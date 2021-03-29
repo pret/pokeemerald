@@ -8,6 +8,15 @@ enum {
     INTROCRED_SCENERY_FROZEN,
 };
 
+// Scenes for the Credits sequence
+enum {
+    SCENE_OCEAN_MORNING,
+    SCENE_OCEAN_SUNSET,
+    SCENE_FOREST_RIVAL_ARRIVE,
+    SCENE_FOREST_CATCH_RIVAL,
+    SCENE_CITY_NIGHT,
+};
+
 extern u16 gIntroCredits_MovingSceneryVBase;
 extern s16 gIntroCredits_MovingSceneryVOffset;
 extern s16 gIntroCredits_MovingSceneryState;

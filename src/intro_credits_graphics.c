@@ -38,19 +38,19 @@ struct IntroCreditsSpriteMetadata
 };
 
 static const u16 sGrass_Pal[]             = INCBIN_U16("graphics/intro/scene_2/grass.gbapal");
-static const u16 sGrassAfternoon_Pal[]    = INCBIN_U16("graphics/intro/scene_2/grass_afternoon.gbapal");
+static const u16 sGrassSunset_Pal[]       = INCBIN_U16("graphics/intro/scene_2/grass_sunset.gbapal");
 static const u16 sGrassNight_Pal[]        = INCBIN_U16("graphics/intro/scene_2/grass_night.gbapal");
 static const u32 sGrass_Gfx[]             = INCBIN_U32("graphics/intro/scene_2/grass.4bpp.lz");
 static const u32 sGrass_Tilemap[]         = INCBIN_U32("graphics/intro/scene_2/grass_map.bin.lz");
 static const u16 sCloudsBg_Pal[]          = INCBIN_U16("graphics/intro/scene_2/clouds_bg.gbapal");
-static const u16 sCloudsBgAfternoon_Pal[] = INCBIN_U16("graphics/intro/scene_2/clouds_bg_afternoon.gbapal");
+static const u16 sCloudsBgSunset_Pal[]    = INCBIN_U16("graphics/intro/scene_2/clouds_bg_sunset.gbapal");
 static const u32 sCloudsBg_Gfx[]          = INCBIN_U32("graphics/intro/scene_2/clouds_bg.4bpp.lz");
 static const u32 sCloudsBg_Tilemap[]      = INCBIN_U32("graphics/intro/scene_2/clouds_bg_map.bin.lz");
 static const u16 sClouds_Pal[]            = INCBIN_U16("graphics/intro/scene_2/clouds.gbapal");
-static const u16 sCloudsAfternoon_Pal[]   = INCBIN_U16("graphics/intro/scene_2/clouds_afternoon.gbapal");
+static const u16 sCloudsSunset_Pal[]      = INCBIN_U16("graphics/intro/scene_2/clouds_sunset.gbapal");
 static const u32 sClouds_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/clouds.4bpp.lz");
 static const u16 sTrees_Pal[]             = INCBIN_U16("graphics/intro/scene_2/trees.gbapal");
-static const u16 sTreesAfternoon_Pal[]    = INCBIN_U16("graphics/intro/scene_2/trees_afternoon.gbapal");
+static const u16 sTreesSunset_Pal[]       = INCBIN_U16("graphics/intro/scene_2/trees_sunset.gbapal");
 static const u32 sTrees_Gfx[]             = INCBIN_U32("graphics/intro/scene_2/trees.4bpp.lz");
 static const u32 sTrees_Tilemap[]         = INCBIN_U32("graphics/intro/scene_2/trees_map.bin.lz");
 static const u16 sTreesSmall_Pal[]        = INCBIN_U16("graphics/intro/scene_2/trees_small.gbapal");
@@ -97,25 +97,25 @@ static const struct CompressedSpriteSheet sSpriteSheet_Clouds[] =
     {}
 };
 
-static const union AnimCmd gUnknown_085F5074[] =
+static const union AnimCmd sAnim_Cloud_Largest[] =
 {
     ANIMCMD_FRAME( 0, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F507C[] =
+static const union AnimCmd sAnim_Cloud_Large[] =
 {
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F5084[] =
+static const union AnimCmd sAnim_Cloud_Small[] =
 {
     ANIMCMD_FRAME(20, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F508C[] =
+static const union AnimCmd sAnim_Cloud_Smallest[] =
 {
     ANIMCMD_FRAME(22, 30),
     ANIMCMD_END
@@ -123,10 +123,10 @@ static const union AnimCmd gUnknown_085F508C[] =
 
 static const union AnimCmd *const sAnims_Clouds[] =
 {
-    gUnknown_085F5074,
-    gUnknown_085F507C,
-    gUnknown_085F5084,
-    gUnknown_085F508C
+    sAnim_Cloud_Largest,
+    sAnim_Cloud_Large,
+    sAnim_Cloud_Small,
+    sAnim_Cloud_Smallest
 };
 
 static const struct IntroCreditsSpriteMetadata sSpriteMetadata_Clouds[] =
@@ -224,29 +224,29 @@ static const struct CompressedSpriteSheet sSpriteSheet_TreesSmall[] =
     {}
 };
 
-static const union AnimCmd gUnknown_085F50FC[] =
+static const union AnimCmd sAnim_Trees_0[] =
 {
     ANIMCMD_FRAME( 0, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F5104[] =
+static const union AnimCmd sAnim_Trees_1[] =
 {
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F510C[] =
+static const union AnimCmd sAnim_Trees_2[] =
 {
     ANIMCMD_FRAME(24, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sAnims_TreesSmall[] =
+static const union AnimCmd *const sAnims_Trees[] =
 {
-    gUnknown_085F50FC,
-    gUnknown_085F5104,
-    gUnknown_085F510C
+    sAnim_Trees_0,
+    sAnim_Trees_1,
+    sAnim_Trees_2
 };
 
 static const struct IntroCreditsSpriteMetadata sSpriteMetadata_Trees[] =
@@ -726,12 +726,12 @@ static void CreateTreeSprites(void);
 static void CreateHouseSprites(void);
 static void Task_BicycleBgAnimation(u8);
 
-void LoadIntroPart2Graphics(u8 scene)
+void LoadIntroPart2Graphics(u8 scenery)
 {
     LZ77UnCompVram(sGrass_Gfx, (void *)(BG_CHAR_ADDR(1)));
     LZ77UnCompVram(sGrass_Tilemap, (void *)(BG_SCREEN_ADDR(15)));
     LoadPalette(&sGrass_Pal, 240, sizeof(sGrass_Pal));
-    switch (scene)
+    switch (scenery)
     {
     case 0:
     default:
@@ -758,10 +758,10 @@ void LoadIntroPart2Graphics(u8 scene)
 }
 
 // Note: This is only called with a=1.
-void SetIntroPart2BgCnt(u8 scene)
+void SetIntroPart2BgCnt(u8 scenery)
 {
-    // Only called with scene = 1
-    switch (scene)
+    // Only called with scenery = 1
+    switch (scenery)
     {
     default:
     case 0:
@@ -842,7 +842,7 @@ void LoadCreditsSceneGraphics(u8 scene)
     LZ77UnCompVram(sGrass_Tilemap, (void *)(BG_SCREEN_ADDR(15)));
     switch (scene)
     {
-    case 0:
+    case SCENE_OCEAN_MORNING:
     default:
         LoadPalette(&sGrass_Pal, 240, sizeof(sGrass_Pal));
         LZ77UnCompVram(sCloudsBg_Gfx, (void *)(VRAM));
@@ -853,27 +853,27 @@ void LoadCreditsSceneGraphics(u8 scene)
         LoadPalette(&sClouds_Pal, 256, sizeof(sClouds_Pal));
         CreateCloudSprites();
         break;
-    case 1:
-        LoadPalette(&sGrassAfternoon_Pal, 240, sizeof(sGrassAfternoon_Pal));
+    case SCENE_OCEAN_SUNSET:
+        LoadPalette(&sGrassSunset_Pal, 240, sizeof(sGrassSunset_Pal));
         LZ77UnCompVram(sCloudsBg_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sCloudsBg_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sCloudsBgAfternoon_Pal, 0, sizeof(sCloudsBgAfternoon_Pal));
+        LoadPalette(&sCloudsBgSunset_Pal, 0, sizeof(sCloudsBgSunset_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_Clouds);
         LZ77UnCompVram(sClouds_Gfx, (void *)(OBJ_VRAM0));
-        LoadPalette(&sCloudsAfternoon_Pal, 256, sizeof(sCloudsAfternoon_Pal));
+        LoadPalette(&sCloudsSunset_Pal, 256, sizeof(sCloudsSunset_Pal));
         CreateCloudSprites();
         break;
-    case 2:
-    case 3:
-        LoadPalette(&sGrassAfternoon_Pal, 240, sizeof(sGrassAfternoon_Pal));
+    case SCENE_FOREST_RIVAL_ARRIVE:
+    case SCENE_FOREST_CATCH_RIVAL:
+        LoadPalette(&sGrassSunset_Pal, 240, sizeof(sGrassSunset_Pal));
         LZ77UnCompVram(sTrees_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sTrees_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sTreesAfternoon_Pal, 0, sizeof(sTreesAfternoon_Pal));
+        LoadPalette(&sTreesSunset_Pal, 0, sizeof(sTreesSunset_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_TreesSmall);
-        LoadPalette(&sTreesAfternoon_Pal, 256, sizeof(sTreesAfternoon_Pal));
+        LoadPalette(&sTreesSunset_Pal, 256, sizeof(sTreesSunset_Pal));
         CreateTreeSprites();
         break;
-    case 4:
+    case SCENE_CITY_NIGHT:
         LoadPalette(&sGrassNight_Pal, 240, sizeof(sGrassNight_Pal));
         LZ77UnCompVram(sHouses_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sHouses_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
@@ -987,11 +987,11 @@ static void Task_BicycleBgAnimation(u8 taskId)
     }
 }
 
-void CycleSceneryPalette(u8 scene)
+void CycleSceneryPalette(u8 mode)
 {
     u16 x;
     u16 y;
-    switch (scene)
+    switch (mode)
     {
         case 0:
         default:
@@ -1031,6 +1031,10 @@ void CycleSceneryPalette(u8 scene)
     }
 }
 
+#define tHasVerticalMove data[0]
+#define tXOffset         data[1]
+#define tXPos            data[2]
+
 static void SpriteCB_MovingScenery(struct Sprite *sprite)
 {
     s32 x;
@@ -1044,12 +1048,12 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
             DestroySprite(sprite);
             break;
         case INTROCRED_SCENERY_NORMAL:
-            x = ((sprite->pos1.x << 16) | (u16)sprite->data[2]) + (u16)sprite->data[1];
+            x = ((sprite->pos1.x << 16) | (u16)sprite->tXPos) + (u16)sprite->tXOffset;
             sprite->pos1.x = x >> 16;
-            sprite->data[2] = x;
-            if (sprite->pos1.x > 0xFF)
-                sprite->pos1.x = -0x20;
-            if (sprite->data[0])
+            sprite->tXPos = x;
+            if (sprite->pos1.x > 255)
+                sprite->pos1.x = -32;
+            if (sprite->tHasVerticalMove)
                 sprite->pos2.y = -(gIntroCredits_MovingSceneryVBase + gIntroCredits_MovingSceneryVOffset);
             else
                 sprite->pos2.y = -gIntroCredits_MovingSceneryVBase;
@@ -1058,7 +1062,7 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
     }
 }
 
-static void CreateMovingScenerySprites(bool8 a, const struct IntroCreditsSpriteMetadata *metadata, const union AnimCmd *const *anims, u8 numSprites)
+static void CreateMovingScenerySprites(bool8 hasVerticalMove, const struct IntroCreditsSpriteMetadata *metadata, const union AnimCmd *const *anims, u8 numSprites)
 {
     u8 i;
 
@@ -1072,11 +1076,15 @@ static void CreateMovingScenerySprites(bool8 a, const struct IntroCreditsSpriteM
         gSprites[sprite].oam.paletteNum = 0;
         gSprites[sprite].anims = anims;
         StartSpriteAnim(&gSprites[sprite], metadata[i].animNum);
-        gSprites[sprite].data[0] = a;
-        gSprites[sprite].data[1] = metadata[i].xOff;
-        gSprites[sprite].data[2] = 0;
+        gSprites[sprite].tHasVerticalMove = hasVerticalMove;
+        gSprites[sprite].tXOffset = metadata[i].xOff;
+        gSprites[sprite].tXPos = 0;
     }
 }
+
+#undef tHasVerticalMove
+#undef tXOffset
+#undef tXPos
 
 static void CreateCloudSprites(void)
 {
@@ -1085,7 +1093,7 @@ static void CreateCloudSprites(void)
 
 static void CreateTreeSprites(void)
 {
-    CreateMovingScenerySprites(TRUE, sSpriteMetadata_Trees, sAnims_TreesSmall, 12);
+    CreateMovingScenerySprites(TRUE, sSpriteMetadata_Trees, sAnims_Trees, 12);
 }
 
 static void CreateHouseSprites(void)

@@ -35,49 +35,32 @@ enum {
     POS_RIGHT,
 };
 
-#define tPlayerSpriteId data[5]
-#define tRivalSpriteId  data[6]
-
-enum
-{
-    TDA_0 = 0,
-    TDA_TASK_C_ID = 1,
-    TDA_TASK_E_ID = 2,
-    TDA_TASK_D_ID = 3,
-    TDA_4 = 4,
-    TDA_PLAYER_CYCLIST = 5,
-    TDA_RIVAL_CYCLIST = 6,
-    TDA_7 = 7, // Has something to do with the bike scene
-    TDA_11 = 11, // Gets set depending on whether the bike or the grass scene should be shown
-    TDA_12 = 12,
-    TDA_13 = 13,
-    TDA_14 = 14,
-    TDA_TASK_B_ID = 15,
-
-    // Appears to be responsible for text
-    TDB_0 = 0,
-    TDB_TASK_A_ID = 1,
-    TDB_CURRENT_PAGE = 2,
-    TDB_3 = 3,
-
-    TDC_0 = 0,
-    TDC_1 = 1,
-    TDC_2 = 2,
-    TDC_3 = 3,
-    TDC_4 = 4,
-    TDC_5 = 5,
-
-    TDD_STATE = 0,
-    TDD_TASK_A_ID = 1,
-    TDD_2 = 2,
-    TDD_3 = 3,
-
-    TDE_0 = 0,
-    TDE_1 = 1,
-    TDE_TASK_A_ID = 2,
+enum {
+    MODE_NONE,
+    MODE_BIKE_SCENE,
+    MODE_SHOW_MONS,
 };
 
+#define tState data[0]
+
+// Task data for the main Credits tasks
+#define tTaskId_BgScenery  data[0] // ID for Task_BicycleBgAnimation (created by CreateBicycleBgAnimationTask)
+#define tTaskId_BikeScene  data[1] // ID for Task_BikeScene
+#define tTaskId_SceneryPal data[2] // ID for Task_CycleSceneryPalette
+#define tTaskId_ShowMons   data[3] // ID for Task_ShowMons
+#define tEndCredits        data[4]
+#define tPlayerSpriteId    data[5]
+#define tRivalSpriteId     data[6]
+#define tSceneNum          data[7]
+// data[8]-[10] are unused
+#define tNextMode          data[11]
+#define tTheEndDelay       data[12]
+#define tCurrentMode       data[13]
+#define tPrintedPage       data[14]
+#define tTaskId_UpdatePage data[15]
+
 #define NUM_MON_SLIDES 71
+
 struct CreditsData
 {
     u16 monToShow[NUM_MON_SLIDES]; // List of Pokemon species ids that will show during the credits
@@ -108,11 +91,11 @@ static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_e
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
 static void Task_WaitPaletteFade(u8);
-static void Task_ProgressCreditTasks(u8);
-static void sub_8175808(u8);
-static void c2_080C9BFC(u8);
-static void Task_CreditsLoadGrassScene(u8);
-static void sub_81758A4(u8);
+static void Task_CreditsMain(u8);
+static void Task_ReadyBikeScene(u8);
+static void Task_SetBikeScene(u8);
+static void Task_LoadShowMons(u8);
+static void Task_ReadyShowMons(u8);
 static void Task_CreditsTheEnd1(u8);
 static void Task_CreditsTheEnd2(u8);
 static void Task_CreditsTheEnd3(u8);
@@ -121,17 +104,17 @@ static void Task_CreditsTheEnd5(u8);
 static void Task_CreditsTheEnd6(u8);
 static void Task_CreditsSoftReset(u8);
 static void ResetGpuAndVram(void);
-static void sub_8175DA0(u8);
+static void Task_UpdatePage(u8);
 static u8 CheckChangeScene(u8, u8);
-static void sub_81760FC(u8);
-static void sub_817651C(u8);
-static void sub_817624C(u8);
-static bool8 sub_8176AB0(u8 data, u8);
+static void Task_ShowMons(u8);
+static void Task_CycleSceneryPalette(u8);
+static void Task_BikeScene(u8);
+static bool8 LoadBikeScene(u8 data, u8);
 static void ResetCreditsTasks(u8);
 static void LoadTheEndScreen(u16, u16, u16);
 static void DrawTheEnd(u16, u16);
-static void SpriteCB_PlayerCyclist(struct Sprite *);
-static void SpriteCB_RivalCyclist(struct Sprite *);
+static void SpriteCB_Player(struct Sprite *);
+static void SpriteCB_Rival(struct Sprite *);
 static u8 CreateCreditsMonSprite(u16, s16, s16, u16);
 static void DeterminePokemonToShow(void);
 
@@ -365,7 +348,7 @@ static void CB2_Credits(void)
 
     if ((JOY_HELD(B_BUTTON))
      && gHasHallOfFameRecords
-     && gTasks[sSavedTaskId].func == Task_ProgressCreditTasks)
+     && gTasks[sSavedTaskId].func == Task_CreditsMain)
     {
         // Speed up credits
         VBlankCB_Credits();
@@ -390,7 +373,7 @@ static void InitCreditsBgsAndWindows(void)
     ShowBg(0);
 }
 
-static void sub_81755A4(void)
+static void FreeCreditsBgsAndWindows(void)
 {
     void *ptr;
     FreeAllWindowBuffers();
@@ -421,11 +404,13 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
     AddTextPrinterParameterized4(0, 1, x, y, 1, 0, color, -1, string);
 }
 
+#define tMainTaskId data[1]
+
 void CB2_StartCreditsSequence(void)
 {
-    u8 taskIdA;
-    s16 taskIdC;
-    u8 taskIdB;
+    u8 taskId;
+    s16 bikeTaskId;
+    u8 pageTaskId;
 
     ResetGpuAndVram();
     SetVBlankCallback(NULL);
@@ -434,28 +419,28 @@ void CB2_StartCreditsSequence(void)
     ResetTasks();
     InitCreditsBgsAndWindows();
 
-    taskIdA = CreateTask(Task_WaitPaletteFade, 0);
+    taskId = CreateTask(Task_WaitPaletteFade, 0);
 
-    gTasks[taskIdA].data[TDA_4] = 0;
-    gTasks[taskIdA].data[TDA_7] = 0;
-    gTasks[taskIdA].data[TDA_11] = 0;
-    gTasks[taskIdA].data[TDA_13] = 1;
+    gTasks[taskId].tEndCredits = FALSE;
+    gTasks[taskId].tSceneNum = SCENE_OCEAN_MORNING;
+    gTasks[taskId].tNextMode = MODE_NONE;
+    gTasks[taskId].tCurrentMode = MODE_BIKE_SCENE;
 
     while (TRUE)
     {
-        if (sub_8176AB0(0, taskIdA))
+        if (LoadBikeScene(SCENE_OCEAN_MORNING, taskId))
             break;
     }
 
-    taskIdC = gTasks[taskIdA].data[TDA_TASK_C_ID];
-    gTasks[taskIdC].data[TDC_0] = 40;
+    bikeTaskId = gTasks[taskId].tTaskId_BikeScene;
+    gTasks[bikeTaskId].tState = 40;
 
     SetGpuReg(REG_OFFSET_BG0VOFS, 0xFFFC);
 
-    taskIdB = CreateTask(sub_8175DA0, 0);
+    pageTaskId = CreateTask(Task_UpdatePage, 0);
 
-    gTasks[taskIdB].data[TDB_TASK_A_ID] = taskIdA;
-    gTasks[taskIdA].data[TDA_TASK_B_ID] = taskIdB;
+    gTasks[pageTaskId].tMainTaskId = taskId;
+    gTasks[taskId].tTaskId_UpdatePage = pageTaskId;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
@@ -471,84 +456,84 @@ void CB2_StartCreditsSequence(void)
     sCreditsData->nextImgPos = POS_LEFT;
     sCreditsData->currShownMon = 0;
 
-    sSavedTaskId = taskIdA;
+    sSavedTaskId = taskId;
 }
 
-static void Task_WaitPaletteFade(u8 taskIdA)
+static void Task_WaitPaletteFade(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskIdA].func = Task_ProgressCreditTasks;
+        gTasks[taskId].func = Task_CreditsMain;
 }
 
-static void Task_ProgressCreditTasks(u8 taskIdA)
+static void Task_CreditsMain(u8 taskId)
 {
-    u16 data1;
+    u16 mode;
 
-    if (gTasks[taskIdA].data[TDA_4])
+    if (gTasks[taskId].tEndCredits)
     {
-        s16 taskIdC;
+        s16 bikeTaskId = gTasks[taskId].tTaskId_BikeScene;
+        gTasks[bikeTaskId].tState = 30;
 
-        taskIdC = gTasks[taskIdA].data[TDA_TASK_C_ID];
-        gTasks[taskIdC].data[TDC_0] = 30;
-
-        gTasks[taskIdA].data[TDA_12] = 0x100;
-        gTasks[taskIdA].func = Task_CreditsTheEnd1;
+        gTasks[taskId].tTheEndDelay = 256;
+        gTasks[taskId].func = Task_CreditsTheEnd1;
         return;
     }
 
     sUnkVar = 0;
-    data1 = gTasks[taskIdA].data[TDA_11];
+    mode = gTasks[taskId].tNextMode;
 
-    if (gTasks[taskIdA].data[TDA_11] == 1)
+    if (gTasks[taskId].tNextMode == MODE_BIKE_SCENE)
     {
-        gTasks[taskIdA].data[TDA_13] = data1;
-        gTasks[taskIdA].data[TDA_11] = 0;
+        // Start a bike cutscene
+        gTasks[taskId].tCurrentMode = mode;
+        gTasks[taskId].tNextMode = MODE_NONE;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskIdA].func = sub_8175808;
+        gTasks[taskId].func = Task_ReadyBikeScene;
     }
-    else if (gTasks[taskIdA].data[TDA_11] == 2)
+    else if (gTasks[taskId].tNextMode == MODE_SHOW_MONS)
     {
-        gTasks[taskIdA].data[TDA_13] = data1;
-        gTasks[taskIdA].data[TDA_11] = 0;
+        // Start a Pokémon interlude
+        gTasks[taskId].tCurrentMode = mode;
+        gTasks[taskId].tNextMode = MODE_NONE;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskIdA].func = sub_81758A4;
+        gTasks[taskId].func = Task_ReadyShowMons;
     }
 }
 
-static void sub_8175808(u8 taskIdA)
+static void Task_ReadyBikeScene(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        ResetCreditsTasks(taskIdA);
-        gTasks[taskIdA].func = c2_080C9BFC;
+        ResetCreditsTasks(taskId);
+        gTasks[taskId].func = Task_SetBikeScene;
     }
 }
 
-static void c2_080C9BFC(u8 taskIdA)
+static void Task_SetBikeScene(u8 taskId)
 {
     SetVBlankCallback(NULL);
 
-    if (sub_8176AB0(gTasks[taskIdA].data[TDA_7], taskIdA))
+    if (LoadBikeScene(gTasks[taskId].tSceneNum, taskId))
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Credits);
-        gTasks[taskIdA].func = Task_WaitPaletteFade;
+        gTasks[taskId].func = Task_WaitPaletteFade;
     }
 }
 
-static void sub_81758A4(u8 taskIdA)
+static void Task_ReadyShowMons(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        ResetCreditsTasks(taskIdA);
-        gTasks[taskIdA].func = Task_CreditsLoadGrassScene;
+        ResetCreditsTasks(taskId);
+        gTasks[taskId].func = Task_LoadShowMons;
     }
 }
 
-static void Task_CreditsLoadGrassScene(u8 taskIdA)
+static void Task_LoadShowMons(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -586,10 +571,10 @@ static void Task_CreditsLoadGrassScene(u8 taskIdA)
         break;
     }
     case 1:
-        gTasks[taskIdA].data[TDA_TASK_D_ID] = CreateTask(sub_81760FC, 0);
-        gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_STATE] = 1;
-        gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_TASK_A_ID] = taskIdA;
-        gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_2] = gTasks[taskIdA].data[TDA_7];
+        gTasks[taskId].tTaskId_ShowMons = CreateTask(Task_ShowMons, 0);
+        gTasks[gTasks[taskId].tTaskId_ShowMons].tState = 1;
+        gTasks[gTasks[taskId].tTaskId_ShowMons].tMainTaskId = taskId;
+        gTasks[gTasks[taskId].tTaskId_ShowMons].data[2] = gTasks[taskId].tSceneNum; // data[2] never read
 
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
@@ -607,35 +592,35 @@ static void Task_CreditsLoadGrassScene(u8 taskIdA)
 
         gMain.state = 0;
         gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
-        gTasks[taskIdA].func = Task_WaitPaletteFade;
+        gTasks[taskId].func = Task_WaitPaletteFade;
         break;
     }
 }
 
-static void Task_CreditsTheEnd1(u8 taskIdA)
+static void Task_CreditsTheEnd1(u8 taskId)
 {
-    if (gTasks[taskIdA].data[TDA_12])
+    if (gTasks[taskId].tTheEndDelay)
     {
-        gTasks[taskIdA].data[TDA_12]--;
+        gTasks[taskId].tTheEndDelay--;
         return;
     }
 
     BeginNormalPaletteFade(PALETTES_ALL, 12, 0, 16, RGB_BLACK);
-    gTasks[taskIdA].func = Task_CreditsTheEnd2;
+    gTasks[taskId].func = Task_CreditsTheEnd2;
 }
 
-static void Task_CreditsTheEnd2(u8 taskIdA)
+static void Task_CreditsTheEnd2(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        ResetCreditsTasks(taskIdA);
-        gTasks[taskIdA].func = Task_CreditsTheEnd3;
+        ResetCreditsTasks(taskId);
+        gTasks[taskId].func = Task_CreditsTheEnd3;
     }
 }
 
 #define tDelay data[0]
 
-static void Task_CreditsTheEnd3(u8 taskIdA)
+static void Task_CreditsTheEnd3(u8 taskId)
 {
     ResetGpuAndVram();
     ResetPaletteFade();
@@ -654,59 +639,59 @@ static void Task_CreditsTheEnd3(u8 taskIdA)
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON);
 
-    gTasks[taskIdA].tDelay = 235; //set this to 215 to actually show "THE END" in time to the last song beat
-    gTasks[taskIdA].func = Task_CreditsTheEnd4;
+    gTasks[taskId].tDelay = 235; //set this to 215 to actually show "THE END" in time to the last song beat
+    gTasks[taskId].func = Task_CreditsTheEnd4;
 }
 
-static void Task_CreditsTheEnd4(u8 taskIdA)
+static void Task_CreditsTheEnd4(u8 taskId)
 {
-    if (gTasks[taskIdA].tDelay)
+    if (gTasks[taskId].tDelay)
     {
-        gTasks[taskIdA].tDelay--;
+        gTasks[taskId].tDelay--;
         return;
     }
 
     BeginNormalPaletteFade(PALETTES_ALL, 6, 0, 16, RGB_BLACK);
-    gTasks[taskIdA].func = Task_CreditsTheEnd5;
+    gTasks[taskId].func = Task_CreditsTheEnd5;
 }
 
-static void Task_CreditsTheEnd5(u8 taskIdA)
+static void Task_CreditsTheEnd5(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         DrawTheEnd(0x3800, 0);
 
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0, RGB_BLACK);
-        gTasks[taskIdA].tDelay = 7200;
-        gTasks[taskIdA].func = Task_CreditsTheEnd6;
+        gTasks[taskId].tDelay = 7200;
+        gTasks[taskId].func = Task_CreditsTheEnd6;
     }
 }
 
-static void Task_CreditsTheEnd6(u8 taskIdA)
+static void Task_CreditsTheEnd6(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gTasks[taskIdA].tDelay == 0 || gMain.newKeys)
+        if (gTasks[taskId].tDelay == 0 || gMain.newKeys)
         {
             FadeOutBGM(4);
             BeginNormalPaletteFade(PALETTES_ALL, 8, 0, 16, RGB_WHITEALPHA);
-            gTasks[taskIdA].func = Task_CreditsSoftReset;
+            gTasks[taskId].func = Task_CreditsSoftReset;
             return;
         }
 
-        if (gTasks[taskIdA].tDelay == 7144)
+        if (gTasks[taskId].tDelay == 7144)
             FadeOutBGM(8);
 
-        if (gTasks[taskIdA].tDelay == 6840)
+        if (gTasks[taskId].tDelay == 6840)
             m4aSongNumStart(MUS_END);
 
-        gTasks[taskIdA].tDelay--;
+        gTasks[taskId].tDelay--;
     }
 }
 
 #undef tDelay
 
-static void Task_CreditsSoftReset(u8 taskIdA)
+static void Task_CreditsSoftReset(u8 taskId)
 {
     if (!gPaletteFade.active)
         SoftReset(RESET_ALL);
@@ -734,11 +719,14 @@ static void ResetGpuAndVram(void)
     DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
 }
 
-static void sub_8175DA0(u8 taskIdB)
+#define tCurrentPage data[2]
+#define tDelay       data[3]
+
+static void Task_UpdatePage(u8 taskId)
 {
     int i;
 
-    switch (gTasks[taskIdB].data[TDB_0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
     case 6:
@@ -748,185 +736,194 @@ static void sub_8175DA0(u8 taskIdB)
     default:
         if (!gPaletteFade.active)
         {
-            gTasks[taskIdB].data[TDB_0] = 1;
-            gTasks[taskIdB].data[TDB_3] = 0x48;
-            gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_14] = 0;
+            gTasks[taskId].tState = 1;
+            gTasks[taskId].tDelay = 72;
+            gTasks[gTasks[taskId].tMainTaskId].tPrintedPage = FALSE;
             sUnkVar = 0;
         }
         return;
     case 1:
-        if (gTasks[taskIdB].data[TDB_3] != 0)
+        if (gTasks[taskId].tDelay != 0)
         {
-            gTasks[taskIdB].data[TDB_3]--;
+            gTasks[taskId].tDelay--;
             return;
         }
-        gTasks[taskIdB].data[TDB_0]++;
+        gTasks[taskId].tState++;
         return;
     case 2:
-        if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].func == Task_ProgressCreditTasks)
+        if (gTasks[gTasks[taskId].tMainTaskId].func == Task_CreditsMain)
         {
-            if (gTasks[taskIdB].data[TDB_CURRENT_PAGE] < PAGE_COUNT)
+            if (gTasks[taskId].tCurrentPage < PAGE_COUNT)
             {
+                // Print text for this Credits page
                 for (i = 0; i < ENTRIES_PER_PAGE; i++)
                     PrintCreditsText(
-                        sCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text,
+                        sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->text,
                          5 + i * 16, 
-                         sCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->isTitle);
-
+                         sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->isTitle);
                 CopyWindowToVram(0, 2);
 
-                gTasks[taskIdB].data[TDB_CURRENT_PAGE]++;
-                gTasks[taskIdB].data[TDB_0]++;
+                gTasks[taskId].tCurrentPage++;
+                gTasks[taskId].tState++;
 
-                gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_14] = 1;
+                gTasks[gTasks[taskId].tMainTaskId].tPrintedPage = TRUE;
 
-                if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_13] == 1)
-                    BeginNormalPaletteFade(0x00000300, 0, 16, 0, COLOR_LIGHT_GREEN);
-                else
-                    BeginNormalPaletteFade(0x00000300, 0, 16, 0, COLOR_DARK_GREEN);
+                if (gTasks[gTasks[taskId].tMainTaskId].tCurrentMode == MODE_BIKE_SCENE)
+                    BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_LIGHT_GREEN);
+                else // MODE_SHOW_MONS
+                    BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_DARK_GREEN);
                 return;
             }
-            gTasks[taskIdB].data[TDB_0] = 10;
+
+            // Reached final page of Credits, end task
+            gTasks[taskId].tState = 10;
             return;
         }
-        gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_14] = 0;
+        gTasks[gTasks[taskId].tMainTaskId].tPrintedPage = FALSE;
         return;
     case 3:
         if (!gPaletteFade.active)
         {
-            gTasks[taskIdB].data[TDB_3] = 0x73;
-            gTasks[taskIdB].data[TDB_0]++;
+            gTasks[taskId].tDelay = 115;
+            gTasks[taskId].tState++;
         }
         return;
     case 4:
-        if (gTasks[taskIdB].data[TDB_3] != 0)
+        if (gTasks[taskId].tDelay != 0)
         {
-            gTasks[taskIdB].data[TDB_3]--;
+            gTasks[taskId].tDelay--;
             return;
         }
 
-        if (CheckChangeScene((u8)gTasks[taskIdB].data[TDB_CURRENT_PAGE], (u8)gTasks[taskIdB].data[TDB_TASK_A_ID]))
+        if (CheckChangeScene((u8)gTasks[taskId].tCurrentPage, (u8)gTasks[taskId].tMainTaskId))
         {
-            gTasks[taskIdB].data[TDB_0]++;
+            gTasks[taskId].tState++;
             return;
         }
-        gTasks[taskIdB].data[TDB_0]++;
-        if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_13] == 1)
-            BeginNormalPaletteFade(0x00000300, 0, 0, 16, COLOR_LIGHT_GREEN);
-        else
-            BeginNormalPaletteFade(0x00000300, 0, 0, 16, COLOR_DARK_GREEN);
+        gTasks[taskId].tState++;
+        if (gTasks[gTasks[taskId].tMainTaskId].tCurrentMode == MODE_BIKE_SCENE)
+            BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_LIGHT_GREEN);
+        else // MODE_SHOW_MONS
+            BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_DARK_GREEN);
         return;
     case 5:
         if (!gPaletteFade.active)
         {
+            // Still more Credits pages to show, return to state 2 to print
             FillWindowPixelBuffer(0, PIXEL_FILL(0));
             CopyWindowToVram(0, 2);
-            gTasks[taskIdB].data[TDB_0] = 2;
+            gTasks[taskId].tState = 2;
         }
         return;
     case 10:
-        gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_4] = 1;
-        DestroyTask(taskIdB);
-        sub_81755A4();
+        gTasks[gTasks[taskId].tMainTaskId].tEndCredits = TRUE;
+        DestroyTask(taskId);
+        FreeCreditsBgsAndWindows();
         FREE_AND_SET_NULL(sCreditsData);
         return;
     }
 }
 
-static u8 CheckChangeScene(u8 page, u8 taskIdA)
-{
-    // Starts with bike + ocean + morning
+#undef tDelay
 
-    if (page == 6)
+#define PAGE_INTERVAL (PAGE_COUNT / 9) // 9 scenes (5 bike scenes, 4 Pokémon interludes)
+
+static u8 CheckChangeScene(u8 page, u8 taskId)
+{
+    // Starts with bike + ocean + morning (SCENE_OCEAN_MORNING)
+
+    if (page == PAGE_INTERVAL * 1)
     {
         // Pokémon interlude
-        gTasks[taskIdA].data[TDA_11] = 2;
+        gTasks[taskId].tNextMode = MODE_SHOW_MONS;
     }
 
-    if (page == 12)
+    if (page == PAGE_INTERVAL * 2)
     {
         // Bike + ocean + sunset
-        gTasks[taskIdA].data[TDA_7] = 1;
-        gTasks[taskIdA].data[TDA_11] = 1;
+        gTasks[taskId].tSceneNum = SCENE_OCEAN_SUNSET;
+        gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
     }
 
-    if (page == 18)
+    if (page == PAGE_INTERVAL * 3)
     {
         // Pokémon interlude
-        gTasks[taskIdA].data[TDA_11] = 2;
+        gTasks[taskId].tNextMode = MODE_SHOW_MONS;
     }
 
-    if (page == 24)
+    if (page == PAGE_INTERVAL * 4)
     {
         // Bike + forest + sunset
-        gTasks[taskIdA].data[TDA_7] = 2;
-        gTasks[taskIdA].data[TDA_11] = 1;
+        gTasks[taskId].tSceneNum = SCENE_FOREST_RIVAL_ARRIVE;
+        gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
     }
 
-    if (page == 30)
+    if (page == PAGE_INTERVAL * 5)
     {
         // Pokémon interlude
-        gTasks[taskIdA].data[TDA_11] = 2;
+        gTasks[taskId].tNextMode = MODE_SHOW_MONS;
     }
 
-    if (page == 36)
+    if (page == PAGE_INTERVAL * 6)
     {
         // Bike + forest + sunset
-        gTasks[taskIdA].data[TDA_7] = 3;
-        gTasks[taskIdA].data[TDA_11] = 1;
+        gTasks[taskId].tSceneNum = SCENE_FOREST_CATCH_RIVAL;
+        gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
     }
 
-    if (page == 42)
+    if (page == PAGE_INTERVAL * 7)
     {
         // Pokémon interlude
-        gTasks[taskIdA].data[TDA_11] = 2;
+        gTasks[taskId].tNextMode = MODE_SHOW_MONS;
     }
 
-    if (page == 48)
+    if (page == PAGE_INTERVAL * 8)
     {
         // Bike + town + night
-        gTasks[taskIdA].data[TDA_7] = 4;
-        gTasks[taskIdA].data[TDA_11] = 1;
+        gTasks[taskId].tSceneNum = SCENE_CITY_NIGHT;
+        gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
     }
 
-    if (gTasks[taskIdA].data[TDA_11] != 0)
+    if (gTasks[taskId].tNextMode != MODE_NONE)
     {
-        // Returns true if changed?
+        // Returns true if changed
         return TRUE;
     }
 
     return FALSE;
 }
 
-static void sub_81760FC(u8 taskIdD)
-{
-    u8 r2;
+#define tDelay data[3]
 
-    switch (gTasks[taskIdD].data[TDD_STATE])
+static void Task_ShowMons(u8 taskId)
+{
+    u8 spriteId;
+
+    switch (gTasks[taskId].tState)
     {
     case 0:
         break;
     case 1:
-        if (sCreditsData->nextImgPos == POS_LEFT && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] == 0)
+        if (sCreditsData->nextImgPos == POS_LEFT && gTasks[gTasks[taskId].tMainTaskId].tPrintedPage == FALSE)
             break;
-        gTasks[taskIdD].data[TDD_STATE]++;
+        gTasks[taskId].tState++;
         break;
     case 2:
-        if (sCreditsData->imgCounter == NUM_MON_SLIDES || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != Task_ProgressCreditTasks)
+        if (sCreditsData->imgCounter == NUM_MON_SLIDES || gTasks[gTasks[taskId].tMainTaskId].func != Task_CreditsMain)
             break;
-        r2 = CreateCreditsMonSprite(sCreditsData->monToShow[sCreditsData->currShownMon], 
+        spriteId = CreateCreditsMonSprite(sCreditsData->monToShow[sCreditsData->currShownMon], 
                                     sMonSpritePos[sCreditsData->nextImgPos][0], 
                                     sMonSpritePos[sCreditsData->nextImgPos][1], 
                                     sCreditsData->nextImgPos);
         if (sCreditsData->currShownMon < sCreditsData->numMonToShow - 1)
         {
             sCreditsData->currShownMon++;
-            gSprites[r2].data[3] = 50;
+            gSprites[spriteId].data[3] = 50;
         }
         else
         {
             sCreditsData->currShownMon = 0;
-            gSprites[r2].data[3] = 512;
+            gSprites[spriteId].data[3] = 512;
         }
         sCreditsData->imgCounter++;
 
@@ -935,237 +932,254 @@ static void sub_81760FC(u8 taskIdD)
         else
             sCreditsData->nextImgPos++;
 
-        gTasks[taskIdD].data[TDD_3] = 50;
-        gTasks[taskIdD].data[TDD_STATE]++;
+        gTasks[taskId].tDelay = 50;
+        gTasks[taskId].tState++;
         break;
     case 3:
-        if (gTasks[taskIdD].data[TDD_3] != 0)
-            gTasks[taskIdD].data[TDD_3]--;
+        if (gTasks[taskId].tDelay != 0)
+            gTasks[taskId].tDelay--;
         else
-            gTasks[taskIdD].data[TDD_STATE] = 1;
+            gTasks[taskId].tState = 1;
         break;
     }
 }
 
-static void sub_817624C(u8 taskIdC)
+#undef tMainTaskId
+#undef tDelay
+
+#define tPlayer data[2]
+#define tRival  data[3]
+#define tDelay  data[4]
+#define tSinIdx data[5]
+
+static void Task_BikeScene(u8 taskId)
 {
-    switch (gTasks[taskIdC].data[TDC_0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
-        gIntroCredits_MovingSceneryVOffset = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
-        gTasks[taskIdC].data[TDC_5]++;
+        gIntroCredits_MovingSceneryVOffset = Sin((gTasks[taskId].tSinIdx >> 1) & 0x7F, 12);
+        gTasks[taskId].tSinIdx++;
         break;
     case 1:
         if (gIntroCredits_MovingSceneryVOffset != 0)
         {
-            gIntroCredits_MovingSceneryVOffset = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
-            gTasks[taskIdC].data[TDC_5]++;
+            gIntroCredits_MovingSceneryVOffset = Sin((gTasks[taskId].tSinIdx >> 1) & 0x7F, 12);
+            gTasks[taskId].tSinIdx++;
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 2;
-            gTasks[taskIdC].data[TDC_5] = 0;
-            gTasks[taskIdC].data[TDC_0]++;
+            gSprites[gTasks[taskId].tPlayer].data[0] = 2;
+            gTasks[taskId].tSinIdx = 0;
+            gTasks[taskId].tState++;
         }
         break;
     case 2:
-        if (gTasks[taskIdC].data[TDC_5] < 64)
+        if (gTasks[taskId].tSinIdx < 64)
         {
-            gTasks[taskIdC].data[TDC_5]++;
-            gIntroCredits_MovingSceneryVOffset = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
+            gTasks[taskId].tSinIdx++;
+            gIntroCredits_MovingSceneryVOffset = Sin(gTasks[taskId].tSinIdx & 0x7F, 20);
         }
         else
         {
-            gTasks[taskIdC].data[TDC_0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 3:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 3;
-        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 1;
-        gTasks[taskIdC].data[TDC_4] = 120;
-        gTasks[taskIdC].data[TDC_0]++;
+        gSprites[gTasks[taskId].tPlayer].data[0] = 3;
+        gSprites[gTasks[taskId].tRival].data[0] = 1;
+        gTasks[taskId].tDelay = 120;
+        gTasks[taskId].tState++;
         break;
     case 4:
-        if (gTasks[taskIdC].data[TDC_4] != 0)
+        if (gTasks[taskId].tDelay != 0)
         {
-            gTasks[taskIdC].data[TDC_4]--;
+            gTasks[taskId].tDelay--;
         }
         else
         {
-            gTasks[taskIdC].data[TDC_5] = 64;
-            gTasks[taskIdC].data[TDC_0]++;
+            gTasks[taskId].tSinIdx = 64;
+            gTasks[taskId].tState++;
         }
         break;
     case 5:
-        if (gTasks[taskIdC].data[TDC_5] > 0)
+        if (gTasks[taskId].tSinIdx > 0)
         {
-            gTasks[taskIdC].data[TDC_5]--;
-            gIntroCredits_MovingSceneryVOffset = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
+            gTasks[taskId].tSinIdx--;
+            gIntroCredits_MovingSceneryVOffset = Sin(gTasks[taskId].tSinIdx & 0x7F, 20);
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 1;
-            gTasks[taskIdC].data[TDC_0]++;
+            gSprites[gTasks[taskId].tPlayer].data[0] = 1;
+            gTasks[taskId].tState++;
         }
         break;
     case 6:
-        gTasks[taskIdC].data[TDC_0] = 50;
+        gTasks[taskId].tState = 50;
         break;
     case 10:
-        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 2;
-        gTasks[taskIdC].data[TDC_0] = 50;
+        gSprites[gTasks[taskId].tRival].data[0] = 2;
+        gTasks[taskId].tState = 50;
         break;
     case 20:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 4;
-        gTasks[taskIdC].data[TDC_0] = 50;
+        gSprites[gTasks[taskId].tPlayer].data[0] = 4;
+        gTasks[taskId].tState = 50;
         break;
     case 30:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 5;
-        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 3;
-        gTasks[taskIdC].data[TDC_0] = 50;
+        gSprites[gTasks[taskId].tPlayer].data[0] = 5;
+        gSprites[gTasks[taskId].tRival].data[0] = 3;
+        gTasks[taskId].tState = 50;
         break;
     case 50:
-        gTasks[taskIdC].data[TDC_0] = 0;
+        gTasks[taskId].tState = 0;
         break;
     }
 }
 
-static void sub_817651C(u8 taskIdE)
-{
-    s16 taskIdC;
+#define TIMER_STOP  0x7FFF
+#define tTimer      data[1]
+#define tMainTaskId data[2]
 
-    switch (gTasks[taskIdE].data[TDE_0])
+static void Task_CycleSceneryPalette(u8 taskId)
+{
+    s16 bikeTaskId;
+
+    switch (gTasks[taskId].tState)
     {
     default:
-    case 0:
-        if (gTasks[taskIdE].data[TDE_1] != 0x7FFF)
+    case SCENE_OCEAN_MORNING:
+        if (gTasks[taskId].tTimer != TIMER_STOP)
         {
-
-            if (gTasks[gTasks[gTasks[taskIdE].data[TDE_TASK_A_ID]].data[TDA_TASK_B_ID]].data[TDB_CURRENT_PAGE] == 2)
+            if (gTasks[gTasks[gTasks[taskId].tMainTaskId].tTaskId_UpdatePage].tCurrentPage == 2)
             {
-                gTasks[gTasks[gTasks[taskIdE].data[TDE_TASK_A_ID]].data[TDA_TASK_C_ID]].data[TDC_0] = 20;
-                gTasks[taskIdE].data[TDE_1] = 0x7FFF;
+                gTasks[gTasks[gTasks[taskId].tMainTaskId].tTaskId_BikeScene].tState = 20;
+                gTasks[taskId].tTimer = TIMER_STOP;
             }
         }
         CycleSceneryPalette(0);
         break;
-    case 1:
+    case SCENE_OCEAN_SUNSET:
         CycleSceneryPalette(0);
         break;
-    case 2:
-        if (gTasks[taskIdE].data[TDE_1] != 0x7FFF)
+    case SCENE_FOREST_RIVAL_ARRIVE:
+        if (gTasks[taskId].tTimer != TIMER_STOP)
         {
-            taskIdC = gTasks[gTasks[taskIdE].data[TDE_TASK_A_ID]].data[TDA_TASK_C_ID];
+            bikeTaskId = gTasks[gTasks[taskId].tMainTaskId].tTaskId_BikeScene;
 
             // Floor to multiple of 128
-            if ((gTasks[taskIdC].data[TDC_5] & -128) == 640)
+            if ((gTasks[bikeTaskId].tSinIdx & -128) == 640)
             {
-                gTasks[taskIdC].data[TDC_0] = 1;
-                gTasks[taskIdE].data[TDE_1] = 0x7FFF;
+                gTasks[bikeTaskId].tState = 1;
+                gTasks[taskId].tTimer = TIMER_STOP;
             }
         }
         CycleSceneryPalette(1);
         break;
-    case 3:
-        if (gTasks[taskIdE].data[TDE_1] != 0x7FFF)
+    case SCENE_FOREST_CATCH_RIVAL:
+        if (gTasks[taskId].tTimer != TIMER_STOP)
         {
 
-            if (gTasks[taskIdE].data[TDE_1] == 0x248)
+            if (gTasks[taskId].tTimer == 584)
             {
-                gTasks[gTasks[gTasks[taskIdE].data[TDE_TASK_A_ID]].data[TDA_TASK_C_ID]].data[TDC_0] = 10;
-                gTasks[taskIdE].data[TDE_1] = 0x7FFF;
+                gTasks[gTasks[gTasks[taskId].tMainTaskId].tTaskId_BikeScene].tState = 10;
+                gTasks[taskId].tTimer = TIMER_STOP;
             }
             else
             {
-                gTasks[taskIdE].data[TDE_1]++;
+                gTasks[taskId].tTimer++;
             }
         }
         CycleSceneryPalette(1);
         break;
-    case 4:
+    case SCENE_CITY_NIGHT:
         CycleSceneryPalette(2);
         break;
     }
 }
 
-static void InitCreditsSceneGfx(u8 scene, u8 taskIdA)
+static void SetBikeScene(u8 scene, u8 taskId)
 {
     switch (scene)
     {
-    case 0:
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.x = 272;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.x = 272;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].data[0] = 0;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
+    case SCENE_OCEAN_MORNING:
+        gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
+        gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
+        gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
         break;
-    case 1:
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.x = 120;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.x = 272;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].data[0] = 0;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
+    case SCENE_OCEAN_SUNSET:
+        gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 120;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
+        gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
+        gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
         break;
-    case 2:
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.x = 120;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.x = 272;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].data[0] = 0;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
+    case SCENE_FOREST_RIVAL_ARRIVE:
+        gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 120;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
+        gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
+        gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
         break;
-    case 3:
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.x = 120;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.x = -32;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].data[0] = 0;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
+    case SCENE_FOREST_CATCH_RIVAL:
+        gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 120;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = -32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
+        gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
+        gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
         break;
-    case 4:
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.x = 88;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.x = 152;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskIdA].tPlayerSpriteId].data[0] = 0;
-        gSprites[gTasks[taskIdA].tRivalSpriteId].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(2, 0x2000, 0x200, 8);
+    case SCENE_CITY_NIGHT:
+        gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 88;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = 152;
+        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
+        gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
+        gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(2, 0x2000, 0x200, 8);
         break;
     }
 
-    gTasks[taskIdA].data[TDA_TASK_E_ID] = CreateTask(sub_817651C, 0);
-    gTasks[gTasks[taskIdA].data[TDA_TASK_E_ID]].data[TDE_0] = scene;
-    gTasks[gTasks[taskIdA].data[TDA_TASK_E_ID]].data[TDE_1] = 0;
-    gTasks[gTasks[taskIdA].data[TDA_TASK_E_ID]].data[TDE_TASK_A_ID] = taskIdA;
+    gTasks[taskId].tTaskId_SceneryPal = CreateTask(Task_CycleSceneryPalette, 0);
+    gTasks[gTasks[taskId].tTaskId_SceneryPal].tState = scene;
+    gTasks[gTasks[taskId].tTaskId_SceneryPal].tTimer = 0;
+    gTasks[gTasks[taskId].tTaskId_SceneryPal].tMainTaskId = taskId;
 
-    gTasks[taskIdA].data[TDA_TASK_C_ID] = CreateTask(sub_817624C, 0);
-    gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_0] = 0;
-    gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_1] = taskIdA;
-    gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_2] = gTasks[taskIdA].tPlayerSpriteId;
-    gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_3] = gTasks[taskIdA].tRivalSpriteId;
-    gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_4] = 0;
+    gTasks[taskId].tTaskId_BikeScene = CreateTask(Task_BikeScene, 0);
+    gTasks[gTasks[taskId].tTaskId_BikeScene].tState = 0;
+    gTasks[gTasks[taskId].tTaskId_BikeScene].data[1] = taskId; // data[1] is never read
+    gTasks[gTasks[taskId].tTaskId_BikeScene].tPlayer = gTasks[taskId].tPlayerSpriteId;
+    gTasks[gTasks[taskId].tTaskId_BikeScene].tRival = gTasks[taskId].tRivalSpriteId;
+    gTasks[gTasks[taskId].tTaskId_BikeScene].tDelay = 0;
 
-    if (scene == 2)
-        gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_5] = 0x45;
+    if (scene == SCENE_FOREST_RIVAL_ARRIVE)
+        gTasks[gTasks[taskId].tTaskId_BikeScene].tSinIdx = 69;
 }
 
-static bool8 sub_8176AB0(u8 scene, u8 taskIdA)
+#undef tTimer
+#undef tDelay
+#undef tSinIdx
+#undef tRival
+#undef tPlayer
+
+static bool8 LoadBikeScene(u8 scene, u8 taskId)
 {
     u8 spriteId;
 
@@ -1201,13 +1215,13 @@ static bool8 sub_8176AB0(u8 scene, u8 taskIdA)
             LoadSpritePalettes(gSpritePalettes_Credits);
 
             spriteId = CreateIntroBrendanSprite(120, 46);
-            gTasks[taskIdA].tPlayerSpriteId = spriteId;
-            gSprites[spriteId].callback = SpriteCB_PlayerCyclist;
+            gTasks[taskId].tPlayerSpriteId = spriteId;
+            gSprites[spriteId].callback = SpriteCB_Player;
             gSprites[spriteId].anims = sAnims_Player;
 
-            spriteId = CreateIntroMaySprite(272, 46);
-            gTasks[taskIdA].tRivalSpriteId = spriteId;
-            gSprites[spriteId].callback = SpriteCB_RivalCyclist;
+            spriteId = CreateIntroMaySprite(DISPLAY_WIDTH + 32, 46);
+            gTasks[taskId].tRivalSpriteId = spriteId;
+            gSprites[spriteId].callback = SpriteCB_Rival;
             gSprites[spriteId].anims = sAnims_Rival;
         }
         else
@@ -1218,19 +1232,19 @@ static bool8 sub_8176AB0(u8 scene, u8 taskIdA)
             LoadSpritePalettes(gSpritePalettes_Credits);
 
             spriteId = CreateIntroMaySprite(120, 46);
-            gTasks[taskIdA].tPlayerSpriteId = spriteId;
-            gSprites[spriteId].callback = SpriteCB_PlayerCyclist;
+            gTasks[taskId].tPlayerSpriteId = spriteId;
+            gSprites[spriteId].callback = SpriteCB_Player;
             gSprites[spriteId].anims = sAnims_Player;
 
-            spriteId = CreateIntroBrendanSprite(272, 46);
-            gTasks[taskIdA].tRivalSpriteId = spriteId;
-            gSprites[spriteId].callback = SpriteCB_RivalCyclist;
+            spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 46);
+            gTasks[taskId].tRivalSpriteId = spriteId;
+            gSprites[spriteId].callback = SpriteCB_Rival;
             gSprites[spriteId].anims = sAnims_Rival;
         };
         gMain.state++;
         break;
     case 3:
-        InitCreditsSceneGfx(scene, taskIdA);
+        SetBikeScene(scene, taskId);
         SetCreditsSceneBgCnt(scene);
         gMain.state = 0;
         return TRUE;
@@ -1238,30 +1252,34 @@ static bool8 sub_8176AB0(u8 scene, u8 taskIdA)
     return FALSE;
 }
 
-static void ResetCreditsTasks(u8 taskIdA)
+static void ResetCreditsTasks(u8 taskId)
 {
-    if (gTasks[taskIdA].data[TDA_0] != 0)
+    // Destroy Task_BicycleBgAnimation, if running
+    if (gTasks[taskId].tTaskId_BgScenery != 0)
     {
-        DestroyTask(gTasks[taskIdA].data[TDA_0]);
-        gTasks[taskIdA].data[TDA_0] = 0;
+        DestroyTask(gTasks[taskId].tTaskId_BgScenery);
+        gTasks[taskId].tTaskId_BgScenery = 0;
     }
 
-    if (gTasks[taskIdA].data[TDA_TASK_C_ID] != 0)
+    // Destroy Task_BikeScene, if running
+    if (gTasks[taskId].tTaskId_BikeScene != 0)
     {
-        DestroyTask(gTasks[taskIdA].data[TDA_TASK_C_ID]);
-        gTasks[taskIdA].data[TDA_TASK_C_ID] = 0;
+        DestroyTask(gTasks[taskId].tTaskId_BikeScene);
+        gTasks[taskId].tTaskId_BikeScene = 0;
     }
 
-    if (gTasks[taskIdA].data[TDA_TASK_E_ID] != 0)
+    // Destroy Task_CycleSceneryPalette, if running
+    if (gTasks[taskId].tTaskId_SceneryPal != 0)
     {
-        DestroyTask(gTasks[taskIdA].data[TDA_TASK_E_ID]);
-        gTasks[taskIdA].data[TDA_TASK_E_ID] = 0;
+        DestroyTask(gTasks[taskId].tTaskId_SceneryPal);
+        gTasks[taskId].tTaskId_SceneryPal = 0;
     }
 
-    if (gTasks[taskIdA].data[TDA_TASK_D_ID] != 0)
+    // Destroy Task_ShowMons, if running
+    if (gTasks[taskId].tTaskId_ShowMons != 0)
     {
-        DestroyTask(gTasks[taskIdA].data[TDA_TASK_D_ID]);
-        gTasks[taskIdA].data[TDA_TASK_D_ID] = 0;
+        DestroyTask(gTasks[taskId].tTaskId_ShowMons);
+        gTasks[taskId].tTaskId_ShowMons = 0;
     }
 
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_DESTROY;
@@ -1326,7 +1344,7 @@ static void DrawTheEnd(u16 offset, u16 palette)
 
 #define sState data[0]
 
-static void SpriteCB_PlayerCyclist(struct Sprite *sprite)
+static void SpriteCB_Player(struct Sprite *sprite)
 {
     if (gIntroCredits_MovingSceneryState != INTROCRED_SCENERY_NORMAL)
     {
@@ -1363,7 +1381,7 @@ static void SpriteCB_PlayerCyclist(struct Sprite *sprite)
     }
 }
 
-static void SpriteCB_RivalCyclist(struct Sprite *sprite)
+static void SpriteCB_Rival(struct Sprite *sprite)
 {
     if (gIntroCredits_MovingSceneryState != INTROCRED_SCENERY_NORMAL)
     {
@@ -1417,9 +1435,9 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
     case 0:
     default:
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        sprite->oam.matrixNum = sprite->data[1];
+        sprite->oam.matrixNum = sprite->sPosition;
         sprite->data[2] = 16;
-        SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
+        SetOamMatrix(sprite->sPosition, 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
         sprite->invisible = FALSE;
         sprite->sState = 1;
         break;
@@ -1427,7 +1445,7 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
         if (sprite->data[2] < 256)
         {
             sprite->data[2] += 8;
-            SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
+            SetOamMatrix(sprite->sPosition, 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
         }
         else
         {
