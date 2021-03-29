@@ -5244,7 +5244,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
             gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREHEALBLOCK;
             ret = TRUE;
         }
-        // disable
+        // Check disable
         if (gDisableStructs[gBattlerTarget].disableTimer != 0)
         {
             gDisableStructs[gBattlerTarget].disableTimer = gDisableStructs[gBattlerTarget].disableTimerStartValue = 0;
