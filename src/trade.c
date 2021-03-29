@@ -1160,12 +1160,12 @@ static void ReactToLinkTradeData(u8 mpId, u8 status)
     {
         switch (gBlockRecvBuffer[0][0])
         {
-        case LINKCMD_CANCEL_TRADE:
+        case LINKCMD_BOTH_CANCEL_TRADE:
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             PrintTradeMessage(TRADE_MSG_WAITING_FOR_FRIEND);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_CANCEL_TRADE_1;
             break;
-        case LINKCMD_0xEECC:
+        case LINKCMD_PARTNER_CANCEL_TRADE:
             PrintTradeMessage(TRADE_MSG_FRIEND_WANTS_TO_TRADE);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
             break;
@@ -1180,7 +1180,7 @@ static void ReactToLinkTradeData(u8 mpId, u8 status)
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_LINK_TRADE_WAIT_FADE;
             break;
-        case LINKCMD_0xDDEE:
+        case LINKCMD_PLAYER_CANCEL_TRADE:
             PrintTradeMessage(TRADE_MSG_CANCELED);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
         }
@@ -1208,7 +1208,7 @@ static void QueueLinkTradeData(void)
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_CANCEL)
         {
             PrintTradeMessage(TRADE_MSG_CANCELED);
-            sTradeMenuData->linkData[0] = LINKCMD_0xEECC;
+            sTradeMenuData->linkData[0] = LINKCMD_PARTNER_CANCEL_TRADE;
             sTradeMenuData->linkData[1] = 0;
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
             sTradeMenuData->playerLinkFlagStatus = sTradeMenuData->partnerLinkFlagStatus = 0;
@@ -1219,7 +1219,7 @@ static void QueueLinkTradeData(void)
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_TRADE)
         {
             PrintTradeMessage(TRADE_MSG_FRIEND_WANTS_TO_TRADE);
-            sTradeMenuData->linkData[0] = LINKCMD_0xDDEE;
+            sTradeMenuData->linkData[0] = LINKCMD_PLAYER_CANCEL_TRADE;
             sTradeMenuData->linkData[1] = 0;
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
             sTradeMenuData->playerLinkFlagStatus = sTradeMenuData->partnerLinkFlagStatus = 0;
@@ -1229,7 +1229,7 @@ static void QueueLinkTradeData(void)
         else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_CANCEL)
         {
-            sTradeMenuData->linkData[0] = LINKCMD_CANCEL_TRADE;
+            sTradeMenuData->linkData[0] = LINKCMD_BOTH_CANCEL_TRADE;
             sTradeMenuData->linkData[1] = 0;
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -1255,7 +1255,7 @@ static void QueueLinkTradeData(void)
          || sTradeMenuData->partnerLinkFlagStatus == CANCEL_TRADE)
         {
             PrintTradeMessage(TRADE_MSG_CANCELED);
-            sTradeMenuData->linkData[0] = LINKCMD_0xDDEE;
+            sTradeMenuData->linkData[0] = LINKCMD_PLAYER_CANCEL_TRADE;
             sTradeMenuData->linkData[1] = 0;
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
             sTradeMenuData->playerLinkFlagStatus = 0;

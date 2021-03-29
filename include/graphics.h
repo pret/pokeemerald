@@ -5001,9 +5001,9 @@ extern const u16 gUsePokeblockUpDown_Pal[];
 extern const u16 gUsePokeblockCondition_Pal[];
 
 // Berry Crush
-extern const u32 gUnknown_08DE34B8[];
-extern const u16 gUnknown_08DE3398[];
-extern const u32 gUnknown_08DE3FD4[];
+extern const u32 gBerryCrush_Crusher_Gfx[];
+extern const u16 gBerryCrush_Crusher_Pal[];
+extern const u32 gBerryCrush_Crusher_Tilemap[];
 
 // Pokenav
 extern const u32 gPokenavMessageBox_Gfx[];

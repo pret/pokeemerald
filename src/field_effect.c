@@ -480,13 +480,13 @@ static const struct Subsprite sSubsprites_HofMonitorBig[] =
 
 static const struct SubspriteTable sSubspriteTable_HofMonitorBig = subsprite_table(sSubsprites_HofMonitorBig);
 
-const union AnimCmd gSpriteAnim_855C2CC[] =
+const union AnimCmd sAnim_Static[] =
 {
     ANIMCMD_FRAME(.imageValue = 0, .duration = 1),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_855C2D4[] =
+const union AnimCmd sAnim_Flicker[] =
 {
     ANIMCMD_FRAME(.imageValue = 0, .duration = 16),
     ANIMCMD_FRAME(.imageValue = 1, .duration = 16),
@@ -499,15 +499,16 @@ const union AnimCmd gSpriteAnim_855C2D4[] =
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_855C2F8[] =
+// Flicker on and off, for the Pokéballs / monitors during the PokéCenter heal effect
+const union AnimCmd *const sAnims_Flicker[] =
 {
-    gSpriteAnim_855C2CC,
-    gSpriteAnim_855C2D4
+    sAnim_Static,
+    sAnim_Flicker
 };
 
-static const union AnimCmd *const sAnimTable_HofMonitor[] =
+static const union AnimCmd *const sAnims_HofMonitor[] =
 {
-    gSpriteAnim_855C2CC
+    sAnim_Static
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
@@ -515,7 +516,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
     .tileTag = 0xFFFF,
     .paletteTag = FLDEFF_PAL_TAG_POKEBALL_GLOW,
     .oam = &sOam_8x8,
-    .anims = gSpriteAnimTable_855C2F8,
+    .anims = sAnims_Flicker,
     .images = sPicTable_PokeballGlow,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PokeballGlow
@@ -526,7 +527,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor =
     .tileTag = 0xFFFF,
     .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &sOam_16x16,
-    .anims = gSpriteAnimTable_855C2F8,
+    .anims = sAnims_Flicker,
     .images = sPicTable_PokecenterMonitor,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PokecenterMonitor
@@ -537,7 +538,7 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorBig =
     .tileTag = 0xFFFF,
     .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
     .oam = &sOam_16x16,
-    .anims = sAnimTable_HofMonitor,
+    .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorBig,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_HallOfFameMonitor
@@ -548,7 +549,7 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorSmall =
     .tileTag = 0xFFFF,
     .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
     .oam = &sOam_32x16,
-    .anims = sAnimTable_HofMonitor,
+    .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorSmall,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_HallOfFameMonitor
@@ -3853,16 +3854,8 @@ static void Task_MoveDeoxysRock(u8 taskId)
         case 0:
             data[4] = sprite->pos1.x << 4;
             data[5] = sprite->pos1.y << 4;
-
-            // UB: Possible divide by zero
-            #ifdef UBFIX
-            #define DIVISOR (data[8] ? data[8] : 1);
-            #else
-            #define DIVISOR (data[8])
-            #endif
-
-            data[6] = (data[2] * 16 - data[4]) / DIVISOR;
-            data[7] = (data[3] * 16 - data[5]) / DIVISOR;
+            data[6] = SAFE_DIV(data[2] * 16 - data[4], data[8]);
+            data[7] = SAFE_DIV(data[3] * 16 - data[5], data[8]);
             data[0]++;
         case 1:
             if (data[8] != 0)

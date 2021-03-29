@@ -1576,7 +1576,7 @@ static void Task_IntroSpinAndZoomPokeball(u8 taskId)
         gTasks[taskId].func = Task_IntroWaitToSetupPart3LegendsFight;
     }
 
-    PanFadeAndZoomScreen(0x78, 0x50, 0x10000 / gTasks[taskId].data[1], gTasks[taskId].data[0]);
+    PanFadeAndZoomScreen(0x78, 0x50, SAFE_DIV(0x10000, gTasks[taskId].data[1]), gTasks[taskId].data[0]);
 
     if (gIntroFrameCounter == 28)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);

@@ -319,7 +319,7 @@ bool8 MenuHelpers_CallLinkSomething(void)
 {
     if (sub_81221D0() == TRUE)
         return TRUE;
-    else if (sub_800B504() != TRUE)
+    else if (IsLinkRecvQueueLengthAtLeast3() != TRUE)
         return FALSE;
     else
         return TRUE;
