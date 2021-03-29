@@ -5230,7 +5230,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
             gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREENCORE;   // STRINGID_PKMNENCOREENDED
             ret = TRUE;
         }
-        // check torment
+        // Check torment
         if (gBattleMons[battlerId].status2 & STATUS2_TORMENT)
         {
             gBattleMons[battlerId].status2 &= ~(STATUS2_TORMENT);
