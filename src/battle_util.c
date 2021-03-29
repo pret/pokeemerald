@@ -5205,7 +5205,7 @@ static bool32 UnnerveOn(u32 battlerId, u32 itemId)
 static bool32 GetMentalHerbEffect(u8 battlerId)
 {
     bool32 ret = FALSE;
-    // check infatuation
+    // Check infatuation
     if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
     {
         gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
