@@ -6605,12 +6605,12 @@ const u8 *GetTrainerPartnerName(void)
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
     (void*)(                                                    \
     ((u16)(gTasks[taskId].data[dataId]) |                       \
-    ((u16)(gTasks[taskId].data[dataId + 1]) << 0x10)))
+    ((u16)(gTasks[taskId].data[dataId + 1]) << 16)))
 
 #define STORE_PTR_IN_TASK(ptr, taskId, dataId)                 \
 {                                                              \
     gTasks[taskId].data[dataId] = (u32)(ptr);                  \
-    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 0x10;      \
+    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 16;        \
 }
 
 static void Task_AnimateAfterDelay(u8 taskId)
@@ -6897,7 +6897,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
     else
     {
         for (i = 0; i < structPtr->field_0_0; i++)
-            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 0xD));
+            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 13));
     }
 
     structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);
