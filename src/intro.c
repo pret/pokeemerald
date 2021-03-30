@@ -175,26 +175,26 @@ static EWRAM_DATA u16 sFlygonYOffset = 0;
 u32 gIntroFrameCounter;
 struct GcmbStruct gMultibootProgramStruct;
 
-static const u16 sIntro1DropsPal[]         = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
-static const u16 sIntro1Logo_Pal[]         = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
-static const u32 sIntro1DropsLogo_Gfx[]    = INCBIN_U32("graphics/intro/scene_1/drops_logo.4bpp.lz");
-static const u16 sIntro1Bg_Pal[16][16]     = INCBIN_U16("graphics/intro/scene_1/bg.gbapal");
-static const u32 sIntro1Bg0_Tilemap[]      = INCBIN_U32("graphics/intro/scene_1/bg0_map.bin.lz");
-static const u32 sIntro1Bg1_Tilemap[]      = INCBIN_U32("graphics/intro/scene_1/bg1_map.bin.lz");
-static const u32 sIntro1Bg2_Tilemap[]      = INCBIN_U32("graphics/intro/scene_1/bg2_map.bin.lz");
-static const u32 sIntro1Bg3_Tilemap[]      = INCBIN_U32("graphics/intro/scene_1/bg3_map.bin.lz");
-static const u32 sIntro1Bg_Gfx[]           = INCBIN_U32("graphics/intro/scene_1/bg.4bpp.lz");
-static const u16 sIntro3Pokeball_Pal[]     = INCBIN_U16("graphics/intro/scene_3/pokeball.gbapal");
-static const u32 sIntro3Pokeball_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/pokeball_map.bin.lz");
-static const u32 sIntro3Pokeball_Gfx[]     = INCBIN_U32("graphics/intro/scene_3/pokeball.8bpp.lz");
-static const u16 sIntro3Streaks_Pal[]      = INCBIN_U16("graphics/intro/scene_3/streaks.gbapal"); // Unused
-static const u32 sIntro3Streaks_Gfx[]      = INCBIN_U32("graphics/intro/scene_3/streaks.4bpp.lz"); // Unused
-static const u32 sIntro3Streaks_Tilemap[]  = INCBIN_U32("graphics/intro/scene_3/streaks_map.bin.lz"); // Unused
-static const u16 sIntro3Misc1_Pal[]        = INCBIN_U16("graphics/intro/scene_3/misc1.gbapal");
-static const u16 sIntro3Misc2_Pal[]        = INCBIN_U16("graphics/intro/scene_3/misc2.gbapal"); // Unused
-static const u32 sIntro3Misc_Gfx[]         = INCBIN_U32("graphics/intro/scene_3/misc.4bpp.lz");
-static const u16 sIntro1Flygon_Pal[]       = INCBIN_U16("graphics/intro/scene_1/flygon.gbapal");
-static const u32 sIntro1Lati_Gfx[]         = INCBIN_U32("graphics/intro/scene_1/lati.4bpp.lz"); // Unused
+static const u16 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
+static const u16 sIntroLogo_Pal[]             = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
+static const u32 sIntroDropsLogo_Gfx[]        = INCBIN_U32("graphics/intro/scene_1/drops_logo.4bpp.lz");
+static const u16 sIntro1Bg_Pal[16][16]        = INCBIN_U16("graphics/intro/scene_1/bg.gbapal");
+static const u32 sIntro1Bg0_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg0_map.bin.lz");
+static const u32 sIntro1Bg1_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg1_map.bin.lz");
+static const u32 sIntro1Bg2_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg2_map.bin.lz");
+static const u32 sIntro1Bg3_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg3_map.bin.lz");
+static const u32 sIntro1Bg_Gfx[]              = INCBIN_U32("graphics/intro/scene_1/bg.4bpp.lz");
+static const u16 sIntroPokeball_Pal[]         = INCBIN_U16("graphics/intro/scene_3/pokeball.gbapal");
+static const u32 sIntroPokeball_Tilemap[]     = INCBIN_U32("graphics/intro/scene_3/pokeball_map.bin.lz");
+static const u32 sIntroPokeball_Gfx[]         = INCBIN_U32("graphics/intro/scene_3/pokeball.8bpp.lz");
+static const u16 sIntroStreaks_Pal[]          = INCBIN_U16("graphics/intro/scene_3/streaks.gbapal"); // Unused
+static const u32 sIntroStreaks_Gfx[]          = INCBIN_U32("graphics/intro/scene_3/streaks.4bpp.lz"); // Unused
+static const u32 sIntroStreaks_Tilemap[]      = INCBIN_U32("graphics/intro/scene_3/streaks_map.bin.lz"); // Unused
+static const u16 sIntroRayquzaOrb_Pal[]       = INCBIN_U16("graphics/intro/scene_3/rayquaza_orb.gbapal");
+static const u16 sIntroMisc_Pal[]             = INCBIN_U16("graphics/intro/scene_3/misc.gbapal"); // Unused
+static const u32 sIntroMisc_Gfx[]             = INCBIN_U32("graphics/intro/scene_3/misc.4bpp.lz"); // Rayquza orb, and misc unused gfx
+static const u16 sIntroFlygonSilhouette_Pal[] = INCBIN_U16("graphics/intro/scene_1/flygon.gbapal");
+static const u32 sIntroLati_Gfx[]             = INCBIN_U32("graphics/intro/scene_1/lati.4bpp.lz"); // Unused
 static const u8 sUnusedData[] = {
     0x02, 0x03, 0x04, 0x05, 0x01, 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x02, 0x0D,
     0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x02, 0x0D, 0x0E, 0x0F,
@@ -203,12 +203,12 @@ static const u8 sUnusedData[] = {
 };
 static const struct CompressedSpriteSheet sSpriteSheet_Sparkle[] =
 {
-    {gIntro1Sparkle_Gfx, 0x400, TAG_SPARKLE},
+    {gIntroSparkle_Gfx, 0x400, TAG_SPARKLE},
     {},
 };
 static const struct SpritePalette sSpritePalette_Sparkle[] =
 {
-    {gIntro3LightningPal, TAG_SPARKLE}, // Lightning palette re-used
+    {gIntroLightning_Pal, TAG_SPARKLE}, // Lightning palette re-used
     {},
 };
 static const struct OamData sOamData_Sparkle =
@@ -267,16 +267,16 @@ static const u8 sSparkleCoords[][2] =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_RunningPokemon[] =
 {
-    {gIntro2VolbeatGfx, 0x400, TAG_VOLBEAT},
-    {gIntro2TorchicGfx, 0xC00, TAG_TORCHIC},
-    {gIntro2ManectricGfx, 0x2000, TAG_MANECTRIC},
+    {gIntroVolbeat_Gfx, 0x400, TAG_VOLBEAT},
+    {gIntroTorchic_Gfx, 0xC00, TAG_TORCHIC},
+    {gIntroManectric_Gfx, 0x2000, TAG_MANECTRIC},
     {},
 };
 static const struct SpritePalette sSpritePalettes_RunningPokemon[] =
 {
-    {gIntro2VolbeatPal, TAG_VOLBEAT},
-    {gIntro2TorchicPal, TAG_TORCHIC},
-    {gIntro2ManectricPal, TAG_MANECTRIC},
+    {gIntroVolbeat_Pal, TAG_VOLBEAT},
+    {gIntroTorchic_Pal, TAG_TORCHIC},
+    {gIntroManectric_Pal, TAG_MANECTRIC},
     {},
 };
 static const struct OamData sOamData_Volbeat =
@@ -415,12 +415,12 @@ static const struct SpriteTemplate sSpriteTemplate_Manectric =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_Lightning[] =
 {
-    {gIntro3LightningGfx, 0xC00, TAG_LIGHTNING},
+    {gIntroLightning_Gfx, 0xC00, TAG_LIGHTNING},
     {},
 };
 static const struct SpritePalette sSpritePalette_Lightning[] =
 {
-    {gIntro3LightningPal, TAG_LIGHTNING},
+    {gIntroLightning_Pal, TAG_LIGHTNING},
     {},
 };
 static const struct OamData sOamData_Lightning =
@@ -486,12 +486,12 @@ static const s16 sGroudonRockData[][3] =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_Bubbles[] =
 {
-    {gIntro3Bubbles_Gfx, 0x600, TAG_BUBBLES},
+    {gIntroBubbles_Gfx, 0x600, TAG_BUBBLES},
     {},
 };
 static const struct SpritePalette sSpritePalette_Bubbles[] =
 {
-    {gIntro3Bubbles_Pal, TAG_BUBBLES},
+    {gIntroBubbles_Pal, TAG_BUBBLES},
     {},
 };
 #define NUM_BUBBLES_IN_SET 6
@@ -963,19 +963,19 @@ static const struct SpriteTemplate sSpriteTemplate_FlygonSilhouette =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_WaterDropsAndLogo[] =
 {
-    {sIntro1DropsLogo_Gfx, 0x1400, GFXTAG_DROPS_LOGO},
+    {sIntroDropsLogo_Gfx, 0x1400, GFXTAG_DROPS_LOGO},
     {},
 };
 static const struct CompressedSpriteSheet sSpriteSheet_FlygonSilhouette[] =
 {
-    {gIntro1Flygon_Gfx, 0x400, TAG_FLYGON_SILHOUETTE},
+    {gIntroFlygonSilhouette_Gfx, 0x400, TAG_FLYGON_SILHOUETTE},
     {},
 };
 static const struct SpritePalette sSpritePalettes_Intro1[] =
 {
-    {sIntro1DropsPal, PALTAG_DROPS},
-    {sIntro1Logo_Pal, PALTAG_LOGO},
-    {sIntro1Flygon_Pal, TAG_FLYGON_SILHOUETTE},
+    {sIntroDrops_Pal, PALTAG_DROPS},
+    {sIntroLogo_Pal, PALTAG_LOGO},
+    {sIntroFlygonSilhouette_Pal, TAG_FLYGON_SILHOUETTE},
     {},
 };
 static const struct OamData sOamData_RayquazaOrb =
@@ -1015,12 +1015,12 @@ static const struct SpriteTemplate sSpriteTemplate_RayquazaOrb =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_RayquazaOrb[] =
 {
-    {sIntro3Misc_Gfx, 0xA00, TAG_RAYQUAZA_ORB},
+    {sIntroMisc_Gfx, 0xA00, TAG_RAYQUAZA_ORB},
     {},
 };
 static const struct SpritePalette sSpritePalette_RayquazaOrb[] =
 {
-    {sIntro3Misc1_Pal, TAG_RAYQUAZA_ORB},
+    {sIntroRayquzaOrb_Pal, TAG_RAYQUAZA_ORB},
     {},
 };
 
@@ -1715,9 +1715,9 @@ static void SpriteCB_Manectric(struct Sprite *sprite)
 static void Task_Scene3_Load(u8 taskId)
 {
     IntroResetGpuRegs();
-    LZ77UnCompVram(sIntro3Pokeball_Gfx, (void *)VRAM);
-    LZ77UnCompVram(sIntro3Pokeball_Tilemap, (void *)(BG_CHAR_ADDR(1)));
-    LoadPalette(sIntro3Pokeball_Pal, 0, sizeof(sIntro3Pokeball_Pal));
+    LZ77UnCompVram(sIntroPokeball_Gfx, (void *)VRAM);
+    LZ77UnCompVram(sIntroPokeball_Tilemap, (void *)(BG_CHAR_ADDR(1)));
+    LoadPalette(sIntroPokeball_Pal, 0, sizeof(sIntroPokeball_Pal));
     gTasks[taskId].tAlpha = 0;
     gTasks[taskId].tZoomDiv = 0;
     gTasks[taskId].tZoomDivSpeed = 0;
@@ -1770,13 +1770,13 @@ static void Task_Scene3_LoadGroudon(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LZDecompressVram(gIntro3GroudonGfx, (void *)VRAM);
-        LZDecompressVram(gIntro3GroudonTilemap, (void *)(BG_CHAR_ADDR(3)));
-        LZDecompressVram(gIntro3LegendBgGfx, (void *)(BG_CHAR_ADDR(1)));
-        LZDecompressVram(gIntro3GroudonBgTilemap, (void *)(BG_SCREEN_ADDR(28)));
+        LZDecompressVram(gIntroGroudon_Gfx, (void *)VRAM);
+        LZDecompressVram(gIntroGroudon_Tilemap, (void *)(BG_CHAR_ADDR(3)));
+        LZDecompressVram(gIntroLegendBg_Gfx, (void *)(BG_CHAR_ADDR(1)));
+        LZDecompressVram(gIntroGroudonBg_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
         LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
         LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
-        CpuCopy16(gIntro3BgPal, gPlttBufferUnfaded, sizeof(gIntro3BgPal));
+        CpuCopy16(gIntro3Bg_Pal, gPlttBufferUnfaded, sizeof(gIntro3Bg_Pal));
         gTasks[taskId].func = Task_Scene3_InitGroudonBg;
     }
 }
@@ -1884,7 +1884,7 @@ static void Task_Scene3_Groudon(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 2;
-            CpuCopy16(&gIntro3BgPal[tPalIdx], &gPlttBufferFaded[31], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[31], sizeof(u16));
             tPalIdx += 2;
             if (tPalIdx == 0x1EC)
                 tState++;
@@ -1901,7 +1901,7 @@ static void Task_Scene3_Groudon(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 2;
-            CpuCopy16(&gIntro3BgPal[tPalIdx], &gPlttBufferFaded[31], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[31], sizeof(u16));
             tPalIdx -= 2;
             if (tPalIdx == 0x1E0)
             {
@@ -2045,9 +2045,9 @@ static void SpriteCB_GroudonRocks(struct Sprite *sprite)
 static void Task_Scene3_LoadKyogre(u8 taskId)
 {
     ResetSpriteData();
-    LZDecompressVram(gIntro3KyogreGfx, (void *)VRAM);
-    LZDecompressVram(gIntro3KyogreTilemap, (void *)(BG_CHAR_ADDR(3)));
-    LZDecompressVram(gIntro3KyogreBgTilemap, (void *)(BG_SCREEN_ADDR(28)));
+    LZDecompressVram(gIntroKyogre_Gfx, (void *)VRAM);
+    LZDecompressVram(gIntroKyogre_Tilemap, (void *)(BG_CHAR_ADDR(3)));
+    LZDecompressVram(gIntroKyogreBg_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
     LoadCompressedSpriteSheet(sSpriteSheet_Bubbles);
     LoadSpritePalette(sSpritePalette_Bubbles);
     BeginNormalPaletteFade(PALETTES_ALL & ~1, 0, 16, 0, RGB_WHITEALPHA);
@@ -2143,7 +2143,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 4;
-            CpuCopy16(&gIntro3BgPal[tPalIdx], &gPlttBufferFaded[47], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[47], sizeof(u16));
             tPalIdx -= 2;
             if (tPalIdx == 0x1E0)
                 tState++;
@@ -2161,7 +2161,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 4;
-            CpuCopy16(&gIntro3BgPal[tPalIdx], &gPlttBufferFaded[47], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[47], sizeof(u16));
             tPalIdx += 2;
             if (tPalIdx == 0x1EE)
             {
@@ -2353,16 +2353,16 @@ static void Task_Scene3_LoadClouds1(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, 0);
     SetGpuReg(REG_OFFSET_BG2HOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 0);
-    LZDecompressVram(gIntro3CloudsGfx, (void *)VRAM);
-    LZDecompressVram(gIntro3CloudsGfx, (void *)(BG_CHAR_ADDR(1)));
-    LZDecompressVram(gIntro3Clouds3Tilemap, (void *)(BG_SCREEN_ADDR(28)));
+    LZDecompressVram(gIntroClouds_Gfx, (void *)VRAM);
+    LZDecompressVram(gIntroClouds_Gfx, (void *)(BG_CHAR_ADDR(1)));
+    LZDecompressVram(gIntroCloudsSun_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
     gTasks[taskId].func = Task_Scene3_LoadClouds2;
 }
 
 static void Task_Scene3_LoadClouds2(u8 taskId)
 {
-    LZDecompressVram(gIntro3Clouds1Tilemap, (void *)(BG_CHAR_ADDR(3)));
-    LZDecompressVram(gIntro3Clouds2Tilemap, (void *)(BG_SCREEN_ADDR(26)));
+    LZDecompressVram(gIntroCloudsLeft_Tilemap, (void *)(BG_CHAR_ADDR(3)));
+    LZDecompressVram(gIntroCloudsRight_Tilemap, (void *)(BG_SCREEN_ADDR(26)));
     gTasks[taskId].func = Task_Scene3_InitClouds;
 }
 
@@ -2420,10 +2420,10 @@ static void Task_Scene3_Clouds(u8 taskId)
 
 static void Task_Scene3_LoadLightning(u8 taskId)
 {
-    LZDecompressVram(gIntro3RayquazaTilemap, (void *)(BG_SCREEN_ADDR(28)));
-    LZDecompressVram(gIntro3Clouds4Tilemap, (void *)(BG_CHAR_ADDR(3)));
-    LZDecompressVram(gIntro3RayquazaGfx, (void *)(BG_CHAR_ADDR(1)));
-    LZDecompressVram(gIntro3Clouds2Gfx, (void *)VRAM);
+    LZDecompressVram(gIntroRayquaza_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
+    LZDecompressVram(gIntroRayquazaClouds_Tilemap, (void *)(BG_CHAR_ADDR(3)));
+    LZDecompressVram(gIntroRayquaza_Gfx, (void *)(BG_CHAR_ADDR(1)));
+    LZDecompressVram(gIntroRayquazaClouds_Gfx, (void *)VRAM);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
@@ -2492,7 +2492,7 @@ static void SpriteCB_Lightning(struct Sprite *sprite)
         sprite->sPalIdx = 0x1C2;
         sprite->sState++;
     case 1:
-        CpuCopy16(&gIntro3BgPal[sprite->sPalIdx], &gPlttBufferFaded[93], 2);
+        CpuCopy16(&gIntro3Bg_Pal[sprite->sPalIdx], &gPlttBufferFaded[93], 2);
         sprite->sPalIdx += 2;
         if (sprite->sPalIdx != 0x1CE)
             break;
@@ -2503,7 +2503,7 @@ static void SpriteCB_Lightning(struct Sprite *sprite)
         if (--sprite->sDelay == 0)
         {
             sprite->sDelay = 4;
-            CpuCopy16(&gIntro3BgPal[sprite->sPalIdx], &gPlttBufferFaded[93], 2);
+            CpuCopy16(&gIntro3Bg_Pal[sprite->sPalIdx], &gPlttBufferFaded[93], 2);
             sprite->sPalIdx -= 2;
             if (sprite->sPalIdx == 0x1C0)
                 DestroySprite(sprite);
@@ -2606,7 +2606,7 @@ static void Task_RayquazaAttack(u8 taskId)
     case 0:
         if ((data[2] & 1) != 0)
         {
-            CpuCopy16(&gIntro3BgPal[0x1A2 + data[1] * 2], &gPlttBufferFaded[94], 2);
+            CpuCopy16(&gIntro3Bg_Pal[0x1A2 + data[1] * 2], &gPlttBufferFaded[94], 2);
             data[1]++;
         }
         if (data[1] == 6)
@@ -2621,7 +2621,7 @@ static void Task_RayquazaAttack(u8 taskId)
         {
             if ((data[2] & 1) != 0)
             {
-                CpuCopy16(&gIntro3BgPal[0x1A2 + data[1] * 2], &gPlttBufferFaded[88], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x1A2 + data[1] * 2], &gPlttBufferFaded[88], 2);
                 data[1]++;
             }
             if (data[1] == 6)
@@ -2640,7 +2640,7 @@ static void Task_RayquazaAttack(u8 taskId)
         {
             if ((data[2] & 1) != 0)
             {
-                CpuCopy16(&gIntro3BgPal[0x182 + data[1] * 2], &gPlttBufferFaded[92], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x182 + data[1] * 2], &gPlttBufferFaded[92], 2);
                 data[1]++;
             }
             if (data[1] == 6)
@@ -2664,9 +2664,9 @@ static void Task_RayquazaAttack(u8 taskId)
             if (--data[3] != 0)
             {
                 BlendPalette(0x50, 16, data[3], RGB(9, 10, 10));
-                CpuCopy16(&gIntro3BgPal[0x1AC], &gPlttBufferFaded[94], 2);
-                CpuCopy16(&gIntro3BgPal[0x1AC], &gPlttBufferFaded[88], 2);
-                CpuCopy16(&gIntro3BgPal[0x18C], &gPlttBufferFaded[92], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x1AC], &gPlttBufferFaded[94], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x1AC], &gPlttBufferFaded[88], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x18C], &gPlttBufferFaded[92], 2);
             }
             else
             {
@@ -3197,16 +3197,16 @@ static void SpriteCB_LogoLetter(struct Sprite *sprite)
             sprite->sColorDelay = 2;
             if (sprite->sTimer != 0)
             {
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
                 sprite->sTimer--;
             }
             else
             {
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
                 sprite->sState++;
             }
         }
@@ -3226,9 +3226,9 @@ static void SpriteCB_LogoLetter(struct Sprite *sprite)
             sprite->sColorDelay = 2;
             if (sprite->sTimer <= COLOR_CHANGES)
             {
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
-                CpuCopy16(&gIntro1GameFreakTextFadePal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
                 sprite->sTimer++;
             }
             else

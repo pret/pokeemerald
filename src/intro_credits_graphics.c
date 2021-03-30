@@ -579,7 +579,7 @@ static const struct SpriteTemplate sSpriteTemplate_FlygonLatias =
 const struct CompressedSpriteSheet gSpriteSheet_IntroBrendan[] =
 {
     {
-        .data = gIntro2BrendanGfx,
+        .data = gIntroBrendan_Gfx,
         .size = 0x2000,
         .tag = TAG_BRENDAN
     },
@@ -589,7 +589,7 @@ const struct CompressedSpriteSheet gSpriteSheet_IntroBrendan[] =
 const struct CompressedSpriteSheet gSpriteSheet_IntroMay[] =
 {
     {
-        .data = gIntro2MayGfx,
+        .data = gIntroMay_Gfx,
         .size = 0x2000,
         .tag = TAG_MAY
     },
@@ -610,7 +610,7 @@ const struct CompressedSpriteSheet gSpriteSheet_IntroBicycle[] =
 static const struct CompressedSpriteSheet sSpriteSheet_IntroFlygon_Unused[] =
 {
     {
-        .data = gIntro2FlygonGfx,
+        .data = gIntroFlygon_Gfx,
         .size = 0x1000,
         .tag = TAG_FLYGON_LATIOS
     },
@@ -620,7 +620,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_IntroFlygon_Unused[] =
 const struct CompressedSpriteSheet gSpriteSheet_IntroFlygon[] =
 {
     {
-        .data = gIntro2FlygonGfx,
+        .data = gIntroFlygon_Gfx,
         .size = 0x1000,
         .tag = TAG_FLYGON_LATIAS
     },
@@ -629,10 +629,10 @@ const struct CompressedSpriteSheet gSpriteSheet_IntroFlygon[] =
 
 const struct SpritePalette gSpritePalettes_IntroPlayerFlygon[] =
 {
-    { .data = gIntro2PlayerPal, .tag = TAG_BRENDAN },
-    { .data = gIntro2PlayerPal, .tag = TAG_MAY },
-    { .data = gIntro2FlygonPal, .tag = TAG_FLYGON_LATIOS },
-    { .data = gIntro2FlygonPal, .tag = TAG_FLYGON_LATIAS },
+    { .data = gIntroPlayer_Pal, .tag = TAG_BRENDAN },
+    { .data = gIntroPlayer_Pal, .tag = TAG_MAY },
+    { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIOS },
+    { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIAS },
     {}
 };
 
