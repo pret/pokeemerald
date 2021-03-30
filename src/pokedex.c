@@ -3032,17 +3032,8 @@ static void SpriteCB_PokedexListMonSprite(struct Sprite *sprite)
     else
     {
         u32 var;
-
         sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
-        // UB: possible division by zero
-#ifdef UBFIX
-        if (gSineTable[sprite->data[5] + 64] != 0)
-            var = 0x10000 / gSineTable[sprite->data[5] + 64];
-        else
-            var = 0;
-#else
-        var = 0x10000 / gSineTable[sprite->data[5] + 64];
-#endif //UBFIX
+        var = SAFE_DIV(0x10000, gSineTable[sprite->data[5] + 64]);
         if (var > 0xFFFF)
             var = 0xFFFF;
         SetOamMatrix(sprite->data[1] + 1, 0x100, 0, 0, var);

@@ -1746,7 +1746,7 @@ static void Task_Scene3_SpinPokeball(u8 taskId)
         gTasks[taskId].func = Task_Scene3_WaitGroudon;
     }
 
-    PanFadeAndZoomScreen(0x78, 0x50, 0x10000 / gTasks[taskId].tZoomDiv, gTasks[taskId].tAlpha);
+    PanFadeAndZoomScreen(0x78, 0x50, SAFE_DIV(0x10000, gTasks[taskId].tZoomDiv), gTasks[taskId].tAlpha);
 
     if (gIntroFrameCounter == TIMER_POKEBALL_FADE)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);

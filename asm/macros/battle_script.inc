@@ -941,7 +941,7 @@
 	.byte 0xb5
 	.endm
 
-	.macro happinesstodamagecalculation
+	.macro friendshiptodamagecalculation
 	.byte 0xb6
 	.endm
 

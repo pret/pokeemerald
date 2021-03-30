@@ -74,6 +74,14 @@
 #define abs(x) (((x) < 0) ? -(x) : (x))
 #endif
 
+// Used in cases where division by 0 can occur in the retail version.
+// Avoids invalid opcodes on some emulators, and the otherwise UB.
+#ifdef UBFIX
+#define SAFE_DIV(a, b) ((b) ? (a) / (b) : 0)
+#else
+#define SAFE_DIV(a, b) ((a) / (b))
+#endif
+
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
 
@@ -209,7 +217,7 @@ struct PyramidBag
 
 struct BerryCrush
 {
-    u16 berryCrushResults[4];
+    u16 pressingSpeeds[4]; // For the record with each possible group size, 2-5 players
     u32 berryPowderAmount;
     u32 unk;
 };
