@@ -43,13 +43,17 @@
         new phrase submitted after the 1st submission.
 
     ## Saving trends ##
-    Each time a new trendy phrase is accepted, the previous Dewford Trend is saved
-    in gSaveBlock1Ptr->dewfordTrends[]. Up to SAVED_TRENDS_COUNT (5) trends may be
-    saved at one time. The trends in this array are kept in sorted order from most trendy
-    to least trendy. The current trendy phrase is always at gSaveBlock1Ptr->dewfordTrends[0].
-    If the player mixes records with another player, their own trends are replaced with
-    their mixing partner's, unless the phrase is the same, in which case the version with
-    a higher trendiness value is used (see ReceiveDewfordTrendData).
+    Each time a potential trendy phrase is submitted, it is saved in gSaveBlock1Ptr->dewfordTrends[]. 
+    Up to SAVED_TRENDS_COUNT (5) trends may be saved at one time. The trends in this array are kept 
+    in sorted order from most trendy to least trendy. The current trendy phrase is always at 
+    gSaveBlock1Ptr->dewfordTrends[0]. If the player mixes records with another player, their own 
+    trends are replaced with their mixing partner's, unless the phrase is the same, in which case 
+    the version with a higher trendiness value is used (see ReceiveDewfordTrendData).
+
+    ## TV Show ##
+    If a submitted phrase is only trendier than 1 or none of the saved trends, it may trigger a
+    TV Show called Trend Watcher (see TryPutTrendWatcherOnAir) that, ironically, spends the
+    show talking about how the submitted phrase was not trendy.
 
 */
 
@@ -144,6 +148,8 @@ void UpdateDewfordTrendPerDay(u16 days)
 
 // Returns TRUE if the current trendy phrase was successfully changed to the given phrase
 // Returns FALSE otherwise
+// Regardless of whether or not the current trendy phrase was changed, the submitted
+// phrase is always saved in gSaveBlock1Ptr->dewfordTrends
 bool8 TrySetTrendyPhrase(u16 *phrase)
 {
     struct DewfordTrend trend = {0};
