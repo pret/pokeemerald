@@ -27,7 +27,6 @@
     - rand: 
         This is a 16 bit value generated once when the phrase is created.
         It's used in calculations for Feebas tiles, Slot Machines, and Match Call.
-        It's also used to determine how much "trendiness" is lost over time (see below).
     - trendiness / maxTrendiness: 
         Initialized as a random value between 30-127 inclusive. This is used to
         compare how trendy one phrase is vs another. If a submitted phrase is
