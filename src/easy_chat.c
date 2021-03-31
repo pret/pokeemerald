@@ -1477,8 +1477,8 @@ void ShowEasyChatScreen(void)
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
         words = (u16 *)gStringVar3;
-        words[0] = gSaveBlock1Ptr->easyChatPairs[0].words[0];
-        words[1] = gSaveBlock1Ptr->easyChatPairs[0].words[1];
+        words[0] = gSaveBlock1Ptr->dewfordTrends[0].words[0];
+        words[1] = gSaveBlock1Ptr->dewfordTrends[0].words[1];
         break;
     case EASY_CHAT_TYPE_GABBY_AND_TY:
         words = gSaveBlock1Ptr->gabbyAndTyData.quote;
@@ -2958,7 +2958,7 @@ static void SetSpecialEasyChatResult(void)
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
         BufferCurrentPhraseToStringVar2();
-        gSpecialVar_0x8004 = IsPhraseTrendy(sEasyChatScreen->currentPhrase);
+        gSpecialVar_0x8004 = TrySetTrendyPhrase(sEasyChatScreen->currentPhrase);
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
         gSpecialVar_0x8004 = DidPlayerInputABerryMasterWifePhrase();

@@ -1773,7 +1773,7 @@ static bool32 sub_8196D74(int matchCallId)
 {
     int dayCount;
     int otId;
-    u16 easyChatWord;
+    u16 rand;
     int numRematchTrainersFought;
     int var0, var1, var2;
 
@@ -1783,10 +1783,10 @@ static bool32 sub_8196D74(int matchCallId)
     dayCount = RtcGetLocalDayCount();
     otId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId) & 0xFFFF;
 
-    easyChatWord = gSaveBlock1Ptr->easyChatPairs[0].unk2;
+    rand = gSaveBlock1Ptr->dewfordTrends[0].rand;
     numRematchTrainersFought = GetNumRematchTrainersFought();
     var0 = (numRematchTrainersFought * 13) / 10;
-    var1 = ((dayCount ^ easyChatWord) + (easyChatWord ^ GetGameStat(GAME_STAT_TRAINER_BATTLES))) ^ otId;
+    var1 = ((dayCount ^ rand) + (rand ^ GetGameStat(GAME_STAT_TRAINER_BATTLES))) ^ otId;
     var2 = var1 % var0;
     if (var2 < numRematchTrainersFought)
     {

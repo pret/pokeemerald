@@ -1972,7 +1972,7 @@ void TryPutTodaysRivalTrainerOnAir(void)
     }
 }
 
-void sub_80EDC60(const u16 *words)
+void TryPutTrendWatcherOnAir(const u16 *words)
 {
     TVShow *show;
 
