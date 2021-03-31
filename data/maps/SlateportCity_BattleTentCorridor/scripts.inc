@@ -69,7 +69,7 @@ SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent:: @ 8208F0D
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_ReadyFor2ndOpponent
 	compare VAR_RESULT, 2
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_AskSwapMon
 	case 1, SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge
@@ -85,7 +85,7 @@ SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge:: @ 8208F5B
 SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge:: @ 8208F89
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent
 	case 0, SlateportCity_BattleTent_EventScript_WarpToLobbyLost
