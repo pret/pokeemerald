@@ -145,7 +145,7 @@ TrainerHill_Entrance_EventScript_AllFloorsUsed:: @ 8268275
 TrainerHill_Entrance_EventScript_AskChallengeTrainers:: @ 826827D
 	message TrainerHill_Entrance_Text_LikeToChallengeTrainers
 	waitmessage
-	multichoice 15, 6, MULTI_YESNOINFO, 0
+	multichoice 15, 6, MULTI_YESNOINFO, FALSE
 	switch VAR_RESULT
 	case 0, TrainerHill_Entrance_EventScript_ChooseChallenge
 	case 1, TrainerHill_Entrance_EventScript_CancelEntry
@@ -159,7 +159,7 @@ TrainerHill_Entrance_EventScript_Info:: @ 82682BA
 	end
 
 TrainerHill_Entrance_EventScript_ChooseChallenge:: @ 82682C8
-	multichoice 13, 2, MULTI_TAG_MATCH_TYPE, 0
+	multichoice 13, 2, MULTI_TAG_MATCH_TYPE, FALSE
 	switch VAR_RESULT
 	case 4, TrainerHill_Entrance_EventScript_CancelEntry
 	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_CancelEntry
