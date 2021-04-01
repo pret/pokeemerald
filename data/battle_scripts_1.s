@@ -4183,6 +4183,15 @@ BattleScript_NotAffected::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
+BattleScript_NotAffectedAbilityPopUp::
+	copybyte gBattlerAbility, gBattlerTarget
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
+	resultmessage
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectUproar::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE

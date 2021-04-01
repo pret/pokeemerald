@@ -9689,7 +9689,7 @@ static void Cmd_tryinfatuating(void)
 
     if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
-        gBattlescriptCurrInstr = BattleScript_NotAffected;
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
@@ -11096,7 +11096,7 @@ static void Cmd_settaunt(void)
 {
     if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
-        gBattlescriptCurrInstr = BattleScript_NotAffected;
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
