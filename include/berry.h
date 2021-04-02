@@ -28,11 +28,11 @@ void SetBerryTreesSeen(void);
 
 extern const struct Berry gBerries[];
 
-struct UnkStruct_0858AB24 {
-    u8 unk0;
-    u16 unk1;
+struct BerryCrushBerryData {
+    u8 difficulty; // The number of A presses required to crush it
+    u16 powder;
 };
 
-extern const struct UnkStruct_0858AB24 gUnknown_0858AB24[];
+extern const struct BerryCrushBerryData gBerryCrush_BerryData[];
 
 #endif // GUARD_BERRY_H

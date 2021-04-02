@@ -197,8 +197,8 @@ static const u8 * const gBattlePyramid_MapHeaderStrings[] =
     gText_Pyramid,
 };
 
-// text
-bool8 sub_80D47D4(void)
+// Unused
+static bool8 StartMenu_ShowMapNamePopup(void)
 {
     HideStartMenu();
     ShowMapNamePopup();
@@ -333,24 +333,36 @@ static void ShowMapNamePopUpWindow(void)
     CopyWindowToVram(GetMapNamePopUpWindowId(), 3);
 }
 
-static void sub_80D4A78(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 unused)
+#define TILE_TOP_EDGE_START 0x21D
+#define TILE_TOP_EDGE_END   0x228
+#define TILE_LEFT_EDGE_TOP  0x229
+#define TILE_RIGHT_EDGE_TOP 0x22A
+#define TILE_LEFT_EDGE_MID  0x22B
+#define TILE_RIGHT_EDGE_MID 0x22C
+#define TILE_LEFT_EDGE_BOT  0x22D
+#define TILE_RIGHT_EDGE_BOT 0x22E
+#define TILE_BOT_EDGE_START 0x22F
+#define TILE_BOT_EDGE_END   0x23A
+
+static void DrawMapNamePopUpFrame(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 unused)
 {
     s32 i;
 
-    for (i = 0; i < 12; i++)
-    {
-        FillBgTilemapBufferRect(bg, 0x21D + i, i - 1 + x, y - 1, 1, 1, 0xE);
-    }
-    FillBgTilemapBufferRect(bg, 0x229, x - 1, y, 1, 1, 0xE);
-    FillBgTilemapBufferRect(bg, 0x22A, deltaX + x, y, 1, 1, 0xE);
-    FillBgTilemapBufferRect(bg, 0x22B, x - 1, y + 1 , 1, 1, 0xE);
-    FillBgTilemapBufferRect(bg, 0x22C, deltaX + x, y + 1, 1, 1, 0xE);
-    FillBgTilemapBufferRect(bg, 0x22D, x - 1, y + 2, 1, 1, 0xE);
-    FillBgTilemapBufferRect(bg, 0x22E, deltaX + x, y + 2, 1, 1, 0xE);
-    for (i = 0; i < 12; i++)
-    {
-        FillBgTilemapBufferRect(bg, 0x22F + i, i - 1 + x, y + deltaY, 1, 1, 0xE);
-    }
+    // Draw top edge
+    for (i = 0; i < 1 + TILE_TOP_EDGE_END - TILE_TOP_EDGE_START; i++)
+        FillBgTilemapBufferRect(bg, TILE_TOP_EDGE_START + i, i - 1 + x, y - 1, 1, 1, 14);
+
+    // Draw sides
+    FillBgTilemapBufferRect(bg, TILE_LEFT_EDGE_TOP,       x - 1,     y, 1, 1, 14);
+    FillBgTilemapBufferRect(bg, TILE_RIGHT_EDGE_TOP, deltaX + x,     y, 1, 1, 14);
+    FillBgTilemapBufferRect(bg, TILE_LEFT_EDGE_MID,       x - 1, y + 1, 1, 1, 14);
+    FillBgTilemapBufferRect(bg, TILE_RIGHT_EDGE_MID, deltaX + x, y + 1, 1, 1, 14);
+    FillBgTilemapBufferRect(bg, TILE_LEFT_EDGE_BOT,       x - 1, y + 2, 1, 1, 14);
+    FillBgTilemapBufferRect(bg, TILE_RIGHT_EDGE_BOT, deltaX + x, y + 2, 1, 1, 14);
+
+    // Draw bottom edge
+    for (i = 0; i < 1 + TILE_BOT_EDGE_END - TILE_BOT_EDGE_START; i++)
+        FillBgTilemapBufferRect(bg, TILE_BOT_EDGE_START + i, i - 1 + x, y + deltaY, 1, 1, 14);
 }
 
 static void LoadMapNamePopUpWindowBg(void)
@@ -369,7 +381,7 @@ static void LoadMapNamePopUpWindowBg(void)
     popUpThemeId = gRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
     LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), gMapPopUp_Outline_Table[popUpThemeId], 0x400, 0x21D);
-    CallWindowFunction(popupWindowId, sub_80D4A78);
+    CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
     PutWindowTilemap(popupWindowId);
     if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
         LoadPalette(&gUnknown_0857F444, 0xE0, 0x20);

@@ -24,7 +24,7 @@ DewfordTown_EventScript_Briney:: @ 81E9511
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_ReturnToPetalburgPrompt
 	message DewfordTown_Text_WhereAreWeBound
 	waitmessage
-	multichoicedefault 21, 6, MULTI_BRINEY_ON_DEWFORD, 2, 0
+	multichoicedefault 21, 6, MULTI_BRINEY_ON_DEWFORD, 2, FALSE
 	switch VAR_RESULT
 	case 0, DewfordTown_EventScript_ChoosePetalburg
 	case 1, DewfordTown_EventScript_ChooseSlateport
@@ -109,7 +109,7 @@ DewfordTown_EventScript_NotGettingItchToFish:: @ 81E9620
 DewfordTown_EventScript_HowsFishing:: @ 81E962A
 	message DewfordTown_Text_HowsYourFishing
 	waitmessage
-	multichoice 20, 8, MULTI_HOWS_FISHING, 1
+	multichoice 20, 8, MULTI_HOWS_FISHING, TRUE
 	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_EventScript_FishingExcellent
 	compare VAR_RESULT, 1

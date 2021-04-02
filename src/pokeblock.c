@@ -760,8 +760,8 @@ static void sub_8135FCC(s32 pkblId)
         {
             if (GetPokeblockData(pokeblock, PBLOCK_SPICY + i) > 0)
             {
-                rectTilemapSrc[0] = (i << 0xC) + 0x17;
-                rectTilemapSrc[1] = (i << 0xC) + 0x18;
+                rectTilemapSrc[0] = (i << 12) + 0x17;
+                rectTilemapSrc[1] = (i << 12) + 0x18;
             }
             else
             {
