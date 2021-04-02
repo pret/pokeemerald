@@ -32,6 +32,7 @@
 
 #define cEFFECT_CHOOSER gBattleCommunication + 3
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
+#define cMISS_TYPE gBattleCommunication + 6
 
 // Battle Script defines for getting the wanted battler
 #define BS_TARGET                   0

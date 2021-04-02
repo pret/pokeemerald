@@ -991,7 +991,7 @@ static void Cmd_attackcanceler(void)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
-        gBattleCommunication[6] = 1;
+        gBattleCommunication[6] = B_MSG_PROTECTED;
         gBattlescriptCurrInstr++;
     }
     else
@@ -1024,7 +1024,7 @@ static void Cmd_jumpifaffectedbyprotect(void)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(5, 0);
-        gBattleCommunication[6] = 1;
+        gBattleCommunication[6] = B_MSG_PROTECTED;
     }
     else
     {
@@ -1039,7 +1039,7 @@ bool8 JumpIfMoveAffectedByProtect(u16 move)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
-        gBattleCommunication[6] = 1;
+        gBattleCommunication[6] = B_MSG_PROTECTED;
         affected = TRUE;
     }
     return affected;
@@ -1172,9 +1172,9 @@ static void Cmd_accuracycheck(void)
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
                 (gBattleMoves[move].target == MOVE_TARGET_BOTH || gBattleMoves[move].target == MOVE_TARGET_FOES_AND_ALLY))
-                gBattleCommunication[6] = 2;
+                gBattleCommunication[6] = B_MSG_AVOIDED_ATK;
             else
-                gBattleCommunication[6] = 0;
+                gBattleCommunication[6] = B_MSG_MISSED;
 
             CheckWonderGuardAndLevitate();
         }
@@ -1370,7 +1370,7 @@ static void Cmd_typecalc(void)
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
-        gBattleCommunication[6] = moveType;
+        gBattleCommunication[6] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
     else
@@ -1406,7 +1406,7 @@ static void Cmd_typecalc(void)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
-        gBattleCommunication[6] = 3;
+        gBattleCommunication[6] = B_MSG_AVOIDED_DMG;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
     if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
@@ -1429,7 +1429,7 @@ static void CheckWonderGuardAndLevitate(void)
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
         gLastUsedAbility = ABILITY_LEVITATE;
-        gBattleCommunication[6] = moveType;
+        gBattleCommunication[6] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_LEVITATE);
         return;
     }
@@ -1484,7 +1484,7 @@ static void CheckWonderGuardAndLevitate(void)
         if (((flags & 2) || !(flags & 1)) && gBattleMoves[gCurrentMove].power)
         {
             gLastUsedAbility = ABILITY_WONDER_GUARD;
-            gBattleCommunication[6] = 3;
+            gBattleCommunication[6] = B_MSG_AVOIDED_DMG;
             RecordAbilityBattle(gBattlerTarget, ABILITY_WONDER_GUARD);
         }
     }
@@ -2019,7 +2019,7 @@ static void Cmd_resultmessage(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[6] > 2))
+    if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[6] > B_MSG_AVOIDED_ATK))
     {
         stringId = gMissStringIds[gBattleCommunication[6]];
         gBattleCommunication[MSG_DISPLAY] = 1;
@@ -4459,7 +4459,7 @@ static void Cmd_typecalc2(void)
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
         gLastLandedMoves[gBattlerTarget] = 0;
-        gBattleCommunication[6] = moveType;
+        gBattleCommunication[6] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
     else
@@ -4534,7 +4534,7 @@ static void Cmd_typecalc2(void)
         gLastUsedAbility = ABILITY_WONDER_GUARD;
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastLandedMoves[gBattlerTarget] = 0;
-        gBattleCommunication[6] = 3;
+        gBattleCommunication[6] = B_MSG_AVOIDED_DMG;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
     if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
@@ -6802,7 +6802,7 @@ static void Cmd_stockpiletobasedamage(void)
     }
     else
     {
-        if (gBattleCommunication[6] != 1)
+        if (gBattleCommunication[6] != B_MSG_PROTECTED)
         {
             gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
                                                     gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)], 0,
@@ -8928,7 +8928,7 @@ static void Cmd_jumpifattackandspecialattackcannotfall(void) // memento
 {
     if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == MIN_STAT_STAGE
         && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == MIN_STAT_STAGE
-        && gBattleCommunication[6] != 1)
+        && gBattleCommunication[6] != B_MSG_PROTECTED)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }

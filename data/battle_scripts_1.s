@@ -2113,7 +2113,7 @@ BattleScript_EffectStockpile::
 
 BattleScript_EffectSpitUp::
 	attackcanceler
-	jumpifbyte CMP_EQUAL, gBattleCommunication + 6, 0x1, BattleScript_82D9FA2
+	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PROTECTED, BattleScript_SpitUpFailProtect
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -2127,7 +2127,7 @@ BattleScript_SpitUpFail::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82D9FA2::
+BattleScript_SpitUpFailProtect::
 	attackstring
 	ppreduce
 	pause 0x40
@@ -2223,7 +2223,7 @@ BattleScript_AlreadyBurned::
 
 BattleScript_EffectMemento::
 	attackcanceler
-	jumpifbyte CMP_EQUAL, gBattleCommunication + 6, 0x1, BattleScript_82DA153
+	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PROTECTED, BattleScript_MementoFailProtect
 	attackstring
 	ppreduce
 	jumpifattackandspecialattackcannotfall BattleScript_ButItFailed
@@ -2253,11 +2253,11 @@ BattleScript_EffectMementoPrintNoEffect:
 	printstring STRINGID_BUTNOEFFECT
 	waitmessage 0x40
 	goto BattleScript_EffectMementoTryFaint
-BattleScript_82DA153:
+BattleScript_MementoFailProtect:
 	attackstring
 	ppreduce
-	jumpifattackandspecialattackcannotfall BattleScript_82DA15A
-BattleScript_82DA15A:
+	jumpifattackandspecialattackcannotfall BattleScript_MementoFailEnd
+BattleScript_MementoFailEnd:
 	setatkhptozero
 	pause 0x40
 	effectivenesssound
