@@ -7559,7 +7559,7 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         break;
     case ABILITY_PUNK_ROCK:
         if (gBattleMoves[move].flags & FLAG_SOUND)
-            MulModifier(&modifier, UQ_4_12(1.3));
+            MulModifier(&modifier, UQ_4_12(2.0));
         break;
     }
 
