@@ -504,13 +504,13 @@ static const u8 *const sTVTodaysRivalTrainerTextGroup[] = {
 };
 
 static const u8 *const sTVDewfordTrendWatcherNetworkTextGroup[] = {
-    gTVDewfordTrendWatcherNetworkText00,
-    gTVDewfordTrendWatcherNetworkText01,
-    gTVDewfordTrendWatcherNetworkText02,
-    gTVDewfordTrendWatcherNetworkText03,
-    gTVDewfordTrendWatcherNetworkText04,
-    gTVDewfordTrendWatcherNetworkText05,
-    gTVDewfordTrendWatcherNetworkText06
+    [TRENDWATCHER_STATE_INTRO]           = TrendWatcher_Text_Intro,
+    [TRENDWATCHER_STATE_TAUGHT_MALE]     = TrendWatcher_Text_MaleTaughtMePhrase,
+    [TRENDWATCHER_STATE_TAUGHT_FEMALE]   = TrendWatcher_Text_FemaleTaughtMePhrase,
+    [TRENDWATCHER_STATE_PHRASE_HOPELESS] = TrendWatcher_Text_PhraseWasHopeless,
+    [TRENDWATCHER_STATE_BIGGER_MALE]     = TrendWatcher_Text_MaleTellMeBigger,
+    [TRENDWATCHER_STATE_BIGGER_FEMALE]   = TrendWatcher_Text_FemaleTellMeBigger,
+    [TRENDWATCHER_STATE_OUTRO]           = TrendWatcher_Text_Outro
 };
 
 static const u8 *const sTVHoennTreasureInvestisatorsTextGroup[] = {
@@ -1972,7 +1972,7 @@ void TryPutTodaysRivalTrainerOnAir(void)
     }
 }
 
-void sub_80EDC60(const u16 *words)
+void TryPutTrendWatcherOnAir(const u16 *words)
 {
     TVShow *show;
 
@@ -5979,48 +5979,40 @@ static void DoTVShowDewfordTrendWatcherNetwork(void)
     state = sTVShowState;
     switch (state)
     {
-        case 0:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            if (show->trendWatcher.gender == MALE)
-            {
-                sTVShowState = 1;
-            }
-            else
-            {
-                sTVShowState = 2;
-            }
-            break;
-        case 1:
-        case 2:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
-            sTVShowState = 3;
-            break;
-        case 3:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            if (show->trendWatcher.gender == MALE)
-            {
-                sTVShowState = 4;
-            }
-            else
-            {
-                sTVShowState = 5;
-            }
-            break;
-        case 4:
-        case 5:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
-            sTVShowState = 6;
-            break;
-        case 6:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            TVShowDone();
+    case TRENDWATCHER_STATE_INTRO:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        if (show->trendWatcher.gender == MALE)
+            sTVShowState = TRENDWATCHER_STATE_TAUGHT_MALE;
+        else
+            sTVShowState = TRENDWATCHER_STATE_TAUGHT_FEMALE;
+        break;
+    case TRENDWATCHER_STATE_TAUGHT_MALE:
+    case TRENDWATCHER_STATE_TAUGHT_FEMALE:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
+        sTVShowState = TRENDWATCHER_STATE_PHRASE_HOPELESS;
+        break;
+    case TRENDWATCHER_STATE_PHRASE_HOPELESS:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        if (show->trendWatcher.gender == MALE)
+            sTVShowState = TRENDWATCHER_STATE_BIGGER_MALE;
+        else
+            sTVShowState = TRENDWATCHER_STATE_BIGGER_FEMALE;
+        break;
+    case TRENDWATCHER_STATE_BIGGER_MALE:
+    case TRENDWATCHER_STATE_BIGGER_FEMALE:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
+        sTVShowState = TRENDWATCHER_STATE_OUTRO;
+        break;
+    case TRENDWATCHER_STATE_OUTRO:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        TVShowDone();
     }
     ShowFieldMessage(sTVDewfordTrendWatcherNetworkTextGroup[state]);
 }
