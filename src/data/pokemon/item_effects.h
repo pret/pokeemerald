@@ -36,12 +36,20 @@ const u8 gItemEffect_MaxPotion[7] = {
 
 const u8 gItemEffect_HyperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 120,
+#else
+    [6] = 200,
+#endif
 };
 
 const u8 gItemEffect_SuperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 60,
+#else
+    [6] = 50,
+#endif
 };
 
 const u8 gItemEffect_FullHeal[6] = {
@@ -60,17 +68,29 @@ const u8 gItemEffect_MaxRevive[7] = {
 
 const u8 gItemEffect_FreshWater[7] = {
     [4] = ITEM4_HEAL_HP,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 30,
+#else
+    [6] = 50,
+#endif
 };
 
 const u8 gItemEffect_SodaPop[7] = {
     [4] = ITEM4_HEAL_HP,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 50,
+#else
+    [6] = 60,
+#endif
 };
 
 const u8 gItemEffect_Lemonade[7] = {
     [4] = ITEM4_HEAL_HP,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 70,
+#else
+    [6] = 80,
+#endif
 };
 
 const u8 gItemEffect_MoomooMilk[7] = {
@@ -81,7 +101,11 @@ const u8 gItemEffect_MoomooMilk[7] = {
 const u8 gItemEffect_EnergyPowder[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 60,
+#else
+    [6] = 50,
+#endif
     [7] = -5,
     [8] = -5,
     [9] = -10,
@@ -90,7 +114,11 @@ const u8 gItemEffect_EnergyPowder[10] = {
 const u8 gItemEffect_EnergyRoot[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
+#if I_LEGACY_HEALING_ITEMS >= GEN_7
     [6] = 120,
+#else
+    [6] = 200,
+#endif
     [7] = -10,
     [8] = -10,
     [9] = -15,
