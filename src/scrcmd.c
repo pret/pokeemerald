@@ -1359,7 +1359,7 @@ bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
-    u8 ignoreBPress = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
 
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
@@ -1378,7 +1378,7 @@ bool8 ScrCmd_multichoicedefault(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
     u8 defaultChoice = ScriptReadByte(ctx);
-    u8 ignoreBPress = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
 
     if (ScriptMenu_MultichoiceWithDefault(left, top, multichoiceId, ignoreBPress, defaultChoice) == TRUE)
     {
@@ -1408,7 +1408,7 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
     u8 numColumns = ScriptReadByte(ctx);
-    u8 ignoreBPress = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
 
     if (ScriptMenu_MultichoiceGrid(left, top, multichoiceId, ignoreBPress, numColumns) == TRUE)
     {
@@ -1428,7 +1428,7 @@ bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
     u8 right = ScriptReadByte(ctx);
     u8 bottom = ScriptReadByte(ctx);
 
-    // MenuZeroFillWindowRect(left, top, right, bottom);
+    // Menu_EraseWindowRect(left, top, right, bottom);
     return FALSE;
 }
 
@@ -1437,7 +1437,7 @@ bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
-    u8 ignoreBPress = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
 
     /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {

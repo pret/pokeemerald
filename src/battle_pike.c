@@ -58,8 +58,8 @@ static void GetRoomType(void);
 static void SetInWildMonRoom(void);
 static void ClearInWildMonRoom(void);
 static void SavePikeChallenge(void);
-static void nullsub_76(void);
-static void nullsub_124(void);
+static void PikeDummy1(void);
+static void PikeDummy2(void);
 static void GetRoomInflictedStatus(void);
 static void GetRoomInflictedStatusMon(void);
 static void HealOneOrTwoMons(void);
@@ -489,8 +489,8 @@ static void (* const sBattlePikeFunctions[])(void) =
     [BATTLE_PIKE_FUNC_SET_IN_WILD_MON_ROOM]    = SetInWildMonRoom,
     [BATTLE_PIKE_FUNC_CLEAR_IN_WILD_MON_ROOM]  = ClearInWildMonRoom,
     [BATTLE_PIKE_FUNC_SAVE]                    = SavePikeChallenge,
-    [BATTLE_PIKE_FUNC_NULL_9]                  = nullsub_76,
-    [BATTLE_PIKE_FUNC_NULL_10]                 = nullsub_124,
+    [BATTLE_PIKE_FUNC_DUMMY_1]                 = PikeDummy1,
+    [BATTLE_PIKE_FUNC_DUMMY_2]                 = PikeDummy2,
     [BATTLE_PIKE_FUNC_GET_ROOM_STATUS]         = GetRoomInflictedStatus,
     [BATTLE_PIKE_FUNC_GET_ROOM_STATUS_MON]     = GetRoomInflictedStatusMon,
     [BATTLE_PIKE_FUNC_HEAL_ONE_TWO_MONS]       = HealOneOrTwoMons,
@@ -716,12 +716,12 @@ static void SavePikeChallenge(void)
     TrySavingData(SAVE_LINK);
 }
 
-static void nullsub_76(void)
+static void PikeDummy1(void)
 {
 
 }
 
-static void nullsub_124(void)
+static void PikeDummy2(void)
 {
 
 }

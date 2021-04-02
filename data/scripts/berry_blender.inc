@@ -711,7 +711,7 @@ BerryBlender_EventScript_StartDecideLinkLeader: @ 82941ED
 BerryBlender_EventScript_DecideLinkLeader: @ 82941F8
 	message LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, BerryBlender_EventScript_TryJoinGroup
 	case 1, BerryBlender_EventScript_TryLeadGroup

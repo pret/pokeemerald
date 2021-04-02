@@ -4357,7 +4357,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     {                                                                                                   \
         friendshipChange = itemEffect[itemEffectParam];                                                 \
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);                                        \
-        if (friendshipChange > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)                             \
+        if (friendshipChange > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)                            \
             friendship += 150 * friendshipChange / 100;                                                 \
         else                                                                                            \
             friendship += friendshipChange;                                                             \
@@ -5681,7 +5681,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
          && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE || IS_LEAGUE_BATTLE))
         {
             s8 mod = sFriendshipEventModifiers[event][friendshipLevel];
-            if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+            if (mod > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)
                 mod = (150 * mod) / 100;
             friendship += mod;
             if (mod > 0)
@@ -6491,12 +6491,12 @@ const u8 *GetTrainerPartnerName(void)
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
     (void*)(                                                    \
     ((u16)(gTasks[taskId].data[dataId]) |                       \
-    ((u16)(gTasks[taskId].data[dataId + 1]) << 0x10)))
+    ((u16)(gTasks[taskId].data[dataId + 1]) << 16)))
 
 #define STORE_PTR_IN_TASK(ptr, taskId, dataId)                 \
 {                                                              \
     gTasks[taskId].data[dataId] = (u32)(ptr);                  \
-    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 0x10;      \
+    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 16;        \
 }
 
 static void Task_AnimateAfterDelay(u8 taskId)
@@ -6783,7 +6783,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
     else
     {
         for (i = 0; i < structPtr->field_0_0; i++)
-            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 0xD));
+            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 13));
     }
 
     structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);

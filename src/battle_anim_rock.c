@@ -140,37 +140,37 @@ static const struct SubspriteTable sFlyingSandSubspriteTable[] =
     {ARRAY_COUNT(sFlyingSandSubsprites), sFlyingSandSubsprites},
 };
 
-static const union AnimCmd sAnim_BasicRock_0[] =
+static const union AnimCmd sAnim_Rock_Biggest[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BasicRock_1[] =
+static const union AnimCmd sAnim_Rock_Bigger[] =
 {
     ANIMCMD_FRAME(16, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_WeatherBallRockDown_0[] =
+static const union AnimCmd sAnim_Rock_Big[] =
 {
     ANIMCMD_FRAME(32, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_WeatherBallRockDown_1[] =
+static const union AnimCmd sAnim_Rock_Small[] =
 {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_TwisterRock_0[] =
+static const union AnimCmd sAnim_Rock_Smaller[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_TwisterRock_1[] =
+static const union AnimCmd sAnim_Rock_Smallest[] =
 {
     ANIMCMD_FRAME(80, 1),
     ANIMCMD_END,
@@ -178,16 +178,12 @@ static const union AnimCmd sAnim_TwisterRock_1[] =
 
 static const union AnimCmd *const sAnims_BasicRock[] =
 {
-    sAnim_BasicRock_0,
-    sAnim_BasicRock_1,
-    sAnim_WeatherBallRockDown_0,
-    sAnim_WeatherBallRockDown_1,
-};
-
-static const union AnimCmd *const sAnims_TwisterRock[] =
-{
-    sAnim_TwisterRock_0,
-    sAnim_TwisterRock_1,
+    sAnim_Rock_Biggest,
+    sAnim_Rock_Bigger,
+    sAnim_Rock_Big,
+    sAnim_Rock_Small,
+    sAnim_Rock_Smaller,
+    sAnim_Rock_Smallest,
 };
 
 const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
@@ -279,7 +275,7 @@ const struct SpriteTemplate gTwisterRockSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_TwisterRock,
+    .anims = &sAnims_BasicRock[4],
     .images = NULL,
     .affineAnims = gAffineAnims_BasicRock,
     .callback = AnimMoveTwisterParticle,

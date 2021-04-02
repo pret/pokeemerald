@@ -51,25 +51,25 @@
 	inc _num_traps
 	.endm
 
-	.macro bg_event x, y, elevation, kind, arg6, arg7, arg8
+	.macro bg_event x, y, elevation, kind, arg6, arg7
 	.2byte \x, \y
 	.byte \elevation, \kind
 	.2byte 0
-	.if \kind < 5
+	.if \kind != BG_EVENT_HIDDEN_ITEM
 	.4byte \arg6
 	.else
 	.2byte \arg6
-	.byte \arg7, \arg8
+	.2byte \arg7
 	.endif
 	inc _num_signs
 	.endm
 
 	.macro bg_hidden_item_event x, y, height, item, flag
-	bg_event \x, \y, \height, 7, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
+	bg_event \x, \y, \height, BG_EVENT_HIDDEN_ITEM, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START)
 	.endm
 
 	.macro bg_secret_base_event x, y, height, secret_base_id
-	bg_event \x, \y, \height, 8, \secret_base_id, 0, 0
+	bg_event \x, \y, \height, BG_EVENT_SECRET_BASE, \secret_base_id
 	.endm
 
 	.macro map_events npcs, warps, traps, signs

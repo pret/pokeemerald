@@ -138,7 +138,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferMonNickname
 	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
-	def_special TrendyPhraseIsOld
+	def_special IsTrendyPhraseBoring
 	def_special BufferDeepLinkPhrase
 	def_special GetDewfordHallPaintingNameIndex
 	def_special SwapRegisteredBike
