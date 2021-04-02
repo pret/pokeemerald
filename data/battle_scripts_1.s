@@ -7,6 +7,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
+#include "constants/trainers.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -2962,7 +2963,7 @@ BattleScript_LocalBattleLost::
 	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_TRAINER_HILL, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
-	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, 0x400, BattleScript_LocalBattleLostEnd
+	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, TRAINER_SECRET_BASE, BattleScript_LocalBattleLostEnd
 BattleScript_LocalBattleLostPrintWhiteOut::
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage WAIT_TIME_LONG
