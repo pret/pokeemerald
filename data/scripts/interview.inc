@@ -278,7 +278,7 @@ BattleFrontier_BattleTowerLobby_EventScript_Reporter:: @ 828CB96
 BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview:: @ 828CBD8
 	message BattleFrontier_BattleTowerLobby_Text_HowDidBattleTowerTurnOut
 	waitmessage
-	multichoice 20, 8, MULTI_SATISFACTION, 1
+	multichoice 20, 8, MULTI_SATISFACTION, TRUE
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_Satisfied

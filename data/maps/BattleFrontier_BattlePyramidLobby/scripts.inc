@@ -115,7 +115,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_Attendant:: @ 82508B1
 BattleFrontier_BattlePyramidLobby_EventScript_AskTakeChallenge:: @ 82508C8
 	message BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_ExplainChallenge
@@ -125,7 +125,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_AskTakeChallenge:: @ 82508C8
 BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge:: @ 8250904
 	message BattleFrontier_BattlePyramidLobby_Text_WhichLevelMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge
@@ -218,7 +218,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_HintGiver:: @ 8250ACE
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_GiveHint:: @ 8250AF0
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_50, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLv50
 	case FRONTIER_LVL_OPEN, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLvOpen
@@ -446,7 +446,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag:: @ 82
 
 @ When exiting Battle Pyramid with a full pyramid bag and held items the player must select to keep/toss party held items and make room for any kept items by tossing from the pyramid bag
 BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep:: @ 8250E09
-	multichoice 17, 6, MULTI_FRONTIER_ITEM_CHOOSE, 0
+	multichoice 17, 6, MULTI_FRONTIER_ITEM_CHOOSE, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromBag
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromParty
@@ -500,7 +500,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard:: @ 8250E95
 BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard:: @ 8250EA4
 	message BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 15, 2, MULTI_BATTLE_PYRAMID_RULES, 0
+	multichoice 15, 2, MULTI_BATTLE_PYRAMID_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_RulesPokemon
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_RulesTrainers

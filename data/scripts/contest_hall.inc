@@ -60,7 +60,7 @@ LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter:: @ 8279D4B
 LilycoveCity_ContestLobby_EventScript_AskEnterContest:: @ 8279D5A
 	message LilycoveCity_ContestLobby_Text_EnterContest1
 	waitmessage
-	multichoice 0, 0, MULTI_ENTERINFO, 0
+	multichoice 0, 0, MULTI_ENTERINFO, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_ChooseContestRank
 	case 1, LilycoveCity_ContestLobby_EventScript_ContestInfo
@@ -71,7 +71,7 @@ LilycoveCity_ContestLobby_EventScript_AskEnterContest:: @ 8279D5A
 LilycoveCity_ContestLobby_EventScript_ContestInfo:: @ 8279D97
 	message LilycoveCity_ContestLobby_Text_WhichTopic1
 	waitmessage
-	multichoice 0, 0, MULTI_CONTEST_INFO, 0
+	multichoice 0, 0, MULTI_CONTEST_INFO, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_ExplainContests
 	case 1, LilycoveCity_ContestLobby_EventScript_ExplainContestTypes
@@ -121,7 +121,7 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestMon:: @ 8279E13
 LilycoveCity_ContestLobby_EventScript_ChooseContestRank:: @ 8279E62
 	message LilycoveCity_ContestLobby_Text_EnterWhichRank
 	waitmessage
-	multichoice 0, 0, MULTI_CONTEST_RANK, 0
+	multichoice 0, 0, MULTI_CONTEST_RANK, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_EnterNormalRank
 	case 1, LilycoveCity_ContestLobby_EventScript_EnterSuperRank
@@ -156,7 +156,7 @@ LilycoveCity_ContestLobby_EventScript_EnterMasterRank:: @ 8279ED6
 LilycoveCity_ContestLobby_EventScript_ChooseContestType:: @ 8279EE1
 	message LilycoveCity_ContestLobby_Text_EnterWhichContest1
 	waitmessage
-	multichoice 0, 0, MULTI_CONTEST_TYPE, 0
+	multichoice 0, 0, MULTI_CONTEST_TYPE, FALSE
 	switch VAR_RESULT
 	case 5, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest

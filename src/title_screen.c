@@ -64,7 +64,9 @@ static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clo
 
 
 
-const u16 gIntroWaterDropAlphaBlend[] =
+// Used to blend "Emerald Version" as it passes over over the Pokémon banner.
+// Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear
+const u16 gTitleScreenAlphaBlend[64] =
 {
     BLDALPHA_BLEND(16, 0),
     BLDALPHA_BLEND(16, 1),
@@ -364,7 +366,7 @@ static void SpriteCB_VersionBannerLeft(struct Sprite *sprite)
             sprite->pos1.y++;
         if (sprite->data[0] != 0)
             sprite->data[0]--;
-        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[sprite->data[0]]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gTitleScreenAlphaBlend[sprite->data[0]]);
     }
 }
 
@@ -388,7 +390,7 @@ static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite)
     {
         sprite->data[1]++;
         // Alternate between hidden and shown every 16th frame
-        if (sprite->data[1] & 0x10)
+        if (sprite->data[1] & 16)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;

@@ -425,21 +425,21 @@ static void StartBardSong(bool8 useTemporaryLyrics)
     gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-static void sub_81206F0(void)
+static void EnableTextPrinters(void)
 {
-    gUnknown_03002F84 = FALSE;
+    gDisableTextPrinters = FALSE;
 }
 
-static void BardSong_TextSubPrinter(struct TextPrinterTemplate * printer, u16 a1)
+static void BardSong_DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
 {
-    gUnknown_03002F84 = TRUE;
+    gDisableTextPrinters = TRUE;
 }
 
 static void sub_8120708(const u8 * src)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
-    gUnknown_03002F84 = TRUE;
+    AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_DisableTextPrinters);
+    gDisableTextPrinters = TRUE;
     CopyWindowToVram(0, 3);
 }
 
@@ -620,7 +620,7 @@ static void Task_BardSong(u8 taskId)
             else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
             {
 
-                sub_81206F0();
+                EnableTextPrinters();
                 task->tCharIndex++;
                 task->tState = 2;
                 task->data[2] = 0;
@@ -640,7 +640,7 @@ static void Task_BardSong(u8 taskId)
             else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
             {
                 gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
-                sub_81206F0();
+                EnableTextPrinters();
                 task->tCharIndex++;
                 task->data[2] = 0;
             }
@@ -649,7 +649,7 @@ static void Task_BardSong(u8 taskId)
                 switch (task->data[1])
                 {
                     case 0:
-                        sub_81206F0();
+                        EnableTextPrinters();
                         task->data[1]++;
                         break;
                     case 1:

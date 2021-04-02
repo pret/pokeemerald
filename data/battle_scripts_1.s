@@ -1678,7 +1678,7 @@ BattleScript_EffectReturn::
 BattleScript_EffectFrustration::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	happinesstodamagecalculation
+	friendshiptodamagecalculation
 	goto BattleScript_HitFromAtkString
 
 BattleScript_EffectPresent::

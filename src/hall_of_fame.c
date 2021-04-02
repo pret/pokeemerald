@@ -71,7 +71,7 @@ static void ClearVramOamPltt_LoadHofPal(void);
 static void LoadHofGfx(void);
 static void InitHofBgs(void);
 static bool8 CreateHofConfettiSprite(void);
-static void SetCallback2AfterHallOfFameDisplay(void);
+static void StartCredits(void);
 static bool8 sub_8175024(void);
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);
@@ -774,11 +774,11 @@ static void Task_Hof_HandleExit(u8 taskId)
         if (sHofMonPtr != NULL)
             FREE_AND_SET_NULL(sHofMonPtr);
 
-        SetCallback2AfterHallOfFameDisplay();
+        StartCredits();
     }
 }
 
-static void SetCallback2AfterHallOfFameDisplay(void)
+static void StartCredits(void)
 {
     SetMainCallback2(CB2_StartCreditsSequence);
 }
