@@ -37,6 +37,8 @@
 #define ITEMMENUACTION_BY_AMOUNT    16
 #define ITEMMENUACTION_DUMMY        17
 
+#define ITEMMENUACTION_COUNT        ITEMMENUACTION_DUMMY
+
 // Exported type declarations
 struct BagStruct
 {
