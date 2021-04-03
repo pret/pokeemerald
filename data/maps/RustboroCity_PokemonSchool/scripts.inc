@@ -10,7 +10,7 @@ RustboroCity_PokemonSchool_EventScript_Blackboard:: @ 8213EA9
 RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic:: @ 8213EB8
 	message RustboroCity_PokemonSchool_Text_ReadWhichTopic
 	waitmessage
-	multichoicegrid 8, 1, MULTI_STATUS_INFO, 3, 0
+	multichoicegrid 8, 1, MULTI_STATUS_INFO, 3, FALSE
 	switch VAR_RESULT
 	case 0, RustboroCity_PokemonSchool_EventScript_Poison
 	case 1, RustboroCity_PokemonSchool_EventScript_Paralysis

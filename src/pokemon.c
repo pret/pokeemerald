@@ -1811,32 +1811,32 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 
 const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {
-    // Atk Def Spd Sp.Atk Sp.Def
-    {    0,  0,  0,     0,     0}, // Hardy
-    {   +1, -1,  0,     0,     0}, // Lonely
-    {   +1,  0, -1,     0,     0}, // Brave
-    {   +1,  0,  0,    -1,     0}, // Adamant
-    {   +1,  0,  0,     0,    -1}, // Naughty
-    {   -1, +1,  0,     0,     0}, // Bold
-    {    0,  0,  0,     0,     0}, // Docile
-    {    0, +1, -1,     0,     0}, // Relaxed
-    {    0, +1,  0,    -1,     0}, // Impish
-    {    0, +1,  0,     0,    -1}, // Lax
-    {   -1,  0, +1,     0,     0}, // Timid
-    {    0, -1, +1,     0,     0}, // Hasty
-    {    0,  0,  0,     0,     0}, // Serious
-    {    0,  0, +1,    -1,     0}, // Jolly
-    {    0,  0, +1,     0,    -1}, // Naive
-    {   -1,  0,  0,    +1,     0}, // Modest
-    {    0, -1,  0,    +1,     0}, // Mild
-    {    0,  0, -1,    +1,     0}, // Quiet
-    {    0,  0,  0,     0,     0}, // Bashful
-    {    0,  0,  0,    +1,    -1}, // Rash
-    {   -1,  0,  0,     0,    +1}, // Calm
-    {    0, -1,  0,     0,    +1}, // Gentle
-    {    0,  0, -1,     0,    +1}, // Sassy
-    {    0,  0,  0,    -1,    +1}, // Careful
-    {    0,  0,  0,     0,     0}, // Quirky
+                       // Atk Def Spd Sp.Atk Sp.Def
+    [NATURE_HARDY]   = {    0,  0,  0,     0,     0},
+    [NATURE_LONELY]  = {   +1, -1,  0,     0,     0},
+    [NATURE_BRAVE]   = {   +1,  0, -1,     0,     0},
+    [NATURE_ADAMANT] = {   +1,  0,  0,    -1,     0},
+    [NATURE_NAUGHTY] = {   +1,  0,  0,     0,    -1},
+    [NATURE_BOLD]    = {   -1, +1,  0,     0,     0},
+    [NATURE_DOCILE]  = {    0,  0,  0,     0,     0},
+    [NATURE_RELAXED] = {    0, +1, -1,     0,     0},
+    [NATURE_IMPISH]  = {    0, +1,  0,    -1,     0},
+    [NATURE_LAX]     = {    0, +1,  0,     0,    -1},
+    [NATURE_TIMID]   = {   -1,  0, +1,     0,     0},
+    [NATURE_HASTY]   = {    0, -1, +1,     0,     0},
+    [NATURE_SERIOUS] = {    0,  0,  0,     0,     0},
+    [NATURE_JOLLY]   = {    0,  0, +1,    -1,     0},
+    [NATURE_NAIVE]   = {    0,  0, +1,     0,    -1},
+    [NATURE_MODEST]  = {   -1,  0,  0,    +1,     0},
+    [NATURE_MILD]    = {    0, -1,  0,    +1,     0},
+    [NATURE_QUIET]   = {    0,  0, -1,    +1,     0},
+    [NATURE_BASHFUL] = {    0,  0,  0,     0,     0},
+    [NATURE_RASH]    = {    0,  0,  0,    +1,    -1},
+    [NATURE_CALM]    = {   -1,  0,  0,     0,    +1},
+    [NATURE_GENTLE]  = {    0, -1,  0,     0,    +1},
+    [NATURE_SASSY]   = {    0,  0, -1,     0,    +1},
+    [NATURE_CAREFUL] = {    0,  0,  0,    -1,    +1},
+    [NATURE_QUIRKY]  = {    0,  0,  0,     0,     0},
 };
 
 #include "data/pokemon/tmhm_learnsets.h"
@@ -2737,119 +2737,119 @@ static const u8 sHoldEffectToType[][2] =
     {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
 };
 
-const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
+const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
-    {   // B_POSITION_PLAYER_LEFT
+    [B_POSITION_PLAYER_LEFT] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
-        .images = gUnknown_082FF3A8,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .images = gBattlerPicTable_PlayerLeft,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {   // B_POSITION_OPPONENT_LEFT
+    [B_POSITION_OPPONENT_LEFT] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACA8,
+        .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL,
-        .images = gUnknown_082FF3C8,
-        .affineAnims = gUnknown_082FF694,
+        .images = gBattlerPicTable_OpponentLeft,
+        .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
         .callback = SpriteCb_WildMon,
     },
-    {   // B_POSITION_PLAYER_RIGHT
+    [B_POSITION_PLAYER_RIGHT] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
-        .images = gUnknown_082FF3E8,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .images = gBattlerPicTable_PlayerRight,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {   // B_POSITION_OPPONENT_RIGHT
+    [B_POSITION_OPPONENT_RIGHT] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACA8,
+        .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL,
-        .images = gUnknown_082FF408,
-        .affineAnims = gUnknown_082FF694,
+        .images = gBattlerPicTable_OpponentRight,
+        .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
         .callback = SpriteCb_WildMon
     },
 };
 
-static const struct SpriteTemplate gSpriteTemplateTable_TrainerBackSprites[] =
+static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 {
-    {
+    [TRAINER_BACK_PIC_BRENDAN] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Brendan,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_MAY] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_May,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_RED] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Red,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_LEAF] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Leaf,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_RubySapphireBrendan,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_RubySapphireMay,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_WALLY] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Wally,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    {
+    [TRAINER_BACK_PIC_STEVEN] = {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gOamData_831ACB0,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Steven,
-        .affineAnims = gUnknown_082FF618,
-        .callback = sub_8039BB4,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
 };
 
@@ -3415,22 +3415,23 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
 
-void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    bool32 obedient = TRUE;
+    bool32 isEventLegal = TRUE;
 
     CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
-    SetMonData(mon, MON_DATA_OBEDIENCE, &obedient);
+    SetMonData(mon, MON_DATA_EVENT_LEGAL, &isEventLegal);
 }
 
-bool8 sub_80688F8(u8 caseId, u8 battlerId)
+// If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form
+bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
 {
     switch (caseId)
     {
     case 0:
     default:
         return FALSE;
-    case 1:
+    case 1: // Player's side in battle
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return FALSE;
         if (!gMain.inBattle)
@@ -3440,7 +3441,7 @@ bool8 sub_80688F8(u8 caseId, u8 battlerId)
         break;
     case 2:
         break;
-    case 3:
+    case 3: // Summary Screen
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return FALSE;
         if (!gMain.inBattle)
@@ -3450,7 +3451,7 @@ bool8 sub_80688F8(u8 caseId, u8 battlerId)
         return FALSE;
     case 4:
         break;
-    case 5:
+    case 5: // In move animation, e.g. in Role Play or Snatch
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             if (!gMain.inBattle)
@@ -3509,14 +3510,14 @@ u16 GetUnionRoomTrainerClass(void)
     return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
 }
 
-void CreateObedientEnemyMon(void)
+void CreateEventLegalEnemyMon(void)
 {
     s32 species = gSpecialVar_0x8004;
     s32 level = gSpecialVar_0x8005;
     s32 itemId = gSpecialVar_0x8006;
 
     ZeroEnemyPartyMons();
-    CreateObedientMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
+    CreateEventLegalMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
     if (itemId)
     {
         u8 heldItem[2];
@@ -3739,7 +3740,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 {
-    u32 retVal = 0;
+    u32 retVal = MOVE_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
 
@@ -3755,7 +3756,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
         {
             sLearningMoveTableID++;
             if (gLevelUpLearnsets[species][sLearningMoveTableID].move == LEVEL_UP_END)
-                return 0;
+                return MOVE_NONE;
         }
     }
 
@@ -4212,7 +4213,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     else if (gUnknown_020249B4[1])
         gMultiuseSpriteTemplate = gUnknown_020249B4[1]->templates[battlerPosition];
     else
-        gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
+        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
@@ -4228,7 +4229,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
-        gMultiuseSpriteTemplate = gSpriteTemplateTable_TrainerBackSprites[trainerSpriteId];
+        gMultiuseSpriteTemplate = sTrainerBackSpriteTemplates[trainerSpriteId];
         gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else
@@ -4236,7 +4237,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
         if (gMonSpritesGfxPtr != NULL)
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
-            gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
+            gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
         gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerSpriteId];
     }
 }
@@ -4246,7 +4247,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition)
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
     else
-        gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
+        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = arg0;
     gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[arg0];
@@ -4654,32 +4655,32 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_EFFORT_RIBBON:
         retVal = substruct3->effortRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_1:
-        retVal = substruct3->giftRibbon1;
+    case MON_DATA_MARINE_RIBBON:
+        retVal = substruct3->marineRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_2:
-        retVal = substruct3->giftRibbon2;
+    case MON_DATA_LAND_RIBBON:
+        retVal = substruct3->landRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_3:
-        retVal = substruct3->giftRibbon3;
+    case MON_DATA_SKY_RIBBON:
+        retVal = substruct3->skyRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_4:
-        retVal = substruct3->giftRibbon4;
+    case MON_DATA_COUNTRY_RIBBON:
+        retVal = substruct3->countryRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_5:
-        retVal = substruct3->giftRibbon5;
+    case MON_DATA_NATIONAL_RIBBON:
+        retVal = substruct3->nationalRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_6:
-        retVal = substruct3->giftRibbon6;
+    case MON_DATA_EARTH_RIBBON:
+        retVal = substruct3->earthRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_7:
-        retVal = substruct3->giftRibbon7;
+    case MON_DATA_WORLD_RIBBON:
+        retVal = substruct3->worldRibbon;
         break;
-    case MON_DATA_FATEFUL_ENCOUNTER:
-        retVal = substruct3->fatefulEncounter;
+    case MON_DATA_UNUSED_RIBBONS:
+        retVal = substruct3->unusedRibbons;
         break;
-    case MON_DATA_OBEDIENCE:
-        retVal = substruct3->obedient;
+    case MON_DATA_EVENT_LEGAL:
+        retVal = substruct3->eventLegal;
         break;
     case MON_DATA_SPECIES2:
         retVal = substruct0->species;
@@ -4721,13 +4722,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal += substruct3->victoryRibbon;
             retVal += substruct3->artistRibbon;
             retVal += substruct3->effortRibbon;
-            retVal += substruct3->giftRibbon1;
-            retVal += substruct3->giftRibbon2;
-            retVal += substruct3->giftRibbon3;
-            retVal += substruct3->giftRibbon4;
-            retVal += substruct3->giftRibbon5;
-            retVal += substruct3->giftRibbon6;
-            retVal += substruct3->giftRibbon7;
+            retVal += substruct3->marineRibbon;
+            retVal += substruct3->landRibbon;
+            retVal += substruct3->skyRibbon;
+            retVal += substruct3->countryRibbon;
+            retVal += substruct3->nationalRibbon;
+            retVal += substruct3->earthRibbon;
+            retVal += substruct3->worldRibbon;
         }
         break;
     case MON_DATA_RIBBONS:
@@ -4744,13 +4745,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (substruct3->victoryRibbon << 17)
                 | (substruct3->artistRibbon << 18)
                 | (substruct3->effortRibbon << 19)
-                | (substruct3->giftRibbon1 << 20)
-                | (substruct3->giftRibbon2 << 21)
-                | (substruct3->giftRibbon3 << 22)
-                | (substruct3->giftRibbon4 << 23)
-                | (substruct3->giftRibbon5 << 24)
-                | (substruct3->giftRibbon6 << 25)
-                | (substruct3->giftRibbon7 << 26);
+                | (substruct3->marineRibbon << 20)
+                | (substruct3->landRibbon << 21)
+                | (substruct3->skyRibbon << 22)
+                | (substruct3->countryRibbon << 23)
+                | (substruct3->nationalRibbon << 24)
+                | (substruct3->earthRibbon << 25)
+                | (substruct3->worldRibbon << 26);
         }
         break;
     default:
@@ -5033,32 +5034,32 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_EFFORT_RIBBON:
         SET8(substruct3->effortRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_1:
-        SET8(substruct3->giftRibbon1);
+    case MON_DATA_MARINE_RIBBON:
+        SET8(substruct3->marineRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_2:
-        SET8(substruct3->giftRibbon2);
+    case MON_DATA_LAND_RIBBON:
+        SET8(substruct3->landRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_3:
-        SET8(substruct3->giftRibbon3);
+    case MON_DATA_SKY_RIBBON:
+        SET8(substruct3->skyRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_4:
-        SET8(substruct3->giftRibbon4);
+    case MON_DATA_COUNTRY_RIBBON:
+        SET8(substruct3->countryRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_5:
-        SET8(substruct3->giftRibbon5);
+    case MON_DATA_NATIONAL_RIBBON:
+        SET8(substruct3->nationalRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_6:
-        SET8(substruct3->giftRibbon6);
+    case MON_DATA_EARTH_RIBBON:
+        SET8(substruct3->earthRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_7:
-        SET8(substruct3->giftRibbon7);
+    case MON_DATA_WORLD_RIBBON:
+        SET8(substruct3->worldRibbon);
         break;
-    case MON_DATA_FATEFUL_ENCOUNTER:
-        SET8(substruct3->fatefulEncounter);
+    case MON_DATA_UNUSED_RIBBONS:
+        SET8(substruct3->unusedRibbons);
         break;
-    case MON_DATA_OBEDIENCE:
-        SET8(substruct3->obedient);
+    case MON_DATA_EVENT_LEGAL:
+        SET8(substruct3->eventLegal);
         break;
     case MON_DATA_IVS:
     {
@@ -5388,29 +5389,56 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
 
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
 {
-    return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, 0);
+    return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, FALSE);
 }
 
-bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
+#define UPDATE_FRIENDSHIP_FROM_ITEM                                                                     \
+{                                                                                                       \
+    if ((retVal == 0 || friendshipOnly) && !ShouldSkipFriendshipChange() && friendshipChange == 0)      \
+    {                                                                                                   \
+        friendshipChange = itemEffect[itemEffectParam];                                                 \
+        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);                                        \
+        if (friendshipChange > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)                            \
+            friendship += 150 * friendshipChange / 100;                                                 \
+        else                                                                                            \
+            friendship += friendshipChange;                                                             \
+        if (friendshipChange > 0)                                                                       \
+        {                                                                                               \
+            if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)                           \
+                friendship++;                                                                           \
+            if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())         \
+                friendship++;                                                                           \
+        }                                                                                               \
+        if (friendship < 0)                                                                             \
+            friendship = 0;                                                                             \
+        if (friendship > MAX_FRIENDSHIP)                                                                \
+            friendship = MAX_FRIENDSHIP;                                                                \
+        SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);                                              \
+        retVal = FALSE;                                                                                 \
+    }                                                                                                   \
+}
+
+// Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
+bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
 {
     u32 dataUnsigned;
     s32 dataSigned;
     s32 friendship;
-    s32 cmdIndex;
+    s32 i;
     bool8 retVal = TRUE;
     const u8 *itemEffect;
-    u8 var_3C = 6;
-    u32 var_38;
-    s8 var_34 = 0;
+    u8 itemEffectParam = ITEM_EFFECT_ARG_START;
+    u32 temp1, temp2;
+    s8 friendshipChange = 0;
     u8 holdEffect;
-    u8 battlerId = 4;
-    u32 var_28 = 0;
+    u8 battlerId = MAX_BATTLERS_COUNT;
+    u32 friendshipOnly = FALSE;
     u16 heldItem;
-    u8 r10;
-    u32 r5;
-    s8 r2;
+    u8 effectFlags;
+    s8 evChange;
     u16 evCount;
 
+    // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
@@ -5424,19 +5452,20 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         holdEffect = ItemId_GetHoldEffect(heldItem);
     }
 
+    // Get battler id (if relevant)
     gPotentialItemEffectBattler = gBattlerInMenuId;
     if (gMain.inBattle)
     {
         gActiveBattler = gBattlerInMenuId;
-        cmdIndex = (GetBattlerSide(gActiveBattler) != B_SIDE_PLAYER);
-        while (cmdIndex < gBattlersCount)
+        i = (GetBattlerSide(gActiveBattler) != B_SIDE_PLAYER);
+        while (i < gBattlersCount)
         {
-            if (gBattlerPartyIndexes[cmdIndex] == partyIndex)
+            if (gBattlerPartyIndexes[i] == partyIndex)
             {
-                battlerId = cmdIndex;
+                battlerId = i;
                 break;
             }
-            cmdIndex += 2;
+            i += 2;
         }
     }
     else
@@ -5445,11 +5474,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         battlerId = MAX_BATTLERS_COUNT;
     }
 
+    // Skip using the item if it won't do anything
     if (!ITEM_HAS_EFFECT(item))
         return TRUE;
     if (gItemEffectTable[item - ITEM_POTION] == NULL && item != ITEM_ENIGMA_BERRY)
         return TRUE;
 
+    // Get item effect
     if (item == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
@@ -5462,79 +5493,98 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         itemEffect = gItemEffectTable[item - ITEM_POTION];
     }
 
-    for (cmdIndex = 0; cmdIndex < 6; cmdIndex++)
+    // Do item effect
+    for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
     {
-        switch (cmdIndex)
+        switch (i)
         {
-        // infatuation heal, x attack, sacred ash and dire hit
+
+        // Handle ITEM0 effects (infatuation, Dire Hit, X Attack). ITEM0_SACRED_ASH is handled in party_menu.c
         case 0:
-            if ((itemEffect[cmdIndex] & ITEM0_INFATUATION)
+            // Cure infatuation
+            if ((itemEffect[i] & ITEM0_INFATUATION)
              && gMain.inBattle && battlerId != MAX_BATTLERS_COUNT && (gBattleMons[battlerId].status2 & STATUS2_INFATUATION))
             {
                 gBattleMons[battlerId].status2 &= ~STATUS2_INFATUATION;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM0_DIRE_HIT)
+
+            // Dire Hit
+            if ((itemEffect[i] & ITEM0_DIRE_HIT)
              && !(gBattleMons[gActiveBattler].status2 & STATUS2_FOCUS_ENERGY))
             {
                 gBattleMons[gActiveBattler].status2 |= STATUS2_FOCUS_ENERGY;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM0_X_ATTACK)
+
+            // X Attack
+            if ((itemEffect[i] & ITEM0_X_ATTACK)
              && gBattleMons[gActiveBattler].statStages[STAT_ATK] < MAX_STAT_STAGE)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_ATK] += itemEffect[cmdIndex] & ITEM0_X_ATTACK;
+                gBattleMons[gActiveBattler].statStages[STAT_ATK] += itemEffect[i] & ITEM0_X_ATTACK;
                 if (gBattleMons[gActiveBattler].statStages[STAT_ATK] > MAX_STAT_STAGE)
                     gBattleMons[gActiveBattler].statStages[STAT_ATK] = MAX_STAT_STAGE;
                 retVal = FALSE;
             }
             break;
-        // in-battle stat boosting effects
+
+        // Handle ITEM1 effects (in-battle stat boosting effects)
         case 1:
-            if ((itemEffect[cmdIndex] & ITEM1_X_DEFEND)
+            // X Defend
+            if ((itemEffect[i] & ITEM1_X_DEFEND)
              && gBattleMons[gActiveBattler].statStages[STAT_DEF] < MAX_STAT_STAGE)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_DEF] += (itemEffect[cmdIndex] & ITEM1_X_DEFEND) >> 4;
+                gBattleMons[gActiveBattler].statStages[STAT_DEF] += (itemEffect[i] & ITEM1_X_DEFEND) >> 4;
                 if (gBattleMons[gActiveBattler].statStages[STAT_DEF] > MAX_STAT_STAGE)
                     gBattleMons[gActiveBattler].statStages[STAT_DEF] = MAX_STAT_STAGE;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM1_X_SPEED)
+
+            // X Speed
+            if ((itemEffect[i] & ITEM1_X_SPEED)
              && gBattleMons[gActiveBattler].statStages[STAT_SPEED] < MAX_STAT_STAGE)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_SPEED] += itemEffect[cmdIndex] & ITEM1_X_SPEED;
+                gBattleMons[gActiveBattler].statStages[STAT_SPEED] += itemEffect[i] & ITEM1_X_SPEED;
                 if (gBattleMons[gActiveBattler].statStages[STAT_SPEED] > MAX_STAT_STAGE)
                     gBattleMons[gActiveBattler].statStages[STAT_SPEED] = MAX_STAT_STAGE;
                 retVal = FALSE;
             }
             break;
-        // more stat boosting effects
+        // Handle ITEM2 effects (more stat boosting effects)
         case 2:
-            if ((itemEffect[cmdIndex] & ITEM2_X_ACCURACY)
+            // X Accuracy
+            if ((itemEffect[i] & ITEM2_X_ACCURACY)
              && gBattleMons[gActiveBattler].statStages[STAT_ACC] < MAX_STAT_STAGE)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_ACC] += (itemEffect[cmdIndex] & ITEM2_X_ACCURACY) >> 4;
+                gBattleMons[gActiveBattler].statStages[STAT_ACC] += (itemEffect[i] & ITEM2_X_ACCURACY) >> 4;
                 if (gBattleMons[gActiveBattler].statStages[STAT_ACC] > MAX_STAT_STAGE)
                     gBattleMons[gActiveBattler].statStages[STAT_ACC] = MAX_STAT_STAGE;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM2_X_SPATK)
+
+            // X Sp Attack
+            if ((itemEffect[i] & ITEM2_X_SPATK)
              && gBattleMons[gActiveBattler].statStages[STAT_SPATK] < MAX_STAT_STAGE)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_SPATK] += itemEffect[cmdIndex] & ITEM2_X_SPATK;
+                gBattleMons[gActiveBattler].statStages[STAT_SPATK] += itemEffect[i] & ITEM2_X_SPATK;
                 if (gBattleMons[gActiveBattler].statStages[STAT_SPATK] > MAX_STAT_STAGE)
                     gBattleMons[gActiveBattler].statStages[STAT_SPATK] = MAX_STAT_STAGE;
                 retVal = FALSE;
             }
             break;
+
+        // Handle ITEM3 effects (Guard Spec, Rare Candy, cure status)
         case 3:
-            if ((itemEffect[cmdIndex] & ITEM3_GUARD_SPEC)
+            // Guard Spec
+            if ((itemEffect[i] & ITEM3_GUARD_SPEC)
              && gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer == 0)
             {
                 gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer = 5;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM3_LEVEL_UP)
+
+            // Rare Candy
+            if ((itemEffect[i] & ITEM3_LEVEL_UP)
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
@@ -5542,106 +5592,120 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 CalculateMonStats(mon);
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM3_SLEEP)
-             && HealStatusConditions(mon, partyIndex, 7, battlerId) == 0)
+
+            // Cure status
+            if ((itemEffect[i] & ITEM3_SLEEP)
+             && HealStatusConditions(mon, partyIndex, STATUS1_SLEEP, battlerId) == 0)
             {
-                if (battlerId != 4)
+                if (battlerId != MAX_BATTLERS_COUNT)
                     gBattleMons[battlerId].status2 &= ~STATUS2_NIGHTMARE;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM3_POISON) && HealStatusConditions(mon, partyIndex, STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER, battlerId) == 0)
+            if ((itemEffect[i] & ITEM3_POISON) && HealStatusConditions(mon, partyIndex, STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER, battlerId) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & ITEM3_BURN) && HealStatusConditions(mon, partyIndex, STATUS1_BURN, battlerId) == 0)
+            if ((itemEffect[i] & ITEM3_BURN) && HealStatusConditions(mon, partyIndex, STATUS1_BURN, battlerId) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & ITEM3_FREEZE) && HealStatusConditions(mon, partyIndex, STATUS1_FREEZE, battlerId) == 0)
+            if ((itemEffect[i] & ITEM3_FREEZE) && HealStatusConditions(mon, partyIndex, STATUS1_FREEZE, battlerId) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & ITEM3_PARALYSIS) && HealStatusConditions(mon, partyIndex, STATUS1_PARALYSIS, battlerId) == 0)
+            if ((itemEffect[i] & ITEM3_PARALYSIS) && HealStatusConditions(mon, partyIndex, STATUS1_PARALYSIS, battlerId) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & ITEM3_CONFUSION)  // heal confusion
+            if ((itemEffect[i] & ITEM3_CONFUSION)  // heal confusion
              && gMain.inBattle && battlerId != MAX_BATTLERS_COUNT && (gBattleMons[battlerId].status2 & STATUS2_CONFUSION))
             {
                 gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
                 retVal = FALSE;
             }
             break;
-        // EV, HP, and PP raising effects
+
+        // Handle ITEM4 effects (Change HP/Atk EVs, HP heal, PP heal, PP up, Revive, and evolution stones)
         case 4:
-            r10 = itemEffect[cmdIndex];
-            if (r10 & ITEM4_PP_UP)
+            effectFlags = itemEffect[i];
+
+            // PP Up
+            if (effectFlags & ITEM4_PP_UP)
             {
-                r10 &= ~ITEM4_PP_UP;
+                effectFlags &= ~ITEM4_PP_UP;
                 dataUnsigned = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                var_38 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                if (dataUnsigned <= 2 && var_38 > 4)
+                temp1 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                if (dataUnsigned <= 2 && temp1 > 4)
                 {
                     dataUnsigned = GetMonData(mon, MON_DATA_PP_BONUSES, NULL) + gPPUpAddMask[moveIndex];
                     SetMonData(mon, MON_DATA_PP_BONUSES, &dataUnsigned);
 
-                    dataUnsigned = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), dataUnsigned, moveIndex) - var_38;
+                    dataUnsigned = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), dataUnsigned, moveIndex) - temp1;
                     dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL) + dataUnsigned;
                     SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
                     retVal = FALSE;
                 }
             }
-            var_38 = 0;
-            while (r10 != 0)
+            temp1 = 0;
+
+            // Loop through and try each of the remaining ITEM4 effects
+            while (effectFlags != 0)
             {
-                if (r10 & 1)
+                if (effectFlags & 1)
                 {
-                    switch (var_38)
+                    switch (temp1)
                     {
-                    case 0:
-                    case 1:
-                        // ev raise
+                    case 0: // ITEM4_EV_HP
+                    case 1: // ITEM4_EV_ATK
                         evCount = GetMonEVCount(mon);
-                        r5 = itemEffect[var_3C];
-                        dataSigned = GetMonData(mon, sGetMonDataEVConstants[var_38], NULL);
-                        r2 = r5;
-                        if (r2 > 0)
+                        temp2 = itemEffect[itemEffectParam];
+                        dataSigned = GetMonData(mon, sGetMonDataEVConstants[temp1], NULL);
+                        evChange = temp2;
+     
+                        if (evChange > 0) // Increasing EV (HP or Atk)
                         {
+                            // Has EV increase limit already been reached?
                             if (evCount >= MAX_TOTAL_EVS)
                                 return TRUE;
                             if (dataSigned >= EV_ITEM_RAISE_LIMIT)
                                 break;
 
-                            if (dataSigned + r2 > EV_ITEM_RAISE_LIMIT)
-                                r5 = EV_ITEM_RAISE_LIMIT - (dataSigned + r2) + r2;
+                            // Limit the increase
+                            if (dataSigned + evChange > EV_ITEM_RAISE_LIMIT)
+                                temp2 = EV_ITEM_RAISE_LIMIT - (dataSigned + evChange) + evChange;
                             else
-                                r5 = r2;
+                                temp2 = evChange;
 
-                            if (evCount + r5 > MAX_TOTAL_EVS)
-                                r5 += MAX_TOTAL_EVS - (evCount + r5);
-                            dataSigned += r5;
+                            if (evCount + temp2 > MAX_TOTAL_EVS)
+                                temp2 += MAX_TOTAL_EVS - (evCount + temp2);
+
+                            dataSigned += temp2;
                         }
-                        else
+                        else // Decreasing EV (HP or Atk)
                         {
                             if (dataSigned == 0)
                             {
-                                var_28 = 1;
-                                var_3C++;
+                                // No EVs to lose, but make sure friendship updates anyway
+                                friendshipOnly = TRUE;
+                                itemEffectParam++;
                                 break;
                             }
-                            dataSigned += r2;
+                            dataSigned += evChange;
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
-                        SetMonData(mon, sGetMonDataEVConstants[var_38], &dataSigned);
+
+                        // Update EVs and stats
+                        SetMonData(mon, sGetMonDataEVConstants[temp1], &dataSigned);
                         CalculateMonStats(mon);
-                        var_3C++;
+                        itemEffectParam++;
                         retVal = FALSE;
                         break;
-                    case 2:
-                        // revive
-                        if (r10 & 0x10)
+
+                    case 2: // ITEM4_HEAL_HP
+                        // If Revive, update number of times revive has been used
+                        if (effectFlags & (ITEM4_REVIVE >> 2))
                         {
                             if (GetMonData(mon, MON_DATA_HP, NULL) != 0)
                             {
-                                var_3C++;
+                                itemEffectParam++;
                                 break;
                             }
                             if (gMain.inBattle)
                             {
-                                if (battlerId != 4)
+                                if (battlerId != MAX_BATTLERS_COUNT)
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[battlerId];
                                     CopyPlayerPartyMonToBattleData(battlerId, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battlerId]));
@@ -5660,48 +5724,53 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         {
                             if (GetMonData(mon, MON_DATA_HP, NULL) == 0)
                             {
-                                var_3C++;
+                                itemEffectParam++;
                                 break;
                             }
                         }
 
                         // Get amount of HP to restore
-                        dataUnsigned = itemEffect[var_3C++];
+                        dataUnsigned = itemEffect[itemEffectParam++];
                         switch (dataUnsigned)
                         {
-                        case ITEM6_HEAL_FULL:
+                        case ITEM6_HEAL_HP_FULL:
                             dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL) - GetMonData(mon, MON_DATA_HP, NULL);
                             break;
-                        case ITEM6_HEAL_HALF:
+                        case ITEM6_HEAL_HP_HALF:
                             dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL) / 2;
                             if (dataUnsigned == 0)
                                 dataUnsigned = 1;
                             break;
-                        case ITEM6_HEAL_LVL_UP:
+                        case ITEM6_HEAL_HP_LVL_UP:
                             dataUnsigned = gBattleScripting.levelUpHP;
                             break;
                         }
+
+                        // Only restore HP if not at max health
                         if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                         {
-                            if (e == 0)
+                            if (!usedByAI)
                             {
+                                // Restore HP 
                                 dataUnsigned = GetMonData(mon, MON_DATA_HP, NULL) + dataUnsigned;
                                 if (dataUnsigned > GetMonData(mon, MON_DATA_MAX_HP, NULL))
                                     dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL);
                                 SetMonData(mon, MON_DATA_HP, &dataUnsigned);
-                                if (gMain.inBattle && battlerId != 4)
+
+                                // Update battler (if applicable)
+                                if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT)
                                 {
                                     gBattleMons[battlerId].hp = dataUnsigned;
-                                    if (!(r10 & 0x10) && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+                                    if (!(effectFlags & (ITEM4_REVIVE >> 2)) && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
                                     {
                                         if (gBattleResults.numHealingItemsUsed < 255)
                                             gBattleResults.numHealingItemsUsed++;
-                                        // I have to re-use this variable to match.
-                                        r5 = gActiveBattler;
+
+                                        temp2 = gActiveBattler;
                                         gActiveBattler = battlerId;
                                         BtlController_EmitGetMonData(0, REQUEST_ALL_BATTLE, 0);
                                         MarkBattlerForControllerExec(gActiveBattler);
-                                        gActiveBattler = r5;
+                                        gActiveBattler = temp2;
                                     }
                                 }
                             }
@@ -5711,227 +5780,197 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             retVal = FALSE;
                         }
-                        r10 &= 0xEF;
+                        effectFlags &= ~(ITEM4_REVIVE >> 2);
                         break;
-                    case 3:
-                        // Heal pp in all moves.
-                        if (!(r10 & 2))
+
+                    case 3: // ITEM4_HEAL_PP
+                        if (!(effectFlags & (ITEM4_HEAL_PP_ONE >> 3)))
                         {
-                            for (r5 = 0; (signed)(r5) < (signed)(4); r5++)
+                            // Heal PP for all moves
+                            for (temp2 = 0; (signed)(temp2) < (signed)(MAX_MON_MOVES); temp2++)
                             {
                                 u16 moveId;
-
-                                dataUnsigned = GetMonData(mon, MON_DATA_PP1 + r5, NULL);
-                                moveId = GetMonData(mon, MON_DATA_MOVE1 + r5, NULL);
-                                if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), r5))
+                                dataUnsigned = GetMonData(mon, MON_DATA_PP1 + temp2, NULL);
+                                moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL);
+                                if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                 {
-                                    dataUnsigned += itemEffect[var_3C];
-                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + r5, NULL);
-                                    if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), r5))
+                                    dataUnsigned += itemEffect[itemEffectParam];
+                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
+                                    if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                     {
-                                        moveId = GetMonData(mon, MON_DATA_MOVE1 + r5, NULL);
-                                        dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), r5);
+                                        moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
+                                        dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
                                     }
-                                    SetMonData(mon, MON_DATA_PP1 + r5, &dataUnsigned);
+                                    SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
+
+                                    // Heal battler PP too (if applicable)
                                     if (gMain.inBattle
                                      && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                     && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[r5]))
-                                        gBattleMons[battlerId].pp[r5] = dataUnsigned;
+                                     && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[temp2]))
+                                        gBattleMons[battlerId].pp[temp2] = dataUnsigned;
+
                                     retVal = FALSE;
                                 }
                             }
-                            var_3C++;
+                            itemEffectParam++;
                         }
-                        // Heal pp in one move.
                         else
                         {
+                            // Heal PP for one move
                             u16 moveId;
-
                             dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL);
                             moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
                             if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                             {
-                                dataUnsigned += itemEffect[var_3C++];
-                                moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                                dataUnsigned += itemEffect[itemEffectParam++];
+                                moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
                                 if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                                 {
-                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
                                     dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                                 }
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
+                                
+                                // Heal battler PP too (if applicable)
                                 if (gMain.inBattle
-                                 && battlerId != 4 && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
+                                 && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
                                  && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[moveIndex]))
                                     gBattleMons[battlerId].pp[moveIndex] = dataUnsigned;
+
                                 retVal = FALSE;
                             }
                         }
                         break;
-                        // Evolution stone
-                    case 7:
+
+                    // cases 4-6 are ITEM4_HEAL_PP_ONE, ITEM4_PP_UP, and ITEM4_REVIVE, which
+                    // are already handled above by other cases or before the loop
+
+                    case 7: // ITEM4_EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item, SPECIES_NONE);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, SPECIES_NONE);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
-                                BeginEvolutionScene(mon, targetSpecies, 0, partyIndex);
+                                BeginEvolutionScene(mon, targetSpecies, FALSE, partyIndex);
                                 return FALSE;
                             }
                         }
                         break;
                     }
                 }
-                var_38++;
-                r10 >>= 1;
+                temp1++;
+                effectFlags >>= 1;
             }
             break;
-        // EV and friendship
+
+        // Handle ITEM5 effects (Change Def/SpDef/SpAtk/Speed EVs, PP Max, and friendship changes)
         case 5:
-            r10 = itemEffect[cmdIndex];
-            var_38 = 0;
-            while (r10 != 0)
+            effectFlags = itemEffect[i];
+            temp1 = 0;
+            
+            // Loop through and try each of the ITEM5 effects
+            while (effectFlags != 0)
             {
-                if (r10 & 1)
+                if (effectFlags & 1)
                 {
-                    switch (var_38)
+                    switch (temp1)
                     {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
+                    case 0: // ITEM5_EV_DEF
+                    case 1: // ITEM5_EV_SPEED
+                    case 2: // ITEM5_EV_SPDEF
+                    case 3: // ITEM5_EV_SPATK
                         evCount = GetMonEVCount(mon);
-                        r5 = itemEffect[var_3C];
-                        dataSigned = GetMonData(mon, sGetMonDataEVConstants[var_38 + 2], NULL);
-                        r2 = r5;
-                        if (r2 > 0)
+                        temp2 = itemEffect[itemEffectParam];
+                        dataSigned = GetMonData(mon, sGetMonDataEVConstants[temp1 + 2], NULL);
+                        evChange = temp2;
+                        if (evChange > 0) // Increasing EV
                         {
+                            // Has EV increase limit already been reached?
                             if (evCount >= MAX_TOTAL_EVS)
                                 return TRUE;
                             if (dataSigned >= EV_ITEM_RAISE_LIMIT)
                                 break;
 
-                            if (dataSigned + r2 > EV_ITEM_RAISE_LIMIT)
-                                r5 = EV_ITEM_RAISE_LIMIT - (dataSigned + r2) + r2;
+                            // Limit the increase
+                            if (dataSigned + evChange > EV_ITEM_RAISE_LIMIT)
+                                temp2 = EV_ITEM_RAISE_LIMIT - (dataSigned + evChange) + evChange;
                             else
-                                r5 = r2;
+                                temp2 = evChange;
 
-                            if (evCount + r5 > MAX_TOTAL_EVS)
-                                r5 += MAX_TOTAL_EVS - (evCount + r5);
-                            dataSigned += r5;
+                            if (evCount + temp2 > MAX_TOTAL_EVS)
+                                temp2 += MAX_TOTAL_EVS - (evCount + temp2);
+
+                            dataSigned += temp2;
                         }
-                        else
+                        else // Decreasing EV
                         {
                             if (dataSigned == 0)
                             {
-                                var_28 = 1;
-                                var_3C++;
+                                // No EVs to lose, but make sure friendship updates anyway
+                                friendshipOnly = TRUE;
+                                itemEffectParam++;
                                 break;
                             }
-                            dataSigned += r2;
+                            dataSigned += evChange;
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
-                        SetMonData(mon, sGetMonDataEVConstants[var_38 + 2], &dataSigned);
+
+                        // Update EVs and stats
+                        SetMonData(mon, sGetMonDataEVConstants[temp1 + 2], &dataSigned);
                         CalculateMonStats(mon);
                         retVal = FALSE;
-                        var_3C++;
+                        itemEffectParam++;
                         break;
-                    case 4:
+
+                    case 4: // ITEM5_PP_MAX
                         dataUnsigned = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                        r5 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                        if (dataUnsigned < 3 && r5 > 4)
+                        temp2 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                        if (dataUnsigned < 3 && temp2 > 4)
                         {
                             dataUnsigned = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
                             dataUnsigned &= gPPUpSetMask[moveIndex];
                             dataUnsigned += gPPUpAddMask[moveIndex] * 3;
 
                             SetMonData(mon, MON_DATA_PP_BONUSES, &dataUnsigned);
-                            dataUnsigned = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), dataUnsigned, moveIndex) - r5;
+                            dataUnsigned = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), dataUnsigned, moveIndex) - temp2;
                             dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL) + dataUnsigned;
                             SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
                             retVal = FALSE;
                         }
                         break;
-                    case 5:
-                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 100 && (retVal == 0 || var_28 != 0) && !ShouldSkipFriendshipChange() && var_34 == 0)
+
+                    case 5: // ITEM5_FRIENDSHIP_LOW
+                        // Changes to friendship are given differently depending on
+                        // how much friendship the Pokémon already has.
+                        // In general, Pokémon with lower friendship receive more,
+                        // and Pokémon with higher friendship receive less.
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 100)
                         {
-                            var_34 = itemEffect[var_3C];
-                            friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
-                            if (var_34 > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                                friendship += 150 * var_34 / 100;
-                            else
-                                friendship += var_34;
-                            if (var_34 > 0)
-                            {
-                                if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)
-                                    friendship++;
-                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
-                                    friendship++;
-                            }
-                            if (friendship < 0)
-                                friendship = 0;
-                            if (friendship > MAX_FRIENDSHIP)
-                                friendship = MAX_FRIENDSHIP;
-                            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-                            retVal = FALSE;
+                            UPDATE_FRIENDSHIP_FROM_ITEM;
                         }
-                        var_3C++;
+                        itemEffectParam++;
                         break;
-                    case 6:
-                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 100 && GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 200
-                         && (retVal == 0 || var_28 != 0) && !ShouldSkipFriendshipChange() && var_34 == 0)
+
+                    case 6: // ITEM5_FRIENDSHIP_MID
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 100 && GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 200)
                         {
-                            var_34 = itemEffect[var_3C];
-                            friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
-                            if ((s8)(var_34) > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                                friendship += 150 * var_34 / 100;
-                            else
-                                friendship += var_34;
-                            if (var_34 > 0)
-                            {
-                                if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)
-                                    friendship++;
-                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
-                                    friendship++;
-                            }
-                            if (friendship < 0)
-                                friendship = 0;
-                            if (friendship > MAX_FRIENDSHIP)
-                                friendship = MAX_FRIENDSHIP;
-                            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-                            retVal = FALSE;
+                            UPDATE_FRIENDSHIP_FROM_ITEM;
                         }
-                        var_3C++;
+                        itemEffectParam++;
                         break;
-                    case 7:
-                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200 && (retVal == 0 || var_28 != 0) && !ShouldSkipFriendshipChange() && var_34 == 0)
+
+                    case 7: // ITEM5_FRIENDSHIP_HIGH
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200)
                         {
-                            var_34 = itemEffect[var_3C];
-                            friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
-                            if ((s8)(var_34) > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                                friendship += 150 * var_34 / 100;
-                            else
-                                friendship += var_34;
-                            if (var_34 > 0)
-                            {
-                                if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)
-                                    friendship++;
-                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
-                                    friendship++;
-                            }
-                            if (friendship < 0)
-                                friendship = 0;
-                            if (friendship > MAX_FRIENDSHIP)
-                                friendship = MAX_FRIENDSHIP;
-                            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-                            retVal = FALSE;
+                            UPDATE_FRIENDSHIP_FROM_ITEM;
                         }
-                        var_3C++;
+                        itemEffectParam++;
                         break;
                     }
                 }
-                var_38++;
-                r10 >>= 1;
+                temp1++;
+                effectFlags >>= 1;
             }
             break;
         }
@@ -5964,9 +6003,9 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     u8 offset;
     int i;
     u8 j;
-    u8 val;
+    u8 effectFlags;
 
-    offset = 6;
+    offset = ITEM_EFFECT_ARG_START;
 
     temp = gItemEffectTable[itemId - ITEM_POTION];
 
@@ -5980,7 +6019,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     itemEffect = temp;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
     {
         switch (i)
         {
@@ -5992,74 +6031,75 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                 return 0;
             break;
         case 4:
-            val = itemEffect[4];
-            if (val & ITEM4_PP_UP)
-                val &= ~(ITEM4_PP_UP);
+            effectFlags = itemEffect[4];
+            if (effectFlags & ITEM4_PP_UP)
+                effectFlags &= ~(ITEM4_PP_UP);
             j = 0;
-            while (val)
+            while (effectFlags)
             {
-                if (val & 1)
+                if (effectFlags & 1)
                 {
                     switch (j)
                     {
-                    case 2:
-                        if (val & 0x10)
-                            val &= 0xEF;
-                    case 0:
-                        if (i == effectByte && (val & effectBit))
+                    case 2: // ITEM4_HEAL_HP
+                        if (effectFlags & (ITEM4_REVIVE >> 2))
+                            effectFlags &= ~(ITEM4_REVIVE >> 2);
+                        // fallthrough
+                    case 0: // ITEM4_EV_HP
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
-                    case 1:
-                        if (i == effectByte && (val & effectBit))
+                    case 1: // ITEM4_EV_ATK
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
-                    case 3:
-                        if (i == effectByte && (val & effectBit))
+                    case 3: // ITEM4_HEAL_PP
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
-                    case 7:
+                    case 7: // ITEM4_EVO_STONE
                         if (i == effectByte)
                             return 0;
                         break;
                     }
                 }
                 j++;
-                val >>= 1;
+                effectFlags >>= 1;
                 if (i == effectByte)
                     effectBit >>= 1;
             }
             break;
         case 5:
-            val = itemEffect[5];
+            effectFlags = itemEffect[5];
             j = 0;
-            while (val)
+            while (effectFlags)
             {
-                if (val & 1)
+                if (effectFlags & 1)
                 {
                     switch (j)
                     {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                        if (i == effectByte && (val & effectBit))
+                    case 0: // ITEM5_EV_DEF
+                    case 1: // ITEM5_EV_SPEED
+                    case 2: // ITEM5_EV_SPDEF
+                    case 3: // ITEM5_EV_SPATK
+                    case 4: // ITEM5_PP_MAX
+                    case 5: // ITEM5_FRIENDSHIP_LOW
+                    case 6: // ITEM5_FRIENDSHIP_MID
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
-                    case 7:
+                    case 7: // ITEM5_FRIENDSHIP_HIGH
                         if (i == effectByte)
                             return 0;
                         break;
                     }
                 }
                 j++;
-                val >>= 1;
+                effectFlags >>= 1;
                 if (i == effectByte)
                     effectBit >>= 1;
             }
@@ -6135,7 +6175,7 @@ u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u16 tradePartnerSpecies)
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u16 tradePartnerSpecies)
 {
     int i, j;
     u16 targetSpecies = 0;
@@ -6154,12 +6194,13 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
-    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE && type != 3)
+    // Prevent evolution with Everstone, unless we're just viewing the party menu with an evolution item
+    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE && mode != EVO_MODE_ITEM_CHECK)
         return SPECIES_NONE;
 
-    switch (type)
+    switch (mode)
     {
-    case 0:
+    case EVO_MODE_NORMAL:
         level = GetMonData(mon, MON_DATA_LEVEL, 0);
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
 
@@ -6313,7 +6354,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
             }
         }
         break;
-    case 1:
+    case EVO_MODE_TRADE:
         for (i = 0; i < EVOS_PER_MON; i++)
         {
             switch (gEvolutionTable[species][i].method)
@@ -6336,8 +6377,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
             }
         }
         break;
-    case 2:
-    case 3:
+    case EVO_MODE_ITEM_USE:
+    case EVO_MODE_ITEM_CHECK:
         for (i = 0; i < EVOS_PER_MON; i++)
         {
             switch (gEvolutionTable[species][i].method)
@@ -6440,96 +6481,63 @@ u16 HoennToNationalOrder(u16 hoennNum)
     return gHoennToNationalOrder[hoennNum - 1];
 }
 
-void sub_806D544(u16 species, u32 personality, u8 *dest)
+#define DRAW_SPINDA_SPOTS                                                       \
+{                                                                               \
+    int i;                                                                      \
+    for (i = 0; i < 4; i++)                                                     \
+    {                                                                           \
+        int j;                                                                  \
+        u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);           \
+        u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);    \
+                                                                                \
+        for (j = 0; j < 16; j++)                                                \
+        {                                                                       \
+            int k;                                                              \
+            s32 row = gSpindaSpotGraphics[i].image[j];                          \
+                                                                                \
+            for (k = x; k < x + 16; k++)                                        \
+            {                                                                   \
+                u8 *val = dest + ((k / 8) * 32) +                               \
+                                 ((k % 8) / 2) +                                \
+                                 ((y >> 3) << 8) +                              \
+                                 ((y & 7) << 2);                                \
+                                                                                \
+                if (row & 1)                                                    \
+                {                                                               \
+                    if (k & 1)                                                  \
+                    {                                                           \
+                        if ((u8)((*val & 0xF0) - 0x10) <= 0x20)                 \
+                            *val += 0x40;                                       \
+                    }                                                           \
+                    else                                                        \
+                    {                                                           \
+                        if ((u8)((*val & 0xF) - 0x01) <= 0x02)                  \
+                            *val += 0x04;                                       \
+                    }                                                           \
+                }                                                               \
+                                                                                \
+                row >>= 1;                                                      \
+            }                                                                   \
+                                                                                \
+            y++;                                                                \
+        }                                                                       \
+                                                                                \
+        personality >>= 8;                                                      \
+    }                                                                           \
+}
+
+static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites.ptr[0]
         && dest != gMonSpritesGfxPtr->sprites.ptr[2])
-    {
-        int i;
-        for (i = 0; i < 4; i++)
-        {
-            int j;
-            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
-            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
-
-            for (j = 0; j < 16; j++)
-            {
-                int k;
-                s32 row = gSpindaSpotGraphics[i].image[j];
-
-                for (k = x; k < x + 16; k++)
-                {
-                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
-
-                    if (row & 1)
-                    {
-                        if (k & 1)
-                        {
-                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
-                                *val += 0x40;
-                        }
-                        else
-                        {
-                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
-                                *val += 0x04;
-                        }
-                    }
-
-                    row >>= 1;
-                }
-
-                y++;
-            }
-
-            personality >>= 8;
-        }
-    }
+        DRAW_SPINDA_SPOTS;
 }
 
-void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4)
+void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, bool8 isFrontPic)
 {
-    if (species == SPECIES_SPINDA && a4)
-    {
-        int i;
-        for (i = 0; i < 4; i++)
-        {
-            int j;
-            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
-            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
-
-            for (j = 0; j < 16; j++)
-            {
-                int k;
-                s32 row = gSpindaSpotGraphics[i].image[j];
-
-                for (k = x; k < x + 16; k++)
-                {
-                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
-
-                    if (row & 1)
-                    {
-                        if (k & 1)
-                        {
-                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
-                                *val += 0x40;
-                        }
-                        else
-                        {
-                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
-                                *val += 0x04;
-                        }
-                    }
-
-                    row >>= 1;
-                }
-
-                y++;
-            }
-
-            personality >>= 8;
-        }
-    }
+    if (species == SPECIES_SPINDA && isFrontPic)
+        DRAW_SPINDA_SPOTS;
 }
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
@@ -6666,7 +6674,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
          && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE || IS_LEAGUE_BATTLE))
         {
             s8 mod = sFriendshipEventModifiers[event][friendshipLevel];
-            if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+            if (mod > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)
                 mod = (150 * mod) / 100;
             friendship += mod;
             if (mod > 0)
@@ -7463,12 +7471,12 @@ const u8 *GetTrainerPartnerName(void)
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
     (void*)(                                                    \
     ((u16)(gTasks[taskId].data[dataId]) |                       \
-    ((u16)(gTasks[taskId].data[dataId + 1]) << 0x10)))
+    ((u16)(gTasks[taskId].data[dataId + 1]) << 16)))
 
 #define STORE_PTR_IN_TASK(ptr, taskId, dataId)                 \
 {                                                              \
     gTasks[taskId].data[dataId] = (u32)(ptr);                  \
-    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 0x10;      \
+    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 16;        \
 }
 
 static void Task_AnimateAfterDelay(u8 taskId)
@@ -7564,7 +7572,7 @@ void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneF
 void StopPokemonAnimationDelayTask(void)
 {
     u8 delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay);
-    if (delayTaskId != 0xFF)
+    if (delayTaskId != TASK_NONE)
         DestroyTask(delayTaskId);
 }
 
@@ -7690,7 +7698,7 @@ static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
     u16 i, j;
     for (i = 0; i < structPtr->field_0_0; i++)
     {
-        structPtr->templates[i] = gUnknown_08329D98[i];
+        structPtr->templates[i] = gBattlerSpriteTemplates[i];
         for (j = 0; j < structPtr->field_1; j++)
         {
             structPtr->frameImages[i * structPtr->field_1 + j].data = &structPtr->byteArrays[i][j * 0x800];
@@ -7755,7 +7763,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
     else
     {
         for (i = 0; i < structPtr->field_0_0; i++)
-            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 0xD));
+            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 13));
     }
 
     structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);

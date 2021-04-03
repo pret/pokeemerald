@@ -165,15 +165,15 @@
 #define MON_DATA_VICTORY_RIBBON    69
 #define MON_DATA_ARTIST_RIBBON     70
 #define MON_DATA_EFFORT_RIBBON     71
-#define MON_DATA_GIFT_RIBBON_1     72
-#define MON_DATA_GIFT_RIBBON_2     73
-#define MON_DATA_GIFT_RIBBON_3     74
-#define MON_DATA_GIFT_RIBBON_4     75
-#define MON_DATA_GIFT_RIBBON_5     76
-#define MON_DATA_GIFT_RIBBON_6     77
-#define MON_DATA_GIFT_RIBBON_7     78
-#define MON_DATA_FATEFUL_ENCOUNTER 79
-#define MON_DATA_OBEDIENCE         80
+#define MON_DATA_MARINE_RIBBON     72
+#define MON_DATA_LAND_RIBBON       73
+#define MON_DATA_SKY_RIBBON        74
+#define MON_DATA_COUNTRY_RIBBON    75
+#define MON_DATA_NATIONAL_RIBBON   76
+#define MON_DATA_EARTH_RIBBON      77
+#define MON_DATA_WORLD_RIBBON      78
+#define MON_DATA_UNUSED_RIBBONS    79
+#define MON_DATA_EVENT_LEGAL       80
 #define MON_DATA_KNOWN_MOVES       81
 #define MON_DATA_RIBBON_COUNT      82
 #define MON_DATA_RIBBONS           83
@@ -182,6 +182,55 @@
 #define MON_DATA_SPEED2            86
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
+
+// Ribbon IDs used by TV and Pokénav
+#define CHAMPION_RIBBON       0
+#define COOL_RIBBON_NORMAL    1
+#define COOL_RIBBON_SUPER     2
+#define COOL_RIBBON_HYPER     3
+#define COOL_RIBBON_MASTER    4
+#define BEAUTY_RIBBON_NORMAL  5
+#define BEAUTY_RIBBON_SUPER   6
+#define BEAUTY_RIBBON_HYPER   7
+#define BEAUTY_RIBBON_MASTER  8
+#define CUTE_RIBBON_NORMAL    9
+#define CUTE_RIBBON_SUPER    10
+#define CUTE_RIBBON_HYPER    11
+#define CUTE_RIBBON_MASTER   12
+#define SMART_RIBBON_NORMAL  13
+#define SMART_RIBBON_SUPER   14
+#define SMART_RIBBON_HYPER   15
+#define SMART_RIBBON_MASTER  16
+#define TOUGH_RIBBON_NORMAL  17
+#define TOUGH_RIBBON_SUPER   18
+#define TOUGH_RIBBON_HYPER   19
+#define TOUGH_RIBBON_MASTER  20
+#define WINNING_RIBBON       21
+#define VICTORY_RIBBON       22
+#define ARTIST_RIBBON        23
+#define EFFORT_RIBBON        24
+#define MARINE_RIBBON        25
+#define LAND_RIBBON          26
+#define SKY_RIBBON           27
+#define COUNTRY_RIBBON       28
+#define NATIONAL_RIBBON      29
+#define EARTH_RIBBON         30
+#define WORLD_RIBBON         31
+
+#define FIRST_GIFT_RIBBON MARINE_RIBBON
+#define LAST_GIFT_RIBBON  WORLD_RIBBON
+#define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
+
+// The above gift ribbons (Marine - World) are
+// special distribution ribbons that correspond to
+// 1 bit each in the Pokémon struct. Gen 4 hard-codes
+// each of these to the given name. In Gen 3 they're
+// used to get an index into giftRibbons in the save block,
+// which can have a value 0-64 (0 is 'no ribbon') that 
+// corresponds to one of the special ribbons listed
+// in gGiftRibbonDescriptionPointers. Most of these were
+// never distributed
+#define MAX_GIFT_RIBBON 64
 
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
@@ -239,8 +288,6 @@
 #define MAX_PER_STAT_EVS 255
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT 100
-
-#define UNOWN_FORM_COUNT 28
 
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
@@ -310,7 +357,15 @@
 
 #define EVOS_PER_MON 10
 
+// Evolution 'modes,' for GetEvolutionTargetSpecies
+#define EVO_MODE_NORMAL     0
+#define EVO_MODE_TRADE      1
+#define EVO_MODE_ITEM_USE   2
+#define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
+
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
+
+#define MON_PIC_SIZE (64 * 64 / 2)
 
 #endif // GUARD_CONSTANTS_POKEMON_H

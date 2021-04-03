@@ -44,7 +44,7 @@ static void PrintContestPaintingCaption(u8, u8);
 static void VBlankCB_ContestPainting(void);
 static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64]);
 
-extern const u8 gUnknown_0827EA0C[];
+extern const u8 gContestPaintingCaption[];
 extern const u8 gContestCoolness[];
 extern const u8 gContestBeauty[];
 extern const u8 gContestCuteness[];
@@ -165,12 +165,11 @@ const u16 gUnknown_085B0838[] = {RGB(0, 0, 0), RGB(0, 0, 0)};
 
 void SetContestWinnerForPainting(int contestWinnerId)
 {
-    // probably fakematching
     u8 *ptr1 = &gUnknown_02039F5D;
     u8 *ptr2 = &gUnknown_02039F5C;
-	gCurContestWinner = gSaveBlock1Ptr->contestWinners[contestWinnerId - 1];
-	*ptr1 = contestWinnerId - 1;
-	*ptr2 = FALSE;
+    gCurContestWinner = gSaveBlock1Ptr->contestWinners[contestWinnerId - 1];
+    *ptr1 = contestWinnerId - 1;
+    *ptr2 = FALSE;
 }
 
 void CB2_ContestPainting(void)
@@ -251,7 +250,7 @@ static void HoldContestPainting(void)
         if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             gContestPaintingState++;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
         }
 
         if (gUnknown_030011F6)
@@ -298,7 +297,7 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 arg1)
         StringCopy(gStringVar2, gContestPaintingWinner->trainerName);
         sub_81DB5AC(gStringVar2);
         StringCopy(gStringVar3, gContestPaintingWinner->monName);
-        StringExpandPlaceholders(gStringVar4, gUnknown_0827EA0C);
+        StringExpandPlaceholders(gStringVar4, gContestPaintingCaption);
     }
     else
     {
