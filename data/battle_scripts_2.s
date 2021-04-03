@@ -34,7 +34,7 @@ gBattlescriptsForUsingItem:: @ 82DBD3C
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_HEAL_HP
 	.4byte BattleScript_OpponentUsesStatusCureItem  @ AI_ITEM_CURE_CONDITION
 	.4byte BattleScript_OpponentUsesXItem           @ AI_ITEM_X_STAT
-	.4byte BattleScript_OpponentUsesGuardSpecs      @ AI_ITEM_GUARD_SPECS
+	.4byte BattleScript_OpponentUsesGuardSpec       @ AI_ITEM_GUARD_SPEC
 
 	.align 2
 gBattlescriptsForRunningByItem:: @ 82DBD54
@@ -155,7 +155,7 @@ BattleScript_OpponentUsesXItem::
 	moveendcase MOVEEND_MIRROR_MOVE
 	finishaction
 
-BattleScript_OpponentUsesGuardSpecs::
+BattleScript_OpponentUsesGuardSpec::
 	printstring STRINGID_EMPTYSTRING3
 	pause B_WAIT_TIME_MED
 	playse SE_USE_ITEM
