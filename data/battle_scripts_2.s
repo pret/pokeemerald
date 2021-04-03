@@ -95,7 +95,7 @@ BattleScript_ShakeBallThrow::
 	printfromtable gBallEscapeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_ShakeBallThrowEnd
-	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
+	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0, BattleScript_ShakeBallThrowEnd
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
@@ -111,8 +111,7 @@ BattleScript_TrainerBallBlock::
 	finishaction
 
 BattleScript_PlayerUsesItem::
-	setbyte sMOVEEND_STATE, 0xF
-	moveend 0x1, 0x0
+	moveendcase MOVEEND_MIRROR_MOVE
 	end
 
 BattleScript_OpponentUsesHealItem::
@@ -128,8 +127,7 @@ BattleScript_OpponentUsesHealItem::
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_ATTACKER
-	setbyte sMOVEEND_STATE, 0xF
-	moveend 0x1, 0x0
+	moveendcase MOVEEND_MIRROR_MOVE
 	finishaction
 
 BattleScript_OpponentUsesStatusCureItem::
@@ -142,8 +140,7 @@ BattleScript_OpponentUsesStatusCureItem::
 	printfromtable gTrainerItemCuredStatusStringIds
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_ATTACKER
-	setbyte sMOVEEND_STATE, 0xF
-	moveend 0x1, 0x0
+	moveendcase MOVEEND_MIRROR_MOVE
 	finishaction
 
 BattleScript_OpponentUsesXItem::
@@ -155,8 +152,7 @@ BattleScript_OpponentUsesXItem::
 	useitemonopponent
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
-	setbyte sMOVEEND_STATE, 0xF
-	moveend 0x1, 0x0
+	moveendcase MOVEEND_MIRROR_MOVE
 	finishaction
 
 BattleScript_OpponentUsesGuardSpecs::
@@ -168,8 +164,7 @@ BattleScript_OpponentUsesGuardSpecs::
 	useitemonopponent
 	printfromtable gMistUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
-	setbyte sMOVEEND_STATE, 0xF
-	moveend 0x1, 0x0
+	moveendcase MOVEEND_MIRROR_MOVE
 	finishaction
 
 BattleScript_RunByUsingItem::

@@ -75,7 +75,7 @@ static void WallyHandleSetUnkVar(void);
 static void WallyHandleClearUnkFlag(void);
 static void WallyHandleToggleUnkFlag(void);
 static void WallyHandleHitAnimation(void);
-static void WallyHandleCmd42(void);
+static void WallyHandleCantSwitch(void);
 static void WallyHandlePlaySE(void);
 static void WallyHandlePlayFanfareOrBGM(void);
 static void WallyHandleFaintingCry(void);
@@ -144,7 +144,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = WallyHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = WallyHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
-    [CONTROLLER_42]                       = WallyHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = WallyHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = WallyHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = WallyHandleFaintingCry,
@@ -1385,7 +1385,7 @@ static void WallyHandleHitAnimation(void)
     }
 }
 
-static void WallyHandleCmd42(void)
+static void WallyHandleCantSwitch(void)
 {
     WallyBufferExecCompleted();
 }

@@ -421,12 +421,6 @@
 #define B_MSG_LEECH_SEED_DRAIN 3
 #define B_MSG_LEECH_SEED_OOZE  4
 
-// gBattlePalaceFlavorTextTable
-#define B_MSG_GLINT_IN_EYE   0
-#define B_MSG_GETTING_IN_POS 1
-#define B_MSG_GROWL_DEEPLY   2
-#define B_MSG_EAGER_FOR_MORE 3
-
 // gFirstTurnOfTwoStringIds
 #define B_MSG_TURN1_RAZOR_WIND  0
 #define B_MSG_TURN1_SOLAR_BEAM  1
@@ -585,5 +579,22 @@
 // gGotDefrostedStringIds
 #define B_MSG_DEFROSTED         0
 #define B_MSG_DEFROSTED_BY_MOVE 1
+
+// gBattlePalaceFlavorTextTable
+#define B_MSG_GLINT_IN_EYE   0
+#define B_MSG_GETTING_IN_POS 1
+#define B_MSG_GROWL_DEEPLY   2
+#define B_MSG_EAGER_FOR_MORE 3
+
+// gRefereeStringsTable
+#define B_MSG_REF_NOTHING_IS_DECIDED 0
+#define B_MSG_REF_THATS_IT           1
+#define B_MSG_REF_JUDGE_MIND         2
+#define B_MSG_REF_JUDGE_SKILL        3
+#define B_MSG_REF_JUDGE_BODY         4
+#define B_MSG_REF_PLAYER_WON         5
+#define B_MSG_REF_OPPONENT_WON       6
+#define B_MSG_REF_DRAW               7
+#define B_MSG_REF_COMMENCE_BATTLE    8
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H
