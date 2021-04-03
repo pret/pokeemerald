@@ -751,8 +751,8 @@ static bool32 InitFrontierPass(void)
         ShowBg(2);
         LoadCursorAndSymbolSprites();
         SetVBlankCallback(VblankCb_FrontierPass);
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         break;
     case 10:
         AnimateSprites();
@@ -775,7 +775,7 @@ static bool32 HideFrontierPass(void)
     case 0:
         if (sPassData->unkE != 1 && sPassData->unkE != 2)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         }
         else
         {
@@ -1023,7 +1023,7 @@ static void Task_DoFadeEffect(u8 taskId)
             data[2] = Q_8_8(1);
             data[3] = 0x15;
             data[4] = 0x15;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITE);
         }
         else
         {
@@ -1037,8 +1037,8 @@ static void Task_DoFadeEffect(u8 taskId)
             ShowBg(2);
             LoadCursorAndSymbolSprites();
             SetVBlankCallback(VblankCb_FrontierPass);
-            BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITE);
+            BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_WHITE);
         }
         sPassGfx->setAffine = TRUE;
         sPassGfx->unk2E = MathUtil_Inv16(data[1]);
@@ -1366,8 +1366,8 @@ static bool32 InitFrontierMap(void)
         ShowBg(2);
         InitFrontierMapSprites();
         SetVBlankCallback(VblankCb_FrontierPass);
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITE);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_WHITE);
         break;
     case 7:
         if (UpdatePaletteFade())
@@ -1385,7 +1385,7 @@ static bool32 ExitFrontierMap(void)
     switch (sPassData->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITE);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITE);
         break;
     case 1:
         if (UpdatePaletteFade())

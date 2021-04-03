@@ -13,7 +13,7 @@
 static void AnimConfuseRayBallBounce(struct Sprite *);
 static void AnimConfuseRayBallBounce_Step1(struct Sprite *);
 static void AnimConfuseRayBallBounce_Step2(struct Sprite *);
-static void sub_8111764(struct Sprite *);
+static void UpdateConfuseRayBallBlend(struct Sprite *);
 static void AnimConfuseRayBallSpiral(struct Sprite *);
 static void AnimConfuseRayBallSpiral_Step(struct Sprite *);
 static void AnimTask_NightShadeClone_Step1(u8 taskId);
@@ -39,8 +39,8 @@ static void AnimGhostStatusSprite(struct Sprite *);
 static void AnimGhostStatusSprite_Step(struct Sprite *);
 static void AnimTask_GrudgeFlames_Step(u8 taskId);
 static void AnimGrudgeFlame(struct Sprite *);
-static void sub_8112F60(struct Sprite *);
-static void sub_8112FB8(struct Sprite *);
+static void AnimUnused_8112F60(struct Sprite *);
+static void AnimUnused_8112F60_Step(struct Sprite *);
 
 static const union AffineAnimCmd sAffineAnim_ConfuseRayBallBounce[] =
 {
@@ -124,16 +124,16 @@ const struct SpriteTemplate gLickSpriteTemplate =
     .callback = AnimLick,
 };
 
-static const union AffineAnimCmd gUnknown_08596DA4[] =
+static const union AffineAnimCmd sAnim_Unused_08596DA4[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_END,
 };
 
 // Unused
-static const union AffineAnimCmd *const gUnknown_08596DB4[] =
+static const union AffineAnimCmd *const gAnims_Unused_08596DB4[] =
 {
-    gUnknown_08596DA4,
+    sAnim_Unused_08596DA4,
 };
 
 const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplate =
@@ -206,7 +206,7 @@ const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
 };
 
 // Unused
-const struct SpriteTemplate gUnknown_08596E48 =
+const struct SpriteTemplate gUnusedSpriteTemplate_08596E48 =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -214,18 +214,18 @@ const struct SpriteTemplate gUnknown_08596E48 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8112F60,
+    .callback = AnimUnused_8112F60,
 };
 
 static void AnimConfuseRayBallBounce(struct Sprite *sprite)
 {
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-    sub_80A6FD4(sprite);
+    InitAnimLinearTranslationWithSpeed(sprite);
     sprite->callback = AnimConfuseRayBallBounce_Step1;
     sprite->data[6] = 16;
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
@@ -236,7 +236,7 @@ static void AnimConfuseRayBallBounce_Step1(struct Sprite *sprite)
 {
     s16 r0;
     s16 r2;
-    sub_8111764(sprite);
+    UpdateConfuseRayBallBlend(sprite);
     if (AnimTranslateLinear(sprite))
     {
         sprite->callback = AnimConfuseRayBallBounce_Step2;
@@ -280,13 +280,11 @@ static void AnimConfuseRayBallBounce_Step2(struct Sprite *sprite)
         sprite->callback = DestroyAnimSpriteAndDisableBlend;
     }
     else
-        sub_8111764(sprite);
+        UpdateConfuseRayBallBlend(sprite);
 }
 
-static void sub_8111764(struct Sprite *sprite)
+static void UpdateConfuseRayBallBlend(struct Sprite *sprite)
 {
-
-    s16 r0;
     if (sprite->data[6] > 0xFF)
     {
         if (++sprite->data[6] == 0x10d)
@@ -294,10 +292,7 @@ static void sub_8111764(struct Sprite *sprite)
         return;
     }
 
-    r0 = sprite->data[7];
-    sprite->data[7]++;
-
-    if ((r0 & 0xFF) == 0)
+    if ((sprite->data[7]++ & 0xFF) == 0)
     {
         sprite->data[7] &= 0xff00;
         if ((sprite->data[7] & 0x100) != 0)
@@ -648,7 +643,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
         break;
     case 1:
         task->data[14] = (task->data[14] + 16) * 16;
-        CpuSet(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], 0x4000008);
+        CpuCopy32(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], 32);
         BlendPalette(task->data[4], 16, 10, RGB(13, 0, 15));
         task->data[15]++;
         break;
@@ -1009,7 +1004,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         right = 240;
         top = 0;
         bottom = 112;
-        selectedPalettes = sub_80A75AC(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
@@ -1307,7 +1302,7 @@ static void AnimGrudgeFlame(struct Sprite *sprite)
     }
 }
 
-static void sub_8112F60(struct Sprite *sprite)
+static void AnimUnused_8112F60(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
     sprite->data[5] = gBattlerSpriteIds[gBattleAnimAttacker];
@@ -1315,12 +1310,12 @@ static void sub_8112F60(struct Sprite *sprite)
     sprite->data[1] = 10;
     sprite->data[2] = gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[1];
-    sprite->callback = sub_8112FB8;
+    sprite->callback = AnimUnused_8112F60_Step;
 
     gSprites[sprite->data[5]].pos1.y += 8;
 }
 
-static void sub_8112FB8(struct Sprite *sprite)
+static void AnimUnused_8112F60_Step(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {

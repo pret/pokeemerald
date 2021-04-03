@@ -85,7 +85,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_SaveAfterChallenge:: @ 824D8A1
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_RecordMatch
@@ -139,7 +139,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge:: @ 824D999
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_ExplainChallenge
@@ -149,7 +149,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge:: @ 824D999
 BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge:: @ 824D9E6
 	message BattleFrontier_BattlePalaceLobby_Text_WhichChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
@@ -351,7 +351,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_RulesBoard:: @ 824DCA6
 BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard:: @ 824DCB5
 	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 16, 0, MULTI_BATTLE_PALACE_RULES, 0
+	multichoice 16, 0, MULTI_BATTLE_PALACE_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_RulesBasics
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_RulesNature

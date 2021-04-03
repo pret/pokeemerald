@@ -390,5 +390,5 @@ void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src
 static void DuplicateDeoxysTiles(void *pointer, s32 species)
 {
     if (species == SPECIES_DEOXYS)
-        CpuCopy32(pointer + 0x800, pointer, 0x800);
+        CpuCopy32(pointer + MON_PIC_SIZE, pointer, MON_PIC_SIZE);
 }

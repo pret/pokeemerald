@@ -1,24 +1,22 @@
-#ifndef GUARD_BATTLE_GFX_SFX_UTIL
-#define GUARD_BATTLE_GFX_SFX_UTIL
+#ifndef GUARD_BATTLE_GFX_SFX_UTIL_H
+#define GUARD_BATTLE_GFX_SFX_UTIL_H
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
 u16 ChooseMoveAndTargetInBattlePalace(void);
-void sub_805D714(struct Sprite *sprite);
-void sub_805D770(struct Sprite *sprite, bool8 arg1);
-void sub_805D7AC(struct Sprite *sprite);
+void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite);
+void SpriteCB_TrainerSlideIn(struct Sprite *sprite);
 void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status);
 bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattlerId, u8 attacker, u8 target, u8 tableId, u16 argument);
 void InitAndLaunchSpecialAnimation(u8 activeBattlerId, u8 attacker, u8 target, u8 tableId);
 bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn);
-bool8 mplay_80342A4(u8 battlerId);
+bool8 IsBattleSEPlaying(u8 battlerId);
 void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId);
 void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId);
-void nullsub_23(void);
-void nullsub_24(u16 species);
+void BattleGfxSfxDummy2(u16 species);
 void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId);
 void DecompressTrainerBackPic(u16 backPicId, u8 battlerId);
-void nullsub_25(u8 arg0);
+void BattleGfxSfxDummy3(u8 gender);
 void FreeTrainerFrontPicPalette(u16 frontPicId);
 void sub_805DFFC(void);
 bool8 BattleLoadAllHealthBoxesGfx(u8 state);
@@ -36,7 +34,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId);
 void BattleStopLowHpSound(void);
 u8 GetMonHPBarLevel(struct Pokemon *mon);
 void HandleBattleLowHpMusicChange(void);
-void sub_805EB9C(u8 affineMode);
+void SetBattlerSpriteAffineMode(u8 affineMode);
 void LoadAndCreateEnemyShadowSprites(void);
 void SpriteCB_SetInvisible(struct Sprite *sprite);
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);
@@ -47,4 +45,4 @@ void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);
 
-#endif // GUARD_BATTLE_GFX_SFX_UTIL
+#endif // GUARD_BATTLE_GFX_SFX_UTIL_H

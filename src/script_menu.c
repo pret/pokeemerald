@@ -580,7 +580,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     u8 taskId;
     u8 spriteId;
 
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) != 0xFF)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
     {
         return FALSE;
     }
@@ -604,7 +604,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
 
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
         return NULL;
     gTasks[taskId].tState++;
     return IsPicboxClosed;
@@ -612,7 +612,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 
 static bool8 IsPicboxClosed(void)
 {
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) == 0xFF)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

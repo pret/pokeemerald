@@ -24,7 +24,7 @@ CaveOfOrigin_B1F_EventScript_Wallace:: @ 82357A9
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
 
 CaveOfOrigin_B1F_EventScript_WheresRayquaza:: @ 82357F0
-	multichoice 0, 0, MULTI_WHERES_RAYQUAZA, 0
+	multichoice 0, 0, MULTI_WHERES_RAYQUAZA, FALSE
 	switch VAR_RESULT
 	case 0, CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin
 	case 1, CaveOfOrigin_B1F_EventScript_AtMtPyre

@@ -277,7 +277,7 @@ CableClub_EventScript_UnusedWelcomeToCableClub:: @ 8276E22
 CableClub_EventScript_SelectCableClubRoom:: @ 8276E30
 	setvar VAR_0x8004, 0
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_CableClubUnlockedRecordCorner
-	multichoice 0, 0, MULTI_CABLE_CLUB_NO_RECORD_MIX, 0
+	multichoice 0, 0, MULTI_CABLE_CLUB_NO_RECORD_MIX, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TradeCenter
 	case 1, CableClub_EventScript_Colosseum
@@ -286,7 +286,7 @@ CableClub_EventScript_SelectCableClubRoom:: @ 8276E30
 	end
 
 CableClub_EventScript_CableClubUnlockedRecordCorner:: @ 8276E75
-	multichoice 0, 0, MULTI_CABLE_CLUB_WITH_RECORD_MIX, 0
+	multichoice 0, 0, MULTI_CABLE_CLUB_WITH_RECORD_MIX, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TradeCenter
 	case 1, CableClub_EventScript_Colosseum
@@ -303,7 +303,7 @@ CableClub_EventScript_Colosseum:: @ 8276EB7
 CableClub_EventScript_SelectBattleMode:: @ 8276EC2
 	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
-	multichoice 0, 0, MULTI_BATTLE_MODE, 0
+	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_SingleBattleMode
 	case 1, CableClub_EventScript_DoubleBattleMode
@@ -927,7 +927,7 @@ CableClub_EventScript_UnionRoomAttendant:: @ 827751B
 	end
 
 CableClub_EventScript_UnionRoomSelect:: @ 827755C
-	multichoice 17, 6, MULTI_YESNOINFO, 0
+	multichoice 17, 6, MULTI_YESNOINFO, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_EnterUnionRoom
 	case 1, CableClub_EventScript_AbortLink
@@ -1039,7 +1039,7 @@ CableClub_EventScript_DirectCornerSelectService:: @ 82776E3
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_DirectCornerNoBerry
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_DirectCornerSelectAllServices
-	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD, 0
+	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_WirelessTrade
 	case 1, CableClub_EventScript_WirelessBattleSelect
@@ -1049,7 +1049,7 @@ CableClub_EventScript_DirectCornerSelectService:: @ 82776E3
 	end
 
 CableClub_EventScript_DirectCornerSelectAllServices:: @ 827773E
-	multichoice 0, 0, MULTI_WIRELESS_ALL_SERVICES, 0
+	multichoice 0, 0, MULTI_WIRELESS_ALL_SERVICES, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_WirelessTrade
 	case 1, CableClub_EventScript_WirelessBattleSelect
@@ -1061,7 +1061,7 @@ CableClub_EventScript_DirectCornerSelectAllServices:: @ 827773E
 
 CableClub_EventScript_DirectCornerNoBerry:: @ 827778B
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_DirectCornerHasRecordMix
-	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD_BERRY, 0
+	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD_BERRY, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_WirelessTrade
 	case 1, CableClub_EventScript_WirelessBattleSelect
@@ -1070,7 +1070,7 @@ CableClub_EventScript_DirectCornerNoBerry:: @ 827778B
 	end
 
 CableClub_EventScript_DirectCornerHasRecordMix:: @ 82777CB
-	multichoice 0, 0, MULTI_WIRELESS_NO_BERRY, 0
+	multichoice 0, 0, MULTI_WIRELESS_NO_BERRY, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_WirelessTrade
 	case 1, CableClub_EventScript_WirelessBattleSelect
@@ -1093,7 +1093,7 @@ CableClub_EventScript_WirelessTrade:: @ 827780D
 CableClub_EventScript_WirelessBattleSelect:: @ 827783B
 	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
-	multichoice 0, 0, MULTI_BATTLE_MODE, 0
+	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_WirelessSingleBattle
 	case 1, CableClub_EventScript_WirelessDoubleBattle
@@ -1171,7 +1171,7 @@ CableClub_EventScript_SaveAndChooseLinkLeader:: @ 8277931
 CableClub_EventScript_ChooseLinkLeaderFrom2:: @ 8277989
 	message CableClub_Text_ChooseGroupLeaderOfTwo
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinGroup2Players
 	case 1, CableClub_EventScript_TryLeadGroup2Players
@@ -1204,7 +1204,7 @@ CableClub_EventScript_TryJoinGroup2Players:: @ 82779EE
 CableClub_EventScript_ChooseLinkLeaderFrom4:: @ 8277A16
 	message CableClub_Text_ChooseGroupLeaderOfFour
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinGroup4Players
 	case 1, CableClub_EventScript_TryLeadGroup4Players
@@ -1237,7 +1237,7 @@ CableClub_EventScript_TryJoinGroup4Players:: @ 8277A7B
 CableClub_EventScript_ChooseLinkLeader:: @ 8277AA3
 	message CableClub_Text_ChooseGroupLeader
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinGroupXPlayers
 	case 1, CableClub_EventScript_TryLeadGroupXPlayers
@@ -1360,7 +1360,7 @@ MossdeepCity_GameCorner_1F_EventScript_InfoMan2:: @ 8277C34
 	faceplayer
 	message MossdeepCity_GameCorner_1F_Text_DescribeWhichGame
 	waitmessage
-	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, 0
+	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_PokemonJumpInfo
 	case 1, MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingInfo
@@ -1394,7 +1394,7 @@ MossdeepCity_GameCorner_1F_EventScript_OldMan2:: @ 8277C91
 	delay 60
 	message MossdeepCity_GameCorner_1F_Text_PlayWhichGame
 	waitmessage
-	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, 0
+	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump
 	case 1, MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking
@@ -1443,7 +1443,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking:: @ 8277D35
 MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader:: @ 8277D81
 	message CableClub_Text_ChooseGroupLeader
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_TryJoinLinkGroup
 	case 1, MossdeepCity_GameCorner_1F_EventScript_TryBecomeLinkLeader

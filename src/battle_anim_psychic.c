@@ -565,14 +565,14 @@ static void AnimDefensiveWall_Step5(struct Sprite *sprite)
         u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         u8 rank = GetBattlerSpriteBGPriorityRank(battler);
         int var0 = 1;
-        u8 toBG_2 = (rank ^ var0) != 0;
+        bool8 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
-            sub_80A477C(toBG_2);
+            ResetBattleAnimBg(toBG2);
 
         battler = battlerCopy ^ 2;
         if (IsBattlerSpriteVisible(battler))
-            sub_80A477C(toBG_2 ^ var0);
+            ResetBattleAnimBg(toBG2 ^ var0);
     }
 
     sprite->callback = DestroyAnimSprite;
@@ -836,7 +836,7 @@ static void AnimTask_ImprisonOrbs_Step(u8 taskId)
     }
 }
 
-static void sub_810FB60(struct Sprite *sprite)
+static void AnimRedX_Step(struct Sprite *sprite)
 {
     if (sprite->data[1] > sprite->data[0] - 10)
         sprite->invisible = sprite->data[1] & 1;
@@ -856,7 +856,7 @@ static void AnimRedX(struct Sprite *sprite)
     }
 
     sprite->data[0] = gBattleAnimArgs[1];
-    sprite->callback = sub_810FB60;
+    sprite->callback = AnimRedX_Step;
 }
 
 void AnimTask_SkillSwap(u8 taskId)
