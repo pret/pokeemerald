@@ -394,10 +394,10 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         ChangeBgX(3, 0, 0);
         ChangeBgY(3, 0, 0);
 
-        SetBgTilemapBuffer(3, Alloc(0x800));
-        SetBgTilemapBuffer(2, Alloc(0x800));
-        SetBgTilemapBuffer(1, Alloc(0x800));
-        SetBgTilemapBuffer(0, Alloc(0x800));
+        SetBgTilemapBuffer(3, Alloc(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(2, Alloc(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
 
         bgid_upload_textbox_1(3);
         InitWindows(sMainWindows);

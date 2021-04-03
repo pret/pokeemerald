@@ -37,7 +37,6 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
 #include "constants/battle_string_ids.h"
-#include "constants/berry.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -1149,7 +1148,7 @@ void MarkAllBattlersForControllerExec(void) // unused
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleControllerExecFlags |= gBitTable[i] << 0x1C;
+            gBattleControllerExecFlags |= gBitTable[i] << (32 - MAX_BATTLERS_COUNT);
     }
     else
     {
@@ -1169,19 +1168,19 @@ bool32 IsBattlerMarkedForControllerExec(u8 battlerId)
 void MarkBattlerForControllerExec(u8 battlerId)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gBattleControllerExecFlags |= gBitTable[battlerId] << 0x1C;
+        gBattleControllerExecFlags |= gBitTable[battlerId] << (32 - MAX_BATTLERS_COUNT);
     else
         gBattleControllerExecFlags |= gBitTable[battlerId];
 }
 
-void sub_803F850(u8 arg0)
+void MarkBattlerReceivedLinkData(u8 battlerId)
 {
     s32 i;
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
-        gBattleControllerExecFlags |= gBitTable[arg0] << (i << 2);
+        gBattleControllerExecFlags |= gBitTable[battlerId] << (i << 2);
 
-    gBattleControllerExecFlags &= ~(0x10000000 << arg0);
+    gBattleControllerExecFlags &= ~(0x10000000 << battlerId);
 }
 
 void CancelMultiTurnMoves(u8 battler)
@@ -6418,14 +6417,14 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
     return targetBattler;
 }
 
-static bool32 HasObedientBitSet(u8 battlerId)
+static bool32 IsMonEventLegal(u8 battlerId)
 {
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
         return TRUE;
     if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
         && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
             return TRUE;
-    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_OBEDIENCE, NULL);
+    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
 }
 
 u8 IsMonDisobedient(void)
@@ -6439,7 +6438,7 @@ u8 IsMonDisobedient(void)
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return 0;
 
-    if (HasObedientBitSet(gBattlerAttacker)) // only if species is Mew or Deoxys
+    if (IsMonEventLegal(gBattlerAttacker)) // only false if illegal Mew or Deoxys
     {
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gBattlerAttacker) == 2)
             return 0;

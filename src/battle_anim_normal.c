@@ -12,7 +12,7 @@ static void AnimSimplePaletteBlend_Step(struct Sprite *);
 static void AnimComplexPaletteBlend(struct Sprite *);
 static void AnimComplexPaletteBlend_Step1(struct Sprite *);
 static void AnimComplexPaletteBlend_Step2(struct Sprite *);
-static void sub_81159B4(struct Sprite *);
+static void AnimUnused_81159B4(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain_UpdateCoordOffsetEnabled(void);
@@ -144,7 +144,7 @@ const struct SpriteTemplate gPowerSwapGuardSwapSpriteTemplate =
     .callback = AnimMovePowerSwapGuardSwap
 };
 
-static const union AnimCmd gUnknown_085972A4[] =
+static const union AnimCmd sAnim_Unused_085972A4[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -154,21 +154,21 @@ static const union AnimCmd gUnknown_085972A4[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const gUnknown_085972BC[] =
+static const union AnimCmd *const sAnims_Unused_085972BC[] =
 {
-    gUnknown_085972A4,
+    sAnim_Unused_085972A4,
 };
 
 // Unused
-const struct SpriteTemplate gUnknown_085972C0 =
+const struct SpriteTemplate gUnusedSpriteTemplate_085972C0 =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085972BC,
+    .anims = sAnims_Unused_085972BC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81159B4,
+    .callback = AnimUnused_81159B4,
 };
 
 const struct SpriteTemplate gShakeMonOrTerrainSpriteTemplate =
@@ -389,7 +389,7 @@ static void AnimConfusionDuck_Step(struct Sprite *sprite)
 // arg 4: blend color
 static void AnimSimplePaletteBlend(struct Sprite *sprite)
 {
-    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattleBgPalettes(gBattleAnimArgs[0]);
     BeginNormalPaletteFade(selectedPalettes, gBattleAnimArgs[1], gBattleAnimArgs[2], gBattleAnimArgs[3], gBattleAnimArgs[4]);
     sprite->invisible = TRUE;
     sprite->callback = AnimSimplePaletteBlend_Step;
@@ -404,7 +404,7 @@ static void AnimSimplePaletteBlend(struct Sprite *sprite)
 //   4: gBattleAnimTarget partner OBJ palette
 //   5: BG palette 4
 //   6: BG palette 5
-u32 UnpackSelectedBattleAnimPalettes(s16 selector)
+u32 UnpackSelectedBattleBgPalettes(s16 selector)
 {
     u8 battleBackground = selector & 1;
     u8 attacker = (selector >> 1) & 1;
@@ -413,7 +413,7 @@ u32 UnpackSelectedBattleAnimPalettes(s16 selector)
     u8 targetPartner = (selector >> 4) & 1;
     u8 arg5 = (selector >> 5) & 1;
     u8 arg6 = (selector >> 6) & 1;
-    return sub_80A75AC(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
+    return GetBattleBgPalettesMask(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
 }
 
 static void AnimSimplePaletteBlend_Step(struct Sprite *sprite)
@@ -435,7 +435,7 @@ static void AnimComplexPaletteBlend(struct Sprite *sprite)
     sprite->data[6] = gBattleAnimArgs[6];
     sprite->data[7] = gBattleAnimArgs[0];
 
-    selectedPalettes = UnpackSelectedBattleAnimPalettes(sprite->data[7]);
+    selectedPalettes = UnpackSelectedBattleBgPalettes(sprite->data[7]);
     BlendPalettes(selectedPalettes, gBattleAnimArgs[4], gBattleAnimArgs[3]);
     sprite->invisible = TRUE;
     sprite->callback = AnimComplexPaletteBlend_Step1;
@@ -460,7 +460,7 @@ static void AnimComplexPaletteBlend_Step1(struct Sprite *sprite)
         return;
     }
 
-    selectedPalettes = UnpackSelectedBattleAnimPalettes(sprite->data[7]);
+    selectedPalettes = UnpackSelectedBattleBgPalettes(sprite->data[7]);
     if (sprite->data[1] & 0x100)
         BlendPalettes(selectedPalettes, sprite->data[4], sprite->data[3]);
     else
@@ -477,13 +477,13 @@ static void AnimComplexPaletteBlend_Step2(struct Sprite *sprite)
 
     if (!gPaletteFade.active)
     {
-        selectedPalettes = UnpackSelectedBattleAnimPalettes(sprite->data[7]);
+        selectedPalettes = UnpackSelectedBattleBgPalettes(sprite->data[7]);
         BlendPalettes(selectedPalettes, 0, 0);
         DestroyAnimSprite(sprite);
     }
 }
 
-static void sub_81159B4(struct Sprite *sprite)
+static void AnimUnused_81159B4(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -527,7 +527,7 @@ void AnimTask_BlendColorCycle(u8 taskId)
 
 static void BlendColorCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
-    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gTasks[taskId].tPalSelector);
+    u32 selectedPalettes = UnpackSelectedBattleBgPalettes(gTasks[taskId].tPalSelector);
     BeginNormalPaletteFade(
         selectedPalettes,
         gTasks[taskId].tDelay,
@@ -804,7 +804,7 @@ void AnimTask_InvertScreenColor(u8 taskId)
     u32 selectedPalettes = 0;
 
     if (gBattleAnimArgs[0] & 0x1)
-        selectedPalettes = sub_80A75AC(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
     if (gBattleAnimArgs[0] & 0x2)
         selectedPalettes |= (0x10000 << gBattleAnimAttacker);
     if (gBattleAnimArgs[0] & 0x4)
@@ -818,7 +818,7 @@ void AnimTask_InvertScreenColor(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8115F94(u8 taskId)
+void UnusedAnimTask_8115F94(u8 taskId)
 {
     u8 attackerBattler;
     u8 targetBattler;

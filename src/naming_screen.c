@@ -635,8 +635,8 @@ static bool8 MainState_FadeIn(void)
     CopyBgTilemapBufferToVram(1);
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
-    BlendPalettes(-1, 16, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 16, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     sNamingScreen->state++;
     return FALSE;
 }
@@ -690,7 +690,7 @@ static bool8 MainState_PressedOKButton(void)
 
 static bool8 MainState_FadeOut(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     sNamingScreen->state++;
     return FALSE;
 }
@@ -826,7 +826,7 @@ static void Task_HandlePageSwapAnim(u8 taskId)
 
 static bool8 IsPageSwapAnimNotInProgress(void)
 {
-    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == 0xFF)
+    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

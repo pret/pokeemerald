@@ -75,9 +75,6 @@ EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
 
 // Static ROM declarations
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
 void ClearPokemonNews(void);
 u8 GetTVChannelByShowType(u8 kind);
 u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
@@ -139,7 +136,7 @@ static void sub_80EF120(u16 days);
 static void sub_80EDA48(u16 days);
 static void sub_80EEB98(u16 days);
 void PutFishingAdviceShowOnTheAir(void);
-u8 TV_MonDataIdxToRibbon(u8 monDataIdx);
+static u8 MonDataIdxToRibbon(u8 monDataIdx);
 static void sub_80EEBF4(u8 actionIdx);
 bool8 IsPriceDiscounted(u8 newsKind);
 static void InterviewBefore_FanClubLetter(void);
@@ -507,13 +504,13 @@ static const u8 *const sTVTodaysRivalTrainerTextGroup[] = {
 };
 
 static const u8 *const sTVDewfordTrendWatcherNetworkTextGroup[] = {
-    gTVDewfordTrendWatcherNetworkText00,
-    gTVDewfordTrendWatcherNetworkText01,
-    gTVDewfordTrendWatcherNetworkText02,
-    gTVDewfordTrendWatcherNetworkText03,
-    gTVDewfordTrendWatcherNetworkText04,
-    gTVDewfordTrendWatcherNetworkText05,
-    gTVDewfordTrendWatcherNetworkText06
+    [TRENDWATCHER_STATE_INTRO]           = TrendWatcher_Text_Intro,
+    [TRENDWATCHER_STATE_TAUGHT_MALE]     = TrendWatcher_Text_MaleTaughtMePhrase,
+    [TRENDWATCHER_STATE_TAUGHT_FEMALE]   = TrendWatcher_Text_FemaleTaughtMePhrase,
+    [TRENDWATCHER_STATE_PHRASE_HOPELESS] = TrendWatcher_Text_PhraseWasHopeless,
+    [TRENDWATCHER_STATE_BIGGER_MALE]     = TrendWatcher_Text_MaleTellMeBigger,
+    [TRENDWATCHER_STATE_BIGGER_FEMALE]   = TrendWatcher_Text_FemaleTellMeBigger,
+    [TRENDWATCHER_STATE_OUTRO]           = TrendWatcher_Text_Outro
 };
 
 static const u8 *const sTVHoennTreasureInvestisatorsTextGroup[] = {
@@ -592,22 +589,22 @@ static const u8 *const sTVTrainerFanClubTextGroup[] = {
 };
 
 static const u8 *const sTVCutiesTextGroup[] = {
-    gTVCutiesText00,
-    gTVCutiesText01,
-    gTVCutiesText02,
-    gTVCutiesText03,
-    gTVCutiesText04,
-    gTVCutiesText05,
-    gTVCutiesText06,
-    gTVCutiesText07,
-    gTVCutiesText08,
-    gTVCutiesText09,
-    gTVCutiesText10,
-    gTVCutiesText11,
-    gTVCutiesText12,
-    gTVCutiesText13,
-    gTVCutiesText14,
-    gTVCutiesText15
+    [SPOTCUTIES_STATE_INTRO]           = TVSpotTheCuties_Text_Intro,
+    [SPOTCUTIES_STATE_RIBBONS_LOW]     = TVSpotTheCuties_Text_RibbonsLow,
+    [SPOTCUTIES_STATE_RIBBONS_MID]     = TVSpotTheCuties_Text_RibbonsMid,
+    [SPOTCUTIES_STATE_RIBBONS_HIGH]    = TVSpotTheCuties_Text_RibbonsHigh,
+    [SPOTCUTIES_STATE_RIBBON_INTRO]    = TVSpotTheCuties_Text_RibbonIntro,
+    [SPOTCUTIES_STATE_RIBBON_CHAMPION] = TVSpotTheCuties_Text_RibbonChampion,
+    [SPOTCUTIES_STATE_RIBBON_COOL]     = TVSpotTheCuties_Text_RibbonCool,
+    [SPOTCUTIES_STATE_RIBBON_BEAUTY]   = TVSpotTheCuties_Text_RibbonBeauty,
+    [SPOTCUTIES_STATE_RIBBON_CUTE]     = TVSpotTheCuties_Text_RibbonCute,
+    [SPOTCUTIES_STATE_RIBBON_SMART]    = TVSpotTheCuties_Text_RibbonSmart,
+    [SPOTCUTIES_STATE_RIBBON_TOUGH]    = TVSpotTheCuties_Text_RibbonTough,
+    [SPOTCUTIES_STATE_RIBBON_WINNING]  = TVSpotTheCuties_Text_RibbonWinning,
+    [SPOTCUTIES_STATE_RIBBON_VICTORY]  = TVSpotTheCuties_Text_RibbonVictory,
+    [SPOTCUTIES_STATE_RIBBON_ARTIST]   = TVSpotTheCuties_Text_RibbonArtist,
+    [SPOTCUTIES_STATE_RIBBON_EFFORT]   = TVSpotTheCuties_Text_RibbonEffort,
+    [SPOTCUTIES_STATE_OUTRO]           = TVSpotTheCuties_Text_Outro
 };
 
 static const u8 *const sTVPokemonNewsBattleFrontierTextGroup[] = {
@@ -1016,7 +1013,7 @@ bool8 IsTVShowInSearchOfTrainersAiring(void)
 
 bool8 GabbyAndTyGetLastQuote(void)
 {
-    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == 0xFFFF)
+    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == EC_EMPTY_WORD)
     {
         return FALSE;
     }
@@ -1665,7 +1662,7 @@ void PutLilycoveContestLadyShowOnTheAir(void)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         BufferContestLadyLanguage(&show->contestLiveUpdates2.language);
-        show->contestLiveUpdates2.pokemonNameLanguage = LANGUAGE_ENGLISH;
+        show->contestLiveUpdates2.pokemonNameLanguage = GAME_LANGUAGE;
         show->contestLiveUpdates2.kind = TVSHOW_CONTEST_LIVE_UPDATES_2;
         show->contestLiveUpdates2.active = TRUE;
         BufferContestLadyPlayerName(show->contestLiveUpdates2.playerName);
@@ -1975,7 +1972,7 @@ void TryPutTodaysRivalTrainerOnAir(void)
     }
 }
 
-void sub_80EDC60(const u16 *words)
+void TryPutTrendWatcherOnAir(const u16 *words)
 {
     TVShow *show;
 
@@ -2369,7 +2366,7 @@ void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
         GetMonData(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
         StripExtCtrlCodes(show->cuties.nickname);
         show->cuties.nRibbons = GetRibbonCount(pokemon);
-        show->cuties.selectedRibbon = TV_MonDataIdxToRibbon(ribbonMonDataIdx);
+        show->cuties.selectedRibbon = MonDataIdxToRibbon(ribbonMonDataIdx);
         tv_store_id_3x(show);
         show->cuties.language = gGameLanguage;
         if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
@@ -2398,36 +2395,36 @@ u8 GetRibbonCount(struct Pokemon *pokemon)
     nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_1);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_2);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_3);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_4);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_5);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_6);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_7);
+    nRibbons += GetMonData(pokemon, MON_DATA_MARINE_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_LAND_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_SKY_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_COUNTRY_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_NATIONAL_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_EARTH_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_WORLD_RIBBON);
     return nRibbons;
 }
 
-u8 TV_MonDataIdxToRibbon(u8 monDataIdx)
+static u8 MonDataIdxToRibbon(u8 monDataIdx)
 {
-    if (monDataIdx == MON_DATA_CHAMPION_RIBBON) return  0;
-    if (monDataIdx == MON_DATA_COOL_RIBBON)     return  1;
-    if (monDataIdx == MON_DATA_BEAUTY_RIBBON)   return  5;
-    if (monDataIdx == MON_DATA_CUTE_RIBBON)     return  9;
-    if (monDataIdx == MON_DATA_SMART_RIBBON)    return 13;
-    if (monDataIdx == MON_DATA_TOUGH_RIBBON)    return 17;
-    if (monDataIdx == MON_DATA_WINNING_RIBBON)  return 21;
-    if (monDataIdx == MON_DATA_VICTORY_RIBBON)  return 22;
-    if (monDataIdx == MON_DATA_ARTIST_RIBBON)   return 23;
-    if (monDataIdx == MON_DATA_EFFORT_RIBBON)   return 24;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_1)   return 25;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_2)   return 26;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_3)   return 27;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_4)   return 28;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_5)   return 29;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_6)   return 30;
-    if (monDataIdx == MON_DATA_GIFT_RIBBON_7)   return 31;
-    return 0;
+    if (monDataIdx == MON_DATA_CHAMPION_RIBBON) return CHAMPION_RIBBON;
+    if (monDataIdx == MON_DATA_COOL_RIBBON)     return COOL_RIBBON_NORMAL;
+    if (monDataIdx == MON_DATA_BEAUTY_RIBBON)   return BEAUTY_RIBBON_NORMAL;
+    if (monDataIdx == MON_DATA_CUTE_RIBBON)     return CUTE_RIBBON_NORMAL;
+    if (monDataIdx == MON_DATA_SMART_RIBBON)    return SMART_RIBBON_NORMAL;
+    if (monDataIdx == MON_DATA_TOUGH_RIBBON)    return TOUGH_RIBBON_NORMAL;
+    if (monDataIdx == MON_DATA_WINNING_RIBBON)  return WINNING_RIBBON;
+    if (monDataIdx == MON_DATA_VICTORY_RIBBON)  return VICTORY_RIBBON;
+    if (monDataIdx == MON_DATA_ARTIST_RIBBON)   return ARTIST_RIBBON;
+    if (monDataIdx == MON_DATA_EFFORT_RIBBON)   return EFFORT_RIBBON;
+    if (monDataIdx == MON_DATA_MARINE_RIBBON)   return MARINE_RIBBON;
+    if (monDataIdx == MON_DATA_LAND_RIBBON)     return LAND_RIBBON;
+    if (monDataIdx == MON_DATA_SKY_RIBBON)      return SKY_RIBBON;
+    if (monDataIdx == MON_DATA_COUNTRY_RIBBON)  return COUNTRY_RIBBON;
+    if (monDataIdx == MON_DATA_NATIONAL_RIBBON) return NATIONAL_RIBBON;
+    if (monDataIdx == MON_DATA_EARTH_RIBBON)    return EARTH_RIBBON;
+    if (monDataIdx == MON_DATA_WORLD_RIBBON)    return WORLD_RIBBON;
+    return CHAMPION_RIBBON;
 }
 
 void TrySetUpTrainerFanClubSpecial(void)
@@ -3144,7 +3141,7 @@ static bool8 IsPartyMonNicknamedOrNotEnglish(u8 monIdx)
     pokemon = &gPlayerParty[monIdx];
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
     language = GetMonData(pokemon, MON_DATA_LANGUAGE, &language);
-    if (language == LANGUAGE_ENGLISH && !StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
+    if (language == GAME_LANGUAGE && !StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
     {
         return FALSE;
     }
@@ -3299,14 +3296,11 @@ void TV_FanClubLetter_RandomWordToStringVar3(TVShow *show)
     while (TRUE)
     {
         if (i == 6)
-        {
             i = 0;
-        }
-        if (show->fanclubLetter.words[i] != 0xFFFF)
-        {
+
+        if (show->fanclubLetter.words[i] != EC_EMPTY_WORD)
             break;
-        }
-        i ++;
+        i++;
     }
     CopyEasyChatWord(gStringVar3, show->fanclubLetter.words[i]);
 }
@@ -4254,7 +4248,7 @@ static void sub_80F1254(TVShow *shows)
             }
             else
             {
-                curShow->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_ENGLISH;
+                curShow->bravoTrainerTower.pokemonNameLanguage = GAME_LANGUAGE;
             }
         }
     }
@@ -4262,7 +4256,7 @@ static void sub_80F1254(TVShow *shows)
 
 u8 TV_GetStringLanguage(u8 *str)
 {
-    return IsStringJapanese(str) ? LANGUAGE_JAPANESE : LANGUAGE_ENGLISH;
+    return IsStringJapanese(str) ? LANGUAGE_JAPANESE : GAME_LANGUAGE;
 }
 
 static void sub_80F12A4(TVShow *shows)
@@ -5985,48 +5979,40 @@ static void DoTVShowDewfordTrendWatcherNetwork(void)
     state = sTVShowState;
     switch (state)
     {
-        case 0:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            if (show->trendWatcher.gender == MALE)
-            {
-                sTVShowState = 1;
-            }
-            else
-            {
-                sTVShowState = 2;
-            }
-            break;
-        case 1:
-        case 2:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
-            sTVShowState = 3;
-            break;
-        case 3:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            if (show->trendWatcher.gender == MALE)
-            {
-                sTVShowState = 4;
-            }
-            else
-            {
-                sTVShowState = 5;
-            }
-            break;
-        case 4:
-        case 5:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
-            sTVShowState = 6;
-            break;
-        case 6:
-            CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
-            CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-            TVShowDone();
+    case TRENDWATCHER_STATE_INTRO:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        if (show->trendWatcher.gender == MALE)
+            sTVShowState = TRENDWATCHER_STATE_TAUGHT_MALE;
+        else
+            sTVShowState = TRENDWATCHER_STATE_TAUGHT_FEMALE;
+        break;
+    case TRENDWATCHER_STATE_TAUGHT_MALE:
+    case TRENDWATCHER_STATE_TAUGHT_FEMALE:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
+        sTVShowState = TRENDWATCHER_STATE_PHRASE_HOPELESS;
+        break;
+    case TRENDWATCHER_STATE_PHRASE_HOPELESS:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        if (show->trendWatcher.gender == MALE)
+            sTVShowState = TRENDWATCHER_STATE_BIGGER_MALE;
+        else
+            sTVShowState = TRENDWATCHER_STATE_BIGGER_FEMALE;
+        break;
+    case TRENDWATCHER_STATE_BIGGER_MALE:
+    case TRENDWATCHER_STATE_BIGGER_FEMALE:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        TVShowConvertInternationalString(gStringVar3, show->trendWatcher.playerName, show->trendWatcher.language);
+        sTVShowState = TRENDWATCHER_STATE_OUTRO;
+        break;
+    case TRENDWATCHER_STATE_OUTRO:
+        CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
+        CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
+        TVShowDone();
     }
     ShowFieldMessage(sTVDewfordTrendWatcherNetworkTextGroup[state]);
 }
@@ -6603,98 +6589,100 @@ static void DoTVShowSpotTheCuties(void)
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
+
+    // For each state, in addition to the switch a message
+    // is printed from the table at the bottom
     state = sTVShowState;
     switch (state)
     {
-        case 0:
+        case SPOTCUTIES_STATE_INTRO:
             TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
             TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
+
+            // Comments following the intro depend on how many ribbons the pokemon has
             if (show->cuties.nRibbons < 10)
-            {
-                sTVShowState = 1;
-            }
+                sTVShowState = SPOTCUTIES_STATE_RIBBONS_LOW;
             else if (show->cuties.nRibbons < 20)
-            {
-                sTVShowState = 2;
-            }
+                sTVShowState = SPOTCUTIES_STATE_RIBBONS_MID;
             else
-            {
-                sTVShowState = 3;
-            }
+                sTVShowState = SPOTCUTIES_STATE_RIBBONS_HIGH;
             break;
-        case 1:
-        case 2:
-        case 3:
+        case SPOTCUTIES_STATE_RIBBONS_LOW:
+        case SPOTCUTIES_STATE_RIBBONS_MID:
+        case SPOTCUTIES_STATE_RIBBONS_HIGH:
             TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
             TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
             TV_PrintIntToStringVar(2, show->cuties.nRibbons);
-            sTVShowState = 4;
+            sTVShowState = SPOTCUTIES_STATE_RIBBON_INTRO;
             break;
-        case 4:
+        case SPOTCUTIES_STATE_RIBBON_INTRO:
             TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
             switch (show->cuties.selectedRibbon)
             {
-                case 0:
-                    sTVShowState = 5;
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    sTVShowState = 6;
-                    break;
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                    sTVShowState = 7;
-                    break;
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                    sTVShowState = 8;
-                    break;
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                    sTVShowState = 9;
-                    break;
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                    sTVShowState = 10;
-                    break;
-                case 21:
-                    sTVShowState = 11;
-                    break;
-                case 22:
-                    sTVShowState = 12;
-                    break;
-                case 23:
-                    sTVShowState = 13;
-                    break;
-                case 24:
-                    sTVShowState = 14;
-                    break;
+            case CHAMPION_RIBBON:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_CHAMPION;
+                break;
+            case COOL_RIBBON_NORMAL:
+            case COOL_RIBBON_SUPER:
+            case COOL_RIBBON_HYPER:
+            case COOL_RIBBON_MASTER:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_COOL;
+                break;
+            case BEAUTY_RIBBON_NORMAL:
+            case BEAUTY_RIBBON_SUPER:
+            case BEAUTY_RIBBON_HYPER:
+            case BEAUTY_RIBBON_MASTER:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_BEAUTY;
+                break;
+            case CUTE_RIBBON_NORMAL:
+            case CUTE_RIBBON_SUPER:
+            case CUTE_RIBBON_HYPER:
+            case CUTE_RIBBON_MASTER:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_CUTE;
+                break;
+            case SMART_RIBBON_NORMAL:
+            case SMART_RIBBON_SUPER:
+            case SMART_RIBBON_HYPER:
+            case SMART_RIBBON_MASTER:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_SMART;
+                break;
+            case TOUGH_RIBBON_NORMAL:
+            case TOUGH_RIBBON_SUPER:
+            case TOUGH_RIBBON_HYPER:
+            case TOUGH_RIBBON_MASTER:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_TOUGH;
+                break;
+            case WINNING_RIBBON:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_WINNING;
+                break;
+            case VICTORY_RIBBON:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_VICTORY;
+                break;
+            case ARTIST_RIBBON:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_ARTIST;
+                break;
+            case EFFORT_RIBBON:
+                sTVShowState = SPOTCUTIES_STATE_RIBBON_EFFORT;
+                break;
+            // No comment is made for any of the gift ribbons.
+            // If the show is created for a gift ribbon
+            // then this state will repeat indefinitely
             }
             break;
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
+        case SPOTCUTIES_STATE_RIBBON_CHAMPION:
+        case SPOTCUTIES_STATE_RIBBON_COOL:
+        case SPOTCUTIES_STATE_RIBBON_BEAUTY:
+        case SPOTCUTIES_STATE_RIBBON_CUTE:
+        case SPOTCUTIES_STATE_RIBBON_SMART:
+        case SPOTCUTIES_STATE_RIBBON_TOUGH:
+        case SPOTCUTIES_STATE_RIBBON_WINNING:
+        case SPOTCUTIES_STATE_RIBBON_VICTORY:
+        case SPOTCUTIES_STATE_RIBBON_ARTIST:
+        case SPOTCUTIES_STATE_RIBBON_EFFORT:
             TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
-            sTVShowState = 15;
+            sTVShowState = SPOTCUTIES_STATE_OUTRO;
             break;
-        case 15:
+        case SPOTCUTIES_STATE_OUTRO:
             TVShowDone();
     }
     ShowFieldMessage(sTVCutiesTextGroup[state]);

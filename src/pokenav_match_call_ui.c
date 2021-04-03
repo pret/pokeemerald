@@ -987,7 +987,7 @@ bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *dest, const str
     window.baseBlock = a3 + 2;
 
     dest->listWindow.windowId = AddWindow(&window);
-    if (dest->listWindow.windowId == 0xFF)
+    if (dest->listWindow.windowId == WINDOW_NONE)
         return FALSE;
 
     dest->listWindow.unkA = 0;

@@ -2383,13 +2383,13 @@ void ClearRankingHallRecords(void)
 {
     s32 i, j, k;
 
-    // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
-    #ifdef BUGFIX
-    u8 zero = 0;
-    #define ZERO (&zero)
-    #else
+    // UB: Passing 0 as a pointer instead of a pointer holding a value of 0.
+#ifdef UBFIX
+    u8 emptyId[TRAINER_ID_LENGTH] = {0};
+    #define ZERO emptyId
+#else
     #define ZERO 0
-    #endif
+#endif
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
