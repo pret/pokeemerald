@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
+      - battle_engine
+      - pokemon_expansion
+      - item_expansion
   pull_request:
 
 jobs:
@@ -10,7 +14,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: Install binutils
         run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
@@ -25,16 +29,8 @@ jobs:
           ./build.sh
           ./install.sh ../
 
-      - name: Compare
-        run: make -j${nproc} compare
+      - name: Agbcc
+        run: make -j${nproc} 
 
       - name: Modern
         run: make -j${nproc} modern
-
-      - name: Webhook
-        if: ${{ github.event_name == 'push' }}
-        env:
-          CALCROM_DISCORD_WEBHOOK_USERNAME: OK
-          CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
-          CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
-        run: sh .github/calcrom/webhook.sh pokeemerald
