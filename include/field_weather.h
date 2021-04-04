@@ -160,13 +160,12 @@ void DroughtStateRun(void);
 void Weather_SetBlendCoeffs(u8 eva, u8 evb);
 void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
 bool8 Weather_UpdateBlend(void);
-void sub_80AC274(u8 a);
 u8 GetCurrentWeather(void);
 void SetRainStrengthFromSoundEffect(u16 soundEffect);
 void PlayRainStoppingSoundEffect(void);
 u8 IsWeatherChangeComplete(void);
 void SetWeatherScreenFadeOut(void);
-void sub_80AC3E4(void);
+void SetWeatherPalStateIdle(void);
 void PreservePaletteInWeather(u8 preservedPalIndex);
 void ResetPreservedPalettesInWeather(void);
 

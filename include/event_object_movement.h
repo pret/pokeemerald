@@ -198,7 +198,7 @@ u8 GetMoveDirectionFastestAnimNum(u8);
 u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 u16 GetObjectPaletteTag(u8 palSlot);
-void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
+void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible);
 s16 GetFigure8XOffset(s16 idx);
 s16 GetFigure8YOffset(s16 idx);
 void CameraObjectReset2(void);

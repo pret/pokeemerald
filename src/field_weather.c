@@ -990,38 +990,39 @@ bool8 Weather_UpdateBlend(void)
     return FALSE;
 }
 
-void sub_80AC274(u8 a)
+// Unused. Uses the same numbering scheme as the coord events
+static void SetFieldWeather(u8 weather)
 {
-    switch (a)
+    switch (weather)
     {
-    case 1:
+    case COORD_EVENT_WEATHER_SUNNY_CLOUDS:
         SetWeather(WEATHER_SUNNY_CLOUDS);
         break;
-    case 2:
+    case COORD_EVENT_WEATHER_SUNNY:
         SetWeather(WEATHER_SUNNY);
         break;
-    case 3:
+    case COORD_EVENT_WEATHER_RAIN:
         SetWeather(WEATHER_RAIN);
         break;
-    case 4:
+    case COORD_EVENT_WEATHER_SNOW:
         SetWeather(WEATHER_SNOW);
         break;
-    case 5:
+    case COORD_EVENT_WEATHER_RAIN_THUNDERSTORM:
         SetWeather(WEATHER_RAIN_THUNDERSTORM);
         break;
-    case 6:
+    case COORD_EVENT_WEATHER_FOG_HORIZONTAL:
         SetWeather(WEATHER_FOG_HORIZONTAL);
         break;
-    case 7:
+    case COORD_EVENT_WEATHER_FOG_DIAGONAL:
         SetWeather(WEATHER_FOG_DIAGONAL);
         break;
-    case 8:
+    case COORD_EVENT_WEATHER_VOLCANIC_ASH:
         SetWeather(WEATHER_VOLCANIC_ASH);
         break;
-    case 9:
+    case COORD_EVENT_WEATHER_SANDSTORM:
         SetWeather(WEATHER_SANDSTORM);
         break;
-    case 10:
+    case COORD_EVENT_WEATHER_SHADE:
         SetWeather(WEATHER_SHADE);
         break;
     }
@@ -1085,7 +1086,7 @@ void SetWeatherScreenFadeOut(void)
     gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
 }
 
-void sub_80AC3E4(void)
+void SetWeatherPalStateIdle(void)
 {
     gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
 }

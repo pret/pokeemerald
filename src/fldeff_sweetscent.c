@@ -92,7 +92,7 @@ static void FailSweetScentEncounter(u8 taskId)
     if (!gPaletteFade.active)
     {
         CpuFastSet(gPaletteDecompressionBuffer, gPlttBufferUnfaded, 0x100);
-        sub_80AC3E4();
+        SetWeatherPalStateIdle();
         ScriptContext1_SetupScript(EventScript_FailSweetScent);
         DestroyTask(taskId);
     }
