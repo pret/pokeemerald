@@ -8,7 +8,7 @@
 
 #define POKE_ICON_BASE_PAL_TAG 56000
 
-#define INVALID_ICON_SPECIES SPECIES_NONE  // Oddly specific, used when an icon should be a ?. Any of the 'old unown' would work
+#define INVALID_ICON_SPECIES SPECIES_NONE // Oddly specific, used when an icon should be a ?. Any of the 'old unown' would work
 
 struct MonIconSpriteTemplate
 {
