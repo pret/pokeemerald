@@ -1,7 +1,7 @@
 {
-  "id": "MAP_UNKNOWN_LINK_CONTEST_ROOM_25_30",
-  "name": "UnknownLinkContestRoom_25_30",
-  "layout": "LAYOUT_UNKNOWN_LINK_CONTEST_ROOM_25_30",
+  "id": "MAP_UNUSED_CONTEST_HALL2",
+  "name": "UnusedContestHall2",
+  "layout": "LAYOUT_UNUSED_CONTEST_HALL2",
   "music": "MUS_GSC_PEWTER",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,

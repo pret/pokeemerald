@@ -8,7 +8,7 @@ MysteryEventClub_EventScript_Man:: @ 8291539
 
 MysteryEventClub_EventScript_AskToSeeProfile:: @ 8291552
 	msgbox MysteryEventClub_Text_MayISeeYourProfile, MSGBOX_DEFAULT
-	multichoice 17, 6, MULTI_YESNOINFO_2, 0
+	multichoice 17, 6, MULTI_YESNOINFO_2, FALSE
 	switch VAR_RESULT
 	case 0, MysteryEventClub_EventScript_CreateProfile
 	case 1, MysteryEventClub_EventScript_DeclineShowProfile
@@ -60,7 +60,7 @@ MysteryEventClub_EventScript_GivenProfileBefore:: @ 82915F5
 
 MysteryEventClub_EventScript_AskToSeeNewProfile:: @ 8291603
 	msgbox MysteryEventClub_Text_MayISeeYourNewProfile, MSGBOX_DEFAULT
-	multichoice 17, 6, MULTI_YESNOINFO_2, 0
+	multichoice 17, 6, MULTI_YESNOINFO_2, FALSE
 	switch VAR_RESULT
 	case 0, MysteryEventClub_EventScript_CreateNewProfile
 	case 1, MysteryEventClub_EventScript_DeclineNewProfile

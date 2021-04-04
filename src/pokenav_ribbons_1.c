@@ -44,7 +44,7 @@ struct PokenavSub10
 static u32 HandleRibbonsMonListInput_WaitListInit(struct PokenavSub9 *structPtr);
 static u32 HandleRibbonsMonListInput(struct PokenavSub9 *structPtr);
 static u32 RibbonsMonMenu_ReturnToMainMenu(struct PokenavSub9 *structPtr);
-static u32 sub_81CFB10(struct PokenavSub9 *structPtr);
+static u32 RibbonsMonMenu_ToSummaryScreen(struct PokenavSub9 *structPtr);
 static u32 BuildPartyMonRibbonList(s32 state);
 static u32 InitBoxMonRibbonList(s32 state);
 static u32 BuildBoxMonRibbonList(s32 state);
@@ -71,10 +71,10 @@ static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
     BuildBoxMonRibbonList
 };
 
-static const u16 sMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ui_ribbons.gbapal");
-static const u32 sMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ui_ribbons.4bpp.lz");
-static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ui_ribbons.bin.lz");
-static const u16 gUnknown_08623790[] = INCBIN_U16("graphics/pokenav/8623790.gbapal");
+static const u16 sMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
+static const u32 sMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.4bpp.lz");
+static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
+static const u16 sMonRibbonListUi_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/list_ui.gbapal");
 
 static const struct BgTemplate sMonRibbonListBgTemplates[] =
 {
@@ -192,7 +192,7 @@ static u32 HandleRibbonsMonListInput(struct PokenavSub9 *structPtr)
     {
         structPtr->monList->currIndex = GetSelectedPokenavListIndex();
         structPtr->saveMonList = 1;
-        structPtr->callback = sub_81CFB10;
+        structPtr->callback = RibbonsMonMenu_ToSummaryScreen;
         return RIBBONS_MON_LIST_FUNC_OPEN_RIBBONS_SUMMARY;
     }
     return RIBBONS_MON_LIST_FUNC_NONE;
@@ -203,7 +203,7 @@ static u32 RibbonsMonMenu_ReturnToMainMenu(struct PokenavSub9 *structPtr)
     return POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS;
 }
 
-static u32 sub_81CFB10(struct PokenavSub9 *structPtr)
+static u32 RibbonsMonMenu_ToSummaryScreen(struct PokenavSub9 *structPtr)
 {
     return POKENAV_RIBBONS_SUMMARY_SCREEN;
 }
@@ -342,8 +342,8 @@ static void sub_81CFCEC(struct PokenavSub9 *structPtr, struct PokenavMonList *it
     structPtr->monList->listCount++;
 }
 
-//unused
-static bool32 Unused_PlayerHasRibbonsMon(void)
+// Unused
+static bool32 PlayerHasRibbonsMon(void)
 {
     s32 i, j;
 
@@ -446,7 +446,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        CopyPaletteIntoBufferUnfaded(gUnknown_08623790, 0x20, 0x20);
+        CopyPaletteIntoBufferUnfaded(sMonRibbonListUi_Pal, 0x20, 0x20);
         InitMonRibbonPokenavListMenuTemplate();
         return LT_INC_AND_PAUSE;
     case 3:

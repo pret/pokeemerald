@@ -7,9 +7,9 @@
 
 static void AnimLightning(struct Sprite *);
 static void AnimLightning_Step(struct Sprite *);
-static void sub_810A214(struct Sprite *);
-static void sub_810A258(struct Sprite *);
-static void sub_810A274(struct Sprite *);
+static void AnimUnused_0810A214(struct Sprite *);
+static void AnimUnused_0810A214_Step(struct Sprite *);
+static void AnimUnused_0810A274(struct Sprite *);
 static void AnimSparkElectricity(struct Sprite *);
 static void AnimZapCannonSpark(struct Sprite *);
 static void AnimZapCannonSpark_Step(struct Sprite *);
@@ -29,13 +29,13 @@ static void AnimGrowingChargeOrb(struct Sprite *);
 static void AnimElectricPuff(struct Sprite *);
 static void AnimVoltTackleOrbSlide(struct Sprite *);
 static void AnimVoltTackleOrbSlide_Step(struct Sprite *);
-static bool8 sub_810B154(struct Task *task, u8 taskId);
+static bool8 CreateVoltTackleBolt(struct Task *task, u8 taskId);
 static void AnimVoltTackleBolt(struct Sprite *);
 static void AnimGrowingShockWaveOrb(struct Sprite *);
-static bool8 sub_810B430(struct Task *task, u8 taskId);
+static bool8 CreateShockWaveBoltSprite(struct Task *task, u8 taskId);
 static void AnimShockWaveProgressingBolt(struct Sprite *);
-static bool8 sub_810B614(struct Task *task, u8 taskId);
-static void sub_810B684(struct Sprite *sprite);
+static bool8 CreateShockWaveLightningSprite(struct Task *task, u8 taskId);
+static void AnimShockWaveLightning(struct Sprite *sprite);
 
 static const union AnimCmd sAnim_Lightning[] =
 {
@@ -63,7 +63,7 @@ const struct SpriteTemplate gLightningSpriteTemplate =
     .callback = AnimLightning,
 };
 
-static const union AffineAnimCmd gUnknown_085956D8[] =
+static const union AffineAnimCmd sAnim_Unused_085956D8[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 20),
@@ -71,24 +71,24 @@ static const union AffineAnimCmd gUnknown_085956D8[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_085956F8[] =
+static const union AffineAnimCmd *const sAnims_Unused_085956F8[] =
 {
-    gUnknown_085956D8,
+    sAnim_Unused_085956D8,
 };
 
 // Unused
-const struct SpriteTemplate gUnknown_085956FC =
+const struct SpriteTemplate gUnusedSpriteTemplate_085956FC =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_085956F8,
-    .callback = sub_810A214,
+    .affineAnims = sAnims_Unused_085956F8,
+    .callback = AnimUnused_0810A214,
 };
 
-static const union AnimCmd gUnknown_08595714[] =
+static const union AnimCmd sAnim_Unused_08595714[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -99,21 +99,21 @@ static const union AnimCmd gUnknown_08595714[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const gUnknown_08595730[] =
+static const union AnimCmd *const sAnims_Unused_08595730[] =
 {
-    gUnknown_08595714,
+    sAnim_Unused_08595714,
 };
 
 // Unused
-const struct SpriteTemplate gUnknown_08595734 =
+const struct SpriteTemplate gUnusedSpriteTemplate_08595734 =
 {
     .tileTag = ANIM_TAG_SHOCK,
     .paletteTag = ANIM_TAG_SHOCK,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08595730,
+    .anims = sAnims_Unused_08595730,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810A274,
+    .callback = AnimUnused_0810A274,
 };
 
 const struct SpriteTemplate gSparkElectricitySpriteTemplate =
@@ -473,23 +473,23 @@ static void AnimLightning_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_810A214(struct Sprite *sprite)
+static void AnimUnused_0810A214(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];
 
-    sprite->callback = sub_810A258;
+    sprite->callback = AnimUnused_0810A214_Step;
 }
 
-static void sub_810A258(struct Sprite *sprite)
+static void AnimUnused_0810A214_Step(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
         DestroySpriteAndMatrix(sprite);
 }
 
-static void sub_810A274(struct Sprite *sprite)
+static void AnimUnused_0810A274(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
@@ -1076,7 +1076,7 @@ void AnimTask_VoltTackleBolt(u8 taskId)
         if (++task->data[2] > 0)
         {
             task->data[2] = 0;
-            if (sub_810B154(task, taskId) || sub_810B154(task, taskId))
+            if (CreateVoltTackleBolt(task, taskId) || CreateVoltTackleBolt(task, taskId))
                 task->data[0]++;
         }
         break;
@@ -1086,7 +1086,7 @@ void AnimTask_VoltTackleBolt(u8 taskId)
     }
 }
 
-static bool8 sub_810B154(struct Task *task, u8 taskId)
+static bool8 CreateVoltTackleBolt(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gVoltTackleBoltSpriteTemplate, task->data[3], task->data[5], 35);
     if (spriteId != MAX_SPRITES)
@@ -1169,7 +1169,7 @@ void AnimTask_ShockWaveProgressingBolt(u8 taskId)
         if (++task->data[1] > 0)
         {
             task->data[1] = 0;
-            if (sub_810B430(task, taskId))
+            if (CreateShockWaveBoltSprite(task, taskId))
             {
                 if (task->data[2] == 5)
                     task->data[0] = 3;
@@ -1222,7 +1222,7 @@ void AnimTask_ShockWaveProgressingBolt(u8 taskId)
     }
 }
 
-static bool8 sub_810B430(struct Task *task, u8 taskId)
+static bool8 CreateShockWaveBoltSprite(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gShockWaveProgressingBoltSpriteTemplate, task->data[6], task->data[7], 35);
     if (spriteId != MAX_SPRITES)
@@ -1291,7 +1291,7 @@ void AnimTask_ShockWaveLightning(u8 taskId)
         if (++task->data[1] > 1)
         {
             task->data[1] = 0;
-            if (sub_810B614(task, taskId))
+            if (CreateShockWaveLightningSprite(task, taskId))
                 task->data[0]++;
         }
         break;
@@ -1302,13 +1302,13 @@ void AnimTask_ShockWaveLightning(u8 taskId)
     }
 }
 
-bool8 sub_810B614(struct Task *task, u8 taskId)
+static bool8 CreateShockWaveLightningSprite(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gLightningSpriteTemplate, task->data[13], task->data[14], task->data[12]);
     
     if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].callback = sub_810B684;
+        gSprites[spriteId].callback = AnimShockWaveLightning;
         gSprites[spriteId].data[6] = taskId;
         gSprites[spriteId].data[7] = 10;
         task->data[10]++;
@@ -1319,7 +1319,7 @@ bool8 sub_810B614(struct Task *task, u8 taskId)
     return FALSE;
 }
 
-static void sub_810B684(struct Sprite *sprite)
+static void AnimShockWaveLightning(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
