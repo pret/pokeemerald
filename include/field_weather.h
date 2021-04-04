@@ -46,11 +46,11 @@ struct Weather
     u8 gammaStepDelay;
     u8 gammaStepFrameCounter;
     u16 fadeDestColor;
-    /*0x6C6*/ u8 palProcessingState;
-    /*0x6C7*/ u8 fadeScreenCounter;
-    /*0x6C8*/ bool8 readyForInit;
-    /*0x6C9*/ u8 taskId;
-    /*0x6CA*/ u8 unknown_6CA;
+    u8 palProcessingState;
+    u8 fadeScreenCounter;
+    bool8 readyForInit;
+    u8 taskId;
+    u8 unknown_6CA;
     u8 unknown_6CB;
     u16 initStep;
     u16 finishStep;
@@ -60,6 +60,7 @@ struct Weather
     bool8 weatherChangeComplete;
     u8 weatherPicSpritePalIndex;
     u8 altGammaSpritePalIndex;
+    // Rain
     u16 rainSpriteVisibleCounter;
     u8 curRainSpriteIndex;
     u8 targetRainSpriteCount;
@@ -67,37 +68,41 @@ struct Weather
     u8 rainSpriteVisibleDelay;
     u8 isDownpour;
     u8 rainStrength;
-    /*0x6DE*/ u8 cloudSpritesCreated;
-    u8 filler_6DF[1];
+    u8 cloudSpritesCreated;
+    // Snow
     u16 snowflakeVisibleCounter;
     u16 unknown_6E2;
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
-    u16 unknown_6E6;
+    // Thunderstorm
+    u16 thunderDelay;
     u16 thunderCounter;
-    u8 unknown_6EA;
-    u8 unknown_6EB;
-    u8 unknown_6EC;
-    u8 thunderTriggered;
+    bool8 thunderAllowEnd;
+    bool8 thunderSkipShort;
+    u8 thunderShortRetries;
+    bool8 thunderTriggered;
+    // Horizontal fog
     u16 fogHScrollPosX;
     u16 fogHScrollCounter;
     u16 fogHScrollOffset;
     u8 lightenedFogSpritePals[6];
     u8 lightenedFogSpritePalsCount;
     u8 fogHSpritesCreated;
+    // Ash
     u16 ashBaseSpritesX;
     u16 unknown_6FE;
     u8 ashSpritesCreated;
-    u8 filler_701[3];
+    // Sandstorm
     u32 sandstormXOffset;
     u32 sandstormYOffset;
-    u8 filler_70C[2];
+    u16 sandstormUnused;
     u16 sandstormBaseSpritesX;
     u16 sandstormPosY;
     u16 sandstormWaveIndex;
     u16 sandstormWaveCounter;
     u8 sandstormSpritesCreated;
     u8 sandstormSwirlSpritesCreated;
+    // Diagonal fog
     u16 fogDBaseSpritesX;
     u16 fogDPosY;
     u16 fogDScrollXCounter;
@@ -105,13 +110,13 @@ struct Weather
     u16 fogDXOffset;
     u16 fogDYOffset;
     u8 fogDSpritesCreated;
-    u8 filler_725[1];
+    // Bubbles
     u16 bubblesDelayCounter;
     u16 bubblesDelayIndex;
     u16 bubblesCoordsIndex;
     u16 bubblesSpriteCount;
     u8 bubblesSpritesCreated;
-    u8 filler_72F;
+
     u16 currBlendEVA;
     u16 currBlendEVB;
     u16 targetBlendEVA;
@@ -119,12 +124,12 @@ struct Weather
     u8 blendUpdateCounter;
     u8 blendFrameCounter;
     u8 blendDelay;
-    u8 filler_73B[0x3C-0x3B];
+    // Drought
     s16 droughtBrightnessStage;
     s16 droughtLastBrightnessStage;
     s16 droughtTimer;
     s16 droughtState;
-    u8 filler_744[0xD-4];
+    u8 droughtUnused[9];
     s8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };
@@ -141,7 +146,7 @@ void StartWeather(void);
 void SetNextWeather(u8 weather);
 void SetCurrentAndNextWeather(u8 weather);
 void SetCurrentAndNextWeatherNoDelay(u8 weather);
-void sub_80ABC48(s8 gammaIndex);
+void ApplyWeatherGammaShiftIfIdle(s8 gammaIndex);
 void sub_80ABC7C(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay);
 void FadeScreen(u8 mode, s8 delay);
 bool8 IsWeatherNotFadingIn(void);

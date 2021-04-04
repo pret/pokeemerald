@@ -710,7 +710,7 @@ static bool8 LightenSpritePaletteInFog(u8 paletteIndex)
     return FALSE;
 }
 
-void sub_80ABC48(s8 gammaIndex)
+void ApplyWeatherGammaShiftIfIdle(s8 gammaIndex)
 {
     if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_IDLE)
     {
@@ -728,7 +728,7 @@ void sub_80ABC7C(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay)
         gWeatherPtr->gammaTargetIndex = gammaTargetIndex;
         gWeatherPtr->gammaStepFrameCounter = 0;
         gWeatherPtr->gammaStepDelay = gammaStepDelay;
-        sub_80ABC48(gammaIndex);
+        ApplyWeatherGammaShiftIfIdle(gammaIndex);
     }
 }
 
@@ -887,7 +887,7 @@ bool8 LoadDroughtWeatherPalettes(void)
 
 static void SetDroughtGamma(s8 gammaIndex)
 {
-    sub_80ABC48(-gammaIndex - 1);
+    ApplyWeatherGammaShiftIfIdle(-gammaIndex - 1);
 }
 
 void DroughtStateInit(void)
