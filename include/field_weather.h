@@ -4,6 +4,21 @@
 #include "sprite.h"
 #include "constants/field_weather.h"
 
+#define TAG_WEATHER_START 0x1200
+enum {
+    GFXTAG_CLOUD = TAG_WEATHER_START,
+    GFXTAG_FOG_H,
+    GFXTAG_ASH,
+    GFXTAG_FOG_D,
+    GFXTAG_SANDSTORM,
+    GFXTAG_BUBBLE,
+    GFXTAG_RAIN,
+};
+enum {
+    PALTAG_WEATHER = TAG_WEATHER_START,
+    PALTAG_WEATHER_2
+};
+
 struct Weather
 {
     union
@@ -105,10 +120,10 @@ struct Weather
     u8 blendFrameCounter;
     u8 blendDelay;
     u8 filler_73B[0x3C-0x3B];
-    s16 unknown_73C;
-    s16 unknown_73E;
-    s16 unknown_740;
-    s16 unknown_742;
+    s16 droughtBrightnessStage;
+    s16 droughtLastBrightnessStage;
+    s16 droughtTimer;
+    s16 droughtState;
     u8 filler_744[0xD-4];
     s8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
@@ -136,9 +151,8 @@ u8 sub_80ABF20(void);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
-void sub_80ABFE0(s8 gammaIndex);
-void sub_80ABFF0(void);
-void sub_80AC01C(void);
+void DroughtStateInit(void);
+void DroughtStateRun(void);
 void Weather_SetBlendCoeffs(u8 eva, u8 evb);
 void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
 bool8 Weather_UpdateBlend(void);
