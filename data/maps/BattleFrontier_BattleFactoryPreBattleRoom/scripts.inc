@@ -105,7 +105,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForRegularOpponent
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponentNoRecord
-	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapMon
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskRecordBattle
@@ -114,7 +114,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForRegularOpponent
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponentNoRecord:: @ 8259CC6
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapMon
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskPauseChallenge
@@ -124,7 +124,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponentNoRecor
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskRecordBattle:: @ 8259CFC
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_RecordLatestBattle
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponent
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_RecordBattle
@@ -144,7 +144,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskPauseChallenge:: @ 8259
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskRetireChallenge:: @ 8259D66
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponent
 	case 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost
@@ -396,7 +396,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead:: @ 825A0B
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHeadNoRecord
-	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapBeforeHead
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskRecordBattle
@@ -405,7 +405,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead:: @ 825A0B
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHeadNoRecord:: @ 825A110
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapBeforeHead
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskPauseChallenge

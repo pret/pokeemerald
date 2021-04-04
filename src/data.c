@@ -8,41 +8,42 @@
 #include "constants/trainers.h"
 #include "constants/battle_ai.h"
 
-const u16 gUnknown_082FF1D8[] = INCBIN_U16("graphics/link/minigame_digits.gbapal");
-const u32 gUnknown_082FF1F8[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
-// unused
-const u32 gUnknown_082FF2B8[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz");
+const u16 gMinigameDigits_Pal[] = INCBIN_U16("graphics/link/minigame_digits.gbapal");
+const u32 gMinigameDigits_Gfx[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
+static const u32 sMinigameDigitsThin_Gfx[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz"); // Unused
 
-const struct SpriteFrameImage gUnknown_082FF3A8[] =
+#define BATTLER_OFFSET(i) (gHeap + 0x8000 + MON_PIC_SIZE * (i))
+
+const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[] =
 {
-    gHeap + 0x8000, 0x800,
-    gHeap + 0x8800, 0x800,
-    gHeap + 0x9000, 0x800,
-    gHeap + 0x9800, 0x800,
+    BATTLER_OFFSET(0), MON_PIC_SIZE,
+    BATTLER_OFFSET(1), MON_PIC_SIZE,
+    BATTLER_OFFSET(2), MON_PIC_SIZE,
+    BATTLER_OFFSET(3), MON_PIC_SIZE,
 };
 
-const struct SpriteFrameImage gUnknown_082FF3C8[] =
+const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[] =
 {
-    gHeap + 0xA000, 0x800,
-    gHeap + 0xA800, 0x800,
-    gHeap + 0xB000, 0x800,
-    gHeap + 0xB800, 0x800,
+    BATTLER_OFFSET(4), MON_PIC_SIZE,
+    BATTLER_OFFSET(5), MON_PIC_SIZE,
+    BATTLER_OFFSET(6), MON_PIC_SIZE,
+    BATTLER_OFFSET(7), MON_PIC_SIZE,
 };
 
-const struct SpriteFrameImage gUnknown_082FF3E8[] =
+const struct SpriteFrameImage gBattlerPicTable_PlayerRight[] =
 {
-    gHeap + 0xC000, 0x800,
-    gHeap + 0xC800, 0x800,
-    gHeap + 0xD000, 0x800,
-    gHeap + 0xD800, 0x800,
+    BATTLER_OFFSET(8),  MON_PIC_SIZE,
+    BATTLER_OFFSET(9),  MON_PIC_SIZE,
+    BATTLER_OFFSET(10), MON_PIC_SIZE,
+    BATTLER_OFFSET(11), MON_PIC_SIZE,
 };
 
-const struct SpriteFrameImage gUnknown_082FF408[] =
+const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
 {
-    gHeap + 0xE000, 0x800,
-    gHeap + 0xE800, 0x800,
-    gHeap + 0xF000, 0x800,
-    gHeap + 0xF800, 0x800,
+    BATTLER_OFFSET(12), MON_PIC_SIZE,
+    BATTLER_OFFSET(13), MON_PIC_SIZE,
+    BATTLER_OFFSET(14), MON_PIC_SIZE,
+    BATTLER_OFFSET(15), MON_PIC_SIZE,
 };
 
 const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
@@ -189,7 +190,7 @@ static const union AffineAnimCmd gUnknown_082FF600[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_082FF618[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[] =
 {
     gUnknown_082FF548,
     gUnknown_082FF568,
@@ -229,7 +230,7 @@ static const union AffineAnimCmd gUnknown_082FF684[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_082FF694[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[] =
 {
     gUnknown_082FF548,
     gUnknown_082FF568,
@@ -291,7 +292,7 @@ const union AnimCmd *const gUnknown_082FF70C[] =
     gUnknown_082FF704,
 };
 
-#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, 0x800, SPECIES_##species}
+#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
@@ -316,8 +317,7 @@ const bool8 SpeciesHasGenderDifference[NUM_SPECIES] =
 #include "data/pokemon_graphics/front_pic_anims.h"
 #include "data/pokemon_graphics/front_pic_table.h"
 
-// unused
-const u32 gUnknown830AF4C[] =
+static const u32 sUnused[] =
 {
     0x00000888, 0x00000888, 0x00000888, 0x00000888,
     0x00000088, 0x00000888, 0x00000888, 0x00000886,

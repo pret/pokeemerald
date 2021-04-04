@@ -510,7 +510,7 @@
 	.byte \battler
 	.endm
 
-	.macro atk57
+	.macro endlinkbattle
 	.byte 0x57
 	.endm
 
@@ -1763,6 +1763,10 @@
 	.macro gettotemboost ptr:req
 	various BS_ATTACKER, VARIOUS_TOTEM_BOOST
 	.4byte \ptr
+	.endm
+
+	.macro tryactivategrimneigh, battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
 
 @ helpful macros

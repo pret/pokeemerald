@@ -69,13 +69,13 @@ struct Trainer
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
-extern const u16 gUnknown_082FF1D8[];
-extern const u32 gUnknown_082FF1F8[];
+extern const u16 gMinigameDigits_Pal[];
+extern const u32 gMinigameDigits_Gfx[];
 
-extern const struct SpriteFrameImage gUnknown_082FF3A8[];
-extern const struct SpriteFrameImage gUnknown_082FF3C8[];
-extern const struct SpriteFrameImage gUnknown_082FF3E8[];
-extern const struct SpriteFrameImage gUnknown_082FF408[];
+extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
+extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];
+extern const struct SpriteFrameImage gBattlerPicTable_PlayerRight[];
+extern const struct SpriteFrameImage gBattlerPicTable_OpponentRight[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_May[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
@@ -85,8 +85,8 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
 
-extern const union AffineAnimCmd *const gUnknown_082FF618[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 
 extern const union AnimCmd *const gUnknown_082FF70C[];

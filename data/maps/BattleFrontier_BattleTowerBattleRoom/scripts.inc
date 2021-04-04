@@ -82,7 +82,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent:: @ 8241C8F
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponentNoRecord
-	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_ContinueChallenge
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_AskRecordBattle
@@ -91,7 +91,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent:: @ 8241C8F
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponentNoRecord:: @ 8241D0A
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_ContinueChallenge
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_AskPauseChallenge
@@ -101,7 +101,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponentNoRecord:: @
 BattleFrontier_BattleTowerBattleRoom_EventScript_AskRecordBattle:: @ 8241D40
 	message BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_RecordBattle
@@ -121,7 +121,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskPauseChallenge:: @ 8241D7C
 BattleFrontier_BattleTowerBattleRoom_EventScript_AskRetireChallenge:: @ 8241DAA
 	message BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_RetireChallenge
@@ -224,7 +224,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaiden:: @ 8241F22
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaidenNoRecord
-	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_AskRecordBattle
@@ -233,7 +233,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaiden:: @ 8241F22
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaiden
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaidenNoRecord:: @ 8241F79
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_AskPauseChallenge

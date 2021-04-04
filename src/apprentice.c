@@ -144,7 +144,7 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
     u8 i;
 
     for (i = 0; i < ARRAY_COUNT(apprentice->speechWon); i++)
-        apprentice->speechWon[i] = 0xFFFF;
+        apprentice->speechWon[i] = EC_EMPTY_WORD;
 
     apprentice->playerName[0] = EOS;
     apprentice->id = NUM_APPRENTICES;
@@ -158,7 +158,7 @@ void ResetAllApprenticeData(void)
     for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         for (j = 0; j < ARRAY_COUNT(gSaveBlock2Ptr->apprentices[i].speechWon); j++)
-            gSaveBlock2Ptr->apprentices[i].speechWon[j] = 0xFFFF;
+            gSaveBlock2Ptr->apprentices[i].speechWon[j] = EC_EMPTY_WORD;
         gSaveBlock2Ptr->apprentices[i].id = NUM_APPRENTICES;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
@@ -923,7 +923,7 @@ static void Script_PrintApprenticeMessage(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    sub_808B864();
+    PlayerFreeze();
     sub_808BCF4();
     DrawDialogueFrame(0, 1);
     PrintApprenticeMessage();
@@ -1083,7 +1083,7 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data));
         break;
     case APPRENTICE_BUFF_NAME:
-        TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, LANGUAGE_ENGLISH), LANGUAGE_ENGLISH);
+        TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, GAME_LANGUAGE), GAME_LANGUAGE);
         StringCopy(stringDst, text);
         break;
     case APPRENTICE_BUFF_LEVEL:

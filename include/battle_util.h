@@ -23,6 +23,7 @@
 #define ABILITYEFFECT_TRACE1                     0xC
 #define ABILITYEFFECT_TRACE2                     0xD
 #define ABILITYEFFECT_MOVE_END_OTHER             0xE
+#define ABILITYEFFECT_SWITCH_IN_TERRAIN          0xFE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
@@ -65,7 +66,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker);
 void MarkAllBattlersForControllerExec(void); // unused
 bool32 IsBattlerMarkedForControllerExec(u8 battlerId);
 void MarkBattlerForControllerExec(u8 battlerId);
-void sub_803F850(u8 arg0);
+void MarkBattlerReceivedLinkData(u8 arg0);
 void CancelMultiTurnMoves(u8 battlerId);
 bool8 WasUnableToUseMove(u8 battlerId);
 void PrepareStringBattle(u16 stringId, u8 battlerId);
@@ -130,5 +131,6 @@ void ClearIllusionMon(u32 battlerId);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 u8 GetBattleMoveSplit(u32 moveId);
+bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
 
 #endif // GUARD_BATTLE_UTIL_H
