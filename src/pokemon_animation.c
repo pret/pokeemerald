@@ -1053,7 +1053,7 @@ static void sub_817F77C(struct Sprite *sprite)
     {
         // FIX: Reset these back to normal after they were changed so Poké Ball catch/release
         // animations without a screen transition in between don't break
-        sprite->affineAnims = gUnknown_082FF694;
+        sprite->affineAnims = gAffineAnims_BattleSpriteOpponentSide;
     }
 #endif // BUGFIX
 }

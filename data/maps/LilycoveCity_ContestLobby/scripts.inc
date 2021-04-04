@@ -638,7 +638,7 @@ LilycoveCity_ContestLobby_EventScript_LinkContestReceptionist:: @ 821A806
 LilycoveCity_ContestLobby_EventScript_AskEnterLinkContest:: @ 821A819
 	message LilycoveCity_ContestLobby_Text_EnterContest3
 	waitmessage
-	multichoice 0, 0, MULTI_ENTERINFO, 0
+	multichoice 0, 0, MULTI_ENTERINFO, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_TryEnterLinkContest
 	case 1, LilycoveCity_ContestLobby_EventScript_LinkContestInfo
@@ -656,7 +656,7 @@ LilycoveCity_ContestLobby_EventScript_TryEnterLinkContest:: @ 821A856
 	message LilycoveCity_ContestLobby_Text_WhichContestMode
 	waitmessage
 	specialvar VAR_TEMP_D, IsWirelessAdapterConnected
-	multichoice 0, 0, MULTI_LINK_CONTEST_MODE, 0
+	multichoice 0, 0, MULTI_LINK_CONTEST_MODE, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_EmeraldMode  @ Shortened to E-Mode
 	case 1, LilycoveCity_ContestLobby_EventScript_GlobalMode   @ Shortened to G-Mode
@@ -679,7 +679,7 @@ LilycoveCity_ContestLobby_EventScript_GlobalMode:: @ 821A8C6
 LilycoveCity_ContestLobby_EventScript_ChooseLinkContestType:: @ 821A8DC
 	message LilycoveCity_ContestLobby_Text_EnterWhichContest3
 	waitmessage
-	multichoice 0, 0, MULTI_CONTEST_TYPE, 0
+	multichoice 0, 0, MULTI_CONTEST_TYPE, FALSE
 	switch VAR_RESULT
 	case CONTEST_CATEGORIES_COUNT, LilycoveCity_ContestLobby_EventScript_CancelLinkContest
 	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelLinkContest
@@ -690,7 +690,7 @@ LilycoveCity_ContestLobby_EventScript_ChooseLinkContestType:: @ 821A8DC
 LilycoveCity_ContestLobby_EventScript_LinkContestInfo:: @ 821A90D
 	message LilycoveCity_ContestLobby_Text_WhichTopic2
 	waitmessage
-	multichoice 0, 0, MULTI_LINK_CONTEST_INFO, 0
+	multichoice 0, 0, MULTI_LINK_CONTEST_INFO, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_ExplainLinkContest
 	case 1, LilycoveCity_ContestLobby_EventScript_ExplainEMode
@@ -783,7 +783,7 @@ LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest:: @ 821AA15
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkError
 	compare VAR_RESULT, LINKUP_FAILED_CONTEST_GMODE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference
-	message3 LilycoveCity_ContestLobby_Text_Transmitting
+	messageinstant LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer
 	switch VAR_0x8004
 	case 0, LilycoveCity_ContestLobby_EventScript_StartLinkContest
@@ -885,7 +885,7 @@ LilycoveCity_ContestLobby_EventScript_SetLinkGroupToughContest:: @ 821ABA0
 LilycoveCity_ContestLobby_EventScript_DecideLinkLeader:: @ 821ABA6
 	message LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_TryJoinGroup
 	case 1, LilycoveCity_ContestLobby_EventScript_TryLeadGroup
@@ -926,7 +926,7 @@ LilycoveCity_ContestLobby_EventScript_TryJoinLinkGroup:: @ 821AC38
 	return
 
 LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided:: @ 821AC3D
-	message3 LilycoveCity_ContestLobby_Text_Transmitting
+	messageinstant LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer
 	goto LilycoveCity_ContestLobby_EventScript_StartLinkContest
 	end

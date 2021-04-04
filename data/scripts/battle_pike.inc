@@ -1,5 +1,5 @@
 @ Note: LOCALIDs shared with BattleFrontier_BattlePikeRoomNormal
-BattleFrontier_BattlePikeRoomNormal_MapScripts_2C3E1B: @ 82C3E1B
+BattleFrontier_BattlePikeRoom_MapScripts: @ 82C3E1B
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePikeRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRoom_OnWarp
 

@@ -152,10 +152,10 @@ u16 sub_8087288(void);
 u16 sub_808729C(void);
 u16 QueueExitLinkRoomKey(void);
 u16 sub_80872C4(void);
-bool32 sub_8087598(void);
-bool32 sub_80875C8(void);
-bool32 sub_8087634(void);
-bool32 sub_808766C(void);
+bool32 Overworld_LinkRecvQueueLengthMoreThan2(void);
+bool32 Overworld_RecvKeysFromLinkIsRunning(void);
+bool32 Overworld_SendKeysToLinkIsRunning(void);
+bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 
 #endif // GUARD_OVERWORLD_H

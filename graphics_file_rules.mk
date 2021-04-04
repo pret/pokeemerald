@@ -313,7 +313,7 @@ $(FONTGFXDIR)/keypad_icons.4bpp: %.4bpp: %.png
 graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 	$(GFX) $< $@ -num_colors 224
 
-graphics/link_games/pkmnjump_bg.4bpp: %.4bpp: %.png
+graphics/pokemon_jump/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
 
 graphics/pokenav/region_map.8bpp: %.8bpp: %.png
@@ -404,7 +404,7 @@ $(BTLANMSPRGFXDIR)/spark.4bpp: $(BTLANMSPRGFXDIR)/spark_0.4bpp \
 						  $(BTLANMSPRGFXDIR)/spark_1.4bpp
 	@cat $^ >$@
 
-$(MASKSGFXDIR)/unknown_C2EA50.4bpp: %.4bpp: %.png
+$(MASKSGFXDIR)/unused_level_up.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 14
 
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png

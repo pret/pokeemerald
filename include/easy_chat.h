@@ -24,55 +24,55 @@ struct EasyChatScreen
     /*0x01*/ u8 templateId;
     /*0x02*/ u8 numColumns;
     /*0x03*/ u8 numRows;
-    /*0x04*/ u8 state;
+    /*0x04*/ u8 inputState;
     /*0x05*/ s8 mainCursorColumn;
     /*0x06*/ s8 mainCursorRow;
-    /*0x07*/ u8 unk_07;
-    /*0x08*/ u8 stateBackup;
-    /*0x09*/ u8 unk_09;
-    /*0x0A*/ s8 unk_0a;
-    /*0x0B*/ s8 unk_0b;
-    /*0x0C*/ u8 unk_0c;
-    /*0x0D*/ u8 unk_0d;
-    /*0x0E*/ u8 unk_0e;
-    /*0x0F*/ u8 unk_0f;
-    /*0x10*/ s8 unk_10;
-    /*0x11*/ s8 unk_11;
+    /*0x07*/ u8 maxWords;
+    /*0x08*/ u8 inputStateBackup;
+    /*0x09*/ bool8 inAlphabetMode;
+    /*0x0A*/ s8 keyboardColumn;
+    /*0x0B*/ s8 keyboardRow;
+    /*0x0C*/ u8 keyboardScrollOffset;
+    /*0x0D*/ u8 keyboardLastRow;
+    /*0x0E*/ u8 wordSelectScrollOffset;
+    /*0x0F*/ u8 wordSelectLastRow;
+    /*0x10*/ s8 wordSelectColumn;
+    /*0x11*/ s8 wordSelectRow;
     /*0x12*/ u8 displayedPersonType;
-    /*0x13*/ u8 unk_13;
-    /*0x14*/ u8 unk_14[0x20];
+    /*0x13*/ u8 unused; // Set to 0, never read
+    /*0x14*/ u8 quizTitle[32];
     /*0x34*/ const u8 *titleText;
-    /*0x38*/ u16 *words;
-    /*0x3C*/ u16 ecWordBuffer[9];
+    /*0x38*/ u16 *savedPhrase;
+    /*0x3C*/ u16 currentPhrase[9];
 };
 
-struct Unk203A11C
+struct EasyChatScreenControl
 {
-    u16 unk0;
+    u16 funcState;
     u16 windowId;
-    u16 unk4;
-    u8 unk6;
-    u8 unk7;
-    s8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB[0xC1];
-    u8 unkCC[0x202];
-    u16 unk2CE;
-    int unk2D0;
-    int unk2D4;
-    struct Sprite *unk2D8;
-    struct Sprite *unk2DC;
-    struct Sprite *unk2E0;
-    struct Sprite *unk2E4;
-    struct Sprite *unk2E8;
-    struct Sprite *unk2EC;
-    struct Sprite *unk2F0;
-    struct Sprite *unk2F4;
-    struct Sprite *unk2F8;
-    struct Sprite *unk2FC;
-    u16 unk300[BG_SCREEN_SIZE / 2];
-    u16 unkB00[BG_SCREEN_SIZE / 2];
+    u16 currentFuncId;
+    u8 curWindowAnimState;
+    u8 destWindowAnimState;
+    s8 windowAnimStateDir;
+    u8 modeWindowState;
+    bool8 fourFooterOptions; // Never read (template is used directly instead)
+    u8 phrasePrintBuffer[193];
+    u8 wordSelectPrintBuffer[514];
+    u16 scrollOffset;
+    int scrollDest;
+    int scrollSpeed;
+    struct Sprite *mainCursorSprite;
+    struct Sprite *rectangleCursorSpriteRight;
+    struct Sprite *rectangleCursorSpriteLeft;
+    struct Sprite *wordSelectCursorSprite;
+    struct Sprite *buttonWindowSprite;
+    struct Sprite *modeWindowSprite;
+    struct Sprite *scrollIndicatorUpSprite;
+    struct Sprite *scrollIndicatorDownSprite;
+    struct Sprite *startButtonSprite;
+    struct Sprite *selectButtonSprite;
+    u16 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
+    u16 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
 };
 
 struct EasyChatPhraseFrameDimensions
@@ -104,15 +104,15 @@ struct EasyChatGroup
     u16 numEnabledWords;
 };
 
-struct Unk203A120
+struct EasyChatScreenWordData
 {
-    u16 unk0;
-    u16 unk2[EC_NUM_GROUPS];
-    u16 unk2E[27];
-    u16 unk64[27][270];
-    u8 filler3958[0x2C];
-    u16 unk3984[0x10E];
-    u16 unk3BA0;
+    u16 numUnlockedGroups;
+    u16 unlockedGroupIds[EC_NUM_GROUPS];
+    u16 numUnlockedAlphabetWords[EC_NUM_ALPHABET_GROUPS];
+    u16 unlockedAlphabetWords[EC_NUM_ALPHABET_GROUPS][EC_MAX_WORDS_IN_GROUP];
+    u8 unused[44];
+    u16 selectedGroupWords[EC_MAX_WORDS_IN_GROUP];
+    u16 numSelectedGroupWords;
 }; /*size = 0x3BA4*/
 
 struct EasyChatWordsByLetter
@@ -124,16 +124,16 @@ struct EasyChatWordsByLetter
 void InitEasyChatPhrases(void);
 void ShowEasyChatScreen(void);
 u8 * CopyEasyChatWord(u8 *dest, u16 word);
-bool32 sub_811F8D8(int word);
+bool32 IsEasyChatAnswerUnlocked(int word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
-bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
+bool8 IsBardWordInvalid(u16 word);
 u16 GetRandomEasyChatWordFromGroup(u16 group);
 u16 GetNewHipsterPhraseToTeach(void);
 u16 EasyChat_GetNumWordsInGroup(u8);
 u16 GetRandomEasyChatWordFromUnlockedGroup(u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
-void sub_811F8BC(void);
+void InitQuestionnaireWords(void);
 void UnlockAdditionalPhrase(u8 additionalPhraseId);
 
 #endif // GUARD_EASYCHAT_H
