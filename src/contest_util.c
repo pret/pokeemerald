@@ -517,7 +517,7 @@ static void CB2_StartShowContestResults(void)
     memset(sContestResults->monResults, 0, sizeof(*sContestResults->monResults));
     LoadContestResultSprites();
     TryCreateWirelessSprites();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     gPaletteFade.bufferTransferDisabled = FALSE;
     sContestResults->data->showResultsTaskId = CreateTask(Task_ShowContestResults, 5);
     SetMainCallback2(CB2_ShowContestResults);
@@ -1007,12 +1007,12 @@ static void Task_EndShowContestResults(u8 taskId)
         if (gTasks[taskId].tTimer == 0)
         {
             DestroyTask(sContestResults->data->highlightWinnerTaskId);
-            BlendPalettes(0x0000FFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_BG, 16, RGB_BLACK);
             gTasks[taskId].tTimer++;
         }
         else if (gTasks[taskId].tTimer == 1)
         {
-            BlendPalettes(0xFFFF0000, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_OBJECTS, 16, RGB_BLACK);
             gTasks[taskId].tTimer++;
         }
         else
@@ -2086,7 +2086,7 @@ void StartContest(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_StartContest, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
 void BufferContestantMonSpecies(void)
@@ -2107,7 +2107,7 @@ void ShowContestResults(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_StartShowContestResults, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
 void GetContestPlayerId(void)
@@ -2519,7 +2519,7 @@ void ShowContestEntryMonPic(void)
     u8 taskId;
     u8 left, top;
 
-    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == 0xFF)
+    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
     {
         AllocateMonSpritesGfx();
         left = 10;
@@ -2559,7 +2559,7 @@ void ShowContestEntryMonPic(void)
 void HideContestEntryMonPic(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ShowContestEntryMonPic);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         gTasks[taskId].data[0]++;
         FreeMonSpritesGfx();

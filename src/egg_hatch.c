@@ -297,7 +297,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 {
     u16 species;
     u32 personality, pokerus;
-    u8 i, friendship, language, gameMet, markings, obedience;
+    u8 i, friendship, language, gameMet, markings, isEventLegal;
     u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
 
@@ -320,7 +320,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     gameMet = GetMonData(egg, MON_DATA_MET_GAME);
     markings = GetMonData(egg, MON_DATA_MARKINGS);
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
-    obedience = GetMonData(egg, MON_DATA_OBEDIENCE);
+    isEventLegal = GetMonData(egg, MON_DATA_EVENT_LEGAL);
 
     CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
@@ -342,7 +342,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     friendship = 120;
     SetMonData(temp, MON_DATA_FRIENDSHIP, &friendship);
     SetMonData(temp, MON_DATA_POKERUS, &pokerus);
-    SetMonData(temp, MON_DATA_OBEDIENCE, &obedience);
+    SetMonData(temp, MON_DATA_EVENT_LEGAL, &isEventLegal);
 
     *egg = *temp;
 }
@@ -597,7 +597,7 @@ static void CB2_EggHatch_1(void)
     switch (sEggHatchData->CB2_state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         sEggHatchData->eggSpriteID = CreateSprite(&sSpriteTemplate_EggHatch, 120, 75, 5);
         ShowBg(0);
         ShowBg(1);
@@ -680,7 +680,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 11:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         sEggHatchData->CB2_state++;
         break;
     case 12:
@@ -790,7 +790,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
 {
     s16 i;
     if (sprite->data[0] == 0)
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_WHITEALPHA);
     if (sprite->data[0] < 4u)
     {
         for (i = 0; i <= 3; i++)
@@ -814,7 +814,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
         StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0x10, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_WHITEALPHA);
     if (sprite->data[0] <= 9)
         gSprites[sEggHatchData->pokeSpriteID].pos1.y -= 1;
     if (sprite->data[0] > 40)

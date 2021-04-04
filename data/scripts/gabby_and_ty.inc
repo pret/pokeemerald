@@ -1,16 +1,3 @@
-@ Unused
-EventScript_28CCAA:: @ 828CCAA
-	setvar VAR_0x8005, 8
-	special InterviewBefore
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_UnusedRet
-	setvar VAR_0x8005, 8
-	special InterviewAfter
-	return
-
-EventScript_UnusedRet:: @ 828CCC6
-	return
-
 @ Gabby and Ty always move to the same spots for the first 5 battles
 @ From the 6th battle onwards, they move randomly between locations 6-8
 @ Note: The local IDs of Gabby and Ty are hard-coded in GabbyAndTySetScriptVarsToObjectEventLocalIds

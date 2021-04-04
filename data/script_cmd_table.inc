@@ -205,8 +205,8 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_nop1                      @ 0xca
 	.4byte ScrCmd_nop1                      @ 0xcb
 	.4byte ScrCmd_nop1                      @ 0xcc
-	.4byte ScrCmd_setmonobedient            @ 0xcd
-	.4byte ScrCmd_checkmonobedience         @ 0xce
+	.4byte ScrCmd_setmoneventlegal          @ 0xcd
+	.4byte ScrCmd_checkmoneventlegal        @ 0xce
 	.4byte ScrCmd_gotoram                   @ 0xcf
 	.4byte ScrCmd_nop1                      @ 0xd0
 	.4byte ScrCmd_warpspinenter             @ 0xd1
@@ -216,10 +216,10 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_initrotatingtilepuzzle    @ 0xd5
 	.4byte ScrCmd_freerotatingtilepuzzle    @ 0xd6
 	.4byte ScrCmd_warpmossdeepgym           @ 0xd7
-	.4byte ScrCmd_cmdD8                     @ 0xd8
-	.4byte ScrCmd_cmdD9                     @ 0xd9
+	.4byte ScrCmd_selectapproachingtrainer  @ 0xd8
+	.4byte ScrCmd_lockfortrainer            @ 0xd9
 	.4byte ScrCmd_closebraillemessage       @ 0xda
-	.4byte ScrCmd_cmdDB                     @ 0xdb
+	.4byte ScrCmd_messageinstant            @ 0xdb
 	.4byte ScrCmd_fadescreenswapbuffers     @ 0xdc
 	.4byte ScrCmd_buffertrainerclassname    @ 0xdd
 	.4byte ScrCmd_buffertrainername         @ 0xde

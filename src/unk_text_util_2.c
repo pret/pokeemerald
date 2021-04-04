@@ -5,7 +5,7 @@
 #include "sound.h"
 
 ALIGNED(4)
-static const u8 sUnknown_08616124[] = {1, 2, 4};
+static const u8 sScrollDistances[] = {1, 2, 4};
 static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("graphics/fonts/font6.fwjpnfont");
 
 static void DecompressGlyphFont6(u16);
@@ -135,7 +135,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             }
             DecompressGlyphFont6(char_);
             CopyGlyphToWindow(textPrinter);
-            textPrinter->printerTemplate.currentX += gUnknown_03002F90.width + textPrinter->printerTemplate.letterSpacing;
+            textPrinter->printerTemplate.currentX += gCurGlyph.width + textPrinter->printerTemplate.letterSpacing;
             return 0;
         case 1:
             if (TextPrinterWait(textPrinter))
@@ -164,15 +164,15 @@ u16 Font6Func(struct TextPrinter *textPrinter)
         case 4:
             if (textPrinter->scrollDistance)
             {
-                if (textPrinter->scrollDistance < sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed])
+                if (textPrinter->scrollDistance < sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed])
                 {
                     ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance = 0;
                 }
                 else
                 {
-                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                    textPrinter->scrollDistance -= sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed];
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                    textPrinter->scrollDistance -= sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed];
                 }
                 CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
             }
@@ -206,12 +206,12 @@ static void DecompressGlyphFont6(u16 glyph)
     const u16 *glyphs;
 
     glyphs = sFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
-    DecompressGlyphTile(glyphs, (u16 *)gUnknown_03002F90.unk0);
-    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gUnknown_03002F90.unk20));
-    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gUnknown_03002F90.unk40));
-    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gUnknown_03002F90.unk60));
-    gUnknown_03002F90.width = 0x10;
-    gUnknown_03002F90.height = 0x10;
+    DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+    DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
+    DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+    DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);
+    gCurGlyph.width = 0x10;
+    gCurGlyph.height = 0x10;
 }
 
 u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese)

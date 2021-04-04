@@ -33,6 +33,12 @@ struct SpriteCopyRequest
     u16 size;
 };
 
+struct OamDimensions32
+{
+    s32 width;
+    s32 height;
+};
+
 struct OamDimensions
 {
     s8 width;
@@ -240,25 +246,28 @@ static const AffineAnimCmdFunc sAffineAnimCmdFuncs[] =
     AffineAnimCmd_frame,
 };
 
-static const s32 sUnknown_082EC6F4[3][4][2] =
+static const struct OamDimensions32 sOamDimensions32[3][4] =
 {
+    [ST_OAM_SQUARE] = 
     {
-        {8, 8},
-        {0x10, 0x10},
-        {0x20, 0x20},
-        {0x40, 0x40},
+        [SPRITE_SIZE(8x8)]   = {  8,  8 },
+        [SPRITE_SIZE(16x16)] = { 16, 16 },
+        [SPRITE_SIZE(32x32)] = { 32, 32 },
+        [SPRITE_SIZE(64x64)] = { 64, 64 },
     },
+    [ST_OAM_H_RECTANGLE] =
     {
-        {0x10, 8},
-        {0x20, 8},
-        {0x20, 0x10},
-        {0x40, 0x20},
+        [SPRITE_SIZE(16x8)]  = { 16,  8 },
+        [SPRITE_SIZE(32x8)]  = { 32,  8 },
+        [SPRITE_SIZE(32x16)] = { 32, 16 },
+        [SPRITE_SIZE(64x32)] = { 64, 32 },
     },
+    [ST_OAM_V_RECTANGLE] = 
     {
-        {8, 0x10},
-        {8, 0x20},
-        {0x10, 0x20},
-        {0x20, 0x40},
+        [SPRITE_SIZE(8x16)]  = {  8, 16 },
+        [SPRITE_SIZE(8x32)]  = {  8, 32 },
+        [SPRITE_SIZE(16x32)] = { 16, 32 },
+        [SPRITE_SIZE(32x64)] = { 32, 64 },
     },
 };
 
@@ -1233,14 +1242,14 @@ void obj_update_pos2(struct Sprite *sprite, s32 a1, s32 a2)
     u32 matrixNum = sprite->oam.matrixNum;
     if (a1 != 0x800)
     {
-        var0 = sUnknown_082EC6F4[sprite->oam.shape][sprite->oam.size][0];
+        var0 = sOamDimensions32[sprite->oam.shape][sprite->oam.size].width;
         var1 = var0 << 8;
         var2 = (var0 << 16) / gOamMatrices[matrixNum].a;
         sprite->pos2.x = sub_8007E28(var1, var2, a1);
     }
     if (a2 != 0x800)
     {
-        var0 = sUnknown_082EC6F4[sprite->oam.shape][sprite->oam.size][1];
+        var0 = sOamDimensions32[sprite->oam.shape][sprite->oam.size].height;
         var1 = var0 << 8;
         var2 = (var0 << 16) / gOamMatrices[matrixNum].d;
         sprite->pos2.y = sub_8007E28(var1, var2, a2);
@@ -1320,12 +1329,7 @@ void ApplyAffineAnimFrameRelativeAndUpdateMatrix(u8 matrixNum, struct AffineAnim
 s16 ConvertScaleParam(s16 scale)
 {
     s32 val = 0x10000;
-    // UB: possible division by zero
-#ifdef UBFIX
-    if (scale == 0)
-        return 0;
-#endif //UBFIX
-    return val / scale;
+    return SAFE_DIV(val, scale);
 }
 
 void GetAffineAnimFrame(u8 matrixNum, struct Sprite *sprite, struct AffineAnimFrameCmd *frameCmd)

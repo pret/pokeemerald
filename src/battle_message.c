@@ -22,7 +22,6 @@
 #include "constants/abilities.h"
 #include "constants/battle_dome.h"
 #include "constants/battle_string_ids.h"
-#include "constants/berry.h"
 #include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -601,7 +600,7 @@ static const u8 sText_SnowWarningHail[] = _("It started to hail!");
 static const u8 sText_FriskActivates[] = _("{B_ATK_NAME_WITH_PREFIX} frisked {B_DEF_NAME_WITH_PREFIX} and\nfound its {B_LAST_ITEM}!");
 static const u8 sText_UnnerveEnters[] = _("The opposing team is too nervous\nto eat Berries!");
 static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX} harvested\nits {B_LAST_ITEM}!");
-static const u8 sText_MoxieAtkRise[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} raised its Attack!");
+static const u8 sText_LastAbilityRaisedBuff1[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sText_MagicBounceActivates[] = _("The {B_DEF_NAME_WITH_PREFIX} bounced the\n{B_ATK_NAME_WITH_PREFIX} back!");
 static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} transformed\nit into the {B_BUFF1} type!");
 static const u8 sText_SymbiosisItemPass[] = _("{B_ATK_NAME_WITH_PREFIX} passed its {B_LAST_ITEM}\nto {B_SCR_ACTIVE_NAME_WITH_PREFIX} through {B_ATK_ABILITY}!");
@@ -691,9 +690,17 @@ static const u8 sText_BattlerAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PR
 static const u8 sText_ASandstormKickedUp[] = _("A sandstorm kicked up!");
 static const u8 sText_PkmnsWillPerishIn3Turns[] = _("Both Pokémon will perish\nin three turns!");
 static const u8 sText_AbilityRaisedStatDrastically[] = _("{B_DEF_ABILITY} raised {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} drastically!");
+static const u8 sText_AsOneEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} has two Abilities!");
+static const u8 sText_CuriousMedicineEnters[] = _("{B_EFF_NAME_WITH_PREFIX}'s\nstat changes were reset!");
+static const u8 sText_CanActFaster[] = _("{B_ATK_NAME_WITH_PREFIX} can act faster,\nthanks to {B_LAST_ITEM}!");
+static const u8 sText_MicleBerryActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted the accuracy of its\nnext move using {B_LAST_ITEM}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_MICLEBERRYACTIVATES - 12] = sText_MicleBerryActivates,
+    [STRINGID_CANACTFASTERTHANKSTO - 12] = sText_CanActFaster,
+    [STRINGID_CURIOUSMEDICINEENTERS - 12] = sText_CuriousMedicineEnters,
+    [STRINGID_ASONEENTERS - 12] = sText_AsOneEnters,
     [STRINGID_ABILITYRAISEDSTATDRASTICALLY - 12] = sText_AbilityRaisedStatDrastically,
     [STRINGID_PKMNSWILLPERISHIN3TURNS - 12] = sText_PkmnsWillPerishIn3Turns,
     [STRINGID_ASANDSTORMKICKEDUP - 12] = sText_ASandstormKickedUp,
@@ -1185,7 +1192,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_FRISKACTIVATES - 12] = sText_FriskActivates,
     [STRINGID_UNNERVEENTERS - 12] = sText_UnnerveEnters,
     [STRINGID_HARVESTBERRY - 12] = sText_HarvestBerry,
-    [STRINGID_MOXIEATKRISE - 12] = sText_MoxieAtkRise,
+    [STRINGID_LASTABILITYRAISEDSTAT - 12] = sText_LastAbilityRaisedBuff1,
     [STRINGID_MAGICBOUNCEACTIVATES - 12] = sText_MagicBounceActivates,
     [STRINGID_PROTEANTYPECHANGE - 12] = sText_ProteanTypeChange,
     [STRINGID_SYMBIOSISITEMPASS - 12] = sText_SymbiosisItemPass,
@@ -1287,6 +1294,8 @@ const u16 gSwitchInAbilityStringIds[] =
     [MULTI_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS,
     [MULTI_SWITCHIN_COMATOSE] = STRINGID_COMATOSEENTERS,
     [MULTI_SWITCHIN_SCREENCLEANER] = STRINGID_SCREENCLEANERENTERS,
+    [MULTI_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
+    [MULTI_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
 };
 
 const u16 gMissStringIds[] =
@@ -3591,7 +3600,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 
     if (printerTemplate.x == 0xFF)
     {
-        u32 width = sub_80397C4(gBattleScripting.windowsType, windowId);
+        u32 width = GetBattleWindowTemplatePixelWidth(gBattleScripting.windowsType, windowId);
         s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(printerTemplate.fontId, printerTemplate.currentChar, width, printerTemplate.letterSpacing);
         printerTemplate.x = printerTemplate.currentX = alignX;
     }

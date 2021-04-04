@@ -107,7 +107,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge:: @ 8200A2A
 	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
 	compare VAR_RESULT, 2
 	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge
@@ -123,7 +123,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge:: @ 8200A78
 FallarborTown_BattleTentBattleRoom_EventScript_AskRetireChallenge:: @ 8200AA6
 	message BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost

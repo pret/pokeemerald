@@ -262,7 +262,7 @@ bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
 void CreateTask_RfuIdle(void);
 void DestroyTask_RfuIdle(void);
-void sub_8011AC8(void);
+void ClearRecvCommands(void);
 void LinkRfu_FatalError(void);
 bool32 sub_8011A9C(void);
 void sub_80104B0(void);

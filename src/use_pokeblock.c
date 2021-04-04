@@ -486,7 +486,7 @@ static void LoadUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        sMenu->curMonSpriteId = 0xFF;
+        sMenu->curMonSpriteId = SPRITE_NONE;
         InitConditionGraphData(&sMenu->graph);
         sInfo->mainState++;
         break;
@@ -569,7 +569,7 @@ static void ShowUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_UsePokeblockMenu);
         ShowBg(0);
         ShowBg(1);
@@ -695,7 +695,7 @@ static void FeedPokeblockToMon(void)
         gPokeblockMonId = GetPartyIdFromSelectionId(sMenu->info.curSelection);
         sExitCallback = sInfo->exitCallback;
         sPokeblock = sInfo->pokeblock;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 1:
@@ -739,7 +739,7 @@ static void ShowUsePokeblockMenuForResults(void)
     case 2:
         break;
     case 3:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 4:
@@ -751,7 +751,7 @@ static void ShowUsePokeblockMenuForResults(void)
         break;
     case 5:
         SetVBlankCallback(VBlankCB_UsePokeblockMenu);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 6:
@@ -827,7 +827,7 @@ static void CloseUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 1:
@@ -853,7 +853,7 @@ static void CloseUsePokeblockMenu(void)
         for (i = 0; i < ARRAY_COUNT(sMenu->condition); i++)
             DestroySprite(sMenu->condition[i]);
 
-        if (sMenu->curMonSpriteId != 0xFF)
+        if (sMenu->curMonSpriteId != SPRITE_NONE)
             DestroySprite(&gSprites[sMenu->curMonSpriteId]);
 
         SetVBlankCallback(NULL);
@@ -1215,7 +1215,7 @@ static void UpdateMonPic(u8 loadId)
     struct SpriteSheet spriteSheet;
     struct SpritePalette spritePal;
 
-    if (sMenu->curMonSpriteId == 0xFF)
+    if (sMenu->curMonSpriteId == SPRITE_NONE)
     {
         LoadConditionMonPicTemplate(&spriteSheet, &spriteTemplate, &spritePal);
         spriteSheet.data = sMenu->partySheets[loadId];
@@ -1228,7 +1228,7 @@ static void UpdateMonPic(u8 loadId)
         {
             FreeSpriteTilesByTag(TAG_CONDITION_MON);
             FreeSpritePaletteByTag(TAG_CONDITION_MON);
-            sMenu->curMonSpriteId = 0xFF;
+            sMenu->curMonSpriteId = SPRITE_NONE;
         }
         else
         {
@@ -1241,7 +1241,7 @@ static void UpdateMonPic(u8 loadId)
     }
     else
     {
-        Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, 0x800);
+        Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, MON_PIC_SIZE);
         LoadPalette(sMenu->partyPalettes[loadId], sMenu->curMonPalette, 32);
     }
 }

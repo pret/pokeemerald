@@ -518,15 +518,11 @@
 #define B_ANIM_INGRAIN_HEAL             21
 #define B_ANIM_WISH_HEAL                22
 #define B_ANIM_MEGA_EVOLUTION           23
-#define B_ANIM_TERRAIN_MISTY            24
-#define B_ANIM_TERRAIN_GRASSY           25
-#define B_ANIM_TERRAIN_ELECTRIC         26
-#define B_ANIM_TERRAIN_PSYCHIC          27
-#define B_ANIM_ILLUSION_OFF             28
-#define B_ANIM_FORM_CHANGE              29
-#define B_ANIM_SLIDE_OFFSCREEN          30 // for Emergency Exit
-#define B_ANIM_RESTORE_BG               31 // for Terrain Endings
-#define B_ANIM_TOTEM_FLARE              32 // Totem boosts aura flare
+#define B_ANIM_ILLUSION_OFF             24
+#define B_ANIM_FORM_CHANGE              25
+#define B_ANIM_SLIDE_OFFSCREEN          26 // for Emergency Exit
+#define B_ANIM_RESTORE_BG               27 // for Terrain Endings
+#define B_ANIM_TOTEM_FLARE              28 // Totem boosts aura flare
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

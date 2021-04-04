@@ -20,8 +20,8 @@ struct HailStruct {
     s32 unk3:4;
 };
 
-static void sub_810B6C4(struct Sprite *);
-static void sub_810B848(struct Sprite *);
+static void AnimUnused_810B6C4(struct Sprite *);
+static void AnimUnused_810B6C4_Step(struct Sprite *);
 static void AnimIcePunchSwirlingParticle(struct Sprite *);
 static void AnimIceBeamParticle(struct Sprite *);
 static void AnimFlickerIceEffectParticle(struct Sprite *);
@@ -40,27 +40,27 @@ static void InitIceBallAnim(struct Sprite *);
 static void AnimThrowIceBall(struct Sprite *);
 static void InitIceBallParticle(struct Sprite *);
 static void AnimIceBallParticle(struct Sprite *);
-static void AnimTask_Haze2(u8);
-static void AnimTask_OverlayFogTiles(u8);
+static void AnimTask_HazeScrollingFog_Step(u8);
+static void AnimTask_LoadMistTiles_Step(u8);
 static void AnimTask_Hail2(u8);
 static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c);
 static void AvalancheAnim_Step(struct Sprite *sprite);
 static void AvalancheAnim_Step2(struct Sprite *sprite);
 
-static const union AnimCmd gUnknown_08595A48[] =
+static const union AnimCmd sAnim_Unused_08595A48[] =
 {
     ANIMCMD_FRAME(0, 5, .hFlip = TRUE),
     ANIMCMD_FRAME(1, 5, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const gUnknown_08595A54[] =
+static const union AnimCmd *const sAnims_Unused_08595A54[] =
 {
-    gUnknown_08595A48,
+    sAnim_Unused_08595A48,
 };
 
 // Unused
-const struct SpriteTemplate gUnknown_08595A58 =
+const struct SpriteTemplate gUnusedSpriteTemplate_08595A58 =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -68,10 +68,10 @@ const struct SpriteTemplate gUnknown_08595A58 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810B6C4,
+    .callback = AnimUnused_810B6C4,
 };
 
-static const union AnimCmd gUnknown_08595A70[] =
+static const union AnimCmd sAnim_Unused_08595A70[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
@@ -109,9 +109,9 @@ static const union AnimCmd sAnim_SmallBubblePair[] =
 };
 
 // Unused
-static const union AnimCmd *const gUnknown_08595AA4[] =
+static const union AnimCmd *const sAnims_Unused_08595AA4[] =
 {
-    gUnknown_08595A70,
+    sAnim_Unused_08595A70,
 };
 
 const union AnimCmd *const gAnims_IceCrystalLarge[] =
@@ -335,7 +335,7 @@ const struct SpriteTemplate gSmogCloudSpriteTemplate =
     .callback = InitSwirlingFogAnim,
 };
 
-static const u8 sUnknown_08595C5C[] =
+static const u8 sHazeBlendAmounts[] =
 {
     0, 1, 2, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6, 6, 6, 7, 8, 8, 8, 9,
 };
@@ -351,7 +351,7 @@ const struct SpriteTemplate gMistBallSpriteTemplate =
     .callback = AnimThrowMistBall,
 };
 
-static const u8 sUnknown_08595C88[] =
+static const u8 wMistBlendAmounts[] =
 {
     0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5,
 };
@@ -607,7 +607,7 @@ static void AvalancheAnim_Step2(struct Sprite *sprite)
 }
 
 // Unused
-static void sub_810B6C4(struct Sprite *sprite)
+static void AnimUnused_810B6C4(struct Sprite *sprite)
 {
     s16 targetX, targetY, attackerX, attackerY;
 
@@ -643,10 +643,10 @@ static void sub_810B6C4(struct Sprite *sprite)
     sub_80A64EC(sprite);
     sprite->data[3] = gBattleAnimArgs[5];
     sprite->data[4] = gBattleAnimArgs[6];
-    sprite->callback = sub_810B848;
+    sprite->callback = AnimUnused_810B6C4_Step;
 }
 
-static void sub_810B848(struct Sprite *sprite)
+static void AnimUnused_810B6C4_Step(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
     {
@@ -793,7 +793,7 @@ static void AnimSwirlingSnowball(struct Sprite *sprite)
     for (i = 0; i < 8; i++)
         sprite->data[i] = tempDataHolder[i];
 
-    sprite->callback = sub_80A718C;
+    sprite->callback = InitAnimFastLinearTranslationWithSpeedAndPos;
     StoreSpriteCallbackInData6(sprite, AnimSwirlingSnowball_Step1);
 }
 
@@ -1081,15 +1081,15 @@ void AnimTask_HazeScrollingFog(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
-    LoadPalette(&gUnknown_083970E8, animBg.paletteId * 16, 32);
+    LoadPalette(&gFogPalette, animBg.paletteId * 16, 32);
 
-    gTasks[taskId].func = AnimTask_Haze2;
+    gTasks[taskId].func = AnimTask_HazeScrollingFog_Step;
 }
 
-static void AnimTask_Haze2(u8 taskId)
+static void AnimTask_HazeScrollingFog_Step(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -1103,7 +1103,7 @@ static void AnimTask_Haze2(u8 taskId)
         {
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[9]++;
-            gTasks[taskId].data[11] = sUnknown_08595C5C[gTasks[taskId].data[9]];
+            gTasks[taskId].data[11] = sHazeBlendAmounts[gTasks[taskId].data[9]];
 
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[11], 16 - gTasks[taskId].data[11]));
             if (gTasks[taskId].data[11] == 9)
@@ -1135,12 +1135,10 @@ static void AnimTask_Haze2(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
-        sub_80A6C68(1);
-        sub_80A6C68(2);
-
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(1);
+        ClearBattleAnimBg(2);
         gTasks[taskId].data[12]++;
-
         // fall through
     case 4:
         if (!IsContest())
@@ -1188,16 +1186,16 @@ void AnimTask_LoadMistTiles(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
-    LoadPalette(&gUnknown_083970E8, animBg.paletteId * 16, 32);
+    LoadPalette(&gFogPalette, animBg.paletteId * 16, 32);
 
     gTasks[taskId].data[15] = -1;
-    gTasks[taskId].func = AnimTask_OverlayFogTiles;
+    gTasks[taskId].func = AnimTask_LoadMistTiles_Step;
 }
 
-static void AnimTask_OverlayFogTiles(u8 taskId)
+static void AnimTask_LoadMistTiles_Step(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -1208,7 +1206,7 @@ static void AnimTask_OverlayFogTiles(u8 taskId)
     {
     case 0:
         gTasks[taskId].data[9] += 1;
-        gTasks[taskId].data[11] = sUnknown_08595C88[gTasks[taskId].data[9]];
+        gTasks[taskId].data[11] = wMistBlendAmounts[gTasks[taskId].data[9]];
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[11], 17 - gTasks[taskId].data[11]));
         if (gTasks[taskId].data[11] == 5)
         {
@@ -1237,9 +1235,9 @@ static void AnimTask_OverlayFogTiles(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
-        sub_80A6C68(1);
-        sub_80A6C68(2);
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(1);
+        ClearBattleAnimBg(2);
 
         gTasks[taskId].data[12]++;
 
@@ -1394,7 +1392,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
 
             sprite->data[7]++;
             sprite->pos2.x = sprite->pos2.y = 0;
-            sub_80A6FD4(sprite);
+            InitAnimLinearTranslationWithSpeed(sprite);
         }
         break;
     case 2:

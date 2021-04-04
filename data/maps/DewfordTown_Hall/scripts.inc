@@ -10,7 +10,7 @@ DewfordTown_Hall_EventScript_Girl:: @ 81FD4D0
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
-	special TrendyPhraseIsOld
+	special IsTrendyPhraseBoring
 	compare VAR_RESULT, TRUE
 	goto_if_eq DewfordTown_Hall_EventScript_GirlBoredOfTrend
 	msgbox DewfordTown_Hall_Text_CantImagineLifeWithoutTrend, MSGBOX_DEFAULT

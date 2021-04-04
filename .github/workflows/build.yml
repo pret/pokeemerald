@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+      - battle_engine
+      - pokemon_expansion
+      - item_expansion
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install binutils
+        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
+        # build-essential, git, and libpng-dev are already installed
+        # gcc-arm-none-eabi is only needed for the modern build
+        # as an alternative to dkP
+
+      - name: Install agbcc
+        run: |
+          git clone https://github.com/pret/agbcc.git
+          cd agbcc 
+          ./build.sh
+          ./install.sh ../
+
+      - name: Agbcc
+        run: make -j${nproc} 
+
+      - name: Modern
+        run: make -j${nproc} modern

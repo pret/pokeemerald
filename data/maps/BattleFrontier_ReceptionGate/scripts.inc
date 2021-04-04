@@ -218,7 +218,7 @@ BattleFrontier_ReceptionGate_EventScript_RulesGuide:: @ 8266436
 BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout:: @ 8266446
 	message BattleFrontier_ReceptionGate_Text_LearnAboutWhat
 	waitmessage
-	multichoice 15, 0, MULTI_FRONTIER_RULES, 0
+	multichoice 15, 0, MULTI_FRONTIER_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_LevelMode
 	case 1, BattleFrontier_ReceptionGate_EventScript_Level50
@@ -269,7 +269,7 @@ BattleFrontier_ReceptionGate_EventScript_FrontierPassGuide:: @ 82664F4
 BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout:: @ 8266504
 	message BattleFrontier_ReceptionGate_Text_LearnAboutWhich1
 	waitmessage
-	multichoice 16, 4, MULTI_FRONTIER_PASS_INFO, 0
+	multichoice 16, 4, MULTI_FRONTIER_PASS_INFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_Symbols
 	case 1, BattleFrontier_ReceptionGate_EventScript_RecordBattle

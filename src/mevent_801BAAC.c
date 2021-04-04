@@ -186,7 +186,7 @@ s32 FadeToWonderCardMenu(void)
     switch(sWonderCardData->unk_0174)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -231,7 +231,7 @@ s32 FadeToWonderCardMenu(void)
             ShowBg(2);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sub_801C4C0();
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
@@ -251,7 +251,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
     switch (sWonderCardData->unk_0174)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -279,7 +279,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
         case 5:
             PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             CopyBgTilemapBufferToVram(0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             break;
         default:
             if (UpdatePaletteFade())
@@ -420,7 +420,7 @@ void sub_801C4C0(void)
     sWonderCardData->unk_017C = 0xFF;
     if (sWonderCardData->unk_014C.unk_06 != SPECIES_NONE)
     {
-        sWonderCardData->unk_017C = sub_80D2D78(sub_80D2E84(sWonderCardData->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0);
+        sWonderCardData->unk_017C = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0);
         gSprites[sWonderCardData->unk_017C].oam.priority = 2;
     }
     if (sWonderCardData->unk_0000.unk_09 != 0 && sWonderCardData->unk_0000.unk_08_0 == 1)
@@ -434,7 +434,7 @@ void sub_801C4C0(void)
             sWonderCardData->unk_017D[r7][0] = CreateSprite(&gUnknown_082F1D48, 0xd8 - 32 * r7, 0x90, 8);
             if (sWonderCardData->unk_014C.unk_08[0][r7] != 0)
             {
-                sWonderCardData->unk_017D[r7][1] = sub_80D2D78(sub_80D2E84(sWonderCardData->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0);
+                sWonderCardData->unk_017D[r7][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0);
             }
         }
     }
@@ -575,7 +575,7 @@ s32 FadeToWonderNewsMenu(void)
     switch (sWonderNewsData->unk_01C0_1)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -629,7 +629,7 @@ s32 FadeToWonderNewsMenu(void)
             ShowBg(3);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sWonderNewsData->unk_01C1 = AddScrollIndicatorArrowPair(&sWonderNewsData->unk_0394, &sWonderNewsData->unk_01C6);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
@@ -650,7 +650,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
     switch (sWonderNewsData->unk_01C0_1)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -692,7 +692,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
             MG_DrawCheckerboardPattern(3);
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(3);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             break;
         default:
             if (UpdatePaletteFade())
