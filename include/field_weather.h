@@ -50,8 +50,8 @@ struct Weather
     u8 fadeScreenCounter;
     bool8 readyForInit;
     u8 taskId;
-    u8 unknown_6CA;
-    u8 unknown_6CB;
+    u8 fadeInFirstFrame;
+    u8 fadeInTimer;
     u16 initStep;
     u16 finishStep;
     u8 currWeather;
@@ -71,7 +71,7 @@ struct Weather
     u8 cloudSpritesCreated;
     // Snow
     u16 snowflakeVisibleCounter;
-    u16 unknown_6E2;
+    u16 snowflakeTimer;
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
     // Thunderstorm
@@ -90,7 +90,7 @@ struct Weather
     u8 fogHSpritesCreated;
     // Ash
     u16 ashBaseSpritesX;
-    u16 unknown_6FE;
+    u16 ashUnused;
     u8 ashSpritesCreated;
     // Sandstorm
     u32 sandstormXOffset;
@@ -152,7 +152,6 @@ void FadeScreen(u8 mode, s8 delay);
 bool8 IsWeatherNotFadingIn(void);
 void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex);
 void ApplyWeatherGammaShiftToPal(u8 paletteIndex);
-u8 sub_80ABF20(void);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
