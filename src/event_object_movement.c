@@ -36,6 +36,8 @@
 #define sObjEventId   data[0]
 #define sTypeFuncId   data[1] // Index into corresponding gMovementTypeFuncs_* table
 #define sActionFuncId data[2] // Index into corresponding gMovementActionFuncs_* table
+#define sDirection    data[3]
+#define sSpeed        data[4]
 
 
 #define movement_type_def(setup, table) \
@@ -135,7 +137,7 @@ static void CameraObject_2(struct Sprite *);
 static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count);
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
-static void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
+static void SetSpriteDataForNormalStep(struct Sprite *, u8, u8);
 static void InitSpriteForFigure8Anim(struct Sprite *sprite);
 static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 static void UpdateObjectEventSprite(struct Sprite *);
@@ -147,6 +149,7 @@ static u8 DoJumpSpriteMovement(struct Sprite *sprite);
 static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite);
 static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
+static bool8 NpcTakeStep(struct Sprite *sprite);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
@@ -4620,58 +4623,53 @@ u8 GetRunningDirectionAnimNum(u8 direction)
     return sRunningDirectionAnimNums[direction];
 }
 
-static const struct UnkStruct_085094AC *sub_8092A4C(const union AnimCmd *const *anims)
+static const struct StepAnimTable *GetStepAnimTable(const union AnimCmd *const *anims)
 {
-    const struct UnkStruct_085094AC *retval;
+    const struct StepAnimTable *stepTable;
 
-    for (retval = gUnknown_085094AC; retval->anims != NULL; retval++)
+    for (stepTable = sStepAnimTables; stepTable->anims != NULL; stepTable++)
     {
-        if (retval->anims == anims)
-            return retval;
+        if (stepTable->anims == anims)
+            return stepTable;
     }
     return NULL;
 }
 
-void npc_apply_anim_looping(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 animNum)
+void SetStepAnimHandleAlternation(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 animNum)
 {
-    const struct UnkStruct_085094AC *unk85094AC;
+    const struct StepAnimTable *stepTable;
 
     if (!objectEvent->inanimate)
     {
         sprite->animNum = animNum;
-        unk85094AC = sub_8092A4C(sprite->anims);
-        if (unk85094AC != NULL)
+        stepTable = GetStepAnimTable(sprite->anims);
+        if (stepTable != NULL)
         {
-            if (sprite->animCmdIndex == unk85094AC->animPos[0])
-            {
-                sprite->animCmdIndex = unk85094AC->animPos[3];
-            }
-            else if (sprite->animCmdIndex == unk85094AC->animPos[1])
-            {
-                sprite->animCmdIndex = unk85094AC->animPos[2];
-            }
+            if (sprite->animCmdIndex == stepTable->animPos[0])
+                sprite->animCmdIndex  = stepTable->animPos[3];
+            else if (sprite->animCmdIndex == stepTable->animPos[1])
+                sprite->animCmdIndex = stepTable->animPos[2];
         }
         SeekSpriteAnim(sprite, sprite->animCmdIndex);
     }
 }
 
-void obj_npc_animation_step(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 animNum)
+void SetStepAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 animNum)
 {
-    const struct UnkStruct_085094AC *unk85094AC;
+    const struct StepAnimTable *stepTable;
 
     if (!objectEvent->inanimate)
     {
         u8 animPos;
 
         sprite->animNum = animNum;
-        unk85094AC = sub_8092A4C(sprite->anims);
-        if (unk85094AC != NULL)
+        stepTable = GetStepAnimTable(sprite->anims);
+        if (stepTable != NULL)
         {
-            animPos = unk85094AC->animPos[1];
-            if (sprite->animCmdIndex <= unk85094AC->animPos[0])
-            {
-                animPos = unk85094AC->animPos[0];
-            }
+            animPos = stepTable->animPos[1];
+            if (sprite->animCmdIndex <= stepTable->animPos[0])
+                animPos = stepTable->animPos[0];
+
             SeekSpriteAnim(sprite, animPos);
         }
     }
@@ -5118,7 +5116,7 @@ static void FaceDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite
 {
     SetObjectEventDirection(objectEvent, direction);
     ShiftStillObjectEventCoords(objectEvent);
-    obj_npc_animation_step(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+    SetStepAnim(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
     sprite->animPaused = TRUE;
     sprite->sActionFuncId = 1;
 }
@@ -5147,7 +5145,7 @@ bool8 MovementAction_FaceRight_Step0(struct ObjectEvent *objectEvent, struct Spr
     return TRUE;
 }
 
-void npc_apply_direction(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
+void InitNpcForMovement(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
     s16 x;
     s16 y;
@@ -5157,12 +5155,12 @@ void npc_apply_direction(struct ObjectEvent *objectEvent, struct Sprite *sprite,
     SetObjectEventDirection(objectEvent, direction);
     MoveCoords(direction, &x, &y);
     ShiftObjectEventCoords(objectEvent, x, y);
-    oamt_npc_ministep_reset(sprite, direction, speed);
+    SetSpriteDataForNormalStep(sprite, direction, speed);
     sprite->animPaused = FALSE;
+
     if (sLockedAnimObjectEvents != NULL && FindLockedObjectEventIndex(objectEvent) != OBJECT_EVENTS_COUNT)
-    {
         sprite->animPaused = TRUE;
-    }
+
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     sprite->sActionFuncId = 1;
 }
@@ -5172,19 +5170,19 @@ static void InitMovementNormal(struct ObjectEvent *objectEvent, struct Sprite *s
     u8 (*functions[ARRAY_COUNT(sDirectionAnimFuncsBySpeed)])(u8);
 
     memcpy(functions, sDirectionAnimFuncsBySpeed, sizeof sDirectionAnimFuncsBySpeed);
-    npc_apply_direction(objectEvent, sprite, direction, speed);
-    npc_apply_anim_looping(objectEvent, sprite, functions[speed](objectEvent->facingDirection));
+    InitNpcForMovement(objectEvent, sprite, direction, speed);
+    SetStepAnimHandleAlternation(objectEvent, sprite, functions[speed](objectEvent->facingDirection));
 }
 
 static void StartRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
-    npc_apply_direction(objectEvent, sprite, direction, 1);
-    npc_apply_anim_looping(objectEvent, sprite, GetRunningDirectionAnimNum(objectEvent->facingDirection));
+    InitNpcForMovement(objectEvent, sprite, direction, 1);
+    SetStepAnimHandleAlternation(objectEvent, sprite, GetRunningDirectionAnimNum(objectEvent->facingDirection));
 }
 
 static bool8 UpdateMovementNormal(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (obj_npc_ministep(sprite))
+    if (NpcTakeStep(sprite))
     {
         ShiftStillObjectEventCoords(objectEvent);
         objectEvent->triggerGroundEffectsOnStop = TRUE;
@@ -5213,7 +5211,7 @@ static void InitNpcForWalkSlow(struct ObjectEvent *objectEvent, struct Sprite *s
 static void InitWalkSlow(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
     InitNpcForWalkSlow(objectEvent, sprite, direction);
-    npc_apply_anim_looping(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+    SetStepAnimHandleAlternation(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
 }
 
 static bool8 UpdateWalkSlow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -5495,11 +5493,11 @@ enum {
 
 static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed, u8 type)
 {
-    s16 displacements[ARRAY_COUNT(gUnknown_0850DFBC)];
+    s16 displacements[ARRAY_COUNT(sJumpInitDisplacements)];
     s16 x;
     s16 y;
 
-    memcpy(displacements, gUnknown_0850DFBC, sizeof gUnknown_0850DFBC);
+    memcpy(displacements, sJumpInitDisplacements, sizeof sJumpInitDisplacements);
     x = 0;
     y = 0;
     SetObjectEventDirection(objectEvent, direction);
@@ -5515,24 +5513,24 @@ static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 
 static void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed, u8 type)
 {
     InitJump(objectEvent, sprite, direction, speed, type);
-    npc_apply_anim_looping(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+    SetStepAnimHandleAlternation(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
     DoShadowFieldEffect(objectEvent);
 }
 
 static u8 UpdateJumpAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 callback(struct Sprite *))
 {
-    s16 displacements[ARRAY_COUNT(gUnknown_0850DFC2)];
+    s16 displacements[ARRAY_COUNT(sJumpDisplacements)];
     s16 x;
     s16 y;
     u8 result;
 
-    memcpy(displacements, gUnknown_0850DFC2, sizeof gUnknown_0850DFC2);
+    memcpy(displacements, sJumpDisplacements, sizeof sJumpDisplacements);
     result = callback(sprite);
-    if (result == JUMP_HALFWAY && displacements[sprite->data[4]] != 0)
+    if (result == JUMP_HALFWAY && displacements[sprite->sSpeed] != 0)
     {
         x = 0;
         y = 0;
-        MoveCoordsInDirection(objectEvent->movementDirection, &x, &y, displacements[sprite->data[4]], displacements[sprite->data[4]]);
+        MoveCoordsInDirection(objectEvent->movementDirection, &x, &y, displacements[sprite->sSpeed], displacements[sprite->sSpeed]);
         ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
         objectEvent->triggerGroundEffectsOnMove = TRUE;
         objectEvent->disableCoveringGroundEffects = TRUE;
@@ -5581,7 +5579,7 @@ static bool8 DoJumpInPlaceAnim(struct ObjectEvent *objectEvent, struct Sprite *s
             return TRUE;
         case JUMP_HALFWAY:
             SetObjectEventDirection(objectEvent, GetOppositeDirection(objectEvent->movementDirection));
-            obj_npc_animation_step(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+            SetStepAnim(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
         default:
             return FALSE;
     }
@@ -5769,7 +5767,7 @@ bool8 MovementAction_WalkFastRight_Step1(struct ObjectEvent *objectEvent, struct
 static void InitMoveInPlace(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 animNum, u16 duration)
 {
     SetObjectEventDirection(objectEvent, direction);
-    npc_apply_anim_looping(objectEvent, sprite, animNum);
+    SetStepAnimHandleAlternation(objectEvent, sprite, animNum);
     sprite->animPaused = FALSE;
     sprite->sActionFuncId = 1;
     sprite->data[3] = duration;
@@ -6770,7 +6768,7 @@ static void AcroWheelieFaceDirection(struct ObjectEvent *objectEvent, struct Spr
 {
     SetObjectEventDirection(objectEvent, direction);
     ShiftStillObjectEventCoords(objectEvent);
-    obj_npc_animation_step(objectEvent, sprite, GetAcroWheeliePedalDirectionAnimNum(direction));
+    SetStepAnim(objectEvent, sprite, GetAcroWheeliePedalDirectionAnimNum(direction));
     sprite->animPaused = TRUE;
     sprite->sActionFuncId = 1;
 }
@@ -7143,7 +7141,7 @@ bool8 MovementAction_AcroWheelieInPlaceRight_Step0(struct ObjectEvent *objectEve
 
 static void InitAcroPopWheelie(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
-    npc_apply_direction(objectEvent, sprite, direction, speed);
+    InitNpcForMovement(objectEvent, sprite, direction, speed);
     StartSpriteAnim(sprite, GetAcroWheelieDirectionAnimNum(objectEvent->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
@@ -7214,8 +7212,8 @@ bool8 MovementAction_AcroPopWheelieMoveRight_Step1(struct ObjectEvent *objectEve
 
 static void InitAcroWheelieMove(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
-    npc_apply_direction(objectEvent, sprite, direction, speed);
-    npc_apply_anim_looping(objectEvent, sprite, GetAcroWheeliePedalDirectionAnimNum(objectEvent->facingDirection));
+    InitNpcForMovement(objectEvent, sprite, direction, speed);
+    SetStepAnimHandleAlternation(objectEvent, sprite, GetAcroWheeliePedalDirectionAnimNum(objectEvent->facingDirection));
 }
 
 bool8 MovementAction_AcroWheelieMoveDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -7284,7 +7282,7 @@ bool8 MovementAction_AcroWheelieMoveRight_Step1(struct ObjectEvent *objectEvent,
 
 static void InitAcroEndWheelie(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
-    npc_apply_direction(objectEvent, sprite, direction, speed);
+    InitNpcForMovement(objectEvent, sprite, direction, speed);
     StartSpriteAnim(sprite, GetAcroEndWheelieDirectionAnimNum(objectEvent->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
@@ -8280,16 +8278,18 @@ static void Step8(struct Sprite *sprite, u8 dir)
     sprite->pos1.y += 8 * (u16) sDirectionToVectors[dir].y;
 }
 
-static void oamt_npc_ministep_reset(struct Sprite *sprite, u8 direction, u8 a3)
+#define sTimer data[5]
+
+static void SetSpriteDataForNormalStep(struct Sprite *sprite, u8 direction, u8 speed)
 {
-    sprite->data[3] = direction;
-    sprite->data[4] = a3;
-    sprite->data[5] = 0;
+    sprite->sDirection = direction;
+    sprite->sSpeed = speed;
+    sprite->sTimer = 0;
 }
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 direction);
 
-static const SpriteStepFunc gUnknown_0850E6C4[] = {
+static const SpriteStepFunc sStep1Funcs[] = {
     Step1,
     Step1,
     Step1,
@@ -8308,7 +8308,7 @@ static const SpriteStepFunc gUnknown_0850E6C4[] = {
     Step1,
 };
 
-static const SpriteStepFunc gUnknown_0850E704[] = {
+static const SpriteStepFunc sStep2Funcs[] = {
     Step2,
     Step2,
     Step2,
@@ -8319,7 +8319,7 @@ static const SpriteStepFunc gUnknown_0850E704[] = {
     Step2,
 };
 
-static const SpriteStepFunc gUnknown_0850E724[] = {
+static const SpriteStepFunc sStep3Funcs[] = {
     Step2,
     Step3,
     Step3,
@@ -8328,46 +8328,47 @@ static const SpriteStepFunc gUnknown_0850E724[] = {
     Step3,
 };
 
-static const SpriteStepFunc gUnknown_0850E73C[] = {
+static const SpriteStepFunc sStep4Funcs[] = {
     Step4,
     Step4,
     Step4,
     Step4,
 };
 
-static const SpriteStepFunc gUnknown_0850E74C[] = {
+static const SpriteStepFunc sStep8Funcs[] = {
     Step8,
     Step8,
 };
 
-static const SpriteStepFunc *const gUnknown_0850E754[] = {
-    gUnknown_0850E6C4,
-    gUnknown_0850E704,
-    gUnknown_0850E724,
-    gUnknown_0850E73C,
-    gUnknown_0850E74C,
+static const SpriteStepFunc *const sNpcStepFuncTables[] = {
+    sStep1Funcs,
+    sStep2Funcs,
+    sStep3Funcs,
+    sStep4Funcs,
+    sStep8Funcs,
 };
 
-static const s16 gUnknown_0850E768[] = {
+static const s16 sStepTimes[] = {
     16, 8, 6, 4, 2
 };
 
-bool8 obj_npc_ministep(struct Sprite *sprite)
+static bool8 NpcTakeStep(struct Sprite *sprite)
 {
-    if (sprite->data[5] >= gUnknown_0850E768[sprite->data[4]])
+    if (sprite->sTimer >= sStepTimes[sprite->sSpeed])
         return FALSE;
 
-    gUnknown_0850E754[sprite->data[4]][sprite->data[5]](sprite, sprite->data[3]);
+    sNpcStepFuncTables[sprite->sSpeed][sprite->sTimer](sprite, sprite->sDirection);
 
-    sprite->data[5]++;
+    sprite->sTimer++;
 
-    if (sprite->data[5] < gUnknown_0850E768[sprite->data[4]])
+    if (sprite->sTimer < sStepTimes[sprite->sSpeed])
         return FALSE;
 
     return TRUE;
 }
 
-#define sDirection data[3]
+#undef sTimer
+
 #define sTimer     data[4]
 #define sNumSteps  data[5]
 
@@ -8394,7 +8395,6 @@ static bool8 UpdateWalkSlowAnim(struct Sprite *sprite)
         return FALSE;
 }
 
-#undef sDirection
 #undef sTimer
 #undef sNumSteps
 
@@ -8501,8 +8501,6 @@ static s16 GetJumpY(s16 i, u8 type)
     return sJumpYTable[type][i];
 }
 
-#define sDirection data[3]
-#define sSpeed     data[4]
 #define sJumpType  data[5]
 #define sTimer     data[6]
 
@@ -8564,7 +8562,6 @@ static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite)
     return result;
 }
 
-#undef sDirection
 #undef sSpeed
 #undef sJumpType
 #undef sTimer

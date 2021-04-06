@@ -47,7 +47,7 @@ enum ReflectionTypes
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
 
-struct UnkStruct_085094AC
+struct StepAnimTable
 {
     const union AnimCmd *const *anims;
     u8 animPos[4];
@@ -174,7 +174,6 @@ void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 bool8 IsZCoordMismatchAt(u8, s16, s16);
 void UnfreezeObjectEvent(struct ObjectEvent *);
 u8 FindLockedObjectEventIndex(struct ObjectEvent *);
-bool8 obj_npc_ministep(struct Sprite *sprite);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
 void UnfreezeObjectEvents(void);

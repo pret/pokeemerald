@@ -1143,7 +1143,8 @@ static const union AffineAnimCmd *const sAffineAnimTable_KyogreGroudon[] = {
     sAffineAnim_KyogreGroudon_DipEast,      // Unused
 };
 
-const struct UnkStruct_085094AC gUnknown_085094AC[] = {
+// For animations with alternating steps
+static const struct StepAnimTable sStepAnimTables[] = {
     {
         .anims = sAnimTable_QuintyPlump,
         .animPos = {1, 3, 0, 2},
