@@ -32,6 +32,9 @@ static void UpdateBobbingEffect(struct ObjectEvent *, struct Sprite *, struct Sp
 static void SpriteCB_UnderwaterSurfBlob(struct Sprite *);
 static u32 ShowDisguiseFieldEffect(u8, u8, u8);
 
+// Used by several field effects to determine which of a group it is
+#define sFldEff    data[1]
+
 #define sReflectionObjEventId       data[0]
 #define sReflectionObjEventLocalId  data[1]
 #define sReflectionVerticalOffset   data[2] 
@@ -359,9 +362,6 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
         UpdateGrassFieldEffectSubpriority(sprite, sprite->sElevation, metatileBehavior);
     }
 }
-
-// Sprite data for FLDEFF_JUMP_TALL_GRASS and FLDEFF_JUMP_LONG_GRASS
-#define sFldEff    data[1]
 
 u32 FldEff_JumpTallGrass(void)
 {
@@ -1301,6 +1301,13 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
     return 0;
 }
 
+// Sprite data for FLDEFF_TREE_DISGUISE / FLDEFF_MOUNTAIN_DISGUISE / FLDEFF_SAND_DISGUISE
+#define sState      data[0]
+#define sLocalId    data[2]
+#define sMapNum     data[3]
+#define sMapGroup   data[4]
+#define sReadyToEnd data[7]
+
 u32 ShowTreeDisguiseFieldEffect(void)
 {
     return ShowDisguiseFieldEffect(FLDEFF_TREE_DISGUISE, FLDEFFOBJ_TREE_DISGUISE, 4);
@@ -1332,10 +1339,10 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 fldEffObj, u8 paletteNum)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled ++;
         sprite->oam.paletteNum = paletteNum;
-        sprite->data[1] = fldEff;
-        sprite->data[2] = gFieldEffectArguments[0];
-        sprite->data[3] = gFieldEffectArguments[1];
-        sprite->data[4] = gFieldEffectArguments[2];
+        sprite->sFldEff = fldEff;
+        sprite->sLocalId = gFieldEffectArguments[0];
+        sprite->sMapNum = gFieldEffectArguments[1];
+        sprite->sMapGroup = gFieldEffectArguments[2];
     }
     return spriteId;
 }
@@ -1346,10 +1353,8 @@ void UpdateDisguiseFieldEffect(struct Sprite *sprite)
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     struct Sprite *linkedSprite;
 
-    if (TryGetObjectEventIdByLocalIdAndMap(sprite->data[2], sprite->data[3], sprite->data[4], &objectEventId))
-    {
-        FieldEffectStop(sprite, sprite->data[1]);
-    }
+    if (TryGetObjectEventIdByLocalIdAndMap(sprite->sLocalId, sprite->sMapNum, sprite->sMapGroup, &objectEventId))
+        FieldEffectStop(sprite, sprite->sFldEff);
 
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
     linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
@@ -1357,50 +1362,55 @@ void UpdateDisguiseFieldEffect(struct Sprite *sprite)
     sprite->pos1.x = linkedSprite->pos1.x;
     sprite->pos1.y = (graphicsInfo->height >> 1) + linkedSprite->pos1.y - 16;
     sprite->subpriority = linkedSprite->subpriority - 1;
-    if (sprite->data[0] == 1)
+
+    if (sprite->sState == 1)
     {
-        sprite->data[0] ++;
+        sprite->sState++;
         StartSpriteAnim(sprite, 1);
     }
-    if (sprite->data[0] == 2 && sprite->animEnded)
-    {
-        sprite->data[7] = 1;
-    }
-    if (sprite->data[0] == 3)
-    {
-        FieldEffectStop(sprite, sprite->data[1]);
-    }
+
+    if (sprite->sState == 2 && sprite->animEnded)
+        sprite->sReadyToEnd = TRUE;
+
+    if (sprite->sState == 3)
+        FieldEffectStop(sprite, sprite->sFldEff);
 }
 
-void sub_8155D78(struct ObjectEvent *objectEvent)
+void StartRevealDisguise(struct ObjectEvent *objectEvent)
 {
     if (objectEvent->directionSequenceIndex == 1)
-    {
-        gSprites[objectEvent->fieldEffectSpriteId].data[0]++;
-    }
+        gSprites[objectEvent->fieldEffectSpriteId].sState++;
 }
 
-bool8 sub_8155DA0(struct ObjectEvent *objectEvent)
+bool8 UpdateRevealDisguise(struct ObjectEvent *objectEvent)
 {
     struct Sprite *sprite;
 
     if (objectEvent->directionSequenceIndex == 2)
-    {
         return TRUE;
-    }
+
     if (objectEvent->directionSequenceIndex == 0)
-    {
         return TRUE;
-    }
+
     sprite = &gSprites[objectEvent->fieldEffectSpriteId];
-    if (sprite->data[7])
+    if (sprite->sReadyToEnd)
     {
         objectEvent->directionSequenceIndex = 2;
-        sprite->data[0]++;
+        sprite->sState++;
         return TRUE;
     }
     return FALSE;
 }
+
+#undef sState
+#undef sLocalId
+#undef sMapNum
+#undef sMapGroup
+#undef sReadyToEnd
+
+// Sprite data for FLDEFF_SPARKLE
+#define sFinished data[0]
+#define sEndTimer data[1]
 
 u32 FldEff_Sparkle(void)
 {
@@ -1417,9 +1427,6 @@ u32 FldEff_Sparkle(void)
     }
     return 0;
 }
-
-#define sFinished data[0]
-#define sEndTimer data[1]
 
 void UpdateSparkleFieldEffect(struct Sprite *sprite)
 {

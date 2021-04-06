@@ -4396,10 +4396,9 @@ movement_type_def(MovementType_CopyPlayerInGrass, gMovementTypeFuncs_CopyPlayerI
 
 bool8 MovementType_CopyPlayerInGrass_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (gObjectEvents[gPlayerAvatar.objectEventId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
-    {
+    if (gObjectEvents[gPlayerAvatar.objectEventId].movementActionId == MOVEMENT_ACTION_NONE || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
         return FALSE;
-    }
+
     return gCopyPlayerMovementFuncs[PlayerGetCopyableMovement()](objectEvent, sprite, GetPlayerMovementDirection(), MetatileBehavior_IsPokeGrass);
 }
 
@@ -6577,14 +6576,14 @@ bool8 MovementAction_RevealTrainer_Step0(struct ObjectEvent *objectEvent, struct
         sprite->sActionFuncId = 2;
         return TRUE;
     }
-    sub_8155D78(objectEvent);
+    StartRevealDisguise(objectEvent);
     sprite->sActionFuncId = 1;
     return MovementAction_RevealTrainer_Step1(objectEvent, sprite);
 }
 
 bool8 MovementAction_RevealTrainer_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8155DA0(objectEvent))
+    if (UpdateRevealDisguise(objectEvent))
     {
         sprite->sActionFuncId = 2;
         return TRUE;
