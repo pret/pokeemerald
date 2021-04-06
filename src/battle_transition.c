@@ -3675,7 +3675,7 @@ static bool8 Phase1_TransitionAll_Func2(struct Task *task)
 static void InitTransitionStructVars(void)
 {
     memset(sTransitionStructPtr, 0, sizeof(*sTransitionStructPtr));
-    sub_8089C08(&sTransitionStructPtr->field_14, &sTransitionStructPtr->field_16);
+    GetCameraOffsetWithPan(&sTransitionStructPtr->field_14, &sTransitionStructPtr->field_16);
 }
 
 static void VBlankCB_BattleTransition(void)
