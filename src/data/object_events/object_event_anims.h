@@ -733,7 +733,7 @@ static const union AnimCmd sAnim_HookedPokemonEast[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd sAffineAnim_8508FD8[] =
+static const union AffineAnimCmd sAffineAnim_KyogreGroudon_GoSouthStart[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 1),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
@@ -743,7 +743,7 @@ static const union AffineAnimCmd sAffineAnim_8508FD8[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd sAffineAnim_8509008[] =
+static const union AffineAnimCmd sAffineAnim_KyogreGroudon_GoSouth[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 1),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
@@ -754,26 +754,26 @@ static const union AffineAnimCmd sAffineAnim_8509008[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd sAffineAnim_8509040[] =
+static const union AffineAnimCmd sAffineAnim_KyogreGroudon_AttackEast[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 10, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd sAffineAnim_8509050[] =
+static const union AffineAnimCmd sAffineAnim_KyogreGroudon_AttackWest[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 10, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd sAffineAnim_8509060[] =
+static const union AffineAnimCmd sAffineAnim_KyogreGroudon_DipEast[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 1),
     AFFINEANIMCMD_LOOP(8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd sAffineAnim_8509078[] =
+static const union AffineAnimCmd sAffineAnim_KyogreGroudon_DipWest[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 1),
     AFFINEANIMCMD_LOOP(8),
@@ -1135,12 +1135,12 @@ static const union AnimCmd *const sAnimTable_Fishing[] = {
 };
 
 static const union AffineAnimCmd *const sAffineAnimTable_KyogreGroudon[] = {
-    sAffineAnim_8508FD8,
-    sAffineAnim_8509008,
-    sAffineAnim_8509050,
-    sAffineAnim_8509040,
-    sAffineAnim_8509078,
-    sAffineAnim_8509060,
+    sAffineAnim_KyogreGroudon_GoSouthStart, // Used by Kyogre/Groudon when awakened
+    sAffineAnim_KyogreGroudon_GoSouth,      // Used by Kyogre/Groudon when awakened
+    sAffineAnim_KyogreGroudon_AttackWest,   // Used by Kyogre during Sootopolis fight
+    sAffineAnim_KyogreGroudon_AttackEast,   // Unused
+    sAffineAnim_KyogreGroudon_DipWest,      // Unused
+    sAffineAnim_KyogreGroudon_DipEast,      // Unused
 };
 
 const struct UnkStruct_085094AC gUnknown_085094AC[] = {
