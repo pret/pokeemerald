@@ -1266,10 +1266,9 @@ static void UpdateThunderSound(void)
 // WEATHER_FOG_HORIZONTAL and WEATHER_UNDERWATER
 //------------------------------------------------------------------------------
 
-// unused data
-static const u16 unusedData_839AB1C[] = {0, 6, 6, 12, 18, 42, 300, 300};
+static const u16 sUnusedData[] = {0, 6, 6, 12, 18, 42, 300, 300};
 
-static const struct OamData gOamData_839AB2C =
+static const struct OamData sOamData_FogH =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1286,61 +1285,61 @@ static const struct OamData gOamData_839AB2C =
     .affineParam = 0,
 };
 
-static const union AnimCmd gSpriteAnim_839AB34[] =
+static const union AnimCmd sAnim_FogH_0[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_839AB3C[] =
+static const union AnimCmd sAnim_FogH_1[] =
 {
     ANIMCMD_FRAME(32, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_839AB44[] =
+static const union AnimCmd sAnim_FogH_2[] =
 {
     ANIMCMD_FRAME(64, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_839AB4C[] =
+static const union AnimCmd sAnim_FogH_3[] =
 {
     ANIMCMD_FRAME(96, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_839AB54[] =
+static const union AnimCmd sAnim_FogH_4[] =
 {
     ANIMCMD_FRAME(128, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_839AB5C[] =
+static const union AnimCmd sAnim_FogH_5[] =
 {
     ANIMCMD_FRAME(160, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gSpriteAnimTable_839AB64[] =
+static const union AnimCmd *const sAnims_FogH[] =
 {
-    gSpriteAnim_839AB34,
-    gSpriteAnim_839AB3C,
-    gSpriteAnim_839AB44,
-    gSpriteAnim_839AB4C,
-    gSpriteAnim_839AB54,
-    gSpriteAnim_839AB5C,
+    sAnim_FogH_0,
+    sAnim_FogH_1,
+    sAnim_FogH_2,
+    sAnim_FogH_3,
+    sAnim_FogH_4,
+    sAnim_FogH_5,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_839AB7C[] =
+static const union AffineAnimCmd sAffineAnim_FogH[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_839AB8C[] =
+static const union AffineAnimCmd *const sAffineAnims_FogH[] =
 {
-    gSpriteAffineAnim_839AB7C,
+    sAffineAnim_FogH,
 };
 
 static void FogHorizontalSpriteCallback(struct Sprite *);
@@ -1348,10 +1347,10 @@ static const struct SpriteTemplate sFogHorizontalSpriteTemplate =
 {
     .tileTag = GFXTAG_FOG_H,
     .paletteTag = PALTAG_WEATHER,
-    .oam = &gOamData_839AB2C,
-    .anims = gSpriteAnimTable_839AB64,
+    .oam = &sOamData_FogH,
+    .anims = sAnims_FogH,
     .images = NULL,
-    .affineAnims = gSpriteAffineAnimTable_839AB8C,
+    .affineAnims = sAffineAnims_FogH,
     .callback = FogHorizontalSpriteCallback,
 };
 
