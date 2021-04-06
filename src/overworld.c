@@ -111,7 +111,7 @@ static void SpawnLinkPlayers(void);
 static void SetCameraToTrackGuestPlayer(void);
 static void ResumeMap(bool32 arg0);
 static void SetCameraToTrackPlayer(void);
-static void sub_8086A68(void);
+static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
 static void SetCameraToTrackGuestPlayer_2(void);
 static void CreateLinkPlayerSprites(void);
@@ -1946,7 +1946,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
         ResetMirageTowerAndSaveBlockPtrs();
         sub_80867D8();
         ResumeMap(FALSE);
-        sub_8086A68();
+        InitObjectEventsReturnToField();
         SetCameraToTrackPlayer();
         (*state)++;
         break;
@@ -1982,7 +1982,7 @@ static bool32 ReturnToFieldLink(u8 *state)
         break;
     case 2:
         CreateLinkPlayerSprites();
-        sub_8086A68();
+        InitObjectEventsReturnToField();
         SetCameraToTrackGuestPlayer_2();
         (*state)++;
         break;
@@ -2157,9 +2157,9 @@ static void InitObjectEventsLocal(void)
     TryRunOnWarpIntoMapScript();
 }
 
-static void sub_8086A68(void)
+static void InitObjectEventsReturnToField(void)
 {
-    sub_808E16C(0, 0);
+    SpawnObjectEventsOnReturnToField(0, 0);
     RotatingGate_InitPuzzleAndGraphics();
     RunOnReturnToFieldMapScript();
 }

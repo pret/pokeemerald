@@ -722,9 +722,9 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
     }
 }
 
-static bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
+static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
 {
-    if (GetLedgeJumpDirection(x, y, z) != 0)
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
         return TRUE;
     else
         return FALSE;
@@ -1192,7 +1192,7 @@ u8 GetPlayerAvatarFlags(void)
     return gPlayerAvatar.flags;
 }
 
-u8 GetPlayerAvatarObjectId(void)
+u8 GetPlayerAvatarSpriteId(void)
 {
     return gPlayerAvatar.spriteId;
 }
