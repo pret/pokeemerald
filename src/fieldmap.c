@@ -565,10 +565,6 @@ static void MoveMapViewToBackup(u8 direction)
 
 int GetMapBorderIdAt(int x, int y)
 {
-    struct MapLayout const *mapLayout;
-    u16 block, block2;
-    int i, j;
-
     if (MapGridGetTileAt(x, y) == METATILE_ID_UNDEFINED)
         return CONNECTION_INVALID;
 
