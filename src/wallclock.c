@@ -665,7 +665,7 @@ static void LoadWallClockGraphics(void)
 
 static void WallClockInit(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(VBlankCB_WallClock);
     SetMainCallback2(CB2_WallClock);
@@ -856,7 +856,7 @@ static void Task_SetClock_HandleConfirmInput(u8 taskId)
 static void Task_SetClock_Confirmed(u8 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_SetClock_Exit;
 }
 
@@ -884,7 +884,7 @@ static void Task_ViewClock_HandleInput(u8 taskId)
 
 static void Task_ViewClock_FadeOut(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ViewClock_Exit;
 }
 

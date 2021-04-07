@@ -7,9 +7,14 @@
 
 #define RAM_SCRIPT_MAGIC 51
 
-extern const u8* gUnknown_020375C0;
+enum {
+    SCRIPT_MODE_STOPPED,
+    SCRIPT_MODE_BYTECODE,
+    SCRIPT_MODE_NATIVE,
+};
 
-// ewram bss
+extern const u8* gRamScriptRetAddr;
+
 static u8 sScriptContext1Status;
 static struct ScriptContext sScriptContext1;
 static struct ScriptContext sScriptContext2;
@@ -23,57 +28,60 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
 {
     s32 i;
 
-    ctx->mode = 0;
-    ctx->scriptPtr = 0;
+    ctx->mode = SCRIPT_MODE_STOPPED;
+    ctx->scriptPtr = NULL;
     ctx->stackDepth = 0;
-    ctx->nativePtr = 0;
+    ctx->nativePtr = NULL;
     ctx->cmdTable = cmdTable;
     ctx->cmdTableEnd = cmdTableEnd;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(ctx->data); i++)
         ctx->data[i] = 0;
 
-    for (i = 0; i < 20; i++)
-        ctx->stack[i] = 0;
+    for (i = 0; i < (int)ARRAY_COUNT(ctx->stack); i++)
+        ctx->stack[i] = NULL;
 }
 
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
 {
     ctx->scriptPtr = ptr;
-    ctx->mode = 1;
+    ctx->mode = SCRIPT_MODE_BYTECODE;
     return 1;
 }
 
 void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
 {
-    ctx->mode = 2;
+    ctx->mode = SCRIPT_MODE_NATIVE;
     ctx->nativePtr = ptr;
 }
 
 void StopScript(struct ScriptContext *ctx)
 {
-    ctx->mode = 0;
-    ctx->scriptPtr = 0;
+    ctx->mode = SCRIPT_MODE_STOPPED;
+    ctx->scriptPtr = NULL;
 }
 
 bool8 RunScriptCommand(struct ScriptContext *ctx)
 {
-    if (ctx->mode == 0)
+    if (ctx->mode == SCRIPT_MODE_STOPPED)
         return FALSE;
 
     switch (ctx->mode)
     {
-    case 0:
+    case SCRIPT_MODE_STOPPED:
         return FALSE;
-    case 2:
+    case SCRIPT_MODE_NATIVE:
+        // Try to call a function in C
+        // Continue to bytecode if no function or it returns TRUE
         if (ctx->nativePtr)
         {
             if (ctx->nativePtr() == TRUE)
-                ctx->mode = 1;
+                ctx->mode = SCRIPT_MODE_BYTECODE;
             return TRUE;
         }
-        ctx->mode = 1;
-    case 1:
+        ctx->mode = SCRIPT_MODE_BYTECODE;
+        // fallthrough
+    case SCRIPT_MODE_BYTECODE:
         while (1)
         {
             u8 cmdCode;
@@ -81,7 +89,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
 
             if (!ctx->scriptPtr)
             {
-                ctx->mode = 0;
+                ctx->mode = SCRIPT_MODE_STOPPED;
                 return FALSE;
             }
 
@@ -97,11 +105,11 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
 
             if (func >= ctx->cmdTableEnd)
             {
-                ctx->mode = 0;
+                ctx->mode = SCRIPT_MODE_STOPPED;
                 return FALSE;
             }
 
-            if ((*func)(ctx) == 1)
+            if ((*func)(ctx) == TRUE)
                 return TRUE;
         }
     }
@@ -109,21 +117,21 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
     return TRUE;
 }
 
-u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
+static bool8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
 {
-    if (ctx->stackDepth + 1 >= 20)
+    if (ctx->stackDepth + 1 >= (int)ARRAY_COUNT(ctx->stack))
     {
-        return 1;
+        return TRUE;
     }
     else
     {
         ctx->stack[ctx->stackDepth] = ptr;
         ctx->stackDepth++;
-        return 0;
+        return FALSE;
     }
 }
 
-const u8 *ScriptPop(struct ScriptContext *ctx)
+static const u8 *ScriptPop(struct ScriptContext *ctx)
 {
     if (ctx->stackDepth == 0)
         return NULL;
@@ -196,10 +204,10 @@ void ScriptContext1_Init(void)
 bool8 ScriptContext2_RunScript(void)
 {
     if (sScriptContext1Status == 2)
-        return 0;
+        return FALSE;
 
     if (sScriptContext1Status == 1)
-        return 0;
+        return FALSE;
 
     ScriptContext2_Enable();
 
@@ -207,10 +215,10 @@ bool8 ScriptContext2_RunScript(void)
     {
         sScriptContext1Status = 2;
         ScriptContext2_Disable();
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void ScriptContext1_SetupScript(const u8 *ptr)
@@ -234,7 +242,7 @@ void EnableBothScriptContexts(void)
 
 void ScriptContext2_RunNewScript(const u8 *ptr)
 {
-    InitScriptContext(&sScriptContext2, &gScriptCmdTable, &gScriptCmdTableEnd);
+    InitScriptContext(&sScriptContext2, gScriptCmdTable, gScriptCmdTableEnd);
     SetupBytecodeScript(&sScriptContext2, ptr);
     while (RunScriptCommand(&sScriptContext2) == TRUE);
 }
@@ -253,7 +261,7 @@ u8 *MapHeaderGetScriptTable(u8 tag)
         if (*mapScripts == tag)
         {
             mapScripts++;
-            return (u8 *)(mapScripts[0] + (mapScripts[1] << 8) + (mapScripts[2] << 16) + (mapScripts[3] << 24));
+            return T2_READ_PTR(mapScripts);
         }
         mapScripts += 5;
     }
@@ -277,14 +285,20 @@ u8 *MapHeaderCheckScriptTable(u8 tag)
     {
         u16 varIndex1;
         u16 varIndex2;
-        varIndex1 = ptr[0] | (ptr[1] << 8);
+
+        // Read first var (or .2byte terminal value)
+        varIndex1 = T1_READ_16(ptr);
         if (!varIndex1)
-            return NULL;
+            return NULL; // Reached end of table
         ptr += 2;
-        varIndex2 = ptr[0] | (ptr[1] << 8);
+
+        // Read second var
+        varIndex2 = T1_READ_16(ptr);
         ptr += 2;
+
+        // Run map script if vars are equal
         if (VarGet(varIndex1) == VarGet(varIndex2))
-            return (u8 *)(ptr[0] + (ptr[1] << 8) + (ptr[2] << 16) + (ptr[3] << 24));
+            return T2_READ_PTR(ptr);
         ptr += 4;
     }
 }
@@ -363,7 +377,7 @@ bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8
 const u8 *GetRamScript(u8 objectId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    gUnknown_020375C0 = NULL;
+    gRamScriptRetAddr = NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return script;
     if (scriptData->mapGroup != gSaveBlock1Ptr->location.mapGroup)
@@ -379,7 +393,7 @@ const u8 *GetRamScript(u8 objectId, const u8 *script)
     }
     else
     {
-        gUnknown_020375C0 = script;
+        gRamScriptRetAddr = script;
         return scriptData->script;
     }
 }

@@ -460,7 +460,7 @@ Route110_TrickHouseEntrance_EventScript_MechadollReward:: @ 826A039
 	end
 
 Route110_TrickHouseEntrance_EventScript_ChooseTent:: @ 826A070
-	multichoice 0, 0, MULTI_TENT, 1
+	multichoice 0, 0, MULTI_TENT, TRUE
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEntrance_EventScript_GiveRedTent
 	goto Route110_TrickHouseEntrance_EventScript_GiveBlueTent

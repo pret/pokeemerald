@@ -529,7 +529,7 @@ static const union AnimCmd * const sAnims_Select_Pokeball[] =
     sAnim_Select_Pokeball_Moving,
 };
 
-static const union AffineAnimCmd gUnknown_0861050C[] =
+static const union AffineAnimCmd sAffineAnim_Select_MonPicBg_Opening[] =
 {
     AFFINEANIMCMD_FRAME(5, 5, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 0, 1),
@@ -545,7 +545,7 @@ static const union AffineAnimCmd gUnknown_0861050C[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_0861056C[] =
+static const union AffineAnimCmd sAffineAnim_Select_MonPicBg_Closing[] =
 {
     AFFINEANIMCMD_FRAME(128, 5, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 0, 1),
@@ -559,7 +559,7 @@ static const union AffineAnimCmd gUnknown_0861056C[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_086105BC[] =
+static const union AffineAnimCmd sAffineAnim_Select_MonPicBg_Open[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_END,
@@ -567,9 +567,9 @@ static const union AffineAnimCmd gUnknown_086105BC[] =
 
 static const union AffineAnimCmd * const sAffineAnims_Select_MonPicBgAnim[] =
 {
-    gUnknown_0861050C,
-    gUnknown_0861056C,
-    gUnknown_086105BC,
+    sAffineAnim_Select_MonPicBg_Opening,
+    sAffineAnim_Select_MonPicBg_Closing,
+    sAffineAnim_Select_MonPicBg_Open,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Select_Pokeball =
@@ -780,7 +780,7 @@ static const union AnimCmd * const sAnims_Swap_Pokeball[] =
     sAnim_Swap_Pokeball_Moving,
 };
 
-static const union AffineAnimCmd gUnknown_08610768[] =
+static const union AffineAnimCmd sAffineAnim_Swap_MonPicBg_Opening[] =
 {
     AFFINEANIMCMD_FRAME(5, 5, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 0, 1),
@@ -796,7 +796,7 @@ static const union AffineAnimCmd gUnknown_08610768[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_086107C8[] =
+static const union AffineAnimCmd sAffineAnim_Swap_MonPicBg_Closing[] =
 {
     AFFINEANIMCMD_FRAME(128, 5, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 0, 1),
@@ -810,7 +810,7 @@ static const union AffineAnimCmd gUnknown_086107C8[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_08610818[] =
+static const union AffineAnimCmd sAffineAnim_Swap_MonPicBg_Open[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_END,
@@ -818,9 +818,9 @@ static const union AffineAnimCmd gUnknown_08610818[] =
 
 static const union AffineAnimCmd * const sAffineAnims_Swap_MonPicBgAnim[] =
 {
-    gUnknown_08610768,
-    gUnknown_086107C8,
-    gUnknown_08610818,
+    sAffineAnim_Swap_MonPicBg_Opening,
+    sAffineAnim_Swap_MonPicBg_Closing,
+    sAffineAnim_Swap_MonPicBg_Open,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_Pokeball =
@@ -1203,7 +1203,7 @@ static void CB2_InitSelectScreen(void)
         ShowBg(0);
         ShowBg(1);
         SetVBlankCallback(VBlankCB_SelectScreen);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
 #ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
@@ -1451,7 +1451,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
     {
     case STATE_SUMMARY_FADE:
         gPlttBufferUnfaded[228] = gPlttBufferFaded[228];
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
     case STATE_SUMMARY_CLEAN:
@@ -1489,7 +1489,7 @@ static void Select_Task_Exit(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -2369,7 +2369,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
     case STATE_SUMMARY_CLEAN:
@@ -2425,7 +2425,7 @@ static void Swap_Task_Exit(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 3:
@@ -3381,7 +3381,7 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 14:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         ShowBg(0);
         ShowBg(1);

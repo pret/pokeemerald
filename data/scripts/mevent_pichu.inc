@@ -30,7 +30,7 @@ SurfPichu_FullParty: @ 8674D73
 
 SurfPichu_GiveEgg: @ 8674D7E
 	giveegg SPECIES_PICHU
-	setmonobedient VAR_EVENT_PICHU_SLOT
+	setmoneventlegal VAR_EVENT_PICHU_SLOT
 	setmonmetlocation VAR_EVENT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
 	compare VAR_EVENT_PICHU_SLOT, 1
 	vgoto_if_eq SurfPichu_Slot1

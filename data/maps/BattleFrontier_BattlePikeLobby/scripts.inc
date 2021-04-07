@@ -101,7 +101,7 @@ BattleFrontier_BattlePikeLobby_EventScript_Attendant:: @ 825B868
 BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge:: @ 825B87F
 	message BattleFrontier_BattlePikeLobby_Text_TakeChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattlePikeLobby_EventScript_ExplainChallenge
@@ -111,7 +111,7 @@ BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge:: @ 825B87F
 BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge:: @ 825B8BB
 	message BattleFrontier_BattlePikeLobby_Text_WhichChallengeMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
@@ -236,7 +236,7 @@ BattleFrontier_BattlePikeLobby_EventScript_RulesBoard:: @ 825BAC6
 BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard:: @ 825BAD5
 	message BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 16, 4, MULTI_BATTLE_PIKE_RULES, 0
+	multichoice 16, 4, MULTI_BATTLE_PIKE_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeLobby_EventScript_RulesPokenavBag
 	case 1, BattleFrontier_BattlePikeLobby_EventScript_RulesHeldItems

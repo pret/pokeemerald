@@ -1784,7 +1784,7 @@ static void AnimCoinThrow(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
     sprite->data[4] = r7;
-    sprite->callback = sub_80A7000;
+    sprite->callback = InitAnimLinearTranslationWithSpeedAndPos;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -2569,7 +2569,7 @@ static void AnimBlendThinRing(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_8105284(struct Sprite *sprite)
+static void AnimHyperVoiceRing_WaitEnd(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
     {
@@ -2659,7 +2659,7 @@ static void AnimHyperVoiceRing(struct Sprite *sprite)
     sprite->data[4] = sp1;
     sprite->data[0] = gBattleAnimArgs[0];
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_8105284;
+    sprite->callback = AnimHyperVoiceRing_WaitEnd;
     sprite->callback(sprite);
 }
 
@@ -3106,7 +3106,7 @@ static void AnimTask_FakeOut_Step2(u8 taskId)
     {
         gTasks[taskId].data[11] = 0x88;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN);
-        BlendPalettes(sub_80A75AC(1, 0, 0, 0, 0, 0, 0), 16, RGB(31, 31, 31));
+        BlendPalettes(GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0), 16, RGB(31, 31, 31));
     }
     else if (gTasks[taskId].data[10] > 4)
     {
@@ -3248,7 +3248,7 @@ void AnimTask_HeartsBackground(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80A6B30(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgGfx(animBg.bgId, &gBattleAnimBgImage_Attract, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_Attract, 0);
     LoadCompressedPalette(&gBattleAnimBgPalette_Attract, animBg.paletteId * 16, 32);
@@ -3295,8 +3295,8 @@ static void AnimTask_HeartsBackground_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
-        sub_80A6C68(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
     case 4:
@@ -3326,7 +3326,7 @@ void AnimTask_ScaryFace(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80A6B30(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     if (IsContest())
         AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
@@ -3379,9 +3379,9 @@ static void AnimTask_ScaryFace_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
-        sub_80A6C68(1);
-        sub_80A6C68(2);
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(1);
+        ClearBattleAnimBg(2);
         gTasks[taskId].data[12]++;
         // fall through
     case 4:
@@ -3523,7 +3523,7 @@ static void AnimAngel(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_8106A64(struct Sprite *sprite)
+static void AnimPinkHeart_Step(struct Sprite *sprite)
 {
     sprite->data[5]++;
     sprite->pos2.x = Sin(sprite->data[3], 5);
@@ -3552,7 +3552,7 @@ static void AnimPinkHeart(struct Sprite *sprite)
         sprite->data[3] = (sprite->data[3] + 3) & 0xFF;
         if (sprite->data[3] > 70)
         {
-            sprite->callback = sub_8106A64;
+            sprite->callback = AnimPinkHeart_Step;
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;
             sprite->pos2.x = 0;

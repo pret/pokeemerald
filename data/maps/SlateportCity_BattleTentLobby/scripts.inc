@@ -100,7 +100,7 @@ SlateportCity_BattleTentLobby_EventScript_Attendant:: @ 82088AA
 SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge:: @ 82088CA
 	message SlateportCity_BattleTentLobby_Text_TakeChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, SlateportCity_BattleTentLobby_EventScript_ExplainChallenge
@@ -237,7 +237,7 @@ SlateportCity_BattleTentLobby_EventScript_RulesBoard:: @ 8208A99
 SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard:: @ 8208AA8
 	message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 17, 0, MULTI_SLATEPORT_TENT_RULES, 0
+	multichoice 17, 0, MULTI_SLATEPORT_TENT_RULES, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_RulesBasics
 	case 1, SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner

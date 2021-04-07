@@ -1,5 +1,5 @@
-#ifndef GUARD_ITEM_MENU_ICONS
-#define GUARD_ITEM_MENU_ICONS
+#ifndef GUARD_ITEM_MENU_ICONS_H
+#define GUARD_ITEM_MENU_ICONS_H
 
 extern const struct CompressedSpriteSheet gBagMaleSpriteSheet;
 extern const struct CompressedSpriteSheet gBagFemaleSpriteSheet;
@@ -28,4 +28,4 @@ u8 CreateBerryFlavorCircleSprite(s16 x);
 #define TAG_BERRY_PIC_TILE 0xFFFF
 #define TAG_BERRY_PIC_PAL 0x7544
 
-#endif // GUARD_ITEM_MENU_ICONS
+#endif // GUARD_ITEM_MENU_ICONS_H
