@@ -7871,7 +7871,11 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
 
     if (moveType == TYPE_GROUND && !IsBattlerGrounded(battlerDef))
     {
-        modifier = UQ_4_12(0.0);
+        if (move == MOVE_THOUSAND_ARROWS)
+            modifier = UQ_4_12(1.0);
+        else
+            modifier = UQ_4_12(0.0);
+
         if (recordAbilities && GetBattlerAbility(battlerDef) == ABILITY_LEVITATE)
         {
             gLastUsedAbility = ABILITY_LEVITATE;
