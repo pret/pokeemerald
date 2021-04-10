@@ -21,7 +21,7 @@
     Vertical and Horizontal are frequently shortened to V and H.
 
     Every front animation uses 1 of these ANIMs, and every back animation
-    uses a BACK_ANIM_* that refers to a set of 3 ANIM functions. Which of
+    uses a BACK_ANIM_* that refers to a set of 3 ANIM functions. Which of the
     3 that gets used depends on the Pokémon's nature (see sBackAnimationIds).
 
     The table linking species to a BACK_ANIM is in this file (sSpeciesToBackAnimSet)
@@ -38,11 +38,17 @@
 
 struct PokemonAnimData
 {
-    u16 field_0;
-    s16 field_2;
-    s16 field_4;
-    s16 field_6;
-    s16 field_8;
+    u16 delay;
+    s16 speed; // Only used by 2 sets of animations
+    s16 runs; // Number of times to do the animation
+    s16 rotation;
+    s16 data; // General use
+};
+
+struct YellowFlashData
+{
+    bool8 isYellow;
+    u8 time;
 };
 
 static void Anim_VerticalSquishBounce(struct Sprite *sprite);
@@ -593,7 +599,8 @@ static const u8 sSpeciesToBackAnimSet[] =
     [SPECIES_CHIMECHO]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
 };
 
-static const u8 sFlashYellowData[][2] =
+// Equivalent to struct YellowFlashData, but doesn't match as a struct
+static const u8 sYellowFlashData[][2] =
 {
     {FALSE,  5},
     { TRUE,  1},
@@ -611,7 +618,7 @@ static const u8 sFlashYellowData[][2] =
     {FALSE, -1}
 };
 
-static const u8 sUnknown_0860AA80[][2] =
+static const u8 sVerticalShakeData[][2] =
 {
     { 6,  30},
     {-2,  15},
@@ -835,30 +842,29 @@ static const u8 sBackAnimNatureModTable[NUM_NATURES] =
     [NATURE_QUIRKY]  = 1,
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_860AD48[] =
+static const union AffineAnimCmd sMonAffineAnim_0[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMDTYPE_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_860AD58[] =
+static const union AffineAnimCmd sMonAffineAnim_1[] =
 {
     AFFINEANIMCMD_FRAME(-256, 256, 0, 0),
     AFFINEANIMCMDTYPE_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_860AD68[] =
+static const union AffineAnimCmd *const sMonAffineAnims[] =
 {
-    sSpriteAffineAnim_860AD48,
-    sSpriteAffineAnim_860AD58
+    sMonAffineAnim_0,
+    sMonAffineAnim_1
 };
 
-// code
 static void MonAnimDummySpriteCallback(struct Sprite *sprite)
 {
 }
 
-static void sub_817F3F0(struct Sprite *sprite, u16 index, s16 amplitudeX, s16 amplitudeY)
+static void SetPosForRotation(struct Sprite *sprite, u16 index, s16 amplitudeX, s16 amplitudeY)
 {
     s16 xAdder, yAdder;
 
@@ -996,7 +1002,7 @@ static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rot
 static void HandleStartAffineAnim(struct Sprite *sprite)
 {
     sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-    sprite->affineAnims = sSpriteAffineAnimTable_860AD68;
+    sprite->affineAnims = sMonAffineAnims;
 
     if (sIsSummaryAnim == TRUE)
         InitSpriteAffineAnim(sprite);
@@ -1035,11 +1041,11 @@ static bool32 InitAnimData(u8 id)
     }
     else
     {
-        sAnims[id].field_6 = 0;
-        sAnims[id].field_0 = 0;
-        sAnims[id].field_4 = 1;
-        sAnims[id].field_2 = 0;
-        sAnims[id].field_8 = 0;
+        sAnims[id].rotation = 0;
+        sAnims[id].delay = 0;
+        sAnims[id].runs = 1;
+        sAnims[id].speed = 0;
+        sAnims[id].data = 0;
         return TRUE;
     }
 }
@@ -1414,26 +1420,26 @@ static void Twist(struct Sprite *sprite)
 {
     s16 id = sprite->data[0];
 
-    if (sAnims[id].field_0 != 0)
+    if (sAnims[id].delay != 0)
     {
-        sAnims[id].field_0--;
+        sAnims[id].delay--;
     }
     else
     {
-        if (sprite->data[2] == 0 && sAnims[id].field_8 == 0)
+        if (sprite->data[2] == 0 && sAnims[id].data == 0)
         {
             HandleStartAffineAnim(sprite);
-            sAnims[id].field_8++;
+            sAnims[id].data++;
         }
 
-        if (sprite->data[2] > sAnims[id].field_6)
+        if (sprite->data[2] > sAnims[id].rotation)
         {
             HandleSetAffineData(sprite, 256, 256, 0);
 
-            if (sAnims[id].field_4 > 1)
+            if (sAnims[id].runs > 1)
             {
-                sAnims[id].field_4--;
-                sAnims[id].field_0 = 10;
+                sAnims[id].runs--;
+                sAnims[id].delay = 10;
                 sprite->data[2] = 0;
             }
             else
@@ -1456,8 +1462,8 @@ static void Anim_Twist(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 512;
-    sAnims[id].field_0 = 0;
+    sAnims[id].rotation = 512;
+    sAnims[id].delay = 0;
     Twist(sprite);
     sprite->callback = Twist;
 }
@@ -1469,7 +1475,7 @@ static void Spin(struct Sprite *sprite)
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
 
-    if (sprite->data[2] > sAnims[id].field_0)
+    if (sprite->data[2] > sAnims[id].delay)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
         ResetSpriteAfterAnim(sprite);
@@ -1477,7 +1483,7 @@ static void Spin(struct Sprite *sprite)
     }
     else
     {
-        sprite->data[6] = (65536 / sAnims[id].field_8) * sprite->data[2];
+        sprite->data[6] = (65536 / sAnims[id].data) * sprite->data[2];
         HandleSetAffineData(sprite, 256, 256, sprite->data[6]);
     }
 
@@ -1488,8 +1494,8 @@ static void Anim_Spin_Long(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_0 = 60;
-    sAnims[id].field_8 = 20;
+    sAnims[id].delay = 60;
+    sAnims[id].data = 20;
     Spin(sprite);
     sprite->callback = Spin;
 }
@@ -1500,7 +1506,7 @@ static void CircleCounterclockwise(struct Sprite *sprite)
 
     TryFlipX(sprite);
 
-    if (sprite->data[2] > sAnims[id].field_6)
+    if (sprite->data[2] > sAnims[id].rotation)
     {
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
@@ -1510,11 +1516,11 @@ static void CircleCounterclockwise(struct Sprite *sprite)
     {
         s16 index = (sprite->data[2] + 192) % 256;
 
-        sprite->pos2.x = -(Cos(index, sAnims[id].field_8 * 2));
-        sprite->pos2.y = Sin(index, sAnims[id].field_8) + sAnims[id].field_8;
+        sprite->pos2.x = -(Cos(index, sAnims[id].data * 2));
+        sprite->pos2.y = Sin(index, sAnims[id].data) + sAnims[id].data;
     }
 
-    sprite->data[2] += sAnims[id].field_2;
+    sprite->data[2] += sAnims[id].speed;
     TryFlipX(sprite);
 }
 
@@ -1522,9 +1528,9 @@ static void Anim_CircleCounterclockwise(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 512;
-    sAnims[id].field_8 = 6;
-    sAnims[id].field_2 = 24;
+    sAnims[id].rotation = 512;
+    sAnims[id].data = 6;
+    sAnims[id].speed = 24;
     CircleCounterclockwise(sprite);
     sprite->callback = CircleCounterclockwise;
 }
@@ -1632,8 +1638,8 @@ static void VerticalShakeTwice(struct Sprite *sprite)
 {
     u8 index = sprite->data[2];
     u8 var7 = sprite->data[6];
-    u8 var5 = sUnknown_0860AA80[sprite->data[5]][0];
-    u8 var6 = sUnknown_0860AA80[sprite->data[5]][1];
+    u8 var5 = sVerticalShakeData[sprite->data[5]][0];
+    u8 var6 = sVerticalShakeData[sprite->data[5]][1];
     u8 amplitude = 0;
 
     if (var5 != (u8)-2)
@@ -1905,27 +1911,27 @@ static void Anim_ShrinkGrow(struct Sprite *sprite)
     ShrinkGrow(sprite);
 }
 
-static const s8 sUnknown_0860AD8E[][8][3] =
+static const s8 sBounceRotateToSidesData[][8][3] =
 {
     {
-        {0,  8, 8},
-        {8, -8, 12},
-        {-8, 8, 12},
-        {8, -8, 12},
-        {-8, 8, 12},
-        {8, -8, 12},
-        {-8, 0, 12},
-        {0,  0, 0}
+        { 0,  8,  8},
+        { 8, -8, 12},
+        {-8,  8, 12},
+        { 8, -8, 12},
+        {-8,  8, 12},
+        { 8, -8, 12},
+        {-8,  0, 12},
+        { 0,  0,  0}
     },
     {
-        {0,  8, 16},
-        {8, -8, 24},
-        {-8, 8, 24},
-        {8, -8, 24},
-        {-8, 8, 24},
-        {8, -8, 24},
-        {-8, 0, 24},
-        {0,  0, 0}
+        { 0,  8, 16},
+        { 8, -8, 24},
+        {-8,  8, 24},
+        { 8, -8, 24},
+        {-8,  8, 24},
+        { 8, -8, 24},
+        {-8,  0, 24},
+        { 0,  0,  0}
     },
 };
 
@@ -1940,10 +1946,10 @@ static void BounceRotateToSides(struct Sprite *sprite)
 
     TryFlipX(sprite);
     structId = sprite->data[0];
-    var = sAnims[structId].field_6;
-    r9 = sUnknown_0860AD8E[sAnims[structId].field_8][sprite->data[4]][0];
-    r10 = sUnknown_0860AD8E[sAnims[structId].field_8][sprite->data[4]][1] - r9;
-    arrId = sAnims[structId].field_8;
+    var = sAnims[structId].rotation;
+    r9 = sBounceRotateToSidesData[sAnims[structId].data][sprite->data[4]][0];
+    r10 = sBounceRotateToSidesData[sAnims[structId].data][sprite->data[4]][1] - r9;
+    arrId = sAnims[structId].data;
     r7 = sprite->data[3];
 
     if (sprite->data[2] == 0)
@@ -1952,7 +1958,7 @@ static void BounceRotateToSides(struct Sprite *sprite)
         sprite->data[2]++;
     }
 
-    if (sUnknown_0860AD8E[arrId][sprite->data[4]][2] == 0)
+    if (sBounceRotateToSidesData[arrId][sprite->data[4]][2] == 0)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
         sprite->pos2.x = 0;
@@ -1964,13 +1970,13 @@ static void BounceRotateToSides(struct Sprite *sprite)
     {
         u16 rotation;
 
-        sprite->pos2.y = -(Sin(r7 * 128 / sUnknown_0860AD8E[arrId][sprite->data[4]][2], 10));
-        sprite->pos2.x = (r10 * r7 / sUnknown_0860AD8E[arrId][sprite->data[4]][2]) + r9;
+        sprite->pos2.y = -(Sin(r7 * 128 / sBounceRotateToSidesData[arrId][sprite->data[4]][2], 10));
+        sprite->pos2.x = (r10 * r7 / sBounceRotateToSidesData[arrId][sprite->data[4]][2]) + r9;
 
         rotation = -(var * sprite->pos2.x) / 8;
         HandleSetAffineData(sprite, 256, 256, rotation);
 
-        if (r7 == sUnknown_0860AD8E[arrId][sprite->data[4]][2])
+        if (r7 == sBounceRotateToSidesData[arrId][sprite->data[4]][2])
         {
             sprite->data[4]++;
             sprite->data[3] = 0;
@@ -1987,8 +1993,8 @@ static void BounceRotateToSides(struct Sprite *sprite)
 static void Anim_BounceRotateToSides(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_6 = 4096;
-    sAnims[id].field_8 = sprite->data[6];
+    sAnims[id].rotation = 4096;
+    sAnims[id].data = sprite->data[6];
     BounceRotateToSides(sprite);
     sprite->callback = BounceRotateToSides;
 }
@@ -2361,16 +2367,16 @@ static void TumblingFrontFlip(struct Sprite *sprite);
 static void Anim_TumblingFrontFlip(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_2 = 2;
+    sAnims[id].speed = 2;
     TumblingFrontFlip(sprite);
     sprite->callback = TumblingFrontFlip;
 }
 
 static void TumblingFrontFlip(struct Sprite *sprite)
 {
-    if (sAnims[sprite->data[0]].field_0 != 0)
+    if (sAnims[sprite->data[0]].delay != 0)
     {
-        sAnims[sprite->data[0]].field_0--;
+        sAnims[sprite->data[0]].delay--;
     }
     else
     {
@@ -2379,7 +2385,7 @@ static void TumblingFrontFlip(struct Sprite *sprite)
         {
             sprite->data[2]++;
             HandleStartAffineAnim(sprite);
-            sprite->data[7] = sAnims[sprite->data[0]].field_2;
+            sprite->data[7] = sAnims[sprite->data[0]].speed;
             sprite->data[3] = -1;
             sprite->data[4] = -1;
             sprite->data[5] = 0;
@@ -2406,12 +2412,12 @@ static void TumblingFrontFlip(struct Sprite *sprite)
         {
             sprite->pos2.x = 0;
             sprite->pos2.y = 0;
-            if (sAnims[sprite->data[0]].field_4 > 1)
+            if (sAnims[sprite->data[0]].runs > 1)
             {
-                sAnims[sprite->data[0]].field_4--;
+                sAnims[sprite->data[0]].runs--;
                 sprite->data[5] = 0;
                 sprite->data[6] = 0;
-                sAnims[sprite->data[0]].field_0 = 10;
+                sAnims[sprite->data[0]].delay = 10;
             }
             else
             {
@@ -2473,7 +2479,7 @@ static void Anim_FlashYellow(struct Sprite *sprite)
         sprite->data[4] = 0;
     }
 
-    if (sFlashYellowData[sprite->data[6]][1] == (u8)-1)
+    if (sYellowFlashData[sprite->data[6]][1] == (u8)-1)
     {
         sprite->callback = WaitAnimEnd;
     }
@@ -2481,7 +2487,7 @@ static void Anim_FlashYellow(struct Sprite *sprite)
     {
         if (sprite->data[4] == 1)
         {
-            if (sFlashYellowData[sprite->data[6]][0])
+            if (sYellowFlashData[sprite->data[6]][0])
                 BlendPalette(sprite->data[7], 16, 16, RGB_YELLOW);
             else
                 BlendPalette(sprite->data[7], 16, 0, RGB_YELLOW);
@@ -2489,7 +2495,7 @@ static void Anim_FlashYellow(struct Sprite *sprite)
             sprite->data[4] = 0;
         }
 
-        if (sFlashYellowData[sprite->data[6]][1] == sprite->data[5])
+        if (sYellowFlashData[sprite->data[6]][1] == sprite->data[5])
         {
             sprite->data[4] = 1;
             sprite->data[5] = 0;
@@ -2508,13 +2514,13 @@ static void SwingConcave(struct Sprite *sprite)
         HandleStartAffineAnim(sprite);
 
     TryFlipX(sprite);
-    if (sprite->data[2] > sAnims[sprite->data[0]].field_8)
+    if (sprite->data[2] > sAnims[sprite->data[0]].data)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
         sprite->pos2.x = 0;
-        if (sAnims[sprite->data[0]].field_4 > 1)
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sAnims[sprite->data[0]].field_4--;
+            sAnims[sprite->data[0]].runs--;
             sprite->data[2] = 0;
         }
         else
@@ -2525,7 +2531,7 @@ static void SwingConcave(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].field_8;
+        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
         sprite->pos2.x = -(Sin(index, 10));
         HandleSetAffineData(sprite, 256, 256, Sin(index, 3276));
     }
@@ -2537,7 +2543,7 @@ static void SwingConcave(struct Sprite *sprite)
 static void Anim_SwingConcave_FastShort(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_8 = 50;
+    sAnims[id].data = 50;
     SwingConcave(sprite);
     sprite->callback = SwingConcave;
 }
@@ -2548,13 +2554,13 @@ static void SwingConvex(struct Sprite *sprite)
         HandleStartAffineAnim(sprite);
 
     TryFlipX(sprite);
-    if (sprite->data[2] > sAnims[sprite->data[0]].field_8)
+    if (sprite->data[2] > sAnims[sprite->data[0]].data)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
         sprite->pos2.x = 0;
-        if (sAnims[sprite->data[0]].field_4 > 1)
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sAnims[sprite->data[0]].field_4--;
+            sAnims[sprite->data[0]].runs--;
             sprite->data[2] = 0;
         }
         else
@@ -2565,7 +2571,7 @@ static void SwingConvex(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].field_8;
+        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
         sprite->pos2.x = -(Sin(index, 10));
         HandleSetAffineData(sprite, 256, 256, -(Sin(index, 3276)));
     }
@@ -2577,7 +2583,7 @@ static void SwingConvex(struct Sprite *sprite)
 static void Anim_SwingConvex_FastShort(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_8 = 50;
+    sAnims[id].data = 50;
     SwingConvex(sprite);
     sprite->callback = SwingConvex;
 }
@@ -2648,9 +2654,9 @@ static void RotateUpSlamDown_2(struct Sprite *sprite)
 
 static void DeepVerticalSquishBounce(struct Sprite *sprite)
 {
-    if (sAnims[sprite->data[0]].field_0 != 0)
+    if (sAnims[sprite->data[0]].delay != 0)
     {
-        sAnims[sprite->data[0]].field_0--;
+        sAnims[sprite->data[0]].delay--;
     }
     else
     {
@@ -2682,10 +2688,10 @@ static void DeepVerticalSquishBounce(struct Sprite *sprite)
             HandleSetAffineData(sprite, 256 + sprite->data[6], 256 - sprite->data[7], 0);
             if (sprite->data[4] == 128)
             {
-                if (sAnims[sprite->data[0]].field_4 > 1)
+                if (sAnims[sprite->data[0]].runs > 1)
                 {
-                    sAnims[sprite->data[0]].field_4--;
-                    sAnims[sprite->data[0]].field_0 = 10;
+                    sAnims[sprite->data[0]].runs--;
+                    sAnims[sprite->data[0]].delay = 10;
                     sprite->data[4] = 0;
                     sprite->data[5] = 0;
                 }
@@ -2698,14 +2704,14 @@ static void DeepVerticalSquishBounce(struct Sprite *sprite)
             }
         }
 
-        sprite->data[4] += sAnims[sprite->data[0]].field_6;
+        sprite->data[4] += sAnims[sprite->data[0]].rotation;
     }
 }
 
 static void Anim_DeepVerticalSquishBounce(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_6 = 4;
+    sAnims[id].rotation = 4;
     DeepVerticalSquishBounce(sprite);
     sprite->callback = DeepVerticalSquishBounce;
 }
@@ -2752,7 +2758,7 @@ static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite);
 static void Anim_HorizontalJumpsVerticalStretch(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_8 = -1;
+    sAnims[id].data = -1;
     HandleStartAffineAnim(sprite);
     sprite->data[3] = 0;
     HorizontalJumpsVerticalStretch_0(sprite);
@@ -2761,9 +2767,9 @@ static void Anim_HorizontalJumpsVerticalStretch(struct Sprite *sprite)
 
 static void HorizontalJumpsVerticalStretch_0(struct Sprite *sprite)
 {
-    if (sAnims[sprite->data[0]].field_0 != 0)
+    if (sAnims[sprite->data[0]].delay != 0)
     {
-        sAnims[sprite->data[0]].field_0--;
+        sAnims[sprite->data[0]].delay--;
     }
     else
     {
@@ -2778,7 +2784,7 @@ static void HorizontalJumpsVerticalStretch_0(struct Sprite *sprite)
         }
         else
         {
-            s32 var = 8 * sAnims[sprite->data[0]].field_8;
+            s32 var = 8 * sAnims[sprite->data[0]].data;
             sprite->pos2.x = var * (counter % 128) / 128;
             sprite->pos2.y = -(Sin(counter % 128, 8));
             sprite->data[2] += 12;
@@ -2805,7 +2811,7 @@ static void HorizontalJumpsVerticalStretch_1(struct Sprite *sprite)
         if (sprite->data[2] >= 16 && sprite->data[2] <= 31)
         {
             sprite->data[3] += 8;
-            sprite->pos2.x -= sAnims[sprite->data[0]].field_8;
+            sprite->pos2.x -= sAnims[sprite->data[0]].data;
         }
 
         yDelta = 0;
@@ -2830,10 +2836,10 @@ static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite)
     counter = sprite->data[2];
     if (counter > 128)
     {
-        if (sAnims[sprite->data[0]].field_4 > 1)
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sAnims[sprite->data[0]].field_4--;
-            sAnims[sprite->data[0]].field_0 = 10;
+            sAnims[sprite->data[0]].runs--;
+            sAnims[sprite->data[0]].delay = 10;
             sprite->data[3] = 0;
             sprite->data[2] = 0;
             sprite->data[4] = 0;
@@ -2850,7 +2856,7 @@ static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite)
     }
     else
     {
-        s32 var = sAnims[sprite->data[0]].field_8;
+        s32 var = sAnims[sprite->data[0]].data;
 
         sprite->pos2.x = var * ((counter % 128) * 8) / 128 + 8 * -var;
         sprite->pos2.y = -(Sin(counter % 128, 8));
@@ -2874,9 +2880,9 @@ static void RotateToSides(struct Sprite *sprite)
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        if (sAnims[sprite->data[0]].field_4 > 1)
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sAnims[sprite->data[0]].field_4--;
+            sAnims[sprite->data[0]].runs--;
             sprite->data[2] = 0;
             sprite->data[7] = 0;
         }
@@ -2895,7 +2901,7 @@ static void RotateToSides(struct Sprite *sprite)
         sprite->pos2.x = -(Sin(sprite->data[7], 16));
         rotation = Sin(sprite->data[7], 32);
         HandleSetAffineData(sprite, 256, 256, rotation << 8);
-        sprite->data[7] += sAnims[sprite->data[0]].field_6;
+        sprite->data[7] += sAnims[sprite->data[0]].rotation;
         TryFlipX(sprite);
     }
 }
@@ -2903,7 +2909,7 @@ static void RotateToSides(struct Sprite *sprite)
 static void Anim_RotateToSides_Fast(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].field_6 = 4;
+    sAnims[id].rotation = 4;
     RotateToSides(sprite);
     sprite->callback = RotateToSides;
 }
@@ -3673,8 +3679,8 @@ static void Anim_BounceRotateToSides_Small(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 2048;
-    sAnims[id].field_8 = sprite->data[6];
+    sAnims[id].rotation = 2048;
+    sAnims[id].data = sprite->data[6];
     BounceRotateToSides(sprite);
     sprite->callback = BounceRotateToSides;
 }
@@ -3726,9 +3732,9 @@ static void Anim_Twist_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 1024;
-    sAnims[id].field_0 = 0;
-    sAnims[id].field_4 = 2;
+    sAnims[id].rotation = 1024;
+    sAnims[id].delay = 0;
+    sAnims[id].runs = 2;
     Twist(sprite);
     sprite->callback = Twist;
 }
@@ -3737,9 +3743,9 @@ static void Anim_CircleCounterclockwise_Slow(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 512;
-    sAnims[id].field_8 = 3;
-    sAnims[id].field_2 = 12;
+    sAnims[id].rotation = 512;
+    sAnims[id].data = 3;
+    sAnims[id].speed = 12;
     CircleCounterclockwise(sprite);
     sprite->callback = CircleCounterclockwise;
 }
@@ -3769,8 +3775,8 @@ static void Anim_Spin(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_0 = 60;
-    sAnims[id].field_8 = 30;
+    sAnims[id].delay = 60;
+    sAnims[id].data = 30;
     Spin(sprite);
     sprite->callback = Spin;
 }
@@ -3779,8 +3785,8 @@ static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_2 = 1;
-    sAnims[id].field_4 = 2;
+    sAnims[id].speed = 1;
+    sAnims[id].runs = 2;
     TumblingFrontFlip(sprite);
     sprite->callback = TumblingFrontFlip;
 }
@@ -3789,8 +3795,8 @@ static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 4;
-    sAnims[id].field_4 = 2;
+    sAnims[id].rotation = 4;
+    sAnims[id].runs = 2;
     DeepVerticalSquishBounce(sprite);
     sprite->callback = DeepVerticalSquishBounce;
 }
@@ -3799,8 +3805,8 @@ static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_8 = 1;
-    sAnims[id].field_4 = 2;
+    sAnims[id].data = 1;
+    sAnims[id].runs = 2;
     HandleStartAffineAnim(sprite);
     sprite->data[3] = 0;
     HorizontalJumpsVerticalStretch_0(sprite);
@@ -3811,7 +3817,7 @@ static void Anim_RotateToSides(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 2;
+    sAnims[id].rotation = 2;
     RotateToSides(sprite);
     sprite->callback = RotateToSides;
 }
@@ -3820,8 +3826,8 @@ static void Anim_RotateToSides_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 4;
-    sAnims[id].field_4 = 2;
+    sAnims[id].rotation = 4;
+    sAnims[id].runs = 2;
     RotateToSides(sprite);
     sprite->callback = RotateToSides;
 }
@@ -3830,7 +3836,7 @@ static void Anim_SwingConcave(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_8 = 100;
+    sAnims[id].data = 100;
     SwingConcave(sprite);
     sprite->callback = SwingConcave;
 }
@@ -3839,8 +3845,8 @@ static void Anim_SwingConcave_Fast(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_8 = 50;
-    sAnims[id].field_4 = 2;
+    sAnims[id].data = 50;
+    sAnims[id].runs = 2;
     SwingConcave(sprite);
     sprite->callback = SwingConcave;
 }
@@ -3849,7 +3855,7 @@ static void Anim_SwingConvex(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_8 = 100;
+    sAnims[id].data = 100;
     SwingConvex(sprite);
     sprite->callback = SwingConvex;
 }
@@ -3858,8 +3864,8 @@ static void Anim_SwingConvex_Fast(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_8 = 50;
-    sAnims[id].field_4 = 2;
+    sAnims[id].data = 50;
+    sAnims[id].runs = 2;
     SwingConvex(sprite);
     sprite->callback = SwingConvex;
 }
@@ -4059,14 +4065,14 @@ static void VerticalShakeLowTwice(struct Sprite *sprite)
     u8 var6, var7;
     u8 var8 = sprite->data[2];
     u8 var9 = sprite->data[6];
-    u8 var5 = sUnknown_0860AA80[sprite->data[5]][0];
+    u8 var5 = sVerticalShakeData[sprite->data[5]][0];
     u8 var2 = var5;
     if (var5 != (u8)-1)
         var5 = sprite->data[7];
     else
         var5 = (u8)-1; // needed to match
 
-    var6 = sUnknown_0860AA80[sprite->data[5]][1];
+    var6 = sVerticalShakeData[sprite->data[5]][1];
     var7 = 0;
     if (var2 != (u8)-2)
         var7 = (var6 - var9) * var5 / var6;
@@ -4186,9 +4192,9 @@ static void Anim_CircleCounterclockwise_Long(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
 
-    sAnims[id].field_6 = 1024;
-    sAnims[id].field_8 = 6;
-    sAnims[id].field_2 = 24;
+    sAnims[id].rotation = 1024;
+    sAnims[id].data = 6;
+    sAnims[id].speed = 24;
     CircleCounterclockwise(sprite);
     sprite->callback = CircleCounterclockwise;
 }
@@ -4323,7 +4329,7 @@ static void Anim_VerticalShakeHorizontalSlide_Fast(struct Sprite *sprite)
     TryFlipX(sprite);
 }
 
-static const s8 sUnknown_0860ADBE[][3] =
+static const s8 sTriangleDownData[][3] =
 {
 //   x    y   timer
     {1,   1, 12},
@@ -4338,13 +4344,13 @@ static void TriangleDown(struct Sprite *sprite)
     if (sprite->data[2] == 0)
         sprite->data[3] = 0;
 
-    if (sUnknown_0860ADBE[sprite->data[3]][2] / sprite->data[5] == sprite->data[2])
+    if (sTriangleDownData[sprite->data[3]][2] / sprite->data[5] == sprite->data[2])
     {
         sprite->data[3]++;
         sprite->data[2] = 0;
     }
 
-    if (sUnknown_0860ADBE[sprite->data[3]][2] / sprite->data[5] == 0)
+    if (sTriangleDownData[sprite->data[3]][2] / sprite->data[5] == 0)
     {
         if (--sprite->data[6] == 0)
             sprite->callback = WaitAnimEnd;
@@ -4354,8 +4360,8 @@ static void TriangleDown(struct Sprite *sprite)
     else
     {
         s32 amplitude = sprite->data[5];
-        sprite->pos2.x += (sUnknown_0860ADBE[sprite->data[3]][0] * amplitude);
-        sprite->pos2.y += (sUnknown_0860ADBE[sprite->data[3]][1] * sprite->data[5]);
+        sprite->pos2.x += (sTriangleDownData[sprite->data[3]][0] * amplitude);
+        sprite->pos2.y += (sTriangleDownData[sprite->data[3]][1] * sprite->data[5]); // Not using amplitude here. No reason for this.
         sprite->data[2]++;
         TryFlipX(sprite);
     }
@@ -4833,11 +4839,11 @@ static void Anim_ConcaveArcSmall_Twice(struct Sprite *sprite)
     ConcaveArc(sprite);
 }
 
-static void sub_8184290(struct Sprite *sprite)
+static void SetHorizontalDip(struct Sprite *sprite)
 {
     u16 index = Sin((sprite->data[2] * 128) / sprite->data[7], sprite->data[5]);
     sprite->data[6] = -(index << 8);
-    sub_817F3F0(sprite, index, sprite->data[4], 0);
+    SetPosForRotation(sprite, index, sprite->data[4], 0);
     HandleSetAffineData(sprite, 256, 256, sprite->data[6]);
 }
 
@@ -4872,7 +4878,7 @@ static void Anim_HorizontalDip(struct Sprite *sprite)
     }
     else
     {
-        sub_8184290(sprite);
+        SetHorizontalDip(sprite);
     }
 
     sprite->data[2]++;
@@ -4909,7 +4915,7 @@ static void Anim_HorizontalDip_Fast(struct Sprite *sprite)
     }
     else
     {
-        sub_8184290(sprite);
+        SetHorizontalDip(sprite);
     }
 
     sprite->data[2]++;
@@ -4946,7 +4952,7 @@ static void Anim_HorizontalDip_Twice(struct Sprite *sprite)
     }
     else
     {
-        sub_8184290(sprite);
+        SetHorizontalDip(sprite);
     }
 
     sprite->data[2]++;
@@ -5142,7 +5148,7 @@ static void Anim_JoltRight_Slow(struct Sprite *sprite)
     sprite->callback = JoltRight;
 }
 
-static void sub_8184770(struct Sprite *sprite)
+static void SetShakeFlashYellowPos(struct Sprite *sprite)
 {
     sprite->pos2.x = sprite->data[1];
     if (sprite->data[0] > 1)
@@ -5156,80 +5162,74 @@ static void sub_8184770(struct Sprite *sprite)
     }
 }
 
-struct YellowBlendStruct
+static const struct YellowFlashData sShakeYellowFlashData_Fast[] =
 {
-    u8 field_0;
-    u8 field_1;
+    {FALSE,  1},
+    { TRUE,  2},
+    {FALSE, 15},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    {FALSE, -1}
 };
 
-static const struct YellowBlendStruct sUnknown_0860ADCC[] =
+static const struct YellowFlashData sShakeYellowFlashData_Normal[] =
 {
-    {0, 1},
-    {1, 2},
-    {0, 15},
-    {1, 1},
-    {0, 15},
-    {1, 1},
-    {0, 15},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {0, 0xFF}
+    {FALSE,  5},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  4},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    {FALSE, -1}
 };
 
-static const struct YellowBlendStruct sUnknown_0860AE1C[] =
+static const struct YellowFlashData sShakeYellowFlashData_Slow[] =
 {
-    {0, 5},
-    {1, 1},
-    {0, 15},
-    {1, 4},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {0, 0xFF}
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE, 20},
+    { TRUE,  1},
+    {FALSE, 20},
+    { TRUE,  1},
+    {FALSE, 20},
+    { TRUE,  1},
+    {FALSE,  1},
+    {FALSE, -1}
 };
 
-static const struct YellowBlendStruct sUnknown_0860AE54[] =
+static const struct YellowFlashData *const sShakeYellowFlashData[] =
 {
-    {0, 1},
-    {1, 1},
-    {0, 20},
-    {1, 1},
-    {0, 20},
-    {1, 1},
-    {0, 20},
-    {1, 1},
-    {0, 1},
-    {0, 0xFF}
-};
-
-static const struct YellowBlendStruct *const sUnknown_0860AE7C[] =
-{
-    sUnknown_0860ADCC,
-    sUnknown_0860AE1C,
-    sUnknown_0860AE54
+    sShakeYellowFlashData_Fast,
+    sShakeYellowFlashData_Normal,
+    sShakeYellowFlashData_Slow
 };
 
 static void ShakeFlashYellow(struct Sprite *sprite)
 {
-    const struct YellowBlendStruct *array = sUnknown_0860AE7C[sprite->data[3]];
-    sub_8184770(sprite);
-    if (array[sprite->data[6]].field_1 == 0xFF)
+    const struct YellowFlashData *array = sShakeYellowFlashData[sprite->data[3]];
+    SetShakeFlashYellowPos(sprite);
+    if (array[sprite->data[6]].time == (u8)-1)
     {
         sprite->pos2.x = 0;
         sprite->callback = WaitAnimEnd;
@@ -5238,7 +5238,7 @@ static void ShakeFlashYellow(struct Sprite *sprite)
     {
         if (sprite->data[4] == 1)
         {
-            if (array[sprite->data[6]].field_0 != 0)
+            if (array[sprite->data[6]].isYellow)
                 BlendPalette(sprite->data[7], 16, 16, RGB_YELLOW);
             else
                 BlendPalette(sprite->data[7], 16, 0, RGB_YELLOW);
@@ -5246,7 +5246,7 @@ static void ShakeFlashYellow(struct Sprite *sprite)
             sprite->data[4] = 0;
         }
 
-        if (array[sprite->data[6]].field_1 == sprite->data[5])
+        if (array[sprite->data[6]].time == sprite->data[5])
         {
             sprite->data[4] = 1;
             sprite->data[5] = 0;
