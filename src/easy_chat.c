@@ -3932,7 +3932,7 @@ static void PrintTitle(void)
 
     xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    PrintEasyChatTextWithColors(0, 1, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+    PrintEasyChatTextWithColors(0, 1, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -4330,7 +4330,7 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
                 if (!DummyWordCheck(easyChatWord))
                     PrintEasyChatText(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, NULL);
                 else // Never reached
-                    PrintEasyChatTextWithColors(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GREY);
+                    PrintEasyChatTextWithColors(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
             }
         }
 
