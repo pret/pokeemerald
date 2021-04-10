@@ -52,7 +52,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "47",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_PERSIM",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -65,7 +65,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "48",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_ASPEAR",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -78,7 +78,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "49",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_RAWST",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -91,7 +91,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "50",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_CHESTO",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -104,7 +104,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "51",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_SOIL_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -117,7 +117,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "52",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_NANAB_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -130,7 +130,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "53",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_NANAB_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -143,7 +143,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "54",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_121_SOIL_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },

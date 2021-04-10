@@ -278,7 +278,7 @@ BattleFrontier_BattleTowerLobby_EventScript_Reporter:: @ 828CB96
 BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview:: @ 828CBD8
 	message BattleFrontier_BattleTowerLobby_Text_HowDidBattleTowerTurnOut
 	waitmessage
-	multichoice 20, 8, MULTI_SATISFACTION, 1
+	multichoice 20, 8, MULTI_SATISFACTION, TRUE
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_Satisfied
@@ -341,4 +341,17 @@ BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter:: @ 828CC84
 
 BattleFrontier_BattleTowerLobby_EventScript_HideReporter:: @ 828CCA6
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
+	return
+
+@ Unused
+EventScript_ContestLiveInterview:: @ 828CCAA
+	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
+	special InterviewBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_ContestLiveInterviewEnd
+	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
+	special InterviewAfter
+	return
+
+EventScript_ContestLiveInterviewEnd:: @ 828CCC6
 	return

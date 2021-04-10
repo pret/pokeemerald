@@ -890,7 +890,7 @@ static void sub_81CBC1C(void)
 static void sub_81CBC38(int arg0)
 {
     u8 taskId = FindTaskIdByFunc(sub_81CBC64);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
         gTasks[taskId].data[15] = arg0;
 }
 
@@ -1061,15 +1061,15 @@ static void UpdateWindowsToShowCheckPage(struct Pokenav4Struct *state)
 static void sub_81CC034(struct Pokenav4Struct *state)
 {
     state->msgBoxWindowId = AddWindow(&sCallMsgBoxWindowTemplate);
-    sub_8197184(state->msgBoxWindowId, 1, 4);
+    LoadMatchCallWindowGfx(state->msgBoxWindowId, 1, 4);
     sub_81C7B40();
 }
 
 static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *state)
 {
     struct Sprite *sprite;
-    sub_8197184(state->msgBoxWindowId, 1, 4);
-    sub_81971C4(state->msgBoxWindowId, 1, 4);
+    LoadMatchCallWindowGfx(state->msgBoxWindowId, 1, 4);
+    DrawMatchCallTextBoxBorder(state->msgBoxWindowId, 1, 4);
     FillWindowPixelBuffer(state->msgBoxWindowId, PIXEL_FILL(1));
     PutWindowTilemap(state->msgBoxWindowId);
     CopyWindowToVram(state->msgBoxWindowId, 3);
