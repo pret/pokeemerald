@@ -121,7 +121,7 @@ static void Task_DiplomaFadeOut(u8 taskId)
         Free(sDiplomaTilemapPtr);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
-        SetMainCallback2(sub_80861E8);
+        SetMainCallback2(CB2_ReturnToFieldFadeFromBlack);
     }
 }
 

@@ -1055,14 +1055,4 @@ struct MapPosition
     s8 height;
 };
 
-struct TradeRoomPlayer
-{
-    u8 playerId;
-    u8 isLocalPlayer;
-    u8 c;
-    u8 facing;
-    struct MapPosition pos;
-    u16 field_C;
-};
-
 #endif // GUARD_GLOBAL_H

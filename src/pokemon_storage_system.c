@@ -6884,18 +6884,18 @@ static void SetCursorMonData(void *pokemon, u8 mode)
             *(txtPtr)++ = CHAR_FEMALE;
             break;
         default:
-            *(txtPtr)++ = TEXT_COLOR_DARK_GREY;
+            *(txtPtr)++ = TEXT_COLOR_DARK_GRAY;
             *(txtPtr)++ = TEXT_COLOR_WHITE;
-            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREY;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GRAY;
             *(txtPtr)++ = CHAR_UNK_SPACER;
             break;
         }
 
         *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
         *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-        *(txtPtr++) = TEXT_COLOR_DARK_GREY;
+        *(txtPtr++) = TEXT_COLOR_DARK_GRAY;
         *(txtPtr++) = TEXT_COLOR_WHITE;
-        *(txtPtr++) = TEXT_COLOR_LIGHT_GREY;
+        *(txtPtr++) = TEXT_COLOR_LIGHT_GRAY;
         *(txtPtr++) = CHAR_SPACE;
         *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = CHAR_LV_2;

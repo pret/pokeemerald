@@ -3859,13 +3859,13 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
     case 0:
     case 3:
         txtColor[0] = TEXT_COLOR_WHITE;
-        txtColor[1] = TEXT_COLOR_DARK_GREY;
-        txtColor[2] = TEXT_COLOR_LIGHT_GREY;
+        txtColor[1] = TEXT_COLOR_DARK_GRAY;
+        txtColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 1:
         txtColor[0] = TEXT_COLOR_TRANSPARENT;
-        txtColor[1] = TEXT_COLOR_DARK_GREY;
-        txtColor[2] = TEXT_COLOR_LIGHT_GREY;
+        txtColor[1] = TEXT_COLOR_DARK_GRAY;
+        txtColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 2:
         txtColor[0] = TEXT_COLOR_TRANSPARENT;

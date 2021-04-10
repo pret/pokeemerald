@@ -179,7 +179,7 @@ typedef union // size = 0x24
         /*0x18*/ u8 idolNameLanguage;
     } fanClubSpecial;
 
-    // TVSHOW_CONTEST_LIVE_UPDATES_2
+    // TVSHOW_LILYCOVE_CONTEST_LADY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
@@ -189,7 +189,7 @@ typedef union // size = 0x24
         /*0x16*/ u8 pokeblockState;
         /*0x17*/ u8 language;
         /*0x18*/ u8 pokemonNameLanguage;
-    } contestLiveUpdates2;
+    } contestLady;
 
     // Record Mixing Shows
     // TVSHOW_POKEMON_TODAY_CAUGHT
