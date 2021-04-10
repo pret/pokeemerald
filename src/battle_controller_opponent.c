@@ -79,7 +79,7 @@ static void OpponentHandleSetUnkVar(void);
 static void OpponentHandleClearUnkFlag(void);
 static void OpponentHandleToggleUnkFlag(void);
 static void OpponentHandleHitAnimation(void);
-static void OpponentHandleCmd42(void);
+static void OpponentHandleCantSwitch(void);
 static void OpponentHandlePlaySE(void);
 static void OpponentHandlePlayFanfareOrBGM(void);
 static void OpponentHandleFaintingCry(void);
@@ -151,7 +151,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = OpponentHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = OpponentHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = OpponentHandleHitAnimation,
-    [CONTROLLER_42]                       = OpponentHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = OpponentHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = OpponentHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = OpponentHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = OpponentHandleFaintingCry,
@@ -1813,7 +1813,7 @@ static void OpponentHandleHitAnimation(void)
     }
 }
 
-static void OpponentHandleCmd42(void)
+static void OpponentHandleCantSwitch(void)
 {
     OpponentBufferExecCompleted();
 }

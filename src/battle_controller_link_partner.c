@@ -72,7 +72,7 @@ static void LinkPartnerHandleSetUnkVar(void);
 static void LinkPartnerHandleClearUnkFlag(void);
 static void LinkPartnerHandleToggleUnkFlag(void);
 static void LinkPartnerHandleHitAnimation(void);
-static void LinkPartnerHandleCmd42(void);
+static void LinkPartnerHandleCantSwitch(void);
 static void LinkPartnerHandlePlaySE(void);
 static void LinkPartnerHandlePlayFanfareOrBGM(void);
 static void LinkPartnerHandleFaintingCry(void);
@@ -143,7 +143,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = LinkPartnerHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = LinkPartnerHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = LinkPartnerHandleHitAnimation,
-    [CONTROLLER_42]                       = LinkPartnerHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = LinkPartnerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkPartnerHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = LinkPartnerHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = LinkPartnerHandleFaintingCry,
@@ -1477,7 +1477,7 @@ static void LinkPartnerHandleHitAnimation(void)
     }
 }
 
-static void LinkPartnerHandleCmd42(void)
+static void LinkPartnerHandleCantSwitch(void)
 {
     LinkPartnerBufferExecCompleted();
 }

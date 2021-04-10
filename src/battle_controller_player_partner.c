@@ -70,7 +70,7 @@ static void PlayerPartnerHandleSetUnkVar(void);
 static void PlayerPartnerHandleClearUnkFlag(void);
 static void PlayerPartnerHandleToggleUnkFlag(void);
 static void PlayerPartnerHandleHitAnimation(void);
-static void PlayerPartnerHandleCmd42(void);
+static void PlayerPartnerHandleCantSwitch(void);
 static void PlayerPartnerHandlePlaySE(void);
 static void PlayerPartnerHandlePlayFanfareOrBGM(void);
 static void PlayerPartnerHandleFaintingCry(void);
@@ -146,7 +146,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = PlayerPartnerHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = PlayerPartnerHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = PlayerPartnerHandleHitAnimation,
-    [CONTROLLER_42]                       = PlayerPartnerHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = PlayerPartnerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = PlayerPartnerHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = PlayerPartnerHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = PlayerPartnerHandleFaintingCry,
@@ -1727,7 +1727,7 @@ static void PlayerPartnerHandleHitAnimation(void)
     }
 }
 
-static void PlayerPartnerHandleCmd42(void)
+static void PlayerPartnerHandleCantSwitch(void)
 {
     PlayerPartnerBufferExecCompleted();
 }
