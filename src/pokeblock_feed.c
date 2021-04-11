@@ -498,13 +498,13 @@ static const union AffineAnimCmd *const sThrownPokeblockAffineAnimTable[] =
 
 static const struct CompressedSpriteSheet sPokeblock_SpriteSheet =
 {
-    gPokeblock_Gfx, 0x20, GFX_TAG_POKEBLOCK
+    gPokeblock_Gfx, 0x20, TAG_POKEBLOCK
 };
 
 static const struct SpriteTemplate sThrownPokeblockSpriteTemplate =
 {
-    .tileTag = GFX_TAG_POKEBLOCK,
-    .paletteTag = GFX_TAG_POKEBLOCK,
+    .tileTag = TAG_POKEBLOCK,
+    .paletteTag = TAG_POKEBLOCK,
     .oam = &sThrownPokeblockOamData,
     .anims = sThrownPokeblockAnimTable,
     .images = NULL,
@@ -711,7 +711,7 @@ static void SetPokeblockSpritePal(u8 pokeblockCaseId)
 {
     u8 colorId = GetPokeblockData(&gSaveBlock1Ptr->pokeblocks[pokeblockCaseId], PBLOCK_COLOR);
     sPokeblockSpritePal.data = sPokeblocksPals[colorId - 1];
-    sPokeblockSpritePal.tag = GFX_TAG_POKEBLOCK;
+    sPokeblockSpritePal.tag = TAG_POKEBLOCK;
 }
 
 // defines for task data fields
