@@ -37,7 +37,7 @@
 #define MENU_MIDPOINT (MAX_MENU_ITEMS / 2)
 
 #define TILE_HIGHLIGHT_NONE 0x0005 // Tile number for the bg of an unselected menu item 
-#define TILE_HIGHLIGHT_BLUE 0x1005  // Tile number for the bg of a selected menu item 
+#define TILE_HIGHLIGHT_BLUE 0x1005 // Tile number for the bg of a selected menu item 
 #define TILE_HIGHLIGHT_RED  0x2005 // Tile number for the bg of a menu item to swap
 
 #define TAG_POKEBLOCK_CASE  14800

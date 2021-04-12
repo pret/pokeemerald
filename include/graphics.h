@@ -4076,7 +4076,7 @@ extern const u8 gNamingScreenCursor_Gfx[];
 extern const u8 gNamingScreenInputArrow_Gfx[];
 extern const u8 gNamingScreenUnderscore_Gfx[];
 
-extern const u32 gUnknown_08D9BA44[];
+extern const u32 gPokeblockFeedBg_Tilemap[];
 
 extern const u32 gConfetti_Gfx[];
 extern const u32 gConfetti_Pal[];
