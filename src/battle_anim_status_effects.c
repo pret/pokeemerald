@@ -17,14 +17,14 @@ extern const u8 *const gBattleAnims_StatusConditions[];
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
-static void UnusedTask_80A9DB4(u8 taskId);
+static void Task_UpdateFlashingCircleImpacts(u8 taskId);
 static void AnimTask_FrozenIceCube_Step1(u8 taskId);
 static void AnimTask_FrozenIceCube_Step2(u8 taskId);
 static void AnimTask_FrozenIceCube_Step3(u8 taskId);
 static void AnimTask_FrozenIceCube_Step4(u8 taskId);
 static void Task_DoStatusAnimation(u8 taskId);
-static void AnimUnused_80A9E44(struct Sprite *sprite);
-static void AnimUnused_80A9E44_Step(struct Sprite *sprite);
+static void AnimFlashingCircleImpact(struct Sprite *sprite);
+static void AnimFlashingCircleImpact_Step(struct Sprite *sprite);
 
 static const union AnimCmd sAnim_Unused_853EDE4[] =
 {
@@ -259,7 +259,7 @@ static const struct SpriteTemplate gFrozenIceCubeSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct SpriteTemplate gUnusedSpriteTemplate_0853EF60 =
+static const struct SpriteTemplate sFlashingCircleImpactSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CIRCLE_IMPACT,
     .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
@@ -267,31 +267,31 @@ static const struct SpriteTemplate gUnusedSpriteTemplate_0853EF60 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_80A9E44,
+    .callback = AnimFlashingCircleImpact,
 };
 
 // Unused
-u8 Unused_80A9C70(u8 battlerId, bool8 b)
+static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
 {
     u8 battlerSpriteId = gBattlerSpriteIds[battlerId];
-    u8 taskId = CreateTask(UnusedTask_80A9DB4, 10);
-    u8 spriteId2;
+    u8 taskId = CreateTask(Task_UpdateFlashingCircleImpacts, 10);
+    u8 spriteId;
     u8 i;
 
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
     gTasks[taskId].data[0] = battlerId;
-    if (b)
+    if (red)
     {
         gTasks[taskId].data[1] = RGB_RED;
         for (i = 0; i < 10; i++)
         {
-            spriteId2 = CreateSprite(&gUnusedSpriteTemplate_0853EF60, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y + 32, 0);
-            gSprites[spriteId2].data[0] = i * 51;
-            gSprites[spriteId2].data[1] = -256;
-            gSprites[spriteId2].invisible = TRUE;
+            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y + 32, 0);
+            gSprites[spriteId].data[0] = i * 51;
+            gSprites[spriteId].data[1] = -256;
+            gSprites[spriteId].invisible = TRUE;
             if (i > 4)
-                gSprites[spriteId2].data[6] = 21;
+                gSprites[spriteId].data[6] = 21;
         }
     }
     else
@@ -299,19 +299,19 @@ u8 Unused_80A9C70(u8 battlerId, bool8 b)
         gTasks[taskId].data[1] = RGB_BLUE;
         for (i = 0; i < 10; i++)
         {
-            spriteId2 = CreateSprite(&gUnusedSpriteTemplate_0853EF60, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y - 32, 0);
-            gSprites[spriteId2].data[0] = i * 51;
-            gSprites[spriteId2].data[1] = 256;
-            gSprites[spriteId2].invisible = TRUE;
+            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y - 32, 0);
+            gSprites[spriteId].data[0] = i * 51;
+            gSprites[spriteId].data[1] = 256;
+            gSprites[spriteId].invisible = TRUE;
             if (i > 4)
-                gSprites[spriteId2].data[6] = 21;
+                gSprites[spriteId].data[6] = 21;
         }
     }
-    gSprites[spriteId2].data[7] = 1;
+    gSprites[spriteId].data[7] = 1;
     return taskId;
 }
 
-static void UnusedTask_80A9DB4(u8 taskId)
+static void Task_UpdateFlashingCircleImpacts(u8 taskId)
 {
     if (gTasks[taskId].data[2] == 2)
     {
@@ -344,13 +344,13 @@ static void UnusedTask_80A9DB4(u8 taskId)
     }
 }
 
-static void AnimUnused_80A9E44(struct Sprite *sprite)
+static void AnimFlashingCircleImpact(struct Sprite *sprite)
 {
     if (sprite->data[6] == 0)
     {
         sprite->invisible = FALSE;
-        sprite->callback = AnimUnused_80A9E44_Step;
-        AnimUnused_80A9E44_Step(sprite);
+        sprite->callback = AnimFlashingCircleImpact_Step;
+        AnimFlashingCircleImpact_Step(sprite);
     }
     else
     {
@@ -358,7 +358,7 @@ static void AnimUnused_80A9E44(struct Sprite *sprite)
     }
 }
 
-static void AnimUnused_80A9E44_Step(struct Sprite *sprite)
+static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
 {
     sprite->pos2.x = Cos(sprite->data[0], 32);
     sprite->pos2.y = Sin(sprite->data[0], 8);
