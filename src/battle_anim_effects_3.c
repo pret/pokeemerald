@@ -91,7 +91,7 @@ static void AnimMeteorMashStar(struct Sprite *);
 static void AnimMeteorMashStar_Step(struct Sprite *sprite);
 static void AnimBlockX(struct Sprite *);
 static void AnimBlockX_Step(struct Sprite *);
-static void sub_815FE80(struct Sprite *);
+static void AnimUnusedItemBagSteal(struct Sprite *);
 static void AnimKnockOffStrike(struct Sprite *);
 static void AnimKnockOffStrike_Step(struct Sprite *sprite);
 static void AnimRecycle(struct Sprite *);
@@ -432,7 +432,7 @@ const struct SpriteTemplate gRapidSpinSpriteTemplate =
     .callback = AnimRapidSpin,
 };
 
-const union AffineAnimCmd gUnknown_085CE2A0[] =
+static const union AffineAnimCmd sAffineAnims_Torment[] =
 {
     AFFINEANIMCMD_FRAME(-12, 8, 0, 4),
     AFFINEANIMCMD_FRAME(20, -20, 0, 4),
@@ -718,7 +718,7 @@ const struct SpriteTemplate gSweetScentPetalSpriteTemplate =
     .callback = AnimSweetScentPetal,
 };
 
-const u16 gUnknown_085CE55C[] = INCBIN_U16("graphics/unknown/unknown_85CE55C.gbapal");
+static const u16 sUnusedPalette[] = INCBIN_U16("graphics/battle_anims/unused.gbapal");
 
 const union AnimCmd gPainSplitAnimCmds[] =
 {
@@ -1071,7 +1071,7 @@ const struct SpriteTemplate gMeteorMashStarSpriteTemplate =
     .callback = AnimMeteorMashStar,
 };
 
-const struct SpriteTemplate gUnknown_085CE8F4 =
+static const struct SpriteTemplate sUnusedStarBurstSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GOLD_STARS,
     .paletteTag = ANIM_TAG_GOLD_STARS,
@@ -1093,7 +1093,7 @@ const struct SpriteTemplate gBlockXSpriteTemplate =
     .callback = AnimBlockX,
 };
 
-const struct SpriteTemplate gUnknown_085CE924 =
+static const struct SpriteTemplate sUnusedItemBagStealSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ITEM_BAG,
     .paletteTag = ANIM_TAG_ITEM_BAG,
@@ -1101,7 +1101,7 @@ const struct SpriteTemplate gUnknown_085CE924 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815FE80,
+    .callback = AnimUnusedItemBagSteal,
 };
 
 const union AnimCmd gKnockOffStrikeAnimCmds[] =
@@ -1944,7 +1944,7 @@ static void TormentAttacker_Step(u8 taskId)
             task->data[5] -= 6;
         }
 
-        PrepareAffineAnimInTaskData(task, task->data[15], gUnknown_085CE2A0);
+        PrepareAffineAnimInTaskData(task, task->data[15], sAffineAnims_Torment);
         task->data[1]++;
         task->data[0] = 1;
         break;
@@ -3580,7 +3580,7 @@ static void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
     sprite->callback = DestroyAnimSpriteAfterTimer;
 }
 
-static void sub_815D8D8(u8 taskId)
+static void AnimTask_SlideMonForFocusBand_Step2(u8 taskId)
 {
     u16 var0 = 0;
     u16 var1 = 0;
@@ -3630,7 +3630,7 @@ static void sub_815D8D8(u8 taskId)
     }
 }
 
-static void sub_815DA20(u8 taskId)
+static void AnimTask_SlideMonForFocusBand_Step1(u8 taskId)
 {
     u16 var0 = 0;
     u16 var1 = 0;
@@ -3679,7 +3679,7 @@ static void sub_815DA20(u8 taskId)
     {
         gTasks[taskId].data[0] = 30;
         gTasks[taskId].data[13] = 0;
-        gTasks[taskId].func = sub_815D8D8;
+        gTasks[taskId].func = AnimTask_SlideMonForFocusBand_Step2;
     }
 }
 
@@ -3714,7 +3714,7 @@ void AnimTask_SlideMonForFocusBand(u8 taskId)
     gTasks[taskId].data[7] = 0;
     gTasks[taskId].data[4] = gBattleAnimArgs[4];
     gTasks[taskId].data[5] = gBattleAnimArgs[5];
-    gTasks[taskId].func = sub_815DA20;
+    gTasks[taskId].func = AnimTask_SlideMonForFocusBand_Step1;
 }
 
 // Squishes the mon vertically and emits sweat droplets a few times.
@@ -4737,7 +4737,7 @@ void AnimTask_MonToSubstitute(u8 taskId)
             StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], 0);
         }
 
-        for (i = 0; i < 16; i++)
+        for (i = 0; i < NUM_TASK_DATA; i++)
             gTasks[taskId].data[i] = 0;
 
         gTasks[taskId].func = AnimTask_MonToSubstituteDoll;
@@ -5143,7 +5143,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     }
 }
 
-static void sub_815FE80(struct Sprite *sprite)
+static void AnimUnusedItemBagSteal(struct Sprite *sprite)
 {
     switch (sprite->data[7])
     {
