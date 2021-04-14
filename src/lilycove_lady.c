@@ -805,7 +805,7 @@ void Script_BufferContestLadyCategoryAndMonName(void)
 
 void OpenPokeblockCaseForContestLady(void)
 {
-    OpenPokeblockCase(3, CB2_ReturnToField);
+    OpenPokeblockCase(PBLOCK_CASE_GIVE, CB2_ReturnToField);
 }
 
 void SetContestLadyGivenPokeblock(void)

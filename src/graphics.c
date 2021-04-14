@@ -1201,7 +1201,7 @@ const u32 gPokeblockBlack_Pal[] = INCBIN_U32("graphics/pokeblock/black.gbapal.lz
 const u32 gPokeblockWhite_Pal[] = INCBIN_U32("graphics/pokeblock/white.gbapal.lz");
 const u32 gPokeblockGold_Pal[] = INCBIN_U32("graphics/pokeblock/gold.gbapal.lz");
 
-const u32 gUnknown_08D9BA44[] = INCBIN_U32("graphics/interface/pokeblock_feeding_bg_map.bin.lz");
+const u32 gPokeblockFeedBg_Tilemap[] = INCBIN_U32("graphics/interface/pokeblock_feeding_bg_map.bin.lz");
 
 #include "data/graphics/berries.h"
 #include "data/graphics/rayquaza_scene.h"
