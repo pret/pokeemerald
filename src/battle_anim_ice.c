@@ -49,16 +49,16 @@ static void AnimTask_LoadMistTiles_Step(u8);
 static void AnimTask_Hail2(u8);
 static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c);
 
-static const union AnimCmd sAnim_Unused_08595A48[] =
+static const union AnimCmd sAnim_Unused[] =
 {
     ANIMCMD_FRAME(0, 5, .hFlip = TRUE),
     ANIMCMD_FRAME(1, 5, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_Unused_08595A54[] =
+static const union AnimCmd *const sAnims_Unused[] =
 {
-    sAnim_Unused_08595A48,
+    sAnim_Unused,
 };
 
 // Unused

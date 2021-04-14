@@ -290,7 +290,7 @@ const struct SpriteTemplate gDiveBallSpriteTemplate =
     .callback = AnimDiveBall,
 };
 
-static const union AffineAnimCmd sAnim_Unused_085964A8[] =
+static const union AffineAnimCmd sAnim_Unused[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x0, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x20, 0, 12),
@@ -299,9 +299,9 @@ static const union AffineAnimCmd sAnim_Unused_085964A8[] =
 };
 
 // Unused
-static const union AffineAnimCmd *const sAnims_Unused_085964C8[] =
+static const union AffineAnimCmd *const sAnims_Unused[] =
 {
-    sAnim_Unused_085964A8,
+    sAnim_Unused,
 };
 
 const struct SpriteTemplate gDiveWaterSplashSpriteTemplate =
