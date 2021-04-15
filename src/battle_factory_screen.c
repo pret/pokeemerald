@@ -1476,7 +1476,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
         sFactorySelectMons = AllocZeroed(sizeof(struct Pokemon) * SELECTABLE_MONS_COUNT);
         for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
             sFactorySelectMons[i] = sFactorySelectScreen->mons[i].monData;
-        ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, sFactorySelectMons, currMonId, SELECTABLE_MONS_COUNT - 1, CB2_InitSelectScreen);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, sFactorySelectMons, currMonId, SELECTABLE_MONS_COUNT - 1, CB2_InitSelectScreen);
         break;
     }
 }
@@ -2390,7 +2390,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
         DestroyTask(taskId);
         sFactorySwapScreen->fromSummaryScreen = TRUE;
         sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[244];
-        ShowPokemonSummaryScreen(PSS_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
         break;
     }
 }

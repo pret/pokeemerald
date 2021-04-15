@@ -2703,11 +2703,11 @@ static void CB2_ShowPokemonSummaryScreen(void)
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
     {
         UpdatePartyToBattleOrder();
-        ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
     }
     else
     {
-        ShowPokemonSummaryScreen(PSS_MODE_NORMAL, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
     }
 }
 
@@ -6265,7 +6265,7 @@ static void Task_BattlePyramidChooseMonHeldItems(u8 taskId)
 
 void MoveDeleterChooseMoveToForget(void)
 {
-    ShowPokemonSummaryScreen(PSS_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
     gFieldCallback = FieldCB_ContinueScriptHandleMusic;
 }
 
