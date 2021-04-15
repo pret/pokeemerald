@@ -51,8 +51,6 @@ void ZeroBoxMonAt(u8 boxId, u8 boxPosition);
 void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon *dst);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 boxPosition);
 u8 *GetBoxNamePtr(u8 boxId);
-u8 GetBoxWallpaper(u8 boxId);
-void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
 s16 sub_80D214C(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3);
 bool8 CheckFreePokemonStorageSpace(void);
 bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition);

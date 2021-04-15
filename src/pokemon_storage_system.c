@@ -138,6 +138,7 @@ enum {
     MENU_MACHINE,
     MENU_SIMPLE,
 };
+#define MENU_WALLPAPER_SETS_START MENU_SCENERY_1
 #define MENU_WALLPAPERS_START MENU_FOREST
 
 enum {
@@ -151,27 +152,6 @@ enum {
     MODE_PARTY,
     MODE_BOX,
     MODE_MOVE,
-};
-
-enum {
-    WALLPAPER_FOREST,
-    WALLPAPER_CITY,
-    WALLPAPER_DESERT,
-    WALLPAPER_SAVANNA,
-    WALLPAPER_CRAG,
-    WALLPAPER_VOLCANO,
-    WALLPAPER_SNOW,
-    WALLPAPER_CAVE,
-    WALLPAPER_BEACH,
-    WALLPAPER_SEAFLOOR,
-    WALLPAPER_RIVER,
-    WALLPAPER_SKY,
-    WALLPAPER_POLKADOT,
-    WALLPAPER_POKECENTER,
-    WALLPAPER_MACHINE,
-    WALLPAPER_PLAIN,
-    WALLPAPER_FRIENDS, // The one received as a gift from Walda's parents.
-    WALLPAPER_COUNT
 };
 
 enum {
@@ -206,26 +186,28 @@ enum {
 #define TAG_PAL_DAC6        0xDAC6
 #define TAG_PAL_DACE        0xDACE
 #define TAG_PAL_DAC7        0xDAC7
-#define TAG_PAL_DAC9        0xDAC9
+#define PALTAG_BOX_TITLE        0xDAC9
 #define TAG_PAL_DAC0        0xDAC0
 #define TAG_PAL_DACB        0xDACB
 
-#define TAG_TILE_WAVEFORM   0x5
-#define TAG_TILE_10         0x10
-#define TAG_TILE_2          0x2
-#define TAG_TILE_D          0xD
-#define TAG_TILE_A          0xA
-#define TAG_TILE_3          0x3
-#define TAG_TILE_4          0x4
-#define TAG_TILE_12         0x12
-#define TAG_TILE_7          0x7
-#define TAG_TILE_0          0x0
-#define TAG_TILE_1          0x1
+#define TAG_TILE_0           0
+#define TAG_TILE_1           1
+#define TAG_TILE_2           2
+#define GFXTAG_BOX_TITLE     3
+#define GFXTAG_BOX_TITLE_ALT 4
+#define TAG_TILE_WAVEFORM    5
+#define GFXTAG_ARROW         6
+#define TAG_TILE_7           7
+#define TAG_TILE_A          10
+#define TAG_TILE_D          13
+#define TAG_TILE_10         16
+#define TAG_TILE_12         18
 
-struct WallpaperTable
+
+struct Wallpaper
 {
     const u32 *tiles;
-    const u32 *tileMap;
+    const u32 *tilemap;
     const u16 *palettes;
 };
 
@@ -275,7 +257,7 @@ struct UnkPSSStruct_2002370
     struct Sprite *unk_0000;
     struct Sprite *unk_0004[4];
     u32 unk_0014[3];
-    struct Sprite *unk_0020[2];
+    struct Sprite *arrowSprites[2];
     u8 filler_0028[0x214];
     u32 unk_023c;
     u16 unk_0240;
@@ -317,37 +299,37 @@ struct PokemonStorageSystemData
     u16 bg2_X;
     s16 wallpaperScrollSpeed;
     u16 field_2D0;
-    u8 field_2D2;
+    u8 wallpaperOffset;
     u8 field_2D3; // Written to, but never read.
-    u8 field_2D4; // Written to, but never read.
+    u8 scrollToBoxIdUnused; // Written to, but never read.
     u16 field_2D6; // Written to, but never read.
-    s16 field_2D8; // Written to, but never read.
+    s16 scrollDirectionUnused; // Written to, but never read.
     u16 field_2DA; // Written to, but never read.
     u16 field_2DC; // Written to, but never read.
     u16 field_2DE; // Written to, but never read.
     u16 field_2E0; // Written to, but never read.
     u8 filler[22];
-    u8 field_2F8[1024];
-    u8 field_6F8;
-    u8 field_6F9; // Written to, but never read.
-    u8 field_6FA;
-    s8 field_6FB;
-    u16 field_6FC[16];
-    u16 field_71C;
-    u16 field_71E;
-    struct Sprite *field_720[2];
-    struct Sprite *field_728[2];
-    struct Sprite *field_730[2];
-    u32 field_738;
+    u8 boxTitleTiles[1024];
+    u8 boxTitleCycleId;
+    u8 wallpaperLoadState; // Written to, but never read.
+    u8 wallpaperLoadBoxId;
+    s8 wallpaperLoadDir;
+    u16 boxTitlePal[16];
+    u16 boxTitlePalOffset;
+    u16 boxTitleAltPalOffset;
+    struct Sprite *curBoxTitleSprites[2];
+    struct Sprite *nextBoxTitleSprites[2];
+    struct Sprite *arrowSprites[2];
+    u32 boxTitlePalBits;
     u8 field_73C[80]; // Unused
     u16 field_78C; // Written to, but never read.
     s16 wallpaperSetId;
     s16 wallpaperId;
-    u16 field_792[360];
+    u16 wallpaperTilemap[360];
     u8 wallpaperChangeState;
-    u8 field_A63;
-    u8 boxScrollDestination;
-    s8 field_A65;
+    u8 scrollState;
+    u8 scrollToBoxId;
+    s8 scrollDirection;
     u8 *wallpaperTiles;
     struct Sprite *movingMonSprite;
     struct Sprite *partySprites[PARTY_SIZE];
@@ -433,7 +415,7 @@ struct PokemonStorageSystemData
         struct BoxPokemon *box;
     } field_218C;
     u8 field_2190[40];
-    u8 field_21B8[40];
+    u8 boxTitleText[40];
     u8 field_21E0[POKEMON_NAME_LENGTH + 1];
     u8 itemName[20];
     u8 inBoxMovingMode;
@@ -449,7 +431,7 @@ struct PokemonStorageSystemData
     u8 field_22C4[0x800];
     u8 field_2AC4[0x1800]; // Unused
     u8 field_42C4[0x800];
-    u8 field_4AC4[0x1000];
+    u8 wallpaperBgTilemapBuffer[0x1000];
     u8 field_5AC4[0x800];
 };
 
@@ -501,19 +483,19 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
 // This file's functions.
-static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
-static void Cb2_EnterPSS(u8 boxOption);
+static void CreatePCMenu(u8, s16 *);
+static void Cb2_EnterPSS(u8);
 static u8 GetCurrentBoxOption(void);
 static u8 HandleInput(void);
 static u8 sub_80CDC2C(void);
 static u8 sub_80CB9BC(void);
-static void LoadWallpaperGfx(u8 boxId, s8 direction);
-static void sub_80CCCFC(u8 boxId, s8 direction);
-static void sub_80CD0B8(s8 direction);
-static void SetCurrentBox(u8 boxId);
-static void sub_80CC32C(u8 boxId);
-static void sub_80C7958(u8 curBox);
-static void sub_80CCAE0(void *arg0);
+static void LoadWallpaperGfx(u8, s8);
+static void CreateIncomingBoxTitle(u8, s8);
+static void StartBoxScrollArrowsSlide(s8);
+static void SetCurrentBox(u8);
+static void CreateInitBoxTask(u8);
+static void sub_80C7958(u8);
+static void TrimOldWallpaper(void *);
 static void sub_80C7B14(void);
 static void sub_80C7BB4(void);
 static void ScrollBackground(void);
@@ -561,14 +543,14 @@ static void sub_80D1194(void);
 static void PrintCursorMonInfo(void);
 static void sub_80CA65C(void);
 static void AddWallpaperSetsMenu(void);
-static void sub_80CD02C(void);
+static void CreateBoxScrollArrows(void);
 static void InitMenu(void);
-static void sub_80CD158(void);
+static void StopBoxScrollArrowsSlide(void);
 static void sub_80CFC14(void);
 static void sub_80CEB40(void);
-static void sub_80CCEE0(void);
+static void CycleBoxTitleSprites(void);
 static void sub_80D1818(void);
-static void sub_80D19B4(u32 arg0);
+static void sub_80D19B4(u32);
 static void sub_80CAA74(void);
 static void PrintItemDescription(void);
 static void sub_80CE760(void);
@@ -578,7 +560,7 @@ static void sub_80CFECC(void);
 static void sub_80CA9EC(void);
 static void FreePSSData(void);
 static void AddBoxMenu(void);
-static void sub_80CCF9C(void);
+static void CycleBoxTitleColor(void);
 static void MoveMon(void);
 static void PlaceMon(void);
 static void sub_80CAB20(void);
@@ -588,16 +570,16 @@ static void sub_80CB950(void);
 static void sub_80CA9C0(void);
 static void SetUpDoShowPartyMenu(void);
 static void BoxSetMosaic(void);
-static void sub_80C7CF4(struct Sprite *sprite);
-static void sub_80CC100(struct Sprite *sprite);
-static void sub_80CB278(struct Sprite *sprite);
-static void sub_80CD210(struct Sprite *sprite);
+static void SpriteCB_JumpBoxArrow(struct Sprite *);
+static void sub_80CC100(struct Sprite *);
+static void sub_80CB278(struct Sprite *);
+static void SpriteCB_Arrow(struct Sprite *);
 static bool32 WaitForWallpaperGfxLoad(void);
 static bool8 InitPSSWindows(void);
 static bool8 sub_80CC0A0(void);
 static bool8 sub_80CE2A8(void);
 static bool8 sub_80D0164(void);
-static bool8 sub_80CC35C(void);
+static bool8 IsInitBoxActive(void);
 static bool8 sub_80D01E4(void);
 static bool8 sub_80CDED4(void);
 static bool8 sub_80CDF08(void);
@@ -614,14 +596,14 @@ static bool8 sub_80D0BC0(void);
 static bool8 sub_80CA2B8(void);
 static bool8 DoWallpaperGfxChange(void);
 static bool8 DoMonPlaceChange(void);
-static bool8 sub_80D00A8(void);
+static bool8 IsMenuLoading(void);
 static bool8 CanMovePartyMon(void);
 static bool8 CanShiftMon(void);
 static bool8 IsCursorOnCloseBox(void);
 static bool8 IsCursorOnBox(void);
 static bool8 IsCursorInBox(void);
 static bool8 IsMonBeingMoved(void);
-static bool8 TryStorePartyMonInBox(u8 boxId);
+static bool8 TryStorePartyMonInBox(u8);
 static void Cb_InitPSS(u8 taskId);
 static void Cb_PlaceMon(u8 taskId);
 static void Cb_ChangeScreen(u8 taskId);
@@ -653,34 +635,34 @@ static void Cb_HandleWallpapers(u8 taskId);
 static void Cb_NameBox(u8 taskId);
 static void Cb_PrintCantStoreMail(u8 taskId);
 static void Cb_HandleMovingMonFromParty(u8 taskId);
-static void SetUpScrollToBox(u8 boxId);
-static void sub_80CFE54(u8 animNum);
-static void SetMovingMonPriority(u8 priority);
-static void InitMonPlaceChange(u8 arg0);
-static void SetMonMarkings(u8 markings);
-static void ShowYesNoWindow(s8 cursorPos);
-static void sub_80CDBF8(u8 cursorBoxPosition);
-static void sub_80D01D0(u8 arg0);
-static void sub_80CD1A8(bool8 arg0);
-static void sub_80CA984(bool8 arg0);
-static void CreatePartyMonsSprites(bool8 arg0);
+static void SetUpScrollToBox(u8);
+static void sub_80CFE54(u8);
+static void SetMovingMonPriority(u8);
+static void InitMonPlaceChange(u8);
+static void SetMonMarkings(u8);
+static void ShowYesNoWindow(s8);
+static void sub_80CDBF8(u8);
+static void sub_80D01D0(u8);
+static void AnimateBoxScrollArrows(bool8);
+static void sub_80CA984(bool8);
+static void CreatePartyMonsSprites(bool8);
 static void PrintMessage(u8 id);
 static s16 HandleMenuInput(void);
 static s8 RunCanReleaseMon(void);
 static u8 GetBoxCursorPosition(void);
-static void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos);
-static void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos);
-static void Item_TakeMons(u8 cursorArea, u8 cursorPos);
-static void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos);
-static struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
-static void SetWallpaperForCurrentBox(u8 wallpaperId);
-static void AddWallpapersMenu(u8 wallpaperSet);
+static void Item_FromMonToMoving(u8, u8);
+static void Item_GiveMovingToMon(u8, u8);
+static void Item_TakeMons(u8, u8);
+static void Item_SwitchMonsWithMoving(u8, u8);
+static struct Sprite *CreateJumpBoxArrows(u16, u16, u8, u8, u8);
+static void SetWallpaperForCurrentBox(u8);
+static void AddWallpapersMenu(u8);
 static u16 GetMovingItem(void);
 static void LoadCursorMonGfx(u16 species, u32 pid);
 static void sub_80CA2D0(struct Sprite *sprite);
-static void sub_80CCF64(struct Sprite *sprite);
+static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
 static void sub_80CBA3C(struct Sprite *sprite);
-static void sub_80CCF30(struct Sprite *sprite);
+static void SpriteCB_IncomingBoxTitle(struct Sprite *);
 static void sub_80CBAF0(s16 yDelta);
 static void sub_80CAAA8(u8 arg0, bool8 isPartyMon);
 static const u8 *GetMovingItemName(void);
@@ -690,13 +672,13 @@ static void sub_80D0E50(u8 cursorArea, u8 cursorPos);
 static void sub_80D0F38(u16 item);
 static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority);
 static void DestroyBoxMonIcon(struct Sprite *sprite);
-static void SetBoxSpeciesAndPersonalities(u8 boxId);
-static void sub_80CB9D0(struct Sprite *sprite, u16 partyId);
-static void sub_80CC370(u8 taskId);
-static void sub_80CCB50(u8 boxId);
+static void SetBoxSpeciesAndPersonalities(u8);
+static void sub_80CB9D0(struct Sprite *, u16);
+static void Task_InitBox(u8 taskId);
+static void InitBoxTitle(u8 boxId);
 static s8 DetermineBoxScrollDirection(u8 boxId);
-static void sub_80CCA3C(const void *tilemap, s8 direction, u8 arg2);
-static s16 sub_80CD00C(const u8 *string);
+static void DrawWallpaper(const void *, s8, u8);
+static s16 GetBoxTitleBaseX(const u8 *);
 static bool8 MonPlaceChange_Shift(void);
 static bool8 MonPlaceChange_Move(void);
 static bool8 MonPlaceChange_Place(void);
@@ -750,6 +732,8 @@ static void sub_80D2A90(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028
 static void sub_80D2AA4(void);
 static void sub_80D2B88(struct UnkStruct_2000028 *unkStruct);
 static void sub_80D2C1C(struct UnkStruct_2000028 *unkStruct);
+static u8 GetBoxWallpaper(u8);
+static void SetBoxWallpaper(u8, u8);
 
 // static const rom data
 static const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -1126,450 +1110,83 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_857291C[] =
     gSpriteAffineAnim_8572904
 };
 
-static const u16 gWallpaperPalettes_Forest[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/forest_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/forest_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Forest[] = INCBIN_U32("graphics/pokemon_storage/forest.4bpp.lz");
-static const u32 gWallpaperTilemap_Forest[] = INCBIN_U32("graphics/pokemon_storage/forest.bin.lz");
-
-static const u16 gWallpaperPalettes_City[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/city_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/city_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_City[] = INCBIN_U32("graphics/pokemon_storage/city.4bpp.lz");
-static const u32 gWallpaperTilemap_City[] = INCBIN_U32("graphics/pokemon_storage/city.bin.lz");
-
-static const u16 gWallpaperPalettes_Desert[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/desert_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/desert_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Desert[] = INCBIN_U32("graphics/pokemon_storage/desert.4bpp.lz");
-static const u32 gWallpaperTilemap_Desert[] = INCBIN_U32("graphics/pokemon_storage/desert.bin.lz");
-
-static const u16 gWallpaperPalettes_Savanna[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/savanna_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/savanna_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Savanna[] = INCBIN_U32("graphics/pokemon_storage/savanna.4bpp.lz");
-static const u32 gWallpaperTilemap_Savanna[] = INCBIN_U32("graphics/pokemon_storage/savanna.bin.lz");
-
-static const u16 gWallpaperPalettes_Crag[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/crag_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/crag_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Crag[] = INCBIN_U32("graphics/pokemon_storage/crag.4bpp.lz");
-static const u32 gWallpaperTilemap_Crag[] = INCBIN_U32("graphics/pokemon_storage/crag.bin.lz");
-
-static const u16 gWallpaperPalettes_Volcano[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/volcano_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/volcano_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Volcano[] = INCBIN_U32("graphics/pokemon_storage/volcano.4bpp.lz");
-static const u32 gWallpaperTilemap_Volcano[] = INCBIN_U32("graphics/pokemon_storage/volcano.bin.lz");
-
-static const u16 gWallpaperPalettes_Snow[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/snow_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/snow_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Snow[] = INCBIN_U32("graphics/pokemon_storage/snow.4bpp.lz");
-static const u32 gWallpaperTilemap_Snow[] = INCBIN_U32("graphics/pokemon_storage/snow.bin.lz");
-
-static const u16 gWallpaperPalettes_Cave[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/cave_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/cave_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Cave[] = INCBIN_U32("graphics/pokemon_storage/cave.4bpp.lz");
-static const u32 gWallpaperTilemap_Cave[] = INCBIN_U32("graphics/pokemon_storage/cave.bin.lz");
-
-static const u16 gWallpaperPalettes_Beach[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/beach_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/beach_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Beach[] = INCBIN_U32("graphics/pokemon_storage/beach.4bpp.lz");
-static const u32 gWallpaperTilemap_Beach[] = INCBIN_U32("graphics/pokemon_storage/beach.bin.lz");
-
-static const u16 gWallpaperPalettes_Seafloor[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/seafloor_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/seafloor_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Seafloor[] = INCBIN_U32("graphics/pokemon_storage/seafloor.4bpp.lz");
-static const u32 gWallpaperTilemap_Seafloor[] = INCBIN_U32("graphics/pokemon_storage/seafloor.bin.lz");
-
-static const u16 gWallpaperPalettes_River[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/river_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/river_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_River[] = INCBIN_U32("graphics/pokemon_storage/river.4bpp.lz");
-static const u32 gWallpaperTilemap_River[] = INCBIN_U32("graphics/pokemon_storage/river.bin.lz");
-static const u16 gWallpaperPalettes_Sky[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/sky_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/sky_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Sky[] = INCBIN_U32("graphics/pokemon_storage/sky.4bpp.lz");
-static const u32 gWallpaperTilemap_Sky[] = INCBIN_U32("graphics/pokemon_storage/sky.bin.lz");
-
-static const u16 gWallpaperPalettes_PolkaDot[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/polkadot_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/polkadot_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_PolkaDot[] = INCBIN_U32("graphics/pokemon_storage/polkadot.4bpp.lz");
-static const u32 gWallpaperTilemap_PolkaDot[] = INCBIN_U32("graphics/pokemon_storage/polkadot.bin.lz");
-
-static const u16 gWallpaperPalettes_Pokecenter[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/pokecenter_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/pokecenter_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Pokecenter[] = INCBIN_U32("graphics/pokemon_storage/pokecenter.4bpp.lz");
-static const u32 gWallpaperTilemap_Pokecenter[] = INCBIN_U32("graphics/pokemon_storage/pokecenter.bin.lz");
-
-static const u16 gWallpaperPalettes_Machine[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/machine_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/machine_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Machine[] = INCBIN_U32("graphics/pokemon_storage/machine.4bpp.lz");
-static const u32 gWallpaperTilemap_Machine[] = INCBIN_U32("graphics/pokemon_storage/machine.bin.lz");
-
-static const u16 gWallpaperPalettes_Plain[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/plain_frame.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/plain_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.4bpp.lz");
-static const u32 gWallpaperTilemap_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.bin.lz");
-
-// 12x18 tilemap
-static const u32 gUnknown_085773C4[] = INCBIN_U32("graphics/unused/tilemap_5773C4.bin");
-
-static const u16 gUnknown_08577574[][2] =
-{
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF},
-    {0x1CE7, 0x7FFF}
-};
-
-#define WALLPAPER_ENTRY(name) {gWallpaperTiles_##name, gWallpaperTilemap_##name, gWallpaperPalettes_##name[0]}
-
-static const struct WallpaperTable gWallpaperTable[] =
-{
-    [WALLPAPER_FOREST] = WALLPAPER_ENTRY(Forest),
-    [WALLPAPER_CITY] = WALLPAPER_ENTRY(City),
-    [WALLPAPER_DESERT] = WALLPAPER_ENTRY(Desert),
-    [WALLPAPER_SAVANNA] = WALLPAPER_ENTRY(Savanna),
-    [WALLPAPER_CRAG] = WALLPAPER_ENTRY(Crag),
-    [WALLPAPER_VOLCANO] = WALLPAPER_ENTRY(Volcano),
-    [WALLPAPER_SNOW] = WALLPAPER_ENTRY(Snow),
-    [WALLPAPER_CAVE] = WALLPAPER_ENTRY(Cave),
-    [WALLPAPER_BEACH] = WALLPAPER_ENTRY(Beach),
-    [WALLPAPER_SEAFLOOR] = WALLPAPER_ENTRY(Seafloor),
-    [WALLPAPER_RIVER] = WALLPAPER_ENTRY(River),
-    [WALLPAPER_SKY] = WALLPAPER_ENTRY(Sky),
-    [WALLPAPER_POLKADOT] = WALLPAPER_ENTRY(PolkaDot),
-    [WALLPAPER_POKECENTER] = WALLPAPER_ENTRY(Pokecenter),
-    [WALLPAPER_MACHINE] = WALLPAPER_ENTRY(Machine),
-    [WALLPAPER_PLAIN] = WALLPAPER_ENTRY(Plain),
-};
-
-static const u8 gPCGfx_Arrow[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
-
-static const u16 gWallpaperPalettes_Zigzagoon[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/zigzagoon_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Zigzagoon[] = INCBIN_U32("graphics/pokemon_storage/zigzagoon.4bpp.lz");
-static const u32 gWallpaperTilemap_Zigzagoon[] = INCBIN_U32("graphics/pokemon_storage/zigzagoon.bin.lz");
-
-static const u16 gWallpaperPalettes_Screen[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/screen_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Screen[] = INCBIN_U32("graphics/pokemon_storage/screen.4bpp.lz");
-static const u32 gWallpaperTilemap_Screen[] = INCBIN_U32("graphics/pokemon_storage/screen.bin.lz");
-
-static const u16 gWallpaperPalettes_Diagonal[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/diagonal_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Diagonal[] = INCBIN_U32("graphics/pokemon_storage/diagonal.4bpp.lz");
-static const u32 gWallpaperTilemap_Diagonal[] = INCBIN_U32("graphics/pokemon_storage/diagonal.bin.lz");
-
-static const u16 gWallpaperPalettes_Block[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/block_bg.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/block_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Block[] = INCBIN_U32("graphics/pokemon_storage/block.4bpp.lz");
-static const u32 gWallpaperTilemap_Block[] = INCBIN_U32("graphics/pokemon_storage/block.bin.lz");
-
-static const u16 gWallpaperPalettes_Pokecenter2[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/pokecenter2_bg.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/pokecenter2_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Pokecenter2[] = INCBIN_U32("graphics/pokemon_storage/pokecenter2.4bpp.lz");
-static const u32 gWallpaperTilemap_Pokecenter2[] = INCBIN_U32("graphics/pokemon_storage/pokecenter2.bin.lz");
-
-static const u16 gWallpaperPalettes_Frame[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/frame_bg.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/frame_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Frame[] = INCBIN_U32("graphics/pokemon_storage/frame.4bpp.lz");
-static const u32 gWallpaperTilemap_Frame[] = INCBIN_U32("graphics/pokemon_storage/frame.bin.lz");
-
-static const u16 gWallpaperPalettes_Blank[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/zigzagoon_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Blank[] = INCBIN_U32("graphics/pokemon_storage/blank.4bpp.lz");
-static const u32 gWallpaperTilemap_Blank[] = INCBIN_U32("graphics/pokemon_storage/blank.bin.lz");
-
-static const u16 gWallpaperPalettes_Circles[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/circles_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Circles[] = INCBIN_U32("graphics/pokemon_storage/circles.4bpp.lz");
-static const u32 gWallpaperTilemap_Circles[] = INCBIN_U32("graphics/pokemon_storage/circles.bin.lz");
-
-static const u16 gWallpaperPalettes_Azumarill[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/azumarill_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Azumarill[] = INCBIN_U32("graphics/pokemon_storage/azumarill.4bpp.lz");
-static const u32 gWallpaperTilemap_Azumarill[] = INCBIN_U32("graphics/pokemon_storage/azumarill.bin.lz");
-
-static const u16 gWallpaperPalettes_Pikachu[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/pikachu_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Pikachu[] = INCBIN_U32("graphics/pokemon_storage/pikachu.4bpp.lz");
-static const u32 gWallpaperTilemap_Pikachu[] = INCBIN_U32("graphics/pokemon_storage/pikachu.bin.lz");
-
-static const u16 gWallpaperPalettes_Legendary[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/legendary_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Legendary[] = INCBIN_U32("graphics/pokemon_storage/legendary.4bpp.lz");
-static const u32 gWallpaperTilemap_Legendary[] = INCBIN_U32("graphics/pokemon_storage/legendary.bin.lz");
-
-static const u16 gWallpaperPalettes_Dusclops[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/dusclops_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Dusclops[] = INCBIN_U32("graphics/pokemon_storage/dusclops.4bpp.lz");
-static const u32 gWallpaperTilemap_Dusclops[] = INCBIN_U32("graphics/pokemon_storage/dusclops.bin.lz");
-
-static const u16 gWallpaperPalettes_Ludicolo[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/ludicolo_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Ludicolo[] = INCBIN_U32("graphics/pokemon_storage/ludicolo.4bpp.lz");
-static const u32 gWallpaperTilemap_Ludicolo[] = INCBIN_U32("graphics/pokemon_storage/ludicolo.bin.lz");
-
-static const u16 gWallpaperPalettes_Whiscash[][16] =
-{
-    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-    INCBIN_U16("graphics/pokemon_storage/whiscash_bg.gbapal"),
-};
-static const u32 gWallpaperTiles_Whiscash[] = INCBIN_U32("graphics/pokemon_storage/whiscash.4bpp.lz");
-static const u32 gWallpaperTilemap_Whiscash[] = INCBIN_U32("graphics/pokemon_storage/whiscash.bin.lz");
-
-static const u32 gWallpaperIcon_Aqua[] = INCBIN_U32("graphics/pokemon_storage/aqua_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Heart[] = INCBIN_U32("graphics/pokemon_storage/heart_icon.4bpp.lz");
-static const u32 gWallpaperIcon_FiveStar[] = INCBIN_U32("graphics/pokemon_storage/five_star_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Brick[] = INCBIN_U32("graphics/pokemon_storage/brick_icon.4bpp.lz");
-static const u32 gWallpaperIcon_FourStar[] = INCBIN_U32("graphics/pokemon_storage/four_star_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Asterisk[] = INCBIN_U32("graphics/pokemon_storage/asterisk_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Dot[] = INCBIN_U32("graphics/pokemon_storage/dot_icon.4bpp.lz");
-static const u32 gWallpaperIcon_LineCircle[] = INCBIN_U32("graphics/pokemon_storage/line_circle_icon.4bpp.lz");
-static const u32 gWallpaperIcon_PokeBall[] = INCBIN_U32("graphics/pokemon_storage/pokeball_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Maze[] = INCBIN_U32("graphics/pokemon_storage/maze_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Footprint[] = INCBIN_U32("graphics/pokemon_storage/footprint_icon.4bpp.lz");
-static const u32 gWallpaperIcon_BigAsterisk[] = INCBIN_U32("graphics/pokemon_storage/big_asterisk_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Circle[] = INCBIN_U32("graphics/pokemon_storage/circle_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Koffing[] = INCBIN_U32("graphics/pokemon_storage/koffing_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Ribbon[] = INCBIN_U32("graphics/pokemon_storage/ribbon_icon.4bpp.lz");
-static const u32 gWallpaperIcon_FourCircles[] = INCBIN_U32("graphics/pokemon_storage/four_circles_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Lotad[] = INCBIN_U32("graphics/pokemon_storage/lotad_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Crystal[] = INCBIN_U32("graphics/pokemon_storage/crystal_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Pichu[] = INCBIN_U32("graphics/pokemon_storage/pichu_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Diglett[] = INCBIN_U32("graphics/pokemon_storage/diglett_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Luvdisc[] = INCBIN_U32("graphics/pokemon_storage/luvdisc_icon.4bpp.lz");
-static const u32 gWallpaperIcon_StarInCircle[] = INCBIN_U32("graphics/pokemon_storage/star_in_circle_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Spinda[] = INCBIN_U32("graphics/pokemon_storage/spinda_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Latis[] = INCBIN_U32("graphics/pokemon_storage/latis_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Minun[] = INCBIN_U32("graphics/pokemon_storage/minun_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Togepi[] = INCBIN_U32("graphics/pokemon_storage/togepi_icon.4bpp.lz");
-static const u32 gWallpaperIcon_Magma[] = INCBIN_U32("graphics/pokemon_storage/magma_icon.4bpp.lz");
-
-static const struct WallpaperTable gFriendsWallpaperTable[] =
-{
-    WALLPAPER_ENTRY(Zigzagoon),
-    WALLPAPER_ENTRY(Screen),
-    WALLPAPER_ENTRY(Horizontal),
-    WALLPAPER_ENTRY(Diagonal),
-    WALLPAPER_ENTRY(Block),
-    WALLPAPER_ENTRY(Ribbon),
-    WALLPAPER_ENTRY(Pokecenter2),
-    WALLPAPER_ENTRY(Frame),
-    WALLPAPER_ENTRY(Blank),
-    WALLPAPER_ENTRY(Circles),
-    WALLPAPER_ENTRY(Azumarill),
-    WALLPAPER_ENTRY(Pikachu),
-    WALLPAPER_ENTRY(Legendary),
-    WALLPAPER_ENTRY(Dusclops),
-    WALLPAPER_ENTRY(Ludicolo),
-    WALLPAPER_ENTRY(Whiscash),
-};
-
-static const u32 *const gFriendsIcons[] =
-{
-    gWallpaperIcon_Aqua,
-    gWallpaperIcon_Heart,
-    gWallpaperIcon_FiveStar,
-    gWallpaperIcon_Brick,
-    gWallpaperIcon_FourStar,
-    gWallpaperIcon_Asterisk,
-    gWallpaperIcon_Dot,
-    gWallpaperIcon_Cross,
-    gWallpaperIcon_LineCircle,
-    gWallpaperIcon_PokeBall,
-    gWallpaperIcon_Maze,
-    gWallpaperIcon_Footprint,
-    gWallpaperIcon_BigAsterisk,
-    gWallpaperIcon_Circle,
-    gWallpaperIcon_Koffing,
-    gWallpaperIcon_Ribbon,
-    gWallpaperIcon_Bolt,
-    gWallpaperIcon_FourCircles,
-    gWallpaperIcon_Lotad,
-    gWallpaperIcon_Crystal,
-    gWallpaperIcon_Pichu,
-    gWallpaperIcon_Diglett,
-    gWallpaperIcon_Luvdisc,
-    gWallpaperIcon_StarInCircle,
-    gWallpaperIcon_Spinda,
-    gWallpaperIcon_Latis,
-    gWallpaperIcon_Plusle,
-    gWallpaperIcon_Minun,
-    gWallpaperIcon_Togepi,
-    gWallpaperIcon_Magma,
-};
+#include "data/wallpapers.h"
 
 // Unknown Unused data.
 static const u16 gUnknown_0857B07C = 0x23BA;
 
-static const struct SpriteSheet gUnknown_0857B080 = {gPCGfx_Arrow, 0x80, 6};
+static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, 0x80, GFXTAG_ARROW};
 
-static const struct OamData gOamData_83BB298 =
+static const struct OamData sOamData_BoxTitle =
 {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 
-static const union AnimCmd gSpriteAnim_83BB2A0[] =
+static const union AnimCmd sAnim_BoxTitle_Left[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_83BB2A8[] =
+static const union AnimCmd sAnim_BoxTitle_Right[] =
 {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_83BB2B0[] =
+static const union AnimCmd *const sAnims_BoxTitle[] =
 {
-    gSpriteAnim_83BB2A0,
-    gSpriteAnim_83BB2A8
+    sAnim_BoxTitle_Left,
+    sAnim_BoxTitle_Right
 };
 
-static const struct SpriteTemplate gSpriteTemplate_857B0A8 =
+static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
 {
-    TAG_TILE_3,
-    TAG_PAL_DAC9,
-    &gOamData_83BB298,
-    gSpriteAnimTable_83BB2B0,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
+    .tileTag = GFXTAG_BOX_TITLE,
+    .paletteTag = PALTAG_BOX_TITLE,
+    .oam = &sOamData_BoxTitle,
+    .anims = sAnims_BoxTitle,
+    .images NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_83BB2D0 =
+static const struct OamData sOamData_Arrow =
 {
     .shape = SPRITE_SHAPE(8x16),
     .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
-static const union AnimCmd gSpriteAnim_83BB2D8[] =
+static const union AnimCmd sAnim_Arrow_Left[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_83BB2E0[] =
+static const union AnimCmd sAnim_Arrow_Right[] =
 {
     ANIMCMD_FRAME(2, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_83BB2E8[] =
+static const union AnimCmd *const sAnims_Arrow[] =
 {
-    gSpriteAnim_83BB2D8,
-    gSpriteAnim_83BB2E0
+    sAnim_Arrow_Left,
+    sAnim_Arrow_Right
 };
 
-static const struct SpriteTemplate gUnknown_0857B0E0 =
+static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
-    6,
-    TAG_PAL_WAVEFORM,
-    &gOamData_83BB2D0,
-    gSpriteAnimTable_83BB2E8,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    sub_80CD210
+    .tileTag = GFXTAG_ARROW,
+    .paletteTag = TAG_PAL_WAVEFORM,
+    .oam = &sOamData_Arrow,
+    .anims = sAnims_Arrow,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Arrow
 };
 
 static const u16 gHandCursorPalette[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
@@ -1961,10 +1578,10 @@ void ResetPokemonStorageSystem(void)
         u8 *dest = StringCopy(GetBoxNamePtr(boxId), gText_Box);
         ConvertIntToDecimalStringN(dest, boxId + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
     }
+
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
-    {
-        SetBoxWallpaper(boxId, boxId % 4);
-    }
+        SetBoxWallpaper(boxId, boxId % (MAX_DEFAULT_WALLPAPER + 1));
+
     ResetWaldaWallpaper();
 }
 
@@ -2079,11 +1696,11 @@ static void sub_80C7958(u8 curBox)
     }
     for (i = 0; i < 2; i++)
     {
-        gUnknown_02039D04->unk_0020[i] = sub_80CD2E8(72 * i + 0x7c, 0x58, i, 0, gUnknown_02039D04->unk_0246);
-        if (gUnknown_02039D04->unk_0020[i])
+        gUnknown_02039D04->arrowSprites[i] = CreateJumpBoxArrows(72 * i + 124, 88, i, 0, gUnknown_02039D04->unk_0246);
+        if (gUnknown_02039D04->arrowSprites[i])
         {
-            gUnknown_02039D04->unk_0020[i]->data[0] = (i == 0 ? -1 : 1);
-            gUnknown_02039D04->unk_0020[i]->callback = sub_80C7CF4;
+            gUnknown_02039D04->arrowSprites[i]->data[0] = (i == 0 ? -1 : 1);
+            gUnknown_02039D04->arrowSprites[i]->callback = SpriteCB_JumpBoxArrow;
         }
     }
     sub_80C7BE4();
@@ -2107,8 +1724,8 @@ static void sub_80C7B14(void)
     }
     for (i = 0; i < 2; i++)
     {
-        if (gUnknown_02039D04->unk_0020[i])
-            DestroySprite(gUnknown_02039D04->unk_0020[i]);
+        if (gUnknown_02039D04->arrowSprites[i])
+            DestroySprite(gUnknown_02039D04->arrowSprites[i]);
     }
 }
 
@@ -2156,7 +1773,7 @@ static void sub_80C7BE4(void)
     RemoveWindow(windowId);
 }
 
-static void sub_80C7CF4(struct Sprite *sprite)
+static void SpriteCB_JumpBoxArrow(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 3)
     {
@@ -2350,10 +1967,10 @@ static void Cb_InitPSS(u8 taskId)
         sub_80CA704();
         break;
     case 8:
-        sub_80CC32C(StorageGetCurrentBox());
+        CreateInitBoxTask(StorageGetCurrentBox());
         break;
     case 9:
-        if (sub_80CC35C())
+        if (IsInitBoxActive())
             return;
 
         if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
@@ -2765,8 +2382,8 @@ static void Cb_OnSelectedMon(u8 taskId)
             sPSSData->state = 1;
         }
         break;
-    case 1: // debug?
-        if (!sub_80D00A8())
+    case 1:
+        if (!IsMenuLoading())
             sPSSData->state = 2;
         break;
     case 2:
@@ -3553,7 +3170,7 @@ static void Cb_HandleBoxOptions(u8 taskId)
         sPSSData->state++;
         break;
     case 1:
-        if (sub_80D00A8())
+        if (IsMenuLoading())
             return;
         sPSSData->state++;
     case 2:
@@ -3561,7 +3178,7 @@ static void Cb_HandleBoxOptions(u8 taskId)
         {
         case MENU_B_PRESSED:
         case MENU_CANCEL:
-            sub_80CD1A8(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
@@ -3594,7 +3211,7 @@ static void Cb_HandleWallpapers(u8 taskId)
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_80D00A8())
+        if (!IsMenuLoading())
              sPSSData->state++;
         break;
     case 2:
@@ -3602,7 +3219,7 @@ static void Cb_HandleWallpapers(u8 taskId)
         switch (sPSSData->wallpaperSetId)
         {
         case MENU_B_PRESSED:
-            sub_80CD1A8(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
@@ -3612,13 +3229,13 @@ static void Cb_HandleWallpapers(u8 taskId)
         case MENU_ETCETERA:
             PlaySE(SE_SELECT);
             RemoveMenu();
-            sPSSData->wallpaperSetId -= 18;
+            sPSSData->wallpaperSetId -= MENU_WALLPAPER_SETS_START;
             sPSSData->state++;
             break;
         case MENU_FRIENDS:
             // New wallpaper from Walda.
             PlaySE(SE_SELECT);
-            sPSSData->wallpaperId = 16;
+            sPSSData->wallpaperId = WALLPAPER_FRIENDS;
             RemoveMenu();
             ClearBottomWindow();
             sPSSData->state = 6;
@@ -3655,7 +3272,7 @@ static void Cb_HandleWallpapers(u8 taskId)
     case 5:
         if (!DoWallpaperGfxChange())
         {
-            sub_80CD1A8(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             SetPSSCallback(Cb_MainPSS);
         }
         break;
@@ -3691,7 +3308,7 @@ static void Cb_JumpBox(u8 taskId)
             sub_80C7890();
             if (sPSSData->newCurrBoxId == 201 || sPSSData->newCurrBoxId == StorageGetCurrentBox())
             {
-                sub_80CD1A8(TRUE);
+                AnimateBoxScrollArrows(TRUE);
                 SetPSSCallback(Cb_MainPSS);
             }
             else
@@ -4493,25 +4110,25 @@ static void AddWallpapersMenu(u8 wallpaperSet)
     InitMenu();
     switch (wallpaperSet)
     {
-    case 0:
+    case MENU_SCENERY_1 - MENU_WALLPAPER_SETS_START:
         SetMenuText(MENU_FOREST);
         SetMenuText(MENU_CITY);
         SetMenuText(MENU_DESERT);
         SetMenuText(MENU_SAVANNA);
         break;
-    case 1:
+    case MENU_SCENERY_2 - MENU_WALLPAPER_SETS_START:
         SetMenuText(MENU_CRAG);
         SetMenuText(MENU_VOLCANO);
         SetMenuText(MENU_SNOW);
         SetMenuText(MENU_CAVE);
         break;
-    case 2:
+    case MENU_SCENERY_3 - MENU_WALLPAPER_SETS_START:
         SetMenuText(MENU_BEACH);
         SetMenuText(MENU_SEAFLOOR);
         SetMenuText(MENU_RIVER);
         SetMenuText(MENU_SKY);
         break;
-    case 3:
+    case MENU_ETCETERA - MENU_WALLPAPER_SETS_START:
         SetMenuText(MENU_POLKADOT);
         SetMenuText(MENU_POKECENTER);
         SetMenuText(MENU_MACHINE);
@@ -4576,7 +4193,7 @@ static void CreateMovingMonIcon(void)
     sPSSData->movingMonSprite->callback = sub_80CC100;
 }
 
-static void sub_80CB028(u8 boxId)
+static void InitBoxMonSprites(u8 boxId)
 {
     u8 boxPosition;
     u16 i, j, count;
@@ -4585,6 +4202,8 @@ static void sub_80CB028(u8 boxId)
 
     count = 0;
     boxPosition = 0;
+
+    // For each box slot, create a Pokémon icon if a species is present
     for (i = 0; i < IN_BOX_COLUMNS; i++)
     {
         for (j = 0; j < IN_BOX_ROWS; j++)
@@ -4604,11 +4223,12 @@ static void sub_80CB028(u8 boxId)
         }
     }
 
+    // If in item mode, set all Pokémon icons with no item to be transparent
     if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
-            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
+            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
                 sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
@@ -5260,58 +4880,66 @@ static void DestroyBoxMonIcon(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-static void sub_80CC32C(u8 boxId)
-{
-    u8 taskId = CreateTask(sub_80CC370, 2);
+#define tState  data[0]
+#define tDmaIdx data[1]
+#define tBoxId  data[2]
 
-    gTasks[taskId].data[2] = boxId;
+static void CreateInitBoxTask(u8 boxId)
+{
+    u8 taskId = CreateTask(Task_InitBox, 2);
+
+    gTasks[taskId].tBoxId = boxId;
 }
 
-static bool8 sub_80CC35C(void)
+static bool8 IsInitBoxActive(void)
 {
-    return FuncIsActiveTask(sub_80CC370);
+    return FuncIsActiveTask(Task_InitBox);
 }
 
-static void sub_80CC370(u8 taskId)
+static void Task_InitBox(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 0:
-        sPSSData->field_2D2 = 0;
+        sPSSData->wallpaperOffset = 0;
         sPSSData->bg2_X = 0;
-        task->data[1] = RequestDma3Fill(0, sPSSData->field_4AC4, 0x1000, 1);
+        task->tDmaIdx = RequestDma3Fill(0, sPSSData->wallpaperBgTilemapBuffer, sizeof(sPSSData->wallpaperBgTilemapBuffer), 1);
         break;
     case 1:
-        if (CheckForSpaceForDma3Request(task->data[1]) == -1)
+        if (CheckForSpaceForDma3Request(task->tDmaIdx) == -1)
             return;
 
-        SetBgTilemapBuffer(2, sPSSData->field_4AC4);
+        SetBgTilemapBuffer(2, sPSSData->wallpaperBgTilemapBuffer);
         ShowBg(2);
         break;
     case 2:
-        LoadWallpaperGfx(task->data[2], 0);
+        LoadWallpaperGfx(task->tBoxId, 0);
         break;
     case 3:
         if (!WaitForWallpaperGfxLoad())
             return;
 
-        sub_80CCB50(task->data[2]);
-        sub_80CD02C();
-        sub_80CB028(task->data[2]);
+        InitBoxTitle(task->tBoxId);
+        CreateBoxScrollArrows();
+        InitBoxMonSprites(task->tBoxId);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(27) | BGCNT_TXT512x256);
         break;
     case 4:
         DestroyTask(taskId);
         break;
     default:
-        task->data[0] = 0;
+        task->tState = 0;
         return;
     }
 
-    task->data[0]++;
+    task->tState++;
 }
+
+#undef tState
+#undef tDmaIdx
+#undef tBoxId
 
 static void SetUpScrollToBox(u8 boxId)
 {
@@ -5320,34 +4948,35 @@ static void SetUpScrollToBox(u8 boxId)
     sPSSData->wallpaperScrollSpeed = (direction > 0) ? 6 : -6;
     sPSSData->field_2D3 = (direction > 0) ? 1 : 2;
     sPSSData->field_2D0 = 32;
-    sPSSData->field_2D4 = boxId;
+    sPSSData->scrollToBoxIdUnused = boxId;
     sPSSData->field_2D6 = (direction <= 0) ? 5 : 0;
-    sPSSData->field_2D8 = direction;
+    sPSSData->scrollDirectionUnused = direction;
+
     sPSSData->field_2DA = (direction > 0) ? 264 : 56;
     sPSSData->field_2DC = (direction <= 0) ? 5 : 0;
     sPSSData->field_2DE = 0;
     sPSSData->field_2E0 = 2;
-    sPSSData->boxScrollDestination = boxId;
-    sPSSData->field_A65 = direction;
-    sPSSData->field_A63 = 0;
+    sPSSData->scrollToBoxId = boxId;
+    sPSSData->scrollDirection = direction;
+    sPSSData->scrollState = 0;
 }
 
 static bool8 ScrollToBox(void)
 {
     bool8 var;
 
-    switch (sPSSData->field_A63)
+    switch (sPSSData->scrollState)
     {
     case 0:
-        LoadWallpaperGfx(sPSSData->boxScrollDestination, sPSSData->field_A65);
-        sPSSData->field_A63++;
+        LoadWallpaperGfx(sPSSData->scrollToBoxId, sPSSData->scrollDirection);
+        sPSSData->scrollState++;
     case 1:
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_80CB4CC(sPSSData->boxScrollDestination, sPSSData->field_A65);
-        sub_80CCCFC(sPSSData->boxScrollDestination, sPSSData->field_A65);
-        sub_80CD0B8(sPSSData->field_A65);
+        sub_80CB4CC(sPSSData->scrollToBoxId, sPSSData->scrollDirection);
+        CreateIncomingBoxTitle(sPSSData->scrollToBoxId, sPSSData->scrollDirection);
+        StartBoxScrollArrowsSlide(sPSSData->scrollDirection);
         break;
     case 2:
         var = sub_80CB584();
@@ -5356,13 +4985,13 @@ static bool8 ScrollToBox(void)
             sPSSData->bg2_X += sPSSData->wallpaperScrollSpeed;
             if (--sPSSData->field_2D0 != 0)
                 return TRUE;
-            sub_80CCEE0();
-            sub_80CD158();
+            CycleBoxTitleSprites();
+            StopBoxScrollArrowsSlide();
         }
         return var;
     }
 
-    sPSSData->field_A63++;
+    sPSSData->scrollState++;
     return TRUE;
 }
 
@@ -5393,7 +5022,7 @@ static bool8 DoWallpaperGfxChange(void)
     switch (sPSSData->wallpaperChangeState)
     {
     case 0:
-        BeginNormalPaletteFade(sPSSData->field_738, 1, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(sPSSData->boxTitlePalBits, 1, 0, 16, RGB_WHITEALPHA);
         sPSSData->wallpaperChangeState++;
         break;
     case 1:
@@ -5407,8 +5036,8 @@ static bool8 DoWallpaperGfxChange(void)
     case 2:
         if (WaitForWallpaperGfxLoad() == TRUE)
         {
-            sub_80CCF9C();
-            BeginNormalPaletteFade(sPSSData->field_738, 1, 16, 0, RGB_WHITEALPHA);
+            CycleBoxTitleColor();
+            BeginNormalPaletteFade(sPSSData->boxTitlePalBits, 1, 16, 0, RGB_WHITEALPHA);
             sPSSData->wallpaperChangeState++;
         }
         break;
@@ -5426,54 +5055,54 @@ static bool8 DoWallpaperGfxChange(void)
 static void LoadWallpaperGfx(u8 boxId, s8 direction)
 {
     u8 wallpaperId;
-    const struct WallpaperTable *wallpaperGfx;
+    const struct Wallpaper *wallpaper;
     void *iconGfx;
-    u32 size1, size2;
+    u32 tilesSize, iconSize;
 
-    sPSSData->field_6F9 = 0;
-    sPSSData->field_6FA = boxId;
-    sPSSData->field_6FB = direction;
-    if (sPSSData->field_6FB != 0)
+    sPSSData->wallpaperLoadState = 0;
+    sPSSData->wallpaperLoadBoxId = boxId;
+    sPSSData->wallpaperLoadDir = direction;
+    if (sPSSData->wallpaperLoadDir != 0)
     {
-        sPSSData->field_2D2 = (sPSSData->field_2D2 == 0);
-        sub_80CCAE0(sPSSData->field_4AC4);
+        sPSSData->wallpaperOffset = (sPSSData->wallpaperOffset == 0);
+        TrimOldWallpaper(sPSSData->wallpaperBgTilemapBuffer);
     }
 
-    wallpaperId = GetBoxWallpaper(sPSSData->field_6FA);
+    wallpaperId = GetBoxWallpaper(sPSSData->wallpaperLoadBoxId);
     if (wallpaperId != WALLPAPER_FRIENDS)
     {
-        wallpaperGfx = &gWallpaperTable[wallpaperId];
-        LZ77UnCompWram(wallpaperGfx->tileMap, sPSSData->field_792);
-        sub_80CCA3C(sPSSData->field_792, sPSSData->field_6FB, sPSSData->field_2D2);
+        wallpaper = &sWallpapers[wallpaperId];
+        LZ77UnCompWram(wallpaper->tilemap, sPSSData->wallpaperTilemap);
+        DrawWallpaper(sPSSData->wallpaperTilemap, sPSSData->wallpaperLoadDir, sPSSData->wallpaperOffset);
 
-        if (sPSSData->field_6FB != 0)
-            LoadPalette(wallpaperGfx->palettes, (sPSSData->field_2D2 * 32) + 0x40, 0x40);
+        if (sPSSData->wallpaperLoadDir != 0)
+            LoadPalette(wallpaper->palettes, (sPSSData->wallpaperOffset * 32) + 0x40, 0x40);
         else
-            CpuCopy16(wallpaperGfx->palettes, &gPlttBufferUnfaded[(sPSSData->field_2D2 * 32) + 0x40], 0x40);
+            CpuCopy16(wallpaper->palettes, &gPlttBufferUnfaded[(sPSSData->wallpaperOffset * 32) + 0x40], 0x40);
 
-        sPSSData->wallpaperTiles = malloc_and_decompress(wallpaperGfx->tiles, &size1);
-        LoadBgTiles(2, sPSSData->wallpaperTiles, size1, sPSSData->field_2D2 << 8);
+        sPSSData->wallpaperTiles = malloc_and_decompress(wallpaper->tiles, &tilesSize);
+        LoadBgTiles(2, sPSSData->wallpaperTiles, tilesSize, sPSSData->wallpaperOffset << 8);
     }
     else
     {
-        wallpaperGfx = &gFriendsWallpaperTable[GetWaldaWallpaperPatternId()];
-        LZ77UnCompWram(wallpaperGfx->tileMap, sPSSData->field_792);
-        sub_80CCA3C(sPSSData->field_792, sPSSData->field_6FB, sPSSData->field_2D2);
+        wallpaper = &sWaldaWallpapers[GetWaldaWallpaperPatternId()];
+        LZ77UnCompWram(wallpaper->tilemap, sPSSData->wallpaperTilemap);
+        DrawWallpaper(sPSSData->wallpaperTilemap, sPSSData->wallpaperLoadDir, sPSSData->wallpaperOffset);
 
-        CpuCopy16(wallpaperGfx->palettes, sPSSData->field_792, 0x40);
-        CpuCopy16(GetWaldaWallpaperColorsPtr(), &sPSSData->field_792[1], 4);
-        CpuCopy16(GetWaldaWallpaperColorsPtr(), &sPSSData->field_792[17], 4);
+        CpuCopy16(wallpaper->palettes, sPSSData->wallpaperTilemap, 0x40);
+        CpuCopy16(GetWaldaWallpaperColorsPtr(), &sPSSData->wallpaperTilemap[1], 4);
+        CpuCopy16(GetWaldaWallpaperColorsPtr(), &sPSSData->wallpaperTilemap[17], 4);
 
-        if (sPSSData->field_6FB != 0)
-            LoadPalette(sPSSData->field_792, (sPSSData->field_2D2 * 32) + 0x40, 0x40);
+        if (sPSSData->wallpaperLoadDir != 0)
+            LoadPalette(sPSSData->wallpaperTilemap, (sPSSData->wallpaperOffset * 32) + 0x40, 0x40);
         else
-            CpuCopy16(sPSSData->field_792, &gPlttBufferUnfaded[(sPSSData->field_2D2 * 32) + 0x40], 0x40);
+            CpuCopy16(sPSSData->wallpaperTilemap, &gPlttBufferUnfaded[(sPSSData->wallpaperOffset * 32) + 0x40], 0x40);
 
-        sPSSData->wallpaperTiles = malloc_and_decompress(wallpaperGfx->tiles, &size1);
-        iconGfx = malloc_and_decompress(gFriendsIcons[GetWaldaWallpaperIconId()], &size2);
-        CpuCopy32(iconGfx, sPSSData->wallpaperTiles + 0x800, size2);
+        sPSSData->wallpaperTiles = malloc_and_decompress(wallpaper->tiles, &tilesSize);
+        iconGfx = malloc_and_decompress(sWaldaWallpaperIcons[GetWaldaWallpaperIconId()], &iconSize);
+        CpuCopy32(iconGfx, sPSSData->wallpaperTiles + 0x800, iconSize);
         Free(iconGfx);
-        LoadBgTiles(2, sPSSData->wallpaperTiles, size1, sPSSData->field_2D2 << 8);
+        LoadBgTiles(2, sPSSData->wallpaperTiles, tilesSize, sPSSData->wallpaperOffset << 8);
     }
 
     CopyBgTilemapBufferToVram(2);
@@ -5492,12 +5121,12 @@ static bool32 WaitForWallpaperGfxLoad(void)
     return TRUE;
 }
 
-static void sub_80CCA3C(const void *tilemap, s8 direction, u8 arg2)
+static void DrawWallpaper(const void *tilemap, s8 direction, u8 offset)
 {
-    s16 var = (arg2 * 2) + 3;
+    s16 var = (offset * 2) + 3;
     s16 x = ((sPSSData->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
 
-    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, arg2 << 8, var);
+    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, offset << 8, var);
 
     if (direction == 0)
         return;
@@ -5509,10 +5138,10 @@ static void sub_80CCA3C(const void *tilemap, s8 direction, u8 arg2)
     FillBgTilemapBufferRect(2, 0, x, 2, 4, 0x12, 0x11);
 }
 
-static void sub_80CCAE0(void *arg0)
+static void TrimOldWallpaper(void *tilemap)
 {
     u16 i;
-    u16 *dest = arg0;
+    u16 *dest = tilemap;
     s16 r3 = ((sPSSData->bg2_X / 8) + 30) & 0x3F;
 
     if (r3 <= 31)
@@ -5531,238 +5160,266 @@ static void sub_80CCAE0(void *arg0)
     }
 }
 
-static void sub_80CCB50(u8 boxId)
+static void InitBoxTitle(u8 boxId)
 {
     u8 tagIndex;
-    s16 r6;
+    s16 x;
     u16 i;
 
-    struct SpriteSheet spriteSheet = {sPSSData->field_2F8, 0x200, TAG_TILE_3};
+    struct SpriteSheet spriteSheet = {sPSSData->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
     struct SpritePalette palettes[] = {
-        {sPSSData->field_6FC, TAG_PAL_DAC9},
+        {sPSSData->boxTitlePal, PALTAG_BOX_TITLE},
         {}
     };
 
     u16 wallpaperId = GetBoxWallpaper(boxId);
 
-    sPSSData->field_6FC[14] = gUnknown_08577574[wallpaperId][0];
-    sPSSData->field_6FC[15] = gUnknown_08577574[wallpaperId][1];
+    sPSSData->boxTitlePal[14] = sBoxTitleColors[wallpaperId][0]; // Shadow color
+    sPSSData->boxTitlePal[15] = sBoxTitleColors[wallpaperId][1]; // Text Color
     LoadSpritePalettes(palettes);
-    sPSSData->field_738 = 0x3f0;
+    sPSSData->boxTitlePalBits = 0x3f0;
 
-    tagIndex = IndexOfSpritePaletteTag(TAG_PAL_DAC9);
-    sPSSData->field_71C = 0x10e + 16 * tagIndex;
-    sPSSData->field_738 |= 0x10000 << tagIndex;
+    tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
+    sPSSData->boxTitlePalOffset = 0x10e + 16 * tagIndex;
+    sPSSData->boxTitlePalBits |= 0x10000 << tagIndex;
 
-    tagIndex = IndexOfSpritePaletteTag(TAG_PAL_DAC9);
-    sPSSData->field_71E = 0x10e + 16 * tagIndex;
-    sPSSData->field_738 |= 0x10000 << tagIndex;
+    // The below seems intended to have separately tracked
+    // the incoming wallpaper title's palette, but as they now
+    // share a palette tag, all colors (and fields in some cases)
+    // this is redundant along with the use of boxTitleAltPalOffset
+    tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
+    sPSSData->boxTitleAltPalOffset = 0x10e + 16 * tagIndex;
+    sPSSData->boxTitlePalBits |= 0x10000 << tagIndex;
 
-    StringCopyPadded(sPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
-    DrawTextWindowAndBufferTiles(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, 2);
+    StringCopyPadded(sPSSData->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
+    DrawTextWindowAndBufferTiles(sPSSData->boxTitleText, sPSSData->boxTitleTiles, 0, 0, 2);
     LoadSpriteSheet(&spriteSheet);
-    r6 = sub_80CD00C(GetBoxNamePtr(boxId));
+    x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
 
+    // Title is split across two sprites
     for (i = 0; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(&gSpriteTemplate_857B0A8, r6 + i * 32, 28, 24);
-        sPSSData->field_720[i] = &gSprites[spriteId];
-        StartSpriteAnim(sPSSData->field_720[i], i);
+        u8 spriteId = CreateSprite(&sSpriteTemplate_BoxTitle, x + i * 32, 28, 24);
+        sPSSData->curBoxTitleSprites[i] = &gSprites[spriteId];
+        StartSpriteAnim(sPSSData->curBoxTitleSprites[i], i);
     }
-    sPSSData->field_6F8 = 0;
+    sPSSData->boxTitleCycleId = 0;
 }
 
-static void sub_80CCCFC(u8 boxId, s8 direction)
+// Sprite data for moving title text
+#define sSpeed data[0]
+// Flipped between incoming/outgoing for some reason
+#define sIncomingX     data[1]
+#define sIncomingDelay data[2]
+#define sOutgoingDelay data[1]
+#define sOutgoingX     data[2]
+
+static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
 {
-    u16 r8;
-    s16 x, x2;
+    u16 palOffset;
+    s16 x, adjustedX;
     u16 i;
-    struct SpriteSheet spriteSheet = {sPSSData->field_2F8, 0x200, TAG_TILE_3};
-    struct SpriteTemplate template = gSpriteTemplate_857B0A8;
+    struct SpriteSheet spriteSheet = {sPSSData->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
+    struct SpriteTemplate template = sSpriteTemplate_BoxTitle;
 
-    sPSSData->field_6F8 = (sPSSData->field_6F8 == 0);
-    if (sPSSData->field_6F8 == 0)
+    sPSSData->boxTitleCycleId = (sPSSData->boxTitleCycleId == 0);
+    if (sPSSData->boxTitleCycleId == 0)
     {
-        spriteSheet.tag = TAG_TILE_3;
-        r8 = sPSSData->field_71C;
+        spriteSheet.tag = GFXTAG_BOX_TITLE;
+        palOffset = sPSSData->boxTitlePalOffset;
     }
     else
     {
-        spriteSheet.tag = TAG_TILE_4;
-        r8 = sPSSData->field_71C;
-        template.tileTag = TAG_TILE_4;
-        template.paletteTag = TAG_PAL_DAC9;
+        spriteSheet.tag = GFXTAG_BOX_TITLE_ALT;
+        palOffset = sPSSData->boxTitlePalOffset;
+        template.tileTag = GFXTAG_BOX_TITLE_ALT;
+        template.paletteTag = PALTAG_BOX_TITLE;
     }
 
-    StringCopyPadded(sPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
-    DrawTextWindowAndBufferTiles(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, 2);
+    StringCopyPadded(sPSSData->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
+    DrawTextWindowAndBufferTiles(sPSSData->boxTitleText, sPSSData->boxTitleTiles, 0, 0, 2);
     LoadSpriteSheet(&spriteSheet);
-    LoadPalette(gUnknown_08577574[GetBoxWallpaper(boxId)], r8, 4);
-    x = sub_80CD00C(GetBoxNamePtr(boxId));
-    x2 = x;
-    x2 += direction * 192;
+    LoadPalette(sBoxTitleColors[GetBoxWallpaper(boxId)], palOffset, 4);
+    x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
+    adjustedX = x;
+    adjustedX += direction * 192;
 
+    // Title is split across two sprites
     for (i = 0; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(&template, i * 32 + x2, 28, 24);
+        u8 spriteId = CreateSprite(&template, i * 32 + adjustedX, 28, 24);
 
-        sPSSData->field_728[i] = &gSprites[spriteId];
-        sPSSData->field_728[i]->data[0] = (-direction) * 6;
-        sPSSData->field_728[i]->data[1] = i * 32 + x;
-        sPSSData->field_728[i]->data[2] = 0;
-        sPSSData->field_728[i]->callback = sub_80CCF30;
-        StartSpriteAnim(sPSSData->field_728[i], i);
+        sPSSData->nextBoxTitleSprites[i] = &gSprites[spriteId];
+        sPSSData->nextBoxTitleSprites[i]->sSpeed = (-direction) * 6;
+        sPSSData->nextBoxTitleSprites[i]->sIncomingX = i * 32 + x;
+        sPSSData->nextBoxTitleSprites[i]->sIncomingDelay = 0;
+        sPSSData->nextBoxTitleSprites[i]->callback = SpriteCB_IncomingBoxTitle;
+        StartSpriteAnim(sPSSData->nextBoxTitleSprites[i], i);
 
-        sPSSData->field_720[i]->data[0] = (-direction) * 6;
-        sPSSData->field_720[i]->data[1] = 1;
-        sPSSData->field_720[i]->callback = sub_80CCF64;
+        sPSSData->curBoxTitleSprites[i]->sSpeed = (-direction) * 6;
+        sPSSData->curBoxTitleSprites[i]->sOutgoingDelay = 1;
+        sPSSData->curBoxTitleSprites[i]->callback = SpriteCB_OutgoingBoxTitle;
     }
 }
 
-static void sub_80CCEE0(void)
+static void CycleBoxTitleSprites(void)
 {
-    if (sPSSData->field_6F8 == 0)
-        FreeSpriteTilesByTag(TAG_TILE_4);
+    if (sPSSData->boxTitleCycleId == 0)
+        FreeSpriteTilesByTag(GFXTAG_BOX_TITLE_ALT);
     else
-        FreeSpriteTilesByTag(TAG_TILE_3);
+        FreeSpriteTilesByTag(GFXTAG_BOX_TITLE);
 
-    sPSSData->field_720[0] = sPSSData->field_728[0];
-    sPSSData->field_720[1] = sPSSData->field_728[1];
+    sPSSData->curBoxTitleSprites[0] = sPSSData->nextBoxTitleSprites[0];
+    sPSSData->curBoxTitleSprites[1] = sPSSData->nextBoxTitleSprites[1];
 }
 
-static void sub_80CCF30(struct Sprite *sprite)
+static void SpriteCB_IncomingBoxTitle(struct Sprite *sprite)
 {
-    if (sprite->data[2] != 0)
-        sprite->data[2]--;
-    else if ((sprite->pos1.x += sprite->data[0]) == sprite->data[1])
+    if (sprite->sIncomingDelay != 0)
+        sprite->sIncomingDelay--;
+    else if ((sprite->pos1.x += sprite->sSpeed) == sprite->sIncomingX)
         sprite->callback = SpriteCallbackDummy;
 }
 
-static void sub_80CCF64(struct Sprite *sprite)
+static void SpriteCB_OutgoingBoxTitle(struct Sprite *sprite)
 {
-    if (sprite->data[1] != 0)
+    if (sprite->sOutgoingDelay != 0)
     {
-        sprite->data[1]--;
+        sprite->sOutgoingDelay--;
     }
     else
     {
-        sprite->pos1.x += sprite->data[0];
-        sprite->data[2] = sprite->pos1.x + sprite->pos2.x;
-        if (sprite->data[2] < 0x40 || sprite->data[2] > 0x100)
+        sprite->pos1.x += sprite->sSpeed;
+        sprite->sOutgoingX = sprite->pos1.x + sprite->pos2.x;
+        if (sprite->sOutgoingX < 64 || sprite->sOutgoingX > DISPLAY_WIDTH + 16)
             DestroySprite(sprite);
     }
 }
 
-static void sub_80CCF9C(void)
+#undef sSpeed
+#undef sIncomingX
+#undef sIncomingDelay
+#undef sOutgoingDelay
+#undef sOutgoingX
+
+static void CycleBoxTitleColor(void)
 {
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
-    if (sPSSData->field_6F8 == 0)
-        CpuCopy16(gUnknown_08577574[wallpaperId], gPlttBufferUnfaded + sPSSData->field_71C, 4);
+    if (sPSSData->boxTitleCycleId == 0)
+        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + sPSSData->boxTitlePalOffset, 4);
     else
-        CpuCopy16(gUnknown_08577574[wallpaperId], gPlttBufferUnfaded + sPSSData->field_71E, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + sPSSData->boxTitleAltPalOffset, 4);
 }
 
-static s16 sub_80CD00C(const u8 *string)
+static s16 GetBoxTitleBaseX(const u8 *string)
 {
-    return 0xB0 - GetStringWidth(1, string, 0) / 2;
+    return DISPLAY_WIDTH - 64 - GetStringWidth(1, string, 0) / 2;
 }
 
-static void sub_80CD02C(void)
+// Sprite data for box scroll arrows
+#define sState data[0]
+#define sTimer data[1]
+#define sSpeed data[3]
+
+static void CreateBoxScrollArrows(void)
 {
     u16 i;
 
-    LoadSpriteSheet(&gUnknown_0857B080);
+    LoadSpriteSheet(&sSpriteSheet_Arrow);
     for (i = 0; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(&gUnknown_0857B0E0, 0x5c + i * 0x88, 28, 22);
+        u8 spriteId = CreateSprite(&sSpriteTemplate_Arrow, 92 + i * 136, 28, 22);
         if (spriteId != MAX_SPRITES)
         {
             struct Sprite *sprite = &gSprites[spriteId];
             StartSpriteAnim(sprite, i);
-            sprite->data[3] = (i == 0) ? -1 : 1;
-            sPSSData->field_730[i] = sprite;
+            sprite->sSpeed = (i == 0) ? -1 : 1;
+            sPSSData->arrowSprites[i] = sprite;
         }
     }
     if (IsCursorOnBox())
-        sub_80CD1A8(TRUE);
+        AnimateBoxScrollArrows(TRUE);
 }
 
-static void sub_80CD0B8(s8 direction)
+// Slide box scroll arrows horizontally for box change
+static void StartBoxScrollArrowsSlide(s8 direction)
 {
     u16 i;
 
     for (i = 0; i < 2; i++)
     {
-        sPSSData->field_730[i]->pos2.x = 0;
-        sPSSData->field_730[i]->data[0] = 2;
+        sPSSData->arrowSprites[i]->pos2.x = 0;
+        sPSSData->arrowSprites[i]->sState = 2;
     }
     if (direction < 0)
     {
-        sPSSData->field_730[0]->data[1] = 29;
-        sPSSData->field_730[1]->data[1] = 5;
-        sPSSData->field_730[0]->data[2] = 0x48;
-        sPSSData->field_730[1]->data[2] = 0x48;
+        sPSSData->arrowSprites[0]->sTimer = 29;
+        sPSSData->arrowSprites[1]->sTimer = 5;
+        sPSSData->arrowSprites[0]->data[2] = 72;
+        sPSSData->arrowSprites[1]->data[2] = 72;
     }
     else
     {
-        sPSSData->field_730[0]->data[1] = 5;
-        sPSSData->field_730[1]->data[1] = 29;
-        sPSSData->field_730[0]->data[2] = 0xF8;
-        sPSSData->field_730[1]->data[2] = 0xF8;
+        sPSSData->arrowSprites[0]->sTimer = 5;
+        sPSSData->arrowSprites[1]->sTimer = 29;
+        sPSSData->arrowSprites[0]->data[2] = DISPLAY_WIDTH + 8;
+        sPSSData->arrowSprites[1]->data[2] = DISPLAY_WIDTH + 8;
     }
-    sPSSData->field_730[0]->data[7] = 0;
-    sPSSData->field_730[1]->data[7] = 1;
+    sPSSData->arrowSprites[0]->data[7] = 0;
+    sPSSData->arrowSprites[1]->data[7] = 1;
 }
 
-static void sub_80CD158(void)
+// New box's scroll arrows have entered, stop sliding and set their position
+static void StopBoxScrollArrowsSlide(void)
 {
     u16 i;
 
     for (i = 0; i < 2; i++)
     {
-        sPSSData->field_730[i]->pos1.x = 0x88 * i + 0x5c;
-        sPSSData->field_730[i]->pos2.x = 0;
-        sPSSData->field_730[i]->invisible = FALSE;
+        sPSSData->arrowSprites[i]->pos1.x = 136 * i + 92;
+        sPSSData->arrowSprites[i]->pos2.x = 0;
+        sPSSData->arrowSprites[i]->invisible = FALSE;
     }
-    sub_80CD1A8(TRUE);
+    AnimateBoxScrollArrows(TRUE);
 }
 
-static void sub_80CD1A8(bool8 a0)
+// Bounce scroll arrows while title is selected
+static void AnimateBoxScrollArrows(bool8 animate)
 {
     u16 i;
 
-    if (a0)
+    if (animate)
     {
+        // Start arrows moving
         for (i = 0; i < 2; i++)
         {
-            sPSSData->field_730[i]->data[0] = 1;
-            sPSSData->field_730[i]->data[1] = 0;
-            sPSSData->field_730[i]->data[2] = 0;
-            sPSSData->field_730[i]->data[4] = 0;
+            sPSSData->arrowSprites[i]->sState = 1;
+            sPSSData->arrowSprites[i]->sTimer = 0;
+            sPSSData->arrowSprites[i]->data[2] = 0;
+            sPSSData->arrowSprites[i]->data[4] = 0;
         }
     }
     else
     {
+        // Stop arrows moving
         for (i = 0; i < 2; i++)
-        {
-            sPSSData->field_730[i]->data[0] = 0;
-        }
+            sPSSData->arrowSprites[i]->sState = 0;
     }
 }
 
-static void sub_80CD210(struct Sprite *sprite)
+static void SpriteCB_Arrow(struct Sprite *sprite)
 {
-    switch (sprite->data[0])
+    switch (sprite->sState)
     {
     case 0:
         sprite->pos2.x = 0;
         break;
     case 1:
-        if (++sprite->data[1] > 3)
+        if (++sprite->sTimer > 3)
         {
-            sprite->data[1] = 0;
-            sprite->pos2.x += sprite->data[3];
+            sprite->sTimer = 0;
+            sprite->pos2.x += sprite->sSpeed;
             if (++sprite->data[2] > 5)
             {
                 sprite->data[2] = 0;
@@ -5771,17 +5428,17 @@ static void sub_80CD210(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->data[0] = 3;
+        sprite->sState = 3;
         break;
     case 3:
         sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
-        if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
+        if (sprite->pos1.x <= 72 || sprite->pos1.x >= DISPLAY_WIDTH + 8)
             sprite->invisible = TRUE;
-        if (--sprite->data[1] == 0)
+        if (--sprite->sTimer == 0)
         {
             sprite->pos1.x = sprite->data[2];
             sprite->invisible = FALSE;
-            sprite->data[0] = 4;
+            sprite->sState = 4;
         }
         break;
     case 4:
@@ -5790,9 +5447,12 @@ static void sub_80CD210(struct Sprite *sprite)
     }
 }
 
-static struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
+#undef sState
+#undef sSpeed
+
+static struct Sprite *CreateJumpBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
 {
-    u8 spriteId = CreateSprite(&gUnknown_0857B0E0, x, y, subpriority);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_Arrow, x, y, subpriority);
     if (spriteId == MAX_SPRITES)
         return NULL;
 
@@ -5905,25 +5565,25 @@ static bool8 sub_80CD554(void)
         sPSSData->field_CC0 += sPSSData->field_CC8;
         sPSSData->field_CB4->pos1.x = sPSSData->field_CBC >> 8;
         sPSSData->field_CB4->pos1.y = sPSSData->field_CC0 >> 8;
-        if (sPSSData->field_CB4->pos1.x > 0x100)
+        if (sPSSData->field_CB4->pos1.x > DISPLAY_WIDTH + 16)
         {
-            tmp = sPSSData->field_CB4->pos1.x - 0x100;
-            sPSSData->field_CB4->pos1.x = tmp + 0x40;
+            tmp = sPSSData->field_CB4->pos1.x - (DISPLAY_WIDTH + 16);
+            sPSSData->field_CB4->pos1.x = tmp + 64;
         }
-        if (sPSSData->field_CB4->pos1.x < 0x40)
+        if (sPSSData->field_CB4->pos1.x < 64)
         {
-            tmp = 0x40 - sPSSData->field_CB4->pos1.x;
-            sPSSData->field_CB4->pos1.x = 0x100 - tmp;
+            tmp = 64 - sPSSData->field_CB4->pos1.x;
+            sPSSData->field_CB4->pos1.x = DISPLAY_WIDTH + 16 - tmp;
         }
-        if (sPSSData->field_CB4->pos1.y > 0xb0)
+        if (sPSSData->field_CB4->pos1.y > DISPLAY_HEIGHT + 16)
         {
-            tmp = sPSSData->field_CB4->pos1.y - 0xb0;
-            sPSSData->field_CB4->pos1.y = tmp - 0x10;
+            tmp = sPSSData->field_CB4->pos1.y - (DISPLAY_HEIGHT + 16);
+            sPSSData->field_CB4->pos1.y = tmp - 16;
         }
-        if (sPSSData->field_CB4->pos1.y < -0x10)
+        if (sPSSData->field_CB4->pos1.y < -16)
         {
-            tmp = -0x10 - sPSSData->field_CB4->pos1.y;
-            sPSSData->field_CB4->pos1.y = 0xb0 - tmp;
+            tmp = -16 - sPSSData->field_CB4->pos1.y;
+            sPSSData->field_CB4->pos1.y = DISPLAY_HEIGHT + 16 - tmp;
         }
         if (sPSSData->field_CD7 && --sPSSData->field_CD7 == 0)
             sPSSData->field_CB4->vFlip = (sPSSData->field_CB4->vFlip == FALSE);
@@ -6076,7 +5736,7 @@ static void sub_80CDA68(void)
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_BOX:
-        sub_80CD1A8(TRUE);
+        AnimateBoxScrollArrows(TRUE);
         break;
     case CURSOR_AREA_IN_PARTY:
         sPSSData->field_CB8->subpriority = 13;
@@ -7426,7 +7086,7 @@ static u8 HandleInput_OnBox(void)
 
         if (JOY_NEW(A_BUTTON))
         {
-            sub_80CD1A8(FALSE);
+            AnimateBoxScrollArrows(FALSE);
             AddBoxMenu();
             return 7;
         }
@@ -7447,7 +7107,7 @@ static u8 HandleInput_OnBox(void)
     if (retVal)
     {
         if (cursorArea != CURSOR_AREA_BOX)
-            sub_80CD1A8(FALSE);
+            AnimateBoxScrollArrows(FALSE);
         sub_80CD894(cursorArea, cursorPosition);
     }
 
@@ -7948,7 +7608,10 @@ static void AddMenu(void)
     sPSSData->field_CAE = 0;
 }
 
-static bool8 sub_80D00A8(void)
+// Called after AddMenu to determine whether or not the handler callback should
+// wait to move on to the next state. Evidently there was no need to wait, and
+// now it always returns FALSE
+static bool8 IsMenuLoading(void)
 {
     return FALSE;
 }
@@ -9451,7 +9114,7 @@ u8 *GetBoxNamePtr(u8 boxId)
         return NULL;
 }
 
-u8 GetBoxWallpaper(u8 boxId)
+static u8 GetBoxWallpaper(u8 boxId)
 {
     if (boxId < TOTAL_BOXES_COUNT)
         return gPokemonStoragePtr->boxWallpapers[boxId];
@@ -9459,7 +9122,7 @@ u8 GetBoxWallpaper(u8 boxId)
         return 0;
 }
 
-void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
+static void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
 {
     if (boxId < TOTAL_BOXES_COUNT && wallpaperId < WALLPAPER_COUNT)
         gPokemonStoragePtr->boxWallpapers[boxId] = wallpaperId;
@@ -9615,7 +9278,7 @@ u32 GetWaldaWallpaperIconId(void)
 
 void SetWaldaWallpaperIconId(u8 id)
 {
-    if (id < 30)
+    if (id < ARRAY_COUNT(sWaldaWallpaperIcons))
         gSaveBlock1Ptr->waldaPhrase.iconId = id;
 }
 
