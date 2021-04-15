@@ -2047,7 +2047,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 void sub_8038A04(void) // unused
 {
     if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F)
-        SetGpuReg(REG_OFFSET_BG0CNT, 0x9800);
+        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_SCREENBASE(24) | BGCNT_TXT256x512);
 }
 
 void VBlankCB_Battle(void)

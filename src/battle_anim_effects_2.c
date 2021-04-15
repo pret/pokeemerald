@@ -3079,7 +3079,7 @@ void AnimTask_FakeOut(u8 taskId)
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_ALL);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_ALL | WINOUT_WINOBJ_ALL);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN);
-    SetGpuReg(REG_OFFSET_BLDY, 0x10);
+    SetGpuReg(REG_OFFSET_BLDY, 16);
     gTasks[taskId].data[0] = win0v;
     gTasks[taskId].data[1] = win0h;
     gTasks[taskId].func = AnimTask_FakeOut_Step1;
