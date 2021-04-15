@@ -105,7 +105,7 @@ const u16 gTitleScreenAlphaBlend[64] =
 
 static const struct OamData sVersionBannerLeftOamData =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -122,7 +122,7 @@ static const struct OamData sVersionBannerLeftOamData =
 
 static const struct OamData sVersionBannerRightOamData =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -193,7 +193,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 
 static const struct OamData sOamData_CopyrightBanner =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -305,7 +305,7 @@ static const struct SpritePalette sSpritePalette_PressStart[] =
 
 static const struct OamData sPokemonLogoShineOamData =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -430,7 +430,7 @@ static void CreateCopyrightBanner(s16 x, s16 y)
 
 static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
 {
-    if (sprite->pos1.x < 272)
+    if (sprite->pos1.x < DISPLAY_WIDTH + 32)
     {
         if (sprite->data[0]) // Flash background
         {
@@ -473,7 +473,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
 
 static void SpriteCB_PokemonLogoShine2(struct Sprite *sprite)
 {
-    if (sprite->pos1.x < 272)
+    if (sprite->pos1.x < DISPLAY_WIDTH + 32)
         sprite->pos1.x += 8;
     else
         DestroySprite(sprite);

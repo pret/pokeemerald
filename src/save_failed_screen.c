@@ -47,7 +47,7 @@ static EWRAM_DATA u8 sUnused2[4] = {0};
 
 static const struct OamData sClockOamData =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,

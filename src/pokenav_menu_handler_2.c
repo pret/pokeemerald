@@ -1223,7 +1223,7 @@ static void SetupPokenavMenuScanlineEffects(void)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
     SetGpuRegBits(REG_OFFSET_WININ, 0x3F);
     SetGpuRegBits(REG_OFFSET_WINOUT, 0x1F);
-    SetGpuRegBits(REG_OFFSET_WIN0V, 0xA0);
+    SetGpuRegBits(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
     ScanlineEffect_Stop();
     SetMenuOptionGlow();
     ScanlineEffect_SetParams(sPokenavMainMenuScanlineEffectParams);

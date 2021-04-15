@@ -4836,7 +4836,7 @@ static void CreatePartyMonsSprites(bool8 arg0)
     {
         for (i = 0; i < count; i++)
         {
-            sPSSData->partySprites[i]->pos1.y -= 160;
+            sPSSData->partySprites[i]->pos1.y -= DISPLAY_HEIGHT;
             sPSSData->partySprites[i]->invisible = TRUE;
         }
     }

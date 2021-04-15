@@ -957,12 +957,12 @@ void AnimTask_CurseStretchingBlackBg(u8 taskId)
     else
         startX = 200;
 
-    gBattle_WIN0H = (startX << 8) | startX;
+    gBattle_WIN0H = WIN_RANGE(startX, startX);
     startY = 40;
-    gBattle_WIN0V = (startY << 8) | startY;
+    gBattle_WIN0V = WIN_RANGE(startY, startY);
 
     leftDistance = startX;
-    rightDistance = 240 - startX;
+    rightDistance = DISPLAY_WIDTH - startX;
     topDistance = startY;
     bottomDistance = 72;
     gTasks[taskId].data[1] = leftDistance;
@@ -1001,7 +1001,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
     else
     {
         left = 0;
-        right = 240;
+        right = DISPLAY_WIDTH;
         top = 0;
         bottom = 112;
         selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
@@ -1009,8 +1009,8 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
 
-    gBattle_WIN0H = (left << 8) | right;
-    gBattle_WIN0V = (top  << 8) | bottom;
+    gBattle_WIN0H = WIN_RANGE(left, right);
+    gBattle_WIN0V = WIN_RANGE(top, bottom);
 }
 
 static void AnimTask_CurseStretchingBlackBg_Step2(u8 taskId)

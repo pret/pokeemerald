@@ -1509,7 +1509,7 @@ static void AnimLetterZ(struct Sprite *sprite)
     sprite->pos2.x = sprite->data[3] / 2;
     sprite->pos2.y = Sin(var0 & 0xFF, 5) + (sprite->data[4] / 2);
 
-    if ((u16)(sprite->pos1.x + sprite->pos2.x) > 240)
+    if ((u16)(sprite->pos1.x + sprite->pos2.x) > DISPLAY_WIDTH)
         DestroyAnimSprite(sprite);
 }
 
@@ -1676,18 +1676,18 @@ void AnimTask_CreateSpotlight(u8 taskId)
 {
     if (IsContest())
     {
-        SetGpuReg(REG_OFFSET_WININ, 0x1F3F);
-        gBattle_WIN1H = 0x98F0;
-        gBattle_WIN1V = 0x00A0;
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+        gBattle_WIN1H = WIN_RANGE(152, DISPLAY_WIDTH);
+        gBattle_WIN1V = WIN_RANGE(0, DISPLAY_HEIGHT);
         SetGpuReg(REG_OFFSET_WIN1H, gBattle_WIN0H);
         SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN0V);
     }
     else
     {
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-        gBattle_WIN1H = 0x00F0;
-        gBattle_WIN1V = 0x78A0;
-        SetGpuReg(REG_OFFSET_WIN1H, 0x00F0);
+        gBattle_WIN1H = WIN_RANGE(0, DISPLAY_WIDTH);
+        gBattle_WIN1V = WIN_RANGE(120, DISPLAY_HEIGHT);
+        SetGpuReg(REG_OFFSET_WIN1H, gBattle_WIN1H);
         SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN1V);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
     }
@@ -1785,13 +1785,13 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
     {
         var3 = gBattle_BG1_X;
         task->data[8] = var3;
-        var4 = var3 + 240;
+        var4 = var3 + DISPLAY_WIDTH;
     }
     else
     {
         var3 = gBattle_BG2_X;
         task->data[8] = var3;
-        var4 = var3 + 240;
+        var4 = var3 + DISPLAY_WIDTH;
     }
 
     task->data[9] = var4;
@@ -2807,7 +2807,7 @@ static void AnimSweetScentPetal(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.x = 240;
+        sprite->pos1.x = DISPLAY_WIDTH;
         sprite->pos1.y = gBattleAnimArgs[0] - 30;
     }
 
@@ -2824,7 +2824,7 @@ static void AnimSweetScentPetal_Step(struct Sprite *sprite)
         sprite->pos1.x += 5;
         sprite->pos1.y -= 1;
 
-        if (sprite->pos1.x > 240)
+        if (sprite->pos1.x > DISPLAY_WIDTH)
             DestroyAnimSprite(sprite);
 
         sprite->pos2.y = Sin(sprite->data[0] & 0xFF, 16);
@@ -5049,7 +5049,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
 
                 subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
                 isBackPic = FALSE;
-                x = 272;
+                x = DISPLAY_WIDTH + 32;
             }
             else
             {
@@ -5116,7 +5116,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             gSprites[spriteId].pos2.x = -gSprites[spriteId].pos1.x - 32;
         else
-            gSprites[spriteId].pos2.x = 272 - gSprites[spriteId].pos1.x;
+            gSprites[spriteId].pos2.x = DISPLAY_WIDTH + 32 - gSprites[spriteId].pos1.x;
 
         gTasks[taskId].data[0]++;
         break;

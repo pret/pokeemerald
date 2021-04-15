@@ -1537,7 +1537,7 @@ static void SpriteCB_Ball_Block_Step(struct Sprite *sprite)
     sprite->sDy = (sprite->sDy + 0x800) & 0xFF;
     sprite->sDx = (sprite->sDx + 0x680) & 0xFF;
 
-    if (sprite->pos1.y + sprite->pos2.y > 160
+    if (sprite->pos1.y + sprite->pos2.y > DISPLAY_HEIGHT
      || sprite->pos1.x + sprite->pos2.x < -8)
     {
         sprite->sFrame = 0;

@@ -3069,11 +3069,11 @@ static void AnimMagentaHeart(struct Sprite *sprite)
 
 void AnimTask_FakeOut(u8 taskId)
 {
-    u16 win0h = IsContest() ? 0x98 : 0xF0;
+    u16 win0h = IsContest() ? 152 : DISPLAY_WIDTH;
     u16 win0v = 0;
 
     gBattle_WIN0H = win0h;
-    gBattle_WIN0V = 0xA0;
+    gBattle_WIN0V = DISPLAY_HEIGHT;
     SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
     SetGpuReg(REG_OFFSET_WININ, 0x3F1F);
@@ -3096,7 +3096,7 @@ static void AnimTask_FakeOut_Step1(u8 taskId)
     }
     else
     {
-        gBattle_WIN0H = gTasks[taskId].data[1] | (gTasks[taskId].data[0] << 8);
+        gBattle_WIN0H = WIN_RANGE(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
 }
 
@@ -3210,7 +3210,7 @@ void AnimParticleBurst(struct Sprite *sprite)
 static void AnimRedHeartRising(struct Sprite *sprite)
 {
     sprite->pos1.x = gBattleAnimArgs[0];
-    sprite->pos1.y = 160;
+    sprite->pos1.y = DISPLAY_HEIGHT;
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->callback = WaitAnimForDuration;
@@ -3464,7 +3464,8 @@ static void AnimOrbitScatter_Step(struct Sprite *sprite)
 {
     sprite->pos2.x += sprite->data[0];
     sprite->pos2.y += sprite->data[1];
-    if (sprite->pos1.x + sprite->pos2.x + 16 > 272u || sprite->pos1.y + sprite->pos2.y > 160 || sprite->pos1.y + sprite->pos2.y < -16)
+    if (sprite->pos1.x + sprite->pos2.x + 16 > ((u32)DISPLAY_WIDTH + 32) 
+     || sprite->pos1.y + sprite->pos2.y > DISPLAY_HEIGHT || sprite->pos1.y + sprite->pos2.y < -16)
         DestroyAnimSprite(sprite);
 }
 

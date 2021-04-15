@@ -1537,8 +1537,8 @@ void Ash_InitAll(void)
 void Ash_Main(void)
 {
     gWeatherPtr->ashBaseSpritesX = gSpriteCoordOffsetX & 0x1FF;
-    while (gWeatherPtr->ashBaseSpritesX >= 240)
-        gWeatherPtr->ashBaseSpritesX -= 240;
+    while (gWeatherPtr->ashBaseSpritesX >= DISPLAY_WIDTH)
+        gWeatherPtr->ashBaseSpritesX -= DISPLAY_WIDTH;
 
     switch (gWeatherPtr->initStep)
     {
