@@ -42,6 +42,186 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+enum {
+    BOX_OPTION_WITHDRAW,
+    BOX_OPTION_DEPOSIT,
+    BOX_OPTION_MOVE_MONS,
+    BOX_OPTION_MOVE_ITEMS,
+    BOX_OPTION_EXIT,
+};
+
+// IDs for messages to print with PrintMessage
+enum {
+    MSG_EXIT_BOX,
+    MSG_WHAT_YOU_DO,
+    MSG_PICK_A_THEME,
+    MSG_PICK_A_WALLPAPER,
+    MSG_IS_SELECTED,
+    MSG_JUMP_TO_WHICH_BOX,
+    MSG_DEPOSIT_IN_WHICH_BOX,
+    MSG_WAS_DEPOSITED,
+    MSG_BOX_IS_FULL,
+    MSG_RELEASE_POKE,
+    MSG_WAS_RELEASED,
+    MSG_BYE_BYE,
+    MSG_MARK_POKE,
+    MSG_LAST_POKE,
+    MSG_PARTY_FULL,
+    MSG_HOLDING_POKE,
+    MSG_WHICH_ONE_WILL_TAKE,
+    MSG_CANT_RELEASE_EGG,
+    MSG_CONTINUE_BOX,
+    MSG_CAME_BACK,
+    MSG_WORRIED,
+    MSG_SURPRISE,
+    MSG_PLEASE_REMOVE_MAIL,
+    MSG_IS_SELECTED2,
+    MSG_GIVE_TO_MON,
+    MSG_PLACED_IN_BAG,
+    MSG_BAG_FULL,
+    MSG_PUT_IN_BAG,
+    MSG_ITEM_IS_HELD,
+    MSG_CHANGED_TO_ITEM,
+    MSG_CANT_STORE_MAIL,
+};
+
+enum {
+    MSG_FORMAT_NORMAL,
+    MSG_FORMAT_MON_NAME_1,
+    MSG_FORMAT_MON_NAME_2, // Unused
+    MSG_FORMAT_MON_NAME_3, // Unused
+    MSG_FORMAT_MON_NAME_4,
+    MSG_FORMAT_MON_NAME_5, // Unused
+    MSG_FORMAT_MON_NAME_6,
+    MSG_FORMAT_ITEM_NAME,
+};
+
+// IDs for menu selection items. See SetMenuText, HandleMenuInput, etc
+enum {
+    MENU_CANCEL,
+    MENU_STORE,
+    MENU_WITHDRAW,
+    MENU_MOVE,
+    MENU_SHIFT,
+    MENU_PLACE,
+    MENU_SUMMARY,
+    MENU_RELEASE,
+    MENU_MARK,
+    MENU_JUMP,
+    MENU_WALLPAPER,
+    MENU_NAME,
+    MENU_TAKE,
+    MENU_GIVE,
+    MENU_GIVE_2,
+    MENU_SWITCH,
+    MENU_BAG,
+    MENU_INFO,
+    MENU_SCENERY_1,
+    MENU_SCENERY_2,
+    MENU_SCENERY_3,
+    MENU_ETCETERA,
+    MENU_FRIENDS,
+    MENU_FOREST,
+    MENU_CITY,
+    MENU_DESERT,
+    MENU_SAVANNA,
+    MENU_CRAG,
+    MENU_VOLCANO,
+    MENU_SNOW,
+    MENU_CAVE,
+    MENU_BEACH,
+    MENU_SEAFLOOR,
+    MENU_RIVER,
+    MENU_SKY,
+    MENU_POLKADOT,
+    MENU_POKECENTER,
+    MENU_MACHINE,
+    MENU_SIMPLE,
+};
+#define MENU_WALLPAPERS_START MENU_FOREST
+
+enum {
+    SCREEN_CHANGE_EXIT_BOX,
+    SCREEN_CHANGE_SUMMARY_SCREEN,
+    SCREEN_CHANGE_NAME_BOX,
+    SCREEN_CHANGE_ITEM_FROM_BAG,
+};
+
+enum {
+    MODE_PARTY,
+    MODE_BOX,
+    MODE_MOVE,
+};
+
+enum {
+    WALLPAPER_FOREST,
+    WALLPAPER_CITY,
+    WALLPAPER_DESERT,
+    WALLPAPER_SAVANNA,
+    WALLPAPER_CRAG,
+    WALLPAPER_VOLCANO,
+    WALLPAPER_SNOW,
+    WALLPAPER_CAVE,
+    WALLPAPER_BEACH,
+    WALLPAPER_SEAFLOOR,
+    WALLPAPER_RIVER,
+    WALLPAPER_SKY,
+    WALLPAPER_POLKADOT,
+    WALLPAPER_POKECENTER,
+    WALLPAPER_MACHINE,
+    WALLPAPER_PLAIN,
+    WALLPAPER_FRIENDS, // The one received as a gift from Walda's parents.
+    WALLPAPER_COUNT
+};
+
+enum {
+    FRIENDS_ZIGZAGOON,
+    FRIENDS_SCREEN,
+    FRIENDS_HORIZONTAL,
+    FRIENDS_DIAGONAL,
+    FRIENDS_BLOCK,
+    FRIENDS_RIBBON,
+    FRIENDS_POKECENTER2,
+    FRIENDS_FRAME,
+    FRIENDS_BLANK,
+    FRIENDS_CIRCLES,
+    FRIENDS_AZUMARILL,
+    FRIENDS_PIKACHU,
+    FRIENDS_LEGENDARY,
+    FRIENDS_DUSCLOPS,
+    FRIENDS_LUDICOLO,
+    FRIENDS_WHISCASH,
+    FRIENDS_WALLPAPERS_COUNT
+};
+
+enum {
+    CURSOR_AREA_IN_BOX,
+    CURSOR_AREA_IN_PARTY,
+    CURSOR_AREA_BOX,
+    CURSOR_AREA_BUTTONS, // Party Pokemon and Close Box
+};
+
+#define TAG_PAL_WAVEFORM    0xDACA
+#define TAG_PAL_DAC8        0xDAC8
+#define TAG_PAL_DAC6        0xDAC6
+#define TAG_PAL_DACE        0xDACE
+#define TAG_PAL_DAC7        0xDAC7
+#define TAG_PAL_DAC9        0xDAC9
+#define TAG_PAL_DAC0        0xDAC0
+#define TAG_PAL_DACB        0xDACB
+
+#define TAG_TILE_WAVEFORM   0x5
+#define TAG_TILE_10         0x10
+#define TAG_TILE_2          0x2
+#define TAG_TILE_D          0xD
+#define TAG_TILE_A          0xA
+#define TAG_TILE_3          0x3
+#define TAG_TILE_4          0x4
+#define TAG_TILE_12         0x12
+#define TAG_TILE_7          0x7
+#define TAG_TILE_0          0x0
+#define TAG_TILE_1          0x1
+
 struct WallpaperTable
 {
     const u32 *tiles;
@@ -55,7 +235,7 @@ struct PokemonStorageSystemFunc
     s8 unk4;
 };
 
-struct StorageAction
+struct StorageMessage
 {
     const u8 *text;
     u8 format;
@@ -194,7 +374,7 @@ struct PokemonStorageSystemData
     u8 menuItemsCount;
     u8 menuWidth;
     u8 field_CAE; // Written to, but never read.
-    u16 field_CB0;
+    u16 menuWindowId;
     struct Sprite *field_CB4;
     struct Sprite *field_CB8;
     s32 field_CBC;
@@ -299,149 +479,6 @@ struct UnkStruct_2039D84
     u8 field_2D;
 };
 
-enum
-{
-    BOX_OPTION_WITHDRAW,
-    BOX_OPTION_DEPOSIT,
-    BOX_OPTION_MOVE_MONS,
-    BOX_OPTION_MOVE_ITEMS,
-    BOX_OPTION_EXIT,
-};
-
-enum
-{
-    PC_TEXT_EXIT_BOX,
-    PC_TEXT_WHAT_YOU_DO,
-    PC_TEXT_PICK_A_THEME,
-    PC_TEXT_PICK_A_WALLPAPER,
-    PC_TEXT_IS_SELECTED,
-    PC_TEXT_JUMP_TO_WHICH_BOX,
-    PC_TEXT_DEPOSIT_IN_WHICH_BOX,
-    PC_TEXT_WAS_DEPOSITED,
-    PC_TEXT_BOX_IS_FULL,
-    PC_TEXT_RELEASE_POKE,
-    PC_TEXT_WAS_RELEASED,
-    PC_TEXT_BYE_BYE,
-    PC_TEXT_MARK_POKE,
-    PC_TEXT_LAST_POKE,
-    PC_TEXT_PARTY_FULL,
-    PC_TEXT_HOLDING_POKE,
-    PC_TEXT_WHICH_ONE_WILL_TAKE,
-    PC_TEXT_CANT_RELEASE_EGG,
-    PC_TEXT_CONTINUE_BOX,
-    PC_TEXT_CAME_BACK,
-    PC_TEXT_WORRIED,
-    PC_TEXT_SURPRISE,
-    PC_TEXT_PLEASE_REMOVE_MAIL,
-    PC_TEXT_IS_SELECTED2,
-    PC_TEXT_GIVE_TO_MON,
-    PC_TEXT_PLACED_IN_BAG,
-    PC_TEXT_BAG_FULL,
-    PC_TEXT_PUT_IN_BAG,
-    PC_TEXT_ITEM_IS_HELD,
-    PC_TEXT_CHANGED_TO_ITEM,
-    PC_TEXT_CANT_STORE_MAIL,
-};
-
-enum
-{
-    PC_TEXT_FMT_NORMAL,
-    PC_TEXT_FMT_MON_NAME_1,
-    PC_TEXT_FMT_MON_NAME_2,
-    PC_TEXT_FMT_MON_NAME_3,
-    PC_TEXT_FMT_MON_NAME_4,
-    PC_TEXT_FMT_MON_NAME_5,
-    PC_TEXT_FMT_MON_NAME_6,
-    PC_TEXT_FMT_ITEM_NAME,
-};
-
-enum
-{
-    SCREEN_CHANGE_EXIT_BOX,
-    SCREEN_CHANGE_SUMMARY_SCREEN,
-    SCREEN_CHANGE_NAME_BOX,
-    SCREEN_CHANGE_ITEM_FROM_BAG,
-};
-
-enum
-{
-    MODE_PARTY,
-    MODE_BOX,
-    MODE_MOVE,
-};
-
-enum
-{
-    WALLPAPER_FOREST,
-    WALLPAPER_CITY,
-    WALLPAPER_DESERT,
-    WALLPAPER_SAVANNA,
-    WALLPAPER_CRAG,
-    WALLPAPER_VOLCANO,
-    WALLPAPER_SNOW,
-    WALLPAPER_CAVE,
-    WALLPAPER_BEACH,
-    WALLPAPER_SEAFLOOR,
-    WALLPAPER_RIVER,
-    WALLPAPER_SKY,
-    WALLPAPER_POLKADOT,
-    WALLPAPER_POKECENTER,
-    WALLPAPER_MACHINE,
-    WALLPAPER_PLAIN,
-    WALLPAPER_FRIENDS, // The one received as a gift from Walda's parents.
-    WALLPAPER_COUNT
-};
-
-enum
-{
-    FRIENDS_ZIGZAGOON,
-    FRIENDS_SCREEN,
-    FRIENDS_HORIZONTAL,
-    FRIENDS_DIAGONAL,
-    FRIENDS_BLOCK,
-    FRIENDS_RIBBON,
-    FRIENDS_POKECENTER2,
-    FRIENDS_FRAME,
-    FRIENDS_BLANK,
-    FRIENDS_CIRCLES,
-    FRIENDS_AZUMARILL,
-    FRIENDS_PIKACHU,
-    FRIENDS_LEGENDARY,
-    FRIENDS_DUSCLOPS,
-    FRIENDS_LUDICOLO,
-    FRIENDS_WHISCASH,
-    FRIENDS_WALLPAPERS_COUNT
-};
-
-enum
-{
-    CURSOR_AREA_IN_BOX,
-    CURSOR_AREA_IN_PARTY,
-    CURSOR_AREA_BOX,
-    CURSOR_AREA_BUTTONS, // Party Pokemon and Close Box
-};
-
-#define TAG_PAL_WAVEFORM    0xDACA
-#define TAG_PAL_DAC8        0xDAC8
-#define TAG_PAL_DAC6        0xDAC6
-#define TAG_PAL_DACE        0xDACE
-#define TAG_PAL_DAC7        0xDAC7
-#define TAG_PAL_DAC9        0xDAC9
-#define TAG_PAL_DAC0        0xDAC0
-#define TAG_PAL_DACB        0xDACB
-
-#define TAG_TILE_WAVEFORM   0x5
-#define TAG_TILE_10         0x10
-#define TAG_TILE_2          0x2
-#define TAG_TILE_D          0xD
-#define TAG_TILE_A          0xA
-#define TAG_TILE_3          0x3
-#define TAG_TILE_4          0x4
-#define TAG_TILE_12         0x12
-#define TAG_TILE_7          0x7
-#define TAG_TILE_0          0x0
-#define TAG_TILE_1          0x1
-
 // IWRAM bss
 static u32 gUnknown_03000F78[98];
 
@@ -518,7 +555,7 @@ static void sub_80CC064(void);
 static void sub_80CE324(void);
 static void ClearBottomWindow(void);
 static void sub_80CA704(void);
-static void sub_80D013C(void);
+static void RemoveMenu(void);
 static void sub_80CE00C(void);
 static void sub_80D1194(void);
 static void PrintCursorMonInfo(void);
@@ -627,8 +664,8 @@ static void sub_80D01D0(u8 arg0);
 static void sub_80CD1A8(bool8 arg0);
 static void sub_80CA984(bool8 arg0);
 static void CreatePartyMonsSprites(bool8 arg0);
-static void PrintStorageActionText(u8 id);
-static s16 sub_80D00AC(void);
+static void PrintMessage(u8 id);
+static s16 HandleMenuInput(void);
 static s8 RunCanReleaseMon(void);
 static u8 GetBoxCursorPosition(void);
 static void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos);
@@ -675,7 +712,7 @@ static bool32 AtLeastThreeUsableMons(void);
 static u8 InBoxInput_Normal(void);
 static u8 InBoxInput_MovingMultiple(void);
 static u8 InBoxInput_GrabbingMultiple(void);
-static s8 sub_80CFF98(u8 arg0);
+static s8 GetMenuItemTextId(u8);
 static u8 sub_80CFA5C(void);
 static u8 sub_80D0BA4(void);
 static bool8 sub_80CFA84(void);
@@ -914,39 +951,39 @@ static const struct SpriteTemplate sSpriteTemplate_CursorMon =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct StorageAction gPCStorageActionTexts[] =
+static const struct StorageMessage sMessages[] =
 {
-    [PC_TEXT_EXIT_BOX] = {gText_ExitFromBox, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_WHAT_YOU_DO] = {gText_WhatDoYouWantToDo, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_PICK_A_THEME] = {gText_PleasePickATheme, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_PICK_A_WALLPAPER] = {gText_PickTheWallpaper, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_IS_SELECTED] = {gText_PkmnIsSelected, PC_TEXT_FMT_MON_NAME_1},
-    [PC_TEXT_JUMP_TO_WHICH_BOX] = {gText_JumpToWhichBox, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_WAS_DEPOSITED] = {gText_PkmnWasDeposited, PC_TEXT_FMT_MON_NAME_1},
-    [PC_TEXT_BOX_IS_FULL] = {gText_BoxIsFull2, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_RELEASE_POKE] = {gText_ReleaseThisPokemon, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_WAS_RELEASED] = {gText_PkmnWasReleased, PC_TEXT_FMT_MON_NAME_4},
-    [PC_TEXT_BYE_BYE] = {gText_ByeByePkmn, PC_TEXT_FMT_MON_NAME_6},
-    [PC_TEXT_MARK_POKE] = {gText_MarkYourPkmn, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_LAST_POKE] = {gText_ThatsYourLastPkmn, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_PARTY_FULL] = {gText_YourPartysFull, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_HOLDING_POKE] = {gText_YoureHoldingAPkmn, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_WHICH_ONE_WILL_TAKE] = {gText_WhichOneWillYouTake, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_CANT_RELEASE_EGG] = {gText_YouCantReleaseAnEgg, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_CONTINUE_BOX] = {gText_ContinueBoxOperations, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_CAME_BACK] = {gText_PkmnCameBack, PC_TEXT_FMT_MON_NAME_1},
-    [PC_TEXT_WORRIED] = {gText_WasItWorriedAboutYou, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_SURPRISE] = {gText_FourEllipsesExclamation, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_PLEASE_REMOVE_MAIL] = {gText_PleaseRemoveTheMail, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_IS_SELECTED2] = {gText_PkmnIsSelected, PC_TEXT_FMT_ITEM_NAME},
-    [PC_TEXT_GIVE_TO_MON] = {gText_GiveToAPkmn, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_PLACED_IN_BAG] = {gText_PlacedItemInBag, PC_TEXT_FMT_ITEM_NAME},
-    [PC_TEXT_BAG_FULL] = {gText_BagIsFull2, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_PUT_IN_BAG] = {gText_PutItemInBag, PC_TEXT_FMT_NORMAL},
-    [PC_TEXT_ITEM_IS_HELD] = {gText_ItemIsNowHeld, PC_TEXT_FMT_ITEM_NAME},
-    [PC_TEXT_CHANGED_TO_ITEM] = {gText_ChangedToNewItem, PC_TEXT_FMT_ITEM_NAME},
-    [PC_TEXT_CANT_STORE_MAIL] = {gText_MailCantBeStored, PC_TEXT_FMT_NORMAL},
+    [MSG_EXIT_BOX]             = {gText_ExitFromBox, MSG_FORMAT_NORMAL},
+    [MSG_WHAT_YOU_DO]          = {gText_WhatDoYouWantToDo, MSG_FORMAT_NORMAL},
+    [MSG_PICK_A_THEME]         = {gText_PleasePickATheme, MSG_FORMAT_NORMAL},
+    [MSG_PICK_A_WALLPAPER]     = {gText_PickTheWallpaper, MSG_FORMAT_NORMAL},
+    [MSG_IS_SELECTED]          = {gText_PkmnIsSelected, MSG_FORMAT_MON_NAME_1},
+    [MSG_JUMP_TO_WHICH_BOX]    = {gText_JumpToWhichBox, MSG_FORMAT_NORMAL},
+    [MSG_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox, MSG_FORMAT_NORMAL},
+    [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited, MSG_FORMAT_MON_NAME_1},
+    [MSG_BOX_IS_FULL]          = {gText_BoxIsFull2, MSG_FORMAT_NORMAL},
+    [MSG_RELEASE_POKE]         = {gText_ReleaseThisPokemon, MSG_FORMAT_NORMAL},
+    [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased, MSG_FORMAT_MON_NAME_4},
+    [MSG_BYE_BYE]              = {gText_ByeByePkmn, MSG_FORMAT_MON_NAME_6},
+    [MSG_MARK_POKE]            = {gText_MarkYourPkmn, MSG_FORMAT_NORMAL},
+    [MSG_LAST_POKE]            = {gText_ThatsYourLastPkmn, MSG_FORMAT_NORMAL},
+    [MSG_PARTY_FULL]           = {gText_YourPartysFull, MSG_FORMAT_NORMAL},
+    [MSG_HOLDING_POKE]         = {gText_YoureHoldingAPkmn, MSG_FORMAT_NORMAL},
+    [MSG_WHICH_ONE_WILL_TAKE]  = {gText_WhichOneWillYouTake, MSG_FORMAT_NORMAL},
+    [MSG_CANT_RELEASE_EGG]     = {gText_YouCantReleaseAnEgg, MSG_FORMAT_NORMAL},
+    [MSG_CONTINUE_BOX]         = {gText_ContinueBoxOperations, MSG_FORMAT_NORMAL},
+    [MSG_CAME_BACK]            = {gText_PkmnCameBack, MSG_FORMAT_MON_NAME_1},
+    [MSG_WORRIED]              = {gText_WasItWorriedAboutYou, MSG_FORMAT_NORMAL},
+    [MSG_SURPRISE]             = {gText_FourEllipsesExclamation, MSG_FORMAT_NORMAL},
+    [MSG_PLEASE_REMOVE_MAIL]   = {gText_PleaseRemoveTheMail, MSG_FORMAT_NORMAL},
+    [MSG_IS_SELECTED2]         = {gText_PkmnIsSelected, MSG_FORMAT_ITEM_NAME},
+    [MSG_GIVE_TO_MON]          = {gText_GiveToAPkmn, MSG_FORMAT_NORMAL},
+    [MSG_PLACED_IN_BAG]        = {gText_PlacedItemInBag, MSG_FORMAT_ITEM_NAME},
+    [MSG_BAG_FULL]             = {gText_BagIsFull2, MSG_FORMAT_NORMAL},
+    [MSG_PUT_IN_BAG]           = {gText_PutItemInBag, MSG_FORMAT_NORMAL},
+    [MSG_ITEM_IS_HELD]         = {gText_ItemIsNowHeld, MSG_FORMAT_ITEM_NAME},
+    [MSG_CHANGED_TO_ITEM]      = {gText_ChangedToNewItem, MSG_FORMAT_ITEM_NAME},
+    [MSG_CANT_STORE_MAIL]      = {gText_MailCantBeStored, MSG_FORMAT_NORMAL},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -2382,7 +2419,7 @@ static void Cb_ReshowPSS(u8 taskId)
         {
             if (sWhichToReshow == 2 && gSpecialVar_ItemId != 0)
             {
-                PrintStorageActionText(PC_TEXT_ITEM_IS_HELD);
+                PrintMessage(MSG_ITEM_IS_HELD);
                 sPSSData->state++;
             }
             else
@@ -2419,7 +2456,7 @@ static void Cb_MainPSS(u8 taskId)
         case 5:
             if (sPSSData->boxOption != BOX_OPTION_MOVE_MONS && sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
             {
-                PrintStorageActionText(PC_TEXT_WHICH_ONE_WILL_TAKE);
+                PrintMessage(MSG_WHICH_ONE_WILL_TAKE);
                 sPSSData->state = 3;
             }
             else
@@ -2622,12 +2659,12 @@ static void Cb_MainPSS(u8 taskId)
         break;
     case 4:
         PlaySE(SE_FAILURE);
-        PrintStorageActionText(PC_TEXT_LAST_POKE);
+        PrintMessage(MSG_LAST_POKE);
         sPSSData->state = 6;
         break;
     case 5:
         PlaySE(SE_FAILURE);
-        PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
+        PrintMessage(MSG_PLEASE_REMOVE_MAIL);
         sPSSData->state = 6;
         break;
     case 6:
@@ -2718,11 +2755,11 @@ static void Cb_OnSelectedMon(u8 taskId)
         {
             PlaySE(SE_SELECT);
             if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
-                PrintStorageActionText(PC_TEXT_IS_SELECTED);
+                PrintMessage(MSG_IS_SELECTED);
             else if (IsActiveItemMoving() || sPSSData->cursorMonItem != 0)
-                PrintStorageActionText(PC_TEXT_IS_SELECTED2);
+                PrintMessage(MSG_IS_SELECTED2);
             else
-                PrintStorageActionText(PC_TEXT_GIVE_TO_MON);
+                PrintMessage(MSG_GIVE_TO_MON);
 
             AddMenu();
             sPSSData->state = 1;
@@ -2733,14 +2770,14 @@ static void Cb_OnSelectedMon(u8 taskId)
             sPSSData->state = 2;
         break;
     case 2:
-        switch (sub_80D00AC())
+        switch (HandleMenuInput())
         {
-        case -1:
-        case  0:
+        case MENU_B_PRESSED:
+        case MENU_CANCEL:
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
-        case 3:
+        case MENU_MOVE:
             if (CanMovePartyMon())
             {
                 sPSSData->state = 3;
@@ -2752,12 +2789,12 @@ static void Cb_OnSelectedMon(u8 taskId)
                 SetPSSCallback(Cb_MoveMon);
             }
             break;
-        case 5:
+        case MENU_PLACE:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
             SetPSSCallback(Cb_PlaceMon);
             break;
-        case 4:
+        case MENU_SHIFT:
             if (!CanShiftMon())
             {
                 sPSSData->state = 3;
@@ -2769,12 +2806,12 @@ static void Cb_OnSelectedMon(u8 taskId)
                 SetPSSCallback(Cb_ShiftMon);
             }
             break;
-        case 2:
+        case MENU_WITHDRAW:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
             SetPSSCallback(Cb_WithdrawMon);
             break;
-        case 1:
+        case MENU_STORE:
             if (CanMovePartyMon())
             {
                 sPSSData->state = 3;
@@ -2790,7 +2827,7 @@ static void Cb_OnSelectedMon(u8 taskId)
                 SetPSSCallback(Cb_DepositMenu);
             }
             break;
-        case 7:
+        case MENU_RELEASE:
             if (CanMovePartyMon())
             {
                 sPSSData->state = 3;
@@ -2809,51 +2846,51 @@ static void Cb_OnSelectedMon(u8 taskId)
                 SetPSSCallback(Cb_ReleaseMon);
             }
             break;
-        case 6:
+        case MENU_SUMMARY:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_ShowMonSummary);
             break;
-        case 8:
+        case MENU_MARK:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_ShowMarkMenu);
             break;
-        case 12:
+        case MENU_TAKE:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_TakeItemForMoving);
             break;
-        case 13:
+        case MENU_GIVE:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_GiveMovingItemToMon);
             break;
-        case 16:
+        case MENU_BAG:
             SetPSSCallback(Cb_ItemToBag);
             break;
-        case 15:
+        case MENU_SWITCH:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_SwitchSelectedItem);
             break;
-        case 14:
+        case MENU_GIVE_2:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_GiveItemFromBag);
             break;
-        case 17:
+        case MENU_INFO:
             SetPSSCallback(Cb_ShowItemInfo);
             break;
         }
         break;
     case 3:
         PlaySE(SE_FAILURE);
-        PrintStorageActionText(PC_TEXT_LAST_POKE);
+        PrintMessage(MSG_LAST_POKE);
         sPSSData->state = 6;
         break;
     case 5:
         PlaySE(SE_FAILURE);
-        PrintStorageActionText(PC_TEXT_CANT_RELEASE_EGG);
+        PrintMessage(MSG_CANT_RELEASE_EGG);
         sPSSData->state = 6;
         break;
     case 4:
         PlaySE(SE_FAILURE);
-        PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
+        PrintMessage(MSG_PLEASE_REMOVE_MAIL);
         sPSSData->state = 6;
         break;
     case 6:
@@ -2931,7 +2968,7 @@ static void Cb_WithdrawMon(u8 taskId)
     case 0:
         if (CalculatePlayerPartyCount() == PARTY_SIZE)
         {
-            PrintStorageActionText(PC_TEXT_PARTY_FULL);
+            PrintMessage(MSG_PARTY_FULL);
             sPSSData->state = 1;
         }
         else
@@ -2983,7 +3020,7 @@ static void Cb_DepositMenu(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+        PrintMessage(MSG_DEPOSIT_IN_WHICH_BOX);
         sub_80C77E8(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_80C78D4(gUnknown_02039D0E);
         sPSSData->state++;
@@ -3013,7 +3050,7 @@ static void Cb_DepositMenu(u8 taskId)
             }
             else
             {
-                PrintStorageActionText(PC_TEXT_BOX_IS_FULL);
+                PrintMessage(MSG_BOX_IS_FULL);
                 sPSSData->state = 4;
             }
         }
@@ -3035,7 +3072,7 @@ static void Cb_DepositMenu(u8 taskId)
     case 4:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+            PrintMessage(MSG_DEPOSIT_IN_WHICH_BOX);
             sPSSData->state = 1;
         }
         break;
@@ -3047,7 +3084,7 @@ static void Cb_ReleaseMon(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        PrintStorageActionText(PC_TEXT_RELEASE_POKE);
+        PrintMessage(MSG_RELEASE_POKE);
         ShowYesNoWindow(1);
         sPSSData->state++;
         // fallthrough
@@ -3090,13 +3127,13 @@ static void Cb_ReleaseMon(u8 taskId)
     case 3:
         ReleaseMon();
         RefreshCursorMonData();
-        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        PrintMessage(MSG_WAS_RELEASED);
         sPSSData->state++;
         break;
     case 4:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            PrintStorageActionText(PC_TEXT_BYE_BYE);
+            PrintMessage(MSG_BYE_BYE);
             sPSSData->state++;
         }
         break;
@@ -3129,13 +3166,13 @@ static void Cb_ReleaseMon(u8 taskId)
         SetPSSCallback(Cb_MainPSS);
         break;
     case 8:
-        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        PrintMessage(MSG_WAS_RELEASED);
         sPSSData->state++;
         break;
     case 9:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            PrintStorageActionText(PC_TEXT_SURPRISE);
+            PrintMessage(MSG_SURPRISE);
             sPSSData->state++;
         }
         break;
@@ -3151,14 +3188,14 @@ static void Cb_ReleaseMon(u8 taskId)
         if (!sub_80CC0A0())
         {
             sub_80CE324();
-            PrintStorageActionText(PC_TEXT_CAME_BACK);
+            PrintMessage(MSG_CAME_BACK);
             sPSSData->state++;
         }
         break;
     case 12:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            PrintStorageActionText(PC_TEXT_WORRIED);
+            PrintMessage(MSG_WORRIED);
             sPSSData->state++;
         }
         break;
@@ -3177,7 +3214,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        PrintStorageActionText(PC_TEXT_MARK_POKE);
+        PrintMessage(MSG_MARK_POKE);
         sPSSData->markMenu.markings = sPSSData->cursorMonMarkings;
         OpenMonMarkingsMenu(sPSSData->cursorMonMarkings, 0xb0, 0x10);
         sPSSData->state++;
@@ -3251,7 +3288,7 @@ static void Cb_GiveMovingItemToMon(u8 taskId)
             sub_80CFE54(0);
             sub_80CE00C();
             PrintCursorMonInfo();
-            PrintStorageActionText(PC_TEXT_ITEM_IS_HELD);
+            PrintMessage(MSG_ITEM_IS_HELD);
             sPSSData->state++;
         }
         break;
@@ -3277,7 +3314,7 @@ static void Cb_ItemToBag(u8 taskId)
         if (!AddBagItem(sPSSData->cursorMonItem, 1))
         {
             PlaySE(SE_FAILURE);
-            PrintStorageActionText(PC_TEXT_BAG_FULL);
+            PrintMessage(MSG_BAG_FULL);
             sPSSData->state = 3;
         }
         else
@@ -3290,7 +3327,7 @@ static void Cb_ItemToBag(u8 taskId)
     case 1:
         if (!sub_80D1218())
         {
-            PrintStorageActionText(PC_TEXT_PLACED_IN_BAG);
+            PrintMessage(MSG_PLACED_IN_BAG);
             sPSSData->state = 2;
         }
         break;
@@ -3343,7 +3380,7 @@ static void Cb_SwitchSelectedItem(u8 taskId)
             sub_80CFE54(3);
             sub_80CE00C();
             PrintCursorMonInfo();
-            PrintStorageActionText(PC_TEXT_CHANGED_TO_ITEM);
+            PrintMessage(MSG_CHANGED_TO_ITEM);
             sPSSData->state++;
         }
         break;
@@ -3410,7 +3447,7 @@ static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PrintStorageActionText(PC_TEXT_PUT_IN_BAG);
+        PrintMessage(MSG_PUT_IN_BAG);
         ShowYesNoWindow(0);
         sPSSData->state = 1;
         break;
@@ -3430,7 +3467,7 @@ static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
             }
             else
             {
-                PrintStorageActionText(PC_TEXT_BAG_FULL);
+                PrintMessage(MSG_BAG_FULL);
                 sPSSData->state = 2;
             }
             break;
@@ -3485,7 +3522,7 @@ static void Cb_PrintCantStoreMail(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        PrintStorageActionText(PC_TEXT_CANT_STORE_MAIL);
+        PrintMessage(MSG_CANT_STORE_MAIL);
         sPSSData->state++;
         break;
     case 1:
@@ -3511,7 +3548,7 @@ static void Cb_HandleBoxOptions(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        PrintStorageActionText(PC_TEXT_WHAT_YOU_DO);
+        PrintMessage(MSG_WHAT_YOU_DO);
         AddMenu();
         sPSSData->state++;
         break;
@@ -3520,24 +3557,24 @@ static void Cb_HandleBoxOptions(u8 taskId)
             return;
         sPSSData->state++;
     case 2:
-        switch (sub_80D00AC())
+        switch (HandleMenuInput())
         {
-        case -1:
-        case  0:
+        case MENU_B_PRESSED:
+        case MENU_CANCEL:
             sub_80CD1A8(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
-        case 11:
+        case MENU_NAME:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_NameBox);
             break;
-        case 10:
+        case MENU_WALLPAPER:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
             SetPSSCallback(Cb_HandleWallpapers);
             break;
-        case 9:
+        case MENU_JUMP:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
             SetPSSCallback(Cb_JumpBox);
@@ -3553,7 +3590,7 @@ static void Cb_HandleWallpapers(u8 taskId)
     {
     case 0:
         AddWallpaperSetsMenu();
-        PrintStorageActionText(PC_TEXT_PICK_A_THEME);
+        PrintMessage(MSG_PICK_A_THEME);
         sPSSData->state++;
         break;
     case 1:
@@ -3561,25 +3598,28 @@ static void Cb_HandleWallpapers(u8 taskId)
              sPSSData->state++;
         break;
     case 2:
-        sPSSData->wallpaperSetId = sub_80D00AC();
+        sPSSData->wallpaperSetId = HandleMenuInput();
         switch (sPSSData->wallpaperSetId)
         {
-        case -1:
+        case MENU_B_PRESSED:
             sub_80CD1A8(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
-        case 18 ... 21:
+        case MENU_SCENERY_1:
+        case MENU_SCENERY_2:
+        case MENU_SCENERY_3:
+        case MENU_ETCETERA:
             PlaySE(SE_SELECT);
-            sub_80D013C();
+            RemoveMenu();
             sPSSData->wallpaperSetId -= 18;
             sPSSData->state++;
             break;
-        // New wallpaper from Walda.
-        case 22:
+        case MENU_FRIENDS:
+            // New wallpaper from Walda.
             PlaySE(SE_SELECT);
             sPSSData->wallpaperId = 16;
-            sub_80D013C();
+            RemoveMenu();
             ClearBottomWindow();
             sPSSData->state = 6;
             break;
@@ -3589,24 +3629,24 @@ static void Cb_HandleWallpapers(u8 taskId)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             AddWallpapersMenu(sPSSData->wallpaperSetId);
-            PrintStorageActionText(PC_TEXT_PICK_A_WALLPAPER);
+            PrintMessage(MSG_PICK_A_WALLPAPER);
             sPSSData->state++;
         }
         break;
     case 4:
-        sPSSData->wallpaperId = sub_80D00AC();
+        sPSSData->wallpaperId = HandleMenuInput();
         switch (sPSSData->wallpaperId)
         {
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             break;
-        case -1:
+        case MENU_B_PRESSED:
             ClearBottomWindow();
             sPSSData->state = 0;
             break;
         default:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
-            sPSSData->wallpaperId -= 23;
+            sPSSData->wallpaperId -= MENU_WALLPAPERS_START;
             SetWallpaperForCurrentBox(sPSSData->wallpaperId);
             sPSSData->state++;
             break;
@@ -3634,7 +3674,7 @@ static void Cb_JumpBox(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        PrintStorageActionText(PC_TEXT_JUMP_TO_WHICH_BOX);
+        PrintMessage(MSG_JUMP_TO_WHICH_BOX);
         sub_80C77E8(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_80C78D4(StorageGetCurrentBox());
         sPSSData->state++;
@@ -3742,7 +3782,7 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
         if (IsMonBeingMoved())
         {
             PlaySE(SE_FAILURE);
-            PrintStorageActionText(PC_TEXT_HOLDING_POKE);
+            PrintMessage(MSG_HOLDING_POKE);
             sPSSData->state = 1;
         }
         else if (IsActiveItemMoving())
@@ -3752,7 +3792,7 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
         else
         {
             PlaySE(SE_SELECT);
-            PrintStorageActionText(PC_TEXT_EXIT_BOX);
+            PrintMessage(MSG_EXIT_BOX);
             ShowYesNoWindow(0);
             sPSSData->state = 2;
         }
@@ -3803,7 +3843,7 @@ static void Cb_OnBPressed(u8 taskId)
         if (IsMonBeingMoved())
         {
             PlaySE(SE_FAILURE);
-            PrintStorageActionText(PC_TEXT_HOLDING_POKE);
+            PrintMessage(MSG_HOLDING_POKE);
             sPSSData->state = 1;
         }
         else if (IsActiveItemMoving())
@@ -3813,7 +3853,7 @@ static void Cb_OnBPressed(u8 taskId)
         else
         {
             PlaySE(SE_SELECT);
-            PrintStorageActionText(PC_TEXT_CONTINUE_BOX);
+            PrintMessage(MSG_CONTINUE_BOX);
             ShowYesNoWindow(0);
             sPSSData->state = 2;
         }
@@ -4382,26 +4422,26 @@ static void sub_80CAC1C(void)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void PrintStorageActionText(u8 id)
+static void PrintMessage(u8 id)
 {
     u8 *txtPtr;
 
     DynamicPlaceholderTextUtil_Reset();
-    switch (gPCStorageActionTexts[id].format)
+    switch (sMessages[id].format)
     {
-    case PC_TEXT_FMT_NORMAL:
+    case MSG_FORMAT_NORMAL:
         break;
-    case PC_TEXT_FMT_MON_NAME_1:
-    case PC_TEXT_FMT_MON_NAME_2:
-    case PC_TEXT_FMT_MON_NAME_3:
+    case MSG_FORMAT_MON_NAME_1:
+    case MSG_FORMAT_MON_NAME_2:
+    case MSG_FORMAT_MON_NAME_3:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sPSSData->cursorMonNick);
         break;
-    case PC_TEXT_FMT_MON_NAME_4:
-    case PC_TEXT_FMT_MON_NAME_5:
-    case PC_TEXT_FMT_MON_NAME_6:
+    case MSG_FORMAT_MON_NAME_4:
+    case MSG_FORMAT_MON_NAME_5:
+    case MSG_FORMAT_MON_NAME_6:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sPSSData->field_21E0);
         break;
-    case PC_TEXT_FMT_ITEM_NAME:
+    case MSG_FORMAT_ITEM_NAME:
         if (IsActiveItemMoving())
             txtPtr = StringCopy(sPSSData->itemName, GetMovingItemName());
         else
@@ -4415,7 +4455,7 @@ static void PrintStorageActionText(u8 id)
         break;
     }
 
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(sPSSData->field_2190, gPCStorageActionTexts[id].text);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(sPSSData->field_2190, sMessages[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     AddTextPrinterParameterized(1, 1, sPSSData->field_2190, 0, 1, TEXT_SPEED_FF, NULL);
     DrawTextBorderOuter(1, 2, 14);
@@ -4439,12 +4479,12 @@ static void ClearBottomWindow(void)
 static void AddWallpaperSetsMenu(void)
 {
     InitMenu();
-    SetMenuText(18);
-    SetMenuText(19);
-    SetMenuText(20);
-    SetMenuText(21);
+    SetMenuText(MENU_SCENERY_1);
+    SetMenuText(MENU_SCENERY_2);
+    SetMenuText(MENU_SCENERY_3);
+    SetMenuText(MENU_ETCETERA);
     if (IsWaldaWallpaperUnlocked())
-        SetMenuText(22);
+        SetMenuText(MENU_FRIENDS);
     AddMenu();
 }
 
@@ -4454,28 +4494,28 @@ static void AddWallpapersMenu(u8 wallpaperSet)
     switch (wallpaperSet)
     {
     case 0:
-        SetMenuText(23);
-        SetMenuText(24);
-        SetMenuText(25);
-        SetMenuText(26);
+        SetMenuText(MENU_FOREST);
+        SetMenuText(MENU_CITY);
+        SetMenuText(MENU_DESERT);
+        SetMenuText(MENU_SAVANNA);
         break;
     case 1:
-        SetMenuText(27);
-        SetMenuText(28);
-        SetMenuText(29);
-        SetMenuText(30);
+        SetMenuText(MENU_CRAG);
+        SetMenuText(MENU_VOLCANO);
+        SetMenuText(MENU_SNOW);
+        SetMenuText(MENU_CAVE);
         break;
     case 2:
-        SetMenuText(31);
-        SetMenuText(32);
-        SetMenuText(33);
-        SetMenuText(34);
+        SetMenuText(MENU_BEACH);
+        SetMenuText(MENU_SEAFLOOR);
+        SetMenuText(MENU_RIVER);
+        SetMenuText(MENU_SKY);
         break;
     case 3:
-        SetMenuText(35);
-        SetMenuText(36);
-        SetMenuText(37);
-        SetMenuText(38);
+        SetMenuText(MENU_POLKADOT);
+        SetMenuText(MENU_POKECENTER);
+        SetMenuText(MENU_MACHINE);
+        SetMenuText(MENU_SIMPLE);
         break;
     }
     AddMenu();
@@ -7010,23 +7050,23 @@ static u8 InBoxInput_Normal(void)
 
             if (sPSSData->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
             {
-                switch (sub_80CFF98(0))
+                switch (GetMenuItemTextId(0))
                 {
-                case 1:
+                case MENU_STORE:
                     return 11;
-                case 2:
+                case MENU_WITHDRAW:
                     return 12;
-                case 3:
+                case MENU_MOVE:
                     return 13;
-                case 4:
+                case MENU_SHIFT:
                     return 14;
-                case 5:
+                case MENU_PLACE:
                     return 15;
-                case 12:
+                case MENU_TAKE:
                     return 16;
-                case 13:
+                case MENU_GIVE:
                     return 17;
-                case 15:
+                case MENU_SWITCH:
                     return 18;
                 }
             }
@@ -7290,23 +7330,23 @@ static u8 HandleInput_InParty(void)
                 if (!sCanOnlyMove)
                     return 8;
 
-                switch (sub_80CFF98(0))
+                switch (GetMenuItemTextId(0))
                 {
-                case 1:
+                case MENU_STORE:
                     return 11;
-                case 2:
+                case MENU_WITHDRAW:
                     return 12;
-                case 3:
+                case MENU_MOVE:
                     return 13;
-                case 4:
+                case MENU_SHIFT:
                     return 14;
-                case 5:
+                case MENU_PLACE:
                     return 15;
-                case 12:
+                case MENU_TAKE:
                     return 16;
-                case 13:
+                case MENU_GIVE:
                     return 17;
-                case 15:
+                case MENU_SWITCH:
                     return 18;
                 }
             }
@@ -7515,10 +7555,10 @@ static u8 HandleInput(void)
 static void AddBoxMenu(void)
 {
     InitMenu();
-    SetMenuText(9);
-    SetMenuText(10);
-    SetMenuText(11);
-    SetMenuText(0);
+    SetMenuText(MENU_JUMP);
+    SetMenuText(MENU_WALLPAPER);
+    SetMenuText(MENU_NAME);
+    SetMenuText(MENU_CANCEL);
 }
 
 static u8 sub_80CFA5C(void)
@@ -7538,13 +7578,13 @@ static bool8 sub_80CFA84(void)
     {
     case BOX_OPTION_DEPOSIT:
         if (var0)
-            SetMenuText(1);
+            SetMenuText(MENU_STORE);
         else
             return FALSE;
         break;
     case BOX_OPTION_WITHDRAW:
         if (var0)
-            SetMenuText(2);
+            SetMenuText(MENU_WITHDRAW);
         else
             return FALSE;
         break;
@@ -7552,14 +7592,14 @@ static bool8 sub_80CFA84(void)
         if (sIsMonBeingMoved)
         {
             if (var0)
-                SetMenuText(4);
+                SetMenuText(MENU_SHIFT);
             else
-                SetMenuText(5);
+                SetMenuText(MENU_PLACE);
         }
         else
         {
             if (var0)
-                SetMenuText(3);
+                SetMenuText(MENU_MOVE);
             else
                 return FALSE;
         }
@@ -7569,18 +7609,18 @@ static bool8 sub_80CFA84(void)
         return FALSE;
     }
 
-    SetMenuText(6);
+    SetMenuText(MENU_SUMMARY);
     if (sPSSData->boxOption == BOX_OPTION_MOVE_MONS)
     {
         if (!sBoxCursorArea)
-            SetMenuText(2);
+            SetMenuText(MENU_WITHDRAW);
         else
-            SetMenuText(1);
+            SetMenuText(MENU_STORE);
     }
 
-    SetMenuText(8);
-    SetMenuText(7);
-    SetMenuText(0);
+    SetMenuText(MENU_MARK);
+    SetMenuText(MENU_RELEASE);
+    SetMenuText(MENU_CANCEL);
     return TRUE;
 }
 
@@ -7596,16 +7636,16 @@ static bool8 sub_80CFB44(void)
             if (sPSSData->cursorMonSpecies == SPECIES_NONE)
                 return FALSE;
 
-            SetMenuText(14);
+            SetMenuText(MENU_GIVE_2);
         }
         else
         {
             if (!ItemIsMail(sPSSData->cursorMonItem))
             {
-                SetMenuText(12);
-                SetMenuText(16);
+                SetMenuText(MENU_TAKE);
+                SetMenuText(MENU_BAG);
             }
-            SetMenuText(17);
+            SetMenuText(MENU_INFO);
         }
     }
     else
@@ -7615,18 +7655,18 @@ static bool8 sub_80CFB44(void)
             if (sPSSData->cursorMonSpecies == SPECIES_NONE)
                 return FALSE;
 
-            SetMenuText(13);
+            SetMenuText(MENU_GIVE);
         }
         else
         {
             if (ItemIsMail(sPSSData->cursorMonItem) == TRUE)
                 return FALSE;
 
-            SetMenuText(15);
+            SetMenuText(MENU_SWITCH);
         }
     }
 
-    SetMenuText(0);
+    SetMenuText(MENU_CANCEL);
     return TRUE;
 }
 
@@ -7825,57 +7865,57 @@ static void InitMenu(void)
     sPSSData->menuWindow.baseBlock = 92;
 }
 
-static const u8 *const gUnknown_0857BA80[] =
+static const u8 *const sMenuTexts[] =
 {
-    gPCText_Cancel,
-    gPCText_Store,
-    gPCText_Withdraw,
-    gPCText_Move,
-    gPCText_Shift,
-    gPCText_Place,
-    gPCText_Summary,
-    gPCText_Release,
-    gPCText_Mark,
-    gPCText_Jump,
-    gPCText_Wallpaper,
-    gPCText_Name,
-    gPCText_Take,
-    gPCText_Give,
-    gPCText_Give,
-    gPCText_Switch,
-    gPCText_Bag,
-    gPCText_Info,
-    gPCText_Scenery1,
-    gPCText_Scenery2,
-    gPCText_Scenery3,
-    gPCText_Etcetera,
-    gPCText_Friends,
-    gPCText_Forest,
-    gPCText_City,
-    gPCText_Desert,
-    gPCText_Savanna,
-    gPCText_Crag,
-    gPCText_Volcano,
-    gPCText_Snow,
-    gPCText_Cave,
-    gPCText_Beach,
-    gPCText_Seafloor,
-    gPCText_River,
-    gPCText_Sky,
-    gPCText_PolkaDot,
-    gPCText_Pokecenter,
-    gPCText_Machine,
-    gPCText_Simple,
+    [MENU_CANCEL]     = gPCText_Cancel,
+    [MENU_STORE]      = gPCText_Store,
+    [MENU_WITHDRAW]   = gPCText_Withdraw,
+    [MENU_MOVE]       = gPCText_Move,
+    [MENU_SHIFT]      = gPCText_Shift,
+    [MENU_PLACE]      = gPCText_Place,
+    [MENU_SUMMARY]    = gPCText_Summary,
+    [MENU_RELEASE]    = gPCText_Release,
+    [MENU_MARK]       = gPCText_Mark,
+    [MENU_JUMP]       = gPCText_Jump,
+    [MENU_WALLPAPER]  = gPCText_Wallpaper,
+    [MENU_NAME]       = gPCText_Name,
+    [MENU_TAKE]       = gPCText_Take,
+    [MENU_GIVE]       = gPCText_Give,
+    [MENU_GIVE_2]     = gPCText_Give,
+    [MENU_SWITCH]     = gPCText_Switch,
+    [MENU_BAG]        = gPCText_Bag,
+    [MENU_INFO]       = gPCText_Info,
+    [MENU_SCENERY_1]  = gPCText_Scenery1,
+    [MENU_SCENERY_2]  = gPCText_Scenery2,
+    [MENU_SCENERY_3]  = gPCText_Scenery3,
+    [MENU_ETCETERA]   = gPCText_Etcetera,
+    [MENU_FRIENDS]    = gPCText_Friends,
+    [MENU_FOREST]     = gPCText_Forest,
+    [MENU_CITY]       = gPCText_City,
+    [MENU_DESERT]     = gPCText_Desert,
+    [MENU_SAVANNA]    = gPCText_Savanna,
+    [MENU_CRAG]       = gPCText_Crag,
+    [MENU_VOLCANO]    = gPCText_Volcano,
+    [MENU_SNOW]       = gPCText_Snow,
+    [MENU_CAVE]       = gPCText_Cave,
+    [MENU_BEACH]      = gPCText_Beach,
+    [MENU_SEAFLOOR]   = gPCText_Seafloor,
+    [MENU_RIVER]      = gPCText_River,
+    [MENU_SKY]        = gPCText_Sky,
+    [MENU_POLKADOT]   = gPCText_PolkaDot,
+    [MENU_POKECENTER] = gPCText_Pokecenter,
+    [MENU_MACHINE]    = gPCText_Machine,
+    [MENU_SIMPLE]     = gPCText_Simple,
 };
 
 static void SetMenuText(u8 textId)
 {
-    if (sPSSData->menuItemsCount < 7)
+    if (sPSSData->menuItemsCount < ARRAY_COUNT(sPSSData->menuItems))
     {
         u8 len;
         struct StorageMenu *menu = &sPSSData->menuItems[sPSSData->menuItemsCount];
 
-        menu->text = gUnknown_0857BA80[textId];
+        menu->text = sMenuTexts[textId];
         menu->textId = textId;
         len = StringLength(menu->text);
         if (len > sPSSData->menuWidth)
@@ -7885,12 +7925,12 @@ static void SetMenuText(u8 textId)
     }
 }
 
-static s8 sub_80CFF98(u8 arg0)
+static s8 GetMenuItemTextId(u8 menuIdx)
 {
-    if (arg0 >= sPSSData->menuItemsCount)
+    if (menuIdx >= sPSSData->menuItemsCount)
         return -1;
     else
-        return sPSSData->menuItems[arg0].textId;
+        return sPSSData->menuItems[menuIdx].textId;
 }
 
 static void AddMenu(void)
@@ -7899,11 +7939,11 @@ static void AddMenu(void)
     sPSSData->menuWindow.height = 2 * sPSSData->menuItemsCount;
     sPSSData->menuWindow.tilemapLeft = 29 - sPSSData->menuWindow.width;
     sPSSData->menuWindow.tilemapTop = 15 - sPSSData->menuWindow.height;
-    sPSSData->field_CB0 = AddWindow(&sPSSData->menuWindow);
-    ClearWindowTilemap(sPSSData->field_CB0);
-    DrawStdFrameWithCustomTileAndPalette(sPSSData->field_CB0, FALSE, 11, 14);
-    PrintMenuTable(sPSSData->field_CB0, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sPSSData->field_CB0, sPSSData->menuItemsCount, 0);
+    sPSSData->menuWindowId = AddWindow(&sPSSData->menuWindow);
+    ClearWindowTilemap(sPSSData->menuWindowId);
+    DrawStdFrameWithCustomTileAndPalette(sPSSData->menuWindowId, FALSE, 11, 14);
+    PrintMenuTable(sPSSData->menuWindowId, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sPSSData->menuWindowId, sPSSData->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     sPSSData->field_CAE = 0;
 }
@@ -7913,21 +7953,21 @@ static bool8 sub_80D00A8(void)
     return FALSE;
 }
 
-static s16 sub_80D00AC(void)
+static s16 HandleMenuInput(void)
 {
-    s32 textId = -2;
+    s32 input = MENU_NOTHING_CHOSEN;
 
     do
     {
         if (JOY_NEW(A_BUTTON))
         {
-            textId = Menu_GetCursorPos();
+            input = Menu_GetCursorPos();
             break;
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            textId = -1;
+            input = MENU_B_PRESSED;
         }
 
         if (JOY_NEW(DPAD_UP))
@@ -7942,19 +7982,19 @@ static s16 sub_80D00AC(void)
         }
     } while (0);
 
-    if (textId != -2)
-        sub_80D013C();
+    if (input != MENU_NOTHING_CHOSEN)
+        RemoveMenu();
 
-    if (textId >= 0)
-        textId = sPSSData->menuItems[textId].textId;
+    if (input >= 0)
+        input = sPSSData->menuItems[input].textId;
 
-    return textId;
+    return input;
 }
 
-static void sub_80D013C(void)
+static void RemoveMenu(void)
 {
-    ClearStdWindowAndFrameToTransparent(sPSSData->field_CB0, TRUE);
-    RemoveWindow(sPSSData->field_CB0);
+    ClearStdWindowAndFrameToTransparent(sPSSData->menuWindowId, TRUE);
+    RemoveWindow(sPSSData->menuWindowId);
 }
 
 // The functions below handle moving and grabbing multiple mons at once.
