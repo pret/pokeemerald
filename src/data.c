@@ -431,3 +431,4 @@ static const u32 sUnused[] =
 #include "data/trainers.h"
 #include "data/text/species_names.h"
 #include "data/text/move_names.h"
+#include "data/text/follower_messages.h"

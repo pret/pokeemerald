@@ -16,6 +16,8 @@ extern const u8 EventScript_FollowerAboutToFall[];
 extern const u8 EventScript_FollowerTryingToKeepUp[];
 extern const u8 EventScript_FollowerIsShivering[];
 extern const u8 EventScript_FollowerBurnPainful[];
+extern const u8 EventScript_FollowerGeneric[];
+extern const u8 EventScript_FollowerLove[];
 extern const u8 EnterPokeballMovement[];
 
 extern const u8 EventScript_TestSignpostMsg[];

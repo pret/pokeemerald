@@ -1705,6 +1705,49 @@ static bool8 SpeciesHasType(u16 species, u8 type) {
   return gBaseStats[species].type1 == type || gBaseStats[species].type2 == type;
 }
 
+// Returns a random index according to a list of weights
+static u8 RandomWeightedIndex(u8 *weights, u8 length) {
+  u8 i;
+  u16 random_value;
+  u16 cum_weight = 0;
+  for (i = 0; i < length; i++)
+    cum_weight += weights[i];
+  random_value = Random() % cum_weight;
+  cum_weight = 0;
+  for (i = 0; i < length; i++) {
+    cum_weight += weights[i];
+    if (random_value <= cum_weight)
+      return i;
+  }
+}
+
+enum {
+  FOLLOWER_EMOTION_HAPPY = 0,
+  FOLLOWER_EMOTION_NEUTRAL, // Also called "No emotion"
+  FOLLOWER_EMOTION_SAD,
+  FOLLOWER_EMOTION_UPSET,
+  FOLLOWER_EMOTION_ANGRY,
+  FOLLOWER_EMOTION_PENSIVE,
+  FOLLOWER_EMOTION_LOVE,
+  FOLLOWER_EMOTION_SURPRISE,
+  FOLLOWER_EMOTION_CURIOUS,
+  FOLLOWER_EMOTION_LENGTH,
+};
+
+// Pool of "unconditional" follower messages TODO: Should this be elsewhere ?
+static const struct FollowerMessagePool followerBasicMessages[] = {
+  [FOLLOWER_EMOTION_HAPPY] = {gFollowerHappyMessages, EventScript_FollowerGeneric, N_FOLLOWER_HAPPY_MESSAGES},
+  [FOLLOWER_EMOTION_NEUTRAL] = {gFollowerNeutralMessages, EventScript_FollowerGeneric, N_FOLLOWER_NEUTRAL_MESSAGES},
+  [FOLLOWER_EMOTION_SAD] = {gFollowerSadMessages, EventScript_FollowerGeneric, N_FOLLOWER_SAD_MESSAGES},
+  [FOLLOWER_EMOTION_UPSET] = {gFollowerUpsetMessages, EventScript_FollowerGeneric, N_FOLLOWER_UPSET_MESSAGES},
+  [FOLLOWER_EMOTION_ANGRY] = {gFollowerAngryMessages, EventScript_FollowerGeneric, N_FOLLOWER_ANGRY_MESSAGES},
+  [FOLLOWER_EMOTION_PENSIVE] = {gFollowerPensiveMessages, EventScript_FollowerGeneric, N_FOLLOWER_PENSIVE_MESSAGES},
+  [FOLLOWER_EMOTION_LOVE] = {gFollowerLoveMessages, EventScript_FollowerLove, N_FOLLOWER_LOVE_MESSAGES},
+  [FOLLOWER_EMOTION_SURPRISE] = {gFollowerSurpriseMessages, EventScript_FollowerGeneric, N_FOLLOWER_SURPRISE_MESSAGES},
+  [FOLLOWER_EMOTION_CURIOUS] = {gFollowerCuriousMessages, EventScript_FollowerGeneric, N_FOLLOWER_CURIOUS_MESSAGES},
+};
+
+// Call an applicable follower message script
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
   u16 value;
@@ -1717,6 +1760,8 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   u8 n_choices = 0;
   struct ObjectEvent *objEvent = GetFollowerObject();
   struct Pokemon *mon = GetFirstLiveMon();
+  u8 emotion;
+  u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] = {0};
   if (mon == NULL) {
     ScriptCall(ctx, EventScript_FollowerLovesYou);
     return FALSE;
@@ -1751,24 +1796,46 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     message_choices[n_choices++] = EventScript_FollowerIsShivering;
   else if (mon->status & 0x10) // STATUS1_BURN
     message_choices[n_choices++] = EventScript_FollowerBurnPainful;
-  // 5. Location-based messages
-  map_region = GetCurrentRegionMapSectionId(); // defined in region_map_sections.h
-  if (GetMonData(mon, MON_DATA_MET_LOCATION) == map_region)
-    message_choices[n_choices++] = EventScript_FollowerMetLocation;
-  // 6. Friendship-based messages
+  // TODO: What influences a follower's emotion ?
+  // Happy, neutral, sad, upset, angry, daydream, love, surprise, quizzical
+  // Friendship: boost to 'happy' and 'love'
+  // Weather: Based on type
+  // Status/low health: boost to unhappy, poisoned
+  // Happy weights
+  // TODO: Add sprites from https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/ ?
   friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-  if (friendship <= 80)
-    message_choices[n_choices++] = EventScript_FollowerSkeptical;
-  else if (friendship <= 170)
-    message_choices[n_choices++] = EventScript_FollowerAppraising;
-  else if (friendship < 255)
-    message_choices[n_choices++] = EventScript_FollowerHappyWalk;
-  else // Max friendship
-    message_choices[n_choices++] = EventScript_FollowerLovesYou;
-  if (!n_choices)
-    ScriptCall(ctx, EventScript_FollowerLovesYou); // Default in case of no choices
-  else
-    ScriptCall(ctx, message_choices[Random() % min(n_choices, ARRAY_COUNT(message_choices))]);
+  emotion_weight[FOLLOWER_EMOTION_HAPPY] = 10;
+  if (friendship > 170)
+    emotion_weight[FOLLOWER_EMOTION_HAPPY] = 30;
+  else if (friendship > 80)
+    emotion_weight[FOLLOWER_EMOTION_HAPPY] = 20;
+  // Neutral weights
+  emotion_weight[FOLLOWER_EMOTION_NEUTRAL] = 15;
+  // Sad weights
+  emotion_weight[FOLLOWER_EMOTION_SAD] = 5;
+  health_percent = mon->hp * 100 / mon->maxHP;
+  if (health_percent < 50 || mon->status & 0x40) // STATUS1_PARALYSIS
+    emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
+  // Upset weights
+  emotion_weight[FOLLOWER_EMOTION_UPSET] = friendship < 80 ? 15 : 5;
+  // Angry weights
+  emotion_weight[FOLLOWER_EMOTION_ANGRY] = friendship < 80 ? 15 : 5;
+  // Pensive weights
+  emotion_weight[FOLLOWER_EMOTION_PENSIVE] = 15;
+  // Love weights
+  if (friendship > 170)
+    emotion_weight[FOLLOWER_EMOTION_LOVE] = 30;
+  else if (friendship > 80)
+    emotion_weight[FOLLOWER_EMOTION_LOVE] = 20;
+  // Surprise weights
+  // TODO: Scale this with how long the follower has been out
+  emotion_weight[FOLLOWER_EMOTION_SURPRISE] = 10;
+  // Curious weights
+  // TODO: Increase this if there is an item nearby, or if the pokemon has pickup
+  emotion_weight[FOLLOWER_EMOTION_CURIOUS] = 5;
+  emotion = RandomWeightedIndex(emotion_weight, FOLLOWER_EMOTION_LENGTH);
+  ctx->data[0] = (u32) followerBasicMessages[emotion].messages[Random() % followerBasicMessages[emotion].length];
+  ScriptCall(ctx, followerBasicMessages[emotion].script);
   return FALSE;
 }
 

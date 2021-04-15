@@ -1,5 +1,5 @@
 gText_FollowerLovesYou::
-  .string "{STR_VAR_1} is regarding you with\nadoration!$"
+  .string "123456789012345678901234567890123\n$"
 
 gText_FollowerLostInThought::
   .string "{STR_VAR_1} seems lost in thought.$"
@@ -145,6 +145,18 @@ EventScript_FollowerBurnPainful::
   msgbox gText_FollowerBurnPainful, MSGBOX_DEFAULT
   waitmoncry
   return
+
+@ Message address must be loaded into bank 0
+EventScript_FollowerGeneric:: @ same as Std_MsgboxDefault
+  message 0x0
+  waitmessage
+  waitbuttonpress
+  return
+
+EventScript_FollowerLove::
+  applymovement 0xFE ContestHall_Movement_Heart
+  waitmovement 0xFE
+  goto EventScript_FollowerGeneric
 
 EnterPokeballMovement::
   .byte 0x9F @ EnterPokeball
