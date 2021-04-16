@@ -1318,8 +1318,8 @@ static void TradeMenuMoveCursor(u8 *cursorPosition, u8 direction)
     if (newPosition == (PARTY_SIZE * 2)) // CANCEL
     {
         StartSpriteAnim(&gSprites[sTradeMenuData->cursorSpriteIdx], 1);
-        gSprites[sTradeMenuData->cursorSpriteIdx].pos1.x = 224;
-        gSprites[sTradeMenuData->cursorSpriteIdx].pos1.y = 160;
+        gSprites[sTradeMenuData->cursorSpriteIdx].pos1.x = DISPLAY_WIDTH - 16;
+        gSprites[sTradeMenuData->cursorSpriteIdx].pos1.y = DISPLAY_HEIGHT;
     }
     else
     {
@@ -3496,7 +3496,8 @@ static bool8 AnimateTradeSequenceCable(void)
     case 38:
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y -= 3;
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PARTNER]].pos2.y += 3;
-        if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -160 && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -163)
+        if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -DISPLAY_HEIGHT 
+         && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -DISPLAY_HEIGHT - 3)
         {
             PlaySE(SE_WARP_IN);
         }
@@ -3994,7 +3995,8 @@ static bool8 AnimateTradeSequenceWireless(void)
     case 38:
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y -= 3;
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PARTNER]].pos2.y += 3;
-        if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -160 && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -163)
+        if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -DISPLAY_HEIGHT
+         && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -DISPLAY_HEIGHT - 3)
         {
             PlaySE(SE_WARP_IN);
         }
@@ -4833,7 +4835,7 @@ static void c3_0805465C(u8 taskId)
     {
         sTradeData->wirelessWinLeft = sTradeData->wirelessWinRight = 120;
         sTradeData->wirelessWinTop = 0;
-        sTradeData->wirelessWinBottom = 160;
+        sTradeData->wirelessWinBottom = DISPLAY_HEIGHT;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |

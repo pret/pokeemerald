@@ -306,7 +306,7 @@ static void UpdateDroughtBlend(u8 taskId)
         task->tBlendY = 0;
         task->tBlendDelay = 0;
         task->tWinRange = REG_WININ;
-        SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(63, 63));
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         task->tState++;
@@ -1537,8 +1537,8 @@ void Ash_InitAll(void)
 void Ash_Main(void)
 {
     gWeatherPtr->ashBaseSpritesX = gSpriteCoordOffsetX & 0x1FF;
-    while (gWeatherPtr->ashBaseSpritesX >= 240)
-        gWeatherPtr->ashBaseSpritesX -= 240;
+    while (gWeatherPtr->ashBaseSpritesX >= DISPLAY_WIDTH)
+        gWeatherPtr->ashBaseSpritesX -= DISPLAY_WIDTH;
 
     switch (gWeatherPtr->initStep)
     {
