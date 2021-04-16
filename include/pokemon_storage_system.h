@@ -2,13 +2,13 @@
 #define GUARD_POKEMON_STORAGE_SYSTEM_H
 
 #define TOTAL_BOXES_COUNT       14
-#define IN_BOX_ROWS             6
-#define IN_BOX_COLUMNS          5
+#define IN_BOX_ROWS             5 // Number of rows, 6 Pokémon per row
+#define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
 
-/*
-            ROWS
-COLUMNS     0   1   2   3   4   5
+/* 
+            COLUMNS         
+ROWS        0   1   2   3   4   5
             6   7   8   9   10  11
             12  13  14  15  16  17
             18  19  20  21  22  23
