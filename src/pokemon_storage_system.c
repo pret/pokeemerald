@@ -284,6 +284,13 @@ enum {
     RELEASE_ANIM_CAME_BACK,
 };
 
+// IDs for InitMonPlaceChange
+enum {
+    CHANGE_GRAB,
+    CHANGE_PLACE,
+    CHANGE_SHIFT,
+};
+
 // Modes for selecting and moving Pokémon in the box.
 // "MULTIPLE" mode allows up to an entire box to be
 // picked up at once by pressing Select then holding
@@ -307,6 +314,13 @@ enum {
     MULTIMOVE_GRAB_SELECTION,
     MULTIMOVE_MOVE_MONS,
     MULTIMOVE_PLACE_MONS,
+};
+
+enum {
+    TILEMAPID_PKMN_DATA, // The "Pkmn Data" text at the top of the display
+    TILEMAPID_PARTY_MENU,
+    TILEMAPID_CLOSE_BUTTON,
+    TILEMAPID_COUNT
 };
 
 struct Wallpaper
@@ -528,32 +542,6 @@ struct PokemonStorageSystemData
     u8 displayMenuTilemapBuffer[0x800];
 };
 
-struct UnkSubStruct_2039D84
-{
-    s16 field_0;
-    s16 field_2;
-    u16 field_4;
-    u16 field_6;
-    s16 field_8;
-    s16 field_A;
-};
-
-struct UnkStruct_2039D84
-{
-    struct UnkSubStruct_2039D84 field_0[2];
-    const void *field_18;
-    const void *field_1C;
-    u16 field_20;
-    u16 field_22;
-    u16 field_24;
-    u16 field_26;
-    u16 field_28;
-    u8 field_2A;
-    u8 field_2B;
-    u8 field_2C;
-    u8 field_2D;
-};
-
 static u32 sItemIconGfxBuffer[98];
 
 EWRAM_DATA static u8 sPreviousBoxOption = 0;
@@ -605,7 +593,7 @@ static void SaveCursorPos(void);
 static void sub_80CD36C(void);
 static void sub_80CD3EC(void);
 static void sub_80CAC1C(void);
-static void sub_80CEBDC(void);
+static void ReshowDisplayMon(void);
 static void SetScrollingBackground(void);
 static void sub_80CABE0(void);
 static void sub_80CAEAC(void);
@@ -625,7 +613,7 @@ static void CreateWaveformSprites(void);
 static void ReshowReleaseMon(void);
 static void TrySetCursorFistAnim(void);
 static void ClearBottomWindow(void);
-static void sub_80CA704(void);
+static void InitSupplementalTilemaps(void);
 static void RemoveMenu(void);
 static void RefreshDisplayMon(void);
 static void MoveItemFromCursorToBag(void);
@@ -652,7 +640,7 @@ static void AddBoxMenu(void);
 static void CycleBoxTitleColor(void);
 static void MoveMon(void);
 static void PlaceMon(void);
-static void sub_80CAB20(void);
+static void UpdatePartySlotColors(void);
 static void sub_80CE22C(void);
 static void DoCursorNewPosUpdate(void);
 static void CompactPartySprites(void);
@@ -668,8 +656,8 @@ static bool8 InitPSSWindows(void);
 static bool8 ResetReleaseMonSpritePtr(void);
 static bool8 TryHideReleaseMon(void);
 static bool8 IsInitBoxActive(void);
-static bool8 sub_80CDED4(void);
-static bool8 sub_80CDF08(void);
+static bool8 MonPlaceChange_CursorDown(void);
+static bool8 MonPlaceChange_CursorUp(void);
 static bool8 UpdateItemInfoWindowSlideIn(void);
 static bool8 UpdateItemInfoWindowSlideOut(void);
 static bool8 DoShowPartyMenu(void);
@@ -728,7 +716,7 @@ static void SetMonMarkings(u8);
 static void ShowYesNoWindow(s8);
 static void SetCursorBoxPosition(u8);
 static void AnimateBoxScrollArrows(bool8);
-static void sub_80CA984(bool8);
+static void UpdateCloseBoxButtonTilemap(bool8);
 static void CreatePartyMonsSprites(bool8);
 static void PrintMessage(u8 id);
 static s16 HandleMenuInput(void);
@@ -764,10 +752,10 @@ static s8 DetermineBoxScrollDirection(u8);
 static void DrawWallpaper(const void *, s8, u8);
 static s16 GetBoxTitleBaseX(const u8 *);
 static bool8 MonPlaceChange_Shift(void);
-static bool8 MonPlaceChange_Move(void);
+static bool8 MonPlaceChange_Grab(void);
 static bool8 MonPlaceChange_Place(void);
-static bool8 sub_80CDEC4(void);
-static bool8 sub_80CDEB4(void);
+static bool8 MultiMonPlaceChange_Up(void);
+static bool8 MultiMonPlaceChange_Down(void);
 static void GetCursorCoordsByPos(u8, u8, u16 *, u16 *);
 static void SetShiftedMonData(u8, u8);
 static void SetMovingMonData(u8, u8);
@@ -782,15 +770,6 @@ static s8 GetMenuItemTextId(u8);
 static u8 SetSelectionMenuTexts(void);
 static bool8 SetMenuTexts_Mon(void);
 static bool8 SetMenuTexts_Item(void);
-static void sub_80D27AC(u8, u16, u16, u16, u16);
-static void sub_80D27F4(u8, u8, s8);
-static void sub_80D2644(u8, u8, const void *, u16, u16);
-static void sub_80D2770(u8, u16, u16);
-static void sub_80D259C(u8);
-static void sub_80D25F0(void);
-static void sub_80D2918(u8);
-static void sub_80D2960(u8);
-static void sub_80D29F8(u8);
 static void sub_80D2A90(struct UnkStruct_2000020 *, struct UnkStruct_2000028 *, u32);
 static void sub_80D2AA4(void);
 static void sub_80D2B88(struct UnkStruct_2000028 *);
@@ -845,6 +824,17 @@ static void SpriteCB_ItemIcon_ToMon(struct Sprite *);
 static void SpriteCB_ItemIcon_SwapToHand(struct Sprite *);
 static void SpriteCB_ItemIcon_HideParty(struct Sprite *);
 static void SpriteCB_ItemIcon_SwapToMon(struct Sprite *);
+
+// Functions for the tilemap updating utility
+static void TilemapUtil_SetRect(u8, u16, u16, u16, u16);
+static void TilemapUtil_Move(u8, u8, s8);
+static void TilemapUtil_SetMap(u8, u8, const void *, u16, u16);
+static void TilemapUtil_SetPos(u8, u16, u16);
+static void TilemapUtil_Init(u8);
+static void TilemapUtil_Free(void);
+static void TilemapUtil_Update(u8);
+static void TilemapUtil_DrawPrev(u8);
+static void TilemapUtil_Draw(u8);
 
 struct {
     const u8 *text;
@@ -916,24 +906,25 @@ static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] =
 static const u8 sChooseBoxMenu_TextColors[] = {TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
 static const u8 sText_OutOf30[] = _("/30");
 
-static const u16 sChooseBoxMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
+static const u16 sChooseBoxMenu_Pal[]      = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
 static const u8 sChooseBoxMenuCenter_Gfx[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
-static const u8 sChooseBoxMenuSides_Gfx[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
-static const u32 sScrollingBg_Gfx[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
-static const u32 sScrollingBg_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
-static const u16 sDisplayMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
-static const u32 sDisplayMenu_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
+static const u8 sChooseBoxMenuSides_Gfx[]  = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
+static const u32 sScrollingBg_Gfx[]        = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
+static const u32 sScrollingBg_Tilemap[]    = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
+static const u16 sDisplayMenu_Pal[]        = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
+static const u32 sDisplayMenu_Tilemap[]    = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
 
-static const u16 gUnknown_0857239C[] =
+static const u16 sPkmnData_Tilemap[] =
 {
     0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108, 0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118,
     0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108, 0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118,
 };
 
-static const u16 gUnknown_085723DC[] = INCBIN_U16("graphics/unknown/unknown_5723DC.gbapal"); // Left-most part and Close Box.
-static const u16 gUnknown_085723FC[] = INCBIN_U16("graphics/unknown/unknown_5723FC.gbapal");
-static const u16 gUnknown_0857241C[] = INCBIN_U16("graphics/unknown/unknown_57241C.gbapal");
-static const u16 gUnknown_0857243C[] = INCBIN_U16("graphics/unknown/unknown_57243C.gbapal");
+// sInterface_Pal - parts of the display frame, "PkmnData"'s normal color, Close Box
+static const u16 sInterface_Pal[]    = INCBIN_U16("graphics/pokemon_storage/interface.gbapal");
+static const u16 sPkmnDataGray_Pal[] = INCBIN_U16("graphics/pokemon_storage/pkmn_data_gray.gbapal");
+static const u16 sBg_Pal[]           = INCBIN_U16("graphics/pokemon_storage/bg.gbapal");
+static const u16 sBgMoveItems_Pal[]  = INCBIN_U16("graphics/pokemon_storage/bg_move_items.gbapal");
 
 static const u16 sCloseBoxButton_Tilemap[] =
 {
@@ -952,8 +943,8 @@ static const u16 sPartySlotEmpty_Tilemap[] =
 
 static const u16 sWaveform_Pal[] = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
 static const u32 sWaveform_Gfx[] = INCBIN_U32("graphics/pokemon_storage/waveform.4bpp");
-static const u32 gUnknown_085726B4[] = INCBIN_U32("graphics/unused/unknown_5726B4.gbapal");
-static const u32 gUnknown_085726F4[] = INCBIN_U32("graphics/unknown/unknown_5726F4.gbapal");
+static const u16 gUnknown_085726B4[] = INCBIN_U16("graphics/unused/unknown_5726B4.gbapal");
+static const u16 gUnknown_085726F4[] = INCBIN_U16("graphics/unknown/unknown_5726F4.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
@@ -1353,9 +1344,9 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
 }
 
 // Unused
-void sub_80C6EAC(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr3)
+static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgColor, u8 fgColor, u8 shadowColor)
 {
-    u32 var;
+    u32 tileSize;
     u8 windowId;
     u8 txtColor[3];
     u8 *tileData1, *tileData2;
@@ -1363,17 +1354,17 @@ void sub_80C6EAC(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr
 
     winTemplate.width = StringLength_Multibyte(string);
     winTemplate.height = 2;
-    var = winTemplate.width * 32;
+    tileSize = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(arg3));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
-    txtColor[0] = arg3;
-    txtColor[1] = clr2;
-    txtColor[2] = clr3;
+    txtColor[0] = bgColor;
+    txtColor[1] = fgColor;
+    txtColor[2] = shadowColor;
     AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
-    CpuCopy16(tileData1, dst, var);
-    CpuCopy16(tileData2, dst + arg2, var);
+    CpuCopy16(tileData1, dst, tileSize);
+    CpuCopy16(tileData2, dst + offset, tileSize);
     RemoveWindow(windowId);
 }
 
@@ -2007,9 +1998,9 @@ static void sub_80C7E98(void)
     sub_80D2A90(&sPSSData->unk_0020, sPSSData->unk_0028, 8);
     gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
-    sub_80D259C(3);
-    sub_80D2644(0, 1, gUnknown_0857239C, 8, 4);
-    sub_80D2770(0, 1, 0);
+    TilemapUtil_Init(TILEMAPID_COUNT);
+    TilemapUtil_SetMap(TILEMAPID_PKMN_DATA, 1, sPkmnData_Tilemap, 8, 4);
+    TilemapUtil_SetPos(TILEMAPID_PKMN_DATA, 1, 0);
     sPSSData->closeBoxFlashing = FALSE;
 }
 
@@ -2106,7 +2097,7 @@ static void Cb_InitPSS(u8 taskId)
         sub_80CA0D8();
         break;
     case 7:
-        sub_80CA704();
+        InitSupplementalTilemaps();
         break;
     case 8:
         CreateInitBoxTask(StorageGetCurrentBox());
@@ -2689,7 +2680,7 @@ static void Cb_MoveMon(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        InitMonPlaceChange(0);
+        InitMonPlaceChange(CHANGE_GRAB);
         sPSSData->state++;
         break;
     case 1:
@@ -2709,7 +2700,7 @@ static void Cb_PlaceMon(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        InitMonPlaceChange(1);
+        InitMonPlaceChange(CHANGE_PLACE);
         sPSSData->state++;
         break;
     case 1:
@@ -2729,7 +2720,7 @@ static void Cb_ShiftMon(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        InitMonPlaceChange(2);
+        InitMonPlaceChange(CHANGE_SHIFT);
         sPSSData->state++;
         break;
     case 1:
@@ -2755,7 +2746,7 @@ static void Cb_WithdrawMon(u8 taskId)
         else
         {
             SaveCursorPos();
-            InitMonPlaceChange(0);
+            InitMonPlaceChange(CHANGE_GRAB);
             sPSSData->state = 2;
         }
         break;
@@ -2777,14 +2768,14 @@ static void Cb_WithdrawMon(u8 taskId)
     case 3:
         if (!DoShowPartyMenu())
         {
-            InitMonPlaceChange(1);
+            InitMonPlaceChange(CHANGE_PLACE);
             sPSSData->state++;
         }
         break;
     case 4:
         if (!DoMonPlaceChange())
         {
-            sub_80CAB20();
+            UpdatePartySlotColors();
             sPSSData->state++;
         }
         break;
@@ -2845,7 +2836,7 @@ static void Cb_DepositMenu(u8 taskId)
         {
             sub_80CE22C();
             StartDisplayMonMosaicEffect();
-            sub_80CAB20();
+            UpdatePartySlotColors();
             SetPSSCallback(Cb_MainPSS);
         }
         break;
@@ -2938,7 +2929,7 @@ static void Cb_ReleaseMon(u8 taskId)
         {
             RefreshDisplayMon();
             StartDisplayMonMosaicEffect();
-            sub_80CAB20();
+            UpdatePartySlotColors();
             sPSSData->state++;
         }
         break;
@@ -3291,7 +3282,7 @@ static void Cb_HandleMovingMonFromParty(u8 taskId)
     case 1:
         if (GetNumPartySpritesCompacting() == 0)
         {
-            sub_80CAB20();
+            UpdatePartySlotColors();
             SetPSSCallback(Cb_MainPSS);
         }
         break;
@@ -3738,7 +3729,7 @@ static void GiveChosenBagItem(void)
 
 static void FreePSSData(void)
 {
-    sub_80D25F0();
+    TilemapUtil_Free();
     MultiMove_Free();
     FREE_AND_SET_NULL(sPSSData);
     FreeAllWindowBuffers();
@@ -3787,13 +3778,13 @@ static void LoadWaveformSpritePalette(void)
 
 static void sub_80CA0D8(void)
 {
-    LoadPalette(gUnknown_085723DC, 0, 0x20);
-    LoadPalette(gUnknown_085723FC, 0x20, 0x20);
-    LoadPalette(gUnknown_085726F4, 0xF0, 0x20);
+    LoadPalette(sInterface_Pal, 0, sizeof(sInterface_Pal));
+    LoadPalette(sPkmnDataGray_Pal, 0x20, sizeof(sPkmnDataGray_Pal));
+    LoadPalette(gUnknown_085726F4, 0xF0, sizeof(gUnknown_085726F4));
     if (sPSSData->boxOption != OPTION_MOVE_ITEMS)
-        LoadPalette(gUnknown_0857241C, 0x30, 0x20);
+        LoadPalette(sBg_Pal, 0x30, sizeof(sBg_Pal));
     else
-        LoadPalette(gUnknown_0857243C, 0x30, 0x20);
+        LoadPalette(sBgMoveItems_Pal, 0x30, sizeof(sBgMoveItems_Pal));
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     CreateDisplayMonSprite();
@@ -3963,45 +3954,45 @@ static void UpdateWaveformAnimation(void)
 
     if (sPSSData->displayMonSpecies != SPECIES_NONE)
     {
-        // Start animation
-        sub_80D27AC(0, 0, 0, 8, 2);
+        // Start waveform animation and color "Pkmn Data"
+        TilemapUtil_SetRect(TILEMAPID_PKMN_DATA, 0, 0, 8, 2);
         for (i = 0; i < ARRAY_COUNT(sPSSData->waveformSprites); i++)
             StartSpriteAnimIfDifferent(sPSSData->waveformSprites[i], i * 2 + 1);
     }
     else
     {
-        // Stop animation
-        sub_80D27AC(0, 0, 2, 8, 2);
+        // Stop waveform animation and gray out "Pkmn Data"
+        TilemapUtil_SetRect(TILEMAPID_PKMN_DATA, 0, 2, 8, 2);
         for (i = 0; i < ARRAY_COUNT(sPSSData->waveformSprites); i++)
             StartSpriteAnim(sPSSData->waveformSprites[i], i * 2);
     }
 
-    sub_80D2918(0);
+    TilemapUtil_Update(TILEMAPID_PKMN_DATA);
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void sub_80CA704(void)
+static void InitSupplementalTilemaps(void)
 {
     LZ77UnCompWram(gStorageSystemPartyMenu_Tilemap, sPSSData->partyMenuTilemapBuffer);
     LoadPalette(gStorageSystemPartyMenu_Pal, 0x10, 0x20);
-    sub_80D2644(1, 1, sPSSData->partyMenuTilemapBuffer, 12, 22);
-    sub_80D2644(2, 1, sCloseBoxButton_Tilemap, 9, 4);
-    sub_80D2770(1, 10, 0);
-    sub_80D2770(2, 21, 0);
+    TilemapUtil_SetMap(TILEMAPID_PARTY_MENU, 1, sPSSData->partyMenuTilemapBuffer, 12, 22);
+    TilemapUtil_SetMap(TILEMAPID_CLOSE_BUTTON, 1, sCloseBoxButton_Tilemap, 9, 4);
+    TilemapUtil_SetPos(TILEMAPID_PARTY_MENU, 10, 0);
+    TilemapUtil_SetPos(TILEMAPID_CLOSE_BUTTON, 21, 0);
     SetPartySlotTilemaps();
     if (sInPartyMenu)
     {
-        sub_80CA984(TRUE);
+        UpdateCloseBoxButtonTilemap(TRUE);
         CreatePartyMonsSprites(TRUE);
-        sub_80D2918(2);
-        sub_80D2918(1);
+        TilemapUtil_Update(TILEMAPID_CLOSE_BUTTON);
+        TilemapUtil_Update(TILEMAPID_PARTY_MENU);
     }
     else
     {
-        sub_80D27AC(1, 0, 20, 12, 2);
-        sub_80CA984(TRUE);
-        sub_80D2918(1);
-        sub_80D2918(2);
+        TilemapUtil_SetRect(TILEMAPID_PARTY_MENU, 0, 20, 12, 2);
+        UpdateCloseBoxButtonTilemap(TRUE);
+        TilemapUtil_Update(TILEMAPID_PARTY_MENU);
+        TilemapUtil_Update(TILEMAPID_CLOSE_BUTTON);
     }
 
     ScheduleBgCopyTilemapToVram(1);
@@ -4023,8 +4014,8 @@ static bool8 ShowPartyMenu(void)
 
     sPSSData->partyMenuUnused--;
     sPSSData->partyMenuY++;
-    sub_80D27F4(1, 3, 1);
-    sub_80D2918(1);
+    TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, 1);
+    TilemapUtil_Update(TILEMAPID_PARTY_MENU);
     ScheduleBgCopyTilemapToVram(1);
     MovePartySprites(8);
     if (++sPSSData->partyMenuMoveTimer == 20)
@@ -4053,8 +4044,8 @@ static bool8 HidePartyMenu(void)
     {
         sPSSData->partyMenuUnused++;
         sPSSData->partyMenuY--;
-        sub_80D27F4(1, 3, -1);
-        sub_80D2918(1);
+        TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, -1);
+        TilemapUtil_Update(TILEMAPID_PARTY_MENU);
         FillBgTilemapBufferRect_Palette0(1, 0x100, 10, sPSSData->partyMenuY, 12, 1);
         MovePartySprites(-8);
         if (++sPSSData->partyMenuMoveTimer != 20)
@@ -4067,8 +4058,11 @@ static bool8 HidePartyMenu(void)
             sInPartyMenu = FALSE;
             DestroyAllPartyMonIcons();
             CompactPartySlots();
-            sub_80D27AC(2, 0, 0, 9, 2);
-            sub_80D2918(2);
+
+            // The close box button gets partially covered by
+            // the party menu, restore it
+            TilemapUtil_SetRect(TILEMAPID_CLOSE_BUTTON, 0, 0, 9, 2);
+            TilemapUtil_Update(TILEMAPID_CLOSE_BUTTON);
             ScheduleBgCopyTilemapToVram(1);
             return FALSE;
         }
@@ -4077,14 +4071,14 @@ static bool8 HidePartyMenu(void)
     return FALSE;
 }
 
-static void sub_80CA984(bool8 normal)
+static void UpdateCloseBoxButtonTilemap(bool8 normal)
 {
     if (normal)
-        sub_80D27AC(2, 0, 0, 9, 2);
+        TilemapUtil_SetRect(TILEMAPID_CLOSE_BUTTON, 0, 0, 9, 2);
     else // flashing
-        sub_80D27AC(2, 0, 2, 9, 2);
+        TilemapUtil_SetRect(TILEMAPID_CLOSE_BUTTON, 0, 2, 9, 2);
 
-    sub_80D2918(2);
+    TilemapUtil_Update(TILEMAPID_CLOSE_BUTTON);
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -4100,7 +4094,7 @@ static void StopFlashingCloseBoxButton(void)
     if (sPSSData->closeBoxFlashing)
     {
         sPSSData->closeBoxFlashing = FALSE;
-        sub_80CA984(TRUE);
+        UpdateCloseBoxButtonTilemap(TRUE);
     }
 }
 
@@ -4110,7 +4104,7 @@ static void UpdateCloseBoxButtonFlash(void)
     {
         sPSSData->closeBoxFlashTimer = 0;
         sPSSData->closeBoxFlashState = (sPSSData->closeBoxFlashState == FALSE);
-        sub_80CA984(sPSSData->closeBoxFlashState);
+        UpdateCloseBoxButtonTilemap(sPSSData->closeBoxFlashState);
     }
 }
 
@@ -4150,11 +4144,11 @@ static void SetPartySlotTilemap(u8 partyId, bool8 hasMon)
     }
 }
 
-static void sub_80CAB20(void)
+static void UpdatePartySlotColors(void)
 {
     SetPartySlotTilemaps();
-    sub_80D27AC(1, 0, 0, 12, 22);
-    sub_80D2918(1);
+    TilemapUtil_SetRect(TILEMAPID_PARTY_MENU, 0, 0, 12, 22);
+    TilemapUtil_Update(TILEMAPID_PARTY_MENU);
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -4637,7 +4631,7 @@ static void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
     }
 }
 
-static void CreatePartyMonsSprites(bool8 arg0)
+static void CreatePartyMonsSprites(bool8 visible)
 {
     u16 i, count;
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2);
@@ -4660,7 +4654,7 @@ static void CreatePartyMonsSprites(bool8 arg0)
         }
     }
 
-    if (!arg0)
+    if (!visible)
     {
         for (i = 0; i < count; i++)
         {
@@ -5426,7 +5420,7 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
     StringCopyPadded(sPSSData->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
     DrawTextWindowAndBufferTiles(sPSSData->boxTitleText, sPSSData->boxTitleTiles, 0, 0, 2);
     LoadSpriteSheet(&spriteSheet);
-    LoadPalette(sBoxTitleColors[GetBoxWallpaper(boxId)], palOffset, 4);
+    LoadPalette(sBoxTitleColors[GetBoxWallpaper(boxId)], palOffset, sizeof(sBoxTitleColors[0]));
     x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
     adjustedX = x;
     adjustedX += direction * 192;
@@ -5673,7 +5667,7 @@ static void sub_80CD36C(void)
 static void sub_80CD3EC(void)
 {
     CreateCursorSprites();
-    sub_80CEBDC();
+    ReshowDisplayMon();
     sPSSData->cursorPrevHorizPos = 1;
     sPSSData->inBoxMovingMode = MOVE_MODE_NORMAL;
     if (sIsMonBeingMoved)
@@ -5996,25 +5990,27 @@ static u8 GetSavedCursorPos(void)
     return sSavedCursorPosition;
 }
 
-static void InitMonPlaceChange(u8 a0)
+static void InitMonPlaceChange(u8 type)
 {
     static bool8 (*const placeChangeFuncs[])(void) =
     {
-        MonPlaceChange_Move,
-        MonPlaceChange_Place,
-        MonPlaceChange_Shift,
+        [CHANGE_GRAB]  = MonPlaceChange_Grab,
+        [CHANGE_PLACE] = MonPlaceChange_Place,
+        [CHANGE_SHIFT] = MonPlaceChange_Shift,
     };
 
-    sPSSData->monPlaceChangeFunc = placeChangeFuncs[a0];
+    sPSSData->monPlaceChangeFunc = placeChangeFuncs[type];
     sPSSData->monPlaceChangeState = 0;
 }
 
-static void sub_80CDC64(bool8 arg0)
+// No Shift while moving multiple Pokémon, only grab and place
+// For both grab/place, the cursor moves down, then up
+static void InitMultiMonPlaceChange(bool8 up)
 {
-    if (!arg0)
-        sPSSData->monPlaceChangeFunc = sub_80CDEB4;
+    if (!up)
+        sPSSData->monPlaceChangeFunc = MultiMonPlaceChange_Down;
     else
-        sPSSData->monPlaceChangeFunc = sub_80CDEC4;
+        sPSSData->monPlaceChangeFunc = MultiMonPlaceChange_Up;
 
     sPSSData->monPlaceChangeState = 0;
 }
@@ -6024,7 +6020,7 @@ static bool8 DoMonPlaceChange(void)
     return sPSSData->monPlaceChangeFunc();
 }
 
-static bool8 MonPlaceChange_Move(void)
+static bool8 MonPlaceChange_Grab(void)
 {
     switch (sPSSData->monPlaceChangeState)
     {
@@ -6035,7 +6031,7 @@ static bool8 MonPlaceChange_Move(void)
         sPSSData->monPlaceChangeState++;
         break;
     case 1:
-        if (!sub_80CDED4())
+        if (!MonPlaceChange_CursorDown())
         {
             StartSpriteAnim(sPSSData->cursorSprite, CURSOR_ANIM_FIST);
             MoveMon();
@@ -6043,7 +6039,7 @@ static bool8 MonPlaceChange_Move(void)
         }
         break;
     case 2:
-        if (!sub_80CDF08())
+        if (!MonPlaceChange_CursorUp())
             sPSSData->monPlaceChangeState++;
         break;
     case 3:
@@ -6058,7 +6054,7 @@ static bool8 MonPlaceChange_Place(void)
     switch (sPSSData->monPlaceChangeState)
     {
     case 0:
-        if (!sub_80CDED4())
+        if (!MonPlaceChange_CursorDown())
         {
             StartSpriteAnim(sPSSData->cursorSprite, CURSOR_ANIM_OPEN);
             PlaceMon();
@@ -6066,7 +6062,7 @@ static bool8 MonPlaceChange_Place(void)
         }
         break;
     case 1:
-        if (!sub_80CDF08())
+        if (!MonPlaceChange_CursorUp())
         {
             StartSpriteAnim(sPSSData->cursorSprite, CURSOR_ANIM_BOUNCE);
             sPSSData->monPlaceChangeState++;
@@ -6114,17 +6110,17 @@ static bool8 MonPlaceChange_Shift(void)
     return TRUE;
 }
 
-static bool8 sub_80CDEB4(void)
+static bool8 MultiMonPlaceChange_Down(void)
 {
-    return sub_80CDED4();
+    return MonPlaceChange_CursorDown();
 }
 
-static bool8 sub_80CDEC4(void)
+static bool8 MultiMonPlaceChange_Up(void)
 {
-    return sub_80CDF08();
+    return MonPlaceChange_CursorUp();
 }
 
-static bool8 sub_80CDED4(void)
+static bool8 MonPlaceChange_CursorDown(void)
 {
     switch (sPSSData->cursorSprite->pos2.y)
     {
@@ -6134,18 +6130,18 @@ static bool8 sub_80CDED4(void)
     case 0:
         sPSSData->cursorSprite->pos2.y++;
         break;
-    case 8:
+    case 8: // Cursor has reached bottom
         return FALSE;
     }
 
     return TRUE;
 }
 
-static bool8 sub_80CDF08(void)
+static bool8 MonPlaceChange_CursorUp(void)
 {
     switch (sPSSData->cursorSprite->pos2.y)
     {
-    case 0:
+    case 0: // Cursor has reached top
         return FALSE;
     default:
         sPSSData->cursorSprite->pos2.y--;
@@ -6542,6 +6538,8 @@ static void LoadSavedMovingMon(void)
 {
     if (sIsMonBeingMoved)
     {
+        // If it came from the party load a struct Pokemon,
+        // otherwise load a BoxPokemon
         if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
             sPSSData->movingMon = sSavedMovingMon;
         else
@@ -6695,7 +6693,7 @@ static void TryRefreshDisplayMon(void)
     }
 }
 
-static void sub_80CEBDC(void)
+static void ReshowDisplayMon(void)
 {
     if (sIsMonBeingMoved)
         SetDisplayMonData(&sSavedMovingMon, MODE_PARTY);
@@ -7726,7 +7724,8 @@ static void StartCursorAnim(u8 animNum)
     StartSpriteAnim(sPSSData->cursorSprite, animNum);
 }
 
-static u8 sub_80CFE78(void)
+// Unused
+static u8 GetMovingMonOriginalBoxId(void)
 {
     return sMovingMonOrigBoxId;
 }
@@ -8078,7 +8077,7 @@ static bool8 MultiMove_GrabSelection(void)
     case 0:
         MultiMove_GetMonsFromSelection();
         MultiMove_RemoveMonsFromBox();
-        sub_80CDC64(FALSE);
+        InitMultiMonPlaceChange(FALSE);
         sMultiMove->state++;
         break;
     case 1:
@@ -8086,7 +8085,7 @@ static bool8 MultiMove_GrabSelection(void)
         {
             StartCursorAnim(CURSOR_ANIM_FIST);
             MultiMove_InitMove(0, 256, 8);
-            sub_80CDC64(TRUE);
+            InitMultiMonPlaceChange(TRUE);
             sMultiMove->state++;
         }
         break;
@@ -8119,7 +8118,7 @@ static bool8 MultiMove_PlaceMons(void)
     case 0:
         MultiMove_SetPlacedMonData();
         MultiMove_InitMove(0, -256, 8);
-        sub_80CDC64(FALSE);
+        InitMultiMonPlaceChange(FALSE);
         sMultiMove->state++;
         break;
     case 1:
@@ -8127,7 +8126,7 @@ static bool8 MultiMove_PlaceMons(void)
         {
             MultiMove_CreatePlacedMonIcons();
             StartCursorAnim(CURSOR_ANIM_OPEN);
-            sub_80CDC64(TRUE);
+            InitMultiMonPlaceChange(TRUE);
             HideBg(0);
             sMultiMove->state++;
         }
@@ -9210,6 +9209,12 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 #undef sCursorArea
 #undef sCursorPos
 
+
+//------------------------------------------------------------------------------
+//  SECTION: General utility
+//------------------------------------------------------------------------------
+
+
 // Unused, leftover from FRLG
 static void BackupPokemonStorage(void/*struct PokemonStorage * dest*/)
 {
@@ -9474,6 +9479,12 @@ bool32 AnyStorageMonWithMove(u16 moveId)
     return FALSE;
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Walda
+//------------------------------------------------------------------------------
+
+
 void ResetWaldaWallpaper(void)
 {
     gSaveBlock1Ptr->waldaPhrase.iconId = 0;
@@ -9542,205 +9553,243 @@ bool32 IsWaldaPhraseEmpty(void)
     return (gSaveBlock1Ptr->waldaPhrase.text[0] == EOS);
 }
 
-// Not sure what the purpose of these functions is.
-// They seem to only be called while PSS is initialized.
 
-EWRAM_DATA static struct UnkStruct_2039D84 *gUnknown_02039D84 = NULL;
-EWRAM_DATA static u16 gUnknown_02039D88 = 0;
+//------------------------------------------------------------------------------
+//  SECTION: TilemapUtil
+//
+//  Handles 3 particular tilemaps in a somewhat unusual way.
+//  For example, while the cursor is on the Close Box button it flashes between
+//  two states alternately. Both these states are their own part of the same
+//  tilemap that's always present. The utility shifts the tilemap up and down
+//  to show/hide the states, and limits the view with a rectangle that only
+//  reveals one at a time.
+//  Each tilemap is tracked with a TILEMAPID that can be used to reference it.
+//------------------------------------------------------------------------------
 
-static void sub_80D259C(u8 count)
+
+struct TilemapUtil_RectData
+{
+    s16 x;
+    s16 y;
+    u16 width;
+    u16 height;
+    s16 destX;
+    s16 destY;
+};
+
+struct TilemapUtil
+{
+    struct TilemapUtil_RectData prev; // Only read in unused function
+    struct TilemapUtil_RectData cur;
+    const void *savedTilemap; // Only written in unused function
+    const void *tilemap;
+    u16 altWidth;
+    u16 altHeight; // Never read
+    u16 width;
+    u16 height; // Never read
+    u16 rowSize; // Never read
+    u8 tileSize;
+    u8 bg;
+    bool8 active;
+};
+
+EWRAM_DATA static struct TilemapUtil *sTilemapUtil = NULL;
+EWRAM_DATA static u16 sNumTilemapUtilIds = 0;
+
+static void TilemapUtil_Init(u8 count)
 {
     u16 i;
 
-    gUnknown_02039D84 = Alloc(sizeof(*gUnknown_02039D84) * count);
-    gUnknown_02039D88 = (gUnknown_02039D84 == NULL) ? 0 : count;
-    for (i = 0; i < gUnknown_02039D88; i++)
+    sTilemapUtil = Alloc(sizeof(*sTilemapUtil) * count);
+    sNumTilemapUtilIds = (sTilemapUtil == NULL) ? 0 : count;
+    for (i = 0; i < sNumTilemapUtilIds; i++)
     {
-        gUnknown_02039D84[i].field_18 = NULL;
-        gUnknown_02039D84[i].field_2C = 0;
+        sTilemapUtil[i].savedTilemap = NULL;
+        sTilemapUtil[i].active = FALSE;
     }
 }
 
-static void sub_80D25F0(void)
+static void TilemapUtil_Free(void)
 {
-    Free(gUnknown_02039D84);
+    Free(sTilemapUtil);
 }
 
-static void sub_80D2604(void)
+// Unused
+static void TilemapUtil_UpdateAll(void)
 {
     s32 i;
 
-    for (i = 0; i < gUnknown_02039D88; i++)
+    for (i = 0; i < sNumTilemapUtilIds; i++)
     {
-        if (gUnknown_02039D84[i].field_2C == 1)
-            sub_80D2918(i);
+        if (sTilemapUtil[i].active == TRUE)
+            TilemapUtil_Update(i);
     }
 }
 
 struct
 {
-    u16 a;
-    u16 b;
-}
-static const sUnkVars[][4] =
+    u16 width;
+    u16 height;
+} static const sTilemapDimensions[][4] =
 {
     {
-        {0x0100, 0x0100},
-        {0x0200, 0x0100},
-        {0x0100, 0x0200},
-        {0x0200, 0x0200},
+        { 256,  256},
+        { 512,  256},
+        { 256,  512},
+        { 512,  512},
     },
     {
-        {0x0080, 0x0080},
-        {0x0100, 0x0100},
-        {0x0200, 0x0200},
-        {0x0400, 0x0400},
+        { 128,  128},
+        { 256,  256},
+        { 512,  512},
+        {1024, 1024},
     },
 };
 
-static void sub_80D2644(u8 id, u8 bg, const void *arg2, u16 arg3, u16 arg4)
+static void TilemapUtil_SetMap(u8 id, u8 bg, const void *tilemap, u16 width, u16 height)
 {
     u16 bgScreenSize, bgType;
 
-    if (id >= gUnknown_02039D88)
+    if (id >= sNumTilemapUtilIds)
         return;
 
-    gUnknown_02039D84[id].field_18 = NULL;
-    gUnknown_02039D84[id].field_1C = arg2;
-    gUnknown_02039D84[id].field_2B = bg;
-    gUnknown_02039D84[id].field_24 = arg3;
-    gUnknown_02039D84[id].field_26 = arg4;
+    sTilemapUtil[id].savedTilemap = NULL;
+    sTilemapUtil[id].tilemap = tilemap;
+    sTilemapUtil[id].bg = bg;
+    sTilemapUtil[id].width = width;
+    sTilemapUtil[id].height = height;
 
     bgScreenSize = GetBgAttribute(bg, BG_ATTR_SCREENSIZE);
     bgType = GetBgAttribute(bg, BG_ATTR_TYPE);
-    gUnknown_02039D84[id].field_20 = sUnkVars[bgType][bgScreenSize].a;
-    gUnknown_02039D84[id].field_22 = sUnkVars[bgType][bgScreenSize].b;
+    sTilemapUtil[id].altWidth = sTilemapDimensions[bgType][bgScreenSize].width;
+    sTilemapUtil[id].altHeight = sTilemapDimensions[bgType][bgScreenSize].height;
     if (bgType != 0)
-        gUnknown_02039D84[id].field_2A = 1;
+        sTilemapUtil[id].tileSize = 1;
     else
-        gUnknown_02039D84[id].field_2A = 2;
+        sTilemapUtil[id].tileSize = 2;
 
-    gUnknown_02039D84[id].field_28 = gUnknown_02039D84[id].field_2A * arg3;
-    gUnknown_02039D84[id].field_0[1].field_4 = arg3;
-    gUnknown_02039D84[id].field_0[1].field_6 = arg4;
-    gUnknown_02039D84[id].field_0[1].field_0 = 0;
-    gUnknown_02039D84[id].field_0[1].field_2 = 0;
-    gUnknown_02039D84[id].field_0[1].field_8 = 0;
-    gUnknown_02039D84[id].field_0[1].field_A = 0;
-    gUnknown_02039D84[id].field_0[0] = gUnknown_02039D84[id].field_0[1];
-    gUnknown_02039D84[id].field_2C = 1;
+    sTilemapUtil[id].rowSize = sTilemapUtil[id].tileSize * width;
+    sTilemapUtil[id].cur.width = width;
+    sTilemapUtil[id].cur.height = height;
+    sTilemapUtil[id].cur.x = 0;
+    sTilemapUtil[id].cur.y = 0;
+    sTilemapUtil[id].cur.destX = 0;
+    sTilemapUtil[id].cur.destY = 0;
+    sTilemapUtil[id].prev = sTilemapUtil[id].cur;
+    sTilemapUtil[id].active = TRUE;
 }
 
-static void sub_80D2740(u8 id, const void *arg1)
+// Unused
+static void TilemapUtil_SetSavedMap(u8 id, const void *tilemap)
 {
-    if (id >= gUnknown_02039D88)
+    if (id >= sNumTilemapUtilIds)
         return;
 
-    gUnknown_02039D84[id].field_18 = arg1;
-    gUnknown_02039D84[id].field_2C = 1;
+    sTilemapUtil[id].savedTilemap = tilemap;
+    sTilemapUtil[id].active = TRUE;
 }
 
-static void sub_80D2770(u8 id, u16 arg1, u16 arg2)
+static void TilemapUtil_SetPos(u8 id, u16 x, u16 y)
 {
-    if (id >= gUnknown_02039D88)
+    if (id >= sNumTilemapUtilIds)
         return;
 
-    gUnknown_02039D84[id].field_0[1].field_8 = arg1;
-    gUnknown_02039D84[id].field_0[1].field_A = arg2;
-    gUnknown_02039D84[id].field_2C = 1;
+    sTilemapUtil[id].cur.destX = x;
+    sTilemapUtil[id].cur.destY = y;
+    sTilemapUtil[id].active = TRUE;
 }
 
-static void sub_80D27AC(u8 id, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
+static void TilemapUtil_SetRect(u8 id, u16 x, u16 y, u16 width, u16 height)
 {
-    if (id >= gUnknown_02039D88)
+    if (id >= sNumTilemapUtilIds)
         return;
 
-    gUnknown_02039D84[id].field_0[1].field_0 = arg1;
-    gUnknown_02039D84[id].field_0[1].field_2 = arg2;
-    gUnknown_02039D84[id].field_0[1].field_4 = arg3;
-    gUnknown_02039D84[id].field_0[1].field_6 = arg4;
-    gUnknown_02039D84[id].field_2C = 1;
+    sTilemapUtil[id].cur.x = x;
+    sTilemapUtil[id].cur.y = y;
+    sTilemapUtil[id].cur.width = width;
+    sTilemapUtil[id].cur.height = height;
+    sTilemapUtil[id].active = TRUE;
 }
 
-static void sub_80D27F4(u8 id, u8 arg1, s8 arg2)
+static void TilemapUtil_Move(u8 id, u8 mode, s8 val)
 {
-    if (id >= gUnknown_02039D88)
+    if (id >= sNumTilemapUtilIds)
         return;
 
-    switch (arg1)
+    switch (mode)
     {
     case 0:
-        gUnknown_02039D84[id].field_0[1].field_8 += arg2;
-        gUnknown_02039D84[id].field_0[1].field_4 -= arg2;
+        sTilemapUtil[id].cur.destX += val;
+        sTilemapUtil[id].cur.width -= val;
         break;
     case 1:
-        gUnknown_02039D84[id].field_0[1].field_0 += arg2;
-        gUnknown_02039D84[id].field_0[1].field_4 += arg2;
+        sTilemapUtil[id].cur.x += val;
+        sTilemapUtil[id].cur.width += val;
         break;
     case 2:
-        gUnknown_02039D84[id].field_0[1].field_A += arg2;
-        gUnknown_02039D84[id].field_0[1].field_6 -= arg2;
+        sTilemapUtil[id].cur.destY += val;
+        sTilemapUtil[id].cur.height -= val;
         break;
     case 3:
-        gUnknown_02039D84[id].field_0[1].field_2 -= arg2;
-        gUnknown_02039D84[id].field_0[1].field_6 += arg2;
+        sTilemapUtil[id].cur.y -= val;
+        sTilemapUtil[id].cur.height += val;
         break;
     case 4:
-        gUnknown_02039D84[id].field_0[1].field_8 += arg2;
+        sTilemapUtil[id].cur.destX += val;
         break;
     case 5:
-        gUnknown_02039D84[id].field_0[1].field_A += arg2;
+        sTilemapUtil[id].cur.destY += val;
         break;
     }
 
-    gUnknown_02039D84[id].field_2C = 1;
+    sTilemapUtil[id].active = TRUE;
 }
 
-static void sub_80D2918(u8 id)
+static void TilemapUtil_Update(u8 id)
 {
-    if (id >= gUnknown_02039D88)
+    if (id >= sNumTilemapUtilIds)
         return;
 
-    if (gUnknown_02039D84[id].field_18 != NULL)
-        sub_80D2960(id);
+    if (sTilemapUtil[id].savedTilemap != NULL)
+        TilemapUtil_DrawPrev(id); // Never called, above always FALSE
 
-    sub_80D29F8(id);
-    gUnknown_02039D84[id].field_0[0] = gUnknown_02039D84[id].field_0[1];
+    TilemapUtil_Draw(id);
+    sTilemapUtil[id].prev = sTilemapUtil[id].cur;
 }
 
-static void sub_80D2960(u8 id)
+static void TilemapUtil_DrawPrev(u8 id)
 {
     s32 i;
-    u32 adder = gUnknown_02039D84[id].field_2A * gUnknown_02039D84[id].field_20;
-    const void *tiles = (gUnknown_02039D84[id].field_18 + (adder * gUnknown_02039D84[id].field_0[0].field_A))
-                      + (gUnknown_02039D84[id].field_2A * gUnknown_02039D84[id].field_0[0].field_8);
+    u32 adder = sTilemapUtil[id].tileSize * sTilemapUtil[id].altWidth;
+    const void *tiles = (sTilemapUtil[id].savedTilemap + (adder * sTilemapUtil[id].prev.destY))
+                      + (sTilemapUtil[id].tileSize * sTilemapUtil[id].prev.destX);
 
-    for (i = 0; i < gUnknown_02039D84[id].field_0[0].field_6; i++)
+    for (i = 0; i < sTilemapUtil[id].prev.height; i++)
     {
-        CopyToBgTilemapBufferRect(gUnknown_02039D84[id].field_2B,
+        CopyToBgTilemapBufferRect(sTilemapUtil[id].bg,
                                   tiles,
-                                  gUnknown_02039D84[id].field_0[0].field_8,
-                                  gUnknown_02039D84[id].field_0[0].field_A + i,
-                                  gUnknown_02039D84[id].field_0[0].field_4,
+                                  sTilemapUtil[id].prev.destX,
+                                  sTilemapUtil[id].prev.destY + i,
+                                  sTilemapUtil[id].prev.width,
                                   1);
         tiles += adder;
     }
 }
 
-static void sub_80D29F8(u8 id)
+static void TilemapUtil_Draw(u8 id)
 {
     s32 i;
-    u32 adder = gUnknown_02039D84[id].field_2A * gUnknown_02039D84[id].field_24;
-    const void *tiles = (gUnknown_02039D84[id].field_1C + (adder * gUnknown_02039D84[id].field_0[1].field_2))
-                      + (gUnknown_02039D84[id].field_2A * gUnknown_02039D84[id].field_0[1].field_0);
+    u32 adder = sTilemapUtil[id].tileSize * sTilemapUtil[id].width;
+    const void *tiles = (sTilemapUtil[id].tilemap + (adder * sTilemapUtil[id].cur.y))
+                      + (sTilemapUtil[id].tileSize * sTilemapUtil[id].cur.x);
 
-    for (i = 0; i < gUnknown_02039D84[id].field_0[1].field_6; i++)
+    for (i = 0; i < sTilemapUtil[id].cur.height; i++)
     {
-        CopyToBgTilemapBufferRect(gUnknown_02039D84[id].field_2B,
+        CopyToBgTilemapBufferRect(sTilemapUtil[id].bg,
                                   tiles,
-                                  gUnknown_02039D84[id].field_0[1].field_8,
-                                  gUnknown_02039D84[id].field_0[1].field_A + i,
-                                  gUnknown_02039D84[id].field_0[1].field_4,
+                                  sTilemapUtil[id].cur.destX,
+                                  sTilemapUtil[id].cur.destY + i,
+                                  sTilemapUtil[id].cur.width,
                                   1);
         tiles += adder;
     }
