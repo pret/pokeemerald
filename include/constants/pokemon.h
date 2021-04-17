@@ -368,4 +368,6 @@
 
 #define MON_PIC_SIZE (64 * 64 / 2)
 
+#define NUM_ABILITY_SLOTS 2
+
 #endif // GUARD_CONSTANTS_POKEMON_H
