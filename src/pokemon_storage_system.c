@@ -450,14 +450,14 @@ struct PokemonStorageSystemData
     u8 field_C5C;
     u8 field_C5D;
     u8 numPartyToCompact;
-    u16 field_C60;
-    s16 field_C62;
-    s16 field_C64;
-    u16 field_C66;
-    u8 field_C68;
-    s8 field_C69;
-    u8 field_C6A;
-    u8 field_C6B; // Never read.
+    u16 iconScrollDistance;
+    s16 iconScrollPos;
+    s16 iconScrollSpeed;
+    u16 iconScrollNumIncoming;
+    u8 iconScrollCurColumn;
+    s8 iconScrollDirection; // Unnecessary duplicate of scrollDirection
+    u8 iconScrollState;
+    u8 iconScrollToBoxId; // Unnecessary duplicate of scrollToBoxId
     struct WindowTemplate menuWindow;
     struct StorageMenu menuItems[7];
     u8 menuItemsCount;
@@ -582,7 +582,7 @@ static void ChooseBoxMenu_PrintInfo(void);
 static void UpdateCloseBoxButtonFlash(void);
 static void ToggleCursorAutoAction(void);
 static void LoadSavedMovingMon(void);
-static void sub_80CE8E4(void);
+static void SetSelectionAfterSummaryScreen(void);
 static void GiveChosenBagItem(void);
 static void SetUpHidePartyMenu(void);
 static void DestroyAllPartyMonIcons(void);
@@ -649,7 +649,7 @@ static void SetUpDoShowPartyMenu(void);
 static void StartDisplayMonMosaicEffect(void);
 static void SpriteCB_ChooseBoxArrow(struct Sprite *);
 static void SpriteCB_HeldMon(struct Sprite *);
-static void sub_80CB278(struct Sprite *);
+static void SpriteCB_BoxMonIconScrollOut(struct Sprite *);
 static void SpriteCB_Arrow(struct Sprite *);
 static bool32 WaitForWallpaperGfxLoad(void);
 static bool8 InitPSSWindows(void);
@@ -2045,7 +2045,7 @@ static void Cb_InitPSS(u8 taskId)
                 break;
             case SCREEN_CHANGE_SUMMARY_SCREEN - 1:
                 // Return from summary screen
-                sub_80CE8E4();
+                SetSelectionAfterSummaryScreen();
                 break;
             case SCREEN_CHANGE_ITEM_FROM_BAG - 1:
                 // Return from bag menu
@@ -4396,7 +4396,7 @@ static void InitBoxMonSprites(u8 boxId)
     }
 }
 
-static void sub_80CB140(u8 boxPosition)
+static void CreateBoxMonIconAtPos(u8 boxPosition)
 {
     u16 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES2);
 
@@ -4412,7 +4412,13 @@ static void sub_80CB140(u8 boxPosition)
     }
 }
 
-static void sub_80CB1F0(s16 arg0)
+#define sDistance      data[1]
+#define sSpeed         data[2]
+#define sScrollInDestX data[3]
+#define sDelay         data[4]
+#define sScrollOutX    data[5]
+
+static void StartBoxMonIconsScrollOut(s16 speed)
 {
     u16 i;
 
@@ -4420,44 +4426,51 @@ static void sub_80CB1F0(s16 arg0)
     {
         if (sPSSData->boxMonsSprites[i] != NULL)
         {
-            sPSSData->boxMonsSprites[i]->data[2] = arg0;
-            sPSSData->boxMonsSprites[i]->data[4] = 1;
-            sPSSData->boxMonsSprites[i]->callback = sub_80CB278;
+            sPSSData->boxMonsSprites[i]->sSpeed = speed;
+            sPSSData->boxMonsSprites[i]->sDelay = 1;
+            sPSSData->boxMonsSprites[i]->callback = SpriteCB_BoxMonIconScrollOut;
         }
     }
 }
 
-static void sub_80CB234(struct Sprite *sprite)
+static void SpriteCB_BoxMonIconScrollIn(struct Sprite *sprite)
 {
-    if (sprite->data[1] != 0)
+    if (sprite->sDistance != 0)
     {
-        sprite->data[1]--;
-        sprite->pos1.x += sprite->data[2];
+        // Icon moving
+        sprite->sDistance--;
+        sprite->pos1.x += sprite->sSpeed;
     }
     else
     {
-        sPSSData->field_C66--;
-        sprite->pos1.x = sprite->data[3];
+        // Icon arrived
+        sPSSData->iconScrollNumIncoming--;
+        sprite->pos1.x = sprite->sScrollInDestX;
         sprite->callback = SpriteCallbackDummy;
     }
 }
 
-static void sub_80CB278(struct Sprite *sprite)
+static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite)
 {
-    if (sprite->data[4] != 0)
+    if (sprite->sDelay != 0)
     {
-        sprite->data[4]--;
+        sprite->sDelay--;
     }
     else
     {
-        sprite->pos1.x += sprite->data[2];
-        sprite->data[5] = sprite->pos1.x + sprite->pos2.x;
-        if (sprite->data[5] <= 68 || sprite->data[5] >= 252)
+        // Icon moving
+        sprite->pos1.x += sprite->sSpeed;
+        sprite->sScrollOutX = sprite->pos1.x + sprite->pos2.x;
+
+        // Check if icon offscreen
+        if (sprite->sScrollOutX <= 68 || sprite->sScrollOutX >= 252)
             sprite->callback = SpriteCallbackDummy;
     }
 }
 
-static void DestroyAllIconsInColumn(u8 column)
+// Sprites for Pokémon icons are destroyed during
+// the box scroll once they've gone offscreen
+static void DestroyBoxMonIconsInColumn(u8 column)
 {
     u16 row;
     u8 boxPosition = column;
@@ -4473,15 +4486,16 @@ static void DestroyAllIconsInColumn(u8 column)
     }
 }
 
-static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
+// Create the appearing icons for the incoming scrolling box
+static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
 {
     s32 i;
     u16 y = 44;
-    s16 xDest = 8 * (3 * row) + 100;
-    u16 x = xDest - ((times + 1) * xDelta);
-    u8 subpriority = 19 - row;
-    u8 count = 0;
-    u8 boxPosition = row;
+    s16 xDest = 8 * (3 * column) + 100;
+    u16 x = xDest - ((distance + 1) * speed);
+    u8 subpriority = 19 - column;
+    u8 iconsCreated = 0;
+    u8 boxPosition = column;
 
     if (sPSSData->boxOption != OPTION_MOVE_ITEMS)
     {
@@ -4494,11 +4508,11 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
                                                                                         x, y, 2, subpriority);
                 if (sPSSData->boxMonsSprites[boxPosition] != NULL)
                 {
-                    sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
-                    sPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
-                    sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
-                    sPSSData->boxMonsSprites[boxPosition]->callback = sub_80CB234;
-                    count++;
+                    sPSSData->boxMonsSprites[boxPosition]->sDistance = distance;
+                    sPSSData->boxMonsSprites[boxPosition]->sSpeed = speed;
+                    sPSSData->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                    sPSSData->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
+                    iconsCreated++;
                 }
             }
             boxPosition += IN_BOX_COLUMNS;
@@ -4507,6 +4521,8 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
     }
     else
     {
+        // Separate case for Move Items mode is used
+        // to create the icons with the proper blend
         for (i = 0; i < IN_BOX_ROWS; i++)
         {
             if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
@@ -4516,13 +4532,13 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
                                                                                         x, y, 2, subpriority);
                 if (sPSSData->boxMonsSprites[boxPosition] != NULL)
                 {
-                    sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
-                    sPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
-                    sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
-                    sPSSData->boxMonsSprites[boxPosition]->callback = sub_80CB234;
-                    if (GetBoxMonDataAt(sPSSData->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == 0)
+                    sPSSData->boxMonsSprites[boxPosition]->sDistance = distance;
+                    sPSSData->boxMonsSprites[boxPosition]->sSpeed = speed;
+                    sPSSData->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                    sPSSData->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
+                    if (GetBoxMonDataAt(sPSSData->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
                         sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
-                    count++;
+                    iconsCreated++;
                 }
             }
             boxPosition += IN_BOX_COLUMNS;
@@ -4530,61 +4546,73 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
         }
     }
 
-    return count;
+    return iconsCreated;
 }
 
-static void sub_80CB4CC(u8 boxId, s8 direction)
+#undef sDistance
+#undef sSpeed
+#undef sScrollInDestX
+#undef sDelay
+#undef sScrollOutX
+
+static void InitBoxMonIconScroll(u8 boxId, s8 direction)
 {
-    sPSSData->field_C6A = 0;
-    sPSSData->field_C6B = boxId;
-    sPSSData->field_C69 = direction;
-    sPSSData->field_C60 = 32;
-    sPSSData->field_C64 = -(6 * direction);
-    sPSSData->field_C66 = 0;
+    sPSSData->iconScrollState = 0;
+    sPSSData->iconScrollToBoxId = boxId;
+    sPSSData->iconScrollDirection = direction;
+    sPSSData->iconScrollDistance = 32;
+    sPSSData->iconScrollSpeed = -(6 * direction);
+    sPSSData->iconScrollNumIncoming = 0;
     SetBoxSpeciesAndPersonalities(boxId);
     if (direction > 0)
-        sPSSData->field_C68 = 0;
+        sPSSData->iconScrollCurColumn = 0;
     else
-        sPSSData->field_C68 = IN_BOX_COLUMNS - 1;
+        sPSSData->iconScrollCurColumn = IN_BOX_COLUMNS - 1;
 
-    sPSSData->field_C62 = (24 * sPSSData->field_C68) + 100;
-    sub_80CB1F0(sPSSData->field_C64);
+    sPSSData->iconScrollPos = (24 * sPSSData->iconScrollCurColumn) + 100;
+    StartBoxMonIconsScrollOut(sPSSData->iconScrollSpeed);
 }
 
-static bool8 sub_80CB584(void)
+static bool8 UpdateBoxMonIconScroll(void)
 {
-    if (sPSSData->field_C60 != 0)
-        sPSSData->field_C60--;
+    if (sPSSData->iconScrollDistance != 0)
+        sPSSData->iconScrollDistance--;
 
-    switch (sPSSData->field_C6A)
+    switch (sPSSData->iconScrollState)
     {
     case 0:
-        sPSSData->field_C62 += sPSSData->field_C64;
-        if (sPSSData->field_C62 <= 64 || sPSSData->field_C62 >= 252)
+        sPSSData->iconScrollPos += sPSSData->iconScrollSpeed;
+        if (sPSSData->iconScrollPos <= 64 || sPSSData->iconScrollPos >= 252)
         {
-            DestroyAllIconsInColumn(sPSSData->field_C68);
-            sPSSData->field_C62 += sPSSData->field_C69 * 24;
-            sPSSData->field_C6A++;
+            // A column of icons has gone offscreen, destroy them
+            DestroyBoxMonIconsInColumn(sPSSData->iconScrollCurColumn);
+            sPSSData->iconScrollPos += sPSSData->iconScrollDirection * 24;
+            sPSSData->iconScrollState++;
         }
         break;
     case 1:
-        sPSSData->field_C62 += sPSSData->field_C64;
-        sPSSData->field_C66 += sub_80CB2F8(sPSSData->field_C68, sPSSData->field_C60, sPSSData->field_C64);
-        if ((sPSSData->field_C69 > 0 && sPSSData->field_C68 == IN_BOX_COLUMNS - 1)
-            || (sPSSData->field_C69 < 0 && sPSSData->field_C68 == 0))
+        // Create the new incoming column of icons
+        sPSSData->iconScrollPos += sPSSData->iconScrollSpeed;
+        sPSSData->iconScrollNumIncoming += CreateBoxMonIconsInColumn(sPSSData->iconScrollCurColumn, sPSSData->iconScrollDistance, sPSSData->iconScrollSpeed);
+        
+        if ((sPSSData->iconScrollDirection > 0 && sPSSData->iconScrollCurColumn == IN_BOX_COLUMNS - 1)
+         || (sPSSData->iconScrollDirection < 0 && sPSSData->iconScrollCurColumn == 0))
         {
-            sPSSData->field_C6A++;
+            // Scroll has reached final column
+            sPSSData->iconScrollState++;
         }
         else
         {
-            sPSSData->field_C68 += sPSSData->field_C69;
-            sPSSData->field_C6A = 0;
+            // Continue scrolling
+            sPSSData->iconScrollCurColumn += sPSSData->iconScrollDirection;
+            sPSSData->iconScrollState = 0;
         }
         break;
     case 2:
-        if (sPSSData->field_C66 == 0)
+        // Wait to make sure all icons have arrived
+        if (sPSSData->iconScrollNumIncoming == 0)
         {
-            sPSSData->field_C60++;
+            sPSSData->iconScrollDistance++;
             return FALSE;
         }
         break;
@@ -4626,9 +4654,7 @@ static void DestroyBoxMonIconAtPosition(u8 boxPosition)
 static void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
 {
     if (sPSSData->boxMonsSprites[boxPosition] != NULL)
-    {
         sPSSData->boxMonsSprites[boxPosition]->oam.objMode = objMode;
-    }
 }
 
 static void CreatePartyMonsSprites(bool8 visible)
@@ -4667,7 +4693,7 @@ static void CreatePartyMonsSprites(bool8 visible)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (sPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
+            if (sPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == ITEM_NONE)
                 sPSSData->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
@@ -5146,7 +5172,7 @@ static void SetUpScrollToBox(u8 boxId)
 
 static bool8 ScrollToBox(void)
 {
-    bool8 var;
+    bool8 iconsScrolling;
 
     switch (sPSSData->scrollState)
     {
@@ -5157,12 +5183,12 @@ static bool8 ScrollToBox(void)
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_80CB4CC(sPSSData->scrollToBoxId, sPSSData->scrollDirection);
+        InitBoxMonIconScroll(sPSSData->scrollToBoxId, sPSSData->scrollDirection);
         CreateIncomingBoxTitle(sPSSData->scrollToBoxId, sPSSData->scrollDirection);
         StartBoxScrollArrowsSlide(sPSSData->scrollDirection);
         break;
     case 2:
-        var = sub_80CB584();
+        iconsScrolling = UpdateBoxMonIconScroll();
         if (sPSSData->scrollTimer != 0)
         {
             sPSSData->bg2_X += sPSSData->scrollSpeed;
@@ -5171,7 +5197,7 @@ static bool8 ScrollToBox(void)
             CycleBoxTitleSprites();
             StopBoxScrollArrowsSlide();
         }
-        return var;
+        return iconsScrolling;
     }
 
     sPSSData->scrollState++;
@@ -6267,7 +6293,7 @@ static bool8 TryStorePartyMonInBox(u8 boxId)
     }
 
     if (boxId == StorageGetCurrentBox())
-        sub_80CB140(boxPosition);
+        CreateBoxMonIconAtPos(boxPosition);
 
     StartSpriteAnim(sPSSData->cursorSprite, CURSOR_ANIM_STILL);
     return TRUE;
@@ -6573,7 +6599,7 @@ static void InitSummaryScreenData(void)
     }
 }
 
-static void sub_80CE8E4(void)
+static void SetSelectionAfterSummaryScreen(void)
 {
     if (sIsMonBeingMoved)
         LoadSavedMovingMon();
@@ -8385,7 +8411,7 @@ static void MultiMove_CreatePlacedMonIcons(void)
         for (j = sMultiMove->minColumn; j < columnCount; j++)
         {
             if (GetBoxMonData(&sMultiMove->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
-                sub_80CB140(boxPosition);
+                CreateBoxMonIconAtPos(boxPosition);
             monArrayId++;
             boxPosition++;
         }
