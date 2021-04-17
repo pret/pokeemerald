@@ -72,7 +72,7 @@ CC1              = $(shell $(CC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -g
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
-LIBPATH := -L "$(dir $(shell $(CC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(CC) -mthumb -print-file-name=libc.a))"
+LIBPATH := -L "$(dir $(shell $(CC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(CC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(CC) -mthumb -print-file-name=libc.a))"
 endif
 
 CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
@@ -82,7 +82,7 @@ endif
 
 LDFLAGS = -Map ../../$(MAP)
 
-LIB := $(LIBPATH) -lc -lgcc -L../../libagbsyscall -lagbsyscall
+LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx$(EXE)
