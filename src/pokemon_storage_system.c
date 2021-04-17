@@ -435,7 +435,7 @@ struct PokemonStorageSystemData
     u32 boxPersonalities[IN_BOX_COUNT];
     u8 field_C5C;
     u8 field_C5D;
-    u8 field_C5E;
+    u8 numPartyToCompact;
     u16 field_C60;
     s16 field_C62;
     s16 field_C64;
@@ -578,7 +578,7 @@ static void Cb2_EnterPSS(u8);
 static u8 GetCurrentBoxOption(void);
 static u8 HandleInput(void);
 static u8 GetSavedCursorPos(void);
-static u8 sub_80CB9BC(void);
+static u8 GetNumPartySpritesCompacting(void);
 static void LoadWallpaperGfx(u8, s8);
 static void CreateIncomingBoxTitle(u8, s8);
 static void StartBoxScrollArrowsSlide(s8);
@@ -640,7 +640,7 @@ static void TryRefreshDisplayMon(void);
 static void CycleBoxTitleSprites(void);
 static void InitItemInfoWindow(void);
 static void DrawItemInfoWindow(u32);
-static void sub_80CAA74(void);
+static void SetPartySlotTilemaps(void);
 static void PrintItemDescription(void);
 static void SaveMovingMon(void);
 static void SetCursorInParty(void);
@@ -655,7 +655,7 @@ static void PlaceMon(void);
 static void sub_80CAB20(void);
 static void sub_80CE22C(void);
 static void DoCursorNewPosUpdate(void);
-static void sub_80CB950(void);
+static void CompactPartySprites(void);
 static void StartFlashingCloseBoxButton(void);
 static void SetUpDoShowPartyMenu(void);
 static void StartDisplayMonMosaicEffect(void);
@@ -745,10 +745,10 @@ static u16 GetMovingItemId(void);
 static void LoadDisplayMonGfx(u16, u32);
 static void SpriteCB_DisplayMonMosaic(struct Sprite *);
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
-static void sub_80CBA3C(struct Sprite *);
+static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *);
 static void SpriteCB_IncomingBoxTitle(struct Sprite *);
 static void MovePartySprites(s16);
-static void sub_80CAAA8(u8, bool8);
+static void SetPartySlotTilemap(u8, bool8);
 static const u8 *GetMovingItemName(void);
 static void SetMenuText(u8);
 static void TryLoadItemIconAtPos(u8, u8);
@@ -757,7 +757,7 @@ static void InitItemIconInCursor(u16);
 static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
 static void DestroyBoxMonIcon(struct Sprite *);
 static void SetBoxSpeciesAndPersonalities(u8);
-static void sub_80CB9D0(struct Sprite *, u16);
+static void MovePartySpriteToNextSlot(struct Sprite *, u16);
 static void Task_InitBox(u8);
 static void InitBoxTitle(u8);
 static s8 DetermineBoxScrollDirection(u8);
@@ -935,17 +935,17 @@ static const u16 gUnknown_085723FC[] = INCBIN_U16("graphics/unknown/unknown_5723
 static const u16 gUnknown_0857241C[] = INCBIN_U16("graphics/unknown/unknown_57241C.gbapal");
 static const u16 gUnknown_0857243C[] = INCBIN_U16("graphics/unknown/unknown_57243C.gbapal");
 
-static const u16 gUnknown_0857245C[] =
+static const u16 sCloseBoxButton_Tilemap[] =
 {
     0x014c, 0x014d, 0x014e, 0x014f, 0x0170, 0x0171, 0x0172, 0x0173, 0x0174, 0x015c, 0x015d, 0x015e, 0x015f, 0x0180, 0x0181, 0x0182,
     0x0183, 0x0184, 0x0175, 0x0176, 0x0177, 0x0178, 0x0179, 0x017a, 0x017b, 0x017c, 0x017d, 0x0185, 0x0186, 0x0187, 0x0188, 0x0189,
     0x018a, 0x018b, 0x018c, 0x018d
 };
-static const u16 gUnknown_085724A4[] =
+static const u16 sPartySlotFilled_Tilemap[] =
 {
     0x1140, 0x1141, 0x1141, 0x1142, 0x1150, 0x1151, 0x1151, 0x1152, 0x1160, 0x1161, 0x1161, 0x1162,
 };
-static const u16 gUnknown_085724BC[] =
+static const u16 sPartySlotEmpty_Tilemap[] =
 {
     0x1143, 0x1144, 0x1144, 0x1145, 0x1153, 0x1154, 0x1154, 0x1155, 0x1163, 0x1164, 0x1164, 0x1165,
 };
@@ -2837,11 +2837,11 @@ static void Cb_DepositMenu(u8 taskId)
         break;
     case 2:
         CompactPartySlots();
-        sub_80CB950();
+        CompactPartySprites();
         sPSSData->state++;
         break;
     case 3:
-        if (!sub_80CB9BC())
+        if (GetNumPartySpritesCompacting() == 0)
         {
             sub_80CE22C();
             StartDisplayMonMosaicEffect();
@@ -2924,7 +2924,7 @@ static void Cb_ReleaseMon(u8 taskId)
             if (sInPartyMenu)
             {
                 CompactPartySlots();
-                sub_80CB950();
+                CompactPartySprites();
                 sPSSData->state++;
             }
             else
@@ -2934,7 +2934,7 @@ static void Cb_ReleaseMon(u8 taskId)
         }
         break;
     case 6:
-        if (!sub_80CB9BC())
+        if (GetNumPartySpritesCompacting() == 0)
         {
             RefreshDisplayMon();
             StartDisplayMonMosaicEffect();
@@ -3285,11 +3285,11 @@ static void Cb_HandleMovingMonFromParty(u8 taskId)
     {
     case 0:
         CompactPartySlots();
-        sub_80CB950();
+        CompactPartySprites();
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_80CB9BC())
+        if (GetNumPartySpritesCompacting() == 0)
         {
             sub_80CAB20();
             SetPSSCallback(Cb_MainPSS);
@@ -3985,10 +3985,10 @@ static void sub_80CA704(void)
     LZ77UnCompWram(gStorageSystemPartyMenu_Tilemap, sPSSData->partyMenuTilemapBuffer);
     LoadPalette(gStorageSystemPartyMenu_Pal, 0x10, 0x20);
     sub_80D2644(1, 1, sPSSData->partyMenuTilemapBuffer, 12, 22);
-    sub_80D2644(2, 1, gUnknown_0857245C, 9, 4);
+    sub_80D2644(2, 1, sCloseBoxButton_Tilemap, 9, 4);
     sub_80D2770(1, 10, 0);
     sub_80D2770(2, 21, 0);
-    sub_80CAA74();
+    SetPartySlotTilemaps();
     if (sInPartyMenu)
     {
         sub_80CA984(TRUE);
@@ -4114,28 +4114,30 @@ static void UpdateCloseBoxButtonFlash(void)
     }
 }
 
-static void sub_80CAA74(void)
+static void SetPartySlotTilemaps(void)
 {
     u8 i;
 
+    // Skips first party slot, it should always be drawn
+    // as if it has a Pokémon in it
     for (i = 1; i < PARTY_SIZE; i++)
     {
         s32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        sub_80CAAA8(i, (species != SPECIES_NONE));
+        SetPartySlotTilemap(i, species != SPECIES_NONE);
     }
 }
 
-static void sub_80CAAA8(u8 arg0, bool8 isPartyMon)
+static void SetPartySlotTilemap(u8 partyId, bool8 hasMon)
 {
     u16 i, j, index;
     const u16 *data;
 
-    if (isPartyMon)
-        data = gUnknown_085724A4;
+    if (hasMon)
+        data = sPartySlotFilled_Tilemap;
     else
-        data = gUnknown_085724BC;
+        data = sPartySlotEmpty_Tilemap;
 
-    index = 3 * (3 * (arg0 - 1) + 1);
+    index = 3 * (3 * (partyId - 1) + 1);
     index *= 4;
     index += 7;
     for (i = 0; i < 3; i++)
@@ -4150,7 +4152,7 @@ static void sub_80CAAA8(u8 arg0, bool8 isPartyMon)
 
 static void sub_80CAB20(void)
 {
-    sub_80CAA74();
+    SetPartySlotTilemaps();
     sub_80D27AC(1, 0, 0, 12, 22);
     sub_80D2918(1);
     ScheduleBgCopyTilemapToVram(1);
@@ -4677,62 +4679,69 @@ static void CreatePartyMonsSprites(bool8 arg0)
     }
 }
 
-static void sub_80CB950(void)
+static void CompactPartySprites(void)
 {
-    u16 i, count;
+    u16 i, targetSlot;
 
-    sPSSData->field_C5E = 0;
-    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    sPSSData->numPartyToCompact = 0;
+    for (i = 0, targetSlot = 0; i < PARTY_SIZE; i++)
     {
         if (sPSSData->partySprites[i] != NULL)
         {
-            if (i != count)
+            if (i != targetSlot)
             {
-                sub_80CB9D0(sPSSData->partySprites[i], count);
+                MovePartySpriteToNextSlot(sPSSData->partySprites[i], targetSlot);
                 sPSSData->partySprites[i] = NULL;
-                sPSSData->field_C5E++;
+                sPSSData->numPartyToCompact++;
             }
-            count++;
+            targetSlot++;
         }
     }
 }
 
-static u8 sub_80CB9BC(void)
+static u8 GetNumPartySpritesCompacting(void)
 {
-    return sPSSData->field_C5E;
+    return sPSSData->numPartyToCompact;
 }
 
-static void sub_80CB9D0(struct Sprite *sprite, u16 partyId)
+#define sPartyId   data[1]
+#define sMonX      data[2]
+#define sMonY      data[3]
+#define sSpeedX    data[4]
+#define sSpeedY    data[5]
+#define sMoveSteps data[6]
+
+static void MovePartySpriteToNextSlot(struct Sprite *sprite, u16 partyId)
 {
     s16 x, y;
 
-    sprite->data[1] = partyId;
+    sprite->sPartyId = partyId;
     if (partyId == 0)
         x = 104, y = 64;
     else
         x = 152, y = 8 * (3 * (partyId - 1)) + 16;
 
-    sprite->data[2] = (u16)(sprite->pos1.x) * 8;
-    sprite->data[3] = (u16)(sprite->pos1.y) * 8;
-    sprite->data[4] = ((x * 8) - sprite->data[2]) / 8;
-    sprite->data[5] = ((y * 8) - sprite->data[3]) / 8;
+    sprite->sMonX = (u16)(sprite->pos1.x) * 8;
+    sprite->sMonY = (u16)(sprite->pos1.y) * 8;
+    sprite->sSpeedX = ((x * 8) - sprite->sMonX) / 8;
+    sprite->sSpeedY = ((y * 8) - sprite->sMonY) / 8;
     sprite->data[6] = 8;
-    sprite->callback = sub_80CBA3C;
+    sprite->callback = SpriteCB_MovePartyMonToNextSlot;
 }
 
-static void sub_80CBA3C(struct Sprite *sprite)
+static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *sprite)
 {
-    if (sprite->data[6] != 0)
+    if (sprite->sMoveSteps != 0)
     {
-        s16 x = sprite->data[2] += sprite->data[4];
-        s16 y = sprite->data[3] += sprite->data[5];
+        s16 x = sprite->sMonX += sprite->sSpeedX;
+        s16 y = sprite->sMonY += sprite->sSpeedY;
         sprite->pos1.x = x / 8u;
         sprite->pos1.y = y / 8u;
-        sprite->data[6]--;
+        sprite->sMoveSteps--;
     }
     else
     {
-        if (sprite->data[1] == 0)
+        if (sprite->sPartyId == 0)
         {
             sprite->pos1.x = 104;
             sprite->pos1.y = 64;
@@ -4740,13 +4749,20 @@ static void sub_80CBA3C(struct Sprite *sprite)
         else
         {
             sprite->pos1.x = 152;
-            sprite->pos1.y = 8 * (3 * (sprite->data[1] - 1)) + 16;
+            sprite->pos1.y = 8 * (3 * (sprite->sPartyId - 1)) + 16;
         }
         sprite->callback = SpriteCallbackDummy;
-        sPSSData->partySprites[sprite->data[1]] = sprite;
-        sPSSData->field_C5E--;
+        sPSSData->partySprites[sprite->sPartyId] = sprite;
+        sPSSData->numPartyToCompact--;
     }
 }
+
+#undef sPartyId
+#undef sMonX
+#undef sMonY
+#undef sSpeedX
+#undef sSpeedY
+#undef sMoveSteps
 
 static void DestroyMovingMonIcon(void)
 {
