@@ -342,21 +342,21 @@ struct StorageMenu
     int textId;
 };
 
-struct UnkStruct_2000028
+struct UnkUtilData
 {
-    const u8 *unk_00;
-    u8 *unk_04;
-    u16 unk_08;
-    u16 unk_0a;
-    u16 newField;
-    void (*unk_0c)(struct UnkStruct_2000028 *data);
+    const u8 *src;
+    u8 *dest;
+    u16 size;
+    u16 unk;
+    u16 height;
+    void (*func)(struct UnkUtilData *data);
 };
 
-struct UnkStruct_2000020
+struct UnkUtil
 {
-    struct UnkStruct_2000028 *unk_00;
-    u8 unk_04;
-    u8 unk_05;
+    struct UnkUtilData *data;
+    u8 numActive;
+    u8 max;
 };
 
 struct ChooseBoxMenu
@@ -391,8 +391,8 @@ struct PokemonStorageSystemData
     u8 screenChangeType;
     bool8 isReshowingPSS;
     u8 taskId;
-    struct UnkStruct_2000020 unk_0020;
-    struct UnkStruct_2000028 unk_0028[8];
+    struct UnkUtil unkUtil;
+    struct UnkUtilData unkUtilData[8];
     u16 partyMenuTilemapBuffer[0x108];
     u16 partyMenuUnused; // Never read
     u16 partyMenuY;
@@ -770,10 +770,6 @@ static s8 GetMenuItemTextId(u8);
 static u8 SetSelectionMenuTexts(void);
 static bool8 SetMenuTexts_Mon(void);
 static bool8 SetMenuTexts_Item(void);
-static void sub_80D2A90(struct UnkStruct_2000020 *, struct UnkStruct_2000028 *, u32);
-static void sub_80D2AA4(void);
-static void sub_80D2B88(struct UnkStruct_2000028 *);
-static void sub_80D2C1C(struct UnkStruct_2000028 *);
 static u8 GetBoxWallpaper(u8);
 static void SetBoxWallpaper(u8, u8);
 
@@ -835,6 +831,12 @@ static void TilemapUtil_Free(void);
 static void TilemapUtil_Update(u8);
 static void TilemapUtil_DrawPrev(u8);
 static void TilemapUtil_Draw(u8);
+
+// Functions for unknown utility
+static void UnkUtil_Init(struct UnkUtil *, struct UnkUtilData *, u32);
+static void UnkUtil_Run(void);
+static void UnkUtil_CpuRun(struct UnkUtilData *);
+static void UnkUtil_DmaRun(struct UnkUtilData *);
 
 struct {
     const u8 *text;
@@ -1921,7 +1923,7 @@ static void VblankCb_PSS(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
-    sub_80D2AA4();
+    UnkUtil_Run();
     TransferPlttBuffer();
     SetGpuReg(REG_OFFSET_BG2HOFS, sPSSData->bg2_X);
 }
@@ -1995,7 +1997,7 @@ static void sub_80C7E98(void)
     FreeAllSpritePalettes();
     ClearDma3Requests();
     gReservedSpriteTileCount = 0x280;
-    sub_80D2A90(&sPSSData->unk_0020, sPSSData->unk_0028, 8);
+    UnkUtil_Init(&sPSSData->unkUtil, sPSSData->unkUtilData, ARRAY_COUNT(sPSSData->unkUtilData));
     gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
     TilemapUtil_Init(TILEMAPID_COUNT);
@@ -9821,83 +9823,96 @@ static void TilemapUtil_Draw(u8 id)
     }
 }
 
-EWRAM_DATA static struct UnkStruct_2000020 *gUnknown_02039D8C = NULL;
 
-static void sub_80D2A90(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u32 arg2)
+//------------------------------------------------------------------------------
+//  SECTION: UnkUtil
+// 
+//  Some data transfer utility that goes functionally unused.
+//  It gets initialized with UnkUtil_Init, and run every vblank in Pokémon
+//  Storage with UnkUtil_Run, but neither of the Add functions are ever used,
+//  so UnkUtil_Run performs no actions.
+//------------------------------------------------------------------------------
+
+
+EWRAM_DATA static struct UnkUtil *sUnkUtil = NULL;
+
+static void UnkUtil_Init(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
 {
-    gUnknown_02039D8C = arg0;
-    arg0->unk_00 = arg1;
-    arg0->unk_05 = arg2;
-    arg0->unk_04 = 0;
+    sUnkUtil = util;
+    util->data = data;
+    util->max = max;
+    util->numActive = 0;
 }
 
-static void sub_80D2AA4(void)
+static void UnkUtil_Run(void)
 {
     u16 i;
-
-    if (gUnknown_02039D8C->unk_04)
+    if (sUnkUtil->numActive)
     {
-        for (i = 0; i < gUnknown_02039D8C->unk_04; i++)
+        for (i = 0; i < sUnkUtil->numActive; i++)
         {
-            struct UnkStruct_2000028 *unkStruct = &gUnknown_02039D8C->unk_00[i];
-            unkStruct->unk_0c(unkStruct);
+            struct UnkUtilData *data = &sUnkUtil->data[i];
+            data->func(data);
         }
-
-        gUnknown_02039D8C->unk_04 = 0;
+        sUnkUtil->numActive = 0;
     }
 }
 
-static bool8 sub_80D2AEC(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
+// Unused
+static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
 {
-    struct UnkStruct_2000028 *unkStruct;
+    struct UnkUtilData *data;
 
-    if (gUnknown_02039D8C->unk_04 >= gUnknown_02039D8C->unk_05)
+    if (sUnkUtil->numActive >= sUnkUtil->max)
         return FALSE;
 
-    unkStruct = &gUnknown_02039D8C->unk_00[gUnknown_02039D8C->unk_04++];
-    unkStruct->unk_08 = width * 2;
-    unkStruct->unk_04 = dest + 2 * (dTop * 32 + dLeft);
-    unkStruct->unk_00 = src + 2 * (sTop * unkArg + sLeft);
-    unkStruct->newField = height;
-    unkStruct->unk_0a = unkArg;
-    unkStruct->unk_0c = sub_80D2B88;
+    data = &sUnkUtil->data[sUnkUtil->numActive++];
+    data->size = width * 2;
+    data->dest = dest + 2 * (dTop * 32 + dLeft);
+    data->src = src + 2 * (sTop * unkArg + sLeft);
+    data->height = height;
+    data->unk = unkArg;
+    data->func = UnkUtil_CpuRun;
     return TRUE;
 }
 
-static void sub_80D2B88(struct UnkStruct_2000028 *unkStruct)
+// Functionally unused
+static void UnkUtil_CpuRun(struct UnkUtilData *data)
 {
     u16 i;
 
-    for (i = 0; i < unkStruct->newField; i++)
+    for (i = 0; i < data->height; i++)
     {
-        CpuSet(unkStruct->unk_00, unkStruct->unk_04, (unkStruct->unk_08 / 2));
-        unkStruct->unk_04 += 64;
-        unkStruct->unk_00 += (unkStruct->unk_0a * 2);
+        CpuSet(data->src, data->dest, data->size / 2);
+        data->dest += 64;
+        data->src += data->unk * 2;
     }
 }
 
-static bool8 sub_80D2BC0(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
+// Unused
+static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
 {
-    struct UnkStruct_2000028 *unkStruct;
+    struct UnkUtilData *data;
 
-    if (gUnknown_02039D8C->unk_04 >= gUnknown_02039D8C->unk_05)
+    if (sUnkUtil->numActive >= sUnkUtil->max)
         return FALSE;
 
-    unkStruct = &gUnknown_02039D8C->unk_00[gUnknown_02039D8C->unk_04++];
-    unkStruct->unk_08 = width * 2;
-    unkStruct->unk_04 = dest + ((dTop * 32) + dLeft) * 2;
-    unkStruct->newField = height;
-    unkStruct->unk_0c = sub_80D2C1C;
+    data = &sUnkUtil->data[sUnkUtil->numActive++];
+    data->size = width * 2;
+    data->dest = dest + (dTop * 32 + dLeft) * 2;
+    data->height = height;
+    data->func = UnkUtil_DmaRun;
     return TRUE;
 }
 
-static void sub_80D2C1C(struct UnkStruct_2000028 *unkStruct)
+// Functionally unused
+static void UnkUtil_DmaRun(struct UnkUtilData *data)
 {
     u16 i;
 
-    for (i = 0; i < unkStruct->newField; i++)
+    for (i = 0; i < data->height; i++)
     {
-        Dma3FillLarge_(0, unkStruct->unk_04, unkStruct->unk_08, 16);
-        unkStruct->unk_04 += 64;
+        Dma3FillLarge16_(0, data->dest, data->size);
+        data->dest += 64;
     }
 }
