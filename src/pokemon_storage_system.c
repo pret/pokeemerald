@@ -42,6 +42,14 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+/*
+    NOTE: This file is large. Some general groups of functions have
+          been labeled with commented headers to make navigation easier.
+          Search for "SECTION:" to locate them. These sections are not
+          hard and fast rules, but give a basic idea of where certain
+          types of functions are likely located.
+*/
+
 // PC main menu options
 enum {
     OPTION_WITHDRAW,
@@ -215,10 +223,10 @@ enum {
     PALTAG_4, // Unused
     PALTAG_5, // Unused
     PALTAG_DISPLAY_MON,
-    PALTAG_7,
+    PALTAG_MISC_1,
     PALTAG_MARKING_COMBO,
     PALTAG_BOX_TITLE,
-    PALTAG_10,
+    PALTAG_MISC_2,
     PALTAG_ITEM_ICON_0,
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
@@ -316,6 +324,7 @@ enum {
     MULTIMOVE_PLACE_MONS,
 };
 
+// IDs for TilemapUtil
 enum {
     TILEMAPID_PKMN_DATA, // The "Pkmn Data" text at the top of the display
     TILEMAPID_PARTY_MENU,
@@ -394,9 +403,9 @@ struct PokemonStorageSystemData
     struct UnkUtil unkUtil;
     struct UnkUtilData unkUtilData[8];
     u16 partyMenuTilemapBuffer[0x108];
-    u16 partyMenuUnused; // Never read
+    u16 partyMenuUnused1; // Never read
     u16 partyMenuY;
-    u8 field_2C4; // Unused
+    u8 partyMenuUnused2; // Unused
     u8 partyMenuMoveTimer;
     u8 showPartyMenuState;
     bool8 closeBoxFlashing;
@@ -415,7 +424,7 @@ struct PokemonStorageSystemData
     u16 scrollUnused4; // Never read
     u16 scrollUnused5; // Never read
     u16 scrollUnused6; // Never read
-    u8 filler[22];
+    u8 filler1[22];
     u8 boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u8 wallpaperLoadState; // Written to, but never read.
@@ -427,9 +436,9 @@ struct PokemonStorageSystemData
     struct Sprite *curBoxTitleSprites[2];
     struct Sprite *nextBoxTitleSprites[2];
     struct Sprite *arrowSprites[2];
-    u32 boxTitlePalBits;
-    u8 field_73C[80]; // Unused
-    u16 field_78C; // Never read.
+    u32 wallpaperPalBits;
+    u8 filler2[80]; // Unused
+    u16 unkUnused1; // Never read.
     s16 wallpaperSetId;
     s16 wallpaperId;
     u16 wallpaperTilemap[360];
@@ -441,14 +450,14 @@ struct PokemonStorageSystemData
     struct Sprite *movingMonSprite;
     struct Sprite *partySprites[PARTY_SIZE];
     struct Sprite *boxMonsSprites[IN_BOX_COUNT];
-    struct Sprite **field_B00;
+    struct Sprite **shiftMonSpritePtr;
     struct Sprite **releaseMonSpritePtr;
     u16 numIconsPerSpecies[MAX_MON_ICONS];
     u16 iconSpeciesList[MAX_MON_ICONS];
     u16 boxSpecies[IN_BOX_COUNT];
     u32 boxPersonalities[IN_BOX_COUNT];
-    u8 field_C5C;
-    u8 field_C5D;
+    u8 incomingBoxId;
+    u8 shiftTimer;
     u8 numPartyToCompact;
     u16 iconScrollDistance;
     s16 iconScrollPos;
@@ -496,7 +505,7 @@ struct PokemonStorageSystemData
     u8 displayMonItemName[36];
     bool8 (*monPlaceChangeFunc)(void);
     u8 monPlaceChangeState;
-    u8 field_D91;
+    u8 shiftBoxId;
     struct Sprite *markingComboSprite;
     struct Sprite *waveformSprites[2];
     u16 *markingComboTilesPtr;
@@ -530,14 +539,14 @@ struct PokemonStorageSystemData
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
     u16 movingItemId;
     u16 itemInfoWindowOffset;
-    u8 field_2238; // Unused
+    u8 unkUnused2; // Unused
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
     u16 displayMonPalBuffer[0x40];
     u8 tileBuffer[0x800];
-    u8 field_2AC4[0x1800]; // Unused
-    u8 field_42C4[0x800];
+    u8 unusedBuffer[0x1800]; // Unused
+    u8 itemIconBuffer[0x800];
     u8 wallpaperBgTilemapBuffer[0x1000];
     u8 displayMenuTilemapBuffer[0x800];
 };
@@ -561,122 +570,8 @@ EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sAutoActionOn = 0;
 
-static void CreateMainMenu(u8, s16 *);
+// Main tasks
 static void EnterPokeStorage(u8);
-static u8 GetCurrentBoxOption(void);
-static u8 HandleInput(void);
-static u8 GetSavedCursorPos(void);
-static u8 GetNumPartySpritesCompacting(void);
-static void LoadWallpaperGfx(u8, s8);
-static void CreateIncomingBoxTitle(u8, s8);
-static void StartBoxScrollArrowsSlide(s8);
-static void SetCurrentBox(u8);
-static void CreateInitBoxTask(u8);
-static void ChooseBoxMenu_CreateSprites(u8);
-static void TrimOldWallpaper(void *);
-static void ChooseBoxMenu_DestroySprites(void);
-static void ChooseBoxMenu_MoveLeft(void);
-static void ScrollBackground(void);
-static void ChooseBoxMenu_MoveRight(void);
-static void ChooseBoxMenu_PrintInfo(void);
-static void UpdateCloseBoxButtonFlash(void);
-static void ToggleCursorAutoAction(void);
-static void LoadSavedMovingMon(void);
-static void SetSelectionAfterSummaryScreen(void);
-static void GiveChosenBagItem(void);
-static void SetUpHidePartyMenu(void);
-static void DestroyAllPartyMonIcons(void);
-static void MoveHeldItemWithPartyMenu(void);
-static void LoadPokeStorageMenuGfx(void);
-static void LoadWaveformSpritePalette(void);
-static void SaveCursorPos(void);
-static void sub_80CD36C(void);
-static void sub_80CD3EC(void);
-static void sub_80CAC1C(void);
-static void ReshowDisplayMon(void);
-static void SetScrollingBackground(void);
-static void sub_80CABE0(void);
-static void sub_80CAEAC(void);
-static void CreateItemIconSprites(void);
-static void TryHideItemAtCursor(void);
-static void ClearSavedCursorPos(void);
-static void InitMonIconFields(void);
-static void sub_80CA0D8(void);
-static void AddMenu(void);
-static void InitReleaseMon(void);
-static void InitCanReleaseMonVars(void);
-static void ReleaseMon(void);
-static void RefreshDisplayMonData(void);
-static void CreateDisplayMonSprite(void);
-static void CreateMarkingComboSprite(void);
-static void CreateWaveformSprites(void);
-static void ReshowReleaseMon(void);
-static void TrySetCursorFistAnim(void);
-static void ClearBottomWindow(void);
-static void InitSupplementalTilemaps(void);
-static void RemoveMenu(void);
-static void RefreshDisplayMon(void);
-static void MoveItemFromCursorToBag(void);
-static void PrintDisplayMonInfo(void);
-static void UpdateWaveformAnimation(void);
-static void AddWallpaperSetsMenu(void);
-static void CreateBoxScrollArrows(void);
-static void InitMenu(void);
-static void StopBoxScrollArrowsSlide(void);
-static void CreateCursorSprites(void);
-static void TryRefreshDisplayMon(void);
-static void CycleBoxTitleSprites(void);
-static void InitItemInfoWindow(void);
-static void DrawItemInfoWindow(u32);
-static void SetPartySlotTilemaps(void);
-static void PrintItemDescription(void);
-static void SaveMovingMon(void);
-static void SetCursorInParty(void);
-static void InitSummaryScreenData(void);
-static void TryShowItemAtCursor(void);
-static void StopFlashingCloseBoxButton(void);
-static void FreePokeStorageData(void);
-static void AddBoxMenu(void);
-static void CycleBoxTitleColor(void);
-static void MoveMon(void);
-static void PlaceMon(void);
-static void UpdatePartySlotColors(void);
-static void sub_80CE22C(void);
-static void DoCursorNewPosUpdate(void);
-static void CompactPartySprites(void);
-static void StartFlashingCloseBoxButton(void);
-static void SetUpDoShowPartyMenu(void);
-static void StartDisplayMonMosaicEffect(void);
-static void SpriteCB_ChooseBoxArrow(struct Sprite *);
-static void SpriteCB_HeldMon(struct Sprite *);
-static void SpriteCB_BoxMonIconScrollOut(struct Sprite *);
-static void SpriteCB_Arrow(struct Sprite *);
-static bool32 WaitForWallpaperGfxLoad(void);
-static bool8 InitPokeStorageWindows(void);
-static bool8 ResetReleaseMonSpritePtr(void);
-static bool8 TryHideReleaseMon(void);
-static bool8 IsInitBoxActive(void);
-static bool8 MonPlaceChange_CursorDown(void);
-static bool8 MonPlaceChange_CursorUp(void);
-static bool8 UpdateItemInfoWindowSlideIn(void);
-static bool8 UpdateItemInfoWindowSlideOut(void);
-static bool8 DoShowPartyMenu(void);
-static bool8 IsItemIconAnimActive(void);
-static bool8 ScrollToBox(void);
-static bool8 UpdateCursorPos(void);
-static bool8 HidePartyMenu(void);
-static bool8 IsMovingItem(void);
-static bool8 IsDisplayMosaicActive(void);
-static bool8 DoWallpaperGfxChange(void);
-static bool8 DoMonPlaceChange(void);
-static bool8 IsMenuLoading(void);
-static bool8 IsRemovingLastPartyMon(void);
-static bool8 CanShiftMon(void);
-static bool8 IsCursorOnCloseBox(void);
-static bool8 IsCursorOnBoxTitle(void);
-static bool8 IsCursorInBox(void);
-static bool8 IsMonBeingMoved(void);
-static bool8 TryStorePartyMonInBox(u8);
 static void Task_InitPokeStorage(u8);
 static void Task_PlaceMon(u8);
 static void Task_ChangeScreen(u8);
@@ -708,72 +603,81 @@ static void Task_HandleWallpapers(u8);
 static void Task_NameBox(u8);
 static void Task_PrintCantStoreMail(u8);
 static void Task_HandleMovingMonFromParty(u8);
-static void SetUpScrollToBox(u8);
-static void StartCursorAnim(u8);
-static void SetMovingMonPriority(u8);
-static void InitMonPlaceChange(u8);
-static void SetMonMarkings(u8);
-static void ShowYesNoWindow(s8);
-static void SetCursorBoxPosition(u8);
-static void AnimateBoxScrollArrows(bool8);
-static void UpdateCloseBoxButtonTilemap(bool8);
-static void CreatePartyMonsSprites(bool8);
-static void PrintMessage(u8 id);
-static s16 HandleMenuInput(void);
-static s8 RunCanReleaseMon(void);
-static u8 GetCursorPosition(void);
-static void TakeItemFromMon(u8, u8);
-static void GiveItemToMon(u8, u8);
-static void MoveItemFromMonToBag(u8, u8);
-static void SwapItemsWithMon(u8, u8);
-static struct Sprite *CreateChooseBoxArrows(u16, u16, u8, u8, u8);
-static void SetWallpaperForCurrentBox(u8);
-static void AddWallpapersMenu(u8);
-static u16 GetMovingItemId(void);
-static void LoadDisplayMonGfx(u16, u32);
-static void SpriteCB_DisplayMonMosaic(struct Sprite *);
-static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
-static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *);
-static void SpriteCB_IncomingBoxTitle(struct Sprite *);
-static void MovePartySprites(s16);
-static void SetPartySlotTilemap(u8, bool8);
-static const u8 *GetMovingItemName(void);
-static void SetMenuText(u8);
-static void TryLoadItemIconAtPos(u8, u8);
-static void TryHideItemIconAtPos(u8, u8);
-static void InitItemIconInCursor(u16);
-static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
-static void DestroyBoxMonIcon(struct Sprite *);
-static void SetBoxSpeciesAndPersonalities(u8);
-static void MovePartySpriteToNextSlot(struct Sprite *, u16);
-static void Task_InitBox(u8);
-static void InitBoxTitle(u8);
-static s8 DetermineBoxScrollDirection(u8);
-static void DrawWallpaper(const void *, s8, u8);
-static s16 GetBoxTitleBaseX(const u8 *);
-static bool8 MonPlaceChange_Shift(void);
-static bool8 MonPlaceChange_Grab(void);
-static bool8 MonPlaceChange_Place(void);
-static bool8 MultiMonPlaceChange_Up(void);
-static bool8 MultiMonPlaceChange_Down(void);
-static void GetCursorCoordsByPos(u8, u8, u16 *, u16 *);
-static void SetShiftedMonData(u8, u8);
-static void SetMovingMonData(u8, u8);
-static void SetPlacedMonData(u8, u8);
-static void PurgeMonOrBoxMon(u8, u8);
-static void SetDisplayMonData(void *, u8);
-static bool32 AtLeastThreeUsableMons(void);
+
+// Input handlers
 static u8 InBoxInput_Normal(void);
 static u8 InBoxInput_MovingMultiple(void);
 static u8 InBoxInput_SelectingMultiple(void);
-static s8 GetMenuItemTextId(u8);
+static u8 HandleInput(void);
+static void AddBoxOptionsMenu(void);
 static u8 SetSelectionMenuTexts(void);
 static bool8 SetMenuTexts_Mon(void);
 static bool8 SetMenuTexts_Item(void);
-static u8 GetBoxWallpaper(u8);
-static void SetBoxWallpaper(u8, u8);
 
-// Functions for moving multiple Pokémon at once
+// Choose box menu
+static void ChooseBoxMenu_CreateSprites(u8);
+static void ChooseBoxMenu_DestroySprites(void);
+static void ChooseBoxMenu_MoveLeft(void);
+static void ChooseBoxMenu_MoveRight(void);
+static void ChooseBoxMenu_PrintInfo(void);
+static void SpriteCB_ChooseBoxArrow(struct Sprite *);
+
+// Options menus
+static void InitMenu(void);
+static void SetMenuText(u8);
+static s8 GetMenuItemTextId(u8);
+static void AddMenu(void);
+static bool8 IsMenuLoading(void);
+static s16 HandleMenuInput(void);
+static void RemoveMenu(void);
+
+// Pokémon sprites
+static void InitMonIconFields(void);
+static void SpriteCB_BoxMonIconScrollOut(struct Sprite *);
+static void GetIncomingBoxMonData(u8);
+static void CreatePartyMonsSprites(bool8);
+static void CompactPartySprites(void);
+static u8 GetNumPartySpritesCompacting(void);
+static void MovePartySpriteToNextSlot(struct Sprite *, u16);
+static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *);
+static void MovePartySprites(s16);
+static void DestroyAllPartyMonIcons(void);
+static void ReshowReleaseMon(void);
+static bool8 ResetReleaseMonSpritePtr(void);
+static void SetMovingMonPriority(u8);
+static void SpriteCB_HeldMon(struct Sprite *);
+static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
+static void DestroyBoxMonIcon(struct Sprite *);
+
+// Pokémon data
+static void MoveMon(void);
+static void PlaceMon(void);
+static void RefreshDisplayMon(void);
+static void SetMovingMonData(u8, u8);
+static void SetPlacedMonData(u8, u8);
+static void PurgeMonOrBoxMon(u8, u8);
+static void SetShiftedMonData(u8, u8);
+static bool8 TryStorePartyMonInBox(u8);
+static void ResetSelectionAfterDeposit(void);
+static void InitReleaseMon(void);
+static bool8 TryHideReleaseMon(void);
+static void InitCanReleaseMonVars(void);
+static void ReleaseMon(void);
+static bool32 AtLeastThreeUsableMons(void);
+static s8 RunCanReleaseMon(void);
+static void SaveMovingMon(void);
+static void LoadSavedMovingMon(void);
+static void InitSummaryScreenData(void);
+static void SetSelectionAfterSummaryScreen(void);
+static void SetMonMarkings(u8);
+static bool8 IsRemovingLastPartyMon(void);
+static bool8 CanShiftMon(void);
+static bool8 IsMonBeingMoved(void);
+static void TryRefreshDisplayMon(void);
+static void ReshowDisplayMon(void);
+static void SetDisplayMonData(void *, u8);
+
+// Moving multiple Pokémon at once
 static void MultiMove_Free(void);
 static bool8 MultiMove_Init(void);
 static bool8 MultiMove_RunFunction(void);
@@ -802,7 +706,7 @@ static void MultiMove_SelectRow(u8, u8, u8);
 static void MultiMove_SelectColumn(u8, u8, u8);
 static void MultiMove_DeselectColumn(u8, u8, u8);
 
-// Functions for Move Items mode
+// Move Items mode
 static bool32 IsItemIconAtPosition(u8, u8);
 static const u32 *GetItemIconPic(u16);
 static const u32 *GetItemIconPalette(u16);
@@ -812,6 +716,25 @@ static void LoadItemIconGfx(u8, const u32 *, const u32 *);
 static void SetItemIconAffineAnim(u8, u8);
 static void SetItemIconActive(u8, bool8);
 static u8 GetItemIconIdxByPosition(u8, u8);
+static void CreateItemIconSprites(void);
+static void TryLoadItemIconAtPos(u8, u8);
+static void TryHideItemIconAtPos(u8, u8);
+static void TakeItemFromMon(u8, u8);
+static void InitItemIconInCursor(u16);
+static void SwapItemsWithMon(u8, u8);
+static void GiveItemToMon(u8, u8);
+static void MoveItemFromMonToBag(u8, u8);
+static void MoveItemFromCursorToBag(void);
+static void MoveHeldItemWithPartyMenu(void);
+static bool8 IsItemIconAnimActive(void);
+static bool8 IsMovingItem(void);
+static const u8 *GetMovingItemName(void);
+static u16 GetMovingItemId(void);
+static void PrintItemDescription(void);
+static void InitItemInfoWindow(void);
+static bool8 UpdateItemInfoWindowSlideIn(void);
+static bool8 UpdateItemInfoWindowSlideOut(void);
+static void DrawItemInfoWindow(u32);
 static void SetItemIconCallback(u8, u8, u8, u8);
 static void SpriteCB_ItemIcon_SetPosToCursor(struct Sprite *);
 static void SpriteCB_ItemIcon_WaitAnim(struct Sprite *);
@@ -821,7 +744,116 @@ static void SpriteCB_ItemIcon_SwapToHand(struct Sprite *);
 static void SpriteCB_ItemIcon_HideParty(struct Sprite *);
 static void SpriteCB_ItemIcon_SwapToMon(struct Sprite *);
 
-// Functions for the tilemap updating utility
+// Cursor
+static void CreateCursorSprites(void);
+static void ToggleCursorAutoAction(void);
+static u8 GetCursorPosition(void);
+static void StartCursorAnim(u8);
+static void TryHideItemAtCursor(void);
+static void TryShowItemAtCursor(void);
+static void InitCursor(void);
+static void InitCursorOnReopen(void);
+static void GetCursorCoordsByPos(u8, u8, u16 *, u16 *);
+static bool8 UpdateCursorPos(void);
+static void DoCursorNewPosUpdate(void);
+static void SetCursorInParty(void);
+static void SetCursorBoxPosition(u8);
+static void ClearSavedCursorPos(void);
+static void SaveCursorPos(void);
+static u8 GetSavedCursorPos(void);
+static void InitMonPlaceChange(u8);
+static bool8 DoMonPlaceChange(void);
+static bool8 MonPlaceChange_Shift(void);
+static bool8 MonPlaceChange_Grab(void);
+static bool8 MonPlaceChange_Place(void);
+static bool8 MultiMonPlaceChange_Up(void);
+static bool8 MultiMonPlaceChange_Down(void);
+static bool8 MonPlaceChange_CursorDown(void);
+static bool8 MonPlaceChange_CursorUp(void);
+static void TrySetCursorFistAnim(void);
+static bool8 IsCursorOnCloseBox(void);
+static bool8 IsCursorOnBoxTitle(void);
+static bool8 IsCursorInBox(void);
+
+// Scroll arrows
+static void CreateBoxScrollArrows(void);
+static void StartBoxScrollArrowsSlide(s8);
+static void StopBoxScrollArrowsSlide(void);
+static void AnimateBoxScrollArrows(bool8);
+static void SpriteCB_Arrow(struct Sprite *);
+static struct Sprite *CreateChooseBoxArrows(u16, u16, u8, u8, u8);
+
+// Box title
+static void InitBoxTitle(u8);
+static void CreateIncomingBoxTitle(u8, s8);
+static void CycleBoxTitleSprites(void);
+static void SpriteCB_IncomingBoxTitle(struct Sprite *);
+static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
+static void CycleBoxTitleColor(void);
+static s16 GetBoxTitleBaseX(const u8 *);
+
+// Wallpaper
+static void SetWallpaperForCurrentBox(u8);
+static bool8 DoWallpaperGfxChange(void);
+static void LoadWallpaperGfx(u8, s8);
+static bool32 WaitForWallpaperGfxLoad(void);
+static void DrawWallpaper(const void *, s8, u8);
+static void TrimOldWallpaper(void *);
+static void AddWallpaperSetsMenu(void);
+static void AddWallpapersMenu(u8);
+static u8 GetBoxWallpaper(u8);
+static void SetBoxWallpaper(u8, u8);
+
+// General box
+static void CreateInitBoxTask(u8);
+static bool8 IsInitBoxActive(void);
+static void Task_InitBox(u8);
+static void SetUpScrollToBox(u8);
+static bool8 ScrollToBox(void);
+static s8 DetermineBoxScrollDirection(u8);
+static void SetCurrentBox(u8);
+
+// Misc
+static void CreateMainMenu(u8, s16 *);
+static u8 GetCurrentBoxOption(void);
+static void ScrollBackground(void);
+static void UpdateCloseBoxButtonFlash(void);
+static void GiveChosenBagItem(void);
+static void SetUpHidePartyMenu(void);
+static void LoadPokeStorageMenuGfx(void);
+static void LoadWaveformSpritePalette(void);
+static void InitPokeStorageBg0(void);
+static void SetScrollingBackground(void);
+static void UpdateBoxToSendMons(void);
+static void InitCursorItemIcon(void);
+static void InitPalettesAndSprites(void);
+static void RefreshDisplayMonData(void);
+static void CreateDisplayMonSprite(void);
+static void CreateMarkingComboSprite(void);
+static void CreateWaveformSprites(void);
+static void ClearBottomWindow(void);
+static void InitSupplementalTilemaps(void);
+static void PrintDisplayMonInfo(void);
+static void UpdateWaveformAnimation(void);
+static void SetPartySlotTilemaps(void);
+static void StopFlashingCloseBoxButton(void);
+static void FreePokeStorageData(void);
+static void UpdatePartySlotColors(void);
+static void StartFlashingCloseBoxButton(void);
+static void SetUpDoShowPartyMenu(void);
+static void StartDisplayMonMosaicEffect(void);
+static bool8 InitPokeStorageWindows(void);
+static bool8 DoShowPartyMenu(void);
+static bool8 HidePartyMenu(void);
+static bool8 IsDisplayMosaicActive(void);
+static void ShowYesNoWindow(s8);
+static void UpdateCloseBoxButtonTilemap(bool8);
+static void PrintMessage(u8 id);
+static void LoadDisplayMonGfx(u16, u32);
+static void SpriteCB_DisplayMonMosaic(struct Sprite *);
+static void SetPartySlotTilemap(u8, bool8);
+
+// Tilemap utility
 static void TilemapUtil_SetRect(u8, u16, u16, u16, u16);
 static void TilemapUtil_Move(u8, u8, s8);
 static void TilemapUtil_SetMap(u8, u8, const void *, u16, u16);
@@ -832,7 +864,7 @@ static void TilemapUtil_Update(u8);
 static void TilemapUtil_DrawPrev(u8);
 static void TilemapUtil_Draw(u8);
 
-// Functions for unknown utility
+// Unknown utility
 static void UnkUtil_Init(struct UnkUtil *, struct UnkUtilData *, u32);
 static void UnkUtil_Run(void);
 static void UnkUtil_CpuRun(struct UnkUtilData *);
@@ -945,8 +977,8 @@ static const u16 sPartySlotEmpty_Tilemap[] =
 
 static const u16 sWaveform_Pal[] = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
 static const u32 sWaveform_Gfx[] = INCBIN_U32("graphics/pokemon_storage/waveform.4bpp");
-static const u16 gUnknown_085726B4[] = INCBIN_U16("graphics/unused/unknown_5726B4.gbapal");
-static const u16 gUnknown_085726F4[] = INCBIN_U16("graphics/unknown/unknown_5726F4.gbapal");
+static const u16 sUnused_Pal[]   = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
+static const u16 sUnknown_Pal[]  = INCBIN_U16("graphics/pokemon_storage/unknown.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
@@ -1022,7 +1054,7 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const struct SpritePalette gWaveformSpritePalette =
 {
-    sWaveform_Pal, PALTAG_10
+    sWaveform_Pal, PALTAG_MISC_2
 };
 
 static const struct SpriteSheet sSpriteSheet_Waveform =
@@ -1161,7 +1193,7 @@ static const union AnimCmd *const sAnims_Waveform[] =
 static const struct SpriteTemplate sSpriteTemplate_Waveform =
 {
     .tileTag = GFXTAG_WAVEFORM,
-    .paletteTag = PALTAG_10,
+    .paletteTag = PALTAG_MISC_2,
     .oam = &sOamData_Waveform,
     .anims = sAnims_Waveform,
     .images = NULL,
@@ -1254,7 +1286,7 @@ static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
     .paletteTag = PALTAG_BOX_TITLE,
     .oam = &sOamData_BoxTitle,
     .anims = sAnims_BoxTitle,
-    .images NULL,
+    .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
@@ -1287,7 +1319,7 @@ static const union AnimCmd *const sAnims_Arrow[] =
 static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
     .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_10,
+    .paletteTag = PALTAG_MISC_2,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,
     .images = NULL,
@@ -1298,6 +1330,12 @@ static const struct SpriteTemplate sSpriteTemplate_Arrow =
 static const u16 sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
 static const u8 sHandCursor_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor.4bpp");
 static const u8 sHandCursorShadow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
+
+
+//------------------------------------------------------------------------------
+//  SECTION: Misc utility
+//------------------------------------------------------------------------------
+
 
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer)
 {
@@ -1461,7 +1499,8 @@ u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
-static void sub_80C7128(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+// Unused
+static void UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
 {
     u16 i;
 
@@ -1476,7 +1515,8 @@ static void sub_80C7128(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, 
     }
 }
 
-static void sub_80C71A4(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
+// Unused
+static void UnusedWriteRectDma(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
 {
     u16 i;
 
@@ -1485,6 +1525,16 @@ static void sub_80C71A4(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 h
     for (i = 0; i < height; dest += 0x20, i++)
         Dma3FillLarge16_(0, dest, width);
 }
+
+
+//------------------------------------------------------------------------------
+//  SECTION: Main menu
+//
+//  The below functions generally handle the PC main menu where the main
+//  options can be selected (Withdraw, Deposit, etc.), as well as exiting
+//  Pokémon Storage back to this menu.
+//------------------------------------------------------------------------------
+
 
 enum {
     STATE_LOAD,
@@ -1714,6 +1764,16 @@ void ResetPokemonStorageSystem(void)
     ResetWaldaWallpaper();
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Choose Box menu
+//
+//  The below functions handle the popup menu that allows the player to cycle
+//  through the boxes and select one. Used when storing Pokémon in Deposit mode
+//  and for the Jump feature.
+//------------------------------------------------------------------------------
+
+
 static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal)
 {
     struct SpritePalette palette =
@@ -1919,6 +1979,17 @@ static void SpriteCB_ChooseBoxArrow(struct Sprite *sprite)
     }
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Main tasks
+//
+//  Below are the main task callbacks that handle the primary actions the
+//  player can take in the PC. The most 'important' of these tasks is the
+//  primary one, Task_PokeStorageMain. Also included are some basic
+//  initialization functions.
+//------------------------------------------------------------------------------
+
+
 static void VBlankCB_PokeStorage(void)
 {
     LoadOam();
@@ -1989,7 +2060,7 @@ static void ResetAllBgCoords(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
 }
 
-static void sub_80C7E98(void)
+static void ResetForPokeStorage(void)
 {
     ResetPaletteFade();
     ResetSpriteData();
@@ -2006,7 +2077,7 @@ static void sub_80C7E98(void)
     sStorage->closeBoxFlashing = FALSE;
 }
 
-static void sub_80C7F1C(void)
+static void InitStartingPosData(void)
 {
     ClearSavedCursorPos();
     sInPartyMenu = (sStorage->boxOption == OPTION_DEPOSIT);
@@ -2036,7 +2107,7 @@ static void Task_InitPokeStorage(u8 taskId)
     case 0:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        sub_80C7E98();
+        ResetForPokeStorage();
         if (sStorage->isReopening)
         {
             switch (sWhichToReshow)
@@ -2074,14 +2145,14 @@ static void Task_InitPokeStorage(u8 taskId)
     case 3:
         ResetAllBgCoords();
         if (!sStorage->isReopening)
-            sub_80C7F1C();
+            InitStartingPosData();
         break;
     case 4:
         InitMonIconFields();
         if (!sStorage->isReopening)
-            sub_80CD36C();
+            InitCursor();
         else
-            sub_80CD3EC();
+            InitCursorOnReopen();
         break;
     case 5:
         if (!MultiMove_Init())
@@ -2092,11 +2163,11 @@ static void Task_InitPokeStorage(u8 taskId)
         else
         {
             SetScrollingBackground();
-            sub_80CAC1C();
+            InitPokeStorageBg0();
         }
         break;
     case 6:
-        sub_80CA0D8();
+        InitPalettesAndSprites();
         break;
     case 7:
         InitSupplementalTilemaps();
@@ -2118,7 +2189,7 @@ static void Task_InitPokeStorage(u8 taskId)
         else
         {
             CreateItemIconSprites();
-            sub_80CAEAC();
+            InitCursorItemIcon();
         }
         break;
     case 10:
@@ -2795,7 +2866,7 @@ static void Task_DepositMenu(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_DEPOSIT_IN_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_7, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
         CreateChooseBoxMenuSprites(sDepositBoxId);
         sStorage->state++;
         break;
@@ -2836,7 +2907,7 @@ static void Task_DepositMenu(u8 taskId)
     case 3:
         if (GetNumPartySpritesCompacting() == 0)
         {
-            sub_80CE22C();
+            ResetSelectionAfterDeposit();
             StartDisplayMonMosaicEffect();
             UpdatePartySlotColors();
             SetPokeStorageTask(Task_PokeStorageMain);
@@ -3450,7 +3521,7 @@ static void Task_JumpBox(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_JUMP_TO_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_7, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
         CreateChooseBoxMenuSprites(StorageGetCurrentBox());
         sStorage->state++;
         break;
@@ -3601,7 +3672,7 @@ static void Task_OnCloseBoxPressed(u8 taskId)
     case 4:
         if (!IsComputerScreenCloseEffectActive())
         {
-            sub_80CABE0();
+            UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
@@ -3662,7 +3733,7 @@ static void Task_OnBPressed(u8 taskId)
     case 4:
         if (!IsComputerScreenCloseEffectActive())
         {
-            sub_80CABE0();
+            UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
@@ -3737,6 +3808,16 @@ static void FreePokeStorageData(void)
     FreeAllWindowBuffers();
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Misc
+//
+//  No real uniform section below. Misc functions including more initialization,
+//  showing/hiding the party menu, updating the Close Box button, printing
+//  messages, doing the mosaic effect when transitioning between Pokémon, etc.
+//------------------------------------------------------------------------------
+
+
 static void SetScrollingBackground(void)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
@@ -3778,11 +3859,11 @@ static void LoadWaveformSpritePalette(void)
     LoadSpritePalette(&gWaveformSpritePalette);
 }
 
-static void sub_80CA0D8(void)
+static void InitPalettesAndSprites(void)
 {
     LoadPalette(sInterface_Pal, 0, sizeof(sInterface_Pal));
     LoadPalette(sPkmnDataGray_Pal, 0x20, sizeof(sPkmnDataGray_Pal));
-    LoadPalette(gUnknown_085726F4, 0xF0, sizeof(gUnknown_085726F4));
+    LoadPalette(sUnknown_Pal, 0xF0, sizeof(sUnknown_Pal));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         LoadPalette(sBg_Pal, 0x30, sizeof(sBg_Pal));
     else
@@ -4003,7 +4084,7 @@ static void InitSupplementalTilemaps(void)
 
 static void SetUpShowPartyMenu(void)
 {
-    sStorage->partyMenuUnused = 20;
+    sStorage->partyMenuUnused1 = 20;
     sStorage->partyMenuY = 2;
     sStorage->partyMenuMoveTimer = 0;
     CreatePartyMonsSprites(FALSE);
@@ -4014,7 +4095,7 @@ static bool8 ShowPartyMenu(void)
     if (sStorage->partyMenuMoveTimer == 20)
         return FALSE;
 
-    sStorage->partyMenuUnused--;
+    sStorage->partyMenuUnused1--;
     sStorage->partyMenuY++;
     TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, 1);
     TilemapUtil_Update(TILEMAPID_PARTY_MENU);
@@ -4033,7 +4114,7 @@ static bool8 ShowPartyMenu(void)
 
 static void SetUpHidePartyMenu(void)
 {
-    sStorage->partyMenuUnused = 0;
+    sStorage->partyMenuUnused1 = 0;
     sStorage->partyMenuY = 22;
     sStorage->partyMenuMoveTimer = 0;
     if (sStorage->boxOption == OPTION_MOVE_ITEMS)
@@ -4044,7 +4125,7 @@ static bool8 HidePartyMenu(void)
 {
     if (sStorage->partyMenuMoveTimer != 20)
     {
-        sStorage->partyMenuUnused++;
+        sStorage->partyMenuUnused1++;
         sStorage->partyMenuY--;
         TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, -1);
         TilemapUtil_Update(TILEMAPID_PARTY_MENU);
@@ -4186,7 +4267,7 @@ static bool8 DoShowPartyMenu(void)
     return TRUE;
 }
 
-static void sub_80CABE0(void)
+static void UpdateBoxToSendMons(void)
 {
     if (sLastUsedBox != StorageGetCurrentBox())
     {
@@ -4195,7 +4276,7 @@ static void sub_80CABE0(void)
     }
 }
 
-static void sub_80CAC1C(void)
+static void InitPokeStorageBg0(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
     LoadUserWindowBorderGfx(1, 2, 208);
@@ -4307,7 +4388,7 @@ static u8 GetCurrentBoxOption(void)
     return sCurrentBoxOption;
 }
 
-static void sub_80CAEAC(void)
+static void InitCursorItemIcon(void)
 {
     if (!IsCursorOnBoxTitle())
     {
@@ -4324,6 +4405,16 @@ static void sub_80CAEAC(void)
     }
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Pokémon sprites
+//
+//  The below functions generally handle the Pokémon icon sprites, including
+//  moving them with a scrolling box, shifting the party sprites, and
+//  animating released Pokémon.
+//------------------------------------------------------------------------------
+
+
 static void InitMonIconFields(void)
 {
     u16 i;
@@ -4339,7 +4430,7 @@ static void InitMonIconFields(void)
         sStorage->boxMonsSprites[i] = NULL;
 
     sStorage->movingMonSprite = NULL;
-    sStorage->field_78C = 0;
+    sStorage->unkUnused1 = 0;
 }
 
 static u8 GetMonIconPriorityByCursorPos(void)
@@ -4538,7 +4629,7 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                     sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
                     sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
                     sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
-                    if (GetBoxMonDataAt(sStorage->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
+                    if (GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
                         sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
                     iconsCreated++;
                 }
@@ -4565,7 +4656,7 @@ static void InitBoxMonIconScroll(u8 boxId, s8 direction)
     sStorage->iconScrollDistance = 32;
     sStorage->iconScrollSpeed = -(6 * direction);
     sStorage->iconScrollNumIncoming = 0;
-    SetBoxSpeciesAndPersonalities(boxId);
+    GetIncomingBoxMonData(boxId);
     if (direction > 0)
         sStorage->iconScrollCurColumn = 0;
     else
@@ -4625,7 +4716,7 @@ static bool8 UpdateBoxMonIconScroll(void)
     return TRUE;
 }
 
-static void SetBoxSpeciesAndPersonalities(u8 boxId)
+static void GetIncomingBoxMonData(u8 boxId)
 {
     s32 i, j, boxPosition;
 
@@ -4641,7 +4732,7 @@ static void SetBoxSpeciesAndPersonalities(u8 boxId)
         }
     }
 
-    sStorage->field_C5C = boxId;
+    sStorage->incomingBoxId = boxId;
 }
 
 static void DestroyBoxMonIconAtPosition(u8 boxPosition)
@@ -4867,7 +4958,7 @@ static void SetMovingMonSprite(u8 mode, u8 id)
     sStorage->movingMonSprite->subpriority = 7;
 }
 
-static void sub_80CBCAC(u8 boxId, u8 position)
+static void SetPlacedMonSprite(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT) // party mon
     {
@@ -4885,47 +4976,47 @@ static void sub_80CBCAC(u8 boxId, u8 position)
     sStorage->movingMonSprite = NULL;
 }
 
-static void sub_80CBD5C(u8 boxId, u8 position)
+static void SaveMonSpriteAtPos(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT) // party mon
-        sStorage->field_B00 = &sStorage->partySprites[position];
+        sStorage->shiftMonSpritePtr = &sStorage->partySprites[position];
     else
-        sStorage->field_B00 = &sStorage->boxMonsSprites[position];
+        sStorage->shiftMonSpritePtr = &sStorage->boxMonsSprites[position];
 
     sStorage->movingMonSprite->callback = SpriteCallbackDummy;
-    sStorage->field_C5D = 0;
+    sStorage->shiftTimer = 0;
 }
 
-static bool8 sub_80CBDC4(void)
+static bool8 MoveShiftingMons(void)
 {
-    if (sStorage->field_C5D == 16)
+    if (sStorage->shiftTimer == 16)
         return FALSE;
 
-    sStorage->field_C5D++;
-    if (sStorage->field_C5D & 1)
+    sStorage->shiftTimer++;
+    if (sStorage->shiftTimer & 1)
     {
-        (*sStorage->field_B00)->pos1.y--;
+        (*sStorage->shiftMonSpritePtr)->pos1.y--;
         sStorage->movingMonSprite->pos1.y++;
     }
 
-    (*sStorage->field_B00)->pos2.x = gSineTable[sStorage->field_C5D * 8] / 16;
-    sStorage->movingMonSprite->pos2.x = -(gSineTable[sStorage->field_C5D * 8] / 16);
-    if (sStorage->field_C5D == 8)
+    (*sStorage->shiftMonSpritePtr)->pos2.x = gSineTable[sStorage->shiftTimer * 8] / 16;
+    sStorage->movingMonSprite->pos2.x = -(gSineTable[sStorage->shiftTimer * 8] / 16);
+    if (sStorage->shiftTimer == 8)
     {
-        sStorage->movingMonSprite->oam.priority = (*sStorage->field_B00)->oam.priority;
-        sStorage->movingMonSprite->subpriority = (*sStorage->field_B00)->subpriority;
-        (*sStorage->field_B00)->oam.priority = GetMonIconPriorityByCursorPos();
-        (*sStorage->field_B00)->subpriority = 7;
+        sStorage->movingMonSprite->oam.priority = (*sStorage->shiftMonSpritePtr)->oam.priority;
+        sStorage->movingMonSprite->subpriority = (*sStorage->shiftMonSpritePtr)->subpriority;
+        (*sStorage->shiftMonSpritePtr)->oam.priority = GetMonIconPriorityByCursorPos();
+        (*sStorage->shiftMonSpritePtr)->subpriority = 7;
     }
 
-    if (sStorage->field_C5D == 16)
+    if (sStorage->shiftTimer == 16)
     {
         struct Sprite *sprite = sStorage->movingMonSprite;
-        sStorage->movingMonSprite = (*sStorage->field_B00);
-        *sStorage->field_B00 = sprite;
+        sStorage->movingMonSprite = (*sStorage->shiftMonSpritePtr);
+        *sStorage->shiftMonSpritePtr = sprite;
 
         sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
-        (*sStorage->field_B00)->callback = SpriteCallbackDummy;
+        (*sStorage->shiftMonSpritePtr)->callback = SpriteCallbackDummy;
     }
 
     return TRUE;
@@ -5091,6 +5182,14 @@ static void DestroyBoxMonIcon(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: General box
+//
+//  Some basic box functions, including initializing the box and scrolling.
+//------------------------------------------------------------------------------
+
+
 #define tState  data[0]
 #define tDmaIdx data[1]
 #define tBoxId  data[2]
@@ -5221,6 +5320,12 @@ static s8 DetermineBoxScrollDirection(u8 boxId)
     return (i < TOTAL_BOXES_COUNT / 2) ? 1 : -1;
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Wallpaper gfx
+//------------------------------------------------------------------------------
+
+
 static void SetWallpaperForCurrentBox(u8 wallpaperId)
 {
     u8 boxId = StorageGetCurrentBox();
@@ -5233,7 +5338,7 @@ static bool8 DoWallpaperGfxChange(void)
     switch (sStorage->wallpaperChangeState)
     {
     case 0:
-        BeginNormalPaletteFade(sStorage->boxTitlePalBits, 1, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(sStorage->wallpaperPalBits, 1, 0, 16, RGB_WHITEALPHA);
         sStorage->wallpaperChangeState++;
         break;
     case 1:
@@ -5248,7 +5353,7 @@ static bool8 DoWallpaperGfxChange(void)
         if (WaitForWallpaperGfxLoad() == TRUE)
         {
             CycleBoxTitleColor();
-            BeginNormalPaletteFade(sStorage->boxTitlePalBits, 1, 16, 0, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(sStorage->wallpaperPalBits, 1, 16, 0, RGB_WHITEALPHA);
             sStorage->wallpaperChangeState++;
         }
         break;
@@ -5369,6 +5474,12 @@ static void TrimOldWallpaper(void *tilemap)
     }
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Box Title
+//------------------------------------------------------------------------------
+
+
 static void InitBoxTitle(u8 boxId)
 {
     u8 tagIndex;
@@ -5386,11 +5497,11 @@ static void InitBoxTitle(u8 boxId)
     sStorage->boxTitlePal[14] = sBoxTitleColors[wallpaperId][0]; // Shadow color
     sStorage->boxTitlePal[15] = sBoxTitleColors[wallpaperId][1]; // Text Color
     LoadSpritePalettes(palettes);
-    sStorage->boxTitlePalBits = 0x3f0;
+    sStorage->wallpaperPalBits = 0x3f0;
 
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitlePalOffset = 0x10e + 16 * tagIndex;
-    sStorage->boxTitlePalBits |= 0x10000 << tagIndex;
+    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
 
     // The below seems intended to have separately tracked
     // the incoming wallpaper title's palette, but as they now
@@ -5398,7 +5509,7 @@ static void InitBoxTitle(u8 boxId)
     // this is redundant along with the use of boxTitleAltPalOffset
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitleAltPalOffset = 0x10e + 16 * tagIndex;
-    sStorage->boxTitlePalBits |= 0x10000 << tagIndex;
+    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
     DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
@@ -5525,6 +5636,12 @@ static s16 GetBoxTitleBaseX(const u8 *string)
 {
     return DISPLAY_WIDTH - 64 - GetStringWidth(1, string, 0) / 2;
 }
+
+
+//------------------------------------------------------------------------------
+//  SECTION: Scroll arrows
+//------------------------------------------------------------------------------
+
 
 // Sprite data for box scroll arrows
 #define sState data[0]
@@ -5673,7 +5790,16 @@ static struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority
     return &gSprites[spriteId];
 }
 
-static void sub_80CD36C(void)
+
+//------------------------------------------------------------------------------
+//  SECTION: Cursor movement
+//
+//  The functions below generally handle the cursor's movement, including
+//  moving around the box and picking up/putting down Pokémon.
+//------------------------------------------------------------------------------
+
+
+static void InitCursor(void)
 {
     if (sStorage->boxOption != OPTION_DEPOSIT)
         sCursorArea = CURSOR_AREA_IN_BOX;
@@ -5692,7 +5818,7 @@ static void sub_80CD36C(void)
     TryRefreshDisplayMon();
 }
 
-static void sub_80CD3EC(void)
+static void InitCursorOnReopen(void)
 {
     CreateCursorSprites();
     ReshowDisplayMon();
@@ -6111,23 +6237,23 @@ static bool8 MonPlaceChange_Shift(void)
         switch (sCursorArea)
         {
         case CURSOR_AREA_IN_PARTY:
-            sStorage->field_D91 = TOTAL_BOXES_COUNT;
+            sStorage->shiftBoxId = TOTAL_BOXES_COUNT;
             break;
         case CURSOR_AREA_IN_BOX:
-            sStorage->field_D91 = StorageGetCurrentBox();
+            sStorage->shiftBoxId = StorageGetCurrentBox();
             break;
         default:
             return FALSE;
         }
         StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
-        sub_80CBD5C(sStorage->field_D91, sCursorPosition);
+        SaveMonSpriteAtPos(sStorage->shiftBoxId, sCursorPosition);
         sStorage->monPlaceChangeState++;
         break;
     case 1:
-        if (!sub_80CBDC4())
+        if (!MoveShiftingMons())
         {
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
-            SetShiftedMonData(sStorage->field_D91, sCursorPosition);
+            SetShiftedMonData(sStorage->shiftBoxId, sCursorPosition);
             sStorage->monPlaceChangeState++;
         }
         break;
@@ -6179,6 +6305,16 @@ static bool8 MonPlaceChange_CursorUp(void)
     return TRUE;
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Pokémon data
+//
+//  The functions below handle moving Pokémon data around while using the PC,
+//  including changing the positions of Pokémon, releasing Pokémon, viewing the
+//  summary screen, and updating the display of the currently selected Pokémon.
+//------------------------------------------------------------------------------
+
+
 static void MoveMon(void)
 {
     switch (sCursorArea)
@@ -6209,12 +6345,12 @@ static void PlaceMon(void)
     {
     case CURSOR_AREA_IN_PARTY:
         SetPlacedMonData(TOTAL_BOXES_COUNT, sCursorPosition);
-        sub_80CBCAC(TOTAL_BOXES_COUNT, sCursorPosition);
+        SetPlacedMonSprite(TOTAL_BOXES_COUNT, sCursorPosition);
         break;
     case CURSOR_AREA_IN_BOX:
         boxId = StorageGetCurrentBox();
         SetPlacedMonData(boxId, sCursorPosition);
-        sub_80CBCAC(boxId, sCursorPosition);
+        SetPlacedMonSprite(boxId, sCursorPosition);
         break;
     default:
         return;
@@ -6301,7 +6437,7 @@ static bool8 TryStorePartyMonInBox(u8 boxId)
     return TRUE;
 }
 
-static void sub_80CE22C(void)
+static void ResetSelectionAfterDeposit(void)
 {
     StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
     TryRefreshDisplayMon();
@@ -6867,6 +7003,14 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     }
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Input handlers
+//
+//  The functions below process context-dependent input
+//------------------------------------------------------------------------------
+
+
 static u8 HandleInput_InBox(void)
 {
     switch (sStorage->inBoxMovingMode)
@@ -7344,7 +7488,7 @@ static u8 HandleInput_OnBox(void)
         if (JOY_NEW(A_BUTTON))
         {
             AnimateBoxScrollArrows(FALSE);
-            AddBoxMenu();
+            AddBoxOptionsMenu();
             return INPUT_BOX_OPTIONS;
         }
 
@@ -7470,7 +7614,7 @@ static u8 HandleInput(void)
     return INPUT_NONE;
 }
 
-static void AddBoxMenu(void)
+static void AddBoxOptionsMenu(void)
 {
     InitMenu();
     SetMenuText(MENU_JUMP);
@@ -7588,6 +7732,14 @@ static bool8 SetMenuTexts_Item(void)
     return TRUE;
 }
 
+
+//------------------------------------------------------------------------------
+//  SECTION: Cursor
+//
+//  The functions below handle a few of the generic cursor features.
+//------------------------------------------------------------------------------
+
+
 static void SpriteCB_CursorShadow(struct Sprite *sprite)
 {
     sprite->pos1.x = sStorage->cursorSprite->pos1.x;
@@ -7608,7 +7760,7 @@ static void CreateCursorSprites(void)
 
     struct SpritePalette spritePalettes[] =
     {
-        {sHandCursor_Pal, PALTAG_7},
+        {sHandCursor_Pal, PALTAG_MISC_1},
         {}
     };
 
@@ -7658,7 +7810,7 @@ static void CreateCursorSprites(void)
     static const struct SpriteTemplate sSpriteTemplate_Cursor =
     {
         .tileTag = GFXTAG_CURSOR,
-        .paletteTag = PALTAG_10,
+        .paletteTag = PALTAG_MISC_2,
         .oam = &sOamData_Cursor,
         .anims = sAnims_Cursor,
         .images = NULL,
@@ -7669,7 +7821,7 @@ static void CreateCursorSprites(void)
     static const struct SpriteTemplate sSpriteTemplate_CursorShadow =
     {
         .tileTag = GFXTAG_CURSOR_SHADOW,
-        .paletteTag = PALTAG_10,
+        .paletteTag = PALTAG_MISC_2,
         .oam = &sOamData_CursorShadow,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -7679,8 +7831,8 @@ static void CreateCursorSprites(void)
 
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
-    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(PALTAG_10); // White hand, normal
-    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(PALTAG_7);  // Yellow hand, when auto-action is on
+    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(PALTAG_MISC_2); // White hand, normal
+    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(PALTAG_MISC_1); // Yellow hand, when auto-action is on
 
     GetCursorCoordsByPos(sCursorArea, sCursorPosition, &x, &y);
     spriteId = CreateSprite(&sSpriteTemplate_Cursor, x, y, 6);
@@ -7774,6 +7926,15 @@ static void TryShowItemAtCursor(void)
     if (sCursorArea == CURSOR_AREA_IN_BOX)
         TryLoadItemIconAtPos(CURSOR_AREA_IN_BOX, sCursorPosition);
 }
+
+
+//------------------------------------------------------------------------------
+//  SECTION: Menu
+//
+//  The functions below handle the generic options menu that comes up whenever
+//  something in the PC is selected.
+//------------------------------------------------------------------------------
+
 
 static void InitMenu(void)
 {
@@ -8947,14 +9108,14 @@ static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    CpuFastFill(0, sStorage->field_42C4, 0x200);
+    CpuFastFill(0, sStorage->itemIconBuffer, 0x200);
     LZ77UnCompWram(itemTiles, sStorage->tileBuffer);
     for (i = 0; i < 3; i++)
-        CpuFastCopy(&sStorage->tileBuffer[i * 0x60], &sStorage->field_42C4[i * 0x80], 0x60);
+        CpuFastCopy(&sStorage->tileBuffer[i * 0x60], &sStorage->itemIconBuffer[i * 0x80], 0x60);
 
-    CpuFastCopy(sStorage->field_42C4, sStorage->itemIcons[id].tiles, 0x200);
-    LZ77UnCompWram(itemPal, sStorage->field_42C4);
-    LoadPalette(sStorage->field_42C4, sStorage->itemIcons[id].palIndex, 0x20);
+    CpuFastCopy(sStorage->itemIconBuffer, sStorage->itemIcons[id].tiles, 0x200);
+    LZ77UnCompWram(itemPal, sStorage->itemIconBuffer);
+    LoadPalette(sStorage->itemIconBuffer, sStorage->itemIcons[id].palIndex, 0x20);
 }
 
 static void SetItemIconAffineAnim(u8 id, u8 animNum)
