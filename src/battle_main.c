@@ -611,22 +611,22 @@ static void CB2_InitBattleInternal(void)
     CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
 
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
-    SetGpuReg(REG_OFFSET_WIN0H, 240);
-    SetGpuReg(REG_OFFSET_WIN0V, 0x5051);
+    SetGpuReg(REG_OFFSET_WIN0H, DISPLAY_WIDTH);
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1));
     SetGpuReg(REG_OFFSET_WININ, 0);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
 
-    gBattle_WIN0H = 240;
+    gBattle_WIN0H = DISPLAY_WIDTH;
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER)
     {
-        gBattle_WIN0V = 159;
-        gBattle_WIN1H = 240;
+        gBattle_WIN0V = DISPLAY_HEIGHT - 1;
+        gBattle_WIN1H = DISPLAY_WIDTH;
         gBattle_WIN1V = 32;
     }
     else
     {
-        gBattle_WIN0V = 0x5051;
+        gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
         ScanlineEffect_Clear();
 
         i = 0;
@@ -2047,7 +2047,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 void sub_8038A04(void) // unused
 {
     if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F)
-        SetGpuReg(REG_OFFSET_BG0CNT, 0x9800);
+        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_SCREENBASE(24) | BGCNT_TXT256x512);
 }
 
 void VBlankCB_Battle(void)

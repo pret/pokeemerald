@@ -353,7 +353,7 @@ static void AnimTask_DigBounceMovement(u8 taskId)
             else
                 gBattle_BG2_Y = task->data[13] - task->data[5];
 
-            gSprites[task->data[10]].pos2.x = 272 - gSprites[task->data[10]].pos1.x;
+            gSprites[task->data[10]].pos2.x = DISPLAY_WIDTH + 32 - gSprites[task->data[10]].pos1.x;
             task->data[0]++;
         }
         break;
@@ -405,7 +405,7 @@ static void AnimTask_DigSetVisibleUnderground(u8 taskId)
         task->data[10] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         gSprites[task->data[10]].invisible = FALSE;
         gSprites[task->data[10]].pos2.x = 0;
-        gSprites[task->data[10]].pos2.y = 160 - gSprites[task->data[10]].pos1.y;
+        gSprites[task->data[10]].pos2.y = DISPLAY_HEIGHT - gSprites[task->data[10]].pos1.y;
         task->data[0]++;
         break;
     case 1:

@@ -4777,7 +4777,7 @@ static void CreatePartyMonsSprites(bool8 visible)
     {
         for (i = 0; i < count; i++)
         {
-            sStorage->partySprites[i]->pos1.y -= 160;
+            sStorage->partySprites[i]->pos1.y -= DISPLAY_HEIGHT;
             sStorage->partySprites[i]->invisible = TRUE;
         }
     }

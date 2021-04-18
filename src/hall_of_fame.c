@@ -1398,7 +1398,7 @@ static bool8 CreateHofConfettiSprite(void)
     u8 spriteID;
     struct Sprite* sprite;
 
-    s16 posX = Random() % 240;
+    s16 posX = Random() % DISPLAY_WIDTH;
     s16 posY = -(Random() % 8);
 
     spriteID = CreateSprite(&sSpriteTemplate_HofConfetti, posX, posY, 0);
@@ -1505,7 +1505,7 @@ static void Task_DoDomeConfetti(u8 taskId)
             id = ConfettiUtil_AddNew(&sOamData_Confetti, 
                               TAG_CONFETTI, 
                               TAG_CONFETTI, 
-                              Random() % 240, 
+                              Random() % DISPLAY_WIDTH, 
                               -(Random() % 8), 
                               Random() % ARRAY_COUNT(sAnims_Confetti), 
                               id);

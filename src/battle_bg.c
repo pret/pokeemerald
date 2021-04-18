@@ -1134,8 +1134,8 @@ void DrawBattleEntryBackground(void)
         CopyToBgTilemapBuffer(2, gUnknown_08D779D8, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
-        SetGpuReg(REG_OFFSET_WININ, 0x36);
-        SetGpuReg(REG_OFFSET_WINOUT, 0x36);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
         gBattle_BG1_Y = 0xFF5C;
         gBattle_BG2_Y = 0xFF5C;
         LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
