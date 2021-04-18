@@ -55,6 +55,12 @@ callfunc ScrFunc_bufferlivemonspeciesname
 .byte \out
 .endm
 
+.macro emote obj:req id:req
+callfunc ScrFunc_emote
+.byte \obj
+.byte \id
+.endm
+
 EventScript_Follower::
   lock
   faceplayer
@@ -73,6 +79,7 @@ EventScript_Follower::
 EventScript_FollowerFly::
   callfunc ScrFunc_followerfly
 EventScript_FollowerEnd::
+  waitfieldeffect FLDEFF_EMOTE
   release
   end
 
@@ -147,16 +154,12 @@ EventScript_FollowerBurnPainful::
   return
 
 @ Message address must be loaded into bank 0
-EventScript_FollowerGeneric:: @ same as Std_MsgboxDefault
+EventScript_FollowerGeneric:: @ similar to Std_MsgboxDefault
+  waitfieldeffect FLDEFF_EMOTE
   message 0x0
   waitmessage
   waitbuttonpress
   return
-
-EventScript_FollowerLove::
-  applymovement 0xFE ContestHall_Movement_Heart
-  waitmovement 0xFE
-  goto EventScript_FollowerGeneric
 
 EnterPokeballMovement::
   .byte 0x9F @ EnterPokeball

@@ -450,8 +450,9 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_LUGIA                   0x1121
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
-#define OBJ_EVENT_PAL_TAG_DYNAMIC 0x1124
-#define OBJ_EVENT_PAL_TAG_LIGHT 0x8001
+#define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
+#define OBJ_EVENT_PAL_TAG_EMOTES                  0x1125
+#define OBJ_EVENT_PAL_TAG_LIGHT                   0x8001
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -500,6 +501,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     {gObjectEventPal_Npc1, OBJ_EVENT_PAL_TAG_DYNAMIC},
     {gObjectEventPaletteLight, OBJ_EVENT_PAL_TAG_LIGHT},
+    {gObjectEventPaletteEmotes, OBJ_EVENT_PAL_TAG_EMOTES},
     {NULL,                  0x0000},
 };
 
@@ -1731,6 +1733,8 @@ enum {
   FOLLOWER_EMOTION_LOVE,
   FOLLOWER_EMOTION_SURPRISE,
   FOLLOWER_EMOTION_CURIOUS,
+  FOLLOWER_EMOTION_MUSIC,
+  FOLLOWER_EMOTION_POISONED,
   FOLLOWER_EMOTION_LENGTH,
 };
 
@@ -1742,21 +1746,45 @@ static const struct FollowerMessagePool followerBasicMessages[] = {
   [FOLLOWER_EMOTION_UPSET] = {gFollowerUpsetMessages, EventScript_FollowerGeneric, N_FOLLOWER_UPSET_MESSAGES},
   [FOLLOWER_EMOTION_ANGRY] = {gFollowerAngryMessages, EventScript_FollowerGeneric, N_FOLLOWER_ANGRY_MESSAGES},
   [FOLLOWER_EMOTION_PENSIVE] = {gFollowerPensiveMessages, EventScript_FollowerGeneric, N_FOLLOWER_PENSIVE_MESSAGES},
-  [FOLLOWER_EMOTION_LOVE] = {gFollowerLoveMessages, EventScript_FollowerLove, N_FOLLOWER_LOVE_MESSAGES},
+  [FOLLOWER_EMOTION_LOVE] = {gFollowerLoveMessages, EventScript_FollowerGeneric, N_FOLLOWER_LOVE_MESSAGES},
   [FOLLOWER_EMOTION_SURPRISE] = {gFollowerSurpriseMessages, EventScript_FollowerGeneric, N_FOLLOWER_SURPRISE_MESSAGES},
   [FOLLOWER_EMOTION_CURIOUS] = {gFollowerCuriousMessages, EventScript_FollowerGeneric, N_FOLLOWER_CURIOUS_MESSAGES},
+  [FOLLOWER_EMOTION_POISONED] = {gFollowerPoisonedMessages, EventScript_FollowerGeneric, N_FOLLOWER_POISONED_MESSAGES},
+};
+
+// Display an emote above an object event
+// Note that this is not a movement action
+static void ObjectEventEmote(struct ObjectEvent *objEvent, u8 emotion) {
+  emotion %= FOLLOWER_EMOTION_LENGTH;
+  ObjectEventGetLocalIdAndMap(objEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
+  gFieldEffectArguments[7] = emotion;
+  FieldEffectStart(FLDEFF_EMOTE);
+}
+
+// Script-accessible version of the above
+bool8 ScrFunc_emote(struct ScriptContext *ctx) {
+  u8 localId = ScriptReadByte(ctx);
+  u8 emotion = ScriptReadByte(ctx) % FOLLOWER_EMOTION_LENGTH;
+  u8 i = GetObjectEventIdByLocalId(localId);
+  if (i < OBJECT_EVENTS_COUNT)
+    ObjectEventEmote(&gObjectEvents[i], emotion);
+  return FALSE;
+}
+
+struct SpecialEmote { // Used for storing conditional emotes
+  const u8 * script;
+  u16 index;
+  u8 emotion;
 };
 
 // Call an applicable follower message script
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
-  u16 value;
   u16 species;
   u32 behavior;
   s16 health_percent;
-  u8 map_region;
   u8 friendship;
-  const u8 *message_choices[10] = {0};
+  struct SpecialEmote cond_emotes[16] = {0};
   u8 n_choices = 0;
   struct ObjectEvent *objEvent = GetFollowerObject();
   struct Pokemon *mon = GetFirstLiveMon();
@@ -1771,44 +1799,22 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     ScriptJump(ctx, EventScript_FollowerEnd);
   behavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
   species = GetMonData(mon, MON_DATA_SPECIES);
-  // 1. Puddle splash or wet feet
-  if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
-    if (SpeciesHasType(species, TYPE_FIRE))
-      message_choices[n_choices++] = EventScript_FollowerUnhappyToBeWet;
-    else if (SpeciesToGraphicsInfo(species, 0)->tracks) // if follower is grounded
-      message_choices[n_choices++] = EventScript_FollowerSplashesAbout;
-  }
-  // 2. Weather-based messages
-  if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
-    if (SpeciesHasType(species, TYPE_FIRE))
-      message_choices[n_choices++] = EventScript_FollowerUnhappyFace;
-    else if (SpeciesHasType(species, TYPE_WATER) || SpeciesHasType(species, TYPE_GRASS))
-      message_choices[n_choices++] = EventScript_FollowerHappyRain;
-  }
-  // 3. Health & status-based messages
-  health_percent = mon->hp * 100 / mon->maxHP;
-  if (health_percent <= 20)
-    message_choices[n_choices++] = EventScript_FollowerAboutToFall;
-  else if (health_percent < 50 || mon->status & 0x40) // STATUS1_PARALYSIS
-    message_choices[n_choices++] = EventScript_FollowerTryingToKeepUp;
-  // 4. More status messages
-  if (mon->status & (0x20 | 0x8)) // STATUS1_FREEZE | STATUS1_POISON
-    message_choices[n_choices++] = EventScript_FollowerIsShivering;
-  else if (mon->status & 0x10) // STATUS1_BURN
-    message_choices[n_choices++] = EventScript_FollowerBurnPainful;
-  // TODO: What influences a follower's emotion ?
-  // Happy, neutral, sad, upset, angry, daydream, love, surprise, quizzical
-  // Friendship: boost to 'happy' and 'love'
-  // Weather: Based on type
-  // Status/low health: boost to unhappy, poisoned
-  // Happy weights
-  // TODO: Add sprites from https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/ ?
   friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+  // // 1. Puddle splash or wet feet
+  // if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
+  //   if (SpeciesHasType(species, TYPE_FIRE))
+  //     message_choices[n_choices++] = EventScript_FollowerUnhappyToBeWet;
+  //   else if (SpeciesToGraphicsInfo(species, 0)->tracks) // if follower is grounded
+  //     message_choices[n_choices++] = EventScript_FollowerSplashesAbout;
+  // }
+  // Happy weights
   emotion_weight[FOLLOWER_EMOTION_HAPPY] = 10;
   if (friendship > 170)
     emotion_weight[FOLLOWER_EMOTION_HAPPY] = 30;
   else if (friendship > 80)
     emotion_weight[FOLLOWER_EMOTION_HAPPY] = 20;
+  if (GetCurrentWeather() == WEATHER_SUNNY || GetCurrentWeather() == WEATHER_SUNNY_CLOUDS)
+    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_HAPPY, .index=31};
   // Neutral weights
   emotion_weight[FOLLOWER_EMOTION_NEUTRAL] = 15;
   // Sad weights
@@ -1834,6 +1840,28 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   // TODO: Increase this if there is an item nearby, or if the pokemon has pickup
   emotion_weight[FOLLOWER_EMOTION_CURIOUS] = 5;
   emotion = RandomWeightedIndex(emotion_weight, FOLLOWER_EMOTION_LENGTH);
+  if (mon->status & 0x8) // STATUS1_POISON
+    emotion = FOLLOWER_EMOTION_POISONED;
+  ObjectEventEmote(objEvent, emotion);
+  if (Random() & 1) { // With 50% chance, select special message using reservoir sampling
+    u8 i, j = 1;
+    struct SpecialEmote *choice = 0;
+    for (i = 0; i < n_choices; i++) {
+      if (cond_emotes[i].emotion == emotion) {
+        if (Random() < 0x10000 / (j++)) // Replace item with 1/j chance
+          choice = &cond_emotes[i];
+      }
+    }
+    if (choice) { // Only continue if a script was actually chosen
+      if (choice->script)
+        ScriptCall(ctx, choice->script);
+      else {
+        ctx->data[0] = (u32) followerBasicMessages[emotion].messages[choice->index];
+        ScriptCall(ctx, followerBasicMessages[emotion].script);
+      }
+      return FALSE;
+    }
+  }
   ctx->data[0] = (u32) followerBasicMessages[emotion].messages[Random() % followerBasicMessages[emotion].length];
   ScriptCall(ctx, followerBasicMessages[emotion].script);
   return FALSE;
@@ -2119,7 +2147,7 @@ static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct
 }
 
 // Find and update based on template's paletteTag
-// TODO: Should this logic happen in CreateSpriteAt?
+// TODO: Add a better way to associate tags -> palettes besides listing them in sObjectEventSpritePalettes
 u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate * template, struct Sprite * sprite) {
   u8 i = FindObjectEventPaletteIndexByTag(template->paletteTag);
   if (i == 0xFF)
@@ -7260,6 +7288,7 @@ bool8 MovementAction_EmoteExclamationMark_Step0(struct ObjectEvent *objectEvent,
 bool8 MovementAction_EmoteQuestionMark_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ObjectEventGetLocalIdAndMap(objectEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
+    gFieldEffectArguments[7] = -1;
     FieldEffectStart(FLDEFF_QUESTION_MARK_ICON);
     sprite->data[2] = 1;
     return TRUE;

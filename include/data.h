@@ -13,6 +13,7 @@
 #define N_FOLLOWER_LOVE_MESSAGES 10
 #define N_FOLLOWER_SURPRISE_MESSAGES 20
 #define N_FOLLOWER_CURIOUS_MESSAGES 7
+#define N_FOLLOWER_POISONED_MESSAGES 1
 
 struct MonCoords
 {
@@ -141,5 +142,6 @@ extern const char * const gFollowerPensiveMessages[];
 extern const char * const gFollowerLoveMessages[];
 extern const char * const gFollowerSurpriseMessages[];
 extern const char * const gFollowerCuriousMessages[];
+extern const char * const gFollowerPoisonedMessages[];
 
 #endif // GUARD_DATA_H

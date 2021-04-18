@@ -31,6 +31,8 @@ const char * const gFollowerHappyMessages[] = {
   (const char []) _("{STR_VAR_1} seems very happy to see\nyou!"),
   (const char []) _("{STR_VAR_1} faced this way and\ngrinned."),
   (const char []) _("{STR_VAR_1} happily cuddled up to\nyou!"),
+  // Conditional messages begin here, index 31
+  (const char []) _("Your pokemon seems happy about the\ngreat weather."),
 };
 
 // Unconditional neutral messages
@@ -146,4 +148,8 @@ const char * const gFollowerCuriousMessages[] = {
   (const char []) _("{STR_VAR_1} is wandering around and\nsearching for something."),
   (const char []) _("{STR_VAR_1} is sniffing at you."),
   (const char []) _("{STR_VAR_1} seems to be a little\nhesitant..."),
+};
+
+const char * const gFollowerPoisonedMessages[] = {
+  (const char []) _("{STR_VAR_1} is shivering with the\neffects of being poisoned."),
 };

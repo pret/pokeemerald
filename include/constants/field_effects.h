@@ -35,6 +35,7 @@
 #define FLDEFF_USE_FLY                   31
 #define FLDEFF_FLY_IN                    32
 #define FLDEFF_QUESTION_MARK_ICON        33
+#define FLDEFF_EMOTE                     33 // shares a slot with FLDEFF_QUESTION_MARK_ICON
 #define FLDEFF_FEET_IN_FLOWING_WATER     34
 #define FLDEFF_BIKE_TIRE_TRACKS          35
 #define FLDEFF_SAND_DISGUISE             36

@@ -1,14 +1,13 @@
 Happy (Special):
-{STR_VAR_1} greeted the two. (when standing in front of 2 trainers).
-{STR_VAR_1} is very eager! ( gym ) must have type advantage.
-{STR_VAR_1} is very composed and sure of itself (in a gym with a type advantage).
-{STR_VAR_1} greeted Amphy!
 {STR_VAR_1} greeted your mom.
 Your pokemon is staring intently at the mountain peak.
 {STR_VAR_1} is staring straight at the pokemon league.
 {STR_VAR_1} is staring at the sea.
 {STR_VAR_1} greeted everyone!
-Your pokemon seems happy about the great weather.
+{STR_VAR_1} greeted the two. (when standing in front of 2 trainers).
+{STR_VAR_1} is very eager! ( gym ) must have type advantage.
+{STR_VAR_1} is very composed and sure of itself (in a gym with a type advantage).
+{STR_VAR_1} greeted Amphy!
 Neutral (Special):
 (CELEBI) danced happily ( Pokemon Exclusive ).
 (CELEBI) danced beautiful ( Pokemon Exclusive ).
@@ -187,5 +186,3 @@ Curious (Special):
 {STR_VAR_1} seems to be hearing a strange sound. (Team rocket hide out).
 {STR_VAR_1} is concerned about the other side of the fence, it seems.
 {STR_VAR_1} is looking at the machine in a strange manner. (Power plant).
-Poisoned:
-{STR_VAR_1} is shivering with the effects of being poisoned.
