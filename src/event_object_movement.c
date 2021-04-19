@@ -1749,6 +1749,7 @@ static const struct FollowerMessagePool followerBasicMessages[] = {
   [FOLLOWER_EMOTION_LOVE] = {gFollowerLoveMessages, EventScript_FollowerGeneric, N_FOLLOWER_LOVE_MESSAGES},
   [FOLLOWER_EMOTION_SURPRISE] = {gFollowerSurpriseMessages, EventScript_FollowerGeneric, N_FOLLOWER_SURPRISE_MESSAGES},
   [FOLLOWER_EMOTION_CURIOUS] = {gFollowerCuriousMessages, EventScript_FollowerGeneric, N_FOLLOWER_CURIOUS_MESSAGES},
+  [FOLLOWER_EMOTION_MUSIC] = {gFollowerMusicMessages, EventScript_FollowerGeneric, N_FOLLOWER_MUSIC_MESSAGES},
   [FOLLOWER_EMOTION_POISONED] = {gFollowerPoisonedMessages, EventScript_FollowerGeneric, N_FOLLOWER_POISONED_MESSAGES},
 };
 
@@ -1813,15 +1814,10 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     emotion_weight[FOLLOWER_EMOTION_HAPPY] = 30;
   else if (friendship > 80)
     emotion_weight[FOLLOWER_EMOTION_HAPPY] = 20;
-  if (GetCurrentWeather() == WEATHER_SUNNY || GetCurrentWeather() == WEATHER_SUNNY_CLOUDS)
-    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_HAPPY, .index=31};
   // Neutral weights
   emotion_weight[FOLLOWER_EMOTION_NEUTRAL] = 15;
   // Sad weights
   emotion_weight[FOLLOWER_EMOTION_SAD] = 5;
-  health_percent = mon->hp * 100 / mon->maxHP;
-  if (health_percent < 50 || mon->status & 0x40) // STATUS1_PARALYSIS
-    emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
   // Upset weights
   emotion_weight[FOLLOWER_EMOTION_UPSET] = friendship < 80 ? 15 : 5;
   // Angry weights
@@ -1833,12 +1829,37 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     emotion_weight[FOLLOWER_EMOTION_LOVE] = 30;
   else if (friendship > 80)
     emotion_weight[FOLLOWER_EMOTION_LOVE] = 20;
-  // Surprise weights
-  // TODO: Scale this with how long the follower has been out
+  // Surprise weights TODO: Scale this with how long the follower has been out
   emotion_weight[FOLLOWER_EMOTION_SURPRISE] = 10;
-  // Curious weights
-  // TODO: Increase this if there is an item nearby, or if the pokemon has pickup
-  emotion_weight[FOLLOWER_EMOTION_CURIOUS] = 5;
+  // Curious weights TODO: Increase this if there is an item nearby, or if the pokemon has pickup
+  emotion_weight[FOLLOWER_EMOTION_CURIOUS] = 10;
+  // Music weights TODO: Change this depending on music ?
+  emotion_weight[FOLLOWER_EMOTION_MUSIC] = friendship > 80 ? 20 : 15;
+
+  // Conditional messages follow
+  // Weather-related
+  if (GetCurrentWeather() == WEATHER_SUNNY || GetCurrentWeather() == WEATHER_SUNNY_CLOUDS)
+    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_HAPPY, .index=31};
+  else if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
+    if (SpeciesHasType(species, TYPE_FIRE)) {
+      emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
+      cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=3};
+      cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_UPSET, .index=3};
+    }
+    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SURPRISE, .index=20};
+  }
+  // Health & status-related
+  health_percent = mon->hp * 100 / mon->maxHP;
+  if (health_percent < 20) {
+    emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
+    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=4};
+    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=5};
+  }
+  if (health_percent < 50 || mon->status & 0x40) { // STATUS1_PARALYSIS
+    emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
+    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=6};
+  }
+
   emotion = RandomWeightedIndex(emotion_weight, FOLLOWER_EMOTION_LENGTH);
   if (mon->status & 0x8) // STATUS1_POISON
     emotion = FOLLOWER_EMOTION_POISONED;
@@ -1853,12 +1874,11 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
       }
     }
     if (choice) { // Only continue if a script was actually chosen
+      ctx->data[0] = (u32) followerBasicMessages[emotion].messages[choice->index];
       if (choice->script)
         ScriptCall(ctx, choice->script);
-      else {
-        ctx->data[0] = (u32) followerBasicMessages[emotion].messages[choice->index];
+      else
         ScriptCall(ctx, followerBasicMessages[emotion].script);
-      }
       return FALSE;
     }
   }

@@ -178,77 +178,77 @@ static const struct SpriteFrameImage sSpriteImageTable_Emotes[] =
 
 static const union AnimCmd sSpriteAnim_Emotes0[] = {
     ANIMCMD_FRAME(0*2, 30),
-    ANIMCMD_FRAME(0*2+1, 30),
+    ANIMCMD_FRAME(0*2+1, 25),
     ANIMCMD_FRAME(0*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes1[] = {
     ANIMCMD_FRAME(1*2, 30),
-    ANIMCMD_FRAME(1*2+1, 30),
+    ANIMCMD_FRAME(1*2+1, 25),
     ANIMCMD_FRAME(1*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes2[] = {
     ANIMCMD_FRAME(2*2, 30),
-    ANIMCMD_FRAME(2*2+1, 30),
+    ANIMCMD_FRAME(2*2+1, 25),
     ANIMCMD_FRAME(2*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes3[] = {
     ANIMCMD_FRAME(3*2, 30),
-    ANIMCMD_FRAME(3*2+1, 30),
+    ANIMCMD_FRAME(3*2+1, 25),
     ANIMCMD_FRAME(3*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes4[] = {
     ANIMCMD_FRAME(4*2, 30),
-    ANIMCMD_FRAME(4*2+1, 30),
+    ANIMCMD_FRAME(4*2+1, 25),
     ANIMCMD_FRAME(4*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes5[] = {
     ANIMCMD_FRAME(5*2, 30),
-    ANIMCMD_FRAME(5*2+1, 30),
+    ANIMCMD_FRAME(5*2+1, 25),
     ANIMCMD_FRAME(5*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes6[] = {
     ANIMCMD_FRAME(6*2, 30),
-    ANIMCMD_FRAME(6*2+1, 30),
+    ANIMCMD_FRAME(6*2+1, 25),
     ANIMCMD_FRAME(6*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes7[] = {
     ANIMCMD_FRAME(7*2, 30),
-    ANIMCMD_FRAME(7*2+1, 30),
+    ANIMCMD_FRAME(7*2+1, 25),
     ANIMCMD_FRAME(7*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes8[] = {
     ANIMCMD_FRAME(8*2, 30),
-    ANIMCMD_FRAME(8*2+1, 30),
+    ANIMCMD_FRAME(8*2+1, 25),
     ANIMCMD_FRAME(8*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes9[] = {
     ANIMCMD_FRAME(9*2, 30),
-    ANIMCMD_FRAME(9*2+1, 30),
+    ANIMCMD_FRAME(9*2+1, 25),
     ANIMCMD_FRAME(9*2, 30),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Emotes10[] = {
     ANIMCMD_FRAME(10*2, 30),
-    ANIMCMD_FRAME(10*2+1, 30),
+    ANIMCMD_FRAME(10*2+1, 25),
     ANIMCMD_FRAME(10*2, 30),
     ANIMCMD_END
 };

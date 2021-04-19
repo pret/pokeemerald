@@ -161,6 +161,15 @@ EventScript_FollowerGeneric:: @ similar to Std_MsgboxDefault
   waitbuttonpress
   return
 
+EventScript_FollowerJump::
+  applymovement 0xFE FollowerSplashMovement
+  waitmovement 0xFE
+  waitfieldeffect FLDEFF_EMOTE
+  message 0x0
+  waitmessage
+  waitbuttonpress
+  return
+
 EnterPokeballMovement::
   .byte 0x9F @ EnterPokeball
   step_end

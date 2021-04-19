@@ -39,10 +39,6 @@ Your pokemon is staring intently at the sea!
 {STR_VAR_1} is looking outside and frolicking!
 {STR_VAR_1} spun around in a circle!
 Sad (Special):
-{STR_VAR_1} is going to fall down! (when HP is red).
-{STR_VAR_1} is not happy. (During rain if the pokemon is a fire type).
-{STR_VAR_1} seems to be about to fall over! (When HP is red.).
-{STR_VAR_1} is trying very hard to keep up with you... (When HP is yellow or paralyzed).
 {STR_VAR_1}'s burn looks painful! (when burnt).
 Upset (Special):
 {STR_VAR_1} is taking shelter in the grass from the rain.
@@ -54,7 +50,7 @@ It seems to have eaten something strange. It's making an odd face... (Olivine Ca
 {STR_VAR_1} is a bit nervous about the narrow space!
 {STR_VAR_1} is splashing around in the grass (must be fire type).
 Your pokemon doesn't like splashing around on the ground (must be fire type).
-{STR_VAR_1} is taking shelter in the grass from the rain (must be fire type).
+
 {STR_VAR_1} seems very cold (when frozen).
 {STR_VAR_1} seems uneasy and is poking (PLAYER).
 {STR_VAR_1} is trembling with fear (Cemetery).
@@ -83,27 +79,38 @@ Your pokemon is drooling a little (Olivine Cafe).
 {STR_VAR_1} seems very interested in the bicycles (bike shop).
 {STR_VAR_1} is preoccupied by the floor, which seems like it may collapse (burnt tower).
 {STR_VAR_1} is nervous ( in a gym before beating gym leader ) ( must have type disadvantage ).
-Music:
-{STR_VAR_1} is showing off its agility!
-{STR_VAR_1} is moving around happily!
-Woah! {STR_VAR_1} suddenly started dancing in happiness!
-{STR_VAR_1} is steadily keeping up with you!
-{STR_VAR_1} is very happy about the rain.
-{STR_VAR_1} seems to want to play with (Player).
+Music (Special):
 {STR_VAR_1} is pulling out the grass.
-{STR_VAR_1} is happy skipping about.
-{STR_VAR_1} is playing in the puddle.
-{STR_VAR_1} is gazing restlessly at the building ( in goldenrod).
-{STR_VAR_1} is singing and humming.
-{STR_VAR_1} is looking around restlessly at the Forest.
-{STR_VAR_1} is playfully nibbling at the ground.
-(CYNDAQUIL) blew out a fireball. ( Pokemon Exclusive ).
-(CYNDAQUIL) blew out a couple of fireballs. ( Pokemon Exclusive ).
-(CHIKORITA) is waving its leaf around ( Pokemon Exclusive ).
-(CHIKORITA) is making its leaf twitch ( Pokemon Exclusive ).
-(TODADILE) is moving its jaw ( Pokemon Exclusive ).
-(TODADILE) is opening and closing its mouth ( Pokemon Exclusive ).
-{STR_VAR_1} is nipping at your feet!
+Waah! your pokemon suddenly splashed water! (on a shore).
+{STR_VAR_1} is happy to see what's out doors!
+{STR_VAR_1} seems to want to touch the machine! (Power plant).
+{STR_VAR_1} is listening intently to the sound of the waves.
+{STR_VAR_1} is swaying with the boat!
+{STR_VAR_1} is dancing along with the rolling of the ship.
+{STR_VAR_1} doesn't want to get off the boat yet!
+{STR_VAR_1} is listening to the sound of the machine.
+{STR_VAR_1} seems happy at the sight of water on the window!
+Your pokemon is blowing sand in the air!
+Your pokemon is staring spellbound at the night sky!
+Your pokemon seems to be enjoying sliding around!
+{STR_VAR_1} is touching the ice.
+{STR_VAR_1} is steadily observing the flow of the river.
+{STR_VAR_1} is noticing the scent of the grass.
+{STR_VAR_1} is playing around, plucking bits of grass.
+{STR_VAR_1} is looking up at the ceiling.
+{STR_VAR_1} seems to be enjoying this a little bit!
+{STR_VAR_1} is wandering around enjoying the forest scenery.
+{STR_VAR_1} is playing around in the fallen leaves.
+{STR_VAR_1} is playing around with a leaf.
+{STR_VAR_1} is playing around, touching the leaves.
+Your pokemon is happily gazing at the beautiful, starry sky!
+{STR_VAR_1} is pulling out the grass.
+{STR_VAR_1} is rolling around in the grass.
+{STR_VAR_1} seems to want to return to the lab (after you receive the Mystery egg).
+Your pokemon is staring at the various items.
+{STR_VAR_1} is listening to the sound of the waterfall ( Mt. Mortar).
+{STR_VAR_1} is looking up the tall mountain... (Mt. Mortar).
+{STR_VAR_1} seems concerned about the waterfall.
 {STR_VAR_1} is sniffing around the room. (Inside Hero's Room).
 {STR_VAR_1} is dancing around the pillar! (Seems to occur more for Bellsprout)(sprout tower).
 {STR_VAR_1} swayed around, dancing in a strange manner.(Seems to occur more for Bellsprout)(sprout tower).
@@ -117,43 +124,17 @@ Your pokemon is rolling a screw from a bicycle around.
 {STR_VAR_1} is looking up at the sky.
 {STR_VAR_1} seems to be happy about the rain! ( during rain, must not have type disadvantage to water).
 {STR_VAR_1} is clawing the grass!
-{STR_VAR_1} turns around and looks at you.
-{STR_VAR_1} is listening to the sound of the waterfall ( Mt. Mortar).
-{STR_VAR_1} is looking up the tall mountain... (Mt. Mortar).
-{STR_VAR_1} seems concerned about the waterfall.
-{STR_VAR_1} is working hard to show off its mighty power!
-{STR_VAR_1} pulled back to run!
-Whoa! {STR_VAR_1} suddenly danced in happiness!
-{STR_VAR_1} is rolling around in the grass.
-{STR_VAR_1} seems to want to return to the lab (after you receive the Mystery egg).
-Your pokemon is staring at the various items.
-{STR_VAR_1} is wandering around enjoying the forest scenery.
-{STR_VAR_1} is playing around in the fallen leaves.
-{STR_VAR_1} is playing around with a leaf.
-{STR_VAR_1} is playing around, touching the leaves.
-Your pokemon is happily gazing at the beautiful, starry sky!
-{STR_VAR_1} is pulling out the grass.
-{STR_VAR_1} seems to be enjoying this a little bit!
-{STR_VAR_1} is looking up at the ceiling.
-{STR_VAR_1} is cheerful!
-{STR_VAR_1} is swaying with the boat!
-{STR_VAR_1} is dancing along with the rolling of the ship.
-{STR_VAR_1} doesn't want to get off the boat yet!
-{STR_VAR_1} is listening to the sound of the machine.
-{STR_VAR_1} seems happy at the sight of water on the window!
-Your pokemon is blowing sand in the air!
-Your pokemon is staring spellbound at the night sky!
-Your pokemon seems to be enjoying sliding around!
-{STR_VAR_1} is touching the ice.
-{STR_VAR_1} is steadily observing the flow of the river.
-{STR_VAR_1} is noticing the scent of the grass.
-{STR_VAR_1} is playing around, plucking bits of grass.
-{STR_VAR_1} is happy to see what's out doors!
-{STR_VAR_1} seems to want to touch the machine! (Power plant).
-{STR_VAR_1} is listening intently to the sound of the waves.
-{STR_VAR_1} is jumping around in a carefree way!
-Waah! your pokemon suddenly splashed water! (on a shore).
-Your pokemon seems to be smelling a nostalgically familiar scent...
+{STR_VAR_1} is looking around restlessly at the Forest.
+{STR_VAR_1} is playfully nibbling at the ground.
+(CYNDAQUIL) blew out a fireball. ( Pokemon Exclusive ).
+(CYNDAQUIL) blew out a couple of fireballs. ( Pokemon Exclusive ).
+(CHIKORITA) is waving its leaf around ( Pokemon Exclusive ).
+(CHIKORITA) is making its leaf twitch ( Pokemon Exclusive ).
+(TODADILE) is moving its jaw ( Pokemon Exclusive ).
+(TODADILE) is opening and closing its mouth ( Pokemon Exclusive ).
+{STR_VAR_1} is playing in the puddle.
+{STR_VAR_1} is gazing restlessly at the building ( in goldenrod).
+
 Surprised (Special):
 Your pokemon has a flower petal on its face! (Newbark Town).
 {STR_VAR_1} seems to have gotten caught in the clumps of grass.
@@ -164,7 +145,6 @@ Careful! seems like the floor could collapse, and it might fall.
 {STR_VAR_1} gazed surprisingly at the rock!
 Huh? your pokemon found something in top of the mountain ( outside Mt. Mortar) (!).
 {STR_VAR_1} is cautious about the confined area!
-{STR_VAR_1} seems to be very surprised that it is raining!
 {STR_VAR_1} got tangled up in the branches and almost fell down!
 {STR_VAR_1} looked up at the sky and shouted loudly.
 {STR_VAR_1} seems to have found something!

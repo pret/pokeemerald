@@ -59,6 +59,11 @@ const char * const gFollowerSadMessages[] = {
   (const char []) _("{STR_VAR_1} is dizzy."),
   (const char []) _("{STR_VAR_1} is stepping on your\nfeet!"),
   (const char []) _("{STR_VAR_1} seems a little tired."),
+  // Conditional messages begin, index 3
+  (const char []) _("{STR_VAR_1} is not happy."),
+  (const char []) _("{STR_VAR_1} is going to fall down!\n"),
+  (const char []) _("{STR_VAR_1} seems to be about to\nfall over!"),
+  (const char []) _("{STR_VAR_1} is trying very hard to\nkeep up with you..."),
 };
 
 // Unconditional upset messages
@@ -66,6 +71,8 @@ const char * const gFollowerUpsetMessages[] = {
   (const char []) _("{STR_VAR_1} seems unhappy somehow..."),
   (const char []) _("{STR_VAR_1} is making an unhappy\nface."),
   (const char []) _(".....Your pokemon seems a little\ncold."),
+  // Conditional messages, index 3
+  (const char []) _("{STR_VAR_1} is taking shelter in the\ngrass from the rain."),
 };
 
 // Unconditional angry messages
@@ -137,6 +144,8 @@ const char * const gFollowerSurpriseMessages[] = {
   (const char []) _("{STR_VAR_1} is scared and snuggled\nup to you!"),
   (const char []) _("{STR_VAR_1} is feeling an unusual\npresence..."),
   (const char []) _("{STR_VAR_1} is getting tense with\nnervous energy."),
+  // Conditional messages, index 20
+  (const char []) _("{STR_VAR_1} seems to be very\nsurprised that it is raining!"),
 };
 
 // Unconditional curious messages
@@ -148,6 +157,25 @@ const char * const gFollowerCuriousMessages[] = {
   (const char []) _("{STR_VAR_1} is wandering around and\nsearching for something."),
   (const char []) _("{STR_VAR_1} is sniffing at you."),
   (const char []) _("{STR_VAR_1} seems to be a little\nhesitant..."),
+};
+
+// Unconditional music messages
+const char * const gFollowerMusicMessages[] = {
+  (const char []) _("{STR_VAR_1} is showing off its\nagility!"),
+  (const char []) _("{STR_VAR_1} is moving around\nhappily!"),
+  (const char []) _("Woah! {STR_VAR_1} suddenly started\ndancing in happiness!"),
+  (const char []) _("{STR_VAR_1} is steadily keeping up\nwith you!"),
+  (const char []) _("{STR_VAR_1} is very happy about the\nrain."),
+  (const char []) _("{STR_VAR_1} seems to want to play\nwith you."),
+  (const char []) _("{STR_VAR_1} is happy skipping about."),
+  (const char []) _("{STR_VAR_1} is singing and humming."),
+  (const char []) _("{STR_VAR_1} is nipping at your feet!"),
+  (const char []) _("{STR_VAR_1} turns around and looks\nat you."),
+  (const char []) _("{STR_VAR_1} is working hard to show\noff its mighty power!"),
+  (const char []) _("Whoa! {STR_VAR_1} suddenly danced in\nhappiness!"),
+  (const char []) _("{STR_VAR_1} is cheerful!"),
+  (const char []) _("{STR_VAR_1} is jumping around in a\ncarefree way!"),
+  (const char []) _("Your pokemon seems to be smelling a\nnostalgically familiar scent..."),
 };
 
 const char * const gFollowerPoisonedMessages[] = {
