@@ -1964,7 +1964,7 @@ static void SpawnLightSprite(s16 x, s16 y, s16 camX, s16 camY, u32 behavior) {
   }
   sprite = &gSprites[CreateSprite(&gFieldEffectObjectTemplate_BallLight, 0, 0, 0)];
   UpdateSpritePaletteByTemplate(&gFieldEffectObjectTemplate_BallLight, sprite);
-  sub_8092FF0(x + camX, y + camY, &sprite->pos1.x, &sprite->pos1.y);
+  GetMapCoordsFromSpritePos(x + camX, y + camY, &sprite->pos1.x, &sprite->pos1.y);
   sprite->data[6] = x;
   sprite->data[7] = y;
   sprite->affineAnims = gDummySpriteAffineAnimTable;
@@ -2125,7 +2125,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
             SetPlayerAvatarObjectEventIdAndObjectId(objectEventId, i);
             objectEvent->warpArrowSpriteId = CreateWarpArrowSprite();
         }
-        if (subspriteTables != NULL)
+        if (subspriteTables != NULL) {
             SetSubspriteTables(sprite, subspriteTables);
         }
         sprite->coordOffsetEnabled = TRUE;
@@ -2427,7 +2427,6 @@ static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette
     u8 paletteNum;
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)
         return 0xFF;
-    }
     paletteNum = LoadSpritePalette(spritePalette);
     UpdateSpritePaletteWithTime(paletteNum);
     return paletteNum;
@@ -6459,10 +6458,10 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
 
     objectEvent->invisible = FALSE;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) {
-      sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_NORTH), 8);
+      InitMoveInPlace(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_NORTH), 8);
       sprite->data[6] = 0; // fast speed
     } else {
-      sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_SOUTH), 16);
+      InitMoveInPlace(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_SOUTH), 16);
       sprite->data[6] = 1; // slow speed
     }
     ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
@@ -6491,7 +6490,7 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
 
 bool8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     u8 direction = objectEvent->facingDirection;
-    sub_8094554(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction), 16);
+    InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction), 16);
     sprite->data[6] = 1; // slow speed
     return MovementAction_EnterPokeball_Step1(objectEvent, sprite);
 }
