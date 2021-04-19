@@ -4903,8 +4903,8 @@ extern const u16 gUnknown_08DDCF04[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
-extern const u8 gTradeButtons_Gfx[];
-extern const u16 gUnknown_08DDB444[];
+extern const u8 gTradeCursor_Gfx[];
+extern const u16 gTradeCursor_Pal[];
 
 // Party menu
 extern const u32 gPartyMenuPokeball_Gfx[];
