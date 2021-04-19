@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_2",
+      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA",
       "x": 14,
       "y": 7,
       "elevation": 3,
@@ -25,10 +25,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_2"
+      "flag": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_1",
+      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_STILL",
       "x": 14,
       "y": 6,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SkyPillar_Top_EventScript_Rayquaza",
-      "flag": "FLAG_HIDE_RAYQUAZA_SKY_TOWER_SUMMIT"
+      "flag": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL"
     }
   ],
   "warp_events": [

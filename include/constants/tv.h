@@ -19,7 +19,7 @@
 #define TVSHOW_3_CHEERS_FOR_POKEBLOCKS              9
 #define TVSHOW_BATTLE_UPDATE                        10
 #define TVSHOW_FAN_CLUB_SPECIAL                     11
-#define TVSHOW_CONTEST_LIVE_UPDATES_2               12
+#define TVSHOW_LILYCOVE_CONTEST_LADY                12
 //                                                  //
 #define TVSHOW_POKEMON_TODAY_CAUGHT                 21 
 #define TVSHOW_SMART_SHOPPER                        22
@@ -205,5 +205,20 @@
 #define SPOTCUTIES_STATE_RIBBON_ARTIST   13
 #define SPOTCUTIES_STATE_RIBBON_EFFORT   14
 #define SPOTCUTIES_STATE_OUTRO           15
+
+// TV Show states for Trend Watcher
+#define TRENDWATCHER_STATE_INTRO           0
+#define TRENDWATCHER_STATE_TAUGHT_MALE     1
+#define TRENDWATCHER_STATE_TAUGHT_FEMALE   2
+#define TRENDWATCHER_STATE_PHRASE_HOPELESS 3
+#define TRENDWATCHER_STATE_BIGGER_MALE     4
+#define TRENDWATCHER_STATE_BIGGER_FEMALE   5
+#define TRENDWATCHER_STATE_OUTRO           6
+
+// TV Show states for the Contest Lady's Live Updates show
+#define CONTESTLADYLIVE_STATE_INTRO      0
+#define CONTESTLADYLIVE_STATE_WON        1
+#define CONTESTLADYLIVE_STATE_LOST       2
+#define CONTESTLADYLIVE_STATE_LOST_BADLY 3
 
 #endif //GUARD_CONSTANTS_TV_H

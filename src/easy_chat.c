@@ -230,14 +230,14 @@ static void DoQuizSetQuestionEasyChatScreen(void);
 #define PALTAG_TRIANGLE_CURSOR 0
 #define PALTAG_RECTANGLE_CURSOR 1
 #define PALTAG_MISC_UI 2
-#define PALTAG_3 3
+#define PALTAG_RS_INTERVIEW_FRAME 3
 
 #define GFXTAG_TRIANGLE_CURSOR 0
 #define GFXTAG_RECTANGLE_CURSOR 1
 #define GFXTAG_SCROLL_INDICATOR 2
 #define GFXTAG_START_SELECT_BUTTONS 3
 #define GFXTAG_MODE_WINDOW 4
-#define GFXTAG_5 5
+#define GFXTAG_RS_INTERVIEW_FRAME 5
 #define GFXTAG_BUTTON_WINDOW 6
 
 // State values for sEasyChatScreen->inputState
@@ -698,13 +698,16 @@ static const u16 sTriangleCursor_Pal[] = INCBIN_U16("graphics/easy_chat/triangle
 static const u32 sTriangleCursor_Gfx[] = INCBIN_U32("graphics/easy_chat/triangle_cursor.4bpp");
 static const u32 sScrollIndicator_Gfx[] = INCBIN_U32("graphics/easy_chat/scroll_indicator.4bpp");
 static const u32 sStartSelectButtons_Gfx[] = INCBIN_U32("graphics/easy_chat/start_select_buttons.4bpp");
-static const u16 sUnknown_085979C0[] = INCBIN_U16("graphics/misc/interview_frame.gbapal");
-static const u32 sUnknown_085979E0[] = INCBIN_U32("graphics/misc/interview_frame.4bpp.lz");
+// In Ruby/Sapphire Easy Chat screens had a black background, and when the player & interviewer were present
+// on screen the interview_frame gfx was shown behind them.
+// In Emerald all Easy Chat screens have a filled background, so these gfx go unused
+static const u16 sRSInterviewFrame_Pal[] = INCBIN_U16("graphics/easy_chat/interview_frame.gbapal");
+static const u32 sRSInterviewFrame_Gfx[] = INCBIN_U32("graphics/easy_chat/interview_frame.4bpp.lz");
 static const u16 sTextInputFrameOrange_Pal[] = INCBIN_U16("graphics/easy_chat/text_input_frame_orange.gbapal");
 static const u16 sTextInputFrameGreen_Pal[] = INCBIN_U16("graphics/easy_chat/text_input_frame_green.gbapal");
 static const u32 sTextInputFrame_Gfx[] = INCBIN_U32("graphics/easy_chat/text_input_frame.4bpp.lz");
-static const u16 sUnknown_08597C1C[] = INCBIN_U16("graphics/misc/8597C1C.gbapal");
-static const u16 sUnknown_08597C24[] = INCBIN_U16("graphics/misc/8597C24.gbapal");
+static const u16 sTitleText_Pal[] = INCBIN_U16("graphics/easy_chat/title_text.gbapal");
+static const u16 sText_Pal[] = INCBIN_U16("graphics/easy_chat/text.gbapal");
 
 static const struct EasyChatPhraseFrameDimensions sPhraseFrameDimensions[] = {
     [FRAMEID_GENERAL_2x2] = {
@@ -895,17 +898,17 @@ static const struct SpritePalette sSpritePalettes[] = {
         .tag = PALTAG_MISC_UI, // The palette is generated from the button window but used for various parts of the UI
     },
     {
-        .data = sUnknown_085979C0,
-        .tag = PALTAG_3,
+        .data = sRSInterviewFrame_Pal,
+        .tag = PALTAG_RS_INTERVIEW_FRAME,
     },
     {0}
 };
 
 static const struct CompressedSpriteSheet sCompressedSpriteSheets[] = {
     {
-        .data = sUnknown_085979E0,
+        .data = sRSInterviewFrame_Gfx,
         .size = 0x800,
-        .tag = GFXTAG_5,
+        .tag = GFXTAG_RS_INTERVIEW_FRAME,
     },
     {
         .data = gEasyChatRectangleCursor_Gfx,
@@ -1477,8 +1480,8 @@ void ShowEasyChatScreen(void)
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
         words = (u16 *)gStringVar3;
-        words[0] = gSaveBlock1Ptr->easyChatPairs[0].words[0];
-        words[1] = gSaveBlock1Ptr->easyChatPairs[0].words[1];
+        words[0] = gSaveBlock1Ptr->dewfordTrends[0].words[0];
+        words[1] = gSaveBlock1Ptr->dewfordTrends[0].words[1];
         break;
     case EASY_CHAT_TYPE_GABBY_AND_TY:
         words = gSaveBlock1Ptr->gabbyAndTyData.quote;
@@ -2958,7 +2961,7 @@ static void SetSpecialEasyChatResult(void)
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
         BufferCurrentPhraseToStringVar2();
-        gSpecialVar_0x8004 = IsPhraseTrendy(sEasyChatScreen->currentPhrase);
+        gSpecialVar_0x8004 = TrySetTrendyPhrase(sEasyChatScreen->currentPhrase);
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
         gSpecialVar_0x8004 = DidPlayerInputABerryMasterWifePhrase();
@@ -3914,10 +3917,10 @@ static void LoadEasyChatPalettes(void)
     LoadPalette(gEasyChatMode_Pal, 0, 32);
     LoadPalette(sTextInputFrameOrange_Pal, 1 * 16, 32);
     LoadPalette(sTextInputFrameGreen_Pal, 4 * 16, 32);
-    LoadPalette(sUnknown_08597C1C, 10 * 16, 8);
-    LoadPalette(sUnknown_08597C24, 11 * 16, 12);
-    LoadPalette(sUnknown_08597C24, 15 * 16, 12);
-    LoadPalette(sUnknown_08597C24, 3 * 16, 12);
+    LoadPalette(sTitleText_Pal, 10 * 16, 8);
+    LoadPalette(sText_Pal, 11 * 16, 12);
+    LoadPalette(sText_Pal, 15 * 16, 12);
+    LoadPalette(sText_Pal, 3 * 16, 12);
 }
 
 static void PrintTitle(void)
@@ -3929,7 +3932,7 @@ static void PrintTitle(void)
 
     xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    PrintEasyChatTextWithColors(0, 1, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+    PrintEasyChatTextWithColors(0, 1, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -4327,7 +4330,7 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
                 if (!DummyWordCheck(easyChatWord))
                     PrintEasyChatText(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, NULL);
                 else // Never reached
-                    PrintEasyChatTextWithColors(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GREY);
+                    PrintEasyChatTextWithColors(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
             }
         }
 

@@ -1229,7 +1229,7 @@ gTVTodaysRivalTrainerText06:: @ 082849AE
 	.string "Let's all keep moving forward\n"
 	.string "and ahead of our rivals!$"
 
-gTVDewfordTrendWatcherNetworkText00:: @ 08284A3E
+TrendWatcher_Text_Intro:: @ 08284A3E
 	.string "DEWFORD TREND-WATCHER NETWORK!\p"
 	.string "MC: Wassup?\n"
 	.string "We'll keep it real with the latest on\l"
@@ -1251,17 +1251,18 @@ gTVDewfordTrendWatcherNetworkText00:: @ 08284A3E
 	.string "MC: Uh, no. What we want to know is\n"
 	.string "what's the in thing of the moment…$"
 
-gTVDewfordTrendWatcherNetworkText01:: @ 08284C55
+@ Identical to below, may have been different in other languages
+TrendWatcher_Text_MaleTaughtMePhrase:: @ 08284C55
 	.string "Old man: {STR_VAR_1} {STR_VAR_2}\n"
 	.string "was what {STR_VAR_3} from LITTLEROOT\l"
 	.string "taught me as being trendy…$"
 
-gTVDewfordTrendWatcherNetworkText02:: @ 08284C9B
+TrendWatcher_Text_FemaleTaughtMePhrase:: @ 08284C9B
 	.string "Old man: {STR_VAR_1} {STR_VAR_2}\n"
 	.string "was what {STR_VAR_3} from LITTLEROOT\l"
 	.string "taught me as being trendy…$"
 
-gTVDewfordTrendWatcherNetworkText03:: @ 08284CE1
+TrendWatcher_Text_PhraseWasHopeless:: @ 08284CE1
 	.string "But it was utterly hopeless.\p"
 	.string "{STR_VAR_1} {STR_VAR_2} festival!\p"
 	.string "{STR_VAR_1} {STR_VAR_2} contest!\p"
@@ -1272,17 +1273,18 @@ gTVDewfordTrendWatcherNetworkText03:: @ 08284CE1
 	.string "MC: Uh, excuse me, compadre, I need\n"
 	.string "to hear about what's in now…$"
 
-gTVDewfordTrendWatcherNetworkText04:: @ 08284DB6
+@ Identical to below, may have been different in other languages
+TrendWatcher_Text_MaleTellMeBigger:: @ 08284DB6
 	.string "Old man: {STR_VAR_3}!\n"
 	.string "Please, tell me something bigger than\l"
 	.string "that {STR_VAR_1} {STR_VAR_2}!$"
 
-gTVDewfordTrendWatcherNetworkText05:: @ 08284DF5
+TrendWatcher_Text_FemaleTellMeBigger:: @ 08284DF5
 	.string "Old man: {STR_VAR_3}!\n"
 	.string "Please, tell me something bigger than\l"
 	.string "that {STR_VAR_1} {STR_VAR_2}!$"
 
-gTVDewfordTrendWatcherNetworkText06:: @ 08284E34
+TrendWatcher_Text_Outro:: @ 08284E34
 	.string "MC: …Uh… So, there you have it,\n"
 	.string "all you trendy, hep cats out there!\p"
 	.string "{STR_VAR_1} {STR_VAR_2}…uh…\n"
@@ -2923,7 +2925,7 @@ gTVInSearchOfTrainersText08:: @ 0828C011
 	.string "That's all for today!\n"
 	.string "See you again on our next broadcast!$"
 
-gTVPokemonContestLiveUpdates2Text00:: @ 0828C137
+ContestLadyShow_Text_Intro:: @ 0828C137
 	.string "“POKéMON CONTEST LIVE UPDATES!”\p"
 	.string "MC: Sorry to interrupt the regular\n"
 	.string "programming, and thanks for joining us!\p"
@@ -2938,7 +2940,7 @@ gTVPokemonContestLiveUpdates2Text00:: @ 0828C137
 	.string "Spectators: ?!!!!\n"
 	.string "?!!!!$"
 
-gTVPokemonContestLiveUpdates2Text01:: @ 0828C28C
+ContestLadyShow_Text_Won:: @ 0828C28C
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "May I congratulate you on your win?\p"
@@ -2957,7 +2959,7 @@ gTVPokemonContestLiveUpdates2Text01:: @ 0828C28C
 	.string "We did it!\l"
 	.string "Thank you!$"
 
-gTVPokemonContestLiveUpdates2Text02:: @ 0828C45B
+ContestLadyShow_Text_Lost:: @ 0828C45B
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "You must be disappointed by that turn\n"
@@ -2977,7 +2979,7 @@ gTVPokemonContestLiveUpdates2Text02:: @ 0828C45B
 	.string "Uh… That's all the time we have today!\n"
 	.string "Thanks for tuning in!$"
 
-gTVPokemonContestLiveUpdates2Text03:: @ 0828C662
+ContestLadyShow_Text_LostBadly:: @ 0828C662
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "How did your CONTEST appearance go?\p"

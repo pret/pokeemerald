@@ -17,7 +17,7 @@ struct PokenavSub11
 {
     u32 monPal[3][0x20];
     u8 fill[0x180];
-    u32 monPicGfx[3][0x800];
+    u32 monPicGfx[3][MON_PIC_SIZE];
     u8 searchMode;
     s16 monIndex;
     u32 (*callback)(struct PokenavSub11 *);

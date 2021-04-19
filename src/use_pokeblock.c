@@ -708,7 +708,7 @@ static void FeedPokeblockToMon(void)
             FREE_AND_SET_NULL(sMenu);
             FreeAllWindowBuffers();
             gMain.savedCallback = CB2_ReturnAndChooseMonToGivePokeblock;
-            CB2_PreparePokeblockFeedScene();
+            PreparePokeblockFeedScene();
         }
         break;
     }
@@ -1241,7 +1241,7 @@ static void UpdateMonPic(u8 loadId)
     }
     else
     {
-        Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, 0x800);
+        Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, MON_PIC_SIZE);
         LoadPalette(sMenu->partyPalettes[loadId], sMenu->curMonPalette, 32);
     }
 }

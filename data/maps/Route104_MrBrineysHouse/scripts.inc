@@ -44,7 +44,7 @@ Route104_MrBrineysHouse_EventScript_SailingIntro:: @ 8229D8A
 Route104_MrBrineysHouse_EventScript_WhereAreWeBound:: @ 8229DAE
 	message Route104_MrBrineysHouse_Text_WhereAreWeBound
 	waitmessage
-	multichoicedefault 20, 8, MULTI_BRINEY_OFF_DEWFORD, 1, 0
+	multichoicedefault 20, 8, MULTI_BRINEY_OFF_DEWFORD, 1, FALSE
 	switch VAR_RESULT
 	case 0, Route104_MrBrineysHouse_EventScript_SailToDewford
 	case 1, Route104_MrBrineysHouse_EventScript_DeclineSailing

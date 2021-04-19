@@ -12,36 +12,38 @@ const u16 gMinigameDigits_Pal[] = INCBIN_U16("graphics/link/minigame_digits.gbap
 const u32 gMinigameDigits_Gfx[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
 static const u32 sMinigameDigitsThin_Gfx[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz"); // Unused
 
+#define BATTLER_OFFSET(i) (gHeap + 0x8000 + MON_PIC_SIZE * (i))
+
 const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[] =
 {
-    gHeap + 0x8000, 0x800,
-    gHeap + 0x8800, 0x800,
-    gHeap + 0x9000, 0x800,
-    gHeap + 0x9800, 0x800,
+    BATTLER_OFFSET(0), MON_PIC_SIZE,
+    BATTLER_OFFSET(1), MON_PIC_SIZE,
+    BATTLER_OFFSET(2), MON_PIC_SIZE,
+    BATTLER_OFFSET(3), MON_PIC_SIZE,
 };
 
 const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[] =
 {
-    gHeap + 0xA000, 0x800,
-    gHeap + 0xA800, 0x800,
-    gHeap + 0xB000, 0x800,
-    gHeap + 0xB800, 0x800,
+    BATTLER_OFFSET(4), MON_PIC_SIZE,
+    BATTLER_OFFSET(5), MON_PIC_SIZE,
+    BATTLER_OFFSET(6), MON_PIC_SIZE,
+    BATTLER_OFFSET(7), MON_PIC_SIZE,
 };
 
 const struct SpriteFrameImage gBattlerPicTable_PlayerRight[] =
 {
-    gHeap + 0xC000, 0x800,
-    gHeap + 0xC800, 0x800,
-    gHeap + 0xD000, 0x800,
-    gHeap + 0xD800, 0x800,
+    BATTLER_OFFSET(8),  MON_PIC_SIZE,
+    BATTLER_OFFSET(9),  MON_PIC_SIZE,
+    BATTLER_OFFSET(10), MON_PIC_SIZE,
+    BATTLER_OFFSET(11), MON_PIC_SIZE,
 };
 
 const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
 {
-    gHeap + 0xE000, 0x800,
-    gHeap + 0xE800, 0x800,
-    gHeap + 0xF000, 0x800,
-    gHeap + 0xF800, 0x800,
+    BATTLER_OFFSET(12), MON_PIC_SIZE,
+    BATTLER_OFFSET(13), MON_PIC_SIZE,
+    BATTLER_OFFSET(14), MON_PIC_SIZE,
+    BATTLER_OFFSET(15), MON_PIC_SIZE,
 };
 
 const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
@@ -290,7 +292,7 @@ const union AnimCmd *const gUnknown_082FF70C[] =
     gUnknown_082FF704,
 };
 
-#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, 0x800, SPECIES_##species}
+#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 

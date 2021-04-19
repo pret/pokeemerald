@@ -233,8 +233,8 @@
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
-#define TEXT_COLOR_DARK_GREY    0x2
-#define TEXT_COLOR_LIGHT_GREY   0x3
+#define TEXT_COLOR_DARK_GRAY    0x2
+#define TEXT_COLOR_LIGHT_GRAY   0x3
 #define TEXT_COLOR_RED          0x4
 #define TEXT_COLOR_LIGHT_RED    0x5
 #define TEXT_COLOR_GREEN        0x6
@@ -360,20 +360,18 @@ typedef struct {
     bool8 forceMidTextSpeed:1;
 } TextFlags;
 
-struct Struct_03002F90
+struct TextGlyph
 {
-    u32 unk0[8];
-    u32 unk20[8];
-    u32 unk40[8];
-    u32 unk60[8];
+    u32 gfxBufferTop[16];
+    u32 gfxBufferBottom[16];
     u8 width;
     u8 height;
 };
 
 extern TextFlags gTextFlags;
 
-extern u8 gUnknown_03002F84;
-extern struct Struct_03002F90 gUnknown_03002F90;
+extern u8 gDisableTextPrinters;
+extern struct TextGlyph gCurGlyph;
 
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);

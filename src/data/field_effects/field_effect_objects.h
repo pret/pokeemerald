@@ -40,7 +40,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge = {0xFFFF, OB
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_64x32, sAnimTable_Shadow, sPicTable_ShadowExtraLarge, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_BallLight = {0xFFFF, OBJ_EVENT_PAL_TAG_LIGHT, &gObjectEventBaseOam_32x32, gObjectEventImageAnimTable_Inanimate, gFieldEffectObjectPicTable_BallLight, gDummySpriteAffineAnimTable, UpdateLightSprite};
+const struct SpriteTemplate gFieldEffectObjectTemplate_BallLight = {0xFFFF, OBJ_EVENT_PAL_TAG_LIGHT, &gObjectEventBaseOam_32x32, sAnimTable_Inanimate, gFieldEffectObjectPicTable_BallLight, gDummySpriteAffineAnimTable, UpdateLightSprite};
 
 static const struct SpriteFrameImage sPicTable_TallGrass[] = {
     overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 0),
@@ -1197,16 +1197,16 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle = {
 
 const struct SpritePalette gSpritePalette_SmallSparkle = {gFieldEffectPal_SmallSparkle, FLDEFF_PAL_TAG_SMALL_SPARKLE};
 
-static const union AnimCmd sAnim_Rayquaza[] = {
+static const union AnimCmd sAnim_RayquazaSpotlightEffect[] = {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnimTable_Rayquaza[] = {
-    sAnim_Rayquaza,
+static const union AnimCmd *const sAnimTable_RayquazaSpotlightEffect[] = {
+    sAnim_RayquazaSpotlightEffect,
 };
 
-const struct SpriteFrameImage  sPicTable_Rayquaza[] = {
+const struct SpriteFrameImage  sPicTable_RayquazaSpotlightEffect[] = {
     overworld_frame(gObjectEventPic_Rayquaza, 4, 4, 0),
 };
 
@@ -1214,8 +1214,8 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {
     .tileTag = 0xFFFF,
     .paletteTag = 0xFFFF,
     .oam = &gObjectEventBaseOam_32x32,
-    .anims = sAnimTable_Rayquaza,
-    .images = sPicTable_Rayquaza,
+    .anims = sAnimTable_RayquazaSpotlightEffect,
+    .images = sPicTable_RayquazaSpotlightEffect,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateRayquazaSpotlightEffect,
 };
