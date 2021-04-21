@@ -1758,9 +1758,6 @@ static void rfu_constructSendLLFrame(void)
             {
                 u8 *maxSize = llf_p - offsetof(struct RfuFixed, LLFBuffer[1]);
 
-                // Does the volatile qualifier make sense?
-                // It's the same as:
-                // asm("":::"memory");
                 pakcketSize = maxSize - *(u8 *volatile *)&gRfuFixed;
             }
         }
