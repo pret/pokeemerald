@@ -1550,27 +1550,135 @@ u16 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot)
 
 u16 rfu_NI_stopReceivingData(u8 slotStatusIndex)
 {
-    struct NIComm *NI_comm;
     u16 imeBak;
+    struct NIComm *NI_comm;
 
     if (slotStatusIndex >= RFU_CHILD_MAX)
         return ERR_SLOT_NO;
     NI_comm = &gRfuSlotStatusNI[slotStatusIndex]->recv;
     imeBak = REG_IME;
-    ++imeBak; --imeBak; // fix imeBak, NI_comm register swap
     REG_IME = 0;
-    if (gRfuSlotStatusNI[slotStatusIndex]->recv.state & SLOT_BUSY_FLAG)
+    if (NI_comm->state & SLOT_BUSY_FLAG)
     {
-        if (gRfuSlotStatusNI[slotStatusIndex]->recv.state == SLOT_STATE_RECV_LAST)
-            gRfuSlotStatusNI[slotStatusIndex]->recv.state = SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN;
+        if (NI_comm->state == SLOT_STATE_RECV_LAST)
+            NI_comm->state = SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN;
         else
-            gRfuSlotStatusNI[slotStatusIndex]->recv.state = SLOT_STATE_RECV_FAILED;
+            NI_comm->state = SLOT_STATE_RECV_FAILED;
         gRfuLinkStatus->recvSlotNIFlag &= ~(1 << slotStatusIndex);
         rfu_STC_releaseFrame(slotStatusIndex, 1, NI_comm);
     }
     REG_IME = imeBak;
     return 0;
 }
+
+/*
+	.globl	rfu_NI_stopReceivingData
+	.type	 rfu_NI_stopReceivingData,function
+	.thumb_func
+rfu_NI_stopReceivingData:
+.LFB64:
+.LM902:
+
+	push	{r4, r5, lr}
+	lsl	r0, r0, #0x18
+	lsr	r3, r0, #0x18
+.LM903:
+
+.LBB50:
+.LM904:
+
+	cmp	r3, #0x3
+	bls	.L683	@cond_branch
+.LM905:
+
+	mov	r0, #0x80
+	lsl	r0, r0, #0x3
+	b	.L687
+.L683:
+.LM906:
+
+	ldr	r1, .L689
+	lsl	r0, r3, #0x2
+	add	r0, r0, r1
+	ldr	r2, [r0]
+	add	r5, r2, #0
+	add	r5, r5, #0x34
+.LM907:
+
+	ldr	r1, .L689+0x4
+	ldrh	r0, [r1]
+.LM908:
+
+	add	r4, r0, #0
+.LM909:
+
+	mov	r0, #0x0
+	strh	r0, [r1]
+.LM910:
+
+	ldrh	r1, [r2, #0x34]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x8
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	.L684	@cond_branch
+.LM911:
+
+	ldr	r0, .L689+0x8
+	cmp	r1, r0
+	bne	.L685	@cond_branch
+.LM912:
+
+	mov	r0, #0x48
+	b	.L688
+.L690:
+	.align	2, 0
+.L689:
+	.word	gRfuSlotStatusNI
+	.word	0x4000208
+	.word	0x8043
+.L685:
+.LM913:
+
+	mov	r0, #0x47
+.L688:
+	strh	r0, [r2, #0x34]
+.LM914:
+
+	ldr	r0, .L691
+	ldr	r2, [r0]
+	mov	r1, #0x1
+	lsl	r1, r1, r3
+	ldrb	r0, [r2, #0x5]
+	bic	r0, r0, r1
+	strb	r0, [r2, #0x5]
+.LM915:
+
+	add	r0, r3, #0
+	mov	r1, #0x1
+	add	r2, r5, #0
+	bl	rfu_STC_releaseFrame
+.L684:
+.LM916:
+
+	ldr	r0, .L691+0x4
+	strh	r4, [r0]
+.LM917:
+
+	mov	r0, #0x0
+.L687:
+.LM918:
+
+.LBE50:
+	pop	{r4, r5}
+	pop	{r1}
+	bx	r1
+.L692:
+	.align	2, 0
+.L691:
+	.word	gRfuLinkStatus
+	.word	0x4000208
+*/
 
 u16 rfu_UNI_changeAndReadySendData(u8 slotStatusIndex, const void *src, u8 size)
 {
