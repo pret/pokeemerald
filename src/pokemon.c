@@ -3926,9 +3926,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             {
                 u16 move = moves[i];
                 if (substruct1->moves[0] == move
-                    || substruct1->moves[1] == move
-                    || substruct1->moves[2] == move
-                    || substruct1->moves[3] == move)
+                 || substruct1->moves[1] == move
+                 || substruct1->moves[2] == move
+                 || substruct1->moves[3] == move)
                     retVal |= gBitTable[i];
                 i++;
             }
