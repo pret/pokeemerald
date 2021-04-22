@@ -1550,21 +1550,20 @@ u16 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot)
 
 u16 rfu_NI_stopReceivingData(u8 slotStatusIndex)
 {
-    struct NIComm *NI_comm;
     u16 imeBak;
+    struct NIComm *NI_comm;
 
     if (slotStatusIndex >= RFU_CHILD_MAX)
         return ERR_SLOT_NO;
     NI_comm = &gRfuSlotStatusNI[slotStatusIndex]->recv;
     imeBak = REG_IME;
-    ++imeBak; --imeBak; // fix imeBak, NI_comm register swap
     REG_IME = 0;
-    if (gRfuSlotStatusNI[slotStatusIndex]->recv.state & SLOT_BUSY_FLAG)
+    if (NI_comm->state & SLOT_BUSY_FLAG)
     {
-        if (gRfuSlotStatusNI[slotStatusIndex]->recv.state == SLOT_STATE_RECV_LAST)
-            gRfuSlotStatusNI[slotStatusIndex]->recv.state = SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN;
+        if (NI_comm->state == SLOT_STATE_RECV_LAST)
+            NI_comm->state = SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN;
         else
-            gRfuSlotStatusNI[slotStatusIndex]->recv.state = SLOT_STATE_RECV_FAILED;
+            NI_comm->state = SLOT_STATE_RECV_FAILED;
         gRfuLinkStatus->recvSlotNIFlag &= ~(1 << slotStatusIndex);
         rfu_STC_releaseFrame(slotStatusIndex, 1, NI_comm);
     }
