@@ -325,6 +325,10 @@ static void SetRandomQuestionData(void)
 #define APPRENTICE_SPECIES_ID(monId) \
     ((monId < MULTI_PARTY_SIZE) ? (PLAYER_APPRENTICE.speciesIds[monId] >> (((PLAYER_APPRENTICE.party >> monId) & 1) << 2) & 0xF) : 0)
 
+#define APPRENTICE_SPECIES_ID_NO_COND(monId, count) \
+    monId = ((PLAYER_APPRENTICE.party >> count) & 1); \
+    monId = ((PLAYER_APPRENTICE.speciesIds[count]) >> (monId << 2)) & 0xF; \
+
 // Get the second move choice for the "Which move" question
 // Unlike the first move choice, this can be either a level up move or a TM/HM move
 static u16 GetRandomAlternateMove(u8 monId)
@@ -997,12 +1001,9 @@ static void InitQuestionData(void)
             && PLAYER_APPRENTICE.questionsAnswered < count + NUM_WHICH_MON_QUESTIONS
             && PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].questionId == QUESTION_ID_WHICH_MOVE)
         {
-            u8 a0;
             // count re-used as monId
             count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
-            a0 = ((PLAYER_APPRENTICE.party >> count) & 1);
-            id1 = PLAYER_APPRENTICE.speciesIds[count];
-            id1 = ((id1) >> (a0 << 2)) & 0xF;
+            APPRENTICE_SPECIES_ID_NO_COND(id1, count);
             gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id1];
             gApprenticeQuestionData->moveId1 = GetDefaultMove(count, id1, PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].moveSlot);
             gApprenticeQuestionData->moveId2 = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data;
@@ -1014,12 +1015,9 @@ static void InitQuestionData(void)
             && PLAYER_APPRENTICE.questionsAnswered < count + NUM_WHICH_MON_QUESTIONS
             && PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].questionId == QUESTION_ID_WHAT_ITEM)
         {
-            u8 a0;
             // count re-used as monId
             count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
-            a0 = ((PLAYER_APPRENTICE.party >> count) & 1);
-            id2 = PLAYER_APPRENTICE.speciesIds[count];
-            id2 = ((id2) >> (a0 << 2)) & 0xF;
+            APPRENTICE_SPECIES_ID_NO_COND(id2, count);
             gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id2];
         }
     }
