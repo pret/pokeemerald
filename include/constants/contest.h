@@ -32,8 +32,8 @@
 #define CONTEST_WINNER_HALL_5 5
 #define CONTEST_WINNER_HALL_6 6
 #define NUM_CONTEST_HALL_WINNERS 6
-#define CONTEST_WINNER_HALL_UNUSED 7
-#define CONTEST_WINNER_MUSEUM_UNUSED 8
+#define CONTEST_WINNER_HALL_UNUSED_1 7 // These two have data for gDefaultContestWinners
+#define CONTEST_WINNER_HALL_UNUSED_2 8 // but there are only 6 paintings in the Contest Hall
 #define CONTEST_WINNER_MUSEUM_COOL   9
 #define CONTEST_WINNER_MUSEUM_BEAUTY 10
 #define CONTEST_WINNER_MUSEUM_CUTE   11
@@ -41,13 +41,13 @@
 #define CONTEST_WINNER_MUSEUM_TOUGH  13
 // NUM_CONTEST_WINNERS in constants/global.h
 
-#define MUSEUM_CONTEST_WINNERS_START CONTEST_WINNER_MUSEUM_UNUSED
-
-// The number of possible captions for a Contest painting, per category
-#define NUM_PAINTING_CAPTIONS 3
+#define MUSEUM_CONTEST_WINNERS_START (CONTEST_WINNER_MUSEUM_COOL - 1)
 
 #define CONTEST_SAVE_FOR_MUSEUM ((u8)-1)
 #define CONTEST_SAVE_FOR_ARTIST ((u8)-2)
+
+// The number of possible captions for a Contest painting, per category
+#define NUM_PAINTING_CAPTIONS 3
 
 #define CANT_ENTER_CONTEST             0
 #define CAN_ENTER_CONTEST_EQUAL_RANK   1

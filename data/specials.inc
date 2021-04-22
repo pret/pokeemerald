@@ -89,14 +89,14 @@ gSpecials:: @ 81DBA64
 	def_special ResetTVShowState
 	def_special GetContestWinnerId
 	def_special GetContestPlayerId
-	def_special sub_80F8814
+	def_special GetNpcContestantLocalId
 	def_special BufferContestWinnerTrainerName
 	def_special BufferContestWinnerMonName
 	def_special BufferContestTrainerAndMonNames
 	def_special GetContestMonConditionRanking
 	def_special SetContestTrainerGfxIds
 	def_special TryEnterContestMon
-	def_special sub_80F8970
+	def_special GetContestantNamesAtRank
 	def_special SetLinkContestPlayerGfx
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
@@ -147,8 +147,8 @@ gSpecials:: @ 81DBA64
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
 	def_special SaveMuseumContestPainting
-	def_special DoesContestCategoryHaveWinner
-	def_special CountPlayerContestPaintings
+	def_special DoesContestCategoryHaveMuseumPainting
+	def_special CountPlayerMuseumPaintings
 	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch

@@ -159,7 +159,7 @@ static const struct OamData sContestPaintingMonOamData =
     .paletteNum = 0,
 };
 
-static const u16 sBg_Palette[] = {RGB_BLACK, RGB_BLACK};
+static const u16 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
 
 void SetContestWinnerForPainting(int contestWinnerId)
 {
@@ -223,7 +223,7 @@ static void ShowContestPainting(void)
         break;
     case 4:
         PrintContestPaintingCaption(gCurContestWinnerSaveIdx, gCurContestWinnerIsForArtist);
-        LoadPalette(sBg_Palette, 0, 1 * 2);
+        LoadPalette(sBgPalette, 0, 1 * 2);
         DmaClear32(3, PLTT, PLTT_SIZE);
         BeginFastPaletteFade(2);
         SetVBlankCallback(VBlankCB_ContestPainting);
@@ -278,12 +278,13 @@ static void InitContestPaintingWindow(void)
     ShowBg(1);
 }
 
-static void PrintContestPaintingCaption(u8 contestType, bool8 noCaption)
+static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
 {
     int x;
     u8 category;
 
-    if (noCaption == TRUE)
+    // Artist's painting has no caption
+    if (isForArtist == TRUE)
         return;
 
     category = gContestPaintingWinner->contestCategory;
@@ -294,7 +295,7 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 noCaption)
         StringAppend(gStringVar1, gText_Space);
         StringAppend(gStringVar1, sContestRankNames[gContestPaintingWinner->contestRank]);
         StringCopy(gStringVar2, gContestPaintingWinner->trainerName);
-        sub_81DB5AC(gStringVar2);
+        ConvertInternationalContestantName(gStringVar2);
         StringCopy(gStringVar3, gContestPaintingWinner->monName);
         StringExpandPlaceholders(gStringVar4, gContestHallPaintingCaption);
     }

@@ -192,7 +192,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("HANA"),
         .contestRank = CONTEST_RANK_HYPER
     },
-    [CONTEST_WINNER_HALL_UNUSED - 1] = {
+    [CONTEST_WINNER_HALL_UNUSED_1 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_LOUDRED,
@@ -201,7 +201,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("BRYANT"),
         .contestRank = CONTEST_RANK_HYPER
     },
-    [CONTEST_WINNER_MUSEUM_UNUSED - 1] = {
+    [CONTEST_WINNER_HALL_UNUSED_2 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_DELCATTY,

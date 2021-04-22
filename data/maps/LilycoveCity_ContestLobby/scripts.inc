@@ -108,7 +108,7 @@ LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon:: @ 821A314
 	return
 
 LilycoveCity_ContestLobby_EventScript_UpdateMuseumPatrons:: @ 821A360
-	specialvar VAR_0x8004, CountPlayerContestPaintings
+	specialvar VAR_0x8004, CountPlayerMuseumPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_ShowPatron1
 	case 2, LilycoveCity_ContestLobby_EventScript_ShowPatron2

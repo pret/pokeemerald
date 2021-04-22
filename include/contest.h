@@ -111,11 +111,11 @@ struct ContestPokemon
     u32 otId;
 };
 
-struct Shared1A004
+struct ContestTempSave
 {
     u16 cachedWindowPalettes[16][16]; // Saved palette data before a move happens?
-    u16 unk18204[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferUnfaded
-    u16 unk18604[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferFaded
+    u16 cachedPlttBufferUnfaded[PLTT_BUFFER_SIZE];
+    u16 cachedPlttBufferFaded[PLTT_BUFFER_SIZE];
     u8 savedJunk[0x800];
 };
 
@@ -306,7 +306,7 @@ struct ContestResources
 #define eUnzippedContestAudience_Gfx (gHeap + 0x18000)
 #define eContestAudienceFrame2_Gfx (gHeap + 0x19000)
 #define eContestDebugMode (gHeap[0x1a000])
-#define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
+#define eContestTempSave (*(struct ContestTempSave *)(gHeap + 0x1a004))
 
 extern struct ContestPokemon gContestMons[CONTESTANT_COUNT];
 extern s16 gContestMonRound1Points[CONTESTANT_COUNT];

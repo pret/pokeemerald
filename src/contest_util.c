@@ -856,7 +856,7 @@ static void Task_AnnounceWinner(u8 taskId)
             gTasks[taskId].tTimer = 0;
             GET_CONTEST_WINNER_ID(i);
             StringCopy(gStringVar1, gContestMons[i].trainerName);
-            sub_81DB5AC(gStringVar1);
+            ConvertInternationalContestantName(gStringVar1);
             StringCopy(gStringVar2, gContestMons[i].nickname);
             StringExpandPlaceholders(winnerTextBuffer, gText_ContestantsMonWon);
             x = DrawResultsTextWindow(winnerTextBuffer, sContestResults->data->slidingTextBoxSpriteId);
@@ -2057,7 +2057,7 @@ void GiveMonContestRibbon(void)
 void BufferContestantTrainerName(void)
 {
     StringCopy(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
-    sub_81DB5AC(gStringVar1);
+    ConvertInternationalContestantName(gStringVar1);
 }
 
 void BufferContestantMonNickname(void)
@@ -2096,7 +2096,7 @@ void BufferContestWinnerTrainerName(void)
     u8 i;
     GET_CONTEST_WINNER_ID(i);
     StringCopy(gStringVar3, gContestMons[i].trainerName);
-    sub_81DB5AC(gStringVar3);
+    ConvertInternationalContestantName(gStringVar3);
 }
 
 void BufferContestWinnerMonName(void)
@@ -2279,6 +2279,10 @@ static void Task_LinkContest_WaitDisconnect(u8 taskId)
     }
 }
 
+/*
+    A section of contest script functions starts here
+*/
+
 void SetContestTrainerGfxIds(void)
 {
     gSaveBlock1Ptr->vars[VAR_OBJ_GFX_ID_0 - VARS_START] = gContestMons[0].trainerGfxId;
@@ -2287,27 +2291,27 @@ void SetContestTrainerGfxIds(void)
 }
 
 // Unused
-void sub_80F8814(void)
+void GetNpcContestantLocalId(void)
 {
-    u16 var1;
-    u8 var0 = gSpecialVar_0x8005;
-    switch (var0)
+    u16 localId;
+    u8 contestant = gSpecialVar_0x8005;
+    switch (contestant)
     {
     case 0:
-        var1 = 3;
+        localId = 3;
         break;
     case 1:
-        var1 = 4;
+        localId = 4;
         break;
     case 2:
-        var1 = 5;
+        localId = 5;
         break;
-    default:
-        var1 = 100;
+    default: // Invalid
+        localId = 100;
         break;
     }
 
-    gSpecialVar_0x8004 = var1;
+    gSpecialVar_0x8004 = localId;
 }
 
 void BufferContestTrainerAndMonNames(void)
@@ -2318,26 +2322,26 @@ void BufferContestTrainerAndMonNames(void)
 }
 
 // Unused
-void DoesContestCategoryHaveWinner(void)
+void DoesContestCategoryHaveMuseumPainting(void)
 {
     int contestWinner;
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        contestWinner = 8;
+        contestWinner = CONTEST_WINNER_MUSEUM_COOL - 1;
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        contestWinner = 9;
+        contestWinner = CONTEST_WINNER_MUSEUM_BEAUTY - 1;
         break;
     case CONTEST_CATEGORY_CUTE:
-        contestWinner = 10;
+        contestWinner = CONTEST_WINNER_MUSEUM_CUTE - 1;
         break;
     case CONTEST_CATEGORY_SMART:
-        contestWinner = 11;
+        contestWinner = CONTEST_WINNER_MUSEUM_SMART - 1;
         break;
     case CONTEST_CATEGORY_TOUGH:
     default:
-        contestWinner = 12;
+        contestWinner = CONTEST_WINNER_MUSEUM_TOUGH - 1;
         break;
     }
 
@@ -2366,14 +2370,14 @@ void ShouldReadyContestArtist(void)
     }
 }
 
-u8 CountPlayerContestPaintings(void)
+u8 CountPlayerMuseumPaintings(void)
 {
     int i;
     u8 count = 0;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_CONTEST_WINNERS - MUSEUM_CONTEST_WINNERS_START; i++)
     {
-        if (gSaveBlock1Ptr->contestWinners[8 + i].species)
+        if (gSaveBlock1Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START + i].species)
             count++;
     }
 
@@ -2381,19 +2385,21 @@ u8 CountPlayerContestPaintings(void)
 }
 
 // Unused
-void sub_80F8970(void)
+void GetContestantNamesAtRank(void)
 {
     s16 conditions[CONTESTANT_COUNT];
     int i, j;
     s16 condition;
-    s8 var0;
-    u8 var2;
-    u8 r8;
-    u8 r7;
+    s8 numAtCondition;
+    u8 contestantOffset;
+    u8 tieRank;
+    u8 rank;
 
+    // Get round 1 points
     for (i = 0; i < CONTESTANT_COUNT; i++)
         conditions[i] = gContestMonRound1Points[i];
 
+    // Sort round 1 points
     for (i = 0; i < CONTESTANT_COUNT - 1; i++)
     {
         for (j = CONTESTANT_COUNT - 1; j > i; j--)
@@ -2406,47 +2412,54 @@ void sub_80F8970(void)
         }
     }
 
+    // Get round 1 points at specified rank
     condition = conditions[gSpecialVar_0x8006];
-    var0 = 0;
-    r8 = 0;
+
+    // Count number of contestants with the same number of points
+    numAtCondition = 0;
+    tieRank = 0;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (conditions[i] == condition)
         {
-            var0++;
+            numAtCondition++;
             if (i == gSpecialVar_0x8006)
-                r8 = var0;
+                tieRank = numAtCondition;
         }
     }
 
+    // Get rank of first contestant with the same number of points
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (conditions[i] == condition)
             break;
     }
+    rank = i;
 
-    r7 = i;
-    var2 = r8;
+    // Get contestant id of player at rank (taking ties into account)
+    contestantOffset = tieRank;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (condition == gContestMonRound1Points[i])
         {
-            if (var2 == 1)
+            if (contestantOffset == 1)
                 break;
-            var2--;
+            contestantOffset--;
         }
     }
 
+    // Use contestant id to get names
     StringCopy(gStringVar1, gContestMons[i].nickname);
     StringCopy(gStringVar2, gContestMons[i].trainerName);
-    sub_81DB5AC(gStringVar2);
+    ConvertInternationalContestantName(gStringVar2);
 
-    if (var0 == 1)
-        gSpecialVar_0x8006 = r7;
-    else if (r8 == var0)
-        gSpecialVar_0x8006 = r7;
+    // Return adjusted rank
+    if (numAtCondition == 1)
+        gSpecialVar_0x8006 = rank;
+    else if (tieRank == numAtCondition)
+        gSpecialVar_0x8006 = rank;
     else
-        gSpecialVar_0x8006 = r7 + 4;
+        gSpecialVar_0x8006 = rank + CONTESTANT_COUNT;
 }
 
 static void ExitContestPainting(void)
