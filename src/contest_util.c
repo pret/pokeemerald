@@ -606,10 +606,10 @@ static void Task_ShowContestResults(u8 taskId)
             }
 
             TryGainNewFanFromCounter(FANCOUNTER_FINISHED_CONTEST);
-            sub_80DEDA8(gSpecialVar_ContestRank);
-            sub_80DEDA8(0xFE);
-            gUnknown_02039F5C = TRUE;
-            gUnknown_02039F5D = sub_80DEFA8(0xFE, 0);
+            SaveContestWinner(gSpecialVar_ContestRank); // Save for lobby painting
+            SaveContestWinner(CONTEST_SAVE_FOR_ARTIST);
+            gCurContestWinnerIsForArtist = TRUE;
+            gCurContestWinnerSaveIdx = GetContestWinnerSaveIdx(CONTEST_SAVE_FOR_ARTIST, FALSE);
             var = VarGet(VAR_CONTEST_HALL_STATE);
             VarSet(VAR_CONTEST_HALL_STATE, 0);
             SetContinueGameWarpStatusToDynamicWarp();
@@ -656,10 +656,10 @@ static void Task_ShowContestResults(u8 taskId)
             if (gContestFinalStandings[gContestPlayerMonIndex] == 0)
                 IncrementGameStat(GAME_STAT_WON_CONTEST);
 
-            sub_80DEDA8(gSpecialVar_ContestRank);
-            sub_80DEDA8(0xFE);
-            gUnknown_02039F5C = TRUE;
-            gUnknown_02039F5D = sub_80DEFA8(0xFE, 0);
+            SaveContestWinner(gSpecialVar_ContestRank); // Save for lobby painting
+            SaveContestWinner(CONTEST_SAVE_FOR_ARTIST);
+            gCurContestWinnerIsForArtist = TRUE;
+            gCurContestWinnerSaveIdx = GetContestWinnerSaveIdx(CONTEST_SAVE_FOR_ARTIST, FALSE);
             TryGainNewFanFromCounter(FANCOUNTER_FINISHED_CONTEST);
             gTasks[taskId].func = Task_AnnouncePreliminaryResults;
         }
@@ -2349,7 +2349,7 @@ void DoesContestCategoryHaveWinner(void)
 
 void SaveMuseumContestPainting(void)
 {
-    sub_80DEDA8(0xFF);
+    SaveContestWinner(CONTEST_SAVE_FOR_MUSEUM);
 }
 
 void ShouldReadyContestArtist(void)
@@ -2449,15 +2449,15 @@ void sub_80F8970(void)
         gSpecialVar_0x8006 = r7 + 4;
 }
 
-static void ExitContestWinnerPainting(void)
+static void ExitContestPainting(void)
 {
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void ShowContestWinnerPainting(void)
+void ShowContestPainting(void)
 {
     SetMainCallback2(CB2_ContestPainting);
-    gMain.savedCallback = ExitContestWinnerPainting;
+    gMain.savedCallback = ExitContestPainting;
 }
 
 void SetLinkContestPlayerGfx(void)

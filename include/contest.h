@@ -326,8 +326,8 @@ extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
 extern u8 sContestBgCopyFlags;
 extern struct ContestWinner gCurContestWinner;
-extern u8 gUnknown_02039F5C;
-extern u8 gUnknown_02039F5D;
+extern u8 gCurContestWinnerIsForArtist;
+extern u8 gCurContestWinnerSaveIdx;
 extern u32 gContestRngValue;
 
 // contest.c
@@ -351,8 +351,8 @@ s8 Contest_GetMoveExcitement(u16 move);
 bool8 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);
-bool8 sub_80DEDA8(u8 a);
-u8 sub_80DEFA8(u8 a, u8 b);
+bool8 SaveContestWinner(u8 rank);
+u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift);
 void ClearContestWinnerPicsInContestHall(void);
 void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language);
 

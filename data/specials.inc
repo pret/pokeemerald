@@ -149,7 +149,7 @@ gSpecials:: @ 81DBA64
 	def_special SaveMuseumContestPainting
 	def_special DoesContestCategoryHaveWinner
 	def_special CountPlayerContestPaintings
-	def_special ShowContestWinnerPainting
+	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
