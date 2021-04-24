@@ -2273,7 +2273,7 @@ u8 CreateInvisibleSpriteCopy(int battlerId, u8 spriteId, int species)
     return newSpriteId;
 }
 
-void AnimUnused_80A8A6C(struct Sprite *sprite)
+void AnimTranslateLinearAndFlicker_Flipped(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -2296,7 +2296,7 @@ void AnimUnused_80A8A6C(struct Sprite *sprite)
 }
 
 // Used by three different unused battle anim sprite templates.
-void AnimUnused_80A8AEC(struct Sprite *sprite)
+void AnimTranslateLinearAndFlicker(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
