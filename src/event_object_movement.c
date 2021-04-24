@@ -1716,7 +1716,7 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
 
 void RemoveFollowingPokemon(void) { // Remove follower object. Idempotent.
   struct ObjectEvent *objectEvent = GetFollowerObject();
-  if (objectEvent == NULL)
+  if (objectEvent == NULL)g
     return;
   RemoveObjectEvent(objectEvent);
 }
@@ -1727,7 +1727,9 @@ static bool8 IsFollowerVisible(void) { // Determine whether follower *should* be
   || MetatileBehavior_IsSurfableWaterOrUnderwater(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior)
   || MetatileBehavior_IsSurfableWaterOrUnderwater(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior)
   || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior)
-  || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior));
+  || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior)
+  || gWeatherPtr->currWeather == WEATHER_UNDERWATER
+  || gWeatherPtr->currWeather == WEATHER_UNDERWATER_BUBBLES);
 }
 
 static bool8 SpeciesHasType(u16 species, u8 type) {
