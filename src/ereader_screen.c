@@ -401,7 +401,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 15:
-        data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
+        data->unkE = ValidateTrainerHillData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
         SetCloseLinkCallbackAndType(data->unkE);
         data->unk8 = 16;
         break;

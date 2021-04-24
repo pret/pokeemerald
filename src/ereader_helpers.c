@@ -14,6 +14,7 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 #include "constants/items.h"
+#include "constants/trainer_hill.h"
 
 enum {
     EREADER_XFR_STATE_INIT = 0,
@@ -419,127 +420,131 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     },
 };
 
-static u8 sub_81D38D4(void)
+static u8 GetTrainerHillUnkVal(void)
 {
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
-static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)
+static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTrainer)
 {
-    int checksum = CalcByteArraySum((u8 *)arg0, 0x270);
-    if (checksum != arg0->checksum)
+    int checksum = CalcByteArraySum((u8 *)hillTrainer, offsetof(typeof(*hillTrainer), checksum));
+    if (checksum != hillTrainer->checksum)
         return FALSE;
 
     return TRUE;
 }
 
-bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
+bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
 {
     u32 i;
     u32 checksum;
-    int var0 = buffer->count;
-    if (var0 < 1 || var0 > 8)
+    int numTrainers = hillSet->numTrainers;
+
+    // Validate number of trainers
+    if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
         return FALSE;
 
-    for (i = 0; i < var0; i++)
+    // Validate trainers
+    for (i = 0; i < numTrainers; i++)
     {
-        if (!Struct_EReaderTrainerHillTrainer_ValidateChecksum(&buffer->unk_8[i]))
+        if (!ValidateTrainerChecksum(&hillSet->trainers[i]))
             return FALSE;
     }
 
-    checksum = CalcByteArraySum((u8 *)buffer->unk_8, var0 * sizeof(struct EReaderTrainerHillTrainer));
-    if (checksum != buffer->checksum)
+    // Validate checksum
+    checksum = CalcByteArraySum((u8 *)hillSet->trainers, numTrainers * sizeof(struct EReaderTrainerHillTrainer));
+    if (checksum != hillSet->checksum)
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
+static bool32 ValidateTrainerHillChecksum(struct EReaderTrainerHillSet *hillSet)
 {
     u32 checksum;
-    int var0 = buffer->count;
-    if (var0 < 1 || var0 > 8)
+    int numTrainers = hillSet->numTrainers;
+    if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
         return FALSE;
 
-    checksum = CalcByteArraySum((u8 *)buffer->unk_8, sizeof(struct EReaderTrainerHillSet) - offsetof(struct EReaderTrainerHillSet, unk_8));
-    if (checksum != buffer->checksum)
+    checksum = CalcByteArraySum((u8 *)hillSet->trainers, sizeof(struct EReaderTrainerHillSet) - offsetof(struct EReaderTrainerHillSet, trainers));
+    if (checksum != hillSet->checksum)
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
+static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet * hillSet, struct TrHillTag * hillTag)
 {
     int i;
 
-    AGB_ASSERT_EX(ttdata->dummy == 0, "cereader_tool.c", 450);
-    AGB_ASSERT_EX(ttdata->id == 0, "cereader_tool.c", 452);
+    AGB_ASSERT_EX(hillSet->dummy == 0, "cereader_tool.c", 450);
+    AGB_ASSERT_EX(hillSet->id == 0, "cereader_tool.c", 452);
 
-    memset(buffer2, 0, 0x1000);
-    buffer2->numTrainers = ttdata->count;
-    buffer2->unused1 = sub_81D38D4();
-    buffer2->numFloors = (ttdata->count + 1) / 2;
+    memset(hillTag, 0, SECTOR_SIZE);
+    hillTag->numTrainers = hillSet->numTrainers;
+    hillTag->unused1 = GetTrainerHillUnkVal();
+    hillTag->numFloors = (hillSet->numTrainers + 1) / TRAINER_HILL_TRAINERS_PER_FLOOR;
 
-    for (i = 0; i < ttdata->count; i++)
+    for (i = 0; i < hillSet->numTrainers; i++)
     {
         if (!(i & 1))
         {
-            buffer2->floors[i / 2].trainerNum1 = ttdata->unk_8[i].unk0;
-            buffer2->floors[i / 2].display = ttdata->unk_8[i].unk14C;
-            buffer2->floors[i / 2].trainers[0] = ttdata->unk_8[i].unk4;
+            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainerNum1 = hillSet->trainers[i].trainerNum;
+            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].display = hillSet->trainers[i].display;
+            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainers[0] = hillSet->trainers[i].trainer;
         }
         else
         {
-            buffer2->floors[i / 2].trainerNum2 = ttdata->unk_8[i].unk0;
-            buffer2->floors[i / 2].trainers[1] = ttdata->unk_8[i].unk4;
+            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainerNum2 = hillSet->trainers[i].trainerNum;
+            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainers[1] = hillSet->trainers[i].trainer;
         }
     }
 
     if (i & 1)
     {
-        buffer2->floors[i / 2].trainers[1] = sTrainerHillTrainerTemplates_JP[i / 2];
+        hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainers[1] = sTrainerHillTrainerTemplates_JP[i / TRAINER_HILL_TRAINERS_PER_FLOOR];
     }
 
-    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, 4 * sizeof(struct TrHillFloor));
-    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != SAVE_STATUS_OK)
+    hillTag->checksum = CalcByteArraySum((u8 *)hillTag->floors, NUM_TRAINER_HILL_FLOORS * sizeof(struct TrHillFloor));
+    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)hillTag) != SAVE_STATUS_OK)
         return FALSE;
 
     return TRUE;
 }
 
-bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
+bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
 {
-    void *var0 = AllocZeroed(0x1000);
-    bool32 result = TryWriteTrainerHill_r(arg0, var0);
-    Free(var0);
+    void *buffer = AllocZeroed(SECTOR_SIZE);
+    bool32 result = TryWriteTrainerHill_Internal(hillSet, buffer);
+    Free(buffer);
     return result;
 }
 
-static bool32 TryReadTrainerHill_r(struct EReaderTrainerHillSet *dst, u8 *buffer)
+static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 * buffer)
 {
     if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;
 
-    memcpy(dst, buffer, sizeof(struct EReaderTrainerHillSet));
-    if (!TrainerHill_VerifyChecksum(dst))
+    memcpy(dest, buffer, sizeof(struct EReaderTrainerHillSet));
+    if (!ValidateTrainerHillChecksum(dest))
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet *arg0)
+static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet * hillSet)
 {
-    u8 *var0 = AllocZeroed(0x1000);
-    bool32 result = TryReadTrainerHill_r(arg0, var0);
-    Free(var0);
+    u8 *buffer = AllocZeroed(SECTOR_SIZE);
+    bool32 result = TryReadTrainerHill_Internal(hillSet, buffer);
+    Free(buffer);
     return result;
 }
 
 bool32 ReadTrainerHillAndValidate(void)
 {
-    struct EReaderTrainerHillSet *var0 = AllocZeroed(0x1000);
-    bool32 result = TryReadTrainerHill(var0);
-    Free(var0);
+    struct EReaderTrainerHillSet *hillSet = AllocZeroed(SECTOR_SIZE);
+    bool32 result = TryReadTrainerHill(hillSet);
+    Free(hillSet);
     return result;
 }
 
