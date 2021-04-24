@@ -1716,7 +1716,7 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
 
 void RemoveFollowingPokemon(void) { // Remove follower object. Idempotent.
   struct ObjectEvent *objectEvent = GetFollowerObject();
-  if (objectEvent == NULL)g
+  if (objectEvent == NULL)
     return;
   RemoveObjectEvent(objectEvent);
 }
