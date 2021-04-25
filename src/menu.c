@@ -509,12 +509,14 @@ void RemoveStartMenuWindow(void)
     }
 }
 
-u16 sub_8197A30(void)
+// Unused
+static u16 GetDialogFrameBaseTileNum(void)
 {
     return DLG_WINDOW_BASE_TILE_NUM;
 }
 
-u16 sub_8197A38(void)
+// Unused
+static u16 GetStandardFrameBaseTileNum(void)
 {
     return STD_WINDOW_BASE_TILE_NUM;
 }

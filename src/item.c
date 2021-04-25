@@ -14,7 +14,6 @@
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
-#include "constants/tv.h"
 
 extern u16 gUnknown_0203CF30[];
 
