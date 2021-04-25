@@ -811,7 +811,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
     if (sprite->data[0] == 0)
     {
         gSprites[sEggHatchData->pokeSpriteID].invisible = FALSE;
-        StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
+        StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], BATTLER_AFFINE_EMERGE);
     }
     if (sprite->data[0] == 8)
         BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_WHITEALPHA);

@@ -2078,8 +2078,8 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
 
     if (IsContest())
     {
-        gSprites[spriteId].affineAnims = gUnknown_082FF6C0;
-        StartSpriteAffineAnim(&gSprites[spriteId], 0);
+        gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteContest;
+        StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_NORMAL);
     }
     return spriteId;
 }
