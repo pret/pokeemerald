@@ -287,7 +287,7 @@ static const union AnimCmd *const sSpriteAnimTable_Emotes[] = {
 
 // TODO: Move these declarations into even_object_movement.h
 #define OBJ_EVENT_PAL_TAG_MAY 0x1110
-#define OBJ_EVENT_PAL_TAG_EMOTES 0x1125
+#define OBJ_EVENT_PAL_TAG_EMOTES 0x8002
 
 static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 {
