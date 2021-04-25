@@ -323,36 +323,38 @@ bool8 MenuHelpers_CallLinkSomething(void)
         return TRUE;
 }
 
-void sub_812220C(struct ItemSlot *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount)
+void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage)
 {
     u16 i;
     struct ItemSlot *slots_ = slots;
 
-    (*usedSlotsCount) = 0;
-    for (i = 0; i < count; i++)
+    // Count the number of non-empty item slots
+    *totalItems = 0;
+    for (i = 0; i < slotsCount; i++)
     {
         if (slots_[i].itemId != ITEM_NONE)
-            (*usedSlotsCount)++;
+            (*totalItems)++;
     }
+    (*totalItems)++; // + 1 for 'Cancel'
 
-    (*usedSlotsCount)++;
-    if ((*usedSlotsCount) > maxUsedSlotsCount)
-        *arg2 = maxUsedSlotsCount;
+    // Set number of items per page
+    if (*totalItems > maxPerPage)
+        *pageItems = maxPerPage;
     else
-        *arg2 = (*usedSlotsCount);
+        *pageItems = *totalItems;
 }
 
-void sub_812225C(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 numItems)
+void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems)
 {
-    if (*scrollOffset != 0 && *scrollOffset + maxShownItems > numItems)
-        *scrollOffset = numItems - maxShownItems;
+    if (*scrollOffset != 0 && *scrollOffset + maxShownItems > totalItems)
+        *scrollOffset = totalItems - maxShownItems;
 
-    if (*scrollOffset + *cursorPos >= numItems)
+    if (*scrollOffset + *cursorPos >= totalItems)
     {
-        if (numItems == 0)
+        if (totalItems == 0)
             *cursorPos = 0;
         else
-            *cursorPos = numItems - 1;
+            *cursorPos = totalItems - 1;
     }
 }
 
