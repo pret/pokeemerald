@@ -244,7 +244,7 @@ static const struct OamData sBerryPicRotatingOamData =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_857FBD8[] =
+static const union AnimCmd sAnim_BerryPic[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
@@ -252,7 +252,7 @@ static const union AnimCmd sSpriteAnim_857FBD8[] =
 
 static const union AnimCmd *const sBerryPicSpriteAnimTable[] =
 {
-    sSpriteAnim_857FBD8
+    sAnim_BerryPic
 };
 
 static const struct SpriteFrameImage sBerryPicSpriteImageTable[] =
