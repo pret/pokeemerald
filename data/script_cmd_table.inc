@@ -119,7 +119,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_drawboxtext               @ 0x74
 	.4byte ScrCmd_showmonpic                @ 0x75
 	.4byte ScrCmd_hidemonpic                @ 0x76
-	.4byte ScrCmd_showcontestwinner         @ 0x77
+	.4byte ScrCmd_showcontestpainting       @ 0x77
 	.4byte ScrCmd_braillemessage            @ 0x78
 	.4byte ScrCmd_givemon                   @ 0x79
 	.4byte ScrCmd_giveegg                   @ 0x7a

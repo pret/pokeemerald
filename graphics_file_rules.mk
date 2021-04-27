@@ -476,7 +476,7 @@ $(RAYQUAZAGFXDIR)/scene_4/streaks.4bpp: %.4bpp: %.png
 $(RAYQUAZAGFXDIR)/scene_4/rayquaza.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 155
 
-graphics/picture_frame/frame5.4bpp: %.4bpp: %.png
+graphics/picture_frame/lobby.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 86
 
 $(ROULETTEGFXDIR)/roulette_tilt.4bpp: $(ROULETTEGFXDIR)/shroomish.4bpp \

@@ -350,8 +350,8 @@ EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
 EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
-EWRAM_DATA bool8 gUnknown_02039F5C = 0;
-EWRAM_DATA u8 gUnknown_02039F5D = 0;
+EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
+EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 
 // IWRAM common vars.
 u32 gContestRngValue;
@@ -1034,7 +1034,7 @@ void LoadContestBgAfterMoveAnim(void)
     {
         u32 contestantWindowId = 5 + i;
 
-        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId], 16 * (5 + gContestantTurnOrder[i]), sizeof((eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId])));
+        LoadPalette(eContestTempSave.cachedWindowPalettes[contestantWindowId], 16 * (5 + gContestantTurnOrder[i]), sizeof((eContestTempSave.cachedWindowPalettes[contestantWindowId])));
     }
 }
 
@@ -1320,7 +1320,7 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
         CopyBgTilemapBufferToVram(2);
         // This is a bug, and copies random junk. savedJunk is never read.
-        DmaCopy32Defvars(3, gContestResources->contestBgTilemaps[2], eUnknownHeap1A004.savedJunk, sizeof(eUnknownHeap1A004.savedJunk));
+        DmaCopy32Defvars(3, gContestResources->contestBgTilemaps[2], eContestTempSave.savedJunk, sizeof(eContestTempSave.savedJunk));
         break;
     case 5:
         LoadCompressedPalette(gOldContestPalette, 0, 0x200);
@@ -1328,7 +1328,7 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
         CpuCopy32(tempPalette2, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
         CpuCopy32(tempPalette1, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
-        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.cachedWindowPalettes, sizeof(eUnknownHeap1A004.cachedWindowPalettes));
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, eContestTempSave.cachedWindowPalettes, sizeof(eContestTempSave.cachedWindowPalettes));
         LoadContestPalettes();
         break;
     case 6:
@@ -1468,7 +1468,7 @@ static void Task_DisplayAppealNumberText(u8 taskId)
         gBattle_BG0_Y = 0;
         gBattle_BG2_Y = 0;
         ContestDebugDoPrint();
-        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18204, PLTT_BUFFER_SIZE * 2);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, eContestTempSave.cachedPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
         ConvertIntToDecimalStringN(gStringVar1, eContest.appealNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
             StringCopy(gDisplayedStringBattle, gText_AppealNumWhichMoveWillBePlayed);
@@ -1667,8 +1667,8 @@ static void Task_HideMoveSelectScreen(u8 taskId)
     }
     Contest_SetBgCopyFlags(0);
     // This seems to be a bug; it should have just copied PLTT_BUFFER_SIZE.
-    DmaCopy32Defvars(3, gPlttBufferFaded, eUnknownHeap1A004.unk18604, PLTT_BUFFER_SIZE * 2);
-    LoadPalette(eUnknownHeap1A004.unk18204, 0, PLTT_BUFFER_SIZE * 2);
+    DmaCopy32Defvars(3, gPlttBufferFaded, eContestTempSave.cachedPlttBufferFaded, PLTT_BUFFER_SIZE * 2);
+    LoadPalette(eContestTempSave.cachedPlttBufferUnfaded, 0, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].func = Task_HideApplauseMeterForAppealStart;
@@ -2554,7 +2554,7 @@ static void Task_WaitForHeartSliders(u8 taskId)
 
 static void sub_80DA348(u8 taskId)
 {
-    DmaCopy32Defvars(3, eUnknownHeap1A004.unk18204, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
+    DmaCopy32Defvars(3, eContestTempSave.cachedPlttBufferUnfaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 2;
     gTasks[taskId].func = Task_WaitPrintRoundResult;
@@ -4412,7 +4412,7 @@ static void DrawContestantWindows(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         s32 windowId = i + 5;
-        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + 5) * 16, sizeof(eUnknownHeap1A004.cachedWindowPalettes[0]));
+        LoadPalette(eContestTempSave.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + 5) * 16, sizeof(eContestTempSave.cachedWindowPalettes[0]));
     }
     DrawContestantWindowText();
 }
@@ -5516,40 +5516,46 @@ void ResetContestLinkResults(void)
             gSaveBlock2Ptr->contestLinkResults[i][j] = 0;
 }
 
-bool8 sub_80DEDA8(u8 rank)
+bool8 SaveContestWinner(u8 rank)
 {
     s32 i;
-    u8 r7 = Random() % 3;
+    u8 captionId = Random() % NUM_PAINTING_CAPTIONS;
 
+    // Get the index of the winner among the contestants
     for (i = 0; i < CONTESTANT_COUNT - 1; i++)
-    {
         if (gContestFinalStandings[i] == 0)
             break;
-    }
-    if (rank == 0xFF && i != gContestPlayerMonIndex)
+
+    // Exit if attempting to save a Pokémon other than the player's to the museum
+    if (rank == CONTEST_SAVE_FOR_MUSEUM && i != gContestPlayerMonIndex)
         return FALSE;
+
+    // Adjust the random painting caption depending on the category
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        r7 += 0;
+        captionId += NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_COOL;
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        r7 += 3;
+        captionId += NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_BEAUTY;
         break;
     case CONTEST_CATEGORY_CUTE:
-        r7 += 6;
+        captionId += NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_CUTE;
         break;
     case CONTEST_CATEGORY_SMART:
-        r7 += 9;
+        captionId += NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_SMART;
         break;
     case CONTEST_CATEGORY_TOUGH:
-        r7 += 12;
+        captionId += NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_TOUGH;
         break;
     }
-    if (rank != 0xFE)
-    {
-        u8 id = sub_80DEFA8(rank, 1);
 
+    if (rank != CONTEST_SAVE_FOR_ARTIST)
+    {
+        // Save winner in the saveblock
+        // Used to save any winner for the Contest Hall or the Museum
+        // but excludes the temporary save used by the artist
+        u8 id = GetContestWinnerSaveIdx(rank, TRUE);
         gSaveBlock1Ptr->contestWinners[id].personality = gContestMons[i].personality;
         gSaveBlock1Ptr->contestWinners[id].species = gContestMons[i].species;
         gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
@@ -5560,24 +5566,29 @@ bool8 sub_80DEDA8(u8 rank)
         else
             gSaveBlock1Ptr->contestWinners[id].contestRank = gSpecialVar_ContestRank;
 
-        if (rank != 0xFF)
+        if (rank != CONTEST_SAVE_FOR_MUSEUM)
             gSaveBlock1Ptr->contestWinners[id].contestCategory = gSpecialVar_ContestCategory;
         else
-            gSaveBlock1Ptr->contestWinners[id].contestCategory = r7;
+            gSaveBlock1Ptr->contestWinners[id].contestCategory = captionId;
     }
     else
     {
+        // Set the most recent winner so the artist can show the player their painting
         gCurContestWinner.personality = gContestMons[i].personality;
         gCurContestWinner.trainerId = gContestMons[i].otId;
         gCurContestWinner.species = gContestMons[i].species;
         StringCopy(gCurContestWinner.monName, gContestMons[i].nickname);
         StringCopy(gCurContestWinner.trainerName, gContestMons[i].trainerName);
-        gCurContestWinner.contestCategory = r7;
+        gCurContestWinner.contestCategory = captionId;
     }
     return TRUE;
 }
 
-u8 sub_80DEFA8(u8 rank, u8 b)
+// Rank is either a regular contest rank (for saving winners to show in the Contest Hall)
+// Or one of two special IDs listed below (for saving winners to show in Museum, or from the artist)
+// If just retrieving the index where the winner *would* go, shift is FALSE
+// If actually preparing to insert the winner into the saveblock, shift is TRUE
+u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift)
 {
     s32 i;
 
@@ -5587,13 +5598,15 @@ u8 sub_80DEFA8(u8 rank, u8 b)
     case CONTEST_RANK_SUPER:
     case CONTEST_RANK_HYPER:
     case CONTEST_RANK_MASTER:
-        if (b != 0)
+        if (shift)
         {
-            for (i = NUM_CONTEST_HALL_WINNERS - 1; i >= 1; i--)
+            for (i = NUM_CONTEST_HALL_WINNERS - 1; i > 0; i--)
                 memcpy(&gSaveBlock1Ptr->contestWinners[i], &gSaveBlock1Ptr->contestWinners[i - 1], sizeof(struct ContestWinner));
         }
-        return 0;
+        return CONTEST_WINNER_HALL_1 - 1;
     default:
+//  case CONTEST_SAVE_FOR_MUSEUM:
+//  case CONTEST_SAVE_FOR_ARTIST:
         switch (gSpecialVar_ContestCategory)
         {
         case CONTEST_CATEGORY_COOL:
@@ -5615,7 +5628,7 @@ void ClearContestWinnerPicsInContestHall(void)
 {
     s32 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < MUSEUM_CONTEST_WINNERS_START; i++)
         gSaveBlock1Ptr->contestWinners[i] = gDefaultContestWinners[i];
 }
 
