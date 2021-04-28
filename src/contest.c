@@ -3133,10 +3133,10 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;
     if (IsSpeciesNotUnown(species))
-        gSprites[spriteId].affineAnims = gUnknown_082FF6C0;
+        gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteContest;
     else
         gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteOpponentSide;
-    StartSpriteAffineAnim(gSprites + spriteId, 0);
+    StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_NORMAL);
 
     return spriteId;
 }
