@@ -300,25 +300,25 @@ static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
-    _("Normal"),
-    _("Fight"),
-    _("Flying"),
-    _("Poison"),
-    _("Ground"),
-    _("Rock"),
-    _("Bug"),
-    _("Ghost"),
-    _("Steel"),
-    _("???"),
-    _("Fire"),
-    _("Water"),
-    _("Grass"),
-    _("Electr"),
-    _("Psychc"),
-    _("Ice"),
-    _("Dragon"),
-    _("Dark"),
-    _("Fairy"),
+    [TYPE_NORMAL] = _("Normal"),
+    [TYPE_FIGHTING] = _("Fight"),
+    [TYPE_FLYING] = _("Flying"),
+    [TYPE_POISON] = _("Poison"),
+    [TYPE_GROUND] = _("Ground"),
+    [TYPE_ROCK] = _("Rock"),
+    [TYPE_BUG] = _("Bug"),
+    [TYPE_GHOST] = _("Ghost"),
+    [TYPE_STEEL] = _("Steel"),
+    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FIRE] = _("Fire"),
+    [TYPE_WATER] = _("Water"),
+    [TYPE_GRASS] = _("Grass"),
+    [TYPE_ELECTRIC] = _("Electr"),
+    [TYPE_PSYCHIC] = _("Psychc"),
+    [TYPE_ICE] = _("Ice"),
+    [TYPE_DRAGON] = _("Dragon"),
+    [TYPE_DARK] = _("Dark"),
+    [TYPE_FAIRY] = _("Fairy"),
 };
 
 // This is a factor in how much money you get for beating a trainer.
@@ -478,22 +478,22 @@ static void CB2_InitBattleInternal(void)
     CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
 
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
-    SetGpuReg(REG_OFFSET_WIN0H, 240);
-    SetGpuReg(REG_OFFSET_WIN0V, 0x5051);
+    SetGpuReg(REG_OFFSET_WIN0H, DISPLAY_WIDTH);
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1));
     SetGpuReg(REG_OFFSET_WININ, 0);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
 
-    gBattle_WIN0H = 240;
+    gBattle_WIN0H = DISPLAY_WIDTH;
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER && gPartnerTrainerId < TRAINER_CUSTOM_PARTNER)
     {
-        gBattle_WIN0V = 159;
-        gBattle_WIN1H = 240;
+        gBattle_WIN0V = DISPLAY_HEIGHT - 1;
+        gBattle_WIN1H = DISPLAY_WIDTH;
         gBattle_WIN1V = 32;
     }
     else
     {
-        gBattle_WIN0V = 0x5051;
+        gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
         ScanlineEffect_Clear();
 
         i = 0;
@@ -3648,13 +3648,13 @@ u8 IsRunningFromBattleImpossible(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) // Cannot ever run from saving Birch's battle.
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DONT_LEAVE_BIRCH;
         return 1;
     }
     if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && WILD_DOUBLE_BATTLE
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) // The second pokemon cannot run from a double wild battle, unless it's the only alive mon.
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return 1;
     }
 
@@ -3669,13 +3669,13 @@ u8 IsRunningFromBattleImpossible(void)
     {
         gBattleScripting.battler = i - 1;
         gLastUsedAbility = gBattleMons[i - 1].ability;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
         return 2;
     }
 
     if (!CanBattlerEscape(gActiveBattler))
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return 1;
     }
     return 0;

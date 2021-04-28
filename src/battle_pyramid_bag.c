@@ -63,7 +63,7 @@ static void sub_81C56F8(void);
 static void sub_81C5A20(void);
 static void sub_81C6BD8(void);
 static void sub_81C6EF4(void);
-static void sub_81C700C(void);
+static void CreateSwapLine(void);
 static void sub_81C6E98(void);
 static void sub_81C6F20(void);
 static void sub_81C6404(void);
@@ -84,8 +84,8 @@ static void sub_81C5F08(u8 windowId, u8 horizontalCount, u8 verticalCount);
 static bool8 IsValidMenuAction(s8 arg0);
 static void sub_81C6DAC(u8 taskId, const struct YesNoFuncTable *yesNoTable);
 static void sub_81C6CEC(u8 windowId);
-static void sub_81C704C(u8 y);
-static void sub_81C7028(bool8 invisible);
+static void UpdateSwapLinePos(u8 y);
+static void SetSwapLineInvisibility(bool8 invisible);
 static void sub_81C6F68(struct Sprite *sprite);
 static void BagAction_UseOnField(u8 taskId);
 static void BagAction_Toss(u8 taskId);
@@ -489,7 +489,7 @@ static bool8 sub_81C5078(void)
             gMain.state++;
             break;
         case 14:
-            sub_81C700C();
+            CreateSwapLine();
             gMain.state++;
             break;
         case 15:
@@ -555,7 +555,7 @@ static bool8 sub_81C5238(void)
         gPyramidBagResources->state++;
         break;
     default:
-        LoadListMenuArrowsGfx();
+        LoadListMenuSwapLineGfx();
         gPyramidBagResources->state = 0;
         return TRUE;
     }
@@ -1268,7 +1268,7 @@ static void Task_BeginItemSwap(u8 taskId)
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
     sub_81C5A98(data[0], 1);
-    sub_81C704C(data[1]);
+    UpdateSwapLinePos(data[1]);
     gTasks[taskId].func = Task_ItemSwapHandleInput;
 }
 
@@ -1287,8 +1287,8 @@ static void Task_ItemSwapHandleInput(u8 taskId)
         {
             s32 id = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &gPyramidBagCursorData.scrollPosition, &gPyramidBagCursorData.cursorPosition);
-            sub_81C7028(FALSE);
-            sub_81C704C(gPyramidBagCursorData.cursorPosition);
+            SetSwapLineInvisibility(FALSE);
+            UpdateSwapLinePos(gPyramidBagCursorData.cursorPosition);
             switch (id)
             {
             case LIST_NOTHING_CHOSEN:
@@ -1324,7 +1324,7 @@ static void PerformItemSwap(u8 taskId)
     {
         MovePyramidBagItemSlotInList(data[1], var);
         gPyramidBagResources->unk814 = 0xFF;
-        sub_81C7028(TRUE);
+        SetSwapLineInvisibility(TRUE);
         DestroyListMenuTask(data[0], scrollOffset, selectedRow);
         if (data[1] < var)
             gPyramidBagCursorData.cursorPosition--;
@@ -1341,7 +1341,7 @@ static void sub_81C6A14(u8 taskId)
     u16 *selectedRow = &gPyramidBagCursorData.cursorPosition;
 
     gPyramidBagResources->unk814 = 0xFF;
-    sub_81C7028(TRUE);
+    SetSwapLineInvisibility(TRUE);
     DestroyListMenuTask(data[0], scrollOffset, selectedRow);
     if (data[1] < *scrollOffset + *selectedRow)
         gPyramidBagCursorData.cursorPosition--;
@@ -1545,17 +1545,17 @@ static void sub_81C6FF8(u8 itemSpriteArrayId)
     sub_81C6E38(itemSpriteArrayId + 1);
 }
 
-static void sub_81C700C(void)
+static void CreateSwapLine(void)
 {
-    sub_8122344(&gPyramidBagResources->itemsSpriteIds[3], 8);
+    CreateSwapLineSprites(&gPyramidBagResources->itemsSpriteIds[3], 8);
 }
 
-static void sub_81C7028(bool8 invisible)
+static void SetSwapLineInvisibility(bool8 invisible)
 {
-    sub_81223FC(&gPyramidBagResources->itemsSpriteIds[3], 8, invisible);
+    SetSwapLineSpritesInvisibility(&gPyramidBagResources->itemsSpriteIds[3], 8, invisible);
 }
 
-static void sub_81C704C(u8 y)
+static void UpdateSwapLinePos(u8 y)
 {
-    sub_8122448(&gPyramidBagResources->itemsSpriteIds[3], 8 | 0x80, 120, (y + 1) * 16);
+    UpdateSwapLineSpritesPos(&gPyramidBagResources->itemsSpriteIds[3], 8 | 0x80, 120, (y + 1) * 16);
 }

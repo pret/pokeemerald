@@ -202,7 +202,7 @@ static const u16 *const *const sPrizeListSets[] =
 };
 
 static const u16 sEReader_Pal[] = INCBIN_U16("graphics/misc/trainer_hill_ereader.gbapal");
-static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrHillTag *const sDataPerTag[] =
 {

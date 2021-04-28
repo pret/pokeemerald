@@ -10,6 +10,7 @@
 #include "constants/abilities.h"
 #include "random.h"
 #include "battle_scripts.h"
+#include "constants/battle_string_ids.h"
 
 void AllocateBattleResources(void)
 {
@@ -135,7 +136,7 @@ u32 sub_805725C(u8 battlerId)
                     gBattleMons[battlerId].status1 &= ~(STATUS1_SLEEP);
                     gBattleMons[battlerId].status2 &= ~(STATUS2_NIGHTMARE);
                     BattleScriptPushCursor();
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP_UPROAR;
                     gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
                     effect = 2;
                 }
@@ -162,7 +163,7 @@ u32 sub_805725C(u8 battlerId)
                     {
                         gBattleMons[battlerId].status2 &= ~(STATUS2_NIGHTMARE);
                         BattleScriptPushCursor();
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
                         gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
                         effect = 2;
                     }
@@ -182,7 +183,7 @@ u32 sub_805725C(u8 battlerId)
                     gBattleMons[battlerId].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
                 }
                 effect = 2;
             }

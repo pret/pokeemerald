@@ -75,7 +75,7 @@ static void WallyHandleSetUnkVar(void);
 static void WallyHandleClearUnkFlag(void);
 static void WallyHandleToggleUnkFlag(void);
 static void WallyHandleHitAnimation(void);
-static void WallyHandleCmd42(void);
+static void WallyHandleCantSwitch(void);
 static void WallyHandlePlaySE(void);
 static void WallyHandlePlayFanfareOrBGM(void);
 static void WallyHandleFaintingCry(void);
@@ -145,7 +145,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = WallyHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = WallyHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
-    [CONTROLLER_42]                       = WallyHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = WallyHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = WallyHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = WallyHandleFaintingCry,
@@ -192,7 +192,7 @@ static void WallyHandleActions(void)
     switch (gBattleStruct->wallyBattleState)
     {
     case 0:
-        gBattleStruct->wallyWaitFrames = 64;
+        gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         gBattleStruct->wallyBattleState++;
     case 1:
         if (--gBattleStruct->wallyWaitFrames == 0)
@@ -202,7 +202,7 @@ static void WallyHandleActions(void)
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
-            gBattleStruct->wallyWaitFrames = 64;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         }
         break;
     case 2:
@@ -213,17 +213,17 @@ static void WallyHandleActions(void)
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
-            gBattleStruct->wallyWaitFrames = 64;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         }
         break;
     case 3:
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
-            BtlController_EmitTwoReturnValues(1, 9, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_WALLY_THROW, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
-            gBattleStruct->wallyWaitFrames = 64;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         }
         break;
     case 4:
@@ -232,7 +232,7 @@ static void WallyHandleActions(void)
             PlaySE(SE_SELECT);
             ActionSelectionDestroyCursorAt(0);
             ActionSelectionCreateCursorAt(1, 0);
-            gBattleStruct->wallyWaitFrames = 64;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
             gBattleStruct->wallyBattleState++;
         }
         break;
@@ -1196,7 +1196,7 @@ static void HandleChooseActionAfterDma3(void)
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         gBattle_BG0_X = 0;
-        gBattle_BG0_Y = 160;
+        gBattle_BG0_Y = DISPLAY_HEIGHT;
         gBattlerControllerFuncs[gActiveBattler] = WallyHandleActions;
     }
 }
@@ -1234,7 +1234,7 @@ static void WallyHandleChooseMove(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             gBattle_BG0_X = 0;
-            gBattle_BG0_Y = 0x140;
+            gBattle_BG0_Y = DISPLAY_HEIGHT * 2;
             gBattleStruct->wallyMovesState++;
         }
         break;
@@ -1386,7 +1386,7 @@ static void WallyHandleHitAnimation(void)
     }
 }
 
-static void WallyHandleCmd42(void)
+static void WallyHandleCantSwitch(void)
 {
     WallyBufferExecCompleted();
 }
