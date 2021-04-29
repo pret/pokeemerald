@@ -49,7 +49,7 @@ LilycoveCity_ContestLobby_EventScript_ContestArtist:: @ 821A264
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_ARTIST
+	showcontestpainting CONTEST_WINNER_ARTIST
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -108,7 +108,7 @@ LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon:: @ 821A314
 	return
 
 LilycoveCity_ContestLobby_EventScript_UpdateMuseumPatrons:: @ 821A360
-	specialvar VAR_0x8004, CountPlayerContestPaintings
+	specialvar VAR_0x8004, CountPlayerMuseumPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_ShowPatron1
 	case 2, LilycoveCity_ContestLobby_EventScript_ShowPatron2
@@ -223,7 +223,7 @@ LilycoveCity_ContestLobby_EventScript_LinkContestArtist:: @ 821A436
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_ARTIST
+	showcontestpainting CONTEST_WINNER_ARTIST
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink
@@ -511,42 +511,42 @@ LilycoveCity_ContestLobby_EventScript_NinjaBoy:: @ 821A735
 LilycoveCity_ContestLobby_EventScript_ContestWinner1:: @ 821A73E
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_HALL_1
+	showcontestpainting CONTEST_WINNER_HALL_1
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner2:: @ 821A745
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_HALL_2
+	showcontestpainting CONTEST_WINNER_HALL_2
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner3:: @ 821A74C
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_HALL_3
+	showcontestpainting CONTEST_WINNER_HALL_3
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner4:: @ 821A753
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_HALL_4
+	showcontestpainting CONTEST_WINNER_HALL_4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner5:: @ 821A75A
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_HALL_5
+	showcontestpainting CONTEST_WINNER_HALL_5
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner6:: @ 821A761
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_HALL_6
+	showcontestpainting CONTEST_WINNER_HALL_6
 	releaseall
 	end
 
