@@ -36,37 +36,37 @@ static void LoadMapNamePopUpWindowBg(void);
 static EWRAM_DATA u8 sPopupTaskId = 0;
 
 // .rodata
-static const u8 gMapPopUp_Table[][960] =
+static const u8 sMapPopUp_Table[][960] =
 {
-    INCBIN_U8("graphics/interface/map_popup/wood.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/marble.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/stone.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/brick.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/underwater.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/stone2.4bpp"),
+    [MAPPOPUP_THEME_WOOD]       = INCBIN_U8("graphics/interface/map_popup/wood.4bpp"),
+    [MAPPOPUP_THEME_MARBLE]     = INCBIN_U8("graphics/interface/map_popup/marble.4bpp"),
+    [MAPPOPUP_THEME_STONE]      = INCBIN_U8("graphics/interface/map_popup/stone.4bpp"),
+    [MAPPOPUP_THEME_BRICK]      = INCBIN_U8("graphics/interface/map_popup/brick.4bpp"),
+    [MAPPOPUP_THEME_UNDERWATER] = INCBIN_U8("graphics/interface/map_popup/underwater.4bpp"),
+    [MAPPOPUP_THEME_STONE2]     = INCBIN_U8("graphics/interface/map_popup/stone2.4bpp"),
 };
 
-static const u8 gMapPopUp_Outline_Table[][960] =
+static const u8 sMapPopUp_OutlineTable[][960] =
 {
-    INCBIN_U8("graphics/interface/map_popup/wood_outline.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/marble_outline.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/stone_outline.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/brick_outline.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/underwater_outline.4bpp"),
-    INCBIN_U8("graphics/interface/map_popup/stone2_outline.4bpp"),
+    [MAPPOPUP_THEME_WOOD]       = INCBIN_U8("graphics/interface/map_popup/wood_outline.4bpp"),
+    [MAPPOPUP_THEME_MARBLE]     = INCBIN_U8("graphics/interface/map_popup/marble_outline.4bpp"),
+    [MAPPOPUP_THEME_STONE]      = INCBIN_U8("graphics/interface/map_popup/stone_outline.4bpp"),
+    [MAPPOPUP_THEME_BRICK]      = INCBIN_U8("graphics/interface/map_popup/brick_outline.4bpp"),
+    [MAPPOPUP_THEME_UNDERWATER] = INCBIN_U8("graphics/interface/map_popup/underwater_outline.4bpp"),
+    [MAPPOPUP_THEME_STONE2]     = INCBIN_U8("graphics/interface/map_popup/stone2_outline.4bpp"),
 };
 
-static const u16 gMapPopUp_Palette_Table[][16] =
+static const u16 sMapPopUp_PaletteTable[][16] =
 {
-    INCBIN_U16("graphics/interface/map_popup/wood.gbapal"),
-    INCBIN_U16("graphics/interface/map_popup/marble_outline.gbapal"),
-    INCBIN_U16("graphics/interface/map_popup/stone_outline.gbapal"),
-    INCBIN_U16("graphics/interface/map_popup/brick_outline.gbapal"),
-    INCBIN_U16("graphics/interface/map_popup/underwater_outline.gbapal"),
-    INCBIN_U16("graphics/interface/map_popup/stone2_outline.gbapal"),
+    [MAPPOPUP_THEME_WOOD]       = INCBIN_U16("graphics/interface/map_popup/wood.gbapal"),
+    [MAPPOPUP_THEME_MARBLE]     = INCBIN_U16("graphics/interface/map_popup/marble_outline.gbapal"),
+    [MAPPOPUP_THEME_STONE]      = INCBIN_U16("graphics/interface/map_popup/stone_outline.gbapal"),
+    [MAPPOPUP_THEME_BRICK]      = INCBIN_U16("graphics/interface/map_popup/brick_outline.gbapal"),
+    [MAPPOPUP_THEME_UNDERWATER] = INCBIN_U16("graphics/interface/map_popup/underwater_outline.gbapal"),
+    [MAPPOPUP_THEME_STONE2]     = INCBIN_U16("graphics/interface/map_popup/stone2_outline.gbapal"),
 };
 
-static const u16 gUnknown_0857F444[16] = INCBIN_U16("graphics/interface/map_popup/857F444.gbapal");
+static const u16 sMapPopUp_Palette_Underwater[16] = INCBIN_U16("graphics/interface/map_popup/underwater.gbapal");
 
 static const u8 gRegionMapSectionId_To_PopUpThemeIdMapping[] =
 {
@@ -380,12 +380,12 @@ static void LoadMapNamePopUpWindowBg(void)
     }
     popUpThemeId = gRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
-    LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), gMapPopUp_Outline_Table[popUpThemeId], 0x400, 0x21D);
+    LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), sMapPopUp_OutlineTable[popUpThemeId], 0x400, 0x21D);
     CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
     PutWindowTilemap(popupWindowId);
     if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
-        LoadPalette(&gUnknown_0857F444, 0xE0, 0x20);
+        LoadPalette(&sMapPopUp_Palette_Underwater, 0xE0, sizeof(sMapPopUp_Palette_Underwater));
     else
-        LoadPalette(gMapPopUp_Palette_Table[popUpThemeId], 0xE0, 0x20);
-    BlitBitmapToWindow(popupWindowId, gMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
+        LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], 0xE0, sizeof(sMapPopUp_PaletteTable[0]));
+    BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
 }

@@ -850,7 +850,7 @@ static bool8 BattlePyramidRetireCallback(void)
 
 static void InitSave(void)
 {
-    save_serialize_map();
+    SaveMapView();
     sSaveDialogCallback = SaveConfirmSaveCallback;
     sSavingComplete = FALSE;
 }
@@ -1242,9 +1242,9 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
                                         gText_SavingDontTurnOffPower,
                                         TEXT_SPEED_FF,
                                         NULL,
-                                        TEXT_COLOR_DARK_GREY,
+                                        TEXT_COLOR_DARK_GRAY,
                                         TEXT_COLOR_WHITE,
-                                        TEXT_COLOR_LIGHT_GREY);
+                                        TEXT_COLOR_LIGHT_GRAY);
             DrawTextBorderOuter(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);

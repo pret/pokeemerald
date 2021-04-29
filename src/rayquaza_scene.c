@@ -1860,7 +1860,7 @@ static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite)
 static void DuoFight_SlideGroudonDown(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    if (sprite->pos1.y <= 160)
+    if (sprite->pos1.y <= DISPLAY_HEIGHT)
     {
         sprite->pos1.y += 8;
         gSprites[sprite->sGroudonBodySpriteId].pos1.y += 8;
@@ -1965,7 +1965,7 @@ static void SpriteCB_DuoFight_Kyogre(struct Sprite *sprite)
 static void DuoFight_SlideKyogreDown(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    if (sprite->pos1.y <= 160)
+    if (sprite->pos1.y <= DISPLAY_HEIGHT)
     {
         sprite->pos1.y += 8;
         gSprites[sprite->data[0] >> 8].pos1.y += 8;

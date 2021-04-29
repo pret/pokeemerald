@@ -1393,7 +1393,7 @@ static void Task_RaiseCurtainAtStart(u8 taskId)
         break;
     case 1:
         *(s16*)&gBattle_BG1_Y += 7;
-        if ((s16)gBattle_BG1_Y <= 160)
+        if ((s16)gBattle_BG1_Y <= DISPLAY_HEIGHT)
             break;
         gTasks[taskId].data[0]++;
         break;
@@ -1513,8 +1513,8 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
     u8 i;
     u8 moveName[32];
 
-    gBattle_BG0_Y = 160;
-    gBattle_BG2_Y = 160;
+    gBattle_BG0_Y = DISPLAY_HEIGHT;
+    gBattle_BG2_Y = DISPLAY_HEIGHT;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2681,7 +2681,7 @@ static void Task_WaitForOutOfTimeMsg(u8 taskId)
     {
         SetBgForCurtainDrop();
         gBattle_BG1_X = 0;
-        gBattle_BG1_Y = 160;
+        gBattle_BG1_Y = DISPLAY_HEIGHT;
         PlaySE12WithPanning(SE_CONTEST_CURTAIN_FALL, 0);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = Task_DropCurtainAtAppealsEnd;

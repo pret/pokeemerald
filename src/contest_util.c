@@ -521,8 +521,8 @@ static void CB2_StartShowContestResults(void)
     gPaletteFade.bufferTransferDisabled = FALSE;
     sContestResults->data->showResultsTaskId = CreateTask(Task_ShowContestResults, 5);
     SetMainCallback2(CB2_ShowContestResults);
-    gBattle_WIN1H = 0x00F0;
-    gBattle_WIN1V = 0x80A0;
+    gBattle_WIN1H = WIN_RANGE(0, DISPLAY_WIDTH);
+    gBattle_WIN1V = WIN_RANGE(128, DISPLAY_HEIGHT);
     CreateTask(Task_SlideContestResultsBg, 20);
     CalculateContestantsResultData();
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
@@ -679,7 +679,7 @@ static void Task_AnnouncePreliminaryResults(u8 taskId)
     {
         CreateTask(Task_FlashStarsAndHearts, 20);
         x = DrawResultsTextWindow(gText_AnnouncingResults, sContestResults->data->slidingTextBoxSpriteId);
-        StartTextBoxSlideIn(x, 144, 120, 1088);
+        StartTextBoxSlideIn(x, DISPLAY_HEIGHT - 16, 120, 1088);
         gTasks[taskId].tState++;
     }
     else if (gTasks[taskId].tState == 1)
@@ -702,7 +702,7 @@ static void Task_AnnouncePreliminaryResults(u8 taskId)
     else if (gTasks[taskId].tState == 3)
     {
         x = DrawResultsTextWindow(gText_PreliminaryResults, sContestResults->data->slidingTextBoxSpriteId);
-        StartTextBoxSlideIn(x, 144, -1, 1088);
+        StartTextBoxSlideIn(x, DISPLAY_HEIGHT - 16, -1, 1088);
         gTasks[taskId].tState++;
     }
     else if (gTasks[taskId].tState == 4)
@@ -752,7 +752,7 @@ static void Task_AnnounceRound2Results(u8 taskId)
         {
             gTasks[taskId].tTimer = 0;
             x = DrawResultsTextWindow(gText_Round2Results, sContestResults->data->slidingTextBoxSpriteId);
-            StartTextBoxSlideIn(x, 144, -1, 1088);
+            StartTextBoxSlideIn(x, DISPLAY_HEIGHT - 16, -1, 1088);
         }
     }
     else if (sContestResults->data->slidingTextBoxState == SLIDING_TEXT_ARRIVED)
@@ -841,7 +841,7 @@ static void Task_AnnounceWinner(u8 taskId)
             StringCopy(gStringVar2, gContestMons[i].nickname);
             StringExpandPlaceholders(winnerTextBuffer, gText_ContestantsMonWon);
             x = DrawResultsTextWindow(winnerTextBuffer, sContestResults->data->slidingTextBoxSpriteId);
-            StartTextBoxSlideIn(x, 144, -1, 1088);
+            StartTextBoxSlideIn(x, DISPLAY_HEIGHT - 16, -1, 1088);
             gTasks[taskId].tState++;
         }
         break;
@@ -864,8 +864,8 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        gBattle_WIN0H = 0x00F0;
-        gBattle_WIN0V = 0x5050;
+        gBattle_WIN0H = WIN_RANGE(0, DISPLAY_WIDTH);
+        gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2);
 
         GET_CONTEST_WINNER_ID(i);
         species = gContestMons[i].species;
@@ -881,7 +881,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         LoadCompressedSpritePalette(pokePal);
         SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
         gMultiuseSpriteTemplate.paletteTag = pokePal->tag;
-        spriteId = CreateSprite(&gMultiuseSpriteTemplate, 272, 80, 10);
+        spriteId = CreateSprite(&gMultiuseSpriteTemplate, DISPLAY_WIDTH + 32, 80, 10);
         gSprites[spriteId].data[1] = species;
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].callback = SpriteCB_WinnerMonSlideIn;
@@ -901,7 +901,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
                 gTasks[taskId].tCounter = 32;
 
             counter = gTasks[taskId].tCounter;
-            gBattle_WIN0V = ((80 - counter) << 8) | (80 + counter);
+            gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2 - counter, DISPLAY_HEIGHT / 2 + counter);
             if (counter == 32)
                 gTasks[taskId].tState++;
         }
@@ -923,11 +923,11 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         {
             u8 top = (gBattle_WIN0V >> 8);
             top += 2;
-            if (top > 80)
-                top = 80;
+            if (top > DISPLAY_HEIGHT / 2)
+                top = DISPLAY_HEIGHT / 2;
 
-            gBattle_WIN0V = (top << 8) | (160 - top);
-            if (top == 80)
+            gBattle_WIN0V = WIN_RANGE(top, DISPLAY_HEIGHT - top);
+            if (top == DISPLAY_HEIGHT / 2)
                 gTasks[taskId].tState++;
         }
         break;
@@ -1189,7 +1189,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
     }
     RemoveWindow(windowId);
 
-    return (240 - (strWidth + 2) * 8) / 2;
+    return (DISPLAY_WIDTH - (strWidth + 2) * 8) / 2;
 }
 
 static void LoadContestResultSprites(void)
@@ -1205,7 +1205,7 @@ static void LoadContestResultSprites(void)
     LoadSpritePalette(&sUnknown_0858D850);
     for (i = 0; i < (int)ARRAY_COUNT(sUnknown_0858D810); i++)
     {
-        spriteIds[i] = CreateSprite(&template, 272, 144, 10);
+        spriteIds[i] = CreateSprite(&template, DISPLAY_WIDTH + 32, DISPLAY_HEIGHT - 16, 10);
         template.tileTag++;
     }
 
@@ -1232,7 +1232,7 @@ static void LoadContestResultSprites(void)
 static void StartTextBoxSlideIn(s16 x, u16 y, u16 slideOutTimer, u16 slideIncrement)
 {
     struct Sprite *sprite = &gSprites[sContestResults->data->slidingTextBoxSpriteId];
-    sprite->pos1.x = 272;
+    sprite->pos1.x = DISPLAY_WIDTH + 32;
     sprite->pos1.y = y;
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;
@@ -1259,8 +1259,8 @@ static void StartTextBoxSlideOut(u16 slideIncrement)
 
 static void EndTextBoxSlideOut(struct Sprite *sprite)
 {
-    sprite->pos1.x = 272;
-    sprite->pos1.y = 144;
+    sprite->pos1.x = DISPLAY_WIDTH + 32;
+    sprite->pos1.y = DISPLAY_HEIGHT - 16;
     sprite->pos2.y = 0;
     sprite->pos2.x = 0;
     sprite->callback = SpriteCallbackDummy;
@@ -1337,8 +1337,8 @@ static void ShowLinkResultsTextBox(const u8 *text)
         gSprites[sprite->data[i]].invisible = FALSE;
     }
 
-    gBattle_WIN0H = 0x00F0;
-    gBattle_WIN0V = ((sprite->pos1.y - 16) << 8) | (sprite->pos1.y + 16);
+    gBattle_WIN0H = WIN_RANGE(0, DISPLAY_WIDTH);
+    gBattle_WIN0V = WIN_RANGE(sprite->pos1.y - 16, sprite->pos1.y + 16);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR
         | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
 }
@@ -1584,7 +1584,7 @@ static void Task_CreateConfetti(u8 taskId)
         gTasks[taskId].data[0] = 0;
         if (sContestResults->data->confettiCount < 40)
         {
-            u8 spriteId = CreateSprite(&sSpriteTemplate_Confetti, (Random() % 240) - 20, 44, 5);
+            u8 spriteId = CreateSprite(&sSpriteTemplate_Confetti, (Random() % DISPLAY_WIDTH) - 20, 44, 5);
             gSprites[spriteId].data[0] = Random() % 512;
             gSprites[spriteId].data[1] = (Random() % 24) + 16;
             gSprites[spriteId].data[2] = (Random() % 256) + 48;

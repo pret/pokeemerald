@@ -39,8 +39,8 @@ static void AnimGhostStatusSprite(struct Sprite *);
 static void AnimGhostStatusSprite_Step(struct Sprite *);
 static void AnimTask_GrudgeFlames_Step(u8 taskId);
 static void AnimGrudgeFlame(struct Sprite *);
-static void AnimUnused_8112F60(struct Sprite *);
-static void AnimUnused_8112F60_Step(struct Sprite *);
+static void AnimMonMoveCircular(struct Sprite *);
+static void AnimMonMoveCircular_Step(struct Sprite *);
 
 static const union AffineAnimCmd sAffineAnim_ConfuseRayBallBounce[] =
 {
@@ -124,16 +124,16 @@ const struct SpriteTemplate gLickSpriteTemplate =
     .callback = AnimLick,
 };
 
-static const union AffineAnimCmd sAnim_Unused_08596DA4[] =
+static const union AffineAnimCmd sAffineAnim_Unused[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_END,
 };
 
 // Unused
-static const union AffineAnimCmd *const gAnims_Unused_08596DB4[] =
+static const union AffineAnimCmd *const sAffineAnims_Unused[] =
 {
-    sAnim_Unused_08596DA4,
+    sAffineAnim_Unused,
 };
 
 const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplate =
@@ -206,7 +206,7 @@ const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_08596E48 =
+static const struct SpriteTemplate sMonMoveCircularSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -214,7 +214,7 @@ const struct SpriteTemplate gUnusedSpriteTemplate_08596E48 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_8112F60,
+    .callback = AnimMonMoveCircular,
 };
 
 static void AnimConfuseRayBallBounce(struct Sprite *sprite)
@@ -950,19 +950,19 @@ void AnimTask_CurseStretchingBlackBg(u8 taskId)
     SetGpuReg(REG_OFFSET_WINOUT, ((WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ) |
                                     (WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR)));
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN));
-    SetGpuReg(REG_OFFSET_BLDY, 0x10);
+    SetGpuReg(REG_OFFSET_BLDY, 16);
 
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER || IsContest())
         startX = 40;
     else
         startX = 200;
 
-    gBattle_WIN0H = (startX << 8) | startX;
+    gBattle_WIN0H = WIN_RANGE(startX, startX);
     startY = 40;
-    gBattle_WIN0V = (startY << 8) | startY;
+    gBattle_WIN0V = WIN_RANGE(startY, startY);
 
     leftDistance = startX;
-    rightDistance = 240 - startX;
+    rightDistance = DISPLAY_WIDTH - startX;
     topDistance = startY;
     bottomDistance = 72;
     gTasks[taskId].data[1] = leftDistance;
@@ -1001,7 +1001,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
     else
     {
         left = 0;
-        right = 240;
+        right = DISPLAY_WIDTH;
         top = 0;
         bottom = 112;
         selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
@@ -1009,8 +1009,8 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
 
-    gBattle_WIN0H = (left << 8) | right;
-    gBattle_WIN0V = (top  << 8) | bottom;
+    gBattle_WIN0H = WIN_RANGE(left, right);
+    gBattle_WIN0V = WIN_RANGE(top, bottom);
 }
 
 static void AnimTask_CurseStretchingBlackBg_Step2(u8 taskId)
@@ -1302,7 +1302,7 @@ static void AnimGrudgeFlame(struct Sprite *sprite)
     }
 }
 
-static void AnimUnused_8112F60(struct Sprite *sprite)
+static void AnimMonMoveCircular(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
     sprite->data[5] = gBattlerSpriteIds[gBattleAnimAttacker];
@@ -1310,12 +1310,12 @@ static void AnimUnused_8112F60(struct Sprite *sprite)
     sprite->data[1] = 10;
     sprite->data[2] = gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[1];
-    sprite->callback = AnimUnused_8112F60_Step;
+    sprite->callback = AnimMonMoveCircular_Step;
 
     gSprites[sprite->data[5]].pos1.y += 8;
 }
 
-static void AnimUnused_8112F60_Step(struct Sprite *sprite)
+static void AnimMonMoveCircular_Step(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {
