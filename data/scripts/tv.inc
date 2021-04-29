@@ -2,14 +2,14 @@ EventScript_TV:: @ 827EE0B
 	lockall
 	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
-	specialvar VAR_RESULT, CheckForBigMovieOrEmergencyNewsOnTV
-	compare VAR_RESULT, 2
+	specialvar VAR_RESULT, CheckForPlayersHouseNews
+	compare VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE
 	goto_if_eq EventScript_PlayersHouseMovie
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, PLAYERS_HOUSE_TV_LATI
 	goto_if_eq EventScript_PlayersHouseLatiNewsFlash
 	goto_if_unset FLAG_SYS_TV_START, EventScript_MomDadMightLikeThis1
 	goto_if_set FLAG_SYS_TV_WATCH, EventScript_MomDadMightLikeThis1
-	specialvar VAR_RESULT, IsTVShowInSearchOfTrainersAiring
+	specialvar VAR_RESULT, IsGabbyAndTyShowOnTheAir
 	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_DoInSearchOfTrainers
 	goto EventScript_TryDoPokeNews

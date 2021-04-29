@@ -5564,8 +5564,8 @@ extern const u16 gUnknown_08DDCF04[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
-extern const u8 gTradeButtons_Gfx[];
-extern const u16 gUnknown_08DDB444[];
+extern const u8 gTradeCursor_Gfx[];
+extern const u16 gTradeCursor_Pal[];
 
 // Party menu
 extern const u32 gPartyMenuPokeball_Gfx[];
@@ -5585,21 +5585,21 @@ extern const u32 gRouletteMultiplier_Gfx[];
 
 // Contest util
 extern const u32 gContestResults_Gfx[];
-extern const u32 gUnknown_08C19EEC[];
-extern const u32 gUnknown_08C1A000[];
-extern const u32 gUnknown_08C1A12C[];
+extern const u32 gContestResults_WinnerBanner_Tilemap[];
+extern const u32 gContestResults_Interface_Tilemap[];
+extern const u32 gContestResults_Bg_Tilemap[];
 extern const u32 gContestResults_Pal[];
-extern const u16 gLinkContestResults_Tilemap[];
-extern const u16 gNormalContestResults_Tilemap[];
-extern const u16 gSuperContestResults_Tilemap[];
-extern const u16 gHyperContestResults_Tilemap[];
-extern const u16 gMasterContestResults_Tilemap[];
-extern const u16 gCoolContestResults_Tilemap[];
-extern const u16 gBeautyContestResults_Tilemap[];
-extern const u16 gCuteContestResults_Tilemap[];
-extern const u16 gSmartContestResults_Tilemap[];
-extern const u16 gToughContestResults_Tilemap[];
-extern const u16 gContestResults_Tilemap[];
+extern const u16 gContestResultsTitle_Link_Tilemap[];
+extern const u16 gContestResultsTitle_Normal_Tilemap[];
+extern const u16 gContestResultsTitle_Super_Tilemap[];
+extern const u16 gContestResultsTitle_Hyper_Tilemap[];
+extern const u16 gContestResultsTitle_Master_Tilemap[];
+extern const u16 gContestResultsTitle_Cool_Tilemap[];
+extern const u16 gContestResultsTitle_Beauty_Tilemap[];
+extern const u16 gContestResultsTitle_Cute_Tilemap[];
+extern const u16 gContestResultsTitle_Smart_Tilemap[];
+extern const u16 gContestResultsTitle_Tough_Tilemap[];
+extern const u16 gContestResultsTitle_Tilemap[];
 
 // Trainer Card.
 extern const u16 gHoennTrainerCard0Star_Pal[];

@@ -5,6 +5,12 @@
 
 #define SPECIES_SHINY_TAG 500
 
+enum {
+    BATTLER_AFFINE_NORMAL,
+    BATTLER_AFFINE_EMERGE,
+    BATTLER_AFFINE_RETURN,
+};
+
 struct MonCoords
 {
     // This would use a bitfield, but some function
@@ -87,9 +93,9 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
 
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
-extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 
-extern const union AnimCmd *const gUnknown_082FF70C[];
+extern const union AnimCmd *const gAnims_MonPic[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct CompressedSpriteSheet gMonStillFrontPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];

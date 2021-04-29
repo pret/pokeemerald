@@ -918,10 +918,10 @@
 	.byte 0x76
 	.endm
 
-	@ Draws an image of the winner of the contest. In FireRed, this command is a nop. (The argument is discarded.)
-	.macro showcontestwinner a:req
+	@ Draws an image of the winner of the contest. winnerId is any CONTEST_WINNER_* constant.
+	.macro showcontestpainting winnerId:req
 	.byte 0x77
-	.byte \a
+	.byte \winnerId
 	.endm
 
 	@ Displays the string at pointer as braille text in a standard message box. The string must be formatted to use braille 
