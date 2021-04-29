@@ -65,7 +65,7 @@ void EnterSafariMode(void)
 
 void ExitSafariMode(void)
 {
-    sub_80EE44C(sSafariZoneCaughtMons, sSafariZonePkblkUses);
+    TryPutSafariFanClubOnAir(sSafariZoneCaughtMons, sSafariZonePkblkUses);
     ResetSafariZoneFlag();
     ClearAllPokeblockFeeders();
     gNumSafariBalls = 0;

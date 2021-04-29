@@ -83,8 +83,8 @@ gSpecials:: @ 81DBA64
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
 	def_special GetNextActiveShowIfMassOutbreak
-	def_special TV_IsScriptShowKindAlreadyInQueue
-	def_special CheckForBigMovieOrEmergencyNewsOnTV
+	def_special IsTVShowAlreadyInQueue
+	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
 	def_special ResetTVShowState
 	def_special GetContestWinnerId
@@ -187,10 +187,10 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
 	def_special DoTVShowInSearchOfTrainers
-	def_special IsTVShowInSearchOfTrainersAiring
+	def_special IsGabbyAndTyShowOnTheAir
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToObjectEventLocalIds
+	def_special GetGabbyAndTyLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -354,7 +354,7 @@ gSpecials:: @ 81DBA64
 	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
-	def_special TrySetUpTrainerFanClubSpecial
+	def_special TryPutTrainerFanClubOnAir
 	def_special ShouldHideFanClubInterviewer
 	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir
