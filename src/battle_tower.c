@@ -36,7 +36,6 @@
 #include "constants/event_objects.h"
 #include "constants/moves.h"
 #include "constants/easy_chat.h"
-#include "constants/tv.h"
 
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer[];

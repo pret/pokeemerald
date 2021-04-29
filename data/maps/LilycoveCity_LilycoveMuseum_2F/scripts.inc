@@ -94,7 +94,7 @@ LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall: @ 8219863
 LilycoveCity_LilycoveMuseum_2F_EventScript_Curator:: @ 8219866
 	lockall
 	goto_if_set FLAG_RECEIVED_GLASS_ORNAMENT, LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament
-	specialvar VAR_0x8004, CountPlayerContestPaintings
+	specialvar VAR_0x8004, CountPlayerMuseumPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting
 	case 2, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting
@@ -185,35 +185,35 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy:: @ 821999C
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting:: @ 82199A5
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_COOL
+	showcontestpainting CONTEST_WINNER_MUSEUM_COOL
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting:: @ 82199B3
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_BEAUTY
+	showcontestpainting CONTEST_WINNER_MUSEUM_BEAUTY
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting:: @ 82199C1
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_CUTE
+	showcontestpainting CONTEST_WINNER_MUSEUM_CUTE
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting:: @ 82199CF
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_SMART
+	showcontestpainting CONTEST_WINNER_MUSEUM_SMART
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting:: @ 82199DD
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_TOUGH
+	showcontestpainting CONTEST_WINNER_MUSEUM_TOUGH
 	releaseall
 	end
 

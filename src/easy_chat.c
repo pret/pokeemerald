@@ -1474,8 +1474,8 @@ void ShowEasyChatScreen(void)
         words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words[gSpecialVar_0x8006];
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
         break;
-    case EASY_CHAT_TYPE_UNK_8:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].unkShow04.words;
+    case EASY_CHAT_TYPE_DUMMY_SHOW:
+        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].dummy.words;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_MALE;
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
