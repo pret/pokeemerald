@@ -70,7 +70,7 @@ static void RecordedPlayerHandleSetUnkVar(void);
 static void RecordedPlayerHandleClearUnkFlag(void);
 static void RecordedPlayerHandleToggleUnkFlag(void);
 static void RecordedPlayerHandleHitAnimation(void);
-static void RecordedPlayerHandleCmd42(void);
+static void RecordedPlayerHandleCantSwitch(void);
 static void RecordedPlayerHandlePlaySE(void);
 static void RecordedPlayerHandlePlayFanfareOrBGM(void);
 static void RecordedPlayerHandleFaintingCry(void);
@@ -141,7 +141,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_CLEARUNKFLAG]             = RecordedPlayerHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = RecordedPlayerHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = RecordedPlayerHandleHitAnimation,
-    [CONTROLLER_42]                       = RecordedPlayerHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = RecordedPlayerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = RecordedPlayerHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = RecordedPlayerHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = RecordedPlayerHandleFaintingCry,
@@ -1098,7 +1098,7 @@ static void RecordedPlayerHandleLoadMonSprite(void)
                                                GetBattlerSpriteCoord(gActiveBattler, 2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
@@ -1610,7 +1610,7 @@ static void RecordedPlayerHandleHitAnimation(void)
     }
 }
 
-static void RecordedPlayerHandleCmd42(void)
+static void RecordedPlayerHandleCantSwitch(void)
 {
     RecordedPlayerBufferExecCompleted();
 }

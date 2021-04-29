@@ -80,7 +80,7 @@ static void PlayerHandleSetUnkVar(void);
 static void PlayerHandleClearUnkFlag(void);
 static void PlayerHandleToggleUnkFlag(void);
 static void PlayerHandleHitAnimation(void);
-static void PlayerHandleCmd42(void);
+static void PlayerHandleCantSwitch(void);
 static void PlayerHandlePlaySE(void);
 static void PlayerHandlePlayFanfareOrBGM(void);
 static void PlayerHandleFaintingCry(void);
@@ -167,7 +167,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = PlayerHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = PlayerHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
-    [CONTROLLER_42]                       = PlayerHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = PlayerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = PlayerHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = PlayerHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = PlayerHandleFaintingCry,
@@ -630,7 +630,7 @@ static u32 HandleMoveInputUnused(void)
     {
         PlaySE(SE_SELECT);
         gBattle_BG0_X = 0;
-        gBattle_BG0_Y = 0x140;
+        gBattle_BG0_Y = DISPLAY_HEIGHT * 2;
         var = 0xFF;
     }
     if (JOY_NEW(DPAD_LEFT) && gMoveSelectionCursor[gActiveBattler] & 1)
@@ -2568,7 +2568,7 @@ static void HandleChooseActionAfterDma3(void)
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         gBattle_BG0_X = 0;
-        gBattle_BG0_Y = 160;
+        gBattle_BG0_Y = DISPLAY_HEIGHT;
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseAction;
     }
 }
@@ -2610,7 +2610,7 @@ static void HandleChooseMoveAfterDma3(void)
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         gBattle_BG0_X = 0;
-        gBattle_BG0_Y = 320;
+        gBattle_BG0_Y = DISPLAY_HEIGHT * 2;
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseMove;
     }
 }
@@ -2890,7 +2890,7 @@ static void PlayerHandleHitAnimation(void)
     }
 }
 
-static void PlayerHandleCmd42(void)
+static void PlayerHandleCantSwitch(void)
 {
     PlayerBufferExecCompleted();
 }

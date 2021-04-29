@@ -4500,7 +4500,7 @@ struct WinCoords
 };
 
 enum {
-    COLORID_GREY,
+    COLORID_GRAY,
     COLORID_RED,
     COLORID_BLUE,
     COLORID_GREEN, // Unused
@@ -4508,7 +4508,7 @@ enum {
 
 static const u8 sTextColorTable[][3] =
 {
-    [COLORID_GREY]  = {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    [COLORID_GRAY]  = {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
     [COLORID_RED]   = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED},
     [COLORID_BLUE]  = {TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE},
     [COLORID_GREEN] = {TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN},
@@ -4638,7 +4638,7 @@ static void ShowNames(void)
         window.baseBlock = 0x13;
         for (i = 0; i < numPlayers; coords++, i++)
         {
-            colorsId = COLORID_GREY;
+            colorsId = COLORID_GRAY;
             playerId = GetPlayerIdByPos(i);
             left = (56 - GetStringWidth(1, GetPlayerName(playerId), -1)) / 2u;
             window.tilemapLeft = coords->left;
@@ -4729,7 +4729,7 @@ static void PrintRankedScores(u8 numPlayers_)
     x = 216 - GetStringWidth(1, gText_SpacePoints, 0);
     for (i = 0; i < numPlayers; i++)
     {
-        u8 colorsId = COLORID_GREY;
+        u8 colorsId = COLORID_GRAY;
         u8 playerId = playersByRanking[i];
         u32 points = scoreResults[playerId].score;
 
@@ -4776,7 +4776,7 @@ static void ShowResults(void)
         AddTextPrinterParameterized(sGfx->windowIds[1], 1, gText_10P30P50P50P, 68, 17, -1, NULL);
         for (i = 0; i < numPlayers; i++)
         {
-            u8 colorsId = COLORID_GREY;
+            u8 colorsId = COLORID_GRAY;
             if (i == GetMultiplayerId())
                 colorsId = COLORID_BLUE;
 
