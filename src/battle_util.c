@@ -703,6 +703,43 @@ void HandleAction_ActionFinished(void)
 
 // rom const data
 
+static const u8 sMovesNotAffectedByStench[] =
+{
+    [MOVE_AIR_SLASH] = 1,
+    [MOVE_ASTONISH] = 1,
+    [MOVE_BITE] = 1,
+    [MOVE_BONE_CLUB] = 1,
+    [MOVE_DARK_PULSE] = 1,
+    [MOVE_DOUBLE_IRON_BASH] = 1,
+    [MOVE_DRAGON_RUSH] = 1,
+    [MOVE_EXTRASENSORY] = 1,
+    [MOVE_FAKE_OUT] = 1,
+    [MOVE_FIERY_WRATH] = 1,
+    [MOVE_FIRE_FANG] = 1,
+    [MOVE_FLING] = 1,
+    [MOVE_FLOATY_FALL] = 1,
+    [MOVE_HEADBUTT] = 1,
+    [MOVE_HEART_STAMP] = 1,
+    [MOVE_HYPER_FANG] = 1,
+    [MOVE_ICE_FANG] = 1,
+    [MOVE_ICICLE_CRASH] = 1,
+    [MOVE_IRON_HEAD] = 1,
+    [MOVE_NEEDLE_ARM] = 1,
+    [MOVE_NONE] = 1,
+    [MOVE_ROCK_SLIDE] = 1,
+    [MOVE_ROLLING_KICK] = 1,
+    [MOVE_SECRET_POWER] = 1,
+    [MOVE_SKY_ATTACK] = 1,
+    [MOVE_SNORE] = 1,
+    [MOVE_STEAMROLLER] = 1,
+    [MOVE_STOMP] = 1,
+    [MOVE_THUNDER_FANG] = 1,
+    [MOVE_TWISTER] = 1,
+    [MOVE_WATERFALL] = 1,
+    [MOVE_ZEN_HEADBUTT] = 1,
+    [MOVE_ZING_ZAP] = 1,
+};
+
 static const u8 sAbilitiesAffectedByMoldBreaker[] =
 {
     [ABILITY_BATTLE_ARMOR] = 1,
@@ -4801,6 +4838,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+                effect++;
+            }
+            break;
+        case ABILITY_STENCH:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerTarget].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && (Random() % 10) == 0
+             && !IS_MOVE_STATUS(move)
+             && !sMovesNotAffectedByStench[gCurrentMove])
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
+                BattleScriptPushCursor();
+                SetMoveEffect(FALSE, 0);
+                BattleScriptPop();
                 effect++;
             }
             break;
