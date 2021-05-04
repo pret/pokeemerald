@@ -2234,6 +2234,7 @@ BattleScript_EffectAbsorb::
 	resultmessage
 	waitmessage 0x40
 	setdrainedhp
+	manipulatedamage DMG_BIG_ROOT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_AbsorbLiquidOoze
 	setbyte cMULTISTRING_CHOOSER, 0x0
@@ -2361,6 +2362,7 @@ BattleScript_DreamEaterWorked:
 	resultmessage
 	waitmessage 0x40
 	setdrainedhp
+	manipulatedamage DMG_BIG_ROOT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
