@@ -6272,6 +6272,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             if (!gBattleMons[battlerId].status1
                 && CanPoisonType(battlerId, battlerId)
                 && GetBattlerAbility(battlerId) != ABILITY_IMMUNITY
+                && GetBattlerAbility(battlerId) != ABILITY_COMATOSE
                 && IsBattlerAlive)
             {
                 effect = ITEM_STATUS_CHANGE;
@@ -6284,6 +6285,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             if (!gBattleMons[battlerId].status1
                 && !IS_BATTLER_OF_TYPE(battlerId, TYPE_FIRE)
                 && GetBattlerAbility(battlerId) != ABILITY_WATER_VEIL
+                && GetBattlerAbility(battlerId) != ABILITY_WATER_BUBBLE
+                && GetBattlerAbility(battlerId) != ABILITY_COMATOSE
                 && IsBattlerAlive)
             {
                 effect = ITEM_STATUS_CHANGE;
