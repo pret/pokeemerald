@@ -143,10 +143,25 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all rom compare modern berry_fix libagbsyscall,$(MAKECMDGOALS)))
+# Don't build tools yet for modern because we perform a recursive make
+ifeq (,$(filter-out all rom berry_fix libagbsyscall,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) tools)
 else
 NODEP := 1
+endif
+
+# check if we need to scan dependencies based on the rule
+ifeq (,$(MAKECMDGOALS))
+  SCAN_DEPS := 1
+else
+  # compare and modern perform recursive calls, so don't scan dependencies yet
+  # clean, tidy, tools, mostlyclean, clean-tools, $(TOOLDIRS), tidymodern, tidynonmodern don't even build the ROM
+  # berry_fix and libagbsyscall do their own thing
+  ifeq (,$(filter-out clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix libagbsyscall modern tidymodern tidynonmodern,$(MAKECMDGOALS)))
+    SCAN_DEPS := 0
+  else
+    SCAN_DEPS := 1
+  endif
 endif
 
 C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
@@ -272,17 +287,21 @@ else
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
 endif
 
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_dep :=
-else
-$(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
-endif
-
 ifeq ($(DINFO),1)
 override CFLAGS += -g
 endif
 
-$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
+# The dep rules have to be explicit or else missing files won't be reported.
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way.
+
+# ifeq (,$(filter-out all rom compare modern berry_fix libagbsyscall,$(MAKECMDGOALS)))
+
+#$(info MAKECMDGOALS - $(MAKECMDGOALS))
+
+ifeq ($(SCAN_DEPS),1)
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c
 ifeq (,$(KEEP_TEMPS))
 	@echo "$(CC1) <flags> -o $@ $<"
 	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) $< charmap.txt -i | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
@@ -292,13 +311,25 @@ else
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 endif
-
-ifeq ($(NODEP),1)
-$(GFLIB_BUILDDIR)/%.o: c_dep :=
 else
-$(GFLIB_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(GFLIB_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(GFLIB_SUBDIR)/$*.c)
+define C_DEP
+$1: $2 $$(shell $(SCANINC) -I include -I tools/agbcc/include -I gflib $2)
+ifeq (,$$(KEEP_TEMPS))
+	@echo "$$(CC1) <flags> -o $$@ $$<"
+	@$$(CPP) $$(CPPFLAGS) $$< | $$(PREPROC) $$< charmap.txt -i | $$(CC1) $$(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $$(AS) $$(ASFLAGS) -o $$@ -
+else
+	@$$(CPP) $$(CPPFLAGS) $$< -o $$(C_BUILDDIR)/$$*.i
+	@$$(PREPROC) $$(C_BUILDDIR)/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o $$(C_BUILDDIR)/$$*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $$(C_BUILDDIR)/$$*.s
+	$$(AS) $$(ASFLAGS) -o $$@ $$(C_BUILDDIR)/$$*.s
+endif
+endef
+#$(info C_DEP)
+$(foreach src, $(C_SRCS), $(eval $(call C_DEP,$(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o, $(src)),$(src))))
+#$(error done C_DEP)
 endif
 
+ifeq ($(NODEP),1)
 $(GFLIB_BUILDDIR)/%.o : $(GFLIB_SUBDIR)/%.c $$(c_dep)
 ifeq (,$(KEEP_TEMPS))
 	@echo "$(CC1) <flags> -o $@ $<"
@@ -309,20 +340,32 @@ else
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(GFLIB_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(GFLIB_BUILDDIR)/$*.s
 endif
-
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_asm_dep :=
 else
-$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
+define GFLIB_DEP
+$1: $2 $$(shell $(SCANINC) -I include -I tools/agbcc/include -I gflib $2)
+ifeq (,$$(KEEP_TEMPS))
+	@echo "$$(CC1) <flags> -o $$@ $$<"
+	@$$(CPP) $$(CPPFLAGS) $$< | $$(PREPROC) $$< charmap.txt -i | $$(CC1) $$(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $$(AS) $$(ASFLAGS) -o $$@ -
+else
+	@$$(CPP) $$(CPPFLAGS) $$< -o $$(GFLIB_BUILDDIR)/$$*.i
+	@$$(PREPROC) $$(GFLIB_BUILDDIR)/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o $$(GFLIB_BUILDDIR)/$$*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $$(GFLIB_BUILDDIR)/$$*.s
+	$$(AS) $$(ASFLAGS) -o $$@ $$(GFLIB_BUILDDIR)/$$*.s
+endif
+endef
+$(foreach src, $(GFLIB_SRCS), $(eval $(call GFLIB_DEP,$(patsubst $(GFLIB_SUBDIR)/%.c,$(GFLIB_BUILDDIR)/%.o, $(src)),$(src))))
 endif
 
-$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<
-
-# The dep rules have to be explicit or else missing files won't be reported.
-# As a side effect, they're evaluated immediately instead of when the rule is invoked.
-# It doesn't look like $(shell) can be deferred so there might not be a better way.
-
+else
+define C_ASM_DEP
+$1: $2 $$(shell $(SCANINC) -I "" $2)
+	$$(AS) $$(ASFLAGS) -o $$@ $$<
+endef
+$(foreach src, $(C_ASM_SRCS), $(eval $(call C_ASM_DEP,$(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o, $(src)),$(src))))
+endif
 
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
@@ -344,6 +387,7 @@ $1: $2 $$(shell $(SCANINC) -I include -I "" $2)
 	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include - | $$(AS) $$(ASFLAGS) -o $$@
 endef
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
+endif
 endif
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
