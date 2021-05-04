@@ -8877,15 +8877,16 @@ static void Cmd_stockpiletohpheal(void)
     }
 }
 
+// Sign change for drained HP handled in GetDrainedBigRootHp
 static void Cmd_setdrainedhp(void)
 {
     if (gBattleMoves[gCurrentMove].argument != 0)
-        gBattleMoveDamage = -(gHpDealt * gBattleMoves[gCurrentMove].argument / 100);
+        gBattleMoveDamage = (gHpDealt * gBattleMoves[gCurrentMove].argument / 100);
     else
-        gBattleMoveDamage = -(gHpDealt / 2);
+        gBattleMoveDamage = (gHpDealt / 2);
 
     if (gBattleMoveDamage == 0)
-        gBattleMoveDamage = -1;
+        gBattleMoveDamage = 1;
 
     gBattlescriptCurrInstr++;
 }
