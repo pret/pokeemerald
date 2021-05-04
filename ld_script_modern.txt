@@ -27,8 +27,8 @@ SECTIONS {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
         gflib/*.o(.bss);
-        *libc.a:*.o(.bss);
-        *libnosys.a:*.o(.bss);
+        *libc.a:*.o(.bss*);
+        *libnosys.a:*.o(.bss*);
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
@@ -47,19 +47,10 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        src/crt0.o(.text);
-        src/*.o(.text);
-        gflib/*.o(.text);
-        asm/*.o(.text);
-    } =0
-
-    .text.unlikely :
-    ALIGN(4)
-    {
-        src/crt0.o(.text.unlikely);
-        src/*.o(.text.unlikely);
-        gflib/*.o(.text.unlikely);
-        asm/*.o(.text.unlikely);
+        src/crt0.o(.text*);
+        src/*.o(.text*);
+        gflib/*.o(.text*);
+        asm/*.o(.text*);
     } =0
 
     script_data :
