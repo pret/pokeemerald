@@ -1573,6 +1573,9 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
             calc = (calc * 120) / 100;  // 20% acc boost
     }
 
+    if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+        calc = (calc * 5) / 3; // 1.66 Gravity acc boost
+
     return calc;
 }
 
