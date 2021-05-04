@@ -201,10 +201,7 @@ struct BaseStats
  /* 0x13 */ u8 growthRate;
  /* 0x14 */ u8 eggGroup1;
  /* 0x15 */ u8 eggGroup2;
- /* 0x16 */ u16 abilities[2];
-#ifdef POKEMON_EXPANSION
-            u16 abilityHidden;
-#endif
+ /* 0x16 */ u16 abilities[NUM_ABILITY_SLOTS];
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;
             u8 noFlip : 1;
