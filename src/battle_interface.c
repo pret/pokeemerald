@@ -1483,8 +1483,11 @@ bool32 IsMegaTriggerSpriteActive(void)
 
 void HideMegaTriggerSprite(void)
 {
-    ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, 0);
-    gSprites[gBattleStruct->mega.triggerSpriteId].tHide = TRUE;
+    if (gBattleStruct->mega.triggerSpriteId != 0xFF)
+    {
+        ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, 0);
+        gSprites[gBattleStruct->mega.triggerSpriteId].tHide = TRUE;
+    }
 }
 
 void DestroyMegaTriggerSprite(void)

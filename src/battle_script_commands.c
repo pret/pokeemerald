@@ -1509,7 +1509,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
 
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
-    if (atkAbility == ABILITY_UNAWARE)
+    if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE)
         evasionStage = 6;
     if (gBattleMoves[move].flags & FLAG_STAT_STAGES_IGNORED)
         evasionStage = 6;
@@ -1571,6 +1571,9 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
         else
             calc = (calc * 120) / 100;  // 20% acc boost
     }
+
+    if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+        calc = (calc * 5) / 3; // 1.66 Gravity acc boost
 
     return calc;
 }
@@ -8878,15 +8881,16 @@ static void Cmd_stockpiletohpheal(void)
     }
 }
 
+// Sign change for drained HP handled in GetDrainedBigRootHp
 static void Cmd_setdrainedhp(void)
 {
     if (gBattleMoves[gCurrentMove].argument != 0)
-        gBattleMoveDamage = -(gHpDealt * gBattleMoves[gCurrentMove].argument / 100);
+        gBattleMoveDamage = (gHpDealt * gBattleMoves[gCurrentMove].argument / 100);
     else
-        gBattleMoveDamage = -(gHpDealt / 2);
+        gBattleMoveDamage = (gHpDealt / 2);
 
     if (gBattleMoveDamage == 0)
-        gBattleMoveDamage = -1;
+        gBattleMoveDamage = 1;
 
     gBattlescriptCurrInstr++;
 }
