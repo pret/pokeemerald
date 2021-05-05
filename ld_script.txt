@@ -333,6 +333,7 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
+        src/wonder_trade.o(.text);
     } =0
 
     script_data :
@@ -689,6 +690,7 @@ SECTIONS {
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event.o(.rodata);
+        src/wonder_trade.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
