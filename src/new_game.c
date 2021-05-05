@@ -48,23 +48,19 @@
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
-// this file's functions
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
 
-// EWRAM vars
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
 
-// const rom data
 static const struct ContestWinner sContestWinnerPicDummy =
 {
     .monName = _(""),
     .trainerName = _("")
 };
 
-// code
 void SetTrainerId(u32 trainerId, u8 *dst)
 {
     dst[0] = trainerId;
@@ -114,7 +110,9 @@ void ClearAllContestWinnerPics(void)
     s32 i;
 
     ClearContestWinnerPicsInContestHall();
-    for (i = 8; i < 13; i++)
+
+    // Clear Museum paintings
+    for (i = MUSEUM_CONTEST_WINNERS_START; i < NUM_CONTEST_WINNERS; i++)
         gSaveBlock1Ptr->contestWinners[i] = sContestWinnerPicDummy;
 }
 

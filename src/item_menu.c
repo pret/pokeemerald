@@ -509,7 +509,6 @@ EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 static EWRAM_DATA struct TempWallyStruct *sTempWallyBag = 0;
 
 extern u8 *const gPocketNamesStringsTable[];
-extern u8* gReturnToXStringsTable[];
 extern const u8 EventScript_SelectWithoutRegisteredItem[];
 extern const u16 gUnknown_0860F074[];
 
@@ -530,7 +529,7 @@ void CB2_BagMenuFromBattle(void)
     if (!InBattlePyramid())
         GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT, CB2_SetUpReshowBattleScreenAfterMenu2);
     else
-        GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
+        GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 // Choosing berry to plant
@@ -947,7 +946,7 @@ void BagMenu_PrintDescription(int itemIndex)
     }
     else
     {
-        StringCopy(gStringVar1, gReturnToXStringsTable[gBagPositionStruct.location]);
+        StringCopy(gStringVar1, gBagMenu_ReturnToStrings[gBagPositionStruct.location]);
         StringExpandPlaceholders(gStringVar4, gText_ReturnToVar1);
         str = gStringVar4;
     }
@@ -1458,7 +1457,7 @@ void sub_81AC590(u8 taskId)
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }
 
-void OpenContextMenu(u8 unused)
+static void OpenContextMenu(u8 unused)
 {
     switch (gBagPositionStruct.location)
     {
@@ -1604,8 +1603,8 @@ void sub_81ACAF8(u8 a)
 
 void sub_81ACB54(u8 a, u8 b, u8 c)
 {
-    sub_8198DBC(a, 7, 8, 1, 0x38, b, c, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
-    sub_8199944(a, 0x38, b, c, 0);
+    PrintMenuActionGrid(a, 7, 8, 1, 0x38, b, c, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
+    InitMenuActionGrid(a, 0x38, b, c, 0);
 }
 
 void Task_ItemContext_FieldOrBattle(u8 taskId)
@@ -1850,7 +1849,7 @@ void ItemMenu_Register(u8 taskId)
 void ItemMenu_Give(u8 taskId)
 {
     BagMenu_RemoveSomeWindow();
-    if (!itemid_80BF6D8_mail_related(gSpecialVar_ItemId))
+    if (!IsWritingMailAllowed(gSpecialVar_ItemId))
     {
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
     }
@@ -1925,7 +1924,7 @@ void CB2_ReturnToBagMenuPocket(void)
 
 void Task_ItemContext_FieldGive(u8 taskId)
 {
-    if (!itemid_80BF6D8_mail_related(gSpecialVar_ItemId))
+    if (!IsWritingMailAllowed(gSpecialVar_ItemId))
     {
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
     }

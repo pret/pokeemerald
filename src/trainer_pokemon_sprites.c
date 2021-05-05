@@ -137,7 +137,7 @@ static void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 pale
 static void AssignSpriteAnimsTable(bool8 isTrainer)
 {
     if (!isTrainer)
-        sCreatingSpriteTemplate.anims = gUnknown_082FF70C;
+        sCreatingSpriteTemplate.anims = gAnims_MonPic;
     else
         sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
 }

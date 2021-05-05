@@ -509,12 +509,14 @@ void RemoveStartMenuWindow(void)
     }
 }
 
-u16 sub_8197A30(void)
+// Unused
+static u16 GetDialogFrameBaseTileNum(void)
 {
     return DLG_WINDOW_BASE_TILE_NUM;
 }
 
-u16 sub_8197A38(void)
+// Unused
+static u16 GetStandardFrameBaseTileNum(void)
 {
     return STD_WINDOW_BASE_TILE_NUM;
 }
@@ -1241,7 +1243,7 @@ void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struc
     sub_8198C94(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a3, a4, a5, strs);
 }
 
-void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
+void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *strs, const u8 *strIds)
 {
     u8 i;
     u8 j;
@@ -1256,13 +1258,13 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
-    for (i = 0; i < itemCount2; i++)
+    for (i = 0; i < verticalCount; i++)
     {
-        for (j = 0; j < itemCount; j++)
+        for (j = 0; j < horizontalCount; j++)
         {
-            printer.currentChar = strs[a8[(itemCount * i) + j]].text;
-            printer.x = (a4 * j) + left;
-            printer.y = (GetFontAttribute(fontId, 1) * i) + top;
+            printer.currentChar = strs[strIds[(horizontalCount * i) + j]].text;
+            printer.x = (optionWidth * j) + left;
+            printer.y = (GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) * i) + top;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
             AddTextPrinter(&printer, 0xFF, NULL);
@@ -1272,9 +1274,10 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_8198EF8(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *strs, const u8 *a8)
+// Unused
+static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, u8 unused, u8 horizontalCount, u8 verticalCount, const struct MenuAction *strs, const u8 *strIds)
 {
-    sub_8198DBC(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a4, a5, strs, a8);
+    PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, strs, strIds);
 }
 
 u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, u8 a6, u8 a7, u8 numChoices, u8 a9)
@@ -1701,7 +1704,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     CopyWindowToVram(windowId, 2);
 }
 
-u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
+u8 InitMenuActionGrid(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
 {
     s32 pos;
 
