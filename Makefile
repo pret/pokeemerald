@@ -215,9 +215,7 @@ mostlyclean: tidynonmodern tidymodern
 	@$(MAKE) clean -C berry_fix
 	@$(MAKE) clean -C libagbsyscall
 
-tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r $(OBJ_DIR)
+tidy: tidynonmodern tidymodern
 
 tidynonmodern:
 	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
