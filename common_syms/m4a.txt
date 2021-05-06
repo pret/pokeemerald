@@ -1,4 +1,3 @@
-gSoundInfo
 gPokemonCrySongs
 gPokemonCryMusicPlayers
 gMPlayInfo_BGM

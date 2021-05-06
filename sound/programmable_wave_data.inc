@@ -72,3 +72,12 @@ ProgrammableWaveData_86B49A0:: @ 86B49A0
 
 ProgrammableWaveData_86B49B0:: @ 86B49B0
 	.incbin "sound/programmable_wave_samples/86B49B0.pcm"
+
+ProgrammableWaveData_sq25half:: @ 25% square half
+	.incbin "sound/programmable_wave_samples/sq25half.pcm"
+
+ProgrammableWaveData_sq50half:: @ 50% square half
+	.incbin "sound/programmable_wave_samples/sq50half.pcm"
+
+ProgrammableWaveData_sq50oct:: @ 50% square oct lower
+	.incbin "sound/programmable_wave_samples/sq50oct.pcm"

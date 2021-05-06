@@ -40,6 +40,4 @@ voicegroup007:: @ 8676AE4
 	voice_directsound 61, 64, DirectSoundWaveData_dp_synthkick, 255, 0, 255, 171
 	voice_directsound 60, 64, DirectSoundWaveData_dp_synthsnare, 255, 0, 255, 0
 	voice_directsound 60, 64, DirectSoundWaveData_dp_synthsnare, 255, 0, 255, 171
-	voice_directsound 60, 0, DirectSoundWaveData_bw2_streamtitleL, 255, 0, 255, 0
-	voice_directsound 60, 127, DirectSoundWaveData_bw2_streamtitleR, 255, 0, 255, 0
 

@@ -190,3 +190,5 @@
 .include "sound/voicegroups/voicegroup188.inc"
 .include "sound/voicegroups/voicegroup189.inc"
 .include "sound/voicegroups/voicegroup190.inc"
+.include "sound/voicegroups/voicegroup191.inc"
+.include "sound/voicegroups/voicegroup192.inc"

@@ -148,3 +148,5 @@
 	.include "src/faraway_island.o"
 	.include "src/trainer_hill.o"
 	.include "src/rayquaza_scene.o"
+gSoundInfo:
+    .space 0xFB0

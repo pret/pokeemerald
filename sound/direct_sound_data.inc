@@ -3993,11 +3993,3 @@ DirectSoundWaveData_bw_239xylo2c6::
 	.align 2
 DirectSoundWaveData_bw_240xylo2f5::
 	.incbin "sound/direct_sound_samples/bw_240xylo2f5.bin"
-
-	.align 2
-DirectSoundWaveData_bw2_streamtitleL::
-	.incbin "sound/direct_sound_samples/bw2_streamtitleL.bin"
-
-	.align 2
-DirectSoundWaveData_bw2_streamtitleR::
-	.incbin "sound/direct_sound_samples/bw2_streamtitleR.bin"
