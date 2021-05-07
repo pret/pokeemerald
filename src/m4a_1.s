@@ -177,7 +177,7 @@ do_reverb:
 	@ Reverb gets applied to the frame we are currently looking at and the one after that,
 	@ the magic below simply calculates the pointer for the one after the current one.
 	cmp	r4, #2
-	addeq r7, r0, #0x350
+	addeq r7, r0, #0x410
 	addne r7, r5, r8
 	mov	r4, r8
 	orr	r3, r3, r3, lsl#16			
