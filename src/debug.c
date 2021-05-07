@@ -93,8 +93,8 @@ enum { // Vars
     DEBUG_VARS_MENU_ITEM_VARS,
 };
 enum { // Give
-    DEBUG_GIVE_MENU_ITEM_ITEM,
-    DEBUG_MENU_ITEM_GIVE_ALLTMS,
+    DEBUG_GIVE_MENU_ITEM_ITEM_X,
+    DEBUG_GIVE_MENU_ITEM_ALLTMS,
     DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE,
     DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX,
     DEBUG_GIVE_MENU_ITEM_MAX_MONEY,
@@ -264,27 +264,27 @@ static const u8 gDebugText_Util_Trainer_Name[] =            _("Trainer name");
 static const u8 gDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
 static const u8 gDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
 // Flags Menu
-static const u8 gDebugText_Flags_Flags[] =                _("Set Flag XXXX");
-static const u8 gDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
-static const u8 gDebugText_Flags_SwitchDex[] =            _("Pokédex ON/OFF");
-static const u8 gDebugText_Flags_SwitchNationalDex[] =    _("NatDex ON/OFF");
-static const u8 gDebugText_Flags_SwitchPokeNav[] =        _("PokéNav ON/OFF");
-static const u8 gDebugText_Flags_ToggleFlyFlags[] =       _("Fly Flags ON/OFF");
-static const u8 gDebugText_Flags_ToggleAllBadges[] =      _("All badges ON/OFF");
-static const u8 gDebugText_Flags_SwitchCollision[] =      _("Collision ON/OFF");
-static const u8 gDebugText_Flags_SwitchEncounter[] =      _("Encounter ON/OFF");
-static const u8 gDebugText_Flags_SwitchTrainerSee[] =     _("TrainerSee ON/OFF");
-static const u8 gDebugText_Flags_SwitchBagUse[] =         _("BagUse ON/OFF");
-static const u8 gDebugText_Flags_SwitchCatching[] =       _("Catching ON/OFF");
-static const u8 gDebugText_Flag[] =                       _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
-static const u8 gDebugText_FlagHex[] =                    _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
-static const u8 gDebugText_FlagSet[] =                    _("TRUE");
-static const u8 gDebugText_FlagUnset[] =                  _("FALSE");
+static const u8 gDebugText_Flags_Flags[] =                  _("Set Flag XXXX");
+static const u8 gDebugText_Flags_SetPokedexFlags[] =        _("All Pokédex Flags");
+static const u8 gDebugText_Flags_SwitchDex[] =              _("Pokédex ON/OFF");
+static const u8 gDebugText_Flags_SwitchNationalDex[] =      _("NatDex ON/OFF");
+static const u8 gDebugText_Flags_SwitchPokeNav[] =          _("PokéNav ON/OFF");
+static const u8 gDebugText_Flags_ToggleFlyFlags[] =         _("Fly Flags ON/OFF");
+static const u8 gDebugText_Flags_ToggleAllBadges[] =        _("All badges ON/OFF");
+static const u8 gDebugText_Flags_SwitchCollision[] =        _("Collision ON/OFF");
+static const u8 gDebugText_Flags_SwitchEncounter[] =        _("Encounter ON/OFF");
+static const u8 gDebugText_Flags_SwitchTrainerSee[] =       _("TrainerSee ON/OFF");
+static const u8 gDebugText_Flags_SwitchBagUse[] =           _("BagUse ON/OFF");
+static const u8 gDebugText_Flags_SwitchCatching[] =         _("Catching ON/OFF");
+static const u8 gDebugText_Flags_Flag[] =                   _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
+static const u8 gDebugText_Flags_FlagHex[] =                _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
+static const u8 gDebugText_Flags_FlagSet[] =                _("TRUE");
+static const u8 gDebugText_Flags_FlagUnset[] =              _("FALSE");
 // Variables Menu
-static const u8 gDebugText_Vars_Vars[] =             _("Set Vars XXXX");
-static const u8 gDebugText_VariableHex[] =           _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
-static const u8 gDebugText_Variable[] =              _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
-static const u8 gDebugText_VariableValueSet[] =      _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
+static const u8 gDebugText_Vars_Vars[] =                    _("Set Vars XXXX");
+static const u8 gDebugText_Vars_VariableHex[] =             _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
+static const u8 gDebugText_Vars_Variable[] =                _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
+static const u8 gDebugText_Vars_VariableValueSet[] =        _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
 // Give Menu
 static const u8 gDebugText_Give_GiveItem[] =            _("Give item XXXX");
 static const u8 gDebugText_ItemQuantity[] =             _("Quantity:       \n{STR_VAR_1}    \n\n{STR_VAR_2}");
@@ -395,8 +395,8 @@ static const struct ListMenuItem sDebugMenu_Items_Vars[] =
 };
 static const struct ListMenuItem sDebugMenu_Items_Give[] =
 {
-    [DEBUG_GIVE_MENU_ITEM_ITEM]             = {gDebugText_Give_GiveItem,            DEBUG_GIVE_MENU_ITEM_ITEM},
-    [DEBUG_MENU_ITEM_GIVE_ALLTMS]           = {gDebugText_Give_AllTMs,              DEBUG_MENU_ITEM_GIVE_ALLTMS},
+    [DEBUG_GIVE_MENU_ITEM_ITEM_X]           = {gDebugText_Give_GiveItem,            DEBUG_GIVE_MENU_ITEM_ITEM_X},
+    [DEBUG_GIVE_MENU_ITEM_ALLTMS]           = {gDebugText_Give_AllTMs,              DEBUG_GIVE_MENU_ITEM_ALLTMS},
     [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]   = {gDebugText_Give_GivePokemonSimple,   DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE},
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = {gDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = {gDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
@@ -454,8 +454,8 @@ static void (*const sDebugMenu_Actions_Vars[])(u8) =
 };
 static void (*const sDebugMenu_Actions_Give[])(u8) =
 {
-    [DEBUG_GIVE_MENU_ITEM_ITEM]             = DebugAction_Give_Item,
-    [DEBUG_MENU_ITEM_GIVE_ALLTMS]           = DebugAction_Give_AllTMs,
+    [DEBUG_GIVE_MENU_ITEM_ITEM_X]           = DebugAction_Give_Item,
+    [DEBUG_GIVE_MENU_ITEM_ALLTMS]           = DebugAction_Give_AllTMs,
     [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]   = DebugAction_Give_PokemonSimple,
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = DebugAction_Give_PokemonComplex,
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = DebugAction_Give_MaxMoney,
@@ -1039,13 +1039,13 @@ static void DebugAction_Flags_Flags(u8 taskId)
     //Display initial Flag
     ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
     ConvertIntToHexStringN(gStringVar2, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar1, gDebugText_FlagHex);
+    StringExpandPlaceholders(gStringVar1, gDebugText_Flags_FlagHex);
     if(FlagGet(0) == TRUE)
-        StringCopyPadded(gStringVar2, gDebugText_FlagSet, CHAR_SPACE, 15);
+        StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
     else
-        StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+        StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
     StringCopy(gStringVar3, gText_DigitIndicator[0]);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Flag);
+    StringExpandPlaceholders(gStringVar4, gDebugText_Flags_Flag);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Flags_FlagsSelect;
@@ -1103,13 +1103,13 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
     {
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar1, gDebugText_FlagHex);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Flags_FlagHex);
         if(FlagGet(gTasks[taskId].data[3]) == TRUE)
-            StringCopyPadded(gStringVar2, gDebugText_FlagSet, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
         else
-            StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Flag);
+        StringExpandPlaceholders(gStringVar4, gDebugText_Flags_Flag);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 }
@@ -1275,11 +1275,11 @@ static void DebugAction_Vars_Vars(u8 taskId)
     //Display initial Variable
     ConvertIntToDecimalStringN(gStringVar1, VARS_START, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
     ConvertIntToHexStringN(gStringVar2, VARS_START, STR_CONV_MODE_LEFT_ALIGN, 4);
-    StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+    StringExpandPlaceholders(gStringVar1, gDebugText_Vars_VariableHex);
     ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
     StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Variable);
+    StringExpandPlaceholders(gStringVar4, gDebugText_Vars_Variable);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Vars_Select;
@@ -1328,7 +1328,7 @@ static void DebugAction_Vars_Select(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Vars_VariableHex);
         if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value, if 65535 the value hasnt been set
             gTasks[taskId].data[5] = 0;
         else
@@ -1337,7 +1337,7 @@ static void DebugAction_Vars_Select(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
 
         //Combine str's to full window string
-        StringExpandPlaceholders(gStringVar4, gDebugText_Variable);
+        StringExpandPlaceholders(gStringVar4, gDebugText_Vars_Variable);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -1349,7 +1349,7 @@ static void DebugAction_Vars_Select(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Vars_VariableHex);
         if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value if 65535 the value hasnt been set
             gTasks[taskId].data[5] = 0;
         else
@@ -1357,7 +1357,7 @@ static void DebugAction_Vars_Select(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[5], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
-        StringExpandPlaceholders(gStringVar4, gDebugText_VariableValueSet);
+        StringExpandPlaceholders(gStringVar4, gDebugText_Vars_VariableValueSet);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].data[6] = gTasks[taskId].data[5]; //New value selector
@@ -1424,12 +1424,12 @@ static void DebugAction_Vars_SetValue(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Vars_VariableHex);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[6], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
-        StringExpandPlaceholders(gStringVar4, gDebugText_VariableValueSet);
+        StringExpandPlaceholders(gStringVar4, gDebugText_Vars_VariableValueSet);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 }
@@ -1844,7 +1844,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
 
             ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 0);
             StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-            StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
             StringExpandPlaceholders(gStringVar4, gDebugText_PokemonShiny);
             AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
@@ -1881,9 +1881,9 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
         }
 
         if(gTasks[taskId].data[3] == 1)
-            StringCopyPadded(gStringVar2, gDebugText_FlagSet, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
         else
-            StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 0);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringExpandPlaceholders(gStringVar4, gDebugText_PokemonShiny);
