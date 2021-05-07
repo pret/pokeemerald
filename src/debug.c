@@ -7,8 +7,11 @@
 //AsparagusEduardo:     https://github.com/AsparagusEduardo/pokeemerald/tree/InfusedEmerald_v2
 //Ghoulslash:           https://github.com/ghoulslash/pokeemerald
 #include "global.h"
+#include "battle.h"
+#include "coins.h"
 #include "credits.h"
 #include "data.h"
+#include "daycare.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -23,6 +26,7 @@
 #include "malloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "money.h"
 #include "naming_screen.h"
 #include "new_game.h"
 #include "overworld.h"
@@ -60,6 +64,8 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_HEAL_PARTY,
     DEBUG_UTIL_MENU_ITEM_FLY,
     DEBUG_UTIL_MENU_ITEM_WARP,
+    DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES,
+    DEBUG_UTIL_MENU_ITEM_POISON_MONS,
     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
@@ -91,6 +97,10 @@ enum { // Give
     DEBUG_MENU_ITEM_GIVE_ALLTMS,
     DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE,
     DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX,
+    DEBUG_GIVE_MENU_ITEM_MAX_MONEY,
+    DEBUG_GIVE_MENU_ITEM_MAX_COINS,
+    DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
+    DEBUG_GIVE_MENU_ITEM_FILL_PC,
     DEBUG_GIVE_MENU_ITEM_CHEAT,
     //DEBUG_MENU_ITEM_ACCESS_PC,
 };
@@ -162,6 +172,8 @@ static void DebugAction_Util_Warp_Warp(u8 taskId);
 static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId);
 static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
+static void DebugAction_Util_RunningShoes(u8 taskId);
+static void DebugAction_Util_PoisonMons(u8 taskId);
 static void DebugAction_Util_CheckSaveBlock(u8);
 static void DebugAction_Util_CheckWallClock(u8);
 static void DebugAction_Util_SetWallClock(u8);
@@ -204,6 +216,10 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId);
 static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId);
 static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId);
 static void DebugAction_Give_Pokemon_Move(u8 taskId);
+static void DebugAction_Give_MaxMoney(u8 taskId);
+static void DebugAction_Give_MaxCoins(u8 taskId);
+static void DebugAction_Give_DayCareEgg(u8 taskId);
+static void DebugAction_Give_FillPC(u8 taskId);
 static void DebugAction_Give_CHEAT(u8 taskId);
 static void DebugAction_AccessPC(u8 taskId);
 
@@ -237,6 +253,8 @@ static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1
 static const u8 gDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}            \nMapSec:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectWarp[] =    _("Warp:             \n{STR_VAR_1}                \n                                  \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelMax[] =        _("{STR_VAR_1} / {STR_VAR_2}");
+static const u8 gDebugText_Util_RunningShoes[] =            _("Toggle Running Shoes");
+static const u8 gDebugText_Util_PoisonMons[] =              _("Poison all mons");
 static const u8 gDebugText_Util_SaveBlockSpace[] =          _("SaveBlock Space");
 static const u8 gDebugText_Util_CheckWallClock[] =          _("Check Wall Clock");
 static const u8 gDebugText_Util_SetWallClock[] =            _("Set Wall Clock");
@@ -290,7 +308,11 @@ static const u8 gDebugText_PokemonMove_0[] =            _("Move 0: {STR_VAR_3}  
 static const u8 gDebugText_PokemonMove_1[] =            _("Move 1: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 gDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 gDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
-static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT start");
+static const u8 gDebugText_Give_MaxMoney[] =            _("Max Money");
+static const u8 gDebugText_Give_MaxCoins[] =            _("Max Coins");
+static const u8 gDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
+static const u8 gDebugText_Give_FillPc[] =              _("Fill Pc");
+static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
 // static const u8 gDebugText_Give_AccessPC[] =         _("Access PC");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
@@ -341,6 +363,8 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]       = {gDebugText_Util_HealParty,        DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
     [DEBUG_UTIL_MENU_ITEM_FLY]              = {gDebugText_Util_Fly,              DEBUG_UTIL_MENU_ITEM_FLY},
     [DEBUG_UTIL_MENU_ITEM_WARP]             = {gDebugText_Util_WarpToMap,        DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES]    = {gDebugText_Util_RunningShoes,     DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES},
+    [DEBUG_UTIL_MENU_ITEM_POISON_MONS]      = {gDebugText_Util_PoisonMons,       DEBUG_UTIL_MENU_ITEM_POISON_MONS},
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]        = {gDebugText_Util_SaveBlockSpace,   DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]   = {gDebugText_Util_CheckWallClock,   DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]     = {gDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
@@ -375,6 +399,10 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_MENU_ITEM_GIVE_ALLTMS]           = {gDebugText_Give_AllTMs,              DEBUG_MENU_ITEM_GIVE_ALLTMS},
     [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]   = {gDebugText_Give_GivePokemonSimple,   DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE},
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = {gDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
+    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = {gDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
+    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = {gDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_ITEM_MAX_COINS},
+    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = {gDebugText_Give_DaycareEgg,          DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = {gDebugText_Give_FillPc,              DEBUG_GIVE_MENU_ITEM_FILL_PC},
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = {gDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
     //[DEBUG_MENU_ITEM_ACCESS_PC] = {gDebugText_AccessPC, DEBUG_MENU_ITEM_ACCESS_PC},
 };
@@ -394,6 +422,8 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]       = DebugAction_Util_HealParty,
     [DEBUG_UTIL_MENU_ITEM_FLY]              = DebugAction_Util_Fly,
     [DEBUG_UTIL_MENU_ITEM_WARP]             = DebugAction_Util_Warp_Warp,
+    [DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES]    = DebugAction_Util_RunningShoes,
+    [DEBUG_UTIL_MENU_ITEM_POISON_MONS]      = DebugAction_Util_PoisonMons,
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]        = DebugAction_Util_CheckSaveBlock,
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]   = DebugAction_Util_CheckWallClock,
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]     = DebugAction_Util_SetWallClock,
@@ -428,6 +458,10 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_MENU_ITEM_GIVE_ALLTMS]           = DebugAction_Give_AllTMs,
     [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]   = DebugAction_Give_PokemonSimple,
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = DebugAction_Give_PokemonComplex,
+    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = DebugAction_Give_MaxMoney,
+    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = DebugAction_Give_MaxCoins,
+    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = DebugAction_Give_DayCareEgg,
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = DebugAction_Give_FillPC,
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = DebugAction_Give_CHEAT,
     //[DEBUG_MENU_ITEM_ACCESS_PC] = DebugAction_AccessPC,
 };
@@ -893,6 +927,36 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
     }
+}
+
+static void DebugAction_Util_RunningShoes(u8 taskId)
+{
+    if (FlagGet(FLAG_SYS_B_DASH))
+    {
+        FlagClear(FLAG_SYS_B_DASH);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_SYS_B_DASH);
+        PlaySE(SE_PC_LOGIN);
+    }
+}
+
+static void DebugAction_Util_PoisonMons(u8 taskId)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0)
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        {
+            u32 curStatus = STATUS1_POISON;
+            SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &curStatus);
+        }
+    }
+    PlaySE(SE_FIELD_POISON);
 }
 
 static void DebugAction_Util_CheckSaveBlock(u8 taskId)
@@ -2348,6 +2412,50 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
 
     Free(sDebugMonData); //Frees EWRAM of MonData Struct
     DebugAction_DestroyExtraWindow(taskId); //return sentToPc;
+}
+
+static void DebugAction_Give_MaxMoney(u8 taskId)
+{
+    SetMoney(&gSaveBlock1Ptr->money, 999999);
+}
+
+static void DebugAction_Give_MaxCoins(u8 taskId)
+{
+    SetCoins(9999);
+}
+
+static void DebugAction_Give_DayCareEgg(u8 taskId)
+{
+    TriggerPendingDaycareEgg();
+}
+
+static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
+{
+    int boxId, boxPosition;
+    u32 personality;
+    struct BoxPokemon boxMon;
+
+    personality = Random32();
+
+    CreateBoxMon(&boxMon,
+                 SPECIES_DEOXYS,
+                 100,
+                 32,
+                 personality,
+                 0,
+                 OT_ID_PLAYER_ID,
+                 0);
+
+    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            if (!GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
+            {
+                gPokemonStoragePtr->boxes[boxId][boxPosition] = boxMon;
+            }
+        }
+    }
 }
 
 static void DebugAction_Give_CHEAT(u8 taskId)
