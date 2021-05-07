@@ -950,7 +950,7 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
-    u32 trainerId = (Random() << 0x10) | GetGeneratedTrainerIdLower();
+    u32 trainerId = ((Random() << 16) | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
