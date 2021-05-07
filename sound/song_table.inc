@@ -741,6 +741,13 @@ gSongTable:: @ 86B49F0
 	song hg_seq_me_hyouka1, 2, 2
 	song hg_seq_gs_c_kikyou, 0, 0
 	song hg_seq_gs_to_madatsubomi1, 0, 0
+	song hg_seq_gs_eye_bouzu, 0, 0
+    song hg_seq_gs_fs, 0, 0
+    song hg_seq_me_tamago_get, 2, 2
+    song hg_seq_gs_e_maiko_theme, 0, 0
+    song hg_seq_gs_d_chikatsuuro, 0, 0
+    song hg_seq_me_item, 2, 2
+    song hg_seq_gs_d_unknown_iseki, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

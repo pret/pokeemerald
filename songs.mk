@@ -1892,3 +1892,24 @@ $(MID_SUBDIR)/hg_seq_gs_c_kikyou.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_gs_to_madatsubomi1.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V062
+
+$(MID_SUBDIR)/hg_seq_gs_eye_bouzu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V084
+
+$(MID_SUBDIR)/hg_seq_gs_fs.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V078
+
+$(MID_SUBDIR)/hg_seq_me_tamago_get.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V088 -P5
+
+$(MID_SUBDIR)/hg_seq_gs_e_maiko_theme.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V088
+
+$(MID_SUBDIR)/hg_seq_gs_d_chikatsuuro.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_me_item.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V081 -P5
+
+$(MID_SUBDIR)/hg_seq_gs_d_unknown_iseki.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V093

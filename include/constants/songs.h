@@ -756,6 +756,13 @@
 #define HG_SEQ_ME_HYOUKA1           737 // Pokédex Evaluation... No Good!
 #define HG_SEQ_GS_C_KIKYOU          738 // Violet City
 #define HG_SEQ_GS_TO_MADATSUBOMI1   739 // Sprout Tower
+#define HG_SEQ_GS_EYE_BOUZU         740 // Trainers' Eyes Meet (Sage)
+#define HG_SEQ_GS_FS                741 // Poké Mart
+#define HG_SEQ_ME_TAMAGO_GET        742 // Received a Pokémon Egg!
+#define HG_SEQ_GS_E_MAIKO_THEME     743 // Kimono Girl
+#define HG_SEQ_GS_D_CHIKATSUURO     744 // Union Cave
+#define HG_SEQ_ME_ITEM              745 // Picked Up an Item!
+#define HG_SEQ_GS_D_UNKNOWN_ISEKI   746 // Ruins of Alph
 
 // Black & White Music
 
