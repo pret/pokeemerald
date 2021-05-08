@@ -748,6 +748,16 @@ gSongTable:: @ 86B49F0
     song hg_seq_gs_d_chikatsuuro, 0, 0
     song hg_seq_me_item, 2, 2
     song hg_seq_gs_d_unknown_iseki, 0, 0
+	song hg_seq_gs_radio_unknown, 0, 0
+	song hg_seq_me_hyouka2, 2, 2
+	song hg_seq_gs_t_hiwada, 0, 0
+	song hg_seq_gs_eye_rocket, 0, 0
+	song hg_seq_gs_vs_rocket, 0, 0
+	song hg_seq_gs_r_4_34, 0, 0
+	song hg_seq_gs_e_rival1, 0, 0
+	song hg_seq_gs_vs_rival, 0, 0
+	song hg_seq_gs_shinka, 0, 0
+	song hg_seq_me_shinkaome, 2, 2
 
 	.align 2
 dummy_song_header: @ 86B5D00

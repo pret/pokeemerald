@@ -1913,3 +1913,33 @@ $(MID_SUBDIR)/hg_seq_me_item.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_gs_d_unknown_iseki.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V093
+
+$(MID_SUBDIR)/hg_seq_gs_radio_unknown.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V089
+
+$(MID_SUBDIR)/hg_seq_me_hyouka2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V095 -P5
+
+$(MID_SUBDIR)/hg_seq_gs_t_hiwada.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V073
+
+$(MID_SUBDIR)/hg_seq_gs_eye_rocket.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V071
+
+$(MID_SUBDIR)/hg_seq_gs_vs_rocket.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V102
+
+$(MID_SUBDIR)/hg_seq_gs_r_4_34.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V092
+
+$(MID_SUBDIR)/hg_seq_gs_e_rival1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V089
+
+$(MID_SUBDIR)/hg_seq_gs_vs_rival.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V084
+
+$(MID_SUBDIR)/hg_seq_gs_shinka.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_me_shinkaome.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V076 -p5

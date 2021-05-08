@@ -763,6 +763,16 @@
 #define HG_SEQ_GS_D_CHIKATSUURO     744 // Union Cave
 #define HG_SEQ_ME_ITEM              745 // Picked Up an Item!
 #define HG_SEQ_GS_D_UNKNOWN_ISEKI   746 // Ruins of Alph
+#define HG_SEQ_GS_RADIO_UNKNOWN     747 // Pokégear Radio Unown
+#define HG_SEQ_ME_HYOUKA2           748 // Pokédex Evaluation... You're on Your Way!
+#define HG_SEQ_GS_T_HIWADA          749 // Azalea Town
+#define HG_SEQ_GS_EYE_ROCKET        750 // Trainers' Eyes Meet (Team Rocket)
+#define HG_SEQ_GS_VS_ROCKET         751 // Battle! (Team Rocket)
+#define HG_SEQ_GS_R_4_34            752 // Route 34
+#define HG_SEQ_GS_E_RIVAL1          753 // A Rival Appears!
+#define HG_SEQ_GS_VS_RIVAL          754 // Battle! (Rival)
+#define HG_SEQ_GS_SHINKA            755 // Evolution
+#define HG_SEQ_ME_SHINKAOME         756 // Congratulations! Your Pokémon Evolved!
 
 // Black & White Music
 
