@@ -1067,7 +1067,7 @@ const u16 gTransformUsedStringIds[] =
     [B_MSG_TRANSFORM_FAILED] = STRINGID_BUTITFAILED
 };
 
-const u16 gSubsituteUsedStringIds[] =
+const u16 gSubstituteUsedStringIds[] =
 {
     [B_MSG_SET_SUBSTITUTE]    = STRINGID_PKMNMADESUBSTITUTE,
     [B_MSG_SUBSTITUTE_FAILED] = STRINGID_TOOWEAKFORSUBSTITUTE
