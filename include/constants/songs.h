@@ -763,7 +763,7 @@
 #define HG_SEQ_GS_D_CHIKATSUURO     744 // Union Cave
 #define HG_SEQ_ME_ITEM              745 // Picked Up an Item!
 #define HG_SEQ_GS_D_UNKNOWN_ISEKI   746 // Ruins of Alph
-#define HG_SEQ_GS_RADIO_UNKNOWN     747 // Pokégear Radio Unown
+#define HG_SEQ_GS_RADIO_UNKNOWN     747 // Pokégear Radio: Unown
 #define HG_SEQ_ME_HYOUKA2           748 // Pokédex Evaluation... You're on Your Way!
 #define HG_SEQ_GS_T_HIWADA          749 // Azalea Town
 #define HG_SEQ_GS_EYE_ROCKET        750 // Trainers' Eyes Meet (Team Rocket)
@@ -773,6 +773,35 @@
 #define HG_SEQ_GS_VS_RIVAL          754 // Battle! (Rival)
 #define HG_SEQ_GS_SHINKA            755 // Evolution
 #define HG_SEQ_ME_SHINKAOME         756 // Congratulations! Your Pokémon Evolved!
+#define HG_SEQ_GS_C_KOGANE          757 // Goldenrod City
+#define HG_SEQ_GS_GYM               758 // Pokémon Gym
+#define HG_SEQ_GS_VS_GYMREADER      759 // Battle! (Gym Leader - Johto Version)
+#define HG_SEQ_GS_WIN3              760 // Victory! (Gym Leader)
+#define HG_SEQ_ME_BADGE             761 // Received a Gym Badge!
+#define HG_SEQ_GS_RADIO_JINGLE      762 // Pokégear Radio: Pokémon Channel
+#define HG_SEQ_GS_AIKOTOBA          763 // Pokégear Radio: Buena's Password
+#define HG_SEQ_ME_WAZA              764 // Received a TM!
+#define HG_SEQ_GS_GAME              765 // Goldenrod Game Corner
+#define HG_SEQ_GS_GAMEATARI         766 // You're a Winner!
+#define HG_SEQ_ME_ACCE              767 // Obtained an Accessory
+#define HG_SEQ_GS_WIFITOWER         768 // Global Terminal
+#define HG_SEQ_GS_BLD_GTC           769 // GTS
+#define HG_SEQ_ME_HYOUKA3           770 // Pokédex Evaluation... Keep at It!
+#define HG_SEQ_PL_BICYCLE           771 // Bicycle
+#define HG_SEQ_GS_EYE_J_SHOUJO      772 // Trainers' Eyes Meet (Girl 1)
+#define HG_SEQ_ME_POKEGEAR_REGIST   773 // Registered in the Pokégear!
+#define HG_SEQ_GS_D_KOUEN           774 // National Park
+#define HG_SEQ_ME_KINOMI            775 // Obtained a Berry!
+#define HG_SEQ_GS_C_ENJU            776 // Ecruteak City
+#define HG_SEQ_GS_KABURENJOU        777 // Ecruteak Dance Theater
+#define HG_SEQ_GS_TO_YAKETA         778 // Burned Tower
+#define HG_SEQ_GS_E_MINAKI          779 // Eusine
+#define HG_SEQ_GS_OHKIDO_RABO       780 // Pokégear Radio: Professor Oak's Pokémon Talk
+#define HG_SEQ_ME_HYOUKA4           781 // Pokédex Evaluation... Not Bad!
+#define HG_SEQ_GS_R_6_38            782 // Route 38
+#define HG_SEQ_GS_RADIO_MARCH       783 // Pokégear Radio: Pokémon March
+#define HG_SEQ_GS_VS_RAIKOU         784 // Battle! (Raikou)
+#define HG_SEQ_GS_TO_TOUDAI         785 // Olivine Lighthouse
 
 // Black & White Music
 

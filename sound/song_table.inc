@@ -758,6 +758,35 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_vs_rival, 0, 0
 	song hg_seq_gs_shinka, 0, 0
 	song hg_seq_me_shinkaome, 2, 2
+	song hg_seq_gs_c_kogane, 0, 0
+	song hg_seq_gs_gym, 0, 0
+	song hg_seq_gs_vs_gymreader, 0, 0
+	song hg_seq_gs_win3, 0, 0
+	song hg_seq_me_badge, 2, 2
+    song hg_seq_gs_radio_jingle, 0, 0
+    song hg_seq_gs_aikotoba, 0, 0
+    song hg_seq_me_waza, 2, 2
+    song hg_seq_gs_game, 0, 0
+    song hg_seq_gs_gameatari, 0, 0
+	song hg_seq_me_acce, 2, 2
+	song hg_seq_gs_wifitower, 0, 0
+	song hg_seq_gs_bld_gtc, 0, 0
+	song hg_seq_me_hyouka3, 2, 2
+	song hg_seq_pl_bicycle, 0, 0
+	song hg_seq_gs_eye_j_shoujo, 0, 0
+	song hg_seq_me_pokegear_regist, 2, 2
+	song hg_seq_gs_d_kouen, 0, 0
+	song hg_seq_me_kinomi, 2, 2
+	song hg_seq_gs_c_enju, 0, 0
+	song hg_seq_gs_kaburenjou, 0, 0
+	song hg_seq_gs_to_yaketa, 0, 0
+	song hg_seq_gs_e_minaki, 0, 0
+	song hg_seq_gs_ohkido_rabo, 0, 0
+	song hg_seq_me_hyouka4, 2, 2
+	song hg_seq_gs_r_6_38, 0, 0
+	song hg_seq_gs_radio_march, 0, 0
+	song hg_seq_gs_vs_raikou, 0, 0
+	song hg_seq_gs_to_toudai, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

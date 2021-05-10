@@ -1450,6 +1450,35 @@ SECTIONS {
         sound/songs/midi/hg_seq_gs_vs_rival.o(.rodata);
         sound/songs/midi/hg_seq_gs_shinka.o(.rodata);
         sound/songs/midi/hg_seq_me_shinkaome.o(.rodata);
+        sound/songs/midi/hg_seq_gs_c_kogane.o(.rodata);
+        sound/songs/midi/hg_seq_gs_gym.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_gymreader.o(.rodata);
+        sound/songs/midi/hg_seq_gs_win3.o(.rodata);
+        sound/songs/midi/hg_seq_me_badge.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_jingle.o(.rodata);
+        sound/songs/midi/hg_seq_gs_aikotoba.o(.rodata);
+        sound/songs/midi/hg_seq_me_waza.o(.rodata);
+        sound/songs/midi/hg_seq_gs_game.o(.rodata);
+        sound/songs/midi/hg_seq_gs_gameatari.o(.rodata);
+        sound/songs/midi/hg_seq_me_acce.o(.rodata);
+        sound/songs/midi/hg_seq_gs_wifitower.o(.rodata);
+        sound/songs/midi/hg_seq_gs_bld_gtc.o(.rodata);
+        sound/songs/midi/hg_seq_me_hyouka3.o(.rodata);
+        sound/songs/midi/hg_seq_pl_bicycle.o(.rodata);
+        sound/songs/midi/hg_seq_gs_eye_j_shoujo.o(.rodata);
+        sound/songs/midi/hg_seq_me_pokegear_regist.o(.rodata);
+        sound/songs/midi/hg_seq_gs_d_kouen.o(.rodata);
+        sound/songs/midi/hg_seq_me_kinomi.o(.rodata);
+        sound/songs/midi/hg_seq_gs_c_enju.o(.rodata);
+        sound/songs/midi/hg_seq_gs_kaburenjou.o(.rodata);
+        sound/songs/midi/hg_seq_gs_to_yaketa.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_minaki.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ohkido_rabo.o(.rodata);
+        sound/songs/midi/hg_seq_me_hyouka4.o(.rodata);
+        sound/songs/midi/hg_seq_gs_r_6_38.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_march.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_raikou.o(.rodata);
+        sound/songs/midi/hg_seq_gs_to_toudai.o(.rodata);
     } =0
 
     lib_rodata :

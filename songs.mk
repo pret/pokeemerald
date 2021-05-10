@@ -1943,3 +1943,90 @@ $(MID_SUBDIR)/hg_seq_gs_shinka.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_me_shinkaome.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V076 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_c_kogane.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V072
+
+$(MID_SUBDIR)/hg_seq_gs_gym.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_gs_vs_gymreader.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V108
+
+$(MID_SUBDIR)/hg_seq_gs_win3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V102
+
+$(MID_SUBDIR)/hg_seq_me_badge.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V104 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_radio_jingle.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V082
+
+$(MID_SUBDIR)/hg_seq_gs_aikotoba.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V092
+
+$(MID_SUBDIR)/hg_seq_me_waza.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V087 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_game.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V092
+
+$(MID_SUBDIR)/hg_seq_gs_gameatari.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V078
+
+$(MID_SUBDIR)/hg_seq_me_acce.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V072 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_wifitower.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V075
+
+$(MID_SUBDIR)/hg_seq_gs_bld_gtc.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V091
+
+$(MID_SUBDIR)/hg_seq_me_hyouka3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V081 -p5
+
+$(MID_SUBDIR)/hg_seq_pl_bicycle.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V085
+
+$(MID_SUBDIR)/hg_seq_gs_eye_j_shoujo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V084
+
+$(MID_SUBDIR)/hg_seq_me_pokegear_regist.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_d_kouen.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V087
+
+$(MID_SUBDIR)/hg_seq_me_kinomi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V082 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_c_enju.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V054
+
+$(MID_SUBDIR)/hg_seq_gs_kaburenjou.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_gs_to_yaketa.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V070
+
+$(MID_SUBDIR)/hg_seq_gs_e_minaki.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V086
+
+$(MID_SUBDIR)/hg_seq_gs_ohkido_rabo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V089
+
+$(MID_SUBDIR)/hg_seq_me_hyouka4.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V092 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_r_6_38.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V083
+
+$(MID_SUBDIR)/hg_seq_gs_radio_march.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V082
+
+$(MID_SUBDIR)/hg_seq_gs_vs_raikou.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V098
+
+$(MID_SUBDIR)/hg_seq_gs_to_toudai.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V050
