@@ -805,6 +805,16 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_e_maiko_mai, 0, 0
 	song hg_seq_gs_e_houou, 0, 0
 	song hg_seq_gs_vs_houou, 0, 0
+	song hg_seq_gs_r_1_26, 0, 0
+	song hg_seq_gs_kousokusen, 0, 0
+	song hg_seq_gs_c_kuchiba, 0, 0
+	song hg_seq_gs_vs_gymreader_kanto, 0, 0
+	song hg_seq_gs_t_chion, 0, 0
+	song hg_seq_gs_d_iwayama, 0, 0
+	song hg_seq_gs_vs_norapoke_kanto, 0, 0
+	song hg_seq_me_hyouka5, 2, 2
+	song hg_seq_gs_c_hanada, 0, 0
+	song hg_seq_gs_r_12_24, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00
