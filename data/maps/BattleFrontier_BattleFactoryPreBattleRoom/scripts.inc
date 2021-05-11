@@ -493,14 +493,14 @@ BattleFrontier_BattleFactoryPreBattleRoom_Movement_AttendantReturnToPlayer: @ 82
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection: @ 825A1C8
-	.string "First, we will hold your POKéMON for\n"
+	.string "First, we will hold your Pokémon for\n"
 	.string "safekeeping.\p"
 	.string "You may then choose from our\n"
-	.string "selection of POKéMON.$"
+	.string "selection of Pokémon.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons: @ 825A22D
 	.string "Thank you for competing!\n"
-	.string "Let us restore your POKéMON!$"
+	.string "Let us restore your Pokémon!$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent: @ 825A263
 	.string "The 2nd match is next!\n"
@@ -539,75 +539,75 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_InvestigatedUpcomingOpponent: @ 8
 	.string "about your upcoming opponent.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInNormalType: @ 825A3F8
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the NORMAL type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Normal type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFireType: @ 825A43E
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the FIRE type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Fire type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInWaterType: @ 825A482
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the WATER type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Water type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInElectricType: @ 825A4C7
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the ELECTRIC type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Electric type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGrassType: @ 825A50F
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the GRASS type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Grass type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInIceType: @ 825A554
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the ICE type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Ice type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFightingType: @ 825A597
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the FIGHTING type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Fighting type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPoisonType: @ 825A5DF
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the POISON type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Poison type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGroundType: @ 825A625
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the GROUND type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Ground type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFlyingType: @ 825A66B
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the FLYING type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Flying type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPsychicType: @ 825A6B1
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the PSYCHIC type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Psychic type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInBugType: @ 825A6F8
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the BUG type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Bug type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInRockType: @ 825A73B
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the ROCK type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Rock type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGhostType: @ 825A77F
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the GHOST type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Ghost type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDragonType: @ 825A7C4
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the DRAGON type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Dragon type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDarkType: @ 825A80A
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the DARK type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Dark type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInSteelType: @ 825A84E
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the STEEL type.$"
+	.string "The Trainer is apparently skilled\n"
+	.string "in the handling of the Steel type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerHasNoClearFavorite: @ 825A893
-	.string "The TRAINER appears to have no clear\n"
+	.string "The Trainer appears to have no clear\n"
 	.string "favorites when it comes to type.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleSlowAndSteady: @ 825A8D9
@@ -648,11 +648,11 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleUnrestrained: @ 825AAE6
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon: @ 825AB2E
 	.string "Before starting the battle, would you\n"
-	.string "like to swap a POKéMON?$"
+	.string "like to swap a Pokémon?$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete: @ 825AB6C
 	.string "Thank you!\n"
-	.string "Your POKéMON swap is complete.$"
+	.string "Your Pokémon swap is complete.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay: @ 825AB96
 	.string "Right this way, please!$"
@@ -663,7 +663,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait: @ 825ABAE
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_RecordLatestBattle: @ 825ABD2
 	.string "Would you like to record your latest\n"
-	.string "battle on your FRONTIER PASS?$"
+	.string "battle on your Frontier Pass?$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_WaitFewMoments: @ 825AC15
 	.string "Excuse me! Excuse me, please!\n"
@@ -677,14 +677,14 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_MessageFromHeadComeRightNow: @ 82
 	.string "Oh, my…\n"
 	.string "Sorry to keep you waiting!\p"
 	.string "I have a message from this facility's\n"
-	.string "boss, the FACTORY HEAD.\p"
+	.string "boss, the Factory Head.\p"
 	.string "He says, “We're going to do it!\n"
 	.string "Come here right now!”$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_PreparedToFaceHead: @ 825AD20
-	.string "The FACTORY HEAD is demanding you.\n"
+	.string "The Factory Head is demanding you.\n"
 	.string "Are you prepared to face him?$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_CantTellAnythingAboutHead: @ 825AD61
 	.string "I'm terribly sorry, but I can't tell you\n"
-	.string "anything about the FACTORY HEAD.$"
+	.string "anything about the Factory Head.$"
