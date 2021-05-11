@@ -68,8 +68,15 @@ extern vu16 GPIOPortDirection;
 static u16 sDummy; // unused variable
 static bool8 sLocked;
 
+#ifndef UBFIX
 static int WriteCommand(u8 value);
 static int WriteData(u8 value);
+#else
+
+static void WriteCommand(u8 value);
+static void WriteData(u8 value);
+
+#endif
 static u8 ReadData();
 static void EnableGpioPortRead();
 static void DisableGpioPortRead();
@@ -378,7 +385,11 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
+#ifndef UBFIX
 static int WriteCommand(u8 value)
+#else
+static int WriteCommand(u8 value)
+#endif
 {
     u8 i;
     u8 temp;
@@ -395,7 +406,11 @@ static int WriteCommand(u8 value)
     // control reaches end of non-void function
 }
 
+#ifndef UBFIX
 static int WriteData(u8 value)
+#else
+static void WriteData(u8 value)
+#endif
 {
     u8 i;
     u8 temp;
