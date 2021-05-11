@@ -10,7 +10,7 @@ gText_GreatAppealButNoMoreToEnd:: @ 827CBCE
 	.string "Makes a great appeal, but\nallows no more to the end.$"
 
 gText_UsedRepeatedlyWithoutBoringJudge:: @ 827CC03
-	.string "Can be repeatedly used\nwithout boring the JUDGE.$"
+	.string "Can be repeatedly used\nwithout boring the Judge.$"
 
 gText_AvoidStartledByOthersOnce:: @ 827CC34
 	.string "Can avoid being startled\nby others once.$"
@@ -25,67 +25,67 @@ gText_UserLessLikelyStartled:: @ 827CCAE
 	.string "After this move, the user is\nless likely to be startled.$"
 
 gText_SlightlyStartleFrontMon:: @ 827CCE7
-	.string "Slightly startles the\nPOKéMON in front.$"
+	.string "Slightly startles the\nPokémon in front.$"
 
 gText_SlightlyStartleAppealed:: @ 827CD0F
 	.string "Slightly startles those\nthat have made appeals.$"
 
 gText_StartleAppealedBeforeUser:: @ 827CD3F
-	.string "Startles the POKéMON that\nappealed before the user.$"
+	.string "Startles the Pokémon that\nappealed before the user.$"
 
 gText_StartleAllAppealed:: @ 827CD73
-	.string "Startles all POKéMON that\nhave done their appeals.$"
+	.string "Startles all Pokémon that\nhave done their appeals.$"
 
 gText_BadlyStartleFrontMon:: @ 827CDA6
-	.string "Badly startles the\nPOKéMON in front.$"
+	.string "Badly startles the\nPokémon in front.$"
 
 gText_BadlyStartleAppealed:: @ 827CDCB
 	.string "Badly startles those that\nhave made appeals.$"
 
 gText_StartleAppealedBeforeUser2:: @ 827CDF8
-	.string "Startles the POKéMON that\nappealed before the user.$"
+	.string "Startles the Pokémon that\nappealed before the user.$"
 
 gText_StartleAllAppealed2:: @ 827CE2C
-	.string "Startles all POKéMON that\nhave done their appeals.$"
+	.string "Startles all Pokémon that\nhave done their appeals.$"
 
 gText_ShiftJudgesAttentionFromOthers:: @ 827CE5F
-	.string "Shifts the JUDGE's\nattention from others.$"
+	.string "Shifts the Judge's\nattention from others.$"
 
 gText_StartleMonHasJudgesAttention:: @ 827CE89
-	.string "Startles the POKéMON that\nhas the JUDGE's attention.$"
+	.string "Startles the Pokémon that\nhas the Judge's attention.$"
 
 gText_JamOthersMissesTurn:: @ 827CEBE
 	.string "Jams the others, and misses\none turn of appeals.$"
 
 gText_StartleMonsMadeSameTypeAppeal:: @ 827CEEF
-	.string "Startles POKéMON that\nmade a same-type appeal.$"
+	.string "Startles Pokémon that\nmade a same-type appeal.$"
 
 gText_BadlyStartleCoolAppeals:: @ 827CF1E
-	.string "Badly startles POKéMON\nthat made COOL appeals.$"
+	.string "Badly startles Pokémon\nthat made Cool appeals.$"
 
 gText_BadlyStartleBeautyAppeals:: @ 827CF4D
-	.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
+	.string "Badly startles Pokémon\nthat made Beauty appeals.$"
 
 gText_BadlyStartleCuteAppeals:: @ 827CF7E
-	.string "Badly startles POKéMON\nthat made CUTE appeals.$"
+	.string "Badly startles Pokémon\nthat made Cute appeals.$"
 
 gText_BadlyStartleSmartAppeals:: @ 827CFAD
-	.string "Badly startles POKéMON\nthat made SMART appeals.$"
+	.string "Badly startles Pokémon\nthat made Smart appeals.$"
 
 gText_BadlyStartleToughAppeals:: @ 827CFDD
-	.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
+	.string "Badly startles Pokémon\nthat made Tough appeals.$"
 
 gText_MakeMonAfterUserNervous:: @ 827D00D
-	.string "Makes one POKéMON after\nthe user nervous.$"
+	.string "Makes one Pokémon after\nthe user nervous.$"
 
 gText_MakeAllMonsAfterUserNervous:: @ 827D037
-	.string "Makes all POKéMON after\nthe user nervous.$"
+	.string "Makes all Pokémon after\nthe user nervous.$"
 
 gText_WorsenConditionOfThoseMadeAppeals:: @ 827D061
 	.string "Worsens the condition of\nthose that made appeals.$"
 
 gText_BadlyStartleMonsGoodCondition:: @ 827D093
-	.string "Badly startles POKéMON in\ngood condition.$"
+	.string "Badly startles Pokémon in\ngood condition.$"
 
 gText_AppealGreatIfPerformedFirst:: @ 827D0BD
 	.string "The appeal works great if\nperformed first.$"
@@ -133,10 +133,10 @@ gText_ScrambleOrderOfNextAppeals:: @ 827D369
 	.string "Scrambles the order of\nappeals on the next turn.$"
 
 gText_AppealExcitesAudienceInAnyContest:: @ 827D39A
-	.string "An appeal that excites the\naudience in any CONTEST.$"
+	.string "An appeal that excites the\naudience in any Contest.$"
 
 gText_BadlyStartlesMonsGoodAppeals:: @ 827D3CE
-	.string "Badly startles all POKéMON\nthat made good appeals.$"
+	.string "Badly startles all Pokémon\nthat made good appeals.$"
 
 gText_AppealBestMoreCrowdExcited:: @ 827D401
 	.string "The appeal works best the\nmore the crowd is excited.$"
@@ -147,60 +147,60 @@ gText_TemporarilyStopCrowdExcited:: @ 827D436
 @ Unused move names
 
 gText_RainDance:: @ 827D468
-	.string "RAIN DANCE$"
+	.string "Rain Dance$"
 
 gText_Rage:: @ 827D473
-	.string "RAGE$"
+	.string "Rage$"
 
 gText_FocusEnergy:: @ 827D478
-	.string "FOCUS ENERGY$"
+	.string "Focus Energy$"
 
 gText_Hypnosis:: @ 827D485
-	.string "HYPNOSIS$"
+	.string "Hypnosis$"
 
 gText_Softboiled:: @ 827D48E
-	.string "SOFTBOILED$"
+	.string "SoftBoiled$"
 
 gText_HornAttack:: @ 827D499
-	.string "HORN ATTACK$"
+	.string "Horn Attack$"
 
 gText_SwordsDance:: @ 827D4A5
-	.string "SWORDS DANCE$"
+	.string "Swords Dance$"
 
 gText_Conversion:: @ 827D4B2
-	.string "CONVERSION$"
+	.string "Conversion$"
 
 gText_SunnyDay:: @ 827D4BD
-	.string "SUNNY DAY$"
+	.string "Sunny Day$"
 
 gText_Rest2:: @ 827D4C7
-	.string "REST$"
+	.string "Rest$"
 
 gText_Vicegrip:: @ 827D4CC
-	.string "VICEGRIP$"
+	.string "ViceGrip$"
 
 gText_DefenseCurl:: @ 827D4D5
-	.string "DEFENSE CURL$"
+	.string "Defense Curl$"
 
 gText_LockOn:: @ 827D4E2
-	.string "LOCK-ON$"
+	.string "Lock-On$"
 
 @ Contest type names
 
 gContestMoveTypeCoolText:: @ 827D4EA
-	.string "COOL$"
+	.string "Cool$"
 
 gContestMoveTypeBeautyText:: @ 827D4EF
-	.string "BEAUTY$"
+	.string "Beauty$"
 
 gContestMoveTypeCuteText:: @ 827D4F6
-	.string "CUTE$"
+	.string "Cute$"
 
 gContestMoveTypeSmartText:: @ 827D4FB
-	.string "SMART$"
+	.string "Smart$"
 
 gContestMoveTypeToughText:: @ 827D501
-	.string "TOUGH$"
+	.string "Tough$"
 
 gText_AppealNumWhichMoveWillBePlayed:: @ 827D507
 	.string "Appeal no. {STR_VAR_1}!\n"
@@ -230,7 +230,7 @@ gText_ButAppealWasJammed:: @ 827D5C1
 
 gText_FollowedAnotherMonsLead:: @ 827D5DC
 	.string "It followed another\n"
-	.string "POKéMON's lead.$"
+	.string "Pokémon's lead.$"
 
 gText_ButItMessedUp:: @ 827D600
 	.string "But it messed up.$"
@@ -240,7 +240,7 @@ gText_WentBetterThanUsual:: @ 827D612
 	.string "usual.$"
 
 gText_JudgeLookedAwayForSomeReason:: @ 827D62D
-	.string "The JUDGE looked away\n"
+	.string "The Judge looked away\n"
 	.string "for some reason.$"
 
 gText_WorkedHardToBuildOnPastMistakes:: @ 827D654
@@ -257,10 +257,10 @@ gText_WorkedFrighteninglyWell:: @ 827D69C
 
 gText_WorkedHardAsStandoutMon:: @ 827D6BA
 	.string "It worked as hard as the\n"
-	.string "standout POKéMON.$"
+	.string "standout Pokémon.$"
 
 gText_JudgedLookedOnExpectantly:: @ 827D6E5
-	.string "The JUDGE looked on\n"
+	.string "The Judge looked on\n"
 	.string "expectantly.$"
 
 gText_WorkedRatherWell:: @ 827D706
@@ -305,7 +305,7 @@ gText_EmptyContestString:: @ 827D830
 	.string "$"
 
 gText_JudgesViewsOnMonHeldFirm:: @ 827D831
-	.string "The JUDGE 's views on\n"
+	.string "The Judge 's views on\n"
 	.string "{STR_VAR_1} held firm.$"
 
 gText_MonsXChangedPerceptions:: @ 827D855
@@ -353,7 +353,7 @@ gText_CheapenedAppealOfThoseAhead2:: @ 827D9B1
 	.string "of those ahead.$"
 
 gText_CheapenedJudgesFavoriteAppeal:: @ 827D9D9
-	.string "It cheapened the JUDGE's\n"
+	.string "It cheapened the Judge's\n"
 	.string "favorite appeal.$"
 
 gText_AppealsOfOthersCheapenedByHalf:: @ 827DA03
@@ -369,7 +369,7 @@ gText_CantParticipateInAppealsAnyMore:: @ 827DA5B
 	.string "appeals any more.$"
 
 gText_TouchedJudgeForFantasticAppeal:: @ 827DA85
-	.string "It touched the JUDGE for\n"
+	.string "It touched the Judge for\n"
 	.string "a fantastic appeal.$"
 
 gText_AnticipationRoseForUpcomingAppeals:: @ 827DAB2
@@ -396,7 +396,7 @@ gText_EveryonesAppealsMadeSame:: @ 827DB4E
 
 gText_BecameMoreConsciousOfOtherMons:: @ 827DB75
 	.string "It became more conscious\n"
-	.string "of the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "of the other Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonCantMakeAnAppealAfterThis:: @ 827DBB0
 	.string "{STR_VAR_1} can't make an\n"
@@ -408,31 +408,31 @@ gText_SettledDownJustLittleBit:: @ 827DBE0
 
 gText_BecameObliviousToOtherMons:: @ 827DC0F
 	.string "It became oblivious to\n"
-	.string "the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "the other Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_BecameLessAwareOfOtherMons:: @ 827DC45
 	.string "It became less aware of\n"
-	.string "the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "the other Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_StoppedCaringAboutOtherMons:: @ 827DC7C
 	.string "It stopped caring about\n"
-	.string "other POKéMON much.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "other Pokémon much.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToStartleOtherMons:: @ 827DCB4
 	.string "It tried to startle the\n"
-	.string "other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "other Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToDazzleOthers:: @ 827DCE7
 	.string "It tried to dazzle the\n"
 	.string "others.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_JudgeLookedAwayFromMon:: @ 827DD12
-	.string "The JUDGE looked away\n"
+	.string "The Judge looked away\n"
 	.string "from {STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToUnnerveNextMon:: @ 827DD3D
 	.string "It tried to unnerve the\n"
-	.string "next POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "next Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonBecameNervous:: @ 827DD6F
 	.string "{STR_VAR_1} became\n"
@@ -440,10 +440,10 @@ gText_MonBecameNervous:: @ 827DD6F
 
 gText_AppealTriedToUnnerveWaitingMons:: @ 827DD8E
 	.string "The appeal tried to\n"
-	.string "unnerve waiting POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "unnerve waiting Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TauntedMonsDoingWell:: @ 827DDC7
-	.string "It taunted POKéMON\n"
+	.string "It taunted Pokémon\n"
 	.string "doing well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonRegainedItsForm:: @ 827DDF2
@@ -451,7 +451,7 @@ gText_MonRegainedItsForm:: @ 827DDF2
 	.string "form.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToJamMonDoingWell:: @ 827DE14
-	.string "It tried to jam POKéMON\n"
+	.string "It tried to jam Pokémon\n"
 	.string "doing well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_StandoutMonHustledEvenMore:: @ 827DE44
@@ -464,7 +464,7 @@ gText_LargelyUnnoticedMonWorkedHard:: @ 827DE73
 
 gText_WorkedAsMuchAsMonBefore:: @ 827DEA5
 	.string "It worked as much as\n"
-	.string "POKéMON before it.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "Pokémon before it.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealDidNotGoWell:: @ 827DED9
 	.string "{STR_VAR_1}'s appeal did\n"
@@ -472,7 +472,7 @@ gText_MonsAppealDidNotGoWell:: @ 827DED9
 
 gText_WorkedAsMuchAsPrecedingMon:: @ 827DF02
 	.string "It worked as much as the\n"
-	.string "preceding POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "preceding Pokémon.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealDidNotGoWell2:: @ 827DF3A
 	.string "{STR_VAR_1}'s appeal did\n"
@@ -520,7 +520,7 @@ gText_MonsAppealWentExcellently2:: @ 827E0DD
 
 gText_SameTypeAsOneBeforeGood:: @ 827E107
 	.string "It's the same type as the\n"
-	.string "POKéMON before--good!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "Pokémon before--good!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_NotSameTypeAsOneBeforeGood:: @ 827E143
 	.string "It's not the same type as\n"
@@ -528,11 +528,11 @@ gText_NotSameTypeAsOneBeforeGood:: @ 827E143
 
 gText_StoodOutMuchMoreThanMonBefore:: @ 827E17F
 	.string "It stood out much more\n"
-	.string "than the POKéMON before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "than the Pokémon before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_DidntDoAsWellAsMonBefore:: @ 827E1BB
 	.string "It didn't do as well as the\n"
-	.string "POKéMON before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "Pokémon before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsConditionRoseAboveUsual:: @ 827E1F3
 	.string "{STR_VAR_1}'s condition\n"
@@ -555,7 +555,7 @@ gText_ScrambledUpOrderForNextTurn:: @ 827E2C5
 	.string "order for the next turn.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_JudgeLookedAtMonExpectantly:: @ 827E2FE
-	.string "The JUDGE looked at\n"
+	.string "The Judge looked at\n"
 	.string "{STR_VAR_1} expectantly.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_AppealComboWentOverWell:: @ 827E32E
@@ -588,7 +588,7 @@ gText_MonBecameALittleDistracted:: @ 827E448
 
 gText_TriedToStartleOtherPokemon:: @ 827E473
 	.string "It tried to startle the\n"
-	.string "other POKéMON.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+	.string "other Pokémon.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_MonLookedDownOutOfDistraction:: @ 827E4A6
 	.string "{STR_VAR_1} looked down\n"
@@ -704,22 +704,22 @@ gText_Contest_Toughness:: @ 827E882
 
 @ Unused
 gText_Tension:: @ 827E88C
-	.string "TENSION$"
+	.string "Tension$"
 
 gText_CoolMove:: @ 827E894
-	.string "COOL Move$"
+	.string "Cool Move$"
 
 gText_BeautyMove:: @ 827E89E
-	.string "BEAUTY Move$"
+	.string "Beauty Move$"
 
 gText_CuteMove:: @ 827E8AA
-	.string "CUTE Move$"
+	.string "Cute Move$"
 
 gText_SmartMove:: @ 827E8B4
-	.string "SMART Move$"
+	.string "Smart Move$"
 
 gText_ToughMove:: @ 827E8BF
-	.string "TOUGH Move$"
+	.string "Tough Move$"
 
 gText_3QuestionMarks:: @ 827E8CA
 	.string "???$"
