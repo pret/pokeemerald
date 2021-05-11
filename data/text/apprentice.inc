@@ -70,9 +70,9 @@ gText_ApprenticePleaseTeach0:: @ 82B7229
 	.string "I'm {STR_VAR_1}, and I really look up\n"
 	.string "to you, {PLAYER}.\p"
 	.string "I… I had this dream of one day meeting\n"
-	.string "you and asking you about POKéMON.\p"
+	.string "you and asking you about Pokémon.\p"
 	.string "Please, please, {PLAYER}!\n"
-	.string "Please teach me about POKéMON!$"
+	.string "Please teach me about Pokémon!$"
 
 gText_ApprenticeRejectTeaching0:: @ 82B731C
 	.string "Oh… B-but…\n"
@@ -86,7 +86,7 @@ gText_ApprenticeWhichLevelMode0:: @ 82B735B
 	.string "Oh… I'm sorry…\n"
 	.string "I'm so happy, I'm crying…\p"
 	.string "Um… Then please tell me!\n"
-	.string "It's about the BATTLE TOWER.\p"
+	.string "It's about the Battle Tower.\p"
 	.string "Which would be better for me: Level 50\n"
 	.string "or the Open Level?$"
 
@@ -104,10 +104,10 @@ gText_ApprenticePleaseTeach1:: @ 82B74C1
 	.string "Wowee! You're {PLAYER}, aren't you?\n"
 	.string "You're awesomely strong, aren't you?\p"
 	.string "I'm {STR_VAR_1}!\n"
-	.string "I just became a TRAINER!\p"
+	.string "I just became a Trainer!\p"
 	.string "Please, {PLAYER}!\n"
 	.string "Can you be my teacher and tell me\l"
-	.string "lots about being a TRAINER?$"
+	.string "lots about being a Trainer?$"
 
 gText_ApprenticeRejectTeaching1:: @ 82B756F
 	.string "Aww, why?\n"
@@ -117,7 +117,7 @@ gText_ApprenticeRejectTeaching1:: @ 82B756F
 gText_ApprenticeWhichLevelMode1:: @ 82B75B2
 	.string "Yay! Great!\p"
 	.string "The first thing I wanted to ask you is\n"
-	.string "about the BATTLE TOWER!\p"
+	.string "about the Battle Tower!\p"
 	.string "The Level 50 and Open Level Rooms…\n"
 	.string "Which would be perfect for me?$"
 
@@ -130,7 +130,7 @@ gText_ApprenticeLevelModeThanks1:: @ 82B763F
 gText_ApprenticePleaseTeach2:: @ 82B76AC
 	.string "Um… Are you {PLAYER}?\n"
 	.string "My name is {STR_VAR_1}.\p"
-	.string "I want to become a POKéMON TRAINER,\n"
+	.string "I want to become a Pokémon Trainer,\n"
 	.string "but I don't know what to do…\p"
 	.string "So I thought maybe I could ask you for\n"
 	.string "advice because you're so famous.\p"
@@ -138,14 +138,14 @@ gText_ApprenticePleaseTeach2:: @ 82B76AC
 
 gText_ApprenticeRejectTeaching2:: @ 82B7772
 	.string "Oh, but…\p"
-	.string "I sincerely want to become a POKéMON\n"
-	.string "TRAINER!\p"
+	.string "I sincerely want to become a Pokémon\n"
+	.string "Trainer!\p"
 	.string "Please, can you answer my questions?$"
 
 gText_ApprenticeWhichLevelMode2:: @ 82B77CE
 	.string "Thank you!\n"
 	.string "Here's my first question right away!\p"
-	.string "The BATTLE TOWER has two levels,\n"
+	.string "The Battle Tower has two levels,\n"
 	.string "Level 50 and Open Level, right?\p"
 	.string "Which level do you think is more\n"
 	.string "suitable for me?$"
@@ -174,7 +174,7 @@ gText_ApprenticePleaseTeach3:: @ 82B78D4
 	.string "myself because you'll forget…\p"
 	.string "I had this dream that if I ever met\n"
 	.string "you, {PLAYER}, that maybe I could ask\l"
-	.string "you for advice as a TRAINER.\p"
+	.string "you for advice as a Trainer.\p"
 	.string "But I don't think you would agree\n"
 	.string "to that.\p"
 	.string "…Or will you be so kind as to give\n"
@@ -197,7 +197,7 @@ gText_ApprenticeWhichLevelMode3:: @ 82B7C13
 	.string "I… I'm so happy…\p"
 	.string "What I want to ask you is really\n"
 	.string "trivial, but I can't decide…\p"
-	.string "At the BATTLE TOWER, they let you\n"
+	.string "At the Battle Tower, they let you\n"
 	.string "choose Level 50 or Open Level.\p"
 	.string "Which course do you think even I may\n"
 	.string "have a chance at?$"
@@ -214,13 +214,13 @@ gText_ApprenticeLevelModeThanks3:: @ 82B7D18
 gText_ApprenticePleaseTeach4:: @ 82B7DD4
 	.string "Oh! You're {PLAYER}{KUN}, aren't you?\p"
 	.string "I've heard that you're tough at\n"
-	.string "POKéMON!\p"
+	.string "Pokémon!\p"
 	.string "I'm {STR_VAR_1}!\n"
 	.string "I'll be your friend!\p"
 	.string "Did you know?\p"
-	.string "You can't win at the BATTLE FRONTIER\n"
+	.string "You can't win at the Battle Frontier\n"
 	.string "if all you know is what they teach at\l"
-	.string "the TRAINER'S SCHOOL.\p"
+	.string "the Trainer's School.\p"
 	.string "I'm willing to listen to your advice.\n"
 	.string "You'll agree, of course?$"
 
@@ -232,7 +232,7 @@ gText_ApprenticeRejectTeaching4:: @ 82B7EE5
 gText_ApprenticeWhichLevelMode4:: @ 82B7F35
 	.string "Okay, so there is this something.\n"
 	.string "I want you to decide it for me.\p"
-	.string "You know that the BATTLE TOWER has\n"
+	.string "You know that the Battle TOWER has\n"
 	.string "Level 50 and Open Level Rooms?\p"
 	.string "Which do you think would be good\n"
 	.string "for me, {PLAYER}{KUN}?$"
