@@ -185,7 +185,7 @@ gBerryDescriptionPart2_Spelon:: @ 858A2FF
 	.string "Its warts secrete a spicy substance.$"
 
 gBerryDescriptionPart1_Pamtre:: @ 858A324
-	.string "Drifts on the sea from somewhere.$
+	.string "Drifts on the sea from somewhere.$"
 	
 gBerryDescriptionPart2_Pamtre:: @ 858A346
 	.string "It is thought to grow elsewhere.$"
