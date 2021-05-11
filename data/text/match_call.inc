@@ -2923,7 +2923,7 @@ MatchCall_Text_MrStone7:: @ 82B65BB
 
 MatchCall_Text_MrStone8:: @ 82B6664
 	.string "…Huh? …What's that?\p"
-	.string "Grou… Yes? …Don?\p"
+	.string "Grou… Yes? …don?\p"
 	.string "You're breaking up…\n"
 	.string "…can't hear…\p"
 	.string "BZZZZ…$"
