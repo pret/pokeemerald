@@ -55,8 +55,8 @@ AbandonedShip_Corridors_B1F_EventScript_Duncan:: @ 8237E13
 	end
 
 AbandonedShip_Corridors_B1F_Text_DuncanIntro: @ 8237E2A
-	.string "When we go out to sea, we SAILORS\n"
-	.string "always bring our POKéMON.\l"
+	.string "When we go out to sea, we Sailors\n"
+	.string "always bring our Pokémon.\l"
 	.string "How about a quick battle?$"
 
 AbandonedShip_Corridors_B1F_Text_DuncanDefeat: @ 8237E80
@@ -65,7 +65,7 @@ AbandonedShip_Corridors_B1F_Text_DuncanDefeat: @ 8237E80
 AbandonedShip_Corridors_B1F_Text_DuncanPostBattle: @ 8237E92
 	.string "The ship's bottom has sunk into the\n"
 	.string "depths.\p"
-	.string "If a POKéMON knew how to go underwater,\n"
+	.string "If a Pokémon knew how to go underwater,\n"
 	.string "we might make some progress…$"
 
 AbandonedShip_Corridors_B1F_Text_YayItsAShip: @ 8237F03
@@ -74,12 +74,12 @@ AbandonedShip_Corridors_B1F_Text_YayItsAShip: @ 8237F03
 
 AbandonedShip_Corridors_B1F_Text_DoorIsLocked: @ 8237F15
 	.string "The door is locked.\p"
-	.string "“STORAGE” is painted on the door.$"
+	.string "“Storage” is painted on the door.$"
 
 AbandonedShip_Corridors_B1F_Text_InsertedStorageKey: @ 8237F4B
 	.string "{PLAYER} inserted and turned the\n"
-	.string "STORAGE KEY.\p"
-	.string "The inserted KEY stuck fast,\n"
+	.string "Storage Key.\p"
+	.string "The inserted Key stuck fast,\n"
 	.string "but the door opened.$"
 
 AbandonedShip_Text_TheDoorIsOpen: @ 8237FA5
