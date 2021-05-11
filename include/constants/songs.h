@@ -802,6 +802,24 @@
 #define HG_SEQ_GS_RADIO_MARCH       783 // Pokégear Radio: Pokémon March
 #define HG_SEQ_GS_VS_RAIKOU         784 // Battle! (Raikou)
 #define HG_SEQ_GS_TO_TOUDAI         785 // Olivine Lighthouse
+#define HG_SEQ_GS_NAMINORI          786 // Surf
+#define HG_SEQ_GS_C_TANBA           787 // Cianwood City
+#define HG_SEQ_ME_PT_SPECIAL        788 // Received a Pokémon!
+#define HG_SEQ_GS_R_7_42            789 // Route 42
+#define HG_SEQ_GS_KAIDENPA          790 // Radio Transmission
+#define HG_SEQ_GS_D_AJITO           791 // Team Rocket HQ
+#define HG_SEQ_GS_EYE_J_AYASHII     792 // Trainers' Eyes Meet (Suspicious Figure 1)
+#define HG_SEQ_GS_E_RIVAL2          793 // A Rival Appears! (Version 2)
+#define HG_SEQ_GS_SENKYO            794 // Radio Tower Occupied!
+#define HG_SEQ_GS_D_KOORINONUKE     795 // Ice Path
+#define HG_SEQ_ME_WASURE            796 // Move Deleted
+#define HG_SEQ_GS_RYUUNOANA         797 // Dragon's Den
+#define HG_SEQ_GS_IBUKI             798 // Clair
+#define HG_SEQ_GS_VS_ENTEI          799 // Battle! (Entei)
+#define HG_SEQ_GS_TO_SUZU           800 // Bell Tower
+#define HG_SEQ_GS_E_MAIKO_MAI       801 // The Dance of Ecruteak
+#define HG_SEQ_GS_E_HOUOU           802 // Ho-Oh Appears!
+#define HG_SEQ_GS_VS_HOUOU          803 // Battle! (Ho-Oh)
 
 // Black & White Music
 

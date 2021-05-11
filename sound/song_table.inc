@@ -787,6 +787,24 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_radio_march, 0, 0
 	song hg_seq_gs_vs_raikou, 0, 0
 	song hg_seq_gs_to_toudai, 0, 0
+	song hg_seq_gs_naminori, 0, 0
+	song hg_seq_gs_c_tanba, 0, 0
+	song hg_seq_me_pt_special, 2, 2
+	song hg_seq_gs_r_7_42, 0, 0
+	song hg_seq_gs_kaidenpa, 0, 0
+	song hg_seq_gs_d_ajito, 0, 0
+	song hg_seq_gs_eye_j_ayashii, 0, 0
+	song hg_seq_gs_e_rival2, 0, 0
+	song hg_seq_gs_senkyo, 0, 0
+	song hg_seq_gs_d_koorinonuke, 0, 0
+	song hg_seq_me_wasure, 2, 2
+	song hg_seq_gs_ryuunoana, 0, 0
+	song hg_seq_gs_ibuki, 0, 0
+	song hg_seq_gs_vs_entei, 0, 0
+	song hg_seq_gs_to_suzu, 0, 0
+	song hg_seq_gs_e_maiko_mai, 0, 0
+	song hg_seq_gs_e_houou, 0, 0
+	song hg_seq_gs_vs_houou, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

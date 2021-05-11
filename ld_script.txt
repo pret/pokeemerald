@@ -1479,6 +1479,24 @@ SECTIONS {
         sound/songs/midi/hg_seq_gs_radio_march.o(.rodata);
         sound/songs/midi/hg_seq_gs_vs_raikou.o(.rodata);
         sound/songs/midi/hg_seq_gs_to_toudai.o(.rodata);
+        sound/songs/midi/hg_seq_gs_naminori.o(.rodata);
+        sound/songs/midi/hg_seq_gs_c_tanba.o(.rodata);
+        sound/songs/midi/hg_seq_me_pt_special.o(.rodata);
+        sound/songs/midi/hg_seq_gs_r_7_42.o(.rodata);
+        sound/songs/midi/hg_seq_gs_kaidenpa.o(.rodata);
+        sound/songs/midi/hg_seq_gs_d_ajito.o(.rodata);
+        sound/songs/midi/hg_seq_gs_eye_j_ayashii.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_rival2.o(.rodata);
+        sound/songs/midi/hg_seq_gs_senkyo.o(.rodata);
+        sound/songs/midi/hg_seq_gs_d_koorinonuke.o(.rodata);
+        sound/songs/midi/hg_seq_me_wasure.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ryuunoana.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ibuki.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_entei.o(.rodata);
+        sound/songs/midi/hg_seq_gs_to_suzu.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_maiko_mai.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_houou.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_houou.o(.rodata);
     } =0
 
     lib_rodata :

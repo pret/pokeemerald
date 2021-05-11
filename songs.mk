@@ -2030,3 +2030,57 @@ $(MID_SUBDIR)/hg_seq_gs_vs_raikou.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_gs_to_toudai.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V050
+
+$(MID_SUBDIR)/hg_seq_gs_naminori.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V085
+
+$(MID_SUBDIR)/hg_seq_gs_c_tanba.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V073
+
+$(MID_SUBDIR)/hg_seq_me_pt_special.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V098 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_r_7_42.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V085
+
+$(MID_SUBDIR)/hg_seq_gs_kaidenpa.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V092
+
+$(MID_SUBDIR)/hg_seq_gs_d_ajito.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V081
+
+$(MID_SUBDIR)/hg_seq_gs_eye_j_ayashii.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V073
+
+$(MID_SUBDIR)/hg_seq_gs_e_rival2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V089
+
+$(MID_SUBDIR)/hg_seq_gs_senkyo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V069
+
+$(MID_SUBDIR)/hg_seq_gs_d_koorinonuke.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V072
+
+$(MID_SUBDIR)/hg_seq_me_wasure.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V105 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_ryuunoana.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V087
+
+$(MID_SUBDIR)/hg_seq_gs_ibuki.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V089
+
+$(MID_SUBDIR)/hg_seq_gs_vs_entei.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V098
+
+$(MID_SUBDIR)/hg_seq_gs_to_suzu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_gs_e_maiko_mai.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V088
+
+$(MID_SUBDIR)/hg_seq_gs_e_houou.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V108
+
+$(MID_SUBDIR)/hg_seq_gs_vs_houou.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V079
