@@ -252,26 +252,26 @@ MossdeepCity_GameCorner_1F_Text_DescribeWhichGame: @ 8278A7D
 	.string "Which game should I describe?$"
 
 MossdeepCity_GameCorner_1F_Text_PokemonJumpInfo: @ 8278ACB
-	.string "“Pokémon JUMP”\p"
-	.string "Make your Pokémon skip the VINE WHIP\n"
+	.string "“Pokémon Jump”\p"
+	.string "Make your Pokémon skip the Vine Whip\n"
 	.string "rope with the A Button.\p"
-	.string "Only mini POKéMON around 28 inches\n"
+	.string "Only mini Pokémon around 28 inches\n"
 	.string "or less may participate.\p"
-	.string "POKéMON that only swim, burrow,\n"
+	.string "Pokémon that only swim, burrow,\n"
 	.string "or fly are not good at jumping.\p"
-	.string "As a result, those POKéMON may not\n"
+	.string "As a result, those Pokémon may not\n"
 	.string "participate.\p"
 	.string "Good things happen if everyone\n"
 	.string "jumps in time.$"
 
 MossdeepCity_GameCorner_1F_Text_DodrioBerryPickingInfo: @ 8278BF1
-	.string "“DODRIO BERRY-PICKING”\p"
-	.string "Command DODRIO's three heads to\n"
-	.string "catch falling BERRIES.\p"
+	.string "“Dodrio Berry-Picking”\p"
+	.string "Command Dodrio's three heads to\n"
+	.string "catch falling Berries.\p"
 	.string "Press right, up, or left on the\n"
 	.string "{PLUS} Control Pad to move the heads.\p"
 	.string "To play this game, you must have\n"
-	.string "a DODRIO.$"
+	.string "a Dodrio.$"
 
 MossdeepCity_GameCorner_1F_Text_TalkToOldManToPlay: @ 8278CAC
 	.string "If you want to play a game,\n"
@@ -295,7 +295,7 @@ MossdeepCity_GameCorner_1F_Text_PlayWhichGame: @ 8278DAD
 	.string "to play?$"
 
 MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon: @ 8278DD9
-	.string "Which POKéMON would you like to\n"
+	.string "Which Pokémon would you like to\n"
 	.string "enter?$"
 
 MossdeepCity_GameCorner_1F_Text_AllGoodToGo: @ 8278E00
@@ -309,22 +309,22 @@ MossdeepCity_GameCorner_1F_Text_LeavingDoComeAgain: @ 8278E3C
 
 MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon: @ 8278E60
 	.string "It doesn't look like you have any\n"
-	.string "POKéMON that you can enter…\p"
+	.string "Pokémon that you can enter…\p"
 	.string "Would you like me to explain what\n"
-	.string "kinds of POKéMON can enter?$"
+	.string "kinds of Pokémon can enter?$"
 
 MossdeepCity_GameCorner_1F_Text_ShortJumpingPokemonAllowed: @ 8278EDC
-	.string "“POKéMON JUMP” is open to POKéMON\n"
+	.string "“Pokémon Jump” is open to Pokémon\n"
 	.string "around 28 inches or less.\p"
 	.string "What you can't enter are those\n"
-	.string "POKéMON that can't jump.\p"
-	.string "You know, like POKéMON that only\n"
+	.string "Pokémon that can't jump.\p"
+	.string "You know, like Pokémon that only\n"
 	.string "swim, burrow, or fly.\p"
 	.string "That's all you need to know.$"
 
 MossdeepCity_GameCorner_1F_Text_OnlyDodrioAllowed: @ 8278FA4
-	.string "DODRIO BERRY-PICKING is a game that \n"
-	.string "only DODRIO may enter.$"
+	.string "Dodrio Berry-Picking is a game that \n"
+	.string "only Dodrio may enter.$"
 
 @ Unused
 MossdeepCity_GameCorner_1F_Text_RetryPlease: @ 8278FE0
@@ -332,15 +332,15 @@ MossdeepCity_GameCorner_1F_Text_RetryPlease: @ 8278FE0
 	.string "again, please?$"
 
 CableClub_Text_WelcomeWhichDirectCornerRoom: @ 8279013
-	.string "Welcome to the POKéMON WIRELESS\n"
-	.string "CLUB DIRECT CORNER.\p"
+	.string "Welcome to the Pokémon Wireless\n"
+	.string "Club Direct Corner.\p"
 	.string "You may interact directly with\n"
 	.string "your friends here.\p"
 	.string "Which room would you like to\n"
 	.string "enter?$"
 
 CableClub_Text_TradePokemon: @ 827909D
-	.string "Would you like to trade POKéMON?$"
+	.string "Would you like to trade Pokémon?$"
 
 CableClub_Text_PlayWhichBattleMode: @ 82790BE
 	.string "Which Battle Mode would you like\n"
@@ -348,7 +348,7 @@ CableClub_Text_PlayWhichBattleMode: @ 82790BE
 
 CableClub_Text_AccessRecordCorner: @ 82790E8
 	.string "Would you like to access\n"
-	.string "the RECORD CORNER?$"
+	.string "the Record CORNER?$"
 
 CableClub_Text_UseBerryCrush: @ 8279114
 	.string "Would you like to use the\n"
