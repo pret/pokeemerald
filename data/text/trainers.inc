@@ -121,7 +121,7 @@ Route103_Text_LivNotEnoughPokemon: @ 8294BD0
 
 Route103_Text_AmyRematchIntro: @ 8294C29
 	.string "Amy: I'm Amy.\n"
-	.string "And this is my little sister LIV.\l"
+	.string "And this is my little sister Liv.\l"
 	.string "We battle together!$"
 
 Route103_Text_AmyRematchDefeated: @ 8294C6D
@@ -4132,7 +4132,7 @@ Route127_Text_KojiRematchDefeat: @ 82A276B
 
 Route127_Text_KojiPostRematch: @ 82A278E
 	.string "Want to go barefoot for a while?\n"
-	.string "So I can try your RUNNING SHOES?$"
+	.string "So I can try your Running Shoes?$"
 
 Route127_Text_AthenaIntro: @ 82A27D0
 	.string "We should have a slow and methodical\n"
@@ -4161,7 +4161,7 @@ Route128_Text_IsaiahPostBattle: @ 82A28D7
 Route128_Text_IsaiahRegister: @ 82A2916
 	.string "I know I'm not good now, but I think\n"
 	.string "I can win eventually.\p"
-	.string "Please register me in your POKéNAV.$"
+	.string "Please register me in your Pokénav.$"
 
 Route128_Text_IsaiahRematchIntro: @ 82A2975
 	.string "I'm still feeling good. I'll keep on\n"
