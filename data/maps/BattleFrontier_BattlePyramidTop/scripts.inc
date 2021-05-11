@@ -234,16 +234,16 @@ BattleFrontier_BattlePyramidTop_Movement_CameraPanUp: @ 825540C
 BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo: @ 8255410
 	.string "It is a delight to see you here!\n"
 	.string "You have reached the summit of\l"
-	.string "the BATTLE PYRAMID!\p"
-	.string "Above here is the PYRAMID's\n"
+	.string "the Battle Pyramid!\p"
+	.string "Above here is the Pyramid's\n"
 	.string "lookout point.\p"
 	.string "It is a place open only to those\n"
-	.string "who have conquered the PYRAMID.\p"
+	.string "who have conquered the Pyramid.\p"
 	.string "Now, please!\n"
 	.string "Up you go!$"
 
 BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid: @ 82554E8
-	.string "The PYRAMID's new conqueror!\n"
+	.string "The Pyramid's new conqueror!\n"
 	.string "Let the name {PLAYER} be known!$"
 
 BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere: @ 825551F
@@ -251,9 +251,9 @@ BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere: @ 825551F
 	.string "Unfortunately, you were second by\n"
 	.string "a mere fraction of time!\p"
 	.string "Our chief has already conquered\n"
-	.string "the PYRAMID ahead of you.\p"
+	.string "the Pyramid ahead of you.\p"
 	.string "However, my young explorer…\n"
-	.string "You are a TRAINER!\p"
+	.string "You are a Trainer!\p"
 	.string "Assert your power and take the glory\n"
 	.string "of the pinnacle from our chief!\p"
 	.string "Now, please! When you are ready,\n"
@@ -265,15 +265,15 @@ BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure: @ 8255669
 	.string "are the grandest of adventures?\p"
 	.string "Your own wits!\p"
 	.string "Your own strength!\p"
-	.string "Your own POKéMON!\p"
+	.string "Your own Pokémon!\p"
 	.string "And, above all, only your own courage\n"
 	.string "to lead you through unknown worlds…$"
 
 BattleFrontier_BattlePyramidTop_Text_ImPyramidKingBrandon: @ 825573E
 	.string "Aah, yes, indeed this life is grand!\n"
 	.string "Grand, it is! Eh?\p"
-	.string "I'm BRANDON!\p"
-	.string "I'm the PYRAMID KING, which means\n"
+	.string "I'm Brandon!\p"
+	.string "I'm the Pyramid King, which means\n"
 	.string "I'm in charge here.\p"
 	.string "Most people call me the chief!\p"
 	.string "You coming here means you have\n"
@@ -287,21 +287,21 @@ BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle: @ 8255846
 	.string "Bring your courage to our battle!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease: @ 8255873
-	.string "BRANDON: Hahahah! Grand it was!\n"
+	.string "Brandon: Hahahah! Grand it was!\n"
 	.string "Grand, yes, indeed!\p"
 	.string "Well done! You've earned recognition!\n"
-	.string "Your FRONTIER PASS, please!$"
+	.string "Your Frontier Pass, please!$"
 
 BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol: @ 82558E9
 	.string "The Brave Symbol was embossed on\n"
-	.string "the FRONTIER PASS!$"
+	.string "the Frontier Pass!$"
 
 BattleFrontier_BattlePyramidTop_Text_LookForwardToNextMeeting: @ 825591D
 	.string "Young explorer!\n"
 	.string "I look forward to our next meeting!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned: @ 8255951
-	.string "BRANDON: …You've finally returned,\n"
+	.string "Brandon: …You've finally returned,\n"
 	.string "young explorer…\p"
 	.string "Your love of adventure seems to come\n"
 	.string "deep from within your heart…\p"
@@ -324,7 +324,7 @@ BattleFrontier_BattlePyramidTop_Text_EverythingYouHave: @ 8255AA1
 	.string "I'm braced for it all!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis: @ 8255ACD
-	.string "BRANDON: Hahahah!\n"
+	.string "Brandon: Hahahah!\n"
 	.string "Remarkable!\l"
 	.string "Yes, it's grand, indeed!\p"
 	.string "Young explorer!\p"
