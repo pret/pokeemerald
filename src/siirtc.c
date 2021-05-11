@@ -386,7 +386,7 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 #ifndef UBFIX
 static int WriteCommand(u8 value)
 #else
-static int WriteCommand(u8 value)
+static void WriteCommand(u8 value)
 #endif
 {
     u8 i;
