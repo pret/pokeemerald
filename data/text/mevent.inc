@@ -12,32 +12,32 @@ Mevent_Text_YouKnowThoseWordsGift:: @ 8273446
 	.string "Oh, hello!\n"
 	.string "You know those words?\p"
 	.string "That means you must know about\n"
-	.string "the MYSTERY GIFT.\p"
+	.string "the Mystery Gift.\p"
 	.string "From now on, you should be\n"
-	.string "receiving MYSTERY GIFTS!$"
+	.string "receiving Mystery Gifts!$"
 
 Mevent_Text_YouCanAccessMysteryGift:: @ 82734CC
 	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY GIFT.$"
+	.string "access the Mystery Gift.$"
 
 Mevent_Text_YouKnowThoseWordsEvent:: @ 8273506
 	.string "Oh, hello!\n"
 	.string "You know those words?\p"
 	.string "That means you must know about\n"
-	.string "the MYSTERY EVENT.$"
+	.string "the Mystery Event.$"
 
 Mevent_Text_YouCanAccessMysteryEvent:: @ 8273559
 	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY EVENT.$"
+	.string "access the Mystery Event.$"
 
 Mevent_Text_TheresATicketForYou:: @ 8273594
-	.string "Thank you for using the MYSTERY\n"
-	.string "EVENT System.\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Event System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
 Mevent_Text_TryUsingItAtLilycovePort:: @ 82735F2
 	.string "It appears to be for use at\n"
-	.string "the LILYCOVE CITY port.\p"
+	.string "the Lilycove City port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
