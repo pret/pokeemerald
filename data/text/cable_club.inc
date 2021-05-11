@@ -1,6 +1,6 @@
 CableClub_Text_WelcomeWhichCableClubService: @ 8277EA4
-	.string "Welcome to the POKéMON CABLE\n"
-	.string "CLUB.\p"
+	.string "Welcome to the Pokémon Cable\n"
+	.string "Club.\p"
 	.string "Which of our services do you wish\n"
 	.string "to use?$"
 
@@ -9,15 +9,15 @@ CableClub_Text_WhichService: @ 8277EF1
 	.string "to use?$"
 
 CableClub_Text_TradeUsingLinkCable:: @ 8277F1B
-	.string "Trade POKéMON with another player\n"
+	.string "Trade Pokémon with another player\n"
 	.string "using a GBA Game Link cable.$"
 
 CableClub_Text_BattleUsingLinkCable:: @ 8277F5A
-	.string "You may battle another TRAINER\n"
+	.string "You may battle another Trainer\n"
 	.string "using a GBA Game Link cable.$"
 
 CableClub_Text_RecordCornerUsingLinkCable:: @ 8277F96
-	.string "You can use the RECORD CORNER with\n"
+	.string "You can use the Record Corner with\n"
 	.string "others using a GBA Game Link cable.$"
 
 @ Unused
@@ -25,16 +25,16 @@ CableClub_Text_CloseThisMenu: @ 8277FDD
 	.string "Close this menu.$"
 
 CableClub_Text_NeedTwoMonsForDoubleBattle: @ 8277FEE
-	.string "For a DOUBLE BATTLE, you must\n"
-	.string "have at least two POKéMON.$"
+	.string "For a Double Battle, you must\n"
+	.string "have at least two Pokémon.$"
 
 CableClub_Text_NeedTwoMonsToTrade: @ 8278027
 	.string "For trading, you must have at\n"
-	.string "least two POKéMON with you.$"
+	.string "least two Pokémon with you.$"
 
 CableClub_Text_CantTradeEnigmaBerry: @ 8278061
-	.string "A POKéMON holding the {STR_VAR_1}\n"
-	.string "BERRY can't be traded.$"
+	.string "A Pokémon holding the {STR_VAR_1}\n"
+	.string "Berry can't be traded.$"
 
 gText_PleaseWaitForLink:: @ 8278091
 	.string "Please wait.\n"
@@ -86,11 +86,11 @@ CableClub_Text_IncorrectNumberOfParticipants: @ 82782A8
 	.string "incorrect.$"
 
 CableClub_Text_CantSingleBattleWithXPlayers: @ 82782D1
-	.string "The SINGLE BATTLE Mode can't be\n"
+	.string "The Single Battle Mode can't be\n"
 	.string "played by {STR_VAR_1} players.$"
 
 CableClub_Text_CantDoubleBattleWithXPlayers: @ 8278307
-	.string "The DOUBLE BATTLE Mode can't be\n"
+	.string "The Double Battle Mode can't be\n"
 	.string "played by {STR_VAR_1} players.$"
 
 CableClub_Text_NeedFourPlayers: @ 827833D
@@ -111,16 +111,16 @@ Text_TerminateLinkPleaseWait: @ 82783E9
 	.string "the room. Please wait.$"
 
 CableClub_Text_TooBusyToNotice: @ 827842E
-	.string "This TRAINER is too busy to\n"
+	.string "This Trainer is too busy to\n"
 	.string "notice…$"
 
 CableClub_Text_GotToLookAtTrainerCard: @ 8278452
 	.string "Score! Got to look at {STR_VAR_1}'s\n"
-	.string "TRAINER CARD!$"
+	.string "Trainer Card!$"
 
 CableClub_Text_GotToLookAtColoredTrainerCard: @ 827847B
 	.string "Score! Got to look at {STR_VAR_1}'s\n"
-	.string "TRAINER CARD!\p"
+	.string "Trainer Card!\p"
 	.string "It's a {STR_VAR_2} card!$"
 
 BattleColosseum_2P_Text_TakePlaceStartBattle: @ 82784B4
@@ -135,7 +135,7 @@ RecordCorner_Text_ThanksForComing: @ 827850E
 	.string "Thanks for coming.$"
 
 CableClub_Text_TrainerCardDataOverwritten: @ 8278521
-	.string "The TRAINER CARD data will\n"
+	.string "The Trainer Card data will\n"
 	.string "be overwritten.$"
 
 CableClub_Text_HopeToSeeYouAgain: @ 827854C
@@ -144,14 +144,14 @@ CableClub_Text_HopeToSeeYouAgain: @ 827854C
 CableClub_Text_NotSetUpForFarAwayRegion: @ 8278565
 	.string "I'm awfully sorry.\p"
 	.string "We're not set up to conduct trades\n"
-	.string "with TRAINERS far away in another\l"
+	.string "with Trainers far away in another\l"
 	.string "region yet…$"
 
 CableClub_Text_OtherTrainerNotReady: @ 82785C9
-	.string "The other TRAINER is not ready.$"
+	.string "The other Trainer is not ready.$"
 
 CableClub_Text_YouHaveAMonThatCantBeTaken: @ 82785E9
-	.string "You have at least one POKéMON\n"
+	.string "You have at least one Pokémon\n"
 	.string "that can't be taken.$"
 
 RecordCorner_Text_TakeSeatAndWait: @ 827861C
@@ -186,16 +186,16 @@ CableClub_Text_PleaseWait: @ 8278792
 	.string "Please wait.$"
 
 CableClub_Text_YouMayTradeHere:: @ 827879F
-	.string "You may trade your POKéMON here\n"
-	.string "with another TRAINER.$"
+	.string "You may trade your Pokémon here\n"
+	.string "with another Trainer.$"
 
 CableClub_Text_YouMayBattleHere:: @ 82787D5
 	.string "You may battle with your friends\n"
 	.string "here.$"
 
 CableClub_Text_CanMakeBerryPowder:: @ 82787FC
-	.string "Two to five TRAINERS can make\n"
-	.string "BERRY POWDER together.$"
+	.string "Two to five Trainers can make\n"
+	.string "Berry Powder together.$"
 
 CableClub_Text_CanMixRecords:: @ 8278831
 	.string "The records of two to four players\n"
@@ -203,11 +203,11 @@ CableClub_Text_CanMixRecords:: @ 8278831
 
 @ Unused
 CableClub_Text_GuideToVariousServices: @ 827886B
-	.string "A guide to the WIRELESS CLUB's\n"
+	.string "A guide to the Wireless Club's\n"
 	.string "various services.$"
 
 CableClub_Text_CancelSelectedItem:: @ 827889C
-	.string "Cancels the selected MENU item.$"
+	.string "Cancels the selected Menu item.$"
 
 @ Unused
 CableClub_Text_WhichBattleMode: @ 82788BC
@@ -218,20 +218,20 @@ CableClub_Text_ReturnsToPreviousStep: @ 82788DE
 	.string "Returns to the previous step.$"
 
 CableClub_Text_NeedBerryForBerryCrush: @ 82788FC
-	.string "To use the BERRY CRUSH service,\n"
-	.string "you must have at least one BERRY.$"
+	.string "To use the Berry Crush service,\n"
+	.string "you must have at least one Berry.$"
 
 CableClub_Text_NeedTwoMonsForUnionRoom: @ 827893E
-	.string "To enter the UNION ROOM, you must\n"
-	.string "have at least two POKéMON.$"
+	.string "To enter the Union Room, you must\n"
+	.string "have at least two Pokémon.$"
 
 CableClub_Text_NoEnigmaBerryInUnionRoom: @ 827897B
-	.string "No POKéMON holding the {STR_VAR_1}\n"
-	.string "BERRY may enter the UNION ROOM.$"
+	.string "No Pokémon holding the {STR_VAR_1}\n"
+	.string "Berry may enter the Union Room.$"
 
 CableClub_Text_UnionRoomAdapterNotConnected: @ 82789B5
-	.string "This is the POKéMON WIRELESS CLUB\n"
-	.string "UNION ROOM.\p"
+	.string "This is the Pokémon Wireless Club\n"
+	.string "Union Room.\p"
 	.string "Unfortunately, your Wireless\n"
 	.string "Adapter is not connected properly.\p"
 	.string "Please do come again.$"
@@ -252,8 +252,8 @@ MossdeepCity_GameCorner_1F_Text_DescribeWhichGame: @ 8278A7D
 	.string "Which game should I describe?$"
 
 MossdeepCity_GameCorner_1F_Text_PokemonJumpInfo: @ 8278ACB
-	.string "“POKéMON JUMP”\p"
-	.string "Make your POKéMON skip the VINE WHIP\n"
+	.string "“Pokémon JUMP”\p"
+	.string "Make your Pokémon skip the VINE WHIP\n"
 	.string "rope with the A Button.\p"
 	.string "Only mini POKéMON around 28 inches\n"
 	.string "or less may participate.\p"
