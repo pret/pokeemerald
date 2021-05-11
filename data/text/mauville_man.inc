@@ -59,5 +59,5 @@ gMauvilleManText_LyingBackInTheGreenGrass:: @ 82944A0
 	.string "Oh, it's so, so nice!$"
 
 gMauvilleManText_SecretBasesAreSoWonderful:: @ 82944D5
-	.string "SECRET BASES are so wonderful!\n"
+	.string "Secret Bases are so wonderful!\n"
 	.string "Can't you feel the excitement?$"
