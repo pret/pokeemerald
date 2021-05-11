@@ -1,12 +1,12 @@
 LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket: @ 82A6390
-	.string "This is the POKéMON LOTTERY CORNER.\p"
-	.string "All shoppers at our DEPARTMENT STORE\n"
-	.string "get to draw a POKéMON LOTO TICKET.\p"
-	.string "If the LOTO TICKET's number matches\n"
-	.string "the ID number of any of your POKéMON,\l"
+	.string "This is the Pokémon Lottery Corner.\p"
+	.string "All shoppers at our Department Store\n"
+	.string "get to draw a Pokémon Loto Ticket.\p"
+	.string "If the Loto Ticket's number matches\n"
+	.string "the ID number of any of your Pokémon,\l"
 	.string "you will receive a fabulous gift.\p"
-	.string "Would you like to draw a POKéMON\n"
-	.string "LOTO TICKET?$"
+	.string "Would you like to draw a Pokémon\n"
+	.string "Loto Ticket?$"
 
 LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow: @ 82A6496
 	.string "Please come back tomorrow.$"
@@ -15,26 +15,26 @@ LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain: @ 82A64B1
 	.string "Please do visit again.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket: @ 82A64C8
-	.string "Please pick a LOTO TICKET.\n"
+	.string "Please pick a Loto Ticket.\n"
 	.string "…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait: @ 82A650B
-	.string "The LOTO TICKET number is {STR_VAR_1}.\p"
+	.string "The Loto Ticket number is {STR_VAR_1}.\p"
 	.string "I need to run a check on this number\n"
 	.string "to see if it matches any of your\l"
-	.string "POKéMON's ID numbers. Please wait.$"
+	.string "Pokémon's ID numbers. Please wait.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon: @ 82A6592
 	.string "Congratulations!\p"
 	.string "The ID number of your team's\n"
 	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+	.string "Loto Ticket's number!$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon: @ 82A65E6
 	.string "Congratulations!\p"
 	.string "The ID number of your PC-boxed\n"
 	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+	.string "Loto Ticket's number!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched: @ 82A663C
 	.string "I'm sorry.\n"
@@ -64,7 +64,7 @@ LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched: @ 82A6731
 LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis: @ 82A678C
 	.string "Oh?\n"
 	.string "You seem to have no room for this.\p"
-	.string "Please make room in your BAG and\n"
+	.string "Please make room in your Bag and\n"
 	.string "let me know.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding: @ 82A67E1
