@@ -72,10 +72,8 @@ static bool8 sLocked;
 static int WriteCommand(u8 value);
 static int WriteData(u8 value);
 #else
-
 static void WriteCommand(u8 value);
 static void WriteData(u8 value);
-
 #endif
 static u8 ReadData();
 static void EnableGpioPortRead();
