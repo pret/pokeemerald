@@ -291,7 +291,7 @@ BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals: @ 824B6E3
 	.string "Are you ready?$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_ChooseTwoMons: @ 824B70C
-	.string "Please choose the two POKéMON\n"
+	.string "Please choose the two Pokémon\n"
 	.string "that are to appear in battle.$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay: @ 824B748
@@ -299,7 +299,7 @@ BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay: @ 824B748
 
 BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth: @ 824B760
 	.string "Thank you for competing!\p"
-	.string "I'll restore your POKéMON to\n"
+	.string "I'll restore your Pokémon to\n"
 	.string "full health.$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_Round1Complete: @ 824B7A3
@@ -340,7 +340,7 @@ BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForFinals: @ 824B94E
 
 BattleFrontier_BattleDomePreBattleRoom_Text_PlayersNextOpponentIsTrainer: @ 824B9B5
 	.string "{PLAYER}'s next opponent\n"
-	.string "is this TRAINER.$"
+	.string "is this Trainer.$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound1: @ 824B9D9
 	.string "The tournament is in the 1st round.$"
@@ -368,13 +368,13 @@ BattleFrontier_BattleDomePreBattleRoom_Text_SavingDataPleaseWait: @ 824BAD3
 
 BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch: @ 824BAF7
 	.string "Should I record your last match\n"
-	.string "on your FRONTIER PASS?$"
+	.string "on your Frontier Pass?$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver: @ 824BB2E
 	.string "Congratulations for advancing\n"
 	.string "to the final match.\p"
 	.string "For the final match, you will challenge\n"
-	.string "the DOME ACE TUCKER.\p"
+	.string "the Dome Ace Tucker.\p"
 	.string "Are you ready?$"
 
 @ Identical to ReadyForTuckerSilver
@@ -382,15 +382,15 @@ BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold: @ 824BBAC
 	.string "Congratulations for advancing\n"
 	.string "to the final match.\p"
 	.string "For the final match, you will challenge\n"
-	.string "the DOME ACE TUCKER.\p"
+	.string "the Dome Ace Tucker.\p"
 	.string "Are you ready?$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort: @ 824BC2A
-	.string "Your final battle against TUCKER is\n"
+	.string "Your final battle against Tucker is\n"
 	.string "next. Are you ready?$"
 
 @ Identical again
 BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort: @ 824BC63
-	.string "Your final battle against TUCKER is\n"
+	.string "Your final battle against Tucker is\n"
 	.string "next. Are you ready?$"
 
