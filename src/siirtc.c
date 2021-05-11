@@ -418,6 +418,10 @@ static u8 ReadData()
     u8 temp;
     u8 value;
 
+#ifdef UBFIX
+    value = 0;
+#endif
+
     for (i = 0; i < 8; i++)
     {
         GPIO_PORT_DATA = CS_HI;
