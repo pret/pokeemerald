@@ -515,5 +515,5 @@ gText_LinkStandby3:: @ 824978D
 
 gText_YourPartnerHasRetired:: @ 824979B
 	.string "Your partner has retired.\p"
-	.string "Your BATTLE ROOM challenge\n"
+	.string "Your Battle Room challenge\n"
 	.string "will be canceled.$"
