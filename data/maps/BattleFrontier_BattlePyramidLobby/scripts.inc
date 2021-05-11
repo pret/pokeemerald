@@ -554,7 +554,7 @@ BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid: @ 825100C
 	.string "the Pyramid and try to reach the top.\p"
 	.string "In the Pyramid are seven floors of\n"
 	.string "mazes, all of them filled with not only\l"
-	.string "skilled Trainres but also wild Pokémon.\p"
+	.string "skilled Trainers but also wild Pokémon.\p"
 	.string "You must enter with three Pokémon,\n"
 	.string "none of them holding an item.\p"
 	.string "On your ascent, you will be provided\n"
