@@ -94,7 +94,7 @@ AquaHideout_B2F_Text_MattIntro: @ 8233EDD
 	.string "Got here already, did you?\n"
 	.string "We underestimated you!\p"
 	.string "But this is it!\p"
-	.string "I'm a cut above the GRUNTS you've seen\n"
+	.string "I'm a cut above the Grunts you've seen\n"
 	.string "so far.\p"
 	.string "I'm not stalling for time.\n"
 	.string "I'm going to pulverize you!$"
@@ -105,16 +105,16 @@ AquaHideout_B2F_Text_MattDefeat: @ 8233F8D
 
 AquaHideout_B2F_Text_OurBossGotThroughHisPreparations: @ 8233FA6
 	.string "Hehehe!\p"
-	.string "While I was toying with you, our BOSS\n"
+	.string "While I was toying with you, our Boss\n"
 	.string "got through his preparations!$"
 
 AquaHideout_B2F_Text_MattPostBattle: @ 8233FF2
 	.string "Hehehe!\p"
-	.string "Our BOSS has already gone on his way to\n"
+	.string "Our Boss has already gone on his way to\n"
 	.string "some cave under the sea!\p"
 	.string "If you're going to give chase, you'd\n"
 	.string "better search the big, wide sea beyond\l"
-	.string "LILYCOVE.\p"
+	.string "Lilycove.\p"
 	.string "But will you find it then?\n"
 	.string "Hehehe!$"
 
@@ -127,11 +127,11 @@ AquaHideout_B2F_Text_Grunt4Defeat: @ 82340F0
 	.string "Lost and dazed…$"
 
 AquaHideout_B2F_Text_Grunt4PostBattle: @ 8234112
-	.string "BOSS…\n"
+	.string "Boss…\n"
 	.string "Is this good enough?$"
 
 AquaHideout_B2F_Text_Grunt6Intro: @ 823412D
-	.string "Warp panels, the HIDEOUT's pride\n"
+	.string "Warp panels, the Hideout's pride\n"
 	.string "and joy!\p"
 	.string "You're clueless about where you are,\n"
 	.string "aren't you?\p"
@@ -144,12 +144,12 @@ AquaHideout_B2F_Text_Grunt6Defeat: @ 82341CE
 
 AquaHideout_B2F_Text_Grunt6PostBattle: @ 82341FE
 	.string "That reminds me… I can't remember\n"
-	.string "where I put the MASTER BALL.\p"
-	.string "If I fail to guard it, our BOSS will\n"
+	.string "where I put the Master Ball.\p"
+	.string "If I fail to guard it, our Boss will\n"
 	.string "chew me out…$"
 
 AquaHideout_B2F_Text_Grunt8Intro: @ 823426F
-	.string "When I joined TEAM AQUA, the first\n"
+	.string "When I joined Team Aqua, the first\n"
 	.string "thing I had to learn was how these\l"
 	.string "warp panels connected.$"
 
