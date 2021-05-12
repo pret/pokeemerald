@@ -57,11 +57,11 @@ BattleFrontier_Mart_Text_ChaperonGrandson: @ 8267B29
 BattleFrontier_Mart_Text_ProteinMakeNiceGift: @ 8267B8F
 	.string "Dear, what do you think of this?\n"
 	.string "Wouldn't this make a nice gift?\p"
-	.string "It's…PRO…TE…IN?\n"
+	.string "It's…Pro…te…in?\n"
 	.string "It sounds delicious, doesn't it?$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems: @ 8267C01
-	.string "A lot of the BATTLE FRONTIER's\n"
+	.string "A lot of the Battle Frontier's\n"
 	.string "facilities don't allow the use of items\l"
 	.string "during battles.\p"
 	.string "That rule makes things tougher than\n"
