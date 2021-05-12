@@ -43,25 +43,25 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal:: @ 81FE534
 	end
 
 LavaridgeTown_HerbShop_Text_WelcomeToHerbShop: @ 81FE53E
-	.string "Welcome to the HERB SHOP, home of\n"
+	.string "Welcome to the Herb Shop, home of\n"
 	.string "effective and inexpensive medicine!$"
 
 LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine: @ 81FE584
 	.string "You've come to look at herbal medicine\n"
-	.string "in LAVARIDGE?\p"
+	.string "in Lavaridge?\p"
 	.string "That's rather commendable.\p"
 	.string "I like you! Take this!$"
 
 LavaridgeTown_HerbShop_Text_ExplainCharcoal: @ 81FE5EB
-	.string "That CHARCOAL I gave you, it's used\n"
+	.string "That Charcoal I gave you, it's used\n"
 	.string "for making herbal medicine.\p"
 	.string "It also does wonders when held by\n"
-	.string "a POKéMON.\p"
-	.string "It intensifies the power of FIRE-type\n"
+	.string "a Pokémon.\p"
+	.string "It intensifies the power of Fire-type\n"
 	.string "moves.$"
 
 LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike: @ 81FE685
 	.string "Herbal medicine works impressively well.\n"
-	.string "But your POKéMON will dislike you for it.\l"
+	.string "But your Pokémon will dislike you for it.\l"
 	.string "It must be horribly bitter!$"
 
