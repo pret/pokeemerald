@@ -102,18 +102,18 @@ BattleFrontier_RankingHall_EventScript_Boy:: @ 825E573
 	end
 
 BattleFrontier_RankingHall_Text_ExplainRankingHall: @ 825E57C
-	.string "This is the RANKING HALL.\p"
+	.string "This is the Ranking Hall.\p"
 	.string "This is where we recognize the immortal\n"
-	.string "TRAINERS who left great records in\l"
-	.string "BATTLE FRONTIER events.$"
+	.string "Trainers who left great records in\l"
+	.string "Battle Frontier events.$"
 
 BattleFrontier_RankingHall_Text_DomePikeFactoryRecords: @ 825E5F9
-	.string "BATTLE DOME, BATTLE PIKE,\n"
-	.string "and BATTLE FACTORY Records$"
+	.string "Battle Dome, Battle Pike,\n"
+	.string "and Battle Factory Records$"
 
 BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords: @ 825E62E
-	.string "BATTLE PALACE, BATTLE ARENA,\n"
-	.string "and BATTLE PYRAMID Records$"
+	.string "Battle Palace, Battle Arena,\n"
+	.string "and Battle Pyramid Records$"
 
 BattleFrontier_RankingHall_Text_IsYourNameOnThisList: @ 825E666
 	.string "Hi, is your name on this list?$"
