@@ -65,8 +65,8 @@ FortreeCity_DecorationShop_Text_MerchandiseSentToPC: @ 8218078
 
 FortreeCity_DecorationShop_Text_BuyingDeskForDolls: @ 82180ED
 	.string "I'm buying a pretty desk and I'm\n"
-	.string "putting my cute DOLLS on it.\p"
+	.string "putting my cute Dolls on it.\p"
 	.string "If I don't, when I decorate my\n"
-	.string "SECRET BASE, my DOLLS will get\l"
+	.string "Secret Base, my Dolls will get\l"
 	.string "dirty or poked with splinters.$"
 
