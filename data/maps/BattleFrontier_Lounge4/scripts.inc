@@ -15,7 +15,7 @@ BattleFrontier_Lounge4_EventScript_Man:: @ 826359F
 
 BattleFrontier_Lounge4_Text_WonderIfInterviewsAiring: @ 82635A8
 	.string "I wonder if they'll be airing interviews\n"
-	.string "with tough TRAINERS today?$"
+	.string "with tough Trainers today?$"
 
 BattleFrontier_Lounge4_Text_IfIOpenedRestaurantHere: @ 82635EC
 	.string "If I opened a restaurant here,\n"
