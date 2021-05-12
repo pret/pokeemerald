@@ -815,6 +815,20 @@ gSongTable:: @ 86B49F0
 	song hg_seq_me_hyouka5, 2, 2
 	song hg_seq_gs_c_hanada, 0, 0
 	song hg_seq_gs_r_12_24, 0, 0
+	song hg_seq_gs_e_linear, 0, 0
+	song hg_seq_gs_radio_komoriuta, 0, 0
+	song hg_seq_gs_vs_suicune, 0, 0
+	song hg_seq_gs_c_tamamushi, 0, 0
+	song hg_seq_gs_r_10_11, 0, 0
+	song hg_seq_gs_hue, 0, 0
+	song hg_seq_gs_d_tokiwanomori3, 0, 0
+	song hg_seq_gs_eye_k_shounen, 0, 0
+	song hg_seq_gs_c_yamabuki, 0, 0
+	song hg_seq_gs_r_9_03, 0, 0
+	song hg_seq_gs_eye_k_ayashii, 0, 0
+	song hg_seq_gs_otsukimi_event, 0, 0
+	song hg_seq_gs_r_9_01, 0, 0
+	song hg_seq_gs_t_masara, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

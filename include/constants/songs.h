@@ -830,6 +830,20 @@
 #define HG_SEQ_ME_HYOUKA5            811 // Pokédex Evaluation... Just a Little More!
 #define HG_SEQ_GS_C_HANADA           812 // Cerulean City
 #define HG_SEQ_GS_R_12_24            813 // Route 24
+#define HG_SEQ_GS_E_LINEAR           814 // Magnet Train
+#define HG_SEQ_GS_RADIO_KOMORIUTA    815 // Pokégear Radio: Pokémon Lullaby
+#define HG_SEQ_GS_VS_SUICUNE         816 // Battle! (Suicune)
+#define HG_SEQ_GS_C_TAMAMUSHI        817 // Celadon City
+#define HG_SEQ_GS_R_10_11            818 // Route 11
+#define HG_SEQ_GS_HUE                819 // Pokégear Radio: Poké Flute
+#define HG_SEQ_GS_D_TOKIWANOMORI3    820 // Viridian Forest
+#define HG_SEQ_GS_EYE_K_SHOUNEN      821 // Trainers' Eyes Meet (Boy 2)
+#define HG_SEQ_GS_C_YAMABUKI         822 // Pewter City
+#define HG_SEQ_GS_R_9_03             823 // Route 3
+#define HG_SEQ_GS_EYE_K_AYASHII      824 // Trainers' Eyes Meet (Suspicious Figure 2)
+#define HG_SEQ_GS_OTSUKIMI_EVENT     825 // Mt. Moon
+#define HG_SEQ_GS_R_9_01             826 // Route 1
+#define HG_SEQ_GS_T_MASARA           827 // Pallet Town
 
 // Black & White Music
 

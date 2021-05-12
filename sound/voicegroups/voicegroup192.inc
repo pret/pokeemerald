@@ -84,4 +84,5 @@ voicegroup192:: @ HGSS main
 	voice_directsound 60, 0, DirectSoundWaveData_dp_tom1_16, 255, 0, 255, 1
 	voice_keysplit voicegroup005, KeySplitTable29    @ dp trumpets (arceus)
 	voice_keysplit voicegroup005, KeySplitTable30    @ dp trombone (arceus)
+	voice_square_1_alt 60, 0, 0, 2, 0, 2, 6, 2 @ double up of 051
 

@@ -1507,6 +1507,20 @@ SECTIONS {
         sound/songs/midi/hg_seq_me_hyouka5.o(.rodata);
         sound/songs/midi/hg_seq_gs_c_hanada.o(.rodata);
         sound/songs/midi/hg_seq_gs_r_12_24.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_linear.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_komoriuta.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_suicune.o(.rodata);
+        sound/songs/midi/hg_seq_gs_c_tamamushi.o(.rodata);
+        sound/songs/midi/hg_seq_gs_r_10_11.o(.rodata);
+        sound/songs/midi/hg_seq_gs_hue.o(.rodata);
+        sound/songs/midi/hg_seq_gs_d_tokiwanomori3.o(.rodata);
+        sound/songs/midi/hg_seq_gs_eye_k_shounen.o(.rodata);
+        sound/songs/midi/hg_seq_gs_c_yamabuki.o(.rodata);
+        sound/songs/midi/hg_seq_gs_r_9_03.o(.rodata);
+        sound/songs/midi/hg_seq_gs_eye_k_ayashii.o(.rodata);
+        sound/songs/midi/hg_seq_gs_otsukimi_event.o(.rodata);
+        sound/songs/midi/hg_seq_gs_r_9_01.o(.rodata);
+        sound/songs/midi/hg_seq_gs_t_masara.o(.rodata);
     } =0
 
     lib_rodata :
