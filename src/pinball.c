@@ -46,8 +46,8 @@ enum
 struct Ball
 {
     u8 spriteId;
-    u16 xPos;
-    u16 yPos;
+    u32 xPos;
+    u32 yPos;
     s16 xVelocity;
     s16 yVelocity;
     s8 spin;
@@ -59,6 +59,10 @@ struct PinballGame
     u8 state;
     struct Ball ball;
     bool8 gravityEnabled;
+    u8 stageTileWidth;
+    u8 stageTileHeight;
+    u16 cameraScrollX;
+    u16 cameraScrollY;
     MainCallback returnMainCallback;
 };
 
@@ -72,9 +76,10 @@ static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
 static void UpdatePosition(struct Ball *ball);
-static bool32 HandleStaticCollision(struct Ball *ball);
+static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
 static void ApplyCollisionForces(struct Ball *ball);
+static void UpdateCamera(void);
 static void StartExitPinballGame(void);
 static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
@@ -84,8 +89,8 @@ static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 static const struct BgTemplate sPinballBgTemplates[] = {
     {
        .bg = PINBALL_BG_TEXT,
-       .charBaseIndex = 2,
-       .mapBaseIndex = 31,
+       .charBaseIndex = 0,
+       .mapBaseIndex = 27,
        .screenSize = 0,
        .paletteMode = 0,
        .priority = 0,
@@ -93,9 +98,9 @@ static const struct BgTemplate sPinballBgTemplates[] = {
    },
    {
        .bg = PINBALL_BG_BASE,
-       .charBaseIndex = 1,
-       .mapBaseIndex = 29,
-       .screenSize = 0,
+       .charBaseIndex = 2,
+       .mapBaseIndex = 28,
+       .screenSize = 3,
        .paletteMode = 0,
        .priority = 1,
        .baseTile = 0
@@ -110,14 +115,14 @@ static const struct WindowTemplate sPinballWinTemplates[] = {
         .width = 26,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x14,
+        .baseBlock = 0x1,
     },
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 sPinballBaseBgGfx[] = INCBIN_U32("graphics/pinball/base_bg_tiles.4bpp.lz");
+static const u32 sPinballBaseBgGfx[] = INCBIN_U32("graphics/pinball/base_bg_tiles.4bpp");
 static const u16 sPinballBaseBgPalette[] = INCBIN_U16("graphics/pinball/base_bg_tiles.gbapal");
-static const u32 sPinballBaseBgTilemap[] = INCBIN_U32("graphics/pinball/base_bg_tilemap.bin.lz");
+static const u32 sPinballBaseBgTilemap[] = INCBIN_U32("graphics/pinball/base_bg_tilemap.bin");
 static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball.4bpp.lz");
 static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_pokeball.gbapal");
 static const u8 sPinballBaseBgCollisionMasks[] = INCBIN_U8("graphics/pinball/base_bg_collision_masks.1bpp");
@@ -312,9 +317,9 @@ static void InitPinballScreen(void)
         ResetVramOamAndBgCntRegs();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sPinballBgTemplates, ARRAY_COUNT(sPinballBgTemplates));
-        SetBgTilemapBuffer(PINBALL_BG_BASE, AllocZeroed(BG_SCREEN_SIZE));
-        DecompressAndLoadBgGfxUsingHeap(PINBALL_BG_BASE, sPinballBaseBgGfx, 0, 0, 0);
-        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sPinballBaseBgTilemap, 0, 0);
+        SetBgTilemapBuffer(PINBALL_BG_BASE, AllocZeroed(BG_SCREEN_SIZE * 4));
+        LoadBgTiles(PINBALL_BG_BASE, sPinballBaseBgGfx, sizeof(sPinballBaseBgGfx), 0);
+        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sPinballBaseBgTilemap, sizeof(sPinballBaseBgTilemap), 0);
         ResetPaletteFade();
         LoadPalette(sPinballBaseBgPalette, 0, sizeof(sPinballBaseBgPalette));
         InitWindows(sPinballWinTemplates);
@@ -380,12 +385,15 @@ static void PinballMain(u8 taskId)
         {
             sPinballGame->gravityEnabled = TRUE;
             sPinballGame->state = PINBALL_STATE_RUNNING;
+            sPinballGame->stageTileWidth = 64;
+            sPinballGame->stageTileHeight = 64;
             sPinballGame->ball.xPos = 104 << 8;
-            sPinballGame->ball.yPos = 24 << 8;
+            sPinballGame->ball.yPos = 32 << 8;
         }
         break;
     case PINBALL_STATE_RUNNING:
         HandleBallPhysics();
+        UpdateCamera();
         break;
     case PINBALL_STATE_START_EXIT:
         StartExitPinballGame();
@@ -405,10 +413,10 @@ static void HandleBallPhysics(void)
         ApplyGravity(ball);
 
     LimitVelocity(ball);
-    isColliding = HandleStaticCollision(ball);
+    isColliding = HandleStaticCollision(ball, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight);
     UpdatePosition(ball);
 
-    if ((ball->yPos >> 8) > 160)
+    if ((ball->yPos >> 8) > sPinballGame->stageTileHeight * 8 - 8)
     {
         ball->xPos = 104 << 8;
         ball->yPos = 24 << 8;
@@ -462,10 +470,11 @@ static void UpdatePosition(struct Ball *ball)
         ball->yPos += ball->yVelocity;
 }
 
-static bool32 HandleStaticCollision(struct Ball *ball)
+static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight)
 {
     int i;
     u8 collisionNormal;
+    u16 xDelta, yDelta;
     int collisionIndex;
     int maxStringStart, maxStringEnd, curStringStart, curStringLength, maxStringLength;
     u8 collisionTests[ARRAY_COUNT(sCollisionTestPointOffsets)];
@@ -491,7 +500,7 @@ static bool32 HandleStaticCollision(struct Ball *ball)
         tileY = testY / 8;
         row = testY % 8;
         column = testX % 8;
-        tileIndex = (tileY * 32) + tileX;
+        tileIndex = (tileY * stageTileWidth) + tileX;
         collisionAttribute = sPinballBaseBgCollisionMap[tileIndex];
         collisionMaskRow = sPinballBaseBgCollisionMasks[(collisionAttribute * 0x8) + row];
         collisionTests[i] = (collisionMaskRow & (1 << column)) != 0;
@@ -550,14 +559,26 @@ static bool32 HandleStaticCollision(struct Ball *ball)
     }
  
     collisionIndex = ((maxStringStart & 0xF) << 4) | (maxStringEnd & 0xF);
-    ball->xPos += sCollisionXDeltas[collisionIndex];
-    ball->yPos += sCollisionYDeltas[collisionIndex];
+
+    // Treat the delta values as signed.
+    xDelta = sCollisionXDeltas[collisionIndex];
+    if (xDelta > 0x8000)
+        ball->xPos -= 0x10000 - xDelta;
+    else
+        ball->xPos += xDelta;
+
+    yDelta = sCollisionYDeltas[collisionIndex];
+    if (yDelta > 0x8000)
+        ball->yPos -= 0x10000 - yDelta;
+    else
+        ball->yPos += yDelta;
+
     collisionNormal = sCollisionNormals[collisionIndex];
     RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
     ApplyCollisionForces(ball);
     RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
 
-    return TRUE;
+    return FALSE;
 }
 
 static void RotateVector(s16 *x, s16 *y, u8 angle)
@@ -589,6 +610,32 @@ static void ApplyCollisionForces(struct Ball *ball)
     ball->spin = (ball->xVelocity * 4) >> 8;
 }
 
+static void UpdateCamera(void)
+{
+    int scrollX, scrollY;
+    int stagePixelWidth = sPinballGame->stageTileWidth * 8;
+    int stagePixelHeight = sPinballGame->stageTileHeight * 8;
+    struct Ball *ball = &sPinballGame->ball;
+
+    scrollX = (ball->xPos >> 8) - (DISPLAY_WIDTH / 2);
+    if (scrollX < 0)
+        scrollX = 0;
+    if (scrollX > stagePixelWidth - DISPLAY_WIDTH)
+        scrollX = stagePixelWidth - DISPLAY_WIDTH;
+
+    scrollY = (ball->yPos >> 8) - (DISPLAY_HEIGHT / 2);
+    if (scrollY < 0)
+        scrollY = 0;
+    if (scrollY > stagePixelHeight - DISPLAY_HEIGHT)
+        scrollY = stagePixelHeight - DISPLAY_HEIGHT;
+
+    sPinballGame->cameraScrollX = scrollX;
+    sPinballGame->cameraScrollY = scrollY;
+
+    SetGpuReg(REG_OFFSET_BG1HOFS, scrollX);
+    SetGpuReg(REG_OFFSET_BG1VOFS, scrollY);
+}
+
 static void StartExitPinballGame(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -608,8 +655,8 @@ static void UpdateBallSprite(struct Sprite *sprite)
 {
     int ballAnim;
     struct Ball *ball = &sPinballGame->ball;
-    sprite->pos1.x = ball->xPos >> 8;
-    sprite->pos1.y = ball->yPos >> 8;
+    sprite->pos1.x = (ball->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->pos1.y = (ball->yPos >> 8) - sPinballGame->cameraScrollY;
 
     ball->rotation += ball->spin;
     ballAnim = (ball->rotation >> 4) % 8;
