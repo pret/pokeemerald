@@ -60,18 +60,18 @@ EverGrandeCity_GlaciasRoom_EventScript_Defeated:: @ 822849A
 	end
 
 EverGrandeCity_GlaciasRoom_Text_IntroSpeech: @ 82284AC
-	.string "Welcome, my name is GLACIA\n"
-	.string "of the ELITE FOUR.\p"
-	.string "I've traveled from afar to HOENN\n"
+	.string "Welcome, my name is Glacia\n"
+	.string "of the Elite Four.\p"
+	.string "I've traveled from afar to Hoenn\n"
 	.string "so that I may hone my ice skills.\p"
 	.string "But all I have seen are challenges by\n"
-	.string "weak TRAINERS and their POKéMON.\p"
+	.string "weak Trainers and their Pokémon.\p"
 	.string "What about you?\p"
 	.string "It would please me to no end if I could\n"
 	.string "go all out against you!$"
 
 EverGrandeCity_GlaciasRoom_Text_Defeat: @ 82285B4
-	.string "You and your POKéMON…\n"
+	.string "You and your Pokémon…\n"
 	.string "How hot your spirits burn!\p"
 	.string "The all-consuming heat overwhelms.\p"
 	.string "It's no surprise that my icy skills\n"
@@ -80,5 +80,5 @@ EverGrandeCity_GlaciasRoom_Text_Defeat: @ 82285B4
 EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech: @ 8228640
 	.string "Advance to the next room.\p"
 	.string "And there, confirm the truly fearsome\n"
-	.string "side of the POKéMON LEAGUE.$"
+	.string "side of the Pokémon League.$"
 
