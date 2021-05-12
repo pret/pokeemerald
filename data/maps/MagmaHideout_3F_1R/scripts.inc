@@ -26,7 +26,7 @@ MagmaHideout_3F_1R_Text_Grunt9PostBattle: @ 823A246
 MagmaHideout_3F_1R_Text_Grunt16Intro: @ 823A293
 	.string "We joined so we can help our leader\n"
 	.string "achieve his fantastic vision.\p"
-	.string "I don't care if you're with TEAM AQUA\n"
+	.string "I don't care if you're with Team Aqua\n"
 	.string "or if you're just some kid passing by.\p"
 	.string "No one interferes with us and gets\n"
 	.string "away with it!$"
@@ -37,7 +37,7 @@ MagmaHideout_3F_1R_Text_Grunt16Defeat: @ 823A353
 
 MagmaHideout_3F_1R_Text_Grunt16PostBattle: @ 823A37C
 	.string "Listen to me.\n"
-	.string "TEAM MAGMA is right!\p"
-	.string "Don't listen to TEAM AQUA.\n"
+	.string "Team Magma is right!\p"
+	.string "Don't listen to Team Aqua.\n"
 	.string "Don't believe their lies!$"
 
