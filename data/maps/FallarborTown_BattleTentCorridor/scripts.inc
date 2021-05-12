@@ -52,19 +52,19 @@ FallarborTown_ContestHall_Text_DoAllRightInPreliminary: @ 8200704
 @ Unused
 FallarborTown_ContestHall_Text_MonAllTheseRibbons: @ 8200791
 	.string "See!\n"
-	.string "My POKéMON won all these RIBBONS!\p"
-	.string "Have your POKéMON earned any RIBBONS?\n"
-	.string "You can check them on your POKéNAV.$"
+	.string "My Pokémon won all these Ribbons!\p"
+	.string "Have your Pokémon earned any Ribbons?\n"
+	.string "You can check them on your Pokénav.$"
 
 @ Unused
 FallarborTown_ContestHall_Text_CantWinEverywhere: @ 8200802
-	.string "I can't beat GYM LEADERS…\p"
-	.string "I can't win any CONTESTS…\p"
+	.string "I can't beat Gym Leaders…\p"
+	.string "I can't win any Contests…\p"
 	.string "I've been here, there, and everywhere,\n"
 	.string "and it's all for naught…$"
 
 @ Unused
 FallarborTown_ContestHall_Text_SuperRankStage: @ 8200876
-	.string "POKéMON CONTESTS\n"
-	.string "SUPER RANK STAGE!$"
+	.string "Pokémon Contests\n"
+	.string "Super Rank Stage!$"
 
