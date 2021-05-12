@@ -91,31 +91,31 @@ FortreeCity_Movement_KecleonFlee: @ 81E2674
 
 FortreeCity_Text_SawGiganticPokemonInSky: @ 81E2676
 	.string "No one believes me, but I saw this\n"
-	.string "gigantic POKéMON in the sky.\p"
+	.string "gigantic Pokémon in the sky.\p"
 	.string "It seemed to squirm as it flew toward\n"
-	.string "ROUTE 131.\p"
+	.string "Route 131.\p"
 	.string "By the way… Sniff…\n"
 	.string "Um… You, uh…smell singed.\p"
 	.string "Were you at a volcano or something?$"
 
 FortreeCity_Text_SomethingBlockingGym: @ 81E2738
-	.string "I want to go to the POKéMON GYM,\n"
+	.string "I want to go to the Pokémon Gym,\n"
 	.string "but something's blocking the way.\p"
 	.string "After all the bother I went through\n"
-	.string "training on ROUTE 120…$"
+	.string "training on Route 120…$"
 
 FortreeCity_Text_ThisTimeIllBeatWinona: @ 81E27B6
-	.string "I've got my pride-and-joy POKéMON\n"
-	.string "with me. This time, I'll beat WINONA.$"
+	.string "I've got my pride-and-joy Pokémon\n"
+	.string "with me. This time, I'll beat Winona.$"
 
 FortreeCity_Text_TreesGrowByDrinkingRainwater: @ 81E27FE
 	.string "The ground absorbs rainwater, and\n"
 	.string "trees grow by drinking that water…\p"
-	.string "Our FORTREE CITY exists because\n"
+	.string "Our Fortree City exists because\n"
 	.string "there's both water and soil.$"
 
 FortreeCity_Text_EveryoneHealthyAndLively: @ 81E2880
-	.string "The CITY consists of homes built on\n"
+	.string "The City consists of homes built on\n"
 	.string "trees.\p"
 	.string "Perhaps because of that lifestyle,\n"
 	.string "everyone is healthy and lively.\p"
@@ -124,12 +124,12 @@ FortreeCity_Text_EveryoneHealthyAndLively: @ 81E2880
 
 FortreeCity_Text_BugPokemonComeThroughWindow: @ 81E292E
 	.string "Living on top of trees is okay.\p"
-	.string "But sometimes BUG POKéMON come in\n"
+	.string "But sometimes Bug Pokémon come in\n"
 	.string "through windows.\l"
 	.string "It can be really startling.$"
 
 FortreeCity_Text_PokemonThatEvolveWhenTraded: @ 81E299D
-	.string "There are POKéMON that evolve when\n"
+	.string "There are Pokémon that evolve when\n"
 	.string "you trade them! That's what I heard.$"
 
 FortreeCity_Text_SomethingUnseeable: @ 81E29E5
@@ -137,22 +137,22 @@ FortreeCity_Text_SomethingUnseeable: @ 81E29E5
 
 FortreeCity_Text_UnseeableUseDevonScope: @ 81E2A08
 	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
+	.string "Want to use the Devon Scope?$"
 
 FortreeCity_Text_UsedDevonScopePokemonFled: @ 81E2A48
-	.string "{PLAYER} used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
+	.string "{PLAYER} used the Devon Scope.\p"
+	.string "An invisible Pokémon became completely\n"
 	.string "visible!\p"
-	.string "The startled POKéMON fled!$"
+	.string "The startled Pokémon fled!$"
 
 FortreeCity_Text_CitySign: @ 81E2AAC
-	.string "FORTREE CITY\n"
+	.string "Fortree City\n"
 	.string "“The treetop city that frolics with\l"
 	.string "nature.”$"
 
 FortreeCity_Text_GymSign: @ 81E2AE6
-	.string "FORTREE CITY POKéMON GYM\n"
-	.string "LEADER: WINONA\p"
+	.string "Fortree City Pokémon Gym\n"
+	.string "Leader: Winona\p"
 	.string "“The bird user taking flight into\n"
 	.string "the world.”$"
 
