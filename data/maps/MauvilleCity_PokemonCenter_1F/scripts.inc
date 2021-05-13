@@ -42,15 +42,15 @@ MauvilleCity_PokemonCenter_1F_Text_ManOverThereSaysWeirdThings: @ 8210EA1
 	.string "I doubt I'll forget about him!$"
 
 MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner: @ 8210F06
-	.string "When I accessed the RECORD CORNER,\n"
-	.string "the data for what's hot in DEWFORD\l"
+	.string "When I accessed the Record Corner,\n"
+	.string "the data for what's hot in Dewford\l"
 	.string "got updated.\p"
 	.string "Now that bit of data is the same\n"
 	.string "as my friend's!$"
 
 MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun: @ 8210F8A
-	.string "A RECORD CORNER opened upstairs in\n"
-	.string "the POKéMON CENTER.\p"
+	.string "A Record Corner opened upstairs in\n"
+	.string "the Pokémon Center.\p"
 	.string "I don't know what it's about, but it\n"
 	.string "sounds fun. I'll go check it out!$"
 
