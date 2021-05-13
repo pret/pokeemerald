@@ -26,26 +26,26 @@ MossdeepCity_House3_EventScript_DeclineSuperRod:: @ 822260C
 	end
 
 MossdeepCity_House3_Text_YouWantSuperRod: @ 8222616
-	.string "Hey there, TRAINER!\n"
-	.string "A SUPER ROD really is super!\p"
+	.string "Hey there, Trainer!\n"
+	.string "A Super Rod really is super!\p"
 	.string "Say all you want, but this baby can\n"
-	.string "catch POKéMON off the seafloor!\p"
+	.string "catch Pokémon off the seafloor!\p"
 	.string "What do you think?\n"
 	.string "You want it, don't you?$"
 
 MossdeepCity_House3_Text_SuperRodIsSuper: @ 82226B6
 	.string "You bet, you bet!\n"
-	.string "After all, a SUPER ROD is really super!$"
+	.string "After all, a Super Rod is really super!$"
 
 MossdeepCity_House3_Text_TryDroppingRodInWater: @ 82226F0
 	.string "If there's any water, try dropping in\n"
-	.string "your ROD and see what bites!$"
+	.string "your Rod and see what bites!$"
 
 MossdeepCity_House3_Text_DontYouLikeToFish: @ 8222733
 	.string "Hunh?\n"
 	.string "Don't you like to fish?$"
 
 MossdeepCity_House3_Text_GoAfterSeafloorPokemon: @ 8222751
-	.string "Go after the seafloor POKéMON with\n"
-	.string "your SUPER ROD.$"
+	.string "Go after the seafloor Pokémon with\n"
+	.string "your Super Rod.$"
 
