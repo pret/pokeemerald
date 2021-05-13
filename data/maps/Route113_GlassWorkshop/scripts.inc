@@ -326,7 +326,7 @@ Route113_GlassWorkshop_Text_GoCollectAshWithThis: @ 826F19D
 	.string "Go collect ashes with this, huff-puff.$"
 
 Route113_GlassWorkshop_Text_ExplainSootSack: @ 826F252
-	.string "Just take that SOOT SACK and walk\n"
+	.string "Just take that Soot Sack and walk\n"
 	.string "through piles of ash, huff-puff.\p"
 	.string "And it will fill up with the volcanic ash,\n"
 	.string "huff-puff.\p"
@@ -343,7 +343,7 @@ Route113_GlassWorkshop_Text_NotEnoughAshNeedX: @ 826F34E
 	.string "I can't make glass with this, huff-puff.\p"
 	.string "Let's see… {STR_VAR_1} is the number of steps\n"
 	.string "you'll need to walk for me to make you\l"
-	.string "a BLUE FLUTE, huff-puff.$"
+	.string "a Blue Flute, huff-puff.$"
 
 Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike: @ 826F40A
 	.string "Oh!\n"
@@ -383,7 +383,7 @@ Route113_GlassWorkshop_Text_IveFinishedGlassItem: @ 826F688
 
 Route113_GlassWorkshop_Text_NoRoomInBag: @ 826F6B7
 	.string "Oh?\n"
-	.string "You've no room in your BAG, huff-puff.\p"
+	.string "You've no room in your Bag, huff-puff.\p"
 	.string "I'll hold on to it, so come back later,\n"
 	.string "huff-puff.$"
 
@@ -394,7 +394,7 @@ Route113_GlassWorkshop_Text_NoRoomInPC: @ 826F715
 	.string "huff-puff.$"
 
 Route113_GlassWorkshop_Text_HaventGotYourSootSack: @ 826F772
-	.string "Hah? You haven't got your SOOT SACK\n"
+	.string "Hah? You haven't got your Soot Sack\n"
 	.string "with you, huff-puff.\p"
 	.string "You have to keep it with you to collect\n"
 	.string "volcanic ash, huff-puff.$"
