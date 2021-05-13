@@ -1020,7 +1020,7 @@ Route104_EventScript_Darian:: @ 81ED5D5
 
 Route104_Text_BrineyLivesInSeasideCottage: @ 81ED5EC
 	.string "That seaside cottage is where\n"
-	.string "MR. BRINEY lives.\p"
+	.string "Mr. Briney lives.\p"
 	.string "He was once a mighty sailor who never\n"
 	.string "feared the sea, however stormy.$"
 
@@ -1030,20 +1030,20 @@ Route104_Text_WhatsItLikeAtBottomOfSea: @ 81ED662
 	.string "of the sea?$"
 
 Route104_Text_ThrowBallAtWeakenedPokemon: @ 81ED6A2
-	.string "If you're going to throw a POKé BALL,\n"
-	.string "weaken the wild POKéMON first.\p"
+	.string "If you're going to throw a Poké Ball,\n"
+	.string "weaken the wild Pokémon first.\p"
 	.string "It will be easier to catch if it's been\n"
 	.string "poisoned, burned, or lulled to sleep.$"
 
 Route104_Text_OnlyThrowBallAtWildPokemon: @ 81ED735
 	.string "You're a thief if you try to steal\n"
-	.string "someone else's POKéMON.\p"
-	.string "You should throw POKé BALLS only at\n"
-	.string "wild POKéMON.$"
+	.string "someone else's Pokémon.\p"
+	.string "You should throw Poké Balls only at\n"
+	.string "wild Pokémon.$"
 
 Route104_Text_ImNotATrainer: @ 81ED7A2
-	.string "Oh, no, I'm not a TRAINER.\p"
-	.string "But that's right, if TRAINERS lock eyes,\n"
+	.string "Oh, no, I'm not a Trainer.\p"
+	.string "But that's right, if Trainers lock eyes,\n"
 	.string "it's a challenge to battle.\p"
 	.string "If you don't want to battle, stay out\n"
 	.string "of their sight.$"
@@ -1052,69 +1052,69 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 	.string "I like filling my mouth with seeds,\n"
 	.string "then spitting them out fast!\p"
 	.string "You can have this, so you try it out!\p"
-	.string "Use it on a POKéMON, and it will learn\n"
+	.string "Use it on a Pokémon, and it will learn\n"
 	.string "a move for firing seeds rapidly.$"
 
 Route104_Text_TMsAreOneTimeUse: @ 81ED8E7
 	.string "A word of advice!\p"
-	.string "A TM, TECHNICAL MACHINE, is good only\n"
+	.string "A TM, Technical Machine, is good only\n"
 	.string "for one-time use.\p"
 	.string "Once you use it, it's gone.\n"
 	.string "Think twice before using it!$"
 
 Route104_Text_DontNeedThisTakeIt: @ 81ED96A
-	.string "This FLOWER SHOP started selling\n"
+	.string "This Flower Shop started selling\n"
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
 	.string "shopping.\p"
-	.string "I don't need this WHITE HERB anymore.\n"
+	.string "I don't need this White Herb anymore.\n"
 	.string "Would you take it, please?$"
 
 Route104_Text_FlowerShopSellingSaplings: @ 81EDA0F
-	.string "This FLOWER SHOP started selling\n"
+	.string "This Flower Shop started selling\n"
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
 	.string "shopping. Where should I put them?$"
 
 Route104_Text_MrBrineysCottage: @ 81EDA8C
-	.string "MR. BRINEY'S COTTAGE$"
+	.string "Mr. Briney's Cottage$"
 
 Route104_Text_RouteSignPetalburg: @ 81EDAA1
-	.string "ROUTE 1O4\n"
-	.string "{RIGHT_ARROW} PETALBURG CITY$"
+	.string "Route 1O4\n"
+	.string "{RIGHT_ARROW} Petalburg City$"
 
 Route104_Text_RouteSignRustboro: @ 81EDABC
-	.string "ROUTE 1O4\n"
-	.string "{UP_ARROW} RUSTBORO CITY$"
+	.string "Route 1O4\n"
+	.string "{UP_ARROW} Rustboro City$"
 
 Route104_Text_PrettyPetalFlowShop: @ 81EDAD6
-	.string "PRETTY PETAL FLOWER SHOP$"
+	.string "Pretty Petal Flower Shop$"
 
 Route104_Text_TrainerTipsDoubleBattles: @ 81EDAEF
-	.string "TRAINER TIPS\p"
-	.string "In the HOENN region there are pairs\n"
-	.string "of TRAINERS who challenge others\l"
-	.string "for 2-on-2 POKéMON battles called\l"
-	.string "DOUBLE BATTLES.\p"
-	.string "In a DOUBLE BATTLE, the TRAINER must\n"
-	.string "send out two POKéMON, the one at the\l"
+	.string "Trainer Tips\p"
+	.string "In the Hoenn region there are pairs\n"
+	.string "of Trainers who challenge others\l"
+	.string "for 2-on-2 Pokémon battles called\l"
+	.string "Double Battles.\p"
+	.string "In a Double Battle, the Trainer must\n"
+	.string "send out two Pokémon, the one at the\l"
 	.string "left of the list and the top one.\l"
-	.string "Watch how POKéMON are lined up.$"
+	.string "Watch how Pokémon are lined up.$"
 
 Route104_Text_MayWeShouldRegister: @ 81EDBFF
-	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "DEVON upgraded your POKéNAV with\n"
-	.string "the MATCH CALL system, huh?\p"
+	.string "May: Oh, hi, {PLAYER}{KUN}!\p"
+	.string "Devon upgraded your Pokénav with\n"
+	.string "the Match Call system, huh?\p"
 	.string "We should register each other so we\n"
 	.string "can get in contact anytime.$"
 
 Route104_Text_RegisteredMay: @ 81EDC8F
-	.string "{PLAYER} registered MAY\n"
-	.string "in the POKéNAV.$"
+	.string "{PLAYER} registered May\n"
+	.string "in the Pokénav.$"
 
 Route104_Text_MayHowsYourPokedex: @ 81EDCB1
-	.string "MAY: Oh, by the way, {PLAYER}{KUN},\n"
-	.string "how's your POKéDEX coming along?$"
+	.string "May: Oh, by the way, {PLAYER}{KUN},\n"
+	.string "how's your Pokédex coming along?$"
 
 Route104_Text_MayMinesDecentLetsBattle: @ 81EDCED
 	.string "Mine's looking pretty decent.\n"
@@ -1122,17 +1122,17 @@ Route104_Text_MayMinesDecentLetsBattle: @ 81EDCED
 	.string "How about a little battle?$"
 
 Route104_Text_MayHaventRaisedPokemon: @ 81EDD2A
-	.string "MAY: Oh, what's the matter?\p"
+	.string "May: Oh, what's the matter?\p"
 	.string "Haven't you caught or raised your\n"
-	.string "POKéMON very much?\p"
-	.string "That's not very good for a TRAINER!$"
+	.string "Pokémon very much?\p"
+	.string "That's not very good for a Trainer!$"
 
 Route104_Text_MayLetsBattle: @ 81EDD9F
-	.string "MAY: So, what do you think?\n"
+	.string "May: So, what do you think?\n"
 	.string "How about a little battle here?$"
 
 Route104_Text_MayIntro: @ 81EDDDB
-	.string "MAY: You just became a TRAINER,\n"
+	.string "May: You just became a Trainer,\n"
 	.string "{PLAYER}{KUN}. I'm not going to lose!$"
 
 Route104_Text_MayDefeat: @ 81EDE18
@@ -1140,26 +1140,26 @@ Route104_Text_MayDefeat: @ 81EDE18
 	.string "You're better than I expected!$"
 
 Route104_Text_MayPostBattle: @ 81EDE3E
-	.string "MAY: I can tell you've gotten pretty\n"
-	.string "good with the way you handle POKéMON.\p"
+	.string "May: I can tell you've gotten pretty\n"
+	.string "good with the way you handle Pokémon.\p"
 	.string "But instead of only making them\n"
-	.string "battle, you should be like MR. BRINEY.\p"
+	.string "battle, you should be like Mr. Briney.\p"
 	.string "It's important to become friends with\n"
-	.string "POKéMON, too.$"
+	.string "Pokémon, too.$"
 
 Route104_Text_BrendanWeShouldRegister: @ 81EDF04
-	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
-	.string "Cool, you had DEVON install the MATCH\n"
-	.string "CALL system on your POKéNAV!\p"
+	.string "Brendan: Oh, hey, {PLAYER}!\p"
+	.string "Cool, you had Devon install the Match\n"
+	.string "CALL system on your Pokénav!\p"
 	.string "Let's register each other in our\n"
-	.string "POKéNAVS so we can keep in touch.$"
+	.string "Pokénavs so we can keep in touch.$"
 
 Route104_Text_RegisteredBrendan: @ 81EDFA0
-	.string "{PLAYER} registered BRENDAN\n"
-	.string "in the POKéNAV.$"
+	.string "{PLAYER} registered Brendan\n"
+	.string "in the Pokénav.$"
 
 Route104_Text_BrendanHowsYourPokedex: @ 81EDFC6
-	.string "BRENDAN: {PLAYER}, how's your POKéDEX?\n"
+	.string "Brendan: {PLAYER}, how's your Pokédex?\n"
 	.string "Have you filled in any pages yet?$"
 
 Route104_Text_BrendanDoingGreatLetsBattle: @ 81EE009
@@ -1168,25 +1168,25 @@ Route104_Text_BrendanDoingGreatLetsBattle: @ 81EE009
 	.string "a battle?$"
 
 Route104_Text_BrendanNoConfidence: @ 81EE04D
-	.string "BRENDAN: What's the matter? Don't have\n"
-	.string "any confidence in your POKéMON?$"
+	.string "Brendan: What's the matter? Don't have\n"
+	.string "any confidence in your Pokémon?$"
 
 Route104_Text_BrendanLetsBattle: @ 81EE094
-	.string "BRENDAN: What's up?\n"
+	.string "Brendan: What's up?\n"
 	.string "Want to have a battle with me?$"
 
 Route104_Text_BrendanIntro: @ 81EE0C7
-	.string "BRENDAN: I know you just became\n"
-	.string "a TRAINER, but I won't go easy!$"
+	.string "Brendan: I know you just became\n"
+	.string "a Trainer, but I won't go easy!$"
 
 Route104_Text_BrendanDefeat: @ 81EE107
 	.string "Hmm…\n"
 	.string "You're pretty good.$"
 
 Route104_Text_BrendanPostBattle: @ 81EE120
-	.string "BRENDAN: You've gotten pretty decent\n"
-	.string "at handling POKéMON.\p"
+	.string "Brendan: You've gotten pretty decent\n"
+	.string "at handling Pokémon.\p"
 	.string "But, you know, you shouldn't just be\n"
-	.string "making POKéMON battle.\p"
-	.string "Like MR. BRINEY, it's important to\n"
-	.string "become friends with your POKéMON.$"
+	.string "making Pokémon battle.\p"
+	.string "Like Mr. Briney, it's important to\n"
+	.string "become friends with your Pokémon.$"
