@@ -90,7 +90,7 @@ Route112_CableCarStation_Movement_ExitCableCar: @ 822AB80
 	step_end
 
 Route112_CableCarStation_Text_CableCarReadyGetOn: @ 822AB85
-	.string "The CABLE CAR is ready to go up.\n"
+	.string "The Cable Car is ready to go up.\n"
 	.string "Would you like to be on it?$"
 
 Route112_CableCarStation_Text_StepThisWay: @ 822ABC2
