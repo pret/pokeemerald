@@ -176,28 +176,28 @@ Route123_EventScript_RematchFernando:: @ 81F6407
 	end
 
 Route123_Text_LoveGrassMonsHaveAny: @ 81F641E
-	.string "I love GRASS-type POKéMON!\p"
-	.string "Do you have any GRASS-type POKéMON?$"
+	.string "I love Grass-type Pokémon!\p"
+	.string "Do you have any Grass-type Pokémon?$"
 
 Route123_Text_YouLikeGrassMonsTooHaveThis: @ 81F645D
 	.string "Oh?\p"
-	.string "You like GRASS-type POKéMON, too,\n"
+	.string "You like Grass-type Pokémon, too,\n"
 	.string "don't you?\p"
 	.string "I'm so happy, you can have this!\n"
 	.string "It's a token of our friendship.$"
 
 Route123_Text_CheckTreesWithMyGrassMon: @ 81F64CF
-	.string "I check trees with my GRASS-type\n"
-	.string "POKéMON. I'm like a tree doctor.$"
+	.string "I check trees with my Grass-type\n"
+	.string "Pokémon. I'm like a tree doctor.$"
 
 Route123_Text_RouteSign: @ 81F6511
-	.string "{RIGHT_ARROW} ROUTE 123\n"
-	.string "{LEFT_ARROW} ROUTE 118$"
+	.string "{RIGHT_ARROW} Route 123\n"
+	.string "{LEFT_ARROW} Route 118$"
 
 Route123_Text_RouteSignMtPyre: @ 81F6529
-	.string "{UP_ARROW} MT. PYRE\n"
+	.string "{UP_ARROW} Mt. Pyre\n"
 	.string "“Forbidden to the faint of heart.”$"
 
 Route123_Text_BerryMastersHouse: @ 81F6557
-	.string "BERRY MASTER'S HOUSE$"
+	.string "Berry Master's House$"
 
