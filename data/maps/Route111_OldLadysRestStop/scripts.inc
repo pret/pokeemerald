@@ -34,7 +34,7 @@ Route111_OldLadysRestStop_EventScript_DeclineRest:: @ 822A96E
 
 Route111_OldLadysRestStop_Text_RestUpHere: @ 822A978
 	.string "Oh, dear, dear.\n"
-	.string "Aren't your POKéMON exhausted?\p"
+	.string "Aren't your Pokémon exhausted?\p"
 	.string "If you'd like, rest up here.\n"
 	.string "That's a fine idea! You should do that.$"
 
@@ -44,7 +44,7 @@ Route111_OldLadysRestStop_Text_TakeYourTimeRestUp: @ 822A9EC
 
 Route111_OldLadysRestStop_Text_StillTiredTakeAnotherRest: @ 822AA16
 	.string "Oh, dear, dear.\n"
-	.string "Are your POKéMON still tired?\p"
+	.string "Are your Pokémon still tired?\p"
 	.string "You should take another rest here.\n"
 	.string "That's a fine idea. You should do that.$"
 
