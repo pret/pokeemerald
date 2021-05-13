@@ -20,18 +20,18 @@ MauvilleCity_House1_EventScript_ReceivedRockSmash:: @ 820F9A5
 
 MauvilleCity_House1_Text_ImRockSmashDudeTakeThis: @ 820F9AF
 	.string "Woohoo!\p"
-	.string "I hear people call me the ROCK SMASH\n"
+	.string "I hear people call me the Rock Smash\n"
 	.string "GUY, but I find that sort of degrading.\p"
 	.string "I think I deserve a bit more respect,\n"
-	.string "like maybe the ROCK SMASH DUDE.\p"
+	.string "like maybe the Rock Smash Dude.\p"
 	.string "Woohoo!\p"
-	.string "Anyways, your POKéMON look pretty\n"
+	.string "Anyways, your Pokémon look pretty\n"
 	.string "strong.\p"
 	.string "I like that!\n"
-	.string "Here, take this HIDDEN MACHINE!$"
+	.string "Here, take this Hidden Machine!$"
 
 MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
-	.string "That HM contains ROCK SMASH.\p"
+	.string "That HM contains Rock Smash.\p"
 	.string "If you come across large boulders\n"
 	.string "that block your path…\p"
 	.string "Well, use that HM move and smash\n"
@@ -40,7 +40,7 @@ MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
 	.string "Woohoo!$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
-	.string "Oh, yes, if you smash a rock, a POKéMON\n"
+	.string "Oh, yes, if you smash a rock, a Pokémon\n"
 	.string "could come flying out of hiding.\p"
 	.string "Woohoo!$"
 
