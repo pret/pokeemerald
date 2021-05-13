@@ -30,21 +30,21 @@ PacifidlogTown_House4_EventScript_No:: @ 8203F89
 	end
 
 PacifidlogTown_House4_Text_PeopleSawHighFlyingPokemon: @ 8203F93
-	.string "People were saying they saw a POKéMON\n"
-	.string "flying high above HOENN.\p"
+	.string "People were saying they saw a Pokémon\n"
+	.string "flying high above Hoenn.\p"
 	.string "Is it flying around all the time?\n"
 	.string "Doesn't it need to rest somewhere?$"
 
 PacifidlogTown_House4_Text_SkyPokemon: @ 8204017
-	.string "A sky POKéMON!\n"
-	.string "A sky POKéMON!$"
+	.string "A sky Pokémon!\n"
+	.string "A sky Pokémon!$"
 
 PacifidlogTown_House4_Text_WhereDidYouComeFrom: @ 8204035
 	.string "Where did you come from?$"
 
 PacifidlogTown_House4_Text_YesTown: @ 820404E
 	.string "Yes?\n"
-	.string "YES TOWN?\p"
+	.string "Yes Town?\p"
 	.string "I've never heard of a place like that.$"
 
 PacifidlogTown_House4_Text_YouHaveToComeFromSomewhere: @ 8204084
