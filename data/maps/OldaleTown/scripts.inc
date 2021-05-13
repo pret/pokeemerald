@@ -355,53 +355,53 @@ OldaleTown_Text_SavingMyProgress: @ 81E918E
 
 OldaleTown_Text_IWorkAtPokemonMart: @ 81E91C0
 	.string "Hi!\n"
-	.string "I work at a POKéMON MART.\p"
+	.string "I work at a Pokémon Mart.\p"
 	.string "Can I get you to come with me?$"
 
 OldaleTown_Text_ThisIsAPokemonMart: @ 81E91FD
-	.string "This is a POKéMON MART.\n"
+	.string "This is a Pokémon Mart.\n"
 	.string "Just look for our blue roof.\p"
 	.string "We sell a variety of goods including\n"
-	.string "POKé BALLS for catching POKéMON.\p"
+	.string "Poké Balls for catching Pokémon.\p"
 	.string "Here, I'd like you to have this as\n"
 	.string "a promotional item.$"
 
 OldaleTown_Text_PotionExplanation: @ 81E92AF
-	.string "A POTION can be used anytime, so it's\n"
-	.string "even more useful than a POKéMON CENTER\l"
+	.string "A Potion can be used anytime, so it's\n"
+	.string "even more useful than a Pokémon Center\l"
 	.string "in certain situations.$"
 
 OldaleTown_Text_WaitDontComeInHere: @ 81E9313
 	.string "Aaaaah! Wait!\n"
 	.string "Please don't come in here.\p"
 	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
+	.string "a rare Pokémon!\p"
 	.string "Wait until I finish sketching\n"
 	.string "them, okay?$"
 
 OldaleTown_Text_DiscoveredFootprints: @ 81E939A
 	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
+	.string "a rare Pokémon!\p"
 	.string "Wait until I finish sketching\n"
 	.string "them, okay?$"
 
 OldaleTown_Text_FinishedSketchingFootprints: @ 81E93F8
 	.string "I finished sketching the footprints of\n"
-	.string "a rare POKéMON.\p"
+	.string "a rare Pokémon.\p"
 	.string "But it turns out they were only my\n"
 	.string "own footprints…$"
 
 OldaleTown_Text_MayLetsGoBack: @ 81E9462
-	.string "MAY: {PLAYER}{KUN}!\n"
+	.string "May: {PLAYER}{KUN}!\n"
 	.string "Over here!\l"
 	.string "Let's hurry home!$"
 
 OldaleTown_Text_BrendanLetsGoBack: @ 81E948A
-	.string "BRENDAN: I'm heading back to my dad's\n"
-	.string "LAB now.\l"
+	.string "Brendan: I'm heading back to my dad's\n"
+	.string "Lab now.\l"
 	.string "{PLAYER}, you should hustle back, too.$"
 
 OldaleTown_Text_CitySign: @ 81E94DA
-	.string "OLDALE TOWN\n"
+	.string "Oldale Town\n"
 	.string "“Where things start off scarce.”$"
 
