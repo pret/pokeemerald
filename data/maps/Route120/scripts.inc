@@ -388,7 +388,7 @@ Route120_EventScript_Callie:: @ 81F5981
 	end
 
 Route120_Text_StevenGreeting: @ 81F5998
-	.string "STEVEN: Hm? {PLAYER}{KUN}, hi.\n"
+	.string "Steven: Hm? {PLAYER}{KUN}, hi.\n"
 	.string "It's been a while.\p"
 	.string "There's something here that you can't\n"
 	.string "see, right?\p"
@@ -397,40 +397,40 @@ Route120_Text_StevenGreeting: @ 81F5998
 	.string "No, no. Rather than describing it,\n"
 	.string "I should just show you.\l"
 	.string "That would be more fun.\p"
-	.string "{PLAYER}{KUN}, are your POKéMON ready for\n"
+	.string "{PLAYER}{KUN}, are your Pokémon ready for\n"
 	.string "battle?$"
 
 Route120_Text_StevenIllWaitHere: @ 81F5AAC
-	.string "STEVEN: No?\p"
+	.string "Steven: No?\p"
 	.string "I'll wait here, so you can get ready.$"
 
 Route120_Text_StevenReadyForBattle: @ 81F5ADE
-	.string "STEVEN: {PLAYER}{KUN}, are your POKéMON\n"
+	.string "Steven: {PLAYER}{KUN}, are your Pokémon\n"
 	.string "ready for battle?$"
 
 Route120_Text_StevenShowMeYourPower: @ 81F5B0F
-	.string "STEVEN: {PLAYER}{KUN}, show me your true\n"
-	.string "power as a TRAINER!$"
+	.string "Steven: {PLAYER}{KUN}, show me your true\n"
+	.string "power as a Trainer!$"
 
 Route120_Text_StevenUsedDevonScope: @ 81F5B43
-	.string "STEVEN used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
+	.string "Steven used the Devon Scope.\p"
+	.string "An invisible Pokémon became completely\n"
 	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
+	.string "The startled Pokémon attacked!$"
 
 Route120_Text_StevenGiveDevonScope: @ 81F5BAF
-	.string "STEVEN: I see…\n"
+	.string "Steven: I see…\n"
 	.string "Your battle style is intriguing.\p"
-	.string "Your POKéMON have obviously grown\n"
-	.string "since I first met you in DEWFORD.\p"
+	.string "Your Pokémon have obviously grown\n"
+	.string "since I first met you in Dewford.\p"
 	.string "I'd like you to have this\n"
-	.string "DEVON SCOPE.\p"
+	.string "Devon Scope.\p"
 	.string "Who knows, there may be other\n"
-	.string "concealed POKéMON.$"
+	.string "concealed Pokémon.$"
 
 Route120_Text_StevenGoodbye: @ 81F5C7B
-	.string "STEVEN: {PLAYER}{KUN}.\p"
-	.string "I enjoy seeing POKéMON and TRAINERS\n"
+	.string "Steven: {PLAYER}{KUN}.\p"
+	.string "I enjoy seeing Pokémon and Trainers\n"
 	.string "who strive together.\p"
 	.string "I think you're doing great.\p"
 	.string "Well, let's meet again somewhere.$"
@@ -440,18 +440,18 @@ Kecleon_Text_SomethingUnseeable: @ 81F5D00
 
 Kecleon_Text_WantToUseDevonScope: @ 81F5D23
 	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
+	.string "Want to use the Devon Scope?$"
 
 Kecleon_Text_UseDevonScopeMonAttacked: @ 81F5D63
-	.string "{PLAYER} used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
+	.string "{PLAYER} used the Devon Scope.\p"
+	.string "An invisible Pokémon became completely\n"
 	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
+	.string "The startled Pokémon attacked!$"
 
 Route120_Text_RouteSignFortree: @ 81F5DCB
-	.string "ROUTE 120\n"
-	.string "{LEFT_ARROW} FORTREE CITY$"
+	.string "Route 120\n"
+	.string "{LEFT_ARROW} Fortree City$"
 
 Route120_Text_RouteSign121: @ 81F5DE4
-	.string "{RIGHT_ARROW} ROUTE 121\n"
-	.string "{LEFT_ARROW} ROUTE 120$"
+	.string "{RIGHT_ARROW} Route 121\n"
+	.string "{LEFT_ARROW} Route 120$"
