@@ -291,7 +291,7 @@ Route110_TrickHouseEnd_Text_AllNightToShoveBoulders: @ 826B223
 	.string "one, two, three places!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls: @ 826B293
-	.string "It took me all night to make MECHADOLLS\n"
+	.string "It took me all night to make Mechadolls\n"
 	.string "and another to think up the quiz…\p"
 	.string "You're almost my equal in greatness by\n"
 	.string "one, two places!$"
@@ -330,7 +330,7 @@ Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent: @ 826B485
 	.string "that is myself, I demand that you take\l"
 	.string "this keepsake!\p"
 	.string "Actually there are two--\n"
-	.string "a RED TENT and a BLUE TENT.\l"
+	.string "a Red Tent and a Blue Tent.\l"
 	.string "Which do you prefer?$"
 
 Route110_TrickHouseEnd_Text_NoRoomInPC: @ 826B615
