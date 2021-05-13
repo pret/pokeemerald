@@ -844,6 +844,15 @@
 #define HG_SEQ_GS_OTSUKIMI_EVENT     825 // Mt. Moon
 #define HG_SEQ_GS_R_9_01             826 // Route 1
 #define HG_SEQ_GS_T_MASARA           827 // Pallet Town
+#define HG_SEQ_GS_OHKIDO             828 // Professor Oak
+#define HG_SEQ_ME_HYOUKA6            829 // Pokédex Evaluation... Complete!
+#define HG_SEQ_GS_EYE_K_SHOUJO       830 // Trainers' Eyes Meet (Girl 2)
+#define HG_SEQ_GS_VS_TRAINER_KANTO   831 // Battle! (Trainer Battle - Kanto Version)
+#define HG_SEQ_GS_T_GUREN            832 // Cinnabar Island
+#define HG_SEQ_GS_SAFARI_ROAD        833 // Route 47
+#define HG_SEQ_GS_SAFARI_HOUSE       834 // Safari Zone Gate
+#define HG_SEQ_GS_SAFARI_FIELD       835 // Safari Zone
+#define HG_SEQ_GS_RADIO_VARIETY      836 // Pokégear Radio: Variety Channel
 
 // Black & White Music
 

@@ -2156,3 +2156,30 @@ $(MID_SUBDIR)/hg_seq_gs_r_9_01.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_gs_t_masara.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_gs_ohkido.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V100
+
+$(MID_SUBDIR)/hg_seq_me_hyouka6.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V092 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_eye_k_shoujo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097
+
+$(MID_SUBDIR)/hg_seq_gs_vs_trainer_kanto.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V119
+
+$(MID_SUBDIR)/hg_seq_gs_t_guren.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V075
+
+$(MID_SUBDIR)/hg_seq_gs_safari_road.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V073
+
+$(MID_SUBDIR)/hg_seq_gs_safari_house.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V079
+
+$(MID_SUBDIR)/hg_seq_gs_safari_field.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V087
+
+$(MID_SUBDIR)/hg_seq_gs_radio_variety.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V073

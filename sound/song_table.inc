@@ -829,6 +829,15 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_otsukimi_event, 0, 0
 	song hg_seq_gs_r_9_01, 0, 0
 	song hg_seq_gs_t_masara, 0, 0
+	song hg_seq_gs_ohkido, 0, 0
+	song hg_seq_me_hyouka6, 2, 2
+	song hg_seq_gs_eye_k_shoujo, 0, 0
+	song hg_seq_gs_vs_trainer_kanto, 0, 0
+	song hg_seq_gs_t_guren, 0, 0
+	song hg_seq_gs_safari_road, 0, 0
+	song hg_seq_gs_safari_house, 0, 0
+	song hg_seq_gs_safari_field, 0, 0
+	song hg_seq_gs_radio_variety, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

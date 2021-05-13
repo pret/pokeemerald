@@ -1521,6 +1521,15 @@ SECTIONS {
         sound/songs/midi/hg_seq_gs_otsukimi_event.o(.rodata);
         sound/songs/midi/hg_seq_gs_r_9_01.o(.rodata);
         sound/songs/midi/hg_seq_gs_t_masara.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ohkido.o(.rodata);
+        sound/songs/midi/hg_seq_me_hyouka6.o(.rodata);
+        sound/songs/midi/hg_seq_gs_eye_k_shoujo.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_trainer_kanto.o(.rodata);
+        sound/songs/midi/hg_seq_gs_t_guren.o(.rodata);
+        sound/songs/midi/hg_seq_gs_safari_road.o(.rodata);
+        sound/songs/midi/hg_seq_gs_safari_house.o(.rodata);
+        sound/songs/midi/hg_seq_gs_safari_field.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_variety.o(.rodata);
     } =0
 
     lib_rodata :
