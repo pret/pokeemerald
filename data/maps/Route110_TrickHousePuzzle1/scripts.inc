@@ -41,13 +41,13 @@ Route110_TrickHousePuzzle1_EventScript_Robin:: @ 826B976
 Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened:: @ 826B98D
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is fabulous.”\n"
+	.string "“Trick Master is fabulous.”\n"
 	.string "… … … … … … … …\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle1_Text_SallyIntro: @ 826B9FB
 	.string "I'll hack and slash my way to victory\n"
-	.string "with the CUT we just learned!$"
+	.string "with the Cut we just learned!$"
 
 Route110_TrickHousePuzzle1_Text_SallyDefeat: @ 826BA3F
 	.string "Why are you so serious?$"
@@ -68,7 +68,7 @@ Route110_TrickHousePuzzle1_Text_EddiePostBattle: @ 826BAC3
 	.string "now even more lost… I can't get out…$"
 
 Route110_TrickHousePuzzle1_Text_RobinIntro: @ 826BB10
-	.string "Just who is the TRICK MASTER?$"
+	.string "Just who is the Trick Master?$"
 
 Route110_TrickHousePuzzle1_Text_RobinDefeat: @ 826BB2E
 	.string "I lost while I was lost in thought!$"
