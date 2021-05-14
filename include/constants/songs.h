@@ -869,6 +869,17 @@
 #define HG_SEQ_GS_PT_END             850 // Pokéathlon: Medal Ceremony
 #define HG_SEQ_GS_PT_VICTORY         851 // Pokéathlon: Winner!
 #define HG_SEQ_GS_WIFI_PRESENT       852 // Mystery Gift
+#define HG_SEQ_GS_BATTLETOWER2       853 // Battle Tower Reception Desk
+#define HG_SEQ_GS_BATTLETOWER        854 // Battle Tower (Johto)
+#define HG_SEQ_ME_BPGET              855 // Received Battle Points!
+#define HG_SEQ_GS_BF_FACTORY         856 // Battle Factory
+#define HG_SEQ_GS_BF_STAGE           857 // Battle Hall
+#define HG_SEQ_GS_BF_ROULETTE        858 // Battle Arcade
+#define HG_SEQ_ME_ROULETTE           859 // Received Battle Points in the Battle Arcade!
+#define HG_SEQ_GS_BF_CASTLE          860 // Battle Castle
+#define HG_SEQ_ME_CASTLE             861 // Received Castle Points!
+#define HG_SEQ_GS_BA_BRAIN           862 // Battle! (Frontier Brain)
+#define HG_SEQ_GS_WINBRAIN           863 // Victory! (Frontier Brain)
 
 // Black & White Music
 

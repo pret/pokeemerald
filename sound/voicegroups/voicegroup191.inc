@@ -15,7 +15,7 @@ voicegroup191:: @ DPPt main
 	voice_keysplit voicegroup005, KeySplitTable12    @ marimba
 	voice_keysplit voicegroup005, KeySplitTable13    @ xylophone
 	voice_keysplit voicegroup005, KeySplitTable14    @ tubular bell
-	voice_keysplit voicegroup005, KeySplitTable38    @ trinity piano
+	voice_keysplit voicegroup193, KeySplitTable38    @ trinity piano
 	voice_keysplit_all voicegroup007				 @ synth kick + snare
 	voice_keysplit voicegroup005, KeySplitTable15    @ rotary organ
 	voice_keysplit voicegroup005, KeySplitTable16    @ straight organ
@@ -40,40 +40,40 @@ voicegroup191:: @ DPPt main
 	voice_directsound 60, 0, DirectSoundWaveData_dp_slapbass_c1_16, 255, 0, 255, 216
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass1_c2_16, 255, 1, 255, 196
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass2_c1_16, 255, 0, 255, 222
-	voice_keysplit voicegroup005, KeySplitTable23    @ violin
+	voice_keysplit voicegroup193, KeySplitTable23    @ violin
 	voice_directsound 60, 0, DirectSoundWaveData_dp_oct_g3_16, 255, 235, 255, 212
 	voice_square_2_alt 60, 0, 2, 0, 7, 10, 0
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_wind, 37, 244, 155, 226
 	voice_directsound 60, 0, DirectSoundWaveData_dp_explosion, 37, 255, 0, 246
-	voice_keysplit voicegroup005, KeySplitTable24    @ pizzicato
-	voice_keysplit voicegroup005, KeySplitTable25    @ harp
-	voice_keysplit voicegroup005, KeySplitTable26    @ timpani 1
-	voice_keysplit voicegroup005, KeySplitTable27    @ strings
+	voice_keysplit voicegroup193, KeySplitTable24    @ pizzicato
+	voice_keysplit voicegroup193, KeySplitTable25    @ harp
+	voice_keysplit voicegroup193, KeySplitTable26    @ timpani 1
+	voice_keysplit voicegroup193, KeySplitTable27    @ strings
 	voice_directsound 60, 0, DirectSoundWaveData_dp_octlow_cs2_16, 255, 200, 255, 196
 	voice_directsound 60, 0, DirectSoundWaveData_dp_octlowbra_b2_16, 255, 200, 255, 226
-	voice_keysplit voicegroup005, KeySplitTable28    @ timpani 2
+	voice_keysplit voicegroup193, KeySplitTable28    @ timpani 2
 	voice_square_2_alt 60, 0, 2, 0, 7, 8, 2
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_square_wave, 255, 250, 0, 171 @ shift up by 1 octave
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_bubbles, 254, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_octhit_c2_16, 255, 200, 255, 222
-	voice_keysplit voicegroup005, KeySplitTable29    @ trumpets 1
-	voice_keysplit voicegroup005, KeySplitTable30    @ trombone
-	voice_keysplit voicegroup005, KeySplitTable31    @ tuba
-	voice_keysplit voicegroup005, KeySplitTable32    @ trumpets 2
-	voice_keysplit voicegroup005, KeySplitTable33    @ french horns
-	voice_keysplit voicegroup005, KeySplitTable34    @ distortion guitar 2
+	voice_keysplit voicegroup193, KeySplitTable29    @ trumpets 1
+	voice_keysplit voicegroup193, KeySplitTable30    @ trombone
+	voice_keysplit voicegroup193, KeySplitTable31    @ tuba
+	voice_keysplit voicegroup193, KeySplitTable32    @ trumpets 2
+	voice_keysplit voicegroup193, KeySplitTable33    @ french horns
+	voice_keysplit voicegroup193, KeySplitTable34    @ distortion guitar 2
 	voice_square_2_alt 60, 0, 1, 0, 6, 6, 2
 	voice_square_2_alt 60, 0, 0, 0, 6, 6, 2
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass_c1_16, 255, 1, 255, 216
 	voice_directsound 60, 0, DirectSoundWaveData_dp_altosax_c3_16, 255, 219, 252, 196
-	voice_keysplit voicegroup005, KeySplitTable35    @ upright bass 2
+	voice_keysplit voicegroup193, KeySplitTable35    @ upright bass 2
 	voice_square_2_alt 60, 0, 2, 0, 6, 6, 2
 	voice_directsound 60, 0, DirectSoundWaveData_dp_oboe_c3_16, 255, 243, 127, 216
 	voice_noise_alt 60, 0, 0, 0, 3, 0, 1
 	voice_square_2_alt 60, 0, 1, 1, 2, 6, 2
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sy_clarinet_c3_16, 255, 243, 159, 216
 	voice_square_2_alt 60, 0, 2, 0, 3, 6, 0
-	voice_keysplit voicegroup005, KeySplitTable36    @ flute
+	voice_keysplit voicegroup193, KeySplitTable36    @ flute
 	voice_directsound 60, 0, DirectSoundWaveData_dp_woodpat_c4_16, 100, 247, 78, 136
 	voice_directsound 60, 0, DirectSoundWaveData_dp_basschoir36, 255, 200, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_dp_tenorchoir48, 255, 200, 255, 171
@@ -104,6 +104,6 @@ voicegroup191:: @ DPPt main
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup005, KeySplitTable39    @ music box (platinum only)
-	voice_keysplit voicegroup005, KeySplitTable37    @ banjo
+	voice_keysplit voicegroup193, KeySplitTable39    @ music box (platinum only)
+	voice_keysplit voicegroup193, KeySplitTable37    @ banjo
 

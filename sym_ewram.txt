@@ -149,4 +149,4 @@
 	.include "src/trainer_hill.o"
 	.include "src/rayquaza_scene.o"
 gSoundInfo:
-    .space 0xFB0
+    .space 0x1050

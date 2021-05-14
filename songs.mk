@@ -2231,3 +2231,36 @@ $(MID_SUBDIR)/hg_seq_gs_pt_victory.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_gs_wifi_present.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V087
+
+$(MID_SUBDIR)/hg_seq_gs_battletower2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V070
+
+$(MID_SUBDIR)/hg_seq_gs_battletower.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097
+
+$(MID_SUBDIR)/hg_seq_me_bpget.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V107 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_bf_factory.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V077
+
+$(MID_SUBDIR)/hg_seq_gs_bf_stage.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V080
+
+$(MID_SUBDIR)/hg_seq_gs_bf_roulette.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V077
+
+$(MID_SUBDIR)/hg_seq_me_roulette.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V098 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_bf_castle.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097
+
+$(MID_SUBDIR)/hg_seq_me_castle.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V086 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_ba_brain.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V100
+
+$(MID_SUBDIR)/hg_seq_gs_winbrain.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097

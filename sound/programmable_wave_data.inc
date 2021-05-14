@@ -81,3 +81,6 @@ ProgrammableWaveData_sq50half:: @ 50% square half
 
 ProgrammableWaveData_sq50oct:: @ 50% square oct lower
 	.incbin "sound/programmable_wave_samples/sq50oct.pcm"
+
+ProgrammableWaveData_sq37half:: @ 37.5% square half
+	.incbin "sound/programmable_wave_samples/sq37half.pcm"

@@ -854,6 +854,17 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_pt_end, 0, 0
 	song hg_seq_gs_pt_victory, 0, 0
 	song hg_seq_gs_wifi_present, 0, 0
+	song hg_seq_gs_battletower2, 0, 0
+	song hg_seq_gs_battletower, 0, 0
+	song hg_seq_me_bpget, 2, 2
+	song hg_seq_gs_bf_factory, 0, 0
+	song hg_seq_gs_bf_stage, 0, 0
+	song hg_seq_gs_bf_roulette, 0, 0
+	song hg_seq_me_roulette, 2, 2
+	song hg_seq_gs_bf_castle, 0, 0
+	song hg_seq_me_castle, 2, 2
+	song hg_seq_gs_ba_brain, 0, 0
+	song hg_seq_gs_winbrain, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

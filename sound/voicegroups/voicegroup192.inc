@@ -1,31 +1,31 @@
 	.align 2
 voicegroup192:: @ HGSS main
-	voice_keysplit voicegroup005, KeySplitTable40    @ piano
-	voice_keysplit voicegroup005, KeySplitTable41    @ piano 2
-	voice_keysplit voicegroup005, KeySplitTable42    @ piano octave
-	voice_keysplit voicegroup005, KeySplitTable43    @ rhodes 1
-	voice_keysplit voicegroup005, KeySplitTable44    @ rhodes 2
-	voice_keysplit voicegroup005, KeySplitTable45    @ vibraphone
-	voice_keysplit voicegroup005, KeySplitTable46    @ marimba
-	voice_keysplit voicegroup005, KeySplitTable47    @ xylophone
-	voice_keysplit voicegroup005, KeySplitTable48    @ tubular bell
-	voice_keysplit voicegroup005, KeySplitTable49    @ glockenspiel
-	voice_keysplit voicegroup005, KeySplitTable50    @ music box
-	voice_keysplit voicegroup005, KeySplitTable51    @ drawbar organ
-	voice_keysplit voicegroup005, KeySplitTable52    @ jazz organ
-	voice_keysplit voicegroup005, KeySplitTable53    @ accordion
-	voice_keysplit voicegroup005, KeySplitTable54    @ nylon guitar
-	voice_keysplit voicegroup005, KeySplitTable55    @ martin guitar
-	voice_keysplit voicegroup005, KeySplitTable56    @ distortion guitar 1
-	voice_keysplit voicegroup005, KeySplitTable57    @ distortion guitar 2
-	voice_keysplit voicegroup005, KeySplitTable58    @ clean guitar
-	voice_keysplit voicegroup005, KeySplitTable59    @ upright bass
-	voice_keysplit voicegroup005, KeySplitTable60    @ fingered bass
+	voice_keysplit voicegroup193, KeySplitTable40    @ piano
+	voice_keysplit voicegroup193, KeySplitTable41    @ piano 2
+	voice_keysplit voicegroup193, KeySplitTable42    @ piano octave
+	voice_keysplit voicegroup193, KeySplitTable43    @ rhodes 1
+	voice_keysplit voicegroup193, KeySplitTable44    @ rhodes 2
+	voice_keysplit voicegroup193, KeySplitTable45    @ vibraphone
+	voice_keysplit voicegroup193, KeySplitTable46    @ marimba
+	voice_keysplit voicegroup193, KeySplitTable47    @ xylophone
+	voice_keysplit voicegroup193, KeySplitTable48    @ tubular bell
+	voice_keysplit voicegroup193, KeySplitTable49    @ glockenspiel
+	voice_keysplit voicegroup193, KeySplitTable50    @ music box
+	voice_keysplit voicegroup193, KeySplitTable51    @ drawbar organ
+	voice_keysplit voicegroup193, KeySplitTable52    @ jazz organ
+	voice_keysplit voicegroup193, KeySplitTable53    @ accordion
+	voice_keysplit voicegroup193, KeySplitTable54    @ nylon guitar
+	voice_keysplit voicegroup193, KeySplitTable55    @ martin guitar
+	voice_keysplit voicegroup193, KeySplitTable56    @ distortion guitar 1
+	voice_keysplit voicegroup193, KeySplitTable57    @ distortion guitar 2
+	voice_keysplit voicegroup193, KeySplitTable58    @ clean guitar
+	voice_keysplit voicegroup193, KeySplitTable59    @ upright bass
+	voice_keysplit voicegroup193, KeySplitTable60    @ fingered bass
 	voice_directsound 60, 0, DirectSoundWaveData_dp_slapbass_c1_16, 255, 0, 255, 192
-	voice_keysplit voicegroup005, KeySplitTable61    @ synth bass
-	voice_keysplit voicegroup005, KeySplitTable62    @ strings
-	voice_keysplit voicegroup005, KeySplitTable63    @ violin
-	voice_keysplit voicegroup005, KeySplitTable64    @ cello
+	voice_keysplit voicegroup193, KeySplitTable61    @ synth bass
+	voice_keysplit voicegroup193, KeySplitTable62    @ strings
+	voice_keysplit voicegroup193, KeySplitTable63    @ violin
+	voice_keysplit voicegroup193, KeySplitTable64    @ cello
 	voice_keysplit voicegroup006, KeySplitTable65    @ pizzicato
 	voice_keysplit voicegroup006, KeySplitTable66    @ harp
 	voice_keysplit voicegroup006, KeySplitTable67    @ timpani
@@ -35,7 +35,7 @@ voicegroup192:: @ HGSS main
 	voice_keysplit voicegroup006, KeySplitTable71    @ french horns
 	voice_keysplit voicegroup006, KeySplitTable72    @ oboe
 	voice_keysplit voicegroup006, KeySplitTable73    @ clarinet
-	voice_keysplit voicegroup005, KeySplitTable74    @ flute
+	voice_keysplit voicegroup193, KeySplitTable74    @ flute
 	voice_keysplit voicegroup006, KeySplitTable75    @ bassoon
 	voice_keysplit voicegroup006, KeySplitTable76    @ orchestra hit
 	voice_keysplit voicegroup006, KeySplitTable77    @ square wave
@@ -58,12 +58,12 @@ voicegroup192:: @ HGSS main
 	voice_directsound 60, 0, DirectSoundWaveData_dp_whistle_c5_16, 255, 246, 78, 192
 	voice_directsound 60, 0, DirectSoundWaveData_dp_reverscyn_16, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_org5_c3_16, 255, 167, 235, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_sq37half, 0, 2, 11, 1
 	voice_square_2_alt 60, 0, 0, 0, 2, 11, 1 @ END OF BASIC BANK
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 197, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 197, 255, 171
 	voice_keysplit_all voicegroup007				 @ shift all D's up to D#
-	voice_keysplit voicegroup005, KeySplitTable26    @ DPPt timpani
+	voice_keysplit voicegroup193, KeySplitTable26    @ DPPt timpani
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass1_c2_16, 255, 1, 255, 192
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass2_c1_16, 255, 0, 255, 220
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sawtoothlead60, 255, 197, 255, 171
@@ -82,7 +82,10 @@ voicegroup192:: @ HGSS main
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synthsnare, 255, 0, 255, 171
 	voice_keysplit voicegroup006, KeySplitTable80    @ piano (national park)
 	voice_directsound 60, 0, DirectSoundWaveData_dp_tom1_16, 255, 0, 255, 1
-	voice_keysplit voicegroup005, KeySplitTable29    @ dp trumpets (arceus)
-	voice_keysplit voicegroup005, KeySplitTable30    @ dp trombone (arceus)
-	voice_square_1_alt 60, 0, 0, 2, 0, 2, 6, 2 @ double up of 051
+	voice_keysplit voicegroup193, KeySplitTable29    @ dp trumpets (arceus)
+	voice_keysplit voicegroup193, KeySplitTable30    @ dp trombone (arceus)
+	voice_square_1_alt 60, 0, 0, 2, 0, 2, 6, 2									 @ double up of 051
+	voice_square_1_alt 60, 0, 0, 2, 0, 2, 2, 0									 @ double up of 048
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_sq50half, 0, 2, 2, 0 @ triple up of 048
+	voice_directsound 60, 0, DirectSoundWaveData_puresquare_50, 255, 242, 25, 0  @ 4x and up of 048
 

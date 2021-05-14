@@ -1546,6 +1546,17 @@ SECTIONS {
         sound/songs/midi/hg_seq_gs_pt_end.o(.rodata);
         sound/songs/midi/hg_seq_gs_pt_victory.o(.rodata);
         sound/songs/midi/hg_seq_gs_wifi_present.o(.rodata);
+        sound/songs/midi/hg_seq_gs_battletower2.o(.rodata);
+        sound/songs/midi/hg_seq_gs_battletower.o(.rodata);
+        sound/songs/midi/hg_seq_me_bpget.o(.rodata);
+        sound/songs/midi/hg_seq_gs_bf_factory.o(.rodata);
+        sound/songs/midi/hg_seq_gs_bf_stage.o(.rodata);
+        sound/songs/midi/hg_seq_gs_bf_roulette.o(.rodata);
+        sound/songs/midi/hg_seq_me_roulette.o(.rodata);
+        sound/songs/midi/hg_seq_gs_bf_castle.o(.rodata);
+        sound/songs/midi/hg_seq_me_castle.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ba_brain.o(.rodata);
+        sound/songs/midi/hg_seq_gs_winbrain.o(.rodata);
     } =0
 
     lib_rodata :

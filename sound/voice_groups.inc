@@ -190,5 +190,6 @@
 .include "sound/voicegroups/voicegroup188.inc"
 .include "sound/voicegroups/voicegroup189.inc"
 .include "sound/voicegroups/voicegroup190.inc"
-.include "sound/voicegroups/voicegroup191.inc"
-.include "sound/voicegroups/voicegroup192.inc"
+.include "sound/voicegroups/voicegroup191.inc" @ DPPt main
+.include "sound/voicegroups/voicegroup192.inc" @ HGSS main
+.include "sound/voicegroups/voicegroup193.inc"
