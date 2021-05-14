@@ -612,10 +612,6 @@ u16 determineEvolution(struct Pokemon *mon)
                 targetSpecies = SPECIES_UMBREON;
             return targetSpecies;
         }
-        else // not the right level
-        {
-            return targetSpecies;
-        }
     }
 
     for (i = 0; i < 5; i++)
