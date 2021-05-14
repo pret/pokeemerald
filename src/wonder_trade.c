@@ -121,13 +121,11 @@ u16 GetValidWonderTradeItem(u16 item);
 static u16 PickRandomSpecies() // picks only base forms
 {
 #ifdef POKEMON_EXPANSION
-    u16 species = Random() % 422;
+    u16 species = Random() % 423;
 #else
     u16 species = Random() % 180;
 #endif
     species = returnValidSpecies(species);
-    if (species == 0 || species == 0xFFFF)
-        species = 1;
     return species;
 }
 
@@ -610,10 +608,6 @@ u16 determineEvolution(struct Pokemon *mon)
                 targetSpecies = SPECIES_ESPEON;
             else if (eeveelution == 4)
                 targetSpecies = SPECIES_UMBREON;
-            return targetSpecies;
-        }
-        else // not the right level
-        {
             return targetSpecies;
         }
     }
