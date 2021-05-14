@@ -889,7 +889,7 @@ RecordCorner_EventScript_AlreadyMixed:: @ 82774E0
 	closemessage
 	end
 
-EventScript_ConfirmLeaveTradeRoom:: @ 82774EF
+EventScript_ConfirmLeaveCableClubRoom:: @ 82774EF
 	msgbox Text_TerminateLinkConfirmation, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_TerminateLink

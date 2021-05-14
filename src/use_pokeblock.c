@@ -708,7 +708,7 @@ static void FeedPokeblockToMon(void)
             FREE_AND_SET_NULL(sMenu);
             FreeAllWindowBuffers();
             gMain.savedCallback = CB2_ReturnAndChooseMonToGivePokeblock;
-            CB2_PreparePokeblockFeedScene();
+            PreparePokeblockFeedScene();
         }
         break;
     }

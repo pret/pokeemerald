@@ -47,7 +47,7 @@ enum ReflectionTypes
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
 
-struct UnkStruct_085094AC
+struct StepAnimTable
 {
     const union AnimCmd *const *anims;
     u8 animPos[4];
@@ -65,7 +65,6 @@ struct LockedAnimObjectEvents
     u8 count;
 };
 
-extern const struct SpriteFrameImage gObjectEventPicTable_PechaBerryTree[];
 extern const struct OamData gObjectEventBaseOam_32x8;
 extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
@@ -87,9 +86,9 @@ void LoadPlayerObjectReflectionPalette(u16, u8);
 void LoadSpecialObjectReflectionPalette(u16, u8);
 void TryMoveObjectEventToMapCoords(u8, u8, u8, s16, s16);
 void PatchObjectPalette(u16, u8);
-void sub_808E16C(s16, s16);
+void SpawnObjectEventsOnReturnToField(s16, s16);
 void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
-void sub_8092FF0(s16, s16, s16 *, s16 *);
+void GetMapCoordsFromSpritePos(s16, s16, s16 *, s16 *);
 u8 GetFaceDirectionAnimNum(u8);
 void SetSpritePosToOffsetMapCoords(s16 *, s16 *, s16, s16);
 void ObjectEventClearHeldMovement(struct ObjectEvent *);
@@ -111,7 +110,7 @@ void FreeAndReserveObjectSpritePalettes(void);
 void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void ResetObjectPriority(u8, u8, u8);
 void SetObjectPriority(u8, u8, u8, u8);
-void sub_808E75C(s16, s16);
+void AllowObjectAtPosTriggerGroundEffects(s16, s16);
 void ObjectEventGetLocalIdAndMap(struct ObjectEvent *objectEvent, void *localId, void *mapNum, void *mapGroup);
 void ShiftObjectEventCoords(struct ObjectEvent *, s16, s16);
 void MoveObjectEventToMapCoords(struct ObjectEvent *, s16, s16);
@@ -175,17 +174,8 @@ void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 bool8 IsZCoordMismatchAt(u8, s16, s16);
 void UnfreezeObjectEvent(struct ObjectEvent *);
 u8 FindLockedObjectEventIndex(struct ObjectEvent *);
-bool8 obj_npc_ministep(struct Sprite *sprite);
-bool8 sub_80976EC(struct Sprite *sprite);
-void sub_80976DC(struct Sprite *, u8);
-void sub_809783C(struct Sprite *, u8, u8, u8);
-void DoShadowFieldEffect(struct ObjectEvent *);
-u8 sub_809785C(struct Sprite *);
-u8 sub_80978E4(struct Sprite *);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
-void CreateLevitateMovementTask(struct ObjectEvent *);
-void DestroyExtraMovementTask(u8);
 void UnfreezeObjectEvents(void);
 void FreezeObjectEventsExceptOne(u8 objectEventId);
 void TurnObjectEventSprite(u8, u8);
@@ -196,9 +186,9 @@ u8 GetMoveDirectionFastAnimNum(u8);
 u8 GetMoveDirectionFasterAnimNum(u8);
 u8 GetMoveDirectionFastestAnimNum(u8);
 u8 GetLedgeJumpDirection(s16, s16, u8);
-void CameraObjectSetFollowedObjectId(u8 objectId);
+void CameraObjectSetFollowedSpriteId(u8 objectId);
 u16 GetObjectPaletteTag(u8 palSlot);
-void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
+void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible);
 s16 GetFigure8XOffset(s16 idx);
 s16 GetFigure8YOffset(s16 idx);
 void CameraObjectReset2(void);

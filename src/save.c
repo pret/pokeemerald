@@ -913,7 +913,7 @@ void Task_LinkSave(u8 taskId)
         if (IsLinkTaskFinished())
         {
             if (!tPartialSave)
-                save_serialize_map();
+                SaveMapView();
             tState = 3;
         }
         break;
