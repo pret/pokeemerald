@@ -2183,3 +2183,51 @@ $(MID_SUBDIR)/hg_seq_gs_safari_field.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_gs_radio_variety.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V073
+
+$(MID_SUBDIR)/hg_seq_gs_taikaimae.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V052
+
+$(MID_SUBDIR)/hg_seq_gs_taikai.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V100
+
+$(MID_SUBDIR)/hg_seq_me_mushitori3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097 -p5
+
+$(MID_SUBDIR)/hg_seq_me_mushitori2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V102 -p5
+
+$(MID_SUBDIR)/hg_seq_me_mushitori1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_pt_entr.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V085
+
+$(MID_SUBDIR)/hg_seq_me_pt_new.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V102 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_pt_open.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V090
+
+$(MID_SUBDIR)/hg_seq_gs_pt_title.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V089
+
+$(MID_SUBDIR)/hg_seq_gs_pt_game.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V096
+
+$(MID_SUBDIR)/hg_seq_me_pt_resultg.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V098 -p5
+
+$(MID_SUBDIR)/hg_seq_gs_pt_gamef.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V097
+
+$(MID_SUBDIR)/hg_seq_gs_pt_result.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V088
+
+$(MID_SUBDIR)/hg_seq_gs_pt_end.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V098
+
+$(MID_SUBDIR)/hg_seq_gs_pt_victory.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V088
+
+$(MID_SUBDIR)/hg_seq_gs_wifi_present.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V087

@@ -853,6 +853,22 @@
 #define HG_SEQ_GS_SAFARI_HOUSE       834 // Safari Zone Gate
 #define HG_SEQ_GS_SAFARI_FIELD       835 // Safari Zone
 #define HG_SEQ_GS_RADIO_VARIETY      836 // Pokégear Radio: Variety Channel
+#define HG_SEQ_GS_TAIKAIMAE          837 // The Bug-Catching Contest Begins!
+#define HG_SEQ_GS_TAIKAI             838 // The Bug-Catching Contest
+#define HG_SEQ_ME_MUSHITORI3         839 // Bug-Catching Contest: Third Place
+#define HG_SEQ_ME_MUSHITORI2         840 // Bug-Catching Contest: Second Place
+#define HG_SEQ_ME_MUSHITORI1         841 // Bug-Catching Contest: Winner
+#define HG_SEQ_GS_PT_ENTR            842 // Pokéathlon: In the Pokéathlon Dome
+#define HG_SEQ_ME_PT_NEW             843 // Pokéathlon: Getting Changed
+#define HG_SEQ_GS_PT_OPEN            844 // Pokéathlon: Opening Ceremony
+#define HG_SEQ_GS_PT_TITLE           845 // Pokéathlon: An Event Begins!
+#define HG_SEQ_GS_PT_GAME            846 // Pokéathlon: Event Time!
+#define HG_SEQ_ME_PT_RESULTG         847 // Pokéathlon: In First Place!
+#define HG_SEQ_GS_PT_GAMEF           848 // Pokéathlon: Finals!
+#define HG_SEQ_GS_PT_RESULT          849 // Pokéathlon: Results Announcement!
+#define HG_SEQ_GS_PT_END             850 // Pokéathlon: Medal Ceremony
+#define HG_SEQ_GS_PT_VICTORY         851 // Pokéathlon: Winner!
+#define HG_SEQ_GS_WIFI_PRESENT       852 // Mystery Gift
 
 // Black & White Music
 

@@ -838,6 +838,22 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_safari_house, 0, 0
 	song hg_seq_gs_safari_field, 0, 0
 	song hg_seq_gs_radio_variety, 0, 0
+	song hg_seq_gs_taikaimae, 0, 0
+	song hg_seq_gs_taikai, 0, 0
+	song hg_seq_me_mushitori3, 2, 2
+	song hg_seq_me_mushitori2, 2, 2
+	song hg_seq_me_mushitori1, 2, 2
+	song hg_seq_gs_pt_entr, 0, 0
+	song hg_seq_me_pt_new, 2, 2
+	song hg_seq_gs_pt_open, 0, 0
+	song hg_seq_gs_pt_title, 0, 0
+	song hg_seq_gs_pt_game, 0, 0
+	song hg_seq_me_pt_resultg, 2, 2
+	song hg_seq_gs_pt_gamef, 0, 0
+	song hg_seq_gs_pt_result, 0, 0
+	song hg_seq_gs_pt_end, 0, 0
+	song hg_seq_gs_pt_victory, 0, 0
+	song hg_seq_gs_wifi_present, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

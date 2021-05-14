@@ -1530,6 +1530,22 @@ SECTIONS {
         sound/songs/midi/hg_seq_gs_safari_house.o(.rodata);
         sound/songs/midi/hg_seq_gs_safari_field.o(.rodata);
         sound/songs/midi/hg_seq_gs_radio_variety.o(.rodata);
+        sound/songs/midi/hg_seq_gs_taikaimae.o(.rodata);
+        sound/songs/midi/hg_seq_gs_taikai.o(.rodata);
+        sound/songs/midi/hg_seq_me_mushitori3.o(.rodata);
+        sound/songs/midi/hg_seq_me_mushitori2.o(.rodata);
+        sound/songs/midi/hg_seq_me_mushitori1.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_entr.o(.rodata);
+        sound/songs/midi/hg_seq_me_pt_new.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_open.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_title.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_game.o(.rodata);
+        sound/songs/midi/hg_seq_me_pt_resultg.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_gamef.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_result.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_end.o(.rodata);
+        sound/songs/midi/hg_seq_gs_pt_victory.o(.rodata);
+        sound/songs/midi/hg_seq_gs_wifi_present.o(.rodata);
     } =0
 
     lib_rodata :
