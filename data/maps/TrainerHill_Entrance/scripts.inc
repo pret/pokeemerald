@@ -301,17 +301,17 @@ TrainerHill_Entrance_Pokemart_Expanded: @ 8268414
 	end
 
 TrainerHill_Entrance_Text_StillGettingReady: @ 8268430
-	.string "This is the TRAINER HILL where\n"
+	.string "This is the Trainer Hill where\n"
 	.string "you may enjoy tag battles with many\l"
-	.string "TRAINERS.\p"
+	.string "Trainers.\p"
 	.string "Unfortunately, we're still getting\n"
 	.string "things ready. Please come back later!$"
 
 TrainerHill_Entrance_Text_WelcomeToTrainerHill: @ 82684C6
 	.string "Welcome!\p"
-	.string "This is the TRAINER HILL where\n"
+	.string "This is the Trainer Hill where\n"
 	.string "you may enjoy tag battles with many\l"
-	.string "TRAINERS!$"
+	.string "Trainers!$"
 
 TrainerHill_Entrance_Text_SaveGameBeforeEnter: @ 826851C
 	.string "Is this your first visit here?\p"
@@ -320,18 +320,18 @@ TrainerHill_Entrance_Text_SaveGameBeforeEnter: @ 826851C
 
 TrainerHill_Entrance_Text_TrainersUpToFloorX: @ 8268564
 	.string "Let's see…\n"
-	.string "The TRAINERS here now are…\p"
+	.string "The Trainers here now are…\p"
 	.string "Up to floor no. {STR_VAR_1}.$"
 
 TrainerHill_Entrance_Text_TrainersInEveryRoom: @ 826859E
 	.string "Let's see…\n"
-	.string "The TRAINERS here now are…\p"
-	.string "There appear to be TRAINERS gathered\n"
+	.string "The Trainers here now are…\p"
+	.string "There appear to be Trainers gathered\n"
 	.string "in every room.$"
 
 TrainerHill_Entrance_Text_LikeToChallengeTrainers: @ 82685F8
 	.string "Would you like to challenge the\n"
-	.string "waiting TRAINERS?$"
+	.string "waiting Trainers?$"
 
 TrainerHill_Entrance_Text_TimeProgessGetSetGo: @ 826862A
 	.string "I will time your progress.\n"
@@ -353,7 +353,7 @@ TrainerHill_Entrance_Text_HopeYouGiveItYourBest: @ 82686F4
 	.string "I hope you give it your best.$"
 
 TrainerHill_Entrance_Text_MovedReceptionHereForSwitch: @ 8268712
-	.string "When the TRAINERS switch places,\n"
+	.string "When the Trainers switch places,\n"
 	.string "the movement can be hectic.\p"
 	.string "To avoid the stampede, we moved\n"
 	.string "the reception counter here.\p"
@@ -363,7 +363,7 @@ TrainerHill_Entrance_Text_ThankYouForPlaying: @ 82687AC
 	.string "Thank you for playing!$"
 
 TrainerHill_Entrance_Text_ExplainTrainerHill: @ 82687C3
-	.string "Here at the TRAINER HILL, we conduct\n"
+	.string "Here at the Trainer Hill, we conduct\n"
 	.string "an event called the Time Attack.\p"
 	.string "It is a race that measures how long\n"
 	.string "you take to reach our owner on\l"
@@ -371,15 +371,15 @@ TrainerHill_Entrance_Text_ExplainTrainerHill: @ 82687C3
 	.string "The fastest times are posted on\n"
 	.string "the Time Board--try competing with\l"
 	.string "your friends.\p"
-	.string "In TRAINER battles along the way,\n"
+	.string "In Trainer battles along the way,\n"
 	.string "neither Exp. Points nor money will\l"
 	.string "be awarded.$"
 
 @ Unused
 TrainerHill_Entrance_Text_NeedAtLeastTwoPokemon: @ 826890D
 	.string "Oh, I'm sorry, but you appear to have\n"
-	.string "only one POKéMON with you.\p"
-	.string "You will need at least two POKéMON\n"
+	.string "only one Pokémon with you.\p"
+	.string "You will need at least two Pokémon\n"
 	.string "to enter this event.$"
 
 TrainerHill_Roof_Text_YouFinallyCameBravo: @ 8268986
@@ -390,7 +390,7 @@ TrainerHill_Roof_Text_YouFinallyCameBravo: @ 8268986
 	.string "I know why you came all the way\l"
 	.string "here by yourself!\p"
 	.string "You wanted to see me, the owner\n"
-	.string "of the TRAINER HILL, because…\p"
+	.string "of the Trainer Hill, because…\p"
 	.string "You want to form a tag team with me!\n"
 	.string "Wa-hoo!\p"
 	.string "…Uh?\n"
@@ -427,7 +427,7 @@ TrainerHill_Roof_Text_ArriveZippierNextTime: @ 8268C31
 
 @ Unused
 TrainerHill_Roof_Text_BuiltTrainerHillToFindPartner: @ 8268CC6
-	.string "I had the TRAINER HILL built for but\n"
+	.string "I had the Trainer Hill built for but\n"
 	.string "one reason and one only!\p"
 	.string "To find the most suitable partner\n"
 	.string "with whom I may form a tag team!$"
@@ -436,14 +436,14 @@ TrainerHill_Entrance_Text_ChallengeTime: @ 8268D47
 	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
 
 TrainerHill_Entrance_Text_WhatSortOfTrainersAreAhead: @ 8268D5A
-	.string "Who knows what sort of TRAINERS\n"
-	.string "and POKéMON combos are ahead?\p"
+	.string "Who knows what sort of Trainers\n"
+	.string "and Pokémon combos are ahead?\p"
 	.string "All I know is that I'll knock aside\n"
 	.string "anyone that stands in my way!$"
 
 TrainerHill_Entrance_Text_CantWaitToTestTheWaters: @ 8268DDA
-	.string "I heard tough TRAINERS come to this\n"
-	.string "TRAINER HILL from all over.\p"
+	.string "I heard tough Trainers come to this\n"
+	.string "Trainer Hill from all over.\p"
 	.string "I can't wait to test the waters!\p"
 	.string "I'll knock aside anyone that stands\n"
 	.string "in my way!$"
