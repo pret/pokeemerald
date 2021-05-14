@@ -1763,6 +1763,12 @@ static void Cmd_if_cant_faint(void)
 
     // This macro is missing the damage 0 = 1 assumption.
 
+#ifdef BUGFIX
+    // Moves always do at least 1 damage.
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+#endif
+
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
@@ -1877,8 +1883,13 @@ static void Cmd_if_has_move_with_effect(void)
     case AI_TARGET_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            // UB: checks sBattler_AI instead of gBattlerTarget.
+            // BUG: checks sBattler_AI instead of gBattlerTarget.
+#ifndef BUGFIX
             if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+#else
+
+            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+#endif
                 break;
         }
         if (i == MAX_MON_MOVES)
@@ -2025,7 +2036,11 @@ static void Cmd_if_holds_item(void)
     var2 = gAIScriptPtr[2];
     var1 = gAIScriptPtr[3];
 
+#ifndef UBFIX
     if ((var1 | var2) == item)
+#else
+    if (((var1 << 8) | var2) == item)
+#endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
