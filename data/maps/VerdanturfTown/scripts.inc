@@ -66,7 +66,7 @@ VerdanturfTown_EventScript_RusturfTunnelSign:: @ 81EB5F4
 VerdanturfTown_Text_ManTryingToDigTunnel: @ 81EB5FD
 	.string "My papa told me.\p"
 	.string "He says this tunnel is full of\n"
-	.string "timid POKéMON.\p"
+	.string "timid Pokémon.\p"
 	.string "They get all scared of loud noise and\n"
 	.string "make a big uproar.\p"
 	.string "So they had to stop the big tunnel\n"
@@ -87,41 +87,41 @@ VerdanturfTown_Text_AirCleanHere: @ 81EB736
 	.string "frail and sickly people.$"
 
 VerdanturfTown_Text_MakeBattleTentDebut: @ 81EB7E2
-	.string "My POKéMON and I, we've been riding\n"
+	.string "My Pokémon and I, we've been riding\n"
 	.string "a hot winning streak.\p"
-	.string "So I decided to make my BATTLE TENT\n"
+	.string "So I decided to make my Battle Tent\n"
 	.string "debut in this town.$"
 
 VerdanturfTown_Text_GuyTryingToBustThroughCave: @ 81EB854
 	.string "Did you see the cave next to the\n"
-	.string "POKéMON MART?\p"
+	.string "Pokémon Mart?\p"
 	.string "There's a guy in there who's trying to\n"
 	.string "bust up boulders so he can bust out\l"
 	.string "through to the other side.\p"
 	.string "It'd be great if we could go through…\n"
-	.string "It'll make it easy to visit RUSTBORO.$"
+	.string "It'll make it easy to visit Rustboro.$"
 
 VerdanturfTown_Text_EasyToGetToRustboroNow: @ 81EB935
-	.string "That cave next to the POKéMON MART\n"
+	.string "That cave next to the Pokémon Mart\n"
 	.string "is now a tunnel to the other side.\p"
 	.string "It's great--it's easy to go shop for\n"
-	.string "new DEVON products in RUSTBORO now.$"
+	.string "new Devon products in Rustboro now.$"
 
 VerdanturfTown_Text_TownSign: @ 81EB9C4
-	.string "VERDANTURF TOWN\p"
+	.string "Verdanturf Town\p"
 	.string "“The windswept highlands with the\n"
 	.string "sweet fragrance of grass.”$"
 
 VerdanturfTown_Text_WandasHouse: @ 81EBA11
-	.string "WANDA'S HOUSE$"
+	.string "Wanda's House$"
 
 VerdanturfTown_Text_BattleTentSign: @ 81EBA1F
-	.string "BATTLE TENT VERDANTURF SITE\n"
+	.string "Battle Tent Verdanturf Site\n"
 	.string "“Feast Your Eyes on Battles!”$"
 
 VerdanturfTown_Text_RusturfTunnelSign: @ 81EBA59
-	.string "RUSTURF TUNNEL\n"
-	.string "“Linking RUSTBORO and VERDANTURF\p"
+	.string "Rusturf Tunnel\n"
+	.string "“Linking Rustboro and Verdanturf\p"
 	.string "“The tunnel project has been\n"
 	.string "canceled.”$"
 
