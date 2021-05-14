@@ -457,10 +457,10 @@ static u8 ReadData()
 
 static void EnableGpioPortRead()
 {
-    GPIO_PORT_READ_ENABLE = 1;
+    GPIO_PORT_READ_ENABLE = TRUE;
 }
 
 static void DisableGpioPortRead()
 {
-    GPIO_PORT_READ_ENABLE = 0;
+    GPIO_PORT_READ_ENABLE = FALSE;
 }
