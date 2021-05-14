@@ -487,8 +487,8 @@ void AnimTask_CreateRaindrops(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] % gTasks[taskId].data[2] == 1)
     {
-        x = Random2() % 240;
-        y = Random2() % 80;
+        x = Random2() % DISPLAY_WIDTH;
+        y = Random2() % (DISPLAY_HEIGHT / 2);
         CreateSprite(&gRainDropSpriteTemplate, x, y, 4);
     }
     if (gTasks[taskId].data[0] == gTasks[taskId].data[3])

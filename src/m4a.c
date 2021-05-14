@@ -887,18 +887,13 @@ void CgbModVol(struct CgbChannel *chan)
     if ((soundInfo->mode & 1) || !CgbPan(chan))
     {
         chan->pan = 0xFF;
-        chan->envelopeGoal = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->envelopeGoal = (u32)(chan->leftVolume + chan->rightVolume);
+        chan->envelopeGoal /= 16;
     }
     else
     {
-        // Force chan->rightVolume and chan->leftVolume to be read from memory again,
-        // even though there is no reason to do so.
-        // The command line option "-fno-gcse" achieves the same result as this.
-        #ifndef NONMATCHING
-            asm("" : : : "memory");
-        #endif
-
-        chan->envelopeGoal = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->envelopeGoal = (u32)(chan->leftVolume + chan->rightVolume);
+        chan->envelopeGoal /= 16;
         if (chan->envelopeGoal > 15)
             chan->envelopeGoal = 15;
     }
