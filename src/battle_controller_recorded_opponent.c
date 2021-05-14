@@ -74,7 +74,7 @@ static void RecordedOpponentHandleSetUnkVar(void);
 static void RecordedOpponentHandleClearUnkFlag(void);
 static void RecordedOpponentHandleToggleUnkFlag(void);
 static void RecordedOpponentHandleHitAnimation(void);
-static void RecordedOpponentHandleCmd42(void);
+static void RecordedOpponentHandleCantSwitch(void);
 static void RecordedOpponentHandlePlaySE(void);
 static void RecordedOpponentHandlePlayFanfareOrBGM(void);
 static void RecordedOpponentHandleFaintingCry(void);
@@ -146,7 +146,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     [CONTROLLER_CLEARUNKFLAG]             = RecordedOpponentHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = RecordedOpponentHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = RecordedOpponentHandleHitAnimation,
-    [CONTROLLER_42]                       = RecordedOpponentHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = RecordedOpponentHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = RecordedOpponentHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = RecordedOpponentHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = RecordedOpponentHandleFaintingCry,
@@ -1117,7 +1117,7 @@ static void RecordedOpponentHandleLoadMonSprite(void)
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
@@ -1249,7 +1249,7 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
                                                (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40,
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
@@ -1587,7 +1587,7 @@ static void RecordedOpponentHandleHitAnimation(void)
     }
 }
 
-static void RecordedOpponentHandleCmd42(void)
+static void RecordedOpponentHandleCantSwitch(void)
 {
     RecordedOpponentBufferExecCompleted();
 }

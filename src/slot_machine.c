@@ -682,7 +682,7 @@ static const struct WindowTemplate sWindowTemplate_InfoBox =
     .baseBlock = 1
 };
 
-static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 
 static bool8 (*const sSlotActions[])(struct Task *task) =
 {
@@ -1592,7 +1592,7 @@ static bool8 SlotAction_WaitMsg_NoMoreCoins(struct Task *task)
 static bool8 SlotAction_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
-    AlertTVOfNewCoinTotal(GetCoins());
+    TryPutFindThatGamerOnAir(GetCoins());
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
     sSlotMachine->state++; // SLOT_ACTION_FREE
     return FALSE;

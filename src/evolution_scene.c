@@ -1125,7 +1125,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             var = gSprites[sEvoStructPtr->preEvoSpriteId].oam.paletteNum + 16;
             sEvoGraphicsTaskId = EvolutionSparkles_SpiralUpward(var);
             gTasks[taskId].tState++;
-            SetGpuReg(REG_OFFSET_BG3CNT, 0x603);
+            SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_SCREENBASE(6));
         }
         break;
     case T_EVOSTATE_SPARKLE_ARC:

@@ -933,7 +933,7 @@ static void SavePyramidChallenge(void)
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
-    save_serialize_map();
+    SaveMapView();
     TrySavingData(SAVE_LINK);
 }
 

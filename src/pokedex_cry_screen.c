@@ -188,7 +188,7 @@ static const union AnimCmd *const sSpriteAnimTable_CryMeterNeedle[] =
 
 static const struct OamData sOamData_CryMeterNeedle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = ST_OAM_4BPP,

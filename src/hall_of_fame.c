@@ -138,8 +138,8 @@ static const struct BgTemplate sHof_BgTemplates[] =
 
 static const struct WindowTemplate sHof_WindowTemplate = {0, 2, 2, 0xE, 6, 0xE, 1};
 
-static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
-static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
+static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const u8 sUnused_085E538C[] = {4, 5, 0, 0};
 
@@ -1398,7 +1398,7 @@ static bool8 CreateHofConfettiSprite(void)
     u8 spriteID;
     struct Sprite* sprite;
 
-    s16 posX = Random() % 240;
+    s16 posX = Random() % DISPLAY_WIDTH;
     s16 posY = -(Random() % 8);
 
     spriteID = CreateSprite(&sSpriteTemplate_HofConfetti, posX, posY, 0);
@@ -1505,7 +1505,7 @@ static void Task_DoDomeConfetti(u8 taskId)
             id = ConfettiUtil_AddNew(&sOamData_Confetti, 
                               TAG_CONFETTI, 
                               TAG_CONFETTI, 
-                              Random() % 240, 
+                              Random() % DISPLAY_WIDTH, 
                               -(Random() % 8), 
                               Random() % ARRAY_COUNT(sAnims_Confetti), 
                               id);

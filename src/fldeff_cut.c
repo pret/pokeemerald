@@ -326,7 +326,7 @@ bool8 FldEff_CutGrass(void)
             y = yAdd + gPlayerFacingPosition.y;
 
             SetCutGrassMetatile(x, y);
-            sub_808E75C(x, y);
+            AllowObjectAtPosTriggerGroundEffects(x, y);
         }
     }
 
