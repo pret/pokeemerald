@@ -37,7 +37,7 @@ SootopolisCity_House6_Text_FirstGuestInWhileTakeDoll: @ 8226FC3
 	.string "Hello! You're our first guest in\n"
 	.string "a good while.\p"
 	.string "You've brightened up my day, so I'll\n"
-	.string "give you a big WAILMER DOLL.$"
+	.string "give you a big Wailmer Doll.$"
 
 SootopolisCity_House6_Text_TakeGoodCareOfIt: @ 8227034
 	.string "Take good care of it!$"
@@ -48,8 +48,8 @@ SootopolisCity_House6_Text_IllHoldItForYou: @ 822704A
 
 SootopolisCity_House6_Text_DontWantThisDoll: @ 822708F
 	.string "Are you sure?\n"
-	.string "You don't want this DOLL?$"
+	.string "You don't want this Doll?$"
 
 SootopolisCity_House6_Text_LovePlushDolls: @ 82270B7
-	.string "I love plush DOLLS!$"
+	.string "I love plush Dolls!$"
 
