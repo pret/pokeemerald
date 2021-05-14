@@ -6172,7 +6172,12 @@ static void Cmd_recordlastability(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
+
+#ifndef UBFIX
     gBattlescriptCurrInstr += 1; // UB: Should be + 2, one byte for command and one byte for battlerId argument.
+#else
+    gBattlescriptCurrInstr += 2;
+#endif
 }
 
 void BufferMoveToLearnIntoBattleTextBuff2(void)
