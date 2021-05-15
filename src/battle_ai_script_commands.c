@@ -2031,14 +2031,14 @@ static void Cmd_if_holds_item(void)
     else
         item = BATTLE_HISTORY->itemEffects[battlerId];
 
-    // UB: doesn't properly read an unaligned u16
+    // BUG: doesn't properly read an unaligned u16
     var2 = gAIScriptPtr[2];
     var1 = gAIScriptPtr[3];
 
-#ifndef UBFIX
+#ifndef BUGFIX
     if ((var1 | var2) == item)
 #else
-    if (((var1 << 8) | var2) == item)
+    if (((var1 << 8) | var2) == item) // We shift var1 so we can splice it with var2 and make a u16
 #endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
