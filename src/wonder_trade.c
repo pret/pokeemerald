@@ -113,7 +113,7 @@ static const u16 sInvalidItem[] = {
 
 static u16 PickRandomSpecies(void);
 void CreateWonderTradePokemon(u8 whichPlayerMon);
-u16 returnValidSpecies(u16 input);
+static const u16 returnValidSpecies(u16 input);
 u16 determineEvolution(struct Pokemon *);
 u8 getWonderTradeOT(u8 *name);
 u16 GetValidWonderTradeItem(u16 item);
@@ -166,7 +166,6 @@ void CreateWonderTradePokemon(u8 whichPlayerMon)
     u8 nameOT[8];
     u8 genderOT;
 #ifdef POKEMON_EXPANSION
-    u16 incomingSpecies = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
     u8 abilityNum;
 #endif
     u8 level = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LEVEL); // gets level of player's selected Pokemon
@@ -241,14 +240,14 @@ void CreateWonderTradePokemon(u8 whichPlayerMon)
 #ifdef POKEMON_EXPANSION
     // 10% chance of giving the in coming Pokémon their HA, if they have one
     // Uncomment if your copy of the pokemon_expansion is up-to-date.
-    //if (gBaseStats[incomingSpecies].abilities[2] != ABILITY_NONE && (Random() % 99) < 10)
+    //if (gBaseStats[species].abilities[2] != ABILITY_NONE && (Random() % 99) < 10)
     //{
     //    abilityNum = 2;
     //    SetMonData(pokemon, MON_DATA_ABILITY_NUM, &abilityNum);
     //}
 
     // Uncomment if your copy of the pokemon_expansion is not up-to-date.
-    //if (gBaseStats[incomingSpecies].abilityHidden != ABILITY_NONE && (Random() % 99) < 10)
+    //if (gBaseStats[species].abilityHidden != ABILITY_NONE && (Random() % 99) < 10)
     //{
     //    abilityNum = 2;
     //    SetMonData(pokemon, MON_DATA_ABILITY_NUM, &abilityNum);
@@ -562,7 +561,7 @@ u16 determineEvolution(struct Pokemon *mon)
             break;
         case EVO_TRADE_ITEM:
             {
-                u16 currHeldItem = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HELD_ITEM);
+                u16 currHeldItem = GetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM);
                 if (gEvolutionTable[species][i].param == currHeldItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
             }
@@ -748,7 +747,7 @@ u16 determineEvolution(struct Pokemon *mon)
 }
 #endif
 
-u16 returnValidSpecies(u16 input)
+static const u16 returnValidSpecies(u16 input)
 {
     u16 species[] =
     {
@@ -1184,7 +1183,7 @@ u16 returnValidSpecies(u16 input)
 }
 
 #if defined ITEM_EXPANSION && defined POKEMON_EXPANSION
-static bool32 IsMegaPreEvolution(u16 species, u16 heldStone)
+bool32 IsMegaPreEvolution(u16 species, u16 heldStone, bool32 found)
 {
     u8 i;
 
@@ -1193,12 +1192,12 @@ static bool32 IsMegaPreEvolution(u16 species, u16 heldStone)
         if (gEvolutionTable[species][i].targetSpecies != SPECIES_NONE)
         {
             if (gEvolutionTable[species][i].method == EVO_MEGA_EVOLUTION && gEvolutionTable[species][i].param == heldStone)
-                return TRUE;
+                found = TRUE;
 
-            return IsMegaPreEvolution(gEvolutionTable[species][i].targetSpecies, heldStone);
+            found = IsMegaPreEvolution(gEvolutionTable[species][i].targetSpecies, heldStone, found);
         }
     }
-    return FALSE;
+    return found;
 }
 
 // Generate an item randomly for a Wonder Trade in coming Pokémon to hold, with a few exceptions
@@ -1206,7 +1205,6 @@ u16 GetValidWonderTradeItem(u16 item)
 {
     u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     int i;
-    bool8 isNotValidMegaStone = TRUE;
 
     ROLL:
         item = Random() % ITEMS_COUNT;
@@ -1258,16 +1256,7 @@ u16 GetValidWonderTradeItem(u16 item)
     // Make sure that if the Pokémon can Mega Evolve, or it evolves into a species who can, it can get the relevant Mega Stone
     if (ItemId_GetHoldEffect(item) == HOLD_EFFECT_MEGA_STONE)
     {
-        for (i = 0; i < EVOS_PER_MON; i++)
-        {
-            if (gEvolutionTable[species][i].method == EVO_MEGA_EVOLUTION
-             && item == gEvolutionTable[species][i].param)
-                isNotValidMegaStone = FALSE;
-            else if (IsMegaPreEvolution(species, item) == TRUE)
-                isNotValidMegaStone = FALSE;
-        }
-
-        if (isNotValidMegaStone)
+        if (!IsMegaPreEvolution(species, item, FALSE))
             goto ROLL;
     }
 
