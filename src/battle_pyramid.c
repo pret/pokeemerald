@@ -1403,7 +1403,7 @@ void GenerateBattlePyramidWildMon(void)
     #ifndef UBFIX
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] >= 140)
     #else
-    if (gSaveBlock2Ptr->frontier.pyramidWinStreas[gSaveBlock2Ptr->frontier.lvlMode] >= 140)
+    if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] >= 140)
     #endif
     {
         id = (Random() % 17) + 15;
