@@ -33,6 +33,7 @@
 #define WIN_TEXT 0
 
 #define TAG_BALL_POKEBALL 500
+#define TAG_FLIPPER  501
 
 enum
 {
@@ -54,10 +55,26 @@ struct Ball
     u8 rotation;
 };
 
+#define FLIPPER_LEFT  0
+#define FLIPPER_RIGHT 1
+
+struct Flipper
+{
+    u8 type;
+    u8 spriteId;
+    u16 xPos;
+    u16 yPos;
+    int state;
+    int prevState;
+    int stateDelta;
+};
+
 struct PinballGame
 {
     u8 state;
     struct Ball ball;
+    struct Flipper leftFlipper;
+    struct Flipper rightFlipper;
     bool8 gravityEnabled;
     u8 stageTileWidth;
     u8 stageTileHeight;
@@ -69,20 +86,26 @@ struct PinballGame
 static void FadeToPinballScreen(u8 taskId);
 static void InitPinballScreen(void);
 static void InitBallSprite(void);
+static void InitFlipperSprites(void);
 static void PinballVBlankCallback(void);
 static void PinballMainCallback(void);
 static void PinballMain(u8 taskId);
 static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
+static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal);
+static void UpdateFlipperState(struct Flipper *flipper);
+static struct Flipper *FindPotentialCollisionFlipper(u32 x, u32 y);
+static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal);
 static void UpdatePosition(struct Ball *ball);
-static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight);
+static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
-static void ApplyCollisionForces(struct Ball *ball);
+static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce);
 static void UpdateCamera(void);
 static void StartExitPinballGame(void);
 static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
+static void UpdateFlipperSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -125,8 +148,13 @@ static const u16 sPinballBaseBgPalette[] = INCBIN_U16("graphics/pinball/base_bg_
 static const u32 sPinballBaseBgTilemap[] = INCBIN_U32("graphics/pinball/base_bg_tilemap.bin");
 static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball.4bpp.lz");
 static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_pokeball.gbapal");
+static const u32 sFlipperGfx[] = INCBIN_U32("graphics/pinball/flipper.4bpp.lz");
+static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal");
+
 static const u8 sPinballBaseBgCollisionMasks[] = INCBIN_U8("graphics/pinball/base_bg_collision_masks.1bpp");
 static const u8 sPinballBaseBgCollisionMap[] = INCBIN_U8("graphics/pinball/base_bg_collision_map.bin");
+static const u8 sFlipperCollisionRadii[] = INCBIN_U8("data/pinball/flipper_radii.bin");
+static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flipper_normal_angles.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -134,8 +162,19 @@ static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .tag = TAG_BALL_POKEBALL,
 };
 
+static const struct CompressedSpriteSheet sFlipperSpriteSheet = {
+    .data = sFlipperGfx,
+    .size = 0x600,
+    .tag = TAG_FLIPPER,
+};
+
 static const struct SpritePalette sPinballSpritePalettes[] = {
     {sBallPokeballPalette, TAG_BALL_POKEBALL},
+    {0},
+};
+
+static const struct SpritePalette sFlipperSpritePalettes[] = {
+    {sFlipperPalette, TAG_FLIPPER},
     {0},
 };
 
@@ -190,6 +229,55 @@ static const struct SpriteTemplate sBallPokeballSpriteTemplate = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateBallSprite,
+};
+
+static const struct OamData sFlipperOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+#define FLIPPER_FRAME_ANIMCMD(n, flip) \
+static const union AnimCmd sFlipperAnimCmd_##n[] =\
+{\
+    ANIMCMD_FRAME(((n) % 3) * 16, 0, .hFlip = (flip)),\
+    ANIMCMD_END,\
+};
+
+FLIPPER_FRAME_ANIMCMD(0, FALSE)
+FLIPPER_FRAME_ANIMCMD(1, FALSE)
+FLIPPER_FRAME_ANIMCMD(2, FALSE)
+FLIPPER_FRAME_ANIMCMD(3, TRUE)
+FLIPPER_FRAME_ANIMCMD(4, TRUE)
+FLIPPER_FRAME_ANIMCMD(5, TRUE)
+
+static const union AnimCmd *const sFlipperAnimCmds[] = {
+    sFlipperAnimCmd_0,
+    sFlipperAnimCmd_1,
+    sFlipperAnimCmd_2,
+    sFlipperAnimCmd_3,
+    sFlipperAnimCmd_4,
+    sFlipperAnimCmd_5,
+};
+
+static const struct SpriteTemplate sFlipperSpriteTemplate = {
+    .tileTag = TAG_FLIPPER,
+    .paletteTag = TAG_FLIPPER,
+    .oam = &sFlipperOamData,
+    .anims = sFlipperAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateFlipperSprite,
 };
 
 static const s8 sCollisionTestPointOffsets[][2] = {
@@ -276,6 +364,11 @@ static const u16 sCollisionYDeltas[256] = {
     0x0020, 0x0000, 0xFF99, 0xFEE3, 0xFE71, 0xFDEC, 0xFC94, 0xFB27, 0xFA8E, 0xFA08, 0xF948, 0xF94A, 0xF993, 0xFA0A, 0xFBA3, 0x003E, // 0xFX
 };
 
+static const u16 sFlipperRadiusMagnitudes[32] = {
+    0x0000, 0x000C, 0x001C, 0x0030, 0x0038, 0x0048, 0x005C, 0x006C, 0x0070, 0x0080, 0x0094, 0x00A4, 0x00B4, 0x00C4, 0x00D4, 0x00E4,
+    0x00F8, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC,
+};
+
 void PlayPinballGame(void)
 {
     u8 taskId;
@@ -343,7 +436,10 @@ static void InitPinballScreen(void)
     case 4:
         LoadCompressedSpriteSheet(&sBallPokeballSpriteSheet);
         LoadSpritePalettes(sPinballSpritePalettes);
+        LoadCompressedSpriteSheet(&sFlipperSpriteSheet);
+        LoadSpritePalettes(sFlipperSpritePalettes);
         InitBallSprite();
+        InitFlipperSprites();
         gMain.state++;
     case 5:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
@@ -356,8 +452,18 @@ static void InitPinballScreen(void)
 
 static void InitBallSprite(void)
 {
-    sPinballGame->ball.spriteId = CreateSprite(&sBallPokeballSpriteTemplate, 10, 10, 3);
+    sPinballGame->ball.spriteId = CreateSprite(&sBallPokeballSpriteTemplate, 0, 0, 3);
     StartSpriteAnim(&gSprites[sPinballGame->ball.spriteId], 3);
+}
+
+static void InitFlipperSprites(void)
+{
+    sPinballGame->rightFlipper.spriteId = CreateSprite(&sFlipperSpriteTemplate, 0, 0, 4);
+    sPinballGame->leftFlipper.spriteId = CreateSprite(&sFlipperSpriteTemplate, 0, 0, 4);
+    gSprites[sPinballGame->leftFlipper.spriteId].data[0] = FLIPPER_LEFT;
+    gSprites[sPinballGame->rightFlipper.spriteId].data[0] = FLIPPER_RIGHT;
+    StartSpriteAnim(&gSprites[sPinballGame->leftFlipper.spriteId], 0);
+    StartSpriteAnim(&gSprites[sPinballGame->rightFlipper.spriteId], 3);
 }
 
 static void PinballVBlankCallback(void)
@@ -387,8 +493,14 @@ static void PinballMain(u8 taskId)
             sPinballGame->state = PINBALL_STATE_RUNNING;
             sPinballGame->stageTileWidth = 64;
             sPinballGame->stageTileHeight = 64;
-            sPinballGame->ball.xPos = 104 << 8;
+            sPinballGame->ball.xPos = 128 << 8;
             sPinballGame->ball.yPos = 32 << 8;
+            sPinballGame->rightFlipper.type = FLIPPER_RIGHT;
+            sPinballGame->rightFlipper.xPos = 128;
+            sPinballGame->rightFlipper.yPos = 96;
+            sPinballGame->leftFlipper.type = FLIPPER_LEFT;
+            sPinballGame->leftFlipper.xPos = 96;
+            sPinballGame->leftFlipper.yPos = 96;
         }
         break;
     case PINBALL_STATE_RUNNING:
@@ -406,21 +518,42 @@ static void PinballMain(u8 taskId)
 
 static void HandleBallPhysics(void)
 {
-    bool32 isColliding;
+    bool32 isFlipperColliding;
+    bool32 isStaticColliding;
+    u8 flipperCollisionNormal;
+    u8 staticCollisionNormal;
+    u8 collisionNormal;
+    u16 flipperYForce = 0;
     struct Ball *ball = &sPinballGame->ball;
 
     if (sPinballGame->gravityEnabled)
         ApplyGravity(ball);
 
     LimitVelocity(ball);
-    isColliding = HandleStaticCollision(ball, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight);
+    isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal);
+    isStaticColliding = HandleStaticCollision(ball, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
+    if (isFlipperColliding)
+        collisionNormal = flipperCollisionNormal;
+    else
+        collisionNormal = staticCollisionNormal;
+
+    if (isFlipperColliding || isStaticColliding)
+    {
+        RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
+        ApplyCollisionForces(ball, flipperYForce);
+        RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
+    }
+
     UpdatePosition(ball);
 
-    if ((ball->yPos >> 8) > sPinballGame->stageTileHeight * 8 - 8)
+    //if ((ball->yPos >> 8) > sPinballGame->stageTileHeight * 8 - 8)
+    if ((ball->yPos >> 8) > 160 || (ball->xPos >> 8) > 240)
     {
-        ball->xPos = 104 << 8;
-        ball->yPos = 24 << 8;
+        ball->xPos = 129 << 8;
+        ball->yPos = 32 << 8;
         ball->yVelocity = 0;
+        ball->xVelocity = 0;
+        ball->spin = 0;
     }
 }
 
@@ -448,6 +581,111 @@ static void LimitVelocity(struct Ball *ball)
         ball->yVelocity = -MAX_VELOCITY;
 }
 
+static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal)
+{
+    struct Flipper *flipper;
+
+    UpdateFlipperState(&sPinballGame->rightFlipper);
+    UpdateFlipperState(&sPinballGame->leftFlipper);
+
+    // Find the nearest flipper to the ball, and check collision with it.
+    flipper = FindPotentialCollisionFlipper(ball->xPos >> 8, ball->yPos >> 8);
+    if (flipper == NULL)
+        return;
+    
+    CheckFlipperCollision(ball, flipper, outYForce, outCollisionNormal);
+}
+
+#define FLIPPER_STATE_DELTA 0x0333
+
+static void UpdateFlipperState(struct Flipper *flipper)
+{
+    int stateDelta;
+
+    flipper->prevState = flipper->state;
+    if (gMain.heldKeys & (A_BUTTON | B_BUTTON))
+    {
+        if (flipper->state == 0x0FFF)
+            stateDelta = 0;
+        else
+            stateDelta = FLIPPER_STATE_DELTA;
+    }
+    else
+    {
+        if (flipper->state == 0)
+            stateDelta = 0;
+        else
+            stateDelta = -FLIPPER_STATE_DELTA;
+    }
+
+    flipper->stateDelta = stateDelta;
+    flipper->state += stateDelta;
+}
+
+static struct Flipper *FindPotentialCollisionFlipper(u32 x, u32 y)
+{
+    int i;
+    int minIndex = 0;
+    struct Flipper *candidates[] =
+    {
+        &sPinballGame->leftFlipper,
+        &sPinballGame->rightFlipper,
+        NULL,
+    };
+
+    for (i = 0; candidates[i] != NULL; i++)
+    {
+        struct Flipper *flipper = candidates[i];
+        if (x >= flipper->xPos - 24 && x < flipper->xPos + 24 && y >= flipper->yPos - 16 && y < flipper->yPos + 16)
+            return flipper;
+    }
+
+    return NULL;
+}
+
+static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal)
+{
+    int curState, stateDelta;
+    int offset;
+    u32 collisionRadius, magnitude;
+    u8 collisionNormal;
+    int ballXPos = (ball->xPos >> 8);
+    int ballYPos = (ball->yPos >> 8);
+    int xOffset = ballXPos - flipper->xPos + 24;
+    int yOffset = ballYPos - flipper->yPos + 16;
+
+    if (flipper->type == FLIPPER_RIGHT)
+        xOffset = 48 - xOffset;
+
+    offset = xOffset * 32 + yOffset;
+    collisionRadius = 0;
+
+    stateDelta = flipper->prevState < flipper->state ? 1 : -1;
+    curState = flipper->prevState >> 8;
+    while (1)
+    {
+        collisionRadius = sFlipperCollisionRadii[curState * 0x600 + offset];
+        if (collisionRadius != 0)
+            break;
+
+        if (curState == (flipper->state >> 8))
+            return FALSE;
+
+        curState += stateDelta;
+    }
+
+    collisionNormal = sFlipperCollisionNormalAngles[curState * 0x600 + offset];
+    magnitude = sFlipperRadiusMagnitudes[collisionRadius];
+    *outYForce = ((abs(flipper->stateDelta) * 4) * magnitude) >> 8;
+    *outCollisionNormal = flipper->type == FLIPPER_LEFT ? collisionNormal : -collisionNormal;
+
+    // Don't apply any y force if the ball is being forced downwards into the flipper
+    if ((*outYForce) & 0x8000)
+        *outYForce = 0;
+
+    return TRUE;
+}
+
 #define MAX_POS_UPDATE 0x04FF
 
 static void UpdatePosition(struct Ball *ball)
@@ -470,10 +708,9 @@ static void UpdatePosition(struct Ball *ball)
         ball->yPos += ball->yVelocity;
 }
 
-static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight)
+static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
 {
     int i;
-    u8 collisionNormal;
     u16 xDelta, yDelta;
     int collisionIndex;
     int maxStringStart, maxStringEnd, curStringStart, curStringLength, maxStringLength;
@@ -573,12 +810,8 @@ static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int s
     else
         ball->yPos += yDelta;
 
-    collisionNormal = sCollisionNormals[collisionIndex];
-    RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
-    ApplyCollisionForces(ball);
-    RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
-
-    return FALSE;
+    *outCollisionNormal = sCollisionNormals[collisionIndex];
+    return TRUE;
 }
 
 static void RotateVector(s16 *x, s16 *y, u8 angle)
@@ -594,7 +827,7 @@ static void RotateVector(s16 *x, s16 *y, u8 angle)
     *y = newY;
 }
 
-static void ApplyCollisionForces(struct Ball *ball)
+static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce)
 {
     // Only apply the collision forces if the ball is moving
     // towards the wall it collided with, which can only be
@@ -605,9 +838,11 @@ static void ApplyCollisionForces(struct Ball *ball)
 
     // Apply dampening to the vertical velocity component, and
     // negate it so that the ball bounces off the wall.
-    ball->yVelocity = -(ball->yVelocity / 1);
+    ball->yVelocity = -(ball->yVelocity / 4);
     ball->xVelocity += ball->spin / 2;
     ball->spin = (ball->xVelocity * 4) >> 8;
+
+    ball->yVelocity -= flipperYForce;
 }
 
 static void UpdateCamera(void)
@@ -628,6 +863,9 @@ static void UpdateCamera(void)
         scrollY = 0;
     if (scrollY > stagePixelHeight - DISPLAY_HEIGHT)
         scrollY = stagePixelHeight - DISPLAY_HEIGHT;
+
+    scrollX = 0;
+    scrollY = 0;
 
     sPinballGame->cameraScrollX = scrollX;
     sPinballGame->cameraScrollY = scrollY;
@@ -661,4 +899,20 @@ static void UpdateBallSprite(struct Sprite *sprite)
     ball->rotation += ball->spin;
     ballAnim = (ball->rotation >> 4) % 8;
     StartSpriteAnim(sprite, ballAnim);
+}
+
+static void UpdateFlipperSprite(struct Sprite *sprite)
+{
+    int anim;
+    struct Flipper *flipper;
+    if (sprite->data[0] == FLIPPER_RIGHT)
+        flipper = &sPinballGame->rightFlipper;
+    else
+        flipper = &sPinballGame->leftFlipper;
+
+    sprite->pos1.x = flipper->xPos - sPinballGame->cameraScrollX;
+    sprite->pos1.y = flipper->yPos - sPinballGame->cameraScrollY;
+
+    anim = (flipper->type * 3) + ((flipper->state >> 8) / 6);
+    StartSpriteAnim(sprite, anim);
 }
