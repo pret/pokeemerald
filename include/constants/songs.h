@@ -694,8 +694,9 @@
 #define DP_SEQ_BLD_EV_DENDO2         679 // Congratulations on Entering the Hall of Fame!
 #define DP_SEQ_BLD_ENDING            680 // Ending Theme
 #define DP_SEQ_BA_SECRET1            681 // Battle! Arceus
-//TODO: Azure Flute (DP_SEQ_FUE), Hall of Origin (DP_SEQ_THE_EVENT05)
- 
+#define DP_SEQ_FUE                   891 // Azure Flute
+#define DP_SEQ_AUS                   892 // Hall of Origin
+
 // Platinum Music 
 #define PL_SEQ_TITLE00               682 // Title Screen
 #define PL_SEQ_TITLE01               683 // Press Start
@@ -730,7 +731,7 @@
 #define PL_SEQ_PL_POINTGET3          712 // Received Battle Points!
 #define PL_SEQ_PL_BA_BRAIN           713 // Battle! (Frontier Brain)
 #define PL_SEQ_PL_WINBRAIN           714 // Victory! (Frontier Brain)
-//TODO: Battle! (Regirock / Regice / Registeel) (PL_SEQ_PL_BA_REGI)
+#define PL_SEQ_PL_VS_REGI            893 // Battle! (Regirock / Regice / Registeel)
  
 // HeartGold & SoulSilver Music 
 #define HG_SEQ_GS_TITLE              715 // Opening Movie

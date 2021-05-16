@@ -1584,6 +1584,9 @@ SECTIONS {
         sound/songs/midi/hg_seq_me_cardgame1.o(.rodata);
         sound/songs/midi/hg_seq_me_cardgame2.o(.rodata);
         sound/songs/midi/hg_seq_me_gonin.o(.rodata);
+        sound/songs/midi/dp_seq_fue.o(.rodata);
+        sound/songs/midi/dp_seq_aus.o(.rodata);
+        sound/songs/midi/pl_seq_pl_ba_regi.o(.rodata);
     } =0
 
     lib_rodata :

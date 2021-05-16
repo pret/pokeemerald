@@ -2345,3 +2345,12 @@ $(MID_SUBDIR)/hg_seq_me_cardgame2.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_me_gonin.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -V088 -p5
+
+$(MID_SUBDIR)/dp_seq_fue.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G191 -V127
+
+$(MID_SUBDIR)/dp_seq_aus.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G191 -V127
+
+$(MID_SUBDIR)/pl_seq_pl_ba_regi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G191 -V105

@@ -1348,6 +1348,9 @@ HG_SEQ_GS_KOUKAN             = 77 03
 HG_SEQ_ME_CARDGAME1          = 78 03
 HG_SEQ_ME_CARDGAME2          = 79 03
 HG_SEQ_ME_GONIN              = 7A 03
+DP_SEQ_FUE                   = 7B 03
+DP_SEQ_AUS                   = 7C 03
+PL_SEQ_PL_BA_REGI            = 7D 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

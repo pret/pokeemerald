@@ -892,6 +892,9 @@ gSongTable:: @ 86B49F0
 	song hg_seq_me_cardgame1, 2, 2
 	song hg_seq_me_cardgame2, 2, 2
 	song hg_seq_me_gonin, 2, 2
+	song dp_seq_fue, 0, 0
+	song dp_seq_aus, 0, 0
+	song pl_seq_pl_ba_regi, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00
