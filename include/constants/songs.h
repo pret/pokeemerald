@@ -694,6 +694,7 @@
 #define DP_SEQ_BLD_EV_DENDO2         679 // Congratulations on Entering the Hall of Fame!
 #define DP_SEQ_BLD_ENDING            680 // Ending Theme
 #define DP_SEQ_BA_SECRET1            681 // Battle! Arceus
+//TODO: Azure Flute (DP_SEQ_FUE), Hall of Origin (DP_SEQ_THE_EVENT05)
  
 // Platinum Music 
 #define PL_SEQ_TITLE00               682 // Title Screen
@@ -729,6 +730,7 @@
 #define PL_SEQ_PL_POINTGET3          712 // Received Battle Points!
 #define PL_SEQ_PL_BA_BRAIN           713 // Battle! (Frontier Brain)
 #define PL_SEQ_PL_WINBRAIN           714 // Victory! (Frontier Brain)
+//TODO: Battle! (Regirock / Regice / Registeel) (PL_SEQ_PL_BA_REGI)
  
 // HeartGold & SoulSilver Music 
 #define HG_SEQ_GS_TITLE              715 // Opening Movie
@@ -743,7 +745,7 @@
 #define HG_SEQ_GS_R_1_29             724 // Route 29
 #define HG_SEQ_GS_VS_NORAPOKE        725 // Battle! (Wild Pokémon - Johto Version)
 #define HG_SEQ_GS_WIN2               726 // Victory! (Wild Pokémon)
-#define HG_SEQ_GS_WIN2_NOT_FAN       727 // Victory! (Wild Pokémon) (no intro)
+#define HG_SEQ_GS_WIN2_NOT_FAN       727 // Victory! (Wild Pokémon) (No intro)
 #define HG_SEQ_ME_LVUP               728 // Level Up!
 #define HG_SEQ_GS_C_YOSHINO          729 // Cherrygrove City
 #define HG_SEQ_GS_E_TSURETEKE2       730 // Hurry Along 2
@@ -772,6 +774,7 @@
 #define HG_SEQ_GS_E_RIVAL1           753 // A Rival Appears!
 #define HG_SEQ_GS_VS_RIVAL           754 // Battle! (Rival)
 #define HG_SEQ_GS_SHINKA             755 // Evolution
+#define HG_SEQ_GS_KOUKAN             887 // Evolution (No intro)
 #define HG_SEQ_ME_SHINKAOME          756 // Congratulations! Your Pokémon Evolved!
 #define HG_SEQ_GS_C_KOGANE           757 // Goldenrod City
 #define HG_SEQ_GS_GYM                758 // Pokémon Gym
@@ -783,6 +786,8 @@
 #define HG_SEQ_ME_WAZA               764 // Received a TM!
 #define HG_SEQ_GS_GAME               765 // Goldenrod Game Corner
 #define HG_SEQ_GS_GAMEATARI          766 // You're a Winner!
+#define HG_SEQ_ME_CARDGAME1          888 // Voltorb Flip: Is this what you're expecting?!
+#define HG_SEQ_ME_CARDGAME2          889 // Voltorb Flip: Game Over
 #define HG_SEQ_ME_ACCE               767 // Obtained an Accessory
 #define HG_SEQ_GS_WIFITOWER          768 // Global Terminal
 #define HG_SEQ_GS_BLD_GTC            769 // GTS
@@ -880,6 +885,30 @@
 #define HG_SEQ_ME_CASTLE             861 // Received Castle Points!
 #define HG_SEQ_GS_BA_BRAIN           862 // Battle! (Frontier Brain)
 #define HG_SEQ_GS_WINBRAIN           863 // Victory! (Frontier Brain)
+#define HG_SEQ_GS_RADIO_TRAINER      864 // Pokégear Radio: Trainer Channel
+#define HG_SEQ_GS_GURUGURU           865 // Spin Trade
+#define HG_SEQ_GS_WIFI_ACCESS        866 // Nintendo Wi-Fi Connection
+#define HG_SEQ_GS_WIFIUNION          867 // Wi-Fi Plaza
+#define HG_SEQ_GS_WIFIGAME           868 // Wi-Fi Plaza: Plaza Games
+#define HG_SEQ_ME_MINIGAME           869 // Cleared Wobbuffet Pop!
+#define HG_SEQ_GS_WIFIPARADE         870 // Wi-Fi Plaza: Parade
+#define HG_SEQ_GS_RADIO_R_101        871 // Pokégear Radio: Route 101
+#define HG_SEQ_GS_RADIO_R_201        872 // Pokégear Radio: Route 201
+#define HG_SEQ_GS_PHC                873 // Pokéwalker
+#define HG_SEQ_GS_E_G_PICHU          874 // Spiky-Eared Pichu Appears!
+#define HG_SEQ_GS_EYE_MAIKO          875 // Trainers' Eyes Meet (Kimono Girl)
+#define HG_SEQ_GS_E_LUGIA            876 // Lugia Appears!
+#define HG_SEQ_GS_VS_LUGIA           877 // Battle! (Lugia)
+#define HG_SEQ_GS_D_CHAMPROAD        878 // Victory Road
+#define HG_SEQ_GS_CHAMPROAD          879 // The Pokémon League
+#define HG_SEQ_GS_VS_CHAMP           880 // Battle! (Champion)
+#define HG_SEQ_GS_E_DENDOURIRI       881 // The Hall of Fame
+#define HG_SEQ_GS_ENDING             882 // Ending Theme
+#define HG_SEQ_GS_ENDING2            883 // The End
+#define HG_SEQ_GS_VS_KODAI           884 // Battle! (Super-Ancient Pokémon)
+#define HG_SEQ_GS_D_SHINTO           885 // Sinjoh Ruins
+#define HG_SEQ_GS_E_ARCEUS           886 // Arceus
+#define HG_SEQ_ME_GONIN              890 // Let's Go Together (Unused?)
 
 // Black & White Music
 

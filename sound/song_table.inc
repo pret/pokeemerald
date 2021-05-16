@@ -865,6 +865,33 @@ gSongTable:: @ 86B49F0
 	song hg_seq_me_castle, 2, 2
 	song hg_seq_gs_ba_brain, 0, 0
 	song hg_seq_gs_winbrain, 0, 0
+	song hg_seq_gs_radio_trainer, 0, 0
+	song hg_seq_gs_guruguru, 0, 0
+	song hg_seq_gs_wifi_access, 0, 0
+	song hg_seq_gs_wifiunion, 0, 0
+	song hg_seq_gs_wifigame, 0, 0
+	song hg_seq_me_minigame, 2, 2
+	song hg_seq_gs_wifiparade, 0, 0
+	song hg_seq_gs_radio_r_101, 0, 0
+	song hg_seq_gs_radio_r_201, 0, 0
+	song hg_seq_gs_phc, 0, 0
+	song hg_seq_gs_e_g_pichu, 0, 0
+	song hg_seq_gs_eye_maiko, 0, 0
+	song hg_seq_gs_e_lugia, 0, 0
+	song hg_seq_gs_vs_lugia, 0, 0
+	song hg_seq_gs_d_champroad, 0, 0
+	song hg_seq_gs_champroad, 0, 0
+	song hg_seq_gs_vs_champ, 0, 0
+	song hg_seq_gs_e_dendouiri, 0, 0
+	song hg_seq_gs_ending, 0, 0
+	song hg_seq_gs_ending2, 0, 0
+	song hg_seq_gs_vs_kodai, 0, 0
+	song hg_seq_gs_d_shinto, 0, 0
+	song hg_seq_gs_e_arceus, 0, 0
+	song hg_seq_gs_koukan, 0, 0
+	song hg_seq_me_cardgame1, 2, 2
+	song hg_seq_me_cardgame2, 2, 2
+	song hg_seq_me_gonin, 2, 2
 
 	.align 2
 dummy_song_header: @ 86B5D00

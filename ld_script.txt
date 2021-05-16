@@ -1557,6 +1557,33 @@ SECTIONS {
         sound/songs/midi/hg_seq_me_castle.o(.rodata);
         sound/songs/midi/hg_seq_gs_ba_brain.o(.rodata);
         sound/songs/midi/hg_seq_gs_winbrain.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_trainer.o(.rodata);
+        sound/songs/midi/hg_seq_gs_guruguru.o(.rodata);
+        sound/songs/midi/hg_seq_gs_wifi_access.o(.rodata);
+        sound/songs/midi/hg_seq_gs_wifiunion.o(.rodata);
+        sound/songs/midi/hg_seq_gs_wifigame.o(.rodata);
+        sound/songs/midi/hg_seq_me_minigame.o(.rodata);
+        sound/songs/midi/hg_seq_gs_wifiparade.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_r_101.o(.rodata);
+        sound/songs/midi/hg_seq_gs_radio_r_201.o(.rodata);
+        sound/songs/midi/hg_seq_gs_phc.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_g_pichu.o(.rodata);
+        sound/songs/midi/hg_seq_gs_eye_maiko.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_lugia.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_lugia.o(.rodata);
+        sound/songs/midi/hg_seq_gs_d_champroad.o(.rodata);
+        sound/songs/midi/hg_seq_gs_champroad.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_champ.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_dendouiri.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ending.o(.rodata);
+        sound/songs/midi/hg_seq_gs_ending2.o(.rodata);
+        sound/songs/midi/hg_seq_gs_vs_kodai.o(.rodata);
+        sound/songs/midi/hg_seq_gs_d_shinto.o(.rodata);
+        sound/songs/midi/hg_seq_gs_e_arceus.o(.rodata);
+        sound/songs/midi/hg_seq_gs_koukan.o(.rodata);
+        sound/songs/midi/hg_seq_me_cardgame1.o(.rodata);
+        sound/songs/midi/hg_seq_me_cardgame2.o(.rodata);
+        sound/songs/midi/hg_seq_me_gonin.o(.rodata);
     } =0
 
     lib_rodata :
