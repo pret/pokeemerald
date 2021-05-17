@@ -5374,6 +5374,9 @@ u8 GetAbilityBySpecies(u16 species, u8 abilityNum)
     else
         gLastUsedAbility = gBaseStats[species].abilities[0];
 
+    if (gLastUsedAbility == ABILITY_NONE)
+        gLastUsedAbility = gBaseStats[species].abilities[0];
+
     return gLastUsedAbility;
 }
 
