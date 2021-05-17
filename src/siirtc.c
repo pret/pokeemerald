@@ -76,6 +76,7 @@ static void WriteCommand(u8 value);
 static void WriteData(u8 value);
 #endif
 static u8 ReadData();
+
 static void EnableGpioPortRead();
 static void DisableGpioPortRead();
 
@@ -434,13 +435,10 @@ static u8 ReadData()
     u8 i;
     u8 temp;
     u8 value;
+
     #ifdef UBFIX
     value = 0;
     #endif
-
-#ifdef UBFIX
-    value = 0;
-#endif
 
     for (i = 0; i < 8; i++)
     {
