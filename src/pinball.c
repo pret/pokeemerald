@@ -93,14 +93,16 @@ static void PinballMain(u8 taskId);
 static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
-static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal);
+static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdateFlipperState(struct Flipper *flipper);
 static struct Flipper *FindPotentialCollisionFlipper(u32 x, u32 y);
-static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal);
+static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdatePosition(struct Ball *ball);
 static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
+static u8 GetCollisionMaskRow(int collisionAttribute, int row);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
-static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce);
+static u8 ReverseBits(u8 value);
+static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification);
 static void UpdateCamera(void);
 static void StartExitPinballGame(void);
 static void ExitPinballGame(void);
@@ -153,6 +155,8 @@ static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal
 
 static const u8 sPinballBaseBgCollisionMasks[] = INCBIN_U8("graphics/pinball/base_bg_collision_masks.1bpp");
 static const u8 sPinballBaseBgCollisionMap[] = INCBIN_U8("graphics/pinball/base_bg_collision_map.bin");
+static const u8 sFlipperLeftCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks.1bpp");
+static const u8 sFlipperRightCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks.1bpp");
 static const u8 sFlipperCollisionRadii[] = INCBIN_U8("data/pinball/flipper_radii.bin");
 static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flipper_normal_angles.bin");
 
@@ -493,14 +497,16 @@ static void PinballMain(u8 taskId)
             sPinballGame->state = PINBALL_STATE_RUNNING;
             sPinballGame->stageTileWidth = 64;
             sPinballGame->stageTileHeight = 64;
-            sPinballGame->ball.xPos = 128 << 8;
+            sPinballGame->ball.xPos = 108 << 8;
             sPinballGame->ball.yPos = 32 << 8;
+            sPinballGame->ball.xVelocity = 1 << 8;
+            sPinballGame->ball.yVelocity = 2 << 8;
             sPinballGame->rightFlipper.type = FLIPPER_RIGHT;
-            sPinballGame->rightFlipper.xPos = 128;
-            sPinballGame->rightFlipper.yPos = 96;
+            sPinballGame->rightFlipper.xPos = 125;
+            sPinballGame->rightFlipper.yPos = 98;
             sPinballGame->leftFlipper.type = FLIPPER_LEFT;
-            sPinballGame->leftFlipper.xPos = 96;
-            sPinballGame->leftFlipper.yPos = 96;
+            sPinballGame->leftFlipper.xPos = 99;
+            sPinballGame->leftFlipper.yPos = 98;
         }
         break;
     case PINBALL_STATE_RUNNING:
@@ -524,13 +530,14 @@ static void HandleBallPhysics(void)
     u8 staticCollisionNormal;
     u8 collisionNormal;
     u16 flipperYForce = 0;
+    int collisionAmplification = 0;
     struct Ball *ball = &sPinballGame->ball;
 
     if (sPinballGame->gravityEnabled)
         ApplyGravity(ball);
 
     LimitVelocity(ball);
-    isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal);
+    isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal, &collisionAmplification);
     isStaticColliding = HandleStaticCollision(ball, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
     if (isFlipperColliding)
         collisionNormal = flipperCollisionNormal;
@@ -540,7 +547,7 @@ static void HandleBallPhysics(void)
     if (isFlipperColliding || isStaticColliding)
     {
         RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
-        ApplyCollisionForces(ball, flipperYForce);
+        ApplyCollisionForces(ball, flipperYForce, collisionAmplification);
         RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
     }
 
@@ -549,7 +556,7 @@ static void HandleBallPhysics(void)
     //if ((ball->yPos >> 8) > sPinballGame->stageTileHeight * 8 - 8)
     if ((ball->yPos >> 8) > 160 || (ball->xPos >> 8) > 240)
     {
-        ball->xPos = 129 << 8;
+        ball->xPos = 128 << 8;
         ball->yPos = 32 << 8;
         ball->yVelocity = 0;
         ball->xVelocity = 0;
@@ -581,7 +588,7 @@ static void LimitVelocity(struct Ball *ball)
         ball->yVelocity = -MAX_VELOCITY;
 }
 
-static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal)
+static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     struct Flipper *flipper;
 
@@ -591,9 +598,9 @@ static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollision
     // Find the nearest flipper to the ball, and check collision with it.
     flipper = FindPotentialCollisionFlipper(ball->xPos >> 8, ball->yPos >> 8);
     if (flipper == NULL)
-        return;
+        return FALSE;
     
-    CheckFlipperCollision(ball, flipper, outYForce, outCollisionNormal);
+    return CheckFlipperCollision(ball, flipper, outYForce, outCollisionNormal, outCollisionAmplification);
 }
 
 #define FLIPPER_STATE_DELTA 0x0333
@@ -643,7 +650,7 @@ static struct Flipper *FindPotentialCollisionFlipper(u32 x, u32 y)
     return NULL;
 }
 
-static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal)
+static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     int curState, stateDelta;
     int offset;
@@ -653,6 +660,8 @@ static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, 
     int ballYPos = (ball->yPos >> 8);
     int xOffset = ballXPos - flipper->xPos + 24;
     int yOffset = ballYPos - flipper->yPos + 16;
+    *outYForce = 0;
+    *outCollisionAmplification = 0;
 
     if (flipper->type == FLIPPER_RIGHT)
         xOffset = 48 - xOffset;
@@ -676,12 +685,16 @@ static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, 
 
     collisionNormal = sFlipperCollisionNormalAngles[curState * 0x600 + offset];
     magnitude = sFlipperRadiusMagnitudes[collisionRadius];
-    *outYForce = ((abs(flipper->stateDelta) * 4) * magnitude) >> 8;
+    *outYForce = ((flipper->stateDelta * 4) * magnitude) >> 8;
     *outCollisionNormal = flipper->type == FLIPPER_LEFT ? collisionNormal : -collisionNormal;
+    *outCollisionAmplification = 1;
 
     // Don't apply any y force if the ball is being forced downwards into the flipper
     if ((*outYForce) & 0x8000)
+    {
         *outYForce = 0;
+        *outCollisionAmplification = 0;
+    }
 
     return TRUE;
 }
@@ -739,7 +752,7 @@ static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int s
         column = testX % 8;
         tileIndex = (tileY * stageTileWidth) + tileX;
         collisionAttribute = sPinballBaseBgCollisionMap[tileIndex];
-        collisionMaskRow = sPinballBaseBgCollisionMasks[(collisionAttribute * 0x8) + row];
+        collisionMaskRow = GetCollisionMaskRow(collisionAttribute, row);
         collisionTests[i] = (collisionMaskRow & (1 << column)) != 0;
     }
 
@@ -814,6 +827,51 @@ static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int s
     return TRUE;
 }
 
+static u8 GetCollisionMaskRow(int collisionAttribute, int row)
+{
+    struct Flipper *flipper;
+    int state;
+    int offset;
+    const u8 *flipperStateMasks;
+    u8 mask;
+
+    if (collisionAttribute < 0xE0)
+        return sPinballBaseBgCollisionMasks[(collisionAttribute * 0x8) + row];
+
+    // Collision attribute from 0xE0 - 0xFF are special
+    // static flipper collision masks.
+    if (collisionAttribute < 0xF0)
+        flipper = &sPinballGame->leftFlipper;
+    else
+        flipper = &sPinballGame->rightFlipper;
+
+    state = flipper->state >> 8;
+    if (state < 7)
+        offset = 0;
+    else if (state < 14)
+        offset = 1;
+    else
+        offset = 2;
+
+    if (collisionAttribute < 0xF0)
+        flipperStateMasks = sFlipperLeftCollisionMasks[offset];
+    else
+        flipperStateMasks = sFlipperRightCollisionMasks[offset];
+
+    mask = flipperStateMasks[(collisionAttribute % 0x10) * 0x8 + row];
+
+    // Reverse the bits because my tooling is backwards.
+    return ReverseBits(mask);
+}
+
+static u8 ReverseBits(u8 b)
+{
+    b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+    b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+    b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+    return b;
+}
+
 static void RotateVector(s16 *x, s16 *y, u8 angle)
 {
     // Rotate a vector by an angle with a 2D rotation matrix calculation.
@@ -827,7 +885,7 @@ static void RotateVector(s16 *x, s16 *y, u8 angle)
     *y = newY;
 }
 
-static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce)
+static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification)
 {
     // Only apply the collision forces if the ball is moving
     // towards the wall it collided with, which can only be
@@ -838,7 +896,7 @@ static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce)
 
     // Apply dampening to the vertical velocity component, and
     // negate it so that the ball bounces off the wall.
-    ball->yVelocity = -(ball->yVelocity / 4);
+    ball->yVelocity = -(((2 + collisionAmplification) * ball->yVelocity) / 8);
     ball->xVelocity += ball->spin / 2;
     ball->spin = (ball->xVelocity * 4) >> 8;
 
