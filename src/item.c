@@ -548,7 +548,6 @@ bool8 AddPCItem(u16 itemId, u16 count)
 
 void RemovePCItem(u8 index, u16 count)
 {
-    // UB: should use GetPCItemQuantity and SetPCItemQuantity functions
     gSaveBlock1Ptr->pcItems[index].quantity -= count;
     if (gSaveBlock1Ptr->pcItems[index].quantity == 0)
     {

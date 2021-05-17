@@ -1890,6 +1890,10 @@ static void Cmd_if_has_move_with_effect(void)
             if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
 #endif
                 break;
+            #else
+            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+                break;
+            #endif
         }
         if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;
