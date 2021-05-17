@@ -492,6 +492,12 @@ void SortSprites(void)
                 }
             }
         }
+#ifdef UBFIX //To sort the first two sprites
+        {
+            u8 temp = sSpriteOrder[1];
+            sSpriteOrder[1] = sSpriteOrder[0];
+            sSpriteOrder[0] = temp;
+        }
     }
 }
 
