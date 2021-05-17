@@ -439,7 +439,11 @@ void SortSprites(void)
             }
         }
 
+#ifndef UBFIX
         while (j > 0
+#else
+        while (j > 1
+#endif
             && ((sprite1Priority > sprite2Priority)
              || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
         {
