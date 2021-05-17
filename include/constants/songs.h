@@ -371,7 +371,8 @@
 #define MUS_CONTEST                  440 // MUS_CONTEST0
 #define MUS_ENCOUNTER_MAGMA          441 // MUS_MGM0
 #define MUS_INTRO_BATTLE             442 // MUS_T_BATTLE
-#define MUS_ABNORMAL_WEATHER         443 // MUS_OOAME (Replaces MUS_WEATHER_KYOGRE from R/S)
+#define MUS_ABNORMAL_WEATHER         443 // MUS_OOAME 
+#define MUS_WEATHER_KYOGRE           894 // old MUS_OOAME (Unused, from R/S)
 #define MUS_WEATHER_GROUDON          444 // MUS_HIDERI (Unused, from R/S)
 #define MUS_SOOTOPOLIS               445 // MUS_RUNECITY
 #define MUS_CONTEST_RESULTS          446 // MUS_CON_K

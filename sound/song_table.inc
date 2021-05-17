@@ -895,6 +895,7 @@ gSongTable:: @ 86B49F0
 	song dp_seq_fue, 0, 0
 	song dp_seq_aus, 0, 0
 	song pl_seq_pl_ba_regi, 0, 0
+	song mus_weather_kyogre, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

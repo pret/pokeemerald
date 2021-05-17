@@ -1587,6 +1587,7 @@ SECTIONS {
         sound/songs/midi/dp_seq_fue.o(.rodata);
         sound/songs/midi/dp_seq_aus.o(.rodata);
         sound/songs/midi/pl_seq_pl_ba_regi.o(.rodata);
+        sound/songs/mus_weather_kyogre.o(.rodata);
     } =0
 
     lib_rodata :
