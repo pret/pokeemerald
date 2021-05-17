@@ -693,9 +693,9 @@
 #define DP_SEQ_BLD_DENDO             678 // Hall of Fame
 #define DP_SEQ_BLD_EV_DENDO2         679 // Congratulations on Entering the Hall of Fame!
 #define DP_SEQ_BLD_ENDING            680 // Ending Theme
-#define DP_SEQ_BA_SECRET1            681 // Battle! Arceus
 #define DP_SEQ_FUE                   891 // Azure Flute
 #define DP_SEQ_AUS                   892 // Hall of Origin
+#define DP_SEQ_BA_SECRET1            681 // Battle! Arceus
 
 // Platinum Music 
 #define PL_SEQ_TITLE00               682 // Title Screen

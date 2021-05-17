@@ -41,8 +41,8 @@ struct RfuDebug
     u8 filler4[88];
 };
 
-u32 gf_rfu_REQ_api[RFU_API_BUFF_SIZE_RAM / 4];
-struct GFRfuManager Rfu;
+EWRAM_DATA u32 gf_rfu_REQ_api[RFU_API_BUFF_SIZE_RAM / 4] = {};
+EWRAM_DATA struct GFRfuManager Rfu = {};
 
 static u8 sHeldKeyCount;
 static u8 sResendBlock8[16];
