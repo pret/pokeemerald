@@ -3997,3 +3997,155 @@ DirectSoundWaveData_bw_239xylo2c6::
 	.align 2
 DirectSoundWaveData_bw_240xylo2f5::
 	.incbin "sound/direct_sound_samples/bw_240xylo2f5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_solotrumpetc5::
+	.incbin "sound/direct_sound_samples/bw_solotrumpetc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_spiccatostringse2::
+	.incbin "sound/direct_sound_samples/bw_spiccatostringse2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_trombonesstaccatocs2::
+	.incbin "sound/direct_sound_samples/bw_trombonesstaccatocs2.bin"
+
+	.align 2
+DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
+	.incbin "sound/direct_sound_samples/b2_trumpetsstaccatogs4_loop.bin"
+
+	.align 2
+DirectSoundWaveData_b2_drumloop_vsiris::
+	.incbin "sound/direct_sound_samples/b2_drumloop_vsiris.bin"
+
+	.align 2
+DirectSoundWaveData_b2_femvoxohas2::
+	.incbin "sound/direct_sound_samples/b2_femvoxohas2.bin"
+
+	.align 2
+DirectSoundWaveData_b2_femvoxohf3::
+	.incbin "sound/direct_sound_samples/b2_femvoxohf3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_femvoxohas3::
+	.incbin "sound/direct_sound_samples/b2_femvoxohas3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_femvoxohf4::
+	.incbin "sound/direct_sound_samples/b2_femvoxohf4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_femvoxohas4::
+	.incbin "sound/direct_sound_samples/b2_femvoxohas4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fmsawpadd2::
+	.incbin "sound/direct_sound_samples/b2_fmsawpadd2.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fmsawpadd3::
+	.incbin "sound/direct_sound_samples/b2_fmsawpadd3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fmsawpadd4::
+	.incbin "sound/direct_sound_samples/b2_fmsawpadd4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fmsawpadd5::
+	.incbin "sound/direct_sound_samples/b2_fmsawpadd5.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fmsawpadd6::
+	.incbin "sound/direct_sound_samples/b2_fmsawpadd6.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fuzzyleadg2::
+	.incbin "sound/direct_sound_samples/b2_fuzzyleadg2.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fuzzyleadg3::
+	.incbin "sound/direct_sound_samples/b2_fuzzyleadg3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fuzzyleadg4::
+	.incbin "sound/direct_sound_samples/b2_fuzzyleadg4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_fuzzyleadg5::
+	.incbin "sound/direct_sound_samples/b2_fuzzyleadg5.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gamelanc3::
+	.incbin "sound/direct_sound_samples/b2_gamelanc3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gamelang3::
+	.incbin "sound/direct_sound_samples/b2_gamelang3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gamelanc4::
+	.incbin "sound/direct_sound_samples/b2_gamelanc4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gamelang4::
+	.incbin "sound/direct_sound_samples/b2_gamelang4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gamelanc5::
+	.incbin "sound/direct_sound_samples/b2_gamelanc5.bin"
+
+	.align 2
+DirectSoundWaveData_b2_panflutec4::
+	.incbin "sound/direct_sound_samples/b2_panflutec4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_panflutea4::
+	.incbin "sound/direct_sound_samples/b2_panflutea4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_panfluteg5::
+	.incbin "sound/direct_sound_samples/b2_panfluteg5.bin"
+
+	.align 2
+DirectSoundWaveData_b2_panflutec6::
+	.incbin "sound/direct_sound_samples/b2_panflutec6.bin"
+
+	.align 2
+DirectSoundWaveData_b2_pinkstrate2::
+	.incbin "sound/direct_sound_samples/b2_pinkstrate2.bin"
+
+	.align 2
+DirectSoundWaveData_b2_pinkstrate3::
+	.incbin "sound/direct_sound_samples/b2_pinkstrate3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_pinkstrate4::
+	.incbin "sound/direct_sound_samples/b2_pinkstrate4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_pinkstrata4::
+	.incbin "sound/direct_sound_samples/b2_pinkstrata4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_pinkstrata5::
+	.incbin "sound/direct_sound_samples/b2_pinkstrata5.bin"
+
+	.align 2
+DirectSoundWaveData_b2_squarepadd2::
+	.incbin "sound/direct_sound_samples/b2_squarepadd2.bin"
+
+	.align 2
+DirectSoundWaveData_b2_squarepadd3::
+	.incbin "sound/direct_sound_samples/b2_squarepadd3.bin"
+
+	.align 2
+DirectSoundWaveData_b2_squarepadd4::
+	.incbin "sound/direct_sound_samples/b2_squarepadd4.bin"
+
+	.align 2
+DirectSoundWaveData_b2_squarepadd5::
+	.incbin "sound/direct_sound_samples/b2_squarepadd5.bin"
+
+	.align 2
+DirectSoundWaveData_b2_squarepadd6::
+	.incbin "sound/direct_sound_samples/b2_squarepadd6.bin"
