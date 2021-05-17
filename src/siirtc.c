@@ -162,7 +162,9 @@ bool8 SiiRtcReset(void)
 
     rtc.status = SIIRTCINFO_24HOUR;
 
-    return SiiRtcSetStatus(&rtc);
+    result = SiiRtcSetStatus(&rtc);
+
+    return result;
 }
 
 bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
