@@ -140,7 +140,7 @@ u8 SiiRtcProbe(void)
 
 bool8 SiiRtcReset(void)
 {
-    u8 result;
+    bool8 result;
     struct SiiRtcInfo rtc;
 
     if (sLocked == TRUE)
