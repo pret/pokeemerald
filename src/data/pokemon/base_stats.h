@@ -7844,7 +7844,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 54,
         .evYield_Speed     = 1,
         #ifdef ITEM_EXPANSION
-            .item1 = ITEM_PRETTY_WING,
+            .item1 = ITEM_PRETTY_FEATHER,
         #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -7879,7 +7879,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 2,
         #ifdef ITEM_EXPANSION
-            .item1 = ITEM_PRETTY_WING,
+            .item1 = ITEM_PRETTY_FEATHER,
         #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
