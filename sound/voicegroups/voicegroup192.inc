@@ -19,7 +19,7 @@ voicegroup192:: @ HGSS main
 	voice_keysplit voicegroup193, KeySplitTable56    @ distortion guitar 1
 	voice_keysplit voicegroup193, KeySplitTable57    @ distortion guitar 2
 	voice_keysplit voicegroup193, KeySplitTable58    @ clean guitar
-	voice_keysplit voicegroup193, KeySplitTable59    @ upright bass
+	voice_keysplit voicegroup007, KeySplitTable59    @ upright bass
 	voice_keysplit voicegroup193, KeySplitTable60    @ fingered bass
 	voice_directsound 60, 0, DirectSoundWaveData_dp_slapbass_c1_16, 255, 0, 255, 192
 	voice_keysplit voicegroup193, KeySplitTable61    @ synth bass
@@ -27,11 +27,11 @@ voicegroup192:: @ HGSS main
 	voice_keysplit voicegroup193, KeySplitTable63    @ violin
 	voice_keysplit voicegroup193, KeySplitTable64    @ cello
 	voice_keysplit voicegroup006, KeySplitTable65    @ pizzicato
-	voice_keysplit voicegroup006, KeySplitTable66    @ harp
+	voice_keysplit voicegroup007, KeySplitTable66    @ harp
 	voice_keysplit voicegroup006, KeySplitTable67    @ timpani
 	voice_keysplit voicegroup006, KeySplitTable68    @ trumpets
 	voice_keysplit voicegroup006, KeySplitTable69    @ trombones
-	voice_keysplit voicegroup006, KeySplitTable70    @ french horn solo
+	voice_keysplit voicegroup007, KeySplitTable70    @ french horn solo
 	voice_keysplit voicegroup006, KeySplitTable71    @ french horns
 	voice_keysplit voicegroup006, KeySplitTable72    @ oboe
 	voice_keysplit voicegroup006, KeySplitTable73    @ clarinet

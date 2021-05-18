@@ -193,3 +193,8 @@
 .include "sound/voicegroups/voicegroup191.inc" @ DPPt main
 .include "sound/voicegroups/voicegroup192.inc" @ HGSS main
 .include "sound/voicegroups/voicegroup193.inc"
+.include "sound/voicegroups/voicegroup194.inc" @ BW/B2W2 main
+.include "sound/voicegroups/voicegroup195.inc" @ bw drums 1
+.include "sound/voicegroups/voicegroup196.inc" @ bw drums 2
+.include "sound/voicegroups/voicegroup197.inc" @ bw drums 3
+.include "sound/voicegroups/voicegroup198.inc" @ bw drums 4

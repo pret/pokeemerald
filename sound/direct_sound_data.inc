@@ -4149,3 +4149,19 @@ DirectSoundWaveData_b2_squarepadd5::
 	.align 2
 DirectSoundWaveData_b2_squarepadd6::
 	.incbin "sound/direct_sound_samples/b2_squarepadd6.bin"
+
+	.align 2
+DirectSoundWaveData_b2_woodblocklo::
+	.incbin "sound/direct_sound_samples/b2_woodblocklo.bin"
+
+	.align 2
+DirectSoundWaveData_b2_woodblockhi::
+	.incbin "sound/direct_sound_samples/b2_woodblockhi.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gongf::
+	.incbin "sound/direct_sound_samples/b2_gongf.bin"
+
+	.align 2
+DirectSoundWaveData_b2_gongp::
+	.incbin "sound/direct_sound_samples/b2_gongp.bin"

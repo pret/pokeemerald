@@ -9,9 +9,9 @@ voicegroup006:: @ 8676AC0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_148pizzc4, 255, 242, 25, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_147pizza4, 255, 242, 25, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_150pizzf5, 255, 239, 25, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_087harpc3, 255, 248, 0, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_088harpc4, 255, 246, 0, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_089harpc5, 255, 242, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_203timpg3, 255, 251, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_202timpc4, 255, 251, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_204timpg4, 255, 251, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_203timpg3, 255, 251, 25, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_202timpc4, 255, 251, 25, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_204timpg4, 255, 251, 25, 192
@@ -117,4 +117,14 @@ voicegroup006:: @ 8676AC0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_pno4b4, 255, 247, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_pno4g5, 255, 247, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_pno4e6, 255, 247, 0, 205
-
+	voice_directsound 60, 0, DirectSoundWaveData_bw_075pnoc2, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_079pnog2, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_076pnoc3, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_080pnog3, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_077pnoc4, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_081pnog4, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_078pnoc5, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_082pnog5, 255, 251, 0, 214
+	voice_directsound 60, 0, DirectSoundWaveData_bw_226vibrc4, 255, 248, 0, 192      @ note the decay is
+	voice_directsound 60, 0, DirectSoundWaveData_bw_227vibrc5, 255, 248, 0, 205      @ slightly longer
+	voice_directsound 60, 0, DirectSoundWaveData_bw_228vibrc6, 255, 248, 0, 205      @ than in hgss

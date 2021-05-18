@@ -108,8 +108,8 @@ voicegroup193::
 	voice_directsound 60, 0, DirectSoundWaveData_bw_039cleang3, 255, 246, 0, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_037cleane4, 255, 246, 0, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_036cleanc5, 255, 246, 0, 171
-	voice_directsound 60, 0, DirectSoundWaveData_bw_000uprigc2, 255, 251, 0, 192
-	voice_directsound 60, 0, DirectSoundWaveData_bw_001uprigc3, 255, 251, 0, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_052ampega2, 255, 234, 191, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_053ampega3, 255, 234, 191, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_052ampega2, 255, 234, 159, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_053ampega3, 255, 234, 159, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_194elastkc2, 255, 1, 227, 171
