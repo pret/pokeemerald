@@ -6983,84 +6983,78 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_HEALTH_WING] =
+    [ITEM_HEALTH_FEATHER] =
     {
-        .name = _("HealthFeather"),
-        .itemId = ITEM_HEALTH_WING,
+        .name = _("HealthFeathr"),
+        .itemId = ITEM_HEALTH_FEATHER,
         .price = 300,
-        .description = sHealthWingDesc,
+        .description = sHealthFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .secondaryId = STAT_HP,
     },
 
-    [ITEM_MUSCLE_WING] =
+    [ITEM_MUSCLE_FEATHER] =
     {
-        .name = _("MuscleFeather"),
-        .itemId = ITEM_MUSCLE_WING,
+        .name = _("MuscleFeathr"),
+        .itemId = ITEM_MUSCLE_FEATHER,
         .price = 300,
-        .description = sMuscleWingDesc,
+        .description = sMuscleFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .secondaryId = STAT_ATK,
     },
 
-    [ITEM_RESIST_WING] =
+    [ITEM_RESIST_FEATHER] =
     {
-        .name = _("ResistFeather"),
-        .itemId = ITEM_RESIST_WING,
+        .name = _("ResistFeathr"),
+        .itemId = ITEM_RESIST_FEATHER,
         .price = 300,
-        .description = sResistWingDesc,
+        .description = sResistFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .secondaryId = STAT_DEF,
     },
 
-    [ITEM_GENIUS_WING] =
+    [ITEM_GENIUS_FEATHER] =
     {
-        .name = _("GeniusFeather"),
-        .itemId = ITEM_GENIUS_WING,
+        .name = _("GeniusFeathr"),
+        .itemId = ITEM_GENIUS_FEATHER,
         .price = 300,
-        .description = sGeniusWingDesc,
+        .description = sGeniusFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .secondaryId = STAT_SPATK,
     },
 
-    [ITEM_CLEVER_WING] =
+    [ITEM_CLEVER_FEATHER] =
     {
-        .name = _("CleverFeather"),
-        .itemId = ITEM_CLEVER_WING,
+        .name = _("CleverFeathr"),
+        .itemId = ITEM_CLEVER_FEATHER,
         .price = 300,
-        .description = sCleverWingDesc,
+        .description = sCleverFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .secondaryId = STAT_SPDEF,
     },
 
-    [ITEM_SWIFT_WING] =
+    [ITEM_SWIFT_FEATHER] =
     {
-        .name = _("Swift Feather"),
-        .itemId = ITEM_SWIFT_WING,
+        .name = _("SwiftFeather"),
+        .itemId = ITEM_SWIFT_FEATHER,
         .price = 300,
-        .description = sSwiftWingDesc,
+        .description = sSwiftFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .secondaryId = STAT_SPEED,
     },
 
-    [ITEM_PRETTY_WING] =
+    [ITEM_PRETTY_FEATHER] =
     {
-        .name = _("PrettyFeather"),
-        .itemId = ITEM_PRETTY_WING,
+        .name = _("PrettyFeathr"),
+        .itemId = ITEM_PRETTY_FEATHER,
         .price = 1000,
-        .description = sPrettyWingDesc,
+        .description = sPrettyFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
