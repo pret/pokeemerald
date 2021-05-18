@@ -277,7 +277,7 @@
 #define SE_PIKE_CURTAIN_OPEN         268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE           269 // SE_USSOKI
  
-// Music 
+// Ruby & Sapphire Music 
 #define MUS_LITTLEROOT_TEST          350 // MUS_TETSUJI
 #define MUS_GSC_ROUTE38              351 // MUS_FIELD13
 #define MUS_CAUGHT                   352 // MUS_KACHI22
@@ -371,7 +371,6 @@
 #define MUS_CONTEST                  440 // MUS_CONTEST0
 #define MUS_ENCOUNTER_MAGMA          441 // MUS_MGM0
 #define MUS_INTRO_BATTLE             442 // MUS_T_BATTLE
-#define MUS_ABNORMAL_WEATHER         443 // MUS_OOAME 
 #define MUS_WEATHER_KYOGRE           894 // old MUS_OOAME (Unused, from R/S)
 #define MUS_WEATHER_GROUDON          444 // MUS_HIDERI (Unused, from R/S)
 #define MUS_SOOTOPOLIS               445 // MUS_RUNECITY
@@ -386,23 +385,6 @@
 #define MUS_ENCOUNTER_CHAMPION       454 // MUS_DAIGO
 #define MUS_CREDITS                  455 // MUS_THANKFOR
 #define MUS_END                      456 // MUS_END
-#define MUS_B_FRONTIER               457 // MUS_B_FRONTIER
-#define MUS_B_ARENA                  458 // MUS_B_ARENA
-#define MUS_OBTAIN_B_POINTS          459 // MUS_ME_POINTGET
-#define MUS_REGISTER_MATCH_CALL      460 // MUS_ME_TORE_EYE
-#define MUS_B_PYRAMID                461 // MUS_PYRAMID
-#define MUS_B_PYRAMID_TOP            462 // MUS_PYRAMID_TOP
-#define MUS_B_PALACE                 463 // MUS_B_PALACE
-#define MUS_RAYQUAZA_APPEARS         464 // MUS_REKKUU_KOURIN
-#define MUS_B_TOWER                  465 // MUS_SATTOWER
-#define MUS_OBTAIN_SYMBOL            466 // MUS_ME_SYMBOLGET
-#define MUS_B_DOME                   467 // MUS_B_DOME
-#define MUS_B_PIKE                   468 // MUS_B_TUBE
-#define MUS_B_FACTORY                469 // MUS_B_FACTORY
-#define MUS_VS_RAYQUAZA              470 // MUS_VS_REKKU (Identical to MUS_VS_KYOGRE_GROUDON)
-#define MUS_VS_FRONTIER_BRAIN        471 // MUS_VS_FRONT
-#define MUS_VS_MEW                   472 // MUS_VS_MEW
-#define MUS_B_DOME_LOBBY             473 // MUS_B_DOME1
 #define MUS_VS_WILD                  474 // MUS_BATTLE27
 #define MUS_VS_AQUA_MAGMA            475 // MUS_BATTLE31
 #define MUS_VS_TRAINER               476 // MUS_BATTLE20
@@ -413,7 +395,8 @@
 #define MUS_VS_RIVAL                 481 // MUS_BATTLE35
 #define MUS_VS_ELITE_FOUR            482 // MUS_BATTLE38
 #define MUS_VS_AQUA_MAGMA_LEADER     483 // MUS_BATTLE30
-// FRLG Music 
+
+// FireRed & LeafGreen Music 
 #define MUS_RG_FOLLOW_ME             484 // MUS_RG_ANNAI
 #define MUS_RG_GAME_CORNER           485 // MUS_RG_SLOT
 #define MUS_RG_ROCKET_HIDEOUT        486 // MUS_RG_AJITO
@@ -489,58 +472,27 @@
 #define MUS_RG_TRAINER_TOWER         556 // MUS_RG_T_TOWER
 #define MUS_RG_SLOW_PALLET           557 // MUS_RG_SLOWMASARA
 #define MUS_RG_TEACHY_TV_MENU        558 // MUS_RG_TVNOIZE
- 
-#define PH_TRAP_BLEND                559
-#define PH_TRAP_HELD                 560
-#define PH_TRAP_SOLO                 561
-#define PH_FACE_BLEND                562
-#define PH_FACE_HELD                 563
-#define PH_FACE_SOLO                 564
-#define PH_CLOTH_BLEND               565
-#define PH_CLOTH_HELD                566
-#define PH_CLOTH_SOLO                567
-#define PH_DRESS_BLEND               568
-#define PH_DRESS_HELD                569
-#define PH_DRESS_SOLO                570
-#define PH_FLEECE_BLEND              571
-#define PH_FLEECE_HELD               572
-#define PH_FLEECE_SOLO               573
-#define PH_KIT_BLEND                 574
-#define PH_KIT_HELD                  575
-#define PH_KIT_SOLO                  576
-#define PH_PRICE_BLEND               577
-#define PH_PRICE_HELD                578
-#define PH_PRICE_SOLO                579
-#define PH_LOT_BLEND                 580
-#define PH_LOT_HELD                  581
-#define PH_LOT_SOLO                  582
-#define PH_GOAT_BLEND                583
-#define PH_GOAT_HELD                 584
-#define PH_GOAT_SOLO                 585
-#define PH_THOUGHT_BLEND             586
-#define PH_THOUGHT_HELD              587
-#define PH_THOUGHT_SOLO              588
-#define PH_CHOICE_BLEND              589
-#define PH_CHOICE_HELD               590
-#define PH_CHOICE_SOLO               591
-#define PH_MOUTH_BLEND               592
-#define PH_MOUTH_HELD                593
-#define PH_MOUTH_SOLO                594
-#define PH_FOOT_BLEND                595
-#define PH_FOOT_HELD                 596
-#define PH_FOOT_SOLO                 597
-#define PH_GOOSE_BLEND               598
-#define PH_GOOSE_HELD                599
-#define PH_GOOSE_SOLO                600
-#define PH_STRUT_BLEND               601
-#define PH_STRUT_HELD                602
-#define PH_STRUT_SOLO                603
-#define PH_CURE_BLEND                604
-#define PH_CURE_HELD                 605
-#define PH_CURE_SOLO                 606
-#define PH_NURSE_BLEND               607
-#define PH_NURSE_HELD                608
-#define PH_NURSE_SOLO                609
+
+// Emerald Music
+#define MUS_ABNORMAL_WEATHER         443 // MUS_OOAME
+#define MUS_B_FRONTIER               457 // MUS_B_FRONTIER
+#define MUS_B_ARENA                  458 // MUS_B_ARENA
+#define MUS_OBTAIN_B_POINTS          459 // MUS_ME_POINTGET
+#define MUS_REGISTER_MATCH_CALL      460 // MUS_ME_TORE_EYE
+#define MUS_B_PYRAMID                461 // MUS_PYRAMID
+#define MUS_B_PYRAMID_TOP            462 // MUS_PYRAMID_TOP
+#define MUS_B_PALACE                 463 // MUS_B_PALACE
+#define MUS_RAYQUAZA_APPEARS         464 // MUS_REKKUU_KOURIN
+#define MUS_B_TOWER                  465 // MUS_SATTOWER
+#define MUS_OBTAIN_SYMBOL            466 // MUS_ME_SYMBOLGET
+#define MUS_B_DOME                   467 // MUS_B_DOME
+#define MUS_B_PIKE                   468 // MUS_B_TUBE
+#define MUS_B_FACTORY                469 // MUS_B_FACTORY
+#define MUS_VS_RAYQUAZA              470 // MUS_VS_REKKU (Identical to MUS_VS_KYOGRE_GROUDON)
+#define MUS_VS_FRONTIER_BRAIN        471 // MUS_VS_FRONT
+#define MUS_VS_MEW                   472 // MUS_VS_MEW
+#define MUS_B_DOME_LOBBY             473 // MUS_B_DOME1
+
  
 // Diamond & Pearl Music 
 #define DP_SEQ_TITLE00               270 // Opening Movie (Part 1)
@@ -913,7 +865,9 @@
 #define HG_SEQ_ME_GONIN              890 // Let's Go Together (Unused?)
 
 // Black & White Music
-
+#define BW_SEQ_BGM_TITLE             895 // Coronation Day
+#define BW_SEQ_BGM_TITLE01           896 // A New Adventure!
+#define BW_SEQ_BGM_POKEMON_THEME     897 // Title Screen
 
 // Black 2 & White 2 Music
 
@@ -922,6 +876,58 @@
 // (Only additions to the OST not already present in RSE)
 
 
+ 
+#define PH_TRAP_BLEND                559
+#define PH_TRAP_HELD                 560
+#define PH_TRAP_SOLO                 561
+#define PH_FACE_BLEND                562
+#define PH_FACE_HELD                 563
+#define PH_FACE_SOLO                 564
+#define PH_CLOTH_BLEND               565
+#define PH_CLOTH_HELD                566
+#define PH_CLOTH_SOLO                567
+#define PH_DRESS_BLEND               568
+#define PH_DRESS_HELD                569
+#define PH_DRESS_SOLO                570
+#define PH_FLEECE_BLEND              571
+#define PH_FLEECE_HELD               572
+#define PH_FLEECE_SOLO               573
+#define PH_KIT_BLEND                 574
+#define PH_KIT_HELD                  575
+#define PH_KIT_SOLO                  576
+#define PH_PRICE_BLEND               577
+#define PH_PRICE_HELD                578
+#define PH_PRICE_SOLO                579
+#define PH_LOT_BLEND                 580
+#define PH_LOT_HELD                  581
+#define PH_LOT_SOLO                  582
+#define PH_GOAT_BLEND                583
+#define PH_GOAT_HELD                 584
+#define PH_GOAT_SOLO                 585
+#define PH_THOUGHT_BLEND             586
+#define PH_THOUGHT_HELD              587
+#define PH_THOUGHT_SOLO              588
+#define PH_CHOICE_BLEND              589
+#define PH_CHOICE_HELD               590
+#define PH_CHOICE_SOLO               591
+#define PH_MOUTH_BLEND               592
+#define PH_MOUTH_HELD                593
+#define PH_MOUTH_SOLO                594
+#define PH_FOOT_BLEND                595
+#define PH_FOOT_HELD                 596
+#define PH_FOOT_SOLO                 597
+#define PH_GOOSE_BLEND               598
+#define PH_GOOSE_HELD                599
+#define PH_GOOSE_SOLO                600
+#define PH_STRUT_BLEND               601
+#define PH_STRUT_HELD                602
+#define PH_STRUT_SOLO                603
+#define PH_CURE_BLEND                604
+#define PH_CURE_HELD                 605
+#define PH_CURE_SOLO                 606
+#define PH_NURSE_BLEND               607
+#define PH_NURSE_HELD                608
+#define PH_NURSE_SOLO                609
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

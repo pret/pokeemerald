@@ -2354,3 +2354,12 @@ $(MID_SUBDIR)/dp_seq_aus.s: %.s: %.mid
 
 $(MID_SUBDIR)/pl_seq_pl_ba_regi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G191 -V105
+
+$(MID_SUBDIR)/bw_seq_bgm_title.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V092
+
+$(MID_SUBDIR)/bw_seq_bgm_title01.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V093
+
+$(MID_SUBDIR)/bw_seq_bgm_pokemon_theme.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V106

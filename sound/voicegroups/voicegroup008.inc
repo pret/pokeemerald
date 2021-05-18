@@ -105,17 +105,17 @@ voicegroup008:: @ 8677108
 	voice_directsound 60, 0, DirectSoundWaveData_hg_126squarc5, 255, 242, 191, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_127squarc6, 255, 234, 191, 205
 	voice_directsound 60, 0, DirectSoundWaveData_b2_fuzzyleadg5, 255, 0, 255, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmaleg2, 255, 242, 191, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmalee3, 255, 242, 191, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmalec4, 255, 242, 191, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalef4, 255, 242, 191, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalec5, 255, 242, 191, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalef5, 255, 242, 191, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_064flt2a5, 255, 246, 159, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_067flt2f6, 255, 246, 159, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_219tptc4short, 255, 246, 210, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_218tpta4short, 255, 246, 210, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_220tptg5, 255, 246, 210, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

@@ -1352,6 +1352,9 @@ DP_SEQ_FUE                   = 7B 03
 DP_SEQ_AUS                   = 7C 03
 PL_SEQ_PL_BA_REGI            = 7D 03
 MUS_WEATHER_KYOGRE           = 7E 03
+BW_SEQ_BGM_TITLE             = 7F 03
+BW_SEQ_BGM_TITLE01           = 80 03
+BW_SEQ_BGM_POKEMON_THEME     = 81 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

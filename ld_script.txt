@@ -1588,6 +1588,9 @@ SECTIONS {
         sound/songs/midi/dp_seq_aus.o(.rodata);
         sound/songs/midi/pl_seq_pl_ba_regi.o(.rodata);
         sound/songs/mus_weather_kyogre.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_title.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_title01.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_pokemon_theme.o(.rodata);
     } =0
 
     lib_rodata :

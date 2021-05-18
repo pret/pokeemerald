@@ -4011,6 +4011,46 @@ DirectSoundWaveData_bw_trombonesstaccatocs2::
 	.incbin "sound/direct_sound_samples/bw_trombonesstaccatocs2.bin"
 
 	.align 2
+DirectSoundWaveData_bw_reversecymbale2::
+	.incbin "sound/direct_sound_samples/bw_reversecymbale2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmaleg2::
+	.incbin "sound/direct_sound_samples/bw_choirmaleg2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmalee3::
+	.incbin "sound/direct_sound_samples/bw_choirmalee3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmalec4::
+	.incbin "sound/direct_sound_samples/bw_choirmalec4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemalef4::
+	.incbin "sound/direct_sound_samples/bw_choirfemalef4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemalec5::
+	.incbin "sound/direct_sound_samples/bw_choirfemalec5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemalef5::
+	.incbin "sound/direct_sound_samples/bw_choirfemalef5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_218tpta4short::
+	.incbin "sound/direct_sound_samples/bw_218tpta4short.bin"
+
+	.align 2
+DirectSoundWaveData_bw_219tptc4short::
+	.incbin "sound/direct_sound_samples/bw_219tptc4short.bin"
+
+	.align 2
+DirectSoundWaveData_bw_snareroll::
+	.incbin "sound/direct_sound_samples/bw_snareroll.bin"
+
+	.align 2
 DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
 	.incbin "sound/direct_sound_samples/b2_trumpetsstaccatogs4_loop.bin"
 

@@ -194,7 +194,11 @@
 .include "sound/voicegroups/voicegroup192.inc" @ HGSS main
 .include "sound/voicegroups/voicegroup193.inc"
 .include "sound/voicegroups/voicegroup194.inc" @ BW/B2W2 main
-.include "sound/voicegroups/voicegroup195.inc" @ bw drums 1
-.include "sound/voicegroups/voicegroup196.inc" @ bw drums 2
-.include "sound/voicegroups/voicegroup197.inc" @ bw drums 3
-.include "sound/voicegroups/voicegroup198.inc" @ bw drums 4
+.include "sound/voicegroups/voicegroup195.inc"
+.include "sound/voicegroups/voicegroup196.inc"
+.include "sound/voicegroups/voicegroup197.inc"
+.include "sound/voicegroups/voicegroup198.inc"
+.include "sound/voicegroups/voicegroup199.inc" @ BW Kageyama
+.include "sound/voicegroups/voicegroup200.inc" @ BW Sato
+.include "sound/voicegroups/voicegroup201.inc" @ BW Ichinose (overworld)
+.include "sound/voicegroups/voicegroup202.inc" @ BW Ichinose (battles)
