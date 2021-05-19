@@ -2035,13 +2035,13 @@ static void Cmd_if_holds_item(void)
     // BUG: doesn't properly read an unaligned u16, instead it performs a bitwise OR between what is supposed to be the upper and lower bits
 
     // Note that this doesn't affect vanilla because the only time this function is actually called, var1 is always 0.
-    var1 = gAIScriptPtr[2];
-    var2 = gAIScriptPtr[3];
+    var2 = gAIScriptPtr[2];
+    var1 = gAIScriptPtr[3];
 
 #ifndef BUGFIX
     if ((var1 | var2) == item)
 #else
-    if (((var1 << 8) | var2) == item) // We shift var1 so we can splice it with var2 and make a u16
+    if (((var2 << 8) | var1) == item) // We shift var1 so we can splice it with var2 and make a u16
 #endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
