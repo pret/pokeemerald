@@ -73,6 +73,7 @@
 	.include "src/naming_screen.o"
 	.include "src/money.o"
 	.include "src/record_mixing.o"
+	.include "src/sound_check_menu.o"
 	.include "src/secret_base.o"
 	.include "src/tv.o"
 	.include "src/contest_util.o"

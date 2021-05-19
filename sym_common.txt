@@ -49,6 +49,7 @@ gReservedSpritePaletteCount:
 	.include "trainer_see.o"
 	.include "pokedex.o"
 	.include "contest.o"
+	.include "sound_check_menu.o"
 	.include "tv.o"
 	.include "mauville_old_man.o"
 	.include "image_processing_effects.o"

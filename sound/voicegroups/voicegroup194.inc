@@ -37,7 +37,7 @@ voicegroup194:: @ BW/B2W2 main
 	voice_keysplit voicegroup007, KeySplitTable111   @ pizzicato
 	voice_keysplit voicegroup007, KeySplitTable112   @ harp 2
 	voice_keysplit voicegroup007, KeySplitTable113   @ harp 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup007, KeySplitTable139   @ french horns (old splits)
 	voice_keysplit voicegroup006, KeySplitTable114   @ timpani
 	voice_keysplit voicegroup007, KeySplitTable115   @ trumpets
 	voice_keysplit voicegroup007, KeySplitTable116   @ trombones

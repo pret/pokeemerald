@@ -23,10 +23,10 @@ voicegroup195::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 48, 40, DirectSoundWaveData_dp_reverscyn_16, 2, 0, 227, 171
+	voice_directsound 60, 40, DirectSoundWaveData_bw_045crash, 255, 250, 0, 205
 	voice_directsound 61, 64, DirectSoundWaveData_bw_snareroll, 255, 0, 227, 2
-	voice_directsound 48, 64, DirectSoundWaveData_dp_reverscyn_16, 2, 0, 227, 171
+	voice_directsound 48, 64, DirectSoundWaveData_dp_reverscyn_16, 2, 0, 227, 171 // start of main kit
 	voice_directsound 60, 64, DirectSoundWaveData_bw_085clap, 255, 197, 227, 205
 	voice_directsound 60, 64, DirectSoundWaveData_bw_157snare, 255, 0, 227, 205
 	voice_directsound 60, 64, DirectSoundWaveData_bw_159rim, 255, 0, 227, 205

@@ -2363,3 +2363,18 @@ $(MID_SUBDIR)/bw_seq_bgm_title01.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_pokemon_theme.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V106
+
+$(MID_SUBDIR)/bw_seq_bgm_starting.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V045
+
+$(MID_SUBDIR)/bw_seq_bgm_starting2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_e_opening.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V103
+
+$(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V079

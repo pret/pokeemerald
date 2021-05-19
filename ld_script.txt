@@ -164,6 +164,7 @@ SECTIONS {
         src/money.o(.text);
         src/contest_effect.o(.text);
         src/record_mixing.o(.text);
+        src/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         src/tv.o(.text);
         src/contest_util.o(.text);
@@ -539,6 +540,7 @@ SECTIONS {
         src/money.o(.rodata);
         src/contest_effect.o(.rodata);
         src/record_mixing.o(.rodata);
+        src/sound_check_menu.o(.rodata);
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         src/contest_util.o(.rodata);
@@ -1591,6 +1593,11 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_title.o(.rodata);
         sound/songs/midi/bw_seq_bgm_title01.o(.rodata);
         sound/songs/midi/bw_seq_bgm_pokemon_theme.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_starting.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_starting2.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_opening.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_01.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_rival.o(.rodata);
     } =0
 
     lib_rodata :
