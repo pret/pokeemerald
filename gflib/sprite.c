@@ -439,8 +439,12 @@ void SortSprites(void)
             }
         }
 
-        while (j > 0
-            && ((sprite1Priority > sprite2Priority)
+#ifndef UBFIX
+        while (j > 0 &&
+#else
+        while (
+#endif
+            ((sprite1Priority > sprite2Priority)
              || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
         {
             u8 temp = sSpriteOrder[j];
