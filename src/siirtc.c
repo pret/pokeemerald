@@ -406,7 +406,7 @@ static void WriteCommand(u8 value)
         GPIO_PORT_DATA = (temp << 1) | SCK_HI | CS_HI;
     }
 
-    // control reaches end of non-void function
+    // UB: control reaches end of non-void function
 }
 
 #ifndef UBFIX
@@ -427,7 +427,7 @@ static void WriteData(u8 value)
         GPIO_PORT_DATA = (temp << 1) | SCK_HI | CS_HI;
     }
 
-    // control reaches end of non-void function
+    // UB: control reaches end of non-void function
 }
 
 static u8 ReadData()
