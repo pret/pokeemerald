@@ -672,7 +672,6 @@ void ResetOamRange(u8 a, u8 b)
 
     for (i = a; i < b; i++)
     {
-        struct OamData *oamBuffer = gMain.oamBuffer;
         oamBuffer[i] = *(struct OamData *)&gDummyOamData;
     }
 }
