@@ -442,7 +442,7 @@ void SortSprites(void)
 #ifndef UBFIX
         while (j > 0 &&
 #else
-        while (
+        while ( //j is always at least 1 when it gets here. We check for 0 in the middle of the loop.
 #endif
             ((sprite1Priority > sprite2Priority)
              || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
@@ -458,7 +458,7 @@ void SortSprites(void)
             j--;
 
 #ifdef UBFIX
-            if (j == 0)
+            if (j == 0) // We break after the last sort to avoid reaching sSpriteOrder[-1]
                 break;
 #endif
 
