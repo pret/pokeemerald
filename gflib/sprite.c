@@ -453,6 +453,11 @@ void SortSprites(void)
             // the behavior is undefined.
             j--;
 
+#ifdef UBFIX
+            if (j == 0)
+                break;
+#endif
+
             sprite1 = &gSprites[sSpriteOrder[j - 1]];
             sprite2 = &gSprites[sSpriteOrder[j]];
             sprite1Priority = sSpritePriorities[sSpriteOrder[j - 1]];
