@@ -2041,7 +2041,7 @@ static void Cmd_if_holds_item(void)
 #ifndef BUGFIX
     if ((var1 | var2) == item)
 #else
-    if (((var2 << 8) | var1) == item) // We shift var2 so we can splice it with var2 and make a u16
+    if (((var2 << 8) | var1) == item) // We shift var2 so we can splice it with var1 and make a u16
 #endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
