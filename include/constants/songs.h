@@ -873,6 +873,7 @@
 #define BW_SEQ_BGM_E_OPENING         900 // A Day of Beginnings
 #define BW_SEQ_BGM_T_01              901 // Nuvema Town
 #define BW_SEQ_BGM_VS_RIVAL          902 // Battle! (Cheren/Bianca) (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_E_TSURETEKE1      903 // Hurry Along 1
 
 // Black 2 & White 2 Music
 

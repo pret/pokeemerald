@@ -66,6 +66,8 @@
 	.equ	LFODL,	0xc3		@ LFO delay
 	.equ	MOD,	0xc4		@ modulation depth
 	.equ	MODT,	0xc5		@ modulation type
+@	.equ	PORT,	0xc6		@ portamento toggle
+@	.equ	PORTT,	0xc7		@ portamento time
 	.equ	TUNE,	0xc8		@ micro tuning (c_v+??)
 
 	.equ	XCMD,	0xcd		@ extend command  ***lib

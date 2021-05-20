@@ -2378,3 +2378,6 @@ $(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V079
+
+$(MID_SUBDIR)/bw_seq_bgm_e_tsureteke1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V066

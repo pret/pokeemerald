@@ -904,6 +904,7 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_e_opening, 0, 0
 	song bw_seq_bgm_t_01, 0, 0
 	song bw_seq_bgm_vs_rival, 0, 0
+	song bw_seq_bgm_e_tsureteke1, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

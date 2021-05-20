@@ -353,6 +353,9 @@ void PrintControllerOp(const Event& event)
     case 0x01:
         PrintOp(event.time, "MOD   ", "%u", event.param2);
         break;
+//    case 0x05:
+//        PrintOp(event.time, "PORTT ", "%u", event.param2);
+//        break;
     case 0x07:
         PrintOp(event.time, "VOL   ", "%u*%s_mvl/mxv", event.param2, g_asmLabel.c_str());
         break;
@@ -408,6 +411,9 @@ void PrintControllerOp(const Event& event)
         PrintByte("PRIO  , %u", event.param2);
         PrintWait(event.time);
         break;
+//    case 0x41:
+//        PrintOp(event.time, "PORT  ", "%u", event.param2);
+//        break;
     default:
         PrintWait(event.time);
         break;
