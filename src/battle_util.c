@@ -7961,7 +7961,7 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
         && gBattleMons[battlerDef].type3 != gBattleMons[battlerDef].type1)
         MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type3, battlerAtk, recordAbilities);
 
-    if (moveType == TYPE_GROUND && !IsBattlerGrounded(battlerDef))
+    if (moveType == TYPE_GROUND && !IsBattlerGrounded(battlerDef) && !(gBattleMoves[move].flags & FLAG_DAMAGE_AIRBORNE))
     {
         modifier = UQ_4_12(0.0);
         if (recordAbilities && GetBattlerAbility(battlerDef) == ABILITY_LEVITATE)
@@ -7973,6 +7973,14 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
             RecordAbilityBattle(battlerDef, ABILITY_LEVITATE);
         }
     }
+
+    // Thousand Arrows ignores type modifiers for flying mons
+    if (!IsBattlerGrounded(battlerDef) && (gBattleMoves[move].flags & FLAG_DAMAGE_AIRBORNE)
+        && (gBattleMons[battlerDef].type1 == TYPE_FLYING || gBattleMons[battlerDef].type2 == TYPE_FLYING || gBattleMons[battlerDef].type3 == TYPE_FLYING))
+    {
+        modifier = UQ_4_12(1.0);
+    }
+
     if (GetBattlerAbility(battlerDef) == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && gBattleMoves[move].power)
     {
         modifier = UQ_4_12(0.0);
