@@ -294,7 +294,7 @@ RustboroCity_EventScript_StolenGoodsTrigger4:: @ 81E09B6
 RustboroCity_EventScript_StolenGoodsScene:: @ 81E09CD
 	msgbox RustboroCity_Text_OutOfTheWay, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_ENCOUNTER_AQUA, 0
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	addobject LOCALID_GRUNT
 	addobject LOCALID_DEVON_EMPLOYEE
 	applymovement LOCALID_GRUNT, RustboroCity_Movement_GruntEscape
@@ -706,11 +706,11 @@ RustboroCity_EventScript_PlayRivalMusic:: @ 81E0DD1
 	return
 
 RustboroCity_EventScript_PlayMayMusic:: @ 81E0DE9
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
 RustboroCity_EventScript_PlayBrendanMusic:: @ 81E0DEE
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
 RustboroCity_EventScript_RivalTrigger0:: @ 81E0DF3
