@@ -2766,7 +2766,7 @@ BattleScriptFirstChargingTurn::
 	pause 0x40
 	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
 	printfromtable gFirstTurnOfTwoStringIds
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	attackanimation
 	waitanimation
 	orword gHitMarker, HITMARKER_CHARGING
