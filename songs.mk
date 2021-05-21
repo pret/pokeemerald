@@ -2381,3 +2381,21 @@ $(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_e_tsureteke1.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V066
+
+$(MID_SUBDIR)/bw_seq_bgm_e_doctor.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V100
+
+$(MID_SUBDIR)/bw_seq_bgm_labo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V066
+
+$(MID_SUBDIR)/bw_seq_me_keyitem.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V085 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_e_friend.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V081
+
+$(MID_SUBDIR)/bw_seq_bgm_r_a_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G201 -V063
+
+$(MID_SUBDIR)/bw_seq_bgm_r_a.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G201 -V063

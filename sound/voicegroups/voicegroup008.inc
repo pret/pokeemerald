@@ -116,10 +116,10 @@ voicegroup008:: @ 8677108
 	voice_directsound 60, 0, DirectSoundWaveData_bw_219tptc4short, 255, 246, 210, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_218tpta4short, 255, 246, 210, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_220tptg5, 255, 246, 210, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_191str2f2, 255, 242, 191, 192   @ Route 1
+	voice_directsound 60, 0, DirectSoundWaveData_bw_188str2c3, 255, 242, 191, 192   @ Route 1
+	voice_directsound 60, 0, DirectSoundWaveData_bw_186str2a3, 255, 242, 191, 192   @ Route 1
+	voice_directsound 60, 0, DirectSoundWaveData_bw_192str2f4, 255, 242, 191, 192   @ Route 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

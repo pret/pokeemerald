@@ -874,6 +874,12 @@
 #define BW_SEQ_BGM_T_01              901 // Nuvema Town
 #define BW_SEQ_BGM_VS_RIVAL          902 // Battle! (Cheren/Bianca) (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_E_TSURETEKE1      903 // Hurry Along 1
+#define BW_SEQ_BGM_E_DOCTOR          904 // Professor Juniper
+#define BW_SEQ_BGM_LABO              905 // Juniper Pokémon Lab
+#define BW_SEQ_ME_KEYITEM            906 // Obtained a Key Item!
+#define BW_SEQ_BGM_E_FRIEND          907 // Let's Go Together!
+#define BW_SEQ_BGM_R_A_VAR           908 // Route 1 (No tambourine)
+#define BW_SEQ_BGM_R_A               909 // Route 1
 
 // Black 2 & White 2 Music
 

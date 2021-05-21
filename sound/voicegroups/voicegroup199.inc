@@ -1,7 +1,7 @@
 	.align 2
 voicegroup199:: @ BW Kageyama
 	voice_keysplit voicegroup006, KeySplitTable82    @ piano (c4 split missing)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup193, KeySplitTable40    @ HGSS piano
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable86    @ rhodes 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -72,9 +72,9 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_b2_gongp, 255, 252, 0, 236
 	voice_keysplit voicegroup007, KeySplitTable146   @ pizzicato (missing top 2 splits)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup193, KeySplitTable54    @ HGSS nylon guitar
+	voice_keysplit voicegroup193, KeySplitTable60    @ HGSS fingered bass
+	voice_keysplit voicegroup006, KeySplitTable68    @ HGSS trumpets
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
