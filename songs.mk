@@ -2399,3 +2399,24 @@ $(MID_SUBDIR)/bw_seq_bgm_r_a_var.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_r_a.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G201 -V063
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_norapoke.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_win1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V116
+
+$(MID_SUBDIR)/bw_seq_me_lvup.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V090 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060

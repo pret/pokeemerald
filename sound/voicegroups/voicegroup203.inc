@@ -4,16 +4,16 @@ voicegroup203:: @ Ichinose battle drums
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 104, DirectSoundWaveData_bw_100chh, 255, 242, 0, 171
+	voice_directsound 61, 104, DirectSoundWaveData_bw_100chh, 255, 242, 0, 171
+	voice_directsound 63, 104, DirectSoundWaveData_bw_100chh, 255, 242, 0, 171
+	voice_directsound 60, 104, DirectSoundWaveData_bw_103ohh, 255, 241, 0, 171
+	voice_directsound 72, 104, DirectSoundWaveData_bw_103ohh, 255, 241, 0, 171
+	voice_directsound 64, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205
+	voice_directsound 65, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205
+	voice_directsound 66, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205
+	voice_directsound 67, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205
+	voice_directsound 68, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -76,3 +76,17 @@ voicegroup203:: @ Ichinose battle drums
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 63, 64, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 64, 64, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 65, 64, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 66, 64, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 67, 64, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 60, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 61, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 62, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 63, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 64, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 65, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 66, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 67, 114, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
+	voice_directsound 60, 14, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214

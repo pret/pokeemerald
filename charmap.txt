@@ -1367,6 +1367,13 @@ BW_SEQ_ME_KEYITEM            = 8A 03
 BW_SEQ_BGM_E_FRIEND          = 8B 03
 BW_SEQ_BGM_R_A_VAR           = 8C 03
 BW_SEQ_BGM_R_A               = 8D 03
+BW_SEQ_BGM_VS_NORAPOKE       = 8E 03
+BW_SEQ_BGM_WIN1              = 8F 03
+BW_SEQ_ME_LVUP               = 90 03
+BW_SEQ_BGM_T_02_VAR1         = 91 03
+BW_SEQ_BGM_T_02_VAR2         = 92 03
+BW_SEQ_BGM_T_02_VAR3         = 93 03
+BW_SEQ_BGM_T_02              = 94 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

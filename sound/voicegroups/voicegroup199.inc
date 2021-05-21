@@ -13,7 +13,7 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_228vibrc6, 255, 246, 0, 205      @ victory! (wild pokemon)
 	voice_keysplit voicegroup007, KeySplitTable92    @ tubular bell
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -75,9 +75,9 @@ voicegroup199:: @ BW Kageyama
 	voice_keysplit voicegroup193, KeySplitTable54    @ HGSS nylon guitar
 	voice_keysplit voicegroup193, KeySplitTable60    @ HGSS fingered bass
 	voice_keysplit voicegroup006, KeySplitTable68    @ HGSS trumpets
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_063rhodc5, 255, 250, 0, 214 @ rel = 114
+	voice_keysplit voicegroup008, KeySplitTable150   @ harp 2 (level up only)
+	voice_directsound 60, 0, DirectSoundWaveData_bw_146flt1f5, 255, 246, 159, 214 @ rel = 114
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit_all voicegroup008				 @ HGSS drum kit
 	voice_keysplit_all voicegroup195				 @ drum kit (standard)

@@ -120,8 +120,8 @@ voicegroup008:: @ 8677108
 	voice_directsound 60, 0, DirectSoundWaveData_bw_188str2c3, 255, 242, 191, 192   @ Route 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_186str2a3, 255, 242, 191, 192   @ Route 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_192str2f4, 255, 242, 191, 192   @ Route 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_093harpffg4, 255, 248, 0, 214 @ level up
+	voice_directsound 60, 0, DirectSoundWaveData_bw_091harpffe5, 255, 248, 0, 214 @ level up
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_130hitminc4, 255, 0, 255, 205

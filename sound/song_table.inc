@@ -911,6 +911,13 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_e_friend, 0, 0
 	song bw_seq_bgm_r_a_var, 0, 0
 	song bw_seq_bgm_r_a, 0, 0
+	song bw_seq_bgm_vs_norapoke, 0, 0
+	song bw_seq_bgm_win1, 0, 0
+	song bw_seq_me_lvup, 2, 2
+	song bw_seq_bgm_t_02_var1, 0, 0
+	song bw_seq_bgm_t_02_var2, 0, 0
+	song bw_seq_bgm_t_02_var3, 0, 0
+	song bw_seq_bgm_t_02, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00
