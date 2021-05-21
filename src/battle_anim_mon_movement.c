@@ -95,7 +95,7 @@ void AnimTask_ShakeMon(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    if (spriteId == 0xff)
+    if (spriteId == SPRITE_NONE)
     {
         DestroyAnimVisualTask(taskId);
         return;
@@ -163,7 +163,7 @@ void AnimTask_ShakeMon2(u8 taskId)
     if (gBattleAnimArgs[0] < MAX_BATTLERS_COUNT)
     {
         spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-        if (spriteId == 0xff)
+        if (spriteId == SPRITE_NONE)
         {
             DestroyAnimVisualTask(taskId);
             return;
@@ -256,7 +256,7 @@ static void AnimTask_ShakeMon2_Step(u8 taskId)
 void AnimTask_ShakeMonInPlace(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    if (spriteId == 0xff)
+    if (spriteId == SPRITE_NONE)
     {
         DestroyAnimVisualTask(taskId);
         return;

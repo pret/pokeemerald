@@ -1968,7 +1968,7 @@ static void ExitRoulette(u8 taskId)
         gSpecialVar_0x8004 = TRUE;
     else
         gSpecialVar_0x8004 = FALSE;
-    AlertTVOfNewCoinTotal(GetCoins());
+    TryPutFindThatGamerOnAir(GetCoins());
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = Task_ExitRoulette;
 }
@@ -3389,7 +3389,7 @@ static void Task_AcceptMinBet(u8 taskId)
     ClearStdWindowAndFrame(0, TRUE);
     HideCoinsWindow();
     FreeAllWindowBuffers();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
     UpdatePaletteFade();
     gTasks[taskId].func = Task_FadeToRouletteGame;

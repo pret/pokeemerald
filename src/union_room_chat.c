@@ -930,8 +930,8 @@ static void CB2_LoadInterface(void)
         RunDisplaySubtasks();
         if (!IsDisplaySubtask0Active())
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
@@ -1567,7 +1567,7 @@ static void Chat_SaveAndExit(void)
             sChat->funcState = 12;
         break;
     case 12:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sChat->funcState = 13;
         break;
     case 13:
@@ -2157,8 +2157,8 @@ static void FreeDisplay(void)
 
 static void InitDisplay(struct UnionRoomChatDisplay *display)
 {
-    display->yesNoMenuWindowId = 0xFF;
-    display->messageWindowId = 0xFF;
+    display->yesNoMenuWindowId = WINDOW_NONE;
+    display->messageWindowId = WINDOW_NONE;
     display->currLine = 0;
 }
 
@@ -2724,7 +2724,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     template.paletteNum = 14;
     template.baseBlock = 0x52;
     sDisplay->yesNoMenuWindowId = AddWindow(&template);
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sDisplay->yesNoMenuWindowId, PIXEL_FILL(1));
         PutWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2737,7 +2737,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
 
 static void HideYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->yesNoMenuWindowId, FALSE);
         ClearWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2746,10 +2746,10 @@ static void HideYesNoMenuWindow(void)
 
 static void DestroyYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->yesNoMenuWindowId);
-        sDisplay->yesNoMenuWindowId = 0xFF;
+        sDisplay->yesNoMenuWindowId = WINDOW_NONE;
     }
 }
 
@@ -2778,7 +2778,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
     sDisplay->messageWindowId = AddWindow(&template);
     windowId = sDisplay->messageWindowId;
-    if (sDisplay->messageWindowId == 0xFF)
+    if (sDisplay->messageWindowId == WINDOW_NONE)
         return;
 
     if (sDisplayStdMessages[msgId].hasPlaceholders)
@@ -2828,7 +2828,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
 static void HideStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->messageWindowId, FALSE);
         ClearWindowTilemap(sDisplay->messageWindowId);
@@ -2839,10 +2839,10 @@ static void HideStdMessageWindow(void)
 
 static void DestroyStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->messageWindowId);
-        sDisplay->messageWindowId = 0xFF;
+        sDisplay->messageWindowId = WINDOW_NONE;
     }
 }
 
@@ -3011,8 +3011,8 @@ static void ResetGpuBgState(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, 240));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 144));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, DISPLAY_WIDTH));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT - 16));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG2 | WININ_WIN0_BG3
                               | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);

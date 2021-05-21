@@ -39,7 +39,7 @@ static void CameraPanningCB_PanAhead(void);
 static struct FieldCameraOffset sFieldCameraOffset;
 static s16 sHorizontalCameraPan;
 static s16 sVerticalCameraPan;
-static bool8 gUnknown_03000E2C;
+static bool8 sBikeCameraPanFlag;
 static void (*sFieldCameraPanningCallback)(void);
 
 struct CameraObject gFieldCamera;
@@ -89,7 +89,7 @@ void FieldUpdateBgTilemapScroll(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, r4);
 }
 
-void sub_8089C08(s16 *x, s16 *y)
+void GetCameraOffsetWithPan(s16 *x, s16 *y)
 {
     *x = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
     *y = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
@@ -417,7 +417,7 @@ void CameraUpdate(void)
         CameraMove(deltaX, deltaY);
         UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
-        ResetBerryTreeSparkleFlags();
+        SetBerryTreesSeen();
         AddCameraTileOffset(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
@@ -450,7 +450,7 @@ void SetCameraPanning(s16 a, s16 b)
 void InstallCameraPanAheadCallback(void)
 {
     sFieldCameraPanningCallback = CameraPanningCB_PanAhead;
-    gUnknown_03000E2C = FALSE;
+    sBikeCameraPanFlag = FALSE;
     sHorizontalCameraPan = 0;
     sVerticalCameraPan = 32;
 }
@@ -474,16 +474,16 @@ static void CameraPanningCB_PanAhead(void)
     }
     else
     {
-        // this code is never reached.
+        // this code is never reached
         if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         {
-            gUnknown_03000E2C ^= 1;
-            if (gUnknown_03000E2C == FALSE)
+            sBikeCameraPanFlag ^= 1;
+            if (sBikeCameraPanFlag == FALSE)
                 return;
         }
         else
         {
-            gUnknown_03000E2C = FALSE;
+            sBikeCameraPanFlag = FALSE;
         }
 
         var = GetPlayerMovementDirection();

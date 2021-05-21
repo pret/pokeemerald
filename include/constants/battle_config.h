@@ -112,6 +112,8 @@
 #define B_PP_REDUCED_BY_SPITE       GEN_6 // In Gen4+, Spite reduces the foe's last move's PP by 4, instead of 2 to 5.
 #define B_CAN_SPITE_FAIL            GEN_6 // In Gen4+, Spite can no longer fail if the foe's last move only has 1 remaining PP.
 #define B_CRASH_IF_TARGET_IMMUNE    GEN_6 // In Gen4+, The user of Jump Kick or Hi Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
+#define B_TAILWIND_TIMER            GEN_5 // In Gen5+, Tailwind lasts 4 turns instead of 3.
+#define B_MEMENTO_FAIL              GEN_4 // In Gen4+, memento fails if there is no target or if the target is protected or behind substitute. But not if atk/sp.atk are at -6
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_6 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move.
@@ -134,6 +136,11 @@
 #define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
 #define B_FLAG_FORCE_DOUBLE_WILD    0     // If this flag is set, all land and surfing wild battles will be double battles.
 
+// Var Settings
+// To use the following features in scripting, replace the 0s with the var ID you're assigning it to.
+// Eg: Replace with VAR_UNUSED_0x40F7 so you can use VAR_TERRAIN for that feature.
+#define VAR_TERRAIN                 0     // If this var has a value, assigning a STATUS_FIELD_xx_TERRAIN to it before battle causes the battle to start with that terrain active
+
 // Interface settings
 #define B_ABILITY_POP_UP            TRUE  // In Gen5+, the Pokémon abilities are displayed in a pop-up, when they activate in battle.
 #define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
@@ -150,6 +157,7 @@
 #define B_PARALYZE_ELECTRIC         GEN_6 // In Gen6+, Electric-type Pokémon can't be paralyzed.
 #define B_POWDER_GRASS              GEN_6 // In Gen6+, Grass-type Pokémon are immune to powder and spore moves.
 #define B_STEEL_RESISTANCES         GEN_6 // In Gen6+, Steel-type Pokémon are no longer resistant to Dark and Ghost moves.
+#define B_THUNDERSTORM_TERRAIN      TRUE  // If TRUE, overworld Thunderstorm generates Rain and Electric Terrain as in Gen 8.
 
 // Animation Settings
 #define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.
