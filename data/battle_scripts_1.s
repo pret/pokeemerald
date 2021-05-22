@@ -2762,14 +2762,16 @@ BattleScriptFirstChargingTurn::
 	attackcanceler
 	printstring STRINGID_EMPTYSTRING3
 	ppreduce
+	attackstring
+	pause B_WAIT_TIME_LONG
+	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
+	printfromtable gFirstTurnOfTwoStringIds
+	waitmessage B_WAIT_TIME_LONG
 	attackanimation
 	waitanimation
 	orword gHitMarker, HITMARKER_CHARGING
 	setmoveeffect MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
-	printfromtable gFirstTurnOfTwoStringIds
-	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_EffectSuperFang::
