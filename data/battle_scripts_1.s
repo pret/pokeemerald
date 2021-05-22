@@ -2763,7 +2763,7 @@ BattleScriptFirstChargingTurn::
 	printstring STRINGID_EMPTYSTRING3
 	ppreduce
 	attackstring
-	pause 0x40
+	pause B_WAIT_TIME_LONG
 	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
 	printfromtable gFirstTurnOfTwoStringIds
 	waitmessage B_WAIT_TIME_LONG
