@@ -137,7 +137,7 @@ static void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 pale
 static void AssignSpriteAnimsTable(bool8 isTrainer)
 {
     if (!isTrainer)
-        sCreatingSpriteTemplate.anims = gUnknown_082FF70C;
+        sCreatingSpriteTemplate.anims = gAnims_MonPic;
     else
         sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
 }
@@ -262,12 +262,12 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
     sCreatingSpriteTemplate.images = images;
     if (flags2 == 0x01)
     {
-        sCreatingSpriteTemplate.affineAnims = gUnknown_082FF694;
+        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpriteOpponentSide;
         sCreatingSpriteTemplate.oam = &gUnknown_0860B06C;
     }
     else if (flags2 == 0x00)
     {
-        sCreatingSpriteTemplate.affineAnims = gUnknown_082FF618;
+        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpritePlayerSide;
         sCreatingSpriteTemplate.oam = &gUnknown_0860B06C;
     }
     else
