@@ -68,13 +68,8 @@ extern vu16 GPIOPortDirection;
 static u16 sDummy; // unused variable
 static bool8 sLocked;
 
-#ifndef UBFIX
 static int WriteCommand(u8 value);
 static int WriteData(u8 value);
-#else
-static void WriteCommand(u8 value);
-static void WriteData(u8 value);
-#endif
 static u8 ReadData();
 
 static void EnableGpioPortRead();
@@ -104,11 +99,11 @@ u8 SiiRtcProbe(void)
 
     errorCode = 0;
 
-#ifndef BUGFIX
+#ifdef BUGFIX
+    if (!(rtc.status & SIIRTCINFO_24HOUR) || (rtc.status & SIIRTCINFO_POWER))
+#else
     if ((rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == SIIRTCINFO_POWER
      || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
-#else
-    if (!(rtc.status & SIIRTCINFO_24HOUR) || (rtc.status & SIIRTCINFO_POWER))
 #endif
     {
         // The RTC is in 12-hour mode. Reset it and switch to 24-hour mode.
@@ -388,11 +383,7 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-#ifndef UBFIX
 static int WriteCommand(u8 value)
-#else
-static void WriteCommand(u8 value)
-#endif
 {
     u8 i;
     u8 temp;
@@ -406,14 +397,14 @@ static void WriteCommand(u8 value)
         GPIO_PORT_DATA = (temp << 1) | SCK_HI | CS_HI;
     }
 
-    // UB: control reaches end of non-void function
+    // Nothing uses the returned value from this function,
+    // so the undefined behavior is harmless in the vanilla game.
+#ifdef UBFIX
+    return 0;
+#endif
 }
 
-#ifndef UBFIX
 static int WriteData(u8 value)
-#else
-static void WriteData(u8 value)
-#endif
 {
     u8 i;
     u8 temp;
@@ -427,7 +418,11 @@ static void WriteData(u8 value)
         GPIO_PORT_DATA = (temp << 1) | SCK_HI | CS_HI;
     }
 
-    // UB: control reaches end of non-void function
+    // Nothing uses the returned value from this function,
+    // so the undefined behavior is harmless in the vanilla game.
+#ifdef UBFIX
+    return 0;
+#endif
 }
 
 static u8 ReadData()
@@ -436,9 +431,9 @@ static u8 ReadData()
     u8 temp;
     u8 value;
 
-    #ifdef UBFIX
+#ifdef UBFIX
     value = 0;
-    #endif
+#endif
 
     for (i = 0; i < 8; i++)
     {
@@ -450,7 +445,7 @@ static u8 ReadData()
         GPIO_PORT_DATA = SCK_HI | CS_HI;
 
         temp = ((GPIO_PORT_DATA & SIO_HI) >> 1);
-        value = (value >> 1) | (temp << 7); // UB: value is uninitialized on first iteration
+        value = (value >> 1) | (temp << 7);
     }
 
     return value;
