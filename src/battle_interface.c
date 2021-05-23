@@ -2340,11 +2340,11 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
 
     if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
     {
-        s32 newToAdd = Q_24_8(maxValue) / scale;
+        s32 delta = Q_24_8(maxValue) / scale;
 
         if (receivedValue < 0) // fill bar right
         {
-            *currValue += newToAdd;
+            *currValue += delta;
             ret = Q_24_8_TO_INT(*currValue);
             if (ret >= newValue)
             {
@@ -2354,7 +2354,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
         }
         else // move bar left
         {
-            *currValue -= newToAdd;
+            *currValue -= delta;
             ret = Q_24_8_TO_INT(*currValue);
             // try round up
             if ((*currValue & 0xFF) > 0)
