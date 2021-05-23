@@ -439,12 +439,8 @@ void SortSprites(void)
             }
         }
 
-#ifndef UBFIX
-        while (j > 0 &&
-#else
-        while ( //j is always at least 1 when it gets here. We check for 0 in the middle of the loop.
-#endif
-            ((sprite1Priority > sprite2Priority)
+        while (j > 0
+            && ((sprite1Priority > sprite2Priority)
              || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
         {
             u8 temp = sSpriteOrder[j];
@@ -456,9 +452,8 @@ void SortSprites(void)
             // Although this doesn't result in a bug in the ROM,
             // the behavior is undefined.
             j--;
-
 #ifdef UBFIX
-            if (j == 0) // We break after the last sort to avoid reaching sSpriteOrder[-1]
+            if (j == 0)
                 break;
 #endif
 
