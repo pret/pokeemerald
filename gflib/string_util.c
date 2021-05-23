@@ -545,12 +545,9 @@ u8 *StringCopyPadded(u8 *dest, const u8 *src, u8 c, u16 n)
             n--;
     }
 
-    n--;
-
-    while (n != (u16)-1)
+    while (n--)
     {
         *dest++ = c;
-        n--;
     }
 
     *dest = EOS;
@@ -564,9 +561,7 @@ u8 *StringFillWithTerminator(u8 *dest, u16 n)
 
 u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
 {
-    u32 i;
-
-    for (i = n - 1; i != (u32)-1; i--)
+    while (n--)
     {
         if (*src == EOS)
         {
