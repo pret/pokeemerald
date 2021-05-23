@@ -9,7 +9,7 @@
 #define EASY_CHAT_TYPE_INTERVIEW               5
 #define EASY_CHAT_TYPE_BARD_SONG               6
 #define EASY_CHAT_TYPE_FAN_CLUB                7
-#define EASY_CHAT_TYPE_UNK_8                   8
+#define EASY_CHAT_TYPE_DUMMY_SHOW              8
 #define EASY_CHAT_TYPE_TRENDY_PHRASE           9
 #define EASY_CHAT_TYPE_GABBY_AND_TY            10
 #define EASY_CHAT_TYPE_CONTEST_INTERVIEW       11
@@ -28,29 +28,29 @@
 #define EASY_CHAT_PERSON_BOY             2
 #define EASY_CHAT_PERSON_DISPLAY_NONE    3
 
-#define EC_GROUP_POKEMON        0x0
-#define EC_GROUP_TRAINER        0x1
-#define EC_GROUP_STATUS         0x2
-#define EC_GROUP_BATTLE         0x3
-#define EC_GROUP_GREETINGS      0x4
-#define EC_GROUP_PEOPLE         0x5
-#define EC_GROUP_VOICES         0x6
-#define EC_GROUP_SPEECH         0x7
-#define EC_GROUP_ENDINGS        0x8
-#define EC_GROUP_FEELINGS       0x9
-#define EC_GROUP_CONDITIONS     0xa
-#define EC_GROUP_ACTIONS        0xb
-#define EC_GROUP_LIFESTYLE      0xc
-#define EC_GROUP_HOBBIES        0xd
-#define EC_GROUP_TIME           0xe
-#define EC_GROUP_MISC           0xf
-#define EC_GROUP_ADJECTIVES     0x10
-#define EC_GROUP_EVENTS         0x11
-#define EC_GROUP_MOVE_1         0x12
-#define EC_GROUP_MOVE_2         0x13
-#define EC_GROUP_TRENDY_SAYING  0x14
-#define EC_GROUP_POKEMON_2      0x15
-#define EC_NUM_GROUPS           0x16
+#define EC_GROUP_POKEMON          0
+#define EC_GROUP_TRAINER          1
+#define EC_GROUP_STATUS           2
+#define EC_GROUP_BATTLE           3
+#define EC_GROUP_GREETINGS        4
+#define EC_GROUP_PEOPLE           5
+#define EC_GROUP_VOICES           6
+#define EC_GROUP_SPEECH           7
+#define EC_GROUP_ENDINGS          8
+#define EC_GROUP_FEELINGS         9
+#define EC_GROUP_CONDITIONS       10
+#define EC_GROUP_ACTIONS          11
+#define EC_GROUP_LIFESTYLE        12
+#define EC_GROUP_HOBBIES          13
+#define EC_GROUP_TIME             14
+#define EC_GROUP_MISC             15
+#define EC_GROUP_ADJECTIVES       16
+#define EC_GROUP_EVENTS           17
+#define EC_GROUP_MOVE_1           18
+#define EC_GROUP_MOVE_2           19
+#define EC_GROUP_TRENDY_SAYING    20
+#define EC_GROUP_POKEMON_NATIONAL 21
+#define EC_NUM_GROUPS             22
 
 // TRAINER
 #define EC_WORD_I_CHOOSE_YOU  (EC_GROUP_TRAINER << 9) | 0x0
@@ -1105,13 +1105,22 @@
 #define PHRASE_COOL_LATIOS          4
 #define PHRASE_SUPER_HUSTLE         5
 
+#define EC_NUM_ALPHABET_GROUPS 27 // 26 (1 for each letter) + 1 (Others)
+
+#define EC_MAX_WORDS_IN_GROUP 270 // The closest is words by letter S, at 262
+
+#define EC_MASK_GROUP 0x7F
+#define EC_MASK_INDEX 0x1FF
+
 #define EC_POKEMON(mon) ((EC_GROUP_POKEMON << 9) | SPECIES_##mon)
-#define EC_POKEMON2(mon) ((EC_GROUP_POKEMON_2 << 9) | SPECIES_##mon)
+#define EC_POKEMON_NATIONAL(mon) ((EC_GROUP_POKEMON_NATIONAL << 9) | SPECIES_##mon)
 #define EC_MOVE(move) ((EC_GROUP_MOVE_1 << 9) | MOVE_##move)
 #define EC_MOVE2(move) ((EC_GROUP_MOVE_2 << 9) | MOVE_##move)
 
 #define EC_GROUP(word) ((word) >> 9)
-#define EC_INDEX(word) ((word) & 0x1FF)
-#define EC_WORD(group, index) ((((group) & 0x7F) << 9) | ((index) & 0x1FF))
+#define EC_INDEX(word) ((word) & EC_MASK_INDEX)
+#define EC_WORD(group, index) ((((group) & EC_MASK_GROUP) << 9) | ((index) & EC_MASK_INDEX))
+
+#define EC_EMPTY_WORD 0xFFFF
 
 #endif  // GUARD_CONSTANTS_EASY_CHAT_H

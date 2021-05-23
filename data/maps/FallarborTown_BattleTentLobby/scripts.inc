@@ -113,7 +113,7 @@ FallarborTown_BattleTentLobby_EventScript_Attendant:: @ 8200001
 FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge:: @ 8200021
 	message FallarborTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, FallarborTown_BattleTentLobby_EventScript_ExplainChallenge
@@ -266,7 +266,7 @@ FallarborTown_BattleTentLobby_EventScript_RulesBoard:: @ 820024F
 FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 820025E
 	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, 0
+	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, FALSE
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_RulesLevel
 	case 1, FallarborTown_BattleTentLobby_EventScript_RulesBattle

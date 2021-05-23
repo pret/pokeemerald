@@ -60,7 +60,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
 void MarkAllBattlersForControllerExec(void); // unused
 void MarkBattlerForControllerExec(u8 battlerId);
-void sub_803F850(u8 arg0);
+void MarkBattlerReceivedLinkData(u8 arg0);
 void CancelMultiTurnMoves(u8 battlerId);
 bool8 WasUnableToUseMove(u8 battlerId);
 void PrepareStringBattle(u16 stringId, u8 battlerId);

@@ -70,7 +70,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene:: @ 820C9F5
 	removeobject LOCALID_SUBMARINE
 	setvar VAR_SLATEPORT_HARBOR_STATE, 2
 	setflag FLAG_MET_TEAM_AQUA_HARBOR
-	setflag FLAG_HIDE_LILCOVE_MOTEL_SCOTT
+	setflag FLAG_HIDE_LILYCOVE_MOTEL_SCOTT
 	compare VAR_0x8008, 0
 	call_if_eq SlateportCity_Harbor_EventScript_SternApproachPlayer0
 	compare VAR_0x8008, 1
@@ -182,7 +182,7 @@ SlateportCity_Harbor_EventScript_AskForTicket:: @ 820CB06
 
 SlateportCity_Harbor_EventScript_ChooseDestination:: @ 820CB1A
 	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
-	multichoicedefault 18, 8, MULTI_SSTIDAL_SLATEPORT_NO_BF, 2, 0
+	multichoicedefault 18, 8, MULTI_SSTIDAL_SLATEPORT_NO_BF, 2, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove
 	case 1, SlateportCity_Harbor_EventScript_CancelDestinationSelect
@@ -190,7 +190,7 @@ SlateportCity_Harbor_EventScript_ChooseDestination:: @ 820CB1A
 	end
 
 SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier:: @ 820CB50
-	multichoicedefault 17, 6, MULTI_SSTIDAL_SLATEPORT_WITH_BF, 2, 0
+	multichoicedefault 17, 6, MULTI_SSTIDAL_SLATEPORT_WITH_BF, 2, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove
 	case 1, SlateportCity_Harbor_EventScript_BattleFrontier
@@ -352,7 +352,7 @@ SlateportCity_Harbor_EventScript_AskToTradeScanner:: @ 820CD38
 	end
 
 SlateportCity_Harbor_EventScript_ChooseScannerTrade:: @ 820CD44
-	multichoice 0, 0, MULTI_STERN_DEEPSEA, 0
+	multichoice 0, 0, MULTI_STERN_DEEPSEA, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_DeepSeaTooth
 	case 1, SlateportCity_Harbor_EventScript_DeepSeaScale
