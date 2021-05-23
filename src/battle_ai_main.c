@@ -3861,7 +3861,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         switch (move)
         {
         case MOVE_DEFOG:
-            if (gSideStatuses[GetBattlerSide(battlerDef)] & (SIDE_STATUS_SCREEEN_ANY | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST))
+            if (gSideStatuses[GetBattlerSide(battlerDef)] & (SIDE_STATUS_SCREEN_ANY | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST))
             {
                 score += 3;
             }
