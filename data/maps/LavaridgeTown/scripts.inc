@@ -105,11 +105,11 @@ LavaridgeTown_EventScript_RivalExit:: @ 81EA5FF
 	end
 
 LavaridgeTown_EventScript_PlayMayMusic:: @ 81EA630
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
 LavaridgeTown_EventScript_PlayBrendanMusic:: @ 81EA635
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
 LavaridgeTown_EventScript_RivalNoticePlayer:: @ 81EA63A
