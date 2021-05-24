@@ -3149,11 +3149,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
                     }
 				}
-                if (gCurrentMove == MOVE_HYPERSPACE_FURY)
-                {
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_DefDown;
-                }
                 break;
             case MOVE_EFFECT_SPECTRAL_THIEF:
                 gBattleStruct->stolenStats[0] = 0; // Stats to steal.

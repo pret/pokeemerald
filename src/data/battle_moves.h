@@ -9581,7 +9581,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HYPERSPACE_FURY] =
     {
-        .effect = EFFECT_FEINT,
+        .effect = EFFECT_ATTACKER_DEFENSE_DOWN_HIT,
         .power = 100,
         .type = TYPE_DARK,
         .accuracy = 0,
@@ -9591,6 +9591,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .split = SPLIT_PHYSICAL,
+		.argument = MOVE_EFFECT_FEINT,
     },
 
     [MOVE_SHORE_UP] =
