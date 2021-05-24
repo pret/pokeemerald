@@ -2533,7 +2533,6 @@ const struct Item gItems[] =
         .itemId = ITEM_MARANGA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_HOLD_EFFECT_MARANGA_BERRY,
-        .holdEffectParam = TYPE_FAIRY,
         .description = sMarangaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
