@@ -2497,7 +2497,6 @@ const struct Item gItems[] =
         .itemId = ITEM_JABOCA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_JABOCA_BERRY,
-        .holdEffectParam = TYPE_FAIRY,
         .description = sJabocaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
