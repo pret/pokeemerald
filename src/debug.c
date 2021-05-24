@@ -1725,8 +1725,8 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
             if(gTasks[taskId].data[3] > SPECIES_CELEBI && gTasks[taskId].data[3] < SPECIES_TREECKO)
                 gTasks[taskId].data[3] = SPECIES_TREECKO;
-            if(gTasks[taskId].data[3] >= NUM_SPECIES - 1)
-                gTasks[taskId].data[3] = NUM_SPECIES - 2;
+            if(gTasks[taskId].data[3] >= NUM_SPECIES)
+                gTasks[taskId].data[3] = NUM_SPECIES - 1;
         }
         if(gMain.newKeys & DPAD_DOWN)
         {
