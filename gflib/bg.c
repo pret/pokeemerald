@@ -252,7 +252,6 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
 
     switch (sGpuBgConfigs.bgVisibilityAndMode & 0x7)
     {
-
     default:
     case 0:
         return;
@@ -281,10 +280,10 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
     SetGpuReg(REG_OFFSET_BG2PC, dest.pc);
     SetGpuReg(REG_OFFSET_BG2PD, dest.pd);
     SetGpuReg(REG_OFFSET_BG2PA, dest.pa);
-    SetGpuReg(REG_OFFSET_BG2X_L, (u16)(dest.dx));
-    SetGpuReg(REG_OFFSET_BG2X_H, (u16)(dest.dx >> 16));
-    SetGpuReg(REG_OFFSET_BG2Y_L, (u16)(dest.dy));
-    SetGpuReg(REG_OFFSET_BG2Y_H, (u16)(dest.dy >> 16));
+    SetGpuReg(REG_OFFSET_BG2X_L, (s16)(dest.dx));
+    SetGpuReg(REG_OFFSET_BG2X_H, (s16)(dest.dx >> 16));
+    SetGpuReg(REG_OFFSET_BG2Y_L, (s16)(dest.dy));
+    SetGpuReg(REG_OFFSET_BG2Y_H, (s16)(dest.dy >> 16));
 }
 
 bool8 IsInvalidBg(u8 bg)
