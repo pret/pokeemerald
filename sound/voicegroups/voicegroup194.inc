@@ -62,7 +62,7 @@ voicegroup194:: @ BW/B2W2 main
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup008, KeySplitTable126   @ orchestra hit
 	voice_keysplit voicegroup007, KeySplitTable127   @ orchestra hit major
-	voice_keysplit voicegroup008, KeySplitTable127   @ orchestra hit minor
+	voice_keysplit voicegroup009, KeySplitTable154   @ orchestra hit minor
 	voice_keysplit voicegroup008, KeySplitTable128   @ choir
 	voice_keysplit voicegroup008, KeySplitTable129   @ female vox (bw2 only)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

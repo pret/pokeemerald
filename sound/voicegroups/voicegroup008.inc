@@ -111,8 +111,8 @@ voicegroup008:: @ 8677108
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalef4, 255, 242, 191, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalec5, 255, 242, 191, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalef5, 255, 242, 191, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_064flt2a5, 255, 246, 159, 192
-	voice_directsound 60, 0, DirectSoundWaveData_bw_067flt2f6, 255, 246, 159, 192
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_219tptc4short, 255, 246, 210, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_218tpta4short, 255, 246, 210, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_220tptg5, 255, 246, 210, 205
@@ -122,10 +122,10 @@ voicegroup008:: @ 8677108
 	voice_directsound 60, 0, DirectSoundWaveData_bw_192str2f4, 255, 242, 191, 192   @ Route 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_093harpffg4, 255, 248, 0, 214 @ level up
 	voice_directsound 60, 0, DirectSoundWaveData_bw_091harpffe5, 255, 248, 0, 214 @ level up
+	voice_directsound 60, 0, DirectSoundWaveData_bw_062rhodc4, 255, 251, 0, 205 @ pokecenter
+	voice_directsound 60, 0, DirectSoundWaveData_bw_063rhodc5, 255, 251, 0, 205 @ pokecenter
+	voice_directsound 60, 0, DirectSoundWaveData_bw_str2d5_pc, 255, 242, 191, 192
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_bw_130hitminc4, 255, 0, 255, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_131hitminds4, 255, 0, 255, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_132hitminfs4, 255, 0, 255, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_129hitmina4, 255, 0, 255, 205
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 

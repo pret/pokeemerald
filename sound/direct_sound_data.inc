@@ -4091,6 +4091,38 @@ DirectSoundWaveData_bw_synthohh_vsrival::
 	.incbin "sound/direct_sound_samples/bw_synthohh_vsrival.bin"
 
 	.align 2
+DirectSoundWaveData_bw_vibrc4_pc::
+	.incbin "sound/direct_sound_samples/bw_vibrc4_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vibrc5_pc::
+	.incbin "sound/direct_sound_samples/bw_vibrc5_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fingerbassa2_pc::
+	.incbin "sound/direct_sound_samples/bw_fingerbassa2_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fingerbassa3_pc::
+	.incbin "sound/direct_sound_samples/bw_fingerbassa3_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_str2d5_pc::
+	.incbin "sound/direct_sound_samples/bw_str2d5_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_claric4_pc::
+	.incbin "sound/direct_sound_samples/bw_claric4_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_claria4_pc::
+	.incbin "sound/direct_sound_samples/bw_claria4_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_clarif5_pc::
+	.incbin "sound/direct_sound_samples/bw_clarif5_pc.bin"
+
+	.align 2
 DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
 	.incbin "sound/direct_sound_samples/b2_trumpetsstaccatogs4_loop.bin"
 

@@ -918,6 +918,11 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_t_02_var2, 0, 0
 	song bw_seq_bgm_t_02_var3, 0, 0
 	song bw_seq_bgm_t_02, 0, 0
+	song bw_seq_bgm_e_tsureteke2, 0, 0
+	song bw_seq_bgm_pokecen, 0, 0
+	song bw_seq_me_asa, 2, 2
+	song bw_seq_me_hyouka1, 2, 2
+	song bw_seq_bgm_e_sage, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

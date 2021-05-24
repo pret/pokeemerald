@@ -1374,6 +1374,11 @@ BW_SEQ_BGM_T_02_VAR1         = 91 03
 BW_SEQ_BGM_T_02_VAR2         = 92 03
 BW_SEQ_BGM_T_02_VAR3         = 93 03
 BW_SEQ_BGM_T_02              = 94 03
+BW_SEQ_BGM_E_TSURETEKE2      = 95 03
+BW_SEQ_BGM_POKECEN           = 96 03
+BW_SEQ_ME_ASA                = 97 03
+BW_SEQ_ME_HYOUKA1            = 98 03
+BW_SEQ_BGM_E_SAGE            = 99 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

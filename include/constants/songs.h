@@ -518,7 +518,7 @@
 #define DP_SEQ_TSURETEKE             290 // Hurry Along
 #define DP_SEQ_PC_01                 291 // Pokémon Center (Day)
 #define DP_SEQ_PC_02                 292 // Pokémon Center (Night)
-#define DP_SEQ_ASA                   293 // Pokémon Healed
+#define DP_SEQ_ASA                   293 // Pokémon Healed                  (TODO: SWEEP PITCH!!)
 #define DP_SEQ_EYE_BOY               294 // Trainers' Eyes Meet (Youngster)
 #define DP_SEQ_EYE_GIRL              295 // Trainers' Eyes Meet (Lass)
 #define DP_SEQ_BA_TRAIN              296 // Battle! (Trainer Battle)
@@ -872,7 +872,7 @@
 #define BW_SEQ_BGM_STARTING2         899 // Onward to Adventure! (In-Game Version)
 #define BW_SEQ_BGM_E_OPENING         900 // A Day of Beginnings
 #define BW_SEQ_BGM_T_01              901 // Nuvema Town
-#define BW_SEQ_BGM_VS_RIVAL          902 // Battle! (Cheren/Bianca) (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_VS_RIVAL          902 // Battle! (Cheren/Bianca)         (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_E_TSURETEKE1      903 // Hurry Along 1
 #define BW_SEQ_BGM_E_DOCTOR          904 // Professor Juniper
 #define BW_SEQ_BGM_LABO              905 // Juniper Pokémon Lab
@@ -880,13 +880,18 @@
 #define BW_SEQ_BGM_E_FRIEND          907 // Let's Go Together!
 #define BW_SEQ_BGM_R_A_VAR           908 // Route 1 (No Tambourine)
 #define BW_SEQ_BGM_R_A               909 // Route 1
-#define BW_SEQ_BGM_VS_NORAPOKE       910 // Battle! (Wild Pokémon) (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_VS_NORAPOKE       910 // Battle! (Wild Pokémon)          (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_WIN1              911 // Victory! (Wild Pokémon)
 #define BW_SEQ_ME_LVUP               912 // Level Up!
 #define BW_SEQ_BGM_T_02_VAR1         913 // Accumula Town (No Piano or Drums)
 #define BW_SEQ_BGM_T_02_VAR2         914 // Accumula Town (No Drums)
 #define BW_SEQ_BGM_T_02_VAR3         915 // Accumula Town (No Piano)
 #define BW_SEQ_BGM_T_02              916 // Accumula Town
+#define BW_SEQ_BGM_E_TSURETEKE2      917 // Hurry Along 2
+#define BW_SEQ_BGM_POKECEN           918 // Pokémon Center
+#define BW_SEQ_ME_ASA                919 // Pokémon Healed                  (TODO: SWEEP PITCH!!)
+#define BW_SEQ_ME_HYOUKA1            920 // Pokédex Evaluation... You've Just Begun!
+#define BW_SEQ_BGM_E_SAGE            921 // Team Plasma Plots
 
 // Black 2 & White 2 Music
 

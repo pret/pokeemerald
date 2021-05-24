@@ -203,3 +203,4 @@
 .include "sound/voicegroups/voicegroup201.inc" @ BW Ichinose (overworld)
 .include "sound/voicegroups/voicegroup202.inc" @ BW Ichinose (battles)
 .include "sound/voicegroups/voicegroup203.inc"
+.include "sound/voicegroups/voicegroup204.inc"

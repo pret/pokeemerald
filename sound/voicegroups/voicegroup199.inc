@@ -9,8 +9,8 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable145   @ marimba (splits shifted -2)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup006, KeySplitTable147   @ piano (route 1)
+	voice_keysplit voicegroup006, KeySplitTable83    @ vibraphone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_228vibrc6, 255, 246, 0, 205      @ victory! (wild pokemon)
@@ -20,7 +20,7 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup007, KeySplitTable98    @ nylon guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -29,14 +29,14 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup193, KeySplitTable106   @ synth bass
 	voice_keysplit voicegroup007, KeySplitTable107   @ strings 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup008, KeySplitTable155   @ strings 2 (pokecenter)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup193, KeySplitTable110   @ cello
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup007, KeySplitTable112   @ harp 2
+	voice_keysplit voicegroup007, KeySplitTable113   @ harp 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup006, KeySplitTable114   @ timpani
 	voice_keysplit voicegroup007, KeySplitTable115   @ trumpets
@@ -49,10 +49,10 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable123   @ flute 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup204, KeySplitTable157   @ flute 2 (pokecenter, shorter release)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 197, 227, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup007, KeySplitTable107   @ strings 1 (missing top split)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -89,3 +89,11 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_025cellog2, 255, 242, 227, 205
+	voice_keysplit voicegroup008, KeySplitTable151   @ rhodes (pokecenter)
+	voice_keysplit voicegroup009, KeySplitTable152   @ vibraphone (pokecenter)
+	voice_keysplit voicegroup009, KeySplitTable153   @ fingered bass (pokecenter)
+	voice_keysplit voicegroup204, KeySplitTable156   @ clarinet (pokecenter)
+	voice_keysplit voicegroup204, KeySplitTable159   @ piano (plasma plots, longer decay, top 3 splits only)
+	voice_keysplit voicegroup007, KeySplitTable160   @ strings 1 (bottom 2 splits only)
+	voice_keysplit voicegroup007, KeySplitTable161   @ pizzicato (missing top split)
+	voice_keysplit voicegroup008, KeySplitTable162   @ choir (missing bottom split)

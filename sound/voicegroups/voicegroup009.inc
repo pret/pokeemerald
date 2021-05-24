@@ -2,14 +2,14 @@
 voicegroup009:: @ 8677120
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_french_horn_60, 255, 0, 224, 165  @ 8677120
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_french_horn_72, 255, 0, 218, 165  @ 867712C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vibrc4_pc, 255, 248, 2, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vibrc5_pc, 255, 248, 2, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_fingerbassa2_pc, 255, 234, 191, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_fingerbassa3_pc, 255, 234, 191, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_130hitminc4, 255, 0, 255, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_131hitminds4, 255, 0, 255, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_132hitminfs4, 255, 0, 255, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_129hitmina4, 255, 0, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 24, 40, DirectSoundWaveData_bw_199jdruml, 255, 0, 227, 171
