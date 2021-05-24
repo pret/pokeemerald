@@ -2509,7 +2509,6 @@ const struct Item gItems[] =
         .itemId = ITEM_ROWAP_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_ROWAP_BERRY,
-        .holdEffectParam = TYPE_FAIRY,
         .description = sRowapBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
