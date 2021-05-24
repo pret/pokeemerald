@@ -173,36 +173,30 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     u16 offset;
     s8 cursor;
 
-    if (!IsInvalidBg(bg) && sGpuBgConfigs.configs[bg].visible)
-    {
-        switch (mode)
-        {
-        case 0x1:
-            offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
-            break;
-        case 0x2:
-            offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
-            break;
-        default:
-            cursor = -1;
-            goto end;
-        }
+    if (IsInvalidBg(bg) || !sGpuBgConfigs.configs[bg].visible)
+        return -1;
 
+    switch (mode)
+    {
+    case 0x1:
+        offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
         offset = destOffset + offset;
-
         cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
-
         if (cursor == -1)
-        {
             return -1;
-        }
-    }
-    else
-    {
-       return -1;
+        break;
+    case 0x2:
+        offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
+        offset = destOffset + offset;
+        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        if (cursor == -1)
+            return -1;
+        break;
+    default:
+        cursor = -1;
+        break;
     }
 
-end:
     return cursor;
 }
 
