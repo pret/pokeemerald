@@ -2,7 +2,8 @@
 #include "malloc.h"
 #include "battle.h"
 #include "pokemon.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
@@ -688,7 +689,7 @@ static bool32 AreStatsMaxed(u8 battlerId, u8 n)
     return TRUE;
 }
 
-//TODO - this could be a lot better
+//TODO - this could use some more sophisticated logic
 bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
 {
     // simple logic. just upgrades chosen move to z move if possible, unless regular move would kill opponent
@@ -701,9 +702,9 @@ bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
     {
         #ifdef POKEMON_EXPANSION
         if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU)
-            return 0; // Don't waste a Z-Move busting Mimikyu's disguise
+            return FALSE; // Don't waste a Z-Move busting disguise
         if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
-            return 0; // Don't waste a Z-Move busting Eiscue's Ice Face
+            return FALSE; // Don't waste a Z-Move busting Ice Face
         #endif
         
         if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
@@ -712,7 +713,7 @@ bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
             return FALSE;
         
         if (!IS_MOVE_STATUS(chosenMove) && AI_CalcDamage(chosenMove, battlerAtk, battlerDef, FALSE) >= gBattleMons[battlerDef].hp)
-            return FALSE;   //don't waste damaging z move if regular is expected to faint target
+            return FALSE;   // don't waste damaging z move if can otherwise faint target
         
         return TRUE;
     }

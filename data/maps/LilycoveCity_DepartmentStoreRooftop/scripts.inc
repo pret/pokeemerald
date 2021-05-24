@@ -76,7 +76,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine:: @ 8220295
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink:: @ 82202A6
-	multichoice 16, 0, MULTI_VENDING_MACHINE, 0
+	multichoice 16, 0, MULTI_VENDING_MACHINE, FALSE
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater

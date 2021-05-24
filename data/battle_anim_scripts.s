@@ -14515,7 +14515,7 @@ Move_TWINEEDLE:
 
 Move_FIRE_BLAST:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
-	createsoundtask sub_8158B30, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
+	createsoundtask SoundTask_FireBlast, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
 	call FireBlastRing
 	call FireBlastRing
 	call FireBlastRing
@@ -16290,7 +16290,7 @@ Move_FISSURE:
 	delay 40
 	restorebg
 	waitbgfadeout
-	setarg 7, 0xFFFF
+	setarg 7, -1
 	waitbgfadein
 	end
 

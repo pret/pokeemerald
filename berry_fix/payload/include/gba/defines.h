@@ -1,5 +1,5 @@
-#ifndef GUARD_GBA_DEFINES
-#define GUARD_GBA_DEFINES
+#ifndef GUARD_GBA_DEFINES_H
+#define GUARD_GBA_DEFINES_H
 
 #include <stddef.h>
 
@@ -84,4 +84,4 @@
 #define RGB_CYAN RGB(0, 31, 31)
 #define RGB_WHITEALPHA (RGB_WHITE | 0x8000)
 
-#endif // GUARD_GBA_DEFINES
+#endif // GUARD_GBA_DEFINES_H

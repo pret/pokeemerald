@@ -61,7 +61,7 @@ NavelRock_Top_EventScript_HoOh:: @ 826916F
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70 @ level
 	setvar VAR_0x8006, ITEM_NONE
-	special CreateObedientEnemyMon
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

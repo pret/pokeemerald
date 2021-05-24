@@ -242,7 +242,6 @@ extern const u8* const gBattleStringsTable[];
 extern const u8* const gStatNamesTable[];
 extern const u8* const gPokeblockWasTooXStringTable[];
 extern const u8* const gRefereeStringsTable[];
-extern const u8* const gStatNamesTable2[];
 extern const u8 *const gRoundsStringTable[];
 
 extern const u8 gText_PkmnIsEvolving[];
@@ -289,7 +288,7 @@ extern const u8 gText_Loss[];
 extern const u8 gText_Draw[];
 extern const u8 gText_StatSharply[];
 extern const u8 gText_StatRose[];
-extern const u8 gText_PkmnsStatChanged2[];
+extern const u8 gText_DefendersStatRose[];
 extern const u8 gText_PkmnGettingPumped[];
 extern const u8 gText_PkmnShroudedInMist[];
 extern const u8 gText_PkmnsXPreventsSwitching[];

@@ -467,8 +467,6 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
     }
 }
 
-#define TASK_NONE 0xFF
-
 void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 {
     struct ListMenu *list = (void*) gTasks[listTaskId].data;
@@ -681,7 +679,7 @@ static u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind)
     struct CursorStruct cursor;
 
     cursor.left = 0;
-    cursor.top = 160;
+    cursor.top = DISPLAY_HEIGHT;
     cursor.rowWidth = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8 + 2;
     cursor.rowHeight = GetFontAttribute(list->template.fontId, FONTATTR_MAX_LETTER_HEIGHT) + 2;
     cursor.tileTag = 0x4000;

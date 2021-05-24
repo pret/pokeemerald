@@ -13,7 +13,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_Curator:: @ 8218CC2
 	applymovement LOCALID_CURATOR, Common_Movement_FacePlayer
 	message LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings
 	waitmessage
-	multichoice 20, 8, MULTI_VIEWED_PAINTINGS, 1
+	multichoice 20, 8, MULTI_VIEWED_PAINTINGS, TRUE
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings
 	compare VAR_RESULT, 1
