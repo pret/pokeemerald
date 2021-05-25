@@ -556,7 +556,7 @@ void BeginFastPaletteFade(u8 submode)
 static void BeginFastPaletteFadeInternal(u8 submode)
 {
     gPaletteFade.y = 31;
-    gPaletteFade_submode = submode & 0x3F;
+    gPaletteFade_submode = submode;
     gPaletteFade.active = 1;
     gPaletteFade.mode = FAST_FADE;
 
