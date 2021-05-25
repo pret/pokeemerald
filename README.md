@@ -1,3 +1,6 @@
+This branch adds music from NDS Pokémon games to the Pokeemerald decompilations. It is recommended that your repository is up to date as long as this branch is too. Feel free to use the voicegroups to make your own music.
+
+
 # Pokémon Emerald
 
 This is a decompilation of Pokémon Emerald.
