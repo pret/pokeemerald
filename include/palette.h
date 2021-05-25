@@ -30,7 +30,7 @@ struct PaletteFadeControl
 {
     u32 multipurpose1;
 
-    u16 delayCounter:6;
+    u8 delayCounter:6;
     u16 y:5; // blend coefficient
     u16 targetY:5; // target blend coefficient
 
@@ -47,8 +47,8 @@ struct PaletteFadeControl
     u16 softwareFadeFinishingCounter:5;
     bool16 softwareFadeFinishing:1;
     bool16 objPaletteToggle:1;
-    u16 deltaY:4; // rate of change of blend coefficient
-    u16 dummy:1;
+    u8 deltaY:4; // rate of change of blend coefficient
+    u8 dummy:1;
 };
 
 extern struct PaletteFadeControl gPaletteFade;
