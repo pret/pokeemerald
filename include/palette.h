@@ -29,6 +29,7 @@ enum
 struct PaletteFadeControl
 {
     u32 multipurpose1;
+
     u16 delayCounter:6;
     u16 y:5; // blend coefficient
     u16 targetY:5; // target blend coefficient
