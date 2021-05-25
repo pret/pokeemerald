@@ -812,13 +812,13 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(MELMETAL, gMonShinyPalette_Melmetal),
     SPECIES_SHINY_PAL(GROOKEY, gMonShinyPalette_Grookey),
     SPECIES_SHINY_PAL(THWACKEY, gMonShinyPalette_Thwackey),
-    SPECIES_SHINY_PAL(RILLABOOM, gMonShinyPalette_DoubleQuestionMark/*gMonShinyPalette_Rillaboom*/),
+    SPECIES_SHINY_PAL(RILLABOOM, gMonShinyPalette_Rillaboom),
     SPECIES_SHINY_PAL(SCORBUNNY, gMonShinyPalette_Scorbunny),
     SPECIES_SHINY_PAL(RABOOT, gMonShinyPalette_Raboot),
     SPECIES_SHINY_PAL(CINDERACE, gMonShinyPalette_Cinderace),
     SPECIES_SHINY_PAL(SOBBLE, gMonShinyPalette_Sobble),
     SPECIES_SHINY_PAL(DRIZZILE, gMonShinyPalette_Drizzile),
-    SPECIES_SHINY_PAL(INTELEON, gMonShinyPalette_DoubleQuestionMark/*gMonShinyPalette_Inteleon*/),
+    SPECIES_SHINY_PAL(INTELEON, gMonShinyPalette_Inteleon),
     SPECIES_SHINY_PAL(SKWOVET, gMonShinyPalette_Skwovet),
     SPECIES_SHINY_PAL(GREEDENT, gMonShinyPalette_Greedent),
     SPECIES_SHINY_PAL(ROOKIDEE, gMonShinyPalette_Rookidee),
@@ -894,7 +894,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(KUBFU, gMonShinyPalette_Kubfu),
     SPECIES_SHINY_PAL(URSHIFU, gMonShinyPalette_Urshifu),
     SPECIES_SHINY_PAL(ZARUDE, gMonShinyPalette_Zarude),
-    SPECIES_SHINY_PAL(REGIELEKI, gMonShinyPalette_DoubleQuestionMark/*gMonShinyPalette_Regieleki*/),
+    SPECIES_SHINY_PAL(REGIELEKI, gMonShinyPalette_Regieleki),
     SPECIES_SHINY_PAL(REGIDRAGO, gMonShinyPalette_Regidrago),
     SPECIES_SHINY_PAL(GLASTRIER, gMonShinyPalette_Glastrier),
     SPECIES_SHINY_PAL(SPECTRIER, gMonShinyPalette_Spectrier),
@@ -1263,7 +1263,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
 
     SPECIES_SHINY_PAL(ZAMAZENTA_CROWNED_SHIELD, gMonShinyPalette_ZamazentaCrownedShield),
 
-    SPECIES_SHINY_PAL(ETERNATUS_ETERNAMAX, gMonShinyPalette_Eternatus/*Eternamax*/),
+    SPECIES_SHINY_PAL(ETERNATUS_ETERNAMAX, gMonShinyPalette_EternatusEternamax),
 
     SPECIES_SHINY_PAL(URSHIFU_RAPID_STRIKE_STYLE, gMonShinyPalette_UrshifuRapidStrikeStyle),
 

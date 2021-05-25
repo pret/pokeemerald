@@ -131,5 +131,5 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     // Misc Forms
     [SPECIES_GIRATINA_ORIGIN] = 7,
     [SPECIES_THUNDURUS_THERIAN] = 7,
+    [SPECIES_ETERNATUS_ETERNAMAX] = 4,
 };
-
