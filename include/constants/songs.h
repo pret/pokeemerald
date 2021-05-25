@@ -892,6 +892,14 @@
 #define BW_SEQ_ME_ASA                919 // Pokémon Healed                  (TODO: SWEEP PITCH!!)
 #define BW_SEQ_ME_HYOUKA1            920 // Pokédex Evaluation... You've Just Begun!
 #define BW_SEQ_BGM_E_SAGE            921 // Team Plasma Plots
+#define BW_SEQ_BGM_R_B_SP_VAR        922 // Route 2 (Spring) (No Percussion)
+#define BW_SEQ_BGM_R_B_SP            923 // Route 2 (Spring)
+#define BW_SEQ_BGM_R_B_SU_VAR        924 // Route 2 (Summer) (No Percussion)
+#define BW_SEQ_BGM_R_B_SU            925 // Route 2 (Summer)
+#define BW_SEQ_BGM_R_B_AU_VAR        926 // Route 2 (Autumn) (No Percussion)
+#define BW_SEQ_BGM_R_B_AU            927 // Route 2 (Autumn)
+#define BW_SEQ_BGM_R_B_WI_VAR        928 // Route 2 (Winter) (No Percussion)
+#define BW_SEQ_BGM_R_B_WI            929 // Route 2 (Winter)
 
 // Black 2 & White 2 Music
 

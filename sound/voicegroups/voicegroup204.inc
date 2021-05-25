@@ -76,11 +76,11 @@ voicegroup204::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_151pizzg2, 255, 248, 6, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_149pizze3, 255, 248, 6, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_148pizzc4, 255, 248, 6, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_147pizza4, 255, 248, 6, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_150pizzf5, 255, 248, 6, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

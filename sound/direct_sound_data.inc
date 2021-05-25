@@ -4123,6 +4123,10 @@ DirectSoundWaveData_bw_clarif5_pc::
 	.incbin "sound/direct_sound_samples/bw_clarif5_pc.bin"
 
 	.align 2
+DirectSoundWaveData_bw_sambawhistlec4_route2::
+	.incbin "sound/direct_sound_samples/bw_sambawhistlec4_route2.bin"
+
+	.align 2
 DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
 	.incbin "sound/direct_sound_samples/b2_trumpetsstaccatogs4_loop.bin"
 

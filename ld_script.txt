@@ -1617,6 +1617,14 @@ SECTIONS {
         sound/songs/midi/bw_seq_me_asa.o(.rodata);
         sound/songs/midi/bw_seq_me_hyouka1.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_sage.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_sp_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_sp.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_su_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_su.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_au_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_au.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_wi_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_b_wi.o(.rodata);
     } =0
 
     lib_rodata :

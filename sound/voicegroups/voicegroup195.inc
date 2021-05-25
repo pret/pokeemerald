@@ -18,7 +18,7 @@ voicegroup195::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 61, 105, DirectSoundWaveData_bw_045crash, 255, 250, 0, 205
 	voice_directsound 61, 102, DirectSoundWaveData_bw_041crash, 255, 248, 0, 214
 	voice_directsound 59, 20, DirectSoundWaveData_bw_026china, 255, 250, 0, 224
 	voice_directsound 60, 64, DirectSoundWaveData_bw_048orccym, 255, 248, 0, 214
@@ -90,3 +90,4 @@ voicegroup195::
 	voice_directsound 60, 64, DirectSoundWaveData_b2_woodblocklo, 255, 0, 255, 0
 	voice_directsound 60, 64, DirectSoundWaveData_b2_gongf, 255, 0, 255, 0
 	voice_directsound 60, 64, DirectSoundWaveData_b2_gongp, 255, 0, 255, 0
+	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 248, 0, 192
