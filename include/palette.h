@@ -40,13 +40,14 @@ struct PaletteFadeControl
     bool8 yDec:1; // whether blend coefficient is decreasing
     bool8 bufferTransferDisabled:1;
 
-    u8 mode:2;
-    bool8 shouldResetBlendRegisters:1;
-    bool8 hardwareFadeFinishing:1;
-    u8 softwareFadeFinishingCounter:5;
-    bool8 softwareFadeFinishing:1;
-    bool8 objPaletteToggle:1;
-    u8 deltaY:4; // rate of change of blend coefficient
+    u16 mode:2;
+    bool16 shouldResetBlendRegisters:1;
+    bool16 hardwareFadeFinishing:1;
+    u16 softwareFadeFinishingCounter:5;
+    bool16 softwareFadeFinishing:1;
+    bool16 objPaletteToggle:1;
+    u16 deltaY:4; // rate of change of blend coefficient
+    u16 dummy:1;
 };
 
 extern struct PaletteFadeControl gPaletteFade;
