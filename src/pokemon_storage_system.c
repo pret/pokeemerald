@@ -5443,14 +5443,14 @@ static void DrawWallpaper(const void *tilemap, s8 direction, u8 offset)
 
     CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, var, var2);
 
-    if (direction)
-    {
-        if (direction > 0)
-            x += 0x14;
-        else
-            x -= 4;
+    if (direction == 0)
+        return;
+    if (direction > 0)
+        x += 0x14;
+    else
+        x -= 4;
+
     FillBgTilemapBufferRect(2, 0, x, 2, 4, 0x12, 0x11);
-    }
 }
 
 static void TrimOldWallpaper(void *tilemap)
