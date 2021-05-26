@@ -2604,9 +2604,9 @@ static void RotateUpSlamDown_0(struct Sprite *sprite)
 {
     TryFlipX(sprite);
     sprite->data[7]--;
-    sprite->pos2.x = Cos(sprite->data[7], sprite->data[6]) + sprite->data[6];
+    sprite->pos2.x = sprite->data[6] + Cos(sprite->data[7], sprite->data[6]);
 
-    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6] += 0)); // dummy += 0 is needed to match
+    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6]));
 
     HandleSetAffineData(sprite, 256, 256, (sprite->data[7] - 128) << 8);
     if (sprite->data[7] <= 120)
@@ -2634,9 +2634,9 @@ static void RotateUpSlamDown_2(struct Sprite *sprite)
 {
     TryFlipX(sprite);
     sprite->data[7] += 2;
-    sprite->pos2.x = Cos(sprite->data[7], sprite->data[6]) + sprite->data[6];
+    sprite->pos2.x = sprite->data[6] + Cos(sprite->data[7], sprite->data[6]);
 
-    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6] += 0)); // dummy += 0 is needed to match
+    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6]));
 
     HandleSetAffineData(sprite, 256, 256, (sprite->data[7] - 128) << 8);
     if (sprite->data[7] >= 128)
