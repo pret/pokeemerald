@@ -1493,6 +1493,7 @@ static void Task_UpdateBgPalette(u8 taskId)
 
     if (tPaused)
         return;
+
     if (tStartTimer++ < 20)
         return;
 
