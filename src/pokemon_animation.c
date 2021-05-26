@@ -4066,16 +4066,15 @@ static void VerticalShakeLowTwice(struct Sprite *sprite)
     u8 var8 = sprite->data[2];
     u8 var9 = sprite->data[6];
     u8 var5 = sVerticalShakeData[sprite->data[5]][0];
-    u8 var2 = var5;
     if (var5 != (u8)-1)
         var5 = sprite->data[7];
-    else
-        var5 = (u8)-1; // needed to match
 
     var6 = sVerticalShakeData[sprite->data[5]][1];
     var7 = 0;
-    if (var2 != (u8)-2)
+    if (sVerticalShakeData[sprite->data[5]][0] != (u8)-2)
         var7 = (var6 - var9) * var5 / var6;
+    else
+        var7 = 0;
 
     if (var5 == (u8)-1)
     {
