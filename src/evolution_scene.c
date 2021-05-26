@@ -1598,7 +1598,7 @@ static void StartBgAnimation(bool8 isLink)
 {
     u8 innerBgId, outerBgId;
 
-    sBgAnimPal = AllocZeroed(0x640);
+    sBgAnimPal = AllocZeroed(16*sizeof(u16)*ARRAY_COUNT(sBgAnim_PalIndexes));
     InitMovingBgPalette(sBgAnimPal);
 
     if (!isLink)
