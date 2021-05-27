@@ -34,7 +34,7 @@ BattleFrontier_Lounge3_EventScript_AskToEnterChallenge:: @ 8261DAF
 	end
 
 BattleFrontier_Lounge3_EventScript_ChooseBetAmount:: @ 8261DE9
-	multichoice 20, 4, MULTI_FRONTIER_GAMBLER_BET, 0
+	multichoice 20, 4, MULTI_FRONTIER_GAMBLER_BET, FALSE
 	copyvar VAR_FRONTIER_GAMBLER_AMOUNT_BET, VAR_RESULT
 	switch VAR_RESULT
 	case FRONTIER_GAMBLER_BET_5, BattleFrontier_Lounge3_EventScript_Bet5

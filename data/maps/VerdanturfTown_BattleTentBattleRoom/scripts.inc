@@ -88,7 +88,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge:: @ 820243C
 	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
 	compare VAR_RESULT, 2
 	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_AskPauseChallenge
@@ -104,7 +104,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_AskPauseChallenge:: @ 820248A
 VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge:: @ 82024B8
 	message BattleFrontier_BattlePalaceBattleRoom_Text_WishToQuitChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost

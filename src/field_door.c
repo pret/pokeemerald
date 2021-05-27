@@ -357,40 +357,42 @@ static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame 
     }
 }
 
-enum
-{
-    TD_FRAMELIST = 0,
-    TD_GFX = 2,
-    TD_FRAME = 4,
-    TD_COUNTER,
-    TD_X,
-    TD_Y
-};
+#define tFramesHi data[0]
+#define tFramesLo data[1]
+#define tGfxHi data[2]
+#define tGfxLo data[3]
+#define tFrameId data[4]
+#define tCounter data[5]
+#define tX data[6]
+#define tY data[7]
 
-static bool32 sub_808A5F0(struct DoorGraphics *gfx, struct DoorAnimFrame *frames, s16 *taskData)
+// Draws a single frame of the door animation, or skips drawing to wait between frames.
+// Returns FALSE when the final frame has been reached
+static bool32 AnimateDoorFrame(struct DoorGraphics *gfx, struct DoorAnimFrame *frames, s16 *data)
 {
-    if (taskData[TD_COUNTER] == 0)
-        DrawDoor(gfx, &frames[taskData[TD_FRAME]], taskData[TD_X], taskData[TD_Y]);
-    if (taskData[TD_COUNTER] == frames[taskData[TD_FRAME]].time)
+    if (tCounter == 0)
+        DrawDoor(gfx, &frames[tFrameId], tX, tY);
+
+    if (tCounter == frames[tFrameId].time)
     {
-        taskData[TD_COUNTER] = 0;
-        taskData[TD_FRAME]++;
-        if (frames[taskData[TD_FRAME]].time == 0)
+        tCounter = 0;
+        tFrameId++;
+        if (frames[tFrameId].time == 0)
             return FALSE;
         else
             return TRUE;
     }
-    taskData[TD_COUNTER]++;
+    tCounter++;
     return TRUE;
 }
 
 static void Task_AnimateDoor(u8 taskId)
 {
-    u16 *taskData = gTasks[taskId].data;
-    struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(taskData[TD_FRAMELIST] << 16 | taskData[TD_FRAMELIST + 1]);
-    struct DoorGraphics *gfx = (struct DoorGraphics *)(taskData[TD_GFX] << 16 | taskData[TD_GFX + 1]);
+    u16 *data = gTasks[taskId].data;
+    struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(tFramesHi << 16 | tFramesLo);
+    struct DoorGraphics *gfx = (struct DoorGraphics *)(tGfxHi << 16 | tGfxLo);
 
-    if (sub_808A5F0(gfx, frames, taskData) == FALSE)
+    if (AnimateDoorFrame(gfx, frames, data) == FALSE)
         DestroyTask(taskId);
 }
 
@@ -419,16 +421,16 @@ static s8 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct Do
     else
     {
         u8 taskId = CreateTask(Task_AnimateDoor, 0x50);
-        s16 *taskData = gTasks[taskId].data;
+        s16 *data = gTasks[taskId].data;
 
-        taskData[TD_X] = x;
-        taskData[TD_Y] = y;
+        tX = x;
+        tY = y;
 
-        taskData[TD_FRAMELIST + 1] = (u32)frames;
-        taskData[TD_FRAMELIST] = (u32)frames >> 16;
+        tFramesLo = (u32)frames;
+        tFramesHi = (u32)frames >> 16;
 
-        taskData[TD_GFX + 1] = (u32)gfx;
-        taskData[TD_GFX] = (u32)gfx >> 16;
+        tGfxLo = (u32)gfx;
+        tGfxHi = (u32)gfx >> 16;
 
         return taskId;
     }
