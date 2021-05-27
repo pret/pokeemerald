@@ -246,17 +246,17 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
 
     switch (sGpuBgConfigs.bgVisibilityAndMode & 0x7)
     {
+    default:
+    case 0:
+        return;
     case 1:
         if (bg != 2)
             return;
         break;
     case 2:
-        if (bg < 2 || bg >= NUM_BACKGROUNDS)
+        if (bg != 2 && bg != 3)
             return;
         break;
-    case 0:
-    default:
-        return;
     }
 
     src.texX = srcCenterX;
@@ -689,7 +689,7 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
-s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
 {
     u8 mode;
     u16 temp1;
