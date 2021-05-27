@@ -11,9 +11,9 @@ voicegroup199:: @ BW Kageyama
 	voice_keysplit voicegroup007, KeySplitTable145   @ marimba (splits shifted -2)
 	voice_keysplit voicegroup006, KeySplitTable147   @ piano (route 1)
 	voice_keysplit voicegroup006, KeySplitTable83    @ vibraphone
+	voice_keysplit voicegroup007, KeySplitTable89    @ marimba
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_bw_228vibrc6, 255, 246, 0, 205      @ victory! (wild pokemon)
+	voice_keysplit voicegroup204, KeySplitTable168   @ vibraphone (hgss decay, all splits)
 	voice_keysplit voicegroup007, KeySplitTable92    @ tubular bell
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -26,7 +26,7 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable102   @ upright bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup193, KeySplitTable103   @ fingered bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup193, KeySplitTable106   @ synth bass
@@ -97,3 +97,6 @@ voicegroup199:: @ BW Kageyama
 	voice_keysplit voicegroup007, KeySplitTable160   @ strings 1 (bottom 2 splits only)
 	voice_keysplit voicegroup007, KeySplitTable161   @ pizzicato (missing top split)
 	voice_keysplit voicegroup008, KeySplitTable162   @ choir (missing bottom split)
+	voice_keysplit voicegroup204, KeySplitTable164   @ xtransceiver tone
+	voice_directsound 60, 0, DirectSoundWaveData_bw_xtransceiverbeep, 255, 0, 255, 210
+	voice_keysplit voicegroup007, KeySplitTable165   @ clarinet (missing top split)

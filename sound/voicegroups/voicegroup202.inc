@@ -36,15 +36,15 @@ voicegroup202:: @ BW Ichinose (battles)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_025cellog2, 254, 242, 255, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_147pizza4, 255, 248, 0, 205
 	voice_keysplit voicegroup204, KeySplitTable140   @ flute 2
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup006, KeySplitTable166   @ timpani (missing top split)
 	voice_keysplit voicegroup007, KeySplitTable111   @ pizzicato
 	voice_directsound 60, 0, DirectSoundWaveData_bw_203timpg3, 255, 251, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable141   @ trombones (missing top split)
 	voice_keysplit voicegroup006, KeySplitTable149   @ trombones (HGSS, missing top split)
-	voice_keysplit voicegroup007, KeySplitTable142   @ french horns
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup007, KeySplitTable143   @ oboe
+	voice_keysplit voicegroup007, KeySplitTable142   @ french horns (missing bottom 2 splits)
+	voice_directsound 60, 0, DirectSoundWaveData_bw_221tubaa2, 255, 234, 210, 205
+	voice_keysplit voicegroup007, KeySplitTable143   @ oboe (missing bottom split)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_timpany_as_16, 255, 248, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -88,6 +88,7 @@ voicegroup202:: @ BW Ichinose (battles)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_wah_vsrival, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_click_vsrival, 255, 0, 255, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sawleadc4_vsleader, 255, 242, 191, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -124,6 +125,5 @@ voicegroup202:: @ BW Ichinose (battles)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_126hitmajc4, 255, 0, 255, 205
 	voice_keysplit_all voicegroup203				 @ ichinose battle kit

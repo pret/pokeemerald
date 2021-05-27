@@ -69,7 +69,7 @@ voicegroup203:: @ Ichinose battle drums
 	voice_directsound 60, 100, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
 	voice_directsound 60, 100, DirectSoundWaveData_bw_026china, 255, 248, 0, 224
 	voice_directsound 63, 84, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 64, 44, DirectSoundWaveData_bw_041crash, 255, 246, 0, 214
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

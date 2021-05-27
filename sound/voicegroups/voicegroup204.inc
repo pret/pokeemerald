@@ -10,13 +10,13 @@ voicegroup204::
 	voice_directsound 60, 0, DirectSoundWaveData_bw_081pnog4, 255, 252, 0, 214
 	voice_directsound 60, 0, DirectSoundWaveData_bw_078pnoc5, 255, 252, 0, 214
 	voice_directsound 60, 0, DirectSoundWaveData_bw_082pnog5, 255, 252, 0, 214
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_xtransceivertonec4, 255, 0, 255, 87 @ functionally unused
+	voice_directsound 60, 0, DirectSoundWaveData_bw_xtransceivertoneg4, 255, 0, 255, 87
+	voice_directsound 60, 0, DirectSoundWaveData_bw_xtransceivertonec5, 255, 0, 255, 87
+	voice_directsound 60, 0, DirectSoundWaveData_bw_xtransceivertoneg5, 255, 0, 255, 87
+	voice_directsound 60, 0, DirectSoundWaveData_bw_226vibrc4, 255, 246, 0, 192
+	voice_directsound 60, 0, DirectSoundWaveData_bw_227vibrc5, 255, 246, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_228vibrc6, 255, 246, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

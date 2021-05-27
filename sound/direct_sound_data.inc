@@ -4127,6 +4127,38 @@ DirectSoundWaveData_bw_sambawhistlec4_route2::
 	.incbin "sound/direct_sound_samples/bw_sambawhistlec4_route2.bin"
 
 	.align 2
+DirectSoundWaveData_bw_xtransceivertonec4::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertonec4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceivertoneg4::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertoneg4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceivertonec5::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertonec5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceivertoneg5::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertoneg5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceiverbeep::
+	.incbin "sound/direct_sound_samples/bw_xtransceiverbeep.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sawleadc4_vsleader::
+	.incbin "sound/direct_sound_samples/bw_sawleadc4_vsleader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sawleadc5_vsleader::
+	.incbin "sound/direct_sound_samples/bw_sawleadc5_vsleader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sawleadc6_vsleader::
+	.incbin "sound/direct_sound_samples/bw_sawleadc6_vsleader.bin"
+
+	.align 2
 DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
 	.incbin "sound/direct_sound_samples/b2_trumpetsstaccatogs4_loop.bin"
 

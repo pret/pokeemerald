@@ -900,6 +900,11 @@
 #define BW_SEQ_BGM_R_B_AU            927 // Route 2 (Autumn)
 #define BW_SEQ_BGM_R_B_WI_VAR        928 // Route 2 (Winter) (No Percussion)
 #define BW_SEQ_BGM_R_B_WI            929 // Route 2 (Winter)
+#define BW_SEQ_ME_CALL               930 // Xtransceiver
+#define BW_SEQ_BGM_EYE_01            931 // Trainers' Eyes Meet (Youngster)
+#define BW_SEQ_BGM_VS_TRAINER        932 // Battle! (Trainer Battle)
+#define BW_SEQ_BGM_WIN2              933 // Victory! (Trainer Battle)
+#define BW_SEQ_BGM_EYE_02            934 // Trainers' Eyes Meet (Lass)
 
 // Black 2 & White 2 Music
 

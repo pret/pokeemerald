@@ -1625,6 +1625,11 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_r_b_au.o(.rodata);
         sound/songs/midi/bw_seq_bgm_r_b_wi_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_r_b_wi.o(.rodata);
+        sound/songs/midi/bw_seq_me_call.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_eye_01.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_trainer.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_win2.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_eye_02.o(.rodata);
     } =0
 
     lib_rodata :
