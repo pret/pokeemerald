@@ -2796,17 +2796,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CONVERSION_2] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_5
-            .target = MOVE_TARGET_SELECTED,
-        #else
-            .target = MOVE_TARGET_USER,
-        #endif
         .effect = EFFECT_CONVERSION_2,
         .power = 0,
         .type = TYPE_NORMAL,
-        .accuracy = 100,
+        .accuracy = 0,
         .pp = 30,
         .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
         .priority = 0,
         .flags = 0,
         .split = SPLIT_STATUS,
@@ -4693,7 +4689,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #endif
         .power = 0,
         .type = TYPE_BUG,
-        .accuracy = 100,
+        .accuracy = 0,
         .pp = 20,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
@@ -5354,17 +5350,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HOWL] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_8
-            .target = MOVE_TARGET_SELECTED,
-        #else
-            .target = MOVE_TARGET_USER,
-        #endif
         .effect = EFFECT_ATTACK_UP,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 40,
         .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
         .priority = 0,
         .flags = FLAG_SNATCH_AFFECTED | FLAG_SOUND,
         .split = SPLIT_STATUS,
