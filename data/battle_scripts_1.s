@@ -367,6 +367,14 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectFairyLock
 	.4byte BattleScript_EffectAllySwitch
 	.4byte BattleScript_EffectSleepHit
+	.4byte BattleScript_EffectPhotonGeyser
+	.4byte BattleScript_EffectShellSideArm
+
+BattleScript_EffectShellSideArm:
+	shellsidearmcheck
+
+BattleScript_EffectPhotonGeyser:
+	photongeysercheck
 
 BattleScript_EffectSleepHit:
 	setmoveeffect MOVE_EFFECT_SLEEP

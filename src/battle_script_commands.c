@@ -7126,6 +7126,55 @@ static void Cmd_various(void)
 
     switch (gBattlescriptCurrInstr[2])
     {
+    case VARIOUS_PHOTON_GEYSER_CHECK:
+    {
+        u32 attStat = gBattleMons[gActiveBattler].attack;
+        u8 atkStage = gBattleMons[gActiveBattler].statStages[STAT_ATK];
+        u32 spaStat = gBattleMons[gActiveBattler].spAttack;
+
+        attStat *= gStatStageRatios[atkStage][0];
+        attStat /= gStatStageRatios[atkStage][1];
+
+        atkStage = gBattleMons[gActiveBattler].statStages[STAT_SPATK];
+        spaStat *= gStatStageRatios[atkStage][0];
+        spaStat /= gStatStageRatios[atkStage][1];
+
+        if (attStat > spaStat)
+            gSwapDamageCategory = TRUE;
+    }
+    case VARIOUS_SHELL_SIDE_ARM_CHECK: // according to DaWoblefet, 0% chance GameFreak actually checks this way, but this is the only functional explanation at the moment
+    {
+        u32 attStat = gBattleMons[gBattlerAttacker].attack;
+        u8 atkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        u32 attStatDef = gBattleMons[gBattlerTarget].attack;
+        u32 physical;
+
+        u32 spaStat = gBattleMons[gBattlerAttacker].spAttack;
+        u32 spaStatDef = gBattleMons[gBattlerTarget].spAttack;
+        u32 special;
+
+        attStat *= gStatStageRatios[atkStage][0];
+        attStat /= gStatStageRatios[atkStage][1];
+
+        atkStage = gBattleMons[gBattlerTarget].statStages[STAT_ATK];
+        attStatDef *= gStatStageRatios[atkStage][0];
+        attStatDef /= gStatStageRatios[atkStage][1];
+
+        physical = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * 90 * attStat) / attStatDef) / 50);
+
+        atkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
+        spaStat *= gStatStageRatios[atkStage][0];
+        spaStat /= gStatStageRatios[atkStage][1];
+
+        atkStage = gBattleMons[gBattlerTarget].statStages[STAT_SPATK];
+        spaStatDef *= gStatStageRatios[atkStage][0];
+        spaStatDef /= gStatStageRatios[atkStage][1];
+
+        special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * 90 * spaStat) / spaStatDef) / 50);
+
+        if (((physical > special) || (physical == special && (Random() % 2) == 0)))
+            gSwapDamageCategory = TRUE;
+    }
     // Roar will fail in a double wild battle when used by the player against one of the two alive wild mons.
     // Also when an opposing wild mon uses it againt its partner.
     case VARIOUS_JUMP_IF_ROAR_FAILS:

@@ -173,6 +173,8 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
+#define VARIOUS_PHOTON_GEYSER_CHECK          105
+#define VARIOUS_SHELL_SIDE_ARM_CHECK          106
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
