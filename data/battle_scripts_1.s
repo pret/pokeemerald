@@ -372,9 +372,12 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
+	setmoveeffect MOVE_EFFECT_POISON
+	goto BattleScript_EffectHit
 
 BattleScript_EffectPhotonGeyser:
 	photongeysercheck
+	goto BattleScript_EffectHit
 
 BattleScript_EffectSleepHit:
 	setmoveeffect MOVE_EFFECT_SLEEP
