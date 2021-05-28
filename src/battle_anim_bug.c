@@ -3,6 +3,7 @@
 #include "gpu_regs.h"
 #include "trig.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 static void AnimMegahornHorn(struct Sprite *);
 static void AnimLeechLifeNeedle(struct Sprite *);
@@ -45,8 +46,8 @@ static const union AffineAnimCmd *const sAffineAnims_MegahornHorn[] =
 
 const struct SpriteTemplate gMegahornHornSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_HORN_HIT_2,
-    .paletteTag = ANIM_TAG_HORN_HIT_2,
+    .tileTag = TAG_BATTLE_ANIM_HORN_HIT_2,
+    .paletteTag = TAG_BATTLE_ANIM_HORN_HIT_2,
     .oam = &gOamData_AffineDouble_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -81,8 +82,8 @@ static const union AffineAnimCmd *const sAffineAnims_LeechLifeNeedle[] =
 
 const struct SpriteTemplate gLeechLifeNeedleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_NEEDLE,
-    .paletteTag = ANIM_TAG_NEEDLE,
+    .tileTag = TAG_BATTLE_ANIM_NEEDLE,
+    .paletteTag = TAG_BATTLE_ANIM_NEEDLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -92,8 +93,8 @@ const struct SpriteTemplate gLeechLifeNeedleSpriteTemplate =
 
 const struct SpriteTemplate gWebThreadSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WEB_THREAD,
-    .paletteTag = ANIM_TAG_WEB_THREAD,
+    .tileTag = TAG_BATTLE_ANIM_WEB_THREAD,
+    .paletteTag = TAG_BATTLE_ANIM_WEB_THREAD,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -103,8 +104,8 @@ const struct SpriteTemplate gWebThreadSpriteTemplate =
 
 const struct SpriteTemplate gStringWrapSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_STRING,
-    .paletteTag = ANIM_TAG_STRING,
+    .tileTag = TAG_BATTLE_ANIM_STRING,
+    .paletteTag = TAG_BATTLE_ANIM_STRING,
     .oam = &gOamData_AffineOff_ObjNormal_64x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -126,8 +127,8 @@ static const union AffineAnimCmd *const sAffineAnims_SpiderWeb[] =
 
 const struct SpriteTemplate gSpiderWebSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPIDER_WEB,
-    .paletteTag = ANIM_TAG_SPIDER_WEB,
+    .tileTag = TAG_BATTLE_ANIM_SPIDER_WEB,
+    .paletteTag = TAG_BATTLE_ANIM_SPIDER_WEB,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -137,8 +138,8 @@ const struct SpriteTemplate gSpiderWebSpriteTemplate =
 
 const struct SpriteTemplate gLinearStingerSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_NEEDLE,
-    .paletteTag = ANIM_TAG_NEEDLE,
+    .tileTag = TAG_BATTLE_ANIM_NEEDLE,
+    .paletteTag = TAG_BATTLE_ANIM_NEEDLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -148,8 +149,8 @@ const struct SpriteTemplate gLinearStingerSpriteTemplate =
 
 const struct SpriteTemplate gPinMissileSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_NEEDLE,
-    .paletteTag = ANIM_TAG_NEEDLE,
+    .tileTag = TAG_BATTLE_ANIM_NEEDLE,
+    .paletteTag = TAG_BATTLE_ANIM_NEEDLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -159,8 +160,8 @@ const struct SpriteTemplate gPinMissileSpriteTemplate =
 
 const struct SpriteTemplate gIcicleSpearSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICICLE_SPEAR,
-    .paletteTag = ANIM_TAG_ICICLE_SPEAR,
+    .tileTag = TAG_BATTLE_ANIM_ICICLE_SPEAR,
+    .paletteTag = TAG_BATTLE_ANIM_ICICLE_SPEAR,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -186,8 +187,8 @@ static const union AffineAnimCmd *const sAffineAnims_TailGlowOrb[] =
 
 const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

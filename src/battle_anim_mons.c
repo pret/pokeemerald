@@ -15,6 +15,7 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/battle_anim.h"
+#include "constants/sprite_tags.h"
 
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
 
@@ -2344,7 +2345,7 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
     task->data[2] = 0;
     task->data[3] = 0;
     gSprites[task->data[0]].pos2.x -= task->data[0];
-    task->data[4] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+    task->data[4] = AllocSpritePalette(TAG_BATTLE_ANIM_BENT_SPOON);
     task->data[5] = 0;
 
     dest = (task->data[4] + 0x10) * 0x10;
@@ -2385,7 +2386,7 @@ static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId)
     case 2:
         if (!task->data[5])
         {
-            FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
+            FreeSpritePaletteByTag(TAG_BATTLE_ANIM_BENT_SPOON);
             DestroyAnimVisualTask(taskId);
         }
         break;

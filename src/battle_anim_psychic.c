@@ -7,6 +7,7 @@
 #include "trig.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 static void AnimDefensiveWall(struct Sprite *);
 static void AnimDefensiveWall_Step1(struct Sprite *);
@@ -43,8 +44,8 @@ static const union AffineAnimCmd *const sAffineAnims_PsychUpSpiral[] =
 
 const struct SpriteTemplate gPsychUpSpiralSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPIRAL,
-    .paletteTag = ANIM_TAG_SPIRAL,
+    .tileTag = TAG_BATTLE_ANIM_SPIRAL,
+    .paletteTag = TAG_BATTLE_ANIM_SPIRAL,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -54,8 +55,8 @@ const struct SpriteTemplate gPsychUpSpiralSpriteTemplate =
 
 const struct SpriteTemplate gLightScreenWallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GREEN_LIGHT_WALL,
-    .paletteTag = ANIM_TAG_GREEN_LIGHT_WALL,
+    .tileTag = TAG_BATTLE_ANIM_GREEN_LIGHT_WALL,
+    .paletteTag = TAG_BATTLE_ANIM_GREEN_LIGHT_WALL,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -65,8 +66,8 @@ const struct SpriteTemplate gLightScreenWallSpriteTemplate =
 
 const struct SpriteTemplate gReflectWallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BLUE_LIGHT_WALL,
-    .paletteTag = ANIM_TAG_BLUE_LIGHT_WALL,
+    .tileTag = TAG_BATTLE_ANIM_BLUE_LIGHT_WALL,
+    .paletteTag = TAG_BATTLE_ANIM_BLUE_LIGHT_WALL,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -76,8 +77,8 @@ const struct SpriteTemplate gReflectWallSpriteTemplate =
 
 const struct SpriteTemplate gMirrorCoatWallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_RED_LIGHT_WALL,
-    .paletteTag = ANIM_TAG_RED_LIGHT_WALL,
+    .tileTag = TAG_BATTLE_ANIM_RED_LIGHT_WALL,
+    .paletteTag = TAG_BATTLE_ANIM_RED_LIGHT_WALL,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -87,8 +88,8 @@ const struct SpriteTemplate gMirrorCoatWallSpriteTemplate =
 
 const struct SpriteTemplate gBarrierWallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GRAY_LIGHT_WALL,
-    .paletteTag = ANIM_TAG_GRAY_LIGHT_WALL,
+    .tileTag = TAG_BATTLE_ANIM_GRAY_LIGHT_WALL,
+    .paletteTag = TAG_BATTLE_ANIM_GRAY_LIGHT_WALL,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -98,8 +99,8 @@ const struct SpriteTemplate gBarrierWallSpriteTemplate =
 
 const struct SpriteTemplate gMagicCoatWallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ORANGE_LIGHT_WALL,
-    .paletteTag = ANIM_TAG_ORANGE_LIGHT_WALL,
+    .tileTag = TAG_BATTLE_ANIM_ORANGE_LIGHT_WALL,
+    .paletteTag = TAG_BATTLE_ANIM_ORANGE_LIGHT_WALL,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -124,8 +125,8 @@ static const union AnimCmd *const sAnims_ReflectSparkle[] =
 
 const struct SpriteTemplate gReflectSparkleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARKLE_4,
-    .paletteTag = ANIM_TAG_SPARKLE_4,
+    .tileTag = TAG_BATTLE_ANIM_SPARKLE_4,
+    .paletteTag = TAG_BATTLE_ANIM_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_ReflectSparkle,
     .images = NULL,
@@ -149,8 +150,8 @@ static const union AnimCmd *const sAnims_SpecialScreenSparkle[] =
 
 const struct SpriteTemplate gSpecialScreenSparkleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARKLE_3,
-    .paletteTag = ANIM_TAG_SPARKLE_3,
+    .tileTag = TAG_BATTLE_ANIM_SPARKLE_3,
+    .paletteTag = TAG_BATTLE_ANIM_SPARKLE_3,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_SpecialScreenSparkle,
     .images = NULL,
@@ -160,8 +161,8 @@ const struct SpriteTemplate gSpecialScreenSparkleSpriteTemplate =
 
 const struct SpriteTemplate gGoldRingSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GOLD_RING,
-    .paletteTag = ANIM_TAG_GOLD_RING,
+    .tileTag = TAG_BATTLE_ANIM_GOLD_RING,
+    .paletteTag = TAG_BATTLE_ANIM_GOLD_RING,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -217,8 +218,8 @@ static const union AnimCmd *const sAnims_BentSpoon[] =
 
 const struct SpriteTemplate gBentSpoonSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BENT_SPOON,
-    .paletteTag = ANIM_TAG_BENT_SPOON,
+    .tileTag = TAG_BATTLE_ANIM_BENT_SPOON,
+    .paletteTag = TAG_BATTLE_ANIM_BENT_SPOON,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = sAnims_BentSpoon,
     .images = NULL,
@@ -259,8 +260,8 @@ static const union AffineAnimCmd *const sAffineAnims_QuestionMark[] =
 
 const struct SpriteTemplate gQuestionMarkSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_AMNESIA,
-    .paletteTag = ANIM_TAG_AMNESIA,
+    .tileTag = TAG_BATTLE_ANIM_AMNESIA,
+    .paletteTag = TAG_BATTLE_ANIM_AMNESIA,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_QuestionMark,
     .images = NULL,
@@ -285,8 +286,8 @@ static const union AffineAnimCmd sAffineAnim_Teleport[] =
 
 const struct SpriteTemplate gImprisonOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_HOLLOW_ORB,
-    .paletteTag = ANIM_TAG_HOLLOW_ORB,
+    .tileTag = TAG_BATTLE_ANIM_HOLLOW_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_HOLLOW_ORB,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -296,8 +297,8 @@ const struct SpriteTemplate gImprisonOrbSpriteTemplate =
 
 const struct SpriteTemplate gRedXSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_X_SIGN,
-    .paletteTag = ANIM_TAG_X_SIGN,
+    .tileTag = TAG_BATTLE_ANIM_X_SIGN,
+    .paletteTag = TAG_BATTLE_ANIM_X_SIGN,
     .oam = &gOamData_AffineOff_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -349,8 +350,8 @@ static const union AffineAnimCmd *const sAffineAnims_SkillSwapOrb[] =
 
 const struct SpriteTemplate gSkillSwapOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BLUEGREEN_ORB,
-    .paletteTag = ANIM_TAG_BLUEGREEN_ORB,
+    .tileTag = TAG_BATTLE_ANIM_BLUEGREEN_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_BLUEGREEN_ORB,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -372,8 +373,8 @@ static const union AffineAnimCmd *const sAffineAnims_LusterPurgeCircle[] =
 
 const struct SpriteTemplate gLusterPurgeCircleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WHITE_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_WHITE_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_WHITE_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_WHITE_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -410,8 +411,8 @@ static const union AffineAnimCmd *const sAffineAnims_PsychoBoostOrb[] =
 
 const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

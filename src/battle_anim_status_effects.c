@@ -10,6 +10,7 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
@@ -43,8 +44,8 @@ static const union AnimCmd *const sAnims_FlickeringOrb[] =
 // Unused
 static const struct SpriteTemplate sFlickeringOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ORB,
-    .paletteTag = ANIM_TAG_ORB,
+    .tileTag = TAG_BATTLE_ANIM_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_FlickeringOrb,
     .images = NULL,
@@ -55,8 +56,8 @@ static const struct SpriteTemplate sFlickeringOrbSpriteTemplate =
 // Unused
 static const struct SpriteTemplate sFlickeringOrbFlippedSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ORB,
-    .paletteTag = ANIM_TAG_ORB,
+    .tileTag = TAG_BATTLE_ANIM_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_FlickeringOrb,
     .images = NULL,
@@ -77,8 +78,8 @@ static const union AnimCmd *const sAnims_WeatherBallNormal[] =
 
 const struct SpriteTemplate gWeatherBallUpSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WEATHER_BALL,
-    .paletteTag = ANIM_TAG_WEATHER_BALL,
+    .tileTag = TAG_BATTLE_ANIM_WEATHER_BALL,
+    .paletteTag = TAG_BATTLE_ANIM_WEATHER_BALL,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_WeatherBallNormal,
     .images = NULL,
@@ -88,8 +89,8 @@ const struct SpriteTemplate gWeatherBallUpSpriteTemplate =
 
 const struct SpriteTemplate gWeatherBallNormalDownSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WEATHER_BALL,
-    .paletteTag = ANIM_TAG_WEATHER_BALL,
+    .tileTag = TAG_BATTLE_ANIM_WEATHER_BALL,
+    .paletteTag = TAG_BATTLE_ANIM_WEATHER_BALL,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_WeatherBallNormal,
     .images = NULL,
@@ -114,8 +115,8 @@ static const union AnimCmd *const sAnims_SpinningSparkle[] =
 
 const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARKLE_4,
-    .paletteTag = ANIM_TAG_SPARKLE_4,
+    .tileTag = TAG_BATTLE_ANIM_SPARKLE_4,
+    .paletteTag = TAG_BATTLE_ANIM_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_SpinningSparkle,
     .images = NULL,
@@ -126,8 +127,8 @@ const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
 // Unused
 static const struct SpriteTemplate sFlickeringFootSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MONSTER_FOOT,
-    .paletteTag = ANIM_TAG_MONSTER_FOOT,
+    .tileTag = TAG_BATTLE_ANIM_MONSTER_FOOT,
+    .paletteTag = TAG_BATTLE_ANIM_MONSTER_FOOT,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -163,8 +164,8 @@ static const union AnimCmd *const sAnims_FlickeringImpact[] =
 // Unused
 static const struct SpriteTemplate sFlickeringImpactSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FlickeringImpact,
     .images = NULL,
@@ -198,8 +199,8 @@ static const union AffineAnimCmd *const sAffineAnims_FlickeringShrinkOrb[] =
 // Unused
 static const struct SpriteTemplate sFlickeringShrinkOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ORB,
-    .paletteTag = ANIM_TAG_ORB,
+    .tileTag = TAG_BATTLE_ANIM_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_ORB,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = sAnims_FlickeringShrinkOrb,
     .images = NULL,
@@ -250,8 +251,8 @@ static const struct SubspriteTable sFrozenIceCubeSubspriteTable[] =
 
 static const struct SpriteTemplate gFrozenIceCubeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CUBE,
-    .paletteTag = ANIM_TAG_ICE_CUBE,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CUBE,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CUBE,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -261,8 +262,8 @@ static const struct SpriteTemplate gFrozenIceCubeSpriteTemplate =
 
 static const struct SpriteTemplate sFlashingCircleImpactSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_IMPACT,
-    .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_IMPACT,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -278,8 +279,8 @@ static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
     u8 spriteId;
     u8 i;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
-    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_CIRCLE_IMPACT)]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_CIRCLE_IMPACT)]);
     gTasks[taskId].data[0] = battlerId;
     if (red)
     {
@@ -390,7 +391,7 @@ void AnimTask_FrozenIceCube(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&gFrozenIceCubeSpriteTemplate, x, y, 4);
-    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
+    if (GetSpriteTileStartByTag(TAG_BATTLE_ANIM_ICE_CUBE) == 0xFFFF)
         gSprites[spriteId].invisible = TRUE;
     SetSubspriteTables(&gSprites[spriteId], sFrozenIceCubeSubspriteTable);
     gTasks[taskId].data[15] = spriteId;
@@ -415,7 +416,7 @@ static void AnimTask_FrozenIceCube_Step1(u8 taskId)
 
 static void AnimTask_FrozenIceCube_Step2(u8 taskId)
 {
-    u8 palIndex = IndexOfSpritePaletteTag(ANIM_TAG_ICE_CUBE);
+    u8 palIndex = IndexOfSpritePaletteTag(TAG_BATTLE_ANIM_ICE_CUBE);
 
     if (gTasks[taskId].data[1]++ > 13)
     {

@@ -19,8 +19,9 @@
 #include "data.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 // iwram
 u32 gMonShrinkDuration;
@@ -396,8 +397,8 @@ const u16 gBallOpenFadeColors[] =
 
 const struct SpriteTemplate gPokeblockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POKEBLOCK,
-    .paletteTag = ANIM_TAG_POKEBLOCK,
+    .tileTag = TAG_BATTLE_ANIM_POKEBLOCK,
+    .paletteTag = TAG_BATTLE_ANIM_POKEBLOCK,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -418,8 +419,8 @@ static const union AnimCmd *const sAnims_SafariRock[] = {
 // Unused, leftover from FRLG
 static const struct SpriteTemplate sSafariRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_SafariRock,
     .images = NULL,
@@ -2233,10 +2234,10 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
 
         if (isShiny)
         {
-            if (GetSpriteTileStartByTag(ANIM_TAG_GOLD_STARS) == 0xFFFF)
+            if (GetSpriteTileStartByTag(TAG_BATTLE_ANIM_GOLD_STARS) == 0xFFFF)
             {
-                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_GOLD_STARS - ANIM_SPRITES_START]);
-                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_GOLD_STARS - ANIM_SPRITES_START]);
+                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[TAG_BATTLE_ANIM_GOLD_STARS - ANIM_SPRITES_START]);
+                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[TAG_BATTLE_ANIM_GOLD_STARS - ANIM_SPRITES_START]);
             }
 
             taskCirc = CreateTask(Task_ShinyStars, 10);
@@ -2388,16 +2389,16 @@ void AnimTask_LoadPokeblockGfx(u8 taskId)
 {
     u8 paletteIndex;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK); // unused
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[TAG_BATTLE_ANIM_POKEBLOCK - ANIM_SPRITES_START]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[TAG_BATTLE_ANIM_POKEBLOCK - ANIM_SPRITES_START]);
+    paletteIndex = IndexOfSpritePaletteTag(TAG_BATTLE_ANIM_POKEBLOCK); // unused
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_FreePokeblockGfx(u8 taskId)
 {
-    FreeSpriteTilesByTag(ANIM_TAG_POKEBLOCK);
-    FreeSpritePaletteByTag(ANIM_TAG_POKEBLOCK);
+    FreeSpriteTilesByTag(TAG_BATTLE_ANIM_POKEBLOCK);
+    FreeSpritePaletteByTag(TAG_BATTLE_ANIM_POKEBLOCK);
     DestroyAnimVisualTask(taskId);
 }
 

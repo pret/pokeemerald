@@ -2,9 +2,10 @@
 #include "battle_anim.h"
 #include "palette.h"
 #include "trig.h"
+#include "random.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-#include "random.h"
+#include "constants/sprite_tags.h"
 
 extern const struct SpriteTemplate gFlashingHitSplatSpriteTemplate;
 
@@ -39,8 +40,8 @@ static void AnimTask_AnimateGustTornadoPalette_Step(u8);
 
 const struct SpriteTemplate gEllipticalGustSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GUST,
-    .paletteTag = ANIM_TAG_GUST,
+    .tileTag = TAG_BATTLE_ANIM_GUST,
+    .paletteTag = TAG_BATTLE_ANIM_GUST,
     .oam = &gOamData_AffineOff_ObjNormal_32x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -62,8 +63,8 @@ static const union AffineAnimCmd *const sAffineAnims_GustToTarget[] =
 
 const struct SpriteTemplate gGustToTargetSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GUST,
-    .paletteTag = ANIM_TAG_GUST,
+    .tileTag = TAG_BATTLE_ANIM_GUST,
+    .paletteTag = TAG_BATTLE_ANIM_GUST,
     .oam = &gOamData_AffineNormal_ObjNormal_32x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -87,8 +88,8 @@ static const union AnimCmd *const sAffineAnims_AirWaveCrescent[] =
 
 const struct SpriteTemplate gAirWaveCrescentSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_AIR_WAVE_2,
-    .paletteTag = ANIM_TAG_AIR_WAVE_2,
+    .tileTag = TAG_BATTLE_ANIM_AIR_WAVE_2,
+    .paletteTag = TAG_BATTLE_ANIM_AIR_WAVE_2,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = sAffineAnims_AirWaveCrescent,
     .images = NULL,
@@ -130,8 +131,8 @@ static const union AffineAnimCmd *const sAffineAnims_FlyBallAttack[] =
 
 const struct SpriteTemplate gFlyBallUpSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROUND_SHADOW,
-    .paletteTag = ANIM_TAG_ROUND_SHADOW,
+    .tileTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
+    .paletteTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -141,8 +142,8 @@ const struct SpriteTemplate gFlyBallUpSpriteTemplate =
 
 const struct SpriteTemplate gFlyBallAttackSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROUND_SHADOW,
-    .paletteTag = ANIM_TAG_ROUND_SHADOW,
+    .tileTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
+    .paletteTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
     .oam = &gOamData_AffineNormal_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -170,8 +171,8 @@ static const union AnimCmd *const sAnims_FallingFeather[] =
 
 const struct SpriteTemplate gFallingFeatherSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WHITE_FEATHER,
-    .paletteTag = ANIM_TAG_WHITE_FEATHER,
+    .tileTag = TAG_BATTLE_ANIM_WHITE_FEATHER,
+    .paletteTag = TAG_BATTLE_ANIM_WHITE_FEATHER,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_FallingFeather,
     .images = NULL,
@@ -182,8 +183,8 @@ const struct SpriteTemplate gFallingFeatherSpriteTemplate =
 // Unused
 static const struct SpriteTemplate sUnusedBubbleThrowSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -208,8 +209,8 @@ static const union AnimCmd *const sAnims_WhirlwindLines[] =
 
 const struct SpriteTemplate gWhirlwindLineSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WHIRLWIND_LINES,
-    .paletteTag = ANIM_TAG_WHIRLWIND_LINES,
+    .tileTag = TAG_BATTLE_ANIM_WHIRLWIND_LINES,
+    .paletteTag = TAG_BATTLE_ANIM_WHIRLWIND_LINES,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = sAnims_WhirlwindLines,
     .images = NULL,
@@ -234,8 +235,8 @@ static const union AffineAnimCmd *const sAffineAnims_BounceBallShrink[] =
 
 const struct SpriteTemplate gBounceBallShrinkSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROUND_SHADOW,
-    .paletteTag = ANIM_TAG_ROUND_SHADOW,
+    .tileTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
+    .paletteTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -256,8 +257,8 @@ static const union AffineAnimCmd *const sAffineAnims_BounceBallLand[] =
 
 const struct SpriteTemplate gBounceBallLandSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROUND_SHADOW,
-    .paletteTag = ANIM_TAG_ROUND_SHADOW,
+    .tileTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
+    .paletteTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -281,8 +282,8 @@ static const union AffineAnimCmd *const sAffineAnims_DiveBall[] =
 
 const struct SpriteTemplate gDiveBallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROUND_SHADOW,
-    .paletteTag = ANIM_TAG_ROUND_SHADOW,
+    .tileTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
+    .paletteTag = TAG_BATTLE_ANIM_ROUND_SHADOW,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -306,8 +307,8 @@ static const union AffineAnimCmd *const sAnims_Unused[] =
 
 const struct SpriteTemplate gDiveWaterSplashSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPLASH,
-    .paletteTag = ANIM_TAG_SPLASH,
+    .tileTag = TAG_BATTLE_ANIM_SPLASH,
+    .paletteTag = TAG_BATTLE_ANIM_SPLASH,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -317,8 +318,8 @@ const struct SpriteTemplate gDiveWaterSplashSpriteTemplate =
 
 const struct SpriteTemplate gSprayWaterDropletSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SWEAT_BEAD,
-    .paletteTag = ANIM_TAG_SWEAT_BEAD,
+    .tileTag = TAG_BATTLE_ANIM_SWEAT_BEAD,
+    .paletteTag = TAG_BATTLE_ANIM_SWEAT_BEAD,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -329,8 +330,8 @@ const struct SpriteTemplate gSprayWaterDropletSpriteTemplate =
 // Unused
 static const struct SpriteTemplate sUnusedFlashingLightSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -340,8 +341,8 @@ static const struct SpriteTemplate sUnusedFlashingLightSpriteTemplate =
 
 const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BIRD,
-    .paletteTag = ANIM_TAG_BIRD,
+    .tileTag = TAG_BATTLE_ANIM_BIRD,
+    .paletteTag = TAG_BATTLE_ANIM_BIRD,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -374,7 +375,7 @@ void AnimTask_AnimateGustTornadoPalette(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[1];
     gTasks[taskId].data[1] = gBattleAnimArgs[0];
-    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(ANIM_TAG_GUST);
+    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(TAG_BATTLE_ANIM_GUST);
     gTasks[taskId].func = AnimTask_AnimateGustTornadoPalette_Step;
 }
 

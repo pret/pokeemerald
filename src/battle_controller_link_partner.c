@@ -26,6 +26,7 @@
 #include "window.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 #include "constants/trainers.h"
 #include "recorded_battle.h"
 
@@ -364,8 +365,8 @@ static void SwitchIn_ShowHealthbox(void)
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
 
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
 
         CreateTask(Task_PlayerController_RestoreBgmAfterCry, 10);
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);

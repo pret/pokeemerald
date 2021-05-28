@@ -5,6 +5,7 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 static void AnimConfusionDuck(struct Sprite *);
 static void AnimSimplePaletteBlend(struct Sprite *);
@@ -61,8 +62,8 @@ static const union AnimCmd *const sAnims_ConfusionDuck[] =
 
 const struct SpriteTemplate gConfusionDuckSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_DUCK,
-    .paletteTag = ANIM_TAG_DUCK,
+    .tileTag = TAG_BATTLE_ANIM_DUCK,
+    .paletteTag = TAG_BATTLE_ANIM_DUCK,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_ConfusionDuck,
     .images = NULL,
@@ -110,8 +111,8 @@ static const union AnimCmd *const sAnims_CirclingSparkle[] =
 // Unused
 static const struct SpriteTemplate sCirclingSparkleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARKLE_4,
-    .paletteTag = ANIM_TAG_SPARKLE_4,
+    .tileTag = TAG_BATTLE_ANIM_SPARKLE_4,
+    .paletteTag = TAG_BATTLE_ANIM_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_CirclingSparkle,
     .images = NULL,
@@ -167,8 +168,8 @@ static const union AffineAnimCmd *const sAffineAnims_HitSplat[] =
 
 const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -178,8 +179,8 @@ const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gHandleInvertHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -189,8 +190,8 @@ const struct SpriteTemplate gHandleInvertHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WATER_IMPACT,
-    .paletteTag = ANIM_TAG_WATER_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_WATER_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_WATER_IMPACT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -200,8 +201,8 @@ const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -211,8 +212,8 @@ const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gMonEdgeHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -222,8 +223,8 @@ const struct SpriteTemplate gMonEdgeHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gCrossImpactSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CROSS_IMPACT,
-    .paletteTag = ANIM_TAG_CROSS_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_CROSS_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_CROSS_IMPACT,
     .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -233,8 +234,8 @@ const struct SpriteTemplate gCrossImpactSpriteTemplate =
 
 const struct SpriteTemplate gFlashingHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -244,8 +245,8 @@ const struct SpriteTemplate gFlashingHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gPersistHitSplatSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
+    .tileTag = TAG_BATTLE_ANIM_IMPACT,
+    .paletteTag = TAG_BATTLE_ANIM_IMPACT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

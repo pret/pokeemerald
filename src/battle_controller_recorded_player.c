@@ -24,6 +24,7 @@
 #include "window.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -233,8 +234,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = FALSE;
 
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+            FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
 
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
             if (IsDoubleBattle())
@@ -441,8 +442,8 @@ static void SwitchIn_ShowHealthbox(void)
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
 
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
 
         CreateTask(Task_PlayerController_RestoreBgmAfterCry, 10);
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);

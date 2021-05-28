@@ -22,6 +22,7 @@
 #include "window.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 #include "constants/trainers.h"
 
 struct BattleBackground
@@ -89,8 +90,6 @@ static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] =
     sVsLetterAffineAnimCmds0,
     sVsLetterAffineAnimCmds1,
 };
-
-#define TAG_VS_LETTERS 10000
 
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
 {
