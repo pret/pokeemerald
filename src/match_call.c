@@ -1866,7 +1866,7 @@ static int GetNumOwnedBadges(void)
 static bool32 ShouldTrainerRequestBattle(int matchCallId)
 {
     int dayCount;
-    int otId;
+    u32 otId;
     u16 dewfordRand;
     int numRematchTrainersFought;
     int max, rand, n;
