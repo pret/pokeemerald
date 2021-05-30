@@ -22,11 +22,11 @@ static bool8 sScriptContext2Enabled;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
-extern void *gNullScriptPtr;
+extern const void const *gNullScriptPtr;
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
 {
-    s32 i;
+    int i;
 
     ctx->mode = SCRIPT_MODE_STOPPED;
     ctx->scriptPtr = NULL;
