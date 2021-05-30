@@ -149,7 +149,7 @@ s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
     return *str1 - *str2;
 }
 
-bool8 IsStringLengthAtLeast(const u8 *str, s32 n)
+bool32 IsStringLengthAtLeast(const u8 *str, s32 n)
 {
     u8 i;
 
