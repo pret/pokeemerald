@@ -533,7 +533,7 @@ void CallWindowFunction(u8 windowId, void ( *func)(u8, u8, u8, u8, u8, u8))
     func(window.bg, window.tilemapLeft, window.tilemapTop, window.width, window.height, window.paletteNum);
 }
 
-bool8 SetWindowAttribute(u8 windowId, u8 attributeId, u32 value)
+bool32 SetWindowAttribute(u8 windowId, u8 attributeId, u32 value)
 {
     switch (attributeId)
     {
