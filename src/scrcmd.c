@@ -109,8 +109,9 @@ bool8 ScrCmd_end(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gotonative(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, (bool8 (*)(void))ScriptReadWord(ctx));
+    bool8 (*addr)(void) = (bool8 (*)(void))ScriptReadWord(ctx);
 
+    SetupNativeScript(ctx, addr);
     return TRUE;
 }
 
