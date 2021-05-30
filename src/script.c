@@ -26,7 +26,7 @@ extern void *gNullScriptPtr;
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
 {
-    int i;
+    s32 i;
 
     ctx->mode = SCRIPT_MODE_STOPPED;
     ctx->scriptPtr = NULL;
