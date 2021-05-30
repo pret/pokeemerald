@@ -248,7 +248,7 @@ struct MusicPlayerTrack
     u8 key;
     u8 velocity;
     u8 runningStatus;
-    u8 keyM;
+    s8 keyM;
     u8 pitM;
     s8 keyShift;
     s8 keyShiftX;
