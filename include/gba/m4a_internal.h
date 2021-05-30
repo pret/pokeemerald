@@ -171,7 +171,7 @@ struct SoundChannel
 struct MusicPlayerInfo;
 
 typedef void (*MPlayFunc)();
-typedef void (*PlyNoteFunc)(u32, struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+typedef void (*PlyNoteFunc)(u8, struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 typedef void (*CgbSoundFunc)(void);
 typedef void (*CgbOscOffFunc)(u8);
 typedef u32 (*MidiKeyToCgbFreqFunc)(u8, u8, u8);
