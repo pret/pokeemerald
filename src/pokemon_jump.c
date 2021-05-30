@@ -643,14 +643,14 @@ static void ResetPlayersForNewGame(void)
 
 static s16 GetPokemonJumpSpeciesIdx(u16 species)
 {
-    u32 i;
+    int i; // should be s16
     for (i = 0; i < ARRAY_COUNT(sPokeJumpMons); i++)
     {
         if (sPokeJumpMons[i].species == species)
             return i;
     }
 
-    return -1; // species isnt allowed
+    return -1; // species isn't allowed
 }
 
 static void InitJumpMonInfo(struct PokemonJump_MonInfo *monInfo, struct Pokemon *mon)
