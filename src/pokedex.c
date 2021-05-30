@@ -4619,10 +4619,10 @@ static u32 GetPokedexMonPersonality(u16 species)
 {
     switch (species)
     {
-    case SPECIES_UNOWN:
-        return gSaveBlock2Ptr->pokedex.unownPersonality;
     case SPECIES_SPINDA:
         return gSaveBlock2Ptr->pokedex.spindaPersonality;
+    case SPECIES_UNOWN:
+        return gSaveBlock2Ptr->pokedex.unownPersonality;
     default:
         return 0;
     }
