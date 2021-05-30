@@ -3228,7 +3228,7 @@ static bool8 Phase2_Rayquaza_Func9(struct Task *task)
 
 static void VBlankCB_Phase2_Rayquaza(void)
 {
-    void *dmaSrc;
+    u16 *dmaSrc;
 
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -3264,7 +3264,7 @@ static bool8 Phase2_WhiteFade_Func1(struct Task *task)
     for (i = 0; i < 160; i++)
     {
         gScanlineEffectRegBuffers[1][i] = 0;
-        gScanlineEffectRegBuffers[1][i + 160] = 0xF0;
+        gScanlineEffectRegBuffers[1][i + 160] = DISPLAY_WIDTH;
     }
 
     EnableInterrupts(INTR_FLAG_HBLANK);
