@@ -5068,7 +5068,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
 
         spriteId2 = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, FALSE);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies != SPECIES_NONE)
-            BlendPalette((gSprites[spriteId2].oam.paletteNum * 16) | 0x100, 16, 6, RGB_WHITE);
+            BlendPalette((gSprites[spriteId2].oam.paletteNum * 16) + 0x100, 16, 6, RGB_WHITE);
 
         gTasks[taskId].data[15] = spriteId2;
         gTasks[taskId].data[0]++;
