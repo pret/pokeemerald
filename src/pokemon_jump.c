@@ -643,7 +643,7 @@ static void ResetPlayersForNewGame(void)
 
 static s16 GetPokemonJumpSpeciesIdx(u16 species)
 {
-    u32 i; // should be s16
+    int i; // should be s16
     for (i = 0; i < ARRAY_COUNT(sPokeJumpMons); i++)
     {
         if (sPokeJumpMons[i].species == species)
