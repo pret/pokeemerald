@@ -4623,9 +4623,10 @@ static u32 GetPokedexMonPersonality(u16 species)
         return gSaveBlock2Ptr->pokedex.spindaPersonality;
     case SPECIES_UNOWN:
         return gSaveBlock2Ptr->pokedex.unownPersonality;
-    }
+    default:
+        return 0;
 
-    return 0;
+    }
 }
 
 u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot)
