@@ -508,7 +508,9 @@ u16 LinkMain2(const u16 *heldKeys)
 static void HandleReceiveRemoteLinkPlayer(u8 who)
 {
     int i;
-    int count = 0;
+    int count;
+
+    count = 0;
     gRemoteLinkPlayersNotReceived[who] = FALSE;
     for (i = 0; i < GetLinkPlayerCount_2(); i++)
     {
