@@ -1825,7 +1825,7 @@ static void ResetVineAfterHit(void)
     AllowVineUpdates();
 }
 
-static int IsGameOver(void)
+static bool32 IsGameOver(void)
 {
     return sPokemonJump->gameOver;
 }
