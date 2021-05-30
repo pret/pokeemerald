@@ -77,7 +77,7 @@ enum {
     PALTAG_REEL_TIME_PIKACHU,
     PALTAG_REEL_TIME_MISC,
     PALTAG_REEL_TIME_MACHINE,
-    PALTAG_MISC,
+    TAG_PAL_BERRY_BLENDER_MISC,
     PALTAG_EXPLOSION,
     PALTAG_DIG_DISPLAY,
     PALTAG_PIKA_AURA,
@@ -5522,7 +5522,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelSymbol =
 static const struct SpriteTemplate sSpriteTemplate_CoinNumber =
 {
     .tileTag = GFXTAG_NUMBERS_START, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_8x16, 
     .anims = sAnims_SingleFrame, 
     .images = NULL, 
@@ -5588,7 +5588,7 @@ static const struct SpriteTemplate sSpriteTemplate_BrokenReelTimeMachine =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumbers =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_16x16, 
     .anims = sAnims_ReelTimeNumbers, 
     .images = sImageTable_ReelTimeNumbers, 
@@ -5599,7 +5599,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumbers =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeShadow =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_16x16, 
     .anims = sAnims_SingleFrame, 
     .images = sImageTable_ReelTimeShadow, 
@@ -5610,7 +5610,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeShadow =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumberGap =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_16x16, 
     .anims = sAnims_SingleFrame, 
     .images = sImageTable_ReelTimeNumberGap, 
@@ -5621,7 +5621,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumberGap =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeBolt =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_16x32, 
     .anims = sAnims_ReelTimeBolt, 
     .images = sImageTable_ReelTimeBolt, 
@@ -5654,7 +5654,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeExplosion =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeDuck =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_8x8, 
     .anims = sAnims_ReelTimeDuck, 
     .images = sImageTable_ReelTimeDuck, 
@@ -5665,7 +5665,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeDuck =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeSmoke =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_16x16, 
     .anims = sAnims_SingleFrame, 
     .images = sImageTable_ReelTimeSmoke, 
@@ -5830,7 +5830,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_DPad =
 static const struct SpriteTemplate sSpriteTemplate_PikaPowerBolt =
 {
     .tileTag = 0xFFFF, 
-    .paletteTag = PALTAG_MISC, 
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC, 
     .oam = &sOam_8x8, 
     .anims = sAnims_SingleFrame, 
     .images = sImageTable_PikaPowerBolt, 
@@ -7190,7 +7190,7 @@ static const struct SpritePalette sSlotMachineSpritePalettes[] =
     { .data = gSlotMachineReelTimePikachu_Pal,   .tag = PALTAG_REEL_TIME_PIKACHU},
     { .data = gSlotMachineReelTimeMisc_Pal,      .tag = PALTAG_REEL_TIME_MISC},
     { .data = gSlotMachineReelTimeMachine_Pal,   .tag = PALTAG_REEL_TIME_MACHINE},
-    { .data = gSlotMachineMisc_Pal,              .tag = PALTAG_MISC},
+    { .data = gSlotMachineMisc_Pal,              .tag = TAG_PAL_BERRY_BLENDER_MISC},
     { .data = gSlotMachineReelTimeExplosion_Pal, .tag = PALTAG_EXPLOSION},
     { .data = gSlotMachineDigitalDisplay_Pal,    .tag = PALTAG_DIG_DISPLAY},
     { .data = gSlotMachineMisc_Pal,              .tag = PALTAG_PIKA_AURA},

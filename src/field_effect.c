@@ -31,6 +31,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
@@ -332,7 +333,7 @@ static const struct SpriteFrameImage sPicTable_NewGameBirch[] =
 static const struct SpritePalette sSpritePalette_NewGameBirch =
 {
     .data = sNewGameBirch_Pal,
-    .tag = 0x1006
+    .tag = TAG_PAL_NEW_GAME_BIRCH
 };
 
 static const union AnimCmd sAnim_NewGameBirch[] =
@@ -348,8 +349,8 @@ static const union AnimCmd *const sAnimTable_NewGameBirch[] =
 
 static const struct SpriteTemplate sSpriteTemplate_NewGameBirch =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0x1006,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_NEW_GAME_BIRCH,
     .oam = &sOam_64x64,
     .anims = sAnimTable_NewGameBirch,
     .images = sPicTable_NewGameBirch,
@@ -360,13 +361,13 @@ static const struct SpriteTemplate sSpriteTemplate_NewGameBirch =
 const struct SpritePalette gSpritePalette_PokeballGlow =
 {
     .data = sPokeballGlow_Pal,
-    .tag = FLDEFF_PAL_TAG_POKEBALL_GLOW
+    .tag = TAG_PAL_FLDEFF_POKEBALL_GLOW
 };
 
 const struct SpritePalette gSpritePalette_HofMonitor =
 {
     .data = sHofMonitor_Pal,
-    .tag = FLDEFF_PAL_TAG_HOF_MONITOR
+    .tag = TAG_PAL_FLDEFF_HOF_MONITOR
 };
 
 static const struct OamData sOam_32x16 =
@@ -513,8 +514,8 @@ static const union AnimCmd *const sAnims_HofMonitor[] =
 
 static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_POKEBALL_GLOW,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_POKEBALL_GLOW,
     .oam = &sOam_8x8,
     .anims = sAnims_Flicker,
     .images = sPicTable_PokeballGlow,
@@ -524,8 +525,8 @@ static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
 
 static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_GENERAL_0,
     .oam = &sOam_16x16,
     .anims = sAnims_Flicker,
     .images = sPicTable_PokecenterMonitor,
@@ -535,8 +536,8 @@ static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor =
 
 static const struct SpriteTemplate sSpriteTemplate_HofMonitorBig =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_HOF_MONITOR,
     .oam = &sOam_16x16,
     .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorBig,
@@ -546,8 +547,8 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorBig =
 
 static const struct SpriteTemplate sSpriteTemplate_HofMonitorSmall =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_HOF_MONITOR,
     .oam = &sOam_32x16,
     .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorSmall,
@@ -1179,14 +1180,14 @@ static void PokeballGlowEffect_Flash1(struct Sprite *sprite)
             sprite->data[3]++;
     }
     phase = (sprite->sCounter + 3) & 3;
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x108, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x108, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     phase = (sprite->sCounter + 2) & 3;
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x106, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x106, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     phase = (sprite->sCounter + 1) & 3;
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x102, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x102, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     phase = sprite->sCounter;
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x105, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x103, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x105, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x103, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     if (sprite->data[3] > 2)
     {
         sprite->sState++;
@@ -1210,11 +1211,11 @@ static void PokeballGlowEffect_Flash2(struct Sprite *sprite)
         }
     }
     phase = sprite->sCounter;
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x108, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x106, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x102, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x105, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW) << 4) + 0x103, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x108, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x106, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x102, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x105, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(TAG_PAL_FLDEFF_POKEBALL_GLOW) << 4) + 0x103, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
 }
 
 static void PokeballGlowEffect_WaitAfterFlash(struct Sprite *sprite)

@@ -22,6 +22,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 
 EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
@@ -193,8 +194,8 @@ static const struct SpriteFrameImage sPicTable_SecretPowerShrub[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_TREE,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_SECRET_POWER_TREE,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerCave,
     .images = sPicTable_SecretPowerCave,
@@ -204,8 +205,8 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerTree,
     .images = sPicTable_SecretPowerTree,
@@ -215,8 +216,8 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerShrub =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerShrub,
     .images = sPicTable_SecretPowerShrub,
@@ -224,8 +225,8 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerShrub =
     .callback = SpriteCB_ShrubEntranceInit,
 };
 
-const struct SpritePalette gSpritePalette_SecretPower_Cave = {sSecretPowerCave_Pal, FLDEFF_PAL_TAG_SECRET_POWER_TREE};
-const struct SpritePalette gSpritePalette_SecretPower_Plant = {sSecretPowerPlant_Pal, FLDEFF_PAL_TAG_SECRET_POWER_PLANT};
+const struct SpritePalette gSpritePalette_SecretPower_Cave = {sSecretPowerCave_Pal, TAG_PAL_FLDEFF_SECRET_POWER_TREE};
+const struct SpritePalette gSpritePalette_SecretPower_Plant = {sSecretPowerPlant_Pal, TAG_PAL_FLDEFF_SECRET_POWER_PLANT};
 
 static const struct OamData sOam_SandPillar =
 {
@@ -261,8 +262,8 @@ static const struct SpriteFrameImage sPicTable_SandPillar[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SandPillar =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_SAND_PILLAR,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_SAND_PILLAR,
     .oam = &sOam_SandPillar,
     .anims = sAnimTable_SandPillar,
     .images = sPicTable_SandPillar,
@@ -270,7 +271,7 @@ static const struct SpriteTemplate sSpriteTemplate_SandPillar =
     .callback = SpriteCB_SandPillar_BreakTop,
 };
 
-const struct SpritePalette gSpritePalette_SandPillar = {gTilesetPalettes_SecretBase[5], FLDEFF_PAL_TAG_SAND_PILLAR};
+const struct SpritePalette gSpritePalette_SandPillar = {gTilesetPalettes_SecretBase[5], TAG_PAL_FLDEFF_SAND_PILLAR};
 
 static const u8 sRecordMixLights_Gfx[] = INCBIN_U8("graphics/field_effects/pics/record_mix_lights.4bpp");
 static const u16 sRecordMixLights_Pal[] = INCBIN_U16("graphics/field_effects/palettes/record_mix_lights.gbapal");
@@ -282,7 +283,7 @@ static const struct SpriteFrameImage sPicTable_RecordMixLights[] =
     overworld_frame(sRecordMixLights_Gfx, 4, 1, 2),
 };
 
-static const struct SpritePalette sSpritePalette_RecordMixLights = {sRecordMixLights_Pal, 0x1000};
+static const struct SpritePalette sSpritePalette_RecordMixLights = {sRecordMixLights_Pal, TAG_PAL_FLDEFF_RECORD_MIX_LIGHTS};
 
 static const union AnimCmd sAnim_RecordMixLights[] =
 {
@@ -299,8 +300,8 @@ static const union AnimCmd *const sAnimTable_RecordMixLights[] =
 
 static const struct SpriteTemplate sSpriteTemplate_RecordMixLights =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0x1000,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_RECORD_MIX_LIGHTS,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = sAnimTable_RecordMixLights,
     .images = sPicTable_RecordMixLights,

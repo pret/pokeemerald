@@ -37,21 +37,9 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 #define MAX_TIME (10 * 60 * 60) // Timer can go up to 9:59:59
-
-#define TAG_CRUSHER_BASE  1
-#define PALTAG_EFFECT     2 // The next two gfx tags share this pal tag
-#define GFXTAG_IMPACT     2
-#define GFXTAG_SPARKLE    3
-#define TAG_TIMER_DIGITS  4
-#define TAG_PLAYER1_BERRY 5
-#define TAG_PLAYER2_BERRY 6
-#define TAG_PLAYER3_BERRY 7
-#define TAG_PLAYER4_BERRY 8
-#define TAG_PLAYER5_BERRY 9
-
-#define TAG_COUNTDOWN 0x1000
 
 #define CRUSHER_START_Y (-104)
 
@@ -674,30 +662,30 @@ static const s8 sSparkleCoords[][2] =
 
 static const u16 sPlayerBerrySpriteTags[MAX_RFU_PLAYERS] = 
 {
-    TAG_PLAYER1_BERRY, 
-    TAG_PLAYER2_BERRY, 
-    TAG_PLAYER3_BERRY, 
-    TAG_PLAYER4_BERRY, 
-    TAG_PLAYER5_BERRY
+    TAG_BERRY_CRUSH_PLAYER1_BERRY, 
+    TAG_BERRY_CRUSH_PLAYER2_BERRY, 
+    TAG_BERRY_CRUSH_PLAYER3_BERRY, 
+    TAG_BERRY_CRUSH_PLAYER4_BERRY, 
+    TAG_BERRY_CRUSH_PLAYER5_BERRY
 };
 
 // sTimerDigits_Gfx is part of this array but is (apparently) uncompressed
 // It gets cast to raw uncompressed data when used in sDigitObjTemplates
 static const struct CompressedSpriteSheet sSpriteSheets[] = 
 {
-    { .data = sCrusherBase_Gfx, .size = 0x800, .tag = TAG_CRUSHER_BASE },
-    { .data = sImpact_Gfx,      .size = 0xE00, .tag = GFXTAG_IMPACT },
-    { .data = sSparkle_Gfx,     .size = 0x700, .tag = GFXTAG_SPARKLE },
-    { .data = sTimerDigits_Gfx, .size = 0x2C0, .tag = TAG_TIMER_DIGITS },
+    { .data = sCrusherBase_Gfx, .size = 0x800, .tag = TAG_BERRY_CRUSH_CRUSHER_BASE },
+    { .data = sImpact_Gfx,      .size = 0xE00, .tag = TAG_GFX_BERRY_CRUSH_IMPACT },
+    { .data = sSparkle_Gfx,     .size = 0x700, .tag = TAG_GFX_BERRY_CRUSH_SPARKLE },
+    { .data = sTimerDigits_Gfx, .size = 0x2C0, .tag = TAG_BERRY_CRUSH_TIMER_DIGITS },
     {}
 };
 
 
 static const struct SpritePalette sSpritePals[] =
 {
-    { .data = sCrusherBase_Pal, .tag = TAG_CRUSHER_BASE },
-    { .data = sEffects_Pal,     .tag = PALTAG_EFFECT }, // For the impact and sparkle effects
-    { .data = sTimerDigits_Pal, .tag = TAG_TIMER_DIGITS },
+    { .data = sCrusherBase_Pal, .tag = TAG_BERRY_CRUSH_CRUSHER_BASE },
+    { .data = sEffects_Pal,     .tag = TAG_PAL_BERRY_CRUSH_EFFECT }, // For the impact and sparkle effects
+    { .data = sTimerDigits_Pal, .tag = TAG_BERRY_CRUSH_TIMER_DIGITS },
     {}
 };
 
@@ -810,8 +798,8 @@ static const union AffineAnimCmd *const sAffineAnims_PlayerBerry[] =
 
 static const struct SpriteTemplate sSpriteTemplate_CrusherBase =
 {
-    .tileTag = TAG_CRUSHER_BASE, 
-    .paletteTag = TAG_CRUSHER_BASE, 
+    .tileTag = TAG_BERRY_CRUSH_CRUSHER_BASE, 
+    .paletteTag = TAG_BERRY_CRUSH_CRUSHER_BASE, 
     .oam = &gOamData_AffineOff_ObjNormal_64x64, 
     .anims = sAnims_CrusherBase, 
     .images = NULL, 
@@ -821,8 +809,8 @@ static const struct SpriteTemplate sSpriteTemplate_CrusherBase =
 
 static const struct SpriteTemplate sSpriteTemplate_Impact =
 {
-    .tileTag = GFXTAG_IMPACT,
-    .paletteTag = PALTAG_EFFECT, 
+    .tileTag = TAG_GFX_BERRY_CRUSH_IMPACT,
+    .paletteTag = TAG_PAL_BERRY_CRUSH_EFFECT, 
     .oam = &gOamData_AffineOff_ObjNormal_32x32, 
     .anims = sAnims_Impact, 
     .images = NULL, 
@@ -832,8 +820,8 @@ static const struct SpriteTemplate sSpriteTemplate_Impact =
 
 static const struct SpriteTemplate sSpriteTemplate_Sparkle =
 {
-    .tileTag = GFXTAG_SPARKLE, 
-    .paletteTag = PALTAG_EFFECT, 
+    .tileTag = TAG_GFX_BERRY_CRUSH_SPARKLE, 
+    .paletteTag = TAG_PAL_BERRY_CRUSH_EFFECT, 
     .oam = &gOamData_AffineOff_ObjNormal_16x16, 
     .anims = sAnims_Sparkle, 
     .images = NULL, 
@@ -843,8 +831,8 @@ static const struct SpriteTemplate sSpriteTemplate_Sparkle =
 
 static const struct SpriteTemplate sSpriteTemplate_Timer =
 {
-    .tileTag = TAG_TIMER_DIGITS, 
-    .paletteTag = TAG_TIMER_DIGITS, 
+    .tileTag = TAG_BERRY_CRUSH_TIMER_DIGITS, 
+    .paletteTag = TAG_BERRY_CRUSH_TIMER_DIGITS, 
     .oam = &gOamData_AffineOff_ObjNormal_8x16, 
     .anims = sAnims_Timer, 
     .images = NULL, 
@@ -854,8 +842,8 @@ static const struct SpriteTemplate sSpriteTemplate_Timer =
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerBerry =
 {
-    .tileTag = TAG_PLAYER1_BERRY, 
-    .paletteTag = TAG_PLAYER1_BERRY, 
+    .tileTag = TAG_BERRY_CRUSH_PLAYER1_BERRY, 
+    .paletteTag = TAG_BERRY_CRUSH_PLAYER1_BERRY, 
     .oam = &gOamData_AffineDouble_ObjNormal_32x32, 
     .anims = sAnims_PlayerBerry, 
     .images = NULL, 
@@ -2037,13 +2025,13 @@ static void CreateGameSprites(struct BerryCrushGame *game)
 static void DestroyGameSprites(struct BerryCrushGame *game)
 {
     u8 i = 0;
-    FreeSpriteTilesByTag(TAG_TIMER_DIGITS);
-    FreeSpriteTilesByTag(GFXTAG_SPARKLE);
-    FreeSpriteTilesByTag(GFXTAG_IMPACT);
-    FreeSpriteTilesByTag(TAG_CRUSHER_BASE);
-    FreeSpritePaletteByTag(TAG_TIMER_DIGITS);
-    FreeSpritePaletteByTag(PALTAG_EFFECT);
-    FreeSpritePaletteByTag(TAG_CRUSHER_BASE);
+    FreeSpriteTilesByTag(TAG_BERRY_CRUSH_TIMER_DIGITS);
+    FreeSpriteTilesByTag(TAG_GFX_BERRY_CRUSH_SPARKLE);
+    FreeSpriteTilesByTag(TAG_GFX_BERRY_CRUSH_IMPACT);
+    FreeSpriteTilesByTag(TAG_BERRY_CRUSH_CRUSHER_BASE);
+    FreeSpritePaletteByTag(TAG_BERRY_CRUSH_TIMER_DIGITS);
+    FreeSpritePaletteByTag(TAG_PAL_BERRY_CRUSH_EFFECT);
+    FreeSpritePaletteByTag(TAG_BERRY_CRUSH_CRUSHER_BASE);
     for (i = 0; i < ARRAY_COUNT(game->gfx.timerSprites); i++)
         DestroySprite(game->gfx.timerSprites[i]);
     DigitObjUtil_DeletePrinter(2);
@@ -2521,7 +2509,7 @@ static u32 Cmd_Countdown(struct BerryCrushGame *game,  u8 *args)
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        StartMinigameCountdown(TAG_COUNTDOWN, TAG_COUNTDOWN, 120, 80, 0);
+        StartMinigameCountdown(TAG_BERRY_CRUSH_COUNTDOWN, TAG_BERRY_CRUSH_COUNTDOWN, 120, 80, 0);
         break;
     case 2:
         if (IsMinigameCountdownRunning())

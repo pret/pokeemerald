@@ -3034,10 +3034,8 @@ void AnimTask_FreeMusicNotesPals(u8 taskId)
 
 static void SetMusicNotePalette(struct Sprite *sprite, u8 a, u8 b)
 {
-    u8 tile;
-    tile = (b & 1);
-    tile = ((-tile | tile) >> 31) & 32;
-    sprite->oam.tileNum += tile + (a << 2);
+    u8 tile = (b & 1) ? 32 : 0;
+    sprite->oam.tileNum += tile + a * 4;
     sprite->oam.paletteNum = IndexOfSpritePaletteTag(sMusicNotePaletteTagsTable[b >> 1]);
 }
 

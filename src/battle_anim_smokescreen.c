@@ -45,12 +45,15 @@ const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
 
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
-    .data = gSmokescreenImpactTiles, .size = 0x180, .tag = 55019
+    .data = gSmokescreenImpactTiles,
+    .size = 0x180,
+    .tag = TAG_BATTLE_ANIM_SMOKESCREEN_IMPACT,
 };
 
 static const struct CompressedSpritePalette sSmokescreenImpactSpritePalette =
 {
-    .data = gSmokescreenImpactPalette, .tag = 55019
+    .data = gSmokescreenImpactPalette,
+    .tag = TAG_BATTLE_ANIM_SMOKESCREEN_IMPACT,
 };
 
 static const struct OamData sOamData_SmokescreenImpact =
@@ -112,8 +115,8 @@ static const union AnimCmd *const sAnims_SmokescreenImpact[] =
 
 static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
 {
-    .tileTag = 55019, 
-    .paletteTag = 55019, 
+    .tileTag = TAG_BATTLE_ANIM_SMOKESCREEN_IMPACT, 
+    .paletteTag = TAG_BATTLE_ANIM_SMOKESCREEN_IMPACT, 
     .oam = &sOamData_SmokescreenImpact, 
     .anims = sAnims_SmokescreenImpact, 
     .images = NULL, 
@@ -123,7 +126,9 @@ static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
 
 const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
 {
-    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = 55129
+    .data = gEnemyMonShadow_Gfx,
+    .size = 0x80,
+    .tag = TAG_BATTLE_ANIM_ENEMY_SHADOW_TILES,
 };
 
 static const struct OamData sOamData_EnemyShadow =
@@ -145,8 +150,8 @@ static const struct OamData sOamData_EnemyShadow =
 
 const struct SpriteTemplate gSpriteTemplate_EnemyShadow =
 {
-    .tileTag = 55129, 
-    .paletteTag = 55039, 
+    .tileTag = TAG_BATTLE_ANIM_ENEMY_SHADOW_TILES, 
+    .paletteTag = TAG_GFX_HEALTHBOX_PLAYER1, 
     .oam = &sOamData_EnemyShadow, 
     .anims = gDummySpriteAnimTable, 
     .images = NULL, 

@@ -20,8 +20,9 @@
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
-#include "constants/songs.h"
 #include "constants/metatile_labels.h"
+#include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 extern struct MapPosition gPlayerFacingPosition;
 
@@ -121,12 +122,12 @@ static const struct SpriteFrameImage sSpriteImageTable_CutGrass[] =
     {gFieldEffectPic_CutGrass, 0x20},
 };
 
-const struct SpritePalette gSpritePalette_CutGrass = {gFieldEffectPal_CutGrass, FLDEFF_PAL_TAG_CUT_GRASS};
+const struct SpritePalette gSpritePalette_CutGrass = {gFieldEffectPal_CutGrass, TAG_PAL_FLDEFF_CUT_GRASS};
 
 static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_CUT_GRASS,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_CUT_GRASS,
     .oam = &sOamData_CutGrass,
     .anims = sSpriteAnimTable_CutGrass,
     .images = sSpriteImageTable_CutGrass,
