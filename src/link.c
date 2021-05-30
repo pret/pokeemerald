@@ -925,7 +925,7 @@ void ResetLinkPlayers(void)
     int i;
 
     for (i = 0; i <= MAX_LINK_PLAYERS; i++)
-        gLinkPlayers[i] = (struct LinkPlayer){0};
+        gLinkPlayers[i] = (struct LinkPlayer){};
 }
 
 static void ResetBlockSend(void)
