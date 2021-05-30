@@ -291,8 +291,8 @@ void CopyWindowToVram(u8 windowId, u8 mode)
 void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h)
 {
     struct Window windowLocal;
-    int rectSize;
-    int rectPos;
+    u32 rectSize;
+    u32 rectPos;
 
     if (w != 0 && h != 0)
     {
