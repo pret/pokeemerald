@@ -44,6 +44,7 @@ struct LinkTestBGInfo
     u32 baseChar;
     u32 unused;
 };
+
 static struct BlockTransfer sBlockSend;
 static struct BlockTransfer sBlockRecv[MAX_LINK_PLAYERS];
 static u32 sBlockSendDelayCounter;
