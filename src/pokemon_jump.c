@@ -4231,7 +4231,7 @@ static void PrintRecordsText(u16 windowId, int width)
 
 static void TruncateToFirstWordOnly(u8 *str)
 {
-    for (; *str != EOS; str++)
+    for (;*str != EOS; str++)
     {
         if (*str == CHAR_SPACE)
         {
