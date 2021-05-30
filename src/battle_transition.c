@@ -3311,8 +3311,8 @@ static bool8 Phase2_WhiteFade_Func4(struct Task *task)
     sTransitionStructPtr->VBlank_DMA = 0;
 
     DmaStop(0);
-    SetVBlankCallback(0);
-    SetHBlankCallback(0);
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
 
     sTransitionStructPtr->WIN0H = DISPLAY_WIDTH;
     sTransitionStructPtr->BLDY = 0;
