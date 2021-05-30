@@ -925,7 +925,7 @@ void ResetLinkPlayers(void)
     int i;
 
     for (i = 0; i <= MAX_LINK_PLAYERS; i++)
-        gLinkPlayers[i] = (struct LinkPlayer){};
+        gLinkPlayers[i] = (struct LinkPlayer){0};
 }
 
 static void ResetBlockSend(void)
@@ -936,7 +936,7 @@ static void ResetBlockSend(void)
     sBlockSend.src = NULL;
 }
 
-static bool32 InitBlockSend(const void *src, size_t size)
+static bool8 InitBlockSend(const void *src, u32 size)
 {
     if (sBlockSend.active)
     {
@@ -980,7 +980,7 @@ static void LinkCB_BlockSend(void)
     {
         gSendCmd[i + 1] = (src[sBlockSend.pos + i * 2 + 1] << 8) | src[sBlockSend.pos + i * 2];
     }
-    sBlockSend.pos += 14;
+    sBlockSend.pos += (CMD_LENGTH - 1) * 2;
     if (sBlockSend.size <= sBlockSend.pos)
     {
         sBlockSend.active = FALSE;
