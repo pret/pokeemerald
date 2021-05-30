@@ -743,12 +743,9 @@ void ConvertInternationalString(u8 *s, u8 language)
         s[i++] = EXT_CTRL_CODE_ENG;
         s[i++] = EOS;
 
-        i--;
-
-        while (i != (u8)-1)
+        while (i--)
         {
-            s[i + 2] = s[i];
-            i--;
+            s[i + 2] = s[i]; 
         }
 
         s[0] = EXT_CTRL_CODE_BEGIN;
