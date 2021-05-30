@@ -5001,8 +5001,8 @@ void AnimTask_GetReturnPowerLevel(u8 taskId)
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
-    int personality;
-    int otId;
+    u32 personality;
+    u32 otId;
     u16 species;
     u8 subpriority;
     bool8 isBackPic;
