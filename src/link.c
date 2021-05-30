@@ -1727,8 +1727,6 @@ static void CB2_PrintErrorMessage(void)
         gMain.state++;
 }
 
-// TODO: there might be a file boundary here, let's name it
-
 bool8 GetSioMultiSI(void)
 {
     return (REG_SIOCNT & 0x04) != 0;
