@@ -651,10 +651,10 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
 
 void FillWindowPixelBuffer8Bit(u8 windowId, u8 fillValue)
 {
-    s32 i;
-    s32 size;
+    int i;
+    u16 size;
 
-    size = (u16)(64 * (gWindows[windowId].window.width * gWindows[windowId].window.height));
+    size = 64 * (gWindows[windowId].window.width * gWindows[windowId].window.height);
     for (i = 0; i < size; i++)
         gWindows[windowId].tileData[i] = fillValue;
 }
