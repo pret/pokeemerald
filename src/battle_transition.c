@@ -1337,7 +1337,7 @@ static bool8 Phase2_BigPokeball_Func2(struct Task *task)
     {
         for (j = 0; j < 30; j++, BigPokeballMap++)
         {
-            tilemap[i * 32 + j] = *BigPokeballMap | 0xF000;
+            SOME_VRAM_STORE(tilemap, i, j, *BigPokeballMap | 0xF000);
         }
     }
     sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
@@ -1695,12 +1695,12 @@ static void sub_814713C(struct Sprite *sprite)
 
             if (posX != sprite->data[2])
             {
-                u32 var;
+                u16 var;
                 u16 *ptr;
 
                 sprite->data[2] = posX;
-                var = (((REG_BG0CNT >> 8) & 0x1F) << 11);
-                ptr = (u16 *)(VRAM + var);
+                var = (REG_BG0CNT >> 8) & 0x1F;
+                ptr = (u16 *)(BG_VRAM + var);
 
                 SOME_VRAM_STORE(ptr, posY - 2, posX, 0xF001);
                 SOME_VRAM_STORE(ptr, posY - 1, posX, 0xF001);
