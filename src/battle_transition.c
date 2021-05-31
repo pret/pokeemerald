@@ -2138,7 +2138,7 @@ static bool8 Phase2_Mugshot_Func2(struct Task *task)
     {
         for (j = 0; j < 32; j++, mugshotsMap++)
         {
-            tilemap[i * 32 + j] = *mugshotsMap | 0xF000;
+            SOME_VRAM_STORE(tilemap, i, j, *mugshotsMap | 0xF000);
         }
     }
 
