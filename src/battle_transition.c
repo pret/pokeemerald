@@ -1700,7 +1700,7 @@ static void sub_814713C(struct Sprite *sprite)
 
                 sprite->data[2] = posX;
                 var = (REG_BG0CNT >> 8) & 0x1F;
-                ptr = (u16 *)(BG_VRAM + var);
+                ptr = (u16 *)(BG_VRAM + (var << 11));
 
                 SOME_VRAM_STORE(ptr, posX, posY - 2, 0xF001);
                 SOME_VRAM_STORE(ptr, posX, posY - 1, 0xF001);
