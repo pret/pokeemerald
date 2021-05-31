@@ -4625,7 +4625,6 @@ static u32 GetPokedexMonPersonality(u16 species)
         return gSaveBlock2Ptr->pokedex.unownPersonality;
     default:
         return 0;
-
     }
 }
 
