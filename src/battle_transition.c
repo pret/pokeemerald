@@ -2943,6 +2943,11 @@ static bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
     u16 *tilemap, *tileset;
     u8 i;
     u16 j;
+
+    s16 var;
+    s16 var1;
+    s16 var2;
+
     bool32 done = TRUE;
 
     GetBg0TilesDst(&tilemap, &tileset);
@@ -2951,22 +2956,17 @@ static bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
     {
         for (j = 0; j < ARRAY_COUNT(sRectangularSpiralTransition); j++)
         {
-            s16 var = 0, var2 = 0;
-            s32 var3 = 0;
-
             if (sub_8149048(gUnknown_085C8D38[j / 2], &sRectangularSpiralTransition[j]))
             {
-                u32 one;
                 done = FALSE;
                 var = sRectangularSpiralTransition[j].field_2;
-                one = 1;
-                if ((j & 1) == one)
+                if ((j % 2) == 1)
                     var = 0x27D - var;
 
-                var2 = var % 32;
-                var3 = var / 32 * 32;
+                var1 = var % 32;
+                var2 = var / 32;
 
-                tilemap[var3 + var2] = 0xF002;
+                SOME_VRAM_STORE(tilemap, var1, var2, 0xF002);
             }
         }
     }
@@ -3685,7 +3685,7 @@ static void GetBg0TilemapDst(u16 **tileset)
 {
     u16 charBase = REG_BG0CNT >> 2;
     charBase <<= 0xE;
-    *tileset = (u16*)(VRAM + charBase);
+    *tileset = (u16*)(BG_VRAM + charBase);
 }
 
 void GetBg0TilesDst(u16 **tilemap, u16 **tileset)
