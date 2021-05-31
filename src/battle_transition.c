@@ -897,7 +897,7 @@ static const TransitionStateFunc sPhase2_FrontierSquaresScroll_Funcs[] =
 static const u8 gUnknown_085C9A30[] = {0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x1b, 0x14, 0x0d, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00, 0x07, 0x0e, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x13, 0x0c, 0x0b, 0x0a, 0x09, 0x08, 0x0f, 0x10, 0x11, 0x12};
 static const u8 gUnknown_085C9A53[] = {0x00, 0x10, 0x29, 0x16, 0x2c, 0x02, 0x2b, 0x15, 0x2e, 0x1b, 0x09, 0x30, 0x26, 0x05, 0x39, 0x3b, 0x0c, 0x3f, 0x23, 0x1c, 0x0a, 0x35, 0x07, 0x31, 0x27, 0x17, 0x37, 0x01, 0x3e, 0x11, 0x3d, 0x1e, 0x06, 0x22, 0x0f, 0x33, 0x20, 0x3a, 0x0d, 0x2d, 0x25, 0x34, 0x0b, 0x18, 0x3c, 0x13, 0x38, 0x21, 0x1d, 0x32, 0x28, 0x36, 0x0e, 0x03, 0x2f, 0x14, 0x12, 0x19, 0x04, 0x24, 0x1a, 0x2a, 0x1f, 0x08, 0x00};
 
-#define SOME_VRAM_STORE(ptr, posY, posX, toStore) ptr[((posY) << 5) + posX] = toStore
+#define SOME_VRAM_STORE(ptr, posX, posY, toStore) ptr[((posY) << 5) + posX] = toStore
 
 // code
 static void CB2_TestBattleTransition(void)
@@ -1641,7 +1641,7 @@ static bool8 Phase2_PokeballsTrail_Func2(struct Task *task)
     memcpy(arr0, sUnknown_085C8B88, sizeof(sUnknown_085C8B88));
     memcpy(arr1, sUnknown_085C8B8C, sizeof(sUnknown_085C8B8C));
     rand = Random() & 1;
-    for (i = 0; i <= 4; i++, rand ^= 1)
+    for (i = 0; i < 5; i++, rand ^= 1)
     {
         gFieldEffectArguments[0] = arr0[rand];      // x
         gFieldEffectArguments[1] = (i * 32) + 16;   // y
@@ -1702,10 +1702,10 @@ static void sub_814713C(struct Sprite *sprite)
                 var = (REG_BG0CNT >> 8) & 0x1F;
                 ptr = (u16 *)(BG_VRAM + var);
 
-                SOME_VRAM_STORE(ptr, posY - 2, posX, 0xF001);
-                SOME_VRAM_STORE(ptr, posY - 1, posX, 0xF001);
-                SOME_VRAM_STORE(ptr, posY - 0, posX, 0xF001);
-                SOME_VRAM_STORE(ptr, posY + 1, posX, 0xF001);
+                SOME_VRAM_STORE(ptr, posX, posY - 2, 0xF001);
+                SOME_VRAM_STORE(ptr, posX, posY - 1, 0xF001);
+                SOME_VRAM_STORE(ptr, posX, posY - 0, 0xF001);
+                SOME_VRAM_STORE(ptr, posX, posY + 1, 0xF001);
             }
         }
         sprite->pos1.x += arr0[sprite->data[0]];
