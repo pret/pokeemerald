@@ -23,7 +23,7 @@
 // like the example below.
 //
 // ...
-// callnative PlayPinball
+// callnative PlayPinballGame
 // waitstate
 // ...
 
@@ -125,7 +125,7 @@ static const struct BgTemplate sPinballBgTemplates[] = {
        .bg = PINBALL_BG_BASE,
        .charBaseIndex = 2,
        .mapBaseIndex = 28,
-       .screenSize = 3,
+       .screenSize = 0,
        .paletteMode = 0,
        .priority = 1,
        .baseTile = 0
@@ -145,18 +145,28 @@ static const struct WindowTemplate sPinballWinTemplates[] = {
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 sPinballBaseBgGfx[] = INCBIN_U32("graphics/pinball/base_bg_tiles.4bpp");
-static const u16 sPinballBaseBgPalette[] = INCBIN_U16("graphics/pinball/base_bg_tiles.gbapal");
-static const u32 sPinballBaseBgTilemap[] = INCBIN_U32("graphics/pinball/base_bg_tilemap.bin");
+// static const u32 sPinballBaseBgGfx[] = INCBIN_U32("graphics/pinball/base_bg_tiles.4bpp");
+// static const u16 sPinballBaseBgPalette[] = INCBIN_U16("graphics/pinball/base_bg_tiles.gbapal");
+// static const u32 sPinballBaseBgTilemap[] = INCBIN_U32("graphics/pinball/base_bg_tilemap.bin");
+// static const u8 sPinballBaseBgCollisionMasks[] = INCBIN_U8("graphics/pinball/base_bg_collision_masks.1bpp");
+// static const u8 sPinballBaseBgCollisionMap[] = INCBIN_U8("graphics/pinball/base_bg_collision_map.bin");
+// static const u8 sFlipperLeftBaseCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks.1bpp");
+// static const u8 sFlipperRightBaseCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks.1bpp");
+
+static const u32 sMeowthStageBgGfx[] = INCBIN_U32("graphics/pinball/bg_tiles_meowth.4bpp");
+static const u16 sMeowthStageBgPalette[] = INCBIN_U16("graphics/pinball/bg_tiles_meowth.gbapal");
+static const u32 sMeowthStageBgTilemap[] = INCBIN_U32("graphics/pinball/bg_tilemap_meowth.bin");
+static const u8 sMeowthStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_meowth.1bpp");
+static const u8 sMeowthStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth.bin");
+static const u8 sFlipperLeftMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks_meowth.1bpp");
+static const u8 sFlipperRightMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks_meowth.1bpp");
+
 static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball.4bpp.lz");
 static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_pokeball.gbapal");
 static const u32 sFlipperGfx[] = INCBIN_U32("graphics/pinball/flipper.4bpp.lz");
 static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal");
 
-static const u8 sPinballBaseBgCollisionMasks[] = INCBIN_U8("graphics/pinball/base_bg_collision_masks.1bpp");
-static const u8 sPinballBaseBgCollisionMap[] = INCBIN_U8("graphics/pinball/base_bg_collision_map.bin");
-static const u8 sFlipperLeftCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks.1bpp");
-static const u8 sFlipperRightCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks.1bpp");
+
 static const u8 sFlipperCollisionRadii[] = INCBIN_U8("data/pinball/flipper_radii.bin");
 static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flipper_normal_angles.bin");
 
@@ -415,10 +425,10 @@ static void InitPinballScreen(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sPinballBgTemplates, ARRAY_COUNT(sPinballBgTemplates));
         SetBgTilemapBuffer(PINBALL_BG_BASE, AllocZeroed(BG_SCREEN_SIZE * 4));
-        LoadBgTiles(PINBALL_BG_BASE, sPinballBaseBgGfx, sizeof(sPinballBaseBgGfx), 0);
-        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sPinballBaseBgTilemap, sizeof(sPinballBaseBgTilemap), 0);
+        LoadBgTiles(PINBALL_BG_BASE, sMeowthStageBgGfx, sizeof(sMeowthStageBgGfx), 0);
+        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sMeowthStageBgTilemap, sizeof(sMeowthStageBgTilemap), 0);
         ResetPaletteFade();
-        LoadPalette(sPinballBaseBgPalette, 0, sizeof(sPinballBaseBgPalette));
+        LoadPalette(sMeowthStageBgPalette, 0, sizeof(sMeowthStageBgPalette));
         InitWindows(sPinballWinTemplates);
         DeactivateAllTextPrinters();
         LoadMessageBoxGfx(WIN_TEXT, 0x200, 0xF0);
@@ -495,18 +505,18 @@ static void PinballMain(u8 taskId)
         {
             sPinballGame->gravityEnabled = TRUE;
             sPinballGame->state = PINBALL_STATE_RUNNING;
-            sPinballGame->stageTileWidth = 64;
-            sPinballGame->stageTileHeight = 64;
-            sPinballGame->ball.xPos = 108 << 8;
+            sPinballGame->stageTileWidth = 32;
+            sPinballGame->stageTileHeight = 32;
+            sPinballGame->ball.xPos = 30 << 8;
             sPinballGame->ball.yPos = 32 << 8;
-            sPinballGame->ball.xVelocity = 1 << 8;
-            sPinballGame->ball.yVelocity = 2 << 8;
+            sPinballGame->ball.xVelocity = 0 << 8;
+            sPinballGame->ball.yVelocity = 0 << 8;
             sPinballGame->rightFlipper.type = FLIPPER_RIGHT;
-            sPinballGame->rightFlipper.xPos = 125;
-            sPinballGame->rightFlipper.yPos = 98;
+            sPinballGame->rightFlipper.xPos = 93;
+            sPinballGame->rightFlipper.yPos = 122;
             sPinballGame->leftFlipper.type = FLIPPER_LEFT;
-            sPinballGame->leftFlipper.xPos = 99;
-            sPinballGame->leftFlipper.yPos = 98;
+            sPinballGame->leftFlipper.xPos = 67;
+            sPinballGame->leftFlipper.yPos = 122;
         }
         break;
     case PINBALL_STATE_RUNNING:
@@ -553,10 +563,9 @@ static void HandleBallPhysics(void)
 
     UpdatePosition(ball);
 
-    //if ((ball->yPos >> 8) > sPinballGame->stageTileHeight * 8 - 8)
     if ((ball->yPos >> 8) > 160 || (ball->xPos >> 8) > 240)
     {
-        ball->xPos = 128 << 8;
+        ball->xPos = 102 << 8;
         ball->yPos = 32 << 8;
         ball->yVelocity = 0;
         ball->xVelocity = 0;
@@ -751,7 +760,7 @@ static bool32 HandleStaticCollision(struct Ball *ball, int stageTileWidth, int s
         row = testY % 8;
         column = testX % 8;
         tileIndex = (tileY * stageTileWidth) + tileX;
-        collisionAttribute = sPinballBaseBgCollisionMap[tileIndex];
+        collisionAttribute = sMeowthStageBgCollisionMap[tileIndex];
         collisionMaskRow = GetCollisionMaskRow(collisionAttribute, row);
         collisionTests[i] = (collisionMaskRow & (1 << column)) != 0;
     }
@@ -836,7 +845,10 @@ static u8 GetCollisionMaskRow(int collisionAttribute, int row)
     u8 mask;
 
     if (collisionAttribute < 0xE0)
-        return sPinballBaseBgCollisionMasks[(collisionAttribute * 0x8) + row];
+    {
+        // Reverse the bits because my tooling is backwards.
+        return ReverseBits(sMeowthStageBgCollisionMasks[(collisionAttribute * 0x8) + row]);
+    }
 
     // Collision attribute from 0xE0 - 0xFF are special
     // static flipper collision masks.
@@ -854,9 +866,9 @@ static u8 GetCollisionMaskRow(int collisionAttribute, int row)
         offset = 2;
 
     if (collisionAttribute < 0xF0)
-        flipperStateMasks = sFlipperLeftCollisionMasks[offset];
+        flipperStateMasks = sFlipperLeftMeowthCollisionMasks[offset];
     else
-        flipperStateMasks = sFlipperRightCollisionMasks[offset];
+        flipperStateMasks = sFlipperRightMeowthCollisionMasks[offset];
 
     mask = flipperStateMasks[(collisionAttribute % 0x10) * 0x8 + row];
 
