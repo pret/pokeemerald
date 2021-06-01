@@ -4191,11 +4191,11 @@ BattleScript_NotAffected::
 
 BattleScript_NotAffectedAbilityPopUp::
 	copybyte gBattlerAbility, gBattlerTarget
-	pause 0x20
+	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	resultmessage
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectUproar::
