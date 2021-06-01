@@ -12,6 +12,6 @@ void BufferContestLadyMonName(u8 *dest1, u8 *dest2);
 void BufferContestLadyPlayerName(u8 *dest);
 void BufferContestLadyLanguage(u8 *dest);
 void BufferContestName(u8 *dest, u8 category);
-u8 sub_818E880(void);
+u8 GetContestLadyPokeblockState(void);
 
 #endif //GUARD_LILYCOVE_LADY_H

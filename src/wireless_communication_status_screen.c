@@ -174,8 +174,8 @@ static void CB2_InitWirelessCommunicationScreen(void)
     SetVBlankCallback(NULL);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-    SetBgTilemapBuffer(1, Alloc(0x800));
-    SetBgTilemapBuffer(0, Alloc(0x800));
+    SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
     DecompressAndLoadBgGfxUsingHeap(1, sBgTiles_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, sBgTiles_Tilemap, 0, 0);
     InitWindows(sWindowTemplates);
@@ -260,7 +260,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
         ShowBg(1);
         CopyBgTilemapBufferToVram(0);
         ShowBg(0);
@@ -296,7 +296,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
         WCSS_CyclePalette(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
         break;
     case 4:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
         gTasks[taskId].tState++;
         break;
     case 5:
@@ -319,13 +319,13 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     {
     case COLORMODE_NORMAL:
         color[0] = TEXT_COLOR_TRANSPARENT;
-        color[1] = TEXT_COLOR_DARK_GREY;
-        color[2] = TEXT_COLOR_LIGHT_GREY;
+        color[1] = TEXT_COLOR_DARK_GRAY;
+        color[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case COLORMODE_WHITE_LGRAY:
         color[0] = TEXT_COLOR_TRANSPARENT;
         color[1] = TEXT_COLOR_WHITE;
-        color[2] = TEXT_COLOR_LIGHT_GREY;
+        color[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case COLORMODE_RED:
         color[0] = TEXT_COLOR_TRANSPARENT;
@@ -340,7 +340,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     case COLORMODE_WHITE_DGRAY:
         color[0] = TEXT_COLOR_TRANSPARENT;
         color[1] = TEXT_COLOR_WHITE;
-        color[2] = TEXT_COLOR_DARK_GREY;
+        color[2] = TEXT_COLOR_DARK_GRAY;
         break;
     }
 

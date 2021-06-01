@@ -37,7 +37,7 @@ struct Main
 
     /*0x439*/ u8 oamLoadDisabled:1;
     /*0x439*/ u8 inBattle:1;
-    /*0x439*/ u8 field_439_x4:1;
+    /*0x439*/ u8 anyLinkBattlerHasFrontierPass:1;
 };
 
 extern const u8 gGameVersion;

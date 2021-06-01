@@ -982,7 +982,8 @@ extern const u8 gText_RibbonsVar1[];
 extern const u8 gText_OneDash[];
 extern const u8 gText_TwoDashes[];
 
-extern const u8 *const gReturnToXStringsTable2[];
+extern const u8 *const gBagMenu_ReturnToStrings[];
+extern const u8 *const gPyramidBagMenu_ReturnToStrings[];
 
 extern const u8 gText_NumPlayerLink[];
 extern const u8 gText_ConfirmLinkWhenPlayersReady[];
@@ -2904,7 +2905,7 @@ extern const u8 gText_CrushingResults[];
 extern const u8 gText_BerryCrush2[];
 extern const u8 gText_PressingSpeedRankings[];
 extern const u8 gText_Var1Players[];
-extern const u8 gText_ReadyToBerryCrush[];
+extern const u8 gText_ReadyPickBerry[];
 extern const u8 gText_WaitForAllChooseBerry[];
 extern const u8 gText_EndedWithXUnitsPowder[];
 extern const u8 gText_RecordingGameResults[];

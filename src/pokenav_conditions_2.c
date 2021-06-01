@@ -132,7 +132,7 @@ struct Pokenav7Struct
     u8 listIndexWindowId;
     u8 unusedWindowId1;
     u8 unusedWindowId2;
-    struct PokemonMarkMenu monMarks;
+    struct MonMarkingsMenu monMarks;
     struct Sprite *monMarksSprite;
     struct Sprite *conditionSparkleSprites[MAX_CONDITION_SPARKLES];
     u8 windowModeState;
@@ -161,7 +161,7 @@ bool32 OpenPartyConditionMenu(void)
     if (structPtr == NULL)
         return FALSE;
 
-    structPtr->monPicSpriteId = 0xFF;
+    structPtr->monPicSpriteId = SPRITE_NONE;
     structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_OpenPartyConditionGraph, 1);
     structPtr->callback = GetPartyConditionLoopedTaskActive;
     structPtr->windowModeState = 0;
@@ -514,7 +514,7 @@ u32 LoopedTask_OpenMonMarkingsWindow(s32 state)
     switch (state)
     {
     case 0:
-        sub_811FAA4(TryGetMonMarkId(), 176, 32);
+        OpenMonMarkingsMenu(TryGetMonMarkId(), 176, 32);
         return LT_INC_AND_CONTINUE;
     case 1:
         PrintHelpBarText(HELPBAR_CONDITION_MARKINGS);
@@ -533,7 +533,7 @@ u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
     switch (state)
     {
     case 0:
-        sub_811FAF8();
+        FreeMonMarkingsMenu();
         return LT_INC_AND_CONTINUE;
     case 1:
         PrintHelpBarText(HELPBAR_CONDITION_MON_STATUS);
@@ -668,9 +668,9 @@ void CreateMonMarkingsOrPokeballIndicators(void)
     {
         structPtr->monMarks.baseTileTag = 0x6A;
         structPtr->monMarks.basePaletteTag = 0x6A;
-        sub_811F90C(&structPtr->monMarks);
-        sub_811FA90();
-        sprite = CreateMonMarkingsSpriteWithPal(0x69, 0x69, sConditionGraphMonMarkingsPal);
+        InitMonMarkingsMenu(&structPtr->monMarks);
+        BufferMonMarkingsMenuTiles();
+        sprite = CreateMonMarkingAllCombosSprite(0x69, 0x69, sConditionGraphMonMarkingsPal);
         sprite->oam.priority = 3;
         sprite->pos1.x = 192;
         sprite->pos1.y = 32;
@@ -694,7 +694,7 @@ void CreateMonMarkingsOrPokeballIndicators(void)
             }
             else
             {
-                structPtr->partyPokeballSpriteIds[i] = 0xFF;
+                structPtr->partyPokeballSpriteIds[i] = SPRITE_NONE;
             }
         }
 
@@ -710,7 +710,7 @@ void CreateMonMarkingsOrPokeballIndicators(void)
             }
             else
             {
-                structPtr->partyPokeballSpriteIds[i] = 0xFF;
+                structPtr->partyPokeballSpriteIds[i] = SPRITE_NONE;
             }
         }
 
@@ -725,7 +725,7 @@ void CreateMonMarkingsOrPokeballIndicators(void)
         }
         else
         {
-            structPtr->partyPokeballSpriteIds[i] = 0xFF;
+            structPtr->partyPokeballSpriteIds[i] = SPRITE_NONE;
         }
     }
 
@@ -759,7 +759,7 @@ void sub_81CEBF4(struct Pokenav7Struct *structPtr)
         FreeSpritePaletteByTag(0x66);
     }
 
-    if (structPtr->monPicSpriteId != 0xFF)
+    if (structPtr->monPicSpriteId != SPRITE_NONE)
     {
         DestroySprite(&gSprites[structPtr->monPicSpriteId]);
         FreeSpriteTilesByTag(0x64);
@@ -803,7 +803,7 @@ void CreateConditionMonPic(u8 id)
     u8 spriteId;
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
 
-    if (structPtr->monPicSpriteId == 0xFF)
+    if (structPtr->monPicSpriteId == SPRITE_NONE)
     {
         LoadConditionMonPicTemplate(&sprSheet, &sprTemplate, &sprPal);
         sprSheet.data = GetConditionMonPicGfx(id);
@@ -816,7 +816,7 @@ void CreateConditionMonPic(u8 id)
         {
             FreeSpriteTilesByTag(0x64);
             FreeSpritePaletteByTag(0x64);
-            structPtr->monPicSpriteId = 0xFF;
+            structPtr->monPicSpriteId = SPRITE_NONE;
         }
         else
         {
@@ -828,7 +828,7 @@ void CreateConditionMonPic(u8 id)
     }
     else
     {
-        DmaCopy16Defvars(3, GetConditionMonPicGfx(id), structPtr->unk181C, 0x800);
+        DmaCopy16Defvars(3, GetConditionMonPicGfx(id), structPtr->unk181C, MON_PIC_SIZE);
         LoadPalette(GetConditionMonPal(id), structPtr->monPalIndex, 0x20);
     }
 }
