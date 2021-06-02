@@ -74,7 +74,7 @@ static void GetChallengeWon(void);
 static void TrainerHillSetTag(void);
 static void SetUpDataStruct(void);
 static void FreeDataStruct(void);
-static void nullsub_2(void);
+static void TrainerHillDummy(void);
 static void SetTimerValue(u32 *dst, u32 val);
 static u32 GetTimerValue(u32 *src);
 static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level);
@@ -202,7 +202,7 @@ static const u16 *const *const sPrizeListSets[] =
 };
 
 static const u16 sEReader_Pal[] = INCBIN_U16("graphics/misc/trainer_hill_ereader.gbapal");
-static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrHillTag *const sDataPerTag[] =
 {
@@ -358,7 +358,7 @@ static void SetUpDataStruct(void)
         sHillData = AllocZeroed(sizeof(*sHillData));
         sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
         CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag) + 4 * sizeof(struct TrHillFloor));
-        nullsub_2();
+        TrainerHillDummy();
     }
 }
 
@@ -397,7 +397,7 @@ void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
 
 static void TrainerHillStartChallenge(void)
 {
-    nullsub_2();
+    TrainerHillDummy();
     if (!ReadTrainerHillAndValidate())
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 1;
     else
@@ -573,12 +573,12 @@ static void IsTrainerHillChallengeActive(void)
         gSpecialVar_Result = TRUE;
 }
 
-void nullsub_129(void)
+static void TrainerHillDummy_Unused(void)
 {
 
 }
 
-static void nullsub_2(void)
+static void TrainerHillDummy(void)
 {
 
 }
@@ -897,7 +897,7 @@ void FillHillTrainersParties(void)
 // hill trainers.
 u32 GetTrainerHillAIFlags(void)
 {
-    return (AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY);
+    return (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
 }
 
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)

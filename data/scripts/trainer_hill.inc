@@ -16,7 +16,9 @@ TrainerHill_OnWarp: @ 82C8372
 
 TrainerHill_1F_EventScript_DummyOnWarp:: @ 82C837C
 	setvar VAR_TEMP_3, 1
-@ forced stop
+.ifdef BUGFIX
+	end  @ Missing end. By chance, the next byte (0x02 of VAR_TEMP_2) is also the id for the end cmd
+.endif
 
 TrainerHill_OnFrame: @ 82C8381
 	map_script_2 VAR_TEMP_2, 0, TrainerHill_1F_EventScript_DummyWarpToEntranceCounter

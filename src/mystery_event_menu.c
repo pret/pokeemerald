@@ -138,7 +138,7 @@ static void CB2_MysteryEventMenu(void)
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
         ShowBg(0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 1:
@@ -281,7 +281,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 15:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 16:

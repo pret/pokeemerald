@@ -18,19 +18,17 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-// this file's functions
+#define TAG_SWAP_LINE 109
+
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 static void Task_CallYesOrNoCallback(u8 taskId);
 
-// EWRAM vars
 EWRAM_DATA static struct YesNoFuncTable gUnknown_0203A138 = {0};
 EWRAM_DATA static u8 gUnknown_0203A140 = 0;
 
-// IWRAM bss vars
 static TaskFunc gUnknown_0300117C;
 
-// const rom data
-static const struct OamData sOamData_859F4E8 =
+static const struct OamData sOamData_SwapLine =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -47,47 +45,47 @@ static const struct OamData sOamData_859F4E8 =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_859F4F0[] =
+static const union AnimCmd sAnim_SwapLine_RightArrow[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_859F4F8[] =
+static const union AnimCmd sAnim_SwapLine_Line[] =
 {
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_859F500[] =
+static const union AnimCmd sAnim_SwapLine_LeftArrow[] =
 {
-    ANIMCMD_FRAME(0, 0, 1, 0),
+    ANIMCMD_FRAME(0, 0, .hFlip = TRUE),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_859F508[] =
+static const union AnimCmd *const sAnims_SwapLine[] =
 {
-    sSpriteAnim_859F4F0,
-    sSpriteAnim_859F4F8,
-    sSpriteAnim_859F500
+    sAnim_SwapLine_RightArrow,
+    sAnim_SwapLine_Line,
+    sAnim_SwapLine_LeftArrow
 };
 
-static const struct CompressedSpriteSheet gUnknown_0859F514 =
+static const struct CompressedSpriteSheet sSpriteSheet_SwapLine =
 {
-    gBagSwapLineGfx, 0x100, 109
+    gBagSwapLineGfx, 0x100, TAG_SWAP_LINE
 };
 
-static const struct CompressedSpritePalette gUnknown_0859F51C =
+static const struct CompressedSpritePalette sSpritePalette_SwapLine =
 {
-    gBagSwapLinePal, 109
+    gBagSwapLinePal, TAG_SWAP_LINE
 };
 
-static const struct SpriteTemplate gUnknown_0859F524 =
+static const struct SpriteTemplate sSpriteTemplate_SwapLine =
 {
-    .tileTag = 109,
-    .paletteTag = 109,
-    .oam = &sOamData_859F4E8,
-    .anims = sSpriteAnimTable_859F508,
+    .tileTag = TAG_SWAP_LINE,
+    .paletteTag = TAG_SWAP_LINE,
+    .oam = &sOamData_SwapLine,
+    .anims = sAnims_SwapLine,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -289,7 +287,7 @@ bool8 sub_8122148(u16 itemId)
         return FALSE;
 }
 
-bool8 itemid_80BF6D8_mail_related(u16 itemId)
+bool8 IsWritingMailAllowed(u16 itemId)
 {
     if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
         return TRUE;
@@ -312,14 +310,14 @@ static bool8 sub_81221D0(void)
     if (!MenuHelpers_LinkSomething())
         return FALSE;
     else
-        return sub_8087598();
+        return Overworld_LinkRecvQueueLengthMoreThan2();
 }
 
 bool8 MenuHelpers_CallLinkSomething(void)
 {
     if (sub_81221D0() == TRUE)
         return TRUE;
-    else if (sub_800B504() != TRUE)
+    else if (IsLinkRecvQueueLengthAtLeast3() != TRUE)
         return FALSE;
     else
         return TRUE;
@@ -390,19 +388,19 @@ void sub_8122298(u16 *arg0, u16 *arg1, u8 arg2, u8 arg3, u8 arg4)
     }
 }
 
-void LoadListMenuArrowsGfx(void)
+void LoadListMenuSwapLineGfx(void)
 {
-    LoadCompressedSpriteSheet(&gUnknown_0859F514);
-    LoadCompressedSpritePalette(&gUnknown_0859F51C);
+    LoadCompressedSpriteSheet(&sSpriteSheet_SwapLine);
+    LoadCompressedSpritePalette(&sSpritePalette_SwapLine);
 }
 
-void sub_8122344(u8 *spriteIds, u8 count)
+void CreateSwapLineSprites(u8 *spriteIds, u8 count)
 {
     u8 i;
 
     for (i = 0; i < count; i++)
     {
-        spriteIds[i] = CreateSprite(&gUnknown_0859F524, i * 16, 0, 0);
+        spriteIds[i] = CreateSprite(&sSpriteTemplate_SwapLine, i * 16, 0, 0);
         if (i != 0)
             StartSpriteAnim(&gSprites[spriteIds[i]], 1);
 
@@ -410,7 +408,7 @@ void sub_8122344(u8 *spriteIds, u8 count)
     }
 }
 
-void sub_81223B0(u8 *spriteIds, u8 count)
+void DestroySwapLineSprites(u8 *spriteIds, u8 count)
 {
     u8 i;
 
@@ -423,17 +421,15 @@ void sub_81223B0(u8 *spriteIds, u8 count)
     }
 }
 
-void sub_81223FC(u8 *spriteIds, u8 count, bool8 invisible)
+void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible)
 {
     u8 i;
 
     for (i = 0; i < count; i++)
-    {
         gSprites[spriteIds[i]].invisible = invisible;
-    }
 }
 
-void sub_8122448(u8 *spriteIds, u8 count, s16 x, u16 y)
+void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
 {
     u8 i;
     bool8 unknownBit = count & 0x80;
