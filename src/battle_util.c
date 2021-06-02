@@ -7524,6 +7524,11 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
             atkStage = gBattleMons[battlerDef].statStages[STAT_SPATK];
         }
     }
+    if (gBattleMoves[move].effect == EFFECT_BODY_PRESS)
+    {
+        atkStat = gBattleMons[battlerAtk].defense;
+        atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
+    }
     else
     {
         if (IS_MOVE_PHYSICAL(move))
