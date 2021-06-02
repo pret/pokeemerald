@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 {
     if (argc < 3 || argc > 4)
     {
-        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE [-i]\nwhere -i denotes if input is from stdin", argv[0]);
+        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE [-i]\nwhere -i denotes if input is from stdin\n", argv[0]);
         return 1;
     }
 
