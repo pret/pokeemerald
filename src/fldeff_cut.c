@@ -62,7 +62,6 @@ static void HandleLongGrassOnHyper(u8, s16, s16);
 static u8 sCutSquareSide;
 static u8 sTileCountFromPlayer_X;
 static u8 sTileCountFromPlayer_Y;
-static u32 sUnused;
 static bool8 sHyperCutTiles[CUT_HYPER_AREA];
 
 // EWRAM variables
@@ -327,7 +326,7 @@ bool8 FldEff_CutGrass(void)
             y = yAdd + gPlayerFacingPosition.y;
 
             SetCutGrassMetatile(x, y);
-            sub_808E75C(x, y);
+            AllowObjectAtPosTriggerGroundEffects(x, y);
         }
     }
 

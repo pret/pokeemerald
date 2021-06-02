@@ -135,7 +135,7 @@ BattleFrontier_BattleTowerLobby_EventScript_AskSaveBattle:: @ 823E84D
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_EndSaveBattle
 	message BattleFrontier_BattleTowerLobby_Text_RecordLastMatch
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_EndSaveBattle
 	case 0, BattleFrontier_EventScript_SaveBattle
@@ -187,7 +187,7 @@ BattleFrontier_BattleTowerLobby_EventScript_SinglesAttendant:: @ 823E936
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterSinglesChallenge:: @ 823E948
 	message BattleFrontier_BattleTowerLobby_Text_TakeSinglesChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_TryEnterSinglesChallenge
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_ExplainSinglesChallenge
@@ -198,7 +198,7 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterSinglesChallenge:: @ 823E984
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	message BattleFrontier_BattleTowerLobby_Text_WhichLevelMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
@@ -253,7 +253,7 @@ BattleFrontier_BattleTowerLobby_EventScript_DoublesAttendant:: @ 823EA9F
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterDoublesChallenge:: @ 823EAB1
 	message BattleFrontier_BattleTowerLobby_Text_TakeDoublesChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_TryEnterDoublesChallenge
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_ExplainDoublesChallenge
@@ -264,7 +264,7 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterDoublesChallenge:: @ 823EAED
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	message BattleFrontier_BattleTowerLobby_Text_WhichLevelMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
@@ -320,7 +320,7 @@ BattleFrontier_BattleTowerLobby_EventScript_MultisAttendant:: @ 823EC08
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterMultisChallenge:: @ 823EC1D
 	message BattleFrontier_BattleTowerLobby_Text_TakeMultisChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_TryEnterMultisChallenge
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_ExplainMultisChallenge
@@ -331,7 +331,7 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterMultisChallenge:: @ 823EC59
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	message BattleFrontier_BattleTowerLobby_Text_WhichLevelMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
@@ -386,7 +386,7 @@ BattleFrontier_BattleTowerLobby_EventScript_LinkMultisAttendant:: @ 823ED74
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterLinkMultisChallenge:: @ 823ED86
 	message BattleFrontier_BattleTowerLobby_Text_TakeLinkMultisChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_TryEnterLinkMultisChallenge
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_ExplainLinkMultisChallenge
@@ -397,7 +397,7 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterLinkMultisChallenge:: @ 823E
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	message BattleFrontier_BattleTowerLobby_Text_WhichLevelMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
@@ -446,7 +446,7 @@ BattleFrontier_BattleTowerLobby_EventScript_FeelingsMan:: @ 823EEE7
 	faceplayer
 	message BattleFrontier_BattleTowerLobby_Text_DescribeFeelingsAboutBattleTower
 	waitmessage
-	multichoice 16, 4, MULTI_BATTLE_TOWER_FEELINGS, 0
+	multichoice 16, 4, MULTI_BATTLE_TOWER_FEELINGS, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_FeelingsBattleNow
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_FeelingsIWon
@@ -879,7 +879,7 @@ BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink:: @ 823F3E8
 BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader:: @ 823F3F3
 	message CableClub_Text_ChooseGroupLeaderOfTwo
 	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader
@@ -935,7 +935,7 @@ BattleFrontier_BattleTowerLobby_EventScript_RulesBoard:: @ 823F4BE
 BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard:: @ 823F4CD
 	message BattleFrontier_BattleTowerLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 17, 2, MULTI_BATTLE_TOWER_RULES, 0
+	multichoice 17, 2, MULTI_BATTLE_TOWER_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_RulesTower
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_RulesMons

@@ -102,12 +102,14 @@ override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-
 ROM := $(ROM_NAME)
 OBJ_DIR := $(OBJ_DIR_NAME)
 LIBPATH := -L ../../tools/agbcc/lib
+LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 else
 CC1              = $(shell $(MODERNCC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -g
 ROM := $(MODERN_ROM_NAME)
 OBJ_DIR := $(MODERN_OBJ_DIR_NAME)
-LIBPATH := -L "$(dir $(shell $(MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(MODERNCC) -mthumb -print-file-name=libc.a))"
+LIBPATH := -L "$(dir $(shell $(MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(MODERNCC) -mthumb -print-file-name=libc.a))"
+LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 endif
 
 CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
@@ -116,8 +118,6 @@ CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
 endif
 
 LDFLAGS = -Map ../../$(MAP)
-
-LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx$(EXE)
@@ -242,9 +242,7 @@ mostlyclean: tidynonmodern tidymodern
 	@$(MAKE) clean -C berry_fix
 	@$(MAKE) clean -C libagbsyscall
 
-tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r $(OBJ_DIR)
+tidy: tidynonmodern tidymodern
 
 tidynonmodern:
 	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
@@ -394,6 +392,7 @@ $1: $2 $$(shell $(SCANINC) -I include -I "" $2)
 	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include - | $$(AS) $$(ASFLAGS) -o $$@
 endef
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
+$(foreach src, $(C_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o, $(src)),$(src))))
 endif
 $(info Scanning deps end $(shell date +%s%3N))
 endif

@@ -9,7 +9,7 @@ LavaridgeTown_Gym_1F_MapScripts:: @ 81FE6F4
 
 LavaridgeTown_Gym_1F_OnTransition: @ 81FE6FA
 	call LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars
-	call LavaridgeTown_Gym_1F_EventScript_CheckHideTrainers
+	call LavaridgeTown_Gym_1F_EventScript_CheckBuryTrainers
 	end
 
 @ Unclear where/if these temp vars are getting checked
@@ -33,19 +33,19 @@ LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar:: @ 81FE748
 LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars:: @ 81FE756
 	return
 
-LavaridgeTown_Gym_1F_EventScript_CheckHideTrainers:: @ 81FE757
-	goto_if_defeated TRAINER_COLE, LavaridgeTown_Gym_1F_EventScript_CheckHideGerald
-	setobjectmovementtype LOCALID_COLE, MOVEMENT_TYPE_HIDDEN
-LavaridgeTown_Gym_1F_EventScript_CheckHideGerald:: @ 81FE764
-	goto_if_defeated TRAINER_GERALD, LavaridgeTown_Gym_1F_EventScript_CheckHideAxle
-	setobjectmovementtype LOCALID_GERALD, MOVEMENT_TYPE_HIDDEN
-LavaridgeTown_Gym_1F_EventScript_CheckHideAxle:: @ 81FE771
-	goto_if_defeated TRAINER_AXLE, LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle
-	setobjectmovementtype LOCALID_AXLE, MOVEMENT_TYPE_HIDDEN
-LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle:: @ 81FE77E
-	goto_if_defeated TRAINER_DANIELLE, LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers
-	setobjectmovementtype LOCALID_DANIELLE, MOVEMENT_TYPE_HIDDEN
-LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers:: @ 81FE78B
+LavaridgeTown_Gym_1F_EventScript_CheckBuryTrainers:: @ 81FE757
+	goto_if_defeated TRAINER_COLE, LavaridgeTown_Gym_1F_EventScript_CheckBuryGerald
+	setobjectmovementtype LOCALID_COLE, MOVEMENT_TYPE_BURIED
+LavaridgeTown_Gym_1F_EventScript_CheckBuryGerald:: @ 81FE764
+	goto_if_defeated TRAINER_GERALD, LavaridgeTown_Gym_1F_EventScript_CheckBuryAxle
+	setobjectmovementtype LOCALID_GERALD, MOVEMENT_TYPE_BURIED
+LavaridgeTown_Gym_1F_EventScript_CheckBuryAxle:: @ 81FE771
+	goto_if_defeated TRAINER_AXLE, LavaridgeTown_Gym_1F_EventScript_CheckBuryDanielle
+	setobjectmovementtype LOCALID_AXLE, MOVEMENT_TYPE_BURIED
+LavaridgeTown_Gym_1F_EventScript_CheckBuryDanielle:: @ 81FE77E
+	goto_if_defeated TRAINER_DANIELLE, LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers
+	setobjectmovementtype LOCALID_DANIELLE, MOVEMENT_TYPE_BURIED
+LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers:: @ 81FE78B
 	return
 
 LavaridgeTown_Gym_1F_EventScript_Flannery:: @ 81FE78C

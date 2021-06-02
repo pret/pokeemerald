@@ -18,7 +18,7 @@ SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre:: @ 8234DC9
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, SeafloorCavern_Room9_Movement_Delay32
 	waitmovement 0
-	playbgm MUS_ENCOUNTER_AQUA, 0
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	msgbox SeafloorCavern_Room9_Text_ArchieHoldItRightThere, MSGBOX_DEFAULT
 	closemessage
 	addobject VAR_0x8004
@@ -142,7 +142,7 @@ SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre:: @ 8234DC9
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS
-	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_1
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	warp MAP_ROUTE128, 255, 38, 22

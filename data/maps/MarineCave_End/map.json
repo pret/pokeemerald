@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_KYOGRE_1",
+      "graphics_id": "OBJ_EVENT_GFX_KYOGRE_FRONT",
       "x": 9,
       "y": 22,
       "elevation": 1,

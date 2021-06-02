@@ -203,7 +203,7 @@ PetalburgCity_Gym_EventScript_BeginWallyTutorial:: @ 8204AAC
 	msgbox PetalburgCity_Gym_Text_WouldYouReallyComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_FOLLOW_ME, 0
+	playbgm MUS_FOLLOW_ME, FALSE
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_Gym_EventScript_ExitGymWithWallySouth
 	compare VAR_0x8008, 1
@@ -487,7 +487,7 @@ PetalburgCity_Gym_EventScript_WallysDadArrives:: @ 8204F13
 	msgbox PetalburgCity_Gym_Text_LetMeBorrowPlayer, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_FOLLOW_ME, 0
+	playbgm MUS_FOLLOW_ME, FALSE
 	compare VAR_0x8008, 1
 	call_if_eq PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth
 	compare VAR_0x8008, 2

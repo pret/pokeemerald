@@ -95,7 +95,7 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
+const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
 // Table of move info icon offsets in graphics/interface_fr/menu.png
 static const struct MenuInfoIcon sMenuInfoIcons[] =
@@ -144,8 +144,8 @@ void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 void InitStandardTextBoxWindows(void)
 {
     InitWindows(sStandardTextBox_WindowTemplates);
-    sStartMenuWindowId = 0xFF;
-    sMapNamePopupWindowId = 0xFF;
+    sStartMenuWindowId = WINDOW_NONE;
+    sMapNamePopupWindowId = WINDOW_NONE;
 }
 
 void FreeAllOverworldWindowBuffers(void)
@@ -490,7 +490,7 @@ u8 GetPlayerTextSpeedDelay(void)
 
 u8 sub_81979C4(u8 a1)
 {
-    if (sStartMenuWindowId == 0xFF)
+    if (sStartMenuWindowId == WINDOW_NONE)
         sStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
     return sStartMenuWindowId;
 }
@@ -502,26 +502,28 @@ u8 GetStartMenuWindowId(void)
 
 void RemoveStartMenuWindow(void)
 {
-    if (sStartMenuWindowId != 0xFF)
+    if (sStartMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sStartMenuWindowId);
-        sStartMenuWindowId = 0xFF;
+        sStartMenuWindowId = WINDOW_NONE;
     }
 }
 
-u16 sub_8197A30(void)
+// Unused
+static u16 GetDialogFrameBaseTileNum(void)
 {
     return DLG_WINDOW_BASE_TILE_NUM;
 }
 
-u16 sub_8197A38(void)
+// Unused
+static u16 GetStandardFrameBaseTileNum(void)
 {
     return STD_WINDOW_BASE_TILE_NUM;
 }
 
 u8 AddMapNamePopUpWindow(void)
 {
-    if (sMapNamePopupWindowId == 0xFF)
+    if (sMapNamePopupWindowId == WINDOW_NONE)
         sMapNamePopupWindowId = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
     return sMapNamePopupWindowId;
 }
@@ -533,10 +535,10 @@ u8 GetMapNamePopUpWindowId(void)
 
 void RemoveMapNamePopUpWindow(void)
 {
-    if (sMapNamePopupWindowId != 0xFF)
+    if (sMapNamePopupWindowId != WINDOW_NONE)
     {
         RemoveWindow(sMapNamePopupWindowId);
-        sMapNamePopupWindowId = 0xFF;
+        sMapNamePopupWindowId = WINDOW_NONE;
     }
 }
 
@@ -815,7 +817,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
 {
     u16 width = 0;
 
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
@@ -837,19 +839,19 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
     u8 color[3];
     u16 width = 0;
 
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         if (a3 != 0)
         {
             color[0] = TEXT_COLOR_TRANSPARENT;
             color[1] = TEXT_COLOR_WHITE;
-            color[2] = TEXT_COLOR_DARK_GREY;
+            color[2] = TEXT_COLOR_DARK_GRAY;
         }
         else
         {
             color[0] = TEXT_DYNAMIC_COLOR_6;
             color[1] = TEXT_COLOR_WHITE;
-            color[2] = TEXT_COLOR_DARK_GREY;
+            color[2] = TEXT_COLOR_DARK_GRAY;
         }
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
@@ -872,13 +874,13 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 
 void sub_81982D8(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
         CopyWindowToVram(sWindowId, 3);
 }
 
 void sub_81982F0(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
         CopyWindowToVram(sWindowId, 3);
@@ -887,13 +889,13 @@ void sub_81982F0(void)
 
 void sub_8198314(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sWindowId);
         CopyWindowToVram(sWindowId, 3);
         RemoveWindow(sWindowId);
-        sWindowId = 0xFF;
+        sWindowId = WINDOW_NONE;
     }
 }
 
@@ -1241,7 +1243,7 @@ void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struc
     sub_8198C94(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a3, a4, a5, strs);
 }
 
-void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
+void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *strs, const u8 *strIds)
 {
     u8 i;
     u8 j;
@@ -1256,13 +1258,13 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
-    for (i = 0; i < itemCount2; i++)
+    for (i = 0; i < verticalCount; i++)
     {
-        for (j = 0; j < itemCount; j++)
+        for (j = 0; j < horizontalCount; j++)
         {
-            printer.currentChar = strs[a8[(itemCount * i) + j]].text;
-            printer.x = (a4 * j) + left;
-            printer.y = (GetFontAttribute(fontId, 1) * i) + top;
+            printer.currentChar = strs[strIds[(horizontalCount * i) + j]].text;
+            printer.x = (optionWidth * j) + left;
+            printer.y = (GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) * i) + top;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
             AddTextPrinter(&printer, 0xFF, NULL);
@@ -1272,9 +1274,10 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_8198EF8(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *strs, const u8 *a8)
+// Unused
+static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, u8 unused, u8 horizontalCount, u8 verticalCount, const struct MenuAction *strs, const u8 *strIds)
 {
-    sub_8198DBC(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a4, a5, strs, a8);
+    PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, strs, strIds);
 }
 
 u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, u8 a6, u8 a7, u8 numChoices, u8 a9)
@@ -1701,7 +1704,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     CopyWindowToVram(windowId, 2);
 }
 
-u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
+u8 InitMenuActionGrid(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
 {
     s32 pos;
 
@@ -2036,8 +2039,8 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
     {
         for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
         {
-            pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B);
-            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 0x1d) >> 0x1B);
+            pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 29) >> 27);
+            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 29) >> 27);
 
             if ((uintptr_t)pixelsDst & 0x1)
             {
