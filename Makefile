@@ -1,5 +1,10 @@
+$(info start $(shell date +%s%3N))
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
+
+ifeq (compare,$(MAKECMDGOALS))
+  COMPARE := 1
+endif
 
 # don't use dkP's base_tools anymore
 # because the redefinition of $(CC) conflicts
@@ -35,6 +40,10 @@ GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
 MODERN      ?= 0
+
+ifeq (modern,$(MAKECMDGOALS))
+  MODERN := 1
+endif
 
 # use arm-none-eabi-cpp for macOS
 # as macOS's default compiler is clang
@@ -143,9 +152,10 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-# Don't build tools yet for modern because we perform a recursive make
-ifeq (,$(filter-out all rom berry_fix libagbsyscall,$(MAKECMDGOALS)))
-$(call infoshell, $(MAKE) tools)
+# Use a separate minimal makefile for speed
+# Since we don't need to reload most of this makefile
+ifeq (,$(filter-out all rom compare modern berry_fix libagbsyscall,$(MAKECMDGOALS)))
+$(call infoshell, $(MAKE) -f make_tools.mk)
 else
 NODEP := 1
 endif
@@ -154,16 +164,17 @@ endif
 ifeq (,$(MAKECMDGOALS))
   SCAN_DEPS := 1
 else
-  # compare and modern perform recursive calls, so don't scan dependencies yet
   # clean, tidy, tools, mostlyclean, clean-tools, $(TOOLDIRS), tidymodern, tidynonmodern don't even build the ROM
   # berry_fix and libagbsyscall do their own thing
-  ifeq (,$(filter-out clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix libagbsyscall modern tidymodern tidynonmodern,$(MAKECMDGOALS)))
+  ifeq (,$(filter-out clean tidy tools mostlyclean clean-tools $(TOOLDIRS) tidymodern tidynonmodern berry_fix libagbsyscall,$(MAKECMDGOALS)))
     SCAN_DEPS := 0
   else
     SCAN_DEPS := 1
   endif
 endif
 
+$(info scanfiles $(shell date +%s%3N))
+ifeq ($(SCAN_DEPS),1)
 C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -193,10 +204,11 @@ OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
+$(shell mkdir -p $(SUBDIRS))
+endif
+$(info scanfiles done $(shell date +%s%3N))
 
 AUTO_GEN_TARGETS :=
-
-$(shell mkdir -p $(SUBDIRS))
 
 all: rom
 
@@ -211,7 +223,7 @@ ifeq ($(COMPARE),1)
 endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: ; @$(MAKE) COMPARE=1
+compare: all
 
 clean: mostlyclean clean-tools
 
@@ -295,11 +307,8 @@ endif
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 
-# ifeq (,$(filter-out all rom compare modern berry_fix libagbsyscall,$(MAKECMDGOALS)))
-
-#$(info MAKECMDGOALS - $(MAKECMDGOALS))
-
 ifeq ($(SCAN_DEPS),1)
+$(info Scanning deps start $(shell date +%s%3N))
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c
 ifeq (,$(KEEP_TEMPS))
@@ -324,9 +333,7 @@ else
 	$$(AS) $$(ASFLAGS) -o $$@ $$(C_BUILDDIR)/$$*.s
 endif
 endef
-#$(info C_DEP)
 $(foreach src, $(C_SRCS), $(eval $(call C_DEP,$(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o, $(src)),$(src))))
-#$(error done C_DEP)
 endif
 
 ifeq ($(NODEP),1)
@@ -388,6 +395,7 @@ $1: $2 $$(shell $(SCANINC) -I include -I "" $2)
 endef
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
 endif
+$(info Scanning deps end $(shell date +%s%3N))
 endif
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
@@ -422,7 +430,7 @@ $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
 
-modern: ; @$(MAKE) MODERN=1
+modern: all
 
 berry_fix/berry_fix.gba: berry_fix
 
