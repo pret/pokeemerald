@@ -250,7 +250,7 @@ const u8 gItemEffect_Zinc[11] = {
     [10] = ITEM10_IS_VITAMIN,
 };
 
-#define FEATHER_FRIENDSHIP_CHANGE(i)                \
+#define FEATHER_FRIENDSHIP_CHANGE(i)             \
     [(i) + 0] = 3, /* Friendship change, low */  \
     [(i) + 1] = 2, /* Friendship change, mid */  \
     [(i) + 2] = 1  /* Friendship change, high */
