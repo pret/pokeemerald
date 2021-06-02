@@ -367,6 +367,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectFairyLock
 	.4byte BattleScript_EffectAllySwitch
 	.4byte BattleScript_EffectSleepHit
+	.4byte BattleScript_EffectBodyPress
 
 BattleScript_EffectSleepHit:
 	setmoveeffect MOVE_EFFECT_SLEEP
@@ -2051,6 +2052,7 @@ BattleScript_EffectChangeTypeOnItem:
 BattleScript_EffectFusionCombo:
 BattleScript_EffectRevelationDance:
 BattleScript_EffectBelch:
+BattleScript_EffectBodyPress:
 
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
@@ -2762,14 +2764,16 @@ BattleScriptFirstChargingTurn::
 	attackcanceler
 	printstring STRINGID_EMPTYSTRING3
 	ppreduce
+	attackstring
+	pause B_WAIT_TIME_LONG
+	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
+	printfromtable gFirstTurnOfTwoStringIds
+	waitmessage B_WAIT_TIME_LONG
 	attackanimation
 	waitanimation
 	orword gHitMarker, HITMARKER_CHARGING
 	setmoveeffect MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
-	printfromtable gFirstTurnOfTwoStringIds
-	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_EffectSuperFang::
