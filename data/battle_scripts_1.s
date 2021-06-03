@@ -883,10 +883,11 @@ BattleScript_EffectFlameBurst:
 
 BattleScript_MoveEffectFlameBurst::
 	tryfaintmon BS_TARGET, FALSE, NULL
+	copybyte sBATTLER, sSAVED_BATTLER
 	printstring STRINGID_BURSTINGFLAMESHIT
 	waitmessage B_WAIT_TIME_LONG
 	savetarget
-	copybyte gBattlerTarget, sBATTLER
+	copybyte gBattlerTarget, sSAVED_BATTLER
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
 	tryfaintmon BS_TARGET, FALSE, NULL

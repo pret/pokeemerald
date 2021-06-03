@@ -1633,7 +1633,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
         calc = (calc * (100 + atkParam)) / 100;
     else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
         calc = (calc * (100 + atkParam)) / 100;
-    
+
     if (gProtectStructs[battlerAtk].micle)
     {
         gProtectStructs[battlerAtk].micle = FALSE;
@@ -3189,7 +3189,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_FLAME_BURST:
                 if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) != ABILITY_MAGIC_GUARD)
                 {
-                    gBattleScripting.battler = BATTLE_PARTNER(gBattlerTarget);
+                    gBattleScripting.savedBattler = BATTLE_PARTNER(gBattlerTarget);
                     gBattleMoveDamage = gBattleMons[BATTLE_PARTNER(gBattlerTarget)].hp / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
@@ -4485,7 +4485,7 @@ static void Cmd_playanimation(void)
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
-    
+
     #if B_TERRAIN_BG_CHANGE == FALSE
     if (gBattlescriptCurrInstr[2] == B_ANIM_RESTORE_BG)
     {
@@ -7777,7 +7777,7 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
             return;
         }
-        
+
         if (gBattleMons[gBattlerTarget].ability == gBattleMons[gBattlerAttacker].ability)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
@@ -9184,17 +9184,17 @@ bool32 TryResetBattlerStatChanges(u8 battler)
 {
     u32 j;
     bool32 ret = FALSE;
-    
+
     gDisableStructs[battler].stockpileDef = 0;
     gDisableStructs[battler].stockpileSpDef = 0;
     for (j = 0; j < NUM_BATTLE_STATS; j++)
     {
         if (gBattleMons[battler].statStages[j] != DEFAULT_STAT_STAGE)
             ret = TRUE; // returns TRUE if any stat was reset
-        
+
         gBattleMons[battler].statStages[j] = DEFAULT_STAT_STAGE;
     }
-    
+
     return ret;
 }
 
@@ -11280,7 +11280,7 @@ static void Cmd_tryswapitems(void) // trick
 static void Cmd_trycopyability(void) // role play
 {
     u16 defAbility = gBattleMons[gBattlerTarget].ability;
-    
+
     if (gBattleMons[gBattlerAttacker].ability == defAbility
       || defAbility == ABILITY_NONE
       || IsRolePlayBannedAbilityAtk(gBattleMons[gBattlerAttacker].ability)
@@ -11428,7 +11428,7 @@ static void Cmd_tryswapabilities(void) // skill swap
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         return;
     }
-    
+
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
@@ -12448,7 +12448,7 @@ static const u16 sTelekinesisBanList[] =
 bool32 IsTelekinesisBannedSpecies(u16 species)
 {
     u32 i;
-    
+
     for (i = 0; i < ARRAY_COUNT(sTelekinesisBanList); i++)
     {
         if (species == sTelekinesisBanList[i])
