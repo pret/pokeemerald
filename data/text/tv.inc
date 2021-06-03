@@ -2925,7 +2925,7 @@ gTVInSearchOfTrainersText08:: @ 0828C011
 	.string "That's all for today!\n"
 	.string "See you again on our next broadcast!$"
 
-gTVPokemonContestLiveUpdates2Text00:: @ 0828C137
+ContestLadyShow_Text_Intro:: @ 0828C137
 	.string "“POKéMON CONTEST LIVE UPDATES!”\p"
 	.string "MC: Sorry to interrupt the regular\n"
 	.string "programming, and thanks for joining us!\p"
@@ -2940,7 +2940,7 @@ gTVPokemonContestLiveUpdates2Text00:: @ 0828C137
 	.string "Spectators: ?!!!!\n"
 	.string "?!!!!$"
 
-gTVPokemonContestLiveUpdates2Text01:: @ 0828C28C
+ContestLadyShow_Text_Won:: @ 0828C28C
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "May I congratulate you on your win?\p"
@@ -2959,7 +2959,7 @@ gTVPokemonContestLiveUpdates2Text01:: @ 0828C28C
 	.string "We did it!\l"
 	.string "Thank you!$"
 
-gTVPokemonContestLiveUpdates2Text02:: @ 0828C45B
+ContestLadyShow_Text_Lost:: @ 0828C45B
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "You must be disappointed by that turn\n"
@@ -2979,7 +2979,7 @@ gTVPokemonContestLiveUpdates2Text02:: @ 0828C45B
 	.string "Uh… That's all the time we have today!\n"
 	.string "Thanks for tuning in!$"
 
-gTVPokemonContestLiveUpdates2Text03:: @ 0828C662
+ContestLadyShow_Text_LostBadly:: @ 0828C662
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "How did your CONTEST appearance go?\p"

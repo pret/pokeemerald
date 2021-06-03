@@ -14,7 +14,6 @@
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
-#include "constants/tv.h"
 
 extern u16 gUnknown_0203CF30[];
 
@@ -281,10 +280,6 @@ bool8 AddBagItem(u16 itemId, u16 count)
                 {
                     // successfully added to already existing item's count
                     SetBagItemQuantity(&newItems[i].quantity, ownedCount + count);
-
-                    // goto SUCCESS_ADD_ITEM;
-                    // is equivalent but won't match
-
                     memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
                     Free(newItems);
                     return TRUE;
@@ -304,7 +299,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
                         // don't create another instance of the item if it's at max slot capacity and count is equal to 0
                         if (count == 0)
                         {
-                            goto SUCCESS_ADD_ITEM;
+                            break;
                         }
                     }
                 }
@@ -335,7 +330,8 @@ bool8 AddBagItem(u16 itemId, u16 count)
                     {
                         // created a new slot and added quantity
                         SetBagItemQuantity(&newItems[i].quantity, count);
-                        goto SUCCESS_ADD_ITEM;
+                        count = 0;
+                        break;
                     }
                 }
             }
@@ -346,11 +342,9 @@ bool8 AddBagItem(u16 itemId, u16 count)
                 return FALSE;
             }
         }
-
-        SUCCESS_ADD_ITEM:
-            memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
-            Free(newItems);
-            return TRUE;
+        memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
+        Free(newItems);
+        return TRUE;
     }
 }
 
@@ -554,7 +548,6 @@ bool8 AddPCItem(u16 itemId, u16 count)
 
 void RemovePCItem(u8 index, u16 count)
 {
-    // UB: should use GetPCItemQuantity and SetPCItemQuantity functions
     gSaveBlock1Ptr->pcItems[index].quantity -= count;
     if (gSaveBlock1Ptr->pcItems[index].quantity == 0)
     {
@@ -820,7 +813,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
-    i = gPyramidBagCursorData.cursorPosition + gPyramidBagCursorData.scrollPosition;
+    i = gPyramidBagMenuState.cursorPosition + gPyramidBagMenuState.scrollPosition;
     if (items[i] == itemId && quantities[i] >= count)
     {
         quantities[i] -= count;

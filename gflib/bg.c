@@ -55,7 +55,7 @@ void ResetBgs(void)
 
 static void SetBgModeInternal(u8 bgMode)
 {
-    sGpuBgConfigs.bgVisibilityAndMode &= 0xFFF8;
+    sGpuBgConfigs.bgVisibilityAndMode &= ~0x7;
     sGpuBgConfigs.bgVisibilityAndMode |= bgMode;
 }
 
@@ -66,13 +66,11 @@ u8 GetBgMode(void)
 
 void ResetBgControlStructs(void)
 {
-    struct BgConfig* bgConfigs = &sGpuBgConfigs.configs[0];
-    struct BgConfig zeroedConfig = sZeroedBgControlStruct;
     int i;
 
     for (i = 0; i < NUM_BACKGROUNDS; i++)
     {
-        bgConfigs[i] = zeroedConfig;
+        sGpuBgConfigs.configs[i] = sZeroedBgControlStruct;
     }
 }
 
@@ -175,36 +173,30 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     u16 offset;
     s8 cursor;
 
-    if (!IsInvalidBg(bg) && sGpuBgConfigs.configs[bg].visible)
-    {
-        switch (mode)
-        {
-        case 0x1:
-            offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
-            break;
-        case 0x2:
-            offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
-            break;
-        default:
-            cursor = -1;
-            goto end;
-        }
+    if (IsInvalidBg(bg) || !sGpuBgConfigs.configs[bg].visible)
+        return -1;
 
+    switch (mode)
+    {
+    case 0x1:
+        offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
         offset = destOffset + offset;
-
         cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
-
         if (cursor == -1)
-        {
             return -1;
-        }
-    }
-    else
-    {
-       return -1;
+        break;
+    case 0x2:
+        offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
+        offset = destOffset + offset;
+        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        if (cursor == -1)
+            return -1;
+        break;
+    default:
+        cursor = -1;
+        break;
     }
 
-end:
     return cursor;
 }
 
@@ -254,17 +246,17 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
 
     switch (sGpuBgConfigs.bgVisibilityAndMode & 0x7)
     {
+    default:
+    case 0:
+        return;
     case 1:
         if (bg != 2)
             return;
         break;
     case 2:
-        if (bg < 2 || bg >= NUM_BACKGROUNDS)
+        if (bg != 2 && bg != 3)
             return;
         break;
-    case 0:
-    default:
-        return;
     }
 
     src.texX = srcCenterX;
@@ -697,7 +689,7 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
-s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
 {
     u8 mode;
     u16 temp1;

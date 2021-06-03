@@ -737,7 +737,7 @@ static void AnimTask_Teleport_Step(u8 taskId)
         else
         {
             gSprites[task->data[0]].invisible = TRUE;
-            gSprites[task->data[0]].pos1.x = 272;
+            gSprites[task->data[0]].pos1.x = DISPLAY_WIDTH + 32;
             ResetSpriteRotScale(task->data[0]);
             DestroyAnimVisualTask(taskId);
         }

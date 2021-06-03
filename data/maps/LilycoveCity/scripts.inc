@@ -160,7 +160,7 @@ LilycoveCity_EventScript_MotelSign:: @ 81E2D11
 
 LilycoveCity_EventScript_MuseumSign:: @ 81E2D1A
 	lockall
-	specialvar VAR_0x8004, CountPlayerContestPaintings
+	specialvar VAR_0x8004, CountPlayerMuseumPaintings
 	switch VAR_0x8004
 	case 0, LilycoveCity_EventScript_MuseumSignNoPaintings
 	msgbox LilycoveCity_Text_MuseumSignPlayersExhibit, MSGBOX_DEFAULT
@@ -241,7 +241,7 @@ LilycoveCity_EventScript_Rival:: @ 81E2DDE
 	end
 
 LilycoveCity_EventScript_May:: @ 81E2DF8
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattle
 	compare VAR_RESULT, NO
@@ -270,7 +270,7 @@ LilycoveCity_EventScript_DeclineMayBattle:: @ 81E2E5A
 	end
 
 LilycoveCity_EventScript_Brendan:: @ 81E2E6B
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattle
 	compare VAR_RESULT, NO

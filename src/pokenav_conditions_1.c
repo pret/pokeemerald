@@ -372,7 +372,7 @@ u8 *CopyMonConditionNameGender(u8 *str, u16 id, bool8 arg3)
     switch (gender)
     {
     default:
-        *(str_++) = CHAR_UNK_SPACER;
+        *(str_++) = CHAR_GENDERLESS;
         break;
     case MON_MALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;

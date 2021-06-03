@@ -275,7 +275,7 @@ struct RouletteTable
     struct Taillow taillow;
     u16 ballSpeed;
     u16 baseTravelDist;
-    float var1C;
+    f32 var1C;
 };
 
 struct GridSelection
@@ -340,13 +340,13 @@ static EWRAM_DATA struct Roulette
     s16 ballTravelDistFast;
     u16 ballTravelDistMed;
     u16 ballTravelDistSlow;
-    float ballAngle;
-    float ballAngleSpeed;
-    float ballAngleAccel;
-    float ballDistToCenter;
-    float ballFallSpeed;
-    float ballFallAccel;
-    float varA0;
+    f32 ballAngle;
+    f32 ballAngleSpeed;
+    f32 ballAngleAccel;
+    f32 ballDistToCenter;
+    f32 ballFallSpeed;
+    f32 ballFallAccel;
+    f32 varA0;
     u8 playTaskId;
     u8 spinTaskId;
     u8 filler_1[2];
@@ -1968,7 +1968,7 @@ static void ExitRoulette(u8 taskId)
         gSpecialVar_0x8004 = TRUE;
     else
         gSpecialVar_0x8004 = FALSE;
-    AlertTVOfNewCoinTotal(GetCoins());
+    TryPutFindThatGamerOnAir(GetCoins());
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = Task_ExitRoulette;
 }
@@ -2896,7 +2896,9 @@ static const union AnimCmd sAnim_CreditDigit[] =
     ANIMCMD_FRAME(18, 0), // 9
     // BUG: Animation not terminated properly
     // Doesn't matter in practice, the frames are set directly and not looped
-    //ANIMCMD_END
+#ifdef BUGFIX
+    ANIMCMD_END
+#endif
 };
 
 static const union AnimCmd *const sAnims_CreditDigit[] =
@@ -3948,7 +3950,7 @@ static s16 UpdateBallRelativeWheelAngle(struct Sprite *sprite)
 
 static u8 UpdateSlotBelowBall(struct Sprite *sprite)
 {
-    sRoulette->hitSlot = UpdateBallRelativeWheelAngle(sprite) / (float) DEGREES_PER_SLOT;
+    sRoulette->hitSlot = UpdateBallRelativeWheelAngle(sprite) / (f32)DEGREES_PER_SLOT;
     return sRoulette->hitSlot;
 }
 
@@ -4050,7 +4052,7 @@ static void SpriteCB_UnstickBall_ShroomishBallFall(struct Sprite *sprite)
 
 static void SpriteCB_UnstickBall_Shroomish(struct Sprite *sprite)
 {
-    float slotOffset, ballFallDist, ballFallSpeed;
+    f32 slotOffset, ballFallDist, ballFallSpeed;
     UpdateBallPos(sprite);
 
     switch (sprite->sBallAngle)
@@ -4233,7 +4235,7 @@ static void SpriteCB_RollBall_TryLand(struct Sprite *sprite)
         }
         else // fall left
         {
-            float temp;
+            f32 temp;
             sRoulette->ballAngleSpeed = (temp = sRouletteTables[sRoulette->tableId].var1C) * 2.0f;
             slotId = (sRoulette->hitSlot + NUM_ROULETTE_SLOTS - 1) % NUM_ROULETTE_SLOTS;
             sRoulette->stuckHitSlot = sRoulette->hitSlot;
@@ -4279,7 +4281,7 @@ static void SpriteCB_RollBall_Slow(struct Sprite *sprite)
     {
         // Reached slot to land in
         sRoulette->ballAngleAccel = 0.0f;
-        sRoulette->ballAngleSpeed -= (float)(sRouletteTables[sRoulette->tableId].wheelSpeed)
+        sRoulette->ballAngleSpeed -= (f32)(sRouletteTables[sRoulette->tableId].wheelSpeed)
             / (sRouletteTables[sRoulette->tableId].wheelDelay + 1);
         sprite->sState = 4;
         sprite->callback = SpriteCB_RollBall_TryLand;
@@ -4304,8 +4306,8 @@ static void SpriteCB_RollBall_Medium(struct Sprite *sprite)
     if (sRoulette->ballDistToCenter > 40.0f)
         return;
 
-    sRoulette->ballFallSpeed = -(4.0f / (float)(sRoulette->ballTravelDistSlow));
-    sRoulette->ballAngleAccel = -(sRoulette->ballAngleSpeed / (float)(sRoulette->ballTravelDistSlow));
+    sRoulette->ballFallSpeed = -(4.0f / (f32)(sRoulette->ballTravelDistSlow));
+    sRoulette->ballAngleAccel = -(sRoulette->ballAngleSpeed / (f32)(sRoulette->ballTravelDistSlow));
     sprite->animNum = 2;
     sprite->animBeginning = TRUE;
     sprite->animEnded = FALSE;
@@ -4320,8 +4322,8 @@ static void SpriteCB_RollBall_Fast(struct Sprite *sprite)
         return;
 
     m4aSongNumStartOrChange(SE_ROULETTE_BALL2);
-    sRoulette->ballFallSpeed = -(20.0f / (float)(sRoulette->ballTravelDistMed));
-    sRoulette->ballAngleAccel = ((1.0f - sRoulette->ballAngleSpeed) / (float)(sRoulette->ballTravelDistMed));
+    sRoulette->ballFallSpeed = -(20.0f / (f32)(sRoulette->ballTravelDistMed));
+    sRoulette->ballAngleAccel = ((1.0f - sRoulette->ballAngleSpeed) / (f32)(sRoulette->ballTravelDistMed));
     sprite->animNum = 1;
     sprite->animBeginning = TRUE;
     sprite->animEnded = FALSE;
@@ -4558,7 +4560,7 @@ static void SpriteCB_ShroomishShakeScreen(struct Sprite *sprite)
 
 static void SpriteCB_ShroomishFall(struct Sprite *sprite)
 {
-    float timer;
+    f32 timer;
     sprite->data[1]++;
     timer = sprite->data[1];
     sprite->pos2.y = timer * 0.039f * timer;

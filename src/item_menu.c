@@ -531,7 +531,6 @@ EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 static EWRAM_DATA struct TempWallyStruct *sTempWallyBag = 0;
 
 extern u8 *const gPocketNamesStringsTable[];
-extern u8* gReturnToXStringsTable[];
 extern const u8 EventScript_SelectWithoutRegisteredItem[];
 extern const u16 gUnknown_0860F074[];
 
@@ -552,7 +551,7 @@ void CB2_BagMenuFromBattle(void)
     if (!InBattlePyramid())
         GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT, CB2_SetUpReshowBattleScreenAfterMenu2);
     else
-        GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
+        GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 // Choosing berry to plant
@@ -729,7 +728,7 @@ bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 16:
-        sub_80D4FAC();
+        CreateItemMenuSwapLine();
         gMain.state++;
         break;
     case 17:
@@ -809,7 +808,7 @@ bool8 LoadBagMenu_Graphics(void)
             gBagMenu->graphicsLoadState++;
             break;
         default:
-            LoadListMenuArrowsGfx();
+            LoadListMenuSwapLineGfx();
             gBagMenu->graphicsLoadState = 0;
             return TRUE;
     }
@@ -969,7 +968,7 @@ void BagMenu_PrintDescription(int itemIndex)
     }
     else
     {
-        StringCopy(gStringVar1, gReturnToXStringsTable[gBagPositionStruct.location]);
+        StringCopy(gStringVar1, gBagMenu_ReturnToStrings[gBagPositionStruct.location]);
         StringExpandPlaceholders(gStringVar4, gText_ReturnToVar1);
         str = gStringVar4;
     }
@@ -1419,7 +1418,7 @@ void BagMenu_SwapItems(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
-    sub_80D4FEC(data[1]);
+    UpdateItemMenuSwapLinePos(data[1]);
     BagDestroyPocketSwitchArrowPair();
     BagMenu_PrintCursor_(data[0], 2);
     gTasks[taskId].func = Task_HandleSwappingItemsInput;
@@ -1442,8 +1441,8 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
         {
             input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &gBagPositionStruct.scrollPosition[gBagPositionStruct.pocket], &gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
-            sub_80D4FC8(0);
-            sub_80D4FEC(gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
+            SetItemMenuSwapLineInvisibility(FALSE);
+            UpdateItemMenuSwapLinePos(gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
             switch (input)
             {
                 case LIST_NOTHING_CHOSEN:
@@ -1481,7 +1480,7 @@ void sub_81AC498(u8 taskId)
             gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]--;
         LoadBagItemListBuffers(gBagPositionStruct.pocket);
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
-        sub_80D4FC8(1);
+        SetItemMenuSwapLineInvisibility(TRUE);
         CreatePocketSwitchArrowPair();
         gTasks[taskId].func = Task_BagMenu_HandleInput;
     }
@@ -1499,12 +1498,12 @@ void sub_81AC590(u8 taskId)
         gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]--;
     LoadBagItemListBuffers(gBagPositionStruct.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
-    sub_80D4FC8(1);
+    SetItemMenuSwapLineInvisibility(TRUE);
     CreatePocketSwitchArrowPair();
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }
 
-void OpenContextMenu(u8 unused)
+static void OpenContextMenu(u8 unused)
 {
     switch (gBagPositionStruct.location)
     {
@@ -1650,8 +1649,8 @@ void sub_81ACAF8(u8 a)
 
 void sub_81ACB54(u8 a, u8 b, u8 c)
 {
-    sub_8198DBC(a, 7, 8, 1, 0x38, b, c, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
-    sub_8199944(a, 0x38, b, c, 0);
+    PrintMenuActionGrid(a, 7, 8, 1, 0x38, b, c, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
+    InitMenuActionGrid(a, 0x38, b, c, 0);
 }
 
 void Task_ItemContext_FieldOrBattle(u8 taskId)
@@ -1896,7 +1895,7 @@ void ItemMenu_Register(u8 taskId)
 void ItemMenu_Give(u8 taskId)
 {
     BagMenu_RemoveSomeWindow();
-    if (!itemid_80BF6D8_mail_related(gSpecialVar_ItemId))
+    if (!IsWritingMailAllowed(gSpecialVar_ItemId))
     {
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
     }
@@ -1971,7 +1970,7 @@ void CB2_ReturnToBagMenuPocket(void)
 
 void Task_ItemContext_FieldGive(u8 taskId)
 {
-    if (!itemid_80BF6D8_mail_related(gSpecialVar_ItemId))
+    if (!IsWritingMailAllowed(gSpecialVar_ItemId))
     {
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
     }

@@ -173,7 +173,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan:: @ 821C9AE
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow:: @ 821C9B4
-	special TrySetUpTrainerFanClubSpecial
+	special TryPutTrainerFanClubOnAir
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable:: @ 821C9B8

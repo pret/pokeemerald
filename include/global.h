@@ -107,7 +107,7 @@
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
 // Macros for checking the joypad
-#define TEST_BUTTON(field, button) ({(field) & (button);})
+#define TEST_BUTTON(field, button) ((field) & (button))
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
 #define JOY_HELD_RAW(button) TEST_BUTTON(gMain.heldKeysRaw, button)
@@ -727,7 +727,7 @@ struct ContestWinner
     u8 contestRank;
 };
 
-struct DayCareMail
+struct DaycareMail
 {
     struct MailStruct message;
     u8 OT_name[PLAYER_NAME_LENGTH + 1];
@@ -739,7 +739,7 @@ struct DayCareMail
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct DayCareMail mail;
+    struct DaycareMail mail;
     u32 steps;
 };
 
@@ -750,9 +750,9 @@ struct DayCare
     u8 stepCounter;
 };
 
-struct RecordMixingDayCareMail
+struct RecordMixingDaycareMail
 {
-    struct DayCareMail mail[DAYCARE_MON_COUNT];
+    struct DaycareMail mail[DAYCARE_MON_COUNT];
     u32 numDaycareMons;
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
@@ -1053,16 +1053,6 @@ struct MapPosition
     s16 x;
     s16 y;
     s8 height;
-};
-
-struct TradeRoomPlayer
-{
-    u8 playerId;
-    u8 isLocalPlayer;
-    u8 c;
-    u8 facing;
-    struct MapPosition pos;
-    u16 field_C;
 };
 
 #endif // GUARD_GLOBAL_H

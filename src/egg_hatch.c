@@ -54,7 +54,7 @@ struct EggHatchData
     u8 textColor[3];
 };
 
-extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
+extern const u32 gTradePlatform_Tilemap[];
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NicknameHatchPrompt[];
 
@@ -546,7 +546,7 @@ static void CB2_EggHatch_0(void)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
         LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_08331F60, 0x1000, 0);
+        CopyToBgTilemapBuffer(1, gTradePlatform_Tilemap, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
         gMain.state++;
         break;
@@ -584,6 +584,9 @@ static void Task_EggHatchPlayBGM(u8 taskID)
         PlayBGM(MUS_EVOLUTION);
         DestroyTask(taskID);
         // UB: task is destroyed, yet the value is incremented
+        #ifdef UBFIX
+        return;
+        #endif
     }
     gTasks[taskID].data[0]++;
 }
@@ -811,7 +814,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
     if (sprite->data[0] == 0)
     {
         gSprites[sEggHatchData->pokeSpriteID].invisible = FALSE;
-        StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
+        StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], BATTLER_AFFINE_EMERGE);
     }
     if (sprite->data[0] == 8)
         BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_WHITEALPHA);

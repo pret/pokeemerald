@@ -55,7 +55,7 @@ static const struct SpritePalette sEvoSparkleSpritePals[] =
 
 static const struct OamData sOamData_EvoSparkle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
