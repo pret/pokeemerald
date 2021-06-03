@@ -1426,8 +1426,8 @@ static const u8 sGRAVITYDescription[] = _(
     "negating levitation.");
 
 static const u8 sMIRACLE_EYEDescription[] = _(
-    "Makes Dark-type and evasive\n"
-    "foes easier to hit.");
+    "Negate evasiveness and\n"
+    "Dark-type's immunities.");
 
 static const u8 sWAKE_UP_SLAPDescription[] = _(
     "Powerful against sleeping\n"
