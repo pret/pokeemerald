@@ -71,7 +71,7 @@
 //
 #define CHAR_i_ACUTE           0x6F
 //
-#define CHAR_UNK_SPACER        0x77
+#define CHAR_GENDERLESS        0x77 // Empty space for lack of gender icon
 //
 #define CHAR_UP_ARROW          0x79
 #define CHAR_DOWN_ARROW        0x7A
@@ -233,8 +233,8 @@
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
-#define TEXT_COLOR_DARK_GREY    0x2
-#define TEXT_COLOR_LIGHT_GREY   0x3
+#define TEXT_COLOR_DARK_GRAY    0x2
+#define TEXT_COLOR_LIGHT_GRAY   0x3
 #define TEXT_COLOR_RED          0x4
 #define TEXT_COLOR_LIGHT_RED    0x5
 #define TEXT_COLOR_GREEN        0x6

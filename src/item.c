@@ -14,7 +14,6 @@
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
-#include "constants/tv.h"
 
 extern u16 gUnknown_0203CF30[];
 
@@ -820,7 +819,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
-    i = gPyramidBagCursorData.cursorPosition + gPyramidBagCursorData.scrollPosition;
+    i = gPyramidBagMenuState.cursorPosition + gPyramidBagMenuState.scrollPosition;
     if (items[i] == itemId && quantities[i] >= count)
     {
         quantities[i] -= count;
@@ -953,4 +952,27 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
 u8 ItemId_GetSecondaryId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].secondaryId;
+}
+
+bool32 IsPinchBerryItemEffect(u16 holdEffect)
+{
+    switch (holdEffect)
+    {
+    case HOLD_EFFECT_ATTACK_UP:
+    case HOLD_EFFECT_DEFENSE_UP:
+    case HOLD_EFFECT_SPEED_UP:
+    case HOLD_EFFECT_SP_ATTACK_UP:
+    case HOLD_EFFECT_SP_DEFENSE_UP:
+    case HOLD_EFFECT_CRITICAL_UP:
+    case HOLD_EFFECT_RANDOM_STAT_UP:
+    #ifdef HOLD_EFFECT_CUSTAP_BERRY
+    case HOLD_EFFECT_CUSTAP_BERRY:
+    #endif
+    #ifdef HOLD_EFFECT_MICLE_BERRY
+    case HOLD_EFFECT_MICLE_BERRY:
+    #endif
+        return TRUE;
+    }
+
+    return FALSE;
 }

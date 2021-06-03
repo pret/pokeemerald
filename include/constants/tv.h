@@ -6,12 +6,22 @@
 #define POKENEWS_GAME_CORNER  2
 #define POKENEWS_LILYCOVE     3
 #define POKENEWS_BLENDMASTER  4
+#define NUM_POKENEWS_TYPES    4 // Excludes NONE
+
+// TV shows are categorized as being in one of 3 groups
+// - TVGROUP_NORMAL, TV shows that can appear without Record Mixing
+// - TVGROUP_RECORD_MIX, TV shows that can only appear via Record Mixing
+// - TVGROUP_OUTBREAK, just contains TVSHOW_MASS_OUTBREAK
+// Each group was allotted 20 spaces arbitrarily, though none use all 20
 
 #define TVSHOW_OFF_AIR                              0
+
+// TVGROUP_NORMAL
+#define TVGROUP_NORMAL_START                        1
 #define TVSHOW_FAN_CLUB_LETTER                      1
 #define TVSHOW_RECENT_HAPPENINGS                    2
 #define TVSHOW_PKMN_FAN_CLUB_OPINIONS               3
-#define TVSHOW_UNKN_SHOWTYPE_04                     4
+#define TVSHOW_DUMMY                                4
 #define TVSHOW_NAME_RATER_SHOW                      5
 #define TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE        6
 #define TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE   7
@@ -19,8 +29,12 @@
 #define TVSHOW_3_CHEERS_FOR_POKEBLOCKS              9
 #define TVSHOW_BATTLE_UPDATE                        10
 #define TVSHOW_FAN_CLUB_SPECIAL                     11
-#define TVSHOW_CONTEST_LIVE_UPDATES_2               12
-//                                                  //
+#define TVSHOW_LILYCOVE_CONTEST_LADY                12
+//
+#define TVGROUP_NORMAL_END                          20
+
+// TVGROUP_RECORD_MIX
+#define TVGROUP_RECORD_MIX_START                    21
 #define TVSHOW_POKEMON_TODAY_CAUGHT                 21 
 #define TVSHOW_SMART_SHOPPER                        22
 #define TVSHOW_POKEMON_TODAY_FAILED                 23
@@ -40,8 +54,22 @@
 #define TVSHOW_NUMBER_ONE                           37
 #define TVSHOW_SECRET_BASE_SECRETS                  38
 #define TVSHOW_SAFARI_FAN_CLUB                      39
-//                                                  //
-#define TVSHOW_MASS_OUTBREAK                        41 
+#define TVGROUP_RECORD_MIX_END                      40
+
+// TVGROUP_OUTBREAK
+#define TVGROUP_OUTBREAK_START                      41
+#define TVSHOW_MASS_OUTBREAK                        41
+//
+#define TVGROUP_OUTBREAK_END                        60
+
+// The first 5 elements of gSaveBlock1Ptr->tvShows are reserved
+// for TV shows from TVGROUP_NORMAL. The remainder are for TV
+// shows from TVGROUP_RECORD_MIX.
+#define NUM_NORMAL_TVSHOW_SLOTS 5
+
+#define PLAYERS_HOUSE_TV_NONE  0
+#define PLAYERS_HOUSE_TV_LATI  1
+#define PLAYERS_HOUSE_TV_MOVIE 2
 
 // Number of ribbons to put Spot the Cuties on air
 #define NUM_CUTIES_RIBBONS  4
@@ -214,5 +242,13 @@
 #define TRENDWATCHER_STATE_BIGGER_MALE     4
 #define TRENDWATCHER_STATE_BIGGER_FEMALE   5
 #define TRENDWATCHER_STATE_OUTRO           6
+
+// TV Show states for the Contest Lady's Live Updates show
+#define CONTESTLADYLIVE_STATE_INTRO      0
+#define CONTESTLADYLIVE_STATE_WON        1
+#define CONTESTLADYLIVE_STATE_LOST       2
+#define CONTESTLADYLIVE_STATE_LOST_BADLY 3
+
+#define SMARTSHOPPER_NUM_ITEMS 3
 
 #endif //GUARD_CONSTANTS_TV_H
