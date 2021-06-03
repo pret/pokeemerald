@@ -33,7 +33,8 @@
 #define WIN_TEXT 0
 
 #define TAG_BALL_POKEBALL 500
-#define TAG_FLIPPER  501
+#define TAG_FLIPPER       501
+#define TAG_MEOWTH        502
 
 enum
 {
@@ -53,6 +54,29 @@ struct Ball
     s16 yVelocity;
     s8 spin;
     u8 rotation;
+};
+
+enum
+{
+    MEOWTH_STATE_WALK,
+    MEOWTH_STATE_HIT,
+    MEOWTH_STATE_FINISH,
+};
+
+enum
+{
+    MEOWTH_FACING_RIGHT,
+    MEOWTH_FACING_LEFT,
+};
+
+struct Meowth
+{
+    u8 spriteId;
+    u16 xPos;
+    u16 yPos;
+    int state;
+    int facing;
+    int verticalVelocity;
 };
 
 #define FLIPPER_LEFT  0
@@ -80,6 +104,7 @@ struct PinballGame
     u8 stageTileHeight;
     u16 cameraScrollX;
     u16 cameraScrollY;
+    struct Meowth meowth;
     MainCallback returnMainCallback;
 };
 
@@ -87,6 +112,7 @@ static void FadeToPinballScreen(u8 taskId);
 static void InitPinballScreen(void);
 static void InitBallSprite(void);
 static void InitFlipperSprites(void);
+static void InitMeowth(void);
 static void PinballVBlankCallback(void);
 static void PinballMainCallback(void);
 static void PinballMain(u8 taskId);
@@ -108,6 +134,8 @@ static void StartExitPinballGame(void);
 static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
 static void UpdateFlipperSprite(struct Sprite *sprite);
+static void UpdateMeowth(struct Meowth *meowth);
+static void UpdateMeowthSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -166,9 +194,17 @@ static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_poke
 static const u32 sFlipperGfx[] = INCBIN_U32("graphics/pinball/flipper.4bpp.lz");
 static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal");
 
-
 static const u8 sFlipperCollisionRadii[] = INCBIN_U8("data/pinball/flipper_radii.bin");
 static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flipper_normal_angles.bin");
+
+static const u32 sMeowthAnimationGfx[] = INCBIN_U32("graphics/pinball/meowth_animation.4bpp.lz");
+static const u16 sMeowthAnimationPalette[] = INCBIN_U16("graphics/pinball/meowth_animation.gbapal");
+
+static const struct CompressedSpriteSheet sMeowthAnimationSpriteSheet = {
+    .data = sMeowthAnimationGfx,
+    .size = 0x400,
+    .tag = TAG_MEOWTH,
+};
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -182,15 +218,9 @@ static const struct CompressedSpriteSheet sFlipperSpriteSheet = {
     .tag = TAG_FLIPPER,
 };
 
-static const struct SpritePalette sPinballSpritePalettes[] = {
-    {sBallPokeballPalette, TAG_BALL_POKEBALL},
-    {0},
-};
-
-static const struct SpritePalette sFlipperSpritePalettes[] = {
-    {sFlipperPalette, TAG_FLIPPER},
-    {0},
-};
+static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
+static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
+static const struct SpritePalette sMeowthAnimationSpritePalette = { sMeowthAnimationPalette, TAG_MEOWTH };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -292,6 +322,69 @@ static const struct SpriteTemplate sFlipperSpriteTemplate = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateFlipperSprite,
+};
+
+static const struct OamData sMeowthOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sMeowthAnimCmd_WalkRight[] = {
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(16, 15),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sMeowthAnimCmd_WalkLeft[] = {
+    ANIMCMD_FRAME(0, 15, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 15, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sMeowthAnimCmd_HitRight[] = {
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sMeowthAnimCmd_HitLeft[] = {
+    ANIMCMD_FRAME(32, 0, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sMeowthAnimCmd_Finish[] =
+{
+    ANIMCMD_FRAME(48, 30),
+    ANIMCMD_FRAME(64, 30),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sMeowthAnimCmds[] = {
+    sMeowthAnimCmd_WalkRight,
+    sMeowthAnimCmd_WalkLeft,
+    sMeowthAnimCmd_HitRight,
+    sMeowthAnimCmd_HitLeft,
+    sMeowthAnimCmd_Finish,
+};
+
+static const struct SpriteTemplate sMeowthSpriteTemplate = {
+    .tileTag = TAG_MEOWTH,
+    .paletteTag = TAG_MEOWTH,
+    .oam = &sMeowthOamData,
+    .anims = sMeowthAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateMeowthSprite,
 };
 
 static const s8 sCollisionTestPointOffsets[][2] = {
@@ -449,11 +542,14 @@ static void InitPinballScreen(void)
         break;
     case 4:
         LoadCompressedSpriteSheet(&sBallPokeballSpriteSheet);
-        LoadSpritePalettes(sPinballSpritePalettes);
+        LoadSpritePalette(&sPinballSpritePalette);
         LoadCompressedSpriteSheet(&sFlipperSpriteSheet);
-        LoadSpritePalettes(sFlipperSpritePalettes);
+        LoadSpritePalette(&sFlipperSpritePalette);
+        LoadCompressedSpriteSheet(&sMeowthAnimationSpriteSheet);
+        LoadSpritePalette(&sMeowthAnimationSpritePalette);
         InitBallSprite();
         InitFlipperSprites();
+        InitMeowth();
         gMain.state++;
     case 5:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
@@ -478,6 +574,19 @@ static void InitFlipperSprites(void)
     gSprites[sPinballGame->rightFlipper.spriteId].data[0] = FLIPPER_RIGHT;
     StartSpriteAnim(&gSprites[sPinballGame->leftFlipper.spriteId], 0);
     StartSpriteAnim(&gSprites[sPinballGame->rightFlipper.spriteId], 3);
+}
+
+static void InitMeowth(void)
+{
+    struct Meowth *meowth = &sPinballGame->meowth;
+
+    meowth->xPos = 40;
+    meowth->yPos = 40;
+    meowth->state = MEOWTH_STATE_WALK;
+    meowth->facing = MEOWTH_FACING_RIGHT;
+    meowth->verticalVelocity = 0;
+    meowth->spriteId = CreateSprite(&sMeowthSpriteTemplate, 0, 0, 4);
+    StartSpriteAnim(&gSprites[meowth->spriteId], 0);
 }
 
 static void PinballVBlankCallback(void)
@@ -520,6 +629,7 @@ static void PinballMain(u8 taskId)
         }
         break;
     case PINBALL_STATE_RUNNING:
+        UpdateMeowth(&sPinballGame->meowth);
         HandleBallPhysics();
         UpdateCamera();
         break;
@@ -985,4 +1095,63 @@ static void UpdateFlipperSprite(struct Sprite *sprite)
 
     anim = (flipper->type * 3) + ((flipper->state >> 8) / 6);
     StartSpriteAnim(sprite, anim);
+}
+
+#define MEOWTH_HORIZONTAL_SPEED 1
+
+static void UpdateMeowth(struct Meowth *meowth)
+{
+    switch (meowth->state)
+    {
+    case MEOWTH_STATE_WALK:
+        if (meowth->facing == MEOWTH_FACING_RIGHT)
+            meowth->xPos += MEOWTH_HORIZONTAL_SPEED;
+        else
+            meowth->xPos -= MEOWTH_HORIZONTAL_SPEED;
+
+        if (meowth->xPos > 100)
+            meowth->facing = MEOWTH_FACING_LEFT;
+        else if (meowth->xPos < 30)
+            meowth->facing = MEOWTH_FACING_RIGHT;
+
+        break;
+    case MEOWTH_STATE_HIT:
+        break;
+    case MEOWTH_STATE_FINISH:
+        break;
+    }
+}
+
+static void UpdateMeowthSprite(struct Sprite *sprite)
+{
+    int animNum;
+    struct Meowth *meowth = &sPinballGame->meowth;
+    int prevState = sprite->data[0];
+    int prevFacing = sprite->data[1];
+    int curState = meowth->state;
+    int curFacing = meowth->facing;
+    sprite->pos1.x = meowth->xPos;
+    sprite->pos1.y = meowth->yPos;
+
+    // Check if Meowth's state changed, and start the appropriate
+    // sprite animation.
+    if (prevState != curState || prevFacing != curFacing)
+    {
+        sprite->data[0] = curState;
+        sprite->data[1] = curFacing;
+        switch (curState)
+        {
+        case MEOWTH_STATE_WALK:
+            animNum = curFacing == MEOWTH_FACING_RIGHT ? 0 : 1;
+            StartSpriteAnim(sprite, animNum);
+            break;
+        case MEOWTH_STATE_HIT:
+            animNum = curFacing == MEOWTH_FACING_RIGHT ? 2 : 3;
+            StartSpriteAnim(sprite, animNum);
+            break;
+        case MEOWTH_STATE_FINISH:
+            StartSpriteAnim(sprite, 4);
+            break;
+        }
+    }
 }
