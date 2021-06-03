@@ -1,4 +1,3 @@
-$(info start $(shell date +%s%3N))
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
@@ -173,7 +172,6 @@ else
   endif
 endif
 
-$(info scanfiles $(shell date +%s%3N))
 ifeq ($(SCAN_DEPS),1)
 C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
@@ -206,7 +204,6 @@ OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 SUBDIRS  := $(sort $(dir $(OBJS)))
 $(shell mkdir -p $(SUBDIRS))
 endif
-$(info scanfiles done $(shell date +%s%3N))
 
 AUTO_GEN_TARGETS :=
 
@@ -306,7 +303,6 @@ endif
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 
 ifeq ($(SCAN_DEPS),1)
-$(info Scanning deps start $(shell date +%s%3N))
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 ifeq (,$(KEEP_TEMPS))
@@ -389,7 +385,6 @@ $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
 else
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call SRC_ASM_DATA_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
 endif
-$(info Scanning deps end $(shell date +%s%3N))
 endif
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
