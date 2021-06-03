@@ -7412,6 +7412,18 @@ BattleScript_AbilityCuredStatus::
 	updatestatusicon BS_SCRIPTING
 	return
 
+BattleScript_BattlerShookOffTaunt::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSHOOKOFFTHETAUNT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BattlerGotOverItsInfatuation::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNGOTOVERITSINFATUATION
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_IgnoresWhileAsleep::
 	printstring STRINGID_PKMNIGNORESASLEEP
 	waitmessage B_WAIT_TIME_LONG
