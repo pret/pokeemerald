@@ -6981,7 +6981,7 @@ const struct Item gItems[] =
 
     [ITEM_HEALTH_FEATHER] =
     {
-        .name = _("HealthFeathr"),
+        .name = _("HealthFeather"),
         .itemId = ITEM_HEALTH_FEATHER,
         .price = 300,
         .description = sHealthFeatherDesc,
@@ -6992,7 +6992,7 @@ const struct Item gItems[] =
 
     [ITEM_MUSCLE_FEATHER] =
     {
-        .name = _("MuscleFeathr"),
+        .name = _("MuscleFeather"),
         .itemId = ITEM_MUSCLE_FEATHER,
         .price = 300,
         .description = sMuscleFeatherDesc,
@@ -7003,7 +7003,7 @@ const struct Item gItems[] =
 
     [ITEM_RESIST_FEATHER] =
     {
-        .name = _("ResistFeathr"),
+        .name = _("ResistFeather"),
         .itemId = ITEM_RESIST_FEATHER,
         .price = 300,
         .description = sResistFeatherDesc,
@@ -7014,7 +7014,7 @@ const struct Item gItems[] =
 
     [ITEM_GENIUS_FEATHER] =
     {
-        .name = _("GeniusFeathr"),
+        .name = _("GeniusFeather"),
         .itemId = ITEM_GENIUS_FEATHER,
         .price = 300,
         .description = sGeniusFeatherDesc,
@@ -7025,7 +7025,7 @@ const struct Item gItems[] =
 
     [ITEM_CLEVER_FEATHER] =
     {
-        .name = _("CleverFeathr"),
+        .name = _("CleverFeather"),
         .itemId = ITEM_CLEVER_FEATHER,
         .price = 300,
         .description = sCleverFeatherDesc,
@@ -7047,7 +7047,7 @@ const struct Item gItems[] =
 
     [ITEM_PRETTY_FEATHER] =
     {
-        .name = _("PrettyFeathr"),
+        .name = _("PrettyFeather"),
         .itemId = ITEM_PRETTY_FEATHER,
         .price = 1000,
         .description = sPrettyFeatherDesc,
