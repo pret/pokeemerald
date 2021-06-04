@@ -9739,7 +9739,7 @@ static void Cmd_tryinfatuating(void)
 
     if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
-        gBattlescriptCurrInstr = BattleScript_ObliviousPreventsAttraction;
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
@@ -11152,7 +11152,13 @@ static void Cmd_jumpifnodamage(void)
 
 static void Cmd_settaunt(void)
 {
-    if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
+    if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_OBLIVIOUS;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
+    }
+    else if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
     {
         u8 turns = 4;
         if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))

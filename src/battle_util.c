@@ -5100,10 +5100,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 break;
             case ABILITY_OBLIVIOUS:
                 if (gBattleMons[battler].status2 & STATUS2_INFATUATION)
-                {
-                    StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
                     effect = 3;
-                }
+                else if (gDisableStructs[battler].tauntTimer != 0)
+                    effect = 4;
                 break;
             }
             if (effect)
@@ -5112,17 +5111,26 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 {
                 case 1: // status cleared
                     gBattleMons[battler].status1 = 0;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                     break;
                 case 2: // get rid of confusion
                     gBattleMons[battler].status2 &= ~(STATUS2_CONFUSION);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                     break;
                 case 3: // get rid of infatuation
                     gBattleMons[battler].status2 &= ~(STATUS2_INFATUATION);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_BattlerGotOverItsInfatuation;
+                    break;
+                case 4: // get rid of taunt
+                    gDisableStructs[battler].tauntTimer = 0;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_BattlerShookOffTaunt;
                     break;
                 }
 
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                 gBattleScripting.battler = gActiveBattler = gBattlerAbility = battler;
                 BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                 MarkBattlerForControllerExec(gActiveBattler);

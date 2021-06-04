@@ -4197,6 +4197,15 @@ BattleScript_NotAffected::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_NotAffectedAbilityPopUp::
+	copybyte gBattlerAbility, gBattlerTarget
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectUproar::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -7409,6 +7418,18 @@ BattleScript_AbilityCuredStatus::
 	printstring STRINGID_PKMNSXCUREDITSYPROBLEM
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_SCRIPTING
+	return
+
+BattleScript_BattlerShookOffTaunt::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSHOOKOFFTHETAUNT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BattlerGotOverItsInfatuation::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNGOTOVERITSINFATUATION
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_IgnoresWhileAsleep::
