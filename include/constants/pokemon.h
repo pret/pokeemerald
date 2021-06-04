@@ -312,8 +312,8 @@
 #define FLAG_POWDER                 (1 << 19)
 #define FLAG_TARGET_ABILITY_IGNORED (1 << 20)
 #define FLAG_DANCE                  (1 << 21)
-#define FLAG_DMG_2X_IN_AIR          (1 << 22) // X2 dmg on air, always hits target on air
-#define FLAG_DMG_IN_AIR             (1 << 23) // dmg is normal, always hits target on air
+#define FLAG_DMG_2X_IN_AIR          (1 << 22) // If target is in the air, can hit and deal double damage.
+#define FLAG_DMG_IN_AIR             (1 << 23) // If target is in the air, can hit.
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
