@@ -24,6 +24,7 @@
 #include <string>
 #include <memory>
 #include <cstring>
+#include <cerrno>
 #include "preproc.h"
 #include "c_file.h"
 #include "char_util.h"
