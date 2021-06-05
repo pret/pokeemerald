@@ -1343,7 +1343,7 @@ bool32 IsSemiInvulnerable(u8 battlerDef, u16 move)
 {
     if (gStatuses3[battlerDef] & STATUS3_PHANTOM_FORCE)
         return TRUE;
-    else if (!TestMoveFlags(move, FLAG_HIT_IN_AIR) && gStatuses3[battlerDef] & STATUS3_ON_AIR)
+    else if (!TestMoveFlags(move, FLAG_DMG_IN_AIR) && gStatuses3[battlerDef] & STATUS3_ON_AIR)
         return TRUE;
     else if (!TestMoveFlags(move, FLAG_DMG_UNDERWATER) && gStatuses3[battlerDef] & STATUS3_UNDERWATER)
         return TRUE;
