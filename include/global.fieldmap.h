@@ -213,8 +213,8 @@ struct ObjectEvent
     /*0x22*/ union __attribute__((packed)) {
         u8 playerCopyableMovement;
         struct __attribute__((packed)) {
-            u16 species:11; // 11 bits; 2048 species
-            u16 form:4;
+            u16 species:10; // 11 bits; 1024 species
+            u16 form:5; // Used for Deoxys, Unown, etc
             u16 shiny:1;
         } mon;
         u16 asU16;

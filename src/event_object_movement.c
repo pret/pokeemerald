@@ -1645,10 +1645,19 @@ struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or
   return NULL;
 }
 
-// Return graphicsInfo for a pokemon species
+// Return graphicsInfo for a pokemon species & form
 static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form) {
-  const struct ObjectEventGraphicsInfo *graphicsInfo = &gPokemonObjectGraphics[species];
-  return graphicsInfo->tileTag == 0xFFFF ? graphicsInfo : &gPokemonObjectGraphics[SPECIES_PORYGON];
+  const struct ObjectEventGraphicsInfo *graphicsInfo;
+  switch (species) {
+    case SPECIES_UNOWN: // Letters >A are defined as species >= NUM_SPECIES, so are not contiguous with A
+      form %= NUM_UNOWN_FORMS;
+      graphicsInfo = &gPokemonObjectGraphics[form ? SPECIES_UNOWN_B + form - 1 : species];
+      break;
+    default:
+      graphicsInfo = &gPokemonObjectGraphics[species];
+      break;
+  }
+  return graphicsInfo->tileTag == 0xFFFF ? graphicsInfo : &gPokemonObjectGraphics[SPECIES_PORYGON]; // avoid OOB access
 }
 
 // Set graphics & sprite for a follower object event by species & shininess.
@@ -1684,6 +1693,7 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct Sprite *sprite;
   u16 species;
   bool8 shiny;
+  u8 form;
   // Avoid spawning large (64x64) follower pokemon inside buildings
   if (mon && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(GetMonData(mon, MON_DATA_SPECIES), 0)->width == 64)) {
     if (objEvent == NULL) { // Spawn follower
@@ -1701,14 +1711,17 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
     sprite = &gSprites[objEvent->spriteId];
     species = GetMonData(mon, MON_DATA_SPECIES);
     shiny = IsMonShiny(mon);
-    if (species != objEvent->extra.mon.species || shiny != objEvent->extra.mon.shiny) { // Move to player and set invisible
+    form = species == SPECIES_UNOWN ? GET_UNOWN_LETTER(mon->box.personality) : 0;
+    // Follower appearance changed; move to player and set invisible
+    if (species != objEvent->extra.mon.species || shiny != objEvent->extra.mon.shiny || form != objEvent->extra.mon.form) {
       MoveObjectEventToMapCoords(objEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
       objEvent->invisible = TRUE;
     }
-    FollowerSetGraphics(objEvent, species, 0, shiny);
+    FollowerSetGraphics(objEvent, species, form, shiny);
     sprite->data[6] = 0; // set animation data
     objEvent->extra.mon.species = species;
     objEvent->extra.mon.shiny = shiny;
+    objEvent->extra.mon.form = form;
   } else {
     RemoveFollowingPokemon();
   }
