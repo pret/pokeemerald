@@ -40,7 +40,7 @@ static const u8 sPoisonPointDescription[] = _("Poisons foe on contact.");
 static const u8 sInnerFocusDescription[] = _("Prevents flinching.");
 static const u8 sMagmaArmorDescription[] = _("Prevents freezing.");
 static const u8 sWaterVeilDescription[] = _("Prevents burns.");
-static const u8 sMagnetPullDescription[] = _("Traps Steel-type POKéMON.");
+static const u8 sMagnetPullDescription[] = _("Traps Steel-type Pokémon.");
 static const u8 sSoundproofDescription[] = _("Avoids sound-based moves.");
 static const u8 sRainDishDescription[] = _("Slight HP recovery in rain.");
 static const u8 sSandStreamDescription[] = _("Summons a sandstorm.");
@@ -255,7 +255,7 @@ static const u8 sGrimNeighDescription[] = _("KOs boost Sp. Atk stat.");
 static const u8 sAsOneIceRiderDescription[] = _("Unnerve and Chilling Neigh.");
 static const u8 sAsOneShadowRiderDescription[] = _("Unnerve and Grim Neigh.");
 
-const u8 gAbilityNames[ABILITIES_COUNT_GEN8][ABILITY_NAME_LENGTH + 1] =
+const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
     [ABILITY_NONE] = _("-------"),
     [ABILITY_STENCH] = _("Stench"),
@@ -527,7 +527,7 @@ const u8 gAbilityNames[ABILITIES_COUNT_GEN8][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_AS_ONE_SHADOW_RIDER] = _("As One"),
 };
 
-const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT_GEN8] =
+const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
     [ABILITY_NONE] = sNoneDescription,
     [ABILITY_STENCH] = sStenchDescription,
