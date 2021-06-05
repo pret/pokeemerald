@@ -77,6 +77,7 @@ struct Meowth
     int state;
     int facing;
     int verticalVelocity;
+    int hitCounter;
 };
 
 #define FLIPPER_LEFT  0
@@ -135,6 +136,7 @@ static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
 static void UpdateFlipperSprite(struct Sprite *sprite);
 static void UpdateMeowth(struct Meowth *meowth);
+static bool32 HandleMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal);
 static void UpdateMeowthSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
@@ -199,10 +201,11 @@ static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flippe
 
 static const u32 sMeowthAnimationGfx[] = INCBIN_U32("graphics/pinball/meowth_animation.4bpp.lz");
 static const u16 sMeowthAnimationPalette[] = INCBIN_U16("graphics/pinball/meowth_animation.gbapal");
+static const u8 sMeowthCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_normal_angles.bin");
 
 static const struct CompressedSpriteSheet sMeowthAnimationSpriteSheet = {
     .data = sMeowthAnimationGfx,
-    .size = 0x400,
+    .size = 0xA00,
     .tag = TAG_MEOWTH,
 };
 
@@ -646,7 +649,9 @@ static void HandleBallPhysics(void)
 {
     bool32 isFlipperColliding;
     bool32 isStaticColliding;
+    bool32 isObjectColliding = FALSE;
     u8 flipperCollisionNormal;
+    u8 objectCollisionNormal;
     u8 staticCollisionNormal;
     u8 collisionNormal;
     u16 flipperYForce = 0;
@@ -658,13 +663,18 @@ static void HandleBallPhysics(void)
 
     LimitVelocity(ball);
     isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal, &collisionAmplification);
+    if (!isFlipperColliding)
+        isObjectColliding = HandleMeowthCollision(ball, &sPinballGame->meowth, &objectCollisionNormal);
+
     isStaticColliding = HandleStaticCollision(ball, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
     if (isFlipperColliding)
         collisionNormal = flipperCollisionNormal;
+    else if (isObjectColliding)
+        collisionNormal = objectCollisionNormal;
     else
         collisionNormal = staticCollisionNormal;
 
-    if (isFlipperColliding || isStaticColliding)
+    if (isFlipperColliding || isObjectColliding || isStaticColliding)
     {
         RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
         ApplyCollisionForces(ball, flipperYForce, collisionAmplification);
@@ -1122,6 +1132,34 @@ static void UpdateMeowth(struct Meowth *meowth)
     }
 }
 
+static bool32 HandleMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal)
+{
+    int x, y;
+    u8 collisionNormal;
+    int ballXPos = (ball->xPos >> 8);
+    int ballYPos = (ball->yPos >> 8);
+    if (ballXPos < meowth->xPos - 24 || ballXPos >= meowth->xPos + 24
+     || ballYPos < meowth->yPos - 20 || ballYPos >= meowth->yPos + 20)
+        return FALSE;
+
+    x = ballXPos - meowth->xPos + 24;
+    y = ballYPos - meowth->yPos + 20;
+    collisionNormal = sMeowthCollisionNormalAngles[y * 48 + x];
+    if (collisionNormal == 0xFF)
+        return FALSE;
+
+    // Multiply normal by two because the original data is stored halved.
+    *outCollisionNormal = collisionNormal * 2;
+
+    if (meowth->state == MEOWTH_STATE_WALK)
+    {
+        meowth->state = MEOWTH_STATE_HIT;
+        meowth->hitCounter = 30;
+    }
+
+    return TRUE;
+}
+
 static void UpdateMeowthSprite(struct Sprite *sprite)
 {
     int animNum;
@@ -1153,5 +1191,11 @@ static void UpdateMeowthSprite(struct Sprite *sprite)
             StartSpriteAnim(sprite, 4);
             break;
         }
+    }
+
+    if (curState == MEOWTH_STATE_HIT)
+    {
+        if (--meowth->hitCounter == 0)
+            meowth->state = MEOWTH_STATE_WALK;
     }
 }
