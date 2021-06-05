@@ -42,15 +42,17 @@
 #define MAX_TRAINER_ITEMS 4
 
 // array entries for battle communication
-#define MULTIUSE_STATE          0x0
-#define CURSOR_POSITION         0x1
-#define TASK_ID                 0x1 // task Id and cursor position share the same field
-#define SPRITES_INIT_STATE1     0x1 // shares the Id as well
-#define SPRITES_INIT_STATE2     0x2
-#define ACTIONS_CONFIRMED_COUNT 0x4
-#define MULTISTRING_CHOOSER     0x5
-#define MSG_DISPLAY             0x7
-#define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
+#define MULTIUSE_STATE          0
+#define CURSOR_POSITION         1
+#define TASK_ID                 1 // task Id and cursor position share the same field
+#define SPRITES_INIT_STATE1     1 // shares the Id as well
+#define SPRITES_INIT_STATE2     2
+#define MOVE_EFFECT_BYTE        3
+#define ACTIONS_CONFIRMED_COUNT 4
+#define MULTISTRING_CHOOSER     5
+#define MISS_TYPE               6
+#define MSG_DISPLAY             7
+#define BATTLE_COMMUNICATION_ENTRIES_COUNT  8
 
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
@@ -237,8 +239,35 @@ struct AI_SavedBattleMon
     u16 species;
 };
 
+struct AiLogicData
+{
+    //attacker data
+    u16 atkAbility;
+    u16 atkItem;
+    u16 atkHoldEffect;
+    u8 atkParam;
+    u16 atkSpecies;
+    // target data
+    u16 defAbility;
+    u16 defItem;
+    u16 defHoldEffect;
+    u8 defParam;
+    u16 defSpecies;
+    // attacker partner data
+    u8 battlerAtkPartner;
+    u16 partnerMove;
+    u16 atkPartnerAbility;
+    u16 atkPartnerHoldEffect;
+    bool32 targetSameSide;
+    // target partner data
+    u8 battlerDefPartner;
+    u16 defPartnerAbility;
+    u16 defPartnerHoldEffect;
+};
+
 struct AI_ThinkingStruct
 {
+    struct AiLogicData data;
     u8 aiState;
     u8 movesetIndex;
     u16 moveConsidered;
@@ -291,10 +320,13 @@ struct BattleResources
     struct StatsArray* beforeLvlUp;
     struct AI_ThinkingStruct *ai;
     struct BattleHistory *battleHistory;
-    struct BattleScriptsStack *AI_ScriptsStack;
     u8 bufferA[MAX_BATTLERS_COUNT][0x200];
     u8 bufferB[MAX_BATTLERS_COUNT][0x200];
 };
+
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
+#define AI_DATA ((struct AiLogicData *)(&gBattleResources->ai->data))
+#define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
 
 struct BattleResults
 {

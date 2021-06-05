@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
@@ -1396,12 +1396,12 @@ void BtlController_EmitHitAnimation(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitCmd42(u8 bufferId)
+void BtlController_EmitCantSwitch(u8 bufferId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_42;
-    sBattleBuffersTransferData[1] = CONTROLLER_42;
-    sBattleBuffersTransferData[2] = CONTROLLER_42;
-    sBattleBuffersTransferData[3] = CONTROLLER_42;
+    sBattleBuffersTransferData[0] = CONTROLLER_CANTSWITCH;
+    sBattleBuffersTransferData[1] = CONTROLLER_CANTSWITCH;
+    sBattleBuffersTransferData[2] = CONTROLLER_CANTSWITCH;
+    sBattleBuffersTransferData[3] = CONTROLLER_CANTSWITCH;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 

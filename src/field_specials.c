@@ -57,7 +57,6 @@
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/mevent.h"
-#include "constants/tv.h"
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
@@ -1301,12 +1300,12 @@ void SpawnCameraObject(void)
 {
     u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1, MOVEMENT_TYPE_FACE_DOWN, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
     gObjectEvents[obj].invisible = TRUE;
-    CameraObjectSetFollowedObjectId(gObjectEvents[obj].spriteId);
+    CameraObjectSetFollowedSpriteId(gObjectEvents[obj].spriteId);
 }
 
 void RemoveCameraObject(void)
 {
-    CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
+    CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
     RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
@@ -1622,7 +1621,7 @@ void BufferLottoTicketNumber(void)
 {
     if (gSpecialVar_Result >= 10000)
     {
-        TV_PrintIntToStringVar(0, gSpecialVar_Result);
+        ConvertIntToDecimalString(0, gSpecialVar_Result);
     }
     else if (gSpecialVar_Result >= 1000)
     {

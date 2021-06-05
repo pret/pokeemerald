@@ -314,6 +314,8 @@
 #define FLAG_DANCE                  (1 << 21)
 #define FLAG_DMG_2X_IN_AIR          (1 << 22) // If target is in the air, can hit and deal double damage.
 #define FLAG_DMG_IN_AIR             (1 << 23) // If target is in the air, can hit.
+#define FLAG_DAMAGE_AIRBORNE        (1 << 24) // Makes a Ground type move do 1x damage to flying and levitating targets
+
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
@@ -373,5 +375,7 @@
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
 #define MON_PIC_SIZE (64 * 64 / 2)
+
+#define NUM_ABILITY_SLOTS 2
 
 #endif // GUARD_CONSTANTS_POKEMON_H

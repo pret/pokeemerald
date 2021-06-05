@@ -532,8 +532,8 @@ static void BattleIntroSlidePartner(u8 taskId)
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
             gBattle_BG0_Y = -48;
-            gBattle_BG1_X = 240;
-            gBattle_BG2_X = -240;
+            gBattle_BG1_X = DISPLAY_WIDTH;
+            gBattle_BG2_X = -DISPLAY_WIDTH;
         }
         break;
     case 2:

@@ -391,13 +391,13 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
 
     if (isTitle == TRUE)
     {
-        color[1] = TEXT_COLOR_LIGHT_GREY;
+        color[1] = TEXT_COLOR_LIGHT_GRAY;
         color[2] = TEXT_COLOR_RED;
     }
     else
     {
         color[1] = TEXT_COLOR_WHITE;
-        color[2] = TEXT_COLOR_DARK_GREY;
+        color[2] = TEXT_COLOR_DARK_GRAY;
     }
 
     x = GetStringCenterAlignXOffsetWithLetterSpacing(1, string, DISPLAY_WIDTH, 1);
