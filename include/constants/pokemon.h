@@ -316,7 +316,6 @@
 #define FLAG_DMG_IN_AIR             (1 << 23) // If target is in the air, can hit.
 #define FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING (1 << 24) // Makes a Ground type move do 1x damage to flying and levitating targets
 
-
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
 #define SPLIT_SPECIAL   0x1
