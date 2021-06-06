@@ -54,6 +54,7 @@
 #include "constants/rgb.h"
 #include "data.h"
 #include "constants/party_menu.h"
+#include "src/battle_util.c"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -4780,7 +4781,7 @@ static void Cmd_moveend(void)
         switch (gBattleScripting.moveendState)
         {
         case MOVEEND_PROTECT_LIKE_EFFECT:
-            if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) // needs to be IsMoveMakingContact, but this file does not reference include/battle_util.h or src/battle_util.c
+            if (IsMoveMakingContact(move, gBattlerAttacker))
             {
                 if (gProtectStructs[gBattlerTarget].spikyShielded && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                 {
