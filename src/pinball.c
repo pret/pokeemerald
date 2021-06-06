@@ -33,11 +33,12 @@
 
 #define WIN_TEXT 0
 
-#define TAG_BALL_POKEBALL           500
-#define TAG_FLIPPER                 501
-#define TAG_MEOWTH                  502
-#define TAG_MEOWTH_JEWEL            503
-#define TAG_MEOWTH_JEWEL_MUTLIPLIER 504
+#define TAG_BALL_POKEBALL              500
+#define TAG_FLIPPER                    501
+#define TAG_MEOWTH                     502
+#define TAG_MEOWTH_JEWEL               503
+#define TAG_MEOWTH_JEWEL_MUTLIPLIER    504
+#define TAG_TILES_MEOWTH_JEWEL_SPARKLE 505
 
 enum
 {
@@ -98,6 +99,7 @@ struct MeowthJewel
 struct Meowth
 {
     u8 spriteId;
+    u8 sparkleSpriteId;
     u16 xPos;
     u16 yPos;
     int state;
@@ -183,6 +185,7 @@ static void UpdateMeowthSprite(struct Sprite *sprite);
 static void UpdateMeowthJewelSprite(struct Sprite *sprite);
 static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite);
 static void ResetMeowthJewels(struct Meowth *meowth);
+static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -250,6 +253,7 @@ static const u16 sMeowthAnimationPalette[] = INCBIN_U16("graphics/pinball/meowth
 static const u32 sMeowthJewelGfx[] = INCBIN_U32("graphics/pinball/meowth_jewel_animation.4bpp.lz");
 static const u16 sMeowthJewelPalette[] = INCBIN_U16("graphics/pinball/meowth_jewel_animation.gbapal");
 static const u32 sMeowthJewelMultipliersGfx[] = INCBIN_U32("graphics/pinball/meowth_jewel_multipliers.4bpp.lz");
+static const u32 sMeowthJewelSparkleGfx[] = INCBIN_U32("graphics/pinball/meowth_sparkle.4bpp.lz");
 static const u16 sMeowthJewelMultipliersPalette[] = INCBIN_U16("graphics/pinball/meowth_jewel_multipliers.gbapal");
 static const u8 sMeowthCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_normal_angles.bin");
 static const u8 sMeowthJewelCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_jewel_normal_angles.bin");
@@ -270,6 +274,12 @@ static const struct CompressedSpriteSheet sMeowthJewelMultipliersSpriteSheet = {
     .data = sMeowthJewelMultipliersGfx,
     .size = 0x140,
     .tag = TAG_MEOWTH_JEWEL_MUTLIPLIER,
+};
+
+static const struct CompressedSpriteSheet sMeowthSparkleSpriteSheet = {
+    .data = sMeowthJewelSparkleGfx,
+    .size = 0x40,
+    .tag = TAG_TILES_MEOWTH_JEWEL_SPARKLE,
 };
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
@@ -570,6 +580,42 @@ static const struct SpriteTemplate sMeowthJewelMultiplierSpriteTemplate = {
     .callback = UpdateMeowthJewelMultiplierSprite,
 };
 
+static const struct OamData sMeowthJewelSparkleOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sMeowthJewelSparkleAnimCmd_0[] = {
+    ANIMCMD_FRAME(0, 11),
+    ANIMCMD_FRAME(1, 11),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sMeowthJewelSparkleAnimCmds[] = {
+    sMeowthJewelSparkleAnimCmd_0,
+};
+
+static const struct SpriteTemplate sMeowthJewelSparkleSpriteTemplate = {
+    .tileTag = TAG_TILES_MEOWTH_JEWEL_SPARKLE,
+    .paletteTag = TAG_MEOWTH_JEWEL_MUTLIPLIER,
+    .oam = &sMeowthJewelSparkleOamData,
+    .anims = sMeowthJewelSparkleAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateMeowthJewelSparkleSprite,
+};
+
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
     {  4,  1 },
@@ -733,6 +779,7 @@ static void InitPinballScreen(void)
         LoadCompressedSpriteSheet(&sMeowthJewelSpriteSheet);
         LoadSpritePalette(&sMeowthJewelSpritePalette);
         LoadCompressedSpriteSheet(&sMeowthJewelMultipliersSpriteSheet);
+        LoadCompressedSpriteSheet(&sMeowthSparkleSpriteSheet);
         LoadSpritePalette(&sMeowthJewelMultipliersSpritePalette);
         InitPinballGame();
         InitBallSprite();
@@ -790,7 +837,9 @@ static void InitMeowth(void)
     meowth->score = 0;
     meowth->jewelStreak = 0;
     meowth->spriteId = CreateSprite(&sMeowthSpriteTemplate, 0, 0, 5);
+    meowth->sparkleSpriteId = CreateSprite(&sMeowthJewelSparkleSpriteTemplate, 0, 0, 6);
     StartSpriteAnim(&gSprites[meowth->spriteId], 0);
+    StartSpriteAnim(&gSprites[meowth->sparkleSpriteId], 0);
 }
 
 static void PinballVBlankCallback(void)
@@ -956,12 +1005,23 @@ static void LoseBall(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
 }
 
+#define JEWEL_SPARKLE_DURATION 180
+
 static void LoseBallMeowth(struct Meowth *meowth)
 {
-    if (meowth->score > 3)
+    struct Sprite *sparkleSprite = &gSprites[sPinballGame->meowth.sparkleSpriteId];
+    if (meowth->score > 4)
+    {
         meowth->score -= 4;
+        sparkleSprite->data[0] = JEWEL_SPARKLE_DURATION;
+        sparkleSprite->data[1] = meowth->score;
+    }
     else
+    {
         meowth->score = 0;
+        sparkleSprite->data[0] = 0;
+        sparkleSprite->data[1] = 0;
+    }
 
     meowth->jewelStreak = 0;
     ResetMeowthJewels(meowth);
@@ -1466,6 +1526,8 @@ static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 
 static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal)
 {
     int i;
+    struct Sprite *sparkleSprite = &gSprites[meowth->sparkleSpriteId];
+
     for (i = 0; i < MAX_MEOWTH_JEWELS; i++)
     {
         struct MeowthJewel *jewel = &meowth->jewels[i];
@@ -1477,6 +1539,8 @@ static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowt
                     meowth->jewelStreak = 6;
 
                 meowth->score += meowth->jewelStreak;
+                sparkleSprite->data[0] = JEWEL_SPARKLE_DURATION;
+                sparkleSprite->data[1] = min(20, meowth->score);
                 DrawMeowthScoreJewels(meowth);
                 if (meowth->jewelStreak > 1)
                 {
@@ -1733,5 +1797,22 @@ static void ResetMeowthJewels(struct Meowth *meowth)
             DestroySprite(&gSprites[jewel->spriteId]);
             jewel->state = JEWEL_STATE_HIDDEN;
         }
+    }
+}
+
+static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite)
+{
+    // data[0] is visibility counter timer
+    // data[1] is the player's score, capped at 20.
+    if (sprite->data[0] == 0)
+    {
+        sprite->invisible = TRUE;
+    }
+    else
+    {
+        sprite->data[0]--;
+        sprite->pos1.x = (sprite->data[1] - 1) * 8 + 4;
+        sprite->pos1.y = 4;
+        sprite->invisible = FALSE;
     }
 }
