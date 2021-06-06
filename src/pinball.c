@@ -43,6 +43,8 @@ enum
 {
     PINBALL_STATE_INIT,
     PINBALL_STATE_RUNNING,
+    PINBALL_LOST_BALL_FADE_OUT,
+    PINBALL_LOST_BALL_FADE_IN,
     PINBALL_STATE_START_EXIT,
     PINBALL_STATE_EXIT,
     PINBALL_STATE_WAIT_ANIM,
@@ -133,26 +135,32 @@ struct PinballGame
     u16 cameraScrollX;
     u16 cameraScrollY;
     struct Meowth meowth;
+    bool8 ballIsEntering;
     MainCallback returnMainCallback;
 };
 
 static void FadeToPinballScreen(u8 taskId);
 static void InitPinballScreen(void);
+static void InitPinballGame(void);
 static void InitBallSprite(void);
 static void InitFlipperSprites(void);
 static void InitMeowth(void);
 static void PinballVBlankCallback(void);
 static void PinballMainCallback(void);
 static void PinballMain(u8 taskId);
+static void StartNewBall(void);
+static void LoseBall(void);
+static void LoseBallMeowth(struct Meowth *meowth);
+static void DrawMeowthScoreJewels(struct Meowth *meowth);
+static void OpenEntrance(void);
 static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
 static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdateFlipperState(struct Flipper *flipper);
-static struct Flipper *FindPotentialCollisionFlipper(u32 x, u32 y);
 static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdatePosition(struct Ball *ball);
-static bool32 CheckStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
+static bool32 CheckStaticCollision(struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
 static u8 GetCollisionMaskRow(int collisionAttribute, int row);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
 static u8 ReverseBits(u8 value);
@@ -174,6 +182,7 @@ static void UpdateJewels(struct MeowthJewel *jewels);
 static void UpdateMeowthSprite(struct Sprite *sprite);
 static void UpdateMeowthJewelSprite(struct Sprite *sprite);
 static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite);
+static void ResetMeowthJewels(struct Meowth *meowth);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -221,9 +230,10 @@ static const struct WindowTemplate sPinballWinTemplates[] = {
 
 static const u32 sMeowthStageBgGfx[] = INCBIN_U32("graphics/pinball/bg_tiles_meowth.4bpp");
 static const u16 sMeowthStageBgPalette[] = INCBIN_U16("graphics/pinball/bg_tiles_meowth.gbapal");
-static const u32 sMeowthStageBgTilemap[] = INCBIN_U32("graphics/pinball/bg_tilemap_meowth.bin");
+static const u16 sMeowthStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_meowth.bin");
 static const u8 sMeowthStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_meowth.1bpp");
 static const u8 sMeowthStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth.bin");
+static const u8 sMeowthStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth_entrance.bin");
 static const u8 sFlipperLeftMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks_meowth.1bpp");
 static const u8 sFlipperRightMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks_meowth.1bpp");
 
@@ -724,9 +734,11 @@ static void InitPinballScreen(void)
         LoadSpritePalette(&sMeowthJewelSpritePalette);
         LoadCompressedSpriteSheet(&sMeowthJewelMultipliersSpriteSheet);
         LoadSpritePalette(&sMeowthJewelMultipliersSpritePalette);
+        InitPinballGame();
         InitBallSprite();
         InitFlipperSprites();
         InitMeowth();
+        StartNewBall();
         gMain.state++;
     case 5:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
@@ -735,6 +747,19 @@ static void InitPinballScreen(void)
         CreateTask(PinballMain, 0);
         return;
     }
+}
+
+static void InitPinballGame(void)
+{
+    sPinballGame->stageTileWidth = 32;
+    sPinballGame->stageTileHeight = 32;
+    sPinballGame->gravityEnabled = TRUE;
+    sPinballGame->rightFlipper.type = FLIPPER_RIGHT;
+    sPinballGame->rightFlipper.xPos = 93;
+    sPinballGame->rightFlipper.yPos = 122;
+    sPinballGame->leftFlipper.type = FLIPPER_LEFT;
+    sPinballGame->leftFlipper.xPos = 67;
+    sPinballGame->leftFlipper.yPos = 122;
 }
 
 static void InitBallSprite(void)
@@ -791,26 +816,26 @@ static void PinballMain(u8 taskId)
     case PINBALL_STATE_INIT:
         if (!gPaletteFade.active)
         {
-            sPinballGame->gravityEnabled = TRUE;
             sPinballGame->state = PINBALL_STATE_RUNNING;
-            sPinballGame->stageTileWidth = 32;
-            sPinballGame->stageTileHeight = 32;
-            sPinballGame->ball.xPos = 30 << 8;
-            sPinballGame->ball.yPos = 32 << 8;
-            sPinballGame->ball.xVelocity = 0 << 8;
-            sPinballGame->ball.yVelocity = 0 << 8;
-            sPinballGame->rightFlipper.type = FLIPPER_RIGHT;
-            sPinballGame->rightFlipper.xPos = 93;
-            sPinballGame->rightFlipper.yPos = 122;
-            sPinballGame->leftFlipper.type = FLIPPER_LEFT;
-            sPinballGame->leftFlipper.xPos = 67;
-            sPinballGame->leftFlipper.yPos = 122;
         }
         break;
     case PINBALL_STATE_RUNNING:
         UpdateMeowth(&sPinballGame->meowth);
         HandleBallPhysics();
         UpdateCamera();
+        break;
+    case PINBALL_LOST_BALL_FADE_OUT:
+        if (!gPaletteFade.active)
+        {
+            LoseBallMeowth(&sPinballGame->meowth);
+            StartNewBall();
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_WHITE);
+            sPinballGame->state = PINBALL_LOST_BALL_FADE_IN;
+        }
+        break;
+    case PINBALL_LOST_BALL_FADE_IN:
+        if (!gPaletteFade.active)
+            sPinballGame->state = PINBALL_STATE_RUNNING;
         break;
     case PINBALL_STATE_START_EXIT:
         StartExitPinballGame();
@@ -819,6 +844,65 @@ static void PinballMain(u8 taskId)
         ExitPinballGame();
         break;
     }
+}
+
+static void StartNewBall(void)
+{
+    sPinballGame->ball.xPos = 166 << 8;
+    sPinballGame->ball.yPos = 70 << 8;
+    sPinballGame->ball.xVelocity = 0x40;
+    sPinballGame->ball.yVelocity = 0;
+    sPinballGame->ball.spin = 0;
+    OpenEntrance();
+}
+
+static void OpenEntrance(void)
+{
+    u16 *tilemap;
+    sPinballGame->ballIsEntering = TRUE;
+
+    tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x113] = 0x415;
+    tilemap[0x114] = 0x414;
+    tilemap[0x133] = 0x413;
+    tilemap[0x134] = 0x412;
+    tilemap[0x152] = 0x400;
+    tilemap[0x153] = 0x410;
+    tilemap[0x154] = 0x011;
+    tilemap[0x172] = 0x409;
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+}
+
+static void CloseEntrance(void)
+{
+    u16 *tilemap;
+
+    sPinballGame->ballIsEntering = FALSE;
+    tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x113] = 0x404;
+    tilemap[0x114] = 0x402;
+    tilemap[0x133] = 0x403;
+    tilemap[0x134] = 0x401;
+    tilemap[0x152] = 0x40F;
+    tilemap[0x153] = 0x40E;
+    tilemap[0x154] = 0x002;
+    tilemap[0x172] = 0x40C;
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+}
+
+static void DrawMeowthScoreJewels(struct Meowth *meowth)
+{
+    int i;
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    for (i = 0; i < 20; i++)
+    {
+        if (i < meowth->score)
+            tilemap[i] = i % 2 ? 0x41E : 0x1E;
+        else
+            tilemap[i] = sMeowthStageBgTilemap[i];
+    }
+
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
 static void HandleBallPhysics(void)
@@ -834,6 +918,9 @@ static void HandleBallPhysics(void)
     int collisionAmplification = 0;
     struct Ball *ball = &sPinballGame->ball;
 
+    if (sPinballGame->ballIsEntering && (ball->xPos >> 8) < 144)
+        CloseEntrance();
+
     if (sPinballGame->gravityEnabled)
         ApplyGravity(ball);
 
@@ -842,7 +929,7 @@ static void HandleBallPhysics(void)
     if (!isFlipperColliding)
         isObjectColliding = CheckObjectsCollision(ball, &objectCollisionNormal, &collisionAmplification);
 
-    isStaticColliding = CheckStaticCollision(ball, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
+    isStaticColliding = CheckStaticCollision(ball, sPinballGame->ballIsEntering, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
     if (isFlipperColliding)
         collisionNormal = flipperCollisionNormal;
     else if (isObjectColliding)
@@ -859,14 +946,26 @@ static void HandleBallPhysics(void)
 
     UpdatePosition(ball);
 
-    if ((ball->yPos >> 8) > 160 || (ball->xPos >> 8) > 240)
-    {
-        ball->xPos = 102 << 8;
-        ball->yPos = 32 << 8;
-        ball->yVelocity = 0;
-        ball->xVelocity = 0;
-        ball->spin = 0;
-    }
+    if ((ball->yPos >> 8) > 168)
+        LoseBall();
+}
+
+static void LoseBall(void)
+{
+    sPinballGame->state = PINBALL_LOST_BALL_FADE_OUT;
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
+}
+
+static void LoseBallMeowth(struct Meowth *meowth)
+{
+    if (meowth->score > 3)
+        meowth->score -= 4;
+    else
+        meowth->score = 0;
+
+    meowth->jewelStreak = 0;
+    ResetMeowthJewels(meowth);
+    DrawMeowthScoreJewels(meowth);
 }
 
 #define GRAVITY 0x0B
@@ -895,17 +994,17 @@ static void LimitVelocity(struct Ball *ball)
 
 static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
+    bool32 collided;
     struct Flipper *flipper;
 
     UpdateFlipperState(&sPinballGame->rightFlipper);
     UpdateFlipperState(&sPinballGame->leftFlipper);
-
-    // Find the nearest flipper to the ball, and check collision with it.
-    flipper = FindPotentialCollisionFlipper(ball->xPos >> 8, ball->yPos >> 8);
-    if (flipper == NULL)
-        return FALSE;
     
-    return CheckFlipperCollision(ball, flipper, outYForce, outCollisionNormal, outCollisionAmplification);
+    collided = CheckFlipperCollision(ball, &sPinballGame->rightFlipper, outYForce, outCollisionNormal, outCollisionAmplification);
+    if (!collided)
+        collided = CheckFlipperCollision(ball, &sPinballGame->leftFlipper, outYForce, outCollisionNormal, outCollisionAmplification);
+
+    return collided;
 }
 
 #define FLIPPER_STATE_DELTA 0x0333
@@ -934,27 +1033,6 @@ static void UpdateFlipperState(struct Flipper *flipper)
     flipper->state += stateDelta;
 }
 
-static struct Flipper *FindPotentialCollisionFlipper(u32 x, u32 y)
-{
-    int i;
-    int minIndex = 0;
-    struct Flipper *candidates[] =
-    {
-        &sPinballGame->leftFlipper,
-        &sPinballGame->rightFlipper,
-        NULL,
-    };
-
-    for (i = 0; candidates[i] != NULL; i++)
-    {
-        struct Flipper *flipper = candidates[i];
-        if (x >= flipper->xPos - 24 && x < flipper->xPos + 24 && y >= flipper->yPos - 16 && y < flipper->yPos + 16)
-            return flipper;
-    }
-
-    return NULL;
-}
-
 static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     int curState, stateDelta;
@@ -965,6 +1043,10 @@ static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, 
     int ballYPos = (ball->yPos >> 8);
     int xOffset = ballXPos - flipper->xPos + 24;
     int yOffset = ballYPos - flipper->yPos + 16;
+
+    if (xOffset < 0 || xOffset >= 48 || yOffset < 0 || yOffset >= 32)
+        return FALSE;
+
     *outYForce = 0;
     *outCollisionAmplification = 0;
 
@@ -1026,7 +1108,7 @@ static void UpdatePosition(struct Ball *ball)
         ball->yPos += ball->yVelocity;
 }
 
-static bool32 CheckStaticCollision(struct Ball *ball, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
+static bool32 CheckStaticCollision(struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
 {
     int i;
     u16 xDelta, yDelta;
@@ -1056,7 +1138,11 @@ static bool32 CheckStaticCollision(struct Ball *ball, int stageTileWidth, int st
         row = testY % 8;
         column = testX % 8;
         tileIndex = (tileY * stageTileWidth) + tileX;
-        collisionAttribute = sMeowthStageBgCollisionMap[tileIndex];
+        if (ballIsEntering)
+            collisionAttribute = sMeowthStageEntranceBgCollisionMap[tileIndex];
+        else
+            collisionAttribute = sMeowthStageBgCollisionMap[tileIndex];
+
         collisionMaskRow = GetCollisionMaskRow(collisionAttribute, row);
         collisionTests[i] = (collisionMaskRow & (1 << column)) != 0;
     }
@@ -1391,6 +1477,7 @@ static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowt
                     meowth->jewelStreak = 6;
 
                 meowth->score += meowth->jewelStreak;
+                DrawMeowthScoreJewels(meowth);
                 if (meowth->jewelStreak > 1)
                 {
                     int y = (jewel->yPos >> 8) - 8;
@@ -1405,11 +1492,6 @@ static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowt
     }
 
     return FALSE;
-}
-
-static void CreateJewelMultiplierSprite(struct MeowthJewel *jewel)
-{
-
 }
 
 static int GetNumActiveJewels(struct Meowth *meowth)
@@ -1636,5 +1718,20 @@ static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite)
         else
             sprite->invisible = TRUE;
         break;
+    }
+}
+
+
+static void ResetMeowthJewels(struct Meowth *meowth)
+{
+    int i;
+    for (i = 0; i < MAX_MEOWTH_JEWELS; i++)
+    {
+        struct MeowthJewel *jewel = &meowth->jewels[i];
+        if (jewel->state != JEWEL_STATE_HIDDEN)
+        {
+            DestroySprite(&gSprites[jewel->spriteId]);
+            jewel->state = JEWEL_STATE_HIDDEN;
+        }
     }
 }
