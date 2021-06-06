@@ -4,7 +4,8 @@
 #include "constants/battle_script_commands.h"
 #include "battle_message.h"
 #include "battle_anim.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_scripts.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
@@ -813,13 +814,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_metalburstdamagecalculator,              //0xFF
 };
 
-struct StatFractions
-{
-    u8 dividend;
-    u8 divisor;
-};
-
-static const struct StatFractions sAccuracyStageRatios[] =
+const struct StatFractions gAccuracyStageRatios[] =
 {
     { 33, 100}, // -6
     { 36, 100}, // -5
@@ -921,92 +916,167 @@ static const u8 sForbiddenMoves[MOVES_COUNT] =
     [MOVE_NONE] = 0xFF, // Can't use a non-move lol
     [MOVE_STRUGGLE] = 0xFF, // Neither Struggle
     [MOVE_AFTER_YOU] = FORBIDDEN_METRONOME,
+    [MOVE_APPLE_ACID] = FORBIDDEN_METRONOME,
     [MOVE_ASSIST] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_ASTRAL_BARRAGE] = FORBIDDEN_METRONOME,
+    [MOVE_AURA_WHEEL] = FORBIDDEN_METRONOME,
+    [MOVE_BADDY_BAD] = FORBIDDEN_METRONOME,
     [MOVE_BANEFUL_BUNKER] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_BEAK_BLAST] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_BEHEMOTH_BASH] = FORBIDDEN_METRONOME | FORBIDDEN_COPYCAT,
+    [MOVE_BEHEMOTH_BLADE] = FORBIDDEN_METRONOME | FORBIDDEN_COPYCAT,
     [MOVE_BELCH] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_BESTOW] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_BIDE] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_BODY_PRESS] = FORBIDDEN_METRONOME,
+    [MOVE_BOUNCE] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
+    [MOVE_BOUNCY_BUBBLE] = FORBIDDEN_METRONOME,
+    [MOVE_BRANCH_POKE] = FORBIDDEN_METRONOME,
+    [MOVE_BREAKING_SWIPE] = FORBIDDEN_METRONOME,
+    [MOVE_BUZZY_BUZZ] = FORBIDDEN_METRONOME,
     [MOVE_CELEBRATE] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_CHATTER] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_MIMIC | FORBIDDEN_SLEEP_TALK,
     [MOVE_CIRCLE_THROW] = FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_CLANGOROUS_SOUL] = FORBIDDEN_METRONOME,
     [MOVE_COPYCAT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_COUNTER] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_COVET] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
-    [MOVE_CRAFTY_SHIELD] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_CRAFTY_SHIELD] = FORBIDDEN_METRONOME,
+    [MOVE_DECORATE] = FORBIDDEN_METRONOME,
     [MOVE_DESTINY_BOND] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_DETECT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
-    [MOVE_DIG] = FORBIDDEN_ASSIST,
-    [MOVE_DIVE] = FORBIDDEN_ASSIST,
-    [MOVE_DRAGON_TAIL] = FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_DIAMOND_STORM] = FORBIDDEN_METRONOME,
+    [MOVE_DIG] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
+    [MOVE_DIVE] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
+    [MOVE_DOUBLE_IRON_BASH] = FORBIDDEN_METRONOME,
+    [MOVE_DRAGON_ASCENT] = FORBIDDEN_METRONOME,
+    [MOVE_DRAGON_ENERGY] = FORBIDDEN_METRONOME,
+    [MOVE_DRAGON_TAIL] = FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_DRUM_BEATING] = FORBIDDEN_METRONOME,
+    [MOVE_DYNAMAX_CANNON] = FORBIDDEN_METRONOME | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_ENDURE] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_ETERNABEAM] = FORBIDDEN_METRONOME,
+    [MOVE_FALSE_SURRENDER] = FORBIDDEN_METRONOME,
     [MOVE_FEINT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_FIERY_WRATH] = FORBIDDEN_METRONOME,
     [MOVE_FLEUR_CANNON] = FORBIDDEN_METRONOME,
-    [MOVE_FLY] = FORBIDDEN_ASSIST,
+    [MOVE_FLOATY_FALL] = FORBIDDEN_METRONOME,
+    [MOVE_FLY] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
     [MOVE_FOCUS_PUNCH] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_FOLLOW_ME] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
-    [MOVE_FREEZE_SHOCK] = FORBIDDEN_METRONOME,
+    [MOVE_FREEZE_SHOCK] = FORBIDDEN_METRONOME | FORBIDDEN_SLEEP_TALK,
+    [MOVE_FREEZING_GLARE] = FORBIDDEN_METRONOME,
+    [MOVE_FREEZY_FROST] = FORBIDDEN_METRONOME,
+    [MOVE_GEOMANCY] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_GLACIAL_LANCE] = FORBIDDEN_METRONOME,
+    [MOVE_GLITZY_GLOW] = FORBIDDEN_METRONOME,
+    [MOVE_GRAV_APPLE] = FORBIDDEN_METRONOME,
     [MOVE_HELPING_HAND] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_HOLD_HANDS] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_HYPERSPACE_FURY] = FORBIDDEN_METRONOME,
     [MOVE_HYPERSPACE_HOLE] = FORBIDDEN_METRONOME,
-    [MOVE_ICE_BURN] = FORBIDDEN_METRONOME,
+    [MOVE_ICE_BURN] = FORBIDDEN_METRONOME | FORBIDDEN_SLEEP_TALK,
     [MOVE_INSTRUCT] = FORBIDDEN_METRONOME,
+    [MOVE_JUNGLE_HEALING] = FORBIDDEN_METRONOME,
     [MOVE_KINGS_SHIELD] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_LIFE_DEW] = FORBIDDEN_METRONOME,
     [MOVE_LIGHT_OF_RUIN] = FORBIDDEN_METRONOME,
     [MOVE_MAT_BLOCK] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_ME_FIRST] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_METEOR_ASSAULT] = FORBIDDEN_METRONOME,
     [MOVE_METRONOME] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
     [MOVE_MIMIC] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_MIMIC | FORBIDDEN_SLEEP_TALK,
+    [MOVE_MIND_BLOWN] = FORBIDDEN_METRONOME,
     [MOVE_MIRROR_COAT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_MIRROR_MOVE] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_MOONGEIST_BEAM] = FORBIDDEN_METRONOME,
     [MOVE_NATURE_POWER] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_NATURES_MADNESS] = FORBIDDEN_METRONOME,
+    [MOVE_OBSTRUCT] = FORBIDDEN_METRONOME | FORBIDDEN_COPYCAT,
     [MOVE_ORIGIN_PULSE] = FORBIDDEN_METRONOME,
+    [MOVE_OVERDRIVE] = FORBIDDEN_METRONOME,
+    [MOVE_PHANTOM_FORCE] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
+    [MOVE_PHOTON_GEYSER] = FORBIDDEN_METRONOME,
+    [MOVE_PIKA_PAPOW] = FORBIDDEN_METRONOME,
+    [MOVE_PLASMA_FISTS] = FORBIDDEN_METRONOME,
     [MOVE_PRECIPICE_BLADES] = FORBIDDEN_METRONOME,
     [MOVE_PROTECT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_PYRO_BALL] = FORBIDDEN_METRONOME,
     [MOVE_QUASH] = FORBIDDEN_METRONOME,
     [MOVE_QUICK_GUARD] = FORBIDDEN_METRONOME,
     [MOVE_RAGE_POWDER] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_RAZOR_WIND] = FORBIDDEN_SLEEP_TALK,
     [MOVE_RELIC_SONG] = FORBIDDEN_METRONOME,
     [MOVE_ROAR] = FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_SAPPY_SEED] = FORBIDDEN_METRONOME,
     [MOVE_SECRET_SWORD] = FORBIDDEN_METRONOME,
+    [MOVE_SHADOW_FORCE] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
     [MOVE_SHELL_TRAP] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
-    [MOVE_SKETCH] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_SIZZLY_SLIDE] = FORBIDDEN_METRONOME,
+    [MOVE_SKETCH] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_MIMIC | FORBIDDEN_SLEEP_TALK,
+    [MOVE_SKULL_BASH] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_SKY_ATTACK] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_SKY_DROP] = FORBIDDEN_ASSIST | FORBIDDEN_SLEEP_TALK,
     [MOVE_SLEEP_TALK] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
+    [MOVE_SNAP_TRAP] = FORBIDDEN_METRONOME,
     [MOVE_SNARL] = FORBIDDEN_METRONOME,
     [MOVE_SNATCH] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_SNORE] = FORBIDDEN_METRONOME,
+    [MOVE_SOLAR_BEAM] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_SOLAR_BLADE] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_SPARKLY_SWIRL] = FORBIDDEN_METRONOME,
     [MOVE_SPECTRAL_THIEF] = FORBIDDEN_METRONOME,
     [MOVE_SPIKY_SHIELD] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
-    [MOVE_SPOTLIGHT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST,
+    [MOVE_SPIRIT_BREAK] = FORBIDDEN_METRONOME,
+    [MOVE_SPLISHY_SPLASH] = FORBIDDEN_METRONOME,
+    [MOVE_SPOTLIGHT] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_STEAM_ERUPTION] = FORBIDDEN_METRONOME,
+    [MOVE_STEEL_BEAM] = FORBIDDEN_METRONOME,
+    [MOVE_STRANGE_STEAM] = FORBIDDEN_METRONOME,
+    [MOVE_SUNSTEEL_STRIKE] = FORBIDDEN_METRONOME,
+    [MOVE_SURGING_STRIKES] = FORBIDDEN_METRONOME,
     [MOVE_SWITCHEROO] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_TECHNO_BLAST] = FORBIDDEN_METRONOME,
     [MOVE_THIEF] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_THOUSAND_ARROWS] = FORBIDDEN_METRONOME,
     [MOVE_THOUSAND_WAVES] = FORBIDDEN_METRONOME,
+    [MOVE_THUNDER_CAGE] = FORBIDDEN_METRONOME,
+    [MOVE_THUNDEROUS_KICK] = FORBIDDEN_METRONOME,
     [MOVE_TRANSFORM] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_MIMIC,
     [MOVE_TRICK] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
-    [MOVE_V_CREATE] = FORBIDDEN_METRONOME,
-    [MOVE_WIDE_GUARD] = FORBIDDEN_METRONOME,
-    [MOVE_WHIRLWIND] = FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_UPROAR] = FORBIDDEN_SLEEP_TALK,
+    [MOVE_V_CREATE] = FORBIDDEN_METRONOME,
+    [MOVE_VEEVEE_VOLLEY] = FORBIDDEN_METRONOME,
+    [MOVE_WHIRLWIND] = FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_WICKED_BLOW] = FORBIDDEN_METRONOME,
+    [MOVE_WIDE_GUARD] = FORBIDDEN_METRONOME,
+    [MOVE_ZIPPY_ZAP] = FORBIDDEN_METRONOME,
 };
 
 static const u16 sMoveEffectsForbiddenToInstruct[] =
 {
     EFFECT_ASSIST,
     //EFFECT_BEAK_BLAST,
+    EFFECT_BELCH,
     EFFECT_BIDE,
+    //EFFECT_CELEBRATE,
+    //EFFECT_CHATTER,
+    EFFECT_COPYCAT,
+    //EFFECT_DYNAMAX_CANNON,
     EFFECT_FOCUS_PUNCH,
-    //EFFECT_GEOMANCY,
+    EFFECT_GEOMANCY,
+    //EFFECT_HOLD_HANDS,
     EFFECT_INSTRUCT,
     EFFECT_ME_FIRST,
     EFFECT_METRONOME,
+    EFFECT_MIMIC,
     EFFECT_MIRROR_MOVE,
     EFFECT_NATURE_POWER,
+    //EFFECT_OBSTRUCT,
+    EFFECT_RAMPAGE,
     EFFECT_RECHARGE,
+    EFFECT_RECOIL_25,
+    EFFECT_ROLLOUT,
     EFFECT_SEMI_INVULNERABLE,
     //EFFECT_SHELL_TRAP,
     EFFECT_SKETCH,
@@ -1016,21 +1086,22 @@ static const u16 sMoveEffectsForbiddenToInstruct[] =
     EFFECT_SOLARBEAM,
     EFFECT_TRANSFORM,
     EFFECT_TWO_TURNS_ATTACK,
+    EFFECT_UPROAR,
     FORBIDDEN_INSTRUCT_END
 };
 
 static const u16 sNaturePowerMoves[] =
 {
-    [BATTLE_TERRAIN_GRASS]      = MOVE_STUN_SPORE,
-    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_RAZOR_LEAF,
-    [BATTLE_TERRAIN_SAND]       = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_GRASS]      = MOVE_ENERGY_BALL,
+    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_ENERGY_BALL,
+    [BATTLE_TERRAIN_SAND]       = MOVE_EARTH_POWER,
     [BATTLE_TERRAIN_UNDERWATER] = MOVE_HYDRO_PUMP,
-    [BATTLE_TERRAIN_WATER]      = MOVE_SURF,
-    [BATTLE_TERRAIN_POND]       = MOVE_BUBBLE_BEAM,
-    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_ROCK_SLIDE,
-    [BATTLE_TERRAIN_CAVE]       = MOVE_SHADOW_BALL,
-    [BATTLE_TERRAIN_BUILDING]   = MOVE_SWIFT,
-    [BATTLE_TERRAIN_PLAIN]      = MOVE_SWIFT
+    [BATTLE_TERRAIN_WATER]      = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_POND]       = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_EARTH_POWER,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_POWER_GEM,
+    [BATTLE_TERRAIN_BUILDING]   = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_TRI_ATTACK
 };
 
 static const u16 sPickupItems[] =
@@ -1083,7 +1154,7 @@ static const u8 sTerrainToType[] =
     [BATTLE_TERRAIN_UNDERWATER] = TYPE_WATER,
     [BATTLE_TERRAIN_WATER]      = TYPE_WATER,
     [BATTLE_TERRAIN_POND]       = TYPE_WATER,
-    [BATTLE_TERRAIN_MOUNTAIN]   = TYPE_ROCK,
+    [BATTLE_TERRAIN_MOUNTAIN]   = TYPE_GROUND,
     [BATTLE_TERRAIN_CAVE]       = TYPE_ROCK,
     [BATTLE_TERRAIN_BUILDING]   = TYPE_NORMAL,
     [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
@@ -1470,7 +1541,8 @@ static bool32 AccuracyCalcHelper(u16 move)
     }
 
     if ((gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
-        || (!(gBattleMoves[move].flags & FLAG_HIT_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
+        || (!(gBattleMoves[move].flags & FLAG_DMG_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
+        || (!(gBattleMoves[move].flags & FLAG_DMG_2X_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
         || (!(gBattleMoves[move].flags & FLAG_DMG_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
         || (!(gBattleMoves[move].flags & FLAG_DMG_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER))
     {
@@ -1535,8 +1607,8 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
     if (defAbility == ABILITY_WONDER_SKIN && gBattleMoves[move].power == 0)
         moveAcc = 50;
 
-    calc = sAccuracyStageRatios[buff].dividend * moveAcc;
-    calc /= sAccuracyStageRatios[buff].divisor;
+    calc = gAccuracyStageRatios[buff].dividend * moveAcc;
+    calc /= gAccuracyStageRatios[buff].divisor;
 
     if (atkAbility == ABILITY_COMPOUND_EYES)
         calc = (calc * 130) / 100; // 1.3 compound eyes boost
@@ -1562,7 +1634,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
         calc = (calc * (100 + atkParam)) / 100;
     else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
         calc = (calc * (100 + atkParam)) / 100;
-    
+
     if (gProtectStructs[battlerAtk].micle)
     {
         gProtectStructs[battlerAtk].micle = FALSE;
@@ -3118,7 +3190,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_FLAME_BURST:
                 if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) != ABILITY_MAGIC_GUARD)
                 {
-                    gBattleScripting.battler = BATTLE_PARTNER(gBattlerTarget);
+                    gBattleScripting.savedBattler = BATTLE_PARTNER(gBattlerTarget);
                     gBattleMoveDamage = gBattleMons[BATTLE_PARTNER(gBattlerTarget)].hp / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
@@ -4414,7 +4486,7 @@ static void Cmd_playanimation(void)
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
-    
+
     #if B_TERRAIN_BG_CHANGE == FALSE
     if (gBattlescriptCurrInstr[2] == B_ANIM_RESTORE_BG)
     {
@@ -7688,51 +7760,25 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     case VARIOUS_SET_SIMPLE_BEAM:
-        switch (gBattleMons[gActiveBattler].ability)
+        if (IsEntrainmentTargetOrSimpleBeamBannedAbility(gBattleMons[gActiveBattler].ability))
         {
-        case ABILITY_SIMPLE:
-        case ABILITY_TRUANT:
-        case ABILITY_STANCE_CHANGE:
-        case ABILITY_DISGUISE:
-        case ABILITY_MULTITYPE:
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-            break;
-        default:
+        }
+        else
+        {
             gBattleMons[gActiveBattler].ability = ABILITY_SIMPLE;
             gBattlescriptCurrInstr += 7;
             break;
         }
         return;
     case VARIOUS_TRY_ENTRAINMENT:
-        switch (gBattleMons[gBattlerTarget].ability)
+        if (IsEntrainmentBannedAbilityAttacker(gBattleMons[gBattlerAttacker].ability)
+          || IsEntrainmentTargetOrSimpleBeamBannedAbility(gBattleMons[gBattlerTarget].ability))
         {
-        case ABILITY_TRUANT:
-        case ABILITY_MULTITYPE:
-        case ABILITY_STANCE_CHANGE:
-        case ABILITY_SCHOOLING:
-        case ABILITY_COMATOSE:
-        case ABILITY_SHIELDS_DOWN:
-        case ABILITY_DISGUISE:
-        case ABILITY_RKS_SYSTEM:
-        case ABILITY_BATTLE_BOND:
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
             return;
         }
-        switch (gBattleMons[gBattlerAttacker].ability)
-        {
-        case ABILITY_TRACE:
-        case ABILITY_FORECAST:
-        case ABILITY_FLOWER_GIFT:
-        case ABILITY_ZEN_MODE:
-        case ABILITY_ILLUSION:
-        case ABILITY_IMPOSTER:
-        case ABILITY_POWER_OF_ALCHEMY:
-        case ABILITY_RECEIVER:
-        case ABILITY_DISGUISE:
-        case ABILITY_POWER_CONSTRUCT:
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-            return;
-        }
+
         if (gBattleMons[gBattlerTarget].ability == gBattleMons[gBattlerAttacker].ability)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
@@ -9190,17 +9236,17 @@ bool32 TryResetBattlerStatChanges(u8 battler)
 {
     u32 j;
     bool32 ret = FALSE;
-    
+
     gDisableStructs[battler].stockpileDef = 0;
     gDisableStructs[battler].stockpileSpDef = 0;
     for (j = 0; j < NUM_BATTLE_STATS; j++)
     {
         if (gBattleMons[battler].statStages[j] != DEFAULT_STAT_STAGE)
             ret = TRUE; // returns TRUE if any stat was reset
-        
+
         gBattleMons[battler].statStages[j] = DEFAULT_STAT_STAGE;
     }
-    
+
     return ret;
 }
 
@@ -9745,7 +9791,7 @@ static void Cmd_tryinfatuating(void)
 
     if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
-        gBattlescriptCurrInstr = BattleScript_ObliviousPreventsAttraction;
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
@@ -11113,6 +11159,12 @@ static void Cmd_callterrainattack(void) // nature power
     gBattlescriptCurrInstr++;
 }
 
+u16 GetNaturePowerMove(void)
+{
+    //TODO terrain
+    return sNaturePowerMoves[gBattleTerrain];
+}
+
 static void Cmd_cureifburnedparalysedorpoisoned(void) // refresh
 {
     if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
@@ -11152,7 +11204,13 @@ static void Cmd_jumpifnodamage(void)
 
 static void Cmd_settaunt(void)
 {
-    if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
+    if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_OBLIVIOUS;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
+    }
+    else if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
     {
         u8 turns = 4;
         if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))
@@ -11279,18 +11337,20 @@ static void Cmd_tryswapitems(void) // trick
 
 static void Cmd_trycopyability(void) // role play
 {
-    switch (gBattleMons[gBattlerTarget].ability)
+    u16 defAbility = gBattleMons[gBattlerTarget].ability;
+
+    if (gBattleMons[gBattlerAttacker].ability == defAbility
+      || defAbility == ABILITY_NONE
+      || IsRolePlayBannedAbilityAtk(gBattleMons[gBattlerAttacker].ability)
+      || IsRolePlayBannedAbility(defAbility))
     {
-        case ABILITY_NONE:
-        case ABILITY_WONDER_GUARD:
-        case ABILITY_DISGUISE:
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-            break;
-        default:
-            gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
-            gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
-            gBattlescriptCurrInstr += 5;
-            break;
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        gBattleMons[gBattlerAttacker].ability = defAbility;
+        gLastUsedAbility = defAbility;
+        gBattlescriptCurrInstr += 5;
     }
 }
 
@@ -11344,28 +11404,14 @@ static void Cmd_settoxicspikes(void)
 
 static void Cmd_setgastroacid(void)
 {
-    switch (gBattleMons[gBattlerTarget].ability)
+    if (IsGastroAcidBannedAbility(gBattleMons[gBattlerTarget].ability))
     {
-    case ABILITY_AS_ONE_ICE_RIDER:
-    case ABILITY_AS_ONE_SHADOW_RIDER:
-    case ABILITY_BATTLE_BOND:
-    case ABILITY_COMATOSE:
-    case ABILITY_DISGUISE:
-    case ABILITY_GULP_MISSILE:
-    case ABILITY_ICE_FACE:
-    case ABILITY_MULTITYPE:
-    case ABILITY_POWER_CONSTRUCT:
-    case ABILITY_RKS_SYSTEM:
-    case ABILITY_SCHOOLING:
-    case ABILITY_SHIELDS_DOWN:
-    case ABILITY_STANCE_CHANGE:
-    case ABILITY_ZEN_MODE:
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        break;
-    default:
+    }
+    else
+    {
         gStatuses3[gBattlerTarget] |= STATUS3_GASTRO_ACID;
         gBattlescriptCurrInstr += 5;
-        break;
     }
 }
 
@@ -11434,20 +11480,9 @@ static void Cmd_setroom(void)
 
 static void Cmd_tryswapabilities(void) // skill swap
 {
-    switch (gBattleMons[gBattlerAttacker].ability)
+    if (IsSkillSwapBannedAbility(gBattleMons[gBattlerAttacker].ability)
+      || IsSkillSwapBannedAbility(gBattleMons[gBattlerTarget].ability))
     {
-    case ABILITY_NONE:
-    case ABILITY_WONDER_GUARD:
-    case ABILITY_DISGUISE:
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        return;
-    }
-
-    switch (gBattleMons[gBattlerTarget].ability)
-    {
-    case ABILITY_NONE:
-    case ABILITY_WONDER_GUARD:
-    case ABILITY_DISGUISE:
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         return;
     }
@@ -11679,7 +11714,7 @@ static void Cmd_getsecretpowereffect(void)
     switch (gBattleTerrain)
     {
     case BATTLE_TERRAIN_GRASS:
-        gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
+        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
         break;
     case BATTLE_TERRAIN_LONG_GRASS:
         gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
@@ -11688,16 +11723,16 @@ static void Cmd_getsecretpowereffect(void)
         gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
         break;
     case BATTLE_TERRAIN_UNDERWATER:
-        gBattleScripting.moveEffect = MOVE_EFFECT_DEF_MINUS_1;
+        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
         break;
     case BATTLE_TERRAIN_WATER:
         gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
         break;
     case BATTLE_TERRAIN_POND:
-        gBattleScripting.moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
         break;
     case BATTLE_TERRAIN_MOUNTAIN:
-        gBattleScripting.moveEffect = MOVE_EFFECT_CONFUSION;
+        gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
         break;
     case BATTLE_TERRAIN_CAVE:
         gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
@@ -11922,6 +11957,13 @@ static void Cmd_tryrecycleitem(void)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
+}
+
+bool32 CanCamouflage(u8 battlerId)
+{
+    if (IS_BATTLER_OF_TYPE(battlerId, sTerrainToType[gBattleTerrain]))
+        return FALSE;
+    return TRUE;
 }
 
 static void Cmd_settypetoterrain(void)
@@ -12448,11 +12490,36 @@ static void Cmd_trainerslideout(void)
     gBattlescriptCurrInstr += 2;
 }
 
+static const u16 sTelekinesisBanList[] =
+{
+	SPECIES_DIGLETT,
+	SPECIES_DUGTRIO,
+    #ifdef POKEMON_EXPANSION
+	SPECIES_DIGLETT_ALOLAN,
+	SPECIES_DUGTRIO_ALOLAN,
+	SPECIES_SANDYGAST,
+	SPECIES_PALOSSAND,
+	SPECIES_GENGAR_MEGA,
+    #endif
+};
+
+bool32 IsTelekinesisBannedSpecies(u16 species)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sTelekinesisBanList); i++)
+    {
+        if (species == sTelekinesisBanList[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static void Cmd_settelekinesis(void)
 {
     if (gStatuses3[gBattlerTarget] & (STATUS3_TELEKINESIS | STATUS3_ROOTED | STATUS3_SMACKED_DOWN)
         || gFieldStatuses & STATUS_FIELD_GRAVITY
-        || (gBattleMons[gBattlerTarget].species == SPECIES_DIGLETT || gBattleMons[gBattlerTarget].species == SPECIES_DUGTRIO))
+        || IsTelekinesisBannedSpecies(gBattleMons[gBattlerTarget].species))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -12520,19 +12587,14 @@ static void Cmd_trygetbaddreamstarget(void)
 
 static void Cmd_tryworryseed(void)
 {
-    switch (gBattleMons[gBattlerTarget].ability)
+    if (IsWorrySeedBannedAbility(gBattleMons[gBattlerTarget].ability))
     {
-    case ABILITY_INSOMNIA:
-    case ABILITY_MULTITYPE:
-    case ABILITY_TRUANT:
-    case ABILITY_STANCE_CHANGE:
-    case ABILITY_DISGUISE:
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        break;
-    default:
+    }
+    else
+    {
         gBattleMons[gBattlerTarget].ability = ABILITY_INSOMNIA;
         gBattlescriptCurrInstr += 5;
-        break;
     }
 }
 
