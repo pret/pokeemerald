@@ -9,6 +9,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pinball.h"
+#include "random.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -32,10 +33,11 @@
 
 #define WIN_TEXT 0
 
-#define TAG_BALL_POKEBALL 500
-#define TAG_FLIPPER       501
-#define TAG_MEOWTH        502
-#define TAG_MEOWTH_JEWEL  503
+#define TAG_BALL_POKEBALL           500
+#define TAG_FLIPPER                 501
+#define TAG_MEOWTH                  502
+#define TAG_MEOWTH_JEWEL            503
+#define TAG_MEOWTH_JEWEL_MUTLIPLIER 504
 
 enum
 {
@@ -98,9 +100,11 @@ struct Meowth
     u16 yPos;
     int state;
     int facing;
-    int verticalVelocity;
-    int hitCounter;
+    int yMovement;
+    int hitDuration;
     struct MeowthJewel jewels[MAX_MEOWTH_JEWELS];
+    int score;
+    int jewelStreak;
 };
 
 #define FLIPPER_LEFT  0
@@ -162,13 +166,14 @@ static void UpdateMeowth(struct Meowth *meowth);
 static bool32 CheckObjectsCollision(struct Ball *ball, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 CheckJewelCollision(struct Ball *ball, struct MeowthJewel *jewel, u8 *outCollisionNormal);
-static bool32 IsJewelSpaceOccupied(u16 xPos, struct MeowthJewel *jewels);
-static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct MeowthJewel *jewels, u8 *outCollisionNormal);
+static bool32 IsJewelSpaceOccupied(u16 xPos, u16 destYPos, struct MeowthJewel *jewels);
+static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal);
 static int GetNumActiveJewels(struct Meowth *meowth);
 static struct MeowthJewel *TryCreateNewJewel(struct Meowth *meowth, int ballXPos);
 static void UpdateJewels(struct MeowthJewel *jewels);
 static void UpdateMeowthSprite(struct Sprite *sprite);
 static void UpdateMeowthJewelSprite(struct Sprite *sprite);
+static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -234,6 +239,8 @@ static const u32 sMeowthAnimationGfx[] = INCBIN_U32("graphics/pinball/meowth_ani
 static const u16 sMeowthAnimationPalette[] = INCBIN_U16("graphics/pinball/meowth_animation.gbapal");
 static const u32 sMeowthJewelGfx[] = INCBIN_U32("graphics/pinball/meowth_jewel_animation.4bpp.lz");
 static const u16 sMeowthJewelPalette[] = INCBIN_U16("graphics/pinball/meowth_jewel_animation.gbapal");
+static const u32 sMeowthJewelMultipliersGfx[] = INCBIN_U32("graphics/pinball/meowth_jewel_multipliers.4bpp.lz");
+static const u16 sMeowthJewelMultipliersPalette[] = INCBIN_U16("graphics/pinball/meowth_jewel_multipliers.gbapal");
 static const u8 sMeowthCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_normal_angles.bin");
 static const u8 sMeowthJewelCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_jewel_normal_angles.bin");
 
@@ -247,6 +254,12 @@ static const struct CompressedSpriteSheet sMeowthJewelSpriteSheet = {
     .data = sMeowthJewelGfx,
     .size = 0x400,
     .tag = TAG_MEOWTH_JEWEL,
+};
+
+static const struct CompressedSpriteSheet sMeowthJewelMultipliersSpriteSheet = {
+    .data = sMeowthJewelMultipliersGfx,
+    .size = 0x140,
+    .tag = TAG_MEOWTH_JEWEL_MUTLIPLIER,
 };
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
@@ -265,6 +278,7 @@ static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sMeowthAnimationSpritePalette = { sMeowthAnimationPalette, TAG_MEOWTH };
 static const struct SpritePalette sMeowthJewelSpritePalette = { sMeowthJewelPalette, TAG_MEOWTH_JEWEL };
+static const struct SpritePalette sMeowthJewelMultipliersSpritePalette = { sMeowthJewelMultipliersPalette, TAG_MEOWTH_JEWEL_MUTLIPLIER };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -406,8 +420,7 @@ static const union AnimCmd sMeowthAnimCmd_HitLeft[] = {
     ANIMCMD_END,
 };
 
-static const union AnimCmd sMeowthAnimCmd_Finish[] =
-{
+static const union AnimCmd sMeowthAnimCmd_Finish[] = {
     ANIMCMD_FRAME(48, 30),
     ANIMCMD_FRAME(64, 30),
     ANIMCMD_JUMP(0),
@@ -447,22 +460,19 @@ static const struct OamData sMeowthJewelOamData = {
     .affineParam = 0,
 };
 
-static const union AnimCmd sMeowthJewelAnimCmd_Create[] =
-{
+static const union AnimCmd sMeowthJewelAnimCmd_Create[] = {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(4, 20),
     ANIMCMD_FRAME(8, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sMeowthJewelAnimCmd_Sparkle[] =
-{
+static const union AnimCmd sMeowthJewelAnimCmd_Sparkle[] = {
     ANIMCMD_FRAME(8, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sMeowthJewelAnimCmd_Disappear[] =
-{
+static const union AnimCmd sMeowthJewelAnimCmd_Disappear[] = {
     ANIMCMD_FRAME(12, 1),
     ANIMCMD_FRAME(16, 1),
     ANIMCMD_FRAME(20, 1),
@@ -489,6 +499,65 @@ static const struct SpriteTemplate sMeowthJewelSpriteTemplate = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateMeowthJewelSprite,
+};
+
+static const struct OamData sMeowthJewelMultiplierOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sMeowthJewelMultiplierAnimCmd_2x[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sMeowthJewelMultiplierAnimCmd_3x[] = {
+    ANIMCMD_FRAME(2, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sMeowthJewelMultiplierAnimCmd_4x[] = {
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sMeowthJewelMultiplierAnimCmd_5x[] = {
+    ANIMCMD_FRAME(6, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sMeowthJewelMultiplierAnimCmd_6x[] = {
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sMeowthJewelMultiplierAnimCmds[] = {
+    sMeowthJewelMultiplierAnimCmd_2x,
+    sMeowthJewelMultiplierAnimCmd_3x,
+    sMeowthJewelMultiplierAnimCmd_4x,
+    sMeowthJewelMultiplierAnimCmd_5x,
+    sMeowthJewelMultiplierAnimCmd_6x,
+};
+
+static const struct SpriteTemplate sMeowthJewelMultiplierSpriteTemplate = {
+    .tileTag = TAG_MEOWTH_JEWEL_MUTLIPLIER,
+    .paletteTag = TAG_MEOWTH_JEWEL_MUTLIPLIER,
+    .oam = &sMeowthJewelMultiplierOamData,
+    .anims = sMeowthJewelMultiplierAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateMeowthJewelMultiplierSprite,
 };
 
 static const s8 sCollisionTestPointOffsets[][2] = {
@@ -653,6 +722,8 @@ static void InitPinballScreen(void)
         LoadSpritePalette(&sMeowthAnimationSpritePalette);
         LoadCompressedSpriteSheet(&sMeowthJewelSpriteSheet);
         LoadSpritePalette(&sMeowthJewelSpritePalette);
+        LoadCompressedSpriteSheet(&sMeowthJewelMultipliersSpriteSheet);
+        LoadSpritePalette(&sMeowthJewelMultipliersSpritePalette);
         InitBallSprite();
         InitFlipperSprites();
         InitMeowth();
@@ -690,7 +761,9 @@ static void InitMeowth(void)
     meowth->yPos = 40;
     meowth->state = MEOWTH_STATE_WALK;
     meowth->facing = MEOWTH_FACING_RIGHT;
-    meowth->verticalVelocity = 0;
+    meowth->yMovement = 0;
+    meowth->score = 0;
+    meowth->jewelStreak = 0;
     meowth->spriteId = CreateSprite(&sMeowthSpriteTemplate, 0, 0, 5);
     StartSpriteAnim(&gSprites[meowth->spriteId], 0);
 }
@@ -1211,6 +1284,7 @@ static void UpdateFlipperSprite(struct Sprite *sprite)
 }
 
 #define MEOWTH_HORIZONTAL_SPEED 1
+#define MEOWTH_VERTICAL_SPEED 1
 
 static void UpdateMeowth(struct Meowth *meowth)
 {
@@ -1222,10 +1296,37 @@ static void UpdateMeowth(struct Meowth *meowth)
         else
             meowth->xPos -= MEOWTH_HORIZONTAL_SPEED;
 
-        if (meowth->xPos > 130)
+        meowth->yPos += meowth->yMovement;
+
+        if (meowth->xPos > 136)
+        {
             meowth->facing = MEOWTH_FACING_LEFT;
-        else if (meowth->xPos < 30)
+            meowth->xPos = 136;
+        }
+        else if (meowth->xPos < 24)
+        {
             meowth->facing = MEOWTH_FACING_RIGHT;
+            meowth->xPos = 24;
+        }
+        else if (gMain.vblankCounter1 % 64 == 0)
+        {
+            meowth->facing = Random() % 2 ? MEOWTH_FACING_RIGHT : MEOWTH_FACING_LEFT;
+        }
+
+        if (meowth->yPos > 48)
+        {
+            meowth->yPos = 48;
+            meowth->yMovement = 0;
+        }
+        else if (meowth->yPos < 32)
+        {
+            meowth->yPos = 32;
+            meowth->yMovement = 0;
+        }
+        else if (gMain.vblankCounter1 % 64 == 0)
+        {
+            meowth->yMovement = Random() % 2 ? -MEOWTH_VERTICAL_SPEED : MEOWTH_VERTICAL_SPEED;
+        }
 
         break;
     case MEOWTH_STATE_HIT:
@@ -1241,7 +1342,7 @@ static bool32 CheckObjectsCollision(struct Ball *ball, u8 *outCollisionNormal, i
 {
     bool32 isColliding = CheckMeowthCollision(ball, &sPinballGame->meowth, outCollisionNormal, outCollisionAmplification);
     if (!isColliding)
-        isColliding = CheckMeowthJewelsCollision(ball, sPinballGame->meowth.jewels, outCollisionNormal);
+        isColliding = CheckMeowthJewelsCollision(ball, &sPinballGame->meowth, outCollisionNormal);
 
     return isColliding;
 }
@@ -1269,27 +1370,46 @@ static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 
     if (meowth->state == MEOWTH_STATE_WALK)
     {
         meowth->state = MEOWTH_STATE_HIT;
-        meowth->hitCounter = 30;
+        meowth->hitDuration = 30;
         TryCreateNewJewel(meowth, ballXPos);
     }
 
     return TRUE;
 }
 
-static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct MeowthJewel *jewels, u8 *outCollisionNormal)
+static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal)
 {
     int i;
     for (i = 0; i < MAX_MEOWTH_JEWELS; i++)
     {
-        struct MeowthJewel *jewel = &jewels[i];
+        struct MeowthJewel *jewel = &meowth->jewels[i];
         if (jewel->state == JEWEL_STATE_LANDED)
         {
             if (CheckJewelCollision(ball, jewel, outCollisionNormal))
+            {
+                if (++meowth->jewelStreak > 6)
+                    meowth->jewelStreak = 6;
+
+                meowth->score += meowth->jewelStreak;
+                if (meowth->jewelStreak > 1)
+                {
+                    int y = (jewel->yPos >> 8) - 8;
+                    u8 spriteId = CreateSprite(&sMeowthJewelMultiplierSpriteTemplate, jewel->xPos, y, 4);
+                    gSprites[spriteId].data[2] = y;
+                    StartSpriteAnim(&gSprites[spriteId], meowth->jewelStreak - 2);
+                }
+
                 return TRUE;
+            }
         }
     }
 
     return FALSE;
+}
+
+static void CreateJewelMultiplierSprite(struct MeowthJewel *jewel)
+{
+
 }
 
 static int GetNumActiveJewels(struct Meowth *meowth)
@@ -1315,13 +1435,15 @@ static struct MeowthJewel *TryCreateNewJewel(struct Meowth *meowth, int ballXPos
     if (i == MAX_MEOWTH_JEWELS)
         return NULL;
 
+    meowth->jewelStreak = 0;
+
     meowth->jewels[i].state = JEWEL_STATE_FALLING;
     meowth->jewels[i].xPos = meowth->xPos;
     meowth->jewels[i].yPos = (meowth->yPos - 12) << 8;
     meowth->jewels[i].spriteId = CreateSprite(&sMeowthJewelSpriteTemplate, meowth->jewels[i].xPos, meowth->jewels[i].yPos, 4);
     meowth->jewels[i].xVelocity = ballXPos < meowth->xPos ? 2 : -2;
     meowth->jewels[i].yVelocity = -2 << 8;
-    meowth->jewels[i].destYPos = 88;
+    meowth->jewels[i].destYPos = meowth->yPos < 40 ? 72 : 88;
     gSprites[meowth->jewels[i].spriteId].data[0] = i;
     gSprites[meowth->jewels[i].spriteId].data[1] = JEWEL_STATE_HIDDEN;
 
@@ -1352,7 +1474,7 @@ static void UpdateJewels(struct MeowthJewel *jewels)
             jewel->yVelocity += 0x40;
             if ((jewel->yPos >> 8) >= jewel->destYPos)
             {
-                if (IsJewelSpaceOccupied(jewel->xPos, jewels))
+                if (IsJewelSpaceOccupied(jewel->xPos, jewel->destYPos, jewels))
                 {
                     jewel->yVelocity = -1 << 8;
                 }
@@ -1366,14 +1488,14 @@ static void UpdateJewels(struct MeowthJewel *jewels)
     }
 }
 
-static bool32 IsJewelSpaceOccupied(u16 xPos, struct MeowthJewel *jewels)
+static bool32 IsJewelSpaceOccupied(u16 xPos, u16 destYPos, struct MeowthJewel *jewels)
 {
     int i;
     struct MeowthJewel *jewel;
     for (i = 0; i < MAX_MEOWTH_JEWELS; i++)
     {
         jewel = &jewels[i];
-        if (jewel->state == JEWEL_STATE_LANDED && abs(xPos - jewel->xPos) < 16)
+        if (jewel->state == JEWEL_STATE_LANDED && jewel->destYPos == destYPos && abs(xPos - jewel->xPos) < 16)
             return TRUE;
     }
 
@@ -1439,7 +1561,7 @@ static void UpdateMeowthSprite(struct Sprite *sprite)
 
     if (curState == MEOWTH_STATE_HIT)
     {
-        if (--meowth->hitCounter == 0)
+        if (--meowth->hitDuration == 0)
             meowth->state = MEOWTH_STATE_WALK;
     }
 }
@@ -1476,5 +1598,43 @@ static void UpdateMeowthJewelSprite(struct Sprite *sprite)
     {
         sPinballGame->meowth.jewels[jewelId].state = JEWEL_STATE_HIDDEN;
         DestroySprite(sprite);
+    }
+}
+
+static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite)
+{
+    // data[0] = state
+    // data[1] = state counter
+    // data[2] = original y position
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos1.y--;
+        if (++sprite->data[1] == 5)
+        {
+            sprite->data[0] = 1;
+            sprite->data[1] = 0;
+            sprite->pos1.y = sprite->data[2];
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] >= 22)
+        {
+            sprite->data[0] = 2;
+            sprite->data[1] = 0;
+        }
+        break;
+    case 2:
+        if (++sprite->data[1] >= 24)
+        {
+            DestroySprite(sprite);
+            return;
+        }
+
+        if (sprite->data[1] % 8 < 4)
+            sprite->invisible = FALSE;
+        else
+            sprite->invisible = TRUE;
+        break;
     }
 }
