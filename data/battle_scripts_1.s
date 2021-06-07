@@ -7056,14 +7056,6 @@ BattleScript_ObliviousPreventsAttraction::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_FlinchPrevention::
-	pause 0x20
-	copybyte gBattlerAbility, gBattlerTarget
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNSXPREVENTSFLINCHING
-	waitmessage 0x40
-	goto BattleScript_MoveEnd
-
 BattleScript_OwnTempoPrevents::
 	pause 0x20
 	call BattleScript_AbilityPopUp
