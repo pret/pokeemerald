@@ -6,12 +6,18 @@ SRCS := json11.cpp mapjson.cpp
 
 HEADERS := mapjson.h
 
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
 .PHONY: all clean
 
-all: mapjson
+all: mapjson$(EXE)
 	@:
 
-mapjson: $(SRCS) $(HEADERS)
+mapjson$(EXE): $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:

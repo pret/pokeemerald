@@ -46,6 +46,8 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
 are actually part of battle_main.c. They needed to be moved to this file in order to

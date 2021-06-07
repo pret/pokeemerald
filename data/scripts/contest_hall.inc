@@ -916,7 +916,7 @@ ContestHall_EventScript_ContestResults:: @ 827A8A5
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
-	playbgm MUS_CONTEST_WINNER, 0
+	playbgm MUS_CONTEST_WINNER, FALSE
 	return
 
 ContestHall_EventScript_ThatsItForJudging:: @ 827A8FB
