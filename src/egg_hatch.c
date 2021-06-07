@@ -584,6 +584,9 @@ static void Task_EggHatchPlayBGM(u8 taskID)
         PlayBGM(MUS_EVOLUTION);
         DestroyTask(taskID);
         // UB: task is destroyed, yet the value is incremented
+        #ifdef UBFIX
+        return;
+        #endif
     }
     gTasks[taskID].data[0]++;
 }
