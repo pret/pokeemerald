@@ -271,7 +271,7 @@ PetalburgCity_EventScript_ShowGymToPlayer3:: @ 81DC4BE
 PetalburgCity_EventScript_ShowGymToPlayer:: @ 81DC4CA
 	applymovement LOCALID_GYM_BOY, Common_Movement_FacePlayer
 	waitmovement 0
-	playbgm MUS_FOLLOW_ME, 0
+	playbgm MUS_FOLLOW_ME, FALSE
 	playse SE_PIN
 	applymovement LOCALID_GYM_BOY, Common_Movement_ExclamationMark
 	waitmovement 0

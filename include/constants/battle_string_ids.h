@@ -502,7 +502,7 @@
 #define B_MSG_TRANSFORMED      0
 #define B_MSG_TRANSFORM_FAILED 1
 
-// gSubsituteUsedStringIds
+// gSubstituteUsedStringIds
 #define B_MSG_SET_SUBSTITUTE    0
 #define B_MSG_SUBSTITUTE_FAILED 1
 

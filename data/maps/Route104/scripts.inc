@@ -84,11 +84,11 @@ Route104_EventScript_PlayRivalMusic:: @ 81ECD11
 	return
 
 Route104_EventScript_PlayMayMusic:: @ 81ECD29
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
 Route104_EventScript_PlayBrendanMusic:: @ 81ECD2E
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
 Route104_EventScript_RivalEncounter:: @ 81ECD33
