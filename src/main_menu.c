@@ -1387,11 +1387,9 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
     switch (tState)
     {
         case 0:
-            if (sprite->callback == SpriteCallbackDummy)
-            {
-                sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-                goto incrementStateAndTimer;
-            }
+            if (sprite->callback != SpriteCallbackDummy)
+                return;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             break;
         case 1:
             if (gTasks[sBirchSpeechMainTaskId].tTimer >= 96)
@@ -1400,14 +1398,11 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
                 if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
                     gTasks[sBirchSpeechMainTaskId].tTimer++;
             }
-            break;
-        incrementStateAndTimer:
-        default:
-            tState++;
-            if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
-                gTasks[sBirchSpeechMainTaskId].tTimer++;
-            break;
+            return;
     }
+    tState++;
+    if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
+        gTasks[sBirchSpeechMainTaskId].tTimer++;
 }
 
 #undef tState
