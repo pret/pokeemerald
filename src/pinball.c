@@ -1,6 +1,7 @@
 #include "global.h"
 #include "bg.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "malloc.h"
@@ -21,7 +22,8 @@
 #include "constants/rgb.h"
 
 // In order to run the Pinball game, it should be launched via a normal script
-// like the example below.
+// like the example below. VAR_RESULT is set to 1 if the player successfully
+// completes the game, 0 otherwise.
 //
 // ...
 // callnative PlayPinballGame
@@ -39,6 +41,7 @@
 #define TAG_MEOWTH_JEWEL               503
 #define TAG_MEOWTH_JEWEL_MUTLIPLIER    504
 #define TAG_TILES_MEOWTH_JEWEL_SPARKLE 505
+#define TAG_TIMER_DIGIT                506
 
 enum
 {
@@ -47,6 +50,7 @@ enum
     PINBALL_LOST_BALL_FADE_OUT,
     PINBALL_LOST_BALL_FADE_IN,
     PINBALL_STATE_START_EXIT,
+    PINBALL_STATE_DELAY_START_EXIT,
     PINBALL_STATE_EXIT,
     PINBALL_STATE_WAIT_ANIM,
 };
@@ -109,6 +113,7 @@ struct Meowth
     struct MeowthJewel jewels[MAX_MEOWTH_JEWELS];
     int score;
     int jewelStreak;
+    bool32 completed;
 };
 
 #define FLIPPER_LEFT  0
@@ -125,12 +130,22 @@ struct Flipper
     int stateDelta;
 };
 
+struct Timer
+{
+    u32 ticks;
+    u8 minutesSpriteId;
+    u8 colonSpriteId;
+    u8 tensSpriteId;
+    u8 onesSpriteId;
+};
+
 struct PinballGame
 {
     u8 state;
     struct Ball ball;
     struct Flipper leftFlipper;
     struct Flipper rightFlipper;
+    struct Timer timer;
     bool8 gravityEnabled;
     u8 stageTileWidth;
     u8 stageTileHeight;
@@ -138,6 +153,9 @@ struct PinballGame
     u16 cameraScrollY;
     struct Meowth meowth;
     bool8 ballIsEntering;
+    bool8 flippersDisabled;
+    bool8 completed;
+    u8 exitTimer;
     MainCallback returnMainCallback;
 };
 
@@ -146,6 +164,7 @@ static void InitPinballScreen(void);
 static void InitPinballGame(void);
 static void InitBallSprite(void);
 static void InitFlipperSprites(void);
+static void InitTimerSprites(void);
 static void InitMeowth(void);
 static void PinballVBlankCallback(void);
 static void PinballMainCallback(void);
@@ -168,13 +187,15 @@ static void RotateVector(s16 *x, s16 *y, u8 angle);
 static u8 ReverseBits(u8 value);
 static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification);
 static void UpdateCamera(void);
+static void UpdateTimer(void);
 static void StartExitPinballGame(void);
 static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
 static void UpdateFlipperSprite(struct Sprite *sprite);
-static void UpdateMeowth(struct Meowth *meowth);
-static bool32 CheckObjectsCollision(struct Ball *ball, u8 *outCollisionNormal, int *outCollisionAmplification);
-static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal, int *outCollisionAmplification);
+static void UpdateTimerDigitSprite(struct Sprite *sprite);
+static bool32 UpdateMeowth(struct Meowth *meowth);
+static bool32 CheckObjectsCollision(struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
+static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 CheckJewelCollision(struct Ball *ball, struct MeowthJewel *jewel, u8 *outCollisionNormal);
 static bool32 IsJewelSpaceOccupied(u16 xPos, u16 destYPos, struct MeowthJewel *jewels);
 static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal);
@@ -244,6 +265,8 @@ static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball
 static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_pokeball.gbapal");
 static const u32 sFlipperGfx[] = INCBIN_U32("graphics/pinball/flipper.4bpp.lz");
 static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal");
+static const u32 sTimerDigitsGfx[] = INCBIN_U32("graphics/pinball/timer_digits.4bpp.lz");
+static const u16 sTimerDigitsPalette[] = INCBIN_U16("graphics/pinball/timer_digits.gbapal");
 
 static const u8 sFlipperCollisionRadii[] = INCBIN_U8("data/pinball/flipper_radii.bin");
 static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flipper_normal_angles.bin");
@@ -257,6 +280,24 @@ static const u32 sMeowthJewelSparkleGfx[] = INCBIN_U32("graphics/pinball/meowth_
 static const u16 sMeowthJewelMultipliersPalette[] = INCBIN_U16("graphics/pinball/meowth_jewel_multipliers.gbapal");
 static const u8 sMeowthCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_normal_angles.bin");
 static const u8 sMeowthJewelCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_jewel_normal_angles.bin");
+
+static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
+    .data = sBallPokeballGfx,
+    .size = 0x400,
+    .tag = TAG_BALL_POKEBALL,
+};
+
+static const struct CompressedSpriteSheet sFlipperSpriteSheet = {
+    .data = sFlipperGfx,
+    .size = 0x600,
+    .tag = TAG_FLIPPER,
+};
+
+static const struct CompressedSpriteSheet sTimerDigitsSpriteSheet = {
+    .data = sTimerDigitsGfx,
+    .size = 0x2C0,
+    .tag = TAG_TIMER_DIGIT,
+};
 
 static const struct CompressedSpriteSheet sMeowthAnimationSpriteSheet = {
     .data = sMeowthAnimationGfx,
@@ -282,20 +323,9 @@ static const struct CompressedSpriteSheet sMeowthSparkleSpriteSheet = {
     .tag = TAG_TILES_MEOWTH_JEWEL_SPARKLE,
 };
 
-static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
-    .data = sBallPokeballGfx,
-    .size = 0x400,
-    .tag = TAG_BALL_POKEBALL,
-};
-
-static const struct CompressedSpriteSheet sFlipperSpriteSheet = {
-    .data = sFlipperGfx,
-    .size = 0x600,
-    .tag = TAG_FLIPPER,
-};
-
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
+static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
 static const struct SpritePalette sMeowthAnimationSpritePalette = { sMeowthAnimationPalette, TAG_MEOWTH };
 static const struct SpritePalette sMeowthJewelSpritePalette = { sMeowthJewelPalette, TAG_MEOWTH_JEWEL };
 static const struct SpritePalette sMeowthJewelMultipliersSpritePalette = { sMeowthJewelMultipliersPalette, TAG_MEOWTH_JEWEL_MUTLIPLIER };
@@ -400,6 +430,65 @@ static const struct SpriteTemplate sFlipperSpriteTemplate = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateFlipperSprite,
+};
+
+static const struct OamData sTimerDigitOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+#define TIMER_DIGIT_FRAME_ANIMCMD(n) \
+static const union AnimCmd sTimerDigitAnimCmd_##n[] =\
+{\
+    ANIMCMD_FRAME((n) * 2, 0),\
+    ANIMCMD_END,\
+};
+
+TIMER_DIGIT_FRAME_ANIMCMD(0)
+TIMER_DIGIT_FRAME_ANIMCMD(1)
+TIMER_DIGIT_FRAME_ANIMCMD(2)
+TIMER_DIGIT_FRAME_ANIMCMD(3)
+TIMER_DIGIT_FRAME_ANIMCMD(4)
+TIMER_DIGIT_FRAME_ANIMCMD(5)
+TIMER_DIGIT_FRAME_ANIMCMD(6)
+TIMER_DIGIT_FRAME_ANIMCMD(7)
+TIMER_DIGIT_FRAME_ANIMCMD(8)
+TIMER_DIGIT_FRAME_ANIMCMD(9)
+TIMER_DIGIT_FRAME_ANIMCMD(10)
+
+static const union AnimCmd *const sTimerDigitAnimCmds[] = {
+    sTimerDigitAnimCmd_0,
+    sTimerDigitAnimCmd_1,
+    sTimerDigitAnimCmd_2,
+    sTimerDigitAnimCmd_3,
+    sTimerDigitAnimCmd_4,
+    sTimerDigitAnimCmd_5,
+    sTimerDigitAnimCmd_6,
+    sTimerDigitAnimCmd_7,
+    sTimerDigitAnimCmd_8,
+    sTimerDigitAnimCmd_9,
+    sTimerDigitAnimCmd_10,
+};
+
+static const struct SpriteTemplate sTimerDigitSpriteTemplate = {
+    .tileTag = TAG_TIMER_DIGIT,
+    .paletteTag = TAG_TIMER_DIGIT,
+    .oam = &sTimerDigitOamData,
+    .anims = sTimerDigitAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateTimerDigitSprite,
 };
 
 static const struct OamData sMeowthOamData = {
@@ -774,6 +863,8 @@ static void InitPinballScreen(void)
         LoadSpritePalette(&sPinballSpritePalette);
         LoadCompressedSpriteSheet(&sFlipperSpriteSheet);
         LoadSpritePalette(&sFlipperSpritePalette);
+        LoadCompressedSpriteSheet(&sTimerDigitsSpriteSheet);
+        LoadSpritePalette(&sTimerDigitsSpritePalette);
         LoadCompressedSpriteSheet(&sMeowthAnimationSpriteSheet);
         LoadSpritePalette(&sMeowthAnimationSpritePalette);
         LoadCompressedSpriteSheet(&sMeowthJewelSpriteSheet);
@@ -784,6 +875,7 @@ static void InitPinballScreen(void)
         InitPinballGame();
         InitBallSprite();
         InitFlipperSprites();
+        InitTimerSprites();
         InitMeowth();
         StartNewBall();
         gMain.state++;
@@ -807,6 +899,8 @@ static void InitPinballGame(void)
     sPinballGame->leftFlipper.type = FLIPPER_LEFT;
     sPinballGame->leftFlipper.xPos = 67;
     sPinballGame->leftFlipper.yPos = 122;
+    sPinballGame->timer.ticks = 60 * 60;
+    sPinballGame->flippersDisabled = FALSE;
 }
 
 static void InitBallSprite(void)
@@ -823,6 +917,22 @@ static void InitFlipperSprites(void)
     gSprites[sPinballGame->rightFlipper.spriteId].data[0] = FLIPPER_RIGHT;
     StartSpriteAnim(&gSprites[sPinballGame->leftFlipper.spriteId], 0);
     StartSpriteAnim(&gSprites[sPinballGame->rightFlipper.spriteId], 3);
+}
+
+static void InitTimerSprites(void)
+{
+    sPinballGame->timer.minutesSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 131, 109, 4);
+    sPinballGame->timer.colonSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 139, 109, 4);
+    sPinballGame->timer.tensSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 147, 109, 4);
+    sPinballGame->timer.onesSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 155, 109, 4);
+    gSprites[sPinballGame->timer.minutesSpriteId].data[0] = 0;
+    gSprites[sPinballGame->timer.colonSpriteId].data[0] = 1;
+    gSprites[sPinballGame->timer.tensSpriteId].data[0] = 2;
+    gSprites[sPinballGame->timer.onesSpriteId].data[0] = 3;
+    StartSpriteAnim(&gSprites[sPinballGame->timer.minutesSpriteId], 0);
+    StartSpriteAnim(&gSprites[sPinballGame->timer.colonSpriteId], 10);
+    StartSpriteAnim(&gSprites[sPinballGame->timer.tensSpriteId], 0);
+    StartSpriteAnim(&gSprites[sPinballGame->timer.onesSpriteId], 0);
 }
 
 static void InitMeowth(void)
@@ -860,6 +970,8 @@ static void PinballMainCallback(void)
 
 static void PinballMain(u8 taskId)
 {
+    bool32 completed;
+
     switch (sPinballGame->state)
     {
     case PINBALL_STATE_INIT:
@@ -869,9 +981,13 @@ static void PinballMain(u8 taskId)
         }
         break;
     case PINBALL_STATE_RUNNING:
-        UpdateMeowth(&sPinballGame->meowth);
+        completed = UpdateMeowth(&sPinballGame->meowth);
+        if (!sPinballGame->completed && completed)
+            sPinballGame->completed = TRUE;
+
         HandleBallPhysics();
         UpdateCamera();
+        UpdateTimer();
         break;
     case PINBALL_LOST_BALL_FADE_OUT:
         if (!gPaletteFade.active)
@@ -885,6 +1001,10 @@ static void PinballMain(u8 taskId)
     case PINBALL_LOST_BALL_FADE_IN:
         if (!gPaletteFade.active)
             sPinballGame->state = PINBALL_STATE_RUNNING;
+        break;
+    case PINBALL_STATE_DELAY_START_EXIT:
+        if (--sPinballGame->exitTimer == 0)
+            sPinballGame->state = PINBALL_STATE_START_EXIT;
         break;
     case PINBALL_STATE_START_EXIT:
         StartExitPinballGame();
@@ -976,7 +1096,7 @@ static void HandleBallPhysics(void)
     LimitVelocity(ball);
     isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal, &collisionAmplification);
     if (!isFlipperColliding)
-        isObjectColliding = CheckObjectsCollision(ball, &objectCollisionNormal, &collisionAmplification);
+        isObjectColliding = CheckObjectsCollision(ball, sPinballGame->timer.ticks, &objectCollisionNormal, &collisionAmplification);
 
     isStaticColliding = CheckStaticCollision(ball, sPinballGame->ballIsEntering, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
     if (isFlipperColliding)
@@ -1001,8 +1121,17 @@ static void HandleBallPhysics(void)
 
 static void LoseBall(void)
 {
-    sPinballGame->state = PINBALL_LOST_BALL_FADE_OUT;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
+    if (sPinballGame->timer.ticks > 0 && !sPinballGame->completed)
+    {
+        sPinballGame->state = PINBALL_LOST_BALL_FADE_OUT;
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
+    }
+    else
+    {
+        sPinballGame->state = PINBALL_STATE_DELAY_START_EXIT;
+        sPinballGame->exitTimer = 2 * 60;
+        gSpecialVar_Result = sPinballGame->completed;
+    }
 }
 
 #define JEWEL_SPARKLE_DURATION 180
@@ -1074,7 +1203,7 @@ static void UpdateFlipperState(struct Flipper *flipper)
     int stateDelta;
 
     flipper->prevState = flipper->state;
-    if (gMain.heldKeys & (A_BUTTON | B_BUTTON))
+    if (!sPinballGame->flippersDisabled && (gMain.heldKeys & (A_BUTTON | B_BUTTON)))
     {
         if (flipper->state == 0x0FFF)
             stateDelta = 0;
@@ -1386,6 +1515,31 @@ static void UpdateCamera(void)
     SetGpuReg(REG_OFFSET_BG1VOFS, scrollY);
 }
 
+static void UpdateTimer(void)
+{
+    int flipperPaletteIndex;
+
+    if (sPinballGame->timer.ticks > 0)
+    {
+        if (--sPinballGame->timer.ticks == 0)
+        {
+            // Time has completely run out.
+            // Disable the flippers, and play any ending
+            // animation stuff.
+            sPinballGame->flippersDisabled = TRUE;
+
+            // Change the flippers' color to red.
+            flipperPaletteIndex = IndexOfSpritePaletteTag(TAG_FLIPPER);
+            gPlttBufferUnfaded[0x100 + flipperPaletteIndex * 0x10 + 2] = RGB(20, 4, 4);
+            gPlttBufferUnfaded[0x100 + flipperPaletteIndex * 0x10 + 3] = RGB(27, 10, 10);
+            gPlttBufferFaded[0x100 + flipperPaletteIndex * 0x10 + 2] = RGB(20, 4, 4);
+            gPlttBufferFaded[0x100 + flipperPaletteIndex * 0x10 + 3] = RGB(27, 10, 10);
+
+            sPinballGame->meowth.state = MEOWTH_STATE_FINISH;
+        }
+    }
+}
+
 static void StartExitPinballGame(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -1429,14 +1583,35 @@ static void UpdateFlipperSprite(struct Sprite *sprite)
     StartSpriteAnim(sprite, anim);
 }
 
+static void UpdateTimerDigitSprite(struct Sprite *sprite)
+{
+    int minutes, tensDigit, onesDigit;
+    int type = sprite->data[0];
+
+    switch (type)
+    {
+    case 0: // Minutes ones digit
+        minutes = (sPinballGame->timer.ticks / 3600) % 10;
+        StartSpriteAnim(sprite, minutes);
+        break;
+    case 2: // Seconds tens digit
+        tensDigit = ((sPinballGame->timer.ticks / 60) % 60) / 10;
+        StartSpriteAnim(sprite, tensDigit);
+        break;
+    case 3: // Seconds ones digit
+        onesDigit = ((sPinballGame->timer.ticks / 60) % 60) % 10;
+        StartSpriteAnim(sprite, onesDigit);
+        break;
+    }
+}
+
 #define MEOWTH_HORIZONTAL_SPEED 1
 #define MEOWTH_VERTICAL_SPEED 1
 
-static void UpdateMeowth(struct Meowth *meowth)
+static bool32 UpdateMeowth(struct Meowth *meowth)
 {
-    switch (meowth->state)
+    if (meowth->state == MEOWTH_STATE_WALK)
     {
-    case MEOWTH_STATE_WALK:
         if (meowth->facing == MEOWTH_FACING_RIGHT)
             meowth->xPos += MEOWTH_HORIZONTAL_SPEED;
         else
@@ -1473,32 +1648,31 @@ static void UpdateMeowth(struct Meowth *meowth)
         {
             meowth->yMovement = Random() % 2 ? -MEOWTH_VERTICAL_SPEED : MEOWTH_VERTICAL_SPEED;
         }
-
-        break;
-    case MEOWTH_STATE_HIT:
-        break;
-    case MEOWTH_STATE_FINISH:
-        break;
     }
 
     UpdateJewels(meowth->jewels);
+    return meowth->completed;
 }
 
-static bool32 CheckObjectsCollision(struct Ball *ball, u8 *outCollisionNormal, int *outCollisionAmplification)
+static bool32 CheckObjectsCollision(struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
-    bool32 isColliding = CheckMeowthCollision(ball, &sPinballGame->meowth, outCollisionNormal, outCollisionAmplification);
+    bool32 isColliding = CheckMeowthCollision(ball, &sPinballGame->meowth, ticks, outCollisionNormal, outCollisionAmplification);
     if (!isColliding)
         isColliding = CheckMeowthJewelsCollision(ball, &sPinballGame->meowth, outCollisionNormal);
 
     return isColliding;
 }
 
-static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u8 *outCollisionNormal, int *outCollisionAmplification)
+static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     int x, y;
     u8 collisionNormal;
     int ballXPos = (ball->xPos >> 8);
     int ballYPos = (ball->yPos >> 8);
+
+    if (ticks <= 0)
+        return FALSE;
+
     if (ballXPos < meowth->xPos - 24 || ballXPos >= meowth->xPos + 24
      || ballYPos < meowth->yPos - 20 || ballYPos >= meowth->yPos + 20)
         return FALSE;
@@ -1539,6 +1713,9 @@ static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowt
                     meowth->jewelStreak = 6;
 
                 meowth->score += meowth->jewelStreak;
+                if (!meowth->completed && meowth->score >= 20)
+                    meowth->completed = TRUE;
+
                 sparkleSprite->data[0] = JEWEL_SPARKLE_DURATION;
                 sparkleSprite->data[1] = min(20, meowth->score);
                 DrawMeowthScoreJewels(meowth);
