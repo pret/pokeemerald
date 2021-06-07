@@ -143,7 +143,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RestoreParty:: @ 8249121
 	special LoadPlayerParty
 	frontier_setpartyorder FRONTIER_MULTI_PARTY_SIZE
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_249514
+	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink
 	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
@@ -155,7 +155,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents:: @ 8
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoRecord
-	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattle
@@ -164,7 +164,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents:: @ 8
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoRecord:: @ 82491B1
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge
@@ -174,7 +174,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoReco
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattle:: @ 82491E7
 	message BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents
 	case 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RecordBattle
@@ -194,7 +194,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge:: @ 8249
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge:: @ 8249251
 	message BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents
 	case 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
@@ -324,7 +324,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_LinkDelayForMsg:: @ 824941
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLink:: @ 8249417
 	goto_if_set FLAG_TEMP_2, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNoRecord
-	multichoice 19, 6, MULTI_GO_ON_RECORD_RETIRE, 1
+	multichoice 19, 6, MULTI_GO_ON_RECORD_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink
@@ -333,7 +333,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLink::
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNoRecord:: @ 8249457
-	multichoice 20, 8, MULTI_GO_ON_RETIRE, 1
+	multichoice 20, 8, MULTI_GO_ON_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink
@@ -355,7 +355,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink:: @ 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink:: @ 82494A8
 	message BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents
@@ -367,7 +367,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink:: @ 82
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink:: @ 82494DD
 	message BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents
@@ -383,9 +383,8 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink:: @ 82
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
 	end
 
-@ Some link function. Sets battle type flags at least
-BattleFrontier_BattleTowerMultiBattleRoom_EventScript_249514:: @ 8249514
-	special sub_813B534
+BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink:: @ 8249514
+	special BattleTowerReconnectLink
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_PlayerEnterRoom: @ 8249518

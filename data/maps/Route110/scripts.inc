@@ -410,11 +410,11 @@ Route110_EventScript_RivalScene:: @ 81EF76E
 	end
 
 Route110_EventScript_PlayMayMusic:: @ 81EF7E1
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
 Route110_EventScript_PlayBrendanMusic:: @ 81EF7E6
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
 Route110_EventScript_MayBattle:: @ 81EF7EB
