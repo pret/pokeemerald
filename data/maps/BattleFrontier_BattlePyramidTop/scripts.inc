@@ -53,7 +53,7 @@ BattleFrontier_BattlePyramidTop_OnFrame: @ 825516E
 	.2byte 0
 
 BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic:: @ 8255180
-	playbgm MUS_B_PYRAMID_TOP, 0
+	playbgm MUS_B_PYRAMID_TOP, FALSE
 	setvar VAR_TEMP_E, 1
 	end
 
@@ -136,7 +136,7 @@ BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech:: @ 82552D0
 BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonSilver:: @ 82552DA
 	msgbox BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle
-	playbgm MUS_B_PYRAMID_TOP, 0
+	playbgm MUS_B_PYRAMID_TOP, FALSE
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
@@ -176,7 +176,7 @@ BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech:: @ 8255388
 BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonGold:: @ 8255392
 	msgbox BattleFrontier_BattlePyramidTop_Text_EverythingYouHave, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle
-	playbgm MUS_B_PYRAMID_TOP, 0
+	playbgm MUS_B_PYRAMID_TOP, FALSE
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost

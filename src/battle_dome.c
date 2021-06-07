@@ -2766,13 +2766,22 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
             }
             if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
             {
-                // BUG: TYPE_x2 is not necessary and makes the condition always false if the ability is wonder guard.
+                // BUG: the value of TYPE_x2 does not exist in gTypeEffectiveness, so if defAbility is ABILITY_WONDER_GUARD, the conditional always fails
+                #ifndef BUGFIX
                 if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
                     if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_x2) || defAbility != ABILITY_WONDER_GUARD)
                         typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
                 if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
                     if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_x2) || defAbility != ABILITY_WONDER_GUARD)
                         typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                #else
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                #endif
             }
             i += 3;
         }
@@ -5211,40 +5220,38 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
     }
 
     j = bestId;
-    goto LABEL;
-    while (j != 0)
+    do
     {
-        for (j = 0, k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
+        for (i = 0; i < roundId - 1; i++)
         {
-            if (bestScore < moveScores[k])
-            {
-                j = k;
-                bestScore = moveScores[k];
-            }
-            else if (bestScore == moveScores[k] && moveIds[j] < moveIds[k])
-            {
-                j = k;
-            }
-        }
-        if (i == roundId - 1)
-            break;
-        LABEL:
-        {
-            for (i = 0; i < roundId - 1; i++)
-            {
-                if (gSaveBlock2Ptr->frontier.domeWinningMoves[sub_81953E8(winnerTournamentId, i)] == moveIds[j])
-                    break;
-            }
-            if (i == roundId - 1)
+            if (gSaveBlock2Ptr->frontier.domeWinningMoves[sub_81953E8(winnerTournamentId, i)] == moveIds[j])
                 break;
-
+        }
+        if (i != roundId - 1)
+        {
             moveScores[j] = 0;
             bestScore = 0;
             j = 0;
             for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
                 j += moveScores[k];
+            if (j == 0)
+                break;
+            j = 0;
+            for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
+            {
+                if (bestScore < moveScores[k])
+                {
+                    j = k;
+                    bestScore = moveScores[k];
+                }
+                else if (bestScore == moveScores[k] && moveIds[j] < moveIds[k]) // Yes, these conditions are redundant
+                {
+                    j = k;
+                    bestScore = moveScores[k];
+                }
+            }
         }
-    }
+    } while (i != roundId - 1);
 
     if (moveScores[j] == 0)
         j = bestId;

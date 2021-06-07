@@ -1099,21 +1099,14 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
     u8 text[16];
-    u32 xPos, var1;
-    void *objVram;
+    u32 xPos;
+    u8 *objVram;
+    
+    text[0] = CHAR_EXTRA_SYMBOL;
+    text[1] = CHAR_LV_2;
 
-    text[0] = 0xF9;
-    text[1] = 5;
-
-    xPos = (u32) ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
-    // Alright, that part was unmatchable. It's basically doing:
-    // xPos = 5 * (3 - (u32)(&text[2]));
-    xPos--;
-    xPos--;
-    xPos -= ((u32)(text));
-    var1 = (3 - xPos);
-    xPos = 4 * var1;
-    xPos += var1;
+    objVram = ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+    xPos = 5 * (3 - (objVram - (text + 2)));
 
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;

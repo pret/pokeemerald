@@ -30,7 +30,7 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
-/* Summary of Apprentice, because (as of writing at least) its not very well documented online
+/* Summary of Apprentice, because (as of writing at least) it's not very well documented online
  *
  * ## Basic info
  * In the Battle Tower lobby there is an NPC which asks to be taught by the player
@@ -1107,17 +1107,24 @@ static void TrySetApprenticeHeldItem(void)
 
     if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
         return;
-
-    for (count = 0, j = 0; j < APPRENTICE_MAX_QUESTIONS && PLAYER_APPRENTICE.questions[j].questionId != QUESTION_ID_WIN_SPEECH; count++, j++)
-        ;
-
-    // Make sure the item hasnt already been suggested in previous questions
-    for (i = 0; i < count && i < CURRENT_QUESTION_NUM; i++)
+    
+    count = 0;
+    for (j = 0; j < APPRENTICE_MAX_QUESTIONS; j++)
     {
-        do {} while(0);
-        if (PLAYER_APPRENTICE.questions[i].questionId == QUESTION_ID_WHAT_ITEM
-            && PLAYER_APPRENTICE.questions[i].suggestedChange
-            && PLAYER_APPRENTICE.questions[i].data == gSpecialVar_0x8005)
+        if (PLAYER_APPRENTICE.questions[j].questionId == QUESTION_ID_WIN_SPEECH)
+            break;
+        count++;
+    }
+
+    // Make sure the item hasn't already been suggested in previous questions
+    for (i = 0; i < count; i++)
+    {
+        if (i >= CURRENT_QUESTION_NUM)
+            break;
+        if (PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WHAT_ITEM ||
+            PLAYER_APPRENTICE.questions[i].suggestedChange == 0)
+            continue;
+        if (PLAYER_APPRENTICE.questions[i].data == gSpecialVar_0x8005)
         {
             PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].suggestedChange = FALSE;
             PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_0x8005;

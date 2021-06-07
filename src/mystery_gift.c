@@ -558,14 +558,12 @@ bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
     {
     case 0:
         AddTextPrinterToWindow1(str);
-        goto inc;
+        (*textState)++;
+        break;
     case 1:
         DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
         if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
-        {
-        inc:
             (*textState)++;
-        }
         break;
     case 2:
         DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
@@ -574,7 +572,7 @@ bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
         return TRUE;
     case 0xFF:
         *textState = 2;
-        break;
+        return FALSE;
     }
     return FALSE;
 }
@@ -809,8 +807,6 @@ static bool32 ValidateCardOrNews(bool32 cardOrNews)
 
 static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
 {
-    s32 v0;
-
     switch (*state)
     {
     case 0:
@@ -827,20 +823,18 @@ static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 1:
         if (cardOrNews == 0)
         {
-            v0 = FadeToWonderCardMenu();
-        check:
-            if (v0 != 0)
+            if (!FadeToWonderCardMenu())
             {
-                goto done;
+                return FALSE;
             }
-            break;
         }
         else
         {
-            v0 = FadeToWonderNewsMenu();
-            goto check;
+            if (!FadeToWonderNewsMenu())
+            {
+                return FALSE;
+            }
         }
-    done:
         *state = 0;
         return TRUE;
     }
