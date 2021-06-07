@@ -4221,12 +4221,17 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
+        #ifndef UBFIX
         DestroyTask(taskId);
+        #endif
         // UB: Should not use the task after it has been deleted.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
+        #ifdef UBFIX
+        DestroyTask(taskId);
+        #endif
         return;
     }
     task->tState++;

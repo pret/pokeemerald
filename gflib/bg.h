@@ -59,7 +59,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId);
 s32 ChangeBgX(u8 bg, s32 value, u8 op);
 s32 GetBgX(u8 bg);
 s32 ChangeBgY(u8 bg, s32 value, u8 op);
-s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op);
+s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op);
 s32 GetBgY(u8 bg);
 void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle);
 u8 Unused_AdjustBgMosaic(u8 a1, u8 a2);

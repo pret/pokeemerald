@@ -670,7 +670,8 @@ static void RotatingGate_RotateInDirection(u8 gateId, u32 rotationDirection)
     }
     else
     {
-        orientation = ++orientation % GATE_ORIENTATION_MAX;
+        orientation++;
+        orientation = orientation % GATE_ORIENTATION_MAX;
     }
     RotatingGate_SetGateOrientation(gateId, orientation);
 }
