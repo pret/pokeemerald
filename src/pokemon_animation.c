@@ -212,7 +212,7 @@ static struct PokemonAnimData sAnims[MAX_BATTLERS_COUNT];
 static u8 sAnimIdx;
 static bool32 sIsSummaryAnim;
 
-static const u8 sSpeciesToBackAnimSet[] =
+static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
 {
     [SPECIES_BULBASAUR]  = BACK_ANIM_DIP_RIGHT_SIDE,
     [SPECIES_IVYSAUR]    = BACK_ANIM_H_SLIDE,

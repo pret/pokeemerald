@@ -6983,10 +6983,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_HEALTH_WING] =
+    [ITEM_HEALTH_FEATHER] =
     {
         .name = _("HealthFeather"),
-        .itemId = ITEM_HEALTH_WING,
+        .itemId = ITEM_HEALTH_FEATHER,
         .price = 300,
         .holdEffect = 0,
         .holdEffectParam = 4,
@@ -6997,10 +6997,10 @@ const struct Item gItems[] =
         .secondaryId = STAT_HP,
     },
 
-    [ITEM_MUSCLE_WING] =
+    [ITEM_MUSCLE_FEATHER] =
     {
         .name = _("MuscleFeather"),
-        .itemId = ITEM_MUSCLE_WING,
+        .itemId = ITEM_MUSCLE_FEATHER,
         .price = 300,
         .holdEffect = 0,
         .holdEffectParam = 4,
@@ -7011,10 +7011,10 @@ const struct Item gItems[] =
         .secondaryId = STAT_ATK,
     },
 
-    [ITEM_RESIST_WING] =
+    [ITEM_RESIST_FEATHER] =
     {
         .name = _("ResistFeather"),
-        .itemId = ITEM_RESIST_WING,
+        .itemId = ITEM_RESIST_FEATHER,
         .price = 300,
         .holdEffect = 0,
         .holdEffectParam = 4,
@@ -7025,10 +7025,10 @@ const struct Item gItems[] =
         .secondaryId = STAT_DEF,
     },
 
-    [ITEM_GENIUS_WING] =
+    [ITEM_GENIUS_FEATHER] =
     {
         .name = _("GeniusFeather"),
-        .itemId = ITEM_GENIUS_WING,
+        .itemId = ITEM_GENIUS_FEATHER,
         .price = 300,
         .holdEffect = 0,
         .holdEffectParam = 4,
@@ -7039,10 +7039,10 @@ const struct Item gItems[] =
         .secondaryId = STAT_SPATK,
     },
 
-    [ITEM_CLEVER_WING] =
+    [ITEM_CLEVER_FEATHER] =
     {
         .name = _("CleverFeather"),
-        .itemId = ITEM_CLEVER_WING,
+        .itemId = ITEM_CLEVER_FEATHER,
         .price = 300,
         .holdEffect = 0,
         .holdEffectParam = 4,
@@ -7053,10 +7053,10 @@ const struct Item gItems[] =
         .secondaryId = STAT_SPDEF,
     },
 
-    [ITEM_SWIFT_WING] =
+    [ITEM_SWIFT_FEATHER] =
     {
         .name = _("Swift Feather"),
-        .itemId = ITEM_SWIFT_WING,
+        .itemId = ITEM_SWIFT_FEATHER,
         .price = 300,
         .holdEffect = 0,
         .holdEffectParam = 4,
@@ -7067,10 +7067,10 @@ const struct Item gItems[] =
         .secondaryId = STAT_SPEED,
     },
 
-    [ITEM_PRETTY_WING] =
+    [ITEM_PRETTY_FEATHER] =
     {
         .name = _("PrettyFeather"),
-        .itemId = ITEM_PRETTY_WING,
+        .itemId = ITEM_PRETTY_FEATHER,
         .price = 1000,
         .description = sPrettyWingDesc,
         .pocket = POCKET_ITEMS,

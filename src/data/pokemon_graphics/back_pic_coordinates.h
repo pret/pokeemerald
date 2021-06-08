@@ -4063,7 +4063,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_RILLABOOM] =
     {
         .size = 0x85,
-        .y_offset = 13,
+        .y_offset = 4,
     },
     [SPECIES_SCORBUNNY] =
     {
@@ -4093,7 +4093,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_INTELEON] =
     {
         .size = 0x85,
-        .y_offset = 13,
+        .y_offset = 4,
     },
     [SPECIES_SKWOVET] =
     {
@@ -4473,7 +4473,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_REGIELEKI] =
     {
         .size = 0x85,
-        .y_offset = 13,
+        .y_offset = 9,
     },
     [SPECIES_REGIDRAGO] =
     {
@@ -6075,7 +6075,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_ETERNATUS_ETERNAMAX] =
     {
         .size = 0x85,
-        .y_offset = 13,
+        .y_offset = 7,
     },
     // Urshifu
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE] =

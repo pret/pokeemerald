@@ -812,13 +812,13 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(MELMETAL, gMonBackPic_Melmetal),
     SPECIES_SPRITE(GROOKEY, gMonBackPic_Grookey),
     SPECIES_SPRITE(THWACKEY, gMonBackPic_Thwackey),
-    SPECIES_SPRITE(RILLABOOM, gMonBackPic_DoubleQuestionMark/*gMonBackPic_Rillaboom*/),
+    SPECIES_SPRITE(RILLABOOM, gMonBackPic_Rillaboom),
     SPECIES_SPRITE(SCORBUNNY, gMonBackPic_Scorbunny),
     SPECIES_SPRITE(RABOOT, gMonBackPic_Raboot),
     SPECIES_SPRITE(CINDERACE, gMonBackPic_Cinderace),
     SPECIES_SPRITE(SOBBLE, gMonBackPic_Sobble),
     SPECIES_SPRITE(DRIZZILE, gMonBackPic_Drizzile),
-    SPECIES_SPRITE(INTELEON, gMonBackPic_DoubleQuestionMark/*gMonBackPic_Inteleon*/),
+    SPECIES_SPRITE(INTELEON, gMonBackPic_Inteleon),
     SPECIES_SPRITE(SKWOVET, gMonBackPic_Skwovet),
     SPECIES_SPRITE(GREEDENT, gMonBackPic_Greedent),
     SPECIES_SPRITE(ROOKIDEE, gMonBackPic_Rookidee),
@@ -894,7 +894,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(KUBFU, gMonBackPic_Kubfu),
     SPECIES_SPRITE(URSHIFU, gMonBackPic_Urshifu),
     SPECIES_SPRITE(ZARUDE, gMonBackPic_Zarude),
-    SPECIES_SPRITE(REGIELEKI, gMonBackPic_DoubleQuestionMark/*gMonBackPic_Regieleki*/),
+    SPECIES_SPRITE(REGIELEKI, gMonBackPic_Regieleki),
     SPECIES_SPRITE(REGIDRAGO, gMonBackPic_Regidrago),
     SPECIES_SPRITE(GLASTRIER, gMonBackPic_Glastrier),
     SPECIES_SPRITE(SPECTRIER, gMonBackPic_Spectrier),
@@ -1263,7 +1263,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
 
     SPECIES_SPRITE(ZAMAZENTA_CROWNED_SHIELD, gMonBackPic_ZamazentaCrownedShield),
 
-    SPECIES_SPRITE(ETERNATUS_ETERNAMAX, gMonBackPic_Eternatus/*Eternamax*/),
+    SPECIES_SPRITE(ETERNATUS_ETERNAMAX, gMonBackPic_EternatusEternamax),
 
     SPECIES_SPRITE(URSHIFU_RAPID_STRIKE_STYLE, gMonBackPic_UrshifuRapidStrikeStyle),
 
