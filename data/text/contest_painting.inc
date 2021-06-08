@@ -1,4 +1,4 @@
-gContestPaintingCaption:: @ 827EA0C
+gContestHallPaintingCaption:: @ 827EA0C
 	.string "{STR_VAR_1}\n"
 	.string "{STR_VAR_2}'s {STR_VAR_3}$"
 

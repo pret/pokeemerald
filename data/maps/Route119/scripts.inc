@@ -74,11 +74,11 @@ Route119_EventScript_RivalEncounter:: @ 81F4488
 	end
 
 Route119_EventScript_PlayMayMusic:: @ 81F4501
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
 Route119_EventScript_PlayBrendanMusic:: @ 81F4506
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
 Route119_EventScript_BattleMay:: @ 81F450B

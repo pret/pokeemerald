@@ -802,7 +802,7 @@ static void AddRibbonCountWindow(struct PokenavSub14 *structPtr)
 
 static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
 {
-    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
     ConvertIntToDecimalStringN(gStringVar1, GetCurrMonRibbonCount(), STR_CONV_MODE_LEFT_ALIGN, 2);
     DynamicPlaceholderTextUtil_Reset();
@@ -817,7 +817,7 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
 {
     s32 i;
     u32 ribbonId = GetRibbonId();
-    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
     FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
     if (ribbonId < FIRST_GIFT_RIBBON)
@@ -864,8 +864,8 @@ static void AddRibbonSummaryMonNameWindow(struct PokenavSub14 *structPtr)
     PrintRibbbonsSummaryMonInfo(structPtr);
 }
 
-static const u8 sMaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-static const u8 sFemaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 sMaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u8 sFemaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
 static const u8 sGenderlessIconString[] = _("{UNK_SPACER}");
 
 static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)

@@ -319,8 +319,13 @@ static void StringExpandPlaceholders_AwaitingCommFromAnother(u8 *dst, u8 caseId)
     case ACTIVITY_CONTEST_CUTE:
     case ACTIVITY_CONTEST_SMART:
     case ACTIVITY_CONTEST_TOUGH:
-        // UB: argument *dst isn't used, instead it always prints to gStringVar4
+        // BUG: argument *dst isn't used, instead it always prints to gStringVar4
+        // not an issue in practice since Gamefreak never used any other arguments here besides gStringVar4
+        #ifndef BUGFIX
         StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
+        #else
+        StringExpandPlaceholders(dst, sText_AwaitingCommunication);
+        #endif
         break;
     }
 }
@@ -3769,9 +3774,9 @@ static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str
     case UR_COLOR_DKE_WHT_LTE:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_DARK_GREY;
+        printerTemplate.fgColor = TEXT_COLOR_DARK_GRAY;
         printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREY;
+        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
         break;
     case UR_COLOR_RED_WHT_LTR:
         printerTemplate.letterSpacing = 0;
@@ -3792,14 +3797,14 @@ static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str
         printerTemplate.lineSpacing = 0;
         printerTemplate.fgColor = TEXT_COLOR_WHITE;
         printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREY;
+        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
         break;
     case UR_COLOR_WHT_DKE_LTE:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
         printerTemplate.fgColor = TEXT_COLOR_WHITE;
-        printerTemplate.bgColor = TEXT_COLOR_DARK_GREY;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREY;
+        printerTemplate.bgColor = TEXT_COLOR_DARK_GRAY;
+        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
         break;
     case UR_COLOR_GRN_DN6_LTB:
         printerTemplate.letterSpacing = 0;

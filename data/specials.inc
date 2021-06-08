@@ -83,20 +83,20 @@ gSpecials:: @ 81DBA64
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
 	def_special GetNextActiveShowIfMassOutbreak
-	def_special TV_IsScriptShowKindAlreadyInQueue
-	def_special CheckForBigMovieOrEmergencyNewsOnTV
+	def_special IsTVShowAlreadyInQueue
+	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
 	def_special ResetTVShowState
 	def_special GetContestWinnerId
 	def_special GetContestPlayerId
-	def_special sub_80F8814
+	def_special GetNpcContestantLocalId
 	def_special BufferContestWinnerTrainerName
 	def_special BufferContestWinnerMonName
 	def_special BufferContestTrainerAndMonNames
 	def_special GetContestMonConditionRanking
 	def_special SetContestTrainerGfxIds
 	def_special TryEnterContestMon
-	def_special sub_80F8970
+	def_special GetContestantNamesAtRank
 	def_special SetLinkContestPlayerGfx
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
@@ -147,9 +147,9 @@ gSpecials:: @ 81DBA64
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
 	def_special SaveMuseumContestPainting
-	def_special DoesContestCategoryHaveWinner
-	def_special CountPlayerContestPaintings
-	def_special ShowContestWinnerPainting
+	def_special DoesContestCategoryHaveMuseumPainting
+	def_special CountPlayerMuseumPaintings
+	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
@@ -187,10 +187,10 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
 	def_special DoTVShowInSearchOfTrainers
-	def_special IsTVShowInSearchOfTrainersAiring
+	def_special IsGabbyAndTyShowOnTheAir
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToObjectEventLocalIds
+	def_special GetGabbyAndTyLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -354,7 +354,7 @@ gSpecials:: @ 81DBA64
 	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
-	def_special TrySetUpTrainerFanClubSpecial
+	def_special TryPutTrainerFanClubOnAir
 	def_special ShouldHideFanClubInterviewer
 	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir

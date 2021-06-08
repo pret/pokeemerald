@@ -6,7 +6,7 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-static void AnimUnused_080B08A0(struct Sprite *);
+static void AnimUnusedHumanoidFoot(struct Sprite *);
 static void AnimSlideHandOrFootToTarget(struct Sprite *);
 static void AnimFistOrFootRandomPos(struct Sprite *);
 static void AnimFistOrFootRandomPos_Step(struct Sprite *);
@@ -33,7 +33,7 @@ static void AnimForcePalm(struct Sprite *sprite);
 extern struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_08595E14 =
+static const struct SpriteTemplate sUnusedHumanoidFootSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HUMANOID_FOOT,
     .paletteTag = ANIM_TAG_HUMANOID_FOOT,
@@ -41,7 +41,7 @@ const struct SpriteTemplate gUnusedSpriteTemplate_08595E14 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_080B08A0,
+    .callback = AnimUnusedHumanoidFoot,
 };
 
 static const union AnimCmd sAnim_Fist[] =
@@ -482,7 +482,7 @@ static void AnimForcePalm(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-static void AnimUnused_080B08A0(struct Sprite *sprite)
+static void AnimUnusedHumanoidFoot(struct Sprite *sprite)
 {
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];

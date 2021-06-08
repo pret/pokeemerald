@@ -367,5 +367,8 @@ extern const u8 BattleScript_CustapBerryActivation[];
 extern const u8 BattleScript_MicleBerryActivateEnd2[];
 extern const u8 BattleScript_MicleBerryActivateRet[];
 extern const u8 BattleScript_JabocaRowapBerryActivates[];
+extern const u8 BattleScript_NotAffectedAbilityPopUp[];
+extern const u8 BattleScript_BattlerShookOffTaunt[];
+extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

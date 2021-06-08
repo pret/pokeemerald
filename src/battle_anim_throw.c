@@ -16,6 +16,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "data.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -1742,7 +1743,7 @@ static void SpriteCB_Ball_Release_Step(struct Sprite *sprite)
 
     // Animate Pokémon emerging from Poké Ball
     gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = FALSE;
-    StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 1);
+    StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], BATTLER_AFFINE_EMERGE);
     AnimateSprite(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]]);
     gSprites[gBattlerSpriteIds[gBattleAnimTarget]].sOffsetY = 4096;
 }
@@ -1756,7 +1757,7 @@ static void SpriteCB_Ball_Release_Wait(struct Sprite *sprite)
 
     if (gSprites[gBattlerSpriteIds[gBattleAnimTarget]].affineAnimEnded)
     {
-        StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 0);
+        StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], BATTLER_AFFINE_NORMAL);
         released = TRUE;
     }
     else
@@ -1808,7 +1809,7 @@ static void SpriteCB_Ball_Block_Step(struct Sprite *sprite)
     sprite->sDy = (sprite->sDy + 0x800) & 0xFF;
     sprite->sDx = (sprite->sDx + 0x680) & 0xFF;
 
-    if (sprite->pos1.y + sprite->pos2.y > 160
+    if (sprite->pos1.y + sprite->pos2.y > DISPLAY_HEIGHT
      || sprite->pos1.x + sprite->pos2.x < -8)
     {
         sprite->sFrame = 0;
