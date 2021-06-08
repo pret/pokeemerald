@@ -4649,7 +4649,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && !(GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST)
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
              && !(gBattleTypeFlags & BATTLE_TYPE_ARENA)
-             && !IsLastAliveMonInParty(battler))
+             && CountUsablePartyMons(battler) > 0)
             {
                 gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_EMERGENCY_EXIT;
                 effect++;
@@ -8671,27 +8671,4 @@ bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability)
             return TRUE;
     }
     return FALSE;
-}
-
-bool32 IsLastAliveMonInParty(u8 battlerId)
-{
-    struct Pokemon *party;
-    u8 i;
-    u8 count = 0;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&party[i], MON_DATA_HP) != 0)
-            count++;
-    }
-
-    if (count > 1)
-        return FALSE;
-    else
-        return TRUE;
 }
