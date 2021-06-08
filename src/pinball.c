@@ -26,7 +26,7 @@
 // completes the game, 0 otherwise.
 //
 // ...
-// callnative PlayPinballGame
+// callnative PlayMeowthPinballGame
 // waitstate
 // ...
 
@@ -42,6 +42,12 @@
 #define TAG_MEOWTH_JEWEL_MUTLIPLIER    504
 #define TAG_TILES_MEOWTH_JEWEL_SPARKLE 505
 #define TAG_TIMER_DIGIT                506
+
+enum
+{
+    GAME_TYPE_MEOWTH,
+    GAME_TYPE_DIGLETT,
+};
 
 enum
 {
@@ -116,6 +122,11 @@ struct Meowth
     bool32 completed;
 };
 
+struct Diglett
+{
+    bool32 completed;
+};
+
 #define FLIPPER_LEFT  0
 #define FLIPPER_RIGHT 1
 
@@ -142,6 +153,7 @@ struct Timer
 struct PinballGame
 {
     u8 state;
+    u8 gameType;
     struct Ball ball;
     struct Flipper leftFlipper;
     struct Flipper rightFlipper;
@@ -152,6 +164,7 @@ struct PinballGame
     u16 cameraScrollX;
     u16 cameraScrollY;
     struct Meowth meowth;
+    struct Diglett diglett;
     bool8 ballIsEntering;
     bool8 flippersDisabled;
     bool8 completed;
@@ -159,21 +172,32 @@ struct PinballGame
     MainCallback returnMainCallback;
 };
 
+static void PlayPinballGame(u8 gameType);
 static void FadeToPinballScreen(u8 taskId);
 static void InitPinballScreen(void);
 static void InitPinballGame(void);
+static void LoadBgGfx(u8 gameType);
+static void LoadSpriteGfx(u8 gameType);
 static void InitBallSprite(void);
 static void InitFlipperSprites(void);
 static void InitTimerSprites(void);
+static void InitGameType(u8 gameType);
 static void InitMeowth(void);
+static void InitDiglett(void);
 static void PinballVBlankCallback(void);
 static void PinballMainCallback(void);
 static void PinballMain(u8 taskId);
 static void StartNewBall(void);
 static void LoseBall(void);
-static void LoseBallMeowth(struct Meowth *meowth);
+static void LostBall(u8 gameType);
+static void LostBallMeowth(struct Meowth *meowth);
+static void LostBallDiglett(struct Diglett *diglett);
 static void DrawMeowthScoreJewels(struct Meowth *meowth);
-static void OpenEntrance(void);
+static void OpenEntrance(u8 gameType);
+static void OpenEntranceMeowth(void);
+static void OpenEntranceDiglett(void);
+static void CloseEntranceMeowth(void);
+static void CloseEntranceDiglett(void);
 static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
@@ -181,8 +205,9 @@ static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollision
 static void UpdateFlipperState(struct Flipper *flipper);
 static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdatePosition(struct Ball *ball);
-static bool32 CheckStaticCollision(struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
-static u8 GetCollisionMaskRow(int collisionAttribute, int row);
+static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
+static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index);
+static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
 static u8 ReverseBits(u8 value);
 static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification);
@@ -193,8 +218,9 @@ static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
 static void UpdateFlipperSprite(struct Sprite *sprite);
 static void UpdateTimerDigitSprite(struct Sprite *sprite);
+static bool32 UpdateGameType(u8 gameType);
 static bool32 UpdateMeowth(struct Meowth *meowth);
-static bool32 CheckObjectsCollision(struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
+static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 CheckMeowthCollision(struct Ball *ball, struct Meowth *meowth, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 CheckJewelCollision(struct Ball *ball, struct MeowthJewel *jewel, u8 *outCollisionNormal);
 static bool32 IsJewelSpaceOccupied(u16 xPos, u16 destYPos, struct MeowthJewel *jewels);
@@ -207,6 +233,7 @@ static void UpdateMeowthJewelSprite(struct Sprite *sprite);
 static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite);
 static void ResetMeowthJewels(struct Meowth *meowth);
 static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite);
+static bool32 UpdateDiglett(struct Diglett *diglett);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -252,12 +279,6 @@ static const struct WindowTemplate sPinballWinTemplates[] = {
 // static const u8 sFlipperLeftBaseCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks.1bpp");
 // static const u8 sFlipperRightBaseCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks.1bpp");
 
-static const u32 sMeowthStageBgGfx[] = INCBIN_U32("graphics/pinball/bg_tiles_meowth.4bpp");
-static const u16 sMeowthStageBgPalette[] = INCBIN_U16("graphics/pinball/bg_tiles_meowth.gbapal");
-static const u16 sMeowthStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_meowth.bin");
-static const u8 sMeowthStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_meowth.1bpp");
-static const u8 sMeowthStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth.bin");
-static const u8 sMeowthStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth_entrance.bin");
 static const u8 sFlipperLeftMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks_meowth.1bpp");
 static const u8 sFlipperRightMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks_meowth.1bpp");
 
@@ -271,6 +292,12 @@ static const u16 sTimerDigitsPalette[] = INCBIN_U16("graphics/pinball/timer_digi
 static const u8 sFlipperCollisionRadii[] = INCBIN_U8("data/pinball/flipper_radii.bin");
 static const u8 sFlipperCollisionNormalAngles[] = INCBIN_U8("data/pinball/flipper_normal_angles.bin");
 
+static const u32 sMeowthStageBgGfx[] = INCBIN_U32("graphics/pinball/bg_tiles_meowth.4bpp");
+static const u16 sMeowthStageBgPalette[] = INCBIN_U16("graphics/pinball/bg_tiles_meowth.gbapal");
+static const u16 sMeowthStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_meowth.bin");
+static const u8 sMeowthStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_meowth.1bpp");
+static const u8 sMeowthStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth.bin");
+static const u8 sMeowthStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_meowth_entrance.bin");
 static const u32 sMeowthAnimationGfx[] = INCBIN_U32("graphics/pinball/meowth_animation.4bpp.lz");
 static const u16 sMeowthAnimationPalette[] = INCBIN_U16("graphics/pinball/meowth_animation.gbapal");
 static const u32 sMeowthJewelGfx[] = INCBIN_U32("graphics/pinball/meowth_jewel_animation.4bpp.lz");
@@ -280,6 +307,13 @@ static const u32 sMeowthJewelSparkleGfx[] = INCBIN_U32("graphics/pinball/meowth_
 static const u16 sMeowthJewelMultipliersPalette[] = INCBIN_U16("graphics/pinball/meowth_jewel_multipliers.gbapal");
 static const u8 sMeowthCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_normal_angles.bin");
 static const u8 sMeowthJewelCollisionNormalAngles[] = INCBIN_U8("data/pinball/meowth_jewel_normal_angles.bin");
+
+static const u32 sDiglettStageBgGfx[] = INCBIN_U32("graphics/pinball/bg_tiles_diglett.4bpp");
+static const u16 sDiglettStageBgPalette[] = INCBIN_U16("graphics/pinball/bg_tiles_diglett.gbapal");
+static const u16 sDiglettStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_diglett.bin");
+static const u8 sDiglettStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_diglett.1bpp");
+static const u8 sDiglettStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_diglett.bin");
+static const u8 sDiglettStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_diglett_entrance.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -794,12 +828,23 @@ static const u16 sFlipperRadiusMagnitudes[32] = {
     0x00F8, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC,
 };
 
-void PlayPinballGame(void)
+void PlayMeowthPinballGame(void)
+{
+    PlayPinballGame(GAME_TYPE_MEOWTH);
+}
+
+void PlayDiglettPinballGame(void)
+{
+    PlayPinballGame(GAME_TYPE_DIGLETT);
+}
+
+static void PlayPinballGame(u8 gameType)
 {
     u8 taskId;
 
     ScriptContext1_Stop();
     sPinballGame = AllocZeroed(sizeof(*sPinballGame));
+    sPinballGame->gameType = gameType;
     sPinballGame->returnMainCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     taskId = CreateTask(FadeToPinballScreen, 0);
 }
@@ -836,10 +881,7 @@ static void InitPinballScreen(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sPinballBgTemplates, ARRAY_COUNT(sPinballBgTemplates));
         SetBgTilemapBuffer(PINBALL_BG_BASE, AllocZeroed(BG_SCREEN_SIZE * 4));
-        LoadBgTiles(PINBALL_BG_BASE, sMeowthStageBgGfx, sizeof(sMeowthStageBgGfx), 0);
-        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sMeowthStageBgTilemap, sizeof(sMeowthStageBgTilemap), 0);
-        ResetPaletteFade();
-        LoadPalette(sMeowthStageBgPalette, 0, sizeof(sMeowthStageBgPalette));
+        LoadBgGfx(sPinballGame->gameType);
         InitWindows(sPinballWinTemplates);
         DeactivateAllTextPrinters();
         LoadMessageBoxGfx(WIN_TEXT, 0x200, 0xF0);
@@ -865,18 +907,12 @@ static void InitPinballScreen(void)
         LoadSpritePalette(&sFlipperSpritePalette);
         LoadCompressedSpriteSheet(&sTimerDigitsSpriteSheet);
         LoadSpritePalette(&sTimerDigitsSpritePalette);
-        LoadCompressedSpriteSheet(&sMeowthAnimationSpriteSheet);
-        LoadSpritePalette(&sMeowthAnimationSpritePalette);
-        LoadCompressedSpriteSheet(&sMeowthJewelSpriteSheet);
-        LoadSpritePalette(&sMeowthJewelSpritePalette);
-        LoadCompressedSpriteSheet(&sMeowthJewelMultipliersSpriteSheet);
-        LoadCompressedSpriteSheet(&sMeowthSparkleSpriteSheet);
-        LoadSpritePalette(&sMeowthJewelMultipliersSpritePalette);
+        LoadSpriteGfx(sPinballGame->gameType);
         InitPinballGame();
         InitBallSprite();
         InitFlipperSprites();
         InitTimerSprites();
-        InitMeowth();
+        InitGameType(sPinballGame->gameType);
         StartNewBall();
         gMain.state++;
     case 5:
@@ -885,6 +921,43 @@ static void InitPinballScreen(void)
         SetMainCallback2(PinballMainCallback);
         CreateTask(PinballMain, 0);
         return;
+    }
+}
+
+static void LoadBgGfx(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        LoadBgTiles(PINBALL_BG_BASE, sMeowthStageBgGfx, sizeof(sMeowthStageBgGfx), 0);
+        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sMeowthStageBgTilemap, sizeof(sMeowthStageBgTilemap), 0);
+        ResetPaletteFade();
+        LoadPalette(sMeowthStageBgPalette, 0, sizeof(sMeowthStageBgPalette));
+        break;
+    case GAME_TYPE_DIGLETT:
+        LoadBgTiles(PINBALL_BG_BASE, sDiglettStageBgGfx, sizeof(sDiglettStageBgGfx), 0);
+        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sDiglettStageBgTilemap, sizeof(sDiglettStageBgTilemap), 0);
+        ResetPaletteFade();
+        LoadPalette(sDiglettStageBgPalette, 0, sizeof(sDiglettStageBgPalette));
+        break;
+    }
+}
+
+static void LoadSpriteGfx(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        LoadCompressedSpriteSheet(&sMeowthAnimationSpriteSheet);
+        LoadSpritePalette(&sMeowthAnimationSpritePalette);
+        LoadCompressedSpriteSheet(&sMeowthJewelSpriteSheet);
+        LoadSpritePalette(&sMeowthJewelSpritePalette);
+        LoadCompressedSpriteSheet(&sMeowthJewelMultipliersSpriteSheet);
+        LoadCompressedSpriteSheet(&sMeowthSparkleSpriteSheet);
+        LoadSpritePalette(&sMeowthJewelMultipliersSpritePalette);
+        break;
+    case GAME_TYPE_DIGLETT:
+        break;
     }
 }
 
@@ -935,6 +1008,19 @@ static void InitTimerSprites(void)
     StartSpriteAnim(&gSprites[sPinballGame->timer.onesSpriteId], 0);
 }
 
+static void InitGameType(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        InitMeowth();
+        break;
+    case GAME_TYPE_DIGLETT:
+        InitDiglett();
+        break;
+    }
+}
+
 static void InitMeowth(void)
 {
     struct Meowth *meowth = &sPinballGame->meowth;
@@ -950,6 +1036,12 @@ static void InitMeowth(void)
     meowth->sparkleSpriteId = CreateSprite(&sMeowthJewelSparkleSpriteTemplate, 0, 0, 6);
     StartSpriteAnim(&gSprites[meowth->spriteId], 0);
     StartSpriteAnim(&gSprites[meowth->sparkleSpriteId], 0);
+}
+
+static void InitDiglett(void)
+{
+    struct Diglett *diglett = &sPinballGame->diglett;
+    diglett->completed = FALSE;
 }
 
 static void PinballVBlankCallback(void)
@@ -981,7 +1073,7 @@ static void PinballMain(u8 taskId)
         }
         break;
     case PINBALL_STATE_RUNNING:
-        completed = UpdateMeowth(&sPinballGame->meowth);
+        completed = UpdateGameType(sPinballGame->gameType);
         if (!sPinballGame->completed && completed)
             sPinballGame->completed = TRUE;
 
@@ -992,7 +1084,7 @@ static void PinballMain(u8 taskId)
     case PINBALL_LOST_BALL_FADE_OUT:
         if (!gPaletteFade.active)
         {
-            LoseBallMeowth(&sPinballGame->meowth);
+            LostBall(sPinballGame->gameType);
             StartNewBall();
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_WHITE);
             sPinballGame->state = PINBALL_LOST_BALL_FADE_IN;
@@ -1022,15 +1114,26 @@ static void StartNewBall(void)
     sPinballGame->ball.xVelocity = 0x40;
     sPinballGame->ball.yVelocity = 0;
     sPinballGame->ball.spin = 0;
-    OpenEntrance();
+    OpenEntrance(sPinballGame->gameType);
 }
 
-static void OpenEntrance(void)
+static void OpenEntrance(u8 gameType)
 {
-    u16 *tilemap;
     sPinballGame->ballIsEntering = TRUE;
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        OpenEntranceMeowth();
+        break;
+    case GAME_TYPE_DIGLETT:
+        OpenEntranceDiglett();
+        break;
+    }
+}
 
-    tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+static void OpenEntranceMeowth(void)
+{
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
     tilemap[0x113] = 0x415;
     tilemap[0x114] = 0x414;
     tilemap[0x133] = 0x413;
@@ -1042,12 +1145,28 @@ static void OpenEntrance(void)
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
-static void CloseEntrance(void)
+static void OpenEntranceDiglett(void)
 {
-    u16 *tilemap;
 
+}
+
+static void CloseEntrance(u8 gameType)
+{
     sPinballGame->ballIsEntering = FALSE;
-    tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        CloseEntranceMeowth();
+        break;
+    case GAME_TYPE_DIGLETT:
+        CloseEntranceDiglett();
+        break;
+    }
+}
+
+static void CloseEntranceMeowth(void)
+{
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
     tilemap[0x113] = 0x404;
     tilemap[0x114] = 0x402;
     tilemap[0x133] = 0x403;
@@ -1057,6 +1176,10 @@ static void CloseEntrance(void)
     tilemap[0x154] = 0x002;
     tilemap[0x172] = 0x40C;
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+}
+
+static void CloseEntranceDiglett(void)
+{
 }
 
 static void DrawMeowthScoreJewels(struct Meowth *meowth)
@@ -1088,7 +1211,7 @@ static void HandleBallPhysics(void)
     struct Ball *ball = &sPinballGame->ball;
 
     if (sPinballGame->ballIsEntering && (ball->xPos >> 8) < 144)
-        CloseEntrance();
+        CloseEntrance(sPinballGame->gameType);
 
     if (sPinballGame->gravityEnabled)
         ApplyGravity(ball);
@@ -1096,9 +1219,9 @@ static void HandleBallPhysics(void)
     LimitVelocity(ball);
     isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal, &collisionAmplification);
     if (!isFlipperColliding)
-        isObjectColliding = CheckObjectsCollision(ball, sPinballGame->timer.ticks, &objectCollisionNormal, &collisionAmplification);
+        isObjectColliding = CheckObjectsCollision(sPinballGame->gameType, ball, sPinballGame->timer.ticks, &objectCollisionNormal, &collisionAmplification);
 
-    isStaticColliding = CheckStaticCollision(ball, sPinballGame->ballIsEntering, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
+    isStaticColliding = CheckStaticCollision(sPinballGame->gameType, ball, sPinballGame->ballIsEntering, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
     if (isFlipperColliding)
         collisionNormal = flipperCollisionNormal;
     else if (isObjectColliding)
@@ -1134,9 +1257,22 @@ static void LoseBall(void)
     }
 }
 
+static void LostBall(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        LostBallMeowth(&sPinballGame->meowth);
+        break;
+    case GAME_TYPE_DIGLETT:
+        LostBallDiglett(&sPinballGame->diglett);
+        break;
+    }
+}
+
 #define JEWEL_SPARKLE_DURATION 180
 
-static void LoseBallMeowth(struct Meowth *meowth)
+static void LostBallMeowth(struct Meowth *meowth)
 {
     struct Sprite *sparkleSprite = &gSprites[sPinballGame->meowth.sparkleSpriteId];
     if (meowth->score > 4)
@@ -1155,6 +1291,10 @@ static void LoseBallMeowth(struct Meowth *meowth)
     meowth->jewelStreak = 0;
     ResetMeowthJewels(meowth);
     DrawMeowthScoreJewels(meowth);
+}
+
+static void LostBallDiglett(struct Diglett *diglett)
+{
 }
 
 #define GRAVITY 0x0B
@@ -1297,7 +1437,7 @@ static void UpdatePosition(struct Ball *ball)
         ball->yPos += ball->yVelocity;
 }
 
-static bool32 CheckStaticCollision(struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
+static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
 {
     int i;
     u16 xDelta, yDelta;
@@ -1327,12 +1467,8 @@ static bool32 CheckStaticCollision(struct Ball *ball, bool32 ballIsEntering, int
         row = testY % 8;
         column = testX % 8;
         tileIndex = (tileY * stageTileWidth) + tileX;
-        if (ballIsEntering)
-            collisionAttribute = sMeowthStageEntranceBgCollisionMap[tileIndex];
-        else
-            collisionAttribute = sMeowthStageBgCollisionMap[tileIndex];
-
-        collisionMaskRow = GetCollisionMaskRow(collisionAttribute, row);
+        collisionAttribute = GetCollisionAttribute(gameType, ballIsEntering, tileIndex);
+        collisionMaskRow = GetCollisionMaskRow(gameType, collisionAttribute, row);
         collisionTests[i] = (collisionMaskRow & (1 << column)) != 0;
     }
 
@@ -1407,7 +1543,30 @@ static bool32 CheckStaticCollision(struct Ball *ball, bool32 ballIsEntering, int
     return TRUE;
 }
 
-static u8 GetCollisionMaskRow(int collisionAttribute, int row)
+static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index)
+{
+    const u8 *entranceCollisionMap;
+    const u8 *collisionMap;
+
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        entranceCollisionMap = sMeowthStageEntranceBgCollisionMap;
+        collisionMap = sMeowthStageBgCollisionMap;
+        break;
+    case GAME_TYPE_DIGLETT:
+        entranceCollisionMap = sDiglettStageEntranceBgCollisionMap;
+        collisionMap = sDiglettStageBgCollisionMap;
+        break;
+    }
+
+    if (ballIsEntering)
+        return entranceCollisionMap[index];
+
+    return collisionMap[index];
+}
+
+static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row)
 {
     struct Flipper *flipper;
     int state;
@@ -1417,8 +1576,19 @@ static u8 GetCollisionMaskRow(int collisionAttribute, int row)
 
     if (collisionAttribute < 0xE0)
     {
+        const u8 *masks;
+        switch (gameType)
+        {
+        case GAME_TYPE_MEOWTH:
+            masks = sMeowthStageBgCollisionMasks;
+            break;
+        case GAME_TYPE_DIGLETT:
+            masks = sDiglettStageBgCollisionMasks;
+            break;
+        }
+
         // Reverse the bits because my tooling is backwards.
-        return ReverseBits(sMeowthStageBgCollisionMasks[(collisionAttribute * 0x8) + row]);
+        return ReverseBits(masks[(collisionAttribute * 0x8) + row]);
     }
 
     // Collision attribute from 0xE0 - 0xFF are special
@@ -1605,6 +1775,19 @@ static void UpdateTimerDigitSprite(struct Sprite *sprite)
     }
 }
 
+static bool32 UpdateGameType(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        return UpdateMeowth(&sPinballGame->meowth);
+    case GAME_TYPE_DIGLETT:
+        return UpdateDiglett(&sPinballGame->diglett);
+    default:
+        return FALSE;
+    }
+}
+
 #define MEOWTH_HORIZONTAL_SPEED 1
 #define MEOWTH_VERTICAL_SPEED 1
 
@@ -1654,11 +1837,21 @@ static bool32 UpdateMeowth(struct Meowth *meowth)
     return meowth->completed;
 }
 
-static bool32 CheckObjectsCollision(struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
+static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
-    bool32 isColliding = CheckMeowthCollision(ball, &sPinballGame->meowth, ticks, outCollisionNormal, outCollisionAmplification);
-    if (!isColliding)
-        isColliding = CheckMeowthJewelsCollision(ball, &sPinballGame->meowth, outCollisionNormal);
+    bool32 isColliding;
+
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        isColliding = CheckMeowthCollision(ball, &sPinballGame->meowth, ticks, outCollisionNormal, outCollisionAmplification);
+        if (!isColliding)
+            isColliding = CheckMeowthJewelsCollision(ball, &sPinballGame->meowth, outCollisionNormal);
+        break;
+    case GAME_TYPE_DIGLETT:
+        isColliding = FALSE;
+        break;
+    }
 
     return isColliding;
 }
@@ -1992,4 +2185,9 @@ static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite)
         sprite->pos1.y = 4;
         sprite->invisible = FALSE;
     }
+}
+
+static bool32 UpdateDiglett(struct Diglett *diglett)
+{
+    return FALSE;
 }
