@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -74,7 +74,7 @@ static void LinkOpponentHandleSetUnkVar(void);
 static void LinkOpponentHandleClearUnkFlag(void);
 static void LinkOpponentHandleToggleUnkFlag(void);
 static void LinkOpponentHandleHitAnimation(void);
-static void LinkOpponentHandleCmd42(void);
+static void LinkOpponentHandleCantSwitch(void);
 static void LinkOpponentHandlePlaySE(void);
 static void LinkOpponentHandlePlayFanfareOrBGM(void);
 static void LinkOpponentHandleFaintingCry(void);
@@ -147,7 +147,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = LinkOpponentHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = LinkOpponentHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = LinkOpponentHandleHitAnimation,
-    [CONTROLLER_42]                       = LinkOpponentHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = LinkOpponentHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkOpponentHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = LinkOpponentHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = LinkOpponentHandleFaintingCry,
@@ -1135,7 +1135,7 @@ static void LinkOpponentHandleLoadMonSprite(void)
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
@@ -1303,7 +1303,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                                                (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40,
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
@@ -1648,7 +1648,7 @@ static void LinkOpponentHandleHitAnimation(void)
     }
 }
 
-static void LinkOpponentHandleCmd42(void)
+static void LinkOpponentHandleCantSwitch(void)
 {
     LinkOpponentBufferExecCompleted();
 }

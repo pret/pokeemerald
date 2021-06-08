@@ -237,11 +237,12 @@
 #define MOVEMENT_ACTION_WALK_RIGHT_AFFINE               0x97
 #define MOVEMENT_ACTION_LEVITATE                        0x98
 #define MOVEMENT_ACTION_STOP_LEVITATE                   0x99
-#define MOVEMENT_ACTION_DESTROY_EXTRA_TASK_IF_AT_TOP    0x9A
+#define MOVEMENT_ACTION_STOP_LEVITATE_AT_TOP            0x9A
 #define MOVEMENT_ACTION_FIGURE_8                        0x9B
 #define MOVEMENT_ACTION_FLY_UP                          0x9C
 #define MOVEMENT_ACTION_FLY_DOWN                        0x9D
 
 #define MOVEMENT_ACTION_STEP_END 0xFE
+#define MOVEMENT_ACTION_NONE     0xFF
 
 #endif // GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H

@@ -402,7 +402,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
 };
 
 static const u16 sSelectText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal");
-static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_TRANSPARENT};
+static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
 static const struct OamData sOam_Select_Pokeball =
@@ -1024,7 +1024,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
 };
 
 static const u16 sSwapText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
-static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_TRANSPARENT};
+static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSwapSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
 #define SWAPACTION_MON           1
@@ -1476,7 +1476,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
         sFactorySelectMons = AllocZeroed(sizeof(struct Pokemon) * SELECTABLE_MONS_COUNT);
         for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
             sFactorySelectMons[i] = sFactorySelectScreen->mons[i].monData;
-        ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, sFactorySelectMons, currMonId, SELECTABLE_MONS_COUNT - 1, CB2_InitSelectScreen);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, sFactorySelectMons, currMonId, SELECTABLE_MONS_COUNT - 1, CB2_InitSelectScreen);
         break;
     }
 }
@@ -2390,7 +2390,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
         DestroyTask(taskId);
         sFactorySwapScreen->fromSummaryScreen = TRUE;
         sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[244];
-        ShowPokemonSummaryScreen(PSS_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
         break;
     }
 }
@@ -4221,12 +4221,17 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
+        #ifndef UBFIX
         DestroyTask(taskId);
+        #endif
         // UB: Should not use the task after it has been deleted.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
+        #ifdef UBFIX
+        DestroyTask(taskId);
+        #endif
         return;
     }
     task->tState++;

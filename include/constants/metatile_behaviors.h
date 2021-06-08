@@ -241,5 +241,6 @@
 #define MB_UNUSED_ED 0xED
 #define MB_UNUSED_EE 0xEE
 #define MB_UNUSED_EF 0xEF
+#define MB_INVALID   0xFF
 
 #endif // GUARD_METATILE_BEHAVIORS_H

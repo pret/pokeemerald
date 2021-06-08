@@ -205,10 +205,7 @@ struct BaseStats
  /* 0x13 */ u8 growthRate;
  /* 0x14 */ u8 eggGroup1;
  /* 0x15 */ u8 eggGroup2;
- /* 0x16 */ u16 abilities[2];
-#ifdef POKEMON_EXPANSION
-            u16 abilityHidden;
-#endif
+ /* 0x16 */ u16 abilities[NUM_ABILITY_SLOTS];
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;
             u8 noFlip : 1;
@@ -270,7 +267,6 @@ extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
-extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];
 extern const u8 gPPUpGetMask[];

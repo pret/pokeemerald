@@ -210,8 +210,8 @@ u8 ConfettiUtil_Remove(u8 id)
         return 0xFF;
 
     memset(&sWork->array[id], 0, sizeof(struct ConfettiUtil));
-    sWork->array[id].oam.y = 160;
-    sWork->array[id].oam.x = 240;
+    sWork->array[id].oam.y = DISPLAY_HEIGHT;
+    sWork->array[id].oam.x = DISPLAY_WIDTH;
     sWork->array[id].dummied = TRUE;
     memcpy(&gMain.oamBuffer[id + 64], &gDummyOamData, sizeof(struct OamData));
     return id;

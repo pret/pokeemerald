@@ -447,7 +447,7 @@ void SetPokemonCryPitch(s16 val);
 void SetPokemonCryLength(u16 val);
 void SetPokemonCryRelease(u8 val);
 void SetPokemonCryProgress(u32 val);
-int IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo);
+bool32 IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo);
 void SetPokemonCryChorus(s8 val);
 void SetPokemonCryStereo(u32 val);
 void SetPokemonCryPriority(u8 val);

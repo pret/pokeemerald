@@ -158,7 +158,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival:: @ 81F78E2
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if_ne LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0
 	compare VAR_0x8008, 1

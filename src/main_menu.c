@@ -896,8 +896,8 @@ static bool8 HandleMainMenuInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
-        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT));
         gTasks[taskId].func = Task_HandleMainMenuBPressed;
     }
     else if ((JOY_NEW(DPAD_UP)) && tCurrItem > 0)
@@ -1387,11 +1387,9 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
     switch (tState)
     {
         case 0:
-            if (sprite->callback == SpriteCallbackDummy)
-            {
-                sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-                goto incrementStateAndTimer;
-            }
+            if (sprite->callback != SpriteCallbackDummy)
+                return;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             break;
         case 1:
             if (gTasks[sBirchSpeechMainTaskId].tTimer >= 96)
@@ -1400,14 +1398,11 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
                 if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
                     gTasks[sBirchSpeechMainTaskId].tTimer++;
             }
-            break;
-        incrementStateAndTimer:
-        default:
-            tState++;
-            if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
-                gTasks[sBirchSpeechMainTaskId].tTimer++;
-            break;
+            return;
     }
+    tState++;
+    if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
+        gTasks[sBirchSpeechMainTaskId].tTimer++;
 }
 
 #undef tState
@@ -1547,7 +1542,7 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
             spriteId = gTasks[taskId].tBrendanSpriteId;
-        gSprites[spriteId].pos1.x = 240;
+        gSprites[spriteId].pos1.x = DISPLAY_WIDTH;
         gSprites[spriteId].pos1.y = 60;
         gSprites[spriteId].invisible = FALSE;
         gTasks[taskId].tPlayerSpriteId = spriteId;
@@ -2129,8 +2124,8 @@ static void CreateMainMenuErrorWindow(const u8* str)
     PutWindowTilemap(7);
     CopyWindowToVram(7, 2);
     DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[7], MAIN_MENU_BORDER_TILE);
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(9, 231));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(113, 159));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(9, DISPLAY_WIDTH - 9));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(113, DISPLAY_HEIGHT - 1));
 }
 
 static void MainMenu_FormatSavegameText(void)

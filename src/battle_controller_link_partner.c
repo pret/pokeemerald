@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -72,7 +72,7 @@ static void LinkPartnerHandleSetUnkVar(void);
 static void LinkPartnerHandleClearUnkFlag(void);
 static void LinkPartnerHandleToggleUnkFlag(void);
 static void LinkPartnerHandleHitAnimation(void);
-static void LinkPartnerHandleCmd42(void);
+static void LinkPartnerHandleCantSwitch(void);
 static void LinkPartnerHandlePlaySE(void);
 static void LinkPartnerHandlePlayFanfareOrBGM(void);
 static void LinkPartnerHandleFaintingCry(void);
@@ -144,7 +144,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = LinkPartnerHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = LinkPartnerHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = LinkPartnerHandleHitAnimation,
-    [CONTROLLER_42]                       = LinkPartnerHandleCmd42,
+    [CONTROLLER_CANTSWITCH]               = LinkPartnerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkPartnerHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = LinkPartnerHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = LinkPartnerHandleFaintingCry,
@@ -1022,7 +1022,7 @@ static void LinkPartnerHandleLoadMonSprite(void)
                                                GetBattlerSpriteCoord(gActiveBattler, 2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
@@ -1478,7 +1478,7 @@ static void LinkPartnerHandleHitAnimation(void)
     }
 }
 
-static void LinkPartnerHandleCmd42(void)
+static void LinkPartnerHandleCantSwitch(void)
 {
     LinkPartnerBufferExecCompleted();
 }
