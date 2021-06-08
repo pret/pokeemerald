@@ -3080,7 +3080,7 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     if (!sprite->tHide) // Show
     {
         if (sprite->tIsMain && ++sprite->tFrames == 4)
-            PlaySE(SE_SELECT);
+            PlaySE(SE_BALL_TRAY_ENTER);
         if ((!sprite->tRightToLeft && (sprite->pos1.x -= 4) <= sprite->tOriginalX)
             || (sprite->tRightToLeft && (sprite->pos1.x += 4) >= sprite->tOriginalX)
            )
