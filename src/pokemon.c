@@ -1642,6 +1642,7 @@ static const u8 sMonFrontAnimIdsTable[] =
     [SPECIES_LUGIA - 1]       = ANIM_GROW_IN_STAGES,
     [SPECIES_HO_OH - 1]       = ANIM_GROW_VIBRATE,
     [SPECIES_CELEBI - 1]      = ANIM_RISING_WOBBLE,
+    [SPECIES_TREECKO - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_GROVYLE - 1]     = ANIM_V_STRETCH,
     [SPECIES_SCEPTILE - 1]    = ANIM_V_SHAKE,
     [SPECIES_TORCHIC - 1]     = ANIM_H_STRETCH,
@@ -3433,7 +3434,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
-        gMultiuseSpriteTemplate.anims = gUnknown_082FF70C;
+        gMultiuseSpriteTemplate.anims = gAnims_MonPic;
     else if (speciesTag > SPECIES_SHINY_TAG)
         gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[speciesTag - SPECIES_SHINY_TAG];
     else
@@ -3926,9 +3927,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             {
                 u16 move = moves[i];
                 if (substruct1->moves[0] == move
-                    || substruct1->moves[1] == move
-                    || substruct1->moves[2] == move
-                    || substruct1->moves[3] == move)
+                 || substruct1->moves[1] == move
+                 || substruct1->moves[2] == move
+                 || substruct1->moves[3] == move)
                     retVal |= gBitTable[i];
                 i++;
             }
@@ -6826,7 +6827,7 @@ static void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
             structPtr->frameImages[i * structPtr->field_0_0 + j].data = &structPtr->byteArrays[i][j * 0x800];
         }
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_0_0];
-        structPtr->templates[i].anims = gUnknown_082FF70C;
+        structPtr->templates[i].anims = gAnims_MonPic;
         structPtr->templates[i].paletteTag = i;
     }
 }

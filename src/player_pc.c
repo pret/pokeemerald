@@ -1245,7 +1245,6 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
 {
     s16 *data;
     u16 b;
-    u8 c;
 
     data = gTasks[taskId].data;
     b = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
@@ -1253,21 +1252,17 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
     DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
     if (!a)
     {
-        c = gUnknown_0203BCC4->unk666;
-        if (c != b)
+        if (gUnknown_0203BCC4->unk666 != b)
         {
-            if (c != b - 1)
+            if (gUnknown_0203BCC4->unk666 != b - 1)
             {
-                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, c, b);
+                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, gUnknown_0203BCC4->unk666, b);
                 ItemStorage_RefreshListMenu();
             }
         }
-        else
-            goto LABEL_SKIP_CURSOR_DECREMENT;
     }
     if (gUnknown_0203BCC4->unk666 < b)
         playerPCItemPageInfo.cursorPos--;
-    LABEL_SKIP_CURSOR_DECREMENT:
     SetSwapLineSpritesInvisibility(gUnknown_0203BCC4->spriteIds, 7, TRUE);
     gUnknown_0203BCC4->unk666 = 0xFF;
     data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
