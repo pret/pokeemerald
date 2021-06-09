@@ -122,9 +122,15 @@ struct Meowth
     bool32 completed;
 };
 
+#define NUM_DIGLETTS 31
+
 struct Diglett
 {
     bool32 completed;
+    bool8 initialized;
+    u8 curInitIndex;
+    u8 curUpdateIndex;
+    u8 states[NUM_DIGLETTS];
 };
 
 #define FLIPPER_LEFT  0
@@ -234,6 +240,7 @@ static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite);
 static void ResetMeowthJewels(struct Meowth *meowth);
 static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite);
 static bool32 UpdateDiglett(struct Diglett *diglett);
+static void UpdateDiglettTiles(u16 *tilemap, int index, struct Diglett *diglett);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -738,6 +745,65 @@ static const struct SpriteTemplate sMeowthJewelSparkleSpriteTemplate = {
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateMeowthJewelSparkleSprite,
 };
+
+enum
+{
+    DIGLETT_STATE_INIT,
+    DIGLETT_STATE_HIDDEN,
+    DIGLETT_STATE_IDLE_0,
+    DIGLETT_STATE_IDLE_1,
+    DIGLETT_STATE_IDLE_2,
+    DIGLETT_STATE_IDLE_3,
+    DIGLETT_STATE_HIT_0,
+    DIGLETT_STATE_HIT_1,
+};
+
+static const u8 sDiglettStateTiles[][4] = {
+    [DIGLETT_STATE_INIT] = {0x4C, 0x4D, 0x4E, 0x4F},
+    [DIGLETT_STATE_HIDDEN] = {0x4C, 0x4D, 0x4E, 0x4F},
+    [DIGLETT_STATE_IDLE_0] = {0x3C, 0x3D, 0x3E, 0x3F},
+    [DIGLETT_STATE_IDLE_1] = {0x44, 0x45, 0x46, 0x47},
+    [DIGLETT_STATE_IDLE_2] = {0x3C, 0x3D, 0x3E, 0x3F},
+    [DIGLETT_STATE_IDLE_3] = {0x40, 0x41, 0x42, 0x43},
+    [DIGLETT_STATE_HIT_0]  = {0x48, 0x49, 0x4A, 0x4B},
+    [DIGLETT_STATE_HIT_1]  = {0x48, 0x49, 0x4A, 0x4B},
+};
+
+static const u8 sDiglettCoords[NUM_DIGLETTS][2] = {
+    {1, 3},
+    {1, 5},
+    {1, 7},
+    {3, 4},
+    {3, 6},
+    {3, 8},
+    {5, 3},
+    {5, 5},
+    {5, 7},
+    {5, 9},
+    {7, 4},
+    {7, 6},
+    {7, 8},
+    {7, 10},
+    {9, 5},
+    {9, 7},
+    {9, 9},
+    {11, 4},
+    {11, 6},
+    {11, 8},
+    {11, 10},
+    {13, 3},
+    {13, 5},
+    {13, 7},
+    {13, 9},
+    {15, 4},
+    {15, 6},
+    {15, 8},
+    {17, 3},
+    {17, 5},
+    {17, 7},
+};
+
+static const u8 sDiglettInitOrder[NUM_DIGLETTS] = { 0, 28, 1, 29, 3, 25, 6, 21, 2, 30, 4, 26, 7, 22, 10, 17, 5, 27, 8, 23, 11, 18, 14, 9, 24, 12, 19, 15, 13, 20, 16 };
 
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
@@ -2189,5 +2255,72 @@ static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite)
 
 static bool32 UpdateDiglett(struct Diglett *diglett)
 {
+    u16 *tilemap;
+
+    if (!diglett->initialized)
+    {
+        if (gMain.vblankCounter1 & 1)
+        {
+            int index = sDiglettInitOrder[diglett->curInitIndex];
+            diglett->states[index] = DIGLETT_STATE_IDLE_0 + (Random() % 4);
+
+            tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+            UpdateDiglettTiles(tilemap, index, diglett);
+            CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+
+            if (++diglett->curInitIndex == NUM_DIGLETTS)
+                diglett->initialized = TRUE;
+        }
+    }
+    else
+    {
+        // Update 4 digletts each frame.
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            int index = (diglett->curUpdateIndex + i) % NUM_DIGLETTS;
+            switch (diglett->states[index])
+            {
+            case DIGLETT_STATE_INIT:
+            case DIGLETT_STATE_HIDDEN:
+                break;
+            case DIGLETT_STATE_IDLE_0:
+                diglett->states[index] = DIGLETT_STATE_IDLE_1;
+                break;
+            case DIGLETT_STATE_IDLE_1:
+                diglett->states[index] = DIGLETT_STATE_IDLE_2;
+                break;
+            case DIGLETT_STATE_IDLE_2:
+                diglett->states[index] = DIGLETT_STATE_IDLE_3;
+                break;
+            case DIGLETT_STATE_IDLE_3:
+                diglett->states[index] = DIGLETT_STATE_IDLE_0;
+                break;
+            case DIGLETT_STATE_HIT_0:
+                diglett->states[index] = DIGLETT_STATE_HIT_1;
+                break;
+            case DIGLETT_STATE_HIT_1:
+                diglett->states[index] = DIGLETT_STATE_HIDDEN;
+                break;
+            }
+
+            // Update bg tilemap for the new diglett states.
+            tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+            UpdateDiglettTiles(tilemap, index, diglett);
+        }
+
+        CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+        diglett->curUpdateIndex = (diglett->curUpdateIndex + 4) % NUM_DIGLETTS;
+    }
+
     return FALSE;
+}
+
+static void UpdateDiglettTiles(u16 *tilemap, int index, struct Diglett *diglett)
+{
+    int tileIndex = sDiglettCoords[index][0] + sDiglettCoords[index][1] * 32;
+    tilemap[tileIndex]      = sDiglettStateTiles[diglett->states[index]][0];
+    tilemap[tileIndex + 1]  = sDiglettStateTiles[diglett->states[index]][1];
+    tilemap[tileIndex + 32] = sDiglettStateTiles[diglett->states[index]][2];
+    tilemap[tileIndex + 33] = sDiglettStateTiles[diglett->states[index]][3];
 }
