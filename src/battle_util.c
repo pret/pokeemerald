@@ -90,7 +90,7 @@ static const u8 sPkblToEscapeFactor[][3] = {
 static const u8 sGoNearCounterToCatchFactor[] = {4, 3, 2, 1};
 static const u8 sGoNearCounterToEscapeFactor[] = {4, 4, 4, 4};
 
-static const u16 sSkillSwapBannedAbilities[] = 
+static const u16 sSkillSwapBannedAbilities[] =
 {
     ABILITY_WONDER_GUARD,
     ABILITY_MULTITYPE,
@@ -109,9 +109,9 @@ static const u16 sSkillSwapBannedAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
-static const u16 sRolePlayBannedAbilities[] = 
+static const u16 sRolePlayBannedAbilities[] =
 {
-    ABILITY_TRACE,          
+    ABILITY_TRACE,
     ABILITY_WONDER_GUARD,
     ABILITY_FORECAST,
     ABILITY_FLOWER_GIFT,
@@ -134,7 +134,7 @@ static const u16 sRolePlayBannedAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
-static const u16 sRolePlayBannedAttackerAbilities[] = 
+static const u16 sRolePlayBannedAttackerAbilities[] =
 {
     ABILITY_MULTITYPE,
     ABILITY_ZEN_MODE,
@@ -150,7 +150,7 @@ static const u16 sRolePlayBannedAttackerAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
-static const u16 sWorrySeedBannedAbilities[] = 
+static const u16 sWorrySeedBannedAbilities[] =
 {
     ABILITY_MULTITYPE,
     ABILITY_STANCE_CHANGE,
@@ -166,7 +166,7 @@ static const u16 sWorrySeedBannedAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
-static const u16 sGastroAcidBannedAbilities[] = 
+static const u16 sGastroAcidBannedAbilities[] =
 {
     ABILITY_AS_ONE_ICE_RIDER,
     ABILITY_AS_ONE_SHADOW_RIDER,
@@ -184,7 +184,7 @@ static const u16 sGastroAcidBannedAbilities[] =
     ABILITY_ZEN_MODE,
 };
 
-static const u16 sEntrainmentBannedAttackerAbilities[] = 
+static const u16 sEntrainmentBannedAttackerAbilities[] =
 {
     ABILITY_TRACE,
     ABILITY_FORECAST,
@@ -202,7 +202,7 @@ static const u16 sEntrainmentBannedAttackerAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
-static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] = 
+static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
 {
     ABILITY_TRUANT,
     ABILITY_MULTITYPE,
@@ -216,6 +216,21 @@ static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
     ABILITY_ICE_FACE,
     ABILITY_GULP_MISSILE,
 };
+
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide)
+{
+    u32 ability = GetBattlerAbility(battlerAtk);
+
+    if (gSideTimers[defSide].followmeTimer == 0
+        || gBattleMons[gSideTimers[defSide].followmeTarget].hp == 0
+        || ability == ABILITY_PROPELLER_TAIL || ability == ABILITY_STALWART)
+        return FALSE;
+
+    if (gSideTimers[defSide].followmePowder && !IsAffectedByPowder(battlerAtk, ability, GetBattlerHoldEffect(battlerAtk, TRUE)))
+        return FALSE;
+
+    return TRUE;
+}
 
 // Functions
 void HandleAction_UseMove(void)
@@ -292,12 +307,9 @@ void HandleAction_UseMove(void)
 
     // choose target
     side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
-    if (gSideTimers[side].followmeTimer != 0
+    if (IsAffectedByFollowMe(gBattlerAttacker, side)
         && gBattleMoves[gCurrentMove].target == MOVE_TARGET_SELECTED
-        && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gSideTimers[side].followmeTarget)
-        && gBattleMons[gSideTimers[side].followmeTarget].hp != 0
-        && (GetBattlerAbility(gBattlerAttacker) != ABILITY_PROPELLER_TAIL
-         || GetBattlerAbility(gBattlerAttacker) != ABILITY_STALWART))
+        && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gSideTimers[side].followmeTarget))
     {
         gBattlerTarget = gSideTimers[side].followmeTarget;
     }
@@ -1542,7 +1554,7 @@ bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
 {
     if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
         return FALSE;
-    
+
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_ABSORB:
@@ -3862,7 +3874,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                     break;
                 }
-                
+
                 BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
                 effect++;
             }
@@ -5429,13 +5441,13 @@ static u8 HealConfuseBerry(u32 battlerId, u32 itemId, u8 flavorId, bool32 end2)
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;
-        
+
         if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
         {
             gBattleMoveDamage *= 2;
             gBattlerAbility = battlerId;
         }
-        
+
         if (end2)
         {
             if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, flavorId) < 0)
@@ -5469,10 +5481,10 @@ static u8 StatRaiseBerry(u32 battlerId, u32 itemId, u32 statId, bool32 end2)
             SET_STATCHANGER(statId, 2, FALSE);
         else
             SET_STATCHANGER(statId, 1, FALSE);
-        
+
         gBattleScripting.animArg1 = 14 + statId;
         gBattleScripting.animArg2 = 0;
-        
+
         if (end2)
         {
             BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
@@ -5515,15 +5527,15 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId, bool32 end2)
         gBattleTextBuff2[7] = EOS;
 
         gEffectBattler = battlerId;
-        
+
         if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
             SET_STATCHANGER(i + 1, 4, FALSE);
         else
             SET_STATCHANGER(i + 1, 2, FALSE);
-        
+
         gBattleScripting.animArg1 = 0x21 + i + 6;
         gBattleScripting.animArg2 = 0;
-        
+
         if (end2)
         {
             BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
@@ -5543,7 +5555,7 @@ static u8 TrySetMicleBerry(u32 battlerId, u32 itemId, bool32 end2)
     if (HasEnoughHpToEatBerry(battlerId, 4, itemId))
     {
         gProtectStructs[battlerId].micle = TRUE;  // battler's next attack has increased accuracy
-        
+
         if (end2)
         {
             BattleScriptExecute(BattleScript_MicleBerryActivateEnd2);
@@ -5566,7 +5578,7 @@ static u8 DamagedStatBoostBerryEffect(u8 battlerId, u8 statId, u8 split)
      && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
      && GetBattleMoveSplit(gCurrentMove) == split)
     {
-        
+
         PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
         PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
 
@@ -5575,7 +5587,7 @@ static u8 DamagedStatBoostBerryEffect(u8 battlerId, u8 statId, u8 split)
             SET_STATCHANGER(statId, 2, FALSE);
         else
             SET_STATCHANGER(statId, 1, FALSE);
-        
+
         gBattleScripting.animArg1 = 14 + statId;
         gBattleScripting.animArg2 = 0;
         BattleScriptPushCursor();
@@ -5593,11 +5605,11 @@ static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
             gBattleMoveDamage = (gBattleMons[battlerId].maxHP * GetBattlerHoldEffectParam(battlerId) / 100) * -1;
         else
             gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) * -1;
-        
+
         // check ripen
         if (ItemId_GetPocket(itemId) == POCKET_BERRIES && GetBattlerAbility(battlerId) == ABILITY_RIPEN)
             gBattleMoveDamage *= 2;
-        
+
         gBattlerAbility = battlerId;    // in SWSH, berry juice shows ability pop up but has no effect. This is mimicked here
         if (end2)
         {
@@ -5869,7 +5881,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     {
                         u8 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
                         u8 ppRestored = GetBattlerHoldEffectParam(battlerId);
-                        
+
                         if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
                         {
                             ppRestored *= 2;
@@ -6447,7 +6459,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         gBattleMoveDamage = 1;
                     if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
                         gBattleMoveDamage *= 2;
-                    
+
                     effect = ITEM_HP_CHANGE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_JabocaRowapBerryActivates;
@@ -6467,7 +6479,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         gBattleMoveDamage = 1;
                     if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
                         gBattleMoveDamage *= 2;
-                    
+
                     effect = ITEM_HP_CHANGE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_JabocaRowapBerryActivates;
@@ -6582,7 +6594,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
     {
     case MOVE_TARGET_SELECTED:
         side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
-        if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
+        if (IsAffectedByFollowMe(gBattlerAttacker, side))
         {
             targetBattler = gSideTimers[side].followmeTarget;
         }
@@ -6617,7 +6629,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
         break;
     case MOVE_TARGET_RANDOM:
         side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
-        if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
+        if (IsAffectedByFollowMe(gBattlerAttacker, side))
             targetBattler = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
             targetBattler = SetRandomTarget(gBattlerAttacker);
@@ -7647,7 +7659,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         break;
     case ABILITY_ICE_SCALES:
         if (IS_MOVE_SPECIAL(move))
-            MulModifier(&modifier, UQ_4_12(0.5));            
+            MulModifier(&modifier, UQ_4_12(0.5));
         break;
     }
 
@@ -8521,7 +8533,7 @@ static bool32 TryRemoveScreens(u8 battler)
     bool32 removed = FALSE;
     u8 battlerSide = GetBattlerSide(battler);
     u8 enemySide = GetBattlerSide(BATTLE_OPPOSITE(battler));
-    
+
     // try to remove from battler's side
     if (gSideStatuses[battlerSide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
     {
@@ -8531,7 +8543,7 @@ static bool32 TryRemoveScreens(u8 battler)
         gSideTimers[battlerSide].auroraVeilTimer = 0;
         removed = TRUE;
     }
-    
+
     // try to remove from battler opponent's side
     if (gSideStatuses[enemySide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
     {
@@ -8541,7 +8553,7 @@ static bool32 TryRemoveScreens(u8 battler)
         gSideTimers[enemySide].auroraVeilTimer = 0;
         removed = TRUE;
     }
-     
+
     return removed;
 }
 
@@ -8568,7 +8580,7 @@ struct Pokemon *GetBattlerPartyData(u8 battlerId)
         mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
     else
         mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
-    
+
     return mon;
 }
 

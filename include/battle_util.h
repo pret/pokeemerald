@@ -46,6 +46,7 @@ struct TypePower
 
 extern const struct TypePower gNaturalGiftTable[];
 
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide);
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
 void HandleAction_UseItem(void);
