@@ -84,7 +84,7 @@ voicegroup194:: @ BW/B2W2 main
 	voice_keysplit_all voicegroup196				 @ drum kit (tr-909)
 	voice_keysplit_all voicegroup197				 @ drum kit (small room)
 	voice_keysplit_all voicegroup198				 @ drum kit (taiko)
-	voice_directsound 60, 0, DirectSoundWaveData_bw_solotrumpetc5, 255, 0, 255, 171
+	voice_directsound 60, 0, DirectSoundWaveData_bw2_solotrumpetc5loud, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 1, 227, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_spiccatostringse2, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_b2_trumpetsstaccatogs4_loop, 255, 0, 255, 224

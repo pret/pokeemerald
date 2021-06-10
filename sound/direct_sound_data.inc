@@ -4159,6 +4159,10 @@ DirectSoundWaveData_bw_sawleadc6_vsleader::
 	.incbin "sound/direct_sound_samples/bw_sawleadc6_vsleader.bin"
 
 	.align 2
+DirectSoundWaveData_bw2_solotrumpetc5loud::
+	.incbin "sound/direct_sound_samples/bw2_solotrumpetc5loud.bin"
+
+	.align 2
 DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
 	.incbin "sound/direct_sound_samples/b2_trumpetsstaccatogs4_loop.bin"
 
