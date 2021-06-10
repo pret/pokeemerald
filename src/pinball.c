@@ -41,7 +41,8 @@
 #define TAG_MEOWTH_JEWEL               503
 #define TAG_MEOWTH_JEWEL_MUTLIPLIER    504
 #define TAG_TILES_MEOWTH_JEWEL_SPARKLE 505
-#define TAG_TIMER_DIGIT                506
+#define TAG_DUGTRIO                    506
+#define TAG_TIMER_DIGIT                507
 
 enum
 {
@@ -122,6 +123,32 @@ struct Meowth
     bool32 completed;
 };
 
+enum
+{
+    DIGLETT_STATE_INIT,
+    DIGLETT_STATE_HIDDEN,
+    DIGLETT_STATE_IDLE_0,
+    DIGLETT_STATE_IDLE_1,
+    DIGLETT_STATE_IDLE_2,
+    DIGLETT_STATE_IDLE_3,
+    DIGLETT_STATE_HIT_0,
+    DIGLETT_STATE_HIT_1,
+    DIGLETT_STATE_HIT_2,
+};
+
+enum
+{
+    DUGTRIO_STATE_HIDDEN,
+    DUGTRIO_STATE_3ALIVE,
+    DUGTRIO_STATE_3ALIVE_HIT,
+    DUGTRIO_STATE_2ALIVE,
+    DUGTRIO_STATE_2ALIVE_HIT,
+    DUGTRIO_STATE_1ALIVE,
+    DUGTRIO_STATE_1ALIVE_HIT,
+    DUGTRIO_STATE_0ALIVE,
+    DUGTRIO_STATE_COMPLETE,
+};
+
 #define NUM_DIGLETTS 31
 
 struct Diglett
@@ -131,6 +158,10 @@ struct Diglett
     u8 curInitIndex;
     u8 curUpdateIndex;
     u8 states[NUM_DIGLETTS];
+    u8 numDiglettsHit;
+    u8 *collisionMap;
+    u8 dugtrioSpriteId;
+    u8 dugtrioState;
 };
 
 #define FLIPPER_LEFT  0
@@ -187,6 +218,7 @@ static void LoadSpriteGfx(u8 gameType);
 static void InitBallSprite(void);
 static void InitFlipperSprites(void);
 static void InitTimerSprites(void);
+static bool32 GameTypeUsesTimer(u8 gameType);
 static void InitGameType(u8 gameType);
 static void InitMeowth(void);
 static void InitDiglett(void);
@@ -195,9 +227,9 @@ static void PinballMainCallback(void);
 static void PinballMain(u8 taskId);
 static void StartNewBall(void);
 static void LoseBall(void);
+static bool32 PlayAnotherBall(void);
 static void LostBall(u8 gameType);
 static void LostBallMeowth(struct Meowth *meowth);
-static void LostBallDiglett(struct Diglett *diglett);
 static void DrawMeowthScoreJewels(struct Meowth *meowth);
 static void OpenEntrance(u8 gameType);
 static void OpenEntranceMeowth(void);
@@ -214,11 +246,15 @@ static void UpdatePosition(struct Ball *ball);
 static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
 static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index);
 static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row);
+static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute);
+static void HandleStaticCollisionDiglett(struct Diglett *diglett, int x, int y, u8 collisionAttribute);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
 static u8 ReverseBits(u8 value);
 static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification);
 static void UpdateCamera(void);
 static void UpdateTimer(void);
+static void HandleTimeRanOut(void);
+static void DisableFlippers(void);
 static void StartExitPinballGame(void);
 static void ExitPinballGame(void);
 static void UpdateBallSprite(struct Sprite *sprite);
@@ -241,6 +277,8 @@ static void ResetMeowthJewels(struct Meowth *meowth);
 static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite);
 static bool32 UpdateDiglett(struct Diglett *diglett);
 static void UpdateDiglettTiles(u16 *tilemap, int index, struct Diglett *diglett);
+static void UpdateDiglettCollision(u8 *collisionMap, int index, bool32 solidCollision);
+static void UpdateDugtrioSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -321,6 +359,8 @@ static const u16 sDiglettStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tile
 static const u8 sDiglettStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_diglett.1bpp");
 static const u8 sDiglettStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_diglett.bin");
 static const u8 sDiglettStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_diglett_entrance.bin");
+static const u32 sDugtrioAnimationGfx[] = INCBIN_U32("graphics/pinball/dugtrio_animation.4bpp.lz");
+static const u16 sDugtrioAnimationPalette[] = INCBIN_U16("graphics/pinball/dugtrio_animation.gbapal");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -364,12 +404,19 @@ static const struct CompressedSpriteSheet sMeowthSparkleSpriteSheet = {
     .tag = TAG_TILES_MEOWTH_JEWEL_SPARKLE,
 };
 
+static const struct CompressedSpriteSheet sDugtrioAnimationSpriteSheet = {
+    .data = sDugtrioAnimationGfx,
+    .size = 0x1A00,
+    .tag = TAG_DUGTRIO,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
 static const struct SpritePalette sMeowthAnimationSpritePalette = { sMeowthAnimationPalette, TAG_MEOWTH };
 static const struct SpritePalette sMeowthJewelSpritePalette = { sMeowthJewelPalette, TAG_MEOWTH_JEWEL };
 static const struct SpritePalette sMeowthJewelMultipliersSpritePalette = { sMeowthJewelMultipliersPalette, TAG_MEOWTH_JEWEL_MUTLIPLIER };
+static const struct SpritePalette sDugtrioAnimationSpritePalette = { sDugtrioAnimationPalette, TAG_DUGTRIO };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -746,18 +793,6 @@ static const struct SpriteTemplate sMeowthJewelSparkleSpriteTemplate = {
     .callback = UpdateMeowthJewelSparkleSprite,
 };
 
-enum
-{
-    DIGLETT_STATE_INIT,
-    DIGLETT_STATE_HIDDEN,
-    DIGLETT_STATE_IDLE_0,
-    DIGLETT_STATE_IDLE_1,
-    DIGLETT_STATE_IDLE_2,
-    DIGLETT_STATE_IDLE_3,
-    DIGLETT_STATE_HIT_0,
-    DIGLETT_STATE_HIT_1,
-};
-
 static const u8 sDiglettStateTiles[][4] = {
     [DIGLETT_STATE_INIT] = {0x4C, 0x4D, 0x4E, 0x4F},
     [DIGLETT_STATE_HIDDEN] = {0x4C, 0x4D, 0x4E, 0x4F},
@@ -767,6 +802,7 @@ static const u8 sDiglettStateTiles[][4] = {
     [DIGLETT_STATE_IDLE_3] = {0x40, 0x41, 0x42, 0x43},
     [DIGLETT_STATE_HIT_0]  = {0x48, 0x49, 0x4A, 0x4B},
     [DIGLETT_STATE_HIT_1]  = {0x48, 0x49, 0x4A, 0x4B},
+    [DIGLETT_STATE_HIT_2]  = {0x48, 0x49, 0x4A, 0x4B},
 };
 
 static const u8 sDiglettCoords[NUM_DIGLETTS][2] = {
@@ -804,6 +840,89 @@ static const u8 sDiglettCoords[NUM_DIGLETTS][2] = {
 };
 
 static const u8 sDiglettInitOrder[NUM_DIGLETTS] = { 0, 28, 1, 29, 3, 25, 6, 21, 2, 30, 4, 26, 7, 22, 10, 17, 5, 27, 8, 23, 11, 18, 14, 9, 24, 12, 19, 15, 13, 20, 16 };
+
+static const struct OamData sDugtrioOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sDugtrioAnimCmd_Hidden[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sDugtrioAnimCmd_3Alive[] = {
+    ANIMCMD_FRAME(16, 14),
+    ANIMCMD_FRAME(32, 14),
+    ANIMCMD_FRAME(48, 14),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sDugtrioAnimCmd_3AliveHit[] = {
+    ANIMCMD_FRAME(64, 12),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sDugtrioAnimCmd_2Alive[] = {
+    ANIMCMD_FRAME(80, 14),
+    ANIMCMD_FRAME(96, 14),
+    ANIMCMD_FRAME(112, 14),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sDugtrioAnimCmd_2AliveHit[] = {
+    ANIMCMD_FRAME(128, 12),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sDugtrioAnimCmd_1Alive[] = {
+    ANIMCMD_FRAME(144, 14),
+    ANIMCMD_FRAME(160, 28),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sDugtrioAnimCmd_1AliveHit[] = {
+    ANIMCMD_FRAME(176, 12),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sDugtrioAnimCmd_0Alive[] = {
+    ANIMCMD_FRAME(192, 33), // We want a duration of 66 frames, but 63 is the maximum an ANIMCMD_FRAME can hold.
+    ANIMCMD_FRAME(192, 33),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sDugtrioAnimCmds[] = {
+    sDugtrioAnimCmd_Hidden,
+    sDugtrioAnimCmd_3Alive,
+    sDugtrioAnimCmd_3AliveHit,
+    sDugtrioAnimCmd_2Alive,
+    sDugtrioAnimCmd_2AliveHit,
+    sDugtrioAnimCmd_1Alive,
+    sDugtrioAnimCmd_1AliveHit,
+    sDugtrioAnimCmd_0Alive,
+};
+
+static const struct SpriteTemplate sDugtrioSpriteTemplate = {
+    .tileTag = TAG_DUGTRIO,
+    .paletteTag = TAG_DUGTRIO,
+    .oam = &sDugtrioOamData,
+    .anims = sDugtrioAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateDugtrioSprite,
+};
 
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
@@ -1023,6 +1142,8 @@ static void LoadSpriteGfx(u8 gameType)
         LoadSpritePalette(&sMeowthJewelMultipliersSpritePalette);
         break;
     case GAME_TYPE_DIGLETT:
+        LoadCompressedSpriteSheet(&sDugtrioAnimationSpriteSheet);
+        LoadSpritePalette(&sDugtrioAnimationSpritePalette);
         break;
     }
 }
@@ -1060,18 +1181,32 @@ static void InitFlipperSprites(void)
 
 static void InitTimerSprites(void)
 {
-    sPinballGame->timer.minutesSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 131, 109, 4);
-    sPinballGame->timer.colonSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 139, 109, 4);
-    sPinballGame->timer.tensSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 147, 109, 4);
-    sPinballGame->timer.onesSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 155, 109, 4);
-    gSprites[sPinballGame->timer.minutesSpriteId].data[0] = 0;
-    gSprites[sPinballGame->timer.colonSpriteId].data[0] = 1;
-    gSprites[sPinballGame->timer.tensSpriteId].data[0] = 2;
-    gSprites[sPinballGame->timer.onesSpriteId].data[0] = 3;
-    StartSpriteAnim(&gSprites[sPinballGame->timer.minutesSpriteId], 0);
-    StartSpriteAnim(&gSprites[sPinballGame->timer.colonSpriteId], 10);
-    StartSpriteAnim(&gSprites[sPinballGame->timer.tensSpriteId], 0);
-    StartSpriteAnim(&gSprites[sPinballGame->timer.onesSpriteId], 0);
+    if (GameTypeUsesTimer(sPinballGame->gameType))
+    {
+        sPinballGame->timer.minutesSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 131, 109, 4);
+        sPinballGame->timer.colonSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 139, 109, 4);
+        sPinballGame->timer.tensSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 147, 109, 4);
+        sPinballGame->timer.onesSpriteId = CreateSprite(&sTimerDigitSpriteTemplate, 155, 109, 4);
+        gSprites[sPinballGame->timer.minutesSpriteId].data[0] = 0;
+        gSprites[sPinballGame->timer.colonSpriteId].data[0] = 1;
+        gSprites[sPinballGame->timer.tensSpriteId].data[0] = 2;
+        gSprites[sPinballGame->timer.onesSpriteId].data[0] = 3;
+        StartSpriteAnim(&gSprites[sPinballGame->timer.minutesSpriteId], 0);
+        StartSpriteAnim(&gSprites[sPinballGame->timer.colonSpriteId], 10);
+        StartSpriteAnim(&gSprites[sPinballGame->timer.tensSpriteId], 0);
+        StartSpriteAnim(&gSprites[sPinballGame->timer.onesSpriteId], 0);
+    }
+}
+
+static bool32 GameTypeUsesTimer(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_DIGLETT:
+        return FALSE;
+    default:
+        return TRUE;
+    }
 }
 
 static void InitGameType(u8 gameType)
@@ -1108,6 +1243,13 @@ static void InitDiglett(void)
 {
     struct Diglett *diglett = &sPinballGame->diglett;
     diglett->completed = FALSE;
+    diglett->numDiglettsHit = 0;
+    diglett->collisionMap = Alloc(ARRAY_COUNT(sDiglettStageBgCollisionMap) * sizeof(sDiglettStageBgCollisionMap[0]));
+    memcpy(diglett->collisionMap, sDiglettStageBgCollisionMap, ARRAY_COUNT(sDiglettStageBgCollisionMap) * sizeof(sDiglettStageBgCollisionMap[0]));
+    diglett->dugtrioSpriteId = CreateSprite(&sDugtrioSpriteTemplate, 80, 16, 5);
+    diglett->dugtrioState = DUGTRIO_STATE_HIDDEN;
+    gSprites[diglett->dugtrioSpriteId].data[0] = DUGTRIO_STATE_HIDDEN;
+    StartSpriteAnim(&gSprites[diglett->dugtrioSpriteId], 0);
 }
 
 static void PinballVBlankCallback(void)
@@ -1213,7 +1355,16 @@ static void OpenEntranceMeowth(void)
 
 static void OpenEntranceDiglett(void)
 {
-
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x113] = 0x55;
+    tilemap[0x114] = 0x56;
+    tilemap[0x133] = 0x0;
+    tilemap[0x134] = 0x54;
+    tilemap[0x152] = 0x0;
+    tilemap[0x153] = 0x52;
+    tilemap[0x154] = 0x53;
+    tilemap[0x172] = 0x50;
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
 static void CloseEntrance(u8 gameType)
@@ -1246,6 +1397,16 @@ static void CloseEntranceMeowth(void)
 
 static void CloseEntranceDiglett(void)
 {
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x113] = 0x24;
+    tilemap[0x114] = 0x2;
+    tilemap[0x133] = 0x22;
+    tilemap[0x134] = 0x1;
+    tilemap[0x152] = 0x1F;
+    tilemap[0x153] = 0x20;
+    tilemap[0x154] = 0x2;
+    tilemap[0x172] = 0x1B;
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
 static void DrawMeowthScoreJewels(struct Meowth *meowth)
@@ -1310,7 +1471,7 @@ static void HandleBallPhysics(void)
 
 static void LoseBall(void)
 {
-    if (sPinballGame->timer.ticks > 0 && !sPinballGame->completed)
+    if (PlayAnotherBall())
     {
         sPinballGame->state = PINBALL_LOST_BALL_FADE_OUT;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
@@ -1323,6 +1484,19 @@ static void LoseBall(void)
     }
 }
 
+static bool32 PlayAnotherBall(void)
+{
+    switch (sPinballGame->gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        return sPinballGame->timer.ticks > 0 && !sPinballGame->completed;
+    case GAME_TYPE_DIGLETT:
+        return FALSE;
+    default:
+        return TRUE;
+    }
+}
+
 static void LostBall(u8 gameType)
 {
     switch (gameType)
@@ -1331,7 +1505,6 @@ static void LostBall(u8 gameType)
         LostBallMeowth(&sPinballGame->meowth);
         break;
     case GAME_TYPE_DIGLETT:
-        LostBallDiglett(&sPinballGame->diglett);
         break;
     }
 }
@@ -1357,10 +1530,6 @@ static void LostBallMeowth(struct Meowth *meowth)
     meowth->jewelStreak = 0;
     ResetMeowthJewels(meowth);
     DrawMeowthScoreJewels(meowth);
-}
-
-static void LostBallDiglett(struct Diglett *diglett)
-{
 }
 
 #define GRAVITY 0x0B
@@ -1501,6 +1670,12 @@ static void UpdatePosition(struct Ball *ball)
         ball->yPos -= MAX_POS_UPDATE;
     else
         ball->yPos += ball->yVelocity;
+
+    if (ball->xPos & 0x80000000)
+        ball->xPos = 0;
+    if (ball->yPos & 0x80000000)
+        ball->yPos = 0;
+
 }
 
 static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
@@ -1509,6 +1684,8 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
     u16 xDelta, yDelta;
     int collisionIndex;
     int maxStringStart, maxStringEnd, curStringStart, curStringLength, maxStringLength;
+    u8 collisionTestAttributes[ARRAY_COUNT(sCollisionTestPointOffsets)];
+    u8 collisionTestCoords[ARRAY_COUNT(sCollisionTestPointOffsets)][2];
     u8 collisionTests[ARRAY_COUNT(sCollisionTestPointOffsets)];
 
     // Check each of the test points around the ball's origin
@@ -1526,7 +1703,10 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
         testX = xPos + sCollisionTestPointOffsets[i][0];
         testY = yPos + sCollisionTestPointOffsets[i][1];
         if (testX < 0 || testY < 0)
+        {
+            collisionTests[i] = 1;
             continue;
+        }
 
         tileX = testX / 8;
         tileY = testY / 8;
@@ -1536,6 +1716,9 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
         collisionAttribute = GetCollisionAttribute(gameType, ballIsEntering, tileIndex);
         collisionMaskRow = GetCollisionMaskRow(gameType, collisionAttribute, row);
         collisionTests[i] = (collisionMaskRow & (1 << column)) != 0;
+        collisionTestCoords[i][0] = testX;
+        collisionTestCoords[i][1] = testY;
+        collisionTestAttributes[i] = collisionAttribute;
     }
 
     // Find the largest string of consecutive colliding test points.
@@ -1606,6 +1789,13 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
         ball->yPos += yDelta;
 
     *outCollisionNormal = sCollisionNormals[collisionIndex];
+    HandleStaticCollisionForGameType(
+        gameType,
+        collisionTestCoords[maxStringStart][0],
+        collisionTestCoords[maxStringStart][1],
+        collisionTestAttributes[maxStringStart]
+    );
+
     return TRUE;
 }
 
@@ -1622,7 +1812,7 @@ static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index)
         break;
     case GAME_TYPE_DIGLETT:
         entranceCollisionMap = sDiglettStageEntranceBgCollisionMap;
-        collisionMap = sDiglettStageBgCollisionMap;
+        collisionMap = sPinballGame->diglett.collisionMap;
         break;
     }
 
@@ -1704,6 +1894,81 @@ static void RotateVector(s16 *x, s16 *y, u8 angle)
     *y = newY;
 }
 
+static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        break;
+    case GAME_TYPE_DIGLETT:
+        HandleStaticCollisionDiglett(&sPinballGame->diglett, x, y, collisionAttribute);
+        break;
+    }
+}
+
+static void HandleStaticCollisionDiglett(struct Diglett *diglett, int x, int y, u8 collisionAttribute)
+{
+    if (collisionAttribute == 0x19 || collisionAttribute == 0x1A || collisionAttribute == 0x1B)
+    {
+        // If the ball hit a Diglett, remove the Diglett's solid collision from the map.
+        int i;
+        int tileX = x / 8;
+        int tileY = y / 8;
+
+        // Find the id of the collided Diglett.
+        for (i = 0; i < NUM_DIGLETTS; i++)
+        {
+            int diglettX = sDiglettCoords[i][0];
+            int diglettY = sDiglettCoords[i][1];
+            int xDiff = tileX - diglettX;
+            int yDiff = tileY - diglettY;
+            if ((xDiff == 0 || xDiff == 1) && (yDiff == 0 || yDiff == 1))
+                break;
+        }
+
+        if (i != NUM_DIGLETTS)
+        {
+            u16 *tilemap;
+            int tileIndex = sDiglettCoords[i][0] + sDiglettCoords[i][1] * 32;
+            diglett->collisionMap[tileIndex]      = 0x2;
+            diglett->collisionMap[tileIndex + 1]  = 0x2;
+            diglett->collisionMap[tileIndex + 32] = 0x2;
+            diglett->collisionMap[tileIndex + 33] = 0x2;
+            diglett->states[i] = DIGLETT_STATE_HIT_0;
+            tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+            UpdateDiglettTiles(tilemap, i, diglett);
+            CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+        }
+    }
+    else if (collisionAttribute == 0x14 || collisionAttribute == 0x15 ||
+             collisionAttribute == 0x16 || collisionAttribute == 0x17 ||
+             collisionAttribute == 0x18)
+    {
+        // If the ball hit Dugtrio, advance its state.
+        switch (diglett->dugtrioState)
+        {
+        case DUGTRIO_STATE_3ALIVE:
+            diglett->dugtrioState = DUGTRIO_STATE_3ALIVE_HIT;
+            break;
+        case DUGTRIO_STATE_2ALIVE:
+            diglett->dugtrioState = DUGTRIO_STATE_2ALIVE_HIT;
+            break;
+        case DUGTRIO_STATE_1ALIVE:
+            diglett->dugtrioState = DUGTRIO_STATE_1ALIVE_HIT;
+            // Clear the collision map for the Dugtrio-occupied tiles.
+            diglett->collisionMap[0x48] = 0x2;
+            diglett->collisionMap[0x49] = 0x2;
+            diglett->collisionMap[0x4A] = 0x2;
+            diglett->collisionMap[0x4B] = 0x2;
+            diglett->collisionMap[0x68] = 0x2;
+            diglett->collisionMap[0x69] = 0x2;
+            diglett->collisionMap[0x6A] = 0x2;
+            diglett->collisionMap[0x6B] = 0x2;
+            break;
+        }
+    }
+}
+
 static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification)
 {
     // Only apply the collision forces if the ball is moving
@@ -1753,27 +2018,42 @@ static void UpdateCamera(void)
 
 static void UpdateTimer(void)
 {
-    int flipperPaletteIndex;
-
-    if (sPinballGame->timer.ticks > 0)
+    if (GameTypeUsesTimer(sPinballGame->gameType) && sPinballGame->timer.ticks > 0)
     {
         if (--sPinballGame->timer.ticks == 0)
         {
             // Time has completely run out.
             // Disable the flippers, and play any ending
             // animation stuff.
-            sPinballGame->flippersDisabled = TRUE;
-
-            // Change the flippers' color to red.
-            flipperPaletteIndex = IndexOfSpritePaletteTag(TAG_FLIPPER);
-            gPlttBufferUnfaded[0x100 + flipperPaletteIndex * 0x10 + 2] = RGB(20, 4, 4);
-            gPlttBufferUnfaded[0x100 + flipperPaletteIndex * 0x10 + 3] = RGB(27, 10, 10);
-            gPlttBufferFaded[0x100 + flipperPaletteIndex * 0x10 + 2] = RGB(20, 4, 4);
-            gPlttBufferFaded[0x100 + flipperPaletteIndex * 0x10 + 3] = RGB(27, 10, 10);
-
-            sPinballGame->meowth.state = MEOWTH_STATE_FINISH;
+            DisableFlippers();
+            HandleTimeRanOut();
         }
     }
+}
+
+static void HandleTimeRanOut(void)
+{
+    switch (sPinballGame->gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        sPinballGame->meowth.state = MEOWTH_STATE_FINISH;
+        break;
+    case GAME_TYPE_DIGLETT:
+        break;
+    }
+}
+
+static void DisableFlippers(void)
+{
+    int flipperPaletteIndex;
+    sPinballGame->flippersDisabled = TRUE;
+
+    // Change the flippers' color to red.
+    flipperPaletteIndex = IndexOfSpritePaletteTag(TAG_FLIPPER);
+    gPlttBufferUnfaded[0x100 + flipperPaletteIndex * 0x10 + 2] = RGB(20, 4, 4);
+    gPlttBufferUnfaded[0x100 + flipperPaletteIndex * 0x10 + 3] = RGB(27, 10, 10);
+    gPlttBufferFaded[0x100 + flipperPaletteIndex * 0x10 + 2] = RGB(20, 4, 4);
+    gPlttBufferFaded[0x100 + flipperPaletteIndex * 0x10 + 3] = RGB(27, 10, 10);
 }
 
 static void StartExitPinballGame(void)
@@ -1786,6 +2066,9 @@ static void ExitPinballGame(void)
 {
     if (!gPaletteFade.active)
     {
+        if (sPinballGame->gameType == GAME_TYPE_DIGLETT)
+            FREE_AND_SET_NULL(sPinballGame->diglett.collisionMap);
+
         SetMainCallback2(sPinballGame->returnMainCallback);
         FREE_AND_SET_NULL(sPinballGame);
     }
@@ -2267,12 +2550,13 @@ static bool32 UpdateDiglett(struct Diglett *diglett)
             tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
             UpdateDiglettTiles(tilemap, index, diglett);
             CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+            UpdateDiglettCollision(diglett->collisionMap, index, TRUE);
 
             if (++diglett->curInitIndex == NUM_DIGLETTS)
                 diglett->initialized = TRUE;
         }
     }
-    else
+    else if (diglett->numDiglettsHit < NUM_DIGLETTS)
     {
         // Update 4 digletts each frame.
         int i;
@@ -2300,7 +2584,26 @@ static bool32 UpdateDiglett(struct Diglett *diglett)
                 diglett->states[index] = DIGLETT_STATE_HIT_1;
                 break;
             case DIGLETT_STATE_HIT_1:
+                diglett->states[index] = DIGLETT_STATE_HIT_2;
+                break;
+            case DIGLETT_STATE_HIT_2:
                 diglett->states[index] = DIGLETT_STATE_HIDDEN;
+                UpdateDiglettCollision(diglett->collisionMap, index, FALSE);
+                if (++diglett->numDiglettsHit == NUM_DIGLETTS)
+                {
+                    diglett->dugtrioState = DUGTRIO_STATE_3ALIVE;
+
+                    // Update the colision tilemap for the Dugtrio-occupied tiles.
+                    tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+                    diglett->collisionMap[0x48] = 0x14;
+                    diglett->collisionMap[0x49] = 0x14;
+                    diglett->collisionMap[0x4A] = 0x14;
+                    diglett->collisionMap[0x4B] = 0x14;
+                    diglett->collisionMap[0x68] = 0x15;
+                    diglett->collisionMap[0x69] = 0x16;
+                    diglett->collisionMap[0x6A] = 0x17;
+                    diglett->collisionMap[0x6B] = 0x18;
+                }
                 break;
             }
 
@@ -2311,6 +2614,36 @@ static bool32 UpdateDiglett(struct Diglett *diglett)
 
         CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
         diglett->curUpdateIndex = (diglett->curUpdateIndex + 4) % NUM_DIGLETTS;
+    }
+    else
+    {
+        // At this point, all the Digletts are hidden and Dugtrio is visible.
+        struct Sprite *dugtrioSprite = &gSprites[diglett->dugtrioSpriteId];
+        switch (diglett->dugtrioState)
+        {
+        case DUGTRIO_STATE_3ALIVE_HIT:
+            if (dugtrioSprite->animEnded)
+                diglett->dugtrioState = DUGTRIO_STATE_2ALIVE;
+            break;
+        case DUGTRIO_STATE_2ALIVE_HIT:
+            if (dugtrioSprite->animEnded)
+                diglett->dugtrioState = DUGTRIO_STATE_1ALIVE;
+            break;
+        case DUGTRIO_STATE_1ALIVE_HIT:
+            if (dugtrioSprite->animEnded)
+            {
+                diglett->dugtrioState = DUGTRIO_STATE_0ALIVE;
+                StartSpriteAnim(dugtrioSprite, 7);
+                DisableFlippers();
+                diglett->completed = TRUE;
+                return TRUE;
+            }
+            break;
+        case DUGTRIO_STATE_0ALIVE:
+            if (dugtrioSprite->animEnded)
+                diglett->dugtrioState = DUGTRIO_STATE_COMPLETE;
+            return TRUE;
+        }
     }
 
     return FALSE;
@@ -2323,4 +2656,68 @@ static void UpdateDiglettTiles(u16 *tilemap, int index, struct Diglett *diglett)
     tilemap[tileIndex + 1]  = sDiglettStateTiles[diglett->states[index]][1];
     tilemap[tileIndex + 32] = sDiglettStateTiles[diglett->states[index]][2];
     tilemap[tileIndex + 33] = sDiglettStateTiles[diglett->states[index]][3];
+}
+
+static void UpdateDiglettCollision(u8 *collisionMap, int index, bool32 solidCollision)
+{
+    int tileIndex = sDiglettCoords[index][0] + sDiglettCoords[index][1] * 32;
+    if (solidCollision)
+    {
+        collisionMap[tileIndex]      = 0x19;
+        collisionMap[tileIndex + 1]  = 0x19;
+        collisionMap[tileIndex + 32] = 0x1A;
+        collisionMap[tileIndex + 33] = 0x1B;
+    }
+    else
+    {
+        collisionMap[tileIndex]      = 0x2;
+        collisionMap[tileIndex + 1]  = 0x2;
+        collisionMap[tileIndex + 32] = 0x2;
+        collisionMap[tileIndex + 33] = 0x2;
+    }
+}
+
+static void UpdateDugtrioSprite(struct Sprite *sprite)
+{
+    int animNum;
+    struct Diglett *diglett = &sPinballGame->diglett;
+    int prevState = sprite->data[0];
+    int curState = diglett->dugtrioState;
+
+    // Check if Dugtrio's state changed, and start the appropriate
+    // sprite animation.
+    if (prevState != curState)
+    {
+        sprite->data[0] = curState;
+        switch (curState)
+        {
+        case DUGTRIO_STATE_HIDDEN:
+            StartSpriteAnim(sprite, 0);
+            break;
+        case DUGTRIO_STATE_3ALIVE:
+            StartSpriteAnim(sprite, 1);
+            break;
+        case DUGTRIO_STATE_3ALIVE_HIT:
+            StartSpriteAnim(sprite, 2);
+            break;
+        case DUGTRIO_STATE_2ALIVE:
+            StartSpriteAnim(sprite, 3);
+            break;
+        case DUGTRIO_STATE_2ALIVE_HIT:
+            StartSpriteAnim(sprite, 4);
+            break;
+        case DUGTRIO_STATE_1ALIVE:
+            StartSpriteAnim(sprite, 5);
+            break;
+        case DUGTRIO_STATE_1ALIVE_HIT:
+            StartSpriteAnim(sprite, 6);
+            break;
+        case DUGTRIO_STATE_0ALIVE:
+            StartSpriteAnim(sprite, 7);
+            break;
+        case DUGTRIO_STATE_COMPLETE:
+            StartSpriteAnim(sprite, 0);
+            break;
+        }
+    }
 }
