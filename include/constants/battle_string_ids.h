@@ -568,17 +568,19 @@
 #define STRINGID_CURIOUSMEDICINEENTERS           564
 #define STRINGID_CANACTFASTERTHANKSTO            565
 #define STRINGID_MICLEBERRYACTIVATES             566
-#define STRINGID_ZPOWERSURROUNDS                 567
-#define STRINGID_ZMOVEUNLEASHED                  568
-#define STRINGID_ZMOVERESETSSTATS                569
-#define STRINGID_ZMOVEALLSTATSUP                 570
-#define STRINGID_ZMOVEZBOOSTCRIT                 571
-#define STRINGID_ZMOVERESTOREHP                  572
-#define STRINGID_ZMOVESTATUP                     573
-#define STRINGID_ZMOVEHPTRAP                     574
-#define STRINGID_TERRAINREMOVED                  575
+#define STRINGID_PKMNSHOOKOFFTHETAUNT            567
+#define STRINGID_PKMNGOTOVERITSINFATUATION       568
+#define STRINGID_ZPOWERSURROUNDS                 569
+#define STRINGID_ZMOVEUNLEASHED                  570
+#define STRINGID_ZMOVERESETSSTATS                571
+#define STRINGID_ZMOVEALLSTATSUP                 572
+#define STRINGID_ZMOVEZBOOSTCRIT                 573
+#define STRINGID_ZMOVERESTOREHP                  574
+#define STRINGID_ZMOVESTATUP                     575
+#define STRINGID_ZMOVEHPTRAP                     576
+#define STRINGID_TERRAINREMOVED                  577
 
-#define BATTLESTRINGS_COUNT                      576
+#define BATTLESTRINGS_COUNT                      578
 
 //// multichoice message IDs
 // switch in ability message
@@ -720,7 +722,7 @@
 #define B_MSG_TRANSFORMED      0
 #define B_MSG_TRANSFORM_FAILED 1
 
-// gSubsituteUsedStringIds
+// gSubstituteUsedStringIds
 #define B_MSG_SET_SUBSTITUTE    0
 #define B_MSG_SUBSTITUTE_FAILED 1
 

@@ -345,11 +345,12 @@
 	.byte 0x32
 	.endm
 
-	@ Plays the specified (song_number) song. The byte is apparently supposed to be 0x00.
-	.macro playbgm song_number:req, unknown:req
+	@ Plays the specified (song_number) song. If save_song is TRUE, the
+	@ specified (song_number) will be saved as if savebgm was called with it.
+	.macro playbgm song_number:req, save_song:req
 	.byte 0x33
 	.2byte \song_number
-	.byte \unknown
+	.byte \save_song
 	.endm
 
 	@ Saves the specified (song_number) song to be played later.
