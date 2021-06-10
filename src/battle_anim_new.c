@@ -4258,7 +4258,7 @@ const struct SpriteTemplate gContinentalCrushGrowingRockSpriteTemplate =
 const struct SpriteTemplate gContinentalCrushEruptionSpriteTemplate = 
 {
     .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -4352,7 +4352,7 @@ const struct SpriteTemplate gNeverEndingNightmareFocusEnergySpriteTemplate =
 const struct SpriteTemplate gNeverEndingNightmareHandSpriteTemplate = 
 {
     .tileTag = ANIM_TAG_ASSURANCE_HAND,
-    .paletteTag ANIM_TAG_ASSURANCE_HAND,
+    .paletteTag = ANIM_TAG_ASSURANCE_HAND,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -4600,7 +4600,7 @@ const struct SpriteTemplate gBloomDoomPetalSpinSpriteTemplate =
 const struct SpriteTemplate gBloomDoomGreenChargeSpriteTemplate = 
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag ANIM_TAG_RAZOR_LEAF,
+    .paletteTag = ANIM_TAG_RAZOR_LEAF,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
