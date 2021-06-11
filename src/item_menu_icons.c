@@ -537,19 +537,19 @@ void RemoveBagItemIconSprite(u8 id)
     RemoveBagSprite(id + 2);
 }
 
-void sub_80D4FAC(void)
+void CreateItemMenuSwapLine(void)
 {
-    sub_8122344(&gBagMenu->spriteId[4], 8);
+    CreateSwapLineSprites(&gBagMenu->spriteId[4], 8);
 }
 
-void sub_80D4FC8(u8 arg0)
+void SetItemMenuSwapLineInvisibility(bool8 invisible)
 {
-    sub_81223FC(&gBagMenu->spriteId[4], 8, arg0);
+    SetSwapLineSpritesInvisibility(&gBagMenu->spriteId[4], 8, invisible);
 }
 
-void sub_80D4FEC(u8 arg0)
+void UpdateItemMenuSwapLinePos(u8 y)
 {
-    sub_8122448(&gBagMenu->spriteId[4], 136, 120, (arg0 + 1) * 16);
+    UpdateSwapLineSpritesPos(&gBagMenu->spriteId[4], 136, 120, (y + 1) * 16);
 }
 
 static void sub_80D5018(void *mem0, void *mem1)

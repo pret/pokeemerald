@@ -112,7 +112,7 @@ static void CopyItemName_PlayerPC(u8 *string, u16 itemId);
 static void sub_816BC14(void);
 static void sub_816BFE0(u8 y, u8, u8 speed);
 static void sub_816BCC4(u8);
-static void sub_816C690(u8);
+static void UpdateSwapLinePos(u8);
 static void sub_816C4FC(u8 taskId);
 static void sub_816C0C8(void);
 static void sub_816C060(u16 itemId);
@@ -558,8 +558,8 @@ static void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
     ItemStorage_SetItemAndMailCount(taskId);
     sub_816BC14();
     FreeAndReserveObjectSpritePalettes();
-    LoadListMenuArrowsGfx();
-    sub_8122344(gUnknown_0203BCC4->spriteIds, 7);
+    LoadListMenuSwapLineGfx();
+    CreateSwapLineSprites(gUnknown_0203BCC4->spriteIds, 7);
     ClearDialogWindowAndFrame(0,0);
     gTasks[taskId].func = ItemStorage_ProcessWithdrawTossInput;
 }
@@ -1186,7 +1186,7 @@ static void ItemStorage_GoBackToPlayerPCMenu(u8 taskId)
     sub_816C0C8();
     ItemStorage_RemoveScrollIndicator();
     DestroyListMenuTask(data[5], NULL, NULL);
-    sub_81223B0(gUnknown_0203BCC4->spriteIds, 7);
+    DestroySwapLineSprites(gUnknown_0203BCC4->spriteIds, 7);
     sub_816BC58();
     gTasks[taskId].func = ItemStorage_GoBackToPlayerPCMenu_InitStorage;
 }
@@ -1199,7 +1199,7 @@ static void ItemStorage_ItemSwapChoosePrompt(u8 taskId)
     ListMenuSetUnkIndicatorsStructField(data[5], 16, 1);
     gUnknown_0203BCC4->unk666 = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
     sub_816BFB8(data[5], 0, 0);
-    sub_816C690(gUnknown_0203BCC4->unk666);
+    UpdateSwapLinePos(gUnknown_0203BCC4->unk666);
     CopyItemName(gSaveBlock1Ptr->pcItems[gUnknown_0203BCC4->unk666].itemId, gStringVar1);
     ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(ITEMPC_SWITCH_WHICH_ITEM));
     gTasks[taskId].func = sub_816C4FC;
@@ -1219,8 +1219,8 @@ static void sub_816C4FC(u8 taskId)
     }
     id = ListMenu_ProcessInput(data[5]);
     ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
-    sub_81223FC(gUnknown_0203BCC4->spriteIds, 7, 0);
-    sub_816C690(playerPCItemPageInfo.cursorPos);
+    SetSwapLineSpritesInvisibility(gUnknown_0203BCC4->spriteIds, 7, FALSE);
+    UpdateSwapLinePos(playerPCItemPageInfo.cursorPos);
     switch(id)
     {
     case LIST_NOTHING_CHOSEN:
@@ -1245,7 +1245,6 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
 {
     s16 *data;
     u16 b;
-    u8 c;
 
     data = gTasks[taskId].data;
     b = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
@@ -1253,31 +1252,27 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
     DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
     if (!a)
     {
-        c = gUnknown_0203BCC4->unk666;
-        if (c != b)
+        if (gUnknown_0203BCC4->unk666 != b)
         {
-            if (c != b - 1)
+            if (gUnknown_0203BCC4->unk666 != b - 1)
             {
-                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, c, b);
+                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, gUnknown_0203BCC4->unk666, b);
                 ItemStorage_RefreshListMenu();
             }
         }
-        else
-            goto LABEL_SKIP_CURSOR_DECREMENT;
     }
     if (gUnknown_0203BCC4->unk666 < b)
         playerPCItemPageInfo.cursorPos--;
-    LABEL_SKIP_CURSOR_DECREMENT:
-    sub_81223FC(gUnknown_0203BCC4->spriteIds, 7, 1);
+    SetSwapLineSpritesInvisibility(gUnknown_0203BCC4->spriteIds, 7, TRUE);
     gUnknown_0203BCC4->unk666 = 0xFF;
     data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = ItemStorage_ProcessInput;
 }
 
-static void sub_816C690(u8 a)
+static void UpdateSwapLinePos(u8 y)
 {
-    sub_8122448(gUnknown_0203BCC4->spriteIds, 7, 128, ((a+1) * 16));
+    UpdateSwapLineSpritesPos(gUnknown_0203BCC4->spriteIds, 7, 128, ((y+1) * 16));
 }
 
 static void sub_816C6BC(u8 windowId, u16 value, u32 mode, u8 x, u8 y, u8 n)

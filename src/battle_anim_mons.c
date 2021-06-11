@@ -1310,7 +1310,7 @@ u16 ArcTan2Neg(s16 a, s16 b)
     return -var;
 }
 
-void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
+void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
 {
     int i;
     struct PlttData *originalColor;
@@ -2078,8 +2078,8 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
 
     if (IsContest())
     {
-        gSprites[spriteId].affineAnims = gUnknown_082FF6C0;
-        StartSpriteAffineAnim(&gSprites[spriteId], 0);
+        gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteContest;
+        StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_NORMAL);
     }
     return spriteId;
 }
@@ -2273,7 +2273,7 @@ u8 CreateInvisibleSpriteCopy(int battlerId, u8 spriteId, int species)
     return newSpriteId;
 }
 
-void AnimUnused_80A8A6C(struct Sprite *sprite)
+void AnimTranslateLinearAndFlicker_Flipped(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -2296,7 +2296,7 @@ void AnimUnused_80A8A6C(struct Sprite *sprite)
 }
 
 // Used by three different unused battle anim sprite templates.
-void AnimUnused_80A8AEC(struct Sprite *sprite)
+void AnimTranslateLinearAndFlicker(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {

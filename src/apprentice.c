@@ -30,7 +30,7 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
-/* Summary of Apprentice, because (as of writing at least) its not very well documented online
+/* Summary of Apprentice, because (as of writing at least) it's not very well documented online
  *
  * ## Basic info
  * In the Battle Tower lobby there is an NPC which asks to be taught by the player
@@ -322,17 +322,12 @@ static void SetRandomQuestionData(void)
     FREE_AND_SET_NULL(gApprenticePartyMovesData);
 }
 
-// No idea why a do-while loop is needed, but it will not match without it.
+#define APPRENTICE_SPECIES_ID(monId) \
+    ((monId < MULTI_PARTY_SIZE) ? (PLAYER_APPRENTICE.speciesIds[monId] >> (((PLAYER_APPRENTICE.party >> monId) & 1) << 2) & 0xF) : 0)
 
-#define APPRENTICE_SPECIES_ID(speciesArrId, monId) speciesArrId = (PLAYER_APPRENTICE.speciesIds[monId] >> \
-                                                                  (((PLAYER_APPRENTICE.party >> monId) & 1) << 2)) & 0xF; \
-                                                   do {} while (0)
-
-// Why the need to have two macros do the exact thing differently?
-#define APPRENTICE_SPECIES_ID_2(speciesArrId, monId) {  u8 a0 = ((PLAYER_APPRENTICE.party >> monId) & 1);\
-                                                        speciesArrId = PLAYER_APPRENTICE.speciesIds[monId];     \
-                                                        speciesArrId = ((speciesArrId) >> (a0 << 2)) & 0xF; \
-                                                     }
+#define APPRENTICE_SPECIES_ID_NO_COND(monId, count) \
+    monId = ((PLAYER_APPRENTICE.party >> count) & 1); \
+    monId = ((PLAYER_APPRENTICE.speciesIds[count]) >> (monId << 2)) & 0xF; \
 
 // Get the second move choice for the "Which move" question
 // Unlike the first move choice, this can be either a level up move or a TM/HM move
@@ -348,15 +343,7 @@ static u16 GetRandomAlternateMove(u8 monId)
     bool32 shouldUseMove;
     u8 level;
 
-    if (monId < MULTI_PARTY_SIZE)
-    {
-        APPRENTICE_SPECIES_ID(id, monId);
-    }
-    else
-    {
-        id = 0;
-    }
-
+    id = APPRENTICE_SPECIES_ID(monId);
     species = gApprentices[PLAYER_APPRENTICE.id].species[id];
     learnset = gLevelUpLearnsets[species];
     j = 0;
@@ -551,7 +538,7 @@ static void SaveApprenticeParty(u8 numQuestions)
     // Save party species
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
-        APPRENTICE_SPECIES_ID(speciesTableId, i);
+        speciesTableId = APPRENTICE_SPECIES_ID(i);
         apprenticeMons[i]->species = gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
         GetLatestLearnedMoves(apprenticeMons[i]->species, apprenticeMons[i]->moves);
     }
@@ -605,7 +592,7 @@ static void CreateApprenticeMenu(u8 menu)
             u16 species;
             u32 speciesTableId;
 
-            APPRENTICE_SPECIES_ID(speciesTableId, i);
+            speciesTableId = APPRENTICE_SPECIES_ID(i);
             species =  gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
             strings[i] = gSpeciesNames[species];
         }
@@ -1016,7 +1003,7 @@ static void InitQuestionData(void)
         {
             // count re-used as monId
             count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
-            APPRENTICE_SPECIES_ID_2(id1, count);
+            APPRENTICE_SPECIES_ID_NO_COND(id1, count);
             gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id1];
             gApprenticeQuestionData->moveId1 = GetDefaultMove(count, id1, PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].moveSlot);
             gApprenticeQuestionData->moveId2 = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data;
@@ -1030,7 +1017,7 @@ static void InitQuestionData(void)
         {
             // count re-used as monId
             count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
-            APPRENTICE_SPECIES_ID_2(id2, count);
+            APPRENTICE_SPECIES_ID_NO_COND(id2, count);
             gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id2];
         }
     }
@@ -1097,14 +1084,7 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, gStringVar4);
         break;
     case APPRENTICE_BUFF_LEAD_MON_SPECIES:
-        if (PLAYER_APPRENTICE.leadMonId < MULTI_PARTY_SIZE)
-        {
-            APPRENTICE_SPECIES_ID(speciesArrayId, PLAYER_APPRENTICE.leadMonId);
-        }
-        else
-        {
-            speciesArrayId = 0;
-        }
+        speciesArrayId = APPRENTICE_SPECIES_ID(PLAYER_APPRENTICE.leadMonId);
         StringCopy(stringDst, gSpeciesNames[gApprentices[PLAYER_APPRENTICE.id].species[speciesArrayId]]);
         break;
     }
@@ -1127,17 +1107,24 @@ static void TrySetApprenticeHeldItem(void)
 
     if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
         return;
-
-    for (count = 0, j = 0; j < APPRENTICE_MAX_QUESTIONS && PLAYER_APPRENTICE.questions[j].questionId != QUESTION_ID_WIN_SPEECH; count++, j++)
-        ;
-
-    // Make sure the item hasnt already been suggested in previous questions
-    for (i = 0; i < count && i < CURRENT_QUESTION_NUM; i++)
+    
+    count = 0;
+    for (j = 0; j < APPRENTICE_MAX_QUESTIONS; j++)
     {
-        do {} while(0);
-        if (PLAYER_APPRENTICE.questions[i].questionId == QUESTION_ID_WHAT_ITEM
-            && PLAYER_APPRENTICE.questions[i].suggestedChange
-            && PLAYER_APPRENTICE.questions[i].data == gSpecialVar_0x8005)
+        if (PLAYER_APPRENTICE.questions[j].questionId == QUESTION_ID_WIN_SPEECH)
+            break;
+        count++;
+    }
+
+    // Make sure the item hasn't already been suggested in previous questions
+    for (i = 0; i < count; i++)
+    {
+        if (i >= CURRENT_QUESTION_NUM)
+            break;
+        if (PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WHAT_ITEM ||
+            PLAYER_APPRENTICE.questions[i].suggestedChange == 0)
+            continue;
+        if (PLAYER_APPRENTICE.questions[i].data == gSpecialVar_0x8005)
         {
             PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].suggestedChange = FALSE;
             PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_0x8005;

@@ -258,8 +258,8 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, 2
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_GroudonAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -358,8 +358,8 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, 2
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_GroudonAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -431,7 +431,7 @@ SootopolisCity_Movement_KyogreAttack: @ 81E5BB8
 	clear_affine_anim
 	step_end
 
-SootopolisCity_Movement_GroudonAttack: @ 81E5BC2
+SootopolisCity_Movement_KyogreDefend: @ 81E5BC2
 	delay_16
 	delay_16
 	delay_16
@@ -464,7 +464,7 @@ SootopolisCity_Movement_KyogreIdle: @ 81E5BD6
 	walk_in_place_slow_left
 	step_end
 
-SootopolisCity_Movement_KyogreDefend: @ 81E5BDD
+SootopolisCity_Movement_GroudonAttack: @ 81E5BDD
 	walk_in_place_slow_right
 	walk_in_place_slow_right
 	walk_in_place_slow_right

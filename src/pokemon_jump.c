@@ -3628,7 +3628,7 @@ static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
 // "Points" for jump score and "times" for number of jumps in a row
 static void PrintScoreSuffixes(void)
 {
-    u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+    u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
     PutWindowTilemap(WIN_POINTS);
     PutWindowTilemap(WIN_TIMES);
@@ -3868,7 +3868,7 @@ static void PrintPokeJumpPlayerNames(bool32 highlightSelf)
     if (!highlightSelf)
     {
         for (i = 0; i < playersCount; i++)
-            PrintPokeJumpPlayerName(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+            PrintPokeJumpPlayerName(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     }
     else
     {
@@ -3877,7 +3877,7 @@ static void PrintPokeJumpPlayerNames(bool32 highlightSelf)
         for (i = 0; i < playersCount; i++)
         {
             if (multiplayerId != i)
-                PrintPokeJumpPlayerName(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+                PrintPokeJumpPlayerName(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
             else
                 PrintPokeJumpPlayerName(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED);
         }

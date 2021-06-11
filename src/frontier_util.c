@@ -1552,16 +1552,16 @@ static void CheckPutFrontierTVShowOnAir(void)
                 switch (battleMode)
                 {
                 case FRONTIER_MODE_SINGLES:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 1);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_SINGLES);
                     break;
                 case FRONTIER_MODE_DOUBLES:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 2);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_DOUBLES);
                     break;
                 case FRONTIER_MODE_MULTIS:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 3);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_MULTIS);
                     break;
                 case FRONTIER_MODE_LINK_MULTIS:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 4);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_LINK_MULTIS);
                     break;
                 }
             }
@@ -1575,9 +1575,9 @@ static void CheckPutFrontierTVShowOnAir(void)
                 && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 5);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_DOME_SINGLES);
                 else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 6);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_DOME_DOUBLES);
             }
         }
         break;
@@ -1589,9 +1589,9 @@ static void CheckPutFrontierTVShowOnAir(void)
                 && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 11);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_PALACE_SINGLES);
                 else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 12);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_PALACE_DOUBLES);
             }
         }
         break;
@@ -1602,7 +1602,7 @@ static void CheckPutFrontierTVShowOnAir(void)
             if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] > 1
                 && ShouldAirFrontierTVShow())
             {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], 10);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], FRONTIER_SHOW_ARENA);
             }
         }
         break;
@@ -1615,9 +1615,9 @@ static void CheckPutFrontierTVShowOnAir(void)
                 && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 7);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_FACTORY_SINGLES);
                 else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 8);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_FACTORY_DOUBLES);
             }
         }
         break;
@@ -1628,7 +1628,7 @@ static void CheckPutFrontierTVShowOnAir(void)
             if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] > 1
                 && ShouldAirFrontierTVShow())
             {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], 9);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], FRONTIER_SHOW_PIKE);
             }
         }
         break;
@@ -1639,7 +1639,7 @@ static void CheckPutFrontierTVShowOnAir(void)
             if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > 1
                 && ShouldAirFrontierTVShow())
             {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], 13);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], FRONTIER_SHOW_PYRAMID);
             }
         }
         break;

@@ -9,24 +9,24 @@
 #include "util.h"
 #include "constants/rgb.h"
 
-static void sub_81138D4(struct Sprite *);
+static void AnimUnusedBagSteal(struct Sprite *);
+static void AnimUnusedBagSteal_Step(struct Sprite *);
 static void AnimBite(struct Sprite *);
 static void AnimTearDrop(struct Sprite *);
 static void AnimClawSlash(struct Sprite *);
 static void AnimTask_AttackerFadeToInvisible_Step(u8);
 static void AnimTask_AttackerFadeFromInvisible_Step(u8);
-static void sub_8113950(struct Sprite *);
 static void AnimBite_Step1(struct Sprite *);
 static void AnimBite_Step2(struct Sprite *);
 static void AnimTearDrop_Step(struct Sprite *);
 static void AnimTask_MoveAttackerMementoShadow_Step(u8);
 static void AnimTask_MoveTargetMementoShadow_Step(u8);
-static void sub_8114244(struct Task *);
-static void sub_8114374(u8);
+static void DoMementoShadowEffect(struct Task *);
+static void SetAllBattlersSpritePriority(u8);
 static void AnimTask_MetallicShine_Step(u8);
 
 // Unused
-const struct SpriteTemplate gUnknown_08596FC8 =
+static const struct SpriteTemplate sUnusedBagStealSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TIED_BAG,
     .paletteTag = ANIM_TAG_TIED_BAG,
@@ -34,7 +34,7 @@ const struct SpriteTemplate gUnknown_08596FC8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81138D4,
+    .callback = AnimUnusedBagSteal,
 };
 
 static const union AffineAnimCmd sAffineAnim_Bite_0[] =
@@ -268,7 +268,7 @@ void AnimTask_InitAttackerFadeFromInvisible(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-static void sub_81138D4(struct Sprite *sprite)
+static void AnimUnusedBagSteal(struct Sprite *sprite)
 {
     sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
@@ -279,11 +279,11 @@ static void sub_81138D4(struct Sprite *sprite)
     sprite->data[3] = -sprite->data[1];
     sprite->data[4] = -sprite->data[2];
     sprite->data[6] = 0xFFD8;
-    sprite->callback = sub_8113950;
+    sprite->callback = AnimUnusedBagSteal_Step;
     sprite->callback(sprite);
 }
 
-static void sub_8113950(struct Sprite *sprite)
+static void AnimUnusedBagSteal_Step(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -430,7 +430,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         scanlineParams.dmaDest = &REG_BG1VOFS;
         var0 = WINOUT_WIN01_BG1;
         if (!IsContest())
-            gBattle_BG2_X += 240;
+            gBattle_BG2_X += DISPLAY_WIDTH;
     }
     else
     {
@@ -440,7 +440,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         scanlineParams.dmaDest = &REG_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
         if (!IsContest())
-            gBattle_BG1_X += 240;
+            gBattle_BG1_X += DISPLAY_WIDTH;
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
@@ -451,7 +451,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     task->data[0] = 0;
     task->data[1] = 0;
     task->data[2] = 0;
-    sub_8114374(3);
+    SetAllBattlersSpritePriority(3);
     for (i = 0; i < 112; i++)
     {
         gScanlineEffectRegBuffers[0][i] = task->data[10];
@@ -462,7 +462,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR | (var0 ^ (WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR)));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     gBattle_WIN0H = (task->data[14] << 8) | task->data[15];
-    gBattle_WIN0V = 160;
+    gBattle_WIN0V = DISPLAY_HEIGHT;
 
     task->func = AnimTask_MoveAttackerMementoShadow_Step;
 }
@@ -496,14 +496,14 @@ static void AnimTask_MoveAttackerMementoShadow_Step(u8 taskId)
         break;
     case 1:
         task->data[4] -= 8;
-        sub_8114244(task);
+        DoMementoShadowEffect(task);
 
         if (task->data[4] < task->data[8])
             task->data[0]++;
         break;
     case 2:
         task->data[4] -= 8;
-        sub_8114244(task);
+        DoMementoShadowEffect(task);
         task->data[14] += 4;
         task->data[15] -= 4;
 
@@ -550,12 +550,12 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
             if (task->data[3] == 1)
             {
                 SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
-                gBattle_BG2_X += 240;
+                gBattle_BG2_X += DISPLAY_WIDTH;
             }
             else
             {
                 SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-                gBattle_BG1_X += 240;
+                gBattle_BG1_X += DISPLAY_WIDTH;
             }
 
             task->data[0]++;
@@ -574,7 +574,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
             FillPalette(0, 9 * 16, 32);
         }
 
-        sub_8114374(3);
+        SetAllBattlersSpritePriority(3);
         task->data[0]++;
         break;
     case 2:
@@ -622,7 +622,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
 
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
         gBattle_WIN0H = (task->data[14] << 8) | task->data[15];
-        gBattle_WIN0V = 160;
+        gBattle_WIN0V = DISPLAY_HEIGHT;
 
         task->data[0] = 0;
         task->data[1] = 0;
@@ -644,7 +644,7 @@ static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
         if (task->data[5] >=  task->data[7])
             task->data[5] = task->data[7];
 
-        sub_8114244(task);
+        DoMementoShadowEffect(task);
         if (task->data[5] == task->data[7])
             task->data[0]++;
         break;
@@ -664,7 +664,7 @@ static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
         if (task->data[4] >= task->data[6])
             task->data[4] = task->data[6];
 
-        sub_8114244(task);
+        DoMementoShadowEffect(task);
         if (task->data[4] == task->data[6] && task->data[1])
         {
             task->data[1] = 0;
@@ -706,7 +706,7 @@ static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
     }
 }
 
-static void sub_8114244(struct Task *task)
+static void DoMementoShadowEffect(struct Task *task)
 {
     int var0, var1;
     s16 var2;
@@ -757,7 +757,7 @@ static void sub_8114244(struct Task *task)
     }
 }
 
-static void sub_8114374(u8 priority)
+static void SetAllBattlersSpritePriority(u8 priority)
 {
     u16 i;
 
@@ -870,7 +870,7 @@ void AnimTask_MetallicShine(u8 taskId)
     paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
 
     if (gBattleAnimArgs[1] == 0)
-        SetGreyscaleOrOriginalPalette(paletteNum, FALSE);
+        SetGrayscaleOrOriginalPalette(paletteNum, FALSE);
     else
         BlendPalette(paletteNum * 16, 16, 11, gBattleAnimArgs[2]);
 
@@ -900,7 +900,7 @@ static void AnimTask_MetallicShine_Step(u8 taskId)
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
             paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
             if (gTasks[taskId].data[1] == 0)
-                SetGreyscaleOrOriginalPalette(paletteNum, TRUE);
+                SetGrayscaleOrOriginalPalette(paletteNum, TRUE);
 
             DestroySprite(&gSprites[gTasks[taskId].data[0]]);
             GetBattleAnimBg1Data(&animBg);
@@ -925,10 +925,10 @@ static void AnimTask_MetallicShine_Step(u8 taskId)
     }
 }
 
-// Changes battler's palette to either greyscale or original.
+// Changes battler's palette to either grayscale or original.
 // arg0: which battler
 // arg1: FALSE grayscale, TRUE original
-void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
+void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
 {
     u8 spriteId;
     u8 battler;
@@ -974,7 +974,7 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
     }
 
     if (spriteId != SPRITE_NONE)
-        SetGreyscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, gBattleAnimArgs[1]);
+        SetGrayscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, gBattleAnimArgs[1]);
 
     DestroyAnimVisualTask(taskId);
 }

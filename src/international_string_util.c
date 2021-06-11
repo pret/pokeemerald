@@ -185,7 +185,7 @@ void ConvertInternationalPlayerNameStripChar(u8 *str, u8 removeChar)
     }
 }
 
-void sub_81DB5AC(u8 *str)
+void ConvertInternationalContestantName(u8 *str)
 {
     if (*str++ == EXT_CTRL_CODE_BEGIN && *str++ == EXT_CTRL_CODE_JPN)
     {

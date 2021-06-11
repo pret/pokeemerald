@@ -12,8 +12,8 @@ static void AnimFireSpread(struct Sprite *);
 static void AnimFirePlume(struct Sprite *);
 static void AnimLargeFlame(struct Sprite *);
 static void AnimLargeFlame_Step(struct Sprite *);
-static void AnimUnused_8109064(struct Sprite *);
-static void AnimUnused_8109064_Step(struct Sprite *);
+static void AnimUnusedSmallEmber(struct Sprite *);
+static void AnimUnusedSmallEmber_Step(struct Sprite *);
 static void AnimSunlight(struct Sprite *);
 static void AnimEmberFlare(struct Sprite *);
 static void AnimBurnFlame(struct Sprite *);
@@ -162,7 +162,7 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_08595440 =
+static const struct SpriteTemplate sUnusedEmberFirePlumeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -173,7 +173,7 @@ const struct SpriteTemplate gUnusedSpriteTemplate_08595440 =
     .callback = AnimFirePlume,
 };
 
-static const union AnimCmd sAnim_Unused_08595458[] =
+static const union AnimCmd sAnim_UnusedSmallEmber[] =
 {
     ANIMCMD_FRAME(16, 6),
     ANIMCMD_FRAME(32, 6),
@@ -181,21 +181,21 @@ static const union AnimCmd sAnim_Unused_08595458[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_Unused_08595468[] =
+static const union AnimCmd *const sAnims_UnusedSmallEmber[] =
 {
-    sAnim_Unused_08595458,
+    sAnim_UnusedSmallEmber,
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_0859546C =
+static const struct SpriteTemplate sUnusedSmallEmberSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_Unused_08595468,
+    .anims = sAnims_UnusedSmallEmber,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_8109064,
+    .callback = AnimUnusedSmallEmber,
 };
 
 static const union AffineAnimCmd sAffineAnim_SunlightRay[] =
@@ -292,23 +292,23 @@ static const union AnimCmd *const sAnims_FireBlastCross[] =
     sAnim_FireBlastCross,
 };
 
-static const union AffineAnimCmd sAnim_Unused_08595544[] =
+static const union AffineAnimCmd sAffineAnim_Unused_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd sAnim_Unused_08595554[] =
+static const union AffineAnimCmd sAffineAnim_Unused_1[] =
 {
     AFFINEANIMCMD_FRAME(0xA0, 0xA0, 0, 0),
     AFFINEANIMCMD_END,
 };
 
 // Unused
-static const union AffineAnimCmd *const sAnims_Unused_08595564[] =
+static const union AffineAnimCmd *const sAffineAnims_Unused[] =
 {
-    sAnim_Unused_08595544,
-    sAnim_Unused_08595554,
+    sAffineAnim_Unused_0,
+    sAffineAnim_Unused_1,
 };
 
 const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
@@ -548,7 +548,7 @@ static void AnimLargeFlame_Step(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-static void AnimUnused_8109064(struct Sprite *sprite)
+static void AnimUnusedSmallEmber(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
 
@@ -570,10 +570,10 @@ static void AnimUnused_8109064(struct Sprite *sprite)
     sprite->data[4] = gBattleAnimArgs[6];
     sprite->data[5] = 0;
 
-    sprite->callback = AnimUnused_8109064_Step;
+    sprite->callback = AnimUnusedSmallEmber_Step;
 }
 
-static void AnimUnused_8109064_Step(struct Sprite *sprite)
+static void AnimUnusedSmallEmber_Step(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {

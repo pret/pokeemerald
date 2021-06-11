@@ -708,7 +708,7 @@ void sub_81C8C64(struct PokenavListMenuWindow *listWindow, u32 a1)
 
 void sub_81C8CB4(struct MatchCallWindowState *state, struct PokenavSub17Substruct *list)
 {
-    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_RED};
+    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_RED};
 
     list->unk34(state->unk10 + state->unkC * state->windowTopIndex, list->unkTextBuffer);
     list->unk38(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
