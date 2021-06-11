@@ -48,6 +48,7 @@ enum
 {
     GAME_TYPE_MEOWTH,
     GAME_TYPE_DIGLETT,
+    GAME_TYPE_SEEL,
 };
 
 enum
@@ -164,6 +165,29 @@ struct Diglett
     u8 dugtrioState;
 };
 
+enum
+{
+    SEEL_STATE_SWIM_LEFT,
+    SEEL_STATE_SWIM_RIGHT,
+    SEEL_STATE_SWIM_EMERGING,
+    SEEL_STATE_SWIM_VISIBLE,
+    SEEL_STATE_SWIM_HIT,
+    SEEL_STATE_SWIM_SUBMERGING,
+};
+
+struct SeelSwimmer
+{
+    u8 state;
+};
+
+#define NUM_SEELS 3
+
+struct Seel
+{
+    bool32 completed;
+    struct SeelSwimmer swimmers[NUM_SEELS];
+};
+
 #define FLIPPER_LEFT  0
 #define FLIPPER_RIGHT 1
 
@@ -202,6 +226,7 @@ struct PinballGame
     u16 cameraScrollY;
     struct Meowth meowth;
     struct Diglett diglett;
+    struct Seel seel;
     bool8 ballIsEntering;
     bool8 flippersDisabled;
     bool8 completed;
@@ -213,6 +238,7 @@ static void PlayPinballGame(u8 gameType);
 static void FadeToPinballScreen(u8 taskId);
 static void InitPinballScreen(void);
 static void InitPinballGame(void);
+static u32 GetTimerTicks(u8 gameType);
 static void LoadBgGfx(u8 gameType);
 static void LoadSpriteGfx(u8 gameType);
 static void InitBallSprite(void);
@@ -222,6 +248,7 @@ static bool32 GameTypeUsesTimer(u8 gameType);
 static void InitGameType(u8 gameType);
 static void InitMeowth(void);
 static void InitDiglett(void);
+static void InitSeel(void);
 static void PinballVBlankCallback(void);
 static void PinballMainCallback(void);
 static void PinballMain(u8 taskId);
@@ -230,12 +257,15 @@ static void LoseBall(void);
 static bool32 PlayAnotherBall(void);
 static void LostBall(u8 gameType);
 static void LostBallMeowth(struct Meowth *meowth);
+static void LostBallSeel(struct Seel *seel);
 static void DrawMeowthScoreJewels(struct Meowth *meowth);
 static void OpenEntrance(u8 gameType);
 static void OpenEntranceMeowth(void);
 static void OpenEntranceDiglett(void);
+static void OpenEntranceSeel(void);
 static void CloseEntranceMeowth(void);
 static void CloseEntranceDiglett(void);
+static void CloseEntranceSeel(void);
 static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
@@ -279,6 +309,7 @@ static bool32 UpdateDiglett(struct Diglett *diglett);
 static void UpdateDiglettTiles(u16 *tilemap, int index, struct Diglett *diglett);
 static void UpdateDiglettCollision(u8 *collisionMap, int index, bool32 solidCollision);
 static void UpdateDugtrioSprite(struct Sprite *sprite);
+static bool32 UpdateSeel(struct Seel *seel);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -361,6 +392,13 @@ static const u8 sDiglettStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_c
 static const u8 sDiglettStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_diglett_entrance.bin");
 static const u32 sDugtrioAnimationGfx[] = INCBIN_U32("graphics/pinball/dugtrio_animation.4bpp.lz");
 static const u16 sDugtrioAnimationPalette[] = INCBIN_U16("graphics/pinball/dugtrio_animation.gbapal");
+
+static const u32 sSeelStageBgGfx[] = INCBIN_U32("graphics/pinball/bg_tiles_seel.4bpp");
+static const u16 sSeelStageBgPalette[] = INCBIN_U16("graphics/pinball/bg_tiles_seel.gbapal");
+static const u16 sSeelStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_seel.bin");
+static const u8 sSeelStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_seel.1bpp");
+static const u8 sSeelStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_seel.bin");
+static const u8 sSeelStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_seel_entrance.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -1023,6 +1061,11 @@ void PlayDiglettPinballGame(void)
     PlayPinballGame(GAME_TYPE_DIGLETT);
 }
 
+void PlaySeelPinballGame(void)
+{
+    PlayPinballGame(GAME_TYPE_SEEL);
+}
+
 static void PlayPinballGame(u8 gameType)
 {
     u8 taskId;
@@ -1125,6 +1168,12 @@ static void LoadBgGfx(u8 gameType)
         ResetPaletteFade();
         LoadPalette(sDiglettStageBgPalette, 0, sizeof(sDiglettStageBgPalette));
         break;
+    case GAME_TYPE_SEEL:
+        LoadBgTiles(PINBALL_BG_BASE, sSeelStageBgGfx, sizeof(sSeelStageBgGfx), 0);
+        CopyToBgTilemapBuffer(PINBALL_BG_BASE, sSeelStageBgTilemap, sizeof(sSeelStageBgTilemap), 0);
+        ResetPaletteFade();
+        LoadPalette(sSeelStageBgPalette, 0, sizeof(sSeelStageBgPalette));
+        break;
     }
 }
 
@@ -1145,6 +1194,10 @@ static void LoadSpriteGfx(u8 gameType)
         LoadCompressedSpriteSheet(&sDugtrioAnimationSpriteSheet);
         LoadSpritePalette(&sDugtrioAnimationSpritePalette);
         break;
+    case GAME_TYPE_SEEL:
+        // LoadCompressedSpriteSheet(&sDugtrioAnimationSpriteSheet);
+        // LoadSpritePalette(&sDugtrioAnimationSpritePalette);
+        break;
     }
 }
 
@@ -1159,8 +1212,21 @@ static void InitPinballGame(void)
     sPinballGame->leftFlipper.type = FLIPPER_LEFT;
     sPinballGame->leftFlipper.xPos = 67;
     sPinballGame->leftFlipper.yPos = 122;
-    sPinballGame->timer.ticks = 60 * 60;
+    sPinballGame->timer.ticks = GetTimerTicks(sPinballGame->gameType);
     sPinballGame->flippersDisabled = FALSE;
+}
+
+static u32 GetTimerTicks(u8 gameType)
+{
+    switch (gameType)
+    {
+    case GAME_TYPE_MEOWTH:
+        return 60 * 60;
+    case GAME_TYPE_SEEL:
+        return 90 * 60;
+    default:
+        return 1;
+    }
 }
 
 static void InitBallSprite(void)
@@ -1219,6 +1285,9 @@ static void InitGameType(u8 gameType)
     case GAME_TYPE_DIGLETT:
         InitDiglett();
         break;
+    case GAME_TYPE_SEEL:
+        InitSeel();
+        break;
     }
 }
 
@@ -1250,6 +1319,10 @@ static void InitDiglett(void)
     diglett->dugtrioState = DUGTRIO_STATE_HIDDEN;
     gSprites[diglett->dugtrioSpriteId].data[0] = DUGTRIO_STATE_HIDDEN;
     StartSpriteAnim(&gSprites[diglett->dugtrioSpriteId], 0);
+}
+
+static void InitSeel(void)
+{
 }
 
 static void PinballVBlankCallback(void)
@@ -1336,6 +1409,9 @@ static void OpenEntrance(u8 gameType)
     case GAME_TYPE_DIGLETT:
         OpenEntranceDiglett();
         break;
+    case GAME_TYPE_SEEL:
+        OpenEntranceSeel();
+        break;
     }
 }
 
@@ -1367,6 +1443,20 @@ static void OpenEntranceDiglett(void)
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
+static void OpenEntranceSeel(void)
+{
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x113] = 0x41E;
+    tilemap[0x114] = 0x41D;
+    tilemap[0x133] = 0x41B;
+    tilemap[0x134] = 0x41A;
+    tilemap[0x152] = 0x400;
+    tilemap[0x153] = 0x418;
+    tilemap[0x154] = 0x417;
+    tilemap[0x172] = 0x414;
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+}
+
 static void CloseEntrance(u8 gameType)
 {
     sPinballGame->ballIsEntering = FALSE;
@@ -1377,6 +1467,9 @@ static void CloseEntrance(u8 gameType)
         break;
     case GAME_TYPE_DIGLETT:
         CloseEntranceDiglett();
+        break;
+    case GAME_TYPE_SEEL:
+        CloseEntranceSeel();
         break;
     }
 }
@@ -1406,6 +1499,21 @@ static void CloseEntranceDiglett(void)
     tilemap[0x153] = 0x20;
     tilemap[0x154] = 0x2;
     tilemap[0x172] = 0x1B;
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+}
+
+static void CloseEntranceSeel(void)
+{
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x113] = 0x41C;
+    tilemap[0x114] = 0x401;
+    tilemap[0x133] = 0x419;
+    tilemap[0x134] = 0x408;
+    tilemap[0x152] = 0x416;
+    tilemap[0x153] = 0x415;
+    tilemap[0x154] = 0x405;
+    tilemap[0x172] = 0x411;
+    tilemap[0x173] = 0x401;
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
@@ -1489,6 +1597,7 @@ static bool32 PlayAnotherBall(void)
     switch (sPinballGame->gameType)
     {
     case GAME_TYPE_MEOWTH:
+    case GAME_TYPE_SEEL:
         return sPinballGame->timer.ticks > 0 && !sPinballGame->completed;
     case GAME_TYPE_DIGLETT:
         return FALSE;
@@ -1505,6 +1614,9 @@ static void LostBall(u8 gameType)
         LostBallMeowth(&sPinballGame->meowth);
         break;
     case GAME_TYPE_DIGLETT:
+        break;
+    case GAME_TYPE_SEEL:
+        LostBallSeel(&sPinballGame->seel);
         break;
     }
 }
@@ -1530,6 +1642,10 @@ static void LostBallMeowth(struct Meowth *meowth)
     meowth->jewelStreak = 0;
     ResetMeowthJewels(meowth);
     DrawMeowthScoreJewels(meowth);
+}
+
+static void LostBallSeel(struct Seel *seel)
+{
 }
 
 #define GRAVITY 0x0B
@@ -1814,6 +1930,10 @@ static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index)
         entranceCollisionMap = sDiglettStageEntranceBgCollisionMap;
         collisionMap = sPinballGame->diglett.collisionMap;
         break;
+    case GAME_TYPE_SEEL:
+        entranceCollisionMap = sSeelStageEntranceBgCollisionMap;
+        collisionMap = sSeelStageBgCollisionMap;
+        break;
     }
 
     if (ballIsEntering)
@@ -1840,6 +1960,9 @@ static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row)
             break;
         case GAME_TYPE_DIGLETT:
             masks = sDiglettStageBgCollisionMasks;
+            break;
+        case GAME_TYPE_SEEL:
+            masks = sSeelStageBgCollisionMasks;
             break;
         }
 
@@ -1899,6 +2022,7 @@ static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 colli
     switch (gameType)
     {
     case GAME_TYPE_MEOWTH:
+    case GAME_TYPE_SEEL:
         break;
     case GAME_TYPE_DIGLETT:
         HandleStaticCollisionDiglett(&sPinballGame->diglett, x, y, collisionAttribute);
@@ -2040,6 +2164,8 @@ static void HandleTimeRanOut(void)
         break;
     case GAME_TYPE_DIGLETT:
         break;
+    case GAME_TYPE_SEEL:
+        break;
     }
 }
 
@@ -2132,6 +2258,8 @@ static bool32 UpdateGameType(u8 gameType)
         return UpdateMeowth(&sPinballGame->meowth);
     case GAME_TYPE_DIGLETT:
         return UpdateDiglett(&sPinballGame->diglett);
+    case GAME_TYPE_SEEL:
+        return UpdateSeel(&sPinballGame->seel);
     default:
         return FALSE;
     }
@@ -2188,7 +2316,7 @@ static bool32 UpdateMeowth(struct Meowth *meowth)
 
 static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
-    bool32 isColliding;
+    bool32 isColliding = FALSE;
 
     switch (gameType)
     {
@@ -2198,6 +2326,9 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
             isColliding = CheckMeowthJewelsCollision(ball, &sPinballGame->meowth, outCollisionNormal);
         break;
     case GAME_TYPE_DIGLETT:
+        isColliding = FALSE;
+        break;
+    case GAME_TYPE_SEEL:
         isColliding = FALSE;
         break;
     }
@@ -2720,4 +2851,10 @@ static void UpdateDugtrioSprite(struct Sprite *sprite)
             break;
         }
     }
+}
+
+
+static bool32 UpdateSeel(struct Seel *seel)
+{
+    return FALSE;
 }
