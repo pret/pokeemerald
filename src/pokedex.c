@@ -6323,6 +6323,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         break;
     case 6:
         gTasks[taskId].data[5] = 0;
+        FillWindowPixelRect(0, PIXEL_FILL(0), 0, 48, 240, 130);
         PrintMonStats(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
         PrintMonStatsToggle(taskId);
         if (!sPokedexListItem->owned)
@@ -6397,6 +6398,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
             gTasks[taskId].data[5] = 1;
         else
             gTasks[taskId].data[5] = 0;
+        FillWindowPixelRect(0, PIXEL_FILL(0), 0, 48, 240, 130);
         PrintMonStatsToggle(taskId);
         DestroyMoveIcon(taskId);
         PrintMoveNameAndInfo(taskId, TRUE);
@@ -6414,6 +6416,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
     {
         sPokedexView->moveSelected -= 1;
         PlaySE(SE_SELECT);
+        FillWindowPixelRect(0, PIXEL_FILL(0), 96, 16, 144, 80);
         DestroyMoveIcon(taskId);
         PrintMoveNameAndInfo(taskId, FALSE);
     }
@@ -6421,6 +6424,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
     {
         sPokedexView->moveSelected = sPokedexView->moveSelected + 1;
         PlaySE(SE_SELECT);
+        FillWindowPixelRect(0, PIXEL_FILL(0), 96, 16, 144, 80);
         DestroyMoveIcon(taskId);
         PrintMoveNameAndInfo(taskId, FALSE);
     }
@@ -6521,12 +6525,6 @@ static void PrintMoveNameAndInfo(u8 taskId, bool8 toggle)
 
     //Contest
     u8 contest_i, contest_effectValue, contest_appeal, contest_jam;
-
-    //Clear space
-    if (!toggle)
-        FillWindowPixelRect(0, PIXEL_FILL(0), moves_x-1, moves_y, 139, 78);
-    else
-        FillWindowPixelRect(0, PIXEL_FILL(0), moves_x-1, moves_y+29, 139, 55);
 
     //Calculate and retrieve correct move from the arrays
     if (selected < numEggMoves)
@@ -6797,10 +6795,6 @@ static void PrintMonStatsToggle(u8 taskId)
     u8 differentEVs = 0;
     u8 EVs[6] = {gBaseStats[species].evYield_HP, gBaseStats[species].evYield_Speed, gBaseStats[species].evYield_Attack, gBaseStats[species].evYield_SpAttack, gBaseStats[species].evYield_Defense, gBaseStats[species].evYield_SpDefense};
 
-    //Clear old text
-    FillWindowPixelRect(0, PIXEL_FILL(0), base_x, base_y, 90, 100); //bottom stats
-    FillWindowPixelRect(0, PIXEL_FILL(0), abilities_x, 99, 130, 58); //abilities
-
 
     //Base stats
     if (gTasks[taskId].data[5] == 0)
@@ -7046,7 +7040,6 @@ static void PrintMonStatsToggle(u8 taskId)
     {
         base_i = 0;
         //Egg group 1
-        PrintInfoScreenTextSmall(gText_Stats_eggGroup_g1, base_x, base_y + base_y_offset*base_i);
         switch (gBaseStats[species].eggGroup1)
         {
         case EGG_GROUP_MONSTER     :
@@ -7095,62 +7088,67 @@ static void PrintMonStatsToggle(u8 taskId)
             StringCopy(gStringVar1, gText_Stats_eggGroup_UNDISCOVERED);
             break;
         }
-        align_x = GetStringRightAlignXOffset(0, gStringVar1, total_x);
-        PrintInfoScreenTextSmall(gStringVar1, align_x, base_y + base_y_offset*base_i);
-        base_i++;
 
         //Egg group 2
-        PrintInfoScreenTextSmall(gText_Stats_eggGroup_g2, base_x, base_y + base_y_offset*base_i);
-        switch (gBaseStats[species].eggGroup2)
+        if (gBaseStats[species].eggGroup1 != gBaseStats[species].eggGroup2)
         {
-        case EGG_GROUP_MONSTER     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_MONSTER);
-            break;
-        case EGG_GROUP_WATER_1     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_WATER_1);
-            break;
-        case EGG_GROUP_BUG         :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_BUG);
-            break;
-        case EGG_GROUP_FLYING      :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_FLYING);
-            break;
-        case EGG_GROUP_FIELD       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_FIELD);
-            break;
-        case EGG_GROUP_FAIRY       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_FAIRY);
-            break;
-        case EGG_GROUP_GRASS       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_GRASS);
-            break;
-        case EGG_GROUP_HUMAN_LIKE  :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_HUMAN_LIKE);
-            break;
-        case EGG_GROUP_WATER_3     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_WATER_3);
-            break;
-        case EGG_GROUP_MINERAL     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_MINERAL);
-            break;
-        case EGG_GROUP_AMORPHOUS   :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_AMORPHOUS);
-            break;
-        case EGG_GROUP_WATER_2     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_WATER_2);
-            break;
-        case EGG_GROUP_DITTO       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_DITTO);
-            break;
-        case EGG_GROUP_DRAGON      :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_DRAGON);
-            break;
-        case EGG_GROUP_UNDISCOVERED:
-            StringCopy(gStringVar1, gText_Stats_eggGroup_UNDISCOVERED);
-            break;
+            switch (gBaseStats[species].eggGroup2)
+            {
+            case EGG_GROUP_MONSTER     :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_MONSTER);
+                break;
+            case EGG_GROUP_WATER_1     :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_WATER_1);
+                break;
+            case EGG_GROUP_BUG         :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_BUG);
+                break;
+            case EGG_GROUP_FLYING      :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_FLYING);
+                break;
+            case EGG_GROUP_FIELD       :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_FIELD);
+                break;
+            case EGG_GROUP_FAIRY       :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_FAIRY);
+                break;
+            case EGG_GROUP_GRASS       :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_GRASS);
+                break;
+            case EGG_GROUP_HUMAN_LIKE  :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_HUMAN_LIKE);
+                break;
+            case EGG_GROUP_WATER_3     :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_WATER_3);
+                break;
+            case EGG_GROUP_MINERAL     :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_MINERAL);
+                break;
+            case EGG_GROUP_AMORPHOUS   :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_AMORPHOUS);
+                break;
+            case EGG_GROUP_WATER_2     :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_WATER_2);
+                break;
+            case EGG_GROUP_DITTO       :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_DITTO);
+                break;
+            case EGG_GROUP_DRAGON      :
+                StringCopy(gStringVar2, gText_Stats_eggGroup_DRAGON);
+                break;
+            case EGG_GROUP_UNDISCOVERED:
+                StringCopy(gStringVar2, gText_Stats_eggGroup_UNDISCOVERED);
+                break;
+            }
+            StringExpandPlaceholders(gStringVar3, gText_Stats_eggGroup_Groups);
+            align_x = GetStringRightAlignXOffset(0, gStringVar3, total_x);
+            PrintInfoScreenTextSmall(gStringVar3, base_x, base_y + base_y_offset*base_i);
         }
-        align_x = GetStringRightAlignXOffset(0, gStringVar1, total_x);
-        PrintInfoScreenTextSmall(gStringVar1, align_x, base_y + base_y_offset*base_i);
+        else
+        {
+            align_x = GetStringRightAlignXOffset(0, gStringVar1, total_x);
+            PrintInfoScreenTextSmall(gStringVar1, base_x, base_y + base_y_offset*base_i);
+        }
         base_i++;
 
         //Egg cycles
