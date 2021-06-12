@@ -1820,25 +1820,15 @@ const u8 gText_Berries[] = _("BERRIES");
 
 
 //HGSS_Ui PokedexPlus
-const u8 gText_Stats_EV[]          = _("EV: ");
-const u8 gText_Stats_EV_HP[]       = _("HP {PLUS} ");
-const u8 gText_Stats_EV_Attack[]   = _("ATTACK {PLUS} ");
-const u8 gText_Stats_EV_Defense[]  = _("DEFENSE {PLUS} ");
-const u8 gText_Stats_EV_Speed[]    = _("SPEED {PLUS} ");
-const u8 gText_Stats_EV_SpAtk[]    = _("SP. ATK {PLUS} ");
-const u8 gText_Stats_EV_SpDef[]    = _("SP. DEF {PLUS}");
 const u8 gText_Stats_HP[]       = _("HP ");
 const u8 gText_Stats_Attack[]   = _("ATK ");
 const u8 gText_Stats_Defense[]  = _("DEF ");
 const u8 gText_Stats_Speed[]    = _("SPE ");
-const u8 gText_Stats_SpAtk[]    = _("SP.A ");
-const u8 gText_Stats_SpDef[]    = _("SP.D ");
-const u8 gText_Stats_EVHP[]       = _("EV HP");
-const u8 gText_Stats_EVAttack[]   = _("EV ATK");
-const u8 gText_Stats_EVDefense[]  = _("EV DEF");
-const u8 gText_Stats_EVSpeed[]    = _("EV SPE");
-const u8 gText_Stats_EVSpAtk[]    = _("EV SP.A");
-const u8 gText_Stats_EVSpDef[]    = _("EV SP.D");
+const u8 gText_Stats_SpAttack[]    = _("SP.A ");
+const u8 gText_Stats_SpDefense[]    = _("SP.D ");
+const u8 gText_Stats_EV_Plus1[]     = _("{UP_ARROW_2}");
+const u8 gText_Stats_EV_Plus2[]     = _("{UP_ARROW_2}{UP_ARROW_2}");
+const u8 gText_Stats_EV_Plus3[]     = _("{UP_ARROW_2}{UP_ARROW_2}{UP_ARROW_2}");
 const u8 gText_Stats_MoveSelectedMax[]      = _("{STR_VAR_1} / {STR_VAR_2}");
 const u8 gText_Stats_MoveLevel[]     = _("LVL");
 const u8 gText_Stats_Gender_0[]      = _("♂");

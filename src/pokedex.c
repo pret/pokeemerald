@@ -6758,6 +6758,22 @@ static u8 PrintMonStatsToggle_DifferentEVsRow(u8 differentEVs)
     else
         return 1;
 }
+static u8* PrintMonStatsToggle_EV_Arrows(u8 *dest, u8 EVs[], u8 position)
+{
+    switch (EVs[position])
+    {
+        case 1:
+            StringCopy(dest, gText_Stats_EV_Plus1);
+            break;
+        case 2:
+            StringCopy(dest, gText_Stats_EV_Plus2);
+            break;
+        case 3:
+            StringCopy(dest, gText_Stats_EV_Plus3);
+            break;
+    }
+    return dest;
+}
 static void PrintMonStatsToggle(u8 taskId)
 {
     u8 base_x = 8;
@@ -6779,7 +6795,7 @@ static void PrintMonStatsToggle(u8 taskId)
     u8 abilities_y = 99;
     u8 ability0;
     u8 differentEVs = 0;
-    u8 differentEVsOffsetX = 0;
+    u8 EVs[6] = {gBaseStats[species].evYield_HP, gBaseStats[species].evYield_Speed, gBaseStats[species].evYield_Attack, gBaseStats[species].evYield_SpAttack, gBaseStats[species].evYield_Defense, gBaseStats[species].evYield_SpDefense};
 
     //Clear old text
     FillWindowPixelRect(0, PIXEL_FILL(0), base_x, base_y, 90, 100); //bottom stats
@@ -6802,7 +6818,7 @@ static void PrintMonStatsToggle(u8 taskId)
         ConvertIntToDecimalStringN(strBase, gBaseStats[species].baseAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_first_row, base_y + base_y_offset*base_i);
 
-        PrintInfoScreenTextSmall(gText_Stats_SpAtk, base_x+base_x_second_row, base_y + base_y_offset*base_i);
+        PrintInfoScreenTextSmall(gText_Stats_SpAttack, base_x+base_x_second_row, base_y + base_y_offset*base_i);
         ConvertIntToDecimalStringN(strBase, gBaseStats[species].baseSpAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
 
@@ -6811,71 +6827,142 @@ static void PrintMonStatsToggle(u8 taskId)
         ConvertIntToDecimalStringN(strBase, gBaseStats[species].baseDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_first_row, base_y + base_y_offset*base_i);
 
-        PrintInfoScreenTextSmall(gText_Stats_SpDef, base_x+base_x_second_row, base_y + base_y_offset*base_i);
+        PrintInfoScreenTextSmall(gText_Stats_SpDefense, base_x+base_x_second_row, base_y + base_y_offset*base_i);
         ConvertIntToDecimalStringN(strBase, gBaseStats[species].baseSpDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
         base_i++;
     }
-    else //EV increses
+    else //EV increases
     {
-        if (gBaseStats[species].evYield_HP > 0) //HP
-        {
+        //Count how many different EVs
+        if (EVs[0] > 0) //HP
             differentEVs++;
-            column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-            base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-            PrintInfoScreenTextSmall(gText_Stats_EVHP, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            ConvertIntToDecimalStringN(strBase, gBaseStats[species].evYield_HP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
-        }
+        if (EVs[1]  > 0) //Speed
+            differentEVs++;
+        if (EVs[2]  > 0) //Attack
+            differentEVs++;
+        if (EVs[3]  > 0) //Special Attack
+            differentEVs++;
+        if (EVs[4]  > 0) //Defense
+            differentEVs++;
+        if (EVs[5]  > 0) //Special Defense
+            differentEVs++;
 
-        if (gBaseStats[species].evYield_Speed > 0) //Speed
+        //If 1 or 2 EVs display with the same layout as the base stats
+        if (differentEVs < 3)
         {
-            differentEVs++;
-            column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-            base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-            PrintInfoScreenTextSmall(gText_Stats_EVSpeed, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            ConvertIntToDecimalStringN(strBase, gBaseStats[species].evYield_Speed, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
-        }
+            differentEVs = 0;
 
-        if (gBaseStats[species].evYield_Attack > 0) //Attack
-        {
-            differentEVs++;
-            column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-            base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-            PrintInfoScreenTextSmall(gText_Stats_EVAttack, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            ConvertIntToDecimalStringN(strBase, gBaseStats[species].evYield_Attack, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
-        }
+            if (gBaseStats[species].evYield_HP > 0) //HP
+            {
+                differentEVs++;
+                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
+                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
+                PrintInfoScreenTextSmall(gText_Stats_HP, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 0);
+                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            }
 
-        if (gBaseStats[species].evYield_SpAttack > 0) //Special Attack
-        {
-            differentEVs++;
-            column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-            base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-            PrintInfoScreenTextSmall(gText_Stats_EVSpAtk, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            ConvertIntToDecimalStringN(strBase, gBaseStats[species].evYield_SpAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
-        }
+            if (gBaseStats[species].evYield_Speed > 0) //Speed
+            {
+                differentEVs++;
+                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
+                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
+                PrintInfoScreenTextSmall(gText_Stats_Speed, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 1);
+                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            }
 
-        if (gBaseStats[species].evYield_Defense > 0) //Defense
-        {
-            differentEVs++;
-            column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-            base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-            PrintInfoScreenTextSmall(gText_Stats_EVDefense, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            ConvertIntToDecimalStringN(strBase, gBaseStats[species].evYield_Defense, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
-        }
+            if (gBaseStats[species].evYield_Attack > 0) //Attack
+            {
+                differentEVs++;
+                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
+                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
+                PrintInfoScreenTextSmall(gText_Stats_Attack, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 2);
+                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            }
 
-        if (gBaseStats[species].evYield_SpDefense > 0) //Special Defense
+            if (gBaseStats[species].evYield_SpAttack > 0) //Special Attack
+            {
+                differentEVs++;
+                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
+                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
+                PrintInfoScreenTextSmall(gText_Stats_SpAttack, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 3);
+                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            }
+
+            if (gBaseStats[species].evYield_Defense > 0) //Defense
+            {
+                differentEVs++;
+                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
+                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
+                PrintInfoScreenTextSmall(gText_Stats_Defense, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 4);
+                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            }
+
+            if (gBaseStats[species].evYield_SpDefense > 0) //Special Defense
+            {
+                differentEVs++;
+                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
+                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
+                PrintInfoScreenTextSmall(gText_Stats_SpDefense, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 5);
+                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            }
+        }
+        else //3 different EVs in 1 row
         {
-            differentEVs++;
-            column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-            base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-            PrintInfoScreenTextSmall(gText_Stats_EVSpDef, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            ConvertIntToDecimalStringN(strBase, gBaseStats[species].evYield_SpDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+            column = 0;
+            if (gBaseStats[species].evYield_HP > 0) //HP
+            {
+                PrintInfoScreenTextSmall(gText_Stats_HP, base_x + 29*column, base_y);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 0);
+                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                column++;
+            }
+
+            if (gBaseStats[species].evYield_Speed > 0) //Speed
+            {
+                PrintInfoScreenTextSmall(gText_Stats_Speed, base_x + 29*column, base_y);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 1);
+                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                column++;
+            }
+
+            if (gBaseStats[species].evYield_Attack > 0) //Attack
+            {
+                PrintInfoScreenTextSmall(gText_Stats_Attack, base_x + 29*column, base_y);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 2);
+                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                column++;
+            }
+
+            if (gBaseStats[species].evYield_SpAttack > 0) //Special Attack
+            {
+                PrintInfoScreenTextSmall(gText_Stats_SpAttack, base_x + 29*column, base_y);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 3);
+                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                column++;
+            }
+
+            if (gBaseStats[species].evYield_Defense > 0) //Defense
+            {
+                PrintInfoScreenTextSmall(gText_Stats_Defense, base_x + 29*column, base_y);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 4);
+                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                column++;
+            }
+
+            if (gBaseStats[species].evYield_SpDefense > 0) //Special Defense
+            {
+                PrintInfoScreenTextSmall(gText_Stats_SpDefense, base_x + 29*column, base_y);
+                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 5);
+                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                column++;
+            }
         }
 
     }
