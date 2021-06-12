@@ -6834,14 +6834,35 @@ static void PrintMonStatsToggle(u8 taskId)
     if (gTasks[taskId].data[5] == 0)
     {
         //Exp
-        PrintInfoScreenTextSmall(gText_Stats_Exp, base_x, base_y + base_offset*base_i);
+        PrintInfoScreenTextSmall(gText_Stats_ExpYield, base_x, base_y + base_offset*base_i);
         ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].expYield, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(gStringVar1, base_x + base_x_offset, base_y + base_offset*base_i);
         base_i++;
 
         //friendship
         PrintInfoScreenTextSmall(gText_Stats_Friendship, base_x, base_y + base_offset*base_i);
-        ConvertIntToDecimalStringN(strEV, gBaseStats[species].friendship, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        switch (gBaseStats[species].friendship)
+        {
+        case 35:
+            StringCopy(strEV, gText_Stats_Friendship_BigAnger);
+            break;
+        case 70:
+            StringCopy(strEV, gText_Stats_Friendship_Neutral);
+            break;
+        case 90:
+            StringCopy(strEV, gText_Stats_Friendship_Happy);
+            break;
+        case 100:
+            StringCopy(strEV, gText_Stats_Friendship_Happy);
+            break;
+        case 140:
+            StringCopy(strEV, gText_Stats_Friendship_BigSmile);
+            break;
+        default:
+            ConvertIntToDecimalStringN(strEV, gBaseStats[species].friendship, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            break;
+        }
+        // ConvertIntToDecimalStringN(strEV, gBaseStats[species].friendship, STR_CONV_MODE_RIGHT_ALIGN, 3);
         align_x = GetStringRightAlignXOffset(0, strEV, total_x);
         PrintInfoScreenTextSmall(strEV, align_x, base_y + base_offset*base_i);
         base_i++;
