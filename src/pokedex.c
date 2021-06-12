@@ -6833,7 +6833,7 @@ static void PrintMonStatsToggle(u8 taskId)
 
     if (gTasks[taskId].data[5] == 0)
     {
-        //Exp
+        //Exp Yield
         PrintInfoScreenTextSmall(gText_Stats_ExpYield, base_x, base_y + base_offset*base_i);
         ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].expYield, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(gStringVar1, base_x + base_x_offset, base_y + base_offset*base_i);
@@ -6867,20 +6867,6 @@ static void PrintMonStatsToggle(u8 taskId)
         PrintInfoScreenTextSmall(strEV, align_x, base_y + base_offset*base_i);
         base_i++;
 
-        //Egg cycles
-        if (gBaseStats[species].eggGroup1 == EGG_GROUP_UNDISCOVERED || gBaseStats[species].eggGroup2 == EGG_GROUP_UNDISCOVERED)
-        {
-            PrintInfoScreenTextSmall(gText_Stats_EggCycles, base_x, base_y + base_offset*base_i);
-            PrintInfoScreenTextSmall(gText_ThreeDashes, 78, base_y + base_offset*base_i);
-        }
-        else
-        {
-            PrintInfoScreenTextSmall(gText_Stats_EggCycles, base_x, base_y + base_offset*base_i);
-            ConvertIntToDecimalStringN(strEV, gBaseStats[species].eggCycles, STR_CONV_MODE_RIGHT_ALIGN, 2);
-            align_x = GetStringRightAlignXOffset(0, strEV, total_x);
-            PrintInfoScreenTextSmall(strEV, align_x, base_y + base_offset*base_i);
-        }
-        base_i++;
 
         //Catch rate
         PrintInfoScreenTextSmall(gText_Stats_Catch, base_x, base_y + base_offset*base_i);
@@ -6969,7 +6955,8 @@ static void PrintMonStatsToggle(u8 taskId)
             StringCopy(gStringVar1, gText_Stats_eggGroup_UNDISCOVERED);
             break;
         }
-        PrintInfoScreenTextSmall(gStringVar1, base_x + 37, base_y + base_offset*base_i);
+        align_x = GetStringRightAlignXOffset(0, gStringVar1, total_x);
+        PrintInfoScreenTextSmall(gStringVar1, align_x, base_y + base_offset*base_i);
         base_i++;
 
         //Egg group 2
@@ -7022,7 +7009,41 @@ static void PrintMonStatsToggle(u8 taskId)
             StringCopy(gStringVar1, gText_Stats_eggGroup_UNDISCOVERED);
             break;
         }
-        PrintInfoScreenTextSmall(gStringVar1, base_x + 37, base_y + base_offset*base_i);
+        align_x = GetStringRightAlignXOffset(0, gStringVar1, total_x);
+        PrintInfoScreenTextSmall(gStringVar1, align_x, base_y + base_offset*base_i);
+        base_i++;
+
+        //Egg cycles
+        if (gBaseStats[species].eggGroup1 == EGG_GROUP_UNDISCOVERED || gBaseStats[species].eggGroup2 == EGG_GROUP_UNDISCOVERED) //Species without eggs (legendaries etc)
+        {
+            PrintInfoScreenTextSmall(gText_Stats_EggCycles, base_x, base_y + base_offset*base_i);
+            PrintInfoScreenTextSmall(gText_ThreeDashes, 78, base_y + base_offset*base_i);
+        }
+        else
+        {
+            PrintInfoScreenTextSmall(gText_Stats_EggCycles, base_x, base_y + base_offset*base_i);
+            if (gBaseStats[species].eggCycles <= 10)
+            {
+                StringCopy(strEV, gText_Stats_EggCycles_VeryFast);
+                align_x = 76;
+            }
+            else if (gBaseStats[species].eggCycles <= 20)
+            {
+                StringCopy(strEV, gText_Stats_EggCycles_Fast);
+                align_x = 85;
+            }
+            else if (gBaseStats[species].eggCycles <= 30)
+            {
+                StringCopy(strEV, gText_Stats_EggCycles_Normal);
+                align_x = 76;
+            }
+            else
+            {
+                StringCopy(strEV, gText_Stats_EggCycles_Slow);
+                align_x = 67;
+            }
+            PrintInfoScreenTextSmall(strEV, align_x, base_y + base_offset*base_i);
+        }
     }
 
 
