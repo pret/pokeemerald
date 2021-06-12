@@ -370,6 +370,17 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAttackerDefenseDownHit
 	.4byte BattleScript_EffectBodyPress
 	.4byte BattleScript_EffectEvasionUpHit
+	.4byte BattleScript_EffectDoubleIronBash
+
+BattleScript_EffectDoubleIronBash:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setmultihitcounter 2
+	initmultihitstring
+	sethword sMULTIHIT_EFFECT, MOVE_EFFECT_FLINCH
+	goto BattleScript_MultiHitLoop
 
 BattleScript_EffectEvasionUpHit:
 	setmoveeffect MOVE_EFFECT_EVS_PLUS_1 | MOVE_EFFECT_AFFECTS_USER

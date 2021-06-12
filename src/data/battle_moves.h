@@ -10456,7 +10456,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
-            .effect = EFFECT_EVASION_UP_HIT, // TODO: EFFECT_EVASION_UP_HIT
+            .effect = EFFECT_EVASION_UP_HIT,
             .pp = 10,
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         #else
@@ -10716,7 +10716,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_DMG_MINIMIZE | FLAG_IRON_FIST_BOOST | FLAG_SHEER_FORCE_BOOST,
         #endif
-        .effect = EFFECT_PLACEHOLDER,   //TODO (EFFECT_FLINCH_HIT + EFFECT_DOUBLE_HIT)
+        .effect = EFFECT_DOUBLE_IRON_BASH,
         .power = 60,
         .type = TYPE_STEEL,
         .accuracy = 100,
