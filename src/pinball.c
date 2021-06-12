@@ -42,7 +42,8 @@
 #define TAG_MEOWTH_JEWEL_MUTLIPLIER    504
 #define TAG_TILES_MEOWTH_JEWEL_SPARKLE 505
 #define TAG_DUGTRIO                    506
-#define TAG_TIMER_DIGIT                507
+#define TAG_SEEL                       507
+#define TAG_TIMER_DIGIT                508
 
 enum
 {
@@ -167,17 +168,27 @@ struct Diglett
 
 enum
 {
-    SEEL_STATE_SWIM_LEFT,
     SEEL_STATE_SWIM_RIGHT,
-    SEEL_STATE_SWIM_EMERGING,
-    SEEL_STATE_SWIM_VISIBLE,
-    SEEL_STATE_SWIM_HIT,
-    SEEL_STATE_SWIM_SUBMERGING,
+    SEEL_STATE_TURN_LEFT,
+    SEEL_STATE_SWIM_LEFT,
+    SEEL_STATE_TURN_RIGHT,
+    SEEL_STATE_EMERGE_RIGHT,
+    SEEL_STATE_EMERGE_LEFT,
+    SEEL_STATE_VISIBLE_RIGHT,
+    SEEL_STATE_VISIBLE_LEFT,
+    SEEL_STATE_SUBMERGE_RIGHT,
+    SEEL_STATE_SUBMERGE_LEFT,
+    SEEL_STATE_HIT_RIGHT,
+    SEEL_STATE_HIT_LEFT,
 };
 
 struct SeelSwimmer
 {
     u8 state;
+    u8 spriteId;
+    u16 xPos;
+    u16 yPos;
+    int counter;
 };
 
 #define NUM_SEELS 3
@@ -186,6 +197,10 @@ struct Seel
 {
     bool32 completed;
     struct SeelSwimmer swimmers[NUM_SEELS];
+    u8 streak;
+    u8 score;
+    u8 emergingSwimmerIndex;
+    u8 emergingSwimmerCounter;
 };
 
 #define FLIPPER_LEFT  0
@@ -309,7 +324,12 @@ static bool32 UpdateDiglett(struct Diglett *diglett);
 static void UpdateDiglettTiles(u16 *tilemap, int index, struct Diglett *diglett);
 static void UpdateDiglettCollision(u8 *collisionMap, int index, bool32 solidCollision);
 static void UpdateDugtrioSprite(struct Sprite *sprite);
+static bool32 CheckSeelCollision(struct Ball *ball, struct Seel *seel, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 UpdateSeel(struct Seel *seel);
+static void ResetSeels(struct Seel *seel);
+static void UpdateSeelSprite(struct Sprite *sprite);
+static void ChooseNextEmergingSeel(int curSeelIndex, struct Seel *seel);
+static u32 GetSeelVisibleTicks(int curStreak);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -399,6 +419,9 @@ static const u16 sSeelStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap
 static const u8 sSeelStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_seel.1bpp");
 static const u8 sSeelStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_seel.bin");
 static const u8 sSeelStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_seel_entrance.bin");
+static const u32 sSeelAnimationGfx[] = INCBIN_U32("graphics/pinball/seel_animation.4bpp.lz");
+static const u16 sSeelAnimationPalette[] = INCBIN_U16("graphics/pinball/seel_animation.gbapal");
+static const u8 sSeelCollisionNormalAngles[] = INCBIN_U8("data/pinball/seel_normal_angles.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -448,6 +471,12 @@ static const struct CompressedSpriteSheet sDugtrioAnimationSpriteSheet = {
     .tag = TAG_DUGTRIO,
 };
 
+static const struct CompressedSpriteSheet sSeelAnimationSpriteSheet = {
+    .data = sSeelAnimationGfx,
+    .size = 0x1E00,
+    .tag = TAG_SEEL,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
@@ -455,6 +484,7 @@ static const struct SpritePalette sMeowthAnimationSpritePalette = { sMeowthAnima
 static const struct SpritePalette sMeowthJewelSpritePalette = { sMeowthJewelPalette, TAG_MEOWTH_JEWEL };
 static const struct SpritePalette sMeowthJewelMultipliersSpritePalette = { sMeowthJewelMultipliersPalette, TAG_MEOWTH_JEWEL_MUTLIPLIER };
 static const struct SpritePalette sDugtrioAnimationSpritePalette = { sDugtrioAnimationPalette, TAG_DUGTRIO };
+static const struct SpritePalette sSeelAnimationSpritePalette = { sSeelAnimationPalette, TAG_SEEL };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -962,6 +992,174 @@ static const struct SpriteTemplate sDugtrioSpriteTemplate = {
     .callback = UpdateDugtrioSprite,
 };
 
+static const struct OamData sSeelOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSeelAnimCmd_SwimRight[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(16, 13),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 12),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sSeelAnimCmd_TurnLeft[] = {
+    ANIMCMD_FRAME(48, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(64, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_SwimLeft[] = {
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 13, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 12, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sSeelAnimCmd_TurnRight[] = {
+    ANIMCMD_FRAME(48, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(64, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(80, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(64, 4, .vFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .vFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_EmergeRight[] = {
+    ANIMCMD_FRAME(48, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(144, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_EmergeLeft[] = {
+    ANIMCMD_FRAME(48, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(64, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(144, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_Visible[] = {
+    ANIMCMD_FRAME(160, 30),
+    ANIMCMD_FRAME(176, 30),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sSeelAnimCmd_SubmergeRight[] = {
+    ANIMCMD_FRAME(144, 9),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 6),
+    ANIMCMD_FRAME(224, 16),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_FRAME(64, 4, .vFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .vFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_SubmergeLeft[] = {
+    ANIMCMD_FRAME(144, 9),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 6),
+    ANIMCMD_FRAME(224, 16),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_FRAME(64, 4, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_HitRight[] = {
+    ANIMCMD_FRAME(208, 16),
+    ANIMCMD_FRAME(192, 6),
+    ANIMCMD_FRAME(224, 16),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_FRAME(64, 4, .vFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .vFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelAnimCmd_HitLeft[] = {
+    ANIMCMD_FRAME(208, 16),
+    ANIMCMD_FRAME(192, 6),
+    ANIMCMD_FRAME(224, 16),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_FRAME(64, 4, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sSeelAnimCmds[] = {
+    sSeelAnimCmd_SwimRight,
+    sSeelAnimCmd_TurnLeft,
+    sSeelAnimCmd_SwimLeft,
+    sSeelAnimCmd_TurnRight,
+    sSeelAnimCmd_EmergeRight,
+    sSeelAnimCmd_EmergeLeft,
+    sSeelAnimCmd_Visible,
+    sSeelAnimCmd_SubmergeRight,
+    sSeelAnimCmd_SubmergeLeft,
+    sSeelAnimCmd_HitRight,
+    sSeelAnimCmd_HitLeft,
+};
+
+static const struct SpriteTemplate sSeelSpriteTemplate = {
+    .tileTag = TAG_SEEL,
+    .paletteTag = TAG_SEEL,
+    .oam = &sSeelOamData,
+    .anims = sSeelAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateSeelSprite,
+};
+
+static const u8 sInitialSeelStates[NUM_SEELS] = {
+    SEEL_STATE_SWIM_RIGHT,
+    SEEL_STATE_SWIM_LEFT,
+    SEEL_STATE_SWIM_RIGHT,
+};
+
+static const u8 sInitialSeelCoords[NUM_SEELS][2] = {
+    {110, 30},
+    {46, 56},
+    {78, 82},
+};
+
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
     {  4,  1 },
@@ -1195,8 +1393,8 @@ static void LoadSpriteGfx(u8 gameType)
         LoadSpritePalette(&sDugtrioAnimationSpritePalette);
         break;
     case GAME_TYPE_SEEL:
-        // LoadCompressedSpriteSheet(&sDugtrioAnimationSpriteSheet);
-        // LoadSpritePalette(&sDugtrioAnimationSpritePalette);
+        LoadCompressedSpriteSheet(&sSeelAnimationSpriteSheet);
+        LoadSpritePalette(&sSeelAnimationSpritePalette);
         break;
     }
 }
@@ -1323,6 +1521,24 @@ static void InitDiglett(void)
 
 static void InitSeel(void)
 {
+    int i;
+    struct Seel *seel = &sPinballGame->seel;
+    seel->completed = FALSE;
+    seel->streak = 0;
+    for (i = 0; i < NUM_SEELS; i++)
+    {
+        struct SeelSwimmer *swimmer = &seel->swimmers[i];
+        swimmer->state = sInitialSeelStates[i];
+        swimmer->xPos = sInitialSeelCoords[i][0] << 8;
+        swimmer->yPos = sInitialSeelCoords[i][1] << 8;
+        swimmer->spriteId = CreateSprite(&sSeelSpriteTemplate, swimmer->xPos >> 8, swimmer->yPos >> 8, 5);
+        gSprites[swimmer->spriteId].data[0] = swimmer->state;
+        gSprites[swimmer->spriteId].data[1] = i;
+        if (swimmer->state == SEEL_STATE_SWIM_RIGHT)
+            StartSpriteAnim(&gSprites[swimmer->spriteId], 0);
+        else
+            StartSpriteAnim(&gSprites[swimmer->spriteId], 2);
+    }
 }
 
 static void PinballVBlankCallback(void)
@@ -1646,6 +1862,17 @@ static void LostBallMeowth(struct Meowth *meowth)
 
 static void LostBallSeel(struct Seel *seel)
 {
+    if (seel->score > 4)
+    {
+        seel->score -= 4;
+    }
+    else
+    {
+        seel->score = 0;
+    }
+
+    seel->streak = 0;
+    ResetSeels(seel);
 }
 
 #define GRAVITY 0x0B
@@ -2329,7 +2556,7 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
         isColliding = FALSE;
         break;
     case GAME_TYPE_SEEL:
-        isColliding = FALSE;
+        isColliding = CheckSeelCollision(ball, &sPinballGame->seel, ticks, outCollisionNormal, outCollisionAmplification);
         break;
     }
 
@@ -2810,7 +3037,7 @@ static void UpdateDiglettCollision(u8 *collisionMap, int index, bool32 solidColl
 
 static void UpdateDugtrioSprite(struct Sprite *sprite)
 {
-    int animNum;
+    // data[0] = previous state
     struct Diglett *diglett = &sPinballGame->diglett;
     int prevState = sprite->data[0];
     int curState = diglett->dugtrioState;
@@ -2853,8 +3080,255 @@ static void UpdateDugtrioSprite(struct Sprite *sprite)
     }
 }
 
+static bool32 CheckSeelCollision(struct Ball *ball, struct Seel *seel, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
+{
+    int x, y;
+    u8 collisionNormal;
+    struct SeelSwimmer *swimmer = &seel->swimmers[seel->emergingSwimmerIndex];
+    int ballXPos = (ball->xPos >> 8);
+    int ballYPos = (ball->yPos >> 8);
+    int swimmerXPos = (swimmer->xPos >> 8);
+    int swimmerYPos = (swimmer->yPos >> 8);
+
+    if (ticks <= 0)
+        return FALSE;
+
+    if (swimmer->state != SEEL_STATE_VISIBLE_RIGHT && swimmer->state != SEEL_STATE_VISIBLE_LEFT)
+        return FALSE;
+
+    if (ballXPos < swimmerXPos - 16 || ballXPos >= swimmerXPos + 16
+     || ballYPos < swimmerYPos - 16 || ballYPos >= swimmerYPos + 16)
+        return FALSE;
+
+    x = ballXPos - swimmerXPos + 16;
+    y = ballYPos - swimmerYPos + 16;
+    collisionNormal = sSeelCollisionNormalAngles[y * 32 + x];
+    if (collisionNormal == 0xFF)
+        return FALSE;
+
+    // Multiply normal by two because the original data is stored halved.
+    *outCollisionNormal = collisionNormal * 2;
+    //*outCollisionAmplification = 1;
+
+    if (swimmer->state == SEEL_STATE_VISIBLE_RIGHT)
+        swimmer->state = SEEL_STATE_HIT_RIGHT;
+    else
+        swimmer->state = SEEL_STATE_HIT_LEFT;
+
+    seel->score += seel->streak + 1;
+    if (!seel->completed && seel->score >= 20)
+        seel->completed = TRUE;
+
+    if (++seel->streak >= 9)
+        seel->streak = 0;
+
+    return TRUE;
+}
+
+#define SEEL_SWIMMER_SPEED 0x34
 
 static bool32 UpdateSeel(struct Seel *seel)
 {
-    return FALSE;
+    int i;
+
+    for (i = 0; i < NUM_SEELS; i++)
+    {
+        struct SeelSwimmer *swimmer = &seel->swimmers[i];
+        struct Sprite *swimmerSprite = &gSprites[swimmer->spriteId];
+        switch (swimmer->state)
+        {
+        case SEEL_STATE_SWIM_RIGHT:
+            swimmer->xPos += SEEL_SWIMMER_SPEED;
+            if ((swimmer->xPos >> 8) > 136)
+            {
+                swimmer->state = SEEL_STATE_TURN_LEFT;
+                swimmer->xPos = 136 << 8;
+            }
+            else if (seel->emergingSwimmerIndex == i)
+            {
+                if (--seel->emergingSwimmerCounter == 0)
+                    swimmer->state = SEEL_STATE_EMERGE_RIGHT;
+            }
+            break;
+        case SEEL_STATE_TURN_LEFT:
+            if (swimmerSprite->animEnded)
+                swimmer->state = SEEL_STATE_SWIM_LEFT;
+            break;
+        case SEEL_STATE_SWIM_LEFT:
+            swimmer->xPos -= SEEL_SWIMMER_SPEED;
+            if ((swimmer->xPos >> 8) < 24)
+            {
+                swimmer->state = SEEL_STATE_TURN_RIGHT;
+                swimmer->xPos = 24 << 8;
+            }
+            else if (seel->emergingSwimmerIndex == i)
+            {
+                if (--seel->emergingSwimmerCounter == 0)
+                    swimmer->state = SEEL_STATE_EMERGE_LEFT;
+            }
+            break;
+        case SEEL_STATE_TURN_RIGHT:
+            if (swimmerSprite->animEnded)
+                swimmer->state = SEEL_STATE_SWIM_RIGHT;
+            break;
+        case SEEL_STATE_EMERGE_RIGHT:
+            if (swimmerSprite->animEnded)
+            {
+                swimmer->state = SEEL_STATE_VISIBLE_RIGHT;
+                swimmer->counter = GetSeelVisibleTicks(seel->streak);
+            }
+            break;
+        case SEEL_STATE_EMERGE_LEFT:
+            if (swimmerSprite->animEnded)
+            {
+                swimmer->state = SEEL_STATE_VISIBLE_LEFT;
+                swimmer->counter = GetSeelVisibleTicks(seel->streak);
+            }
+            break;
+        case SEEL_STATE_VISIBLE_RIGHT:
+        case SEEL_STATE_VISIBLE_LEFT:
+            if (--swimmer->counter == 0)
+            {
+                swimmer->state = (Random() & 1) ? SEEL_STATE_SUBMERGE_RIGHT : SEEL_STATE_SUBMERGE_LEFT;
+                seel->streak = 0;
+            }
+            break;
+        case SEEL_STATE_SUBMERGE_RIGHT:
+        case SEEL_STATE_HIT_RIGHT:
+            if (swimmerSprite->animEnded)
+            {
+                swimmer->state = SEEL_STATE_SWIM_RIGHT;
+                ChooseNextEmergingSeel(i, seel);
+            }
+            break;
+        case SEEL_STATE_SUBMERGE_LEFT:
+        case SEEL_STATE_HIT_LEFT:
+            if (swimmerSprite->animEnded)
+            {
+                swimmer->state = SEEL_STATE_SWIM_LEFT;
+                ChooseNextEmergingSeel(i, seel);
+            }
+            break;
+        }
+    }
+
+    return seel->completed;
+}
+
+static void ChooseNextEmergingSeel(int curSeelIndex, struct Seel *seel)
+{
+    int index;
+    do {
+        index = Random() % NUM_SEELS;
+    } while (index == curSeelIndex);
+
+    seel->emergingSwimmerIndex = index;
+    seel->emergingSwimmerCounter = Random() % 60;
+}
+
+static u32 GetSeelVisibleTicks(int curStreak)
+{
+    if (curStreak < 2)
+        return 3 * 60;
+
+    if (curStreak < 6)
+        return 2 * 60;
+
+    return 1 * 60;
+}
+
+static void ResetSeels(struct Seel *seel)
+{
+    int i;
+    bool32 isSeelVisible = FALSE;
+
+    for (i = 0; i < NUM_SEELS; i++)
+    {
+        struct SeelSwimmer *swimmer = &seel->swimmers[i];
+        if (swimmer->state == SEEL_STATE_VISIBLE_RIGHT || swimmer->state == SEEL_STATE_VISIBLE_LEFT)
+        {
+            isSeelVisible = TRUE;
+            break;
+        }
+    }
+
+    for (i = 0; i < NUM_SEELS; i++)
+    {
+        struct SeelSwimmer *swimmer = &seel->swimmers[i];
+        if (isSeelVisible)
+        {
+            // Reset to original positions.
+            // The original game does this for some reason.
+            swimmer->state = sInitialSeelStates[i];
+            swimmer->xPos = sInitialSeelCoords[i][0] << 8;
+            swimmer->yPos = sInitialSeelCoords[i][1] << 8;
+        }
+        else
+        {
+            // Revert the seel back to a swimming state, depending on
+            // its current direction.
+            swimmer->state = (swimmer->state == SEEL_STATE_SWIM_RIGHT     ||
+                              swimmer->state == SEEL_STATE_TURN_LEFT      ||
+                              swimmer->state == SEEL_STATE_EMERGE_RIGHT   ||
+                              swimmer->state == SEEL_STATE_SUBMERGE_RIGHT ||
+                              swimmer->state == SEEL_STATE_HIT_RIGHT)
+                            ? SEEL_STATE_SWIM_RIGHT
+                            : SEEL_STATE_SWIM_LEFT;
+        }
+    }
+}
+
+static void UpdateSeelSprite(struct Sprite *sprite)
+{
+    // data[0] = previous state
+    // data[1] = seel swimmer index
+    struct SeelSwimmer *swimmer = &sPinballGame->seel.swimmers[sprite->data[1]];
+    int prevState = sprite->data[0];
+    int curState = swimmer->state;
+    sprite->pos1.x = swimmer->xPos >> 8;
+    sprite->pos1.y = swimmer->yPos >> 8;
+
+    // Check if this Seel's state changed, and start the appropriate
+    // sprite animation.
+    if (prevState != curState)
+    {
+        sprite->data[0] = curState;
+        switch (curState)
+        {
+        case SEEL_STATE_SWIM_RIGHT:
+            StartSpriteAnim(sprite, 0);
+            break;
+        case SEEL_STATE_TURN_LEFT:
+            StartSpriteAnim(sprite, 1);
+            break;
+        case SEEL_STATE_SWIM_LEFT:
+            StartSpriteAnim(sprite, 2);
+            break;
+        case SEEL_STATE_TURN_RIGHT:
+            StartSpriteAnim(sprite, 3);
+            break;
+        case SEEL_STATE_EMERGE_RIGHT:
+            StartSpriteAnim(sprite, 4);
+            break;
+        case SEEL_STATE_EMERGE_LEFT:
+            StartSpriteAnim(sprite, 5);
+            break;
+        case SEEL_STATE_VISIBLE_RIGHT:
+        case SEEL_STATE_VISIBLE_LEFT:
+            StartSpriteAnim(sprite, 6);
+            break;
+        case SEEL_STATE_SUBMERGE_RIGHT:
+            StartSpriteAnim(sprite, 7);
+            break;
+        case SEEL_STATE_SUBMERGE_LEFT:
+            StartSpriteAnim(sprite, 8);
+            break;
+        case SEEL_STATE_HIT_RIGHT:
+            StartSpriteAnim(sprite, 9);
+            break;
+        case SEEL_STATE_HIT_LEFT:
+            StartSpriteAnim(sprite, 10);
+            break;
+        }
+    }
 }
