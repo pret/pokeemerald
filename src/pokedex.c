@@ -6852,9 +6852,10 @@ static void PrintMonStatsToggle(u8 taskId)
                 differentEVs++;
                 column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
                 base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                PrintInfoScreenTextSmall(gText_Stats_HP, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 0);
-                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+                StringCopy(gStringVar1, gText_Stats_HP);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 0);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
             }
 
             if (gBaseStats[species].evYield_Speed > 0) //Speed
@@ -6862,9 +6863,10 @@ static void PrintMonStatsToggle(u8 taskId)
                 differentEVs++;
                 column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
                 base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                PrintInfoScreenTextSmall(gText_Stats_Speed, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 1);
-                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+                StringCopy(gStringVar1, gText_Stats_Speed);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 1);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
             }
 
             if (gBaseStats[species].evYield_Attack > 0) //Attack
@@ -6872,9 +6874,10 @@ static void PrintMonStatsToggle(u8 taskId)
                 differentEVs++;
                 column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
                 base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                PrintInfoScreenTextSmall(gText_Stats_Attack, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 2);
-                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+                StringCopy(gStringVar1, gText_Stats_Attack);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 2);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
             }
 
             if (gBaseStats[species].evYield_SpAttack > 0) //Special Attack
@@ -6882,9 +6885,10 @@ static void PrintMonStatsToggle(u8 taskId)
                 differentEVs++;
                 column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
                 base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                PrintInfoScreenTextSmall(gText_Stats_SpAttack, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 3);
-                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+                StringCopy(gStringVar1, gText_Stats_SpAttack);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 3);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
             }
 
             if (gBaseStats[species].evYield_Defense > 0) //Defense
@@ -6892,9 +6896,10 @@ static void PrintMonStatsToggle(u8 taskId)
                 differentEVs++;
                 column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
                 base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                PrintInfoScreenTextSmall(gText_Stats_Defense, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 4);
-                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+                StringCopy(gStringVar1, gText_Stats_Defense);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 4);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
             }
 
             if (gBaseStats[species].evYield_SpDefense > 0) //Special Defense
@@ -6902,9 +6907,10 @@ static void PrintMonStatsToggle(u8 taskId)
                 differentEVs++;
                 column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
                 base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                PrintInfoScreenTextSmall(gText_Stats_SpDefense, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 5);
-                PrintInfoScreenTextSmall(strBase, base_x + x_offset_column*column + x_offset_value, base_y + base_y_offset*base_i);
+                StringCopy(gStringVar1, gText_Stats_SpDefense);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 5);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
             }
         }
         else //3 different EVs in 1 row
@@ -6912,49 +6918,55 @@ static void PrintMonStatsToggle(u8 taskId)
             column = 0;
             if (gBaseStats[species].evYield_HP > 0) //HP
             {
-                PrintInfoScreenTextSmall(gText_Stats_HP, base_x + 29*column, base_y);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 0);
-                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                StringCopy(gStringVar1, gText_Stats_HP);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 0);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
                 column++;
             }
 
             if (gBaseStats[species].evYield_Speed > 0) //Speed
             {
-                PrintInfoScreenTextSmall(gText_Stats_Speed, base_x + 29*column, base_y);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 1);
-                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                StringCopy(gStringVar1, gText_Stats_Speed);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 1);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
                 column++;
             }
 
             if (gBaseStats[species].evYield_Attack > 0) //Attack
             {
-                PrintInfoScreenTextSmall(gText_Stats_Attack, base_x + 29*column, base_y);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 2);
-                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                StringCopy(gStringVar1, gText_Stats_Attack);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 2);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
                 column++;
             }
 
             if (gBaseStats[species].evYield_SpAttack > 0) //Special Attack
             {
-                PrintInfoScreenTextSmall(gText_Stats_SpAttack, base_x + 29*column, base_y);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 3);
-                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                StringCopy(gStringVar1, gText_Stats_SpAttack);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 3);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
                 column++;
             }
 
             if (gBaseStats[species].evYield_Defense > 0) //Defense
             {
-                PrintInfoScreenTextSmall(gText_Stats_Defense, base_x + 29*column, base_y);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 4);
-                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                StringCopy(gStringVar1, gText_Stats_Defense);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 4);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
                 column++;
             }
 
             if (gBaseStats[species].evYield_SpDefense > 0) //Special Defense
             {
-                PrintInfoScreenTextSmall(gText_Stats_SpDefense, base_x + 29*column, base_y);
-                PrintMonStatsToggle_EV_Arrows(strBase, EVs, 5);
-                PrintInfoScreenTextSmall(strBase, base_x + 29*column + 21, base_y);
+                StringCopy(gStringVar1, gText_Stats_SpDefense);
+                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs, 5);
+                StringExpandPlaceholders(gStringVar3, gText_Stats_EvStr1Str2);
+                PrintInfoScreenTextSmall(gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
                 column++;
             }
         }

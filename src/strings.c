@@ -1820,15 +1820,16 @@ const u8 gText_Berries[] = _("BERRIES");
 
 
 //HGSS_Ui PokedexPlus
-const u8 gText_Stats_HP[]       = _("HP ");
-const u8 gText_Stats_Attack[]   = _("ATK ");
-const u8 gText_Stats_Defense[]  = _("DEF ");
-const u8 gText_Stats_Speed[]    = _("SPE ");
-const u8 gText_Stats_SpAttack[]    = _("SP.A ");
-const u8 gText_Stats_SpDefense[]    = _("SP.D ");
+const u8 gText_Stats_HP[]       = _("HP");
+const u8 gText_Stats_Attack[]   = _("ATK");
+const u8 gText_Stats_Defense[]  = _("DEF");
+const u8 gText_Stats_Speed[]    = _("SPE");
+const u8 gText_Stats_SpAttack[]    = _("SP.A");
+const u8 gText_Stats_SpDefense[]    = _("SP.D");
 const u8 gText_Stats_EV_Plus1[]     = _("{UP_ARROW_2}");
 const u8 gText_Stats_EV_Plus2[]     = _("{UP_ARROW_2}{UP_ARROW_2}");
 const u8 gText_Stats_EV_Plus3[]     = _("{UP_ARROW_2}{UP_ARROW_2}{UP_ARROW_2}");
+const u8 gText_Stats_EvStr1Str2[]   = _("{STR_VAR_1}{STR_VAR_2}");
 const u8 gText_Stats_MoveSelectedMax[]      = _("{STR_VAR_1} / {STR_VAR_2}");
 const u8 gText_Stats_MoveLevel[]     = _("LVL");
 const u8 gText_Stats_Gender_0[]      = _("♂");
