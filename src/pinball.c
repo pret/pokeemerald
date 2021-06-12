@@ -43,7 +43,8 @@
 #define TAG_TILES_MEOWTH_JEWEL_SPARKLE 505
 #define TAG_DUGTRIO                    506
 #define TAG_SEEL                       507
-#define TAG_TIMER_DIGIT                508
+#define TAG_SEEL_SPARKLE               508
+#define TAG_TIMER_DIGIT                509
 
 enum
 {
@@ -201,6 +202,7 @@ struct Seel
     u8 score;
     u8 emergingSwimmerIndex;
     u8 emergingSwimmerCounter;
+    u8 sparkleSpriteId;
 };
 
 #define FLIPPER_LEFT  0
@@ -274,6 +276,7 @@ static void LostBall(u8 gameType);
 static void LostBallMeowth(struct Meowth *meowth);
 static void LostBallSeel(struct Seel *seel);
 static void DrawMeowthScoreJewels(struct Meowth *meowth);
+static void DrawSeelScoreJewels(struct Seel *seel);
 static void OpenEntrance(u8 gameType);
 static void OpenEntranceMeowth(void);
 static void OpenEntranceDiglett(void);
@@ -327,9 +330,10 @@ static void UpdateDugtrioSprite(struct Sprite *sprite);
 static bool32 CheckSeelCollision(struct Ball *ball, struct Seel *seel, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 UpdateSeel(struct Seel *seel);
 static void ResetSeels(struct Seel *seel);
-static void UpdateSeelSprite(struct Sprite *sprite);
 static void ChooseNextEmergingSeel(int curSeelIndex, struct Seel *seel);
 static u32 GetSeelVisibleTicks(int curStreak);
+static void UpdateSeelSprite(struct Sprite *sprite);
+static void UpdateSeelSparkleSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -422,6 +426,8 @@ static const u8 sSeelStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball
 static const u32 sSeelAnimationGfx[] = INCBIN_U32("graphics/pinball/seel_animation.4bpp.lz");
 static const u16 sSeelAnimationPalette[] = INCBIN_U16("graphics/pinball/seel_animation.gbapal");
 static const u8 sSeelCollisionNormalAngles[] = INCBIN_U8("data/pinball/seel_normal_angles.bin");
+static const u32 sSeelSparkleGfx[] = INCBIN_U32("graphics/pinball/seel_sparkle.4bpp.lz");
+static const u16 sSeelSparklePalette[] = INCBIN_U16("graphics/pinball/seel_sparkle.gbapal");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -477,6 +483,12 @@ static const struct CompressedSpriteSheet sSeelAnimationSpriteSheet = {
     .tag = TAG_SEEL,
 };
 
+static const struct CompressedSpriteSheet sSeelSparkleSpriteSheet = {
+    .data = sSeelSparkleGfx,
+    .size = 0x40,
+    .tag = TAG_SEEL_SPARKLE,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
@@ -485,6 +497,7 @@ static const struct SpritePalette sMeowthJewelSpritePalette = { sMeowthJewelPale
 static const struct SpritePalette sMeowthJewelMultipliersSpritePalette = { sMeowthJewelMultipliersPalette, TAG_MEOWTH_JEWEL_MUTLIPLIER };
 static const struct SpritePalette sDugtrioAnimationSpritePalette = { sDugtrioAnimationPalette, TAG_DUGTRIO };
 static const struct SpritePalette sSeelAnimationSpritePalette = { sSeelAnimationPalette, TAG_SEEL };
+static const struct SpritePalette sSeelSparkleSpritePalette = { sSeelSparklePalette, TAG_SEEL_SPARKLE };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -1160,6 +1173,42 @@ static const u8 sInitialSeelCoords[NUM_SEELS][2] = {
     {78, 82},
 };
 
+static const struct OamData sSeelSparkleOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSeelSparkleAnimCmd_0[] = {
+    ANIMCMD_FRAME(0, 11),
+    ANIMCMD_FRAME(1, 11),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sSeelSparkleAnimCmds[] = {
+    sSeelSparkleAnimCmd_0,
+};
+
+static const struct SpriteTemplate sSeelSparkleSpriteTemplate = {
+    .tileTag = TAG_SEEL_SPARKLE,
+    .paletteTag = TAG_SEEL_SPARKLE,
+    .oam = &sSeelSparkleOamData,
+    .anims = sSeelSparkleAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateSeelSparkleSprite,
+};
+
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
     {  4,  1 },
@@ -1395,6 +1444,8 @@ static void LoadSpriteGfx(u8 gameType)
     case GAME_TYPE_SEEL:
         LoadCompressedSpriteSheet(&sSeelAnimationSpriteSheet);
         LoadSpritePalette(&sSeelAnimationSpritePalette);
+        LoadCompressedSpriteSheet(&sSeelSparkleSpriteSheet);
+        LoadSpritePalette(&sSeelSparkleSpritePalette);
         break;
     }
 }
@@ -1525,6 +1576,8 @@ static void InitSeel(void)
     struct Seel *seel = &sPinballGame->seel;
     seel->completed = FALSE;
     seel->streak = 0;
+    seel->sparkleSpriteId = CreateSprite(&sSeelSparkleSpriteTemplate, 0, 0, 6);
+    StartSpriteAnim(&gSprites[seel->sparkleSpriteId], 0);
     for (i = 0; i < NUM_SEELS; i++)
     {
         struct SeelSwimmer *swimmer = &seel->swimmers[i];
@@ -1748,6 +1801,32 @@ static void DrawMeowthScoreJewels(struct Meowth *meowth)
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
+static void DrawSeelScoreJewels(struct Seel *seel)
+{
+    int i;
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    for (i = 0; i < 20; i++)
+    {
+        if (i < seel->score)
+        {
+            if (i == 0 || i == 19)
+                tilemap[i] = 0x28;
+            else if (i == 1)
+                tilemap[i] = 0x29;
+            else if (i == 18)
+                tilemap[i] = 0x2B;
+            else
+                tilemap[i] = 0x2A;
+        }
+        else
+        {
+            tilemap[i] = sSeelStageBgTilemap[i];
+        }
+    }
+
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+}
+
 static void HandleBallPhysics(void)
 {
     bool32 isFlipperColliding;
@@ -1860,19 +1939,27 @@ static void LostBallMeowth(struct Meowth *meowth)
     DrawMeowthScoreJewels(meowth);
 }
 
+#define SEEL_SPARKLE_DURATION 180
+
 static void LostBallSeel(struct Seel *seel)
 {
+    struct Sprite *sparkleSprite = &gSprites[sPinballGame->seel.sparkleSpriteId];
     if (seel->score > 4)
     {
         seel->score -= 4;
+        sparkleSprite->data[0] = SEEL_SPARKLE_DURATION;
+        sparkleSprite->data[1] = seel->score;
     }
     else
     {
         seel->score = 0;
+        sparkleSprite->data[0] = 0;
+        sparkleSprite->data[1] = 0;
     }
 
     seel->streak = 0;
     ResetSeels(seel);
+    DrawSeelScoreJewels(seel);
 }
 
 #define GRAVITY 0x0B
@@ -3084,6 +3171,7 @@ static bool32 CheckSeelCollision(struct Ball *ball, struct Seel *seel, u32 ticks
 {
     int x, y;
     u8 collisionNormal;
+    struct Sprite *sparkleSprite = &gSprites[seel->sparkleSpriteId];
     struct SeelSwimmer *swimmer = &seel->swimmers[seel->emergingSwimmerIndex];
     int ballXPos = (ball->xPos >> 8);
     int ballYPos = (ball->yPos >> 8);
@@ -3121,6 +3209,10 @@ static bool32 CheckSeelCollision(struct Ball *ball, struct Seel *seel, u32 ticks
 
     if (++seel->streak >= 9)
         seel->streak = 0;
+
+    sparkleSprite->data[0] = SEEL_SPARKLE_DURATION;
+    sparkleSprite->data[1] = min(20, seel->score);
+    DrawSeelScoreJewels(seel);
 
     return TRUE;
 }
@@ -3330,5 +3422,22 @@ static void UpdateSeelSprite(struct Sprite *sprite)
             StartSpriteAnim(sprite, 10);
             break;
         }
+    }
+}
+
+static void UpdateSeelSparkleSprite(struct Sprite *sprite)
+{
+    // data[0] is visibility counter timer
+    // data[1] is the player's score, capped at 20.
+    if (sprite->data[0] == 0)
+    {
+        sprite->invisible = TRUE;
+    }
+    else
+    {
+        sprite->data[0]--;
+        sprite->pos1.x = (sprite->data[1] - 1) * 8 + 4;
+        sprite->pos1.y = 4;
+        sprite->invisible = FALSE;
     }
 }
