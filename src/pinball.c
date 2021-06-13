@@ -304,11 +304,12 @@ static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollision
 static void UpdateFlipperState(struct Flipper *flipper);
 static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdatePosition(struct Ball *ball);
-static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal);
+static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal, u16 *outYForce);
 static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index);
 static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row);
-static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute);
+static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute, u16 *outYForce);
 static void HandleStaticCollisionDiglett(struct Diglett *diglett, int x, int y, u8 collisionAttribute);
+static void HandleStaticCollisionGengar(struct Gengar *gengar, u8 collisionAttribute, u16 *outYForce);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
 static u8 ReverseBits(u8 value);
 static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification);
@@ -1311,6 +1312,8 @@ static const struct SpriteTemplate sSeelMultiplierSpriteTemplate = {
     .callback = UpdateSeelMultiplierSprite,
 };
 
+static const u8 sGengarGravestoneCollisionAttributes[] = {0x19, 0x1A, 0x1B, 0x1C, 0x27, 0x1D, 0x1E, 0x1F, 0x20};
+
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
     {  4,  1 },
@@ -2015,7 +2018,7 @@ static void HandleBallPhysics(void)
     u8 objectCollisionNormal;
     u8 staticCollisionNormal;
     u8 collisionNormal;
-    u16 flipperYForce = 0;
+    u16 artificialYForce = 0;
     int collisionAmplification = 0;
     struct Ball *ball = &sPinballGame->ball;
 
@@ -2026,11 +2029,11 @@ static void HandleBallPhysics(void)
         ApplyGravity(ball);
 
     LimitVelocity(ball);
-    isFlipperColliding = HandleFlippers(ball, &flipperYForce, &flipperCollisionNormal, &collisionAmplification);
+    isFlipperColliding = HandleFlippers(ball, &artificialYForce, &flipperCollisionNormal, &collisionAmplification);
     if (!isFlipperColliding)
         isObjectColliding = CheckObjectsCollision(sPinballGame->gameType, ball, sPinballGame->timer.ticks, &objectCollisionNormal, &collisionAmplification);
 
-    isStaticColliding = CheckStaticCollision(sPinballGame->gameType, ball, sPinballGame->ballIsEntering, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal);
+    isStaticColliding = CheckStaticCollision(sPinballGame->gameType, ball, sPinballGame->ballIsEntering, sPinballGame->stageTileWidth, sPinballGame->stageTileHeight, &staticCollisionNormal, &artificialYForce);
     if (isFlipperColliding)
         collisionNormal = flipperCollisionNormal;
     else if (isObjectColliding)
@@ -2041,7 +2044,7 @@ static void HandleBallPhysics(void)
     if (isFlipperColliding || isObjectColliding || isStaticColliding)
     {
         RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
-        ApplyCollisionForces(ball, flipperYForce, collisionAmplification);
+        ApplyCollisionForces(ball, artificialYForce, collisionAmplification);
         RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
     }
 
@@ -2295,7 +2298,7 @@ static void UpdatePosition(struct Ball *ball)
 
 }
 
-static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal)
+static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIsEntering, int stageTileWidth, int stageTileHeight, u8 *outCollisionNormal, u16 *outYForce)
 {
     int i;
     u16 xDelta, yDelta;
@@ -2410,7 +2413,8 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
         gameType,
         collisionTestCoords[maxStringStart][0],
         collisionTestCoords[maxStringStart][1],
-        collisionTestAttributes[maxStringStart]
+        collisionTestAttributes[maxStringStart],
+        outYForce
     );
 
     return TRUE;
@@ -2525,13 +2529,15 @@ static void RotateVector(s16 *x, s16 *y, u8 angle)
     *y = newY;
 }
 
-static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute)
+static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute, u16 *outYForce)
 {
     switch (gameType)
     {
     case GAME_TYPE_MEOWTH:
     case GAME_TYPE_SEEL:
+        break;
     case GAME_TYPE_GENGAR:
+        HandleStaticCollisionGengar(&sPinballGame->gengar, collisionAttribute, outYForce);
         break;
     case GAME_TYPE_DIGLETT:
         HandleStaticCollisionDiglett(&sPinballGame->diglett, x, y, collisionAttribute);
@@ -2598,6 +2604,21 @@ static void HandleStaticCollisionDiglett(struct Diglett *diglett, int x, int y, 
             diglett->collisionMap[0x6A] = 0x2;
             diglett->collisionMap[0x6B] = 0x2;
             break;
+        }
+    }
+}
+
+static void HandleStaticCollisionGengar(struct Gengar *gengar, u8 collisionAttribute, u16 *outYForce)
+{
+    int i;
+    for (i = 0; i < ARRAY_COUNT(sGengarGravestoneCollisionAttributes); i++)
+    {
+        if (collisionAttribute == sGengarGravestoneCollisionAttributes[i])
+        {
+            // If the ball hit a gravestone, apply some artificial force to
+            // make the ball bounce harder.
+            *outYForce = 0x100;
+            return;
         }
     }
 }
