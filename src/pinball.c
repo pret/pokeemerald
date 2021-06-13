@@ -45,7 +45,8 @@
 #define TAG_SEEL                       507
 #define TAG_SEEL_SPARKLE               508
 #define TAG_SEEL_MULTIPLIER            509
-#define TAG_TIMER_DIGIT                510
+#define TAG_GASTLY                     510
+#define TAG_TIMER_DIGIT                511
 
 enum
 {
@@ -207,9 +208,54 @@ struct Seel
     u8 sparkleSpriteId;
 };
 
+enum
+{
+    GHOST_DIR_RIGHT,
+    GHOST_DIR_LEFT,
+};
+
+enum
+{
+    GASTLY_STATE_VISIBLE,
+    GASTLY_STATE_HIT,
+    GASTLY_STATE_INVISIBLE,
+    GASTLY_STATE_FINISHED,
+};
+
+struct GraveyardGhost
+{
+    u8 state;
+    u8 spriteId;
+    u16 xPos;
+    u16 yPos;
+    u8 direction;
+    u8 leftBoundary;
+    u8 rightBoundary;
+    u8 counter;
+};
+
+enum
+{
+    GRAVEYARD_STATE_GASTLY,
+    GRAVEYARD_STATE_TO_HAUNTER,
+    GRAVEYARD_STATE_HAUNTER,
+    GRAVEYARD_STATE_TO_GENGAR,
+    GRAVEYARD_STATE_GENGAR,
+    GRAVEYARD_STATE_GENGAR_VICTORY,
+};
+
+#define NUM_GASTLY  3
+#define NUM_HAUNTER 2
+
 struct Gengar
 {
     bool32 completed;
+    u8 graveyardState;
+    struct GraveyardGhost gastlyGhosts[NUM_GASTLY];
+    struct GraveyardGhost haunterGhosts[NUM_HAUNTER];
+    u8 numGastlyHits;
+    u8 numHaunterHits;
+    u8 numGengarHits;
 };
 
 #define FLIPPER_LEFT  0
@@ -349,7 +395,9 @@ static u32 GetSeelVisibleTicks(int curStreak);
 static void UpdateSeelSprite(struct Sprite *sprite);
 static void UpdateSeelSparkleSprite(struct Sprite *sprite);
 static void UpdateSeelMultiplierSprite(struct Sprite *sprite);
+static bool32 CheckGastlyCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 UpdateGengar(struct Gengar *gengar);
+static void UpdateGastlySprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -453,6 +501,9 @@ static const u16 sGengarStageBgTilemap[] = INCBIN_U16("graphics/pinball/bg_tilem
 static const u8 sGengarStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_gengar.1bpp");
 static const u8 sGengarStageBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_gengar.bin");
 static const u8 sGengarStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinball/bg_collision_map_gengar_entrance.bin");
+static const u32 sGastlyAnimationGfx[] = INCBIN_U32("graphics/pinball/gastly_animation.4bpp.lz");
+static const u16 sGastlyAnimationPalette[] = INCBIN_U16("graphics/pinball/gastly_animation.gbapal");
+static const u8 sGastlyCollisionNormalAngles[] = INCBIN_U8("data/pinball/gastly_normal_angles.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -520,6 +571,12 @@ static const struct CompressedSpriteSheet sSeelMultipliersSpriteSheet = {
     .tag = TAG_SEEL_MULTIPLIER,
 };
 
+static const struct CompressedSpriteSheet sGastlyAnimationSpriteSheet = {
+    .data = sGastlyAnimationGfx,
+    .size = 0x600,
+    .tag = TAG_GASTLY,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
@@ -530,6 +587,7 @@ static const struct SpritePalette sDugtrioAnimationSpritePalette = { sDugtrioAni
 static const struct SpritePalette sSeelAnimationSpritePalette = { sSeelAnimationPalette, TAG_SEEL };
 static const struct SpritePalette sSeelSparkleSpritePalette = { sSeelSparklePalette, TAG_SEEL_SPARKLE };
 static const struct SpritePalette sSeelMultipliersSpritePalette = { sSeelMultipliersPalette, TAG_SEEL_MULTIPLIER };
+static const struct SpritePalette sGastlyAnimationSpritePalette = { sGastlyAnimationPalette, TAG_GASTLY };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -1312,7 +1370,69 @@ static const struct SpriteTemplate sSeelMultiplierSpriteTemplate = {
     .callback = UpdateSeelMultiplierSprite,
 };
 
+static const struct OamData sGastlyOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sGastlyAnimCmd_Visible[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sGastlyAnimCmd_Hit[] = {
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(16, 3),
+    ANIMCMD_FRAME(32, 3),
+    ANIMCMD_FRAME(16, 3),
+    ANIMCMD_FRAME(32, 3),
+    ANIMCMD_FRAME(16, 2),
+    ANIMCMD_FRAME(32, 2),
+    ANIMCMD_FRAME(16, 2),
+    ANIMCMD_FRAME(32, 2),
+    ANIMCMD_FRAME(16, 1),
+    ANIMCMD_FRAME(32, 1),
+    ANIMCMD_FRAME(16, 1),
+    ANIMCMD_FRAME(32, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sGastlyAnimCmds[] = {
+    sGastlyAnimCmd_Visible,
+    sGastlyAnimCmd_Hit,
+};
+
+static const struct SpriteTemplate sGastlySpriteTemplate = {
+    .tileTag = TAG_GASTLY,
+    .paletteTag = TAG_GASTLY,
+    .oam = &sGastlyOamData,
+    .anims = sGastlyAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateGastlySprite,
+};
+
 static const u8 sGengarGravestoneCollisionAttributes[] = {0x19, 0x1A, 0x1B, 0x1C, 0x27, 0x1D, 0x1E, 0x1F, 0x20};
+
+static const u8 sInitialGastlyData[NUM_GASTLY][5] = {
+    {24, 24, GHOST_DIR_RIGHT, 24, 64},
+    {96, 48, GHOST_DIR_RIGHT, 96, 136},
+    {64, 72, GHOST_DIR_RIGHT, 64, 96},
+};
 
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
@@ -1566,6 +1686,8 @@ static void LoadSpriteGfx(u8 gameType)
         LoadSpritePalette(&sSeelMultipliersSpritePalette);
         break;
     case GAME_TYPE_GENGAR:
+        LoadCompressedSpriteSheet(&sGastlyAnimationSpriteSheet);
+        LoadSpritePalette(&sGastlyAnimationSpritePalette);
         break;
     }
 }
@@ -1743,7 +1865,30 @@ static void InitSeel(void)
 
 static void InitGengar(void)
 {
-    
+    int i;
+    struct Gengar *gengar = &sPinballGame->gengar;
+    gengar->completed = FALSE;
+    gengar->numGastlyHits = 0;
+    gengar->numHaunterHits = 0;
+    gengar->numGengarHits = 0;
+    gengar->graveyardState = GRAVEYARD_STATE_GASTLY;
+    for (i = 0; i < NUM_GASTLY; i++)
+    {
+        struct GraveyardGhost *gastly = &gengar->gastlyGhosts[i];
+        gastly->state = GASTLY_STATE_VISIBLE;
+        gastly->xPos = sInitialGastlyData[i][0] << 8;
+        gastly->yPos = sInitialGastlyData[i][1] << 8;
+        gastly->direction = sInitialGastlyData[i][2];
+        gastly->leftBoundary = sInitialGastlyData[i][3];
+        gastly->rightBoundary = sInitialGastlyData[i][4];
+        gastly->spriteId = CreateSprite(&sGastlySpriteTemplate, gastly->xPos >> 8, gastly->yPos >> 8, 5);
+        gSprites[gastly->spriteId].data[0] = gastly->state;
+        gSprites[gastly->spriteId].data[1] = i;
+        if (gastly->direction == GHOST_DIR_RIGHT)
+            StartSpriteAnim(&gSprites[gastly->spriteId], 0);
+        else
+            StartSpriteAnim(&gSprites[gastly->spriteId], 1);
+    }
 }
 
 static void PinballVBlankCallback(void)
@@ -2859,14 +3004,20 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
         if (!isColliding)
             isColliding = CheckMeowthJewelsCollision(ball, &sPinballGame->meowth, outCollisionNormal);
         break;
-    case GAME_TYPE_DIGLETT:
-        isColliding = FALSE;
-        break;
     case GAME_TYPE_SEEL:
         isColliding = CheckSeelCollision(ball, &sPinballGame->seel, ticks, outCollisionNormal, outCollisionAmplification);
         break;
     case GAME_TYPE_GENGAR:
-        isColliding = FALSE;
+        switch (sPinballGame->gengar.graveyardState)
+        {
+        case GRAVEYARD_STATE_GASTLY:
+            isColliding = CheckGastlyCollision(ball, &sPinballGame->gengar, ticks, outCollisionNormal, outCollisionAmplification);
+            break;
+        case GRAVEYARD_STATE_HAUNTER:
+            break;
+        case GRAVEYARD_STATE_GENGAR:
+            break;
+        }
         break;
     }
 
@@ -3709,7 +3860,157 @@ static void UpdateSeelMultiplierSprite(struct Sprite *sprite)
     }
 }
 
+static bool32 CheckGastlyCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
+{
+    int i;
+    int x, y;
+    u8 collisionNormal;
+    int ballXPos = (ball->xPos >> 8);
+    int ballYPos = (ball->yPos >> 8);
+
+    if (ticks <= 0)
+        return FALSE;
+
+    for (i = 0; i < NUM_GASTLY; i++)
+    {
+        struct GraveyardGhost *gastly = &gengar->gastlyGhosts[i];
+        int gastlyXPos = (gastly->xPos >> 8);
+        int gastlyYPos = (gastly->yPos >> 8);
+
+        if (gastly->state != GASTLY_STATE_VISIBLE)
+            continue;
+
+        if (ballXPos < gastlyXPos - 16 || ballXPos >= gastlyXPos + 16
+         || ballYPos < gastlyYPos - 16 || ballYPos >= gastlyYPos + 16)
+            continue;
+
+        x = ballXPos - gastlyXPos + 16;
+        y = ballYPos - gastlyYPos + 16;
+        collisionNormal = sGastlyCollisionNormalAngles[y * 32 + x];
+        if (collisionNormal == 0xFF)
+            continue;
+        
+        // Multiply normal by two because the original data is stored halved.
+        *outCollisionNormal = collisionNormal * 2;
+        gastly->state = GASTLY_STATE_HIT;
+        gengar->numGastlyHits++;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+#define GASTLY_SPEED 0x35
+
 static bool32 UpdateGengar(struct Gengar *gengar)
 {
-    return FALSE;
+    int i;
+
+    switch (gengar->graveyardState)
+    {
+    case GRAVEYARD_STATE_GASTLY:
+        for (i = 0; i < NUM_GASTLY; i++)
+        {
+            struct GraveyardGhost *gastly = &gengar->gastlyGhosts[i];
+            struct Sprite *sprite = &gSprites[gastly->spriteId];
+            switch (gastly->state)
+            {
+            case GASTLY_STATE_VISIBLE:
+                if (gastly->direction == GHOST_DIR_RIGHT)
+                {
+                    gastly->xPos += GASTLY_SPEED;
+                    if ((gastly->xPos >> 8) >= gastly->rightBoundary)
+                    {
+                        gastly->xPos = gastly->rightBoundary << 8;
+                        gastly->direction = GHOST_DIR_LEFT;
+                    }
+                }
+                else
+                {
+                    gastly->xPos -= GASTLY_SPEED;
+                    if ((gastly->xPos >> 8) < gastly->leftBoundary)
+                    {
+                        gastly->xPos = gastly->leftBoundary << 8;
+                        gastly->direction = GHOST_DIR_RIGHT;
+                    }
+                }
+
+                if (++gastly->counter >= 52)
+                    gastly->counter = 0;
+                break;
+            case GASTLY_STATE_HIT:
+                if (sprite->animEnded)
+                {
+                    if (gengar->numGastlyHits >= 8)
+                    {
+                        gastly->state = GASTLY_STATE_FINISHED;
+                    }
+                    else
+                    {
+                        gastly->state = GASTLY_STATE_INVISIBLE;
+                        gastly->counter = 0;
+                    }
+                }
+                break;
+            case GASTLY_STATE_INVISIBLE:
+                if (++gastly->counter >= 130)
+                {
+                    gastly->state = GASTLY_STATE_VISIBLE;
+                    gastly->counter = 0;
+                }
+                break;
+            }
+        }
+        break;
+    }
+
+    return gengar->completed;
+}
+
+static void UpdateGastlySprite(struct Sprite *sprite)
+{
+    // data[0] = previous state
+    // data[1] = gastly index
+    struct GraveyardGhost *gastly = &sPinballGame->gengar.gastlyGhosts[sprite->data[1]];
+    int prevState = sprite->data[0];
+    int curState = gastly->state;
+    sprite->pos1.x = gastly->xPos >> 8;
+    sprite->pos1.y = gastly->yPos >> 8;
+    switch ((gastly->counter % 52) / 13)
+    {
+    case 0:
+    case 2:
+        sprite->pos2.y = 0;
+        break;
+    case 1:
+        sprite->pos2.y = 1;
+        break;
+    case 3:
+        sprite->pos2.y = -1;
+        break;
+    }
+
+    // Check if this Gastly's state changed, and start the appropriate
+    // sprite animation.
+    if (prevState != curState)
+    {
+        sprite->data[0] = curState;
+        switch (curState)
+        {
+        case GASTLY_STATE_VISIBLE:
+            sprite->invisible = FALSE;
+            StartSpriteAnim(sprite, 0);
+            break;
+        case GASTLY_STATE_HIT:
+            sprite->invisible = FALSE;
+            StartSpriteAnim(sprite, 1);
+            break;
+        case GASTLY_STATE_INVISIBLE:
+            sprite->invisible = TRUE;
+            break;
+        case GASTLY_STATE_FINISHED:
+            DestroySprite(sprite);
+            break;
+        }
+    }
 }
