@@ -44,7 +44,8 @@
 #define TAG_DUGTRIO                    506
 #define TAG_SEEL                       507
 #define TAG_SEEL_SPARKLE               508
-#define TAG_TIMER_DIGIT                509
+#define TAG_SEEL_MULTIPLIER            509
+#define TAG_TIMER_DIGIT                510
 
 enum
 {
@@ -334,6 +335,7 @@ static void ChooseNextEmergingSeel(int curSeelIndex, struct Seel *seel);
 static u32 GetSeelVisibleTicks(int curStreak);
 static void UpdateSeelSprite(struct Sprite *sprite);
 static void UpdateSeelSparkleSprite(struct Sprite *sprite);
+static void UpdateSeelMultiplierSprite(struct Sprite *sprite);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -428,6 +430,8 @@ static const u16 sSeelAnimationPalette[] = INCBIN_U16("graphics/pinball/seel_ani
 static const u8 sSeelCollisionNormalAngles[] = INCBIN_U8("data/pinball/seel_normal_angles.bin");
 static const u32 sSeelSparkleGfx[] = INCBIN_U32("graphics/pinball/seel_sparkle.4bpp.lz");
 static const u16 sSeelSparklePalette[] = INCBIN_U16("graphics/pinball/seel_sparkle.gbapal");
+static const u32 sSeelMultipliersGfx[] = INCBIN_U32("graphics/pinball/seel_multipliers.4bpp.lz");
+static const u16 sSeelMultipliersPalette[] = INCBIN_U16("graphics/pinball/seel_multipliers.gbapal");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -489,6 +493,12 @@ static const struct CompressedSpriteSheet sSeelSparkleSpriteSheet = {
     .tag = TAG_SEEL_SPARKLE,
 };
 
+static const struct CompressedSpriteSheet sSeelMultipliersSpriteSheet = {
+    .data = sSeelMultipliersGfx,
+    .size = 0x1C0,
+    .tag = TAG_SEEL_MULTIPLIER,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
@@ -498,6 +508,7 @@ static const struct SpritePalette sMeowthJewelMultipliersSpritePalette = { sMeow
 static const struct SpritePalette sDugtrioAnimationSpritePalette = { sDugtrioAnimationPalette, TAG_DUGTRIO };
 static const struct SpritePalette sSeelAnimationSpritePalette = { sSeelAnimationPalette, TAG_SEEL };
 static const struct SpritePalette sSeelSparkleSpritePalette = { sSeelSparklePalette, TAG_SEEL_SPARKLE };
+static const struct SpritePalette sSeelMultipliersSpritePalette = { sSeelMultipliersPalette, TAG_SEEL_MULTIPLIER };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -1209,6 +1220,77 @@ static const struct SpriteTemplate sSeelSparkleSpriteTemplate = {
     .callback = UpdateSeelSparkleSprite,
 };
 
+static const struct OamData sSeelMultiplierOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_2x[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_3x[] = {
+    ANIMCMD_FRAME(2, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_4x[] = {
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_5x[] = {
+    ANIMCMD_FRAME(6, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_6x[] = {
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_7x[] = {
+    ANIMCMD_FRAME(10, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSeelMultiplierAnimCmd_8x[] = {
+    ANIMCMD_FRAME(12, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sSeelMultiplierAnimCmds[] = {
+    sSeelMultiplierAnimCmd_2x,
+    sSeelMultiplierAnimCmd_3x,
+    sSeelMultiplierAnimCmd_4x,
+    sSeelMultiplierAnimCmd_5x,
+    sSeelMultiplierAnimCmd_6x,
+    sSeelMultiplierAnimCmd_7x,
+    sSeelMultiplierAnimCmd_8x,
+};
+
+static const struct SpriteTemplate sSeelMultiplierSpriteTemplate = {
+    .tileTag = TAG_SEEL_MULTIPLIER,
+    .paletteTag = TAG_SEEL_MULTIPLIER,
+    .oam = &sSeelMultiplierOamData,
+    .anims = sSeelMultiplierAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateSeelMultiplierSprite,
+};
+
 static const s8 sCollisionTestPointOffsets[][2] = {
     {  4,  0 },
     {  4,  1 },
@@ -1446,6 +1528,8 @@ static void LoadSpriteGfx(u8 gameType)
         LoadSpritePalette(&sSeelAnimationSpritePalette);
         LoadCompressedSpriteSheet(&sSeelSparkleSpriteSheet);
         LoadSpritePalette(&sSeelSparkleSpritePalette);
+        LoadCompressedSpriteSheet(&sSeelMultipliersSpriteSheet);
+        LoadSpritePalette(&sSeelMultipliersSpritePalette);
         break;
     }
 }
@@ -2949,7 +3033,6 @@ static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite)
     }
 }
 
-
 static void ResetMeowthJewels(struct Meowth *meowth)
 {
     int i;
@@ -3213,6 +3296,13 @@ static bool32 CheckSeelCollision(struct Ball *ball, struct Seel *seel, u32 ticks
     sparkleSprite->data[0] = SEEL_SPARKLE_DURATION;
     sparkleSprite->data[1] = min(20, seel->score);
     DrawSeelScoreJewels(seel);
+    if (seel->streak > 1)
+    {
+        int y = swimmerYPos - 16;
+        u8 spriteId = CreateSprite(&sSeelMultiplierSpriteTemplate, swimmerXPos, y, 4);
+        gSprites[spriteId].data[2] = y;
+        StartSpriteAnim(&gSprites[spriteId], seel->streak - 2);
+    }
 
     return TRUE;
 }
@@ -3439,5 +3529,43 @@ static void UpdateSeelSparkleSprite(struct Sprite *sprite)
         sprite->pos1.x = (sprite->data[1] - 1) * 8 + 4;
         sprite->pos1.y = 4;
         sprite->invisible = FALSE;
+    }
+}
+
+static void UpdateSeelMultiplierSprite(struct Sprite *sprite)
+{
+    // data[0] = state
+    // data[1] = state counter
+    // data[2] = original y position
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos1.y--;
+        if (++sprite->data[1] == 5)
+        {
+            sprite->data[0] = 1;
+            sprite->data[1] = 0;
+            sprite->pos1.y = sprite->data[2];
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] >= 22)
+        {
+            sprite->data[0] = 2;
+            sprite->data[1] = 0;
+        }
+        break;
+    case 2:
+        if (++sprite->data[1] >= 24)
+        {
+            DestroySprite(sprite);
+            return;
+        }
+
+        if (sprite->data[1] % 8 < 4)
+            sprite->invisible = FALSE;
+        else
+            sprite->invisible = TRUE;
+        break;
     }
 }
