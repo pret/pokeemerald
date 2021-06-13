@@ -10599,7 +10599,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .accuracy = 100,
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #endif
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Light Screen + Hit)
+        .effect = EFFECT_GLITZY_GLOW,
         .type = TYPE_PSYCHIC,
         .pp = 15,
         .secondaryEffectChance = 0,
@@ -10619,7 +10619,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .accuracy = 100,
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #endif
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Reflect + Hit)
+        .effect = EFFECT_BADDY_BAD,
         .type = TYPE_DARK,
         .pp = 15,
         .secondaryEffectChance = 0,
@@ -10641,7 +10641,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .pp = 15,
             .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #endif
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Leech Seed + Hit)
+        .effect = EFFECT_SAPPY_SEED,
         .type = TYPE_GRASS,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -10662,7 +10662,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .pp = 15,
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #endif
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Haze + Hit)
+        .effect = EFFECT_FREEZY_FROST,
         .type = TYPE_ICE,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -10683,7 +10683,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .pp = 15,
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #endif
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Heal Bell + Hit)
+        .effect = EFFECT_SPARKLY_SWIRL,
         .type = TYPE_FAIRY,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,

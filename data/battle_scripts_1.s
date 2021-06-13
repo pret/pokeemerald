@@ -371,6 +371,37 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectBodyPress
 	.4byte BattleScript_EffectEvasionUpHit
 	.4byte BattleScript_EffectDoubleIronBash
+	.4byte BattleScript_EffectGlitzyGlow
+	.4byte BattleScript_EffectBaddyBad
+	.4byte BattleScript_EffectSappySeed
+	.4byte BattleScript_EffectFreezyFrost
+	.4byte BattleScript_EffectSparklySwirl
+
+BattleScript_EffectSparklySwirl:
+	healpartystatus
+	waitstate
+	updatestatusicon BS_ATTACKER_WITH_PARTNER
+	waitstate
+	goto BattleScript_EffectHit
+
+BattleScript_EffectFreezyFrost:
+	normalisebuffs
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSappySeed:
+	jumpifstatus3 BS_TARGET, STATUS3_LEECHSEED, BattleScript_EffectHit
+	setseeded
+	goto BattleScript_EffectHit
+
+BattleScript_EffectBaddyBad:
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_REFLECT, BattleScript_EffectHit
+	setreflect
+	goto BattleScript_EffectHit
+
+BattleScript_EffectGlitzyGlow:
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_LIGHTSCREEN, BattleScript_EffectHit
+	setlightscreen
+	goto BattleScript_EffectHit
 
 BattleScript_EffectDoubleIronBash:
 	attackcanceler
