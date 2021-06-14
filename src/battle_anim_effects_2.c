@@ -89,7 +89,7 @@ static void AnimPerishSongMusicNote_Step1(struct Sprite *);
 static void AnimPerishSongMusicNote_Step2(struct Sprite *);
 static void AnimGuardRing(struct Sprite *);
 static void AnimTask_Withdraw_Step(u8);
-static void AnimTask_GrowAndGreyscale_Step(u8);
+static void AnimTask_GrowAndGrayscale_Step(u8);
 static void AnimTask_Minimize_Step(u8);
 static void CreateMinimizeSprite(struct Task *, u8);
 static void ClonedMinizeSprite_Step(struct Sprite *);
@@ -1996,26 +1996,26 @@ static void AnimGuillotinePincer_Step3(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// Scales up the target mon sprite, and sets the palette to greyscale.
+// Scales up the target mon sprite, and sets the palette to grayscale.
 // Used in MOVE_DISABLE.
 // No args.
-void AnimTask_GrowAndGreyscale(u8 taskId)
+void AnimTask_GrowAndGrayscale(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
     SetSpriteRotScale(spriteId, 0xD0, 0xD0, 0);
-    SetGreyscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, FALSE);
+    SetGrayscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, FALSE);
     gTasks[taskId].data[0] = 80;
-    gTasks[taskId].func = AnimTask_GrowAndGreyscale_Step;
+    gTasks[taskId].func = AnimTask_GrowAndGrayscale_Step;
 }
 
-static void AnimTask_GrowAndGreyscale_Step(u8 taskId)
+static void AnimTask_GrowAndGrayscale_Step(u8 taskId)
 {
     if (--gTasks[taskId].data[0] == -1)
     {
         u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         ResetSpriteRotScale(spriteId);
-        SetGreyscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, TRUE);
+        SetGrayscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, TRUE);
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -3710,7 +3710,7 @@ static void AnimPerishSongMusicNote2(struct Sprite *sprite)
     }
 
     if (++sprite->data[0] == sprite->data[1])
-        SetGreyscaleOrOriginalPalette(sprite->oam.paletteNum + 16, 0);
+        SetGrayscaleOrOriginalPalette(sprite->oam.paletteNum + 16, 0);
 
     if (sprite->data[0] == sprite->data[1] + 80)
         DestroyAnimSprite(sprite);

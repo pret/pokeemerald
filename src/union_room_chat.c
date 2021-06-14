@@ -2984,7 +2984,7 @@ static void HideKeyboardSwapMenu(void)
 
 static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
 {
-    // colorIdx: 0 = grey, 1 = red, 2 = green, 3 = blue
+    // colorIdx: 0 = gray, 1 = red, 2 = green, 3 = blue
     u8 color[3];
     color[0] = TEXT_COLOR_WHITE;
     color[1] = colorIdx * 2 + 2;
