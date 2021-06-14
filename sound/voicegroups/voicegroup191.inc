@@ -1,38 +1,38 @@
 	.align 2
 voicegroup191:: @ DPPt main
 	voice_directsound 60, 0, DirectSoundWaveData_dp_reverscyn_16, 255, 0, 255, 0
-	voice_keysplit_all voicegroup005				 @ drums 1
-	voice_keysplit voicegroup005, KeySplitTable6     @ piano
-	voice_keysplit voicegroup005, KeySplitTable7     @ piano low
-	voice_keysplit voicegroup005, KeySplitTable8     @ ep 1
-	voice_keysplit voicegroup005, KeySplitTable9     @ ep 2
-	voice_keysplit_all voicegroup006				 @ drums 2
-	voice_keysplit voicegroup005, KeySplitTable10    @ clavi
+	voice_keysplit_all voicegroup205				 @ drums 1
+	voice_keysplit voicegroup205, KeySplitTable6     @ piano
+	voice_keysplit voicegroup205, KeySplitTable7     @ piano low
+	voice_keysplit voicegroup205, KeySplitTable8     @ ep 1
+	voice_keysplit voicegroup205, KeySplitTable9     @ ep 2
+	voice_keysplit_all voicegroup206				 @ drums 2
+	voice_keysplit voicegroup205, KeySplitTable10    @ clavi
 	voice_noise_alt 60, 0, 0, 1, 0, 3, 1
 	voice_directsound 60, 0, DirectSoundWaveData_dp_glocken_c6_16, 255, 247, 0, 208
 	voice_square_1_alt 60, 0, 0, 1, 1, 2, 6, 2         @ double up of 070
-	voice_keysplit voicegroup005, KeySplitTable11    @ vibraphone
-	voice_keysplit voicegroup005, KeySplitTable12    @ marimba
-	voice_keysplit voicegroup005, KeySplitTable13    @ xylophone
-	voice_keysplit voicegroup005, KeySplitTable14    @ tubular bell
+	voice_keysplit voicegroup205, KeySplitTable11    @ vibraphone
+	voice_keysplit voicegroup205, KeySplitTable12    @ marimba
+	voice_keysplit voicegroup205, KeySplitTable13    @ xylophone
+	voice_keysplit voicegroup205, KeySplitTable14    @ tubular bell
 	voice_keysplit voicegroup193, KeySplitTable38    @ trinity piano
-	voice_keysplit_all voicegroup007				 @ synth kick + snare
-	voice_keysplit voicegroup005, KeySplitTable15    @ rotary organ
-	voice_keysplit voicegroup005, KeySplitTable16    @ straight organ
+	voice_keysplit_all voicegroup207				 @ synth kick + snare
+	voice_keysplit voicegroup205, KeySplitTable15    @ rotary organ
+	voice_keysplit voicegroup205, KeySplitTable16    @ straight organ
 	voice_directsound 60, 0, DirectSoundWaveData_dp_org5_c3_16, 255, 175, 235, 171
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sawtoothlead60, 255, 200, 255, 171
-	voice_keysplit voicegroup005, KeySplitTable17    @ accordion
+	voice_keysplit voicegroup205, KeySplitTable17    @ accordion
 	voice_directsound 60, 0, DirectSoundWaveData_dp_harmonica_c3_16, 67, 247, 191, 171
 	voice_directsound 60, 0, DirectSoundWaveData_dp_fretnoise60, 255, 0, 255, 0
-	voice_keysplit voicegroup005, KeySplitTable18    @ acoustic guitar
+	voice_keysplit voicegroup205, KeySplitTable18    @ acoustic guitar
 	voice_directsound 60, 0, DirectSoundWaveData_dp_bluesgt_a2_16, 255, 255, 227, 208
 	voice_directsound 60, 0, DirectSoundWaveData_dp_eternaguitar36, 255, 253, 159, 208
-	voice_keysplit voicegroup005, KeySplitTable19    @ clean guitar
+	voice_keysplit voicegroup205, KeySplitTable19    @ clean guitar
 	voice_directsound 60, 0, DirectSoundWaveData_dp_spearpillarwind60, 255, 0, 255, 1
-	voice_keysplit voicegroup005, KeySplitTable20    @ distortion guitar 1
-	voice_keysplit voicegroup005, KeySplitTable21    @ power guitar
+	voice_keysplit voicegroup205, KeySplitTable20    @ distortion guitar 1
+	voice_keysplit voicegroup205, KeySplitTable21    @ power guitar
 	voice_square_2_alt 60, 0, 2, 0, 7, 2, 0
-	voice_keysplit voicegroup005, KeySplitTable22    @ upright bass 1
+	voice_keysplit voicegroup205, KeySplitTable22    @ upright bass 1
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sting_bass_e1_16, 255, 251, 0, 208
 	voice_directsound 60, 0, DirectSoundWaveData_dp_pickbass_e1_16, 255, 251, 0, 208
 	voice_directsound 60, 0, DirectSoundWaveData_dp_fretlessbass_d1_16, 255, 0, 255, 196

@@ -204,3 +204,8 @@
 .include "sound/voicegroups/voicegroup202.inc" @ BW Ichinose (battles)
 .include "sound/voicegroups/voicegroup203.inc"
 .include "sound/voicegroups/voicegroup204.inc"
+.include "sound/voicegroups/voicegroup205.inc"
+.include "sound/voicegroups/voicegroup206.inc"
+.include "sound/voicegroups/voicegroup207.inc"
+.include "sound/voicegroups/voicegroup208.inc"
+.include "sound/voicegroups/voicegroup209.inc"
