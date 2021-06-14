@@ -1128,6 +1128,7 @@ static const struct BgTemplate sInfoScreen_BgTemplate[] =
 #define WIN_FOOTPRINT 1
 #define WIN_CRY_WAVE 2
 #define WIN_VU_METER 3
+#define WIN_NAVIGATION_BUTTONS 4
 
 static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
 {
@@ -1170,6 +1171,16 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .height = 8,
         .paletteNum = 9,
         .baseBlock = 869,
+    },
+    [WIN_NAVIGATION_BUTTONS] = 
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 641,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -6245,6 +6256,16 @@ static void LoadTilesetTilemapHGSS(u8 page)
 }
 
 //PokedexPlus HGSS_Ui Stats Page
+static const u8 sStatsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static void StatsPage_PrintAToggleUpdownMoves(void)
+{
+    u8 x = 9;
+    u8 y = 0;
+    AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_Stats_Buttons);
+    // DrawKeypadIcon(WIN_NAVIGATION_BUTTONS, 10, 5, 0); //(u8 windowId, u8 keypadIconId, u16 x, u16 y)
+    PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
+    CopyWindowToVram(WIN_NAVIGATION_BUTTONS, 3);
+}
 #define tMonSpriteId data[4]
 static void Task_LoadStatsScreen(u8 taskId)
 {
@@ -6275,6 +6296,9 @@ static void Task_LoadStatsScreen(u8 taskId)
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         CopyWindowToVram(WIN_INFO, 3);
+        FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0)); 
+        PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, 3);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -6329,6 +6353,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         PrintMonStatsToggle(taskId);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
+        StatsPage_PrintAToggleUpdownMoves(); //gText_Stats_Buttons
         gMain.state++;
         break;
     case 7:

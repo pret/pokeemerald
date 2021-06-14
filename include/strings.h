@@ -533,6 +533,7 @@ extern const u8 gText_SearchCompleted[];
 extern const u8 gText_NoMatchingPkmnWereFound[];
 extern const u8 gText_SelectorArrow[];
 //PokedexPlus HGSS_Ui
+extern const u8 gText_Stats_Buttons[];
 extern const u8 gText_Stats_HP[];
 extern const u8 gText_Stats_Attack[];
 extern const u8 gText_Stats_Defense[];

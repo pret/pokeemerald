@@ -1820,6 +1820,7 @@ const u8 gText_Berries[] = _("BERRIES");
 
 
 //HGSS_Ui PokedexPlus
+const u8 gText_Stats_Buttons[]  = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
 const u8 gText_Stats_HP[]       = _("HP");
 const u8 gText_Stats_Attack[]   = _("ATK");
 const u8 gText_Stats_Defense[]  = _("DEF");
