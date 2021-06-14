@@ -7320,6 +7320,31 @@ static void DestroySplitIcon(void)
 #endif
 
 //PokedexPlus HGSS_Ui Evolution Page
+static const u8 sEvoFormsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static void EvoFormsPage_PrintAToggleUpdownEvos(void)
+{
+    u8 x = 9;
+    u8 y = 0;
+    #ifdef POKEMON_EXPANSION
+        if (sPokedexView->selectedScreen == EVO_SCREEN)
+        {
+            if (!HGSS_DECAPPED)
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_EVO_Buttons_PE);
+            else
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_EVO_Buttons_Decapped_PE);
+        }
+        else if (sPokedexView->selectedScreen == FORMS_SCREEN)
+        {
+            if (!HGSS_DECAPPED)
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_FORMS_Buttons_PE);
+            else
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_FORMS_Buttons_Decapped_PE);
+        }
+        // DrawKeypadIcon(WIN_NAVIGATION_BUTTONS, 10, 5, 0); //(u8 windowId, u8 keypadIconId, u16 x, u16 y)
+        PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, 3);
+    #endif
+}
 static void Task_LoadEvolutionScreen(u8 taskId)
 {
     switch (gMain.state)
@@ -7347,6 +7372,9 @@ static void Task_LoadEvolutionScreen(u8 taskId)
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         CopyWindowToVram(WIN_INFO, 3);
+        FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0)); 
+        PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, 3);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -7370,6 +7398,7 @@ static void Task_LoadEvolutionScreen(u8 taskId)
                 gTasks[taskId].data[4] = CreateMonIcon(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4, 0); //Create pokemon sprite
             #endif
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            EvoFormsPage_PrintAToggleUpdownEvos(); //HGSS_Ui Navigation buttons
         }
         gMain.state++;
         break;
@@ -7515,7 +7544,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species)
     bool8 left = TRUE;
     u8 base_x = 13;
     u8 base_x_offset = 54;
-    u8 base_y = 52;
+    u8 base_y = 51;
     u8 base_y_offset = 9;
     u8 base_i = 0;
     u8 times = 0;
@@ -8095,6 +8124,9 @@ static void Task_LoadFormsScreen(u8 taskId)
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         CopyWindowToVram(WIN_INFO, 3);
+        FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0)); 
+        PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, 3);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -8114,6 +8146,7 @@ static void Task_LoadFormsScreen(u8 taskId)
             gTasks[taskId].data[4] = CreateMonIcon(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4, 0); //Create pokemon sprite
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
         }
+        EvoFormsPage_PrintAToggleUpdownEvos(); //HGSS_Ui Navigation buttons
         gMain.state++;
         break;
     case 4:
