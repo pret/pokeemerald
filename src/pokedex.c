@@ -7329,9 +7329,9 @@ static void EvoFormsPage_PrintAToggleUpdownEvos(void)
         if (sPokedexView->selectedScreen == EVO_SCREEN)
         {
             if (!HGSS_DECAPPED)
-                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_EVO_Buttons_PE);
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, gText_EVO_Buttons_PE);
             else
-                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_EVO_Buttons_Decapped_PE);
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, gText_EVO_Buttons_Decapped_PE);
         }
         else if (sPokedexView->selectedScreen == FORMS_SCREEN)
         {
@@ -8231,6 +8231,10 @@ static void PrintForms(u8 taskId, u16 species)
     u8 base_y_offset = 9;
     u8 base_i = 0;
     u8 times = 0;
+    u8 y_offset_icons = 0; //For unown only
+
+    if (species == SPECIES_UNOWN)
+        y_offset_icons = 8;
 
     StringCopy(gStringVar1, gSpeciesNames[species]);
 
@@ -8248,11 +8252,11 @@ static void PrintForms(u8 taskId, u16 species)
             if (times < 7)
                 gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 52 + 34*(times-1), 31, 4, 0); //Create pokemon sprite
             else if (times < 14)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-7), 70, 4, 0); //Create pokemon sprite
+                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-7), 70 - y_offset_icons, 4, 0); //Create pokemon sprite
             else if (times < 21)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-14), 104, 4, 0); //Create pokemon sprite
+                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-14), 104 - y_offset_icons, 4, 0); //Create pokemon sprite
             else
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-21), 138, 4, 0); //Create pokemon sprite
+                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-21), 138 - y_offset_icons, 4, 0); //Create pokemon sprite
             gSprites[gTasks[taskId].data[4+times]].oam.priority = 0;
         }
     }
