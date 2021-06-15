@@ -1,13 +1,25 @@
 # Pokémon Emerald
 
-This is a decompilation of Pokémon Emerald.
+This is a fork of the [matching decompilation](https://github.com/pret/pokeemerald) at [PRET](https://github.com/pret).
 
-It builds the following ROM:
+The general philosophy of this fork is to maintain vanilla behavior & compatibility where possible, especially in terms of data structures. For that reason, this fork does not increase the size of the save data structure or the object event structure, nor does it add a `nature` field to the Pokémon structure.
 
-* [**pokeemerald.gba**](https://datomatic.no-intro.org/index.php?page=show_record&s=23&n=1961) `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
+There are several branches, each with additional features compared to vanilla:
+
+**romhack** branch:
+* [HGSS-style pokémon followers](https://bulbapedia.bulbagarden.net/wiki/Walking_Pok%C3%A9mon#Pok.C3.A9mon_HeartGold_and_SoulSilver) for all 386 pokémon, including emotes, the 28 Unown forms and a majority of follower messages.
+* Dynamic overworld palettes & reflections compatible with vanilla berry trees.
+* HGSS-style alpha-blended shadows for object events.
+* A way to change a pokemon's nature while mangling its PID as little as possible.
+* Function to detect newer emulators/new GBA hardware.
+
+**lighting** branch:
+* Everything from the **romhack** branch.
+* Day/night shading compatible with weather.
+* GSC-style window lights.
+* WIP interframe-blended lamp lights at night, i.e in Rustboro.
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
-
 
 ## See also
 
@@ -28,4 +40,4 @@ Other disassembly and/or decompilation projects:
 
 ## Contacts
 
-You can find us on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://kiwiirc.com/client/irc.freenode.net/?#pret).
+You can find PRET on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://kiwiirc.com/client/irc.freenode.net/?#pret).
