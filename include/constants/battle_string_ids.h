@@ -572,8 +572,9 @@
 #define STRINGID_PKMNGOTOVERITSINFATUATION       568
 #define STRINGID_PKMNINSNAPTRAP                  569
 #define STRINGID_METEORBEAMCHARGING              570
+#define STRINGID_ITEMMELTED                      571
 
-#define BATTLESTRINGS_COUNT                      571
+#define BATTLESTRINGS_COUNT                      572
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

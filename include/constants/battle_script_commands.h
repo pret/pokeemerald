@@ -173,6 +173,7 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
+#define VARIOUS_TRY_SET_CORROSIVE_GAS           105
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

@@ -373,6 +373,25 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectScaleShot
 	.4byte BattleScript_EffectMeteorBeam
 	.4byte BattleScript_EffectRisingVoltage
+	.4byte BattleScript_EffectCorrosiveGas
+
+BattleScript_EffectCorrosiveGas::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
+	attackstring 
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_PrintMoveMissed
+	trysetcorrosivegas BS_TARGET, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_ITEMMELTED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_MeltedItem::
+	printstring STRINGID_ITEMMELTED
+	waitmessage 0x40
+	return
 
 BattleScript_EffectMeteorBeam::
 	@ DecideTurn

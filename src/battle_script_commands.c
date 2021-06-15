@@ -3021,7 +3021,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                            | BATTLE_TYPE_LINK
                            | BATTLE_TYPE_RECORDED_LINK
                            | BATTLE_TYPE_SECRET_BASE))
-                        && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
+                         && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
+                         || gWishFutureKnock.meltedItemMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
                     {
                         gBattlescriptCurrInstr++;
                     }
@@ -5264,6 +5265,11 @@ static void Cmd_switchindataupdate(void)
     // check knocked off item
     i = GetBattlerSide(gActiveBattler);
     if (gWishFutureKnock.knockedOffMons[i] & gBitTable[gBattlerPartyIndexes[gActiveBattler]])
+    {
+        gBattleMons[gActiveBattler].item = 0;
+    }
+    // check melted items
+    if (gWishFutureKnock.meltedItemMons[i] & gBitTable[gBattlerPartyIndexes[gActiveBattler]])
     {
         gBattleMons[gActiveBattler].item = 0;
     }
@@ -8422,6 +8428,35 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
         }
         return;
+    case VARIOUS_TRY_SET_CORROSIVE_GAS:
+        if (gBattleMons[gActiveBattler].item != 0
+            && CanBattlerGetOrLoseItem(gActiveBattler, gBattleMons[gActiveBattler].item)
+            && !NoAliveMonsForEitherParty())
+        {
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_STICKY_HOLD && IsBattlerAlive(gActiveBattler))
+            {
+                gBattlerAbility = gActiveBattler;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
+            }
+            else
+            {   //Item is melted normally
+                u32 side = GetBattlerSide(gActiveBattler);
+
+                gLastUsedItem = gBattleMons[gActiveBattler].item;
+                gBattleMons[gActiveBattler].item = 0;
+                gBattleStruct->choicedMove[gActiveBattler] = 0;
+                gWishFutureKnock.meltedItemMons[side] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
+
+                CheckSetUnburden(gActiveBattler);
+                gBattlescriptCurrInstr += 7;
+            }
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -11206,14 +11241,16 @@ static void Cmd_tryswapitems(void) // trick
         u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
         u8 sideTarget = GetBattlerSide(gBattlerTarget);
 
-        // you can't swap items if they were knocked off in regular battles
+        // you can't swap items if they were knocked off or melted in regular battles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_EREADER_TRAINER
                              | BATTLE_TYPE_FRONTIER
                              | BATTLE_TYPE_SECRET_BASE
                              | BATTLE_TYPE_RECORDED_LINK))
             && (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
-                || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))
+                || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]
+                || gWishFutureKnock.meltedItemMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
+                || gWishFutureKnock.meltedItemMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         }
