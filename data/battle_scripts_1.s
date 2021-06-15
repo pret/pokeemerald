@@ -372,6 +372,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectExpandingForce
 	.4byte BattleScript_EffectScaleShot
 	.4byte BattleScript_EffectMeteorBeam
+	.4byte BattleScript_EffectRisingVoltage
 
 BattleScript_EffectMeteorBeam::
 	@ DecideTurn
@@ -2145,6 +2146,7 @@ BattleScript_EffectRevelationDance:
 BattleScript_EffectBelch:
 BattleScript_EffectBodyPress:
 BattleScript_EffectExpandingForce:
+BattleScript_EffectRisingVoltage:
 
 BattleScript_HitFromAtkCanceler::
 	attackcanceler

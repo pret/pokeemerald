@@ -11318,7 +11318,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RISING_VOLTAGE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_RISING_VOLTAGE,
         .power = 70,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,

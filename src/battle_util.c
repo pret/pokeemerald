@@ -7214,6 +7214,11 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
             basePower = 120;
         break;
+    case EFFECT_RISING_VOLTAGE:
+        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && !IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING)
+            && gBattleMons[battlerDef].item != ITEM_AIR_BALLOON && gBattleMons[battlerDef].ability != ABILITY_LEVITATE)
+        basePower *= 2;
+        break;
     }
 
     if (basePower == 0)
