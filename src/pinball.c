@@ -46,7 +46,8 @@
 #define TAG_SEEL_SPARKLE               508
 #define TAG_SEEL_MULTIPLIER            509
 #define TAG_GASTLY                     510
-#define TAG_TIMER_DIGIT                511
+#define TAG_HAUNTER                    511
+#define TAG_TIMER_DIGIT                512
 
 enum
 {
@@ -216,10 +217,10 @@ enum
 
 enum
 {
-    GASTLY_STATE_VISIBLE,
-    GASTLY_STATE_HIT,
-    GASTLY_STATE_INVISIBLE,
-    GASTLY_STATE_FINISHED,
+    GHOST_STATE_VISIBLE,
+    GHOST_STATE_HIT,
+    GHOST_STATE_INVISIBLE,
+    GHOST_STATE_FINISHED,
 };
 
 struct GraveyardGhost
@@ -251,6 +252,7 @@ struct Gengar
 {
     bool32 completed;
     u8 graveyardState;
+    u16 counter;
     struct GraveyardGhost gastlyGhosts[NUM_GASTLY];
     struct GraveyardGhost haunterGhosts[NUM_HAUNTER];
     u8 numGastlyHits;
@@ -395,9 +397,13 @@ static u32 GetSeelVisibleTicks(int curStreak);
 static void UpdateSeelSprite(struct Sprite *sprite);
 static void UpdateSeelSparkleSprite(struct Sprite *sprite);
 static void UpdateSeelMultiplierSprite(struct Sprite *sprite);
-static bool32 CheckGastlyCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
+static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct GraveyardGhost *ghosts, int numGhosts, u8 *hits, const u8 *angles, int width, int height, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 UpdateGengar(struct Gengar *gengar);
+static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 *numGhostHits, u8 nextState, int numGhosts);
+static void InitGhost(struct GraveyardGhost *ghost, const u8 *initialData, const struct SpriteTemplate *spriteTemplate, int ghostIndex);
 static void UpdateGastlySprite(struct Sprite *sprite);
+static void UpdateHaunterSprite(struct Sprite *sprite);
+static void UpdateGhostSprite(struct Sprite *sprite, struct GraveyardGhost *ghost);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -504,6 +510,9 @@ static const u8 sGengarStageEntranceBgCollisionMap[] = INCBIN_U8("graphics/pinba
 static const u32 sGastlyAnimationGfx[] = INCBIN_U32("graphics/pinball/gastly_animation.4bpp.lz");
 static const u16 sGastlyAnimationPalette[] = INCBIN_U16("graphics/pinball/gastly_animation.gbapal");
 static const u8 sGastlyCollisionNormalAngles[] = INCBIN_U8("data/pinball/gastly_normal_angles.bin");
+static const u32 sHaunterAnimationGfx[] = INCBIN_U32("graphics/pinball/haunter_animation.4bpp.lz");
+static const u16 sHaunterAnimationPalette[] = INCBIN_U16("graphics/pinball/haunter_animation.gbapal");
+static const u8 sHaunterCollisionNormalAngles[] = INCBIN_U8("data/pinball/haunter_normal_angles.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -577,6 +586,12 @@ static const struct CompressedSpriteSheet sGastlyAnimationSpriteSheet = {
     .tag = TAG_GASTLY,
 };
 
+static const struct CompressedSpriteSheet sHaunterAnimationSpriteSheet = {
+    .data = sHaunterAnimationGfx,
+    .size = 0x3000,
+    .tag = TAG_HAUNTER,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
@@ -588,6 +603,7 @@ static const struct SpritePalette sSeelAnimationSpritePalette = { sSeelAnimation
 static const struct SpritePalette sSeelSparkleSpritePalette = { sSeelSparklePalette, TAG_SEEL_SPARKLE };
 static const struct SpritePalette sSeelMultipliersSpritePalette = { sSeelMultipliersPalette, TAG_SEEL_MULTIPLIER };
 static const struct SpritePalette sGastlyAnimationSpritePalette = { sGastlyAnimationPalette, TAG_GASTLY };
+static const struct SpritePalette sHaunterAnimationSpritePalette = { sHaunterAnimationPalette, TAG_HAUNTER };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -1426,12 +1442,76 @@ static const struct SpriteTemplate sGastlySpriteTemplate = {
     .callback = UpdateGastlySprite,
 };
 
+static const struct OamData sHaunterOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sHaunterAnimCmd_Visible[] = {
+    ANIMCMD_FRAME(0, 13),
+    ANIMCMD_FRAME(64, 13),
+    ANIMCMD_FRAME(128, 13),
+    ANIMCMD_FRAME(192, 13),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sHaunterAnimCmd_Hit[] = {
+    ANIMCMD_FRAME(256, 8),
+    ANIMCMD_FRAME(320, 4),
+    ANIMCMD_FRAME(256, 4),
+    ANIMCMD_FRAME(320, 4),
+    ANIMCMD_FRAME(256, 3),
+    ANIMCMD_FRAME(320, 3),
+    ANIMCMD_FRAME(256, 3),
+    ANIMCMD_FRAME(320, 3),
+    ANIMCMD_FRAME(256, 2),
+    ANIMCMD_FRAME(320, 2),
+    ANIMCMD_FRAME(256, 2),
+    ANIMCMD_FRAME(320, 2),
+    ANIMCMD_FRAME(256, 1),
+    ANIMCMD_FRAME(320, 1),
+    ANIMCMD_FRAME(256, 1),
+    ANIMCMD_FRAME(320, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sHaunterAnimCmds[] = {
+    sHaunterAnimCmd_Visible,
+    sHaunterAnimCmd_Hit,
+};
+
+static const struct SpriteTemplate sHaunterSpriteTemplate = {
+    .tileTag = TAG_HAUNTER,
+    .paletteTag = TAG_HAUNTER,
+    .oam = &sHaunterOamData,
+    .anims = sHaunterAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateHaunterSprite,
+};
+
 static const u8 sGengarGravestoneCollisionAttributes[] = {0x19, 0x1A, 0x1B, 0x1C, 0x27, 0x1D, 0x1E, 0x1F, 0x20};
 
 static const u8 sInitialGastlyData[NUM_GASTLY][5] = {
     {24, 24, GHOST_DIR_RIGHT, 24, 64},
     {96, 48, GHOST_DIR_RIGHT, 96, 136},
     {64, 72, GHOST_DIR_RIGHT, 64, 96},
+};
+
+static const u8 sInitialHaunterData[NUM_HAUNTER][5] = {
+    {94, 30, GHOST_DIR_RIGHT, 94, 134},
+    {30, 66, GHOST_DIR_RIGHT, 30, 70},
 };
 
 static const s8 sCollisionTestPointOffsets[][2] = {
@@ -1688,6 +1768,8 @@ static void LoadSpriteGfx(u8 gameType)
     case GAME_TYPE_GENGAR:
         LoadCompressedSpriteSheet(&sGastlyAnimationSpriteSheet);
         LoadSpritePalette(&sGastlyAnimationSpritePalette);
+        LoadCompressedSpriteSheet(&sHaunterAnimationSpriteSheet);
+        LoadSpritePalette(&sHaunterAnimationSpritePalette);
         break;
     }
 }
@@ -1873,22 +1955,7 @@ static void InitGengar(void)
     gengar->numGengarHits = 0;
     gengar->graveyardState = GRAVEYARD_STATE_GASTLY;
     for (i = 0; i < NUM_GASTLY; i++)
-    {
-        struct GraveyardGhost *gastly = &gengar->gastlyGhosts[i];
-        gastly->state = GASTLY_STATE_VISIBLE;
-        gastly->xPos = sInitialGastlyData[i][0] << 8;
-        gastly->yPos = sInitialGastlyData[i][1] << 8;
-        gastly->direction = sInitialGastlyData[i][2];
-        gastly->leftBoundary = sInitialGastlyData[i][3];
-        gastly->rightBoundary = sInitialGastlyData[i][4];
-        gastly->spriteId = CreateSprite(&sGastlySpriteTemplate, gastly->xPos >> 8, gastly->yPos >> 8, 5);
-        gSprites[gastly->spriteId].data[0] = gastly->state;
-        gSprites[gastly->spriteId].data[1] = i;
-        if (gastly->direction == GHOST_DIR_RIGHT)
-            StartSpriteAnim(&gSprites[gastly->spriteId], 0);
-        else
-            StartSpriteAnim(&gSprites[gastly->spriteId], 1);
-    }
+        InitGhost(&gengar->gastlyGhosts[i], sInitialGastlyData[i], &sGastlySpriteTemplate, i);
 }
 
 static void PinballVBlankCallback(void)
@@ -3011,9 +3078,30 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
         switch (sPinballGame->gengar.graveyardState)
         {
         case GRAVEYARD_STATE_GASTLY:
-            isColliding = CheckGastlyCollision(ball, &sPinballGame->gengar, ticks, outCollisionNormal, outCollisionAmplification);
+            isColliding = CheckGhostsCollision(
+                ball,
+                ticks,
+                sPinballGame->gengar.gastlyGhosts,
+                NUM_GASTLY,
+                &sPinballGame->gengar.numGastlyHits,
+                sGastlyCollisionNormalAngles,
+                32,
+                32,
+                outCollisionNormal,
+                outCollisionAmplification);
             break;
         case GRAVEYARD_STATE_HAUNTER:
+            isColliding = CheckGhostsCollision(
+                ball,
+                ticks,
+                sPinballGame->gengar.haunterGhosts,
+                NUM_HAUNTER,
+                &sPinballGame->gengar.numHaunterHits,
+                sHaunterCollisionNormalAngles,
+                32,
+                40,
+                outCollisionNormal,
+                outCollisionAmplification);
             break;
         case GRAVEYARD_STATE_GENGAR:
             break;
@@ -3860,7 +3948,7 @@ static void UpdateSeelMultiplierSprite(struct Sprite *sprite)
     }
 }
 
-static bool32 CheckGastlyCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
+static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct GraveyardGhost *ghosts, int numGhosts, u8 *hits, const u8 *angles, int width, int height, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     int i;
     int x, y;
@@ -3871,36 +3959,37 @@ static bool32 CheckGastlyCollision(struct Ball *ball, struct Gengar *gengar, u32
     if (ticks <= 0)
         return FALSE;
 
-    for (i = 0; i < NUM_GASTLY; i++)
+    for (i = 0; i < numGhosts; i++)
     {
-        struct GraveyardGhost *gastly = &gengar->gastlyGhosts[i];
-        int gastlyXPos = (gastly->xPos >> 8);
-        int gastlyYPos = (gastly->yPos >> 8);
+        struct GraveyardGhost *ghost = &ghosts[i];
+        int ghostXPos = (ghost->xPos >> 8);
+        int ghostYPos = (ghost->yPos >> 8);
 
-        if (gastly->state != GASTLY_STATE_VISIBLE)
+        if (ghost->state != GHOST_STATE_VISIBLE)
             continue;
 
-        if (ballXPos < gastlyXPos - 16 || ballXPos >= gastlyXPos + 16
-         || ballYPos < gastlyYPos - 16 || ballYPos >= gastlyYPos + 16)
+        if (ballXPos < ghostXPos - (width / 2) || ballXPos >= ghostXPos + (width / 2)
+         || ballYPos < ghostYPos - (height / 2) || ballYPos >= ghostYPos + (height / 2))
             continue;
 
-        x = ballXPos - gastlyXPos + 16;
-        y = ballYPos - gastlyYPos + 16;
-        collisionNormal = sGastlyCollisionNormalAngles[y * 32 + x];
+        x = ballXPos - ghostXPos + (width / 2);
+        y = ballYPos - ghostYPos + (height / 2);
+        collisionNormal = angles[y * width + x];
         if (collisionNormal == 0xFF)
             continue;
         
         // Multiply normal by two because the original data is stored halved.
         *outCollisionNormal = collisionNormal * 2;
-        gastly->state = GASTLY_STATE_HIT;
-        gengar->numGastlyHits++;
+        ghost->state = GHOST_STATE_HIT;
+        (*hits)++;
         return TRUE;
     }
 
     return FALSE;
 }
 
-#define GASTLY_SPEED 0x35
+#define GHOST_SPEED 0x35
+#define REQUIRED_GHOST_HITS 10
 
 static bool32 UpdateGengar(struct Gengar *gengar)
 {
@@ -3910,56 +3999,25 @@ static bool32 UpdateGengar(struct Gengar *gengar)
     {
     case GRAVEYARD_STATE_GASTLY:
         for (i = 0; i < NUM_GASTLY; i++)
+            UpdateGhost(gengar, &gengar->gastlyGhosts[i], &gengar->numGastlyHits, GRAVEYARD_STATE_TO_HAUNTER, NUM_GASTLY);
+        break;
+    case GRAVEYARD_STATE_TO_HAUNTER:
+        if (--gengar->counter == 0)
         {
-            struct GraveyardGhost *gastly = &gengar->gastlyGhosts[i];
-            struct Sprite *sprite = &gSprites[gastly->spriteId];
-            switch (gastly->state)
-            {
-            case GASTLY_STATE_VISIBLE:
-                if (gastly->direction == GHOST_DIR_RIGHT)
-                {
-                    gastly->xPos += GASTLY_SPEED;
-                    if ((gastly->xPos >> 8) >= gastly->rightBoundary)
-                    {
-                        gastly->xPos = gastly->rightBoundary << 8;
-                        gastly->direction = GHOST_DIR_LEFT;
-                    }
-                }
-                else
-                {
-                    gastly->xPos -= GASTLY_SPEED;
-                    if ((gastly->xPos >> 8) < gastly->leftBoundary)
-                    {
-                        gastly->xPos = gastly->leftBoundary << 8;
-                        gastly->direction = GHOST_DIR_RIGHT;
-                    }
-                }
-
-                if (++gastly->counter >= 52)
-                    gastly->counter = 0;
-                break;
-            case GASTLY_STATE_HIT:
-                if (sprite->animEnded)
-                {
-                    if (gengar->numGastlyHits >= 8)
-                    {
-                        gastly->state = GASTLY_STATE_FINISHED;
-                    }
-                    else
-                    {
-                        gastly->state = GASTLY_STATE_INVISIBLE;
-                        gastly->counter = 0;
-                    }
-                }
-                break;
-            case GASTLY_STATE_INVISIBLE:
-                if (++gastly->counter >= 130)
-                {
-                    gastly->state = GASTLY_STATE_VISIBLE;
-                    gastly->counter = 0;
-                }
-                break;
-            }
+            gengar->graveyardState = GRAVEYARD_STATE_HAUNTER;
+            for (i = 0; i < NUM_HAUNTER; i++)
+                InitGhost(&gengar->haunterGhosts[i], sInitialHaunterData[i], &sHaunterSpriteTemplate, i);
+        }
+        break;
+    case GRAVEYARD_STATE_HAUNTER:
+        for (i = 0; i < NUM_HAUNTER; i++)
+            UpdateGhost(gengar, &gengar->haunterGhosts[i], &gengar->numHaunterHits, GRAVEYARD_STATE_TO_GENGAR, NUM_HAUNTER);
+        break;
+     case GRAVEYARD_STATE_TO_GENGAR:
+        if (--gengar->counter == 0)
+        {
+            gengar->graveyardState = GRAVEYARD_STATE_GENGAR;
+            // TODO: Init Gengar
         }
         break;
     }
@@ -3967,16 +4025,105 @@ static bool32 UpdateGengar(struct Gengar *gengar)
     return gengar->completed;
 }
 
+static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 *numGhostHits, u8 nextState, int numGhosts)
+{
+    struct Sprite *sprite = &gSprites[ghost->spriteId];
+    switch (ghost->state)
+    {
+    case GHOST_STATE_VISIBLE:
+        if (ghost->direction == GHOST_DIR_RIGHT)
+        {
+            ghost->xPos += GHOST_SPEED;
+            if ((ghost->xPos >> 8) >= ghost->rightBoundary)
+            {
+                ghost->xPos = ghost->rightBoundary << 8;
+                ghost->direction = GHOST_DIR_LEFT;
+            }
+        }
+        else
+        {
+            ghost->xPos -= GHOST_SPEED;
+            if ((ghost->xPos >> 8) < ghost->leftBoundary)
+            {
+                ghost->xPos = ghost->leftBoundary << 8;
+                ghost->direction = GHOST_DIR_RIGHT;
+            }
+        }
+
+        if (++ghost->counter >= 52)
+            ghost->counter = 0;
+        break;
+    case GHOST_STATE_HIT:
+        if (sprite->animEnded)
+        {
+            if (*numGhostHits >= REQUIRED_GHOST_HITS - (numGhosts - 1))
+            {
+                ghost->state = GHOST_STATE_FINISHED;
+                if (*numGhostHits >= REQUIRED_GHOST_HITS)
+                {
+                    gengar->graveyardState = nextState;
+                    gengar->counter = 2 * 60;
+                }
+            }
+            else
+            {
+                ghost->state = GHOST_STATE_INVISIBLE;
+                ghost->counter = 0;
+            }
+        }
+        break;
+    case GHOST_STATE_INVISIBLE:
+        if (++ghost->counter >= 130)
+        {
+            ghost->state = GHOST_STATE_VISIBLE;
+            ghost->counter = 0;
+        }
+        break;
+    }
+}
+
+static void InitGhost(struct GraveyardGhost *ghost, const u8 *initialData, const struct SpriteTemplate *spriteTemplate, int ghostIndex)
+{
+    ghost->state = GHOST_STATE_VISIBLE;
+    ghost->xPos = initialData[0] << 8;
+    ghost->yPos = initialData[1] << 8;
+    ghost->direction = initialData[2];
+    ghost->leftBoundary = initialData[3];
+    ghost->rightBoundary = initialData[4];
+    ghost->spriteId = CreateSprite(spriteTemplate, ghost->xPos >> 8, ghost->yPos >> 8, 5);
+    gSprites[ghost->spriteId].data[0] = ghost->state;
+    gSprites[ghost->spriteId].data[1] = ghostIndex;
+    if (ghost->direction == GHOST_DIR_RIGHT)
+        StartSpriteAnim(&gSprites[ghost->spriteId], 0);
+    else
+        StartSpriteAnim(&gSprites[ghost->spriteId], 1);
+}
+
 static void UpdateGastlySprite(struct Sprite *sprite)
 {
     // data[0] = previous state
     // data[1] = gastly index
     struct GraveyardGhost *gastly = &sPinballGame->gengar.gastlyGhosts[sprite->data[1]];
+    UpdateGhostSprite(sprite, gastly);
+}
+
+static void UpdateHaunterSprite(struct Sprite *sprite)
+{
+    // data[0] = previous state
+    // data[1] = haunter index
+    struct GraveyardGhost *haunter = &sPinballGame->gengar.haunterGhosts[sprite->data[1]];
+    UpdateGhostSprite(sprite, haunter);
+}
+
+static void UpdateGhostSprite(struct Sprite *sprite, struct GraveyardGhost *ghost)
+{
+    // data[0] = previous state
+    // data[1] = ghost index
     int prevState = sprite->data[0];
-    int curState = gastly->state;
-    sprite->pos1.x = gastly->xPos >> 8;
-    sprite->pos1.y = gastly->yPos >> 8;
-    switch ((gastly->counter % 52) / 13)
+    int curState = ghost->state;
+    sprite->pos1.x = ghost->xPos >> 8;
+    sprite->pos1.y = ghost->yPos >> 8;
+    switch ((ghost->counter % 52) / 13)
     {
     case 0:
     case 2:
@@ -3990,26 +4137,27 @@ static void UpdateGastlySprite(struct Sprite *sprite)
         break;
     }
 
-    // Check if this Gastly's state changed, and start the appropriate
+    // Check if this Haunter's state changed, and start the appropriate
     // sprite animation.
     if (prevState != curState)
     {
         sprite->data[0] = curState;
         switch (curState)
         {
-        case GASTLY_STATE_VISIBLE:
+        case GHOST_STATE_VISIBLE:
             sprite->invisible = FALSE;
             StartSpriteAnim(sprite, 0);
             break;
-        case GASTLY_STATE_HIT:
+        case GHOST_STATE_HIT:
             sprite->invisible = FALSE;
             StartSpriteAnim(sprite, 1);
             break;
-        case GASTLY_STATE_INVISIBLE:
+        case GHOST_STATE_INVISIBLE:
             sprite->invisible = TRUE;
             break;
-        case GASTLY_STATE_FINISHED:
+        case GHOST_STATE_FINISHED:
             DestroySprite(sprite);
+            ghost->spriteId = 0xFF;
             break;
         }
     }
