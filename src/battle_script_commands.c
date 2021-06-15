@@ -4807,6 +4807,12 @@ static void Cmd_moveend(void)
                     gBattlescriptCurrInstr = BattleScript_BanefulBunkerEffect;
                     effect = 1;
                 }
+                else if (gProtectStructs[gBattlerTarget].beakBlastCharge)
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_BeakBlastBurn;
+                    effect = 1;
+                }
             }
             gBattleScripting.moveendState++;
             break;
@@ -7867,6 +7873,7 @@ static void Cmd_various(void)
             case MOVE_MIRROR_COAT:
             case MOVE_METAL_BURST:
             case MOVE_ME_FIRST:
+            case MOVE_BEAK_BLAST:
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
                 break;
             default:
@@ -8457,6 +8464,9 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         }
         return;
+    case VARIOUS_SET_BEAK_BLAST:    
+        gProtectStructs[gActiveBattler].beakBlastCharge = 1;
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

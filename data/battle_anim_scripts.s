@@ -822,6 +822,7 @@ gBattleAnims_General::
 	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
 	.4byte General_TotemFlare               @ B_ANIM_TOTEM_FLARE
+	.4byte General_BeakBlastSetUp			@ B_ANIM_BEAK_BLAST_SETUP
 
 	.align 2
 gBattleAnims_Special::
@@ -11673,7 +11674,7 @@ Move_INSTRUCT::
 	blendoff
 	end
 
-Move_BEAK_BLAST::
+General_BeakBlastSetUp:
 	loadspritegfx ANIM_TAG_SMALL_EMBER @Fire
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	delay 0x3
@@ -11681,7 +11682,7 @@ Move_BEAK_BLAST::
 	launchtemplate gFireSpiralOutwardSpriteTemplate 0x3 0x4 0x0 0x0 0x38 0x0
 	waitforvisualfinish
 	end
-BeakBlastUnleash:
+Move_BEAK_BLAST::
 	loadspritegfx ANIM_TAG_IMPACT
 	launchtask AnimTask_BlendBattleAnimPal 0xA 0x5 ANIM_PAL_ATK 0x2 0x0 0x9 0x1F
 	waitforvisualfinish

@@ -374,7 +374,37 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectMeteorBeam
 	.4byte BattleScript_EffectRisingVoltage
 	.4byte BattleScript_EffectCorrosiveGas
+	.4byte BattleScript_EffectBeakBlast
 
+BattleScript_EffectBeakBlast::
+	attackcanceler
+	jumpifnodamage BattleScript_HitFromAccCheck
+	ppreduce
+	printstring STRINGID_PKMNLOSTFOCUS
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_BeakBlastSetUp::
+	setbeakblast BS_ATTACKER
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 0x1
+	playanimation BS_ATTACKER, B_ANIM_BEAK_BLAST_SETUP, NULL	
+	printstring STRINGID_HEATUPBEAK
+	waitmessage 0x40
+	end2
+
+BattleScript_BeakBlastBurn::
+	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
+	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_LeafGuardProtects
+	jumpifflowerveil BattleScript_FlowerVeilProtects
+	jumpifleafguard BattleScript_LeafGuardProtects
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_BeakBlastBurnReturn
+	setmoveeffect MOVE_EFFECT_BURN | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+BattleScript_BeakBlastBurnReturn:
+	return
 BattleScript_EffectCorrosiveGas::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON

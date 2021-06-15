@@ -10127,7 +10127,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEAK_BLAST] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_BEAK_BLAST,
         .power = 100,
         .type = TYPE_FLYING,
         .accuracy = 100,
