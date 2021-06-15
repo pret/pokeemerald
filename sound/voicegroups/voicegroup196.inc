@@ -34,7 +34,7 @@ voicegroup196::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 66, 64, DirectSoundWaveData_bw_159rim, 255, 0, 227, 205
 	voice_directsound 60, 64, DirectSoundWaveData_bw_107kick, 255, 0, 227, 205
 	voice_directsound 60, 64, DirectSoundWaveData_bw_108kick, 255, 0, 227, 205
 	voice_directsound 61, 64, DirectSoundWaveData_bw_108kick, 255, 0, 227, 205

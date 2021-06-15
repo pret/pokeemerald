@@ -1392,6 +1392,12 @@ BW_SEQ_BGM_EYE_01            = A3 03
 BW_SEQ_BGM_VS_TRAINER        = A4 03
 BW_SEQ_BGM_WIN2              = A5 03
 BW_SEQ_BGM_EYE_02            = A6 03
+BW_SEQ_ME_ITEM               = A7 03
+BW_SEQ_BGM_C_01              = A8 03
+BW_SEQ_ME_HYOUKA2            = A9 03
+BW_SEQ_BGM_D_01              = AA 03
+BW_SEQ_BGM_D_01_B1F          = AB 03
+BW_SEQ_BGM_D_01_B2F          = AC 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

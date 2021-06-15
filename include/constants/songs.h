@@ -905,6 +905,12 @@
 #define BW_SEQ_BGM_VS_TRAINER        932 // Battle! (Trainer Battle)
 #define BW_SEQ_BGM_WIN2              933 // Victory! (Trainer Battle)
 #define BW_SEQ_BGM_EYE_02            934 // Trainers' Eyes Meet (Lass)
+#define BW_SEQ_ME_ITEM               935 // Obtained an Item!
+#define BW_SEQ_BGM_C_01              936 // Striaton City
+#define BW_SEQ_ME_HYOUKA2            937 // Pokédex Evaluation... You're on Your Way!
+#define BW_SEQ_BGM_D_01              938 // The Dreamyard
+#define BW_SEQ_BGM_D_01_B1F          939 // The Dreamyard (B1F)
+#define BW_SEQ_BGM_D_01_B2F          940 // The Dreamyard (B2F) (Unused)
 
 // Black 2 & White 2 Music
 
