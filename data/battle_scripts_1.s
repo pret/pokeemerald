@@ -369,6 +369,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSleepHit
 	.4byte BattleScript_EffectAttackerDefenseDownHit
 	.4byte BattleScript_EffectBodyPress
+	.4byte BattleScript_EffectExpandingForce
 
 BattleScript_EffectAttackerDefenseDownHit:
 	setmoveeffect MOVE_EFFECT_DEF_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
@@ -2059,6 +2060,7 @@ BattleScript_EffectFusionCombo:
 BattleScript_EffectRevelationDance:
 BattleScript_EffectBelch:
 BattleScript_EffectBodyPress:
+BattleScript_EffectExpandingForce:
 
 BattleScript_HitFromAtkCanceler::
 	attackcanceler

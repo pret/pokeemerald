@@ -7210,6 +7210,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gBattleMoves[gLastUsedMove].effect == EFFECT_FUSION_COMBO && move != gLastUsedMove)
             basePower *= 2;
         break;
+    case EFFECT_EXPANDING_FORCE:
+        if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+            basePower = 120;
+        break;
     }
 
     if (basePower == 0)
