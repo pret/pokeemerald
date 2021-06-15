@@ -175,6 +175,7 @@
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
 #define VARIOUS_TRY_SET_CORROSIVE_GAS           105
 #define VARIOUS_SET_BEAK_BLAST                  106
+#define VARIOUS_SWAP_SIDE_STATUSES              107
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

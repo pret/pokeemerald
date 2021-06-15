@@ -574,8 +574,9 @@
 #define STRINGID_METEORBEAMCHARGING              570
 #define STRINGID_ITEMMELTED                      571
 #define STRINGID_HEATUPBEAK                      572
+#define STRINGID_COURTCHANGE                     573
 
-#define BATTLESTRINGS_COUNT                      573
+#define BATTLESTRINGS_COUNT                      574
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

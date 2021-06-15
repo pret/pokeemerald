@@ -376,6 +376,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectCorrosiveGas
 	.4byte BattleScript_EffectBeakBlast
 	.4byte BattleScript_EffectTerrainPulse
+	.4byte BattleScript_EffectCourtChange
+
+BattleScript_EffectCourtChange::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	swapsidestatuses
+	attackanimation
+	waitanimation
+	printstring STRINGID_COURTCHANGE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectBeakBlast::
 	attackcanceler
