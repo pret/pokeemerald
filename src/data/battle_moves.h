@@ -10197,13 +10197,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHELL_TRAP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_SHELL_TRAP,
         .power = 150,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 5,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .target = MOVE_TARGET_OPPONENTS_FIELD,
         .priority = -3,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .split = SPLIT_SPECIAL,

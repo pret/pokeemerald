@@ -145,6 +145,7 @@ struct ProtectStruct
     u32 micle:1;
     u32 custap:1;    // also quick claw
     u32 beakBlastCharge:1;
+    u32 shellTrap:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;

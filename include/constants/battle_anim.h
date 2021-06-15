@@ -524,6 +524,7 @@
 #define B_ANIM_RESTORE_BG               27 // for Terrain Endings
 #define B_ANIM_TOTEM_FLARE              28 // Totem boosts aura flare
 #define B_ANIM_BEAK_BLAST_SETUP         29
+#define B_ANIM_SHELL_TRAP_SETUP         30
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

@@ -823,6 +823,7 @@ gBattleAnims_General::
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
 	.4byte General_TotemFlare               @ B_ANIM_TOTEM_FLARE
 	.4byte General_BeakBlastSetUp			@ B_ANIM_BEAK_BLAST_SETUP
+	.4byte General_ShellTrapSetUp			@ B_ANIM_SHELL_TRAP_SETUP
 
 	.align 2
 gBattleAnims_Special::
@@ -11831,8 +11832,7 @@ Move_AURORA_VEIL::
 	blendoff
 	end
 
-Move_SHELL_TRAP::
-ShellTrapChargeUp:
+General_ShellTrapSetUp:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -11849,6 +11849,7 @@ ShellTrapChargeUp:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
+Move_SHELL_TRAP::
 ShellTrapUnleash:
 	loadspritegfx ANIM_TAG_IMPACT @pound
 	loadspritegfx ANIM_TAG_SMALL_RED_EYE @red
