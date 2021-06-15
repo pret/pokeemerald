@@ -10968,7 +10968,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SNAP_TRAP] =
     {
-        .effect = EFFECT_TRAP,  //TODO: add case/effect
+        .effect = EFFECT_TRAP,
         .power = 35,
         .type = TYPE_GRASS,
         .accuracy = 100,

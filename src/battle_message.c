@@ -147,6 +147,7 @@ static const u8 sText_PkmnDugHole[] = _("{B_ATK_NAME_WITH_PREFIX} dug a hole!");
 static const u8 sText_PkmnHidUnderwater[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!");
 static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
 static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
+static const u8 sText_PkmnInSnapTrap[] = _("{B_DEF_NAME_WITH_PREFIX} got trapped\nby a snap trap!");
 static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
 static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
 static const u8 sText_PkmnWrappedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!");
@@ -699,6 +700,7 @@ static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_P
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_PKMNINSNAPTRAP - 12] = sText_PkmnInSnapTrap,
     [STRINGID_PKMNGOTOVERITSINFATUATION - 12] = sText_PkmnGotOverItsInfatuation,
     [STRINGID_PKMNSHOOKOFFTHETAUNT - 12] = sText_PkmnShookOffTheTaunt,
     [STRINGID_MICLEBERRYACTIVATES - 12] = sText_MicleBerryActivates,
@@ -1463,6 +1465,7 @@ const u16 gWrappedStringIds[] =
     STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_WHIRLPOOL
     STRINGID_PKMNTRAPPEDBYSANDTOMB,// MOVE_SAND_TOMB
     STRINGID_INFESTATION,          // MOVE_INFESTATION
+    STRINGID_PKMNINSNAPTRAP,             // MOVE_SNAPTRAP
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1675,7 +1678,7 @@ const u16 gCaughtMonStringIds[] =
 
 const u16 gTrappingMoves[] =
 {
-    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_INFESTATION, 0xFFFF
+    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_INFESTATION, MOVE_SNAP_TRAP, 0xFFFF
 };
 
 const u16 gRoomsStringIds[] =
