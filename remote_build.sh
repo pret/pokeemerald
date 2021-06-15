@@ -11,5 +11,5 @@ set -x
 git push build --force
 # `nproc` must be escaped so that it executes on the remote machine
 ssh $remote_host "cd $remote_path && git reset --hard && git checkout $git_branch && \
-                  echo \"Using \`nproc\` job(s)\" && make -j\`nproc\`"
+                  echo \"Using \`nproc\` job(s)\" && make DDEBUG=1 -j\`nproc\`"
 scp "$remote_host:$remote_path/pokeemerald.gba" romhack.gba
