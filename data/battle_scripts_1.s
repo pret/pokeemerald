@@ -375,6 +375,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectRisingVoltage
 	.4byte BattleScript_EffectCorrosiveGas
 	.4byte BattleScript_EffectBeakBlast
+	.4byte BattleScript_EffectTerrainPulse
 
 BattleScript_EffectBeakBlast::
 	attackcanceler
@@ -2196,6 +2197,7 @@ BattleScript_EffectBelch:
 BattleScript_EffectBodyPress:
 BattleScript_EffectExpandingForce:
 BattleScript_EffectRisingVoltage:
+BattleScript_EffectTerrainPulse:
 
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
