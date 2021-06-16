@@ -17,9 +17,9 @@ voicegroup204::
 	voice_directsound 60, 0, DirectSoundWaveData_bw_226vibrc4, 255, 246, 0, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_227vibrc5, 255, 246, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_228vibrc6, 255, 246, 0, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sawleadc4_vsleader, 255, 242, 191, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sawleadc5_vsleader, 255, 242, 191, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sawleadc6_vsleader, 255, 234, 191, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -117,11 +117,11 @@ voicegroup204::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_disgt_e1_16, 255, 253, 0, 2
+	voice_directsound 60, 0, DirectSoundWaveData_dp_disgt_c2_16, 255, 253, 0, 2
+	voice_directsound 60, 0, DirectSoundWaveData_dp_disgt_e3_16, 255, 253, 0, 2
+	voice_directsound 60, 0, DirectSoundWaveData_dp_disgt_e4_16, 255, 253, 0, 2
+	voice_directsound 60, 0, DirectSoundWaveData_dp_disgt_b4_16, 255, 253, 0, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

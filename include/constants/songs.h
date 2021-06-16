@@ -868,8 +868,8 @@
 #define BW_SEQ_BGM_TITLE             895 // Coronation Day
 #define BW_SEQ_BGM_TITLE01           896 // A New Adventure!
 #define BW_SEQ_BGM_POKEMON_THEME     897 // Title Screen
-#define BW_SEQ_BGM_STARTING          898 // Onward to Adventure! (OST Version)
-#define BW_SEQ_BGM_STARTING2         899 // Onward to Adventure! (In-Game Version)
+#define BW_SEQ_BGM_STARTING          898 // Onward to Adventure! (Part 1)
+#define BW_SEQ_BGM_STARTING2         899 // Onward to Adventure! (Part 2)
 #define BW_SEQ_BGM_E_OPENING         900 // A Day of Beginnings
 #define BW_SEQ_BGM_T_01              901 // Nuvema Town
 #define BW_SEQ_BGM_VS_RIVAL          902 // Battle! (Cheren/Bianca)         (TODO: PORTAMENTO!!)
@@ -911,6 +911,8 @@
 #define BW_SEQ_BGM_D_01              938 // The Dreamyard
 #define BW_SEQ_BGM_D_01_B1F          939 // The Dreamyard (B1F)
 #define BW_SEQ_BGM_D_01_B2F          940 // The Dreamyard (B2F) (Unused)
+#define BW_SEQ_BGM_E_PLASMA          941 // Team Plasma Appears!            (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_VS_PLASMA         942 // Battle! (Team Plasma)           (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 

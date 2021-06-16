@@ -1398,6 +1398,8 @@ BW_SEQ_ME_HYOUKA2            = A9 03
 BW_SEQ_BGM_D_01              = AA 03
 BW_SEQ_BGM_D_01_B1F          = AB 03
 BW_SEQ_BGM_D_01_B2F          = AC 03
+BW_SEQ_BGM_E_PLASMA          = AD 03
+BW_SEQ_BGM_VS_PLASMA         = AE 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

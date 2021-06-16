@@ -84,7 +84,7 @@ voicegroup194:: @ BW/B2W2 main
 	voice_keysplit_all voicegroup196				 @ drum kit (tr-909)
 	voice_keysplit_all voicegroup197				 @ drum kit (small room)
 	voice_keysplit_all voicegroup198				 @ drum kit (taiko)
-	voice_directsound 60, 0, DirectSoundWaveData_bw2_solotrumpetc5loud, 255, 0, 255, 171
+	voice_directsound 60, 0, DirectSoundWaveData_b2_solotrumpetc5loud, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 1, 227, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_spiccatostringse2, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_b2_trumpetsstaccatogs4_loop, 255, 0, 255, 224
@@ -92,7 +92,7 @@ voicegroup194:: @ BW/B2W2 main
 	voice_keysplit voicegroup208, KeySplitTable131   @ pan flute (bw2 only)
 	voice_keysplit voicegroup208, KeySplitTable132   @ gamelan (bw2 only)
 	voice_keysplit voicegroup208, KeySplitTable133   @ overdriven guitar (bw2 only)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit_all voicegroup203				 @ ichinose battle kit
 	voice_directsound 60, 0, DirectSoundWaveData_b2_drumloop_vsiris, 255, 0, 255, 0
 	voice_keysplit voicegroup208, KeySplitTable134   @ square pad (bw2 only)
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sawtoothlead60, 255, 197, 255, 171

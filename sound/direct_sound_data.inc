@@ -4159,8 +4159,64 @@ DirectSoundWaveData_bw_sawleadc6_vsleader::
 	.incbin "sound/direct_sound_samples/bw_sawleadc6_vsleader.bin"
 
 	.align 2
-DirectSoundWaveData_bw2_solotrumpetc5loud::
-	.incbin "sound/direct_sound_samples/bw2_solotrumpetc5loud.bin"
+DirectSoundWaveData_bw_acidbassb1short::
+	.incbin "sound/direct_sound_samples/bw_acidbassb1short.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbass_plasma::
+	.incbin "sound/direct_sound_samples/bw_synthbass_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sd90distc4_plasma::
+	.incbin "sound/direct_sound_samples/bw_sd90distc4_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sd90distc5_plasma::
+	.incbin "sound/direct_sound_samples/bw_sd90distc5_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distguitarc3_plasma::
+	.incbin "sound/direct_sound_samples/bw_distguitarc3_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distguitarc4_plasma::
+	.incbin "sound/direct_sound_samples/bw_distguitarc4_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distguitarc5_plasma::
+	.incbin "sound/direct_sound_samples/bw_distguitarc5_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_stringhit_plasma::
+	.incbin "sound/direct_sound_samples/bw_stringhit_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distpowerc4_plasma::
+	.incbin "sound/direct_sound_samples/bw_distpowerc4_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_guitarbendc5_plasma::
+	.incbin "sound/direct_sound_samples/bw_guitarbendc5_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sfxwhip_plasma::
+	.incbin "sound/direct_sound_samples/bw_sfxwhip_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sfxlasergun_plasma::
+	.incbin "sound/direct_sound_samples/bw_sfxlasergun_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthclap_plasma::
+	.incbin "sound/direct_sound_samples/bw_synthclap_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthsnare_plasma::
+	.incbin "sound/direct_sound_samples/bw_synthsnare_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_b2_solotrumpetc5loud::
+	.incbin "sound/direct_sound_samples/b2_solotrumpetc5loud.bin"
 
 	.align 2
 DirectSoundWaveData_b2_trumpetsstaccatogs4_loop::
