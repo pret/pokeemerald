@@ -2716,7 +2716,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLAME_WHEEL] =
     {
-        .effect = EFFECT_THAW_HIT,
+        .effect = EFFECT_BURN_HIT,
         .power = 60,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -3508,7 +3508,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SACRED_FIRE] =
     {
-        .effect = EFFECT_THAW_HIT,
+        .effect = EFFECT_BURN_HIT,
         .power = 100,
         .type = TYPE_FIRE,
         .accuracy = 95,
