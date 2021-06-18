@@ -3124,20 +3124,12 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_FROZEN: // check being frozen
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
+            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE && !(gBattleMoves[gCurrentMove].flags & FLAG_THAW_USER))
             {
                 if (Random() % 5)
                 {
-                    if (!(gBattleMoves[gCurrentMove].flags & FLAG_THAW_USER)) // unfreezing via a move effect happens in case 13
-                    {
-                        gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
-                        gHitMarker |= HITMARKER_NO_ATTACKSTRING;
-                    }
-                    else
-                    {
-                        gBattleStruct->atkCancellerTracker++;
-                        break;
-                    }
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
+                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
                 }
                 else // unfreeze
                 {
