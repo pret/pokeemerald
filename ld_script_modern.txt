@@ -14,7 +14,6 @@ SECTIONS {
         . = 0x1C000;
 
         src/*.o(ewram_data);
-        gflib/*.o(ewram_data);
 
         . = 0x40000;
 }
@@ -26,7 +25,6 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
-        gflib/*.o(.bss);
         *libc.a:*.o(.bss*);
         *libnosys.a:*.o(.bss*);
 
@@ -35,7 +33,6 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
         src/*.o(COMMON);
-        gflib/*.o(COMMON);
         *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
         end = .;
@@ -49,7 +46,6 @@ SECTIONS {
     {
         src/crt0.o(.text*);
         src/*.o(.text*);
-        gflib/*.o(.text*);
         asm/*.o(.text*);
     } =0
 
@@ -84,7 +80,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.rodata*);
-        gflib/*.o(.rodata*);
         data/*.o(.rodata*);
     } =0
 
