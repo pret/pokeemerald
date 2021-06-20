@@ -6,6 +6,7 @@
 //Pyredrid:             https://github.com/Pyredrid/pokeemerald/tree/debugmenu
 //AsparagusEduardo:     https://github.com/AsparagusEduardo/pokeemerald/tree/InfusedEmerald_v2
 //Ghoulslash:           https://github.com/ghoulslash/pokeemerald
+//Jaizu:                https://hastebin.com/raw/rikegejore
 #include "global.h"
 #include "battle.h"
 #include "coins.h"
@@ -55,6 +56,7 @@
 // Enums
 enum { // Main
     DEBUG_MENU_ITEM_UTILITIES,
+    DEBUG_MENU_ITEM_SCRIPTS,
     DEBUG_MENU_ITEM_FLAGS,
     DEBUG_MENU_ITEM_VARS,
     DEBUG_MENU_ITEM_GIVE,
@@ -74,6 +76,16 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME,
     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER,
     DEBUG_UTIL_MENU_ITEM_TRAINER_ID,
+};
+enum {
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_2,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_3,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_4,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_5,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_6,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_7,
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_8,
 };
 enum { // Flags
     DEBUG_FLAG_MENU_ITEM_FLAGS,
@@ -156,12 +168,23 @@ static void Debug_DestroyMenu(u8);
 static void DebugAction_Cancel(u8);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 
+static void DebugAction_Util_Script_1(u8);
+static void DebugAction_Util_Script_2(u8);
+static void DebugAction_Util_Script_3(u8);
+static void DebugAction_Util_Script_4(u8);
+static void DebugAction_Util_Script_5(u8);
+static void DebugAction_Util_Script_6(u8);
+static void DebugAction_Util_Script_7(u8);
+static void DebugAction_Util_Script_8(u8);
+
 static void DebugAction_OpenUtilitiesMenu(u8);
+static void DebugAction_OpenScriptsMenu(u8);
 static void DebugAction_OpenFlagsMenu(u8);
 static void DebugAction_OpenVariablesMenu(u8);
 static void DebugAction_OpenGiveMenu(u8);
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utilities(u8);
+static void DebugTask_HandleMenuInput_Scripts(u8);
 static void DebugTask_HandleMenuInput_Flags(u8);
 static void DebugTask_HandleMenuInput_Vars(u8);
 static void DebugTask_HandleMenuInput_Give(u8);
@@ -226,6 +249,15 @@ static void DebugAction_AccessPC(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
+extern u8 Debug_Script_1[];
+extern u8 Debug_Script_2[];
+extern u8 Debug_Script_3[];
+extern u8 Debug_Script_4[];
+extern u8 Debug_Script_5[];
+extern u8 Debug_Script_6[];
+extern u8 Debug_Script_7[];
+extern u8 Debug_Script_8[];
+
 extern u8 Debug_ShowFieldMessageStringVar4[];
 extern u8 Debug_CheatStart[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
@@ -241,10 +273,20 @@ extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 // Text
 // Main Menu
 static const u8 gDebugText_Utilities[] =        _("Utilities");
+static const u8 gDebugText_Scripts[] =          _("Scripts");
 static const u8 gDebugText_Flags[] =            _("Flags");
 static const u8 gDebugText_Vars[] =             _("Variables");
 static const u8 gDebugText_Give[] =             _("Give X");
 static const u8 gDebugText_Cancel[] =           _("Cancel");
+// Script menu
+static const u8 gDebugText_Util_Script_1[] =               _("Script 1");
+static const u8 gDebugText_Util_Script_2[] =               _("Script 2");
+static const u8 gDebugText_Util_Script_3[] =               _("Script 3");
+static const u8 gDebugText_Util_Script_4[] =               _("Script 4");
+static const u8 gDebugText_Util_Script_5[] =               _("Script 5");
+static const u8 gDebugText_Util_Script_6[] =               _("Script 6");
+static const u8 gDebugText_Util_Script_7[] =               _("Script 7");
+static const u8 gDebugText_Util_Script_8[] =               _("Script 8");
 // Util Menu
 static const u8 gDebugText_Util_HealParty[] =               _("Heal Party");
 static const u8 gDebugText_Util_Fly[] =                     _("Fly to map");
@@ -353,6 +395,7 @@ static const s32 sPowersOfTen[] =
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
     [DEBUG_MENU_ITEM_UTILITIES]     = {gDebugText_Utilities,    DEBUG_MENU_ITEM_UTILITIES},
+    [DEBUG_MENU_ITEM_SCRIPTS]       = {gDebugText_Scripts,      DEBUG_MENU_ITEM_SCRIPTS},
     [DEBUG_MENU_ITEM_FLAGS]         = {gDebugText_Flags,        DEBUG_MENU_ITEM_FLAGS},
     [DEBUG_MENU_ITEM_VARS]          = {gDebugText_Vars,         DEBUG_MENU_ITEM_VARS},
     [DEBUG_MENU_ITEM_GIVE]          = {gDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
@@ -373,6 +416,17 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = {gDebugText_Util_Trainer_Name,     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = {gDebugText_Util_Trainer_Gender,   DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = {gDebugText_Util_Trainer_Id,       DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
+};
+static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
+{
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_1]     = {gDebugText_Util_Script_1,    DEBUG_UTIL_MENU_ITEM_SCRIPT_1},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_2]     = {gDebugText_Util_Script_2,    DEBUG_UTIL_MENU_ITEM_SCRIPT_2},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_3]     = {gDebugText_Util_Script_3,    DEBUG_UTIL_MENU_ITEM_SCRIPT_3},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_4]     = {gDebugText_Util_Script_4,    DEBUG_UTIL_MENU_ITEM_SCRIPT_4},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_5]     = {gDebugText_Util_Script_5,    DEBUG_UTIL_MENU_ITEM_SCRIPT_5},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_6]     = {gDebugText_Util_Script_6,    DEBUG_UTIL_MENU_ITEM_SCRIPT_6},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_7]     = {gDebugText_Util_Script_7,    DEBUG_UTIL_MENU_ITEM_SCRIPT_7},
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_8]     = {gDebugText_Util_Script_8,    DEBUG_UTIL_MENU_ITEM_SCRIPT_8},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
@@ -412,6 +466,7 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
 static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
     [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
+    [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
     [DEBUG_MENU_ITEM_FLAGS]         = DebugAction_OpenFlagsMenu,
     [DEBUG_MENU_ITEM_VARS]          = DebugAction_OpenVariablesMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
@@ -432,6 +487,17 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = DebugAction_Util_Trainer_Name,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = DebugAction_Util_Trainer_Gender,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = DebugAction_Util_Trainer_Id,
+};
+static void (*const sDebugMenu_Actions_Scripts[])(u8) =
+{
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_1]     = DebugAction_Util_Script_1,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_2]     = DebugAction_Util_Script_2,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_3]     = DebugAction_Util_Script_3,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_4]     = DebugAction_Util_Script_4,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_5]     = DebugAction_Util_Script_5,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_6]     = DebugAction_Util_Script_6,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_7]     = DebugAction_Util_Script_7,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_8]     = DebugAction_Util_Script_8,
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
@@ -503,6 +569,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
     .items = sDebugMenu_Items_Utilities,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utilities),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Scripts =
+{
+    .items = sDebugMenu_Items_Scripts,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Scripts),
 };
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Flags =
 {
@@ -632,6 +704,24 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
         Debug_ShowMainMenu();
     }
 }
+static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Scripts[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMainMenu();
+    }
+}
 static void DebugTask_HandleMenuInput_Flags(u8 taskId)
 {
     void (*func)(u8);
@@ -693,6 +783,11 @@ static void DebugAction_OpenUtilitiesMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
+}
+static void DebugAction_OpenScriptsMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Scripts, sDebugMenu_ListTemplate_Scripts);
 }
 static void DebugAction_OpenFlagsMenu(u8 taskId)
 {
@@ -1018,6 +1113,57 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+}
+
+// *******************************
+// Actions Scripts
+static void DebugAction_Util_Script_1(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_1);
+}
+static void DebugAction_Util_Script_2(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_2);
+}
+static void DebugAction_Util_Script_3(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_3);
+}
+static void DebugAction_Util_Script_4(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_4);
+}
+static void DebugAction_Util_Script_5(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_5);
+}
+static void DebugAction_Util_Script_6(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_6);
+}
+static void DebugAction_Util_Script_7(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_7);
+}
+static void DebugAction_Util_Script_8(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_Script_8);
 }
 
 // *******************************
