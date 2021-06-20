@@ -6,7 +6,7 @@
 //Pyredrid:             https://github.com/Pyredrid/pokeemerald/tree/debugmenu
 //AsparagusEduardo:     https://github.com/AsparagusEduardo/pokeemerald/tree/InfusedEmerald_v2
 //Ghoulslash:           https://github.com/ghoulslash/pokeemerald
-//Jaizu:                https://hastebin.com/raw/rikegejore
+//Jaizu:                https://jaizu.moe/
 #include "global.h"
 #include "battle.h"
 #include "coins.h"
