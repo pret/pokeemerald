@@ -371,7 +371,7 @@
 #define MUS_CONTEST                  440 // MUS_CONTEST0
 #define MUS_ENCOUNTER_MAGMA          441 // MUS_MGM0
 #define MUS_INTRO_BATTLE             442 // MUS_T_BATTLE
-#define MUS_WEATHER_KYOGRE           894 // old MUS_OOAME (Unused, from R/S)
+#define MUS_WEATHER_KYOGRE           349 // old MUS_OOAME (Unused, from R/S)
 #define MUS_WEATHER_GROUDON          444 // MUS_HIDERI (Unused, from R/S)
 #define MUS_SOOTOPOLIS               445 // MUS_RUNECITY
 #define MUS_CONTEST_RESULTS          446 // MUS_CON_K
@@ -574,7 +574,7 @@
 #define DP_SEQ_CITY07_D              346 // Veilstone City (Day)
 #define DP_SEQ_CITY07_N              347 // Veilstone City (Night)
 #define DP_SEQ_TOWN07_D              348 // Valor Lakefront (Day)
-#define DP_SEQ_TOWN07_N              349 // Valor Lakefront (Night)
+#define DP_SEQ_TOWN07_N              894 // Valor Lakefront (Night)
 #define DP_SEQ_CITY02_D              610 // Canalave City (Day)
 #define DP_SEQ_CITY02_N              611 // Canalave City (Night)
 #define DP_SEQ_ROAD_SNOW_D           612 // Route 216 (Day)

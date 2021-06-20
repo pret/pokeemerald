@@ -1097,7 +1097,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(DP_SEQ_CITY07_D   , "DP-SEQ-CITY07-D") \
     X(DP_SEQ_CITY07_N   , "DP-SEQ-CITY07-N") \
     X(DP_SEQ_TOWN07_D   , "DP-SEQ-TOWN07-D") \
-    X(DP_SEQ_TOWN07_N   , "DP-SEQ-TOWN07-N") \
+    X(MUS_WEATHER_KYOGRE, "MUS-WEATHER-KYOGRE") \
     X(MUS_LITTLEROOT_TEST, "MUS-LITTLEROOT-TEST") \
     X(MUS_GSC_ROUTE38, "MUS-GSC-ROUTE38") \
     X(MUS_CAUGHT, "MUS-CAUGHT") \
@@ -1642,7 +1642,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(DP_SEQ_FUE                  , "DP-SEQ-FUE") \
     X(DP_SEQ_AUS                  , "DP-SEQ-AUS") \
     X(PL_SEQ_PL_BA_REGI           , "PL-SEQ-PL-BA-REGI") \
-    X(MUS_WEATHER_KYOGRE          , "MUS-WEATHER-KYOGRE") \
+    X(DP_SEQ_TOWN07_N             , "DP-SEQ-TOWN07-N") \
     X(BW_SEQ_BGM_TITLE            , "BW-SEQ-BGM-TITLE") \
     X(BW_SEQ_BGM_TITLE01          , "BW-SEQ-BGM-TITLE01") \
     X(BW_SEQ_BGM_POKEMON_THEME    , "BW-SEQ-BGM-POKEMON-THEME") \

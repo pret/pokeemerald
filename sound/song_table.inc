@@ -350,7 +350,7 @@ gSongTable:: @ 86B49F0
 	song dp_seq_city07_d, 0, 0
 	song dp_seq_city07_n, 0, 0
 	song dp_seq_town07_d, 0, 0
-	song dp_seq_town07_n, 0, 0
+	song mus_weather_kyogre, 0, 0
 	song mus_littleroot_test, 0, 0
 	song mus_gsc_route38, 0, 0
 	song mus_caught, 0, 0
@@ -895,7 +895,7 @@ gSongTable:: @ 86B49F0
 	song dp_seq_fue, 0, 0
 	song dp_seq_aus, 0, 0
 	song pl_seq_pl_ba_regi, 0, 0
-	song mus_weather_kyogre, 0, 0
+	song dp_seq_town07_n, 0, 0
 	song bw_seq_bgm_title, 0, 0
 	song bw_seq_bgm_title01, 0, 0
 	song bw_seq_bgm_pokemon_theme, 0, 0
