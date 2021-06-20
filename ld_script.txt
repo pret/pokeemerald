@@ -1059,6 +1059,7 @@ SECTIONS {
         sound/songs/midi/mus_encounter_magma.o(.rodata);
         sound/songs/midi/mus_intro_battle.o(.rodata);
         sound/songs/midi/mus_abnormal_weather.o(.rodata);
+        sound/songs/mus_weather_kyogre.o(.rodata);
         sound/songs/midi/mus_weather_groudon.o(.rodata);
         sound/songs/midi/mus_sootopolis.o(.rodata);
         sound/songs/midi/mus_contest_results.o(.rodata);
@@ -1377,6 +1378,8 @@ SECTIONS {
         sound/songs/midi/dp_seq_bld_ev_dendo2.o(.rodata);
         sound/songs/midi/dp_seq_bld_ending.o(.rodata);
         sound/songs/midi/dp_seq_ba_secret1.o(.rodata);
+        sound/songs/midi/dp_seq_fue.o(.rodata);
+        sound/songs/midi/dp_seq_aus.o(.rodata);
         sound/songs/midi/pl_seq_title00.o(.rodata);
         sound/songs/midi/pl_seq_title01.o(.rodata);
         sound/songs/midi/pl_seq_tv_housou.o(.rodata);
@@ -1410,6 +1413,7 @@ SECTIONS {
         sound/songs/midi/pl_seq_pl_pointget3.o(.rodata);
         sound/songs/midi/pl_seq_pl_ba_brain.o(.rodata);
         sound/songs/midi/pl_seq_pl_winbrain.o(.rodata);
+        sound/songs/midi/pl_seq_pl_ba_regi.o(.rodata);
         sound/songs/midi/hg_seq_gs_title.o(.rodata);
         sound/songs/midi/hg_seq_gs_pokemon_theme.o(.rodata);
         sound/songs/midi/hg_seq_gs_starting.o(.rodata);
@@ -1586,10 +1590,6 @@ SECTIONS {
         sound/songs/midi/hg_seq_me_cardgame1.o(.rodata);
         sound/songs/midi/hg_seq_me_cardgame2.o(.rodata);
         sound/songs/midi/hg_seq_me_gonin.o(.rodata);
-        sound/songs/midi/dp_seq_fue.o(.rodata);
-        sound/songs/midi/dp_seq_aus.o(.rodata);
-        sound/songs/midi/pl_seq_pl_ba_regi.o(.rodata);
-        sound/songs/mus_weather_kyogre.o(.rodata);
         sound/songs/midi/bw_seq_bgm_title.o(.rodata);
         sound/songs/midi/bw_seq_bgm_title01.o(.rodata);
         sound/songs/midi/bw_seq_bgm_pokemon_theme.o(.rodata);

@@ -1,5 +1,5 @@
 	.align 2
-voicegroup209:: @ 8677120
+voicegroup209:: @ 
 	voice_directsound 60, 0, DirectSoundWaveData_bw_sd90distc4_plasma, 255, 253, 0, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_sd90distc5_plasma, 255, 253, 0, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vibrc4_pc, 255, 248, 2, 192

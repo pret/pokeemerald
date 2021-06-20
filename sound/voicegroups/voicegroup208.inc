@@ -1,5 +1,5 @@
 	.align 2
-voicegroup208:: @ 8677108
+voicegroup208:: @ 
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_160asaxc3, 255, 234, 227, 205

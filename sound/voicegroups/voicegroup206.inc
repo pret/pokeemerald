@@ -1,5 +1,5 @@
 	.align 2
-voicegroup206:: @ 8676AC0
+voicegroup206:: @ 
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
