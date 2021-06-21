@@ -76,7 +76,7 @@ voicegroup207:: @
 	voice_directsound 60, 0, DirectSoundWaveData_hg_152violne4, 255, 234, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_151violnc5, 255, 242, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_150violna5, 255, 242, 227, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_151pizzg2, 255, 250, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_hg_102pizzg2, 255, 250, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_100pizze3, 255, 249, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_099pizzc4, 255, 249, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_098pizza4, 255, 248, 0, 205

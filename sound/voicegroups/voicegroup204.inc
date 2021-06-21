@@ -76,7 +76,7 @@ voicegroup204::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_bw_151pizzg2, 255, 248, 6, 205
+	voice_directsound 60, 0, DirectSoundWaveData_hg_102pizzg2, 255, 248, 6, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_100pizze3, 255, 248, 6, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_099pizzc4, 255, 248, 6, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_098pizza4, 255, 248, 6, 205

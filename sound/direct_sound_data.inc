@@ -3307,8 +3307,8 @@ DirectSoundWaveData_hg_101pizzf5::
 	.incbin "sound/direct_sound_samples/hg_101pizzf5.bin"
 
 	.align 2
-DirectSoundWaveData_bw_151pizzg2::
-	.incbin "sound/direct_sound_samples/bw_151pizzg2.bin"
+DirectSoundWaveData_hg_102pizzg2::
+	.incbin "sound/direct_sound_samples/hg_102pizzg2.bin"
 
 	.align 2
 DirectSoundWaveData_hg_115martinc5::
