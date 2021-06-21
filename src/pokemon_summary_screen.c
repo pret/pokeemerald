@@ -119,6 +119,11 @@ enum
     SPRITE_ARR_ID_COUNT = SPRITE_ARR_ID_MOVE_SELECTOR2 + MOVE_SELECTOR_SPRITES_COUNT
 };
 
+#define TILE_EMPTY_APPEAL_HEART  0x1039
+#define TILE_FILLED_APPEAL_HEART 0x103A
+#define TILE_FILLED_JAM_HEART    0x103C
+#define TILE_EMPTY_JAM_HEART     0x103D
+
 static EWRAM_DATA struct PokemonSummaryScreenData
 {
     /*0x00*/ union {
@@ -2645,29 +2650,30 @@ static void DrawContestMoveHearts(u16 move)
 
     if (move != MOVE_NONE)
     {
+        // Draw appeal hearts
         u8 effectValue = gContestEffects[gContestMoves[move].effect].appeal;
         if (effectValue != 0xFF)
             effectValue /= 10;
 
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < MAX_CONTEST_MOVE_HEARTS; i++)
         {
             if (effectValue != 0xFF && i < effectValue)
-                tilemap[(i / 4 * 32) + (i & 3) + 0x1E6] = 0x103A;
+                tilemap[(i / 4 * 32) + (i & 3) + 0x1E6] = TILE_FILLED_APPEAL_HEART;
             else
-                tilemap[(i / 4 * 32) + (i & 3) + 0x1E6] = 0x1039;
+                tilemap[(i / 4 * 32) + (i & 3) + 0x1E6] = TILE_EMPTY_APPEAL_HEART;
         }
 
+        // Draw jam hearts
         effectValue = gContestEffects[gContestMoves[move].effect].jam;
-
         if (effectValue != 0xFF)
             effectValue /= 10;
 
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < MAX_CONTEST_MOVE_HEARTS; i++)
         {
             if (effectValue != 0xFF && i < effectValue)
-                tilemap[(i / 4 * 32) + (i & 3) + 0x226] = 0x103C;
+                tilemap[(i / 4 * 32) + (i & 3) + 0x226] = TILE_FILLED_JAM_HEART;
             else
-                tilemap[(i / 4 * 32) + (i & 3) + 0x226] = 0x103D;
+                tilemap[(i / 4 * 32) + (i & 3) + 0x226] = TILE_EMPTY_JAM_HEART;
         }
     }
 }
