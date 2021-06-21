@@ -77,7 +77,7 @@ voicegroup199:: @ BW Kageyama
 	voice_keysplit voicegroup206, KeySplitTable68    @ HGSS trumpets
 	voice_directsound 60, 0, DirectSoundWaveData_bw_063rhodc5, 255, 250, 0, 214 @ rel = 114
 	voice_keysplit voicegroup208, KeySplitTable150   @ harp 2 (level up only)
-	voice_directsound 60, 0, DirectSoundWaveData_bw_146flt1f5, 255, 246, 159, 214 @ rel = 114
+	voice_directsound 60, 0, DirectSoundWaveData_hg_097flt1f5, 255, 246, 159, 214 @ rel = 114
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit_all voicegroup208				 @ HGSS drum kit
 	voice_keysplit_all voicegroup195				 @ drum kit (standard)
@@ -88,7 +88,7 @@ voicegroup199:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_bw_025cellog2, 255, 242, 227, 205
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 255, 242, 227, 205
 	voice_keysplit voicegroup208, KeySplitTable151   @ rhodes (pokecenter)
 	voice_keysplit voicegroup209, KeySplitTable152   @ vibraphone (pokecenter)
 	voice_keysplit voicegroup209, KeySplitTable153   @ fingered bass (pokecenter)

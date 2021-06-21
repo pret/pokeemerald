@@ -88,7 +88,7 @@ voicegroup194:: @ BW/B2W2 main
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 1, 227, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_spiccatostringse2, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_b2_trumpetsstaccatogs4_loop, 255, 0, 255, 224
-	voice_directsound 60, 0, DirectSoundWaveData_bw_025cellog2, 254, 242, 255, 205
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 254, 242, 255, 205
 	voice_keysplit voicegroup208, KeySplitTable131   @ pan flute (bw2 only)
 	voice_keysplit voicegroup208, KeySplitTable132   @ gamelan (bw2 only)
 	voice_keysplit voicegroup208, KeySplitTable133   @ overdriven guitar (bw2 only)

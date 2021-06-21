@@ -25,7 +25,7 @@ voicegroup201:: @ BW Ichinose (overworld)
 	voice_keysplit voicegroup204, KeySplitTable20    @ distortion guitar 1 (DPPT)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_bw_000uprigc2, 255, 251, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_hg_000uprigc2, 255, 251, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_170slapbg2, 255, 1, 227, 171

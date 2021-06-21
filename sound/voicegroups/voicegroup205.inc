@@ -39,8 +39,8 @@ voicegroup205:: @
 	voice_directsound 60, 64, DirectSoundWaveData_dp_bassdr1_16, 255, 0, 255, 171
 	voice_directsound 61, 58, DirectSoundWaveData_dp_rim1_roop, 255, 220, 0, 0
 	voice_directsound 60, 64, DirectSoundWaveData_dp_oct_snare_16, 255, 0, 255, 0
-	voice_directsound 60, 70, DirectSoundWaveData_bw_085clap, 255, 0, 227, 1
-	voice_directsound 60, 64, DirectSoundWaveData_bw_177snare, 255, 226, 127, 0
+	voice_directsound 60, 70, DirectSoundWaveData_dp_053clap, 255, 0, 227, 1
+	voice_directsound 60, 64, DirectSoundWaveData_dp_093snare, 255, 226, 127, 0
 	voice_directsound 29, 30, DirectSoundWaveData_dp_tom1_16, 255, 0, 255, 1
 	voice_directsound 60, 80, DirectSoundWaveData_dp_closed_hihat_16, 255, 0, 227, 1
 	voice_directsound 34, 40, DirectSoundWaveData_dp_tom1_16, 255, 0, 255, 1
@@ -60,17 +60,17 @@ voicegroup205:: @
 	voice_directsound 60, 36, DirectSoundWaveData_dp_cymbal1_16, 255, 250, 0, 216
 	voice_directsound 61, 102, DirectSoundWaveData_dp_cymbal1_16, 255, 250, 0, 216
 	voice_directsound 60, 86, DirectSoundWaveData_dp_ridecynbal, 255, 250, 0, 216
-	voice_directsound 60, 90, DirectSoundWaveData_bw_016bongo, 255, 0, 255, 176
-	voice_directsound 57, 90, DirectSoundWaveData_bw_016bongo, 255, 0, 255, 176
+	voice_directsound 60, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 176
+	voice_directsound 57, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 176
 	voice_directsound 60, 20, DirectSoundWaveData_dp_mute_conga_16, 255, 0, 255, 176
-	voice_directsound 60, 24, DirectSoundWaveData_bw_098conga, 255, 0, 255, 176
-	voice_directsound 57, 26, DirectSoundWaveData_bw_098conga, 255, 0, 255, 176
+	voice_directsound 60, 24, DirectSoundWaveData_dp_060conga, 255, 0, 255, 176
+	voice_directsound 57, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 176
 	voice_directsound 60, 26, DirectSoundWaveData_dp_africa_dr_16, 255, 0, 255, 176
 	voice_directsound 60, 101, DirectSoundWaveData_dp_africa_dr_16, 255, 0, 255, 176
 	voice_directsound 60, 26, DirectSoundWaveData_dp_cabassa_16, 255, 243, 127, 176
 	voice_directsound 60, 100, DirectSoundWaveData_dp_mute_conga_16, 255, 0, 255, 176
-	voice_directsound 60, 98, DirectSoundWaveData_bw_098conga, 255, 0, 255, 176
-	voice_directsound 63, 102, DirectSoundWaveData_bw_098conga, 255, 0, 255, 176
+	voice_directsound 60, 98, DirectSoundWaveData_dp_060conga, 255, 0, 255, 176
+	voice_directsound 63, 102, DirectSoundWaveData_dp_060conga, 255, 0, 255, 176
 	voice_directsound 60, 25, DirectSoundWaveData_dp_india_per_16, 255, 0, 255, 0
 	voice_directsound 60, 112, DirectSoundWaveData_dp_dragon_dr_16, 255, 0, 255, 0
 	voice_directsound 57, 100, DirectSoundWaveData_dp_dragon_dr_16, 255, 0, 255, 0
@@ -83,7 +83,7 @@ voicegroup205:: @
 	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 200, 0, 0
 	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 249, 0, 196
 	voice_directsound 60, 90, DirectSoundWaveData_dp_sheiker, 255, 243, 111, 16
-	voice_directsound 60, 94, DirectSoundWaveData_bw_106sleigh, 255, 0, 255, 226
+	voice_directsound 60, 94, DirectSoundWaveData_dp_062sleigh, 255, 0, 255, 226
 	voice_directsound 70, 26, DirectSoundWaveData_dp_africa_dr_16, 255, 0, 255, 176
 	voice_directsound 54, 101, DirectSoundWaveData_dp_africa_dr_16, 255, 0, 255, 176
 	voice_directsound 65, 101, DirectSoundWaveData_dp_africa_dr_16, 255, 0, 255, 176
