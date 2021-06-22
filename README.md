@@ -1,6 +1,6 @@
 This branch adds music from NDS Pokémon games to the Pokeemerald decompilations. It is recommended that your repository is up to date as long as this branch is too. Feel free to use the voicegroups to make your own music.
 
-This branch alone can take up 4+ megabytes of your ROM. If you have space concerns and/or only wish to use select music from this repo, feel free to contact me on Discord at @Furret#7777.
+This branch alone can take up 4+ megabytes of your ROM. If you have space concerns and/or only wish to use select music from this repo, feel free to contact me on Discord at *@Furret#7777*.
 
 
 # Pokémon Emerald
