@@ -1719,6 +1719,12 @@ $(MID_SUBDIR)/dp_seq_bld_ending.s: %.s: %.mid
 $(MID_SUBDIR)/dp_seq_ba_secret1.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G191 -V092
 
+$(MID_SUBDIR)/dp_seq_fue.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G191 -V127
+
+$(MID_SUBDIR)/dp_seq_aus.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G191 -V127
+
 $(MID_SUBDIR)/pl_seq_title00.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G191 -V127
 
@@ -1817,6 +1823,9 @@ $(MID_SUBDIR)/pl_seq_pl_ba_brain.s: %.s: %.mid
 
 $(MID_SUBDIR)/pl_seq_pl_winbrain.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G191 -V108
+
+$(MID_SUBDIR)/pl_seq_pl_ba_regi.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G191 -V105
 
 $(MID_SUBDIR)/hg_seq_gs_title.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G192 -V122
@@ -2345,15 +2354,6 @@ $(MID_SUBDIR)/hg_seq_me_cardgame2.s: %.s: %.mid
 
 $(MID_SUBDIR)/hg_seq_me_gonin.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G192 -V088 -p5
-
-$(MID_SUBDIR)/dp_seq_fue.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G191 -V127
-
-$(MID_SUBDIR)/dp_seq_aus.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G191 -V127
-
-$(MID_SUBDIR)/pl_seq_pl_ba_regi.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G191 -V105
 
 $(MID_SUBDIR)/bw_seq_bgm_title.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G199 -V092

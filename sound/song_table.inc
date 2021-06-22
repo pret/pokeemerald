@@ -271,86 +271,57 @@ gSongTable:: @ 86B49F0
 	song se_pike_curtain_close, 1, 1
 	song se_pike_curtain_open, 1, 1
 	song se_sudowoodo_shake, 1, 1
-	song dp_seq_title00, 0, 0
-	song dp_seq_title01, 0, 0
-	song dp_seq_opening, 0, 0
-	song dp_seq_tv_housou, 0, 0
-	song dp_seq_tv_end, 2, 2
-	song dp_seq_town01_d, 0, 0
-	song dp_seq_town01_n, 0, 0
-	song dp_seq_the_riv, 0, 0
-	song dp_seq_road_a_d, 0, 0
-	song dp_seq_road_a_n, 0, 0
-	song dp_seq_d_lake, 0, 0
-	song dp_seq_the_event01, 0, 0
-	song dp_seq_ba_poke, 0, 0
-	song dp_seq_winpoke, 0, 0
-	song dp_seq_the_girl, 0, 0
-	song dp_seq_the_boy, 0, 0
-	song dp_seq_fanfa4, 2, 2
-	song dp_seq_town02_d, 0, 0
-	song dp_seq_town02_n, 0, 0
-	song dp_seq_kenkyujo, 0, 0
-	song dp_seq_tsureteke, 0, 0
-	song dp_seq_pc_01, 0, 0
-	song dp_seq_pc_02, 0, 0
-	song dp_seq_asa, 2, 2
-	song dp_seq_eye_boy, 0, 0
-	song dp_seq_eye_girl, 0, 0
-	song dp_seq_ba_train, 0, 0
-	song dp_seq_wintrain, 0, 0
-	song dp_seq_city01_d, 0, 0
-	song dp_seq_city01_n, 0, 0
-	song dp_seq_fanfa3, 2, 2
-	song dp_seq_fs, 0, 0
-	song dp_seq_road_b_d, 0, 0
-	song dp_seq_road_b_n, 0, 0
-	song dp_seq_ba_rival, 0, 0
-	song dp_seq_d_05, 0, 0
-	song dp_seq_waza, 2, 2
-	song dp_seq_city03_d, 0, 0
-	song dp_seq_city03_n, 0, 0
-	song dp_seq_d_04, 0, 0
-	song dp_seq_gym, 0, 0
-	song dp_seq_ba_gym, 0, 0
-	song dp_seq_wintgym, 0, 0
-	song dp_seq_badge, 2, 2
-	song dp_seq_eye_kid, 0, 0
-	song dp_seq_fanfa1, 2, 2
-	song dp_seq_town03_d, 0, 0
-	song dp_seq_town03_n, 0, 0
-	song dp_seq_kinomi, 2, 2
-	song dp_seq_road_c_d, 0, 0
-	song dp_seq_road_c_n, 0, 0
-	song dp_seq_eye_ginga, 0, 0
-	song dp_seq_ba_ginga, 0, 0
-	song dp_seq_d_02, 0, 0
-	song dp_seq_gonin, 2, 2
-	song dp_seq_city04_d, 0, 0
-	song dp_seq_city04_n, 0, 0
-	song dp_seq_d_ginlobby, 0, 0
-	song dp_seq_ba_ginga3, 0, 0
-	song dp_seq_winginga, 0, 0
-	song dp_seq_shinka, 0, 0
-	song dp_seq_fanfa5, 2, 2
-	song dp_seq_bicycle, 0, 0
-	song dp_seq_eye_sport, 0, 0
-	song dp_seq_road_d_d, 0, 0
-	song dp_seq_road_d_n, 0, 0
-	song dp_seq_city05_d, 0, 0
-	song dp_seq_city05_n, 0, 0
-	song dp_seq_road_e_d, 0, 0
-	song dp_seq_road_e_n, 0, 0
-	song dp_seq_eye_mount, 0, 0
-	song dp_seq_town04_d, 0, 0
-	song dp_seq_town04_n, 0, 0
-	song dp_seq_pocketch, 2, 2
-	song dp_seq_road_f_d, 0, 0
-	song dp_seq_road_f_n, 0, 0
-	song dp_seq_city07_d, 0, 0
-	song dp_seq_city07_n, 0, 0
-	song dp_seq_town07_d, 0, 0
-	song mus_weather_kyogre, 0, 0
+	song ph_trap_blend, 2, 2
+	song ph_trap_held, 2, 2
+	song ph_trap_solo, 2, 2
+	song ph_face_blend, 2, 2
+	song ph_face_held, 2, 2
+	song ph_face_solo, 2, 2
+	song ph_cloth_blend, 2, 2
+	song ph_cloth_held, 2, 2
+	song ph_cloth_solo, 2, 2
+	song ph_dress_blend, 2, 2
+	song ph_dress_held, 2, 2
+	song ph_dress_solo, 2, 2
+	song ph_fleece_blend, 2, 2
+	song ph_fleece_held, 2, 2
+	song ph_fleece_solo, 2, 2
+	song ph_kit_blend, 2, 2
+	song ph_kit_held, 2, 2
+	song ph_kit_solo, 2, 2
+	song ph_price_blend, 2, 2
+	song ph_price_held, 2, 2
+	song ph_price_solo, 2, 2
+	song ph_lot_blend, 2, 2
+	song ph_lot_held, 2, 2
+	song ph_lot_solo, 2, 2
+	song ph_goat_blend, 2, 2
+	song ph_goat_held, 2, 2
+	song ph_goat_solo, 2, 2
+	song ph_thought_blend, 2, 2
+	song ph_thought_held, 2, 2
+	song ph_thought_solo, 2, 2
+	song ph_choice_blend, 2, 2
+	song ph_choice_held, 2, 2
+	song ph_choice_solo, 2, 2
+	song ph_mouth_blend, 2, 2
+	song ph_mouth_held, 2, 2
+	song ph_mouth_solo, 2, 2
+	song ph_foot_blend, 2, 2
+	song ph_foot_held, 2, 2
+	song ph_foot_solo, 2, 2
+	song ph_goose_blend, 2, 2
+	song ph_goose_held, 2, 2
+	song ph_goose_solo, 2, 2
+	song ph_strut_blend, 2, 2
+	song ph_strut_held, 2, 2
+	song ph_strut_solo, 2, 2
+	song ph_cure_blend, 2, 2
+	song ph_cure_held, 2, 2
+	song ph_cure_solo, 2, 2
+	song ph_nurse_blend, 2, 2
+	song ph_nurse_held, 2, 2
+	song ph_nurse_solo, 2, 2
 	song mus_littleroot_test, 0, 0
 	song mus_gsc_route38, 0, 0
 	song mus_caught, 0, 0
@@ -444,7 +415,7 @@ gSongTable:: @ 86B49F0
 	song mus_contest, 0, 0
 	song mus_encounter_magma, 0, 0
 	song mus_intro_battle, 0, 0
-	song mus_abnormal_weather, 0, 0
+	song mus_weather_kyogre, 0, 0
 	song mus_weather_groudon, 0, 0
 	song mus_sootopolis, 0, 0
 	song mus_contest_results, 0, 0
@@ -458,23 +429,6 @@ gSongTable:: @ 86B49F0
 	song mus_encounter_champion, 0, 0
 	song mus_credits, 0, 0
 	song mus_end, 0, 0
-	song mus_b_frontier, 0, 0
-	song mus_b_arena, 0, 0
-	song mus_obtain_b_points, 2, 2
-	song mus_register_match_call, 2, 2
-	song mus_b_pyramid, 0, 0
-	song mus_b_pyramid_top, 0, 0
-	song mus_b_palace, 0, 0
-	song mus_rayquaza_appears, 0, 0
-	song mus_b_tower, 0, 0
-	song mus_obtain_symbol, 2, 2
-	song mus_b_dome, 0, 0
-	song mus_b_pike, 0, 0
-	song mus_b_factory, 0, 0
-	song mus_vs_rayquaza, 0, 0
-	song mus_vs_frontier_brain, 0, 0
-	song mus_vs_mew, 0, 0
-	song mus_b_dome_lobby, 0, 0
 	song mus_vs_wild, 0, 0
 	song mus_vs_aqua_magma, 0, 0
 	song mus_vs_trainer, 0, 0
@@ -560,57 +514,104 @@ gSongTable:: @ 86B49F0
 	song mus_rg_trainer_tower, 0, 0
 	song mus_rg_slow_pallet, 0, 0
 	song mus_rg_teachy_tv_menu, 0, 0
-	song ph_trap_blend, 2, 2
-	song ph_trap_held, 2, 2
-	song ph_trap_solo, 2, 2
-	song ph_face_blend, 2, 2
-	song ph_face_held, 2, 2
-	song ph_face_solo, 2, 2
-	song ph_cloth_blend, 2, 2
-	song ph_cloth_held, 2, 2
-	song ph_cloth_solo, 2, 2
-	song ph_dress_blend, 2, 2
-	song ph_dress_held, 2, 2
-	song ph_dress_solo, 2, 2
-	song ph_fleece_blend, 2, 2
-	song ph_fleece_held, 2, 2
-	song ph_fleece_solo, 2, 2
-	song ph_kit_blend, 2, 2
-	song ph_kit_held, 2, 2
-	song ph_kit_solo, 2, 2
-	song ph_price_blend, 2, 2
-	song ph_price_held, 2, 2
-	song ph_price_solo, 2, 2
-	song ph_lot_blend, 2, 2
-	song ph_lot_held, 2, 2
-	song ph_lot_solo, 2, 2
-	song ph_goat_blend, 2, 2
-	song ph_goat_held, 2, 2
-	song ph_goat_solo, 2, 2
-	song ph_thought_blend, 2, 2
-	song ph_thought_held, 2, 2
-	song ph_thought_solo, 2, 2
-	song ph_choice_blend, 2, 2
-	song ph_choice_held, 2, 2
-	song ph_choice_solo, 2, 2
-	song ph_mouth_blend, 2, 2
-	song ph_mouth_held, 2, 2
-	song ph_mouth_solo, 2, 2
-	song ph_foot_blend, 2, 2
-	song ph_foot_held, 2, 2
-	song ph_foot_solo, 2, 2
-	song ph_goose_blend, 2, 2
-	song ph_goose_held, 2, 2
-	song ph_goose_solo, 2, 2
-	song ph_strut_blend, 2, 2
-	song ph_strut_held, 2, 2
-	song ph_strut_solo, 2, 2
-	song ph_cure_blend, 2, 2
-	song ph_cure_held, 2, 2
-	song ph_cure_solo, 2, 2
-	song ph_nurse_blend, 2, 2
-	song ph_nurse_held, 2, 2
-	song ph_nurse_solo, 2, 2
+	song mus_abnormal_weather, 0, 0
+	song mus_b_frontier, 0, 0
+	song mus_b_arena, 0, 0
+	song mus_obtain_b_points, 2, 2
+	song mus_register_match_call, 2, 2
+	song mus_b_pyramid, 0, 0
+	song mus_b_pyramid_top, 0, 0
+	song mus_b_palace, 0, 0
+	song mus_rayquaza_appears, 0, 0
+	song mus_b_tower, 0, 0
+	song mus_obtain_symbol, 2, 2
+	song mus_b_dome, 0, 0
+	song mus_b_pike, 0, 0
+	song mus_b_factory, 0, 0
+	song mus_vs_rayquaza, 0, 0
+	song mus_vs_frontier_brain, 0, 0
+	song mus_vs_mew, 0, 0
+	song mus_b_dome_lobby, 0, 0
+	song dp_seq_title00, 0, 0
+	song dp_seq_title01, 0, 0
+	song dp_seq_opening, 0, 0
+	song dp_seq_tv_housou, 0, 0
+	song dp_seq_tv_end, 2, 2
+	song dp_seq_town01_d, 0, 0
+	song dp_seq_town01_n, 0, 0
+	song dp_seq_the_riv, 0, 0
+	song dp_seq_road_a_d, 0, 0
+	song dp_seq_road_a_n, 0, 0
+	song dp_seq_d_lake, 0, 0
+	song dp_seq_the_event01, 0, 0
+	song dp_seq_ba_poke, 0, 0
+	song dp_seq_winpoke, 0, 0
+	song dp_seq_the_girl, 0, 0
+	song dp_seq_the_boy, 0, 0
+	song dp_seq_fanfa4, 2, 2
+	song dp_seq_town02_d, 0, 0
+	song dp_seq_town02_n, 0, 0
+	song dp_seq_kenkyujo, 0, 0
+	song dp_seq_tsureteke, 0, 0
+	song dp_seq_pc_01, 0, 0
+	song dp_seq_pc_02, 0, 0
+	song dp_seq_asa, 2, 2
+	song dp_seq_eye_boy, 0, 0
+	song dp_seq_eye_girl, 0, 0
+	song dp_seq_ba_train, 0, 0
+	song dp_seq_wintrain, 0, 0
+	song dp_seq_city01_d, 0, 0
+	song dp_seq_city01_n, 0, 0
+	song dp_seq_fanfa3, 2, 2
+	song dp_seq_fs, 0, 0
+	song dp_seq_road_b_d, 0, 0
+	song dp_seq_road_b_n, 0, 0
+	song dp_seq_ba_rival, 0, 0
+	song dp_seq_d_05, 0, 0
+	song dp_seq_waza, 2, 2
+	song dp_seq_city03_d, 0, 0
+	song dp_seq_city03_n, 0, 0
+	song dp_seq_d_04, 0, 0
+	song dp_seq_gym, 0, 0
+	song dp_seq_ba_gym, 0, 0
+	song dp_seq_wintgym, 0, 0
+	song dp_seq_badge, 2, 2
+	song dp_seq_eye_kid, 0, 0
+	song dp_seq_fanfa1, 2, 2
+	song dp_seq_town03_d, 0, 0
+	song dp_seq_town03_n, 0, 0
+	song dp_seq_kinomi, 2, 2
+	song dp_seq_road_c_d, 0, 0
+	song dp_seq_road_c_n, 0, 0
+	song dp_seq_eye_ginga, 0, 0
+	song dp_seq_ba_ginga, 0, 0
+	song dp_seq_d_02, 0, 0
+	song dp_seq_gonin, 2, 2
+	song dp_seq_city04_d, 0, 0
+	song dp_seq_city04_n, 0, 0
+	song dp_seq_d_ginlobby, 0, 0
+	song dp_seq_ba_ginga3, 0, 0
+	song dp_seq_winginga, 0, 0
+	song dp_seq_shinka, 0, 0
+	song dp_seq_fanfa5, 2, 2
+	song dp_seq_bicycle, 0, 0
+	song dp_seq_eye_sport, 0, 0
+	song dp_seq_road_d_d, 0, 0
+	song dp_seq_road_d_n, 0, 0
+	song dp_seq_city05_d, 0, 0
+	song dp_seq_city05_n, 0, 0
+	song dp_seq_road_e_d, 0, 0
+	song dp_seq_road_e_n, 0, 0
+	song dp_seq_eye_mount, 0, 0
+	song dp_seq_town04_d, 0, 0
+	song dp_seq_town04_n, 0, 0
+	song dp_seq_pocketch, 2, 2
+	song dp_seq_road_f_d, 0, 0
+	song dp_seq_road_f_n, 0, 0
+	song dp_seq_city07_d, 0, 0
+	song dp_seq_city07_n, 0, 0
+	song dp_seq_town07_d, 0, 0
+	song dp_seq_town07_n, 0, 0
 	song dp_seq_city02_d, 0, 0
 	song dp_seq_city02_n, 0, 0
 	song dp_seq_road_snow_d, 0, 0
@@ -682,6 +683,8 @@ gSongTable:: @ 86B49F0
 	song dp_seq_bld_dendo, 0, 0
 	song dp_seq_bld_ev_dendo2, 0, 0
 	song dp_seq_bld_ending, 0, 0
+	song dp_seq_fue, 0, 0
+	song dp_seq_aus, 0, 0
 	song dp_seq_ba_secret1, 0, 0
 	song pl_seq_title00, 0, 0
 	song pl_seq_title01, 0, 0
@@ -716,6 +719,7 @@ gSongTable:: @ 86B49F0
 	song pl_seq_pl_pointget3, 2, 2
 	song pl_seq_pl_ba_brain, 0, 0
 	song pl_seq_pl_winbrain, 0, 0
+	song pl_seq_pl_ba_regi, 0, 0
 	song hg_seq_gs_title, 0, 0
 	song hg_seq_gs_pokemon_theme, 0, 0
 	song hg_seq_gs_starting, 0, 0
@@ -892,10 +896,6 @@ gSongTable:: @ 86B49F0
 	song hg_seq_me_cardgame1, 2, 2
 	song hg_seq_me_cardgame2, 2, 2
 	song hg_seq_me_gonin, 2, 2
-	song dp_seq_fue, 0, 0
-	song dp_seq_aus, 0, 0
-	song pl_seq_pl_ba_regi, 0, 0
-	song dp_seq_town07_n, 0, 0
 	song bw_seq_bgm_title, 0, 0
 	song bw_seq_bgm_title01, 0, 0
 	song bw_seq_bgm_pokemon_theme, 0, 0

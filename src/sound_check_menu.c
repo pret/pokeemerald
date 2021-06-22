@@ -294,7 +294,7 @@ static const u8 *const gSENames[];
 static void Task_HandleDrawingSoundCheckMenuText(u8 taskId) // sub_080E85F4
 {
     FillWindowPixelRect(WIN_MUS, PIXEL_FILL(1), 0, 14, 224, 12);
-    PrintSoundNumber(gTasks[taskId].tBgmIndex + (DP_SEQ_TITLE00 - 1), WIN_MUS); // print by BGM index
+    PrintSoundNumber(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), WIN_MUS); // print by BGM index
     PrintPaddedString(gBGMNames[gTasks[taskId].tBgmIndex], WIN_MUS);
     FillWindowPixelRect(WIN_SE, PIXEL_FILL(1), 0, 14, 224, 12);
     PrintSoundNumber(gTasks[taskId].tSeIndex, WIN_SE);
@@ -346,19 +346,19 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             {
                 if (gTasks[taskId].tBgmIndex != 0)
                 {
-                    m4aSongNumStop(gTasks[taskId].tBgmIndexOld + (DP_SEQ_TITLE00 - 1));
-                    m4aSongNumStart(gTasks[taskId].tBgmIndex + (DP_SEQ_TITLE00 - 1));
+                    m4aSongNumStop(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1));
+                    m4aSongNumStart(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1));
                     gTasks[taskId].tBgmIndexOld = gTasks[taskId].tBgmIndex;
                 }
                 else
                 {
-                    m4aSongNumStop(gTasks[taskId].tBgmIndexOld + (DP_SEQ_TITLE00 - 1));
+                    m4aSongNumStop(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1));
                     gTasks[taskId].tBgmIndexOld = 0;
                 }
             }
             else if (gTasks[taskId].tBgmIndex != 0)
             {
-                m4aSongNumStart(gTasks[taskId].tBgmIndex + (DP_SEQ_TITLE00 - 1));
+                m4aSongNumStart(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1));
                 gTasks[taskId].tBgmIndexOld = gTasks[taskId].tBgmIndex;
             }
         }
@@ -382,14 +382,14 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tSeIndex > 0)
                 gTasks[taskId].tSeIndex--;
             else
-                gTasks[taskId].tSeIndex = SE_SUDOWOODO_SHAKE;
+                gTasks[taskId].tSeIndex = PH_NURSE_SOLO;
         }
         else
         {
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_PLASMA - (DP_SEQ_TITLE00 - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_PLASMA - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -397,14 +397,14 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
     {
         if (gTasks[taskId].tWindowSelected != TEST_MUS)
         {
-            if (gTasks[taskId].tSeIndex < SE_SUDOWOODO_SHAKE)
+            if (gTasks[taskId].tSeIndex < PH_NURSE_SOLO)
                 gTasks[taskId].tSeIndex++;
             else
                 gTasks[taskId].tSeIndex = 0;
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_PLASMA - (DP_SEQ_TITLE00 - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_PLASMA - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -886,7 +886,7 @@ static void Task_ProcessPanTestInput(u8 taskId) // sub_080E9284
     if (JOY_REPEAT(DPAD_RIGHT))
     {
         sSoundTestParams[CRY_TEST_VOICE]++;
-        if (sSoundTestParams[CRY_TEST_VOICE] > SE_SUDOWOODO_SHAKE)
+        if (sSoundTestParams[CRY_TEST_VOICE] > PH_NURSE_SOLO)
             sSoundTestParams[CRY_TEST_VOICE] = MUS_DUMMY;
         PrintPanTestMenuText();
     }
@@ -894,7 +894,7 @@ static void Task_ProcessPanTestInput(u8 taskId) // sub_080E9284
     {
         sSoundTestParams[CRY_TEST_VOICE]--;
         if (sSoundTestParams[CRY_TEST_VOICE] < MUS_DUMMY)
-            sSoundTestParams[CRY_TEST_VOICE] = SE_SUDOWOODO_SHAKE;
+            sSoundTestParams[CRY_TEST_VOICE] = PH_NURSE_SOLO;
         PrintPanTestMenuText();
     }
 }
@@ -1018,86 +1018,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
 
 #define SOUND_LIST_BGM \
     X(MUS_STOP, "STOP") \
-    X(DP_SEQ_TITLE00    , "DP-SEQ-TITLE00") \
-    X(DP_SEQ_TITLE01    , "DP-SEQ-TITLE01") \
-    X(DP_SEQ_OPENING    , "DP-SEQ-OPENING") \
-    X(DP_SEQ_TV_HOUSOU  , "DP-SEQ-TV-HOUSOU") \
-    X(DP_SEQ_TV_END     , "DP-SEQ-TV-END") \
-    X(DP_SEQ_TOWN01_D   , "DP-SEQ-TOWN01-D") \
-    X(DP_SEQ_TOWN01_N   , "DP-SEQ-TOWN01-N") \
-    X(DP_SEQ_THE_RIV    , "DP-SEQ-THE-RIV") \
-    X(DP_SEQ_ROAD_A_D   , "DP-SEQ-ROAD-A-D") \
-    X(DP_SEQ_ROAD_A_N   , "DP-SEQ-ROAD-A-N") \
-    X(DP_SEQ_D_LAKE     , "DP-SEQ-D-LAKE") \
-    X(DP_SEQ_THE_EVENT01, "DP-SEQ-THE-EVENT01") \
-    X(DP_SEQ_BA_POKE    , "DP-SEQ-BA-POKE") \
-    X(DP_SEQ_WINPOKE    , "DP-SEQ-WINPOKE") \
-    X(DP_SEQ_THE_GIRL   , "DP-SEQ-THE-GIRL") \
-    X(DP_SEQ_THE_BOY    , "DP-SEQ-THE-BOY") \
-    X(DP_SEQ_FANFA4     , "DP-SEQ-FANFA4") \
-    X(DP_SEQ_TOWN02_D   , "DP-SEQ-TOWN02-D") \
-    X(DP_SEQ_TOWN02_N   , "DP-SEQ-TOWN02-N") \
-    X(DP_SEQ_KENKYUJO   , "DP-SEQ-KENKYUJO") \
-    X(DP_SEQ_TSURETEKE  , "DP-SEQ-TSURETEKE") \
-    X(DP_SEQ_PC_01      , "DP-SEQ-PC-01") \
-    X(DP_SEQ_PC_02      , "DP-SEQ-PC-02") \
-    X(DP_SEQ_ASA        , "DP-SEQ-ASA") \
-    X(DP_SEQ_EYE_BOY    , "DP-SEQ-EYE-BOY") \
-    X(DP_SEQ_EYE_GIRL   , "DP-SEQ-EYE-GIRL") \
-    X(DP_SEQ_BA_TRAIN   , "DP-SEQ-BA-TRAIN") \
-    X(DP_SEQ_WINTRAIN   , "DP-SEQ-WINTRAIN") \
-    X(DP_SEQ_CITY01_D   , "DP-SEQ-CITY01-D") \
-    X(DP_SEQ_CITY01_N   , "DP-SEQ-CITY01-N") \
-    X(DP_SEQ_FANFA3     , "DP-SEQ-FANFA3") \
-    X(DP_SEQ_FS         , "DP-SEQ-FS") \
-    X(DP_SEQ_ROAD_B_D   , "DP-SEQ-ROAD-B-D") \
-    X(DP_SEQ_ROAD_B_N   , "DP-SEQ-ROAD-B-N") \
-    X(DP_SEQ_BA_RIVAL   , "DP-SEQ-BA-RIVAL") \
-    X(DP_SEQ_D_05       , "DP-SEQ-D-05") \
-    X(DP_SEQ_WAZA       , "DP-SEQ-WAZA") \
-    X(DP_SEQ_CITY03_D   , "DP-SEQ-CITY03-D") \
-    X(DP_SEQ_CITY03_N   , "DP-SEQ-CITY03-N") \
-    X(DP_SEQ_D_04       , "DP-SEQ-D-04") \
-    X(DP_SEQ_GYM        , "DP-SEQ-GYM") \
-    X(DP_SEQ_BA_GYM     , "DP-SEQ-BA-GYM") \
-    X(DP_SEQ_WINTGYM    , "DP-SEQ-WINTGYM") \
-    X(DP_SEQ_BADGE      , "DP-SEQ-BADGE") \
-    X(DP_SEQ_EYE_KID    , "DP-SEQ-EYE-KID") \
-    X(DP_SEQ_FANFA1     , "DP-SEQ-FANFA1") \
-    X(DP_SEQ_TOWN03_D   , "DP-SEQ-TOWN03-D") \
-    X(DP_SEQ_TOWN03_N   , "DP-SEQ-TOWN03-N") \
-    X(DP_SEQ_KINOMI     , "DP-SEQ-KINOMI") \
-    X(DP_SEQ_ROAD_C_D   , "DP-SEQ-ROAD-C-D") \
-    X(DP_SEQ_ROAD_C_N   , "DP-SEQ-ROAD-C-N") \
-    X(DP_SEQ_EYE_GINGA  , "DP-SEQ-EYE-GINGA") \
-    X(DP_SEQ_BA_GINGA   , "DP-SEQ-BA-GINGA") \
-    X(DP_SEQ_D_02       , "DP-SEQ-D-02") \
-    X(DP_SEQ_GONIN      , "DP-SEQ-GONIN") \
-    X(DP_SEQ_CITY04_D   , "DP-SEQ-CITY04-D") \
-    X(DP_SEQ_CITY04_N   , "DP-SEQ-CITY04-N") \
-    X(DP_SEQ_D_GINLOBBY , "DP-SEQ-D-GINLOBBY") \
-    X(DP_SEQ_BA_GINGA3  , "DP-SEQ-BA-GINGA3") \
-    X(DP_SEQ_WINGINGA   , "DP-SEQ-WINGINGA") \
-    X(DP_SEQ_SHINKA     , "DP-SEQ-SHINKA") \
-    X(DP_SEQ_FANFA5     , "DP-SEQ-FANFA5") \
-    X(DP_SEQ_BICYCLE    , "DP-SEQ-BICYCLE") \
-    X(DP_SEQ_EYE_SPORT  , "DP-SEQ-EYE-SPORT") \
-    X(DP_SEQ_ROAD_D_D   , "DP-SEQ-ROAD-D-D") \
-    X(DP_SEQ_ROAD_D_N   , "DP-SEQ-ROAD-D-N") \
-    X(DP_SEQ_CITY05_D   , "DP-SEQ-CITY05-D") \
-    X(DP_SEQ_CITY05_N   , "DP-SEQ-CITY05-N") \
-    X(DP_SEQ_ROAD_E_D   , "DP-SEQ-ROAD-E-D") \
-    X(DP_SEQ_ROAD_E_N   , "DP-SEQ-ROAD-E-N") \
-    X(DP_SEQ_EYE_MOUNT  , "DP-SEQ-EYE-MOUNT") \
-    X(DP_SEQ_TOWN04_D   , "DP-SEQ-TOWN04-D") \
-    X(DP_SEQ_TOWN04_N   , "DP-SEQ-TOWN04-N") \
-    X(DP_SEQ_POCKETCH   , "DP-SEQ-POCKETCH") \
-    X(DP_SEQ_ROAD_F_D   , "DP-SEQ-ROAD-F-D") \
-    X(DP_SEQ_ROAD_F_N   , "DP-SEQ-ROAD-F-N") \
-    X(DP_SEQ_CITY07_D   , "DP-SEQ-CITY07-D") \
-    X(DP_SEQ_CITY07_N   , "DP-SEQ-CITY07-N") \
-    X(DP_SEQ_TOWN07_D   , "DP-SEQ-TOWN07-D") \
-    X(MUS_WEATHER_KYOGRE, "MUS-WEATHER-KYOGRE") \
     X(MUS_LITTLEROOT_TEST, "MUS-LITTLEROOT-TEST") \
     X(MUS_GSC_ROUTE38, "MUS-GSC-ROUTE38") \
     X(MUS_CAUGHT, "MUS-CAUGHT") \
@@ -1191,7 +1111,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_CONTEST, "MUS-CONTEST") \
     X(MUS_ENCOUNTER_MAGMA, "MUS-ENCOUNTER-MAGMA") \
     X(MUS_INTRO_BATTLE, "MUS-INTRO-BATTLE") \
-    X(MUS_ABNORMAL_WEATHER, "MUS-ABNORMAL-WEATHER") \
+    X(MUS_WEATHER_KYOGRE, "MUS-WEATHER-KYOGRE") \
     X(MUS_WEATHER_GROUDON, "MUS-WEATHER-GROUDON") \
     X(MUS_SOOTOPOLIS, "MUS-SOOTOPOLIS") \
     X(MUS_CONTEST_RESULTS, "MUS-CONTEST-RESULTS") \
@@ -1205,23 +1125,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_ENCOUNTER_CHAMPION, "MUS-ENCOUNTER-CHAMPION") \
     X(MUS_CREDITS, "MUS-CREDITS") \
     X(MUS_END, "MUS-END") \
-    X(MUS_B_FRONTIER, "MUS-B-FRONTIER") \
-    X(MUS_B_ARENA, "MUS-B-ARENA") \
-    X(MUS_OBTAIN_B_POINTS, "MUS-OBTAIN-B-POINTS") \
-    X(MUS_REGISTER_MATCH_CALL, "MUS-REGISTER-MATCH-CALL") \
-    X(MUS_B_PYRAMID, "MUS-B-PYRAMID") \
-    X(MUS_B_PYRAMID_TOP, "MUS-B-PYRAMID-TOP") \
-    X(MUS_B_PALACE, "MUS-B-PALACE") \
-    X(MUS_RAYQUAZA_APPEARS, "MUS-RAYQUAZA-APPEARS") \
-    X(MUS_B_TOWER, "MUS-B-TOWER") \
-    X(MUS_OBTAIN_SYMBOL, "MUS-OBTAIN-SYMBOL") \
-    X(MUS_B_DOME, "MUS-B-DOME") \
-    X(MUS_B_PIKE, "MUS-B-PIKE") \
-    X(MUS_B_FACTORY, "MUS-B-FACTORY") \
-    X(MUS_VS_RAYQUAZA, "MUS-VS-RAYQUAZA") \
-    X(MUS_VS_FRONTIER_BRAIN, "MUS-VS-FRONTIER-BRAIN") \
-    X(MUS_VS_MEW, "MUS-VS-MEW") \
-    X(MUS_B_DOME_LOBBY, "MUS-B-DOME-LOBBY") \
     X(MUS_VS_WILD, "MUS-VS-WILD") \
     X(MUS_VS_AQUA_MAGMA, "MUS-VS-AQUA-MAGMA") \
     X(MUS_VS_TRAINER, "MUS-VS-TRAINER") \
@@ -1307,57 +1210,104 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_RG_TRAINER_TOWER, "MUS-RG-TRAINER-TOWER") \
     X(MUS_RG_SLOW_PALLET, "MUS-RG-SLOW-PALLET") \
     X(MUS_RG_TEACHY_TV_MENU, "MUS-RG-TEACHY-TV-MENU") \
-    X(PH_TRAP_BLEND, "PH-TRAP-BLEND") \
-    X(PH_TRAP_HELD, "PH-TRAP-HELD") \
-    X(PH_TRAP_SOLO, "PH-TRAP-SOLO") \
-    X(PH_FACE_BLEND, "PH-FACE-BLEND") \
-    X(PH_FACE_HELD, "PH-FACE-HELD") \
-    X(PH_FACE_SOLO, "PH-FACE-SOLO") \
-    X(PH_CLOTH_BLEND, "PH-CLOTH-BLEND") \
-    X(PH_CLOTH_HELD, "PH-CLOTH-HELD") \
-    X(PH_CLOTH_SOLO, "PH-CLOTH-SOLO") \
-    X(PH_DRESS_BLEND, "PH-DRESS-BLEND") \
-    X(PH_DRESS_HELD, "PH-DRESS-HELD") \
-    X(PH_DRESS_SOLO, "PH-DRESS-SOLO") \
-    X(PH_FLEECE_BLEND, "PH-FLEECE-BLEND") \
-    X(PH_FLEECE_HELD, "PH-FLEECE-HELD") \
-    X(PH_FLEECE_SOLO, "PH-FLEECE-SOLO") \
-    X(PH_KIT_BLEND, "PH-KIT-BLEND") \
-    X(PH_KIT_HELD, "PH-KIT-HELD") \
-    X(PH_KIT_SOLO, "PH-KIT-SOLO") \
-    X(PH_PRICE_BLEND, "PH-PRICE-BLEND") \
-    X(PH_PRICE_HELD, "PH-PRICE-HELD") \
-    X(PH_PRICE_SOLO, "PH-PRICE-SOLO") \
-    X(PH_LOT_BLEND, "PH-LOT-BLEND") \
-    X(PH_LOT_HELD, "PH-LOT-HELD") \
-    X(PH_LOT_SOLO, "PH-LOT-SOLO") \
-    X(PH_GOAT_BLEND, "PH-GOAT-BLEND") \
-    X(PH_GOAT_HELD, "PH-GOAT-HELD") \
-    X(PH_GOAT_SOLO, "PH-GOAT-SOLO") \
-    X(PH_THOUGHT_BLEND, "PH-THOUGHT-BLEND") \
-    X(PH_THOUGHT_HELD, "PH-THOUGHT-HELD") \
-    X(PH_THOUGHT_SOLO, "PH-THOUGHT-SOLO") \
-    X(PH_CHOICE_BLEND, "PH-CHOICE-BLEND") \
-    X(PH_CHOICE_HELD, "PH-CHOICE-HELD") \
-    X(PH_CHOICE_SOLO, "PH-CHOICE-SOLO") \
-    X(PH_MOUTH_BLEND, "PH-MOUTH-BLEND") \
-    X(PH_MOUTH_HELD, "PH-MOUTH-HELD") \
-    X(PH_MOUTH_SOLO, "PH-MOUTH-SOLO") \
-    X(PH_FOOT_BLEND, "PH-FOOT-BLEND") \
-    X(PH_FOOT_HELD, "PH-FOOT-HELD") \
-    X(PH_FOOT_SOLO, "PH-FOOT-SOLO") \
-    X(PH_GOOSE_BLEND, "PH-GOOSE-BLEND") \
-    X(PH_GOOSE_HELD, "PH-GOOSE-HELD") \
-    X(PH_GOOSE_SOLO, "PH-GOOSE-SOLO") \
-    X(PH_STRUT_BLEND, "PH-STRUT-BLEND") \
-    X(PH_STRUT_HELD, "PH-STRUT-HELD") \
-    X(PH_STRUT_SOLO, "PH-STRUT-SOLO") \
-    X(PH_CURE_BLEND, "PH-CURE-BLEND") \
-    X(PH_CURE_HELD, "PH-CURE-HELD") \
-    X(PH_CURE_SOLO, "PH-CURE-SOLO") \
-    X(PH_NURSE_BLEND, "PH-NURSE-BLEND") \
-    X(PH_NURSE_HELD, "PH-NURSE-HELD") \
-    X(PH_NURSE_SOLO, "PH-NURSE-SOLO") \
+    X(MUS_ABNORMAL_WEATHER, "MUS-ABNORMAL-WEATHER") \
+    X(MUS_B_FRONTIER, "MUS-B-FRONTIER") \
+    X(MUS_B_ARENA, "MUS-B-ARENA") \
+    X(MUS_OBTAIN_B_POINTS, "MUS-OBTAIN-B-POINTS") \
+    X(MUS_REGISTER_MATCH_CALL, "MUS-REGISTER-MATCH-CALL") \
+    X(MUS_B_PYRAMID, "MUS-B-PYRAMID") \
+    X(MUS_B_PYRAMID_TOP, "MUS-B-PYRAMID-TOP") \
+    X(MUS_B_PALACE, "MUS-B-PALACE") \
+    X(MUS_RAYQUAZA_APPEARS, "MUS-RAYQUAZA-APPEARS") \
+    X(MUS_B_TOWER, "MUS-B-TOWER") \
+    X(MUS_OBTAIN_SYMBOL, "MUS-OBTAIN-SYMBOL") \
+    X(MUS_B_DOME, "MUS-B-DOME") \
+    X(MUS_B_PIKE, "MUS-B-PIKE") \
+    X(MUS_B_FACTORY, "MUS-B-FACTORY") \
+    X(MUS_VS_RAYQUAZA, "MUS-VS-RAYQUAZA") \
+    X(MUS_VS_FRONTIER_BRAIN, "MUS-VS-FRONTIER-BRAIN") \
+    X(MUS_VS_MEW, "MUS-VS-MEW") \
+    X(MUS_B_DOME_LOBBY, "MUS-B-DOME-LOBBY") \
+    X(DP_SEQ_TITLE00    , "DP-SEQ-TITLE00") \
+    X(DP_SEQ_TITLE01    , "DP-SEQ-TITLE01") \
+    X(DP_SEQ_OPENING    , "DP-SEQ-OPENING") \
+    X(DP_SEQ_TV_HOUSOU  , "DP-SEQ-TV-HOUSOU") \
+    X(DP_SEQ_TV_END     , "DP-SEQ-TV-END") \
+    X(DP_SEQ_TOWN01_D   , "DP-SEQ-TOWN01-D") \
+    X(DP_SEQ_TOWN01_N   , "DP-SEQ-TOWN01-N") \
+    X(DP_SEQ_THE_RIV    , "DP-SEQ-THE-RIV") \
+    X(DP_SEQ_ROAD_A_D   , "DP-SEQ-ROAD-A-D") \
+    X(DP_SEQ_ROAD_A_N   , "DP-SEQ-ROAD-A-N") \
+    X(DP_SEQ_D_LAKE     , "DP-SEQ-D-LAKE") \
+    X(DP_SEQ_THE_EVENT01, "DP-SEQ-THE-EVENT01") \
+    X(DP_SEQ_BA_POKE    , "DP-SEQ-BA-POKE") \
+    X(DP_SEQ_WINPOKE    , "DP-SEQ-WINPOKE") \
+    X(DP_SEQ_THE_GIRL   , "DP-SEQ-THE-GIRL") \
+    X(DP_SEQ_THE_BOY    , "DP-SEQ-THE-BOY") \
+    X(DP_SEQ_FANFA4     , "DP-SEQ-FANFA4") \
+    X(DP_SEQ_TOWN02_D   , "DP-SEQ-TOWN02-D") \
+    X(DP_SEQ_TOWN02_N   , "DP-SEQ-TOWN02-N") \
+    X(DP_SEQ_KENKYUJO   , "DP-SEQ-KENKYUJO") \
+    X(DP_SEQ_TSURETEKE  , "DP-SEQ-TSURETEKE") \
+    X(DP_SEQ_PC_01      , "DP-SEQ-PC-01") \
+    X(DP_SEQ_PC_02      , "DP-SEQ-PC-02") \
+    X(DP_SEQ_ASA        , "DP-SEQ-ASA") \
+    X(DP_SEQ_EYE_BOY    , "DP-SEQ-EYE-BOY") \
+    X(DP_SEQ_EYE_GIRL   , "DP-SEQ-EYE-GIRL") \
+    X(DP_SEQ_BA_TRAIN   , "DP-SEQ-BA-TRAIN") \
+    X(DP_SEQ_WINTRAIN   , "DP-SEQ-WINTRAIN") \
+    X(DP_SEQ_CITY01_D   , "DP-SEQ-CITY01-D") \
+    X(DP_SEQ_CITY01_N   , "DP-SEQ-CITY01-N") \
+    X(DP_SEQ_FANFA3     , "DP-SEQ-FANFA3") \
+    X(DP_SEQ_FS         , "DP-SEQ-FS") \
+    X(DP_SEQ_ROAD_B_D   , "DP-SEQ-ROAD-B-D") \
+    X(DP_SEQ_ROAD_B_N   , "DP-SEQ-ROAD-B-N") \
+    X(DP_SEQ_BA_RIVAL   , "DP-SEQ-BA-RIVAL") \
+    X(DP_SEQ_D_05       , "DP-SEQ-D-05") \
+    X(DP_SEQ_WAZA       , "DP-SEQ-WAZA") \
+    X(DP_SEQ_CITY03_D   , "DP-SEQ-CITY03-D") \
+    X(DP_SEQ_CITY03_N   , "DP-SEQ-CITY03-N") \
+    X(DP_SEQ_D_04       , "DP-SEQ-D-04") \
+    X(DP_SEQ_GYM        , "DP-SEQ-GYM") \
+    X(DP_SEQ_BA_GYM     , "DP-SEQ-BA-GYM") \
+    X(DP_SEQ_WINTGYM    , "DP-SEQ-WINTGYM") \
+    X(DP_SEQ_BADGE      , "DP-SEQ-BADGE") \
+    X(DP_SEQ_EYE_KID    , "DP-SEQ-EYE-KID") \
+    X(DP_SEQ_FANFA1     , "DP-SEQ-FANFA1") \
+    X(DP_SEQ_TOWN03_D   , "DP-SEQ-TOWN03-D") \
+    X(DP_SEQ_TOWN03_N   , "DP-SEQ-TOWN03-N") \
+    X(DP_SEQ_KINOMI     , "DP-SEQ-KINOMI") \
+    X(DP_SEQ_ROAD_C_D   , "DP-SEQ-ROAD-C-D") \
+    X(DP_SEQ_ROAD_C_N   , "DP-SEQ-ROAD-C-N") \
+    X(DP_SEQ_EYE_GINGA  , "DP-SEQ-EYE-GINGA") \
+    X(DP_SEQ_BA_GINGA   , "DP-SEQ-BA-GINGA") \
+    X(DP_SEQ_D_02       , "DP-SEQ-D-02") \
+    X(DP_SEQ_GONIN      , "DP-SEQ-GONIN") \
+    X(DP_SEQ_CITY04_D   , "DP-SEQ-CITY04-D") \
+    X(DP_SEQ_CITY04_N   , "DP-SEQ-CITY04-N") \
+    X(DP_SEQ_D_GINLOBBY , "DP-SEQ-D-GINLOBBY") \
+    X(DP_SEQ_BA_GINGA3  , "DP-SEQ-BA-GINGA3") \
+    X(DP_SEQ_WINGINGA   , "DP-SEQ-WINGINGA") \
+    X(DP_SEQ_SHINKA     , "DP-SEQ-SHINKA") \
+    X(DP_SEQ_FANFA5     , "DP-SEQ-FANFA5") \
+    X(DP_SEQ_BICYCLE    , "DP-SEQ-BICYCLE") \
+    X(DP_SEQ_EYE_SPORT  , "DP-SEQ-EYE-SPORT") \
+    X(DP_SEQ_ROAD_D_D   , "DP-SEQ-ROAD-D-D") \
+    X(DP_SEQ_ROAD_D_N   , "DP-SEQ-ROAD-D-N") \
+    X(DP_SEQ_CITY05_D   , "DP-SEQ-CITY05-D") \
+    X(DP_SEQ_CITY05_N   , "DP-SEQ-CITY05-N") \
+    X(DP_SEQ_ROAD_E_D   , "DP-SEQ-ROAD-E-D") \
+    X(DP_SEQ_ROAD_E_N   , "DP-SEQ-ROAD-E-N") \
+    X(DP_SEQ_EYE_MOUNT  , "DP-SEQ-EYE-MOUNT") \
+    X(DP_SEQ_TOWN04_D   , "DP-SEQ-TOWN04-D") \
+    X(DP_SEQ_TOWN04_N   , "DP-SEQ-TOWN04-N") \
+    X(DP_SEQ_POCKETCH   , "DP-SEQ-POCKETCH") \
+    X(DP_SEQ_ROAD_F_D   , "DP-SEQ-ROAD-F-D") \
+    X(DP_SEQ_ROAD_F_N   , "DP-SEQ-ROAD-F-N") \
+    X(DP_SEQ_CITY07_D   , "DP-SEQ-CITY07-D") \
+    X(DP_SEQ_CITY07_N   , "DP-SEQ-CITY07-N") \
+    X(DP_SEQ_TOWN07_D   , "DP-SEQ-TOWN07-D") \
+    X(DP_SEQ_TOWN07_N             , "DP-SEQ-TOWN07-N") \
     X(DP_SEQ_CITY02_D             , "DP-SEQ-CITY02-D") \
     X(DP_SEQ_CITY02_N             , "DP-SEQ-CITY02-N") \
     X(DP_SEQ_ROAD_SNOW_D          , "DP-SEQ-ROAD-SNOW-D") \
@@ -1429,6 +1379,8 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(DP_SEQ_BLD_DENDO            , "DP-SEQ-BLD-DENDO") \
     X(DP_SEQ_BLD_EV_DENDO2        , "DP-SEQ-BLD-EV-DENDO2") \
     X(DP_SEQ_BLD_ENDING           , "DP-SEQ-BLD-ENDING") \
+    X(DP_SEQ_FUE                  , "DP-SEQ-FUE") \
+    X(DP_SEQ_AUS                  , "DP-SEQ-AUS") \
     X(DP_SEQ_BA_SECRET1           , "DP-SEQ-BA-SECRET1") \
     X(PL_SEQ_TITLE00              , "PL-SEQ-TITLE00") \
     X(PL_SEQ_TITLE01              , "PL-SEQ-TITLE01") \
@@ -1463,6 +1415,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(PL_SEQ_PL_POINTGET3         , "PL-SEQ-PL-POINTGET3") \
     X(PL_SEQ_PL_BA_BRAIN          , "PL-SEQ-PL-BA-BRAIN") \
     X(PL_SEQ_PL_WINBRAIN          , "PL-SEQ-PL-WINBRAIN") \
+    X(PL_SEQ_PL_BA_REGI           , "PL-SEQ-PL-BA-REGI") \
     X(HG_SEQ_GS_TITLE             , "HG-SEQ-GS-TITLE") \
     X(HG_SEQ_GS_POKEMON_THEME     , "HG-SEQ-GS-POKEMON-THEME") \
     X(HG_SEQ_GS_STARTING          , "HG-SEQ-GS-STARTING") \
@@ -1639,10 +1592,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(HG_SEQ_ME_CARDGAME1         , "HG-SEQ-ME-CARDGAME1") \
     X(HG_SEQ_ME_CARDGAME2         , "HG-SEQ-ME-CARDGAME2") \
     X(HG_SEQ_ME_GONIN             , "HG-SEQ-ME-GONIN") \
-    X(DP_SEQ_FUE                  , "DP-SEQ-FUE") \
-    X(DP_SEQ_AUS                  , "DP-SEQ-AUS") \
-    X(PL_SEQ_PL_BA_REGI           , "PL-SEQ-PL-BA-REGI") \
-    X(DP_SEQ_TOWN07_N             , "DP-SEQ-TOWN07-N") \
     X(BW_SEQ_BGM_TITLE            , "BW-SEQ-BGM-TITLE") \
     X(BW_SEQ_BGM_TITLE01          , "BW-SEQ-BGM-TITLE01") \
     X(BW_SEQ_BGM_POKEMON_THEME    , "BW-SEQ-BGM-POKEMON-THEME") \
@@ -1963,6 +1912,57 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(SE_PIKE_CURTAIN_CLOSE, "SE-PIKE-CURTAIN-CLOSE") \
     X(SE_PIKE_CURTAIN_OPEN, "SE-PIKE-CURTAIN-OPEN") \
     X(SE_SUDOWOODO_SHAKE, "SE-SUDOWOODO-SHAKE") \
+    X(PH_TRAP_BLEND, "PH-TRAP-BLEND") \
+    X(PH_TRAP_HELD, "PH-TRAP-HELD") \
+    X(PH_TRAP_SOLO, "PH-TRAP-SOLO") \
+    X(PH_FACE_BLEND, "PH-FACE-BLEND") \
+    X(PH_FACE_HELD, "PH-FACE-HELD") \
+    X(PH_FACE_SOLO, "PH-FACE-SOLO") \
+    X(PH_CLOTH_BLEND, "PH-CLOTH-BLEND") \
+    X(PH_CLOTH_HELD, "PH-CLOTH-HELD") \
+    X(PH_CLOTH_SOLO, "PH-CLOTH-SOLO") \
+    X(PH_DRESS_BLEND, "PH-DRESS-BLEND") \
+    X(PH_DRESS_HELD, "PH-DRESS-HELD") \
+    X(PH_DRESS_SOLO, "PH-DRESS-SOLO") \
+    X(PH_FLEECE_BLEND, "PH-FLEECE-BLEND") \
+    X(PH_FLEECE_HELD, "PH-FLEECE-HELD") \
+    X(PH_FLEECE_SOLO, "PH-FLEECE-SOLO") \
+    X(PH_KIT_BLEND, "PH-KIT-BLEND") \
+    X(PH_KIT_HELD, "PH-KIT-HELD") \
+    X(PH_KIT_SOLO, "PH-KIT-SOLO") \
+    X(PH_PRICE_BLEND, "PH-PRICE-BLEND") \
+    X(PH_PRICE_HELD, "PH-PRICE-HELD") \
+    X(PH_PRICE_SOLO, "PH-PRICE-SOLO") \
+    X(PH_LOT_BLEND, "PH-LOT-BLEND") \
+    X(PH_LOT_HELD, "PH-LOT-HELD") \
+    X(PH_LOT_SOLO, "PH-LOT-SOLO") \
+    X(PH_GOAT_BLEND, "PH-GOAT-BLEND") \
+    X(PH_GOAT_HELD, "PH-GOAT-HELD") \
+    X(PH_GOAT_SOLO, "PH-GOAT-SOLO") \
+    X(PH_THOUGHT_BLEND, "PH-THOUGHT-BLEND") \
+    X(PH_THOUGHT_HELD, "PH-THOUGHT-HELD") \
+    X(PH_THOUGHT_SOLO, "PH-THOUGHT-SOLO") \
+    X(PH_CHOICE_BLEND, "PH-CHOICE-BLEND") \
+    X(PH_CHOICE_HELD, "PH-CHOICE-HELD") \
+    X(PH_CHOICE_SOLO, "PH-CHOICE-SOLO") \
+    X(PH_MOUTH_BLEND, "PH-MOUTH-BLEND") \
+    X(PH_MOUTH_HELD, "PH-MOUTH-HELD") \
+    X(PH_MOUTH_SOLO, "PH-MOUTH-SOLO") \
+    X(PH_FOOT_BLEND, "PH-FOOT-BLEND") \
+    X(PH_FOOT_HELD, "PH-FOOT-HELD") \
+    X(PH_FOOT_SOLO, "PH-FOOT-SOLO") \
+    X(PH_GOOSE_BLEND, "PH-GOOSE-BLEND") \
+    X(PH_GOOSE_HELD, "PH-GOOSE-HELD") \
+    X(PH_GOOSE_SOLO, "PH-GOOSE-SOLO") \
+    X(PH_STRUT_BLEND, "PH-STRUT-BLEND") \
+    X(PH_STRUT_HELD, "PH-STRUT-HELD") \
+    X(PH_STRUT_SOLO, "PH-STRUT-SOLO") \
+    X(PH_CURE_BLEND, "PH-CURE-BLEND") \
+    X(PH_CURE_HELD, "PH-CURE-HELD") \
+    X(PH_CURE_SOLO, "PH-CURE-SOLO") \
+    X(PH_NURSE_BLEND, "PH-NURSE-BLEND") \
+    X(PH_NURSE_HELD, "PH-NURSE-HELD") \
+    X(PH_NURSE_SOLO, "PH-NURSE-SOLO") \
 
 // Create BGM list
 #define X(songId, name) static const u8 sBGMName_##songId[] = _(name);
