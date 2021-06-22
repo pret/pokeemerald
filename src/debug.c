@@ -2729,8 +2729,6 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
 {
     if (gMain.newKeys & DPAD_ANY)
     {
-        PlaySE(SE_SELECT);
-
         if(gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
@@ -2808,8 +2806,6 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 {
     if (gMain.newKeys & DPAD_ANY)
     {
-        PlaySE(SE_SELECT);
-
         if(gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
