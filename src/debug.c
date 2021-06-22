@@ -60,6 +60,7 @@ enum { // Main
     DEBUG_MENU_ITEM_FLAGS,
     DEBUG_MENU_ITEM_VARS,
     DEBUG_MENU_ITEM_GIVE,
+    DEBUG_MENU_ITEM_SOUND,
     DEBUG_MENU_ITEM_CANCEL
 };
 enum { // Util
@@ -77,7 +78,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER,
     DEBUG_UTIL_MENU_ITEM_TRAINER_ID,
 };
-enum {
+enum { // Scripts
     DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
     DEBUG_UTIL_MENU_ITEM_SCRIPT_2,
     DEBUG_UTIL_MENU_ITEM_SCRIPT_3,
@@ -115,6 +116,10 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_FILL_PC,
     DEBUG_GIVE_MENU_ITEM_CHEAT,
     //DEBUG_MENU_ITEM_ACCESS_PC,
+};
+enum { //Sound
+    DEBUG_SOUND_MENU_ITEM_SE,
+    DEBUG_SOUND_MENU_ITEM_MUS,
 };
 
 
@@ -182,12 +187,14 @@ static void DebugAction_OpenScriptsMenu(u8);
 static void DebugAction_OpenFlagsMenu(u8);
 static void DebugAction_OpenVariablesMenu(u8);
 static void DebugAction_OpenGiveMenu(u8);
+static void DebugAction_OpenSoundMenu(u8);
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utilities(u8);
 static void DebugTask_HandleMenuInput_Scripts(u8);
 static void DebugTask_HandleMenuInput_Flags(u8);
 static void DebugTask_HandleMenuInput_Vars(u8);
 static void DebugTask_HandleMenuInput_Give(u8);
+static void DebugTask_HandleMenuInput_Sound(u8);
 
 static void DebugAction_Util_HealParty(u8 taskId);
 static void DebugAction_Util_Fly(u8 taskId);
@@ -246,6 +253,11 @@ static void DebugAction_Give_FillPC(u8 taskId);
 static void DebugAction_Give_CHEAT(u8 taskId);
 static void DebugAction_AccessPC(u8 taskId);
 
+static void DebugAction_Sound_SE(u8 taskId);
+static void DebugAction_Sound_SE_SelectId(u8 taskId);
+static void DebugAction_Sound_MUS(u8 taskId);
+static void DebugAction_Sound_MUS_SelectId(u8 taskId);
+
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
@@ -277,6 +289,7 @@ static const u8 gDebugText_Scripts[] =          _("Scripts");
 static const u8 gDebugText_Flags[] =            _("Flags");
 static const u8 gDebugText_Vars[] =             _("Variables");
 static const u8 gDebugText_Give[] =             _("Give X");
+static const u8 gDebugText_Sound[] =            _("Sound");
 static const u8 gDebugText_Cancel[] =           _("Cancel");
 // Script menu
 static const u8 gDebugText_Util_Script_1[] =               _("Script 1");
@@ -356,6 +369,12 @@ static const u8 gDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
 static const u8 gDebugText_Give_FillPc[] =              _("Fill Pc");
 static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
 // static const u8 gDebugText_Give_AccessPC[] =         _("Access PC");
+// Sound Mneu
+static const u8 gDebugText_Sound_SE[] =                 _("Effects");
+static const u8 gDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
+static const u8 gDebugText_Sound_MUS[] =                _("Music");
+static const u8 gDebugText_Sound_MUS_ID[] =             _("Music Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
+static const u8 gDebugText_Sound_Empty[] =              _("");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -399,6 +418,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     [DEBUG_MENU_ITEM_FLAGS]         = {gDebugText_Flags,        DEBUG_MENU_ITEM_FLAGS},
     [DEBUG_MENU_ITEM_VARS]          = {gDebugText_Vars,         DEBUG_MENU_ITEM_VARS},
     [DEBUG_MENU_ITEM_GIVE]          = {gDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
+    [DEBUG_MENU_ITEM_SOUND]         = {gDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
     [DEBUG_MENU_ITEM_CANCEL]        = {gDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL}
 };
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -460,6 +480,11 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = {gDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
     //[DEBUG_MENU_ITEM_ACCESS_PC] = {gDebugText_AccessPC, DEBUG_MENU_ITEM_ACCESS_PC},
 };
+static const struct ListMenuItem sDebugMenu_Items_Sound[] =
+{
+    [DEBUG_SOUND_MENU_ITEM_SE]            = {gDebugText_Sound_SE,         DEBUG_SOUND_MENU_ITEM_SE},
+    [DEBUG_SOUND_MENU_ITEM_MUS]           = {gDebugText_Sound_MUS,        DEBUG_SOUND_MENU_ITEM_MUS},
+};
 
 // *******************************
 // Menu Actions
@@ -470,6 +495,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_FLAGS]         = DebugAction_OpenFlagsMenu,
     [DEBUG_MENU_ITEM_VARS]          = DebugAction_OpenVariablesMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
+    [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
     [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
 };
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
@@ -530,6 +556,11 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = DebugAction_Give_FillPC,
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = DebugAction_Give_CHEAT,
     //[DEBUG_MENU_ITEM_ACCESS_PC] = DebugAction_AccessPC,
+};
+static void (*const sDebugMenu_Actions_Sound[])(u8) =
+{
+    [DEBUG_SOUND_MENU_ITEM_SE]      = DebugAction_Sound_SE,
+    [DEBUG_SOUND_MENU_ITEM_MUS]     = DebugAction_Sound_MUS,
 };
 
 
@@ -593,6 +624,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
     .items = sDebugMenu_Items_Give,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
+{
+    .items = sDebugMenu_Items_Sound,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
 };
 
 
@@ -776,6 +813,24 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId)
         Debug_ShowMainMenu();
     }
 }
+static void DebugTask_HandleMenuInput_Sound(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Sound[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMainMenu();
+    }
+}
 
 // *******************************
 // Open sub-menus
@@ -803,6 +858,11 @@ static void DebugAction_OpenGiveMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
+}
+static void DebugAction_OpenSoundMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
 }
 
 
@@ -2619,8 +2679,160 @@ static void DebugAction_Give_CHEAT(u8 taskId)
 // }
 
 
+// *******************************
+// Sound Scripts
+static void DebugAction_Sound_SE(u8 taskId)
+{
+    u8 windowId;
 
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
 
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, 3);
+
+    //Display initial ID
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+    StringCopyPadded(gStringVar1, gDebugText_Sound_Empty, CHAR_SPACE, 15);
+    StringExpandPlaceholders(gStringVar4, gDebugText_Sound_SE_ID);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+
+    StopMapMusic(); //Stop map music to better hear sounds
+
+    gTasks[taskId].func = DebugAction_Sound_SE_SelectId;
+    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[3] = 1;            //Current ID
+    gTasks[taskId].data[4] = 0;                    //Digit Selected
+}
+static void DebugAction_Sound_SE_SelectId(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_ANY)
+    {
+        PlaySE(SE_SELECT);
+
+        if(gMain.newKeys & DPAD_UP)
+        {
+            gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
+            if(gTasks[taskId].data[3] > END_SE)
+                gTasks[taskId].data[3] = END_SE;
+        }
+        if(gMain.newKeys & DPAD_DOWN)
+        {
+            gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
+            if(gTasks[taskId].data[3] < 1)
+                gTasks[taskId].data[3] = 1;
+        }
+        if(gMain.newKeys & DPAD_LEFT)
+        {
+            if(gTasks[taskId].data[4] > 0)
+                gTasks[taskId].data[4] -= 1;
+        }
+        if(gMain.newKeys & DPAD_RIGHT)
+        {
+            if(gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
+                gTasks[taskId].data[4] += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
+        StringCopyPadded(gStringVar1, gDebugText_Sound_Empty, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+        StringExpandPlaceholders(gStringVar4, gDebugText_Sound_SE_ID);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(gTasks[taskId].data[3]);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        MapMusicMain();
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+static void DebugAction_Sound_MUS(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, 3);
+
+    //Display initial ID
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, START_MUS, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+    StringCopyPadded(gStringVar1, gDebugText_Sound_Empty, CHAR_SPACE, 15);
+    StringExpandPlaceholders(gStringVar4, gDebugText_Sound_MUS_ID);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+
+    StopMapMusic(); //Stop map music to better hear new music
+
+    gTasks[taskId].func = DebugAction_Sound_MUS_SelectId;
+    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[3] = START_MUS;            //Current ID
+    gTasks[taskId].data[4] = 0;                    //Digit Selected
+}
+static void DebugAction_Sound_MUS_SelectId(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_ANY)
+    {
+        PlaySE(SE_SELECT);
+
+        if(gMain.newKeys & DPAD_UP)
+        {
+            gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
+            if(gTasks[taskId].data[3] > END_MUS)
+                gTasks[taskId].data[3] = END_MUS;
+        }
+        if(gMain.newKeys & DPAD_DOWN)
+        {
+            gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
+            if(gTasks[taskId].data[3] < START_MUS)
+                gTasks[taskId].data[3] = START_MUS;
+        }
+        if(gMain.newKeys & DPAD_LEFT)
+        {
+            if(gTasks[taskId].data[4] > 0)
+                gTasks[taskId].data[4] -= 1;
+        }
+        if(gMain.newKeys & DPAD_RIGHT)
+        {
+            if(gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
+                gTasks[taskId].data[4] += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
+        StringCopyPadded(gStringVar1, gDebugText_Sound_Empty, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+        StringExpandPlaceholders(gStringVar4, gDebugText_Sound_MUS_ID);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        StopMapMusic();
+        PlayNewMapMusic(gTasks[taskId].data[3]);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        MapMusicMain();
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
 
 // Additional functions
 /*
