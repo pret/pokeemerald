@@ -22,6 +22,7 @@
 #include "item.h"
 #include "item_icon.h"
 #include "list_menu.h"
+#include "m4a.h"
 #include "main.h"
 #include "main_menu.h"
 #include "malloc.h"
@@ -2720,8 +2721,9 @@ static void DebugAction_Sound_SE(u8 taskId)
 
     gTasks[taskId].func = DebugAction_Sound_SE_SelectId;
     gTasks[taskId].data[2] = windowId;
-    gTasks[taskId].data[3] = 1;            //Current ID
-    gTasks[taskId].data[4] = 0;                    //Digit Selected
+    gTasks[taskId].data[3] = 1;                         //Current ID
+    gTasks[taskId].data[4] = 0;                         //Digit Selected
+    gTasks[taskId].data[5] = gTasks[taskId].data[3];    //Last song played (for stopping)
 }
 static void DebugAction_Sound_SE_SelectId(u8 taskId)
 {
@@ -2761,12 +2763,14 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(gTasks[taskId].data[3]);
+        m4aSongNumStop(gTasks[taskId].data[5]);
+        gTasks[taskId].data[5] = gTasks[taskId].data[3];
+        m4aSongNumStart(gTasks[taskId].data[3]);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        MapMusicMain();
+        m4aSongNumStop(gTasks[taskId].data[5]);
         DebugAction_DestroyExtraWindow(taskId);
     }
 }
@@ -2796,8 +2800,9 @@ static void DebugAction_Sound_MUS(u8 taskId)
 
     gTasks[taskId].func = DebugAction_Sound_MUS_SelectId;
     gTasks[taskId].data[2] = windowId;
-    gTasks[taskId].data[3] = START_MUS;            //Current ID
-    gTasks[taskId].data[4] = 0;                    //Digit Selected
+    gTasks[taskId].data[3] = START_MUS;                 //Current ID
+    gTasks[taskId].data[4] = 0;                         //Digit Selected
+    gTasks[taskId].data[5] = gTasks[taskId].data[3];    //Last song played (for stopping)
 }
 static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 {
@@ -2837,13 +2842,14 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        StopMapMusic();
-        PlayNewMapMusic(gTasks[taskId].data[3]);
+        m4aSongNumStop(gTasks[taskId].data[5]);
+        gTasks[taskId].data[5] = gTasks[taskId].data[3];
+        m4aSongNumStart(gTasks[taskId].data[3]);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        MapMusicMain();
+        // m4aSongNumStop(gTasks[taskId].data[5]);   //Uncomment if music should stop after leaving menu
         DebugAction_DestroyExtraWindow(taskId);
     }
 }
