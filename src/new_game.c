@@ -45,6 +45,7 @@
 #include "berry_powder.h"
 #include "mevent.h"
 #include "union_room_chat.h"
+#include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -204,6 +205,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    gSaveBlock2Ptr->lastUsedBall = ITEM_POKE_BALL;
 }
 
 static void ResetMiniGamesRecords(void)

@@ -12017,7 +12017,8 @@ static void Cmd_handleballthrow(void)
     {
         u32 odds;
         u8 catchRate;
-
+    
+        gSaveBlock2Ptr->lastUsedBall = gLastUsedItem;
         if (gLastUsedItem == ITEM_SAFARI_BALL)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else
