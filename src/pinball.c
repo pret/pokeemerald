@@ -47,7 +47,8 @@
 #define TAG_SEEL_MULTIPLIER            509
 #define TAG_GASTLY                     510
 #define TAG_HAUNTER                    511
-#define TAG_TIMER_DIGIT                512
+#define TAG_GENGAR                     512
+#define TAG_TIMER_DIGIT                513
 
 enum
 {
@@ -63,8 +64,8 @@ enum
     PINBALL_STATE_RUNNING,
     PINBALL_LOST_BALL_FADE_OUT,
     PINBALL_LOST_BALL_FADE_IN,
-    PINBALL_STATE_START_EXIT,
     PINBALL_STATE_DELAY_START_EXIT,
+    PINBALL_STATE_START_EXIT,
     PINBALL_STATE_EXIT,
     PINBALL_STATE_WAIT_ANIM,
 };
@@ -237,6 +238,26 @@ struct GraveyardGhost
 
 enum
 {
+    GENGAR_STATE_STANDING,
+    GENGAR_STATE_STEP_LEFT,
+    GENGAR_STATE_STEP_RIGHT,
+    GENGAR_STATE_HIT,
+    GENGAR_STATE_LAST_HIT,
+    GENGAR_STATE_LEAVING,
+};
+
+struct GengarGhost
+{
+    u8 state;
+    u8 spriteId;
+    u16 xPos;
+    u16 yPos;
+    u8 nextFoot;
+    u32 counter;
+};
+
+enum
+{
     GRAVEYARD_STATE_GASTLY,
     GRAVEYARD_STATE_TO_HAUNTER,
     GRAVEYARD_STATE_HAUNTER,
@@ -255,9 +276,11 @@ struct Gengar
     u16 counter;
     struct GraveyardGhost gastlyGhosts[NUM_GASTLY];
     struct GraveyardGhost haunterGhosts[NUM_HAUNTER];
+    struct GengarGhost gengarGhost;
     u8 numGastlyHits;
     u8 numHaunterHits;
     u8 numGengarHits;
+    u8 *collisionMap;
 };
 
 #define FLIPPER_LEFT  0
@@ -304,6 +327,7 @@ struct PinballGame
     bool8 flippersDisabled;
     bool8 completed;
     u8 exitTimer;
+    bool8 waitExitScene;
     MainCallback returnMainCallback;
 };
 
@@ -397,13 +421,17 @@ static u32 GetSeelVisibleTicks(int curStreak);
 static void UpdateSeelSprite(struct Sprite *sprite);
 static void UpdateSeelSparkleSprite(struct Sprite *sprite);
 static void UpdateSeelMultiplierSprite(struct Sprite *sprite);
-static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct GraveyardGhost *ghosts, int numGhosts, u8 *hits, const u8 *angles, int width, int height, u8 *outCollisionNormal, int *outCollisionAmplification);
+static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct GraveyardGhost *ghosts, int numGhosts, const u8 *angles, int width, int height, u8 *outCollisionNormal, int *outCollisionAmplification);
+static bool32 CheckGengarCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification);
 static bool32 UpdateGengar(struct Gengar *gengar);
+static void UpdateGengarGhost(struct Gengar *gengar);
 static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 *numGhostHits, u8 nextState, int numGhosts);
 static void InitGhost(struct GraveyardGhost *ghost, const u8 *initialData, const struct SpriteTemplate *spriteTemplate, int ghostIndex);
 static void UpdateGastlySprite(struct Sprite *sprite);
 static void UpdateHaunterSprite(struct Sprite *sprite);
 static void UpdateGhostSprite(struct Sprite *sprite, struct GraveyardGhost *ghost);
+static void UpdateGengarSprite(struct Sprite *sprite);
+static void CrumbleGravestones(struct Gengar *gengar);
 
 static EWRAM_DATA struct PinballGame *sPinballGame = NULL;
 
@@ -513,6 +541,9 @@ static const u8 sGastlyCollisionNormalAngles[] = INCBIN_U8("data/pinball/gastly_
 static const u32 sHaunterAnimationGfx[] = INCBIN_U32("graphics/pinball/haunter_animation.4bpp.lz");
 static const u16 sHaunterAnimationPalette[] = INCBIN_U16("graphics/pinball/haunter_animation.gbapal");
 static const u8 sHaunterCollisionNormalAngles[] = INCBIN_U8("data/pinball/haunter_normal_angles.bin");
+static const u32 sGengarAnimationGfx[] = INCBIN_U32("graphics/pinball/gengar_animation.4bpp.lz");
+static const u16 sGengarAnimationPalette[] = INCBIN_U16("graphics/pinball/gengar_animation.gbapal");
+static const u8 sGengarCollisionNormalAngles[] = INCBIN_U8("data/pinball/gengar_normal_angles.bin");
 
 static const struct CompressedSpriteSheet sBallPokeballSpriteSheet = {
     .data = sBallPokeballGfx,
@@ -592,6 +623,12 @@ static const struct CompressedSpriteSheet sHaunterAnimationSpriteSheet = {
     .tag = TAG_HAUNTER,
 };
 
+static const struct CompressedSpriteSheet sGengarAnimationSpriteSheet = {
+    .data = sGengarAnimationGfx,
+    .size = 0x4000,
+    .tag = TAG_GENGAR,
+};
+
 static const struct SpritePalette sPinballSpritePalette = { sBallPokeballPalette, TAG_BALL_POKEBALL };
 static const struct SpritePalette sFlipperSpritePalette = { sFlipperPalette, TAG_FLIPPER };
 static const struct SpritePalette sTimerDigitsSpritePalette = { sTimerDigitsPalette, TAG_TIMER_DIGIT };
@@ -604,6 +641,7 @@ static const struct SpritePalette sSeelSparkleSpritePalette = { sSeelSparklePale
 static const struct SpritePalette sSeelMultipliersSpritePalette = { sSeelMultipliersPalette, TAG_SEEL_MULTIPLIER };
 static const struct SpritePalette sGastlyAnimationSpritePalette = { sGastlyAnimationPalette, TAG_GASTLY };
 static const struct SpritePalette sHaunterAnimationSpritePalette = { sHaunterAnimationPalette, TAG_HAUNTER };
+static const struct SpritePalette sGengarAnimationSpritePalette = { sGengarAnimationPalette, TAG_GENGAR };
 
 static const struct OamData sBallOamData = {
     .y = 0,
@@ -1501,7 +1539,418 @@ static const struct SpriteTemplate sHaunterSpriteTemplate = {
     .callback = UpdateHaunterSprite,
 };
 
+static const struct OamData sGengarOamData = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sGengarAnimCmd_Stand[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sGengarAnimCmd_StepLeft[] = {
+    ANIMCMD_FRAME(64, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sGengarAnimCmd_StepRight[] = {
+    ANIMCMD_FRAME(128, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sGengarAnimCmd_Hit[] = {
+    ANIMCMD_FRAME(192, 16),
+    ANIMCMD_FRAME(64, 32),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sGengarAnimCmd_Leave[] = {
+    ANIMCMD_FRAME(192, 16),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(320, 8),
+    ANIMCMD_FRAME(384, 12),
+    ANIMCMD_FRAME(320, 10),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(320, 8),
+    ANIMCMD_FRAME(384, 12),
+    ANIMCMD_FRAME(320, 10),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(448, 4),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 3),
+    ANIMCMD_FRAME(448, 3),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 2),
+    ANIMCMD_FRAME(448, 2),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(448, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sGengarAnimCmds[] = {
+    sGengarAnimCmd_Stand,
+    sGengarAnimCmd_StepLeft,
+    sGengarAnimCmd_StepRight,
+    sGengarAnimCmd_Hit,
+    sGengarAnimCmd_Leave,
+};
+
+static const struct SpriteTemplate sGengarSpriteTemplate = {
+    .tileTag = TAG_GENGAR,
+    .paletteTag = TAG_GENGAR,
+    .oam = &sGengarOamData,
+    .anims = sGengarAnimCmds,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateGengarSprite,
+};
+
 static const u8 sGengarGravestoneCollisionAttributes[] = {0x19, 0x1A, 0x1B, 0x1C, 0x27, 0x1D, 0x1E, 0x1F, 0x20};
+
+static const u8 sGengarGravestoneCoords[][2] = {
+    {8, 5},
+    {15, 4},
+    {4, 8},
+    {14, 9},
+};
 
 static const u8 sInitialGastlyData[NUM_GASTLY][5] = {
     {24, 24, GHOST_DIR_RIGHT, 24, 64},
@@ -1954,6 +2403,8 @@ static void InitGengar(void)
     gengar->numHaunterHits = 0;
     gengar->numGengarHits = 0;
     gengar->graveyardState = GRAVEYARD_STATE_GASTLY;
+    gengar->collisionMap = Alloc(ARRAY_COUNT(sGengarStageBgCollisionMap) * sizeof(sGengarStageBgCollisionMap[0]));
+    memcpy(gengar->collisionMap, sGengarStageBgCollisionMap, ARRAY_COUNT(sGengarStageBgCollisionMap) * sizeof(sGengarStageBgCollisionMap[0]));
     for (i = 0; i < NUM_GASTLY; i++)
         InitGhost(&gengar->gastlyGhosts[i], sInitialGastlyData[i], &sGastlySpriteTemplate, i);
 }
@@ -1990,10 +2441,12 @@ static void PinballMain(u8 taskId)
         completed = UpdateGameType(sPinballGame->gameType);
         if (!sPinballGame->completed && completed)
             sPinballGame->completed = TRUE;
-
+        
         HandleBallPhysics();
         UpdateCamera();
-        UpdateTimer();
+
+        if (!sPinballGame->waitExitScene)
+            UpdateTimer();
         break;
     case PINBALL_LOST_BALL_FADE_OUT:
         if (!gPaletteFade.active)
@@ -2263,7 +2716,10 @@ static void HandleBallPhysics(void)
     UpdatePosition(ball);
 
     if ((ball->yPos >> 8) > 168)
+    {
+        ball->yPos == 170 << 8;
         LoseBall();
+    }
 }
 
 static void LoseBall(void)
@@ -2275,8 +2731,12 @@ static void LoseBall(void)
     }
     else
     {
-        sPinballGame->state = PINBALL_STATE_DELAY_START_EXIT;
-        sPinballGame->exitTimer = 2 * 60;
+        if (!sPinballGame->waitExitScene)
+        {
+            sPinballGame->state = PINBALL_STATE_DELAY_START_EXIT;
+            sPinballGame->exitTimer = 2 * 60;
+        }
+
         gSpecialVar_Result = sPinballGame->completed;
     }
 }
@@ -2653,7 +3113,7 @@ static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index)
         break;
     case GAME_TYPE_GENGAR:
         entranceCollisionMap = sGengarStageEntranceBgCollisionMap;
-        collisionMap = sGengarStageBgCollisionMap;
+        collisionMap = sPinballGame->gengar.collisionMap;
         break;
     }
 
@@ -3083,7 +3543,6 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
                 ticks,
                 sPinballGame->gengar.gastlyGhosts,
                 NUM_GASTLY,
-                &sPinballGame->gengar.numGastlyHits,
                 sGastlyCollisionNormalAngles,
                 32,
                 32,
@@ -3096,7 +3555,6 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
                 ticks,
                 sPinballGame->gengar.haunterGhosts,
                 NUM_HAUNTER,
-                &sPinballGame->gengar.numHaunterHits,
                 sHaunterCollisionNormalAngles,
                 32,
                 40,
@@ -3104,6 +3562,7 @@ static bool32 CheckObjectsCollision(u8 gameType, struct Ball *ball, u32 ticks, u
                 outCollisionAmplification);
             break;
         case GRAVEYARD_STATE_GENGAR:
+            isColliding = CheckGengarCollision(ball, &sPinballGame->gengar, ticks, outCollisionNormal, outCollisionAmplification);
             break;
         }
         break;
@@ -3948,7 +4407,7 @@ static void UpdateSeelMultiplierSprite(struct Sprite *sprite)
     }
 }
 
-static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct GraveyardGhost *ghosts, int numGhosts, u8 *hits, const u8 *angles, int width, int height, u8 *outCollisionNormal, int *outCollisionAmplification)
+static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct GraveyardGhost *ghosts, int numGhosts, const u8 *angles, int width, int height, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     int i;
     int x, y;
@@ -3981,15 +4440,58 @@ static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct Graveyar
         // Multiply normal by two because the original data is stored halved.
         *outCollisionNormal = collisionNormal * 2;
         ghost->state = GHOST_STATE_HIT;
-        (*hits)++;
         return TRUE;
     }
 
     return FALSE;
 }
 
+static bool32 CheckGengarCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
+{
+    int x, y;
+    u8 collisionNormal;
+    struct GengarGhost *gengarGhost = &gengar->gengarGhost;
+    int gengarXPos = (gengarGhost->xPos >> 8);
+    int gengarYPos = (gengarGhost->yPos >> 8);
+    int ballXPos = (ball->xPos >> 8);
+    int ballYPos = (ball->yPos >> 8);
+
+    if (ticks <= 0)
+        return FALSE;
+
+    if (ballXPos < gengarXPos - 24 || ballXPos >= gengarXPos + 24
+     || ballYPos < gengarYPos - 32 || ballYPos >= gengarYPos + 32)
+        return FALSE;
+
+    x = ballXPos - gengarXPos + 24;
+    y = ballYPos - gengarYPos + 32;
+    collisionNormal = sGengarCollisionNormalAngles[y * 48 + x];
+    if (collisionNormal == 0xFF)
+        return FALSE;
+
+    // Multiply normal by two because the original data is stored halved.
+    *outCollisionNormal = collisionNormal * 2;
+
+    if (gengarGhost->state == GENGAR_STATE_STANDING || gengarGhost->state == GENGAR_STATE_STEP_LEFT ||
+        gengarGhost->state == GENGAR_STATE_STEP_RIGHT)
+    {
+        gengarGhost->state = GENGAR_STATE_HIT;
+        gengarGhost->counter = 0;
+        gengar->numGengarHits++;
+        if (gengar->numGengarHits >= 5)
+        {
+            gengar->completed = TRUE;
+            DisableFlippers();
+            gengarGhost->state = GENGAR_STATE_LEAVING;
+            sPinballGame->waitExitScene = TRUE;
+        }
+    }
+
+    return TRUE;
+}
+
 #define GHOST_SPEED 0x35
-#define REQUIRED_GHOST_HITS 10
+#define REQUIRED_GHOST_HITS 4
 
 static bool32 UpdateGengar(struct Gengar *gengar)
 {
@@ -4014,16 +4516,102 @@ static bool32 UpdateGengar(struct Gengar *gengar)
             UpdateGhost(gengar, &gengar->haunterGhosts[i], &gengar->numHaunterHits, GRAVEYARD_STATE_TO_GENGAR, NUM_HAUNTER);
         break;
      case GRAVEYARD_STATE_TO_GENGAR:
-        if (--gengar->counter == 0)
+        gengar->counter--;
+        if (gengar->counter == 60)
         {
-            gengar->graveyardState = GRAVEYARD_STATE_GENGAR;
-            // TODO: Init Gengar
+            CrumbleGravestones(gengar);
         }
+        else if (gengar->counter == 0)
+        {
+            struct GengarGhost *gengarGhost = &gengar->gengarGhost;
+            FreeSpriteTilesByTag(TAG_HAUNTER);
+            FreeSpritePaletteByTag(TAG_HAUNTER);
+            LoadCompressedSpriteSheet(&sGengarAnimationSpriteSheet);
+            LoadSpritePalette(&sGengarAnimationSpritePalette);
+            gengar->graveyardState = GRAVEYARD_STATE_GENGAR;
+            gengarGhost->state = GENGAR_STATE_STANDING;
+            gengarGhost->counter = 60;
+            gengarGhost->xPos = 80 << 8;
+            gengarGhost->yPos = 20 << 8;
+            gengarGhost->spriteId = CreateSprite(&sGengarSpriteTemplate, 80, 20, 5);
+            gSprites[gengarGhost->spriteId].data[0] = gengarGhost->state;
+            StartSpriteAnim(&gSprites[gengarGhost->spriteId], 0);
+        }
+    case GRAVEYARD_STATE_GENGAR:
+        UpdateGengarGhost(gengar);
         break;
     }
 
     return gengar->completed;
 }
+
+static void UpdateGengarGhost(struct Gengar *gengar)
+{
+    struct GengarGhost *gengarGhost = &gengar->gengarGhost;
+    struct Sprite *sprite = &gSprites[gengarGhost->spriteId];
+
+    switch (gengarGhost->state)
+    {
+    case GENGAR_STATE_STANDING:
+        if (--gengarGhost->counter == 0)
+        {
+            gengarGhost->state = gengarGhost->nextFoot ? GENGAR_STATE_STEP_RIGHT : GENGAR_STATE_STEP_LEFT;
+            gengarGhost->counter = 64;
+            if ((gengarGhost->yPos >> 8) < 64)
+                gengarGhost->yPos += (3 << 8);
+        }
+        break;
+    case GENGAR_STATE_STEP_LEFT:
+    case GENGAR_STATE_STEP_RIGHT:
+        if (--gengarGhost->counter == 0)
+        {
+            gengarGhost->state = GENGAR_STATE_STANDING;
+            gengarGhost->counter = 12;
+            gengarGhost->nextFoot = !gengarGhost->nextFoot;
+            if ((gengarGhost->yPos >> 8) < 64)
+                gengarGhost->yPos += (1 << 8);
+        }
+        break;
+    case GENGAR_STATE_HIT:
+        gengarGhost->counter++;
+        if (gengarGhost->counter == 1)
+        {
+            if ((gengarGhost->yPos >> 8) > 16)
+                gengarGhost->yPos -= (4 << 8);
+        }
+        else if (gengarGhost->counter == 21)
+        {
+            if ((gengarGhost->yPos >> 8) > 16)
+                gengarGhost->yPos -= (4 << 8);
+        }
+        else if (sprite->animEnded)
+        {
+            gengarGhost->state = GENGAR_STATE_STANDING;
+            gengarGhost->counter = 64;
+        }
+        break;
+    case GENGAR_STATE_LEAVING:
+        if (sprite->animEnded)
+        {
+            sPinballGame->waitExitScene = FALSE;
+            sPinballGame->state = PINBALL_STATE_START_EXIT;
+            sprite->invisible = TRUE;
+        }
+        else if (++gengarGhost->counter >= 108)
+        {
+            int leaveIndex = gengarGhost->counter - 108;
+            if (leaveIndex % 82 == 0)
+            {
+                gengarGhost->yPos -= (3 << 8);
+            }
+            else if (leaveIndex % 82 == 64)
+            {
+                gengarGhost->yPos -= (1 << 8);
+            }
+        }
+        break;
+    }
+};
 
 static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 *numGhostHits, u8 nextState, int numGhosts)
 {
@@ -4056,6 +4644,7 @@ static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 
     case GHOST_STATE_HIT:
         if (sprite->animEnded)
         {
+            (*numGhostHits)++;
             if (*numGhostHits >= REQUIRED_GHOST_HITS - (numGhosts - 1))
             {
                 ghost->state = GHOST_STATE_FINISHED;
@@ -4160,5 +4749,111 @@ static void UpdateGhostSprite(struct Sprite *sprite, struct GraveyardGhost *ghos
             ghost->spriteId = 0xFF;
             break;
         }
+    }
+}
+
+static void UpdateGengarSprite(struct Sprite *sprite)
+{
+    // data[0] = previous state
+    struct GengarGhost *gengarGhost = &sPinballGame->gengar.gengarGhost;
+    int prevState = sprite->data[0];
+    int curState = gengarGhost->state;
+    sprite->pos1.x = gengarGhost->xPos >> 8;
+    sprite->pos1.y = gengarGhost->yPos >> 8;
+
+    // Check if Gengar's state changed, and start the appropriate
+    // sprite animation.
+    if (prevState != curState)
+    {
+        sprite->data[0] = curState;
+        switch (curState)
+        {
+        case GENGAR_STATE_STANDING:
+            StartSpriteAnim(sprite, 0);
+            break;
+        case GENGAR_STATE_STEP_LEFT:
+            StartSpriteAnim(sprite, 1);
+            break;
+        case GENGAR_STATE_STEP_RIGHT:
+            StartSpriteAnim(sprite, 2);
+            break;
+        case GENGAR_STATE_HIT:
+            StartSpriteAnim(sprite, 3);
+            break;
+        case GENGAR_STATE_LEAVING:
+            StartSpriteAnim(sprite, 4);
+            break;
+        }
+    }
+}
+
+static void CrumbleGravestones(struct Gengar *gengar)
+{
+    int i;
+
+    // Draw the 4 crumbled gravestone tiles to the background tilemap.
+    u16 *tilemap = GetBgTilemapBuffer(PINBALL_BG_BASE);
+    tilemap[0x67] = 0x5;
+    tilemap[0x68] = 0x5;
+    tilemap[0x69] = 0x5;
+    tilemap[0x87] = 0x5;
+    tilemap[0x88] = 0x5;
+    tilemap[0x89] = 0x5;
+    tilemap[0xA7] = 0xA0;
+    tilemap[0xA8] = 0xA1;
+    tilemap[0xA9] = 0xA2;
+    tilemap[0xC7] = 0xA3;
+    tilemap[0xC8] = 0xA4;
+    tilemap[0xC9] = 0xA5;
+
+    tilemap[0x6E] = 0x5;
+    tilemap[0x6F] = 0x5;
+    tilemap[0x70] = 0x5;
+    tilemap[0x8E] = 0xA0;
+    tilemap[0x8F] = 0xA1;
+    tilemap[0x90] = 0xA2;
+    tilemap[0xAE] = 0xA3;
+    tilemap[0xAF] = 0xA4;
+    tilemap[0xB0] = 0xA5;
+
+    tilemap[0xE3] = 0x7;
+    tilemap[0xE4] = 0x64;
+    tilemap[0xE5] = 0x65;
+    tilemap[0x103] = 0xA6;
+    tilemap[0x104] = 0xA7;
+    tilemap[0x105] = 0xA8;
+    tilemap[0x123] = 0xA9;
+    tilemap[0x124] = 0xAA;
+    tilemap[0x125] = 0xAB;
+
+    tilemap[0xED] = 0x5;
+    tilemap[0xEE] = 0x5;
+    tilemap[0xEF] = 0x5;
+    tilemap[0x10D] = 0x5;
+    tilemap[0x10E] = 0x5;
+    tilemap[0x10F] = 0x5;
+    tilemap[0x12D] = 0xA0;
+    tilemap[0x12E] = 0xA1;
+    tilemap[0x12F] = 0xA2;
+    tilemap[0x14D] = 0xA3;
+    tilemap[0x14E] = 0xA4;
+    tilemap[0x14F] = 0xA5;
+
+    CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
+
+    // Update the collision map so the pinball can't collide with the
+    // crumbled gravestones.
+    for (i = 0; i < ARRAY_COUNT(sGengarGravestoneCoords); i++)
+    {
+        int index = sGengarGravestoneCoords[i][0] + sGengarGravestoneCoords[i][1] * 0x20;
+        gengar->collisionMap[index - 0x21] = 0x0;
+        gengar->collisionMap[index - 0x20] = 0x0;
+        gengar->collisionMap[index - 0x1F] = 0x0;
+        gengar->collisionMap[index - 0x01] = 0x0;
+        gengar->collisionMap[index]        = 0x0;
+        gengar->collisionMap[index + 0x01] = 0x0;
+        gengar->collisionMap[index + 0x1F] = 0x0;
+        gengar->collisionMap[index + 0x20] = 0x0;
+        gengar->collisionMap[index + 0x21] = 0x0;
     }
 }
