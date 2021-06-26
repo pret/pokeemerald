@@ -1828,673 +1828,673 @@ $(MID_SUBDIR)/pl_seq_pl_ba_regi.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G191 -V105
 
 $(MID_SUBDIR)/hg_seq_gs_title.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V122
+	$(MID) $< $@ -E -R20 -G229 -V122
 
 $(MID_SUBDIR)/hg_seq_gs_pokemon_theme.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V109
+	$(MID) $< $@ -E -R20 -G229 -V109
 
 $(MID_SUBDIR)/hg_seq_gs_starting.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_t_wakaba.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_e_tsureteke1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V079
+	$(MID) $< $@ -E -R20 -G229 -V079
 
 $(MID_SUBDIR)/hg_seq_gs_e_support_f.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_e_support_m.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_utsugi_rabo.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_me_keyitem.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V081 -P5
+	$(MID) $< $@ -E -R20 -G229 -V081 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_r_1_29.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V063
+	$(MID) $< $@ -E -R20 -G229 -V063
 
 $(MID_SUBDIR)/hg_seq_gs_vs_norapoke.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V110
+	$(MID) $< $@ -E -R20 -G229 -V110
 
 $(MID_SUBDIR)/hg_seq_gs_win2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V110
+	$(MID) $< $@ -E -R20 -G229 -V110
 
 $(MID_SUBDIR)/hg_seq_gs_win2_not_fan.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V072
+	$(MID) $< $@ -E -R20 -G229 -V072
 
 $(MID_SUBDIR)/hg_seq_me_lvup.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102 -P5
+	$(MID) $< $@ -E -R20 -G229 -V102 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_c_yoshino.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V068
+	$(MID) $< $@ -E -R20 -G229 -V068
 
 $(MID_SUBDIR)/hg_seq_gs_e_tsureteke2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V078
+	$(MID) $< $@ -E -R20 -G229 -V078
 
 $(MID_SUBDIR)/hg_seq_gs_pokesen.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V075
+	$(MID) $< $@ -E -R20 -G229 -V075
 
 $(MID_SUBDIR)/hg_seq_me_asa.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080 -P5
+	$(MID) $< $@ -E -R20 -G229 -V080 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_eye_j_shounen.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102
+	$(MID) $< $@ -E -R20 -G229 -V102
 
 $(MID_SUBDIR)/hg_seq_gs_vs_trainer.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V111
+	$(MID) $< $@ -E -R20 -G229 -V111
 
 $(MID_SUBDIR)/hg_seq_gs_win1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V110
+	$(MID) $< $@ -E -R20 -G229 -V110
 
 $(MID_SUBDIR)/hg_seq_gs_r_1_30.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V093
+	$(MID) $< $@ -E -R20 -G229 -V093
 
 $(MID_SUBDIR)/hg_seq_me_hyouka1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092 -P5
+	$(MID) $< $@ -E -R20 -G229 -V092 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_c_kikyou.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V078
+	$(MID) $< $@ -E -R20 -G229 -V078
 
 $(MID_SUBDIR)/hg_seq_gs_to_madatsubomi1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V062
+	$(MID) $< $@ -E -R20 -G229 -V062
 
 $(MID_SUBDIR)/hg_seq_gs_eye_bouzu.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V084
+	$(MID) $< $@ -E -R20 -G229 -V084
 
 $(MID_SUBDIR)/hg_seq_gs_fs.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V078
+	$(MID) $< $@ -E -R20 -G229 -V078
 
 $(MID_SUBDIR)/hg_seq_me_tamago_get.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088 -P5
+	$(MID) $< $@ -E -R20 -G229 -V088 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_e_maiko_theme.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088
+	$(MID) $< $@ -E -R20 -G229 -V088
 
 $(MID_SUBDIR)/hg_seq_gs_d_chikatsuuro.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_me_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V081 -P5
+	$(MID) $< $@ -E -R20 -G229 -V081 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_d_unknown_iseki.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V093
+	$(MID) $< $@ -E -R20 -G229 -V093
 
 $(MID_SUBDIR)/hg_seq_gs_radio_unknown.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_me_hyouka2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V095 -P5
+	$(MID) $< $@ -E -R20 -G229 -V095 -P5
 
 $(MID_SUBDIR)/hg_seq_gs_t_hiwada.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_eye_rocket.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V071
+	$(MID) $< $@ -E -R20 -G229 -V071
 
 $(MID_SUBDIR)/hg_seq_gs_vs_rocket.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102
+	$(MID) $< $@ -E -R20 -G229 -V102
 
 $(MID_SUBDIR)/hg_seq_gs_r_4_34.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092
+	$(MID) $< $@ -E -R20 -G229 -V092
 
 $(MID_SUBDIR)/hg_seq_gs_e_rival1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_gs_vs_rival.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V084
+	$(MID) $< $@ -E -R20 -G229 -V084
 
 $(MID_SUBDIR)/hg_seq_gs_shinka.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_me_shinkaome.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V076 -p5
+	$(MID) $< $@ -E -R20 -G229 -V076 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_c_kogane.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V072
+	$(MID) $< $@ -E -R20 -G229 -V072
 
 $(MID_SUBDIR)/hg_seq_gs_gym.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_vs_gymreader.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V108
+	$(MID) $< $@ -E -R20 -G229 -V108
 
 $(MID_SUBDIR)/hg_seq_gs_win3.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102
+	$(MID) $< $@ -E -R20 -G229 -V102
 
 $(MID_SUBDIR)/hg_seq_me_badge.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V104 -p5
+	$(MID) $< $@ -E -R20 -G229 -V104 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_radio_jingle.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V082
+	$(MID) $< $@ -E -R20 -G229 -V082
 
 $(MID_SUBDIR)/hg_seq_gs_aikotoba.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092
+	$(MID) $< $@ -E -R20 -G229 -V092
 
 $(MID_SUBDIR)/hg_seq_me_waza.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087 -p5
+	$(MID) $< $@ -E -R20 -G229 -V087 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_game.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092
+	$(MID) $< $@ -E -R20 -G229 -V092
 
 $(MID_SUBDIR)/hg_seq_gs_gameatari.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V078
+	$(MID) $< $@ -E -R20 -G229 -V078
 
 $(MID_SUBDIR)/hg_seq_me_acce.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V072 -p5
+	$(MID) $< $@ -E -R20 -G229 -V072 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_wifitower.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V075
+	$(MID) $< $@ -E -R20 -G229 -V075
 
 $(MID_SUBDIR)/hg_seq_gs_bld_gtc.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V091
+	$(MID) $< $@ -E -R20 -G229 -V091
 
 $(MID_SUBDIR)/hg_seq_me_hyouka3.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V081 -p5
+	$(MID) $< $@ -E -R20 -G229 -V081 -p5
 
 $(MID_SUBDIR)/hg_seq_pl_bicycle.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V085
+	$(MID) $< $@ -E -R20 -G229 -V085
 
 $(MID_SUBDIR)/hg_seq_gs_eye_j_shoujo.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V084
+	$(MID) $< $@ -E -R20 -G229 -V084
 
 $(MID_SUBDIR)/hg_seq_me_pokegear_regist.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097 -p5
+	$(MID) $< $@ -E -R20 -G229 -V097 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_d_kouen.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_me_kinomi.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V082 -p5
+	$(MID) $< $@ -E -R20 -G229 -V082 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_c_enju.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V054
+	$(MID) $< $@ -E -R20 -G229 -V054
 
 $(MID_SUBDIR)/hg_seq_gs_kaburenjou.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_to_yaketa.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V070
+	$(MID) $< $@ -E -R20 -G229 -V070
 
 $(MID_SUBDIR)/hg_seq_gs_e_minaki.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V086
+	$(MID) $< $@ -E -R20 -G229 -V086
 
 $(MID_SUBDIR)/hg_seq_gs_ohkido_rabo.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_me_hyouka4.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092 -p5
+	$(MID) $< $@ -E -R20 -G229 -V092 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_r_6_38.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V083
+	$(MID) $< $@ -E -R20 -G229 -V083
 
 $(MID_SUBDIR)/hg_seq_gs_radio_march.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V082
+	$(MID) $< $@ -E -R20 -G229 -V082
 
 $(MID_SUBDIR)/hg_seq_gs_vs_raikou.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098
+	$(MID) $< $@ -E -R20 -G229 -V098
 
 $(MID_SUBDIR)/hg_seq_gs_to_toudai.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V050
+	$(MID) $< $@ -E -R20 -G229 -V050
 
 $(MID_SUBDIR)/hg_seq_gs_naminori.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V085
+	$(MID) $< $@ -E -R20 -G229 -V085
 
 $(MID_SUBDIR)/hg_seq_gs_c_tanba.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_me_pt_special.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098 -p5
+	$(MID) $< $@ -E -R20 -G229 -V098 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_r_7_42.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V085
+	$(MID) $< $@ -E -R20 -G229 -V085
 
 $(MID_SUBDIR)/hg_seq_gs_kaidenpa.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092
+	$(MID) $< $@ -E -R20 -G229 -V092
 
 $(MID_SUBDIR)/hg_seq_gs_d_ajito.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V081
+	$(MID) $< $@ -E -R20 -G229 -V081
 
 $(MID_SUBDIR)/hg_seq_gs_eye_j_ayashii.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_e_rival2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_gs_senkyo.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V069
+	$(MID) $< $@ -E -R20 -G229 -V069
 
 $(MID_SUBDIR)/hg_seq_gs_d_koorinonuke.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V072
+	$(MID) $< $@ -E -R20 -G229 -V072
 
 $(MID_SUBDIR)/hg_seq_me_wasure.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V105 -p5
+	$(MID) $< $@ -E -R20 -G229 -V105 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_ryuunoana.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_ibuki.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_gs_vs_entei.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098
+	$(MID) $< $@ -E -R20 -G229 -V098
 
 $(MID_SUBDIR)/hg_seq_gs_to_suzu.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_e_maiko_mai.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088
+	$(MID) $< $@ -E -R20 -G229 -V088
 
 $(MID_SUBDIR)/hg_seq_gs_e_houou.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V108
+	$(MID) $< $@ -E -R20 -G229 -V108
 
 $(MID_SUBDIR)/hg_seq_gs_vs_houou.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V079
+	$(MID) $< $@ -E -R20 -G229 -V079
 
 $(MID_SUBDIR)/hg_seq_gs_r_1_26.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V078
+	$(MID) $< $@ -E -R20 -G229 -V078
 
 $(MID_SUBDIR)/hg_seq_gs_kousokusen.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V077
+	$(MID) $< $@ -E -R20 -G229 -V077
 
 $(MID_SUBDIR)/hg_seq_gs_c_kuchiba.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V062
+	$(MID) $< $@ -E -R20 -G229 -V062
 
 $(MID_SUBDIR)/hg_seq_gs_vs_gymreader_kanto.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V075
+	$(MID) $< $@ -E -R20 -G229 -V075
 
 $(MID_SUBDIR)/hg_seq_gs_t_chion.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_d_iwayama.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V079
+	$(MID) $< $@ -E -R20 -G229 -V079
 
 $(MID_SUBDIR)/hg_seq_gs_vs_norapoke_kanto.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V103
+	$(MID) $< $@ -E -R20 -G229 -V103
 
 $(MID_SUBDIR)/hg_seq_me_hyouka5.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092 -p5
+	$(MID) $< $@ -E -R20 -G229 -V092 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_c_hanada.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_r_12_24.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_e_linear.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V100
+	$(MID) $< $@ -E -R20 -G229 -V100
 
 $(MID_SUBDIR)/hg_seq_gs_radio_komoriuta.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V082
+	$(MID) $< $@ -E -R20 -G229 -V082
 
 $(MID_SUBDIR)/hg_seq_gs_vs_suicune.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098
+	$(MID) $< $@ -E -R20 -G229 -V098
 
 $(MID_SUBDIR)/hg_seq_gs_c_tamamushi.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V063
+	$(MID) $< $@ -E -R20 -G229 -V063
 
 $(MID_SUBDIR)/hg_seq_gs_r_10_11.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V077
+	$(MID) $< $@ -E -R20 -G229 -V077
 
 $(MID_SUBDIR)/hg_seq_gs_hue.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_gs_d_tokiwanomori3.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_eye_k_shounen.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_gs_c_yamabuki.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V058
+	$(MID) $< $@ -E -R20 -G229 -V058
 
 $(MID_SUBDIR)/hg_seq_gs_r_9_03.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_eye_k_ayashii.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V086
+	$(MID) $< $@ -E -R20 -G229 -V086
 
 $(MID_SUBDIR)/hg_seq_gs_otsukimi_event.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V105
+	$(MID) $< $@ -E -R20 -G229 -V105
 
 $(MID_SUBDIR)/hg_seq_gs_r_9_01.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V085
+	$(MID) $< $@ -E -R20 -G229 -V085
 
 $(MID_SUBDIR)/hg_seq_gs_t_masara.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_ohkido.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V100
+	$(MID) $< $@ -E -R20 -G229 -V100
 
 $(MID_SUBDIR)/hg_seq_me_hyouka6.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092 -p5
+	$(MID) $< $@ -E -R20 -G229 -V092 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_eye_k_shoujo.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097
+	$(MID) $< $@ -E -R20 -G229 -V097
 
 $(MID_SUBDIR)/hg_seq_gs_vs_trainer_kanto.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V119
+	$(MID) $< $@ -E -R20 -G229 -V119
 
 $(MID_SUBDIR)/hg_seq_gs_t_guren.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V075
+	$(MID) $< $@ -E -R20 -G229 -V075
 
 $(MID_SUBDIR)/hg_seq_gs_safari_road.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_safari_house.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V079
+	$(MID) $< $@ -E -R20 -G229 -V079
 
 $(MID_SUBDIR)/hg_seq_gs_safari_field.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_radio_variety.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_taikaimae.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V052
+	$(MID) $< $@ -E -R20 -G229 -V052
 
 $(MID_SUBDIR)/hg_seq_gs_taikai.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V100
+	$(MID) $< $@ -E -R20 -G229 -V100
 
 $(MID_SUBDIR)/hg_seq_me_mushitori3.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097 -p5
+	$(MID) $< $@ -E -R20 -G229 -V097 -p5
 
 $(MID_SUBDIR)/hg_seq_me_mushitori2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102 -p5
+	$(MID) $< $@ -E -R20 -G229 -V102 -p5
 
 $(MID_SUBDIR)/hg_seq_me_mushitori1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097 -p5
+	$(MID) $< $@ -E -R20 -G229 -V097 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_pt_entr.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V085
+	$(MID) $< $@ -E -R20 -G229 -V085
 
 $(MID_SUBDIR)/hg_seq_me_pt_new.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102 -p5
+	$(MID) $< $@ -E -R20 -G229 -V102 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_pt_open.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V090
+	$(MID) $< $@ -E -R20 -G229 -V090
 
 $(MID_SUBDIR)/hg_seq_gs_pt_title.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V089
+	$(MID) $< $@ -E -R20 -G229 -V089
 
 $(MID_SUBDIR)/hg_seq_gs_pt_game.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V096
+	$(MID) $< $@ -E -R20 -G229 -V096
 
 $(MID_SUBDIR)/hg_seq_me_pt_resultg.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098 -p5
+	$(MID) $< $@ -E -R20 -G229 -V098 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_pt_gamef.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097
+	$(MID) $< $@ -E -R20 -G229 -V097
 
 $(MID_SUBDIR)/hg_seq_gs_pt_result.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088
+	$(MID) $< $@ -E -R20 -G229 -V088
 
 $(MID_SUBDIR)/hg_seq_gs_pt_end.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098
+	$(MID) $< $@ -E -R20 -G229 -V098
 
 $(MID_SUBDIR)/hg_seq_gs_pt_victory.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088
+	$(MID) $< $@ -E -R20 -G229 -V088
 
 $(MID_SUBDIR)/hg_seq_gs_wifi_present.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_battletower2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V070
+	$(MID) $< $@ -E -R20 -G229 -V070
 
 $(MID_SUBDIR)/hg_seq_gs_battletower.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097
+	$(MID) $< $@ -E -R20 -G229 -V097
 
 $(MID_SUBDIR)/hg_seq_me_bpget.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V107 -p5
+	$(MID) $< $@ -E -R20 -G229 -V107 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_bf_factory.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V077
+	$(MID) $< $@ -E -R20 -G229 -V077
 
 $(MID_SUBDIR)/hg_seq_gs_bf_stage.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V080
+	$(MID) $< $@ -E -R20 -G229 -V080
 
 $(MID_SUBDIR)/hg_seq_gs_bf_roulette.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V077
+	$(MID) $< $@ -E -R20 -G229 -V077
 
 $(MID_SUBDIR)/hg_seq_me_roulette.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098 -p5
+	$(MID) $< $@ -E -R20 -G229 -V098 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_bf_castle.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097
+	$(MID) $< $@ -E -R20 -G229 -V097
 
 $(MID_SUBDIR)/hg_seq_me_castle.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V086 -p5
+	$(MID) $< $@ -E -R20 -G229 -V086 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_ba_brain.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V100
+	$(MID) $< $@ -E -R20 -G229 -V100
 
 $(MID_SUBDIR)/hg_seq_gs_winbrain.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097
+	$(MID) $< $@ -E -R20 -G229 -V097
 
 $(MID_SUBDIR)/hg_seq_gs_radio_trainer.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V073
+	$(MID) $< $@ -E -R20 -G229 -V073
 
 $(MID_SUBDIR)/hg_seq_gs_guruguru.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V093
+	$(MID) $< $@ -E -R20 -G229 -V093
 
 $(MID_SUBDIR)/hg_seq_gs_wifi_access.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V079
+	$(MID) $< $@ -E -R20 -G229 -V079
 
 $(MID_SUBDIR)/hg_seq_gs_wifiunion.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V085
+	$(MID) $< $@ -E -R20 -G229 -V085
 
 $(MID_SUBDIR)/hg_seq_gs_wifigame.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V095
+	$(MID) $< $@ -E -R20 -G229 -V095
 
 $(MID_SUBDIR)/hg_seq_me_minigame.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V091 -p5
+	$(MID) $< $@ -E -R20 -G229 -V091 -p5
 
 $(MID_SUBDIR)/hg_seq_gs_wifiparade.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092
+	$(MID) $< $@ -E -R20 -G229 -V092
 
 $(MID_SUBDIR)/hg_seq_gs_radio_r_101.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V069
+	$(MID) $< $@ -E -R20 -G229 -V069
 
 $(MID_SUBDIR)/hg_seq_gs_radio_r_201.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V104
+	$(MID) $< $@ -E -R20 -G229 -V104
 
 $(MID_SUBDIR)/hg_seq_gs_phc.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V106
+	$(MID) $< $@ -E -R20 -G229 -V106
 
 $(MID_SUBDIR)/hg_seq_gs_e_g_pichu.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V100
+	$(MID) $< $@ -E -R20 -G229 -V100
 
 $(MID_SUBDIR)/hg_seq_gs_eye_maiko.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V084
+	$(MID) $< $@ -E -R20 -G229 -V084
 
 $(MID_SUBDIR)/hg_seq_gs_e_lugia.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V092
+	$(MID) $< $@ -E -R20 -G229 -V092
 
 $(MID_SUBDIR)/hg_seq_gs_vs_lugia.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V102
+	$(MID) $< $@ -E -R20 -G229 -V102
 
 $(MID_SUBDIR)/hg_seq_gs_d_champroad.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V087
+	$(MID) $< $@ -E -R20 -G229 -V087
 
 $(MID_SUBDIR)/hg_seq_gs_champroad.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V082
+	$(MID) $< $@ -E -R20 -G229 -V082
 
 $(MID_SUBDIR)/hg_seq_gs_vs_champ.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V113
+	$(MID) $< $@ -E -R20 -G229 -V113
 
 $(MID_SUBDIR)/hg_seq_gs_e_dendouiri.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V099
+	$(MID) $< $@ -E -R20 -G229 -V099
 
 $(MID_SUBDIR)/hg_seq_gs_ending.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V059
+	$(MID) $< $@ -E -R20 -G229 -V059
 
 $(MID_SUBDIR)/hg_seq_gs_ending2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V074
+	$(MID) $< $@ -E -R20 -G229 -V074
 
 $(MID_SUBDIR)/hg_seq_gs_vs_kodai.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V110
+	$(MID) $< $@ -E -R20 -G229 -V110
 
 $(MID_SUBDIR)/hg_seq_gs_d_shinto.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088
+	$(MID) $< $@ -E -R20 -G229 -V088
 
 $(MID_SUBDIR)/hg_seq_gs_e_arceus.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V099
+	$(MID) $< $@ -E -R20 -G229 -V099
 
 $(MID_SUBDIR)/hg_seq_gs_koukan.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -v080
+	$(MID) $< $@ -E -R20 -G229 -v080
 
 $(MID_SUBDIR)/hg_seq_me_cardgame1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V098 -p5
+	$(MID) $< $@ -E -R20 -G229 -V098 -p5
 
 $(MID_SUBDIR)/hg_seq_me_cardgame2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V097 -p5
+	$(MID) $< $@ -E -R20 -G229 -V097 -p5
 
 $(MID_SUBDIR)/hg_seq_me_gonin.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G192 -V088 -p5
+	$(MID) $< $@ -E -R20 -G229 -V088 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_title.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V092
+	$(MID) $< $@ -E -R20 -G399 -V092
 
 $(MID_SUBDIR)/bw_seq_bgm_title01.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V093
+	$(MID) $< $@ -E -R20 -G399 -V093
 
 $(MID_SUBDIR)/bw_seq_bgm_pokemon_theme.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G202 -V106
+	$(MID) $< $@ -E -R20 -G402 -V106
 
 $(MID_SUBDIR)/bw_seq_bgm_starting.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V045
+	$(MID) $< $@ -E -R20 -G394 -V045
 
 $(MID_SUBDIR)/bw_seq_bgm_starting2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V090
+	$(MID) $< $@ -E -R20 -G394 -V090
 
 $(MID_SUBDIR)/bw_seq_bgm_e_opening.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V103
+	$(MID) $< $@ -E -R20 -G394 -V103
 
 $(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V071
+	$(MID) $< $@ -E -R20 -G394 -V071
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G202 -V079
+	$(MID) $< $@ -E -R20 -G402 -V079
 
 $(MID_SUBDIR)/bw_seq_bgm_e_tsureteke1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V066
+	$(MID) $< $@ -E -R20 -G399 -V066
 
 $(MID_SUBDIR)/bw_seq_bgm_e_doctor.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V100
+	$(MID) $< $@ -E -R20 -G400 -V100
 
 $(MID_SUBDIR)/bw_seq_bgm_labo.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V066
+	$(MID) $< $@ -E -R20 -G394 -V066
 
 $(MID_SUBDIR)/bw_seq_me_keyitem.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V085 -p5
+	$(MID) $< $@ -E -R20 -G394 -V085 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_e_friend.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V081
+	$(MID) $< $@ -E -R20 -G399 -V081
 
 $(MID_SUBDIR)/bw_seq_bgm_r_a_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G201 -V063
+	$(MID) $< $@ -E -R20 -G401 -V063
 
 $(MID_SUBDIR)/bw_seq_bgm_r_a.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G201 -V063
+	$(MID) $< $@ -E -R20 -G401 -V063
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_norapoke.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G202 -V094
+	$(MID) $< $@ -E -R20 -G402 -V094
 
 $(MID_SUBDIR)/bw_seq_bgm_win1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V116
+	$(MID) $< $@ -E -R20 -G399 -V116
 
 $(MID_SUBDIR)/bw_seq_me_lvup.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V090 -p5
+	$(MID) $< $@ -E -R20 -G399 -V090 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_t_02_var1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V060
+	$(MID) $< $@ -E -R20 -G394 -V060
 
 $(MID_SUBDIR)/bw_seq_bgm_t_02_var2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V060
+	$(MID) $< $@ -E -R20 -G394 -V060
 
 $(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V060
+	$(MID) $< $@ -E -R20 -G394 -V060
 
 $(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V060
+	$(MID) $< $@ -E -R20 -G394 -V060
 
 $(MID_SUBDIR)/bw_seq_bgm_e_tsureteke2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V066
+	$(MID) $< $@ -E -R20 -G399 -V066
 
 $(MID_SUBDIR)/bw_seq_bgm_pokecen.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V066
+	$(MID) $< $@ -E -R20 -G399 -V066
 
 $(MID_SUBDIR)/bw_seq_me_asa.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V070 -p5
+	$(MID) $< $@ -E -R20 -G399 -V070 -p5
 
 $(MID_SUBDIR)/bw_seq_me_hyouka1.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V079 -p5
+	$(MID) $< $@ -E -R20 -G394 -V079 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_e_sage.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V099
+	$(MID) $< $@ -E -R20 -G399 -V099
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_sp_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_sp.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_su_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_su.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_au_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_au.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_wi_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_r_b_wi.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V082
+	$(MID) $< $@ -E -R20 -G400 -V082
 
 $(MID_SUBDIR)/bw_seq_me_call.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V095 -p5
+	$(MID) $< $@ -E -R20 -G399 -V095 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_eye_01.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G199 -V064
+	$(MID) $< $@ -E -R20 -G399 -V064
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_trainer.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G202 -V090
+	$(MID) $< $@ -E -R20 -G402 -V090
 
 $(MID_SUBDIR)/bw_seq_bgm_win2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V095
+	$(MID) $< $@ -E -R20 -G394 -V095
 
 $(MID_SUBDIR)/bw_seq_bgm_eye_02.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G200 -V065
+	$(MID) $< $@ -E -R20 -G400 -V065
 
 $(MID_SUBDIR)/bw_seq_me_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V070 -p5
+	$(MID) $< $@ -E -R20 -G394 -V070 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_c_01.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V064
+	$(MID) $< $@ -E -R20 -G394 -V064
 
 $(MID_SUBDIR)/bw_seq_me_hyouka2.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G194 -V081 -p5
+	$(MID) $< $@ -E -R20 -G394 -V081 -p5
 
 $(MID_SUBDIR)/bw_seq_bgm_d_01.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G201 -V093
+	$(MID) $< $@ -E -R20 -G401 -V093
 
 $(MID_SUBDIR)/bw_seq_bgm_d_01_b1f.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G201 -V093
+	$(MID) $< $@ -E -R20 -G401 -V093
 
 $(MID_SUBDIR)/bw_seq_bgm_d_01_b2f.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G201 -V093
+	$(MID) $< $@ -E -R20 -G401 -V093
 
 $(MID_SUBDIR)/bw_seq_bgm_e_plasma.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G201 -V073
+	$(MID) $< $@ -E -R20 -G401 -V073
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_plasma.s: %.s: %.mid
-	$(MID) $< $@ -E -R20 -G202 -V120
+	$(MID) $< $@ -E -R20 -G402 -V120

@@ -233,6 +233,11 @@ clean: mostlyclean clean-tools
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
+clean-audio: tidynonmodern tidymodern
+	rm -f $(SAMPLE_SUBDIR)/*.bin
+	rm -f $(CRY_SUBDIR)/*.bin
+	rm -f $(MID_SUBDIR)/*.s
+
 mostlyclean: tidynonmodern tidymodern
 	rm -f $(SAMPLE_SUBDIR)/*.bin
 	rm -f $(CRY_SUBDIR)/*.bin
