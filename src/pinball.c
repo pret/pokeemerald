@@ -306,6 +306,13 @@ struct Timer
     u8 onesSpriteId;
 };
 
+struct Tilt
+{
+    u8 counter;
+    bool8 reset;
+    bool8 pushing;
+};
+
 struct PinballGame
 {
     u8 state;
@@ -323,6 +330,10 @@ struct PinballGame
     struct Diglett diglett;
     struct Seel seel;
     struct Gengar gengar;
+    struct Tilt leftTilt;
+    struct Tilt rightTilt;
+    struct Tilt downTilt;
+    bool8 doArtificialDownTilt;
     bool8 ballIsEntering;
     bool8 flippersDisabled;
     bool8 completed;
@@ -372,6 +383,8 @@ static void CloseEntranceGengar(void);
 static void HandleBallPhysics(void);
 static void ApplyGravity(struct Ball *ball);
 static void LimitVelocity(struct Ball *ball);
+static void HandleTilts(struct Ball *ball);
+static void HandleTilt(struct Ball *ball, struct Tilt *tilt, int xDelta, int yDelta, u32 buttonMask, bool8 artificalEnabled);
 static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
 static void UpdateFlipperState(struct Flipper *flipper);
 static bool32 CheckFlipperCollision(struct Ball *ball, struct Flipper *flipper, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification);
@@ -382,6 +395,7 @@ static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row);
 static void HandleStaticCollisionForGameType(u8 gameType, int x, int y, u8 collisionAttribute, u16 *outYForce);
 static void HandleStaticCollisionDiglett(struct Diglett *diglett, int x, int y, u8 collisionAttribute);
 static void HandleStaticCollisionGengar(struct Gengar *gengar, u8 collisionAttribute, u16 *outYForce);
+static void ApplyTiltForces(struct Ball *ball, u8 collisionNormal);
 static void RotateVector(s16 *x, s16 *y, u8 angle);
 static u8 ReverseBits(u8 value);
 static void ApplyCollisionForces(struct Ball *ball, u16 flipperYForce, int collisionAmplification);
@@ -2052,6 +2066,23 @@ static const u16 sFlipperRadiusMagnitudes[32] = {
     0x00F8, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC, 0x00FC,
 };
 
+static const s16 sTiltLeftOnlyVelocityDeltas[] = INCBIN_S16("data/pinball/tilt_left_deltas.bin");
+static const s16 sTiltRightOnlyVelocityDeltas[] = INCBIN_S16("data/pinball/tilt_right_deltas.bin");
+static const s16 sTiltDownOnlyVelocityDeltas[] = INCBIN_S16("data/pinball/tilt_down_deltas.bin");
+static const s16 sTiltDownRightVelocityDeltas[] = INCBIN_S16("data/pinball/tilt_down_right_deltas.bin");
+static const s16 sTiltDownLeftVelocityDeltas[] = INCBIN_S16("data/pinball/tilt_down_left_deltas.bin");
+
+static const s16 *const sTiltVelocityDeltas[] = {
+    NULL,
+    sTiltLeftOnlyVelocityDeltas,
+    sTiltRightOnlyVelocityDeltas,
+    NULL,
+    sTiltDownOnlyVelocityDeltas,
+    sTiltDownLeftVelocityDeltas,
+    sTiltDownRightVelocityDeltas,
+    sTiltDownOnlyVelocityDeltas,
+};
+
 void PlayMeowthPinballGame(void)
 {
     PlayPinballGame(GAME_TYPE_MEOWTH);
@@ -2694,6 +2725,7 @@ static void HandleBallPhysics(void)
         ApplyGravity(ball);
 
     LimitVelocity(ball);
+    HandleTilts(ball);
     isFlipperColliding = HandleFlippers(ball, &artificialYForce, &flipperCollisionNormal, &collisionAmplification);
     if (!isFlipperColliding)
         isObjectColliding = CheckObjectsCollision(sPinballGame->gameType, ball, sPinballGame->timer.ticks, &objectCollisionNormal, &collisionAmplification);
@@ -2708,6 +2740,7 @@ static void HandleBallPhysics(void)
 
     if (isFlipperColliding || isObjectColliding || isStaticColliding)
     {
+        ApplyTiltForces(ball, collisionNormal);
         RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
         ApplyCollisionForces(ball, artificialYForce, collisionAmplification);
         RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
@@ -2846,6 +2879,42 @@ static void LimitVelocity(struct Ball *ball)
         ball->yVelocity = MAX_VELOCITY;
     else if (ball->yVelocity < -MAX_VELOCITY)
         ball->yVelocity = -MAX_VELOCITY;
+}
+
+static void HandleTilts(struct Ball *ball)
+{
+    HandleTilt(ball, &sPinballGame->rightTilt, 1, 0, DPAD_RIGHT, FALSE);
+    HandleTilt(ball, &sPinballGame->leftTilt, -1, 0, DPAD_LEFT, FALSE);
+    HandleTilt(ball, &sPinballGame->downTilt, 0, 1, DPAD_UP | DPAD_DOWN, TRUE);
+}
+
+static void HandleTilt(struct Ball *ball, struct Tilt *tilt, int xDelta, int yDelta, u32 buttonMask, bool8 artificalEnabled)
+{
+    if ((artificalEnabled && sPinballGame->doArtificialDownTilt) || (!tilt->reset && (gMain.heldKeys & buttonMask)))
+    {
+        if (++tilt->counter >= 3)
+        {
+            if (artificalEnabled)
+                sPinballGame->doArtificialDownTilt = FALSE;
+
+            tilt->pushing = FALSE;
+            tilt->reset = TRUE;
+        }
+        else
+        {
+            ball->xPos += (xDelta << 8);
+            ball->yPos += (yDelta << 8);
+            tilt->pushing = TRUE;
+        }
+    }
+    else
+    {
+        tilt->pushing = FALSE;
+        if (tilt->counter > 0)
+            tilt->counter--;
+        else if (!(gMain.heldKeys & buttonMask))
+            tilt->reset = FALSE;
+    }
 }
 
 static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollisionNormal, int *outCollisionAmplification)
@@ -3188,6 +3257,19 @@ static u8 ReverseBits(u8 b)
     return b;
 }
 
+static void ApplyTiltForces(struct Ball *ball, u8 collisionNormal)
+{
+    u32 index = (sPinballGame->downTilt.pushing  << 2) |
+                (sPinballGame->rightTilt.pushing << 1) |
+                (sPinballGame->leftTilt.pushing  << 0);
+    const s16 *deltas = sTiltVelocityDeltas[index];
+    if (deltas != NULL)
+    {
+        ball->xVelocity += deltas[collisionNormal * 2];
+        ball->yVelocity += deltas[collisionNormal * 2 + 1];
+    }
+}
+
 static void RotateVector(s16 *x, s16 *y, u8 angle)
 {
     // Rotate a vector by an angle with a 2D rotation matrix calculation.
@@ -3320,20 +3402,24 @@ static void UpdateCamera(void)
     int stagePixelHeight = sPinballGame->stageTileHeight * 8;
     struct Ball *ball = &sPinballGame->ball;
 
-    scrollX = (ball->xPos >> 8) - (DISPLAY_WIDTH / 2);
-    if (scrollX < 0)
-        scrollX = 0;
-    if (scrollX > stagePixelWidth - DISPLAY_WIDTH)
-        scrollX = stagePixelWidth - DISPLAY_WIDTH;
+    // scrollX = (ball->xPos >> 8) - (DISPLAY_WIDTH / 2);
+    // if (scrollX < 0)
+    //     scrollX = 0;
+    // if (scrollX > stagePixelWidth - DISPLAY_WIDTH)
+    //     scrollX = stagePixelWidth - DISPLAY_WIDTH;
 
-    scrollY = (ball->yPos >> 8) - (DISPLAY_HEIGHT / 2);
-    if (scrollY < 0)
-        scrollY = 0;
-    if (scrollY > stagePixelHeight - DISPLAY_HEIGHT)
-        scrollY = stagePixelHeight - DISPLAY_HEIGHT;
+    // scrollY = (ball->yPos >> 8) - (DISPLAY_HEIGHT / 2);
+    // if (scrollY < 0)
+    //     scrollY = 0;
+    // if (scrollY > stagePixelHeight - DISPLAY_HEIGHT)
+    //     scrollY = stagePixelHeight - DISPLAY_HEIGHT;
 
     scrollX = 0;
     scrollY = 0;
+
+    scrollX += sPinballGame->leftTilt.counter;
+    scrollX -= sPinballGame->rightTilt.counter;
+    scrollY += sPinballGame->downTilt.counter;
 
     sPinballGame->cameraScrollX = scrollX;
     sPinballGame->cameraScrollY = scrollY;
@@ -3436,6 +3522,9 @@ static void UpdateTimerDigitSprite(struct Sprite *sprite)
 {
     int minutes, tensDigit, onesDigit;
     int type = sprite->data[0];
+
+    sprite->pos2.x = -sPinballGame->cameraScrollX;
+    sprite->pos2.y = -sPinballGame->cameraScrollY;
 
     switch (type)
     {
@@ -3765,8 +3854,8 @@ static void UpdateMeowthSprite(struct Sprite *sprite)
     int prevFacing = sprite->data[1];
     int curState = meowth->state;
     int curFacing = meowth->facing;
-    sprite->pos1.x = meowth->xPos;
-    sprite->pos1.y = meowth->yPos;
+    sprite->pos1.x = meowth->xPos - sPinballGame->cameraScrollX;
+    sprite->pos1.y = meowth->yPos - sPinballGame->cameraScrollY;
 
     // Check if Meowth's state changed, and start the appropriate
     // sprite animation.
@@ -3803,8 +3892,8 @@ static void UpdateMeowthJewelSprite(struct Sprite *sprite)
     struct MeowthJewel *jewel = &sPinballGame->meowth.jewels[jewelId];
     int prevState = sprite->data[1];
     int curState = jewel->state;
-    sprite->pos1.x = jewel->xPos;
-    sprite->pos1.y = jewel->yPos >> 8;
+    sprite->pos1.x = jewel->xPos - sPinballGame->cameraScrollX;
+    sprite->pos1.y = (jewel->yPos >> 8) - sPinballGame->cameraScrollY;
     if (prevState != curState)
     {
         sprite->data[1] = curState;
@@ -3837,6 +3926,8 @@ static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite)
     // data[0] = state
     // data[1] = state counter
     // data[2] = original y position
+    sprite->pos2.x = -sPinballGame->cameraScrollX;
+    sprite->pos2.y = -sPinballGame->cameraScrollY;
     switch (sprite->data[0])
     {
     case 0:
@@ -3895,8 +3986,8 @@ static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite)
     else
     {
         sprite->data[0]--;
-        sprite->pos1.x = (sprite->data[1] - 1) * 8 + 4;
-        sprite->pos1.y = 4;
+        sprite->pos1.x = ((sprite->data[1] - 1) * 8 + 4) - sPinballGame->cameraScrollX;
+        sprite->pos1.y = 4 - sPinballGame->cameraScrollY;
         sprite->invisible = FALSE;
     }
 }
@@ -4048,6 +4139,9 @@ static void UpdateDugtrioSprite(struct Sprite *sprite)
     struct Diglett *diglett = &sPinballGame->diglett;
     int prevState = sprite->data[0];
     int curState = diglett->dugtrioState;
+
+    sprite->pos2.x = -sPinballGame->cameraScrollX;
+    sprite->pos2.y = -sPinballGame->cameraScrollY;
 
     // Check if Dugtrio's state changed, and start the appropriate
     // sprite animation.
@@ -4304,8 +4398,8 @@ static void UpdateSeelSprite(struct Sprite *sprite)
     struct SeelSwimmer *swimmer = &sPinballGame->seel.swimmers[sprite->data[1]];
     int prevState = sprite->data[0];
     int curState = swimmer->state;
-    sprite->pos1.x = swimmer->xPos >> 8;
-    sprite->pos1.y = swimmer->yPos >> 8;
+    sprite->pos1.x = (swimmer->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->pos1.y = (swimmer->yPos >> 8) - sPinballGame->cameraScrollY;
 
     // Check if this Seel's state changed, and start the appropriate
     // sprite animation.
@@ -4363,8 +4457,8 @@ static void UpdateSeelSparkleSprite(struct Sprite *sprite)
     else
     {
         sprite->data[0]--;
-        sprite->pos1.x = (sprite->data[1] - 1) * 8 + 4;
-        sprite->pos1.y = 4;
+        sprite->pos1.x = ((sprite->data[1] - 1) * 8 + 4) - sPinballGame->cameraScrollX;
+        sprite->pos1.y = 4 - sPinballGame->cameraScrollY;
         sprite->invisible = FALSE;
     }
 }
@@ -4374,6 +4468,8 @@ static void UpdateSeelMultiplierSprite(struct Sprite *sprite)
     // data[0] = state
     // data[1] = state counter
     // data[2] = original y position
+    sprite->pos2.x = -sPinballGame->cameraScrollX;
+    sprite->pos2.y = -sPinballGame->cameraScrollY;
     switch (sprite->data[0])
     {
     case 0:
@@ -4446,6 +4542,10 @@ static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct Graveyar
     return FALSE;
 }
 
+#define GHOST_SPEED 0x35
+#define REQUIRED_GHOST_HITS 10
+#define REQUIRED_GENGAR_HITS 5
+
 static bool32 CheckGengarCollision(struct Ball *ball, struct Gengar *gengar, u32 ticks, u8 *outCollisionNormal, int *outCollisionAmplification)
 {
     int x, y;
@@ -4478,7 +4578,7 @@ static bool32 CheckGengarCollision(struct Ball *ball, struct Gengar *gengar, u32
         gengarGhost->state = GENGAR_STATE_HIT;
         gengarGhost->counter = 0;
         gengar->numGengarHits++;
-        if (gengar->numGengarHits >= 5)
+        if (gengar->numGengarHits >= REQUIRED_GENGAR_HITS)
         {
             gengar->completed = TRUE;
             DisableFlippers();
@@ -4489,9 +4589,6 @@ static bool32 CheckGengarCollision(struct Ball *ball, struct Gengar *gengar, u32
 
     return TRUE;
 }
-
-#define GHOST_SPEED 0x35
-#define REQUIRED_GHOST_HITS 4
 
 static bool32 UpdateGengar(struct Gengar *gengar)
 {
@@ -4559,6 +4656,8 @@ static void UpdateGengarGhost(struct Gengar *gengar)
             gengarGhost->counter = 64;
             if ((gengarGhost->yPos >> 8) < 64)
                 gengarGhost->yPos += (3 << 8);
+
+            sPinballGame->doArtificialDownTilt = TRUE;
         }
         break;
     case GENGAR_STATE_STEP_LEFT:
@@ -4587,7 +4686,7 @@ static void UpdateGengarGhost(struct Gengar *gengar)
         else if (sprite->animEnded)
         {
             gengarGhost->state = GENGAR_STATE_STANDING;
-            gengarGhost->counter = 64;
+            gengarGhost->counter = 10;
         }
         break;
     case GENGAR_STATE_LEAVING:
@@ -4710,8 +4809,8 @@ static void UpdateGhostSprite(struct Sprite *sprite, struct GraveyardGhost *ghos
     // data[1] = ghost index
     int prevState = sprite->data[0];
     int curState = ghost->state;
-    sprite->pos1.x = ghost->xPos >> 8;
-    sprite->pos1.y = ghost->yPos >> 8;
+    sprite->pos1.x = (ghost->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->pos1.y = (ghost->yPos >> 8) - sPinballGame->cameraScrollY;
     switch ((ghost->counter % 52) / 13)
     {
     case 0:
@@ -4758,8 +4857,8 @@ static void UpdateGengarSprite(struct Sprite *sprite)
     struct GengarGhost *gengarGhost = &sPinballGame->gengar.gengarGhost;
     int prevState = sprite->data[0];
     int curState = gengarGhost->state;
-    sprite->pos1.x = gengarGhost->xPos >> 8;
-    sprite->pos1.y = gengarGhost->yPos >> 8;
+    sprite->pos1.x = (gengarGhost->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->pos1.y = (gengarGhost->yPos >> 8) - sPinballGame->cameraScrollY;
 
     // Check if Gengar's state changed, and start the appropriate
     // sprite animation.
