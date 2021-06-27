@@ -11,7 +11,7 @@ voicegroup408:: @
 	voice_directsound 60, 0, DirectSoundWaveData_bw_030choirc3, 255, 242, 191, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_029choira3, 255, 242, 191, 192
 	voice_directsound 60, 0, DirectSoundWaveData_bw_032choirf4, 255, 242, 191, 192
-	voice_directsound 60, 0, DirectSoundWaveData_bw_031choirc5, 255, 242, 191, 192
+	voice_directsound 60, 0, DirectSoundWaveData_hg_choirc5, 255, 242, 191, 192
 	voice_directsound 60, 0, DirectSoundWaveData_b2_femvoxohas2, 255, 242, 191, 192
 	voice_directsound 60, 0, DirectSoundWaveData_b2_femvoxohf3, 255, 242, 191, 192
 	voice_directsound 60, 0, DirectSoundWaveData_b2_femvoxohas3, 255, 242, 191, 192
@@ -113,8 +113,8 @@ voicegroup408:: @
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemalef5, 255, 242, 191, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_hg_144tptc4short, 255, 246, 210, 205
-	voice_directsound 60, 0, DirectSoundWaveData_hg_143tpta4short, 255, 246, 210, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_144tptc4short, 255, 246, 210, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_143tpta4short, 255, 246, 210, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_145tptg5, 255, 246, 210, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_191str2f2, 255, 242, 191, 192   @ Route 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_188str2c3, 255, 242, 191, 192   @ Route 1

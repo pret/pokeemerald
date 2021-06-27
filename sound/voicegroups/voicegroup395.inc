@@ -89,5 +89,5 @@ voicegroup395::
 	voice_directsound 60, 30, DirectSoundWaveData_b2_woodblockhi, 255, 0, 255, 0
 	voice_directsound 60, 64, DirectSoundWaveData_b2_woodblocklo, 255, 0, 255, 0
 	voice_directsound 60, 64, DirectSoundWaveData_b2_gongf, 255, 0, 255, 0
-	voice_directsound 60, 64, DirectSoundWaveData_b2_gongp, 255, 0, 255, 0
+	voice_directsound 60, 64, DirectSoundWaveData_bw_gongp, 255, 0, 255, 0
 	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 248, 0, 192

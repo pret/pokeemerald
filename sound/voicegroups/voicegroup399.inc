@@ -70,7 +70,7 @@ voicegroup399:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_b2_gongp, 255, 252, 0, 236
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gongp, 255, 252, 0, 236
 	voice_keysplit voicegroup407, KeySplitTable146   @ pizzicato (missing top 2 splits)
 	voice_keysplit voicegroup393, KeySplitTable54    @ HGSS nylon guitar
 	voice_keysplit voicegroup393, KeySplitTable60    @ HGSS fingered bass
