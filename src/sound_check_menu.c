@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_PLASMA - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (HG_SEQ_ME_GONIN - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_PLASMA - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (HG_SEQ_ME_GONIN - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1592,54 +1592,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(HG_SEQ_ME_CARDGAME1         , "HG-SEQ-ME-CARDGAME1") \
     X(HG_SEQ_ME_CARDGAME2         , "HG-SEQ-ME-CARDGAME2") \
     X(HG_SEQ_ME_GONIN             , "HG-SEQ-ME-GONIN") \
-    X(BW_SEQ_BGM_TITLE            , "BW-SEQ-BGM-TITLE") \
-    X(BW_SEQ_BGM_TITLE01          , "BW-SEQ-BGM-TITLE01") \
-    X(BW_SEQ_BGM_POKEMON_THEME    , "BW-SEQ-BGM-POKEMON-THEME") \
-    X(BW_SEQ_BGM_STARTING         , "BW-SEQ-BGM-STARTING") \
-    X(BW_SEQ_BGM_STARTING2        , "BW-SEQ-BGM-STARTING2") \
-    X(BW_SEQ_BGM_E_OPENING        , "BW-SEQ-BGM-E-OPENING") \
-    X(BW_SEQ_BGM_T_01             , "BW-SEQ-BGM-T-01") \
-    X(BW_SEQ_BGM_VS_RIVAL         , "BW-SEQ-BGM-VS-RIVAL") \
-    X(BW_SEQ_BGM_E_TSURETEKE1     , "BW-SEQ-BGM-E-TSURETEKE1") \
-    X(BW_SEQ_BGM_E_DOCTOR         , "BW-SEQ-BGM-E-DOCTOR") \
-    X(BW_SEQ_BGM_LABO             , "BW-SEQ-BGM-LABO") \
-    X(BW_SEQ_ME_KEYITEM           , "BW-SEQ-ME-KEYITEM") \
-    X(BW_SEQ_BGM_E_FRIEND         , "BW-SEQ-BGM-E-FRIEND") \
-    X(BW_SEQ_BGM_R_A_VAR          , "BW-SEQ-BGM-R-A-VAR") \
-    X(BW_SEQ_BGM_R_A              , "BW-SEQ-BGM-R-A") \
-    X(BW_SEQ_BGM_VS_NORAPOKE      , "BW-SEQ-BGM-VS-NORAPOKE") \
-    X(BW_SEQ_BGM_WIN1             , "BW-SEQ-BGM-WIN1") \
-    X(BW_SEQ_ME_LVUP              , "BW-SEQ-ME-LVUP") \
-    X(BW_SEQ_BGM_T_02_VAR1        , "BW-SEQ-BGM-T-02-VAR1") \
-    X(BW_SEQ_BGM_T_02_VAR2        , "BW-SEQ-BGM-T-02-VAR2") \
-    X(BW_SEQ_BGM_T_02_VAR3        , "BW-SEQ-BGM-T-02-VAR3") \
-    X(BW_SEQ_BGM_T_02             , "BW-SEQ-BGM-T-02") \
-    X(BW_SEQ_BGM_E_TSURETEKE2     , "BW-SEQ-BGM-E-TSURETEKE2") \
-    X(BW_SEQ_BGM_POKECEN          , "BW-SEQ-BGM-POKECEN") \
-    X(BW_SEQ_ME_ASA               , "BW-SEQ-ME-ASA") \
-    X(BW_SEQ_ME_HYOUKA1           , "BW-SEQ-ME-HYOUKA1") \
-    X(BW_SEQ_BGM_E_SAGE           , "BW-SEQ-BGM-E-SAGE") \
-    X(BW_SEQ_BGM_R_B_SP_VAR       , "BW-SEQ-BGM-R-B-SP-VAR") \
-    X(BW_SEQ_BGM_R_B_SP           , "BW-SEQ-BGM-R-B-SP") \
-    X(BW_SEQ_BGM_R_B_SU_VAR       , "BW-SEQ-BGM-R-B-SU-VAR") \
-    X(BW_SEQ_BGM_R_B_SU           , "BW-SEQ-BGM-R-B-SU") \
-    X(BW_SEQ_BGM_R_B_AU_VAR       , "BW-SEQ-BGM-R-B-AU-VAR") \
-    X(BW_SEQ_BGM_R_B_AU           , "BW-SEQ-BGM-R-B-AU") \
-    X(BW_SEQ_BGM_R_B_WI_VAR       , "BW-SEQ-BGM-R-B-WI-VAR") \
-    X(BW_SEQ_BGM_R_B_WI           , "BW-SEQ-BGM-R-B-WI") \
-    X(BW_SEQ_ME_CALL              , "BW-SEQ-ME-CALL") \
-    X(BW_SEQ_BGM_EYE_01           , "BW-SEQ-BGM-EYE-01") \
-    X(BW_SEQ_BGM_VS_TRAINER       , "BW-SEQ-BGM-VS-TRAINER") \
-    X(BW_SEQ_BGM_WIN2             , "BW-SEQ-BGM-WIN2") \
-    X(BW_SEQ_BGM_EYE_02           , "BW-SEQ-BGM-EYE-02") \
-    X(BW_SEQ_ME_ITEM              , "BW-SEQ-ME-ITEM") \
-    X(BW_SEQ_BGM_C_01             , "BW-SEQ-BGM-C-01") \
-    X(BW_SEQ_ME_HYOUKA2           , "BW-SEQ-ME-HYOUKA2") \
-    X(BW_SEQ_BGM_D_01             , "BW-SEQ-BGM-D-01") \
-    X(BW_SEQ_BGM_D_01_B1F         , "BW-SEQ-BGM-D-01-B1F") \
-    X(BW_SEQ_BGM_D_01_B2F         , "BW-SEQ-BGM-D-01-B2F") \
-    X(BW_SEQ_BGM_E_PLASMA         , "BW-SEQ-BGM-E-PLASMA") \
-    X(BW_SEQ_BGM_VS_PLASMA        , "BW-SEQ-BGM-VS-PLASMA") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

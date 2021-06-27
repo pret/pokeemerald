@@ -917,54 +917,6 @@
 #define HG_SEQ_ME_GONIN              894 // Let's Go Together (Unused?)
 
 // Black & White Music
-#define BW_SEQ_BGM_TITLE             895 // Coronation Day
-#define BW_SEQ_BGM_TITLE01           896 // A New Adventure!
-#define BW_SEQ_BGM_POKEMON_THEME     897 // Title Screen
-#define BW_SEQ_BGM_STARTING          898 // Onward to Adventure! (Part 1)
-#define BW_SEQ_BGM_STARTING2         899 // Onward to Adventure! (Part 2)
-#define BW_SEQ_BGM_E_OPENING         900 // A Day of Beginnings
-#define BW_SEQ_BGM_T_01              901 // Nuvema Town
-#define BW_SEQ_BGM_VS_RIVAL          902 // Battle! (Cheren/Bianca)         (TODO: PORTAMENTO!!)
-#define BW_SEQ_BGM_E_TSURETEKE1      903 // Hurry Along 1
-#define BW_SEQ_BGM_E_DOCTOR          904 // Professor Juniper
-#define BW_SEQ_BGM_LABO              905 // Juniper Pokémon Lab
-#define BW_SEQ_ME_KEYITEM            906 // Obtained a Key Item!
-#define BW_SEQ_BGM_E_FRIEND          907 // Let's Go Together!
-#define BW_SEQ_BGM_R_A_VAR           908 // Route 1 (No Tambourine)
-#define BW_SEQ_BGM_R_A               909 // Route 1
-#define BW_SEQ_BGM_VS_NORAPOKE       910 // Battle! (Wild Pokémon)          (TODO: PORTAMENTO!!)
-#define BW_SEQ_BGM_WIN1              911 // Victory! (Wild Pokémon)
-#define BW_SEQ_ME_LVUP               912 // Level Up!
-#define BW_SEQ_BGM_T_02_VAR1         913 // Accumula Town (No Piano or Drums)
-#define BW_SEQ_BGM_T_02_VAR2         914 // Accumula Town (No Drums)
-#define BW_SEQ_BGM_T_02_VAR3         915 // Accumula Town (No Piano)
-#define BW_SEQ_BGM_T_02              916 // Accumula Town
-#define BW_SEQ_BGM_E_TSURETEKE2      917 // Hurry Along 2
-#define BW_SEQ_BGM_POKECEN           918 // Pokémon Center
-#define BW_SEQ_ME_ASA                919 // Pokémon Healed                  (TODO: SWEEP PITCH!!)
-#define BW_SEQ_ME_HYOUKA1            920 // Pokédex Evaluation... You've Just Begun!
-#define BW_SEQ_BGM_E_SAGE            921 // Team Plasma Plots
-#define BW_SEQ_BGM_R_B_SP_VAR        922 // Route 2 (Spring) (No Percussion)
-#define BW_SEQ_BGM_R_B_SP            923 // Route 2 (Spring)
-#define BW_SEQ_BGM_R_B_SU_VAR        924 // Route 2 (Summer) (No Percussion)
-#define BW_SEQ_BGM_R_B_SU            925 // Route 2 (Summer)
-#define BW_SEQ_BGM_R_B_AU_VAR        926 // Route 2 (Autumn) (No Percussion)
-#define BW_SEQ_BGM_R_B_AU            927 // Route 2 (Autumn)
-#define BW_SEQ_BGM_R_B_WI_VAR        928 // Route 2 (Winter) (No Percussion)
-#define BW_SEQ_BGM_R_B_WI            929 // Route 2 (Winter)
-#define BW_SEQ_ME_CALL               930 // Xtransceiver
-#define BW_SEQ_BGM_EYE_01            931 // Trainers' Eyes Meet (Youngster)
-#define BW_SEQ_BGM_VS_TRAINER        932 // Battle! (Trainer Battle)
-#define BW_SEQ_BGM_WIN2              933 // Victory! (Trainer Battle)
-#define BW_SEQ_BGM_EYE_02            934 // Trainers' Eyes Meet (Lass)
-#define BW_SEQ_ME_ITEM               935 // Obtained an Item!
-#define BW_SEQ_BGM_C_01              936 // Striaton City
-#define BW_SEQ_ME_HYOUKA2            937 // Pokédex Evaluation... You're on Your Way!
-#define BW_SEQ_BGM_D_01              938 // The Dreamyard
-#define BW_SEQ_BGM_D_01_B1F          939 // The Dreamyard (B1F)
-#define BW_SEQ_BGM_D_01_B2F          940 // The Dreamyard (B2F) (Unused)
-#define BW_SEQ_BGM_E_PLASMA          941 // Team Plasma Appears!            (TODO: PORTAMENTO!!)
-#define BW_SEQ_BGM_VS_PLASMA         942 // Battle! (Team Plasma)           (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 

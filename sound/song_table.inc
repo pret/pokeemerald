@@ -896,54 +896,6 @@ gSongTable:: @ 86B49F0
 	song hg_seq_me_cardgame1, 2, 2
 	song hg_seq_me_cardgame2, 2, 2
 	song hg_seq_me_gonin, 2, 2
-	song bw_seq_bgm_title, 0, 0
-	song bw_seq_bgm_title01, 0, 0
-	song bw_seq_bgm_pokemon_theme, 0, 0
-	song bw_seq_bgm_starting, 0, 0
-	song bw_seq_bgm_starting2, 0, 0
-	song bw_seq_bgm_e_opening, 0, 0
-	song bw_seq_bgm_t_01, 0, 0
-	song bw_seq_bgm_vs_rival, 0, 0
-	song bw_seq_bgm_e_tsureteke1, 0, 0
-	song bw_seq_bgm_e_doctor, 0, 0
-	song bw_seq_bgm_labo, 0, 0
-	song bw_seq_me_keyitem, 2, 2
-	song bw_seq_bgm_e_friend, 0, 0
-	song bw_seq_bgm_r_a_var, 0, 0
-	song bw_seq_bgm_r_a, 0, 0
-	song bw_seq_bgm_vs_norapoke, 0, 0
-	song bw_seq_bgm_win1, 0, 0
-	song bw_seq_me_lvup, 2, 2
-	song bw_seq_bgm_t_02_var1, 0, 0
-	song bw_seq_bgm_t_02_var2, 0, 0
-	song bw_seq_bgm_t_02_var3, 0, 0
-	song bw_seq_bgm_t_02, 0, 0
-	song bw_seq_bgm_e_tsureteke2, 0, 0
-	song bw_seq_bgm_pokecen, 0, 0
-	song bw_seq_me_asa, 2, 2
-	song bw_seq_me_hyouka1, 2, 2
-	song bw_seq_bgm_e_sage, 0, 0
-	song bw_seq_bgm_r_b_sp_var, 0, 0
-	song bw_seq_bgm_r_b_sp, 0, 0
-	song bw_seq_bgm_r_b_su_var, 0, 0
-	song bw_seq_bgm_r_b_su, 0, 0
-	song bw_seq_bgm_r_b_au_var, 0, 0
-	song bw_seq_bgm_r_b_au, 0, 0
-	song bw_seq_bgm_r_b_wi_var, 0, 0
-	song bw_seq_bgm_r_b_wi, 0, 0
-	song bw_seq_me_call, 2, 2
-	song bw_seq_bgm_eye_01, 0, 0
-	song bw_seq_bgm_vs_trainer, 0, 0
-	song bw_seq_bgm_win2, 0, 0
-	song bw_seq_bgm_eye_02, 0, 0
-	song bw_seq_me_item, 2, 2
-	song bw_seq_bgm_c_01, 0, 0
-	song bw_seq_me_hyouka2, 2, 2
-	song bw_seq_bgm_d_01, 0, 0
-	song bw_seq_bgm_d_01_b1f, 0, 0
-	song bw_seq_bgm_d_01_b2f, 0, 0
-	song bw_seq_bgm_e_plasma, 0, 0
-	song bw_seq_bgm_vs_plasma, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

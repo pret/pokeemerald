@@ -273,20 +273,3 @@
 .include "sound/voicegroups/voicegroup271.inc"
 .include "sound/voicegroups/voicegroup272.inc"
 .include "sound/voicegroups/voicegroup273.inc"
-.include "sound/voicegroups/voicegroup393.inc"
-.include "sound/voicegroups/voicegroup394.inc" @ BW/B2W2 main
-.include "sound/voicegroups/voicegroup395.inc"
-.include "sound/voicegroups/voicegroup396.inc"
-.include "sound/voicegroups/voicegroup397.inc"
-.include "sound/voicegroups/voicegroup398.inc"
-.include "sound/voicegroups/voicegroup399.inc" @ BW Kageyama
-.include "sound/voicegroups/voicegroup400.inc" @ BW Sato
-.include "sound/voicegroups/voicegroup401.inc" @ BW Ichinose (overworld)
-.include "sound/voicegroups/voicegroup402.inc" @ BW Ichinose (battles)
-.include "sound/voicegroups/voicegroup403.inc"
-.include "sound/voicegroups/voicegroup404.inc"
-.include "sound/voicegroups/voicegroup405.inc"
-.include "sound/voicegroups/voicegroup406.inc"
-.include "sound/voicegroups/voicegroup407.inc"
-.include "sound/voicegroups/voicegroup408.inc"
-.include "sound/voicegroups/voicegroup409.inc"
