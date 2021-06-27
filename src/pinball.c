@@ -31,7 +31,8 @@
 // ...
 
 #define PINBALL_BG_TEXT        0
-#define PINBALL_BG_BASE        1
+#define PINBALL_BG_COVER       1
+#define PINBALL_BG_BASE        2
 
 #define WIN_TEXT 0
 
@@ -460,12 +461,21 @@ static const struct BgTemplate sPinballBgTemplates[] = {
        .baseTile = 0
    },
    {
-       .bg = PINBALL_BG_BASE,
-       .charBaseIndex = 2,
+       .bg = PINBALL_BG_COVER,
+       .charBaseIndex = 1,
        .mapBaseIndex = 28,
        .screenSize = 0,
        .paletteMode = 0,
        .priority = 1,
+       .baseTile = 0
+   },
+   {
+       .bg = PINBALL_BG_BASE,
+       .charBaseIndex = 2,
+       .mapBaseIndex = 29,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 2,
        .baseTile = 0
    },
 };
@@ -483,21 +493,16 @@ static const struct WindowTemplate sPinballWinTemplates[] = {
     DUMMY_WIN_TEMPLATE,
 };
 
-// static const u32 sPinballBaseBgGfx[] = INCBIN_U32("graphics/pinball/base_bg_tiles.4bpp");
-// static const u16 sPinballBaseBgPalette[] = INCBIN_U16("graphics/pinball/base_bg_tiles.gbapal");
-// static const u32 sPinballBaseBgTilemap[] = INCBIN_U32("graphics/pinball/base_bg_tilemap.bin");
-// static const u8 sPinballBaseBgCollisionMasks[] = INCBIN_U8("graphics/pinball/base_bg_collision_masks.1bpp");
-// static const u8 sPinballBaseBgCollisionMap[] = INCBIN_U8("graphics/pinball/base_bg_collision_map.bin");
-// static const u8 sFlipperLeftBaseCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks.1bpp");
-// static const u8 sFlipperRightBaseCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks.1bpp");
-
-static const u8 sFlipperLeftMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks_meowth.1bpp");
-static const u8 sFlipperRightMeowthCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks_meowth.1bpp");
+static const u32 sCoverBgGfx[] = INCBIN_U32("graphics/pinball/bg_cover_tiles.4bpp");
+static const u16 sCoverBgPalette[] = INCBIN_U16("graphics/pinball/bg_cover_tiles.gbapal");
+static const u16 sCovergTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_cover.bin");
 
 static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball.4bpp.lz");
 static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_pokeball.gbapal");
 static const u32 sFlipperGfx[] = INCBIN_U32("graphics/pinball/flipper.4bpp.lz");
 static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal");
+static const u8 sFlipperLeftMinigameCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_left_masks_minigame.1bpp");
+static const u8 sFlipperRightMinigameCollisionMasks[][0x80] = INCBIN_U8("graphics/pinball/flipper_right_masks_minigame.1bpp");
 static const u32 sTimerDigitsGfx[] = INCBIN_U32("graphics/pinball/timer_digits.4bpp.lz");
 static const u16 sTimerDigitsPalette[] = INCBIN_U16("graphics/pinball/timer_digits.gbapal");
 
@@ -668,7 +673,7 @@ static const struct OamData sBallOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -721,7 +726,7 @@ static const struct OamData sFlipperOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -770,7 +775,7 @@ static const struct OamData sTimerDigitOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(8x16),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -829,7 +834,7 @@ static const struct OamData sMeowthOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -891,7 +896,7 @@ static const struct OamData sMeowthJewelOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -948,7 +953,7 @@ static const struct OamData sMeowthJewelMultiplierOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(16x8),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1007,7 +1012,7 @@ static const struct OamData sMeowthJewelSparkleOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1091,7 +1096,7 @@ static const struct OamData sDugtrioOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1174,7 +1179,7 @@ static const struct OamData sSeelOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1342,7 +1347,7 @@ static const struct OamData sSeelSparkleOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1378,7 +1383,7 @@ static const struct OamData sSeelMultiplierOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(16x8),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1449,7 +1454,7 @@ static const struct OamData sGastlyOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1505,7 +1510,7 @@ static const struct OamData sHaunterOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1564,7 +1569,7 @@ static const struct OamData sGengarOamData = {
     .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
-    .priority = 1,
+    .priority = 2,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -2145,12 +2150,13 @@ static void InitPinballScreen(void)
         ResetVramOamAndBgCntRegs();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sPinballBgTemplates, ARRAY_COUNT(sPinballBgTemplates));
+        SetBgTilemapBuffer(PINBALL_BG_COVER, AllocZeroed(BG_SCREEN_SIZE * 4));
         SetBgTilemapBuffer(PINBALL_BG_BASE, AllocZeroed(BG_SCREEN_SIZE * 4));
         LoadBgGfx(sPinballGame->gameType);
         InitWindows(sPinballWinTemplates);
         DeactivateAllTextPrinters();
-        LoadMessageBoxGfx(WIN_TEXT, 0x200, 0xF0);
-        LoadUserWindowBorderGfx(WIN_TEXT, 0x214, 0xE0);
+        LoadMessageBoxGfx(WIN_TEXT, 0x0, 0xF0);
+        LoadUserWindowBorderGfx(WIN_TEXT, 0x14, 0xE0);
         gMain.state++;
         break;
     case 2:
@@ -2159,9 +2165,11 @@ static void InitPinballScreen(void)
         gMain.state++;
         break;
     case 3:
+        CopyBgTilemapBufferToVram(PINBALL_BG_COVER);
         CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         ShowBg(PINBALL_BG_TEXT);
+        ShowBg(PINBALL_BG_COVER);
         ShowBg(PINBALL_BG_BASE);
         gMain.state++;
         break;
@@ -2181,6 +2189,9 @@ static void InitPinballScreen(void)
         StartNewBall();
         gMain.state++;
     case 5:
+        // Center game in the middle of the screen
+        SetGpuReg(REG_OFFSET_BG2HOFS, -40);
+
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(PinballVBlankCallback);
         SetMainCallback2(PinballMainCallback);
@@ -2191,33 +2202,34 @@ static void InitPinballScreen(void)
 
 static void LoadBgGfx(u8 gameType)
 {
+    ResetPaletteFade();
     switch (gameType)
     {
     case GAME_TYPE_MEOWTH:
         LoadBgTiles(PINBALL_BG_BASE, sMeowthStageBgGfx, sizeof(sMeowthStageBgGfx), 0);
         CopyToBgTilemapBuffer(PINBALL_BG_BASE, sMeowthStageBgTilemap, sizeof(sMeowthStageBgTilemap), 0);
-        ResetPaletteFade();
         LoadPalette(sMeowthStageBgPalette, 0, sizeof(sMeowthStageBgPalette));
         break;
     case GAME_TYPE_DIGLETT:
         LoadBgTiles(PINBALL_BG_BASE, sDiglettStageBgGfx, sizeof(sDiglettStageBgGfx), 0);
         CopyToBgTilemapBuffer(PINBALL_BG_BASE, sDiglettStageBgTilemap, sizeof(sDiglettStageBgTilemap), 0);
-        ResetPaletteFade();
         LoadPalette(sDiglettStageBgPalette, 0, sizeof(sDiglettStageBgPalette));
         break;
     case GAME_TYPE_SEEL:
         LoadBgTiles(PINBALL_BG_BASE, sSeelStageBgGfx, sizeof(sSeelStageBgGfx), 0);
         CopyToBgTilemapBuffer(PINBALL_BG_BASE, sSeelStageBgTilemap, sizeof(sSeelStageBgTilemap), 0);
-        ResetPaletteFade();
         LoadPalette(sSeelStageBgPalette, 0, sizeof(sSeelStageBgPalette));
         break;
     case GAME_TYPE_GENGAR:
         LoadBgTiles(PINBALL_BG_BASE, sGengarStageBgGfx, sizeof(sGengarStageBgGfx), 0);
         CopyToBgTilemapBuffer(PINBALL_BG_BASE, sGengarStageBgTilemap, sizeof(sGengarStageBgTilemap), 0);
-        ResetPaletteFade();
         LoadPalette(sGengarStageBgPalette, 0, sizeof(sGengarStageBgPalette));
         break;
     }
+
+    LoadBgTiles(PINBALL_BG_COVER, sCoverBgGfx, sizeof(sCoverBgGfx), 0);
+    CopyToBgTilemapBuffer(PINBALL_BG_COVER, sCovergTilemap, sizeof(sCovergTilemap), 0);
+    LoadPalette(sCoverBgPalette, 0x10, sizeof(sCoverBgPalette));
 }
 
 static void LoadSpriteGfx(u8 gameType)
@@ -2267,6 +2279,8 @@ static void InitPinballGame(void)
     sPinballGame->leftFlipper.yPos = 122;
     sPinballGame->timer.ticks = GetTimerTicks(sPinballGame->gameType);
     sPinballGame->flippersDisabled = FALSE;
+    sPinballGame->cameraScrollX = -40;
+    sPinballGame->cameraScrollY = 0;
 }
 
 static u32 GetTimerTicks(u8 gameType)
@@ -3239,9 +3253,9 @@ static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row)
         offset = 2;
 
     if (collisionAttribute < 0xF0)
-        flipperStateMasks = sFlipperLeftMeowthCollisionMasks[offset];
+        flipperStateMasks = sFlipperLeftMinigameCollisionMasks[offset];
     else
-        flipperStateMasks = sFlipperRightMeowthCollisionMasks[offset];
+        flipperStateMasks = sFlipperRightMinigameCollisionMasks[offset];
 
     mask = flipperStateMasks[(collisionAttribute % 0x10) * 0x8 + row];
 
@@ -3414,7 +3428,7 @@ static void UpdateCamera(void)
     // if (scrollY > stagePixelHeight - DISPLAY_HEIGHT)
     //     scrollY = stagePixelHeight - DISPLAY_HEIGHT;
 
-    scrollX = 0;
+    scrollX = -40; // Center the game in the middle of the screen
     scrollY = 0;
 
     scrollX += sPinballGame->leftTilt.counter;
@@ -3424,8 +3438,8 @@ static void UpdateCamera(void)
     sPinballGame->cameraScrollX = scrollX;
     sPinballGame->cameraScrollY = scrollY;
 
-    SetGpuReg(REG_OFFSET_BG1HOFS, scrollX);
-    SetGpuReg(REG_OFFSET_BG1VOFS, scrollY);
+    SetGpuReg(REG_OFFSET_BG2HOFS, scrollX);
+    SetGpuReg(REG_OFFSET_BG2VOFS, scrollY);
 }
 
 static void UpdateTimer(void)
