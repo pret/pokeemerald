@@ -761,6 +761,7 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_e_rival1, 0, 0
 	song hg_seq_gs_vs_rival, 0, 0
 	song hg_seq_gs_shinka, 0, 0
+	song hg_seq_gs_koukan, 0, 0
 	song hg_seq_me_shinkaome, 2, 2
 	song hg_seq_gs_c_kogane, 0, 0
 	song hg_seq_gs_gym, 0, 0
@@ -772,6 +773,8 @@ gSongTable:: @ 86B49F0
     song hg_seq_me_waza, 2, 2
     song hg_seq_gs_game, 0, 0
     song hg_seq_gs_gameatari, 0, 0
+	song hg_seq_me_cardgame1, 2, 2
+	song hg_seq_me_cardgame2, 2, 2
 	song hg_seq_me_acce, 2, 2
 	song hg_seq_gs_wifitower, 0, 0
 	song hg_seq_gs_bld_gtc, 0, 0
@@ -892,9 +895,6 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_vs_kodai, 0, 0
 	song hg_seq_gs_d_shinto, 0, 0
 	song hg_seq_gs_e_arceus, 0, 0
-	song hg_seq_gs_koukan, 0, 0
-	song hg_seq_me_cardgame1, 2, 2
-	song hg_seq_me_cardgame2, 2, 2
 	song hg_seq_me_gonin, 2, 2
 
 	.align 2
