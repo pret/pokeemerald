@@ -728,7 +728,7 @@
 #define PL_SEQ_PL_POINTGET3          707 // Received Battle Points!
 #define PL_SEQ_PL_BA_BRAIN           708 // Battle! (Frontier Brain)
 #define PL_SEQ_PL_WINBRAIN           709 // Victory! (Frontier Brain)
-#define PL_SEQ_PL_VS_REGI            710 // Battle! (Regirock / Regice / Registeel)
+#define PL_SEQ_PL_BA_REGI            710 // Battle! (Regirock / Regice / Registeel)
  
 // HeartGold & SoulSilver Music 
 #define HG_SEQ_GS_TITLE              711 // Opening Movie
