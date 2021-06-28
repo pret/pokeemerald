@@ -1,8 +1,11 @@
 This branch adds music from NDS Pokémon games to the Pokeemerald decompilations. It is recommended that your repository is up to date as long as this branch is too. Feel free to use the voice groups to make your own music.
 
-Separate branches for select soundtracks are on my to-do list. This branch currently adds music from DPPt and HGSS and uses 1269224 bytes of ROM data.
+This master branch is a WIP. See my other branches for music from select soundtracks:
+[DPPt Music](https://github.com/CyanSMP64/pokeemerald/tree/dppt_music). (1687104 bytes)
 
 If you have space concerns and/or only wish to use select music from this repo, feel free to contact me on Discord at *@Furret#7777*.
+
+Credits to [Ipatix](https://github.com/ipatix) for the [HQ m4a mixer](https://github.com/ipatix/gba-hq-mixer), and to [Sierraffinity](https://github.com/Sierraffinity) for the sound test menu ported from [CrystalDust](https://github.com/Sierraffinity/CrystalDust).
 
 
 # Pokémon Emerald
