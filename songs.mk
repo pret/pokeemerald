@@ -420,15 +420,6 @@ $(MID_SUBDIR)/mus_rg_sevii_45.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_sevii_67.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G189 -V084
 
-$(MID_SUBDIR)/mus_rg_sevii_123.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G173 -V084
-
-$(MID_SUBDIR)/mus_rg_sevii_cave.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
-
-$(MID_SUBDIR)/mus_rg_sevii_dungeon.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G146 -V090
-
 $(MID_SUBDIR)/mus_rg_sevii_route.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G187 -V080
 
@@ -446,9 +437,6 @@ $(MID_SUBDIR)/mus_rg_mystery_gift.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_rg_route24.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G151 -V086
-
-$(MID_SUBDIR)/mus_rg_teachy_tv_show.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G131 -V068
 
 $(MID_SUBDIR)/mus_rg_mt_moon.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
@@ -549,15 +537,6 @@ $(MID_SUBDIR)/mus_rg_vs_trainer.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_vs_wild.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G157 -V090
 
-$(MID_SUBDIR)/mus_rg_victory_gym_leader.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G171 -V090
-
-$(MID_SUBDIR)/mus_rg_victory_trainer.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G169 -V089
-
-$(MID_SUBDIR)/mus_rg_victory_wild.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G170 -V090
-
 $(MID_SUBDIR)/mus_cable_car.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
@@ -626,9 +605,6 @@ $(MID_SUBDIR)/mus_vs_frontier_brain.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_vs_mew.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G116 -V090
-
-$(MID_SUBDIR)/mus_vs_rayquaza.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G114 -V080 -P1
 
 $(MID_SUBDIR)/mus_encounter_hiker.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G097 -V076

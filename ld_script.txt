@@ -1171,9 +1171,6 @@ SECTIONS {
         sound/songs/midi/mus_rg_silph.o(.rodata);
         sound/songs/midi/mus_rg_fuchsia.o(.rodata);
         sound/songs/midi/mus_rg_celadon.o(.rodata);
-        sound/songs/midi/mus_rg_victory_trainer.o(.rodata);
-        sound/songs/midi/mus_rg_victory_wild.o(.rodata);
-        sound/songs/midi/mus_rg_victory_gym_leader.o(.rodata);
         sound/songs/midi/mus_rg_vermillion.o(.rodata);
         sound/songs/midi/mus_rg_pewter.o(.rodata);
         sound/songs/midi/mus_rg_encounter_rival.o(.rodata);
@@ -1192,11 +1189,7 @@ SECTIONS {
         sound/songs/midi/mus_rg_net_center.o(.rodata);
         sound/songs/midi/mus_rg_mystery_gift.o(.rodata);
         sound/songs/midi/mus_rg_berry_pick.o(.rodata);
-        sound/songs/midi/mus_rg_sevii_cave.o(.rodata);
-        sound/songs/midi/mus_rg_teachy_tv_show.o(.rodata);
         sound/songs/midi/mus_rg_sevii_route.o(.rodata);
-        sound/songs/midi/mus_rg_sevii_dungeon.o(.rodata);
-        sound/songs/midi/mus_rg_sevii_123.o(.rodata);
         sound/songs/midi/mus_rg_sevii_45.o(.rodata);
         sound/songs/midi/mus_rg_sevii_67.o(.rodata);
         sound/songs/midi/mus_rg_poke_flute.o(.rodata);
@@ -1222,7 +1215,6 @@ SECTIONS {
         sound/songs/midi/mus_b_dome.o(.rodata);
         sound/songs/midi/mus_b_pike.o(.rodata);
         sound/songs/midi/mus_b_factory.o(.rodata);
-        sound/songs/midi/mus_vs_rayquaza.o(.rodata);
         sound/songs/midi/mus_vs_frontier_brain.o(.rodata);
         sound/songs/midi/mus_vs_mew.o(.rodata);
         sound/songs/midi/mus_b_dome_lobby.o(.rodata);

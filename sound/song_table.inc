@@ -477,9 +477,6 @@ gSongTable:: @ 86B49F0
 	song mus_rg_silph, 0, 0
 	song mus_rg_fuchsia, 0, 0
 	song mus_rg_celadon, 0, 0
-	song mus_rg_victory_trainer, 0, 0
-	song mus_rg_victory_wild, 0, 0
-	song mus_rg_victory_gym_leader, 0, 0
 	song mus_rg_vermillion, 0, 0
 	song mus_rg_pewter, 0, 0
 	song mus_rg_encounter_rival, 0, 0
@@ -498,11 +495,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_net_center, 0, 0
 	song mus_rg_mystery_gift, 0, 0
 	song mus_rg_berry_pick, 0, 0
-	song mus_rg_sevii_cave, 0, 0
-	song mus_rg_teachy_tv_show, 0, 0
 	song mus_rg_sevii_route, 0, 0
-	song mus_rg_sevii_dungeon, 0, 0
-	song mus_rg_sevii_123, 0, 0
 	song mus_rg_sevii_45, 0, 0
 	song mus_rg_sevii_67, 0, 0
 	song mus_rg_poke_flute, 2, 2
@@ -528,7 +521,6 @@ gSongTable:: @ 86B49F0
 	song mus_b_dome, 0, 0
 	song mus_b_pike, 0, 0
 	song mus_b_factory, 0, 0
-	song mus_vs_rayquaza, 0, 0
 	song mus_vs_frontier_brain, 0, 0
 	song mus_vs_mew, 0, 0
 	song mus_b_dome_lobby, 0, 0

@@ -1173,9 +1173,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_RG_SILPH, "MUS-RG-SILPH") \
     X(MUS_RG_FUCHSIA, "MUS-RG-FUCHSIA") \
     X(MUS_RG_CELADON, "MUS-RG-CELADON") \
-    X(MUS_RG_VICTORY_TRAINER, "MUS-RG-VICTORY-TRAINER") \
-    X(MUS_RG_VICTORY_WILD, "MUS-RG-VICTORY-WILD") \
-    X(MUS_RG_VICTORY_GYM_LEADER, "MUS-RG-VICTORY-GYM-LEADER") \
     X(MUS_RG_VERMILLION, "MUS-RG-VERMILLION") \
     X(MUS_RG_PEWTER, "MUS-RG-PEWTER") \
     X(MUS_RG_ENCOUNTER_RIVAL, "MUS-RG-ENCOUNTER-RIVAL") \
@@ -1194,11 +1191,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_RG_NET_CENTER, "MUS-RG-NET-CENTER") \
     X(MUS_RG_MYSTERY_GIFT, "MUS-RG-MYSTERY-GIFT") \
     X(MUS_RG_BERRY_PICK, "MUS-RG-BERRY-PICK") \
-    X(MUS_RG_SEVII_CAVE, "MUS-RG-SEVII-CAVE") \
-    X(MUS_RG_TEACHY_TV_SHOW, "MUS-RG-TEACHY-TV-SHOW") \
     X(MUS_RG_SEVII_ROUTE, "MUS-RG-SEVII-ROUTE") \
-    X(MUS_RG_SEVII_DUNGEON, "MUS-RG-SEVII-DUNGEON") \
-    X(MUS_RG_SEVII_123, "MUS-RG-SEVII-123") \
     X(MUS_RG_SEVII_45, "MUS-RG-SEVII-45") \
     X(MUS_RG_SEVII_67, "MUS-RG-SEVII-67") \
     X(MUS_RG_POKE_FLUTE, "MUS-RG-POKE-FLUTE") \
@@ -1224,7 +1217,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_B_DOME, "MUS-B-DOME") \
     X(MUS_B_PIKE, "MUS-B-PIKE") \
     X(MUS_B_FACTORY, "MUS-B-FACTORY") \
-    X(MUS_VS_RAYQUAZA, "MUS-VS-RAYQUAZA") \
     X(MUS_VS_FRONTIER_BRAIN, "MUS-VS-FRONTIER-BRAIN") \
     X(MUS_VS_MEW, "MUS-VS-MEW") \
     X(MUS_B_DOME_LOBBY, "MUS-B-DOME-LOBBY") \
@@ -1457,6 +1449,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(HG_SEQ_GS_E_RIVAL1          , "HG-SEQ-GS-E-RIVAL1") \
     X(HG_SEQ_GS_VS_RIVAL          , "HG-SEQ-GS-VS-RIVAL") \
     X(HG_SEQ_GS_SHINKA            , "HG-SEQ-GS-SHINKA") \
+    X(HG_SEQ_GS_KOUKAN            , "HG-SEQ-GS-KOUKAN") \
     X(HG_SEQ_ME_SHINKAOME         , "HG-SEQ-ME-SHINKAOME") \
     X(HG_SEQ_GS_C_KOGANE          , "HG-SEQ-GS-C-KOGANE") \
     X(HG_SEQ_GS_GYM               , "HG-SEQ-GS-GYM") \
@@ -1468,6 +1461,8 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(HG_SEQ_ME_WAZA              , "HG-SEQ-ME-WAZA") \
     X(HG_SEQ_GS_GAME              , "HG-SEQ-GS-GAME") \
     X(HG_SEQ_GS_GAMEATARI         , "HG-SEQ-GS-GAMEATARI") \
+    X(HG_SEQ_ME_CARDGAME1         , "HG-SEQ-ME-CARDGAME1") \
+    X(HG_SEQ_ME_CARDGAME2         , "HG-SEQ-ME-CARDGAME2") \
     X(HG_SEQ_ME_ACCE              , "HG-SEQ-ME-ACCE") \
     X(HG_SEQ_GS_WIFITOWER         , "HG-SEQ-GS-WIFITOWER") \
     X(HG_SEQ_GS_BLD_GTC           , "HG-SEQ-GS-BLD-GTC") \
@@ -1588,9 +1583,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(HG_SEQ_GS_VS_KODAI          , "HG-SEQ-GS-VS-KODAI") \
     X(HG_SEQ_GS_D_SHINTO          , "HG-SEQ-GS-D-SHINTO") \
     X(HG_SEQ_GS_E_ARCEUS          , "HG-SEQ-GS-E-ARCEUS") \
-    X(HG_SEQ_GS_KOUKAN            , "HG-SEQ-GS-KOUKAN") \
-    X(HG_SEQ_ME_CARDGAME1         , "HG-SEQ-ME-CARDGAME1") \
-    X(HG_SEQ_ME_CARDGAME2         , "HG-SEQ-ME-CARDGAME2") \
     X(HG_SEQ_ME_GONIN             , "HG-SEQ-ME-GONIN") \
 
 #define SOUND_LIST_SE \
