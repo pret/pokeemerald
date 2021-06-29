@@ -240,7 +240,7 @@
 .include "sound/voicegroups/voicegroup238.inc"
 .include "sound/voicegroups/voicegroup239.inc"
 .include "sound/voicegroups/voicegroup240.inc"
-.include "sound/voicegroups/voicegroup241.inc"
+.include "sound/voicegroups/voicegroup241.inc" @ used in bw
 .include "sound/voicegroups/voicegroup242.inc"
 .include "sound/voicegroups/voicegroup243.inc"
 .include "sound/voicegroups/voicegroup244.inc"
@@ -254,12 +254,12 @@
 .include "sound/voicegroups/voicegroup252.inc"
 .include "sound/voicegroups/voicegroup253.inc"
 .include "sound/voicegroups/voicegroup254.inc"
-.include "sound/voicegroups/voicegroup255.inc"
+.include "sound/voicegroups/voicegroup255.inc" @ used in bw
 .include "sound/voicegroups/voicegroup256.inc"
 .include "sound/voicegroups/voicegroup257.inc"
 .include "sound/voicegroups/voicegroup258.inc"
 .include "sound/voicegroups/voicegroup259.inc"
-.include "sound/voicegroups/voicegroup260.inc"
+.include "sound/voicegroups/voicegroup260.inc" @ used in bw
 .include "sound/voicegroups/voicegroup261.inc"
 .include "sound/voicegroups/voicegroup262.inc"
 .include "sound/voicegroups/voicegroup263.inc"
@@ -273,3 +273,14 @@
 .include "sound/voicegroups/voicegroup271.inc"
 .include "sound/voicegroups/voicegroup272.inc"
 .include "sound/voicegroups/voicegroup273.inc"
+.include "sound/voicegroups/voicegroup274.inc" @ BW (kageyama)
+.include "sound/voicegroups/voicegroup275.inc" @ BW (sato)
+.include "sound/voicegroups/voicegroup276.inc" @ BW (ichinose)
+.include "sound/voicegroups/voicegroup277.inc" @ BW (misc)
+.include "sound/voicegroups/voicegroup278.inc"
+.include "sound/voicegroups/voicegroup279.inc"
+.include "sound/voicegroups/voicegroup280.inc"
+.include "sound/voicegroups/voicegroup281.inc"
+.include "sound/voicegroups/voicegroup282.inc"
+.include "sound/voicegroups/voicegroup283.inc"
+.include "sound/voicegroups/voicegroup284.inc"

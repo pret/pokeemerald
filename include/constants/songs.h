@@ -909,6 +909,7 @@
 #define HG_SEQ_ME_GONIN              886 // Let's Go Together (Unused?)
 
 // Black & White Music
+#define BW_SEQ_BGM_TITLE             887 // Coronation Day
 
 // Black 2 & White 2 Music
 

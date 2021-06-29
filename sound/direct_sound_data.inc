@@ -3120,7 +3120,7 @@ DirectSoundWaveData_hg_020celloe3::
 
 	.align 2
 DirectSoundWaveData_hg_021cellog2::
-	.incbin "sound/direct_sound_samples/hg_021cellog2.bin"
+	.incbin "sound/direct_sound_samples/hg_021cellog2.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_022china::
@@ -3328,19 +3328,19 @@ DirectSoundWaveData_hg_118marting3::
 
 	.align 2
 DirectSoundWaveData_hg_119str1a4::
-	.incbin "sound/direct_sound_samples/hg_119str1a4.bin"
+	.incbin "sound/direct_sound_samples/hg_119str1a4.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_120str1c4::
-	.incbin "sound/direct_sound_samples/hg_120str1c4.bin"
+	.incbin "sound/direct_sound_samples/hg_120str1c4.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_121str1c6::
-	.incbin "sound/direct_sound_samples/hg_121str1c6.bin"
+	.incbin "sound/direct_sound_samples/hg_121str1c6.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_122str1f5::
-	.incbin "sound/direct_sound_samples/hg_122str1f5.bin"
+	.incbin "sound/direct_sound_samples/hg_122str1f5.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_123elastkc2::
@@ -3360,11 +3360,11 @@ DirectSoundWaveData_hg_129jdrumm::
 
 	.align 2
 DirectSoundWaveData_hg_132timpc4::
-	.incbin "sound/direct_sound_samples/hg_132timpc4.bin"
+	.incbin "sound/direct_sound_samples/hg_132timpc4.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_133timpg3::
-	.incbin "sound/direct_sound_samples/hg_133timpg3.bin"
+	.incbin "sound/direct_sound_samples/hg_133timpg3.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_134timpg4::
@@ -3412,11 +3412,11 @@ DirectSoundWaveData_hg_145tptg5::
 
 	.align 2
 DirectSoundWaveData_hg_146tbellc5::
-	.incbin "sound/direct_sound_samples/hg_146tbellc5.bin"
+	.incbin "sound/direct_sound_samples/hg_146tbellc5.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_147tbellg4::
-	.incbin "sound/direct_sound_samples/hg_147tbellg4.bin"
+	.incbin "sound/direct_sound_samples/hg_147tbellg4.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_148vibrc4::
@@ -3449,3 +3449,67 @@ DirectSoundWaveData_hg_156xylo1c4::
 	.align 2
 DirectSoundWaveData_hg_157xylo1f5::
 	.incbin "sound/direct_sound_samples/hg_157xylo1f5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_075pnoc2::
+	.incbin "sound/direct_sound_samples/bw_075pnoc2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_076pnoc3::
+	.incbin "sound/direct_sound_samples/bw_076pnoc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_077pnoc4::
+	.incbin "sound/direct_sound_samples/bw_077pnoc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_078pnoc5::
+	.incbin "sound/direct_sound_samples/bw_078pnoc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_079pnog2::
+	.incbin "sound/direct_sound_samples/bw_079pnog2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_080pnog3::
+	.incbin "sound/direct_sound_samples/bw_080pnog3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_081pnog4::
+	.incbin "sound/direct_sound_samples/bw_081pnog4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_082pnog5::
+	.incbin "sound/direct_sound_samples/bw_082pnog5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_reversecymbale2::
+	.incbin "sound/direct_sound_samples/bw_reversecymbale2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gongp::
+	.incbin "sound/direct_sound_samples/bw_gongp.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmaleg2::
+	.incbin "sound/direct_sound_samples/bw_choirmaleg2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmalee3::
+	.incbin "sound/direct_sound_samples/bw_choirmalee3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmalec4::
+	.incbin "sound/direct_sound_samples/bw_choirmalec4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemalef4::
+	.incbin "sound/direct_sound_samples/bw_choirfemalef4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemalec5::
+	.incbin "sound/direct_sound_samples/bw_choirfemalec5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemalef5::
+	.incbin "sound/direct_sound_samples/bw_choirfemalef5.bin"
