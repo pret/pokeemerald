@@ -3168,7 +3168,7 @@ DirectSoundWaveData_hg_032crash::
 
 	.align 2
 DirectSoundWaveData_hg_033orccym::
-	.incbin "sound/direct_sound_samples/hg_033orccym.bin"
+	.incbin "sound/direct_sound_samples/hg_033orccym.bin" @ used in bw
 
 	.align 2
 DirectSoundWaveData_hg_038drawbc3::
