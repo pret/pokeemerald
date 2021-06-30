@@ -2185,13 +2185,12 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
 static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
 {
     u8 abilityId;
-    u8 abilityCount = 0;
-    if (gBaseStats[sDebugMonData->mon_speciesId].abilities[1] != ABILITY_NONE)
-        abilityCount++;
+    u8 abilityCount = 2 - 1; //-1 for proper iteration
+    u8 i = 0;
     #ifdef POKEMON_EXPANSION
-        if (gBaseStats[sDebugMonData->mon_speciesId].abilities[2] != ABILITY_NONE)
-            abilityCount++;
+        abilityCount = NUM_ABILITY_SLOTS - 1;
     #endif
+
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
@@ -2209,7 +2208,11 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
                 gTasks[taskId].data[3] = 0;
         }
 
-        abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, gTasks[taskId].data[3]);
+        while (GetAbilityBySpecies(sDebugMonData->mon_speciesId, gTasks[taskId].data[3] - i) == ABILITY_NONE)
+        {
+            i++;
+        }
+        abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, gTasks[taskId].data[3] - i);
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
@@ -2220,7 +2223,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        sDebugMonData->mon_abilityNum = gTasks[taskId].data[3]; //AbilityNum
+        sDebugMonData->mon_abilityNum = gTasks[taskId].data[3] - i; //AbilityNum
         gTasks[taskId].data[3] = 0;
         gTasks[taskId].data[4] = 0;
 
