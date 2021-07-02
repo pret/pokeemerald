@@ -2333,3 +2333,9 @@ $(MID_SUBDIR)/hg_seq_me_gonin.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_title.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V092
+
+$(MID_SUBDIR)/bw_seq_bgm_title01.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V093
+
+$(MID_SUBDIR)/bw_seq_bgm_pokemon_theme.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V106

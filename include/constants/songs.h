@@ -910,6 +910,8 @@
 
 // Black & White Music
 #define BW_SEQ_BGM_TITLE             887 // Coronation Day
+#define BW_SEQ_BGM_TITLE01           888 // A New Adventure!
+#define BW_SEQ_BGM_POKEMON_THEME     889 // Title Screen
 
 // Black 2 & White 2 Music
 
