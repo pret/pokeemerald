@@ -3557,3 +3557,7 @@ DirectSoundWaveData_bw_solotrumpetc5::
 	.align 2
 DirectSoundWaveData_bw_snareroll::
 	.incbin "sound/direct_sound_samples/bw_snareroll.bin"
+
+	.align 2
+DirectSoundWaveData_bw_045crash::
+	.incbin "sound/direct_sound_samples/bw_045crash.bin"

@@ -912,6 +912,9 @@
 #define BW_SEQ_BGM_TITLE             887 // Coronation Day
 #define BW_SEQ_BGM_TITLE01           888 // A New Adventure!
 #define BW_SEQ_BGM_POKEMON_THEME     889 // Title Screen
+#define BW_SEQ_BGM_STARTING          890 // Onward to Adventure! (Part 1)
+#define BW_SEQ_BGM_STARTING2         891 // Onward to Adventure! (Part 2)
+#define BW_SEQ_BGM_E_OPENING         892 // A Day of Beginnings
 
 // Black 2 & White 2 Music
 

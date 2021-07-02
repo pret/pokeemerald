@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_POKEMON_THEME - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_E_OPENING - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_POKEMON_THEME - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_E_OPENING - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1587,6 +1587,9 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_TITLE            , "BW-SEQ-BGM-TITLE") \
     X(BW_SEQ_BGM_TITLE01          , "BW-SEQ-BGM-TITLE01") \
     X(BW_SEQ_BGM_POKEMON_THEME    , "BW-SEQ-BGM-POKEMON-THEME") \
+    X(BW_SEQ_BGM_STARTING         , "BW-SEQ-BGM-STARTING") \
+    X(BW_SEQ_BGM_STARTING2        , "BW-SEQ-BGM-STARTING2") \
+    X(BW_SEQ_BGM_E_OPENING        , "BW-SEQ-BGM-E-OPENING") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

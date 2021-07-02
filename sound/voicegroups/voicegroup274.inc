@@ -43,7 +43,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
