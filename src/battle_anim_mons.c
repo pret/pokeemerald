@@ -1310,7 +1310,7 @@ u16 ArcTan2Neg(s16 a, s16 b)
     return -var;
 }
 
-void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
+void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
 {
     int i;
     struct PlttData *originalColor;

@@ -258,6 +258,11 @@ enum {
 #define TAG_BLINK_EFFECT_CONTESTANT2 0x80EA
 #define TAG_BLINK_EFFECT_CONTESTANT3 0x80EB
 
+#define TILE_FILLED_APPEAL_HEART 0x5012
+#define TILE_FILLED_JAM_HEART    0x5014
+#define TILE_EMPTY_APPEAL_HEART  0x5035
+#define TILE_EMPTY_JAM_HEART     0x5036
+
 enum {
     SLIDER_HEART_ANIM_NORMAL,
     SLIDER_HEART_ANIM_DISAPPEAR,
@@ -1526,7 +1531,7 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
             && eContestantStatus[gContestPlayerMonIndex].hasJudgesAttention)
         {
             // Highlight the text because it's a combo move
-            moveNameBuffer = StringCopy(moveName, gText_ColorLightShadowDarkGrey);
+            moveNameBuffer = StringCopy(moveName, gText_ColorLightShadowDarkGray);
         }
         else if (move != MOVE_NONE
                  && eContestantStatus[gContestPlayerMonIndex].prevMove == move
@@ -3203,27 +3208,25 @@ static void PrintContestMoveDescription(u16 a)
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile,        0x0b, 0x1f, 0x05, 0x01, 0x11, 0x01);
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
+    // Appeal hearts
     if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
         numHearts = 0;
     else
         numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
-    if (numHearts > 8)
-        numHearts = 8;
-    // Filled-in hearts
-    ContestBG_FillBoxWithTile(0, 0x5035, 0x15, 0x1f, 0x08,      0x01, 0x11);
-    // Empty hearts
-    ContestBG_FillBoxWithTile(0, 0x5012, 0x15, 0x1f, numHearts, 0x01, 0x11);
+    if (numHearts > MAX_CONTEST_MOVE_HEARTS)
+        numHearts = MAX_CONTEST_MOVE_HEARTS;
+    ContestBG_FillBoxWithTile(0, TILE_EMPTY_APPEAL_HEART, 0x15, 0x1f, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, TILE_FILLED_APPEAL_HEART, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
+    // Jam hearts
     if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
         numHearts = 0;
     else
         numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
-    if (numHearts > 8)
-        numHearts = 8;
-    // Filled-in hearts
-    ContestBG_FillBoxWithTile(0, 0x5036, 0x15, 0x20, 0x08,      0x01, 0x11);
-    // Empty hearts
-    ContestBG_FillBoxWithTile(0, 0x5014, 0x15, 0x20, numHearts, 0x01, 0x11);
+    if (numHearts > MAX_CONTEST_MOVE_HEARTS)
+        numHearts = MAX_CONTEST_MOVE_HEARTS;
+    ContestBG_FillBoxWithTile(0, TILE_EMPTY_JAM_HEART, 0x15, 0x20, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, TILE_FILLED_JAM_HEART, 0x15, 0x20, numHearts, 0x01, 0x11);
 
     FillWindowPixelBuffer(WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
     Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[a].effect]);

@@ -1323,6 +1323,12 @@ static bool8 Phase2_BigPokeball_Func1(struct Task *task)
     return FALSE;
 }
 
+#define SOME_VRAM_STORE(ptr, posY, posX, toStore)                       \
+{                                                                       \
+    u32 index = (posY) * 32 + posX;                                     \
+    ptr[index] = toStore;                                               \
+}
+
 static bool8 Phase2_BigPokeball_Func2(struct Task *task)
 {
     s16 i, j;
@@ -1335,7 +1341,7 @@ static bool8 Phase2_BigPokeball_Func2(struct Task *task)
     {
         for (j = 0; j < 30; j++, BigPokeballMap++)
         {
-            tilemap[i * 32 + j] = *BigPokeballMap | 0xF000;
+            SOME_VRAM_STORE(tilemap, i, j, *BigPokeballMap | 0xF000);
         }
     }
     sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
@@ -1673,12 +1679,6 @@ bool8 FldEff_Pokeball(void)
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], gFieldEffectArguments[2]);
     return FALSE;
-}
-
-#define SOME_VRAM_STORE(ptr, posY, posX, toStore)                       \
-{                                                                       \
-    u32 index = (posY) * 32 + posX;                                     \
-    ptr[index] = toStore;                                               \
 }
 
 static void sub_814713C(struct Sprite *sprite)
@@ -2142,7 +2142,7 @@ static bool8 Phase2_Mugshot_Func2(struct Task *task)
     {
         for (j = 0; j < 32; j++, mugshotsMap++)
         {
-            tilemap[i * 32 + j] = *mugshotsMap | 0xF000;
+            SOME_VRAM_STORE(tilemap, i, j, *mugshotsMap | 0xF000);
         }
     }
 
@@ -2960,17 +2960,15 @@ static bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
 
             if (sub_8149048(gUnknown_085C8D38[j / 2], &sRectangularSpiralTransition[j]))
             {
-                u32 one;
                 done = FALSE;
                 var = sRectangularSpiralTransition[j].field_2;
-                one = 1;
-                if ((j & 1) == one)
+                if ((j % 2) == 1)
                     var = 0x27D - var;
 
                 var2 = var % 32;
-                var3 = var / 32 * 32;
+                var3 = var / 32;
 
-                tilemap[var3 + var2] = 0xF002;
+                SOME_VRAM_STORE(tilemap, var3, var2, 0xF002);
             }
         }
     }
