@@ -349,14 +349,14 @@ static void CreateTypeIconSprites(void);
 #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES 0 //0 false, 1 true
 static void LoadTilesetTilemapHGSS(u8 page);
 static void Task_HandleStatsScreenInput(u8 taskId);
-static void PrintMonStats(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry);
 static void Task_LoadStatsScreen(u8 taskId);
 static void Task_SwitchScreensFromStatsScreen(u8 taskId);
 static void Task_ExitStatsScreen(u8 taskId);
 static bool8 CalculateMoves(void);
-static void DestroyMoveIcon(u8 taskId);
-static void PrintMoveNameAndInfo(u8 taskId, bool8 toogle);
-static void PrintMonStatsToggle(u8 taskId);
+static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry);
+static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId);
+static void PrintStatsScreen_MoveNameAndInfo(u8 taskId);
+static void PrintStatsScreen_Left(u8 taskId);
 static void PrintInfoScreenTextWhite(const u8* str, u8 left, u8 top);
 static void PrintInfoScreenTextSmall(const u8* str, u8 left, u8 top);
 static void PrintInfoScreenTextSmallWhite(const u8* str, u8 left, u8 top);
@@ -6352,8 +6352,9 @@ static void Task_LoadStatsScreen(u8 taskId)
     case 6:
         gTasks[taskId].data[5] = 0;
         FillWindowPixelRect(0, PIXEL_FILL(0), 0, 48, 240, 130);
-        PrintMonStats(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
-        PrintMonStatsToggle(taskId);
+        PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
+        PrintStatsScreen_Left(taskId);
+        PrintStatsScreen_MoveNameAndInfo(taskId);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
         StatsPage_PrintAToggleUpdownMoves(); //gText_Stats_Buttons
@@ -6428,9 +6429,9 @@ static void Task_HandleStatsScreenInput(u8 taskId)
         else
             gTasks[taskId].data[5] = 0;
         FillWindowPixelRect(0, PIXEL_FILL(0), 0, 48, 240, 130);
-        PrintMonStatsToggle(taskId);
-        DestroyMoveIcon(taskId);
-        PrintMoveNameAndInfo(taskId, TRUE);
+        PrintStatsScreen_Left(taskId);
+        PrintStatsScreen_DestroyMoveItemIcon(taskId);
+        PrintStatsScreen_MoveNameAndInfo(taskId);
     }
     if (JOY_NEW(B_BUTTON))
     {
@@ -6446,16 +6447,16 @@ static void Task_HandleStatsScreenInput(u8 taskId)
         sPokedexView->moveSelected -= 1;
         PlaySE(SE_SELECT);
         FillWindowPixelRect(0, PIXEL_FILL(0), 96, 16, 144, 80);
-        DestroyMoveIcon(taskId);
-        PrintMoveNameAndInfo(taskId, FALSE);
+        PrintStatsScreen_DestroyMoveItemIcon(taskId);
+        PrintStatsScreen_MoveNameAndInfo(taskId);
     }
     if (JOY_REPEAT(DPAD_DOWN) && sPokedexView->moveSelected < sPokedexView->moveMax -1 )
     {
         sPokedexView->moveSelected = sPokedexView->moveSelected + 1;
         PlaySE(SE_SELECT);
         FillWindowPixelRect(0, PIXEL_FILL(0), 96, 16, 144, 80);
-        DestroyMoveIcon(taskId);
-        PrintMoveNameAndInfo(taskId, FALSE);
+        PrintStatsScreen_DestroyMoveItemIcon(taskId);
+        PrintStatsScreen_MoveNameAndInfo(taskId);
     }
 
     //Switch screens
@@ -6483,7 +6484,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
     }
 }
 #define ITEM_TAG 0xFDF3
-static void DestroyMoveIcon(u8 taskId)
+static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId)
 {
     FreeSpriteTilesByTag(ITEM_TAG);                         //Destroy item icon
     FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
@@ -6532,7 +6533,7 @@ static bool8 CalculateMoves(void)
 
     return TRUE;
 }
-static void PrintMoveNameAndInfo(u8 taskId, bool8 toggle)
+static void PrintStatsScreen_MoveNameAndInfo(u8 taskId)
 {
     u8 numEggMoves      = sPokedexView->numEggMoves;
     u8 numLevelUpMoves  = sPokedexView->numLevelUpMoves;
@@ -6705,7 +6706,7 @@ static void PrintMoveNameAndInfo(u8 taskId, bool8 toggle)
     }
 }
 // u32 value is re-used, but passed as a bool that's TRUE if national dex is enabled
-static void PrintMonStats(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry) //HGSS_Ui
+static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry) //HGSS_Ui
 {
     u8 str[16];
     u8 str2[32];
@@ -6765,11 +6766,6 @@ static void PrintMonStats(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry
         PrintInfoScreenTextSmall(gText_ThreeDashes, gender_x, gender_y);
         break;
     }
-
-
-    //Moves
-    PrintMoveNameAndInfo(taskId, FALSE);
-
 }
 static u8 PrintMonStatsToggle_DifferentEVsColumn(u8 differentEVs)
 {
@@ -6801,7 +6797,7 @@ static u8* PrintMonStatsToggle_EV_Arrows(u8 *dest, u8 EVs[], u8 position)
     }
     return dest;
 }
-static void PrintMonStatsToggle(u8 taskId)
+static void PrintStatsScreen_Left(u8 taskId)
 {
     u8 base_x = 8;
     u8 x_offset_column = 43;
