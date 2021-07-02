@@ -263,7 +263,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_holds_item,                              // 0x62
 };
 
-// For the purposes of determing the most powerful move in a moveset, these
+// For the purposes of determining the most powerful move in a moveset, these
 // moves are treated the same as having a power of 0 or 1
 #define IGNORED_MOVES_END 0xFFFF
 static const u16 sIgnoredPowerfulMoveEffects[] =
