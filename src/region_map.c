@@ -71,7 +71,7 @@ static EWRAM_DATA struct {
     bool8 choseFlyLocation;
 } *sFlyMap = NULL;
 
-static bool32 gUnknown_03001180;
+static bool32 sDrawFlyDestTextWindow;
 
 // Static ROM declarations
 
@@ -621,7 +621,7 @@ bool8 LoadRegionMapGfx(void)
     return TRUE;
 }
 
-void sub_8123030(u16 color, u32 coeff)
+void BlendRegionMap(u16 color, u32 coeff)
 {
     BlendPalettes(0x380, coeff, color);
     CpuCopy16(gPlttBufferFaded + 0x70, gPlttBufferUnfaded + 0x70, 0x60);
@@ -1696,7 +1696,7 @@ void CB2_OpenFlyMap(void)
         CreateRegionMapPlayerIcon(1, 1);
         sFlyMap->mapSecId = sFlyMap->regionMap.mapSecId;
         StringFill(sFlyMap->nameBuffer, CHAR_SPACE, MAP_NAME_LENGTH);
-        gUnknown_03001180 = TRUE;
+        sDrawFlyDestTextWindow = TRUE;
         DrawFlyDestTextWindow();
         gMain.state++;
         break;
@@ -1782,30 +1782,32 @@ static void DrawFlyDestTextWindow(void)
                     name = sMultiNameFlyDestinations[i].name[sFlyMap->regionMap.posWithinMapSec];
                     AddTextPrinterParameterized(1, 1, name, GetStringRightAlignXOffset(1, name, 96), 17, 0, NULL);
                     ScheduleBgCopyTilemapToVram(0);
-                    gUnknown_03001180 = TRUE;
+                    sDrawFlyDestTextWindow = TRUE;
                 }
                 break;
             }
         }
         if (!namePrinted)
         {
-            if (gUnknown_03001180 == TRUE)
+            if (sDrawFlyDestTextWindow == TRUE)
             {
                 ClearStdWindowAndFrameToTransparent(1, FALSE);
                 DrawStdFrameWithCustomTileAndPalette(0, FALSE, 101, 13);
             }
             else
             {
+                // Window is already drawn, just empty it
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
             }
             AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
-            gUnknown_03001180 = FALSE;
+            sDrawFlyDestTextWindow = FALSE;
         }
     }
     else
     {
-        if (gUnknown_03001180 == TRUE)
+        // Selection is on MAPSECTYPE_NONE, draw empty fly destination text window
+        if (sDrawFlyDestTextWindow == TRUE)
         {
             ClearStdWindowAndFrameToTransparent(1, FALSE);
             DrawStdFrameWithCustomTileAndPalette(0, FALSE, 101, 13);
@@ -1813,7 +1815,7 @@ static void DrawFlyDestTextWindow(void)
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         CopyWindowToVram(0, 2);
         ScheduleBgCopyTilemapToVram(0);
-        gUnknown_03001180 = FALSE;
+        sDrawFlyDestTextWindow = FALSE;
     }
 }
 
