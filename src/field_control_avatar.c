@@ -132,7 +132,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
 
-
+#if DEBUGGING && !DEBUG_MENU
     //DEBUG
     if (heldKeys & R_BUTTON) 
     {
@@ -158,7 +158,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             input->pressedStartButton = FALSE;
         }
     }
-    //
+#endif
 
 }
 
@@ -219,7 +219,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
 
-#if DEBUGGING
+#if DEBUGGING && !DEBUG_MENU
     if (input->input_field_1_2)
     {
         PlaySE(SE_WIN_OPEN);
