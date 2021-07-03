@@ -277,7 +277,7 @@ u8 GetLRKeysPressedAndHeld(void)
 
 bool8 sub_8122148(u16 itemId)
 {
-    if (itemId != ITEM_ENIGMA_BERRY)
+    if (itemId != ITEM_ENIGMA_BERRY_E_READER)
         return TRUE;
     else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
         return FALSE;
