@@ -4,7 +4,7 @@
 .set LOCALID_VICKY, 4
 .set LOCALID_ROCK_SMASH_MAN, 46
 
-@ Note: LOCALID_ROUTE111_PLAYER_FALLING is used in mirage_tower.c, and is defined in event_objects.h
+@ Note: LOCALID_ROUTE111_PLAYER_FALLING is a local id for this map used elsewhere. It's defined in event_objects.h
 
 Route111_MapScripts:: @ 81F0CA7
 	map_script MAP_SCRIPT_ON_LOAD, Route111_OnLoad
