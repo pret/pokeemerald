@@ -2992,6 +2992,155 @@ static const u8 sTM50Desc[] = _(
     "attack, but sharply\n"
     "lowers Sp. Atk.");
 
+static const u8 sTM51Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM52Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM53Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM54Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM55Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM56Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM57Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM58Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM59Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM60Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM61Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM62Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM63Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM64Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM65Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM66Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM67Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM68Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM69Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM70Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM71Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM72Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM73Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM74Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM75Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM76Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM77Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM78Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM79Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM80Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM81Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM82Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM83Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM84Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM85Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM86Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM87Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM88Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM89Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM90Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM91Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM92Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM93Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM94Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM95Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM96Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM97Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM98Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM99Desc[] = _( // Todo
+    "?????");
+
+static const u8 sTM100Desc[] = _( // Todo
+    "?????");
 
 static const u8 sHM01Desc[] = _(
     "Attacks the foe\n"
