@@ -4420,7 +4420,7 @@ static void HandleCancelActivity(bool32 setData)
 static void UR_EnableScriptContext2AndFreezeObjectEvents(void)
 {
     ScriptContext2_Enable();
-    ScriptFreezeObjectEvents();
+    FreezeObjects_WaitForPlayer();
 }
 
 static u8 GetActivePartnerSpriteGenderParam(struct WirelessLink_URoom *data)
