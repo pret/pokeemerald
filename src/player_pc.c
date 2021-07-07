@@ -125,7 +125,7 @@ static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset);
 static EWRAM_DATA const u8 *gPcItemMenuOptionOrder = NULL;
 static EWRAM_DATA u8 gPcItemMenuOptionsNum = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct playerPCItemPageInfo = {0, 0, 0, 0, {0, 0, 0}, 0};
-static EWRAM_DATA struct Struct203BCC4 *gUnknown_0203BCC4 = NULL;
+static EWRAM_DATA struct Struct203BCC4 *gUnknown_0203BCC4 = NULL; //item storage struct
 
 // .rodata
 static const u8 *const gPCText_OptionDescList[] =
@@ -218,7 +218,7 @@ static const struct YesNoFuncTable ResumeFromWithdrawYesNoFuncList = // ResumeFr
     ItemStorage_ResumeInputFromNoToss
 };
 
-static const struct ListMenuTemplate gUnknown_085DFF44 =
+static const struct ListMenuTemplate gUnknown_085DFF44 = //item storage: listmenu template
 {
     .items = NULL,
     .moveCursorFunc = ItemStorage_MoveCursor,
@@ -239,9 +239,9 @@ static const struct ListMenuTemplate gUnknown_085DFF44 =
     .fontId = 7
 };
 
-static const struct WindowTemplate gUnknown_085DFF5C[5] =
+static const struct WindowTemplate gUnknown_085DFF5C[5] = //item storage: ItemStorageWindowTemplates
 {
-    {
+    {//item list window
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 1,
@@ -250,7 +250,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .paletteNum = 15,
         .baseBlock = 0x0001
     },
-    {
+    {//description window
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 13,
@@ -259,7 +259,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .paletteNum = 15,
         .baseBlock = 0x00EB
     },
-    {
+    {//item icon windows
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
@@ -268,7 +268,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .paletteNum = 15,
         .baseBlock = 0x0153
     },
-    {
+    {//item storage type (withdraw, toss) window
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -277,7 +277,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .paletteNum = 15,
         .baseBlock = 0x0139
     },
-    {
+    {//choose amount window
         .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 9,
@@ -877,7 +877,7 @@ static void sub_816BC14(void)
     gUnknown_0203BCC4->spriteId = SPRITE_NONE;
 }
 
-static void sub_816BC58(void)
+static void sub_816BC58(void) //item storage: remove all windows and free struct
 {
     u32 i;
 
@@ -898,7 +898,7 @@ static u8 sub_816BC7C(u8 a)
     return *windowIdLoc;
 }
 
-static void sub_816BCC4(u8 a)
+static void sub_816BCC4(u8 a) //item storage: remove window a
 {
     u8 *windowIdLoc = &(gUnknown_0203BCC4->windowIds[a]);
     if (*windowIdLoc != WINDOW_NONE)
@@ -968,7 +968,7 @@ static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset)
     }
 }
 
-static void sub_816BEF0(s32 id)
+static void sub_816BEF0(s32 id) //item storage: print item description
 {
     const u8* description;
     u8 windowId = gUnknown_0203BCC4->windowIds[1];
@@ -996,12 +996,12 @@ static void ItemStorage_RemoveScrollIndicator(void)
     }
 }
 
-static void sub_816BFB8(u8 a, u8 b, u8 speed)
+static void sub_816BFB8(u8 a, u8 b, u8 speed) ////item storage: get y position and print grey cursor e.g. swapping
 {
     sub_816BFE0(ListMenuGetYCoordForPrintingArrowCursor(a), b, speed);
 }
 
-static void sub_816BFE0(u8 y, u8 b, u8 speed)
+static void sub_816BFE0(u8 y, u8 b, u8 speed) //item storage: print grey cursor e.g. swapping
 {
     u8 windowId = gUnknown_0203BCC4->windowIds[0];
     if (b == 0xFF)
@@ -1010,7 +1010,7 @@ static void sub_816BFE0(u8 y, u8 b, u8 speed)
         AddTextPrinterParameterized4(windowId, 1, 0, y, 0, 0, gUnknown_085DFF8C, speed, gText_SelectorArrow2);
 }
 
-static void sub_816C060(u16 itemId)
+static void sub_816C060(u16 itemId) //item storage: draw item icon
 {
     u8 spriteId;
     u8* spriteIdLoc = &(gUnknown_0203BCC4->spriteId);
@@ -1030,7 +1030,7 @@ static void sub_816C060(u16 itemId)
     }
 }
 
-static void sub_816C0C8(void)
+static void sub_816C0C8(void) //item storage: remove selected item icon
 {
     u8* spriteIdLoc = &(gUnknown_0203BCC4->spriteId);
     if (*spriteIdLoc != SPRITE_NONE)
@@ -1042,13 +1042,13 @@ static void sub_816C0C8(void)
     }
 }
 
-static void sub_816C110(void)
+static void sub_816C110(void) //item storage: calculate used pc item slots
 {
     CompactPCItems();
     sub_812220C(gSaveBlock1Ptr->pcItems, 50, &(playerPCItemPageInfo.pageItems), &(playerPCItemPageInfo.count), 0x8);
 }
 
-static void sub_816C140(void)
+static void sub_816C140(void) //item storage: calculate cursor position from offset, maxShownItems and numItems 
 {
     sub_812225C(&(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos), playerPCItemPageInfo.pageItems, playerPCItemPageInfo.count);
 }
@@ -1205,7 +1205,7 @@ static void ItemStorage_ItemSwapChoosePrompt(u8 taskId)
     gTasks[taskId].func = sub_816C4FC;
 }
 
-static void sub_816C4FC(u8 taskId)
+static void sub_816C4FC(u8 taskId) //item storage: handles input when swapping
 {
     s16 *data;
     s32 id;
