@@ -3182,20 +3182,83 @@ static const u8 sHM08Desc[] = _(
     "the 1st turn, then\n"
     "attacks next turn.");
 
-// Key items
+// Charms
+static const u8 sOvalCharmDesc[] = _(
+    "Raises the chance\n"
+    "of finding eggs\n"
+    "at the daycare.");
+
+static const u8 sShinyCharmDesc[] = _(
+	"A charm that will\n"
+    "raise the chance\n"
+    "of Shiny Pokémon.");
+
+static const u8 sCatchingCharmDesc[] = _( // Todo
+    "?????");
+
+static const u8 sExpCharmDesc[] = _( // Todo
+    "?????");
+
+// Form-changing Key Items
+static const u8 sRotomCatalogDesc[] = _( // Todo
+    "?????");
+
+static const u8 sGracideaDesc[] = _(
+    "Bouquets made with\n"
+    "it are offered as a\n"
+    "token of gratitude.");
+
+static const u8 sRevealGlassDesc[] = _( // Todo
+    "?????");
+
+static const u8 sDNASplicersDesc[] = _( // Todo
+    "?????");
+
+static const u8 sZygardeCubeDesc[] = _( // Todo
+    "?????");
+
+static const u8 sPrisonBottleDesc[] = _( // Todo
+    "?????");
+
+static const u8 sNSolarizerDesc[] = _( // Todo
+    "?????");
+
+static const u8 sNLunarizerDesc[] = _( // Todo
+    "?????");
+
+static const u8 sReinsOfUnityDesc[] = _( // Todo
+    "?????");
+
+// Battle Mechanic Key Items
+static const u8 sKeyStoneDesc[] = _( // Todo
+    "?????");
+
+static const u8 sMegaRingDesc[] = _(
+    "Enables {PKMN} holding\n"
+    "their Mega Stone to\n"
+    "Mega Evolve.");
+
+static const u8 sZPowerRingDesc[] = _(
+    "A strange ring\n"
+    "that enables\n"
+    "Z-Move usage.");
+
+static const u8 sDynamaxBandDesc[] = _( // Todo
+    "?????");
+
+// Misc. Key Items
+static const u8 sPokemonBoxLinkDesc[] = _( // Todo
+    "?????");
+
 static const u8 sMachBikeDesc[] = _(
     "A folding bicycle\n"
     "that doubles your\n"
     "speed or better.");
 
-static const u8 sCoinCaseDesc[] = _(
-    "A case that holds\n"
-    "up to 9,999 Coins.");
-
-static const u8 sItemfinderDesc[] = _(
-    "A device that\n"
-    "signals an invisible\n"
-    "item by sound.");
+static const u8 sAcroBikeDesc[] = _(
+    "A folding bicycle\n"
+    "capable of jumps\n"
+    "and wheelies.");
 
 static const u8 sOldRodDesc[] = _(
     "Use by any body of\n"
@@ -3212,190 +3275,50 @@ static const u8 sSuperRodDesc[] = _(
     "rod for catching\n"
     "wild Pokémon.");
 
-static const u8 sSSTicketDesc[] = _(
-    "The ticket required\n"
-    "for sailing on a\n"
-    "ferry.");
-
-static const u8 sContestPassDesc[] = _(
-    "The pass required\n"
-    "for entering\n"
-    "Pokémon Contests.");
-
-static const u8 sWailmerPailDesc[] = _(
-    "A tool used for\n"
-    "watering Berries\n"
-    "and plants.");
-
-static const u8 sDevonGoodsDesc[] = _(
-    "A package that\n"
-    "contains Devon's\n"
-    "machine parts.");
-
-static const u8 sSootSackDesc[] = _(
-    "A sack used to\n"
-    "gather and hold\n"
-    "volcanic ash.");
-
-static const u8 sBasementKeyDesc[] = _(
-    "The key for New\n"
-    "Mauville beneath\n"
-    "Mauville City.");
-
-static const u8 sAcroBikeDesc[] = _(
-    "A folding bicycle\n"
-    "capable of jumps\n"
-    "and wheelies.");
-
-static const u8 sPokeblockCaseDesc[] = _(
-    "A case for holding\n"
-    "Pokéblocks made with\n"
-    "a Berry Blender.");
-
-static const u8 sLetterDesc[] = _(
-    "A letter to Steven\n"
-    "from the President\n"
-    "of the Devon Corp.");
-
-static const u8 sEonTicketDesc[] = _(
-    "The ticket for a\n"
-    "ferry to a distant\n"
-    "southern island.");
-
-static const u8 sScannerDesc[] = _(
-    "A device found\n"
-    "inside the\n"
-    "Abandoned Ship.");
-
-static const u8 sGoGogglesDesc[] = _(
-    "Nifty goggles that\n"
-    "protect eyes from\n"
-    "desert sandstorms.");
-
-static const u8 sMeteoriteDesc[] = _(
-    "A meteorite found\n"
-    "at Meteor Falls.");
-
-static const u8 sRoom1KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
-
-static const u8 sRoom2KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
-
-static const u8 sRoom4KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
-
-static const u8 sRoom6KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
-
-static const u8 sStorageKeyDesc[] = _(
-    "The key to the\n"
-    "storage inside the\n"
-    "Abandoned Ship.");
-
-static const u8 sDevonScopeDesc[] = _(
-    "A device by Devon\n"
-    "that signals any\n"
-    "unseeable Pokémon.");
-
-// FireRed/LeafGreen key items
-static const u8 sOaksParcelDesc[] = _(
-    "A parcel for Prof.\n"
-    "Oak from a Pokémon\n"
-    "Mart's clerk.");
-
-static const u8 sPokeFluteDesc[] = _(
-    "A sweet-sounding\n"
-    "flute that awakens\n"
-    "Pokémon.");
-
-static const u8 sSecretKeyDesc[] = _(
-    "The key to the\n"
-    "Cinnabar Island\n"
-    "Gym's entrance.");
-
-static const u8 sBikeVoucherDesc[] = _(
-    "A voucher for\n"
-    "obtaining a bicycle\n"
-    "from the Bike Shop.");
-
-static const u8 sGoldTeethDesc[] = _(
-    "Gold dentures lost\n"
-    "by the Safari\n"
-    "Zone's Warden.");
-
-static const u8 sCardKeyDesc[] = _(
-    "A card-type door\n"
-    "key used in Silph\n"
-    "Co's office.");
-
-static const u8 sLiftKeyDesc[] = _(
-    "An elevator key\n"
-    "used in Team\n"
-    "Rocket's Hideout.");
-
-static const u8 sSilphScopeDesc[] = _(
-    "Silph Co's scope\n"
-    "makes unseeable\n"
-    "Pokémon visible.");
-
-static const u8 sBicycleDesc[] = _(
-    "A folding bicycle\n"
-    "that is faster than\n"
-    "the Running Shoes.");
+static const u8 sDowsingMachineDesc[] = _(
+    "A device that\n"
+    "signals an invisible\n"
+    "item by sound.");
 
 static const u8 sTownMapDesc[] = _(
     "Can be viewed\n"
     "anytime. Shows your\n"
     "present location.");
 
-static const u8 sVSSeekerDesc[] = _(
-    "A rechargeable unit\n"
-    "that flags battle-\n"
-    "ready Trainers.");
+static const u8 sCoinCaseDesc[] = _(
+    "A case that holds\n"
+    "up to 9,999 Coins.");
 
-static const u8 sFameCheckerDesc[] = _(
-    "Stores information\n"
-    "on famous people\n"
-    "for instant recall.");
+static const u8 sPowderJarDesc[] = _(
+    "Stores Berry\n"
+    "Powder made using\n"
+    "a Berry Crusher.");
 
-static const u8 sTMCaseDesc[] = _(
-    "A convenient case \n"
-    "that holds TMs and\n"
-    "HMs.");
+static const u8 sWailmerPailDesc[] = _(
+    "A tool used for\n"
+    "watering Berries\n"
+    "and plants.");
 
-static const u8 sBerryPouchDesc[] = _(
-    "A convenient\n"
-    "container that\n"
-    "holds Berries.");
+static const u8 sPokeblockCaseDesc[] = _(
+    "A case for holding\n"
+    "Pokéblocks made with\n"
+    "a Berry Blender.");
 
-static const u8 sTeachyTVDesc[] = _(
-    "A TV set tuned to\n"
-    "an advice program\n"
-    "for Trainers.");
+static const u8 sSootSackDesc[] = _(
+    "A sack used to\n"
+    "gather and hold\n"
+    "volcanic ash.");
 
-static const u8 sTriPassDesc[] = _(
-    "A pass for ferries\n"
-    "between One, Two,\n"
-    "and Three Island.");
+// Story Key Items
+static const u8 sSSTicketDesc[] = _(
+    "The ticket required\n"
+    "for sailing on a\n"
+    "ferry.");
 
-static const u8 sRainbowPassDesc[] = _(
-    "For ferries serving\n"
-    "Vermilion and the\n"
-    "Sevii Islands.");
-
-static const u8 sTeaDesc[] = _(
-    "A thirst-quenching\n"
-    "tea prepared by an\n"
-    "old lady.");
+static const u8 sEonTicketDesc[] = _(
+    "The ticket for a\n"
+    "ferry to a distant\n"
+    "southern island.");
 
 static const u8 sMysticTicketDesc[] = _(
     "A ticket required\n"
@@ -3407,54 +3330,71 @@ static const u8 sAuroraTicketDesc[] = _(
     "to board the ship\n"
     "to Birth Island.");
 
-static const u8 sPowderJarDesc[] = _(
-    "Stores Berry\n"
-    "Powder made using\n"
-    "a Berry Crusher.");
-
-static const u8 sRubyDesc[] = _(
-    "An exquisite, red-\n"
-    "glowing gem that\n"
-    "symbolizes passion.");
-
-static const u8 sSapphireDesc[] = _(
-    "A brilliant blue gem\n"
-    "that symbolizes\n"
-    "honesty.");
-
-// Emerald-specific key items
-static const u8 sMagmaEmblemDesc[] = _(
-    "A medal-like item in\n"
-    "the same shape as\n"
-    "Team Magma's mark.");
-
 static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
 
-	// New items
-static const u8 sGracideaDesc[] = _(
-    "Bouquets made with\n"
-    "it are offered as a\n"
-    "token of gratitude.");
+static const u8 sLetterDesc[] = _(
+    "A letter to Steven\n"
+    "from the President\n"
+    "of the Devon Corp.");
 
-static const u8 sShinyCharmDesc[] = _(
-	"A charm that will\n"
-    "raise the chance\n"
-    "of Shiny Pokémon.");
+static const u8 sDevonPartsDesc[] = _(
+    "A package that\n"
+    "contains Devon's\n"
+    "machine parts.");
 
-static const u8 sOvalCharmDesc[] = _(
-    "Raises the chance\n"
-    "of finding eggs\n"
-    "at the daycare.");
+static const u8 sGoGogglesDesc[] = _(
+    "Nifty goggles that\n"
+    "protect eyes from\n"
+    "desert sandstorms.");
 
-static const u8 sMegaBraceletDesc[] = _(
-    "Enables {PKMN} holding\n"
-    "their Mega Stone to\n"
-    "Mega Evolve.");
+static const u8 sDevonScopeDesc[] = _(
+    "A device by Devon\n"
+    "that signals any\n"
+    "unseeable Pokémon.");
 
-static const u8 sZRingDesc[] = _(
-    "A strange ring\n"
-    "that enables\n"
-    "Z-Move usage.");
+static const u8 sBasementKeyDesc[] = _(
+    "The key for New\n"
+    "Mauville beneath\n"
+    "Mauville City.");
+
+static const u8 sScannerDesc[] = _(
+    "A device found\n"
+    "inside the\n"
+    "Abandoned Ship.");
+
+static const u8 sStorageKeyDesc[] = _(
+    "The key to the\n"
+    "storage inside the\n"
+    "Abandoned Ship.");
+
+static const u8 sKeyToRoom1Desc[] = _(
+    "A key that opens a\n"
+    "door inside the\n"
+    "Abandoned Ship.");
+
+static const u8 sKeyToRoom2Desc[] = _(
+    "A key that opens a\n"
+    "door inside the\n"
+    "Abandoned Ship.");
+
+static const u8 sKeyToRoom4Desc[] = _(
+    "A key that opens a\n"
+    "door inside the\n"
+    "Abandoned Ship.");
+
+static const u8 sKeyToRoom6Desc[] = _(
+    "A key that opens a\n"
+    "door inside the\n"
+    "Abandoned Ship.");
+
+static const u8 sMeteoriteDesc[] = _(
+    "A meteorite found\n"
+    "at Meteor Falls.");
+
+static const u8 sMagmaEmblemDesc[] = _(
+    "A medal-like item in\n"
+    "the same shape as\n"
+    "Team Magma's mark.");

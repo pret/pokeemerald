@@ -731,68 +731,61 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_HM06] = {gItemIcon_HM, gItemIconPalette_FightingTMHM},
     [ITEM_HM07] = {gItemIcon_HM, gItemIconPalette_WaterTMHM},
     [ITEM_HM08] = {gItemIcon_HM, gItemIconPalette_WaterTMHM},
-    // Key items
+    // Charms
+    [ITEM_OVAL_CHARM] = {gItemIcon_OvalCharm, gItemIconPalette_OvalCharm},
+    [ITEM_SHINY_CHARM] = {gItemIcon_ShinyCharm, gItemIconPalette_ShinyCharm},
+    [ITEM_CATCHING_CHARM] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_EXP_CHARM] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    // Form-changing Key Items
+    [ITEM_ROTOM_CATALOG] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_GRACIDEA] = {gItemIcon_Gracidea, gItemIconPalette_Gracidea},
+    [ITEM_REVEAL_GLASS] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_DNA_SPLICERS] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_ZYGARDE_CUBE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_PRISON_BOTTLE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_N_SOLARIZER] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_N_LUNARIZER] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_REINS_OF_UNITY] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    // Battle Mechanic Key Items
+    [ITEM_KEY_STONE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_MEGA_RING] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    //[ITEM_MEGA_BRACELET] = {gItemIcon_MegaBracelet, gItemIconPalette_MegaBracelet}, // Remove
+    [ITEM_Z_POWER_RING] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    //[ITEM_Z_RING] = {gItemIcon_ZRing, gItemIconPalette_ZRing}, // Remove
+    [ITEM_DYNAMAX_BAND] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    // Misc. Key Items
+    [ITEM_POKEMON_BOX_LINK] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_MACH_BIKE] = {gItemIcon_MachBike, gItemIconPalette_MachBike},
-    [ITEM_COIN_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
-    [ITEM_ITEMFINDER] = {gItemIcon_Itemfinder, gItemIconPalette_Itemfinder},
+    [ITEM_ACRO_BIKE] = {gItemIcon_AcroBike, gItemIconPalette_AcroBike},
     [ITEM_OLD_ROD] = {gItemIcon_OldRod, gItemIconPalette_OldRod},
     [ITEM_GOOD_ROD] = {gItemIcon_GoodRod, gItemIconPalette_GoodRod},
     [ITEM_SUPER_ROD] = {gItemIcon_SuperRod, gItemIconPalette_SuperRod},
-    [ITEM_SS_TICKET] = {gItemIcon_SSTicket, gItemIconPalette_SSTicket},
-    [ITEM_CONTEST_PASS] = {gItemIcon_ContestPass, gItemIconPalette_ContestPass},
-    [ITEM_WAILMER_PAIL] = {gItemIcon_WailmerPail, gItemIconPalette_WailmerPail},
-    [ITEM_DEVON_GOODS] = {gItemIcon_DevonGoods, gItemIconPalette_DevonGoods},
-    [ITEM_SOOT_SACK] = {gItemIcon_SootSack, gItemIconPalette_SootSack},
-    [ITEM_BASEMENT_KEY] = {gItemIcon_BasementKey, gItemIconPalette_OldKey},
-    [ITEM_ACRO_BIKE] = {gItemIcon_AcroBike, gItemIconPalette_AcroBike},
-    [ITEM_POKEBLOCK_CASE] = {gItemIcon_PokeblockCase, gItemIconPalette_PokeblockCase},
-    [ITEM_LETTER] = {gItemIcon_Letter, gItemIconPalette_LavaCookieAndLetter},
-    [ITEM_EON_TICKET] = {gItemIcon_EonTicket, gItemIconPalette_EonTicket},
-    [ITEM_SCANNER] = {gItemIcon_Scanner, gItemIconPalette_Scanner},
-    [ITEM_GO_GOGGLES] = {gItemIcon_GoGoggles, gItemIconPalette_GoGoggles},
-    [ITEM_METEORITE] = {gItemIcon_Meteorite, gItemIconPalette_Meteorite},
-    [ITEM_ROOM_1_KEY] = {gItemIcon_Room1Key, gItemIconPalette_Key},
-    [ITEM_ROOM_2_KEY] = {gItemIcon_Room2Key, gItemIconPalette_Key},
-    [ITEM_ROOM_4_KEY] = {gItemIcon_Room4Key, gItemIconPalette_Key},
-    [ITEM_ROOM_6_KEY] = {gItemIcon_Room6Key, gItemIconPalette_Key},
-    [ITEM_STORAGE_KEY] = {gItemIcon_StorageKey, gItemIconPalette_OldKey},
-    [ITEM_DEVON_SCOPE] = {gItemIcon_DevonScope, gItemIconPalette_DevonScope},
-    // FireRed/LeafGreen key items
-    [ITEM_OAKS_PARCEL] = {gItemIcon_OaksParcel, gItemIconPalette_OaksParcel},
-    [ITEM_POKE_FLUTE] = {gItemIcon_PokeFlute, gItemIconPalette_PokeFlute},
-    [ITEM_SECRET_KEY] = {gItemIcon_SecretKey, gItemIconPalette_SecretKey},
-    [ITEM_BIKE_VOUCHER] = {gItemIcon_BikeVoucher, gItemIconPalette_BikeVoucher},
-    [ITEM_GOLD_TEETH] = {gItemIcon_GoldTeeth, gItemIconPalette_GoldTeeth},
-    [ITEM_CARD_KEY] = {gItemIcon_CardKey, gItemIconPalette_CardKey},
-    [ITEM_LIFT_KEY] = {gItemIcon_LiftKey, gItemIconPalette_Key},
-    [ITEM_SILPH_SCOPE] = {gItemIcon_SilphScope, gItemIconPalette_SilphScope},
-    [ITEM_BICYCLE] = {gItemIcon_Bicycle, gItemIconPalette_Bicycle},
+    [ITEM_DOWSING_MACHINE] = {gItemIcon_DowsingMachine, gItemIconPalette_DowsingMachine},
     [ITEM_TOWN_MAP] = {gItemIcon_TownMap, gItemIconPalette_TownMap},
-    [ITEM_VS_SEEKER] = {gItemIcon_VSSeeker, gItemIconPalette_VSSeeker},
-    [ITEM_FAME_CHECKER] = {gItemIcon_FameChecker, gItemIconPalette_FameChecker},
-    [ITEM_TM_CASE] = {gItemIcon_TMCase, gItemIconPalette_TMCase},
-    [ITEM_BERRY_POUCH] = {gItemIcon_BerryPouch, gItemIconPalette_BerryPouch},
-    [ITEM_TEACHY_TV] = {gItemIcon_TeachyTV, gItemIconPalette_TeachyTV},
-    [ITEM_TRI_PASS] = {gItemIcon_TriPass, gItemIconPalette_TriPass},
-    [ITEM_RAINBOW_PASS] = {gItemIcon_RainbowPass, gItemIconPalette_RainbowPass},
-    [ITEM_TEA] = {gItemIcon_Tea, gItemIconPalette_Tea},
+    [ITEM_COIN_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
+    [ITEM_POWDER_JAR] = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
+    [ITEM_WAILMER_PAIL] = {gItemIcon_WailmerPail, gItemIconPalette_WailmerPail},
+    [ITEM_POKEBLOCK_CASE] = {gItemIcon_PokeblockCase, gItemIconPalette_PokeblockCase},
+    [ITEM_SOOT_SACK] = {gItemIcon_SootSack, gItemIconPalette_SootSack},
+    // Story Key Items
+    [ITEM_SS_TICKET] = {gItemIcon_SSTicket, gItemIconPalette_SSTicket},
+    [ITEM_EON_TICKET] = {gItemIcon_EonTicket, gItemIconPalette_EonTicket},
     [ITEM_MYSTIC_TICKET] = {gItemIcon_MysticTicket, gItemIconPalette_MysticTicket},
     [ITEM_AURORA_TICKET] = {gItemIcon_AuroraTicket, gItemIconPalette_AuroraTicket},
-    [ITEM_POWDER_JAR] = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
-    [ITEM_RUBY] = {gItemIcon_Gem, gItemIconPalette_Ruby},
-    [ITEM_SAPPHIRE] = {gItemIcon_Gem, gItemIconPalette_Sapphire},
-    // Emerald-only key items
-    [ITEM_MAGMA_EMBLEM] = {gItemIcon_MagmaEmblem, gItemIconPalette_MagmaEmblem},
     [ITEM_OLD_SEA_MAP] = {gItemIcon_OldSeaMap, gItemIconPalette_OldSeaMap},
-    // New items
-    [ITEM_GRACIDEA] = {gItemIcon_Gracidea, gItemIconPalette_Gracidea},
-	// Gen 5 Items
-    [ITEM_SHINY_CHARM] = {gItemIcon_ShinyCharm, gItemIconPalette_ShinyCharm},
-    [ITEM_OVAL_CHARM] = {gItemIcon_OvalCharm, gItemIconPalette_OvalCharm},
-	// Gen 6 Items
-    [ITEM_MEGA_BRACELET] = {gItemIcon_MegaBracelet, gItemIconPalette_MegaBracelet},
-	// Gen 7 Items
-    [ITEM_Z_RING] = {gItemIcon_ZRing, gItemIconPalette_ZRing},
+    [ITEM_LETTER] = {gItemIcon_Letter, gItemIconPalette_LavaCookieAndLetter},
+    [ITEM_DEVON_PARTS] = {gItemIcon_DevonParts, gItemIconPalette_DevonParts},
+    [ITEM_GO_GOGGLES] = {gItemIcon_GoGoggles, gItemIconPalette_GoGoggles},
+    [ITEM_DEVON_SCOPE] = {gItemIcon_DevonScope, gItemIconPalette_DevonScope},
+    [ITEM_BASEMENT_KEY] = {gItemIcon_BasementKey, gItemIconPalette_OldKey},
+    [ITEM_SCANNER] = {gItemIcon_Scanner, gItemIconPalette_Scanner},
+    [ITEM_STORAGE_KEY] = {gItemIcon_StorageKey, gItemIconPalette_OldKey},
+    [ITEM_KEY_TO_ROOM_1] = {gItemIcon_KeyToRoom1, gItemIconPalette_Key},
+    [ITEM_KEY_TO_ROOM_2] = {gItemIcon_KeyToRoom2, gItemIconPalette_Key},
+    [ITEM_KEY_TO_ROOM_4] = {gItemIcon_KeyToRoom4, gItemIconPalette_Key},
+    [ITEM_KEY_TO_ROOM_6] = {gItemIcon_KeyToRoom6, gItemIconPalette_Key},
+    [ITEM_METEORITE] = {gItemIcon_Meteorite, gItemIconPalette_Meteorite},
+    [ITEM_MAGMA_EMBLEM] = {gItemIcon_MagmaEmblem, gItemIconPalette_MagmaEmblem},
     // Return to field arrow
     [ITEM_FIELD_ARROW] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
