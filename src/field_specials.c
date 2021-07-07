@@ -3117,8 +3117,8 @@ static void ShowFrontierExchangeCornerItemIcon(u16 item)
     if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
         gSprites[sScrollableMultichoice_ItemSpriteId].oam.priority = 0;
-        gSprites[sScrollableMultichoice_ItemSpriteId].pos1.x = 36;
-        gSprites[sScrollableMultichoice_ItemSpriteId].pos1.y = 92;
+        gSprites[sScrollableMultichoice_ItemSpriteId].x = 36;
+        gSprites[sScrollableMultichoice_ItemSpriteId].y = 92;
     }
 }
 

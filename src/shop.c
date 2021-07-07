@@ -625,8 +625,8 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdPtr = spriteId;
-            gSprites[spriteId].pos2.x = 24;
-            gSprites[spriteId].pos2.y = 88;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 88;
         }
     }
     else

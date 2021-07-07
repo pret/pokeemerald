@@ -3167,14 +3167,14 @@ static void MoveKeyboardCursor(void)
     if (page != UNION_ROOM_KB_PAGE_REGISTER)
     {
         StartSpriteAnim(sSprites->keyboardCursor, 0);
-        sSprites->keyboardCursor->pos1.x = x * 8 + 10;
-        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
+        sSprites->keyboardCursor->x = x * 8 + 10;
+        sSprites->keyboardCursor->y = y * 12 + 24;
     }
     else
     {
         StartSpriteAnim(sSprites->keyboardCursor, 2);
-        sSprites->keyboardCursor->pos1.x = 24;
-        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
+        sSprites->keyboardCursor->x = 24;
+        sSprites->keyboardCursor->y = y * 12 + 24;
     }
 }
 
@@ -3231,7 +3231,7 @@ static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos1.x = pos * 8 + 76;
+        sprite->x = pos * 8 + 76;
     }
 }
 
@@ -3240,8 +3240,8 @@ static void SpriteCB_TextEntryArrow(struct Sprite *sprite)
     if (++sprite->data[0] > 4)
     {
         sprite->data[0] = 0;
-        if (++sprite->pos2.x > 4)
-            sprite->pos2.x = 0;
+        if (++sprite->x2 > 4)
+            sprite->x2 = 0;
     }
 }
 

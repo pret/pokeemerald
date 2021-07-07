@@ -351,10 +351,10 @@ static void PlayerDescendMirageTower(u8 taskId)
 
     TryGetObjectEventIdByLocalIdAndMap(45, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     fakePlayerObjectEvent = &gObjectEvents[objectEventId];
-    gSprites[fakePlayerObjectEvent->spriteId].pos2.y += 4;
+    gSprites[fakePlayerObjectEvent->spriteId].y2 += 4;
     playerObjectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    if ((gSprites[fakePlayerObjectEvent->spriteId].pos1.y + gSprites[fakePlayerObjectEvent->spriteId].pos2.y) >=
-        (gSprites[playerObjectEvent->spriteId].pos1.y + gSprites[playerObjectEvent->spriteId].pos2.y))
+    if ((gSprites[fakePlayerObjectEvent->spriteId].y + gSprites[fakePlayerObjectEvent->spriteId].y2) >=
+        (gSprites[playerObjectEvent->spriteId].y + gSprites[playerObjectEvent->spriteId].y2))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();
@@ -450,8 +450,8 @@ static void CreateCeilingCrumbleSprites(void)
 static void MoveCeilingCrumbleSprite(struct Sprite* sprite)
 {
     sprite->data[1] += 2;
-    sprite->pos2.y = sprite->data[1] / 2;
-    if(((sprite->pos1.y) + (sprite->pos2.y)) >  sCeilingCrumblePositions[sprite->data[0]][2])
+    sprite->y2 = sprite->data[1] / 2;
+    if(((sprite->y) + (sprite->y2)) >  sCeilingCrumblePositions[sprite->data[0]][2])
     {
         DestroySprite(sprite);
         IncrementCeilingCrumbleFinishedCount();
@@ -669,7 +669,7 @@ static void DoFossilFallAndSink(u8 taskId)
             fossilTemplate.images = (struct SpriteFrameImage *)(sUnknown_0203CF0C->frameImage);
             sUnknown_0203CF0C->spriteId = CreateSprite(&fossilTemplate, 128, -16, 1);
             gSprites[sUnknown_0203CF0C->spriteId].centerToCornerVecX = 0;
-            gSprites[sUnknown_0203CF0C->spriteId].data[0] = gSprites[sUnknown_0203CF0C->spriteId].pos1.x;
+            gSprites[sUnknown_0203CF0C->spriteId].data[0] = gSprites[sUnknown_0203CF0C->spriteId].x;
             gSprites[sUnknown_0203CF0C->spriteId].data[1] = 1;
         }
     case 5:
@@ -710,7 +710,7 @@ static void sub_81BF248(struct Sprite *sprite)
     {
         sprite->callback = SpriteCallbackDummy;
     }
-    else if (sprite->pos1.y >= 96)
+    else if (sprite->y >= 96)
     {
         u8 i;
         for (i = 0; i < 2; i++)
@@ -720,7 +720,7 @@ static void sub_81BF248(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.y++;
+        sprite->y++;
     }
 }
 
