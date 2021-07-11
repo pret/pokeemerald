@@ -2,8 +2,9 @@
 .set LOCALID_VICTORIA, 2
 .set LOCALID_VIVI, 3
 .set LOCALID_VICKY, 4
-.set LOCALID_PLAYER_FALLING, 45
 .set LOCALID_ROCK_SMASH_MAN, 46
+
+@ Note: LOCALID_ROUTE111_PLAYER_FALLING is a local id for this map used elsewhere. It's defined in event_objects.h
 
 Route111_MapScripts:: @ 81F0CA7
 	map_script MAP_SCRIPT_ON_LOAD, Route111_OnLoad
@@ -127,11 +128,11 @@ Route111_EventScript_MirageTowerDisappear:: @ 81F0E60
 	waitstate
 	delay 24
 	playse SE_FALL
-	addobject LOCALID_PLAYER_FALLING
+	addobject LOCALID_ROUTE111_PLAYER_FALLING
 	special StartPlayerDescendMirageTower
 	waitstate
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
-	removeobject LOCALID_PLAYER_FALLING
+	removeobject LOCALID_ROUTE111_PLAYER_FALLING
 	delay 16
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	delay 16

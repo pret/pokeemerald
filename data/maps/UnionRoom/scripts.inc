@@ -1,11 +1,4 @@
-.set LOCALID_UR_PLAYER_4, 2
-.set LOCALID_UR_PLAYER_8, 3
-.set LOCALID_UR_PLAYER_7, 4
-.set LOCALID_UR_PLAYER_6, 5
-.set LOCALID_UR_PLAYER_5, 6
-.set LOCALID_UR_PLAYER_3, 7
-.set LOCALID_UR_PLAYER_2, 8
-.set LOCALID_UR_PLAYER_1, 9
+@ Note: LOCALID_UNION_ROOM_PLAYER_# are local ids for this map used elsewhere. They're defined in event_objects.h
 
 UnionRoom_MapScripts:: @ 823D1A6
 	map_script MAP_SCRIPT_ON_RESUME, UnionRoom_OnResume
@@ -21,14 +14,14 @@ UnionRoom_OnResume: @ 823D1B1
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_6
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_7
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_8
-	removeobject LOCALID_UR_PLAYER_1
-	removeobject LOCALID_UR_PLAYER_2
-	removeobject LOCALID_UR_PLAYER_3
-	removeobject LOCALID_UR_PLAYER_4
-	removeobject LOCALID_UR_PLAYER_5
-	removeobject LOCALID_UR_PLAYER_6
-	removeobject LOCALID_UR_PLAYER_7
-	removeobject LOCALID_UR_PLAYER_8
+	removeobject LOCALID_UNION_ROOM_PLAYER_1
+	removeobject LOCALID_UNION_ROOM_PLAYER_2
+	removeobject LOCALID_UNION_ROOM_PLAYER_3
+	removeobject LOCALID_UNION_ROOM_PLAYER_4
+	removeobject LOCALID_UNION_ROOM_PLAYER_5
+	removeobject LOCALID_UNION_ROOM_PLAYER_6
+	removeobject LOCALID_UNION_ROOM_PLAYER_7
+	removeobject LOCALID_UNION_ROOM_PLAYER_8
 	special RunUnionRoom
 	end
 
