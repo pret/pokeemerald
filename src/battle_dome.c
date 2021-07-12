@@ -1211,8 +1211,8 @@ static const u8 gUnknown_0860D1A0[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUND
 
 static const u8 gUnknown_0860D1C0[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
 
-// Each tourney trainer has a text describing their potential to win, depending on their seed ranking for the current tourney
-// Dome Ace Tucker has their own separate potential text
+// The first line of text on a trainers info card. It describes their potential to win, based on their seed in the tournament tree.
+// Dome Ace Tucker has their own separate potential text.
 static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT + 1] =
 {
     BattleDome_Text_Potential1, // Highest potential
@@ -1234,7 +1234,7 @@ static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT 
     BattleDome_Text_PotentialDomeAceTucker,
 };
 
-// The first line of text on a trainers info card that gives information about their battle style (dependent on their party's moves)
+// The second line of text on a trainers info card. It gives information about their battle style (dependent on their party's moves).
 static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 {
     [DOME_BATTLE_STYLE_RISKY]           = BattleDome_Text_StyleRiskDisaster,
@@ -1271,7 +1271,7 @@ static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
     [DOME_BATTLE_STYLE_UNUSED4]         = BattleDome_Text_StyleSampleMessage4,
 };
 
-// The second line of text on a trainers info card that gives information about their party's stat spread
+// The third line of text on a trainers info card. It that gives information about their party's stat spread (based on their Pokémon's effort values and Nature).
 static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
     BattleDome_Text_EmphasizesHPAndAtk,      // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here

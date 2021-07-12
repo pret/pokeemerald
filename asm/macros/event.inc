@@ -813,12 +813,12 @@
 	.byte 0x68
 	.endm
 
-	@ Ceases movement for all Objects on-screen.
+	@ Freezes all objects immediately except the player. The player is frozen once their movement is finished.
 	.macro lockall
 	.byte 0x69
 	.endm
 
-	@ If the script was called by an Object, then that Object's movement will cease.
+	@ Freezes all objects immediately except the player and the selected object. The player and selected object are frozen once their movement is finished.
 	.macro lock
 	.byte 0x6a
 	.endm

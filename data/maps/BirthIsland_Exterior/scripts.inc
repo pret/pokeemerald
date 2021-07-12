@@ -1,5 +1,6 @@
-.set LOCALID_DEOXYS_ROCK, 1
 .set LOCALID_DEOXYS, 2
+
+@ Note: LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK is a local id for this map used elsewhere. It's defined in event_objects.h
 
 BirthIsland_Exterior_MapScripts:: @ 8267F15
 	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_OnTransition
@@ -68,9 +69,9 @@ BirthIsland_Exterior_EventScript_NotSolved3:: @ 8267FBF
 
 BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	waitse
-	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
-	setfieldeffectargument 1, 58
-	setfieldeffectargument 2, 26
+	setfieldeffectargument 0, LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK
+	setfieldeffectargument 1, MAP_NUM(BIRTH_ISLAND_EXTERIOR)
+	setfieldeffectargument 2, MAP_GROUP(BIRTH_ISLAND_EXTERIOR)
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK

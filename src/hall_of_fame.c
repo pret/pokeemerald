@@ -66,13 +66,12 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-// this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
 static void LoadHofGfx(void);
 static void InitHofBgs(void);
 static bool8 CreateHofConfettiSprite(void);
 static void StartCredits(void);
-static bool8 sub_8175024(void);
+static bool8 LoadHofBgs(void);
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);
 static void Task_Hof_SetMonDisplayTask(u8 taskId);
@@ -104,7 +103,6 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2);
 static void Task_DoDomeConfetti(u8 taskId);
 static void SpriteCB_HofConfetti(struct Sprite* sprite);
 
-// const rom data
 static const struct BgTemplate sHof_BgTemplates[] =
 {
     {
@@ -136,12 +134,19 @@ static const struct BgTemplate sHof_BgTemplates[] =
     },
 };
 
-static const struct WindowTemplate sHof_WindowTemplate = {0, 2, 2, 0xE, 6, 0xE, 1};
+static const struct WindowTemplate sHof_WindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 2,
+    .width = 14,
+    .height = 6,
+    .paletteNum = 14,
+    .baseBlock = 1
+};
 
 static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
-
-static const u8 sUnused_085E538C[] = {4, 5, 0, 0};
+static const u8 sUnusedTextColors[4] = {TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_TRANSPARENT};
 
 static const struct CompressedSpriteSheet sSpriteSheet_Confetti[] =
 {
@@ -383,7 +388,7 @@ static bool8 InitHallOfFameScreen(void)
         gMain.state++;
         break;
     case 3:
-        if (!sub_8175024())
+        if (!LoadHofBgs())
         {
             SetVBlankCallback(VBlankCB_HallOfFame);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
@@ -819,7 +824,7 @@ void CB2_DoHallOfFamePC(void)
         gMain.state++;
         break;
     case 3:
-        if (!sub_8175024())
+        if (!LoadHofBgs())
         {
             struct HallofFameTeam *fameTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
             fameTeam->mon[0] = sDummyFameMon;
@@ -1301,7 +1306,7 @@ static void InitHofBgs(void)
     ChangeBgY(3, 0, 0);
 }
 
-static bool8 sub_8175024(void)
+static bool8 LoadHofBgs(void)
 {
     switch (sHofGfxPtr->state)
     {

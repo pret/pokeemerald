@@ -1027,7 +1027,7 @@ gTVPokemonTodaySuccessfulText11:: @ 08283A5F
 	.string "BIG BRO: Remember, it could be your\n"
 	.string "POKéMON in the spotlight next time!$"
 
-gTVTodaysSmartShopperText00:: @ 08283B05
+SmartShopper_Text_Intro:: @ 08283B05
 	.string "Hello!\p"
 	.string "It's time for TODAY'S SMART SHOPPER.\p"
 	.string "INTERVIEWER: How are you, viewers?\p"
@@ -1036,7 +1036,7 @@ gTVTodaysSmartShopperText00:: @ 08283B05
 	.string "Let's check on what the hot sellers\n"
 	.string "have been recently.$"
 
-gTVTodaysSmartShopperText01:: @ 08283BAF
+SmartShopper_Text_ClerkNormal:: @ 08283BAF
 	.string "Let's interview the clerk to get the\n"
 	.string "lowdown.\p"
 	.string "Hi, how's your business?\p"
@@ -1046,7 +1046,7 @@ gTVTodaysSmartShopperText01:: @ 08283BAF
 	.string "Why, just the other day a TRAINER\n"
 	.string "named {STR_VAR_1} bought {STR_VAR_3}.$"
 
-gTVTodaysSmartShopperText02:: @ 08283C81
+SmartShopper_Text_RandomComment1:: @ 08283C81
 	.string "INTERVIEWER: The TRAINER bought\n"
 	.string "{STR_VAR_3} {STR_VAR_2}S? That's a haul!\p"
 	.string "If I may say so, {STR_VAR_1} must have\n"
@@ -1055,13 +1055,13 @@ gTVTodaysSmartShopperText02:: @ 08283C81
 	.string "For traveling, {STR_VAR_2}S are so\n"
 	.string "important!$"
 
-gTVTodaysSmartShopperText03:: @ 08283D32
+SmartShopper_Text_RandomComment2:: @ 08283D32
 	.string "INTERVIEWER: Speaking of the item\n"
 	.string "{STR_VAR_2}, I just bought {STR_VAR_3} of\l"
 	.string "them recently.\p"
 	.string "After all, {STR_VAR_2}'s a great item!$"
 
-gTVTodaysSmartShopperText04:: @ 08283D99
+SmartShopper_Text_RandomComment3:: @ 08283D99
 	.string "INTERVIEWER: {STR_VAR_2}?!\n"
 	.string "But {STR_VAR_3} of them?!\p"
 	.string "I didn't think there would be anyone\n"
@@ -1069,7 +1069,7 @@ gTVTodaysSmartShopperText04:: @ 08283D99
 	.string "My goodness, I can only afford one or\n"
 	.string "two at a time…$"
 
-gTVTodaysSmartShopperText05:: @ 08283E28
+SmartShopper_Text_RandomComment4:: @ 08283E28
 	.string "INTERVIEWER: One time, I bought\n"
 	.string "a whole lot of the item {STR_VAR_2}.\p"
 	.string "But it turned out to be too many.\n"
@@ -1079,21 +1079,21 @@ gTVTodaysSmartShopperText05:: @ 08283E28
 	.string "Oops!\p"
 	.string "There's no point talking about me!$"
 
-gTVTodaysSmartShopperText06:: @ 08283F01
+SmartShopper_Text_SecondItem:: @ 08283F01
 	.string "CLERK: {STR_VAR_1} also bought the item\n"
 	.string "{STR_VAR_2} in bulk, taking {STR_VAR_3}.\p"
 	.string "INTERVIEWER: Oh, that's smart.\n"
 	.string "{STR_VAR_2}'s a very good item, too.$"
 
-gTVTodaysSmartShopperText07:: @ 08283F72
+SmartShopper_Text_ThirdItem:: @ 08283F72
 	.string "CLERK: And, the TRAINER also bought\n"
 	.string "{STR_VAR_3} of the item {STR_VAR_2}.$"
 
-gTVTodaysSmartShopperText08:: @ 08283FA9
+SmartShopper_Text_DuringSale:: @ 08283FA9
 	.string "CLERK: Plus, it was during a big sale.\n"
 	.string "That's smart shopping.$"
 
-gTVTodaysSmartShopperText09:: @ 08283FE7
+SmartShopper_Text_OutroNormal:: @ 08283FE7
 	.string "INTERVIEWER: Hmm… {STR_VAR_1} sounds like\n"
 	.string "quite the shrewd bargain hunter!\p"
 	.string "In total, {STR_VAR_1}'s purchases came to…\p"
@@ -1102,11 +1102,11 @@ gTVTodaysSmartShopperText09:: @ 08283FE7
 	.string "Oops! We're out of time!\n"
 	.string "See you on our next broadcast!$"
 
-gTVTodaysSmartShopperText10:: @ 0828409E
+SmartShopper_Text_IsVIP:: @ 0828409E
 	.string "CLERK: {STR_VAR_1} is a VIP customer,\n"
 	.string "no doubt about it.$"
 
-gTVTodaysSmartShopperText11:: @ 082840CE
+SmartShopper_Text_ClerkMax:: @ 082840CE
 	.string "Let's interview the clerk to get the\n"
 	.string "lowdown.\p"
 	.string "Hi, how's your business?\p"
@@ -1127,7 +1127,7 @@ gTVTodaysSmartShopperText11:: @ 082840CE
 	.string "CLERK: {STR_VAR_1} is a VIP customer,\n"
 	.string "no doubt about it.$"
 
-gTVTodaysSmartShopperText12:: @ 082842E6
+SmartShopper_Text_OutroMax:: @ 082842E6
 	.string "INTERVIEWER: Hmm…\n"
 	.string "That is amazing.\p"
 	.string "But why would the TRAINER need to buy\n"
