@@ -129,7 +129,7 @@ enum {
     LL_STATE_PRINT_AWAITING_PLAYERS,
     LL_STATE_AWAIT_PLAYERS,
     LL_STATE_ACCEPT_NEW_MEMBER_PROMPT,
-    LL_STATE_9 = 9,
+    LL_STATE_WAIT_DISCONNECT_CHILD = 9,
     LL_STATE_MEMBER_LEFT,
     LL_STATE_ACCEPT_NEW_MEMBER_PROMPT_HANDLE_INPUT,
     LL_STATE_UPDATE_AFTER_JOIN_REQUEST,
@@ -184,12 +184,10 @@ EWRAM_DATA u16 gUnionRoomOfferedSpecies = 0;
 EWRAM_DATA u8 gUnionRoomRequestedMonType = 0;
 static EWRAM_DATA struct UnionRoomTrade sUnionRoomTrade = {};
 
-// IWRAM vars
 static struct WirelessLink_Leader *sLeader;
 static struct WirelessLink_Group *sGroup;
 static struct WirelessLink_URoom *sURoom;
 
-// this file's functions
 static void UR_AddTextPrinterParameterized(u8, u8, const u8 *, u8, u8, u8);
 static u16 ReadAsU16(const u8 *);
 static void Task_TryBecomeLinkLeader(u8);
@@ -256,11 +254,10 @@ static bool8 AreGnameUnameDifferent(struct WirelessGnameUnamePair*, const struct
 static void ItemPrintFunc_PossibleGroupMembers(u8 windowId, u32 id, u8 y);
 static void ListMenuItemPrintFunc_UnionRoomGroups(u8 windowId, u32 id, u8 y);
 static void TradeBoardListMenuItemPrintFunc(u8 windowId, u32 id, u8 y);
-static void nullsub_14(u8 windowId, u32 id, u8 y);
+static void ItemPrintFunc_EmptyList(u8 windowId, u32 id, u8 y);
 
 #include "data/union_room.h"
 
-// code
 static void PrintNumPlayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 stringId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
@@ -461,19 +458,21 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         if (GROUP_MIN(sPlayerActivityGroupSize) != 0
             && data->playerCount > GROUP_MIN(sPlayerActivityGroupSize) - 1
             && GROUP_MAX(sPlayerActivityGroupSize) != 0
-            && sub_8012240()
+            && IsRfuCommunicatingWithAllChildren()
             && JOY_NEW(START_BUTTON))
         {
             data->state = LL_STATE_MEMBERS_OK_PROMPT;
             LinkRfu_StopManagerAndFinalizeSlots();
         }
-        if (data->state == LL_STATE_AWAIT_PLAYERS && sub_80105EC())
+        if (data->state == LL_STATE_AWAIT_PLAYERS && RfuTryDisconnectLeavingChildren())
         {
-            data->state = LL_STATE_9;
+            // At least 1 group member has left or is trying to leave
+            data->state = LL_STATE_WAIT_DISCONNECT_CHILD;
         }
         break;
-    case LL_STATE_9:
-        if (!sub_80105EC())
+    case LL_STATE_WAIT_DISCONNECT_CHILD:
+        // Resume after ensuring all members trying to leave have left
+        if (!RfuTryDisconnectLeavingChildren())
         {
             data->state = LL_STATE_AWAIT_PLAYERS;
             data->playerCount = sub_8013398(data->field_0);
@@ -525,7 +524,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
             data->state = LL_STATE_UPDATE_AFTER_JOIN_REQUEST;
             break;
         case -3:
-            data->state = LL_STATE_9;
+            data->state = LL_STATE_WAIT_DISCONNECT_CHILD;
             break;
         }
         break;
@@ -4074,7 +4073,7 @@ static s32 UnionRoomGetPlayerInteractionResponse(struct UnkStruct_Main0 *main0, 
     }
 }
 
-void nullsub_14(u8 windowId, u32 itemId, u8 y)
+void ItemPrintFunc_EmptyList(u8 windowId, u32 itemId, u8 y)
 {
 }
 

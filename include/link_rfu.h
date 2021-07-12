@@ -41,8 +41,8 @@
 #define RFU_STATUS_WAIT_ACK_JOIN_GROUP  7
 #define RFU_STATUS_LEAVE_GROUP_NOTICE   8
 #define RFU_STATUS_LEAVE_GROUP          9
-#define RFU_STATUS_10                   10
-#define RFU_STATUS_11                   11
+#define RFU_STATUS_CHILD_LEAVE_READY    10
+#define RFU_STATUS_CHILD_LEAVE          11
 #define RFU_STATUS_ACK_JOIN_GROUP       12
 
 // RfuTgtData.gname is read as these structs.
@@ -213,8 +213,8 @@ void Rfu_SetLinkStandbyCallback(void);
 void ResetLinkRfuGFLayer(void);
 void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
-bool32 sub_8010EC0(void);
-bool32 sub_8010F1C(void);
+bool32 RfuMain1(void);
+bool32 RfuMain2(void);
 bool32 RfuHasErrored(void);
 bool32 IsRfuRecvQueueEmpty(void);
 u32 GetRfuRecvQueueLength(void);
@@ -229,9 +229,9 @@ u8 sub_801048C(bool32 a0);
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2);
 void SetHostRFUtgtGname(u8 activity, u32 child_sprite_genders, bool32 started);
 void InitializeRfuLinkManager_LinkLeader(u32 a0);
-bool32 sub_8012240(void);
+bool32 IsRfuCommunicatingWithAllChildren(void);
 void LinkRfu_StopManagerAndFinalizeSlots(void);
-bool32 sub_80105EC(void);
+bool32 RfuTryDisconnectLeavingChildren(void);
 bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name);
 void SendRfuStatusToPartner(u8 status, u16 trainerId, const u8 *name);
 u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name);

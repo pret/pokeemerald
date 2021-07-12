@@ -485,21 +485,17 @@ u16 LinkMain2(const u16 *heldKeys)
     u8 i;
 
     if (!sLinkOpen)
-    {
         return 0;
-    }
+
     for (i = 0; i < CMD_LENGTH; i++)
-    {
         gSendCmd[i] = 0;
-    }
+
     gLinkHeldKeys = *heldKeys;
     if (gLinkStatus & LINK_STAT_CONN_ESTABLISHED)
     {
         ProcessRecvCmds(SIO_MULTI_CNT->id);
         if (gLinkCallback != NULL)
-        {
             gLinkCallback();
-        }
         CheckErrorStatus();
     }
     return gLinkStatus;
@@ -1796,8 +1792,8 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        r4 = sub_8010EC0();
-        r5 = sub_8010F1C();
+        r4 = RfuMain1();
+        r5 = RfuMain2();
         if (IsSendingKeysOverCable() == TRUE)
         {
             if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
@@ -1916,9 +1912,7 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
                     break;
                 case 1:
                     if (gLink.isMaster == LINK_MASTER && gLink.playerCount > 1)
-                    {
                         gLink.handshakeAsMaster = TRUE;
-                    }
                     break;
                 case 2:
                     gLink.state = LINK_STATE_START0;
@@ -1974,20 +1968,14 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
     }
 
     if (gLink.lag == LAG_MASTER)
-    {
         retVal |= LINK_STAT_ERROR_LAG_MASTER;
-    }
 
     if (gLink.localId >= MAX_LINK_PLAYERS)
-    {
         retVal |= LINK_STAT_ERROR_INVALID_ID;
-    }
 
     retVal2 = retVal;
     if (gLink.lag == LAG_SLAVE)
-    {
         retVal2 |= LINK_STAT_ERROR_LAG_SLAVE;
-    }
 
     return retVal2;
 }

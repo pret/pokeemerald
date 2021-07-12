@@ -18,6 +18,35 @@
 #include "save.h"
 #include "mystery_gift.h"
 
+enum {
+    RFUSTATE_INIT,
+    RFUSTATE_INIT_END,
+    RFUSTATE_PARENT_CONNECT,
+    RFUSTATE_PARENT_CONNECT_END,
+    RFUSTATE_STOP_MANAGER,
+    RFUSTATE_STOP_MANAGER_END,
+    RFUSTATE_CHILD_CONNECT,
+    RFUSTATE_CHILD_CONNECT_END,
+    RFUSTATE_8, // Unused
+    RFUSTATE_RECONNECTED,
+    RFUSTATE_10,
+    RFUSTATE_CHILD_TRY_JOIN,
+    RFUSTATE_CHILD_JOINED,
+    RFUSTATE_13,
+    RFUSTATE_14,
+    RFUSTATE_15,
+    RFUSTATE_UR_FINALIZE,
+};
+// These states are re-used for different purposes
+#define RFUSTATE_17 17
+#define RFUSTATE_18 18
+
+#define RFUSTATE_PARENT_FINALIZE_START 17
+#define RFUSTATE_PARENT_FINALIZE       18
+#define RFUSTATE_UR_CONNECT     17
+#define RFUSTATE_UR_CONNECT_END 18
+#define RFUSTATE_20 20
+
 struct SioInfo
 {
     char magic[15]; // PokemonSioInfo
@@ -193,9 +222,9 @@ static const TaskFunc sUnknown_082ED7E0[] = {
 static const char sASCII_PokemonSioInfo[] = "PokemonSioInfo";
 static const char sASCII_LinkLossDisconnect[] = "LINK LOSS DISCONNECT!";
 static const char sASCII_LinkLossRecoveryNow[] = "LINK LOSS RECOVERY NOW";
-ALIGNED(4) static const char sASCII_30Commas[31] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','\0'};
-static const char sASCII_15Commas[16] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','\0'};
-static const char sASCII_8Commas[9] = {' ',' ',' ',' ',' ',' ',' ',' ','\0'};
+ALIGNED(4) static const char sASCII_30Spaces[31] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','\0'};
+static const char sASCII_15Spaces[16] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','\0'};
+static const char sASCII_8Spaces[9] = {' ',' ',' ',' ',' ',' ',' ',' ','\0'};
 ALIGNED(4) static const char sASCII_Space[2] = {' ','\0'};
 static const char sASCII_Asterisk[2] = {'*','\0'};
 static const char sASCII_NowSlot[8] = "NOWSLOT";
@@ -277,32 +306,32 @@ static void Task_LinkLeaderSearchForChildren(u8 taskId)
     UpdateChildStatuses();
     switch (Rfu.state)
     {
-    case 0:
+    case RFUSTATE_INIT:
         rfu_LMAN_initializeRFU(&sRfuReqConfig);
-        Rfu.state = 1;
+        Rfu.state = RFUSTATE_INIT_END;
         gTasks[taskId].data[1] = 1;
         break;
-    case 1:
+    case RFUSTATE_INIT_END:
         break;
-    case 2:
+    case RFUSTATE_PARENT_CONNECT:
         rfu_LMAN_establishConnection(Rfu.parentChild, 0, 240, (u16 *)sAcceptedSerialNos);
-        Rfu.state = 3;
+        Rfu.state = RFUSTATE_PARENT_CONNECT_END;
         gTasks[taskId].data[1] = 6;
         break;
-    case 3:
+    case RFUSTATE_PARENT_CONNECT_END:
         break;
-    case 4:
+    case RFUSTATE_STOP_MANAGER:
         rfu_LMAN_stopManager(FALSE);
-        Rfu.state = 5;
+        Rfu.state = RFUSTATE_STOP_MANAGER_END;
         break;
-    case 5:
+    case RFUSTATE_STOP_MANAGER_END:
         break;
-    case 18:
+    case RFUSTATE_PARENT_FINALIZE:
         Rfu.unk_cdb = FALSE;
         rfu_LMAN_setMSCCallback(sub_800EDBC);
         sub_800EAB4();
         sub_800EAFC();
-        Rfu.state = 20;
+        Rfu.state = RFUSTATE_20;
         gTasks[taskId].data[1] = 8;
         CreateTask(sub_801084C, 5);
         DestroyTask(taskId);
@@ -363,28 +392,28 @@ static void Task_JoinGroupSearchForParent(u8 taskId)
 {
     switch (Rfu.state)
     {
-    case 0:
+    case RFUSTATE_INIT:
         rfu_LMAN_initializeRFU((INIT_PARAM *)&sRfuReqConfigTemplate);
-        Rfu.state = 1;
+        Rfu.state = RFUSTATE_INIT_END;
         gTasks[taskId].data[1] = 1;
         break;
-    case 1:
+    case RFUSTATE_INIT_END:
         break;
-    case 6:
+    case RFUSTATE_CHILD_CONNECT:
         rfu_LMAN_establishConnection(Rfu.parentChild, 0, 240, (u16 *)sAcceptedSerialNos);
-        Rfu.state = 7;
+        Rfu.state = RFUSTATE_CHILD_CONNECT_END;
         gTasks[taskId].data[1] = 7;
         break;
-    case 7:
+    case RFUSTATE_CHILD_CONNECT_END:
         break;
-    case 9:
+    case RFUSTATE_RECONNECTED:
         gTasks[taskId].data[1] = 10;
         break;
-    case 11:
+    case RFUSTATE_CHILD_TRY_JOIN:
         switch (sub_80107A0())
         {
         case RFU_STATUS_JOIN_GROUP_OK:
-            Rfu.state = 12;
+            Rfu.state = RFUSTATE_CHILD_JOINED;
             break;
         case RFU_STATUS_JOIN_GROUP_NO:
         case RFU_STATUS_LEAVE_GROUP:
@@ -394,7 +423,7 @@ static void Task_JoinGroupSearchForParent(u8 taskId)
             break;
         }
         break;
-    case 12:
+    case RFUSTATE_CHILD_JOINED:
     {
         u8 bmChildSlot = 1 << Rfu.childSlot;
         rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, Rfu.childSlot);
@@ -448,48 +477,44 @@ static void Task_LinkRfu_UnionRoomListen(u8 taskId)
     }
     switch (Rfu.state)
     {
-    case 0:
+    case RFUSTATE_INIT:
         rfu_LMAN_initializeRFU(&sRfuReqConfig);
-        Rfu.state = 1;
+        Rfu.state = RFUSTATE_INIT_END;
         gTasks[taskId].data[1] = 1;
         break;
-    case 1:
+    case RFUSTATE_INIT_END:
         break;
-    case 17:
+    case RFUSTATE_UR_CONNECT:
         rfu_LMAN_establishConnection(2, 0, 240, (u16 *)sAcceptedSerialNos);
         rfu_LMAN_setMSCCallback(sub_800ED34);
-        Rfu.state = 18;
+        Rfu.state = RFUSTATE_UR_CONNECT_END;
         break;
-    case 18:
+    case RFUSTATE_UR_CONNECT_END:
         break;
-    case 13:
+    case RFUSTATE_13:
         if (rfu_UNI_setSendData(1 << Rfu.childSlot, Rfu.unk_4c, sizeof(Rfu.unk_4c)) == 0)
         {
             Rfu.parentChild = MODE_CHILD;
             DestroyTask(taskId);
             if (gTasks[taskId].data[7])
-            {
                 CreateTask(sub_8010D0C, 1);
-            }
             else
-            {
                 CreateTask(sub_801084C, 5);
-            }
         }
         break;
-    case 14:
+    case RFUSTATE_14:
         rfu_LMAN_stopManager(0);
-        Rfu.state = 15;
+        Rfu.state = RFUSTATE_15;
         break;
-    case 15:
+    case RFUSTATE_15:
         break;
-    case 16:
+    case RFUSTATE_UR_FINALIZE:
         Rfu.unk_cdb = FALSE;
         rfu_LMAN_setMSCCallback(sub_800EDBC);
         UpdateGameData_GroupLockedIn(TRUE);
         sub_800EAB4();
         sub_800EAFC();
-        Rfu.state = 20;
+        Rfu.state = RFUSTATE_20;
         gTasks[taskId].data[1] = 8;
         Rfu.parentChild = MODE_PARENT;
         CreateTask(sub_801084C, 5);
@@ -557,7 +582,7 @@ void LinkRfu_Shutdown(void)
             ResetLinkRfuGFLayer();
         }
     }
-    else if (Rfu.parentChild == 2)
+    else if (Rfu.parentChild == MODE_P_C_SWITCH)
     {
         if (FuncIsActiveTask(Task_LinkRfu_UnionRoomListen) == TRUE)
         {
@@ -581,7 +606,7 @@ static void CreateTask_LinkLeaderSearchForChildren(void)
 
 static bool8 sub_800EE94(void)
 {
-    if (Rfu.state == 7 && Rfu.parentId)
+    if (Rfu.state == RFUSTATE_CHILD_CONNECT_END && Rfu.parentId)
     {
         return TRUE;
     }
@@ -590,9 +615,9 @@ static bool8 sub_800EE94(void)
 
 static bool32 IsParentSuccessfullyReconnected(void)
 {
-    if (Rfu.state == 7 && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[Rfu.unk_c3d].id, 240))
+    if (Rfu.state == RFUSTATE_CHILD_CONNECT_END && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[Rfu.unk_c3d].id, 240))
     {
-        Rfu.state = 9;
+        Rfu.state = RFUSTATE_RECONNECTED;
         return TRUE;
     }
     return FALSE;
@@ -614,15 +639,15 @@ bool8 LmanAcceptSlotFlagIsNotZero(void)
 
 void LinkRfu_StopManagerAndFinalizeSlots(void)
 {
-    Rfu.state = 4;
+    Rfu.state = RFUSTATE_STOP_MANAGER;
     Rfu.acceptSlot_flag = lman.acceptSlot_flag;
 }
 
 bool32 WaitRfuState(bool32 force)
 {
-    if (Rfu.state == 17 || force)
+    if (Rfu.state == RFUSTATE_PARENT_FINALIZE_START || force)
     {
-        Rfu.state = 18;
+        Rfu.state = RFUSTATE_PARENT_FINALIZE;
         return TRUE;
     }
     return FALSE;
@@ -630,7 +655,7 @@ bool32 WaitRfuState(bool32 force)
 
 void sub_800EF7C(void)
 {
-    Rfu.state = 14;
+    Rfu.state = RFUSTATE_14;
 }
 
 static void sub_800EF88(u8 a0)
@@ -720,7 +745,7 @@ bool32 IsRfuRecvQueueEmpty(void)
 
 static bool32 sub_800F0F8(void)
 {
-    if (Rfu.state < 20)
+    if (Rfu.state < RFUSTATE_20)
     {
         rfu_REQ_recvData();
         rfu_waitREQComplete();
@@ -772,15 +797,13 @@ static bool32 sub_800F1E0(void)
     u16 j;
     u8 retval;
 
-    if (Rfu.state >= 20 && Rfu.unk_0e == TRUE)
+    if (Rfu.state >= RFUSTATE_20 && Rfu.unk_0e == TRUE)
     {
         rfu_waitREQComplete();
         while (Rfu.unk_cdb == FALSE)
         {
             if (Rfu.errorState != 0)
-            {
                 return FALSE;
-            }
         }
         rfu_REQ_recvData();
         rfu_waitREQComplete();
@@ -885,9 +908,7 @@ static bool32 RfuProcessEnqueuedRecvBlock(void)
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         for (j = 0; j < CMD_LENGTH - 1; j++)
-        {
             gRecvCmds[i][j] = (sp00[i * 14 + (j << 1) + 1] << 8) | sp00[i * 14 + (j << 1) + 0];
-        }
     }
     RfuHandleReceiveCommand(0);
     if (lman.childClockSlave_flag == 0 && Rfu.unk_ce4)
@@ -1563,7 +1584,7 @@ static bool8 CheckForLeavingGroupMembers(void)
                 if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_LEAVE_GROUP_NOTICE)
                 {
                     Rfu.partnerSendStatuses[i] = RFU_STATUS_LEAVE_GROUP;
-                    Rfu.partnerRecvStatuses[i] = RFU_STATUS_10;
+                    Rfu.partnerRecvStatuses[i] = RFU_STATUS_CHILD_LEAVE_READY;
                     rfu_clearSlot(TYPE_NI_RECV, i);
                     rfu_NI_setSendData(1 << i, 8, &Rfu.partnerSendStatuses[i], 1);
                     memberLeft = TRUE;
@@ -1580,27 +1601,33 @@ static bool8 CheckForLeavingGroupMembers(void)
     return memberLeft;
 }
 
-bool32 sub_80105EC(void)
+bool32 RfuTryDisconnectLeavingChildren(void)
 {
-    u8 flags = 0;
+    u8 childrenLeaving = 0;
     s32 i;
+    
+    // Check all children, get those waiting to be disconnected
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_11)
+        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE)
         {
-            flags |= (1 << i);
+            childrenLeaving |= (1 << i);
             Rfu.partnerRecvStatuses[i] = RFU_STATUS_OK;
         }
     }
-    if (flags)
+
+    // Disconnect any leaving children
+    if (childrenLeaving)
     {
-        rfu_REQ_disconnect(flags);
+        rfu_REQ_disconnect(childrenLeaving);
         rfu_waitREQComplete();
     }
+
+    // Return true if any children have left or are still waiting to leave
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10 
-         || Rfu.partnerRecvStatuses[i] == RFU_STATUS_11)
+        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE_READY 
+         || Rfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE)
             return TRUE;
     }
     return FALSE;
@@ -1651,8 +1678,8 @@ static void UpdateChildStatuses(void)
         if (gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_SUCCESS 
          || gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_FAILED)
         {
-            if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10)
-                Rfu.partnerRecvStatuses[i] = RFU_STATUS_11;
+            if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE_READY)
+                Rfu.partnerRecvStatuses[i] = RFU_STATUS_CHILD_LEAVE;
             rfu_clearSlot(TYPE_NI_SEND, i);
         }
     }
@@ -1939,7 +1966,8 @@ static void rfu_REQ_recvData_then_sendData(void)
     }
 }
 
-bool32 sub_8010EC0(void)
+// Rfu equivalent of LinkMain1
+bool32 RfuMain1(void)
 {
     bool32 retval = FALSE;
     Rfu.parentId = 0;
@@ -1954,7 +1982,7 @@ bool32 sub_8010EC0(void)
         case MODE_CHILD:
             retval = RfuProcessEnqueuedRecvBlock();
             break;
-        case 2:
+        case MODE_P_C_SWITCH:
             rfu_REQ_recvData_then_sendData();
             break;
         }
@@ -1962,7 +1990,8 @@ bool32 sub_8010EC0(void)
     return retval;
 }
 
-bool32 sub_8010F1C(void)
+// Rfu equivalent of LinkMain2
+bool32 RfuMain2(void)
 {
     bool32 retval = FALSE;
     if (!Rfu.isShuttingDown)
@@ -2101,7 +2130,7 @@ static void sub_801120C(u8 msg, u8 paramCount)
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        Rfu.state = 2;
+        Rfu.state = RFUSTATE_PARENT_CONNECT;
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_DETECTED:
         break;
@@ -2140,7 +2169,7 @@ static void sub_801120C(u8 msg, u8 paramCount)
             rfu_REQ_disconnect(Rfu.acceptSlot_flag ^ lman.acceptSlot_flag);
             rfu_waitREQComplete();
         }
-        Rfu.state = 17;
+        Rfu.state = RFUSTATE_PARENT_FINALIZE_START;
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_START_RECOVERY:
         Rfu.linkLossRecoveryState = 1;
@@ -2161,8 +2190,7 @@ static void sub_801120C(u8 msg, u8 paramCount)
         }
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
-    case 0x34:
-        break;
+    case 0x34: // ? Not a valid LMAN_MSG value
     case LMAN_MSG_RFU_POWER_DOWN:
     case LMAN_MSG_MANAGER_STOPPED:
     case LMAN_MSG_MANAGER_FORCED_STOPPED_AND_RFU_RESET:
@@ -2188,7 +2216,7 @@ void sub_8011404(u8 msg, u8 unused1)
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        Rfu.state = 6;
+        Rfu.state = RFUSTATE_CHILD_CONNECT;
         break;
     case LMAN_MSG_PARENT_FOUND:
         Rfu.parentId = lman.param[0];
@@ -2202,7 +2230,7 @@ void sub_8011404(u8 msg, u8 unused1)
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
     case LMAN_MSG_CHILD_NAME_SEND_COMPLETED:
-        Rfu.state = 11;
+        Rfu.state = RFUSTATE_CHILD_TRY_JOIN;
         Rfu.unk_c85 = 0;
         Rfu.recvStatus = RFU_STATUS_OK;
         rfu_setRecvBuffer(TYPE_NI, Rfu.childSlot, &Rfu.recvStatus, 1);
@@ -2293,7 +2321,7 @@ static void sub_8011674(u8 msg, u8 paramCount)
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        Rfu.state = 17;
+        Rfu.state = RFUSTATE_17;
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_DETECTED:
         RfuSetStatus(RFU_STATUS_NEW_CHILD_DETECTED, 0);
@@ -2340,8 +2368,8 @@ static void sub_8011674(u8 msg, u8 paramCount)
             rfu_REQ_disconnect(lman.acceptSlot_flag ^ r1);
             rfu_waitREQComplete();
         }
-        if (Rfu.state == 15)
-            Rfu.state = 16;
+        if (Rfu.state == RFUSTATE_15)
+            Rfu.state = RFUSTATE_UR_FINALIZE;
         break;
         break;
     case LMAN_MSG_PARENT_FOUND:
@@ -2353,7 +2381,7 @@ static void sub_8011674(u8 msg, u8 paramCount)
         Rfu.childSlot = lman.param[0];
         break;
     case LMAN_MSG_CONNECT_PARENT_FAILED:
-        Rfu.state = 18;
+        Rfu.state = RFUSTATE_18;
         if (Rfu.unk_ccf < 2)
         {
             Rfu.unk_ccf++;
@@ -2365,7 +2393,7 @@ static void sub_8011674(u8 msg, u8 paramCount)
         }
         break;
     case LMAN_MSG_CHILD_NAME_SEND_COMPLETED:
-        Rfu.state = 13;
+        Rfu.state = RFUSTATE_13;
         RfuSetStatus(RFU_STATUS_CHILD_SEND_COMPLETE, 0);
         rfu_setRecvBuffer(TYPE_UNI, Rfu.childSlot, Rfu.unk_c3f, 70);
         break;
@@ -2403,8 +2431,10 @@ static void sub_8011674(u8 msg, u8 paramCount)
             rfu_LMAN_stopManager(0);
         }
 
-        if (gRfuLinkStatus->parentChild == MODE_NEUTRAL && lman.pcswitch_flag == 0 && FuncIsActiveTask(Task_LinkRfu_UnionRoomListen) == TRUE)
-            Rfu.state = 17;
+        if (gRfuLinkStatus->parentChild == MODE_NEUTRAL 
+            && lman.pcswitch_flag == 0 
+            && FuncIsActiveTask(Task_LinkRfu_UnionRoomListen) == TRUE)
+            Rfu.state = RFUSTATE_17;
 
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
@@ -2557,7 +2587,7 @@ void InitializeRfuLinkManager_JoinGroup(void)
 
 void InitializeRfuLinkManager_EnterUnionRoom(void)
 {
-    Rfu.parentChild = 2;
+    Rfu.parentChild = MODE_P_C_SWITCH;
     CopyPlayerNameToUnameBuffer();
     rfu_LMAN_initializeManager(sub_8011674, NULL);
     sRfuReqConfig = sRfuReqConfigTemplate;
@@ -2765,7 +2795,7 @@ static void sub_801209C(u8 taskId)
             {
                 if (gRfuLinkStatus->partner[id].slot != 0xFF && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[id].id, 0x5A))
                 {
-                    Rfu.state = 0xA;
+                    Rfu.state = RFUSTATE_10;
                     DestroyTask(taskId);
                 }
             }
@@ -2810,12 +2840,15 @@ bool8 IsRfuRecoveringFromLinkLoss(void)
         return FALSE;
 }
 
-bool32 sub_8012240(void)
+bool32 IsRfuCommunicatingWithAllChildren(void)
 {
     s32 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
+        // RFU_STATUS_OK is the default status.
+        // If any connected child is receiving a status other
+        // than OK, then the parent is communicating with them
         if ((lman.acceptSlot_flag >> i) & 1 && Rfu.partnerSendStatuses[i] == RFU_STATUS_OK)
             return FALSE;
     }
@@ -2828,7 +2861,7 @@ static void Debug_PrintEmpty(void)
     s32 i;
 
     for (i = 0; i < 20; i++)
-        Debug_PrintString(sASCII_30Commas, 0, i);
+        Debug_PrintString(sASCII_30Spaces, 0, i);
 }
 
 static void Debug_PrintStatus(void)
@@ -2863,8 +2896,8 @@ static void Debug_PrintStatus(void)
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             Debug_PrintNum(0, 1, i + 3, 4);
-            Debug_PrintString(sASCII_15Commas, 6, i + 3);
-            Debug_PrintString(sASCII_8Commas, 0x16, i + 3);
+            Debug_PrintString(sASCII_15Spaces, 6, i + 3);
+            Debug_PrintString(sASCII_8Spaces, 0x16, i + 3);
         }
         Debug_PrintNum(gRfuLinkStatus->partner[Rfu.childSlot].serialNo, 1, 3, 4);
         Debug_PrintString((void*)gRfuLinkStatus->partner[Rfu.childSlot].gname, 6, 3);
@@ -2884,8 +2917,8 @@ static void Debug_PrintStatus(void)
         for (; i < RFU_CHILD_MAX; i++)
         {
             Debug_PrintNum(0, 1, i + 3, 4);
-            Debug_PrintString(sASCII_15Commas, 6, i + 3);
-            Debug_PrintString(sASCII_8Commas, 0x16, i + 3);
+            Debug_PrintString(sASCII_15Spaces, 6, i + 3);
+            Debug_PrintString(sASCII_8Spaces, 0x16, i + 3);
         }
     }
 }
