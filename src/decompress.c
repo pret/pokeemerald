@@ -113,7 +113,7 @@ void Unused_LZDecompressWramIndirect(const void **src, void *dest)
     LZ77UnCompWram(*src, dest);
 }
 
-void sub_803471C(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
+void Unused_sub_803471C(s32 object_size, s32 object_count, const u8 *src_tiles, u8 *dest_tiles)
 {
     /*
       This function appears to emulate behaviour found in the GB(C) versions regarding how the Pokemon images
@@ -122,7 +122,8 @@ void sub_803471C(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tile
       that the result will have each object centered in a 8x8 tile canvas.
     */
     s32 i, j, k, l;
-    u8 *src = src_tiles, *dest = dest_tiles;
+    const u8 *src = src_tiles;
+    u8 *dest = dest_tiles;
     u8 bottom_off;
 
     if (object_size & 1)
