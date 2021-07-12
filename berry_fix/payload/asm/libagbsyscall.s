@@ -17,12 +17,12 @@ Div: @ 81E3B68
 	bx lr
 	thumb_func_end Div
 
-	thumb_func_start Mod
-Mod:
+	thumb_func_start DivRem
+DivRem:
 	svc 0x6
 	adds r0, r1, 0
 	bx lr
-	thumb_func_end Mod
+	thumb_func_end DivRem
 
 	thumb_func_start LZ77UnCompVram
 LZ77UnCompVram: @ 81E3B6C

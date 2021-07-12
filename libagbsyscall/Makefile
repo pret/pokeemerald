@@ -50,49 +50,48 @@ endif
 ASFLAGS := -mcpu=arm7tdmi
 ARFLAGS := rc
 
-SYSCALLS := IntrWait \
-            RegisterRamReset \
-            Sqrt \
-            MusicPlayerOpen \
-            SoundBiasReset \
-            SoundDriverVSyncOn \
-            Mod \
-            VBlankIntrWait \
-            MusicPlayerStart \
-            SoundDriverVSyncOff \
-            HuffUnComp \
-            SoftResetExram \
-            MusicPlayerFadeOut \
-            LZ77UnCompWram \
-            SoundDriverMain \
-            SoundBiasChange \
-            LZ77UnCompVram \
+SYSCALLS := ArcTan \
             ArcTan2 \
-            MusicPlayerStop \
-            DivArm \
-            ModArm \
-            SoundDriverVSync \
-            SoundDriverInit \
             BgAffineSet \
-            Diff8bitUnFilterWram \
-            MultiBoot \
-            MidiKey2Freq \
-            Div \
-            Diff8bitUnFilterVram \
-            ArcTan \
-            ObjAffineSet \
-            SoftResetRom \
-            SoundDriverMode \
-            RLUnCompWram \
             BitUnPack \
-            SoundChannelClear \
             CpuFastSet \
             CpuSet \
             Diff16bitUnFilter \
-            SoundBiasSet \
+            Diff8bitUnFilterVram \
+            Diff8bitUnFilterWram \
+            Div \
+            DivArm \
+            DivRem \
+            DivRemArm \
+            HuffUnComp \
+            IntrWait \
+            LZ77UnCompVram \
+            LZ77UnCompWram \
+            MidiKey2Freq \
+            MultiBoot \
             MusicPlayerContinue \
+            MusicPlayerFadeOut \
+            MusicPlayerOpen \
+            MusicPlayerStart \
+            MusicPlayerStop \
+            ObjAffineSet \
+            RegisterRamReset \
+            RLUnCompVram \
+            RLUnCompWram \
             SoftReset \
-            RLUnCompVram
+            SoftResetExram \
+            SoftResetRom \
+            SoundBiasReset \
+            SoundBiasSet \
+            SoundChannelClear \
+            SoundDriverInit \
+            SoundDriverMain \
+            SoundDriverMode \
+            SoundDriverVSync \
+            SoundDriverVSyncOff \
+            SoundDriverVSyncOn \
+            Sqrt \
+            VBlankIntrWait
 
 ASM_SRCS := libagbsyscall.s
 ASM_OBJS := $(foreach syscall, $(SYSCALLS), $(syscall).o)
