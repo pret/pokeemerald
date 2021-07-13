@@ -863,6 +863,7 @@ Move_ROOST:
 Move_GRAVITY:
 	fadetobg BG_COSMIC
 	waitbgfadein
+	createvisualtask AnimTask_SetAnimTargetToAttackerOpposite, 1
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ShakeAndSinkMon, 5, ANIM_ATTACKER, 2, 0, 96, 30
 	createvisualtask AnimTask_ShakeAndSinkMon, 5, ANIM_DEF_PARTNER, 2, 0, 96, 30
