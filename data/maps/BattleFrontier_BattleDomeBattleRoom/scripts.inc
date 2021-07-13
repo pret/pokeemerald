@@ -563,7 +563,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience:: @ 824C594
 	createvobject OBJ_EVENT_GFX_HEX_MANIAC, 28, 5, 2, 3, DIR_SOUTH
 	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
 	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 6, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2, 3, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2, 3, DIR_SOUTH
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience:: @ 824C652

@@ -106,7 +106,7 @@ static void BagAction_Give(u8);
 static void BagAction_Cancel(u8);
 static void BagAction_UseInBattle(u8);
 static void BagCursorMoved(s32, bool8, struct ListMenu *);
-static void PrintItemQuantity(u8, s32, u8);
+static void PrintItemQuantity(u8 windowId, u32 itemId, u8 y);
 static void TossItem(u8);
 static void DontTossItem(u8);
 
@@ -651,7 +651,7 @@ static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     }
 }
 
-static void PrintItemQuantity(u8 windowId, s32 itemIndex, u8 y)
+static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
 {
     s32 xAlign;
     if (itemIndex == LIST_CANCEL)
