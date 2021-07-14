@@ -2351,3 +2351,6 @@ $(MID_SUBDIR)/bw_seq_bgm_e_opening.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V079

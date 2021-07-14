@@ -3589,3 +3589,47 @@ DirectSoundWaveData_bw_121nylong3::
 	.align 2
 DirectSoundWaveData_bw_119nylone4::
 	.incbin "sound/direct_sound_samples/bw_119nylone4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthlead_vsrival::
+	.incbin "sound/direct_sound_samples/bw_synthlead_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_wah_vsrival::
+	.incbin "sound/direct_sound_samples/bw_wah_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_click_vsrival::
+	.incbin "sound/direct_sound_samples/bw_click_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_kickcymbal::
+	.incbin "sound/direct_sound_samples/bw_kickcymbal.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthkick_vsrival::
+	.incbin "sound/direct_sound_samples/bw_synthkick_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_snare_vsrival::
+	.incbin "sound/direct_sound_samples/bw_snare_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_castanet_vsrival::
+	.incbin "sound/direct_sound_samples/bw_castanet_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_175snare::
+	.incbin "sound/direct_sound_samples/bw_175snare.bin"
+
+	.align 2
+DirectSoundWaveData_bw_handclap_vsrival::
+	.incbin "sound/direct_sound_samples/bw_handclap_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthchh_vsrival::
+	.incbin "sound/direct_sound_samples/bw_synthchh_vsrival.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthohh_vsrival::
+	.incbin "sound/direct_sound_samples/bw_synthohh_vsrival.bin"

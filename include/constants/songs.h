@@ -916,6 +916,7 @@
 #define BW_SEQ_BGM_STARTING2         891 // Onward to Adventure! (Part 2)
 #define BW_SEQ_BGM_E_OPENING         892 // A Day of Beginnings
 #define BW_SEQ_BGM_T_01              893 // Nuvema Town
+#define BW_SEQ_BGM_VS_RIVAL          894 // Battle! (Cheren/Bianca)                       (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 
