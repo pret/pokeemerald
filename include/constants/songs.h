@@ -915,6 +915,7 @@
 #define BW_SEQ_BGM_STARTING          890 // Onward to Adventure! (Part 1)
 #define BW_SEQ_BGM_STARTING2         891 // Onward to Adventure! (Part 2)
 #define BW_SEQ_BGM_E_OPENING         892 // A Day of Beginnings
+#define BW_SEQ_BGM_T_01              893 // Nuvema Town
 
 // Black 2 & White 2 Music
 

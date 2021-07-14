@@ -3527,20 +3527,12 @@ DirectSoundWaveData_bw_074glocknc5::
 	.incbin "sound/direct_sound_samples/bw_074glocknc5.bin"
 
 	.align 2
-DirectSoundWaveData_bw_066flt2f4::
-	.incbin "sound/direct_sound_samples/bw_066flt2f4.bin"
-
-	.align 2
 DirectSoundWaveData_bw_065flt2c5::
 	.incbin "sound/direct_sound_samples/bw_065flt2c5.bin"
 
 	.align 2
 DirectSoundWaveData_bw_064flt2a5::
 	.incbin "sound/direct_sound_samples/bw_064flt2a5.bin"
-
-	.align 2
-DirectSoundWaveData_bw_067flt2f6::
-	.incbin "sound/direct_sound_samples/bw_067flt2f6.bin"
 
 	.align 2
 DirectSoundWaveData_bw_144tptc4short::
@@ -3561,3 +3553,39 @@ DirectSoundWaveData_bw_snareroll::
 	.align 2
 DirectSoundWaveData_bw_045crash::
 	.incbin "sound/direct_sound_samples/bw_045crash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_094harpsia3::
+	.incbin "sound/direct_sound_samples/bw_094harpsia3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_097harpsif4::
+	.incbin "sound/direct_sound_samples/bw_097harpsif4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_096harpsid5::
+	.incbin "sound/direct_sound_samples/bw_096harpsid5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_accorc3::
+	.incbin "sound/direct_sound_samples/bw_accorc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_accorc4::
+	.incbin "sound/direct_sound_samples/bw_accorc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_accorc5::
+	.incbin "sound/direct_sound_samples/bw_accorc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_120nylong2::
+	.incbin "sound/direct_sound_samples/bw_120nylong2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_121nylong3::
+	.incbin "sound/direct_sound_samples/bw_121nylong3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_119nylone4::
+	.incbin "sound/direct_sound_samples/bw_119nylone4.bin"
