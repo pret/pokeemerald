@@ -917,6 +917,8 @@
 #define BW_SEQ_BGM_E_OPENING         892 // A Day of Beginnings
 #define BW_SEQ_BGM_T_01              893 // Nuvema Town
 #define BW_SEQ_BGM_VS_RIVAL          894 // Battle! (Cheren/Bianca)                       (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_E_TSURETEKE1      895 // Hurry Along 1
+#define BW_SEQ_BGM_E_DOCTOR          896 // Professor Juniper
 
 // Black 2 & White 2 Music
 

@@ -2354,3 +2354,9 @@ $(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V079
+
+$(MID_SUBDIR)/bw_seq_bgm_e_tsureteke1.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V066
+
+$(MID_SUBDIR)/bw_seq_bgm_e_doctor.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V100
