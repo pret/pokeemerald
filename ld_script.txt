@@ -1592,6 +1592,7 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_vs_rival.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_tsureteke1.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_doctor.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_labo.o(.rodata);
     } =0
 
     lib_rodata :

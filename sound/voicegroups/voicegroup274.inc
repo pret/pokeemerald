@@ -15,7 +15,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_147tbellg4, 255, 248, 0, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup296, KeySplitTable36    @ glockenspiel
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -45,7 +45,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
 	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1

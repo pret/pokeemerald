@@ -2360,3 +2360,6 @@ $(MID_SUBDIR)/bw_seq_bgm_e_tsureteke1.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_e_doctor.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V100
+
+$(MID_SUBDIR)/bw_seq_bgm_labo.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V066

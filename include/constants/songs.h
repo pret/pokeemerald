@@ -919,6 +919,7 @@
 #define BW_SEQ_BGM_VS_RIVAL          894 // Battle! (Cheren/Bianca)                       (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_E_TSURETEKE1      895 // Hurry Along 1
 #define BW_SEQ_BGM_E_DOCTOR          896 // Professor Juniper
+#define BW_SEQ_BGM_LABO              897 // Juniper Pokémon Lab
 
 // Black 2 & White 2 Music
 

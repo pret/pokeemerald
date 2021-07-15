@@ -3523,6 +3523,10 @@ DirectSoundWaveData_bw_trombonesstaccatocs2::
 	.incbin "sound/direct_sound_samples/bw_trombonesstaccatocs2.bin"
 
 	.align 2
+DirectSoundWaveData_bw_073glocknc4::
+	.incbin "sound/direct_sound_samples/bw_073glocknc4.bin"
+
+	.align 2
 DirectSoundWaveData_bw_074glocknc5::
 	.incbin "sound/direct_sound_samples/bw_074glocknc5.bin"
 

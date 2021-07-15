@@ -295,3 +295,4 @@
 .include "sound/voicegroups/voicegroup293.inc"
 .include "sound/voicegroups/voicegroup294.inc"
 .include "sound/voicegroups/voicegroup295.inc"
+.include "sound/voicegroups/voicegroup296.inc"

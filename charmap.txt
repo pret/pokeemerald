@@ -1354,6 +1354,7 @@ BW_SEQ_BGM_T_01              = 7D 03
 BW_SEQ_BGM_VS_RIVAL          = 7E 03
 BW_SEQ_BGM_E_TSURETEKE1      = 7F 03
 BW_SEQ_BGM_E_DOCTOR          = 80 03
+BW_SEQ_BGM_LABO              = 81 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01
