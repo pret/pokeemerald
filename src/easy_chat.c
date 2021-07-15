@@ -229,13 +229,13 @@ static void DoQuizSetQuestionEasyChatScreen(void);
 
 #define PALTAG_TRIANGLE_CURSOR 0
 #define PALTAG_RECTANGLE_CURSOR 1
-#define PALTAG_MISC_UI 2
+#define TAG_PAL_BERRY_BLENDER_MISC_UI 2
 #define PALTAG_RS_INTERVIEW_FRAME 3
 
 #define GFXTAG_TRIANGLE_CURSOR 0
 #define GFXTAG_RECTANGLE_CURSOR 1
 #define GFXTAG_SCROLL_INDICATOR 2
-#define GFXTAG_START_SELECT_BUTTONS 3
+#define TAG_GFX_BERRY_BLENDER_START_SELECT_BUTTONS 3
 #define GFXTAG_MODE_WINDOW 4
 #define GFXTAG_RS_INTERVIEW_FRAME 5
 #define GFXTAG_BUTTON_WINDOW 6
@@ -879,7 +879,7 @@ static const struct SpriteSheet sSpriteSheets[] = {
     {
         .data = sStartSelectButtons_Gfx,
         .size = 0x100,
-        .tag = GFXTAG_START_SELECT_BUTTONS
+        .tag = TAG_GFX_BERRY_BLENDER_START_SELECT_BUTTONS
     },
     {0}
 };
@@ -895,7 +895,7 @@ static const struct SpritePalette sSpritePalettes[] = {
     },
     {
         .data = gEasyChatButtonWindow_Pal,
-        .tag = PALTAG_MISC_UI, // The palette is generated from the button window but used for various parts of the UI
+        .tag = TAG_PAL_BERRY_BLENDER_MISC_UI, // The palette is generated from the button window but used for various parts of the UI
     },
     {
         .data = sRSInterviewFrame_Pal,
@@ -1078,7 +1078,7 @@ static const union AnimCmd *const sAnims_ModeWindow[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_ModeWindow = {
     .tileTag = GFXTAG_MODE_WINDOW,
-    .paletteTag = PALTAG_MISC_UI,
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_UI,
     .oam = &sOamData_ModeWindow,
     .anims = sAnims_ModeWindow,
     .images = NULL,
@@ -1104,7 +1104,7 @@ static const struct OamData sOamData_ButtonWindow = {
 
 static const struct SpriteTemplate sSpriteTemplate_ButtonWindow = {
     .tileTag = GFXTAG_BUTTON_WINDOW,
-    .paletteTag = PALTAG_MISC_UI,
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_UI,
     .oam = &sOamData_ButtonWindow,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1161,8 +1161,8 @@ static const union AnimCmd *const sAnims_TwoFrame[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StartSelectButton = {
-    .tileTag = GFXTAG_START_SELECT_BUTTONS,
-    .paletteTag = PALTAG_MISC_UI,
+    .tileTag = TAG_GFX_BERRY_BLENDER_START_SELECT_BUTTONS,
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_UI,
     .oam = &sOamData_StartSelectButton,
     .anims = sAnims_TwoFrame,
     .images = NULL,
@@ -1172,7 +1172,7 @@ static const struct SpriteTemplate sSpriteTemplate_StartSelectButton = {
 
 static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator = {
     .tileTag = GFXTAG_SCROLL_INDICATOR,
-    .paletteTag = PALTAG_MISC_UI,
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_UI,
     .oam = &sOamData_ScrollIndicator,
     .anims = sAnims_TwoFrame,
     .images = NULL,

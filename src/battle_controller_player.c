@@ -33,6 +33,7 @@
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
 
@@ -966,8 +967,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
 
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 
@@ -1076,8 +1077,8 @@ static void SwitchIn_CleanShinyAnimShowSubstitute(void)
         // Reset shiny anim (even if it didn't occur)
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
 
         // Check if Substitute should be shown
         if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)

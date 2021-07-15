@@ -30,6 +30,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 // Select_ refers to the first Pokemon selection screen where you choose your initial 3 rental Pokemon.
 // Swap_   refers to the subsequent selection screens where you can swap a Pokemon with one from the beaten trainer
@@ -42,26 +43,6 @@
 #define SWAP_ENEMY_SCREEN  1  // The screen where the player selects which new pokemon from the defeated party to swap for
 
 #define SELECTABLE_MONS_COUNT 6
-
-enum {
-    PALTAG_BALL_GRAY = 100,
-    PALTAG_BALL_SELECTED,
-    PALTAG_INTERFACE,
-    PALTAG_MON_PIC_BG,
-};
-
-enum {
-    GFXTAG_BALL = 100,
-    GFXTAG_ARROW,
-    GFXTAG_MENU_HIGHLIGHT_LEFT,
-    GFXTAG_MENU_HIGHLIGHT_RIGHT,
-    GFXTAG_ACTION_BOX_LEFT,
-    GFXTAG_ACTION_BOX_RIGHT,
-    GFXTAG_ACTION_HIGHLIGHT_LEFT,
-    GFXTAG_ACTION_HIGHLIGHT_MIDDLE,
-    GFXTAG_ACTION_HIGHLIGHT_RIGHT,
-    GFXTAG_MON_PIC_BG_ANIM,
-};
 
 // Tasks in this file universally use data[0] as a state for switches
 #define tState   data[0]
@@ -273,25 +254,25 @@ static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_front
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
 {
-    {sArrow_Gfx,              sizeof(sArrow_Gfx),              GFXTAG_ARROW},
-    {sMenuHighlightLeft_Gfx,  sizeof(sMenuHighlightLeft_Gfx),  GFXTAG_MENU_HIGHLIGHT_LEFT},
-    {sMenuHighlightRight_Gfx, sizeof(sMenuHighlightRight_Gfx), GFXTAG_MENU_HIGHLIGHT_RIGHT},
-    {sMonPicBgAnim_Gfx,       sizeof(sMonPicBgAnim_Gfx),       GFXTAG_MON_PIC_BG_ANIM},
+    {sArrow_Gfx,              sizeof(sArrow_Gfx),              TAG_GFX_FACTORY_ARROW},
+    {sMenuHighlightLeft_Gfx,  sizeof(sMenuHighlightLeft_Gfx),  TAG_GFX_FACTORY_MENU_HIGHLIGHT_LEFT},
+    {sMenuHighlightRight_Gfx, sizeof(sMenuHighlightRight_Gfx), TAG_GFX_FACTORY_MENU_HIGHLIGHT_RIGHT},
+    {sMonPicBgAnim_Gfx,       sizeof(sMonPicBgAnim_Gfx),       TAG_GFX_FACTORY_MON_PIC_BG_ANIM},
     {},
 };
 
 static const struct CompressedSpriteSheet sSelect_BallGfx[] =
 {
-    {gPokeballSelection_Gfx, 0x800, GFXTAG_BALL},
+    {gPokeballSelection_Gfx, 0x800, TAG_FACTORY_BALL_GRAY},
     {},
 };
 
 static const struct SpritePalette sSelect_SpritePalettes[] =
 {
-    {sPokeballGray_Pal,     PALTAG_BALL_GRAY},
-    {sPokeballSelected_Pal, PALTAG_BALL_SELECTED},
-    {sInterface_Pal,        PALTAG_INTERFACE},
-    {sMonPicBg_Pal,         PALTAG_MON_PIC_BG},
+    {sPokeballGray_Pal,     TAG_FACTORY_BALL_GRAY},
+    {sPokeballSelected_Pal, TAG_PAL_FACTORY_BALL_SELECTED},
+    {sInterface_Pal,        TAG_PAL_FACTORY_INTERFACE},
+    {sMonPicBg_Pal,         TAG_PAL_FACTORY_MON_PIC_BG},
     {},
 };
 
@@ -574,8 +555,8 @@ static const union AffineAnimCmd * const sAffineAnims_Select_MonPicBgAnim[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Select_Pokeball =
 {
-    .tileTag = GFXTAG_BALL,
-    .paletteTag = PALTAG_BALL_GRAY,
+    .tileTag = TAG_FACTORY_BALL_GRAY,
+    .paletteTag = TAG_FACTORY_BALL_GRAY,
     .oam = &sOam_Select_Pokeball,
     .anims = sAnims_Select_Pokeball,
     .images = NULL,
@@ -585,8 +566,8 @@ static const struct SpriteTemplate sSpriteTemplate_Select_Pokeball =
 
 static const struct SpriteTemplate sSpriteTemplate_Select_Arrow =
 {
-    .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = TAG_GFX_FACTORY_ARROW,
+    .paletteTag = TAG_PAL_FACTORY_INTERFACE,
     .oam = &sOam_Select_Arrow,
     .anims = sAnims_Select_Interface,
     .images = NULL,
@@ -596,8 +577,8 @@ static const struct SpriteTemplate sSpriteTemplate_Select_Arrow =
 
 static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightLeft =
 {
-    .tileTag = GFXTAG_MENU_HIGHLIGHT_LEFT,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = TAG_GFX_FACTORY_MENU_HIGHLIGHT_LEFT,
+    .paletteTag = TAG_PAL_FACTORY_INTERFACE,
     .oam = &sOam_Select_MenuHighlight,
     .anims = sAnims_Select_Interface,
     .images = NULL,
@@ -607,8 +588,8 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightLeft =
 
 static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightRight =
 {
-    .tileTag = GFXTAG_MENU_HIGHLIGHT_RIGHT,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = TAG_GFX_FACTORY_MENU_HIGHLIGHT_RIGHT,
+    .paletteTag = TAG_PAL_FACTORY_INTERFACE,
     .oam = &sOam_Select_MenuHighlight,
     .anims = sAnims_Select_Interface,
     .images = NULL,
@@ -618,8 +599,8 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightRight =
 
 static const struct SpriteTemplate sSpriteTemplate_Select_MonPicBgAnim =
 {
-    .tileTag = GFXTAG_MON_PIC_BG_ANIM,
-    .paletteTag = PALTAG_MON_PIC_BG,
+    .tileTag = TAG_GFX_FACTORY_MON_PIC_BG_ANIM,
+    .paletteTag = TAG_PAL_FACTORY_MON_PIC_BG,
     .oam = &sOam_Select_MonPicBgAnim,
     .anims = sAnims_Select_MonPicBgAnim,
     .images = NULL,
@@ -629,30 +610,30 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MonPicBgAnim =
 
 static const struct SpriteSheet sSwap_SpriteSheets[] =
 {
-    {sArrow_Gfx,                 sizeof(sArrow_Gfx),                 GFXTAG_ARROW},
-    {sMenuHighlightLeft_Gfx,     sizeof(sMenuHighlightLeft_Gfx),     GFXTAG_MENU_HIGHLIGHT_LEFT},
-    {sMenuHighlightRight_Gfx,    sizeof(sMenuHighlightRight_Gfx),    GFXTAG_MENU_HIGHLIGHT_RIGHT},
-    {sActionBoxLeft_Gfx,         sizeof(sActionBoxLeft_Gfx),         GFXTAG_ACTION_BOX_LEFT},
-    {sActionBoxRight_Gfx,        sizeof(sActionBoxRight_Gfx),        GFXTAG_ACTION_BOX_RIGHT},
-    {sActionHighlightLeft_Gfx,   0x100,                              GFXTAG_ACTION_HIGHLIGHT_LEFT},
-    {sActionHighlightMiddle_Gfx, sizeof(sActionHighlightMiddle_Gfx), GFXTAG_ACTION_HIGHLIGHT_MIDDLE},
-    {sActionHighlightRight_Gfx,  sizeof(sActionHighlightRight_Gfx),  GFXTAG_ACTION_HIGHLIGHT_RIGHT},
-    {sMonPicBgAnim_Gfx,          sizeof(sMonPicBgAnim_Gfx),          GFXTAG_MON_PIC_BG_ANIM},
+    {sArrow_Gfx,                 sizeof(sArrow_Gfx),                 TAG_GFX_FACTORY_ARROW},
+    {sMenuHighlightLeft_Gfx,     sizeof(sMenuHighlightLeft_Gfx),     TAG_GFX_FACTORY_MENU_HIGHLIGHT_LEFT},
+    {sMenuHighlightRight_Gfx,    sizeof(sMenuHighlightRight_Gfx),    TAG_GFX_FACTORY_MENU_HIGHLIGHT_RIGHT},
+    {sActionBoxLeft_Gfx,         sizeof(sActionBoxLeft_Gfx),         TAG_GFX_FACTORY_ACTION_BOX_LEFT},
+    {sActionBoxRight_Gfx,        sizeof(sActionBoxRight_Gfx),        TAG_GFX_FACTORY_ACTION_BOX_RIGHT},
+    {sActionHighlightLeft_Gfx,   0x100,                              TAG_GFX_FACTORY_ACTION_HIGHLIGHT_LEFT},
+    {sActionHighlightMiddle_Gfx, sizeof(sActionHighlightMiddle_Gfx), TAG_GFX_FACTORY_ACTION_HIGHLIGHT_MIDDLE},
+    {sActionHighlightRight_Gfx,  sizeof(sActionHighlightRight_Gfx),  TAG_GFX_FACTORY_ACTION_HIGHLIGHT_RIGHT},
+    {sMonPicBgAnim_Gfx,          sizeof(sMonPicBgAnim_Gfx),          TAG_GFX_FACTORY_MON_PIC_BG_ANIM},
     {},
 };
 
 static const struct CompressedSpriteSheet sSwap_BallGfx[] =
 {
-    {gPokeballSelection_Gfx, 0x800, GFXTAG_BALL},
+    {gPokeballSelection_Gfx, 0x800, TAG_FACTORY_BALL_GRAY},
     {},
 };
 
 static const struct SpritePalette sSwap_SpritePalettes[] =
 {
-    {sPokeballGray_Pal,     PALTAG_BALL_GRAY},
-    {sPokeballSelected_Pal, PALTAG_BALL_SELECTED},
-    {sInterface_Pal,        PALTAG_INTERFACE},
-    {sMonPicBg_Pal,         PALTAG_MON_PIC_BG},
+    {sPokeballGray_Pal,     TAG_FACTORY_BALL_GRAY},
+    {sPokeballSelected_Pal, TAG_PAL_FACTORY_BALL_SELECTED},
+    {sInterface_Pal,        TAG_PAL_FACTORY_INTERFACE},
+    {sMonPicBg_Pal,         TAG_PAL_FACTORY_MON_PIC_BG},
     {},
 };
 
@@ -825,8 +806,8 @@ static const union AffineAnimCmd * const sAffineAnims_Swap_MonPicBgAnim[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_Pokeball =
 {
-    .tileTag = GFXTAG_BALL,
-    .paletteTag = PALTAG_BALL_GRAY,
+    .tileTag = TAG_FACTORY_BALL_GRAY,
+    .paletteTag = TAG_FACTORY_BALL_GRAY,
     .oam = &sOam_Swap_Pokeball,
     .anims = sAnims_Swap_Pokeball,
     .images = NULL,
@@ -836,8 +817,8 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_Pokeball =
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_Arrow =
 {
-    .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = TAG_GFX_FACTORY_ARROW,
+    .paletteTag = TAG_PAL_FACTORY_INTERFACE,
     .oam = &sOam_Swap_Arrow,
     .anims = sAnims_Swap_Interface,
     .images = NULL,
@@ -847,8 +828,8 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_Arrow =
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightLeft =
 {
-    .tileTag = GFXTAG_MENU_HIGHLIGHT_LEFT,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = TAG_GFX_FACTORY_MENU_HIGHLIGHT_LEFT,
+    .paletteTag = TAG_PAL_FACTORY_INTERFACE,
     .oam = &sOam_Swap_MenuHighlight,
     .anims = sAnims_Swap_Interface,
     .images = NULL,
@@ -858,8 +839,8 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightLeft =
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightRight =
 {
-    .tileTag = GFXTAG_MENU_HIGHLIGHT_RIGHT,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = TAG_GFX_FACTORY_MENU_HIGHLIGHT_RIGHT,
+    .paletteTag = TAG_PAL_FACTORY_INTERFACE,
     .oam = &sOam_Swap_MenuHighlight,
     .anims = sAnims_Swap_Interface,
     .images = NULL,
@@ -869,8 +850,8 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightRight =
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_MonPicBgAnim =
 {
-    .tileTag = GFXTAG_MON_PIC_BG_ANIM,
-    .paletteTag = PALTAG_MON_PIC_BG,
+    .tileTag = TAG_GFX_FACTORY_MON_PIC_BG_ANIM,
+    .paletteTag = TAG_PAL_FACTORY_MON_PIC_BG,
     .oam = &sOam_Swap_MonPicBgAnim,
     .anims = sAnims_Swap_MonPicBgAnim,
     .images = NULL,
@@ -1050,7 +1031,7 @@ static const struct SwapScreenAction sSwap_EnemyScreenActions[] =
 
 static void SpriteCB_Pokeball(struct Sprite *sprite)
 {
-    if (sprite->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED))
+    if (sprite->oam.paletteNum == IndexOfSpritePaletteTag(TAG_PAL_FACTORY_BALL_SELECTED))
     {
         // Pokeball selected, do rocking animation
         if (sprite->animEnded)
@@ -1403,7 +1384,7 @@ static void Select_HandleMonSelectionChange(void)
     u8 cursorPos = sFactorySelectScreen->cursorPos;
     if (sFactorySelectScreen->mons[cursorPos].selectedId) // Deselect a mon.
     {
-        paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_GRAY);
+        paletteNum = IndexOfSpritePaletteTag(TAG_FACTORY_BALL_GRAY);
         if (sFactorySelectScreen->selectingMonsState == FRONTIER_PARTY_SIZE 
          && sFactorySelectScreen->mons[cursorPos].selectedId == 1)
         {
@@ -1422,7 +1403,7 @@ static void Select_HandleMonSelectionChange(void)
     }
     else // Select a mon.
     {
-        paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED);
+        paletteNum = IndexOfSpritePaletteTag(TAG_PAL_FACTORY_BALL_SELECTED);
         sFactorySelectScreen->mons[cursorPos].selectedId = sFactorySelectScreen->selectingMonsState;
         sFactorySelectScreen->selectingMonsState++;
     }
@@ -1435,9 +1416,9 @@ static void Select_SetBallSpritePaletteNum(u8 id)
     u8 palNum;
 
     if (sFactorySelectScreen->mons[id].selectedId)
-        palNum = IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED);
+        palNum = IndexOfSpritePaletteTag(TAG_PAL_FACTORY_BALL_SELECTED);
     else
-        palNum = IndexOfSpritePaletteTag(PALTAG_BALL_GRAY);
+        palNum = IndexOfSpritePaletteTag(TAG_FACTORY_BALL_GRAY);
 
     gSprites[sFactorySelectScreen->mons[id].ballSpriteId].oam.paletteNum = palNum;
 }
@@ -2839,9 +2820,9 @@ static void Swap_Task_SlideCycleBalls(u8 taskId)
                 lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x;
                 gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x = -16;
                 if (sFactorySwapScreen->inEnemyScreen == TRUE)
-                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED);
+                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].oam.paletteNum = IndexOfSpritePaletteTag(TAG_PAL_FACTORY_BALL_SELECTED);
                 else
-                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_GRAY);
+                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].oam.paletteNum = IndexOfSpritePaletteTag(TAG_FACTORY_BALL_GRAY);
 
                 gTasks[taskId].tBallCycled(i) = TRUE;
             }
@@ -3426,7 +3407,7 @@ static void Swap_InitAllSprites(void)
     struct SpriteTemplate spriteTemplate;
 
     spriteTemplate = sSpriteTemplate_Swap_Pokeball;
-    spriteTemplate.paletteTag = PALTAG_BALL_SELECTED;
+    spriteTemplate.paletteTag = TAG_PAL_FACTORY_BALL_SELECTED;
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
@@ -3452,38 +3433,38 @@ static void Swap_InitAllSprites(void)
     // The sprite template for the selector arrow is re-used
     // with the tiles swapped out
     spriteTemplate = sSpriteTemplate_Swap_Arrow;
-    spriteTemplate.tileTag = GFXTAG_ACTION_BOX_LEFT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_BOX_LEFT;
     sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0][0] = CreateSprite(&spriteTemplate, DISPLAY_WIDTH, 120, 10);
 
     spriteTemplate = sSpriteTemplate_Swap_MenuHighlightLeft;
-    spriteTemplate.tileTag = GFXTAG_ACTION_BOX_RIGHT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_BOX_RIGHT;
     sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0][1] = CreateSprite(&spriteTemplate, DISPLAY_WIDTH + 16, 120, 10);
     sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0][2] = CreateSprite(&spriteTemplate, DISPLAY_WIDTH + 48, 120, 10);
 
     spriteTemplate = sSpriteTemplate_Swap_Arrow;
-    spriteTemplate.tileTag = GFXTAG_ACTION_HIGHLIGHT_LEFT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_HIGHLIGHT_LEFT;
     sFactorySwapScreen->pkmnForSwapButtonSpriteIds[1][0] = CreateSprite(&spriteTemplate, DISPLAY_WIDTH, 120, 1);
 
     spriteTemplate = sSpriteTemplate_Swap_MenuHighlightLeft;
-    spriteTemplate.tileTag = GFXTAG_ACTION_HIGHLIGHT_MIDDLE;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_HIGHLIGHT_MIDDLE;
     sFactorySwapScreen->pkmnForSwapButtonSpriteIds[1][1] = CreateSprite(&spriteTemplate, DISPLAY_WIDTH + 16, 120, 1);
-    spriteTemplate.tileTag = GFXTAG_ACTION_HIGHLIGHT_RIGHT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_HIGHLIGHT_RIGHT;
     sFactorySwapScreen->pkmnForSwapButtonSpriteIds[1][2] = CreateSprite(&spriteTemplate, DISPLAY_WIDTH + 48, 120, 1);
 
     spriteTemplate = sSpriteTemplate_Swap_Arrow;
-    spriteTemplate.tileTag = GFXTAG_ACTION_BOX_LEFT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_BOX_LEFT;
     sFactorySwapScreen->cancelButtonSpriteIds[0][0] = CreateSprite(&spriteTemplate, x, 144, 10);
 
     spriteTemplate = sSpriteTemplate_Swap_MenuHighlightLeft;
-    spriteTemplate.tileTag = GFXTAG_ACTION_BOX_RIGHT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_BOX_RIGHT;
     sFactorySwapScreen->cancelButtonSpriteIds[0][1] = CreateSprite(&spriteTemplate, x + 16, 144, 10);
 
     spriteTemplate = sSpriteTemplate_Swap_Arrow;
-    spriteTemplate.tileTag = GFXTAG_ACTION_HIGHLIGHT_LEFT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_HIGHLIGHT_LEFT;
     sFactorySwapScreen->cancelButtonSpriteIds[1][0] = CreateSprite(&spriteTemplate, x, 144, 1);
 
     spriteTemplate = sSpriteTemplate_Swap_MenuHighlightLeft;
-    spriteTemplate.tileTag = GFXTAG_ACTION_HIGHLIGHT_RIGHT;
+    spriteTemplate.tileTag = TAG_GFX_FACTORY_ACTION_HIGHLIGHT_RIGHT;
     sFactorySwapScreen->cancelButtonSpriteIds[1][1] = CreateSprite(&spriteTemplate, x + 16, 144, 1);
 
     for (i = 0; i < 2; i++)

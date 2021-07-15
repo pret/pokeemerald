@@ -12,6 +12,7 @@
 #include "util.h"
 #include "constants/battle.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 static void AnimRainDrop(struct Sprite *);
 static void AnimRainDrop_Step(struct Sprite *);
@@ -77,8 +78,8 @@ static const union AnimCmd *const sAnims_RainDrop[] =
 
 const struct SpriteTemplate gRainDropSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_RAIN_DROPS,
-    .paletteTag = ANIM_TAG_RAIN_DROPS,
+    .tileTag = TAG_BATTLE_ANIM_RAIN_DROPS,
+    .paletteTag = TAG_BATTLE_ANIM_RAIN_DROPS,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = sAnims_RainDrop,
     .images = NULL,
@@ -113,8 +114,8 @@ static const union AnimCmd *const sAnims_WaterBubbleProjectile[] =
 
 const struct SpriteTemplate gWaterBubbleProjectileSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BUBBLE,
-    .paletteTag = ANIM_TAG_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = sAnims_WaterBubbleProjectile,
     .images = NULL,
@@ -154,8 +155,8 @@ static const union AffineAnimCmd *const sAffineAnims_AuroraBeamRing[] =
 
 const struct SpriteTemplate gAuroraBeamRingSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_RAINBOW_RINGS,
-    .paletteTag = ANIM_TAG_RAINBOW_RINGS,
+    .tileTag = TAG_BATTLE_ANIM_RAINBOW_RINGS,
+    .paletteTag = TAG_BATTLE_ANIM_RAINBOW_RINGS,
     .oam = &gOamData_AffineDouble_ObjNormal_8x16,
     .anims = sAnims_AuroraBeamRing,
     .images = NULL,
@@ -179,8 +180,8 @@ const union AnimCmd *const gAnims_WaterMudOrb[] =
 
 const struct SpriteTemplate gHydroPumpOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WATER_ORB,
-    .paletteTag = ANIM_TAG_WATER_ORB,
+    .tileTag = TAG_BATTLE_ANIM_WATER_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_WATER_ORB,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gAnims_WaterMudOrb,
     .images = NULL,
@@ -190,8 +191,8 @@ const struct SpriteTemplate gHydroPumpOrbSpriteTemplate =
 
 const struct SpriteTemplate gMudShotOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BROWN_ORB,
-    .paletteTag = ANIM_TAG_BROWN_ORB,
+    .tileTag = TAG_BATTLE_ANIM_BROWN_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_BROWN_ORB,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gAnims_WaterMudOrb,
     .images = NULL,
@@ -201,8 +202,8 @@ const struct SpriteTemplate gMudShotOrbSpriteTemplate =
 
 const struct SpriteTemplate gSignalBeamRedOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GLOWY_RED_ORB,
-    .paletteTag = ANIM_TAG_GLOWY_RED_ORB,
+    .tileTag = TAG_BATTLE_ANIM_GLOWY_RED_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_GLOWY_RED_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -212,8 +213,8 @@ const struct SpriteTemplate gSignalBeamRedOrbSpriteTemplate =
 
 const struct SpriteTemplate gSignalBeamGreenOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GLOWY_GREEN_ORB,
-    .paletteTag = ANIM_TAG_GLOWY_GREEN_ORB,
+    .tileTag = TAG_BATTLE_ANIM_GLOWY_GREEN_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_GLOWY_GREEN_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -236,8 +237,8 @@ static const union AnimCmd *const sAnims_FlamethrowerFlame[] =
 
 const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FlamethrowerFlame,
     .images = NULL,
@@ -247,8 +248,8 @@ const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
 
 const struct SpriteTemplate gPsywaveRingSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BLUE_RING,
-    .paletteTag = ANIM_TAG_BLUE_RING,
+    .tileTag = TAG_BATTLE_ANIM_BLUE_RING,
+    .paletteTag = TAG_BATTLE_ANIM_BLUE_RING,
     .oam = &gOamData_AffineDouble_ObjNormal_16x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -282,8 +283,8 @@ static const union AffineAnimCmd *const sAffineAnims_HydroCannonBeam[] =
 
 const struct SpriteTemplate gHydroCannonChargeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WATER_ORB,
-    .paletteTag = ANIM_TAG_WATER_ORB,
+    .tileTag = TAG_BATTLE_ANIM_WATER_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_WATER_ORB,
     .oam = &gOamData_AffineDouble_ObjBlend_16x16,
     .anims = gAnims_WaterMudOrb,
     .images = NULL,
@@ -293,8 +294,8 @@ const struct SpriteTemplate gHydroCannonChargeSpriteTemplate =
 
 const struct SpriteTemplate gHydroCannonBeamSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WATER_ORB,
-    .paletteTag = ANIM_TAG_WATER_ORB,
+    .tileTag = TAG_BATTLE_ANIM_WATER_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_WATER_ORB,
     .oam = &gOamData_AffineDouble_ObjBlend_16x16,
     .anims = gAnims_WaterMudOrb,
     .images = NULL,
@@ -326,8 +327,8 @@ static const union AnimCmd *const sAnims_WaterGunDroplet[] =
 
 const struct SpriteTemplate gWaterGunProjectileSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gAnims_WaterBubble,
     .images = NULL,
@@ -337,8 +338,8 @@ const struct SpriteTemplate gWaterGunProjectileSpriteTemplate =
 
 const struct SpriteTemplate gWaterGunDropletSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineDouble_ObjBlend_16x16,
     .anims = sAnims_WaterGunDroplet,
     .images = NULL,
@@ -348,8 +349,8 @@ const struct SpriteTemplate gWaterGunDropletSpriteTemplate =
 
 const struct SpriteTemplate gSmallBubblePairSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS, // ice_crystals_4, which are bubbles
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS, // ice_crystals_4, which are bubbles
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gAnims_SmallBubblePair,
     .images = NULL,
@@ -359,8 +360,8 @@ const struct SpriteTemplate gSmallBubblePairSpriteTemplate =
 
 const struct SpriteTemplate gSmallDriftingBubblesSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -371,8 +372,8 @@ const struct SpriteTemplate gSmallDriftingBubblesSpriteTemplate =
 // Used by Water Spout / Water Sport
 const struct SpriteTemplate gSmallWaterOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GLOWY_BLUE_ORB,
-    .paletteTag = ANIM_TAG_GLOWY_BLUE_ORB,
+    .tileTag = TAG_BATTLE_ANIM_GLOWY_BLUE_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_GLOWY_BLUE_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -443,8 +444,8 @@ static const union AffineAnimCmd *const sAffineAnims_WeatherBallWaterDown[] =
 
 const struct SpriteTemplate gWaterPulseBubbleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = sAnims_WaterPulseBubble,
     .images = NULL,
@@ -454,8 +455,8 @@ const struct SpriteTemplate gWaterPulseBubbleSpriteTemplate =
 
 const struct SpriteTemplate gWaterPulseRingBubbleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_8x8,
     .anims = sAnims_WaterPulseBubble,
     .images = NULL,
@@ -465,8 +466,8 @@ const struct SpriteTemplate gWaterPulseRingBubbleSpriteTemplate =
 
 const struct SpriteTemplate gWeatherBallWaterDownSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = sAnims_WeatherBallWaterDown,
     .images = NULL,
@@ -620,7 +621,7 @@ static void AnimAuroraBeamRings_Step(struct Sprite *sprite)
 void AnimTask_RotateAuroraRingColors(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
-    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(ANIM_TAG_RAINBOW_RINGS) * 16 + 256;
+    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(TAG_BATTLE_ANIM_RAINBOW_RINGS) * 16 + 256;
     gTasks[taskId].func = AnimTask_RotateAuroraRingColors_Step;
 }
 

@@ -27,6 +27,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 // This file's functions.
 static void InitArenaChallenge(void);
@@ -399,8 +400,6 @@ static const s8 sMindRatings[] =
     [MOVE_PSYCHO_BOOST] = 1,
 };
 
-#define TAG_JUDGEMENT_ICON 1000
-
 static const struct OamData sJudgementIconOamData =
 {
     .y = 0,
@@ -453,7 +452,7 @@ static const union AnimCmd *const sJudgementIconAnimCmds[] =
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
     .tileTag = TAG_JUDGEMENT_ICON,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sJudgementIconOamData,
     .anims = sJudgementIconAnimCmds,
     .images = NULL,

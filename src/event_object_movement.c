@@ -27,6 +27,7 @@
 #include "constants/field_effects.h"
 #include "constants/items.h"
 #include "constants/mauville_old_man.h"
+#include "constants/sprite_tags.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
 

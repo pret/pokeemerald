@@ -5,6 +5,7 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 static void AnimBonemerangProjectile(struct Sprite *);
 static void AnimBoneHitProjectile(struct Sprite *);
@@ -51,8 +52,8 @@ static const union AffineAnimCmd *const sAffineAnims_SpinningBone[] =
 
 const struct SpriteTemplate gBonemerangSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BONE,
-    .paletteTag = ANIM_TAG_BONE,
+    .tileTag = TAG_BATTLE_ANIM_BONE,
+    .paletteTag = TAG_BATTLE_ANIM_BONE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -62,8 +63,8 @@ const struct SpriteTemplate gBonemerangSpriteTemplate =
 
 const struct SpriteTemplate gSpinningBoneSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BONE,
-    .paletteTag = ANIM_TAG_BONE,
+    .tileTag = TAG_BATTLE_ANIM_BONE,
+    .paletteTag = TAG_BATTLE_ANIM_BONE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -73,8 +74,8 @@ const struct SpriteTemplate gSpinningBoneSpriteTemplate =
 
 const struct SpriteTemplate gSandAttackDirtSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MUD_SAND,
-    .paletteTag = ANIM_TAG_MUD_SAND,
+    .tileTag = TAG_BATTLE_ANIM_MUD_SAND,
+    .paletteTag = TAG_BATTLE_ANIM_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -95,8 +96,8 @@ static const union AnimCmd *const sAnims_MudSlapMud[] =
 
 const struct SpriteTemplate gMudSlapMudSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MUD_SAND,
-    .paletteTag = ANIM_TAG_MUD_SAND,
+    .tileTag = TAG_BATTLE_ANIM_MUD_SAND,
+    .paletteTag = TAG_BATTLE_ANIM_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_MudSlapMud,
     .images = NULL,
@@ -106,8 +107,8 @@ const struct SpriteTemplate gMudSlapMudSpriteTemplate =
 
 const struct SpriteTemplate gMudsportMudSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MUD_SAND,
-    .paletteTag = ANIM_TAG_MUD_SAND,
+    .tileTag = TAG_BATTLE_ANIM_MUD_SAND,
+    .paletteTag = TAG_BATTLE_ANIM_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -117,8 +118,8 @@ const struct SpriteTemplate gMudsportMudSpriteTemplate =
 
 const struct SpriteTemplate gDirtPlumeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MUD_SAND,
-    .paletteTag = ANIM_TAG_MUD_SAND,
+    .tileTag = TAG_BATTLE_ANIM_MUD_SAND,
+    .paletteTag = TAG_BATTLE_ANIM_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -128,8 +129,8 @@ const struct SpriteTemplate gDirtPlumeSpriteTemplate =
 
 const struct SpriteTemplate gDirtMoundSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_DIRT_MOUND,
-    .paletteTag = ANIM_TAG_DIRT_MOUND,
+    .tileTag = TAG_BATTLE_ANIM_DIRT_MOUND,
+    .paletteTag = TAG_BATTLE_ANIM_DIRT_MOUND,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

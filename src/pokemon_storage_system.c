@@ -223,10 +223,10 @@ enum {
     PALTAG_4, // Unused
     PALTAG_5, // Unused
     PALTAG_DISPLAY_MON,
-    PALTAG_MISC_1,
+    TAG_PAL_BERRY_BLENDER_MISC_1,
     PALTAG_MARKING_COMBO,
     PALTAG_BOX_TITLE,
-    PALTAG_MISC_2,
+    TAG_PAL_BERRY_BLENDER_MISC_2,
     PALTAG_ITEM_ICON_0,
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
@@ -1054,7 +1054,7 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const struct SpritePalette gWaveformSpritePalette =
 {
-    sWaveform_Pal, PALTAG_MISC_2
+    sWaveform_Pal, TAG_PAL_BERRY_BLENDER_MISC_2
 };
 
 static const struct SpriteSheet sSpriteSheet_Waveform =
@@ -1193,7 +1193,7 @@ static const union AnimCmd *const sAnims_Waveform[] =
 static const struct SpriteTemplate sSpriteTemplate_Waveform =
 {
     .tileTag = GFXTAG_WAVEFORM,
-    .paletteTag = PALTAG_MISC_2,
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_2,
     .oam = &sOamData_Waveform,
     .anims = sAnims_Waveform,
     .images = NULL,
@@ -1319,7 +1319,7 @@ static const union AnimCmd *const sAnims_Arrow[] =
 static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
     .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_MISC_2,
+    .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_2,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,
     .images = NULL,
@@ -2866,7 +2866,7 @@ static void Task_DepositMenu(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_DEPOSIT_IN_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, TAG_PAL_BERRY_BLENDER_MISC_1, 3, FALSE);
         CreateChooseBoxMenuSprites(sDepositBoxId);
         sStorage->state++;
         break;
@@ -3521,7 +3521,7 @@ static void Task_JumpBox(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_JUMP_TO_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, TAG_PAL_BERRY_BLENDER_MISC_1, 3, FALSE);
         CreateChooseBoxMenuSprites(StorageGetCurrentBox());
         sStorage->state++;
         break;
@@ -7761,7 +7761,7 @@ static void CreateCursorSprites(void)
 
     struct SpritePalette spritePalettes[] =
     {
-        {sHandCursor_Pal, PALTAG_MISC_1},
+        {sHandCursor_Pal, TAG_PAL_BERRY_BLENDER_MISC_1},
         {}
     };
 
@@ -7811,7 +7811,7 @@ static void CreateCursorSprites(void)
     static const struct SpriteTemplate sSpriteTemplate_Cursor =
     {
         .tileTag = GFXTAG_CURSOR,
-        .paletteTag = PALTAG_MISC_2,
+        .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_2,
         .oam = &sOamData_Cursor,
         .anims = sAnims_Cursor,
         .images = NULL,
@@ -7822,7 +7822,7 @@ static void CreateCursorSprites(void)
     static const struct SpriteTemplate sSpriteTemplate_CursorShadow =
     {
         .tileTag = GFXTAG_CURSOR_SHADOW,
-        .paletteTag = PALTAG_MISC_2,
+        .paletteTag = TAG_PAL_BERRY_BLENDER_MISC_2,
         .oam = &sOamData_CursorShadow,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -7832,8 +7832,8 @@ static void CreateCursorSprites(void)
 
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
-    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(PALTAG_MISC_2); // White hand, normal
-    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(PALTAG_MISC_1); // Yellow hand, when auto-action is on
+    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(TAG_PAL_BERRY_BLENDER_MISC_2); // White hand, normal
+    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(TAG_PAL_BERRY_BLENDER_MISC_1); // Yellow hand, when auto-action is on
 
     GetCursorCoordsByPos(sCursorArea, sCursorPosition, &x, &y);
     spriteId = CreateSprite(&sSpriteTemplate_Cursor, x, y, 6);

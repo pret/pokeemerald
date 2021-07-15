@@ -58,6 +58,7 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 #include "constants/trainers.h"
 #include "cable_club.h"
 
@@ -2090,8 +2091,8 @@ static void SpriteCB_VsLetter(struct Sprite *sprite)
 
     if (sprite->affineAnimEnded)
     {
-        FreeSpriteTilesByTag(ANIM_SPRITES_START);
-        FreeSpritePaletteByTag(ANIM_SPRITES_START);
+        FreeSpriteTilesByTag(TAG_VS_LETTERS);
+        FreeSpritePaletteByTag(TAG_VS_LETTERS);
         FreeSpriteOamMatrix(sprite);
         DestroySprite(sprite);
     }

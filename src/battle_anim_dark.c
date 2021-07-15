@@ -8,6 +8,7 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 static void AnimUnusedBagSteal(struct Sprite *);
 static void AnimUnusedBagSteal_Step(struct Sprite *);
@@ -28,8 +29,8 @@ static void AnimTask_MetallicShine_Step(u8);
 // Unused
 static const struct SpriteTemplate sUnusedBagStealSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_TIED_BAG,
-    .paletteTag = ANIM_TAG_TIED_BAG,
+    .tileTag = TAG_BATTLE_ANIM_TIED_BAG,
+    .paletteTag = TAG_BATTLE_ANIM_TIED_BAG,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -99,8 +100,8 @@ const union AffineAnimCmd *const gAffineAnims_Bite[] =
 
 const struct SpriteTemplate gSharpTeethSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SHARP_TEETH,
-    .paletteTag = ANIM_TAG_SHARP_TEETH,
+    .tileTag = TAG_BATTLE_ANIM_SHARP_TEETH,
+    .paletteTag = TAG_BATTLE_ANIM_SHARP_TEETH,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -110,8 +111,8 @@ const struct SpriteTemplate gSharpTeethSpriteTemplate =
 
 const struct SpriteTemplate gClampJawSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CLAMP,
-    .paletteTag = ANIM_TAG_CLAMP,
+    .tileTag = TAG_BATTLE_ANIM_CLAMP,
+    .paletteTag = TAG_BATTLE_ANIM_CLAMP,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -141,8 +142,8 @@ static const union AffineAnimCmd *const sAffineAnims_TearDrop[] =
 
 const struct SpriteTemplate gTearDropSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -178,8 +179,8 @@ static const union AnimCmd *const sAnims_ClawSlash[] =
 
 const struct SpriteTemplate gClawSlashSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CLAW_SLASH,
-    .paletteTag = ANIM_TAG_CLAW_SLASH,
+    .tileTag = TAG_BATTLE_ANIM_CLAW_SLASH,
+    .paletteTag = TAG_BATTLE_ANIM_CLAW_SLASH,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_ClawSlash,
     .images = NULL,

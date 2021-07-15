@@ -23,8 +23,9 @@
 #include "sound.h"
 #include "util.h"
 #include "title_screen.h"
-#include "constants/rgb.h"
 #include "constants/battle_anim.h"
+#include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 /*
     The intro is grouped into the following scenes
@@ -1774,8 +1775,8 @@ static void Task_Scene3_LoadGroudon(u8 taskId)
         LZDecompressVram(gIntroGroudon_Tilemap, (void *)(BG_CHAR_ADDR(3)));
         LZDecompressVram(gIntroLegendBg_Gfx, (void *)(BG_CHAR_ADDR(1)));
         LZDecompressVram(gIntroGroudonBg_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
-        LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
-        LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
+        LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_ROCKS)]);
+        LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_ROCKS)]);
         CpuCopy16(gIntro3Bg_Pal, gPlttBufferUnfaded, sizeof(gIntro3Bg_Pal));
         gTasks[taskId].func = Task_Scene3_InitGroudonBg;
     }

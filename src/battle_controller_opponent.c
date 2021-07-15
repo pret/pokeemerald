@@ -31,6 +31,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/sprite_tags.h"
 #include "constants/trainers.h"
 #include "trainer_hill.h"
 
@@ -256,8 +257,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
                 gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
                 gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = FALSE;
                 gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = FALSE;
-                FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+                FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
             }
             else
                 return;
@@ -269,8 +270,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
                 if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim 
                  && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim)
                 {
-                    FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                    FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                    FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+                    FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
                 }
                 else
                     return;
@@ -389,8 +390,8 @@ static void TryShinyAnimAfterMonAnim(void)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
         OpponentBufferExecCompleted();
     }
 }
@@ -483,8 +484,8 @@ static void SwitchIn_ShowHealthbox(void)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 0);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
         StartHealthboxSlideIn(gActiveBattler);

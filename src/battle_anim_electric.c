@@ -1,9 +1,10 @@
 #include "global.h"
 #include "battle_anim.h"
-#include "constants/rgb.h"
 #include "trig.h"
-#include "constants/songs.h"
 #include "sound.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 static void AnimLightning(struct Sprite *);
 static void AnimLightning_Step(struct Sprite *);
@@ -54,8 +55,8 @@ static const union AnimCmd *const sAnims_Lightning[] =
 
 const struct SpriteTemplate gLightningSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_LIGHTNING,
-    .paletteTag = ANIM_TAG_LIGHTNING,
+    .tileTag = TAG_BATTLE_ANIM_LIGHTNING,
+    .paletteTag = TAG_BATTLE_ANIM_LIGHTNING,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_Lightning,
     .images = NULL,
@@ -79,8 +80,8 @@ static const union AffineAnimCmd *const sAffineAnims_UnusedSpinningFist[] =
 // Unused
 static const struct SpriteTemplate sUnusedSpinningFistSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_HANDS_AND_FEET,
-    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .tileTag = TAG_BATTLE_ANIM_HANDS_AND_FEET,
+    .paletteTag = TAG_BATTLE_ANIM_HANDS_AND_FEET,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -107,8 +108,8 @@ static const union AnimCmd *const sAnims_UnusedCirclingShock[] =
 // Unused
 static const struct SpriteTemplate sUnusedCirclingShockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SHOCK,
-    .paletteTag = ANIM_TAG_SHOCK,
+    .tileTag = TAG_BATTLE_ANIM_SHOCK,
+    .paletteTag = TAG_BATTLE_ANIM_SHOCK,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_UnusedCirclingShock,
     .images = NULL,
@@ -118,8 +119,8 @@ static const struct SpriteTemplate sUnusedCirclingShockSpriteTemplate =
 
 const struct SpriteTemplate gSparkElectricitySpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK_2,
-    .paletteTag = ANIM_TAG_SPARK_2,
+    .tileTag = TAG_BATTLE_ANIM_SPARK_2,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK_2,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -129,8 +130,8 @@ const struct SpriteTemplate gSparkElectricitySpriteTemplate =
 
 const struct SpriteTemplate gZapCannonBallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BLACK_BALL_2,
-    .paletteTag = ANIM_TAG_BLACK_BALL_2,
+    .tileTag = TAG_BATTLE_ANIM_BLACK_BALL_2,
+    .paletteTag = TAG_BATTLE_ANIM_BLACK_BALL_2,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -151,8 +152,8 @@ static const union AffineAnimCmd *const sAffineAnims_FlashingSpark[] =
 
 const struct SpriteTemplate gZapCannonSparkSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK_2,
-    .paletteTag = ANIM_TAG_SPARK_2,
+    .tileTag = TAG_BATTLE_ANIM_SPARK_2,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK_2,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -188,8 +189,8 @@ static const union AffineAnimCmd *const sAffineAnims_ThunderboltOrb[] =
 
 const struct SpriteTemplate gThunderboltOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SHOCK_3,
-    .paletteTag = ANIM_TAG_SHOCK_3,
+    .tileTag = TAG_BATTLE_ANIM_SHOCK_3,
+    .paletteTag = TAG_BATTLE_ANIM_SHOCK_3,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_ThunderboltOrb,
     .images = NULL,
@@ -199,8 +200,8 @@ const struct SpriteTemplate gThunderboltOrbSpriteTemplate =
 
 const struct SpriteTemplate gSparkElectricityFlashingSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK_2,
-    .paletteTag = ANIM_TAG_SPARK_2,
+    .tileTag = TAG_BATTLE_ANIM_SPARK_2,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK_2,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -210,8 +211,8 @@ const struct SpriteTemplate gSparkElectricityFlashingSpriteTemplate =
 
 const struct SpriteTemplate gElectricitySpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK_2,
-    .paletteTag = ANIM_TAG_SPARK_2,
+    .tileTag = TAG_BATTLE_ANIM_SPARK_2,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK_2,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -221,8 +222,8 @@ const struct SpriteTemplate gElectricitySpriteTemplate =
 
 const struct SpriteTemplate gElectricBoltSegmentSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK,
-    .paletteTag = ANIM_TAG_SPARK,
+    .tileTag = TAG_BATTLE_ANIM_SPARK,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -232,8 +233,8 @@ const struct SpriteTemplate gElectricBoltSegmentSpriteTemplate =
 
 const struct SpriteTemplate gThunderWaveSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK_H,
-    .paletteTag = ANIM_TAG_SPARK_H,
+    .tileTag = TAG_BATTLE_ANIM_SPARK_H,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK_H,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -287,8 +288,8 @@ static const union AnimCmd *const sAnims_ElectricChargingParticles[] =
 
 const struct SpriteTemplate gElectricChargingParticlesSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ELECTRIC_ORBS,
-    .paletteTag = ANIM_TAG_ELECTRIC_ORBS,
+    .tileTag = TAG_BATTLE_ANIM_ELECTRIC_ORBS,
+    .paletteTag = TAG_BATTLE_ANIM_ELECTRIC_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = sAnims_ElectricChargingParticles,
     .images = NULL,
@@ -335,8 +336,8 @@ static const union AffineAnimCmd *const sAffineAnims_GrowingElectricOrb[] =
 
 const struct SpriteTemplate gGrowingChargeOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -360,8 +361,8 @@ static const union AnimCmd *const sAnims_ElectricPuff[] =
 
 const struct SpriteTemplate gElectricPuffSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ELECTRICITY,
-    .paletteTag = ANIM_TAG_ELECTRICITY,
+    .tileTag = TAG_BATTLE_ANIM_ELECTRICITY,
+    .paletteTag = TAG_BATTLE_ANIM_ELECTRICITY,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_ElectricPuff,
     .images = NULL,
@@ -371,8 +372,8 @@ const struct SpriteTemplate gElectricPuffSpriteTemplate =
 
 const struct SpriteTemplate gVoltTackleOrbSlideSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -425,8 +426,8 @@ static const union AffineAnimCmd *const sAffineAnims_VoltTackleBolt[] =
 
 const struct SpriteTemplate gVoltTackleBoltSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK,
-    .paletteTag = ANIM_TAG_SPARK,
+    .tileTag = TAG_BATTLE_ANIM_SPARK,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK,
     .oam = &gOamData_AffineDouble_ObjNormal_8x16,
     .anims = sAnims_VoltTackleBolt,
     .images = NULL,
@@ -436,8 +437,8 @@ const struct SpriteTemplate gVoltTackleBoltSpriteTemplate =
 
 const struct SpriteTemplate gGrowingShockWaveOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .tileTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -447,8 +448,8 @@ const struct SpriteTemplate gGrowingShockWaveOrbSpriteTemplate =
 
 const struct SpriteTemplate gShockWaveProgressingBoltSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SPARK,
-    .paletteTag = ANIM_TAG_SPARK,
+    .tileTag = TAG_BATTLE_ANIM_SPARK,
+    .paletteTag = TAG_BATTLE_ANIM_SPARK,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

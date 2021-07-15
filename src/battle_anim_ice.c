@@ -12,6 +12,7 @@
 #include "trig.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 struct HailStruct {
     s32 x:10;
@@ -64,8 +65,8 @@ static const union AnimCmd *const sAnims_Unused[] =
 // Unused
 static const struct SpriteTemplate sUnusedIceCrystalThrowSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -154,8 +155,8 @@ static const union AffineAnimCmd *const sAffineAnims_IceCrystalSpiralInwardLarge
 
 const struct SpriteTemplate gIceCrystalSpiralInwardLarge =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineDouble_ObjBlend_8x16,
     .anims = sAnims_IceCrystalLarge,
     .images = NULL,
@@ -165,8 +166,8 @@ const struct SpriteTemplate gIceCrystalSpiralInwardLarge =
 
 const struct SpriteTemplate gIceCrystalSpiralInwardSmall =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjBlend_8x8,
     .anims = sAnims_IceCrystalSmall,
     .images = NULL,
@@ -187,8 +188,8 @@ static const union AffineAnimCmd *const sAffineAnims_IceBeamInnerCrystal[] =
 
 const struct SpriteTemplate gIceBeamInnerCrystalSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x16,
     .anims = sAnims_IceCrystalLarge,
     .images = NULL,
@@ -198,8 +199,8 @@ const struct SpriteTemplate gIceBeamInnerCrystalSpriteTemplate =
 
 const struct SpriteTemplate gIceBeamOuterCrystalSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjBlend_8x8,
     .anims = sAnims_IceCrystalSmall,
     .images = NULL,
@@ -222,8 +223,8 @@ static const union AffineAnimCmd *const sAffineAnims_IceCrystalHit[] =
 
 const struct SpriteTemplate gIceCrystalHitLargeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x16,
     .anims = sAnims_IceCrystalLarge,
     .images = NULL,
@@ -233,8 +234,8 @@ const struct SpriteTemplate gIceCrystalHitLargeSpriteTemplate =
 
 const struct SpriteTemplate gIceCrystalHitSmallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x8,
     .anims = sAnims_IceCrystalSmall,
     .images = NULL,
@@ -244,8 +245,8 @@ const struct SpriteTemplate gIceCrystalHitSmallSpriteTemplate =
 
 const struct SpriteTemplate gSwirlingSnowballSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = sAnims_Snowball,
     .images = NULL,
@@ -255,8 +256,8 @@ const struct SpriteTemplate gSwirlingSnowballSpriteTemplate =
 
 const struct SpriteTemplate gBlizzardIceCrystalSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_BlizzardIceCrystal,
     .images = NULL,
@@ -266,8 +267,8 @@ const struct SpriteTemplate gBlizzardIceCrystalSpriteTemplate =
 
 const struct SpriteTemplate gPowderSnowSnowballSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = sAnims_Snowball,
     .images = NULL,
@@ -294,8 +295,8 @@ static const union AnimCmd *const sAnims_IceGroundSpike[] =
 
 const struct SpriteTemplate gIceGroundSpikeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_SPIKES,
-    .paletteTag = ANIM_TAG_ICE_SPIKES,
+    .tileTag = TAG_BATTLE_ANIM_ICE_SPIKES,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_SPIKES,
     .oam = &gOamData_AffineOff_ObjBlend_8x16,
     .anims = sAnims_IceGroundSpike,
     .images = NULL,
@@ -317,8 +318,8 @@ static const union AnimCmd *const sAnims_Cloud[] =
 
 const struct SpriteTemplate gMistCloudSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MIST_CLOUD,
-    .paletteTag = ANIM_TAG_MIST_CLOUD,
+    .tileTag = TAG_BATTLE_ANIM_MIST_CLOUD,
+    .paletteTag = TAG_BATTLE_ANIM_MIST_CLOUD,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
     .anims = sAnims_Cloud,
     .images = NULL,
@@ -328,8 +329,8 @@ const struct SpriteTemplate gMistCloudSpriteTemplate =
 
 const struct SpriteTemplate gSmogCloudSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
-    .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
+    .tileTag = TAG_BATTLE_ANIM_PURPLE_GAS_CLOUD,
+    .paletteTag = TAG_BATTLE_ANIM_PURPLE_GAS_CLOUD,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
     .anims = sAnims_Cloud,
     .images = NULL,
@@ -344,8 +345,8 @@ static const u8 sHazeBlendAmounts[] =
 
 const struct SpriteTemplate gMistBallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -360,8 +361,8 @@ static const u8 wMistBlendAmounts[] =
 
 const struct SpriteTemplate gPoisonGasCloudSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
-    .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
+    .tileTag = TAG_BATTLE_ANIM_PURPLE_GAS_CLOUD,
+    .paletteTag = TAG_BATTLE_ANIM_PURPLE_GAS_CLOUD,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
     .anims = sAnims_Cloud,
     .images = NULL,
@@ -421,8 +422,8 @@ static const union AffineAnimCmd *const sAffineAnims_WeatherBallIceDown[] =
 
 const struct SpriteTemplate gHailParticleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_HAIL,
-    .paletteTag = ANIM_TAG_HAIL,
+    .tileTag = TAG_BATTLE_ANIM_HAIL,
+    .paletteTag = TAG_BATTLE_ANIM_HAIL,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -432,8 +433,8 @@ const struct SpriteTemplate gHailParticleSpriteTemplate =
 
 const struct SpriteTemplate gWeatherBallIceDownSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_HAIL,
-    .paletteTag = ANIM_TAG_HAIL,
+    .tileTag = TAG_BATTLE_ANIM_HAIL,
+    .paletteTag = TAG_BATTLE_ANIM_HAIL,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -503,8 +504,8 @@ static const union AffineAnimCmd *const sAffineAnims_IceBallChunk[] =
 
 const struct SpriteTemplate gIceBallChunkSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CHUNK,
-    .paletteTag = ANIM_TAG_ICE_CHUNK,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CHUNK,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CHUNK,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = sAnims_IceBallChunk,
     .images = NULL,
@@ -514,8 +515,8 @@ const struct SpriteTemplate gIceBallChunkSpriteTemplate =
 
 const struct SpriteTemplate gIceBallImpactShardSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
-    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
+    .paletteTag = TAG_BATTLE_ANIM_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = sAnims_IceCrystalSmall,
     .images = NULL,

@@ -1,11 +1,12 @@
 #include "global.h"
 #include "battle_anim.h"
-#include "constants/rgb.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "util.h"
 #include "task.h"
 #include "trig.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/sprite_tags.h"
 
 static void AnimFireSpiralInward(struct Sprite *);
 static void AnimFireSpread(struct Sprite *);
@@ -63,8 +64,8 @@ static const union AnimCmd *const sAnims_FireSpiralSpread[] =
 
 const struct SpriteTemplate gFireSpiralInwardSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FireSpiralSpread,
     .images = NULL,
@@ -74,8 +75,8 @@ const struct SpriteTemplate gFireSpiralInwardSpriteTemplate =
 
 const struct SpriteTemplate gFireSpreadSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FireSpiralSpread,
     .images = NULL,
@@ -130,8 +131,8 @@ static const union AffineAnimCmd *const sAffineAnims_LargeFlame[] =
 
 const struct SpriteTemplate gLargeFlameSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_FIRE,
-    .paletteTag = ANIM_TAG_FIRE,
+    .tileTag = TAG_BATTLE_ANIM_FIRE,
+    .paletteTag = TAG_BATTLE_ANIM_FIRE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_LargeFlame,
     .images = NULL,
@@ -141,8 +142,8 @@ const struct SpriteTemplate gLargeFlameSpriteTemplate =
 
 const struct SpriteTemplate gLargeFlameScatterSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_FIRE,
-    .paletteTag = ANIM_TAG_FIRE,
+    .tileTag = TAG_BATTLE_ANIM_FIRE,
+    .paletteTag = TAG_BATTLE_ANIM_FIRE,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_LargeFlame,
     .images = NULL,
@@ -152,8 +153,8 @@ const struct SpriteTemplate gLargeFlameScatterSpriteTemplate =
 
 const struct SpriteTemplate gFirePlumeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_FIRE_PLUME,
-    .paletteTag = ANIM_TAG_FIRE_PLUME,
+    .tileTag = TAG_BATTLE_ANIM_FIRE_PLUME,
+    .paletteTag = TAG_BATTLE_ANIM_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FirePlume,
     .images = NULL,
@@ -164,8 +165,8 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
 // Unused
 static const struct SpriteTemplate sUnusedEmberFirePlumeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FirePlume,
     .images = NULL,
@@ -189,8 +190,8 @@ static const union AnimCmd *const sAnims_UnusedSmallEmber[] =
 // Unused
 static const struct SpriteTemplate sUnusedSmallEmberSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_UnusedSmallEmber,
     .images = NULL,
@@ -212,8 +213,8 @@ static const union AffineAnimCmd *const sAffineAnims_SunlightRay[] =
 
 const struct SpriteTemplate gSunlightRaySpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SUNLIGHT,
-    .paletteTag = ANIM_TAG_SUNLIGHT,
+    .tileTag = TAG_BATTLE_ANIM_SUNLIGHT,
+    .paletteTag = TAG_BATTLE_ANIM_SUNLIGHT,
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -238,8 +239,8 @@ const union AnimCmd *const gAnims_BasicFire[] =
 
 const struct SpriteTemplate gEmberSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -249,8 +250,8 @@ const struct SpriteTemplate gEmberSpriteTemplate =
 
 const struct SpriteTemplate gEmberFlareSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_BasicFire,
     .images = NULL,
@@ -260,8 +261,8 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
 
 const struct SpriteTemplate gBurnFlameSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_BasicFire,
     .images = NULL,
@@ -271,8 +272,8 @@ const struct SpriteTemplate gBurnFlameSpriteTemplate =
 
 const struct SpriteTemplate gFireBlastRingSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_BasicFire,
     .images = NULL,
@@ -313,8 +314,8 @@ static const union AffineAnimCmd *const sAffineAnims_Unused[] =
 
 const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FireBlastCross,
     .images = NULL,
@@ -324,8 +325,8 @@ const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
 
 const struct SpriteTemplate gFireSpiralOutwardSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_BasicFire,
     .images = NULL,
@@ -335,8 +336,8 @@ const struct SpriteTemplate gFireSpiralOutwardSpriteTemplate =
 
 const struct SpriteTemplate gWeatherBallFireDownSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_BasicFire,
     .images = NULL,
@@ -346,8 +347,8 @@ const struct SpriteTemplate gWeatherBallFireDownSpriteTemplate =
 
 const struct SpriteTemplate gEruptionLaunchRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WARM_ROCK,
-    .paletteTag = ANIM_TAG_WARM_ROCK,
+    .tileTag = TAG_BATTLE_ANIM_WARM_ROCK,
+    .paletteTag = TAG_BATTLE_ANIM_WARM_ROCK,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -368,8 +369,8 @@ static const s16 sEruptionLaunchRockCoords[][2] =
 
 const struct SpriteTemplate gEruptionFallingRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WARM_ROCK,
-    .paletteTag = ANIM_TAG_WARM_ROCK,
+    .tileTag = TAG_BATTLE_ANIM_WARM_ROCK,
+    .paletteTag = TAG_BATTLE_ANIM_WARM_ROCK,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -414,8 +415,8 @@ static const union AnimCmd *const sAnims_WillOWispOrb[] =
 
 const struct SpriteTemplate gWillOWispOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WISP_ORB,
-    .paletteTag = ANIM_TAG_WISP_ORB,
+    .tileTag = TAG_BATTLE_ANIM_WISP_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_WISP_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_WillOWispOrb,
     .images = NULL,
@@ -439,8 +440,8 @@ static const union AnimCmd *const sAnims_WillOWispFire[] =
 
 const struct SpriteTemplate gWillOWispFireSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WISP_FIRE,
-    .paletteTag = ANIM_TAG_WISP_FIRE,
+    .tileTag = TAG_BATTLE_ANIM_WISP_FIRE,
+    .paletteTag = TAG_BATTLE_ANIM_WISP_FIRE,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_WillOWispFire,
     .images = NULL,

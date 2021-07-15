@@ -24,6 +24,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 struct TransitionData
 {
@@ -748,8 +749,8 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_Pokeball[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_POKEBALL,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_PAL_FLDEFF_POKEBALL,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_Pokeball,
     .images = sSpriteImage_Pokeball,
@@ -797,8 +798,8 @@ static const union AnimCmd *const sSpriteAnimTable_UnusedBrendanLass[] =
 
 static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0x100A,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_UNUSED_RIVAL_TRANSITION,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
     .images = sImageTable_UnusedBrendan,
@@ -808,8 +809,8 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 
 static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0x100A,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_UNUSED_RIVAL_TRANSITION,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
     .images = sImageTable_UnusedLass,
@@ -819,7 +820,7 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
 
 static const u16 sFieldEffectPal_Pokeball[] = INCBIN_U16("graphics/field_effects/palettes/pokeball.gbapal");
 
-const struct SpritePalette gSpritePalette_Pokeball = {sFieldEffectPal_Pokeball, FLDEFF_PAL_TAG_POKEBALL};
+const struct SpritePalette gSpritePalette_Pokeball = {sFieldEffectPal_Pokeball, TAG_PAL_FLDEFF_POKEBALL};
 
 static const u16 sMugshotPal_Sidney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
 static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
@@ -845,7 +846,7 @@ static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
 };
 
 static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
-static const struct SpritePalette sSpritePalette_UnusedTrainer = {sUnusedTrainerPalette, 0x100A};
+static const struct SpritePalette sSpritePalette_UnusedTrainer = {sUnusedTrainerPalette, TAG_UNUSED_RIVAL_TRANSITION};
 
 static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");
 static const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/elite_four_bg_map.bin");

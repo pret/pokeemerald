@@ -1,25 +1,15 @@
 #include "global.h"
 #include "battle.h"
-#include "constants/battle_move_effects.h"
-#include "constants/battle_script_commands.h"
 #include "battle_message.h"
 #include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
-#include "constants/moves.h"
-#include "constants/abilities.h"
 #include "item.h"
-#include "constants/items.h"
-#include "constants/hold_effects.h"
 #include "util.h"
 #include "pokemon.h"
 #include "random.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
-#include "constants/songs.h"
-#include "constants/trainers.h"
-#include "constants/battle_anim.h"
-#include "constants/map_types.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
@@ -38,7 +28,6 @@
 #include "pokemon_storage_system.h"
 #include "task.h"
 #include "naming_screen.h"
-#include "constants/battle_string_ids.h"
 #include "battle_setup.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -49,9 +38,21 @@
 #include "pokemon_summary_screen.h"
 #include "pokenav.h"
 #include "menu_specialized.h"
-#include "constants/rgb.h"
 #include "data.h"
+#include "constants/abilities.h"
+#include "constants/battle_anim.h"
+#include "constants/battle_move_effects.h"
+#include "constants/battle_script_commands.h"
+#include "constants/battle_string_ids.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/map_types.h"
+#include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/sprite_tags.h"
+#include "constants/trainers.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -679,8 +680,6 @@ static const u8 sRubyLevelUpStatBoxStats[] =
     MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPEED
 };
 
-#define MON_ICON_LVLUP_BOX_TAG      0xD75A
-
 static const struct OamData sOamData_MonIconOnLvlUpBox =
 {
     .y = 0,
@@ -700,8 +699,8 @@ static const struct OamData sOamData_MonIconOnLvlUpBox =
 
 static const struct SpriteTemplate sSpriteTemplate_MonIconOnLvlUpBox =
 {
-    .tileTag = MON_ICON_LVLUP_BOX_TAG,
-    .paletteTag = MON_ICON_LVLUP_BOX_TAG,
+    .tileTag = TAG_MON_ICON_LVLUP_BOX,
+    .paletteTag = TAG_MON_ICON_LVLUP_BOX,
     .oam = &sOamData_MonIconOnLvlUpBox,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -6102,11 +6101,11 @@ static void PutMonIconOnLvlUpBox(void)
     const u8* iconPtr = GetMonIconPtr(species, personality, 1);
     iconSheet.data = iconPtr;
     iconSheet.size = 0x200;
-    iconSheet.tag = MON_ICON_LVLUP_BOX_TAG;
+    iconSheet.tag = TAG_MON_ICON_LVLUP_BOX;
 
     iconPal = GetValidMonIconPalettePtr(species);
     iconPalSheet.data = iconPal;
-    iconPalSheet.tag = MON_ICON_LVLUP_BOX_TAG;
+    iconPalSheet.tag = TAG_MON_ICON_LVLUP_BOX;
 
     LoadSpriteSheet(&iconSheet);
     LoadSpritePalette(&iconPalSheet);
@@ -6127,8 +6126,8 @@ static void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite)
     else if (sprite->sDestroy)
     {
         DestroySprite(sprite);
-        FreeSpriteTilesByTag(MON_ICON_LVLUP_BOX_TAG);
-        FreeSpritePaletteByTag(MON_ICON_LVLUP_BOX_TAG);
+        FreeSpriteTilesByTag(TAG_MON_ICON_LVLUP_BOX);
+        FreeSpritePaletteByTag(TAG_MON_ICON_LVLUP_BOX);
     }
 }
 

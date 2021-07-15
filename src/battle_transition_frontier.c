@@ -1,14 +1,15 @@
 #include "global.h"
-#include "sprite.h"
-#include "decompress.h"
-#include "battle_transition_frontier.h"
 #include "battle_transition.h"
-#include "task.h"
-#include "palette.h"
-#include "trig.h"
+#include "battle_transition_frontier.h"
 #include "bg.h"
+#include "decompress.h"
 #include "gpu_regs.h"
+#include "palette.h"
+#include "sprite.h"
+#include "task.h"
+#include "trig.h"
 #include "constants/rgb.h"
+#include "constants/sprite_tags.h"
 
 /*
     There are 3 "categories" of Battle Frontier transition
@@ -44,8 +45,6 @@ static bool8 CirclesAsymmetricSpiralInSeq_End(struct Task *task);
 static bool8 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task);
 static bool8 CirclesSymmetricSpiralInSeq_End(struct Task *task);
 
-#define PALTAG_LOGO_CIRCLES 0x2E90
-
 // const rom data
 static const u32 sLogoCenter_Gfx[] = INCBIN_U32("graphics/battle_transitions/frontier_logo_center.4bpp.lz");
 static const u32 sLogoCenter_Tilemap[] = INCBIN_U32("graphics/battle_transitions/frontier_logo_center.bin");
@@ -76,13 +75,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_LogoCircles =
 {
     .data = sLogoCircles_Gfx,
     .size = 0x1800,
-    .tag = PALTAG_LOGO_CIRCLES
+    .tag = TAG_FRONTIER_TRANSITION_CIRCLES
 };
 
 static const struct SpritePalette sSpritePalette_LogoCircles =
 {
     .data = sLogo_Pal,
-    .tag = PALTAG_LOGO_CIRCLES
+    .tag = TAG_FRONTIER_TRANSITION_CIRCLES
 };
 
 static const union AnimCmd sAnim_LogoCircle_Top[] =
@@ -112,8 +111,8 @@ static const union AnimCmd *const sAnimTable_LogoCircles[] =
 
 static const struct SpriteTemplate sSpriteTemplate_LogoCircles =
 {
-    .tileTag = PALTAG_LOGO_CIRCLES,
-    .paletteTag = PALTAG_LOGO_CIRCLES,
+    .tileTag = TAG_FRONTIER_TRANSITION_CIRCLES,
+    .paletteTag = TAG_FRONTIER_TRANSITION_CIRCLES,
     .oam = &sOamData_LogoCircles,
     .anims = sAnimTable_LogoCircles,
     .images = NULL,
@@ -320,8 +319,8 @@ static void SpriteCB_LogoCircleSpiral(struct Sprite *sprite)
 
 static void DestroyLogoCirclesGfx(struct Task *task)
 {
-    FreeSpriteTilesByTag(PALTAG_LOGO_CIRCLES);
-    FreeSpritePaletteByTag(PALTAG_LOGO_CIRCLES);
+    FreeSpriteTilesByTag(TAG_FRONTIER_TRANSITION_CIRCLES);
+    FreeSpritePaletteByTag(TAG_FRONTIER_TRANSITION_CIRCLES);
 
     DestroySprite(&gSprites[task->data[4]]);
     DestroySprite(&gSprites[task->data[5]]);
