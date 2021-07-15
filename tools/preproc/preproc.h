@@ -51,4 +51,9 @@ const unsigned long kMaxCharmapSequenceLength = 16;
 
 extern Charmap* g_charmap;
 
+namespace Preproc
+{
+    extern int numErrors;
+}
+
 #endif // PREPROC_H
