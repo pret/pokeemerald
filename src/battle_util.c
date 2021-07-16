@@ -492,7 +492,7 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-    UndoFormChange(gBattlerPartyIndexes[gBattlerAttacker], GetBattlerSide(gBattlerAttacker));
+    UndoFormChange(gBattlerPartyIndexes[gBattlerAttacker], GetBattlerSide(gBattlerAttacker), TRUE);
 }
 
 void HandleAction_UseItem(void)
@@ -8322,14 +8322,14 @@ void UndoMegaEvolution(u32 monId)
     }
 }
 
-void UndoFormChange(u32 monId, u32 side)
+void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
 {
     u32 i, currSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     static const u16 species[][2] = // changed form id, default form id
     {
-        {SPECIES_AEGISLASH_BLADE, SPECIES_AEGISLASH},
         {SPECIES_MIMIKYU_BUSTED, SPECIES_MIMIKYU},
+        {SPECIES_AEGISLASH_BLADE, SPECIES_AEGISLASH},
         {SPECIES_DARMANITAN_ZEN_MODE, SPECIES_DARMANITAN},
         {SPECIES_MINIOR, SPECIES_MINIOR_CORE_RED},
         {SPECIES_MINIOR_METEOR_BLUE, SPECIES_MINIOR_CORE_BLUE},
@@ -8341,8 +8341,13 @@ void UndoFormChange(u32 monId, u32 side)
         {SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI},
     };
 
+    if (isSwitchingOut) // Don't revert Mimikyu Busted when switching out
+        i = 1;
+    else
+        i = 0;
+
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-    for (i = 0; i < ARRAY_COUNT(species); i++)
+    for (; i < ARRAY_COUNT(species); i++)
     {
         if (currSpecies == species[i][0])
         {
