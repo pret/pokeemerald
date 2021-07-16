@@ -8341,14 +8341,14 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
         {SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI},
     };
 
-    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-    for (i = 0; i < ARRAY_COUNT(species); i++)
-    {
-        if (i == 0 && isSwitchingOut)
-        {
-            i++; // Don't revert Mimikyu Busted when switching out
-        }
+    if (isSwitchingOut) // Don't revert Mimikyu Busted when switching out
+        i = 1;
+    else
+        i = 0;
 
+    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
+    for (; i < ARRAY_COUNT(species); i++)
+    {
         if (currSpecies == species[i][0])
         {
             SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
