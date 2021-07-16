@@ -1,7 +1,7 @@
 	.align 2
 voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup233, KeySplitTable35    @ piano (HGSS)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -12,7 +12,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup240, KeySplitTable39    @ xylophone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_147tbellg4, 255, 248, 0, 205
 	voice_keysplit voicegroup296, KeySplitTable36    @ glockenspiel
@@ -22,12 +22,12 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup247, KeySplitTable72    @ nylon guitar (HGSS)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings

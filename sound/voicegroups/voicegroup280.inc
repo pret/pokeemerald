@@ -26,3 +26,4 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 60, 20, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    				@ 127/ 80/  0/110/ 20	
 	voice_directsound 60, 100, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/100	
 	voice_directsound 63, 84, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 84	+ 3
+	voice_directsound 60, 30, DirectSoundWaveData_bw_201tamb, 255, 0, 227, 205    				@ 127/224/120/116/ 30

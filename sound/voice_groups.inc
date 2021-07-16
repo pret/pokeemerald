@@ -296,3 +296,5 @@
 .include "sound/voicegroups/voicegroup294.inc"
 .include "sound/voicegroups/voicegroup295.inc"
 .include "sound/voicegroups/voicegroup296.inc"
+.include "sound/voicegroups/voicegroup297.inc"
+.include "sound/voicegroups/voicegroup298.inc"

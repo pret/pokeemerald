@@ -2363,3 +2363,15 @@ $(MID_SUBDIR)/bw_seq_bgm_e_doctor.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_labo.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V066
+
+$(MID_SUBDIR)/bw_seq_me_keyitem.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V085 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_e_friend.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V081
+
+$(MID_SUBDIR)/bw_seq_bgm_r_a_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V063
+
+$(MID_SUBDIR)/bw_seq_bgm_r_a.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V063

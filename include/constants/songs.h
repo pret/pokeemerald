@@ -920,6 +920,10 @@
 #define BW_SEQ_BGM_E_TSURETEKE1      895 // Hurry Along 1
 #define BW_SEQ_BGM_E_DOCTOR          896 // Professor Juniper
 #define BW_SEQ_BGM_LABO              897 // Juniper Pokémon Lab
+#define BW_SEQ_ME_KEYITEM            898 // Obtained a Key Item!
+#define BW_SEQ_BGM_E_FRIEND          899 // Let's Go Together!
+#define BW_SEQ_BGM_R_A_VAR           900 // Route 1 (No Tambourine)
+#define BW_SEQ_BGM_R_A               901 // Route 1
 
 // Black 2 & White 2 Music
 
