@@ -1071,7 +1071,7 @@ static void SpriteCB_InputArrow(struct Sprite *sprite)
         sprite->sDelay = 8;
         sprite->sXPosId = (sprite->sXPosId + 1) & (ARRAY_COUNT(x) - 1);
     }
-    sprite->pos2.x = x[sprite->sXPosId];
+    sprite->x2 = x[sprite->sXPosId];
 }
 
 #undef sDelay
@@ -1089,13 +1089,13 @@ static void SpriteCB_Underscore(struct Sprite *sprite)
     pos = GetTextEntryPosition();
     if (pos != (u8)sprite->sId)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->sYPosId = 0;
         sprite->sDelay = 0;
     }
     else
     {
-        sprite->pos2.y = y[sprite->sYPosId];
+        sprite->y2 = y[sprite->sYPosId];
         sprite->sDelay++;
         if (sprite->sDelay > 8)
         {
@@ -1134,11 +1134,11 @@ static void SetCursorPos(s16 x, s16 y)
     struct Sprite *cursorSprite = &gSprites[sNamingScreen->cursorSpriteId];
 
     if (x < sPageColumnCounts[CurrentPageToKeyboardId()])
-        cursorSprite->pos1.x = sPageColumnXPos[x + CurrentPageToKeyboardId() * KBCOL_COUNT] + 38;
+        cursorSprite->x = sPageColumnXPos[x + CurrentPageToKeyboardId() * KBCOL_COUNT] + 38;
     else
-        cursorSprite->pos1.x = 0;
+        cursorSprite->x = 0;
 
-    cursorSprite->pos1.y = y * 16 + 88;
+    cursorSprite->y = y * 16 + 88;
     cursorSprite->sPrevX = cursorSprite->sX;
     cursorSprite->sPrevY = cursorSprite->sY;
     cursorSprite->sX = x;
@@ -1284,11 +1284,11 @@ static bool8 PageSwapSprite_SlideOff(struct Sprite *sprite)
     struct Sprite *text = &gSprites[sprite->sTextSpriteId];
     struct Sprite *button = &gSprites[sprite->sButtonSpriteId];
 
-    text->pos2.y++;
-    if (text->pos2.y > 7)
+    text->y2++;
+    if (text->y2 > 7)
     {
         sprite->sState++;
-        text->pos2.y = -4;
+        text->y2 = -4;
         text->invisible = TRUE;
         SetPageSwapButtonGfx(PageToNextGfxId(((u8)sprite->sPage + 1) % KBPAGE_COUNT), text, button);
     }
@@ -1300,10 +1300,10 @@ static bool8 PageSwapSprite_SlideOn(struct Sprite *sprite)
     struct Sprite *text = &gSprites[sprite->sTextSpriteId];
 
     text->invisible = FALSE;
-    text->pos2.y++;
-    if (text->pos2.y >= 0)
+    text->y2++;
+    if (text->y2 >= 0)
     {
-        text->pos2.y = 0;
+        text->y2 = 0;
         sprite->sState = 1; // go to PageSwapSprite_Idle
     }
     return FALSE;

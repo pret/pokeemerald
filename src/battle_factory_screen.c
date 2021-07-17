@@ -1307,7 +1307,7 @@ static void Select_InitAllSprites(void)
         Select_SetBallSpritePaletteNum(i);
     }
     cursorPos = sFactorySelectScreen->cursorPos;
-    x = gSprites[sFactorySelectScreen->mons[cursorPos].ballSpriteId].pos1.x;
+    x = gSprites[sFactorySelectScreen->mons[cursorPos].ballSpriteId].x;
     sFactorySelectScreen->cursorSpriteId = CreateSprite(&sSpriteTemplate_Select_Arrow, x, 88, 0);
     sFactorySelectScreen->menuCursor1SpriteId = CreateSprite(&sSpriteTemplate_Select_MenuHighlightLeft, 176, 112, 0);
     sFactorySelectScreen->menuCursor2SpriteId = CreateSprite(&sSpriteTemplate_Select_MenuHighlightRight, 176, 144, 0);
@@ -1352,7 +1352,7 @@ static void Select_UpdateBallCursorPosition(s8 direction)
     }
 
     cursorPos = sFactorySelectScreen->cursorPos;
-    gSprites[sFactorySelectScreen->cursorSpriteId].pos1.x = gSprites[sFactorySelectScreen->mons[cursorPos].ballSpriteId].pos1.x;
+    gSprites[sFactorySelectScreen->cursorSpriteId].x = gSprites[sFactorySelectScreen->mons[cursorPos].ballSpriteId].x;
 }
 
 static void Select_UpdateMenuCursorPosition(s8 direction)
@@ -1372,8 +1372,8 @@ static void Select_UpdateMenuCursorPosition(s8 direction)
             sFactorySelectScreen->menuCursorPos = ARRAY_COUNT(sSelect_MenuOptionFuncs) - 1;
     }
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].pos1.y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
 }
 
 static void Select_UpdateYesNoCursorPosition(s8 direction)
@@ -1393,8 +1393,8 @@ static void Select_UpdateYesNoCursorPosition(s8 direction)
             sFactorySelectScreen->yesNoCursorPos = 1;
     }
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].pos1.y = (sFactorySelectScreen->yesNoCursorPos * 16) + 112;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.y = (sFactorySelectScreen->yesNoCursorPos * 16) + 112;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].y = (sFactorySelectScreen->yesNoCursorPos * 16) + 112;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].y = (sFactorySelectScreen->yesNoCursorPos * 16) + 112;
 }
 
 static void Select_HandleMonSelectionChange(void)
@@ -1823,10 +1823,10 @@ static void Select_ShowMenuOptions(void)
     if (!sFactorySelectScreen->fromSummaryScreen)
         sFactorySelectScreen->menuCursorPos = 0;
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].pos1.x = 176;
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].pos1.y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.x = 208;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].x = 176;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].x = 208;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
 
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = FALSE;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = FALSE;
@@ -1838,10 +1838,10 @@ static void Select_ShowYesNoOptions(void)
 {
     sFactorySelectScreen->yesNoCursorPos = 0;
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].pos1.x = 176;
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].pos1.y = 112;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.x = 208;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.y = 112;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].x = 176;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].y = 112;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].x = 208;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].y = 112;
 
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = FALSE;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = FALSE;
@@ -2793,33 +2793,33 @@ static void Swap_Task_SlideCycleBalls(u8 taskId)
         {
             if (i != FRONTIER_PARTY_SIZE - 1)
             {
-                u8 posX = lastX - gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x;
+                u8 posX = lastX - gSprites[sFactorySwapScreen->ballSpriteIds[i]].x;
                 if (posX == 16 || gTasks[taskId].tBallCycled(i + 1) == TRUE)
                 {
-                    lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x;
-                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x += 10;
+                    lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].x;
+                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].x += 10;
                 }
                 else if (posX > 16)
                 {
-                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x = gSprites[sFactorySwapScreen->ballSpriteIds[i + 1]].pos1.x - 48;
+                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].x = gSprites[sFactorySwapScreen->ballSpriteIds[i + 1]].x - 48;
                 }
             }
             else
             {
-                lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x;
-                gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x += 10;
+                lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].x;
+                gSprites[sFactorySwapScreen->ballSpriteIds[i]].x += 10;
             }
 
             if (gTasks[taskId].tBallCycled(i) == TRUE)
             {
                 // New ball coming in from left, check if it has reached dest
-                if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x > (i * 48) + 72)
+                if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].x > (i * 48) + 72)
                 {
                     // Overshot dest, set x and finish
-                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x = (i * 48) + 72;
+                    gSprites[sFactorySwapScreen->ballSpriteIds[i]].x = (i * 48) + 72;
                     finished = TRUE;
                 }
-                else if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x == (i * 48) + 72)
+                else if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].x == (i * 48) + 72)
                 {
                     finished = TRUE;
                 }
@@ -2833,11 +2833,11 @@ static void Swap_Task_SlideCycleBalls(u8 taskId)
                 finished = FALSE;
             }
 
-            if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x - 16 > DISPLAY_WIDTH)
+            if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].x - 16 > DISPLAY_WIDTH)
             {
                 // Ball is offscreen right, cycle its palette and move to left side of screen
-                lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x;
-                gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x = -16;
+                lastX = gSprites[sFactorySwapScreen->ballSpriteIds[i]].x;
+                gSprites[sFactorySwapScreen->ballSpriteIds[i]].x = -16;
                 if (sFactorySwapScreen->inEnemyScreen == TRUE)
                     gSprites[sFactorySwapScreen->ballSpriteIds[i]].oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED);
                 else
@@ -2881,7 +2881,7 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case SLIDE_BUTTON_PKMN:
-        currPosX = gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0][0]].pos1.x;
+        currPosX = gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0][0]].x;
         if (!gTasks[taskId].tSlidingOn)
         {
             // Sliding "Pkmn for Swap" offscreen
@@ -2915,7 +2915,7 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
             for (i = 0; i < ARRAY_COUNT(sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0]); i++)
             {
                 for (j = 0; j < ARRAY_COUNT(sFactorySwapScreen->pkmnForSwapButtonSpriteIds); j++)
-                    gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][i]].pos1.x += deltaX;
+                    gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][i]].x += deltaX;
             }
         }
         else
@@ -2923,9 +2923,9 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
             // Set final position
             for (j = 0; j < ARRAY_COUNT(sFactorySwapScreen->pkmnForSwapButtonSpriteIds); j++)
             {
-                gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][0]].pos1.x = posX;
-                gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][1]].pos1.x = posX + 16;
-                gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][2]].pos1.x = posX + 48;
+                gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][0]].x = posX;
+                gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][1]].x = posX + 16;
+                gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[j][2]].x = posX + 48;
             }
             prevTaskId = gTasks[taskId].tTaskId;
             gTasks[prevTaskId].tSlideFinishedPkmn = TRUE;
@@ -2933,7 +2933,7 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
         }
         break;
     case SLIDE_BUTTON_CANCEL:
-        currPosX = gSprites[sFactorySwapScreen->cancelButtonSpriteIds[0][0]].pos1.x;
+        currPosX = gSprites[sFactorySwapScreen->cancelButtonSpriteIds[0][0]].x;
         if (!gTasks[taskId].tSlidingOn)
         {
             // Sliding "Cancel" offscreen
@@ -2967,7 +2967,7 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
             for (i = 0; i < ARRAY_COUNT(sFactorySwapScreen->cancelButtonSpriteIds); i++)
             {
                 for (j = 0; j < ARRAY_COUNT(sFactorySwapScreen->cancelButtonSpriteIds[0]); j++)
-                    gSprites[sFactorySwapScreen->cancelButtonSpriteIds[j][i]].pos1.x += deltaX;
+                    gSprites[sFactorySwapScreen->cancelButtonSpriteIds[j][i]].x += deltaX;
             }
         }
         else
@@ -2975,8 +2975,8 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
             // Set final position
             for (j = 0; j < ARRAY_COUNT(sFactorySwapScreen->cancelButtonSpriteIds); j++)
             {
-                gSprites[sFactorySwapScreen->cancelButtonSpriteIds[j][0]].pos1.x = posX;
-                gSprites[sFactorySwapScreen->cancelButtonSpriteIds[j][1]].pos1.x = posX + 16;
+                gSprites[sFactorySwapScreen->cancelButtonSpriteIds[j][0]].x = posX;
+                gSprites[sFactorySwapScreen->cancelButtonSpriteIds[j][1]].x = posX + 16;
             }
             prevTaskId = gTasks[taskId].tTaskId;
             gTasks[prevTaskId].tSlideFinishedCancel = TRUE;
@@ -3221,7 +3221,7 @@ static void Swap_Task_SwitchPartyScreen(u8 taskId)
                 for (i = 0; i < ARRAY_COUNT(sFactorySwapScreen->pkmnForSwapButtonSpriteIds[0]); i++)
                     gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[1][i]].invisible = TRUE;
             }
-            gSprites[sFactorySwapScreen->cursorSpriteId].pos1.x = gSprites[sFactorySwapScreen->ballSpriteIds[sFactorySwapScreen->cursorPos]].pos1.x;
+            gSprites[sFactorySwapScreen->cursorSpriteId].x = gSprites[sFactorySwapScreen->ballSpriteIds[sFactorySwapScreen->cursorPos]].x;
             gTasks[sFactorySwapScreen->fadeSpeciesNameTaskId].func = Swap_Task_FadeSpeciesName;
             sFactorySwapScreen->fadeSpeciesNameCoeffDelay = 0;
             sFactorySwapScreen->fadeSpeciesNameCoeff = 6;
@@ -3433,7 +3433,7 @@ static void Swap_InitAllSprites(void)
         sFactorySwapScreen->ballSpriteIds[i] = CreateSprite(&spriteTemplate, (48 * i) + 72, 64, 1);
         gSprites[sFactorySwapScreen->ballSpriteIds[i]].data[0] = 0;
     }
-    sFactorySwapScreen->cursorSpriteId = CreateSprite(&sSpriteTemplate_Swap_Arrow, gSprites[sFactorySwapScreen->ballSpriteIds[sFactorySwapScreen->cursorPos]].pos1.x, 88, 0);
+    sFactorySwapScreen->cursorSpriteId = CreateSprite(&sSpriteTemplate_Swap_Arrow, gSprites[sFactorySwapScreen->ballSpriteIds[sFactorySwapScreen->cursorPos]].x, 88, 0);
     sFactorySwapScreen->menuCursor1SpriteId = CreateSprite(&sSpriteTemplate_Swap_MenuHighlightLeft, 176, 112, 0);
     sFactorySwapScreen->menuCursor2SpriteId = CreateSprite(&sSpriteTemplate_Swap_MenuHighlightRight, 176, 144, 0);
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = TRUE;
@@ -3541,7 +3541,7 @@ static void Swap_HandleActionCursorChange(u8 cursorId)
         // Cursor is on one of the pokemon
         gSprites[sFactorySwapScreen->cursorSpriteId].invisible = FALSE;
         Swap_HideActionButtonHighlights();
-        gSprites[sFactorySwapScreen->cursorSpriteId].pos1.x = gSprites[sFactorySwapScreen->ballSpriteIds[cursorId]].pos1.x;
+        gSprites[sFactorySwapScreen->cursorSpriteId].x = gSprites[sFactorySwapScreen->ballSpriteIds[cursorId]].x;
     }
     else
     {
@@ -3618,8 +3618,8 @@ static void Swap_UpdateYesNoCursorPosition(s8 direction)
             sFactorySwapScreen->yesNoCursorPos = 1;
     }
 
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
 }
 
 static void Swap_UpdateMenuCursorPosition(s8 direction)
@@ -3640,8 +3640,8 @@ static void Swap_UpdateMenuCursorPosition(s8 direction)
             sFactorySwapScreen->menuCursorPos = ARRAY_COUNT(sSwap_MenuOptionFuncs) - 1;
     }
 
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
 }
 
 static void Swap_HighlightActionButton(u8 actionId)
@@ -3693,10 +3693,10 @@ static void Swap_ShowMenuOptions(void)
     else
         sFactorySwapScreen->menuCursorPos = 0;
 
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.x = 176;
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.x = 208;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].x = 176;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].x = 208;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
 
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = FALSE;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = FALSE;
@@ -3708,10 +3708,10 @@ static void Swap_ShowYesNoOptions(void)
 {
     sFactorySwapScreen->yesNoCursorPos = 0;
 
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.x = 176;
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = 112;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.x = 208;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = 112;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].x = 176;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].y = 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].x = 208;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].y = 112;
 
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = FALSE;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = FALSE;

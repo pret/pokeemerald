@@ -1269,10 +1269,10 @@ static void CreateResultsTextWindowSprites(void)
 static void StartTextBoxSlideIn(s16 x, u16 y, u16 slideOutTimer, u16 slideIncrement)
 {
     struct Sprite *sprite = &gSprites[sContestResults->data->slidingTextBoxSpriteId];
-    sprite->pos1.x = TEXT_BOX_X;
-    sprite->pos1.y = y;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x = TEXT_BOX_X;
+    sprite->y = y;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     sprite->sTargetX = x + 32;
     sprite->sSlideOutTimer = slideOutTimer;
     sprite->sSlideIncrement = slideIncrement;
@@ -1284,10 +1284,10 @@ static void StartTextBoxSlideIn(s16 x, u16 y, u16 slideOutTimer, u16 slideIncrem
 static void StartTextBoxSlideOut(u16 slideIncrement)
 {
     struct Sprite *sprite = &gSprites[sContestResults->data->slidingTextBoxSpriteId];
-    sprite->pos1.x += sprite->pos2.x;
-    sprite->pos1.y += sprite->pos2.y;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x += sprite->x2;
+    sprite->y += sprite->y2;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     sprite->sSlideIncrement = slideIncrement;
     sprite->sDistance = 0;
     sprite->callback = SpriteCB_TextBoxSlideOut;
@@ -1296,10 +1296,10 @@ static void StartTextBoxSlideOut(u16 slideIncrement)
 
 static void EndTextBoxSlideOut(struct Sprite *sprite)
 {
-    sprite->pos1.x = TEXT_BOX_X;
-    sprite->pos1.y = TEXT_BOX_Y;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x = TEXT_BOX_X;
+    sprite->y = TEXT_BOX_Y;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     sprite->callback = SpriteCallbackDummy;
     sContestResults->data->slidingTextBoxState = SLIDING_TEXT_OFFSCREEN;
 }
@@ -1309,21 +1309,21 @@ static void SpriteCB_TextBoxSlideIn(struct Sprite *sprite)
     int i;
 
     s16 delta = sprite->sDistance + sprite->sSlideIncrement;
-    sprite->pos1.x -= delta >> 8;
+    sprite->x -= delta >> 8;
     sprite->sDistance += sprite->sSlideIncrement;
     sprite->sDistance &= 0xFF;
 
     // Prevent overshooting target
-    if (sprite->pos1.x < sprite->sTargetX)
-        sprite->pos1.x = sprite->sTargetX;
+    if (sprite->x < sprite->sTargetX)
+        sprite->x = sprite->sTargetX;
 
     for (i = 0; i < 3; i++)
     {
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
     }
 
-    if (sprite->pos1.x == sprite->sTargetX)
+    if (sprite->x == sprite->sTargetX)
         sprite->callback = SpriteCB_EndTextBoxSlideIn;
 }
 
@@ -1343,16 +1343,16 @@ static void SpriteCB_TextBoxSlideOut(struct Sprite *sprite)
     s16 delta;
 
     delta = sprite->sDistance + sprite->sSlideIncrement;
-    sprite->pos1.x -= delta >> 8;
+    sprite->x -= delta >> 8;
     sprite->sDistance += sprite->sSlideIncrement;
     sprite->sDistance &= 0xFF;
     for (i = 0; i < 3; i++)
     {
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
     }
 
-    if (sprite->pos1.x + sprite->pos2.x < -224)
+    if (sprite->x + sprite->x2 < -224)
         EndTextBoxSlideOut(sprite);
 }
 
@@ -1364,18 +1364,18 @@ static void ShowLinkResultsTextBox(const u8 *text)
 
     x = DrawResultsTextWindow(text, sContestResults->data->linkTextBoxSpriteId);
     sprite = &gSprites[sContestResults->data->linkTextBoxSpriteId];
-    sprite->pos1.x = x + 32;
-    sprite->pos1.y = 80;
+    sprite->x = x + 32;
+    sprite->y = 80;
     sprite->invisible = FALSE;
     for (i = 0; i < 3; i++)
     {
-        gSprites[sprite->data[i]].pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
-        gSprites[sprite->data[i]].pos1.y = sprite->pos1.y;
+        gSprites[sprite->data[i]].x = sprite->x + sprite->x2 + (i + 1) * 64;
+        gSprites[sprite->data[i]].y = sprite->y;
         gSprites[sprite->data[i]].invisible = FALSE;
     }
 
     gBattle_WIN0H = WIN_RANGE(0, DISPLAY_WIDTH);
-    gBattle_WIN0V = WIN_RANGE(sprite->pos1.y - 16, sprite->pos1.y + 16);
+    gBattle_WIN0V = WIN_RANGE(sprite->y - 16, sprite->y + 16);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR
         | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
 }
@@ -1585,13 +1585,13 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
     else
     {
         s16 delta = sprite->data[1] + 0x600;
-        sprite->pos1.x -= delta >> 8;
+        sprite->x -= delta >> 8;
         sprite->data[1] += 0x600;
         sprite->data[1] &= 0xFF;
-        if (sprite->pos1.x < DISPLAY_WIDTH / 2)
-            sprite->pos1.x = DISPLAY_WIDTH / 2;
+        if (sprite->x < DISPLAY_WIDTH / 2)
+            sprite->x = DISPLAY_WIDTH / 2;
 
-        if (sprite->pos1.x == DISPLAY_WIDTH / 2)
+        if (sprite->x == DISPLAY_WIDTH / 2)
         {
             sprite->callback = SpriteCallbackDummy;
             sprite->data[1] = 0;
@@ -1603,10 +1603,10 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
 static void SpriteCB_WinnerMonSlideOut(struct Sprite *sprite)
 {
     s16 delta = sprite->data[1] + 0x600;
-    sprite->pos1.x -= delta >> 8;
+    sprite->x -= delta >> 8;
     sprite->data[1] += + 0x600;
     sprite->data[1] &= 0xFF;
-    if (sprite->pos1.x < -32)
+    if (sprite->x < -32)
     {
         sprite->callback = SpriteCallbackDummy;
         sprite->invisible = TRUE;
@@ -1639,17 +1639,17 @@ static void SpriteCB_Confetti(struct Sprite *sprite)
     s16 delta;
 
     sprite->data[3] += sprite->data[0];
-    sprite->pos2.x = Sin(sprite->data[3] >> 8, sprite->data[1]);
+    sprite->x2 = Sin(sprite->data[3] >> 8, sprite->data[1]);
     delta = sprite->data[4] + sprite->data[2];
-    sprite->pos1.x += delta >> 8;
+    sprite->x += delta >> 8;
     sprite->data[4] += sprite->data[2];
     sprite->data[4] &= 0xff;
 
-    sprite->pos1.y++;
+    sprite->y++;
     if (sContestResults->data->destroyConfetti)
         sprite->invisible = TRUE;
 
-    if (sprite->pos1.x > DISPLAY_WIDTH + 8 || sprite->pos1.y > 116)
+    if (sprite->x > DISPLAY_WIDTH + 8 || sprite->y > 116)
     {
         DestroySprite(sprite);
         sContestResults->data->confettiCount--;

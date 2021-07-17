@@ -997,7 +997,7 @@ static void StartMonSpriteSlide(struct Sprite *sprite, s32 startX, s32 destX, s3
 {
     u32 delta = destX - startX;
 
-    sprite->pos1.x = startX;
+    sprite->x = startX;
     sprite->sCurrX = startX << 4;
     sprite->sMoveIncr = (delta << 4) / time;
     sprite->sTime = time;
@@ -1012,15 +1012,15 @@ static void SpriteCB_MonSpriteSlide(struct Sprite *sprite)
     {
         sprite->sTime--;
         sprite->sCurrX += sprite->sMoveIncr;
-        sprite->pos1.x = sprite->sCurrX >> 4;
-        if (sprite->pos1.x <= MON_SPRITE_X_OFF)
+        sprite->x = sprite->sCurrX >> 4;
+        if (sprite->x <= MON_SPRITE_X_OFF)
             sprite->invisible = TRUE;
         else
             sprite->invisible = FALSE;
     }
     else
     {
-        sprite->pos1.x = sprite->sDestX;
+        sprite->x = sprite->sDestX;
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -1232,8 +1232,8 @@ static void UpdateAndZoomInSelectedRibbon(struct PokenavSub14 *structPtr)
     s32 x = (position % RIBBONS_PER_ROW) * 16 + 96;
     s32 y = (position / RIBBONS_PER_ROW) * 16 + 40;
 
-    structPtr->bigRibbonSprite->pos1.x = x;
-    structPtr->bigRibbonSprite->pos1.y = y;
+    structPtr->bigRibbonSprite->x = x;
+    structPtr->bigRibbonSprite->y = y;
 
     // Set new selected ribbon's gfx data
     ribbonId = GetRibbonId();

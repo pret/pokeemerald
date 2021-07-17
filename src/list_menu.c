@@ -1024,11 +1024,11 @@ static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite)
         {
         case 0:
             multiplier = sprite->tMultiplier;
-            sprite->pos2.x = (gSineTable[(u8)(sprite->tSinePos)] * multiplier) / 256;
+            sprite->x2 = (gSineTable[(u8)(sprite->tSinePos)] * multiplier) / 256;
             break;
         case 1:
             multiplier = sprite->tMultiplier;
-            sprite->pos2.y = (gSineTable[(u8)(sprite->tSinePos)] * multiplier) / 256;
+            sprite->y2 = (gSineTable[(u8)(sprite->tSinePos)] * multiplier) / 256;
             break;
         }
         sprite->tSinePos += sprite->tFrequency;
@@ -1364,8 +1364,8 @@ static void ListMenuUpdateRedOutlineCursorObject(u8 taskId, u16 x, u16 y)
 {
     struct RedOutlineCursor *data = (void*) gTasks[taskId].data;
 
-    gSprites[data->spriteId].pos1.x = x + 120;
-    gSprites[data->spriteId].pos1.y = y + 120;
+    gSprites[data->spriteId].x = x + 120;
+    gSprites[data->spriteId].y = y + 120;
 }
 
 static void ListMenuRemoveRedOutlineCursorObject(u8 taskId)
@@ -1385,7 +1385,7 @@ static void ListMenuRemoveRedOutlineCursorObject(u8 taskId)
 
 static void SpriteCallback_RedArrowCursor(struct Sprite *sprite)
 {
-    sprite->pos2.x = gSineTable[(u8)(sprite->data[0])] / 64;
+    sprite->x2 = gSineTable[(u8)(sprite->data[0])] / 64;
     sprite->data[0] += 8;
 }
 
@@ -1429,8 +1429,8 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
     spriteTemplate.paletteTag = cursor->palTag;
 
     data->spriteId = CreateSprite(&spriteTemplate, cursor->left, cursor->top, 0);
-    gSprites[data->spriteId].pos2.x = 8;
-    gSprites[data->spriteId].pos2.y = 8;
+    gSprites[data->spriteId].x2 = 8;
+    gSprites[data->spriteId].y2 = 8;
 
     if (cursor->palTag == SPRITE_INVALID_TAG)
     {
@@ -1444,8 +1444,8 @@ static void ListMenuUpdateRedArrowCursorObject(u8 taskId, u16 x, u16 y)
 {
     struct RedArrowCursor *data = (void*) gTasks[taskId].data;
 
-    gSprites[data->spriteId].pos1.x = x;
-    gSprites[data->spriteId].pos1.y = y;
+    gSprites[data->spriteId].x = x;
+    gSprites[data->spriteId].y = y;
 }
 
 static void ListMenuRemoveRedArrowCursorObject(u8 taskId)

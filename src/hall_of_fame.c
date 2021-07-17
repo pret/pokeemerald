@@ -717,9 +717,9 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
     {
         gTasks[taskId].tFrameCount--;
     }
-    else if (gSprites[gTasks[taskId].tPlayerSpriteID].pos1.x != 192)
+    else if (gSprites[gTasks[taskId].tPlayerSpriteID].x != 192)
     {
-        gSprites[gTasks[taskId].tPlayerSpriteID].pos1.x++;
+        gSprites[gTasks[taskId].tPlayerSpriteID].x++;
     }
     else
     {
@@ -1345,18 +1345,18 @@ static bool8 LoadHofBgs(void)
 
 static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
 {
-    if (sprite->pos1.x != sprite->tDestinationX
-        || sprite->pos1.y != sprite->tDestinationY)
+    if (sprite->x != sprite->tDestinationX
+        || sprite->y != sprite->tDestinationY)
     {
-        if (sprite->pos1.x < sprite->tDestinationX)
-            sprite->pos1.x += 15;
-        if (sprite->pos1.x > sprite->tDestinationX)
-            sprite->pos1.x -= 15;
+        if (sprite->x < sprite->tDestinationX)
+            sprite->x += 15;
+        if (sprite->x > sprite->tDestinationX)
+            sprite->x -= 15;
 
-        if (sprite->pos1.y < sprite->tDestinationY)
-            sprite->pos1.y += 10;
-        if (sprite->pos1.y > sprite->tDestinationY)
-            sprite->pos1.y -= 10;
+        if (sprite->y < sprite->tDestinationY)
+            sprite->y += 10;
+        if (sprite->y > sprite->tDestinationY)
+            sprite->y -= 10;
     }
     else
     {
@@ -1378,7 +1378,7 @@ static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
 
 static void SpriteCB_HofConfetti(struct Sprite* sprite)
 {
-    if (sprite->pos2.y > 120)
+    if (sprite->y2 > 120)
     {
         DestroySprite(sprite);
     }
@@ -1387,12 +1387,12 @@ static void SpriteCB_HofConfetti(struct Sprite* sprite)
         u16 rand;
         u8 sineIdx;
 
-        sprite->pos2.y++;
-        sprite->pos2.y += sprite->sExtraY;
+        sprite->y2++;
+        sprite->y2 += sprite->sExtraY;
 
         sineIdx = sprite->sSineIdx;
         rand = (Random() % 4) + 8;
-        sprite->pos2.x = rand * gSineTable[sineIdx] / 256;
+        sprite->x2 = rand * gSineTable[sineIdx] / 256;
 
         sprite->sSineIdx += 4;
     }

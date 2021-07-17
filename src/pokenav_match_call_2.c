@@ -1074,9 +1074,9 @@ static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *state)
     PutWindowTilemap(state->msgBoxWindowId);
     CopyWindowToVram(state->msgBoxWindowId, 3);
     sprite = PauseSpinningPokenavSprite();
-    sprite->pos1.x = 24;
-    sprite->pos1.y = 112;
-    sprite->pos2.y = 0;
+    sprite->x = 24;
+    sprite->y = 112;
+    sprite->y2 = 0;
 }
 
 static void DrawMsgBoxForCloseByMsg(struct Pokenav4Struct *state)
@@ -1200,7 +1200,7 @@ static void CloseMatchCallSelectOptionsWindow(struct Pokenav4Struct *state)
 
 static void UpdateCursorGfxPos(struct Pokenav4Struct *state, int top)
 {
-    state->optionsCursorSprite->pos2.y = top * 16;
+    state->optionsCursorSprite->y2 = top * 16;
 }
 
 void SpriteCB_OptionsCursor(struct Sprite *sprite)
@@ -1208,7 +1208,7 @@ void SpriteCB_OptionsCursor(struct Sprite *sprite)
     if (++sprite->data[0] > 3)
     {
         sprite->data[0] = 0;
-        sprite->pos2.x = (sprite->pos2.x + 1) & 0x7;
+        sprite->x2 = (sprite->x2 + 1) & 0x7;
     }
 }
 
@@ -1251,16 +1251,16 @@ static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *sprite)
     case 0:
         if (CheckForSpaceForDma3Request(sprite->data[7]) != -1)
         {
-            sprite->pos2.x = -80;
+            sprite->x2 = -80;
             sprite->invisible = FALSE;
             sprite->data[0]++;
         }
         break;
     case 1:
-        sprite->pos2.x += 8;
-        if (sprite->pos2.x >= 0)
+        sprite->x2 += 8;
+        if (sprite->x2 >= 0)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sprite->callback = SpriteCallbackDummy;
         }
         break;
@@ -1269,8 +1269,8 @@ static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *sprite)
 
 static void SpriteCB_TrainerPicSlideOffscreen(struct Sprite *sprite)
 {
-    sprite->pos2.x -= 8;
-    if (sprite->pos2.x <= -80)
+    sprite->x2 -= 8;
+    if (sprite->x2 <= -80)
     {
         sprite->invisible = TRUE;
         sprite->callback = SpriteCallbackDummy;

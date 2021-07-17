@@ -2764,7 +2764,7 @@ static void DoStarAnim(struct PokemonJumpGfx *jumpGfx, int multiplayerId)
     ResetPokeJumpSpriteData(jumpGfx->starSprites[multiplayerId]);
     jumpGfx->starSprites[multiplayerId]->sOffset = jumpGfx->monSprites[multiplayerId] - gSprites;
     jumpGfx->starSprites[multiplayerId]->invisible = FALSE;
-    jumpGfx->starSprites[multiplayerId]->pos1.y = 96;
+    jumpGfx->starSprites[multiplayerId]->y = 96;
     jumpGfx->starSprites[multiplayerId]->callback = SpriteCB_Star;
     StartSpriteAnim(jumpGfx->starSprites[multiplayerId], 1);
 }
@@ -2781,11 +2781,11 @@ static void SpriteCB_Star(struct Sprite *sprite)
         }
         break;
     case 1:
-        sprite->pos1.y--;
+        sprite->y--;
         sprite->sTimer++;
-        if (sprite->pos1.y <= 72)
+        if (sprite->y <= 72)
         {
-            sprite->pos1.y = 72;
+            sprite->y = 72;
             sprite->sState++;
         }
         break;
@@ -2806,7 +2806,7 @@ static void SpriteCB_Star(struct Sprite *sprite)
 static void Gfx_StartMonHitShake(struct PokemonJumpGfx *jumpGfx, int multiplayerId)
 {
     jumpGfx->monSprites[multiplayerId]->callback = SpriteCB_MonHitShake;
-    jumpGfx->monSprites[multiplayerId]->pos2.y = 0;
+    jumpGfx->monSprites[multiplayerId]->y2 = 0;
     ResetPokeJumpSpriteData(jumpGfx->monSprites[multiplayerId]);
 }
 
@@ -2823,16 +2823,16 @@ static void SpriteCB_MonHitShake(struct Sprite *sprite)
     if (++sprite->sTimer > 1)
     {
         if (++sprite->sNumShakes & 1)
-            sprite->pos2.y = 2;
+            sprite->y2 = 2;
         else
-            sprite->pos2.y = -2;
+            sprite->y2 = -2;
 
         sprite->sTimer = 0;
     }
 
     if (sprite->sNumShakes > 12)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -2919,7 +2919,7 @@ static void SpriteCB_MonIntroBounce(struct Sprite *sprite)
         if (sprite->sHopPos > 127)
             sprite->sHopPos = 0;
 
-        sprite->pos2.y = -(gSineTable[sprite->sHopPos] >> 3);
+        sprite->y2 = -(gSineTable[sprite->sHopPos] >> 3);
         if (sprite->sHopPos == 0)
         {
             if (++sprite->sNumHops < 2)
@@ -2990,7 +2990,7 @@ static void UpdateVineAnim(struct PokemonJumpGfx *jumpGfx, int vineState)
     count = 0;
     for (i = 0; i < VINE_SPRITES_PER_SIDE; i++)
     {
-        jumpGfx->vineSprites[count]->pos1.y = sVineYCoords[i][vineState];
+        jumpGfx->vineSprites[count]->y = sVineYCoords[i][vineState];
         jumpGfx->vineSprites[count]->oam.priority = priority;
         jumpGfx->vineSprites[count]->oam.paletteNum = palNum;
         StartSpriteAnim(jumpGfx->vineSprites[count], vineState);
@@ -2999,7 +2999,7 @@ static void UpdateVineAnim(struct PokemonJumpGfx *jumpGfx, int vineState)
 
     for (i = VINE_SPRITES_PER_SIDE - 1; i >= 0; i--)
     {
-        jumpGfx->vineSprites[count]->pos1.y = sVineYCoords[i][vineState];
+        jumpGfx->vineSprites[count]->y = sVineYCoords[i][vineState];
         jumpGfx->vineSprites[count]->oam.priority = priority;
         jumpGfx->vineSprites[count]->oam.paletteNum = palNum;
         StartSpriteAnim(jumpGfx->vineSprites[count], vineState);
@@ -3726,7 +3726,7 @@ static void CreateJumpMonSprites(void)
 
 static void SetMonSpriteY(u32 id, s16 y)
 {
-    sPokemonJumpGfx->monSprites[id]->pos2.y = y;
+    sPokemonJumpGfx->monSprites[id]->y2 = y;
 }
 
 static void UpdateVineSwing(int vineState)

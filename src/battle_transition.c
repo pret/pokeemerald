@@ -1692,10 +1692,10 @@ static void sub_814713C(struct Sprite *sprite)
     }
     else
     {
-        if (sprite->pos1.x >= 0 && sprite->pos1.x <= DISPLAY_WIDTH)
+        if (sprite->x >= 0 && sprite->x <= DISPLAY_WIDTH)
         {
-            s16 posX = sprite->pos1.x >> 3;
-            s16 posY = sprite->pos1.y >> 3;
+            s16 posX = sprite->x >> 3;
+            s16 posY = sprite->y >> 3;
 
             if (posX != sprite->data[2])
             {
@@ -1712,8 +1712,8 @@ static void sub_814713C(struct Sprite *sprite)
                 SOME_VRAM_STORE(ptr, posY + 1, posX, 0xF001);
             }
         }
-        sprite->pos1.x += arr0[sprite->data[0]];
-        if (sprite->pos1.x < -15 || sprite->pos1.x > 255)
+        sprite->x += arr0[sprite->data[0]];
+        if (sprite->x < -15 || sprite->x > 255)
             FieldEffectStop(sprite, FLDEFF_POKEBALL);
     }
 }
@@ -2438,10 +2438,10 @@ static bool8 TrainerPicCb_SetSlideOffsets(struct Sprite *sprite)
 // fast slide to around middle screen
 static bool8 TrainerPicCb_Slide1(struct Sprite *sprite)
 {
-    sprite->pos1.x += sprite->sOffsetX;
-    if (sprite->sSlideTableId && sprite->pos1.x < 133)
+    sprite->x += sprite->sOffsetX;
+    if (sprite->sSlideTableId && sprite->x < 133)
         sprite->sState++;
-    else if (!sprite->sSlideTableId && sprite->pos1.x > 103)
+    else if (!sprite->sSlideTableId && sprite->x > 103)
         sprite->sState++;
     return FALSE;
 }
@@ -2450,7 +2450,7 @@ static bool8 TrainerPicCb_Slide1(struct Sprite *sprite)
 static bool8 TrainerPicCb_Slide2(struct Sprite *sprite)
 {
     sprite->sOffsetX += sprite->sOffsetX2;
-    sprite->pos1.x += sprite->sOffsetX;
+    sprite->x += sprite->sOffsetX;
     if (sprite->sOffsetX == 0)
     {
         sprite->sState++;
@@ -2464,8 +2464,8 @@ static bool8 TrainerPicCb_Slide2(struct Sprite *sprite)
 static bool8 TrainerPicCb_Slide3(struct Sprite *sprite)
 {
     sprite->sOffsetX += sprite->sOffsetX2;
-    sprite->pos1.x += sprite->sOffsetX;
-    if (sprite->pos1.x < -31 || sprite->pos1.x > 271)
+    sprite->x += sprite->sOffsetX;
+    if (sprite->x < -31 || sprite->x > 271)
         sprite->sState++;
     return FALSE;
 }
@@ -3283,8 +3283,8 @@ static bool8 Phase2_WhiteFade_Func2(struct Task *task)
     for (i = 0, posY = 0; i < 8; i++, posY += 0x14)
     {
         sprite = &gSprites[CreateInvisibleSprite(sub_8149864)];
-        sprite->pos1.x = 0xF0;
-        sprite->pos1.y = posY;
+        sprite->x = 0xF0;
+        sprite->y = posY;
         sprite->data[5] = arr1[i];
     }
     sprite->data[6]++;
@@ -3373,21 +3373,21 @@ static void sub_8149864(struct Sprite *sprite)
     else
     {
         u16 i;
-        u16* ptr1 = &gScanlineEffectRegBuffers[0][sprite->pos1.y];
-        u16* ptr2 = &gScanlineEffectRegBuffers[0][sprite->pos1.y + 160];
+        u16* ptr1 = &gScanlineEffectRegBuffers[0][sprite->y];
+        u16* ptr2 = &gScanlineEffectRegBuffers[0][sprite->y + 160];
         for (i = 0; i < 20; i++)
         {
             ptr1[i] = sprite->data[0] >> 8;
-            ptr2[i] = (u8)(sprite->pos1.x);
+            ptr2[i] = (u8)(sprite->x);
         }
-        if (sprite->pos1.x == 0 && sprite->data[0] == 0x1000)
+        if (sprite->x == 0 && sprite->data[0] == 0x1000)
             sprite->data[1] = 1;
 
-        sprite->pos1.x -= 16;
+        sprite->x -= 16;
         sprite->data[0] += 0x80;
 
-        if (sprite->pos1.x < 0)
-            sprite->pos1.x = 0;
+        if (sprite->x < 0)
+            sprite->x = 0;
         if (sprite->data[0] > 0x1000)
             sprite->data[0] = 0x1000;
 

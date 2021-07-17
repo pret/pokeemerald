@@ -1024,8 +1024,8 @@ static void sub_816C060(u16 itemId)
         {
             *spriteIdLoc = spriteId;
             gSprites[spriteId].oam.priority = 0;
-            gSprites[spriteId].pos2.x = 24;
-            gSprites[spriteId].pos2.y = 80;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 80;
         }
     }
 }

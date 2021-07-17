@@ -934,8 +934,8 @@ static u8 CreateMonSprite(struct Pokemon* mon)
 
 static void StartMonJumpForPokeblock(u8 spriteId)
 {
-    gSprites[spriteId].pos1.x = MON_X;
-    gSprites[spriteId].pos1.y = MON_Y;
+    gSprites[spriteId].x = MON_X;
+    gSprites[spriteId].y = MON_Y;
     gSprites[spriteId].sSpeed = -8;
     gSprites[spriteId].sAccel = 1;
     gSprites[spriteId].callback = SpriteCB_MonJumpForPokeblock;
@@ -943,8 +943,8 @@ static void StartMonJumpForPokeblock(u8 spriteId)
 
 static void SpriteCB_MonJumpForPokeblock(struct Sprite* sprite)
 {
-    sprite->pos1.x += 4;
-    sprite->pos1.y += sprite->sSpeed;
+    sprite->x += 4;
+    sprite->y += sprite->sSpeed;
     sprite->sSpeed += sprite->sAccel;
 
     // Play cry at jump peak
@@ -988,8 +988,8 @@ static u8 CreatePokeblockSprite(void)
 
 static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
-    sprite->pos1.x -= 4;
-    sprite->pos1.y += sprite->sSpeed;
+    sprite->x -= 4;
+    sprite->y += sprite->sSpeed;
     sprite->sSpeed += sprite->sAccel;
     if (sprite->sSpeed == 10)
         DestroySprite(sprite);
@@ -1094,8 +1094,8 @@ static bool8 InitMonAnimStage(void)
         pokeblockFeed->monInitX = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX], pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE]);
         pokeblockFeed->monInitY = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX], pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE]);
         pokeblockFeed->maxAnimStageTime = pokeblockFeed->animData[ANIMDATA_TIME];
-        pokeblockFeed->monX = pokeblockFeed->monSpritePtr->pos2.x;
-        pokeblockFeed->monY = pokeblockFeed->monSpritePtr->pos2.y;
+        pokeblockFeed->monX = pokeblockFeed->monSpritePtr->x2;
+        pokeblockFeed->monY = pokeblockFeed->monSpritePtr->y2;
 
         // Calculate the positions to move to during the animation
         // The time is counted down during this, so reset it afterwards
@@ -1111,8 +1111,8 @@ static bool8 DoMonAnimStep(void)
 {
     // Update mon's position
     u16 time = sPokeblockFeed->maxAnimStageTime - sPokeblockFeed->animData[ANIMDATA_TIME];
-    sPokeblockFeed->monSpritePtr->pos2.x = sPokeblockFeed->monAnimX[time];
-    sPokeblockFeed->monSpritePtr->pos2.y = sPokeblockFeed->monAnimY[time];
+    sPokeblockFeed->monSpritePtr->x2 = sPokeblockFeed->monAnimX[time];
+    sPokeblockFeed->monSpritePtr->y2 = sPokeblockFeed->monAnimY[time];
 
     // Count down time remaining in this stage
     // Return TRUE if this stage is complete

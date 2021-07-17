@@ -189,7 +189,7 @@ static void CreateCloudSprites(void)
         {
             gWeatherPtr->sprites.s1.cloudSprites[i] = &gSprites[spriteId];
             sprite = gWeatherPtr->sprites.s1.cloudSprites[i];
-            SetSpritePosToMapCoords(sCloudSpriteMapCoords[i].x + 7, sCloudSpriteMapCoords[i].y + 7, &sprite->pos1.x, &sprite->pos1.y);
+            SetSpritePosToMapCoords(sCloudSpriteMapCoords[i].x + 7, sCloudSpriteMapCoords[i].y + 7, &sprite->x, &sprite->y);
             sprite->coordOffsetEnabled = TRUE;
         }
         else
@@ -223,7 +223,7 @@ static void UpdateCloudSprite(struct Sprite *sprite)
     // Move 1 pixel left every 2 frames.
     sprite->data[0] = (sprite->data[0] + 1) & 1;
     if (sprite->data[0])
-        sprite->pos1.x--;
+        sprite->x--;
 }
 
 //------------------------------------------------------------------------------
@@ -593,12 +593,12 @@ static void UpdateRainSprite(struct Sprite *sprite)
         // Raindrop is in its "falling" motion.
         sprite->tPosX += sRainSpriteMovement[gWeatherPtr->isDownpour][0];
         sprite->tPosY += sRainSpriteMovement[gWeatherPtr->isDownpour][1];
-        sprite->pos1.x = sprite->tPosX >> 4;
-        sprite->pos1.y = sprite->tPosY >> 4;
+        sprite->x = sprite->tPosX >> 4;
+        sprite->y = sprite->tPosY >> 4;
 
         if (sprite->tActive
-         && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
-         && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
+         && (sprite->x >= -8 && sprite->x <= 248)
+         && sprite->y >= -16 && sprite->y <= 176)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
@@ -608,8 +608,8 @@ static void UpdateRainSprite(struct Sprite *sprite)
             // Make raindrop splash on the ground
             StartSpriteAnim(sprite, gWeatherPtr->isDownpour + 1);
             sprite->tState = 1;
-            sprite->pos1.x -= gSpriteCoordOffsetX;
-            sprite->pos1.y -= gSpriteCoordOffsetY;
+            sprite->x -= gSpriteCoordOffsetX;
+            sprite->y -= gSpriteCoordOffsetY;
             sprite->coordOffsetEnabled = TRUE;
         }
     }
@@ -925,10 +925,10 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
     u16 rand;
     u16 x = ((sprite->tSnowflakeId * 5) & 7) * 30 + (Random() % 30);
 
-    sprite->pos1.y = -3 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-    sprite->pos1.x = x - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
-    sprite->tPosY = sprite->pos1.y * 128;
-    sprite->pos2.x = 0;
+    sprite->y = -3 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+    sprite->x = x - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+    sprite->tPosY = sprite->y * 128;
+    sprite->x2 = 0;
     rand = Random();
     sprite->tDeltaY = (rand & 3) * 5 + 64;
     sprite->tDeltaY2 = sprite->tDeltaY;
@@ -946,8 +946,8 @@ static void WaitSnowflakeSprite(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
         sprite->callback = UpdateSnowflakeSprite;
-        sprite->pos1.y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->tPosY = sprite->pos1.y * 128;
+        sprite->y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->tPosY = sprite->y * 128;
         gWeatherPtr->snowflakeTimer = 0;
     }
 }
@@ -958,32 +958,32 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
     s16 y;
 
     sprite->tPosY += sprite->tDeltaY;
-    sprite->pos1.y = sprite->tPosY >> 7;
+    sprite->y = sprite->tPosY >> 7;
     sprite->tWaveIndex += sprite->tWaveDelta;
     sprite->tWaveIndex &= 0xFF;
-    sprite->pos2.x = gSineTable[sprite->tWaveIndex] / 64;
+    sprite->x2 = gSineTable[sprite->tWaveIndex] / 64;
 
-    x = (sprite->pos1.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
+    x = (sprite->x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
     if (x & 0x100)
         x |= -0x100;
 
     if (x < -3)
-        sprite->pos1.x = 242 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+        sprite->x = 242 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
     else if (x > 242)
-        sprite->pos1.x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+        sprite->x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
 
-    y = (sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
+    y = (sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
     if (y > 163 && y < 171)
     {
-        sprite->pos1.y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->tPosY = sprite->pos1.y * 128;
+        sprite->y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->tPosY = sprite->y * 128;
         sprite->tFallCounter = 0;
         sprite->tFallDuration = 220;
     }
     else if (y > 242 && y < 250)
     {
-        sprite->pos1.y = 163;
-        sprite->tPosY = sprite->pos1.y * 128;
+        sprite->y = 163;
+        sprite->tPosY = sprite->y * 128;
         sprite->tFallCounter = 0;
         sprite->tFallDuration = 220;
         sprite->invisible = TRUE;
@@ -993,7 +993,7 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
     if (++sprite->tFallCounter == sprite->tFallDuration)
     {
         InitSnowflakeSpriteMovement(sprite);
-        sprite->pos1.y = 250;
+        sprite->y = 250;
         sprite->invisible = TRUE;
         sprite->callback = WaitSnowflakeSprite;
     }
@@ -1441,12 +1441,12 @@ bool8 FogHorizontal_Finish(void)
 
 static void FogHorizontalSpriteCallback(struct Sprite *sprite)
 {
-    sprite->pos2.y = (u8)gSpriteCoordOffsetY;
-    sprite->pos1.x = gWeatherPtr->fogHScrollPosX + 32 + sprite->tSpriteColumn * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y2 = (u8)gSpriteCoordOffsetY;
+    sprite->x = gWeatherPtr->fogHScrollPosX + 32 + sprite->tSpriteColumn * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = 480 + gWeatherPtr->fogHScrollPosX - (4 - sprite->tSpriteColumn) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = 480 + gWeatherPtr->fogHScrollPosX - (4 - sprite->tSpriteColumn) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -1471,8 +1471,8 @@ static void CreateFogHorizontalSprites(void)
             {
                 sprite = &gSprites[spriteId];
                 sprite->tSpriteColumn = i % 5;
-                sprite->pos1.x = (i % 5) * 64 + 32;
-                sprite->pos1.y = (i / 5) * 64 + 32;
+                sprite->x = (i % 5) * 64 + 32;
+                sprite->y = (i / 5) * 64 + 32;
                 gWeatherPtr->sprites.s2.fogHSprites[i] = sprite;
             }
             else
@@ -1700,12 +1700,12 @@ static void UpdateAshSprite(struct Sprite *sprite)
         sprite->tOffsetY++;
     }
 
-    sprite->pos1.y = gSpriteCoordOffsetY + sprite->tOffsetY;
-    sprite->pos1.x = gWeatherPtr->ashBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y = gSpriteCoordOffsetY + sprite->tOffsetY;
+    sprite->x = gWeatherPtr->ashBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = gWeatherPtr->ashBaseSpritesX + 480 - (4 - sprite->tSpriteColumn) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = gWeatherPtr->ashBaseSpritesX + 480 - (4 - sprite->tSpriteColumn) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -1910,12 +1910,12 @@ static void DestroyFogDiagonalSprites(void)
 
 static void UpdateFogDiagonalSprite(struct Sprite *sprite)
 {
-    sprite->pos2.y = gWeatherPtr->fogDPosY;
-    sprite->pos1.x = gWeatherPtr->fogDBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y2 = gWeatherPtr->fogDPosY;
+    sprite->x = gWeatherPtr->fogDBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = gWeatherPtr->fogDBaseSpritesX + 480 - (4 - sprite->tSpriteColumn) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = gWeatherPtr->fogDBaseSpritesX + 480 - (4 - sprite->tSpriteColumn) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -2186,12 +2186,12 @@ static void CreateSwirlSandstormSprites(void)
 
 static void UpdateSandstormSprite(struct Sprite *sprite)
 {
-    sprite->pos2.y = gWeatherPtr->sandstormPosY;
-    sprite->pos1.x = gWeatherPtr->sandstormBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y2 = gWeatherPtr->sandstormPosY;
+    sprite->x = gWeatherPtr->sandstormBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = gWeatherPtr->sandstormBaseSpritesX + 480 - (4 - sprite->tSpriteColumn) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = gWeatherPtr->sandstormBaseSpritesX + 480 - (4 - sprite->tSpriteColumn) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -2205,16 +2205,16 @@ static void UpdateSandstormSwirlSprite(struct Sprite *sprite)
 {
     u32 x, y;
 
-    if (--sprite->pos1.y < -48)
+    if (--sprite->y < -48)
     {
-        sprite->pos1.y = 208;
+        sprite->y = 208;
         sprite->tRadius = 4;
     }
 
     x = sprite->tRadius * gSineTable[sprite->tWaveIndex];
     y = sprite->tRadius * gSineTable[sprite->tWaveIndex + 0x40];
-    sprite->pos2.x = x >> 8;
-    sprite->pos2.y = y >> 8;
+    sprite->x2 = x >> 8;
+    sprite->y2 = y >> 8;
     sprite->tWaveIndex = (sprite->tWaveIndex + 10) & 0xFF;
     if (++sprite->tRadiusCounter > 8)
     {
@@ -2404,17 +2404,17 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
         sprite->tScrollXCounter = 0;
         if (sprite->tScrollXDir == 0)
         {
-            if (++sprite->pos2.x > 4)
+            if (++sprite->x2 > 4)
                 sprite->tScrollXDir = 1;
         }
         else
         {
-            if (--sprite->pos2.x <= 0)
+            if (--sprite->x2 <= 0)
                 sprite->tScrollXDir = 0;
         }
     }
 
-    sprite->pos1.y -= 3;
+    sprite->y -= 3;
     if (++sprite->tCounter >= 120)
         DestroySprite(sprite);
 }

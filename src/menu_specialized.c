@@ -1310,13 +1310,13 @@ static void SetConditionSparklePosition(struct Sprite *sprite)
 
     if (mon != NULL)
     {
-        sprite->pos1.x = mon->pos1.x + mon->pos2.x + sConditionSparkleCoords[sprite->sSparkleId][0];
-        sprite->pos1.y = mon->pos1.y + mon->pos2.y + sConditionSparkleCoords[sprite->sSparkleId][1];
+        sprite->x = mon->x + mon->x2 + sConditionSparkleCoords[sprite->sSparkleId][0];
+        sprite->y = mon->y + mon->y2 + sConditionSparkleCoords[sprite->sSparkleId][1];
     }
     else
     {
-        sprite->pos1.x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
-        sprite->pos1.y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
+        sprite->x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
+        sprite->y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
     }
 }
 
