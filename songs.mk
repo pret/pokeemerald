@@ -2375,3 +2375,24 @@ $(MID_SUBDIR)/bw_seq_bgm_r_a_var.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_r_a.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V063
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_norapoke.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_win1.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V116
+
+$(MID_SUBDIR)/bw_seq_me_lvup.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V090 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var1.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V060

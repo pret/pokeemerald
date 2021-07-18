@@ -3116,7 +3116,7 @@ DirectSoundWaveData_hg_019celloc4::
 
 	.align 2
 DirectSoundWaveData_hg_020celloe3::
-	.incbin "sound/direct_sound_samples/hg_020celloe3.bin" @ used in bw
+	.incbin "sound/direct_sound_samples/hg_020celloe3.bin"
 
 	.align 2
 DirectSoundWaveData_hg_021cellog2::
@@ -3689,3 +3689,27 @@ DirectSoundWaveData_bw_192str2f4::
 	.align 2
 DirectSoundWaveData_bw_str2d5_pc::
 	.incbin "sound/direct_sound_samples/bw_str2d5_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_110kick::
+	.incbin "sound/direct_sound_samples/bw_110kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_092harpffg3::
+	.incbin "sound/direct_sound_samples/bw_092harpffg3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_093harpffg4::
+	.incbin "sound/direct_sound_samples/bw_093harpffg4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_091harpffe5::
+	.incbin "sound/direct_sound_samples/bw_091harpffe5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_109kick::
+	.incbin "sound/direct_sound_samples/bw_109kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_086clap::
+	.incbin "sound/direct_sound_samples/bw_086clap.bin"

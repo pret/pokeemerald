@@ -26,4 +26,18 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 60, 20, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    				@ 127/ 80/  0/110/ 20	
 	voice_directsound 60, 100, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/100	
 	voice_directsound 63, 84, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 84	+ 3
-	voice_directsound 60, 30, DirectSoundWaveData_bw_201tamb, 255, 0, 227, 205    				@ 127/224/120/116/ 30
+	voice_directsound 60, 30, DirectSoundWaveData_bw_201tamb, 255, 0, 227, 205    				@ 127/127/120/116/ 30
+	voice_directsound 64, 64, DirectSoundWaveData_bw_110kick, 255, 0, 255, 205    				@ 127/127/127/116/ 64   + 4
+	voice_directsound 66, 64, DirectSoundWaveData_bw_110kick, 255, 0, 255, 205    				@ 127/127/127/116/ 64   + 6
+	voice_directsound 67, 64, DirectSoundWaveData_bw_110kick, 255, 0, 255, 205    				@ 127/127/127/116/ 64   + 7
+	voice_directsound 68, 64, DirectSoundWaveData_bw_110kick, 255, 0, 255, 205    				@ 127/127/127/116/ 64   + 8
+	voice_directsound 60, 104, DirectSoundWaveData_hg_062chh, 255, 242, 0, 171    				@ 127/100/  0/120/104
+	voice_directsound 61, 104, DirectSoundWaveData_hg_062chh, 255, 242, 0, 171    				@ 127/100/  0/120/104	+ 1
+	voice_directsound 63, 104, DirectSoundWaveData_hg_062chh, 255, 242, 0, 171    				@ 127/100/  0/120/104	+ 3
+	voice_directsound 60, 104, DirectSoundWaveData_hg_063ohh, 255, 241, 0, 171    				@ 127/102/  0/120/104
+	voice_directsound 72, 104, DirectSoundWaveData_hg_063ohh, 255, 241, 0, 171    				@ 127/102/  0/120/104	+12
+	voice_directsound 61, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 1
+	voice_directsound 60, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114
+	voice_directsound 61, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 1
+	voice_directsound 64, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 4
+	voice_directsound 60, 14, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 14

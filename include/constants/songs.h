@@ -924,6 +924,13 @@
 #define BW_SEQ_BGM_E_FRIEND          899 // Let's Go Together!
 #define BW_SEQ_BGM_R_A_VAR           900 // Route 1 (No Tambourine)
 #define BW_SEQ_BGM_R_A               901 // Route 1
+#define BW_SEQ_BGM_VS_NORAPOKE       902 // Battle! (Wild Pokémon)                        (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_WIN1              903 // Victory! (Wild Pokémon)
+#define BW_SEQ_ME_LVUP               904 // Level Up!
+#define BW_SEQ_BGM_T_02_VAR1         905 // Accumula Town
+#define BW_SEQ_BGM_T_02_VAR2         906 // Accumula Town (Piano)
+#define BW_SEQ_BGM_T_02_VAR3         907 // Accumula Town (Drums)
+#define BW_SEQ_BGM_T_02              908 // Accumula Town (Piano & Drums)
 
 // Black 2 & White 2 Music
 

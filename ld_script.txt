@@ -1597,6 +1597,13 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_e_friend.o(.rodata);
         sound/songs/midi/bw_seq_bgm_r_a_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_r_a.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_norapoke.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_win1.o(.rodata);
+        sound/songs/midi/bw_seq_me_lvup.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_02_var1.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_02_var2.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_02_var3.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_02.o(.rodata);
     } =0
 
     lib_rodata :

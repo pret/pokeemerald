@@ -10,7 +10,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup295, KeySplitTable74    @ marimba
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup297, KeySplitTable76    @ vibraphone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup240, KeySplitTable39    @ xylophone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -33,9 +33,9 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup257, KeySplitTable66    @ cello (top split is never used)
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 254, 242, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup260, KeySplitTable61    @ timpani
