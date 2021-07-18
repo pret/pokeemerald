@@ -3201,7 +3201,7 @@ bool32 CanThrowLastUsedBall(void)
 
 void TryAddLastUsedBallItemSprites(void)
 {
-    if (gSaveBlock2Ptr->lastUsedBall != ITEM_NONE && !CheckBagHasItem(gSaveBlock2Ptr->lastUsedBall, 1))
+    if (gSaveBlock2Ptr->lastUsedBall != 0 && !CheckBagHasItem(gSaveBlock2Ptr->lastUsedBall, 1))
     {
         // we're out of the last used ball, so just set it to the first ball in the bag
         // we have to compact the bag first bc it is typically only compacted when you open it
