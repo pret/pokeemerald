@@ -240,7 +240,7 @@
 .include "sound/voicegroups/voicegroup238.inc"
 .include "sound/voicegroups/voicegroup239.inc"
 .include "sound/voicegroups/voicegroup240.inc"
-.include "sound/voicegroups/voicegroup241.inc" @ used in bw
+.include "sound/voicegroups/voicegroup241.inc"
 .include "sound/voicegroups/voicegroup242.inc"
 .include "sound/voicegroups/voicegroup243.inc"
 .include "sound/voicegroups/voicegroup244.inc"
@@ -254,12 +254,12 @@
 .include "sound/voicegroups/voicegroup252.inc"
 .include "sound/voicegroups/voicegroup253.inc"
 .include "sound/voicegroups/voicegroup254.inc"
-.include "sound/voicegroups/voicegroup255.inc" @ used in bw
+.include "sound/voicegroups/voicegroup255.inc"
 .include "sound/voicegroups/voicegroup256.inc"
 .include "sound/voicegroups/voicegroup257.inc"
 .include "sound/voicegroups/voicegroup258.inc"
 .include "sound/voicegroups/voicegroup259.inc"
-.include "sound/voicegroups/voicegroup260.inc" @ used in bw
+.include "sound/voicegroups/voicegroup260.inc"
 .include "sound/voicegroups/voicegroup261.inc"
 .include "sound/voicegroups/voicegroup262.inc"
 .include "sound/voicegroups/voicegroup263.inc"
@@ -299,3 +299,5 @@
 .include "sound/voicegroups/voicegroup297.inc"
 .include "sound/voicegroups/voicegroup298.inc"
 .include "sound/voicegroups/voicegroup299.inc"
+.include "sound/voicegroups/voicegroup300.inc"
+.include "sound/voicegroups/voicegroup301.inc"

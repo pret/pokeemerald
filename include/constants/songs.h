@@ -931,6 +931,8 @@
 #define BW_SEQ_BGM_T_02_VAR2         906 // Accumula Town (Piano)
 #define BW_SEQ_BGM_T_02_VAR3         907 // Accumula Town (Drums)
 #define BW_SEQ_BGM_T_02              908 // Accumula Town (Piano & Drums)
+#define BW_SEQ_BGM_E_TSURETEKE2      909 // Hurry Along 2
+#define BW_SEQ_BGM_POKECEN           910 // Pokémon Center
 
 // Black 2 & White 2 Music
 

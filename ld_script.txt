@@ -1604,6 +1604,8 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_t_02_var2.o(.rodata);
         sound/songs/midi/bw_seq_bgm_t_02_var3.o(.rodata);
         sound/songs/midi/bw_seq_bgm_t_02.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_tsureteke2.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_pokecen.o(.rodata);
     } =0
 
     lib_rodata :

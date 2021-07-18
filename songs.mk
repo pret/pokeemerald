@@ -2396,3 +2396,9 @@ $(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_e_tsureteke2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V066
+
+$(MID_SUBDIR)/bw_seq_bgm_pokecen.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V066

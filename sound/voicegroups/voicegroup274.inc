@@ -2,10 +2,10 @@
 voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
 	voice_keysplit voicegroup233, KeySplitTable35    @ piano (HGSS)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup282, KeySplitTable75    @ piano | 41 | 50 ||||| 77
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vibrc5_pc, 255, 248, 2, 205
 	voice_keysplit voicegroup290, KeySplitTable70    @ harpsichord
 	voice_keysplit voicegroup295, KeySplitTable74    @ marimba
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -23,8 +23,8 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
 	voice_keysplit voicegroup247, KeySplitTable72    @ nylon guitar (HGSS)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup300, KeySplitTable8     @ fingered bass (pokecenter, icirrus)
+	voice_keysplit voicegroup298, KeySplitTable77    @ strings 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
 	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
@@ -34,7 +34,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 254, 242, 255, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup301, KeySplitTable79    @ clarinet (pokecenter)
 	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

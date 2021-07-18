@@ -3713,3 +3713,23 @@ DirectSoundWaveData_bw_109kick::
 	.align 2
 DirectSoundWaveData_bw_086clap::
 	.incbin "sound/direct_sound_samples/bw_086clap.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vibrc5_pc::
+	.incbin "sound/direct_sound_samples/bw_vibrc5_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fingerbassa2_pc::
+	.incbin "sound/direct_sound_samples/bw_fingerbassa2_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fingerbassa3_pc::
+	.incbin "sound/direct_sound_samples/bw_fingerbassa3_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_claric4_pc::
+	.incbin "sound/direct_sound_samples/bw_claric4_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_claria4_pc::
+	.incbin "sound/direct_sound_samples/bw_claria4_pc.bin"
