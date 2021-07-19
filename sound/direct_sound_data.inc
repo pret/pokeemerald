@@ -3733,3 +3733,43 @@ DirectSoundWaveData_bw_claric4_pc::
 	.align 2
 DirectSoundWaveData_bw_claria4_pc::
 	.incbin "sound/direct_sound_samples/bw_claria4_pc.bin"
+
+	.align 2
+DirectSoundWaveData_bw_090harpc6::
+	.incbin "sound/direct_sound_samples/bw_090harpc6.bin"
+
+	.align 2
+DirectSoundWaveData_bw_029choira3::
+	.incbin "sound/direct_sound_samples/bw_029choira3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_032choirf4::
+	.incbin "sound/direct_sound_samples/bw_032choirf4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sambawhistlec4_route2::
+	.incbin "sound/direct_sound_samples/bw_sambawhistlec4_route2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_176snare::
+	.incbin "sound/direct_sound_samples/bw_176snare.bin"
+
+	.align 2
+DirectSoundWaveData_bw_043crash::
+	.incbin "sound/direct_sound_samples/bw_043crash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceivertoneg4::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertoneg4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceivertonec5::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertonec5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceivertoneg5::
+	.incbin "sound/direct_sound_samples/bw_xtransceivertoneg5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_xtransceiverbeep::
+	.incbin "sound/direct_sound_samples/bw_xtransceiverbeep.bin"

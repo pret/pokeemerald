@@ -301,3 +301,6 @@
 .include "sound/voicegroups/voicegroup299.inc"
 .include "sound/voicegroups/voicegroup300.inc"
 .include "sound/voicegroups/voicegroup301.inc"
+.include "sound/voicegroups/voicegroup302.inc"
+.include "sound/voicegroups/voicegroup303.inc"
+.include "sound/voicegroups/voicegroup304.inc"

@@ -933,6 +933,19 @@
 #define BW_SEQ_BGM_T_02              908 // Accumula Town (Piano & Drums)
 #define BW_SEQ_BGM_E_TSURETEKE2      909 // Hurry Along 2
 #define BW_SEQ_BGM_POKECEN           910 // Pokémon Center
+#define BW_SEQ_ME_ASA                911 // Pokémon Healed                                (TODO: SWEEP PITCH!!)
+#define BW_SEQ_ME_HYOUKA1            912 // Pokédex Evaluation... You've Just Begun!
+#define BW_SEQ_BGM_E_SAGE            913 // Team Plasma Plots
+#define BW_SEQ_BGM_R_B_SP_VAR        914 // Route 2 (Spring) (No Percussion)
+#define BW_SEQ_BGM_R_B_SP            915 // Route 2 (Spring)
+#define BW_SEQ_BGM_R_B_SU_VAR        916 // Route 2 (Summer) (No Percussion)
+#define BW_SEQ_BGM_R_B_SU            917 // Route 2 (Summer)
+#define BW_SEQ_BGM_R_B_AU_VAR        918 // Route 2 (Autumn) (No Percussion)
+#define BW_SEQ_BGM_R_B_AU            919 // Route 2 (Autumn)
+#define BW_SEQ_BGM_R_B_WI_VAR        920 // Route 2 (Winter) (No Percussion)
+#define BW_SEQ_BGM_R_B_WI            921 // Route 2 (Winter)
+#define BW_SEQ_ME_CALL               922 // Xtransceiver
+#define BW_SEQ_BGM_EYE_01            923 // Trainers' Eyes Meet (Youngster)
 
 // Black 2 & White 2 Music
 
