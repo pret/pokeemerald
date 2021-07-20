@@ -1,13 +1,13 @@
-LilycoveCity_House3_MapScripts:: @ 821EE3C
+LilycoveCity_House3_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_House3_OnTransition
 	.byte 0
 
-LilycoveCity_House3_OnTransition: @ 821EE42
+LilycoveCity_House3_OnTransition:
 	random 4
 	copyvar VAR_TEMP_1, VAR_RESULT
 	end
 
-LilycoveCity_House3_EventScript_PokefanF:: @ 821EE4B
+LilycoveCity_House3_EventScript_PokefanF::
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks, MSGBOX_YESNO
@@ -20,7 +20,7 @@ LilycoveCity_House3_EventScript_PokefanF:: @ 821EE4B
 	release
 	end
 
-LilycoveCity_House3_EventScript_DeclinePokeblockLearn:: @ 821EE75
+LilycoveCity_House3_EventScript_DeclinePokeblockLearn::
 	msgbox LilycoveCity_House3_Text_OhAreYouSure, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
@@ -28,7 +28,7 @@ LilycoveCity_House3_EventScript_DeclinePokeblockLearn:: @ 821EE75
 	release
 	end
 
-LilycoveCity_House3_EventScript_Man:: @ 821EE8A
+LilycoveCity_House3_EventScript_Man::
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_HappyToHaveQuadruplets, MSGBOX_DEFAULT
@@ -38,7 +38,7 @@ LilycoveCity_House3_EventScript_Man:: @ 821EE8A
 	release
 	end
 
-LilycoveCity_House3_EventScript_GameBoyKid1:: @ 821EEA1
+LilycoveCity_House3_EventScript_GameBoyKid1::
 	lock
 	faceplayer
 	switch VAR_TEMP_1
@@ -48,7 +48,7 @@ LilycoveCity_House3_EventScript_GameBoyKid1:: @ 821EEA1
 	case 3, LilycoveCity_House3_EventScript_WereDoingContest
 	end
 
-LilycoveCity_House3_EventScript_GameBoyKid2:: @ 821EED5
+LilycoveCity_House3_EventScript_GameBoyKid2::
 	lock
 	faceplayer
 	switch VAR_TEMP_1
@@ -58,7 +58,7 @@ LilycoveCity_House3_EventScript_GameBoyKid2:: @ 821EED5
 	case 3, LilycoveCity_House3_EventScript_WereDoingContest
 	end
 
-LilycoveCity_House3_EventScript_GameBoyKid3:: @ 821EF09
+LilycoveCity_House3_EventScript_GameBoyKid3::
 	lock
 	faceplayer
 	switch VAR_TEMP_1
@@ -68,7 +68,7 @@ LilycoveCity_House3_EventScript_GameBoyKid3:: @ 821EF09
 	case 3, LilycoveCity_House3_EventScript_WereDoingContest
 	end
 
-LilycoveCity_House3_EventScript_GameBoyKid4:: @ 821EF3D
+LilycoveCity_House3_EventScript_GameBoyKid4::
 	lock
 	faceplayer
 	switch VAR_TEMP_1
@@ -78,27 +78,27 @@ LilycoveCity_House3_EventScript_GameBoyKid4:: @ 821EF3D
 	case 3, LilycoveCity_House3_EventScript_WereDoingContest
 	end
 
-LilycoveCity_House3_EventScript_WereDoingMultiBattle:: @ 821EF71
+LilycoveCity_House3_EventScript_WereDoingMultiBattle::
 	msgbox LilycoveCity_House3_Text_GoingToWinMultiBattles, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_House3_EventScript_WereMixingRecords:: @ 821EF7B
+LilycoveCity_House3_EventScript_WereMixingRecords::
 	msgbox LilycoveCity_House3_Text_LikeMixingAtRecordCorner, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_House3_EventScript_WereBlendingBerries:: @ 821EF85
+LilycoveCity_House3_EventScript_WereBlendingBerries::
 	msgbox LilycoveCity_House3_Text_MakePokeblocksWithBerryBlender, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_House3_EventScript_WereDoingContest:: @ 821EF8F
+LilycoveCity_House3_EventScript_WereDoingContest::
 	msgbox LilycoveCity_House3_Text_GoingToEnterContest, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks: @ 821EF99
+LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks:
 	.string "Oh, my, my! Are you traveling alone?\n"
 	.string "But you're so young! Good for you!\p"
 	.string "I'm sure my kids could learn a thing\n"
@@ -109,12 +109,12 @@ LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks: @ 821EF99
 	.string "Would you like to learn from me,\n"
 	.string "a master of {POKEBLOCK}S?$"
 
-LilycoveCity_House3_Text_OhAreYouSure: @ 821F0A9
+LilycoveCity_House3_Text_OhAreYouSure:
 	.string "Oh? Are you sure?\p"
 	.string "You shouldn't always try to do\n"
 	.string "everything by yourself, dear!$"
 
-LilycoveCity_House3_Text_ExplainPokeblocks: @ 821F0F8
+LilycoveCity_House3_Text_ExplainPokeblocks:
 	.string "Oh, good! You're a smart soul!\n"
 	.string "This is a bit long, so listen up!\p"
 	.string "Are you ready?\p"
@@ -143,26 +143,26 @@ LilycoveCity_House3_Text_ExplainPokeblocks: @ 821F0F8
 	.string "the world would be a happier place.\p"
 	.string "Don't give up, dear!$"
 
-LilycoveCity_House3_Text_HappyToHaveQuadruplets: @ 821F430
+LilycoveCity_House3_Text_HappyToHaveQuadruplets:
 	.string "When my wife gave birth to quadruplets,\n"
 	.string "you bet I was shocked.\p"
 	.string "But, now, seeing them play together,\n"
 	.string "it makes me happy.$"
 
-LilycoveCity_House3_Text_GoingToWinMultiBattles: @ 821F4A7
+LilycoveCity_House3_Text_GoingToWinMultiBattles:
 	.string "We're having MULTI BATTLES, but I know\n"
 	.string "I'm going to win.$"
 
-LilycoveCity_House3_Text_LikeMixingAtRecordCorner: @ 821F4E0
+LilycoveCity_House3_Text_LikeMixingAtRecordCorner:
 	.string "We like mixing stuff at\n"
 	.string "the RECORD CORNER.\p"
 	.string "But what gets mixed up?$"
 
-LilycoveCity_House3_Text_MakePokeblocksWithBerryBlender: @ 821F523
+LilycoveCity_House3_Text_MakePokeblocksWithBerryBlender:
 	.string "We're going to make super {POKEBLOCK}S\n"
 	.string "with a BERRY BLENDER!$"
 
-LilycoveCity_House3_Text_GoingToEnterContest: @ 821F55A
+LilycoveCity_House3_Text_GoingToEnterContest:
 	.string "I want to brag about how tough my\n"
 	.string "POKéMON is, so we're going to enter\l"
 	.string "a CONTEST together.$"

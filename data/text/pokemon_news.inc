@@ -1,5 +1,5 @@
 
-gPokeNewsTextSlateport_Upcoming:: @ 0828D0F8
+gPokeNewsTextSlateport_Upcoming::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "SLATEPORT's most popular kind of guy,\n"
@@ -14,7 +14,7 @@ gPokeNewsTextSlateport_Upcoming:: @ 0828D0F8
 	.string "would be well worth your while that day.\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextSlateport_Ongoing:: @ 0828D2A1
+gPokeNewsTextSlateport_Ongoing::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "This is the news you've all been\n"
@@ -28,7 +28,7 @@ gPokeNewsTextSlateport_Ongoing:: @ 0828D2A1
 	.string "to your heart's content?\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextSlateport_Ending:: @ 0828D3F5
+gPokeNewsTextSlateport_Ending::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "This is the news you've all been\n"
@@ -43,7 +43,7 @@ gPokeNewsTextSlateport_Ending:: @ 0828D3F5
 	.string "a most enjoyable shopping trip?\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextGameCorner_Upcoming:: @ 0828D571
+gPokeNewsTextGameCorner_Upcoming::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "It's approaching!\n"
@@ -54,7 +54,7 @@ gPokeNewsTextGameCorner_Upcoming:: @ 0828D571
 	.string "may be lucky on this particular day!\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextGameCorner_Ongoing:: @ 0828D66F
+gPokeNewsTextGameCorner_Ongoing::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "It's here!\n"
@@ -67,7 +67,7 @@ gPokeNewsTextGameCorner_Ongoing:: @ 0828D66F
 	.string "This is the place!\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextGameCorner_Ending:: @ 0828D768
+gPokeNewsTextGameCorner_Ending::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "It's here!\n"
@@ -80,7 +80,7 @@ gPokeNewsTextGameCorner_Ending:: @ 0828D768
 	.string "The location is MAUVILLE CITY.\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextLilycove_Upcoming:: @ 0828D875
+gPokeNewsTextLilycove_Upcoming::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "We've just received wonderful news\n"
@@ -91,7 +91,7 @@ gPokeNewsTextLilycove_Upcoming:: @ 0828D875
 	.string "you've always wanted could be yours!\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextLilycove_Ongoing:: @ 0828D994
+gPokeNewsTextLilycove_Ongoing::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "This is the news you've all been\n"
@@ -104,7 +104,7 @@ gPokeNewsTextLilycove_Ongoing:: @ 0828D994
 	.string "with them all!\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextLilycove_Ending:: @ 0828DAC0
+gPokeNewsTextLilycove_Ending::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "This is the news you've all been\n"
@@ -117,7 +117,7 @@ gPokeNewsTextLilycove_Ending:: @ 0828DAC0
 	.string "with them all!\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextBlendMaster_Upcoming:: @ 0828DBEC
+gPokeNewsTextBlendMaster_Upcoming::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "We have big news for everyone\n"
@@ -133,7 +133,7 @@ gPokeNewsTextBlendMaster_Upcoming:: @ 0828DBEC
 	.string "are urged to save their BERRIES.\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextBlendMaster_Ongoing:: @ 0828DD9E
+gPokeNewsTextBlendMaster_Ongoing::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "We have big news for everyone\n"
@@ -148,7 +148,7 @@ gPokeNewsTextBlendMaster_Ongoing:: @ 0828DD9E
 	.string "should hurry to LILYCOVE.\p"
 	.string "That's the news on POKéMON NEWS.$"
 
-gPokeNewsTextBlendMaster_Ending:: @ 0828DF05
+gPokeNewsTextBlendMaster_Ending::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"
 	.string "It's incredible!\n"

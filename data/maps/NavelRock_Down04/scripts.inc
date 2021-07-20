@@ -1,3 +1,3 @@
-NavelRock_Down04_MapScripts:: @ 826924D
+NavelRock_Down04_MapScripts::
 	.byte 0
 
