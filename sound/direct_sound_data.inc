@@ -3619,10 +3619,6 @@ DirectSoundWaveData_bw_snare_vsrival::
 	.incbin "sound/direct_sound_samples/bw_snare_vsrival.bin"
 
 	.align 2
-DirectSoundWaveData_bw_castanet_vsrival::
-	.incbin "sound/direct_sound_samples/bw_castanet_vsrival.bin"
-
-	.align 2
 DirectSoundWaveData_bw_175snare::
 	.incbin "sound/direct_sound_samples/bw_175snare.bin"
 
@@ -3773,3 +3769,59 @@ DirectSoundWaveData_bw_xtransceivertoneg5::
 	.align 2
 DirectSoundWaveData_bw_xtransceiverbeep::
 	.incbin "sound/direct_sound_samples/bw_xtransceiverbeep.bin"
+
+	.align 2
+DirectSoundWaveData_bw_222tubac2::
+	.incbin "sound/direct_sound_samples/bw_222tubac2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_221tubaa2::
+	.incbin "sound/direct_sound_samples/bw_221tubaa2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sawleadc4_vsleader::
+	.incbin "sound/direct_sound_samples/bw_sawleadc4_vsleader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sawleadc5_vsleader::
+	.incbin "sound/direct_sound_samples/bw_sawleadc5_vsleader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_163shaker::
+	.incbin "sound/direct_sound_samples/bw_163shaker.bin"
+
+	.align 2
+DirectSoundWaveData_bw_022casta::
+	.incbin "sound/direct_sound_samples/bw_022casta.bin"
+
+	.align 2
+DirectSoundWaveData_bw_083guiro_long::
+	.incbin "sound/direct_sound_samples/bw_083guiro_long.bin"
+
+	.align 2
+DirectSoundWaveData_bw_084guiro_short::
+	.incbin "sound/direct_sound_samples/bw_084guiro_short.bin"
+
+	.align 2
+DirectSoundWaveData_bw_213tri_closed::
+	.incbin "sound/direct_sound_samples/bw_213tri_closed.bin"
+
+	.align 2
+DirectSoundWaveData_bw_214tri_open::
+	.incbin "sound/direct_sound_samples/bw_214tri_open.bin"
+
+	.align 2
+DirectSoundWaveData_bw_159rim::
+	.incbin "sound/direct_sound_samples/bw_159rim.bin"
+
+	.align 2
+DirectSoundWaveData_bw_108kick909::
+	.incbin "sound/direct_sound_samples/bw_108kick909.bin"
+
+	.align 2
+DirectSoundWaveData_bw_172snare909::
+	.incbin "sound/direct_sound_samples/bw_172snare909.bin"
+
+	.align 2
+DirectSoundWaveData_bw_042crash909::
+	.incbin "sound/direct_sound_samples/bw_042crash909.bin"

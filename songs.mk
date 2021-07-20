@@ -2441,3 +2441,27 @@ $(MID_SUBDIR)/bw_seq_me_call.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_eye_01.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V064
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_trainer.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_win2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V095
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V065
+
+$(MID_SUBDIR)/bw_seq_me_item.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V070 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_c_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V064
+
+$(MID_SUBDIR)/bw_seq_me_hyouka2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V081 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_d_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V093
+
+$(MID_SUBDIR)/bw_seq_bgm_d_01_b1f.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V093

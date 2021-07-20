@@ -7,8 +7,8 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 61, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+ 1
 	voice_directsound 60, 64, DirectSoundWaveData_bw_snare_vsrival, 255, 0, 255, 171    		@ 127/127/127/120/ 64	
 	voice_directsound 62, 64, DirectSoundWaveData_bw_snare_vsrival, 255, 0, 255, 171    		@ 127/127/127/120/ 64	+ 2
-	voice_directsound 60, 64, DirectSoundWaveData_bw_castanet_vsrival, 255, 0, 255, 171    		@ 127/127/127/120/ 64	
-	voice_directsound 61, 64, DirectSoundWaveData_bw_castanet_vsrival, 255, 0, 255, 171    		@ 127/127/127/120/ 64	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_dp_castanet_22, 255, 0, 255, 171    		@ 127/127/127/120/ 64	
+	voice_directsound 61, 64, DirectSoundWaveData_dp_castanet_22, 255, 0, 255, 171    		@ 127/127/127/120/ 64	+ 1
 	voice_directsound 60, 64, DirectSoundWaveData_bw_175snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64	
 	voice_directsound 60, 64, DirectSoundWaveData_bw_handclap_vsrival, 255, 0, 255, 205    		@ 127/127/127/116/ 64	
 	voice_directsound 60, 64, DirectSoundWaveData_dp_093snare, 255, 226, 127, 205    			@ 127/114/ 90/116/ 64	
@@ -41,3 +41,21 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 61, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 1
 	voice_directsound 64, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 4
 	voice_directsound 60, 14, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 14
+	voice_directsound 65, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205    				@ 127/127/120/116/ 64   + 5
+	voice_directsound 60, 80, DirectSoundWaveData_hg_062chh, 255, 242, 0, 171    				@ 127/100/  0/120/ 80
+	voice_directsound 61, 30, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 30	+ 1
+	voice_directsound 60, 80, DirectSoundWaveData_hg_063ohh, 255, 241, 0, 171    				@ 127/102/  0/120/ 80
+	voice_directsound 61, 110, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/110	+ 1
+	voice_directsound 63, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+ 3
+	voice_directsound 64, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+ 4
+	voice_directsound 67, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+ 7
+	voice_directsound 68, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+ 8
+	voice_directsound 71, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+11
+	voice_directsound 72, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+12
+	voice_directsound 60, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	
+	voice_directsound 64, 44, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 44	+ 4
+	voice_directsound 66, 64, DirectSoundWaveData_bw_159rim, 255, 0, 227, 205    				@ 127/127/120/116/ 64	+ 6
+	voice_directsound 60, 64, DirectSoundWaveData_bw_108kick909, 255, 0, 227, 205    			@ 127/127/120/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_172snare909, 255, 226, 127, 205    		@ 127/114/ 90/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_042crash909, 255, 242, 0, 205    			@ 127/100/  0/116/ 64
+	voice_directsound 62, 64, DirectSoundWaveData_bw_042crash909, 255, 242, 0, 205    			@ 127/100/  0/116/ 64	+ 2

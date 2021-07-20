@@ -925,6 +925,14 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_r_b_wi, 0, 0
 	song bw_seq_me_call, 2, 2
 	song bw_seq_bgm_eye_01, 0, 0
+	song bw_seq_bgm_vs_trainer, 0, 0
+	song bw_seq_bgm_win2, 0, 0
+	song bw_seq_bgm_eye_02, 0, 0
+	song bw_seq_me_item, 2, 2
+	song bw_seq_bgm_c_01, 0, 0
+	song bw_seq_me_hyouka2, 2, 2
+	song bw_seq_bgm_d_01, 0, 0
+	song bw_seq_bgm_d_01_b1f, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

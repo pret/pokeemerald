@@ -946,6 +946,14 @@
 #define BW_SEQ_BGM_R_B_WI            921 // Route 2 (Winter)
 #define BW_SEQ_ME_CALL               922 // Xtransceiver
 #define BW_SEQ_BGM_EYE_01            923 // Trainers' Eyes Meet (Youngster)
+#define BW_SEQ_BGM_VS_TRAINER        924 // Battle! (Trainer Battle)
+#define BW_SEQ_BGM_WIN2              925 // Victory! (Trainer Battle)
+#define BW_SEQ_BGM_EYE_02            926 // Trainers' Eyes Meet (Lass)
+#define BW_SEQ_ME_ITEM               927 // Obtained an Item!
+#define BW_SEQ_BGM_C_01              928 // Striaton City
+#define BW_SEQ_ME_HYOUKA2            929 // Pokédex Evaluation... You're on Your Way!
+#define BW_SEQ_BGM_D_01              930 // The Dreamyard
+#define BW_SEQ_BGM_D_01_B1F          931 // The Dreamyard (B1F)
 
 // Black 2 & White 2 Music
 

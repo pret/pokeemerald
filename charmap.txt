@@ -1381,6 +1381,14 @@ BW_SEQ_BGM_R_B_WI_VAR        = 98 03
 BW_SEQ_BGM_R_B_WI            = 99 03
 BW_SEQ_ME_CALL               = 9A 03
 BW_SEQ_BGM_EYE_01            = 9B 03
+BW_SEQ_BGM_VS_TRAINER        = 9C 03
+BW_SEQ_BGM_WIN2              = 9D 03
+BW_SEQ_BGM_EYE_02            = 9E 03
+BW_SEQ_ME_ITEM               = 9F 03
+BW_SEQ_BGM_C_01              = A0 03
+BW_SEQ_ME_HYOUKA2            = A1 03
+BW_SEQ_BGM_D_01              = A2 03
+BW_SEQ_BGM_D_01_B1F          = A3 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

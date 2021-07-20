@@ -3,7 +3,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup282, KeySplitTable75    @ piano | 41 | 50 ||||| 77
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -43,14 +43,14 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup262, KeySplitTable27    @ trombones
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup305, KeySplitTable43    @ tuba
 	voice_keysplit voicegroup288, KeySplitTable69    @ oboe || 77
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
 	voice_directsound 60, 0, DirectSoundWaveData_dp_timpany_as_16, 255, 248, 0, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_hg_119str1a4, 255, 242, 191, 192
+	voice_keysplit voicegroup260, KeySplitTable61    @ timpani
+	voice_keysplit voicegroup255, KeySplitTable79    @ strings | 66
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 1, 227, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -88,6 +88,7 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup306, KeySplitTable36    @ saw lead
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -124,7 +125,6 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 0, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit_all voicegroup280				 @ drums
