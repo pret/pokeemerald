@@ -17,7 +17,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup241, KeySplitTable25    @ tubular bell
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -27,9 +27,9 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_170slapbg2, 255, 1, 227, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup210, KeySplitTable21    @ distortion guitar (DPPt)
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_keysplit voicegroup298, KeySplitTable77    @ strings 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -52,8 +52,8 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
 	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 1, 227, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_acidbassb1short, 255, 1, 227, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_synthbassfs1_plasma, 255, 249, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
@@ -65,6 +65,17 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_reversecymbale2, 255, 0, 255, 236
 	voice_directsound 60, 0, DirectSoundWaveData_bw_wah_vsrival, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_click_vsrival, 255, 0, 255, 0
+	voice_keysplit voicegroup307, KeySplitTable25    @ sd90 distortion guitar (team plasma)
+	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc3_plasma, 255, 253, 0, 2
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc5_plasma, 255, 253, 0, 2
+	voice_directsound 60, 0, DirectSoundWaveData_bw_stringhit_plasma, 255, 248, 25, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -76,21 +87,13 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_hg_039drawbc4, 255, 0, 255, 171
 	voice_keysplit voicegroup306, KeySplitTable36    @ saw lead
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_distpowerc4_plasma, 255, 197, 255, 171
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_guitarbendc5_plasma, 255, 197, 255, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -98,11 +101,8 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sfxwhip_plasma, 255, 0, 255, 2
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sfxlasergun_plasma, 255, 0, 255, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

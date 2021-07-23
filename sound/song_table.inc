@@ -933,6 +933,8 @@ gSongTable:: @ 86B49F0
 	song bw_seq_me_hyouka2, 2, 2
 	song bw_seq_bgm_d_01, 0, 0
 	song bw_seq_bgm_d_01_b1f, 0, 0
+	song bw_seq_bgm_e_plasma, 0, 0
+	song bw_seq_bgm_vs_plasma, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

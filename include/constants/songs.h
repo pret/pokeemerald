@@ -954,6 +954,8 @@
 #define BW_SEQ_ME_HYOUKA2            929 // Pokédex Evaluation... You're on Your Way!
 #define BW_SEQ_BGM_D_01              930 // The Dreamyard
 #define BW_SEQ_BGM_D_01_B1F          931 // The Dreamyard (B1F)
+#define BW_SEQ_BGM_E_PLASMA          932 // Team Plasma Appears!
+#define BW_SEQ_BGM_VS_PLASMA         933 // Battle! (Team Plasma)
 
 // Black 2 & White 2 Music
 

@@ -7,8 +7,8 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 61, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+ 1
 	voice_directsound 60, 64, DirectSoundWaveData_bw_snare_vsrival, 255, 0, 255, 171    		@ 127/127/127/120/ 64	
 	voice_directsound 62, 64, DirectSoundWaveData_bw_snare_vsrival, 255, 0, 255, 171    		@ 127/127/127/120/ 64	+ 2
-	voice_directsound 60, 64, DirectSoundWaveData_dp_castanet_22, 255, 0, 255, 171    		@ 127/127/127/120/ 64	
-	voice_directsound 61, 64, DirectSoundWaveData_dp_castanet_22, 255, 0, 255, 171    		@ 127/127/127/120/ 64	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_dp_castanet_22, 255, 0, 255, 171    			@ 127/127/127/120/ 64	
+	voice_directsound 61, 64, DirectSoundWaveData_dp_castanet_22, 255, 0, 255, 171    			@ 127/127/127/120/ 64	+ 1
 	voice_directsound 60, 64, DirectSoundWaveData_bw_175snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64	
 	voice_directsound 60, 64, DirectSoundWaveData_bw_handclap_vsrival, 255, 0, 255, 205    		@ 127/127/127/116/ 64	
 	voice_directsound 60, 64, DirectSoundWaveData_dp_093snare, 255, 226, 127, 205    			@ 127/114/ 90/116/ 64	
@@ -59,3 +59,16 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 60, 64, DirectSoundWaveData_bw_172snare909, 255, 226, 127, 205    		@ 127/114/ 90/116/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_042crash909, 255, 242, 0, 205    			@ 127/100/  0/116/ 64
 	voice_directsound 62, 64, DirectSoundWaveData_bw_042crash909, 255, 242, 0, 205    			@ 127/100/  0/116/ 64	+ 2
+	voice_directsound 61, 64, DirectSoundWaveData_dp_093snare, 255, 226, 127, 205    			@ 127/114/ 90/116/ 64	+ 1
+	voice_directsound 61, 64, DirectSoundWaveData_bw_synthohh_vsrival, 255, 0, 255, 0    		@ 127/127/127/127/ 64	+ 1
+	voice_directsound 48, 64, DirectSoundWaveData_bw_synthclap_plasma, 255, 197, 227, 2    		@ 127/120/120/124/ 64	-12
+	voice_directsound 60, 64, DirectSoundWaveData_bw_synthclap_plasma, 255, 197, 227, 2    		@ 127/120/120/124/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_synthsnare_plasma, 255, 0, 227, 2    		@ 127/127/120/124/ 64
+	voice_directsound 64, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+ 4
+	voice_directsound 61, 64, DirectSoundWaveData_bw_synthchh_vsrival, 255, 0, 255, 0    		@ 127/127/127/127/ 64	+ 1
+	voice_directsound 61, 20, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    				@ 127/ 80/  0/110/ 20	+ 1
+	voice_directsound 62, 20, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    				@ 127/ 80/  0/110/ 20	+ 2
+	voice_directsound 60, 84, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/ 84
+	voice_directsound 61, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	+ 1
+	voice_directsound 62, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	+ 2
+	voice_directsound 62, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 2

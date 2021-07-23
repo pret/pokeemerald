@@ -3825,3 +3825,67 @@ DirectSoundWaveData_bw_172snare909::
 	.align 2
 DirectSoundWaveData_bw_042crash909::
 	.incbin "sound/direct_sound_samples/bw_042crash909.bin"
+
+	.align 2
+DirectSoundWaveData_bw_168slapbc2::
+	.incbin "sound/direct_sound_samples/bw_168slapbc2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_170slapbg2::
+	.incbin "sound/direct_sound_samples/bw_170slapbg2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_169slapbc3::
+	.incbin "sound/direct_sound_samples/bw_169slapbc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_acidbassb1short::
+	.incbin "sound/direct_sound_samples/bw_acidbassb1short.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbassfs1_plasma::
+	.incbin "sound/direct_sound_samples/bw_synthbassfs1_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sd90distc5_plasma::
+	.incbin "sound/direct_sound_samples/bw_sd90distc5_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distguitarc3_plasma::
+	.incbin "sound/direct_sound_samples/bw_distguitarc3_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distguitarc5_plasma::
+	.incbin "sound/direct_sound_samples/bw_distguitarc5_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_stringhit_plasma::
+	.incbin "sound/direct_sound_samples/bw_stringhit_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distpowerc4_plasma::
+	.incbin "sound/direct_sound_samples/bw_distpowerc4_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_guitarbendc5_plasma::
+	.incbin "sound/direct_sound_samples/bw_guitarbendc5_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sfxwhip_plasma::
+	.incbin "sound/direct_sound_samples/bw_sfxwhip_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sfxlasergun_plasma::
+	.incbin "sound/direct_sound_samples/bw_sfxlasergun_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthclap_plasma::
+	.incbin "sound/direct_sound_samples/bw_synthclap_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthsnare_plasma::
+	.incbin "sound/direct_sound_samples/bw_synthsnare_plasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_179splash::
+	.incbin "sound/direct_sound_samples/bw_179splash.bin"

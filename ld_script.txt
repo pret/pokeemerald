@@ -1627,6 +1627,8 @@ SECTIONS {
         sound/songs/midi/bw_seq_me_hyouka2.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_01.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_01_b1f.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_plasma.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_plasma.o(.rodata);
     } =0
 
     lib_rodata :
