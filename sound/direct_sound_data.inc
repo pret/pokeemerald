@@ -3847,6 +3847,10 @@ DirectSoundWaveData_bw_synthbassfs1_plasma::
 	.incbin "sound/direct_sound_samples/bw_synthbassfs1_plasma.bin"
 
 	.align 2
+DirectSoundWaveData_bw_sd90distc4_plasma::
+	.incbin "sound/direct_sound_samples/bw_sd90distc4_plasma.bin"
+
+	.align 2
 DirectSoundWaveData_bw_sd90distc5_plasma::
 	.incbin "sound/direct_sound_samples/bw_sd90distc5_plasma.bin"
 
