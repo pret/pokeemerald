@@ -954,8 +954,17 @@
 #define BW_SEQ_ME_HYOUKA2            929 // Pokédex Evaluation... You're on Your Way!
 #define BW_SEQ_BGM_D_01              930 // The Dreamyard
 #define BW_SEQ_BGM_D_01_B1F          931 // The Dreamyard (B1F)
-#define BW_SEQ_BGM_E_PLASMA          932 // Team Plasma Appears!
-#define BW_SEQ_BGM_VS_PLASMA         933 // Battle! (Team Plasma)
+#define BW_SEQ_BGM_E_PLASMA          932 // Team Plasma Appears!                          (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_VS_PLASMA         933 // Battle! (Team Plasma)                         (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_WIN4              934 // Victory! (Team Plasma)
+#define BW_SEQ_BGM_SHINKA            935 // Evolution (Part 1)
+#define BW_SEQ_BGM_KOUKAN            936 // Evolution (Part 2)
+#define BW_SEQ_ME_SHINKAOME          937 // Congratulations! Your Pokémon Evolved!
+#define BW_SEQ_BGM_EYE_03            938 // Trainers' Eyes Meet (Twins)
+#define BW_SEQ_BGM_E_RIVAL           939 // Cheren's Theme
+#define BW_SEQ_BGM_E_TROUBLE         940 // There's Trouble!
+#define BW_SEQ_BGM_C_02_VAR          941 // Nacrene City (No Accordion)
+#define BW_SEQ_BGM_C_02              942 // Nacrene City
 
 // Black 2 & White 2 Music
 

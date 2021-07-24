@@ -5,7 +5,7 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -24,12 +24,12 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup308, KeySplitTable68    @ lp marschall guitar ||| 69
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_170slapbg2, 255, 1, 227, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup210, KeySplitTable21    @ distortion guitar (DPPt)
+	voice_keysplit voicegroup309, KeySplitTable85    @ slap bass | 45 |
+	voice_keysplit voicegroup310, KeySplitTable21    @ distortion guitar (DPPt)
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_keysplit voicegroup298, KeySplitTable77    @ strings 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

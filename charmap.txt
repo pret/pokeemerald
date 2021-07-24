@@ -1391,6 +1391,15 @@ BW_SEQ_BGM_D_01              = A2 03
 BW_SEQ_BGM_D_01_B1F          = A3 03
 BW_SEQ_BGM_E_PLASMA          = A4 03
 BW_SEQ_BGM_VS_PLASMA         = A5 03
+BW_SEQ_BGM_WIN4              = A6 03
+BW_SEQ_BGM_SHINKA            = A7 03
+BW_SEQ_BGM_KOUKAN            = A8 03
+BW_SEQ_ME_SHINKAOME          = A9 03
+BW_SEQ_BGM_EYE_03            = AA 03
+BW_SEQ_BGM_E_RIVAL           = AB 03
+BW_SEQ_BGM_E_TROUBLE         = AC 03
+BW_SEQ_BGM_C_02_VAR          = AD 03
+BW_SEQ_BGM_C_02              = AE 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

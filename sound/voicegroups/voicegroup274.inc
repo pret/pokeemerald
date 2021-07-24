@@ -9,15 +9,15 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup290, KeySplitTable70    @ harpsichord
 	voice_keysplit voicegroup295, KeySplitTable74    @ marimba
 	voice_directsound 60, 0, DirectSoundWaveData_bw_xtransceiverbeep, 255, 0, 255, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_bellg3_evo, 255, 248, 0, 205
 	voice_keysplit voicegroup297, KeySplitTable76    @ vibraphone
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup239, KeySplitTable38    @ marimba (HGSS)
 	voice_keysplit voicegroup240, KeySplitTable39    @ xylophone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_147tbellg4, 255, 248, 0, 205
 	voice_keysplit voicegroup296, KeySplitTable83    @ glockenspiel
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup308, KeySplitTable84    @ lp marschall guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar

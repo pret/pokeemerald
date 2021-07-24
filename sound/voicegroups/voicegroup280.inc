@@ -72,3 +72,18 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 61, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	+ 1
 	voice_directsound 62, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	+ 2
 	voice_directsound 62, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 2
+	voice_directsound 62, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171				@ 127/127/127/120/ 64	+ 2
+	voice_directsound 61, 80, DirectSoundWaveData_hg_062chh, 255, 242, 0, 171    				@ 127/100/  0/120/ 80	+ 1
+	voice_directsound 61, 80, DirectSoundWaveData_hg_063ohh, 255, 241, 0, 171    				@ 127/102/  0/120/ 80	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_hg_022china, 255, 248, 0, 205    				@ 127/ 80/  0/116/ 64
+	voice_directsound 64, 107, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/107	+ 4
+	voice_directsound 60, 64, DirectSoundWaveData_hg_032crash, 255, 242, 0, 214    				@ 127/100/  0/114/ 64	
+	voice_directsound 60, 64, DirectSoundWaveData_bw_107kick909, 255, 0, 227, 205    			@ 127/127/120/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_171snare909, 255, 0, 227, 205    			@ 127/127/120/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_111kick, 255, 0, 227, 205    				@ 127/127/120/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_178snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_bw_178snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64	+ 1
+	voice_directsound 60, 80, DirectSoundWaveData_bw_102chh, 255, 224, 0, 205    				@ 127/115/  0/116/ 80
+	voice_directsound 60, 80, DirectSoundWaveData_bw_105ohh, 255, 241, 0, 205    				@ 127/102/  0/116/ 80
+	voice_directsound 62, 80, DirectSoundWaveData_bw_105ohh, 255, 241, 0, 205    				@ 127/102/  0/116/ 80	+ 2
+	voice_directsound 60, 40, DirectSoundWaveData_bw_046crash, 255, 250, 0, 205    				@ 127/ 62/  0/116/ 40

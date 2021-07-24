@@ -16,9 +16,9 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup243, KeySplitTable76    @ music box
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

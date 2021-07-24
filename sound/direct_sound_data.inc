@@ -3815,8 +3815,16 @@ DirectSoundWaveData_bw_159rim::
 	.incbin "sound/direct_sound_samples/bw_159rim.bin"
 
 	.align 2
+DirectSoundWaveData_bw_107kick909::
+	.incbin "sound/direct_sound_samples/bw_107kick909.bin"
+
+	.align 2
 DirectSoundWaveData_bw_108kick909::
 	.incbin "sound/direct_sound_samples/bw_108kick909.bin"
+
+	.align 2
+DirectSoundWaveData_bw_171snare909::
+	.incbin "sound/direct_sound_samples/bw_171snare909.bin"
 
 	.align 2
 DirectSoundWaveData_bw_172snare909::
@@ -3893,3 +3901,55 @@ DirectSoundWaveData_bw_synthsnare_plasma::
 	.align 2
 DirectSoundWaveData_bw_179splash::
 	.incbin "sound/direct_sound_samples/bw_179splash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_spiccatostringse2::
+	.incbin "sound/direct_sound_samples/bw_spiccatostringse2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_trumpetsstaccatogs4::
+	.incbin "sound/direct_sound_samples/bw_trumpetsstaccatogs4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_stringscs2::
+	.incbin "sound/direct_sound_samples/bw_stringscs2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_bellg3_evo::
+	.incbin "sound/direct_sound_samples/bw_bellg3_evo.bin"
+
+	.align 2
+DirectSoundWaveData_bw_060marscg2::
+	.incbin "sound/direct_sound_samples/bw_060marscg2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_061marscg3::
+	.incbin "sound/direct_sound_samples/bw_061marscg3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_059marsce4::
+	.incbin "sound/direct_sound_samples/bw_059marsce4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_058marscc5::
+	.incbin "sound/direct_sound_samples/bw_058marscc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_046crash::
+	.incbin "sound/direct_sound_samples/bw_046crash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_102chh::
+	.incbin "sound/direct_sound_samples/bw_102chh.bin"
+
+	.align 2
+DirectSoundWaveData_bw_105ohh::
+	.incbin "sound/direct_sound_samples/bw_105ohh.bin"
+
+	.align 2
+DirectSoundWaveData_bw_111kick::
+	.incbin "sound/direct_sound_samples/bw_111kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_178snare::
+	.incbin "sound/direct_sound_samples/bw_178snare.bin"

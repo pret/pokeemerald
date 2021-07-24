@@ -2471,3 +2471,30 @@ $(MID_SUBDIR)/bw_seq_bgm_e_plasma.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_plasma.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V120
+
+$(MID_SUBDIR)/bw_seq_bgm_win4.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V083
+
+$(MID_SUBDIR)/bw_seq_bgm_shinka.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V068
+
+$(MID_SUBDIR)/bw_seq_bgm_koukan.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_me_shinkaome.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V072 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_03.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V067
+
+$(MID_SUBDIR)/bw_seq_bgm_e_rival.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V059
+
+$(MID_SUBDIR)/bw_seq_bgm_e_trouble.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V092
+
+$(MID_SUBDIR)/bw_seq_bgm_c_02_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V070
+
+$(MID_SUBDIR)/bw_seq_bgm_c_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V070
