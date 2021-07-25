@@ -1638,6 +1638,9 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_e_trouble.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_02_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_02.o(.rodata);
+        sound/songs/midi/bw_seq_me_hyouka3.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_gym.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_gymleader.o(.rodata);
     } =0
 
     lib_rodata :

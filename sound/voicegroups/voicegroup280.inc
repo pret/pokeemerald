@@ -87,3 +87,7 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 60, 80, DirectSoundWaveData_bw_105ohh, 255, 241, 0, 205    				@ 127/102/  0/116/ 80
 	voice_directsound 62, 80, DirectSoundWaveData_bw_105ohh, 255, 241, 0, 205    				@ 127/102/  0/116/ 80	+ 2
 	voice_directsound 60, 40, DirectSoundWaveData_bw_046crash, 255, 250, 0, 205    				@ 127/ 62/  0/116/ 40
+	voice_directsound 60, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171				@ 127/127/127/120/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171				@ 127/127/127/120/ 64	+ 1
+	voice_directsound 65, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171				@ 127/127/127/120/ 64	+ 5
+	voice_directsound 66, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+ 6

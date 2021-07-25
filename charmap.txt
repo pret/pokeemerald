@@ -1400,6 +1400,9 @@ BW_SEQ_BGM_E_RIVAL           = AB 03
 BW_SEQ_BGM_E_TROUBLE         = AC 03
 BW_SEQ_BGM_C_02_VAR          = AD 03
 BW_SEQ_BGM_C_02              = AE 03
+BW_SEQ_ME_HYOUKA3            = AF 03
+BW_SEQ_BGM_GYM               = B0 03
+BW_SEQ_BGM_VS_GYMLEADER      = B1 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

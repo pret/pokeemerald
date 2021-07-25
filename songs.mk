@@ -2498,3 +2498,12 @@ $(MID_SUBDIR)/bw_seq_bgm_c_02_var.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_c_02.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V070
+
+$(MID_SUBDIR)/bw_seq_me_hyouka3.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V070 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_gym.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V056
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_gymleader.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V106

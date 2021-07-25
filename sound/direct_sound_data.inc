@@ -3787,6 +3787,10 @@ DirectSoundWaveData_bw_sawleadc5_vsleader::
 	.incbin "sound/direct_sound_samples/bw_sawleadc5_vsleader.bin"
 
 	.align 2
+DirectSoundWaveData_bw_sawleadc6_vsleader::
+	.incbin "sound/direct_sound_samples/bw_sawleadc6_vsleader.bin"
+
+	.align 2
 DirectSoundWaveData_bw_163shaker::
 	.incbin "sound/direct_sound_samples/bw_163shaker.bin"
 
@@ -3953,3 +3957,47 @@ DirectSoundWaveData_bw_111kick::
 	.align 2
 DirectSoundWaveData_bw_178snare::
 	.incbin "sound/direct_sound_samples/bw_178snare.bin"
+
+	.align 2
+DirectSoundWaveData_bw_056fretlg1::
+	.incbin "sound/direct_sound_samples/bw_056fretlg1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_054fretlc2::
+	.incbin "sound/direct_sound_samples/bw_054fretlc2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_057fretlg2::
+	.incbin "sound/direct_sound_samples/bw_057fretlg2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_055fretlc3::
+	.incbin "sound/direct_sound_samples/bw_055fretlc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbassf1_leader::
+	.incbin "sound/direct_sound_samples/bw_synthbassf1_leader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_timpanics2_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_timpanics2_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_timpanics3_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_timpanics3_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_timpanics4_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_timpanics4_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_orchhitas2_leader::
+	.incbin "sound/direct_sound_samples/bw_orchhitas2_leader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthstringfs4_leader::
+	.incbin "sound/direct_sound_samples/bw_synthstringfs4_leader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthstringcs6_leader::
+	.incbin "sound/direct_sound_samples/bw_synthstringcs6_leader.bin"

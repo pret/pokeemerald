@@ -924,7 +924,7 @@
 #define BW_SEQ_BGM_E_FRIEND          899 // Let's Go Together!
 #define BW_SEQ_BGM_R_A_VAR           900 // Route 1 (No Tambourine)
 #define BW_SEQ_BGM_R_A               901 // Route 1
-#define BW_SEQ_BGM_VS_NORAPOKE       902 // Battle! (Wild Pokémon)                        (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_VS_NORAPOKE       902 // Battle! (Wild Pokémon)                        (TODO: Portamento on string octave melody at bar 5-6)
 #define BW_SEQ_BGM_WIN1              903 // Victory! (Wild Pokémon)
 #define BW_SEQ_ME_LVUP               904 // Level Up!
 #define BW_SEQ_BGM_T_02_VAR1         905 // Accumula Town
@@ -933,7 +933,7 @@
 #define BW_SEQ_BGM_T_02              908 // Accumula Town (Piano & Drums)
 #define BW_SEQ_BGM_E_TSURETEKE2      909 // Hurry Along 2
 #define BW_SEQ_BGM_POKECEN           910 // Pokémon Center
-#define BW_SEQ_ME_ASA                911 // Pokémon Healed                                (TODO: SWEEP PITCH!!)
+#define BW_SEQ_ME_ASA                911 // Pokémon Healed                                (TODO: Sweep pitch on high piano)
 #define BW_SEQ_ME_HYOUKA1            912 // Pokédex Evaluation... You've Just Begun!
 #define BW_SEQ_BGM_E_SAGE            913 // Team Plasma Plots
 #define BW_SEQ_BGM_R_B_SP_VAR        914 // Route 2 (Spring) (No Percussion)
@@ -965,6 +965,9 @@
 #define BW_SEQ_BGM_E_TROUBLE         940 // There's Trouble!
 #define BW_SEQ_BGM_C_02_VAR          941 // Nacrene City (No Accordion)
 #define BW_SEQ_BGM_C_02              942 // Nacrene City
+#define BW_SEQ_ME_HYOUKA3            943 // Pokédex Evaluation... Keep at It!
+#define BW_SEQ_BGM_GYM               944 // Pokémon Gym
+#define BW_SEQ_BGM_VS_GYMLEADER      945 // Battle! (Gym Leader)                          (TODO: Portamento on bass)
 
 // Black 2 & White 2 Music
 
