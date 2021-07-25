@@ -374,8 +374,10 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectLashOut
 	.4byte BattleScript_EffectGrassyGlide
 	.4byte BattleScript_EffectRemoveTerrain
-	.4byte BattleScript_EffectBehemoth
+	.4byte BattleScript_EffectDynamaxDoubleDmg
 	.4byte BattleScript_EffectDecorate
+	.4byte BattleScript_EffectSnipeShot
+	.4byte BattleScript_EffectTripleHit
 
 BattleScript_EffectDecorate:
 	attackcanceler
@@ -470,22 +472,22 @@ BattleScript_EffectJungleHealing:
 	setbyte gBattleCommunication, 0
 JungleHealing_RestoreTargetHealth:
 	copybyte gBattlerAttacker, gBattlerTarget
-	tryhealquarterhealth BS_TARGET, JungleHealing_TryCureStatus
+	tryhealquarterhealth BS_TARGET, BattleScript_JungleHealing_TryCureStatus
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
 	printstring STRINGID_PKMNREGAINEDHEALTH
 	waitmessage 0x40
-JungleHealing_TryCureStatus:
-	jumpifmove MOVE_LIFE_DEW, JungleHealingTryRestoreAlly	@ life dew only heals
+BattleScript_JungleHealing_TryCureStatus:
+	jumpifmove MOVE_LIFE_DEW, BattleScript_JungleHealingTryRestoreAlly	@ life dew only heals
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_JungleHealingCureStatus
-	goto JungleHealingTryRestoreAlly
+	goto BattleScript_JungleHealingTryRestoreAlly
 BattleScript_JungleHealingCureStatus:
 	curestatus BS_TARGET
 	updatestatusicon BS_TARGET
 	printstring STRINGID_PKMNSTATUSNORMAL
 	waitmessage 0x40
-JungleHealingTryRestoreAlly:
+BattleScript_JungleHealingTryRestoreAlly:
 	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_MoveEnd
 	addbyte gBattleCommunication, 1
 	jumpifnoally BS_TARGET, BattleScript_MoveEnd
@@ -2183,7 +2185,8 @@ BattleScript_EffectBelch:
 BattleScript_EffectBodyPress:
 BattleScript_EffectLashOut:
 BattleScript_EffectGrassyGlide:
-BattleScript_EffectBehemoth:
+BattleScript_EffectDynamaxDoubleDmg:
+BattleScript_EffectSnipeShot:
 
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
@@ -2255,6 +2258,17 @@ BattleScript_MoveMissed::
 	effectivenesssound
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
+	jumpifobstruct BattleScript_ObstructActivates
+	goto BattleScript_MoveEnd
+
+BattleScript_ObstructActivates:
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_DEF, MIN_STAT_STAGE, BattleScript_ObstructActivationEnd
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_ObstructActivationEnd
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ObstructActivationEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSleep::
@@ -2931,6 +2945,16 @@ BattleScript_EffectDragonRage::
 BattleScript_EffectTrap::
 	setmoveeffect MOVE_EFFECT_WRAP
 	goto BattleScript_EffectHit
+
+BattleScript_EffectTripleHit::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setmultihitcounter 3
+	initmultihitstring
+	sethword sMULTIHIT_EFFECT, 0
+	goto BattleScript_MultiHitLoop
 
 BattleScript_EffectDoubleHit::
 	attackcanceler
@@ -8130,3 +8154,4 @@ BattleScript_JabocaRowapBerryActivate_Dmg:
 	call BattleScript_HurtAttacker
 	removeitem BS_TARGET
 	return
+	

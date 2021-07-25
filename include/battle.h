@@ -119,7 +119,7 @@ struct ProtectStruct
     u32 spikyShielded:1;
     u32 kingsShielded:1;
     u32 banefulBunkered:1;
-    u32 obstruct:1;
+    u32 obstructed:1;
     u32 endured:1;
     u32 noValidMoves:1;
     u32 helpingHand:1;

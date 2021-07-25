@@ -1241,14 +1241,18 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return FALSE;
     else if (gBattleMoves[move].effect == MOVE_EFFECT_FEINT)
         return FALSE;
-    else if (gProtectStructs[battlerId].protected && move != MOVE_DECORATE)
+    else if (gProtectStructs[battlerId].protected)
+    {
+        if (move == MOVE_DECORATE && !(gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD))
+            return FALSE;   // decorate bypasses protect and detect, but not crafty shield
         return TRUE;
+    }
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD
              && gBattleMoves[move].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
         return TRUE;
     else if (gProtectStructs[battlerId].banefulBunkered)
         return TRUE;
-    else if (gProtectStructs[battlerId].obstruct && !IS_MOVE_STATUS(move))
+    else if (gProtectStructs[battlerId].obstructed && !IS_MOVE_STATUS(move))
         return TRUE;
     else if (gProtectStructs[battlerId].spikyShielded)
         return TRUE;
@@ -1258,10 +1262,10 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
              && GetChosenMovePriority(gBattlerAttacker) > 0)
         return TRUE;
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD
-             && gBattleMoves[move].power == 0)
+      && IS_MOVE_STATUS(move))
         return TRUE;
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_MAT_BLOCK
-             && gBattleMoves[move].power != 0)
+      && !IS_MOVE_STATUS(move))
         return TRUE;
     else
         return FALSE;
@@ -1324,7 +1328,7 @@ static bool32 TryAegiFormChange(void)
 static void Cmd_attackcanceler(void)
 {
     s32 i, moveType;
-    
+
     if (gBattleOutcome != 0)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
@@ -3203,7 +3207,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     || gProtectStructs[gBattlerTarget].spikyShielded
                     || gProtectStructs[gBattlerTarget].kingsShielded
                     || gProtectStructs[gBattlerTarget].banefulBunkered
-                    || gProtectStructs[gBattlerTarget].obstruct)
+                    || gProtectStructs[gBattlerTarget].obstructed)
                 {
                     gProtectStructs[gBattlerTarget].protected = 0;
                     gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_WIDE_GUARD);
@@ -3213,7 +3217,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gProtectStructs[gBattlerTarget].spikyShielded = 0;
                     gProtectStructs[gBattlerTarget].kingsShielded = 0;
                     gProtectStructs[gBattlerTarget].banefulBunkered = 0;
-                    gProtectStructs[gBattlerTarget].obstruct = 0;
+                    gProtectStructs[gBattlerTarget].obstructed = 0;
                     if (gCurrentMove == MOVE_FEINT)
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -4814,7 +4818,7 @@ static void Cmd_moveend(void)
                     gBattlescriptCurrInstr = BattleScript_BanefulBunkerEffect;
                     effect = 1;
                 }
-                else if (gProtectStructs[gBattlerTarget].obstruct && gCurrentMove != MOVE_SUCKER_PUNCH)
+                else if (gProtectStructs[gBattlerTarget].obstructed && gCurrentMove != MOVE_SUCKER_PUNCH)
                 {
                     i = gBattlerAttacker;
                     gBattlerAttacker = gBattlerTarget;
@@ -7766,7 +7770,9 @@ static void Cmd_various(void)
         }
         return;
     case VARIOUS_SUCKER_PUNCH_CHECK:
-        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+        if (gProtectStructs[gBattlerTarget].obstructed)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else if (gBattleMoves[gBattleMons[gBattlerTarget].moves[gBattleStruct->chosenMovePositions[gBattlerTarget]]].power == 0)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
@@ -8538,6 +8544,20 @@ static void Cmd_various(void)
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
         break;
+    case VARIOUS_JUMP_IF_OBSTRUCT:
+        // if obstruct blocked a contact move, sharply lower defense
+        if (IsMoveMakingContact(gCurrentMove, gBattlerAttacker) && gProtectStructs[gBattlerTarget].obstructed && !IS_MOVE_STATUS(gCurrentMove))
+        {
+            SET_STATCHANGER(STAT_DEF, 2, TRUE);
+            gBattleScripting.battler = gBattlerAttacker;
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            gBattlescriptCurrInstr += 7;
+            
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -8585,7 +8605,7 @@ static void Cmd_setprotectlike(void)
             }
             else if (gCurrentMove == MOVE_OBSTRUCT)
             {
-                gProtectStructs[gBattlerAttacker].obstruct = 1;
+                gProtectStructs[gBattlerAttacker].obstructed = 1;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             }
 

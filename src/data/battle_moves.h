@@ -10996,7 +10996,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEHEMOTH_BLADE] =
     {
-        .effect = EFFECT_BEHEMOTH,
+        .effect = EFFECT_DYNAMAX_DOUBLE_DMG,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11010,7 +11010,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEHEMOTH_BASH] =
     {
-        .effect = EFFECT_BEHEMOTH,
+        .effect = EFFECT_DYNAMAX_DOUBLE_DMG,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11158,7 +11158,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 4,
-        .flags = 0,
+        .flags = FLAG_PROTECTION_MOVE,
         .split = SPLIT_STATUS,
     },
 
@@ -11513,7 +11513,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SURGING_STRIKES] =
     {
-        .effect = EFFECT_TRIPLE_KICK,
+        .effect = EFFECT_TRIPLE_HIT,
         .power = 25,
         .type = TYPE_WATER,
         .accuracy = 100,

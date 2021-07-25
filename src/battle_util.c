@@ -7199,11 +7199,11 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_EXPLOSION:
         if (move == MOVE_MISTY_EXPLOSION && gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && IsBattlerGrounded(battlerAtk))
-            basePower = 150;
+            MulModifier(&basePower, UQ_4_12(1.5));
         break;
-    case EFFECT_BEHEMOTH:
+    case EFFECT_DYNAMAX_DOUBLE_DMG:
         #ifdef B_DYNAMAX
-        if (IsDynamaxed(battlerDef))/
+        if (IsDynamaxed(battlerDef))
             basePower *= 2;
         #endif
         break;

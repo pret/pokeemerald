@@ -177,6 +177,7 @@
 #define VARIOUS_JUMP_IF_TEAM_HEALTHY            106
 #define VARIOUS_TRY_HEAL_QUARTER_HP             107
 #define VARIOUS_REMOVE_TERRAIN                  108
+#define VARIOUS_JUMP_IF_OBSTRUCT                109
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
