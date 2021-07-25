@@ -968,6 +968,7 @@
 #define BW_SEQ_ME_HYOUKA3            943 // Pokédex Evaluation... Keep at It!
 #define BW_SEQ_BGM_GYM               944 // Pokémon Gym
 #define BW_SEQ_BGM_VS_GYMLEADER      945 // Battle! (Gym Leader)                          (TODO: Portamento on bass)
+#define BW_SEQ_BGM_BATTLESUPERIOR    946 // Victory Lies Before You!
 
 // Black 2 & White 2 Music
 

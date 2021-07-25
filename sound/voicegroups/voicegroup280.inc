@@ -91,3 +91,5 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 61, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171				@ 127/127/127/120/ 64	+ 1
 	voice_directsound 65, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171				@ 127/127/127/120/ 64	+ 5
 	voice_directsound 66, 120, DirectSoundWaveData_hg_136tom, 255, 0, 255, 171    				@ 127/127/127/120/120	+ 6
+	voice_directsound 60, 64, DirectSoundWaveData_bw_176snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64
+	voice_directsound 60, 40, DirectSoundWaveData_hg_033orccym, 255, 250, 0, 214    			@ 127/ 70/  0/114/ 40

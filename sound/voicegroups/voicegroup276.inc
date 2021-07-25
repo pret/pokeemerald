@@ -57,7 +57,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup312, KeySplitTable87    @ timpani (ghetsis)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_orchhitas2_leader, 255, 248, 0, 205
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_solotrumpetc5, 255, 0, 255, 171

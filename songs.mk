@@ -2507,3 +2507,6 @@ $(MID_SUBDIR)/bw_seq_bgm_gym.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_gymleader.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V106
+
+$(MID_SUBDIR)/bw_seq_bgm_battlesuperior.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V090
