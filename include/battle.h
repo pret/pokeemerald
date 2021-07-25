@@ -659,6 +659,7 @@ struct BattleScripting
     u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
     bool8 fixedPopup;   // force ability popup to stick until manually called back
     u16 abilityPopupOverwrite;
+    u8 overrideBerryRequirements;
 };
 
 // rom_80A5C6C

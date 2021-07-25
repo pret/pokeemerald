@@ -5385,6 +5385,8 @@ bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
 
     if (gBattleMons[battlerId].hp == 0)
         return FALSE;
+    if (gBattleScripting.overrideBerryRequirements)
+        return TRUE;
     // Unnerve prevents consumption of opponents' berries.
     if (isBerry && IsUnnerveAbilityOnOpposingSide(battlerId))
         return FALSE;
@@ -6095,11 +6097,14 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             }
         }
         break;
+    case ITEMEFFECT_BATTLER_MOVE_END:
+        goto DO_ITEMEFFECT_MOVE_END;    // this hurts a bit to do, but is an easy solution
     case ITEMEFFECT_MOVE_END:
         for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
         {
             gLastUsedItem = gBattleMons[battlerId].item;
             battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
+        DO_ITEMEFFECT_MOVE_END:
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_MICLE_BERRY:

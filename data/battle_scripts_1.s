@@ -508,6 +508,11 @@ BattleScript_MoveEffectIncinerate::
 BattleScript_MoveEffectBugBite::
 	printstring STRINGID_BUGBITE
 	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	setbyte sBERRY_OVERRIDE, TRUE	@ override the requirements for eating berries
+	consumeberry BS_ATTACKER, TRUE	@ consume the berry, then restore the item from changedItems
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	setbyte sBERRY_OVERRIDE, FALSE
 	return
 
 BattleScript_EffectCoreEnforcer:
