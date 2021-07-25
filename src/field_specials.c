@@ -57,7 +57,6 @@
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/mevent.h"
-#include "constants/tv.h"
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
@@ -1301,12 +1300,12 @@ void SpawnCameraObject(void)
 {
     u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1, MOVEMENT_TYPE_FACE_DOWN, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
     gObjectEvents[obj].invisible = TRUE;
-    CameraObjectSetFollowedObjectId(gObjectEvents[obj].spriteId);
+    CameraObjectSetFollowedSpriteId(gObjectEvents[obj].spriteId);
 }
 
 void RemoveCameraObject(void)
 {
-    CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
+    CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
     RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
@@ -1336,7 +1335,7 @@ u16 GetSlotMachineId(void)
     static const u8 sSlotMachineIds[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
     static const u8 sSlotMachineServiceDayIds[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
 
-    u32 rnd = gSaveBlock1Ptr->easyChatPairs[0].unk0_0 + gSaveBlock1Ptr->easyChatPairs[0].unk2 + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
+    u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
     if (GetPriceReduction(POKENEWS_GAME_CORNER))
     {
         return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
@@ -1408,13 +1407,13 @@ void GiveLeadMonEffortRibbon(void)
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
     if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
     }
 }
 
 bool8 Special_AreLeadMonEVsMaxedOut(void)
 {
-    if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= 510)
+    if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
     {
         return TRUE;
     }
@@ -1449,7 +1448,7 @@ void SetShoalItemFlag(u16 unused)
 void PutZigzagoonInPlayerParty(void)
 {
     u16 monData;
-    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 32, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     monData = TRUE;
     SetMonData(&gPlayerParty[0], MON_DATA_ABILITY_NUM, &monData);
     monData = MOVE_TACKLE;
@@ -1622,7 +1621,7 @@ void BufferLottoTicketNumber(void)
 {
     if (gSpecialVar_Result >= 10000)
     {
-        TV_PrintIntToStringVar(0, gSpecialVar_Result);
+        ConvertIntToDecimalString(0, gSpecialVar_Result);
     }
     else if (gSpecialVar_Result >= 1000)
     {
@@ -2667,7 +2666,7 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
     u8 taskId;
     PlaySE(SE_SELECT);
     taskId = FindTaskIdByFunc(ScrollableMultichoice_ProcessInput);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         u16 selection;
         struct Task *task = &gTasks[taskId];
@@ -2753,7 +2752,7 @@ static void sub_813A600(u8 taskId)
 void sub_813A630(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_813A600);
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
     {
         EnableBothScriptContexts();
     }
@@ -3262,7 +3261,7 @@ void sub_813ADD4(void)
     u16 scrollOffset, selectedRow;
     u8 i;
     u8 taskId = FindTaskIdByFunc(sub_813A600);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &scrollOffset, &selectedRow);
@@ -3321,7 +3320,7 @@ void GetBattleFrontierTutorMoveIndex(void)
 void sub_813AF48(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_813A600);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         DestroyListMenuTask(task->tListTaskId, NULL, NULL);
@@ -3735,14 +3734,17 @@ bool32 ShouldDistributeEonTicket(void)
     return TRUE;
 }
 
-void sub_813B534(void)
+#define tState data[0]
+
+void BattleTowerReconnectLink(void)
 {
+    // Save battle type, restored at end
+    // of Task_LinkRetireStatusWithBattleTowerPartner
     sBattleTowerMultiBattleTypeFlags = gBattleTypeFlags;
     gBattleTypeFlags = 0;
+
     if (!gReceivedRemoteLinkPlayers)
-    {
-        CreateTask(sub_80B3AF8, 5);
-    }
+        CreateTask(Task_ReconnectWithLinkPlayers, 5);
 }
 
 void LinkRetireStatusWithBattleTowerPartner(void)
@@ -3750,136 +3752,144 @@ void LinkRetireStatusWithBattleTowerPartner(void)
     CreateTask(Task_LinkRetireStatusWithBattleTowerPartner, 5);
 }
 
+// Communicate with a Battle Tower link partner to tell them
+// whether or not the player chose to continue or retire,
+// and determine what the partner chose to do
+// gSpecialVar_0x8004: Player's choice
+// gSpecialVar_0x8005: Partner's choice (read from gBlockRecvBuffer[1][0])
 static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 {
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
-        case 0:
-            if (!FuncIsActiveTask(sub_80B3AF8))
-            {
-                gTasks[taskId].data[0]++;
-            }
-            break;
-        case 1:
-            if (IsLinkTaskFinished() == TRUE)
-            {
-                if (GetMultiplayerId() == 0)
-                {
-                    gTasks[taskId].data[0]++;
-                }
-                else
-                {
-                    SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_0x8004, 2);
-                    gTasks[taskId].data[0]++;
-                }
-            }
-            break;
-        case 2:
-            if ((GetBlockReceivedStatus() & 2) != 0)
-            {
-                if (GetMultiplayerId() == 0)
-                {
-                    gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
-                    ResetBlockReceivedFlag(1);
-                    if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
-                     && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
-                    {
-                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_BOTH_RETIRE;
-                    }
-                    else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE 
-                          && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
-                    {
-                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_PARTNER_RETIRE;
-                    }
-                    else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
-                          && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_CONTINUE)
-                    {
-                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_PLAYER_RETIRE;
-                    }
-                    else
-                    {
-                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_CONTINUE;
-                    }
-                }
-                gTasks[taskId].data[0]++;
-            }
-            break;
-        case 3:
-            if (IsLinkTaskFinished() == TRUE)
-            {
-                if (GetMultiplayerId() != 0)
-                {
-                    gTasks[taskId].data[0]++;
-                }
-                else
-                {
-                    SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_Result, 2);
-                    gTasks[taskId].data[0]++;
-                }
-            }
-            break;
-        case 4:
-            if ((GetBlockReceivedStatus() & 1) != 0)
-            {
-                if (GetMultiplayerId() != 0)
-                {
-                    gSpecialVar_Result = gBlockRecvBuffer[0][0];
-                    ResetBlockReceivedFlag(0);
-                    gTasks[taskId].data[0]++;
-                }
-                else
-                {
-                    gTasks[taskId].data[0]++;
-                }
-            }
-            break;
-        case 5:
+    case 0:
+        if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
+        {
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 1:
+        if (IsLinkTaskFinished() == TRUE)
+        {
             if (GetMultiplayerId() == 0)
             {
-                if (gSpecialVar_Result == BATTLE_TOWER_LINKSTAT_PARTNER_RETIRE)
-                {
-                    ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
-                }
+                // Player is link leader, skip sending data
+                gTasks[taskId].tState++;
             }
             else
             {
-                if (gSpecialVar_Result == BATTLE_TOWER_LINKSTAT_PLAYER_RETIRE)
+                // Send value of gSpecialVar_0x8004 to leader
+                // Will either be BATTLE_TOWER_LINK_CONTINUE or BATTLE_TOWER_LINK_RETIRE
+                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
+                gTasks[taskId].tState++;
+            }
+        }
+        break;
+    case 2:
+        if (GetBlockReceivedStatus() & 2)
+        {
+            if (GetMultiplayerId() == 0)
+            {
+                // Player is leader, read partner's choice
+                // and determine if play should continue
+                gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
+                ResetBlockReceivedFlag(1);
+
+                if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                 && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
                 {
-                    ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
+                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_BOTH_RETIRE;
+                }
+                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE 
+                      && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
+                {
+                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_MEMBER_RETIRE;
+                }
+                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                      && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_CONTINUE)
+                {
+                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_LEADER_RETIRE;
+                }
+                else
+                {
+                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_CONTINUE;
                 }
             }
-            gTasks[taskId].data[0]++;
-            break;
-        case 6:
-            if (!IsTextPrinterActive(0))
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 3:
+        if (IsLinkTaskFinished() == TRUE)
+        {
+            if (GetMultiplayerId() != 0)
             {
-                gTasks[taskId].data[0]++;
+                // Player is not link leader, wait for leader's response
+                gTasks[taskId].tState++;
             }
-            break;
-        case 7:
-            if (IsLinkTaskFinished() == 1)
+            else
             {
-                SetLinkStandbyCallback();
-                gTasks[taskId].data[0]++;
+                // Send whether or not play should continue
+                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
+                gTasks[taskId].tState++;
             }
-            break;
-        case 8:
-            if (IsLinkTaskFinished() == 1)
+        }
+        break;
+    case 4:
+        if (GetBlockReceivedStatus() & 1)
+        {
+            if (GetMultiplayerId() != 0)
             {
-                gTasks[taskId].data[0]++;
+                // Player is not link leader, read leader's response
+                gSpecialVar_Result = gBlockRecvBuffer[0][0];
+                ResetBlockReceivedFlag(0);
+                gTasks[taskId].tState++;
             }
-            break;
-        case 9:
-            if (gWirelessCommType == 0)
+            else
             {
-                SetCloseLinkCallback();
+                gTasks[taskId].tState++;
             }
-            gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
-            EnableBothScriptContexts();
-            DestroyTask(taskId);
-            break;
+        }
+        break;
+    case 5:
+        // Print message if partner chose to retire (and player didn't)
+        if (GetMultiplayerId() == 0)
+        {
+            if (gSpecialVar_Result == BATTLE_TOWER_LINKSTAT_MEMBER_RETIRE)
+                ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
+        }
+        else
+        {
+            if (gSpecialVar_Result == BATTLE_TOWER_LINKSTAT_LEADER_RETIRE)
+                ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
+        }
+        gTasks[taskId].tState++;
+        break;
+    case 6:
+        if (!IsTextPrinterActive(0))
+            gTasks[taskId].tState++;
+        break;
+    case 7:
+        if (IsLinkTaskFinished() == TRUE)
+        {
+            SetLinkStandbyCallback();
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 8:
+        if (IsLinkTaskFinished() == TRUE)
+            gTasks[taskId].tState++;
+        break;
+    case 9:
+        if (gWirelessCommType == 0)
+            SetCloseLinkCallback();
+
+        gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+        break;
     }
 }
+
+#undef tState
 
 void Script_DoRayquazaScene(void)
 {

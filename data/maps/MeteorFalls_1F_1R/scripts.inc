@@ -21,7 +21,7 @@ MeteorFalls_1F_1R_EventScript_OpenStevensCave:: @ 822BD3A
 
 MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene:: @ 822BD5F
 	lockall
-	playbgm MUS_ENCOUNTER_MAGMA, 0
+	playbgm MUS_ENCOUNTER_MAGMA, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	waitmovement 0
 	delay 30
@@ -50,7 +50,7 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene:: @ 822BD5F
 	addobject LOCALID_ARCHIE
 	addobject LOCALID_AQUA_GRUNT_1
 	addobject LOCALID_AQUA_GRUNT_2
-	playbgm MUS_ENCOUNTER_AQUA, 0
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement LOCALID_ARCHIE, MeteorFalls_1F_1R_Movement_ArchieArrive
 	applymovement LOCALID_AQUA_GRUNT_1, MeteorFalls_1F_1R_Movement_AquaGrunt1Arrive
 	applymovement LOCALID_AQUA_GRUNT_2, MeteorFalls_1F_1R_Movement_AquaGrunt2Arrive

@@ -111,11 +111,11 @@ struct ContestPokemon
     u32 otId;
 };
 
-struct Shared1A004
+struct ContestTempSave
 {
     u16 cachedWindowPalettes[16][16]; // Saved palette data before a move happens?
-    u16 unk18204[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferUnfaded
-    u16 unk18604[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferFaded
+    u16 cachedPlttBufferUnfaded[PLTT_BUFFER_SIZE];
+    u16 cachedPlttBufferFaded[PLTT_BUFFER_SIZE];
     u8 savedJunk[0x800];
 };
 
@@ -306,7 +306,7 @@ struct ContestResources
 #define eUnzippedContestAudience_Gfx (gHeap + 0x18000)
 #define eContestAudienceFrame2_Gfx (gHeap + 0x19000)
 #define eContestDebugMode (gHeap[0x1a000])
-#define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
+#define eContestTempSave (*(struct ContestTempSave *)(gHeap + 0x1a004))
 
 extern struct ContestPokemon gContestMons[CONTESTANT_COUNT];
 extern s16 gContestMonRound1Points[CONTESTANT_COUNT];
@@ -326,8 +326,8 @@ extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
 extern u8 sContestBgCopyFlags;
 extern struct ContestWinner gCurContestWinner;
-extern u8 gUnknown_02039F5C;
-extern u8 gUnknown_02039F5D;
+extern u8 gCurContestWinnerIsForArtist;
+extern u8 gCurContestWinnerSaveIdx;
 extern u32 gContestRngValue;
 
 // contest.c
@@ -351,8 +351,8 @@ s8 Contest_GetMoveExcitement(u16 move);
 bool8 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);
-bool8 sub_80DEDA8(u8 a);
-u8 sub_80DEFA8(u8 a, u8 b);
+bool8 SaveContestWinner(u8 rank);
+u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift);
 void ClearContestWinnerPicsInContestHall(void);
 void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language);
 

@@ -22,27 +22,27 @@ LilycoveCity_DepartmentStoreElevator_EventScript_Attendant:: @ 8220624
 
 @ Below scripts ensure the cursor for floor select always starts on the current floor
 LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th:: @ 8220689
-	multichoicedefault 0, 0, MULTI_FLOORS, 0, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 0, FALSE
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th:: @ 8220695
-	multichoicedefault 0, 0, MULTI_FLOORS, 1, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 1, FALSE
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd:: @ 82206A1
-	multichoicedefault 0, 0, MULTI_FLOORS, 2, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 2, FALSE
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom2nd:: @ 82206AD
-	multichoicedefault 0, 0, MULTI_FLOORS, 3, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 3, FALSE
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st:: @ 82206B9
-	multichoicedefault 0, 0, MULTI_FLOORS, 4, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 4, FALSE
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor
 	end
 

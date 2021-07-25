@@ -50,8 +50,8 @@ struct PlayerRecordsRS
     TVShow tvShows[TV_SHOWS_COUNT];
     PokeNews pokeNews[POKE_NEWS_COUNT];
     OldMan oldMan;
-    struct EasyChatPair easyChatPairs[5];
-    struct RecordMixingDayCareMail dayCareMail;
+    struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
+    struct RecordMixingDaycareMail daycareMail;
     struct RSBattleTowerRecord battleTowerRecord;
     u16 giftItem;
     u16 filler11C8[0x32];
@@ -63,8 +63,8 @@ struct PlayerRecordsEmerald
     /* 0x0c80 */ TVShow tvShows[TV_SHOWS_COUNT];
     /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
     /* 0x1044 */ OldMan oldMan;
-    /* 0x1084 */ struct EasyChatPair easyChatPairs[5];
-    /* 0x10ac */ struct RecordMixingDayCareMail dayCareMail;
+    /* 0x1084 */ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
+    /* 0x10ac */ struct RecordMixingDaycareMail daycareMail;
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 giftItem;
     /* 0x1214 */ LilycoveLady lilycoveLady;
@@ -86,18 +86,17 @@ static struct SecretBase *sSecretBasesSave;
 static TVShow *sTvShowsSave;
 static PokeNews *sPokeNewsSave;
 static OldMan *sOldManSave;
-static struct EasyChatPair *sEasyChatPairsSave;
-static struct RecordMixingDayCareMail *gUnknown_03001148;
+static struct DewfordTrend *sDewfordTrendsSave;
+static struct RecordMixingDaycareMail *sDaycareMailSave;
 static void *sBattleTowerSave;
 static LilycoveLady *sLilycoveLadySave;
 static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 gUnknown_03001160;
-static u32 filler_03001164;
 static struct PlayerHallRecords *gUnknown_03001168[3];
 
-static EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {0};
+static EWRAM_DATA struct RecordMixingDaycareMail sDaycareMail = {0};
 static EWRAM_DATA union PlayerRecords *sReceivedRecords = NULL;
 static EWRAM_DATA union PlayerRecords *sSentRecord = NULL;
 
@@ -116,14 +115,14 @@ static void ReceiveOldManData(OldMan *, size_t, u8);
 static void ReceiveBattleTowerData(void *battleTowerRecord, size_t, u8);
 static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
-static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
+static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *, size_t, u8, TVShow *);
 static void ReceiveGiftItem(u16 *item, u8 which);
 static void Task_DoRecordMixing(u8 taskId);
 static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src);
 static void ReceiveApprenticeData(struct Apprentice *mixApprentice, size_t recordSize, u32 multiplayerId);
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t arg1, u32 arg2);
-static void sub_80E89F8(struct RecordMixingDayCareMail *dst);
-static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src);
+static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst);
+static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *src);
 static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *arg0);
 static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *src);
 
@@ -180,8 +179,8 @@ static void SetSrcLookupPointers(void)
     sTvShowsSave = gSaveBlock1Ptr->tvShows;
     sPokeNewsSave = gSaveBlock1Ptr->pokeNews;
     sOldManSave = &gSaveBlock1Ptr->oldMan;
-    sEasyChatPairsSave = gSaveBlock1Ptr->easyChatPairs;
-    gUnknown_03001148 = &gUnknown_02039F9C;
+    sDewfordTrendsSave = gSaveBlock1Ptr->dewfordTrends;
+    sDaycareMailSave = &sDaycareMail;
     sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
     sApprenticesSave = gSaveBlock2Ptr->apprentices;
@@ -192,11 +191,11 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
 {
     memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
     memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
-    sub_80F14F8(dest->tvShows);
+    SanitizeTVShowLocationsForRuby(dest->tvShows);
     memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
     memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
-    memcpy(dest->easyChatPairs, sEasyChatPairsSave, sizeof(dest->easyChatPairs));
-    sub_80E89F8(&dest->dayCareMail);
+    memcpy(dest->dewfordTrends, sDewfordTrendsSave, sizeof(dest->dewfordTrends));
+    GetRecordMixingDaycareMail(&dest->daycareMail);
     EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
 
     if (GetMultiplayerId() == 0)
@@ -208,13 +207,13 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
     memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
     ClearJapaneseSecretBases(dest->secretBases);
     memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
-    sub_80F1208(dest->tvShows);
+    SanitizeTVShowsForRuby(dest->tvShows);
     memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
     memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
-    sub_8120B70(&dest->oldMan);
-    memcpy(dest->easyChatPairs, sEasyChatPairsSave, sizeof(dest->easyChatPairs));
-    sub_80E89F8(&dest->dayCareMail);
-    SanitizeDayCareMailForRuby(&dest->dayCareMail);
+    SanitizeMauvilleOldManForRuby(&dest->oldMan);
+    memcpy(dest->dewfordTrends, sDewfordTrendsSave, sizeof(dest->dewfordTrends));
+    GetRecordMixingDaycareMail(&dest->daycareMail);
+    SanitizeDaycareMailForRuby(&dest->daycareMail);
     EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
     SanitizeRubyBattleTowerRecord(&dest->battleTowerRecord);
 
@@ -225,7 +224,7 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
 static void PrepareExchangePacket(void)
 {
     SetPlayerSecretBaseParty();
-    sub_80F0BB8();
+    DeactivateAllNormalTVShows();
     SetSrcLookupPointers();
 
     if (Link_AnyPartnersPlayingRubyOrSapphire())
@@ -242,8 +241,8 @@ static void PrepareExchangePacket(void)
         memcpy(sSentRecord->emerald.pokeNews, sPokeNewsSave, sizeof(sSentRecord->emerald.pokeNews));
         memcpy(&sSentRecord->emerald.oldMan, sOldManSave, sizeof(sSentRecord->emerald.oldMan));
         memcpy(&sSentRecord->emerald.lilycoveLady, sLilycoveLadySave, sizeof(sSentRecord->emerald.lilycoveLady));
-        memcpy(sSentRecord->emerald.easyChatPairs, sEasyChatPairsSave, sizeof(sSentRecord->emerald.easyChatPairs));
-        sub_80E89F8(&sSentRecord->emerald.dayCareMail);
+        memcpy(sSentRecord->emerald.dewfordTrends, sDewfordTrendsSave, sizeof(sSentRecord->emerald.dewfordTrends));
+        GetRecordMixingDaycareMail(&sSentRecord->emerald.daycareMail);
         memcpy(&sSentRecord->emerald.battleTowerRecord, sBattleTowerSave, sizeof(sSentRecord->emerald.battleTowerRecord));
         SanitizeEmeraldBattleTowerRecord(&sSentRecord->emerald.battleTowerRecord);
 
@@ -262,12 +261,12 @@ static void ReceiveExchangePacket(u32 which)
         // Ruby/Sapphire
         sub_80E7B2C((void *)sReceivedRecords->ruby.tvShows);
         ReceiveSecretBasesData(sReceivedRecords->ruby.secretBases, sizeof(struct PlayerRecordsRS), which);
-        ReceiveDaycareMailData(&sReceivedRecords->ruby.dayCareMail, sizeof(struct PlayerRecordsRS), which, sReceivedRecords->ruby.tvShows);
+        ReceiveDaycareMailData(&sReceivedRecords->ruby.daycareMail, sizeof(struct PlayerRecordsRS), which, sReceivedRecords->ruby.tvShows);
         ReceiveBattleTowerData(&sReceivedRecords->ruby.battleTowerRecord, sizeof(struct PlayerRecordsRS), which);
         ReceiveTvShowsData(sReceivedRecords->ruby.tvShows, sizeof(struct PlayerRecordsRS), which);
         ReceivePokeNewsData(sReceivedRecords->ruby.pokeNews, sizeof(struct PlayerRecordsRS), which);
         ReceiveOldManData(&sReceivedRecords->ruby.oldMan, sizeof(struct PlayerRecordsRS), which);
-        ReceiveEasyChatPairsData(sReceivedRecords->ruby.easyChatPairs, sizeof(struct PlayerRecordsRS), which);
+        ReceiveDewfordTrendData(sReceivedRecords->ruby.dewfordTrends, sizeof(struct PlayerRecordsRS), which);
         ReceiveGiftItem(&sReceivedRecords->ruby.giftItem, which);
     }
     else
@@ -278,8 +277,8 @@ static void ReceiveExchangePacket(u32 which)
         ReceiveTvShowsData(sReceivedRecords->emerald.tvShows, sizeof(struct PlayerRecordsEmerald), which);
         ReceivePokeNewsData(sReceivedRecords->emerald.pokeNews, sizeof(struct PlayerRecordsEmerald), which);
         ReceiveOldManData(&sReceivedRecords->emerald.oldMan, sizeof(struct PlayerRecordsEmerald), which);
-        ReceiveEasyChatPairsData(sReceivedRecords->emerald.easyChatPairs, sizeof(struct PlayerRecordsEmerald), which);
-        ReceiveDaycareMailData(&sReceivedRecords->emerald.dayCareMail, sizeof(struct PlayerRecordsEmerald), which, sReceivedRecords->emerald.tvShows);
+        ReceiveDewfordTrendData(sReceivedRecords->emerald.dewfordTrends, sizeof(struct PlayerRecordsEmerald), which);
+        ReceiveDaycareMailData(&sReceivedRecords->emerald.daycareMail, sizeof(struct PlayerRecordsEmerald), which, sReceivedRecords->emerald.tvShows);
         ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(struct PlayerRecordsEmerald), which);
         ReceiveGiftItem(&sReceivedRecords->emerald.giftItem, which);
         ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(struct PlayerRecordsEmerald), which);
@@ -320,7 +319,7 @@ static void Task_RecordMixing_Main(u8 taskId)
     {
     case 0: // init
         sSentRecord = malloc(sizeof(union PlayerRecords));
-        sReceivedRecords = malloc(sizeof(union PlayerRecords) * 4);
+        sReceivedRecords = malloc(sizeof(union PlayerRecords) * MAX_LINK_PLAYERS);
         SetLocalLinkPlayerId(gSpecialVar_0x8005);
         VarSet(VAR_TEMP_0, 1);
         gUnknown_03001130 = FALSE;
@@ -364,7 +363,7 @@ static void Task_RecordMixing_Main(u8 taskId)
         {
             free(sReceivedRecords);
             free(sSentRecord);
-            sub_808729C();
+            SetLinkWaitingForScript();
             if (gWirelessCommType != 0)
             {
                 CreateTask(Task_ReturnToFieldRecordMixing, 10);
@@ -666,7 +665,7 @@ static void ReceiveBattleTowerData(void *battleTowerRecord, size_t recordSize, u
     {
         memcpy((void *)battleTowerRecord + recordSize * which, (void *)battleTowerRecord + recordSize * mixIndices[which], sizeof(struct EmeraldBattleTowerRecord));
         dest = (void *)battleTowerRecord + recordSize * which;
-        for (i = 0; i < 4; i ++)
+        for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
         {
             btPokemon = &dest->party[i];
             if (btPokemon->species != SPECIES_NONE && IsStringJapanese(btPokemon->nickname))
@@ -707,22 +706,22 @@ static void ReceiveLilycoveLadyData(LilycoveLady *lilycoveLady, size_t recordSiz
     }
 }
 
-static u8 sub_80E7A9C(struct DayCareMail *rmMail)
+static u8 sub_80E7A9C(struct DaycareMail *rmMail)
 {
     return rmMail->message.itemId;
 }
 
-static void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
+static void sub_80E7AA4(struct RecordMixingDaycareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
 {
-    struct DayCareMail buffer;
-    struct RecordMixingDayCareMail *mail1;
-    struct RecordMixingDayCareMail *mail2;
+    struct DaycareMail buffer;
+    struct RecordMixingDaycareMail *mail1;
+    struct RecordMixingDaycareMail *mail2;
 
     mail1 = (void *)src + recordSize * idxs[which0][0];
-    memcpy(&buffer, &mail1->mail[idxs[which0][1]], sizeof(struct DayCareMail));
+    memcpy(&buffer, &mail1->mail[idxs[which0][1]], sizeof(struct DaycareMail));
     mail2 = (void *)src + recordSize * idxs[which1][0];
-    memcpy(&mail1->mail[idxs[which0][1]], &mail2->mail[idxs[which1][1]], sizeof(struct DayCareMail));
-    memcpy(&mail2->mail[idxs[which1][1]], &buffer, sizeof(struct DayCareMail));
+    memcpy(&mail1->mail[idxs[which0][1]], &mail2->mail[idxs[which1][1]], sizeof(struct DaycareMail));
+    memcpy(&mail2->mail[idxs[which1][1]], &buffer, sizeof(struct DaycareMail));
 }
 
 static void sub_80E7B2C(const u8 *src)
@@ -731,7 +730,7 @@ static void sub_80E7B2C(const u8 *src)
     s32 i;
 
     sum = 0;
-    for (i = 0; i < 256; i ++)
+    for (i = 0; i < 256; i++)
         sum += src[i];
 
     gUnknown_03001160 = sum;
@@ -742,17 +741,17 @@ static u8 sub_80E7B54(void)
     return gUnknown_03001160;
 }
 
-static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
+static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *src, size_t recordSize, u8 which, TVShow *shows)
 {
     u16 i, j;
     u8 linkPlayerCount;
     u8 tableId;
-    struct RecordMixingDayCareMail *_src;
+    struct RecordMixingDaycareMail *_src;
     u8 which0, which1;
     void *ptr;
     u8 sp04[4];
     u8 sp08[4];
-    struct RecordMixingDayCareMail *sp0c[4];
+    struct RecordMixingDaycareMail *sp0c[4];
     u8 sp1c[4][2];
     u8 sp24[4][2];
     u8 sp34;
@@ -778,10 +777,10 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
         _src = (void *)src + i * recordSize;
         language = gLinkPlayers[i].language;
         version = gLinkPlayers[i].version & 0xFF;
-        for (j = 0; j < _src->numDaycareMons; j ++)
+        for (j = 0; j < _src->numDaycareMons; j++)
         {
             u16 otNameLanguage, nicknameLanguage;
-            struct DayCareMail *recordMixingMail = &_src->mail[j];
+            struct DaycareMail *recordMixingMail = &_src->mail[j];
 
             if (!recordMixingMail->message.itemId)
                 continue;
@@ -836,7 +835,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
         if (_src->numDaycareMons == 0)
             continue;
 
-        for (j = 0; j < _src->numDaycareMons; j ++)
+        for (j = 0; j < _src->numDaycareMons; j++)
         {
             if (!_src->holdsItem[j])
                 sp1c[i][j] = 1;
@@ -914,8 +913,8 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
     }
 
     _src = (void *)src + which * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &_src->mail[0], sizeof(struct DayCareMail));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &_src->mail[1], sizeof(struct DayCareMail));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &_src->mail[0], sizeof(struct DaycareMail));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &_src->mail[1], sizeof(struct DaycareMail));
     SeedRng(oldSeed);
 }
 
@@ -958,7 +957,7 @@ static void Task_DoRecordMixing(u8 taskId)
     case 2:
         SetContinueGameWarpStatusToDynamicWarp();
         FullSaveGame();
-        task->data[0] ++;
+        task->data[0]++;
         break;
     case 3:
         if (CheckSaveFile())
@@ -972,7 +971,7 @@ static void Task_DoRecordMixing(u8 taskId)
         if (++task->data[1] > 10)
         {
             SetCloseLinkCallback();
-            task->data[0] ++;
+            task->data[0]++;
         }
         break;
     case 5:
@@ -985,7 +984,7 @@ static void Task_DoRecordMixing(u8 taskId)
         if (!sub_801048C(FALSE))
         {
             CreateTask(Task_LinkSave, 5);
-            task->data[0] ++;
+            task->data[0]++;
         }
         break;
     case 7: // wait for Task_LinkSave to finish.
@@ -1004,7 +1003,7 @@ static void Task_DoRecordMixing(u8 taskId)
         break;
     case 8:
         SetLinkStandbyCallback();
-        task->data[0] ++;
+        task->data[0]++;
         break;
     case 9:
         if (IsLinkTaskFinished())
@@ -1062,13 +1061,9 @@ static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
         break;
     case 2:
         if (Random2() > 0x3333)
-        {
             dst[1] = src[gSaveBlock2Ptr->playerApprentice.saveId + 1];
-        }
         else
-        {
             dst[1] = src[((gSaveBlock2Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1) + 1)];
-        }
         break;
     }
 }
@@ -1222,7 +1217,7 @@ static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, 
             for (l = 0; l < 3; l++)
             {
                 if (GetTrainerId(dst->hallRecords2P[j][l].id1) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id1)
-                    && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id2))
+                 && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id2))
                 {
                     var_68++;
                     if (dst->hallRecords2P[j][l].winStreak < gUnknown_03001168[k]->twoPlayers[j].winStreak)
@@ -1309,21 +1304,21 @@ static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, siz
     Free(largeStructPtr);
 }
 
-static void sub_80E89F8(struct RecordMixingDayCareMail *dst)
+static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)
 {
-    gUnknown_02039F9C.mail[0] = gSaveBlock1Ptr->daycare.mons[0].mail;
-    gUnknown_02039F9C.mail[1] = gSaveBlock1Ptr->daycare.mons[1].mail;
-    InitDaycareMailRecordMixing(&gSaveBlock1Ptr->daycare, &gUnknown_02039F9C);
-    *dst = *gUnknown_03001148;
+    sDaycareMail.mail[0] = gSaveBlock1Ptr->daycare.mons[0].mail;
+    sDaycareMail.mail[1] = gSaveBlock1Ptr->daycare.mons[1].mail;
+    InitDaycareMailRecordMixing(&gSaveBlock1Ptr->daycare, &sDaycareMail);
+    *dst = *sDaycareMailSave;
 }
 
-static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src)
+static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *src)
 {
     s32 i;
 
     for (i = 0; i < src->numDaycareMons; i++)
     {
-        struct DayCareMail *mail = &src->mail[i];
+        struct DaycareMail *mail = &src->mail[i];
         if (mail->message.itemId != 0)
         {
             if (mail->gameLanguage != LANGUAGE_JAPANESE)
@@ -1343,10 +1338,10 @@ static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *ds
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {
         struct BattleTowerPokemon *towerMon = &dst->party[i];
-        if (towerMon->species != 0)
+        if (towerMon->species != SPECIES_NONE)
             StripExtCtrlCodes(towerMon->nickname);
     }
 

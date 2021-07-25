@@ -153,11 +153,11 @@ static const struct BgTemplate sBgTemplates[3] =
     },
 };
 
-static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY};
+static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct OamData sOam_Hand =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -174,7 +174,7 @@ static const struct OamData sOam_Hand =
 
 static const struct OamData sOam_Pokeball =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -191,7 +191,7 @@ static const struct OamData sOam_Pokeball =
 
 static const struct OamData sOam_StarterCircle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -378,7 +378,6 @@ static void VblankCB_StarterChoose(void)
 
 void CB2_ChooseStarter(void)
 {
-    u16 savedIme;
     u8 taskId;
     u8 spriteId;
 
@@ -426,7 +425,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeballSelect[0]);
     LoadCompressedSpriteSheet(&sSpriteSheet_StarterCircle[0]);
     LoadSpritePalettes(sSpritePalettes_StarterChoose);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
 
     EnableInterrupts(DISPSTAT_VBLANK);
     SetVBlankCallback(VblankCB_StarterChoose);
@@ -465,7 +464,7 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 2;
 
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
 }
 
 static void CB2_StarterChoose(void)
@@ -614,7 +613,7 @@ static void ClearStarterLabel(void)
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
     ClearWindowTilemap(sStarterLabelWindowId);
     RemoveWindow(sStarterLabelWindowId);
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     ScheduleBgCopyTilemapToVram(0);
