@@ -1404,6 +1404,12 @@ BW_SEQ_ME_HYOUKA3            = AF 03
 BW_SEQ_BGM_GYM               = B0 03
 BW_SEQ_BGM_VS_GYMLEADER      = B1 03
 BW_SEQ_BGM_BATTLESUPERIOR    = B2 03
+BW_SEQ_BGM_WIN3              = B3 03
+BW_SEQ_ME_BADGE              = B4 03
+BW_SEQ_ME_WAZA               = B5 03
+BW_SEQ_BGM_GATE              = B6 03
+BW_SEQ_BGM_H_01              = B7 03
+BW_SEQ_BGM_C_03              = B8 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

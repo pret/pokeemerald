@@ -4001,3 +4001,23 @@ DirectSoundWaveData_bw_synthstringfs4_leader::
 	.align 2
 DirectSoundWaveData_bw_synthstringcs6_leader::
 	.incbin "sound/direct_sound_samples/bw_synthstringcs6_leader.bin"
+
+	.align 2
+DirectSoundWaveData_bw_158rim::
+	.incbin "sound/direct_sound_samples/bw_158rim.bin"
+
+	.align 2
+DirectSoundWaveData_bw_011kick::
+	.incbin "sound/direct_sound_samples/bw_011kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_160asaxc3::
+	.incbin "sound/direct_sound_samples/bw_160asaxc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_161asaxc4::
+	.incbin "sound/direct_sound_samples/bw_161asaxc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_162asaxc5::
+	.incbin "sound/direct_sound_samples/bw_162asaxc5.bin"

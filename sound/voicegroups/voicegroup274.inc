@@ -18,7 +18,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup296, KeySplitTable83    @ glockenspiel
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup308, KeySplitTable84    @ lp marschall guitar
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
@@ -50,7 +50,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup314, KeySplitTable89    @ alto sax
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 197, 227, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

@@ -969,6 +969,12 @@
 #define BW_SEQ_BGM_GYM               944 // Pokémon Gym
 #define BW_SEQ_BGM_VS_GYMLEADER      945 // Battle! (Gym Leader)                          (TODO: Portamento on bass)
 #define BW_SEQ_BGM_BATTLESUPERIOR    946 // Victory Lies Before You!
+#define BW_SEQ_BGM_WIN3              947 // Victory! (Gym Leader)
+#define BW_SEQ_ME_BADGE              948 // Received a League Gym Badge
+#define BW_SEQ_ME_WAZA               949 // Obtained a TM!
+#define BW_SEQ_BGM_GATE              950 // Gate
+#define BW_SEQ_BGM_H_01              951 // Skyarrow Bridge
+#define BW_SEQ_BGM_C_03              952 // Castelia City
 
 // Black 2 & White 2 Music
 

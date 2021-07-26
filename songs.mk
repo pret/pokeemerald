@@ -2510,3 +2510,21 @@ $(MID_SUBDIR)/bw_seq_bgm_vs_gymleader.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_battlesuperior.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_win3.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V096
+
+$(MID_SUBDIR)/bw_seq_me_badge.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V081 -p5
+
+$(MID_SUBDIR)/bw_seq_me_waza.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V093 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_gate.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V079
+
+$(MID_SUBDIR)/bw_seq_bgm_h_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V106
+
+$(MID_SUBDIR)/bw_seq_bgm_c_03.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V064

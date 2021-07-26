@@ -43,7 +43,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup262, KeySplitTable27    @ trombones
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
-	voice_keysplit voicegroup305, KeySplitTable43    @ tuba
+	voice_keysplit voicegroup305, KeySplitTable44    @ tuba
 	voice_keysplit voicegroup288, KeySplitTable69    @ oboe || 77
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
 	voice_directsound 60, 0, DirectSoundWaveData_dp_timpany_as_16, 255, 248, 0, 205
