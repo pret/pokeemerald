@@ -153,6 +153,10 @@
 #define B_CRITICAL_CAPTURE          TRUE  // If set to TRUE, Critical Capture will be enabled.
 #define B_CATCHING_CHARM_BOOST      20    // % boost in Critical Capture odds if player has the Catching Charm.
 
+// AI Settings
+#define B_SMART_WILD_AI_FLAG        0x1DE   // If not 0, you can set this flag in a script to enable smart wild pokemon
+#define B_VAR_WILD_AI_FLAGS         0x40F7  // If not 0, you can use this var to add to default wild AI flags. NOT usable with flags above (1 << 15)
+
 // Other
 #define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
 #define B_SLEEP_TURNS               GEN_7 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
