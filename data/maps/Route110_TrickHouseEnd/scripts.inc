@@ -178,7 +178,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle8:: @ 826AF28
 	end
 
 Route110_TrickHouseEnd_EventScript_ChooseTent:: @ 826AFA5
-	multichoice 0, 0, MULTI_TENT, 1
+	multichoice 0, 0, MULTI_TENT, TRUE
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEnd_EventScript_GiveRedTent
 	goto Route110_TrickHouseEnd_EventScript_GiveBlueTent

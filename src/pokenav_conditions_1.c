@@ -17,7 +17,7 @@ struct PokenavSub11
 {
     u32 monPal[3][0x20];
     u8 fill[0x180];
-    u32 monPicGfx[3][0x800];
+    u32 monPicGfx[3][MON_PIC_SIZE];
     u8 searchMode;
     s16 monIndex;
     u32 (*callback)(struct PokenavSub11 *);
@@ -123,7 +123,7 @@ u32 ConditionMenu_OpenMarkingsMenu(struct PokenavSub11 *structPtr)
     u8 markings;
     u32 ret = PARTY_CONDITION_FUNC_NONE, boxId, monId;
 
-    if (!MonMarkingsMenuHandleInput())
+    if (!HandleMonMarkingsMenuInput())
     {
         structPtr->monMarks[structPtr->mark] = GetMonMarkingsData();
         monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
@@ -372,7 +372,7 @@ u8 *CopyMonConditionNameGender(u8 *str, u16 id, bool8 arg3)
     switch (gender)
     {
     default:
-        *(str_++) = CHAR_UNK_SPACER;
+        *(str_++) = CHAR_GENDERLESS;
         break;
     case MON_MALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;

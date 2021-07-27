@@ -887,18 +887,13 @@ void CgbModVol(struct CgbChannel *chan)
     if ((soundInfo->mode & 1) || !CgbPan(chan))
     {
         chan->pan = 0xFF;
-        chan->envelopeGoal = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->envelopeGoal = (u32)(chan->leftVolume + chan->rightVolume);
+        chan->envelopeGoal /= 16;
     }
     else
     {
-        // Force chan->rightVolume and chan->leftVolume to be read from memory again,
-        // even though there is no reason to do so.
-        // The command line option "-fno-gcse" achieves the same result as this.
-        #ifndef NONMATCHING
-            asm("" : : : "memory");
-        #endif
-
-        chan->envelopeGoal = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->envelopeGoal = (u32)(chan->leftVolume + chan->rightVolume);
+        chan->envelopeGoal /= 16;
         if (chan->envelopeGoal > 15)
             chan->envelopeGoal = 15;
     }
@@ -1530,6 +1525,10 @@ void ply_xwave(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 {
     u32 wav;
 
+#ifdef UBFIX
+    wav = 0;
+#endif
+
     READ_XCMD_BYTE(wav, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(wav, 1)
     READ_XCMD_BYTE(wav, 2)
@@ -1597,6 +1596,10 @@ void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tra
 {
     u32 unk;
 
+#ifdef UBFIX
+    unk = 0;
+#endif
+
     READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(unk, 1)
 
@@ -1616,6 +1619,10 @@ void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tra
 void ply_xcmd_0D(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
     u32 unk;
+
+#ifdef UBFIX
+    unk = 0;
+#endif
 
     READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(unk, 1)
@@ -1657,18 +1664,12 @@ start_song:
     mplayInfo = &gPokemonCryMusicPlayers[i];
     mplayInfo->ident++;
 
-#define CRY ((s32)&gPokemonCrySongs + i * sizeof(struct PokemonCrySong))
-#define CRY_OFS(field) offsetof(struct PokemonCrySong, field)
+    gPokemonCrySongs[i] = gPokemonCrySong;
 
-    memcpy((void *)CRY, &gPokemonCrySong, sizeof(struct PokemonCrySong));
-
-    *(u32 *)(CRY + CRY_OFS(tone)) = (u32)tone;
-    *(u32 *)(CRY + CRY_OFS(part)) = CRY + CRY_OFS(part0);
-    *(u32 *)(CRY + CRY_OFS(part) + 4) = CRY + CRY_OFS(part1);
-    *(u32 *)(CRY + CRY_OFS(gotoTarget)) = CRY + CRY_OFS(cont);
-
-#undef CRY_OFS
-#undef CRY
+    gPokemonCrySongs[i].tone = tone;
+    gPokemonCrySongs[i].part[0] = &gPokemonCrySongs[i].part0;
+    gPokemonCrySongs[i].part[1] = &gPokemonCrySongs[i].part1;
+    gPokemonCrySongs[i].gotoTarget = (u32)&gPokemonCrySongs[i].cont;
 
     mplayInfo->ident = ID_NUMBER;
 
@@ -1711,14 +1712,14 @@ void SetPokemonCryProgress(u32 val)
     gPokemonCrySong.unkCmd0DParam = val;
 }
 
-int IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo)
+bool32 IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo)
 {
     struct MusicPlayerTrack *track = mplayInfo->tracks;
 
     if (track->chan && track->chan->track == track)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 void SetPokemonCryChorus(s8 val)

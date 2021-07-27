@@ -211,7 +211,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PRESENT] = 1, 
     [EFFECT_FRUSTRATION] = 1, 
     [EFFECT_SAFEGUARD] = 5, 
-    [EFFECT_THAW_HIT] = 1, 
+//    [EFFECT_THAW_HIT] = 1, Now unused
     [EFFECT_MAGNITUDE] = 1, 
     [EFFECT_BATON_PASS] = 7,
     [EFFECT_PURSUIT] = 2, 
@@ -666,7 +666,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     case STRINGID_CRITICALHIT:
         AddMovePoints(PTS_CRITICAL_HIT, moveSlot, 0, 0);
         break;
-    case STRINGID_PKMNSSTATCHANGED:
+    case STRINGID_ATTACKERSSTATROSE:
         if (gBattleTextBuff1[2] != 0)
         {
             if (*statStringId == STRINGID_STATSHARPLY)
@@ -675,7 +675,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
                 AddMovePoints(PTS_STAT_INCREASE_1, moveSlot, gBattleTextBuff1[2] - 1, 0);
         }
         break;
-    case STRINGID_PKMNSSTATCHANGED2:
+    case STRINGID_DEFENDERSSTATROSE:
         if (gBattleTextBuff1[2] != 0)
         {
             if (gBattlerAttacker == gBattlerTarget)
@@ -691,11 +691,11 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
             }
         }
         break;
-    case STRINGID_PKMNSSTATCHANGED3:
+    case STRINGID_ATTACKERSSTATFELL:
         if (gBattleTextBuff1[2] != 0)
             AddMovePoints(PTS_STAT_DECREASE_SELF, moveSlot, gBattleTextBuff1[2] - 1, 0);
         break;
-    case STRINGID_PKMNSSTATCHANGED4:
+    case STRINGID_DEFENDERSSTATFELL:
         if (gBattleTextBuff1[2] != 0)
         {
             if (*statStringId == STRINGID_STATHARSHLY)

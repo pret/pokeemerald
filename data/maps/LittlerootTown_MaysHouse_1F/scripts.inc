@@ -192,7 +192,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if_ne LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
-	playbgm MUS_ENCOUNTER_MAY, 1
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
 	compare VAR_0x8008, 1

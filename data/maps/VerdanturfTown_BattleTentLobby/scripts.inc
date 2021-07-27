@@ -114,7 +114,7 @@ VerdanturfTown_BattleTentLobby_EventScript_Attendant:: @ 8201873
 VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge:: @ 8201893
 	message VerdanturfTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge

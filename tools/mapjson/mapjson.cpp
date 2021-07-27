@@ -395,7 +395,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     int group_num = 0;
 
     for (auto &group : groups_data["group_order"].array_items()) {
-        text << "// Map Group " << group_num << "\n";
+        text << "// " << group.string_value() << "\n";
         vector<Json> map_ids;
         size_t max_length = 0;
 
