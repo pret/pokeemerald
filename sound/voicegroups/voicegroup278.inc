@@ -41,3 +41,8 @@ voicegroup278:: @ drums 1 (kageyama)
 	voice_directsound 60, 30, DirectSoundWaveData_dp_cabassa_16, 255, 242, 127, 171				@ 127/100/ 90/120/ 30
 	voice_directsound 61, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 1
 	voice_directsound 62, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 2
+	voice_directsound 60, 64, DirectSoundWaveData_bw_110kick, 255, 0, 227, 205    				@ 127/127/120/116/ 64
+	voice_directsound 60, 90, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 90
+	voice_directsound 61, 40, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 40	+ 1
+	voice_directsound 60, 40, DirectSoundWaveData_bw_suscymroll, 255, 0, 255, 236    			@ 127/127/127/100/ 40
+	voice_directsound 60, 40, DirectSoundWaveData_bw_suscym, 255, 251, 0, 214    				@ 127/ 60/  0/114/ 40

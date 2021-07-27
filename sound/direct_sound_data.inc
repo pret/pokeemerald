@@ -4021,3 +4021,23 @@ DirectSoundWaveData_bw_161asaxc4::
 	.align 2
 DirectSoundWaveData_bw_162asaxc5::
 	.incbin "sound/direct_sound_samples/bw_162asaxc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pickbassg1::
+	.incbin "sound/direct_sound_samples/bw_pickbassg1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pickbasse2::
+	.incbin "sound/direct_sound_samples/bw_pickbasse2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pickbassc3::
+	.incbin "sound/direct_sound_samples/bw_pickbassc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_suscymroll::
+	.incbin "sound/direct_sound_samples/bw_suscymroll.bin"
+
+	.align 2
+DirectSoundWaveData_bw_suscym::
+	.incbin "sound/direct_sound_samples/bw_suscym.bin"

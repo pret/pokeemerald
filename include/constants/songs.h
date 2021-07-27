@@ -975,6 +975,20 @@
 #define BW_SEQ_BGM_GATE              950 // Gate
 #define BW_SEQ_BGM_H_01              951 // Skyarrow Bridge
 #define BW_SEQ_BGM_C_03              952 // Castelia City
+#define BW_SEQ_BGM_EYE_12            953 // Trainers' Eyes Meet (Clerk ♂)
+#define BW_SEQ_BGM_R_C_SP_VAR        954 // Route 4 (Spring) (No Drums)
+#define BW_SEQ_BGM_R_C_SP            955 // Route 4 (Spring)
+#define BW_SEQ_BGM_R_C_SU_VAR        956 // Route 4 (Summer) (No Drums)
+#define BW_SEQ_BGM_R_C_SU            957 // Route 4 (Summer)
+#define BW_SEQ_BGM_R_C_AU_VAR        958 // Route 4 (Autumn) (No Drums)
+#define BW_SEQ_BGM_R_C_AU            959 // Route 4 (Autumn)
+#define BW_SEQ_BGM_R_C_WI_VAR        960 // Route 4 (Winter) (No Drums)
+#define BW_SEQ_BGM_R_C_WI            961 // Route 4 (Winter)
+#define BW_SEQ_BGM_EYE_11            962 // Trainers' Eyes Meet (Backpacker)
+#define BW_SEQ_BGM_C_04              963 // Nimbasa City
+#define BW_SEQ_BGM_E_SUPPORT         964 // Bianca's Theme
+#define BW_SEQ_BGM_E_EMOTION         965 // An Unwavering Heart
+#define BW_SEQ_BGM_E_N               966 // Prisoner to a Formula
 
 // Black 2 & White 2 Music
 

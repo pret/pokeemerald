@@ -16,7 +16,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_147tbellg4, 255, 248, 0, 205
 	voice_keysplit voicegroup296, KeySplitTable83    @ glockenspiel
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup243, KeySplitTable76    @ music box
 	voice_keysplit voicegroup308, KeySplitTable84    @ lp marschall guitar
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
@@ -28,10 +28,10 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup311, KeySplitTable86    @ fretless bass
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
 	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup316, KeySplitTable41    @ clean guitar
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup315, KeySplitTable90    @ picked bass (nimbasa)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 254, 242, 255, 205
 	voice_keysplit voicegroup301, KeySplitTable79    @ clarinet (pokecenter)
@@ -46,7 +46,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
 	voice_keysplit voicegroup287, KeySplitTable68    @ oboe
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup305, KeySplitTable44    @ tuba
 	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
