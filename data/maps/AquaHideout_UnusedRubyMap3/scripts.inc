@@ -1,3 +1,3 @@
-AquaHideout_UnusedRubyMap3_MapScripts:: @ 823929D
+AquaHideout_UnusedRubyMap3_MapScripts::
 	.byte 0
 

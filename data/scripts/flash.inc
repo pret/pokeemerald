@@ -1,4 +1,4 @@
-EventScript_UseFlash:: @ 82926F8
+EventScript_UseFlash::
 	animateflash 1
 	setflashradius 1
 	end

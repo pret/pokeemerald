@@ -16,7 +16,7 @@
 	.section script_data, "aw", %progbits
 	
 .align 2
-gBattleScriptsForMoveEffects:: @ 82D86A8
+gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                    @ EFFECT_HIT
 	.4byte BattleScript_EffectSleep                  @ EFFECT_SLEEP
 	.4byte BattleScript_EffectPoisonHit              @ EFFECT_POISON_HIT
