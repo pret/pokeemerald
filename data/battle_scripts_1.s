@@ -368,6 +368,30 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSleepHit
 	.4byte BattleScript_EffectAttackerDefenseDownHit
 	.4byte BattleScript_EffectBodyPress
+	.4byte BattleScript_EffectStuffCheeks
+
+BattleScript_EffectStuffCheeks::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifnotberry BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+BattleScript_StuffCheeksEatBerry:
+	setbyte sBERRY_OVERRIDE, TRUE
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	consumeberry BS_ATTACKER
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	setbyte sBERRY_OVERRIDE, FALSE
+	setstatchanger STAT_DEF, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_StuffCheeksEnd
+	setgraphicalstatchangevalues
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_StuffCheeksEnd	@ cant raise def
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_StuffCheeksEnd:
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectAttackerDefenseDownHit:
 	setmoveeffect MOVE_EFFECT_DEF_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
@@ -5983,6 +6007,10 @@ BattleScript_SlowStartEnds::
 
 BattleScript_SelectingNotAllowedMoveGravity::
 	printselectionstring STRINGID_GRAVITYPREVENTSUSAGE
+	endselectionscript
+
+BattleScript_SelectingNotAllowedStuffCheeks::
+	printselectionstring STRINGID_STUFFCHEEKSCANTSELECT
 	endselectionscript
 
 BattleScript_SelectingNotAllowedBelch::
