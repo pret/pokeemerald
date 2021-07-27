@@ -356,10 +356,10 @@ static void PlayerDescendMirageTower(u8 taskId)
 
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_ROUTE111_PLAYER_FALLING, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     fallingPlayer = &gObjectEvents[objectEventId];
-    gSprites[fallingPlayer->spriteId].pos2.y += 4;
+    gSprites[fallingPlayer->spriteId].y2 += 4;
     player = &gObjectEvents[gPlayerAvatar.objectEventId];
-    if ((gSprites[fallingPlayer->spriteId].pos1.y + gSprites[fallingPlayer->spriteId].pos2.y) >=
-        (gSprites[player->spriteId].pos1.y + gSprites[player->spriteId].pos2.y))
+    if ((gSprites[fallingPlayer->spriteId].y + gSprites[fallingPlayer->spriteId].y2) >=
+        (gSprites[player->spriteId].y + gSprites[player->spriteId].y2))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();
@@ -467,8 +467,8 @@ static void CreateCeilingCrumbleSprites(void)
 static void SpriteCB_CeilingCrumble(struct Sprite* sprite)
 {
     sprite->data[1] += 2;
-    sprite->pos2.y = sprite->data[1] / 2;
-    if(((sprite->pos1.y) + (sprite->pos2.y)) >  sCeilingCrumblePositions[sprite->data[0]][2])
+    sprite->y2 = sprite->data[1] / 2;
+    if(((sprite->y) + (sprite->y2)) >  sCeilingCrumblePositions[sprite->data[0]][2])
     {
         DestroySprite(sprite);
         IncrementCeilingCrumbleFinishedCount();
@@ -688,7 +688,7 @@ static void Task_FossilFallAndSink(u8 taskId)
             fossilTemplate.images = sFallingFossil->frameImage;
             sFallingFossil->spriteId = CreateSprite(&fossilTemplate, 128, -16, 1);
             gSprites[sFallingFossil->spriteId].centerToCornerVecX = 0;
-            gSprites[sFallingFossil->spriteId].data[0] = gSprites[sFallingFossil->spriteId].pos1.x;
+            gSprites[sFallingFossil->spriteId].data[0] = gSprites[sFallingFossil->spriteId].x;
             gSprites[sFallingFossil->spriteId].data[1] = 1;
         }
     case 5:
@@ -731,7 +731,7 @@ static void SpriteCB_FallingFossil(struct Sprite *sprite)
         // End animation
         sprite->callback = SpriteCallbackDummy;
     }
-    else if (sprite->pos1.y >= 96)
+    else if (sprite->y >= 96)
     {
         // Fossil has reached the ground, update disintegration animation
         u8 i;
@@ -743,7 +743,7 @@ static void SpriteCB_FallingFossil(struct Sprite *sprite)
     else
     {
         // Fossil is still falling
-        sprite->pos1.y++;
+        sprite->y++;
     }
 }
 

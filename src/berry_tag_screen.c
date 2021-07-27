@@ -674,9 +674,9 @@ static void Task_DisplayAnotherBerry(u8 taskId)
     else
         posY = data[0];
 
-    gSprites[sBerryTag->berrySpriteId].pos2.y = posY;
+    gSprites[sBerryTag->berrySpriteId].y2 = posY;
     for (i = 0; i < FLAVOR_COUNT; i++)
-        gSprites[sBerryTag->flavorCircleIds[i]].pos2.y = posY;
+        gSprites[sBerryTag->flavorCircleIds[i]].y2 = posY;
 
     ChangeBgY(1, 0x1000, data[1]);
     ChangeBgY(2, 0x1000, data[1]);
