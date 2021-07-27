@@ -989,6 +989,8 @@
 #define BW_SEQ_BGM_E_SUPPORT         964 // Bianca's Theme
 #define BW_SEQ_BGM_E_EMOTION         965 // An Unwavering Heart
 #define BW_SEQ_BGM_E_N               966 // Prisoner to a Formula
+#define BW_SEQ_BGM_VS_N              967 // Battle! (N)                                   (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_BATTLEPINCH       968 // A Tight Spot During Battle!
 
 // Black 2 & White 2 Music
 

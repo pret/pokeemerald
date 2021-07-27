@@ -37,7 +37,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup301, KeySplitTable79    @ clarinet (pokecenter)
 	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2
 	voice_keysplit voicegroup302, KeySplitTable80    @ harp 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_orchhita3_lowhp, 254, 250, 2, 205
 	voice_keysplit voicegroup260, KeySplitTable61    @ timpani
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
 	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
@@ -49,7 +49,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup305, KeySplitTable44    @ tuba
 	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_2_alt 60, 0, 2, 0, 6, 2, 0
 	voice_keysplit voicegroup314, KeySplitTable89    @ alto sax
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 197, 227, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -120,7 +120,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1_alt 60, 0, 0, 2, 0, 6, 2, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

@@ -1424,6 +1424,8 @@ BW_SEQ_BGM_C_04              = C3 03
 BW_SEQ_BGM_E_SUPPORT         = C4 03
 BW_SEQ_BGM_E_EMOTION         = C5 03
 BW_SEQ_BGM_E_N               = C6 03
+BW_SEQ_BGM_VS_N              = C7 03
+BW_SEQ_BGM_BATTLEPINCH       = C8 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

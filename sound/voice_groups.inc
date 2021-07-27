@@ -316,3 +316,4 @@
 .include "sound/voicegroups/voicegroup314.inc"
 .include "sound/voicegroups/voicegroup315.inc"
 .include "sound/voicegroups/voicegroup316.inc"
+.include "sound/voicegroups/voicegroup317.inc"

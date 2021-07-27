@@ -2570,3 +2570,9 @@ $(MID_SUBDIR)/bw_seq_bgm_e_emotion.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_e_n.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V078
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_n.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V126
+
+$(MID_SUBDIR)/bw_seq_bgm_battlepinch.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V086 -p1

@@ -32,7 +32,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup310, KeySplitTable21    @ distortion guitar (DPPt)
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_keysplit voicegroup298, KeySplitTable77    @ strings 2
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup317, KeySplitTable73    @ synth bass (elite four)
 	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 254, 242, 255, 205
 	voice_directsound 60, 0, DirectSoundWaveData_hg_098pizza4, 255, 248, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_064flt2a5, 255, 246, 159, 205

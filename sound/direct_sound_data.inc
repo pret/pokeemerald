@@ -4041,3 +4041,15 @@ DirectSoundWaveData_bw_suscymroll::
 	.align 2
 DirectSoundWaveData_bw_suscym::
 	.incbin "sound/direct_sound_samples/bw_suscym.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbassfs2_e4::
+	.incbin "sound/direct_sound_samples/bw_synthbassfs2_e4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbassfs4_e4::
+	.incbin "sound/direct_sound_samples/bw_synthbassfs4_e4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_orchhita3_lowhp::
+	.incbin "sound/direct_sound_samples/bw_orchhita3_lowhp.bin"
