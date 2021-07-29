@@ -24,3 +24,15 @@ voicegroup279:: @ drums 2 (sato)
 	voice_directsound 60, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64
 	voice_directsound 61, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 1
 	voice_directsound 62, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 2
+	voice_directsound 48, 64, DirectSoundWaveData_dp_reverscyn_16, 2, 0, 227, 171    			@   3/127/120/120/ 64
+	voice_directsound 60, 110, DirectSoundWaveData_hg_031cowbl, 255, 0, 255, 205				@ 127/127/127/116/110
+	voice_directsound 57, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 205					@ 127/127/127/116/ 90	- 3
+	voice_directsound 60, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 205					@ 127/127/127/116/ 90
+	voice_directsound 61, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 205					@ 127/127/127/116/ 90	+ 1
+	voice_directsound 63, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171				@ 127/127/127/120/105	+ 3
+	voice_directsound 61, 64, DirectSoundWaveData_bw_108kick909, 255, 0, 227, 205    			@ 127/127/120/116/ 64	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_171snare909, 255, 0, 227, 205    			@ 127/127/120/116/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_bw_171snare909, 255, 0, 227, 205    			@ 127/127/120/116/ 64	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_172snare909, 255, 226, 127, 205    		@ 127/114/ 90/116/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_bw_172snare909, 255, 226, 127, 205    		@ 127/114/ 90/116/ 64	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_042crash909, 255, 242, 0, 205    			@ 127/100/  0/116/ 64

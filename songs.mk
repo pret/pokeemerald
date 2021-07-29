@@ -2582,3 +2582,9 @@ $(MID_SUBDIR)/bw_seq_bgm_bicycle.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_e_champion.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V068
+
+$(MID_SUBDIR)/bw_seq_bgm_h_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V124
+
+$(MID_SUBDIR)/bw_seq_bgm_c_05.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V076

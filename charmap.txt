@@ -1428,6 +1428,8 @@ BW_SEQ_BGM_VS_N              = C7 03
 BW_SEQ_BGM_BATTLEPINCH       = C8 03
 BW_SEQ_BGM_BICYCLE           = C9 03
 BW_SEQ_BGM_E_CHAMPION        = CA 03
+BW_SEQ_BGM_H_02              = CB 03
+BW_SEQ_BGM_C_05              = CC 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

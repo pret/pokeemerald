@@ -993,6 +993,8 @@
 #define BW_SEQ_BGM_BATTLEPINCH       968 // A Tight Spot During Battle!
 #define BW_SEQ_BGM_BICYCLE           969 // Bicycle
 #define BW_SEQ_BGM_E_CHAMPION        970 // Champion Alder
+#define BW_SEQ_BGM_H_02              971 // Driftveil Drawbridge
+#define BW_SEQ_BGM_C_05              972 // Driftveil City
 
 // Black 2 & White 2 Music
 

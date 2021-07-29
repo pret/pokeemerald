@@ -15,7 +15,7 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup296, KeySplitTable83    @ glockenspiel
 	voice_keysplit voicegroup243, KeySplitTable76    @ music box
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
@@ -40,7 +40,7 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
 	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
