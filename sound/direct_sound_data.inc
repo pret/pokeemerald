@@ -4053,3 +4053,7 @@ DirectSoundWaveData_bw_synthbassfs4_e4::
 	.align 2
 DirectSoundWaveData_bw_orchhita3_lowhp::
 	.incbin "sound/direct_sound_samples/bw_orchhita3_lowhp.bin"
+
+	.align 2
+DirectSoundWaveData_bw_118conga::
+	.incbin "sound/direct_sound_samples/bw_118conga.bin"

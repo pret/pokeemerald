@@ -970,6 +970,8 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_e_n, 0, 0
 	song bw_seq_bgm_vs_n, 0, 0
 	song bw_seq_bgm_battlepinch, 0, 0		@ consider adding a second bgm player if you plan to use this like in gen 5 (MINIMUM 6 TRACKS)
+	song bw_seq_bgm_bicycle, 0, 0
+	song bw_seq_bgm_e_champion, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

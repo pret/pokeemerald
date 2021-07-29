@@ -2576,3 +2576,9 @@ $(MID_SUBDIR)/bw_seq_bgm_vs_n.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_battlepinch.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V086 -p1
+
+$(MID_SUBDIR)/bw_seq_bgm_bicycle.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_e_champion.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V068

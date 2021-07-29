@@ -991,6 +991,8 @@
 #define BW_SEQ_BGM_E_N               966 // Prisoner to a Formula
 #define BW_SEQ_BGM_VS_N              967 // Battle! (N)                                   (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_BATTLEPINCH       968 // A Tight Spot During Battle!
+#define BW_SEQ_BGM_BICYCLE           969 // Bicycle
+#define BW_SEQ_BGM_E_CHAMPION        970 // Champion Alder
 
 // Black 2 & White 2 Music
 

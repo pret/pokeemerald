@@ -20,3 +20,7 @@ voicegroup279:: @ drums 2 (sato)
 	voice_directsound 60, 58, DirectSoundWaveData_bw_201tamb, 255, 0, 227, 205    				@ 127/127/120/116/ 58
 	voice_directsound 60, 58, DirectSoundWaveData_bw_158rim, 255, 0, 227, 205    				@ 127/127/120/116/ 58
 	voice_directsound 60, 64, DirectSoundWaveData_dp_093snare, 255, 226, 127, 205    			@ 127/114/ 90/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 205    			@ 127/120/120/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 1
+	voice_directsound 62, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 2
