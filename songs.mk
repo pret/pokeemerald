@@ -2588,3 +2588,6 @@ $(MID_SUBDIR)/bw_seq_bgm_h_02.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_c_05.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_d_03.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V057

@@ -14,7 +14,7 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup295, KeySplitTable74    @ marimba
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup241, KeySplitTable25    @ tubular bell
 	voice_keysplit voicegroup296, KeySplitTable83    @ glockenspiel
 	voice_keysplit voicegroup243, KeySplitTable76    @ music box
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
@@ -23,7 +23,7 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup308, KeySplitTable84    @ lp marschall guitar
 	voice_keysplit voicegroup316, KeySplitTable41    @ clean guitar
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -100,6 +100,7 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_2_alt 60, 0, 2, 0, 6, 2, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -119,8 +120,7 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1_alt 60, 0, 0, 2, 0, 6, 2, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

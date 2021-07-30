@@ -1668,6 +1668,7 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_e_champion.o(.rodata);
         sound/songs/midi/bw_seq_bgm_h_02.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_05.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_03.o(.rodata);
     } =0
 
     lib_rodata :

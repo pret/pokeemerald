@@ -995,6 +995,7 @@
 #define BW_SEQ_BGM_E_CHAMPION        970 // Champion Alder
 #define BW_SEQ_BGM_H_02              971 // Driftveil Drawbridge
 #define BW_SEQ_BGM_C_05              972 // Driftveil City
+#define BW_SEQ_BGM_D_03              973 // Cold Storage
 
 // Black 2 & White 2 Music
 

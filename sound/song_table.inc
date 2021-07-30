@@ -974,6 +974,7 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_e_champion, 0, 0
 	song bw_seq_bgm_h_02, 0, 0
 	song bw_seq_bgm_c_05, 0, 0
+	song bw_seq_bgm_d_03, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00
