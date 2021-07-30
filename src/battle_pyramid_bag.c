@@ -1582,8 +1582,8 @@ static void ShowItemIcon(u16 itemId, bool8 isAlt)
         if (itemSpriteId != MAX_SPRITES)
         {
             *spriteId = itemSpriteId;
-            gSprites[itemSpriteId].pos2.x = 24;
-            gSprites[itemSpriteId].pos2.y = 88;
+            gSprites[itemSpriteId].x2 = 24;
+            gSprites[itemSpriteId].y2 = 88;
         }
     }
 }
