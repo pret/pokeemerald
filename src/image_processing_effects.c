@@ -804,8 +804,8 @@ void ConvertImageProcessingToGBA(struct ImageProcessingContext *context)
                     dest = dest_ + ((i * width + j) << 4) + (k << 1);
                     src = src_ + ((((i << 3) + k) << 3) * width) + (j << 3);
 
-                    dest[0] = src[0] | (src[1] << 4) | (src[2] << 8) | (src[3] << 0xC);
-                    dest[1] = src[4] | (src[5] << 4) | (src[6] << 8) | (src[7] << 0xC);
+                    dest[0] = src[0] | (src[1] << 4) | (src[2] << 8) | (src[3] << 12);
+                    dest[1] = src[4] | (src[5] << 4) | (src[6] << 8) | (src[7] << 12);
                 }
             }
         }

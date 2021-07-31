@@ -17,7 +17,7 @@ void CopyMonCategoryText(int dexNum, u8 *dest);
 u8 *sub_81DB494(u8 *str, int fontId, const u8 *str2, int totalStringWidth);
 void PadNameString(u8 *dest, u8 padChar);
 void ConvertInternationalPlayerNameStripChar(u8 *, u8);
-void sub_81DB5AC(u8 *);
+void ConvertInternationalContestantName(u8 *);
 int sub_81DB604(u8 *);
 void sub_81DB620(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
 

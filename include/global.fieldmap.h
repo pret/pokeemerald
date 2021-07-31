@@ -1,6 +1,7 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
+#define METATILE_BEHAVIOR_MASK 0x00FF
 #define METATILE_COLLISION_MASK 0x0C00
 #define METATILE_ID_MASK 0x03FF
 #define METATILE_ID_UNDEFINED 0x03FF
@@ -12,7 +13,9 @@
 
 enum
 {
-    CONNECTION_SOUTH = 1,
+    CONNECTION_INVALID = -1,
+    CONNECTION_NONE,
+    CONNECTION_SOUTH,
     CONNECTION_NORTH,
     CONNECTION_WEST,
     CONNECTION_EAST,
@@ -139,18 +142,14 @@ struct MapHeader
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
     /* 0x18 */ u8 filler_18[2];
-    /* 0x1A */ u8 flags;
+               // fields correspond to the arguments in the map_header_flags macro
+    /* 0x1A */ bool8 allowCycling:1;
+               bool8 allowEscaping:1; // Escape Rope and Dig
+               bool8 allowRunning:1;
+               bool8 showMapName:5; // the last 4 bits are unused 
+                                    // but the 5 bit sized bitfield is required to match
     /* 0x1B */ u8 battleType;
 };
-
-// Flags for gMapHeader.flags, as defined in the map_header_flags macro
-#define MAP_ALLOW_CYCLING      (1 << 0)
-#define MAP_ALLOW_ESCAPING     (1 << 1) // Escape Rope and Dig
-#define MAP_ALLOW_RUNNING      (1 << 2)
-#define MAP_SHOW_MAP_NAME      (1 << 3)
-#define UNUSED_MAP_FLAGS       (1 << 4 | 1 << 5 | 1 << 6 | 1 << 7)
-
-#define SHOW_MAP_NAME_ENABLED  ((gMapHeader.flags & (MAP_SHOW_MAP_NAME | UNUSED_MAP_FLAGS)) == MAP_SHOW_MAP_NAME)
 
 
 struct ObjectEvent

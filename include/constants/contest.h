@@ -4,6 +4,7 @@
 #define APPLAUSE_METER_SIZE 5
 #define CONTEST_NUM_APPEALS 5
 #define CONTEST_LAST_APPEAL (CONTEST_NUM_APPEALS - 1)
+#define MAX_CONTEST_MOVE_HEARTS 8
 
 #define LINK_CONTEST_FLAG_IS_LINK       (1 << 0)
 #define LINK_CONTEST_FLAG_IS_WIRELESS   (1 << 1)
@@ -22,7 +23,9 @@
 #define CONTEST_TYPE_NPC_MASTER  (CONTEST_RANK_MASTER + 1)
 #define CONTEST_TYPE_LINK        (CONTEST_RANK_LINK + 1)
 
-#define CONTEST_WINNER_ARTIST 0  // Winner shown by the artist, painting not necessarily saved
+// IDs below - 1 are indexes into gSaveBlock1Ptr->contestWinners[]
+// CONTEST_WINNER_ARTIST is for the winner of the most recent contest, and is not saved.
+#define CONTEST_WINNER_ARTIST 0
 #define CONTEST_WINNER_HALL_1 1
 #define CONTEST_WINNER_HALL_2 2
 #define CONTEST_WINNER_HALL_3 3
@@ -30,14 +33,22 @@
 #define CONTEST_WINNER_HALL_5 5
 #define CONTEST_WINNER_HALL_6 6
 #define NUM_CONTEST_HALL_WINNERS 6
-#define CONTEST_WINNER_7 7
-#define CONTEST_WINNER_8 8
+#define CONTEST_WINNER_HALL_UNUSED_1 7 // These two have data for gDefaultContestWinners
+#define CONTEST_WINNER_HALL_UNUSED_2 8 // but there are only 6 paintings in the Contest Hall
 #define CONTEST_WINNER_MUSEUM_COOL   9
 #define CONTEST_WINNER_MUSEUM_BEAUTY 10
 #define CONTEST_WINNER_MUSEUM_CUTE   11
 #define CONTEST_WINNER_MUSEUM_SMART  12
 #define CONTEST_WINNER_MUSEUM_TOUGH  13
 // NUM_CONTEST_WINNERS in constants/global.h
+
+#define MUSEUM_CONTEST_WINNERS_START (CONTEST_WINNER_MUSEUM_COOL - 1)
+
+#define CONTEST_SAVE_FOR_MUSEUM ((u8)-1)
+#define CONTEST_SAVE_FOR_ARTIST ((u8)-2)
+
+// The number of possible captions for a Contest painting, per category
+#define NUM_PAINTING_CAPTIONS 3
 
 #define CANT_ENTER_CONTEST             0
 #define CAN_ENTER_CONTEST_EQUAL_RANK   1

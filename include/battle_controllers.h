@@ -156,7 +156,7 @@ enum
     CONTROLLER_CLEARUNKFLAG,
     CONTROLLER_TOGGLEUNKFLAG,
     CONTROLLER_HITANIMATION,
-    CONTROLLER_42,
+    CONTROLLER_CANTSWITCH,
     CONTROLLER_PLAYSE,
     CONTROLLER_PLAYFANFAREORBGM,
     CONTROLLER_FAINTINGCRY,
@@ -227,7 +227,7 @@ void BtlController_EmitSetUnkVar(u8 bufferId, u8 b); // unused
 void BtlController_EmitClearUnkFlag(u8 bufferId); // unused
 void BtlController_EmitToggleUnkFlag(u8 bufferId); // unused
 void BtlController_EmitHitAnimation(u8 bufferId);
-void BtlController_EmitCmd42(u8 bufferId);
+void BtlController_EmitCantSwitch(u8 bufferId);
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId);
 void BtlController_EmitPlayFanfareOrBGM(u8 bufferId, u16 songId, bool8 playBGM);
 void BtlController_EmitFaintingCry(u8 bufferId);

@@ -2984,7 +2984,7 @@ static void HideKeyboardSwapMenu(void)
 
 static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
 {
-    // colorIdx: 0 = grey, 1 = red, 2 = green, 3 = blue
+    // colorIdx: 0 = gray, 1 = red, 2 = green, 3 = blue
     u8 color[3];
     color[0] = TEXT_COLOR_WHITE;
     color[1] = colorIdx * 2 + 2;
@@ -3011,8 +3011,8 @@ static void ResetGpuBgState(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, 240));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 144));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, DISPLAY_WIDTH));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT - 16));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG2 | WININ_WIN0_BG3
                               | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
@@ -3167,14 +3167,14 @@ static void MoveKeyboardCursor(void)
     if (page != UNION_ROOM_KB_PAGE_REGISTER)
     {
         StartSpriteAnim(sSprites->keyboardCursor, 0);
-        sSprites->keyboardCursor->pos1.x = x * 8 + 10;
-        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
+        sSprites->keyboardCursor->x = x * 8 + 10;
+        sSprites->keyboardCursor->y = y * 12 + 24;
     }
     else
     {
         StartSpriteAnim(sSprites->keyboardCursor, 2);
-        sSprites->keyboardCursor->pos1.x = 24;
-        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
+        sSprites->keyboardCursor->x = 24;
+        sSprites->keyboardCursor->y = y * 12 + 24;
     }
 }
 
@@ -3231,7 +3231,7 @@ static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos1.x = pos * 8 + 76;
+        sprite->x = pos * 8 + 76;
     }
 }
 
@@ -3240,8 +3240,8 @@ static void SpriteCB_TextEntryArrow(struct Sprite *sprite)
     if (++sprite->data[0] > 4)
     {
         sprite->data[0] = 0;
-        if (++sprite->pos2.x > 4)
-            sprite->pos2.x = 0;
+        if (++sprite->x2 > 4)
+            sprite->x2 = 0;
     }
 }
 

@@ -666,7 +666,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     case STRINGID_CRITICALHIT:
         AddMovePoints(PTS_CRITICAL_HIT, moveSlot, 0, 0);
         break;
-    case STRINGID_PKMNSSTATCHANGED:
+    case STRINGID_ATTACKERSSTATROSE:
         if (gBattleTextBuff1[2] != 0)
         {
             if (*statStringId == STRINGID_STATSHARPLY)
@@ -675,7 +675,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
                 AddMovePoints(PTS_STAT_INCREASE_1, moveSlot, gBattleTextBuff1[2] - 1, 0);
         }
         break;
-    case STRINGID_PKMNSSTATCHANGED2:
+    case STRINGID_DEFENDERSSTATROSE:
         if (gBattleTextBuff1[2] != 0)
         {
             if (gBattlerAttacker == gBattlerTarget)
@@ -691,11 +691,11 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
             }
         }
         break;
-    case STRINGID_PKMNSSTATCHANGED3:
+    case STRINGID_ATTACKERSSTATFELL:
         if (gBattleTextBuff1[2] != 0)
             AddMovePoints(PTS_STAT_DECREASE_SELF, moveSlot, gBattleTextBuff1[2] - 1, 0);
         break;
-    case STRINGID_PKMNSSTATCHANGED4:
+    case STRINGID_DEFENDERSSTATFELL:
         if (gBattleTextBuff1[2] != 0)
         {
             if (*statStringId == STRINGID_STATHARSHLY)
@@ -1246,7 +1246,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_REFLECT:
         // If hit Reflect with damaging physical move
-        if (type < TYPE_MYSTERY && power != 0 && tvPtr->side[defSide].reflectMonId != 0)
+        if (IS_TYPE_PHYSICAL(type) && power != 0 && tvPtr->side[defSide].reflectMonId != 0)
         {
             u32 id = (tvPtr->side[defSide].reflectMonId - 1) * 4;
             movePoints->points[defSide][id + tvPtr->side[defSide].reflectMoveSlot] += sPointsArray[caseId][0];
@@ -1254,7 +1254,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_LIGHT_SCREEN:
         // If hit Light Screen with damaging special move
-        if (type >= TYPE_MYSTERY && power != 0 && tvPtr->side[defSide].lightScreenMonId != 0)
+        if (!IS_TYPE_PHYSICAL(type) && power != 0 && tvPtr->side[defSide].lightScreenMonId != 0)
         {
             u32 id = (tvPtr->side[defSide].lightScreenMonId - 1) * 4;
             movePoints->points[defSide][id + tvPtr->side[defSide].lightScreenMoveSlot] += sPointsArray[caseId][0];

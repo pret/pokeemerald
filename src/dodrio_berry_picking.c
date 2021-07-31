@@ -3913,11 +3913,11 @@ static u32 DoDodrioMissedAnim(struct Sprite *sprite)
             break;
         }
 
-        sprite->pos1.x += x;
+        sprite->x += x;
         if (++sprite->sTimer >= 40)
         {
             sprite->sState = 0;
-            sprite->pos1.x = GetDodrioXPos(0, GetNumPlayers());
+            sprite->x = GetDodrioXPos(0, GetNumPlayers());
         }
     }
 
@@ -3995,8 +3995,8 @@ static void InitStatusBarPos(void)
     for (i = 0; i < NUM_STATUS_SQUARES; i++)
     {
         struct Sprite *sprite = &gSprites[sStatusBar->spriteIds[i]];
-        sprite->pos1.x = (i * 16) + 48;
-        sprite->pos1.y = -8 - (i * 8);
+        sprite->x = (i * 16) + 48;
+        sprite->y = -8 - (i * 8);
         sStatusBar->entered[i] = FALSE;
     }
 }
@@ -4057,11 +4057,11 @@ static bool32 DoStatusBarIntro(void)
     {
         struct Sprite *sprite = &gSprites[sStatusBar->spriteIds[i]];
         sStatusBar->yChange[i] = 2;
-        if (sStatusBar->entered[i] && sprite->pos1.y == 8)
+        if (sStatusBar->entered[i] && sprite->y == 8)
             continue;
 
         animActive = TRUE;
-        if (sprite->pos1.y == 8)
+        if (sprite->y == 8)
         {
             if (sStatusBar->entered[i])
                 continue;
@@ -4072,7 +4072,7 @@ static bool32 DoStatusBarIntro(void)
             sStatusBar->yChange[i] = -16;
             PlaySE(SE_CLICK);
         }
-        sprite->pos1.y += sStatusBar->yChange[i];
+        sprite->y += sStatusBar->yChange[i];
     }
 
     if (animActive)
@@ -4245,7 +4245,7 @@ static void SetBerryIconsInvisibility(bool8 invisible)
 
 static void SetBerryYPos(u8 id, u8 y)
 {
-    gSprites[*sBerrySpriteIds[id]].pos1.y = y * 8;
+    gSprites[*sBerrySpriteIds[id]].y = y * 8;
 }
 
 static void SetBerryAnim(u16 id, u8 animNum)
@@ -4256,8 +4256,8 @@ static void SetBerryAnim(u16 id, u8 animNum)
 // Unused
 static void UnusedSetSpritePos(u8 spriteId)
 {
-    gSprites[spriteId].pos1.x = 20 * spriteId + 50;
-    gSprites[spriteId].pos1.y = 50;
+    gSprites[spriteId].x = 20 * spriteId + 50;
+    gSprites[spriteId].y = 50;
 }
 
 // Gamefreak made a mistake there and goes out of bounds for the data array as it holds 8 elements
@@ -4279,7 +4279,7 @@ static void SpriteCB_Cloud(struct Sprite *sprite)
         {
             if (++sCloudSpriteIds[i][1] > moveDelays[i])
             {
-                sprite->pos1.x--;
+                sprite->x--;
                 sCloudSpriteIds[i][1] = 0;
             }
         }
@@ -4332,8 +4332,8 @@ static void ResetCloudPos(void)
     {
         struct Sprite *sprite = &gSprites[*sCloudSpriteIds[i]];
         sprite->sFrozen = TRUE;
-        sprite->pos1.x = sCloudStartCoords[i][0];
-        sprite->pos1.y = sCloudStartCoords[i][1];
+        sprite->x = sCloudStartCoords[i][0];
+        sprite->y = sCloudStartCoords[i][1];
     }
 }
 
@@ -4500,7 +4500,7 @@ struct WinCoords
 };
 
 enum {
-    COLORID_GREY,
+    COLORID_GRAY,
     COLORID_RED,
     COLORID_BLUE,
     COLORID_GREEN, // Unused
@@ -4508,7 +4508,7 @@ enum {
 
 static const u8 sTextColorTable[][3] =
 {
-    [COLORID_GREY]  = {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    [COLORID_GRAY]  = {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
     [COLORID_RED]   = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED},
     [COLORID_BLUE]  = {TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE},
     [COLORID_GREEN] = {TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN},
@@ -4638,7 +4638,7 @@ static void ShowNames(void)
         window.baseBlock = 0x13;
         for (i = 0; i < numPlayers; coords++, i++)
         {
-            colorsId = COLORID_GREY;
+            colorsId = COLORID_GRAY;
             playerId = GetPlayerIdByPos(i);
             left = (56 - GetStringWidth(1, GetPlayerName(playerId), -1)) / 2u;
             window.tilemapLeft = coords->left;
@@ -4729,7 +4729,7 @@ static void PrintRankedScores(u8 numPlayers_)
     x = 216 - GetStringWidth(1, gText_SpacePoints, 0);
     for (i = 0; i < numPlayers; i++)
     {
-        u8 colorsId = COLORID_GREY;
+        u8 colorsId = COLORID_GRAY;
         u8 playerId = playersByRanking[i];
         u32 points = scoreResults[playerId].score;
 
@@ -4776,7 +4776,7 @@ static void ShowResults(void)
         AddTextPrinterParameterized(sGfx->windowIds[1], 1, gText_10P30P50P50P, 68, 17, -1, NULL);
         for (i = 0; i < numPlayers; i++)
         {
-            u8 colorsId = COLORID_GREY;
+            u8 colorsId = COLORID_GRAY;
             if (i == GetMultiplayerId())
                 colorsId = COLORID_BLUE;
 

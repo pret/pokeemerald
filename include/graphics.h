@@ -3874,46 +3874,43 @@ extern const u32 gBagPalette[];
 extern const u32 gBerryCheckCircle_Gfx[];
 
 //intro graphics
-extern const u32 gIntro1SparkleGfx[];
-extern const u32 gIntro1FlygonGfx[];
-extern const u16 gIntro3LightningPal[];
+extern const u32 gIntroSparkle_Gfx[];
+extern const u32 gIntroFlygonSilhouette_Gfx[];
+extern const u32 gIntroLightning_Gfx[];
+extern const u16 gIntroLightning_Pal[];
 extern const u32 gIntroCopyright_Gfx[];
 extern const u32 gIntroCopyright_Tilemap[];
 extern const u16 gIntroCopyright_Pal[16];
-extern const u32 gIntro2VolbeatGfx[];
-extern const u32 gIntro2TorchicGfx[];
-extern const u32 gIntro2ManectricGfx[];
-extern const u16 gIntro2VolbeatPal[];
-extern const u16 gIntro2TorchicPal[];
-extern const u16 gIntro2ManectricPal[];
-extern const u32 gIntro2BubblesGfx[];
-extern const u16 gIntro2BubblesPal[];
-extern const u32 gIntro3LightningGfx[];
-extern const u32 gIntro3GroudonGfx[];
-extern const u32 gIntro3GroudonTilemap[];
-extern const u32 gIntro3LegendBgGfx[];
-extern const u32 gIntro3GroudonBgTilemap[];
-extern const u32 gIntro3GroudonBgTilemap[];
-extern const u8 gIntro3BgPal[0x200];
-extern const u32 gIntro3KyogreGfx[];
-extern const u32 gIntro3KyogreTilemap[];
-extern const u32 gIntro3KyogreBgTilemap[];
-extern const u32 gIntro3CloudsGfx[];
-extern const u32 gIntro3Clouds1Tilemap[];
-extern const u32 gIntro3Clouds2Tilemap[];
-extern const u32 gIntro3Clouds3Tilemap[];
-extern const u32 gIntro3Clouds4Tilemap[];
-extern const u32 gIntro3RayquazaTilemap[];
-extern const u32 gIntro3RayquazaGfx[];
-extern const u32 gIntro3Clouds2Gfx[];
-extern const u16 gIntro1GameFreakTextFadePal[];
-
-//intro/credits graphics
-extern const u32 gIntro2BrendanNoTurnGfx[];
-extern const u32 gIntro2MayNoTurnGfx[];
-extern const u16 gIntro2BrendanNoTurnPal[];
-extern const u16 gIntro2FlygonPal[];
-extern const u32 gIntro2FlygonGfx[];
+extern const u32 gIntroVolbeat_Gfx[];
+extern const u16 gIntroVolbeat_Pal[];
+extern const u32 gIntroTorchic_Gfx[];
+extern const u16 gIntroTorchic_Pal[];
+extern const u32 gIntroManectric_Gfx[];
+extern const u16 gIntroManectric_Pal[];
+extern const u32 gIntroBubbles_Gfx[];
+extern const u16 gIntroBubbles_Pal[];
+extern const u32 gIntroGroudon_Gfx[];
+extern const u32 gIntroGroudon_Tilemap[];
+extern const u32 gIntroLegendBg_Gfx[];
+extern const u32 gIntroGroudonBg_Tilemap[];
+extern const u8 gIntro3Bg_Pal[0x200];
+extern const u32 gIntroKyogre_Gfx[];
+extern const u32 gIntroKyogre_Tilemap[];
+extern const u32 gIntroKyogreBg_Tilemap[];
+extern const u32 gIntroClouds_Gfx[];
+extern const u32 gIntroCloudsLeft_Tilemap[];
+extern const u32 gIntroCloudsRight_Tilemap[];
+extern const u32 gIntroCloudsSun_Tilemap[];
+extern const u32 gIntroRayquaza_Tilemap[];
+extern const u32 gIntroRayquaza_Gfx[];
+extern const u32 gIntroRayquazaClouds_Gfx[];
+extern const u32 gIntroRayquazaClouds_Tilemap[];
+extern const u16 gIntroGameFreakTextFade_Pal[];
+extern const u32 gIntroBrendan_Gfx[];
+extern const u32 gIntroMay_Gfx[];
+extern const u16 gIntroPlayer_Pal[];
+extern const u16 gIntroFlygon_Pal[];
+extern const u32 gIntroFlygon_Gfx[];
 
 // party menu graphics
 extern const u32 gPartyMenuBg_Gfx[];
@@ -4079,7 +4076,7 @@ extern const u8 gNamingScreenCursor_Gfx[];
 extern const u8 gNamingScreenInputArrow_Gfx[];
 extern const u8 gNamingScreenUnderscore_Gfx[];
 
-extern const u32 gUnknown_08D9BA44[];
+extern const u32 gPokeblockFeedBg_Tilemap[];
 
 extern const u32 gConfetti_Gfx[];
 extern const u32 gConfetti_Pal[];
@@ -4878,12 +4875,12 @@ extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
 
 // Pokemon Storage System
-extern const u32 gPSSMenu_Gfx[];
-extern const u16 gPSSMenu_Pal[];
+extern const u32 gStorageSystemMenu_Gfx[];
+extern const u16 gStorageSystemPartyMenu_Pal[];
+extern const u32 gStorageSystemPartyMenu_Tilemap[];
 extern const u32 gWallpaperIcon_Plusle[];
 extern const u32 gWallpaperIcon_Cross[];
 extern const u32 gWallpaperIcon_Bolt[];
-extern const u32 gUnknown_08DD36C8[];
 extern const u32 gWallpaperTiles_Ribbon[];
 extern const u32 gWallpaperTilemap_Ribbon[];
 extern const u16 gWallpaperPalettes_Ribbon[][16];
@@ -4906,8 +4903,8 @@ extern const u16 gUnknown_08DDCF04[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
-extern const u8 gTradeButtons_Gfx[];
-extern const u16 gUnknown_08DDB444[];
+extern const u8 gTradeCursor_Gfx[];
+extern const u16 gTradeCursor_Pal[];
 
 // Party menu
 extern const u32 gPartyMenuPokeball_Gfx[];
@@ -4927,21 +4924,21 @@ extern const u32 gRouletteMultiplier_Gfx[];
 
 // Contest util
 extern const u32 gContestResults_Gfx[];
-extern const u32 gUnknown_08C19EEC[];
-extern const u32 gUnknown_08C1A000[];
-extern const u32 gUnknown_08C1A12C[];
+extern const u32 gContestResults_WinnerBanner_Tilemap[];
+extern const u32 gContestResults_Interface_Tilemap[];
+extern const u32 gContestResults_Bg_Tilemap[];
 extern const u32 gContestResults_Pal[];
-extern const u16 gLinkContestResults_Tilemap[];
-extern const u16 gNormalContestResults_Tilemap[];
-extern const u16 gSuperContestResults_Tilemap[];
-extern const u16 gHyperContestResults_Tilemap[];
-extern const u16 gMasterContestResults_Tilemap[];
-extern const u16 gCoolContestResults_Tilemap[];
-extern const u16 gBeautyContestResults_Tilemap[];
-extern const u16 gCuteContestResults_Tilemap[];
-extern const u16 gSmartContestResults_Tilemap[];
-extern const u16 gToughContestResults_Tilemap[];
-extern const u16 gContestResults_Tilemap[];
+extern const u16 gContestResultsTitle_Link_Tilemap[];
+extern const u16 gContestResultsTitle_Normal_Tilemap[];
+extern const u16 gContestResultsTitle_Super_Tilemap[];
+extern const u16 gContestResultsTitle_Hyper_Tilemap[];
+extern const u16 gContestResultsTitle_Master_Tilemap[];
+extern const u16 gContestResultsTitle_Cool_Tilemap[];
+extern const u16 gContestResultsTitle_Beauty_Tilemap[];
+extern const u16 gContestResultsTitle_Cute_Tilemap[];
+extern const u16 gContestResultsTitle_Smart_Tilemap[];
+extern const u16 gContestResultsTitle_Tough_Tilemap[];
+extern const u16 gContestResultsTitle_Tilemap[];
 
 // Trainer Card.
 extern const u16 gHoennTrainerCard0Star_Pal[];

@@ -722,9 +722,9 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
     }
 }
 
-static bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
+static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
 {
-    if (GetLedgeJumpDirection(x, y, z) != 0)
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
         return TRUE;
     else
         return FALSE;
@@ -863,7 +863,7 @@ static void PlayerAvatarTransition_Surfing(struct ObjectEvent *objEvent)
     gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
     spriteId = FieldEffectStart(FLDEFF_SURF_BLOB);
     objEvent->fieldEffectSpriteId = spriteId;
-    SetSurfBobState(spriteId, 1);
+    SetSurfBlob_BobState(spriteId, BOB_PLAYER_AND_MON);
 }
 
 static void PlayerAvatarTransition_Underwater(struct ObjectEvent *objEvent)
@@ -871,7 +871,7 @@ static void PlayerAvatarTransition_Underwater(struct ObjectEvent *objEvent)
     ObjectEventSetGraphicsId(objEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_UNDERWATER));
     ObjectEventTurn(objEvent, objEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_UNDERWATER);
-    objEvent->fieldEffectSpriteId = sub_8155800(objEvent->spriteId);
+    objEvent->fieldEffectSpriteId = StartUnderwaterSurfBlobBobbing(objEvent->spriteId);
 }
 
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent *objEvent)
@@ -1192,7 +1192,7 @@ u8 GetPlayerAvatarFlags(void)
     return gPlayerAvatar.flags;
 }
 
-u8 GetPlayerAvatarObjectId(void)
+u8 GetPlayerAvatarSpriteId(void)
 {
     return gPlayerAvatar.spriteId;
 }
@@ -1646,7 +1646,7 @@ static void Task_StopSurfingInit(u8 taskId)
         if (!ObjectEventClearHeldMovementIfFinished(playerObjEvent))
             return;
     }
-    SetSurfBobState(playerObjEvent->fieldEffectSpriteId, 2);
+    SetSurfBlob_BobState(playerObjEvent->fieldEffectSpriteId, BOB_JUST_MON);
     ObjectEventSetHeldMovement(playerObjEvent, GetJumpSpecialMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
@@ -1932,9 +1932,9 @@ static bool8 Fishing_StartEncounter(struct Task *task)
             ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
             ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
             if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-                SetSurfBobWhileFishingState(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
-            gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
-            gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+                SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, FALSE, 0);
+            gSprites[gPlayerAvatar.spriteId].x2 = 0;
+            gSprites[gPlayerAvatar.spriteId].y2 = 0;
             ClearDialogWindowAndFrame(0, TRUE);
             task->tFrameCounter++;
             return FALSE;
@@ -1989,9 +1989,9 @@ static bool8 Fishing_PutRodAway(struct Task *task)
         ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
         ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-            SetSurfBobWhileFishingState(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
-        gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
-        gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+            SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, FALSE, 0);
+        gSprites[gPlayerAvatar.spriteId].x2 = 0;
+        gSprites[gPlayerAvatar.spriteId].y2 = 0;
         task->tStep++;
     }
     return FALSE;
@@ -2023,8 +2023,8 @@ static void AlignFishingAnimationFrames(void)
     u8 animType;
 
     AnimateSprite(playerSprite);
-    playerSprite->pos2.x = 0;
-    playerSprite->pos2.y = 0;
+    playerSprite->x2 = 0;
+    playerSprite->y2 = 0;
     animCmdIndex = playerSprite->animCmdIndex;
     if (playerSprite->anims[playerSprite->animNum][animCmdIndex].type == -1)
     {
@@ -2039,16 +2039,16 @@ static void AlignFishingAnimationFrames(void)
     animType = playerSprite->anims[playerSprite->animNum][animCmdIndex].type;
     if (animType == 1 || animType == 2 || animType == 3)
     {
-        playerSprite->pos2.x = 8;
+        playerSprite->x2 = 8;
         if (GetPlayerFacingDirection() == 3)
-            playerSprite->pos2.x = -8;
+            playerSprite->x2 = -8;
     }
     if (animType == 5)
-        playerSprite->pos2.y = -8;
+        playerSprite->y2 = -8;
     if (animType == 10 || animType == 11)
-        playerSprite->pos2.y = 8;
+        playerSprite->y2 = 8;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-        SetSurfBobWhileFishingState(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
+        SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, TRUE, playerSprite->y2);
 }
 
 void SetSpinStartFacingDir(u8 direction)
@@ -2090,8 +2090,8 @@ static void Task_DoPlayerSpinExit(u8 taskId)
             SetSpinStartFacingDir(object->facingDirection);
             tSpinDelayTimer = 0;
             tSpeed = 1;
-            tCurY = (u16)(sprite->pos1.y + sprite->pos2.y) << 4;
-            sprite->pos2.y = 0;
+            tCurY = (u16)(sprite->y + sprite->y2) << 4;
+            sprite->y2 = 0;
             CameraObjectReset2();
             object->fixedPriority = TRUE;
             sprite->oam.priority = 0;
@@ -2104,10 +2104,10 @@ static void Task_DoPlayerSpinExit(u8 taskId)
             // Rise and accelerate
             tCurY -= tSpeed;
             tSpeed += 3;
-            sprite->pos1.y = tCurY >> 4;
+            sprite->y = tCurY >> 4;
 
             // Check if offscreen
-            if (sprite->pos1.y + (s16)gTotalCameraPixelOffsetY < -32)
+            if (sprite->y + (s16)gTotalCameraPixelOffsetY < -32)
                 tState++;
             break;
         case 2:
@@ -2156,11 +2156,11 @@ static void Task_DoPlayerSpinEntrance(u8 taskId)
             ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(sSpinDirections[tStartDir]));
             tSpinDelayTimer = 0;
             tSpeed = 116;
-            tDestY = sprite->pos1.y;
+            tDestY = sprite->y;
             tPriority = sprite->oam.priority;
             tSubpriority = sprite->subpriority;
-            tCurY = -((u16)sprite->pos2.y + 32) * 16;
-            sprite->pos2.y = 0;
+            tCurY = -((u16)sprite->y2 + 32) * 16;
+            sprite->y2 = 0;
             CameraObjectReset2();
             object->fixedPriority = TRUE;
             sprite->oam.priority = 1;
@@ -2175,12 +2175,12 @@ static void Task_DoPlayerSpinEntrance(u8 taskId)
             tSpeed -= 3;
             if (tSpeed < 4)
                 tSpeed = 4;
-            sprite->pos1.y = tCurY >> 4;
+            sprite->y = tCurY >> 4;
 
             // Check if reached dest
-            if (sprite->pos1.y >= tDestY)
+            if (sprite->y >= tDestY)
             {
-                sprite->pos1.y = tDestY;
+                sprite->y = tDestY;
                 tGroundTimer = 0;
                 tState++;
             }

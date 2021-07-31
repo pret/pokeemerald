@@ -263,7 +263,10 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_holds_item,                              // 0x62
 };
 
-static const u16 sDiscouragedPowerfulMoveEffects[] =
+// For the purposes of determining the most powerful move in a moveset, these
+// moves are treated the same as having a power of 0 or 1
+#define IGNORED_MOVES_END 0xFFFF
+static const u16 sIgnoredPowerfulMoveEffects[] =
 {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
@@ -277,7 +280,7 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
     EFFECT_OVERHEAT,
-    0xFFFF
+    IGNORED_MOVES_END
 };
 
 // code
@@ -1177,14 +1180,14 @@ static void Cmd_get_how_powerful_move_is(void)
     s32 i, checkedMove;
     s32 moveDmgs[MAX_MON_MOVES];
 
-    for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+    for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
     {
-        if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
+        if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sIgnoredPowerfulMoveEffects[i])
             break;
     }
 
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
-        && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
+        && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END)
     {
         gDynamicBasePower = 0;
         *(&gBattleStruct->dynamicMoveType) = 0;
@@ -1192,16 +1195,18 @@ static void Cmd_get_how_powerful_move_is(void)
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
 
+        // Considered move has power and is not in sIgnoredPowerfulMoveEffects
+        // Check all other moves and calculate their power
         for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
-            for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+            for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
             {
-                if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
+                if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sIgnoredPowerfulMoveEffects[i])
                     break;
             }
 
             if (gBattleMons[sBattler_AI].moves[checkedMove] != MOVE_NONE
-                && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
+                && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END
                 && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power > 1)
             {
                 gCurrentMove = gBattleMons[sBattler_AI].moves[checkedMove];
@@ -1217,6 +1222,7 @@ static void Cmd_get_how_powerful_move_is(void)
             }
         }
 
+        // Is the considered move the most powerful move available?
         for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
             if (moveDmgs[checkedMove] > moveDmgs[AI_THINKING_STRUCT->movesetIndex])
@@ -1224,13 +1230,14 @@ static void Cmd_get_how_powerful_move_is(void)
         }
 
         if (checkedMove == MAX_MON_MOVES)
-            AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL; // Is the most powerful.
+            AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL;
         else
-            AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL; // Not the most powerful.
+            AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL;
     }
     else
     {
-        AI_THINKING_STRUCT->funcResult = MOVE_POWER_DISCOURAGED; // Highly discouraged in terms of power.
+        // Move has a power of 0/1, or is in the group sIgnoredPowerfulMoveEffects
+        AI_THINKING_STRUCT->funcResult = MOVE_POWER_OTHER;
     }
 
     gAIScriptPtr++;
@@ -1761,7 +1768,11 @@ static void Cmd_if_cant_faint(void)
 
     gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
-    // This macro is missing the damage 0 = 1 assumption.
+#ifdef BUGFIX
+    // Moves always do at least 1 damage.
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+#endif
 
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -1877,9 +1888,14 @@ static void Cmd_if_has_move_with_effect(void)
     case AI_TARGET_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            // UB: checks sBattler_AI instead of gBattlerTarget.
+            // BUG: checks sBattler_AI instead of gBattlerTarget.
+            #ifndef BUGFIX
             if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
+            #else
+            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+                break;
+            #endif
         }
         if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;
@@ -2014,18 +2030,24 @@ static void Cmd_if_holds_item(void)
 {
     u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
     u16 item;
-    u8 var1, var2;
+    u8 itemLo, itemHi;
 
     if ((battlerId & BIT_SIDE) == (sBattler_AI & BIT_SIDE))
         item = gBattleMons[battlerId].item;
     else
         item = BATTLE_HISTORY->itemEffects[battlerId];
 
-    // UB: doesn't properly read an unaligned u16
-    var2 = gAIScriptPtr[2];
-    var1 = gAIScriptPtr[3];
+    itemHi = gAIScriptPtr[2];
+    itemLo = gAIScriptPtr[3];
 
-    if ((var1 | var2) == item)
+#ifdef BUGFIX
+    // This bug doesn't affect the vanilla game because this script command
+    // is only used to check ITEM_PERSIM_BERRY, whose high byte happens to
+    // be 0.
+    if (((itemHi << 8) | itemLo) == item)
+#else
+    if ((itemLo | itemHi) == item)
+#endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;

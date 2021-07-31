@@ -323,7 +323,7 @@ extern bool8 gSavedLinkPlayerCount;
 extern u8 gSavedMultiplayerId;
 extern struct LinkTestBGInfo gLinkTestBGInfo;
 extern void (*gLinkCallback)(void);
-extern bool8 gShouldAdvanceLinkState;
+extern u8 gShouldAdvanceLinkState;
 extern u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 extern u8 gBlockRequestType;
 extern u8 gLastSendQueueCount;

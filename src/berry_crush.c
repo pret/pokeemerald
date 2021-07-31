@@ -152,9 +152,9 @@ enum {
 #define PLAY_AGAIN_NO_BERRIES 3
 
 enum {
-    COLORID_GREY,
+    COLORID_GRAY,
     COLORID_BLACK,
-    COLORID_LIGHT_GREY,
+    COLORID_LIGHT_GRAY,
     COLORID_BLUE,
     COLORID_GREEN,
     COLORID_RED,
@@ -457,9 +457,9 @@ static const struct BgTemplate sBgTemplates[4] =
 
 static const u8 sTextColorTable[][3] =
 {
-    [COLORID_GREY]       = {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GREY,  TEXT_COLOR_LIGHT_GREY},
-    [COLORID_BLACK]      = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GREY},
-    [COLORID_LIGHT_GREY] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_RED},
+    [COLORID_GRAY]       = {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
+    [COLORID_BLACK]      = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
+    [COLORID_LIGHT_GRAY] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_RED},
     [COLORID_BLUE]       = {TEXT_COLOR_WHITE,       TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_BLUE},
     [COLORID_GREEN]      = {TEXT_COLOR_WHITE,       TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GREEN},
     [COLORID_RED]        = {TEXT_COLOR_WHITE,       TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_RED},
@@ -1387,8 +1387,8 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
         gfx->berrySprites[i] = &gSprites[spriteId];
         gfx->berrySprites[i]->oam.priority = 3;
         gfx->berrySprites[i]->affineAnimPaused = TRUE;
-        gfx->berrySprites[i]->pos1.x = gfx->playerCoords[i]->berryXOffset + 120;
-        gfx->berrySprites[i]->pos1.y = -16;
+        gfx->berrySprites[i]->x = gfx->playerCoords[i]->berryXOffset + 120;
+        gfx->berrySprites[i]->y = -16;
         data = gfx->berrySprites[i]->data;
         speed = 512;
         sYSpeed = speed;
@@ -1404,7 +1404,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
         var2 = speed + 32;
         var2 = var2 / 2;
         var1 = MathUtil_Div16Shift(7, Q_8_8(63.5), var2);
-        sX = (u16)gfx->berrySprites[i]->pos1.x * 128;
+        sX = (u16)gfx->berrySprites[i]->x * 128;
         sXSpeed = MathUtil_Div16Shift(7, distance, var1);
         var1 = MathUtil_Mul16Shift(7, var1, 85);
         sSinIdx = 0;
@@ -1420,21 +1420,21 @@ static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite)
     s16 *data = sprite->data;
 
     sYSpeed += sYAccel;
-    sprite->pos2.y += sYSpeed >> 8;
+    sprite->y2 += sYSpeed >> 8;
     if (sBitfield & F_MOVE_HORIZ)
     {
         sprite->sX += sXSpeed;
         sSinIdx += sSinSpeed;
-        sprite->pos2.x = Sin(sSinIdx >> 7, sAmplitude);
+        sprite->x2 = Sin(sSinIdx >> 7, sAmplitude);
         if ((sBitfield & F_MOVE_HORIZ) && (sSinIdx >> 7) > 126)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sBitfield &= MASK_TARGET_Y;
         }
     }
 
-    sprite->pos1.x = sX >> 7;
-    if (sprite->pos1.y + sprite->pos2.y >= (sBitfield & MASK_TARGET_Y))
+    sprite->x = sX >> 7;
+    if (sprite->y + sprite->y2 >= (sBitfield & MASK_TARGET_Y))
     {
         sprite->callback = SpriteCallbackDummy;
         FreeSpriteOamMatrix(sprite);
@@ -1490,8 +1490,8 @@ static void UpdateInputEffects(struct BerryCrushGame *game, struct BerryCrushGam
 
             gfx->impactSprites[i]->invisible = FALSE;
             gfx->impactSprites[i]->animPaused = FALSE;
-            gfx->impactSprites[i]->pos2.x = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][0];
-            gfx->impactSprites[i]->pos2.y = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][1];
+            gfx->impactSprites[i]->x2 = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][0];
+            gfx->impactSprites[i]->y2 = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][1];
         }
 
         #undef flags
@@ -1513,10 +1513,10 @@ static void UpdateInputEffects(struct BerryCrushGame *game, struct BerryCrushGam
             if (gfx->sparkleSprites[i]->invisible)
             {
                 gfx->sparkleSprites[i]->callback = SpriteCB_Sparkle_Init;
-                gfx->sparkleSprites[i]->pos1.x = sSparkleCoords[i][0] + 120;
-                gfx->sparkleSprites[i]->pos1.y = sSparkleCoords[i][1] + 136 - (yModifier * 4);
-                gfx->sparkleSprites[i]->pos2.x = sSparkleCoords[i][0] + (sSparkleCoords[i][0] / (xModifier * 4));
-                gfx->sparkleSprites[i]->pos2.y = sSparkleCoords[i][1];
+                gfx->sparkleSprites[i]->x = sSparkleCoords[i][0] + 120;
+                gfx->sparkleSprites[i]->y = sSparkleCoords[i][1] + 136 - (yModifier * 4);
+                gfx->sparkleSprites[i]->x2 = sSparkleCoords[i][0] + (sSparkleCoords[i][0] / (xModifier * 4));
+                gfx->sparkleSprites[i]->y2 = sSparkleCoords[i][1];
                 if (linkState->bigSparkle)
                     StartSpriteAnim(gfx->sparkleSprites[i], 1);
                 else
@@ -1653,7 +1653,7 @@ static void PrintResultsText(struct BerryCrushGame * game, u8 page, u8 sp14, u8 
             break;
         }
         x = GetStringRightAlignXOffset(2, gStringVar4, sp14 - 4);
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
         if (playerId == game->localId)
             StringCopy(gStringVar3, gText_1DotBlueF700);
         else
@@ -1661,7 +1661,7 @@ static void PrintResultsText(struct BerryCrushGame * game, u8 page, u8 sp14, u8 
         gStringVar3[0] = ranking + CHAR_1;
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, game->players[playerId].name);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gStringVar3);
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 4, y, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 4, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
     }
 }
 
@@ -1676,34 +1676,34 @@ static void PrintCrushingResults(struct BerryCrushGame *game)
     FramesToMinSec(&game->gfx, results->time);
 
     // Print time text
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gText_TimeColon);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_TimeColon);
 
     // Print seconds text
     x = 176 - (u8)GetStringWidth(2, gText_SpaceSec, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gText_SpaceSec);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_SpaceSec);
 
     // Print seconds value
     ConvertIntToDecimalStringN(gStringVar1, game->gfx.secondsInt, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, game->gfx.secondsFrac, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY2);
     x -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 
     // Print minutes text
     x -= GetStringWidth(2, gText_SpaceMin, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gText_SpaceMin);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_SpaceMin);
 
     // Print minutes value
     ConvertIntToDecimalStringN(gStringVar1, game->gfx.minutes, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringExpandPlaceholders(gStringVar4, gText_StrVar1);
     x -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
     
     // Print pressing speed text
     y += 14;
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 0, y, sTextColorTable[COLORID_GREY], 0, gText_PressingSpeed);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 0, y, sTextColorTable[COLORID_GRAY], 0, gText_PressingSpeed);
     x = 176 - (u8)GetStringWidth(2, gText_TimesPerSec, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gText_TimesPerSec);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
     
     // Print pressing speed value
     for (i = 0; i < 8; i++)
@@ -1716,17 +1716,17 @@ static void PrintCrushingResults(struct BerryCrushGame *game)
     if (game->newRecord)
         AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_RED], 0, gStringVar4);
     else
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 
     // Print silkiness text
     y += 14;
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 0, y, sTextColorTable[COLORID_GREY], 0, gText_Silkiness);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 0, y, sTextColorTable[COLORID_GRAY], 0, gText_Silkiness);
 
     // Print silkiness value
     ConvertIntToDecimalStringN(gStringVar1, results->silkiness, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
     x = 176 - (u8)GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 }
 
 static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGame_Gfx *gfx)
@@ -1825,9 +1825,9 @@ static void Task_ShowRankings(u8 taskId)
         {
             ConvertIntToDecimalStringN(gStringVar1, i + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
-            AddTextPrinterParameterized3(tWindowId, 1, 0, yPos, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+            AddTextPrinterParameterized3(tWindowId, 1, 0, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
             xPos = 192 - (u8)GetStringWidth(1, gText_TimesPerSec, -1);
-            AddTextPrinterParameterized3(tWindowId, 1, xPos, yPos, sTextColorTable[COLORID_GREY], 0, gText_TimesPerSec);
+            AddTextPrinterParameterized3(tWindowId, 1, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
             for (j = 0; j < 8; j++)
             {
                 if (((tPressingSpeeds(i) & 0xFF) >> (7 - j)) & 1)
@@ -1837,7 +1837,7 @@ static void Task_ShowRankings(u8 taskId)
             ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gText_XDotY3);
             xPos -= GetStringWidth(1, gStringVar4, -1);
-            AddTextPrinterParameterized3(tWindowId, 1, xPos, yPos, sTextColorTable[COLORID_GREY], 0, gStringVar4);
+            AddTextPrinterParameterized3(tWindowId, 1, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
             yPos += 16;
             score = 0;
         }
@@ -1933,7 +1933,7 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
                 1,
                 0,
                 0,
-                sTextColorTable[COLORID_LIGHT_GREY],
+                sTextColorTable[COLORID_LIGHT_GRAY],
                 0,
                 game->players[i].name
             );
@@ -2071,8 +2071,8 @@ static void SpriteCB_Sparkle_End(struct Sprite *sprite)
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sprite->data); i++)
         sprite->data[i] = 0;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     sprite->invisible = TRUE;
     sprite->animPaused = TRUE;
     sprite->callback = SpriteCallbackDummy;
@@ -2097,20 +2097,20 @@ static void SpriteCB_Sparkle(struct Sprite *sprite)
     s16 *data = sprite->data;
 
     sYSpeed += sYAccel;
-    sprite->pos2.y += sYSpeed >> 8;
+    sprite->y2 += sYSpeed >> 8;
     if (sBitfield & F_MOVE_HORIZ)
     {
         sprite->sX += sXSpeed;
         sSinIdx += sSinSpeed;
-        sprite->pos2.x = Sin(sSinIdx >> 7, sAmplitude);
+        sprite->x2 = Sin(sSinIdx >> 7, sAmplitude);
         if (sBitfield & F_MOVE_HORIZ && sSinIdx >> 7 > 126)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sBitfield &= MASK_TARGET_Y;
         }
     }
-    sprite->pos1.x = sX >> 7;
-    if (sprite->pos1.y + sprite->pos2.y > (sBitfield & MASK_TARGET_Y))
+    sprite->x = sX >> 7;
+    if (sprite->y + sprite->y2 > (sBitfield & MASK_TARGET_Y))
         sprite->callback = SpriteCB_Sparkle_End;
 }
 
@@ -2125,17 +2125,17 @@ static void SpriteCB_Sparkle_Init(struct Sprite *sprite)
     sYSpeed = var;
     sYAccel = 32;
     sBitfield = 168; // Setting bits in MASK_TARGET_Y
-    xMult = sprite->pos2.x * 128;
-    xDiv = MathUtil_Div16Shift(7, (168 - sprite->pos1.y) << 7, (var + 32) >> 1);
-    sprite->sX = sprite->pos1.x << 7;
+    xMult = sprite->x2 * 128;
+    xDiv = MathUtil_Div16Shift(7, (168 - sprite->y) << 7, (var + 32) >> 1);
+    sprite->sX = sprite->x << 7;
     sXSpeed = MathUtil_Div16Shift(7, xMult, xDiv);
     var = MathUtil_Mul16Shift(7, xDiv, 85);
     sSinIdx = zero;
     sSinSpeed = MathUtil_Div16Shift(7, Q_8_8(63.5), var);
-    sAmplitude = sprite->pos2.x / 4;
+    sAmplitude = sprite->x2 / 4;
     sBitfield |= F_MOVE_HORIZ;
-    sprite->pos2.y = zero;
-    sprite->pos2.x = zero;
+    sprite->y2 = zero;
+    sprite->x2 = zero;
     sprite->callback = SpriteCB_Sparkle;
     sprite->animPaused = FALSE;
     sprite->invisible = FALSE;
