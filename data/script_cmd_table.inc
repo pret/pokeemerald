@@ -1,5 +1,5 @@
 	.align 2
-gScriptCmdTable:: @ 81DB67C
+gScriptCmdTable::
 	.4byte ScrCmd_nop      	                @ 0x00
 	.4byte ScrCmd_nop1                      @ 0x01
 	.4byte ScrCmd_end      	                @ 0x02
@@ -119,7 +119,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_drawboxtext               @ 0x74
 	.4byte ScrCmd_showmonpic                @ 0x75
 	.4byte ScrCmd_hidemonpic                @ 0x76
-	.4byte ScrCmd_showcontestwinner         @ 0x77
+	.4byte ScrCmd_showcontestpainting       @ 0x77
 	.4byte ScrCmd_braillemessage            @ 0x78
 	.4byte ScrCmd_givemon                   @ 0x79
 	.4byte ScrCmd_giveegg                   @ 0x7a
@@ -228,5 +228,5 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_buffercontesttype         @ 0xe1
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
 
-gScriptCmdTableEnd:: @ 81DBA08
+gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

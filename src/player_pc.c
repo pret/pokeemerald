@@ -174,7 +174,7 @@ static void ItemStorage_DrawItemIcon(u16 itemId);
 static void ItemStorage_PrintDescription(s32 id);
 static void ItemStorage_EraseMainMenu(u8 taskId);
 static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu * thisMenu);
-static void ItemStorage_PrintMenuItem(u8 windowId, s32 id, u8 yOffset);
+static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset);
 
 static EWRAM_DATA const u8 *sTopMenuOptionOrder = NULL;
 static EWRAM_DATA u8 sTopMenuNumOptions = 0;
@@ -1020,7 +1020,7 @@ static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
     }
 }
 
-static void ItemStorage_PrintMenuItem(u8 windowId, s32 id, u8 yOffset)
+static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
 {
     if (id != LIST_CANCEL)
     {
@@ -1099,8 +1099,8 @@ static void ItemStorage_DrawItemIcon(u16 itemId)
         {
             *spriteIdLoc = spriteId;
             gSprites[spriteId].oam.priority = 0;
-            gSprites[spriteId].pos2.x = 24;
-            gSprites[spriteId].pos2.y = 80;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 80;
         }
     }
 }

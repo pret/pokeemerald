@@ -287,7 +287,7 @@ bool8 sub_8122148(u16 itemId)
         return FALSE;
 }
 
-bool8 itemid_80BF6D8_mail_related(u16 itemId)
+bool8 IsWritingMailAllowed(u16 itemId)
 {
     if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
         return TRUE;
@@ -440,10 +440,10 @@ void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
     for (i = 0; i < count; i++)
     {
         if (i == count - 1 && unknownBit)
-            gSprites[spriteIds[i]].pos2.x = x - 8;
+            gSprites[spriteIds[i]].x2 = x - 8;
         else
-            gSprites[spriteIds[i]].pos2.x = x;
+            gSprites[spriteIds[i]].x2 = x;
 
-        gSprites[spriteIds[i]].pos1.y = 1 + y;
+        gSprites[spriteIds[i]].y = 1 + y;
     }
 }

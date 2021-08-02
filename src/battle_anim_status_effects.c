@@ -26,7 +26,7 @@ static void Task_DoStatusAnimation(u8 taskId);
 static void AnimFlashingCircleImpact(struct Sprite *sprite);
 static void AnimFlashingCircleImpact_Step(struct Sprite *sprite);
 
-static const union AnimCmd sAnim_Unused_853EDE4[] =
+static const union AnimCmd sAnim_FlickeringOrb[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(4, 3),
@@ -35,33 +35,33 @@ static const union AnimCmd sAnim_Unused_853EDE4[] =
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sAnims_Unused_853EDF8[] =
+static const union AnimCmd *const sAnims_FlickeringOrb[] =
 {
-    sAnim_Unused_853EDE4
+    sAnim_FlickeringOrb
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_0853EDFC =
+static const struct SpriteTemplate sFlickeringOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORB,
     .paletteTag = ANIM_TAG_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = sAnims_Unused_853EDF8,
+    .anims = sAnims_FlickeringOrb,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_80A8AEC,
+    .callback = AnimTranslateLinearAndFlicker,
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_0853EE14 =
+static const struct SpriteTemplate sFlickeringOrbFlippedSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORB,
     .paletteTag = ANIM_TAG_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = sAnims_Unused_853EDF8,
+    .anims = sAnims_FlickeringOrb,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_80A8A6C,
+    .callback = AnimTranslateLinearAndFlicker_Flipped,
 };
 
 static const union AnimCmd sAnim_WeatherBallNormal[] =
@@ -124,7 +124,7 @@ const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_0853EE9C =
+static const struct SpriteTemplate sFlickeringFootSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MONSTER_FOOT,
     .paletteTag = ANIM_TAG_MONSTER_FOOT,
@@ -132,79 +132,79 @@ const struct SpriteTemplate gUnusedSpriteTemplate_0853EE9C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_80A8AEC,
+    .callback = AnimTranslateLinearAndFlicker,
 };
 
-static const union AnimCmd sAnim_Unused_853EEB4[] =
+static const union AnimCmd sAnim_FlickeringImpact_0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sAnim_Unused_853EEBC[] =
+static const union AnimCmd sAnim_FlickeringImpact_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sAnim_Unused_853EEC4[] =
+static const union AnimCmd sAnim_FlickeringImpact_2[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sAnims_Unused_853EECC[] =
+static const union AnimCmd *const sAnims_FlickeringImpact[] =
 {
-    sAnim_Unused_853EEB4,
-    sAnim_Unused_853EEBC,
-    sAnim_Unused_853EEC4,
+    sAnim_FlickeringImpact_0,
+    sAnim_FlickeringImpact_1,
+    sAnim_FlickeringImpact_2,
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_0853EED8 =
+static const struct SpriteTemplate sFlickeringImpactSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_Unused_853EECC,
+    .anims = sAnims_FlickeringImpact,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnused_80A8AEC,
+    .callback = AnimTranslateLinearAndFlicker,
 };
 
-static const union AnimCmd sAnim_Unused_853EEF0[] =
+static const union AnimCmd sAnim_FlickeringShrinkOrb[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sAnims_Unused_853EEF8[] =
+static const union AnimCmd *const sAnims_FlickeringShrinkOrb[] =
 {
-    sAnim_Unused_853EEF0
+    sAnim_FlickeringShrinkOrb
 };
 
-static const union AffineAnimCmd sAffineAnim_Unused_853EEFC[] =
+static const union AffineAnimCmd sAffineAnim_FlickeringShrinkOrb[] =
 {
     AFFINEANIMCMD_FRAME(96, 96, 0, 0),
     AFFINEANIMCMD_FRAME(2, 2, 0, 1),
     AFFINEANIMCMD_JUMP(1)
 };
 
-static const union AffineAnimCmd *const sAffineAnims_Unused_853EEF8[] =
+static const union AffineAnimCmd *const sAffineAnims_FlickeringShrinkOrb[] =
 {
-    sAffineAnim_Unused_853EEFC
+    sAffineAnim_FlickeringShrinkOrb
 };
 
 // Unused
-const struct SpriteTemplate gUnusedSpriteTemplate_0853EF18 =
+static const struct SpriteTemplate sFlickeringShrinkOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORB,
     .paletteTag = ANIM_TAG_ORB,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
-    .anims = sAnims_Unused_853EEF8,
+    .anims = sAnims_FlickeringShrinkOrb,
     .images = NULL,
-    .affineAnims = sAffineAnims_Unused_853EEF8,
-    .callback = AnimUnused_80A8A6C,
+    .affineAnims = sAffineAnims_FlickeringShrinkOrb,
+    .callback = AnimTranslateLinearAndFlicker_Flipped,
 };
 
 static const struct Subsprite sFrozenIceCubeSubsprites[] =
@@ -286,7 +286,7 @@ static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
         gTasks[taskId].data[1] = RGB_RED;
         for (i = 0; i < 10; i++)
         {
-            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y + 32, 0);
+            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].x, gSprites[battlerSpriteId].y + 32, 0);
             gSprites[spriteId].data[0] = i * 51;
             gSprites[spriteId].data[1] = -256;
             gSprites[spriteId].invisible = TRUE;
@@ -299,7 +299,7 @@ static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
         gTasks[taskId].data[1] = RGB_BLUE;
         for (i = 0; i < 10; i++)
         {
-            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y - 32, 0);
+            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].x, gSprites[battlerSpriteId].y - 32, 0);
             gSprites[spriteId].data[0] = i * 51;
             gSprites[spriteId].data[1] = 256;
             gSprites[spriteId].invisible = TRUE;
@@ -360,15 +360,15 @@ static void AnimFlashingCircleImpact(struct Sprite *sprite)
 
 static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 32);
-    sprite->pos2.y = Sin(sprite->data[0], 8);
+    sprite->x2 = Cos(sprite->data[0], 32);
+    sprite->y2 = Sin(sprite->data[0], 8);
     if (sprite->data[0] < 128)
         sprite->subpriority = 29;
     else
         sprite->subpriority = 31;
     sprite->data[0] = (sprite->data[0] + 8) & 0xFF;
     sprite->data[5] += sprite->data[1];
-    sprite->pos2.y += sprite->data[5] >> 8;
+    sprite->y2 += sprite->data[5] >> 8;
     sprite->data[2]++;
     if (sprite->data[2] == 52)
     {

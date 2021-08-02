@@ -47,7 +47,6 @@
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-#include "constants/tv.h"
 
 // Values for registryStatus
 enum {
