@@ -867,7 +867,7 @@ static void InitDecorationItemsMenuScrollAndCursor(void)
 
 static void InitDecorationItemsMenuScrollAndCursor2(void)
 {
-    sub_8122298(&sDecorationsScrollOffset, &sDecorationsCursorPos, sDecorationItemsMenu->maxShownItems, sDecorationItemsMenu->numMenuItems, 8);
+    SetCursorScrollWithinListBounds(&sDecorationsScrollOffset, &sDecorationsCursorPos, sDecorationItemsMenu->maxShownItems, sDecorationItemsMenu->numMenuItems, 8);
 }
 
 static void PrintDecorationItemMenuItems(u8 taskId)
