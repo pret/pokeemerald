@@ -11,6 +11,7 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 	release
 	end
 
+	.align 2
 LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
