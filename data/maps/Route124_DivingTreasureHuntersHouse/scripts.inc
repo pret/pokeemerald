@@ -29,16 +29,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_CheckPlayerHasShard::
 
 Route124_DivingTreasureHuntersHouse_EventScript_GetPlayersShards::
 	setvar VAR_TEMP_1, 0
-	checkitem ITEM_RED_SHARD, 1
+	checkitem ITEM_RED_SHARD
 	compare VAR_RESULT, TRUE
 	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_HasRedShard
-	checkitem ITEM_YELLOW_SHARD, 1
+	checkitem ITEM_YELLOW_SHARD
 	compare VAR_RESULT, TRUE
 	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_HasYellowShard
-	checkitem ITEM_BLUE_SHARD, 1
+	checkitem ITEM_BLUE_SHARD
 	compare VAR_RESULT, TRUE
 	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_HasBlueShard
-	checkitem ITEM_GREEN_SHARD, 1
+	checkitem ITEM_GREEN_SHARD
 	compare VAR_RESULT, TRUE
 	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_HasGreenShard
 	return
@@ -248,7 +248,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard::
 	msgbox Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade
-	checkitemspace VAR_0x8009, 1
+	checkitemspace VAR_0x8009
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_TradeShard
 	checkitem VAR_0x8008, 2

@@ -165,7 +165,7 @@ Route116_EventScript_BrineyTrigger::
 Route116_EventScript_GlassesMan::
 	lock
 	faceplayer
-	checkitem ITEM_BLACK_GLASSES, 1
+	checkitem ITEM_BLACK_GLASSES
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route116_EventScript_PlayerHasGlasses
 	specialvar VAR_RESULT, FoundBlackGlasses

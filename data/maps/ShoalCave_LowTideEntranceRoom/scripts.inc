@@ -29,7 +29,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert::
 	msgbox ShoalCave_LowTideEntranceRoom_Text_WouldYouLikeShellBell, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell
-	checkitemspace ITEM_SHELL_BELL, 1
+	checkitemspace ITEM_SHELL_BELL
 	compare VAR_RESULT, FALSE
 	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed
 	compare VAR_RESULT, 2
@@ -68,10 +68,10 @@ ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell::
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells::
-	checkitem ITEM_SHOAL_SALT, 1
+	checkitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, TRUE
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
-	checkitem ITEM_SHOAL_SHELL, 1
+	checkitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, TRUE
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
 	msgbox ShoalCave_LowTideEntranceRoom_Text_AreYouPlanningOnGoingInThere, MSGBOX_DEFAULT

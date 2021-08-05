@@ -332,7 +332,7 @@ SlateportCity_Harbor_EventScript_NeedDive::
 SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment::
 	compare VAR_TEMP_1, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_TradedScanner
-	checkitem ITEM_SCANNER, 1
+	checkitem ITEM_SCANNER
 	compare VAR_RESULT, TRUE
 	goto_if_eq SlateportCity_Harbor_EventScript_AskToTradeScanner
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_FerryFinished

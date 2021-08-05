@@ -69,10 +69,10 @@ RustboroCity_DevonCorp_2F_EventScript_FossilScientist::
 	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_StillRegenerating
 	msgbox RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils, MSGBOX_DEFAULT
-	checkitem ITEM_ROOT_FOSSIL, 1
+	checkitem ITEM_ROOT_FOSSIL
 	compare VAR_RESULT, TRUE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil
-	checkitem ITEM_CLAW_FOSSIL, 1
+	checkitem ITEM_CLAW_FOSSIL
 	compare VAR_RESULT, TRUE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil
 	release
@@ -89,7 +89,7 @@ RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil::
 	msgbox RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
-	checkitem ITEM_CLAW_FOSSIL, 1
+	checkitem ITEM_CLAW_FOSSIL
 	compare VAR_RESULT, TRUE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ChooseFossil
 	goto RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil
@@ -114,7 +114,7 @@ RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil::
 	msgbox RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
-	checkitem ITEM_ROOT_FOSSIL, 1
+	checkitem ITEM_ROOT_FOSSIL
 	compare VAR_RESULT, TRUE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ChooseFossil
 	goto RustboroCity_DevonCorp_2F_EventScript_GiveClawFossil

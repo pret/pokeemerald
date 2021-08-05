@@ -210,7 +210,7 @@ Route111_EventScript_ViciousSandstormTriggerRight::
 	end
 
 Route111_EventScript_ViciousSandstormTrigger::
-	checkitem ITEM_GO_GOGGLES, 1
+	checkitem ITEM_GO_GOGGLES
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route111_EventScript_PreventRouteAccess
 	setvar VAR_TEMP_3, 1

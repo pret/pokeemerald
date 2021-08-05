@@ -22,7 +22,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeRight::
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee::
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee
@@ -34,12 +34,12 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee::
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee::
-	checkmoney 50, 0
+	checkmoney 50
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
 	playse SE_SHOP
-	removemoney 50, 0
-	updatemoneybox 0, 0
+	removemoney 50
+	updatemoneybox
 	msgbox SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox

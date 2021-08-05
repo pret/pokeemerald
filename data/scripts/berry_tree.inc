@@ -154,8 +154,8 @@ BerryTree_EventScript_ItemUsePlantBerry::
 	end
 
 BerryTree_EventScript_WantToWater::
-	checkitem ITEM_WAILMER_PAIL, 1
-	compare VAR_RESULT, 0
+	checkitem ITEM_WAILMER_PAIL
+	compare VAR_RESULT, FALSE
 	goto_if_eq BerryTree_EventScript_DontWater
 	special ObjectEventInteractionGetBerryName
 	msgbox BerryTree_Text_WantToWater, MSGBOX_YESNO

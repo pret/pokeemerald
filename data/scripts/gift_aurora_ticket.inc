@@ -4,13 +4,13 @@ MysteryGiftScript_AuroraTicket::
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_AURORA_TICKET, AuroraTicket_Obtained
 	vgoto_if_set FLAG_BATTLED_DEOXYS, AuroraTicket_Obtained
-	checkitem ITEM_AURORA_TICKET, 1
+	checkitem ITEM_AURORA_TICKET
 	compare VAR_RESULT, TRUE
 	vgoto_if_eq AuroraTicket_Obtained
 	vmessage sText_AuroraTicketForYou
 	waitmessage
 	waitbuttonpress
-	checkitemspace ITEM_AURORA_TICKET, 1
+	checkitemspace ITEM_AURORA_TICKET
 	compare VAR_RESULT, FALSE
 	vgoto_if_eq AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET

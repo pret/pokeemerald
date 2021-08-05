@@ -405,7 +405,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock::
 LilycoveCity_PokemonCenter_1F_EventScript_AskForPokeblock::
     special Script_BufferContestLadyCategoryAndMonName
     msgbox LilycoveCity_PokemonCenter_1F_Text_MyFriendDisplaysQuality, MSGBOX_DEFAULT
-    checkitem ITEM_POKEBLOCK_CASE, 1
+    checkitem ITEM_POKEBLOCK_CASE
     compare VAR_RESULT, FALSE
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoPokeblockCase
     msgbox LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock, MSGBOX_YESNO

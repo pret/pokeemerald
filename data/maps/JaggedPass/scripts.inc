@@ -13,7 +13,7 @@ JaggedPass_OnResume:
 	end
 
 JaggedPass_EventScript_CheckHasMagmaEmblem::
-	checkitem ITEM_MAGMA_EMBLEM, 1
+	checkitem ITEM_MAGMA_EMBLEM
 	compare VAR_RESULT, TRUE
 	goto_if_eq JaggedPass_EventScript_SetReadyToOpenHideout
 	return

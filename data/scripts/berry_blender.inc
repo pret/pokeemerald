@@ -296,7 +296,7 @@ BerryBlender_EventScript_ExplainBlending1:
 	end
 
 BerryBlender_EventScript_TryUseBerryBlender1:
-	checkitem ITEM_POKEBLOCK_CASE, 1
+	checkitem ITEM_POKEBLOCK_CASE
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_Blender1NoCase
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
@@ -370,7 +370,7 @@ BerryBlender_EventScript_TryUseBerryBlender2:
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_Blender2NoBerries
-	checkitem ITEM_POKEBLOCK_CASE, 1
+	checkitem ITEM_POKEBLOCK_CASE
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_Blender2NoCase
 	msgbox BerryBlender_Text_Okay, MSGBOX_DEFAULT
@@ -436,7 +436,7 @@ BerryBlender_EventScript_TryUseBlender3:
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_Blender3NoBerries
-	checkitem ITEM_POKEBLOCK_CASE, 1
+	checkitem ITEM_POKEBLOCK_CASE
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_Blender3NoCase
 	msgbox BerryBlender_Text_OhDear, MSGBOX_DEFAULT
@@ -473,7 +473,7 @@ BerryBlender_EventScript_BlendMasterNoBerries:
 	end
 
 BerryBlender_EventScript_TryBlendWithBlendMaster:
-	checkitem ITEM_POKEBLOCK_CASE, 1
+	checkitem ITEM_POKEBLOCK_CASE
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_BlendMasterNoCase
 	specialvar VAR_RESULT, PlayerHasBerries
@@ -542,7 +542,7 @@ BerryBlender_EventScript_ExpertMPlayerHasBerries:
 	end
 
 BerryBlender_EventScript_ExpertMNoBerries:
-	checkitem ITEM_POKEBLOCK_CASE, 1
+	checkitem ITEM_POKEBLOCK_CASE
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_ExpertMNoSpareBerries
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
@@ -575,7 +575,7 @@ BerryBlender_EventScript_BerryBlenderLink::
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_LinkBlenderNoBerries
-	checkitem ITEM_POKEBLOCK_CASE, 1
+	checkitem ITEM_POKEBLOCK_CASE
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_LinkBlenderNoCase
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot

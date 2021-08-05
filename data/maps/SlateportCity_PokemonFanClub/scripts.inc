@@ -72,7 +72,7 @@ SlateportCity_PokemonFanClub_EventScript_NoHighConditions::
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveRedScarf::
-	checkitemspace ITEM_RED_SCARF, 1
+	checkitemspace ITEM_RED_SCARF
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
@@ -83,7 +83,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveRedScarf::
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf::
-	checkitemspace ITEM_BLUE_SCARF, 1
+	checkitemspace ITEM_BLUE_SCARF
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
@@ -94,7 +94,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf::
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GivePinkScarf::
-	checkitemspace ITEM_PINK_SCARF, 1
+	checkitemspace ITEM_PINK_SCARF
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
@@ -105,7 +105,7 @@ SlateportCity_PokemonFanClub_EventScript_GivePinkScarf::
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf::
-	checkitemspace ITEM_GREEN_SCARF, 1
+	checkitemspace ITEM_GREEN_SCARF
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
@@ -116,7 +116,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf::
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf::
-	checkitemspace ITEM_YELLOW_SCARF, 1
+	checkitemspace ITEM_YELLOW_SCARF
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT

@@ -53,7 +53,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6::
 AbandonedShip_HiddenFloorCorridors_EventScript_Room1Door::
 	lockall
 	goto_if_set FLAG_USED_ROOM_1_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen
-	checkitem ITEM_ROOM_1_KEY, 1
+	checkitem ITEM_ROOM_1_KEY
 	compare VAR_RESULT, FALSE
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_Rm1IsLocked
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT
@@ -68,7 +68,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_Room1Door::
 AbandonedShip_HiddenFloorCorridors_EventScript_Room2Door::
 	lockall
 	goto_if_set FLAG_USED_ROOM_2_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen
-	checkitem ITEM_ROOM_2_KEY, 1
+	checkitem ITEM_ROOM_2_KEY
 	compare VAR_RESULT, FALSE
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_Rm2IsLocked
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT
@@ -83,7 +83,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_Room2Door::
 AbandonedShip_HiddenFloorCorridors_EventScript_Room4Door::
 	lockall
 	goto_if_set FLAG_USED_ROOM_4_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen
-	checkitem ITEM_ROOM_4_KEY, 1
+	checkitem ITEM_ROOM_4_KEY
 	compare VAR_RESULT, FALSE
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_Rm4IsLocked
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT
@@ -98,7 +98,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_Room4Door::
 AbandonedShip_HiddenFloorCorridors_EventScript_Room6Door::
 	lockall
 	goto_if_set FLAG_USED_ROOM_6_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen
-	checkitem ITEM_ROOM_6_KEY, 1
+	checkitem ITEM_ROOM_6_KEY
 	compare VAR_RESULT, FALSE
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_Rm6IsLocked
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT

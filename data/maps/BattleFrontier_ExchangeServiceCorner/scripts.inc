@@ -56,7 +56,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_NoRoomForDecor::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveItem::
-	checkitemspace VAR_0x8009, 1
+	checkitemspace VAR_0x8009
 	compare VAR_RESULT, FALSE
 	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_BagFull
 	copyvar VAR_0x8004, VAR_0x8008

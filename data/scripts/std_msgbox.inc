@@ -34,7 +34,8 @@ Std_MsgboxGetPoints:
 	waitmessage
 	return
 
-Std_10:
+@ Never used, pokenavcall is always used directly instead
+Std_MsgboxPokenav:
 	pokenavcall 0x0
 	waitmessage
 	return

@@ -43,7 +43,7 @@ Route113_GlassWorkshop_EventScript_ExplainSootSack::
 	end
 
 Route113_GlassWorkshop_EventScript_CheckCollectedAsh::
-	checkitem ITEM_SOOT_SACK, 1
+	checkitem ITEM_SOOT_SACK
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route113_GlassWorkshop_EventScript_SootSackNotInBag
 	msgbox Route113_GlassWorkshop_Text_LetsSeeCollectedAshes, MSGBOX_DEFAULT

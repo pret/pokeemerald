@@ -55,7 +55,7 @@ FortreeCity_EventScript_GymSign::
 FortreeCity_EventScript_Kecleon::
 	lock
 	faceplayer
-	checkitem ITEM_DEVON_SCOPE, 1
+	checkitem ITEM_DEVON_SCOPE
 	compare VAR_RESULT, TRUE
 	goto_if_eq FortreeCity_EventScript_AskUseDevonScope
 	msgbox FortreeCity_Text_SomethingUnseeable, MSGBOX_DEFAULT

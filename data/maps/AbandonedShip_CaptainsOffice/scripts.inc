@@ -5,7 +5,7 @@ AbandonedShip_CaptainsOffice_EventScript_CaptSternAide::
 	lock
 	faceplayer
 	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus
-	checkitem ITEM_SCANNER, 1
+	checkitem ITEM_SCANNER
 	compare VAR_RESULT, TRUE
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner
 	goto_if_set FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus

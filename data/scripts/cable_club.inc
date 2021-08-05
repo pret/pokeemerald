@@ -24,22 +24,20 @@ CableClub_EventScript_MysteryGiftMan::
 	specialvar VAR_RESULT, ShouldDistributeEonTicket
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_DistributeEonTicket
-	goto CableClub_EventScript_AlreadyGotEonTicket
+	goto CableClub_EventScript_TryWonderCardScript
 	end
 
-CableClub_EventScript_AlreadyGotEonTicket::
-	gotoram
-
-@ Unused?
+CableClub_EventScript_TryWonderCardScript::
+	gotowondercardscript
 CableClub_EventScript_MysteryGiftThankYou::
 	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_NPC
 	end
 
 CableClub_EventScript_DistributeEonTicket::
-	checkitem ITEM_EON_TICKET, 1
+	checkitem ITEM_EON_TICKET
 	compare VAR_RESULT, TRUE
-	goto_if_eq CableClub_EventScript_AlreadyGotEonTicket
-	goto_if_set FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, CableClub_EventScript_AlreadyGotEonTicket
+	goto_if_eq CableClub_EventScript_TryWonderCardScript
+	goto_if_set FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, CableClub_EventScript_TryWonderCardScript
 	msgbox MysteryGift_Text_TheresATicketForYou, MSGBOX_DEFAULT
 	giveitem ITEM_EON_TICKET
 	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
@@ -1035,7 +1033,7 @@ CableClub_EventScript_DirectCornerAttendant::
 	end
 
 CableClub_EventScript_DirectCornerSelectService::
-	checkitem ITEM_POWDER_JAR, 1
+	checkitem ITEM_POWDER_JAR
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_DirectCornerNoBerry
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_DirectCornerSelectAllServices

@@ -107,15 +107,15 @@ MtChimney_EventScript_ArchieExitNorth::
 MtChimney_EventScript_LavaCookieLady::
 	lock
 	faceplayer
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox MtChimney_Text_LavaCookiesJust200, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_DeclineLavaCookie
-	checkmoney 200, 0
+	checkmoney 200
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_NotEnoughMoney
 	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
-	checkitemspace ITEM_LAVA_COOKIE, 1
+	checkitemspace ITEM_LAVA_COOKIE
 	compare VAR_RESULT, TRUE
 	call_if_eq MtChimney_EventScript_RemoveMoney
 	giveitem ITEM_LAVA_COOKIE
@@ -132,8 +132,8 @@ MtChimney_EventScript_BagIsFull::
 	end
 
 MtChimney_EventScript_RemoveMoney::
-	removemoney 200, 0
-	updatemoneybox 0, 0
+	removemoney 200
+	updatemoneybox
 	return
 
 MtChimney_EventScript_DeclineLavaCookie::

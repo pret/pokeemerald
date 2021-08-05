@@ -6,7 +6,7 @@ MauvilleCity_House2_EventScript_Woman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_ReceivedCoinCase
 	msgbox MauvilleCity_House2_Text_BuyHarborMailAtSlateport, MSGBOX_DEFAULT
-	checkitem ITEM_HARBOR_MAIL, 1
+	checkitem ITEM_HARBOR_MAIL
 	compare VAR_RESULT, TRUE
 	goto_if_eq MauvilleCity_House2_EventScript_AskToTradeForHarborMail
 	release
