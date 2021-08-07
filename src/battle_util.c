@@ -8669,7 +8669,7 @@ bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability)
     sentIn = gSentPokesToOpponent[(gBattlerFainted & 2) >> 1];
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
 
-    if ((gSpeciesToNationalPokedexNum[currSpecies - 1] == SPECIES_BURMY) && (gBitTable[monId] & sentIn))
+    if ((GET_BASE_SPECIES_ID(currSpecies) == SPECIES_BURMY) && (gBitTable[monId] & sentIn))
     {
         switch (gBattleTerrain)
         {  
