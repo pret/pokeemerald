@@ -8660,7 +8660,7 @@ bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability)
     return FALSE;
 }
 
-+void DoBurmyFormChange(u32 monId)
+void DoBurmyFormChange(u32 monId)
 {
     u16 newSpecies, currSpecies;
     s32 sentIn;
