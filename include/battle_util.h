@@ -138,6 +138,7 @@ bool32 CanFling(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
+void DoBurmyFormChange(u32 monId);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
