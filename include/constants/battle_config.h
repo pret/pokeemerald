@@ -37,6 +37,9 @@
     #define SPECIES_ZYGARDE                 0     // 50%
     #define SPECIES_ZYGARDE_10              10011 // 10 %
     #define SPECIES_ZYGARDE_COMPLETE        10012 // 100 %
+    #define SPECIES_BURMY                   0
+    #define SPECIES_BURMY_SANDY_CLOAK       10013
+    #define SPECIES_BURMY_TRASH_CLOAK       10014
 #endif
 
 // Items with peculiar battle effects.
