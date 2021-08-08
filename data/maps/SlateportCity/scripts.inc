@@ -147,6 +147,7 @@ SlateportCity_EventScript_EnergyGuru::
 	release
 	end
 
+	.align 2
 SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_IRON
@@ -543,6 +544,7 @@ SlateportCity_EventScript_DecorClerk::
 	release
 	end
 
+	.align 2
 SlateportCity_PokemartDecor:
 	.2byte DECOR_RED_BRICK
 	.2byte DECOR_BLUE_BRICK
