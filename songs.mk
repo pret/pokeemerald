@@ -2591,3 +2591,42 @@ $(MID_SUBDIR)/bw_seq_bgm_c_05.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_d_03.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V057
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_sp_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_sp.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_su_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_su.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_au_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_au.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_wi_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_r_d_wi.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_06.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V050
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_09.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V059
+
+$(MID_SUBDIR)/bw_seq_bgm_d_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V107
+
+$(MID_SUBDIR)/bw_seq_bgm_d_02_b1f.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V107
+
+$(MID_SUBDIR)/bw_seq_bgm_d_02_b2f.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V107

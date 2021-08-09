@@ -99,3 +99,6 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 66, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 6
 	voice_directsound 63, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 3
 	voice_directsound 67, 114, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    			@ 127/ 90/  0/114/114	+ 7
+	voice_directsound 60, 64, DirectSoundWaveData_dp_sne2_loop, 255, 255, 191, 171    			@ 127/  0/110/120/ 64
+	voice_directsound 60, 58, DirectSoundWaveData_dp_tambourine_16, 255, 0, 255, 171			@ 127/127/127/120/ 58
+	voice_directsound 60, 36, DirectSoundWaveData_hg_032crash, 255, 248, 0, 214    				@ 127/ 80/  0/114/ 36	

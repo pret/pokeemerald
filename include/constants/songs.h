@@ -996,6 +996,19 @@
 #define BW_SEQ_BGM_H_02              971 // Driftveil Drawbridge
 #define BW_SEQ_BGM_C_05              972 // Driftveil City
 #define BW_SEQ_BGM_D_03              973 // Cold Storage
+#define BW_SEQ_BGM_R_D_SP_VAR        974 // Route 6 (Spring) (No Drums)
+#define BW_SEQ_BGM_R_D_SP            975 // Route 6 (Spring)
+#define BW_SEQ_BGM_R_D_SU_VAR        976 // Route 6 (Summer) (No Drums)
+#define BW_SEQ_BGM_R_D_SU            977 // Route 6 (Summer)
+#define BW_SEQ_BGM_R_D_AU_VAR        978 // Route 6 (Autumn) (No Drums)
+#define BW_SEQ_BGM_R_D_AU            979 // Route 6 (Autumn)
+#define BW_SEQ_BGM_R_D_WI_VAR        980 // Route 6 (Winter) (No Drums)
+#define BW_SEQ_BGM_R_D_WI            981 // Route 6 (Winter)
+#define BW_SEQ_BGM_EYE_06            982 // Trainers' Eyes Meet (Parasol Lady)
+#define BW_SEQ_BGM_EYE_09            983 // Trainers' Eyes Meet (Scientist)
+#define BW_SEQ_BGM_D_02              984 // Chargestone Cave
+#define BW_SEQ_BGM_D_02_B1F          985 // Chargestone Cave (B1F)
+#define BW_SEQ_BGM_D_02_B2F          986 // Chargestone Cave (B2F)
 
 // Black 2 & White 2 Music
 

@@ -975,6 +975,19 @@ gSongTable::
 	song bw_seq_bgm_h_02, 0, 0
 	song bw_seq_bgm_c_05, 0, 0
 	song bw_seq_bgm_d_03, 0, 0
+	song bw_seq_bgm_r_d_sp_var, 0, 0
+	song bw_seq_bgm_r_d_sp, 0, 0
+	song bw_seq_bgm_r_d_su_var, 0, 0
+	song bw_seq_bgm_r_d_su, 0, 0
+	song bw_seq_bgm_r_d_au_var, 0, 0
+	song bw_seq_bgm_r_d_au, 0, 0
+	song bw_seq_bgm_r_d_wi_var, 0, 0
+	song bw_seq_bgm_r_d_wi, 0, 0
+	song bw_seq_bgm_eye_06, 0, 0
+	song bw_seq_bgm_eye_09, 0, 0
+	song bw_seq_bgm_d_02, 0, 0
+	song bw_seq_bgm_d_02_b1f, 0, 0
+	song bw_seq_bgm_d_02_b2f, 0, 0
 
 	.align 2
 dummy_song_header:

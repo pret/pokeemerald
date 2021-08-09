@@ -15,7 +15,7 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
 	voice_keysplit voicegroup241, KeySplitTable25    @ tubular bell
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup248, KeySplitTable72    @ martin guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
