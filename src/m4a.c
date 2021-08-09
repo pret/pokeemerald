@@ -1198,7 +1198,7 @@ void CgbSound(void)
             }
             else
             {
-                unsigned int envMask = 0xF;
+                u32 envMask = 0xF;
                 *nrx2ptr = (envelopeStepTimeAndDir & envMask) + (channels->envelopeVolume << 4);
                 *nrx4ptr = channels->n4 | 0x80;
                 if (ch == 1 && !(*nrx0ptr & 0x08))
