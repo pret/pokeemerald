@@ -1,7 +1,7 @@
 	.align 2
 voicegroup230:: @ 
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 197, 255, 171
-	voice_keysplit_all voicegroup232				 @ shift all D's up to D#
+	voice_keysplit_all voicegroup232				 @ synth kick+snare
 	voice_keysplit voicegroup216, KeySplitTable27    @ DPPt timpani
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass1_c2_16, 255, 1, 255, 192
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass2_c1_16, 255, 0, 255, 220
