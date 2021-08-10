@@ -4057,3 +4057,7 @@ DirectSoundWaveData_bw_orchhita3_lowhp::
 	.align 2
 DirectSoundWaveData_bw_118conga::
 	.incbin "sound/direct_sound_samples/bw_118conga.bin"
+
+	.align 2
+DirectSoundWaveData_bw_snarepower_mistralton::
+	.incbin "sound/direct_sound_samples/bw_snarepower_mistralton.bin"

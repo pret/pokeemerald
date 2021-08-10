@@ -18,7 +18,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup248, KeySplitTable72    @ martin guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -37,7 +37,7 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_hg_098pizza4, 255, 248, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_064flt2a5, 255, 246, 159, 205
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup309, KeySplitTable92    @ slap bass full
 	voice_directsound 60, 0, DirectSoundWaveData_hg_133timpg3, 254, 251, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup262, KeySplitTable27    @ trombones

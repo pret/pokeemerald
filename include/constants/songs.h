@@ -1009,6 +1009,7 @@
 #define BW_SEQ_BGM_D_02              984 // Chargestone Cave
 #define BW_SEQ_BGM_D_02_B1F          985 // Chargestone Cave (B1F)
 #define BW_SEQ_BGM_D_02_B2F          986 // Chargestone Cave (B2F)
+#define BW_SEQ_BGM_C_06              987 // Mistralton City                             (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 

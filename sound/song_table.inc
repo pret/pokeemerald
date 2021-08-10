@@ -988,6 +988,7 @@ gSongTable::
 	song bw_seq_bgm_d_02, 0, 0
 	song bw_seq_bgm_d_02_b1f, 0, 0
 	song bw_seq_bgm_d_02_b2f, 0, 0
+	song bw_seq_bgm_c_06, 0, 0
 
 	.align 2
 dummy_song_header:
