@@ -1,4 +1,4 @@
-LilycoveCity_PokemonCenter_2F_MapScripts:: @ 821C75D
+LilycoveCity_PokemonCenter_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
 	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
@@ -6,15 +6,15 @@ LilycoveCity_PokemonCenter_2F_MapScripts:: @ 821C75D
 	.byte 0
 
 @ The below 3 are unused and leftover from RS
-LilycoveCity_PokemonCenter_2F_EventScript_Colosseum:: @ 821C772
+LilycoveCity_PokemonCenter_2F_EventScript_Colosseum::
 	call CableClub_EventScript_Colosseum
 	end
 
-LilycoveCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 821C778
+LilycoveCity_PokemonCenter_2F_EventScript_TradeCenter::
 	call CableClub_EventScript_TradeCenter
 	end
 
-LilycoveCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 821C77E
+LilycoveCity_PokemonCenter_2F_EventScript_RecordCorner::
 	call CableClub_EventScript_RecordCorner
 	end
 

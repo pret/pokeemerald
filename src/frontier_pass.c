@@ -928,8 +928,8 @@ static bool32 TryCallPassAreaFunction(u8 taskId, u8 cursorArea)
         return FALSE;
     }
 
-    sPassData->cursorX = sPassGfx->cursorSprite->pos1.x;
-    sPassData->cursorY = sPassGfx->cursorSprite->pos1.y;
+    sPassData->cursorX = sPassGfx->cursorSprite->x;
+    sPassData->cursorY = sPassGfx->cursorSprite->y;
     return TRUE;
 }
 
@@ -937,33 +937,33 @@ static void Task_HandleFrontierPassInput(u8 taskId)
 {
     u8 var = FALSE; // Reused, first informs whether the cursor moves, then used as the new cursor area.
 
-    if (JOY_HELD(DPAD_UP) && sPassGfx->cursorSprite->pos1.y >= 9)
+    if (JOY_HELD(DPAD_UP) && sPassGfx->cursorSprite->y >= 9)
     {
-        sPassGfx->cursorSprite->pos1.y -= 2;
-        if (sPassGfx->cursorSprite->pos1.y <= 7)
-            sPassGfx->cursorSprite->pos1.y = 2;
+        sPassGfx->cursorSprite->y -= 2;
+        if (sPassGfx->cursorSprite->y <= 7)
+            sPassGfx->cursorSprite->y = 2;
         var = TRUE;
     }
-    if (JOY_HELD(DPAD_DOWN) && sPassGfx->cursorSprite->pos1.y <= 135)
+    if (JOY_HELD(DPAD_DOWN) && sPassGfx->cursorSprite->y <= 135)
     {
-        sPassGfx->cursorSprite->pos1.y += 2;
-        if (sPassGfx->cursorSprite->pos1.y >= 137)
-            sPassGfx->cursorSprite->pos1.y = 136;
+        sPassGfx->cursorSprite->y += 2;
+        if (sPassGfx->cursorSprite->y >= 137)
+            sPassGfx->cursorSprite->y = 136;
         var = TRUE;
     }
 
-    if (JOY_HELD(DPAD_LEFT) && sPassGfx->cursorSprite->pos1.x >= 6)
+    if (JOY_HELD(DPAD_LEFT) && sPassGfx->cursorSprite->x >= 6)
     {
-        sPassGfx->cursorSprite->pos1.x -= 2;
-        if (sPassGfx->cursorSprite->pos1.x <= 4)
-            sPassGfx->cursorSprite->pos1.x = 5;
+        sPassGfx->cursorSprite->x -= 2;
+        if (sPassGfx->cursorSprite->x <= 4)
+            sPassGfx->cursorSprite->x = 5;
         var = TRUE;
     }
-    if (JOY_HELD(DPAD_RIGHT) && sPassGfx->cursorSprite->pos1.x <= 231)
+    if (JOY_HELD(DPAD_RIGHT) && sPassGfx->cursorSprite->x <= 231)
     {
-        sPassGfx->cursorSprite->pos1.x += 2;
-        if (sPassGfx->cursorSprite->pos1.x >= 233)
-            sPassGfx->cursorSprite->pos1.x = 232;
+        sPassGfx->cursorSprite->x += 2;
+        if (sPassGfx->cursorSprite->x >= 233)
+            sPassGfx->cursorSprite->x = 232;
         var = TRUE;
     }
 
@@ -998,7 +998,7 @@ static void Task_HandleFrontierPassInput(u8 taskId)
     }
     else
     {
-        var = GetCursorAreaFromCoords(sPassGfx->cursorSprite->pos1.x - 5, sPassGfx->cursorSprite->pos1.y + 5);
+        var = GetCursorAreaFromCoords(sPassGfx->cursorSprite->x - 5, sPassGfx->cursorSprite->y + 5);
         if (sPassData->cursorArea != var)
         {
             PrintAreaDescription(var);
@@ -1475,7 +1475,7 @@ static void Task_HandleFrontierMap(u8 taskId)
         }
         else
         {
-            sMapData->cursorSprite->pos1.y += 4;
+            sMapData->cursorSprite->y += 4;
             data[1]++;
         }
         return;
@@ -1488,7 +1488,7 @@ static void Task_HandleFrontierMap(u8 taskId)
         }
         else
         {
-            sMapData->cursorSprite->pos1.y -= 4;
+            sMapData->cursorSprite->y -= 4;
             data[1]++;
         }
         return;
@@ -1670,11 +1670,11 @@ static void HandleFrontierMapCursorMove(u8 direction)
     AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (oldCursorPos * 16) + 1, sTextColors[1], 0, sMapLandmarks[oldCursorPos].name);
     AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (sMapData->cursorPos * 16) + 1, sTextColors[2], 0, sMapLandmarks[sMapData->cursorPos].name);
 
-    sMapData->cursorSprite->pos1.y = (sMapData->cursorPos * 16) + 8;
+    sMapData->cursorSprite->y = (sMapData->cursorPos * 16) + 8;
 
     StartSpriteAnim(sMapData->mapIndicatorSprite, sMapLandmarks[sMapData->cursorPos].animNum);
-    sMapData->mapIndicatorSprite->pos1.x = sMapLandmarks[sMapData->cursorPos].x;
-    sMapData->mapIndicatorSprite->pos1.y = sMapLandmarks[sMapData->cursorPos].y;
+    sMapData->mapIndicatorSprite->x = sMapLandmarks[sMapData->cursorPos].x;
+    sMapData->mapIndicatorSprite->y = sMapLandmarks[sMapData->cursorPos].y;
     FillWindowPixelBuffer(MAP_WINDOW_DESCRIPTION, PIXEL_FILL(0));
     AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
