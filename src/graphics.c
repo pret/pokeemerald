@@ -1533,14 +1533,12 @@ const u32 gTitleScreenPressStartGfx[] = INCBIN_U32("graphics/title_screen/press_
 
 const u32 gUnknown_08DE0644[] = INCBIN_U32("graphics/title_screen/title_screen2.bin.lz");
 
-// more trainer card stuff
-
-const u16 gUnknown_08DE07C8[][16] = INCBIN_U16("graphics/frontier_pass/tiles.gbapal");// size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
-const u32 gUnknown_08DE08C8[] = INCBIN_U32("graphics/frontier_pass/tiles.4bpp.lz");
-const u32 gUnknown_08DE2084[] = INCBIN_U32("graphics/frontier_pass/tiles2.8bpp.lz");
-const u32 gUnknown_08DE3060[] = INCBIN_U32("graphics/frontier_pass/tiles.bin.lz");
-const u16 gUnknown_08DE3350[] = INCBIN_U16("graphics/frontier_pass/tilemap1.bin");
-const u16 gUnknown_08DE3374[] = INCBIN_U16("graphics/frontier_pass/tilemap2.bin");
+const u16 gFrontierPassBg_Pal[][16] = INCBIN_U16("graphics/frontier_pass/bg.gbapal");// size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
+const u32 gFrontierPassBg_Gfx[] = INCBIN_U32("graphics/frontier_pass/bg.4bpp.lz");
+const u32 gFrontierPassMapAndCard_Gfx[] = INCBIN_U32("graphics/frontier_pass/map_and_card.8bpp.lz");
+const u32 gFrontierPassBg_Tilemap[] = INCBIN_U32("graphics/frontier_pass/bg.bin.lz");
+const u16 gFrontierPassCancelButton_Tilemap[]            = INCBIN_U16("graphics/frontier_pass/cancel.bin");
+const u16 gFrontierPassCancelButtonHighlighted_Tilemap[] = INCBIN_U16("graphics/frontier_pass/cancel_highlighted.bin");
 
 // Berry Crush
 const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("graphics/berry_crush/crusher.gbapal");
