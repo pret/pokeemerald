@@ -911,7 +911,7 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
 
 bool8 CanUseDigOrEscapeRopeOnCurMap(void)
 {
-    if (gMapHeader.flags & MAP_ALLOW_ESCAPING)
+    if (gMapHeader.allowEscaping)
         return TRUE;
     else
         return FALSE;
