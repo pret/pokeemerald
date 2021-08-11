@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Checkout syms
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        if: ${{ github.event_name == 'push' }}
         uses: actions/checkout@master
         with:
           path: symbols
@@ -61,13 +61,13 @@ jobs:
         run: sh .github/calcrom/webhook.sh pokeemerald
 
       - name: Move symfiles
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        if: ${{ github.event_name == 'push' }}
         run: |
           cp -v *.sym symbols/
           echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
 
       - name: Update symfiles
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        if: ${{ github.event_name == 'push' }}
         uses: EndBug/add-and-commit@v7
         with:
           branch: symbols
