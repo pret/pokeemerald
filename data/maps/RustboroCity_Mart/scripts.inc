@@ -16,6 +16,7 @@ RustboroCity_Mart_EventScript_PokemartBasic::
 	release
 	end
 
+	.align 2
 RustboroCity_Mart_Pokemart_Basic:
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION

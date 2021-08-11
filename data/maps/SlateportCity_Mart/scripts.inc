@@ -11,6 +11,7 @@ SlateportCity_Mart_EventScript_Clerk::
 	release
 	end
 
+	.align 2
 SlateportCity_Mart_Pokemart:
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL

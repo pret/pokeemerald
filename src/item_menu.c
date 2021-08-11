@@ -590,7 +590,7 @@ void CB2_GoToSellMenu(void)
 
 void CB2_GoToItemDepositMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_ITEMPC, POCKETS_COUNT, sub_816B31C);
+    GoToBagMenu(ITEMMENULOCATION_ITEMPC, POCKETS_COUNT, CB2_PlayerPCExitBagMenu);
 }
 
 void ApprenticeOpenBagMenu(void)
@@ -1138,7 +1138,7 @@ static void UpdatePocketItemLists(void)
 
 void UpdatePocketListPosition(u8 pocketId)
 {
-    sub_812225C(&gBagPosition.scrollPosition[pocketId], &gBagPosition.cursorPosition[pocketId], gBagMenu->numShownItems[pocketId], gBagMenu->numItemStacks[pocketId]);
+    SetCursorWithinListBounds(&gBagPosition.scrollPosition[pocketId], &gBagPosition.cursorPosition[pocketId], gBagMenu->numShownItems[pocketId], gBagMenu->numItemStacks[pocketId]);
 }
 
 static void InitPocketListPositions(void)
