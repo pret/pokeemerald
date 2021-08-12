@@ -11302,6 +11302,9 @@ static void Cmd_tryswapitems(void) // trick
 
             gBattleMons[gBattlerAttacker].item = 0;
             gBattleMons[gBattlerTarget].item = oldItemAtk;
+            
+            RecordItemEffectBattle(gBattlerAttacker, 0);
+            RecordItemEffectBattle(gBattlerTarget, ItemId_GetHoldEffect(oldItemAtk));
 
             gActiveBattler = gBattlerAttacker;
             BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, newItemAtk);
