@@ -1010,6 +1010,8 @@
 #define BW_SEQ_BGM_D_02_B1F          985 // Chargestone Cave (B1F)
 #define BW_SEQ_BGM_D_02_B2F          986 // Chargestone Cave (B2F)
 #define BW_SEQ_BGM_C_06              987 // Mistralton City                             (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_E_DOCTOR2         988 // Cedric Juniper
+#define BW_SEQ_ME_HYOUKA4            989 // Pokédex Evaluation... Not Bad!
 
 // Black 2 & White 2 Music
 
