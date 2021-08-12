@@ -5867,8 +5867,7 @@ static void Cmd_switchineffects(void)
     }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES)
-        && IsBattlerGrounded(gActiveBattler)
-        && !(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+        && IsBattlerGrounded(gActiveBattler))
     {
         gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_TOXIC_SPIKES_DAMAGED;
         if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_POISON)) // Absorb the toxic spikes.
@@ -5884,7 +5883,8 @@ static void Cmd_switchineffects(void)
             if (!(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
                 && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)
                 && GetBattlerAbility(gActiveBattler) != ABILITY_IMMUNITY
-                && !(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SAFEGUARD))
+                && !(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SAFEGUARD)
+                && !(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
             {
                 if (gSideTimers[GetBattlerSide(gActiveBattler)].toxicSpikesAmount >= 2)
                     gBattleMons[gActiveBattler].status1 |= STATUS1_TOXIC_POISON;
