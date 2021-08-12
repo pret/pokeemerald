@@ -8419,16 +8419,14 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
         return FALSE;
     else if (GET_BASE_SPECIES_ID(species) == SPECIES_GROUDON && itemId == ITEM_RED_ORB) // includes primal
         return FALSE;
-    // Mega stone cannot be lost if pokemon can mega evolve with it or is already mega evolved.
-    else if (holdEffect == HOLD_EFFECT_MEGA_STONE
-      && ((GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
-      || gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]))
+    // Mega stone cannot be lost if pokemon's base species can mega evolve with it.
+    else if (holdEffect == HOLD_EFFECT_MEGA_STONE && (GetMegaEvolutionSpecies(GET_BASE_SPECIES_ID(species), itemId) != SPECIES_NONE))
         return FALSE;
     else if (GET_BASE_SPECIES_ID(species) == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
         return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GENESECT && GetBattlerHoldEffect(battlerId, FALSE) == HOLD_EFFECT_DRIVE)
+    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GENESECT && holdEffect == HOLD_EFFECT_DRIVE)
         return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_SILVALLY && GetBattlerHoldEffect(battlerId, FALSE) == HOLD_EFFECT_MEMORY)
+    else if (GET_BASE_SPECIES_ID(species) == SPECIES_SILVALLY && holdEffect == HOLD_EFFECT_MEMORY)
         return FALSE;
     else if (GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS && holdEffect == HOLD_EFFECT_PLATE)
         return FALSE;
