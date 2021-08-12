@@ -23,6 +23,7 @@
 #define ABILITYEFFECT_TRACE1                     0xC
 #define ABILITYEFFECT_TRACE2                     0xD
 #define ABILITYEFFECT_MOVE_END_OTHER             0xE
+#define ABILITYEFFECT_SWITCH_IN_TERRAIN          0xFE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
@@ -45,6 +46,7 @@ struct TypePower
 
 extern const struct TypePower gNaturalGiftTable[];
 
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide);
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
 void HandleAction_UseItem(void);
@@ -65,7 +67,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker);
 void MarkAllBattlersForControllerExec(void); // unused
 bool32 IsBattlerMarkedForControllerExec(u8 battlerId);
 void MarkBattlerForControllerExec(u8 battlerId);
-void sub_803F850(u8 arg0);
+void MarkBattlerReceivedLinkData(u8 arg0);
 void CancelMultiTurnMoves(u8 battlerId);
 bool8 WasUnableToUseMove(u8 battlerId);
 void PrepareStringBattle(u16 stringId, u8 battlerId);
@@ -122,7 +124,7 @@ u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
 bool32 CanMegaEvolve(u8 battlerId);
 void UndoMegaEvolution(u32 monId);
-void UndoFormChange(u32 monId, u32 side);
+void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
@@ -130,11 +132,27 @@ void ClearIllusionMon(u32 battlerId);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 u8 GetBattleMoveSplit(u32 moveId);
+bool32 TestMoveFlags(u16 move, u32 flag);
+struct Pokemon *GetBattlerPartyData(u8 battlerId);
+bool32 CanFling(u8 battlerId);
+bool32 IsTelekinesisBannedSpecies(u16 species);
+bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
+bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
 void TryRestoreStolenItems(void);
 bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item);
 void TrySaveExchangedItem(u8 battlerId, u16 stolenItem);
 bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
+
+
+// ability checks
+bool32 IsRolePlayBannedAbilityAtk(u16 ability);
+bool32 IsRolePlayBannedAbility(u16 ability);
+bool32 IsSkillSwapBannedAbility(u16 ability);
+bool32 IsWorrySeedBannedAbility(u16 ability);
+bool32 IsGastroAcidBannedAbility(u16 ability);
+bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
+bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability);
 
 #endif // GUARD_BATTLE_UTIL_H

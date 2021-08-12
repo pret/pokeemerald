@@ -1,0 +1,18 @@
+{
+  "id": "MAP_UNUSED_CONTEST_HALL2",
+  "name": "UnusedContestHall2",
+  "layout": "LAYOUT_UNUSED_CONTEST_HALL2",
+  "music": "MUS_GSC_PEWTER",
+  "region_map_section": "MAPSEC_DYNAMIC",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "shared_events_map": "ContestHall",
+  "shared_scripts_map": "ContestHall"
+}

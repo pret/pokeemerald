@@ -3,7 +3,6 @@
 	.include "asm/macros/movement.inc"
 	.include "asm/macros/window.inc"
 	.include "asm/macros/pokemon_data.inc"
-	.include "asm/macros/ec.inc"
 	.include "asm/macros/map.inc"
 	.include "asm/macros/field_effect_script.inc"
 	.include "asm/macros/trainer_hill.inc"
