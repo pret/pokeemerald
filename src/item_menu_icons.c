@@ -244,7 +244,7 @@ static const struct OamData sBerryPicRotatingOamData =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_857FBD8[] =
+static const union AnimCmd sAnim_BerryPic[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
@@ -252,7 +252,7 @@ static const union AnimCmd sSpriteAnim_857FBD8[] =
 
 static const union AnimCmd *const sBerryPicSpriteAnimTable[] =
 {
-    sSpriteAnim_857FBD8
+    sAnim_BerryPic
 };
 
 static const struct SpriteFrameImage sBerryPicSpriteImageTable[] =
@@ -456,7 +456,7 @@ void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets)
     struct Sprite *sprite = &gSprites[gBagMenu->spriteId[0]];
     if (isSwitchingPockets)
     {
-        sprite->pos2.y = -5;
+        sprite->y2 = -5;
         sprite->callback = SpriteCB_BagVisualSwitchingPockets;
         sprite->data[0] = bagPocketId + 1;
         StartSpriteAnim(sprite, 0);
@@ -469,9 +469,9 @@ void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets)
 
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
 {
-    if (sprite->pos2.y != 0)
+    if (sprite->y2 != 0)
     {
-        sprite->pos2.y++;
+        sprite->y2++;
     }
     else
     {
@@ -550,8 +550,8 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
         if (iconSpriteId != MAX_SPRITES)
         {
             *spriteId = iconSpriteId;
-            gSprites[iconSpriteId].pos2.x = 24;
-            gSprites[iconSpriteId].pos2.y = 88;
+            gSprites[iconSpriteId].x2 = 24;
+            gSprites[iconSpriteId].y2 = 88;
         }
     }
 }
