@@ -2155,22 +2155,22 @@ BattleScript_EffectSleep::
 	goto BattleScript_MoveEnd
 	
 BattleScript_TerrainPreventsEnd2::
-	pause 0x20
+	pause B_WAIT_TIME_SHORT
 	printfromtable gTerrainPreventsStringIds
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	end2
 	
 BattleScript_ElectricTerrainPrevents:
-	pause 0x20
+	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ELECTRICTERRAINPREVENTS
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
 BattleScript_MistyTerrainPrevents:
-	pause 0x20
+	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_MISTYTERRAINPREVENTS
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
