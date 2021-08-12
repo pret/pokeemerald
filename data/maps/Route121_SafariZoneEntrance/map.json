@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE121_SAFARI_ZONE_ENTRANCE",
   "name": "Route121_SafariZoneEntrance",
   "layout": "LAYOUT_ROUTE121_SAFARI_ZONE_ENTRANCE",
-  "music": "MUS_MACHI_S3",
+  "music": "MUS_FORTREE",
   "region_map_section": "MAPSEC_ROUTE_121",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

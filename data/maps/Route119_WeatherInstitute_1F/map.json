@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE119_WEATHER_INSTITUTE_1F",
   "name": "Route119_WeatherInstitute_1F",
   "layout": "LAYOUT_ROUTE119_WEATHER_INSTITUTE_1F",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_ROUTE_119",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

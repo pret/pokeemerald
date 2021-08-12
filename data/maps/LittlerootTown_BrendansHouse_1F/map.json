@@ -2,7 +2,7 @@
   "id": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
   "name": "LittlerootTown_BrendansHouse_1F",
   "layout": "LAYOUT_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
-  "music": "MUS_MISHIRO",
+  "music": "MUS_LITTLEROOT",
   "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

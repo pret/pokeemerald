@@ -1,0 +1,56 @@
+{
+  "id": "MAP_UNDERWATER_ROUTE128",
+  "name": "Underwater_Route128",
+  "layout": "LAYOUT_UNDERWATER_ROUTE128",
+  "music": "MUS_UNDERWATER",
+  "region_map_section": "MAPSEC_UNDERWATER_128",
+  "requires_flash": false,
+  "weather": "WEATHER_UNDERWATER_BUBBLES",
+  "map_type": "MAP_TYPE_UNDERWATER",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "up",
+      "offset": 0,
+      "map": "MAP_UNDERWATER_ROUTE127"
+    },
+    {
+      "direction": "emerge",
+      "offset": 0,
+      "map": "MAP_ROUTE128"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 38,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_UNDERWATER_SEAFLOOR_CAVERN",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 38,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_PROTEIN",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_PROTEIN"
+    },
+    {
+      "type": "hidden_item",
+      "x": 69,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_PEARL"
+    }
+  ]
+}

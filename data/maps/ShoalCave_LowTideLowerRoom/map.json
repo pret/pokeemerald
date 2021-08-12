@@ -2,7 +2,7 @@
   "id": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
   "name": "ShoalCave_LowTideLowerRoom",
   "layout": "LAYOUT_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
-  "music": "MUS_M_DUNGON",
+  "music": "MUS_MT_PYRE",
   "region_map_section": "MAPSEC_SHOAL_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -3,7 +3,7 @@
   "name": "SecretBase_RedCave3",
   "shared_scripts_map": "SecretBase",
   "layout": "LAYOUT_SECRET_BASE_RED_CAVE3",
-  "music": "MUS_MACHI_S3",
+  "music": "MUS_FORTREE",
   "region_map_section": "MAPSEC_SECRET_BASE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

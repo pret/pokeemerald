@@ -2,7 +2,7 @@
   "id": "MAP_FIERY_PATH",
   "name": "FieryPath",
   "layout": "LAYOUT_FIERY_PATH",
-  "music": "MUS_DAN01",
+  "music": "MUS_PETALBURG_WOODS",
   "region_map_section": "MAPSEC_FIERY_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

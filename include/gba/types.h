@@ -27,6 +27,9 @@ typedef double f64;
 typedef u8  bool8;
 typedef u16 bool16;
 typedef u32 bool32;
+typedef vu8  vbool8;
+typedef vu16 vbool16;
+typedef vu32 vbool32;
 
 struct BgCnt
 {

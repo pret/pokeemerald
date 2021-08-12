@@ -2,7 +2,7 @@
   "id": "MAP_SOOTOPOLIS_CITY_GYM_B1F",
   "name": "SootopolisCity_Gym_B1F",
   "layout": "LAYOUT_SOOTOPOLIS_CITY_GYM_B1F",
-  "music": "MUS_GIM",
+  "music": "MUS_GYM",
   "region_map_section": "MAPSEC_SOOTOPOLIS_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

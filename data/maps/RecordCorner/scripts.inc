@@ -1,3 +1,3 @@
-RecordCorner_MapScripts:: @ 823B77F
+RecordCorner_MapScripts::
 	.byte 0
 

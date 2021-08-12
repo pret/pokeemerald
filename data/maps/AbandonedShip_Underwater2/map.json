@@ -2,7 +2,7 @@
   "id": "MAP_ABANDONED_SHIP_UNDERWATER2",
   "name": "AbandonedShip_Underwater2",
   "layout": "LAYOUT_ABANDONED_SHIP_UNDERWATER2",
-  "music": "MUS_DEEPDEEP",
+  "music": "MUS_UNDERWATER",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",

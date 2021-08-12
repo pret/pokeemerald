@@ -83,7 +83,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     }
     AddTextPrinterParameterized(data[3], 1, gText_Exit, 8, 16 * i + 1, 255, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[3], 5, 0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
@@ -101,7 +101,7 @@ void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
     ClearStdWindowAndFrameToTransparent(data[3], FALSE);
     ClearWindowTilemap(data[3]);
     RemoveWindow(data[3]);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }

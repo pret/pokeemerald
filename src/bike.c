@@ -7,7 +7,6 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
-#include "constants/flags.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
@@ -615,27 +614,24 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
         return;
     }
     collision = GetBikeCollision(direction);
-    // TODO: Try to get rid of this goto
-    if (collision == 0 || collision == COLLISION_WHEELIE_HOP)
+    if (collision && collision != COLLISION_WHEELIE_HOP)
     {
-        goto derp;
-    }
-    else if (collision == COLLISION_LEDGE_JUMP)
-    {
-        PlayerLedgeHoppingWheelie(direction);
-    }
-    else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
-    {
+        if (collision == COLLISION_LEDGE_JUMP)
+        {
+            PlayerLedgeHoppingWheelie(direction);
+            return;
+        }
+        if (collision >= COLLISION_STOP_SURFING && collision <= COLLISION_ROTATING_GATE)
+        {
+            return;
+        }
         if (collision < COLLISION_VERTICAL_RAIL)
         {
             AcroBikeTransition_WheelieHoppingStanding(direction);
-        }
-        else
-        {
-        derp:
-            PlayerMovingHoppingWheelie(direction);
+            return;
         }
     }
+    PlayerMovingHoppingWheelie(direction);
 }
 
 static void AcroBikeTransition_SideJump(u8 direction)
@@ -660,7 +656,7 @@ static void AcroBikeTransition_SideJump(u8 direction)
         }
     }
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    PlaySE(SE_JITE_PYOKO);
+    PlaySE(SE_BIKE_HOP);
     playerObjEvent->facingDirectionLocked = 1;
     PlayerSetAnimId(GetJumpMovementAction(direction), 2);
 }
@@ -836,7 +832,7 @@ static void Bike_UpdateDirTimerHistory(u8 dir)
 
     gPlayerAvatar.directionHistory = (gPlayerAvatar.directionHistory << 4) | (dir & 0xF);
 
-    for (i = 7; i != 0; i--)
+    for (i = ARRAY_COUNT(gPlayerAvatar.dirTimerHistory) - 1; i != 0; i--)
         gPlayerAvatar.dirTimerHistory[i] = gPlayerAvatar.dirTimerHistory[i - 1];
     gPlayerAvatar.dirTimerHistory[0] = 1;
 }
@@ -847,7 +843,7 @@ static void Bike_UpdateABStartSelectHistory(u8 input)
 
     gPlayerAvatar.abStartSelectHistory = (gPlayerAvatar.abStartSelectHistory << 4) | (input & 0xF);
 
-    for (i = 7; i != 0; i--)
+    for (i = ARRAY_COUNT(gPlayerAvatar.abStartSelectTimerHistory) - 1; i != 0; i--)
         gPlayerAvatar.abStartSelectTimerHistory[i] = gPlayerAvatar.abStartSelectTimerHistory[i - 1];
     gPlayerAvatar.abStartSelectTimerHistory[0] = 1;
 }
@@ -964,9 +960,10 @@ bool8 IsBikingDisallowedByPlayer(void)
     return TRUE;
 }
 
-bool8 player_should_look_direction_be_enforced_upon_movement(void)
+bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void)
 {
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) != FALSE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) 
+        && MetatileBehavior_IsBumpySlope(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
         return FALSE;
     else
         return TRUE;
@@ -1001,10 +998,10 @@ void BikeClearState(int newDirHistory, int newAbStartHistory)
     gPlayerAvatar.directionHistory = newDirHistory;
     gPlayerAvatar.abStartSelectHistory = newAbStartHistory;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(gPlayerAvatar.dirTimerHistory); i++)
         gPlayerAvatar.dirTimerHistory[i] = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(gPlayerAvatar.abStartSelectTimerHistory); i++)
         gPlayerAvatar.abStartSelectTimerHistory[i] = 0;
 }
 
@@ -1056,7 +1053,7 @@ void Bike_HandleBumpySlopeJump(void)
 
 bool32 IsRunningDisallowed(u8 metatile)
 {
-    if (!(gMapHeader.flags & MAP_ALLOW_RUNNING) || IsRunningDisallowedByMetatile(metatile) == TRUE)
+    if (!gMapHeader.allowRunning || IsRunningDisallowedByMetatile(metatile) == TRUE)
         return TRUE;
     else
         return FALSE;

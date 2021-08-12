@@ -2,7 +2,7 @@
   "id": "MAP_BATTLE_FRONTIER_LOUNGE6",
   "name": "BattleFrontier_Lounge6",
   "layout": "LAYOUT_BATTLE_FRONTIER_LOUNGE2",
-  "music": "MUS_B_TOWER",
+  "music": "MUS_B_TOWER_RS",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

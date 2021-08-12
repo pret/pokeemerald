@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE",
   "name": "Route110_SeasideCyclingRoadSouthEntrance",
   "layout": "LAYOUT_ROUTE110_SEASIDE_CYCLING_ROAD_ENTRANCE",
-  "music": "MUS_FINECITY",
+  "music": "MUS_SLATEPORT",
   "region_map_section": "MAPSEC_ROUTE_110",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -13,7 +13,7 @@
 #define TRAINER_PLAYER                      1023
 #define TRAINER_SECRET_BASE                 1024
 #define TRAINER_LINK_OPPONENT               2048
-#define TRAINER_OPPONENT_C00                3072
+#define TRAINER_UNION_ROOM                  3072
 #define TRAINER_STEVEN_PARTNER              3075
 
 #define TRAINER_PIC_HIKER                  0

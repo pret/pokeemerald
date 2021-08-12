@@ -2,7 +2,7 @@
   "id": "MAP_TERRA_CAVE_ENTRANCE",
   "name": "TerraCave_Entrance",
   "layout": "LAYOUT_TERRA_CAVE_ENTRANCE",
-  "music": "MUS_DAN01",
+  "music": "MUS_PETALBURG_WOODS",
   "region_map_section": "MAPSEC_TERRA_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

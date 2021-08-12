@@ -2,7 +2,7 @@
   "id": "MAP_FALLARBOR_TOWN_MART",
   "name": "FallarborTown_Mart",
   "layout": "LAYOUT_MART",
-  "music": "MUS_FRIENDLY",
+  "music": "MUS_POKE_MART",
   "region_map_section": "MAPSEC_FALLARBOR_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

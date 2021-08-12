@@ -2,7 +2,7 @@
   "id": "MAP_DEWFORD_TOWN_GYM",
   "name": "DewfordTown_Gym",
   "layout": "LAYOUT_DEWFORD_TOWN_GYM",
-  "music": "MUS_GIM",
+  "music": "MUS_GYM",
   "region_map_section": "MAPSEC_DEWFORD_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

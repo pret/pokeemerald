@@ -150,20 +150,22 @@
 #define JAM_HEART_EMPTY 2
 #define JAM_HEART_FULL 3
 
+#define MAX_RELEARNER_MOVES (MAX_LEVEL_UP_MOVES > 25 ? MAX_LEVEL_UP_MOVES : 25)
+
 static EWRAM_DATA struct
 {
     u8 state;
-    u8 heartSpriteIds[16];              /*0x001*/
-    u16 movesToLearn[25];               /*0x01A*/
-    u8 partyMon;                        /*0x044*/
-    u8 moveSlot;                        /*0x045*/
-    struct ListMenuItem menuItems[25];  /*0x0E8*/
-    u8 numMenuChoices;                  /*0x110*/
-    u8 numToShowAtOnce;                 /*0x111*/
-    u8 moveListMenuTask;                /*0x112*/
-    u8 moveListScrollArrowTask;         /*0x113*/
-    u8 moveDisplayArrowTask;            /*0x114*/
-    u16 scrollOffset;                   /*0x116*/
+    u8 heartSpriteIds[16];                               /*0x001*/
+    u16 movesToLearn[MAX_RELEARNER_MOVES];               /*0x01A*/
+    u8 partyMon;                                         /*0x044*/
+    u8 moveSlot;                                         /*0x045*/
+    struct ListMenuItem menuItems[MAX_RELEARNER_MOVES];  /*0x0E8*/
+    u8 numMenuChoices;                                   /*0x110*/
+    u8 numToShowAtOnce;                                  /*0x111*/
+    u8 moveListMenuTask;                                 /*0x112*/
+    u8 moveListScrollArrowTask;                          /*0x113*/
+    u8 moveDisplayArrowTask;                             /*0x114*/
+    u16 scrollOffset;                                    /*0x116*/
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
@@ -366,7 +368,7 @@ void TeachMoveRelearnerMove(void)
     ScriptContext2_Enable();
     CreateTask(Task_WaitForFadeOut, 10);
     // Fade to black
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 
 static void Task_WaitForFadeOut(u8 taskId)
@@ -384,7 +386,7 @@ static void CB2_InitLearnMove(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->partyMon = gSpecialVar_0x8004;
     SetVBlankCallback(VBlankCB_MoveRelearner);
@@ -412,7 +414,7 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->state = MENU_STATE_FADE_FROM_SUMMARY_SCREEN;
     sMoveRelearnerStruct->partyMon = gSpecialVar_0x8004;
@@ -452,7 +454,7 @@ static void CB2_MoveRelearnerMain(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -470,7 +472,7 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_FADE_TO_BLACK:
         sMoveRelearnerStruct->state++;
         HideHeartSpritesAndShowTeachMoveText(FALSE);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_WAIT_FOR_FADE:
         if (!gPaletteFade.active)
@@ -643,7 +645,7 @@ static void DoMoveRelearnerMain(void)
         if (!MoveRelearnerRunTextPrinters())
         {
             sMoveRelearnerStruct->state = MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         }
         break;
     case MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN:
@@ -660,10 +662,10 @@ static void DoMoveRelearnerMain(void)
         }
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_FADE_AND_RETURN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sMoveRelearnerStruct->state++;
         break;
     case MENU_STATE_RETURN_TO_FIELD:
@@ -674,7 +676,7 @@ static void DoMoveRelearnerMain(void)
         }
         break;
     case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sMoveRelearnerStruct->state++;
         if (sMoveRelearnerMenuSate.showContestInfo == FALSE)
         {
@@ -713,13 +715,13 @@ static void DoMoveRelearnerMain(void)
         {
             FormatAndPrintText(gText_MoveRelearnerPkmnForgotMoveAndLearnedNew);
             sMoveRelearnerStruct->state = MENU_STATE_PRINT_TEXT_THEN_FANFARE;
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
         }
         break;
     case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
         if (!MoveRelearnerRunTextPrinters())
         {
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
             sMoveRelearnerStruct->state = MENU_STATE_WAIT_FOR_FANFARE;
         }
         break;
@@ -730,7 +732,7 @@ static void DoMoveRelearnerMain(void)
         }
         break;
     case MENU_STATE_WAIT_FOR_A_BUTTON:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
@@ -776,7 +778,7 @@ static void HandleInput(bool8 showContest)
     switch (itemId)
     {
     case LIST_NOTHING_CHOSEN:
-        if (!(gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
+        if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
         {
             break;
         }
@@ -796,7 +798,7 @@ static void HandleInput(bool8 showContest)
             sMoveRelearnerMenuSate.showContestInfo = FALSE;
         }
 
-        schedule_bg_copy_tilemap_to_vram(1);
+        ScheduleBgCopyTilemapToVram(1);
         MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
         break;
     case LIST_CANCEL:
@@ -842,8 +844,8 @@ static void CreateUISprites(void)
 {
     int i;
 
-    sMoveRelearnerStruct->moveDisplayArrowTask = 0xFF;
-    sMoveRelearnerStruct->moveListScrollArrowTask = 0xFF;
+    sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
+    sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
     AddScrollArrows();
 
     // These are the appeal hearts.
@@ -868,12 +870,12 @@ static void CreateUISprites(void)
 
 static void AddScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask == 0xFF)
+    if (sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
     {
         sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
     }
 
-    if (sMoveRelearnerStruct->moveListScrollArrowTask == 0xFF)
+    if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
     {
         gTempScrollArrowTemplate = sMoveListScrollArrowsTemplate;
         gTempScrollArrowTemplate.fullyDownThreshold = sMoveRelearnerStruct->numMenuChoices - sMoveRelearnerStruct->numToShowAtOnce;
@@ -883,16 +885,16 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask != 0xFF)
+    if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
-        sMoveRelearnerStruct->moveDisplayArrowTask = 0xFF;
+        sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
     }
 
-    if (sMoveRelearnerStruct->moveListScrollArrowTask != 0xFF)
+    if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
-        sMoveRelearnerStruct->moveListScrollArrowTask = 0xFF;
+        sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
     }
 }
 

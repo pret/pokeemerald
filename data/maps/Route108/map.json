@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE108",
   "name": "Route108",
   "layout": "LAYOUT_ROUTE108",
-  "music": "MUS_NEXTROAD",
+  "music": "MUS_ROUTE104",
   "region_map_section": "MAPSEC_ROUTE_108",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE8",
   "name": "Route110_TrickHousePuzzle8",
   "layout": "LAYOUT_ROUTE110_TRICK_HOUSE_PUZZLE8",
-  "music": "MUS_KARAKURI",
+  "music": "MUS_TRICK_HOUSE",
   "region_map_section": "MAPSEC_ROUTE_110",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

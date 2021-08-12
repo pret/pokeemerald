@@ -2,7 +2,7 @@
   "id": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
   "name": "LittlerootTown_ProfessorBirchsLab",
   "layout": "LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
-  "music": "MUS_ODAMAKI",
+  "music": "MUS_BIRCH_LAB",
   "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

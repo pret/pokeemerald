@@ -2,7 +2,7 @@
   "id": "MAP_RUSTBORO_CITY_POKEMON_SCHOOL",
   "name": "RustboroCity_PokemonSchool",
   "layout": "LAYOUT_RUSTBORO_CITY_POKEMON_SCHOOL",
-  "music": "MUS_P_SCHOOL",
+  "music": "MUS_SCHOOL",
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_MT_PYRE_EXTERIOR",
   "name": "MtPyre_Exterior",
   "layout": "LAYOUT_MT_PYRE_EXTERIOR",
-  "music": "MUS_MACHUPI",
+  "music": "MUS_MT_PYRE_EXTERIOR",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

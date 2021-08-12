@@ -2,7 +2,7 @@
   "id": "MAP_PETALBURG_CITY_GYM",
   "name": "PetalburgCity_Gym",
   "layout": "LAYOUT_PETALBURG_CITY_GYM",
-  "music": "MUS_GIM",
+  "music": "MUS_GYM",
   "region_map_section": "MAPSEC_PETALBURG_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -155,7 +155,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_PETALBURG_GYM_WALLYS_UNCLE"
+      "flag": "FLAG_HIDE_PETALBURG_GYM_WALLYS_DAD"
     }
   ],
   "warp_events": [

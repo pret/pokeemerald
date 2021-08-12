@@ -69,6 +69,7 @@
 #define NATURE_SASSY    22
 #define NATURE_CAREFUL  23
 #define NATURE_QUIRKY   24
+#define NUM_NATURES     25
 
 // Pokemon Stats
 #define STAT_HP      0
@@ -80,8 +81,12 @@
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_EV_STATS     NUM_STATS - 1 // excludes HP
+#define NUM_NATURE_STATS NUM_STATS - 1 // excludes HP
 #define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
+
+#define MIN_STAT_STAGE     0
+#define DEFAULT_STAT_STAGE 6
+#define MAX_STAT_STAGE    12
 
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
@@ -159,15 +164,15 @@
 #define MON_DATA_VICTORY_RIBBON    69
 #define MON_DATA_ARTIST_RIBBON     70
 #define MON_DATA_EFFORT_RIBBON     71
-#define MON_DATA_GIFT_RIBBON_1     72
-#define MON_DATA_GIFT_RIBBON_2     73
-#define MON_DATA_GIFT_RIBBON_3     74
-#define MON_DATA_GIFT_RIBBON_4     75
-#define MON_DATA_GIFT_RIBBON_5     76
-#define MON_DATA_GIFT_RIBBON_6     77
-#define MON_DATA_GIFT_RIBBON_7     78
-#define MON_DATA_FATEFUL_ENCOUNTER 79
-#define MON_DATA_OBEDIENCE         80
+#define MON_DATA_MARINE_RIBBON     72
+#define MON_DATA_LAND_RIBBON       73
+#define MON_DATA_SKY_RIBBON        74
+#define MON_DATA_COUNTRY_RIBBON    75
+#define MON_DATA_NATIONAL_RIBBON   76
+#define MON_DATA_EARTH_RIBBON      77
+#define MON_DATA_WORLD_RIBBON      78
+#define MON_DATA_UNUSED_RIBBONS    79
+#define MON_DATA_EVENT_LEGAL       80
 #define MON_DATA_KNOWN_MOVES       81
 #define MON_DATA_RIBBON_COUNT      82
 #define MON_DATA_RIBBONS           83
@@ -176,6 +181,55 @@
 #define MON_DATA_SPEED2            86
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
+
+// Ribbon IDs used by TV and Pokénav
+#define CHAMPION_RIBBON       0
+#define COOL_RIBBON_NORMAL    1
+#define COOL_RIBBON_SUPER     2
+#define COOL_RIBBON_HYPER     3
+#define COOL_RIBBON_MASTER    4
+#define BEAUTY_RIBBON_NORMAL  5
+#define BEAUTY_RIBBON_SUPER   6
+#define BEAUTY_RIBBON_HYPER   7
+#define BEAUTY_RIBBON_MASTER  8
+#define CUTE_RIBBON_NORMAL    9
+#define CUTE_RIBBON_SUPER    10
+#define CUTE_RIBBON_HYPER    11
+#define CUTE_RIBBON_MASTER   12
+#define SMART_RIBBON_NORMAL  13
+#define SMART_RIBBON_SUPER   14
+#define SMART_RIBBON_HYPER   15
+#define SMART_RIBBON_MASTER  16
+#define TOUGH_RIBBON_NORMAL  17
+#define TOUGH_RIBBON_SUPER   18
+#define TOUGH_RIBBON_HYPER   19
+#define TOUGH_RIBBON_MASTER  20
+#define WINNING_RIBBON       21
+#define VICTORY_RIBBON       22
+#define ARTIST_RIBBON        23
+#define EFFORT_RIBBON        24
+#define MARINE_RIBBON        25
+#define LAND_RIBBON          26
+#define SKY_RIBBON           27
+#define COUNTRY_RIBBON       28
+#define NATIONAL_RIBBON      29
+#define EARTH_RIBBON         30
+#define WORLD_RIBBON         31
+
+#define FIRST_GIFT_RIBBON MARINE_RIBBON
+#define LAST_GIFT_RIBBON  WORLD_RIBBON
+#define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
+
+// The above gift ribbons (Marine - World) are
+// special distribution ribbons that correspond to
+// 1 bit each in the Pokémon struct. Gen 4 hard-codes
+// each of these to the given name. In Gen 3 they're
+// used to get an index into giftRibbons in the save block,
+// which can have a value 0-64 (0 is 'no ribbon') that 
+// corresponds to one of the special ribbons listed
+// in gGiftRibbonDescriptionPointers. Most of these were
+// never distributed
+#define MAX_GIFT_RIBBON 64
 
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
@@ -199,6 +253,8 @@
 #define LEVEL_UP_MOVE_LV   0xFE00
 #define LEVEL_UP_END       0xFFFF
 
+#define MAX_LEVEL_UP_MOVES       20
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
@@ -216,27 +272,20 @@
 
 #define MAX_FRIENDSHIP  0xFF
 
-#define STATUS_PRIMARY_NONE      0
-#define STATUS_PRIMARY_POISON    1
-#define STATUS_PRIMARY_PARALYSIS 2
-#define STATUS_PRIMARY_SLEEP     3
-#define STATUS_PRIMARY_FREEZE    4
-#define STATUS_PRIMARY_BURN      5
-#define STATUS_PRIMARY_POKERUS   6
-#define STATUS_PRIMARY_FAINTED   7
-
+#define MAX_PER_STAT_IVS 31
+#define MAX_IV_MASK 31
+#define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
+#define MAX_PER_STAT_EVS 255
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT 100
 
-#define UNOWN_FORM_COUNT 28
-
 // Battle move flags
-#define FLAG_MAKES_CONTACT          0x1
-#define FLAG_PROTECT_AFFECTED       0x2
-#define FLAG_MAGICCOAT_AFFECTED     0x4
-#define FLAG_SNATCH_AFFECTED        0x8
-#define FLAG_MIRROR_MOVE_AFFECTED   0x10
-#define FLAG_KINGSROCK_AFFECTED     0x20
+#define FLAG_MAKES_CONTACT          (1 << 0)
+#define FLAG_PROTECT_AFFECTED       (1 << 1)
+#define FLAG_MAGIC_COAT_AFFECTED    (1 << 2)
+#define FLAG_SNATCH_AFFECTED        (1 << 3)
+#define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
+#define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
@@ -260,26 +309,34 @@
 
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 
-// Evolution type flags
-#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
-#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
-#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
-#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
-#define EVO_TRADE            0x0005 // Pokémon is traded
-#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
-#define EVO_ITEM             0x0007 // specified item is used on Pokémon
-#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
-#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
-#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
-#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
-#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
-#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
-#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
-#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
+// Evolution types
+#define EVO_FRIENDSHIP       1  // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY   2  // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT 3  // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL            4  // Pokémon reaches the specified level
+#define EVO_TRADE            5  // Pokémon is traded
+#define EVO_TRADE_ITEM       6  // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM             7  // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF 8  // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF 9  // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF 10 // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON    11 // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON    12 // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK    13 // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA   14 // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
 
 #define EVOS_PER_MON 5
 
+// Evolution 'modes,' for GetEvolutionTargetSpecies
+#define EVO_MODE_NORMAL     0
+#define EVO_MODE_TRADE      1
+#define EVO_MODE_ITEM_USE   2
+#define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
+
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
+
+#define MON_PIC_SIZE (64 * 64 / 2)
 
 #endif // GUARD_CONSTANTS_POKEMON_H

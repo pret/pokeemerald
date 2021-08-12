@@ -1,7 +1,6 @@
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 
 static const u16 sContestLadyMonGfxId[] =
@@ -9,7 +8,7 @@ static const u16 sContestLadyMonGfxId[] =
     OBJ_EVENT_GFX_ZIGZAGOON_1,
     OBJ_EVENT_GFX_SKITTY,
     OBJ_EVENT_GFX_POOCHYENA,
-    OBJ_EVENT_GFX_KECLEON_1,
+    OBJ_EVENT_GFX_KECLEON,
     OBJ_EVENT_GFX_PIKACHU
 };
 
@@ -54,7 +53,7 @@ static const u16 sQuizLadyQuestion3[] =
     EC_WORD_POKEMON,
     EC_WORD_EVOLVE,
     EC_WORD_QUES,
-    0xFFFF,
+    EC_EMPTY_WORD,
     EC_WORD_LEVEL,
     EC_WORD_INSOMNIA,
     EC_WORD_CUTE_CHARM
@@ -93,7 +92,7 @@ static const u16 sQuizLadyQuestion6[] =
     EC_WORD_STOP,
     EC_MOVE2(CONFUSION),
     EC_WORD_QUES,
-    0xFFFF,
+    EC_EMPTY_WORD,
     EC_WORD_ILLUMINATE,
     EC_WORD_OWN_TEMPO,
     EC_WORD_SWIFT_SWIM
@@ -119,7 +118,7 @@ static const u16 sQuizLadyQuestion8[] =
     EC_MOVE2(BLOCK),
     EC_WORD_ESCAPE,
     EC_WORD_QUES,
-    0xFFFF, 
+    EC_EMPTY_WORD, 
     EC_WORD_RUN_AWAY,
     EC_WORD_SHADOW_TAG,
     EC_WORD_WONDER_GUARD
@@ -132,7 +131,7 @@ static const u16 sQuizLadyQuestion9[] =
     EC_WORD_STOP,
     EC_WORD_POISON,
     EC_WORD_QUES,
-    0xFFFF,
+    EC_EMPTY_WORD,
     EC_WORD_GUTS,
     EC_WORD_IMMUNITY,
     EC_WORD_SHED_SKIN
@@ -145,7 +144,7 @@ static const u16 sQuizLadyQuestion10[] =
     EC_WORD_WITH,
     EC_WORD_CENTER,
     EC_WORD_QUES,
-    0xFFFF,
+    EC_EMPTY_WORD,
     EC_WORD_POKEDEX,
     EC_WORD_POKEMON,
     EC_WORD_POKENAV
@@ -158,7 +157,7 @@ static const u16 sQuizLadyQuestion11[] =
     EC_WORD_YOUR,
     EC_WORD_POKEMON,
     EC_WORD_QUES,
-    0xFFFF,
+    EC_EMPTY_WORD,
     EC_WORD_PC,
     EC_WORD_DEPT_STORE,
     EC_WORD_TELEVISION
@@ -200,7 +199,7 @@ static const u16 sQuizLadyQuestion14[] =
     EC_WORD_QUES,
     EC_WORD_ICE,
     EC_WORD_GROUND,
-    0xFFFF
+    EC_EMPTY_WORD
 };
 
 static const u16 sQuizLadyQuestion15[] =
@@ -213,7 +212,7 @@ static const u16 sQuizLadyQuestion15[] =
     EC_WORD_QUES,
     EC_WORD_PSYCHIC,
     EC_WORD_FIGHTING,
-    0xFFFF
+    EC_EMPTY_WORD
 };
 
 static const u16 sQuizLadyQuestion16[] =
@@ -226,7 +225,7 @@ static const u16 sQuizLadyQuestion16[] =
     EC_WORD_QUES,
     EC_WORD_NORMAL,
     EC_WORD_DARK,
-    0xFFFF
+    EC_EMPTY_WORD
 };
 
 static const u16 *const sQuizLadyQuizQuestions[] =

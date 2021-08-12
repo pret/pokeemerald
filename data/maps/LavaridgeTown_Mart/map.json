@@ -2,7 +2,7 @@
   "id": "MAP_LAVARIDGE_TOWN_MART",
   "name": "LavaridgeTown_Mart",
   "layout": "LAYOUT_MART",
-  "music": "MUS_FRIENDLY",
+  "music": "MUS_POKE_MART",
   "region_map_section": "MAPSEC_LAVARIDGE_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

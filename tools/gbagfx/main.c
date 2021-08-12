@@ -92,6 +92,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     options.width = 1;
     options.metatileWidth = 1;
     options.metatileHeight = 1;
+    options.tilemapFilePath = NULL;
     options.isAffineMap = false;
 
     for (int i = 3; i < argc; i++)

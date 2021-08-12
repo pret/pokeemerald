@@ -9,22 +9,13 @@ bool8 FldEff_CutGrass(void);
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y);
 void FixLongGrassMetatilesWindowBottom(s16 x, s16 y);
 
-extern const struct SpritePalette gFieldEffectObjectPaletteInfo6;
+extern const struct SpritePalette gSpritePalette_CutGrass;
 extern struct MapPosition gPlayerFacingPosition;
 
-// groundshake
-bool8 sub_81BE66C(void);
-void sub_81BE6AC(void);
-void sub_81BE6B8(void);
-void sub_81BE72C(void);
-void sub_81BE79C(void);
-void sub_81BE7F4(void);
-void sub_81BE994(void);
-
 // escalator
-void sub_80E1558(u8 var);
-void sub_80E1570(void);
-bool8 sub_80E1584(void);
+void StartEscalator(bool8 var);
+void StopEscalator(void);
+bool8 IsEscalatorMoving(void);
 
 // soft-boiled
 bool8 SetUpFieldMove_SoftBoiled(void);
@@ -39,7 +30,7 @@ bool8 GetMapPairFadeFromType(u8 a1, u8 a2);
 
 // strength
 bool8 SetUpFieldMove_Strength(void);
-bool8 sub_8145E2C(void);
+bool8 FldEff_UseStrength(void);
 
 // sweet scent
 bool8 SetUpFieldMove_SweetScent(void);
@@ -55,7 +46,7 @@ bool8 FldEff_UseDig(void);
 
 // rock smash
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
-u8 oei_task_add(void);
+u8 CreateFieldMoveTask(void);
 bool8 SetUpFieldMove_RockSmash(void);
 bool8 FldEff_UseRockSmash(void);
 

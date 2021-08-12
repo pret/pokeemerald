@@ -21,7 +21,7 @@ struct MEventStruct_Unk1442CC
     u16 unk_0C;
     u32 unk_10;
     u16 unk_14;
-    u16 unk_16[4];
+    u16 unk_16[NUM_QUESTIONNAIRE_WORDS];
     struct MEventBuffer_3430_Sub unk_20;
     u8 unk_44;
     u8 unk_45[7];
@@ -36,7 +36,7 @@ struct WonderNews *GetSavedWonderNews(void);
 struct WonderCard *GetSavedWonderCard(void);
 struct MEventBuffer_3430_Sub *sav1_get_mevent_buffer_2(void);
 struct MysteryEventStruct *sub_801B044(void);
-u16 *sub_801B058(void);
+u16 *GetQuestionnaireWordsPtr(void);
 void DestroyWonderNews(void);
 bool32 sub_801B078(const struct WonderNews *src);
 bool32 ValidateReceivedWonderNews(void);
@@ -57,7 +57,7 @@ u32 sub_801B708(const u16 *a0, const struct MEventStruct_Unk1442CC *a1, const vo
 bool32 MEventStruct_Unk1442CC_CompareField_unk_16(const struct MEventStruct_Unk1442CC *a0, const u16 *a1);
 u16 MEventStruct_Unk1442CC_GetValueNFrom_unk_20(const struct MEventStruct_Unk1442CC *a0, u32 command);
 u16 mevent_081445C0(u32 command);
-void sub_801B940(void);
-bool32 sub_801B94C(u16 a0);
+void ResetReceivedWonderCardFlag(void);
+bool32 MEventHandleReceivedWonderCard(u16 a0);
 
 #endif //GUARD_MEVENT_H

@@ -2,7 +2,7 @@
   "id": "MAP_RUSTBORO_CITY_FLAT1_2F",
   "name": "RustboroCity_Flat1_2F",
   "layout": "LAYOUT_RUSTBORO_CITY_FLAT1_2F",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -582,16 +582,16 @@ $(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/ash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/berry_tree_growth_sparkle.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/sparkle.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/bike_hop_big_splash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/jump_big_splash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/bike_hop_small_splash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/jump_small_splash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(FLDEFFGFXDIR)/bike_hop_tall_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/jump_tall_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
 $(FLDEFFGFXDIR)/bike_tire_tracks.4bpp: %.4bpp: %.png
@@ -606,7 +606,7 @@ $(FLDEFFGFXDIR)/deep_sand_footprints.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/ground_impact_dust.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(FLDEFFGFXDIR)/jump_out_of_ash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/ash_puff.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(FLDEFFGFXDIR)/long_grass.4bpp: %.4bpp: %.png
@@ -642,23 +642,35 @@ $(FLDEFFGFXDIR)/unknown_16.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/unknown_17.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_18.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unused_grass_2.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_19.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unused_sand.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_20.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/water_surfacing.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_29.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/sand_pile.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(FLDEFFGFXDIR)/lavaridge_gym_warp.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/ash_launch.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_35.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/small_sparkle.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unused_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unused_grass_3.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/secret_power_cave.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/secret_power_shrub.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/secret_power_tree.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/record_mix_lights.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 1

@@ -2,7 +2,7 @@
   "id": "MAP_DESERT_RUINS",
   "name": "DesertRuins",
   "layout": "LAYOUT_DESERT_RUINS",
-  "music": "MUS_MABOROSI",
+  "music": "MUS_SEALED_CHAMBER",
   "region_map_section": "MAPSEC_DESERT_RUINS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -136,32 +136,20 @@ void TaskDummy(u8 taskId)
 {
 }
 
-#define TASK_DATA_OP(taskId, offset, op)                    \
-{                                                           \
-    u32 tasksAddr = (u32)gTasks;                            \
-    u32 addr = taskId * sizeof(struct Task) + offset;       \
-    u32 dataAddr = tasksAddr + offsetof(struct Task, data); \
-    addr += dataAddr;                                       \
-    op;                                                     \
-}
-
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    TASK_DATA_OP(taskId, 28, *((u16 *)addr) = (u32)followupFunc)
-    TASK_DATA_OP(taskId, 30, *((u16 *)addr) = (u32)followupFunc >> 16)
+    u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
+
+    gTasks[taskId].data[followupFuncIndex] = (s16)((u32)followupFunc);
+    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // Store followupFunc as two half-words in the data array.
     gTasks[taskId].func = func;
 }
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    s32 func;
+    u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
-    gTasks[taskId].func = NULL;
-
-    TASK_DATA_OP(taskId, 28, func = *((u16 *)addr))
-    TASK_DATA_OP(taskId, 30, func |= *((s16 *)addr) << 16)
-
-    gTasks[taskId].func = (TaskFunc)func;
+    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[followupFuncIndex]) | (gTasks[taskId].data[followupFuncIndex + 1] << 16));
 }
 
 bool8 FuncIsActiveTask(TaskFunc func)
@@ -183,7 +171,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return 0xFF;
+    return TASK_NONE; // No task was found.
 }
 
 u8 GetTaskCount(void)
@@ -200,7 +188,7 @@ u8 GetTaskCount(void)
 
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 {
-    if (dataElem <= 14)
+    if (dataElem < NUM_TASK_DATA - 1)
     {
         gTasks[taskId].data[dataElem] = value;
         gTasks[taskId].data[dataElem + 1] = value >> 16;
@@ -209,7 +197,7 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
-    if (dataElem <= 14)
+    if (dataElem < NUM_TASK_DATA - 1)
         return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;

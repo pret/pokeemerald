@@ -2,7 +2,7 @@
   "id": "MAP_SEALED_CHAMBER_OUTER_ROOM",
   "name": "SealedChamber_OuterRoom",
   "layout": "LAYOUT_SEALED_CHAMBER_OUTER_ROOM",
-  "music": "MUS_MABOROSI",
+  "music": "MUS_SEALED_CHAMBER",
   "region_map_section": "MAPSEC_SEALED_CHAMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

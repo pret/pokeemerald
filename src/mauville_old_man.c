@@ -3,7 +3,6 @@
 #include "constants/songs.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
-#include "constants/vars.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
 #include "string_util.h"
@@ -221,7 +220,7 @@ static void PrepareSongText(void)
         if (lineNum == 0)
         {
             *(wordEnd++) = EXT_CTRL_CODE_BEGIN;
-            *(wordEnd++) = 15;
+            *(wordEnd++) = EXT_CTRL_CODE_FILL_WINDOW;
         }
     }
 }
@@ -251,7 +250,7 @@ void ScrSpecial_HipsterTeachWord(void)
 {
     u16 phrase = GetNewHipsterPhraseToTeach();
 
-    if (phrase == 0xFFFF)
+    if (phrase == EC_EMPTY_WORD)
     {
         gSpecialVar_Result = FALSE;
     }
@@ -284,7 +283,7 @@ void ScrSpecial_GenerateGiddyLine(void)
     if (giddy->taleCounter == 0)
         InitGiddyTaleList();
 
-    if (giddy->randomWords[giddy->taleCounter] != 0xFFFF) // is not the last element of the array?
+    if (giddy->randomWords[giddy->taleCounter] != EC_EMPTY_WORD)
     {
         u8 *stringPtr;
         u32 adjective = Random();
@@ -317,7 +316,7 @@ static void InitGiddyTaleList(void)
         {EC_GROUP_HOBBIES,   0},
         {EC_GROUP_MOVE_1,    0},
         {EC_GROUP_MOVE_2,    0},
-        {EC_GROUP_POKEMON_2, 0}
+        {EC_GROUP_POKEMON_NATIONAL, 0}
     };
     u16 i;
     u16 r10;
@@ -349,7 +348,7 @@ static void InitGiddyTaleList(void)
         r1 = Random() % 10;
         if (r1 < 3 && r7 < 8)
         {
-            giddy->randomWords[i] = 0xFFFF;
+            giddy->randomWords[i] = EC_EMPTY_WORD;
             r7++;
         }
         else
@@ -426,21 +425,21 @@ static void StartBardSong(bool8 useTemporaryLyrics)
     gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-static void sub_81206F0(void)
+static void EnableTextPrinters(void)
 {
-    gUnknown_03002F84 = FALSE;
+    gDisableTextPrinters = FALSE;
 }
 
-static void BardSong_TextSubPrinter(struct TextPrinterTemplate * printer, u16 a1)
+static void BardSong_DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
 {
-    gUnknown_03002F84 = TRUE;
+    gDisableTextPrinters = TRUE;
 }
 
 static void sub_8120708(const u8 * src)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
-    gUnknown_03002F84 = TRUE;
+    AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_DisableTextPrinters);
+    gDisableTextPrinters = TRUE;
     CopyWindowToVram(0, 3);
 }
 
@@ -621,7 +620,7 @@ static void Task_BardSong(u8 taskId)
             else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
             {
 
-                sub_81206F0();
+                EnableTextPrinters();
                 task->tCharIndex++;
                 task->tState = 2;
                 task->data[2] = 0;
@@ -641,7 +640,7 @@ static void Task_BardSong(u8 taskId)
             else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
             {
                 gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
-                sub_81206F0();
+                EnableTextPrinters();
                 task->tCharIndex++;
                 task->data[2] = 0;
             }
@@ -650,7 +649,7 @@ static void Task_BardSong(u8 taskId)
                 switch (task->data[1])
                 {
                     case 0:
-                        sub_81206F0();
+                        EnableTextPrinters();
                         task->data[1]++;
                         break;
                     case 1:
@@ -681,45 +680,43 @@ void ScrSpecial_SetMauvilleOldManObjEventGfx(void)
 
 // Language fixers?
 
-void sub_8120B70(union OldMan * oldMan)
+void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 {
     s32 i;
     u8 playerName[PLAYER_NAME_LENGTH + 1];
 
     switch (oldMan->common.id)
     {
-        case MAUVILLE_MAN_TRADER:
+    case MAUVILLE_MAN_TRADER:
+    {
+        struct MauvilleOldManTrader * trader = &oldMan->trader;
+        for (i = 0; i < NUM_TRADER_ITEMS; i++)
         {
-            struct MauvilleOldManTrader * trader = &oldMan->trader;
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
+            if (trader->language[i] == LANGUAGE_JAPANESE)
+                ConvertInternationalString(trader->playerNames[i], LANGUAGE_JAPANESE);
+        }
+        break;
+    }
+    case MAUVILLE_MAN_STORYTELLER:
+    {
+        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+        for (i = 0; i < NUM_STORYTELLER_TALES; i++)
+        {
+            if (storyteller->gameStatIDs[i] != 0)
             {
-                if (trader->language[i] == LANGUAGE_JAPANESE)
+                memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
+                playerName[PLAYER_NAME_LENGTH] = EOS;
+                if (IsStringJapanese(playerName))
                 {
-                    ConvertInternationalString(trader->playerNames[i], LANGUAGE_JAPANESE);
+                    memset(playerName, CHAR_SPACE, PLAYER_NAME_LENGTH + 1);
+                    StringCopy(playerName, gText_Friend);
+                    memcpy(storyteller->trainerNames[i], playerName, PLAYER_NAME_LENGTH);
+                    storyteller->language[i] = GAME_LANGUAGE;
                 }
             }
         }
-            break;
-        case MAUVILLE_MAN_STORYTELLER:
-        {
-            struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
-            for (i = 0; i < NUM_STORYTELLER_TALES; i++)
-            {
-                if (storyteller->gameStatIDs[i] != 0)
-                {
-                    memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
-                    playerName[PLAYER_NAME_LENGTH] = EOS;
-                    if (IsStringJapanese(playerName))
-                    {
-                        memset(playerName, CHAR_SPACE, PLAYER_NAME_LENGTH + 1);
-                        StringCopy(playerName, gText_Friend);
-                        memcpy(storyteller->trainerNames[i], playerName, PLAYER_NAME_LENGTH);
-                        storyteller->language[i] = GAME_LANGUAGE;
-                    }
-                }
-            }
-        }
-            break;
+        break;
+    }
     }
 }
 
@@ -1325,7 +1322,6 @@ static void PrintStoryList(void)
 {
     s32 i;
     s32 width = GetStringWidth(1, gText_Exit, 0);
-    u8 tileWidth;
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         s32 curWidth;

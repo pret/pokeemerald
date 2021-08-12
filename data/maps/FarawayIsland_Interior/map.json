@@ -2,7 +2,7 @@
   "id": "MAP_FARAWAY_ISLAND_INTERIOR",
   "name": "FarawayIsland_Interior",
   "layout": "LAYOUT_FARAWAY_ISLAND_INTERIOR",
-  "music": "MUS_DAN02",
+  "music": "MUS_ABANDONED_SHIP",
   "region_map_section": "MAPSEC_FARAWAY_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",

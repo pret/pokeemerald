@@ -2,7 +2,7 @@
   "id": "MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB",
   "name": "LilycoveCity_PokemonTrainerFanClub",
   "layout": "LAYOUT_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB",
-  "music": "MUS_MINAMO",
+  "music": "MUS_LILYCOVE",
   "region_map_section": "MAPSEC_LILYCOVE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

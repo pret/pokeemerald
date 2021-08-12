@@ -14,6 +14,10 @@
 #define PALETTE_FADE_STATUS_DONE 0
 #define PALETTE_FADE_STATUS_LOADING 0xFF
 
+#define PALETTES_BG      0x0000FFFF
+#define PALETTES_OBJECTS 0xFFFF0000
+#define PALETTES_ALL     (PALETTES_BG | PALETTES_OBJECTS)
+
 enum
 {
     FAST_FADE_IN_FROM_WHITE,
@@ -70,7 +74,7 @@ void BeginFastPaletteFade(u8);
 void BeginHardwarePaletteFade(u8, u8, u8, u8, u8);
 void BlendPalettes(u32 selectedPalettes, u8 coeff, u16 color);
 void BlendPalettesUnfaded(u32, u8, u16);
-void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7);
+void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u16 color, u8 priority, u8 id);
 void TintPalette_GrayScale(u16 *palette, u16 count);
 void TintPalette_GrayScale2(u16 *palette, u16 count);
 void TintPalette_SepiaTone(u16 *palette, u16 count);

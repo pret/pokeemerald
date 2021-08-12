@@ -75,13 +75,11 @@ static u8   ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
-static void sub_80BB154(void);
+static void DrawBgWindowFrames(void);
 
-// EWRAM vars
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
 
-// const rom data
-static const u16 sUnknown_0855C604[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
+static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
 
@@ -141,7 +139,7 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =
    }
 };
 
-static const u16 sUnknown_0855C6A0[] = {0x7E51};
+static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
 
 // code
 static void MainCB2(void)
@@ -187,9 +185,9 @@ void CB2_InitOptionMenu(void)
         DeactivateAllTextPrinters();
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
-        SetGpuReg(REG_OFFSET_WININ, 1);
-        SetGpuReg(REG_OFFSET_WINOUT, 35);
-        SetGpuReg(REG_OFFSET_BLDCNT, 193);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_CLR);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_DARKEN);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 4);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
@@ -209,12 +207,12 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 4:
-        LoadPalette(sUnknown_0855C6A0, 0, sizeof(sUnknown_0855C6A0));
+        LoadPalette(sOptionMenuBg_Pal, 0, sizeof(sOptionMenuBg_Pal));
         LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, 0x70, 0x20);
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sUnknown_0855C604, 0x10, sizeof(sUnknown_0855C604));
+        LoadPalette(sOptionMenuText_Pal, 16, sizeof(sOptionMenuText_Pal));
         gMain.state++;
         break;
     case 6:
@@ -230,7 +228,7 @@ void CB2_InitOptionMenu(void)
         DrawOptionMenuTexts();
         gMain.state++;
     case 9:
-        sub_80BB154();
+        DrawBgWindowFrames();
         gMain.state++;
         break;
     case 10:
@@ -258,7 +256,7 @@ void CB2_InitOptionMenu(void)
         break;
     }
     case 11:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(MainCB2);
         return;
@@ -273,16 +271,16 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] == MENUITEM_CANCEL)
             gTasks[taskId].func = Task_OptionMenuSave;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_OptionMenuSave;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] > 0)
             gTasks[taskId].data[TD_MENUSELECTION]--;
@@ -290,7 +288,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             gTasks[taskId].data[TD_MENUSELECTION] = MENUITEM_CANCEL;
         HighlightOptionMenuItem(gTasks[taskId].data[TD_MENUSELECTION]);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] < MENUITEM_CANCEL)
             gTasks[taskId].data[TD_MENUSELECTION]++;
@@ -367,7 +365,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].data[TD_BUTTONMODE];
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].data[TD_FRAMETYPE];
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 
@@ -383,7 +381,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
 
 static void HighlightOptionMenuItem(u8 index)
 {
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(16, 224));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(16, DISPLAY_WIDTH - 16));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(index * 16 + 40, index * 16 + 56));
 }
 
@@ -407,7 +405,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
 static u8 TextSpeed_ProcessInput(u8 selection)
 {
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (selection <= 1)
             selection++;
@@ -416,7 +414,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 
         sArrowPressed = TRUE;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (selection != 0)
             selection--;
@@ -453,7 +451,7 @@ static void TextSpeed_DrawChoices(u8 selection)
 
 static u8 BattleScene_ProcessInput(u8 selection)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         selection ^= 1;
         sArrowPressed = TRUE;
@@ -476,7 +474,7 @@ static void BattleScene_DrawChoices(u8 selection)
 
 static u8 BattleStyle_ProcessInput(u8 selection)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         selection ^= 1;
         sArrowPressed = TRUE;
@@ -499,7 +497,7 @@ static void BattleStyle_DrawChoices(u8 selection)
 
 static u8 Sound_ProcessInput(u8 selection)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         selection ^= 1;
         SetPokemonCryStereo(selection);
@@ -523,7 +521,7 @@ static void Sound_DrawChoices(u8 selection)
 
 static u8 FrameType_ProcessInput(u8 selection)
 {
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (selection < WINDOW_FRAMES_COUNT - 1)
             selection++;
@@ -534,7 +532,7 @@ static u8 FrameType_ProcessInput(u8 selection)
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
         sArrowPressed = TRUE;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (selection != 0)
             selection--;
@@ -581,7 +579,7 @@ static void FrameType_DrawChoices(u8 selection)
 
 static u8 ButtonMode_ProcessInput(u8 selection)
 {
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (selection <= 1)
             selection++;
@@ -590,7 +588,7 @@ static u8 ButtonMode_ProcessInput(u8 selection)
 
         sArrowPressed = TRUE;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (selection != 0)
             selection--;
@@ -644,25 +642,37 @@ static void DrawOptionMenuTexts(void)
     CopyWindowToVram(WIN_OPTIONS, 3);
 }
 
-static void sub_80BB154(void)
+#define TILE_TOP_CORNER_L 0x1A2
+#define TILE_TOP_EDGE     0x1A3
+#define TILE_TOP_CORNER_R 0x1A4
+#define TILE_LEFT_EDGE    0x1A5
+#define TILE_RIGHT_EDGE   0x1A7
+#define TILE_BOT_CORNER_L 0x1A8
+#define TILE_BOT_EDGE     0x1A9
+#define TILE_BOT_CORNER_R 0x1AA
+
+static void DrawBgWindowFrames(void)
 {
-    //                   bg, tileNum, x,    y,    width, height,  pal
-    FillBgTilemapBufferRect(1, 0x1A2, 1,    0,      1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A3, 2,    0,      0x1B,   1,      7);
-    FillBgTilemapBufferRect(1, 0x1A4, 28,   0,      1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A5, 1,    1,      1,      2,      7);
-    FillBgTilemapBufferRect(1, 0x1A7, 28,   1,      1,      2,      7);
-    FillBgTilemapBufferRect(1, 0x1A8, 1,    3,      1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A9, 2,    3,      0x1B,   1,      7);
-    FillBgTilemapBufferRect(1, 0x1AA, 28,   3,      1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A2, 1,    4,      1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A3, 2,    4,      0x1A,   1,      7);
-    FillBgTilemapBufferRect(1, 0x1A4, 28,   4,      1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A5, 1,    5,      1,      0x12,   7);
-    FillBgTilemapBufferRect(1, 0x1A7, 28,   5,      1,      0x12,   7);
-    FillBgTilemapBufferRect(1, 0x1A8, 1,    19,     1,      1,      7);
-    FillBgTilemapBufferRect(1, 0x1A9, 2,    19,     0x1A,   1,      7);
-    FillBgTilemapBufferRect(1, 0x1AA, 28,   19,     1,      1,      7);
+    //                     bg, tile,              x, y, width, height, palNum
+    // Draw title window frame
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 27,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1,  2,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1,  2,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1,  3,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2,  3, 27,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28,  3,  1,  1,  7);
+
+    // Draw options list window frame
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  4,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  4, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  4,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  5,  1, 18,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  5,  1, 18,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
 
     CopyBgTilemapBufferToVram(1);
 }

@@ -2,7 +2,7 @@
   "id": "MAP_CONTEST_HALL_TOUGH",
   "name": "ContestHallTough",
   "layout": "LAYOUT_CONTEST_HALL_TOUGH",
-  "music": "MUS_CONTEST0",
+  "music": "MUS_CONTEST",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

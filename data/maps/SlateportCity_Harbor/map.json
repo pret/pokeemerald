@@ -2,7 +2,7 @@
   "id": "MAP_SLATEPORT_CITY_HARBOR",
   "name": "SlateportCity_Harbor",
   "layout": "LAYOUT_HARBOR",
-  "music": "MUS_FINECITY",
+  "music": "MUS_SLATEPORT",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

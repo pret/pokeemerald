@@ -2,7 +2,7 @@
   "id": "MAP_SAFARI_ZONE_SOUTHEAST",
   "name": "SafariZone_Southeast",
   "layout": "LAYOUT_SAFARI_ZONE_SOUTHEAST",
-  "music": "MUS_SAFARI",
+  "music": "MUS_SAFARI_ZONE",
   "region_map_section": "MAPSEC_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

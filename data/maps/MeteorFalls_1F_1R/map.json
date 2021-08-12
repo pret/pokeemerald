@@ -2,7 +2,7 @@
   "id": "MAP_METEOR_FALLS_1F_1R",
   "name": "MeteorFalls_1F_1R",
   "layout": "LAYOUT_METEOR_FALLS_1F_1R",
-  "music": "MUS_DAN03",
+  "music": "MUS_CAVE_OF_ORIGIN",
   "region_map_section": "MAPSEC_METEOR_FALLS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

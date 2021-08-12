@@ -56,7 +56,7 @@
 #define VAR_CYCLING_ROAD_RECORD_COLLISIONS   0x4027
 #define VAR_CYCLING_ROAD_RECORD_TIME_L       0x4028
 #define VAR_CYCLING_ROAD_RECORD_TIME_H       0x4029
-#define VAR_HAPPINESS_STEP_COUNTER           0x402A
+#define VAR_FRIENDSHIP_STEP_COUNTER          0x402A
 #define VAR_POISON_STEP_COUNTER              0x402B
 #define VAR_RESET_RTC_ENABLE                 0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE           0x402D
@@ -274,6 +274,7 @@
 #define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
 
 #define VARS_END                             0x40FF
+#define VARS_COUNT                           (VARS_END - VARS_START + 1)
 
 #define SPECIAL_VARS_START            0x8000
 // special vars

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE126",
   "name": "Route126",
   "layout": "LAYOUT_ROUTE126",
-  "music": "MUS_DOORO_X3",
+  "music": "MUS_ROUTE120",
   "region_map_section": "MAPSEC_ROUTE_126",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -26,7 +26,7 @@
     {
       "direction": "dive",
       "offset": 0,
-      "map": "MAP_UNDERWATER2"
+      "map": "MAP_UNDERWATER_ROUTE126"
     }
   ],
   "object_events": [

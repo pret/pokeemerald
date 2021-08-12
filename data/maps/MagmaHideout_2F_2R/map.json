@@ -2,7 +2,7 @@
   "id": "MAP_MAGMA_HIDEOUT_2F_2R",
   "name": "MagmaHideout_2F_2R",
   "layout": "LAYOUT_MAGMA_HIDEOUT_2F_2R",
-  "music": "MUS_AJITO",
+  "music": "MUS_AQUA_MAGMA_HIDEOUT",
   "region_map_section": "MAPSEC_MAGMA_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_2F_2R_EventScript_MaxElixir",
+      "script": "MagmaHideout_2F_2R_EventScript_ItemMaxElixir",
       "flag": "FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAX_ELIXIR"
     },
     {

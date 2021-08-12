@@ -2,7 +2,7 @@
   "id": "MAP_MT_PYRE_3F",
   "name": "MtPyre_3F",
   "layout": "LAYOUT_MT_PYRE_3F",
-  "music": "MUS_M_DUNGON",
+  "music": "MUS_MT_PYRE",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

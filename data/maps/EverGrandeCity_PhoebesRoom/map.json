@@ -2,7 +2,7 @@
   "id": "MAP_EVER_GRANDE_CITY_PHOEBES_ROOM",
   "name": "EverGrandeCity_PhoebesRoom",
   "layout": "LAYOUT_EVER_GRANDE_CITY_PHOEBES_ROOM",
-  "music": "MUS_C_ROAD",
+  "music": "MUS_VICTORY_ROAD",
   "region_map_section": "MAPSEC_EVER_GRANDE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

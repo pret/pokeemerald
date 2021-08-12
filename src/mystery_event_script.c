@@ -9,7 +9,6 @@
 #include "pokemon.h"
 #include "pokemon_size_record.h"
 #include "script.h"
-#include "constants/species.h"
 #include "strings.h"
 #include "string_util.h"
 #include "text.h"
@@ -326,7 +325,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     }
     else
     {
-        memcpy(&gPlayerParty[5], pokemonPtr, sizeof(struct Pokemon));
+        memcpy(&gPlayerParty[PARTY_SIZE - 1], pokemonPtr, sizeof(struct Pokemon));
         memcpy(&mail, mailPtr, sizeof(struct MailStruct));
 
         if (species != SPECIES_EGG)
@@ -336,9 +335,9 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
             GetSetPokedexFlag(pokedexNum, FLAG_SET_CAUGHT);
         }
 
-        heldItem = GetMonData(&gPlayerParty[5], MON_DATA_HELD_ITEM);
+        heldItem = GetMonData(&gPlayerParty[PARTY_SIZE - 1], MON_DATA_HELD_ITEM);
         if (ItemIsMail(heldItem))
-            GiveMailToMon2(&gPlayerParty[5], &mail);
+            GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &mail);
         CompactPartySlots();
         CalculatePlayerPartyCount();
         StringExpandPlaceholders(gStringVar4, gText_MysteryGiftSentOver);
@@ -351,7 +350,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
     u32 data = ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0];
-    memcpy((void*)(gSaveBlock2Ptr) + 0xBEC, (void *)data, 0xBC);
+    memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, (void *)data, sizeof(gSaveBlock2Ptr->frontier.ereaderTrainer));
     ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gText_MysteryGiftNewTrainer);
     ctx->data[2] = 2;

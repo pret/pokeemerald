@@ -2,7 +2,7 @@
   "id": "MAP_SLATEPORT_CITY_NAME_RATERS_HOUSE",
   "name": "SlateportCity_NameRatersHouse",
   "layout": "LAYOUT_HOUSE_WITH_BED",
-  "music": "MUS_FINECITY",
+  "music": "MUS_SLATEPORT",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

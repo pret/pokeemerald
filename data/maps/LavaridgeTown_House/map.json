@@ -2,7 +2,7 @@
   "id": "MAP_LAVARIDGE_TOWN_HOUSE",
   "name": "LavaridgeTown_House",
   "layout": "LAYOUT_HOUSE3",
-  "music": "MUS_MACHI_S4",
+  "music": "MUS_OLDALE",
   "region_map_section": "MAPSEC_LAVARIDGE_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

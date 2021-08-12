@@ -2,7 +2,7 @@
   "id": "MAP_RECORD_CORNER",
   "name": "RecordCorner",
   "layout": "LAYOUT_RECORD_CORNER",
-  "music": "MUS_RAINBOW",
+  "music": "MUS_EVER_GRANDE",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

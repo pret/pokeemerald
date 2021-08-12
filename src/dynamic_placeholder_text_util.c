@@ -32,7 +32,7 @@ u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
-        if (*src != CHAR_SPECIAL_F7)
+        if (*src != CHAR_DYNAMIC)
         {
             *dest++ = *src++;
         }

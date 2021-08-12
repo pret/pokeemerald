@@ -2,7 +2,7 @@
   "id": "MAP_TRAINER_HILL_3F",
   "name": "TrainerHill_3F",
   "layout": "LAYOUT_TRAINER_HILL_3F",
-  "music": "MUS_B_TOWER",
+  "music": "MUS_B_TOWER_RS",
   "region_map_section": "MAPSEC_TRAINER_HILL",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

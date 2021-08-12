@@ -11,6 +11,7 @@
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
 #include "battle_bg.h"
+#include "pokeball.h"
 
 #define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
@@ -39,16 +40,17 @@
 #define MAX_TRAINER_ITEMS 4
 
 // array entries for battle communication
-#define MULTIUSE_STATE          0x0
-#define CURSOR_POSITION         0x1
-#define TASK_ID                 0x1 // task Id and cursor position share the same field
-#define SPRITES_INIT_STATE1     0x1 // shares the Id as well
-#define SPRITES_INIT_STATE2     0x2
-#define MOVE_EFFECT_BYTE        0x3
-#define ACTIONS_CONFIRMED_COUNT 0x4
-#define MULTISTRING_CHOOSER     0x5
-#define MSG_DISPLAY             0x7
-#define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
+#define MULTIUSE_STATE          0
+#define CURSOR_POSITION         1
+#define TASK_ID                 1 // task Id and cursor position share the same field
+#define SPRITES_INIT_STATE1     1 // shares the Id as well
+#define SPRITES_INIT_STATE2     2
+#define MOVE_EFFECT_BYTE        3
+#define ACTIONS_CONFIRMED_COUNT 4
+#define MULTISTRING_CHOOSER     5
+#define MISS_TYPE               6
+#define MSG_DISPLAY             7
+#define BATTLE_COMMUNICATION_ENTRIES_COUNT  8
 
 #define MOVE_TARGET_SELECTED            0x0
 #define MOVE_TARGET_DEPENDS             0x1
@@ -132,14 +134,14 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered:1;
-    u8 lightningRodRedirected:1;
-    u8 restoredBattlerSprite: 1;
-    u8 intimidatedMon:1;
-    u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
-    u8 flag40:1;
-    u8 focusBanded:1;
+    u32 statLowered:1;
+    u32 lightningRodRedirected:1;
+    u32 restoredBattlerSprite: 1;
+    u32 intimidatedMon:1;
+    u32 traced:1;
+    u32 ppNotAffectedByPressure:1;
+    u32 flag40:1;
+    u32 focusBanded:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -254,8 +256,8 @@ struct BattleResults
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
-    u8 filler35[1];           // 0x35
-    u8 catchAttempts[11];     // 0x36
+    u8 filler35;           // 0x35
+    u8 catchAttempts[POKEBALL_COUNT - 1];     // 0x36 Doesn't include Master ball
 };
 
 struct BattleTv_Side
@@ -343,6 +345,15 @@ struct BattleTvMovePoints
     s16 points[2][PARTY_SIZE * 4];
 };
 
+struct LinkBattlerHeader
+{
+    u8 versionSignatureLo;
+    u8 versionSignatureHi;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -384,13 +395,13 @@ struct BattleStruct
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 unused_3[3];
-    u8 field_8B; // related to player's pokemon switching
+    u8 prevSelectedPartySlot;
     u8 unused_4[2];
     u8 stringMoveType;
     u8 expGetterBattlerId;
     u8 unused_5;
     u8 field_91; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
-    u8 field_92; // battle palace related
+    u8 palaceFlags; // First 4 bits are "is < 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
     u8 field_93; // related to choosing pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;
@@ -418,11 +429,10 @@ struct BattleStruct
     u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
-    u8 field_180; // weird field, used in battle_main.c, once accessed as an array of u32 overwriting the field below
-    u8 field_181;
-    u8 field_182;
-    u8 field_183;
-    struct BattleEnigmaBerry battleEnigmaBerry;
+    union {
+        struct LinkBattlerHeader linkBattlerHeader;
+        u32 battleVideo[2];
+    } multiBuffer;
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
@@ -493,7 +503,7 @@ struct BattleScripting
     u8 field_20;
     u8 reshowMainState;
     u8 reshowHelperState;
-    u8 field_23;
+    u8 levelUpHP;
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
     u8 specialTrainerBattleType;
@@ -522,15 +532,15 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId;
-    u8 field_9_x1:1;
-    u8 field_9_x2:1;
+    u8 introAnimActive:1;
+    u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
     u8 field_9_x20:1;
     u8 field_9_x40:1;
     u8 field_9_x80:1;
-    u8 field_A;
+    u8 numBallParticles;
     u8 field_B;
-    s16 field_C;
+    s16 ballSubpx;
     u8 field_E;
     u8 field_F;
 };
@@ -544,20 +554,20 @@ struct BattleHealthboxInfo
     u8 statusAnimActive:1; // x10
     u8 animFromTableActive:1; // x20
     u8 specialAnimActive:1; // x40
-    u8 flag_x80:1;
-    u8 field_1_x1:1;
+    u8 triedShinyMonAnim:1;
+    u8 finishedShinyMonAnim:1;
     u8 field_1_x1E:4;
-    u8 field_1_x20:1;
-    u8 field_1_x40:1;
-    u8 field_1_x80:1;
+    u8 bgmRestored:1;
+    u8 waitForCry:1;
+    u8 healthboxSlideInStarted:1;
     u8 healthboxBounceSpriteId;
     u8 battlerBounceSpriteId;
     u8 animationState;
-    u8 field_5;
+    u8 partyStatusDelayTimer;
     u8 matrixNum;
     u8 shadowSpriteId;
-    u8 field_8;
-    u8 field_9;
+    u8 soundTimer;
+    u8 introEndDelay;
     u8 field_A;
     u8 field_B;
 };
@@ -584,7 +594,11 @@ struct BattleSpriteData
 struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    void* sprites[4];
+    union
+    {
+	void* ptr[4];
+	u8* byte[4];
+    } sprites;
     struct SpriteTemplate templates[4];
     struct SpriteFrameImage field_74[4][4];
     u8 field_F4[0x80];
@@ -612,7 +626,7 @@ extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
-extern u32 gUnknown_02022FF4;
+extern u32 gUnusedFirstBattleVar1;
 extern u8 *gUnknown_0202305C;
 extern u8 *gUnknown_02023060;
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
@@ -662,7 +676,7 @@ extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;
 extern u32 gHitMarker;
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_0202428C;
+extern u8 gUnusedFirstBattleVar2;
 extern u16 gSideStatuses[2];
 extern struct SideTimer gSideTimers[2];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
@@ -695,8 +709,8 @@ extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
-extern struct BattleHealthboxInfo *gUnknown_020244D8;
-extern struct BattleHealthboxInfo *gUnknown_020244DC;
+extern struct BattleHealthboxInfo *gBattleControllerOpponentHealthboxData;
+extern struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData;
 extern u16 gBattleMovePower;
 extern u16 gMoveToLearn;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
@@ -709,6 +723,6 @@ extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
-extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
 #endif // GUARD_BATTLE_H

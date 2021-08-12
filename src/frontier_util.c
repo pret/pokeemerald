@@ -7,7 +7,7 @@
 #include "battle_tower.h"
 #include "field_specials.h"
 #include "battle.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "main.h"
 #include "window.h"
 #include "menu.h"
@@ -31,7 +31,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/frontier_util.h"
 #include "constants/trainers.h"
-#include "constants/species.h"
 #include "constants/game_stat.h"
 #include "constants/moves.h"
 #include "constants/items.h"
@@ -130,7 +129,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_RAIKOU,
                 .heldItem = ITEM_LUM_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MODEST,
                 .evs = {158, 0, 252, 100, 0, 0},
                 .moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_REFLECT, MOVE_REST},
@@ -138,7 +137,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_LATIOS,
                 .heldItem = ITEM_BRIGHT_POWDER,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_DRAGON_CLAW},
@@ -146,7 +145,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SNORLAX,
                 .heldItem = ITEM_CHESTO_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_ADAMANT,
                 .evs = {252, 252, 0, 0, 6, 0},
                 .moves = {MOVE_CURSE, MOVE_RETURN, MOVE_REST, MOVE_SHADOW_BALL},
@@ -187,7 +186,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SWAMPERT,
                 .heldItem = ITEM_LEFTOVERS,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_BRAVE,
                 .evs = {252, 252, 6, 0, 0, 0},
                 .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_MIRROR_COAT},
@@ -195,7 +194,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_METAGROSS,
                 .heldItem = ITEM_QUICK_CLAW,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_BRAVE,
                 .evs = {252, 252, 6, 0, 0, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
@@ -203,7 +202,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_LATIAS,
                 .heldItem = ITEM_CHESTO_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_REST},
@@ -244,7 +243,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_ARCANINE,
                 .heldItem = ITEM_WHITE_HERB,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_HASTY,
                 .evs = {6, 252, 252, 0, 0, 0},
                 .moves = {MOVE_OVERHEAT, MOVE_EXTREME_SPEED, MOVE_ROAR, MOVE_PROTECT},
@@ -252,7 +251,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SLAKING,
                 .heldItem = ITEM_SCOPE_LENS,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_HARDY,
                 .evs = {6, 252, 0, 252, 0, 0},
                 .moves = {MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN},
@@ -260,7 +259,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SUICUNE,
                 .heldItem = ITEM_KINGS_ROCK,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_HASTY,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_BLIZZARD, MOVE_SURF, MOVE_BITE, MOVE_CALM_MIND},
@@ -301,7 +300,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_UMBREON,
                 .heldItem = ITEM_CHESTO_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_CALM,
                 .evs = {252, 0, 0, 0, 252, 6},
                 .moves = {MOVE_DOUBLE_EDGE, MOVE_CONFUSE_RAY, MOVE_REST, MOVE_PSYCHIC},
@@ -309,7 +308,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_GENGAR,
                 .heldItem = ITEM_LEFTOVERS,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 0, 6, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_DESTINY_BOND},
@@ -317,7 +316,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_BRELOOM,
                 .heldItem = ITEM_LUM_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_JOLLY,
                 .evs = {6, 252, 0, 252, 0, 0},
                 .moves = {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_GIGA_DRAIN, MOVE_HEADBUTT},
@@ -332,7 +331,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_METANG,
                 .heldItem = ITEM_SITRUS_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_BRAVE,
                 .evs = {0, 252, 252, 0, 6, 0},
                 .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
@@ -340,7 +339,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SKARMORY,
                 .heldItem = ITEM_SITRUS_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_IMPISH,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
@@ -348,7 +347,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_AGGRON,
                 .heldItem = ITEM_SITRUS_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 0, 0, 252, 6},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
@@ -358,7 +357,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_METANG,
                 .heldItem = ITEM_SITRUS_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_BRAVE,
                 .evs = {0, 252, 252, 0, 6, 0},
                 .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
@@ -366,7 +365,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SKARMORY,
                 .heldItem = ITEM_SITRUS_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_IMPISH,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
@@ -374,7 +373,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_AGGRON,
                 .heldItem = ITEM_SITRUS_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 0, 0, 252, 6},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
@@ -415,7 +414,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_SEVIPER,
                 .heldItem = ITEM_FOCUS_BAND,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_BOLD,
                 .evs = {252, 0, 0, 0, 252, 6},
                 .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
@@ -423,7 +422,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_STEELIX,
                 .heldItem = ITEM_BRIGHT_POWDER,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_BRAVE,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_EXPLOSION, MOVE_SCREECH},
@@ -431,7 +430,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_GYARADOS,
                 .heldItem = ITEM_CHESTO_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_ADAMANT,
                 .evs = {252, 6, 0, 0, 0, 252},
                 .moves = {MOVE_DRAGON_DANCE, MOVE_RETURN, MOVE_ROAR, MOVE_REST},
@@ -472,7 +471,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_ARTICUNO,
                 .heldItem = ITEM_SCOPE_LENS,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_BLIZZARD, MOVE_WATER_PULSE, MOVE_AERIAL_ACE, MOVE_REFLECT},
@@ -480,7 +479,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_ZAPDOS,
                 .heldItem = ITEM_LUM_BERRY,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_THUNDER, MOVE_DETECT, MOVE_DRILL_PECK, MOVE_LIGHT_SCREEN},
@@ -488,7 +487,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             {
                 .species = SPECIES_MOLTRES,
                 .heldItem = ITEM_BRIGHT_POWDER,
-                .fixedIV = 31,
+                .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_FIRE_BLAST, MOVE_HYPER_BEAM, MOVE_AERIAL_ACE, MOVE_SAFEGUARD},
@@ -1514,9 +1513,9 @@ static void ShowLinkContestResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Smart, x, 89, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Tough, x, 105, TEXT_SPEED_FF, NULL);
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
     {
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->contestLinkResults[i][j], STR_CONV_MODE_RIGHT_ALIGN, 4);
             AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, (j * 38) + 64, (i * 16) + 41, TEXT_SPEED_FF, NULL);
@@ -1553,16 +1552,16 @@ static void CheckPutFrontierTVShowOnAir(void)
                 switch (battleMode)
                 {
                 case FRONTIER_MODE_SINGLES:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 1);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_SINGLES);
                     break;
                 case FRONTIER_MODE_DOUBLES:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 2);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_DOUBLES);
                     break;
                 case FRONTIER_MODE_MULTIS:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 3);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_MULTIS);
                     break;
                 case FRONTIER_MODE_LINK_MULTIS:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 4);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_LINK_MULTIS);
                     break;
                 }
             }
@@ -1576,9 +1575,9 @@ static void CheckPutFrontierTVShowOnAir(void)
                 && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 5);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_DOME_SINGLES);
                 else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 6);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_DOME_DOUBLES);
             }
         }
         break;
@@ -1590,9 +1589,9 @@ static void CheckPutFrontierTVShowOnAir(void)
                 && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 11);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_PALACE_SINGLES);
                 else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 12);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_PALACE_DOUBLES);
             }
         }
         break;
@@ -1603,7 +1602,7 @@ static void CheckPutFrontierTVShowOnAir(void)
             if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] > 1
                 && ShouldAirFrontierTVShow())
             {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], 10);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], FRONTIER_SHOW_ARENA);
             }
         }
         break;
@@ -1616,9 +1615,9 @@ static void CheckPutFrontierTVShowOnAir(void)
                 && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 7);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_FACTORY_SINGLES);
                 else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 8);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_FACTORY_DOUBLES);
             }
         }
         break;
@@ -1629,7 +1628,7 @@ static void CheckPutFrontierTVShowOnAir(void)
             if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] > 1
                 && ShouldAirFrontierTVShow())
             {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], 9);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], FRONTIER_SHOW_PIKE);
             }
         }
         break;
@@ -1640,7 +1639,7 @@ static void CheckPutFrontierTVShowOnAir(void)
             if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > 1
                 && ShouldAirFrontierTVShow())
             {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], 13);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], FRONTIER_SHOW_PYRAMID);
             }
         }
         break;
@@ -2384,13 +2383,21 @@ void ClearRankingHallRecords(void)
 {
     s32 i, j, k;
 
+    // UB: Passing 0 as a pointer instead of a pointer holding a value of 0.
+#ifdef UBFIX
+    u8 emptyId[TRAINER_ID_LENGTH] = {0};
+    #define ZERO emptyId
+#else
+    #define ZERO 0
+#endif
+
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
         for (j = 0; j < 2; j++)
         {
             for (k = 0; k < 3; k++)
             {
-                CopyTrainerId(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+                CopyTrainerId(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, ZERO); 
                 gSaveBlock2Ptr->hallRecords1P[i][j][k].name[0] = EOS;
                 gSaveBlock2Ptr->hallRecords1P[i][j][k].winStreak = 0;
             }
@@ -2401,8 +2408,8 @@ void ClearRankingHallRecords(void)
     {
         for (k = 0; k < 3; k++)
         {
-            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id1, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
-            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id2, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id1, ZERO);
+            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id2, ZERO);
             gSaveBlock2Ptr->hallRecords2P[j][k].name1[0] = EOS;
             gSaveBlock2Ptr->hallRecords2P[j][k].name2[0] = EOS;
             gSaveBlock2Ptr->hallRecords2P[j][k].winStreak = 0;
@@ -2486,7 +2493,6 @@ void SetFrontierBrainObjEventGfx_2(void)
 
 #define FRONTIER_BRAIN_OTID 61226
 
-#ifdef NONMATCHING
 void CreateFrontierBrainPokemon(void)
 {
     s32 i, j;
@@ -2512,8 +2518,11 @@ void CreateFrontierBrainPokemon(void)
 
         do
         {
-            j = Random32();
-        } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j) || sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
+            do
+            {
+                j = Random32(); //should just be one while loop, but that doesn't match
+            } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j));
+        } while (sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
         CreateMon(&gEnemyParty[monPartyId],
                   sFrontierBrainsMons[facility][symbol][i].species,
                   monLevel,
@@ -2535,243 +2544,6 @@ void CreateFrontierBrainPokemon(void)
         monPartyId++;
     }
 }
-#else
-NAKED
-void CreateFrontierBrainPokemon(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x44\n\
-    ldr r0, =0x000040cf\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    str r0, [sp, 0x20]\n\
-    bl GetFronterBrainSymbol\n\
-    str r0, [sp, 0x24]\n\
-    ldr r0, [sp, 0x20]\n\
-    cmp r0, 0x1\n\
-    bne _081A4E44\n\
-    ldr r0, =0x000003fe\n\
-    bl TrainerIdToDomeTournamentId\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl GetDomeTrainerSelectedMons\n\
-    adds r4, r0, 0\n\
-    b _081A4E46\n\
-    .pool\n\
-_081A4E44:\n\
-    movs r4, 0x7\n\
-_081A4E46:\n\
-    bl ZeroEnemyPartyMons\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x18]\n\
-    bl SetFacilityPtrsGetLevel\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x1C]\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x14]\n\
-_081A4E5C:\n\
-    movs r0, 0x1\n\
-    ands r0, r4\n\
-    asrs r4, 1\n\
-    str r4, [sp, 0x30]\n\
-    ldr r3, [sp, 0x14]\n\
-    adds r3, 0x1\n\
-    str r3, [sp, 0x28]\n\
-    cmp r0, 0\n\
-    bne _081A4E70\n\
-    b _081A4FC4\n\
-_081A4E70:\n\
-    ldr r4, [sp, 0x14]\n\
-    lsls r4, 2\n\
-    mov r9, r4\n\
-    ldr r0, [sp, 0x24]\n\
-    lsls r0, 4\n\
-    str r0, [sp, 0x38]\n\
-    ldr r1, [sp, 0x20]\n\
-    lsls r1, 4\n\
-    str r1, [sp, 0x34]\n\
-    ldr r2, [sp, 0x1C]\n\
-    lsls r2, 24\n\
-    str r2, [sp, 0x3C]\n\
-    ldr r3, [sp, 0x18]\n\
-    adds r3, 0x1\n\
-    str r3, [sp, 0x2C]\n\
-    ldr r0, [sp, 0x14]\n\
-    add r0, r9\n\
-    lsls r0, 2\n\
-    mov r8, r0\n\
-_081A4E96:\n\
-    bl Random\n\
-    adds r4, r0, 0\n\
-    bl Random\n\
-    lsls r4, 16\n\
-    lsrs r7, r4, 16\n\
-    lsls r0, 16\n\
-    orrs r7, r0\n\
-    ldr r0, =0x0000ef2a\n\
-    adds r1, r7, 0\n\
-    bl IsShinyOtIdPersonality\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _081A4E96\n\
-    ldr r4, [sp, 0x38]\n\
-    ldr r1, [sp, 0x24]\n\
-    subs r0, r4, r1\n\
-    lsls r5, r0, 2\n\
-    mov r2, r8\n\
-    adds r4, r2, r5\n\
-    ldr r3, [sp, 0x34]\n\
-    ldr r1, [sp, 0x20]\n\
-    subs r0, r3, r1\n\
-    lsls r6, r0, 3\n\
-    adds r4, r6\n\
-    ldr r2, =sFrontierBrainsMons\n\
-    adds r4, r2\n\
-    adds r0, r7, 0\n\
-    bl GetNatureFromPersonality\n\
-    ldrb r1, [r4, 0x5]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r1, r0\n\
-    bne _081A4E96\n\
-    ldr r4, [sp, 0x18]\n\
-    movs r0, 0x64\n\
-    adds r3, r4, 0\n\
-    muls r3, r0\n\
-    mov r8, r3\n\
-    ldr r1, =gEnemyParty\n\
-    add r1, r8\n\
-    mov r10, r1\n\
-    ldr r4, [sp, 0x14]\n\
-    add r4, r9\n\
-    lsls r4, 2\n\
-    adds r0, r4, r5\n\
-    adds r0, r6\n\
-    ldr r2, =sFrontierBrainsMons\n\
-    adds r0, r2\n\
-    ldrh r1, [r0]\n\
-    ldr r3, [sp, 0x3C]\n\
-    lsrs r2, r3, 24\n\
-    ldrb r3, [r0, 0x4]\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    str r7, [sp, 0x4]\n\
-    str r0, [sp, 0x8]\n\
-    ldr r0, =0x0000ef2a\n\
-    str r0, [sp, 0xC]\n\
-    mov r0, r10\n\
-    bl CreateMon\n\
-    ldr r0, =sFrontierBrainsMons\n\
-    adds r5, r0\n\
-    adds r5, r6, r5\n\
-    adds r4, r5, r4\n\
-    adds r4, 0x2\n\
-    mov r0, r10\n\
-    movs r1, 0xC\n\
-    adds r2, r4, 0\n\
-    bl SetMonData\n\
-    movs r7, 0\n\
-    mov r6, r8\n\
-    ldr r3, =gEnemyParty\n\
-_081A4F32:\n\
-    adds r1, r7, 0\n\
-    adds r1, 0x1A\n\
-    ldr r0, [sp, 0x14]\n\
-    add r0, r9\n\
-    lsls r4, r0, 2\n\
-    adds r2, r5, r4\n\
-    adds r0, r7, 0x6\n\
-    adds r2, r0\n\
-    adds r0, r6, r3\n\
-    str r3, [sp, 0x40]\n\
-    bl SetMonData\n\
-    adds r7, 0x1\n\
-    ldr r3, [sp, 0x40]\n\
-    cmp r7, 0x5\n\
-    ble _081A4F32\n\
-    movs r1, 0xFF\n\
-    add r0, sp, 0x10\n\
-    strb r1, [r0]\n\
-    movs r7, 0\n\
-    ldr r1, [sp, 0x18]\n\
-    movs r2, 0x64\n\
-    adds r6, r1, 0\n\
-    muls r6, r2\n\
-    ldr r3, =sFrontierBrainsMons + 0xC\n\
-    mov r8, r3\n\
-    ldr r3, =gEnemyParty\n\
-    adds r5, r4, 0\n\
-_081A4F6A:\n\
-    ldr r4, [sp, 0x38]\n\
-    ldr r0, [sp, 0x24]\n\
-    subs r1, r4, r0\n\
-    lsls r1, 2\n\
-    adds r1, r5, r1\n\
-    ldr r2, [sp, 0x34]\n\
-    ldr r4, [sp, 0x20]\n\
-    subs r0, r2, r4\n\
-    lsls r0, 3\n\
-    adds r1, r0\n\
-    add r1, r8\n\
-    ldrh r4, [r1]\n\
-    lsls r2, r7, 24\n\
-    lsrs r2, 24\n\
-    adds r0, r6, r3\n\
-    adds r1, r4, 0\n\
-    str r3, [sp, 0x40]\n\
-    bl SetMonMoveSlot\n\
-    ldr r3, [sp, 0x40]\n\
-    cmp r4, 0xDA\n\
-    bne _081A4F9C\n\
-    movs r1, 0\n\
-    add r0, sp, 0x10\n\
-    strb r1, [r0]\n\
-_081A4F9C:\n\
-    adds r5, 0x2\n\
-    adds r7, 0x1\n\
-    cmp r7, 0x3\n\
-    ble _081A4F6A\n\
-    ldr r0, [sp, 0x18]\n\
-    movs r1, 0x64\n\
-    adds r4, r0, 0\n\
-    muls r4, r1\n\
-    ldr r0, =gEnemyParty\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x20\n\
-    add r2, sp, 0x10\n\
-    bl SetMonData\n\
-    adds r0, r4, 0\n\
-    bl CalculateMonStats\n\
-    ldr r2, [sp, 0x2C]\n\
-    str r2, [sp, 0x18]\n\
-_081A4FC4:\n\
-    ldr r4, [sp, 0x30]\n\
-    ldr r3, [sp, 0x28]\n\
-    str r3, [sp, 0x14]\n\
-    cmp r3, 0x2\n\
-    bgt _081A4FD0\n\
-    b _081A4E5C\n\
-_081A4FD0:\n\
-    add sp, 0x44\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-");
-}
-#endif
 
 u16 GetFrontierBrainMonSpecies(u8 monId)
 {

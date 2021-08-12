@@ -8,7 +8,6 @@
 #include "frontier_util.h"
 #include "battle_tower.h"
 #include "random.h"
-#include "constants/species.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_frontier.h"
@@ -26,8 +25,8 @@ static void InitFactoryChallenge(void);
 static void GetBattleFactoryData(void);
 static void SetBattleFactoryData(void);
 static void SaveFactoryChallenge(void);
-static void nullsub_75(void);
-static void nullsub_123(void);
+static void FactoryDummy1(void);
+static void FactoryDummy2(void);
 static void SelectInitialRentalMons(void);
 static void SwapRentalMons(void);
 static void SetPerformedRentalSwap(void);
@@ -39,11 +38,19 @@ static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
 static void GetOpponentBattleStyle(void);
 static void RestorePlayerPartyHeldItems(void);
-static u16 GetMonSetId(u8 lvlMode, u8 challengeNum, bool8 arg2);
+static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange);
 static u8 GetMoveBattleStyle(u16 move);
 
-// Const rom data.
-static const u8 sRequiredMoveCounts[] = {3, 3, 3, 2, 2, 2, 2};
+// Number of moves needed on the team to be considered using a certain battle style
+static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
+    [FACTORY_STYLE_PREPARATION - 1]   = 3, 
+    [FACTORY_STYLE_SLOW_STEADY - 1]   = 3, 
+    [FACTORY_STYLE_ENDURANCE - 1]     = 3, 
+    [FACTORY_STYLE_HIGH_RISK - 1]     = 2, 
+    [FACTORY_STYLE_WEAKENING - 1]     = 2, 
+    [FACTORY_STYLE_UNPREDICTABLE - 1] = 2, 
+    [FACTORY_STYLE_WEATHER - 1]       = 2
+};
 
 static const u16 sMoves_TotalPreparation[] =
 {
@@ -120,8 +127,8 @@ static void (* const sBattleFactoryFunctions[])(void) =
     [BATTLE_FACTORY_FUNC_GET_DATA]               = GetBattleFactoryData,
     [BATTLE_FACTORY_FUNC_SET_DATA]               = SetBattleFactoryData,
     [BATTLE_FACTORY_FUNC_SAVE]                   = SaveFactoryChallenge,
-    [BATTLE_FACTORY_FUNC_NULL]                   = nullsub_75,
-    [BATTLE_FACTORY_FUNC_NULL2]                  = nullsub_123,
+    [BATTLE_FACTORY_FUNC_NULL]                   = FactoryDummy1,
+    [BATTLE_FACTORY_FUNC_NULL2]                  = FactoryDummy2,
     [BATTLE_FACTORY_FUNC_SELECT_RENT_MONS]       = SelectInitialRentalMons,
     [BATTLE_FACTORY_FUNC_SWAP_RENT_MONS]         = SwapRentalMons,
     [BATTLE_FACTORY_FUNC_SET_SWAPPED]            = SetPerformedRentalSwap,
@@ -159,24 +166,27 @@ static const u8 sFixedIVTable[][2] =
     {31, 31},
 };
 
-static const u16 sMonsToChooseFrom[][2] =
+static const u16 sInitialRentalMonRanges[][2] =
 {
-    {0x006e, 0x00c7},
-    {0x00a2, 0x010a},
-    {0x010b, 0x0173},
-    {0x0174, 0x01d3},
-    {0x01d4, 0x0233},
-    {0x0234, 0x0293},
-    {0x0294, 0x02f3},
-    {0x0174, 0x0351},
-    {0x0174, 0x01d3},
-    {0x01d4, 0x0233},
-    {0x0234, 0x0293},
-    {0x0294, 0x02f3},
-    {0x0174, 0x0371},
-    {0x0174, 0x0371},
-    {0x0174, 0x0371},
-    {0x0174, 0x0371},
+    // Level 50
+    {FRONTIER_MON_GRIMER,     FRONTIER_MON_FURRET_1},   // 110 - 199
+    {FRONTIER_MON_DELCATTY_1, FRONTIER_MON_CLOYSTER_1}, // 162 - 266
+    {FRONTIER_MON_DELCATTY_2, FRONTIER_MON_CLOYSTER_2}, // 267 - 371
+    {FRONTIER_MON_DUGTRIO_1,  FRONTIER_MON_SLAKING_1},  // 372 - 467
+    {FRONTIER_MON_DUGTRIO_2,  FRONTIER_MON_SLAKING_2},  // 468 - 563
+    {FRONTIER_MON_DUGTRIO_3,  FRONTIER_MON_SLAKING_3},  // 564 - 659
+    {FRONTIER_MON_DUGTRIO_4,  FRONTIER_MON_SLAKING_4},  // 660 - 755
+    {FRONTIER_MON_DUGTRIO_1,  FRONTIER_MONS_HIGH_TIER}, // 372 - 849
+
+    // Open level
+    {FRONTIER_MON_DUGTRIO_1, FRONTIER_MON_SLAKING_1}, // 372 - 467
+    {FRONTIER_MON_DUGTRIO_2, FRONTIER_MON_SLAKING_2}, // 468 - 563
+    {FRONTIER_MON_DUGTRIO_3, FRONTIER_MON_SLAKING_3}, // 564 - 659
+    {FRONTIER_MON_DUGTRIO_4, FRONTIER_MON_SLAKING_4}, // 660 - 755
+    {FRONTIER_MON_DUGTRIO_1, NUM_FRONTIER_MONS - 1},  // 372 - 881
+    {FRONTIER_MON_DUGTRIO_1, NUM_FRONTIER_MONS - 1},  // 372 - 881
+    {FRONTIER_MON_DUGTRIO_1, NUM_FRONTIER_MONS - 1},  // 372 - 881
+    {FRONTIER_MON_DUGTRIO_1, NUM_FRONTIER_MONS - 1},  // 372 - 881
 };
 
 // code
@@ -205,7 +215,7 @@ static void InitFactoryChallenge(void)
     for (i = 0; i < 6; i++)
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = 0xFFFF;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
-        gUnknown_03006298[i] = 0xFFFF;
+        gFrontierTempParty[i] = 0xFFFF;
 
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
@@ -264,12 +274,12 @@ static void SaveFactoryChallenge(void)
     SaveGameFrontier();
 }
 
-static void nullsub_75(void)
+static void FactoryDummy1(void)
 {
 
 }
 
-static void nullsub_123(void)
+static void FactoryDummy2(void)
 {
 
 }
@@ -320,24 +330,24 @@ static void GenerateOpponentMons(void)
     i = 0;
     while (i != FRONTIER_PARTY_SIZE)
     {
-        u16 monSetId = GetMonSetId(lvlMode, challengeNum, FALSE);
-        if (gFacilityTrainerMons[monSetId].species == SPECIES_UNOWN)
+        u16 monId = GetFactoryMonId(lvlMode, challengeNum, FALSE);
+        if (gFacilityTrainerMons[monId].species == SPECIES_UNOWN)
             continue;
 
         for (j = 0; j < 6; j++)
         {
-            if (gFacilityTrainerMons[monSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
+            if (gFacilityTrainerMons[monId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
                 break;
         }
         if (j != 6)
             continue;
 
-        if (lvlMode == FRONTIER_LVL_50 && monSetId > FRONTIER_MONS_HIGH_TIER)
+        if (lvlMode == FRONTIER_LVL_50 && monId > FRONTIER_MONS_HIGH_TIER)
             continue;
 
         for (k = firstMonId; k < firstMonId + i; k++)
         {
-            if (species[k] == gFacilityTrainerMons[monSetId].species)
+            if (species[k] == gFacilityTrainerMons[monId].species)
                 break;
         }
         if (k != firstMonId + i)
@@ -345,15 +355,15 @@ static void GenerateOpponentMons(void)
 
         for (k = firstMonId; k < firstMonId + i; k++)
         {
-            if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+            if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
                 break;
         }
         if (k != firstMonId + i)
             continue;
 
-        species[i] = gFacilityTrainerMons[monSetId].species;
-        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
-        gUnknown_03006298[i] = monSetId;
+        species[i] = gFacilityTrainerMons[monId].species;
+        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId];
+        gFrontierTempParty[i] = monId;
         i++;
     }
 }
@@ -374,11 +384,11 @@ static void SetRentalsToOpponentParty(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId = gUnknown_03006298[i];
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
-        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[gUnknown_03006298[i]].itemTableId]);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId = gFrontierTempParty[i];
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
+        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[gFrontierTempParty[i]].itemTableId]);
     }
 }
 
@@ -388,7 +398,7 @@ static void SetPlayerAndOpponentParties(void)
     int count = 0;
     u8 bits = 0;
     u8 monLevel;
-    u16 monSetId;
+    u16 monId;
     u16 evs;
     u8 ivs;
     u8 friendship;
@@ -412,17 +422,17 @@ static void SetPlayerAndOpponentParties(void)
         ZeroPlayerPartyMons();
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-            monSetId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+            monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
             ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
             CreateMon(&gPlayerParty[i],
-                      gFacilityTrainerMons[monSetId].species,
+                      gFacilityTrainerMons[monId].species,
                       monLevel,
                       ivs,
                       TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
                       OT_ID_PLAYER_ID, 0);
 
             count = 0;
-            bits = gFacilityTrainerMons[monSetId].evSpread;
+            bits = gFacilityTrainerMons[monId].evSpread;
             for (j = 0; j < NUM_STATS; bits >>= 1, j++)
             {
                 if (bits & 1)
@@ -433,16 +443,16 @@ static void SetPlayerAndOpponentParties(void)
             bits = 1;
             for (j = 0; j < NUM_STATS; bits <<= 1, j++)
             {
-                if (gFacilityTrainerMons[monSetId].evSpread & bits)
+                if (gFacilityTrainerMons[monId].evSpread & bits)
                     SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
             }
 
             CalculateMonStats(&gPlayerParty[i]);
             friendship = 0;
             for (k = 0; k < MAX_MON_MOVES; k++)
-                SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monSetId].moves[k], k);
+                SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monId].moves[k], k);
             SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
-            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
             SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum);
         }
     }
@@ -453,17 +463,17 @@ static void SetPlayerAndOpponentParties(void)
     case 2:
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-            monSetId = gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId;
-            ivs = gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs;
+            monId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
+            ivs = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
             CreateMon(&gEnemyParty[i],
-                      gFacilityTrainerMons[monSetId].species,
+                      gFacilityTrainerMons[monId].species,
                       monLevel,
                       ivs,
-                      TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality,
+                      TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality,
                       OT_ID_PLAYER_ID, 0);
 
             count = 0;
-            bits = gFacilityTrainerMons[monSetId].evSpread;
+            bits = gFacilityTrainerMons[monId].evSpread;
             for (j = 0; j < NUM_STATS; bits >>= 1, j++)
             {
                 if (bits & 1)
@@ -474,15 +484,15 @@ static void SetPlayerAndOpponentParties(void)
             bits = 1;
             for (j = 0; j < NUM_STATS; bits <<= 1, j++)
             {
-                if (gFacilityTrainerMons[monSetId].evSpread & bits)
+                if (gFacilityTrainerMons[monId].evSpread & bits)
                     SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &evs);
             }
 
             CalculateMonStats(&gEnemyParty[i]);
             for (k = 0; k < MAX_MON_MOVES; k++)
-                SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monSetId].moves[k], k);
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
-            SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityNum);
+                SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monId].moves[k], k);
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+            SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum);
         }
         break;
     }
@@ -497,8 +507,8 @@ static void GenerateInitialRentalMons(void)
     u8 challengeNum;
     u8 factoryLvlMode;
     u8 factoryBattleMode;
-    u8 var_40;
-    u16 monSetId;
+    u8 rentalRank;
+    u16 monId;
     u16 currSpecies;
     u16 species[PARTY_SIZE];
     u16 monIds[PARTY_SIZE];
@@ -530,30 +540,30 @@ static void GenerateInitialRentalMons(void)
         factoryLvlMode = FRONTIER_LVL_50;
         firstMonId = 0;
     }
-    var_40 = GetNumPastRentalsRank(factoryBattleMode, factoryLvlMode);
+    rentalRank = GetNumPastRentalsRank(factoryBattleMode, factoryLvlMode);
 
     currSpecies = SPECIES_NONE;
     i = 0;
     while (i != PARTY_SIZE)
     {
-        if (i < var_40)
-            monSetId = GetMonSetId(factoryLvlMode, challengeNum, TRUE);
+        if (i < rentalRank) // The more times the player has rented, the more initial rentals are generated from a better set of pokemon
+            monId = GetFactoryMonId(factoryLvlMode, challengeNum, TRUE);
         else
-            monSetId = GetMonSetId(factoryLvlMode, challengeNum, FALSE);
+            monId = GetFactoryMonId(factoryLvlMode, challengeNum, FALSE);
 
-        if (gFacilityTrainerMons[monSetId].species == SPECIES_UNOWN)
+        if (gFacilityTrainerMons[monId].species == SPECIES_UNOWN)
             continue;
 
         // Cannot have two pokemon of the same species.
         for (j = firstMonId; j < firstMonId + i; j++)
         {
-            u16 monId = monIds[j];
-            if (monId == monSetId)
+            u16 existingMonId = monIds[j];
+            if (existingMonId == monId)
                 break;
-            if (species[j] == gFacilityTrainerMons[monSetId].species)
+            if (species[j] == gFacilityTrainerMons[monId].species)
             {
                 if (currSpecies == SPECIES_NONE)
-                    currSpecies = gFacilityTrainerMons[monSetId].species;
+                    currSpecies = gFacilityTrainerMons[monId].species;
                 else
                     break;
             }
@@ -564,9 +574,9 @@ static void GenerateInitialRentalMons(void)
         // Cannot have two same held items.
         for (j = firstMonId; j < firstMonId + i; j++)
         {
-            if (heldItems[j] != 0 && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+            if (heldItems[j] != 0 && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
             {
-                if (gFacilityTrainerMons[monSetId].species == currSpecies)
+                if (gFacilityTrainerMons[monId].species == currSpecies)
                     currSpecies = SPECIES_NONE;
                 break;
             }
@@ -574,47 +584,66 @@ static void GenerateInitialRentalMons(void)
         if (j != firstMonId + i)
             continue;
 
-        gSaveBlock2Ptr->frontier.rentalMons[i].monId = monSetId;
-        species[i] = gFacilityTrainerMons[monSetId].species;
-        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
-        monIds[i] = monSetId;
+        gSaveBlock2Ptr->frontier.rentalMons[i].monId = monId;
+        species[i] = gFacilityTrainerMons[monId].species;
+        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId];
+        monIds[i] = monId;
         i++;
     }
 }
 
+// Determines if the upcoming opponent has a single most-common
+// type in its party. If there are two different types that are
+// tied, then the opponent is deemed to have no preferred type,
+// and NUMBER_OF_MON_TYPES is the result.
 static void GetOpponentMostCommonMonType(void)
 {
     u8 i;
-    u8 typesCount[NUMBER_OF_MON_TYPES];
-    u8 usedType[2];
+    u8 typeCounts[NUMBER_OF_MON_TYPES];
+    u8 mostCommonTypes[2];
 
     gFacilityTrainerMons = gBattleFrontierMons;
-    for (i = 0; i < NUMBER_OF_MON_TYPES; i++)
-        typesCount[i] = 0;
+
+    // Count the number of times each type occurs in the opponent's party.
+    for (i = TYPE_NORMAL; i < NUMBER_OF_MON_TYPES; i++)
+        typeCounts[i] = 0;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        u32 species = gFacilityTrainerMons[gUnknown_03006298[i]].species;
-
-        typesCount[gBaseStats[species].type1]++;
+        u32 species = gFacilityTrainerMons[gFrontierTempParty[i]].species;
+        typeCounts[gBaseStats[species].type1]++;
         if (gBaseStats[species].type1 != gBaseStats[species].type2)
-            typesCount[gBaseStats[species].type2]++;
+            typeCounts[gBaseStats[species].type2]++;
     }
 
-    usedType[0] = 0;
-    usedType[1] = 0;
-    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
+    // Determine which are the two most-common types.
+    // The second most-common type is only updated if
+    // its count is equal to the most-common type.
+    mostCommonTypes[0] = TYPE_NORMAL;
+    mostCommonTypes[1] = TYPE_NORMAL;
+    for (i = TYPE_FIGHTING; i < NUMBER_OF_MON_TYPES; i++)
     {
-        if (typesCount[usedType[0]] < typesCount[i])
-            usedType[0] = i;
-        else if (typesCount[usedType[0]] == typesCount[i])
-            usedType[1] = i;
+        if (typeCounts[mostCommonTypes[0]] < typeCounts[i])
+            mostCommonTypes[0] = i;
+        else if (typeCounts[mostCommonTypes[0]] == typeCounts[i])
+            mostCommonTypes[1] = i;
     }
 
-    gSpecialVar_Result = gSpecialVar_Result; // Needed to match. Don't ask me why.
-    if (typesCount[usedType[0]] != 0 && (typesCount[usedType[0]] > typesCount[usedType[1]] || usedType[0] == usedType[1]))
-        gSpecialVar_Result = usedType[0];
+    if (typeCounts[mostCommonTypes[0]] != 0)
+    {
+        // The most-common type must be strictly greater than
+        // the second-most-common type, or the top two must be
+        // the same type.
+        if (typeCounts[mostCommonTypes[0]] > typeCounts[mostCommonTypes[1]])
+            gSpecialVar_Result = mostCommonTypes[0];
+        else if (mostCommonTypes[0] == mostCommonTypes[1])
+            gSpecialVar_Result = mostCommonTypes[0];
+        else
+            gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+    }
     else
+    {
         gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+    }
 }
 
 static void GetOpponentBattleStyle(void)
@@ -629,15 +658,15 @@ static void GetOpponentBattleStyle(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        u16 monSetId = gUnknown_03006298[i];
+        u16 monId = gFrontierTempParty[i];
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            u8 battleStyle = GetMoveBattleStyle(gFacilityTrainerMons[monSetId].moves[j]);
+            u8 battleStyle = GetMoveBattleStyle(gFacilityTrainerMons[monId].moves[j]);
             stylePoints[battleStyle]++;
         }
     }
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FACTORY_STYLE_NONE;
     for (i = 1; i < FACTORY_NUM_STYLES; i++)
     {
         if (stylePoints[i] >= sRequiredMoveCounts[i - 1])
@@ -724,16 +753,16 @@ void FillFactoryBrainParty(void)
 
     while (i != FRONTIER_PARTY_SIZE)
     {
-        u16 monSetId = GetMonSetId(lvlMode, challengeNum, FALSE);
+        u16 monId = GetFactoryMonId(lvlMode, challengeNum, FALSE);
 
-        if (gFacilityTrainerMons[monSetId].species == SPECIES_UNOWN)
+        if (gFacilityTrainerMons[monId].species == SPECIES_UNOWN)
             continue;
-        if (monLevel == 50 && monSetId > FRONTIER_MONS_HIGH_TIER)
+        if (monLevel == 50 && monId > FRONTIER_MONS_HIGH_TIER)
             continue;
 
         for (j = 0; j < 6; j++)
         {
-            if (monSetId == gSaveBlock2Ptr->frontier.rentalMons[j].monId)
+            if (monId == gSaveBlock2Ptr->frontier.rentalMons[j].monId)
                 break;
         }
         if (j != 6)
@@ -741,7 +770,7 @@ void FillFactoryBrainParty(void)
 
         for (k = 0; k < i; k++)
         {
-            if (species[k] == gFacilityTrainerMons[monSetId].species)
+            if (species[k] == gFacilityTrainerMons[monId].species)
                 break;
         }
         if (k != i)
@@ -749,35 +778,35 @@ void FillFactoryBrainParty(void)
 
         for (k = 0; k < i; k++)
         {
-            if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+            if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
                 break;
         }
         if (k != i)
             continue;
 
-        species[i] = gFacilityTrainerMons[monSetId].species;
-        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
+        species[i] = gFacilityTrainerMons[monId].species;
+        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[i],
-                                             gFacilityTrainerMons[monSetId].species,
+                                             gFacilityTrainerMons[monId].species,
                                              monLevel,
-                                             gFacilityTrainerMons[monSetId].nature,
+                                             gFacilityTrainerMons[monId].nature,
                                              fixedIV,
-                                             gFacilityTrainerMons[monSetId].evSpread,
+                                             gFacilityTrainerMons[monId].evSpread,
                                              otId);
 
         friendship = 0;
         for (k = 0; k < MAX_MON_MOVES; k++)
-            SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monSetId].moves[k], k);
+            SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monId].moves[k], k);
         SetMonData(&gEnemyParty[i], MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
         i++;
     }
 }
 
-static u16 GetMonSetId(u8 lvlMode, u8 challengeNum, bool8 arg2)
+static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange)
 {
-    u16 range, monSetId;
-    u16 adder;
+    u16 numMons, monId;
+    u16 adder; // Used to skip past early mons for open level
 
     if (lvlMode == FRONTIER_LVL_50)
         adder = 0;
@@ -786,30 +815,31 @@ static u16 GetMonSetId(u8 lvlMode, u8 challengeNum, bool8 arg2)
 
     if (challengeNum < 7)
     {
-        if (arg2)
+        if (useBetterRange)
         {
-            range = (sMonsToChooseFrom[adder + challengeNum + 1][1] - sMonsToChooseFrom[adder + challengeNum + 1][0]) + 1;
-            monSetId = Random() % range;
-            monSetId += sMonsToChooseFrom[adder + challengeNum + 1][0];
+            numMons = (sInitialRentalMonRanges[adder + challengeNum + 1][1] - sInitialRentalMonRanges[adder + challengeNum + 1][0]) + 1;
+            monId = Random() % numMons;
+            monId += sInitialRentalMonRanges[adder + challengeNum + 1][0];
         }
         else
         {
-            range = (sMonsToChooseFrom[adder + challengeNum][1] - sMonsToChooseFrom[adder + challengeNum][0]) + 1;
-            monSetId = Random() % range;
-            monSetId += sMonsToChooseFrom[adder + challengeNum][0];
+            numMons = (sInitialRentalMonRanges[adder + challengeNum][1] - sInitialRentalMonRanges[adder + challengeNum][0]) + 1;
+            monId = Random() % numMons;
+            monId += sInitialRentalMonRanges[adder + challengeNum][0];
         }
     }
     else
     {
-        u16 num = challengeNum;
-        if (num != 7)
-            num = 7;
-        range = (sMonsToChooseFrom[adder + num][1] - sMonsToChooseFrom[adder + num][0]) + 1;
-        monSetId = Random() % range;
-        monSetId += sMonsToChooseFrom[adder + num][0];
+        u16 challenge = challengeNum;
+        if (challenge != 7)
+            challenge = 7; // why bother assigning it above at all
+
+        numMons = (sInitialRentalMonRanges[adder + challenge][1] - sInitialRentalMonRanges[adder + challenge][0]) + 1;
+        monId = Random() % numMons;
+        monId += sInitialRentalMonRanges[adder + challenge][0];
     }
 
-    return monSetId;
+    return monId;
 }
 
 u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode)

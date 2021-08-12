@@ -61,13 +61,13 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
     }
 
     // Take away Softboiled user's health first (-1)
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
     PartyMenuModifyHP(taskId, userPartyId, -1, GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP)/5, Task_SoftboiledRestoreHealth);
 }
 
 static void Task_SoftboiledRestoreHealth(u8 taskId)
 {
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
     PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP)/5, Task_DisplayHPRestoredMessage);
 }
 
@@ -76,7 +76,7 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
     GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
     DisplayPartyMenuMessage(gStringVar4, FALSE);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_FinishSoftboiled;
 }
 
@@ -106,6 +106,6 @@ static void CantUseSoftboiledOnMon(u8 taskId)
 {
     PlaySE(SE_SELECT);
     DisplayPartyMenuMessage(gText_CantBeUsedOnPkmn, FALSE);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_ChooseNewMonForSoftboiled;
 }

@@ -2,7 +2,7 @@
   "id": "MAP_MT_PYRE_SUMMIT",
   "name": "MtPyre_Summit",
   "layout": "LAYOUT_MT_PYRE_SUMMIT",
-  "music": "MUS_MACHUPI",
+  "music": "MUS_MT_PYRE_EXTERIOR",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_FOG_HORIZONTAL",

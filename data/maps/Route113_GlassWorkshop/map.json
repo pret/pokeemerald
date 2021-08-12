@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE113_GLASS_WORKSHOP",
   "name": "Route113_GlassWorkshop",
   "layout": "LAYOUT_HOUSE4",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_ROUTE_113",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

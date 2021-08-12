@@ -2,7 +2,7 @@
   "id": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F",
   "name": "SlateportCity_OceanicMuseum_2F",
   "layout": "LAYOUT_SLATEPORT_CITY_OCEANIC_MUSEUM_2F",
-  "music": "MUS_FUNE_KAN",
+  "music": "MUS_OCEANIC_MUSEUM",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

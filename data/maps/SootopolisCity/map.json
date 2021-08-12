@@ -2,7 +2,7 @@
   "id": "MAP_SOOTOPOLIS_CITY",
   "name": "SootopolisCity",
   "layout": "LAYOUT_SOOTOPOLIS_CITY",
-  "music": "MUS_RUNECITY",
+  "music": "MUS_SOOTOPOLIS",
   "region_map_section": "MAPSEC_SOOTOPOLIS_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -119,7 +119,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GROUDON_3",
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_SIDE",
       "x": 28,
       "y": 44,
       "elevation": 0,
@@ -132,7 +132,7 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_KYOGRE_3",
+      "graphics_id": "OBJ_EVENT_GFX_KYOGRE_SIDE",
       "x": 34,
       "y": 44,
       "elevation": 1,
@@ -145,7 +145,7 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_2",
+      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA",
       "x": 31,
       "y": 41,
       "elevation": 1,

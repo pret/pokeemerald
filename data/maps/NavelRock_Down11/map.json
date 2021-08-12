@@ -2,7 +2,7 @@
   "id": "MAP_NAVEL_ROCK_DOWN11",
   "name": "NavelRock_Down11",
   "layout": "LAYOUT_NAVEL_ROCK_LADDER_ROOM1",
-  "music": "MUS_RG_NANADUNGEON",
+  "music": "MUS_RG_SEVII_CAVE",
   "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

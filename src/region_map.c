@@ -9,7 +9,6 @@
 #include "trig.h"
 #include "constants/maps.h"
 #include "overworld.h"
-#include "constants/flags.h"
 #include "event_data.h"
 #include "secret_base.h"
 #include "string_util.h"
@@ -49,6 +48,12 @@
 
 #define FLYDESTICON_RED_OUTLINE 6
 
+enum {
+    TAG_CURSOR,
+    TAG_PLAYER_ICON,
+    TAG_FLY_ICON,
+};
+
 // Static type declarations
 
 struct MultiNameFlyDest
@@ -72,7 +77,7 @@ static EWRAM_DATA struct {
     bool8 choseFlyLocation;
 } *sFlyMap = NULL;
 
-static bool32 gUnknown_03001180;
+static bool32 sDrawFlyDestTextWindow;
 
 // Static ROM declarations
 
@@ -130,30 +135,34 @@ static const u8 sRegionMap_MapSectionLayout[] = INCBIN_U8("graphics/pokenav/regi
 
 static const u16 sRegionMap_SpecialPlaceLocations[][2] =
 {
-    {MAPSEC_UNDERWATER_TERRA_CAVE,     MAPSEC_ROUTE_105},
-    {MAPSEC_UNDERWATER_124,            MAPSEC_ROUTE_124},
-    {MAPSEC_UNDERWATER_UNK1,           MAPSEC_ROUTE_129},
-    {MAPSEC_UNDERWATER_125,            MAPSEC_ROUTE_126},
-    {MAPSEC_UNDERWATER_126,            MAPSEC_ROUTE_127},
-    {MAPSEC_UNDERWATER_127,            MAPSEC_ROUTE_128},
-    {MAPSEC_UNDERWATER_129,            MAPSEC_ROUTE_129},
-    {MAPSEC_UNDERWATER_SOOTOPOLIS,     MAPSEC_SOOTOPOLIS_CITY},
-    {MAPSEC_UNDERWATER_128,            MAPSEC_ROUTE_128},
-    {MAPSEC_AQUA_HIDEOUT,              MAPSEC_LILYCOVE_CITY},
-    {MAPSEC_AQUA_HIDEOUT_OLD,          MAPSEC_LILYCOVE_CITY},
-    {MAPSEC_MAGMA_HIDEOUT,             MAPSEC_ROUTE_112},
-    {MAPSEC_UNDERWATER_SEALED_CHAMBER, MAPSEC_ROUTE_134},
-    {MAPSEC_PETALBURG_WOODS,           MAPSEC_ROUTE_104},
-    {MAPSEC_JAGGED_PASS,               MAPSEC_ROUTE_112},
-    {MAPSEC_MT_PYRE,                   MAPSEC_ROUTE_122},
-    {MAPSEC_SKY_PILLAR,                MAPSEC_ROUTE_131},
-    {MAPSEC_MIRAGE_TOWER,              MAPSEC_ROUTE_111},
-    {MAPSEC_TRAINER_HILL,              MAPSEC_ROUTE_111},
-    {MAPSEC_DESERT_UNDERPASS,          MAPSEC_ROUTE_114},
-    {MAPSEC_ALTERING_CAVE,             MAPSEC_ROUTE_103},
-    {MAPSEC_ARTISAN_CAVE,              MAPSEC_ROUTE_103},
-    {MAPSEC_ABANDONED_SHIP,            MAPSEC_ROUTE_108},
-    {MAPSEC_NONE,                      MAPSEC_NONE}
+    {MAPSEC_UNDERWATER_105,             MAPSEC_ROUTE_105},
+    {MAPSEC_UNDERWATER_124,             MAPSEC_ROUTE_124},
+    #ifdef BUGFIX
+    {MAPSEC_UNDERWATER_125,             MAPSEC_ROUTE_125},
+    #else
+    {MAPSEC_UNDERWATER_125,             MAPSEC_ROUTE_129}, // BUG: Map will incorrectly display the name of Route 129 when diving on Route 125 (for Marine Cave only)
+    #endif
+    {MAPSEC_UNDERWATER_126,             MAPSEC_ROUTE_126},
+    {MAPSEC_UNDERWATER_127,             MAPSEC_ROUTE_127},
+    {MAPSEC_UNDERWATER_128,             MAPSEC_ROUTE_128},
+    {MAPSEC_UNDERWATER_129,             MAPSEC_ROUTE_129},
+    {MAPSEC_UNDERWATER_SOOTOPOLIS,      MAPSEC_SOOTOPOLIS_CITY},
+    {MAPSEC_UNDERWATER_SEAFLOOR_CAVERN, MAPSEC_ROUTE_128},
+    {MAPSEC_AQUA_HIDEOUT,               MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_AQUA_HIDEOUT_OLD,           MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_MAGMA_HIDEOUT,              MAPSEC_ROUTE_112},
+    {MAPSEC_UNDERWATER_SEALED_CHAMBER,  MAPSEC_ROUTE_134},
+    {MAPSEC_PETALBURG_WOODS,            MAPSEC_ROUTE_104},
+    {MAPSEC_JAGGED_PASS,                MAPSEC_ROUTE_112},
+    {MAPSEC_MT_PYRE,                    MAPSEC_ROUTE_122},
+    {MAPSEC_SKY_PILLAR,                 MAPSEC_ROUTE_131},
+    {MAPSEC_MIRAGE_TOWER,               MAPSEC_ROUTE_111},
+    {MAPSEC_TRAINER_HILL,               MAPSEC_ROUTE_111},
+    {MAPSEC_DESERT_UNDERPASS,           MAPSEC_ROUTE_114},
+    {MAPSEC_ALTERING_CAVE,              MAPSEC_ROUTE_103},
+    {MAPSEC_ARTISAN_CAVE,               MAPSEC_ROUTE_103},
+    {MAPSEC_ABANDONED_SHIP,             MAPSEC_ROUTE_108},
+    {MAPSEC_NONE,                       MAPSEC_NONE}
 };
 
 static const u16 sMarineCaveMapSecIds[] =
@@ -234,13 +243,13 @@ static const union AnimCmd *const sRegionMapCursorAnimTable[] =
 static const struct SpritePalette sRegionMapCursorSpritePalette =
 {
     .data = sRegionMapCursorPal,
-    .tag = 0
+    .tag = TAG_CURSOR
 };
 
 static const struct SpriteTemplate sRegionMapCursorSpriteTemplate =
 {
-    .tileTag = 0,
-    .paletteTag = 0,
+    .tileTag = TAG_CURSOR,
+    .paletteTag = TAG_CURSOR,
     .oam = &sRegionMapCursorOam,
     .anims = sRegionMapCursorAnimTable,
     .images = NULL,
@@ -416,7 +425,7 @@ static const struct WindowTemplate sFlyMapWindowTemplates[] =
 static const struct SpritePalette sFlyTargetIconsSpritePalette =
 {
     .data = sFlyTargetIcons_Pal,
-    .tag = 2
+    .tag = TAG_FLY_ICON
 };
 
 static const u16 sRedOutlineFlyDestinations[][2] =
@@ -494,8 +503,8 @@ static const union AnimCmd *const sFlyDestIcon_Anims[] =
 
 static const struct SpriteTemplate sFlyDestIconSpriteTemplate =
 {
-    .tileTag = 2,
-    .paletteTag = 2,
+    .tileTag = TAG_FLY_ICON,
+    .paletteTag = TAG_FLY_ICON,
     .oam = &sFlyDestIcon_OamData,
     .anims = sFlyDestIcon_Anims,
     .images = NULL,
@@ -547,15 +556,15 @@ bool8 LoadRegionMapGfx(void)
     {
     case 0:
         if (gRegionMap->bgManaged)
-            decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBg_GfxLZ, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(gRegionMap->bgNum, sRegionMapBg_GfxLZ, 0, 0, 0);
         else
             LZ77UnCompVram(sRegionMapBg_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
         break;
     case 1:
         if (gRegionMap->bgManaged)
         {
-            if (!free_temp_tile_data_buffers_if_possible())
-                decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBg_TilemapLZ, 0, 0, 1);
+            if (!FreeTempTileDataBuffersIfPossible())
+                DecompressAndCopyTileDataToVram(gRegionMap->bgNum, sRegionMapBg_TilemapLZ, 0, 0, 1);
         }
         else
         {
@@ -563,7 +572,7 @@ bool8 LoadRegionMapGfx(void)
         }
         break;
     case 2:
-        if (!free_temp_tile_data_buffers_if_possible())
+        if (!FreeTempTileDataBuffersIfPossible())
             LoadPalette(sRegionMapBg_Pal, 0x70, 0x60);
         break;
     case 3:
@@ -618,7 +627,7 @@ bool8 LoadRegionMapGfx(void)
     return TRUE;
 }
 
-void sub_8123030(u16 color, u32 coeff)
+void BlendRegionMap(u16 color, u32 coeff)
 {
     BlendPalettes(0x380, coeff, color);
     CpuCopy16(gPlttBufferFaded + 0x70, gPlttBufferUnfaded + 0x70, 0x60);
@@ -652,31 +661,31 @@ static u8 ProcessRegionMapInput_Full(void)
     input = MAP_INPUT_NONE;
     gRegionMap->cursorDeltaX = 0;
     gRegionMap->cursorDeltaY = 0;
-    if (gMain.heldKeys & DPAD_UP && gRegionMap->cursorPosY > MAPCURSOR_Y_MIN)
+    if (JOY_HELD(DPAD_UP) && gRegionMap->cursorPosY > MAPCURSOR_Y_MIN)
     {
         gRegionMap->cursorDeltaY = -1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_DOWN && gRegionMap->cursorPosY < MAPCURSOR_Y_MAX)
+    if (JOY_HELD(DPAD_DOWN) && gRegionMap->cursorPosY < MAPCURSOR_Y_MAX)
     {
         gRegionMap->cursorDeltaY = +1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_LEFT && gRegionMap->cursorPosX > MAPCURSOR_X_MIN)
+    if (JOY_HELD(DPAD_LEFT) && gRegionMap->cursorPosX > MAPCURSOR_X_MIN)
     {
         gRegionMap->cursorDeltaX = -1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && gRegionMap->cursorPosX < MAPCURSOR_X_MAX)
+    if (JOY_HELD(DPAD_RIGHT) && gRegionMap->cursorPosX < MAPCURSOR_X_MAX)
     {
         gRegionMap->cursorDeltaX = +1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         input = MAP_INPUT_A_BUTTON;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         input = MAP_INPUT_B_BUTTON;
     }
@@ -731,31 +740,31 @@ static u8 ProcessRegionMapInput_Zoomed(void)
     input = MAP_INPUT_NONE;
     gRegionMap->zoomedCursorDeltaX = 0;
     gRegionMap->zoomedCursorDeltaY = 0;
-    if (gMain.heldKeys & DPAD_UP && gRegionMap->scrollY > -0x34)
+    if (JOY_HELD(DPAD_UP) && gRegionMap->scrollY > -0x34)
     {
         gRegionMap->zoomedCursorDeltaY = -1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_DOWN && gRegionMap->scrollY < 0x3c)
+    if (JOY_HELD(DPAD_DOWN) && gRegionMap->scrollY < 0x3c)
     {
         gRegionMap->zoomedCursorDeltaY = +1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_LEFT && gRegionMap->scrollX > -0x2c)
+    if (JOY_HELD(DPAD_LEFT) && gRegionMap->scrollX > -0x2c)
     {
         gRegionMap->zoomedCursorDeltaX = -1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && gRegionMap->scrollX < 0xac)
+    if (JOY_HELD(DPAD_RIGHT) && gRegionMap->scrollX < 0xac)
     {
         gRegionMap->zoomedCursorDeltaX = +1;
         input = MAP_INPUT_MOVE_START;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         input = MAP_INPUT_A_BUTTON;
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         input = MAP_INPUT_B_BUTTON;
     }
@@ -949,8 +958,8 @@ void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y)
     UpdateRegionMapVideoRegs();
     if (gRegionMap->playerIconSprite != NULL)
     {
-        gRegionMap->playerIconSprite->pos2.x = -x;
-        gRegionMap->playerIconSprite->pos2.y = -y;
+        gRegionMap->playerIconSprite->x2 = -x;
+        gRegionMap->playerIconSprite->y2 = -y;
     }
 }
 
@@ -999,12 +1008,12 @@ static void InitMapBasedOnPlayerLocation(void)
         mapHeight = gMapHeader.mapLayout->height;
         x = gSaveBlock1Ptr->pos.x;
         y = gSaveBlock1Ptr->pos.y;
-        if (gRegionMap->mapSecId == MAPSEC_UNDERWATER_128 || gRegionMap->mapSecId == MAPSEC_UNDERWATER_MARINE_CAVE)
+        if (gRegionMap->mapSecId == MAPSEC_UNDERWATER_SEAFLOOR_CAVERN || gRegionMap->mapSecId == MAPSEC_UNDERWATER_MARINE_CAVE)
             gRegionMap->playerIsInCave = TRUE;
         break;
     case MAP_TYPE_UNDERGROUND:
     case MAP_TYPE_UNKNOWN:
-        if (gMapHeader.flags & MAP_ALLOW_ESCAPING)
+        if (gMapHeader.allowEscaping)
         {
             mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
@@ -1090,7 +1099,7 @@ static void InitMapBasedOnPlayerLocation(void)
             x = 0;
         break;
     case MAPSEC_ROUTE_126:
-    case MAPSEC_UNDERWATER_125:
+    case MAPSEC_UNDERWATER_126:
         x = 0;
         if (gSaveBlock1Ptr->pos.x > 32)
             x++;
@@ -1361,8 +1370,8 @@ static void SpriteCB_CursorMapFull(struct Sprite *sprite)
 {
     if (gRegionMap->cursorMovementFrameCounter != 0)
     {
-        sprite->pos1.x += 2 * gRegionMap->cursorDeltaX;
-        sprite->pos1.y += 2 * gRegionMap->cursorDeltaY;
+        sprite->x += 2 * gRegionMap->cursorDeltaX;
+        sprite->y += 2 * gRegionMap->cursorDeltaY;
         gRegionMap->cursorMovementFrameCounter--;
     }
 }
@@ -1408,15 +1417,15 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
         if (gRegionMap->zoomed == TRUE)
         {
             gRegionMap->cursorSprite->oam.size = SPRITE_SIZE(32x32);
-            gRegionMap->cursorSprite->pos1.x -= 8;
-            gRegionMap->cursorSprite->pos1.y -= 8;
+            gRegionMap->cursorSprite->x -= 8;
+            gRegionMap->cursorSprite->y -= 8;
             StartSpriteAnim(gRegionMap->cursorSprite, 1);
         }
         else
         {
             gRegionMap->cursorSprite->oam.size = SPRITE_SIZE(16x16);
-            gRegionMap->cursorSprite->pos1.x = 8 * gRegionMap->cursorPosX + 4;
-            gRegionMap->cursorSprite->pos1.y = 8 * gRegionMap->cursorPosY + 4;
+            gRegionMap->cursorSprite->x = 8 * gRegionMap->cursorPosX + 4;
+            gRegionMap->cursorSprite->y = 8 * gRegionMap->cursorPosY + 4;
         }
         gRegionMap->cursorSprite->data[1] = 2;
         gRegionMap->cursorSprite->data[2] = (IndexOfSpritePaletteTag(paletteTag) << 4) + 0x101;
@@ -1469,14 +1478,14 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     gRegionMap->playerIconSprite = &gSprites[spriteId];
     if (!gRegionMap->zoomed)
     {
-        gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 8 + 4;
-        gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 8 + 4;
+        gRegionMap->playerIconSprite->x = gRegionMap->playerIconSpritePosX * 8 + 4;
+        gRegionMap->playerIconSprite->y = gRegionMap->playerIconSpritePosY * 8 + 4;
         gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapFull;
     }
     else
     {
-        gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
-        gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
+        gRegionMap->playerIconSprite->x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
+        gRegionMap->playerIconSprite->y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
         gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapZoomed;
     }
 }
@@ -1496,17 +1505,17 @@ static void UnhideRegionMapPlayerIcon(void)
     {
         if (gRegionMap->zoomed == TRUE)
         {
-            gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
-            gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
+            gRegionMap->playerIconSprite->x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
+            gRegionMap->playerIconSprite->y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
             gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapZoomed;
             gRegionMap->playerIconSprite->invisible = FALSE;
         }
         else
         {
-            gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 8 + 4;
-            gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 8 + 4;
-            gRegionMap->playerIconSprite->pos2.x = 0;
-            gRegionMap->playerIconSprite->pos2.y = 0;
+            gRegionMap->playerIconSprite->x = gRegionMap->playerIconSpritePosX * 8 + 4;
+            gRegionMap->playerIconSprite->y = gRegionMap->playerIconSpritePosY * 8 + 4;
+            gRegionMap->playerIconSprite->x2 = 0;
+            gRegionMap->playerIconSprite->y2 = 0;
             gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapFull;
             gRegionMap->playerIconSprite->invisible = FALSE;
         }
@@ -1515,10 +1524,10 @@ static void UnhideRegionMapPlayerIcon(void)
 
 static void SpriteCB_PlayerIconMapZoomed(struct Sprite *sprite)
 {
-    sprite->pos2.x = -2 * gRegionMap->scrollX;
-    sprite->pos2.y = -2 * gRegionMap->scrollY;
-    sprite->data[0] = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
-    sprite->data[1] = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+    sprite->x2 = -2 * gRegionMap->scrollX;
+    sprite->y2 = -2 * gRegionMap->scrollY;
+    sprite->data[0] = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
+    sprite->data[1] = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
     if (sprite->data[0] < -8 || sprite->data[0] > 0xa8 || sprite->data[1] < -8 || sprite->data[1] > 0xf8)
     {
         sprite->data[2] = FALSE;
@@ -1674,7 +1683,7 @@ void CB2_OpenFlyMap(void)
         break;
     case 1:
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(1, sFlyMapBgTemplates, 3);
+        InitBgsFromTemplates(1, sFlyMapBgTemplates, ARRAY_COUNT(sFlyMapBgTemplates));
         gMain.state++;
         break;
     case 2:
@@ -1684,16 +1693,16 @@ void CB2_OpenFlyMap(void)
         break;
     case 3:
         LoadUserWindowBorderGfx(0, 0x65, 0xd0);
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 4:
         InitRegionMap(&sFlyMap->regionMap, FALSE);
-        CreateRegionMapCursor(0, 0);
-        CreateRegionMapPlayerIcon(1, 1);
+        CreateRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
+        CreateRegionMapPlayerIcon(TAG_PLAYER_ICON, TAG_PLAYER_ICON);
         sFlyMap->mapSecId = sFlyMap->regionMap.mapSecId;
         StringFill(sFlyMap->nameBuffer, CHAR_SPACE, MAP_NAME_LENGTH);
-        gUnknown_03001180 = TRUE;
+        sDrawFlyDestTextWindow = TRUE;
         DrawFlyDestTextWindow();
         gMain.state++;
         break;
@@ -1710,7 +1719,7 @@ void CB2_OpenFlyMap(void)
         PutWindowTilemap(2);
         FillWindowPixelBuffer(2, PIXEL_FILL(0));
         AddTextPrinterParameterized(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         gMain.state++;
         break;
     case 8:
@@ -1718,7 +1727,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 9:
-        BlendPalettes(-1, 16, 0);
+        BlendPalettes(PALETTES_ALL, 16, 0);
         SetVBlankCallback(VBlankCB_FlyMap);
         gMain.state++;
         break;
@@ -1747,7 +1756,7 @@ static void CB2_FlyMap(void)
     sFlyMap->callback();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
 }
 
 static void SetFlyMapCallback(void callback(void))
@@ -1778,39 +1787,41 @@ static void DrawFlyDestTextWindow(void)
                     AddTextPrinterParameterized(1, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
                     name = sMultiNameFlyDestinations[i].name[sFlyMap->regionMap.posWithinMapSec];
                     AddTextPrinterParameterized(1, 1, name, GetStringRightAlignXOffset(1, name, 96), 17, 0, NULL);
-                    schedule_bg_copy_tilemap_to_vram(0);
-                    gUnknown_03001180 = TRUE;
+                    ScheduleBgCopyTilemapToVram(0);
+                    sDrawFlyDestTextWindow = TRUE;
                 }
                 break;
             }
         }
         if (!namePrinted)
         {
-            if (gUnknown_03001180 == TRUE)
+            if (sDrawFlyDestTextWindow == TRUE)
             {
                 ClearStdWindowAndFrameToTransparent(1, FALSE);
                 DrawStdFrameWithCustomTileAndPalette(0, FALSE, 101, 13);
             }
             else
             {
+                // Window is already drawn, just empty it
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
             }
             AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
-            schedule_bg_copy_tilemap_to_vram(0);
-            gUnknown_03001180 = FALSE;
+            ScheduleBgCopyTilemapToVram(0);
+            sDrawFlyDestTextWindow = FALSE;
         }
     }
     else
     {
-        if (gUnknown_03001180 == TRUE)
+        // Selection is on MAPSECTYPE_NONE, draw empty fly destination text window
+        if (sDrawFlyDestTextWindow == TRUE)
         {
             ClearStdWindowAndFrameToTransparent(1, FALSE);
             DrawStdFrameWithCustomTileAndPalette(0, FALSE, 101, 13);
         }
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         CopyWindowToVram(0, 2);
-        schedule_bg_copy_tilemap_to_vram(0);
-        gUnknown_03001180 = FALSE;
+        ScheduleBgCopyTilemapToVram(0);
+        sDrawFlyDestTextWindow = FALSE;
     }
 }
 
@@ -1822,7 +1833,7 @@ static void LoadFlyDestIcons(void)
     LZ77UnCompWram(sFlyTargetIcons_Gfx, sFlyMap->tileBuffer);
     sheet.data = sFlyMap->tileBuffer;
     sheet.size = sizeof(sFlyMap->tileBuffer);
-    sheet.tag = 2;
+    sheet.tag = TAG_FLY_ICON;
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&sFlyTargetIconsSpritePalette);
     CreateFlyDestIcons();
@@ -1933,7 +1944,7 @@ static void CB_FadeInFlyMap(void)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sFlyMap->state++;
         break;
     case 1:
@@ -1980,7 +1991,7 @@ static void CB_ExitFlyMap(void)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sFlyMap->state++;
         break;
     case 1:

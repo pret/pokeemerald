@@ -110,7 +110,7 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
     SetStandardWindowBorderStyle(windowId, 0);
     PrintMenuTable(windowId, count, actions);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, cursorPos);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
 }
 
@@ -170,7 +170,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
             else
                 selection = Menu_ProcessInput();
 
-            if (gMain.newKeys & (DPAD_UP | DPAD_DOWN))
+            if (JOY_NEW(DPAD_UP | DPAD_DOWN))
             {
                 DrawLinkServicesMultichoiceMenu(tMultichoiceId);
             }
@@ -279,7 +279,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
         gTasks[taskId].tWindowId = CreateWindowFromRect(left, top, columnCount * newWidth, rowCount * 2);
         SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, 0);
         PrintMenuGridTable(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, sMultichoiceLists[multichoiceId].list);
-        sub_8199944(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, 0);
+        InitMenuActionGrid(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, 0);
         CopyWindowToVram(gTasks[taskId].tWindowId, 3);
         return TRUE;
     }
@@ -580,7 +580,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     u8 taskId;
     u8 spriteId;
 
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) != 0xFF)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
     {
         return FALSE;
     }
@@ -595,7 +595,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
         gSprites[spriteId].callback = SpriteCallbackDummy;
         gSprites[spriteId].oam.priority = 0;
         SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, 1);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         return TRUE;
     }
 }
@@ -604,7 +604,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
 
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
         return NULL;
     gTasks[taskId].tState++;
     return IsPicboxClosed;
@@ -612,7 +612,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 
 static bool8 IsPicboxClosed(void)
 {
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) == 0xFF)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

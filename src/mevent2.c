@@ -10,7 +10,6 @@
 #include "new_game.h"
 #include "mevent.h"
 #include "constants/mevent.h"
-#include "constants/species.h"
 
 static EWRAM_DATA bool32 gUnknown_02022C70 = FALSE;
 
@@ -27,7 +26,7 @@ void sub_801AFD8(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->unk_322C, sizeof(gSaveBlock1Ptr->unk_322C));
     sub_801B180();
-    sub_811F8BC();
+    InitQuestionnaireWords();
 }
 
 struct WonderNews *GetSavedWonderNews(void)
@@ -50,9 +49,9 @@ struct MysteryEventStruct *sub_801B044(void)
     return &gSaveBlock1Ptr->unk_322C.unk_340;
 }
 
-u16 *sub_801B058(void)
+u16 *GetQuestionnaireWordsPtr(void)
 {
-    return gSaveBlock1Ptr->unk_322C.unk_338;
+    return gSaveBlock1Ptr->unk_322C.questionnaireWords;
 }
 
 void DestroyWonderNews(void)
@@ -365,8 +364,8 @@ void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 a1)
         data->unk_14 = 0;
     }
 
-    for (i = 0; i < 4; i++)
-        data->unk_16[i] = gSaveBlock1Ptr->unk_322C.unk_338[i];
+    for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
+        data->unk_16[i] = gSaveBlock1Ptr->unk_322C.questionnaireWords[i];
 
     CopyTrainerId(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
     StringCopy(data->unk_45, gSaveBlock2Ptr->playerName);
@@ -426,7 +425,7 @@ u32 sub_801B708(const u16 *a0, const struct MEventStruct_Unk1442CC *a1, const vo
 bool32 MEventStruct_Unk1442CC_CompareField_unk_16(const struct MEventStruct_Unk1442CC *a0, const u16 *a1)
 {
     int i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
     {
         if (a0->unk_16[i] != a1[i])
             return FALSE;
@@ -548,12 +547,12 @@ u16 mevent_081445C0(u32 command)
     return 0;
 }
 
-void sub_801B940(void)
+void ResetReceivedWonderCardFlag(void)
 {
     gUnknown_02022C70 = FALSE;
 }
 
-bool32 sub_801B94C(u16 a0)
+bool32 MEventHandleReceivedWonderCard(u16 a0)
 {
     gUnknown_02022C70 = FALSE;
     if (a0 == 0)
@@ -569,7 +568,7 @@ bool32 sub_801B94C(u16 a0)
     return TRUE;
 }
 
-void sub_801B990(u32 a0, u32 a1)
+void RecordIdOfWonderCardSenderByEventType(u32 a0, u32 a1)
 {
     if (gUnknown_02022C70)
     {

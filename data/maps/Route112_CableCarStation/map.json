@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE112_CABLE_CAR_STATION",
   "name": "Route112_CableCarStation",
   "layout": "LAYOUT_CABLE_CAR_STATION",
-  "music": "MUS_DOORO_X1",
+  "music": "MUS_ROUTE110",
   "region_map_section": "MAPSEC_ROUTE_112",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY",
   "name": "BattleFrontier_BattleDomeLobby",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_LOBBY",
-  "music": "MUS_B_DOME1",
+  "music": "MUS_B_DOME_LOBBY",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

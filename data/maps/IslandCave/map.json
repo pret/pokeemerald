@@ -2,7 +2,7 @@
   "id": "MAP_ISLAND_CAVE",
   "name": "IslandCave",
   "layout": "LAYOUT_ISLAND_CAVE",
-  "music": "MUS_MABOROSI",
+  "music": "MUS_SEALED_CHAMBER",
   "region_map_section": "MAPSEC_ISLAND_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -20,8 +20,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
-#include "constants/vars.h"
 
 #define AREA_SCREEN_WIDTH 32
 #define AREA_SCREEN_HEIGHT 20
@@ -310,11 +308,11 @@ static bool8 DrawAreaGlow(void)
         BuildAreaGlowTilemap();
         break;
     case 2:
-        decompress_and_copy_tile_data_to_vram(2, sAreaGlow_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, sAreaGlow_Gfx, 0, 0, 0);
         LoadBgTilemap(2, sPokedexAreaScreen->areaGlowTilemap, 0x500, 0);
         break;
     case 3:
-        if (!free_temp_tile_data_buffers_if_possible())
+        if (!FreeTempTileDataBuffersIfPossible())
         {
             CpuCopy32(sAreaGlow_Pal, gPlttBufferUnfaded + 0xA0, 0x20);
             sPokedexAreaScreen->drawAreaGlowState++;
@@ -491,7 +489,6 @@ static bool8 MonListHasMon(const struct WildPokemonInfo *info, u16 species, u16 
 static void BuildAreaGlowTilemap(void)
 {
     u16 i, y, x, j;
-    u16 val;
 
     for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->areaGlowTilemap); i++)
         sPokedexAreaScreen->areaGlowTilemap[i] = 0;
@@ -694,7 +691,7 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
             CreateAreaUnknownSprites();
             break;
         case 9:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, RGB(0, 0, 0));
+            BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 16, 0, RGB(0, 0, 0));
             break;
         case 10:
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_ALL);
@@ -725,21 +722,21 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             return;
         break;
     case 1:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             gTasks[taskId].data[1] = 1;
             PlaySE(SE_PC_OFF);
         }
-        else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             gTasks[taskId].data[1] = 2;
-            PlaySE(SE_Z_PAGE);
+            PlaySE(SE_DEX_PAGE);
         }
         else
             return;
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 16, RGB_BLACK);
         break;
     case 3:
         if (gPaletteFade.active)

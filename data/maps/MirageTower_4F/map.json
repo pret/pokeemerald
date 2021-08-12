@@ -2,7 +2,7 @@
   "id": "MAP_MIRAGE_TOWER_4F",
   "name": "MirageTower_4F",
   "layout": "LAYOUT_MIRAGE_TOWER_4F",
-  "music": "MUS_TOZAN",
+  "music": "MUS_MT_CHIMNEY",
   "region_map_section": "MAPSEC_MIRAGE_TOWER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

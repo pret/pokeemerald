@@ -2,7 +2,7 @@
   "id": "MAP_RUSTBORO_CITY",
   "name": "RustboroCity",
   "layout": "LAYOUT_RUSTBORO_CITY",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

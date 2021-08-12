@@ -1,13 +1,15 @@
 #ifndef GUARD_GLOBAL_TV_H
 #define GUARD_GLOBAL_TV_H
 
+#include "constants/tv.h"
+
 typedef union // size = 0x24
 {
     // Common
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[26];
+        /*0x02*/ u8 data[26];
         /*0x1C*/ u8 srcTrainerId3Lo;
         /*0x1D*/ u8 srcTrainerId3Hi;
         /*0x1E*/ u8 srcTrainerId2Lo;
@@ -18,6 +20,13 @@ typedef union // size = 0x24
         /*0x23*/ u8 trainerIdHi;
     } common;
 
+    // Common init (used for initialization loop)
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 data[34];
+    } commonInit;
+
     // Local shows
     // TVSHOW_FAN_CLUB_LETTER
     struct {
@@ -25,7 +34,7 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
         /*0x04*/ u16 words[6];
-        /*0x10*/ u8 playerName[8];
+        /*0x10*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x18*/ u8 language;
     } fanclubLetter;
 
@@ -33,9 +42,9 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 var02;
+        /*0x02*/ u16 species;
         /*0x04*/ u16 words[6];
-        /*0x10*/ u8 playerName[8];
+        /*0x10*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x18*/ u8 language;
     } recentHappenings;
 
@@ -46,32 +55,32 @@ typedef union // size = 0x24
         /*0x02*/ u16 species;
         /*0x04*/ u8 friendshipHighNybble:4;
         /*0x04*/ u8 questionAsked:4;
-        /*0x05*/ u8 playerName[8];
+        /*0x05*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x0D*/ u8 language;
         /*0x0E*/ u8 pokemonNameLanguage;
         /*0x0F*/ u8 filler_0F[1];
-        /*0x10*/ u8 nickname[8];
+        /*0x10*/ u8 nickname[PLAYER_NAME_LENGTH + 1];
         /*0x18*/ u16 words18[2];
         /*0x1C*/ u16 words[4];
     } fanclubOpinions;
 
-    // TVSHOW_UNKN_SHOWTYPE_04 (dummied out)
+    // TVSHOW_DUMMY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 words[2];
-        /*0x06*/ u16 var06;
+        /*0x06*/ u16 species;
         /*0x08*/ u8 pad_08[3];
-        /*0x0b*/ u8 string_0b[12];
+        /*0x0b*/ u8 name[12];
         /*0x17*/ u8 language;
-    } unkShow04;
+    } dummy;
 
     // TVSHOW_NAME_RATER_SHOW
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
-        /*0x04*/ u8 pokemonName[11];
+        /*0x04*/ u8 pokemonName[POKEMON_NAME_LENGTH + 1];
         /*0x0F*/ u8 trainerName[11];
         /*0x1A*/ u8 random;
         /*0x1B*/ u8 random2;
@@ -86,12 +95,12 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
         /*0x04*/ u16 words[2];
-        /*0x08*/ u8 pokemonNickname[11];
+        /*0x08*/ u8 pokemonNickname[POKEMON_NAME_LENGTH + 1];
         /*0x13*/ u8 contestCategory:3;
         /*0x13*/ u8 contestRank:2;
         /*0x13*/ u8 contestResult:2;
         /*0x14*/ u16 move;
-        /*0x16*/ u8 playerName[8];
+        /*0x16*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x1E*/ u8 language;
         /*0x1F*/ u8 pokemonNameLanguage;
     } bravoTrainer;
@@ -100,7 +109,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 trainerName[8];
+        /*0x02*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
         /*0x0A*/ u16 species;
         /*0x0C*/ u8 pokemonName[8];
         /*0x14*/ u16 defeatedSpecies;
@@ -117,18 +126,18 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 winningSpecies;
-        /*0x04*/ u8 winningTrainerName[8];
-        /*0x0C*/ u8 appealFlags2;
-        /*0x0D*/ u8 round1Rank;
-        /*0x0e*/ u8 round2Rank;
-        /*0x0f*/ u8 appealFlags1;
+        /*0x02*/ u16 losingSpecies;
+        /*0x04*/ u8 losingTrainerName[PLAYER_NAME_LENGTH + 1];
+        /*0x0C*/ u8 loserAppealFlag;
+        /*0x0D*/ u8 round1Placing;
+        /*0x0e*/ u8 round2Placing;
+        /*0x0f*/ u8 winnerAppealFlag;
         /*0x10*/ u16 move;
-        /*0x12*/ u16 species;
-        /*0x14*/ u8 playerName[8];
+        /*0x12*/ u16 winningSpecies;
+        /*0x14*/ u8 winningTrainerName[PLAYER_NAME_LENGTH + 1];
         /*0x1C*/ u8 category;
-        /*0x1D*/ u8 language;
-        /*0x1E*/ u8 winningTrainerLanguage;
+        /*0x1D*/ u8 winningTrainerLanguage;
+        /*0x1E*/ u8 losingTrainerLanguage;
     } contestLiveUpdates;
 
     // TVSHOW_3_CHEERS_FOR_POKEBLOCKS
@@ -137,9 +146,9 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 sheen;
         /*0x03*/ u8 flavor:3;
-        /*0x03*/ u8 unk_03_3:2;
-        /*0x04*/ u8 worstBlenderName[8];
-        /*0x0C*/ u8 playerName[8];
+        /*0x03*/ u8 color:2;
+        /*0x04*/ u8 worstBlenderName[PLAYER_NAME_LENGTH + 1];
+        /*0x0C*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x14*/ u8 language;
         /*0x15*/ u8 worstBlenderLanguage;
     } threeCheers;
@@ -149,8 +158,8 @@ typedef union // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 speciesOpponent;
-        /*0x04*/ u8 playerName[8];
-        /*0x0C*/ u8 linkOpponentName[8];
+        /*0x04*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
+        /*0x0C*/ u8 linkOpponentName[PLAYER_NAME_LENGTH + 1];
         /*0x14*/ u16 move;
         /*0x16*/ u16 speciesPlayer;
         /*0x18*/ u8 battleType;
@@ -162,27 +171,27 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 playerName[8];
+        /*0x02*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x0a*/ u8 idLo;
         /*0x0b*/ u8 idHi;
-        /*0x0c*/ u8 idolName[8];
+        /*0x0c*/ u8 idolName[PLAYER_NAME_LENGTH + 1];
         /*0x14*/ u16 words[1];
         /*0x16*/ u8 score;
         /*0x17*/ u8 language;
         /*0x18*/ u8 idolNameLanguage;
     } fanClubSpecial;
 
-    // TVSHOW_CONTEST_LIVE_UPDATES_2
+    // TVSHOW_LILYCOVE_CONTEST_LADY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 playerName[8];
+        /*0x02*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x0a*/ u8 contestCategory;
-        /*0x0b*/ u8 nickname[11];
+        /*0x0b*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
         /*0x16*/ u8 pokeblockState;
         /*0x17*/ u8 language;
         /*0x18*/ u8 pokemonNameLanguage;
-    } contestLiveUpdates2;
+    } contestLady;
 
     // Record Mixing Shows
     // TVSHOW_POKEMON_TODAY_CAUGHT
@@ -191,11 +200,11 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 language;
         /*0x03*/ u8 language2;
-        /*0x04*/ u8 nickname[11];
+        /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
         /*0x0F*/ u8 ball;
         /*0x10*/ u16 species;
         /*0x12*/ u8 nBallsUsed;
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } pokemonToday;
 
     // TVSHOW_SMART_SHOPPER
@@ -205,10 +214,10 @@ typedef union // size = 0x24
         /*0x02*/ u8 priceReduced;
         /*0x03*/ u8 language;
         /*0x04*/ u8 pad04[2];
-        /*0x06*/ u16 itemIds[3];
-        /*0x0C*/ u16 itemAmounts[3];
+        /*0x06*/ u16 itemIds[SMARTSHOPPER_NUM_ITEMS];
+        /*0x0C*/ u16 itemAmounts[SMARTSHOPPER_NUM_ITEMS];
         /*0x12*/ u8 shopLocation;
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } smartshopperShow;
 
     // TVSHOW_POKEMON_TODAY_FAILED
@@ -222,7 +231,7 @@ typedef union // size = 0x24
         /*0x10*/ u8 nBallsUsed;
         /*0x11*/ u8 outcome;
         /*0x12*/ u8 location;
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } pokemonTodayFailed;
 
     // TVSHOW_FISHING_ADVICE
@@ -234,7 +243,7 @@ typedef union // size = 0x24
         /*0x04*/ u16 species;
         /*0x06*/ u8 language;
         /*0x07*/ u8 pad07[12];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } pokemonAngler;
 
     // TVSHOW_WORLD_OF_MASTERS
@@ -248,7 +257,7 @@ typedef union // size = 0x24
         /*0x0a*/ u8 location;
         /*0x0b*/ u8 language;
         /*0x0c*/ u8 pad0c[7];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } worldOfMasters;
 
     // TVSHOW_TODAYS_RIVAL_TRAINER
@@ -264,7 +273,7 @@ typedef union // size = 0x24
         /*0x0a*/ u16 mapLayoutId;
         /*0x0c*/ u8 language;
         /*0x0d*/ u8 filler_0d[6];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } rivalTrainer;
 
     // TVSHOW_TREND_WATCHER
@@ -276,7 +285,7 @@ typedef union // size = 0x24
         /*0x08*/ u8 gender;
         /*0x09*/ u8 language;
         /*0x0a*/ u8 filler_0a[9];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } trendWatcher;
 
     // TVSHOW_TREASURE_INVESTIGATORS
@@ -288,7 +297,7 @@ typedef union // size = 0x24
         /*0x05*/ u8 language;
         /*0x06*/ u16 mapLayoutId;
         /*0x08*/ u8 filler_08[11];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } treasureInvestigators;
 
     // TVSHOW_FIND_THAT_GAMER
@@ -301,7 +310,7 @@ typedef union // size = 0x24
         /*0x06*/ u8 filler_06[2];
         /*0x08*/ u8 language;
         /*0x09*/ u8 filler_09[10];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } findThatGamer;
 
     // TVSHOW_BREAKING_NEWS
@@ -317,7 +326,7 @@ typedef union // size = 0x24
         /*0x0c*/ u16 lastUsedMove;
         /*0x0e*/ u8 language;
         /*0x0f*/ u8 filler_0f[4];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } breakingNews;
 
     // TVSHOW_SECRET_BASE_VISIT
@@ -331,7 +340,7 @@ typedef union // size = 0x24
         /*0x0a*/ u16 move;
         /*0x0c*/ u8 language;
         /*0x0d*/ u8 filler_0d[6];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } secretBaseVisit;
 
     // TVSHOW_LOTTO_WINNER
@@ -342,7 +351,7 @@ typedef union // size = 0x24
         /*0x04*/ u8 whichPrize;
         /*0x05*/ u8 language;
         /*0x06*/ u8 filler_06[13];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } lottoWinner;
 
     // TVSHOW_BATTLE_SEMINAR
@@ -357,7 +366,7 @@ typedef union // size = 0x24
         /*0x10*/ u8 nOtherMoves;
         /*0x11*/ u8 language;
         /*0x12*/ u8 filler_12[1];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } battleSeminar;
 
     // TVSHOW_TRAINER_FAN_CLUB
@@ -368,7 +377,7 @@ typedef union // size = 0x24
         /*0x04*/ u16 words[2];
         /*0x08*/ u8 language;
         /*0x09*/ u8 filler_09[10];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } trainerFanClub;
 
     // TVSHOW_CUTIES
@@ -377,11 +386,11 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 nRibbons;
         /*0x03*/ u8 selectedRibbon;
-        /*0x04*/ u8 nickname[11];
+        /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
         /*0x0f*/ u8 language;
         /*0x10*/ u8 pokemonNameLanguage;
         /*0x11*/ u8 filler_12[2];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } cuties;
 
     // TVSHOW_FRONTIER
@@ -394,9 +403,9 @@ typedef union // size = 0x24
         /*0x08*/ u16 species3;
         /*0x0a*/ u16 species4;
         /*0x0c*/ u8 language;
-        /*0x0d*/ u8 facility;
+        /*0x0d*/ u8 facilityAndMode;
         /*0x0e*/ u8 filler_0e[5];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } frontier;
 
     // TVSHOW_NUMBER_ONE
@@ -407,7 +416,7 @@ typedef union // size = 0x24
         /*0x04*/ u8 actionIdx;
         /*0x05*/ u8 language;
         /*0x06*/ u8 filler_06[13];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } numberOne;
 
     // TVSHOW_SECRET_BASE_SECRETS
@@ -415,11 +424,11 @@ typedef union // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 stepsInBase;
-        /*0x04*/ u8 baseOwnersName[8];
+        /*0x04*/ u8 baseOwnersName[PLAYER_NAME_LENGTH + 1];
         /*0x0c*/ u32 flags;
         /*0x10*/ u16 item;
         /*0x12*/ u8 savedState;
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x1b*/ u8 language;
         /*0x1c*/ u8 baseOwnersNameLanguage;
     } secretBaseSecrets;
@@ -432,7 +441,7 @@ typedef union // size = 0x24
         /*0x03*/ u8 nPkblkUsed;
         /*0x04*/ u8 language;
         /*0x05*/ u8 filler_05[14];
-        /*0x13*/ u8 playerName[8];
+        /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } safariFanClub;
 
     // Mass Outbreak

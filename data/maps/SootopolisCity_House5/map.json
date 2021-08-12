@@ -2,7 +2,7 @@
   "id": "MAP_SOOTOPOLIS_CITY_HOUSE5",
   "name": "SootopolisCity_House5",
   "layout": "LAYOUT_SOOTOPOLIS_CITY_HOUSE2",
-  "music": "MUS_RUNECITY",
+  "music": "MUS_SOOTOPOLIS",
   "region_map_section": "MAPSEC_SOOTOPOLIS_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

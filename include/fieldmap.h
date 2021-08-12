@@ -20,36 +20,29 @@ void MapGridSetMetatileEntryAt(int, int, u16);
 void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(int, int);
 int GetMapBorderIdAt(int x, int y);
-int CanCameraMoveInDirection(int direction);
+bool32 CanCameraMoveInDirection(int direction);
 u16 GetBehaviorByMetatileId(u16 metatileId);
 void GetCameraFocusCoords(u16 *x, u16 *y);
 u8 MapGridGetMetatileLayerTypeAt(int x, int y);
 u8 MapGridGetZCoordAt(int x, int y);
 bool8 CameraMove(int deltaX, int deltaY);
-struct MapConnection *sub_8088950(u8 direction, int x, int y);
-bool8 sub_80889A8(u8 direction, int x, int y, struct MapConnection *connection);
-bool8 sub_8088A0C(int x, int src_width, int dest_width, int offset);
-void save_serialize_map(void);
-void sub_8088B3C(u16 x, u16 y);
+void SaveMapView(void);
+void SetCameraFocusCoords(u16 x, u16 y);
 void InitMap(void);
 void InitMapFromSavedGame(void);
 void InitTrainerHillMap(void);
 void InitBattlePyramidMap(bool8 setPlayerPosition);
-void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout);
-void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout);
-void apply_map_tileset2_palette(struct MapLayout const *mapLayout);
-void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout);
-void copy_map_tileset1_to_vram(const struct MapLayout *);
-void copy_map_tileset2_to_vram(const struct MapLayout *);
-struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection);
+void CopyMapTilesetsToVram(struct MapLayout const *mapLayout);
+void LoadMapTilesetPalettes(struct MapLayout const *mapLayout);
+void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout);
+void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout);
+void CopyPrimaryTilesetToVram(const struct MapLayout *);
+void CopySecondaryTilesetToVram(const struct MapLayout *);
+struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *connection);
 struct MapConnection *GetConnectionAtCoords(s16 x, s16 y);
-
-void SpriteCB_PokeballGlow(struct Sprite *);
-void SpriteCB_PokecenterMonitor(struct Sprite *);
-void SpriteCB_HallOfFameMonitor(struct Sprite *);
+void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable);
 
 // field_region_map.c
 void FieldInitRegionMap(MainCallback callback);
-void sub_8088B94(int x, int y, int a2);
 
 #endif //GUARD_FIELDMAP_H
