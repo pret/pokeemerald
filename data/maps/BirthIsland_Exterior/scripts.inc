@@ -72,7 +72,7 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	setfieldeffectargument 1, 58
 	setfieldeffectargument 2, 26
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	playbgm MUS_RG_ENCOUNTER_DEOXYS, 0
+	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	addobject LOCALID_DEOXYS
 	applymovement LOCALID_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
@@ -85,7 +85,7 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	setvar VAR_0x8005, 30 @ level
 	setvar VAR_0x8006, ITEM_NONE
-	special CreateObedientEnemyMon
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

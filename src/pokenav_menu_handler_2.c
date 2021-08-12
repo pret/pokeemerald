@@ -750,7 +750,7 @@ static void LoadPokenavOptionPalettes(void)
 {
     s32 i;
 
-    for (i = 0; i < NELEMS(sPokenavOptionsSpriteSheets); i++)
+    for (i = 0; i < ARRAY_COUNT(sPokenavOptionsSpriteSheets); i++)
         LoadCompressedSpriteSheet(&sPokenavOptionsSpriteSheets[i]);
     Pokenav_AllocAndLoadPalettes(sPokenavOptionsSpritePalettes);
 }
@@ -1221,9 +1221,9 @@ static void SetupPokenavMenuScanlineEffects(void)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-    SetGpuRegBits(REG_OFFSET_WININ, 0x3F);
-    SetGpuRegBits(REG_OFFSET_WINOUT, 0x1F);
-    SetGpuRegBits(REG_OFFSET_WIN0V, 0xA0);
+    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_ALL);
+    SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ);
+    SetGpuRegBits(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
     ScanlineEffect_Stop();
     SetMenuOptionGlow();
     ScanlineEffect_SetParams(sPokenavMainMenuScanlineEffectParams);

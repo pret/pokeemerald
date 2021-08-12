@@ -603,7 +603,7 @@ SlateportCity_EventScript_CaptStern:: @ 81DD1F8
 	applymovement LOCALID_CAPT_STERN, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Text_OhPlayerWeMadeDiscovery, MSGBOX_DEFAULT
-	playbgm MUS_ENCOUNTER_AQUA, 0
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	msgbox SlateportCity_Text_AquaWillAssumeControlOfSubmarine, MSGBOX_DEFAULT
 	applymovement LOCALID_COOK, Common_Movement_WalkInPlaceFastestLeft
 	applymovement LOCALID_FAT_MAN, Common_Movement_WalkInPlaceFastestLeft

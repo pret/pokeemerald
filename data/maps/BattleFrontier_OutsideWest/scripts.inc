@@ -29,7 +29,7 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant:: @ 823D3F0
 	end
 
 BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination:: @ 823D416
-	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, 0
+	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_OutsideWest_EventScript_FerryToSlateport
 	case 1, BattleFrontier_OutsideWest_EventScript_FerryToLilycove

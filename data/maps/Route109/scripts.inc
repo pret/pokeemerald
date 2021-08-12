@@ -290,7 +290,7 @@ Route109_EventScript_HaveNotDeliveredDevonGood:: @ 81EE921
 Route109_EventScript_DeliveredDevonGoods:: @ 81EE93F
 	message Route109_Text_BrineyWhereAreWeBound
 	waitmessage
-	multichoicedefault 21, 8, MULTI_BRINEY_OFF_DEWFORD, 1, 0
+	multichoicedefault 21, 8, MULTI_BRINEY_OFF_DEWFORD, 1, FALSE
 	switch VAR_RESULT
 	case 0, Route109_EventScript_SailToDewford
 	case 1, Route109_EventScript_ChoseNotToSail

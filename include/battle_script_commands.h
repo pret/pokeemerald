@@ -6,6 +6,12 @@
 #define WINDOW_CLEAR            0x1
 #define WINDOW_x80              0x80
 
+struct StatFractions
+{
+    u8 dividend;
+    u8 divisor;
+};
+
 s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbility);
 u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
@@ -26,8 +32,12 @@ u32 IsFlowerVeilProtected(u32 battler);
 u32 IsLeafGuardProtected(u32 battler);
 bool32 IsShieldsDownProtected(u32 battler);
 u32 IsAbilityStatusProtected(u32 battler);
+bool32 TryResetBattlerStatChanges(u8 battler);
+bool32 CanCamouflage(u8 battlerId);
+u16 GetNaturePowerMove(void);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];
+extern const struct StatFractions gAccuracyStageRatios[];
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H
