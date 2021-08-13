@@ -1678,6 +1678,8 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_c_07.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_05.o(.rodata);
         sound/songs/midi/bw_seq_bgm_eye_plasma.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_07.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_04.o(.rodata);
     } =0
 
     lib_rodata :

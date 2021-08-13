@@ -4073,3 +4073,7 @@ DirectSoundWaveData_bw_101chh909::
 	.align 2
 DirectSoundWaveData_bw_synthsnare_eyeplasma::
 	.incbin "sound/direct_sound_samples/bw_synthsnare_eyeplasma.bin"
+
+	.align 2
+DirectSoundWaveData_bw_windc4::
+	.incbin "sound/direct_sound_samples/bw_windc4.bin"

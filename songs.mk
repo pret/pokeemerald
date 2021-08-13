@@ -2618,3 +2618,9 @@ $(MID_SUBDIR)/bw_seq_bgm_d_05.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_eye_plasma.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V088
+
+$(MID_SUBDIR)/bw_seq_bgm_d_07.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_d_04.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V074

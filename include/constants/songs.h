@@ -1005,6 +1005,8 @@
 #define BW_SEQ_BGM_C_07              980 // Icirrus City
 #define BW_SEQ_BGM_D_05              981 // Dragonspiral Tower
 #define BW_SEQ_BGM_EYE_PLASMA        982 // Trainers' Eyes Meet (Team Plasma)           (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_D_07              983 // Dragonspiral Tower Top Floor
+#define BW_SEQ_BGM_D_04              984 // Relic Castle
 
 // Black 2 & White 2 Music
 

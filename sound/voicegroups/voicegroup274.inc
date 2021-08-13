@@ -13,7 +13,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup297, KeySplitTable76    @ vibraphone
 	voice_keysplit voicegroup239, KeySplitTable38    @ marimba (HGSS)
 	voice_keysplit voicegroup240, KeySplitTable39    @ xylophone
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_windc4, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_hg_147tbellg4, 255, 248, 0, 205
 	voice_keysplit voicegroup296, KeySplitTable83    @ glockenspiel
 	voice_keysplit voicegroup243, KeySplitTable76    @ music box
@@ -41,7 +41,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup260, KeySplitTable61    @ timpani
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
 	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup248, KeySplitTable72    @ martin guitar
 	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
 	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
 	voice_keysplit voicegroup287, KeySplitTable68    @ oboe

@@ -1440,6 +1440,8 @@ BW_SEQ_BGM_C_07_VAR          = D3 03
 BW_SEQ_BGM_C_07              = D4 03
 BW_SEQ_BGM_D_05              = D5 03
 BW_SEQ_BGM_EYE_PLASMA        = D6 03
+BW_SEQ_BGM_D_07              = D7 03
+BW_SEQ_BGM_D_04              = D8 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01
