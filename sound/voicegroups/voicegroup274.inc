@@ -32,7 +32,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_keysplit voicegroup315, KeySplitTable90    @ picked bass (nimbasa)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup256, KeySplitTable46    @ violin
 	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 254, 242, 255, 205
 	voice_keysplit voicegroup301, KeySplitTable79    @ clarinet (pokecenter)
 	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2

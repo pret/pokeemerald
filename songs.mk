@@ -2639,3 +2639,15 @@ $(MID_SUBDIR)/bw_seq_bgm_e_doctor2.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_me_hyouka4.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V082 -p5
+
+$(MID_SUBDIR)/bw_seq_me_wasure.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V115 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_08.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V086
+
+$(MID_SUBDIR)/bw_seq_bgm_c_07_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V064
+
+$(MID_SUBDIR)/bw_seq_bgm_c_07.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V064

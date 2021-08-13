@@ -1685,6 +1685,10 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_c_06.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_doctor2.o(.rodata);
         sound/songs/midi/bw_seq_me_hyouka4.o(.rodata);
+        sound/songs/midi/bw_seq_me_wasure.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_eye_08.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_07_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_07.o(.rodata);
     } =0
 
     lib_rodata :

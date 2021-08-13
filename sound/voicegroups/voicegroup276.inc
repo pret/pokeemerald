@@ -2,7 +2,7 @@
 voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup282, KeySplitTable75    @ piano | 41 | 50 ||||| 77
 	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_reverscyn_16, 255, 0, 227, 171
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
@@ -20,7 +20,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_directsound 60, 0, DirectSoundWaveData_bw_synthbassf1_leader, 255, 251, 14, 171
@@ -58,8 +58,8 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_orchhitas2_leader, 255, 248, 0, 205
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
 	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_bass2, 255, 0, 227, 171
+	voice_directsound 60, 0, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_solotrumpetc5, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_synthlead_vsrival, 255, 1, 227, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_reversecymbale2, 255, 0, 255, 236
@@ -67,7 +67,7 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_click_vsrival, 255, 0, 255, 0
 	voice_keysplit voicegroup307, KeySplitTable25    @ sd90 distortion guitar (team plasma)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc3_plasma, 255, 253, 0, 2
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_hg_033orccym, 255, 246, 0, 214
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

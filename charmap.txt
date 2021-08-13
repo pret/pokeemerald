@@ -1447,6 +1447,10 @@ BW_SEQ_BGM_D_02_B2F          = DA 03
 BW_SEQ_BGM_C_06              = DB 03
 BW_SEQ_BGM_E_DOCTOR2         = DC 03
 BW_SEQ_ME_HYOUKA4            = DD 03
+BW_SEQ_ME_WASURE             = DE 03
+BW_SEQ_BGM_EYE_08            = DF 03
+BW_SEQ_BGM_C_07_VAR          = E0 03
+BW_SEQ_BGM_C_07              = E1 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

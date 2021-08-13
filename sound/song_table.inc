@@ -991,6 +991,10 @@ gSongTable::
 	song bw_seq_bgm_c_06, 0, 0
 	song bw_seq_bgm_e_doctor2, 0, 0
 	song bw_seq_me_hyouka4, 2, 2
+	song bw_seq_me_wasure, 2, 2
+	song bw_seq_bgm_eye_08, 0, 0
+	song bw_seq_bgm_c_07_var, 0, 0
+	song bw_seq_bgm_c_07, 0, 0
 
 	.align 2
 dummy_song_header:

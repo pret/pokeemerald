@@ -4061,3 +4061,7 @@ DirectSoundWaveData_bw_118conga::
 	.align 2
 DirectSoundWaveData_bw_snarepower_mistralton::
 	.incbin "sound/direct_sound_samples/bw_snarepower_mistralton.bin"
+
+	.align 2
+DirectSoundWaveData_bw_099conga::
+	.incbin "sound/direct_sound_samples/bw_099conga.bin"

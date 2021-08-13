@@ -1012,6 +1012,10 @@
 #define BW_SEQ_BGM_C_06              987 // Mistralton City                             (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_E_DOCTOR2         988 // Cedric Juniper
 #define BW_SEQ_ME_HYOUKA4            989 // Pokédex Evaluation... Not Bad!
+#define BW_SEQ_ME_WASURE             990 // Move Deleted
+#define BW_SEQ_BGM_EYE_08            991 // Trainers' Eyes Meet (Psychic)               (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_C_07_VAR          992 // Icirrus City (No Percussion)
+#define BW_SEQ_BGM_C_07              993 // Icirrus City
 
 // Black 2 & White 2 Music
 
