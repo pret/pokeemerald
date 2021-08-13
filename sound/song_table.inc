@@ -901,7 +901,6 @@ gSongTable::
 	song bw_seq_bgm_labo, 0, 0
 	song bw_seq_me_keyitem, 2, 2
 	song bw_seq_bgm_e_friend, 0, 0
-	song bw_seq_bgm_r_a_var, 0, 0
 	song bw_seq_bgm_r_a, 0, 0
 	song bw_seq_bgm_vs_norapoke, 0, 0
 	song bw_seq_bgm_win1, 0, 0
@@ -915,13 +914,9 @@ gSongTable::
 	song bw_seq_me_asa, 2, 2
 	song bw_seq_me_hyouka1, 2, 2
 	song bw_seq_bgm_e_sage, 0, 0
-	song bw_seq_bgm_r_b_sp_var, 0, 0
 	song bw_seq_bgm_r_b_sp, 0, 0
-	song bw_seq_bgm_r_b_su_var, 0, 0
 	song bw_seq_bgm_r_b_su, 0, 0
-	song bw_seq_bgm_r_b_au_var, 0, 0
 	song bw_seq_bgm_r_b_au, 0, 0
-	song bw_seq_bgm_r_b_wi_var, 0, 0
 	song bw_seq_bgm_r_b_wi, 0, 0
 	song bw_seq_me_call, 2, 2
 	song bw_seq_bgm_eye_01, 0, 0
@@ -955,13 +950,9 @@ gSongTable::
 	song bw_seq_bgm_h_01, 0, 0
 	song bw_seq_bgm_c_03, 0, 0
 	song bw_seq_bgm_eye_12, 0, 0
-	song bw_seq_bgm_r_c_sp_var, 0, 0
 	song bw_seq_bgm_r_c_sp, 0, 0
-	song bw_seq_bgm_r_c_su_var, 0, 0
 	song bw_seq_bgm_r_c_su, 0, 0
-	song bw_seq_bgm_r_c_au_var, 0, 0
 	song bw_seq_bgm_r_c_au, 0, 0
-	song bw_seq_bgm_r_c_wi_var, 0, 0
 	song bw_seq_bgm_r_c_wi, 0, 0
 	song bw_seq_bgm_eye_11, 0, 0
 	song bw_seq_bgm_c_04, 0, 0
@@ -975,13 +966,9 @@ gSongTable::
 	song bw_seq_bgm_h_02, 0, 0
 	song bw_seq_bgm_c_05, 0, 0
 	song bw_seq_bgm_d_03, 0, 0
-	song bw_seq_bgm_r_d_sp_var, 0, 0
 	song bw_seq_bgm_r_d_sp, 0, 0
-	song bw_seq_bgm_r_d_su_var, 0, 0
 	song bw_seq_bgm_r_d_su, 0, 0
-	song bw_seq_bgm_r_d_au_var, 0, 0
 	song bw_seq_bgm_r_d_au, 0, 0
-	song bw_seq_bgm_r_d_wi_var, 0, 0
 	song bw_seq_bgm_r_d_wi, 0, 0
 	song bw_seq_bgm_eye_06, 0, 0
 	song bw_seq_bgm_eye_09, 0, 0
@@ -995,6 +982,8 @@ gSongTable::
 	song bw_seq_bgm_eye_08, 0, 0
 	song bw_seq_bgm_c_07_var, 0, 0
 	song bw_seq_bgm_c_07, 0, 0
+	song bw_seq_bgm_d_05, 0, 0
+	song bw_seq_bgm_eye_plasma, 0, 0
 
 	.align 2
 dummy_song_header:

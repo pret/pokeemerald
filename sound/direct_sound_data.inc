@@ -4065,3 +4065,11 @@ DirectSoundWaveData_bw_snarepower_mistralton::
 	.align 2
 DirectSoundWaveData_bw_099conga::
 	.incbin "sound/direct_sound_samples/bw_099conga.bin"
+
+	.align 2
+DirectSoundWaveData_bw_101chh909::
+	.incbin "sound/direct_sound_samples/bw_101chh909.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthsnare_eyeplasma::
+	.incbin "sound/direct_sound_samples/bw_synthsnare_eyeplasma.bin"

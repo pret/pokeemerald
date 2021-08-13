@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_C_07 - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_EYE_PLASMA - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_C_07 - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_EYE_PLASMA - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1597,7 +1597,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_LABO             , "BW-SEQ-BGM-LABO") \
     X(BW_SEQ_ME_KEYITEM           , "BW-SEQ-ME-KEYITEM") \
     X(BW_SEQ_BGM_E_FRIEND         , "BW-SEQ-BGM-E-FRIEND") \
-    X(BW_SEQ_BGM_R_A_VAR          , "BW-SEQ-BGM-R-A-VAR") \
     X(BW_SEQ_BGM_R_A              , "BW-SEQ-BGM-R-A") \
     X(BW_SEQ_BGM_VS_NORAPOKE      , "BW-SEQ-BGM-VS-NORAPOKE") \
     X(BW_SEQ_BGM_WIN1             , "BW-SEQ-BGM-WIN1") \
@@ -1611,13 +1610,9 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_ME_ASA               , "BW-SEQ-ME-ASA") \
     X(BW_SEQ_ME_HYOUKA1           , "BW-SEQ-ME-HYOUKA1") \
     X(BW_SEQ_BGM_E_SAGE           , "BW-SEQ-BGM-E-SAGE") \
-    X(BW_SEQ_BGM_R_B_SP_VAR       , "BW-SEQ-BGM-R-B-SP-VAR") \
     X(BW_SEQ_BGM_R_B_SP           , "BW-SEQ-BGM-R-B-SP") \
-    X(BW_SEQ_BGM_R_B_SU_VAR       , "BW-SEQ-BGM-R-B-SU-VAR") \
     X(BW_SEQ_BGM_R_B_SU           , "BW-SEQ-BGM-R-B-SU") \
-    X(BW_SEQ_BGM_R_B_AU_VAR       , "BW-SEQ-BGM-R-B-AU-VAR") \
     X(BW_SEQ_BGM_R_B_AU           , "BW-SEQ-BGM-R-B-AU") \
-    X(BW_SEQ_BGM_R_B_WI_VAR       , "BW-SEQ-BGM-R-B-WI-VAR") \
     X(BW_SEQ_BGM_R_B_WI           , "BW-SEQ-BGM-R-B-WI") \
     X(BW_SEQ_ME_CALL              , "BW-SEQ-ME-CALL") \
     X(BW_SEQ_BGM_EYE_01           , "BW-SEQ-BGM-EYE-01") \
@@ -1651,13 +1646,9 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_H_01             , "BW-SEQ-BGM-H-01") \
     X(BW_SEQ_BGM_C_03             , "BW-SEQ-BGM-C-03") \
     X(BW_SEQ_BGM_EYE_12           , "BW-SEQ-BGM-EYE-12") \
-    X(BW_SEQ_BGM_R_C_SP_VAR       , "BW-SEQ-BGM-R-C-SP-VAR") \
     X(BW_SEQ_BGM_R_C_SP           , "BW-SEQ-BGM-R-C-SP") \
-    X(BW_SEQ_BGM_R_C_SU_VAR       , "BW-SEQ-BGM-R-C-SU-VAR") \
     X(BW_SEQ_BGM_R_C_SU           , "BW-SEQ-BGM-R-C-SU") \
-    X(BW_SEQ_BGM_R_C_AU_VAR       , "BW-SEQ-BGM-R-C-AU-VAR") \
     X(BW_SEQ_BGM_R_C_AU           , "BW-SEQ-BGM-R-C-AU") \
-    X(BW_SEQ_BGM_R_C_WI_VAR       , "BW-SEQ-BGM-R-C-WI-VAR") \
     X(BW_SEQ_BGM_R_C_WI           , "BW-SEQ-BGM-R-C-WI") \
     X(BW_SEQ_BGM_EYE_11           , "BW-SEQ-BGM-EYE-11") \
     X(BW_SEQ_BGM_C_04             , "BW-SEQ-BGM-C-04") \
@@ -1671,13 +1662,9 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_H_02             , "BW-SEQ-BGM-H-02") \
     X(BW_SEQ_BGM_C_05             , "BW-SEQ-BGM-C-05") \
     X(BW_SEQ_BGM_D_03             , "BW-SEQ-BGM-D-03") \
-    X(BW_SEQ_BGM_R_D_SP_VAR       , "BW-SEQ-BGM-R-D-SP-VAR") \
     X(BW_SEQ_BGM_R_D_SP           , "BW-SEQ-BGM-R-D-SP") \
-    X(BW_SEQ_BGM_R_D_SU_VAR       , "BW-SEQ-BGM-R-D-SU-VAR") \
     X(BW_SEQ_BGM_R_D_SU           , "BW-SEQ-BGM-R-D-SU") \
-    X(BW_SEQ_BGM_R_D_AU_VAR       , "BW-SEQ-BGM-R-D-AU-VAR") \
     X(BW_SEQ_BGM_R_D_AU           , "BW-SEQ-BGM-R-D-AU") \
-    X(BW_SEQ_BGM_R_D_WI_VAR       , "BW-SEQ-BGM-R-D-WI-VAR") \
     X(BW_SEQ_BGM_R_D_WI           , "BW-SEQ-BGM-R-D-WI") \
     X(BW_SEQ_BGM_EYE_06           , "BW-SEQ-BGM-EYE-06") \
     X(BW_SEQ_BGM_EYE_09           , "BW-SEQ-BGM-EYE-09") \
@@ -1691,6 +1678,8 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_EYE_08           , "BW-SEQ-BGM-EYE-08") \
     X(BW_SEQ_BGM_C_07_VAR         , "BW-SEQ-BGM-C-07-VAR") \
     X(BW_SEQ_BGM_C_07             , "BW-SEQ-BGM-C-07") \
+    X(BW_SEQ_BGM_D_05             , "BW-SEQ-BGM-D-05") \
+    X(BW_SEQ_BGM_EYE_PLASMA       , "BW-SEQ-BGM-EYE-PLASMA") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \
