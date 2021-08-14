@@ -3851,6 +3851,10 @@ DirectSoundWaveData_bw_169slapbc3::
 	.incbin "sound/direct_sound_samples/bw_169slapbc3.bin"
 
 	.align 2
+DirectSoundWaveData_bw_acidbassb1::
+	.incbin "sound/direct_sound_samples/bw_acidbassb1.bin"
+
+	.align 2
 DirectSoundWaveData_bw_acidbassb1short::
 	.incbin "sound/direct_sound_samples/bw_acidbassb1short.bin"
 
@@ -4077,3 +4081,19 @@ DirectSoundWaveData_bw_synthsnare_eyeplasma::
 	.align 2
 DirectSoundWaveData_bw_windc4::
 	.incbin "sound/direct_sound_samples/bw_windc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vocoder1::
+	.incbin "sound/direct_sound_samples/bw_vocoder1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vocoder2::
+	.incbin "sound/direct_sound_samples/bw_vocoder2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthcowbell::
+	.incbin "sound/direct_sound_samples/bw_synthcowbell.bin"
+
+	.align 2
+DirectSoundWaveData_bw_erhuc3::
+	.incbin "sound/direct_sound_samples/bw_erhuc3.bin"

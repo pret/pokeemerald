@@ -112,3 +112,16 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 62, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+ 2
 	voice_directsound 60, 64, DirectSoundWaveData_bw_synthsnare_eyeplasma, 255, 0, 255, 0    	@ 127/127/127/127/ 64
 	voice_directsound 63, 64, DirectSoundWaveData_bw_synthchh_vsrival, 255, 0, 255, 0    		@ 127/127/127/127/ 64	+ 3
+	voice_directsound 61, 64, DirectSoundWaveData_bw_synthsnare_plasma, 255, 0, 227, 2    		@ 127/127/120/124/ 64	+ 1
+	voice_directsound 62, 64, DirectSoundWaveData_bw_synthsnare_plasma, 255, 0, 227, 2    		@ 127/127/120/124/ 64	+ 2
+	voice_directsound 64, 64, DirectSoundWaveData_bw_synthcowbell, 255, 0, 255, 0    			@ 127/127/127/127/ 64	+ 4
+	voice_directsound 62, 64, DirectSoundWaveData_bw_synthchh_vsrival, 255, 0, 255, 0    		@ 127/127/127/127/ 64	+ 2
+	voice_directsound 60, 64, DirectSoundWaveData_bw_159rim, 255, 0, 227, 205    				@ 127/127/120/116/ 64	
+	voice_directsound 60, 64, DirectSoundWaveData_bw_010kick, 255, 0, 227, 205    				@ 127/127/120/116/ 64
+	voice_directsound 62, 64, DirectSoundWaveData_bw_010kick, 255, 0, 227, 205    				@ 127/127/120/116/ 64	+ 2
+	voice_directsound 64, 64, DirectSoundWaveData_bw_010kick, 255, 0, 227, 205    				@ 127/127/120/116/ 64	+ 4
+	voice_directsound 61, 64, DirectSoundWaveData_bw_176snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64	+ 1
+	voice_directsound 62, 64, DirectSoundWaveData_bw_176snare, 255, 0, 227, 205    				@ 127/127/120/116/ 64	+ 2
+	voice_directsound 60, 80, DirectSoundWaveData_hg_062chh, 255, 78, 0, 205    				@ 127/124/  0/116/ 80
+	voice_directsound 60, 100, DirectSoundWaveData_hg_138tom, 255, 0, 255, 171    				@ 127/127/127/120/100
+	voice_directsound 67, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 7

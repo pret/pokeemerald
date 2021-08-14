@@ -1680,6 +1680,14 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_eye_plasma.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_07.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_04.o(.rodata);
+        sound/songs/midi/bw_seq_me_item_mystery.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_h_03.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_fs.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_eye_05.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_08_b_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_08_b.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_08_w_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_08_w.o(.rodata);
     } =0
 
     lib_rodata :

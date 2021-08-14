@@ -1442,6 +1442,14 @@ BW_SEQ_BGM_D_05              = D5 03
 BW_SEQ_BGM_EYE_PLASMA        = D6 03
 BW_SEQ_BGM_D_07              = D7 03
 BW_SEQ_BGM_D_04              = D8 03
+BW_SEQ_ME_ITEM_MYSTERY       = D9 03
+BW_SEQ_BGM_H_03              = DA 03
+BW_SEQ_BGM_FS                = DB 03
+BW_SEQ_BGM_EYE_05            = DC 03
+BW_SEQ_BGM_C_08_B_VAR        = DD 03
+BW_SEQ_BGM_C_08_B            = DE 03
+BW_SEQ_BGM_C_08_W_VAR        = DF 03
+BW_SEQ_BGM_C_08_W            = E0 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

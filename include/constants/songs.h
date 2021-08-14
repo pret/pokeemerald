@@ -923,7 +923,7 @@
 #define BW_SEQ_ME_KEYITEM            898 // Obtained a Key Item!
 #define BW_SEQ_BGM_E_FRIEND          899 // Let's Go Together!
 #define BW_SEQ_BGM_R_A               900 // Route 1
-#define BW_SEQ_BGM_VS_NORAPOKE       901 // Battle! (Wild Pokémon)                        (TODO: Portamento on string octave melody at bar 5-6)
+#define BW_SEQ_BGM_VS_NORAPOKE       901 // Battle! (Wild Pokémon)                        (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_WIN1              902 // Victory! (Wild Pokémon)
 #define BW_SEQ_ME_LVUP               903 // Level Up!
 #define BW_SEQ_BGM_T_02_VAR1         904 // Accumula Town
@@ -932,7 +932,7 @@
 #define BW_SEQ_BGM_T_02              907 // Accumula Town (Piano & Drums)
 #define BW_SEQ_BGM_E_TSURETEKE2      908 // Hurry Along 2
 #define BW_SEQ_BGM_POKECEN           909 // Pokémon Center
-#define BW_SEQ_ME_ASA                910 // Pokémon Healed                                (TODO: Sweep pitch on high piano)
+#define BW_SEQ_ME_ASA                910 // Pokémon Healed                                (TODO: SWEEP PITCH!!)
 #define BW_SEQ_ME_HYOUKA1            911 // Pokédex Evaluation... You've Just Begun!
 #define BW_SEQ_BGM_E_SAGE            912 // Team Plasma Plots
 #define BW_SEQ_BGM_R_B_SP            913 // Route 2 (Spring)
@@ -962,7 +962,7 @@
 #define BW_SEQ_BGM_C_02              937 // Nacrene City
 #define BW_SEQ_ME_HYOUKA3            938 // Pokédex Evaluation... Keep at It!
 #define BW_SEQ_BGM_GYM               939 // Pokémon Gym
-#define BW_SEQ_BGM_VS_GYMLEADER      940 // Battle! (Gym Leader)                          (TODO: Portamento on bass)
+#define BW_SEQ_BGM_VS_GYMLEADER      940 // Battle! (Gym Leader)                          (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_BATTLESUPERIOR    941 // Victory Lies Before You!
 #define BW_SEQ_BGM_WIN3              942 // Victory! (Gym Leader)
 #define BW_SEQ_ME_BADGE              943 // Received a League Gym Badge
@@ -1007,6 +1007,14 @@
 #define BW_SEQ_BGM_EYE_PLASMA        982 // Trainers' Eyes Meet (Team Plasma)           (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_D_07              983 // Dragonspiral Tower Top Floor
 #define BW_SEQ_BGM_D_04              984 // Relic Castle
+#define BW_SEQ_ME_ITEM_MYSTERY       985 // Light Stone/Dark Stone
+#define BW_SEQ_BGM_H_03              986 // Tubeline Bridge
+#define BW_SEQ_BGM_FS                987 // Shopping Mall Nine
+#define BW_SEQ_BGM_EYE_05            988 // Trainers' Eyes Meet (Roughneck)
+#define BW_SEQ_BGM_C_08_B_VAR        989 // Opelucid City (Pokémon Black) (No Keytar)   (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_C_08_B            990 // Opelucid City (Pokémon Black)               (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_C_08_W_VAR        991 // Opelucid City (Pokémon White) (No Erhu)
+#define BW_SEQ_BGM_C_08_W            992 // Opelucid City (Pokémon White)               (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 

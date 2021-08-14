@@ -4,9 +4,9 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
 	voice_directsound 60, 0, DirectSoundWaveData_dp_reverscyn_16, 255, 0, 227, 171
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup290, KeySplitTable70    @ harpsichord
 	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup282, KeySplitTable93    @ piano | 41 | 46 | 53 | 58 | 65
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_074glocknc5, 255, 249, 0, 205
@@ -38,10 +38,10 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_064flt2a5, 255, 246, 159, 205
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
 	voice_keysplit voicegroup309, KeySplitTable92    @ slap bass full
-	voice_directsound 60, 0, DirectSoundWaveData_hg_133timpg3, 254, 251, 0, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_hg_133timpg3, 255, 251, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_erhuc3, 58, 234, 159, 205
 	voice_keysplit voicegroup262, KeySplitTable27    @ trombones
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup287, KeySplitTable68    @ oboe | 69
 	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
 	voice_keysplit voicegroup305, KeySplitTable44    @ tuba
 	voice_keysplit voicegroup288, KeySplitTable69    @ oboe || 77
@@ -68,9 +68,9 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup307, KeySplitTable25    @ sd90 distortion guitar (team plasma)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc3_plasma, 255, 253, 0, 2
 	voice_directsound 60, 0, DirectSoundWaveData_hg_033orccym, 255, 246, 0, 214
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_acidbassb1short, 255, 1, 227, 2
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder1, 255, 0, 255, 171
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder2, 255, 0, 255, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
