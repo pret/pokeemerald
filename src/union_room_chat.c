@@ -1198,7 +1198,7 @@ static void Chat_AskQuitChatting(void)
             sChat->funcState = 3;
             break;
         case 0:
-            sub_80104B0();
+            Rfu_StopPartnerSearch();
             PrepareSendBuffer_Disband(sChat->sendMessageBuffer);
             sChat->funcState = 4;
             sChat->tryQuitAgainTimer = 0;
@@ -1819,7 +1819,7 @@ static void PrepareSendBuffer_Leave(u8 *buffer)
     buffer[0] = CHAT_MESSAGE_LEAVE;
     StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
     buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
-    sub_8011A50();
+    RfuSetNormalDisconnectMode();
 }
 
 static void PrepareSendBuffer_Drop(u8 *buffer)
@@ -2079,13 +2079,12 @@ static void Task_ReceiveChatMessage(u8 taskId)
         {
             if (GetLinkPlayerCount() == 2)
             {
-                sub_80104B0();
+                Rfu_StopPartnerSearch();
                 sChat->exitType = 1;
                 DestroyTask(taskId);
                 return;
             }
-
-            sub_8011DE0(tCurrLinkPlayer);
+            Rfu_DisconnectPlayerById(tCurrLinkPlayer);
         }
 
         tState = 3;
@@ -2104,7 +2103,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         if (!sub_8011A9C())
         {
             if (!sChat->multiplayerId)
-                sub_80110B8(sChat->linkPlayerCount);
+                SetUnionRoomChatPlayerData(sChat->linkPlayerCount);
 
             tState = 1;
         }

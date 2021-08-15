@@ -1,7 +1,7 @@
 #include "global.h"
 #include "m4a.h"
 #include "malloc.h"
-#include "reset_save_heap.h"
+#include "reload_save.h"
 #include "save.h"
 #include "bg.h"
 #include "window.h"
@@ -1705,7 +1705,7 @@ static void CB2_PrintErrorMessage(void)
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
                 sLinkErrorBuffer.disconnected = FALSE;
-                sub_81700F8();
+                ReloadSave();
             }
         }
         else if (gWirelessCommType == 2)

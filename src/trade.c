@@ -459,7 +459,7 @@ static void CB2_CreateTradeMenu(void)
             sTradeMenuData->timer = 0;
             if (gWirelessCommType)
             {
-                sub_801048C(TRUE);
+                Rfu_SetLinkRecovery(TRUE);
                 SetLinkStandbyCallback();
             }
         }
@@ -1709,7 +1709,7 @@ static void CancelTrade_2(void)
 
 static void LinkTradeWaitForQueue(void)
 {
-    if (!sub_801048C(FALSE) && GetNumQueuedActions() == 0)
+    if (!Rfu_SetLinkRecovery(FALSE) && GetNumQueuedActions() == 0)
     {
         SetLinkStandbyCallback();
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_START_LINK_TRADE;

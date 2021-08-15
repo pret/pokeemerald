@@ -36,6 +36,7 @@ struct SaveSectionOffsets
 
 // Emerald changes this definition to be the sectors per slot.
 #define NUM_SECTORS_PER_SLOT 16
+#define NUM_SAVE_SLOTS 2
 
 #define UNKNOWN_CHECK_VALUE 0x8012025
 #define SPECIAL_SECTION_SENTINEL 0xB39D
@@ -104,7 +105,7 @@ bool8 sub_8153408(void);
 bool8 FullSaveGame(void);
 bool8 CheckSaveFile(void);
 u8 Save_LoadGameData(u8 saveType);
-u16 sub_815355C(void);
+u16 GetSaveBlocksPointersBaseOffset(void);
 u32 TryReadSpecialSaveSection(u8 sector, u8* dst);
 u32 TryWriteSpecialSaveSection(u8 sector, u8* src);
 void Task_LinkSave(u8 taskId);

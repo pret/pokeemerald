@@ -3106,7 +3106,7 @@ static u32 RecvPacket_ReadyToStart(u32 playerId)
 {
     struct ReadyToStartPacket *packet;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     packet = (void *)&gRecvCmds[playerId][1];
@@ -3233,7 +3233,7 @@ static bool32 RecvPacket_GameState(u32 playerId,
     struct GameStatePacket *packet;
     struct DodrioGame_Berries *berries = &player->berries;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     packet = (void *)&gRecvCmds[0][1];
@@ -3310,7 +3310,7 @@ static bool32 RecvPacket_PickState(u32 playerId, u8 *pickState)
 {
     struct PickStatePacket *packet;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     packet = (void *)&gRecvCmds[playerId][1];
@@ -3341,7 +3341,7 @@ static bool32 RecvPacket_ReadyToEnd(u32 playerId)
 {
     struct ReadyToEndPacket *packet;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     packet = (void *)&gRecvCmds[playerId][1];

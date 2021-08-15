@@ -680,7 +680,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
             if (gReceivedRemoteLinkPlayers != 0)
             {
                 if (IsActivityWithVariableGroupSize(gPlayerCurrActivity))
-                    sub_801103C();
+                    GetOtherPlayersInfoFlags();
                 UpdateGameData_GroupLockedIn(TRUE);
                 CreateTask_RunScriptAndFadeToActivity();
                 Leader_DestroyResources(data);
@@ -1291,7 +1291,7 @@ static void Task_ListenToWireless(u8 taskId)
         SetWirelessCommType1();
         OpenLink();
         InitializeRfuLinkManager_JoinGroup();
-        sub_80111B0(TRUE);
+        RfuSetIgnoreError(TRUE);
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 2;
@@ -2894,7 +2894,7 @@ static void Task_RunUnionRoom(u8 taskId)
         ReceiveUnionRoomActivityPacket(uroom);
         if (UnionRoom_HandleContactFromOtherPlayer(uroom) && JOY_NEW(B_BUTTON))
         {
-            sub_8011DE0(1);
+            Rfu_DisconnectPlayerById(1);
             StringCopy(gStringVar4, sText_ChatEnded);
             uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
         }
@@ -2908,9 +2908,9 @@ static void Task_RunUnionRoom(u8 taskId)
         case 0: // ACCEPT
             uroom->playerSendBuffer[0] = ACTIVITY_ACCEPT | IN_UNION_ROOM;
             if (gPlayerCurrActivity == (ACTIVITY_CHAT | IN_UNION_ROOM))
-                UpdateGameData_SetActivity(gPlayerCurrActivity | IN_UNION_ROOM, sub_801100C(1), FALSE);
+                UpdateGameData_SetActivity(gPlayerCurrActivity | IN_UNION_ROOM, GetLinkPlayerInfoFlags(1), FALSE);
             else
-                UpdateGameData_SetActivity(gPlayerCurrActivity | IN_UNION_ROOM, sub_801100C(1), TRUE);
+                UpdateGameData_SetActivity(gPlayerCurrActivity | IN_UNION_ROOM, GetLinkPlayerInfoFlags(1), TRUE);
 
             uroom->field_8->arr[0].field_1B = 0;
             taskData[3] = 0;
@@ -3213,7 +3213,7 @@ void SetUsingUnionRoomStartMenu(void)
 
 static void ReceiveUnionRoomActivityPacket(struct WirelessLink_URoom *data)
 {
-    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == 0x2F00)
+    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & RFUCMD_MASK) == RFUCMD_SEND_PACKET)
     {
         data->recvActivityRequest[0] = gRecvCmds[1][1];
         if (gRecvCmds[1][1] == (ACTIVITY_TRADE | IN_UNION_ROOM))
@@ -3282,7 +3282,7 @@ static void Task_InitUnionRoom(u8 taskId)
         SetWirelessCommType1();
         OpenLink();
         InitializeRfuLinkManager_EnterUnionRoom();
-        sub_80111B0(TRUE);
+        RfuSetIgnoreError(TRUE);
         data->state = 2;
         break;
     case 2:
@@ -3877,32 +3877,22 @@ static bool32 AreUnionRoomPlayerGnamesDifferent(struct WirelessGnameUnamePair *p
     s32 i;
 
     if (pair1->gname.activity != pair2->gname.activity)
-    {
         return TRUE;
-    }
 
     if (pair1->gname.started != pair2->gname.started)
-    {
         return TRUE;
-    }
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (pair1->gname.child_sprite_gender[i] != pair2->gname.child_sprite_gender[i])
-        {
             return TRUE;
-        }
     }
 
     if (pair1->gname.species != pair2->gname.species)
-    {
         return TRUE;
-    }
 
     if (pair1->gname.type != pair2->gname.type)
-    {
         return TRUE;
-    }
 
     return FALSE;
 }
@@ -4246,7 +4236,7 @@ static s32 GetChatLeaderActionRequestMessage(u8 *dst, u32 gender, u16 *activityD
         StringCopy(uroom->activityRequestStrbufs[1], gSpeciesNames[sUnionRoomTrade.playerSpecies]);
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
-            if (gRfuLinkStatus->partner[i].serialNo == 2)
+            if (gRfuLinkStatus->partner[i].serialNo == RFU_SERIAL_A)
             {
                 ConvertIntToDecimalStringN(uroom->activityRequestStrbufs[2], activityData[2], STR_CONV_MODE_LEFT_ALIGN, 3);
                 StringCopy(uroom->activityRequestStrbufs[3], gSpeciesNames[activityData[1]]);

@@ -2069,7 +2069,7 @@ static bool32 CheckRecvCmdMatches(u16 recvCmd, u16 linkCmd, u16 rfuCmd)
 {
     if (gReceivedRemoteLinkPlayers && gWirelessCommType)
     {
-        if ((recvCmd & 0xFF00) == rfuCmd)
+        if ((recvCmd & RFUCMD_MASK) == rfuCmd)
             return TRUE;
     }
     else
@@ -3135,7 +3135,7 @@ static void UpdateBlenderCenter(void)
         }
         else
         {
-            if ((gRecvCmds[0][BLENDER_COMM_INPUT_STATE] & 0xFF00) == RFUCMD_BLENDER_SEND_KEYS)
+            if ((gRecvCmds[0][BLENDER_COMM_INPUT_STATE] & RFUCMD_MASK) == RFUCMD_BLENDER_SEND_KEYS)
             {
                 sBerryBlender->progressBarValue = gRecvCmds[0][BLENDER_COMM_PROGRESS_BAR];
                 sBerryBlender->arrowPos = gRecvCmds[0][BLENDER_COMM_ARROW_POS];

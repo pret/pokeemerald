@@ -5,20 +5,25 @@
 #include "link.h"
 #include "AgbRfu_LinkManager.h"
 
+#define RFUCMD_MASK                0xFF00
+
 #define RFUCMD_SEND_PACKET         0x2F00
 #define RFUCMD_BLENDER_SEND_KEYS   0x4400
 #define RFUCMD_READY_CLOSE_LINK    0x5F00
 #define RFUCMD_READY_EXIT_STANDBY  0x6600
-#define RFUCMD_0x7700              0x7700
-#define RFUCMD_0x7800              0x7800
-#define RFUCMD_0x8800              0x8800
-#define RFUCMD_0x8900              0x8900
+#define RFUCMD_SEND_PLAYER_IDS     0x7700
+#define RFUCMD_SEND_PLAYER_IDS_NEW 0x7800
+#define RFUCMD_SEND_BLOCK_INIT     0x8800
+#define RFUCMD_SEND_BLOCK          0x8900
 #define RFUCMD_SEND_BLOCK_REQ      0xA100
 #define RFUCMD_SEND_HELD_KEYS      0xBE00
-#define RFUCMD_0xED00              0xED00
-#define RFUCMD_0xEE00              0xEE00
+#define RFUCMD_DISCONNECT          0xED00
+#define RFUCMD_DISCONNECT_PARENT   0xEE00
 
-#define RFU_SERIAL_7F7D 0x7F7D
+#define RFU_SERIAL_A   0x0002
+#define RFU_SERIAL_B   0x7F7D
+#define RFU_SERIAL_C   0x0000
+#define RFU_SERIAL_END 0xFFFF
 
 #define RECV_QUEUE_NUM_SLOTS 32
 #define RECV_QUEUE_SLOT_LENGTH (14 * MAX_RFU_PLAYERS)
@@ -44,6 +49,24 @@
 #define RFU_STATUS_CHILD_LEAVE_READY    10
 #define RFU_STATUS_CHILD_LEAVE          11
 #define RFU_STATUS_ACK_JOIN_GROUP       12
+
+#define CHILD_DATA_LENGTH 14
+
+// Values for disconnectMode
+enum {
+    RFU_DISCONNECT_NONE,
+    RFU_DISCONNECT_ERROR,
+    RFU_DISCONNECT_NORMAL,
+};
+
+// Values for errorState
+enum {
+    RFU_ERROR_STATE_NONE,
+    RFU_ERROR_STATE_1,
+    RFU_ERROR_STATE_2,
+    RFU_ERROR_STATE_3,
+    RFU_ERROR_STATE_IGNORE,
+};
 
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub
@@ -125,8 +148,8 @@ struct GFRfuManager
     /* 0x00f */ u8 unk_0f;
     /* 0x010 */ u16 unk_10;
     /* 0x012 */ u16 unk_12;
-    /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
-    /* 0x04c */ u8 unk_4c[14];
+    /* 0x014 */ u8 childRecvBuffer[RFU_CHILD_MAX][CHILD_DATA_LENGTH];
+    /* 0x04c */ u8 childSendBuffer[CHILD_DATA_LENGTH];
     /* 0x05a */ u8 blockRequestType;
     /* 0x05b */ u8 unk_5b;
     /* 0x05c */ bool8 blockReceived[MAX_RFU_PLAYERS];
@@ -144,9 +167,9 @@ struct GFRfuManager
     /* 0x0f1 */ u8 status;
     /* 0x0f2 */ u16 packet[RFU_PACKET_SIZE];
     /* 0x0fe */ u16 resendExitStandbyTimer;
-    /* 0x100 */ u16 unk_100;
+    /* 0x100 */ u16 allReadyNum;
     /* 0x102 */ u8 unk_102;
-    /* 0x103 */ u8 filler_103[0x10A - 0x103];
+    /* 0x103 */ u8 filler_103[7];
     /* 0x10A */ struct GFtgtGname unk_10A;
     u8 filler_;
     u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -162,36 +185,33 @@ struct GFRfuManager
     /* 0xc87 */ u8 recvCmds[5][7][2];
     /* 0xccd */ u8 parentId;
     /* 0xcce */ u8 multiplayerId;
-    /* 0xccf */ u8 unk_ccf;
-    /* 0xcd0 */ vu8 unk_cd0;
+    /* 0xccf */ u8 connectParentFailures;
+    /* 0xcd0 */ vu8 childSendCount;
     /* 0xcd1 */ u8 partnerSendStatuses[RFU_CHILD_MAX];
     /* 0xcd5 */ u8 partnerRecvStatuses[RFU_CHILD_MAX];
-    /* 0xcd9 */ u8 unk_cd9;
+    /* 0xcd9 */ bool8 stopNewConnections;
     /* 0xcda */ u8 unk_cda;
     /* 0xcdb */ vbool8 unk_cdb;
     /* 0xcdc */ vbool8 unk_cdc;
     /* 0xcdd */ u8 unk_cdd;
     /* 0xcde */ u8 linkPlayerIdx[RFU_CHILD_MAX];
     /* 0xce2 */ u8 unk_ce2;
-    /* 0xce2 */ u8 unk_ce3;
-    /* 0xce4 */ u8 unk_ce4;
+    /* 0xce2 */ u8 disconnectSlots;
+    /* 0xce4 */ u8 disconnectMode;
     /* 0xce5 */ u8 unk_ce5;
     /* 0xce5 */ u8 unk_ce6;
     /* 0xce7 */ u8 acceptSlot_flag;
-    /* 0xce8 */ u8 unk_ce8;
+    /* 0xce8 */ bool8 unk_ce8;
     /* 0xce9 */ u8 unk_ce9;
     /* 0xcea */ u8 unk_cea[4];
     /* 0xcee */ u8 unk_cee[4];
 }; // size = 0xcf4
-
-// Exported RAM declarations
 
 extern struct GFtgtGname gHostRFUtgtGnameBuffer;
 extern u8 gHostRFUtgtUnameBuffer[];
 extern struct GFRfuManager Rfu;
 extern u8 gWirelessStatusIndicatorSpriteId;
 
-// Exported ROM declarations
 void WipeTrainerNameRecords(void);
 void InitRFUAPI(void);
 void LinkRfu_Shutdown(void);
@@ -219,13 +239,13 @@ bool32 RfuHasErrored(void);
 bool32 IsRfuRecvQueueEmpty(void);
 u32 GetRfuRecvQueueLength(void);
 void RfuVSync(void);
-void sub_80111B0(bool32 a0);
+void RfuSetIgnoreError(bool32 enable);
 u8 RfuGetStatus(void);
 struct GFtgtGname *GetHostRFUtgtGname(void);
-void UpdateGameData_GroupLockedIn(u8 a0);
-void GetLinkmanErrorParams(u32 a0);
-void RfuSetStatus(u8 a0, u16 a1);
-u8 sub_801048C(bool32 a0);
+void UpdateGameData_GroupLockedIn(u8 started);
+void GetLinkmanErrorParams(u32 msg);
+void RfuSetStatus(u8 status, u16 msg);
+u8 Rfu_SetLinkRecovery(bool32 enable);
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2);
 void SetHostRFUtgtGname(u8 activity, u32 child_sprite_genders, bool32 started);
 void InitializeRfuLinkManager_LinkLeader(u32 a0);
@@ -235,10 +255,10 @@ bool32 RfuTryDisconnectLeavingChildren(void);
 bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name);
 void SendRfuStatusToPartner(u8 status, u16 trainerId, const u8 *name);
 u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name);
-void RequestDisconnectSlotByTrainerNameAndId(const u8 *a0, u16 a1);
+void RequestDisconnectSlotByTrainerNameAndId(const u8 *name, u16 id);
 bool8 LmanAcceptSlotFlagIsNotZero(void);
-bool32 WaitRfuState(bool32 a0);
-void sub_801103C(void);
+bool32 WaitRfuState(bool32 force);
+void GetOtherPlayersInfoFlags(void);
 void InitializeRfuLinkManager_JoinGroup(void);
 void SendLeaveGroupNotice(void);
 void RecordMixTrainerNames(void);
@@ -246,7 +266,7 @@ void LinkRfu_CreateConnectionAsParent(void);
 void LinkRfu_StopManagerBeforeEnteringChat(void);
 void UpdateGameData_SetActivity(u8 activity, u32 flags, bool32 started);
 void CreateTask_RfuReconnectWithParent(const u8 *src, u16 trainerId);
-void SetGnameBufferWonderFlags(bool32 a0, bool32 a1);
+void SetGnameBufferWonderFlags(bool32 hasNews, bool32 hasCard);
 void ClearAndInitHostRFUtgtGname(void);
 void SetTradeBoardRegisteredMonInfo(u32 type, u32 species, u32 level);
 void InitializeRfuLinkManager_EnterUnionRoom(void);
@@ -254,8 +274,8 @@ void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 IsUnionRoomListenTaskActive(void);
 void Rfu_SendPacket(void *data);
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
-void sub_8011DE0(u32 arg0);
-u8 sub_801100C(s32 a0);
+void Rfu_DisconnectPlayerById(u32 playerIdx);
+u8 GetLinkPlayerInfoFlags(s32 playerId);
 void sub_800EF7C(void);
 bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
 bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
@@ -265,9 +285,9 @@ void DestroyTask_RfuIdle(void);
 void ClearRecvCommands(void);
 void LinkRfu_FatalError(void);
 bool32 sub_8011A9C(void);
-void sub_80104B0(void);
-void sub_8011A50(void);
-void sub_80110B8(u32 a0);
+void Rfu_StopPartnerSearch(void);
+void RfuSetNormalDisconnectMode(void);
+void SetUnionRoomChatPlayerData(u32 numPlayers);
 bool32 IsRfuSerialNumberValid(u32 serialNo);
 bool8 IsRfuRecoveringFromLinkLoss(void);
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue);

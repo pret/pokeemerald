@@ -719,7 +719,7 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal = FALSE;
-    if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_7F7D)
+    if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_B)
     {
         memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
         memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
