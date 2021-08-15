@@ -4097,3 +4097,15 @@ DirectSoundWaveData_bw_synthcowbell::
 	.align 2
 DirectSoundWaveData_bw_erhuc3::
 	.incbin "sound/direct_sound_samples/bw_erhuc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_phatkick_e4::
+	.incbin "sound/direct_sound_samples/bw_phatkick_e4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_punchysnare_e4::
+	.incbin "sound/direct_sound_samples/bw_punchysnare_e4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_808snarereverb::
+	.incbin "sound/direct_sound_samples/bw_808snarereverb.bin"

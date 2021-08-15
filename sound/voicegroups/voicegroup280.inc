@@ -125,3 +125,6 @@ voicegroup280:: @ drums 3 (ichinose)
 	voice_directsound 60, 80, DirectSoundWaveData_hg_062chh, 255, 78, 0, 205    				@ 127/124/  0/116/ 80
 	voice_directsound 60, 100, DirectSoundWaveData_hg_138tom, 255, 0, 255, 171    				@ 127/127/127/120/100
 	voice_directsound 67, 64, DirectSoundWaveData_hg_032crash, 255, 246, 0, 214    				@ 127/ 90/  0/114/ 64	+ 7
+	voice_directsound 45, 64, DirectSoundWaveData_bw_synthclap_plasma, 255, 197, 227, 2    		@ 127/120/120/124/ 64	-15
+	voice_directsound 46, 64, DirectSoundWaveData_bw_synthclap_plasma, 255, 197, 227, 2    		@ 127/120/120/124/ 64	-14
+	voice_directsound 73, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+13

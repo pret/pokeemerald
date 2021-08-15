@@ -2681,3 +2681,6 @@ $(MID_SUBDIR)/bw_seq_bgm_eye_04.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_pokemon_league.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V092
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_shitenno.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V090
