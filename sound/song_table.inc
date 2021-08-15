@@ -994,6 +994,15 @@ gSongTable::
 	song bw_seq_bgm_c_08_b, 0, 0
 	song bw_seq_bgm_c_08_w_var, 0, 0
 	song bw_seq_bgm_c_08_w, 0, 0
+	song bw_seq_bgm_r_f, 0, 0
+	song bw_seq_bgm_d_champroad_var1, 0, 0
+	song bw_seq_bgm_d_champroad_var2, 0, 0
+	song bw_seq_bgm_d_champroad_var3, 0, 0
+	song bw_seq_bgm_d_champroad_var4, 0, 0
+	song bw_seq_bgm_d_champroad_var5, 0, 0
+	song bw_seq_bgm_d_champroad_var6, 0, 0
+	song bw_seq_bgm_d_champroad_var7, 0, 0
+	song bw_seq_bgm_d_champroad, 0, 0
 
 	.align 2
 dummy_song_header:

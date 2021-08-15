@@ -2648,3 +2648,30 @@ $(MID_SUBDIR)/bw_seq_bgm_c_08_w_var.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_c_08_w.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V080 -X
+
+$(MID_SUBDIR)/bw_seq_bgm_r_f.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var1.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var3.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var4.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var5.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var6.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var7.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_d_champroad.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V098

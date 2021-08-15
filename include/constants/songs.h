@@ -1015,6 +1015,15 @@
 #define BW_SEQ_BGM_C_08_B            990 // Opelucid City (Pokémon Black)               (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_C_08_W_VAR        991 // Opelucid City (Pokémon White) (No Erhu)
 #define BW_SEQ_BGM_C_08_W            992 // Opelucid City (Pokémon White)               (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_R_F               993 // Route 10
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR1  994 // Victory Road (1 Badge)
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR2  995 // Victory Road (2 Badges)
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR3  996 // Victory Road (3 Badges)
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR4  997 // Victory Road (4 Badges)
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR5  998 // Victory Road (5 Badges)
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR6  999 // Victory Road (6 Badges)
+#define BW_SEQ_BGM_D_CHAMPROAD_VAR7  1000 // Victory Road (7 Badges)
+#define BW_SEQ_BGM_D_CHAMPROAD       1001 // Victory Road (All Badges)
 
 // Black 2 & White 2 Music
 

@@ -63,3 +63,5 @@ voicegroup278:: @ drums 1 (kageyama)
 	voice_directsound 60, 56, DirectSoundWaveData_bw_175snare, 255, 0, 227, 205    				@ 127/127/120/116/ 56	
 	voice_directsound 60, 40, DirectSoundWaveData_hg_062chh, 255, 78, 0, 205    				@ 127/124/  0/116/ 40
 	voice_directsound 60, 40, DirectSoundWaveData_hg_063ohh, 255, 241, 0, 205    				@ 127/102/  0/116/ 40
+	voice_directsound 48, 64, DirectSoundWaveData_dp_reverscyn_16, 3, 0, 227, 171    			@   4/127/120/120/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_159rim, 255, 0, 227, 205    				@ 127/127/120/116/ 64	

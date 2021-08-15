@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_C_08_W - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_D_CHAMPROAD - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_C_08_W - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_D_CHAMPROAD - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -460,10 +460,10 @@ static void HighlightSelectedWindow(u8 windowType) // sub_080E88E8
 
 static void PrintSoundNumber(u16 soundIndex, u8 windowId) // sub_080E8928
 {
-    ConvertIntToDecimalStringN(gStringVar1, soundIndex, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, soundIndex, STR_CONV_MODE_RIGHT_ALIGN, 4);
     
-    gStringVar1[3] = CHAR_COLON;
-    gStringVar1[4] = EOS;
+    gStringVar1[4] = CHAR_COLON;
+    gStringVar1[5] = EOS;
     
     AddTextPrinterParameterized(windowId, 2, gStringVar1, 0, 14, TEXT_SPEED_FF, NULL);
     PutWindowTilemapAndCopyWindowToVram(windowId);
@@ -1690,6 +1690,15 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_C_08_B           , "BW-SEQ-BGM-C-08-B") \
     X(BW_SEQ_BGM_C_08_W_VAR       , "BW-SEQ-BGM-C-08-W-VAR") \
     X(BW_SEQ_BGM_C_08_W           , "BW-SEQ-BGM-C-08-W") \
+    X(BW_SEQ_BGM_R_F              , "BW-SEQ-BGM-R-F") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR1 , "BW-SEQ-BGM-D-CHAMPROAD-VAR1") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR2 , "BW-SEQ-BGM-D-CHAMPROAD-VAR2") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR3 , "BW-SEQ-BGM-D-CHAMPROAD-VAR3") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR4 , "BW-SEQ-BGM-D-CHAMPROAD-VAR4") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR5 , "BW-SEQ-BGM-D-CHAMPROAD-VAR5") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR6 , "BW-SEQ-BGM-D-CHAMPROAD-VAR6") \
+    X(BW_SEQ_BGM_D_CHAMPROAD_VAR7 , "BW-SEQ-BGM-D-CHAMPROAD-VAR7") \
+    X(BW_SEQ_BGM_D_CHAMPROAD      , "BW-SEQ-BGM-D-CHAMPROAD") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

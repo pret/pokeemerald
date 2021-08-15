@@ -1688,6 +1688,15 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_c_08_b.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_08_w_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_08_w.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_r_f.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var1.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var2.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var3.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var4.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var5.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var6.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad_var7.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_d_champroad.o(.rodata);
     } =0
 
     lib_rodata :

@@ -39,7 +39,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
 	voice_keysplit voicegroup309, KeySplitTable92    @ slap bass full
 	voice_directsound 60, 0, DirectSoundWaveData_hg_133timpg3, 255, 251, 0, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_erhuc3, 58, 234, 159, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_erhuc3, 42, 234, 159, 205
 	voice_keysplit voicegroup262, KeySplitTable27    @ trombones
 	voice_keysplit voicegroup287, KeySplitTable68    @ oboe | 69
 	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
@@ -71,12 +71,12 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_acidbassb1short, 255, 1, 227, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder1, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder2, 255, 0, 255, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup318, KeySplitTable44    @ tuba decay
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc5_plasma, 255, 253, 0, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_stringhit_plasma, 255, 248, 25, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_windc4, 255, 0, 255, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
