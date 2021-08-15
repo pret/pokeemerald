@@ -1024,6 +1024,8 @@
 #define BW_SEQ_BGM_D_CHAMPROAD_VAR6  999 // Victory Road (6 Badges)
 #define BW_SEQ_BGM_D_CHAMPROAD_VAR7  1000 // Victory Road (7 Badges)
 #define BW_SEQ_BGM_D_CHAMPROAD       1001 // Victory Road (All Badges)
+#define BW_SEQ_BGM_EYE_04            1002 // Trainers' Eyes Meet (Ace Trainer)
+#define BW_SEQ_BGM_POKEMON_LEAGUE    1003 // The Pokémon League
 
 // Black 2 & White 2 Music
 

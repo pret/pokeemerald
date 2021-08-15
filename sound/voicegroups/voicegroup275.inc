@@ -28,7 +28,7 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup311, KeySplitTable86    @ fretless bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup309, KeySplitTable92    @ slap bass full
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_keysplit voicegroup298, KeySplitTable82    @ strings 2

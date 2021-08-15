@@ -68,7 +68,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup307, KeySplitTable25    @ sd90 distortion guitar (team plasma)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc3_plasma, 255, 253, 0, 2
 	voice_directsound 60, 0, DirectSoundWaveData_hg_033orccym, 255, 246, 0, 214
-	voice_directsound 60, 0, DirectSoundWaveData_bw_acidbassb1short, 255, 1, 227, 2
+	voice_directsound 60, 0, DirectSoundWaveData_bw_acidbassb1, 255, 1, 227, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder1, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder2, 255, 0, 255, 171
 	voice_keysplit voicegroup318, KeySplitTable44    @ tuba decay
@@ -76,7 +76,7 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc5_plasma, 255, 253, 0, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_stringhit_plasma, 255, 248, 25, 205
-	voice_directsound 60, 0, DirectSoundWaveData_bw_windc4, 255, 0, 255, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

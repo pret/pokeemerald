@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_D_CHAMPROAD - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_POKEMON_LEAGUE - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_D_CHAMPROAD - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_POKEMON_LEAGUE - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1699,6 +1699,8 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_D_CHAMPROAD_VAR6 , "BW-SEQ-BGM-D-CHAMPROAD-VAR6") \
     X(BW_SEQ_BGM_D_CHAMPROAD_VAR7 , "BW-SEQ-BGM-D-CHAMPROAD-VAR7") \
     X(BW_SEQ_BGM_D_CHAMPROAD      , "BW-SEQ-BGM-D-CHAMPROAD") \
+    X(BW_SEQ_BGM_EYE_04           , "BW-SEQ-BGM-EYE-04") \
+    X(BW_SEQ_BGM_POKEMON_LEAGUE   , "BW-SEQ-BGM-POKEMON-LEAGUE") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

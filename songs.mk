@@ -2675,3 +2675,9 @@ $(MID_SUBDIR)/bw_seq_bgm_d_champroad_var7.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_d_champroad.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_04.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V061
+
+$(MID_SUBDIR)/bw_seq_bgm_pokemon_league.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V092
