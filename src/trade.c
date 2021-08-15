@@ -1008,9 +1008,7 @@ static bool8 BufferTradeParties(void)
         break;
     case 3:
         if (id == 0)
-        {
-            RequestLinkData(1);
-        }
+            RequestLinkData(BLOCK_REQ_SIZE_200);
         sTradeMenuData->bufferPartyState++;
         break;
     case 4:
@@ -1027,9 +1025,7 @@ static bool8 BufferTradeParties(void)
         break;
     case 7:
         if (id == 0)
-        {
-            RequestLinkData(1);
-        }
+            RequestLinkData(BLOCK_REQ_SIZE_200);
         sTradeMenuData->bufferPartyState++;
         break;
     case 8:
@@ -1046,9 +1042,7 @@ static bool8 BufferTradeParties(void)
         break;
     case 11:
         if (id == 0)
-        {
-            RequestLinkData(1);
-        }
+            RequestLinkData(BLOCK_REQ_SIZE_200);
         sTradeMenuData->bufferPartyState++;
         break;
     case 12:
@@ -1065,9 +1059,7 @@ static bool8 BufferTradeParties(void)
         break;
     case 15:
         if (id == 0)
-        {
-            RequestLinkData(3);
-        }
+            RequestLinkData(BLOCK_REQ_SIZE_220);
         sTradeMenuData->bufferPartyState++;
         break;
     case 16:
@@ -1084,9 +1076,7 @@ static bool8 BufferTradeParties(void)
         break;
     case 19:
         if (id == 0)
-        {
-            RequestLinkData(4);
-        }
+            RequestLinkData(BLOCK_REQ_SIZE_40);
         sTradeMenuData->bufferPartyState++;
         break;
     case 20:
@@ -3096,7 +3086,7 @@ static void TrySendTradeFinishData(void)
     case 1:
         if (IsLinkTaskFinished())
         {
-            SendBlock(bitmask_all_link_players_but_self(), sTradeData->linkData, sizeof(sTradeData->linkData));
+            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeData->linkData, sizeof(sTradeData->linkData));
             sTradeData->sendTradeFinishState++;
         }
         // fallthrough
@@ -4632,7 +4622,7 @@ static void CB2_TryFinishTrade(void)
             && sTradeData->partnerLinkFlagFinishTrade == READY_FINISH_TRADE)
         {
             sTradeData->linkData[0] = LINKCMD_CONFIRM_FINISH_TRADE;
-            SendBlock(bitmask_all_link_players_but_self(), sTradeData->linkData, sizeof(sTradeData->linkData));
+            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeData->linkData, sizeof(sTradeData->linkData));
             sTradeData->playerLinkFlagFinishTrade = FINISH_TRADE;
             sTradeData->partnerLinkFlagFinishTrade = FINISH_TRADE;
         }

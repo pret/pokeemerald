@@ -1355,7 +1355,7 @@ static void CB2_StartBlenderLink(void)
         {
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
-                SendBlockRequest(4);
+                SendBlockRequest(BLOCK_REQ_SIZE_40);
             sBerryBlender->mainState++;
         }
         break;

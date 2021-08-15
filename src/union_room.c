@@ -1494,7 +1494,7 @@ static void Task_ExchangeCards(u8 taskId)
     {
     case 0:
         if (GetMultiplayerId() == 0)
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
         gTasks[taskId].data[0]++;
         break;
     case 1:
