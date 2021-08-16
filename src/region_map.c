@@ -48,6 +48,12 @@
 
 #define FLYDESTICON_RED_OUTLINE 6
 
+enum {
+    TAG_CURSOR,
+    TAG_PLAYER_ICON,
+    TAG_FLY_ICON,
+};
+
 // Static type declarations
 
 struct MultiNameFlyDest
@@ -237,13 +243,13 @@ static const union AnimCmd *const sRegionMapCursorAnimTable[] =
 static const struct SpritePalette sRegionMapCursorSpritePalette =
 {
     .data = sRegionMapCursorPal,
-    .tag = 0
+    .tag = TAG_CURSOR
 };
 
 static const struct SpriteTemplate sRegionMapCursorSpriteTemplate =
 {
-    .tileTag = 0,
-    .paletteTag = 0,
+    .tileTag = TAG_CURSOR,
+    .paletteTag = TAG_CURSOR,
     .oam = &sRegionMapCursorOam,
     .anims = sRegionMapCursorAnimTable,
     .images = NULL,
@@ -419,7 +425,7 @@ static const struct WindowTemplate sFlyMapWindowTemplates[] =
 static const struct SpritePalette sFlyTargetIconsSpritePalette =
 {
     .data = sFlyTargetIcons_Pal,
-    .tag = 2
+    .tag = TAG_FLY_ICON
 };
 
 static const u16 sRedOutlineFlyDestinations[][2] =
@@ -497,8 +503,8 @@ static const union AnimCmd *const sFlyDestIcon_Anims[] =
 
 static const struct SpriteTemplate sFlyDestIconSpriteTemplate =
 {
-    .tileTag = 2,
-    .paletteTag = 2,
+    .tileTag = TAG_FLY_ICON,
+    .paletteTag = TAG_FLY_ICON,
     .oam = &sFlyDestIcon_OamData,
     .anims = sFlyDestIcon_Anims,
     .images = NULL,
@@ -1692,8 +1698,8 @@ void CB2_OpenFlyMap(void)
         break;
     case 4:
         InitRegionMap(&sFlyMap->regionMap, FALSE);
-        CreateRegionMapCursor(0, 0);
-        CreateRegionMapPlayerIcon(1, 1);
+        CreateRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
+        CreateRegionMapPlayerIcon(TAG_PLAYER_ICON, TAG_PLAYER_ICON);
         sFlyMap->mapSecId = sFlyMap->regionMap.mapSecId;
         StringFill(sFlyMap->nameBuffer, CHAR_SPACE, MAP_NAME_LENGTH);
         sDrawFlyDestTextWindow = TRUE;
@@ -1827,7 +1833,7 @@ static void LoadFlyDestIcons(void)
     LZ77UnCompWram(sFlyTargetIcons_Gfx, sFlyMap->tileBuffer);
     sheet.data = sFlyMap->tileBuffer;
     sheet.size = sizeof(sFlyMap->tileBuffer);
-    sheet.tag = 2;
+    sheet.tag = TAG_FLY_ICON;
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&sFlyTargetIconsSpritePalette);
     CreateFlyDestIcons();
