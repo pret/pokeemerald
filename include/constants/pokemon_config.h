@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_POKEMON_CONFIG_H
 #define GUARD_CONSTANTS_POKEMON_CONFIG_H
 
+#include "constants/expansion_branches.h"
+
 #ifndef GEN_3
 #define GEN_3 0
 #define GEN_4 1
