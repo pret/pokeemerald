@@ -1,4 +1,4 @@
-Roulette_EventScript_Table1:: @ 82A5AB1
+Roulette_EventScript_Table1::
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
@@ -10,7 +10,7 @@ Roulette_EventScript_Table1:: @ 82A5AB1
 	goto Roulette_EventScript_Play
 	end
 
-Roulette_EventScript_Table2:: @ 82A5ADF
+Roulette_EventScript_Table2::
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
@@ -22,50 +22,50 @@ Roulette_EventScript_Table2:: @ 82A5ADF
 	goto Roulette_EventScript_Play
 	end
 
-Roulette_EventScript_Play:: @ 82A5B0D
+Roulette_EventScript_Play::
 	special PlayRoulette
 	waitstate
 	end
 	
-Roulette_Text_PlayMinimumWagerIsX:: @ 82A5B12
+Roulette_Text_PlayMinimumWagerIsX::
 	.string "The minimum wager at this table\n"
 	.string "is {STR_VAR_1}. Do you want to play?$"
 
-Roulette_Text_NotEnoughCoins:: @ 82A5B4E
+Roulette_Text_NotEnoughCoins::
 	.string "You don't have enough COINS.$"
 
-Roulette_Text_SpecialRateTable:: @ 82A5B6B
+Roulette_Text_SpecialRateTable::
 	.string "Special rate table right now!$"
 
-Roulette_Text_ControlsInstruction:: @ 82A5B89
+Roulette_Text_ControlsInstruction::
 	.string "Place your wager with the + Control\n"
 	.string "Pad, then press the A Button.$"
 
-Roulette_Text_ItsAHit:: @ 82A5BCB
+Roulette_Text_ItsAHit::
 	.string "It's a hit!$"
 
-Roulette_Text_Jackpot:: @ 82A5BD7
+Roulette_Text_Jackpot::
 	.string "Jackpot!$"
 
-Roulette_Text_NothingDoing:: @ 82A5BE0
+Roulette_Text_NothingDoing::
 	.string "Nothing doing!$"
 
-Roulette_Text_YouveWonXCoins:: @ 82A5BEF
+Roulette_Text_YouveWonXCoins::
 	.string "You've won {STR_VAR_1} COINS!$"
 
-Roulette_Text_NoCoinsLeft:: @ 82A5C04
+Roulette_Text_NoCoinsLeft::
 	.string "No COINS left…$"
 
-Roulette_Text_KeepPlaying:: @ 82A5C13
+Roulette_Text_KeepPlaying::
 	.string "Keep playing?$"
 
-Roulette_Text_BoardWillBeCleared:: @ 82A5C21
+Roulette_Text_BoardWillBeCleared::
 	.string "The ROULETTE board will be cleared.$"
 
 @ Unused
-Roulette_Text_YouDontHaveACoinCase:: @ 82A5C45
+Roulette_Text_YouDontHaveACoinCase::
 	.string "You don't have a COIN CASE.$"
 
-Roulette_Text_CoinCaseIsFull:: @ 82A5C61
+Roulette_Text_CoinCaseIsFull::
 	.string "Your COIN CASE is full!\n"
 	.string "Coins can be exchanged for prizes.$"
