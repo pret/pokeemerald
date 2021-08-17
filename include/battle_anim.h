@@ -143,7 +143,7 @@ void TranslateSpriteLinear(struct Sprite *sprite);
 void AnimSpriteOnMonPos(struct Sprite *sprite);
 void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
 void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
-void SetGreyscaleOrOriginalPalette(u16 palNum, bool8 restoreOriginal);
+void SetGrayscaleOrOriginalPalette(u16 palNum, bool8 restoreOriginal);
 void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds);
 bool8 RunAffineAnimFromTaskData(struct Task *task);
 void AnimThrowProjectile(struct Sprite *sprite);

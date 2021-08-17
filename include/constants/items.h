@@ -199,9 +199,11 @@
 #define FIRST_BERRY_INDEX ITEM_CHERI_BERRY
 #define LAST_BERRY_INDEX  ITEM_ENIGMA_BERRY
 
-#define ITEM_0B0 176
-#define ITEM_0B1 177
-#define ITEM_0B2 178
+#define ITEM_UNUSED_BERRY_1 176
+#define ITEM_UNUSED_BERRY_2 177
+#define ITEM_UNUSED_BERRY_3 178
+
+#define MAX_BERRY_INDEX ITEM_UNUSED_BERRY_3
 
 // Battle Held items
 #define ITEM_BRIGHT_POWDER 179
@@ -531,6 +533,6 @@
 #define ITEM_B_USE_OTHER    2
 
 // Check if the item is one that can be used on a Pokemon.
-#define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
+#define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

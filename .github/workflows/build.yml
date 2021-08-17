@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - battle_engine
       - pokemon_expansion
@@ -11,10 +11,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    env:
+      GAME_VERSION: EMERALD
+      GAME_REVISION: 0
+      GAME_LANGUAGE: ENGLISH
+      MODERN: 0
+      COMPARE: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Checkout agbcc
+        uses: actions/checkout@v2
+        with:
+          path: agbcc
+          repository: pret/agbcc
 
       - name: Install binutils
         run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
@@ -24,13 +36,15 @@ jobs:
 
       - name: Install agbcc
         run: |
-          git clone https://github.com/pret/agbcc.git
-          cd agbcc 
           ./build.sh
           ./install.sh ../
+        working-directory: agbcc
 
       - name: Agbcc
-        run: make -j${nproc} 
+        run: make -j${nproc} all
 
       - name: Modern
-        run: make -j${nproc} modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+        run: make -j${nproc} all

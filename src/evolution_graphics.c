@@ -115,18 +115,18 @@ static void SetEvoSparklesMatrices(void)
 
 static void SpriteCB_Sparkle_SpiralUpward(struct Sprite* sprite)
 {
-    if (sprite->pos1.y > 8)
+    if (sprite->y > 8)
     {
         u8 matrixNum;
 
-        sprite->pos1.y = 88 - (sprite->data[7] * sprite->data[7]) / 80;
-        sprite->pos2.y = Sin((u8)(sprite->data[6]), sprite->data[5]) / 4;
-        sprite->pos2.x = Cos((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->y = 88 - (sprite->data[7] * sprite->data[7]) / 80;
+        sprite->y2 = Sin((u8)(sprite->data[6]), sprite->data[5]) / 4;
+        sprite->x2 = Cos((u8)(sprite->data[6]), sprite->data[5]);
         sprite->data[6] += 4;
         if (sprite->data[7] & 1)
             sprite->data[5]--;
         sprite->data[7]++;
-        if (sprite->pos2.y > 0)
+        if (sprite->y2 > 0)
             sprite->subpriority = 1;
         else
             sprite->subpriority = 20;
@@ -155,11 +155,11 @@ static void CreateSparkle_SpiralUpward(u8 arg0)
 
 static void SpriteCB_Sparkle_ArcDown(struct Sprite* sprite)
 {
-    if (sprite->pos1.y < 88)
+    if (sprite->y < 88)
     {
-        sprite->pos1.y = 8 + (sprite->data[7] * sprite->data[7]) / 5;
-        sprite->pos2.y = Sin((u8)(sprite->data[6]), sprite->data[5]) / 4;
-        sprite->pos2.x = Cos((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->y = 8 + (sprite->data[7] * sprite->data[7]) / 5;
+        sprite->y2 = Sin((u8)(sprite->data[6]), sprite->data[5]) / 4;
+        sprite->x2 = Cos((u8)(sprite->data[6]), sprite->data[5]);
         sprite->data[5] = 8 + Sin((u8)(sprite->data[7] * 4), 40);
         sprite->data[7]++;
     }
@@ -186,8 +186,8 @@ static void SpriteCB_Sparkle_CircleInward(struct Sprite* sprite)
 {
     if (sprite->data[5] > 8)
     {
-        sprite->pos2.y = Sin((u8)(sprite->data[6]), sprite->data[5]);
-        sprite->pos2.x = Cos((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->y2 = Sin((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->x2 = Cos((u8)(sprite->data[6]), sprite->data[5]);
         sprite->data[5] -= sprite->data[3];
         sprite->data[6] += 4;
     }
@@ -214,13 +214,13 @@ static void CreateSparkle_CircleInward(u8 arg0, u8 arg1)
 static void SpriteCB_Sparkle_Spray(struct Sprite* sprite)
 {
     if (!(sprite->data[7] & 3))
-        sprite->pos1.y++;
+        sprite->y++;
     if (sprite->data[6] < 128)
     {
         u8 matrixNum;
 
-        sprite->pos2.y = -Sin((u8)(sprite->data[6]), sprite->data[5]);
-        sprite->pos1.x = 120 + (sprite->data[3] * sprite->data[7]) / 3;
+        sprite->y2 = -Sin((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->x = 120 + (sprite->data[3] * sprite->data[7]) / 3;
         sprite->data[6]++;
         matrixNum = 31 - (sprite->data[6] * 12 / 128);
         if (sprite->data[6] > 64)
