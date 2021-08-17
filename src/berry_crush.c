@@ -1387,8 +1387,8 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
         gfx->berrySprites[i] = &gSprites[spriteId];
         gfx->berrySprites[i]->oam.priority = 3;
         gfx->berrySprites[i]->affineAnimPaused = TRUE;
-        gfx->berrySprites[i]->pos1.x = gfx->playerCoords[i]->berryXOffset + 120;
-        gfx->berrySprites[i]->pos1.y = -16;
+        gfx->berrySprites[i]->x = gfx->playerCoords[i]->berryXOffset + 120;
+        gfx->berrySprites[i]->y = -16;
         data = gfx->berrySprites[i]->data;
         speed = 512;
         sYSpeed = speed;
@@ -1404,7 +1404,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
         var2 = speed + 32;
         var2 = var2 / 2;
         var1 = MathUtil_Div16Shift(7, Q_8_8(63.5), var2);
-        sX = (u16)gfx->berrySprites[i]->pos1.x * 128;
+        sX = (u16)gfx->berrySprites[i]->x * 128;
         sXSpeed = MathUtil_Div16Shift(7, distance, var1);
         var1 = MathUtil_Mul16Shift(7, var1, 85);
         sSinIdx = 0;
@@ -1420,21 +1420,21 @@ static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite)
     s16 *data = sprite->data;
 
     sYSpeed += sYAccel;
-    sprite->pos2.y += sYSpeed >> 8;
+    sprite->y2 += sYSpeed >> 8;
     if (sBitfield & F_MOVE_HORIZ)
     {
         sprite->sX += sXSpeed;
         sSinIdx += sSinSpeed;
-        sprite->pos2.x = Sin(sSinIdx >> 7, sAmplitude);
+        sprite->x2 = Sin(sSinIdx >> 7, sAmplitude);
         if ((sBitfield & F_MOVE_HORIZ) && (sSinIdx >> 7) > 126)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sBitfield &= MASK_TARGET_Y;
         }
     }
 
-    sprite->pos1.x = sX >> 7;
-    if (sprite->pos1.y + sprite->pos2.y >= (sBitfield & MASK_TARGET_Y))
+    sprite->x = sX >> 7;
+    if (sprite->y + sprite->y2 >= (sBitfield & MASK_TARGET_Y))
     {
         sprite->callback = SpriteCallbackDummy;
         FreeSpriteOamMatrix(sprite);
@@ -1490,8 +1490,8 @@ static void UpdateInputEffects(struct BerryCrushGame *game, struct BerryCrushGam
 
             gfx->impactSprites[i]->invisible = FALSE;
             gfx->impactSprites[i]->animPaused = FALSE;
-            gfx->impactSprites[i]->pos2.x = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][0];
-            gfx->impactSprites[i]->pos2.y = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][1];
+            gfx->impactSprites[i]->x2 = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][0];
+            gfx->impactSprites[i]->y2 = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][1];
         }
 
         #undef flags
@@ -1513,10 +1513,10 @@ static void UpdateInputEffects(struct BerryCrushGame *game, struct BerryCrushGam
             if (gfx->sparkleSprites[i]->invisible)
             {
                 gfx->sparkleSprites[i]->callback = SpriteCB_Sparkle_Init;
-                gfx->sparkleSprites[i]->pos1.x = sSparkleCoords[i][0] + 120;
-                gfx->sparkleSprites[i]->pos1.y = sSparkleCoords[i][1] + 136 - (yModifier * 4);
-                gfx->sparkleSprites[i]->pos2.x = sSparkleCoords[i][0] + (sSparkleCoords[i][0] / (xModifier * 4));
-                gfx->sparkleSprites[i]->pos2.y = sSparkleCoords[i][1];
+                gfx->sparkleSprites[i]->x = sSparkleCoords[i][0] + 120;
+                gfx->sparkleSprites[i]->y = sSparkleCoords[i][1] + 136 - (yModifier * 4);
+                gfx->sparkleSprites[i]->x2 = sSparkleCoords[i][0] + (sSparkleCoords[i][0] / (xModifier * 4));
+                gfx->sparkleSprites[i]->y2 = sSparkleCoords[i][1];
                 if (linkState->bigSparkle)
                     StartSpriteAnim(gfx->sparkleSprites[i], 1);
                 else
@@ -2071,8 +2071,8 @@ static void SpriteCB_Sparkle_End(struct Sprite *sprite)
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sprite->data); i++)
         sprite->data[i] = 0;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     sprite->invisible = TRUE;
     sprite->animPaused = TRUE;
     sprite->callback = SpriteCallbackDummy;
@@ -2097,20 +2097,20 @@ static void SpriteCB_Sparkle(struct Sprite *sprite)
     s16 *data = sprite->data;
 
     sYSpeed += sYAccel;
-    sprite->pos2.y += sYSpeed >> 8;
+    sprite->y2 += sYSpeed >> 8;
     if (sBitfield & F_MOVE_HORIZ)
     {
         sprite->sX += sXSpeed;
         sSinIdx += sSinSpeed;
-        sprite->pos2.x = Sin(sSinIdx >> 7, sAmplitude);
+        sprite->x2 = Sin(sSinIdx >> 7, sAmplitude);
         if (sBitfield & F_MOVE_HORIZ && sSinIdx >> 7 > 126)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sBitfield &= MASK_TARGET_Y;
         }
     }
-    sprite->pos1.x = sX >> 7;
-    if (sprite->pos1.y + sprite->pos2.y > (sBitfield & MASK_TARGET_Y))
+    sprite->x = sX >> 7;
+    if (sprite->y + sprite->y2 > (sBitfield & MASK_TARGET_Y))
         sprite->callback = SpriteCB_Sparkle_End;
 }
 
@@ -2125,17 +2125,17 @@ static void SpriteCB_Sparkle_Init(struct Sprite *sprite)
     sYSpeed = var;
     sYAccel = 32;
     sBitfield = 168; // Setting bits in MASK_TARGET_Y
-    xMult = sprite->pos2.x * 128;
-    xDiv = MathUtil_Div16Shift(7, (168 - sprite->pos1.y) << 7, (var + 32) >> 1);
-    sprite->sX = sprite->pos1.x << 7;
+    xMult = sprite->x2 * 128;
+    xDiv = MathUtil_Div16Shift(7, (168 - sprite->y) << 7, (var + 32) >> 1);
+    sprite->sX = sprite->x << 7;
     sXSpeed = MathUtil_Div16Shift(7, xMult, xDiv);
     var = MathUtil_Mul16Shift(7, xDiv, 85);
     sSinIdx = zero;
     sSinSpeed = MathUtil_Div16Shift(7, Q_8_8(63.5), var);
-    sAmplitude = sprite->pos2.x / 4;
+    sAmplitude = sprite->x2 / 4;
     sBitfield |= F_MOVE_HORIZ;
-    sprite->pos2.y = zero;
-    sprite->pos2.x = zero;
+    sprite->y2 = zero;
+    sprite->x2 = zero;
     sprite->callback = SpriteCB_Sparkle;
     sprite->animPaused = FALSE;
     sprite->invisible = FALSE;

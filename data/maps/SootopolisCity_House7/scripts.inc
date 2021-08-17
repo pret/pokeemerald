@@ -1,15 +1,15 @@
-SootopolisCity_House7_MapScripts:: @ 82270CB
+SootopolisCity_House7_MapScripts::
 	.byte 0
 
-SootopolisCity_House7_EventScript_OldMan:: @ 82270CC
+SootopolisCity_House7_EventScript_OldMan::
 	msgbox SootopolisCity_House7_Text_CityFromEruptedVolcano, MSGBOX_NPC
 	end
 
-SootopolisCity_House7_EventScript_PokefanF:: @ 82270D5
+SootopolisCity_House7_EventScript_PokefanF::
 	msgbox SootopolisCity_House7_Text_CaveMadeToKeepSomething, MSGBOX_NPC
 	end
 
-SootopolisCity_House7_Text_CityFromEruptedVolcano: @ 82270DE
+SootopolisCity_House7_Text_CityFromEruptedVolcano:
 	.string "An underwater volcano erupted and\n"
 	.string "forced itself up from the depths.\p"
 	.string "Its crater emerged from the sea and\n"
@@ -17,7 +17,7 @@ SootopolisCity_House7_Text_CityFromEruptedVolcano: @ 82270DE
 	.string "That's how SOOTOPOLIS CITY came into\n"
 	.string "being.$"
 
-SootopolisCity_House7_Text_CaveMadeToKeepSomething: @ 8227190
+SootopolisCity_House7_Text_CaveMadeToKeepSomething:
 	.string "The cave that links SOOTOPOLIS and\n"
 	.string "the outside world…\p"
 	.string "It seems as if the cave was made to\n"

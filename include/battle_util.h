@@ -46,6 +46,7 @@ struct TypePower
 
 extern const struct TypePower gNaturalGiftTable[];
 
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide);
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
 void HandleAction_UseItem(void);
@@ -123,7 +124,7 @@ u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
 bool32 CanMegaEvolve(u8 battlerId);
 void UndoMegaEvolution(u32 monId);
-void UndoFormChange(u32 monId, u32 side);
+void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
@@ -136,7 +137,6 @@ struct Pokemon *GetBattlerPartyData(u8 battlerId);
 bool32 CanFling(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
-bool32 IsThawingMove(u8 battlerId, u16 move);
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
 
 // ability checks

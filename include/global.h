@@ -10,6 +10,7 @@
 #include "constants/vars.h"
 #include "constants/species.h"
 #include "constants/berry.h"
+#include "constants/expansion_branches.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -126,14 +127,6 @@
     if(v < 0) f += 65536.0f; \
     f;                       \
 })
-
-// Branch defines: Used by other branches to detect each other.
-// Each define must be here for each of RHH's branch you have pulled.
-// e.g. If you have both the battle_engine and pokemon_expansion branch,
-//      then both BATTLE_ENGINE and POKEMON_EXPANSION must be defined here.
-#define BATTLE_ENGINE
-#define POKEMON_EXPANSION
-#define ITEM_EXPANSION
 
 #define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
 
