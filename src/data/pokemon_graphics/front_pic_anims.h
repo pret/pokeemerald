@@ -9133,6 +9133,96 @@ static const union AnimCmd sAnim_DEOXYS_SPEED_2[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_PIKACHU_COSPLAY_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_ROCK_STAR_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_BELLE_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_POP_STAR_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_PH_D_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_LIBRE_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_ORIGINAL_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_HOENN_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_SINNOH_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_UNOVA_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_KALOS_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_ALOLA_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_PARTNER_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_WORLD_CAP_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PICHU_SPIKY_EARED_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sAnims_NONE[] ={
     sAnim_GeneralFrame0,
     sAnim_NONE_1,
@@ -14411,6 +14501,81 @@ static const union AnimCmd *const sAnims_DEOXYS_SPEED[] ={
     sAnim_DEOXYS_SPEED_2,
 };
 
+static const union AnimCmd *const sAnims_PIKACHU_COSPLAY[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_COSPLAY_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_ROCK_STAR[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_ROCK_STAR_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_BELLE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_BELLE_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_POP_STAR[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_POP_STAR_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_PH_D[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_PH_D_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_LIBRE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_LIBRE_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_ORIGINAL_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_ORIGINAL_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_HOENN_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_HOENN_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_SINNOH_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_SINNOH_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_UNOVA_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_UNOVA_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_KALOS_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_KALOS_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_ALOLA_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_ALOLA_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_PARTNER_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_PARTNER_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_WORLD_CAP[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_WORLD_CAP_1,
+};
+
+static const union AnimCmd *const sAnims_PICHU_SPIKY_EARED[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PICHU_SPIKY_EARED_1,
+};
+
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
 #define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
 
@@ -15402,21 +15567,21 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(DARMANITAN_GALARIAN),
     ANIM_CMD(YAMASK_GALARIAN),
     ANIM_CMD(STUNFISK_GALARIAN),
-    ANIM_CMD_FULL(PIKACHU_COSPLAY, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_ROCK_STAR, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_BELLE, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_POP_STAR, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_PH_D, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_LIBRE, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_ORIGINAL_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_HOENN_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_SINNOH_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_UNOVA_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_KALOS_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_ALOLA_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_PARTNER_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PIKACHU_WORLD_CAP, sAnims_PIKACHU),
-    ANIM_CMD_FULL(PICHU_SPIKY_EARED, sAnims_PICHU),
+    ANIM_CMD(PIKACHU_COSPLAY),
+    ANIM_CMD(PIKACHU_ROCK_STAR),
+    ANIM_CMD(PIKACHU_BELLE),
+    ANIM_CMD(PIKACHU_POP_STAR),
+    ANIM_CMD(PIKACHU_PH_D),
+    ANIM_CMD(PIKACHU_LIBRE),
+    ANIM_CMD(PIKACHU_ORIGINAL_CAP),
+    ANIM_CMD(PIKACHU_HOENN_CAP),
+    ANIM_CMD(PIKACHU_SINNOH_CAP),
+    ANIM_CMD(PIKACHU_UNOVA_CAP),
+    ANIM_CMD(PIKACHU_KALOS_CAP),
+    ANIM_CMD(PIKACHU_ALOLA_CAP),
+    ANIM_CMD(PIKACHU_PARTNER_CAP),
+    ANIM_CMD(PIKACHU_WORLD_CAP),
+    ANIM_CMD(PICHU_SPIKY_EARED),
     ANIM_CMD(UNOWN_B),
     ANIM_CMD(UNOWN_C),
     ANIM_CMD(UNOWN_D),

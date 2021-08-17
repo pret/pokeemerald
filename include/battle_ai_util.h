@@ -36,6 +36,7 @@ u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbil
 bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move);
 bool32 AI_WeatherHasEffect(void);
 bool32 CanAttackerFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHits);
+bool32 AI_IsTerrainAffected(u8 battlerId, u32 flags);
 bool32 AI_IsBattlerGrounded(u8 battlerId);
 bool32 HasDamagingMove(u8 battlerId);
 bool32 HasDamagingMoveOfType(u8 battlerId, u8 type);

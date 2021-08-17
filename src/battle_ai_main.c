@@ -68,7 +68,7 @@ static s16 (*const sBattleAiFuncTable[])(u8, u8, u16, s16) =
     [4] = AI_Risky,                  // AI_FLAG_RISKY
     [5] = AI_PreferStrongestMove,    // AI_FLAG_PREFER_STRONGEST_MOVE
     [6] = AI_PreferBatonPass,        // AI_FLAG_PREFER_BATON_PASS
-    [7] = AI_DoubleBattle,              // AI_FLAG_DOUBLE_BATTLE.
+    [7] = AI_DoubleBattle,           // AI_FLAG_DOUBLE_BATTLE
     [8] = AI_HPAware,                // AI_FLAG_HP_AWARE
     [9] = NULL,                      // AI_FLAG_NEGATE_UNAWARE
     [10] = NULL,                     // AI_FLAG_WILL_SUICIDE
@@ -721,22 +721,21 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         #endif
         
         // terrain & effect checks
-        if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+        if (AI_IsTerrainAffected(battlerDef, STATUS_FIELD_ELECTRIC_TERRAIN))
         {
             if (moveEffect == EFFECT_SLEEP || moveEffect == EFFECT_YAWN)
                 RETURN_SCORE_MINUS(20);
         }
         
-        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+        if (AI_IsTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN))
         {
             if (IsNonVolatileStatusMoveEffect(moveEffect) || IsConfusionMoveEffect(moveEffect))
                 RETURN_SCORE_MINUS(20);
         }
         
-        if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+        if (AI_IsTerrainAffected(battlerAtk, STATUS_FIELD_PSYCHIC_TERRAIN) && atkPriority > 0)
         {
-            if (atkPriority > 0)
-                RETURN_SCORE_MINUS(20);
+            RETURN_SCORE_MINUS(20);
         }
     } // end check MOVE_TARGET_USER
     
@@ -1641,11 +1640,11 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_TEETER_DANCE:
             if (((gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
               || (!DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move) && AI_DATA->defAbility == ABILITY_OWN_TEMPO)
-              || (IsBattlerGrounded(battlerDef) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+              || (IsBattlerGrounded(battlerDef) && AI_IsTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN))
               || (DoesSubstituteBlockMove(battlerAtk, battlerDef, move)))
              && ((gBattleMons[AI_DATA->battlerDefPartner].status2 & STATUS2_CONFUSION)
               || (!DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move) && AI_DATA->defPartnerAbility == ABILITY_OWN_TEMPO)
-              || (IsBattlerGrounded(AI_DATA->battlerDefPartner) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+              || (IsBattlerGrounded(AI_DATA->battlerDefPartner) && AI_IsTerrainAffected(AI_DATA->battlerDefPartner, STATUS_FIELD_MISTY_TERRAIN))
               || (DoesSubstituteBlockMove(battlerAtk, AI_DATA->battlerDefPartner, move))))
             {
                score -= 10;
@@ -2429,7 +2428,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (TestMoveFlags(move, FLAG_HIGH_CRIT))
             score += 2; // crit makes it more likely to make them faint
         
-        if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
+        if (GetMoveDamageResult(move) == MOVE_POWER_OTHER)
             score--;
         
         switch (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef))
@@ -2565,7 +2564,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // check specific target
     if (IsTargetingPartner(battlerAtk, battlerDef))
     {
-        if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
+        if (GetMoveDamageResult(move) == MOVE_POWER_OTHER)
         {
             // partner ability checks
             if (!partnerProtecting && gBattleMoves[move].target != MOVE_TARGET_BOTH && !DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move))
@@ -2870,7 +2869,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         score++;
     
     // check thawing moves
-    if ((gBattleMons[battlerAtk].status1 & STATUS1_FREEZE) && IsThawingMove(battlerAtk, move))
+    if ((gBattleMons[battlerAtk].status1 & STATUS1_FREEZE) && TestMoveFlags(move, FLAG_THAW_USER))
         score += (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) ? 20 : 10;
     
     // check burn
@@ -3836,7 +3835,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         break;
     case EFFECT_SAFEGUARD:
-        if (!(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN) || !IsBattlerGrounded(battlerAtk))
+        if (!AI_IsTerrainAffected(battlerAtk, STATUS_FIELD_MISTY_TERRAIN) || !IsBattlerGrounded(battlerAtk))
             score++;
         //if (CountUsablePartyMons(battlerDef) != 0)
             //score += 8;
@@ -4699,7 +4698,7 @@ static s16 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     
     if (IsTargetingPartner(battlerAtk, battlerDef)
       || CountUsablePartyMons(battlerAtk) == 0
-      || GetMoveDamageResult(move) != MOVE_POWER_DISCOURAGED
+      || GetMoveDamageResult(move) != MOVE_POWER_OTHER
       || !HasMoveEffect(battlerAtk, EFFECT_BATON_PASS)
       || IsBattlerTrapped(battlerAtk, TRUE))
         return score;
