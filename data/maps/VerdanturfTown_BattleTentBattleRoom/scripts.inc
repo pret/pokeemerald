@@ -2,7 +2,7 @@
 .set LOCALID_OPPONENT, 2
 .set LOCALID_ATTENDANT, 3
 
-VerdanturfTown_BattleTentBattleRoom_MapScripts:: @ 82022FA
+VerdanturfTown_BattleTentBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_BattleTentBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentBattleRoom_OnWarp
@@ -12,11 +12,11 @@ VerdanturfTown_BattleTentBattleRoom_MapScripts:: @ 82022FA
 	@ The player is represented instead by object event 1, which has the gfx id VAR_OBJ_GFX_ID_1
 	@ The opponent is represented by object event 2, which has the gfx id VAR_OBJ_GFX_ID_0
 
-VerdanturfTown_BattleTentBattleRoom_OnTransition: @ 820230A
+VerdanturfTown_BattleTentBattleRoom_OnTransition:
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
 	end
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx:: @ 8202310
+VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
@@ -24,28 +24,28 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx:: @ 8202310
 	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale:: @ 8202328
+VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale:: @ 8202333
+VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
-VerdanturfTown_BattleTentBattleRoom_OnFrame: @ 820233E
+VerdanturfTown_BattleTentBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom
 	.2byte 0
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom:: @ 8202348
+VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	showobjectat LOCALID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	applymovement LOCALID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 0
 	goto_if_ne VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
-VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter:: @ 820236F
+VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 	tower_setopponent
 	addobject LOCALID_OPPONENT
 	applymovement LOCALID_OPPONENT, VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter
@@ -56,13 +56,13 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter:: @ 820236F
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_DoPalaceBattle
 	switch VAR_RESULT
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent
-VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost:: @ 82023AA
+VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
 	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent:: @ 82023C8
+VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
@@ -82,7 +82,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent:: @ 82023C8
 	waitfanfare
 	special HealPlayerParty
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge:: @ 820243C
+VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 1
 	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
@@ -94,14 +94,14 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge:: @ 820243C
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_AskPauseChallenge
 	case 2, VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_AskPauseChallenge:: @ 820248A
+VerdanturfTown_BattleTentBattleRoom_EventScript_AskPauseChallenge::
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 	case YES, VerdanturfTown_BattleTentBattleRoom_EventScript_PauseChallenge
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge:: @ 82024B8
+VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge::
 	message BattleFrontier_BattlePalaceBattleRoom_Text_WishToQuitChallenge
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
@@ -110,20 +110,20 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge:: @ 82024B8
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge:: @ 82024EA
+VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge::
 	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestRight
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	closemessage
 	goto VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon:: @ 8202501
+VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
 	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_PauseChallenge:: @ 820251F
+VerdanturfTown_BattleTentBattleRoom_EventScript_PauseChallenge::
 	message BattleFrontier_BattlePalaceBattleRoom_Text_SavingData
 	waitmessage
 	verdanturftent_save CHALLENGE_STATUS_PAUSED
@@ -133,11 +133,11 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_PauseChallenge:: @ 820251F
 	frontier_reset
 	end
 
-VerdanturfTown_BattleTentBattleRoom_OnWarp: @ 8202541
+VerdanturfTown_BattleTentBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects
 	.2byte 0
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects:: @ 820254B
+VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects::
 	hideobjectat LOCALID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
@@ -145,21 +145,21 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects:: @ 820254B
 	removeobject LOCALID_OPPONENT
 	end
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent:: @ 8202565
+VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent::
 	message BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor2ndOpponent
 	waitmessage
 	return
 
-VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent:: @ 820256C
+VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent::
 	message BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor3rdOpponent
 	waitmessage
 	return
 
-VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible: @ 8202573
+VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible:
 	set_invisible
 	step_end
 
-VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter: @ 8202575
+VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter:
 	set_visible
 	walk_up
 	walk_up
@@ -167,7 +167,7 @@ VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter: @ 8202575
 	face_right
 	step_end
 
-VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter: @ 820257B
+VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_down
 	walk_down
 	walk_down
@@ -175,7 +175,7 @@ VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter: @ 820257B
 	face_left
 	step_end
 
-VerdanturfTown_BattleTentBattleRoom_Movement_OpponentExit: @ 8202581
+VerdanturfTown_BattleTentBattleRoom_Movement_OpponentExit:
 	walk_up
 	walk_up
 	walk_up
