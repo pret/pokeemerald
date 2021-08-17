@@ -1,3 +1,7 @@
+ 	.align 2
+Cry_Crewmate::
+	.incbin "sound/direct_sound_samples/cries/crewmate.bin"
+
 	.align 2
 DirectSoundWaveData_sc88pro_glockenspiel::
 	.incbin "sound/direct_sound_samples/sc88pro_glockenspiel.bin"

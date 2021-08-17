@@ -2319,3 +2319,9 @@ const u8 gDeoxysPokedexText[] = _(
     "extraterrestrial virus exposed to a laser\n"
     "beam. Its body is configured for superior\n"
     "agility and speed.");
+
+const u8 gSusPokedexText[] = _(
+    "When the imposter SUS.\n"
+    "SUSSY BAKA.\n"
+    "Actin SUS.\n"
+    "FUCK!");

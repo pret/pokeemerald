@@ -38,6 +38,38 @@ const struct BaseStats gBaseStats[] =
 {
     [SPECIES_NONE] = {0},
 
+    [SPECIES_CREWMATE] =
+    {
+       .baseHP        = 106,
+       .baseAttack    = 150,
+       .baseDefense   = 70,
+       .baseSpeed     = 140,
+       .baseSpAttack  = 194,
+       .baseSpDefense = 120,
+       .type1 = TYPE_PSYCHIC,
+       .type2 = TYPE_PSYCHIC,
+       .catchRate = 3,
+       .expYield = 255,
+       .evYield_HP        = 0,
+       .evYield_Attack    = 0,
+       .evYield_Defense   = 0,
+       .evYield_Speed     = 0,
+       .evYield_SpAttack  = 3,
+       .evYield_SpDefense = 0,
+       .item1 = ITEM_NONE,
+       .item2 = ITEM_NONE,
+       .genderRatio = MON_GENDERLESS,
+       .eggCycles = 120,
+       .friendship = 0,
+       .growthRate = GROWTH_SLOW,
+       .eggGroup1 = EGG_GROUP_UNDISCOVERED,
+       .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+       .abilities = {ABILITY_INSOMNIA, ABILITY_NONE},
+       .safariZoneFleeRate = 0,
+       .bodyColor = BODY_COLOR_PURPLE,
+       .noFlip = FALSE,
+    },
+
     [SPECIES_BULBASAUR] =
     {
         .baseHP        = 45,

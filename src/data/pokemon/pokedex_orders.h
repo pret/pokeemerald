@@ -85,6 +85,7 @@ const u16 gPokedexOrder_Alphabetical[] =
     NATIONAL_DEX_CORSOLA,
     NATIONAL_DEX_CRADILY,
     NATIONAL_DEX_CRAWDAUNT,
+    NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_CROBAT,
     NATIONAL_DEX_CROCONAW,
     NATIONAL_DEX_CUBONE,
@@ -416,6 +417,7 @@ const u16 gPokedexOrder_Alphabetical[] =
 
 const u16 gPokedexOrder_Weight[] =
 {
+    NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_GASTLY,
     NATIONAL_DEX_HAUNTER,
     NATIONAL_DEX_HOPPIP,
@@ -806,6 +808,7 @@ const u16 gPokedexOrder_Weight[] =
 
 const u16 gPokedexOrder_Height[] =
 {
+    NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_DIGLETT,
     NATIONAL_DEX_AZURILL,
     NATIONAL_DEX_NATU,
