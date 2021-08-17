@@ -1,12 +1,12 @@
-Route114_LanettesHouse_MapScripts:: @ 822B2C8
+Route114_LanettesHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route114_LanettesHouse_OnTransition
 	.byte 0
 
-Route114_LanettesHouse_OnTransition: @ 822B2CE
+Route114_LanettesHouse_OnTransition:
 	setflag FLAG_LANDMARK_LANETTES_HOUSE
 	end
 
-Route114_LanettesHouse_EventScript_Lanette:: @ 822B2D2
+Route114_LanettesHouse_EventScript_Lanette::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_DOLL_LANETTE, Route114_LanettesHouse_EventScript_OfferAdvice
@@ -19,12 +19,12 @@ Route114_LanettesHouse_EventScript_Lanette:: @ 822B2D2
 	release
 	end
 
-Route114_LanettesHouse_EventScript_OfferAdvice:: @ 822B2FF
+Route114_LanettesHouse_EventScript_OfferAdvice::
 	msgbox Route114_LanettesHouse_Text_OrganizeYourBoxes, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_LanettesHouse_EventScript_Notebook:: @ 822B309
+Route114_LanettesHouse_EventScript_Notebook::
 	lockall
 	msgbox Route114_LanettesHouse_Text_ResearchNotesPage1, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -33,22 +33,22 @@ Route114_LanettesHouse_EventScript_Notebook:: @ 822B309
 	releaseall
 	end
 
-Route114_LanettesHouse_EventScript_NotebookPage2:: @ 822B327
+Route114_LanettesHouse_EventScript_NotebookPage2::
 	msgbox Route114_LanettesHouse_Text_ResearchNotesPage2, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	call_if_eq Route114_LanettesHouse_EventScript_NotebookPage3
 	releaseall
 	end
 
-Route114_LanettesHouse_EventScript_NotebookPage3:: @ 822B33C
+Route114_LanettesHouse_EventScript_NotebookPage3::
 	msgbox Route114_LanettesHouse_Text_ResearchNotesPage3, MSGBOX_DEFAULT
 	return
 
-Route114_LanettesHouse_EventScript_PC:: @ 822B345
+Route114_LanettesHouse_EventScript_PC::
 	msgbox Route114_LanettesHouse_Text_EmailFromBill, MSGBOX_SIGN
 	end
 
-Route114_LanettesHouse_Text_EverythingClutteredKeepThis: @ 822B34E
+Route114_LanettesHouse_Text_EverythingClutteredKeepThis:
 	.string "LANETTE: Oh! {PLAYER}{KUN}!\p"
 	.string "I'm sorry everything is so cluttered…\n"
 	.string "When I get engrossed in research,\l"
@@ -56,13 +56,13 @@ Route114_LanettesHouse_Text_EverythingClutteredKeepThis: @ 822B34E
 	.string "This is embarrassing… Please keep\n"
 	.string "this a secret in exchange for this.$"
 
-Route114_LanettesHouse_Text_OrganizeYourBoxes: @ 822B407
+Route114_LanettesHouse_Text_OrganizeYourBoxes:
 	.string "May I offer advice about my POKéMON\n"
 	.string "Storage System?\p"
 	.string "You should organize your BOXES so you\n"
 	.string "can tell which POKéMON are in them.$"
 
-Route114_LanettesHouse_Text_ResearchNotesPage1: @ 822B485
+Route114_LanettesHouse_Text_ResearchNotesPage1:
 	.string "It's LANETTE's research notes.\n"
 	.string "There's information about BOXES.\p"
 	.string "Design BOXES to hold 30 POKéMON each.\p"
@@ -70,7 +70,7 @@ Route114_LanettesHouse_Text_ResearchNotesPage1: @ 822B485
 	.string "420 POKéMON on the PC system.\p"
 	.string "Keep reading?$"
 
-Route114_LanettesHouse_Text_ResearchNotesPage2: @ 822B53C
+Route114_LanettesHouse_Text_ResearchNotesPage2:
 	.string "A marking system should be added to\n"
 	.string "make POKéMON easier to organize.\p"
 	.string "The name and wallpaper design of each\n"
@@ -78,7 +78,7 @@ Route114_LanettesHouse_Text_ResearchNotesPage2: @ 822B53C
 	.string "the stored POKéMON.\p"
 	.string "Keep reading?$"
 
-Route114_LanettesHouse_Text_ResearchNotesPage3: @ 822B5EF
+Route114_LanettesHouse_Text_ResearchNotesPage3:
 	.string "When storing a POKéMON, it should be\n"
 	.string "sent to the BOX inspected last.\p"
 	.string "If that BOX is full, the received\n"
@@ -87,10 +87,10 @@ Route114_LanettesHouse_Text_ResearchNotesPage3: @ 822B5EF
 	.string "it is automatically selected as the BOX\l"
 	.string "to which POKéMON are sent.$"
 
-Route114_LanettesHouse_Text_ClosedTheNotebook: @ 822B6E4
+Route114_LanettesHouse_Text_ClosedTheNotebook:
 	.string "{PLAYER} closed the notebook.$"
 
-Route114_LanettesHouse_Text_EmailFromBill: @ 822B6FC
+Route114_LanettesHouse_Text_EmailFromBill:
 	.string "There's an e-mail from someone on\n"
 	.string "the PC.\p"
 	.string "“… … … … … … …\p"

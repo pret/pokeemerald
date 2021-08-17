@@ -1,3 +1,3 @@
-ShoalCave_LowTideIceRoom_MapScripts:: @ 82396A1
+ShoalCave_LowTideIceRoom_MapScripts::
 	.byte 0
 
