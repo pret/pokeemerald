@@ -496,6 +496,7 @@ static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
     [MOVE_WATER_PULSE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
     [MOVE_DOOM_DESIRE]   = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
     [MOVE_PSYCHO_BOOST]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
+    [MOVE_GUN]    = {[MOVE_POINTS_DMG] = 1},
 };
 
 // This array is searched in-order to determine what battle style a tourney trainer uses.

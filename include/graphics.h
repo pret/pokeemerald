@@ -4147,6 +4147,7 @@ extern const u32 gContest2Pal[];
 extern const u32 gSmokescreenImpactTiles[];
 extern const u32 gSmokescreenImpactPalette[];
 
+extern const u32 gBattleAnimSpriteGfx_Gun[];
 extern const u32 gBattleAnimSpriteGfx_Bone[];
 extern const u32 gBattleAnimSpriteGfx_Spark[];
 extern const u32 gBattleAnimSpriteGfx_Pencil[];

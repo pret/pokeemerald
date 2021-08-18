@@ -4602,6 +4602,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
     },
 
+    [MOVE_GUN] =
+    {
+        .effect = EFFECT_FUTURE_SIGHT,
+        .power = 120,
+        .type = TYPE_STEEL,
+        .accuracy = 85,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = 0,
+    },
+
     [MOVE_PSYCHO_BOOST] =
     {
         .effect = EFFECT_OVERHEAT,

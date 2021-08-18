@@ -21,6 +21,7 @@ const u32 gSmokescreenImpactPalette[] = INCBIN_U32("graphics/battle_anims/sprite
 const u32 gBlankGfxCompressed[] = INCBIN_U32("graphics/interface/blank.4bpp.lz");
 
 // Battle anims
+const u32 gBattleAnimSpriteGfx_Gun[] = INCBIN_U32("graphics/battle_anims/sprites/gun.4bpp.lz");
 const u32 gBattleAnimSpriteGfx_Bubble[] = INCBIN_U32("graphics/battle_anims/sprites/bubble.4bpp.lz");
 const u32 gBattleAnimSpriteGfx_Bone[] = INCBIN_U32("graphics/battle_anims/sprites/bone.4bpp.lz");
 const u32 gBattleAnimSpriteGfx_AirWave[] = INCBIN_U32("graphics/battle_anims/sprites/air_wave.4bpp.lz");
