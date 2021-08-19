@@ -24,7 +24,7 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_directsound 60, 0, DirectSoundWaveData_bw_synthbassf1_leader, 255, 251, 14, 171
-	voice_keysplit voicegroup308, KeySplitTable68    @ lp marschall guitar ||| 69
+	voice_keysplit voicegroup308, KeySplitTable95    @ lp marschall guitar ||| 70
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_170slapbg2, 255, 1, 227, 171

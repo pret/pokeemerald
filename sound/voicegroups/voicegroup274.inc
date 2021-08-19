@@ -52,7 +52,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_2_alt 60, 0, 2, 0, 6, 2, 0
 	voice_keysplit voicegroup314, KeySplitTable89    @ alto sax
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 197, 227, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup282, KeySplitTable96    @ piano | 44 || 56 || 68 || 80
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
