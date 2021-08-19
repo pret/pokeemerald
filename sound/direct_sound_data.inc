@@ -4145,3 +4145,11 @@ DirectSoundWaveData_bw_pipeorgana4::
 	.align 2
 DirectSoundWaveData_bw_pipeorganf5::
 	.incbin "sound/direct_sound_samples/bw_pipeorganf5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_brasshit_vsdragon::
+	.incbin "sound/direct_sound_samples/bw_brasshit_vsdragon.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fhornsripc3::
+	.incbin "sound/direct_sound_samples/bw_fhornsripc3.bin"

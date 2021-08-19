@@ -2702,3 +2702,6 @@ $(MID_SUBDIR)/bw_seq_bgm_e_legend_come.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_e_legend_born.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V118
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_shin.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V091 -X

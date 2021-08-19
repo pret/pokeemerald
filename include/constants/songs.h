@@ -1033,6 +1033,7 @@
 #define BW_SEQ_BGM_N_ROOM            1008 // The Pokémon Child, N
 #define BW_SEQ_BGM_E_LEGEND_COME     1009 // N's Dragon
 #define BW_SEQ_BGM_E_LEGEND_BORN     1010 // The Dragon Awakes
+#define BW_SEQ_BGM_VS_SHIN           1011 // Battle! (Reshiram/Zekrom)                  (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 

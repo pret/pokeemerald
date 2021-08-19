@@ -72,8 +72,8 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder1, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder2, 255, 0, 255, 171
 	voice_keysplit voicegroup318, KeySplitTable44    @ tuba decay
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_brasshit_vsdragon, 255, 248, 0, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_fhornsripc3, 255, 248, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc5_plasma, 255, 253, 0, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_stringhit_plasma, 255, 248, 25, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
