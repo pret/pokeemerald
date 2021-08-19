@@ -55,16 +55,16 @@ enum {
 
 // Windows for item storage (while viewing the PC's item inventory)
 enum {
-    ITEMWIN_LIST,
-    ITEMWIN_MESSAGE,
-    ITEMWIN_ICON,
-    ITEMWIN_TITLE,
-    ITEMWIN_QUANTITY,
-    ITEMWIN_YESNO,
-    ITEMWIN_COUNT
+    ITEMPC_WIN_LIST,
+    ITEMPC_WIN_MESSAGE,
+    ITEMPC_WIN_ICON,
+    ITEMPC_WIN_TITLE,
+    ITEMPC_WIN_QUANTITY,
+    ITEMPC_WIN_YESNO,
+    ITEMPC_WIN_COUNT
 };
  // When showing the main list, the first window to this window are drawn
-#define ITEMWIN_LIST_END ITEMWIN_TITLE
+#define ITEMPC_WIN_LIST_END ITEMPC_WIN_TITLE
 
 // Message IDs for Item Storage
 enum {
@@ -91,7 +91,7 @@ struct ItemStorageMenu
 {
     struct ListMenuItem listItems[PC_ITEMS_COUNT + 1];
     u8 itemNames[PC_ITEMS_COUNT + 1][ITEM_NAME_LENGTH + 10];
-    u8 windowIds[ITEMWIN_COUNT];
+    u8 windowIds[ITEMPC_WIN_COUNT];
     u8 toSwapPos;
     u8 spriteId;
     u8 swapLineSpriteIds[SWAP_LINE_LENGTH];
@@ -294,9 +294,9 @@ static const struct ListMenuTemplate sListMenuTemplate_ItemStorage =
     .fontId = 7
 };
 
-static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMWIN_COUNT] =
+static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT] =
 {
-    [ITEMWIN_LIST] = {
+    [ITEMPC_WIN_LIST] = {
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 1,
@@ -305,7 +305,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMWIN_COUNT] =
         .paletteNum = 15,
         .baseBlock = 0x0001
     },
-    [ITEMWIN_MESSAGE] = {
+    [ITEMPC_WIN_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 13,
@@ -314,7 +314,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMWIN_COUNT] =
         .paletteNum = 15,
         .baseBlock = 0x00EB
     },
-    [ITEMWIN_ICON] = {
+    [ITEMPC_WIN_ICON] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
@@ -323,7 +323,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMWIN_COUNT] =
         .paletteNum = 15,
         .baseBlock = 0x0153
     },
-    [ITEMWIN_TITLE] = {
+    [ITEMPC_WIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -332,7 +332,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMWIN_COUNT] =
         .paletteNum = 15,
         .baseBlock = 0x0139
     },
-    [ITEMWIN_QUANTITY] = {
+    [ITEMPC_WIN_QUANTITY] = {
         .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 9,
@@ -341,7 +341,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMWIN_COUNT] =
         .paletteNum = 15,
         .baseBlock = 0x015C
     },
-    [ITEMWIN_YESNO] = {
+    [ITEMPC_WIN_YESNO] = {
         .bg = 0,
         .tilemapLeft = 9,
         .tilemapTop = 7,
@@ -937,7 +937,7 @@ static void Mailbox_Cancel(u8 taskId)
 static void ItemStorage_Init(void)
 {
     sItemStorageMenu = AllocZeroed(sizeof(*sItemStorageMenu));
-    memset(sItemStorageMenu->windowIds, WINDOW_NONE, ITEMWIN_COUNT);
+    memset(sItemStorageMenu->windowIds, WINDOW_NONE, ITEMPC_WIN_COUNT);
     sItemStorageMenu->toSwapPos = NOT_SWAPPING;
     sItemStorageMenu->spriteId = SPRITE_NONE;
 }
@@ -945,7 +945,7 @@ static void ItemStorage_Init(void)
 static void ItemStorage_Free(void)
 {
     u32 i;
-    for (i = 0; i < ITEMWIN_COUNT; i++)
+    for (i = 0; i < ITEMPC_WIN_COUNT; i++)
         ItemStorage_RemoveWindow(i);
     Free(sItemStorageMenu);
 }
@@ -994,7 +994,7 @@ void ItemStorage_RefreshListMenu(void)
 
     // Set list menu data
     gMultiuseListMenuTemplate = sListMenuTemplate_ItemStorage;
-    gMultiuseListMenuTemplate.windowId = ItemStorage_AddWindow(ITEMWIN_LIST);
+    gMultiuseListMenuTemplate.windowId = ItemStorage_AddWindow(ITEMPC_WIN_LIST);
     gMultiuseListMenuTemplate.totalItems = gPlayerPCItemPageInfo.count;
     gMultiuseListMenuTemplate.items = sItemStorageMenu->listItems;
     gMultiuseListMenuTemplate.maxShowed = gPlayerPCItemPageInfo.pageItems;
@@ -1040,7 +1040,7 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
 static void ItemStorage_PrintDescription(s32 id)
 {
     const u8* description;
-    u8 windowId = sItemStorageMenu->windowIds[ITEMWIN_MESSAGE];
+    u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
 
     // Get item description (or Cancel text)
     if (id != LIST_CANCEL)
@@ -1078,7 +1078,7 @@ static void ItemStorage_SetSwapArrow(u8 listTaskId, u8 b, u8 speed)
 
 static void ItemStorage_DrawSwapArrow(u8 y, u8 b, u8 speed)
 {
-    u8 windowId = sItemStorageMenu->windowIds[ITEMWIN_LIST];
+    u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_LIST];
     if (b == 0xFF)
         FillWindowPixelRect(windowId, PIXEL_FILL(1), 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
@@ -1136,15 +1136,15 @@ static void ItemStorage_CreateListMenu(u8 taskId)
     const u8* text;
 
     data = gTasks[taskId].data;
-    for (i = 0; i <= ITEMWIN_LIST_END; i++)
+    for (i = 0; i <= ITEMPC_WIN_LIST_END; i++)
         ItemStorage_AddWindow(i);
     toss = tInTossMenu;
     text = gText_TossItem;
     if (!toss)
         text = gText_WithdrawItem;
     x = GetStringCenterAlignXOffset(1, text, 104);
-    AddTextPrinterParameterized(sItemStorageMenu->windowIds[ITEMWIN_TITLE], 1, text, x, 1, 0, NULL);
-    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMWIN_ICON], 2);
+    AddTextPrinterParameterized(sItemStorageMenu->windowIds[ITEMPC_WIN_TITLE], 1, text, x, 1, 0, NULL);
+    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], 2);
     ItemStorage_CompactList();
     ItemStorage_CompactCursor();
     ItemStorage_RefreshListMenu();
@@ -1196,7 +1196,7 @@ static const u8* ItemStorage_GetMessage(u16 itemId)
 
 static void ItemStorage_PrintMessage(const u8 *string)
 {
-    u8 windowId = sItemStorageMenu->windowIds[ITEMWIN_MESSAGE];
+    u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, string);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, 0, NULL);
@@ -1377,7 +1377,7 @@ static void ItemStorage_DoItemAction(u8 taskId)
     }
 
     // Set up "how many" prompt
-    ItemStorage_PrintItemQuantity(ItemStorage_AddWindow(ITEMWIN_QUANTITY), tQuantity, STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
+    ItemStorage_PrintItemQuantity(ItemStorage_AddWindow(ITEMPC_WIN_QUANTITY), tQuantity, STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
     gTasks[taskId].func = ItemStorage_HandleQuantityRolling;
 }
 
@@ -1388,7 +1388,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tQuantity, gSaveBlock1Ptr->pcItems[pos].quantity) == TRUE)
     {
-        ItemStorage_PrintItemQuantity(ItemStorage_AddWindow(ITEMWIN_QUANTITY), tQuantity, STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
+        ItemStorage_PrintItemQuantity(ItemStorage_AddWindow(ITEMPC_WIN_QUANTITY), tQuantity, STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
     }
     else
     {
@@ -1396,7 +1396,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
         {
             // Quantity confirmed, perform action
             PlaySE(SE_SELECT);
-            ItemStorage_RemoveWindow(ITEMWIN_QUANTITY);
+            ItemStorage_RemoveWindow(ITEMPC_WIN_QUANTITY);
             if (!tInTossMenu)
                 ItemStorage_DoItemWithdraw(taskId);
             else
@@ -1406,7 +1406,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
         {
             // Canceled action
             PlaySE(SE_SELECT);
-            ItemStorage_RemoveWindow(ITEMWIN_QUANTITY);
+            ItemStorage_RemoveWindow(ITEMPC_WIN_QUANTITY);
             ItemStorage_PrintMessage(ItemStorage_GetMessage(gSaveBlock1Ptr->pcItems[pos].itemId));
             ItemStorage_ReturnToListInput(taskId);
         }
@@ -1446,7 +1446,7 @@ static void ItemStorage_DoItemToss(u8 taskId)
         CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, tQuantity, STR_CONV_MODE_LEFT_ALIGN, 3);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_OKAY_TO_THROW_AWAY));
-        CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_ItemStorage[ITEMWIN_YESNO], 1, 0, 1, 0x214, 0xE, &ItemTossYesNoFuncs);
+        CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_ItemStorage[ITEMPC_WIN_YESNO], 1, 0, 1, 0x214, 0xE, &ItemTossYesNoFuncs);
     }
     else
     {
