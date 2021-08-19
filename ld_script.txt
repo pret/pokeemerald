@@ -1700,6 +1700,12 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_eye_04.o(.rodata);
         sound/songs/midi/bw_seq_bgm_pokemon_league.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_shitenno.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_n_castle.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_n_castle_bridge.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_n_castle.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_n_room.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_legend_come.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_legend_born.o(.rodata);
     } =0
 
     lib_rodata :

@@ -1027,6 +1027,12 @@
 #define BW_SEQ_BGM_EYE_04            1002 // Trainers' Eyes Meet (Ace Trainer)
 #define BW_SEQ_BGM_POKEMON_LEAGUE    1003 // The Pokémon League
 #define BW_SEQ_BGM_VS_SHITENNO       1004 // Battle! (Elite Four)                       (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_E_N_CASTLE        1005 // The Pokémon League Besieged!
+#define BW_SEQ_BGM_N_CASTLE_BRIDGE   1006 // Embracing One's Duty
+#define BW_SEQ_BGM_N_CASTLE          1007 // N's Castle
+#define BW_SEQ_BGM_N_ROOM            1008 // The Pokémon Child, N
+#define BW_SEQ_BGM_E_LEGEND_COME     1009 // N's Dragon
+#define BW_SEQ_BGM_E_LEGEND_BORN     1010 // The Dragon Awakes
 
 // Black 2 & White 2 Music
 

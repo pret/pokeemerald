@@ -4109,3 +4109,39 @@ DirectSoundWaveData_bw_punchysnare_e4::
 	.align 2
 DirectSoundWaveData_bw_808snarereverb::
 	.incbin "sound/direct_sound_samples/bw_808snarereverb.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthkick_nbridge::
+	.incbin "sound/direct_sound_samples/bw_synthkick_nbridge.bin"
+
+	.align 2
+DirectSoundWaveData_bw_snare_nbridge::
+	.incbin "sound/direct_sound_samples/bw_snare_nbridge.bin"
+
+	.align 2
+DirectSoundWaveData_bw_chh808::
+	.incbin "sound/direct_sound_samples/bw_chh808.bin"
+
+	.align 2
+DirectSoundWaveData_bw_ohh808::
+	.incbin "sound/direct_sound_samples/bw_ohh808.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pipeorgang2::
+	.incbin "sound/direct_sound_samples/bw_pipeorgang2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pipeorgane3::
+	.incbin "sound/direct_sound_samples/bw_pipeorgane3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pipeorganc4::
+	.incbin "sound/direct_sound_samples/bw_pipeorganc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pipeorgana4::
+	.incbin "sound/direct_sound_samples/bw_pipeorgana4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_pipeorganf5::
+	.incbin "sound/direct_sound_samples/bw_pipeorganf5.bin"

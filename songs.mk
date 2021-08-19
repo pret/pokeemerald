@@ -2684,3 +2684,21 @@ $(MID_SUBDIR)/bw_seq_bgm_pokemon_league.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_shitenno.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_e_n_castle.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V117
+
+$(MID_SUBDIR)/bw_seq_bgm_n_castle_bridge.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V110
+
+$(MID_SUBDIR)/bw_seq_bgm_n_castle.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V110
+
+$(MID_SUBDIR)/bw_seq_bgm_n_room.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V089
+
+$(MID_SUBDIR)/bw_seq_bgm_e_legend_come.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V111
+
+$(MID_SUBDIR)/bw_seq_bgm_e_legend_born.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V118

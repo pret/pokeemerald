@@ -1006,6 +1006,12 @@ gSongTable::
 	song bw_seq_bgm_eye_04, 0, 0
 	song bw_seq_bgm_pokemon_league, 0, 0
 	song bw_seq_bgm_vs_shitenno, 0, 0
+	song bw_seq_bgm_e_n_castle, 0, 0
+	song bw_seq_bgm_n_castle_bridge, 0, 0
+	song bw_seq_bgm_n_castle, 0, 0
+	song bw_seq_bgm_n_room, 0, 0
+	song bw_seq_bgm_e_legend_come, 0, 0
+	song bw_seq_bgm_e_legend_born, 0, 0
 
 	.align 2
 dummy_song_header:
