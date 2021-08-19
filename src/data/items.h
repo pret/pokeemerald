@@ -173,7 +173,7 @@ const struct Item gItems[] =
 
     [ITEM_POTION] =
     {
-        .name = _("POTION"),
+        .name = _("SNUSK JUICE"),
         .itemId = ITEM_POTION,
         .price = 300,
         .holdEffectParam = 20,
@@ -266,7 +266,7 @@ const struct Item gItems[] =
 
     [ITEM_MAX_POTION] =
     {
-        .name = _("MAX POTION"),
+        .name = _("MUG ROOT BEER"),
         .itemId = ITEM_MAX_POTION,
         .price = 2500,
         .holdEffectParam = 255,
