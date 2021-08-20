@@ -1712,6 +1712,9 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_vs_g_cis.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_last.o(.rodata);
         sound/songs/midi/bw_seq_bgm_ending.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_handsome.o(.rodata);
+        sound/songs/midi/bw_seq_me_tamago_get.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_pleasure_boat.o(.rodata);
     } =0
 
     lib_rodata :

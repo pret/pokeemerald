@@ -4217,3 +4217,15 @@ DirectSoundWaveData_bw_choirfemale2_ghetsis::
 	.align 2
 DirectSoundWaveData_bw_gongc5_ghetsis::
 	.incbin "sound/direct_sound_samples/bw_gongc5_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fhnspd3::
+	.incbin "sound/direct_sound_samples/bw_fhnspd3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fhnspb3::
+	.incbin "sound/direct_sound_samples/bw_fhnspb3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fhnspf4::
+	.incbin "sound/direct_sound_samples/bw_fhnspf4.bin"

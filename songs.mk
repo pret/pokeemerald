@@ -2720,3 +2720,12 @@ $(MID_SUBDIR)/bw_seq_bgm_e_last.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_ending.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V106
+
+$(MID_SUBDIR)/bw_seq_bgm_e_handsome.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V078
+
+$(MID_SUBDIR)/bw_seq_me_tamago_get.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V072 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_pleasure_boat.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V078

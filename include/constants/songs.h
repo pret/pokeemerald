@@ -645,6 +645,7 @@
 #define DP_SEQ_TOWN06_N              626 // Route 225 (Night)
 #define DP_SEQ_ROAD_BZA_D            627 // Route 228 (Day)
 #define DP_SEQ_ROAD_BZA_N            628 // Route 228 (Night)
+
 #define DP_SEQ_WIFILOBBY             629 // Nintendo Wi-Fi Connection
 #define DP_SEQ_BLD_TV                630 // TV Station
 #define DP_SEQ_BLD_BLD_GTC           631 // GTS
@@ -823,6 +824,7 @@
 #define HG_SEQ_GS_E_MAIKO_MAI        800 // The Dance of Ecruteak
 #define HG_SEQ_GS_E_HOUOU            801 // Ho-Oh Appears!
 #define HG_SEQ_GS_VS_HOUOU           802 // Battle! (Ho-Oh)
+
 #define HG_SEQ_GS_R_1_26             803 // Route 26
 #define HG_SEQ_GS_KOUSOKUSEN         804 // S.S. Aqua
 #define HG_SEQ_GS_C_KUCHIBA          805 // Vermilion City
@@ -984,6 +986,7 @@
 #define BW_SEQ_BGM_BATTLEPINCH       959 // A Tight Spot During Battle!
 #define BW_SEQ_BGM_BICYCLE           960 // Bicycle
 #define BW_SEQ_BGM_E_CHAMPION        961 // Champion Alder
+
 #define BW_SEQ_BGM_H_02              962 // Driftveil Drawbridge
 #define BW_SEQ_BGM_C_05              963 // Driftveil City
 #define BW_SEQ_BGM_D_03              964 // Cold Storage
@@ -1039,6 +1042,10 @@
 #define BW_SEQ_BGM_VS_G_CIS          1014 // Battle! (Ghetsis)                          (TODO: PORTAMENTO!!) (female choir part only, not really a huge deal)
 #define BW_SEQ_BGM_E_LAST            1015 // Farewell
 #define BW_SEQ_BGM_ENDING            1016 // Ending "Onward to Our Own Futures"
+
+#define BW_SEQ_BGM_E_HANDSOME        1017 // Looker's Theme
+#define BW_SEQ_ME_TAMAGO_GET         1018 // Received a Pokémon Egg!
+#define BW_SEQ_BGM_PLEASURE_BOAT     1019 // The Royal Unova
 
 // Black 2 & White 2 Music
 
