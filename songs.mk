@@ -2347,7 +2347,7 @@ $(MID_SUBDIR)/bw_seq_bgm_starting2.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V090
 
 $(MID_SUBDIR)/bw_seq_bgm_e_opening.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G274 -V103
+	$(MID) $< $@ -E -R5 -G274 -V103 -X
 
 $(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V071
@@ -2714,3 +2714,9 @@ $(MID_SUBDIR)/bw_seq_bgm_e_g_cis.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_g_cis.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V126
+
+$(MID_SUBDIR)/bw_seq_bgm_e_last.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V111 -X
+
+$(MID_SUBDIR)/bw_seq_bgm_ending.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V106

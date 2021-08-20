@@ -1016,6 +1016,8 @@ gSongTable::
 	song bw_seq_bgm_vs_n_2, 0, 0
 	song bw_seq_bgm_e_g_cis, 0, 0
 	song bw_seq_bgm_vs_g_cis, 0, 0
+	song bw_seq_bgm_e_last, 0, 0
+	song bw_seq_bgm_ending, 0, 0
 
 	.align 2
 dummy_song_header:

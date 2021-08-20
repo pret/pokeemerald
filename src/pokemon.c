@@ -6308,8 +6308,6 @@ u16 GetBattleBGM(void)
         case SPECIES_MEWTWO:
             return MUS_RG_VS_MEWTWO;
         case SPECIES_MEW:
-        case SPECIES_CELEBI:
-        case SPECIES_JIRACHI:
             return MUS_VS_MEW;
         case SPECIES_RAIKOU:
             return HG_SEQ_GS_VS_RAIKOU;

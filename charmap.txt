@@ -1472,6 +1472,8 @@ BW_SEQ_BGM_VS_SHIN           = F3 03
 BW_SEQ_BGM_VS_N_2            = F4 03
 BW_SEQ_BGM_E_G_CIS           = F5 03
 BW_SEQ_BGM_VS_G_CIS          = F6 03
+BW_SEQ_BGM_E_LAST            = F7 03
+BW_SEQ_BGM_ENDING            = F8 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01
