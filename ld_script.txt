@@ -1707,6 +1707,7 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_e_legend_come.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_legend_born.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_shin.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_n_2.o(.rodata);
     } =0
 
     lib_rodata :

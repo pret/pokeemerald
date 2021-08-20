@@ -1034,6 +1034,7 @@
 #define BW_SEQ_BGM_E_LEGEND_COME     1009 // N's Dragon
 #define BW_SEQ_BGM_E_LEGEND_BORN     1010 // The Dragon Awakes
 #define BW_SEQ_BGM_VS_SHIN           1011 // Battle! (Reshiram/Zekrom)                  (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_VS_N_2            1012 // Decisive Battle! (N)                       (TODO: PORTAMENTO!! Trust me this sounds absolutely terrible without it)
 
 // Black 2 & White 2 Music
 

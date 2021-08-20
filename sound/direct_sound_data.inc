@@ -4153,3 +4153,27 @@ DirectSoundWaveData_bw_brasshit_vsdragon::
 	.align 2
 DirectSoundWaveData_bw_fhornsripc3::
 	.incbin "sound/direct_sound_samples/bw_fhornsripc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_brassg5_n::
+	.incbin "sound/direct_sound_samples/bw_brassg5_n.bin"
+
+	.align 2
+DirectSoundWaveData_bw_steeldrumg4_n::
+	.incbin "sound/direct_sound_samples/bw_steeldrumg4_n.bin"
+
+	.align 2
+DirectSoundWaveData_bw_clocktick_n::
+	.incbin "sound/direct_sound_samples/bw_clocktick_n.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gunshot_n::
+	.incbin "sound/direct_sound_samples/bw_gunshot_n.bin"
+
+	.align 2
+DirectSoundWaveData_bw_whitenoise_n::
+	.incbin "sound/direct_sound_samples/bw_whitenoise_n.bin"
+
+	.align 2
+DirectSoundWaveData_bw_click_n::
+	.incbin "sound/direct_sound_samples/bw_click_n.bin"

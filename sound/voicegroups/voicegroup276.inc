@@ -19,7 +19,7 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup319, KeySplitTable97    @ pipe organ
 	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
@@ -76,21 +76,21 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_fhornsripc3, 255, 248, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distguitarc5_plasma, 255, 253, 0, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_stringhit_plasma, 255, 248, 25, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_brassg5_n, 255, 197, 255, 171
+	voice_directsound 60, 0, DirectSoundWaveData_bw_steeldrumg4_n, 255, 251, 0, 205
+	voice_keysplit voicegroup303, KeySplitTable81    @ choir full
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_clocktick_n, 255, 197, 255, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 197, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 58, 197, 255, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_whitenoise_n, 255, 0, 255, 171
 	voice_keysplit voicegroup270, KeySplitTable38    @ square wave (HGSS)
 	voice_directsound 60, 0, DirectSoundWaveData_hg_039drawbc4, 255, 0, 255, 171
 	voice_keysplit voicegroup306, KeySplitTable38    @ saw lead
 	voice_keysplit voicegroup313, KeySplitTable88    @ synth string
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gunshot_n, 255, 197, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distpowerc4_plasma, 255, 197, 255, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_guitarbendc5_plasma, 255, 197, 255, 171
