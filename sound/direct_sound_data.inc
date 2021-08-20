@@ -4177,3 +4177,43 @@ DirectSoundWaveData_bw_whitenoise_n::
 	.align 2
 DirectSoundWaveData_bw_click_n::
 	.incbin "sound/direct_sound_samples/bw_click_n.bin"
+
+	.align 2
+DirectSoundWaveData_bw_bottleblowcs5_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_bottleblowcs5_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_celestacs5_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_celestacs5_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_taikog4_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_taikog4_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_taikohardg4_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_taikohardg4_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmale1_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_choirmale1_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmale2_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_choirmale2_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirmale3_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_choirmale3_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemale1_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_choirfemale1_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_choirfemale2_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_choirfemale2_ghetsis.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gongc5_ghetsis::
+	.incbin "sound/direct_sound_samples/bw_gongc5_ghetsis.bin"

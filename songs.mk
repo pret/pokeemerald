@@ -2708,3 +2708,9 @@ $(MID_SUBDIR)/bw_seq_bgm_vs_shin.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_n_2.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V105
+
+$(MID_SUBDIR)/bw_seq_bgm_e_g_cis.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V088
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_g_cis.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V126
