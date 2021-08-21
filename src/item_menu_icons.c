@@ -559,7 +559,7 @@ void SetItemMenuSwapLineInvisibility(bool8 invisible)
 
 void UpdateItemMenuSwapLinePos(u8 y)
 {
-    UpdateSwapLineSpritesPos(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH | 0x80, 120, (y + 1) * 16);
+    UpdateSwapLineSpritesPos(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }
 
 static void sub_80D5018(void *mem0, void *mem1)
