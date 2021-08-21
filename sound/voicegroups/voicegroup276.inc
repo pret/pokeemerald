@@ -8,7 +8,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
 	voice_keysplit voicegroup282, KeySplitTable93    @ piano | 41 | 46 | 53 | 58 | 65
 	voice_keysplit voicegroup233, KeySplitTable94    @ piano (HGSS) |||| 79
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup233, KeySplitTable35    @ piano (HGSS)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_074glocknc5, 255, 249, 0, 205
 	voice_keysplit voicegroup297, KeySplitTable76    @ vibraphone
 	voice_keysplit voicegroup295, KeySplitTable74    @ marimba
@@ -94,8 +94,8 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_distpowerc4_plasma, 255, 197, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_celestacs5_ghetsis, 255, 248, 0, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_guitarbendc5_plasma, 255, 197, 255, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup321, KeySplitTable73    @ synth bass alt
+	voice_keysplit voicegroup256, KeySplitTable46    @ violin
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

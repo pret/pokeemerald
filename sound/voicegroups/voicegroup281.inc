@@ -22,3 +22,12 @@ voicegroup281:: @ drums 4 (misc)
 	voice_directsound 64, 64, DirectSoundWaveData_dp_synthsnare, 255, 0, 255, 0    				@ 127/127/127/127/ 64	+ 4
 	voice_directsound 60, 64, DirectSoundWaveData_bw_click_n, 255, 0, 255, 0    				@ 127/127/127/127/ 64	
 	voice_directsound 65, 64, DirectSoundWaveData_bw_click_n, 255, 0, 255, 0    				@ 127/127/127/127/ 64	+ 5
+	voice_directsound 60, 64, DirectSoundWaveData_dp_808snare_16, 255, 220, 0, 171				@ 127/116/  0/120/ 64
+	voice_directsound 60, 70, DirectSoundWaveData_dp_053clap, 255, 0, 227, 171					@ 127/127/120/120/ 70
+	voice_directsound 60, 64, DirectSoundWaveData_hg_033orccym, 255, 246, 0, 214    			@ 127/ 90/  0/114/ 64	
+	voice_directsound 62, 58, DirectSoundWaveData_dp_tambourine_16, 255, 0, 255, 171			@ 127/127/127/120/ 58	+ 2
+	voice_directsound 57, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 205					@ 127/127/127/116/ 90	- 3
+	voice_directsound 60, 90, DirectSoundWaveData_dp_016bongo, 255, 0, 255, 205					@ 127/127/127/116/ 90
+	voice_directsound 59, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171					@ 127/127/127/120/ 26   - 1
+	voice_directsound 60, 105, DirectSoundWaveData_dp_mute_conga_16, 255, 0, 255, 171			@ 127/127/127/120/105
+	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 248, 0, 192				@ 127/ 80/  0/118/ 44

@@ -1039,13 +1039,17 @@
 #define BW_SEQ_BGM_VS_SHIN           1011 // Battle! (Reshiram/Zekrom)                  (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_VS_N_2            1012 // Decisive Battle! (N)                       (TODO: PORTAMENTO!! Trust me this sounds absolutely terrible without it)
 #define BW_SEQ_BGM_E_G_CIS           1013 // Ghetsis' Ambitions
-#define BW_SEQ_BGM_VS_G_CIS          1014 // Battle! (Ghetsis)                          (TODO: PORTAMENTO!!) (female choir part only, not really a huge deal)
+#define BW_SEQ_BGM_VS_G_CIS          1014 // Battle! (Ghetsis)                          (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_E_LAST            1015 // Farewell
 #define BW_SEQ_BGM_ENDING            1016 // Ending "Onward to Our Own Futures"
 
 #define BW_SEQ_BGM_E_HANDSOME        1017 // Looker's Theme
 #define BW_SEQ_ME_TAMAGO_GET         1018 // Received a Pokémon Egg!
 #define BW_SEQ_BGM_PLEASURE_BOAT     1019 // The Royal Unova
+#define BW_SEQ_BGM_WIFI_ACCESS       1020 // Nintendo Wi-Fi Connection
+#define BW_SEQ_BGM_GLTERMINAL        1021 // Global Terminal
+#define BW_SEQ_BGM_GTS               1022 // Gts
+#define BW_SEQ_BGM_GURUGURU          1023 // Spin Trade
 
 // Black 2 & White 2 Music
 

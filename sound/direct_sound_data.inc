@@ -4229,3 +4229,11 @@ DirectSoundWaveData_bw_fhnspb3::
 	.align 2
 DirectSoundWaveData_bw_fhnspf4::
 	.incbin "sound/direct_sound_samples/bw_fhnspf4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbassc2alt::
+	.incbin "sound/direct_sound_samples/bw_synthbassc2alt.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthbassc3alt::
+	.incbin "sound/direct_sound_samples/bw_synthbassc3alt.bin"

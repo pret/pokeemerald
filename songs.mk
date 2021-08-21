@@ -2729,3 +2729,15 @@ $(MID_SUBDIR)/bw_seq_me_tamago_get.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_pleasure_boat.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V078
+
+$(MID_SUBDIR)/bw_seq_bgm_wifi_access.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V065
+
+$(MID_SUBDIR)/bw_seq_bgm_glterminal.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_gts.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V100
+
+$(MID_SUBDIR)/bw_seq_bgm_guruguru.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V061

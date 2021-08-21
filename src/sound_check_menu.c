@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_PLEASURE_BOAT - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_GURUGURU - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_PLEASURE_BOAT - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_GURUGURU - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1717,6 +1717,10 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_E_HANDSOME       , "BW-SEQ-BGM-E-HANDSOME") \
     X(BW_SEQ_ME_TAMAGO_GET        , "BW-SEQ-ME-TAMAGO-GET") \
     X(BW_SEQ_BGM_PLEASURE_BOAT    , "BW-SEQ-BGM-PLEASURE-BOAT") \
+    X(BW_SEQ_BGM_WIFI_ACCESS      , "BW-SEQ-BGM-WIFI-ACCESS") \
+    X(BW_SEQ_BGM_GLTERMINAL       , "BW-SEQ-BGM-GLTERMINAL") \
+    X(BW_SEQ_BGM_GTS              , "BW-SEQ-BGM-GTS") \
+    X(BW_SEQ_BGM_GURUGURU         , "BW-SEQ-BGM-GURUGURU") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \
