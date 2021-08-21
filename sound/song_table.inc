@@ -1025,6 +1025,8 @@ gSongTable::
 	song bw_seq_bgm_glterminal, 0, 0
 	song bw_seq_bgm_gts, 0, 0
 	song bw_seq_bgm_guruguru, 0, 0
+	song bw_seq_me_hyouka5, 2, 2
+	song bw_seq_bgm_gear_station, 0, 0
 
 	.align 2
 dummy_song_header:

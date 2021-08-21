@@ -4237,3 +4237,35 @@ DirectSoundWaveData_bw_synthbassc2alt::
 	.align 2
 DirectSoundWaveData_bw_synthbassc3alt::
 	.incbin "sound/direct_sound_samples/bw_synthbassc3alt.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distgta2_gearstation::
+	.incbin "sound/direct_sound_samples/bw_distgta2_gearstation.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distgta3_gearstation::
+	.incbin "sound/direct_sound_samples/bw_distgta3_gearstation.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distgtf4_gearstation::
+	.incbin "sound/direct_sound_samples/bw_distgtf4_gearstation.bin"
+
+	.align 2
+DirectSoundWaveData_bw_distgtc5_gearstation::
+	.incbin "sound/direct_sound_samples/bw_distgtc5_gearstation.bin"
+
+	.align 2
+DirectSoundWaveData_bw_206tom::
+	.incbin "sound/direct_sound_samples/bw_206tom.bin"
+
+	.align 2
+DirectSoundWaveData_bw_208tom::
+	.incbin "sound/direct_sound_samples/bw_208tom.bin"
+
+	.align 2
+DirectSoundWaveData_bw_210tom::
+	.incbin "sound/direct_sound_samples/bw_210tom.bin"
+
+	.align 2
+DirectSoundWaveData_bw_212tom::
+	.incbin "sound/direct_sound_samples/bw_212tom.bin"

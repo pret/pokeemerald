@@ -1719,6 +1719,8 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_glterminal.o(.rodata);
         sound/songs/midi/bw_seq_bgm_gts.o(.rodata);
         sound/songs/midi/bw_seq_bgm_guruguru.o(.rodata);
+        sound/songs/midi/bw_seq_me_hyouka5.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_gear_station.o(.rodata);
     } =0
 
     lib_rodata :

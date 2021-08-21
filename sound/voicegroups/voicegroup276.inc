@@ -26,7 +26,7 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_synthbassf1_leader, 255, 251, 14, 171
 	voice_keysplit voicegroup308, KeySplitTable95    @ lp marschall guitar ||| 70
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup322, KeySplitTable100   @ electric guitar (gear station)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_170slapbg2, 255, 1, 227, 171
 	voice_keysplit voicegroup309, KeySplitTable85    @ slap bass | 45 |
 	voice_keysplit voicegroup310, KeySplitTable21    @ distortion guitar (DPPt)
@@ -96,7 +96,7 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_guitarbendc5_plasma, 255, 197, 255, 171
 	voice_keysplit voicegroup321, KeySplitTable73    @ synth bass alt
 	voice_keysplit voicegroup256, KeySplitTable46    @ violin
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup311, KeySplitTable101   @ fretless bass | 34
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

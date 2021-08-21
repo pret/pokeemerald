@@ -2741,3 +2741,9 @@ $(MID_SUBDIR)/bw_seq_bgm_gts.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_guruguru.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V061
+
+$(MID_SUBDIR)/bw_seq_me_hyouka5.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_gear_station.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V057

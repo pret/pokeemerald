@@ -1050,6 +1050,8 @@
 #define BW_SEQ_BGM_GLTERMINAL        1021 // Global Terminal
 #define BW_SEQ_BGM_GTS               1022 // Gts
 #define BW_SEQ_BGM_GURUGURU          1023 // Spin Trade
+#define BW_SEQ_ME_HYOUKA5            1024 // Pokédex Evaluation... Just a Little More!
+#define BW_SEQ_BGM_GEAR_STATION      1025 // Gear Station
 
 // Black 2 & White 2 Music
 

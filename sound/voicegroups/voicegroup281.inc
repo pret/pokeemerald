@@ -31,3 +31,12 @@ voicegroup281:: @ drums 4 (misc)
 	voice_directsound 59, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171					@ 127/127/127/120/ 26   - 1
 	voice_directsound 60, 105, DirectSoundWaveData_dp_mute_conga_16, 255, 0, 255, 171			@ 127/127/127/120/105
 	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 248, 0, 192				@ 127/ 80/  0/118/ 44
+	voice_directsound 60, 30, DirectSoundWaveData_bw_206tom, 255, 0, 255, 205					@ 127/127/127/116/ 30
+	voice_directsound 60, 40, DirectSoundWaveData_bw_210tom, 255, 0, 255, 205					@ 127/127/127/116/ 40
+	voice_directsound 61, 40, DirectSoundWaveData_bw_210tom, 255, 0, 255, 205					@ 127/127/127/116/ 40	+ 1
+	voice_directsound 60, 50, DirectSoundWaveData_bw_212tom, 255, 0, 255, 205					@ 127/127/127/116/ 50
+	voice_directsound 60, 100, DirectSoundWaveData_bw_208tom, 255, 0, 255, 205					@ 127/127/127/116/100
+	voice_directsound 61, 100, DirectSoundWaveData_bw_208tom, 255, 0, 255, 205					@ 127/127/127/116/100	+ 1
+	voice_directsound 63, 100, DirectSoundWaveData_bw_208tom, 255, 0, 255, 205					@ 127/127/127/116/100	+ 3
+	voice_directsound 65, 100, DirectSoundWaveData_bw_208tom, 255, 0, 255, 205					@ 127/127/127/116/100	+ 5
+	voice_directsound 63, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	+ 3
