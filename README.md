@@ -2,7 +2,7 @@ This branch adds music from NDS Pokémon games to the Pokeemerald decompilations
 
 This branch also implements Ipatix's HQ m4a mixer and *15 voice direct sound polyphony*. I also recommend keeping the sample rate the default value of 13379 Hz, as to prevent vanilla music from breaking.
 
-This master branch is a WIP. See my other branches for music from select soundtracks:
+**This master branch is a WIP and unstable.** Please see my other branches for music from select soundtracks:
 * [**DPPt Music**](https://github.com/CyanSMP64/pokeemerald/tree/dppt_music). (Requires 1687104 bytes (~1.61 MB) of free space.)
 * [**HGSS Music**](https://github.com/CyanSMP64/pokeemerald/tree/hgss_music). (Requires 1439184 bytes (~1.37 MB) of free space.)
 * [**DPPt and HGSS Music**](https://github.com/CyanSMP64/pokeemerald/tree/dppt_hgss_music). (Requires 2895540 bytes (~2.76 MB) of free space.)
