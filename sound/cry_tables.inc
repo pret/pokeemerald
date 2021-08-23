@@ -389,6 +389,7 @@ gCryTable::
 	cry Cry_Deoxys 
 	cry Cry_Chimecho 
 	cry Cry_Crewmate
+	cry Cry_Fren
 
 	.align 2
 gCryTable2::
@@ -781,3 +782,4 @@ gCryTable2::
 	cry2 Cry_Deoxys 
 	cry2 Cry_Chimecho 
 	cry2 Cry_Crewmate
+	cry2 Cry_Fren

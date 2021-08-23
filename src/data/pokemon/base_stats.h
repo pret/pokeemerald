@@ -37,7 +37,39 @@
 const struct BaseStats gBaseStats[] =
 {
     [SPECIES_NONE] = {0},
-
+ 
+    [SPECIES_FREN] =
+    {
+       .baseHP        = 80,
+       .baseAttack    = 100,
+       .baseDefense   = 70,
+       .baseSpeed     = 45,
+       .baseSpAttack  = 50,
+       .baseSpDefense = 60,
+       .type1 = TYPE_NORMAL,  
+       .type2 = TYPE_MYSTERY,
+       .catchRate = 180,
+       .expYield = 255,
+       .evYield_HP        = 0,
+       .evYield_Attack    = 0,
+       .evYield_Defense   = 0,
+       .evYield_Speed     = 0,
+       .evYield_SpAttack  = 3,
+       .evYield_SpDefense = 0,
+       .item1 = ITEM_POTION,
+       .item2 = ITEM_NONE,
+       .genderRatio = PERCENT_FEMALE(0),
+       .eggCycles = 120,
+       .friendship = 0,
+       .growthRate = GROWTH_SLOW,
+       .eggGroup1 = EGG_GROUP_UNDISCOVERED,
+       .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+       .abilities = {ABILITY_SPEED_BOOST, ABILITY_NONE},
+       .safariZoneFleeRate = 0,
+       .bodyColor = BODY_COLOR_PURPLE,
+       .noFlip = FALSE,
+    },
+    
     [SPECIES_CREWMATE] =
     {
        .baseHP        = 106,
@@ -46,8 +78,8 @@ const struct BaseStats gBaseStats[] =
        .baseSpeed     = 140,
        .baseSpAttack  = 194,
        .baseSpDefense = 120,
-       .type1 = TYPE_PSYCHIC,
-       .type2 = TYPE_PSYCHIC,
+       .type1 = TYPE_NONE,  
+       .type2 = TYPE_MYSTERY,
        .catchRate = 3,
        .expYield = 255,
        .evYield_HP        = 0,

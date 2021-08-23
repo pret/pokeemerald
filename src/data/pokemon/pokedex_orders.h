@@ -127,6 +127,7 @@ const u16 gPokedexOrder_Alphabetical[] =
     NATIONAL_DEX_FLAREON,
     NATIONAL_DEX_FLYGON,
     NATIONAL_DEX_FORRETRESS,
+    NATIONAL_DEX_FREN,
     NATIONAL_DEX_FURRET,
     NATIONAL_DEX_GARDEVOIR,
     NATIONAL_DEX_GASTLY,
@@ -417,6 +418,7 @@ const u16 gPokedexOrder_Alphabetical[] =
 
 const u16 gPokedexOrder_Weight[] =
 {
+    NATIONAL_DEX_FREN,
     NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_GASTLY,
     NATIONAL_DEX_HAUNTER,
@@ -808,6 +810,7 @@ const u16 gPokedexOrder_Weight[] =
 
 const u16 gPokedexOrder_Height[] =
 {
+    NATIONAL_DEX_FREN,
     NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_DIGLETT,
     NATIONAL_DEX_AZURILL,

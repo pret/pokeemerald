@@ -1,3 +1,7 @@
+  // #include "start_menu.h"
+  // #include "pokenav.h"
+
+
 const struct Item gItems[] =
 {
     [ITEM_NONE] =
@@ -3139,6 +3143,19 @@ const struct Item gItems[] =
 
 // Key items
 
+//    [ITEM_TOWN_MAP] =
+//    {
+//        .name = _("TOWN MAP"),
+//        .itemId = MENU_ACTION_POKENAV,
+//        .price = 0,
+//        .description = sTownMapDesc,
+//        .importance = 1,
+//        .unk19 = 1,
+//        .pocket = POCKET_KEY_ITEMS,
+//        .type = ITEM_USE_BAG_MENU,
+//        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, 
+ //   }, //
+
     [ITEM_MACH_BIKE] =
     {
         .name = _("MACH BIKE"),
@@ -4315,7 +4332,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_BICYCLE] =
+    [ITEM_BICYCLE] = 
     {
         .name = _("BICYCLE"),
         .itemId = ITEM_BICYCLE,
@@ -4325,19 +4342,6 @@ const struct Item gItems[] =
         .unk19 = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
-
-    [ITEM_TOWN_MAP] =
-    {
-        .name = _("TOWN MAP"),
-        .itemId = ITEM_TOWN_MAP,
-        .price = 0,
-        .description = sTownMapDesc,
-        .importance = 1,
-        .unk19 = 1,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
