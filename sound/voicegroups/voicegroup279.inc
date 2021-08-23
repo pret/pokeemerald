@@ -54,3 +54,5 @@ voicegroup279:: @ drums 2 (sato)
 	voice_directsound 60, 64, DirectSoundWaveData_dp_oct_snare_16, 255, 0, 255, 171				@ 127/127/127/120/ 64
 	voice_directsound 60, 80, DirectSoundWaveData_hg_062chh, 255, 242, 0, 171    				@ 127/100/  0/120/ 80
 	voice_directsound 64, 20, DirectSoundWaveData_hg_022china, 255, 250, 0, 224    				@ 127/ 70/  0/110/ 20	+ 4
+	voice_directsound 60, 64, DirectSoundWaveData_bw_108kick909, 255, 0, 227, 205    			@ 127/127/120/116/ 64
+	voice_directsound 60, 20, DirectSoundWaveData_bw_027china909, 255, 250, 0, 224    			@ 127/ 70/  0/110/ 20

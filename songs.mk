@@ -2747,3 +2747,30 @@ $(MID_SUBDIR)/bw_seq_me_hyouka5.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_gear_station.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V057
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var1.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var3.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var4.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var5.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var6.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_battle_subway.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_subway_trainer.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V112
+
+$(MID_SUBDIR)/bw_seq_me_bpget.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V081 -p5

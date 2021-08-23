@@ -105,8 +105,8 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_sfxlasergun_plasma, 255, 0, 255, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmale2_ghetsis, 255, 0, 255, 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmale3_ghetsis, 255, 0, 255, 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_train1, 255, 0, 255, 2
+	voice_directsound 60, 0, DirectSoundWaveData_bw_train2, 255, 0, 255, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

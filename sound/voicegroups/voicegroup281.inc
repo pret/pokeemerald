@@ -40,3 +40,9 @@ voicegroup281:: @ drums 4 (misc)
 	voice_directsound 63, 100, DirectSoundWaveData_bw_208tom, 255, 0, 255, 205					@ 127/127/127/116/100	+ 3
 	voice_directsound 65, 100, DirectSoundWaveData_bw_208tom, 255, 0, 255, 205					@ 127/127/127/116/100	+ 5
 	voice_directsound 63, 100, DirectSoundWaveData_hg_022china, 255, 248, 0, 224    			@ 127/ 80/  0/110/100	+ 3
+	voice_directsound 64, 64, DirectSoundWaveData_bw_synthsnare_plasma, 255, 0, 227, 2    		@ 127/127/120/124/ 64	+ 4
+	voice_directsound 60, 64, DirectSoundWaveData_bw_tabla1, 255, 0, 227, 2    					@ 127/127/120/124/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_tabla2, 255, 0, 227, 2    					@ 127/127/120/124/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_tabla3, 255, 0, 227, 2    					@ 127/127/120/124/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_tabla4, 255, 0, 227, 2    					@ 127/127/120/124/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_tabla5, 255, 241, 0, 171    				@ 127/102/  0/120/ 64

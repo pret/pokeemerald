@@ -4269,3 +4269,39 @@ DirectSoundWaveData_bw_210tom::
 	.align 2
 DirectSoundWaveData_bw_212tom::
 	.incbin "sound/direct_sound_samples/bw_212tom.bin"
+
+	.align 2
+DirectSoundWaveData_bw_train1::
+	.incbin "sound/direct_sound_samples/bw_train1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_train2::
+	.incbin "sound/direct_sound_samples/bw_train2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tabla1::
+	.incbin "sound/direct_sound_samples/bw_tabla1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tabla2::
+	.incbin "sound/direct_sound_samples/bw_tabla2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tabla3::
+	.incbin "sound/direct_sound_samples/bw_tabla3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tabla4::
+	.incbin "sound/direct_sound_samples/bw_tabla4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tabla5::
+	.incbin "sound/direct_sound_samples/bw_tabla5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_drumloop_vssubway::
+	.incbin "sound/direct_sound_samples/bw_drumloop_vssubway.bin"
+
+	.align 2
+DirectSoundWaveData_bw_027china909::
+	.incbin "sound/direct_sound_samples/bw_027china909.bin"

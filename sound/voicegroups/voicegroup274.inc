@@ -55,8 +55,8 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup282, KeySplitTable96    @ piano | 44 || 56 || 68 || 80
 	voice_keysplit voicegroup285, KeySplitTable98    @ french horns | 52 | 53
 	voice_keysplit voicegroup265, KeySplitTable51    @ oboe (HGSS)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
+	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -88,7 +88,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup306, KeySplitTable102   @ saw lead | 56
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup320, KeySplitTable99    @ french horns p
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -100,7 +100,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_drumloop_vssubway, 255, 0, 255, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -125,6 +125,6 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 0, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit_all voicegroup278				 @ drums

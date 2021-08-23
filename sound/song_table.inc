@@ -1027,6 +1027,15 @@ gSongTable::
 	song bw_seq_bgm_guruguru, 0, 0
 	song bw_seq_me_hyouka5, 2, 2
 	song bw_seq_bgm_gear_station, 0, 0
+	song bw_seq_bgm_battle_subway_var1, 0, 0
+	song bw_seq_bgm_battle_subway_var2, 0, 0
+	song bw_seq_bgm_battle_subway_var3, 0, 0
+	song bw_seq_bgm_battle_subway_var4, 0, 0
+	song bw_seq_bgm_battle_subway_var5, 0, 0
+	song bw_seq_bgm_battle_subway_var6, 0, 0
+	song bw_seq_bgm_battle_subway, 0, 0
+	song bw_seq_bgm_vs_subway_trainer, 0, 0
+	song bw_seq_me_bpget, 2, 2
 
 	.align 2
 dummy_song_header:
