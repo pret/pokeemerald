@@ -1009,7 +1009,7 @@ const struct Item gItems[] =
         .battleUseFunc = ItemUseInBattle_StatIncrease,
     },
 
-    [ITEM_POKE_DOLL] =
+    [ITEM_POKE_DOLL] = 
     {
         .name = _("POKé DOLL"),
         .itemId = ITEM_POKE_DOLL,
@@ -1138,15 +1138,27 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+//    [ITEM_POKE_BALL] =
+//        .name = _("POKé BALL"),
+//        .itemId = ITEM_POKE_BALL,
+//        .price = 200,
+//        .description = sPokeBallDesc,
+ //       .pocket = POCKET_POKE_BALLS,
+  //      .type = ITEM_POKE_BALL - FIRST_BALL,
+  //      .battleUsage = ITEM_B_USE_OTHER,
+  //      .battleUseFunc = ItemUseInBattle_PokeBall,
+  //      .secondaryId = ITEM_POKE_BALL - FIRST_BALL,
 
-    [ITEM_05B] =
+    [ITEM_05B] = //WIP Throw Item 
     {
-        .name = _("????????"),
+        .name = _("????????"), 
         .itemId = ITEM_NONE,
         .price = 0,
         .description = sDummyDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_Test,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 

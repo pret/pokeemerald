@@ -1118,6 +1118,24 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
     }
 }
 
+void ItemUseInBattle_Test(u8 taskId)
+{
+    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    {
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        if (!InBattlePyramid())
+            Task_FadeAndCloseBagMenu(taskId);
+        else
+            CloseBattlePyramidBag(taskId);
+    }
+    else if (!InBattlePyramid())
+    {
+        DisplayItemMessage(taskId, 1, gText_BoxFull, BagMenu_InitListsMenu);
+    }
+    else
+        DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+}
+
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
 {
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);

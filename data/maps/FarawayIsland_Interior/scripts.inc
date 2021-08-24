@@ -126,7 +126,7 @@ FarawayIsland_Interior_EventScript_Mew::
 	special SetMewAboveGrass
 	message FarawayIsland_Interior_Text_Mew
 	waitse
-	playmoncry SPECIES_FREN, 2
+	playmoncry SPECIES_SURSKIT, 2
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq FarawayIsland_Interior_EventScript_FoundMewNorth
 	compare VAR_FACING, DIR_SOUTH
