@@ -261,16 +261,16 @@ static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
     .trainerType = TRAINER_TYPE_NORMAL,
 };
 
-static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] = 
+static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] =
 {
-    MAP_NUM(TRAINER_HILL_2F), 
-    MAP_NUM(TRAINER_HILL_3F), 
-    MAP_NUM(TRAINER_HILL_4F), 
+    MAP_NUM(TRAINER_HILL_2F),
+    MAP_NUM(TRAINER_HILL_3F),
+    MAP_NUM(TRAINER_HILL_4F),
     MAP_NUM(TRAINER_HILL_ROOF)
 };
-static const u8 sTrainerPartySlots[][PARTY_SIZE / 2] = 
+static const u8 sTrainerPartySlots[][PARTY_SIZE / 2] =
 {
-    {0, 1, 2}, 
+    {0, 1, 2},
     {3, 4, 5}
 };
 

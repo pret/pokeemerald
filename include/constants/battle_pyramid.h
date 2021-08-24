@@ -23,7 +23,7 @@
 #define OBJ_POSITIONS_UNIFORM               0
 #define OBJ_POSITIONS_IN_AND_NEAR_ENTRANCE  1
 #define OBJ_POSITIONS_IN_AND_NEAR_EXIT      2
-#define OBJ_POSITIONS_NEAR_ENTRANCE         3         
+#define OBJ_POSITIONS_NEAR_ENTRANCE         3
 #define OBJ_POSITIONS_NEAR_EXIT             4
 
 // Functions IDs for sBattlePyramidFunctions / CallBattlePyramidFunction

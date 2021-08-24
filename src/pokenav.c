@@ -52,7 +52,7 @@ static void CB2_InitPokenavForTutorial(void);
 // TODO: Use MENU ids
 const struct PokenavCallbacks PokenavMenuCallbacks[15] =
 {
-    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMap,
         .callback = GetMenuHandlerCallback,
@@ -62,7 +62,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMap,
         .callback = GetMenuHandlerCallback,
@@ -72,7 +72,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionMenu,
         .callback = GetMenuHandlerCallback,
@@ -82,7 +82,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionSearchMenu,
         .callback = GetMenuHandlerCallback,
@@ -92,7 +92,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
         .callback = GetMenuHandlerCallback,
@@ -102,7 +102,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
         .callback = GetMenuHandlerCallback,
@@ -112,7 +112,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] = 
+    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_RegionMap,
         .callback = GetRegionMapCallback,
@@ -122,7 +122,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeRegionMapSubstruct1,
         .free2 = FreeRegionMapSubstruct2,
     },
-    [POKENAV_CONDITION_PARTY - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_PARTY - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_PartyCondition,
         .callback = GetPartyConditionCallback,
@@ -132,7 +132,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreePartyConditionSubstruct1,
         .free2 = FreePartyConditionSubstruct2,
     },
-    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionSearch,
         .callback = GetConditionSearchResultsCallback,
@@ -142,7 +142,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeSearchResultSubstruct1,
         .free2 = FreeSearchResultSubstruct2,
     },
-    [POKENAV_CONDITION_GRAPH_FROM_SEARCH - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_GRAPH_FROM_SEARCH - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionGraphFromSearch,
         .callback = GetPartyConditionCallback,
@@ -152,7 +152,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreePartyConditionSubstruct1,
         .free2 = FreePartyConditionSubstruct2,
     },
-    [POKENAV_RETURN_CONDITION_SEARCH - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RETURN_CONDITION_SEARCH - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ReturnToMonSearchList,
         .callback = GetConditionSearchResultsCallback,
@@ -162,7 +162,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeSearchResultSubstruct1,
         .free2 = FreeSearchResultSubstruct2,
     },
-    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MatchCall,
         .callback = GetMatchCallCallback,
@@ -172,7 +172,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMatchCallSubstruct1,
         .free2 = FreeMatchCallSubstruct2,
     },
-    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MonRibbonList,
         .callback = GetRibbonsMonListCallback,
@@ -182,7 +182,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeRibbonsMonList1,
         .free2 = FreeRibbonsMonList2,
     },
-    [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_RibbonsSummaryMenu,
         .callback = GetRibbonsSummaryMenuCallback,
@@ -192,7 +192,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeRibbonsSummaryScreen1,
         .free2 = FreeRibbonsSummaryScreen2,
     },
-    [POKENAV_RIBBONS_RETURN_TO_MON_LIST - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RIBBONS_RETURN_TO_MON_LIST - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_RibbonsMonListFromSummary,
         .callback = GetRibbonsMonListCallback,

@@ -6,8 +6,8 @@
 #define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
 
-/* 
-            COLUMNS         
+/*
+            COLUMNS
 ROWS        0   1   2   3   4   5
             6   7   8   9   10  11
             12  13  14  15  16  17

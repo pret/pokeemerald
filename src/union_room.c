@@ -61,13 +61,13 @@ enum {
     UR_STATE_CHECK_SELECTING_MON,
     UR_STATE_MAIN,
     UR_STATE_DO_SOMETHING_PROMPT,
-    UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT,   
+    UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT,
     UR_STATE_DO_SOMETHING_PROMPT_2,
     UR_STATE_PRINT_MSG,
     UR_STATE_HANDLE_ACTIVITY_REQUEST,
-    UR_STATE_DECLINE_ACTIVITY_REQUEST,  
+    UR_STATE_DECLINE_ACTIVITY_REQUEST,
     UR_STATE_PLAYER_CONTACTED_YOU,
-    UR_STATE_RECV_CONTACT_DATA,    
+    UR_STATE_RECV_CONTACT_DATA,
     UR_STATE_PRINT_START_ACTIVITY_MSG,
     UR_STATE_START_ACTIVITY_LINK,
     UR_STATE_START_ACTIVITY_WAIT_FOR_LINK,
@@ -80,7 +80,7 @@ enum {
     UR_STATE_ACCEPT_CHAT_REQUEST,
     UR_STATE_WAIT_FOR_START_MENU,
     UR_STATE_INTERACT_WITH_PLAYER,
-    UR_STATE_TRY_COMMUNICATING,        
+    UR_STATE_TRY_COMMUNICATING,
     UR_STATE_PRINT_AND_EXIT,
     UR_STATE_SEND_ACTIVITY_REQUEST,
     UR_STATE_TRAINER_APPEARS_BUSY,
@@ -94,15 +94,15 @@ enum {
     UR_STATE_CANCEL_REQUEST_PRINT_MSG,
     UR_STATE_CANCEL_REQUEST_RESTART_LINK,
     UR_STATE_COMMUNICATING_WAIT_FOR_DATA,
-    UR_STATE_WAIT_FOR_CONTACT_DATA,    
+    UR_STATE_WAIT_FOR_CONTACT_DATA,
     UR_STATE_PRINT_CARD_INFO,
     UR_STATE_WAIT_FINISH_READING_CARD,
     UR_STATE_INTERACT_WITH_ATTENDANT,
-    UR_STATE_REGISTER_PROMPT,    
+    UR_STATE_REGISTER_PROMPT,
     UR_STATE_CANCEL_REGISTRATION_PROMPT,
     UR_STATE_CHECK_TRADING_BOARD,
     UR_STATE_TRADING_BOARD_LOAD,
-    UR_STATE_REGISTER_PROMPT_HANDLE_INPUT,    
+    UR_STATE_REGISTER_PROMPT_HANDLE_INPUT,
     UR_STATE_TRADING_BOARD_HANDLE_INPUT,
     UR_STATE_TRADE_PROMPT,
     UR_STATE_TRADE_SELECT_MON,
@@ -110,7 +110,7 @@ enum {
     UR_STATE_REGISTER_REQUEST_TYPE,
     UR_STATE_REGISTER_SELECT_MON_FADE,
     UR_STATE_REGISTER_SELECT_MON,
-    UR_STATE_REGISTER_COMPLETE,        
+    UR_STATE_REGISTER_COMPLETE,
     UR_STATE_CANCEL_REGISTRATION,
 };
 
@@ -2485,8 +2485,8 @@ static void Task_RunUnionRoom(u8 taskId)
         uroom->state = UR_STATE_CHECK_SELECTING_MON;
         break;
     case UR_STATE_CHECK_SELECTING_MON:
-        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER 
-          || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE) 
+        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER
+          || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE)
            && sUnionRoomTrade.state != URTRADE_STATE_NONE)
         {
             id = GetCursorSelectionMonId();
@@ -2671,10 +2671,10 @@ static void Task_RunUnionRoom(u8 taskId)
         ScheduleFieldMessageWithFollowupState(UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT, sHiDoSomethingTexts[id][playerGender]);
         break;
     case UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT:
-        input = ListMenuHandler_AllItemsAvailable(&uroom->textState, 
-                                                  &uroom->topListMenuWindowId, 
-                                                  &uroom->topListMenuId, 
-                                                  &sWindowTemplate_InviteToActivity, 
+        input = ListMenuHandler_AllItemsAvailable(&uroom->textState,
+                                                  &uroom->topListMenuWindowId,
+                                                  &uroom->topListMenuId,
+                                                  &sWindowTemplate_InviteToActivity,
                                                   &sListMenuTemplate_InviteToActivity);
         if (input != -1)
         {
@@ -3028,10 +3028,10 @@ static void Task_RunUnionRoom(u8 taskId)
             uroom->state = UR_STATE_REGISTER_PROMPT_HANDLE_INPUT;
         break;
     case UR_STATE_REGISTER_PROMPT_HANDLE_INPUT:
-        input = ListMenuHandler_AllItemsAvailable(&uroom->textState, 
-                                                  &uroom->tradeBoardSelectWindowId, 
-                                                  &uroom->tradeBoardDetailsWindowId, 
-                                                  &sWindowTemplate_RegisterForTrade, 
+        input = ListMenuHandler_AllItemsAvailable(&uroom->textState,
+                                                  &uroom->tradeBoardSelectWindowId,
+                                                  &uroom->tradeBoardDetailsWindowId,
+                                                  &sWindowTemplate_RegisterForTrade,
                                                   &sListMenuTemplate_RegisterForTrade);
         if (input != -1)
         {
@@ -3067,10 +3067,10 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_REGISTER_REQUEST_TYPE:
-        input = ListMenuHandler_AllItemsAvailable(&uroom->textState, 
-                                                  &uroom->tradeBoardSelectWindowId, 
-                                                  &uroom->tradeBoardDetailsWindowId, 
-                                                  &gUnknown_082F0294, 
+        input = ListMenuHandler_AllItemsAvailable(&uroom->textState,
+                                                  &uroom->tradeBoardSelectWindowId,
+                                                  &uroom->tradeBoardDetailsWindowId,
+                                                  &gUnknown_082F0294,
                                                   &sMenuTemplate_TradingBoardRequestType);
         if (input != -1)
         {

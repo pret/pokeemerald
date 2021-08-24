@@ -950,7 +950,7 @@ static const union AnimCmd sAnim_RayquazaFaceEast[] =
 };
 
 // Though they correspond to facing/walking movements, Rayquaza doesn't have
-// equivalent images aside from flying up. Its other frames aside from the 'normal' 
+// equivalent images aside from flying up. Its other frames aside from the 'normal'
 // frame are for the sequence where it awakens on Sky Pillar.
 // The corresponding facing/walking movements are commented alongside
 static const union AnimCmd *const sAnimTable_Rayquaza[] = {

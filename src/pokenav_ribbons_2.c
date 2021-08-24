@@ -32,7 +32,7 @@ enum
 #define PALTAG_RIBBON_ICONS_5 19
 
 #define RIBBONS_PER_ROW 9
-#define GIFT_RIBBON_ROW (1 + (FIRST_GIFT_RIBBON / RIBBONS_PER_ROW)) // Gift ribbons start on a new row after the normal ribbons. 
+#define GIFT_RIBBON_ROW (1 + (FIRST_GIFT_RIBBON / RIBBONS_PER_ROW)) // Gift ribbons start on a new row after the normal ribbons.
 #define GIFT_RIBBON_START_POS (RIBBONS_PER_ROW * GIFT_RIBBON_ROW)
 
 #define MON_SPRITE_X_ON  40
@@ -828,11 +828,11 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
     }
     else
     {
-        // ribbonId here is one of the 'gift' ribbon slots, used to read 
+        // ribbonId here is one of the 'gift' ribbon slots, used to read
         // its actual value from giftRibbons to determine which specific
         // gift ribbon it is
         ribbonId = gSaveBlock1Ptr->giftRibbons[ribbonId - FIRST_GIFT_RIBBON];
-        
+
         // If 0, this gift ribbon slot is unoccupied
         if (ribbonId == 0)
             return;

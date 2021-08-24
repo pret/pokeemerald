@@ -35,7 +35,7 @@
 
 // TVGROUP_RECORD_MIX
 #define TVGROUP_RECORD_MIX_START                    21
-#define TVSHOW_POKEMON_TODAY_CAUGHT                 21 
+#define TVSHOW_POKEMON_TODAY_CAUGHT                 21
 #define TVSHOW_SMART_SHOPPER                        22
 #define TVSHOW_POKEMON_TODAY_FAILED                 23
 #define TVSHOW_FISHING_ADVICE                       24

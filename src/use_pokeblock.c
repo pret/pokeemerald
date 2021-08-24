@@ -29,7 +29,7 @@
     This file handles the screen where the player chooses
     which pokemon to give a pokeblock to. The subsequent scene
     of feeding the pokeblock to the pokemon is handled by
-    pokeblock_feed.c, and the rest of the pokeblock menu (and 
+    pokeblock_feed.c, and the rest of the pokeblock menu (and
     other pokeblock-related functions) are in pokeblock.c
 */
 
@@ -243,7 +243,7 @@ static const struct BgTemplate sBgTemplates[4] =
     }
 };
 
-static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] = 
+static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 {
     [WIN_NAME] = {
         .bg = 0,
@@ -275,7 +275,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
+static const struct WindowTemplate sUsePokeblockYesNoWinTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -295,7 +295,7 @@ static const u8 *const sContestStatNames[] =
     gText_Beauty3
 };
 
-static const struct SpriteSheet sSpriteSheet_UpDown = 
+static const struct SpriteSheet sSpriteSheet_UpDown =
 {
     gUsePokeblockUpDown_Gfx, 0x200, TAG_UP_DOWN
 };
@@ -314,7 +314,7 @@ static const s16 sUpDownCoordsOnGraph[FLAVOR_COUNT][2] =
     {197,  59}
 };
 
-static const struct OamData sOam_UpDown = 
+static const struct OamData sOam_UpDown =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -357,7 +357,7 @@ static const struct SpriteTemplate sSpriteTemplate_UpDown =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct OamData sOam_Condition = 
+static const struct OamData sOam_Condition =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1594,7 +1594,7 @@ static void SpriteCB_SelectionIconCancel(struct Sprite *sprite)
 }
 
 // Calculate the max id for sparkles/stars that appear around the pokemon on the condition screen
-// All pokemon start with 1 sparkle (added by CreateConditionSparkleSprites), so the number here +1 
+// All pokemon start with 1 sparkle (added by CreateConditionSparkleSprites), so the number here +1
 // is the total number of sparkles that appear
 static void CalculateNumAdditionalSparkles(u8 monIndex)
 {

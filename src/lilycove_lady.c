@@ -517,7 +517,7 @@ void BufferQuizPrizeItem(void)
     gSpecialVar_0x8005 = sQuizLadyPtr->prize;
 }
 
-void SetQuizLadyState_Complete(void) 
+void SetQuizLadyState_Complete(void)
 {
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     sQuizLadyPtr->state = LILYCOVE_LADY_STATE_COMPLETED;
@@ -614,7 +614,7 @@ void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)
     u8 i;
 
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (lilycoveLady->quiz.prevQuestionId < ARRAY_COUNT(sQuizLadyQuizQuestions) 
+    if (lilycoveLady->quiz.prevQuestionId < ARRAY_COUNT(sQuizLadyQuizQuestions)
         && sQuizLadyPtr->id == LILYCOVE_LADY_QUIZ)
     {
         for (i = 0; i < 4; i ++)
@@ -656,7 +656,7 @@ static void ResetContestLadyForRecordMix(void)
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
     sContestLadyPtr->givenPokeblock = FALSE;
-    if (sContestLadyPtr->numGoodPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD 
+    if (sContestLadyPtr->numGoodPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD
      || sContestLadyPtr->numOtherPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD)
     {
         ResetContestLadyContestData();
@@ -790,7 +790,7 @@ bool8 ShouldContestLadyShowGoOnAir(void)
     bool8 putOnAir = FALSE;
 
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD 
+    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD
      || sContestLadyPtr->numOtherPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
     {
         putOnAir = TRUE;

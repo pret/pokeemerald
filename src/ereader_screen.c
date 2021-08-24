@@ -240,7 +240,7 @@ static bool32 sub_81D5064(u16 *arg0, u16 arg1)
         *arg0 = 0;
         return TRUE;
     }
-    
+
     return FALSE;
 }
 

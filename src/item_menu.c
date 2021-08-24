@@ -76,20 +76,20 @@ enum {
 
 enum {
     ACTION_USE,
-    ACTION_TOSS,      
-    ACTION_REGISTER,  
-    ACTION_GIVE,      
-    ACTION_CANCEL,    
+    ACTION_TOSS,
+    ACTION_REGISTER,
+    ACTION_GIVE,
+    ACTION_CANCEL,
     ACTION_BATTLE_USE,
-    ACTION_CHECK,     
-    ACTION_WALK,      
-    ACTION_DESELECT,  
-    ACTION_CHECK_TAG, 
-    ACTION_CONFIRM,   
-    ACTION_SHOW,      
-    ACTION_GIVE_FAVOR_LADY,    
-    ACTION_CONFIRM_QUIZ_LADY, 
-    ACTION_DUMMY,     
+    ACTION_CHECK,
+    ACTION_WALK,
+    ACTION_DESELECT,
+    ACTION_CHECK_TAG,
+    ACTION_CONFIRM,
+    ACTION_SHOW,
+    ACTION_GIVE_FAVOR_LADY,
+    ACTION_CONFIRM_QUIZ_LADY,
+    ACTION_DUMMY,
 };
 
 enum {
@@ -669,7 +669,7 @@ void VBlankCB_BagMenuRun(void)
 
 static void CB2_Bag(void)
 {
-    while(MenuHelpers_CallLinkSomething() != TRUE && SetupBagMenu() != TRUE && MenuHelpers_LinkSomething() != TRUE) 
+    while(MenuHelpers_CallLinkSomething() != TRUE && SetupBagMenu() != TRUE && MenuHelpers_LinkSomething() != TRUE)
         {};
 }
 
@@ -1084,7 +1084,7 @@ static void Task_CloseBagMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyListMenuTask(tListTaskId, &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
-        
+
         // If ready for a new screen (e.g. party menu for giving an item) go to that screen
         // Otherwise exit the bag and use callback set up when the bag was first opened
         if (gBagMenu->newScreenCallback != NULL)
@@ -1417,11 +1417,11 @@ static void DrawPocketIndicatorSquare(u8 x, bool8 isCurrentPocket)
 static bool8 CanSwapItems(void)
 {
     // Swaps can only be done from the field or in battle (as opposed to while selling items, for example)
-    if (gBagPosition.location == ITEMMENULOCATION_FIELD 
+    if (gBagPosition.location == ITEMMENULOCATION_FIELD
      || gBagPosition.location == ITEMMENULOCATION_BATTLE)
     {
         // TMHMs and berries are numbered, and so may not be swapped
-        if (gBagPosition.pocket != TMHM_POCKET 
+        if (gBagPosition.pocket != TMHM_POCKET
          && gBagPosition.pocket != BERRIES_POCKET)
             return TRUE;
     }
@@ -2564,7 +2564,7 @@ static void PrintTMHMMoveData(u16 itemId)
     {
         moveId = ItemIdToBattleMoveId(itemId);
         BlitMenuInfoIcon(WIN_TMHM_INFO, gBattleMoves[moveId].type + 1, 0, 0);
-        
+
         // Print TMHM power
         if (gBattleMoves[moveId].power <= 1)
         {

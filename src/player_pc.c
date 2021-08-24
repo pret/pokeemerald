@@ -471,7 +471,7 @@ static void PlayerPC_Mailbox(u8 taskId)
             Mailbox_DrawMailboxMenu(taskId);
             gTasks[taskId].func = Mailbox_ProcessInput;
         }
-        else 
+        else
         {
             // Alloc failed, exit Mailbox
             DisplayItemMessageOnField(taskId, gText_NoMailHere, ReshowPlayerPC);
@@ -588,7 +588,7 @@ static void ItemStorage_Withdraw(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     tUsedSlots = CountUsedPCItemSlots();
-    if (tUsedSlots != 0) 
+    if (tUsedSlots != 0)
     {
         ItemStorage_Enter(taskId, FALSE);
     }
@@ -986,7 +986,7 @@ void ItemStorage_RefreshListMenu(void)
         sItemStorageMenu->listItems[i].name = &sItemStorageMenu->itemNames[i][0];
         sItemStorageMenu->listItems[i].id = i;
     }
-    
+
     // Set up Cancel entry
     StringCopy(&sItemStorageMenu->itemNames[i][0], gText_Cancel2);
     sItemStorageMenu->listItems[i].name = &sItemStorageMenu->itemNames[i][0];
@@ -1055,10 +1055,10 @@ static void ItemStorage_PrintDescription(s32 id)
 static void ItemStorage_AddScrollIndicator(void)
 {
     if (gPlayerPCItemPageInfo.scrollIndicatorTaskId == TASK_NONE)
-        gPlayerPCItemPageInfo.scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 176, 12, 148, 
-                                                                                                gPlayerPCItemPageInfo.count - gPlayerPCItemPageInfo.pageItems, 
-                                                                                                TAG_SCROLL_ARROW, 
-                                                                                                TAG_SCROLL_ARROW, 
+        gPlayerPCItemPageInfo.scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 176, 12, 148,
+                                                                                                gPlayerPCItemPageInfo.count - gPlayerPCItemPageInfo.pageItems,
+                                                                                                TAG_SCROLL_ARROW,
+                                                                                                TAG_SCROLL_ARROW,
                                                                                                 &gPlayerPCItemPageInfo.itemsAbove);
 }
 
@@ -1242,7 +1242,7 @@ static void ItemStorage_ReturnToMenuSelect(u8 taskId)
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         DrawDialogueFrame(0, 0);
-        
+
         // Select Withdraw/Toss by default depending on which was just exited
         if (!tInTossMenu)
             InitItemStorageMenu(taskId, MENU_WITHDRAW);
@@ -1370,7 +1370,7 @@ static void ItemStorage_DoItemAction(u8 taskId)
             ItemStorage_DoItemToss(taskId);
             return;
         }
-        
+
         // Tossing multiple items, show "how many" message
         CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_HOW_MANY_TO_TOSS));

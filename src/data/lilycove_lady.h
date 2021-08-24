@@ -35,7 +35,7 @@ static const u16 sQuizLadyQuestion1[] =
 
 static const u16 sQuizLadyQuestion2[] =
 {
-    EC_WORD_WHICH, 
+    EC_WORD_WHICH,
     EC_WORD_ISN_T,
     EC_WORD_A,
     EC_WORD_GAME,
@@ -118,7 +118,7 @@ static const u16 sQuizLadyQuestion8[] =
     EC_MOVE2(BLOCK),
     EC_WORD_ESCAPE,
     EC_WORD_QUES,
-    EC_EMPTY_WORD, 
+    EC_EMPTY_WORD,
     EC_WORD_RUN_AWAY,
     EC_WORD_SHADOW_TAG,
     EC_WORD_WONDER_GUARD

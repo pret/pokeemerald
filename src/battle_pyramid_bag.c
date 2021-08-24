@@ -452,8 +452,8 @@ static void VBlankCB_PyramidBag(void)
 
 static void CB2_LoadPyramidBagMenu(void)
 {
-    while (MenuHelpers_CallLinkSomething() != TRUE 
-        && LoadPyramidBagMenu() != TRUE 
+    while (MenuHelpers_CallLinkSomething() != TRUE
+        && LoadPyramidBagMenu() != TRUE
         && MenuHelpers_LinkSomething() != TRUE);
 }
 
@@ -696,9 +696,9 @@ static void PrintItemDescription(s32 listMenuId)
 static void AddScrollArrows(void)
 {
     if (gPyramidBagMenu->scrollIndicatorsTaskId == TASK_NONE)
-        gPyramidBagMenu->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 172, 12, 148, 
-                                                                                            gPyramidBagMenu->listMenuCount - gPyramidBagMenu->listMenuMaxShown, 
-                                                                                            TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, 
+        gPyramidBagMenu->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 172, 12, 148,
+                                                                                            gPyramidBagMenu->listMenuCount - gPyramidBagMenu->listMenuMaxShown,
+                                                                                            TAG_SCROLL_ARROW, TAG_SCROLL_ARROW,
                                                                                             &gPyramidBagMenuState.scrollPosition);
 }
 
@@ -866,7 +866,7 @@ static void Task_ClosePyramidBag(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyListMenuTask(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
-        
+
         // If ready for a new screen (e.g. party menu for giving an item) go to that screen
         // Otherwise exit the bag and use callback set up when the bag was first opened
         if (gPyramidBagMenu->newScreenCallback != NULL)
@@ -937,7 +937,7 @@ static void OpenContextMenu(u8 taskId)
     {
     default:
 //  case PYRAMIDBAG_LOC_FIELD:
-//  case PYRAMIDBAG_LOC_PARTY:    
+//  case PYRAMIDBAG_LOC_PARTY:
         gPyramidBagMenu->menuActionIds = sMenuActionIds_Field;
         gPyramidBagMenu->menuActionsCount = ARRAY_COUNT(sMenuActionIds_Field);
         break;

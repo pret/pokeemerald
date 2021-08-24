@@ -5800,7 +5800,7 @@ static void InitRandomTourneyTreeResults(void)
     gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
     zero1 = 0;
     zero2 = 0;
-    
+
     gSaveBlock2Ptr->frontier.domeLvlMode = zero1 + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = zero2 + 1;
 

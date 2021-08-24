@@ -161,7 +161,7 @@ se_m_sandstorm_1:
 	.byte		        13*se_m_sandstorm_mvl/mxv
 	.byte		BEND  , c_v-6
 	.byte	W03
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@
@@ -175,13 +175,13 @@ se_m_sandstorm_2:
 	.byte	W03
 	.byte		        En3 , v080
 	.byte	W04
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
 	.byte		        Cn3 , v100
 	.byte	W04
 	.byte		        En3 , v080
 	.byte	W04
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
 	.byte		        Cn3 , v100
 	.byte	W03
@@ -189,13 +189,13 @@ se_m_sandstorm_2_000:
 	.byte	W01
 	.byte		N03   , En3 , v080
 	.byte	W03
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W04
 	.byte		        Cn3 , v100
 	.byte	W04
 	.byte		        En3 , v080
 	.byte	W03
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W04
 	.byte		        Cn3 , v100
 	.byte	W03
@@ -203,13 +203,13 @@ se_m_sandstorm_2_000:
 	.byte	W02
 	.byte	PEND
 	.byte	W02
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W04
 	.byte		        Cn3 , v100
 	.byte	W03
 	.byte		        En3 , v080
 	.byte	W04
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
 	.byte		        Cn3 , v100
 	.byte	W04
@@ -219,13 +219,13 @@ se_m_sandstorm_2_000:
 	.byte	W03
 	.byte		        En3 , v080
 	.byte	W04
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
 	.byte		        Cn3 , v100
 	.byte	W04
 	.byte		        En3 , v080
 	.byte	W04
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
 	.byte		        Cn3 , v100
 	.byte	W03
@@ -254,7 +254,7 @@ se_m_sandstorm_2_000:
 	.byte	W04
 	.byte		        En3 , v032
 	.byte	W04
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
 	.byte		        Cn3 , v048
 	.byte	W03

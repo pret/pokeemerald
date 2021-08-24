@@ -49,14 +49,14 @@
 #define PARTY_LAYOUT_COUNT           4
 #define KEEP_PARTY_LAYOUT            0xFF
 
-#define PARTY_MENU_TYPE_FIELD                     0 
-#define PARTY_MENU_TYPE_IN_BATTLE                 1 
-#define PARTY_MENU_TYPE_CONTEST                   2 
-#define PARTY_MENU_TYPE_CHOOSE_MON                3 
+#define PARTY_MENU_TYPE_FIELD                     0
+#define PARTY_MENU_TYPE_IN_BATTLE                 1
+#define PARTY_MENU_TYPE_CONTEST                   2
+#define PARTY_MENU_TYPE_CHOOSE_MON                3
 #define PARTY_MENU_TYPE_CHOOSE_HALF               4  // multi battles, eReader battles, and some battle facilities
 #define PARTY_MENU_TYPE_MULTI_SHOWCASE            5
-#define PARTY_MENU_TYPE_DAYCARE                   6 
-#define PARTY_MENU_TYPE_MOVE_RELEARNER            7 
+#define PARTY_MENU_TYPE_DAYCARE                   6
+#define PARTY_MENU_TYPE_MOVE_RELEARNER            7
 #define PARTY_MENU_TYPE_UNION_ROOM_REGISTER       8  // trading board
 #define PARTY_MENU_TYPE_UNION_ROOM_TRADE          9  // trading board
 #define PARTY_MENU_TYPE_SPIN_TRADE                10 // Unused beta for Gen IV's Spin Trade
@@ -68,7 +68,7 @@
 #define PARTY_ACTION_CANT_SWITCH        2
 #define PARTY_ACTION_USE_ITEM           3
 #define PARTY_ACTION_ABILITY_PREVENTS   4
-#define PARTY_ACTION_GIVE_ITEM          5  
+#define PARTY_ACTION_GIVE_ITEM          5
 #define PARTY_ACTION_GIVE_PC_ITEM       6   // Unused. Not possible to give non-mail items directly from PC
 #define PARTY_ACTION_GIVE_MAILBOX_MAIL  7
 #define PARTY_ACTION_SWITCH             8
@@ -83,7 +83,7 @@
 #define PARTY_MSG_CHOOSE_MON                0
 #define PARTY_MSG_CHOOSE_MON_OR_CANCEL      1
 #define PARTY_MSG_CHOOSE_MON_AND_CONFIRM    2
-#define PARTY_MSG_MOVE_TO_WHERE             3 
+#define PARTY_MSG_MOVE_TO_WHERE             3
 #define PARTY_MSG_TEACH_WHICH_MON           4
 #define PARTY_MSG_USE_ON_WHICH_MON          5
 #define PARTY_MSG_GIVE_TO_WHICH_MON         6
