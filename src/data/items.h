@@ -1,5 +1,6 @@
   // #include "start_menu.h"
   // #include "pokenav.h"
+#include "pokeblock.h"
 
 
 const struct Item gItems[] =
@@ -4354,7 +4355,8 @@ const struct Item gItems[] =
         .unk19 = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_Bike,
+        .secondaryId = MACH_BIKE,
     },
 
     [ITEM_VS_SEEKER] =
