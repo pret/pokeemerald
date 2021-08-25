@@ -1519,11 +1519,15 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     {
         x += sIndicatorPosDoubles[position][0];
         y += sIndicatorPosDoubles[position][1];
+        if (gBattleMons[battlerId].level >= 100)
+            x -= 4;
     }
     else
     {
         x += sIndicatorPosSingles[position][0];
         y += sIndicatorPosSingles[position][1];
+        if (gBattleMons[battlerId].level >= 100)
+            x -= 4;
     }
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
     gSprites[gSprites[gHealthboxSpriteIds[battlerId]].oam.affineParam].hOther_IndicatorSpriteId = spriteId;
