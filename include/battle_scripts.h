@@ -369,5 +369,12 @@ extern const u8 BattleScript_JabocaRowapBerryActivates[];
 extern const u8 BattleScript_NotAffectedAbilityPopUp[];
 extern const u8 BattleScript_BattlerShookOffTaunt[];
 extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
+extern const u8 BattleScript_DesolateLandActivates[];
+extern const u8 BattleScript_DesolateLandEvaporatesWaterTypeMoves[];
+extern const u8 BattleScript_PrimordialSeaActivates[];
+extern const u8 BattleScript_PrimordialSeaFizzlesOutFireTypeMoves[];
+extern const u8 BattleScript_DeltaStreamActivates[];
+extern const u8 BattleScript_MysteriousAirCurrentBlowsOn[];
+extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

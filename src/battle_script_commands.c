@@ -1323,6 +1323,30 @@ static void Cmd_attackcanceler(void)
 {
     s32 i, moveType;
 
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (moveType == TYPE_FIRE
+     && (gBattleWeather & WEATHER_RAIN_PRIMAL)
+     && !IsAbilityOnField(ABILITY_AIR_LOCK)
+     && !IsAbilityOnField(ABILITY_CLOUD_NINE)
+     && gBattleMoves[gCurrentMove].power >= 1)
+    {
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_PrimordialSeaFizzlesOutFireTypeMoves;
+        return;
+    }
+
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (moveType == TYPE_WATER
+     && (gBattleWeather & WEATHER_SUN_PRIMAL)
+     && !IsAbilityOnField(ABILITY_AIR_LOCK)
+     && !IsAbilityOnField(ABILITY_CLOUD_NINE)
+     && gBattleMoves[gCurrentMove].power >= 1)
+    {
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_DesolateLandEvaporatesWaterTypeMoves;
+        return;
+    }
+
     if (gBattleOutcome != 0)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
@@ -8422,6 +8446,26 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
         }
         return;
+    case VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER:
+        if (gBattleWeather & WEATHER_SUN_PRIMAL)
+        {
+            gBattleWeather &= ~WEATHER_SUN_PRIMAL;
+            PrepareStringBattle(STRINGID_EXTREMESUNLIGHTFADED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        else if (gBattleWeather & WEATHER_RAIN_PRIMAL)
+        {
+            gBattleWeather &= ~WEATHER_RAIN_PRIMAL;
+            PrepareStringBattle(STRINGID_HEAVYRAINLIFTED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        else if (gBattleWeather & WEATHER_STRONG_WINDS)
+        {
+            gBattleWeather &= ~WEATHER_STRONG_WINDS;
+            PrepareStringBattle(STRINGID_STRONGWINDSDISSIPATED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

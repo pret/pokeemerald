@@ -2098,9 +2098,10 @@ u8 DoFieldEndTurnEffects(void)
             }
             break;
         case ENDTURN_RAIN:
-            if (gBattleWeather & WEATHER_RAIN_ANY)
+            if (gBattleWeather & WEATHER_RAIN_ANY || gBattleWeather & WEATHER_RAIN_PRIMAL)
             {
-                if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
+                if (!(gBattleWeather & WEATHER_RAIN_PERMANENT)
+                 && !(gBattleWeather & WEATHER_RAIN_PRIMAL))
                 {
                     if (--gWishFutureKnock.weatherDuration == 0)
                     {
@@ -2148,9 +2149,11 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_SUN:
-            if (gBattleWeather & WEATHER_SUN_ANY)
+            if (gBattleWeather & WEATHER_SUN_ANY || gBattleWeather & WEATHER_SUN_PRIMAL)
             {
-                if (!(gBattleWeather & WEATHER_SUN_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
+                if (!(gBattleWeather & WEATHER_SUN_PERMANENT)
+                 && !(gBattleWeather & WEATHER_SUN_PRIMAL)
+                 && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SUN_TEMPORARY;
                     gBattlescriptCurrInstr = BattleScript_SunlightFaded;
@@ -3643,9 +3646,12 @@ u8 TryWeatherFormChange(u8 battler)
 static const u16 sWeatherFlagsInfo[][3] =
 {
     [ENUM_WEATHER_RAIN] = {WEATHER_RAIN_TEMPORARY, WEATHER_RAIN_PERMANENT, HOLD_EFFECT_DAMP_ROCK},
+    [ENUM_WEATHER_RAIN_PRIMAL] = {WEATHER_RAIN_PRIMAL, WEATHER_RAIN_PRIMAL, HOLD_EFFECT_DAMP_ROCK},
     [ENUM_WEATHER_SUN] = {WEATHER_SUN_TEMPORARY, WEATHER_SUN_PERMANENT, HOLD_EFFECT_HEAT_ROCK},
+    [ENUM_WEATHER_SUN_PRIMAL] = {WEATHER_SUN_PRIMAL, WEATHER_SUN_PRIMAL, HOLD_EFFECT_HEAT_ROCK},
     [ENUM_WEATHER_SANDSTORM] = {WEATHER_SANDSTORM_TEMPORARY, WEATHER_SANDSTORM_PERMANENT, HOLD_EFFECT_SMOOTH_ROCK},
     [ENUM_WEATHER_HAIL] = {WEATHER_HAIL_TEMPORARY, WEATHER_HAIL_PERMANENT, HOLD_EFFECT_ICY_ROCK},
+    [ENUM_WEATHER_STRONG_WINDS] = {WEATHER_STRONG_WINDS, WEATHER_STRONG_WINDS, HOLD_EFFECT_NONE},
 };
 
 bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
@@ -3655,6 +3661,13 @@ bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
     {
         gBattleWeather = (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1]);
         return TRUE;
+    }
+    else if (gBattleWeather & WEATHER_PRIMAL_ANY
+          && GetBattlerAbility(battler) != ABILITY_DESOLATE_LAND
+          && GetBattlerAbility(battler) != ABILITY_PRIMORDIAL_SEA
+          && GetBattlerAbility(battler) != ABILITY_DELTA_STREAM)
+    {
+        return FALSE;
     }
     else if (!(gBattleWeather & (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1])))
     {
@@ -4230,6 +4243,27 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 SET_STATCHANGER(STAT_DEF, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
+                effect++;
+            }
+            break;
+        case ABILITY_DESOLATE_LAND:
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_SUN_PRIMAL, TRUE))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_DesolateLandActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_PRIMORDIAL_SEA:
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_RAIN_PRIMAL, TRUE))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_PrimordialSeaActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_DELTA_STREAM:
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_STRONG_WINDS, TRUE))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_DeltaStreamActivates);
                 effect++;
             }
             break;
@@ -8103,6 +8137,18 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
         && (gBattleMons[battlerDef].type1 == TYPE_FLYING || gBattleMons[battlerDef].type2 == TYPE_FLYING || gBattleMons[battlerDef].type3 == TYPE_FLYING))
     {
         modifier = UQ_4_12(1.0);
+    }
+
+    // WEATHER_STRONG_WINDS weakens super effective moves against flying type mons
+    if (gBattleWeather & WEATHER_STRONG_WINDS
+     && modifier == UQ_4_12(2.0)
+     && (IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
+     && !IsAbilityOnField(ABILITY_AIR_LOCK)
+     && !IsAbilityOnField(ABILITY_CLOUD_NINE))
+    {
+        modifier = UQ_4_12(1.0);
+        gBattlescriptCurrInstr = BattleScript_AttackWeakenedByStrongWinds;
+        gBattlescriptCurrInstr++;
     }
 
     if (GetBattlerAbility(battlerDef) == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && gBattleMoves[move].power)
