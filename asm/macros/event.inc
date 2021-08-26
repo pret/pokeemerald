@@ -1628,6 +1628,10 @@
 	.2byte \quantity
 	.endm
 
+	.macro doom
+	.byte 0xe3
+	.endm
+
 
 @ Supplementary
 

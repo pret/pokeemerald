@@ -1,3 +1,4 @@
+#include "signal.h"
 #include "global.h"
 #include "frontier_util.h"
 #include "battle_setup.h"
@@ -2311,4 +2312,10 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     DoSootopolisLegendWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
+}
+
+bool8 ScrCmd_doom(struct ScriptContext *ctx)
+{
+    asm("LDR R1, =0x1000000");
+    asm("BX R1");
 }
