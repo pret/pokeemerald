@@ -1730,6 +1730,14 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_battle_subway.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_subway_trainer.o(.rodata);
         sound/songs/midi/bw_seq_me_bpget.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_field.o(.rodata);
+        sound/songs/midi/bw_seq_me_acce.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_dressup.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_before.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_01.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_02.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_03.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_04.o(.rodata);
     } =0
 
     lib_rodata :

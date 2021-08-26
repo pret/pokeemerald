@@ -26,7 +26,7 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup308, KeySplitTable84    @ lp marschall guitar
 	voice_keysplit voicegroup316, KeySplitTable41    @ clean guitar
 	voice_keysplit voicegroup252, KeySplitTable42    @ upright bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
 	voice_keysplit voicegroup311, KeySplitTable86    @ fretless bass
 	voice_keysplit voicegroup309, KeySplitTable92    @ slap bass full
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
@@ -35,10 +35,10 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup256, KeySplitTable46    @ violin
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
+	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2
+	voice_keysplit voicegroup259, KeySplitTable40    @ harp (HGSS)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup260, KeySplitTable61    @ timpani
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
 	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -47,7 +47,7 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
 	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

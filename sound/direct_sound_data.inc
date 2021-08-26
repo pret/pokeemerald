@@ -4303,5 +4303,13 @@ DirectSoundWaveData_bw_drumloop_vssubway::
 	.incbin "sound/direct_sound_samples/bw_drumloop_vssubway.bin"
 
 	.align 2
+DirectSoundWaveData_bw_drumloop_msl1::
+	.incbin "sound/direct_sound_samples/bw_drumloop_msl1.bin"
+
+	.align 2
 DirectSoundWaveData_bw_027china909::
 	.incbin "sound/direct_sound_samples/bw_027china909.bin"
+
+	.align 2
+DirectSoundWaveData_bw_windchime::
+	.incbin "sound/direct_sound_samples/bw_windchime.bin"

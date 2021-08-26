@@ -1061,6 +1061,14 @@
 #define BW_SEQ_BGM_BATTLE_SUBWAY      1032 // The Battle Subway (Carriage 7)            (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_VS_SUBWAY_TRAINER  1033 // Battle! (Battle Subway Trainer)
 #define BW_SEQ_ME_BPGET               1034 // Received BP!
+#define BW_SEQ_BGM_MSL_FIELD          1035 // Musical Theater
+#define BW_SEQ_ME_ACCE                1036 // Received Props!
+#define BW_SEQ_BGM_MSL_DRESSUP        1037 // Dress Up with Props
+#define BW_SEQ_BGM_MSL_BEFORE         1038 // The Curtain for the Musical Rises!
+#define BW_SEQ_BGM_MSL_01             1039 // Musical: "Stardom"                        (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_MSL_02             1040 // Musical: "Forest Stroll"
+#define BW_SEQ_BGM_MSL_03             1041 // Musical: "A Sweet Soirée"
+#define BW_SEQ_BGM_MSL_04             1042 // Musical: "Exciting Nimbasa"
 
 // Black 2 & White 2 Music
 

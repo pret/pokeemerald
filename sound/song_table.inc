@@ -1036,6 +1036,14 @@ gSongTable::
 	song bw_seq_bgm_battle_subway, 0, 0
 	song bw_seq_bgm_vs_subway_trainer, 0, 0
 	song bw_seq_me_bpget, 2, 2
+	song bw_seq_bgm_msl_field, 0, 0
+	song bw_seq_me_acce, 2, 2
+	song bw_seq_bgm_msl_dressup, 0, 0
+	song bw_seq_bgm_msl_before, 0, 0
+	song bw_seq_bgm_msl_01, 0, 0
+	song bw_seq_bgm_msl_02, 0, 0
+	song bw_seq_bgm_msl_03, 0, 0
+	song bw_seq_bgm_msl_04, 0, 0
 
 	.align 2
 dummy_song_header:

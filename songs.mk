@@ -2774,3 +2774,27 @@ $(MID_SUBDIR)/bw_seq_bgm_vs_subway_trainer.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_me_bpget.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V081 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_field.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V113
+
+$(MID_SUBDIR)/bw_seq_me_acce.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V063 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_dressup.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V074
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_before.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V072
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V074
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V084
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_03.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V079
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_04.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V074
