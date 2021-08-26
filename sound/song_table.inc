@@ -1044,6 +1044,11 @@ gSongTable::
 	song bw_seq_bgm_msl_02, 0, 0
 	song bw_seq_bgm_msl_03, 0, 0
 	song bw_seq_bgm_msl_04, 0, 0
+	song bw_seq_bgm_msl_dl_munna, 0, 0
+	song bw_seq_bgm_msl_dl_smash, 0, 0
+	song bw_seq_bgm_msl_dl_festa, 0, 0
+	song bw_seq_bgm_msl_dl_relic, 0, 0
+	song bw_seq_bgm_msl_dl_runpa, 0, 0
 
 	.align 2
 dummy_song_header:

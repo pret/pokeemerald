@@ -277,7 +277,7 @@
 .include "sound/voicegroups/voicegroup275.inc" @ BW (sato)
 .include "sound/voicegroups/voicegroup276.inc" @ BW (ichinose)
 .include "sound/voicegroups/voicegroup277.inc" @ BW (misc)
-.include "sound/voicegroups/voicegroup278.inc"
+.include "sound/voicegroups/voicegroup278.inc" @ BW DLC Musicals
 .include "sound/voicegroups/voicegroup279.inc"
 .include "sound/voicegroups/voicegroup280.inc"
 .include "sound/voicegroups/voicegroup281.inc"
@@ -322,3 +322,6 @@
 .include "sound/voicegroups/voicegroup320.inc"
 .include "sound/voicegroups/voicegroup321.inc"
 .include "sound/voicegroups/voicegroup322.inc"
+.include "sound/voicegroups/voicegroup323.inc"
+.include "sound/voicegroups/voicegroup324.inc"
+.include "sound/voicegroups/voicegroup325.inc"

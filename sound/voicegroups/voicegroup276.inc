@@ -1,12 +1,12 @@
 	.align 2
 voicegroup276:: @ BW Ichinose
-	voice_keysplit voicegroup282, KeySplitTable75    @ piano | 41 | 50 ||||| 77
-	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
+	voice_keysplit voicegroup323, KeySplitTable75    @ piano | 41 | 50 ||||| 77
+	voice_keysplit voicegroup323, KeySplitTable59    @ piano (all splits)
 	voice_directsound 60, 0, DirectSoundWaveData_dp_reverscyn_16, 255, 0, 227, 171
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_keysplit voicegroup290, KeySplitTable70    @ harpsichord
 	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
-	voice_keysplit voicegroup282, KeySplitTable93    @ piano | 41 | 46 | 53 | 58 | 65
+	voice_keysplit voicegroup323, KeySplitTable93    @ piano | 41 | 46 | 53 | 58 | 65
 	voice_keysplit voicegroup233, KeySplitTable94    @ piano (HGSS) |||| 79
 	voice_keysplit voicegroup233, KeySplitTable35    @ piano (HGSS)
 	voice_directsound 60, 0, DirectSoundWaveData_bw_074glocknc5, 255, 249, 0, 205
@@ -126,5 +126,5 @@ voicegroup276:: @ BW Ichinose
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 0, 255, 205
-	voice_keysplit_all voicegroup281				 @ drums 2
-	voice_keysplit_all voicegroup280				 @ drums
+	voice_keysplit_all voicegroup282				 @ drums 2
+	voice_keysplit_all voicegroup281				 @ drums

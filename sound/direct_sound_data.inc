@@ -2171,6 +2171,10 @@ DirectSoundWaveData_sd90_enhanced_delay_shaku::
 	.incbin "sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"
 
 	.align 2
+DirectSoundWaveData_puresquare_37::
+	.incbin "sound/direct_sound_samples/puresquare_37.bin"
+
+	.align 2
 DirectSoundWaveData_puresquare_50::
 	.incbin "sound/direct_sound_samples/puresquare_50.bin"
 
@@ -4307,9 +4311,73 @@ DirectSoundWaveData_bw_drumloop_msl1::
 	.incbin "sound/direct_sound_samples/bw_drumloop_msl1.bin"
 
 	.align 2
+DirectSoundWaveData_bw_drumloop_smash::
+	.incbin "sound/direct_sound_samples/bw_drumloop_smash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_drumloop_meloetta::
+	.incbin "sound/direct_sound_samples/bw_drumloop_meloetta.bin"
+
+	.align 2
+DirectSoundWaveData_bw_drumloop_ludicolo::
+	.incbin "sound/direct_sound_samples/bw_drumloop_ludicolo.bin"
+
+	.align 2
 DirectSoundWaveData_bw_027china909::
 	.incbin "sound/direct_sound_samples/bw_027china909.bin"
 
 	.align 2
 DirectSoundWaveData_bw_windchime::
 	.incbin "sound/direct_sound_samples/bw_windchime.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_mellowmunna::
+	.incbin "sound/direct_sound_samples/bw_msl_mellowmunna.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_yeah::
+	.incbin "sound/direct_sound_samples/bw_msl_yeah.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_thatsright::
+	.incbin "sound/direct_sound_samples/bw_msl_thatsright.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_crymunna::
+	.incbin "sound/direct_sound_samples/bw_msl_crymunna.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_supersaw::
+	.incbin "sound/direct_sound_samples/bw_msl_supersaw.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_chantpokemon::
+	.incbin "sound/direct_sound_samples/bw_msl_chantpokemon.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_chantsmash::
+	.incbin "sound/direct_sound_samples/bw_msl_chantsmash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_dulcimer::
+	.incbin "sound/direct_sound_samples/bw_msl_dulcimer.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_aah::
+	.incbin "sound/direct_sound_samples/bw_msl_aah.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_deepkick::
+	.incbin "sound/direct_sound_samples/bw_msl_deepkick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_kick_melo::
+	.incbin "sound/direct_sound_samples/bw_msl_kick_melo.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_timbale::
+	.incbin "sound/direct_sound_samples/bw_msl_timbale.bin"
+
+	.align 2
+DirectSoundWaveData_bw_msl_cuica::
+	.incbin "sound/direct_sound_samples/bw_msl_cuica.bin"

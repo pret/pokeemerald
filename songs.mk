@@ -2798,3 +2798,18 @@ $(MID_SUBDIR)/bw_seq_bgm_msl_03.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_msl_04.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V074
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_dl_munna.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G278 -V080
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_dl_smash.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G278 -V080
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_dl_festa.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G278 -V080
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_dl_relic.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G278 -V080
+
+$(MID_SUBDIR)/bw_seq_bgm_msl_dl_runpa.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G278 -V080

@@ -1738,6 +1738,11 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_msl_02.o(.rodata);
         sound/songs/midi/bw_seq_bgm_msl_03.o(.rodata);
         sound/songs/midi/bw_seq_bgm_msl_04.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_dl_munna.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_dl_smash.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_dl_festa.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_dl_relic.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_msl_dl_runpa.o(.rodata);
     } =0
 
     lib_rodata :

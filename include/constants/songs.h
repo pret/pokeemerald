@@ -1069,6 +1069,11 @@
 #define BW_SEQ_BGM_MSL_02             1040 // Musical: "Forest Stroll"
 #define BW_SEQ_BGM_MSL_03             1041 // Musical: "A Sweet Soirée"
 #define BW_SEQ_BGM_MSL_04             1042 // Musical: "Exciting Nimbasa"
+#define BW_SEQ_BGM_MSL_DL_MUNNA       1043 // Musical: "Charming Munna"
+#define BW_SEQ_BGM_MSL_DL_SMASH       1044 // Musical: "Pokémon Smash!"                 (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_MSL_DL_FESTA       1045 // Musical: "Carnival Pokémon"               (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_MSL_DL_RELIC       1046 // Musical: "Meloettaaa!!!"
+#define BW_SEQ_BGM_MSL_DL_RUNPA       1047 // Musical: "Carnival Ludicolo!"
 
 // Black 2 & White 2 Music
 

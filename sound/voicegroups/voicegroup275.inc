@@ -1,6 +1,6 @@
 	.align 2
 voicegroup275:: @ BW Sato
-	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
+	voice_keysplit voicegroup323, KeySplitTable59    @ piano (all splits)
 	voice_keysplit voicegroup233, KeySplitTable35    @ piano (HGSS)
 	voice_keysplit voicegroup235, KeySplitTable91    @ piano octave
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
@@ -127,4 +127,4 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit_all voicegroup279				 @ drums
+	voice_keysplit_all voicegroup280				 @ drums

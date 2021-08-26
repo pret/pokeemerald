@@ -1,8 +1,8 @@
 	.align 2
 voicegroup274:: @ BW Kageyama
-	voice_keysplit voicegroup282, KeySplitTable59    @ piano (all splits)
+	voice_keysplit voicegroup323, KeySplitTable59    @ piano (all splits)
 	voice_keysplit voicegroup233, KeySplitTable35    @ piano (HGSS)
-	voice_keysplit voicegroup282, KeySplitTable75    @ piano | 41 | 50 ||||| 77
+	voice_keysplit voicegroup323, KeySplitTable75    @ piano | 41 | 50 ||||| 77
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes
 	voice_keysplit voicegroup304, KeySplitTable63    @ xtransceiver tone
 	voice_directsound 60, 0, DirectSoundWaveData_bw_vibrc5_pc, 255, 248, 2, 205
@@ -52,7 +52,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_2_alt 60, 0, 2, 0, 6, 2, 0
 	voice_keysplit voicegroup314, KeySplitTable89    @ alto sax
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 197, 227, 205
-	voice_keysplit voicegroup282, KeySplitTable96    @ piano | 44 || 56 || 68 || 80
+	voice_keysplit voicegroup323, KeySplitTable96    @ piano | 44 || 56 || 68 || 80
 	voice_keysplit voicegroup285, KeySplitTable98    @ french horns | 52 | 53
 	voice_keysplit voicegroup265, KeySplitTable51    @ oboe (HGSS)
 	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
@@ -63,8 +63,8 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_reversecymbale2, 255, 0, 255, 236
-	voice_keysplit voicegroup283, KeySplitTable62    @ choir male
-	voice_keysplit voicegroup284, KeySplitTable63    @ choir female
+	voice_keysplit voicegroup324, KeySplitTable62    @ choir male
+	voice_keysplit voicegroup325, KeySplitTable63    @ choir female
 	voice_keysplit voicegroup303, KeySplitTable81    @ choir full
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -127,4 +127,4 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 0, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit_all voicegroup278				 @ drums
+	voice_keysplit_all voicegroup279				 @ drums
