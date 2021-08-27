@@ -39,17 +39,6 @@ MoveTutor_Text_RolloutDeclined:
 	.string "You don't need to be shy about it.\n"
 	.string "Let's roll!$"
 
-Doomguy_Text_WannaPlayDoom:
-	.string "Hey, do you want to play Doom?\p"
-	.string "...\nWhat's that funny look for?\l"
-	.string "I have it on my Gameboy right here.\p"
-	.string "You wanna play?$"
-
-MoveTutor_Text_DoomDeclined:
-	.string "Aight then, let me know when you're\n"
-	.string "down. I'm not leaving anytime soon.$"
-
-
 MoveTutor_Text_RolloutWhichMon:
 	.string "Ehehe, sure thing! It'd be great if\n"
 	.string "the POKéMON looked like me.$"

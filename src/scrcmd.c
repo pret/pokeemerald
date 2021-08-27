@@ -1,4 +1,3 @@
-#include "signal.h"
 #include "global.h"
 #include "frontier_util.h"
 #include "battle_setup.h"
@@ -2314,8 +2313,11 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
+<<<<<<< HEAD
 
 bool8 ScrCmd_doom(struct ScriptContext *ctx)
 {
     //D_DoomMainSetup();
 }
+=======
+>>>>>>> parent of 51014e697 (this is gonna get cut off anyways)

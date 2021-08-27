@@ -36,7 +36,11 @@ else
 EXE :=
 endif
 
+<<<<<<< HEAD
 TITLE       := POKEMON EMER
+=======
+TITLE       := POKEMON JOEL
+>>>>>>> parent of 51014e697 (this is gonna get cut off anyways)
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0

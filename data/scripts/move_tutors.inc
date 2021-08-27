@@ -27,20 +27,6 @@ MoveTutor_EventScript_SwaggerTaught::
 	release
 	end
 
-MauvilleCity_EventScript_DoomGuy::
-	lock
-	faceplayer
-	msgbox Doomguy_Text_WannaPlayDoom, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MoveTutor_EventScript_RolloutDeclined
-	doom
-	end
-
-MauvilleCity_EventScript_DoomGuyDeclined::
-	msgbox MoveTutor_Text_DoomDeclined, MSGBOX_DEFAULT
-	release
-	end
-
 MauvilleCity_EventScript_RolloutTutor::
 	lock
 	faceplayer
