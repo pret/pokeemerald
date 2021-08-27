@@ -7,7 +7,7 @@
 #define MENU_L_PRESSED 1
 #define MENU_R_PRESSED 2
 
-// Exported type declarations
+#define SWAP_LINE_HAS_MARGIN (1 << 7)
 
 struct YesNoFuncTable
 {
@@ -15,9 +15,6 @@ struct YesNoFuncTable
     TaskFunc noFunc;
 };
 
-// Exported RAM declarations
-
-// Exported ROM declarations
 void ResetVramOamAndBgCntRegs(void);
 void ResetAllBgsCoordinates(void);
 void SetVBlankHBlankCallbacksToNull(void);

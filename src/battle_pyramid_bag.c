@@ -1608,5 +1608,5 @@ static void SetSwapLineInvisibility(bool8 invisible)
 
 static void UpdateSwapLinePos(u8 y)
 {
-    UpdateSwapLineSpritesPos(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES | 0x80, 120, (y + 1) * 16);
+    UpdateSwapLineSpritesPos(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }
