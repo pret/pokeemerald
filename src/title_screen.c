@@ -79,8 +79,8 @@ static const struct CompressedSpritePalette sSpritePal_Mon[] =
 
 static const union AnimCmd smon_Anim1[] =
 {
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(64, 30),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(64, 5),
     ANIMCMD_JUMP(0),
 };
 
