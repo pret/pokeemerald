@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_MSL_DL_RUNPA - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_MOVEPOKE - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_MSL_DL_RUNPA - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_MOVEPOKE - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1745,6 +1745,12 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_MSL_DL_FESTA      , "BW-SEQ-BGM-MSL-DL-FESTA") \
     X(BW_SEQ_BGM_MSL_DL_RELIC      , "BW-SEQ-BGM-MSL-DL-RELIC") \
     X(BW_SEQ_BGM_MSL_DL_RUNPA      , "BW-SEQ-BGM-MSL-DL-RUNPA") \
+    X(BW_SEQ_BGM_E_KANRANSYA       , "BW-SEQ-BGM-E-KANRANSYA") \
+    X(BW_SEQ_ME_AISHOU_KIDOU       , "BW-SEQ-ME-AISHOU-KIDOU") \
+    X(BW_SEQ_ME_AISHOU_H           , "BW-SEQ-ME-AISHOU-H") \
+    X(BW_SEQ_ME_AISHOU_M           , "BW-SEQ-ME-AISHOU-M") \
+    X(BW_SEQ_ME_AISHOU_L           , "BW-SEQ-ME-AISHOU-L") \
+    X(BW_SEQ_BGM_VS_MOVEPOKE       , "BW-SEQ-BGM-VS-MOVEPOKE") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

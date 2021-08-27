@@ -1743,6 +1743,12 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_msl_dl_festa.o(.rodata);
         sound/songs/midi/bw_seq_bgm_msl_dl_relic.o(.rodata);
         sound/songs/midi/bw_seq_bgm_msl_dl_runpa.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_kanransya.o(.rodata);
+        sound/songs/midi/bw_seq_me_aishou_kidou.o(.rodata);
+        sound/songs/midi/bw_seq_me_aishou_h.o(.rodata);
+        sound/songs/midi/bw_seq_me_aishou_m.o(.rodata);
+        sound/songs/midi/bw_seq_me_aishou_l.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_movepoke.o(.rodata);
     } =0
 
     lib_rodata :

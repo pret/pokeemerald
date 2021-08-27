@@ -1074,6 +1074,12 @@
 #define BW_SEQ_BGM_MSL_DL_FESTA       1045 // Musical: "Carnival Pokémon"               (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_MSL_DL_RELIC       1046 // Musical: "Meloettaaa!!!"
 #define BW_SEQ_BGM_MSL_DL_RUNPA       1047 // Musical: "Carnival Ludicolo!"
+#define BW_SEQ_BGM_E_KANRANSYA        1048 // A Ferris Wheel Ride Together
+#define BW_SEQ_ME_AISHOU_KIDOU        1049 // Feeling Check
+#define BW_SEQ_ME_AISHOU_H            1050 // Feeling Check: Perfect!
+#define BW_SEQ_ME_AISHOU_M            1051 // Feeling Check: Getting Close
+#define BW_SEQ_ME_AISHOU_L            1052 // Feeling Check: Lukewarm
+#define BW_SEQ_BGM_VS_MOVEPOKE        1053 // Battle! (Legendary Pokémon)               (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 

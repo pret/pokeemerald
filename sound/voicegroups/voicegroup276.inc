@@ -97,8 +97,8 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup321, KeySplitTable73    @ synth bass alt
 	voice_keysplit voicegroup256, KeySplitTable46    @ violin
 	voice_keysplit voicegroup311, KeySplitTable101   @ fretless bass | 34
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_carskidcs4, 255, 0, 227, 171
+	voice_directsound 60, 0, DirectSoundWaveData_bw_carcrashcs4, 255, 0, 227, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmale1_ghetsis, 255, 0, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_sfxwhip_plasma, 255, 0, 255, 2

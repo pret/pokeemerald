@@ -2813,3 +2813,21 @@ $(MID_SUBDIR)/bw_seq_bgm_msl_dl_relic.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_msl_dl_runpa.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G278 -V080
+
+$(MID_SUBDIR)/bw_seq_bgm_e_kanransya.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V063
+
+$(MID_SUBDIR)/bw_seq_me_aishou_kidou.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V110 -p5
+
+$(MID_SUBDIR)/bw_seq_me_aishou_h.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V066 -p5
+
+$(MID_SUBDIR)/bw_seq_me_aishou_m.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V066 -p5
+
+$(MID_SUBDIR)/bw_seq_me_aishou_l.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V066 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_movepoke.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V106

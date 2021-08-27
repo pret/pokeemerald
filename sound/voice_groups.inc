@@ -325,3 +325,4 @@
 .include "sound/voicegroups/voicegroup323.inc"
 .include "sound/voicegroups/voicegroup324.inc"
 .include "sound/voicegroups/voicegroup325.inc"
+.include "sound/voicegroups/voicegroup326.inc"

@@ -4381,3 +4381,19 @@ DirectSoundWaveData_bw_msl_timbale::
 	.align 2
 DirectSoundWaveData_bw_msl_cuica::
 	.incbin "sound/direct_sound_samples/bw_msl_cuica.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tackpianoc4::
+	.incbin "sound/direct_sound_samples/bw_tackpianoc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tackpianoc5::
+	.incbin "sound/direct_sound_samples/bw_tackpianoc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_carskidcs4::
+	.incbin "sound/direct_sound_samples/bw_carskidcs4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_carcrashcs4::
+	.incbin "sound/direct_sound_samples/bw_carcrashcs4.bin"

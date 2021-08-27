@@ -49,3 +49,13 @@ voicegroup282:: @ drums 4 (misc)
 	voice_directsound 60, 64, DirectSoundWaveData_bw_synthclap_plasma, 255, 197, 227, 205  		@ 127/120/120/116/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_synthsnare_plasma, 255, 0, 227, 205  		@ 127/127/120/116/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_drumloop_msl1, 255, 0, 227, 0  			@ 127/127/120/127/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_hg_033orccym, 255, 250, 0, 214    			@ 127/ 70/  0/114/ 64	
+	voice_directsound 47, 64, DirectSoundWaveData_bw_synthclap_plasma, 255, 197, 227, 2    		@ 127/120/120/124/ 64	-13
+	voice_directsound 60, 64, DirectSoundWaveData_bw_snareroll, 255, 0, 227, 205    			@ 127/127/120/116/ 64
+	voice_directsound 72, 64, DirectSoundWaveData_bw_snareroll, 255, 0, 227, 205    			@ 127/127/120/116/ 64	+12
+	voice_directsound 66, 64, DirectSoundWaveData_bw_snarepower_mistralton, 255, 226, 127, 171  @ 127/114/ 90/120/ 64	+ 6
+	voice_directsound 67, 64, DirectSoundWaveData_bw_snarepower_mistralton, 255, 226, 127, 171  @ 127/114/ 90/120/ 64	+ 7
+	voice_directsound 60, 27, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/ 27
+	voice_directsound 60, 64, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/ 64
+	voice_directsound 60, 100, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/100
+	voice_directsound 61, 100, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/100	+ 1
