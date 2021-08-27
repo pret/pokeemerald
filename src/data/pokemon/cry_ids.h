@@ -138,4 +138,5 @@ const u16 gSpeciesIdToCryId[] =
     [SPECIES_CREWMATE - 277] = 388,
     [SPECIES_FREN - 277] = 389,
     [SPECIES_DUMPY - 277] = 390,
+    [SPECIES_TEST - 277] = 391,
 };

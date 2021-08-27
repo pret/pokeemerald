@@ -9,7 +9,11 @@ Cry_Fren::
  	.align 2
 Cry_Dumpy::
 	.incbin "sound/direct_sound_samples/cries/dumpy.bin"
-	
+
+
+	.align 2
+Cry_Test::
+	.incbin "sound/direct_sound_samples/cries/gradad.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_glockenspiel::
