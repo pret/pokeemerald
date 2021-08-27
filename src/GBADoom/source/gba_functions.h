@@ -8,8 +8,8 @@
 //#define __arm__
 
 #ifdef __arm__
-    #include <gba_systemcalls.h>
-    #include <gba_dma.h>
+    #include "gba_systemcalls.h"
+    #include "gba_dma.h"
 #endif
 
 //***********************************************************************

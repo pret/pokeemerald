@@ -50,6 +50,7 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "GBADoom/source/d_main.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -2316,6 +2317,5 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
 
 bool8 ScrCmd_doom(struct ScriptContext *ctx)
 {
-    asm("LDR R1, =0x1000000");
-    asm("BX R1");
+    //D_DoomMainSetup();
 }

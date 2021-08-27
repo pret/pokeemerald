@@ -27,87 +27,46 @@
  *  02111-1307, USA.
  *
  * DESCRIPTION:
- *      Mission begin melt/wipe screen special effect.
+ *   DOOM strings, by language.
+ *   Note:  In BOOM, some new strings hav ebeen defined that are
+ *          not found in the French version.  A better approach is
+ *          to create a BEX text-replacement file for other
+ *          languages since any language can be supported that way
+ *          without recompiling the program.
  *
- *-----------------------------------------------------------------------------
+ *-----------------------------------------------------------------------------*/
+
+#ifndef __DSTRINGS__
+#define __DSTRINGS__
+
+/* All important printed strings.
+ * Language selection (message strings).
+ * Use -DFRENCH etc.
  */
 
+#include "d_englsh.h"
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
+/* Note this is not externally modifiable through DEH/BEX
+ * Misc. other strings.
+ * #define SAVEGAMENAME  "boomsav"      * killough 3/22/98 *
+ * Ty 05/04/98 - replaced with a modifiable string, see d_deh.c
+ */
+
+/*
+ * File locations,
+ *  relative to current position.
+ * Path names are OS-sensitive.
+ */
+#define DEVMAPS "devmaps"
+#define DEVDATA "devdata"
+
+
+/* Not done in french?
+ * QuitDOOM messages *
+ * killough 1/18/98:
+ * replace hardcoded limit with extern var (silly hack, I know)
+ */
+
+#include <stddef.h>
+
 #endif
-
-#include "z_zone.h"
-#include "doomdef.h"
-#include "i_video.h"
-#include "v_video.h"
-#include "m_random.h"
-#include "f_wipe.h"
-#include "global_data.h"
-
-#ifdef __arm__
-    #include <gba.h>
-#endif
-
-//
-// SCREEN WIPE PACKAGE
-//
-
-int wipe_StartScreen(void)
-{
-    _g->wipe_tick = 0;
-    return 0;
-}
-
-int wipe_EndScreen(void)
-{
-    _g->wipe_tick = 0;
-    return 0;
-}
-
-// killough 3/5/98: reformatted and cleaned up
-int wipe_ScreenWipe(int ticks)
-{
-    unsigned int wipepos;
-
-    //Do a pageflip on the 16th tick.
-    boolean pageflip = (_g->wipe_tick < 16) &&  (_g->wipe_tick + ticks >= 16);
-
-    _g->wipe_tick += ticks;
-
-    int wipeticks = _g->wipe_tick;
-
-    if(wipeticks >= 32)
-    {
-        wipeticks = 32;
-        wipepos = 0;
-    }
-    else if(wipeticks < 16)
-    {
-        wipepos = wipeticks;
-    }
-    else //16->31
-    {
-        wipepos = 31 - wipeticks;
-    }
-
-#ifdef __arm__
-    REG_BLDCNT = 0xc4;
-    REG_BLDY = wipepos;
-
-    VBlankIntrWait();
-#endif
-
-    if(pageflip)
-         I_FinishUpdate();
-
-    if(wipeticks >= 32)
-    {
-#ifdef __arm__
-        REG_BLDCNT = 0;
-#endif
-        return 1;
-    }
-
-    return 0;
-}
