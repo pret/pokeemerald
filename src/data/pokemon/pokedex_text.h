@@ -2331,3 +2331,9 @@ const u8 gFrenPokedexText[] = _(
     "but some say that ulterior motives lie \n"
     "Abehind the childlike persona.\n"
     "Likes Pepsi.");
+
+const u8 gDumpyPokedexText[] = _(
+    "NULL\n"
+    "NULL\n"
+    "NULL\n"
+    "FUCK");

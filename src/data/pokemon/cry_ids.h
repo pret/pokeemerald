@@ -137,4 +137,5 @@ const u16 gSpeciesIdToCryId[] =
     [SPECIES_CHIMECHO - 277] = 387,
     [SPECIES_CREWMATE - 277] = 388,
     [SPECIES_FREN - 277] = 389,
+    [SPECIES_DUMPY - 277] = 390,
 };

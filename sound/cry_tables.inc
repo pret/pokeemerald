@@ -390,6 +390,7 @@ gCryTable::
 	cry Cry_Chimecho 
 	cry Cry_Crewmate
 	cry Cry_Fren
+	cry Cry_Dumpy
 
 	.align 2
 gCryTable2::
@@ -783,3 +784,4 @@ gCryTable2::
 	cry2 Cry_Chimecho 
 	cry2 Cry_Crewmate
 	cry2 Cry_Fren
+	cry2 Cry_Dumpy

@@ -37,6 +37,17 @@ static const u16 sFrenLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const u16 sDumpyLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(21, MOVE_MINIMIZE),
+    LEVEL_UP_MOVE(25, MOVE_DEFENSE_CURL),
+    LEVEL_UP_MOVE(29, MOVE_METRONOME),
+    LEVEL_UP_MOVE(33, MOVE_COSMIC_POWER),
+    LEVEL_UP_MOVE(37, MOVE_MOONLIGHT),
+    LEVEL_UP_MOVE(41, MOVE_LIGHT_SCREEN),
+    LEVEL_UP_MOVE(45, MOVE_METEOR_MASH),
+    LEVEL_UP_MOVE(45, MOVE_FLAMETHROWER),
+    LEVEL_UP_END
+};
 static const u16 sBulbasaurLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 4, MOVE_GROWL),

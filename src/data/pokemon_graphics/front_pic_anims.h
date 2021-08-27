@@ -4595,6 +4595,16 @@ static const union AnimCmd sAnim_FREN_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_DUMPY_1[] =
+{
+    ANIMCMD_FRAME(0, 50),
+    ANIMCMD_FRAME(1, 25),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 25),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_EGG_1[] =
 {
     ANIMCMD_FRAME(0, 6),
@@ -6830,6 +6840,11 @@ static const union AnimCmd *const sAnims_FREN[] ={
     sAnim_FREN_1,
 };
 
+static const union AnimCmd *const sAnims_DUMPY[] ={
+    sAnim_GeneralFrame0,
+    sAnim_DUMPY_1,
+};
+
 static const union AnimCmd *const sAnims_EGG[] ={
     sAnim_GeneralFrame0,
     sAnim_EGG_1,
@@ -7389,6 +7404,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(CHIMECHO),
     ANIM_CMD(CREWMATE),
     ANIM_CMD(FREN),
+    ANIM_CMD(DUMPY),
     ANIM_CMD(EGG),
     ANIM_CMD(UNOWN_B),
     ANIM_CMD(UNOWN_C),

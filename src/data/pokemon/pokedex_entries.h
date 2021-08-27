@@ -4665,4 +4665,15 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 290,
         .trainerOffset = 2,
     },
+    [NATIONAL_DEX_DUMPY] =
+    {
+        .categoryName = _("DUMPY"),
+        .height = 17,
+        .weight = 608,
+        .description = gDumpyPokedexText,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 2,
+    },
 };

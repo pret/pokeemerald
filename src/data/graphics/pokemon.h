@@ -2726,6 +2726,13 @@ const u32 gMonShinyPalette_Fren[] = INCBIN_U32("graphics/pokemon/fren/shiny.gbap
 const u8 gMonIcon_Fren[] = INCBIN_U8("graphics/pokemon/fren/icon.4bpp");
 const u8 gMonFootprint_Fren[] = INCBIN_U8("graphics/pokemon/fren/footprint.1bpp");
 
+const u32 gMonStillFrontPic_Dumpy[] = INCBIN_U32("graphics/pokemon/dumpy/front.4bpp.lz");
+const u32 gMonPalette_Dumpy[] = INCBIN_U32("graphics/pokemon/dumpy/normal.gbapal.lz");
+const u32 gMonBackPic_Dumpy[] = INCBIN_U32("graphics/pokemon/dumpy/back.4bpp.lz");
+const u32 gMonShinyPalette_Dumpy[] = INCBIN_U32("graphics/pokemon/dumpy/shiny.gbapal.lz");
+const u8 gMonIcon_Dumpy[] = INCBIN_U8("graphics/pokemon/dumpy/icon.4bpp");
+const u8 gMonFootprint_Dumpy[] = INCBIN_U8("graphics/pokemon/dumpy/footprint.1bpp");
+
 const u32 gMonStillFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/front.4bpp.lz");
 const u32 gMonPalette_Egg[] = INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz");
 

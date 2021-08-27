@@ -37,6 +37,38 @@
 const struct BaseStats gBaseStats[] =
 {
     [SPECIES_NONE] = {0},
+
+    [SPECIES_DUMPY] =
+    {
+        .baseHP        = 160,
+        .baseAttack    = 130,
+        .baseDefense   = 150,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 110,
+        .type1 = TYPE_NORMAL,  
+        .type2 = TYPE_MYSTERY,
+        .catchRate = 45,
+        .expYield = 193,
+        .evYield_HP        = 0,
+        .evYield_Attack    = 3,
+        .evYield_Defense   = 0,
+        .evYield_Speed     = 0,
+        .evYield_SpAttack  = 0,
+        .evYield_SpDefense = 0,
+        .item1 = ITEM_NONE,
+        .item2 = ITEM_NONE,
+        .genderRatio = PERCENT_FEMALE(0),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
+        .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+        .abilities = {ABILITY_THICC_FAT, ABILITY_NONE},
+        .safariZoneFleeRate = 0,
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
  
     [SPECIES_FREN] =
     {
@@ -48,7 +80,7 @@ const struct BaseStats gBaseStats[] =
        .baseSpDefense = 60,
        .type1 = TYPE_NORMAL,  
        .type2 = TYPE_MYSTERY,
-       .catchRate = 180,
+       .catchRate = 255,
        .expYield = 255,
        .evYield_HP        = 0,
        .evYield_Attack    = 0,
@@ -61,12 +93,12 @@ const struct BaseStats gBaseStats[] =
        .genderRatio = PERCENT_FEMALE(0),
        .eggCycles = 120,
        .friendship = 0,
-       .growthRate = GROWTH_SLOW,
+       .growthRate = GROWTH_MEDIUM_FAST,
        .eggGroup1 = EGG_GROUP_UNDISCOVERED,
        .eggGroup2 = EGG_GROUP_UNDISCOVERED,
        .abilities = {ABILITY_SPEED_BOOST, ABILITY_NONE},
        .safariZoneFleeRate = 0,
-       .bodyColor = BODY_COLOR_PURPLE,
+       .bodyColor = BODY_COLOR_GREEN,
        .noFlip = FALSE,
     },
     

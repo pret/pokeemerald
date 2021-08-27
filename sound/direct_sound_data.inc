@@ -2,8 +2,13 @@
 Cry_Crewmate::
 	.incbin "sound/direct_sound_samples/cries/crewmate.bin"
 
+ 	.align 2
 Cry_Fren::
 	.incbin "sound/direct_sound_samples/cries/fren.bin"
+
+ 	.align 2
+Cry_Dumpy::
+	.incbin "sound/direct_sound_samples/cries/dumpy.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_glockenspiel::

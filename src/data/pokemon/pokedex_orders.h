@@ -418,6 +418,7 @@ const u16 gPokedexOrder_Alphabetical[] =
 
 const u16 gPokedexOrder_Weight[] =
 {
+    NATIONAL_DEX_DUMPY,
     NATIONAL_DEX_FREN,
     NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_GASTLY,
@@ -545,6 +546,7 @@ const u16 gPokedexOrder_Weight[] =
     NATIONAL_DEX_FLAAFFY,
     NATIONAL_DEX_POOCHYENA,
     NATIONAL_DEX_WYNAUT,
+    NATIONAL_DEX_DUMPY,
     NATIONAL_DEX_DUNSPARCE,
     NATIONAL_DEX_XATU,
     NATIONAL_DEX_DUSKULL,
@@ -810,6 +812,7 @@ const u16 gPokedexOrder_Weight[] =
 
 const u16 gPokedexOrder_Height[] =
 {
+    NATIONAL_DEX_DUMPY,
     NATIONAL_DEX_FREN,
     NATIONAL_DEX_CREWMATE,
     NATIONAL_DEX_DIGLETT,

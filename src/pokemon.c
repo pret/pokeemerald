@@ -508,6 +508,7 @@ const u16 gSpeciesToHoennPokedexNum[] = // Assigns all species to the Hoenn Dex 
     SPECIES_TO_HOENN(CHIMECHO),
     SPECIES_TO_HOENN(CREWMATE),
     SPECIES_TO_HOENN(FREN),
+    SPECIES_TO_HOENN(DUMPY),
 };
 
 const u16 gSpeciesToNationalPokedexNum[] = // Assigns all species to the National Dex Index (Summary No. for National Dex)
@@ -925,6 +926,7 @@ const u16 gSpeciesToNationalPokedexNum[] = // Assigns all species to the Nationa
     SPECIES_TO_NATIONAL(CHIMECHO),
     SPECIES_TO_NATIONAL(CREWMATE),
     SPECIES_TO_NATIONAL(FREN),
+    SPECIES_TO_NATIONAL(DUMPY),
 };
 
 const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pokémon (Using National Dex Index)
@@ -1317,6 +1319,7 @@ const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pokémon (Using Nationa
     HOENN_TO_NATIONAL(CELEBI),
     HOENN_TO_NATIONAL(CREWMATE),
     HOENN_TO_NATIONAL(FREN),
+    HOENN_TO_NATIONAL(DUMPY),
     HOENN_TO_NATIONAL(OLD_UNOWN_B),
     HOENN_TO_NATIONAL(OLD_UNOWN_C),
     HOENN_TO_NATIONAL(OLD_UNOWN_D),
@@ -1785,6 +1788,7 @@ static const u8 sMonFrontAnimIdsTable[] =
     [SPECIES_CHIMECHO - 1]    = ANIM_H_SLIDE_WOBBLE,
     [SPECIES_CREWMATE - 1]    = ANIM_V_SLIDE,
     [SPECIES_FREN - 1]        = ANIM_V_JUMPS_H_JUMPS,
+    [SPECIES_DUMPY - 1]   = ANIM_V_SHAKE_TWICE,
 };
 
 static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
@@ -1846,6 +1850,7 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
     [SPECIES_RAYQUAZA - 1]   = 60,
     [SPECIES_CREWMATE - 1]   = 5,
     [SPECIES_FREN - 1]       = 5,
+    [SPECIES_DUMPY - 1]  = 50,
 
 };
 
@@ -3161,6 +3166,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
+        spAttack /= 2;
+    if (defender->ability == ABILITY_THICC_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
         spAttack /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
