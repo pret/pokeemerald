@@ -375,6 +375,5 @@ extern const u8 BattleScript_PrimordialSeaActivates[];
 extern const u8 BattleScript_PrimordialSeaFizzlesOutFireTypeMoves[];
 extern const u8 BattleScript_DeltaStreamActivates[];
 extern const u8 BattleScript_MysteriousAirCurrentBlowsOn[];
-extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -8147,7 +8147,7 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
      && !IsAbilityOnField(ABILITY_CLOUD_NINE))
     {
         modifier = UQ_4_12(1.0);
-        gBattlescriptCurrInstr = BattleScript_AttackWeakenedByStrongWinds;
+        PrepareStringBattle(STRINGID_ATTACKWEAKENEDBSTRONGWINDS, battlerDef);
         gBattlescriptCurrInstr++;
     }
 

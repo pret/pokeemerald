@@ -6936,15 +6936,6 @@ BattleScript_DeltaStreamActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
-BattleScript_AttackWeakenedByStrongWinds::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
-	waitmessage B_WAIT_TIME_LONG
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 1
-	goto BattleScript_HitFromAtkAnimation
-
 BattleScript_SnowWarningActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
