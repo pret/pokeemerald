@@ -28,7 +28,7 @@ LD := $(PREFIX)ld
 # note: the makefile must be set up so MODERNCC is never called
 # if MODERN=0
 MODERNCC := $(PREFIX)gcc
-PATH_MODERNCC := PATH=$(TOOLCHAIN)/bin:PATH $(MODERNCC) $(LIBGBA)
+PATH_MODERNCC := PATH=$(TOOLCHAIN)/bin:PATH $(MODERNCC)
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -36,21 +36,16 @@ else
 EXE :=
 endif
 
-TITLE       := POKEMON [REDACTED]
+TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
 MODERN      ?= 0
-DOOM 			  ?= 0
 
 ifeq (modern,$(MAKECMDGOALS))
   MODERN := 1
 endif
 
-ifeq (doom,$(MAKECMDGOALS))
-  DOOM := 1
-  MODERN := 1
-endif
 # use arm-none-eabi-cpp for macOS
 # as macOS's default compiler is clang
 # and clang's preprocessor will warn on \u
@@ -87,7 +82,6 @@ SYM = $(ROM:.gba=.sym)
 C_SUBDIR = src
 GFLIB_SUBDIR = gflib
 ASM_SUBDIR = asm
-DOOM_SUBDIR = src/GBADoom/source
 DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
@@ -106,14 +100,14 @@ ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 
 ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
-override CFLAGS += -mthumb-interwork -Wparentheses -Werror -O2 -fhex-asm -g
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -g
 ROM := $(ROM_NAME)
 OBJ_DIR := $(OBJ_DIR_NAME)
 LIBPATH := -L ../../tools/agbcc/lib
 LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 else
 CC1              = $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
-override CFLAGS += -mthumb -mthumb-interwork -O3 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -g -fgcse-after-reload
+override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -g
 ROM := $(MODERN_ROM_NAME)
 OBJ_DIR := $(MODERN_OBJ_DIR_NAME)
 LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libc.a))"
@@ -122,10 +116,8 @@ endif
 
 CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
 ifneq ($(MODERN),1)
-CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef -D__IEEE_LITTLE_ENDIAN
+CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
 endif
-
-CXXFLAGS := -fno-rtti -fno-exceptions
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -186,11 +178,7 @@ else
 endif
 
 ifeq ($(SCAN_DEPS),1)
-ifeq ($(DOOM),1)
 C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
-else
-C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c DATA_SRC_SUBDIR/*.c $(DATA_SRC_SUBDIR)/*/*.c $(DATA_SRC_SUBDIR)/*/*/*.c)
-endif
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
@@ -202,10 +190,6 @@ C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
 
 ASM_SRCS := $(wildcard $(ASM_SUBDIR)/*.s)
 ASM_OBJS := $(patsubst $(ASM_SUBDIR)/%.s,$(ASM_BUILDDIR)/%.o,$(ASM_SRCS))
-
-DOOM_SRCS_IN := $(wildcard $(DOOM_SUBDIR)/*.c $(DOOM_SUBDIR)/*/*.c $(DOOM_SUBDIR)/*/*/*.c)
-DOOM_SRCS := $(foreach src,$(DOOM_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
-DOOM_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(DOOM_SRCS))
 
 # get all the data/*.s files EXCEPT the ones with specific rules
 REGULAR_DATA_ASM_SRCS := $(filter-out $(DATA_ASM_SUBDIR)/maps.s $(DATA_ASM_SUBDIR)/map_events.s, $(wildcard $(DATA_ASM_SUBDIR)/*.s))
@@ -219,13 +203,7 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
-OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS) 
-
-#ifeq ($(DOOM),1)
-#OBJS += $(DOOM_OBJS)
-#endif
-
-
+OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
@@ -233,10 +211,6 @@ $(shell mkdir -p $(SUBDIRS))
 endif
 
 AUTO_GEN_TARGETS :=
-
-#all:
-#	@echo "This was hard disabled because you now need to run 'make modern', which uses DevkitTools instead of agbcc"
-#	@echo "and therefore ensures that GBADoom will compile correctly"
 
 all: rom
 
@@ -449,14 +423,10 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) berry_fix libagbsyscall
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
-	#@mv $(C_BUILDDIR)/doom.wad.o $(C_BUILDDIR)/GBADOOM/source/iwad/
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
 
 modern: all
-doom: modern
-
-#src/GBADoom/GBADoom.gba: src/GBADoom
 
 berry_fix/berry_fix.gba: berry_fix
 
@@ -466,25 +436,9 @@ berry_fix:
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
-
 ###################
 ### Symbol file ###
 ###################
 
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
-
-#---------------------------------------------------------------------------------
-# rule to build soundbank from music files
-#---------------------------------------------------------------------------------
-soundbank.bin soundbank.h : $(AUDIOFILES)
-#---------------------------------------------------------------------------------
-	@mmutil $^ -osoundbank.bin -hsoundbank.h
-
-#---------------------------------------------------------------------------------
-# This rule links in binary data with the .wad extension
-#---------------------------------------------------------------------------------
-%.bin.o	%_bin.h :	%.bin
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
