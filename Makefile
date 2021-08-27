@@ -117,7 +117,7 @@ override CFLAGS += -mthumb -mthumb-interwork -O3 -mabi=apcs-gnu -mtune=arm7tdmi 
 ROM := $(MODERN_ROM_NAME)
 OBJ_DIR := $(MODERN_OBJ_DIR_NAME)
 LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libc.a))"
-LIB := -lmgba -lmm $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
+LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 endif
 
 CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
@@ -221,9 +221,9 @@ MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
 OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS) 
 
-ifeq ($(DOOM),1)
-OBJS += $(DOOM_OBJS)
-endif
+#ifeq ($(DOOM),1)
+#OBJS += $(DOOM_OBJS)
+#endif
 
 
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))

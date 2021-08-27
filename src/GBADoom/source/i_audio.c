@@ -61,7 +61,7 @@
 
 #include "global_data.h"
 
-//#define __arm__
+#define __arm__
 
 #ifdef __arm__
 
