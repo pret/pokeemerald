@@ -49,7 +49,6 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
-#include "GBADoom/source/d_main.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -2313,11 +2312,3 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
-<<<<<<< HEAD
-
-bool8 ScrCmd_doom(struct ScriptContext *ctx)
-{
-    //D_DoomMainSetup();
-}
-=======
->>>>>>> parent of 51014e697 (this is gonna get cut off anyways)
