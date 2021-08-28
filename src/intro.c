@@ -195,6 +195,63 @@ static const u16 sIntroMisc_Pal[]             = INCBIN_U16("graphics/intro/scene
 static const u32 sIntroMisc_Gfx[]             = INCBIN_U32("graphics/intro/scene_3/misc.4bpp.lz"); // Rayquza orb, and misc unused gfx
 static const u16 sIntroFlygonSilhouette_Pal[] = INCBIN_U16("graphics/intro/scene_1/flygon.gbapal");
 static const u32 sIntroLati_Gfx[]             = INCBIN_U32("graphics/intro/scene_1/lati.4bpp.lz"); // Unused
+static const u32 gTest_Mon[]                  = INCBIN_U32("graphics/intro/scene_1/alienpls.4bpp.lz");
+static const u32 gTestPal_Mon[]               = INCBIN_U32("graphics/intro/scene_1/alienpls_palette.gbapal.lz");
+
+static const struct CompressedSpriteSheet sSpriteSheet_Mon[] =
+{
+    {gTest_Mon, 4096, 777},
+    {NULL},
+};
+
+static const struct CompressedSpritePalette sSpritePal_Mon[] =
+{
+    {gTestPal_Mon, 777},
+    {NULL},
+};
+
+static const union AnimCmd smon_Anim1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(64, 30),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const smon_AnimTable[] =
+{
+        smon_Anim1,
+};
+
+static const struct OamData sMonOamData =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sMonSpriteTemplate =
+
+{
+    .tileTag = 777,
+    .paletteTag = 777,
+    .oam = &sMonOamData,
+    .anims = smon_AnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+
 static const u8 sUnusedData[] = {
     0x02, 0x03, 0x04, 0x05, 0x01, 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x02, 0x0D,
     0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x02, 0x0D, 0x0E, 0x0F,
@@ -1188,6 +1245,8 @@ static void Task_Scene1_Load(u8 taskId)
     LoadSpritePalettes(sSpritePalettes_Intro1);
     LoadCompressedSpriteSheet(sSpriteSheet_Sparkle);
     LoadSpritePalettes(sSpritePalette_Sparkle);
+    LoadCompressedSpriteSheet(sSpriteSheet_Mon); //test
+    LoadCompressedSpritePalette(sSpritePal_Mon); //test
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1F0], 0x20);
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1E1], 0x1E);
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1D2], 0x1C);
@@ -1196,6 +1255,12 @@ static void Task_Scene1_Load(u8 taskId)
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1A5], 0x16);
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x196], 0x14);
     CreateGameFreakLogoSprites(120, 80, 0);
+    CreateSprite(&sMonSpriteTemplate, 190, 110, 0);
+   // CreateSprite(&sMonSpriteTemplate, 150, 110, 0);
+   // CreateSprite(&sMonSpriteTemplate, 110, 110, 0);
+    //  CreateSprite(&sMonSpriteTemplate, 90, 110, 0);
+  //CreateSprite(&sMonSpriteTemplate, 70, 110, 0);
+   // CreateSprite(&sMonSpriteTemplate, 40, 110, 0);
     gTasks[taskId].sBigDropSpriteId = CreateWaterDrop(236, -14, 0x200, 1, 0x78, FALSE);
     gTasks[taskId].func = Task_Scene1_FadeIn;
 }
