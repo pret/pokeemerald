@@ -1159,7 +1159,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_EARTHQUAKE] =
     {
-        .effect = EFFECT_EARTHQUAKE,
+        .effect = EFFECT_TEST,
         .power = 100,
         .type = TYPE_GROUND,
         .accuracy = 100,
@@ -4624,6 +4624,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .pp = 5,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_TEST] =
+    {
+        .effect = EFFECT_EARTHQUAKE,
+        .power = 100,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },

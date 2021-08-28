@@ -1,6 +1,7 @@
 const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
 {
     [MOVE_GUN] = _("GUN"),
+    [MOVE_TEST] = _("FUCK"),
     [MOVE_NONE] = _("-"),
     [MOVE_POUND] = _("POUND"),
     [MOVE_KARATE_CHOP] = _("KARATE CHOP"),
