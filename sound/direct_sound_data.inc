@@ -10,7 +10,6 @@ Cry_Fren::
 Cry_Dumpy::
 	.incbin "sound/direct_sound_samples/cries/dumpy.bin"
 
-
 	.align 2
 Cry_Test::
 	.incbin "sound/direct_sound_samples/cries/gradad.bin"

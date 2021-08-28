@@ -1419,11 +1419,14 @@ static const u8 sPsychoBoostDescription[] = _(
 static const u8 sGunDescription[] = _(
     "Gun Go Pew Pew,\n"
     "Murica!");
+    static const u8 sTestDescription[] = _(
+    "FUCK!\n");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 {
     [MOVE_GUN - 1] = sGunDescription,
+    [MOVE_TEST - 1] = sTestDescription,
     [MOVE_POUND - 1] = sPoundDescription,
     [MOVE_KARATE_CHOP - 1] = sKarateChopDescription,
     [MOVE_DOUBLE_SLAP - 1] = sDoubleSlapDescription,
