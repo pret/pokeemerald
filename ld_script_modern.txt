@@ -131,6 +131,75 @@ SECTIONS {
         src/graphics.o(.rodata);
     } =0
 
+
+    doom :
+    ALIGN(4)
+    {
+        src/GBADoom/source/am_map.o;
+        src/GBADoom/source/fixeddiv.o;
+        src/GBADoom/source/d_client.o;
+        src/GBADoom/source/d_items.o;
+        src/GBADoom/source/d_main.o;
+        src/GBADoom/source/doom_iwad.o;
+        src/GBADoom/source/f_finale.o;
+        src/GBADoom/source/f_wipe.o;
+        src/GBADoom/source/g_game.o;
+        src/GBADoom/source/global_data.o;
+        src/GBADoom/source/hu_lib.o;
+        src/GBADoom/source/hu_stuff.o;
+        src/GBADoom/source/i_audio.o;
+        src/GBADoom/source/i_main.o;
+        src/GBADoom/source/i_system.o;
+        src/GBADoom/source/i_system_e32.o;
+        src/GBADoom/source/i_system_gba.o;
+        src/GBADoom/source/i_video.o;
+        src/GBADoom/source/info.o;
+        src/GBADoom/source/lprintf.o;
+        src/GBADoom/source/m_bbox.o;
+        src/GBADoom/source/m_cheat.o;
+        src/GBADoom/source/m_menu.o;
+        src/GBADoom/source/m_random.o;
+        src/GBADoom/source/m_recip.o;
+        src/GBADoom/source/p_ceilng.o;
+        src/GBADoom/source/p_doors.o;
+        src/GBADoom/source/p_enemy.o;
+        src/GBADoom/source/p_floor.o;
+        src/GBADoom/source/p_genlin.o;
+        src/GBADoom/source/p_inter.o;
+        src/GBADoom/source/p_lights.o;
+        src/GBADoom/source/p_map.o;
+        src/GBADoom/source/p_maputl.o;
+        src/GBADoom/source/p_mobj.o;
+        src/GBADoom/source/p_plats.o;
+        src/GBADoom/source/p_pspr.o;
+        src/GBADoom/source/p_setup.o;
+        src/GBADoom/source/p_sight.o;
+        src/GBADoom/source/p_spec.o;
+        src/GBADoom/source/p_switch.o;
+        src/GBADoom/source/p_telept.o;
+        src/GBADoom/source/p_tick.o;
+        src/GBADoom/source/p_user.o;
+        src/GBADoom/source/r_data.o;
+        src/GBADoom/source/r_draw.o;
+        src/GBADoom/source/r_hotpath.iwram.o;
+        src/GBADoom/source/r_main.o;
+        src/GBADoom/source/r_patch.o;
+        src/GBADoom/source/r_plane.o;
+        src/GBADoom/source/r_things.o;
+        src/GBADoom/source/s_sound.o;
+        src/GBADoom/source/sounds.o;
+        src/GBADoom/source/st_gfx.o;
+        src/GBADoom/source/st_lib.o;
+        src/GBADoom/source/st_stuff.o;
+        src/GBADoom/source/tables.o;
+        src/GBADoom/source/v_video.o;
+        src/GBADoom/source/version.o;
+        src/GBADoom/source/w_wad.o;
+        src/GBADoom/source/wi_stuff.o;
+        src/GBADoom/source/z_bmalloc.o;
+        src/GBADoom/source/z_zone.o
+    } =0
+
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning
        of the section so we begin them at 0.  */
