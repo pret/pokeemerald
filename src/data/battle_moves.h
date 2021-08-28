@@ -1159,7 +1159,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_EARTHQUAKE] =
     {
-        .effect = EFFECT_TEST,
+        .effect = EFFECT_EARTHQUAKE,
         .power = 100,
         .type = TYPE_GROUND,
         .accuracy = 100,
@@ -4629,7 +4629,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     },
     [MOVE_TEST] =
     {
-        .effect = EFFECT_EARTHQUAKE,
+        .effect = EFFECT_TEST,
         .power = 100,
         .type = TYPE_GROUND,
         .accuracy = 100,
