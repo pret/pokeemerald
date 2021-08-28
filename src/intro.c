@@ -926,41 +926,41 @@ static const u8 sGameFreakLetterStartDelays[NUM_GF_LETTERS] =
     10, // A
     10  // K
 };
-static const struct OamData sOamData_FlygonSilhouette =
-{
-    .y = DISPLAY_HEIGHT,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x32),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(64x32),
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-static const union AnimCmd sAnim_FlygonSilhouette[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_JUMP(0),
-};
-static const union AnimCmd *const sAnims_FlygonSilhouette[] =
-{
-    sAnim_FlygonSilhouette,
-};
-static const struct SpriteTemplate sSpriteTemplate_FlygonSilhouette =
-{
-    .tileTag = TAG_FLYGON_SILHOUETTE,
-    .paletteTag = TAG_FLYGON_SILHOUETTE,
-    .oam = &sOamData_FlygonSilhouette,
-    .anims = sAnims_FlygonSilhouette,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_FlygonSilhouette,
-};
+//static const struct OamData sOamData_FlygonSilhouette =
+//{
+ //   .y = DISPLAY_HEIGHT,
+ //  .affineMode = ST_OAM_AFFINE_OFF,
+  //  .objMode = ST_OAM_OBJ_NORMAL,
+  //  .mosaic = 0,
+ //   .bpp = ST_OAM_4BPP,
+ //   .shape = SPRITE_SHAPE(64x32),
+ //   .x = 0,
+ //   .matrixNum = 0,
+ //   .size = SPRITE_SIZE(64x32),
+ //   .tileNum = 0,
+ //   .priority = 0,
+ //   .paletteNum = 0,
+//    .affineParam = 0,
+//};
+//static const union AnimCmd sAnim_FlygonSilhouette[] =
+//{
+//    ANIMCMD_FRAME(0, 10),
+//    ANIMCMD_JUMP(0),
+//};
+//static const union AnimCmd *const sAnims_FlygonSilhouette[] =
+//{
+//    sAnim_FlygonSilhouette,
+//};
+//static const struct SpriteTemplate sSpriteTemplate_FlygonSilhouette =
+//{
+ //   .tileTag = TAG_FLYGON_SILHOUETTE,
+ //   .paletteTag = TAG_FLYGON_SILHOUETTE,
+//    .oam = &sOamData_FlygonSilhouette,
+//    .anims = sAnims_FlygonSilhouette,
+//    .images = NULL,
+//    .affineAnims = gDummySpriteAffineAnimTable,
+//    .callback = SpriteCB_FlygonSilhouette,
+//};
 static const struct CompressedSpriteSheet sSpriteSheet_WaterDropsAndLogo[] =
 {
     {sIntroDropsLogo_Gfx, 0x1400, GFXTAG_DROPS_LOGO},
@@ -1324,12 +1324,12 @@ static void Task_Scene1_PanUp(u8 taskId)
         gTasks[taskId].tBg3PosLo = offset;
         SetGpuReg(REG_OFFSET_BG0VOFS, gTasks[taskId].tBg3PosHi);
 
-        if (gIntroFrameCounter == TIMER_FLYGON_SILHOUETTE_APPEAR)
-        {
+      //  if (gIntroFrameCounter == TIMER_FLYGON_SILHOUETTE_APPEAR)
+        //{
             // Show Flygon silhouette
-            u8 spriteId = CreateSprite(&sSpriteTemplate_FlygonSilhouette, 120, DISPLAY_HEIGHT, 10);
-            gSprites[spriteId].invisible = TRUE;
-        }
+  //          u8 spriteId = CreateSprite(&sSpriteTemplate_FlygonSilhouette, 120, DISPLAY_HEIGHT, 10);
+    //        gSprites[spriteId].invisible = TRUE;
+        //}
     }
     else
     {
@@ -1435,8 +1435,8 @@ static void Task_Scene2_BikeRide(u8 taskId)
         gSprites[gTasks[taskId].tPlayerSpriteId].sState = 1;
     if (gIntroFrameCounter == TIMER_PLAYER_MOVE_FORWARD)
         gSprites[gTasks[taskId].tPlayerSpriteId].sState = 0;
-    if (gIntroFrameCounter == TIMER_FLYGON_ENTER)
-        gSprites[gTasks[taskId].tFlygonSpriteId].sState = 1;
+//    if (gIntroFrameCounter == TIMER_FLYGON_ENTER)
+//        gSprites[gTasks[taskId].tFlygonSpriteId].sState = 1;
     if (gIntroFrameCounter == TIMER_PLAYER_MOVE_BACKWARD)
         gSprites[gTasks[taskId].tPlayerSpriteId].sState = 2;
     if (gIntroFrameCounter == TIMER_PLAYER_HOLD_POSITION)
@@ -1445,10 +1445,10 @@ static void Task_Scene2_BikeRide(u8 taskId)
         gSprites[gTasks[taskId].tPlayerSpriteId].sState = 4;
 
     // Handle flygon's y movement
-    offset = Sin(gTasks[taskId].tFlygonTimer >> 2 & 0x7F, 48);
-    sFlygonYOffset = offset;
-    if (gTasks[taskId].tFlygonTimer < 512)
-        gTasks[taskId].tFlygonTimer++;
+//    offset = Sin(gTasks[taskId].tFlygonTimer >> 2 & 0x7F, 48);
+//    sFlygonYOffset = offset;
+//    if (gTasks[taskId].tFlygonTimer < 512)
+//        gTasks[taskId].tFlygonTimer++;
 
     // Alternate colors of the trees
     CycleSceneryPalette(0);
