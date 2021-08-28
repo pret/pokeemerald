@@ -36,6 +36,7 @@
 #include "title_screen.h"
 #include "window.h"
 #include "mystery_gift.h"
+#include "constants/species.h"
 
 /*
  * Main menu state machine
@@ -144,7 +145,7 @@
  * Task_NewGameBirchSpeech_ProcessNameYesNoMenu
  *  - If confirmed, advance to Task_NewGameBirchSpeech_SlidePlatformAway2.
  *  - Otherwise, return to Task_NewGameBirchSpeech_BoyOrGirl.
- * 
+ * PlayCryInternal(SPECIES_TEST, 0, 120, 10, 0);
  * Task_NewGameBirchSpeech_SlidePlatformAway2
  * Task_NewGameBirchSpeech_ReshowBirchLotad
  * Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter
@@ -1694,6 +1695,7 @@ static void Task_NewGameBirchSpeech_ShrinkPlayer(u8 taskId)
         gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
         if (!RunTextPrintersAndIsPrinter0Active())
         {
+            PlayCryInternal(SPECIES_TEST, 0, 120, 10, 0);
             spriteId = gTasks[taskId].tPlayerSpriteId;
             gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
             gSprites[spriteId].affineAnims = sSpriteAffineAnimTable_PlayerShrink;
@@ -1701,7 +1703,7 @@ static void Task_NewGameBirchSpeech_ShrinkPlayer(u8 taskId)
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = SpriteCB_MovePlayerDownWhileShrinking;
             BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
-            FadeOutBGM(4);
+            // FadeOutBGM(4);
             gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForPlayerShrink;
         }
     }
