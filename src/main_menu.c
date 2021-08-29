@@ -1703,7 +1703,6 @@ static void Task_NewGameBirchSpeech_ShrinkPlayer(u8 taskId)
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = SpriteCB_MovePlayerDownWhileShrinking;
             BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
-            // FadeOutBGM(4);
             gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForPlayerShrink;
         }
     }
@@ -1714,6 +1713,7 @@ static void Task_NewGameBirchSpeech_WaitForPlayerShrink(u8 taskId)
     u8 spriteId = gTasks[taskId].tPlayerSpriteId;
 
     if (gSprites[spriteId].affineAnimEnded)
+        FadeOutBGM(4);
         gTasks[taskId].func = Task_NewGameBirchSpeech_FadePlayerToWhite;
 }
 

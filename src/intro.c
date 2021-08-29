@@ -1255,7 +1255,7 @@ static void Task_Scene1_Load(u8 taskId)
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1A5], 0x16);
     CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x196], 0x14);
     CreateGameFreakLogoSprites(120, 80, 0);
-    CreateSprite(&sMonSpriteTemplate, 190, 110, 0);
+  //  CreateSprite(&sMonSpriteTemplate, 190, 110, 0);
    // CreateSprite(&sMonSpriteTemplate, 150, 110, 0);
    // CreateSprite(&sMonSpriteTemplate, 110, 110, 0);
     //  CreateSprite(&sMonSpriteTemplate, 90, 110, 0);
