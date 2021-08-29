@@ -39,7 +39,7 @@ static const u16 sFrenLevelUpLearnset[] = {
 
 static const u16 sDumpyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(21, MOVE_MINIMIZE),
-    LEVEL_UP_MOVE(21, MOVE_TEST),
+    LEVEL_UP_MOVE(21, MOVE_EARTHQUAKE),
     LEVEL_UP_MOVE(25, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE(29, MOVE_METRONOME),
     LEVEL_UP_MOVE(33, MOVE_COSMIC_POWER),

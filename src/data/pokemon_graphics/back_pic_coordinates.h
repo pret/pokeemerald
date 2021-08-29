@@ -2072,7 +2072,7 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_DUMPY] =
     {
-        .size = 0x65,
+        .size = 0x86,
         .y_offset = 12,
     },
     [SPECIES_EGG] =
