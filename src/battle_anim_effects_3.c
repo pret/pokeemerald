@@ -147,6 +147,17 @@ const struct SpriteTemplate gScratchSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
+const struct SpriteTemplate gScratchSpriteGun =
+{
+    .tileTag = ANIM_TAG_GUN,
+    .paletteTag = ANIM_TAG_SCRATCH,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
+    .anims = gScratchAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos,
+};
+
 const struct SpriteTemplate gBlackSmokeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLACK_SMOKE,
