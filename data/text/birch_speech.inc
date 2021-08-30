@@ -1,9 +1,10 @@
 gText_Birch_Welcome::
-	.string "Hi! Sorry to keep you waiting!\p"
-	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is BITCH.\p"
-	.string "But everyone calls me the POKéMON\n"
-	.string "PROFESSOR.\p"
+	.string "I see you're finally awake.\p"
+	.string "It's me joel, the worse mod ever chowder!\p"
+	.string "You've talked too much shit to me.\p"
+	.string "So now it's time I get my revenge!\p"
+	.string "By making you play a shitty ROM HACK of\n" 
+	.string "Pokemon Emerald\p"
 	.string "$"
 
 gText_Birch_Pokemon::
@@ -28,16 +29,16 @@ gText_Birch_MainSpeech::
 	.string "That's what I do.\p"
 	.string "$"
 
-gText_Birch_AndYouAre::
-	.string "  $"
+gText_Birch_AndYouAre:: 
+	.string "  $" 
 
-gText_Birch_BoyOrGirl::
-	.string "Are you a boy?\n"
-	.string "Or are you a girl?$"
+gText_Birch_BoyOrGirl::   
+	.string "Are you a boy?\n"  
+	.string "Or are you a girl?$"  
 
-gText_Birch_WhatsYourName::
-	.string "Bruh\n"
-	.string "What's your name?$"
+gText_Birch_WhatsYourName::  
+	.string "Bruh\n"  
+	.string "What's your name?$"  
 
 gText_Birch_SoItsPlayer::
 	.string "So it's {PLAYER}{KUN}?$"
@@ -56,6 +57,6 @@ gText_Birch_AreYouReady::
 	.string "Take courage, and leap into the\n"
 	.string "world of POKéMON where dreams,\l"
 	.string "adventure, and friendships await!\p"
-	.string "Well, I'll be expecting you later.\n"
-	.string "Come see me in my POKéMON LAB.\p"
+	.string "Imagine being swedish.\n"
+	.string "ENJOY BRAZIL LOSER!\p"
 	.string "$"
