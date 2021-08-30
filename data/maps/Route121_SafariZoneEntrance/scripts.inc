@@ -1,12 +1,12 @@
-Route121_SafariZoneEntrance_MapScripts:: @ 822BBBB
+Route121_SafariZoneEntrance_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route121_SafariZoneEntrance_OnFrame
 	.byte 0
 
-Route121_SafariZoneEntrance_OnFrame: @ 822BBC1
+Route121_SafariZoneEntrance_OnFrame:
 	map_script_2 VAR_SAFARI_ZONE_STATE, 1, Route121_SafariZoneEntrance_EventScript_ExitSafariZone
 	.2byte 0
 
-Route121_SafariZoneEntrance_EventScript_ExitSafariZone:: @ 822BBCB
+Route121_SafariZoneEntrance_EventScript_ExitSafariZone::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_ExitSafariZone
 	waitmovement 0
@@ -14,7 +14,7 @@ Route121_SafariZoneEntrance_EventScript_ExitSafariZone:: @ 822BBCB
 	releaseall
 	end
 
-Route121_SafariZoneEntrance_Movement_ExitSafariZone: @ 822BBDD
+Route121_SafariZoneEntrance_Movement_ExitSafariZone:
 	walk_up
 	walk_right
 	walk_right
@@ -25,11 +25,11 @@ Route121_SafariZoneEntrance_Movement_ExitSafariZone: @ 822BBDD
 	walk_right
 	step_end
 
-Route121_SafariZoneEntrance_EventScript_WelcomeAttendant:: @ 822BBE6
+Route121_SafariZoneEntrance_EventScript_WelcomeAttendant::
 	msgbox Route121_SafariZoneEntrance_Text_WelcomeToSafariZone, MSGBOX_NPC
 	end
 
-Route121_SafariZoneEntrance_EventScript_InfoAttendant:: @ 822BBEF
+Route121_SafariZoneEntrance_EventScript_InfoAttendant::
 	lock
 	faceplayer
 	msgbox Route121_SafariZoneEntrance_Text_WelcomeFirstTime, MSGBOX_YESNO
@@ -39,12 +39,12 @@ Route121_SafariZoneEntrance_EventScript_InfoAttendant:: @ 822BBEF
 	release
 	end
 
-Route121_SafariZoneEntrance_EventScript_FirstTimeInfo:: @ 822BC0E
+Route121_SafariZoneEntrance_EventScript_FirstTimeInfo::
 	msgbox Route121_SafariZoneEntrance_Text_FirstTimeInfo, MSGBOX_DEFAULT
 	release
 	end
 
-Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger:: @ 822BC18
+Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -56,7 +56,7 @@ Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger:: @ 822BC18
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
 	end
 
-Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone:: @ 822BC48
+Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone::
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_NoPokeblockCase
@@ -84,7 +84,7 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone:: @ 822BC48
 	waitstate
 	end
 
-Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon:: @ 822BCBF
+Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon::
 	getpartysize
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon
@@ -95,20 +95,20 @@ Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon:: @ 822BCBF
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
 	end
 
-Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon:: @ 822BCE9
+Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon::
 	return
 
-Route121_SafariZoneEntrance_EventScript_NoPokeblockCase:: @ 822BCEA
+Route121_SafariZoneEntrance_EventScript_NoPokeblockCase::
 	msgbox Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
 	end
 
-Route121_SafariZoneEntrance_EventScript_NotEnoughMoney:: @ 822BCF8
+Route121_SafariZoneEntrance_EventScript_NotEnoughMoney::
 	msgbox Route121_SafariZoneEntrance_Text_NotEnoughMoney, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
 	end
 
-Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter:: @ 822BD06
+Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter::
 	closemessage
 	hidemoneybox
 	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter
@@ -116,11 +116,11 @@ Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter:: @ 822BD06
 	releaseall
 	end
 
-Route121_SafariZoneEntrance_Movement_BackAwayFromCounter: @ 822BD16
+Route121_SafariZoneEntrance_Movement_BackAwayFromCounter:
 	walk_right
 	step_end
 
-Route121_SafariZoneEntrance_Movement_EnterSafariZone: @ 822BD18
+Route121_SafariZoneEntrance_Movement_EnterSafariZone:
 	walk_left
 	walk_left
 	walk_left
@@ -131,7 +131,7 @@ Route121_SafariZoneEntrance_Movement_EnterSafariZone: @ 822BD18
 	delay_16
 	step_end
 
-Route121_SafariZoneEntrance_EventScript_TrainerTipSign:: @ 822BD21
+Route121_SafariZoneEntrance_EventScript_TrainerTipSign::
 	msgbox Route121_SafariZoneEntrance_Text_TrainerTip, MSGBOX_SIGN
 	end
 

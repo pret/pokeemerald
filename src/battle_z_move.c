@@ -276,13 +276,13 @@ void CreateZMoveTriggerSprite(u8 battlerId, bool8 viable)
     
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        x = gSprites[gHealthboxSpriteIds[battlerId]].pos1.x - DOUBLES_Z_TRIGGER_POS_X_SLIDE;
-        y = gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - DOUBLES_Z_TRIGGER_POS_Y_DIFF;
+        x = gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_Z_TRIGGER_POS_X_SLIDE;
+        y = gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_Z_TRIGGER_POS_Y_DIFF;
     }
     else
     {
-        x = gSprites[gHealthboxSpriteIds[battlerId]].pos1.x - SINGLES_Z_TRIGGER_POS_X_SLIDE;
-        y = gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - SINGLES_Z_TRIGGER_POS_Y_DIFF, 0;
+        x = gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_Z_TRIGGER_POS_X_SLIDE;
+        y = gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_Z_TRIGGER_POS_Y_DIFF, 0;
     }
     
     if (gBattleStruct->zmove.triggerSpriteId == 0xFF)
@@ -314,31 +314,31 @@ static void SpriteCB_ZMoveTrigger(struct Sprite *sprite)
 
     if (sprite->tHide)
     {
-        if (sprite->pos1.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xSlide)
-            sprite->pos1.x++;
+        if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xSlide)
+            sprite->x++;
 
-        if (sprite->pos1.x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xPriority)
+        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
             sprite->oam.priority = 2;
         else
             sprite->oam.priority = 1;
 
-        sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.y - yDiff;
-        sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.y - yDiff;
-        if (sprite->pos1.x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xSlide)
+        sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
+        sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
+        if (sprite->x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xSlide)
             DestroyZMoveTriggerSprite();
     }
     else
     {
-        if (sprite->pos1.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xOptimal)
-            sprite->pos1.x--;
+        if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xOptimal)
+            sprite->x--;
 
-        if (sprite->pos1.x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xPriority)
+        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
             sprite->oam.priority = 2;
         else
             sprite->oam.priority = 1;
 
-        sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.y - yDiff;
-        sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.y - yDiff;
+        sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
+        sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
     }
 }
 

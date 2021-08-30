@@ -273,15 +273,6 @@
 
 #define MAX_FRIENDSHIP  0xFF
 
-#define STATUS_PRIMARY_NONE      0
-#define STATUS_PRIMARY_POISON    1
-#define STATUS_PRIMARY_PARALYSIS 2
-#define STATUS_PRIMARY_SLEEP     3
-#define STATUS_PRIMARY_FREEZE    4
-#define STATUS_PRIMARY_BURN      5
-#define STATUS_PRIMARY_POKERUS   6
-#define STATUS_PRIMARY_FAINTED   7
-
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
@@ -315,6 +306,7 @@
 #define FLAG_DMG_2X_IN_AIR          (1 << 22) // If target is in the air, can hit and deal double damage.
 #define FLAG_DMG_IN_AIR             (1 << 23) // If target is in the air, can hit.
 #define FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING (1 << 24) // Makes a Ground type move do 1x damage to flying and levitating targets
+#define FLAG_THAW_USER              (1 << 25)
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
