@@ -1324,23 +1324,21 @@ static void Cmd_attackcanceler(void)
     s32 i, moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
+
     if (moveType == TYPE_FIRE
      && (gBattleWeather & WEATHER_RAIN_PRIMAL)
-     && !IsAbilityOnField(ABILITY_AIR_LOCK)
-     && !IsAbilityOnField(ABILITY_CLOUD_NINE)
-     && gBattleMoves[gCurrentMove].power >= 1)
+     && WEATHER_HAS_EFFECT
+     && gBattleMoves[gCurrentMove].power)
     {
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_PrimordialSeaFizzlesOutFireTypeMoves;
         return;
     }
 
-    GET_MOVE_TYPE(gCurrentMove, moveType);
     if (moveType == TYPE_WATER
      && (gBattleWeather & WEATHER_SUN_PRIMAL)
-     && !IsAbilityOnField(ABILITY_AIR_LOCK)
-     && !IsAbilityOnField(ABILITY_CLOUD_NINE)
-     && gBattleMoves[gCurrentMove].power >= 1)
+     && WEATHER_HAS_EFFECT
+     && gBattleMoves[gCurrentMove].power)
     {
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_DesolateLandEvaporatesWaterTypeMoves;
@@ -1366,7 +1364,6 @@ static void Cmd_attackcanceler(void)
         return;
 
     // Check Protean activation.
-    GET_MOVE_TYPE(gCurrentMove, moveType);
     if ((GetBattlerAbility(gBattlerAttacker) == ABILITY_PROTEAN || GetBattlerAbility(gBattlerAttacker) == ABILITY_LIBERO)
         && (gBattleMons[gBattlerAttacker].type1 != moveType || gBattleMons[gBattlerAttacker].type2 != moveType ||
             (gBattleMons[gBattlerAttacker].type3 != moveType && gBattleMons[gBattlerAttacker].type3 != TYPE_MYSTERY))
