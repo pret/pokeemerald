@@ -13,7 +13,7 @@
 	enum MON_4
 
 	.align 2
-gContestAI_ScriptsTable:: @ 82DE350
+gContestAI_ScriptsTable::
 	.4byte AI_CheckBadMove      @ CONTEST_AI_CHECK_BAD_MOVE
 	.4byte AI_CheckCombo        @ CONTEST_AI_CHECK_COMBO
 	.4byte AI_CheckBoring       @ CONTEST_AI_CHECK_BORING

@@ -756,10 +756,10 @@ static void SpriteCB_TrainerIcons(struct Sprite *sprite)
     {
         struct Sprite *objEventSprite = &gSprites[gObjectEvents[objEventId].spriteId];
         sprite->sData4 += sprite->sData3;
-        sprite->pos1.x = objEventSprite->pos1.x;
-        sprite->pos1.y = objEventSprite->pos1.y - 16;
-        sprite->pos2.x = objEventSprite->pos2.x;
-        sprite->pos2.y = objEventSprite->pos2.y + sprite->sData4;
+        sprite->x = objEventSprite->x;
+        sprite->y = objEventSprite->y - 16;
+        sprite->x2 = objEventSprite->x2;
+        sprite->y2 = objEventSprite->y2 + sprite->sData4;
         if (sprite->sData4)
             sprite->sData3++;
         else

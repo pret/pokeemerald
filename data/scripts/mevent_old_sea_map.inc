@@ -1,4 +1,4 @@
-MysteryEventScript_OldSeaMap:: @ 86757F4
+MysteryEventScript_OldSeaMap::
 	setvaddress MysteryEventScript_OldSeaMap
 	lock
 	faceplayer
@@ -22,14 +22,14 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	release
 	end
 
-OldSeaMap_NoBagSpace: @ 867584F
+OldSeaMap_NoBagSpace:
 	vmessage sText_MysteryGiftOldSeaMapBagFull
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-OldSeaMap_Obtained: @ 8675858
+OldSeaMap_Obtained:
 	vmessage sText_MysteryGiftOldSeaMapThankYou
 	waitmessage
 	waitbuttonpress

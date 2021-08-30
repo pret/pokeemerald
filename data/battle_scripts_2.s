@@ -12,7 +12,7 @@
 	.section script_data, "aw", %progbits
 
 	.align 2
-gBattlescriptsForUsingItem:: @ 82DBD3C
+gBattlescriptsForUsingItem::
 	.4byte BattleScript_PlayerUsesItem
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_FULL_RESTORE
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_HEAL_HP
@@ -21,11 +21,11 @@ gBattlescriptsForUsingItem:: @ 82DBD3C
 	.4byte BattleScript_OpponentUsesGuardSpec       @ AI_ITEM_GUARD_SPEC
 
 	.align 2
-gBattlescriptsForRunningByItem:: @ 82DBD54
+gBattlescriptsForRunningByItem::
 	.4byte BattleScript_RunByUsingItem
 
 	.align 2
-gBattlescriptsForSafariActions:: @ 82DBD58
+gBattlescriptsForSafariActions::
 	.4byte BattleScript_ActionWatchesCarefully
 	.4byte BattleScript_ActionGetNear
 	.4byte BattleScript_ActionThrowPokeblock

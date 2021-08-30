@@ -1162,8 +1162,8 @@ static void SpriteCB_Berry(struct Sprite* sprite)
         else
             PlaySE(SE_BALL_TRAY_EXIT);
     }
-    sprite->pos1.x = sprite->sX;
-    sprite->pos1.y = sprite->sY;
+    sprite->x = sprite->sX;
+    sprite->y = sprite->sY;
 }
 
 static void SetBerrySpriteData(struct Sprite* sprite, s16 x, s16 y, s16 bounceSpeed, s16 xSpeed, s16 ySpeed)
@@ -3163,8 +3163,8 @@ static void SpriteCB_Particle(struct Sprite* sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];
-    sprite->pos2.x = sprite->data[2] / 8;
-    sprite->pos2.y = sprite->data[3] / 8;
+    sprite->x2 = sprite->data[2] / 8;
+    sprite->y2 = sprite->data[3] / 8;
 
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -3197,7 +3197,7 @@ static void CreateParticleSprites(void)
 static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
 {
     sprite->data[0]++;
-    sprite->pos2.y = -(sprite->data[0] / 3);
+    sprite->y2 = -(sprite->data[0] / 3);
 
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -3206,10 +3206,10 @@ static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
 static void SpriteCB_ScoreSymbolBest(struct Sprite* sprite)
 {
     sprite->data[0]++;
-    sprite->pos2.y = -(sprite->data[0] * 2);
+    sprite->y2 = -(sprite->data[0] * 2);
 
-    if (sprite->pos2.y < -12)
-        sprite->pos2.y = -12;
+    if (sprite->y2 < -12)
+        sprite->y2 = -12;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -3264,7 +3264,7 @@ static void SpriteCB_CountdownNumber(struct Sprite* sprite)
         break;
     }
 
-    sprite->pos2.y = sprite->sYPos;
+    sprite->y2 = sprite->sYPos;
 }
 
 #undef sState
@@ -3300,7 +3300,7 @@ static void SpriteCB_Start(struct Sprite* sprite)
         break;
     }
 
-    sprite->pos2.y = sprite->data[1];
+    sprite->y2 = sprite->data[1];
 }
 
 static void TryUpdateProgressBar(u16 current, u16 limit)
@@ -3445,8 +3445,8 @@ static bool8 UpdateBlenderLandScreenShake(void)
 
 static void SpriteCB_PlayerArrow(struct Sprite* sprite)
 {
-   sprite->pos2.x = -(sBerryBlender->bg_X);
-   sprite->pos2.y = -(sBerryBlender->bg_Y);
+   sprite->x2 = -(sBerryBlender->bg_X);
+   sprite->y2 = -(sBerryBlender->bg_Y);
 }
 
 static void TryUpdateBerryBlenderRecord(void)
