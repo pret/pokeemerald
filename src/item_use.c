@@ -943,11 +943,14 @@ u32 CanThrowBall(void)
     {
         return 1;   // There are two present pokemon.
     }
-    else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
+    /*else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
              && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) 
     {
+        /*  * this is removed. instead, selecting a ball to throw with the second mon just clears the action of your first mon.
+            * see the end of HandleTurnActionSelectionState in battle_main.c
+        */
         return 2;   // Attempting to throw a ball with the second pokemon while both are alive.
-    }
+    }*/
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
     {
         return 3;   // No room for mon
