@@ -484,6 +484,14 @@ void HandleAction_UseMove(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
 
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_STRONG_WINDS)
+    {
+        if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_FLYING)
+         && CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, FALSE) >= UQ_4_12(2.0))
+            BattleScriptPushCursorAndCallback(BattleScript_AttackWeakenedByStrongWinds);
+    }
+
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
