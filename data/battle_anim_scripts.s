@@ -822,6 +822,7 @@ gBattleAnims_General::
 	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
 	.4byte General_TotemFlare               @ B_ANIM_TOTEM_FLARE
+	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
 
 	.align 2
 gBattleAnims_Special::
@@ -24395,6 +24396,30 @@ General_TotemFlare::
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_ATTACKER
+	end
+
+General_StrongWinds::
+	loadspritegfx ANIM_TAG_FLYING_DIRT
+	playsewithpan SE_M_GUST, 0
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_FLYING_DIRT, 0, 12, 12, RGB(20, 20, 20)
+	waitforvisualfinish
+	createvisualtask AnimTask_LoadWindstormBackground, 5, FALSE
+	delay 16
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 10, 2304, 96, 0
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 90, 2048, 96, 0
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 50, 2560, 96, 0
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 20, 2304, 96, 0
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 70, 1984, 96, 0
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 0, 2816, 96, 0
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 60, 2560, 96, 0
+	waitforvisualfinish
+	stopsound
 	end
 
 RainbowEndureEffect:

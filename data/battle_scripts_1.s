@@ -6933,7 +6933,8 @@ BattleScript_DeltaStreamActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_MYSTERIOUSAIRCURRENT
-	waitmessage B_WAIT_TIME_LONG
+	waitstate
+	playanimation BS_ATTACKER, B_ANIM_STRONG_WINDS, NULL
 	end3
 
 BattleScript_AttackWeakenedByStrongWinds::
