@@ -363,3 +363,5 @@ const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/h
 const u32 gObjectEventPic_Fren[] = INCBIN_U32("graphics/object_events/pics/pokemon/fren.4bpp");
 const u16 gObjectEventPal_Fren[] = INCBIN_U16("graphics/object_events/pics/pokemon/fren.gbapal");
 const u16 gObjectEventPal_FrenReflection[] = INCBIN_U16("graphics/object_events/pics/pokemon/fren_reflection.gbapal");
+const u32 gObjectEventPic_Chode[] = INCBIN_U32("graphics/object_events/pics/people/chode.4bpp");
+const u16 gObjectEventPal_Chode[] = INCBIN_U16("graphics/object_events/pics/people/chode.gbapal");

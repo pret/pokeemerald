@@ -465,6 +465,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_FREN                        0x1124
 #define OBJ_EVENT_PAL_FREN_REFLECTION             0x1125
+#define OBJ_EVENT_PAL_CHODE                       0x1126
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -513,6 +514,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     {gObjectEventPal_Fren,                  OBJ_EVENT_PAL_FREN},
     {gObjectEventPal_FrenReflection,        OBJ_EVENT_PAL_FREN_REFLECTION},
+    {gObjectEventPal_Chode,                 OBJ_EVENT_PAL_CHODE},
     {NULL,                                  0x0000},
 };
 
