@@ -4055,6 +4055,7 @@ static void HandleTurnActionSelectionState(void)
                     gBattleCommunication[gActiveBattler]++;
                     break;
                 case B_ACTION_THROW_BALL:
+                    gBattleStruct->throwingPokeBall = TRUE;
                     gBattleCommunication[gActiveBattler]++;
                     break;
                 case B_ACTION_SAFARI_POKEBLOCK:
@@ -4170,6 +4171,13 @@ static void HandleTurnActionSelectionState(void)
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
         sub_818603C(1);
+        
+        if (WILD_DOUBLE_BATTLE && gBattleStruct->throwingPokeBall) {
+            // if we choose to throw a ball with our second mon, skip the action of the first
+            // (if we have chosen throw ball with first, second's is already skipped)
+            gChosenActionByBattler[B_POSITION_PLAYER_LEFT] = B_ACTION_NOTHING_FAINTED;
+        }
+        
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
