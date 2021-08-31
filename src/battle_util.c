@@ -2106,7 +2106,7 @@ u8 DoFieldEndTurnEffects(void)
             }
             break;
         case ENDTURN_RAIN:
-            if (gBattleWeather & WEATHER_RAIN_ANY || gBattleWeather & WEATHER_RAIN_PRIMAL)
+            if (gBattleWeather & WEATHER_RAIN_ANY)
             {
                 if (!(gBattleWeather & WEATHER_RAIN_PERMANENT)
                  && !(gBattleWeather & WEATHER_RAIN_PRIMAL))
@@ -2157,7 +2157,7 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_SUN:
-            if (gBattleWeather & WEATHER_SUN_ANY || gBattleWeather & WEATHER_SUN_PRIMAL)
+            if (gBattleWeather & WEATHER_SUN_ANY)
             {
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT)
                  && !(gBattleWeather & WEATHER_SUN_PRIMAL)
