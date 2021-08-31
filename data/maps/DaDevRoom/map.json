@@ -21,8 +21,8 @@
       "x": 9,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_DA_DEV_ROOM",
-      "dest_warp_id": 0
+      "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+      "dest_warp_id": 1
     }
   ],
   "coord_events": [
