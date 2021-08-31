@@ -14,7 +14,7 @@
 // free saveblock 1 defines
 #define FREE_EXTRA_SEEN_FLAGS           //free up extra pokedex seen flags. Frees up 104 bytes
 #define FREE_FIELD_3598                 //frees up unused saveblock data. 384 bytes
-#define FREE_TRAINER_HILL               //frees up trainer hill data. 28 bytes 
+//#define FREE_TRAINER_HILL               //frees up trainer hill data. 28 bytes.       WARNING THIS HAS BEEN SHOWN TO BREAK MULTI BATTLES
 #define FREE_MYSTERY_EVENT_BUFFERS      //frees up mystery event and ramScript. roughly 1880 bytes
 #define FREE_MATCH_CALL                 //frees up match call data. 104 bytes
 #define FREE_UNION_ROOM_CHAT            //frees up field unk3C88. 210 bytes
