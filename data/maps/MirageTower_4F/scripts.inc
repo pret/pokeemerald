@@ -1,10 +1,10 @@
 .set LOCALID_ROOT_FOSSIL, 1
 .set LOCALID_CLAW_FOSSIL, 2
 
-MirageTower_4F_MapScripts:: @ 823AD47
+MirageTower_4F_MapScripts::
 	.byte 0
 
-MirageTower_4F_EventScript_RootFossil:: @ 823AD48
+MirageTower_4F_EventScript_RootFossil::
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_TakeRootFossil, MSGBOX_YESNO
@@ -20,12 +20,12 @@ MirageTower_4F_EventScript_RootFossil:: @ 823AD48
 	goto MirageTower_4F_EventScript_CollapseMirageTower
 	end
 
-MirageTower_4F_EventScript_LeaveRootFossil:: @ 823AD7F
+MirageTower_4F_EventScript_LeaveRootFossil::
 	msgbox MirageTower_4F_Text_LeftRootFossilAlone, MSGBOX_DEFAULT
 	release
 	end
 
-MirageTower_4F_EventScript_ClawFossil:: @ 823AD89
+MirageTower_4F_EventScript_ClawFossil::
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_TakeClawFossil, MSGBOX_YESNO
@@ -41,12 +41,12 @@ MirageTower_4F_EventScript_ClawFossil:: @ 823AD89
 	goto MirageTower_4F_EventScript_CollapseMirageTower
 	end
 
-MirageTower_4F_EventScript_LeaveClawFossil:: @ 823ADC0
+MirageTower_4F_EventScript_LeaveClawFossil::
 	msgbox MirageTower_4F_Text_LeaveClawFossilAlone, MSGBOX_DEFAULT
 	release
 	end
 
-MirageTower_4F_EventScript_CollapseMirageTower:: @ 823ADCA
+MirageTower_4F_EventScript_CollapseMirageTower::
 	setvar VAR_0x8004, 1   @ vertical pan
 	setvar VAR_0x8005, 1   @ horizontal pan
 	setvar VAR_0x8006, 32  @ num shakes
@@ -62,21 +62,21 @@ MirageTower_4F_EventScript_CollapseMirageTower:: @ 823ADCA
 	release
 	end
 
-MirageTower_4F_Text_TakeRootFossil: @ 823ADF9
+MirageTower_4F_Text_TakeRootFossil:
 	.string "You found the ROOT FOSSIL.\p"
 	.string "If this FOSSIL is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
 	.string "Take the ROOT FOSSIL anyway?$"
 
-MirageTower_4F_Text_LeftRootFossilAlone: @ 823AE79
+MirageTower_4F_Text_LeftRootFossilAlone:
 	.string "{PLAYER} left the ROOT FOSSIL alone.$"
 
-MirageTower_4F_Text_TakeClawFossil: @ 823AE98
+MirageTower_4F_Text_TakeClawFossil:
 	.string "You found the CLAW FOSSIL.\p"
 	.string "If this FOSSIL is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
 	.string "Take the CLAW FOSSIL anyway?$"
 
-MirageTower_4F_Text_LeaveClawFossilAlone: @ 823AF18
+MirageTower_4F_Text_LeaveClawFossilAlone:
 	.string "{PLAYER} left the CLAW FOSSIL alone.$"
 

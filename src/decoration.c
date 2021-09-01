@@ -147,7 +147,7 @@ static void ReturnToActionsMenuFromCategories(u8 taskId);
 static void ExitTraderDecorationMenu(u8 taskId);
 static void CopyDecorationMenuItemName(u8 *dest, u16 decoration);
 static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct ListMenu *menu);
-static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, s32 itemIndex, u8 y);
+static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex, u8 y);
 static void ShowDecorationItemsWindow(u8 taskId);
 static void HandleDecorationItemsMenuInput(u8 taskId);
 static void PrintDecorationItemDescription(s32 itemIndex);
@@ -862,12 +862,12 @@ static void InitDecorationItemsMenuLimits(void)
 
 static void InitDecorationItemsMenuScrollAndCursor(void)
 {
-    sub_812225C(&sDecorationsScrollOffset, &sDecorationsCursorPos, sDecorationItemsMenu->maxShownItems, sDecorationItemsMenu->numMenuItems);
+    SetCursorWithinListBounds(&sDecorationsScrollOffset, &sDecorationsCursorPos, sDecorationItemsMenu->maxShownItems, sDecorationItemsMenu->numMenuItems);
 }
 
 static void InitDecorationItemsMenuScrollAndCursor2(void)
 {
-    sub_8122298(&sDecorationsScrollOffset, &sDecorationsCursorPos, sDecorationItemsMenu->maxShownItems, sDecorationItemsMenu->numMenuItems, 8);
+    SetCursorScrollWithinListBounds(&sDecorationsScrollOffset, &sDecorationsCursorPos, sDecorationItemsMenu->maxShownItems, sDecorationItemsMenu->numMenuItems, 8);
 }
 
 static void PrintDecorationItemMenuItems(u8 taskId)
@@ -912,9 +912,9 @@ static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct L
     PrintDecorationItemDescription(itemIndex);
 }
 
-static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, s32 itemIndex, u8 y)
+static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex, u8 y)
 {
-    if (itemIndex != -2)
+    if (itemIndex != LIST_CANCEL)
     {
         if (IsDecorationIndexInSecretBase(itemIndex + 1) == TRUE)
             BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_RED, 92, y + 2);
@@ -1382,8 +1382,8 @@ static void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGrap
     gFieldCamera.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
     gSprites[gFieldCamera.spriteId].oam.priority = 1;
     gSprites[gFieldCamera.spriteId].callback = InitializePuttingAwayCursorSprite;
-    gSprites[gFieldCamera.spriteId].pos1.x = sDecorationMovementInfo[data->decoration->shape].cameraX;
-    gSprites[gFieldCamera.spriteId].pos1.y = sDecorationMovementInfo[data->decoration->shape].cameraY;
+    gSprites[gFieldCamera.spriteId].x = sDecorationMovementInfo[data->decoration->shape].cameraX;
+    gSprites[gFieldCamera.spriteId].y = sDecorationMovementInfo[data->decoration->shape].cameraY;
 }
 
 static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data)
@@ -1650,7 +1650,7 @@ static void PlaceDecoration(u8 taskId)
         ScriptContext1_SetupScript(SecretBase_EventScript_SetDecoration);
     }
 
-    gSprites[sDecor_CameraSpriteObjectIdx1].pos1.y += 2;
+    gSprites[sDecor_CameraSpriteObjectIdx1].y += 2;
     if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
         TryPutSecretBaseVisitOnAir();
 
@@ -2121,8 +2121,8 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
         if (spriteId == MAX_SPRITES)
             return MAX_SPRITES;
 
-        gSprites[spriteId].pos2.x = x + 4;
-        gSprites[spriteId].pos2.y = y + 4;
+        gSprites[spriteId].x2 = x + 4;
+        gSprites[spriteId].y2 = y + 4;
     }
     else if (gDecorIconTable[decor][0] == NULL)
     {
@@ -2130,11 +2130,11 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
         if (spriteId == MAX_SPRITES)
             return MAX_SPRITES;
 
-        gSprites[spriteId].pos2.x = x;
+        gSprites[spriteId].x2 = x;
         if (decor == DECOR_SILVER_SHIELD || decor == DECOR_GOLD_SHIELD)
-            gSprites[spriteId].pos2.y = y - 4;
+            gSprites[spriteId].y2 = y - 4;
         else
-            gSprites[spriteId].pos2.y = y;
+            gSprites[spriteId].y2 = y;
     }
     else
     {
@@ -2142,8 +2142,8 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
         if (spriteId == MAX_SPRITES)
             return MAX_SPRITES;
 
-        gSprites[spriteId].pos2.x = x + 4;
-        gSprites[spriteId].pos2.y = y + 4;
+        gSprites[spriteId].x2 = x + 4;
+        gSprites[spriteId].y2 = y + 4;
     }
 
     gSprites[spriteId].oam.priority = priority;
@@ -2332,8 +2332,8 @@ static void ContinuePuttingAwayDecorations(u8 taskId)
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = InitializeCameraSprite1;
-    gSprites[sDecor_CameraSpriteObjectIdx2].pos1.x = 136;
-    gSprites[sDecor_CameraSpriteObjectIdx2].pos1.y = 72;
+    gSprites[sDecor_CameraSpriteObjectIdx2].x = 136;
+    gSprites[sDecor_CameraSpriteObjectIdx2].y = 72;
     gTasks[taskId].tButton = 0;
     gTasks[taskId].func = Task_SelectLocation;
 }
@@ -2449,8 +2449,8 @@ static void SetCameraSpritePosition(u8 x, u8 y)
 {
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = TRUE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = SpriteCallbackDummy;
-    gSprites[sDecor_CameraSpriteObjectIdx2].pos1.x = x * 16 + 136;
-    gSprites[sDecor_CameraSpriteObjectIdx2].pos1.y = y * 16 + 72;
+    gSprites[sDecor_CameraSpriteObjectIdx2].x = x * 16 + 136;
+    gSprites[sDecor_CameraSpriteObjectIdx2].y = y * 16 + 72;
 }
 
 static bool8 DecorationIsUnderCursor(u8 taskId, u8 idx, struct DecorRearrangementDataBuffer *data)

@@ -7,7 +7,7 @@
 
 .set __special__, 0
 		.align 2
-gSpecials:: @ 81DBA64
+gSpecials::
 	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
