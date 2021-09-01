@@ -100,7 +100,6 @@ struct DisableStruct
     u8 truantCounter:1;
     u8 truantSwitchInHack:1;
     u8 mimickedMoves:4;
-    u8 touchedProtectLike: 1;
     u8 rechargeTimer;
     u8 autotomizeCount;
     u8 slowStartTimer;
@@ -145,6 +144,7 @@ struct ProtectStruct
     u32 usedThroatChopPreventedMove:1;
     u32 micle:1;
     u32 custap:1;    // also quick claw
+    u32 touchedProtectLike:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
