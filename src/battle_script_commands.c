@@ -3783,6 +3783,9 @@ static void Cmd_getexp(void)
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
+            #if B_MAX_LEVEL_EV_GAINS >= GEN_5
+                MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+            #endif
             }
             else
             {
@@ -3958,6 +3961,12 @@ static void Cmd_getexp(void)
     case 6: // increment instruction
         if (gBattleControllerExecFlags == 0)
         {
+        #if B_RECALCULATE_STATS >= GEN_5
+            // Recalculate the stats of every party member before the end
+            for (i = 0; i < PARTY_SIZE; i++)
+                CalculateMonStats(&gPlayerParty[i]);
+        #endif
+
             // not sure why gf clears the item and ability here
             gBattleMons[gBattlerFainted].item = 0;
             gBattleMons[gBattlerFainted].ability = 0;
