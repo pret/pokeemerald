@@ -3965,9 +3965,8 @@ static void Cmd_getexp(void)
             // Recalculate the stats of every party member before the end
             for (i = 0; i < PARTY_SIZE; i++)
             {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0
-                 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-                 && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
+                 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
                 {
                     CalculateMonStats(&gPlayerParty[i]);
                 }
