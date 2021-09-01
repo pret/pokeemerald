@@ -1,4 +1,4 @@
-EventScript_TV:: @ 827EE0B
+EventScript_TV::
 	lockall
 	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
@@ -15,7 +15,7 @@ EventScript_TV:: @ 827EE0B
 	goto EventScript_TryDoPokeNews
 	end
 
-EventScript_TryDoTVShow:: @ 827EE54
+EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
 	compare VAR_0x8004, 255
 	goto_if_eq EventScript_MomDadMightLikeThis2
@@ -28,14 +28,14 @@ EventScript_TryDoTVShow:: @ 827EE54
 	goto_if_ne EventScript_DoTVShow
 	end
 
-EventScript_MomDadMightLikeThis1:: @ 827EE8A
+EventScript_MomDadMightLikeThis1::
 	special GetMomOrDadStringForTVMessage
 	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
 
-EventScript_PlayersHouseMovie:: @ 827EE9A
+EventScript_PlayersHouseMovie::
 	msgbox PlayersHouse_1F_Text_TheresAMovieOnTV, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -43,7 +43,7 @@ EventScript_PlayersHouseMovie:: @ 827EE9A
 @ special InitRoamer is a junk call. Its input var (VAR_0x8004) hasn't been set, and
 @ It's called again when Mom actually asks for the color, overwriting
 @ whatever it does here.
-EventScript_PlayersHouseLatiNewsFlash:: @ 827EEA4
+EventScript_PlayersHouseLatiNewsFlash::
 	msgbox PlayersHouse_1F_Text_LatiEmergencyNewsFlash, MSGBOX_DEFAULT
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS
@@ -52,7 +52,7 @@ EventScript_PlayersHouseLatiNewsFlash:: @ 827EEA4
 	releaseall
 	end
 
-EventScript_DoTVShow:: @ 827EEBA
+EventScript_DoTVShow::
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
@@ -61,19 +61,19 @@ EventScript_DoTVShow:: @ 827EEBA
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_TurnOffTV:: @ 827EED0
+EventScript_TurnOffTV::
 	special TurnOffTVScreen
 	setflag FLAG_SYS_TV_WATCH
 	releaseall
 	end
 
-EventScript_MomDadMightLikeThis2:: @ 827EED8
+EventScript_MomDadMightLikeThis2::
 	special GetMomOrDadStringForTVMessage
 	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_TryDoPokeNews:: @ 827EEE9
+EventScript_TryDoPokeNews::
 	special DoPokeNews
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_TryDoTVShow
@@ -82,7 +82,7 @@ EventScript_TryDoPokeNews:: @ 827EEE9
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_DoInSearchOfTrainers:: @ 827EEFF
+EventScript_DoInSearchOfTrainers::
 	special DoTVShowInSearchOfTrainers
 	waitmessage
 	waitbuttonpress

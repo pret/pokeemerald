@@ -2831,10 +2831,10 @@ static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width,
 
 static void MovePartyMenuBoxSprites(struct PartyMenuBox *menuBox, s16 offset)
 {
-    gSprites[menuBox->pokeballSpriteId].pos2.x += offset * 8;
-    gSprites[menuBox->itemSpriteId].pos2.x += offset * 8;
-    gSprites[menuBox->monSpriteId].pos2.x += offset * 8;
-    gSprites[menuBox->statusSpriteId].pos2.x += offset * 8;
+    gSprites[menuBox->pokeballSpriteId].x2 += offset * 8;
+    gSprites[menuBox->itemSpriteId].x2 += offset * 8;
+    gSprites[menuBox->monSpriteId].x2 += offset * 8;
+    gSprites[menuBox->statusSpriteId].x2 += offset * 8;
 }
 
 static void SlidePartyMenuBoxSpritesOneStep(u8 taskId)
@@ -2924,18 +2924,18 @@ static void SwitchMenuBoxSprites(u8 *spriteIdPtr1, u8 *spriteIdPtr2)
 
     *spriteIdPtr1 = *spriteIdPtr2;
     *spriteIdPtr2 = spriteIdBuffer;
-    xBuffer1 = gSprites[*spriteIdPtr1].pos1.x;
-    yBuffer1 = gSprites[*spriteIdPtr1].pos1.y;
-    xBuffer2 = gSprites[*spriteIdPtr1].pos2.x;
-    yBuffer2 = gSprites[*spriteIdPtr1].pos2.y;
-    gSprites[*spriteIdPtr1].pos1.x = gSprites[*spriteIdPtr2].pos1.x;
-    gSprites[*spriteIdPtr1].pos1.y = gSprites[*spriteIdPtr2].pos1.y;
-    gSprites[*spriteIdPtr1].pos2.x = gSprites[*spriteIdPtr2].pos2.x;
-    gSprites[*spriteIdPtr1].pos2.y = gSprites[*spriteIdPtr2].pos2.y;
-    gSprites[*spriteIdPtr2].pos1.x = xBuffer1;
-    gSprites[*spriteIdPtr2].pos1.y = yBuffer1;
-    gSprites[*spriteIdPtr2].pos2.x = xBuffer2;
-    gSprites[*spriteIdPtr2].pos2.y = yBuffer2;
+    xBuffer1 = gSprites[*spriteIdPtr1].x;
+    yBuffer1 = gSprites[*spriteIdPtr1].y;
+    xBuffer2 = gSprites[*spriteIdPtr1].x2;
+    yBuffer2 = gSprites[*spriteIdPtr1].y2;
+    gSprites[*spriteIdPtr1].x = gSprites[*spriteIdPtr2].x;
+    gSprites[*spriteIdPtr1].y = gSprites[*spriteIdPtr2].y;
+    gSprites[*spriteIdPtr1].x2 = gSprites[*spriteIdPtr2].x2;
+    gSprites[*spriteIdPtr1].y2 = gSprites[*spriteIdPtr2].y2;
+    gSprites[*spriteIdPtr2].x = xBuffer1;
+    gSprites[*spriteIdPtr2].y = yBuffer1;
+    gSprites[*spriteIdPtr2].x2 = xBuffer2;
+    gSprites[*spriteIdPtr2].y2 = yBuffer2;
 }
 
 static void SwitchPartyMon(void)
@@ -3905,22 +3905,22 @@ static void AnimateSelectedPartyIcon(u8 spriteId, u8 animNum)
     gSprites[spriteId].data[0] = 0;
     if (animNum == 0)
     {
-        if (gSprites[spriteId].pos1.x == 16)
+        if (gSprites[spriteId].x == 16)
         {
-            gSprites[spriteId].pos2.x = 0;
-            gSprites[spriteId].pos2.y = -4;
+            gSprites[spriteId].x2 = 0;
+            gSprites[spriteId].y2 = -4;
         }
         else
         {
-            gSprites[spriteId].pos2.x = -4;
-            gSprites[spriteId].pos2.y = 0;
+            gSprites[spriteId].x2 = -4;
+            gSprites[spriteId].y2 = 0;
         }
         gSprites[spriteId].callback = SpriteCB_UpdatePartyMonIcon;
     }
     else
     {
-        gSprites[spriteId].pos2.x = 0;
-        gSprites[spriteId].pos2.y = 0;
+        gSprites[spriteId].x2 = 0;
+        gSprites[spriteId].y2 = 0;
         gSprites[spriteId].callback = SpriteCB_BouncePartyMonIcon;
     }
 }
@@ -3932,9 +3932,9 @@ static void SpriteCB_BouncePartyMonIcon(struct Sprite *sprite)
     if (animCmd != 0)
     {
         if (animCmd & 1) // % 2 also matches
-            sprite->pos2.y = -3;
+            sprite->y2 = -3;
         else
-            sprite->pos2.y = 1;
+            sprite->y2 = 1;
     }
 }
 
@@ -4020,8 +4020,8 @@ static void CreateHeldItemSpriteForTrade(u8 spriteId, bool8 isMail)
     u8 subpriority = gSprites[spriteId].subpriority;
     u8 newSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, 250, 170, subpriority - 1);
 
-    gSprites[newSpriteId].pos2.x = 4;
-    gSprites[newSpriteId].pos2.y = 10;
+    gSprites[newSpriteId].x2 = 4;
+    gSprites[newSpriteId].y2 = 10;
     gSprites[newSpriteId].callback = SpriteCB_HeldItem;
     gSprites[newSpriteId].data[7] = spriteId;
     StartSpriteAnim(&gSprites[newSpriteId], isMail);
@@ -4039,8 +4039,8 @@ static void SpriteCB_HeldItem(struct Sprite *sprite)
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos1.x = gSprites[otherSpriteId].pos1.x + gSprites[otherSpriteId].pos2.x;
-        sprite->pos1.y = gSprites[otherSpriteId].pos1.y + gSprites[otherSpriteId].pos2.y;
+        sprite->x = gSprites[otherSpriteId].x + gSprites[otherSpriteId].x2;
+        sprite->y = gSprites[otherSpriteId].y + gSprites[otherSpriteId].y2;
     }
 }
 
@@ -4087,15 +4087,15 @@ static void SpriteCB_BounceConfirmCancelButton(u8 spriteId, u8 spriteId2, u8 ani
     {
         StartSpriteAnim(&gSprites[spriteId], 2);
         StartSpriteAnim(&gSprites[spriteId2], 4);
-        gSprites[spriteId].pos2.y = 0;
-        gSprites[spriteId2].pos2.y = 0;
+        gSprites[spriteId].y2 = 0;
+        gSprites[spriteId2].y2 = 0;
     }
     else
     {
         StartSpriteAnim(&gSprites[spriteId], 3);
         StartSpriteAnim(&gSprites[spriteId2], 5);
-        gSprites[spriteId].pos2.y = -4;
-        gSprites[spriteId2].pos2.y = 4;
+        gSprites[spriteId].y2 = -4;
+        gSprites[spriteId2].y2 = 4;
     }
 }
 
@@ -4203,7 +4203,7 @@ static void CB2_ReturnToBagMenu(void)
     if (InBattlePyramid() == FALSE)
         GoToBagMenu(ITEMMENULOCATION_LAST, POCKETS_COUNT, NULL);
     else
-        GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PREV, gPyramidBagMenuState.callback);
+        GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PREV, gPyramidBagMenuState.exitCallback);
 }
 
 static void Task_SetSacredAshCB(u8 taskId)
@@ -5475,7 +5475,7 @@ static void TryGiveMailToSelectedMon(u8 taskId)
     struct MailStruct *mail;
 
     gPartyMenuUseExitCallback = FALSE;
-    mail = &gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos];
+    mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
     if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
     {
         DisplayPartyMenuMessage(gText_PkmnHoldingItemCantHoldMail, TRUE);
@@ -6099,7 +6099,7 @@ static void Task_WaitAfterMultiPartnerPartySlideIn(u8 taskId)
 static void MoveMultiPartyMenuBoxSprite(u8 spriteId, s16 x)
 {
     if (x >= 0)
-        gSprites[spriteId].pos2.x = x;
+        gSprites[spriteId].x2 = x;
 }
 
 static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)

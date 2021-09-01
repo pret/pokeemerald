@@ -1,9 +1,9 @@
-TrainerHill_Roof_MapScripts:: @ 8268FA7
+TrainerHill_Roof_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, TrainerHill_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerHill_OnFrame
 	.byte 0
 
-TrainerHill_Roof_EventScript_Owner:: @ 8268FB2
+TrainerHill_Roof_EventScript_Owner::
 	trainerhill_settrainerflags
 	lock
 	faceplayer
@@ -12,15 +12,15 @@ TrainerHill_Roof_EventScript_Owner:: @ 8268FB2
 	case 0, TrainerHill_Roof_EventScript_Arrived
 	case 1, TrainerHill_Roof_EventScript_GivePrize
 	case 2, TrainerHill_Roof_EventScript_AlreadyReceivedPrize
-TrainerHill_Roof_EventScript_Arrived:: @ 8268FEA
+TrainerHill_Roof_EventScript_Arrived::
 	msgbox TrainerHill_Roof_Text_YouFinallyCameBravo, MSGBOX_DEFAULT
-TrainerHill_Roof_EventScript_GivePrize:: @ 8268FF2
+TrainerHill_Roof_EventScript_GivePrize::
 	trainerhill_giveprize
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_ReceivePrize
 	case 1, TrainerHill_Roof_EventScript_NoRoomForPrize
 	case 2, TrainerHill_Roof_EventScript_CheckFinalTime
-TrainerHill_Roof_EventScript_ReceivePrize:: @ 8269020
+TrainerHill_Roof_EventScript_ReceivePrize::
 	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
 	playfanfare MUS_LEVEL_UP
 	message gText_ObtainedTheItem
@@ -28,34 +28,34 @@ TrainerHill_Roof_EventScript_ReceivePrize:: @ 8269020
 	waitmessage
 	goto TrainerHill_Roof_EventScript_CheckFinalTime
 
-TrainerHill_Roof_EventScript_NoRoomForPrize:: @ 8269037
+TrainerHill_Roof_EventScript_NoRoomForPrize::
 	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
 	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	msgbox TrainerHill_Roof_Text_FullUpBeBackLaterForThis, MSGBOX_DEFAULT
 	goto TrainerHill_Roof_EventScript_CheckFinalTime
 
-TrainerHill_Roof_EventScript_CheckFinalTime:: @ 8269054
+TrainerHill_Roof_EventScript_CheckFinalTime::
 	trainerhill_finaltime
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_NewRecord
 	case 1, TrainerHill_Roof_EventScript_NoNewRecord
 	case 2, TrainerHill_Roof_EventScript_EndSpeakToOwner
-TrainerHill_Roof_EventScript_NewRecord:: @ 8269082
+TrainerHill_Roof_EventScript_NewRecord::
 	msgbox TrainerHill_Roof_Text_GotHereMarvelouslyQuickly, MSGBOX_DEFAULT
 	goto TrainerHill_Roof_EventScript_EndSpeakToOwner
 	end
 
-TrainerHill_Roof_EventScript_NoNewRecord:: @ 8269090
+TrainerHill_Roof_EventScript_NoNewRecord::
 	msgbox TrainerHill_Roof_Text_YouWerentVeryQuick, MSGBOX_DEFAULT
 	goto TrainerHill_Roof_EventScript_EndSpeakToOwner
 	end
 
-TrainerHill_Roof_EventScript_EndSpeakToOwner:: @ 826909E
+TrainerHill_Roof_EventScript_EndSpeakToOwner::
 	msgbox TrainerHill_Roof_Text_ArriveZippierNextTime, MSGBOX_DEFAULT
 	release
 	end
 
-TrainerHill_Roof_EventScript_AlreadyReceivedPrize:: @ 82690A8
+TrainerHill_Roof_EventScript_AlreadyReceivedPrize::
 	msgbox TrainerHill_Roof_Text_ArriveZippierNextTime, MSGBOX_DEFAULT
 	release
 	end

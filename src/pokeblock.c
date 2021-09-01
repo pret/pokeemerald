@@ -264,7 +264,7 @@ static const union AnimCmd *const sSpriteAnimTable_PokeblockCase[] =
     sSpriteAnim_PokeblockCase
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_85B26C8[] =
+static const union AffineAnimCmd sAffineAnim_PokeblockCaseShake[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -2,  2),
     AFFINEANIMCMD_FRAME(0, 0,  2,  4),
@@ -273,9 +273,9 @@ static const union AffineAnimCmd sSpriteAffineAnim_85B26C8[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_85B26F0[] =
+static const union AffineAnimCmd *const sAffineAnims_PokeblockCaseShake[] =
 {
-    sSpriteAffineAnim_85B26C8
+    sAffineAnim_PokeblockCaseShake
 };
 
 const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet =
@@ -955,7 +955,7 @@ static void SpriteCB_ShakePokeblockCase(struct Sprite *sprite)
     {
     case 0:
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        sprite->affineAnims = sSpriteAffineAnimTable_85B26F0;
+        sprite->affineAnims = sAffineAnims_PokeblockCaseShake;
         InitSpriteAffineAnim(sprite);
         sprite->sState = 1;
         sprite->sTimer = 0;
