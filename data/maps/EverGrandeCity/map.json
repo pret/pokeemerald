@@ -19,7 +19,9 @@
       "map": "MAP_ROUTE128"
     }
   ],
-  "object_events": [],
+  "object_events": [
+
+  ],
   "warp_events": [
     {
       "x": 18,
