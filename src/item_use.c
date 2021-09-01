@@ -966,7 +966,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         break;
     case 1:  // There are two present pokemon.
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_TwoMons, BagMenu_InitListsMenu);
+            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_TwoMons, Task_CloseBattlePyramidBagMessage);
         break;

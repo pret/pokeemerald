@@ -3218,8 +3218,8 @@ void TryAddLastUsedBallItemSprites(void)
     if (gBattleStruct->ballSpriteIds[0] == MAX_SPRITES)
     {
         gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gSaveBlock2Ptr->lastUsedBall);
-        gSprites[gBattleStruct->ballSpriteIds[0]].pos1.x = LAST_USED_BALL_X_0;
-        gSprites[gBattleStruct->ballSpriteIds[0]].pos1.y = LAST_USED_BALL_Y;
+        gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_0;
+        gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y;
         gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
         gSprites[gBattleStruct->ballSpriteIds[0]].callback = SpriteCB_LastUsedBall;
     }
@@ -3258,16 +3258,16 @@ static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
 {    
     if (sprite->sHide)
     {
-        if (sprite->pos1.x != LAST_BALL_WIN_X_0)
-            sprite->pos1.x--;
+        if (sprite->x != LAST_BALL_WIN_X_0)
+            sprite->x--;
 
-        if (sprite->pos1.x == LAST_BALL_WIN_X_0)
+        if (sprite->x == LAST_BALL_WIN_X_0)
             DestroyLastUsedBallWinGfx(sprite);
     }
     else
     {
-        if (sprite->pos1.x != LAST_BALL_WIN_X_F)
-            sprite->pos1.x++;
+        if (sprite->x != LAST_BALL_WIN_X_F)
+            sprite->x++;
     }
 }
 
@@ -3275,16 +3275,16 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
 {    
     if (sprite->sHide)
     {
-        if (sprite->pos1.x != LAST_USED_BALL_X_0)
-            sprite->pos1.x--;
+        if (sprite->x != LAST_USED_BALL_X_0)
+            sprite->x--;
 
-        if (sprite->pos1.x == LAST_USED_BALL_X_0)
+        if (sprite->x == LAST_USED_BALL_X_0)
             DestroyLastUsedBallGfx(sprite);
     }
     else
     {
-        if (sprite->pos1.x != LAST_USED_BALL_X_F)
-            sprite->pos1.x++;
+        if (sprite->x != LAST_USED_BALL_X_F)
+            sprite->x++;
     }
 }
 
