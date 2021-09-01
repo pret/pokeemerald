@@ -4872,9 +4872,8 @@ static void Cmd_moveend(void)
              && (*choicedMoveAtk == 0 || *choicedMoveAtk == 0xFFFF))
             {
                 if ((gBattleMoves[gChosenMove].effect == EFFECT_BATON_PASS
-                 || gBattleMoves[gChosenMove].effect == EFFECT_HEALING_WISH
-                 || gBattleMoves[gChosenMove].effect == EFFECT_HIT_ESCAPE)
-                    && !(gMoveResultFlags & MOVE_RESULT_FAILED))
+                 || gBattleMoves[gChosenMove].effect == EFFECT_HEALING_WISH)
+                 && !(gMoveResultFlags & MOVE_RESULT_FAILED))
                 {
                     ++gBattleScripting.moveendState;
                     break;
