@@ -3964,7 +3964,14 @@ static void Cmd_getexp(void)
         #if B_RECALCULATE_STATS >= GEN_5
             // Recalculate the stats of every party member before the end
             for (i = 0; i < PARTY_SIZE; i++)
-                CalculateMonStats(&gPlayerParty[i]);
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0
+                 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
+                 && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                {
+                    CalculateMonStats(&gPlayerParty[i]);
+                }
+            }
         #endif
 
             // not sure why gf clears the item and ability here
