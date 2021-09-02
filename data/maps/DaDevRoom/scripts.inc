@@ -49,3 +49,19 @@ Text_PlayerAnsweredNo:
 
 Text_Poop:
 	.string "NORWAY IS GONE!$"
+	
+	
+Script_DisplaySpriteDemo::
+	lock
+	faceplayer
+	msgbox Text_DisplaySpriteDemo, MSGBOX_DEFAULT
+	waitbuttonpress
+	showmonpic SPECIES_UNOWN, 10, 3
+	waitbuttonpress
+	hidemonpic
+	release
+	end
+
+Text_DisplaySpriteDemo:
+	.string "Have you seen this Pokémon?$"
+
