@@ -1,31 +1,31 @@
 .set LOCALID_ATTENDANT, 1
 
-SlateportCity_BattleTentCorridor_MapScripts:: @ 8208E26
+SlateportCity_BattleTentCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentCorridor_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentCorridor_OnWarp
 	.byte 0
 
 	@ This is Slateport Tent's version of the Battle Factory Pre-Battle Room
 
-SlateportCity_BattleTentCorridor_OnWarp: @ 8208E31
+SlateportCity_BattleTentCorridor_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentCorridor_EventScript_SetUpObjects
 	.2byte 0
 
-SlateportCity_BattleTentCorridor_EventScript_SetUpObjects:: @ 8208E3B
+SlateportCity_BattleTentCorridor_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
 	compare VAR_0x8006, 1
 	goto_if_ne SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth
 	setobjectxy LOCALID_ATTENDANT, 2, 2
 	turnobject LOCALID_ATTENDANT, DIR_SOUTH
-SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth:: @ 8208E56
+SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-SlateportCity_BattleTentCorridor_OnFrame: @ 8208E5B
+SlateportCity_BattleTentCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, SlateportCity_BattleTentCorridor_EventScript_EnterCorridor
 	.2byte 0
 
-SlateportCity_BattleTentCorridor_EventScript_EnterCorridor:: @ 8208E65
+SlateportCity_BattleTentCorridor_EventScript_EnterCorridor::
 	compare VAR_0x8006, 1
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle
 	setvar VAR_TEMP_0, 1
@@ -40,7 +40,7 @@ SlateportCity_BattleTentCorridor_EventScript_EnterCorridor:: @ 8208E65
 	fadescreen FADE_TO_BLACK
 	slateporttent_rentmons
 	waitstate
-SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom:: @ 8208EB4
+SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom::
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestUp
@@ -56,42 +56,42 @@ SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom:: @ 8208EB4
 	waitstate
 	end
 
-SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle:: @ 8208EEE
+SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle::
 	factory_setopponentmons
 	factory_resethelditems
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons, MSGBOX_DEFAULT
 	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
-SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent:: @ 8208F0D
+SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 1
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_ReadyFor2ndOpponent
 	compare VAR_RESULT, 2
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent
-	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_AskSwapMon
 	case 1, SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge
 	case 2, SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge
 
-SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge:: @ 8208F5B
+SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge::
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent
 	case YES, SlateportCity_BattleTentCorridor_EventScript_PauseChallenge
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent
 
-SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge:: @ 8208F89
+SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge::
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent
 	case 0, SlateportCity_BattleTent_EventScript_WarpToLobbyLost
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent
 
-SlateportCity_BattleTentCorridor_EventScript_AskSwapMon:: @ 8208FBB
+SlateportCity_BattleTentCorridor_EventScript_AskSwapMon::
 	slateporttent_generateopponentmons
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon, MSGBOX_YESNO
 	switch VAR_RESULT
@@ -99,7 +99,7 @@ SlateportCity_BattleTentCorridor_EventScript_AskSwapMon:: @ 8208FBB
 	case YES, SlateportCity_BattleTentCorridor_EventScript_SwapMons
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom
 
-SlateportCity_BattleTentCorridor_EventScript_SwapMons:: @ 8208FF1
+SlateportCity_BattleTentCorridor_EventScript_SwapMons::
 	fadescreen FADE_TO_BLACK
 	slateporttent_swapmons
 	waitstate
@@ -108,17 +108,17 @@ SlateportCity_BattleTentCorridor_EventScript_SwapMons:: @ 8208FF1
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete, MSGBOX_DEFAULT
 	goto SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom
 
-SlateportCity_BattleTentCorridor_EventScript_ReadyFor2ndOpponent:: @ 8209014
+SlateportCity_BattleTentCorridor_EventScript_ReadyFor2ndOpponent::
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent
 	waitmessage
 	return
 
-SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent:: @ 820901B
+SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent::
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor3rdOpponent
 	waitmessage
 	return
 
-SlateportCity_BattleTentCorridor_EventScript_PauseChallenge:: @ 8209022
+SlateportCity_BattleTentCorridor_EventScript_PauseChallenge::
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait
 	waitmessage
 	slateporttent_save CHALLENGE_STATUS_PAUSED
@@ -128,25 +128,25 @@ SlateportCity_BattleTentCorridor_EventScript_PauseChallenge:: @ 8209022
 	frontier_reset
 	end
 
-SlateportCity_BattleTentCorridor_EventScript_ResumeChallenge:: @ 8209044
+SlateportCity_BattleTentCorridor_EventScript_ResumeChallenge::
 	special SavePlayerParty
 	factory_setparties 0
 	goto SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent
 
-SlateportCity_BattleTentCorridor_Movement_PlayerEnter: @ 8209059
+SlateportCity_BattleTentCorridor_Movement_PlayerEnter:
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-SlateportCity_BattleTentCorridor_Movement_PlayerExit: @ 820905E
+SlateportCity_BattleTentCorridor_Movement_PlayerExit:
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-SlateportCity_BattleTentCorridor_Movement_AttendantEnter: @ 8209062
+SlateportCity_BattleTentCorridor_Movement_AttendantEnter:
 	walk_up
 	walk_up
 	walk_up
@@ -154,14 +154,14 @@ SlateportCity_BattleTentCorridor_Movement_AttendantEnter: @ 8209062
 	walk_in_place_fastest_down
 	step_end
 
-SlateportCity_BattleTentCorridor_Movement_AttendantExit: @ 8209068
+SlateportCity_BattleTentCorridor_Movement_AttendantExit:
 	walk_up
 	set_invisible
 	step_end
 
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
-SlateportCity_ContestHall_Text_AdviceForContests: @ 820906B
+SlateportCity_ContestHall_Text_AdviceForContests:
 	.string "Want a tasty little bit of advice\n"
 	.string "for CONTESTS?\p"
 	.string "Using a certain move after another\n"
@@ -173,13 +173,13 @@ SlateportCity_ContestHall_Text_AdviceForContests: @ 820906B
 	.string "disrupting your POKéMON's showing.$"
 
 @ Unused
-SlateportCity_ContestHall_Text_MyPapaIsContestJudge: @ 820917A
+SlateportCity_ContestHall_Text_MyPapaIsContestJudge:
 	.string "My papa, he's a CONTEST JUDGE.\p"
 	.string "I wonder what I should be when I\n"
 	.string "grow up, a JUDGE or a GYM LEADER?$"
 
 @ Unused
-SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed: @ 82091DC
+SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed:
 	.string "Hey, man, I'm like majorly cheesed,\n"
 	.string "you know. Like, you know, I just\l"
 	.string "wanted to know why my POKéMON\l"
@@ -192,7 +192,7 @@ SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed: @ 82091DC
 	.string "Just, you know, take this!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_ExplainTorment: @ 8209322
+SlateportCity_ContestHall_Text_ExplainTorment:
 	.string "That's, like, TM41, you know?\n"
 	.string "Hey, it's TORMENT, you hearing me?\p"
 	.string "Like, it won't let the other guy\n"
@@ -201,7 +201,7 @@ SlateportCity_ContestHall_Text_ExplainTorment: @ 8209322
 	.string "I'm not laying a torment on you!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_MCStepUpTakePartInContest: @ 82093ED
+SlateportCity_ContestHall_Text_MCStepUpTakePartInContest:
 	.string "MC: Oh, my, my!\n"
 	.string "Now isn't that a dandy of a POKéMON?\p"
 	.string "Please! Do step right up and take\n"
@@ -210,7 +210,7 @@ SlateportCity_ContestHall_Text_MCStepUpTakePartInContest: @ 82093ED
 	.string "My eyes have never failed me!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_JudgeWouldntDoToMissContest: @ 82094A1
+SlateportCity_ContestHall_Text_JudgeWouldntDoToMissContest:
 	.string "JUDGE: Well, hello there!\n"
 	.string "I see that you're a TRAINER!\p"
 	.string "Then, it just wouldn't do for you\n"
@@ -219,19 +219,19 @@ SlateportCity_ContestHall_Text_JudgeWouldntDoToMissContest: @ 82094A1
 	.string "CITY and enter anytime!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_ItsAppealTime: @ 820954E
+SlateportCity_ContestHall_Text_ItsAppealTime:
 	.string "It's appeal time!\n"
 	.string "What should I lead with?$"
 
 @ Unused
-SlateportCity_ContestHall_Text_DidntPayAttentionToAppeal: @ 8209579
+SlateportCity_ContestHall_Text_DidntPayAttentionToAppeal:
 	.string "They didn't pay much attention to\n"
 	.string "my POKéMON's appeal…\p"
 	.string "Humph, that JUDGE, he doesn't know\n"
 	.string "a good thing when he sees it.$"
 
 @ Unused
-SlateportCity_ContestHall_Text_RewardWithSageAdvice: @ 82095F1
+SlateportCity_ContestHall_Text_RewardWithSageAdvice:
 	.string "Oh, hi! You must be a serious fan to get\n"
 	.string "this close to the action.\p"
 	.string "I'll reward your enthusiasm with\n"
@@ -244,20 +244,20 @@ SlateportCity_ContestHall_Text_RewardWithSageAdvice: @ 82095F1
 	.string "to happen!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_MoreFreakedOutThanMon: @ 8209718
+SlateportCity_ContestHall_Text_MoreFreakedOutThanMon:
 	.string "I can't do this! I'm more freaked out\n"
 	.string "than my POKéMON.\p"
 	.string "I'm shivering and my heart is racing!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_BattleAndContestAlike: @ 8209775
+SlateportCity_ContestHall_Text_BattleAndContestAlike:
 	.string "A battle and a CONTEST aren't the\n"
 	.string "same, but they are alike, too.\p"
 	.string "You need to work hard and believe\n"
 	.string "in the POKéMON you've raised.$"
 
 @ Unused
-SlateportCity_ContestHall_Text_MonLooksOnTopOfGame: @ 82097F6
+SlateportCity_ContestHall_Text_MonLooksOnTopOfGame:
 	.string "That POKéMON looks like it's on top\n"
 	.string "of its game, huh?\p"
 	.string "A POKéMON that does good in the\n"
@@ -265,19 +265,19 @@ SlateportCity_ContestHall_Text_MonLooksOnTopOfGame: @ 82097F6
 	.string "relaxed when it's doing appeals.$"
 
 @ Unused
-SlateportCity_ContestHall_Text_MyMonBetterThanThatLot: @ 8209890
+SlateportCity_ContestHall_Text_MyMonBetterThanThatLot:
 	.string "Will you look at that sorry sight?\p"
 	.string "Heh, my POKéMON's absolutely better\n"
 	.string "than that lot!$"
 
 @ Unused
-SlateportCity_ContestHall_Text_GetUrgeToMoveWithMon: @ 82098E6
+SlateportCity_ContestHall_Text_GetUrgeToMoveWithMon:
 	.string "Don't you get the urge to move with\n"
 	.string "POKéMON if they're putting on an\l"
 	.string "energetic appeal?$"
 
 @ Unused
-SlateportCity_ContestHall_Text_HyperRankStage: @ 820993D
+SlateportCity_ContestHall_Text_HyperRankStage:
 	.string "POKéMON CONTESTS\n"
 	.string "HYPER RANK STAGE!$"
 

@@ -47,10 +47,10 @@ static void sub_81D4D50(struct Unk03006370 *arg0, int arg1, u32 *arg2)
 {
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;
-    gIntrTable[1] = sub_81D3FAC;
-    gIntrTable[2] = sub_81D3F9C;
+    gIntrTable[1] = EReaderHelper_SerialCallback;
+    gIntrTable[2] = EReaderHelper_Timer3Callback;
     EReaderHelper_SaveRegsState();
-    sub_81D4238();
+    EReaderHelper_ClearSendRecvMgr();
     REG_IE |= INTR_FLAG_VCOUNT;
     REG_IME = backupIME;
     arg0->unk0 = 0;
@@ -62,7 +62,7 @@ static void sub_81D4DB8(struct Unk03006370 *arg0)
 {
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;
-    sub_81D4238();
+    EReaderHelper_ClearSendRecvMgr();
     EReaderHelper_RestoreRegsState();
     RestoreSerialTimer3IntrHandlers();
     REG_IME = backupIME;
@@ -211,7 +211,6 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
 
 void task_add_00_ereader(void)
 {
-    int value;
     struct Unk81D5014 *data;
     u8 taskId = CreateTask(sub_81D5084, 0);
     data = (struct Unk81D5014 *)gTasks[taskId].data;
@@ -402,7 +401,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 15:
-        data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
+        data->unkE = ValidateTrainerHillData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
         SetCloseLinkCallbackAndType(data->unkE);
         data->unk8 = 16;
         break;

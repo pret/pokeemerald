@@ -34,7 +34,6 @@
 #include "new_game.h"
 #include "save.h"
 #include "strings.h"
-#include "constants/berry.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/rgb.h"
@@ -1098,7 +1097,7 @@ static void CB2_LoadBerryBlender(void)
         }
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         UpdateBlenderCenter();
         sBerryBlender->mainState++;
         break;
@@ -1112,7 +1111,7 @@ static void CB2_LoadBerryBlender(void)
             sBerryBlender->mainState++;
         break;
     case 5:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         sBerryBlender->mainState++;
         break;
     case 6:
@@ -1163,8 +1162,8 @@ static void SpriteCB_Berry(struct Sprite* sprite)
         else
             PlaySE(SE_BALL_TRAY_EXIT);
     }
-    sprite->pos1.x = sprite->sX;
-    sprite->pos1.y = sprite->sY;
+    sprite->x = sprite->sX;
+    sprite->y = sprite->sY;
 }
 
 static void SetBerrySpriteData(struct Sprite* sprite, s16 x, s16 y, s16 bounceSpeed, s16 xSpeed, s16 ySpeed)
@@ -1327,7 +1326,7 @@ static void CB2_StartBlenderLink(void)
         sBerryBlender->mainState++;
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         sBerryBlender->mainState++;
         break;
     case 4:
@@ -1427,7 +1426,7 @@ static void CB2_StartBlenderLink(void)
         sBerryBlender->centerScale += 4;
         if (sBerryBlender->centerScale > 255)
         {
-            SetGpuRegBits(REG_OFFSET_BG2CNT, 2);
+            SetGpuRegBits(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2));
             sBerryBlender->mainState++;
             sBerryBlender->centerScale = 256;
             sBerryBlender->arrowPos = sArrowStartPos[sArrowStartPosIds[sBerryBlender->numPlayers - 2]];
@@ -1665,7 +1664,7 @@ static void CB2_StartBlenderLocal(void)
         sBerryBlender->mainState++;
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         sBerryBlender->mainState++;
         sBerryBlender->framesToWait = 0;
         break;
@@ -1727,7 +1726,7 @@ static void CB2_StartBlenderLocal(void)
             sBerryBlender->mainState++;
             sBerryBlender->centerScale = 256;
             sBerryBlender->arrowPos = sArrowStartPos[sArrowStartPosIds[sBerryBlender->numPlayers - 2]];
-            SetGpuRegBits(REG_OFFSET_BG2CNT, 2);
+            SetGpuRegBits(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2));
             sBerryBlender->framesToWait = 0;
             PlaySE(SE_TRUCK_DOOR);
             PrintPlayerNames();
@@ -2390,7 +2389,7 @@ static s16 Debug_GetGameTimeStage(void)
 static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
 {
     s32 i, j;
-    s32 multiuseVar, var2;
+    s32 multiuseVar;
     u8 numNegatives;
 
     for (i = 0; i < FLAVOR_COUNT + 1; i++)
@@ -2896,7 +2895,7 @@ static void CB2_CheckPlayAgainLink(void)
     case 9:
         if (IsLinkTaskFinished())
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             sBerryBlender->gameEndState++;
         }
         break;
@@ -3164,8 +3163,8 @@ static void SpriteCB_Particle(struct Sprite* sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];
-    sprite->pos2.x = sprite->data[2] / 8;
-    sprite->pos2.y = sprite->data[3] / 8;
+    sprite->x2 = sprite->data[2] / 8;
+    sprite->y2 = sprite->data[3] / 8;
 
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -3198,7 +3197,7 @@ static void CreateParticleSprites(void)
 static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
 {
     sprite->data[0]++;
-    sprite->pos2.y = -(sprite->data[0] / 3);
+    sprite->y2 = -(sprite->data[0] / 3);
 
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -3207,10 +3206,10 @@ static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
 static void SpriteCB_ScoreSymbolBest(struct Sprite* sprite)
 {
     sprite->data[0]++;
-    sprite->pos2.y = -(sprite->data[0] * 2);
+    sprite->y2 = -(sprite->data[0] * 2);
 
-    if (sprite->pos2.y < -12)
-        sprite->pos2.y = -12;
+    if (sprite->y2 < -12)
+        sprite->y2 = -12;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -3265,7 +3264,7 @@ static void SpriteCB_CountdownNumber(struct Sprite* sprite)
         break;
     }
 
-    sprite->pos2.y = sprite->sYPos;
+    sprite->y2 = sprite->sYPos;
 }
 
 #undef sState
@@ -3301,7 +3300,7 @@ static void SpriteCB_Start(struct Sprite* sprite)
         break;
     }
 
-    sprite->pos2.y = sprite->data[1];
+    sprite->y2 = sprite->data[1];
 }
 
 static void TryUpdateProgressBar(u16 current, u16 limit)
@@ -3446,8 +3445,8 @@ static bool8 UpdateBlenderLandScreenShake(void)
 
 static void SpriteCB_PlayerArrow(struct Sprite* sprite)
 {
-   sprite->pos2.x = -(sBerryBlender->bg_X);
-   sprite->pos2.y = -(sBerryBlender->bg_Y);
+   sprite->x2 = -(sBerryBlender->bg_X);
+   sprite->y2 = -(sBerryBlender->bg_Y);
 }
 
 static void TryUpdateBerryBlenderRecord(void)
@@ -3860,13 +3859,13 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
     case 0:
     case 3:
         txtColor[0] = TEXT_COLOR_WHITE;
-        txtColor[1] = TEXT_COLOR_DARK_GREY;
-        txtColor[2] = TEXT_COLOR_LIGHT_GREY;
+        txtColor[1] = TEXT_COLOR_DARK_GRAY;
+        txtColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 1:
         txtColor[0] = TEXT_COLOR_TRANSPARENT;
-        txtColor[1] = TEXT_COLOR_DARK_GREY;
-        txtColor[2] = TEXT_COLOR_LIGHT_GREY;
+        txtColor[1] = TEXT_COLOR_DARK_GRAY;
+        txtColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 2:
         txtColor[0] = TEXT_COLOR_TRANSPARENT;

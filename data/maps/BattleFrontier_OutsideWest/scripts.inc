@@ -7,16 +7,16 @@
 .set LOCALID_FISHERMAN_2, 18
 .set LOCALID_MAN_4, 23
 
-BattleFrontier_OutsideWest_MapScripts:: @ 823D3E1
+BattleFrontier_OutsideWest_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideWest_OnTransition
 	.byte 0
 
-BattleFrontier_OutsideWest_OnTransition: @ 823D3E7
+BattleFrontier_OutsideWest_OnTransition:
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	end
 
-BattleFrontier_OutsideWest_EventScript_FerryAttendant:: @ 823D3F0
+BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_MayISeeYourTicket, MSGBOX_DEFAULT
@@ -28,8 +28,8 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant:: @ 823D3F0
 	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination
 	end
 
-BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination:: @ 823D416
-	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, 0
+BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination::
+	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_OutsideWest_EventScript_FerryToSlateport
 	case 1, BattleFrontier_OutsideWest_EventScript_FerryToLilycove
@@ -37,12 +37,12 @@ BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination:: @ 823D416
 	case MULTI_B_PRESSED, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect
 	end
 
-BattleFrontier_OutsideWest_EventScript_NoSSTicket:: @ 823D44E
+BattleFrontier_OutsideWest_EventScript_NoSSTicket::
 	msgbox BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_FerryToSlateport:: @ 823D458
+BattleFrontier_OutsideWest_EventScript_FerryToSlateport::
 	msgbox BattleFrontier_OutsideWest_Text_SlateportItIs, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
@@ -53,7 +53,7 @@ BattleFrontier_OutsideWest_EventScript_FerryToSlateport:: @ 823D458
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_FerryToLilycove:: @ 823D483
+BattleFrontier_OutsideWest_EventScript_FerryToLilycove::
 	msgbox BattleFrontier_OutsideWest_Text_LilycoveItIs, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
@@ -64,13 +64,13 @@ BattleFrontier_OutsideWest_EventScript_FerryToLilycove:: @ 823D483
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination:: @ 823D4AE
+BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination::
 	message BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo
 	waitmessage
 	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination
 	end
 
-BattleFrontier_OutsideWest_EventScript_BoardFerry:: @ 823D4BA
+BattleFrontier_OutsideWest_EventScript_BoardFerry::
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
@@ -80,38 +80,38 @@ BattleFrontier_OutsideWest_EventScript_BoardFerry:: @ 823D4BA
 	call Common_EventScript_FerryDepartIsland
 	return
 
-BattleFrontier_OutsideWest_EventScript_CancelFerrySelect:: @ 823D4D8
+BattleFrontier_OutsideWest_EventScript_CancelFerrySelect::
 	msgbox BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_BattleDomeSign:: @ 823D4E2
+BattleFrontier_OutsideWest_EventScript_BattleDomeSign::
 	msgbox BattleFrontier_OutsideWest_Text_BattleDomeSign, MSGBOX_SIGN
 	end
 
-BattleFrontier_OutsideWest_EventScript_BattleFactorySign:: @ 823D4EB
+BattleFrontier_OutsideWest_EventScript_BattleFactorySign::
 	msgbox BattleFrontier_OutsideWest_Text_BattleFactorySign, MSGBOX_SIGN
 	end
 
-BattleFrontier_OutsideWest_EventScript_BattlePikeSign:: @ 823D4F4
+BattleFrontier_OutsideWest_EventScript_BattlePikeSign::
 	msgbox BattleFrontier_OutsideWest_Text_BattlePikeSign, MSGBOX_SIGN
 	end
 
 @ Unused. Of note, Battle Tower is in the East section in the final release
-BattleFrontier_OutsideWest_EventScript_UnusedNPC1:: @ 823D4FD
+BattleFrontier_OutsideWest_EventScript_UnusedNPC1::
 	msgbox BattleFrontier_OutsideWest_Text_ThisIsBattleTower, MSGBOX_NPC
 	end
 
 @ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC2:: @ 823D4FD
+BattleFrontier_OutsideWest_EventScript_UnusedNPC2::
 	msgbox BattleFrontier_OutsideWest_Text_CantFindBattleTower, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Boy1:: @ 823D50F
+BattleFrontier_OutsideWest_EventScript_Boy1::
 	msgbox BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Fisherman2:: @ 823D518
+BattleFrontier_OutsideWest_EventScript_Fisherman2::
 	lock
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere
@@ -122,21 +122,21 @@ BattleFrontier_OutsideWest_EventScript_Fisherman2:: @ 823D518
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_Man1:: @ 823D52D
+BattleFrontier_OutsideWest_EventScript_Man1::
 	msgbox BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Maniac1:: @ 823D536
+BattleFrontier_OutsideWest_EventScript_Maniac1::
 	lock
 	goto BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk
 	end
 
-BattleFrontier_OutsideWest_EventScript_Maniac2:: @ 823D53D
+BattleFrontier_OutsideWest_EventScript_Maniac2::
 	lock
 	goto BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk
 	end
 
-BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk:: @ 823D544
+BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk::
 	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons, MSGBOX_DEFAULT
@@ -151,7 +151,7 @@ BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk:: @ 823D544
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_Camper:: @ 823D57F
+BattleFrontier_OutsideWest_EventScript_Camper::
 	lock
 	faceplayer
 	delay 20
@@ -167,15 +167,15 @@ BattleFrontier_OutsideWest_EventScript_Camper:: @ 823D57F
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_CamperFaceFactory:: @ 823D5BA
+BattleFrontier_OutsideWest_EventScript_CamperFaceFactory::
 	applymovement LOCALID_CAMPER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory:: @ 823D5C5
+BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory::
 	return
 
-BattleFrontier_OutsideWest_EventScript_Girl:: @ 823D5C6
+BattleFrontier_OutsideWest_EventScript_Girl::
 	lock
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper
@@ -192,47 +192,47 @@ BattleFrontier_OutsideWest_EventScript_Girl:: @ 823D5C6
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_GirlShudderNorth:: @ 823D5FD
+BattleFrontier_OutsideWest_EventScript_GirlShudderNorth::
 	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderNorth
 	waitmovement 0
 	return
 
-BattleFrontier_OutsideWest_EventScript_GirlShudderSouth:: @ 823D608
+BattleFrontier_OutsideWest_EventScript_GirlShudderSouth::
 	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderSouth
 	waitmovement 0
 	return
 
-BattleFrontier_OutsideWest_EventScript_GirlShudderWest:: @ 823D613
+BattleFrontier_OutsideWest_EventScript_GirlShudderWest::
 	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderWest
 	waitmovement 0
 	return
 
-BattleFrontier_OutsideWest_EventScript_GirlShudderEast:: @ 823D61E
+BattleFrontier_OutsideWest_EventScript_GirlShudderEast::
 	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderEast
 	waitmovement 0
 	return
 
-BattleFrontier_OutsideWest_Movement_GirlShudderNorth: @ 823D629
+BattleFrontier_OutsideWest_Movement_GirlShudderNorth:
 	walk_in_place_fastest_down
 	walk_in_place_fastest_down
 	step_end
 
-BattleFrontier_OutsideWest_Movement_GirlShudderSouth: @ 823D62C
+BattleFrontier_OutsideWest_Movement_GirlShudderSouth:
 	walk_in_place_fastest_up
 	walk_in_place_fastest_up
 	step_end
 
-BattleFrontier_OutsideWest_Movement_GirlShudderWest: @ 823D62F
+BattleFrontier_OutsideWest_Movement_GirlShudderWest:
 	walk_in_place_fastest_right
 	walk_in_place_fastest_right
 	step_end
 
-BattleFrontier_OutsideWest_Movement_GirlShudderEast: @ 823D632
+BattleFrontier_OutsideWest_Movement_GirlShudderEast:
 	walk_in_place_fastest_left
 	walk_in_place_fastest_left
 	step_end
 
-BattleFrontier_OutsideWest_EventScript_Woman2:: @ 823D635
+BattleFrontier_OutsideWest_EventScript_Woman2::
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors, MSGBOX_DEFAULT
@@ -242,70 +242,70 @@ BattleFrontier_OutsideWest_EventScript_Woman2:: @ 823D635
 	goto BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors
 	end
 
-BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors:: @ 823D653
+BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors::
 	msgbox BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors:: @ 823D65D
+BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors::
 	msgbox BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_Fisherman1:: @ 823D667
+BattleFrontier_OutsideWest_EventScript_Fisherman1::
 	msgbox BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling, MSGBOX_NPC
 	end
 
 @ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC3:: @ 823D670
+BattleFrontier_OutsideWest_EventScript_UnusedNPC3::
 	msgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Gentleman:: @ 823D679
+BattleFrontier_OutsideWest_EventScript_Gentleman::
 	msgbox BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Lass:: @ 823D682
+BattleFrontier_OutsideWest_EventScript_Lass::
 	msgbox BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_ExpertM:: @ 823D68B
+BattleFrontier_OutsideWest_EventScript_ExpertM::
 	msgbox BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Man2:: @ 823D694
+BattleFrontier_OutsideWest_EventScript_Man2::
 	msgbox BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Woman1:: @ 823D69D
+BattleFrontier_OutsideWest_EventScript_Woman1::
 	msgbox BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_FatMan1:: @ 823D6A6
+BattleFrontier_OutsideWest_EventScript_FatMan1::
 	msgbox BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_FatMan2:: @ 823D6AF
+BattleFrontier_OutsideWest_EventScript_FatMan2::
 	msgbox BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Woman3:: @ 823D6B8
+BattleFrontier_OutsideWest_EventScript_Woman3::
 	lock
 	msgbox BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_Boy2:: @ 823D6C3
+BattleFrontier_OutsideWest_EventScript_Boy2::
 	lock
 	msgbox BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_OldMan:: @ 823D6CE
+BattleFrontier_OutsideWest_EventScript_OldMan::
 	msgbox BattleFrontier_OutsideWest_Text_DomeAceIsMine, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Man4:: @ 823D6D7
+BattleFrontier_OutsideWest_EventScript_Man4::
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers, MSGBOX_DEFAULT
@@ -315,76 +315,76 @@ BattleFrontier_OutsideWest_EventScript_Man4:: @ 823D6D7
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_PokefanF:: @ 823D6EE
+BattleFrontier_OutsideWest_EventScript_PokefanF::
 	msgbox BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_Text_BattleDomeSign: @ 823D6F7
+BattleFrontier_OutsideWest_Text_BattleDomeSign:
 	.string "This is the BATTLE DOME!\n"
 	.string "Your path to the invincible superstar!$"
 
-BattleFrontier_OutsideWest_Text_BattleFactorySign: @ 823D737
+BattleFrontier_OutsideWest_Text_BattleFactorySign:
 	.string "This is the BATTLE FACTORY!\n"
 	.string "Seek out the toughest POKéMON!$"
 
-BattleFrontier_OutsideWest_Text_BattlePikeSign: @ 823D772
+BattleFrontier_OutsideWest_Text_BattlePikeSign:
 	.string "This is the BATTLE PIKE!\n"
 	.string "Choose one of three paths!$"
 
-BattleFrontier_OutsideWest_Text_ThisIsBattleTower: @ 823D7A6
+BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
 	.string "This is the BATTLE TOWER.\p"
 	.string "TRAINERS bring their best-raised\n"
 	.string "POKéMON for elimination-style matches.$"
 
-BattleFrontier_OutsideWest_Text_MayISeeYourTicket: @ 823D808
+BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your TICKET?$"
 
-BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard: @ 823D842
+BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard:
 	.string "{PLAYER} doesn't have the TICKET…\p"
 	.string "I'm terribly sorry.\p"
 	.string "You must have a TICKET to board\n"
 	.string "the ferry.$"
 
-BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo: @ 823D89D
+BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo:
 	.string "{PLAYER} flashed the TICKET.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
-BattleFrontier_OutsideWest_Text_SlateportItIs: @ 823D8F2
+BattleFrontier_OutsideWest_Text_SlateportItIs:
 	.string "SLATEPORT CITY it is, then!$"
 
-BattleFrontier_OutsideWest_Text_LilycoveItIs: @ 823D90E
+BattleFrontier_OutsideWest_Text_LilycoveItIs:
 	.string "LILYCOVE CITY it is, then!$"
 
-BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime: @ 823D929
+BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime:
 	.string "Please sail with us another time!$"
 
-BattleFrontier_OutsideWest_Text_PleaseBoardFerry: @ 823D94B
+BattleFrontier_OutsideWest_Text_PleaseBoardFerry:
 	.string "Please board the ferry and wait for\n"
 	.string "departure.$"
 
-BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo: @ 823D97A
+BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo:
 	.string "Then, where would you like to go?$"
 
-BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends: @ 823D99C
+BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends:
 	.string "I'm the best out of all my friends.\n"
 	.string "But here…\l"
 	.string "I've been useless!$"
 
-BattleFrontier_OutsideWest_Text_CantFindBattleTower: @ 823D9DD
+BattleFrontier_OutsideWest_Text_CantFindBattleTower:
 	.string "I want to go to the BATTLE TOWER,\n"
 	.string "but I can't find it even though I have\l"
 	.string "a map of the BATTLE FRONTIER.\p"
 	.string "This place is just too big!$"
 
-BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere: @ 823DA60
+BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere:
 	.string "I wanted to take a challenge as soon\n"
 	.string "as I arrived here.\p"
 	.string "But on the way, I got seasick…\n"
 	.string "Urrrrp…$"
 
-BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere: @ 823DABF
+BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere:
 	.string "It's not as if just anyone can come\n"
 	.string "here, you know?\p"
 	.string "Only those TRAINERS who've been\n"
@@ -392,94 +392,94 @@ BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere: @ 823DABF
 	.string "That's why many TRAINERS don't even\n"
 	.string "know about the BATTLE FRONTIER.$"
 
-BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons: @ 823DB7D
+BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons:
 	.string "Hey, bro…\p"
 	.string "Are you sure we can make challenges\n"
 	.string "even if we don't have any POKéMON?$"
 
-BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons: @ 823DBCE
+BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons:
 	.string "Uh…\n"
 	.string "I'm sure it'll be okay.\p"
 	.string "I think…\p"
 	.string "But remember that big scary guy?\n"
 	.string "He said, “I'll lend you POKéMON!”$"
 
-BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons: @ 823DC36
+BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons:
 	.string "That's the BATTLE FACTORY.\n"
 	.string "You can rent strong POKéMON there.\p"
 	.string "But it makes me wonder.\n"
 	.string "Who's raising those rental POKéMON?$"
 
-BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper: @ 823DCB0
+BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper:
 	.string "I'm scared of going into the BATTLE\n"
 	.string "PIKE because of SEVIPER…\p"
 	.string "B-but I came all the way here, so I will\n"
 	.string "try to conquer everything!\l"
 	.string "…Shudder…$"
 
-BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors: @ 823DD3B
+BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors:
 	.string "Let's play rock, paper, scissors!\n"
 	.string "One, two, three!\p"
 	.string "… … … … … …$"
 
-BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge: @ 823DD7A
+BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge:
 	.string "Yay! I won!\n"
 	.string "I will take the BATTLE PIKE challenge!$"
 
-BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge: @ 823DDAD
+BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge:
 	.string "Oh, no…\n"
 	.string "I lost.\p"
 	.string "I guess I'm not very lucky today.\n"
 	.string "I'll put off my BATTLE PIKE challenge\l"
 	.string "until tomorrow.$"
 
-BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling: @ 823DE15
+BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling:
 	.string "I believe I'm the only person here who,\n"
 	.string "for some unknown reason, would choose\l"
 	.string "fishing over battling.\p"
 	.string "Huh? You can't catch anything here?\n"
 	.string "That's disappointing…$"
 
-BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol: @ 823DEB4
+BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol:
 	.string "Today, I'm going to keep battling, no\n"
 	.string "matter what, until I get a Symbol.$"
 
-BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome: @ 823DEFD
+BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome:
 	.string "Oh? You're off to challenge\n"
 	.string "the BATTLE DOME?\p"
 	.string "I'll wish you the best of luck.\n"
 	.string "Let us both win our way up and meet\l"
 	.string "in challenges.$"
 
-BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa: @ 823DF7D
+BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
 	.string "Grandpa, over here!\n"
 	.string "The BATTLE DOME is here!\l"
 	.string "Go get 'em, Grandpa!$"
 
-BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe: @ 823DFBF
+BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe:
 	.string "Ah, so this here is the BATTLE DOME?\n"
 	.string "I won't let GENTLEMEN beat me!\p"
 	.string "But where is the entrance?$"
 
-BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo: @ 823E01E
+BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo:
 	.string "There used to be nothing here not all\n"
 	.string "that long ago.\p"
 	.string "But, now look at this place! Amazing!\n"
 	.string "I'll bring my mother out to see this.$"
 
-BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier: @ 823E09F
+BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier:
 	.string "I've finally arrived at the BATTLE\n"
 	.string "FRONTIER!\p"
 	.string "I'm sure to grab attention with\n"
 	.string "my looks and ability!$"
 
-BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople: @ 823E102
+BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople:
 	.string "Munch, munch…\p"
 	.string "It looks like this square's filled with\n"
 	.string "tough people.\p"
 	.string "Munch, munch…$"
 
-BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike: @ 823E154
+BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike:
 	.string "Crunch, munch…\p"
 	.string "A while back, I met this older girl\n"
 	.string "at the BATTLE PIKE.\p"
@@ -492,13 +492,13 @@ BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike: @ 823E154
 	.string "scary experience, sure enough.\p"
 	.string "Crunch, munch…$"
 
-BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet: @ 823E273
+BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet:
 	.string "Huh? Will you listen to yourself?\n"
 	.string "That's nothing!\p"
 	.string "Why, the last time I cheered for him,\n"
 	.string "our eyes met and sparks flew!$"
 
-BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering: @ 823E2E9
+BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering:
 	.string "Whaaaaaat?!\n"
 	.string "Pfft!\p"
 	.string "That only happened because\n"
@@ -506,7 +506,7 @@ BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering: @ 823E2E9
 	.string "The DOME ACE only looked our way\n"
 	.string "because my cheering was so loud!$"
 
-BattleFrontier_OutsideWest_Text_DomeAceIsMine: @ 823E37E
+BattleFrontier_OutsideWest_Text_DomeAceIsMine:
 	.string "Oh, shush!\n"
 	.string "Keep that racket down!\p"
 	.string "You fair-weather fans should stick\n"
@@ -514,7 +514,7 @@ BattleFrontier_OutsideWest_Text_DomeAceIsMine: @ 823E37E
 	.string "The DOME ACE is mine!\n"
 	.string "The only idol for me!$"
 
-BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers: @ 823E410
+BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers:
 	.string "Those people squabbling over there…\p"
 	.string "It's hard to believe, but they once\n"
 	.string "were TRAINERS, and good ones, too.\p"
@@ -528,7 +528,7 @@ BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers: @ 823E410
 	.string "They go cheer for their idol at the\l"
 	.string "BATTLE DOME every day now.$"
 
-BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier: @ 823E5A5
+BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "I heard a rumor that someone saw\n"
 	.string "a POKéMON with an unusually long tail\l"
 	.string "somewhere in the BATTLE FRONTIER.\p"

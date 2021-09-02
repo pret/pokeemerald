@@ -44,38 +44,38 @@
 #define BIT_FLANK       2
 
 // Battle Type Flags
-#define BATTLE_TYPE_DOUBLE          (1 << 0)
-#define BATTLE_TYPE_LINK            (1 << 1)
-#define BATTLE_TYPE_IS_MASTER       (1 << 2) // In not-link battles, it's always set.
-#define BATTLE_TYPE_TRAINER         (1 << 3)
-#define BATTLE_TYPE_FIRST_BATTLE    (1 << 4)
-#define BATTLE_TYPE_20              (1 << 5)
-#define BATTLE_TYPE_MULTI           (1 << 6)
-#define BATTLE_TYPE_SAFARI          (1 << 7)
-#define BATTLE_TYPE_BATTLE_TOWER    (1 << 8)
-#define BATTLE_TYPE_WALLY_TUTORIAL  (1 << 9)
-#define BATTLE_TYPE_ROAMER          (1 << 10)
-#define BATTLE_TYPE_EREADER_TRAINER (1 << 11)
-#define BATTLE_TYPE_KYOGRE_GROUDON  (1 << 12)
-#define BATTLE_TYPE_LEGENDARY       (1 << 13)
-#define BATTLE_TYPE_REGI            (1 << 14)
-#define BATTLE_TYPE_TWO_OPPONENTS   (1 << 15)
-#define BATTLE_TYPE_DOME            (1 << 16)
-#define BATTLE_TYPE_PALACE          (1 << 17)
-#define BATTLE_TYPE_ARENA           (1 << 18)
-#define BATTLE_TYPE_FACTORY         (1 << 19)
-#define BATTLE_TYPE_PIKE            (1 << 20)
-#define BATTLE_TYPE_PYRAMID         (1 << 21)
-#define BATTLE_TYPE_INGAME_PARTNER  (1 << 22)
-#define BATTLE_TYPE_x800000         (1 << 23)
-#define BATTLE_TYPE_RECORDED        (1 << 24)
-#define BATTLE_TYPE_x2000000        (1 << 25)
-#define BATTLE_TYPE_TRAINER_HILL    (1 << 26)
-#define BATTLE_TYPE_SECRET_BASE     (1 << 27)
-#define BATTLE_TYPE_GROUDON         (1 << 28)
-#define BATTLE_TYPE_KYOGRE          (1 << 29)
-#define BATTLE_TYPE_RAYQUAZA        (1 << 30)
-#define BATTLE_TYPE_x80000000       (1 << 31)
+#define BATTLE_TYPE_DOUBLE             (1 << 0)
+#define BATTLE_TYPE_LINK               (1 << 1)
+#define BATTLE_TYPE_IS_MASTER          (1 << 2) // In not-link battles, it's always set.
+#define BATTLE_TYPE_TRAINER            (1 << 3)
+#define BATTLE_TYPE_FIRST_BATTLE       (1 << 4)
+#define BATTLE_TYPE_LINK_IN_BATTLE     (1 << 5) // Set on battle entry, cleared on exit. Checked rarely
+#define BATTLE_TYPE_MULTI              (1 << 6)
+#define BATTLE_TYPE_SAFARI             (1 << 7)
+#define BATTLE_TYPE_BATTLE_TOWER       (1 << 8)
+#define BATTLE_TYPE_WALLY_TUTORIAL     (1 << 9)
+#define BATTLE_TYPE_ROAMER             (1 << 10)
+#define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
+#define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
+#define BATTLE_TYPE_LEGENDARY          (1 << 13)
+#define BATTLE_TYPE_REGI               (1 << 14)
+#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15)
+#define BATTLE_TYPE_DOME               (1 << 16)
+#define BATTLE_TYPE_PALACE             (1 << 17)
+#define BATTLE_TYPE_ARENA              (1 << 18)
+#define BATTLE_TYPE_FACTORY            (1 << 19)
+#define BATTLE_TYPE_PIKE               (1 << 20)
+#define BATTLE_TYPE_PYRAMID            (1 << 21)
+#define BATTLE_TYPE_INGAME_PARTNER     (1 << 22)
+#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 23)
+#define BATTLE_TYPE_RECORDED           (1 << 24)
+#define BATTLE_TYPE_RECORDED_LINK      (1 << 25)
+#define BATTLE_TYPE_TRAINER_HILL       (1 << 26)
+#define BATTLE_TYPE_SECRET_BASE        (1 << 27)
+#define BATTLE_TYPE_GROUDON            (1 << 28)
+#define BATTLE_TYPE_KYOGRE             (1 << 29)
+#define BATTLE_TYPE_RAYQUAZA           (1 << 30)
+#define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31)
 #define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
 #define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 
@@ -220,19 +220,23 @@
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
 #define SIDE_STATUS_MAT_BLOCK               (1 << 21)
 
+#define SIDE_STATUS_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK)
+#define SIDE_STATUS_SCREEN_ANY     (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)
+
 // Field affecting statuses.
-#define STATUS_FIELD_MAGIC_ROOM         0x1
-#define STATUS_FIELD_TRICK_ROOM         0x2
-#define STATUS_FIELD_WONDER_ROOM        0x4
-#define STATUS_FIELD_MUDSPORT           0x8
-#define STATUS_FIELD_WATERSPORT         0x10
-#define STATUS_FIELD_GRAVITY            0x20
-#define STATUS_FIELD_GRASSY_TERRAIN     0x40
-#define STATUS_FIELD_MISTY_TERRAIN      0x80
-#define STATUS_FIELD_ELECTRIC_TERRAIN   0x100
-#define STATUS_FIELD_PSYCHIC_TERRAIN    0x200
-#define STATUS_FIELD_ION_DELUGE         0x400
-#define STATUS_FIELD_FAIRY_LOCK         0x800
+#define STATUS_FIELD_MAGIC_ROOM                     (1 << 0)
+#define STATUS_FIELD_TRICK_ROOM                     (1 << 1)
+#define STATUS_FIELD_WONDER_ROOM                    (1 << 2)
+#define STATUS_FIELD_MUDSPORT                       (1 << 3)
+#define STATUS_FIELD_WATERSPORT                     (1 << 4)
+#define STATUS_FIELD_GRAVITY                        (1 << 5)
+#define STATUS_FIELD_GRASSY_TERRAIN                 (1 << 6)
+#define STATUS_FIELD_MISTY_TERRAIN                  (1 << 7)
+#define STATUS_FIELD_ELECTRIC_TERRAIN               (1 << 8)
+#define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 9)
+#define STATUS_FIELD_ION_DELUGE                     (1 << 10)
+#define STATUS_FIELD_FAIRY_LOCK                     (1 << 11)
+#define STATUS_FIELD_TERRAIN_PERMANENT              (1 << 12)   // Overworld thunderstorm generates electric terrain
 
 #define STATUS_TERRAIN_ANY              (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 
@@ -358,6 +362,10 @@
 #define BATTLE_TERRAIN_CAVE         7
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
+
+#define B_WAIT_TIME_LONG  64
+#define B_WAIT_TIME_MED   48
+#define B_WAIT_TIME_SHORT 32
 
 // Move targets
 #define MOVE_TARGET_SELECTED            0x0

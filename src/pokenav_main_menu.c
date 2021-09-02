@@ -102,7 +102,7 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 
 static const u8 sHelpBarTextColors[3] =
 {
-    TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY
+    TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY
 };
 
 static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
@@ -314,7 +314,7 @@ void ShutdownPokenav(void)
 {
     PlaySE(SE_POKENAV_OFF);
     ResetBldCnt_();
-    BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
 }
 
 bool32 WaitForPokenavShutdownFade(void)
@@ -496,7 +496,7 @@ void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a
             g1 = ((((GET_G(*dest) << 8) - (g << 8)) / a3) * a4) >> 8;
             b1 = ((((GET_B(*dest) << 8) - (b << 8)) / a3) * a4) >> 8;
 
-            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of ((r + r1) & 0x1F) to r1
+            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of ((r + r1) & 0x1F) to r
             g = (g + g1) & 0x1F; //See above
             b = (b + b1) & 0x1F; //See above
 
@@ -521,10 +521,10 @@ void PokenavFadeScreen(s32 fadeType)
         BeginNormalPaletteFade(structPtr->palettes, -2, 16, 0, RGB_BLACK);
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         break;
     }
 }
@@ -536,7 +536,7 @@ bool32 IsPaletteFadeActive(void)
 
 void sub_81C7B40(void)
 {
-    BlendPalettes(0xFFFEFFFE, 16, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL & ~(0x10000 | 0x1), 16, RGB_BLACK);
 }
 
 void InitBgTemplates(const struct BgTemplate *templates, int count)
@@ -604,7 +604,7 @@ static void CleanupPokenavMainMenuResources(void)
 static void SpriteCB_SpinningPokenav(struct Sprite *sprite)
 {
     // If the background starts scrolling, follow it.
-    sprite->pos2.y = (GetBgY(0) / 256u) * -1;
+    sprite->y2 = (GetBgY(0) / 256u) * -1;
 }
 
 struct Sprite *PauseSpinningPokenavSprite(void)
@@ -619,8 +619,8 @@ void ResumeSpinningPokenavSprite(void)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
-    structPtr->spinningPokenav->pos1.x = 220;
-    structPtr->spinningPokenav->pos1.y = 12;
+    structPtr->spinningPokenav->x = 220;
+    structPtr->spinningPokenav->y = 12;
     structPtr->spinningPokenav->callback = SpriteCB_SpinningPokenav;
     structPtr->spinningPokenav->invisible = FALSE;
     structPtr->spinningPokenav->oam.priority = 0;
@@ -640,13 +640,13 @@ static void InitHoennMapHeaderSprites(void)
         spriteId = CreateSprite(&sPokenavLeftHeaderHoennMapSpriteTemplate, 0, 0, 1);
         structPtr->leftHeaderSprites[i] = &gSprites[spriteId];
         structPtr->leftHeaderSprites[i]->invisible = TRUE;
-        structPtr->leftHeaderSprites[i]->pos2.x = i * 64;
+        structPtr->leftHeaderSprites[i]->x2 = i * 64;
 
         spriteId = CreateSprite(&sUnknown_0861FB44, 0, 0, 2);
         structPtr->submenuLeftHeaderSprites[i] = &gSprites[spriteId];
         structPtr->submenuLeftHeaderSprites[i]->invisible = TRUE;
-        structPtr->submenuLeftHeaderSprites[i]->pos2.x = i * 32;
-        structPtr->submenuLeftHeaderSprites[i]->pos2.y = 18;
+        structPtr->submenuLeftHeaderSprites[i]->x2 = i * 32;
+        structPtr->submenuLeftHeaderSprites[i]->y2 = 18;
         structPtr->submenuLeftHeaderSprites[i]->oam.tileNum += (i * 8) + 64;
     }
 }
@@ -686,9 +686,9 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
     structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].size;
 
     if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
-        structPtr->leftHeaderSprites[1]->pos2.x = 56;
+        structPtr->leftHeaderSprites[1]->x2 = 56;
     else
-        structPtr->leftHeaderSprites[1]->pos2.x = 64;
+        structPtr->leftHeaderSprites[1]->x2 = 64;
 }
 
 static void LoadLeftHeaderGfxForSubMenu(u32 menuGfxId)
@@ -702,7 +702,7 @@ static void LoadLeftHeaderGfxForSubMenu(u32 menuGfxId)
     size = GetDecompressedDataSize(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data);
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(2) * 16) + 0x100, 0x20);
     LZ77UnCompWram(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data, &gDecompressionBuffer[0x1000]);
-    RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)VRAM + 0x10800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
+    RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)OBJ_VRAM0 + 0x800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
 }
 
 void ShowLeftHeaderGfx(u32 menuGfxId, bool32 isMain, bool32 isOnRightSide)
@@ -762,7 +762,7 @@ static void ShowLeftHeaderSprites(u32 startY, bool32 isOnRightSide)
 
     for (i = 0; i < (s32)ARRAY_COUNT(structPtr->leftHeaderSprites); i++)
     {
-        structPtr->leftHeaderSprites[i]->pos1.y = startY;
+        structPtr->leftHeaderSprites[i]->y = startY;
         MoveLeftHeader(structPtr->leftHeaderSprites[i], start, end, 12);
     }
 }
@@ -779,7 +779,7 @@ static void ShowLeftHeaderSubmenuSprites(u32 startY, bool32 isOnRightSide)
 
     for (i = 0; i < (s32)ARRAY_COUNT(structPtr->submenuLeftHeaderSprites); i++)
     {
-        structPtr->submenuLeftHeaderSprites[i]->pos1.y = startY;
+        structPtr->submenuLeftHeaderSprites[i]->y = startY;
         MoveLeftHeader(structPtr->submenuLeftHeaderSprites[i], start, end, 12);
     }
 }
@@ -818,7 +818,7 @@ static void HideLeftHeaderSubmenuSprites(bool32 isOnRightSide)
 
 static void MoveLeftHeader(struct Sprite *sprite, s32 startX, s32 endX, s32 duration)
 {
-    sprite->pos1.x = startX;
+    sprite->x = startX;
     sprite->data[0] = startX * 16;
     sprite->data[1] = (endX - startX) * 16 / duration;
     sprite->data[2] = duration;
@@ -832,15 +832,15 @@ static void SpriteCB_MoveLeftHeader(struct Sprite *sprite)
     {
         sprite->data[2]--;
         sprite->data[0] += sprite->data[1];
-        sprite->pos1.x = sprite->data[0] >> 4;
-        if (sprite->pos1.x < -16 || sprite->pos1.x > 256)
+        sprite->x = sprite->data[0] >> 4;
+        if (sprite->x < -16 || sprite->x > 256)
             sprite->invisible = TRUE;
         else
             sprite->invisible = FALSE;
     }
     else
     {
-        sprite->pos1.x = sprite->data[7];
+        sprite->x = sprite->data[7];
         sprite->callback = SpriteCallbackDummy;
     }
 }

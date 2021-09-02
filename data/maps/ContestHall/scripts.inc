@@ -1,4 +1,4 @@
-ContestHall_MapScripts:: @ 823B781
+ContestHall_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, ContestHall_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, ContestHall_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, ContestHall_OnTransition
@@ -6,17 +6,17 @@ ContestHall_MapScripts:: @ 823B781
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, ContestHall_OnReturn
 	.byte 0
 
-ContestHall_OnReturn: @ 823B79B
+ContestHall_OnReturn:
 	special LoadLinkContestPlayerPalettes
 	end
 
-ContestHall_OnTransition: @ 823B79F
+ContestHall_OnTransition:
 	call ContestHall_EventScript_ReadyContestMusic
 	setvar VAR_TEMP_0, 1
 	call ContestHall_EventScript_AddRandomAudienceMembers
 	end
 
-ContestHall_EventScript_ReadyContestMusic:: @ 823B7AF
+ContestHall_EventScript_ReadyContestMusic::
 	call ContestHall_EventScript_TryWaitForLink
 	special GetContestMultiplayerId
 	compare VAR_RESULT, 0
@@ -31,49 +31,49 @@ ContestHall_EventScript_ReadyContestMusic:: @ 823B7AF
 	call_if_eq ContestHall_EventScript_SaveContestMusic
 	return
 
-ContestHall_EventScript_SaveContestMusicPlayer1:: @ 823B7EF
+ContestHall_EventScript_SaveContestMusicPlayer1::
 	savebgm MUS_LINK_CONTEST_P1
 	return
 
-ContestHall_EventScript_SaveContestMusicPlayer2:: @ 823B7F3
+ContestHall_EventScript_SaveContestMusicPlayer2::
 	savebgm MUS_LINK_CONTEST_P2
 	return
 
-ContestHall_EventScript_SaveContestMusicPlayer3:: @ 823B7F7
+ContestHall_EventScript_SaveContestMusicPlayer3::
 	savebgm MUS_LINK_CONTEST_P3
 	return
 
-ContestHall_EventScript_SaveContestMusicPlayer4:: @ 823B7FB
+ContestHall_EventScript_SaveContestMusicPlayer4::
 	savebgm MUS_LINK_CONTEST_P4
 	return
 
-ContestHall_EventScript_SaveContestMusic:: @ 823B7FF
+ContestHall_EventScript_SaveContestMusic::
 	savebgm MUS_CONTEST
 	return
 
-ContestHall_OnResume: @ 823B803
+ContestHall_OnResume:
 	compare VAR_TEMP_9, 1
 	call_if_eq ContestHall_EventScript_ReShowAudience
 	end
 
-ContestHall_EventScript_ReShowAudience:: @ 823B80F
+ContestHall_EventScript_ReShowAudience::
 	call ContestHall_EventScript_CreateAudience
 	return
 
-ContestHall_OnFrame: @ 823B815
+ContestHall_OnFrame:
 	map_script_2 VAR_CONTEST_HALL_STATE, 1, ContestHall_EventScript_Contest
 	.2byte 0
 
-ContestHall_OnWarp: @ 823B81F
+ContestHall_OnWarp:
 	map_script_2 VAR_CONTEST_HALL_STATE, 1, ContestHall_EventScript_SetContestObjects
 	.2byte 0
 
-ContestHall_EventScript_Contest:: @ 823B829
+ContestHall_EventScript_Contest::
 	call ContestHall_EventScript_DoContest
 	call ContestHall_EventScript_SetExitWarp
 	end
 
-ContestHall_EventScript_SetContestObjects:: @ 823B834
+ContestHall_EventScript_SetContestObjects::
 	special LoadLinkContestPlayerPalettes
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	call ContestHall_EventScript_CreateAudience
@@ -81,14 +81,14 @@ ContestHall_EventScript_SetContestObjects:: @ 823B834
 
 @ There are 8 audience member object events, 7 of which are given random gfx below (the 8th is the Artist)
 @ The rest of the audience is created statically by ContestHall_EventScript_CreateAudience
-ContestHall_EventScript_AddRandomAudienceMembers:: @ 823B842
+ContestHall_EventScript_AddRandomAudienceMembers::
 	call ContestHall_EventScript_GetRandomAudienceGfxId
 	call ContestHall_EventScript_SetRandomAudienceGfx
 	compare VAR_TEMP_0, 8
 	goto_if_lt ContestHall_EventScript_AddRandomAudienceMembers
 	return
 
-ContestHall_EventScript_SetRandomAudienceGfx:: @ 823B858
+ContestHall_EventScript_SetRandomAudienceGfx::
 	switch VAR_TEMP_0
 	case 1, ContestHall_EventScript_SetRandomAudience1
 	case 2, ContestHall_EventScript_SetRandomAudience2
@@ -99,42 +99,42 @@ ContestHall_EventScript_SetRandomAudienceGfx:: @ 823B858
 	case 7, ContestHall_EventScript_SetRandomAudience7
 	end
 
-ContestHall_EventScript_SetRandomAudience1:: @ 823B8AB
+ContestHall_EventScript_SetRandomAudience1::
 	copyvar VAR_OBJ_GFX_ID_4, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_SetRandomAudience2:: @ 823B8B6
+ContestHall_EventScript_SetRandomAudience2::
 	copyvar VAR_OBJ_GFX_ID_5, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_SetRandomAudience3:: @ 823B8C1
+ContestHall_EventScript_SetRandomAudience3::
 	copyvar VAR_OBJ_GFX_ID_6, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_SetRandomAudience4:: @ 823B8CC
+ContestHall_EventScript_SetRandomAudience4::
 	copyvar VAR_OBJ_GFX_ID_7, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_SetRandomAudience5:: @ 823B8D7
+ContestHall_EventScript_SetRandomAudience5::
 	copyvar VAR_OBJ_GFX_ID_8, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_SetRandomAudience6:: @ 823B8E2
+ContestHall_EventScript_SetRandomAudience6::
 	copyvar VAR_OBJ_GFX_ID_9, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_SetRandomAudience7:: @ 823B8ED
+ContestHall_EventScript_SetRandomAudience7::
 	copyvar VAR_OBJ_GFX_ID_A, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_GetRandomAudienceGfxId:: @ 823B8F8
+ContestHall_EventScript_GetRandomAudienceGfxId::
 	setvar VAR_RESULT, 32
 	special GenerateContestRand
 	addvar VAR_RESULT, 1
@@ -173,135 +173,135 @@ ContestHall_EventScript_GetRandomAudienceGfxId:: @ 823B8F8
 	case 32, ContestHall_EventScript_RandomAudienceScientist1
 	end
 
-ContestHall_EventScript_RandomAudienceNinjaBoy:: @ 823BA6B
+ContestHall_EventScript_RandomAudienceNinjaBoy::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_NINJA_BOY
 	return
 
-ContestHall_EventScript_RandomAudienceTwin:: @ 823BA71
+ContestHall_EventScript_RandomAudienceTwin::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_TWIN
 	return
 
-ContestHall_EventScript_RandomAudienceBoy1:: @ 823BA77
+ContestHall_EventScript_RandomAudienceBoy1::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_BOY_1
 	return
 
-ContestHall_EventScript_RandomAudienceGirl1:: @ 823BA7D
+ContestHall_EventScript_RandomAudienceGirl1::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_GIRL_1
 	return
 
-ContestHall_EventScript_RandomAudienceGirl2:: @ 823BA83
+ContestHall_EventScript_RandomAudienceGirl2::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_GIRL_2
 	return
 
-ContestHall_EventScript_RandomAudienceLittleBoy:: @ 823BA89
+ContestHall_EventScript_RandomAudienceLittleBoy::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_LITTLE_BOY
 	return
 
-ContestHall_EventScript_RandomAudienceGirl:: @ 823BA8F
+ContestHall_EventScript_RandomAudienceGirl::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_LITTLE_GIRL
 	return
 
-ContestHall_EventScript_RandomAudienceBoy3:: @ 823BA95
+ContestHall_EventScript_RandomAudienceBoy3::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_BOY_3
 	return
 
-ContestHall_EventScript_RandomAudienceGirl3:: @ 823BA9B
+ContestHall_EventScript_RandomAudienceGirl3::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_GIRL_3
 	return
 
-ContestHall_EventScript_RandomAudienceRichBoy:: @ 823BAA1
+ContestHall_EventScript_RandomAudienceRichBoy::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_RICH_BOY
 	return
 
-ContestHall_EventScript_RandomAudienceFatMan:: @ 823BAA7
+ContestHall_EventScript_RandomAudienceFatMan::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_FAT_MAN
 	return
 
-ContestHall_EventScript_RandomAudiencePokefanF:: @ 823BAAD
+ContestHall_EventScript_RandomAudiencePokefanF::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_POKEFAN_F
 	return
 
-ContestHall_EventScript_RandomAudienceMan1:: @ 823BAB3
+ContestHall_EventScript_RandomAudienceMan1::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_MAN_1
 	return
 
-ContestHall_EventScript_RandomAudienceWoman2:: @ 823BAB9
+ContestHall_EventScript_RandomAudienceWoman2::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_WOMAN_2
 	return
 
-ContestHall_EventScript_RandomAudienceExpertM:: @ 823BABF
+ContestHall_EventScript_RandomAudienceExpertM::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_EXPERT_M
 	return
 
-ContestHall_EventScript_RandomAudienceExpertF:: @ 823BAC5
+ContestHall_EventScript_RandomAudienceExpertF::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_EXPERT_F
 	return
 
-ContestHall_EventScript_RandomAudiencePokefanM:: @ 823BACB
+ContestHall_EventScript_RandomAudiencePokefanM::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_POKEFAN_M
 	return
 
-ContestHall_EventScript_RandomAudienceWoman4:: @ 823BAD1
+ContestHall_EventScript_RandomAudienceWoman4::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_WOMAN_4
 	return
 
-ContestHall_EventScript_RandomAudienceCook:: @ 823BAD7
+ContestHall_EventScript_RandomAudienceCook::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_COOK
 	return
 
-ContestHall_EventScript_RandomAudienceLass:: @ 823BADD
+ContestHall_EventScript_RandomAudienceLass::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_LASS
 	return
 
-ContestHall_EventScript_RandomAudienceOldWoman:: @ 823BAE3
+ContestHall_EventScript_RandomAudienceOldWoman::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_OLD_WOMAN
 	return
 
-ContestHall_EventScript_RandomAudienceCamper:: @ 823BAE9
+ContestHall_EventScript_RandomAudienceCamper::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_CAMPER
 	return
 
-ContestHall_EventScript_RandomAudiencePicnicker:: @ 823BAEF
+ContestHall_EventScript_RandomAudiencePicnicker::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_PICNICKER
 	return
 
-ContestHall_EventScript_RandomAudienceMan3:: @ 823BAF5
+ContestHall_EventScript_RandomAudienceMan3::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_MAN_3
 	return
 
-ContestHall_EventScript_RandomAudienceWoman5:: @ 823BAFB
+ContestHall_EventScript_RandomAudienceWoman5::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_WOMAN_5
 	return
 
-ContestHall_EventScript_RandomAudienceYoungster:: @ 823BB01
+ContestHall_EventScript_RandomAudienceYoungster::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_YOUNGSTER
 	return
 
-ContestHall_EventScript_RandomAudienceBugCatcher:: @ 823BB07
+ContestHall_EventScript_RandomAudienceBugCatcher::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_BUG_CATCHER
 	return
 
-ContestHall_EventScript_RandomAudiencePsychicM:: @ 823BB0D
+ContestHall_EventScript_RandomAudiencePsychicM::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_PSYCHIC_M
 	return
 
-ContestHall_EventScript_RandomAudienceSchoolKidM:: @ 823BB13
+ContestHall_EventScript_RandomAudienceSchoolKidM::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_SCHOOL_KID_M
 	return
 
-ContestHall_EventScript_RandomAudienceBlackBelt:: @ 823BB19
+ContestHall_EventScript_RandomAudienceBlackBelt::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_BLACK_BELT
 	return
 
-ContestHall_EventScript_RandomAudienceBeauty:: @ 823BB1F
+ContestHall_EventScript_RandomAudienceBeauty::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_BEAUTY
 	return
 
-ContestHall_EventScript_RandomAudienceScientist1:: @ 823BB25
+ContestHall_EventScript_RandomAudienceScientist1::
 	setvar VAR_TEMP_1, OBJ_EVENT_GFX_SCIENTIST_1
 	return
 
-ContestHall_EventScript_CreateAudience:: @ 823BB2B
+ContestHall_EventScript_CreateAudience::
 	specialvar VAR_RESULT, IsWirelessContest
 	compare VAR_RESULT, TRUE
 	goto_if_eq ContestHall_EventScript_CreateWirelessContestAudience
@@ -313,12 +313,12 @@ ContestHall_EventScript_CreateAudience:: @ 823BB2B
 	case CONTEST_TYPE_LINK, ContestHall_EventScript_CreateMasterContestAudience
 	return
 
-ContestHall_EventScript_CreateNormalContestAudience:: @ 823BB78
+ContestHall_EventScript_CreateNormalContestAudience::
 	createvobject OBJ_EVENT_GFX_NINJA_BOY, 20, 3, 2, 3, DIR_SOUTH
 	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
 	return
 
-ContestHall_EventScript_CreateSuperContestAudience:: @ 823BB8B
+ContestHall_EventScript_CreateSuperContestAudience::
 	createvobject OBJ_EVENT_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
@@ -331,7 +331,7 @@ ContestHall_EventScript_CreateSuperContestAudience:: @ 823BB8B
 	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
 	return
 
-ContestHall_EventScript_CreateHyperContestAudience:: @ 823BBE6
+ContestHall_EventScript_CreateHyperContestAudience::
 	createvobject OBJ_EVENT_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
@@ -353,7 +353,7 @@ ContestHall_EventScript_CreateHyperContestAudience:: @ 823BBE6
 	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 11, 9, 3, DIR_NORTH
 	return
 
-ContestHall_EventScript_CreateMasterContestAudience:: @ 823BC92
+ContestHall_EventScript_CreateMasterContestAudience::
 	createvobject OBJ_EVENT_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
@@ -383,7 +383,7 @@ ContestHall_EventScript_CreateMasterContestAudience:: @ 823BC92
 	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 11, 9, 3, DIR_NORTH
 	return
 
-ContestHall_EventScript_CreateWirelessContestAudience:: @ 823BD86
+ContestHall_EventScript_CreateWirelessContestAudience::
 	createvobject OBJ_EVENT_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
 	createvobject OBJ_EVENT_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
@@ -407,7 +407,7 @@ ContestHall_EventScript_CreateWirelessContestAudience:: @ 823BD86
 	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
 	return
 
-ContestHall_EventScript_SetExitWarp:: @ 823BE44
+ContestHall_EventScript_SetExitWarp::
 	special ClearLinkContestFlags
 	switch VAR_CONTEST_TYPE
 	case CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_SetExitWarpNormalContest
@@ -417,32 +417,32 @@ ContestHall_EventScript_SetExitWarp:: @ 823BE44
 	case CONTEST_TYPE_LINK, ContestHall_EventScript_SetExitWarpLinkContest
 	return
 
-ContestHall_EventScript_SetExitWarpNormalContest:: @ 823BE84
+ContestHall_EventScript_SetExitWarpNormalContest::
 	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 14, 4
 	waitstate
 	end
 
-ContestHall_EventScript_SetExitWarpSuperContest:: @ 823BE8E
+ContestHall_EventScript_SetExitWarpSuperContest::
 	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 14, 4
 	waitstate
 	end
 
-ContestHall_EventScript_SetExitWarpHyperContest:: @ 823BE98
+ContestHall_EventScript_SetExitWarpHyperContest::
 	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 14, 4
 	waitstate
 	end
 
-ContestHall_EventScript_SetExitWarpMasterContest:: @ 823BEA2
+ContestHall_EventScript_SetExitWarpMasterContest::
 	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 14, 4
 	waitstate
 	end
 
-ContestHall_EventScript_SetExitWarpLinkContest:: @ 823BEAC
+ContestHall_EventScript_SetExitWarpLinkContest::
 	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 15, 4
 	waitstate
 	end
 
-LilycoveCity_ContestLobby_EventScript_SetPlayerGfx:: @ 823BEB6
+LilycoveCity_ContestLobby_EventScript_SetPlayerGfx::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan
@@ -450,11 +450,11 @@ LilycoveCity_ContestLobby_EventScript_SetPlayerGfx:: @ 823BEB6
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay
 	return
 
-LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan:: @ 823BECE
+LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan::
 	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay:: @ 823BED4
+LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay::
 	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 

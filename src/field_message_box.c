@@ -1,6 +1,5 @@
 #include "global.h"
 #include "menu.h"
-#include "string.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
@@ -56,7 +55,7 @@ static void CreateTask_DrawFieldMessage(void)
 static void DestroyTask_DrawFieldMessage(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_DrawFieldMessage);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
         DestroyTask(taskId);
 }
 

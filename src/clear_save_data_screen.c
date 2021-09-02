@@ -163,7 +163,7 @@ static bool8 SetupClearSaveDataScreen(void)
         ShowBg(3);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         InitClearSaveDataScreenWindows();
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_BG, 0, 0x10, 0, RGB_WHITEALPHA);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB);
         gMain.state = 1;
@@ -185,7 +185,7 @@ static void CB2_FadeAndDoReset(void)
     {
     case 0:
     default:
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_BG, 0, 0, 0x10, RGB_WHITEALPHA);
         gMain.state = 1;
         break;
     case 1:

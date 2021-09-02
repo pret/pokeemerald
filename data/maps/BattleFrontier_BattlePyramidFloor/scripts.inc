@@ -1,16 +1,16 @@
-BattleFrontier_BattlePyramidFloor_MapScripts:: @ 8252A33
+BattleFrontier_BattlePyramidFloor_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattlePyramidFloor_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePyramidFloor_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePyramidFloor_OnTransition
 	.byte 0
 
-BattleFrontier_BattlePyramidFloor_OnFrame: @ 8252A43
+BattleFrontier_BattlePyramidFloor_OnFrame:
 	map_script_2 VAR_TEMP_D, 1, BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight
 	map_script_2 VAR_TEMP_E, 0, BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic
 	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName
 	.2byte 0
 
-BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight:: @ 8252A5D
+BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight::
 	lockall
 	@ pyramid_updatelight, cant use macro because it straddles the loop
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_UPDATE_LIGHT
@@ -18,7 +18,7 @@ BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight:: @ 8252A5D
 	setvar VAR_0x8006, PYRAMID_LIGHT_INCR_RADIUS
 	setvar VAR_0x8007, SE_SAVE
 	setvar VAR_RESULT, 0
-BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop:: @ 8252A77
+BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop::
 	special CallBattlePyramidFunction
 	delay 2
 	compare VAR_RESULT, 2
@@ -27,17 +27,17 @@ BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop:: @ 8252A77
 	releaseall
 	end
 
-BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName:: @ 8252A8F
+BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName::
 	special ShowMapNamePopup
 	setvar VAR_TEMP_F, 0
 	end
 
-BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic:: @ 8252A98
-	playbgm MUS_B_PYRAMID, 0
+BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic::
+	playbgm MUS_B_PYRAMID, FALSE
 	setvar VAR_TEMP_E, 1
 	end
 
-BattleFrontier_BattlePyramidFloor_OnResume: @ 8252AA2
+BattleFrontier_BattlePyramidFloor_OnResume:
 	pyramid_setfloorpal
 	frontier_getstatus
 	switch VAR_TEMP_0
@@ -59,14 +59,14 @@ BattleFrontier_BattlePyramidFloor_OnResume: @ 8252AA2
 	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 	frontier_isbattletype BATTLE_TYPE_TRAINER  @ VAR_RESULT seems to be ignored here
 	setvar VAR_TEMP_D, 1
-BattleFrontier_BattlePyramidFloor_EventScript_ResetParty:: @ 8252B39
+BattleFrontier_BattlePyramidFloor_EventScript_ResetParty::
 	pyramid_resetparty
 	end
 
-BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost:: @ 8252B42
+BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	pyramid_set PYRAMID_DATA_TRAINER_FLAGS, 255
-BattleFrontier_BattlePyramid_EventScript_WarpToLobby:: @ 8252B66
+BattleFrontier_BattlePyramid_EventScript_WarpToLobby::
 	pyramid_updatelight 0, PYRAMID_LIGHT_SET_RADIUS
 	pyramid_clearhelditems
 	special HealPlayerParty
@@ -74,7 +74,7 @@ BattleFrontier_BattlePyramid_EventScript_WarpToLobby:: @ 8252B66
 	waitstate
 	end
 
-BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge:: @ 8252B8D
+BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge::
 	pyramid_save CHALLENGE_STATUS_SAVING
 	special SavePlayerParty
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
@@ -83,16 +83,16 @@ BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge:: @ 8252B8D
 	setvar VAR_TEMP_F, 1
 	end
 
-BattleFrontier_BattlePyramidFloor_OnTransition: @ 8252BCA
+BattleFrontier_BattlePyramidFloor_OnTransition:
 	call BattleFrontier_BattlePyramidFloor_EventScript_SetLightRadius
 	setvar VAR_TEMP_F, 1
 	end
 
-BattleFrontier_BattlePyramidFloor_EventScript_SetLightRadius:: @ 8252BD5
+BattleFrontier_BattlePyramidFloor_EventScript_SetLightRadius::
 	pyramid_updatelight 32, PYRAMID_LIGHT_SET_RADIUS
 	return
 
-BattlePyramid_WarpToNextFloor:: @ 8252BE8
+BattlePyramid_WarpToNextFloor::
 	call BattleFrontier_EventScript_IncrementWinStreak
 	frontier_get FRONTIER_DATA_BATTLE_NUM  @ Floor number
 	addvar VAR_RESULT, 1
@@ -106,13 +106,13 @@ BattlePyramid_WarpToNextFloor:: @ 8252BE8
 	waitstate
 	end
 
-BattlePyramid_WarpToTop:: @ 8252C45
+BattlePyramid_WarpToTop::
 	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP, 255, 17, 17
 	waitstate
 	end
 
 @ TRAINER_PHILLIP is used as a placeholder
-BattlePyramid_TrainerBattle:: @ 8252C4F
+BattlePyramid_TrainerBattle::
 	trainerbattle TRAINER_BATTLE_PYRAMID, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
 	pyramid_showhint
 	waitmessage
@@ -121,620 +121,620 @@ BattlePyramid_TrainerBattle:: @ 8252C4F
 	releaseall
 	end
 
-BattlePyramid_FindItemBall:: @ 8252C6A
+BattlePyramid_FindItemBall::
 	pyramid_setitem
 	callstd STD_FIND_ITEM
 	compare VAR_0x8007, 0
 	goto_if_eq BattlePyramid_FindItemBallEnd
 	pyramid_hideitem
-BattlePyramid_FindItemBallEnd:: @ 8252C87
+BattlePyramid_FindItemBallEnd::
 	end
 
-BattlePyramid_Retire:: @ 8252C88
+BattlePyramid_Retire::
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 
 @ Also used by Trainer Hill
-BattleFacility_TrainerBattle_PlaceholderText: @ 8252C8D
+BattleFacility_TrainerBattle_PlaceholderText:
 	.string "This is a sample message.$"
 
-gText_BattlePyramidConfirmRest:: @ 8252CA7
+gText_BattlePyramidConfirmRest::
 	.string "Your BATTLE PYRAMID quest will be\n"
 	.string "saved so that you may quit for now.\l"
 	.string "Is that okay?$"
 
-gText_BattlePyramidConfirmRetire:: @ 8252CFB
+gText_BattlePyramidConfirmRetire::
 	.string "Are you sure you want to quit your\n"
 	.string "PYRAMID quest?$"
 
-BattlePyramid_Text_ExitHintUp1:: @ 8252D2D
+BattlePyramid_Text_ExitHintUp1::
 	.string "This floor's exit is in\n"
 	.string "that direction: {UP_ARROW}$"
 
-BattlePyramid_Text_ExitHintLeft1:: @ 8252D57
+BattlePyramid_Text_ExitHintLeft1::
 	.string "This floor's exit is in\n"
 	.string "that direction: {LEFT_ARROW}$"
 
-BattlePyramid_Text_ExitHintRight1:: @ 8252D81
+BattlePyramid_Text_ExitHintRight1::
 	.string "This floor's exit is in\n"
 	.string "that direction: {RIGHT_ARROW}$"
 
-BattlePyramid_Text_ExitHintDown1:: @ 8252DAB
+BattlePyramid_Text_ExitHintDown1::
 	.string "This floor's exit is in\n"
 	.string "that direction: {DOWN_ARROW}$"
 
-BattlePyramid_Text_ExitHintUp2:: @ 8252DD5
+BattlePyramid_Text_ExitHintUp2::
 	.string "The exit on this floor is in\n"
 	.string "the {UP_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintLeft2:: @ 8252E03
+BattlePyramid_Text_ExitHintLeft2::
 	.string "The exit on this floor is in\n"
 	.string "the {LEFT_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintRight2:: @ 8252E31
+BattlePyramid_Text_ExitHintRight2::
 	.string "The exit on this floor is in\n"
 	.string "the {RIGHT_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintDown2:: @ 8252E5F
+BattlePyramid_Text_ExitHintDown2::
 	.string "The exit on this floor is in\n"
 	.string "the {DOWN_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintUp3:: @ 8252E8D
+BattlePyramid_Text_ExitHintUp3::
 	.string "The exit is over\n"
 	.string "that {UP_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintLeft3:: @ 8252EAA
+BattlePyramid_Text_ExitHintLeft3::
 	.string "The exit is over\n"
 	.string "that {LEFT_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintRight3:: @ 8252EC7
+BattlePyramid_Text_ExitHintRight3::
 	.string "The exit is over\n"
 	.string "that {RIGHT_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintDown3:: @ 8252EE4
+BattlePyramid_Text_ExitHintDown3::
 	.string "The exit is over\n"
 	.string "that {DOWN_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintUp4:: @ 8252F01
+BattlePyramid_Text_ExitHintUp4::
 	.string "On this floor, the exit is somewhere\n"
 	.string "in the {UP_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintLeft4:: @ 8252F3A
+BattlePyramid_Text_ExitHintLeft4::
 	.string "On this floor, the exit is somewhere\n"
 	.string "in the {LEFT_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintRight4:: @ 8252F73
+BattlePyramid_Text_ExitHintRight4::
 	.string "On this floor, the exit is somewhere\n"
 	.string "in the {RIGHT_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintDown4:: @ 8252FAC
+BattlePyramid_Text_ExitHintDown4::
 	.string "On this floor, the exit is somewhere\n"
 	.string "in the {DOWN_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintUp5:: @ 8252FE5
+BattlePyramid_Text_ExitHintUp5::
 	.string "The exit?\n"
 	.string "It's that {UP_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintLeft5:: @ 8253000
+BattlePyramid_Text_ExitHintLeft5::
 	.string "The exit?\n"
 	.string "It's that {LEFT_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintRight5:: @ 825301B
+BattlePyramid_Text_ExitHintRight5::
 	.string "The exit?\n"
 	.string "It's that {RIGHT_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintDown5:: @ 8253036
+BattlePyramid_Text_ExitHintDown5::
 	.string "The exit?\n"
 	.string "It's that {DOWN_ARROW} way.$"
 
-BattlePyramid_Text_ExitHintUp6:: @ 8253051
+BattlePyramid_Text_ExitHintUp6::
 	.string "The exit happens to be in\n"
 	.string "the {UP_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintLeft6:: @ 825307C
+BattlePyramid_Text_ExitHintLeft6::
 	.string "The exit happens to be in\n"
 	.string "the {LEFT_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintRight6:: @ 82530A7
+BattlePyramid_Text_ExitHintRight6::
 	.string "The exit happens to be in\n"
 	.string "the {RIGHT_ARROW} direction.$"
 
-BattlePyramid_Text_ExitHintDown6:: @ 82530D2
+BattlePyramid_Text_ExitHintDown6::
 	.string "The exit happens to be in\n"
 	.string "the {DOWN_ARROW} direction.$"
 
-BattlePyramid_Text_EightItemsRemaining1:: @ 82530FD
+BattlePyramid_Text_EightItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are eight items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_SevenItemsRemaining1:: @ 8253140
+BattlePyramid_Text_SevenItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are seven items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_SixItemsRemaining1:: @ 8253183
+BattlePyramid_Text_SixItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are six items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_FiveItemsRemaining1:: @ 82531C4
+BattlePyramid_Text_FiveItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are five items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_FourItemsRemaining1:: @ 8253206
+BattlePyramid_Text_FourItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are four items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_ThreeItemsRemaining1:: @ 8253248
+BattlePyramid_Text_ThreeItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are three items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_TwoItemsRemaining1:: @ 825328B
+BattlePyramid_Text_TwoItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There are two items left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_OneItemRemaining1:: @ 82532CC
+BattlePyramid_Text_OneItemRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There is one item left to\n"
 	.string "be found.$"
 
-BattlePyramid_Text_ZeroItemsRemaining1:: @ 825330B
+BattlePyramid_Text_ZeroItemsRemaining1::
 	.string "Are you looking for items?\p"
 	.string "There isn't anything left to\n"
 	.string "be found!$"
 
-BattlePyramid_Text_EightItemsRemaining2:: @ 825334D
+BattlePyramid_Text_EightItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are eight items\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_SevenItemsRemaining2:: @ 82533A6
+BattlePyramid_Text_SevenItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are seven items left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_SixItemsRemaining2:: @ 8253404
+BattlePyramid_Text_SixItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are six items left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_FiveItemsRemaining2:: @ 8253460
+BattlePyramid_Text_FiveItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are five items left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_FourItemsRemaining2:: @ 82534BD
+BattlePyramid_Text_FourItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are four items left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_ThreeItemsRemaining2:: @ 825351A
+BattlePyramid_Text_ThreeItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are three items left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_TwoItemsRemaining2:: @ 8253578
+BattlePyramid_Text_TwoItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are two items left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_OneItemRemaining2:: @ 82535D4
+BattlePyramid_Text_OneItemRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There is just one item\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_ZeroItemsRemaining2:: @ 825362E
+BattlePyramid_Text_ZeroItemsRemaining2::
 	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There isn't anything left\n"
 	.string "lying around here.$"
 
-BattlePyramid_Text_EightItemsRemaining3:: @ 825368B
+BattlePyramid_Text_EightItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are eight items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_SevenItemsRemaining3:: @ 82536F8
+BattlePyramid_Text_SevenItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are seven items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_SixItemsRemaining3:: @ 8253765
+BattlePyramid_Text_SixItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are six items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_FiveItemsRemaining3:: @ 82537D0
+BattlePyramid_Text_FiveItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are five items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_FourItemsRemaining3:: @ 825383C
+BattlePyramid_Text_FourItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are four items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_ThreeItemsRemaining3:: @ 82538A8
+BattlePyramid_Text_ThreeItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are three items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_TwoItemsRemaining3:: @ 8253915
+BattlePyramid_Text_TwoItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are two items left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_OneItemRemaining3:: @ 8253980
+BattlePyramid_Text_OneItemRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there's but one item left\n"
 	.string "waiting to be found on this floor.$"
 
-BattlePyramid_Text_ZeroItemsRemaining3:: @ 82539EC
+BattlePyramid_Text_ZeroItemsRemaining3::
 	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are no more items\n"
 	.string "waiting to be found on this floor.\l"
 	.string "You take care now!$"
 
-BattlePyramid_Text_EightItemsRemaining4:: @ 8253A69
+BattlePyramid_Text_EightItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be eight more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_SevenItemsRemaining4:: @ 8253AC4
+BattlePyramid_Text_SevenItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be seven more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_SixItemsRemaining4:: @ 8253B1F
+BattlePyramid_Text_SixItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be six more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_FiveItemsRemaining4:: @ 8253B78
+BattlePyramid_Text_FiveItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be five more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_FourItemsRemaining4:: @ 8253BD2
+BattlePyramid_Text_FourItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be four more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_ThreeItemsRemaining4:: @ 8253C2C
+BattlePyramid_Text_ThreeItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be three more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_TwoItemsRemaining4:: @ 8253C87
+BattlePyramid_Text_TwoItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be two more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_OneItemRemaining4:: @ 8253CE0
+BattlePyramid_Text_OneItemRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appears to be only one more\n"
 	.string "item on the ground.$"
 
-BattlePyramid_Text_ZeroItemsRemaining4:: @ 8253D3E
+BattlePyramid_Text_ZeroItemsRemaining4::
 	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be no more\n"
 	.string "items on the ground.$"
 
-BattlePyramid_Text_EightItemsRemaining5:: @ 8253D96
+BattlePyramid_Text_EightItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are eight items…$"
 
-BattlePyramid_Text_SevenItemsRemaining5:: @ 8253DD2
+BattlePyramid_Text_SevenItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are seven items…$"
 
-BattlePyramid_Text_SixItemsRemaining5:: @ 8253E0E
+BattlePyramid_Text_SixItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are six items…$"
 
-BattlePyramid_Text_FiveItemsRemaining5:: @ 8253E48
+BattlePyramid_Text_FiveItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are five items…$"
 
-BattlePyramid_Text_FourItemsRemaining5:: @ 8253E83
+BattlePyramid_Text_FourItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are four items…$"
 
-BattlePyramid_Text_ThreeItemsRemaining5:: @ 8253EBE
+BattlePyramid_Text_ThreeItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are three items…$"
 
-BattlePyramid_Text_TwoItemsRemaining5:: @ 8253EFA
+BattlePyramid_Text_TwoItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are two items…$"
 
-BattlePyramid_Text_OneItemRemaining5:: @ 8253F34
+BattlePyramid_Text_OneItemRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there is one item…$"
 
-BattlePyramid_Text_ZeroItemsRemaining5:: @ 8253F6C
+BattlePyramid_Text_ZeroItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
 	.string "I hear there are no items…$"
 
-BattlePyramid_Text_EightItemsRemaining6:: @ 8253FA5
+BattlePyramid_Text_EightItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are eight more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_SevenItemsRemaining6:: @ 8253FF7
+BattlePyramid_Text_SevenItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are seven more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_SixItemsRemaining6:: @ 8254049
+BattlePyramid_Text_SixItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are six more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_FiveItemsRemaining6:: @ 8254099
+BattlePyramid_Text_FiveItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are five more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_FourItemsRemaining6:: @ 82540EA
+BattlePyramid_Text_FourItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are four more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_ThreeItemsRemaining6:: @ 825413B
+BattlePyramid_Text_ThreeItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are three more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_TwoItemsRemaining6:: @ 825418D
+BattlePyramid_Text_TwoItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are two more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_OneItemRemaining6:: @ 82541DD
+BattlePyramid_Text_OneItemRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there is one more\n"
 	.string "item on this floor.$"
 
-BattlePyramid_Text_ZeroItemsRemaining6:: @ 825422B
+BattlePyramid_Text_ZeroItemsRemaining6::
 	.string "Have you collected any items?\p"
 	.string "I believe there are no more\n"
 	.string "items on this floor.$"
 
-BattlePyramid_Text_SevenTrainersRemaining1:: @ 825427A
+BattlePyramid_Text_SevenTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there are still seven tough\n"
 	.string "TRAINERS other than me!$"
 
-BattlePyramid_Text_SixTrainersRemaining1:: @ 82542CB
+BattlePyramid_Text_SixTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there are still six tough\n"
 	.string "TRAINERS other than me!$"
 
-BattlePyramid_Text_FiveTrainersRemaining1:: @ 825431A
+BattlePyramid_Text_FiveTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there are still five tough\n"
 	.string "TRAINERS other than me!$"
 
-BattlePyramid_Text_FourTrainersRemaining1:: @ 825436A
+BattlePyramid_Text_FourTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there are still four tough\n"
 	.string "TRAINERS other than me!$"
 
-BattlePyramid_Text_ThreeTrainersRemaining1:: @ 82543BA
+BattlePyramid_Text_ThreeTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there are still three tough\n"
 	.string "TRAINERS other than me!$"
 
-BattlePyramid_Text_TwoTrainersRemaining1:: @ 825440B
+BattlePyramid_Text_TwoTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there are still two tough\n"
 	.string "TRAINERS other than me!$"
 
-BattlePyramid_Text_OneTrainersRemaining1:: @ 825445A
+BattlePyramid_Text_OneTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "But there's still one tough\n"
 	.string "TRAINER other than me!$"
 
-BattlePyramid_Text_ZeroTrainersRemaining1:: @ 82544A6
+BattlePyramid_Text_ZeroTrainersRemaining1::
 	.string "You were really awesome!\p"
 	.string "There's no one left that\n"
 	.string "can beat you!$"
 
-BattlePyramid_Text_SevenTrainersRemaining2:: @ 82544E6
+BattlePyramid_Text_SevenTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are seven TRAINERS left!\n"
 	.string "Someone will humble you!$"
 
-BattlePyramid_Text_SixTrainersRemaining2:: @ 8254538
+BattlePyramid_Text_SixTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are six TRAINERS left!\n"
 	.string "Someone will humble you!$"
 
-BattlePyramid_Text_FiveTrainersRemaining2:: @ 8254588
+BattlePyramid_Text_FiveTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are five TRAINERS left!\n"
 	.string "Someone will humble you!$"
 
-BattlePyramid_Text_FourTrainersRemaining2:: @ 82545D9
+BattlePyramid_Text_FourTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are four TRAINERS left!\n"
 	.string "Someone will humble you!$"
 
-BattlePyramid_Text_ThreeTrainersRemaining2:: @ 825462A
+BattlePyramid_Text_ThreeTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are three TRAINERS left!\n"
 	.string "Someone will humble you!$"
 
-BattlePyramid_Text_TwoTrainersRemaining2:: @ 825467C
+BattlePyramid_Text_TwoTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are two TRAINERS left!\n"
 	.string "Someone will humble you!$"
 
-BattlePyramid_Text_OneTrainersRemaining2:: @ 82546CC
+BattlePyramid_Text_OneTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there's one TRAINER left!\n"
 	.string "I'm sure you will be humbled!$"
 
-BattlePyramid_Text_ZeroTrainersRemaining2:: @ 825471E
+BattlePyramid_Text_ZeroTrainersRemaining2::
 	.string "This is so upsetting!\p"
 	.string "But there are no more TRAINERS\n"
 	.string "who can engage you!$"
 
-BattlePyramid_Text_SevenTrainersRemaining3:: @ 8254767
+BattlePyramid_Text_SevenTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there are seven more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
-BattlePyramid_Text_SixTrainersRemaining3:: @ 82547C9
+BattlePyramid_Text_SixTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there are six more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
-BattlePyramid_Text_FiveTrainersRemaining3:: @ 8254829
+BattlePyramid_Text_FiveTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there are five more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
-BattlePyramid_Text_FourTrainersRemaining3:: @ 825488A
+BattlePyramid_Text_FourTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there are four more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
-BattlePyramid_Text_ThreeTrainersRemaining3:: @ 82548EB
+BattlePyramid_Text_ThreeTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there are three more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
-BattlePyramid_Text_TwoTrainersRemaining3:: @ 825494D
+BattlePyramid_Text_TwoTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there are two more TRAINERS\n"
 	.string "on this floor. Can you beat them both?$"
 
-BattlePyramid_Text_OneTrainersRemaining3:: @ 82549AE
+BattlePyramid_Text_OneTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "But there's still one more TRAINER\n"
 	.string "on this floor. Can you prevail?$"
 
-BattlePyramid_Text_ZeroTrainersRemaining3:: @ 8254A0B
+BattlePyramid_Text_ZeroTrainersRemaining3::
 	.string "That's pretty impressive!\p"
 	.string "You've gone through all the TRAINERS\n"
 	.string "on this floor.$"
 
-BattlePyramid_Text_SevenTrainersRemaining4:: @ 8254A59
+BattlePyramid_Text_SevenTrainersRemaining4::
 	.string "Maybe you could sweep through\n"
 	.string "the seven TRAINERS left on this floor.$"
 
-BattlePyramid_Text_SixTrainersRemaining4:: @ 8254A9E
+BattlePyramid_Text_SixTrainersRemaining4::
 	.string "Maybe you could sweep through\n"
 	.string "the six TRAINERS left on this floor.$"
 
-BattlePyramid_Text_FiveTrainersRemaining4:: @ 8254AE1
+BattlePyramid_Text_FiveTrainersRemaining4::
 	.string "Maybe you could sweep through\n"
 	.string "the five TRAINERS left on this floor.$"
 
-BattlePyramid_Text_FourTrainersRemaining4:: @ 8254B25
+BattlePyramid_Text_FourTrainersRemaining4::
 	.string "Maybe you could sweep through\n"
 	.string "the four TRAINERS left on this floor.$"
 
-BattlePyramid_Text_ThreeTrainersRemaining4:: @ 8254B69
+BattlePyramid_Text_ThreeTrainersRemaining4::
 	.string "Maybe you could sweep through\n"
 	.string "the three TRAINERS left on this floor.$"
 
-BattlePyramid_Text_TwoTrainersRemaining4:: @ 8254BAE
+BattlePyramid_Text_TwoTrainersRemaining4::
 	.string "Maybe you could sweep through\n"
 	.string "the two TRAINERS left on this floor.$"
 
-BattlePyramid_Text_OneTrainersRemaining4:: @ 8254BF1
+BattlePyramid_Text_OneTrainersRemaining4::
 	.string "Maybe you could complete your sweep\n"
 	.string "with the one TRAINER left on this floor.$"
 
-BattlePyramid_Text_ZeroTrainersRemaining4:: @ 8254C3E
+BattlePyramid_Text_ZeroTrainersRemaining4::
 	.string "There isn't a single person left who\n"
 	.string "can defeat you now…$"
 
-BattlePyramid_Text_SevenTrainersRemaining5:: @ 8254C77
+BattlePyramid_Text_SevenTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the seven expert TRAINERS who remain.$"
 
-BattlePyramid_Text_SixTrainersRemaining5:: @ 8254CC0
+BattlePyramid_Text_SixTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the six expert TRAINERS who remain.$"
 
-BattlePyramid_Text_FiveTrainersRemaining5:: @ 8254D07
+BattlePyramid_Text_FiveTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the five expert TRAINERS who remain.$"
 
-BattlePyramid_Text_FourTrainersRemaining5:: @ 8254D4F
+BattlePyramid_Text_FourTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the four expert TRAINERS who remain.$"
 
-BattlePyramid_Text_ThreeTrainersRemaining5:: @ 8254D97
+BattlePyramid_Text_ThreeTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the three expert TRAINERS who remain.$"
 
-BattlePyramid_Text_TwoTrainersRemaining5:: @ 8254DE0
+BattlePyramid_Text_TwoTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the two expert TRAINERS who remain.$"
 
-BattlePyramid_Text_OneTrainersRemaining5:: @ 8254E27
+BattlePyramid_Text_OneTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
 	.string "the one expert TRAINER who remains.$"
 
-BattlePyramid_Text_ZeroTrainersRemaining5:: @ 8254E6E
+BattlePyramid_Text_ZeroTrainersRemaining5::
 	.string "Your skills are beyond reproach.\p"
 	.string "There are no more TRAINERS here\n"
 	.string "who have any chance of beating you.$"
 
-BattlePyramid_Text_SevenTrainersRemaining6:: @ 8254ED3
+BattlePyramid_Text_SevenTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the seven remaining TRAINERS?$"
 
-BattlePyramid_Text_SixTrainersRemaining6:: @ 8254F0E
+BattlePyramid_Text_SixTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the six remaining TRAINERS?$"
 
-BattlePyramid_Text_FiveTrainersRemaining6:: @ 8254F47
+BattlePyramid_Text_FiveTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the five remaining TRAINERS?$"
 
-BattlePyramid_Text_FourTrainersRemaining6:: @ 8254F81
+BattlePyramid_Text_FourTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the four remaining TRAINERS?$"
 
-BattlePyramid_Text_ThreeTrainersRemaining6:: @ 8254FBB
+BattlePyramid_Text_ThreeTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the three remaining TRAINERS?$"
 
-BattlePyramid_Text_TwoTrainersRemaining6:: @ 8254FF6
+BattlePyramid_Text_TwoTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the two remaining TRAINERS?$"
 
-BattlePyramid_Text_OneTrainersRemaining6:: @ 825502F
+BattlePyramid_Text_OneTrainersRemaining6::
 	.string "Can you keep winning against\n"
 	.string "the last remaining TRAINER?$"
 
-BattlePyramid_Text_ZeroTrainersRemaining6:: @ 8255068
+BattlePyramid_Text_ZeroTrainersRemaining6::
 	.string "There aren't any TRAINERS left that\n"
 	.string "can take you on now…$"
