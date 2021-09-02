@@ -2929,6 +2929,9 @@ static void BattleStartClearSetData(void)
     gBattleStruct->arenaLostOpponentMons = 0;
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
+    
+    for (i = 0; i < PARTY_SIZE; i++)
+        gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 }
 
 void SwitchInClearSetData(void)
@@ -4875,6 +4878,10 @@ static void HandleEndTurn_FinishBattle(void)
         sub_8186444();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
+        #if B_TRAINERS_KNOCK_OFF_ITEMS
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            TryRestoreStolenItems();
+        #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
             UndoMegaEvolution(i);

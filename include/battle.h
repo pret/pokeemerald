@@ -471,6 +471,12 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct StolenItem
+{
+    u16 originalItem:15;
+    u16 stolen:1;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -587,6 +593,7 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
+    struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -603,6 +610,7 @@ struct BattleStruct
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+#define BATTLER_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type || gBattleMons[battlerId].type3 == type))
 #define SET_BATTLER_TYPE(battlerId, type)           \
