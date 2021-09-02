@@ -7,7 +7,7 @@
 #define MENU_L_PRESSED 1
 #define MENU_R_PRESSED 2
 
-// Exported type declarations
+#define SWAP_LINE_HAS_MARGIN (1 << 7)
 
 struct YesNoFuncTable
 {
@@ -15,9 +15,6 @@ struct YesNoFuncTable
     TaskFunc noFunc;
 };
 
-// Exported RAM declarations
-
-// Exported ROM declarations
 void ResetVramOamAndBgCntRegs(void);
 void ResetAllBgsCoordinates(void);
 void SetVBlankHBlankCallbacksToNull(void);
@@ -28,13 +25,13 @@ void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *templa
 bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1);
 u8 GetLRKeysPressed(void);
 u8 GetLRKeysPressedAndHeld(void);
-bool8 sub_8122148(u16 itemId);
+bool8 IsHoldingItemAllowed(u16 itemId);
 bool8 IsWritingMailAllowed(u16 itemId);
 bool8 MenuHelpers_LinkSomething(void);
 bool8 MenuHelpers_CallLinkSomething(void);
-void sub_812220C(struct ItemSlot *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount);
-void sub_812225C(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 numItems);
-void sub_8122298(u16 *arg0, u16 *arg1, u8 arg2, u8 arg3, u8 arg4);
+void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage);
+void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems);
+void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems);
 void LoadListMenuSwapLineGfx(void);
 void CreateSwapLineSprites(u8 *spriteIds, u8 count);
 void DestroySwapLineSprites(u8 *spriteIds, u8 count);

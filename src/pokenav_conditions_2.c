@@ -672,8 +672,8 @@ void CreateMonMarkingsOrPokeballIndicators(void)
         BufferMonMarkingsMenuTiles();
         sprite = CreateMonMarkingAllCombosSprite(0x69, 0x69, sConditionGraphMonMarkingsPal);
         sprite->oam.priority = 3;
-        sprite->pos1.x = 192;
-        sprite->pos1.y = 32;
+        sprite->x = 192;
+        sprite->y = 32;
         sprite->callback = MonMarkingsCallback;
         structPtr->monMarksSprite = sprite;
         PokenavFillPalette(IndexOfSpritePaletteTag(0x69), 0);
@@ -792,7 +792,7 @@ void FreePartyConditionSubstruct2(void)
 void MonPicGfxSpriteCallback(struct Sprite *sprite)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
-    sprite->pos1.x = structPtr->monTransitionX + 38;
+    sprite->x = structPtr->monTransitionX + 38;
 }
 
 void CreateConditionMonPic(u8 id)

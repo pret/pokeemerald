@@ -1,5 +1,5 @@
 	.align 2
-gScriptCmdTable:: @ 81DB67C
+gScriptCmdTable::
 	.4byte ScrCmd_nop      	                @ 0x00
 	.4byte ScrCmd_nop1                      @ 0x01
 	.4byte ScrCmd_end      	                @ 0x02
@@ -229,5 +229,5 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
   .4byte ScrCmd_callfunc                  @ 0xe3
 
-gScriptCmdTableEnd:: @ 81DBA08
+gScriptCmdTableEnd::
 	.4byte ScrCmd_nop
