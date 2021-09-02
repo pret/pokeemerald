@@ -13,6 +13,15 @@ There are several branches, each with additional features compared to vanilla:
 * A way to change a pokemon's nature while mangling its PID as little as possible.
 * Function to detect newer emulators/new GBA hardware.
 
+**icons** branch:
+* Everything from the **romhack** branch.
+* All pokemon icons updated to nicer looking Gen 6 style, based on [this repo](https://github.com/msikma/pokesprite/tree/master/icons/pokemon/regular)
+* This includes compatibility with the PC, trade, contests, mail, Battle Dome. Examples:
+![PC](https://i.imgur.com/wzwJfd1.png)
+![Party](https://i.imgur.com/8hbE88t.png)
+![Contest](https://i.imgur.com/S9mCEFL.png)
+* Icons share palettes with front sprites, meaning that shiny pokemon will also have shiny icons!
+
 **lighting** branch:
 * Everything from the **romhack** branch.
 * Day/night shading compatible with weather.
