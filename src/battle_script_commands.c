@@ -5103,26 +5103,26 @@ static void Cmd_moveend(void)
         case MOVEEND_RED_CARD:
             if (gCurrentMove != MOVE_DRAGON_TAIL
               && gCurrentMove != MOVE_CIRCLE_THROW
-              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
               && IsBattlerAlive(gBattlerAttacker)
-              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
-              && (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
+              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
             {
+                // since we check if battler was damaged, we don't need to check move result.
+                // In fact, doing so actually prevents multi-target moves from activating red card properly
                 u8 battlers[4] = {0, 1, 2, 3};
                 SortBattlersBySpeed(battlers, FALSE);
                 for (i = 0; i < gBattlersCount; i++)
                 {
                     u8 battler = battlers[i];
+                    // Search for fastest hit pokemon with a red card
                     // Attacker is the one to be switched out, battler is one with red card
                     if (battler != gBattlerAttacker
                       && IsBattlerAlive(battler)
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RED_CARD
-                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
-                      && CountUsablePartyMons(battler) > 0)  // Has mon to switch into
-                    {
+                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0))
+                    {                        
                         gLastUsedItem = gBattleMons[battler].item;
-                        gActiveBattler = gBattleScripting.battler = battler;  // Battler with red card
+                        gActiveBattler = gBattleStruct->savedBattlerTarget = gBattleScripting.battler = battler;  // Battler with red card
                         gEffectBattler = gBattlerAttacker;
                         if (gBattleMoves[gCurrentMove].effect == EFFECT_HIT_ESCAPE)
                             gBattlescriptCurrInstr = BattleScript_MoveEnd;  // Prevent user switch-in selection
@@ -5533,6 +5533,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         }
         else
         {
+            // check if attacker side has mon to switch into
             battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -6125,7 +6126,7 @@ static void Cmd_endlinkbattle(void)
 }
 
 static void Cmd_returntoball(void)
-{
+{    
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     BtlController_EmitReturnMonToBall(0, 1);
     MarkBattlerForControllerExec(gActiveBattler);
@@ -9420,6 +9421,30 @@ static void Cmd_forcerandomswitch(void)
     struct Pokemon* party = NULL;
     s32 validMons = 0;
     s32 minNeeded;
+    
+    // check wild mon holding a red card
+    // red card swaps attacker with target to get the animation correct, so here we check attacker which is really the target. Thanks GF...
+    if (gBattleScripting.switchCase == B_SWITCH_RED_CARD
+      && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+      && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+    {
+        if (WILD_DOUBLE_BATTLE)
+        {
+            // if wild mon with red card is the last one alive, it ends the battle
+            if (!IS_WHOLE_SIDE_ALIVE(gBattlerAttacker))
+            {
+                gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
+                return;
+            }
+            // else, try to make attacker (aka player) change pokemon            
+        }
+        else
+        {
+            // Wild mon with red card will end single battle
+            gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
+            return;
+        }
+    }
 
     // Swapping pokemon happens in:
     // trainer battles
@@ -9434,7 +9459,7 @@ static void Cmd_forcerandomswitch(void)
             && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
             && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
        )
-    {
+    {        
         if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
             party = gPlayerParty;
         else

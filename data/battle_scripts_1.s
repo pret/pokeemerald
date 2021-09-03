@@ -5583,6 +5583,7 @@ BattleScript_RoarSuccessSwitch::
 	goto BattleScript_MoveEnd
 BattleScript_RoarSuccessSwitch_Ret:
 	swapattackerwithtarget	@ continuation of RedCardActivates
+	restoretarget
 	removeitem BS_TARGET
 	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
 	return
@@ -8031,11 +8032,10 @@ BattleScript_StickyBarbTransfer::
 	return
 
 BattleScript_RedCardActivates::
-	jumpifcantswitch BS_ATTACKER, BattleScript_RedCardEnd
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_REDCARDACTIVATE
 	waitmessage 0x40
-	swapattackerwithtarget	
+	swapattackerwithtarget
 	jumpifstatus3 BS_EFFECT_BATTLER, STATUS3_ROOTED, BattleScript_RedCardIngrain
 	jumpifability BS_EFFECT_BATTLER, ABILITY_SUCTION_CUPS, BattleScript_RedCardSuctionCups
 	setbyte sSWITCH_CASE, B_SWITCH_RED_CARD
