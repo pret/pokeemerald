@@ -8057,7 +8057,6 @@ BattleScript_RedCardSuctionCups:
 	return
 
 BattleScript_EjectButtonActivates::
-	jumpifcantswitch BS_SCRIPTING, BattleScript_EjectButtonEnd
 	makevisible BS_ATTACKER
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_EJECTBUTTONACTIVATE

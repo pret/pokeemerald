@@ -5070,11 +5070,12 @@ static void Cmd_moveend(void)
         case MOVEEND_EJECT_BUTTON:
             if (gCurrentMove != MOVE_DRAGON_TAIL
               && gCurrentMove != MOVE_CIRCLE_THROW
-              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
               && IsBattlerAlive(gBattlerAttacker)
               && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
               && (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
             {
+                // Since we check if battler was damaged, we don't need to check move result.
+                // In fact, doing so actually prevents multi-target moves from activating eject button properly
                 u8 battlers[4] = {0, 1, 2, 3};
                 SortBattlersBySpeed(battlers, FALSE);
                 for (i = 0; i < gBattlersCount; i++)
@@ -5106,7 +5107,7 @@ static void Cmd_moveend(void)
               && IsBattlerAlive(gBattlerAttacker)
               && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
             {
-                // since we check if battler was damaged, we don't need to check move result.
+                // Since we check if battler was damaged, we don't need to check move result.
                 // In fact, doing so actually prevents multi-target moves from activating red card properly
                 u8 battlers[4] = {0, 1, 2, 3};
                 SortBattlersBySpeed(battlers, FALSE);
