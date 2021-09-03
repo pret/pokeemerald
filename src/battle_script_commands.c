@@ -3587,7 +3587,7 @@ static void Cmd_jumpifstat(void)
     u8 cmpTo = gBattlescriptCurrInstr[4];
     u8 cmpKind = gBattlescriptCurrInstr[2];
 
-    ret = CompareStat(battlerId, statId, cmpTo, cmpKind, TRUE);
+    ret = CompareStat(battlerId, statId, cmpTo, cmpKind);
 
     if (ret)
         gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 5);
@@ -4786,7 +4786,7 @@ static void Cmd_moveend(void)
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && TARGET_TURN_DAMAGED
-                && gBattleMoves[gCurrentMove].power && gBattleMons[gBattlerTarget].statStages[STAT_ATK] < MAX_STAT_STAGE)
+                && gBattleMoves[gCurrentMove].power && CompareStat(gBattlerTarget, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
                 gBattleMons[gBattlerTarget].statStages[STAT_ATK]++;
                 BattleScriptPushCursor();
@@ -7476,7 +7476,7 @@ static void Cmd_various(void)
         bits = 0;
         for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
         {
-            if (gBattleMons[gActiveBattler].statStages[i] != 12)
+            if (CompareStat(gActiveBattler, i, MAX_STAT_STAGE, CMP_LESS_THAN))
                 bits |= gBitTable[i];
         }
         if (bits)
@@ -7713,7 +7713,7 @@ static void Cmd_various(void)
          || GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_ICE_RIDER)
           && HasAttackerFaintedTarget()
           && !NoAliveMonsForEitherParty()
-          && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
+          && CompareStat(gBattlerAttacker, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
             SET_STATCHANGER(STAT_ATK, 1, FALSE);
@@ -7731,7 +7731,7 @@ static void Cmd_various(void)
          || GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_SHADOW_RIDER)
           && HasAttackerFaintedTarget()
           && !NoAliveMonsForEitherParty()
-          && gBattleMons[gBattlerAttacker].statStages[STAT_SPATK] != 12)
+          && CompareStat(gBattlerAttacker, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_SPATK]++;
             SET_STATCHANGER(STAT_SPATK, 1, FALSE);
@@ -7776,7 +7776,7 @@ static void Cmd_various(void)
         if (GetBattlerAbility(gActiveBattler) == ABILITY_BEAST_BOOST
             && HasAttackerFaintedTarget()
             && !NoAliveMonsForEitherParty()
-            && gBattleMons[gBattlerAttacker].statStages[i] != 12)
+            && CompareStat(gActiveBattler, i, MAX_STAT_STAGE, CMP_LESS_THAN))
         {
             gBattleMons[gBattlerAttacker].statStages[i]++;
             SET_STATCHANGER(i, 1, FALSE);
@@ -7793,7 +7793,7 @@ static void Cmd_various(void)
             if (GetBattlerAbility(gBattleScripting.battler) == ABILITY_SOUL_HEART
                 && IsBattlerAlive(gBattleScripting.battler)
                 && !NoAliveMonsForEitherParty()
-                && gBattleMons[gBattleScripting.battler].statStages[STAT_SPATK] != 12)
+                && CompareStat(gBattleScripting.battler, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
                 gBattleMons[gBattleScripting.battler].statStages[STAT_SPATK]++;
                 SET_STATCHANGER(STAT_SPATK, 1, FALSE);
@@ -7809,7 +7809,7 @@ static void Cmd_various(void)
         if (gBattleMoves[gCurrentMove].effect == EFFECT_FELL_STINGER
             && HasAttackerFaintedTarget()
             && !NoAliveMonsForEitherParty()
-            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
+            && CompareStat(gBattlerAttacker, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
         {
             if (B_FELL_STINGER_STAT_RAISE >= GEN_7)
                 SET_STATCHANGER(STAT_ATK, 3, FALSE);
@@ -10712,8 +10712,8 @@ static void Cmd_handlerollout(void)
 static void Cmd_jumpifconfusedandstatmaxed(void)
 {
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION
-        && gBattleMons[gBattlerTarget].statStages[gBattlescriptCurrInstr[1]] == MAX_STAT_STAGE)
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+      && CompareStat(gBattlerTarget, gBattlescriptCurrInstr[1], MAX_STAT_STAGE, CMP_LESS_THAN))
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2); // Fails if we're confused AND stat cannot be raised
     else
         gBattlescriptCurrInstr += 6;
 }
@@ -10922,7 +10922,8 @@ static void Cmd_maxattackhalvehp(void) // belly drum
 
     if (!(gBattleMons[gBattlerAttacker].maxHP / 2))
         halfHp = 1;
-
+    
+    // Belly Drum fails if the user's current HP is less than half its maximum, or if the user's Attack is already at +6 (even if the user has Contrary).
     if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
         && gBattleMons[gBattlerAttacker].hp > halfHp)
     {
