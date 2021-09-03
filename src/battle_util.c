@@ -6354,7 +6354,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             }
         }
         break;
-    case ITEMEFFECT_KINGSROCK_SHELLBELL:
+    case ITEMEFFECT_KINGSROCK:
+        // occur on each hit of a multi-strike move
         switch (atkHoldEffect)
         {
         case HOLD_EFFECT_FLINCH:
@@ -6371,6 +6372,25 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 BattleScriptPop();
             }
             break;
+        case HOLD_EFFECT_BLUNDER_POLICY:
+            if (gBattleStruct->blunderPolicy
+             && gBattleMons[gBattlerAttacker].hp != 0
+             && gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] < MAX_STAT_STAGE)
+            {
+                gBattleStruct->blunderPolicy = FALSE;
+                gLastUsedItem = atkItem;
+                gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPEED, 2, FALSE);
+                effect = ITEM_STATS_CHANGE;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AttackerItemStatRaise;
+            }
+            break;
+        }
+        break;
+    case ITEMEFFECT_LIFEORB_SHELLBELL:
+        // occur after the final hit of a multi-strike move
+        switch (atkHoldEffect)
+        {
         case HOLD_EFFECT_SHELL_BELL:
             if (gBattleMoveDamage != 0  // Need to have done damage
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
@@ -6389,30 +6409,35 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gSpecialStatuses[gBattlerTarget].dmg = 0;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ItemHealHP_Ret;
-                effect++;
+                effect = TRUE;
+            }
+            break;
+        case HOLD_EFFECT_LIFE_ORB:
+            if (IsBattlerAlive(gBattlerAttacker)
+                && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+                && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
+                && gSpecialStatuses[gBattlerAttacker].damagedMons)
+            {
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 10;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                effect = TRUE;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_ItemHurtRet;
+                gLastUsedItem = gBattleMons[gBattlerAttacker].item;
             }
             break;
         case HOLD_EFFECT_THROAT_SPRAY:  // Does NOT need to be a damaging move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !(gHitMarker & (HITMARKER_UNABLE_TO_USE_MOVE))
              && gBattleMons[gBattlerAttacker].hp != 0
              && gBattleMoves[gCurrentMove].flags & FLAG_SOUND
-             && gBattleMons[gBattlerAttacker].statStages[STAT_SPATK] < MAX_STAT_STAGE)
+             && gBattleMons[gBattlerAttacker].statStages[STAT_SPATK] < MAX_STAT_STAGE
+             && !NoAliveMonsForEitherParty())   // don't activate if battle will end
             {
                 gLastUsedItem = atkItem;
+                gBattleScripting.battler = gBattlerAttacker;
                 gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPATK, 1, FALSE);
-                effect = ITEM_STATS_CHANGE;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_AttackerItemStatRaise;
-            }
-            break;
-        case HOLD_EFFECT_BLUNDER_POLICY:
-            if (gBattleStruct->blunderPolicy
-             && gBattleMons[gBattlerAttacker].hp != 0
-             && gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] < MAX_STAT_STAGE)
-            {
-                gBattleStruct->blunderPolicy = FALSE;
-                gLastUsedItem = atkItem;
-                gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPEED, 2, FALSE);
                 effect = ITEM_STATS_CHANGE;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AttackerItemStatRaise;

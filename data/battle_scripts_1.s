@@ -1868,7 +1868,7 @@ BattleScript_RoomServiceLoop:
 	jumpifnoholdeffect BS_TARGET, HOLD_EFFECT_ROOM_SERVICE, BattleScript_RoomServiceLoop_NextBattler
 	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPEED, MIN_STAT_STAGE, BattleScript_RoomServiceLoop_NextBattler
 	setstatchanger STAT_SPEED, 1, TRUE
-	statbuffchange 0, BattleScript_RoomServiceLoop_NextBattler
+	statbuffchange MOVE_EFFECT_AFFECTS_USER, BattleScript_RoomServiceLoop_NextBattler
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_RoomServiceLoop_NextBattler
 	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT, NULL
 	waitanimation
@@ -2193,18 +2193,21 @@ BattleScript_AlreadyAsleep::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNALREADYASLEEP
 	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
 BattleScript_WasntAffected::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNWASNTAFFECTED
 	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
 BattleScript_CantMakeAsleep::
 	pause B_WAIT_TIME_SHORT
 	printfromtable gUproarAwakeStringIds
 	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectPoisonHit:
@@ -5643,7 +5646,7 @@ BattleScript_TargetItemStatRaiseRemoveItemRet:
 	
 BattleScript_AttackerItemStatRaise::
 	copybyte sBATTLER, gBattlerAttacker
-	statbuffchange 0, BattleScript_AttackerItemStatRaiseRet
+	statbuffchange MOVE_EFFECT_AFFECTS_USER, BattleScript_AttackerItemStatRaiseRet
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackerItemStatRaiseRet
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
 	waitanimation
@@ -7120,6 +7123,7 @@ BattleScript_SoundproofProtected::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNSXBLOCKSY
 	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
 
 BattleScript_DazzlingProtected::
