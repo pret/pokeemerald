@@ -5569,7 +5569,7 @@ static u8 DamagedStatBoostBerryEffect(u8 battlerId, u8 statId, u8 split)
 
 u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute)
 {
-    if (gFieldStatuses & terrainFlag && gBattleMons[battler].statStages[statId] < MAX_STAT_STAGE)
+    if (gFieldStatuses & terrainFlag && CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN, TRUE))
     {
         PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
         PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
@@ -5826,7 +5826,6 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 RecordItemEffectBattle(battlerId, HOLD_EFFECT_AIR_BALLOON);
                 break;
             case HOLD_EFFECT_ROOM_SERVICE:
-
                 if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && gBattleMons[battlerId].statStages[STAT_SPEED] > MIN_STAT_STAGE)
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPEED);
@@ -8943,4 +8942,56 @@ bool32 TestSheerForceFlag(u8 battler, u16 move)
         return TRUE;
     else
         return FALSE;
+}
+
+// This function is the body of "jumpifstat", but can be used dynamically in a function
+bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind, bool32 checkContrary)
+{
+    bool8 ret = FALSE;
+    u8 statValue = gBattleMons[battlerId].statStages[statId];
+    
+    // Because this command is used as a way of checking if a stat can be lowered/raised,
+    // we need to do some modification at run-time.
+    if (checkContrary && GetBattlerAbility(battlerId) == ABILITY_CONTRARY)
+    {
+        if (cmpKind == CMP_GREATER_THAN)
+            cmpKind = CMP_LESS_THAN;
+        else if (cmpKind == CMP_LESS_THAN)
+            cmpKind = CMP_GREATER_THAN;
+
+        if (cmpTo == MIN_STAT_STAGE)
+            cmpTo = MAX_STAT_STAGE;
+        else if (cmpTo == MAX_STAT_STAGE)
+            cmpTo = MIN_STAT_STAGE;
+    }
+
+    switch (cmpKind)
+    {
+    case CMP_EQUAL:
+        if (statValue == cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_NOT_EQUAL:
+        if (statValue != cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_GREATER_THAN:
+        if (statValue > cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_LESS_THAN:
+        if (statValue < cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_COMMON_BITS:
+        if (statValue & cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_NO_COMMON_BITS:
+        if (!(statValue & cmpTo))
+            ret = TRUE;
+        break;
+    }
+    
+    return ret;
 }

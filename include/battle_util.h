@@ -148,6 +148,7 @@ bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
 u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
 bool32 IsBattlerAffectedByHazards(u8 battlerId, bool32 toxicSpikes);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
+bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind, bool32 checkContrary);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);

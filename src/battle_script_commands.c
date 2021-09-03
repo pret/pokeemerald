@@ -3583,52 +3583,11 @@ static void Cmd_jumpifstat(void)
 {
     bool32 ret = 0;
     u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    u8 statValue = gBattleMons[battlerId].statStages[gBattlescriptCurrInstr[3]];
+    u8 statId = gBattlescriptCurrInstr[3];
     u8 cmpTo = gBattlescriptCurrInstr[4];
     u8 cmpKind = gBattlescriptCurrInstr[2];
 
-    // Because this command is used as a way of checking if a stat can be lowered/raised,
-    // we need to do some modification at run-time.
-    if (GetBattlerAbility(battlerId) == ABILITY_CONTRARY)
-    {
-        if (cmpKind == CMP_GREATER_THAN)
-            cmpKind = CMP_LESS_THAN;
-        else if (cmpKind == CMP_LESS_THAN)
-            cmpKind = CMP_GREATER_THAN;
-
-        if (cmpTo == 0)
-            cmpTo = 0xC;
-        else if (cmpTo == 0xC)
-            cmpTo = 0;
-    }
-
-    switch (cmpKind)
-    {
-    case CMP_EQUAL:
-        if (statValue == cmpTo)
-            ret++;
-        break;
-    case CMP_NOT_EQUAL:
-        if (statValue != cmpTo)
-            ret++;
-        break;
-    case CMP_GREATER_THAN:
-        if (statValue > cmpTo)
-            ret++;
-        break;
-    case CMP_LESS_THAN:
-        if (statValue < cmpTo)
-            ret++;
-        break;
-    case CMP_COMMON_BITS:
-        if (statValue & cmpTo)
-            ret++;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(statValue & cmpTo))
-            ret++;
-        break;
-    }
+    ret = CompareStat(battlerId, statId, cmpTo, cmpKind, TRUE);
 
     if (ret)
         gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 5);
@@ -8561,7 +8520,7 @@ static void Cmd_various(void)
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
         break;
-        case VARIOUS_TERRAIN_SEED:
+    case VARIOUS_TERRAIN_SEED:
         if (GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_SEEDS)
         {
             u8 effect = 0;
@@ -9278,12 +9237,16 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
             index++;
             gBattleTextBuff2[index] = B_BUFF_EOS;
-
-            gSpecialStatuses[gActiveBattler].statFell = TRUE;   // For eject pack
+            
             if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
+            {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_WONT_DECREASE;
+            }
             else
+            {
+                gSpecialStatuses[gActiveBattler].statFell = TRUE;   // For eject pack
                 gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler); // B_MSG_ATTACKER_STAT_FELL or B_MSG_DEFENDER_STAT_FELL
+            }
         }
     }
     else // stat increase

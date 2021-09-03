@@ -7755,12 +7755,13 @@ BattleScript_BerryStatRaiseEnd2::
 BattleScript_BerryStatRaiseEnd2_AbilityPopup:
 	call BattleScript_AbilityPopUp
 BattleScript_BerryStatRaiseEnd2_Anim:
-	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_BerryStatRaiseDoStatUp
-BattleScript_BerryStatRaiseDoStatUp::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_BerryStatRaiseEnd2_End
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, sB_ANIM_ARG1
 	setbyte cMULTISTRING_CHOOSER, B_MSG_STAT_ROSE_ITEM
 	call BattleScript_StatUp
 	removeitem BS_ATTACKER
+BattleScript_BerryStatRaiseEnd2_End::
 	end2
 
 BattleScript_BerryStatRaiseRet::
@@ -7769,12 +7770,13 @@ BattleScript_BerryStatRaiseRet::
 BattleScript_BerryStatRaiseRet_AbilityPopup:
 	call BattleScript_AbilityPopUp
 BattleScript_BerryStatRaiseRet_Anim:
-	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
-	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_BerryStatRaiseRet_End
-BattleScript_BerryStatRaiseRet_End:
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_BerryStatRaiseRet_End
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, sB_ANIM_ARG1
 	setbyte cMULTISTRING_CHOOSER, B_MSG_STAT_ROSE_ITEM
 	call BattleScript_StatUp
 	removeitem BS_SCRIPTING
+BattleScript_BerryStatRaiseRet_End:
 	return
 
 BattleScript_BerryFocusEnergyEnd2::
