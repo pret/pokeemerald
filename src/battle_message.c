@@ -705,6 +705,9 @@ static const u8 sText_ZMoveRestoreHp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} rest
 static const u8 sText_ZMoveStatUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted\nits stats using its Z-Power!");
 static const u8 sText_ZMoveHpSwitchInTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s HP was restored by the Z-Power!");
 static const u8 sText_TerrainReturnedToNormal[] = _("The terrain returned to\nnormal!");
+static const u8 sText_ItemCannotBeRemoved[] = _("{B_ATK_NAME_WITH_PREFIX}'s item cannot be removed!");
+static const u8 sText_StickyBarbTransfer[] = _("The {B_LAST_ITEM} attached itself to\n{B_ATK_NAME_WITH_PREFIX}!");
+
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -716,6 +719,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ZMOVERESTOREHP - 12] = sText_ZMoveRestoreHp,
     [STRINGID_ZMOVESTATUP - 12] = sText_ZMoveStatUp,
     [STRINGID_ZMOVEHPTRAP - 12] = sText_ZMoveHpSwitchInTrap,
+    [STRINGID_STICKYBARBTRANSFER - 12] = sText_StickyBarbTransfer,
+    [STRINGID_ITEMCANNOTBEREMOVED - 12] = sText_ItemCannotBeRemoved,
     [STRINGID_PKMNGOTOVERITSINFATUATION - 12] = sText_PkmnGotOverItsInfatuation,
     [STRINGID_PKMNSHOOKOFFTHETAUNT - 12] = sText_PkmnShookOffTheTaunt,
     [STRINGID_MICLEBERRYACTIVATES - 12] = sText_MicleBerryActivates,

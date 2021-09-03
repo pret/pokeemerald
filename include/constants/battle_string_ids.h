@@ -579,8 +579,10 @@
 #define STRINGID_ZMOVESTATUP                     575
 #define STRINGID_ZMOVEHPTRAP                     576
 #define STRINGID_TERRAINREMOVED                  577
+#define STRINGID_ITEMCANNOTBEREMOVED             578
+#define STRINGID_STICKYBARBTRANSFER              579
 
-#define BATTLESTRINGS_COUNT                      578
+#define BATTLESTRINGS_COUNT                      580
 
 //// multichoice message IDs
 // switch in ability message
