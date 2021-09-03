@@ -2165,7 +2165,7 @@ const struct Item gItems[] =
         .battleUseFunc = ItemUseInBattle_EnigmaBerry,
     },
 
-    [ITEM_0B0] =
+    [ITEM_UNUSED_BERRY_1] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2176,7 +2176,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0B1] =
+    [ITEM_UNUSED_BERRY_2] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2187,7 +2187,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0B2] =
+    [ITEM_UNUSED_BERRY_3] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -4355,8 +4355,20 @@ const struct Item gItems[] =
         .unk19 = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_Bike,
-        .secondaryId = MACH_BIKE,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TOWN_MAP] =
+    {
+        .name = _("TOWN MAP"),
+        .itemId = ITEM_TOWN_MAP,
+        .price = 0,
+        .description = sTownMapDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_VS_SEEKER] =

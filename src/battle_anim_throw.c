@@ -820,7 +820,7 @@ void AnimTask_ThrowBall_StandingTrainer(u8 taskId)
 static void AnimTask_ThrowBall_StandingTrainer_Step(u8 taskId)
 {
     if (gSprites[gBattlerSpriteIds[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]].animCmdIndex == 1)
-    { 
+    {
         PlaySE12WithPanning(SE_BALL_THROW, 0);
         gSprites[gTasks[taskId].tSpriteId].callback = SpriteCB_Ball_Throw;
         CreateTask(Task_PlayerThrow_Wait, 10);

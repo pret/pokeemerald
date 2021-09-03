@@ -584,9 +584,33 @@ extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
 extern const u8 TrainerHill_EventScript_TrainerBattle[];
 
 // Item Use
-extern u8 BerryTree_EventScript_ItemUsePlantBerry[];
-extern u8 BerryTree_EventScript_ItemUseWailmerPail[];
-extern u8 BattleFrontier_OutsideEast_EventScript_WaterSudowoodo[];
+extern const u8 BerryTree_EventScript_ItemUsePlantBerry[];
+extern const u8 BerryTree_EventScript_ItemUseWailmerPail[];
+extern const u8 BattleFrontier_OutsideEast_EventScript_WaterSudowoodo[];
+
+extern const u8 EventScript_SelectWithoutRegisteredItem[];
+
+// overworld
+extern const u8 EventScript_WhiteOut[];
+extern const u8 EventScript_ResetMrBriney[];
+extern const u8 EventScript_DoLinkRoomExit[];
+extern const u8 CableClub_EventScript_TooBusyToNotice[];
+extern const u8 CableClub_EventScript_ReadTrainerCard[];
+extern const u8 CableClub_EventScript_ReadTrainerCardColored[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot2[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot3[];
+extern const u8 EventScript_RecordCenter_Spot0[];
+extern const u8 EventScript_RecordCenter_Spot1[];
+extern const u8 EventScript_RecordCenter_Spot2[];
+extern const u8 EventScript_RecordCenter_Spot3[];
+extern const u8 EventScript_BattleColosseum_2P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum_2P_PlayerSpot1[];
+extern const u8 EventScript_TradeCenter_Chair1[];
+extern const u8 EventScript_TradeCenter_Chair0[];
+extern const u8 EventScript_ConfirmLeaveCableClubRoom[];
+extern const u8 EventScript_TerminateLink[];
 
 // overworld
 extern const u8 EventScript_WhiteOut[];
