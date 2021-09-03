@@ -1,20 +1,20 @@
 .set LOCALID_ATTENDANT, 1
 
-VerdanturfTown_BattleTentLobby_MapScripts:: @ 82016D0
+VerdanturfTown_BattleTentLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_OnWarp
 	.byte 0
 
-VerdanturfTown_BattleTentLobby_OnWarp: @ 82016DB
+VerdanturfTown_BattleTentLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth
 	.2byte 0
 
-VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth:: @ 82016E5
+VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-VerdanturfTown_BattleTentLobby_OnFrame: @ 82016EF
+VerdanturfTown_BattleTentLobby_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentLobby_EventScript_GetChallengeStatus
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge
@@ -22,11 +22,11 @@ VerdanturfTown_BattleTentLobby_OnFrame: @ 82016EF
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, VerdanturfTown_BattleTentLobby_EventScript_LostChallenge
 	.2byte 0
 
-VerdanturfTown_BattleTentLobby_EventScript_GetChallengeStatus:: @ 8201719
+VerdanturfTown_BattleTentLobby_EventScript_GetChallengeStatus::
 	frontier_getstatus
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving:: @ 8201722
+VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving::
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge, MSGBOX_DEFAULT
 	closemessage
@@ -36,7 +36,7 @@ VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving:: @ 8201722
 	releaseall
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_WonChallenge:: @ 8201757
+VerdanturfTown_BattleTentLobby_EventScript_WonChallenge::
 	lockall
 	msgbox VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak, MSGBOX_DEFAULT
 	message VerdanturfTown_BattleTentLobby_Text_FeatWillBeRecorded
@@ -47,7 +47,7 @@ VerdanturfTown_BattleTentLobby_EventScript_WonChallenge:: @ 8201757
 	playse SE_SAVE
 	waitse
 
-VerdanturfTown_BattleTentLobby_EventScript_GivePrize:: @ 8201791
+VerdanturfTown_BattleTentLobby_EventScript_GivePrize::
 	msgbox VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
 	verdanturftent_giveprize
 	switch VAR_RESULT
@@ -63,7 +63,7 @@ VerdanturfTown_BattleTentLobby_EventScript_GivePrize:: @ 8201791
 	releaseall
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize:: @ 82017DD
+VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -71,13 +71,13 @@ VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize:: @ 82017DD
 	releaseall
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting:: @ 82017EE
+VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting::
 	lockall
 	msgbox VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_GivePrize
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_LostChallenge:: @ 82017FD
+VerdanturfTown_BattleTentLobby_EventScript_LostChallenge::
 	lockall
 	message VerdanturfTown_BattleTentLobby_Text_ResultsWillBeRecorded
 	waitmessage
@@ -91,7 +91,7 @@ VerdanturfTown_BattleTentLobby_EventScript_LostChallenge:: @ 82017FD
 	releaseall
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge:: @ 8201837
+VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge::
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting, MSGBOX_DEFAULT
 	message BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge
@@ -103,7 +103,7 @@ VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge:: @ 8201837
 	setvar VAR_TEMP_0, 255
 	goto VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_Attendant:: @ 8201873
+VerdanturfTown_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
 	verdanturftent_getprize
@@ -111,17 +111,17 @@ VerdanturfTown_BattleTentLobby_EventScript_Attendant:: @ 8201873
 	goto_if_ne VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting
 	special SavePlayerParty
 	msgbox VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
-VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge:: @ 8201893
+VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge::
 	message VerdanturfTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge
 	case 2, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 82018CF
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	setvar VAR_RESULT, 2
@@ -143,7 +143,7 @@ VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 82018CF
 	case YES, VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge:: @ 8201954
+VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	verdanturftent_init
@@ -156,7 +156,7 @@ VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge:: @ 8201954
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
-VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge:: @ 82019AE
+VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox VerdanturfTown_BattleTentLobby_Text_NowFollowMe, MSGBOX_DEFAULT
@@ -167,36 +167,36 @@ VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge:: @ 82019AE
 	waitstate
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge:: @ 82019DB
+VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge::
 	msgbox VerdanturfTown_BattleTentLobby_Text_ExplainVerdanturfTent, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons:: @ 82019E8
+VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons::
 	switch VAR_RESULT
 	case FRONTIER_LVL_50, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen
 
-VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50:: @ 8201A03
+VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50::
 	msgbox VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen:: @ 8201A10
+VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen::
 	msgbox VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed:: @ 8201A1D
+VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
 
-VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge:: @ 8201A34
+VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge::
 	special LoadPlayerParty
-VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge:: @ 8201A37
+VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge::
 	msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
-VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge:: @ 8201A3F
+VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge::
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor:: @ 8201A41
+VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor::
 	applymovement LOCALID_ATTENDANT, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
 	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
 	waitmovement 0
@@ -209,24 +209,24 @@ VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor:: @ 8201A41
 	waitdooranim
 	return
 
-VerdanturfTown_BattleTentLobby_Movement_WalkToDoor: @ 8201A70
+VerdanturfTown_BattleTentLobby_Movement_WalkToDoor:
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor: @ 8201A74
+VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor:
 	walk_up
 	set_invisible
 	step_end
 
-VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor: @ 8201A77
+VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor:
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-VerdanturfTown_BattleTentLobby_EventScript_AttractGiver:: @ 8201A7B
+VerdanturfTown_BattleTentLobby_EventScript_AttractGiver::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
@@ -239,22 +239,22 @@ VerdanturfTown_BattleTentLobby_EventScript_AttractGiver:: @ 8201A7B
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract:: @ 8201AB2
+VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract::
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_Boy1:: @ 8201ABC
+VerdanturfTown_BattleTentLobby_EventScript_Boy1::
 	msgbox VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves, MSGBOX_NPC
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_Boy2:: @ 8201AC5
+VerdanturfTown_BattleTentLobby_EventScript_Boy2::
 	lock
 	msgbox VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_Scott:: @ 8201AD0
+VerdanturfTown_BattleTentLobby_EventScript_Scott::
 	lock
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_VERDANTURF, VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo
@@ -264,24 +264,24 @@ VerdanturfTown_BattleTentLobby_EventScript_Scott:: @ 8201AD0
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo:: @ 8201AED
+VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo::
 	msgbox VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_LittleBoy:: @ 8201AF7
+VerdanturfTown_BattleTentLobby_EventScript_LittleBoy::
 	lock
 	msgbox VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesBoard:: @ 8201B02
+VerdanturfTown_BattleTentLobby_EventScript_RulesBoard::
 	lockall
 	msgbox VerdanturfTown_BattleTentLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 8201B11
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
@@ -298,41 +298,41 @@ VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 8201B11
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_ExitRules
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesLevel:: @ 8201B7E
+VerdanturfTown_BattleTentLobby_EventScript_RulesLevel::
 	msgbox BattleTentLobby_Text_ExplainLevelRules, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesBasics:: @ 8201B8C
+VerdanturfTown_BattleTentLobby_EventScript_RulesBasics::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesNature:: @ 8201B9A
+VerdanturfTown_BattleTentLobby_EventScript_RulesNature::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesMoves:: @ 8201BA8
+VerdanturfTown_BattleTentLobby_EventScript_RulesMoves::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered:: @ 8201BB6
+VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger:: @ 8201BC4
+VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-VerdanturfTown_BattleTentLobby_EventScript_ExitRules:: @ 8201BD2
+VerdanturfTown_BattleTentLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves: @ 8201BD4
+VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
 	.string "If it doesn't like a certain move,\n"
 	.string "a POKéMON will be reluctant to use it.\p"
 	.string "It doesn't matter how strong it is,\n"
@@ -344,14 +344,14 @@ VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves: @ 8201BD4
 	.string "potential, it's probably failing at\l"
 	.string "using a disliked move against its will.$"
 
-VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry: @ 8201D11
+VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
 	.string "My big sister is gentle usually.\n"
 	.string "But when she gets angry,\l"
 	.string "she's really, really scary!\p"
 	.string "I bet a gentle POKéMON will be scary\n"
 	.string "if it gets angry!$"
 
-VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep: @ 8201D9E
+VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
 	.string "My feelings toward my POKéMON…\n"
 	.string "The attraction runs deep…\p"
 	.string "Oh, hi, you didn't see that, did you?\n"
@@ -359,20 +359,20 @@ VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep: @ 8201D9E
 	.string "How would you like this TM for\n"
 	.string "your POKéMON?$"
 
-VerdanturfTown_BattleTentLobby_Text_AttractionMutual: @ 8201E43
+VerdanturfTown_BattleTentLobby_Text_AttractionMutual:
 	.string "My feelings toward my POKéMON…\n"
 	.string "I'm sure the attraction is mutual!\p"
 	.string "They battle exactly the way I want\n"
 	.string "them to!$"
 
-VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves: @ 8201EB1
+VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
 	.string "What kind of moves have you taught\n"
 	.string "your POKéMON?\p"
 	.string "I think you would give yourself\n"
 	.string "an advantage if they knew how to\l"
 	.string "heal or protect themselves.$"
 
-VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers: @ 8201F3F
+VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
 	.string "SCOTT: Hey there, {PLAYER}{KUN}!\n"
 	.string "I thought I might see you here.\p"
 	.string "A BATTLE TENT's a place where\n"
@@ -382,7 +382,7 @@ VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers: @ 8201F3F
 	.string "{PLAYER}{KUN}, I expect you to do\n"
 	.string "the best you can!$"
 
-VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly: @ 8202025
+VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
 	.string "SCOTT: I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"

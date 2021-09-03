@@ -475,7 +475,7 @@ static void NamingScreen_Init(void)
     sNamingScreen->bgToHide = 1;
     sNamingScreen->template = sNamingScreenTemplates[sNamingScreen->templateNum];
     sNamingScreen->currentPage = sNamingScreen->template->initialPage;
-    sNamingScreen->inputCharBaseXPos = (240 - sNamingScreen->template->maxChars * 8) / 2 + 6;
+    sNamingScreen->inputCharBaseXPos = (DISPLAY_WIDTH - sNamingScreen->template->maxChars * 8) / 2 + 6;
     if (sNamingScreen->templateNum == NAMING_SCREEN_WALDA)
         sNamingScreen->inputCharBaseXPos += 11;
     sNamingScreen->keyRepeatStartDelayCopy = gKeyRepeatStartDelay;
@@ -635,8 +635,8 @@ static bool8 MainState_FadeIn(void)
     CopyBgTilemapBufferToVram(1);
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
-    BlendPalettes(-1, 16, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 16, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     sNamingScreen->state++;
     return FALSE;
 }
@@ -690,7 +690,7 @@ static bool8 MainState_PressedOKButton(void)
 
 static bool8 MainState_FadeOut(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     sNamingScreen->state++;
     return FALSE;
 }
@@ -826,7 +826,7 @@ static void Task_HandlePageSwapAnim(u8 taskId)
 
 static bool8 IsPageSwapAnimNotInProgress(void)
 {
-    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == 0xFF)
+    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == TASK_NONE)
         return TRUE;
     else
         return FALSE;
@@ -1071,7 +1071,7 @@ static void SpriteCB_InputArrow(struct Sprite *sprite)
         sprite->sDelay = 8;
         sprite->sXPosId = (sprite->sXPosId + 1) & (ARRAY_COUNT(x) - 1);
     }
-    sprite->pos2.x = x[sprite->sXPosId];
+    sprite->x2 = x[sprite->sXPosId];
 }
 
 #undef sDelay
@@ -1089,13 +1089,13 @@ static void SpriteCB_Underscore(struct Sprite *sprite)
     pos = GetTextEntryPosition();
     if (pos != (u8)sprite->sId)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->sYPosId = 0;
         sprite->sDelay = 0;
     }
     else
     {
-        sprite->pos2.y = y[sprite->sYPosId];
+        sprite->y2 = y[sprite->sYPosId];
         sprite->sDelay++;
         if (sprite->sDelay > 8)
         {
@@ -1134,11 +1134,11 @@ static void SetCursorPos(s16 x, s16 y)
     struct Sprite *cursorSprite = &gSprites[sNamingScreen->cursorSpriteId];
 
     if (x < sPageColumnCounts[CurrentPageToKeyboardId()])
-        cursorSprite->pos1.x = sPageColumnXPos[x + CurrentPageToKeyboardId() * KBCOL_COUNT] + 38;
+        cursorSprite->x = sPageColumnXPos[x + CurrentPageToKeyboardId() * KBCOL_COUNT] + 38;
     else
-        cursorSprite->pos1.x = 0;
+        cursorSprite->x = 0;
 
-    cursorSprite->pos1.y = y * 16 + 88;
+    cursorSprite->y = y * 16 + 88;
     cursorSprite->sPrevX = cursorSprite->sX;
     cursorSprite->sPrevY = cursorSprite->sY;
     cursorSprite->sX = x;
@@ -1284,11 +1284,11 @@ static bool8 PageSwapSprite_SlideOff(struct Sprite *sprite)
     struct Sprite *text = &gSprites[sprite->sTextSpriteId];
     struct Sprite *button = &gSprites[sprite->sButtonSpriteId];
 
-    text->pos2.y++;
-    if (text->pos2.y > 7)
+    text->y2++;
+    if (text->y2 > 7)
     {
         sprite->sState++;
-        text->pos2.y = -4;
+        text->y2 = -4;
         text->invisible = TRUE;
         SetPageSwapButtonGfx(PageToNextGfxId(((u8)sprite->sPage + 1) % KBPAGE_COUNT), text, button);
     }
@@ -1300,10 +1300,10 @@ static bool8 PageSwapSprite_SlideOn(struct Sprite *sprite)
     struct Sprite *text = &gSprites[sprite->sTextSpriteId];
 
     text->invisible = FALSE;
-    text->pos2.y++;
-    if (text->pos2.y >= 0)
+    text->y2++;
+    if (text->y2 >= 0)
     {
-        text->pos2.y = 0;
+        text->y2 = 0;
         sprite->sState = 1; // go to PageSwapSprite_Idle
     }
     return FALSE;
@@ -1929,9 +1929,9 @@ struct TextColor   // Needed because of alignment
 static const struct TextColor sTextColorStruct =
 {
     {
-        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
-        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
-        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY}
+        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
+        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
+        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
     }
 };
 
@@ -1999,7 +1999,7 @@ static void DrawKeyboardPageOnDeck(void)
 
 static void PrintControls(void)
 {
-    const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
+    const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_BANNER], PIXEL_FILL(15));
     AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], 0, 2, 1, color, 0, gText_MoveOkBack);

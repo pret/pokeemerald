@@ -1,3 +1,3 @@
-Route104_PrototypePrettyPetalFlowerShop_MapScripts:: @ 82693F3
+Route104_PrototypePrettyPetalFlowerShop_MapScripts::
 	.byte 0
 
