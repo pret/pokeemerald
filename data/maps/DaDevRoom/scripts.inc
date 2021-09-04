@@ -54,14 +54,19 @@ Text_Poop:
 Script_DisplaySpriteDemo::
 	lock
 	faceplayer
+	setvar VAR_0x8000, MUGSHOT_YIIK_STARE
+	callnative DrawMugshot
 	msgbox Text_DisplaySpriteDemo, MSGBOX_DEFAULT
-	waitbuttonpress
-	showmonpic SPECIES_UNOWN, 10, 3
-	waitbuttonpress
-	hidemonpic
+	setvar VAR_0x8000, MUGSHOT_YIIK_SCREAM
+	callnative DrawMugshot
+	msgbox Text_DisplaySpriteDemo2
+	callnative ClearMugshot
 	release
 	end
 
 Text_DisplaySpriteDemo:
-	.string "Have you seen this Pokémon?$"
+	.string "Yes, I am Alex Yiik.$"
+Text_DisplaySpriteDemo2:
+	.string "AAAAAAAAAAAAAHHHHHHH!!!$"
+
 

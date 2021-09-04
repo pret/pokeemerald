@@ -8,6 +8,10 @@
 
 static const u32 sMugshotImg_Simp[] = INCBIN_U32("graphics/mugshots/simp.4bpp.lz");
 static const u16 sMugshotPal_Simp[] = INCBIN_U16("graphics/mugshots/simp.gbapal");
+static const u32 sMugshotImg_Yiik_Stare[] = INCBIN_U32("graphics/mugshots/yiik/stare.4bpp.lz");
+static const u16 sMugshotPal_Yiik_Stare[] = INCBIN_U16("graphics/mugshots/yiik/stare.gbapal");
+static const u32 sMugshotImg_Yiik_Scream[] = INCBIN_U32("graphics/mugshots/yiik/scream.4bpp.lz");
+static const u16 sMugshotPal_Yiik_Scream[] = INCBIN_U16("graphics/mugshots/yiik/scream.gbapal");
 
 #define MUGSHOT_PALETTE_NUM 13
 
@@ -28,6 +32,8 @@ void ClearMugshot(void);
 static const struct Mugshot sMugshots[] = {
     //ADD YOUR MUGSHOTS HERE
        [MUGSHOT_SIMPLE] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Simp, .palette = sMugshotPal_Simp},
+       [MUGSHOT_YIIK_STARE] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Yiik_Stare, .palette = sMugshotPal_Yiik_Stare},
+       [MUGSHOT_YIIK_SCREAM] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Yiik_Scream, .palette = sMugshotPal_Yiik_Scream},
 };
 
 
