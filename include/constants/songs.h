@@ -1082,6 +1082,7 @@
 #define BW_SEQ_BGM_VS_MOVEPOKE        1053 // Battle! (Legendary Pokémon)               (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_T_03_VAR           1054 // Anville Town (No Flute)
 #define BW_SEQ_BGM_T_03               1055 // Anville Town
+#define BW_SEQ_BGM_H_05               1056 // Marvelous Bridge
 
 // Black 2 & White 2 Music
 

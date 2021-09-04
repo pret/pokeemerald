@@ -1057,6 +1057,7 @@ gSongTable::
 	song bw_seq_bgm_vs_movepoke, 0, 0
 	song bw_seq_bgm_t_03_var, 0, 0
 	song bw_seq_bgm_t_03, 0, 0
+	song bw_seq_bgm_h_05, 0, 0
 
 	.align 2
 dummy_song_header:
