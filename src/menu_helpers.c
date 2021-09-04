@@ -440,12 +440,16 @@ void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible)
 void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
 {
     u8 i;
-    bool8 unknownBit = count & 0x80;
-    count &= ~(0x80);
+    bool8 hasMargin = count & SWAP_LINE_HAS_MARGIN;
+    count &= ~SWAP_LINE_HAS_MARGIN;
 
     for (i = 0; i < count; i++)
     {
-        if (i == count - 1 && unknownBit)
+        // If the list menu has a right margin, the swap line
+        // shouldn't extend all the way to the edge of the screen.
+        // If this is the last sprite in the line, move it a bit
+        // to the left to keep it out of the margin.
+        if (i == count - 1 && hasMargin)
             gSprites[spriteIds[i]].x2 = x - 8;
         else
             gSprites[spriteIds[i]].x2 = x;
