@@ -4397,3 +4397,11 @@ DirectSoundWaveData_bw_carskidcs4::
 	.align 2
 DirectSoundWaveData_bw_carcrashcs4::
 	.incbin "sound/direct_sound_samples/bw_carcrashcs4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_kotods4::
+	.incbin "sound/direct_sound_samples/bw_kotods4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_shakuds4::
+	.incbin "sound/direct_sound_samples/bw_shakuds4.bin"

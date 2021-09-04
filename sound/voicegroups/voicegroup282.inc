@@ -59,3 +59,5 @@ voicegroup282:: @ drums 4 (misc)
 	voice_directsound 60, 64, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/ 64
 	voice_directsound 60, 100, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/100
 	voice_directsound 61, 100, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/100	+ 1
+	voice_directsound 72, 64, DirectSoundWaveData_bw_213tri_closed, 255, 0, 227, 2	    		@ 127/127/120/124/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_214tri_open, 255, 246, 0, 214	    		@ 127/ 90/  0/114/ 64

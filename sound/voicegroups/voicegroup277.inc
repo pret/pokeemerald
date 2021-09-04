@@ -34,7 +34,7 @@ voicegroup277:: @ BW Adachi/Misc.
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup293, KeySplitTable107   @ pizzicato | 48 | 57 | 65
 	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -70,8 +70,8 @@ voicegroup277:: @ BW Adachi/Misc.
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_shakuds4, 255, 0, 255, 171
+	voice_directsound 60, 0, DirectSoundWaveData_bw_kotods4, 255, 246, 159, 224
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
