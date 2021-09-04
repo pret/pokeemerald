@@ -1044,7 +1044,7 @@ static const u8 sSootheBellDesc[] = _(
 #ifdef BATTLE_ENGINE
 static const u8 sMentalHerbDesc[] = _(
     "A hold item that\n"
-    "snaps POKéMON out\n"
+    "snaps Pokémon out\n"
     "of infatuation.");
 #else
 static const u8 sMentalHerbDesc[] = _(
