@@ -243,8 +243,10 @@
 #define OBJ_EVENT_GFX_FREN                       239
 #define OBJ_EVENT_GFX_CHODE                      240
 #define OBJ_EVENT_GFX_JOSHI                      241
+#define OBJ_EVENT_GFX_SIMPLE                     242
 
-#define NUM_OBJ_EVENT_GFX                        242
+
+#define NUM_OBJ_EVENT_GFX                        243
 
 
 // These are dynamic object gfx ids.
