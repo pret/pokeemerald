@@ -1749,6 +1749,8 @@ SECTIONS {
         sound/songs/midi/bw_seq_me_aishou_m.o(.rodata);
         sound/songs/midi/bw_seq_me_aishou_l.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_movepoke.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_03_var.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_03.o(.rodata);
     } =0
 
     lib_rodata :

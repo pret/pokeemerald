@@ -1055,6 +1055,8 @@ gSongTable::
 	song bw_seq_me_aishou_m, 2, 2
 	song bw_seq_me_aishou_l, 2, 2
 	song bw_seq_bgm_vs_movepoke, 0, 0
+	song bw_seq_bgm_t_03_var, 0, 0
+	song bw_seq_bgm_t_03, 0, 0
 
 	.align 2
 dummy_song_header:

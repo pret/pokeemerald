@@ -2831,3 +2831,9 @@ $(MID_SUBDIR)/bw_seq_me_aishou_l.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_movepoke.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V106
+
+$(MID_SUBDIR)/bw_seq_bgm_t_03_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_t_03.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V082

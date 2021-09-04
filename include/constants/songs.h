@@ -1080,6 +1080,8 @@
 #define BW_SEQ_ME_AISHOU_M            1051 // Feeling Check: Getting Close
 #define BW_SEQ_ME_AISHOU_L            1052 // Feeling Check: Lukewarm
 #define BW_SEQ_BGM_VS_MOVEPOKE        1053 // Battle! (Legendary Pokémon)               (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_T_03_VAR           1054 // Anville Town (No Flute)
+#define BW_SEQ_BGM_T_03               1055 // Anville Town
 
 // Black 2 & White 2 Music
 

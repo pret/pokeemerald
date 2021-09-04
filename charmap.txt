@@ -1511,6 +1511,8 @@ BW_SEQ_ME_AISHOU_H            = 1A 04
 BW_SEQ_ME_AISHOU_M            = 1B 04
 BW_SEQ_ME_AISHOU_L            = 1C 04
 BW_SEQ_BGM_VS_MOVEPOKE        = 1D 04
+BW_SEQ_BGM_T_03_VAR           = 1E 04
+BW_SEQ_BGM_T_03               = 1F 04
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

@@ -12,11 +12,11 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_074glocknc5, 255, 249, 0, 205
 	voice_keysplit voicegroup297, KeySplitTable76    @ vibraphone
 	voice_keysplit voicegroup295, KeySplitTable74    @ marimba
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 64, DirectSoundWaveData_dp_808snare_16, 255, 220, 0, 171
 	voice_keysplit voicegroup291, KeySplitTable71    @ accordion
 	voice_keysplit voicegroup241, KeySplitTable25    @ tubular bell
 	voice_keysplit voicegroup248, KeySplitTable72    @ martin guitar
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
 	voice_keysplit voicegroup244, KeySplitTable71    @ drawbar organ
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_keysplit voicegroup319, KeySplitTable97    @ pipe organ
@@ -99,7 +99,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup311, KeySplitTable101   @ fretless bass | 34
 	voice_directsound 60, 0, DirectSoundWaveData_bw_carskidcs4, 255, 0, 227, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_carcrashcs4, 255, 0, 227, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmale1_ghetsis, 255, 0, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_sfxwhip_plasma, 255, 0, 255, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_sfxlasergun_plasma, 255, 0, 255, 2
