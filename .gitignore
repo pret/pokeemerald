@@ -23,7 +23,7 @@ tools/agbcc
 *.ld
 *.bat
 *.dump
-*.sa*
+
 Thumbs.db
 build/
 .DS_Store
@@ -34,3 +34,4 @@ porymap.project.cfg
 *.a
 .fuse_hidden*
 *.sna
+*.sa*
