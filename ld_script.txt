@@ -333,6 +333,7 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
+        src/mugshot.o(.text);
     } =0
 
     script_data :
@@ -435,6 +436,7 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
+        src/mugshot.o(.rodata);
         src/main.o(.rodata);
         gflib/bg.o(.rodata);
         gflib/window.o(.rodata);

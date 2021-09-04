@@ -367,3 +367,5 @@ const u32 gObjectEventPic_Chode[] = INCBIN_U32("graphics/object_events/pics/peop
 const u16 gObjectEventPal_Chode[] = INCBIN_U16("graphics/object_events/pics/people/chode.gbapal");
 const u32 gObjectEventPic_Joshi[] = INCBIN_U32("graphics/object_events/pics/people/joshi.4bpp");
 const u16 gObjectEventPal_Joshi[] = INCBIN_U16("graphics/object_events/pics/people/joshi.gbapal");
+const u32 gObjectEventPic_Simple[] = INCBIN_U32("graphics/object_events/pics/people/simple.4bpp");
+const u16 gObjectEventPal_Simple[] = INCBIN_U16("graphics/object_events/pics/people/simple.gbapal");
