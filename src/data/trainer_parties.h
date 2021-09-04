@@ -3578,14 +3578,14 @@ static const struct TrainerMonItemCustomMoves sParty_Juan1[] = {
     {
     .iv = 200,
     .lvl = 41,
-    .species = SPECIES_LUVDISC,
+    .species = SPECIES_SLUGMA,
     .heldItem = ITEM_NONE,
     .moves = {MOVE_WATER_PULSE, MOVE_ATTRACT, MOVE_SWEET_KISS, MOVE_FLAIL}
     },
     {
     .iv = 200,
     .lvl = 41,
-    .species = SPECIES_WHISCASH,
+    .species = SPECIES_RHYDON,
     .heldItem = ITEM_NONE,
     .moves = {MOVE_RAIN_DANCE, MOVE_WATER_PULSE, MOVE_AMNESIA, MOVE_EARTHQUAKE}
     },
