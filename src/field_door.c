@@ -151,6 +151,24 @@ static const struct DoorAnimFrame sDoorCloseAnimFrames[] =
     {0, 0},
 };
 
+static const struct DoorAnimFrame sSmallDoorOpenAnimFrames[] =
+{
+    {4, -1},
+    {4, 0},
+    {4, 0x80},
+    {4, 0x100},
+    {0, 0},
+};
+
+static const struct DoorAnimFrame sSmallDoorCloseAnimFrames[] =
+{
+    {4, 0x100},
+    {4, 0x80},
+    {4, 0},
+    {4, -1},
+    {0, 0},
+};
+
 static const struct DoorAnimFrame sBigDoorOpenAnimFrames[] =
 {
     {4, -1},
@@ -281,10 +299,12 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
 
 static void CopyDoorTilesToVram(const struct DoorGraphics *gfx, const struct DoorAnimFrame *frame)
 {
-    if (gfx->size == 2)
+    if (gfx->size == 1)
+        CpuFastSet(gfx->tiles + frame->offset, (void *)(VRAM + 0x7F00), 0x40);
+    else if (gfx->size == 2)
         CpuFastSet(gfx->tiles + frame->offset, (void *)(VRAM + 0x7E00), 0x80);
     else
-        CpuFastSet(gfx->tiles + frame->offset, (void *)(VRAM + 0x7F00), 0x40);
+        CpuFastSet(gfx->tiles + frame->offset, (void *)(VRAM + 0x7F80), 0x20);
 }
 
 static void door_build_blockdef(u16 *a, u16 b, const u8 *c)
@@ -308,7 +328,14 @@ static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 
 {
     u16 arr[24];
     
-    if (gfx->size == 2)
+    if (gfx->size == 1)
+    {
+        door_build_blockdef(&arr[0], 0x3F8, pal);
+        DrawDoorMetatileAt(x, y - 1, &arr[0]);
+        door_build_blockdef(&arr[0], 0x3FC, pal + 4);
+        DrawDoorMetatileAt(x, y, &arr[0]);
+    }
+    else if (gfx->size == 2)
     {
         door_build_blockdef(&arr[8], 0x3F0, pal);
         DrawDoorMetatileAt(x, y - 1, &arr[8]);
@@ -321,19 +348,19 @@ static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 
     }
     else
     {
-        door_build_blockdef(&arr[0], 0x3F8, pal);
-        DrawDoorMetatileAt(x, y - 1, &arr[0]);
-        door_build_blockdef(&arr[0], 0x3FC, pal + 4);
+        door_build_blockdef(&arr[0], 0x3FC, pal);
         DrawDoorMetatileAt(x, y, &arr[0]);
     }
 }
 
 static void DrawClosedDoorTiles(const struct DoorGraphics *gfx, u32 x, u32 y)
 {
-    CurrentMapDrawMetatileAt(x, y - 1);
     CurrentMapDrawMetatileAt(x, y);
-
-    if (gfx->size == 2)
+    if (gfx->size >= 1)
+    {
+        CurrentMapDrawMetatileAt(x, y - 1);
+    }
+    else
     {
         CurrentMapDrawMetatileAt(x + 1, y - 1);
         CurrentMapDrawMetatileAt(x + 1, y);
@@ -444,8 +471,12 @@ static void DrawClosedDoor(const struct DoorGraphics *gfx, u32 x, u32 y)
 static void DrawOpenedDoor(const struct DoorGraphics *gfx, u32 x, u32 y)
 {
     gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
-    if (gfx != NULL)
-        DrawDoor(gfx, GetLastDoorFrame(sDoorOpenAnimFrames, sDoorOpenAnimFrames), x, y);
+    if (gfx != NULL) {
+        if (gfx->size >= 1) 
+            DrawDoor(gfx, GetLastDoorFrame(sDoorOpenAnimFrames, sDoorOpenAnimFrames), x, y);
+        else
+            DrawDoor(gfx, GetLastDoorFrame(sSmallDoorOpenAnimFrames, sSmallDoorOpenAnimFrames), x, y);
+    }
 }
 
 static s8 StartDoorOpenAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
@@ -459,8 +490,10 @@ static s8 StartDoorOpenAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
     {
         if (gfx->size == 2)
             return StartDoorAnimationTask(gfx, sBigDoorOpenAnimFrames, x, y);
-        else
+        else if (gfx->size == 1)
             return StartDoorAnimationTask(gfx, sDoorOpenAnimFrames, x, y);
+        else 
+            return StartDoorAnimationTask(gfx, sSmallDoorOpenAnimFrames, x, y);
     }
 }
 
@@ -469,8 +502,10 @@ static s8 StartDoorCloseAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
     gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
     if (gfx == NULL)
         return -1;
-    else
+    else if (gfx->size >= 1) 
         return StartDoorAnimationTask(gfx, sDoorCloseAnimFrames, x, y);
+    else
+        return StartDoorAnimationTask(gfx, sSmallDoorCloseAnimFrames, x, y);
 }
 
 static s8 GetDoorSoundType(const struct DoorGraphics *gfx, u32 x, u32 y)
