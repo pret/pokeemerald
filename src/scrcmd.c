@@ -2312,10 +2312,3 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
-
-bool8 ScrCmd_textcolor(struct ScriptContext * ctx)
- {
-     gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
-     gSpecialVar_TextColor = ScriptReadByte(ctx);
-     return FALSE;
- }

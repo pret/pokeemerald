@@ -68,24 +68,5 @@ Text_DisplaySpriteDemo:
 	.string "Yes, I am Alex Yiik.$"
 Text_DisplaySpriteDemo2:
 	.string "AAAAAAAAAAAAAHHHHHHH!!!$"
-	
-Script_Test::
-	lock
-	faceplayer
-	msgbox Text_Test2, MSGBOX_DEFAULT
-	release
-	end
-
-Text_Test2:
-	.string "{COLOR}{RED}RED\p"
-	.string "{COLOR}{GREEN}GREEN\l"
-	.string "{COLOR}{DARK_GRAY}DARK GREY\l"
-	.string "{COLOR}{LIGHT_GRAY}LIGHT GREY\l"
-	.string "{COLOR}{LIGHT_RED}LIGHT RED\l"
-	.string "{COLOR}{LIGHT_GREEN}LIGHT GREEN\l"
-	.string "{COLOR}{BLUE}BLUE\l"
-	.string "{COLOR}{LIGHT_BLUE}LIGHT BLUE$"
-
-
 
 
