@@ -22,11 +22,6 @@
       "direction": "left",
       "offset": 40,
       "map": "MAP_LAVARIDGE_TOWN"
-    },
-    {
-      "direction": "right",
-      "offset": -20,
-      "map": "MAP_ROUTE111"
     }
   ],
   "object_events": [
@@ -257,7 +252,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

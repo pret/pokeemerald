@@ -14,50 +14,50 @@ Route111_MapScripts::
 	.byte 0
 
 Route111_OnLoad:
-	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_CloseDesertRuins
-	compare VAR_MIRAGE_TOWER_STATE, 1
-	call_if_eq Route111_EventScript_ShowTemporaryMirageTower
-	end
+//	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_CloseDesertRuins
+//	compare VAR_MIRAGE_TOWER_STATE, 1
+//	call_if_eq Route111_EventScript_ShowTemporaryMirageTower
+//	end
 
 Route111_EventScript_CloseDesertRuins::
-	setmetatile 29, 86, METATILE_General_RockWall_RockBase, 1
-	setmetatile 29, 87, METATILE_General_RockWall_SandBase, 1
-	return
+//	setmetatile 29, 86, METATILE_General_RockWall_RockBase, 1
+//	setmetatile 29, 87, METATILE_General_RockWall_SandBase, 1
+//	return
 
 @ Show Mirage Tower just prior to disintegration. Mirage Tower is otherwise handled by the map layout
-Route111_EventScript_ShowTemporaryMirageTower::
-	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, 0
-	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, 0
-	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, 0
-	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, 0
-	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, 0
-	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, 0
-	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, 0
-	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, 0
-	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, 0
-	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, 0
-	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, 0
-	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, 0
-	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, 0
-	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, 0
-	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, 0
-	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, 0
-	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, 0
-	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, 0
-	return
+//Route111_EventScript_ShowTemporaryMirageTower::
+//	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, 0
+//	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, 0
+//	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, 0
+//	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, 0
+//	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, 0
+//	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, 0
+//	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, 0
+//	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, 0
+//	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, 0
+//	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, 0
+//	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, 0
+//	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, 0
+//	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, 0
+//	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, 0
+//	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, 0
+//	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, 0
+//	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, 0
+//	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, 0
+//	return
 
 Route111_OnTransition:
-	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
-	special SetMirageTowerVisibility
-	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_SetLayoutNoMirageTower
-	compare VAR_MIRAGE_TOWER_STATE, 1
-	call_if_eq Route111_EventScript_SetFallingPlayerGfx
-	compare VAR_MIRAGE_TOWER_STATE, 2
-	call_if_eq Route111_EventScript_SetMirageTowerGone
-	call Route111_EventScript_CheckSetSandstorm
-	call GabbyAndTy_EventScript_UpdateLocation
-	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
-	end
+//	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
+//	special SetMirageTowerVisibility
+//	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_SetLayoutNoMirageTower
+//	compare VAR_MIRAGE_TOWER_STATE, 1
+//	call_if_eq Route111_EventScript_SetFallingPlayerGfx
+//	compare VAR_MIRAGE_TOWER_STATE, 2
+//	call_if_eq Route111_EventScript_SetMirageTowerGone
+//	call Route111_EventScript_CheckSetSandstorm
+//	call GabbyAndTy_EventScript_UpdateLocation
+//	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
+//	end
 
 Route111_EventScript_SetFallingPlayerGfx::
 	checkplayergender
@@ -102,50 +102,52 @@ Route111_EventScript_SetWinstratesNotDefeated::
 	cleartrainerflag TRAINER_VIVI
 	end
 
-Route111_EventScript_SetLayoutNoMirageTower::
-	setmaplayoutindex LAYOUT_ROUTE111_NO_MIRAGE_TOWER
-	return
+//Route111_EventScript_SetLayoutNoMirageTower::
+//	setmaplayoutindex LAYOUT_ROUTE111_NO_MIRAGE_TOWER
+//	return
 
-Route111_EventScript_SetMirageTowerGone::
-	setvar VAR_MIRAGE_TOWER_STATE, 3
-	return
+//Route111_EventScript_SetMirageTowerGone::
+//	setvar VAR_MIRAGE_TOWER_STATE, 3
+//	return
 
 Route111_OnWarp:
-	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_HidePlayerForMirageTower
-	.2byte 0
-
-Route111_EventScript_HidePlayerForMirageTower::
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
+//	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_HidePlayerForMirageTower
+//	.2byte 0
 	end
+
+//Route111_EventScript_HidePlayerForMirageTower::
+//	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
+//	end
 
 Route111_OnFrame:
-	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_MirageTowerDisappear
-	.2byte 0
-
-Route111_EventScript_MirageTowerDisappear::
-	lockall
-	special StartMirageTowerShake
-	waitstate
-	delay 24
-	playse SE_FALL
-	addobject LOCALID_ROUTE111_PLAYER_FALLING
-	special StartPlayerDescendMirageTower
-	waitstate
-	showobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
-	removeobject LOCALID_ROUTE111_PLAYER_FALLING
-	delay 16
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
-	delay 16
-	special StartMirageTowerDisintegration
-	waitstate
-	special StartMirageTowerFossilFallAndSink
-	waitstate
-	setvar VAR_MIRAGE_TOWER_STATE, 2
-	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
-	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, Route111_EventScript_RootFossilDisappeared
-	msgbox Route111_Text_ClawFossilDisappeared, MSGBOX_DEFAULT
-	releaseall
+//	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_MirageTowerDisappear
+//	.2byte 0
 	end
+
+//Route111_EventScript_MirageTowerDisappear::
+//	lockall
+//	special StartMirageTowerShake
+//	waitstate
+//	delay 24
+//	playse SE_FALL
+//	addobject LOCALID_ROUTE111_PLAYER_FALLING
+//	special StartPlayerDescendMirageTower
+//	waitstate
+//	showobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
+//	removeobject LOCALID_ROUTE111_PLAYER_FALLING
+//	delay 16
+//	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+//	delay 16
+//	special StartMirageTowerDisintegration
+//	waitstate
+//	special StartMirageTowerFossilFallAndSink
+//	waitstate
+//	setvar VAR_MIRAGE_TOWER_STATE, 2
+//	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
+//	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, Route111_EventScript_RootFossilDisappeared
+//	msgbox Route111_Text_ClawFossilDisappeared, MSGBOX_DEFAULT
+//	releaseall
+//	end
 
 Route111_EventScript_RootFossilDisappeared::
 	msgbox Route111_Text_RootFossilDisappeared, MSGBOX_DEFAULT
@@ -417,32 +419,32 @@ Route111_EventScript_Man2::
 	msgbox Route111_Text_WinstrateFamilyDestroyedMe, MSGBOX_NPC
 	end
 
-Route111_EventScript_Hiker::
-	lock
-	faceplayer
-	compare VAR_MIRAGE_TOWER_STATE, 3
-	goto_if_eq Route111_EventScript_HikerMirageTowerGone
-	compare VAR_MIRAGE_TOWER_STATE, 2
-	goto_if_eq Route111_EventScript_HikerMirageTowerDisintegrated
-	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_HikerMirageTowerVisible
-	msgbox Route111_Text_ShouldBeMirageTowerAroundHere, MSGBOX_DEFAULT
-	release
-	end
+//Route111_EventScript_Hiker::
+//	lock
+//	faceplayer
+//	compare VAR_MIRAGE_TOWER_STATE, 3
+//	goto_if_eq Route111_EventScript_HikerMirageTowerGone
+//	compare VAR_MIRAGE_TOWER_STATE, 2
+//	goto_if_eq Route111_EventScript_HikerMirageTowerDisintegrated
+//	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_HikerMirageTowerVisible
+//	msgbox Route111_Text_ShouldBeMirageTowerAroundHere, MSGBOX_DEFAULT
+//	release
+//	end
 
-Route111_EventScript_HikerMirageTowerGone::
-	msgbox Route111_Text_MirageTowerHasntBeenSeenSince, MSGBOX_DEFAULT
-	release
-	end
+//Route111_EventScript_HikerMirageTowerGone::
+//	msgbox Route111_Text_MirageTowerHasntBeenSeenSince, MSGBOX_DEFAULT
+//	release
+//	end
 
-Route111_EventScript_HikerMirageTowerDisintegrated::
-	msgbox Route111_Text_ThatWasShockingSandRainedDown, MSGBOX_DEFAULT
-	release
-	end
+//Route111_EventScript_HikerMirageTowerDisintegrated::
+//	msgbox Route111_Text_ThatWasShockingSandRainedDown, MSGBOX_DEFAULT
+//	release
+//	end
 
-Route111_EventScript_HikerMirageTowerVisible::
-	msgbox Route111_Text_MirageTowerClearlyVisible, MSGBOX_DEFAULT
-	release
-	end
+//Route111_EventScript_HikerMirageTowerVisible::
+//	msgbox Route111_Text_MirageTowerClearlyVisible, MSGBOX_DEFAULT
+//	release
+//	end
 
 Route111_EventScript_RockSmashTipFatMan::
 	lockall

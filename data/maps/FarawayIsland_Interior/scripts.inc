@@ -139,7 +139,7 @@ FarawayIsland_Interior_EventScript_Mew::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_FREN
-	setvar VAR_0x8005, 1 @ level
+	setvar VAR_0x8005, 5 @ level
 	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -155,6 +155,7 @@ FarawayIsland_Interior_EventScript_Mew::
 	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
 	goto_if_eq FarawayIsland_Interior_EventScript_PlayerOrMewRan
 	setflag FLAG_CAUGHT_MEW
+	warp MAP_ROUTE116, -1, 4, 9
 	release
 	end
 

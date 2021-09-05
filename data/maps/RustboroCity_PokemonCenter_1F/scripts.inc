@@ -31,19 +31,19 @@ RustboroCity_PokemonCenter_1F_EventScript_Girl::
 	end
 
 RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities:
-	.string "My POKéMON has a NAIVE nature, and my\n"
-	.string "friend's has a JOLLY nature.\p"
-	.string "It's fascinating how POKéMON have\n"
-	.string "personalities!$"
+	.string "That Dr. Amigo, he isn't a real doctor,\n"
+	.string "you know. Don't let him touch you.\p"
+	.string "I made that mistake once and now\n"
+	.string "I'm circumcised!$"
 
 RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
-	.string "Just like people, there are male and\n"
-	.string "female POKéMON.\p"
-	.string "But no one seems to have any idea how\n"
-	.string "they're different.$"
+	.string "I'm sorry sweetie, but this is\n"
+	.string "the only place that our insurance\p"
+	.string "said was covered!$"
 
 RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:
-	.string "The man next door gave me an HM!\p"
-	.string "I used it to teach my POKéMON how to\n"
-	.string "CUT down skinny trees.$"
+	.string "Yo, who the fuck is this, mom?!\n"
+	.string "We could've gone to a real doctor\p"
+	.string "but no! You had to go to Doctor Amigo!\n"
+	.string "Jesus Christ!$"
 

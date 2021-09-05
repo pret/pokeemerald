@@ -7,7 +7,7 @@
 
 RustboroCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
+	//map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
 	.byte 0
 
 RustboroCity_OnTransition:
@@ -17,189 +17,193 @@ RustboroCity_OnTransition:
 	call_if_eq RustboroCity_EventScript_HideMapNamePopup
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_RUSTBORO_CITY_STATE, 6
-	goto_if_eq RustboroCity_EventScript_PositionScientistForExit
+	//goto_if_eq RustboroCity_EventScript_PositionScientistForExit
+	setvar VAR_RUSTBORO_CITY_STATE, 10
+	removeobject 2
+	setflag FLAG_UNUSED_0x020
 	end
+	
 
-RustboroCity_EventScript_PositionScientistForExit::
-	compare VAR_TEMP_0, 11
-	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
-	setobjectxyperm LOCALID_SCIENTIST, 12, 15
-	end
+//RustboroCity_EventScript_PositionScientistForExit::
+//	compare VAR_TEMP_0, 11
+//	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
+//	setobjectxyperm LOCALID_SCIENTIST, 12, 15
+//	end
 
-RustboroCity_EventScript_PositionScientistLeftExit::
-	setobjectxyperm LOCALID_SCIENTIST, 11, 15
-	end
+//RustboroCity_EventScript_PositionScientistLeftExit::
+//	setobjectxyperm LOCALID_SCIENTIST, 11, 15
+//	end
 
 RustboroCity_EventScript_HideMapNamePopup::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
-RustboroCity_OnFrame:
-	map_script_2 VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_ScientistAddMatchCall
-	.2byte 0
+//RustboroCity_OnFrame:
+//	map_script_2 VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_ScientistAddMatchCall
+//	.2byte 0
 
-RustboroCity_EventScript_ScientistAddMatchCall::
-	lockall
-	setvar VAR_ROUTE104_STATE, 1
-	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerWalkDown
-	waitmovement 0
-	playse SE_EXIT
-	delay 10
-	addobject LOCALID_SCIENTIST
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistApproachPlayer
-	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_SCIENTIST, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_SCIENTIST, Common_Movement_Delay48
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
-	waitmovement 0
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistWalkInPlaceDown
-	waitmovement 0
-	msgbox RustboroCity_Text_DevelopedNewPokenavFeature, MSGBOX_DEFAULT
-	closemessage
-	setflag FLAG_HAS_MATCH_CALL
-	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestLeft
-	waitmovement 0
-	playse SE_CLICK
-	delay 10
-	playse SE_CLICK
-	delay 10
-	playse SE_CLICK
-	delay 10
-	playse SE_CLICK
-	delay 20
-	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestDown
-	waitmovement 0
-	msgbox RustboroCity_Text_AddedMatchCallPleaseCallMrStone, MSGBOX_DEFAULT
-	closemessage
-	delay 20
-	goto RustboroCity_EventScript_MatchCallTutorial
+//RustboroCity_EventScript_ScientistAddMatchCall::
+//	lockall
+//	setvar VAR_ROUTE104_STATE, 1
+//	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerWalkDown
+//	waitmovement 0
+//	playse SE_EXIT
+//	delay 10
+//	addobject LOCALID_SCIENTIST
+//	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistApproachPlayer
+//	waitmovement 0
+//	playse SE_PIN
+//	applymovement LOCALID_SCIENTIST, Common_Movement_ExclamationMark
+//	waitmovement 0
+//	applymovement LOCALID_SCIENTIST, Common_Movement_Delay48
+//	waitmovement 0
+//	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+//	waitmovement 0
+//	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistWalkInPlaceDown
+//	waitmovement 0
+//	msgbox RustboroCity_Text_DevelopedNewPokenavFeature, MSGBOX_DEFAULT
+//	closemessage
+//	setflag FLAG_HAS_MATCH_CALL
+//	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestLeft
+//	waitmovement 0
+//	playse SE_CLICK
+//	delay 10
+//	playse SE_CLICK
+//	delay 10
+//	playse SE_CLICK
+//	delay 10
+//	playse SE_CLICK
+//	delay 20
+//	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestDown
+//	waitmovement 0
+//	msgbox RustboroCity_Text_AddedMatchCallPleaseCallMrStone, MSGBOX_DEFAULT
+//	closemessage
+//	delay 20
+//	goto RustboroCity_EventScript_MatchCallTutorial
 
-RustboroCity_EventScript_PleaseSelectPokenav::
-	msgbox RustboroCity_Text_PleaseSelectPokenav, MSGBOX_DEFAULT
-	closemessage
-	delay 10
-	goto RustboroCity_EventScript_MatchCallTutorial
+//RustboroCity_EventScript_PleaseSelectPokenav::
+//	msgbox RustboroCity_Text_PleaseSelectPokenav, MSGBOX_DEFAULT
+//	closemessage
+//	delay 10
+//	goto RustboroCity_EventScript_MatchCallTutorial
 
-RustboroCity_EventScript_MatchCallTutorial::
-	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	special ScriptMenu_CreateStartMenuForPokenavTutorial
-	waitstate
-	switch VAR_RESULT
-	case 0, RustboroCity_EventScript_PleaseSelectPokenav
-	case 1, RustboroCity_EventScript_PleaseSelectPokenav
-	case 2, RustboroCity_EventScript_PleaseSelectPokenav
-	case 4, RustboroCity_EventScript_PleaseSelectPokenav
-	case 5, RustboroCity_EventScript_PleaseSelectPokenav
-	case 6, RustboroCity_EventScript_PleaseSelectPokenav
-	case 7, RustboroCity_EventScript_PleaseSelectPokenav
-	case MULTI_B_PRESSED, RustboroCity_EventScript_PleaseSelectPokenav
-	special OpenPokenavForTutorial
-	waitstate
-	delay 20
-	msgbox RustboroCity_Text_IdBetterGetBackToWork, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistLeave
-	waitmovement 0
-	playse SE_EXIT
-	removeobject LOCALID_SCIENTIST
-	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
-	setvar VAR_RUSTBORO_CITY_STATE, 7
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	releaseall
-	end
+//RustboroCity_EventScript_MatchCallTutorial::
+//	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
+//	special ScriptMenu_CreateStartMenuForPokenavTutorial
+//	waitstate
+//	switch VAR_RESULT
+//	case 0, RustboroCity_EventScript_PleaseSelectPokenav
+//	case 1, RustboroCity_EventScript_PleaseSelectPokenav
+//	case 2, RustboroCity_EventScript_PleaseSelectPokenav
+//	case 4, RustboroCity_EventScript_PleaseSelectPokenav
+//	case 5, RustboroCity_EventScript_PleaseSelectPokenav
+//	case 6, RustboroCity_EventScript_PleaseSelectPokenav
+//	case 7, RustboroCity_EventScript_PleaseSelectPokenav
+//	case MULTI_B_PRESSED, RustboroCity_EventScript_PleaseSelectPokenav
+//	special OpenPokenavForTutorial
+//	waitstate
+//	delay 20
+//	msgbox RustboroCity_Text_IdBetterGetBackToWork, MSGBOX_DEFAULT
+//	closemessage
+//	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistLeave
+//	waitmovement 0
+//	playse SE_EXIT
+//	removeobject LOCALID_SCIENTIST
+//	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
+//	setvar VAR_RUSTBORO_CITY_STATE, 7
+//	clearflag FLAG_HIDE_MAP_NAME_POPUP
+//	releaseall
+//	end
 
-RustboroCity_Movement_ScientistWalkInPlaceDown:
-	walk_in_place_down
-	step_end
+//RustboroCity_Movement_ScientistWalkInPlaceDown:
+//	walk_in_place_down
+//	step_end
 
-RustboroCity_Movement_PlayerWalkDown:
-	walk_down
-	step_end
+//RustboroCity_Movement_PlayerWalkDown:
+//	walk_down
+//	step_end
 
-RustboroCity_Movement_ScientistApproachPlayer:
-	walk_down
-	delay_16
-	step_end
+//RustboroCity_Movement_ScientistApproachPlayer:
+//	walk_down
+//	delay_16
+//	step_end
+//
+//@ Unused
+//RustboroCity_Movement_ScientistWalkAroundPlayer:
+//	delay_16
+//	walk_left
+//	walk_down
+//	walk_down
+//	walk_right
+//	walk_in_place_fastest_up
+//	delay_16
+//	step_end
+//
+//RustboroCity_Movement_ScientistLeave:
+//	walk_up
+//	step_end
+//
+//RustboroCity_EventScript_FatMan::
+//	lock
+//	faceplayer
+//	goto_if_set FLAG_DEVON_GOODS_STOLEN, RustboroCity_EventScript_FatManSawGrunt
+//	msgbox RustboroCity_Text_WeShortenItToDevon, MSGBOX_DEFAULT
+//	release
+//	end
 
-@ Unused
-RustboroCity_Movement_ScientistWalkAroundPlayer:
-	delay_16
-	walk_left
-	walk_down
-	walk_down
-	walk_right
-	walk_in_place_fastest_up
-	delay_16
-	step_end
+//RustboroCity_EventScript_FatManSawGrunt::
+//	msgbox RustboroCity_Text_SneakyLookingManWentAroundCorner, MSGBOX_DEFAULT
+//	release
+//	end
 
-RustboroCity_Movement_ScientistLeave:
-	walk_up
-	step_end
+//RustboroCity_EventScript_DevonEmployee2::
+//	lock
+//	faceplayer
+//	msgbox RustboroCity_Text_YoureNewAroundHere, MSGBOX_DEFAULT
+//	release
+//	end
+//
+//RustboroCity_EventScript_Woman::
+//	msgbox RustboroCity_Text_GymLeaderIsntEasyWithFire, MSGBOX_NPC
+//	end
 
-RustboroCity_EventScript_FatMan::
-	lock
-	faceplayer
-	goto_if_set FLAG_DEVON_GOODS_STOLEN, RustboroCity_EventScript_FatManSawGrunt
-	msgbox RustboroCity_Text_WeShortenItToDevon, MSGBOX_DEFAULT
-	release
-	end
+//RustboroCity_EventScript_Man1::
+//	lock
+//	faceplayer
+//	goto_if_set FLAG_BADGE01_GET, RustboroCity_EventScript_Man1HaveBadge
+//	msgbox RustboroCity_Text_HaveYouChallengedGym, MSGBOX_DEFAULT
+//	release
+//	end
 
-RustboroCity_EventScript_FatManSawGrunt::
-	msgbox RustboroCity_Text_SneakyLookingManWentAroundCorner, MSGBOX_DEFAULT
-	release
-	end
+//RustboroCity_EventScript_Man1HaveBadge::
+//	msgbox RustboroCity_Text_HeyThatsRustborosGymBadge, MSGBOX_DEFAULT
+//	release
+//	end
 
-RustboroCity_EventScript_DevonEmployee2::
-	lock
-	faceplayer
-	msgbox RustboroCity_Text_YoureNewAroundHere, MSGBOX_DEFAULT
-	release
-	end
+//RustboroCity_EventScript_Boy2::
+//	lock
+//	faceplayer
+//	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_Boy2BrineyLeftTunnel
+//	msgbox RustboroCity_Text_MrBrineyWalksInTheTunnel, MSGBOX_DEFAULT
+//	release
+//	end
 
-RustboroCity_EventScript_Woman::
-	msgbox RustboroCity_Text_GymLeaderIsntEasyWithFire, MSGBOX_NPC
-	end
+//RustboroCity_EventScript_Boy2BrineyLeftTunnel::
+//	msgbox RustboroCity_Text_MrBrineyLovesPeeko, MSGBOX_DEFAULT
+//	release
+//	end
 
-RustboroCity_EventScript_Man1::
-	lock
-	faceplayer
-	goto_if_set FLAG_BADGE01_GET, RustboroCity_EventScript_Man1HaveBadge
-	msgbox RustboroCity_Text_HaveYouChallengedGym, MSGBOX_DEFAULT
-	release
-	end
+//RustboroCity_EventScript_Twin::
+//	msgbox RustboroCity_Text_WowYouHavePokemon, MSGBOX_NPC
+//	end
+//
+//RustboroCity_EventScript_NinjaBoy::
+//	msgbox RustboroCity_Text_CatchRarePokemonIfIGoToSchool, MSGBOX_SIGN
+//	end
 
-RustboroCity_EventScript_Man1HaveBadge::
-	msgbox RustboroCity_Text_HeyThatsRustborosGymBadge, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_EventScript_Boy2::
-	lock
-	faceplayer
-	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_Boy2BrineyLeftTunnel
-	msgbox RustboroCity_Text_MrBrineyWalksInTheTunnel, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_EventScript_Boy2BrineyLeftTunnel::
-	msgbox RustboroCity_Text_MrBrineyLovesPeeko, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_EventScript_Twin::
-	msgbox RustboroCity_Text_WowYouHavePokemon, MSGBOX_NPC
-	end
-
-RustboroCity_EventScript_NinjaBoy::
-	msgbox RustboroCity_Text_CatchRarePokemonIfIGoToSchool, MSGBOX_SIGN
-	end
-
-RustboroCity_EventScript_TunnelSign::
-	msgbox RustboroCity_Text_TunnelNearingCompletion, MSGBOX_SIGN
-	end
+//RustboroCity_EventScript_TunnelSign::
+//	msgbox RustboroCity_Text_TunnelNearingCompletion, MSGBOX_SIGN
+//	end
 
 RustboroCity_EventScript_DevonCorpSign::
 	msgbox RustboroCity_Text_DevonCorpSign, MSGBOX_SIGN
@@ -226,6 +230,168 @@ RustboroCity_EventScript_CuttersHouseSign::
 	msgbox RustboroCity_Text_CuttersHouse, MSGBOX_SIGN
 	end
 
+RustboroCity_EventScript_Bonsai::
+	goto_if_set FLAG_UNUSED_0x024, RustboroCity_EventScript_AlreadyDone
+	lock
+	clearflag FLAG_UNUSED_0x020
+	showobjectat 2, MAP_RUSTBORO_CITY	
+	compare VAR_RUSTBORO_CITY_STATE, 10
+	goto_if_eq RustboroCity_EventScript_Bonsai2
+	end
+
+RustboroCity_EventScript_AlreadyDone::
+	release
+	end
+
+RustboroCity_EventScript_Bonsai2::
+	msgbox RustboroCity_Text_HelloThere, MSGBOX_SIGN
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Bonzi_Confusion
+	waitmovement 0
+	setvar VAR_RUSTBORO_CITY_STATE, 11
+	applymovement OBJ_EVENT_ID_PLAYER, Bonzi_Step
+	//goto RustboroCity_EventScript_JoelPos
+	end
+
+//RustboroCity_EventScript_JoelPos
+
+RustboroCity_EventScript_Bonsai3::
+	applymovement 2, Bonsai_Approach
+	waitmovement 0
+	goto RustboroCity_EventScript_BonsaiEnd
+	end
+
+RustboroCity_EventScript_Bonsai4::
+	applymovement 2, Bonsai_Approach
+	waitmovement 0
+	//applymovement 2, BonsaiWalkDown1
+	goto RustboroCity_EventScript_BonsaiEnd
+	end
+
+RustboroCity_EventScript_Bonsai5::
+	applymovement 2, Bonsai_Approach
+	waitmovement 0
+	//applymovement 2, BonsaiWalkDown2
+	goto RustboroCity_EventScript_BonsaiEnd
+	end
+
+RustboroCity_EventScript_Bonsai6::
+	applymovement 2, Bonsai_Approach
+	waitmovement 0
+	//applymovement 2, BonsaiWalkDown3
+	goto RustboroCity_EventScript_BonsaiEnd
+	end
+
+RustboroCity_EventScript_Bonsai7::
+	applymovement 2, Bonsai_Approach
+	waitmovement 0
+	//applymovement 2, BonsaiWalkDown4
+	goto RustboroCity_EventScript_BonsaiEnd
+	end
+
+RustboroCity_EventScript_BonsaiEnd::
+	msgbox RustboroCity_Text_NotBonzi, MSGBOX_SIGN
+	goto RustboroCity_EventScript_BonsaiWarp
+	end
+
+RustboroCity_EventScript_BonsaiWarp::
+	setflag FLAG_UNUSED_0x024
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, -1, 6, 5
+	waitstate
+	release
+	end
+
+Bonzi_Confusion:
+	emote_question_mark
+	face_right
+	delay_16
+	face_down
+	delay_16
+	face_right
+	delay_16
+	step_end
+
+Bonzi_Step:
+	walk_right
+	step_end
+
+RustboroCity_EventScript_BonsaiWalkDown1::
+	applymovement 2, BonsaiWalkDown1
+	waitmovement 0
+	goto RustboroCity_EventScript_Bonsai4
+	end
+
+RustboroCity_EventScript_BonsaiWalkDown2::
+	applymovement 2, BonsaiWalkDown2
+	waitmovement 0
+	goto RustboroCity_EventScript_Bonsai4
+	end
+
+RustboroCity_EventScript_BonsaiWalkDown3::
+	applymovement 2, BonsaiWalkDown3
+	waitmovement 0
+	goto RustboroCity_EventScript_Bonsai4
+	end
+
+RustboroCity_EventScript_BonsaiWalkDown4::
+	applymovement 2, Bonsai_Approach
+	applymovement 2, BonsaiWalkDown4
+	waitmovement 0
+	goto RustboroCity_EventScript_Bonsai4
+	end
+
+BonsaiWalkDown1:
+	walk_down
+	face_left
+	step_end
+
+BonsaiWalkDown2:
+	walk_down
+	walk_down
+	face_left
+	step_end
+
+BonsaiWalkDown3:
+	walk_down
+	walk_down
+	walk_down
+	face_left
+	step_end
+
+BonsaiWalkDown4:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
+	step_end
+
+Bonsai_Approach:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+RustboroCity_Text_HelloThere:
+	.string "Well! Hello there!\n"
+	.string "I don't believe we've been\l"
+	.string "properly introduced.$"
+
+RustboroCity_Text_NotBonzi:
+	.string "... ... ... What?\n"
+	.string "Bonzi?\p"
+	.string "No, you must be mistaken.\n"
+	.string "My name is BONSAI.\p"
+	.string "Now, Joel, was it? Chowder sent me\n"
+	.string "to get you your first POKéMON.\l"
+	.string "Come with me!$"
+
+
 RustboroCity_EventScript_LittleBoy::
 	lock
 	faceplayer
@@ -251,76 +417,76 @@ RustboroCity_EventScript_Man2::
 	release
 	end
 
-RustboroCity_EventScript_StolenGoodsTrigger0::
-	lockall
-	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 0
-	goto RustboroCity_EventScript_StolenGoodsScene
-	end
+//RustboroCity_EventScript_StolenGoodsTrigger0::
+//	lockall
+//	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
+//	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+//	setvar VAR_0x8004, 0
+//	goto RustboroCity_EventScript_StolenGoodsScene
+//	end
 
-RustboroCity_EventScript_StolenGoodsTrigger1::
-	lockall
-	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 1
-	goto RustboroCity_EventScript_StolenGoodsScene
-	end
+//RustboroCity_EventScript_StolenGoodsTrigger1::
+//	lockall
+//	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
+//	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+//	setvar VAR_0x8004, 1
+//	goto RustboroCity_EventScript_StolenGoodsScene
+//	end
 
-RustboroCity_EventScript_StolenGoodsTrigger2::
-	lockall
-	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 2
-	goto RustboroCity_EventScript_StolenGoodsScene
-	end
+//RustboroCity_EventScript_StolenGoodsTrigger2::
+//	lockall
+//	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
+//	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+//	setvar VAR_0x8004, 2
+//	goto RustboroCity_EventScript_StolenGoodsScene
+//	end
 
-RustboroCity_EventScript_StolenGoodsTrigger3::
-	lockall
-	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 3
-	goto RustboroCity_EventScript_StolenGoodsScene
-	end
+//RustboroCity_EventScript_StolenGoodsTrigger3::
+//	lockall
+//	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
+//	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+//	setvar VAR_0x8004, 3
+//	goto RustboroCity_EventScript_StolenGoodsScene
+//	end
 
-RustboroCity_EventScript_StolenGoodsTrigger4::
-	lockall
-	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 4
-	goto RustboroCity_EventScript_StolenGoodsScene
-	end
+//RustboroCity_EventScript_StolenGoodsTrigger4::
+//	lockall
+//	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
+//	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+//	setvar VAR_0x8004, 4
+//	goto RustboroCity_EventScript_StolenGoodsScene
+//	end
 
-RustboroCity_EventScript_StolenGoodsScene::
-	msgbox RustboroCity_Text_OutOfTheWay, MSGBOX_DEFAULT
-	closemessage
-	playbgm MUS_ENCOUNTER_AQUA, FALSE
-	addobject LOCALID_GRUNT
-	addobject LOCALID_DEVON_EMPLOYEE
-	applymovement LOCALID_GRUNT, RustboroCity_Movement_GruntEscape
-	waitmovement 0
-	removeobject LOCALID_GRUNT
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt1
-	waitmovement 0
-	msgbox RustboroCity_Text_WaitDontTakeMyGoods, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt2
-	waitmovement 0
-	fadedefaultbgm
-	removeobject LOCALID_DEVON_EMPLOYEE
-	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 30, 10
-	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
-	setflag FLAG_DEVON_GOODS_STOLEN
-	setvar VAR_RUSTBORO_CITY_STATE, 2
-	setvar VAR_RUSTURF_TUNNEL_STATE, 2
-	setvar VAR_ROUTE116_STATE, 1
-	clearflag FLAG_HIDE_ROUTE_116_MR_BRINEY
-	clearflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
-	clearflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
-	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
-	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	releaseall
-	end
+//RustboroCity_EventScript_StolenGoodsScene::
+//	msgbox RustboroCity_Text_OutOfTheWay, MSGBOX_DEFAULT
+//	closemessage
+//	playbgm MUS_ENCOUNTER_AQUA, FALSE
+//	addobject LOCALID_GRUNT
+//	addobject LOCALID_DEVON_EMPLOYEE
+//	applymovement LOCALID_GRUNT, RustboroCity_Movement_GruntEscape
+//	waitmovement 0
+//	removeobject LOCALID_GRUNT
+//	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt1
+//	waitmovement 0
+//	msgbox RustboroCity_Text_WaitDontTakeMyGoods, MSGBOX_DEFAULT
+//	closemessage
+//	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt2
+//	waitmovement 0
+//	fadedefaultbgm
+//	removeobject LOCALID_DEVON_EMPLOYEE
+//	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 30, 10
+//	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
+//	setflag FLAG_DEVON_GOODS_STOLEN
+//	setvar VAR_RUSTBORO_CITY_STATE, 2
+//	setvar VAR_RUSTURF_TUNNEL_STATE, 2
+//	setvar VAR_ROUTE116_STATE, 1
+//	clearflag FLAG_HIDE_ROUTE_116_MR_BRINEY
+//	clearflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
+//	clearflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
+//	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+//	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
+//	releaseall
+//	end
 
 @ Unused
 RustboroCity_EventScript_ShadyCharacterTookOff::
@@ -1114,10 +1280,10 @@ RustboroCity_Text_PokemonChangeShape:
 	.string "If one did that, I would be shocked!$"
 
 RustboroCity_Text_TradePokemonGrowFast:
-	.string "A POKéMON you get in a trade from\n"
-	.string "someone grows fast.\p"
-	.string "But if you don't have certain GYM\n"
-	.string "BADGES, it may not obey you…$"
+	.string "I can't believe MAX is closed!\p"
+	.string "I really wanted a burger and a\n"
+	.string "caramel espresso milkshake.\p"
+	.string "Lazy romhack devs…$"
 
 RustboroCity_Text_OutOfTheWay:
 	.string "Get out!\n"
@@ -1258,14 +1424,12 @@ RustboroCity_Text_TunnelNearingCompletion:
 	.string "across it in red paint…$"
 
 RustboroCity_Text_DevonCorpSign:
-	.string "DEVON CORPORATION\p"
-	.string "“For all your living needs, we make\n"
-	.string "it all.”$"
+	.string "It's the town sign.\n"
+	.string "The name is illegible.\p"
+	.string "Wonder where in Sweden this is?$"
 
 RustboroCity_Text_GymSign:
-	.string "RUSTBORO CITY POKéMON GYM\n"
-	.string "LEADER: ROXANNE\p"
-	.string "“The ROCK-loving honors student!”$"
+	.string "JOEL'S HOUSE$"
 
 RustboroCity_Text_DevonCorpBranchOfficeSign:
 	.string "DEVON CORP. BRANCH OFFICE\p"
@@ -1273,17 +1437,21 @@ RustboroCity_Text_DevonCorpBranchOfficeSign:
 	.string "and authorized personnel.”$"
 
 RustboroCity_Text_CitySign:
-	.string "RUSTBORO CITY\p"
-	.string "“The city probing the integration of\n"
-	.string "nature and science.”$"
+	.string "MAX BURGERS\p"
+	.string "“Temporarily closed. \n"
+	.string "Sorry!”$"
 
 RustboroCity_Text_TrainersSchoolSign:
-	.string "POKéMON TRAINER'S SCHOOL\p"
-	.string "“We'll teach you anything about\n"
-	.string "POKéMON!”$"
+	.string "BACON'S HOUSE$"
 
 RustboroCity_Text_CuttersHouse:
-	.string "CUTTER'S HOUSE$"
+	.string "It's a fountain. Supposedly,\n"
+	.string "it depicts a swan going into\p"
+	.string "flight... but it just looks\n"
+	.string "like a cock.$"
+
+
+
 
 RustboroCity_Text_DevelopedNewPokenavFeature:
 	.string "I've been developing an added feature\n"
@@ -1320,3 +1488,10 @@ RustboroCity_Text_YouCanHave2On2Battle:
 	.string "they'll both challenge you.\p"
 	.string "Don't you think it'd be cool if you\n"
 	.string "could beat two TRAINERS by yourself?$"
+
+RustboroCity_Event_LabSign::
+	msgbox RustboroCity_Text_LabSign, MSGBOX_SIGN
+	return
+
+RustboroCity_Text_LabSign:
+	.string "PROFESSOR'S LAB$"

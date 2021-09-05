@@ -1,10 +1,11 @@
 gText_Birch_Welcome::
 	.string "I see you're finally awake.\p"
-	.string "It's me joel, the worse mod ever chowder!\p"
+	.string "It's me, Joel, the worst mod ever,\n"
+	.string "Chowder!\p"
 	.string "You've talked too much shit to me.\p"
 	.string "So now it's time I get my revenge!\p"
 	.string "By making you play a shitty ROM HACK of\n" 
-	.string "Pokemon Emerald\p"
+	.string "Pokémon Emerald.\p"
 	.string "$"
 
 gText_Birch_Pokemon::

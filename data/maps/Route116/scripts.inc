@@ -42,6 +42,9 @@ Route116_EventScript_WandasBoyfriend::
 	end
 
 Route116_EventScript_BoyfriendGruntLeftTunnel::
+	lock
+	faceplayer
+	playmoncry SPECIES_SKITTY, 0
 	msgbox Route116_Text_GoonHightailedItOutOfTunnel, MSGBOX_DEFAULT
 	release
 	end
@@ -125,7 +128,24 @@ Route116_Movement_DevonEmployeeExitEast:
 	step_end
 
 Route116_EventScript_RouteSignRustboro::
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_BLUE_SCARF, Script_FrenShow
+	goto_if_set FLAG_RECEIVED_RED_SCARF, Script_FrenBallGive
 	msgbox Route116_Text_RouteSignRustboro, MSGBOX_SIGN
+	giveitem ITEM_MASTER_BALL
+	setflag FLAG_RECEIVED_RED_SCARF
+	release
+	end
+
+Script_FrenBallGive::
+	msgbox Text_FrenBallGive, MSGBOX_DEFAULT
+	release
+	end
+
+Script_FrenShow::
+	msgbox Text_FrenShow, MSGBOX_DEFAULT
+	release
 	end
 
 Route116_EventScript_RusturfTunnelSign::
@@ -372,6 +392,41 @@ Route116_EventScript_Johnson::
 	msgbox Route116_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route116_EventScript_FrenIsland::
+	goto_if_set FLAG_RECEIVED_BLUE_SCARF, Route116_EventScript_FrenCaught
+	lock
+	applymovement OBJ_EVENT_ID_PLAYER, FrenIsland_Movement
+	waitmovement 0
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 5
+	setflag FLAG_RECEIVED_BLUE_SCARF
+	warp MAP_FARAWAY_ISLAND_INTERIOR, -1, 13, 18
+	waitstate
+	release
+	end	
+
+Route116_EventScript_FrenCaught::
+	release
+	end
+
+FrenIsland_Movement:
+	face_up
+	delay_16
+	delay_16
+	face_down
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	emote_question_mark
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	step_end
+
 Route116_Text_ScoundrelMadeOffWithPeeko:
 	.string "Ohhh, what am I to do?\p"
 	.string "We were on our walk, PEEKO and I, when\n"
@@ -399,9 +454,9 @@ Route116_Text_DiggingTunnelWhenGoonOrderedMeOut:
 	.string "POKéMON into an uproar.$"
 
 Route116_Text_GoonHightailedItOutOfTunnel:
-	.string "Nnn… Roar!\p"
-	.string "That goofy goon hightailed it out of\n"
-	.string "the tunnel! I can go back to digging!$"
+	.string "Myaaa!\p"
+	.string "(There is a collar on the Skitty.\n"
+	.string "It says DR. MEOW on the tag.)$"
 
 Route116_Text_ThankYouTokenOfAppreciation:
 	.string "Oh! It's you!\p"
@@ -464,8 +519,10 @@ Route116_Text_NotWhatImLookingFor:
 	.string "They're not what I'm looking for…$"
 
 Route116_Text_RouteSignRustboro:
-	.string "ROUTE 116\n"
-	.string "{LEFT_ARROW} RUSTBORO CITY$"
+	.string "SPALUMPKIN: Hey Joel.\n"
+	.string "I heard something across the water.\p"
+	.string "You should go check it out.\n"
+	.string "Maybe this will help.$"
 
 Route116_Text_RusturfTunnelSign:
 	.string "RUSTURF TUNNEL\n"
@@ -492,3 +549,12 @@ Route116_Text_TrainerTipsBagHasPockets:
 	.string "No TRAINER can afford to be without\n"
 	.string "a BAG of their own.$"
 
+Text_FrenBallGive:
+	.string "SPALUMPKIN: I hope that ball comes\n"
+	.string "in handy. It can catch anything,\p"
+	.string "especially frens...$"
+
+Text_FrenShow:
+	.string "SPALUMPKIN: Did you catch Fren?\n"
+	.string "Can I see him?\p"
+	.string "Awwh... so cute...$"

@@ -9,13 +9,21 @@ RustboroCity_House2_EventScript_LittleGirl::
 	msgbox RustboroCity_House2_Text_RoxanneKnowsALot, MSGBOX_NPC
 	end
 
+RustboroCity_House2_EventScript_Cabinet::
+	msgbox RustboroCity_House2_Text_BaconsCabinet, MSGBOX_NPC
+	end
+
 RustboroCity_House2_Text_TrainerSchoolExcellent:
-	.string "The TRAINER'S SCHOOL is excellent.\p"
-	.string "If you study there, you could even\n"
-	.string "become a GYM LEADER.$"
+	.string "BACON: Hey Joel! Nice to see you.\p"
+	.string "I'm doing a VTuber stream tonight.\n"
+	.string "Hope I don't get any weird donations...$"
 
 RustboroCity_House2_Text_RoxanneKnowsALot:
-	.string "ROXANNE, the GYM LEADER, really knows\n"
-	.string "a lot about POKéMON.\p"
-	.string "She's really strong, too!$"
+	.string "It's Bacon's hentai collection!\n"
+	.string "... ... ...\p"
+	.string "Let's not.$"
 
+RustboroCity_House2_Text_BaconsCabinet:
+	.string "It's Bacon's anime figurines.\p"
+	.string "You recognize the sexy lady\n"
+	.string "Skeletor he got you as a gift.$"

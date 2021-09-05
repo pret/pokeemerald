@@ -19,8 +19,8 @@ Text_EmptyTrashCan:
 	.string "It's empty.$"
 
 Text_ShopShelf:
-	.string "The shelves brim with all sorts of\n"
-	.string "POKéMON merchandise.$"
+	.string "The shelves are full of discounted,\n"
+	.string "knockoff merchandise.$"
 
 Text_Blueprint:
 	.string "A blueprint of some sort?\n"

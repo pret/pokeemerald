@@ -1,9 +1,9 @@
-.set LOCALID_AIDE, 1
-.set LOCALID_BIRCH, 2
-.set LOCALID_RIVAL, 3
+.set LOCALID_AIDE, 6
+.set LOCALID_BIRCH, 3
+.set LOCALID_RIVAL, 5
 .set LOCALID_BALL_CYNDAQUIL, 4
-.set LOCALID_BALL_TOTODILE, 5
-.set LOCALID_BALL_CHIKORITA, 6
+.set LOCALID_BALL_TOTODILE, 2
+.set LOCALID_BALL_CHIKORITA, 1
 
 LittlerootTown_ProfessorBirchsLab_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
@@ -43,6 +43,19 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_RIVAL, 5, 10
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon::
+	compare VAR_STARTER_MON, 1
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_StarterTaken
+	lock
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ShouldTakePokemon, MSGBOX_DEFAULT
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp2
+	waitmovement 0
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_StarterTaken::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter::
@@ -93,17 +106,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
 	addobject LOCALID_BALL_CYNDAQUIL
 	addobject LOCALID_BALL_TOTODILE
 	addobject LOCALID_BALL_CHIKORITA
-	addobject LOCALID_RIVAL
-	turnobject LOCALID_BALL_CYNDAQUIL, DIR_SOUTH
-	setobjectxy LOCALID_BALL_CYNDAQUIL, 8, 4
-	turnobject LOCALID_BALL_TOTODILE, DIR_SOUTH
-	setobjectxy LOCALID_BALL_TOTODILE, 9, 4
-	turnobject LOCALID_BALL_CHIKORITA, DIR_SOUTH
-	setobjectxy LOCALID_BALL_CHIKORITA, 10, 4
-	turnobject LOCALID_BIRCH, DIR_SOUTH
-	setobjectxy LOCALID_BIRCH, 6, 4
-	turnobject LOCALID_RIVAL, DIR_EAST
-	setobjectxy LOCALID_RIVAL, 5, 5
+	//turnobject LOCALID_BALL_CYNDAQUIL, DIR_SOUTH
+	//setobjectxy LOCALID_BALL_CYNDAQUIL, 8, 4
+	//turnobject LOCALID_BALL_TOTODILE, DIR_SOUTH
+	//setobjectxy LOCALID_BALL_TOTODILE, 9, 5
+	//turnobject LOCALID_BALL_CHIKORITA, DIR_SOUTH
+	//setobjectxy LOCALID_BALL_CHIKORITA, 11, 5
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:
@@ -268,12 +276,41 @@ LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex:
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
-	waitmovement 0
+	//applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
+	//waitmovement 0
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiTakeTime
+	compare VAR_STARTER_MON, 1
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiDone
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
+	setvar VAR_STARTER_MON, 0
 	releaseall
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
 	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiTakeTime::
+	lock
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_BonsaiTakeTime, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_Text_BonsaiTakeTime:
+	.string "Take your time.$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiDone::
+	lock
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Done, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_Text_Done:
+	.string "Well, you're off on your new adventure.\n"
+	.string "You might want to pack a few ibuprofen.\p"
+	.string "This is sure to be quite the, um.\n"
+	.string "Experience?$"
 
 LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter:
 	walk_up
@@ -398,6 +435,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil::
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+	setvar VAR_STARTER_MON, 1
 	releaseall
 	end
 
@@ -443,6 +481,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile::
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+	setvar VAR_STARTER_MON, 1
 	releaseall
 	end
 
@@ -488,6 +527,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita::
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+	setvar VAR_STARTER_MON, 1
 	releaseall
 	end
 
@@ -1050,3 +1090,8 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ShouldTakePokemon:
+	.string "You should really take a POKéMON.\n"
+	.string "The game tends to bug out if\p"
+	.string "you don't have one, you know...$"
