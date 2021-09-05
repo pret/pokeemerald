@@ -558,3 +558,4 @@ Text_FrenShow:
 	.string "SPALUMPKIN: Did you catch Fren?\n"
 	.string "Can I see him?\p"
 	.string "Awwh... so cute...$"
+
