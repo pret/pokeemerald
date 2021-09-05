@@ -1083,6 +1083,15 @@
 #define BW_SEQ_BGM_T_03_VAR           1054 // Anville Town (No Flute)
 #define BW_SEQ_BGM_T_03               1055 // Anville Town
 #define BW_SEQ_BGM_H_05               1056 // Marvelous Bridge
+#define BW_SEQ_BGM_R_E_SP             1057 // Route 12 (Spring)
+#define BW_SEQ_BGM_R_E_SU             1058 // Route 12 (Summer)
+#define BW_SEQ_BGM_R_E_AU             1059 // Route 12 (Autumn)
+#define BW_SEQ_BGM_R_E_WI             1060 // Route 12 (Winter)
+#define BW_SEQ_BGM_EYE_07             1061 // Trainers' Eyes Meet (Cyclist)
+#define BW_SEQ_BGM_PALPARK            1062 // Poké Transfer Lab
+#define BW_SEQ_BGM_PALPARK_BOX        1063 // Poké Transfer: Choose Your Pokémon!
+#define BW_SEQ_BGM_PALPARK_GAME       1064 // Poké Transfer: Catch Your Pokémon!
+#define BW_SEQ_BGM_EYE_10             1065 // Trainers' Eyes Meet (Pokéfan)
 
 // Black 2 & White 2 Music
 

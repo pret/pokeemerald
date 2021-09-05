@@ -2840,3 +2840,30 @@ $(MID_SUBDIR)/bw_seq_bgm_t_03.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_h_05.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V089
+
+$(MID_SUBDIR)/bw_seq_bgm_r_e_sp.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_r_e_su.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_r_e_au.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_r_e_wi.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_07.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V108
+
+$(MID_SUBDIR)/bw_seq_bgm_palpark.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V077
+
+$(MID_SUBDIR)/bw_seq_bgm_palpark_box.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V085
+
+$(MID_SUBDIR)/bw_seq_bgm_palpark_game.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V073
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_10.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V058

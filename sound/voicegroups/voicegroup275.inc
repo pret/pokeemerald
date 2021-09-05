@@ -7,7 +7,7 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup236, KeySplitTable83    @ rhodes (HGSS)
 	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
 	voice_keysplit voicegroup326, KeySplitTable36    @ tack piano
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup290, KeySplitTable70    @ harpsichord
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup297, KeySplitTable76    @ vibraphone
@@ -37,7 +37,7 @@ voicegroup275:: @ BW Sato
 	voice_keysplit voicegroup293, KeySplitTable48    @ pizzicato
 	voice_keysplit voicegroup299, KeySplitTable78    @ harp 2
 	voice_keysplit voicegroup259, KeySplitTable40    @ harp (HGSS)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup302, KeySplitTable80    @ harp 1
 	voice_keysplit voicegroup260, KeySplitTable61    @ timpani
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
 	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
@@ -121,8 +121,8 @@ voicegroup275:: @ BW Sato
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 2, 0, 7, 2, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_sq50half, 0, 7, 2, 0
+	voice_directsound 60, 0, DirectSoundWaveData_puresquare_50, 255, 242, 25, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

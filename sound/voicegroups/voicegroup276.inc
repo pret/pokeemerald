@@ -21,7 +21,7 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_keysplit voicegroup319, KeySplitTable97    @ pipe organ
 	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_slapbass_c1_16, 255, 0, 255, 171
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_directsound 60, 0, DirectSoundWaveData_bw_synthbassf1_leader, 255, 251, 14, 171
 	voice_keysplit voicegroup308, KeySplitTable95    @ lp marschall guitar ||| 70
@@ -107,9 +107,9 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmale3_ghetsis, 255, 0, 255, 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_train1, 255, 0, 255, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_train2, 255, 0, 255, 2
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup237, KeySplitTable83    @ rhodes 2 (HGSS)
+	voice_keysplit voicegroup250, KeySplitTable32    @ distortion guitar 2 (HGSS)
+	voice_keysplit voicegroup316, KeySplitTable41    @ clean guitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

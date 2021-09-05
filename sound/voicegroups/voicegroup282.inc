@@ -61,3 +61,14 @@ voicegroup282:: @ drums 4 (misc)
 	voice_directsound 61, 100, DirectSoundWaveData_bw_179splash, 255, 250, 0, 205    			@ 127/ 70/  0/116/100	+ 1
 	voice_directsound 72, 64, DirectSoundWaveData_bw_213tri_closed, 255, 0, 227, 2	    		@ 127/127/120/124/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_214tri_open, 255, 246, 0, 214	    		@ 127/ 90/  0/114/ 64
+	voice_directsound 59, 20, DirectSoundWaveData_hg_022china, 255, 250, 0, 224    				@ 127/ 70/  0/110/ 20	- 1
+	voice_directsound 61, 102, DirectSoundWaveData_hg_032crash, 255, 248, 0, 214    			@ 127/ 80/  0/114/102	+ 1
+	voice_directsound 60, 30, DirectSoundWaveData_hg_135tom, 255, 0, 255, 171    				@ 127/127/127/120/ 30	
+	voice_directsound 56, 40, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 40	- 4
+	voice_directsound 58, 40, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 40	- 2
+	voice_directsound 59, 40, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 40	- 1
+	voice_directsound 60, 50, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 50	
+	voice_directsound 62, 50, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 50	+ 2
+	voice_directsound 63, 50, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 50	+ 3
+	voice_directsound 60, 90, DirectSoundWaveData_hg_138tom, 255, 0, 255, 171    				@ 127/127/127/120/ 90	
+	voice_directsound 61, 90, DirectSoundWaveData_hg_138tom, 255, 0, 255, 171    				@ 127/127/127/120/ 90	+ 1

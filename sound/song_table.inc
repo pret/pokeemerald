@@ -1058,6 +1058,15 @@ gSongTable::
 	song bw_seq_bgm_t_03_var, 0, 0
 	song bw_seq_bgm_t_03, 0, 0
 	song bw_seq_bgm_h_05, 0, 0
+	song bw_seq_bgm_r_e_sp, 0, 0
+	song bw_seq_bgm_r_e_su, 0, 0
+	song bw_seq_bgm_r_e_au, 0, 0
+	song bw_seq_bgm_r_e_wi, 0, 0
+	song bw_seq_bgm_eye_07, 0, 0
+	song bw_seq_bgm_palpark, 0, 0
+	song bw_seq_bgm_palpark_box, 0, 0
+	song bw_seq_bgm_palpark_game, 0, 0
+	song bw_seq_bgm_eye_10, 0, 0
 
 	.align 2
 dummy_song_header:

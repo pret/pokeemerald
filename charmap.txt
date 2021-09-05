@@ -1514,6 +1514,15 @@ BW_SEQ_BGM_VS_MOVEPOKE        = 1D 04
 BW_SEQ_BGM_T_03_VAR           = 1E 04
 BW_SEQ_BGM_T_03               = 1F 04
 BW_SEQ_BGM_H_05               = 20 04
+BW_SEQ_BGM_R_E_SP             = 21 03
+BW_SEQ_BGM_R_E_SU             = 22 03
+BW_SEQ_BGM_R_E_AU             = 23 03
+BW_SEQ_BGM_R_E_WI             = 24 03
+BW_SEQ_BGM_EYE_07             = 25 03
+BW_SEQ_BGM_PALPARK            = 26 03
+BW_SEQ_BGM_PALPARK_BOX        = 27 03
+BW_SEQ_BGM_PALPARK_GAME       = 28 03
+BW_SEQ_BGM_EYE_10             = 29 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01
