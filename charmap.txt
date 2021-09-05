@@ -1523,6 +1523,8 @@ BW_SEQ_BGM_PALPARK            = 26 03
 BW_SEQ_BGM_PALPARK_BOX        = 27 03
 BW_SEQ_BGM_PALPARK_GAME       = 28 03
 BW_SEQ_BGM_EYE_10             = 29 03
+BW_SEQ_BGM_C_10_B             = 2A 03
+BW_SEQ_BGM_C_10_W             = 2B 03
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

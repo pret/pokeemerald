@@ -2867,3 +2867,9 @@ $(MID_SUBDIR)/bw_seq_bgm_palpark_game.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_eye_10.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V058
+
+$(MID_SUBDIR)/bw_seq_bgm_c_10_b.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076
+
+$(MID_SUBDIR)/bw_seq_bgm_c_10_w.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V098

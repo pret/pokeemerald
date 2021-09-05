@@ -1761,6 +1761,8 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_palpark_box.o(.rodata);
         sound/songs/midi/bw_seq_bgm_palpark_game.o(.rodata);
         sound/songs/midi/bw_seq_bgm_eye_10.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_10_b.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_c_10_w.o(.rodata);
     } =0
 
     lib_rodata :

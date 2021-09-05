@@ -1092,6 +1092,8 @@
 #define BW_SEQ_BGM_PALPARK_BOX        1063 // Poké Transfer: Choose Your Pokémon!
 #define BW_SEQ_BGM_PALPARK_GAME       1064 // Poké Transfer: Catch Your Pokémon!
 #define BW_SEQ_BGM_EYE_10             1065 // Trainers' Eyes Meet (Pokéfan)
+#define BW_SEQ_BGM_C_10_B             1066 // Black City
+#define BW_SEQ_BGM_C_10_W             1067 // White Forest
 
 // Black 2 & White 2 Music
 

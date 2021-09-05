@@ -1067,6 +1067,8 @@ gSongTable::
 	song bw_seq_bgm_palpark_box, 0, 0
 	song bw_seq_bgm_palpark_game, 0, 0
 	song bw_seq_bgm_eye_10, 0, 0
+	song bw_seq_bgm_c_10_b, 0, 0
+	song bw_seq_bgm_c_10_w, 0, 0
 
 	.align 2
 dummy_song_header:
