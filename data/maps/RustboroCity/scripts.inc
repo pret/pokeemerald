@@ -1495,3 +1495,4 @@ RustboroCity_Event_LabSign::
 
 RustboroCity_Text_LabSign:
 	.string "PROFESSOR'S LAB$"
+

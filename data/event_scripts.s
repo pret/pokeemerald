@@ -1,4 +1,3 @@
-#include "constants/mugshots.h"
 #include "constants/global.h"
 #include "constants/apprentice.h"
 #include "constants/battle.h"
@@ -46,6 +45,7 @@
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/mugshots.h"
 #include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
@@ -839,25 +839,25 @@ Common_EventScript_PlayerHandedOverTheItem::
 
 @ The below and surf.inc could be split into some text/notices.inc
 gText_PokemartSign::
-	.string "“Selected items for your convenience!”\n"
-	.string "POKéMON MART$"
+	.string "“Big on Quality, Lidl on Price!”\n"
+	.string "LIDL$"
 
 gText_PokemonCenterSign::
-	.string "“Rejuvenate your tired partners!”\n"
-	.string "POKéMON CENTER$"
+	.string "“Cura a tu POKéMON!”\n"
+	.string "DR. AMIGO$"
 
 gText_MomOrDadMightLikeThisProgram::
-	.string "{STR_VAR_1} might like this program.\n"
-	.string "… … … … … … … … … … … … … … … …\p"
-	.string "Better get going!$"
+	.string "What's this ad?\p"
+	.string "A guy is claiming he can play the drums\n"
+	.string "so good, he can bring back the dead.$"
 
 gText_WhichFloorWouldYouLike::
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
 	.string "Which floor would you like?$"
 
 gText_SandstormIsVicious::
-	.string "The sandstorm is vicious.\n"
-	.string "It's impossible to keep going.$"
+	.string "You can't cross the desert on foot!\n"
+	.string "You're going to need some kind of bus.$"
 
 gText_SelectWithoutRegisteredItem::
 	.string "An item in the BAG can be\n"

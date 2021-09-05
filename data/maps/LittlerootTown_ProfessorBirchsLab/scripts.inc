@@ -1095,3 +1095,4 @@ LittlerootTown_ProfessorBirchsLab_Text_ShouldTakePokemon:
 	.string "You should really take a POKéMON.\n"
 	.string "The game tends to bug out if\p"
 	.string "you don't have one, you know...$"
+
