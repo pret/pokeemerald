@@ -3,9 +3,9 @@ static const u8 sDummyDesc[] = _(
 
 // Pokeballs
 static const u8 sMasterBallDesc[] = _(
-    "The best BALL that\n"
-    "catches a POKéMON\n"
-    "without fail.");
+    "The best BALL.\n"
+    "Perfect for\n"
+    "catching FRENs.");
 
 static const u8 sUltraBallDesc[] = _(
     "A better BALL with\n"
@@ -64,13 +64,14 @@ static const u8 sPremierBallDesc[] = _(
 
 // Medicine
 static const u8 sPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a POKéMON by\n"
-    "20 points.");
+    "A box of SMAKIS\n"
+    "orange flavor.\n"
+    "Unpleasant.");
 
 static const u8 sAntidoteDesc[] = _(
-    "Heals a poisoned\n"
-    "POKéMON.");
+    "A can of MUG root\n"
+    "beer. Heals\n"
+    "poison.");
 
 static const u8 sBurnHealDesc[] = _(
     "Heals POKéMON\n"
@@ -94,18 +95,18 @@ static const u8 sFullRestoreDesc[] = _(
     "POKéMON.");
 
 static const u8 sMaxPotionDesc[] = _(
-    "Fully restores the\n"
-    "HP of a POKéMON.");
+    "A can of PEPSI MAX.\n"
+    "Tastes fantastic.");
 
 static const u8 sHyperPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a POKéMON by\n"
-    "200 points.");
+    "A can of DIET.\n"
+    "PEPSI. Not a\n"
+    "bad choice.");
 
 static const u8 sSuperPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a POKéMON by\n"
-    "50 points.");
+    "A can of regular\n"
+    "PEPSI. Contains\n"
+    "sugar.");
 
 static const u8 sFullHealDesc[] = _(
     "Heals all the\n"
