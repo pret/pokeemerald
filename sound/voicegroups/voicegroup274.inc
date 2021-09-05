@@ -57,7 +57,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup265, KeySplitTable51    @ oboe (HGSS)
 	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

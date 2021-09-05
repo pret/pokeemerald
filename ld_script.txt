@@ -1763,6 +1763,12 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_eye_10.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_10_b.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_10_w.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_game_sync.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_palace.o(.rodata);
+        sound/songs/midi/bw_seq_me_mission_start.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_palace2.o(.rodata);
+        sound/songs/midi/bw_seq_me_mission_clear.o(.rodata);
+        sound/songs/midi/bw_seq_me_mission_failed.o(.rodata);
     } =0
 
     lib_rodata :

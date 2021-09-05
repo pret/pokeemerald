@@ -729,7 +729,7 @@
 #define PL_SEQ_PL_POINTGET3           707 // Received Battle Points!
 #define PL_SEQ_PL_BA_BRAIN            708 // Battle! (Frontier Brain)
 #define PL_SEQ_PL_WINBRAIN            709 // Victory! (Frontier Brain)
-#define PL_SEQ_PL_BA_REGI             710 // Battle! (Regirock / Regice / Registeel)
+#define PL_SEQ_PL_BA_REGI             710 // Battle! (Regirock / Regice / Registeel / Regigigas)
  
 // HeartGold & SoulSilver Music 
 #define HG_SEQ_GS_TITLE               711 // Opening Movie
@@ -1094,6 +1094,12 @@
 #define BW_SEQ_BGM_EYE_10             1065 // Trainers' Eyes Meet (Pokéfan)
 #define BW_SEQ_BGM_C_10_B             1066 // Black City
 #define BW_SEQ_BGM_C_10_W             1067 // White Forest
+#define BW_SEQ_BGM_GAME_SYNC          1068 // Game Sync
+#define BW_SEQ_BGM_PALACE             1069 // Entralink
+#define BW_SEQ_ME_MISSION_START       1070 // Begin an Entralink Mission!
+#define BW_SEQ_BGM_PALACE2            1071 // Someone's Entralink
+#define BW_SEQ_ME_MISSION_CLEAR       1072 // Mission Accomplished!
+#define BW_SEQ_ME_MISSION_FAILED      1073 // Mission Failed!
 
 // Black 2 & White 2 Music
 

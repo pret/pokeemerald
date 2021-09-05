@@ -2873,3 +2873,21 @@ $(MID_SUBDIR)/bw_seq_bgm_c_10_b.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_c_10_w.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V098
+
+$(MID_SUBDIR)/bw_seq_bgm_game_sync.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V086
+
+$(MID_SUBDIR)/bw_seq_bgm_palace.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V078
+
+$(MID_SUBDIR)/bw_seq_me_mission_start.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V112 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_palace2.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V094
+
+$(MID_SUBDIR)/bw_seq_me_mission_clear.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V105 -p5
+
+$(MID_SUBDIR)/bw_seq_me_mission_failed.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V118 -p5

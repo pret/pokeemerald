@@ -4405,3 +4405,19 @@ DirectSoundWaveData_bw_kotods4::
 	.align 2
 DirectSoundWaveData_bw_shakuds4::
 	.incbin "sound/direct_sound_samples/bw_shakuds4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tom1_entralink::
+	.incbin "sound/direct_sound_samples/bw_tom1_entralink.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tom2_entralink::
+	.incbin "sound/direct_sound_samples/bw_tom2_entralink.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tom3_entralink::
+	.incbin "sound/direct_sound_samples/bw_tom3_entralink.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tom4_entralink::
+	.incbin "sound/direct_sound_samples/bw_tom4_entralink.bin"

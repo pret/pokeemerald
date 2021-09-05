@@ -1069,6 +1069,12 @@ gSongTable::
 	song bw_seq_bgm_eye_10, 0, 0
 	song bw_seq_bgm_c_10_b, 0, 0
 	song bw_seq_bgm_c_10_w, 0, 0
+	song bw_seq_bgm_game_sync, 0, 0
+	song bw_seq_bgm_palace, 0, 0
+	song bw_seq_me_mission_start, 2, 2
+	song bw_seq_bgm_palace2, 0, 0
+	song bw_seq_me_mission_clear, 2, 2
+	song bw_seq_me_mission_failed, 2, 2
 
 	.align 2
 dummy_song_header:
