@@ -21,6 +21,12 @@ RustboroCity_OnTransition:
 	setvar VAR_RUSTBORO_CITY_STATE, 10
 	removeobject 2
 	setflag FLAG_UNUSED_0x020
+	compare VAR_STARTER_MON, 0
+	goto_if_gt RustboroCity_EventScript_HasStarter
+	setvar VAR_STARTER_MON, 0
+	end
+
+RustboroCity_EventScript_HasStarter::
 	end
 	
 
@@ -250,7 +256,9 @@ RustboroCity_EventScript_Bonsai2::
 	waitmovement 0
 	setvar VAR_RUSTBORO_CITY_STATE, 11
 	applymovement OBJ_EVENT_ID_PLAYER, Bonzi_Step
-	//goto RustboroCity_EventScript_JoelPos
+	clearflag FLAG_UNUSED_0x025
+	showobjectat 3, MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
+	setvar VAR_STARTER_MON, 1
 	end
 
 //RustboroCity_EventScript_JoelPos
@@ -262,30 +270,26 @@ RustboroCity_EventScript_Bonsai3::
 	end
 
 RustboroCity_EventScript_Bonsai4::
-	applymovement 2, Bonsai_Approach
+	applymovement 2, BonsaiWalkDown1
 	waitmovement 0
-	//applymovement 2, BonsaiWalkDown1
 	goto RustboroCity_EventScript_BonsaiEnd
 	end
 
 RustboroCity_EventScript_Bonsai5::
-	applymovement 2, Bonsai_Approach
+	applymovement 2, BonsaiWalkDown2
 	waitmovement 0
-	//applymovement 2, BonsaiWalkDown2
 	goto RustboroCity_EventScript_BonsaiEnd
 	end
 
 RustboroCity_EventScript_Bonsai6::
-	applymovement 2, Bonsai_Approach
+	applymovement 2, BonsaiWalkDown3
 	waitmovement 0
-	//applymovement 2, BonsaiWalkDown3
 	goto RustboroCity_EventScript_BonsaiEnd
 	end
 
 RustboroCity_EventScript_Bonsai7::
-	applymovement 2, Bonsai_Approach
+	applymovement 2, BonsaiWalkDown4
 	waitmovement 0
-	//applymovement 2, BonsaiWalkDown4
 	goto RustboroCity_EventScript_BonsaiEnd
 	end
 
@@ -334,37 +338,10 @@ RustboroCity_EventScript_BonsaiWalkDown3::
 	end
 
 RustboroCity_EventScript_BonsaiWalkDown4::
-	applymovement 2, Bonsai_Approach
 	applymovement 2, BonsaiWalkDown4
 	waitmovement 0
 	goto RustboroCity_EventScript_Bonsai4
 	end
-
-BonsaiWalkDown1:
-	walk_down
-	face_left
-	step_end
-
-BonsaiWalkDown2:
-	walk_down
-	walk_down
-	face_left
-	step_end
-
-BonsaiWalkDown3:
-	walk_down
-	walk_down
-	walk_down
-	face_left
-	step_end
-
-BonsaiWalkDown4:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	face_left
-	step_end
 
 Bonsai_Approach:
 	walk_left
@@ -376,6 +353,61 @@ Bonsai_Approach:
 	walk_left
 	walk_left
 	step_end
+
+BonsaiWalkDown1:
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+BonsaiWalkDown2:
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+BonsaiWalkDown3:
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+	
+BonsaiWalkDown4:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+	
 
 RustboroCity_Text_HelloThere:
 	.string "Well! Hello there!\n"
@@ -1495,4 +1527,3 @@ RustboroCity_Event_LabSign::
 
 RustboroCity_Text_LabSign:
 	.string "PROFESSOR'S LAB$"
-

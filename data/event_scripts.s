@@ -1,3 +1,4 @@
+#include "constants/mugshots.h"
 #include "constants/global.h"
 #include "constants/apprentice.h"
 #include "constants/battle.h"
@@ -45,7 +46,6 @@
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/mugshots.h"
 #include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"

@@ -22,7 +22,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_SKITTY",
-      "x": 6,
+      "x": 7,
       "y": 10,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -35,7 +35,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PHOEBE",
-      "x": 7,
+      "x": 8,
       "y": 10,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
@@ -54,73 +54,10 @@
     {
       "type": "trigger",
       "x": 12,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 9,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 7,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 15,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 14,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 13,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -128,8 +65,17 @@
       "x": 12,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "Route116_EventScript_FrenIsland"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -137,8 +83,35 @@
       "x": 12,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "Route116_EventScript_FrenIsland"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "Route116_EventScript_FrenIsland"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "Route116_EventScript_FrenIsland"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
       "script": "Route116_EventScript_FrenIsland"
     }
   ],

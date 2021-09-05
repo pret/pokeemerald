@@ -271,7 +271,7 @@ Route111_Movement_PushRightFromRoute:
 
 Route111_EventScript_SunTrigger::
 	setweather WEATHER_SUNNY
-	fadenewbgm MUS_ROUTE110
+	fadenewbgm MUS_ROUTE111
 	doweather
 	setvar VAR_TEMP_3, 0
 	end

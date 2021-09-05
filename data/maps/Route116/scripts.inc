@@ -130,11 +130,18 @@ Route116_Movement_DevonEmployeeExitEast:
 Route116_EventScript_RouteSignRustboro::
 	lock
 	faceplayer
+	compare VAR_STARTER_MON, 0
+	goto_if_eq Script_ComeBackLater
 	goto_if_set FLAG_RECEIVED_BLUE_SCARF, Script_FrenShow
 	goto_if_set FLAG_RECEIVED_RED_SCARF, Script_FrenBallGive
 	msgbox Route116_Text_RouteSignRustboro, MSGBOX_SIGN
 	giveitem ITEM_MASTER_BALL
 	setflag FLAG_RECEIVED_RED_SCARF
+	release
+	end
+
+Script_ComeBackLater::
+	msgbox Text_ComeBackLater, MSGBOX_DEFAULT
 	release
 	end
 
@@ -559,3 +566,7 @@ Text_FrenShow:
 	.string "Can I see him?\p"
 	.string "Awwh... so cute...$"
 
+Text_ComeBackLater:
+	.string "SPALUMPKIN: Hey Joel. You should\n"
+	.string "come back here when you have a\l"
+	.string "POKéMON. I think I heard something...$"

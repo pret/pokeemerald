@@ -5,12 +5,18 @@ Common_EventScript_PkmnCenterNurse::
     specialvar VAR_RESULT, CountPlayerTrainerStars
     compare VAR_RESULT, 4
     goto_if_eq EventScript_PkmnCenterNurse_GoldCard
+    compare VAR_STARTER_MON, 0
+    goto_if_eq EventScript_PkmnCenterNurse_NoPokemon
     msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
     compare VAR_RESULT, YES
     goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
     compare VAR_RESULT, NO
     goto_if_eq EventScript_PkmnCenterNurse_Goodbye
     end
+
+EventScript_PkmnCenterNurse_NoPokemon::
+    message gText_NoPokemonInParty
+    return
 
 EventScript_PkmnCenterNurse_Goodbye::
     message gText_WeHopeToSeeYouAgain

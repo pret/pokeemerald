@@ -27,6 +27,8 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	@ 5: Received pokedex
 
 LittlerootTown_ProfessorBirchsLab_OnTransition:
+	compare VAR_STARTER_MON, 0
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_HideBonsai
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
@@ -35,6 +37,11 @@ LittlerootTown_ProfessorBirchsLab_OnTransition:
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_HideBonsai::
+	removeobject 3
+	setflag FLAG_UNUSED_0x025
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
@@ -46,7 +53,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon::
-	compare VAR_STARTER_MON, 1
+	compare VAR_STARTER_MON, 2
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_StarterTaken
 	lock
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ShouldTakePokemon, MSGBOX_DEFAULT
@@ -280,11 +287,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
 	//waitmovement 0
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiTakeTime
-	compare VAR_STARTER_MON, 1
+	compare VAR_STARTER_MON, 2
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiDone
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
-	setvar VAR_STARTER_MON, 0
+	setvar VAR_STARTER_MON, 1
 	releaseall
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
 	end
@@ -435,7 +442,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil::
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	setvar VAR_STARTER_MON, 1
+	setvar VAR_STARTER_MON, 2
 	releaseall
 	end
 
@@ -481,7 +488,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile::
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	setvar VAR_STARTER_MON, 1
+	setvar VAR_STARTER_MON, 2
 	releaseall
 	end
 
@@ -527,7 +534,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita::
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	setvar VAR_STARTER_MON, 1
+	setvar VAR_STARTER_MON, 2
 	releaseall
 	end
 
@@ -973,21 +980,12 @@ LittlerootTown_ProfessorBirchsLab_Text_BrendanTakeBreakFromFieldwork:
 	.string "for a while.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon:
-	.string "PROF. BITCH: Oh, {PLAYER}{KUN}!\n"
-	.string "Let's have a look at your POKéDEX.\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "Yes, there's no doubt about it.\p"
-	.string "You really have completed the HOENN\n"
-	.string "region's POKéDEX.\p"
-	.string "That's more than just impressive.\p"
-	.string "I have a gift for you.\p"
-	.string "Consider it my show of appreciation\n"
-	.string "for the fantastic work you've done.\p"
-	.string "My gift is a rare POKéMON only found\n"
-	.string "in another region!\p"
-	.string "You can have any one of these\n"
-	.string "three POKéMON!$"
+	.string "PROF. BONSAI: Well, here we are.\n"
+	.string "Chowder has prepared 3 POKéMON for you\p"
+	.string "to choose from. I'm sure it will help to\n"
+	.string "expand your party.\p"
+	.string "... ... ... Why do you keep looking at\n"
+	.string "me like that?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon:
 	.string "PROF. BITCH: These are rare POKéMON\n"
@@ -1095,4 +1093,3 @@ LittlerootTown_ProfessorBirchsLab_Text_ShouldTakePokemon:
 	.string "You should really take a POKéMON.\n"
 	.string "The game tends to bug out if\p"
 	.string "you don't have one, you know...$"
-

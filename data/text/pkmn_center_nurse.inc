@@ -15,6 +15,9 @@ gText_RestoredPkmnToFullHealth::
 gText_WeHopeToSeeYouAgain::
     .string "¡Espero que tengas un seguro!$"
 
+gText_NoPokemonInParty::
+    .string "No tienes ningun POKéMON!$"
+
 gText_WelcomeCutShort::
     .string "Hello, and welcome to\n"
     .string "the POKéMON CENTER.\p"

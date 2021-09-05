@@ -51,7 +51,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter",
-      "flag": "0"
+      "flag": "FLAG_UNUSED_0x025"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -90,7 +90,52 @@
       "y": 7,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "0",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_STARTER_MON",
+      "var_value": "1",
       "script": "LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon"
     }
   ],
