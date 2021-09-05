@@ -2329,7 +2329,7 @@ const u8 gSusPokedexText[] = _(
 const u8 gFrenPokedexText[] = _(
     "A friend. He seems to have an innocent smile\n"
     "but some say that ulterior motives lie \n"
-    "Abehind the childlike persona.\n"
+    "behind the childlike persona.\n"
     "Likes Pepsi.");
 
 const u8 gDumpyPokedexText[] = _(

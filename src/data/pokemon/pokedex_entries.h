@@ -4657,8 +4657,8 @@ const struct PokedexEntry gPokedexEntries[] =
     [NATIONAL_DEX_FREN] =
     {
         .categoryName = _("FREN"),
-        .height = 17,
-        .weight = 608,
+        .height = 10,
+        .weight = 408,
         .description = gFrenPokedexText,
         .pokemonScale = 256,
         .pokemonOffset = 0,

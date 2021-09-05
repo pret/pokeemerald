@@ -57,7 +57,7 @@
       "y": 12,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -66,7 +66,7 @@
       "y": 11,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -75,7 +75,7 @@
       "y": 13,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -84,7 +84,7 @@
       "y": 10,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -93,7 +93,7 @@
       "y": 9,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -102,7 +102,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -111,7 +111,7 @@
       "y": 7,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "1",
+      "var_value": "2",
       "script": "Route116_EventScript_FrenIsland"
     }
   ],

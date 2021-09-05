@@ -9,7 +9,7 @@ OldaleTown_MapScripts::
 OldaleTown_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
-	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
+	//call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
 	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_MoveMartEmployee
 	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
 	end
@@ -19,10 +19,10 @@ OldaleTown_EventScript_SetOldaleState::
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	return
 
-OldaleTown_EventScript_BlockWestEntrance::
-	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 1, 11
-	setobjectmovementtype LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT
-	return
+//OldaleTown_EventScript_BlockWestEntrance::
+//	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 1, 11
+//	setobjectmovementtype LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT
+//	return
 
 OldaleTown_EventScript_MoveMartEmployee::
 	setobjectxyperm LOCALID_MART_EMPLOYEE, 13, 14

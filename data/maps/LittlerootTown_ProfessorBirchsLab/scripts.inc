@@ -439,6 +439,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil::
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_SYS_POKEDEX_GET
+	special SetUnlockedPokedexFlags
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
@@ -485,6 +490,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile::
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_SYS_POKEDEX_GET
+	special SetUnlockedPokedexFlags
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
@@ -531,6 +541,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita::
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_SYS_POKEDEX_GET
+	special SetUnlockedPokedexFlags
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
 	hidemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6

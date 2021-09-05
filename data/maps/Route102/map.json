@@ -20,12 +20,7 @@
     },
     {
       "direction": "right",
-      "offset": 0,
-      "map": "MAP_OLDALE_TOWN"
-    },
-    {
-      "direction": "right",
-      "offset": -40,
+      "offset": -24,
       "map": "MAP_RUSTBORO_CITY"
     }
   ],
