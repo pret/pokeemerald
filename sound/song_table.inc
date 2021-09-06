@@ -905,9 +905,6 @@ gSongTable::
 	song bw_seq_bgm_vs_norapoke, 0, 0
 	song bw_seq_bgm_win1, 0, 0
 	song bw_seq_me_lvup, 2, 2
-	song bw_seq_bgm_t_02_var1, 0, 0
-	song bw_seq_bgm_t_02_var2, 0, 0
-	song bw_seq_bgm_t_02_var3, 0, 0
 	song bw_seq_bgm_t_02, 0, 0
 	song bw_seq_bgm_e_tsureteke2, 0, 0
 	song bw_seq_bgm_pokecen, 0, 0
@@ -937,7 +934,6 @@ gSongTable::
 	song bw_seq_bgm_eye_03, 0, 0
 	song bw_seq_bgm_e_rival, 0, 0
 	song bw_seq_bgm_e_trouble, 0, 0
-	song bw_seq_bgm_c_02_var, 0, 0
 	song bw_seq_bgm_c_02, 0, 0
 	song bw_seq_me_hyouka3, 2, 2
 	song bw_seq_bgm_gym, 0, 0
@@ -980,7 +976,6 @@ gSongTable::
 	song bw_seq_me_hyouka4, 2, 2
 	song bw_seq_me_wasure, 2, 2
 	song bw_seq_bgm_eye_08, 0, 0
-	song bw_seq_bgm_c_07_var, 0, 0
 	song bw_seq_bgm_c_07, 0, 0
 	song bw_seq_bgm_d_05, 0, 0
 	song bw_seq_bgm_eye_plasma, 0, 0
@@ -990,18 +985,9 @@ gSongTable::
 	song bw_seq_bgm_h_03, 0, 0
 	song bw_seq_bgm_fs, 0, 0
 	song bw_seq_bgm_eye_05, 0, 0
-	song bw_seq_bgm_c_08_b_var, 0, 0
 	song bw_seq_bgm_c_08_b, 0, 0
-	song bw_seq_bgm_c_08_w_var, 0, 0
 	song bw_seq_bgm_c_08_w, 0, 0
 	song bw_seq_bgm_r_f, 0, 0
-	song bw_seq_bgm_d_champroad_var1, 0, 0
-	song bw_seq_bgm_d_champroad_var2, 0, 0
-	song bw_seq_bgm_d_champroad_var3, 0, 0
-	song bw_seq_bgm_d_champroad_var4, 0, 0
-	song bw_seq_bgm_d_champroad_var5, 0, 0
-	song bw_seq_bgm_d_champroad_var6, 0, 0
-	song bw_seq_bgm_d_champroad_var7, 0, 0
 	song bw_seq_bgm_d_champroad, 0, 0
 	song bw_seq_bgm_eye_04, 0, 0
 	song bw_seq_bgm_pokemon_league, 0, 0
@@ -1027,12 +1013,6 @@ gSongTable::
 	song bw_seq_bgm_guruguru, 0, 0
 	song bw_seq_me_hyouka5, 2, 2
 	song bw_seq_bgm_gear_station, 0, 0
-	song bw_seq_bgm_battle_subway_var1, 0, 0
-	song bw_seq_bgm_battle_subway_var2, 0, 0
-	song bw_seq_bgm_battle_subway_var3, 0, 0
-	song bw_seq_bgm_battle_subway_var4, 0, 0
-	song bw_seq_bgm_battle_subway_var5, 0, 0
-	song bw_seq_bgm_battle_subway_var6, 0, 0
 	song bw_seq_bgm_battle_subway, 0, 0
 	song bw_seq_bgm_vs_subway_trainer, 0, 0
 	song bw_seq_me_bpget, 2, 2
@@ -1055,7 +1035,6 @@ gSongTable::
 	song bw_seq_me_aishou_m, 2, 2
 	song bw_seq_me_aishou_l, 2, 2
 	song bw_seq_bgm_vs_movepoke, 0, 0
-	song bw_seq_bgm_t_03_var, 0, 0
 	song bw_seq_bgm_t_03, 0, 0
 	song bw_seq_bgm_h_05, 0, 0
 	song bw_seq_bgm_r_e_sp, 0, 0
@@ -1085,6 +1064,7 @@ gSongTable::
 	song bw_seq_bgm_naminori, 0, 0
 	song bw_seq_bgm_diving, 0, 0
 	song bw_seq_bgm_t_04, 0, 0
+	song bw_seq_bgm_h_04, 0, 0
 
 	.align 2
 dummy_song_header:

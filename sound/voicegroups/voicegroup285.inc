@@ -7,27 +7,27 @@ voicegroup285::
 	voice_directsound 59, 20, DirectSoundWaveData_dp_china_cynbal, 255, 250, 0, 226
 	voice_directsound 60, 36, DirectSoundWaveData_dp_cymbal1_16, 255, 250, 0, 216
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 34, DirectSoundWaveData_bw_163shaker, 255, 234, 127, 205				@ 127/110/ 90/116/ 34
+	voice_directsound 61, 64, DirectSoundWaveData_bw_villagebridge_box9, 255, 0, 255, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box1, 255, 0, 255, 1
+	voice_directsound 61, 64, DirectSoundWaveData_bw_villagebridge_box1, 255, 0, 255, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box2, 255, 0, 255, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box3, 255, 0, 227, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box4, 255, 0, 227, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box5, 255, 0, 255, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box6, 255, 0, 255, 1
+	voice_directsound 61, 64, DirectSoundWaveData_bw_villagebridge_box6, 255, 0, 255, 1
+	voice_directsound 62, 64, DirectSoundWaveData_bw_villagebridge_box6, 255, 0, 255, 1
+	voice_directsound 63, 64, DirectSoundWaveData_bw_villagebridge_box6, 255, 0, 255, 1
+	voice_directsound 64, 64, DirectSoundWaveData_bw_villagebridge_box6, 255, 0, 255, 1
+	voice_directsound 65, 64, DirectSoundWaveData_bw_villagebridge_box6, 255, 0, 255, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box7, 255, 0, 255, 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_villagebridge_box8, 255, 0, 255, 1
+	voice_directsound 61, 64, DirectSoundWaveData_bw_villagebridge_box8, 255, 0, 255, 1
+	voice_directsound 62, 64, DirectSoundWaveData_bw_villagebridge_box8, 255, 0, 255, 1
+	voice_directsound 63, 64, DirectSoundWaveData_bw_villagebridge_box8, 255, 0, 255, 1
+	voice_directsound 64, 64, DirectSoundWaveData_bw_villagebridge_box8, 255, 0, 255, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 64, DirectSoundWaveData_dp_handclup1, 255, 0, 227, 171
 	voice_directsound 60, 64, DirectSoundWaveData_dp_sne2_loop, 255, 255, 191, 171

@@ -1599,9 +1599,6 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_vs_norapoke.o(.rodata);
         sound/songs/midi/bw_seq_bgm_win1.o(.rodata);
         sound/songs/midi/bw_seq_me_lvup.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_t_02_var1.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_t_02_var2.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_t_02_var3.o(.rodata);
         sound/songs/midi/bw_seq_bgm_t_02.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_tsureteke2.o(.rodata);
         sound/songs/midi/bw_seq_bgm_pokecen.o(.rodata);
@@ -1631,7 +1628,6 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_eye_03.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_rival.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_trouble.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_c_02_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_02.o(.rodata);
         sound/songs/midi/bw_seq_me_hyouka3.o(.rodata);
         sound/songs/midi/bw_seq_bgm_gym.o(.rodata);
@@ -1674,7 +1670,6 @@ SECTIONS {
         sound/songs/midi/bw_seq_me_hyouka4.o(.rodata);
         sound/songs/midi/bw_seq_me_wasure.o(.rodata);
         sound/songs/midi/bw_seq_bgm_eye_08.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_c_07_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_07.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_05.o(.rodata);
         sound/songs/midi/bw_seq_bgm_eye_plasma.o(.rodata);
@@ -1684,18 +1679,9 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_h_03.o(.rodata);
         sound/songs/midi/bw_seq_bgm_fs.o(.rodata);
         sound/songs/midi/bw_seq_bgm_eye_05.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_c_08_b_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_08_b.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_c_08_w_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_c_08_w.o(.rodata);
         sound/songs/midi/bw_seq_bgm_r_f.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var1.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var2.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var3.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var4.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var5.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var6.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_d_champroad_var7.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_champroad.o(.rodata);
         sound/songs/midi/bw_seq_bgm_eye_04.o(.rodata);
         sound/songs/midi/bw_seq_bgm_pokemon_league.o(.rodata);
@@ -1721,12 +1707,6 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_guruguru.o(.rodata);
         sound/songs/midi/bw_seq_me_hyouka5.o(.rodata);
         sound/songs/midi/bw_seq_bgm_gear_station.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_battle_subway_var1.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_battle_subway_var2.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_battle_subway_var3.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_battle_subway_var4.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_battle_subway_var5.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_battle_subway_var6.o(.rodata);
         sound/songs/midi/bw_seq_bgm_battle_subway.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_subway_trainer.o(.rodata);
         sound/songs/midi/bw_seq_me_bpget.o(.rodata);
@@ -1749,7 +1729,6 @@ SECTIONS {
         sound/songs/midi/bw_seq_me_aishou_m.o(.rodata);
         sound/songs/midi/bw_seq_me_aishou_l.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_movepoke.o(.rodata);
-        sound/songs/midi/bw_seq_bgm_t_03_var.o(.rodata);
         sound/songs/midi/bw_seq_bgm_t_03.o(.rodata);
         sound/songs/midi/bw_seq_bgm_h_05.o(.rodata);
         sound/songs/midi/bw_seq_bgm_r_e_sp.o(.rodata);
@@ -1779,6 +1758,7 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_naminori.o(.rodata);
         sound/songs/midi/bw_seq_bgm_diving.o(.rodata);
         sound/songs/midi/bw_seq_bgm_t_04.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_h_04.o(.rodata);
     } =0
 
     lib_rodata :

@@ -4485,3 +4485,139 @@ DirectSoundWaveData_bw_sitarf4::
 	.align 2
 DirectSoundWaveData_bw_sitard5::
 	.incbin "sound/direct_sound_samples/bw_sitard5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box1::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box2::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box3::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box4::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box5::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box6::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box6.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box7::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box7.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box8::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box8.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_box9::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_box9.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox01::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox01.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox02::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox02.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox03::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox03.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox04::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox04.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox05::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox05.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox06::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox06.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox07::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox07.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox08::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox08.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox09::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox09.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox10::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox10.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox11::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox11.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox12::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox12.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox13::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox13.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox14::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox14.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox15::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox15.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox16::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox16.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox17::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox17.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox18::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox18.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox19::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox19.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox20::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox20.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox21::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox21.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox22::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox22.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox23::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox23.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox24::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox24.bin"
+
+	.align 2
+DirectSoundWaveData_bw_villagebridge_vox25::
+	.incbin "sound/direct_sound_samples/bw_villagebridge_vox25.bin"

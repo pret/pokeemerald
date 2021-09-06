@@ -2382,15 +2382,6 @@ $(MID_SUBDIR)/bw_seq_bgm_win1.s: %.s: %.mid
 $(MID_SUBDIR)/bw_seq_me_lvup.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V090 -p5
 
-$(MID_SUBDIR)/bw_seq_bgm_t_02_var1.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G274 -V060
-
-$(MID_SUBDIR)/bw_seq_bgm_t_02_var2.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G274 -V060
-
-$(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G274 -V060
-
 $(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V060
 
@@ -2477,9 +2468,6 @@ $(MID_SUBDIR)/bw_seq_bgm_e_rival.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_e_trouble.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V092
-
-$(MID_SUBDIR)/bw_seq_bgm_c_02_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V070
 
 $(MID_SUBDIR)/bw_seq_bgm_c_02.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V070
@@ -2607,9 +2595,6 @@ $(MID_SUBDIR)/bw_seq_me_wasure.s: %.s: %.mid
 $(MID_SUBDIR)/bw_seq_bgm_eye_08.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V086
 
-$(MID_SUBDIR)/bw_seq_bgm_c_07_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G274 -V064
-
 $(MID_SUBDIR)/bw_seq_bgm_c_07.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V064
 
@@ -2637,41 +2622,14 @@ $(MID_SUBDIR)/bw_seq_bgm_fs.s: %.s: %.mid
 $(MID_SUBDIR)/bw_seq_bgm_eye_05.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V056
 
-$(MID_SUBDIR)/bw_seq_bgm_c_08_b_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V058
-
 $(MID_SUBDIR)/bw_seq_bgm_c_08_b.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V058
-
-$(MID_SUBDIR)/bw_seq_bgm_c_08_w_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V080 -X
 
 $(MID_SUBDIR)/bw_seq_bgm_c_08_w.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V080 -X
 
 $(MID_SUBDIR)/bw_seq_bgm_r_f.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V094
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var1.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var2.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var3.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var4.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var5.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var6.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
-
-$(MID_SUBDIR)/bw_seq_bgm_d_champroad_var7.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V098
 
 $(MID_SUBDIR)/bw_seq_bgm_d_champroad.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V098
@@ -2748,24 +2706,6 @@ $(MID_SUBDIR)/bw_seq_me_hyouka5.s: %.s: %.mid
 $(MID_SUBDIR)/bw_seq_bgm_gear_station.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V057
 
-$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var1.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V071
-
-$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var2.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V071
-
-$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var3.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V071
-
-$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var4.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V071
-
-$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var5.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V071
-
-$(MID_SUBDIR)/bw_seq_bgm_battle_subway_var6.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V071
-
 $(MID_SUBDIR)/bw_seq_bgm_battle_subway.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V071
 
@@ -2831,9 +2771,6 @@ $(MID_SUBDIR)/bw_seq_me_aishou_l.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_movepoke.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V106
-
-$(MID_SUBDIR)/bw_seq_bgm_t_03_var.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G276 -V082
 
 $(MID_SUBDIR)/bw_seq_bgm_t_03.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V082
@@ -2921,3 +2858,6 @@ $(MID_SUBDIR)/bw_seq_bgm_diving.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_t_04.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G275 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_h_04.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G280 -V090 -X
