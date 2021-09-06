@@ -4346,6 +4346,7 @@ BattleScript_EffectWillOWisp::
 	goto BattleScript_MoveEnd
 
 BattleScript_WaterVeilPrevents::
+	call BattleScript_AbilityPopUp
 	copybyte gEffectBattler, gBattlerTarget
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABILITY_PREVENTS_MOVE_STATUS
 	call BattleScript_BRNPrevention
