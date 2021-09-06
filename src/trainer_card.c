@@ -661,7 +661,7 @@ u32 CountPlayerTrainerStars(void)
         stars++;
     if (HasAllHoennMons())
         stars++;
-    if (CountPlayerContestPaintings() > 4)
+    if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
         stars++;
     if (HasAllFrontierSymbols())
         stars++;
@@ -735,7 +735,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     case CARD_TYPE_FRLG:
         trainerCard->contestsWithFriends = GetCappedGameStat(GAME_STAT_WON_LINK_CONTEST, 999);
         trainerCard->pokeblocksWithFriends = GetCappedGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
-        if (CountPlayerContestPaintings() > 4)
+        if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
             trainerCard->hasAllPaintings = TRUE;
         trainerCard->stars = GetRubyTrainerStars(trainerCard);
         break;

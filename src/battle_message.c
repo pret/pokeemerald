@@ -383,7 +383,7 @@ static const u8 sText_ThrewPokeblockAtPkmn[] = _("{B_PLAYER_NAME} threw a {POKEB
 static const u8 sText_OutOfSafariBalls[] = _("{PLAY_SE SE_DING_DONG}ANNOUNCER: You're out of\nSAFARI BALLS! Game over!\p");
 static const u8 sText_OpponentMon1Appeared[] = _("{B_OPPONENT_MON1_NAME} appeared!\p");
 static const u8 sText_WildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
-static const u8 sText_WildPkmnAppeared2[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
+static const u8 sText_LegendaryPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
 static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}");
 static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p");
 static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to battle!\p");
@@ -1067,7 +1067,7 @@ const u16 gTransformUsedStringIds[] =
     [B_MSG_TRANSFORM_FAILED] = STRINGID_BUTITFAILED
 };
 
-const u16 gSubsituteUsedStringIds[] =
+const u16 gSubstituteUsedStringIds[] =
 {
     [B_MSG_SET_SUBSTITUTE]    = STRINGID_PKMNMADESUBSTITUTE,
     [B_MSG_SUBSTITUTE_FAILED] = STRINGID_TOOWEAKFORSUBSTITUTE
@@ -1328,7 +1328,7 @@ static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
 
 // For displaying names of invalid moves
-static const u8 sATypeMove_Table[][NUMBER_OF_MON_TYPES - 1] =
+static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][17] =
 {
     [TYPE_NORMAL]   = _("a NORMAL move"),
     [TYPE_FIGHTING] = _("a FIGHTING move"),
@@ -2125,7 +2125,7 @@ void BufferStringBattle(u16 stringID)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
-                stringPtr = sText_WildPkmnAppeared2;
+                stringPtr = sText_LegendaryPkmnAppeared;
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) // interesting, looks like they had something planned for wild double battles
                 stringPtr = sText_TwoWildPkmnAppeared;
             else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)

@@ -555,8 +555,8 @@ static void CutGrassSpriteCallback1(struct Sprite *sprite)
 
 static void CutGrassSpriteCallback2(struct Sprite *sprite)
 {
-    sprite->pos2.x = Sin(sprite->data[2], sprite->data[0]);
-    sprite->pos2.y = Cos(sprite->data[2], sprite->data[0]);
+    sprite->x2 = Sin(sprite->data[2], sprite->data[0]);
+    sprite->y2 = Cos(sprite->data[2], sprite->data[0]);
 
     sprite->data[2] = (sprite->data[2] + 8) & 0xFF;
     sprite->data[0] += 1 + (sprite->data[3] >> 2); // right shift by 2 is dividing by 4

@@ -34,11 +34,11 @@ int GetStringWidthDifference(int fontId, const u8 *str, int totalWidth, int lett
         return 0;
 }
 
-int GetMaxWidthInMenuTable(const struct MenuAction *str, int arg1)
+int GetMaxWidthInMenuTable(const struct MenuAction *str, int numActions)
 {
     int i, var;
 
-    for (var = 0, i = 0; i < arg1; i++)
+    for (var = 0, i = 0; i < numActions; i++)
     {
         int stringWidth = GetStringWidth(1, str[i].text, 0);
         if (stringWidth > var)
@@ -185,7 +185,7 @@ void ConvertInternationalPlayerNameStripChar(u8 *str, u8 removeChar)
     }
 }
 
-void sub_81DB5AC(u8 *str)
+void ConvertInternationalContestantName(u8 *str)
 {
     if (*str++ == EXT_CTRL_CODE_BEGIN && *str++ == EXT_CTRL_CODE_JPN)
     {

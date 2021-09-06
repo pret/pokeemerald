@@ -584,10 +584,10 @@ s32 FadeToWonderNewsMenu(void)
             ChangeBgY(1, 0, 0);
             ChangeBgY(2, 0, 0);
             ChangeBgY(3, 0, 0);
-            SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
-            SetGpuReg(REG_OFFSET_WIN0V, 0x1A98);
-            SetGpuReg(REG_OFFSET_WININ, 0x1F);
-            SetGpuReg(REG_OFFSET_WINOUT, 0x1B);
+            SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
+            SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(26, 152));
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
+            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
             break;
         case 2:

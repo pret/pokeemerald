@@ -1,12 +1,12 @@
-Route123_BerryMastersHouse_MapScripts:: @ 826F83B
+Route123_BerryMastersHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route123_BerryMastersHouse_OnTransition
 	.byte 0
 
-Route123_BerryMastersHouse_OnTransition: @ 826F841
+Route123_BerryMastersHouse_OnTransition:
 	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	end
 
-Route123_BerryMastersHouse_EventScript_BerryMaster:: @ 826F845
+Route123_BerryMastersHouse_EventScript_BerryMaster::
 	lock
 	faceplayer
 	dotimebasedevents
@@ -30,12 +30,12 @@ Route123_BerryMastersHouse_EventScript_BerryMaster:: @ 826F845
 	release
 	end
 
-Route123_BerryMastersHouse_EventScript_ReceivedBerryToday:: @ 826F8B6
+Route123_BerryMastersHouse_EventScript_ReceivedBerryToday::
 	msgbox Route123_BerryMastersHouse_Text_DoneForToday, MSGBOX_DEFAULT
 	release
 	end
 
-Route123_BerryMastersHouse_EventScript_BerryMastersWife:: @ 826F8C0
+Route123_BerryMastersHouse_EventScript_BerryMastersWife::
 	lock
 	faceplayer
 	dotimebasedevents
@@ -51,13 +51,13 @@ Route123_BerryMastersHouse_EventScript_BerryMastersWife:: @ 826F8C0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_CancelPhrase
 	end
 
-Route123_BerryMastersHouse_EventScript_CancelPhrase:: @ 826F8F7
+Route123_BerryMastersHouse_EventScript_CancelPhrase::
 	msgbox Route123_BerryMastersHouse_Text_Ah, MSGBOX_DEFAULT
 	msgbox Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife, MSGBOX_DEFAULT
 	release
 	end
 
-Route123_BerryMastersHouse_EventScript_GavePhrase:: @ 826F909
+Route123_BerryMastersHouse_EventScript_GavePhrase::
 	compare VAR_0x8004, NOT_SPECIAL_PHRASE
 	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveNormalBerry
 	compare VAR_0x8004, PHRASE_GREAT_BATTLE
@@ -72,7 +72,7 @@ Route123_BerryMastersHouse_EventScript_GavePhrase:: @ 826F909
 	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveBelueBerry
 	end
 
-Route123_BerryMastersHouse_EventScript_GiveNormalBerry:: @ 826F94C
+Route123_BerryMastersHouse_EventScript_GiveNormalBerry::
 	msgbox Route123_BerryMastersHouse_Text_GoodSayingTakeThis, MSGBOX_DEFAULT
 	random NUM_BERRY_MASTER_WIFE_BERRIES
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
@@ -83,7 +83,7 @@ Route123_BerryMastersHouse_EventScript_GiveNormalBerry:: @ 826F94C
 	release
 	end
 
-Route123_BerryMastersHouse_EventScript_GiveSpelonBerry:: @ 826F97A
+Route123_BerryMastersHouse_EventScript_GiveSpelonBerry::
 	goto_if_set FLAG_RECEIVED_SPELON_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_SPELON_BERRY
@@ -93,7 +93,7 @@ Route123_BerryMastersHouse_EventScript_GiveSpelonBerry:: @ 826F97A
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
 
-Route123_BerryMastersHouse_EventScript_GivePamtreBerry:: @ 826F9AB
+Route123_BerryMastersHouse_EventScript_GivePamtreBerry::
 	goto_if_set FLAG_RECEIVED_PAMTRE_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_PAMTRE_BERRY
@@ -103,7 +103,7 @@ Route123_BerryMastersHouse_EventScript_GivePamtreBerry:: @ 826F9AB
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
 
-Route123_BerryMastersHouse_EventScript_GiveWatmelBerry:: @ 826F9DC
+Route123_BerryMastersHouse_EventScript_GiveWatmelBerry::
 	goto_if_set FLAG_RECEIVED_WATMEL_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_WATMEL_BERRY
@@ -113,7 +113,7 @@ Route123_BerryMastersHouse_EventScript_GiveWatmelBerry:: @ 826F9DC
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
 
-Route123_BerryMastersHouse_EventScript_GiveDurinBerry:: @ 826FA0D
+Route123_BerryMastersHouse_EventScript_GiveDurinBerry::
 	goto_if_set FLAG_RECEIVED_DURIN_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_DURIN_BERRY
@@ -123,7 +123,7 @@ Route123_BerryMastersHouse_EventScript_GiveDurinBerry:: @ 826FA0D
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
 
-Route123_BerryMastersHouse_EventScript_GiveBelueBerry:: @ 826FA3E
+Route123_BerryMastersHouse_EventScript_GiveBelueBerry::
 	goto_if_set FLAG_RECEIVED_BELUE_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_BELUE_BERRY
@@ -133,12 +133,12 @@ Route123_BerryMastersHouse_EventScript_GiveBelueBerry:: @ 826FA3E
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
 
-Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday:: @ 826FA6F
+Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday::
 	msgbox Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife, MSGBOX_DEFAULT
 	release
 	end
 
-Route123_BerryMastersHouse_EventScript_GaveBerry:: @ 826FA79
+Route123_BerryMastersHouse_EventScript_GaveBerry::
 	setflag FLAG_DAILY_BERRY_MASTERS_WIFE
 	msgbox Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife, MSGBOX_DEFAULT
 	release

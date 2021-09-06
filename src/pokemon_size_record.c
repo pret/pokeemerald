@@ -97,7 +97,7 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 {
 #ifdef UNITS_IMPERIAL
     //Convert size from centimeters to inches
-    size = (double)(size * 10) / (CM_PER_INCH * 10);
+    size = (f64)(size * 10) / (CM_PER_INCH * 10);
 #endif
 
     string = ConvertIntToDecimalStringN(string, size / 10, STR_CONV_MODE_LEFT_ALIGN, 8);

@@ -365,7 +365,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
 static void TryShinyAnimAfterMonAnim(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
+     && gSprites[gBattlerSpriteIds[gActiveBattler]].x2 == 0)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim)
         {
@@ -1134,7 +1134,7 @@ static void LinkOpponentHandleLoadMonSprite(void)
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
@@ -1302,7 +1302,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                                                (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40,
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
@@ -1324,8 +1324,8 @@ static void LinkOpponentHandleTrainerSlide(void)
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 176, (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40, 0x1E);
 
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 96;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.x += 32;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x += 32;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
@@ -1342,7 +1342,7 @@ static void LinkOpponentHandleTrainerSlideBack(void)
     SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
@@ -1703,7 +1703,7 @@ static void LinkOpponentHandleIntroTrainerBallThrow(void)
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
 
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreeOpponentSprite);

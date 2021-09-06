@@ -188,7 +188,7 @@ static const union AnimCmd *const sSpriteAnimTable_CryMeterNeedle[] =
 
 static const struct OamData sOamData_CryMeterNeedle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = ST_OAM_4BPP,
@@ -560,8 +560,8 @@ static void SpriteCB_CryMeterNeedle(struct Sprite *sprite)
     SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);
     x = gSineTable[((sCryMeterNeedle->rotation + 0x7F) & 0xFF)];
     y = gSineTable[((sCryMeterNeedle->rotation + 0x7F) & 0xFF) + 64];
-    sprite->pos2.x = x * 24 / 256;
-    sprite->pos2.y = y * 24 / 256;
+    sprite->x2 = x * 24 / 256;
+    sprite->y2 = y * 24 / 256;
 }
 
 static void SetCryMeterNeedleTarget(s8 offset)

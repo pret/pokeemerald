@@ -54,7 +54,7 @@ struct EggHatchData
     u8 textColor[3];
 };
 
-extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
+extern const u32 gTradePlatform_Tilemap[];
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NicknameHatchPrompt[];
 
@@ -546,7 +546,7 @@ static void CB2_EggHatch_0(void)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
         LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_08331F60, 0x1000, 0);
+        CopyToBgTilemapBuffer(1, gTradePlatform_Tilemap, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
         gMain.state++;
         break;
@@ -584,6 +584,9 @@ static void Task_EggHatchPlayBGM(u8 taskID)
         PlayBGM(MUS_EVOLUTION);
         DestroyTask(taskID);
         // UB: task is destroyed, yet the value is incremented
+        #ifdef UBFIX
+        return;
+        #endif
     }
     gTasks[taskID].data[0]++;
 }
@@ -713,7 +716,7 @@ static void SpriteCB_Egg_0(struct Sprite* sprite)
     else
     {
         sprite->data[1] = (sprite->data[1] + 20) & 0xFF;
-        sprite->pos2.x = Sin(sprite->data[1], 1);
+        sprite->x2 = Sin(sprite->data[1], 1);
         if (sprite->data[0] == 15)
         {
             PlaySE(SE_BALL);
@@ -736,7 +739,7 @@ static void SpriteCB_Egg_1(struct Sprite* sprite)
         else
         {
             sprite->data[1] = (sprite->data[1] + 20) & 0xFF;
-            sprite->pos2.x = Sin(sprite->data[1], 2);
+            sprite->x2 = Sin(sprite->data[1], 2);
             if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BALL);
@@ -757,13 +760,13 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             sprite->callback = SpriteCB_Egg_3;
             sprite->data[0] = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
-            gSprites[sEggHatchData->pokeSpriteID].pos2.x = 0;
-            gSprites[sEggHatchData->pokeSpriteID].pos2.y = 0;
+            gSprites[sEggHatchData->pokeSpriteID].x2 = 0;
+            gSprites[sEggHatchData->pokeSpriteID].y2 = 0;
         }
         else
         {
             sprite->data[1] = (sprite->data[1] + 20) & 0xFF;
-            sprite->pos2.x = Sin(sprite->data[1], 2);
+            sprite->x2 = Sin(sprite->data[1], 2);
             if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BALL);
@@ -811,12 +814,12 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
     if (sprite->data[0] == 0)
     {
         gSprites[sEggHatchData->pokeSpriteID].invisible = FALSE;
-        StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
+        StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], BATTLER_AFFINE_EMERGE);
     }
     if (sprite->data[0] == 8)
         BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_WHITEALPHA);
     if (sprite->data[0] <= 9)
-        gSprites[sEggHatchData->pokeSpriteID].pos1.y -= 1;
+        gSprites[sEggHatchData->pokeSpriteID].y -= 1;
     if (sprite->data[0] > 40)
         sprite->callback = SpriteCallbackDummy;
     sprite->data[0]++;
@@ -827,12 +830,12 @@ static void SpriteCB_EggShard(struct Sprite* sprite)
     sprite->data[4] += sprite->data[1];
     sprite->data[5] += sprite->data[2];
 
-    sprite->pos2.x = sprite->data[4] / 256;
-    sprite->pos2.y = sprite->data[5] / 256;
+    sprite->x2 = sprite->data[4] / 256;
+    sprite->y2 = sprite->data[5] / 256;
 
     sprite->data[2] += sprite->data[3];
 
-    if (sprite->pos1.y + sprite->pos2.y > sprite->pos1.y + 20 && sprite->data[2] > 0)
+    if (sprite->y + sprite->y2 > sprite->y + 20 && sprite->data[2] > 0)
         DestroySprite(sprite);
 }
 

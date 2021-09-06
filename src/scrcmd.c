@@ -1203,6 +1203,8 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// lockall freezes all object events except the player immediately.
+// The player is frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 {
     if (IsUpdateLinkStateCBActive())
@@ -1211,12 +1213,14 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
     }
     else
     {
-        ScriptFreezeObjectEvents();
+        FreezeObjects_WaitForPlayer();
         SetupNativeScript(ctx, IsFreezePlayerFinished);
         return TRUE;
     }
 }
 
+// lock freezes all object events except the player and the selected object immediately.
+// The player and selected object are frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lock(struct ScriptContext *ctx)
 {
     if (IsUpdateLinkStateCBActive())
@@ -1227,12 +1231,12 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
     {
         if (gObjectEvents[gSelectedObjectEvent].active)
         {
-            LockSelectedObjectEvent();
+            FreezeObjects_WaitForPlayerAndSelected();
             SetupNativeScript(ctx, IsFreezeSelectedObjectAndPlayerFinished);
         }
         else
         {
-            ScriptFreezeObjectEvents();
+            FreezeObjects_WaitForPlayer();
             SetupNativeScript(ctx, IsFreezePlayerFinished);
         }
         return TRUE;
@@ -1466,15 +1470,15 @@ bool8 ScrCmd_hidemonpic(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
+bool8 ScrCmd_showcontestpainting(struct ScriptContext *ctx)
 {
     u8 contestWinnerId = ScriptReadByte(ctx);
 
-    // Don't save artist's painting yet
+    // Artist's painting is temporary and already has its data loaded
     if (contestWinnerId != CONTEST_WINNER_ARTIST)
         SetContestWinnerForPainting(contestWinnerId);
 
-    ShowContestWinnerPainting();
+    ShowContestPainting();
     ScriptContext1_Stop();
     return TRUE;
 }

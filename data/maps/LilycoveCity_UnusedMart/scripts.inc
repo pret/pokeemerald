@@ -1,3 +1,3 @@
-LilycoveCity_UnusedMart_MapScripts:: @ 821C784
+LilycoveCity_UnusedMart_MapScripts::
 	.byte 0
 
