@@ -1537,6 +1537,10 @@ BW_SEQ_BGM_T_05_SU            = 34 04
 BW_SEQ_BGM_E_SHIRONA          = 35 04
 BW_SEQ_BGM_VS_SHIRONA         = 36 04
 BW_SEQ_BGM_D_06               = 37 04
+BW_SEQ_BGM_VS_TSUYOPOKE       = 38 04
+BW_SEQ_BGM_NAMINORI           = 39 04
+BW_SEQ_BGM_DIVING             = 3A 04
+BW_SEQ_BGM_T_04               = 3B 04
 
 A_BUTTON = F8 00
 B_BUTTON = F8 01

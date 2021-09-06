@@ -3575,6 +3575,10 @@ DirectSoundWaveData_bw_solotrumpetc5::
 	.incbin "sound/direct_sound_samples/bw_solotrumpetc5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_solotrumpetc6::
+	.incbin "sound/direct_sound_samples/bw_solotrumpetc6.bin"
+
+	.align 2
 DirectSoundWaveData_bw_snareroll::
 	.incbin "sound/direct_sound_samples/bw_snareroll.bin"
 
@@ -4449,3 +4453,35 @@ DirectSoundWaveData_bw_seashorec4::
 	.align 2
 DirectSoundWaveData_bw_steeldrumg4_undella::
 	.incbin "sound/direct_sound_samples/bw_steeldrumg4_undella.bin"
+
+	.align 2
+DirectSoundWaveData_bw_abyssalruinsc2::
+	.incbin "sound/direct_sound_samples/bw_abyssalruinsc2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_abyssalruinsc3::
+	.incbin "sound/direct_sound_samples/bw_abyssalruinsc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_abyssalruinsc4::
+	.incbin "sound/direct_sound_samples/bw_abyssalruinsc4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_abyssalruinsc6::
+	.incbin "sound/direct_sound_samples/bw_abyssalruinsc6.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitarc3::
+	.incbin "sound/direct_sound_samples/bw_sitarc3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitara3::
+	.incbin "sound/direct_sound_samples/bw_sitara3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitarf4::
+	.incbin "sound/direct_sound_samples/bw_sitarf4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitard5::
+	.incbin "sound/direct_sound_samples/bw_sitard5.bin"

@@ -110,8 +110,8 @@ voicegroup276:: @ BW Ichinose
 	voice_keysplit voicegroup237, KeySplitTable83    @ rhodes 2 (HGSS)
 	voice_keysplit voicegroup250, KeySplitTable32    @ distortion guitar 2 (HGSS)
 	voice_keysplit voicegroup316, KeySplitTable41    @ clean guitar
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup302, KeySplitTable80    @ harp 1
+	voice_directsound 60, 0, DirectSoundWaveData_bw_solotrumpetc6, 255, 0, 255, 171
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemale1_ghetsis, 255, 0, 227, 205

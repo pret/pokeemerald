@@ -2909,3 +2909,15 @@ $(MID_SUBDIR)/bw_seq_bgm_vs_shirona.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_d_06.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G277 -V062
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_tsuyopoke.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V096
+
+$(MID_SUBDIR)/bw_seq_bgm_naminori.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V068
+
+$(MID_SUBDIR)/bw_seq_bgm_diving.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V084
+
+$(MID_SUBDIR)/bw_seq_bgm_t_04.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V090

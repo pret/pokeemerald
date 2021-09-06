@@ -64,3 +64,7 @@ voicegroup282:: @ drums 2 (sato)
 	voice_directsound 58, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 205					@ 127/127/127/116/ 26	- 2
 	voice_directsound 69, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 227, 171				@ 127/127/120/120/ 64	+ 9
 	voice_directsound 62, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 227, 171				@ 127/127/120/120/ 64	+ 2
+	voice_directsound 60, 20, DirectSoundWaveData_bw_118conga, 255, 0, 255, 205    				@ 127/127/127/116/ 20
+	voice_directsound 60, 24, DirectSoundWaveData_dp_060conga, 255, 0, 255, 205					@ 127/127/127/116/ 24
+	voice_directsound 65, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171				@ 127/127/127/120/105	+ 5
+	voice_directsound 66, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171				@ 127/127/127/120/105	+ 6

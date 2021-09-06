@@ -1081,6 +1081,10 @@ gSongTable::
 	song bw_seq_bgm_e_shirona, 0, 0
 	song bw_seq_bgm_vs_shirona, 0, 0
 	song bw_seq_bgm_d_06, 0, 0
+	song bw_seq_bgm_vs_tsuyopoke, 0, 0
+	song bw_seq_bgm_naminori, 0, 0
+	song bw_seq_bgm_diving, 0, 0
+	song bw_seq_bgm_t_04, 0, 0
 
 	.align 2
 dummy_song_header:

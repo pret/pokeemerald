@@ -1775,6 +1775,10 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_e_shirona.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_shirona.o(.rodata);
         sound/songs/midi/bw_seq_bgm_d_06.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_tsuyopoke.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_naminori.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_diving.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_t_04.o(.rodata);
     } =0
 
     lib_rodata :
