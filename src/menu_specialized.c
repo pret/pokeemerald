@@ -28,10 +28,10 @@
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
-EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
+EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
+EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
-static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void sub_81D24A4(struct ConditionGraph *a0);
 static void sub_81D2634(struct ConditionGraph *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
@@ -40,33 +40,33 @@ static void SetNextConditionSparkle(struct Sprite *sprite);
 static void SpriteCB_ConditionSparkle(struct Sprite *sprite);
 static void ShowAllConditionSparkles(struct Sprite *sprite);
 
-static const struct WindowTemplate sUnknown_086253E8[] =
+static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT] =
 {
-    {
+    [MAILBOXWIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x8
     },
-    {
+    [MAILBOXWIN_LIST] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 1,
         .width = 8,
         .height = 18,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x18
     },
-    {
+    [MAILBOXWIN_OPTIONS] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 11,
         .height = 8,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x18
     }
 };
@@ -207,53 +207,55 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
     .cursorKind = 0
 };
 
-bool8 sub_81D1C44(u8 count)
+bool8 MailboxMenu_Alloc(u8 count)
 {
     u8 i;
 
-    sUnknown_0203CF4C = Alloc(count * sizeof(*sUnknown_0203CF4C) + sizeof(*sUnknown_0203CF4C));
-    if (sUnknown_0203CF4C == NULL)
+    // + 1 to count for 'Cancel'
+    sMailboxList = Alloc((count + 1) * sizeof(*sMailboxList));
+    if (sMailboxList == NULL)
         return FALSE;
 
-    for (i = 0; i < ARRAY_COUNT(sUnknown_0203CF48); i++)
-        sUnknown_0203CF48[i] = WINDOW_NONE;
+    for (i = 0; i < ARRAY_COUNT(sMailboxWindowIds); i++)
+        sMailboxWindowIds[i] = WINDOW_NONE;
 
     return TRUE;
 }
 
-u8 sub_81D1C84(u8 a0)
+u8 MailboxMenu_AddWindow(u8 windowIdx)
 {
-    if (sUnknown_0203CF48[a0] == WINDOW_NONE)
+    if (sMailboxWindowIds[windowIdx] == WINDOW_NONE)
     {
-        if (a0 == 2)
+        if (windowIdx == MAILBOXWIN_OPTIONS)
         {
-            struct WindowTemplate template = sUnknown_086253E8[2];
+            struct WindowTemplate template = sWindowTemplates_MailboxMenu[windowIdx];
             template.width = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
-            sUnknown_0203CF48[2] = AddWindow(&template);
+            sMailboxWindowIds[windowIdx] = AddWindow(&template);
         }
-        else
+        else // MAILBOXWIN_TITLE or MAILBOXWIN_LIST
         {
-            sUnknown_0203CF48[a0] = AddWindow(&sUnknown_086253E8[a0]);
+            sMailboxWindowIds[windowIdx] = AddWindow(&sWindowTemplates_MailboxMenu[windowIdx]);
         }
-        SetStandardWindowBorderStyle(sUnknown_0203CF48[a0], 0);
+        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], 0);
     }
-    return sUnknown_0203CF48[a0];
+    return sMailboxWindowIds[windowIdx];
 }
 
-void sub_81D1D04(u8 a0)
+void MailboxMenu_RemoveWindow(u8 windowIdx)
 {
-    ClearStdWindowAndFrameToTransparent(sUnknown_0203CF48[a0], 0);
-    ClearWindowTilemap(sUnknown_0203CF48[a0]);
-    RemoveWindow(sUnknown_0203CF48[a0]);
-    sUnknown_0203CF48[a0] = WINDOW_NONE;
+    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], 0);
+    ClearWindowTilemap(sMailboxWindowIds[windowIdx]);
+    RemoveWindow(sMailboxWindowIds[windowIdx]);
+    sMailboxWindowIds[windowIdx] = WINDOW_NONE;
 }
 
-static u8 sub_81D1D34(u8 a0)
+// Unused
+static u8 MailboxMenu_GetWindowId(u8 windowIdx)
 {
-    return sUnknown_0203CF48[a0];
+    return sMailboxWindowIds[windowIdx];
 }
 
-static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
+static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     u8 buffer[30];
     u16 length;
@@ -269,21 +271,21 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     AddTextPrinterParameterized4(windowId, 1, 8, y, 0, 0, sPlayerNameTextColors, -1, buffer);
 }
 
-u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
+u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
 {
     u16 i;
     for (i = 0; i < page->count; i++)
     {
-        sUnknown_0203CF4C[i].name = sEmptyItemName;
-        sUnknown_0203CF4C[i].id = i;
+        sMailboxList[i].name = sEmptyItemName;
+        sMailboxList[i].id = i;
     }
 
-    sUnknown_0203CF4C[i].name = gText_Cancel2;
-    sUnknown_0203CF4C[i].id = LIST_CANCEL;
+    sMailboxList[i].name = gText_Cancel2;
+    sMailboxList[i].id = LIST_CANCEL;
 
-    gMultiuseListMenuTemplate.items = sUnknown_0203CF4C;
+    gMultiuseListMenuTemplate.items = sMailboxList;
     gMultiuseListMenuTemplate.totalItems = page->count + 1;
-    gMultiuseListMenuTemplate.windowId = sUnknown_0203CF48[1];
+    gMultiuseListMenuTemplate.windowId = sMailboxWindowIds[MAILBOXWIN_LIST];
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = 8;
     gMultiuseListMenuTemplate.cursor_X = 0;
@@ -292,8 +294,8 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
     gMultiuseListMenuTemplate.cursorPal = 2;
     gMultiuseListMenuTemplate.fillValue = 1;
     gMultiuseListMenuTemplate.cursorShadowPal = 3;
-    gMultiuseListMenuTemplate.moveCursorFunc = sub_81D1E7C;
-    gMultiuseListMenuTemplate.itemPrintFunc = sub_81D1D44;
+    gMultiuseListMenuTemplate.moveCursorFunc = MailboxMenu_MoveCursorFunc;
+    gMultiuseListMenuTemplate.itemPrintFunc = MailboxMenu_ItemPrintFunc;
     gMultiuseListMenuTemplate.fontId = 1;
     gMultiuseListMenuTemplate.cursorKind = 0;
     gMultiuseListMenuTemplate.lettersSpacing = 0;
@@ -302,20 +304,20 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
     return ListMenuInit(&gMultiuseListMenuTemplate, page->itemsAbove, page->cursorPos);
 }
 
-static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
 }
 
-void sub_81D1E90(struct PlayerPCItemPageStruct *page)
+void MailboxMenu_AddScrollArrows(struct PlayerPCItemPageStruct *page)
 {
     page->scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
 }
 
-void sub_81D1EC0(void)
+void MailboxMenu_Free(void)
 {
-    Free(sUnknown_0203CF4C);
+    Free(sMailboxList);
 }
 
 void InitConditionGraphData(struct ConditionGraph *graph)
@@ -1310,13 +1312,13 @@ static void SetConditionSparklePosition(struct Sprite *sprite)
 
     if (mon != NULL)
     {
-        sprite->pos1.x = mon->pos1.x + mon->pos2.x + sConditionSparkleCoords[sprite->sSparkleId][0];
-        sprite->pos1.y = mon->pos1.y + mon->pos2.y + sConditionSparkleCoords[sprite->sSparkleId][1];
+        sprite->x = mon->x + mon->x2 + sConditionSparkleCoords[sprite->sSparkleId][0];
+        sprite->y = mon->y + mon->y2 + sConditionSparkleCoords[sprite->sSparkleId][1];
     }
     else
     {
-        sprite->pos1.x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
-        sprite->pos1.y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
+        sprite->x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
+        sprite->y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
     }
 }
 
