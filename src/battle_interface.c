@@ -153,8 +153,8 @@ enum
     HEALTHBOX_GFX_STATUS_BRN_BATTLER3, //status4 "BRN"
     HEALTHBOX_GFX_114,
     HEALTHBOX_GFX_115,
-    HEALTHBOX_GFX_116, //unknown_D12FEC
-    HEALTHBOX_GFX_117, //unknown_D1300C
+    HEALTHBOX_GFX_116, //gBattleInterfaceGfx_frameend
+    HEALTHBOX_GFX_117, //gBattleInterfaceGfx_frameend_bar
 };
 
 // strings
