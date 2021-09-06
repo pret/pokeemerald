@@ -3961,18 +3961,6 @@ static void Cmd_getexp(void)
     case 6: // increment instruction
         if (gBattleControllerExecFlags == 0)
         {
-        #if B_RECALCULATE_STATS >= GEN_5
-            // Recalculate the stats of every party member before the end
-            for (i = 0; i < PARTY_SIZE; i++)
-            {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-                 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
-                {
-                    CalculateMonStats(&gPlayerParty[i]);
-                }
-            }
-        #endif
-
             // not sure why gf clears the item and ability here
             gBattleMons[gBattlerFainted].item = 0;
             gBattleMons[gBattlerFainted].ability = 0;
