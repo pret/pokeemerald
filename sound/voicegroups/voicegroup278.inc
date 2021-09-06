@@ -22,7 +22,7 @@ voicegroup278:: @ BW DLC Musicals
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
 	voice_keysplit voicegroup267, KeySplitTable53    @ flute
 	voice_keysplit voicegroup269, KeySplitTable105   @ orchestra hit
-	voice_keysplit_all voicegroup283				 @ drums
+	voice_keysplit_all voicegroup285				 @ drums
 	voice_square_2_alt 60, 0, 2, 0, 7, 2, 2
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_sq37half, 0, 7, 11, 3
 	voice_square_2_alt 60, 0, 0, 0, 7, 11, 3
@@ -37,7 +37,7 @@ voicegroup278:: @ BW DLC Musicals
 	voice_keysplit voicegroup254, KeySplitTable73    @ synth bass
 	voice_keysplit voicegroup255, KeySplitTable60    @ strings
 	voice_keysplit voicegroup292, KeySplitTable72    @ nylon str. guitar
-	voice_keysplit_all voicegroup284				 @ drums
+	voice_keysplit_all voicegroup286				 @ drums
 	voice_keysplit voicegroup253, KeySplitTable43    @ fingered bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

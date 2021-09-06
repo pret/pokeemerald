@@ -1100,6 +1100,12 @@
 #define BW_SEQ_BGM_PALACE2            1071 // Someone's Entralink
 #define BW_SEQ_ME_MISSION_CLEAR       1072 // Mission Accomplished!
 #define BW_SEQ_ME_MISSION_FAILED      1073 // Mission Failed!
+#define BW_SEQ_BGM_EYE_13             1074 // Trainers' Eyes Meet (Gentleman)
+#define BW_SEQ_BGM_T_05_SP            1075 // Undella Town (Autumn/Winter/Spring)
+#define BW_SEQ_BGM_T_05_SU            1076 // Undella Town (Summer)
+#define BW_SEQ_BGM_E_SHIRONA          1077 // Cynthia's Theme
+#define BW_SEQ_BGM_VS_SHIRONA         1078 // Battle! (Cynthia)
+#define BW_SEQ_BGM_D_06               1079 // Lostlorn Forest
 
 // Black 2 & White 2 Music
 

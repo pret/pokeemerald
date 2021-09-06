@@ -3455,6 +3455,26 @@ DirectSoundWaveData_hg_157xylo1f5::
 	.incbin "sound/direct_sound_samples/hg_157xylo1f5.bin" @ used in bw
 
 	.align 2
+DirectSoundWaveData_bw_gflogo1::
+	.incbin "sound/direct_sound_samples/bw_gflogo1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gflogo2::
+	.incbin "sound/direct_sound_samples/bw_gflogo2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gflogo3::
+	.incbin "sound/direct_sound_samples/bw_gflogo3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gflogo4::
+	.incbin "sound/direct_sound_samples/bw_gflogo4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gflogo5::
+	.incbin "sound/direct_sound_samples/bw_gflogo5.bin"
+
+	.align 2
 DirectSoundWaveData_bw_075pnoc2::
 	.incbin "sound/direct_sound_samples/bw_075pnoc2.bin"
 
@@ -4421,3 +4441,11 @@ DirectSoundWaveData_bw_tom3_entralink::
 	.align 2
 DirectSoundWaveData_bw_tom4_entralink::
 	.incbin "sound/direct_sound_samples/bw_tom4_entralink.bin"
+
+	.align 2
+DirectSoundWaveData_bw_seashorec4::
+	.incbin "sound/direct_sound_samples/bw_seashorec4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_steeldrumg4_undella::
+	.incbin "sound/direct_sound_samples/bw_steeldrumg4_undella.bin"

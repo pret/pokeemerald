@@ -42,20 +42,20 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
 	voice_keysplit voicegroup262, KeySplitTable47    @ trombones
 	voice_keysplit voicegroup248, KeySplitTable72    @ martin guitar
-	voice_keysplit voicegroup285, KeySplitTable64    @ french horns (old splits)
-	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
-	voice_keysplit voicegroup287, KeySplitTable68    @ oboe
+	voice_keysplit voicegroup327, KeySplitTable64    @ french horns (old splits)
+	voice_keysplit voicegroup327, KeySplitTable41    @ french horns
+	voice_keysplit voicegroup288, KeySplitTable105   @ oboe
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
 	voice_keysplit voicegroup305, KeySplitTable44    @ tuba
 	voice_keysplit voicegroup287, KeySplitTable67    @ flute 2
-	voice_keysplit voicegroup286, KeySplitTable65    @ flute 1
+	voice_keysplit voicegroup328, KeySplitTable65    @ flute 1
 	voice_square_2_alt 60, 0, 2, 0, 6, 2, 0
 	voice_keysplit voicegroup314, KeySplitTable89    @ alto sax
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombonesstaccatocs2, 255, 197, 227, 205
 	voice_keysplit voicegroup323, KeySplitTable96    @ piano | 44 || 56 || 68 || 80
-	voice_keysplit voicegroup285, KeySplitTable98    @ french horns | 52 | 53
+	voice_keysplit voicegroup327, KeySplitTable98    @ french horns | 52 | 53
 	voice_keysplit voicegroup265, KeySplitTable51    @ oboe (HGSS)
-	voice_keysplit voicegroup285, KeySplitTable68    @ french horns ||| 69
+	voice_keysplit voicegroup327, KeySplitTable68    @ french horns ||| 69
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -76,7 +76,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup319, KeySplitTable97    @ pipe organ
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_steeldrumg4_undella, 255, 251, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -102,7 +102,7 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_drumloop_vssubway, 255, 0, 255, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_seashorec4, 255, 0, 255, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -127,4 +127,4 @@ voicegroup274:: @ BW Kageyama
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 0, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit_all voicegroup279				 @ drums
+	voice_keysplit_all voicegroup281				 @ drums

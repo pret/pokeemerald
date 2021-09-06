@@ -2891,3 +2891,21 @@ $(MID_SUBDIR)/bw_seq_me_mission_clear.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_me_mission_failed.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V118 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_eye_13.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V096
+
+$(MID_SUBDIR)/bw_seq_bgm_t_05_sp.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V077
+
+$(MID_SUBDIR)/bw_seq_bgm_t_05_su.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_e_shirona.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V056
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_shirona.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G279 -V068
+
+$(MID_SUBDIR)/bw_seq_bgm_d_06.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V062

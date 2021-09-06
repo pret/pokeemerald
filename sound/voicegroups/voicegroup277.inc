@@ -42,7 +42,7 @@ voicegroup277:: @ BW Adachi/Misc.
 	voice_keysplit voicegroup261, KeySplitTable39    @ trumpets
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup285, KeySplitTable41    @ french horns
+	voice_keysplit voicegroup327, KeySplitTable41    @ french horns
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup266, KeySplitTable52    @ clarinet
@@ -127,4 +127,4 @@ voicegroup277:: @ BW Adachi/Misc.
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit_all voicegroup282				 @ drums
+	voice_keysplit_all voicegroup284				 @ drums
