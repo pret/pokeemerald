@@ -178,7 +178,7 @@ const struct Item gItems[] =
 
     [ITEM_POTION] =
     {
-        .name = _("SNUSK JUICE"),
+        .name = _("PEPSI"),
         .itemId = ITEM_POTION,
         .price = 300,
         .holdEffectParam = 20,
@@ -285,7 +285,7 @@ const struct Item gItems[] =
 
     [ITEM_HYPER_POTION] =
     {
-        .name = _("DIET PEPSI"),
+        .name = _("PEPSI MAX"),
         .itemId = ITEM_HYPER_POTION,
         .price = 1200,
         .holdEffectParam = 200,
@@ -299,7 +299,7 @@ const struct Item gItems[] =
 
     [ITEM_SUPER_POTION] =
     {
-        .name = _("PEPSI"),
+        .name = _("DIET PEPSI"),
         .itemId = ITEM_SUPER_POTION,
         .price = 700,
         .holdEffectParam = 50,
@@ -408,7 +408,7 @@ const struct Item gItems[] =
 
     [ITEM_ENERGY_POWDER] =
     {
-        .name = _("ENERGYPOWDER"),
+        .name = _("SNUSK JUICE"),
         .itemId = ITEM_ENERGY_POWDER,
         .price = 500,
         .description = sEnergyPowderDesc,

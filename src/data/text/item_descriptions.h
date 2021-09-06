@@ -64,9 +64,9 @@ static const u8 sPremierBallDesc[] = _(
 
 // Medicine
 static const u8 sPotionDesc[] = _(
-    "A box of SMAKIS\n"
-    "orange flavor.\n"
-    "Unpleasant.");
+    "A can of regular\n"
+    "PEPSI. Contains\n"
+    "sugar.");
 
 static const u8 sAntidoteDesc[] = _(
     "A can of MUG root\n"
@@ -99,14 +99,13 @@ static const u8 sMaxPotionDesc[] = _(
     "Tastes fantastic.");
 
 static const u8 sHyperPotionDesc[] = _(
+    "A can of PEPSI MAX.\n"
+    "Tastes fantastic.");
+
+static const u8 sSuperPotionDesc[] = _(
     "A can of DIET.\n"
     "PEPSI. Not a\n"
     "bad choice.");
-
-static const u8 sSuperPotionDesc[] = _(
-    "A can of regular\n"
-    "PEPSI. Contains\n"
-    "sugar.");
 
 static const u8 sFullHealDesc[] = _(
     "Heals all the\n"

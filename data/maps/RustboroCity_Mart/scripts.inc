@@ -86,3 +86,42 @@ RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
 	.string "Lid-Ell? Liddle? ... What?\n"
 	.string "LEEDLE???$"
 
+Script_ItemDemonstration::
+	lock
+	faceplayer
+	checkitem ITEM_ENERGY_POWDER, 1
+	compare VAR_RESULT, 1
+	goto_if_ge Script_HasPotionsAlready
+	msgbox Text_ItemGiveaway, MSGBOX_DEFAULT
+	msgbox Text_GivingPotion, MSGBOX_DEFAULT
+	giveitem ITEM_ENERGY_POWDER, 20
+	compare VAR_RESULT, 0
+	goto_if_eq Script_BagIsFull
+	release
+	end
+
+Script_HasPotionsAlready::
+	msgbox Text_HasPotionsAlready, MSGBOX_DEFAULT
+	release
+	end
+
+Script_BagIsFull::
+	msgbox Text_BagIsFull, MSGBOX_DEFAULT
+	release
+	end
+
+Text_ItemGiveaway:
+	.string "Ugh! I bought this Smakis orange\n"
+	.string "juice, and it's disgusting. They say\l"
+	.string "it's good for you but it's awful.$"
+
+Text_GivingPotion:
+	.string "You take it!$"
+
+Text_HasPotionsAlready:
+	.string "How are you liking the juice?\n"
+	.string "Terrible, isn't it?$"
+
+Text_BagIsFull:
+	.string "Looks like you have a ton already.$"
+
