@@ -103,11 +103,11 @@ enum
     HEALTHBOX_GFX_63, //hp bar red [7 pixels]
     HEALTHBOX_GFX_64, //hp bar red [8 pixels]
     HEALTHBOX_GFX_65, //hp bar frame end
-    HEALTHBOX_GFX_66, //status ball [full]
-    HEALTHBOX_GFX_67, //status ball [empty]
-    HEALTHBOX_GFX_68, //status ball [fainted]
-    HEALTHBOX_GFX_69, //status ball [statused]
-    HEALTHBOX_GFX_70, //status ball [unused extra]
+    HEALTHBOX_GFX_STATUS_BALL, // Full
+    HEALTHBOX_GFX_STATUS_BALL_EMPTY,
+    HEALTHBOX_GFX_STATUS_BALL_FAINTED,
+    HEALTHBOX_GFX_STATUS_BALL_STATUSED,
+    HEALTHBOX_GFX_STATUS_BALL_CAUGHT,
     HEALTHBOX_GFX_STATUS_PSN_BATTLER1, //status2 "PSN"
     HEALTHBOX_GFX_72,
     HEALTHBOX_GFX_73,
@@ -636,7 +636,7 @@ static const struct SpritePalette sStatusSummaryBallsSpritePal =
 
 static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 {
-    gBattleInterface_BallDisplayGfx, 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
+    &gHealthboxElementsGfxTable[HEALTHBOX_GFX_STATUS_BALL], 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
 };
 
 // unused oam data
@@ -1962,7 +1962,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
     healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
 
     if (noStatus)
-        CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_70), (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
+        CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_STATUS_BALL_CAUGHT), (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
     else
         CpuFill32(0, (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
 }
