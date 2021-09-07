@@ -136,6 +136,7 @@ Route116_EventScript_RouteSignRustboro::
 	goto_if_set FLAG_RECEIVED_RED_SCARF, Script_FrenBallGive
 	msgbox Route116_Text_RouteSignRustboro, MSGBOX_SIGN
 	giveitem ITEM_MASTER_BALL
+	setvar VAR_STARTER_MON, 3
 	setflag FLAG_RECEIVED_RED_SCARF
 	release
 	end

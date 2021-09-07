@@ -156,7 +156,13 @@
       "flag": "FLAG_ITEM_ROUTE_133_MAX_REVIVE"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

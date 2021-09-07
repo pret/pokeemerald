@@ -22,8 +22,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_SKITTY",
-      "x": 7,
-      "y": 10,
+      "x": 8,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -35,8 +35,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PHOEBE",
-      "x": 8,
-      "y": 10,
+      "x": 9,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -57,7 +57,7 @@
       "y": 12,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "2",
+      "var_value": "3",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -66,16 +66,7 @@
       "y": 11,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "2",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 13,
-      "elevation": 0,
-      "var": "VAR_STARTER_MON",
-      "var_value": "2",
+      "var_value": "3",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -84,7 +75,7 @@
       "y": 10,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "2",
+      "var_value": "3",
       "script": "Route116_EventScript_FrenIsland"
     },
     {
@@ -93,25 +84,7 @@
       "y": 9,
       "elevation": 0,
       "var": "VAR_STARTER_MON",
-      "var_value": "2",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_STARTER_MON",
-      "var_value": "2",
-      "script": "Route116_EventScript_FrenIsland"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 7,
-      "elevation": 0,
-      "var": "VAR_STARTER_MON",
-      "var_value": "2",
+      "var_value": "3",
       "script": "Route116_EventScript_FrenIsland"
     }
   ],

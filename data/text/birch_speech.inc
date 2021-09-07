@@ -16,22 +16,24 @@ gText_Birch_Pokemon::
 gText_Birch_MainSpeech::
 	.string "We've come together to make an\n"
 	.string "awful experience for you.\p"
-	.string "It's full of memes, shitposts, and\n"
-	.string "all kinds of hot garbage.\n"
-	.string "$"
+	.string "It's full of memes, shitposts,\n"
+	.string "and all kinds of hot garbage.$"
 
 gText_Birch_AndYouAre:: 
-	.string "  $" 
+	.string "$" 
 
-gText_Birch_BoyOrGirl::   
+gText_Birch_BoyOrGirl::
+	.string "$"   
 	.string "Are you a boy?\n"  
 	.string "Or are you a girl?$"  
 
-gText_Birch_WhatsYourName::  
+gText_Birch_WhatsYourName::
+	.string "$"  
 	.string "Bruh\n"  
 	.string "What's your name?$"
 
 gText_Birch_SoItsPlayer::
+	.string "$"
 	.string "So it's {PLAYER}{KUN}?$"
 
 gText_Birch_YourePlayer::
