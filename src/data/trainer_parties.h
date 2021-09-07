@@ -4413,6 +4413,8 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Timmy[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_Wallace[] = {
     {
+    .shinyWildMon = 8,
+    .nickname =_("YOUR MOM"),
     .iv = 255,
     .lvl = 57,
     .species = SPECIES_WAILORD,

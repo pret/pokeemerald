@@ -21,6 +21,7 @@ struct MonCoords
 
 struct TrainerMonNoItemDefaultMoves
 {
+//    u8 nickname[POKEMON_NAME_LENGTH];
     u16 iv;
     u8 lvl;
     u16 species;
@@ -44,6 +45,8 @@ struct TrainerMonNoItemCustomMoves
 
 struct TrainerMonItemCustomMoves
 {
+    u8 shinyWildMon;
+    u8 nickname[20];
     u16 iv;
     u8 lvl;
     u16 species;
