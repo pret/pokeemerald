@@ -927,7 +927,7 @@ gSongTable::
 	song bw_seq_bgm_d_01_b1f, 0, 0
 	song bw_seq_bgm_e_plasma, 0, 0
 	song bw_seq_bgm_vs_plasma, 0, 0
-	song bw_seq_bgm_win4, 0, 0
+	song bw_seq_bgm_win6, 0, 0
 	song bw_seq_bgm_shinka, 0, 0
 	song bw_seq_bgm_koukan, 0, 0
 	song bw_seq_me_shinkaome, 2, 2
@@ -1065,6 +1065,10 @@ gSongTable::
 	song bw_seq_bgm_diving, 0, 0
 	song bw_seq_bgm_t_04, 0, 0
 	song bw_seq_bgm_h_04, 0, 0
+	song bw_seq_bgm_wifi_present, 0, 0
+	song bw_seq_bgm_wcs, 0, 0
+	song bw_seq_bgm_e_sound_designer, 0, 0
+	song bw_seq_bgm_vs_rai, 0, 0
 
 	.align 2
 dummy_song_header:

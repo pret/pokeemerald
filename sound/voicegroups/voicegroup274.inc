@@ -58,7 +58,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup327, KeySplitTable68    @ french horns ||| 69
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_slapbass_c1_16, 255, 0, 255, 192
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

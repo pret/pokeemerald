@@ -948,7 +948,7 @@
 #define BW_SEQ_BGM_D_01_B1F           923 // The Dreamyard (B1F)
 #define BW_SEQ_BGM_E_PLASMA           924 // Team Plasma Appears!                          (TODO: PORTAMENTO!!)
 #define BW_SEQ_BGM_VS_PLASMA          925 // Battle! (Team Plasma)                         (TODO: PORTAMENTO!!)
-#define BW_SEQ_BGM_WIN4               926 // Victory! (Team Plasma)
+#define BW_SEQ_BGM_WIN6               926 // Victory! (Team Plasma)
 #define BW_SEQ_BGM_SHINKA             927 // Evolution (Part 1)
 #define BW_SEQ_BGM_KOUKAN             928 // Evolution (Part 2)
 #define BW_SEQ_ME_SHINKAOME           929 // Congratulations! Your Pokémon Evolved!
@@ -1086,12 +1086,13 @@
 #define BW_SEQ_BGM_DIVING             1061 // Abyssal Ruins
 #define BW_SEQ_BGM_T_04               1062 // Lacunosa Town
 #define BW_SEQ_BGM_H_04               1063 // Village Bridge
+#define BW_SEQ_BGM_WIFI_PRESENT       1064 // Mystery Gift                              (TODO: PORTAMENTO!!)
+#define BW_SEQ_BGM_WCS                1065 // Challenging a Battle Competition
+#define BW_SEQ_BGM_E_SOUND_DESIGNER   1066 // Team Rocket!?
+#define BW_SEQ_BGM_VS_RAI             1067 // Battle! (Kyurem)                          (TODO: PORTAMENTO!!)
 
 // Black 2 & White 2 Music
 
-
-// Omega Ruby & Alpha Sapphire Music 
-// (Only additions to the OST not already present in RSE)
 
 
  

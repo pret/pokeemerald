@@ -2448,8 +2448,8 @@ $(MID_SUBDIR)/bw_seq_bgm_e_plasma.s: %.s: %.mid
 $(MID_SUBDIR)/bw_seq_bgm_vs_plasma.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V120
 
-$(MID_SUBDIR)/bw_seq_bgm_win4.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G277 -V083
+$(MID_SUBDIR)/bw_seq_bgm_win6.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V079
 
 $(MID_SUBDIR)/bw_seq_bgm_shinka.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V068
@@ -2861,3 +2861,15 @@ $(MID_SUBDIR)/bw_seq_bgm_t_04.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_h_04.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G280 -V090 -X
+
+$(MID_SUBDIR)/bw_seq_bgm_wifi_present.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V052
+
+$(MID_SUBDIR)/bw_seq_bgm_wcs.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V092
+
+$(MID_SUBDIR)/bw_seq_bgm_e_sound_designer.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V064
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_rai.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V091 -X

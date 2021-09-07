@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_H_04 - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_RAI - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_H_04 - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_RAI - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1623,7 +1623,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_D_01_B1F          , "BW-SEQ-BGM-D-01-B1F") \
     X(BW_SEQ_BGM_E_PLASMA          , "BW-SEQ-BGM-E-PLASMA") \
     X(BW_SEQ_BGM_VS_PLASMA         , "BW-SEQ-BGM-VS-PLASMA") \
-    X(BW_SEQ_BGM_WIN4              , "BW-SEQ-BGM-WIN4") \
+    X(BW_SEQ_BGM_WIN6              , "BW-SEQ-BGM-WIN6") \
     X(BW_SEQ_BGM_SHINKA            , "BW-SEQ-BGM-SHINKA") \
     X(BW_SEQ_BGM_KOUKAN            , "BW-SEQ-BGM-KOUKAN") \
     X(BW_SEQ_ME_SHINKAOME          , "BW-SEQ-ME-SHINKAOME") \
@@ -1761,6 +1761,10 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_DIVING            , "BW-SEQ-BGM-DIVING") \
     X(BW_SEQ_BGM_T_04              , "BW-SEQ-BGM-T-04") \
     X(BW_SEQ_BGM_H_04              , "BW-SEQ-BGM-H-04") \
+    X(BW_SEQ_BGM_WIFI_PRESENT      , "BW-SEQ-BGM-WIFI-PRESENT") \
+    X(BW_SEQ_BGM_WCS               , "BW-SEQ-BGM-WCS") \
+    X(BW_SEQ_BGM_E_SOUND_DESIGNER  , "BW-SEQ-BGM-E-SOUND-DESIGNER") \
+    X(BW_SEQ_BGM_VS_RAI            , "BW-SEQ-BGM-VS-RAI") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

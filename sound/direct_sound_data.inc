@@ -4621,3 +4621,11 @@ DirectSoundWaveData_bw_villagebridge_vox24::
 	.align 2
 DirectSoundWaveData_bw_villagebridge_vox25::
 	.incbin "sound/direct_sound_samples/bw_villagebridge_vox25.bin"
+
+	.align 2
+DirectSoundWaveData_bw_rockorganc5_mysterygift::
+	.incbin "sound/direct_sound_samples/bw_rockorganc5_mysterygift.bin"
+
+	.align 2
+DirectSoundWaveData_bw_uprightbasse2_mysterygift::
+	.incbin "sound/direct_sound_samples/bw_uprightbasse2_mysterygift.bin"

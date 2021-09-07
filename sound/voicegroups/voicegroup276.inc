@@ -107,16 +107,16 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirmale3_ghetsis, 255, 0, 255, 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_train1, 255, 0, 255, 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_train2, 255, 0, 255, 2
-	voice_keysplit voicegroup237, KeySplitTable83    @ rhodes 2 (HGSS)
+	voice_keysplit voicegroup236, KeySplitTable83    @ rhodes 1 (HGSS)
 	voice_keysplit voicegroup250, KeySplitTable32    @ distortion guitar 2 (HGSS)
 	voice_keysplit voicegroup316, KeySplitTable41    @ clean guitar
 	voice_keysplit voicegroup302, KeySplitTable80    @ harp 1
 	voice_directsound 60, 0, DirectSoundWaveData_bw_solotrumpetc6, 255, 0, 255, 171
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_rockorganc5_mysterygift, 255, 0, 255, 205
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vibrc5_pc, 255, 248, 2, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemale1_ghetsis, 255, 0, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemale2_ghetsis, 255, 0, 227, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_uprightbasse2_mysterygift, 255, 251, 0, 192
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_gongc5_ghetsis, 255, 0, 227, 205

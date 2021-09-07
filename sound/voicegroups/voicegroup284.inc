@@ -72,3 +72,6 @@ voicegroup284:: @ drums 4 (misc)
 	voice_directsound 63, 50, DirectSoundWaveData_hg_137tom, 255, 0, 255, 171    				@ 127/127/127/120/ 50	+ 3
 	voice_directsound 60, 90, DirectSoundWaveData_hg_138tom, 255, 0, 255, 171    				@ 127/127/127/120/ 90	
 	voice_directsound 61, 90, DirectSoundWaveData_hg_138tom, 255, 0, 255, 171    				@ 127/127/127/120/ 90	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_dp_handclup1, 255, 0, 227, 171				@ 127/127/120/120/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_dp_bassdr1, 255, 0, 227, 171					@ 127/127/120/120/ 64
+	voice_directsound 83, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+23
