@@ -698,9 +698,11 @@ static const u8 sText_PkmnShookOffTheTaunt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX
 static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} got over\nits infatuation!");
 static const u8 sText_ItemCannotBeRemoved[] = _("{B_ATK_NAME_WITH_PREFIX}'s item cannot be removed!");
 static const u8 sText_StickyBarbTransfer[] = _("The {B_LAST_ITEM} attached itself to\n{B_ATK_NAME_WITH_PREFIX}!");
+static const u8 sText_PkmnBurnHealed[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nburn was healed.");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_PKMNBURNHEALED - 12] = sText_PkmnBurnHealed,
     [STRINGID_STICKYBARBTRANSFER - 12] = sText_StickyBarbTransfer,
     [STRINGID_ITEMCANNOTBEREMOVED - 12] = sText_ItemCannotBeRemoved,
     [STRINGID_PKMNGOTOVERITSINFATUATION - 12] = sText_PkmnGotOverItsInfatuation,

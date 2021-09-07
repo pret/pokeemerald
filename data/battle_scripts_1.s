@@ -6467,6 +6467,18 @@ BattleScript_TargetPRLZHeal::
 	updatestatusicon BS_TARGET
 	return
 
+BattleScript_TargetWokeUp::
+	printstring STRINGID_TARGETWOKEUP
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_TARGET
+	return
+
+BattleScript_TargetBurnHeal::
+	printstring STRINGID_PKMNBURNHEALED
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_TARGET
+	return
+
 BattleScript_MoveEffectSleep::
 	statusanimation BS_EFFECT_BATTLER
 	printfromtable gFellAsleepStringIds
