@@ -33,7 +33,7 @@ void ClearMugshot(void);
 
 static const struct Mugshot sMugshots[] = {
     //ADD YOUR MUGSHOTS HERE
-       [MUGSHOT_BONSAI] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Bonsai, .palette = sMugshotPal_Bonsai},
+       [MUGSHOT_BONSAI] = {.x = 16, .y = -2, .width = 128, .height = 128, .image = sMugshotImg_Bonsai, .palette = sMugshotPal_Bonsai},
        [MUGSHOT_SIMPLE] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Simp, .palette = sMugshotPal_Simp},
        [MUGSHOT_YIIK_STARE] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Yiik_Stare, .palette = sMugshotPal_Yiik_Stare},
        [MUGSHOT_YIIK_SCREAM] = {.x = 16, .y = 0, .width = 128, .height = 128, .image = sMugshotImg_Yiik_Scream, .palette = sMugshotPal_Yiik_Scream},
