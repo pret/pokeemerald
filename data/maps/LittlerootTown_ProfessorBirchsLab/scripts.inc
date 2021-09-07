@@ -54,11 +54,14 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ShouldTakePokemon::
 	compare VAR_STARTER_MON, 2
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_StarterTaken
 	lock
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ShouldTakePokemon, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp2
 	waitmovement 0
+	callnative ClearMugshot
 	release
 	end
 
@@ -166,11 +169,14 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival::
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival
+	callnative ClearMugshot
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent::
@@ -283,6 +289,8 @@ LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex:
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
 	lockall
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	//applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
 	//waitmovement 0
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
@@ -292,14 +300,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	setvar VAR_STARTER_MON, 1
+	callnative ClearMugshot
 	releaseall
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiTakeTime::
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	lock
 	faceplayer
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BonsaiTakeTime, MSGBOX_DEFAULT
+	callnative ClearMugshot
 	release
 	end
 
@@ -307,9 +319,12 @@ LittlerootTown_ProfessorBirchsLab_Text_BonsaiTakeTime:
 	.string "Take your time.$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_BonsaiDone::
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	lock
 	faceplayer
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_Done, MSGBOX_DEFAULT
+	callnative ClearMugshot
 	release
 	end
 
@@ -445,9 +460,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil::
 	setflag FLAG_SYS_NATIONAL_DEX
 	special EnableNationalPokedex
 	hidemonpic
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	setvar VAR_STARTER_MON, 2
+	callnative ClearMugshot
 	releaseall
 	end
 
@@ -496,9 +514,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile::
 	setflag FLAG_SYS_NATIONAL_DEX
 	special EnableNationalPokedex
 	hidemonpic
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	setvar VAR_STARTER_MON, 2
+	callnative ClearMugshot
 	releaseall
 	end
 
@@ -547,9 +568,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita::
 	setflag FLAG_SYS_NATIONAL_DEX
 	special EnableNationalPokedex
 	hidemonpic
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	setvar VAR_STARTER_MON, 2
+	callnative ClearMugshot
 	releaseall
 	end
 

@@ -294,7 +294,10 @@ RustboroCity_EventScript_Bonsai7::
 	end
 
 RustboroCity_EventScript_BonsaiEnd::
+	setvar VAR_0x8000, MUGSHOT_BONSAI
+	callnative DrawMugshot
 	msgbox RustboroCity_Text_NotBonzi, MSGBOX_SIGN
+	callnative ClearMugshot
 	goto RustboroCity_EventScript_BonsaiWarp
 	end
 

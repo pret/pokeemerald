@@ -27,3 +27,4 @@ RustboroCity_House2_Text_BaconsCabinet:
 	.string "It's Bacon's anime figurines.\p"
 	.string "You recognize the sexy lady\n"
 	.string "Skeletor he got you as a gift.$"
+

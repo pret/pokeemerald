@@ -5,6 +5,7 @@
 #define MUGSHOT_SIMPLE 0
 #define MUGSHOT_YIIK_STARE 1
 #define MUGSHOT_YIIK_SCREAM 2
+#define MUGSHOT_BONSAI 3
 
 
 #endif

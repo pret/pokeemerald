@@ -49,3 +49,4 @@ RustboroCity_House1_Text_Sink:
 	.string "It's a sink.\p"
 	.string "... ... ... ... ... ...\p"
 	.string "Funny.$"
+
