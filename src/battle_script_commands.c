@@ -2356,6 +2356,7 @@ static void Cmd_resultmessage(void)
     if (gSpecialStatuses[gBattlerTarget].berryReduced
         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
+        gLastUsedItem = gBattleMons[gBattlerTarget].item;
         gSpecialStatuses[gBattlerTarget].berryReduced = 0;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_PrintBerryReduceString;
