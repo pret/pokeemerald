@@ -60,11 +60,11 @@ voicegroup278:: @ BW DLC Musicals
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gflogo1, 255, 0, 255, 236
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gflogo2, 255, 0, 255, 236
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gflogo3, 255, 0, 255, 236
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gflogo4, 255, 0, 255, 236
+	voice_directsound 60, 0, DirectSoundWaveData_bw_gflogo5, 255, 0, 255, 236
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

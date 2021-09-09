@@ -117,10 +117,10 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemale1_ghetsis, 255, 0, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_choirfemale2_ghetsis, 255, 0, 227, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_uprightbasse2_mysterygift, 255, 251, 0, 192
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup261, KeySplitTable110   @ trumpets
+	voice_keysplit voicegroup216, KeySplitTable27    @ DPPt timpani
 	voice_directsound 60, 0, DirectSoundWaveData_bw_gongc5_ghetsis, 255, 0, 227, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup327, KeySplitTable72    @ french horns | 52 | 60
 	voice_directsound 60, 0, DirectSoundWaveData_bw_taikohardg4_ghetsis, 255, 248, 0, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

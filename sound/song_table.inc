@@ -888,6 +888,7 @@ gSongTable::
 	song hg_seq_gs_d_shinto, 0, 0
 	song hg_seq_gs_e_arceus, 0, 0
 	song hg_seq_me_gonin, 2, 2
+	song bw_seq_bgm_gf_logo, 0, 0
 	song bw_seq_bgm_title, 0, 0
 	song bw_seq_bgm_title01, 0, 0
 	song bw_seq_bgm_pokemon_theme, 0, 0
@@ -1011,6 +1012,7 @@ gSongTable::
 	song bw_seq_bgm_glterminal, 0, 0
 	song bw_seq_bgm_gts, 0, 0
 	song bw_seq_bgm_guruguru, 0, 0
+	song bw_seq_bgm_united_nations, 0, 0
 	song bw_seq_me_hyouka5, 2, 2
 	song bw_seq_bgm_gear_station, 0, 0
 	song bw_seq_bgm_battle_subway, 0, 0
@@ -1069,6 +1071,13 @@ gSongTable::
 	song bw_seq_bgm_wcs, 0, 0
 	song bw_seq_bgm_e_sound_designer, 0, 0
 	song bw_seq_bgm_vs_rai, 0, 0
+	song bw_seq_me_hyouka6, 2, 2
+	song bw_seq_bgm_vs_champ, 0, 0
+	song bw_seq_bgm_win5, 0, 0
+	song bw_seq_bgm_e_dendouiri, 0, 0
+	song bw_seq_bgm_e_inishie, 0, 0
+	song bw_seq_bgm_vs_wcs, 0, 0
+	song bw_seq_me_kinomi, 2, 2
 
 	.align 2
 dummy_song_header:

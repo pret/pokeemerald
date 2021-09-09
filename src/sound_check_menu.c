@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_RAI - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_ME_KINOMI - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_RAI - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_ME_KINOMI - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1584,6 +1584,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(HG_SEQ_GS_D_SHINTO           , "HG-SEQ-GS-D-SHINTO") \
     X(HG_SEQ_GS_E_ARCEUS           , "HG-SEQ-GS-E-ARCEUS") \
     X(HG_SEQ_ME_GONIN              , "HG-SEQ-ME-GONIN") \
+    X(BW_SEQ_BGM_GF_LOGO           , "BW-SEQ-BGM-GF-LOGO") \
     X(BW_SEQ_BGM_TITLE             , "BW-SEQ-BGM-TITLE") \
     X(BW_SEQ_BGM_TITLE01           , "BW-SEQ-BGM-TITLE01") \
     X(BW_SEQ_BGM_POKEMON_THEME     , "BW-SEQ-BGM-POKEMON-THEME") \
@@ -1707,6 +1708,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_GLTERMINAL        , "BW-SEQ-BGM-GLTERMINAL") \
     X(BW_SEQ_BGM_GTS               , "BW-SEQ-BGM-GTS") \
     X(BW_SEQ_BGM_GURUGURU          , "BW-SEQ-BGM-GURUGURU") \
+    X(BW_SEQ_BGM_UNITED_NATIONS    , "BW-SEQ-BGM-UNITED-NATIONS") \
     X(BW_SEQ_ME_HYOUKA5            , "BW-SEQ-ME-HYOUKA5") \
     X(BW_SEQ_BGM_GEAR_STATION      , "BW-SEQ-BGM-GEAR-STATION") \
     X(BW_SEQ_BGM_BATTLE_SUBWAY     , "BW-SEQ-BGM-BATTLE-SUBWAY") \
@@ -1765,6 +1767,13 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(BW_SEQ_BGM_WCS               , "BW-SEQ-BGM-WCS") \
     X(BW_SEQ_BGM_E_SOUND_DESIGNER  , "BW-SEQ-BGM-E-SOUND-DESIGNER") \
     X(BW_SEQ_BGM_VS_RAI            , "BW-SEQ-BGM-VS-RAI") \
+    X(BW_SEQ_ME_HYOUKA6            , "BW-SEQ-ME-HYOUKA6") \
+    X(BW_SEQ_BGM_VS_CHAMP          , "BW-SEQ-BGM-VS-CHAMP") \
+    X(BW_SEQ_BGM_WIN5              , "BW-SEQ-BGM-WIN5") \
+    X(BW_SEQ_BGM_E_DENDOUIRI       , "BW-SEQ-BGM-E-DENDOUIRI") \
+    X(BW_SEQ_BGM_E_INISHIE         , "BW-SEQ-BGM-E-INISHIE") \
+    X(BW_SEQ_BGM_VS_WCS            , "BW-SEQ-BGM-VS-WCS") \
+    X(BW_SEQ_ME_KINOMI             , "BW-SEQ-ME-KINOMI") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

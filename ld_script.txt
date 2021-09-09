@@ -1582,6 +1582,7 @@ SECTIONS {
         sound/songs/midi/hg_seq_me_cardgame1.o(.rodata);
         sound/songs/midi/hg_seq_me_cardgame2.o(.rodata);
         sound/songs/midi/hg_seq_me_gonin.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_gf_logo.o(.rodata);
         sound/songs/midi/bw_seq_bgm_title.o(.rodata);
         sound/songs/midi/bw_seq_bgm_title01.o(.rodata);
         sound/songs/midi/bw_seq_bgm_pokemon_theme.o(.rodata);
@@ -1705,6 +1706,7 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_glterminal.o(.rodata);
         sound/songs/midi/bw_seq_bgm_gts.o(.rodata);
         sound/songs/midi/bw_seq_bgm_guruguru.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_united_nations.o(.rodata);
         sound/songs/midi/bw_seq_me_hyouka5.o(.rodata);
         sound/songs/midi/bw_seq_bgm_gear_station.o(.rodata);
         sound/songs/midi/bw_seq_bgm_battle_subway.o(.rodata);
@@ -1763,6 +1765,13 @@ SECTIONS {
         sound/songs/midi/bw_seq_bgm_wcs.o(.rodata);
         sound/songs/midi/bw_seq_bgm_e_sound_designer.o(.rodata);
         sound/songs/midi/bw_seq_bgm_vs_rai.o(.rodata);
+        sound/songs/midi/bw_seq_me_hyouka6.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_champ.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_win5.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_dendouiri.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_e_inishie.o(.rodata);
+        sound/songs/midi/bw_seq_bgm_vs_wcs.o(.rodata);
+        sound/songs/midi/bw_seq_me_kinomi.o(.rodata);
     } =0
 
     lib_rodata :

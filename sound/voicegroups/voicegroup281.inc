@@ -94,3 +94,8 @@ voicegroup281:: @ drums 1 (kageyama)
 	voice_directsound 60, 90, DirectSoundWaveData_bw_214tri_open, 255, 234, 191, 205    		@ 127/110/110/116/ 90
 	voice_directsound 61, 100, DirectSoundWaveData_hg_136tom, 255, 0, 255, 205    				@ 127/127/127/116/100	+ 1
 	voice_directsound 61, 64, DirectSoundWaveData_bw_011kick, 255, 0, 227, 205					@ 127/127/120/116/ 64	+ 1
+	voice_directsound 60, 64, DirectSoundWaveData_bw_synthkick_nbridge_loud, 255, 0, 227, 205   @ 127/127/120/116/ 64	
+	voice_directsound 61, 30, DirectSoundWaveData_bw_101chh909, 255, 239, 0, 205    			@ 127/105/  0/116/ 30	+ 1
+	voice_directsound 60, 30, DirectSoundWaveData_bw_104ohh909, 255, 241, 0, 205    			@ 127/102/  0/116/ 30
+	voice_directsound 60, 50, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 205    			@ 127/127/120/116/ 50
+	voice_directsound 60, 40, DirectSoundWaveData_hg_033orccym, 255, 250, 0, 214    			@ 127/ 70/  0/114/ 40

@@ -59,14 +59,14 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup289, KeySplitTable39    @ trumpets (short start)
 	voice_keysplit voicegroup245, KeySplitTable71    @ jazz organ
 	voice_directsound 60, 0, DirectSoundWaveData_dp_slapbass_c1_16, 255, 0, 255, 192
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup331, KeySplitTable111   @ nylon str. guitar 2 (relic song)
+	voice_keysplit voicegroup261, KeySplitTable112   @ trumpets | 65
+	voice_keysplit voicegroup234, KeySplitTable36    @ piano 2
 	voice_directsound 60, 0, DirectSoundWaveData_bw_reversecymbale2, 255, 0, 255, 236
 	voice_keysplit voicegroup324, KeySplitTable62    @ choir male
 	voice_keysplit voicegroup325, KeySplitTable63    @ choir female
 	voice_keysplit voicegroup303, KeySplitTable81    @ choir full
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 0, 255, 205
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

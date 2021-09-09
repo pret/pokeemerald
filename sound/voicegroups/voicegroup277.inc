@@ -1,7 +1,7 @@
 	.align 2
 voicegroup277:: @ BW Adachi/Misc.
 	voice_keysplit voicegroup323, KeySplitTable106   @ piano | 41 | 46 | 53 | 58
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup323, KeySplitTable59    @ piano (all splits)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup294, KeySplitTable36    @ rhodes

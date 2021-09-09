@@ -75,3 +75,11 @@ voicegroup284:: @ drums 4 (misc)
 	voice_directsound 60, 64, DirectSoundWaveData_dp_handclup1, 255, 0, 227, 171				@ 127/127/120/120/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_dp_bassdr1, 255, 0, 227, 171					@ 127/127/120/120/ 64
 	voice_directsound 83, 64, DirectSoundWaveData_bw_synthkick_vsrival, 255, 0, 227, 205    	@ 127/127/120/116/ 64	+23
+	voice_directsound 62, 80, DirectSoundWaveData_dp_closed_hihat_16, 255, 0, 227, 1			@ 127/127/120/125/ 80	+ 2
+	voice_directsound 60, 80, DirectSoundWaveData_dp_open_hihat_16, 255, 241, 0, 0				@ 127/102/  0/127/ 80
+	voice_directsound 60, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 205				@ 127/120/120/116/ 64
+	voice_directsound 60, 64, DirectSoundWaveData_bw_drumloop_hof, 255, 0, 227, 205				@ 127/127/120/116/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_bw_synthkick_hof, 255, 0, 227, 205			@ 127/127/120/116/ 64	+ 1
+	voice_directsound 60, 80, DirectSoundWaveData_bw_101chh909, 255, 239, 0, 205    			@ 127/105/  0/116/ 80
+	voice_directsound 60, 80, DirectSoundWaveData_bw_104ohh909, 255, 241, 0, 205    			@ 127/102/  0/116/ 80
+	voice_directsound 60, 64, DirectSoundWaveData_bw_042crash909, 255, 242, 0, 205    			@ 127/100/  0/116/ 64	

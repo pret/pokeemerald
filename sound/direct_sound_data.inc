@@ -4103,6 +4103,10 @@ DirectSoundWaveData_bw_101chh909::
 	.incbin "sound/direct_sound_samples/bw_101chh909.bin"
 
 	.align 2
+DirectSoundWaveData_bw_104ohh909::
+	.incbin "sound/direct_sound_samples/bw_104ohh909.bin"
+
+	.align 2
 DirectSoundWaveData_bw_synthsnare_eyeplasma::
 	.incbin "sound/direct_sound_samples/bw_synthsnare_eyeplasma.bin"
 
@@ -4141,6 +4145,10 @@ DirectSoundWaveData_bw_808snarereverb::
 	.align 2
 DirectSoundWaveData_bw_synthkick_nbridge::
 	.incbin "sound/direct_sound_samples/bw_synthkick_nbridge.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthkick_nbridge_loud::
+	.incbin "sound/direct_sound_samples/bw_synthkick_nbridge_loud.bin"
 
 	.align 2
 DirectSoundWaveData_bw_snare_nbridge::
@@ -4345,6 +4353,10 @@ DirectSoundWaveData_bw_drumloop_meloetta::
 	.align 2
 DirectSoundWaveData_bw_drumloop_ludicolo::
 	.incbin "sound/direct_sound_samples/bw_drumloop_ludicolo.bin"
+
+	.align 2
+DirectSoundWaveData_bw_drumloop_hof::
+	.incbin "sound/direct_sound_samples/bw_drumloop_hof.bin"
 
 	.align 2
 DirectSoundWaveData_bw_027china909::
@@ -4629,3 +4641,31 @@ DirectSoundWaveData_bw_rockorganc5_mysterygift::
 	.align 2
 DirectSoundWaveData_bw_uprightbasse2_mysterygift::
 	.incbin "sound/direct_sound_samples/bw_uprightbasse2_mysterygift.bin"
+
+	.align 2
+DirectSoundWaveData_bw_synthkick_hof::
+	.incbin "sound/direct_sound_samples/bw_synthkick_hof.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylone2_relic::
+	.incbin "sound/direct_sound_samples/bw_nylone2_relic.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylona2_relic::
+	.incbin "sound/direct_sound_samples/bw_nylona2_relic.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylond3_relic::
+	.incbin "sound/direct_sound_samples/bw_nylond3_relic.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylong3_relic::
+	.incbin "sound/direct_sound_samples/bw_nylong3_relic.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylonb3_relic::
+	.incbin "sound/direct_sound_samples/bw_nylonb3_relic.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylone4_relic::
+	.incbin "sound/direct_sound_samples/bw_nylone4_relic.bin"

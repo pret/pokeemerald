@@ -2331,6 +2331,9 @@ $(MID_SUBDIR)/hg_seq_me_cardgame2.s: %.s: %.mid
 $(MID_SUBDIR)/hg_seq_me_gonin.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G229 -V088 -p5
 
+$(MID_SUBDIR)/bw_seq_bgm_gf_logo.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G278 -V070
+
 $(MID_SUBDIR)/bw_seq_bgm_title.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V092
 
@@ -2700,6 +2703,9 @@ $(MID_SUBDIR)/bw_seq_bgm_gts.s: %.s: %.mid
 $(MID_SUBDIR)/bw_seq_bgm_guruguru.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V061
 
+$(MID_SUBDIR)/bw_seq_bgm_united_nations.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V074
+
 $(MID_SUBDIR)/bw_seq_me_hyouka5.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G274 -V076 -p5
 
@@ -2873,3 +2879,24 @@ $(MID_SUBDIR)/bw_seq_bgm_e_sound_designer.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_vs_rai.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G276 -V091 -X
+
+$(MID_SUBDIR)/bw_seq_me_hyouka6.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V076 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_champ.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G276 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_win5.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G275 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_e_dendouiri.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G277 -V074
+
+$(MID_SUBDIR)/bw_seq_bgm_e_inishie.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V089
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_wcs.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V092
+
+$(MID_SUBDIR)/bw_seq_me_kinomi.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G274 -V091 -p5
