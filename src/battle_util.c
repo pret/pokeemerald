@@ -7195,10 +7195,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         // gBattleStruct->sameMoveTurns incremented in ppreduce
         if (gBattleStruct->sameMoveTurns[battlerAtk] != 0)
         {
-            if (gBattleStruct->sameMoveTurns[battlerAtk] >= 5)
-                basePower *= 5;
-            else
-                basePower *= gBattleStruct->sameMoveTurns[battlerAtk];
+            basePower += (40 * gBattleStruct->sameMoveTurns[battlerAtk]);
+            if (basePower > 200)
+                basePower = 200;
         }
         break;
     case EFFECT_PAYBACK:
