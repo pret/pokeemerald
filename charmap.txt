@@ -400,6 +400,7 @@ B_TRAINER2_WIN_TEXT = FD 31
 B_PARTNER_CLASS = FD 32
 B_PARTNER_NAME = FD 33
 B_BUFF3 = FD 34
+B_TARGET_OF_REVIVE = FD 35
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00

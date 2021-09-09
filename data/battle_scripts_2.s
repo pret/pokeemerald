@@ -35,6 +35,7 @@ gBattlescriptsForUsingItem::
 	.4byte BattleScript_OpponentUsesStatusCureItem  @ AI_ITEM_CURE_CONDITION
 	.4byte BattleScript_OpponentUsesXItem           @ AI_ITEM_X_STAT
 	.4byte BattleScript_OpponentUsesGuardSpec       @ AI_ITEM_GUARD_SPEC
+	.4byte BattleScript_OpponentUsesReviveItem		@ AI_ITEM_REVIVE
 
 	.align 2
 gBattlescriptsForRunningByItem::
@@ -200,3 +201,16 @@ BattleScript_ActionWallyThrow:
 	printstring STRINGID_YOUTHROWABALLNOWRIGHT
 	waitmessage B_WAIT_TIME_LONG
 	end2
+	
+BattleScript_OpponentUsesReviveItem::
+	printstring STRINGID_EMPTYSTRING3
+	pause 0x30
+	playse SE_USE_ITEM
+	printstring STRINGID_TRAINER1USEDITEM
+	waitmessage 0x40
+	usereviveonopponent
+	printstring STRINGID_PKMNSITEMREVIVED
+	waitmessage 0x40
+	setbyte sMOVEEND_STATE, 0xF
+	moveend 0x1, 0x0
+	finishaction
