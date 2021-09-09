@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_GROUDON_1",
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
       "x": 17,
       "y": 22,
       "elevation": 1,

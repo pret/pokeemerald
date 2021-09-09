@@ -1,39 +1,39 @@
 .set LOCALID_HO_OH, 1
 
-NavelRock_Top_MapScripts:: @ 8269113
+NavelRock_Top_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Top_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Top_OnResume
 	.byte 0
 
-NavelRock_Top_OnTransition: @ 826911E
+NavelRock_Top_OnTransition:
 	call_if_set FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_HideHoOh
 	call_if_unset FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_TryShowHoOh
 	end
 
-NavelRock_Top_EventScript_HideHoOh:: @ 8269131
+NavelRock_Top_EventScript_HideHoOh::
 	setvar VAR_TEMP_1, 1
 	setflag FLAG_HIDE_HO_OH
 	return
 
-NavelRock_Top_EventScript_TryShowHoOh:: @ 826913A
+NavelRock_Top_EventScript_TryShowHoOh::
 	setvar VAR_TEMP_1, 1
 	goto_if_set FLAG_DEFEATED_HO_OH, Common_EventScript_NopReturn
 	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HO_OH
 	return
 
-NavelRock_Top_OnResume: @ 8269151
+NavelRock_Top_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Top_EventScript_TryRemoveHoOh
 	end
 
-NavelRock_Top_EventScript_TryRemoveHoOh:: @ 826915B
+NavelRock_Top_EventScript_TryRemoveHoOh::
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject LOCALID_HO_OH
 	return
 
-NavelRock_Top_EventScript_HoOh:: @ 826916F
+NavelRock_Top_EventScript_HoOh::
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject
@@ -61,7 +61,7 @@ NavelRock_Top_EventScript_HoOh:: @ 826916F
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70 @ level
 	setvar VAR_0x8006, ITEM_NONE
-	special CreateObedientEnemyMon
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate
@@ -78,24 +78,24 @@ NavelRock_Top_EventScript_HoOh:: @ 826916F
 	releaseall
 	end
 
-NavelRock_Top_EventScript_DefeatedHoOh:: @ 8269217
+NavelRock_Top_EventScript_DefeatedHoOh::
 	setflag FLAG_DEFEATED_HO_OH
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-NavelRock_Top_EventScript_RanFromHoOh:: @ 8269225
+NavelRock_Top_EventScript_RanFromHoOh::
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-NavelRock_Top_Movement_CameraPanUp: @ 8269230
+NavelRock_Top_Movement_CameraPanUp:
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-NavelRock_Top_Movement_CameraPanDown: @ 8269234
+NavelRock_Top_Movement_CameraPanDown:
 	delay_16
 	delay_16
 	walk_down
@@ -103,7 +103,7 @@ NavelRock_Top_Movement_CameraPanDown: @ 8269234
 	walk_down
 	step_end
 
-NavelRock_Top_Movement_HoOhApproach: @ 826923A
+NavelRock_Top_Movement_HoOhApproach:
 	walk_down
 	walk_down
 	walk_down
@@ -114,7 +114,7 @@ NavelRock_Top_Movement_HoOhApproach: @ 826923A
 	delay_16
 	step_end
 
-NavelRock_Top_Movement_HoOhAppear: @ 8269243
+NavelRock_Top_Movement_HoOhAppear:
 	delay_16
 	delay_16
 	walk_in_place_down

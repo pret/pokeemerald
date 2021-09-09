@@ -153,11 +153,11 @@ static const struct BgTemplate sBgTemplates[3] =
     },
 };
 
-static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY};
+static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct OamData sOam_Hand =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -174,7 +174,7 @@ static const struct OamData sOam_Hand =
 
 static const struct OamData sOam_Pokeball =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -191,7 +191,7 @@ static const struct OamData sOam_Pokeball =
 
 static const struct OamData sOam_StarterCircle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -378,7 +378,6 @@ static void VblankCB_StarterChoose(void)
 
 void CB2_ChooseStarter(void)
 {
-    u16 savedIme;
     u8 taskId;
     u8 spriteId;
 
@@ -426,7 +425,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeballSelect[0]);
     LoadCompressedSpriteSheet(&sSpriteSheet_StarterCircle[0]);
     LoadSpritePalettes(sSpritePalettes_StarterChoose);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
 
     EnableInterrupts(DISPSTAT_VBLANK);
     SetVBlankCallback(VblankCB_StarterChoose);
@@ -465,7 +464,7 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 2;
 
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
 }
 
 static void CB2_StarterChoose(void)
@@ -524,8 +523,8 @@ static void Task_HandleStarterChooseInput(u8 taskId)
 static void Task_WaitForStarterSprite(u8 taskId)
 {
     if (gSprites[gTasks[taskId].tCircleSpriteId].affineAnimEnded &&
-        gSprites[gTasks[taskId].tCircleSpriteId].pos1.x == STARTER_PKMN_POS_X &&
-        gSprites[gTasks[taskId].tCircleSpriteId].pos1.y == STARTER_PKMN_POS_Y)
+        gSprites[gTasks[taskId].tCircleSpriteId].x == STARTER_PKMN_POS_X &&
+        gSprites[gTasks[taskId].tCircleSpriteId].y == STARTER_PKMN_POS_Y)
     {
         gTasks[taskId].func = Task_AskConfirmStarter;
     }
@@ -614,7 +613,7 @@ static void ClearStarterLabel(void)
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
     ClearWindowTilemap(sStarterLabelWindowId);
     RemoveWindow(sStarterLabelWindowId);
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     ScheduleBgCopyTilemapToVram(0);
@@ -644,9 +643,9 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 static void SpriteCB_SelectionHand(struct Sprite *sprite)
 {
     // Float up and down above selected pokeball
-    sprite->pos1.x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
-    sprite->pos1.y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
-    sprite->pos2.y = Sin(sprite->data[1], 8);
+    sprite->x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
+    sprite->y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
+    sprite->y2 = Sin(sprite->data[1], 8);
     sprite->data[1] = (u8)(sprite->data[1]) + 4;
 }
 
@@ -662,12 +661,12 @@ static void SpriteCB_Pokeball(struct Sprite *sprite)
 static void SpriteCB_StarterPokemon(struct Sprite *sprite)
 {
     // Move sprite to upper center of screen
-    if (sprite->pos1.x > STARTER_PKMN_POS_X)
-        sprite->pos1.x -= 4;
-    if (sprite->pos1.x < STARTER_PKMN_POS_X)
-        sprite->pos1.x += 4;
-    if (sprite->pos1.y > STARTER_PKMN_POS_Y)
-        sprite->pos1.y -= 2;
-    if (sprite->pos1.y < STARTER_PKMN_POS_Y)
-        sprite->pos1.y += 2;
+    if (sprite->x > STARTER_PKMN_POS_X)
+        sprite->x -= 4;
+    if (sprite->x < STARTER_PKMN_POS_X)
+        sprite->x += 4;
+    if (sprite->y > STARTER_PKMN_POS_Y)
+        sprite->y -= 2;
+    if (sprite->y < STARTER_PKMN_POS_Y)
+        sprite->y += 2;
 }

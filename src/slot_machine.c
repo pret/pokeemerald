@@ -682,7 +682,7 @@ static const struct WindowTemplate sWindowTemplate_InfoBox =
     .baseBlock = 1
 };
 
-static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 
 static bool8 (*const sSlotActions[])(struct Task *task) =
 {
@@ -876,7 +876,7 @@ static void Task_FadeToSlotMachine(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -1149,7 +1149,7 @@ static void Task_SlotMachine(u8 taskId)
 // SLOT_ACTION_UNFADE
 static bool8 SlotAction_UnfadeScreen(struct Task *task)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
     LoadPikaPowerMeter(sSlotMachine->pikaPower);
     sSlotMachine->state++; // SLOT_ACTION_WAIT_FADE
     return FALSE;
@@ -1592,8 +1592,8 @@ static bool8 SlotAction_WaitMsg_NoMoreCoins(struct Task *task)
 static bool8 SlotAction_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
-    AlertTVOfNewCoinTotal(GetCoins());
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+    TryPutFindThatGamerOnAir(GetCoins());
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
     sSlotMachine->state++; // SLOT_ACTION_FREE
     return FALSE;
 }
@@ -3409,7 +3409,7 @@ static void OpenInfoBox(u8 digDisplayId)
 
 static bool8 IsInfoBoxClosed(void)
 {
-    if (FindTaskIdByFunc(RunInfoBoxActions) == 0xFF)
+    if (FindTaskIdByFunc(RunInfoBoxActions) == TASK_NONE)
         return TRUE;
     else
         return FALSE;
@@ -3422,7 +3422,7 @@ static void RunInfoBoxActions(u8 taskId)
 
 static void InfoBox_FadeIn(struct Task *task)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
     task->tState++;
 }
 
@@ -3446,7 +3446,7 @@ static void InfoBox_AddText(struct Task *task)
 {
     AddTextPrinterParameterized3(1, 1, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, 3);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
     task->tState++;
 }
 
@@ -3458,7 +3458,7 @@ static void InfoBox_AwaitPlayerInput(struct Task *task)
         ClearWindowTilemap(1);
         CopyWindowToVram(1, 1);
         RemoveWindow(1);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
         task->tState++;
     }
 }
@@ -3479,7 +3479,7 @@ static void InfoBox_CreateDigitalDisplay(struct Task *task)
 static void InfoBox_LoadPikaPowerMeter(struct Task *task)
 {
     LoadPikaPowerMeter(sSlotMachine->pikaPower);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
     task->tState++;
 }
 
@@ -3605,7 +3605,7 @@ static void SpriteCB_ReelSymbol(struct Sprite *sprite)
 {
     sprite->data[2] = sSlotMachine->reelPixelOffsets[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
-    sprite->pos1.y = sSlotMachine->reelPixelOffsetsWhileStopping[sprite->data[0]] + 28 + sprite->data[2];
+    sprite->y = sSlotMachine->reelPixelOffsetsWhileStopping[sprite->data[0]] + 28 + sprite->data[2];
     sprite->sheetTileStart = GetSpriteTileStartByTag(GetTagAtRest(sprite->data[0], sprite->data[2] / 24));
     SetSpriteSheetFrameTileNum(sprite);
 }
@@ -3692,12 +3692,12 @@ static void DestroyReelTimePikachuSprite(void)
 
 static void SpriteCB_ReelTimePikachu(struct Sprite *sprite)
 {
-    sprite->pos2.y = sprite->pos2.x = 0;
+    sprite->y2 = sprite->x2 = 0;
     if (sprite->animNum == 4)
     {
-        sprite->pos2.y = sprite->pos2.x = 8;
+        sprite->y2 = sprite->x2 = 8;
         if ((sprite->animCmdIndex != 0 && sprite->animDelayCounter != 0) || (sprite->animCmdIndex == 0 && sprite->animDelayCounter == 0))
-            sprite->pos2.y = -8;
+            sprite->y2 = -8;
     }
 }
 
@@ -3776,7 +3776,7 @@ static void SpriteCB_ReelTimeNumbers(struct Sprite *sprite)
 {
     s16 r0 = (u16)(sSlotMachine->reeltimePixelOffset + sprite->data[7]);
     r0 %= 40;
-    sprite->pos1.y = r0 + 59;
+    sprite->y = r0 + 59;
     StartSpriteAnimIfDifferent(sprite, GetNearbyReelTimeTag(r0 / 20));
 }
 
@@ -3872,15 +3872,15 @@ static void SpriteCB_ReelTimeBolt(struct Sprite *sprite)
     if (sprite->sDelayTimer != 0)
     {
         sprite->sDelayTimer--;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->invisible = TRUE;
     }
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos2.x += sprite->sXDir;
-        sprite->pos2.y += sprite->sYDir;
+        sprite->x2 += sprite->sXDir;
+        sprite->y2 += sprite->sYDir;
         if (++sprite->sCounter >= 8)
         {
             sprite->sDelayTimer = sprite->sDelay;
@@ -3971,7 +3971,7 @@ static void CreateReelTimeExplosionSprite(void)
 
 static void SpriteCB_ReelTimeExplosion(struct Sprite *sprite)
 {
-    sprite->pos2.y = gSpriteCoordOffsetY;
+    sprite->y2 = gSpriteCoordOffsetY;
 }
 
 static void DestroyReelTimeExplosionSprite(void)
@@ -3999,8 +3999,8 @@ static void SpriteCB_ReelTimeDuck(struct Sprite *sprite)
 {
     sprite->data[0] -= 2;
     sprite->data[0] &= 0xff;
-    sprite->pos2.x = Cos(sprite->data[0], 20);
-    sprite->pos2.y = Sin(sprite->data[0], 6);
+    sprite->x2 = Cos(sprite->data[0], 20);
+    sprite->y2 = Sin(sprite->data[0], 6);
     sprite->subpriority = 0;
     if (sprite->data[0] >= 0x80)
     {
@@ -4061,7 +4061,7 @@ static void SpriteCB_ReelTimeSmoke(struct Sprite *sprite)
     }
     sprite->sMoveY &= 0xff;
     sprite->sMoveY += 16;
-    sprite->pos2.y -= (sprite->sMoveY >> 8);
+    sprite->y2 -= (sprite->sMoveY >> 8);
 }
 
 static u8 IsReelTimeSmokeAnimFinished(void)
@@ -4147,12 +4147,12 @@ static void SpriteCB_DigitalDisplay_Smoke(struct Sprite *sprite)
         sprite->subspriteTableNum ^= 1;
         sprite->sCounter = 0;
     }
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     if (sprite->subspriteTableNum != 0)
     {
-        sprite->pos2.x = targetX[sprite->sSpriteId];
-        sprite->pos2.y = targetY[sprite->sSpriteId];
+        sprite->x2 = targetX[sprite->sSpriteId];
+        sprite->y2 = targetY[sprite->sSpriteId];
     }
 }
 
@@ -4181,10 +4181,10 @@ static void SpriteCB_DigitalDisplay_Reel(struct Sprite *sprite)
     switch (sprite->sState)
     {
     case 0:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0xd0)
+        sprite->x += 4;
+        if (sprite->x >= 0xd0)
         {
-            sprite->pos1.x = 0xd0;
+            sprite->x = 0xd0;
             sprite->sState++;
         }
         break;
@@ -4193,8 +4193,8 @@ static void SpriteCB_DigitalDisplay_Reel(struct Sprite *sprite)
             sprite->sState++;
         break;
     case 2:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0x110)
+        sprite->x += 4;
+        if (sprite->x >= 0x110)
             sprite->sState++;
         break;
     case 3:
@@ -4209,10 +4209,10 @@ static void SpriteCB_DigitalDisplay_Time(struct Sprite *sprite)
     switch (sprite->sState)
     {
     case 0:
-        sprite->pos1.x -= 4;
-        if (sprite->pos1.x <= 0xd0)
+        sprite->x -= 4;
+        if (sprite->x <= 0xd0)
         {
-            sprite->pos1.x = 0xd0;
+            sprite->x = 0xd0;
             sprite->sState++;
         }
         break;
@@ -4221,8 +4221,8 @@ static void SpriteCB_DigitalDisplay_Time(struct Sprite *sprite)
             sprite->sState++;
         break;
     case 2:
-        sprite->pos1.x -= 4;
-        if (sprite->pos1.x <= 0x90)
+        sprite->x -= 4;
+        if (sprite->x <= 0x90)
             sprite->sState++;
         break;
     case 3:
@@ -4247,10 +4247,10 @@ static void SpriteCB_DigitalDisplay_ReelTimeNumber(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0xd0)
+        sprite->x += 4;
+        if (sprite->x >= 0xd0)
         {
-            sprite->pos1.x = 0xd0;
+            sprite->x = 0xd0;
             sprite->sState++;
         }
         break;
@@ -4259,8 +4259,8 @@ static void SpriteCB_DigitalDisplay_ReelTimeNumber(struct Sprite *sprite)
             sprite->sState++;
         break;
     case 4:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0xf8)
+        sprite->x += 4;
+        if (sprite->x >= 0xf8)
             sprite->sState++;
         break;
     case 5:
@@ -4278,10 +4278,10 @@ static void SpriteCB_DigitalDisplay_PokeballRocking(struct Sprite *sprite)
         sprite->sState++;
         // fallthrough
     case 1:
-        sprite->pos1.y += 8;
-        if (sprite->pos1.y >= 0x70)
+        sprite->y += 8;
+        if (sprite->y >= 0x70)
         {
-            sprite->pos1.y = 0x70;
+            sprite->y = 0x70;
             sprite->sCounter = 16;
             sprite->sState++;
         }
@@ -4289,7 +4289,7 @@ static void SpriteCB_DigitalDisplay_PokeballRocking(struct Sprite *sprite)
     case 2:
         if (sprite->data[2] == 0)
         {
-            sprite->pos1.y -= sprite->sCounter;
+            sprite->y -= sprite->sCounter;
             sprite->sCounter = -sprite->sCounter;
             if (++sprite->data[3] >= 2)
             {
@@ -4318,10 +4318,10 @@ static void SpriteCB_DigitalDisplay_Stop(struct Sprite *sprite)
             sprite->sState++;
         break;
     case 1:
-        sprite->pos1.y += 2;
-        if (sprite->pos1.y >= 0x30)
+        sprite->y += 2;
+        if (sprite->y >= 0x30)
         {
-            sprite->pos1.y = 0x30;
+            sprite->y = 0x30;
             sprite->sState++;
             sprite->sWaitForAnim = FALSE;
         }
@@ -4397,8 +4397,8 @@ static void SpriteCB_DigitalDisplay_RegBonus(struct Sprite *sprite)
     switch (sprite->sState)
     {
     case 0:
-        sprite->pos2.x = letterXOffset[sprite->sSpriteId];
-        sprite->pos2.y = letterYOffset[sprite->sSpriteId];
+        sprite->x2 = letterXOffset[sprite->sSpriteId];
+        sprite->y2 = letterYOffset[sprite->sSpriteId];
         sprite->sCounter = letterDelay[sprite->sSpriteId];
         sprite->sState++;
         // fallthrough
@@ -4407,17 +4407,17 @@ static void SpriteCB_DigitalDisplay_RegBonus(struct Sprite *sprite)
             sprite->sState++;
         break;
     case 2:
-        if (sprite->pos2.x > 0)
-            sprite->pos2.x -= 4;
-        else if (sprite->pos2.x < 0)
-            sprite->pos2.x += 4;
+        if (sprite->x2 > 0)
+            sprite->x2 -= 4;
+        else if (sprite->x2 < 0)
+            sprite->x2 += 4;
 
-        if (sprite->pos2.y > 0)
-            sprite->pos2.y -= 4;
-        else if (sprite->pos2.y < 0)
-            sprite->pos2.y += 4;
+        if (sprite->y2 > 0)
+            sprite->y2 -= 4;
+        else if (sprite->y2 < 0)
+            sprite->y2 += 4;
 
-        if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+        if (sprite->x2 == 0 && sprite->y2 == 0)
             sprite->sState++;
         break;
     }
@@ -4432,8 +4432,8 @@ static void SpriteCB_DigitalDisplay_BigBonus(struct Sprite *sprite)
         sprite->sState++;
         sprite->sCounter = 12;
     }
-    sprite->pos2.x = Cos(sp0[sprite->sSpriteId], sprite->sCounter);
-    sprite->pos2.y = Sin(sp0[sprite->sSpriteId], sprite->sCounter);
+    sprite->x2 = Cos(sp0[sprite->sSpriteId], sprite->sCounter);
+    sprite->y2 = Sin(sp0[sprite->sSpriteId], sprite->sCounter);
     if (sprite->sCounter != 0)
         sprite->sCounter--;
 }

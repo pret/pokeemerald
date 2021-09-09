@@ -792,7 +792,7 @@ void LoadWirelessStatusIndicatorSpriteGfx(void)
         LoadCompressedSpriteSheet(&sWirelessStatusIndicatorSpriteSheet);
     }
     LoadSpritePalette(&sWirelessStatusIndicatorSpritePalette);
-    gWirelessStatusIndicatorSpriteId = 0xFF;
+    gWirelessStatusIndicatorSpriteId = SPRITE_NONE;
 }
 
 static u8 GetParentSignalStrength(void)
@@ -822,7 +822,7 @@ static void SetWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 animNum)
 
 void UpdateWirelessStatusIndicatorSprite(void)
 {
-    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
+    if (gWirelessStatusIndicatorSpriteId != SPRITE_NONE && gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
@@ -880,8 +880,8 @@ void UpdateWirelessStatusIndicatorSprite(void)
             sprite->sFrameDelay++;
         }
         gMain.oamBuffer[125] = sWirelessStatusIndicatorOamData;
-        gMain.oamBuffer[125].x = sprite->pos1.x + sprite->centerToCornerVecX;
-        gMain.oamBuffer[125].y = sprite->pos1.y + sprite->centerToCornerVecY;
+        gMain.oamBuffer[125].x = sprite->x + sprite->centerToCornerVecX;
+        gMain.oamBuffer[125].y = sprite->y + sprite->centerToCornerVecY;
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
         gMain.oamBuffer[125].tileNum = sprite->sTileStart + sprite->anims[sprite->sCurrAnimNum][sprite->sFrameIdx].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));

@@ -288,7 +288,7 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
     s16 *state;
     u32 action;
 
-    if (sub_8087598())
+    if (Overworld_LinkRecvQueueLengthMoreThan2())
         return;
 
     task = (LoopedTask)GetWordTaskArg(taskId, 1);
