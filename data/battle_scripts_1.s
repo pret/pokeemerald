@@ -6623,9 +6623,11 @@ BattleScript_DefiantActivates::
 	return
 
 BattleScript_AbilityPopUp:
+	.if B_ABILITY_POP_UP == TRUE
 	showabilitypopup BS_ABILITY_BATTLER
 	recordability BS_ABILITY_BATTLER
 	pause 40
+	.endif
 	sethword sABILITY_OVERWRITE, 0
 	return
 
