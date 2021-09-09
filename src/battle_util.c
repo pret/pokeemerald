@@ -7192,12 +7192,13 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower = 150;
         break;
     case EFFECT_ECHOED_VOICE:
-        if (gFieldTimers.echoVoiceCounter != 0)
+        // gBattleStruct->sameMoveTurns incremented in ppreduce
+        if (gBattleStruct->sameMoveTurns[battlerAtk] != 0)
         {
-            if (gFieldTimers.echoVoiceCounter >= 5)
+            if (gBattleStruct->sameMoveTurns[battlerAtk] >= 5)
                 basePower *= 5;
             else
-                basePower *= gFieldTimers.echoVoiceCounter;
+                basePower *= gBattleStruct->sameMoveTurns[battlerAtk];
         }
         break;
     case EFFECT_PAYBACK:
