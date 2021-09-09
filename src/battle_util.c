@@ -3402,7 +3402,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_PRANKSTER:
-            #if B_PRANKSTER >= GEN_7
+            #if B_PRANKSTER_DARK_TYPES >= GEN_7
                 if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
                   && IS_MOVE_STATUS(gCurrentMove)
                   && gBattlerAttacker != gBattlerTarget
