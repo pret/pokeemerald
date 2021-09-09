@@ -67,7 +67,7 @@ voicegroup274:: @ BW Kageyama
 	voice_keysplit voicegroup325, KeySplitTable63    @ choir female
 	voice_keysplit voicegroup303, KeySplitTable81    @ choir full
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 0, 255, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup332, KeySplitTable114   @ piano (longer decay)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_gongp, 255, 252, 0, 236

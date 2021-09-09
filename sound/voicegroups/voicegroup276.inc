@@ -122,7 +122,7 @@ voicegroup276:: @ BW Ichinose
 	voice_directsound 60, 0, DirectSoundWaveData_bw_gongc5_ghetsis, 255, 0, 227, 205
 	voice_keysplit voicegroup327, KeySplitTable72    @ french horns | 52 | 60
 	voice_directsound 60, 0, DirectSoundWaveData_bw_taikohardg4_ghetsis, 255, 248, 0, 205
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_keysplit voicegroup297, KeySplitTable113   @ vibraphone | 60
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 0, 255, 205
