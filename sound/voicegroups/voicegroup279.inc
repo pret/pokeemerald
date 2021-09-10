@@ -1,6 +1,6 @@
 	.align 2
 voicegroup279:: @ BW Cynthia
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sambawhistlec4_route2, 255, 0, 255, 171
 	voice_keysplit_all voicegroup285				 @ drums 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

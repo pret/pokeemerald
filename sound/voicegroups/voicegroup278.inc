@@ -119,4 +119,3 @@ voicegroup278:: @ BW DLC Musicals
 	voice_directsound 60, 0, DirectSoundWaveData_bw_msl_timbale, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_drumloop_ludicolo, 255, 0, 255, 171
 	voice_directsound 60, 0, DirectSoundWaveData_bw_msl_cuica, 255, 0, 255, 171
-	voice_directsound 60, 0, DirectSoundWaveData_bw_sambawhistlec4_route2, 255, 0, 255, 171
