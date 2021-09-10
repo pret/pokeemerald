@@ -1,10 +1,10 @@
 .set LOCALID_SAILOR, 1
 .set LOCALID_SS_TIDAL, 2
 
-NavelRock_Harbor_MapScripts:: @ 82690BC
+NavelRock_Harbor_MapScripts::
 	.byte 0
 
-NavelRock_Harbor_EventScript_Sailor:: @ 82690BD
+NavelRock_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	msgbox NavelRock_Harbor_Text_SailorReturn, MSGBOX_YESNO
@@ -23,7 +23,7 @@ NavelRock_Harbor_EventScript_Sailor:: @ 82690BD
 	release
 	end
 
-NavelRock_Harbor_EventScript_AsYouLike:: @ 8269102
+NavelRock_Harbor_EventScript_AsYouLike::
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	release
 	end

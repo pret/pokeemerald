@@ -29,7 +29,7 @@ enum {
 
 struct PyramidBagMenu
 {
-    void (*exitCallback)(void);
+    void (*newScreenCallback)(void);
     u8 tilemapBuffer[BG_SCREEN_SIZE];
     u8 spriteIds[PBAG_SPRITE_COUNT];
     u8 windowIds[5];
@@ -49,7 +49,7 @@ struct PyramidBagMenu
 
 struct PyramidBagMenuState
 {
-    void (*callback)(void);
+    void (*exitCallback)(void);
     u8 location;
     u16 cursorPosition;
     u16 scrollPosition;
@@ -64,7 +64,7 @@ void CB2_ReturnToPyramidBagMenu(void);
 void UpdatePyramidBagList(void);
 void UpdatePyramidBagCursorPos(void);
 void sub_81C4EFC(void);
-void GoToBattlePyramidBagMenu(u8 a0, void (*callback)(void));
+void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void));
 void Task_CloseBattlePyramidBagMessage(u8 taskId);
 void TryStoreHeldItemsInPyramidBag(void);
 void ChooseItemsToTossFromPyramidBag(void);

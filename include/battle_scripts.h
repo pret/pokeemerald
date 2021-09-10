@@ -124,6 +124,8 @@ extern const u8 BattleScript_MoveUsedIsInLoveCantAttack[];
 extern const u8 BattleScript_NightmareTurnDmg[];
 extern const u8 BattleScript_CurseTurnDmg[];
 extern const u8 BattleScript_TargetPRLZHeal[];
+extern const u8 BattleScript_TargetWokeUp[];
+extern const u8 BattleScript_TargetBurnHeal[];
 extern const u8 BattleScript_MoveEffectSleep[];
 extern const u8 BattleScript_YawnMakesAsleep[];
 extern const u8 BattleScript_MoveEffectPoison[];
@@ -369,5 +371,8 @@ extern const u8 BattleScript_JabocaRowapBerryActivates[];
 extern const u8 BattleScript_NotAffectedAbilityPopUp[];
 extern const u8 BattleScript_BattlerShookOffTaunt[];
 extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
+extern const u8 BattleScript_Pickpocket[];
+extern const u8 BattleScript_StickyBarbTransfer[];
+
 
 #endif // GUARD_BATTLE_SCRIPTS_H
