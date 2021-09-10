@@ -11,8 +11,6 @@ If you have space concerns and/or only wish to use select music from this branch
 
 Credits to [Ipatix](https://github.com/ipatix) for the [HQ m4a mixer](https://github.com/ipatix/gba-hq-mixer), and to [Sierraffinity](https://github.com/Sierraffinity) for the sound test menu ported from [CrystalDust](https://github.com/Sierraffinity/CrystalDust).
 
-Something else to note: Duplicate songs from FR/LG and Emerald have been removed. Click [here](https://github.com/pret/pokeemerald/blob/master/include/constants/songs.h#L401) to see which duplicate songs have been removed in case you have used a removed song in your own repository, in which case you should find and replace with the non-duplicate version.
-
 
 # Pokémon Emerald
 
