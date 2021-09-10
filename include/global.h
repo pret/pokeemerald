@@ -761,7 +761,7 @@ struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
     /*0x001*/ u8 state;
-    /*0x002*/ u16 question[9];
+    /*0x002*/ u16 question[QUIZ_QUESTION_LEN];
     /*0x014*/ u16 correctAnswer;
     /*0x016*/ u16 playerAnswer;
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
