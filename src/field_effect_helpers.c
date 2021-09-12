@@ -95,10 +95,6 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
     }
 }
 
-#define Red(Color)		((Color) & 31)
-#define Green(Color)	((Color >> 5) & 31)
-#define Blue(Color)		((Color >> 10) & 31)
-
 void LoadSpecialReflectionPalette(struct Sprite *sprite)
 {
     u32 R, G, B, i;
@@ -107,14 +103,13 @@ void LoadSpecialReflectionPalette(struct Sprite *sprite)
 	struct SpritePalette reflectionPalette;
 	
 	CpuCopy16(&gPlttBufferUnfaded[0x100 + sprite->oam.paletteNum * 16], gReflectionPaletteBuffer, 32);
-	BlendPalettes(gReflectionPaletteBuffer[0x100 + sprite->oam.paletteNum * 16], 6, RGB(12, 20, 27));
 	pal = gReflectionPaletteBuffer;
 	for (i = 0; i < 16; ++i)
 	{
 		color = pal[i];
-		R = Red(color) + 8;
-		G = Green(color) + 8;
-		B = Blue(color) + 16;
+		R = GET_R(color) + 8;
+		G = GET_G(color) + 8;
+		B = GET_B(color) + 16;
 		if (R > 31) R = 31;
 		if (G > 31) G = 31;
 		if (B > 31) B = 31;
