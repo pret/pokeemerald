@@ -572,10 +572,11 @@
 #define STRINGID_PKMNGOTOVERITSINFATUATION       568
 #define STRINGID_ITEMCANNOTBEREMOVED             569
 #define STRINGID_STICKYBARBTRANSFER              570
-#define STRINGID_REDCARDACTIVATE                 571
-#define STRINGID_EJECTBUTTONACTIVATE             572
+#define STRINGID_PKMNBURNHEALED                  571
+#define STRINGID_REDCARDACTIVATE                 572
+#define STRINGID_EJECTBUTTONACTIVATE             573
 
-#define BATTLESTRINGS_COUNT                      573
+#define BATTLESTRINGS_COUNT                      574
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

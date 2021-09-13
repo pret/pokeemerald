@@ -185,7 +185,8 @@
 #define HITMARKER_IGNORE_SAFEGUARD      (1 << 13)
 #define HITMARKER_SYNCHRONISE_EFFECT    (1 << 14)
 #define HITMARKER_RUN                   (1 << 15)
-// 3 free spots because of change in handling of UNDERGROUND/UNDERGWATER/ON AIR
+#define HITMARKER_IGNORE_DISGUISE       (1 << 16)
+// 3 free spots because of change in handling of UNDERGROUND/UNDERWATER/ON AIR
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
 #define HITMARKER_x100000               (1 << 20)
 #define HITMARKER_x200000               (1 << 21)
