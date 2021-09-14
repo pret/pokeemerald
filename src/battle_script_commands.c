@@ -8553,6 +8553,17 @@ static void Cmd_various(void)
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
         break;
+    case VARIOUS_ROOM_SERVICE:
+        if (GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_ROOM_SERVICE && TryRoomService(gActiveBattler))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_BerryStatRaiseRet;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        return;
     case VARIOUS_TERRAIN_SEED:
         if (GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_SEEDS)
         {

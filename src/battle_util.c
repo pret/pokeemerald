@@ -5577,8 +5577,7 @@ u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 exec
         PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
 
         gLastUsedItem = itemId; // For surge abilities
-        gEffectBattler = battler;
-        gBattleScripting.battler = battler;
+        gEffectBattler = gBattleScripting.battler = battler;
         SET_STATCHANGER(statId, 1, FALSE);
         gBattleScripting.animArg1 = 0xE + statId;
         gBattleScripting.animArg2 = 0;
@@ -5831,15 +5830,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 RecordItemEffectBattle(battlerId, HOLD_EFFECT_AIR_BALLOON);
                 break;
             case HOLD_EFFECT_ROOM_SERVICE:
-                if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && CompareStat(battlerId, STAT_SPEED, MIN_STAT_STAGE, CMP_GREATER_THAN))
+                if (TryRoomService(battlerId))
                 {
-                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPEED);
-                    PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL);
-
-                    gEffectBattler = battlerId;
-                    SET_STATCHANGER(STAT_SPEED, 1, TRUE);
-                    gBattleScripting.animArg1 = 0xE + STAT_SPEED;
-                    gBattleScripting.animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
@@ -8995,4 +8987,55 @@ bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind)
     }
     
     return ret;
+}
+
+void BufferStatChange(u8 battlerId, u8 statId, u8 stringId)
+{
+    bool8 hasContrary = (GetBattlerAbility(battlerId) == ABILITY_CONTRARY);
+    
+    PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+    if (stringId == STRINGID_STATFELL)
+    {
+        if (hasContrary)
+        {
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
+        }
+        else
+        {
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL);
+        }
+    }
+    else if (stringId == STRINGID_STATROSE)
+    {
+        if (hasContrary)
+        {
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL);
+        }
+        else
+        {
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
+        }
+    }
+    else
+    {
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId);
+    }
+}
+
+bool32 TryRoomService(u8 battlerId)
+{
+    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && CompareStat(battlerId, STAT_SPEED, MIN_STAT_STAGE, CMP_GREATER_THAN))
+    {
+        BufferStatChange(battlerId, STAT_SPEED, STRINGID_STATFELL);
+        gEffectBattler = gBattleScripting.battler = battlerId;
+        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        gBattleScripting.animArg1 = 0xE + STAT_SPEED;
+        gBattleScripting.animArg2 = 0;
+        gLastUsedItem = gBattleMons[battlerId].item;
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
 }

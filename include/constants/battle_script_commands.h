@@ -177,6 +177,7 @@
 #define VARIOUS_MOVEEND_ITEM_EFFECTS            105
 #define VARIOUS_TERRAIN_SEED                    106
 #define VARIOUS_MAKE_INVISIBLE                  107
+#define VARIOUS_ROOM_SERVICE                    108
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
