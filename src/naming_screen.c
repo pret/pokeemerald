@@ -2503,7 +2503,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
 
 static const struct SpriteTemplate sSpriteTemplate_PCIcon =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = PALTAG_PC_ICON,
     .oam = &sOam_8x8,
     .anims = sAnims_PCIcon,
