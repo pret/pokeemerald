@@ -5145,7 +5145,8 @@ static void Cmd_moveend(void)
                       && IsBattlerAlive(battler)
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RED_CARD
-                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0))
+                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
+                      && CanBattlerSwitch(gBattlerAttacker))
                     {                        
                         gLastUsedItem = gBattleMons[battler].item;
                         gActiveBattler = gBattleStruct->savedBattlerTarget = gBattleScripting.battler = battler;  // Battler with red card
@@ -9469,29 +9470,36 @@ static void Cmd_forcerandomswitch(void)
     s32 validMons = 0;
     s32 minNeeded;
     
-    // check wild mon holding a red card
-    // red card swaps attacker with target to get the animation correct, so here we check attacker which is really the target. Thanks GF...
+    bool32 redCardForcedSwitch = FALSE;
+    
+    // Red card checks against wild pokemon. If we have reached here, the player has a mon to switch into
+    // Red card swaps attacker with target to get the animation correct, so here we check attacker which is really the target. Thanks GF...
     if (gBattleScripting.switchCase == B_SWITCH_RED_CARD
       && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-      && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+      && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)   // Check opponent's red card activating
     {
-        if (WILD_DOUBLE_BATTLE)
-        {
-            // if wild mon with red card is the last one alive, it ends the battle
-            if (!IS_WHOLE_SIDE_ALIVE(gBattlerAttacker))
-            {
-                gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
-                return;
-            }
-            // else, try to make attacker (aka player) change pokemon            
-        }
-        else
+        if (!WILD_DOUBLE_BATTLE)
         {
             // Wild mon with red card will end single battle
             gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
             return;
         }
+        else
+        {
+            // Wild double battle, wild mon red card activation on player
+            if (IS_WHOLE_SIDE_ALIVE(gBattlerTarget))
+            {
+                // Both player's battlers are alive
+                redCardForcedSwitch = FALSE;
+            }
+            else
+            {
+                // Player has only one mon alive -> force red card switch before manually switching to other mon
+                redCardForcedSwitch = TRUE;
+            }
+        }
     }
+    
 
     // Swapping pokemon happens in:
     // trainer battles
@@ -9505,8 +9513,10 @@ static void Cmd_forcerandomswitch(void)
         || (WILD_DOUBLE_BATTLE
             && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
             && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+        || redCardForcedSwitch
        )
-    {        
+    {    
+    
         if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
             party = gPlayerParty;
         else
@@ -9614,7 +9624,7 @@ static void Cmd_forcerandomswitch(void)
              }
         }
 
-        if (validMons <= minNeeded)
+        if (!redCardForcedSwitch && validMons <= minNeeded)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         }
