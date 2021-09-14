@@ -5171,6 +5171,7 @@ static void Cmd_moveend(void)
                     if (IsBattlerAlive(battler)
                      && gSpecialStatuses[battler].statFell
                      && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_PACK
+                     && !(gCurrentMove == MOVE_PARTING_SHOT && CanBattlerSwitch(gBattlerAttacker))  // Does not activate if attacker used Parting Shot and can switch out
                      && CountUsablePartyMons(battler) > 0)  // Has mon to switch into
                     {
                         gSpecialStatuses[battler].statFell = FALSE;
@@ -9288,7 +9289,9 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             }
             else
             {
-                gSpecialStatuses[gActiveBattler].statFell = TRUE;   // For eject pack
+                // Check eject pack. disableEjectPack set for edge cases (e.g. attacking weak armor'd eject pack holder with u-turn)
+                if (gProtectStructs[gActiveBattler].disableEjectPack == 0)
+                    gSpecialStatuses[gActiveBattler].statFell = TRUE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler); // B_MSG_ATTACKER_STAT_FELL or B_MSG_DEFENDER_STAT_FELL
             }
         }
