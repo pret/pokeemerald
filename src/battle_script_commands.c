@@ -4913,8 +4913,8 @@ static void Cmd_moveend(void)
             else
                 gBattleScripting.moveendState++;
             break;
-        case MOVEEND_KINGSROCK: // king's rock and shell bell
-            // these effects will occur at each hit in a multi-strike move
+        case MOVEEND_KINGSROCK: // King's rock and shell bell
+            // These effects will occur at each hit in a multi-strike move
             if (ItemBattleEffects(ITEMEFFECT_KINGSROCK, 0, FALSE))
                 effect = TRUE;
             gBattleScripting.moveendState++;
@@ -5043,6 +5043,11 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_NEXT_TARGET: // For moves hitting two opposing Pokemon.
+            // Set a flag if move hits either target (for throat spray that can't check damage)
+            if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
+             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+                gProtectStructs[gBattlerAttacker].targetAffected = 1;
+        
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
                 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && !gProtectStructs[gBattlerAttacker].chargingTurn
@@ -5285,6 +5290,7 @@ static void Cmd_moveend(void)
             if (gSpecialStatuses[gBattlerAttacker].dancerOriginalTarget)
                 *(gBattleStruct->moveTarget + gBattlerAttacker) = gSpecialStatuses[gBattlerAttacker].dancerOriginalTarget & 0x3;
             gProtectStructs[gBattlerAttacker].usesBouncedMove = 0;
+            gProtectStructs[gBattlerAttacker].targetAffected = 0;
             gBattleStruct->ateBoost[gBattlerAttacker] = 0;
             gStatuses3[gBattlerAttacker] &= ~(STATUS3_ME_FIRST);
             gSpecialStatuses[gBattlerAttacker].gemBoost = 0;
@@ -5554,7 +5560,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         }
         else
         {
-            // check if attacker side has mon to switch into
+            // Check if attacker side has mon to switch into
             battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -6147,7 +6153,7 @@ static void Cmd_endlinkbattle(void)
 }
 
 static void Cmd_returntoball(void)
-{    
+{
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     BtlController_EmitReturnMonToBall(0, 1);
     MarkBattlerForControllerExec(gActiveBattler);
@@ -7802,7 +7808,7 @@ static void Cmd_various(void)
         if (GetBattlerAbility(gActiveBattler) == ABILITY_BEAST_BOOST
             && HasAttackerFaintedTarget()
             && !NoAliveMonsForEitherParty()
-            && CompareStat(gActiveBattler, i, MAX_STAT_STAGE, CMP_LESS_THAN))
+            && CompareStat(gBattlerAttacker, i, MAX_STAT_STAGE, CMP_LESS_THAN))
         {
             gBattleMons[gBattlerAttacker].statStages[i]++;
             SET_STATCHANGER(i, 1, FALSE);

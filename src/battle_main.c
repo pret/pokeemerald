@@ -3078,7 +3078,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].stealMove = 0;
     gProtectStructs[gActiveBattler].prlzImmobility = 0;
     gProtectStructs[gActiveBattler].confusionSelfDmg = 0;
-    gProtectStructs[gActiveBattler].targetNotAffected = 0;
+    gProtectStructs[gActiveBattler].targetAffected = 0;
     gProtectStructs[gActiveBattler].chargingTurn = 0;
     gProtectStructs[gActiveBattler].fleeFlag = 0;
     gProtectStructs[gActiveBattler].usedImprisonedMove = 0;

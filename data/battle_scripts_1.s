@@ -6948,13 +6948,13 @@ BattleScript_SnowWarningActivates::
 BattleScript_TerrainSeedLoop:	
 	savetarget
 	setbyte gBattlerTarget, 0
-TerrainSeedLoop:
+BattleScript_TerrainSeedLoopIter:
 	copybyte sBATTLER, gBattlerTarget
-	doterrainseed BS_TARGET, TerrainSeedLoop_NextBattler
+	doterrainseed BS_TARGET, BattleScript_TerrainSeedLoop_NextBattler
 	removeitem BS_TARGET
-TerrainSeedLoop_NextBattler:
+BattleScript_TerrainSeedLoop_NextBattler:
 	addbyte gBattlerTarget, 0x1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, TerrainSeedLoop
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TerrainSeedLoopIter
 	restoretarget
 	return
 
@@ -7187,6 +7187,7 @@ BattleScript_AbilityNoSpecificStatLoss::
 	printstring STRINGID_PKMNSXPREVENTSYLOSS
 	waitmessage B_WAIT_TIME_LONG
 	setbyte cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY
+	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	return
 
 BattleScript_StickyHoldActivates::

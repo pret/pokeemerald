@@ -1410,7 +1410,6 @@ void CancelMultiTurnMoves(u8 battler)
 bool8 WasUnableToUseMove(u8 battler)
 {
     if (gProtectStructs[battler].prlzImmobility
-        || gProtectStructs[battler].targetNotAffected
         || gProtectStructs[battler].usedImprisonedMove
         || gProtectStructs[battler].loveImmobility
         || gProtectStructs[battler].usedDisabledMove
@@ -6399,10 +6398,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         switch (atkHoldEffect)
         {
         case HOLD_EFFECT_SHELL_BELL:
-            if (gBattleMoveDamage != 0  // Need to have done damage
-                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                && gSpecialStatuses[gBattlerTarget].dmg != 0
-                && gSpecialStatuses[gBattlerTarget].dmg != 0xFFFF
+            if (gSpecialStatuses[gBattlerAttacker].damagedMons  // Need to have done damage
                 && gBattlerAttacker != gBattlerTarget
                 && gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP
                 && gBattleMons[gBattlerAttacker].hp != 0)
@@ -6435,8 +6431,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             }
             break;
         case HOLD_EFFECT_THROAT_SPRAY:  // Does NOT need to be a damaging move
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && !(gHitMarker & (HITMARKER_UNABLE_TO_USE_MOVE))
+            if (gProtectStructs[gBattlerAttacker].targetAffected
              && gBattleMons[gBattlerAttacker].hp != 0
              && gBattleMoves[gCurrentMove].flags & FLAG_SOUND
              && CompareStat(gBattlerAttacker, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN)
