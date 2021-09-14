@@ -150,6 +150,7 @@ bool32 IsBattlerAffectedByHazards(u8 battlerId, bool32 toxicSpikes);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
 bool32 TryRoomService(u8 battlerId);
+void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
