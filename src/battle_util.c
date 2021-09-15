@@ -5612,7 +5612,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
     if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
     {
         gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREINFATUATION;  // STRINGID_TARGETGOTOVERINFATUATION
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_INFATUATION;  // STRINGID_TARGETGOTOVERINFATUATION
         StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
         ret = TRUE;
     }
@@ -5621,7 +5621,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
         if (gDisableStructs[battlerId].tauntTimer != 0)
         {
             gDisableStructs[battlerId].tauntTimer = gDisableStructs[battlerId].tauntTimer2 = 0;
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CURETAUNT;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_TAUNT;
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
             ret = TRUE;
         }
@@ -5630,21 +5630,21 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
         {
             gDisableStructs[battlerId].encoredMove = 0;
             gDisableStructs[battlerId].encoreTimerStartValue = gDisableStructs[battlerId].encoreTimer = 0;
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREENCORE;   // STRINGID_PKMNENCOREENDED
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_ENCORE;   // STRINGID_PKMNENCOREENDED
             ret = TRUE;
         }
         // Check torment
         if (gBattleMons[battlerId].status2 & STATUS2_TORMENT)
         {
             gBattleMons[battlerId].status2 &= ~(STATUS2_TORMENT);
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CURETORMENT;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_TORMENT;
             ret = TRUE;
         }
         // Check heal block
         if (gStatuses3[battlerId] & STATUS3_HEAL_BLOCK)
         {
             gStatuses3[battlerId] &= ~(STATUS3_HEAL_BLOCK);
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREHEALBLOCK;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_HEALBLOCK;
             ret = TRUE;
         }
         // Check disable
@@ -5652,7 +5652,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
         {
             gDisableStructs[battlerId].disableTimer = gDisableStructs[battlerId].disableTimerStartValue = 0;
             gDisableStructs[battlerId].disabledMove = 0;
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREDISABLE;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_DISABLE;
             ret = TRUE;
         }
     #endif
