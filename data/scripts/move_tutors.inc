@@ -1,4 +1,4 @@
-SlateportCity_PokemonFanClub_EventScript_SwaggerTutor:: @ 82C7F16
+SlateportCity_PokemonFanClub_EventScript_SwaggerTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_SWAGGER, MoveTutor_EventScript_SwaggerTaught
@@ -17,17 +17,17 @@ SlateportCity_PokemonFanClub_EventScript_SwaggerTutor:: @ 82C7F16
 	goto MoveTutor_EventScript_SwaggerTaught
 	end
 
-MoveTutor_EventScript_SwaggerDeclined:: @ 82C7F6A
+MoveTutor_EventScript_SwaggerDeclined::
 	msgbox MoveTutor_Text_SwaggerDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_SwaggerTaught:: @ 82C7F74
+MoveTutor_EventScript_SwaggerTaught::
 	msgbox MoveTutor_Text_SwaggerTaught, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_EventScript_RolloutTutor:: @ 82C7F7E
+MauvilleCity_EventScript_RolloutTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_ROLLOUT, MoveTutor_EventScript_RolloutTaught
@@ -46,17 +46,17 @@ MauvilleCity_EventScript_RolloutTutor:: @ 82C7F7E
 	goto MoveTutor_EventScript_RolloutTaught
 	end
 
-MoveTutor_EventScript_RolloutDeclined:: @ 82C7FD2
+MoveTutor_EventScript_RolloutDeclined::
 	msgbox MoveTutor_Text_RolloutDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_RolloutTaught:: @ 82C7FDC
+MoveTutor_EventScript_RolloutTaught::
 	msgbox MoveTutor_Text_RolloutTaught, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor:: @ 82C7FE6
+VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_FURY_CUTTER, MoveTutor_EventScript_FuryCutterTaught
@@ -75,17 +75,17 @@ VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor:: @ 82C7FE6
 	goto MoveTutor_EventScript_FuryCutterTaught
 	end
 
-MoveTutor_EventScript_FuryCutterDeclined:: @ 82C803A
+MoveTutor_EventScript_FuryCutterDeclined::
 	msgbox MoveTutor_Text_FuryCutterDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_FuryCutterTaught:: @ 82C8044
+MoveTutor_EventScript_FuryCutterTaught::
 	msgbox MoveTutor_Text_FuryCutterTaught, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_House_EventScript_MimicTutor:: @ 82C804E
+LavaridgeTown_House_EventScript_MimicTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_MIMIC, MoveTutor_EventScript_MimicTaught
@@ -104,17 +104,17 @@ LavaridgeTown_House_EventScript_MimicTutor:: @ 82C804E
 	goto MoveTutor_EventScript_MimicTaught
 	end
 
-MoveTutor_EventScript_MimicDeclined:: @ 82C80A2
+MoveTutor_EventScript_MimicDeclined::
 	msgbox MoveTutor_MimicDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_MimicTaught:: @ 82C80AC
+MoveTutor_EventScript_MimicTaught::
 	msgbox MoveTutor_Text_MimicTaught, MSGBOX_DEFAULT
 	release
 	end
 
-FallarborTown_Mart_EventScript_MetronomeTutor:: @ 82C80B6
+FallarborTown_Mart_EventScript_MetronomeTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_METRONOME, MoveTutor_EventScript_MetronomeTaught
@@ -133,17 +133,17 @@ FallarborTown_Mart_EventScript_MetronomeTutor:: @ 82C80B6
 	goto MoveTutor_EventScript_MetronomeTaught
 	end
 
-MoveTutor_EventScript_MetronomeDeclined:: @ 82C810A
+MoveTutor_EventScript_MetronomeDeclined::
 	msgbox MoveTutor_Text_MetronomeDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_MetronomeTaught:: @ 82C8114
+MoveTutor_EventScript_MetronomeTaught::
 	msgbox MoveTutor_Text_MetronomeTaught, MSGBOX_DEFAULT
 	release
 	end
 
-FortreeCity_House2_EventScript_SleepTalkTutor:: @ 82C811E
+FortreeCity_House2_EventScript_SleepTalkTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_SLEEP_TALK, MoveTutor_EventScript_SleepTalkTaught
@@ -162,17 +162,17 @@ FortreeCity_House2_EventScript_SleepTalkTutor:: @ 82C811E
 	goto MoveTutor_EventScript_SleepTalkTaught
 	end
 
-MoveTutor_EventScript_SleepTalkDeclined:: @ 82C8172
+MoveTutor_EventScript_SleepTalkDeclined::
 	msgbox MoveTutor_Text_SleepTalkDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_SleepTalkTaught:: @ 82C817C
+MoveTutor_EventScript_SleepTalkTaught::
 	msgbox MoveTutor_Text_SleepTalkTaught, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTutor:: @ 82C8186
+LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_SUBSTITUTE, MoveTutor_EventScript_SubstituteTaught
@@ -191,17 +191,17 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTutor:: @ 82C8186
 	goto MoveTutor_EventScript_SubstituteTaught
 	end
 
-MoveTutor_EventScript_SubstituteDeclined:: @ 82C81DA
+MoveTutor_EventScript_SubstituteDeclined::
 	msgbox MoveTutor_Text_SubstituteDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_SubstituteTaught:: @ 82C81E4
+MoveTutor_EventScript_SubstituteTaught::
 	msgbox MoveTutor_Text_SubstituteTaught, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_EventScript_DynamicPunchTutor:: @ 82C81EE
+MossdeepCity_EventScript_DynamicPunchTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_DYNAMICPUNCH, MoveTutor_EventScript_DynamicPunchTaught
@@ -220,17 +220,17 @@ MossdeepCity_EventScript_DynamicPunchTutor:: @ 82C81EE
 	goto MoveTutor_EventScript_DynamicPunchTaught
 	end
 
-MoveTutor_EventScript_DynamicPunchDeclined:: @ 82C8242
+MoveTutor_EventScript_DynamicPunchDeclined::
 	msgbox MoveTutor_Text_DynamicPunchDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_DynamicPunchTaught:: @ 82C824C
+MoveTutor_EventScript_DynamicPunchTaught::
 	msgbox MoveTutor_Text_DynamicPunchTaught, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor:: @ 82C8256
+SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_DOUBLE_EDGE, MoveTutor_EventScript_DoubleEdgeTaught
@@ -249,17 +249,17 @@ SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor:: @ 82C8256
 	goto MoveTutor_EventScript_DoubleEdgeTaught
 	end
 
-MoveTutor_EventScript_DoubleEdgeDeclined:: @ 82C82AA
+MoveTutor_EventScript_DoubleEdgeDeclined::
 	msgbox MoveTutor_Text_DoubleEdgeDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_DoubleEdgeTaught:: @ 82C82B4
+MoveTutor_EventScript_DoubleEdgeTaught::
 	msgbox MoveTutor_Text_DoubleEdgeTaught, MSGBOX_DEFAULT
 	release
 	end
 
-PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor:: @ 82C82BE
+PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_EXPLOSION, MoveTutor_EventScript_ExplosionTaught
@@ -278,23 +278,23 @@ PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor:: @ 82C82BE
 	goto MoveTutor_EventScript_ExplosionTaught
 	end
 
-MoveTutor_EventScript_ExplosionDeclined:: @ 82C8312
+MoveTutor_EventScript_ExplosionDeclined::
 	msgbox MoveTutor_Text_ExplosionDeclined, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_ExplosionTaught:: @ 82C831C
+MoveTutor_EventScript_ExplosionTaught::
 	msgbox MoveTutor_Text_ExplosionTaught, MSGBOX_DEFAULT
 	release
 	end
 
-MoveTutor_EventScript_OpenPartyMenu:: @ 82C8326
+MoveTutor_EventScript_OpenPartyMenu::
 	special ChooseMonForMoveTutor
 	waitstate
 	lock
 	faceplayer
 	return
 
-MoveTutor_EventScript_CanOnlyBeLearnedOnce:: @ 82C832D
+MoveTutor_EventScript_CanOnlyBeLearnedOnce::
 	msgbox MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
 	return

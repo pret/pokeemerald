@@ -68,7 +68,7 @@ static s16 (*const sBattleAiFuncTable[])(u8, u8, u16, s16) =
     [4] = AI_Risky,                  // AI_FLAG_RISKY
     [5] = AI_PreferStrongestMove,    // AI_FLAG_PREFER_STRONGEST_MOVE
     [6] = AI_PreferBatonPass,        // AI_FLAG_PREFER_BATON_PASS
-    [7] = AI_DoubleBattle,              // AI_FLAG_DOUBLE_BATTLE.
+    [7] = AI_DoubleBattle,           // AI_FLAG_DOUBLE_BATTLE
     [8] = AI_HPAware,                // AI_FLAG_HP_AWARE
     [9] = NULL,                      // AI_FLAG_NEGATE_UNAWARE
     [10] = NULL,                     // AI_FLAG_WILL_SUICIDE
@@ -2428,7 +2428,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (TestMoveFlags(move, FLAG_HIGH_CRIT))
             score += 2; // crit makes it more likely to make them faint
         
-        if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
+        if (GetMoveDamageResult(move) == MOVE_POWER_OTHER)
             score--;
         
         switch (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef))
@@ -2564,7 +2564,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // check specific target
     if (IsTargetingPartner(battlerAtk, battlerDef))
     {
-        if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
+        if (GetMoveDamageResult(move) == MOVE_POWER_OTHER)
         {
             // partner ability checks
             if (!partnerProtecting && gBattleMoves[move].target != MOVE_TARGET_BOTH && !DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move))
@@ -4698,7 +4698,7 @@ static s16 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     
     if (IsTargetingPartner(battlerAtk, battlerDef)
       || CountUsablePartyMons(battlerAtk) == 0
-      || GetMoveDamageResult(move) != MOVE_POWER_DISCOURAGED
+      || GetMoveDamageResult(move) != MOVE_POWER_OTHER
       || !HasMoveEffect(battlerAtk, EFFECT_BATON_PASS)
       || IsBattlerTrapped(battlerAtk, TRUE))
         return score;

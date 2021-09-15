@@ -1,4 +1,4 @@
-Std_MsgboxNPC: @ 8271315
+Std_MsgboxNPC:
 	lock
 	faceplayer
 	message 0x0
@@ -7,7 +7,7 @@ Std_MsgboxNPC: @ 8271315
 	release
 	return
 
-Std_MsgboxSign: @ 8271320
+Std_MsgboxSign:
 	lockall
 	message 0x0
 	waitmessage
@@ -15,34 +15,34 @@ Std_MsgboxSign: @ 8271320
 	releaseall
 	return
 
-Std_MsgboxDefault: @ 827132A
+Std_MsgboxDefault:
 	message 0x0
 	waitmessage
 	waitbuttonpress
 	return
 
-Std_MsgboxYesNo: @ 8271332
+Std_MsgboxYesNo:
 	message 0x0
 	waitmessage
 	yesnobox 20, 8
 	return
 
-Std_MsgboxGetPoints: @ 827133C
+Std_MsgboxGetPoints:
 	message 0x0
 	playfanfare MUS_OBTAIN_B_POINTS
 	waitfanfare
 	waitmessage
 	return
 
-Std_10: @ 8271347
+Std_10:
 	pokenavcall 0x0
 	waitmessage
 	return
 
-EventScript_UnusedReturn: @ 827134E
+EventScript_UnusedReturn:
 	return
 
-Common_EventScript_SaveGame:: @ 827134F
+Common_EventScript_SaveGame::
 	special SaveGame
 	waitstate
 	return

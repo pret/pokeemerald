@@ -1,13 +1,13 @@
-EventScript_StartTrainerApproach:: @ 8271354
+EventScript_StartTrainerApproach::
 	selectapproachingtrainer
 	lockfortrainer
-EventScript_TrainerApproach:: @ 8271356
+EventScript_TrainerApproach::
 	special PlayTrainerEncounterMusic
 	special DoTrainerApproach
 	waitstate
 	goto EventScript_ShowTrainerIntroMsg
 
-EventScript_TryDoNormalTrainerBattle:: @ 8271362
+EventScript_TryDoNormalTrainerBattle::
 	lock
 	faceplayer
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
@@ -19,10 +19,10 @@ EventScript_TryDoNormalTrainerBattle:: @ 8271362
 	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
 
-EventScript_NoNormalTrainerBattle:: @ 8271389
+EventScript_NoNormalTrainerBattle::
 	gotopostbattlescript
 
-EventScript_TryDoDoubleTrainerBattle:: @ 827138A
+EventScript_TryDoDoubleTrainerBattle::
 	lock
 	faceplayer
 	call EventScript_RevealTrainer
@@ -36,24 +36,24 @@ EventScript_TryDoDoubleTrainerBattle:: @ 827138A
 	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
 
-EventScript_NotEnoughMonsForDoubleBattle:: @ 82713BA
+EventScript_NotEnoughMonsForDoubleBattle::
 	special ShowTrainerCantBattleSpeech
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-EventScript_NoDoubleTrainerBattle:: @ 82713C1
+EventScript_NoDoubleTrainerBattle::
 	gotopostbattlescript
 
-EventScript_DoNoIntroTrainerBattle:: @ 82713C2
+EventScript_DoNoIntroTrainerBattle::
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
 	special PlayTrainerEncounterMusic
 	trainerbattlebegin
 	gotopostbattlescript
 
-EventScript_TryDoRematchBattle:: @ 82713D1
+EventScript_TryDoRematchBattle::
 	call EventScript_RevealTrainer
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare VAR_RESULT, FALSE
@@ -68,10 +68,10 @@ EventScript_TryDoRematchBattle:: @ 82713D1
 	releaseall
 	end
 
-EventScript_NoRematchTrainerBattle:: @ 82713F7
+EventScript_NoRematchTrainerBattle::
 	gotopostbattlescript
 
-EventScript_TryDoDoubleRematchBattle:: @ 82713F8
+EventScript_TryDoDoubleRematchBattle::
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_NoDoubleRematchTrainerBattle
@@ -88,26 +88,26 @@ EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	releaseall
 	end
 
-EventScript_NoDoubleRematchTrainerBattle:: @ 8271427
+EventScript_NoDoubleRematchTrainerBattle::
 	gotopostbattlescript
 
-EventScript_NotEnoughMonsForDoubleRematchBattle:: @ 8271428
+EventScript_NotEnoughMonsForDoubleRematchBattle::
 	special ShowTrainerCantBattleSpeech
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-EventScript_RevealTrainer:: @ 827142F
+EventScript_RevealTrainer::
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
 	return
 
-Movement_RevealTrainer: @ 827143A
+Movement_RevealTrainer:
 	reveal_trainer
 	step_end
 
-EventScript_ShowTrainerIntroMsg:: @ 827143C
+EventScript_ShowTrainerIntroMsg::
 	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
@@ -116,7 +116,7 @@ EventScript_ShowTrainerIntroMsg:: @ 827143C
 	goto_if_eq EventScript_TrainerApproach
 	goto EventScript_DoTrainerBattle
 
-EventScript_DoTrainerBattle:: @ 8271454
+EventScript_DoTrainerBattle::
 	trainerbattlebegin
 	@ Below battle mode check only needed in FRLG
 	specialvar VAR_RESULT, GetTrainerBattleMode
@@ -130,12 +130,12 @@ EventScript_DoTrainerBattle:: @ 8271454
 	goto_if_eq EventScript_EndTrainerBattle
 	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC
 	goto_if_eq EventScript_EndTrainerBattle
-EventScript_EndTrainerBattle:: @ 8271491
+EventScript_EndTrainerBattle::
 	gotobeatenscript
 	releaseall
 	end
 
-Std_MsgboxAutoclose:: @ 8271494
+Std_MsgboxAutoclose::
 	message 0x0
 	waitmessage
 	waitbuttonpress

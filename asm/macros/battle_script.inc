@@ -1769,6 +1769,14 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
 
+	.macro activateitemeffects battler:req
+	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
+	.endm
+	
+	.macro pickpocketsteal
+	various 0, VARIOUS_PICKPOCKET
+	.endm
+
 	.macro jumpifterrainaffected battler:req, terrainFlags:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_TERRAIN_AFFECTED
 	.4byte \terrainFlags
