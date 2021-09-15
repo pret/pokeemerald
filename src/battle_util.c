@@ -5643,7 +5643,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
         // Check heal block
         if (gStatuses3[battlerId] & STATUS3_HEAL_BLOCK)
         {
-            gStatuses3[battlerId] & ~(STATUS3_HEAL_BLOCK);
+            gStatuses3[battlerId] &= ~(STATUS3_HEAL_BLOCK);
             gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREHEALBLOCK;
             ret = TRUE;
         }

@@ -813,12 +813,12 @@
 #define B_MSG_SWITCHIN_ASONE            13
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
 
-// mental herb
-#define MULTI_CUREINFATUATION       0
-#define MULTI_CURETAUNT             1
-#define MULTI_CUREENCORE            2
-#define MULTI_CURETORMENT           3
-#define MULTI_CUREHEALBLOCK         4
-#define MULTI_CUREDISABLE           5
+// gMentalHerbCureStringIds
+#define B_MSG_MENTALHERBCURE_INFATUATION       0
+#define B_MSG_MENTALHERBCURE_TAUNT             1
+#define B_MSG_MENTALHERBCURE_ENCORE            2
+#define B_MSG_MENTALHERBCURE_TORMENT           3
+#define B_MSG_MENTALHERBCURE_HEALBLOCK         4
+#define B_MSG_MENTALHERBCURE_DISABLE           5
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H
