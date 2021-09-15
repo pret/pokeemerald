@@ -144,6 +144,7 @@ struct ProtectStruct
     u32 usedThroatChopPreventedMove:1;
     u32 micle:1;
     u32 custap:1;    // also quick claw
+    u32 touchedProtectLike:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -216,7 +217,6 @@ struct FieldTimer
     u8 mistyTerrainTimer;
     u8 electricTerrainTimer;
     u8 psychicTerrainTimer;
-    u8 echoVoiceCounter;
     u8 gravityTimer;
     u8 fairyLockTimer;
 };
@@ -491,7 +491,9 @@ struct BattleStruct
     u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // Each of mons can know max 4 moves.
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
-    u8 moneyMultiplier;
+    u8 moneyMultiplier:6;
+    u8 moneyMultiplierItem:1;
+    u8 moneyMultiplierMove:1;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
