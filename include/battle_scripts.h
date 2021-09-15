@@ -374,5 +374,7 @@ extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
 extern const u8 BattleScript_Pickpocket[];
 extern const u8 BattleScript_StickyBarbTransfer[];
 extern const u8 BattleScript_TerrainPreventsEnd2[];
+extern const u8 BattleScript_MistyTerrainPrevents[];
+extern const u8 BattleScript_ElectricTerrainPrevents[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
