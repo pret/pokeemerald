@@ -4646,7 +4646,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             {
                 if (gBattleMoves[gCurrentMove].effect == EFFECT_HIT_ESCAPE && CanBattlerSwitch(gBattlerAttacker))
                     gProtectStructs[battler].disableEjectPack = 1;  // Set flag for target
-                
+
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_WeakArmorActivates;
                 effect++;
@@ -5491,7 +5491,6 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId, bool32 end2)
 
         PREPARE_STAT_BUFFER(gBattleTextBuff1, i + 1);
         stringId = (GetBattlerAbility(battlerId) == ABILITY_CONTRARY) ? STRINGID_STATFELL : STRINGID_STATROSE;
-        
         gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
         gBattleTextBuff2[1] = B_BUFF_STRING;
         gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
@@ -5500,9 +5499,7 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId, bool32 end2)
         gBattleTextBuff2[5] = stringId;
         gBattleTextBuff2[6] = stringId >> 8;
         gBattleTextBuff2[7] = EOS;
-        
         gEffectBattler = battlerId;
-
         if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
             SET_STATCHANGER(i + 1, 4, FALSE);
         else
@@ -5510,7 +5507,6 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId, bool32 end2)
 
         gBattleScripting.animArg1 = 0x21 + i + 6;
         gBattleScripting.animArg2 = 0;
-
         if (end2)
         {
             BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
@@ -5520,6 +5516,7 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId, bool32 end2)
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_BerryStatRaiseRet;
         }
+        
         return ITEM_STATS_CHANGE;
     }
     return 0;
@@ -8992,33 +8989,25 @@ bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind)
 void BufferStatChange(u8 battlerId, u8 statId, u8 stringId)
 {
     bool8 hasContrary = (GetBattlerAbility(battlerId) == ABILITY_CONTRARY);
-    
+
     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
     if (stringId == STRINGID_STATFELL)
     {
         if (hasContrary)
-        {
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
-        }
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE)
         else
-        {
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL);
-        }
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL)
     }
     else if (stringId == STRINGID_STATROSE)
     {
         if (hasContrary)
-        {
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL);
-        }
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL)
         else
-        {
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
-        }
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE)
     }
     else
     {
-        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId);
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId)
     }
 }
 

@@ -4913,7 +4913,7 @@ static void Cmd_moveend(void)
             else
                 gBattleScripting.moveendState++;
             break;
-        case MOVEEND_KINGSROCK: // King's rock and shell bell
+        case MOVEEND_KINGSROCK: // King's rock
             // These effects will occur at each hit in a multi-strike move
             if (ItemBattleEffects(ITEMEFFECT_KINGSROCK, 0, FALSE))
                 effect = TRUE;
@@ -9499,7 +9499,6 @@ static void Cmd_forcerandomswitch(void)
             }
         }
     }
-    
 
     // Swapping pokemon happens in:
     // trainer battles
@@ -9516,7 +9515,6 @@ static void Cmd_forcerandomswitch(void)
         || redCardForcedSwitch
        )
     {    
-    
         if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
             party = gPlayerParty;
         else
