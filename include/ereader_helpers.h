@@ -15,6 +15,7 @@ struct EReaderTrainerHillSet
 {
     u8 numTrainers;
     u8 id;
+    u16 dummy; // Only read in an assert.
     u32 checksum;
     struct EReaderTrainerHillTrainer trainers[6];
     u8 unk_ec0[40];

@@ -173,7 +173,8 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
-#define VARIOUS_JUMP_IF_WEATHER_AFFECTED        105
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_JUMP_IF_WEATHER_AFFECTED        106
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -234,9 +235,10 @@
 #define MOVEEND_MIRROR_MOVE                       19
 #define MOVEEND_NEXT_TARGET                       20
 #define MOVEEND_LIFE_ORB                          21
-#define MOVEEND_DANCER                            22
-#define MOVEEND_EMERGENCY_EXIT                    23
-#define MOVEEND_CLEAR_BITS                        24
-#define MOVEEND_COUNT                             25
+#define MOVEEND_PICKPOCKET                        22
+#define MOVEEND_DANCER                            23
+#define MOVEEND_EMERGENCY_EXIT                    24
+#define MOVEEND_CLEAR_BITS                        25
+#define MOVEEND_COUNT                             26
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

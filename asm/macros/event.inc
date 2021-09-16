@@ -345,11 +345,12 @@
 	.byte 0x32
 	.endm
 
-	@ Plays the specified (song_number) song. The byte is apparently supposed to be 0x00.
-	.macro playbgm song_number:req, unknown:req
+	@ Plays the specified (song_number) song. If save_song is TRUE, the
+	@ specified (song_number) will be saved as if savebgm was called with it.
+	.macro playbgm song_number:req, save_song:req
 	.byte 0x33
 	.2byte \song_number
-	.byte \unknown
+	.byte \save_song
 	.endm
 
 	@ Saves the specified (song_number) song to be played later.
@@ -812,12 +813,12 @@
 	.byte 0x68
 	.endm
 
-	@ Ceases movement for all Objects on-screen.
+	@ Freezes all objects immediately except the player. The player is frozen once their movement is finished.
 	.macro lockall
 	.byte 0x69
 	.endm
 
-	@ If the script was called by an Object, then that Object's movement will cease.
+	@ Freezes all objects immediately except the player and the selected object. The player and selected object are frozen once their movement is finished.
 	.macro lock
 	.byte 0x6a
 	.endm

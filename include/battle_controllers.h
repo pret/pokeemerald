@@ -214,7 +214,7 @@ void BtlController_EmitChooseItem(u8 bufferId, u8* arg1);
 void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u16 abilityId, u8* arg4);
 void BtlController_EmitCmd23(u8 bufferId); // unused
 void BtlController_EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
-void BtlController_EmitExpUpdate(u8 bufferId, u8 partyId, u16 expPoints);
+void BtlController_EmitExpUpdate(u8 bufferId, u8 partyId, s32 expPoints);
 void BtlController_EmitStatusIconUpdate(u8 bufferId, u32 status1, u32 status2);
 void BtlController_EmitStatusAnimation(u8 bufferId, bool8 status2, u32 status);
 void BtlController_EmitStatusXor(u8 bufferId, u8 b); // unused
@@ -222,7 +222,7 @@ void BtlController_EmitDataTransfer(u8 bufferId, u16 size, void *data);
 void BtlController_EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, void *data); // unused
 void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *unusedDumbDataParameter); // unused
 void BtlController_EmitCmd32(u8 bufferId, u16 size, void *c); // unused
-void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2);
+void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u32 arg2);
 void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c);
 void BtlController_EmitOneReturnValue(u8 bufferId, u16 arg1);
 void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);

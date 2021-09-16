@@ -1323,6 +1323,12 @@ static bool8 Phase2_BigPokeball_Func1(struct Task *task)
     return FALSE;
 }
 
+#define SOME_VRAM_STORE(ptr, posY, posX, toStore)                       \
+{                                                                       \
+    u32 index = (posY) * 32 + posX;                                     \
+    ptr[index] = toStore;                                               \
+}
+
 static bool8 Phase2_BigPokeball_Func2(struct Task *task)
 {
     s16 i, j;
@@ -1335,7 +1341,7 @@ static bool8 Phase2_BigPokeball_Func2(struct Task *task)
     {
         for (j = 0; j < 30; j++, BigPokeballMap++)
         {
-            tilemap[i * 32 + j] = *BigPokeballMap | 0xF000;
+            SOME_VRAM_STORE(tilemap, i, j, *BigPokeballMap | 0xF000);
         }
     }
     sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
@@ -1675,12 +1681,6 @@ bool8 FldEff_Pokeball(void)
     return FALSE;
 }
 
-#define SOME_VRAM_STORE(ptr, posY, posX, toStore)                       \
-{                                                                       \
-    u32 index = (posY) * 32 + posX;                                     \
-    ptr[index] = toStore;                                               \
-}
-
 static void sub_814713C(struct Sprite *sprite)
 {
     s16 arr0[ARRAY_COUNT(sUnknown_085C8B96)];
@@ -1692,10 +1692,10 @@ static void sub_814713C(struct Sprite *sprite)
     }
     else
     {
-        if (sprite->pos1.x >= 0 && sprite->pos1.x <= DISPLAY_WIDTH)
+        if (sprite->x >= 0 && sprite->x <= DISPLAY_WIDTH)
         {
-            s16 posX = sprite->pos1.x >> 3;
-            s16 posY = sprite->pos1.y >> 3;
+            s16 posX = sprite->x >> 3;
+            s16 posY = sprite->y >> 3;
 
             if (posX != sprite->data[2])
             {
@@ -1712,8 +1712,8 @@ static void sub_814713C(struct Sprite *sprite)
                 SOME_VRAM_STORE(ptr, posY + 1, posX, 0xF001);
             }
         }
-        sprite->pos1.x += arr0[sprite->data[0]];
-        if (sprite->pos1.x < -15 || sprite->pos1.x > 255)
+        sprite->x += arr0[sprite->data[0]];
+        if (sprite->x < -15 || sprite->x > 255)
             FieldEffectStop(sprite, FLDEFF_POKEBALL);
     }
 }
@@ -2142,7 +2142,7 @@ static bool8 Phase2_Mugshot_Func2(struct Task *task)
     {
         for (j = 0; j < 32; j++, mugshotsMap++)
         {
-            tilemap[i * 32 + j] = *mugshotsMap | 0xF000;
+            SOME_VRAM_STORE(tilemap, i, j, *mugshotsMap | 0xF000);
         }
     }
 
@@ -2438,10 +2438,10 @@ static bool8 TrainerPicCb_SetSlideOffsets(struct Sprite *sprite)
 // fast slide to around middle screen
 static bool8 TrainerPicCb_Slide1(struct Sprite *sprite)
 {
-    sprite->pos1.x += sprite->sOffsetX;
-    if (sprite->sSlideTableId && sprite->pos1.x < 133)
+    sprite->x += sprite->sOffsetX;
+    if (sprite->sSlideTableId && sprite->x < 133)
         sprite->sState++;
-    else if (!sprite->sSlideTableId && sprite->pos1.x > 103)
+    else if (!sprite->sSlideTableId && sprite->x > 103)
         sprite->sState++;
     return FALSE;
 }
@@ -2450,7 +2450,7 @@ static bool8 TrainerPicCb_Slide1(struct Sprite *sprite)
 static bool8 TrainerPicCb_Slide2(struct Sprite *sprite)
 {
     sprite->sOffsetX += sprite->sOffsetX2;
-    sprite->pos1.x += sprite->sOffsetX;
+    sprite->x += sprite->sOffsetX;
     if (sprite->sOffsetX == 0)
     {
         sprite->sState++;
@@ -2464,8 +2464,8 @@ static bool8 TrainerPicCb_Slide2(struct Sprite *sprite)
 static bool8 TrainerPicCb_Slide3(struct Sprite *sprite)
 {
     sprite->sOffsetX += sprite->sOffsetX2;
-    sprite->pos1.x += sprite->sOffsetX;
-    if (sprite->pos1.x < -31 || sprite->pos1.x > 271)
+    sprite->x += sprite->sOffsetX;
+    if (sprite->x < -31 || sprite->x > 271)
         sprite->sState++;
     return FALSE;
 }
@@ -2960,17 +2960,15 @@ static bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
 
             if (sub_8149048(gUnknown_085C8D38[j / 2], &sRectangularSpiralTransition[j]))
             {
-                u32 one;
                 done = FALSE;
                 var = sRectangularSpiralTransition[j].field_2;
-                one = 1;
-                if ((j & 1) == one)
+                if ((j % 2) == 1)
                     var = 0x27D - var;
 
                 var2 = var % 32;
-                var3 = var / 32 * 32;
+                var3 = var / 32;
 
-                tilemap[var3 + var2] = 0xF002;
+                SOME_VRAM_STORE(tilemap, var3, var2, 0xF002);
             }
         }
     }
@@ -3285,8 +3283,8 @@ static bool8 Phase2_WhiteFade_Func2(struct Task *task)
     for (i = 0, posY = 0; i < 8; i++, posY += 0x14)
     {
         sprite = &gSprites[CreateInvisibleSprite(sub_8149864)];
-        sprite->pos1.x = 0xF0;
-        sprite->pos1.y = posY;
+        sprite->x = 0xF0;
+        sprite->y = posY;
         sprite->data[5] = arr1[i];
     }
     sprite->data[6]++;
@@ -3375,21 +3373,21 @@ static void sub_8149864(struct Sprite *sprite)
     else
     {
         u16 i;
-        u16* ptr1 = &gScanlineEffectRegBuffers[0][sprite->pos1.y];
-        u16* ptr2 = &gScanlineEffectRegBuffers[0][sprite->pos1.y + 160];
+        u16* ptr1 = &gScanlineEffectRegBuffers[0][sprite->y];
+        u16* ptr2 = &gScanlineEffectRegBuffers[0][sprite->y + 160];
         for (i = 0; i < 20; i++)
         {
             ptr1[i] = sprite->data[0] >> 8;
-            ptr2[i] = (u8)(sprite->pos1.x);
+            ptr2[i] = (u8)(sprite->x);
         }
-        if (sprite->pos1.x == 0 && sprite->data[0] == 0x1000)
+        if (sprite->x == 0 && sprite->data[0] == 0x1000)
             sprite->data[1] = 1;
 
-        sprite->pos1.x -= 16;
+        sprite->x -= 16;
         sprite->data[0] += 0x80;
 
-        if (sprite->pos1.x < 0)
-            sprite->pos1.x = 0;
+        if (sprite->x < 0)
+            sprite->x = 0;
         if (sprite->data[0] > 0x1000)
             sprite->data[0] = 0x1000;
 
@@ -4328,7 +4326,10 @@ static bool8 Phase2_FrontierSquaresScroll_Func5(struct Task *task)
     BlendPalettes(PALETTES_ALL, 0x10, 0);
 
     DestroyTask(FindTaskIdByFunc(task->func));
+
+#ifndef UBFIX
     task->tState++; // UB: changing value of a destroyed task
+#endif
     return FALSE;
 }
 

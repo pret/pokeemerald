@@ -670,7 +670,8 @@ static void RotatingGate_RotateInDirection(u8 gateId, u32 rotationDirection)
     }
     else
     {
-        orientation = ++orientation % GATE_ORIENTATION_MAX;
+        orientation++;
+        orientation = orientation % GATE_ORIENTATION_MAX;
     }
     RotatingGate_SetGateOrientation(gateId, orientation);
 }
@@ -754,7 +755,7 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
     sprite->data[0] = gateId;
     sprite->coordOffsetEnabled = 1;
 
-    GetMapCoordsFromSpritePos(x + deltaX, y + deltaY, &sprite->pos1.x, &sprite->pos1.y);
+    GetMapCoordsFromSpritePos(x + deltaX, y + deltaY, &sprite->x, &sprite->y);
     RotatingGate_HideGatesOutsideViewport(sprite);
     StartSpriteAffineAnim(sprite, RotatingGate_GetGateOrientation(gateId));
 
@@ -799,8 +800,8 @@ static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
     s16 x2, y2;
 
     sprite->invisible = FALSE;
-    x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
-    y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+    x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+    y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
 
     x2 = x + 0x40; // Dimensions of the rotating gate
     y2 = y + 0x40;

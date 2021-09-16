@@ -2,29 +2,29 @@
 .set LOCALID_RIVAL, 2
 .set LOCALID_BIRCH, 3
 
-EverGrandeCity_ChampionsRoom_MapScripts:: @ 82289EF
+EverGrandeCity_ChampionsRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_ChampionsRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_ChampionsRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_ChampionsRoom_OnFrame
 	.byte 0
 
-EverGrandeCity_ChampionsRoom_OnTransition: @ 82289FF
+EverGrandeCity_ChampionsRoom_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	end
 
-EverGrandeCity_ChampionsRoom_OnWarp: @ 8228A05
+EverGrandeCity_ChampionsRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
-EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth:: @ 8228A0F
+EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_ChampionsRoom_OnFrame: @ 8228A14
+EverGrandeCity_ChampionsRoom_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_EnterRoom
 	.2byte 0
 
-EverGrandeCity_ChampionsRoom_EventScript_EnterRoom:: @ 8228A1E
+EverGrandeCity_ChampionsRoom_EventScript_EnterRoom::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp4
 	waitmovement 0
@@ -36,19 +36,19 @@ EverGrandeCity_ChampionsRoom_EventScript_EnterRoom:: @ 8228A1E
     releaseall
     end
 
-EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace: @ 8228A42
+EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace:
 	walk_up
 	walk_up
 	step_end
 
-EverGrandeCity_ChampionsRoom_EventScript_Wallace:: @ 8228A45
-	playbgm MUS_ENCOUNTER_CHAMPION, 0
+EverGrandeCity_ChampionsRoom_EventScript_Wallace::
+	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
 	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_Defeated:: @ 8228A61
+EverGrandeCity_ChampionsRoom_EventScript_Defeated::
 	playse SE_DOOR
 	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, 0
 	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, 0
@@ -70,15 +70,15 @@ EverGrandeCity_ChampionsRoom_EventScript_Defeated:: @ 8228A61
 	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic:: @ 8228ABC
-	playbgm MUS_ENCOUNTER_MAY, 0
+EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic::
+	playbgm MUS_ENCOUNTER_MAY, FALSE
 	return
 
-EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic:: @ 8228AC1
-	playbgm MUS_ENCOUNTER_BRENDAN, 0
+EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic::
+	playbgm MUS_ENCOUNTER_BRENDAN, FALSE
 	return
 
-EverGrandeCity_ChampionsRoom_EventScript_MayAdvice:: @ 8228AC6
+EverGrandeCity_ChampionsRoom_EventScript_MayAdvice::
 	msgbox EverGrandeCity_ChampionsRoom_Text_MayAdvice, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
@@ -91,7 +91,7 @@ EverGrandeCity_ChampionsRoom_EventScript_MayAdvice:: @ 8228AC6
 	goto EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice:: @ 8228AFB
+EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice::
 	msgbox EverGrandeCity_ChampionsRoom_Text_BrendanAdvice, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
@@ -104,7 +104,7 @@ EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice:: @ 8228AFB
 	goto EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF:: @ 8228B30
+EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF::
 	closemessage
 	addobject LOCALID_BIRCH
 	applymovement LOCALID_BIRCH, EverGrandeCity_ChampionsRoom_Movement_BirchArrives
@@ -146,32 +146,32 @@ EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF:: @ 8228B30
 	releaseall
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations:: @ 8228BEB
+EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations::
 	msgbox EverGrandeCity_ChampionsRoom_Text_MayCongratulations, MSGBOX_DEFAULT
 	return
 
-EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations:: @ 8228BF4
+EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations::
 	msgbox EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations, MSGBOX_DEFAULT
 	return
 
-EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer:: @ 8228BFD
+EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer::
 	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth:: @ 8228C12
+EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth::
 	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth
 	waitmovement 0
 	return
 
-EverGrandeCity_ChampionsRoom_Movement_PlayerExitStart: @ 8228C1D
+EverGrandeCity_ChampionsRoom_Movement_PlayerExitStart:
 	walk_up
 	walk_up
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_PlayerExit: @ 8228C20
+EverGrandeCity_ChampionsRoom_Movement_PlayerExit:
 	walk_up
 	delay_16
 	walk_up
@@ -179,7 +179,7 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerExit: @ 8228C20
 	set_invisible
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer: @ 8228C26
+EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer:
 	walk_up
 	walk_up
 	walk_up
@@ -190,7 +190,7 @@ EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer: @ 8228C26
 	walk_in_place_fastest_right
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth: @ 8228C2F
+EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth:
 	walk_in_place_fastest_up
 	delay_16
 	walk_in_place_fastest_right
@@ -201,24 +201,24 @@ EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth: @ 8228C2F
 	delay_16
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_RivalFollows: @ 8228C38
+EverGrandeCity_ChampionsRoom_Movement_RivalFollows:
 	walk_right
 	walk_up
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_WallaceExitStart: @ 8228C3B
+EverGrandeCity_ChampionsRoom_Movement_WallaceExitStart:
 	walk_up
 	walk_up
 	walk_in_place_fastest_down
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_WallaceExit: @ 8228C3F
+EverGrandeCity_ChampionsRoom_Movement_WallaceExit:
 	walk_up
 	delay_8
 	set_invisible
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_BirchArrives: @ 8228C43
+EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
 	walk_up
 	walk_up
 	walk_up
@@ -229,7 +229,7 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives: @ 8228C43
 	walk_in_place_fastest_left
 	step_end
 
-EverGrandeCity_ChampionsRoom_Text_IntroSpeech: @ 8228C4C
+EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
 	.string "WALLACE: Welcome, {PLAYER}{KUN}.\p"
 	.string "That incident in SOOTOPOLIS CITY…\n"
 	.string "That was superb work, putting an end\l"
@@ -252,7 +252,7 @@ EverGrandeCity_ChampionsRoom_Text_IntroSpeech: @ 8228C4C
 	.string "their POKéMON in HOENN?\p"
 	.string "Show me right here and now!$"
 
-EverGrandeCity_ChampionsRoom_Text_Defeat: @ 8228EAC
+EverGrandeCity_ChampionsRoom_Text_Defeat:
 	.string "I, the CHAMPION, fall in defeat…\p"
 	.string "That was wonderful work.\n"
 	.string "You were elegant, infuriatingly so.\l"
@@ -261,7 +261,7 @@ EverGrandeCity_ChampionsRoom_Text_Defeat: @ 8228EAC
 	.string "You are a truly noble POKéMON\n"
 	.string "TRAINER!$"
 
-EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech: @ 8228F66
+EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
 	.string "WALLACE: The POKéMON you sent into\n"
 	.string "battle…\p"
 	.string "At times they danced like a spring\n"
@@ -276,29 +276,29 @@ EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech: @ 8228F66
 	.string "I now proclaim you to be the new\n"
 	.string "HOENN region…$"
 
-EverGrandeCity_ChampionsRoom_Text_MayAdvice: @ 82290CA
+EverGrandeCity_ChampionsRoom_Text_MayAdvice:
 	.string "MAY: {PLAYER}{KUN}!\p"
 	.string "Here's some advice before you challenge\n"
 	.string "the CHAMPION…$"
 
-EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver: @ 822910B
+EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver:
 	.string "MAY: Huh?\n"
 	.string "What, what, what?\p"
 	.string "{PLAYER}{KUN}…\n"
 	.string "Could it be that…\l"
 	.string "It's already over?$"
 
-EverGrandeCity_ChampionsRoom_Text_BrendanAdvice: @ 8229152
+EverGrandeCity_ChampionsRoom_Text_BrendanAdvice:
 	.string "BRENDAN: {PLAYER}!\p"
 	.string "How would you like some advice before\n"
 	.string "you challenge the CHAMPION?…$"
 
-EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon: @ 82291A2
+EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon:
 	.string "BRENDAN: {PLAYER}…\p"
 	.string "Are you trying to tell me…\n"
 	.string "You've beaten the CHAMPION?$"
 
-EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex: @ 82291E6
+EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex:
 	.string "PROF. BIRCH: See?\n"
 	.string "What did I tell you, {RIVAL}?\p"
 	.string "Didn't I tell you that you don't need\n"
@@ -314,25 +314,25 @@ EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex: @ 82291E6
 	.string "What became of your POKéDEX?\n"
 	.string "Here, let me see.$"
 
-EverGrandeCity_ChampionsRoom_Text_BirchCongratulations: @ 822934D
+EverGrandeCity_ChampionsRoom_Text_BirchCongratulations:
 	.string "PROF. BIRCH: Anyways,\n"
 	.string "congratulations!\p"
 	.string "Now, go proudly into the final room!$"
 
-EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe: @ 8229399
+EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe:
 	.string "WALLACE: {PLAYER}{KUN}…\p"
 	.string "No, let me rephrase that properly.\p"
 	.string "The new CHAMPION!\p"
 	.string "Come with me.$"
 
-EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside: @ 82293EB
+EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside:
 	.string "WALLACE: I'm sorry, but…\p"
 	.string "From here on, only those TRAINERS who\n"
 	.string "have become CHAMPIONS may enter.\p"
 	.string "You'll have to wait outside with\n"
 	.string "PROF. BIRCH.$"
 
-EverGrandeCity_ChampionsRoom_Text_MayCongratulations: @ 8229479
+EverGrandeCity_ChampionsRoom_Text_MayCongratulations:
 	.string "MAY: Groan…\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
@@ -341,7 +341,7 @@ EverGrandeCity_ChampionsRoom_Text_MayCongratulations: @ 8229479
 	.string "{PLAYER}{KUN}!\n"
 	.string "Honestly, congratulations!$"
 
-EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations: @ 82294F5
+EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations:
 	.string "BRENDAN: Whaaaat?! … … … … …\n"
 	.string "… … … … … … … …\p"
 	.string "It can't be helped if that's the rule.\p"

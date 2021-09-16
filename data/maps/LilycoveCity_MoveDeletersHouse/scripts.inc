@@ -1,9 +1,9 @@
 .set LOCALID_MOVE_DELETER, 1
 
-LilycoveCity_MoveDeletersHouse_MapScripts:: @ 821EA0A
+LilycoveCity_MoveDeletersHouse_MapScripts::
 	.byte 0
 
-LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter:: @ 821EA0B
+LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
 	lockall
 	applymovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
 	waitmovement 0
@@ -14,7 +14,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter:: @ 821EA0B
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget:: @ 821EA3B
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
@@ -40,7 +40,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget:: @ 821EA3B
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove:: @ 821EAB0
+LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove::
 	special IsLastMonThatKnowsSurf
 	compare VAR_RESULT, TRUE
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
@@ -51,62 +51,62 @@ LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove:: @ 821EAB0
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove:: @ 821EACF
+LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove::
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves:: @ 821EADC
+LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves::
 	msgbox LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain:: @ 821EAE6
+LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain::
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ComeAgain, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf:: @ 821EAF0
+LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove: @ 821EAFD
+LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove:
 	.string "Uh…\n"
 	.string "Oh, yes, I'm the MOVE DELETER.\p"
 	.string "I can make POKéMON forget their moves.\p"
 	.string "Would you like me to do that?$"
 
-LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget: @ 821EB65
+LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget:
 	.string "Which POKéMON should forget a move?$"
 
-LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten: @ 821EB89
+LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten:
 	.string "Which move should be forgotten?$"
 
-LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove: @ 821EBA9
+LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove:
 	.string "{STR_VAR_1} knows only one move\n"
 	.string "so it can't be forgotten…$"
 
-LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten: @ 821EBDA
+LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten:
 	.string "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
 	.string "That move should be forgotten?$"
 
-LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove: @ 821EC06
+LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove:
 	.string "It worked to perfection!\p"
 	.string "{STR_VAR_1} has forgotten\n"
 	.string "{STR_VAR_2} completely.$"
 
-LilycoveCity_MoveDeletersHouse_Text_ComeAgain: @ 821EC3F
+LilycoveCity_MoveDeletersHouse_Text_ComeAgain:
 	.string "Come again if there are moves that\n"
 	.string "need to be forgotten.$"
 
-LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves: @ 821EC78
+LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves:
 	.string "What?\n"
 	.string "No EGG should know any moves.$"
 
-LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf: @ 821EC9C
+LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf:
 	.string "Hm!\p"
 	.string "Your {STR_VAR_1} doesn't seem willing\n"
 	.string "to forget SURF.$"
