@@ -6350,7 +6350,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         }
         break;
     case ITEMEFFECT_KINGSROCK:
-        // occur on each hit of a multi-strike move
+        // Occur on each hit of a multi-strike move
         switch (atkHoldEffect)
         {
         case HOLD_EFFECT_FLINCH:
@@ -6383,7 +6383,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         }
         break;
     case ITEMEFFECT_LIFEORB_SHELLBELL:
-        // occur after the final hit of a multi-strike move
+        // Occur after the final hit of a multi-strike move
         switch (atkHoldEffect)
         {
         case HOLD_EFFECT_SHELL_BELL:
@@ -6401,7 +6401,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gSpecialStatuses[gBattlerTarget].dmg = 0;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ItemHealHP_Ret;
-                effect = TRUE;
+                effect = ITEM_HP_CHANGE;
             }
             break;
         case HOLD_EFFECT_LIFE_ORB:
@@ -6413,7 +6413,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 10;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
-                effect = TRUE;
+                effect = ITEM_HP_CHANGE;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ItemHurtRet;
                 gLastUsedItem = gBattleMons[gBattlerAttacker].item;
@@ -6424,7 +6424,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
              && gBattleMons[gBattlerAttacker].hp != 0
              && gBattleMoves[gCurrentMove].flags & FLAG_SOUND
              && CompareStat(gBattlerAttacker, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN)
-             && !NoAliveMonsForEitherParty())   // don't activate if battle will end
+             && !NoAliveMonsForEitherParty())   // Don't activate if battle will end
             {
                 gLastUsedItem = atkItem;
                 gBattleScripting.battler = gBattlerAttacker;
