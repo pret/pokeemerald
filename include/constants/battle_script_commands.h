@@ -173,11 +173,15 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
+<<<<<<< HEAD
 #define VARIOUS_EERIE_SPELL_PP_REDUCE           105
 #define VARIOUS_JUMP_IF_TEAM_HEALTHY            106
 #define VARIOUS_TRY_HEAL_QUARTER_HP             107
 #define VARIOUS_REMOVE_TERRAIN                  108
 #define VARIOUS_JUMP_IF_OBSTRUCT                109
+=======
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+>>>>>>> 0cd7f3ffcde00002691719ae33b4fa0516662acf
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -238,9 +242,10 @@
 #define MOVEEND_MIRROR_MOVE                       19
 #define MOVEEND_NEXT_TARGET                       20
 #define MOVEEND_LIFE_ORB                          21
-#define MOVEEND_DANCER                            22
-#define MOVEEND_EMERGENCY_EXIT                    23
-#define MOVEEND_CLEAR_BITS                        24
-#define MOVEEND_COUNT                             25
+#define MOVEEND_PICKPOCKET                        22
+#define MOVEEND_DANCER                            23
+#define MOVEEND_EMERGENCY_EXIT                    24
+#define MOVEEND_CLEAR_BITS                        25
+#define MOVEEND_COUNT                             26
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

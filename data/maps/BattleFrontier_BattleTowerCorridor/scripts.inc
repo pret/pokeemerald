@@ -1,27 +1,27 @@
 .set LOCALID_ATTENDANT, 1
 
-BattleFrontier_BattleTowerCorridor_MapScripts:: @ 8241AAA
+BattleFrontier_BattleTowerCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, BattleFrontier_BattleTowerCorridor_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerCorridor_OnFrame
 	.byte 0
 
-BattleFrontier_BattleTowerCorridor_OnLoad: @ 8241AB5
+BattleFrontier_BattleTowerCorridor_OnLoad:
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor
 	setmetatile 12, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, 0
 	setmetatile 12, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, 0
 	end
 
-BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor:: @ 8241AD3
+BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor::
 	setmetatile 15, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, 0
 	setmetatile 15, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, 0
 	end
 
-BattleFrontier_BattleTowerCorridor_OnFrame: @ 8241AE6
+BattleFrontier_BattleTowerCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor
 	.2byte 0
 
-BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor:: @ 8241AF0
+BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor::
 	setvar VAR_TEMP_0, 1
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor
@@ -30,25 +30,25 @@ BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor:: @ 8241AF0
 	waitmovement 0
 	goto BattleFrontier_BattleTowerCorridor_EventScript_WarpToBattleRoom
 
-BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor:: @ 8241B16
+BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor::
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToFarDoor
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToFarDoor
 	waitmovement 0
 
-BattleFrontier_BattleTowerCorridor_EventScript_WarpToBattleRoom:: @ 8241B27
+BattleFrontier_BattleTowerCorridor_EventScript_WarpToBattleRoom::
 	setvar VAR_TEMP_0, 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
 	waitstate
 	end
 
-BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToFarDoor: @ 8241B36
+BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToFarDoor:
 	walk_right
-BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToFarDoor: @ 8241B37
+BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToFarDoor:
 	walk_right
 	walk_right
-BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToDoor: @ 8241B39
+BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToDoor:
 	walk_right
-BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor: @ 8241B3A
+BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor:
 	walk_right
 	walk_right
 	walk_right

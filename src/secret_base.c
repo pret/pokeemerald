@@ -1074,7 +1074,7 @@ void DeleteRegistry_Yes_Callback(u8 taskId)
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     gSaveBlock1Ptr->secretBases[tSelectedBaseId].registryStatus = UNREGISTERED;
     BuildRegistryMenuItems(taskId);
-    sub_812225C(&tScrollOffset, &tSelectedRow, tMaxShownItems, tNumBases);
+    SetCursorWithinListBounds(&tScrollOffset, &tSelectedRow, tMaxShownItems, tNumBases);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }

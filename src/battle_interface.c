@@ -153,7 +153,7 @@ enum
 
 // strings
 extern const u8 gText_Slash[];
-extern const u8 gText_HighlightDarkGrey[];
+extern const u8 gText_HighlightDarkGray[];
 extern const u8 gText_DynColor2[];
 extern const u8 gText_DynColor2Male[];
 extern const u8 gText_DynColor1Female[];
@@ -850,22 +850,22 @@ static void SpriteCB_HealthBar(struct Sprite *sprite)
     switch (sprite->hBar_Data6)
     {
     case 0:
-        sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 16;
-        sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;
+        sprite->x = gSprites[healthboxSpriteId].x + 16;
+        sprite->y = gSprites[healthboxSpriteId].y;
         break;
     case 1:
-        sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 16;
-        sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;
+        sprite->x = gSprites[healthboxSpriteId].x + 16;
+        sprite->y = gSprites[healthboxSpriteId].y;
         break;
     case 2:
     default:
-        sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 8;
-        sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;
+        sprite->x = gSprites[healthboxSpriteId].x + 8;
+        sprite->y = gSprites[healthboxSpriteId].y;
         break;
     }
 
-    sprite->pos2.x = gSprites[healthboxSpriteId].pos2.x;
-    sprite->pos2.y = gSprites[healthboxSpriteId].pos2.y;
+    sprite->x2 = gSprites[healthboxSpriteId].x2;
+    sprite->y2 = gSprites[healthboxSpriteId].y2;
 }
 
 static void SpriteCB_HealthBoxOther(struct Sprite *sprite)
@@ -873,16 +873,16 @@ static void SpriteCB_HealthBoxOther(struct Sprite *sprite)
     u8 healthboxMainSpriteId = sprite->hOther_HealthBoxSpriteId;
     u8 megaSpriteId = sprite->hOther_IndicatorSpriteId;
 
-    sprite->pos1.x = gSprites[healthboxMainSpriteId].pos1.x + 64;
-    sprite->pos1.y = gSprites[healthboxMainSpriteId].pos1.y;
+    sprite->x = gSprites[healthboxMainSpriteId].x + 64;
+    sprite->y = gSprites[healthboxMainSpriteId].y;
 
-    sprite->pos2.x = gSprites[healthboxMainSpriteId].pos2.x;
-    sprite->pos2.y = gSprites[healthboxMainSpriteId].pos2.y;
+    sprite->x2 = gSprites[healthboxMainSpriteId].x2;
+    sprite->y2 = gSprites[healthboxMainSpriteId].y2;
 
     if (megaSpriteId != 0xFF)
     {
-        gSprites[megaSpriteId].pos2.x = sprite->pos2.x;
-        gSprites[megaSpriteId].pos2.y = sprite->pos2.y;
+        gSprites[megaSpriteId].x2 = sprite->x2;
+        gSprites[megaSpriteId].y2 = sprite->y2;
     }
 }
 
@@ -922,8 +922,8 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
 
 static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
 {
-    gSprites[spriteId].pos1.x = x;
-    gSprites[spriteId].pos1.y = y;
+    gSprites[spriteId].x = x;
+    gSprites[spriteId].y = y;
 }
 
 void DestoryHealthboxSprite(u8 healthboxSpriteId)
@@ -1400,12 +1400,12 @@ void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].pos1.x - DOUBLES_MEGA_TRIGGER_POS_X_SLIDE,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - DOUBLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_MEGA_TRIGGER_POS_X_SLIDE,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
         else
             gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].pos1.x - SINGLES_MEGA_TRIGGER_POS_X_SLIDE,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - SINGLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_MEGA_TRIGGER_POS_X_SLIDE,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
     }
     gSprites[gBattleStruct->mega.triggerSpriteId].tBattler = battlerId;
     gSprites[gBattleStruct->mega.triggerSpriteId].tHide = FALSE;
@@ -1435,31 +1435,31 @@ static void SpriteCb_MegaTrigger(struct Sprite *sprite)
 
     if (sprite->tHide)
     {
-        if (sprite->pos1.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xSlide)
-            sprite->pos1.x++;
+        if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xSlide)
+            sprite->x++;
 
-        if (sprite->pos1.x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xPriority)
+        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
             sprite->oam.priority = 2;
         else
             sprite->oam.priority = 1;
 
-        sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.y - yDiff;
-        sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.y - yDiff;
-        if (sprite->pos1.x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xSlide)
+        sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
+        sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
+        if (sprite->x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xSlide)
             DestroyMegaTriggerSprite();
     }
     else
     {
-        if (sprite->pos1.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xOptimal)
-            sprite->pos1.x--;
+        if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xOptimal)
+            sprite->x--;
 
-        if (sprite->pos1.x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - xPriority)
+        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
             sprite->oam.priority = 2;
         else
             sprite->oam.priority = 1;
 
-        sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.y - yDiff;
-        sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.y - yDiff;
+        sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
+        sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
     }
 }
 
@@ -1616,17 +1616,17 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
 
     summaryBarSpriteId = CreateSprite(&sStatusSummaryBarSpriteTemplates[isOpponent], bar_X, bar_Y, 10);
     SetSubspriteTables(&gSprites[summaryBarSpriteId], sStatusSummaryBar_SubspriteTable);
-    gSprites[summaryBarSpriteId].pos2.x = bar_pos2_X;
+    gSprites[summaryBarSpriteId].x2 = bar_pos2_X;
     gSprites[summaryBarSpriteId].data[0] = bar_data0;
 
     if (isOpponent)
     {
-        gSprites[summaryBarSpriteId].pos1.x -= 96;
+        gSprites[summaryBarSpriteId].x -= 96;
         gSprites[summaryBarSpriteId].oam.matrixNum = ST_OAM_HFLIP;
     }
     else
     {
-        gSprites[summaryBarSpriteId].pos1.x += 96;
+        gSprites[summaryBarSpriteId].x += 96;
     }
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1638,23 +1638,23 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
 
         if (!isOpponent)
         {
-            gSprites[ballIconSpritesIds[i]].pos2.x = 0;
-            gSprites[ballIconSpritesIds[i]].pos2.y = 0;
+            gSprites[ballIconSpritesIds[i]].x2 = 0;
+            gSprites[ballIconSpritesIds[i]].y2 = 0;
         }
 
         gSprites[ballIconSpritesIds[i]].data[0] = summaryBarSpriteId;
 
         if (!isOpponent)
         {
-            gSprites[ballIconSpritesIds[i]].pos1.x += 10 * i + 24;
+            gSprites[ballIconSpritesIds[i]].x += 10 * i + 24;
             gSprites[ballIconSpritesIds[i]].data[1] = i * 7 + 10;
-            gSprites[ballIconSpritesIds[i]].pos2.x = 120;
+            gSprites[ballIconSpritesIds[i]].x2 = 120;
         }
         else
         {
-            gSprites[ballIconSpritesIds[i]].pos1.x -= 10 * (5 - i) + 24;
+            gSprites[ballIconSpritesIds[i]].x -= 10 * (5 - i) + 24;
             gSprites[ballIconSpritesIds[i]].data[1] = (6 - i) * 7 + 10;
-            gSprites[ballIconSpritesIds[i]].pos2.x = -120;
+            gSprites[ballIconSpritesIds[i]].x2 = -120;
         }
 
         gSprites[ballIconSpritesIds[i]].data[2] = isOpponent;
@@ -1924,17 +1924,17 @@ static void sub_8073F98(u8 taskId)
 
 static void SpriteCB_StatusSummaryBar(struct Sprite *sprite)
 {
-    if (sprite->pos2.x != 0)
-        sprite->pos2.x += sprite->data[0];
+    if (sprite->x2 != 0)
+        sprite->x2 += sprite->data[0];
 }
 
 static void sub_8074090(struct Sprite *sprite)
 {
     sprite->data[1] += 32;
     if (sprite->data[0] > 0)
-        sprite->pos2.x += sprite->data[1] >> 4;
+        sprite->x2 += sprite->data[1] >> 4;
     else
-        sprite->pos2.x -= sprite->data[1] >> 4;
+        sprite->x2 -= sprite->data[1] >> 4;
     sprite->data[1] &= 0xF;
 }
 
@@ -1957,18 +1957,18 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite)
 
     if (var1 != 0)
     {
-        sprite->pos2.x += var2 >> 4;
-        if (sprite->pos2.x > 0)
-            sprite->pos2.x = 0;
+        sprite->x2 += var2 >> 4;
+        if (sprite->x2 > 0)
+            sprite->x2 = 0;
     }
     else
     {
-        sprite->pos2.x -= var2 >> 4;
-        if (sprite->pos2.x < 0)
-            sprite->pos2.x = 0;
+        sprite->x2 -= var2 >> 4;
+        if (sprite->x2 < 0)
+            sprite->x2 = 0;
     }
 
-    if (sprite->pos2.x == 0)
+    if (sprite->x2 == 0)
     {
         pan = SOUND_PAN_TARGET;
         if (var1 != 0)
@@ -1998,11 +1998,11 @@ static void sub_8074158(struct Sprite *sprite)
     var2 += 56;
     sprite->data[3] = var2 & 0xFFF0;
     if (var1 != 0)
-        sprite->pos2.x += var2 >> 4;
+        sprite->x2 += var2 >> 4;
     else
-        sprite->pos2.x -= var2 >> 4;
-    if (sprite->pos2.x + sprite->pos1.x > 248
-     || sprite->pos2.x + sprite->pos1.x < -8)
+        sprite->x2 -= var2 >> 4;
+    if (sprite->x2 + sprite->x > 248
+     || sprite->x2 + sprite->x < -8)
     {
         sprite->invisible = TRUE;
         sprite->callback = SpriteCallbackDummy;
@@ -2013,8 +2013,8 @@ static void SpriteCB_StatusSummaryBallsOnSwitchout(struct Sprite *sprite)
 {
     u8 barSpriteId = sprite->data[0];
 
-    sprite->pos2.x = gSprites[barSpriteId].pos2.x;
-    sprite->pos2.y = gSprites[barSpriteId].pos2.y;
+    sprite->x2 = gSprites[barSpriteId].x2;
+    sprite->y2 = gSprites[barSpriteId].y2;
 }
 
 static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
@@ -2028,7 +2028,7 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     if (illusionMon != NULL)
         mon = illusionMon;
 
-    StringCopy(gDisplayedStringBattle, gText_HighlightDarkGrey);
+    StringCopy(gDisplayedStringBattle, gText_HighlightDarkGray);
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
     StringGetEnd10(nickname);
     ptr = StringAppend(gDisplayedStringBattle, nickname);
@@ -3081,11 +3081,11 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     {
         if (sprite->tIsMain && ++sprite->tFrames == 4)
             PlaySE(SE_BALL_TRAY_ENTER);
-        if ((!sprite->tRightToLeft && (sprite->pos1.x -= 4) <= sprite->tOriginalX)
-            || (sprite->tRightToLeft && (sprite->pos1.x += 4) >= sprite->tOriginalX)
+        if ((!sprite->tRightToLeft && (sprite->x -= 4) <= sprite->tOriginalX)
+            || (sprite->tRightToLeft && (sprite->x += 4) >= sprite->tOriginalX)
            )
         {
-            sprite->pos1.x = sprite->tOriginalX;
+            sprite->x = sprite->tOriginalX;
             sprite->tHide = TRUE;
             sprite->tFrames = FRAMES_TO_WAIT;
         }
@@ -3094,8 +3094,8 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     {
         if (sprite->tFrames == 0)
         {
-            if ((!sprite->tRightToLeft && (sprite->pos1.x += 4) >= sprite->tOriginalX + ABILITY_POP_UP_POS_X_SLIDE)
-                ||(sprite->tRightToLeft && (sprite->pos1.x -= 4) <= sprite->tOriginalX - ABILITY_POP_UP_POS_X_SLIDE)
+            if ((!sprite->tRightToLeft && (sprite->x += 4) >= sprite->tOriginalX + ABILITY_POP_UP_POS_X_SLIDE)
+                ||(sprite->tRightToLeft && (sprite->x -= 4) <= sprite->tOriginalX - ABILITY_POP_UP_POS_X_SLIDE)
                )
             {
                 gBattleStruct->activeAbilityPopUps &= ~(gBitTable[sprite->tBattlerId]);

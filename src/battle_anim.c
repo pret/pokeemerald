@@ -2571,8 +2571,8 @@ static void sub_80A40F4(u8 taskId)
 
     newTaskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
     gTasks[newTaskId].data[t2_BATTLER_SPRITE_ID] = battlerSpriteId;
-    gTasks[newTaskId].data[1] = gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x;
-    gTasks[newTaskId].data[2] = gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y;
+    gTasks[newTaskId].data[1] = gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2;
+    gTasks[newTaskId].data[2] = gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2;
 
     if (!selfData[t1_MON_IN_BG2])
     {
@@ -2708,11 +2708,11 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
-        gBattle_BG1_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
+        gBattle_BG1_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
         if (IsContest() && IsSpeciesNotUnown(gContestResources->moveAnim->species))
             gBattle_BG1_X--;
 
-        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
+        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
         if (setSpriteInvisible)
             gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
 
@@ -2745,8 +2745,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
-        gBattle_BG2_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
-        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
+        gBattle_BG2_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
+        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
 
         if (setSpriteInvisible)
             gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
@@ -2834,8 +2834,8 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
     GetBattleAnimBg1Data(&animBg);
-    x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
-    y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
+    x = gTasks[taskId].data[1] - (gSprites[spriteId].x + gSprites[spriteId].x2);
+    y = gTasks[taskId].data[2] - (gSprites[spriteId].y + gSprites[spriteId].y2);
 
     if (gTasks[taskId].data[5] == 0)
     {

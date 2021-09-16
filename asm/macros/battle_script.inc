@@ -1769,6 +1769,14 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
 
+	.macro activateitemeffects battler:req
+	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
+	.endm
+	
+	.macro pickpocketsteal
+	various 0, VARIOUS_PICKPOCKET
+	.endm
+
 	.macro eeriespellppreduce ptr:req
 	various BS_TARGET, VARIOUS_EERIE_SPELL_PP_REDUCE
 	.4byte \ptr
