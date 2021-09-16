@@ -3418,8 +3418,8 @@ u8 AtkCanceller_UnableToUseMove(void)
                     effect = 1;
                 }
             #endif
-			gBattleStruct->atkCancellerTracker++;
-			break;
+            gBattleStruct->atkCancellerTracker++;
+            break;
         case CANCELLER_END:
             break;
         }
