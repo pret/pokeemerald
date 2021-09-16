@@ -174,6 +174,8 @@
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
 #define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_GET_ROTOTILLER_TARGETS          106
+#define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 107
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

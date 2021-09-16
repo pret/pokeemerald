@@ -7246,6 +7246,21 @@ static u32 GetHighestStatId(u32 battlerId)
     return highestId;
 }
 
+static bool32 IsRototillerAffected(u32 battlerId)
+{
+    if (!IsBattlerAlive(battlerId))
+        return FALSE;
+    if (!IsBattlerGrounded(battlerId))
+        return FALSE;   // Only grounded battlers affected
+    if (!IS_BATTLER_OF_TYPE(battlerId, TYPE_GRASS))
+        return FALSE;   // Only grass types affected
+    if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
+        return FALSE;   // Rototiller doesn't affected semi-invulnerable battlers
+    //if (!CompareStat(battlerId, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN) && !CompareStat(battlerId, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+        //return FALSE;   // Battler unaffected if atk and spatk are maxed
+    return TRUE;
+}
+
 static void Cmd_various(void)
 {
     struct Pokemon *mon;
@@ -8498,6 +8513,36 @@ static void Cmd_various(void)
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
         break;
+    case VARIOUS_GET_ROTOTILLER_TARGETS:
+        // Gets the battlers to be affected by rototiller. If there are none, print 'But it failed!'
+        {
+            u32 count = 0;
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (IsRototillerAffected(i))
+                {
+                    gSpecialStatuses[i].rototillerAffected = 1;
+                    count++;
+                }
+            }
+            
+            if (count == 0)
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Rototiller fails
+            else
+                gBattlescriptCurrInstr += 7;
+        }
+        return;
+    case VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED:
+        if (gSpecialStatuses[gActiveBattler].rototillerAffected)
+        {
+            gSpecialStatuses[gActiveBattler].rototillerAffected = 0;
+            gBattlescriptCurrInstr += 7;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Unaffected by rototiller - print STRINGID_NOEFFECTONTARGET
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
