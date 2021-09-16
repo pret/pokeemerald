@@ -10605,7 +10605,8 @@ static void Cmd_trysetperishsong(void)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
-            || gBattleMons[i].ability == ABILITY_SOUNDPROOF)
+            || gBattleMons[i].ability == ABILITY_SOUNDPROOF
+            || (GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER && IS_BATTLER_OF_TYPE(i, TYPE_DARK)))
         {
             notAffectedCount++;
         }
