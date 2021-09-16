@@ -173,15 +173,12 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
-<<<<<<< HEAD
-#define VARIOUS_EERIE_SPELL_PP_REDUCE           105
-#define VARIOUS_JUMP_IF_TEAM_HEALTHY            106
-#define VARIOUS_TRY_HEAL_QUARTER_HP             107
-#define VARIOUS_REMOVE_TERRAIN                  108
-#define VARIOUS_JUMP_IF_OBSTRUCT                109
-=======
 #define VARIOUS_MOVEEND_ITEM_EFFECTS            105
->>>>>>> 0cd7f3ffcde00002691719ae33b4fa0516662acf
+#define VARIOUS_EERIE_SPELL_PP_REDUCE           106
+#define VARIOUS_JUMP_IF_TEAM_HEALTHY            107
+#define VARIOUS_TRY_HEAL_QUARTER_HP             108
+#define VARIOUS_REMOVE_TERRAIN                  109
+#define VARIOUS_JUMP_IF_OBSTRUCT                110
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
