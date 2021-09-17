@@ -130,7 +130,7 @@
 #define B_HP_BERRIES                GEN_7 // In Gen4+, berries which restore hp activate immediately after HP drops to half. In Gen3, the effect occurs at the end of the turn.
 #define B_BERRIES_INSTANT           GEN_7 // In Gen4+, most berries activate on battle start/switch-in if applicable. In Gen3, they only activate either at the move end or turn end.
 #define B_X_ITEMS_BUFF              GEN_7 // In Gen7+, the X Items raise a stat by 2 stages instead of 1.
-#define B_MENTAL_HERB               GEN_5 // In Gen5+, mental herb cures Taunt, Encore, Heal Block, and Disable
+#define B_MENTAL_HERB               GEN_5 // In Gen5+, the Mental Herb cures Infatuation, Taunt, Encore, Torment, Heal Block, and Disable
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.

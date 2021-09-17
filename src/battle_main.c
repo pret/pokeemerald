@@ -3032,6 +3032,10 @@ void SwitchInClearSetData(void)
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = 0;
     gBattleStruct->arenaTurnCounter = 0xFF;
+    
+    // Reset damage to prevent things like red card activating if the switched-in mon is holding it
+    gSpecialStatuses[gActiveBattler].physicalDmg = 0;
+    gSpecialStatuses[gActiveBattler].specialDmg = 0;
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
@@ -3075,7 +3079,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].stealMove = 0;
     gProtectStructs[gActiveBattler].prlzImmobility = 0;
     gProtectStructs[gActiveBattler].confusionSelfDmg = 0;
-    gProtectStructs[gActiveBattler].targetNotAffected = 0;
+    gProtectStructs[gActiveBattler].targetAffected = 0;
     gProtectStructs[gActiveBattler].chargingTurn = 0;
     gProtectStructs[gActiveBattler].fleeFlag = 0;
     gProtectStructs[gActiveBattler].usedImprisonedMove = 0;

@@ -2589,7 +2589,7 @@ bool32 IsBattlerIncapacitated(u8 battler, u16 ability)
     return FALSE;
 }
 
-bool32 CanSleep(u8 battler, u16 ability)
+bool32 AI_CanSleep(u8 battler, u16 ability)
 {
     if (ability == ABILITY_INSOMNIA
       || ability == ABILITY_VITAL_SPIRIT
@@ -2603,7 +2603,7 @@ bool32 CanSleep(u8 battler, u16 ability)
 
 bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
 {
-    if (!CanSleep(battlerDef, defAbility)
+    if (!AI_CanSleep(battlerDef, defAbility)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(BATTLE_PARTNER(battlerAtk), battlerDef, partnerMove))   // shouldn't try to sleep mon that partner is trying to make sleep
@@ -2611,7 +2611,7 @@ bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, 
     return TRUE;
 }
 
-bool32 CanBePoisoned(u8 battler, u16 ability)
+bool32 AI_CanBePoisoned(u8 battler, u16 ability)
 {
     if (ability == ABILITY_IMMUNITY
       || ability == ABILITY_PASTEL_VEIL
@@ -2624,7 +2624,7 @@ bool32 CanBePoisoned(u8 battler, u16 ability)
 
 bool32 ShouldPoisonSelf(u8 battler, u16 ability)
 {
-    if (CanBePoisoned(battler, ability) && (
+    if (AI_CanBePoisoned(battler, ability) && (
      ability == ABILITY_MARVEL_SCALE
       || ability == ABILITY_POISON_HEAL
       || ability == ABILITY_QUICK_FEET
@@ -2639,7 +2639,7 @@ bool32 ShouldPoisonSelf(u8 battler, u16 ability)
 
 bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
 {
-    if (!CanBePoisoned(battlerDef, defAbility)
+    if (!AI_CanBePoisoned(battlerDef, defAbility)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(BATTLE_PARTNER(battlerAtk), battlerDef, partnerMove))
@@ -2673,7 +2673,7 @@ bool32 AI_CanParalyze(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u1
     return TRUE;
 }
 
-bool32 CanBeConfused(u8 battler, u16 ability)
+bool32 AI_CanBeConfused(u8 battler, u16 ability)
 {
     if ((gBattleMons[battler].status2 & STATUS2_CONFUSION)
       || (ability == ABILITY_OWN_TEMPO)
@@ -2684,7 +2684,7 @@ bool32 CanBeConfused(u8 battler, u16 ability)
 
 bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
 {
-    if (!CanBeConfused(battlerDef, defAbility)
+    if (!AI_CanBeConfused(battlerDef, defAbility)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
@@ -2696,7 +2696,7 @@ bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtk
     return TRUE;
 }
 
-bool32 CanBeBurned(u8 battler, u16 ability)
+bool32 AI_CanBeBurned(u8 battler, u16 ability)
 {
     if (ability == ABILITY_WATER_VEIL
       || ability == ABILITY_WATER_BUBBLE
@@ -2710,7 +2710,7 @@ bool32 CanBeBurned(u8 battler, u16 ability)
 
 bool32 ShouldBurnSelf(u8 battler, u16 ability)
 {
-    if (CanBeBurned(battler, ability) && (
+    if (AI_CanBeBurned(battler, ability) && (
      ability == ABILITY_QUICK_FEET
       || ability == ABILITY_HEATPROOF
       || ability == ABILITY_MAGIC_GUARD
@@ -2724,7 +2724,7 @@ bool32 ShouldBurnSelf(u8 battler, u16 ability)
 
 bool32 AI_CanBurn(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
 {
-    if (!CanBeBurned(battlerDef, defAbility)
+    if (!AI_CanBeBurned(battlerDef, defAbility)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(battlerAtkPartner, battlerDef, partnerMove))

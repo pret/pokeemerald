@@ -28,9 +28,10 @@
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
 #define ITEMEFFECT_MOVE_END                     0x3
-#define ITEMEFFECT_KINGSROCK_SHELLBELL          0x4
+#define ITEMEFFECT_KINGSROCK                    0x4
 #define ITEMEFFECT_TARGET                       0x5
 #define ITEMEFFECT_ORBS                         0x6
+#define ITEMEFFECT_LIFEORB_SHELLBELL            0x7
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
@@ -144,7 +145,12 @@ void TryRestoreStolenItems(void);
 bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item);
 void TrySaveExchangedItem(u8 battlerId, u16 stolenItem);
 bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
-
+u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
+bool32 IsBattlerAffectedByHazards(u8 battlerId, bool32 toxicSpikes);
+void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
+bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
+bool32 TryRoomService(u8 battlerId);
+void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
@@ -154,5 +160,13 @@ bool32 IsWorrySeedBannedAbility(u16 ability);
 bool32 IsGastroAcidBannedAbility(u16 ability);
 bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
 bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability);
+
+bool32 CanSleep(u8 battlerId);
+bool32 CanBePoisoned(u8 battlerId);
+bool32 CanBeBurned(u8 battlerId);
+bool32 CanBeParalyzed(u8 battlerId);
+bool32 CanBeFrozen(u8 battlerId);
+bool32 CanBeConfused(u8 battlerId);
+bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 
 #endif // GUARD_BATTLE_UTIL_H

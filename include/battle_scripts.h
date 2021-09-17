@@ -373,6 +373,16 @@ extern const u8 BattleScript_BattlerShookOffTaunt[];
 extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
 extern const u8 BattleScript_Pickpocket[];
 extern const u8 BattleScript_StickyBarbTransfer[];
-
+extern const u8 BattleScript_AttackerItemStatRaise[];
+extern const u8 BattleScript_RedCardActivates[];
+extern const u8 BattleScript_EjectButtonActivates[];
+extern const u8 BattleScript_EjectPackActivate_Ret[];
+extern const u8 BattleScript_EjectPackActivate_End2[];
+extern const u8 BattleScript_EjectPackActivates[];
+extern const u8 BattleScript_MentalHerbCureRet[];
+extern const u8 BattleScript_MentalHerbCureEnd2[];
+extern const u8 BattleScript_TerrainPreventsEnd2[];
+extern const u8 BattleScript_MistyTerrainPrevents[];
+extern const u8 BattleScript_ElectricTerrainPrevents[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
