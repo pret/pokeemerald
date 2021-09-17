@@ -126,7 +126,7 @@ struct ProtectStruct
     u32 stealMove:1;
     u32 prlzImmobility:1;
     u32 confusionSelfDmg:1;
-    u32 targetNotAffected:1;
+    u32 targetAffected:1;
     u32 chargingTurn:1;
     u32 fleeFlag:2; // For RunAway and Smoke Ball.
     u32 usedImprisonedMove:1;
@@ -145,6 +145,7 @@ struct ProtectStruct
     u32 micle:1;
     u32 custap:1;    // also quick claw
     u32 touchedProtectLike:1;
+    u32 disableEjectPack:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -153,6 +154,7 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
+    u8 statFell:1;
     u8 statLowered:1;
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
@@ -596,6 +598,7 @@ struct BattleStruct
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    u8 blunderPolicy:1; // should blunder policy activate
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -667,8 +670,9 @@ struct BattleScripting
     u16 moveEffect;
     u16 multihitMoveEffect;
     u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
-    bool8 fixedPopup;   // force ability popup to stick until manually called back
+    bool8 fixedPopup;   // Force ability popup to stick until manually called back
     u16 abilityPopupOverwrite;
+    u8 switchCase;  // Special switching conditions, eg. red card
 };
 
 // rom_80A5C6C
