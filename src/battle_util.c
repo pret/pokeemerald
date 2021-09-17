@@ -5626,6 +5626,61 @@ static bool32 UnnerveOn(u32 battlerId, u32 itemId)
     return FALSE;
 }
 
+static bool32 GetMentalHerbEffect(u8 battlerId)
+{
+    bool32 ret = FALSE;
+    
+    // Check infatuation
+    if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
+    {
+        gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_INFATUATION;  // STRINGID_TARGETGOTOVERINFATUATION
+        StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
+        ret = TRUE;
+    }
+    #if B_MENTAL_HERB >= GEN_5
+        // Check taunt
+        if (gDisableStructs[battlerId].tauntTimer != 0)
+        {
+            gDisableStructs[battlerId].tauntTimer = gDisableStructs[battlerId].tauntTimer2 = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_TAUNT;
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
+            ret = TRUE;
+        }
+        // Check encore
+        if (gDisableStructs[battlerId].encoreTimer != 0)
+        {
+            gDisableStructs[battlerId].encoredMove = 0;
+            gDisableStructs[battlerId].encoreTimerStartValue = gDisableStructs[battlerId].encoreTimer = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_ENCORE;   // STRINGID_PKMNENCOREENDED
+            ret = TRUE;
+        }
+        // Check torment
+        if (gBattleMons[battlerId].status2 & STATUS2_TORMENT)
+        {
+            gBattleMons[battlerId].status2 &= ~(STATUS2_TORMENT);
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_TORMENT;
+            ret = TRUE;
+        }
+        // Check heal block
+        if (gStatuses3[battlerId] & STATUS3_HEAL_BLOCK)
+        {
+            gStatuses3[battlerId] &= ~(STATUS3_HEAL_BLOCK);
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_HEALBLOCK;
+            ret = TRUE;
+        }
+        // Check disable
+        if (gDisableStructs[battlerId].disableTimer != 0)
+        {
+            gDisableStructs[battlerId].disableTimer = gDisableStructs[battlerId].disableTimerStartValue = 0;
+            gDisableStructs[battlerId].disabledMove = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_DISABLE;
+            ret = TRUE;
+        }
+    #endif
+    return ret;
+}
+
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
     int i = 0, moveType;
@@ -6119,13 +6174,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
-            case HOLD_EFFECT_CURE_ATTRACT:
-                if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
+            case HOLD_EFFECT_MENTAL_HERB:
+                if (GetMentalHerbEffect(battlerId))
                 {
-                    gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
-                    StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
-                    BattleScriptExecute(BattleScript_BerryCureChosenStatusEnd2);
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PROBLEM;
+                    gBattleScripting.savedBattler = gBattlerAttacker;
+                    gBattlerAttacker = battlerId;
+                    BattleScriptExecute(BattleScript_MentalHerbCureEnd2);
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
@@ -6270,14 +6324,13 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
-            case HOLD_EFFECT_CURE_ATTRACT:
-                if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
+            case HOLD_EFFECT_MENTAL_HERB:
+                if (GetMentalHerbEffect(battlerId))
                 {
-                    gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
-                    StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
+                    gBattleScripting.savedBattler = gBattlerAttacker;
+                    gBattlerAttacker = battlerId;
                     BattleScriptPushCursor();
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PROBLEM;
-                    gBattlescriptCurrInstr = BattleScript_BerryCureChosenStatusRet;
+                    gBattlescriptCurrInstr = BattleScript_MentalHerbCureRet;
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;

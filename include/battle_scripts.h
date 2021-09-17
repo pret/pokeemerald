@@ -379,5 +379,7 @@ extern const u8 BattleScript_EjectButtonActivates[];
 extern const u8 BattleScript_EjectPackActivate_Ret[];
 extern const u8 BattleScript_EjectPackActivate_End2[];
 extern const u8 BattleScript_EjectPackActivates[];
+extern const u8 BattleScript_MentalHerbCureRet[];
+extern const u8 BattleScript_MentalHerbCureEnd2[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

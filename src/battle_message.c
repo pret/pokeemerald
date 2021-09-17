@@ -701,9 +701,16 @@ static const u8 sText_StickyBarbTransfer[] = _("The {B_LAST_ITEM} attached itsel
 static const u8 sText_PkmnBurnHealed[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nburn was healed.");
 static const u8 sText_RedCardActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} held up its {B_LAST_ITEM}\nagainst {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_EjectButtonActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is switched\nout with the {B_LAST_ITEM}!");
+static const u8 sText_AttackerGotOverInfatuation[] =_("{B_ATK_NAME_WITH_PREFIX} got over\nits infatuation!");
+static const u8 sText_TormentedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented no more!");
+static const u8 sText_HealBlockedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is cured of\nits heal block!");
+
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_HEALBLOCKEDNOMORE - 12] = sText_HealBlockedNoMore,
+    [STRINGID_TORMENTEDNOMORE - 12] = sText_TormentedNoMore,
+    [STRINGID_ATKGOTOVERINFATUATION - 12] = sText_AttackerGotOverInfatuation,
     [STRINGID_EJECTBUTTONACTIVATE - 12] = sText_EjectButtonActivate,
     [STRINGID_REDCARDACTIVATE - 12] = sText_RedCardActivate,
     [STRINGID_PKMNBURNHEALED - 12] = sText_PkmnBurnHealed,
@@ -1266,6 +1273,16 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_AURABREAKENTERS - 12] = sText_AuraBreakActivates,
     [STRINGID_COMATOSEENTERS - 12] = sText_ComatoseActivates,
     [STRINGID_SCREENCLEANERENTERS - 12] = sText_ScreenCleanerActivates,
+};
+
+const u16 gMentalHerbCureStringIds[] = 
+{
+    [B_MSG_MENTALHERBCURE_INFATUATION] = STRINGID_ATKGOTOVERINFATUATION,
+    [B_MSG_MENTALHERBCURE_TAUNT]       = STRINGID_BUFFERENDS,
+    [B_MSG_MENTALHERBCURE_ENCORE]      = STRINGID_PKMNENCOREENDED,
+    [B_MSG_MENTALHERBCURE_TORMENT]     = STRINGID_TORMENTEDNOMORE,
+    [B_MSG_MENTALHERBCURE_HEALBLOCK]   = STRINGID_HEALBLOCKEDNOMORE,
+    [B_MSG_MENTALHERBCURE_DISABLE]     = STRINGID_PKMNMOVEDISABLEDNOMORE,
 };
 
 const u16 gTerrainStringIds[] =
