@@ -699,15 +699,20 @@ static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_P
 static const u8 sText_ItemCannotBeRemoved[] = _("{B_ATK_NAME_WITH_PREFIX}'s item cannot be removed!");
 static const u8 sText_StickyBarbTransfer[] = _("The {B_LAST_ITEM} attached itself to\n{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnBurnHealed[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nburn was healed.");
+static const u8 sText_RedCardActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} held up its {B_LAST_ITEM}\nagainst {B_ATK_NAME_WITH_PREFIX}!");
+static const u8 sText_EjectButtonActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is switched\nout with the {B_LAST_ITEM}!");
 static const u8 sText_AttackerGotOverInfatuation[] =_("{B_ATK_NAME_WITH_PREFIX} got over\nits infatuation!");
 static const u8 sText_TormentedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented no more!");
 static const u8 sText_HealBlockedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is cured of\nits heal block!");
+
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
     [STRINGID_HEALBLOCKEDNOMORE - 12] = sText_HealBlockedNoMore,
     [STRINGID_TORMENTEDNOMORE - 12] = sText_TormentedNoMore,
     [STRINGID_ATKGOTOVERINFATUATION - 12] = sText_AttackerGotOverInfatuation,
+    [STRINGID_EJECTBUTTONACTIVATE - 12] = sText_EjectButtonActivate,
+    [STRINGID_REDCARDACTIVATE - 12] = sText_RedCardActivate,
     [STRINGID_PKMNBURNHEALED - 12] = sText_PkmnBurnHealed,
     [STRINGID_STICKYBARBTRANSFER - 12] = sText_StickyBarbTransfer,
     [STRINGID_ITEMCANNOTBEREMOVED - 12] = sText_ItemCannotBeRemoved,
