@@ -178,6 +178,7 @@
 #define VARIOUS_TERRAIN_SEED                    106
 #define VARIOUS_MAKE_INVISIBLE                  107
 #define VARIOUS_ROOM_SERVICE                    108
+#define VARIOUS_JUMP_IF_TERRAIN_AFFECTED        109
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
