@@ -305,6 +305,13 @@ const union AnimCmd *const gAnims_MonPic[] =
 const bool8 SpeciesHasGenderDifference[NUM_SPECIES] =
 {
     [SPECIES_EEVEE] = TRUE,
+    [SPECIES_COMBEE] = TRUE,
+    [SPECIES_HIPPOPOTAS] = TRUE,
+    [SPECIES_HIPPOWDON] = TRUE,
+    [SPECIES_UNFEZANT] = TRUE,
+    [SPECIES_FRILLISH] = TRUE,
+    [SPECIES_JELLICENT] = TRUE,
+    [SPECIES_PYROAR] = TRUE,
 };
 
 #include "data/pokemon_graphics/front_pic_coordinates.h"

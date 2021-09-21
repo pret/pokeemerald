@@ -1268,6 +1268,8 @@ const u16 gSpeciesToNationalPokedexNum[NUM_SPECIES] = // Assigns all species to 
     [SPECIES_RATTATA_ALOLAN - 1] = NATIONAL_DEX_RATTATA,
     [SPECIES_RATICATE_ALOLAN - 1] = NATIONAL_DEX_RATICATE,
     [SPECIES_RAICHU_ALOLAN - 1] = NATIONAL_DEX_RAICHU,
+    [SPECIES_SANDSHREW_ALOLAN - 1] = NATIONAL_DEX_SANDSHREW,
+    [SPECIES_SANDSLASH_ALOLAN - 1] = NATIONAL_DEX_SANDSLASH,
     [SPECIES_VULPIX_ALOLAN - 1] = NATIONAL_DEX_VULPIX,
     [SPECIES_NINETALES_ALOLAN - 1] = NATIONAL_DEX_NINETALES,
     [SPECIES_DIGLETT_ALOLAN - 1] = NATIONAL_DEX_DIGLETT,
@@ -2451,7 +2453,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_MUSHARNA - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_PIDOVE - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_TRANQUILL - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_UNFEZANT - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_UNFEZANT - 1]      = ANIM_V_STRETCH,
     [SPECIES_BLITZLE - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ZEBSTRIKA - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ROGGENROLA - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
@@ -4353,13 +4355,11 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 u32 GetUnownSpeciesId(u32 personality)
 {
-    return GetUnownLetterByPersonality(personality) + SPECIES_UNOWN_B - 1; //TODO
-    /*
     u16 unownLetter = GetUnownLetterByPersonality(personality);
+
     if (unownLetter == 0)
         return SPECIES_UNOWN;
     return unownLetter + SPECIES_UNOWN_B - 1;
-    */
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
