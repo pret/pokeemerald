@@ -10731,7 +10731,7 @@ static void Cmd_trysetperishsong(void)
         if (gStatuses3[i] & STATUS3_PERISH_SONG
             || gBattleMons[i].ability == ABILITY_SOUNDPROOF
             || (B_PRANKSTER_DARK_TYPES >= GEN_7
-                && i != gBattlerAttacker
+                && GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker)
                 && GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
                 && IS_BATTLER_OF_TYPE(i, TYPE_DARK))
         )
