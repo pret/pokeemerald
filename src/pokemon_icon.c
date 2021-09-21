@@ -1240,6 +1240,13 @@ const u8 *const gMonIconTable[] =
 const u8 *const gMonIconTableFemale[] =
 {
     [SPECIES_EEVEE] = gMonIcon_Eevee,
+    [SPECIES_COMBEE] = gMonIcon_Combee,
+    [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
+    [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
+    [SPECIES_UNFEZANT] = gMonIcon_UnfezantF,
+    [SPECIES_FRILLISH] = gMonIcon_FrillishF,
+    [SPECIES_JELLICENT] = gMonIcon_JellicentF,
+    [SPECIES_PYROAR] = gMonIcon_PyroarF,
 };
 
 const u8 gMonIconPaletteIndices[] =
@@ -2421,6 +2428,13 @@ const u8 gMonIconPaletteIndices[] =
 const u8 gMonIconPaletteIndicesFemale[] =
 {
     [SPECIES_EEVEE] = 2,
+    [SPECIES_COMBEE] = 0,
+    [SPECIES_HIPPOPOTAS] = 1,
+    [SPECIES_HIPPOWDON] = 1,
+    [SPECIES_UNFEZANT] = 1,
+    [SPECIES_FRILLISH] = 1,
+    [SPECIES_JELLICENT] = 1,
+    [SPECIES_PYROAR] = 2,
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =
