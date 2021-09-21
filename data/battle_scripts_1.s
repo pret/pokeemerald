@@ -8153,8 +8153,8 @@ BattleScript_EjectPackActivates::
 BattleScript_DarkTypePreventsPrankster::
 	attackstring
 	ppreduce
-	pause 0x20
+	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ITDOESNTAFFECT
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd

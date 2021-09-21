@@ -5046,7 +5046,7 @@ static void Cmd_moveend(void)
                     MoveValuesCleanUp();
                     gBattleScripting.moveEffect = gBattleScripting.savedMoveEffect;
                     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
-                    gBattleStruct->atkCancellerTracker = 0; // run all cancellers on next target
+                    gBattleStruct->atkCancellerTracker = 0; // Run all cancellers on next target
                     gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
                     return;
                 }
@@ -10730,7 +10730,11 @@ static void Cmd_trysetperishsong(void)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
             || gBattleMons[i].ability == ABILITY_SOUNDPROOF
-            || (i != gBattlerAttacker && GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER && IS_BATTLER_OF_TYPE(i, TYPE_DARK)))
+            || (B_PRANKSTER_DARK_TYPES >= GEN_7
+                && i != gBattlerAttacker
+                && GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
+                && IS_BATTLER_OF_TYPE(i, TYPE_DARK))
+        )
         {
             notAffectedCount++;
         }

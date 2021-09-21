@@ -3424,7 +3424,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                   && GetBattlerAbility(gBattlerTarget) != ABILITY_MAGIC_BOUNCE) // Magic bounce will bounce back prankster'd status move instead of blocking it
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
-                        CancelMultiTurnMoves(gBattlerAttacker); // don't cancel moves that can hit two targets bc one target might not be protected
+                        CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
                     gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
                     gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
                     effect = 1;
