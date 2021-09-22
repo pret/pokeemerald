@@ -737,6 +737,8 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_LEVEL_DAMAGE:
+    case EFFECT_PSYWAVE:
+        //psywave's expected damage is equal to the user's level
         dmg = gBattleMons[battlerAtk].level;
         break;
     case EFFECT_DRAGON_RAGE:
@@ -744,16 +746,6 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_SONICBOOM:
         dmg = 20;
-        break;
-    case EFFECT_PSYWAVE:
-        {
-            u32 randDamage;
-            if (B_PSYWAVE_DMG >= GEN_6)
-                randDamage = (Random() % 101);
-            else
-                randDamage = (Random() % 11) * 10;
-            dmg = gBattleMons[battlerAtk].level * (randDamage + 50) / 100;
-        }
         break;
     //case EFFECT_METAL_BURST:
     //case EFFECT_COUNTER:
