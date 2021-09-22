@@ -4897,6 +4897,7 @@ static void HandleEndTurn_FinishBattle(void)
         {
             UndoMegaEvolution(i);
             UndoFormChange(i, B_SIDE_PLAYER, FALSE);
+            DoBurmyFormChange(i);
         }
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
