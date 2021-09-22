@@ -7935,6 +7935,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SCALD] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_6
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_THAW_USER,
+        #else
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        #endif
         .effect = EFFECT_SCALD,
         .power = 80,
         .type = TYPE_WATER,
@@ -7943,7 +7948,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_THAW_USER,
         .split = SPLIT_SPECIAL,
     },
 
