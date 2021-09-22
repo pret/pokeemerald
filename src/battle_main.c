@@ -3463,6 +3463,13 @@ static void TryDoEventsBeforeFirstTurn(void)
     if (gBattleControllerExecFlags)
         return;
 
+    // Set invalid mons as absent(for example when starting a double battle with only one pokemon).
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gBattleMons[i].hp == 0 || gBattleMons[i].species == SPECIES_NONE)
+            gAbsentBattlerFlags |= gBitTable[i];
+    }
+
     if (gBattleStruct->switchInAbilitiesCounter == 0)
     {
         for (i = 0; i < gBattlersCount; i++)
@@ -4089,10 +4096,10 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CONFIRMED_STANDBY:
-            if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) 
+            if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler])
                                                 | (0xF << 28)
-                                                | (gBitTable[gActiveBattler] << 4) 
-                                                | (gBitTable[gActiveBattler] << 8) 
+                                                | (gBitTable[gActiveBattler] << 4)
+                                                | (gBitTable[gActiveBattler] << 8)
                                                 | (gBitTable[gActiveBattler] << 12))))
             {
                 if (AllAtActionConfirmed())
@@ -4659,7 +4666,7 @@ static void CheckQuickClaw_CustapBerryActivation(void)
             }
         }
     }
-    
+
     // setup stuff before turns/actions
     TryClearRageAndFuryCutter();
     gCurrentTurnActionNumber = 0;
@@ -4896,6 +4903,7 @@ static void HandleEndTurn_FinishBattle(void)
         {
             UndoMegaEvolution(i);
             UndoFormChange(i, B_SIDE_PLAYER, FALSE);
+            DoBurmyFormChange(i);
         }
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
