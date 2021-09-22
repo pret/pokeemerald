@@ -7638,6 +7638,7 @@ BattleScript_BerryReduceDmg::
 BattleScript_PrintBerryReduceString::
 	waitmessage B_WAIT_TIME_LONG
 	printstring STRINGID_BERRYDMGREDUCES
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_BerryCureConfusionEnd2::

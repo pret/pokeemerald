@@ -1831,6 +1831,15 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     return critChance;
 }
 
+s8 GetInverseCritChance(u8 battlerAtk, u8 battlerDef, u32 move)
+{
+    s32 critChanceIndex = CalcCritChanceStage(battlerAtk, battlerDef, move, FALSE);
+    if(critChanceIndex < 0)
+        return -1;
+    else
+        return sCriticalHitChance[critChanceIndex];
+}
+
 static void Cmd_critcalc(void)
 {
     s32 critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
@@ -1979,6 +1988,15 @@ static void Cmd_multihitresultmessage(void)
         }
     }
     gBattlescriptCurrInstr++;
+
+    // Print berry reducing message after result message.
+    if (gSpecialStatuses[gBattlerTarget].berryReduced
+        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    {
+        gSpecialStatuses[gBattlerTarget].berryReduced = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_PrintBerryReduceString;
+    }
 }
 
 static void Cmd_attackanimation(void)
@@ -11317,7 +11335,7 @@ static void Cmd_setcharge(void)
 static void Cmd_callterrainattack(void) // nature power
 {
     gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-    gCurrentMove = sNaturePowerMoves[gBattleTerrain];
+    gCurrentMove = GetNaturePowerMove();
     gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
     gBattlescriptCurrInstr++;
@@ -11325,7 +11343,14 @@ static void Cmd_callterrainattack(void) // nature power
 
 u16 GetNaturePowerMove(void)
 {
-    //TODO terrain
+    if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+      return MOVE_MOONBLAST;
+    else if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+      return MOVE_THUNDERBOLT;
+    else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+      return MOVE_ENERGY_BALL;
+    else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+      return MOVE_PSYCHIC;
     return sNaturePowerMoves[gBattleTerrain];
 }
 
