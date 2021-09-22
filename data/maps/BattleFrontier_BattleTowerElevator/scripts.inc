@@ -1,15 +1,15 @@
 .set LOCALID_ATTENDANT, 1
 
-BattleFrontier_BattleTowerElevator_MapScripts:: @ 82419DB
+BattleFrontier_BattleTowerElevator_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerElevator_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerElevator_OnWarp
 	.byte 0
 
-BattleFrontier_BattleTowerElevator_OnFrame: @ 82419E6
+BattleFrontier_BattleTowerElevator_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerElevator_EventScript_EnterElevator
 	.2byte 0
 
-BattleFrontier_BattleTowerElevator_EventScript_EnterElevator:: @ 82419F0
+BattleFrontier_BattleTowerElevator_EventScript_EnterElevator::
 	setvar VAR_TEMP_0, 1
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerElevator_Movement_AttendantEnter
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_PlayerEnter
@@ -25,7 +25,7 @@ BattleFrontier_BattleTowerElevator_EventScript_EnterElevator:: @ 82419F0
 	call BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom
 	end
 
-BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom:: @ 8241A28
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
@@ -36,56 +36,56 @@ BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom:: @ 8241A28
 	call_if_eq BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti
 	return
 
-BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor:: @ 8241A55
+BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 255, 8, 1
 	waitstate
 	return
 
-BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti:: @ 8241A5F
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti::
 	goto_if_unset FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 255, 7, 2
 	waitstate
 	return
 
-BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti:: @ 8241A72
+BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 255, 7, 2
 	waitstate
 	return
 
-BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom:: @ 8241A7C
+BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 255, 10, 1
 	waitstate
 	return
 
-BattleFrontier_BattleTowerElevator_Movement_AttendantEnter: @ 8241A86
+BattleFrontier_BattleTowerElevator_Movement_AttendantEnter:
 	walk_up
 	walk_right
 	face_down
 	step_end
 
-BattleFrontier_BattleTowerElevator_Movement_PlayerEnter: @ 8241A8A
+BattleFrontier_BattleTowerElevator_Movement_PlayerEnter:
 	walk_up
 	walk_up
 	face_down
 	step_end
 
-BattleFrontier_BattleTowerElevator_Movement_AttendantExit: @ 8241A8E
+BattleFrontier_BattleTowerElevator_Movement_AttendantExit:
 	walk_down
 	walk_down
 	set_invisible
 	step_end
 
-BattleFrontier_BattleTowerElevator_Movement_PlayerExit: @ 8241A92
+BattleFrontier_BattleTowerElevator_Movement_PlayerExit:
 	walk_right
 	walk_down
 	walk_down
 	step_end
 
-BattleFrontier_BattleTowerElevator_OnWarp: @ 8241A96
+BattleFrontier_BattleTowerElevator_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth:: @ 8241AA0
+BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end

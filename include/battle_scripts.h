@@ -124,6 +124,8 @@ extern const u8 BattleScript_MoveUsedIsInLoveCantAttack[];
 extern const u8 BattleScript_NightmareTurnDmg[];
 extern const u8 BattleScript_CurseTurnDmg[];
 extern const u8 BattleScript_TargetPRLZHeal[];
+extern const u8 BattleScript_TargetWokeUp[];
+extern const u8 BattleScript_TargetBurnHeal[];
 extern const u8 BattleScript_MoveEffectSleep[];
 extern const u8 BattleScript_YawnMakesAsleep[];
 extern const u8 BattleScript_MoveEffectPoison[];
@@ -369,5 +371,18 @@ extern const u8 BattleScript_JabocaRowapBerryActivates[];
 extern const u8 BattleScript_NotAffectedAbilityPopUp[];
 extern const u8 BattleScript_BattlerShookOffTaunt[];
 extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
+extern const u8 BattleScript_Pickpocket[];
+extern const u8 BattleScript_StickyBarbTransfer[];
+extern const u8 BattleScript_AttackerItemStatRaise[];
+extern const u8 BattleScript_RedCardActivates[];
+extern const u8 BattleScript_EjectButtonActivates[];
+extern const u8 BattleScript_EjectPackActivate_Ret[];
+extern const u8 BattleScript_EjectPackActivate_End2[];
+extern const u8 BattleScript_EjectPackActivates[];
+extern const u8 BattleScript_MentalHerbCureRet[];
+extern const u8 BattleScript_MentalHerbCureEnd2[];
+extern const u8 BattleScript_TerrainPreventsEnd2[];
+extern const u8 BattleScript_MistyTerrainPrevents[];
+extern const u8 BattleScript_ElectricTerrainPrevents[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

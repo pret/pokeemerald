@@ -15,6 +15,14 @@
 
 #define MAX_CONDITION_SPARKLES 10
 
+// Window IDs for the Player PC Mailbox
+enum {
+    MAILBOXWIN_TITLE,
+    MAILBOXWIN_LIST,
+    MAILBOXWIN_OPTIONS,
+    MAILBOXWIN_COUNT
+};
+
 struct UnknownSubStruct_81D1ED4
 {
     u16 unk0;
@@ -35,12 +43,12 @@ struct ConditionGraph
     /*0x355*/ u8 state;
 };
 
-bool8 sub_81D1C44(u8 count);
-u8 sub_81D1C84(u8 a0);
-u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page);
-void sub_81D1E90(struct PlayerPCItemPageStruct *page);
-void sub_81D1EC0(void);
-void sub_81D1D04(u8 a0);
+bool8 MailboxMenu_Alloc(u8 count);
+u8 MailboxMenu_AddWindow(u8 windowIdx);
+u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page);
+void MailboxMenu_AddScrollArrows(struct PlayerPCItemPageStruct *page);
+void MailboxMenu_Free(void);
+void MailboxMenu_RemoveWindow(u8 windowIdx);
 void InitConditionGraphData(struct ConditionGraph *graph);
 void sub_81D2108(struct ConditionGraph *graph);
 void SetConditionGraphIOWindows(u8 bg);
