@@ -1405,8 +1405,17 @@ static void Cmd_attackcanceler(void)
         gProtectStructs[gBattlerTarget].bounceMove = 0;
         gProtectStructs[gBattlerTarget].usesBouncedMove = 1;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+        if (BlocksPrankster(gCurrentMove, gBattlerTarget, gBattlerAttacker))
+        {
+            // Opponent used a prankster'ed magic coat -> reflected status move should fail against a dark type attacker
+            gBattlerTarget = gBattlerAttacker;
+            gBattlescriptCurrInstr = BattleScript_MagicCoatBouncePrankster;
+        }
+        else
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+        }
         return;
     }
     else if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE

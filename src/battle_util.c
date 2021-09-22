@@ -3415,14 +3415,8 @@ u8 AtkCanceller_UnableToUseMove(void)
             break;
         case CANCELLER_PRANKSTER:
             #if B_PRANKSTER_DARK_TYPES >= GEN_7
-                if (gProtectStructs[gBattlerAttacker].pranksterElevated
-                  && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
-                  && !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)) // Don't block hazards, assist-type moves
-                  && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK)  // Only Dark types can block Prankster'e
-                  && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
-                  && !(IS_MOVE_STATUS(gCurrentMove) // Magic bounce/coat will bounce back prankster'd status move instead of blocking it
-                    && (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE || TestMoveFlags(gCurrentMove, FLAG_MAGIC_COAT_AFFECTED)))
-                  )
+                if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gBattlerTarget)
+                  && !(IS_MOVE_STATUS(gCurrentMove) && GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE))
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
                         CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
@@ -9194,4 +9188,16 @@ bool32 TryRoomService(u8 battlerId)
     {
         return FALSE;
     }
+}
+
+bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef)
+{
+    if (gProtectStructs[battlerPrankster].pranksterElevated
+      && GetBattlerSide(battlerPrankster) != GetBattlerSide(battlerDef)
+      && !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)) // Don't block hazards, assist-type moves
+      && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK)  // Only Dark types can block Prankster'ed
+      && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
+        return TRUE;
+    else
+        return FALSE;
 }

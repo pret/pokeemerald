@@ -151,6 +151,7 @@ void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
 bool32 TryRoomService(u8 battlerId);
 void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
+bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);

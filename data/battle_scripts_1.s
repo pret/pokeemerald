@@ -6169,6 +6169,17 @@ BattleScript_MagicCoatBounce::
 	setmagiccoattarget BS_ATTACKER
 	return
 
+BattleScript_MagicCoatBouncePrankster::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	printfromtable gMagicCoatBounceStringIds
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	goto BattleScript_MoveEnd
+	
 BattleScript_SnatchedMove::
 	attackstring
 	ppreduce
