@@ -3415,13 +3415,14 @@ u8 AtkCanceller_UnableToUseMove(void)
             break;
         case CANCELLER_PRANKSTER:
             #if B_PRANKSTER_DARK_TYPES >= GEN_7
-                if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
-                  && IS_MOVE_STATUS(gCurrentMove)
+                if (gProtectStructs[gBattlerAttacker].pranksterElevated
                   && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
-                  && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_OPPONENTS_FIELD)
-                  && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK)
+                  && !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)) // Don't block hazards, assist-type moves
+                  && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK)  // Only Dark types can block Prankster'e
                   && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
-                  && GetBattlerAbility(gBattlerTarget) != ABILITY_MAGIC_BOUNCE) // Magic bounce will bounce back prankster'd status move instead of blocking it
+                  && !(IS_MOVE_STATUS(gCurrentMove) // Magic bounce/coat will bounce back prankster'd status move instead of blocking it
+                    && (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE || TestMoveFlags(gCurrentMove, FLAG_MAGIC_COAT_AFFECTED)))
+                  )
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
                         CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
@@ -6853,7 +6854,11 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
         moveTarget = setTarget - 1;
     else
         moveTarget = gBattleMoves[move].target;
-
+    
+    // Special cases
+    if (move == MOVE_CURSE && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+        moveTarget = MOVE_TARGET_USER;
+    
     switch (moveTarget)
     {
     case MOVE_TARGET_SELECTED:

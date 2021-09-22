@@ -146,6 +146,7 @@ struct ProtectStruct
     u32 custap:1;    // also quick claw
     u32 touchedProtectLike:1;
     u32 disableEjectPack:1;
+    u32 pranksterElevated:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
