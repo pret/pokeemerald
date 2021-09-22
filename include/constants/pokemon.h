@@ -348,6 +348,13 @@
 
 #define EVOS_PER_MON 10
 
+// Form change types
+#define FORM_CHANGE_END       0
+#define FORM_ITEM_HOLD        1
+#define FORM_ITEM_USE         2
+#define FORM_MOVE             3
+#define FORM_WITHDRAW         4
+
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL     0
 #define EVO_MODE_TRADE      1
