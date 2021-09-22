@@ -4045,7 +4045,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 u32 opposingDef = 0, opposingSpDef = 0;
 
                 opposingBattler = BATTLE_OPPOSITE(battler);
-                for (i = 0; i < 2; opposingBattler ^= BIT_SIDE, i++)
+                for (i = 0; i < 2; opposingBattler ^= BIT_FLANK, i++)
                 {
                     if (IsBattlerAlive(opposingBattler))
                     {
@@ -4069,6 +4069,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 {
                     gBattleMons[battler].statStages[statId]++;
                     SET_STATCHANGER(statId, 1, FALSE);
+                    gBattlerAttacker = battler;
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerAbilityStatRaiseEnd3);
                     effect++;
