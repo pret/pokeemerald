@@ -1501,8 +1501,13 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sRedNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_YELLOW_NECTAR] =
@@ -1513,8 +1518,13 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sYellowNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_PINK_NECTAR] =
@@ -1525,8 +1535,13 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sPinkNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_PURPLE_NECTAR] =
@@ -1537,8 +1552,13 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sPurpleNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_RARE_BONE] =
@@ -5331,9 +5351,14 @@ const struct Item gItems[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_GRACIDEA,
         .description = sGracideaDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .pocket = POCKET_KEY_ITEMS,
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_BUG_MEMORY] =
