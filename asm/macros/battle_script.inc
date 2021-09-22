@@ -1816,11 +1816,6 @@
 	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
 	.endm
 	
-	.macro jumpifobstruct ptr:req
-	various BS_ATTACKER, VARIOUS_JUMP_IF_OBSTRUCT
-	.4byte \ptr
-	.endm
-
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

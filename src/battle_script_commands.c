@@ -1237,16 +1237,21 @@ static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
 
 bool32 IsBattlerProtected(u8 battlerId, u16 move)
 {
+    // Decorate bypasses protect and detect, but not crafty shield
+    if (move == MOVE_DECORATE)
+    {
+        if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD)
+            return TRUE;
+        else if (gProtectStructs[battlerId].protected)
+            return FALSE;
+    }
+    
     if (!(gBattleMoves[move].flags & FLAG_PROTECT_AFFECTED))
         return FALSE;
     else if (gBattleMoves[move].effect == MOVE_EFFECT_FEINT)
         return FALSE;
     else if (gProtectStructs[battlerId].protected)
-    {
-        if (move == MOVE_DECORATE && !(gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD))
-            return FALSE;   // decorate bypasses protect and detect, but not crafty shield
         return TRUE;
-    }
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD
              && gBattleMoves[move].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
         return TRUE;
@@ -4778,6 +4783,7 @@ static void Cmd_moveend(void)
                 }
                 else if (gProtectStructs[gBattlerTarget].obstructed && gCurrentMove != MOVE_SUCKER_PUNCH)
                 {
+                    gProtectStructs[gBattlerAttacker].touchedProtectLike = 0;
                     i = gBattlerAttacker;
                     gBattlerAttacker = gBattlerTarget;
                     gBattlerTarget = i; // gBattlerTarget and gBattlerAttacker are swapped in order to activate Defiant, if applicable
@@ -8697,19 +8703,6 @@ static void Cmd_various(void)
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
         break;
-    case VARIOUS_JUMP_IF_OBSTRUCT:
-        // if obstruct blocked a contact move, sharply lower defense
-        if (IsMoveMakingContact(gCurrentMove, gBattlerAttacker) && gProtectStructs[gBattlerTarget].obstructed && !IS_MOVE_STATUS(gCurrentMove))
-        {
-            SET_STATCHANGER(STAT_DEF, 2, TRUE);
-            gBattleScripting.battler = gBattlerAttacker;
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        }
-        else
-        {
-            gBattlescriptCurrInstr += 7;
-        }
-        return;
     }
 
     gBattlescriptCurrInstr += 3;

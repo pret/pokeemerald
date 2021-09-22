@@ -3093,7 +3093,6 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].usesBouncedMove = 0;
     gProtectStructs[gActiveBattler].usedGravityPreventedMove = 0;
     gProtectStructs[gActiveBattler].usedThroatChopPreventedMove = 0;
-    gProtectStructs[gActiveBattler].statFell = 0;
     gProtectStructs[gActiveBattler].statRaised = 0;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
