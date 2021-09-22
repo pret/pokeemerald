@@ -711,7 +711,8 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
 
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    s32 dmg, moveType;
+    s32 dmg, moveType, critDmg, normalDmg;
+    s8 critChance;
 
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
@@ -722,7 +723,15 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     gBattleStruct->dynamicMoveType = 0;
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
-    dmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, AI_GetIfCrit(move, battlerAtk, battlerDef), FALSE, FALSE);
+
+    critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
+    normalDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
+    critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
+
+    if(critChance == -1)
+        dmg = normalDmg;
+    else
+        dmg = (critDmg + normalDmg * (critChance - 1)) / critChance;
 
     // handle dynamic move damage
     switch (gBattleMoves[move].effect)
@@ -749,7 +758,8 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     //case EFFECT_METAL_BURST:
     //case EFFECT_COUNTER:
     default:
-        dmg *= (100 - (Random() % 10)) / 100;   // add random factor
+        //do not add the random factor, it's an average case analysis
+        //dmg *= (100 - (Random() % 10)) / 100;   // add random factor
         break;
     }
 
