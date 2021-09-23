@@ -4047,7 +4047,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 u32 opposingDef = 0, opposingSpDef = 0;
 
                 opposingBattler = BATTLE_OPPOSITE(battler);
-                for (i = 0; i < 2; opposingBattler ^= BIT_SIDE, i++)
+                for (i = 0; i < 2; opposingBattler ^= BIT_FLANK, i++)
                 {
                     if (IsBattlerAlive(opposingBattler))
                     {
@@ -4071,6 +4071,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 {
                     gBattleMons[battler].statStages[statId]++;
                     SET_STATCHANGER(statId, 1, FALSE);
+                    gBattlerAttacker = battler;
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerAbilityStatRaiseEnd3);
                     effect++;
@@ -7808,7 +7809,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
             atkStage = gBattleMons[battlerDef].statStages[STAT_SPATK];
         }
     }
-    if (gBattleMoves[move].effect == EFFECT_BODY_PRESS)
+    else if (gBattleMoves[move].effect == EFFECT_BODY_PRESS)
     {
         atkStat = gBattleMons[battlerAtk].defense;
         atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
@@ -8763,6 +8764,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
         id = i;
         if (GetMonData(&party[id], MON_DATA_SANITY_HAS_SPECIES)
             && GetMonData(&party[id], MON_DATA_HP)
+            && !GetMonData(&party[id], MON_DATA_IS_EGG)
             && &party[id] != mon
             && &party[id] != partnerMon)
         {

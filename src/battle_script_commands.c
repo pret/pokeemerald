@@ -1834,6 +1834,15 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     return critChance;
 }
 
+s8 GetInverseCritChance(u8 battlerAtk, u8 battlerDef, u32 move)
+{
+    s32 critChanceIndex = CalcCritChanceStage(battlerAtk, battlerDef, move, FALSE);
+    if(critChanceIndex < 0)
+        return -1;
+    else
+        return sCriticalHitChance[critChanceIndex];
+}
+
 static void Cmd_critcalc(void)
 {
     s32 critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
@@ -1982,6 +1991,15 @@ static void Cmd_multihitresultmessage(void)
         }
     }
     gBattlescriptCurrInstr++;
+
+    // Print berry reducing message after result message.
+    if (gSpecialStatuses[gBattlerTarget].berryReduced
+        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    {
+        gSpecialStatuses[gBattlerTarget].berryReduced = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_PrintBerryReduceString;
+    }
 }
 
 static void Cmd_attackanimation(void)
