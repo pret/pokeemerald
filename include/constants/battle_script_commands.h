@@ -179,6 +179,7 @@
 #define VARIOUS_MAKE_INVISIBLE                  107
 #define VARIOUS_ROOM_SERVICE                    108
 #define VARIOUS_JUMP_IF_TERRAIN_AFFECTED        109
+#define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       110
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

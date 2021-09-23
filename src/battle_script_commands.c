@@ -8604,6 +8604,12 @@ static void Cmd_various(void)
                 gBattlescriptCurrInstr += 11;
         }
         return;
+    case  VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
+        if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -10757,11 +10763,7 @@ static void Cmd_trysetperishsong(void)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
             || gBattleMons[i].ability == ABILITY_SOUNDPROOF
-            || (B_PRANKSTER_DARK_TYPES >= GEN_7
-                && GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker)
-                && GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
-                && IS_BATTLER_OF_TYPE(i, TYPE_DARK))
-        )
+            || BlocksPrankster(gCurrentMove, gBattlerAttacker, i))
         {
             notAffectedCount++;
         }

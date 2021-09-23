@@ -3414,17 +3414,15 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_PRANKSTER:
-            #if B_PRANKSTER_DARK_TYPES >= GEN_7
-                if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gBattlerTarget)
-                  && !(IS_MOVE_STATUS(gCurrentMove) && GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE))
-                {
-                    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
-                        CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
-                    gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
-                    gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
-                    effect = 1;
-                }
-            #endif
+            if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gBattlerTarget)
+              && !(IS_MOVE_STATUS(gCurrentMove) && GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE))
+            {
+                if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
+                    CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
+                gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
+                gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
+                effect = 1;
+            }
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_END:
@@ -9236,6 +9234,7 @@ void DoBurmyFormChange(u32 monId)
 
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef)
 {
+    #if B_PRANKSTER_DARK_TYPES >= GEN_7
     if (gProtectStructs[battlerPrankster].pranksterElevated
       && GetBattlerSide(battlerPrankster) != GetBattlerSide(battlerDef)
       && !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)) // Don't block hazards, assist-type moves
@@ -9243,5 +9242,6 @@ bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef)
       && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
         return TRUE;
     else
+    #endif
         return FALSE;
 }
