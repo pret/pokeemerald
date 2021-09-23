@@ -1797,6 +1797,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro jumpifpranksterblocked battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_PRANKSTER_BLOCKED
+	.4byte \ptr
+	.endm
+
 	.macro eeriespellppreduce ptr:req
 	various BS_TARGET, VARIOUS_EERIE_SPELL_PP_REDUCE
 	.4byte \ptr

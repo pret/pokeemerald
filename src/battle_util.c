@@ -3087,6 +3087,7 @@ enum
     CANCELLER_POWDER_MOVE,
     CANCELLER_POWDER_STATUS,
     CANCELLER_THROAT_CHOP,
+    CANCELLER_PRANKSTER,
     CANCELLER_END,
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_END2,
@@ -3410,6 +3411,18 @@ u8 AtkCanceller_UnableToUseMove(void)
                 CancelMultiTurnMoves(gBattlerAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsThroatChopPrevented;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_PRANKSTER:
+            if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gBattlerTarget)
+              && !(IS_MOVE_STATUS(gCurrentMove) && GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE))
+            {
+                if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
+                    CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
+                gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
+                gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
                 effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;
@@ -5998,6 +6011,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 break;
             case HOLD_EFFECT_EJECT_PACK:
                 if (gProtectStructs[battlerId].statFell
+                 && gProtectStructs[battlerId].disableEjectPack == 0
                  && !(gCurrentMove == MOVE_PARTING_SHOT && CanBattlerSwitch(gBattlerAttacker))) // Does not activate if attacker used Parting Shot and can switch out
                 {
                     gProtectStructs[battlerId].statFell = FALSE;
@@ -6836,7 +6850,11 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
         moveTarget = setTarget - 1;
     else
         moveTarget = gBattleMoves[move].target;
-
+    
+    // Special cases
+    if (move == MOVE_CURSE && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+        moveTarget = MOVE_TARGET_USER;
+    
     switch (moveTarget)
     {
     case MOVE_TARGET_SELECTED:
@@ -9229,4 +9247,18 @@ void DoBurmyFormChange(u32 monId)
             CalculateMonStats(&party[monId]);
         }
     }
+}
+
+bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef)
+{
+    #if B_PRANKSTER_DARK_TYPES >= GEN_7
+    if (gProtectStructs[battlerPrankster].pranksterElevated
+      && GetBattlerSide(battlerPrankster) != GetBattlerSide(battlerDef)
+      && !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)) // Don't block hazards, assist-type moves
+      && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK)  // Only Dark-types can block Prankster'd
+      && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
+        return TRUE;
+    else
+    #endif
+        return FALSE;
 }
