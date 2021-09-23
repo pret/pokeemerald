@@ -1407,7 +1407,7 @@ static void Cmd_attackcanceler(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         if (BlocksPrankster(gCurrentMove, gBattlerTarget, gBattlerAttacker))
         {
-            // Opponent used a prankster'ed magic coat -> reflected status move should fail against a dark type attacker
+            // Opponent used a prankster'd magic coat -> reflected status move should fail against a dark-type attacker
             gBattlerTarget = gBattlerAttacker;
             gBattlescriptCurrInstr = BattleScript_MagicCoatBouncePrankster;
         }
