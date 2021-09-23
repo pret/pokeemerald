@@ -3071,6 +3071,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].spikyShielded = 0;
     gProtectStructs[gActiveBattler].kingsShielded = 0;
     gProtectStructs[gActiveBattler].banefulBunkered = 0;
+    gProtectStructs[gActiveBattler].obstructed = 0;
     gProtectStructs[gActiveBattler].endured = 0;
     gProtectStructs[gActiveBattler].noValidMoves = 0;
     gProtectStructs[gActiveBattler].helpingHand = 0;
@@ -3092,6 +3093,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].usesBouncedMove = 0;
     gProtectStructs[gActiveBattler].usedGravityPreventedMove = 0;
     gProtectStructs[gActiveBattler].usedThroatChopPreventedMove = 0;
+    gProtectStructs[gActiveBattler].statRaised = 0;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -4323,6 +4325,10 @@ s8 GetMovePriority(u32 battlerId, u16 move)
     else if (GetBattlerAbility(battlerId) == ABILITY_PRANKSTER && IS_MOVE_STATUS(move))
     {
         gProtectStructs[battlerId].pranksterElevated = 1;
+        priority++;
+    }
+    else if (gBattleMoves[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battlerId))
+    {
         priority++;
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_TRIAGE)
