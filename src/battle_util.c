@@ -3500,7 +3500,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             else if (IsTwoStrikesMove(gCurrentMove))
             {
                 gMultiHitCounter = 2;
-				PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
                 if (gCurrentMove == MOVE_DRAGON_DARTS)
                 {
                     // TODO
@@ -3509,7 +3509,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_TRIPLE_KICK || gCurrentMove == MOVE_SURGING_STRIKES)
             {
                 gMultiHitCounter = 3;
-				PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
             #if B_BEAT_UP_DMG >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
@@ -3523,16 +3523,16 @@ u8 AtkCanceller_UnableToUseMove(void)
                     party = gEnemyParty;
                 
                 for (i = 0; i < PARTY_SIZE; i++)
-				{
-					if (GetMonData(&party[i], MON_DATA_HP)
-					&& GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-					&& !GetMonData(&party[i], MON_DATA_IS_EGG)
-					&& !GetMonData(&party[i], MON_DATA_STATUS))
-						gMultiHitCounter++;
-				}
+                {
+                    if (GetMonData(&party[i], MON_DATA_HP)
+                    && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+                    && !GetMonData(&party[i], MON_DATA_IS_EGG)
+                    && !GetMonData(&party[i], MON_DATA_STATUS))
+                        gMultiHitCounter++;
+                }
 
-				gBattleCommunication[0] = 0; // For later
-				PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+                gBattleCommunication[0] = 0; // For later
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
             #endif
             gBattleStruct->atkCancellerTracker++;
@@ -8309,13 +8309,13 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
 
     // Parental Bond Second Strike
-	if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 1)
-	{
-		if (B_PARENTAL_BOND_DAMAGE < GEN_7)
-			MulModifier(&finalModifier, UQ_4_12(0.5));
-		else
-			MulModifier(&finalModifier, UQ_4_12(0.25));
-	}
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 1)
+    {
+        if (B_PARENTAL_BOND_DAMAGE < GEN_7)
+            MulModifier(&finalModifier, UQ_4_12(0.5));
+        else
+            MulModifier(&finalModifier, UQ_4_12(0.25));
+    }
 
     // attacker's abilities
     switch (abilityAtk)

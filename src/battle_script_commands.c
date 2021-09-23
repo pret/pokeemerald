@@ -1729,8 +1729,8 @@ static void Cmd_accuracycheck(void)
             gBattlescriptCurrInstr += 7;
     }
     else if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 1
-		|| (gSpecialStatuses[gBattlerAttacker].multiHitOn && (gBattleMoves[move].effect != EFFECT_TRIPLE_KICK
-		|| GetBattlerAbility(gBattlerAttacker) == ABILITY_SKILL_LINK)))
+        || (gSpecialStatuses[gBattlerAttacker].multiHitOn && (gBattleMoves[move].effect != EFFECT_TRIPLE_KICK
+        || GetBattlerAbility(gBattlerAttacker) == ABILITY_SKILL_LINK)))
     {
         // No acc checks for second hit of Parental Bond or multi hit moves, except Triple Kick/Triple Axel
         gBattlescriptCurrInstr += 7;
@@ -2078,8 +2078,8 @@ static void Cmd_attackanimation(void)
     {
         if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 1) // No animation on second hit
         {
-			gBattlescriptCurrInstr++;
-			return;
+            gBattlescriptCurrInstr++;
+            return;
         }
 
         if ((gBattleMoves[gCurrentMove].target & MOVE_TARGET_BOTH
@@ -5162,9 +5162,9 @@ static void Cmd_moveend(void)
                 gBattleScripting.multihitString[4]++;
                 if (--gMultiHitCounter == 0)
                 {
-					BattleScriptPushCursor();
-					gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
-					effect = 1;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
+                    effect = 1;
                 }
                 else
                 {
@@ -5176,7 +5176,7 @@ static void Cmd_moveend(void)
                     if (gBattleMons[gBattlerAttacker].hp
                     && gBattleMons[gBattlerTarget].hp
                     && (gChosenMove == MOVE_SLEEP_TALK || !(gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP))
-					&& !(gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE))
+                    && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE))
                     {
                         if (gSpecialStatuses[gBattlerAttacker].parentalBondOn)
                             gSpecialStatuses[gBattlerAttacker].parentalBondOn--;
@@ -5187,14 +5187,14 @@ static void Cmd_moveend(void)
                         gSpecialStatuses[gBattlerAttacker].multiHitOn = TRUE;
                         MoveValuesCleanUp();
                         BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
-						gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
-						return;
+                        gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
+                        return;
                     }
                     else
                     {
                         BattleScriptPushCursor();
-						gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
-						effect = 1;
+                        gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
+                        effect = 1;
                     }
                 }
             }
@@ -13124,24 +13124,24 @@ static bool32 CriticalCapture(u32 odds)
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
 {
     if (gBattleMoves[move].split != SPLIT_STATUS && !(sForbiddenMoves[move] & FORBIDDEN_PARENTAL_BOND))
-	{
-		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-		{
-			switch (gBattleMoves[move].target)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        {
+            switch (gBattleMoves[move].target)
             {
-				case MOVE_TARGET_BOTH:
-					if (CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) >= 2) // Check for single target
-						return FALSE;
-					break;
-				case MOVE_TARGET_FOES_AND_ALLY:
-					if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) >= 2) // Count mons on both sides; ignore attacker
-						return FALSE;
-					break;
-			}
-		}
+                case MOVE_TARGET_BOTH:
+                    if (CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) >= 2) // Check for single target
+                        return FALSE;
+                    break;
+                case MOVE_TARGET_FOES_AND_ALLY:
+                    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) >= 2) // Count mons on both sides; ignore attacker
+                        return FALSE;
+                    break;
+            }
+        }
 
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	return FALSE;
+    return FALSE;
 }
