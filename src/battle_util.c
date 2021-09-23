@@ -9239,7 +9239,7 @@ bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef)
     if (gProtectStructs[battlerPrankster].pranksterElevated
       && GetBattlerSide(battlerPrankster) != GetBattlerSide(battlerDef)
       && !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)) // Don't block hazards, assist-type moves
-      && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK)  // Only Dark types can block Prankster'ed
+      && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK)  // Only Dark-types can block Prankster'd
       && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
         return TRUE;
     else
