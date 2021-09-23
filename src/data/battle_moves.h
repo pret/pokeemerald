@@ -5711,7 +5711,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .type = TYPE_FIGHTING,
         .accuracy = 90,
         .pp = 10,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
@@ -9767,8 +9767,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
@@ -9782,7 +9782,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .type = TYPE_ICE,
         .accuracy = 90,
         .pp = 10,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
@@ -10289,7 +10289,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_PHYSICAL,
     },
 
@@ -10743,7 +10743,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SNIPE_SHOT] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_SNIPE_SHOT,
         .power = 80,
         .type = TYPE_WATER,
         .accuracy = 100,
@@ -10751,7 +10751,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRIT,
         .split = SPLIT_SPECIAL,
     },
 
@@ -10940,7 +10940,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DECORATE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   // TODO .. EFFECT_DECORATE
+        .effect = EFFECT_DECORATE,
         .power = 0,
         .type = TYPE_FAIRY,
         .accuracy = 0,
@@ -10996,7 +10996,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEHEMOTH_BLADE] =
     {
-        .effect = EFFECT_HIT,   //TODO: 2x damage if dynamaxed? meh...
+        .effect = EFFECT_DYNAMAX_DOUBLE_DMG,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11010,7 +11010,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEHEMOTH_BASH] =
     {
-        .effect = EFFECT_HIT,   //TODO: 2x damage if dynamaxed? meh...
+        .effect = EFFECT_DYNAMAX_DOUBLE_DMG,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11136,7 +11136,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LIFE_DEW] =
     {
-        .effect = EFFECT_RESTORE_HP,
+        .effect = EFFECT_JUNGLE_HEALING,
         .power = 0,
         .type = TYPE_WATER,
         .accuracy = 0,
@@ -11150,7 +11150,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_OBSTRUCT] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO. EFFECT_PROTECT?
+        .effect = EFFECT_PROTECT,
         .power = 0,
         .type = TYPE_DARK,
         .accuracy = 100,
@@ -11158,7 +11158,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 4,
-        .flags = 0,
+        .flags = FLAG_PROTECTION_MOVE,
         .split = SPLIT_STATUS,
     },
 
@@ -11234,7 +11234,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STEEL_ROLLER] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_REMOVE_TERRAIN,
         .power = 130,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11290,7 +11290,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MISTY_EXPLOSION] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_EXPLOSION,
         .power = 100,
         .type = TYPE_FAIRY,
         .accuracy = 100,
@@ -11304,7 +11304,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GRASSY_GLIDE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_GRASSY_GLIDE,
         .power = 70,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -11360,12 +11360,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BURNING_JEALOUSY] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_BURN_HIT,
         .power = 70,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
@@ -11374,7 +11374,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LASH_OUT] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_LASH_OUT,
         .power = 75,
         .type = TYPE_DARK,
         .accuracy = 100,
@@ -11416,7 +11416,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_COACHING] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_COACHING,
         .power = 0,
         .type = TYPE_FIGHTING,
         .accuracy = 0,
@@ -11444,7 +11444,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TRIPLE_AXEL] =
     {
-        .effect = EFFECT_TRIPLE_KICK,   //TODO: Increase damage by 20 instead of 10
+        .effect = EFFECT_TRIPLE_KICK,
         .power = 20,
         .type = TYPE_ICE,
         .accuracy = 90,
@@ -11486,7 +11486,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_JUNGLE_HEALING] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_JUNGLE_HEALING,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,
@@ -11513,7 +11513,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SURGING_STRIKES] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Multi hit + Always Crit)
+        .effect = EFFECT_TRIPLE_HIT,
         .power = 25,
         .type = TYPE_WATER,
         .accuracy = 100,
@@ -11625,7 +11625,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_EERIE_SPELL] =
     {
-        .effect = EFFECT_HIT, // To do. It's a copy of Spite that inflicts damage and reduced the target's last move's PP by 3 instead of 4.
+        .effect = EFFECT_EERIE_SPELL,
         .power = 80,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
