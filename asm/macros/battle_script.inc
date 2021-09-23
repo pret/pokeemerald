@@ -1796,7 +1796,6 @@
 	.4byte \terrainFlags
 	.4byte \ptr
 	.endm
-	
 	.macro jumpifpranksterblocked battler:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_PRANKSTER_BLOCKED
 	.4byte \ptr
