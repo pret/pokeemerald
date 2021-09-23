@@ -217,6 +217,37 @@ static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
+static const u16 sTwoStrikeMoves[] =
+{
+    MOVE_BONEMERANG,
+    MOVE_DOUBLE_HIT,
+    MOVE_DOUBLE_IRON_BASH,
+    MOVE_DOUBLE_KICK,
+    MOVE_DRAGON_DARTS,
+    MOVE_DUAL_CHOP,
+    MOVE_DUAL_WINGBEAT,
+    MOVE_GEAR_GRIND,
+    MOVE_TWINEEDLE,
+    0xFFFF
+};
+
+static u8 CalcBeatUpPower(void)
+{
+    struct Pokemon *party;
+    u8 basePower;
+    u16 species;
+
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+    // Party slot is set in the battle script for Beat Up
+    species = GetMonData(&party[gBattleCommunication[0] - 1], MON_DATA_SPECIES);
+    basePower = (gBaseStats[species].baseAttack / 10) + 5;
+
+    return basePower;
+}
+
 bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide)
 {
     u32 ability = GetBattlerAbility(battlerAtk);
@@ -248,6 +279,7 @@ void HandleAction_UseMove(void)
     gBattleStruct->atkCancellerTracker = 0;
     gMoveResultFlags = 0;
     gMultiHitCounter = 0;
+    gBattleScripting.savedDmg = 0;
     gBattleCommunication[6] = 0;
     gBattleScripting.savedMoveEffect = 0;
     gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerAttacker);
@@ -3085,6 +3117,7 @@ enum
     CANCELLER_POWDER_MOVE,
     CANCELLER_POWDER_STATUS,
     CANCELLER_THROAT_CHOP,
+    CANCELLER_MULTIHIT_MOVES,
     CANCELLER_END,
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_END2,
@@ -3101,6 +3134,7 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_FLAGS: // flags clear
             gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_DESTINY_BOND);
             gStatuses3[gBattlerAttacker] &= ~(STATUS3_GRUDGE);
+            gBattleScripting.tripleKickPower = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_ASLEEP: // check being asleep
@@ -3410,6 +3444,95 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_MULTIHIT_MOVES:
+            if (gBattleMoves[gCurrentMove].effect == EFFECT_MULTI_HIT)
+            {
+                u16 ability = gBattleMons[gBattlerAttacker].ability;
+
+                if (ability == ABILITY_SKILL_LINK)
+                {
+                    gMultiHitCounter = 5;
+                }
+                #ifdef POKEMON_EXPANSION
+                else if (ability == ABILITY_BATTLE_BOND
+                && gCurrentMove == MOVE_WATER_SHURIKEN
+                && gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_ASH)
+                {
+                    gMultiHitCounter = 3;
+                }
+                #endif
+                else
+                {
+                    if (B_MULTI_HIT_CHANCE >= GEN_5)
+                    {
+                        // 2 and 3 hits: 33.3%
+                        // 4 and 5 hits: 16.7%
+                        gMultiHitCounter = Random() % 4;
+                        if (gMultiHitCounter > 2)
+                        {
+                            gMultiHitCounter = (Random() % 3);
+                            if (gMultiHitCounter < 2)
+                                gMultiHitCounter = 2;
+                            else
+                                gMultiHitCounter = 3;
+                        }
+                        else
+                            gMultiHitCounter += 3;
+                    }
+                    else
+                    {
+                        // 2 and 3 hits: 37.5%
+                        // 4 and 5 hits: 12.5%
+                        gMultiHitCounter = Random() % 4;
+                        if (gMultiHitCounter > 1)
+                            gMultiHitCounter = (Random() % 4) + 2;
+                        else
+                            gMultiHitCounter += 2;
+                    }
+                }
+
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+            }
+            else if (IsTwoStrikesMove(gCurrentMove))
+            {
+                gMultiHitCounter = 2;
+				PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+                if (gCurrentMove == MOVE_DRAGON_DARTS)
+                {
+                    // TODO
+                }
+            }
+            else if (gBattleMoves[gCurrentMove].effect == EFFECT_TRIPLE_KICK || gCurrentMove == MOVE_SURGING_STRIKES)
+            {
+                gMultiHitCounter = 3;
+				PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+            }
+            #if B_BEAT_UP_DMG >= GEN_5
+            else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
+            {
+                struct Pokemon* party;
+                int i;
+
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    party = gPlayerParty;
+                else
+                    party = gEnemyParty;
+                
+                for (i = 0; i < PARTY_SIZE; i++)
+				{
+					if (GetMonData(&party[i], MON_DATA_HP)
+					&& GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+					&& !GetMonData(&party[i], MON_DATA_IS_EGG)
+					&& !GetMonData(&party[i], MON_DATA_STATUS))
+						gMultiHitCounter++;
+				}
+
+				gBattleCommunication[0] = 0; // For later
+				PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+            }
+            #endif
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_END:
@@ -7466,6 +7589,11 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gBattleMoves[gLastUsedMove].effect == EFFECT_FUSION_COMBO && move != gLastUsedMove)
             basePower *= 2;
         break;
+    #if B_BEAT_UP_DMG >= GEN_5
+    case EFFECT_BEAT_UP:
+        basePower = CalcBeatUpPower();
+        break;
+    #endif
     }
 
     if (basePower == 0)
@@ -8162,6 +8290,15 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         else
             MulModifier(&finalModifier, UQ_4_12(0.5));
     }
+
+    // Parental Bond Second Strike
+	if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 1)
+	{
+		if (B_PARENTAL_BOND_DAMAGE < GEN_7)
+			MulModifier(&finalModifier, UQ_4_12(0.5));
+		else
+			MulModifier(&finalModifier, UQ_4_12(0.25));
+	}
 
     // attacker's abilities
     switch (abilityAtk)
@@ -9213,4 +9350,17 @@ void DoBurmyFormChange(u32 monId)
             CalculateMonStats(&party[monId]);
         }
     }
+}
+
+// Move Checks
+bool8 IsTwoStrikesMove(u16 move)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sTwoStrikeMoves); i++)
+    {
+        if (move == sTwoStrikeMoves[i])
+            return TRUE;
+    }
+    return FALSE;
 }

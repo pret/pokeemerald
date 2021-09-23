@@ -162,15 +162,20 @@ struct SpecialStatus
     u8 traced:1;
     u8 ppNotAffectedByPressure:1;
     u8 flag40:1;
-    u8 focusBanded:1;
+    // end of byte
+    u8 focusBanded:1; 
     u8 focusSashed:1;
     u8 sturdied:1;
     u8 stormDrainRedirected:1;
     u8 switchInAbilityDone:1;
-    u8 switchInItemDone:1;
+    u8 switchInItemDone:1; 
+    // end of byte, two bits unused
     u8 instructedChosenTarget:3;
     u8 berryReduced:1;
     u8 gemBoost:1;
+    u8 parentalBondOn:2;
+    u8 multiHitOn:1;
+    // end of byte
     u8 gemParam;
     u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
     u8 dancerUsedMove:1;

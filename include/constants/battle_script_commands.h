@@ -217,36 +217,39 @@
 #define PARTY_SCREEN_OPTIONAL (1 << 7) // Flag for first argument to openpartyscreen
 
 // cases for Cmd_moveend
-#define MOVEEND_PROTECT_LIKE_EFFECT               0
-#define MOVEEND_RAGE                              1
-#define MOVEEND_DEFROST                           2
+#define MOVEEND_SUM_DAMAGE                        0
+#define MOVEEND_PROTECT_LIKE_EFFECT               1
+#define MOVEEND_RAGE                              2
 #define MOVEEND_SYNCHRONIZE_TARGET                3
 #define MOVEEND_ABILITIES                         4
 #define MOVEEND_ABILITIES_ATTACKER                5
 #define MOVEEND_STATUS_IMMUNITY_ABILITIES         6
 #define MOVEEND_SYNCHRONIZE_ATTACKER              7
 #define MOVEEND_CHOICE_MOVE                       8
-#define MOVEEND_CHANGED_ITEMS                     9
-#define MOVEEND_ATTACKER_INVISIBLE                10
-#define MOVEEND_ATTACKER_VISIBLE                  11
-#define MOVEEND_TARGET_VISIBLE                    12
-#define MOVEEND_ITEM_EFFECTS_TARGET               13
-#define MOVEEND_MOVE_EFFECTS2                     14
-#define MOVEEND_ITEM_EFFECTS_ALL                  15
-#define MOVEEND_KINGSROCK                         16    // These item effects will occur each strike of a multi-hit move
-#define MOVEEND_SUBSTITUTE                        17
-#define MOVEEND_UPDATE_LAST_MOVES                 18
-#define MOVEEND_MIRROR_MOVE                       19
-#define MOVEEND_NEXT_TARGET                       20    // Everything up until here is handled for each strike of a multi-hit move
-#define MOVEEND_EJECT_BUTTON                      21
-#define MOVEEND_RED_CARD                          22
-#define MOVEEND_EJECT_PACK                        23
-#define MOVEEND_LIFEORB_SHELLBELL                 24    // Includes shell bell, throat spray, etc
-#define MOVEEND_PICKPOCKET                        25
-#define MOVEEND_DANCER                            26
-#define MOVEEND_EMERGENCY_EXIT                    27
-#define MOVEEND_CLEAR_BITS                        28
-#define MOVEEND_COUNT                             29
+#define MOVEEND_ATTACKER_INVISIBLE                9
+#define MOVEEND_ATTACKER_VISIBLE                  10
+#define MOVEEND_TARGET_VISIBLE                    11
+#define MOVEEND_ITEM_EFFECTS_TARGET               12
+#define MOVEEND_ITEM_EFFECTS_ALL                  13
+#define MOVEEND_KINGSROCK                         14
+#define MOVEEND_SUBSTITUTE                        15
+#define MOVEEND_UPDATE_LAST_MOVES                 16
+#define MOVEEND_MIRROR_MOVE                       17
+#define MOVEEND_NEXT_TARGET                       18    // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_MULTIHIT_MOVE                     19
+#define MOVEEND_MOVE_EFFECTS2                     20
+#define MOVEEND_RECOIL                            21
+#define MOVEEND_EJECT_BUTTON                      22
+#define MOVEEND_RED_CARD                          23
+#define MOVEEND_EJECT_PACK                        24
+#define MOVEEND_LIFEORB_SHELLBELL                 25    // Includes shell bell, throat spray, etc
+#define MOVEEND_CHANGED_ITEMS                     26
+#define MOVEEND_DEFROST                           27
+#define MOVEEND_PICKPOCKET                        28
+#define MOVEEND_DANCER                            29
+#define MOVEEND_EMERGENCY_EXIT                    30
+#define MOVEEND_CLEAR_BITS                        31
+#define MOVEEND_COUNT                             32
 
 // switch cases
 #define B_SWITCH_NORMAL     0

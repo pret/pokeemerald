@@ -152,6 +152,7 @@ bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
 bool32 TryRoomService(u8 battlerId);
 void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 void DoBurmyFormChange(u32 monId);
+bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
@@ -169,5 +170,8 @@ bool32 CanBeParalyzed(u8 battlerId);
 bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
+
+// Move checks
+bool8 IsTwoStrikesMove(u16 move);
 
 #endif // GUARD_BATTLE_UTIL_H
