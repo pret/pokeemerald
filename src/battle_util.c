@@ -5996,10 +5996,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_EJECT_PACK:
-                if (gSpecialStatuses[battlerId].statFell
+                if (gProtectStructs[battlerId].statFell
                  && !(gCurrentMove == MOVE_PARTING_SHOT && CanBattlerSwitch(gBattlerAttacker))) // Does not activate if attacker used Parting Shot and can switch out
                 {
-                    gSpecialStatuses[battlerId].statFell = FALSE;
+                    gProtectStructs[battlerId].statFell = FALSE;
                     gActiveBattler = gBattleScripting.battler = battlerId;
                     effect = ITEM_STATS_CHANGE;
                     if (moveTurn)
@@ -7468,7 +7468,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_LASH_OUT:
-        if (gSpecialStatuses[battlerAtk].statFell == 1)
+        if (gProtectStructs[battlerAtk].statFell)
             basePower *= 2;
         break;
     case EFFECT_EXPLOSION:
