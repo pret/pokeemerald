@@ -3067,31 +3067,31 @@ void FaintClearSetData(void)
 
     memset(&gDisableStructs[gActiveBattler], 0, sizeof(struct DisableStruct));
 
-    gProtectStructs[gActiveBattler].protected = 0;
-    gProtectStructs[gActiveBattler].spikyShielded = 0;
-    gProtectStructs[gActiveBattler].kingsShielded = 0;
-    gProtectStructs[gActiveBattler].banefulBunkered = 0;
-    gProtectStructs[gActiveBattler].endured = 0;
-    gProtectStructs[gActiveBattler].noValidMoves = 0;
-    gProtectStructs[gActiveBattler].helpingHand = 0;
-    gProtectStructs[gActiveBattler].bounceMove = 0;
-    gProtectStructs[gActiveBattler].stealMove = 0;
-    gProtectStructs[gActiveBattler].prlzImmobility = 0;
-    gProtectStructs[gActiveBattler].confusionSelfDmg = 0;
-    gProtectStructs[gActiveBattler].targetAffected = 0;
-    gProtectStructs[gActiveBattler].chargingTurn = 0;
+    gProtectStructs[gActiveBattler].protected = FALSE;
+    gProtectStructs[gActiveBattler].spikyShielded = FALSE;
+    gProtectStructs[gActiveBattler].kingsShielded = FALSE;
+    gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+    gProtectStructs[gActiveBattler].endured = FALSE;
+    gProtectStructs[gActiveBattler].noValidMoves = FALSE;
+    gProtectStructs[gActiveBattler].helpingHand = FALSE;
+    gProtectStructs[gActiveBattler].bounceMove = FALSE;
+    gProtectStructs[gActiveBattler].stealMove = FALSE;
+    gProtectStructs[gActiveBattler].prlzImmobility = FALSE;
+    gProtectStructs[gActiveBattler].confusionSelfDmg = FALSE;
+    gProtectStructs[gActiveBattler].targetAffected = FALSE;
+    gProtectStructs[gActiveBattler].chargingTurn = FALSE;
     gProtectStructs[gActiveBattler].fleeFlag = 0;
-    gProtectStructs[gActiveBattler].usedImprisonedMove = 0;
-    gProtectStructs[gActiveBattler].loveImmobility = 0;
-    gProtectStructs[gActiveBattler].usedDisabledMove = 0;
-    gProtectStructs[gActiveBattler].usedTauntedMove = 0;
-    gProtectStructs[gActiveBattler].flag2Unknown = 0;
-    gProtectStructs[gActiveBattler].flinchImmobility = 0;
-    gProtectStructs[gActiveBattler].notFirstStrike = 0;
-    gProtectStructs[gActiveBattler].usedHealBlockedMove = 0;
-    gProtectStructs[gActiveBattler].usesBouncedMove = 0;
-    gProtectStructs[gActiveBattler].usedGravityPreventedMove = 0;
-    gProtectStructs[gActiveBattler].usedThroatChopPreventedMove = 0;
+    gProtectStructs[gActiveBattler].usedImprisonedMove = FALSE;
+    gProtectStructs[gActiveBattler].loveImmobility = FALSE;
+    gProtectStructs[gActiveBattler].usedDisabledMove = FALSE;
+    gProtectStructs[gActiveBattler].usedTauntedMove = FALSE;
+    gProtectStructs[gActiveBattler].flag2Unknown = FALSE;
+    gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
+    gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
+    gProtectStructs[gActiveBattler].usedHealBlockedMove = FALSE;
+    gProtectStructs[gActiveBattler].usesBouncedMove = FALSE;
+    gProtectStructs[gActiveBattler].usedGravityPreventedMove = FALSE;
+    gProtectStructs[gActiveBattler].usedThroatChopPreventedMove = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -4541,10 +4541,10 @@ static void TurnValuesCleanUp(bool8 var0)
     {
         if (var0)
         {
-            gProtectStructs[gActiveBattler].protected = 0;
-            gProtectStructs[gActiveBattler].spikyShielded = 0;
-            gProtectStructs[gActiveBattler].kingsShielded = 0;
-            gProtectStructs[gActiveBattler].banefulBunkered = 0;
+            gProtectStructs[gActiveBattler].protected = FALSE;
+            gProtectStructs[gActiveBattler].spikyShielded = FALSE;
+            gProtectStructs[gActiveBattler].kingsShielded = FALSE;
+            gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
         }
         else
         {
@@ -5032,7 +5032,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
     gBattleStruct->dynamicMoveType = 0;
     gBattleStruct->ateBoost[battlerAtk] = 0;
-    gSpecialStatuses[battlerAtk].gemBoost = 0;
+    gSpecialStatuses[battlerAtk].gemBoost = FALSE;
 
     if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
     {
@@ -5126,7 +5126,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
         && moveType == ItemId_GetSecondaryId(gBattleMons[battlerAtk].item))
     {
         gSpecialStatuses[battlerAtk].gemParam = GetBattlerHoldEffectParam(battlerAtk);
-        gSpecialStatuses[battlerAtk].gemBoost = 1;
+        gSpecialStatuses[battlerAtk].gemBoost = TRUE;
     }
 }
 
