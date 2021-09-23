@@ -97,6 +97,7 @@ extern const u8 BattleScript_SelectingImprisonedMove[];
 extern const u8 BattleScript_SelectingImprisonedMoveInPalace[];
 extern const u8 BattleScript_GrudgeTakesPp[];
 extern const u8 BattleScript_MagicCoatBounce[];
+extern const u8 BattleScript_MagicCoatBouncePrankster[];
 extern const u8 BattleScript_SnatchedMove[];
 extern const u8 BattleScript_EnduredMsg[];
 extern const u8 BattleScript_OneHitKOMsg[];
@@ -384,5 +385,6 @@ extern const u8 BattleScript_MentalHerbCureEnd2[];
 extern const u8 BattleScript_TerrainPreventsEnd2[];
 extern const u8 BattleScript_MistyTerrainPrevents[];
 extern const u8 BattleScript_ElectricTerrainPrevents[];
+extern const u8 BattleScript_DarkTypePreventsPrankster[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -149,6 +149,7 @@ struct ProtectStruct
     u32 touchedProtectLike:1;
     u32 disableEjectPack:1;
     u32 statFell:1;
+    u32 pranksterElevated:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;

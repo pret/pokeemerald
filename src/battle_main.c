@@ -4302,6 +4302,7 @@ s8 GetChosenMovePriority(u32 battlerId)
 {
     u16 move;
 
+    gProtectStructs[battlerId].pranksterElevated = 0;
     if (gProtectStructs[battlerId].noValidMoves)
         move = MOVE_STRUGGLE;
     else
@@ -4323,6 +4324,7 @@ s8 GetMovePriority(u32 battlerId, u16 move)
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_PRANKSTER && IS_MOVE_STATUS(move))
     {
+        gProtectStructs[battlerId].pranksterElevated = 1;
         priority++;
     }
     else if (gBattleMoves[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battlerId))
