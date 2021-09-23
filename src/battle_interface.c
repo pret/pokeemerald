@@ -30,6 +30,7 @@
 #include "item_icon.h"
 #include "item_use.h"
 #include "item.h"
+#include "constants/items.h"
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
@@ -3175,7 +3176,11 @@ static const struct SpriteTemplate sSpriteTemplate_LastUsedBallWindow =
     .callback = SpriteCB_LastUsedBallWin
 };
 
-static const u8 sLastUsedBallWindowGfx[] = INCBIN_U8("graphics/battle_interface/last_used_ball.4bpp");
+#if B_LAST_USED_BALL_BUTTON == R_BUTTON
+    static const u8 sLastUsedBallWindowGfx[] = INCBIN_U8("graphics/battle_interface/last_used_ball_r.4bpp");
+#else
+    static const u8 sLastUsedBallWindowGfx[] = INCBIN_U8("graphics/battle_interface/last_used_ball_r.4bpp");
+#endif
 static const struct SpriteSheet sSpriteSheet_LastUsedBallWindow =
 {
     sLastUsedBallWindowGfx, sizeof(sLastUsedBallWindowGfx), LAST_BALL_WINDOW_TAG
@@ -3193,31 +3198,39 @@ static const struct SpriteSheet sSpriteSheet_LastUsedBallWindow =
 
 bool32 CanThrowLastUsedBall(void)
 {
-    return (!(CanThrowBall() != 0
-     || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-     || !CheckBagHasItem(gSaveBlock2Ptr->lastUsedBall, 1)));
+    #if B_LAST_USED_BALL == FALSE
+        return FALSE;
+    #else
+        return (!(CanThrowBall() != 0
+         || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+         || !CheckBagHasItem(gLastThrownBall, 1)));
+     #endif
 }
 
 
 void TryAddLastUsedBallItemSprites(void)
 {
-    if (gSaveBlock2Ptr->lastUsedBall != 0 && !CheckBagHasItem(gSaveBlock2Ptr->lastUsedBall, 1))
+    #if B_LAST_USED_BALL == TRUE
+    if (gLastThrownBall == 0)
+        gLastThrownBall = ITEM_POKE_BALL;
+    
+    if (gLastThrownBall != 0 && !CheckBagHasItem(gLastThrownBall, 1))
     {
         // we're out of the last used ball, so just set it to the first ball in the bag
         // we have to compact the bag first bc it is typically only compacted when you open it
         CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
-        gSaveBlock2Ptr->lastUsedBall = gBagPockets[BALLS_POCKET].itemSlots[0].itemId;
+        gLastThrownBall = gBagPockets[BALLS_POCKET].itemSlots[0].itemId;
     }
     
     if (CanThrowBall() != 0
      || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-     || !CheckBagHasItem(gSaveBlock2Ptr->lastUsedBall, 1))
+     || !CheckBagHasItem(gLastThrownBall, 1))
         return;
 
     // ball
     if (gBattleStruct->ballSpriteIds[0] == MAX_SPRITES)
     {
-        gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gSaveBlock2Ptr->lastUsedBall);
+        gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gLastThrownBall);
         gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_0;
         gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y;
         gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
@@ -3236,6 +3249,7 @@ void TryAddLastUsedBallItemSprites(void)
            LAST_USED_WIN_Y, 5);
         gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
     }
+    #endif
 }
 
 static void DestroyLastUsedBallWinGfx(struct Sprite *sprite)
@@ -3290,6 +3304,7 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
 
 static void TryHideOrRestoreLastUsedBall(u8 caseId)
 {
+    #if B_LAST_USED_BALL == TRUE
     if (gBattleStruct->ballSpriteIds[0] == MAX_SPRITES)
         return;
 
@@ -3308,18 +3323,23 @@ static void TryHideOrRestoreLastUsedBall(u8 caseId)
             gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
         break;
     }
+    #endif
 }
 
 void TryHideLastUsedBall(void)
 {
+    #if B_LAST_USED_BALL == TRUE
     TryHideOrRestoreLastUsedBall(0);
+    #endif
 }
 
 void TryRestoreLastUsedBall(void)
 {
+    #if B_LAST_USED_BALL == TRUE
     if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
         TryHideOrRestoreLastUsedBall(1);
     else
         TryAddLastUsedBallItemSprites();
+    #endif
 }
 
