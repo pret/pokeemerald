@@ -3701,7 +3701,7 @@ BattleScript_EffectPerishSong::
 BattleScript_PerishSongLoop::
 	jumpifability BS_TARGET, ABILITY_SOUNDPROOF, BattleScript_PerishSongBlocked
 	jumpifbyteequal gBattlerAttacker, gBattlerTarget, BattleScript_PerishSongLoopIncrement	@ Cannot block your own perish song
-	jumpiftargetally BattleScript_PerishSongLoopIncrement									@ Cannot block ally perish song
+	jumpiftargetally BattleScript_PerishSongLoopIncrement                                   @ Cannot block ally perish song
 	jumpifability BS_ATTACKER, ABILITY_PRANKSTER, BattleScript_PerishSongCheckPrankster
 	goto BattleScript_PerishSongLoopIncrement
 BattleScript_PerishSongCheckPrankster:
