@@ -15,7 +15,7 @@
 
 // These two are a hack to stop user input until link stuff can be
 // resolved.
-#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B 
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B
 #define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
 #define LINK_KEY_CODE_EXIT_SEAT 0x1D
 #define LINK_KEY_CODE_UNK_8 0x1E

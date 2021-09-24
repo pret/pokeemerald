@@ -9,7 +9,7 @@
     They are numbered in the order that they will be called when entering a map (from a warp or camera transition).
     NOTE: These descriptions are just of what they generally do, not what they always or have to do
 
-    3. ON_LOAD: Run after the layout is loaded (but not drawn yet). 
+    3. ON_LOAD: Run after the layout is loaded (but not drawn yet).
                 Almost exclusively used to set metatiles on the map before it's first drawn
 
     6. ON_FRAME_TABLE: Run every frame after the map has faded in, before player input is processed.

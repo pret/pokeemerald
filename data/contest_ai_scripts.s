@@ -48,7 +48,7 @@ gContestAI_ScriptsTable::
 	.4byte AI_Nothing           @ CONTEST_AI_DUMMY_25
 
 
-@ Unused. Encourages improving condition on the 1st appeal, or startling mons if the users turn is later 
+@ Unused. Encourages improving condition on the 1st appeal, or startling mons if the users turn is later
 AI_CheckTiming:
 	if_appeal_num_not_eq 0, AI_CheckTiming_SkipCondition
 	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS, AI_CheckTiming_SkipCondition
@@ -388,7 +388,7 @@ AI_CGM_AppealAsGoodAsPrevOnes_Last:
 	score +20
 	end
 
-@ Encourages move more for each opponent who will have a turn before the user 
+@ Encourages move more for each opponent who will have a turn before the user
 AI_CGM_AppealAsGoodAsPrevOne:
 	if_user_order_eq MON_1, AI_CGM_AppealAsGoodAsPrevOne_1stUp
 	if_user_order_eq MON_2, AI_CGM_AppealAsGoodAsPrevOne_2ndUp
@@ -456,7 +456,7 @@ AI_CGM_BetterWhenAudienceExcited_Not1stUp:
 	score +10
 	end
 
-@ Encourage move more for each condition star the prev mons have 
+@ Encourage move more for each condition star the prev mons have
 AI_CGM_WorsenConditionOfPrevMons:
 	if_user_order_eq MON_1, AI_CGM_End
 	goto AI_CGM_WorsenConditionOfPrevMons_CheckMon1

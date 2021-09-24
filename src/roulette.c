@@ -148,7 +148,7 @@
 #define GFXTAG_SHADOW 14
 
 // 2 different Roulette tables with 2 different rates (normal vs service day special)
-// & 1 gets which table, >> 7 gets if ROULETTE_SPECIAL_RATE is set 
+// & 1 gets which table, >> 7 gets if ROULETTE_SPECIAL_RATE is set
 #define GET_MIN_BET_ID(var)(((var) & 1) + (((var) >> 7) * 2))
 
 // Having Shroomish or Taillow in the party can make rolls more consistent in length
@@ -1448,7 +1448,7 @@ static void ProcessBetGridInput(u8 taskId)
         RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
         sRoulette->flashUtil.palettes[FLASH_ICON].available = sRoulette->flashUtil.palettes[FLASH_ICON_2].available = sRoulette->flashUtil.palettes[FLASH_ICON_3].available = FALSE;
         FlashSelectionOnWheel(gTasks[taskId].tSelectionId);
-        
+
         // Switch all the poke (column) headers to gray outlines
         for (i = 0; i < NUM_BOARD_POKES; i++)
         {
@@ -1568,11 +1568,11 @@ static u8 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
             else
                 return 1;
         }
-        else if (!(rand & 3)) 
+        else if (!(rand & 3))
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow / 2;
         }
-        else 
+        else
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow;
         }
@@ -1586,11 +1586,11 @@ static u8 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
             else
                 return 1;
         }
-        else if ((rand & 1) && ballNum > BALLS_PER_ROUND) 
+        else if ((rand & 1) && ballNum > BALLS_PER_ROUND)
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow / 4;
         }
-        else 
+        else
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow / 2;
         }
@@ -2060,14 +2060,14 @@ static u8 RecordHit(u8 taskId, u8 slotId)
 {
     u8 i, j;
     u32 columnFlags[NUM_BOARD_POKES] = {
-        F_WYNAUT_COL | F_ORANGE_WYNAUT | F_GREEN_WYNAUT | F_PURPLE_WYNAUT, 
-        F_AZURILL_COL | F_ORANGE_AZURILL | F_GREEN_AZURILL | F_PURPLE_AZURILL, 
-        F_SKITTY_COL | F_ORANGE_SKITTY | F_GREEN_SKITTY | F_PURPLE_SKITTY, 
+        F_WYNAUT_COL | F_ORANGE_WYNAUT | F_GREEN_WYNAUT | F_PURPLE_WYNAUT,
+        F_AZURILL_COL | F_ORANGE_AZURILL | F_GREEN_AZURILL | F_PURPLE_AZURILL,
+        F_SKITTY_COL | F_ORANGE_SKITTY | F_GREEN_SKITTY | F_PURPLE_SKITTY,
         F_MAKUHITA_COL | F_ORANGE_MAKUHITA | F_GREEN_MAKUHITA | F_PURPLE_MAKUHITA
     };
     u32 rowFlags[NUM_BOARD_COLORS] = {
-        F_ORANGE_ROW | F_ORANGE_WYNAUT | F_ORANGE_AZURILL | F_ORANGE_SKITTY | F_ORANGE_MAKUHITA, 
-        F_GREEN_ROW | F_GREEN_WYNAUT | F_GREEN_AZURILL | F_GREEN_SKITTY | F_GREEN_MAKUHITA, 
+        F_ORANGE_ROW | F_ORANGE_WYNAUT | F_ORANGE_AZURILL | F_ORANGE_SKITTY | F_ORANGE_MAKUHITA,
+        F_GREEN_ROW | F_GREEN_WYNAUT | F_GREEN_AZURILL | F_GREEN_SKITTY | F_GREEN_MAKUHITA,
         F_PURPLE_ROW | F_PURPLE_WYNAUT | F_PURPLE_AZURILL | F_PURPLE_SKITTY | F_PURPLE_MAKUHITA
     };
 
@@ -2109,15 +2109,15 @@ static bool8 IsHitInBetSelection(u8 gridSquare, u8 betSelection)
         case COL_AZURILL:
         case COL_SKITTY:
         case COL_MAKUHITA:
-            if (hit == betSelection + ROW_ORANGE 
-             || hit == betSelection + ROW_GREEN 
+            if (hit == betSelection + ROW_ORANGE
+             || hit == betSelection + ROW_GREEN
              || hit == betSelection + ROW_PURPLE)
                 return TRUE;
             break;
         case ROW_ORANGE:
         case ROW_GREEN:
         case ROW_PURPLE:
-            if (hit >= (betSelection + COL_WYNAUT) 
+            if (hit >= (betSelection + COL_WYNAUT)
              && hit <= (betSelection + COL_MAKUHITA))
                 return TRUE;
             break;
@@ -3438,7 +3438,7 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
     PrintCoinsString(gTasks[taskId].tCoins);
     minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_0x8004)];
     ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
-    
+
     if (gTasks[taskId].tCoins >= minBet)
     {
         if ((gSpecialVar_0x8004 & ROULETTE_SPECIAL_RATE) && (gSpecialVar_0x8004 & 1))

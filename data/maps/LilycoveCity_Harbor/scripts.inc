@@ -29,7 +29,7 @@ LilycoveCity_Harbor_EventScript_FerryAttendant::
 	goto_if_eq LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime
 	compare VAR_TEMP_B, 4
 	goto_if_eq LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime
-	compare VAR_TEMP_B, 8 
+	compare VAR_TEMP_B, 8
 	goto_if_eq LilycoveCity_Harbor_EventScript_MysticTicketFirstTime
 	compare VAR_TEMP_B, 0
 	goto_if_ne LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime

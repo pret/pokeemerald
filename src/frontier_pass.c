@@ -178,9 +178,9 @@ static const u32 sUnusedData[]                   = INCBIN_U32("graphics/frontier
 static const u32 sBattleRecord_Tilemap[]         = INCBIN_U32("graphics/frontier_pass/record_frame.bin.lz");
 static const u32 sMapAndCard_Zooming_Tilemap[]   = INCBIN_U32("graphics/frontier_pass/small_map_and_card_affine.bin.lz");
 
-static const s16 sBgAffineCoords[][2] = 
+static const s16 sBgAffineCoords[][2] =
 {
-    [CURSOR_AREA_MAP - 1]  = {216,  32}, 
+    [CURSOR_AREA_MAP - 1]  = {216,  32},
     [CURSOR_AREA_CARD - 1] = {216, 128}
 };
 
@@ -1099,7 +1099,7 @@ static void Task_PassAreaZoom(u8 taskId)
         tScaleY += tScaleSpeedY;
         sPassGfx->scaleX = MathUtil_Inv16(tScaleX);
         sPassGfx->scaleY = MathUtil_Inv16(tScaleY);
-        
+
         // Check if zoom hasn't reached target
         if (!tZoomOut)
         {
@@ -1117,7 +1117,7 @@ static void Task_PassAreaZoom(u8 taskId)
             sPassGfx->zooming = FALSE;
         if (UpdatePaletteFade())
             return;
-        
+
         if (!tZoomOut)
         {
             // Zoomed in and faded out, switch to map or trainer card
@@ -1174,7 +1174,7 @@ static void ShowAndPrintWindows(void)
 static void PrintAreaDescription(u8 cursorArea)
 {
     FillWindowPixelBuffer(WINDOW_DESCRIPTION, PIXEL_FILL(0));
-    
+
     if (cursorArea == CURSOR_AREA_RECORD && !sPassData->hasBattleRecord)
         AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[CURSOR_AREA_NOTHING]);
     else if (cursorArea != CURSOR_AREA_NOTHING)
@@ -1256,7 +1256,7 @@ static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
             return;
         break;
     }
-    
+
     // If moving on to highlightable area, highlight it
     switch (cursorArea)
     {

@@ -149,7 +149,7 @@ struct NamingScreenTemplate
     const u8 *title;
 };
 
-struct NamingScreenData 
+struct NamingScreenData
 {
     u8 tilemapBuffer1[0x800];
     u8 tilemapBuffer2[0x800];
@@ -299,12 +299,12 @@ static const u8 sKeyboardChars[KBPAGE_COUNT * KBROW_COUNT * KBCOL_COUNT] = __(
     "!?♂♀/-  "
     "…“”‘'   ");
 
-static const u8 sPageColumnCounts[KBPAGE_COUNT] = { 
-    [KEYBOARD_LETTERS_LOWER] = KBCOL_COUNT, 
-    [KEYBOARD_LETTERS_UPPER] = KBCOL_COUNT, 
-    [KEYBOARD_SYMBOLS]       = 6 
+static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
+    [KEYBOARD_LETTERS_LOWER] = KBCOL_COUNT,
+    [KEYBOARD_LETTERS_UPPER] = KBCOL_COUNT,
+    [KEYBOARD_SYMBOLS]       = 6
 };
-static const u8 sPageColumnXPos[KBPAGE_COUNT * KBCOL_COUNT] = { 
+static const u8 sPageColumnXPos[KBPAGE_COUNT * KBCOL_COUNT] = {
     0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_LOWER
     0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_UPPER
     0, 22, 44, 66, 88, 110          // KEYBOARD_SYMBOLS
@@ -583,25 +583,25 @@ static void Task_NamingScreen(u8 taskId)
 }
 
 // Which gfx/pal to load for the swap page button
-static const u8 sPageToNextGfxId[KBPAGE_COUNT] = 
-{ 
-    [KBPAGE_SYMBOLS]       = PAGE_SWAP_UPPER, 
-    [KBPAGE_LETTERS_UPPER] = PAGE_SWAP_LOWER, 
-    [KBPAGE_LETTERS_LOWER] = PAGE_SWAP_OTHERS 
+static const u8 sPageToNextGfxId[KBPAGE_COUNT] =
+{
+    [KBPAGE_SYMBOLS]       = PAGE_SWAP_UPPER,
+    [KBPAGE_LETTERS_UPPER] = PAGE_SWAP_LOWER,
+    [KBPAGE_LETTERS_LOWER] = PAGE_SWAP_OTHERS
 };
 
-static const u8 sPageToNextKeyboardId[KBPAGE_COUNT] = 
-{ 
-    [KBPAGE_SYMBOLS]       = KEYBOARD_LETTERS_UPPER, 
-    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_LOWER, 
-    [KBPAGE_LETTERS_LOWER] = KEYBOARD_SYMBOLS 
+static const u8 sPageToNextKeyboardId[KBPAGE_COUNT] =
+{
+    [KBPAGE_SYMBOLS]       = KEYBOARD_LETTERS_UPPER,
+    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_LOWER,
+    [KBPAGE_LETTERS_LOWER] = KEYBOARD_SYMBOLS
 };
 
-static const u8 sPageToKeyboardId[KBPAGE_COUNT] = 
-{ 
-    [KBPAGE_SYMBOLS]       = KEYBOARD_SYMBOLS, 
-    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_UPPER, 
-    [KBPAGE_LETTERS_LOWER] = KEYBOARD_LETTERS_LOWER 
+static const u8 sPageToKeyboardId[KBPAGE_COUNT] =
+{
+    [KBPAGE_SYMBOLS]       = KEYBOARD_SYMBOLS,
+    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_UPPER,
+    [KBPAGE_LETTERS_LOWER] = KEYBOARD_LETTERS_LOWER
 };
 
 static u8 PageToNextGfxId(u8 page)
@@ -674,7 +674,7 @@ static bool8 MainState_PressedOKButton(void)
     SetInputState(INPUT_STATE_DISABLED);
     SetCursorFlashing(FALSE);
     TryStartButtonFlash(BUTTON_COUNT, FALSE, TRUE);
-    if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON 
+    if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON
         && CalculatePlayerPartyCount() >= PARTY_SIZE)
     {
         DisplaySentToPCMessage();
@@ -1030,9 +1030,9 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
     if (sprite->sX == GetCurrentPageColumnCount())
         sprite->invisible = TRUE;
 
-    if (sprite->invisible 
+    if (sprite->invisible
        || !(sprite->sFlashing)
-       || sprite->sX != sprite->sPrevX 
+       || sprite->sX != sprite->sPrevX
        || sprite->sY != sprite->sPrevY)
     {
         sprite->sColor = 0;
@@ -1310,14 +1310,14 @@ static bool8 PageSwapSprite_SlideOn(struct Sprite *sprite)
 }
 
 static const u16 sPageSwapPalTags[] = {
-    [PAGE_SWAP_UPPER]  = PALTAG_PAGE_SWAP_UPPER, 
-    [PAGE_SWAP_OTHERS] = PALTAG_PAGE_SWAP_OTHERS, 
+    [PAGE_SWAP_UPPER]  = PALTAG_PAGE_SWAP_UPPER,
+    [PAGE_SWAP_OTHERS] = PALTAG_PAGE_SWAP_OTHERS,
     [PAGE_SWAP_LOWER]  = PALTAG_PAGE_SWAP_LOWER
 };
 
 static const u16 sPageSwapGfxTags[] = {
-    [PAGE_SWAP_UPPER]  = GFXTAG_PAGE_SWAP_UPPER, 
-    [PAGE_SWAP_OTHERS] = GFXTAG_PAGE_SWAP_OTHERS, 
+    [PAGE_SWAP_UPPER]  = GFXTAG_PAGE_SWAP_UPPER,
+    [PAGE_SWAP_OTHERS] = GFXTAG_PAGE_SWAP_OTHERS,
     [PAGE_SWAP_LOWER]  = GFXTAG_PAGE_SWAP_LOWER
 };
 
@@ -1651,7 +1651,7 @@ static void HandleDpadMovement(struct Task *task)
     if (cursorX > GetCurrentPageColumnCount())
         cursorX = 0;
 
-    
+
     // Handle moving on/off the button column
     if (sDpadDeltaX[input] != 0)
     {
@@ -2184,67 +2184,67 @@ static const struct OamData sOam_32x16 =
 static const struct Subsprite sSubsprites_PageSwapFrame[] =
 {
     {
-        .x = -20,  
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8),  
-        .tileOffset = 0,     
-        .priority = 1
-    },
-    {
-        .x =  12,  
-        .y = -16, 
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8),  
-        .tileOffset = 4,     
-        .priority = 1
-    },
-    {
-        .x = -20,  
-        .y = -8,  
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 5,     
-        .priority = 1
-    },
-    {
-        .x =  12,  
-        .y = -8,  
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = 9,     
-        .priority = 1
-    },
-    {
-        .x = -20,  
-        .y =  0,  
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 10,    
-        .priority = 1
-    },
-    {
-        .x =  12,  
-        .y =  0,  
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 14,    
-        .priority = 1
-    },
-    {
-        .x = -20,  
-        .y =  8,  
-        .shape = SPRITE_SHAPE(32x8),  
+        .x = -20,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
-        .tileOffset = 15,    
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y =  8,  
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y = -16,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 19,    
+        .tileOffset = 4,
+        .priority = 1
+    },
+    {
+        .x = -20,
+        .y = -8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 5,
+        .priority = 1
+    },
+    {
+        .x =  12,
+        .y = -8,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 9,
+        .priority = 1
+    },
+    {
+        .x = -20,
+        .y =  0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 10,
+        .priority = 1
+    },
+    {
+        .x =  12,
+        .y =  0,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 14,
+        .priority = 1
+    },
+    {
+        .x = -20,
+        .y =  8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,
+        .priority = 1
+    },
+    {
+        .x =  12,
+        .y =  8,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 19,
         .priority = 1
     }
 };
@@ -2252,19 +2252,19 @@ static const struct Subsprite sSubsprites_PageSwapFrame[] =
 static const struct Subsprite sSubsprites_PageSwapText[] =
 {
     {
-        .x = -12,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(16x8),  
-        .size = SPRITE_SIZE(16x8),  
-        .tileOffset = 0,     
+        .x = -12,
+        .y = -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x =   4,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 2,     
+        .x =   4,
+        .y = -4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 2,
         .priority = 1
     }
 };
@@ -2272,51 +2272,51 @@ static const struct Subsprite sSubsprites_PageSwapText[] =
 static const struct Subsprite sSubsprites_Button[] =
 {
     {
-        .x = -20,  
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8),  
+        .x = -20,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
-        .tileOffset = 0,     
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y = -12, 
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y = -12,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 4,     
+        .tileOffset = 4,
         .priority = 1
     },
     {
-        .x = -20,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(32x8),  
+        .x = -20,
+        .y = -4,
+        .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
-        .tileOffset = 5,     
+        .tileOffset = 5,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y = -4,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 9,     
+        .tileOffset = 9,
         .priority = 1
     },
     {
-        .x = -20,  
-        .y =  4,  
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 10,    
+        .x = -20,
+        .y =  4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 10,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y =  4,  
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y =  4,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 14,    
+        .tileOffset = 14,
         .priority = 1
     }
 };
@@ -2324,27 +2324,27 @@ static const struct Subsprite sSubsprites_Button[] =
 static const struct Subsprite sSubsprites_PCIcon[] =
 {
     {
-        .x = -8,   
-        .y = -12, 
-        .shape = SPRITE_SHAPE(16x8),  
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 0,     
-        .priority = 3
-    },
-    {
-        .x = -8,   
-        .y = -4,  
-        .shape = SPRITE_SHAPE(16x8),  
+        .x = -8,
+        .y = -12,
+        .shape = SPRITE_SHAPE(16x8),
         .size = SPRITE_SIZE(16x8),
-        .tileOffset = 2,     
+        .tileOffset = 0,
         .priority = 3
     },
     {
-        .x = -8,   
-        .y =  4,  
-        .shape = SPRITE_SHAPE(16x8),  
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 4,     
+        .x = -8,
+        .y = -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 2,
+        .priority = 3
+    },
+    {
+        .x = -8,
+        .y =  4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 4,
         .priority = 3
     }
 };
@@ -2514,21 +2514,21 @@ static const struct SpriteTemplate sSpriteTemplate_PCIcon =
 
 static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 {
-    [KEYBOARD_LETTERS_LOWER] = 
+    [KEYBOARD_LETTERS_LOWER] =
     {
         gText_NamingScreenKeyboard_abcdef,
         gText_NamingScreenKeyboard_ghijkl,
         gText_NamingScreenKeyboard_mnopqrs,
         gText_NamingScreenKeyboard_tuvwxyz
     },
-    [KEYBOARD_LETTERS_UPPER] = 
+    [KEYBOARD_LETTERS_UPPER] =
     {
         gText_NamingScreenKeyboard_ABCDEF,
         gText_NamingScreenKeyboard_GHIJKL,
         gText_NamingScreenKeyboard_MNOPQRS,
         gText_NamingScreenKeyboard_TUVWXYZ
     },
-    [KEYBOARD_SYMBOLS] = 
+    [KEYBOARD_SYMBOLS] =
     {
         gText_NamingScreenKeyboard_01234,
         gText_NamingScreenKeyboard_56789,

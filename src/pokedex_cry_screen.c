@@ -19,7 +19,7 @@
 //      .        .
 //    96   .  .  -96
 //         127
-//   
+//
 #define MIN_NEEDLE_POS  32
 #define MAX_NEEDLE_POS -32
 
@@ -253,7 +253,7 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
     case 1:
         for (i = 0; i < sDexCryScreen->playStartPos * 8; i++)
             DrawWaveformSegment(i, 0);
-        
+
         gDexCryScreenState++;
         break;
     case 2:
@@ -295,7 +295,7 @@ void UpdateCryWaveformWindow(u8 windowId)
         DrawWaveformFlatline();
         return;
     }
-    
+
     // Cry playing, buffer waveform
     if (sDexCryScreen->cryState == 1)
     {

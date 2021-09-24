@@ -25,9 +25,9 @@ se_m_flatter_1:
 	.byte		BEND  , c_v+0
 	.byte		N01   , Dn5 , v127
 	.byte	W01
-	.byte		        Gn4 
+	.byte		        Gn4
 	.byte	W01
-	.byte		N09   , En5 
+	.byte		N09   , En5
 	.byte	W02
 	.byte		PAN   , c_v+6
 	.byte	W02
