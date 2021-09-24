@@ -252,7 +252,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_ROUND
 	.4byte BattleScript_EffectHit                     @ EFFECT_BRINE
 	.4byte BattleScript_EffectHit                     @ EFFECT_VENOSHOCK
-	.4byte BattleScript_EffectHit                     @ EFFECT_RETALITATE
+	.4byte BattleScript_EffectHit                     @ EFFECT_RETALIATE
 	.4byte BattleScript_EffectBulldoze                @ EFFECT_BULLDOZE
 	.4byte BattleScript_EffectHit                     @ EFFECT_FOUL_PLAY
 	.4byte BattleScript_EffectHit                     @ EFFECT_PSYSHOCK

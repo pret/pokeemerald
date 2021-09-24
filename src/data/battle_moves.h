@@ -8097,7 +8097,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RETALIATE] =
     {
-        .effect = EFFECT_RETALITATE,
+        .effect = EFFECT_RETALIATE,
         .power = 70,
         .type = TYPE_NORMAL,
         .accuracy = 100,
