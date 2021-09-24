@@ -263,6 +263,10 @@
 #define PLACEHOLDER_ID_KYOGRE        0xC
 #define PLACEHOLDER_ID_GROUDON       0xD
 
+// Hiragana from 0x1-0x50, Katakana from 0x51-0xA0.
+// This excludes Japanese punctuation, which end at 0xB0
+#define JAPANESE_CHAR_END 0xA0
+
 // battle placeholders are located in battle_message.h
 
 #define NUM_TEXT_PRINTERS 32

@@ -161,8 +161,8 @@
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
-#define HITMARKER_x10                   (1 << 4)
-#define HITMARKER_x20                   (1 << 5)
+#define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
+#define HITMARKER_SKIP_DMG_TRACK        (1 << 5)
 #define HITMARKER_DESTINYBOND           (1 << 6)
 #define HITMARKER_NO_ANIMATIONS         (1 << 7)
 #define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
@@ -177,13 +177,13 @@
 #define HITMARKER_IGNORE_UNDERGROUND    (1 << 17)
 #define HITMARKER_IGNORE_UNDERWATER     (1 << 18)
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
-#define HITMARKER_x100000               (1 << 20)
-#define HITMARKER_x200000               (1 << 21)
-#define HITMARKER_x400000               (1 << 22)
-#define HITMARKER_x800000               (1 << 23)
+#define HITMARKER_PASSIVE_DAMAGE        (1 << 20)
+#define HITMARKER_DISOBEDIENT_MOVE      (1 << 21)
+#define HITMARKER_PLAYER_FAINTED        (1 << 22)
+#define HITMARKER_ALLOW_NO_PP           (1 << 23)
 #define HITMARKER_GRUDGE                (1 << 24)
 #define HITMARKER_OBEYS                 (1 << 25)
-#define HITMARKER_x4000000              (1 << 26)
+#define HITMARKER_NEVER_SET             (1 << 26) // Cleared as part of a large group. Never set or checked
 #define HITMARKER_CHARGING              (1 << 27)
 #define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
 #define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)

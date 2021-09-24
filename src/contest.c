@@ -75,7 +75,7 @@ static void Task_FinishRoundOfAppeals(u8);
 static void Task_ReadyUpdateHeartSliders(u8);
 static void Task_UpdateHeartSliders(u8);
 static void Task_WaitForHeartSliders(u8);
-static void sub_80DA348(u8);
+static void Task_RestorePlttBufferUnfaded(u8);
 static void Task_WaitPrintRoundResult(u8);
 static void Task_PrintRoundResultText(u8);
 static void Task_ReUpdateHeartSliders(u8);
@@ -2553,10 +2553,10 @@ static void Task_UpdateHeartSliders(u8 taskId)
 static void Task_WaitForHeartSliders(u8 taskId)
 {
     if (SlidersDoneUpdating())
-        gTasks[taskId].func = sub_80DA348;
+        gTasks[taskId].func = Task_RestorePlttBufferUnfaded;
 }
 
-static void sub_80DA348(u8 taskId)
+static void Task_RestorePlttBufferUnfaded(u8 taskId)
 {
     DmaCopy32Defvars(3, eContestTempSave.cachedPlttBufferUnfaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;

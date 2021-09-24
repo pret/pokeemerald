@@ -1213,7 +1213,8 @@ void HideBattlerShadowSprite(u8 battlerId)
     gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].callback = SpriteCB_SetInvisible;
 }
 
-void sub_805EF14(void)
+// Color the background tiles surrounding the action selection and move windows
+void FillAroundBattleWindows(void)
 {
     u16 *vramPtr = (u16*)(VRAM + 0x240);
     s32 i;

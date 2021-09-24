@@ -978,7 +978,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
 
     currMonID = gTasks[taskId].tMonSpriteId(gTasks[taskId].tCurrMonId);
     gSprites[currMonID].oam.priority = 0;
-    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
+    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ PALETTES_OBJECTS;
     BlendPalettesUnfaded(sHofFadePalettes, 0xC, RGB(16, 29, 24));
 
     currMon = &savedTeams->mon[gTasks[taskId].tCurrMonId];
