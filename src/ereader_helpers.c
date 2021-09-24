@@ -745,7 +745,7 @@ int EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
     }
 
     return (sSendRecvMgr.xferState << EREADER_XFER_SHIFT)
-         | (sSendRecvMgr.cancellationReason << EREADER_CANCEL_SHIFT) 
+         | (sSendRecvMgr.cancellationReason << EREADER_CANCEL_SHIFT)
          | (sSendRecvMgr.checksumResult << EREADER_CHECKSUM_SHIFT);
 }
 

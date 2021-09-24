@@ -1003,7 +1003,7 @@ static void CalculateMonAnimLength(void)
     pokeblockFeed = sPokeblockFeed;
     pokeblockFeed->monAnimLength = 1;
     animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
-    
+
     // Add up the time each stage of the animation will take
     for (i = 0; i < 8; i++, animId++)
     {
@@ -1177,16 +1177,16 @@ static void CalculateMonAnimMovement(void)
 
         if (!negative)
         {
-            pokeblockFeed->monAnimX[time] = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX], 
+            pokeblockFeed->monAnimX[time] = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
                                                 pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE] + amplitude / 0x100) + x;
-            pokeblockFeed->monAnimY[time] = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX], 
+            pokeblockFeed->monAnimY[time] = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
                                                 pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE] + amplitude / 0x100) + y;
         }
         else
         {
-            pokeblockFeed->monAnimX[time] = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX], 
+            pokeblockFeed->monAnimX[time] = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
                                                 pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE] - amplitude / 0x100) + x;
-            pokeblockFeed->monAnimY[time] = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX], 
+            pokeblockFeed->monAnimY[time] = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
                                                 pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE] - amplitude / 0x100) + y;
         }
 

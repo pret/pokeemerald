@@ -129,7 +129,7 @@ se_m_flamethrower_1_000:
 	.byte	W03
 	.byte		        c_v+0
 	.byte	W03
-	.byte		EOT   , Cn3 
+	.byte		EOT   , Cn3
 	.byte	FINE
 
 @********************** Track  2 **********************@

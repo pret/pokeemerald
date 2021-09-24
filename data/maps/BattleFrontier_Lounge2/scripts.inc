@@ -2,7 +2,7 @@ BattleFrontier_Lounge2_MapScripts::
 	.byte 0
 
 @ This NPC gives hints about a random facility or battle mode.
-@ For battle modes he gives generic advice 
+@ For battle modes he gives generic advice
 @ For facilities, depending on how far the player has progressed he will say either
 @    The name of the Frontier Brain there
 @    The type and description of the 3 pokemon they use in their silver battle

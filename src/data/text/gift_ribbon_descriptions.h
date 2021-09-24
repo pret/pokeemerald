@@ -46,7 +46,7 @@ const u8 gGiftRibbonDescriptionPart2_LovedPokemon[] = _("for a loved Pokémon.")
 const u8 gGiftRibbonDescriptionPart1_LoveForPokemon[] = _("Ribbon that shows");
 const u8 gGiftRibbonDescriptionPart2_LoveForPokemon[] = _("love for Pokémon.");
 
-const u8 *const gGiftRibbonDescriptionPointers[MAX_GIFT_RIBBON][2] = 
+const u8 *const gGiftRibbonDescriptionPointers[MAX_GIFT_RIBBON][2] =
 {
     {gGiftRibbonDescriptionPart1_2003RegionalTourney,   gGiftRibbonDescriptionPart2_Champion},
     {gGiftRibbonDescriptionPart1_2003NationalTourney,   gGiftRibbonDescriptionPart2_Champion},

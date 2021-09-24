@@ -423,9 +423,9 @@ static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts
         memcpy(groupCounts,     groupCountBuffer, sizeof(groupCountBuffer));
         memcpy(prevGroupCounts, groupCountBuffer, sizeof(groupCountBuffer));
 
-        groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE] 
-                                     + groupCounts[GROUPTYPE_BATTLE] 
-                                     + groupCounts[GROUPTYPE_UNION] 
+        groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE]
+                                     + groupCounts[GROUPTYPE_BATTLE]
+                                     + groupCounts[GROUPTYPE_UNION]
                                      + groupCounts[GROUPTYPE_TOTAL];
         return TRUE;
     }
