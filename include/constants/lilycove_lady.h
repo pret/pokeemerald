@@ -21,8 +21,6 @@
 #define QUIZ_AUTHOR_NAME_PLAYER          1
 #define QUIZ_AUTHOR_NAME_OTHER_PLAYER    2
 
-#define QUIZ_QUESTION_LEN 9
-
 // Constants for how many good Pokéblocks the Contest Lady was given
 // This determines how her performance is described when her TV show comes on
 #define CONTEST_LADY_NORMAL 0
