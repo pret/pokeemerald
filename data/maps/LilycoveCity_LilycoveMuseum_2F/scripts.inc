@@ -1,68 +1,68 @@
 .set LOCALID_CURATOR, 1
 
-LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 821973A
+LilycoveCity_LilycoveMuseum_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_LilycoveMuseum_2F_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_LilycoveMuseum_2F_OnFrame
 	.byte 0
 
-LilycoveCity_LilycoveMuseum_2F_OnLoad: @ 8219745
+LilycoveCity_LilycoveMuseum_2F_OnLoad:
 	goto_if_set FLAG_COOL_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting:: @ 8219754
+LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting::
 	goto_if_set FLAG_BEAUTY_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting:: @ 8219763
+LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting::
 	goto_if_set FLAG_CUTE_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting:: @ 8219772
+LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting::
 	goto_if_set FLAG_SMART_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting:: @ 8219781
+LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting::
 	goto_if_set FLAG_TOUGH_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting:: @ 821978B
+LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting::
 	setmetatile 10, 6, METATILE_LilycoveMuseum_Painting2_Left, 1
 	setmetatile 11, 6, METATILE_LilycoveMuseum_Painting2_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting:: @ 82197A3
+LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting::
 	setmetatile 18, 6, METATILE_LilycoveMuseum_Painting1_Left, 1
 	setmetatile 19, 6, METATILE_LilycoveMuseum_Painting1_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting:: @ 82197BB
+LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting::
 	setmetatile 14, 10, METATILE_LilycoveMuseum_Painting3_Left, 1
 	setmetatile 15, 10, METATILE_LilycoveMuseum_Painting3_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting:: @ 82197D3
+LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting::
 	setmetatile 6, 10, METATILE_LilycoveMuseum_Painting0_Left, 1
 	setmetatile 7, 10, METATILE_LilycoveMuseum_Painting0_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting:: @ 82197EB
+LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting::
 	setmetatile 2, 6, METATILE_LilycoveMuseum_Painting4_Left, 1
 	setmetatile 3, 6, METATILE_LilycoveMuseum_Painting4_Right, 1
 	end
 
-LilycoveCity_LilycoveMuseum_2F_OnFrame: @ 82197FE
+LilycoveCity_LilycoveMuseum_2F_OnFrame:
 	map_script_2 VAR_LILYCOVE_MUSEUM_2F_STATE, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall
 	.2byte 0
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall:: @ 8219808
+LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall::
 	lockall
 	applymovement LOCALID_CURATOR, Common_Movement_FacePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft
@@ -82,19 +82,19 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall:: @ 8219808
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft: @ 8219861
+LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft:
 	walk_in_place_fastest_left
 	step_end
 
-LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall: @ 8219863
+LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall:
 	face_up
 	delay_16
 	step_end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_Curator:: @ 8219866
+LilycoveCity_LilycoveMuseum_2F_EventScript_Curator::
 	lockall
 	goto_if_set FLAG_RECEIVED_GLASS_ORNAMENT, LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament
-	specialvar VAR_0x8004, CountPlayerContestPaintings
+	specialvar VAR_0x8004, CountPlayerMuseumPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting
 	case 2, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting
@@ -104,11 +104,11 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_Curator:: @ 8219866
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit, MSGBOX_NPC
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting:: @ 82198BA
+LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting, MSGBOX_NPC
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ThankPlayer:: @ 82198C3
+LilycoveCity_LilycoveMuseum_2F_EventScript_ThankPlayer::
 	applymovement LOCALID_CURATOR, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer, MSGBOX_DEFAULT
@@ -117,7 +117,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ThankPlayer:: @ 82198C3
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament:: @ 82198EA
+LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament::
 	applymovement LOCALID_CURATOR, Common_Movement_FacePlayer
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude, MSGBOX_DEFAULT
 	givedecoration DECOR_GLASS_ORNAMENT
@@ -128,99 +128,99 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament:: @ 82198EA
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament:: @ 8219911
+LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament::
 	call Common_EventScript_NoRoomForDecor
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament:: @ 8219921
+LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit, MSGBOX_NPC
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting:: @ 821992B
+LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting::
 	lockall
 	goto_if_set FLAG_CUTE_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting:: @ 821993E
+LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting::
 	lockall
 	goto_if_set FLAG_TOUGH_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting:: @ 8219951
+LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting::
 	lockall
 	goto_if_set FLAG_COOL_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting:: @ 8219964
+LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting::
 	lockall
 	goto_if_set FLAG_BEAUTY_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting:: @ 8219977
+LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting::
 	lockall
 	goto_if_set FLAG_SMART_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_Girl:: @ 821998A
+LilycoveCity_LilycoveMuseum_2F_EventScript_Girl::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe, MSGBOX_NPC
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ExpertM:: @ 8219993
+LilycoveCity_LilycoveMuseum_2F_EventScript_ExpertM::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing, MSGBOX_NPC
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy:: @ 821999C
+LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon, MSGBOX_NPC
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting:: @ 82199A5
+LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_COOL
+	showcontestpainting CONTEST_WINNER_MUSEUM_COOL
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting:: @ 82199B3
+LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_BEAUTY
+	showcontestpainting CONTEST_WINNER_MUSEUM_BEAUTY
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting:: @ 82199C1
+LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_CUTE
+	showcontestpainting CONTEST_WINNER_MUSEUM_CUTE
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting:: @ 82199CF
+LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_SMART
+	showcontestpainting CONTEST_WINNER_MUSEUM_SMART
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting:: @ 82199DD
+LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
 	fadescreen FADE_TO_BLACK
-	showcontestwinner CONTEST_WINNER_MUSEUM_TOUGH
+	showcontestpainting CONTEST_WINNER_MUSEUM_TOUGH
 	releaseall
 	end
 
-LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall: @ 82199EB
+LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall:
 	.string "This is our special exhibit hall.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall: @ 8219A0D
+LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall:
 	.string "As you can plainly see, there is not\n"
 	.string "a single painting on exhibit.\p"
 	.string "Here, I don't wish to exhibit works of\n"
@@ -236,7 +236,7 @@ LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall: @ 8219A0D
 	.string "Pokémon seemingly ready to spring\l"
 	.string "forth into glorious life!$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit: @ 8219BC4
+LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit:
 	.string "I beg your pardon. I didn't intend\n"
 	.string "to monopolize the conversation.\p"
 	.string "Now, as you are young, and yet\n"
@@ -248,23 +248,23 @@ LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit: @ 8219BC4
 	.string "the artist's permission to exhibit\l"
 	.string "it here?$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit: @ 8219CF3
+LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit:
 	.string "I wish to fill this exhibit hall with\n"
 	.string "modern and vibrant paintings of\l"
 	.string "Pokémon.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting: @ 8219D42
+LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting:
 	.string "Thanks to you, we've added a new\n"
 	.string "painting to our collection!\p"
 	.string "I've heard it depicts your Pokémon.\n"
 	.string "Truly magnificent!\p"
 	.string "Thank you so very, very much!$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer: @ 8219DD4
+LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer:
 	.string "Ah! It's you!\n"
 	.string "{PLAYER}!$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests: @ 8219DE6
+LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests:
 	.string "Isn't this marvelous?\n"
 	.string "This collection of paintings!\p"
 	.string "Each one of them flawless!\n"
@@ -274,56 +274,56 @@ LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests: @ 8219DE6
 	.string "Sincerely, I thank you, {PLAYER}.\n"
 	.string "This is my dream come true!$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude: @ 8219EC5
+LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude:
 	.string "This is merely a token of my gratitude.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou: @ 8219EED
+LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou:
 	.string "I will keep this for you until we\n"
 	.string "meet again.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit: @ 8219F1B
+LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit:
 	.string "Ah, so good to see you, {PLAYER}!\p"
 	.string "It's an honor to have you visit us\n"
 	.string "on your busy journeys.\p"
 	.string "Please, relax and do enjoy your\n"
 	.string "visit with us.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame: @ 8219FA0
+LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame:
 	.string "It's a picture frame with pink-colored\n"
 	.string "adornments.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame: @ 8219FD3
+LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame:
 	.string "It's a picture frame with\n"
 	.string "yellow-colored adornments.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame: @ 821A008
+LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame:
 	.string "It's a picture frame with\n"
 	.string "blue-colored adornments.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame: @ 821A03B
+LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame:
 	.string "It's a picture frame with\n"
 	.string "red-colored adornments.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame: @ 821A06D
+LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame:
 	.string "It's a picture frame with\n"
 	.string "green-colored adornments.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon: @ 821A0A1
+LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon:
 	.string "It's a painting of Pokémon.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe: @ 821A0BD
+LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe:
 	.string "I've been away awhile, so the new\n"
 	.string "paintings up here surprised me.\p"
 	.string "I wish someone would paint my Pokémon\n"
 	.string "this pretty.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing: @ 821A132
+LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing:
 	.string "Well… So this is where they show\n"
 	.string "the topical Pokémon paintings.\p"
 	.string "I see, these new paintings are indeed\n"
 	.string "rather amusing.$"
 
-LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon: @ 821A1A8
+LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon:
 	.string "Wow, is that right?\n"
 	.string "These paintings are of your Pokémon.\p"
 	.string "Isn't that just the ultimate joy for\n"

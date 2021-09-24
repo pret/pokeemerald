@@ -1,4 +1,4 @@
-MysteryEventScript_VisitingTrainer:: @ 8674EC1
+MysteryEventScript_VisitingTrainer::
 	setvaddress MysteryEventScript_VisitingTrainer
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 0
@@ -11,7 +11,7 @@ MysteryEventScript_VisitingTrainer:: @ 8674EC1
 	release
 	end
 
-MysteryEventScript_VisitingTrainerArrived: @ 8674EDF
+MysteryEventScript_VisitingTrainerArrived:
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftVisitingTrainerArrived

@@ -1,5 +1,5 @@
 @ Interact with cuttable tree
-EventScript_CutTree:: @ 82906BB
+EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
@@ -19,48 +19,48 @@ EventScript_CutTree:: @ 82906BB
 	end
 
 @ Use cut from party menu
-EventScript_UseCut:: @ 8290705
+EventScript_UseCut::
 	lockall
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto EventScript_CutTreeDown
 	end
 
-EventScript_CutTreeDown:: @ 8290710
+EventScript_CutTreeDown::
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	releaseall
 	end
 
-Movement_CutTreeDown: @ 829071F
+Movement_CutTreeDown:
 	cut_tree
 	step_end
 
-EventScript_CheckTreeCantCut:: @ 8290721
+EventScript_CheckTreeCantCut::
 	msgbox Text_CantCut, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CancelCut:: @ 829072B
+EventScript_CancelCut::
 	closemessage
 	releaseall
 	end
 
-Text_WantToCut: @ 829072E
+Text_WantToCut:
 	.string "This tree looks like it can be\n"
 	.string "Cut down!\p"
 	.string "Would you like to Cut it?$"
 
-Text_MonUsedFieldMove: @ 8290771
+Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
-Text_CantCut: @ 829077D
+Text_CantCut:
 	.string "This tree looks like it can be\n"
 	.string "Cut down!$"
 
 @ Interact with smashable rock
-EventScript_RockSmash:: @ 82907A6
+EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
@@ -80,14 +80,14 @@ EventScript_RockSmash:: @ 82907A6
 	end
 
 @ Use rock smash from party menu
-EventScript_UseRockSmash:: @ 82907F0
+EventScript_UseRockSmash::
 	lockall
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 	goto EventScript_SmashRock
 	end
 
-EventScript_SmashRock:: @ 82907FB
+EventScript_SmashRock::
 	applymovement VAR_LAST_TALKED, Movement_SmashRock
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
@@ -101,33 +101,33 @@ EventScript_SmashRock:: @ 82907FB
 	releaseall
 	end
 
-EventScript_EndSmash:: @ 8290829
+EventScript_EndSmash::
 	releaseall
 	end
 
-Movement_SmashRock: @ 829082B
+Movement_SmashRock:
 	rock_smash_break
 	step_end
 
-EventScript_CantSmashRock:: @ 829082D
+EventScript_CantSmashRock::
 	msgbox Text_CantSmash, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CancelSmash:: @ 8290837
+EventScript_CancelSmash::
 	closemessage
 	releaseall
 	end
 
-Text_WantToSmash: @ 829083A
+Text_WantToSmash:
 	.string "This rock appears to be breakable.\n"
 	.string "Would you like to use Rock Smash?$"
 
-Text_CantSmash: @ 829087F
+Text_CantSmash:
 	.string "It's a rugged rock, but a Pokémon\n"
 	.string "may be able to smash it.$"
 
-EventScript_StrengthBoulder:: @ 82908BA
+EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
@@ -144,53 +144,53 @@ EventScript_StrengthBoulder:: @ 82908BA
 	goto EventScript_ActivateStrength
 	end
 
-EventScript_UseStrength:: @ 82908FD
+EventScript_UseStrength::
 	lockall
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_ActivateStrength
 	end
 
-EventScript_ActivateStrength:: @ 8290908
+EventScript_ActivateStrength::
 	setflag FLAG_SYS_USE_STRENGTH
 	msgbox Text_MonUsedStrength, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CantStrength:: @ 8290915
+EventScript_CantStrength::
 	msgbox Text_CantStrength, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CheckActivatedBoulder:: @ 829091F
+EventScript_CheckActivatedBoulder::
 	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CancelStrength:: @ 8290929
+EventScript_CancelStrength::
 	closemessage
 	releaseall
 	end
 
-Text_WantToStrength: @ 829092C
+Text_WantToStrength:
 	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.\p"
 	.string "Would you like to use Strength?$"
 
-Text_MonUsedStrength: @ 829098C
+Text_MonUsedStrength:
 	.string "{STR_VAR_1} used Strength!\p"
 	.string "{STR_VAR_1}'s Strength made it\n"
 	.string "possible to move boulders around!$"
 
-Text_CantStrength: @ 82909D6
+Text_CantStrength:
 	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.$"
 
-Text_StrengthActivated: @ 8290A16
+Text_StrengthActivated:
 	.string "Strength made it possible to move\n"
 	.string "boulders around.$"
 
-EventScript_UseWaterfall:: @ 8290A49
+EventScript_UseWaterfall::
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, PARTY_SIZE
@@ -204,28 +204,28 @@ EventScript_UseWaterfall:: @ 8290A49
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
 
-EventScript_CannotUseWaterfall:: @ 8290A83
+EventScript_CannotUseWaterfall::
 	lockall
 
-EventScript_CantWaterfall:: @ 8290A84
+EventScript_CantWaterfall::
 	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
 
-EventScript_EndWaterfall:: @ 8290A8C
+EventScript_EndWaterfall::
 	releaseall
 	end
 
-Text_CantWaterfall: @ 8290A8E
+Text_CantWaterfall:
 	.string "A wall of water is crashing down with\n"
 	.string "a mighty roar.$"
 
-Text_WantToWaterfall: @ 8290AC3
+Text_WantToWaterfall:
 	.string "It's a large waterfall.\n"
 	.string "Would you like to use Waterfall?$"
 
-Text_MonUsedWaterfall: @ 8290AFC
+Text_MonUsedWaterfall:
 	.string "{STR_VAR_1} used Waterfall.$"
 
-EventScript_UseDive:: @ 8290B0F
+EventScript_UseDive::
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
@@ -241,16 +241,16 @@ EventScript_UseDive:: @ 8290B0F
 	goto EventScript_EndDive
 	end
 
-EventScript_CantDive:: @ 8290B4E
+EventScript_CantDive::
 	msgbox Text_CantDive, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_EndDive:: @ 8290B58
+EventScript_EndDive::
 	releaseall
 	end
 
-EventScript_UseDiveUnderwater:: @ 8290B5A
+EventScript_UseDiveUnderwater::
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
@@ -266,38 +266,38 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	goto EventScript_EndSurface
 	end
 
-EventScript_CantSurface:: @ 8290B99
+EventScript_CantSurface::
 	lockall
 	msgbox Text_CantSurface, MSGBOX_DEFAULT
 	goto EventScript_EndSurface
 	end
 
-EventScript_EndSurface:: @ 8290BA8
+EventScript_EndSurface::
 	releaseall
 	end
 
-Text_CantDive: @ 8290BAA
+Text_CantDive:
 	.string "The sea is deep here. A Pokémon\n"
 	.string "may be able to go underwater.$"
 
-Text_WantToDive: @ 8290BE8
+Text_WantToDive:
 	.string "The sea is deep here.\n"
 	.string "Would you like to use Dive?$"
 
-Text_MonUsedDive: @ 8290C1A
+Text_MonUsedDive:
 	.string "{STR_VAR_1} used Dive.$"
 
-Text_CantSurface: @ 8290C28
+Text_CantSurface:
 	.string "Light is filtering down from above.\n"
 	.string "A Pokémon may be able to surface.$"
 
-Text_WantToSurface: @ 8290C6E
+Text_WantToSurface:
 	.string "Light is filtering down from above.\n"
 	.string "Would you like to use Dive?$"
 
-EventScript_FailSweetScent:: @ 8290CAE
+EventScript_FailSweetScent::
 	msgbox Text_FailSweetScent, MSGBOX_SIGN
 	end
 
-Text_FailSweetScent: @ 8290CB7
+Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"

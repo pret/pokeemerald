@@ -1,4 +1,4 @@
-EventTicket_Text_OldSeaMapTooFar: @ 82C68A5
+EventTicket_Text_OldSeaMapTooFar:
     .string "What's up, youngster?\p"
 	.string "What, it's you who's supposed to have\n"
 	.string "a tattered old map?\p"
@@ -7,12 +7,12 @@ EventTicket_Text_OldSeaMapTooFar: @ 82C68A5
 	.string "Boy, this is quite a ways away.\n"
 	.string "I'm afraid I can't help you…$"
 
-EventTicket_Text_BrineyHoldOnASecond: @ 82C6951
+EventTicket_Text_BrineyHoldOnASecond:
     .string "Briney: Hold on a second!\p"
 	.string "What's the idea of turning down\n"
 	.string "someone that I owe so much to?$"
 
-EventTicket_Text_BrineyLetsSail: @ 82C69AA
+EventTicket_Text_BrineyLetsSail:
     .string "{PLAYER}{KUN}, I'm terribly sorry.\p"
 	.string "You came to me seeking my help,\n"
 	.string "and we almost turned you away.\p"
@@ -21,7 +21,7 @@ EventTicket_Text_BrineyLetsSail: @ 82C69AA
 	.string "Let's find this island on\n"
 	.string "this Old Sea Map!$"
 
-EventTicket_Text_OddTicketGetOnBoard: @ 82C6A71
+EventTicket_Text_OddTicketGetOnBoard:
     .string "Is it you who brought that odd\n"
 	.string "ticket?\p"
 	.string "Where you're trying to go is an island\n"
@@ -31,16 +31,16 @@ EventTicket_Text_OddTicketGetOnBoard: @ 82C6A71
 	.string "as a sailing man!\p"
 	.string "Get on board, youngster!$"
 
-FarawayIsland_Entrance_Text_SailorReturn: @ 82C6B42
+FarawayIsland_Entrance_Text_SailorReturn:
     .string "Capt. Briney can be so maddeningly\n"
 	.string "fickle…\p"
 	.string "Do you want to return to Lilycove?$"
 
-BirthIsland_Harbor_Text_SailorReturn: @ 82C6B90
+BirthIsland_Harbor_Text_SailorReturn:
     .string "What an oddly shaped island, eh?\n"
 	.string "Do you want to return to Lilycove?$"
 
-EventTicket_Text_OddTicketsWhereTo: @ 82C6BD4
+EventTicket_Text_OddTicketsWhereTo:
     .string "Is it you who brought those\n"
 	.string "odd tickets?\p"
 	.string "… … …Hm.\p"
@@ -53,13 +53,13 @@ EventTicket_Text_OddTicketsWhereTo: @ 82C6BD4
 	.string "Get on board, youngster!\n"
 	.string "Where shall we sail first?$"
 
-NavelRock_Harbor_Text_SailorReturn: @ 82C6CE6
+NavelRock_Harbor_Text_SailorReturn:
     .string "Did… Did you hear that?\n"
 	.string "That low growling from deep in there.\p"
 	.string "Are you sure it's safe?\n"
 	.string "Do you think we should leave?$"
 
-FarawayIsland_Entrance_Text_Sign: @ 82C6D5A
+FarawayIsland_Entrance_Text_Sign:
     .string "The writing is fading as if it was\n"
 	.string "written a long time ago…\p"
 	.string "“…ber, 6th day\n"
@@ -67,5 +67,5 @@ FarawayIsland_Entrance_Text_Sign: @ 82C6D5A
 	.string "again…et it be a kindhearted pers…\l"
 	.string "…ith that hope, I depar…”$"
 
-FarawayIsland_Interior_Text_Mew: @ 82C6DFF
+FarawayIsland_Interior_Text_Mew:
     .string "Myuu…$"

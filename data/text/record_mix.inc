@@ -1,6 +1,6 @@
-Text_WouldYouLikeToMixRecords: @ 827260D
+Text_WouldYouLikeToMixRecords:
 	.string "Would you like to mix records with\n"
 	.string "other Trainers?$"
 
-Text_WeHopeToSeeYouAgain: @ 8272640
+Text_WeHopeToSeeYouAgain:
 	.string "We hope to see you again!$"

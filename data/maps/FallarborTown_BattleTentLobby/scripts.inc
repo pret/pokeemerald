@@ -1,20 +1,20 @@
 .set LOCALID_ATTENDANT, 1
 
-FallarborTown_BattleTentLobby_MapScripts:: @ 81FFE66
+FallarborTown_BattleTentLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentLobby_OnWarp
 	.byte 0
 
-FallarborTown_BattleTentLobby_OnWarp: @ 81FFE71
+FallarborTown_BattleTentLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, FallarborTown_BattleTentLobby_EventScript_TurnPlayerNorth
 	.2byte 0
 
-FallarborTown_BattleTentLobby_EventScript_TurnPlayerNorth:: @ 81FFE7B
+FallarborTown_BattleTentLobby_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-FallarborTown_BattleTentLobby_OnFrame: @ 81FFE85
+FallarborTown_BattleTentLobby_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentLobby_EventScript_GetChallengeStatus
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, FallarborTown_BattleTentLobby_EventScript_QuitWithoutSaving
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, FallarborTown_BattleTentLobby_EventScript_ResumeChallenge
@@ -22,11 +22,11 @@ FallarborTown_BattleTentLobby_OnFrame: @ 81FFE85
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, FallarborTown_BattleTentLobby_EventScript_LostChallenge
 	.2byte 0
 
-FallarborTown_BattleTentLobby_EventScript_GetChallengeStatus:: @ 81FFEAF
+FallarborTown_BattleTentLobby_EventScript_GetChallengeStatus::
 	frontier_getstatus
 	end
 
-FallarborTown_BattleTentLobby_EventScript_QuitWithoutSaving:: @ 81FFEB8
+FallarborTown_BattleTentLobby_EventScript_QuitWithoutSaving::
 	lockall
 	msgbox FallarborTown_BattleTentLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT
 	closemessage
@@ -36,7 +36,7 @@ FallarborTown_BattleTentLobby_EventScript_QuitWithoutSaving:: @ 81FFEB8
 	releaseall
 	end
 
-FallarborTown_BattleTentLobby_EventScript_WonChallenge:: @ 81FFEED
+FallarborTown_BattleTentLobby_EventScript_WonChallenge::
 	lockall
 	msgbox FallarborTown_BattleTentLobby_Text_BeatThreeTrainers, MSGBOX_DEFAULT
 	message FallarborTown_BattleTentLobby_Text_WaitWhileSaveGame
@@ -47,7 +47,7 @@ FallarborTown_BattleTentLobby_EventScript_WonChallenge:: @ 81FFEED
 	playse SE_SAVE
 	waitse
 
-FallarborTown_BattleTentLobby_EventScript_GivePrize:: @ 81FFF27
+FallarborTown_BattleTentLobby_EventScript_GivePrize::
 	msgbox FallarborTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
 	fallarbortent_giveprize
 	switch VAR_RESULT
@@ -63,7 +63,7 @@ FallarborTown_BattleTentLobby_EventScript_GivePrize:: @ 81FFF27
 	releaseall
 	end
 
-FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize:: @ 81FFF73
+FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize::
 	msgbox FallarborTown_BattleTentLobby_Text_BagFullReturnForPrize, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -71,13 +71,13 @@ FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize:: @ 81FFF73
 	releaseall
 	end
 
-FallarborTown_BattleTentLobby_EventScript_PrizeWaiting:: @ 81FFF84
+FallarborTown_BattleTentLobby_EventScript_PrizeWaiting::
 	lockall
 	msgbox FallarborTown_BattleTentLobby_Text_BeatThreeTrainers, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_GivePrize
 	end
 
-FallarborTown_BattleTentLobby_EventScript_LostChallenge:: @ 81FFF93
+FallarborTown_BattleTentLobby_EventScript_LostChallenge::
 	lockall
 	message FallarborTown_BattleTentLobby_Text_ThankYouWaitWhileSaving
 	waitmessage
@@ -91,7 +91,7 @@ FallarborTown_BattleTentLobby_EventScript_LostChallenge:: @ 81FFF93
 	releaseall
 	end
 
-FallarborTown_BattleTentLobby_EventScript_ResumeChallenge:: @ 81FFFCD
+FallarborTown_BattleTentLobby_EventScript_ResumeChallenge::
 	lockall
 	message FallarborTown_BattleTentLobby_Text_LookingForwardToArrival
 	waitmessage
@@ -102,7 +102,7 @@ FallarborTown_BattleTentLobby_EventScript_ResumeChallenge:: @ 81FFFCD
 	setvar VAR_TEMP_0, 255
 	goto FallarborTown_BattleTentLobby_EventScript_EnterChallenge
 
-FallarborTown_BattleTentLobby_EventScript_Attendant:: @ 8200001
+FallarborTown_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
 	fallarbortent_getprize
@@ -110,17 +110,17 @@ FallarborTown_BattleTentLobby_EventScript_Attendant:: @ 8200001
 	goto_if_ne FallarborTown_BattleTentLobby_EventScript_PrizeWaiting
 	special SavePlayerParty
 	msgbox FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
-FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge:: @ 8200021
+FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge::
 	message FallarborTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, FallarborTown_BattleTentLobby_EventScript_ExplainChallenge
 	case 2, FallarborTown_BattleTentLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_CancelChallenge
 
-FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 820005D
+FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	setvar VAR_RESULT, 2
@@ -142,7 +142,7 @@ FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 820005D
 	case YES, FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 
-FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge:: @ 82000E2
+FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	fallarbortent_init
@@ -155,7 +155,7 @@ FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge:: @ 82000E2
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
-FallarborTown_BattleTentLobby_EventScript_EnterChallenge:: @ 820013C
+FallarborTown_BattleTentLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox FallarborTown_BattleTentLobby_Text_GuideYouToBattleTent, MSGBOX_DEFAULT
@@ -166,35 +166,35 @@ FallarborTown_BattleTentLobby_EventScript_EnterChallenge:: @ 820013C
 	waitstate
 	end
 
-FallarborTown_BattleTentLobby_EventScript_ExplainChallenge:: @ 8200169
+FallarborTown_BattleTentLobby_EventScript_ExplainChallenge::
 	msgbox FallarborTown_BattleTentLobby_Text_ExplainFallarborTent, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge
 
-FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons:: @ 8200176
+FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons::
 	switch VAR_RESULT
 	case FRONTIER_LVL_50, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen
-FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50:: @ 8200191
+FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50::
 	msgbox FallarborTown_BattleTentLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_EndCancelChallenge
 
-FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen:: @ 820019E
+FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen::
 	msgbox FallarborTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_EndCancelChallenge
 
-FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed:: @ 82001AB
+FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto FallarborTown_BattleTentLobby_EventScript_CancelChallenge
 
-FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge:: @ 82001C2
+FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge::
 	special LoadPlayerParty
-FallarborTown_BattleTentLobby_EventScript_CancelChallenge:: @ 82001C5
+FallarborTown_BattleTentLobby_EventScript_CancelChallenge::
 	msgbox FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge, MSGBOX_DEFAULT
-FallarborTown_BattleTentLobby_EventScript_EndCancelChallenge:: @ 82001CD
+FallarborTown_BattleTentLobby_EventScript_EndCancelChallenge::
 	release
 	end
 
-FallarborTown_BattleTentLobby_EventScript_WalkToDoor:: @ 82001CF
+FallarborTown_BattleTentLobby_EventScript_WalkToDoor::
 	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentLobby_Movement_AttendantWalkToDoor
 	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerWalkToDoor
 	waitmovement 0
@@ -207,42 +207,42 @@ FallarborTown_BattleTentLobby_EventScript_WalkToDoor:: @ 82001CF
 	waitdooranim
 	return
 
-FallarborTown_BattleTentLobby_Movement_AttendantWalkToDoor: @ 82001FE
+FallarborTown_BattleTentLobby_Movement_AttendantWalkToDoor:
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-FallarborTown_BattleTentLobby_Movement_AttendantEnterDoor: @ 8200202
+FallarborTown_BattleTentLobby_Movement_AttendantEnterDoor:
 	walk_up
 	set_invisible
 	step_end
 
-FallarborTown_BattleTentLobby_Movement_PlayerWalkToDoor: @ 8200205
+FallarborTown_BattleTentLobby_Movement_PlayerWalkToDoor:
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-FallarborTown_BattleTentLobby_Movement_PlayerEnterDoor: @ 8200209
+FallarborTown_BattleTentLobby_Movement_PlayerEnterDoor:
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-FallarborTown_BattleTentLobby_EventScript_Hiker:: @ 820020D
+FallarborTown_BattleTentLobby_EventScript_Hiker::
 	msgbox FallarborTown_BattleTentLobby_Text_CameToCampOut, MSGBOX_NPC
 	end
 
-FallarborTown_BattleTentLobby_EventScript_LittleBoy:: @ 8200216
+FallarborTown_BattleTentLobby_EventScript_LittleBoy::
 	msgbox FallarborTown_BattleTentLobby_Text_MakeThinkImJustKid, MSGBOX_NPC
 	end
 
-FallarborTown_BattleTentLobby_EventScript_Lass:: @ 820021F
+FallarborTown_BattleTentLobby_EventScript_Lass::
 	msgbox FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite, MSGBOX_NPC
 	end
 
-FallarborTown_BattleTentLobby_EventScript_Scott:: @ 8200228
+FallarborTown_BattleTentLobby_EventScript_Scott::
 	lock
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_FALLARBOR, FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo
@@ -252,21 +252,21 @@ FallarborTown_BattleTentLobby_EventScript_Scott:: @ 8200228
 	release
 	end
 
-FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo:: @ 8200245
+FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo::
 	msgbox FallarborTown_BattleTentLobby_Text_ScottMakeChallenge, MSGBOX_DEFAULT
 	release
 	end
 
-FallarborTown_BattleTentLobby_EventScript_RulesBoard:: @ 820024F
+FallarborTown_BattleTentLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 820025E
+FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, 0
+	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, FALSE
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_RulesLevel
 	case 1, FallarborTown_BattleTentLobby_EventScript_RulesBattle
@@ -277,43 +277,43 @@ FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 820025E
 	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_ExitRules
 	end
 
-FallarborTown_BattleTentLobby_EventScript_RulesLevel:: @ 82002BC
+FallarborTown_BattleTentLobby_EventScript_RulesLevel::
 	msgbox BattleTentLobby_Text_ExplainLevelRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-FallarborTown_BattleTentLobby_EventScript_RulesBattle:: @ 82002CA
+FallarborTown_BattleTentLobby_EventScript_RulesBattle::
 	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-FallarborTown_BattleTentLobby_EventScript_RulesMind:: @ 82002D8
+FallarborTown_BattleTentLobby_EventScript_RulesMind::
 	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainMindRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-FallarborTown_BattleTentLobby_EventScript_RulesSkill:: @ 82002E6
+FallarborTown_BattleTentLobby_EventScript_RulesSkill::
 	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-FallarborTown_BattleTentLobby_EventScript_RulesBody:: @ 82002F4
+FallarborTown_BattleTentLobby_EventScript_RulesBody::
 	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
-FallarborTown_BattleTentLobby_EventScript_ExitRules:: @ 8200302
+FallarborTown_BattleTentLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-FallarborTown_BattleTentLobby_Text_MakeThinkImJustKid: @ 8200304
+FallarborTown_BattleTentLobby_Text_MakeThinkImJustKid:
 	.string "Fufufufufu.\p"
 	.string "I'm going to make everyone think\n"
 	.string "I'm just a kid and let them play down.\p"
 	.string "Then, I'll shock them and grab\n"
 	.string "the title!$"
 
-FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite: @ 8200382
+FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite:
 	.string "You know how Battle Tents offer\n"
 	.string "different events in different towns?\p"
 	.string "My favorite is definitely the Battle\n"
@@ -322,7 +322,7 @@ FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite: @ 8200382
 	.string "try to win with all their faith in\l"
 	.string "their Pokémon.$"
 
-FallarborTown_BattleTentLobby_Text_CameToCampOut: @ 820045A
+FallarborTown_BattleTentLobby_Text_CameToCampOut:
 	.string "I heard something about some tent,\n"
 	.string "so I came to camp out.\p"
 	.string "I didn't know that tents these days\n"
@@ -330,7 +330,7 @@ FallarborTown_BattleTentLobby_Text_CameToCampOut: @ 820045A
 	.string "Since I'm here, I may as well try\n"
 	.string "my hand at battling!$"
 
-FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone: @ 8200501
+FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone:
 	.string "Scott: Hi, {PLAYER}{KUN}!\n"
 	.string "So you came out to this Battle Tent!\p"
 	.string "The people in these parts tend to be\n"
@@ -345,7 +345,7 @@ FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone: @ 8200501
 	.string "Whoops! Never mind!\n"
 	.string "Keep working at it!$"
 
-FallarborTown_BattleTentLobby_Text_ScottMakeChallenge: @ 8200653
+FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
 	.string "Scott: Instead of wasting your\n"
 	.string "time with the likes of me, why not\l"
 	.string "make a challenge?$"

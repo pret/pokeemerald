@@ -1,7 +1,7 @@
-SootopolisCity_Mart_MapScripts:: @ 8226794
+SootopolisCity_Mart_MapScripts::
 	.byte 0
 
-SootopolisCity_Mart_EventScript_Clerk:: @ 8226795
+SootopolisCity_Mart_EventScript_Clerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -11,7 +11,8 @@ SootopolisCity_Mart_EventScript_Clerk:: @ 8226795
 	release
 	end
 
-SootopolisCity_Mart_Pokemart: @ 82267AC
+	.align 2
+SootopolisCity_Mart_Pokemart:
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
@@ -25,7 +26,7 @@ SootopolisCity_Mart_Pokemart: @ 82267AC
 	release
 	end
 
-SootopolisCity_Mart_EventScript_FatMan:: @ 82267C2
+SootopolisCity_Mart_EventScript_FatMan::
 	lock
 	faceplayer
 	compare VAR_SKY_PILLAR_STATE, 2
@@ -35,12 +36,12 @@ SootopolisCity_Mart_EventScript_FatMan:: @ 82267C2
 	release
 	end
 
-SootopolisCity_Mart_EventScript_FatManNoLegendaries:: @ 82267E2
+SootopolisCity_Mart_EventScript_FatManNoLegendaries::
 	msgbox SootopolisCity_Mart_Text_PPUpIsGreat, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Mart_EventScript_Gentleman:: @ 82267EC
+SootopolisCity_Mart_EventScript_Gentleman::
 	lock
 	faceplayer
 	compare VAR_SKY_PILLAR_STATE, 2
@@ -50,29 +51,29 @@ SootopolisCity_Mart_EventScript_Gentleman:: @ 82267EC
 	release
 	end
 
-SootopolisCity_Mart_EventScript_GentlemanNoLegendaries:: @ 822680C
+SootopolisCity_Mart_EventScript_GentlemanNoLegendaries::
 	msgbox SootopolisCity_Mart_Text_FullRestoreItemOfDreams, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Mart_Text_PPUpIsGreat: @ 8226816
+SootopolisCity_Mart_Text_PPUpIsGreat:
 	.string "PP UP is great!\p"
 	.string "It raises the Power Points, the PP,\n"
 	.string "of a Pokémon move.$"
 
-SootopolisCity_Mart_Text_TooScaryOutside: @ 822685D
+SootopolisCity_Mart_Text_TooScaryOutside:
 	.string "What…\n"
 	.string "What is happening?\p"
 	.string "I really want to know, but it's too\n"
 	.string "scary to go outside.$"
 
-SootopolisCity_Mart_Text_FullRestoreItemOfDreams: @ 82268AF
+SootopolisCity_Mart_Text_FullRestoreItemOfDreams:
 	.string "Do you know Full Restore?\p"
 	.string "Full restoration of HP!\n"
 	.string "Eradication of all status problems!\p"
 	.string "It's truly an item of your dreams!$"
 
-SootopolisCity_Mart_Text_DidSomethingAwaken: @ 8226928
+SootopolisCity_Mart_Text_DidSomethingAwaken:
 	.string "This weather…\n"
 	.string "Did something awaken?$"
 

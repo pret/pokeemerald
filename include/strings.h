@@ -419,8 +419,8 @@ extern const u8 gText_FirmSlash[];
 
 // item menu screen text
 extern const u8 gText_CloseBag[];
-extern const u8 gText_ClearTo11Var1Clear5Var2[];
-extern const u8 gText_NumberVar1Clear7Var2[];
+extern const u8 gText_NumberItem_HM[];
+extern const u8 gText_NumberItem_TMBerry[];
 extern const u8 gText_xVar1[];
 extern const u8 gText_ReturnToVar1[];
 extern const u8 gText_SelectorArrow2[];
@@ -442,6 +442,7 @@ extern const u8 gText_CantStoreImportantItems[];
 extern const u8 gText_DepositedVar2Var1s[];
 extern const u8 gText_NoRoomForItems[];
 extern const u8 gText_ThreeDashes[];
+extern const u8 *const gPocketNamesStringsTable[];
 
 // party menu text
 extern const u8 gText_PkmnHPRestoredByVar2[];
@@ -596,7 +597,7 @@ extern const u8 gText_TooImportantToToss[];
 extern const u8 gText_ConfirmTossItems[];
 extern const u8 gText_MoveVar1Where[];
 
-extern const u8 gText_ColorLightShadowDarkGrey[];
+extern const u8 gText_ColorLightShadowDarkGray[];
 extern const u8 gText_ColorBlue[];
 extern const u8 gText_Friend[];
 extern const u8 gText_Tristan[];
@@ -982,7 +983,8 @@ extern const u8 gText_RibbonsVar1[];
 extern const u8 gText_OneDash[];
 extern const u8 gText_TwoDashes[];
 
-extern const u8 *const gReturnToXStringsTable2[];
+extern const u8 *const gBagMenu_ReturnToStrings[];
+extern const u8 *const gPyramidBagMenu_ReturnToStrings[];
 
 extern const u8 gText_NumPlayerLink[];
 extern const u8 gText_ConfirmLinkWhenPlayersReady[];
@@ -2511,7 +2513,7 @@ extern const u8 gText_MatchCallMay_Intro1[];
 extern const u8 gText_MatchCallMay_Intro2[];
 
 // Contest Link
-extern const u8 gText_ColorDarkGrey[];
+extern const u8 gText_ColorDarkGray[];
 extern const u8 gText_CommunicationStandby[];
 extern const u8 gText_AnnouncingResults[];
 extern const u8 gText_PreliminaryResults[];
@@ -2904,7 +2906,7 @@ extern const u8 gText_CrushingResults[];
 extern const u8 gText_BerryCrush2[];
 extern const u8 gText_PressingSpeedRankings[];
 extern const u8 gText_Var1Players[];
-extern const u8 gText_ReadyToBerryCrush[];
+extern const u8 gText_ReadyPickBerry[];
 extern const u8 gText_WaitForAllChooseBerry[];
 extern const u8 gText_EndedWithXUnitsPowder[];
 extern const u8 gText_RecordingGameResults[];
@@ -2987,5 +2989,32 @@ extern const u8 gText_Beauty3[];
 extern const u8 gText_SavingDontTurnOff2[];
 extern const u8 gText_BlenderMaxSpeedRecord[];
 extern const u8 gText_234Players[];
+
+// Battle Factory Screen
+extern const u8 gText_RentalPkmn2[];
+extern const u8 gText_SelectFirstPkmn[];
+extern const u8 gText_SelectSecondPkmn[];
+extern const u8 gText_SelectThirdPkmn[];
+extern const u8 gText_TheseThreePkmnOkay[];
+extern const u8 gText_CantSelectSamePkmn[];
+extern const u8 gText_Summary[];
+extern const u8 gText_Rechoose[];
+extern const u8 gText_Deselect[];
+extern const u8 gText_Rent[];
+extern const u8 gText_Others2[];
+extern const u8 gText_Yes2[];
+extern const u8 gText_Yes3[];
+extern const u8 gText_No2[];
+extern const u8 gText_No3[];
+extern const u8 gText_QuitSwapping[];
+extern const u8 gText_AcceptThisPkmn[];
+extern const u8 gText_SelectPkmnToAccept[];
+extern const u8 gText_SelectPkmnToSwap[];
+extern const u8 gText_PkmnSwap[];
+extern const u8 gText_Swap[];
+extern const u8 gText_Summary2[];
+extern const u8 gText_PkmnForSwap[];
+extern const u8 gText_SamePkmnInPartyAlready[];
+extern const u8 gText_Cancel3[];
 
 #endif // GUARD_STRINGS_H

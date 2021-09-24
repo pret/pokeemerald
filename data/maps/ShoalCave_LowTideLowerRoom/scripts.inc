@@ -1,20 +1,20 @@
-ShoalCave_LowTideLowerRoom_MapScripts:: @ 8237156
+ShoalCave_LowTideLowerRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideLowerRoom_OnLoad
 	.byte 0
 
-ShoalCave_LowTideLowerRoom_OnLoad: @ 823715C
+ShoalCave_LowTideLowerRoom_OnLoad:
 	call ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles
 	end
 
-ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles:: @ 8237162
+ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles::
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_4, ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd
 	setmetatile 18, 2, METATILE_Cave_ShoalCave_DirtPile_Large, 1
 	return
 
-ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd:: @ 8237175
+ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd::
 	return
 
-ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4:: @ 8237176
+ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_4, ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt
 	giveitem ITEM_SHOAL_SALT
@@ -26,12 +26,12 @@ ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4:: @ 8237176
 	releaseall
 	end
 
-ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt:: @ 82371A8
+ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt::
 	msgbox ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT
 	releaseall
 	end
 
-ShoalCave_LowTideLowerRoom_EventScript_BlackBelt:: @ 82371B2
+ShoalCave_LowTideLowerRoom_EventScript_BlackBelt::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_FOCUS_BAND, ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand
@@ -43,18 +43,18 @@ ShoalCave_LowTideLowerRoom_EventScript_BlackBelt:: @ 82371B2
 	release
 	end
 
-ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand:: @ 82371E1
+ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand::
 	msgbox ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus, MSGBOX_DEFAULT
 	release
 	end
 
-ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus: @ 82371EB
+ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus:
 	.string "The penetrating cold around these\n"
 	.string "parts is an impediment to training.\p"
 	.string "But with focus, one can overcome!\p"
 	.string "With this Focus Band, buckle down and\n"
 	.string "withstand the cold!$"
 
-ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus: @ 823728D
+ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus:
 	.string "Everything starts with focus!$"
 

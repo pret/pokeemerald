@@ -147,7 +147,7 @@ static const struct SpritePalette sSpritePalettes_Clock[] =
 
 static const struct OamData sOam_ClockHand =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 1,
@@ -199,7 +199,7 @@ static const struct SpriteTemplate sSpriteTemplate_HourHand =
 
 static const struct OamData sOam_PeriodIndicator =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 3,
@@ -665,7 +665,7 @@ static void LoadWallClockGraphics(void)
 
 static void WallClockInit(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(VBlankCB_WallClock);
     SetMainCallback2(CB2_WallClock);
@@ -856,7 +856,7 @@ static void Task_SetClock_HandleConfirmInput(u8 taskId)
 static void Task_SetClock_Confirmed(u8 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_SetClock_Exit;
 }
 
@@ -884,7 +884,7 @@ static void Task_ViewClock_HandleInput(u8 taskId)
 
 static void Task_ViewClock_FadeOut(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ViewClock_Exit;
 }
 
@@ -1029,8 +1029,8 @@ static void SpriteCB_MinuteHand(struct Sprite *sprite)
     if (y > 128)
         y |= 0xff00;
 
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
 }
 
 static void SpriteCB_HourHand(struct Sprite *sprite)
@@ -1049,8 +1049,8 @@ static void SpriteCB_HourHand(struct Sprite *sprite)
     if (y > 128)
         y |= 0xff00;
 
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
 }
 
 static void SpriteCB_PMIndicator(struct Sprite *sprite)
@@ -1077,8 +1077,8 @@ static void SpriteCB_PMIndicator(struct Sprite *sprite)
             sprite->data[1]--;
         }
     }
-    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->data[1]) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->data[1]) * 30 / 0x1000;
 }
 
 static void SpriteCB_AMIndicator(struct Sprite *sprite)
@@ -1105,6 +1105,6 @@ static void SpriteCB_AMIndicator(struct Sprite *sprite)
             sprite->data[1]--;
         }
     }
-    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->data[1]) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->data[1]) * 30 / 0x1000;
 }

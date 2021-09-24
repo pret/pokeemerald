@@ -1,16 +1,16 @@
 .set LOCALID_NURSE, 1
 
-VerdanturfTown_PokemonCenter_1F_MapScripts:: @ 8202726
+VerdanturfTown_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-VerdanturfTown_PokemonCenter_1F_OnTransition: @ 8202731
+VerdanturfTown_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_VERDANTURF_TOWN
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-VerdanturfTown_PokemonCenter_1F_EventScript_Nurse:: @ 820273A
+VerdanturfTown_PokemonCenter_1F_EventScript_Nurse::
 	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -18,15 +18,15 @@ VerdanturfTown_PokemonCenter_1F_EventScript_Nurse:: @ 820273A
 	release
 	end
 
-VerdanturfTown_PokemonCenter_1F_EventScript_Gentleman:: @ 8202748
+VerdanturfTown_PokemonCenter_1F_EventScript_Gentleman::
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon, MSGBOX_NPC
 	end
 
-VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM:: @ 8202751
+VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM::
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent, MSGBOX_NPC
 	end
 
-VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon: @ 820275A
+VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon:
 	.string "You can't consider yourself a real\n"
 	.string "Trainer if you don't have faith\l"
 	.string "in your Pokémon.\p"
@@ -34,7 +34,7 @@ VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon: @ 820275A
 	.string "in their battling Pokémon can win\l"
 	.string "through to the very end.$"
 
-VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent: @ 820280B
+VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent:
 	.string "The reason why anyone would visit\n"
 	.string "Verdanturf…\p"
 	.string "It's the Battle Tent. It goes without\n"

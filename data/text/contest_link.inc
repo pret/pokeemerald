@@ -1,38 +1,38 @@
 @ With the exception of Link standby, none of the below texts are used
 
-gTest_MissedTurn:: @ 827E8CE
+gTest_MissedTurn::
 	.string "Missed turn$"
 
-gText_LinkStandby4:: @ 827E8DA
+gText_LinkStandby4::
 	.string "Link standby!$"
 
-gText_WinnerIsPlayersMonCongrats:: @ 827E8E8
+gText_WinnerIsPlayersMonCongrats::
 	.string "The winner is {STR_VAR_1}'s {STR_VAR_2}!\n"
 	.string "Congratulations!$"
 
-gText_WinnerIsPlayersMon:: @ 827E910
+gText_WinnerIsPlayersMon::
 	.string "The winner is {STR_VAR_1}'s {STR_VAR_2}!{PAUSE_UNTIL_PRESS}$"
 
-gText_PrimaryJudgingNumX:: @ 827E929
+gText_PrimaryJudgingNumX::
 	.string "Primary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gText_SecondaryJudgingNumX:: @ 827E943
+gText_SecondaryJudgingNumX::
 	.string "Secondary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gText_SetEventNumX:: @ 827E95F
+gText_SetEventNumX::
 	.string "Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gText_MoveUsedMostOften:: @ 827E973
+gText_MoveUsedMostOften::
 	.string "The move used most often:\n"
 	.string "{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gText_MostImpressiveMon:: @ 827E992
+gText_MostImpressiveMon::
 	.string "The most impressive Pokémon:\n"
 	.string "{STR_VAR_1}'s {STR_VAR_2}{PAUSE_UNTIL_PRESS}$"
 
-gText_SetEventNumX2:: @ 827E9B9
+gText_SetEventNumX2::
 	.string "Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gText_LinkTVProgramWillNotBeMadeTrainerLost:: @ 827E9CD
+gText_LinkTVProgramWillNotBeMadeTrainerLost::
 	.string "A link TV program will not be made\n"
 	.string "because the Trainer lost.{PAUSE_UNTIL_PRESS}$"

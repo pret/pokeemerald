@@ -1,21 +1,21 @@
 .set LOCALID_ATTENDANT_SINGLES, 1
 .set LOCALID_ATTENDANT_DOUBLES, 6
 
-BattleFrontier_BattlePalaceLobby_MapScripts:: @ 824D77E
+BattleFrontier_BattlePalaceLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePalaceLobby_OnWarp
 	.byte 0
 
-BattleFrontier_BattlePalaceLobby_OnWarp: @ 824D789
+BattleFrontier_BattlePalaceLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePalaceLobby_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattlePalaceLobby_EventScript_TurnPlayerNorth:: @ 824D793
+BattleFrontier_BattlePalaceLobby_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePalaceLobby_OnFrame: @ 824D79D
+BattleFrontier_BattlePalaceLobby_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePalaceLobby_EventScript_GetChallengeStatus
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge
@@ -23,11 +23,11 @@ BattleFrontier_BattlePalaceLobby_OnFrame: @ 824D79D
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePalaceLobby_EventScript_LostChallenge
 	.2byte 0
 
-BattleFrontier_BattlePalaceLobby_EventScript_GetChallengeStatus:: @ 824D7C7
+BattleFrontier_BattlePalaceLobby_EventScript_GetChallengeStatus::
 	frontier_getstatus
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving:: @ 824D7D0
+BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving::
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge, MSGBOX_DEFAULT
 	closemessage
@@ -38,7 +38,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving:: @ 824D7D0
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge:: @ 824D817
+BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
 	compare VAR_RESULT, TRUE
@@ -46,9 +46,9 @@ BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge:: @ 824D817
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_GiveBattlePoints
 
-BattleFrontier_BattlePalaceLobby_EventScript_DefeatedMaven:: @ 824D838
+BattleFrontier_BattlePalaceLobby_EventScript_DefeatedMaven::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers, MSGBOX_DEFAULT
-BattleFrontier_BattlePalaceLobby_EventScript_GiveBattlePoints:: @ 824D840
+BattleFrontier_BattlePalaceLobby_EventScript_GiveBattlePoints::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints, MSGBOX_DEFAULT
 	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
@@ -61,7 +61,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_GiveBattlePoints:: @ 824D840
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_LostChallenge:: @ 824D873
+BattleFrontier_BattlePalaceLobby_EventScript_LostChallenge::
 	lockall
 	message BattleFrontier_BattlePalaceLobby_Text_ResultsWillBeRecorded
 	waitmessage
@@ -73,7 +73,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_LostChallenge:: @ 824D873
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_SaveAfterChallenge:: @ 824D8A1
+BattleFrontier_BattlePalaceLobby_EventScript_SaveAfterChallenge::
 	frontier_checkairshow
 	special LoadPlayerParty
 	special HealPlayerParty
@@ -85,18 +85,18 @@ BattleFrontier_BattlePalaceLobby_EventScript_SaveAfterChallenge:: @ 824D8A1
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_RecordMatch
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_RecordMatch:: @ 824D902
+BattleFrontier_BattlePalaceLobby_EventScript_RecordMatch::
 	call BattleFrontier_EventScript_SaveBattle
-BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge:: @ 824D907
+BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge::
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge:: @ 824D908
+BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge::
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting, MSGBOX_DEFAULT
 	message BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge
@@ -108,7 +108,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge:: @ 824D908
 	setvar VAR_TEMP_0, 255
 	goto BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_SinglesAttendant:: @ 824D944
+BattleFrontier_BattlePalaceLobby_EventScript_SinglesAttendant::
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
@@ -116,7 +116,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_SinglesAttendant:: @ 824D944
 	goto BattleFrontier_BattlePalaceLobby_EventScript_Attendant
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant:: @ 824D956
+BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant::
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
@@ -124,7 +124,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant:: @ 824D956
 	goto BattleFrontier_BattlePalaceLobby_EventScript_Attendant
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_Attendant:: @ 824D968
+BattleFrontier_BattlePalaceLobby_EventScript_Attendant::
 	palace_get PALACE_DATA_PRIZE
 	compare VAR_RESULT, ITEM_NONE
 	goto_if_ne BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge
@@ -133,23 +133,23 @@ BattleFrontier_BattlePalaceLobby_EventScript_Attendant:: @ 824D968
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForSingleBattle
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForDoubleBattle
-BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge:: @ 824D999
+BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_AskTakeSingleBattleChallenge
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_ExplainChallenge
 	case 2, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge:: @ 824D9E6
+BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge::
 	message BattleFrontier_BattlePalaceLobby_Text_WhichChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
@@ -172,7 +172,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge:: @ 824D9E6
 	case YES, BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge:: @ 824DA87
+BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge::
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	palace_init
@@ -186,7 +186,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge:: @ 824DA87
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed
-BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge:: @ 824DAF3
+BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FollowMe, MSGBOX_DEFAULT
@@ -197,58 +197,58 @@ BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge:: @ 824DAF3
 	waitstate
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_ExplainChallenge:: @ 824DB20
+BattleFrontier_BattlePalaceLobby_EventScript_ExplainChallenge::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_ExplainDoublesChallenge
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_ExplainDoublesChallenge:: @ 824DB38
+BattleFrontier_BattlePalaceLobby_EventScript_ExplainDoublesChallenge::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons:: @ 824DB45
+BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons::
 	switch VAR_RESULT
 	case FRONTIER_LVL_50, BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLvOpen
 
-BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLv50:: @ 824DB60
+BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLv50::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_EndCancelChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLvOpen:: @ 824DB6D
+BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLvOpen::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_EndCancelChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed:: @ 824DB7A
+BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 
-BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge:: @ 824DB91
+BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge::
 	special LoadPlayerParty
-BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge:: @ 824DB94
+BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ReturnWhenFortified, MSGBOX_DEFAULT
-BattleFrontier_BattlePalaceLobby_EventScript_EndCancelChallenge:: @ 824DB9C
+BattleFrontier_BattlePalaceLobby_EventScript_EndCancelChallenge::
 	release
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForSingleBattle:: @ 824DB9E
+BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForSingleBattle::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_WelcomeForSingleBattle, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForDoubleBattle:: @ 824DBA7
+BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForDoubleBattle::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_AskTakeSingleBattleChallenge:: @ 824DBB0
+BattleFrontier_BattlePalaceLobby_EventScript_AskTakeSingleBattleChallenge::
 	message BattleFrontier_BattlePalaceLobby_Text_TakeSingleBattleChallenge
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge:: @ 824DBB6
+BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge::
 	message BattleFrontier_BattlePalaceLobby_Text_TakeDoubleBattleChallenge
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor:: @ 824DBBC
+BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
@@ -271,46 +271,46 @@ BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor:: @ 824DBBC
 	waitdooranim
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant:: @ 824DC23
+BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant::
 	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant:: @ 824DC29
+BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant::
 	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor:: @ 824DC2F
+BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor::
 	opendoor 5, 4
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_OpenDoublesHallDoor:: @ 824DC35
+BattleFrontier_BattlePalaceLobby_EventScript_OpenDoublesHallDoor::
 	opendoor 19, 4
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_CloseSinglesHallDoor:: @ 824DC3B
+BattleFrontier_BattlePalaceLobby_EventScript_CloseSinglesHallDoor::
 	closedoor 5, 4
 	return
 
-BattleFrontier_BattlePalaceLobby_EventScript_CloseDoublesHallDoor:: @ 824DC41
+BattleFrontier_BattlePalaceLobby_EventScript_CloseDoublesHallDoor::
 	closedoor 19, 4
 	return
 
-BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor: @ 824DC47
+BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor:
 	walk_up
 	step_end
 
-BattleFrontier_BattlePalaceLobby_Movement_AttendantEnterDoor: @ 824DC49
+BattleFrontier_BattlePalaceLobby_Movement_AttendantEnterDoor:
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor: @ 824DC4C
+BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor:
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattlePalaceLobby_EventScript_ShowSinglesResults:: @ 824DC50
+BattleFrontier_BattlePalaceLobby_EventScript_ShowSinglesResults::
 	lockall
 	frontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_SINGLES
 	waitbuttonpress
@@ -318,7 +318,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_ShowSinglesResults:: @ 824DC50
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_ShowDoublesResults:: @ 824DC69
+BattleFrontier_BattlePalaceLobby_EventScript_ShowDoublesResults::
 	lockall
 	frontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_DOUBLES
 	waitbuttonpress
@@ -326,32 +326,32 @@ BattleFrontier_BattlePalaceLobby_EventScript_ShowDoublesResults:: @ 824DC69
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_BlackBelt:: @ 824DC82
+BattleFrontier_BattlePalaceLobby_EventScript_BlackBelt::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_Man:: @ 824DC8B
+BattleFrontier_BattlePalaceLobby_EventScript_Man::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_Beauty:: @ 824DC94
+BattleFrontier_BattlePalaceLobby_EventScript_Beauty::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_Maniac:: @ 824DC9D
+BattleFrontier_BattlePalaceLobby_EventScript_Maniac::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_RulesBoard:: @ 824DCA6
+BattleFrontier_BattlePalaceLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard:: @ 824DCB5
+BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 16, 0, MULTI_BATTLE_PALACE_RULES, 0
+	multichoice 16, 0, MULTI_BATTLE_PALACE_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_RulesBasics
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_RulesNature
@@ -362,47 +362,47 @@ BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard:: @ 824DCB5
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_ExitRules
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_RulesBasics:: @ 824DD13
+BattleFrontier_BattlePalaceLobby_EventScript_RulesBasics::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_RulesNature:: @ 824DD21
+BattleFrontier_BattlePalaceLobby_EventScript_RulesNature::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_RulesMoves:: @ 824DD2F
+BattleFrontier_BattlePalaceLobby_EventScript_RulesMoves::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_RulesUnderpowered:: @ 824DD3D
+BattleFrontier_BattlePalaceLobby_EventScript_RulesUnderpowered::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_RulesWhenInDanger:: @ 824DD4B
+BattleFrontier_BattlePalaceLobby_EventScript_RulesWhenInDanger::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_ExitRules:: @ 824DD59
+BattleFrontier_BattlePalaceLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_Text_WelcomeForSingleBattle: @ 824DD5B
+BattleFrontier_BattlePalaceLobby_Text_WelcomeForSingleBattle:
 	.string "Where the hearts of Trainers\n"
 	.string "are put to the test.\p"
 	.string "I welcome you to the Battle Palace.\p"
 	.string "I accept challenges to the Single\n"
 	.string "Battle Halls.$"
 
-BattleFrontier_BattlePalaceLobby_Text_TakeSingleBattleChallenge: @ 824DDE1
+BattleFrontier_BattlePalaceLobby_Text_TakeSingleBattleChallenge:
 	.string "Do you wish to take\n"
 	.string "the Single Battle Hall challenge?$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge: @ 824DE17
+BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge:
 	.string "In the Battle Palace, there are\n"
 	.string "several auditoriums for Single Battles\l"
 	.string "that are named Single Battle Halls.\p"
@@ -425,16 +425,16 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge: @ 824DE17
 	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ReturnWhenFortified: @ 824E0D8
+BattleFrontier_BattlePalaceLobby_Text_ReturnWhenFortified:
 	.string "When you have fortified your heart\n"
 	.string "and Pokémon, you must return.$"
 
-BattleFrontier_BattlePalaceLobby_Text_WhichChallenge: @ 824E119
+BattleFrontier_BattlePalaceLobby_Text_WhichChallenge:
 	.string "There are two Battle Halls,\n"
 	.string "Level 50 and Open Level.\l"
 	.string "Which is your choice of a challenge?$"
 
-BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50: @ 824E173
+BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50:
 	.string "Sigh…\p"
 	.string "You do not have the three Pokémon\n"
 	.string "required for the challenge.\p"
@@ -448,7 +448,7 @@ BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50: @ 824E173
 	.string "Come back when you have made\n"
 	.string "your preparations.$"
 
-BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen: @ 824E29E
+BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "Sigh…\p"
 	.string "You do not have the three Pokémon\n"
 	.string "required for the challenge.\p"
@@ -460,52 +460,52 @@ BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen: @ 824E29E
 	.string "Come back when you have made\n"
 	.string "your preparations.$"
 
-BattleFrontier_BattlePalaceLobby_Text_NowSelectThreeMons: @ 824E399
+BattleFrontier_BattlePalaceLobby_Text_NowSelectThreeMons:
 	.string "Good. Now, you must select your\n"
 	.string "three Pokémon.$"
 
-BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2: @ 824E3C8
+BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2:
 	.string "I must save before I show you to\n"
 	.string "the Battle Hall. Is that okay?$"
 
-BattleFrontier_BattlePalaceLobby_Text_FollowMe: @ 824E408
+BattleFrontier_BattlePalaceLobby_Text_FollowMe:
 	.string "Good.\n"
 	.string "Now, follow me.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ResultsWillBeRecorded: @ 824E41E
+BattleFrontier_BattlePalaceLobby_Text_ResultsWillBeRecorded:
 	.string "I feel privileged for having seen\n"
 	.string "your Pokémon's exploits.\p"
 	.string "The results will be recorded.\n"
 	.string "I must ask you to briefly wait.$"
 
-BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak: @ 824E497
+BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak:
 	.string "To achieve a 7-win streak…\p"
 	.string "The bonds that bind your heart with\n"
 	.string "your Pokémon seem firm and true.$"
 
-BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded: @ 824E4F7
+BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded:
 	.string "Your feat will be recorded.\n"
 	.string "I must ask you to briefly wait.$"
 
 @ Unused
-BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak: @ 824E5333
+BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak:
     .string "For the feat of your 7-win streak,\n"
     .string "we present you with Battle Point(s).$"
 
-BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize: @ 824E57B
+BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize:
 	.string "You seem to have no space for\n"
 	.string "our prize.\p"
 	.string "You should return when you have\n"
 	.string "organized your Bag.$"
 
-BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting: @ 824E5D8
+BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting:
 	.string "We have been waiting for you…$"
 
-BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge: @ 824E5F6
+BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge:
 	.string "I must save before I show you to\n"
 	.string "the Battle Hall. Is that okay?$"
 
-BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge: @ 824E636
+BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge:
 	.string "Sigh…\p"
 	.string "You failed to save before you ended\n"
 	.string "your challenge the last time.\p"
@@ -513,11 +513,11 @@ BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge: @ 824E6
 	.string "disqualified. It is most unfortunate.$"
 
 @ Unused
-BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize: @ 824E6C9
+BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize:
 	.string "{PLAYER} received the prize\n"
 	.string "{STR_VAR_1}.$"
 
-BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink: @ 824E6E3
+BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
 	.string "For a hardy fellow like me,\n"
 	.string "hardy Pokémon are the best.\p"
 	.string "Offense is the best defense!\n"
@@ -533,7 +533,7 @@ BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink: @ 824E6E3
 	.string "Huh?\n"
 	.string "Why are you looking at me like that?$"
 
-BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere: @ 824E851
+BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
 	.string "Hmm…\p"
 	.string "It appears that the nature of Pokémon\n"
 	.string "and the moves that they have been\l"
@@ -546,7 +546,7 @@ BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere: @ 824E851
 	.string "you may need to examine how well\l"
 	.string "its moves match its nature.$"
 
-BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms: @ 824E992
+BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
 	.string "My Pokémon is usually very docile.\p"
 	.string "But when it's in a Battle Hall,\n"
 	.string "it sometimes seems to become\l"
@@ -554,25 +554,25 @@ BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms: @ 824E992
 	.string "It becomes totally intimidating.\n"
 	.string "It's shocking, even.$"
 
-BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway: @ 824EA4B
+BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
 	.string "I wonder what sort of nature a Pokémon\n"
 	.string "would have if it favored enfeebling its\l"
 	.string "opponents and chipping away slowly.\p"
 	.string "I'd be surprised if it was a Lax nature.\p"
 	.string "But, nah, that can't be right.$"
 
-BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle: @ 824EB06
+BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
 	.string "Where the hearts of Trainers\n"
 	.string "are put to the test.\p"
 	.string "I welcome you to the Battle Palace.\p"
 	.string "I accept challenges to the Double\n"
 	.string "Battle Halls.$"
 
-BattleFrontier_BattlePalaceLobby_Text_TakeDoubleBattleChallenge: @ 824EB8C
+BattleFrontier_BattlePalaceLobby_Text_TakeDoubleBattleChallenge:
 	.string "Do you wish to take\n"
 	.string "the Double Battle Hall challenge?$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge: @ 824EBC2
+BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge:
 	.string "In the Battle Palace, there are\n"
 	.string "several auditoriums for Double Battles\l"
 	.string "that are named Double Battle Halls.\p"
@@ -595,34 +595,34 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge: @ 824EBC2
 	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers: @ 824EE81
+BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers:
 	.string "To defeat the Palace Maven\n"
 	.string "and seven Trainers in a row…$"
 
-BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints: @ 824EEB9
+BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints:
 	.string "In honor of the bond you share with\n"
 	.string "your Pokémon, we present you with\l"
 	.string "these Battle Point(s).$"
 
-BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch: @ 824EF16
+BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch:
 	.string "Would you like to record your latest\n"
 	.string "Battle Palace match on your\l"
 	.string "Frontier Pass?$"
 
-BattleFrontier_BattlePalaceLobby_Text_RulesAreListed: @ 824EF66
+BattleFrontier_BattlePalaceLobby_Text_RulesAreListed:
 	.string "The Battle Hall rules are listed.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading: @ 824EF88
+BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading:
 	.string "Which heading do you want to read?$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics: @ 824EFAB
+BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics:
 	.string "Here, Pokémon are required to think\n"
 	.string "and battle by themselves.\p"
 	.string "Unlike in the wild, Pokémon that live\n"
 	.string "with people behave differently\l"
 	.string "depending on their nature.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature: @ 824F049
+BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature:
 	.string "Depending on its nature, a Pokémon\n"
 	.string "may prefer to attack no matter what.\p"
 	.string "Another Pokémon may prefer to protect\n"
@@ -635,7 +635,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature: @ 824F049
 	.string "It may also dislike certain moves that\n"
 	.string "it has trouble using.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves: @ 824F190
+BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves:
 	.string "There are offensive moves that inflict\n"
 	.string "direct damage on the foe.\p"
 	.string "There are defensive moves that are\n"
@@ -648,7 +648,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves: @ 824F190
 	.string "Pokémon will consider using moves in\n"
 	.string "these three categories.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered: @ 824F2E8
+BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered:
 	.string "When not under command by its Trainer,\n"
 	.string "a Pokémon may be unable to effectively\l"
 	.string "use certain moves.\p"
@@ -658,7 +658,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered: @ 824F2E8
 	.string "do not match its nature, it will often\l"
 	.string "be unable to live up to its potential.$"
 
-BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger: @ 824F3F4
+BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger:
 	.string "Depending on its nature, a Pokémon may\n"
 	.string "start using moves that don't match its\l"
 	.string "nature when it is in trouble.\p"

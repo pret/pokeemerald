@@ -1,29 +1,29 @@
 .set LOCALID_FOSSIL_MANIAC, 1
 
-Route114_FossilManiacsTunnel_MapScripts:: @ 822AF28
+Route114_FossilManiacsTunnel_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsTunnel_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route114_FossilManiacsTunnel_OnLoad
 	.byte 0
 
-Route114_FossilManiacsTunnel_OnTransition: @ 822AF33
+Route114_FossilManiacsTunnel_OnTransition:
 	call_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac
 	end
 
-Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac:: @ 822AF3D
+Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac::
 	setobjectxyperm LOCALID_FOSSIL_MANIAC, 6, 5
 	setobjectmovementtype LOCALID_FOSSIL_MANIAC, MOVEMENT_TYPE_FACE_DOWN
 	return
 
-Route114_FossilManiacsTunnel_OnLoad: @ 822AF49
+Route114_FossilManiacsTunnel_OnLoad:
 	call_if_unset FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass
 	end
 
-Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass:: @ 822AF53
+Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass::
 	setmetatile 6, 1, METATILE_Fallarbor_RedRockWall, 1
 	setmetatile 6, 2, METATILE_Fallarbor_RedRockWall, 1
 	return
 
-Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn:: @ 822AF66
+Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn::
 	lockall
 	applymovement LOCALID_FOSSIL_MANIAC, Common_Movement_WalkInPlaceFastestUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
@@ -33,7 +33,7 @@ Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn:: @ 822AF66
 	releaseall
 	end
 
-Route114_FossilManiacsTunnel_EventScript_FossilManiac:: @ 822AF87
+Route114_FossilManiacsTunnel_EventScript_FossilManiac::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_REVIVED_FOSSIL_MON, Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil
@@ -47,17 +47,17 @@ Route114_FossilManiacsTunnel_EventScript_FossilManiac:: @ 822AF87
 	release
 	end
 
-Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil:: @ 822AFBC
+Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil::
 	msgbox Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil:: @ 822AFC6
+Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 	msgbox Route114_FossilManiacsTunnel_Text_FossilsAreWonderful, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_FossilManiacsTunnel_Text_LookInDesertForFossils: @ 822AFD0
+Route114_FossilManiacsTunnel_Text_LookInDesertForFossils:
 	.string "I'm the Fossil Maniac…\n"
 	.string "I'm a nice guy who loves Fossils…\p"
 	.string "Do you want a Fossil?\p"
@@ -68,7 +68,7 @@ Route114_FossilManiacsTunnel_Text_LookInDesertForFossils: @ 822AFD0
 	.string "are boulders and sand that may hide\l"
 	.string "Fossils…$"
 
-Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils: @ 822B0D6
+Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils:
 	.string "You found a Fossil, didn't you?\n"
 	.string "That's so nice… It's so dreamy…\p"
 	.string "What are you going to do with that\n"
@@ -79,11 +79,11 @@ Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils: @ 822B0D6
 	.string "I love my Fossils, so I would never\n"
 	.string "do anything like that…$"
 
-Route114_FossilManiacsTunnel_Text_FossilsAreWonderful: @ 822B1CC
+Route114_FossilManiacsTunnel_Text_FossilsAreWonderful:
 	.string "Fossils are so… Wonderful…\n"
 	.string "It's so dreamy…$"
 
-Route114_FossilManiacsTunnel_Text_NotSafeThatWay: @ 822B1F7
+Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
 	.string "Oh…\n"
 	.string "It's not safe that way…\p"
 	.string "I was digging away, you see…\n"

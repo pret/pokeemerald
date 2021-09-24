@@ -1,23 +1,23 @@
-Route102_MapScripts:: @ 81EC0E0
+Route102_MapScripts::
 	.byte 0
 
-Route102_EventScript_LittleBoy:: @ 81EC0E1
+Route102_EventScript_LittleBoy::
 	msgbox Route102_Text_ImNotVeryTall, MSGBOX_NPC
 	end
 
-Route102_EventScript_RouteSignOldale:: @ 81EC0EA
+Route102_EventScript_RouteSignOldale::
 	msgbox Route102_Text_RouteSignOldale, MSGBOX_SIGN
 	end
 
-Route102_EventScript_RouteSignPetalburg:: @ 81EC0F3
+Route102_EventScript_RouteSignPetalburg::
 	msgbox Route102_Text_RouteSignPetalburg, MSGBOX_SIGN
 	end
 
-Route102_EventScript_Boy:: @ 81EC0FC
+Route102_EventScript_Boy::
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
 	end
 
-Route102_EventScript_Calvin:: @ 81EC105
+Route102_EventScript_Calvin::
 	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, Route102_EventScript_CalvinRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -30,52 +30,52 @@ Route102_EventScript_Calvin:: @ 81EC105
 	release
 	end
 
-Route102_EventScript_CalvinRegisterMatchCallAfterBattle:: @ 81EC146
+Route102_EventScript_CalvinRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegisterMatchCall
 	release
 	end
 
-Route102_EventScript_CalvinRegisterMatchCall:: @ 81EC157
+Route102_EventScript_CalvinRegisterMatchCall::
 	msgbox Route102_Text_CalvinRegisterShort, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CALVIN_1
 	release
 	end
 
-Route102_EventScript_CalvinTryRegister:: @ 81EC170
+Route102_EventScript_CalvinTryRegister::
 	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegister
 	msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route102_EventScript_CalvinRegister:: @ 81EC183
+Route102_EventScript_CalvinRegister::
 	msgbox Route102_Text_CalvinRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CALVIN_1
 	release
 	end
 
-Route102_EventScript_CalvinRematch:: @ 81EC19C
+Route102_EventScript_CalvinRematch::
 	trainerbattle_rematch TRAINER_CALVIN_1, Route102_Text_CalvinRematchIntro, Route102_Text_CalvinRematchDefeated
 	msgbox Route102_Text_CalvinRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_Rick:: @ 81EC1B3
+Route102_EventScript_Rick::
 	trainerbattle_single TRAINER_RICK, Route102_Text_RickIntro, Route102_Text_RickDefeated
 	msgbox Route102_Text_RickPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_Tiana:: @ 81EC1CA
+Route102_EventScript_Tiana::
 	trainerbattle_single TRAINER_TIANA, Route102_Text_TianaIntro, Route102_Text_TianaDefeated
 	msgbox Route102_Text_TianaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_Allen:: @ 81EC1E1
+Route102_EventScript_Allen::
 	trainerbattle_single TRAINER_ALLEN, Route102_Text_AllenIntro, Route102_Text_AllenDefeated
 	msgbox Route102_Text_AllenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_Text_WatchMeCatchPokemon: @ 81EC1F8
+Route102_Text_WatchMeCatchPokemon:
 	.string "Wally: {PLAYER}…\n"
 	.string "Pokémon hide in tall grass like this,\l"
 	.string "don't they?\p"
@@ -83,29 +83,29 @@ Route102_Text_WatchMeCatchPokemon: @ 81EC1F8
 	.string "catch one properly.\p"
 	.string "…Whoa!$"
 
-Route102_Text_WallyIDidIt: @ 81EC271
+Route102_Text_WallyIDidIt:
 	.string "Wally: I did it… It's my…\n"
 	.string "My Pokémon!$"
 
-Route102_Text_LetsGoBack: @ 81EC297
+Route102_Text_LetsGoBack:
 	.string "{PLAYER}, thank you!\n"
 	.string "Let's go back to the Gym!$"
 
-Route102_Text_ImNotVeryTall: @ 81EC2C0
+Route102_Text_ImNotVeryTall:
 	.string "I'm…not very tall, so I sink right\n"
 	.string "into tall grass.\p"
 	.string "The grass goes up my nose and…\n"
 	.string "Fwafwafwafwafwa…\p"
 	.string "Fwatchoo!$"
 
-Route102_Text_CatchWholeBunchOfPokemon: @ 81EC32E
+Route102_Text_CatchWholeBunchOfPokemon:
 	.string "I'm going to catch a whole bunch of\n"
 	.string "Pokémon!$"
 
-Route102_Text_RouteSignOldale: @ 81EC35B
+Route102_Text_RouteSignOldale:
 	.string "Route 102\n"
 	.string "{RIGHT_ARROW} Oldale Town$"
 
-Route102_Text_RouteSignPetalburg: @ 81EC373
+Route102_Text_RouteSignPetalburg:
 	.string "Route 102\n"
 	.string "{LEFT_ARROW} Petalburg City$"

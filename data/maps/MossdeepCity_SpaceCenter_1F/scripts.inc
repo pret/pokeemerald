@@ -5,17 +5,17 @@
 .set LOCALID_WOMAN, 5
 .set LOCALID_STAIR_GRUNT, 9
 
-MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
+MossdeepCity_SpaceCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_OnTransition
 	.byte 0
 
-MossdeepCity_SpaceCenter_1F_OnTransition: @ 8222F4C
+MossdeepCity_SpaceCenter_1F_OnTransition:
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma:: @ 8222F58
+MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma::
 	setobjectxyperm LOCALID_SAILOR, 1, 9
 	setobjectmovementtype LOCALID_SAILOR, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm LOCALID_WOMAN, 0, 8
@@ -33,29 +33,29 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma:: @ 8222F58
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft:: @ 8222FAA
+MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft::
 	setobjectxyperm LOCALID_STAIR_GRUNT, 12, 2
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown:: @ 8222FB2
+MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown::
 	setobjectxyperm LOCALID_STAIR_GRUNT, 13, 3
 	end
 
 @ Functionally unused. See comment on MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast
-MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight:: @ 8222FBA
+MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight::
 	setobjectxyperm LOCALID_STAIR_GRUNT, 14, 2
 	end
 
-MossdeepCity_SpaceCenter_1F_OnLoad: @ 8222FC2
+MossdeepCity_SpaceCenter_1F_OnLoad:
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_le MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote:: @ 8222FCE
+MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote::
 	setmetatile 2, 5, METATILE_Facility_DataPad, 1
 	return
 
-MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter:: @ 8222FD8
+MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter::
 	lock
 	faceplayer
 	compare VAR_MOSSDEEP_CITY_STATE, 2
@@ -73,15 +73,15 @@ MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter:: @ 8222FD8
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet:: @ 8223012
+MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent, MSGBOX_DEFAULT
 	return
 
-MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber:: @ 822301B
+MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber, MSGBOX_DEFAULT
 	return
 
-MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma:: @ 8223024
+MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma::
 	dotimebasedevents
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
@@ -95,15 +95,15 @@ MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma:: @ 8223024
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma:: @ 8223051
+MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent, MSGBOX_DEFAULT
 	return
 
-MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma:: @ 822305A
+MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber, MSGBOX_DEFAULT
 	return
 
-MossdeepCity_SpaceCenter_1F_EventScript_Scientist:: @ 8223063
+MossdeepCity_SpaceCenter_1F_EventScript_Scientist::
 	lock
 	faceplayer
 	compare VAR_MOSSDEEP_CITY_STATE, 2
@@ -112,14 +112,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_Scientist:: @ 8223063
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma:: @ 822307A
+MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan:: @ 822308E
+MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan::
 	lock
 	faceplayer
 	compare VAR_MOSSDEEP_CITY_STATE, 2
@@ -134,12 +134,12 @@ MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan:: @ 822308E
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone:: @ 82230D0
+MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma:: @ 82230DA
+MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma::
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma
 	msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_SUN_STONE
@@ -152,14 +152,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma:: @ 82230DA
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma:: @ 8223119
+MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Woman:: @ 822312D
+MossdeepCity_SpaceCenter_1F_EventScript_Woman::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
@@ -170,17 +170,17 @@ MossdeepCity_SpaceCenter_1F_EventScript_Woman:: @ 822312D
 	goto MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal:: @ 8223154
+MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma:: @ 822315E
+MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_OldMan:: @ 8223168
+MossdeepCity_SpaceCenter_1F_EventScript_OldMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
@@ -191,7 +191,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_OldMan:: @ 8223168
 	goto MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal:: @ 822318F
+MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
@@ -199,7 +199,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal:: @ 822318F
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma:: @ 82231A4
+MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaWantsToSpoilMyDream, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
@@ -207,7 +207,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma:: @ 82231A4
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Steven:: @ 82231B9
+MossdeepCity_SpaceCenter_1F_EventScript_Steven::
 	lock
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_1F_Text_StevenMagmaCantBeAllowedToTakeFuel, MSGBOX_DEFAULT
@@ -216,28 +216,28 @@ MossdeepCity_SpaceCenter_1F_EventScript_Steven:: @ 82231B9
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MagmaNote:: @ 82231CF
+MossdeepCity_SpaceCenter_1F_EventScript_MagmaNote::
 	lockall
 	msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaIntentToStealNotice, MSGBOX_DEFAULT
 	releaseall
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Grunt3:: @ 82231DA
+MossdeepCity_SpaceCenter_1F_EventScript_Grunt3::
 	trainerbattle_single TRAINER_GRUNT_SPACE_CENTER_3, MossdeepCity_SpaceCenter_1F_Text_Grunt3Intro, MossdeepCity_SpaceCenter_1F_Text_Grunt3Defeat
 	msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Grunt1:: @ 82231F1
+MossdeepCity_SpaceCenter_1F_EventScript_Grunt1::
 	trainerbattle_single TRAINER_GRUNT_SPACE_CENTER_1, MossdeepCity_SpaceCenter_1F_Text_Grunt1Intro, MossdeepCity_SpaceCenter_1F_Text_Grunt1Defeat
 	msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Grunt4:: @ 8223208
+MossdeepCity_SpaceCenter_1F_EventScript_Grunt4::
 	trainerbattle_single TRAINER_GRUNT_SPACE_CENTER_4, MossdeepCity_SpaceCenter_1F_Text_Grunt4Intro, MossdeepCity_SpaceCenter_1F_Text_Grunt4Defeat
 	msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Grunt2:: @ 822321F
+MossdeepCity_SpaceCenter_1F_EventScript_Grunt2::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F, MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated
@@ -247,19 +247,23 @@ MossdeepCity_SpaceCenter_1F_EventScript_Grunt2:: @ 822321F
 	copyobjectxytoperm LOCALID_STAIR_GRUNT
 	switch VAR_FACING
 	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest
-	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast  @ BUG: This was meant to be case DIR_EAST
+	#ifdef BUGFIX
+	case DIR_EAST, MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast
+	#else
+	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast
+	#endif
 	applymovement LOCALID_STAIR_GRUNT, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 2
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated:: @ 822326E
+MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt2PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest:: @ 8223278
+MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest::
 	applymovement LOCALID_STAIR_GRUNT, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsWest
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 1
@@ -268,53 +272,53 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest:: @ 8223278
 
 @ Functionally unused by mistake. The movement is handled anyway after the switch (see above)
 @ This also means VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE can never be 3
-MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast:: @ 8223289
+MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast::
 	applymovement LOCALID_STAIR_GRUNT, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsEast
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 3
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsWest: @ 822329A
+MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsWest:
 	lock_facing_direction
 	walk_left
 	unlock_facing_direction
 	step_end
 
 @ Functionally unused. See above
-MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsEast: @ 822329E
+MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsEast:
 	lock_facing_direction
 	walk_right
 	unlock_facing_direction
 	step_end
 
 @ This was meant to only handle the player facing North, but by mistake(?) it also handles the player facing East
-MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs: @ 82232A2
+MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs:
 	face_left
 	lock_facing_direction
 	walk_right
 	unlock_facing_direction
 	step_end
 
-MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent: @ 82232A7
+MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent:
 	.string "The rocket's launch is imminent!$"
 
-MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber: @ 82232C8
+MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber:
 	.string "The rocket launched safely!\n"
 	.string "That's successful launch no. {STR_VAR_1}!$"
 
-MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent: @ 8223305
+MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent:
 	.string "I know that things are a little\n"
 	.string "haywire right now, but…\p"
 	.string "The rocket's launch is imminent!$"
 
-MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber: @ 822335E
+MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber:
 	.string "I know that things are a little\n"
 	.string "haywire right now, but…\p"
 	.string "The rocket launched safely!\n"
 	.string "That's successful launch no. {STR_VAR_1}!$"
 
-MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection: @ 82233D3
+MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "A rocket launch demands perfection.\n"
 	.string "Not even a 1% margin of error is allowed.\p"
 	.string "Even if it's 99% okay, the whole thing\n"
@@ -322,55 +326,55 @@ MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection: @ 82233D3
 	.string "Despite that, we never stop trying.\n"
 	.string "Why? It's a dream that never ends.$"
 
-MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter: @ 82234B7
+MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter:
 	.string "Those Magma thugs have their sights\n"
 	.string "set on our Space Center.\p"
 	.string "But we can't allow anything that minor\n"
 	.string "to interfere with our rocket launch!$"
 
-MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt: @ 8223540
+MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt:
 	.string "I was taking a stroll down the beach\n"
 	.string "when I found this.\p"
 	.string "It's not anything I need, so you can\n"
 	.string "have it.$"
 
-MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers: @ 82235A6
+MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers:
 	.string "The Hoenn region has been famous for \n"
 	.string "its meteor showers for a long time.$"
 
-MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis: @ 82235F0
+MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis:
 	.string "Team Magma can't be allowed to steal\n"
 	.string "the rocket fuel.\p"
 	.string "Oh, by the way, you can have this stone\n"
 	.string "I found on the beach.$"
 
-MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma: @ 8223664
+MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma:
 	.string "With Team Magma around, I guess\n"
 	.string "strolls on the beach aren't safe.$"
 
-MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace: @ 82236A6
+MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace:
 	.string "Some people claim that Pokémon came\n"
 	.string "from space. Could it be true?$"
 
-MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma: @ 82236E8
+MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma:
 	.string "Team Aqua should take care of\n"
 	.string "Team Magma!\p"
 	.string "But if they did that, Team Aqua will\n"
 	.string "become bold and brazen, won't they?$"
 
-MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind: @ 822375B
+MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind:
 	.string "A giant chunk of metal bursts through\n"
 	.string "the skies and flies into space…\p"
 	.string "It boggles my mind!$"
 
-MossdeepCity_SpaceCenter_1F_Text_MagmaWantsToSpoilMyDream: @ 82237B5
+MossdeepCity_SpaceCenter_1F_Text_MagmaWantsToSpoilMyDream:
 	.string "A giant chunk of metal bursts through\n"
 	.string "the skies and flies into space…\p"
 	.string "But Team Magma wants to spoil\n"
 	.string "that dream of mine!\p"
 	.string "I'm not having any of that!$"
 
-MossdeepCity_SpaceCenter_1F_Text_StevenMagmaCantBeAllowedToTakeFuel: @ 8223849
+MossdeepCity_SpaceCenter_1F_Text_StevenMagmaCantBeAllowedToTakeFuel:
 	.string "Steven: {PLAYER}{KUN}, have you read that\n"
 	.string "proclamation already?\p"
 	.string "Team Magma is coming after the rocket\n"
@@ -382,57 +386,57 @@ MossdeepCity_SpaceCenter_1F_Text_StevenMagmaCantBeAllowedToTakeFuel: @ 8223849
 	.string "In the meantime, why don't you go\n"
 	.string "check out the town?$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt3Intro: @ 822396C
+MossdeepCity_SpaceCenter_1F_Text_Grunt3Intro:
 	.string "As promised, we've come for\n"
 	.string "the rocket fuel!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt3Defeat: @ 8223999
+MossdeepCity_SpaceCenter_1F_Text_Grunt3Defeat:
 	.string "Ran out of fuel…$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt3PostBattle: @ 82239AA
+MossdeepCity_SpaceCenter_1F_Text_Grunt3PostBattle:
 	.string "Don't think you're on a roll just\n"
 	.string "because you've beaten me!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt1Intro: @ 82239E6
+MossdeepCity_SpaceCenter_1F_Text_Grunt1Intro:
 	.string "We gave you fair warning!\n"
 	.string "There's nothing sneaky about us!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt1Defeat: @ 8223A21
+MossdeepCity_SpaceCenter_1F_Text_Grunt1Defeat:
 	.string "Grrr…\n"
 	.string "We should've used sneaky treachery…$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt1PostBattle: @ 8223A4B
+MossdeepCity_SpaceCenter_1F_Text_Grunt1PostBattle:
 	.string "Okay, I get it already! The next time,\n"
 	.string "we'll come unannounced.$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt4Intro: @ 8223A8A
+MossdeepCity_SpaceCenter_1F_Text_Grunt4Intro:
 	.string "The rocket fuel the Space Center has\n"
 	.string "in storage--that's what we're after.\p"
 	.string "We mean to take every last bit of it!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt4Defeat: @ 8223AFA
+MossdeepCity_SpaceCenter_1F_Text_Grunt4Defeat:
 	.string "Please, can you spare some fuel?\n"
 	.string "Even a chintzy cup will do!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt4PostBattle: @ 8223B37
+MossdeepCity_SpaceCenter_1F_Text_Grunt4PostBattle:
 	.string "What are we going to do with\n"
 	.string "the rocket fuel?\p"
 	.string "How would I know?\n"
 	.string "Ask our leader upstairs!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro: @ 8223B90
+MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro:
 	.string "Our leader said no one, but no one,\n"
 	.string "gets past me!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat: @ 8223BC2
+MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat:
 	.string "Ack! Ack! Aaack!$"
 
-MossdeepCity_SpaceCenter_1F_Text_Grunt2PostBattle: @ 8223BD3
+MossdeepCity_SpaceCenter_1F_Text_Grunt2PostBattle:
 	.string "Please, tell our leader that\n"
 	.string "I never abandoned my post.\l"
 	.string "That I stayed to the bitter end…$"
 
-MossdeepCity_SpaceCenter_1F_Text_MagmaIntentToStealNotice: @ 8223C2C
+MossdeepCity_SpaceCenter_1F_Text_MagmaIntentToStealNotice:
 	.string "This is…\n"
 	.string "An intent-to-steal notice?\p"
 	.string "“To the staff of the Space Center:\n"

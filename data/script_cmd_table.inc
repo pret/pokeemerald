@@ -1,5 +1,5 @@
 	.align 2
-gScriptCmdTable:: @ 81DB67C
+gScriptCmdTable::
 	.4byte ScrCmd_nop      	                @ 0x00
 	.4byte ScrCmd_nop1                      @ 0x01
 	.4byte ScrCmd_end      	                @ 0x02
@@ -119,7 +119,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_drawboxtext               @ 0x74
 	.4byte ScrCmd_showmonpic                @ 0x75
 	.4byte ScrCmd_hidemonpic                @ 0x76
-	.4byte ScrCmd_showcontestwinner         @ 0x77
+	.4byte ScrCmd_showcontestpainting       @ 0x77
 	.4byte ScrCmd_braillemessage            @ 0x78
 	.4byte ScrCmd_givemon                   @ 0x79
 	.4byte ScrCmd_giveegg                   @ 0x7a
@@ -205,21 +205,21 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_nop1                      @ 0xca
 	.4byte ScrCmd_nop1                      @ 0xcb
 	.4byte ScrCmd_nop1                      @ 0xcc
-	.4byte ScrCmd_setmonobedient            @ 0xcd
-	.4byte ScrCmd_checkmonobedience         @ 0xce
+	.4byte ScrCmd_setmoneventlegal          @ 0xcd
+	.4byte ScrCmd_checkmoneventlegal        @ 0xce
 	.4byte ScrCmd_gotoram                   @ 0xcf
 	.4byte ScrCmd_nop1                      @ 0xd0
-	.4byte ScrCmd_warpD1                    @ 0xd1
+	.4byte ScrCmd_warpspinenter             @ 0xd1
 	.4byte ScrCmd_setmonmetlocation         @ 0xd2
 	.4byte ScrCmd_moverotatingtileobjects   @ 0xd3
 	.4byte ScrCmd_turnrotatingtileobjects   @ 0xd4
 	.4byte ScrCmd_initrotatingtilepuzzle    @ 0xd5
 	.4byte ScrCmd_freerotatingtilepuzzle    @ 0xd6
 	.4byte ScrCmd_warpmossdeepgym           @ 0xd7
-	.4byte ScrCmd_cmdD8                     @ 0xd8
-	.4byte ScrCmd_cmdD9                     @ 0xd9
+	.4byte ScrCmd_selectapproachingtrainer  @ 0xd8
+	.4byte ScrCmd_lockfortrainer            @ 0xd9
 	.4byte ScrCmd_closebraillemessage       @ 0xda
-	.4byte ScrCmd_cmdDB                     @ 0xdb
+	.4byte ScrCmd_messageinstant            @ 0xdb
 	.4byte ScrCmd_fadescreenswapbuffers     @ 0xdc
 	.4byte ScrCmd_buffertrainerclassname    @ 0xdd
 	.4byte ScrCmd_buffertrainername         @ 0xde
@@ -228,5 +228,5 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_buffercontesttype         @ 0xe1
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
 
-gScriptCmdTableEnd:: @ 81DBA08
+gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

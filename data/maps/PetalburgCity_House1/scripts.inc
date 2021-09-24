@@ -1,20 +1,20 @@
-PetalburgCity_House1_MapScripts:: @ 8207799
+PetalburgCity_House1_MapScripts::
 	.byte 0
 
-PetalburgCity_House1_EventScript_Man:: @ 820779A
+PetalburgCity_House1_EventScript_Man::
 	msgbox PetalburgCity_House1_Text_TravelingIsWonderful, MSGBOX_NPC
 	end
 
-PetalburgCity_House1_EventScript_Woman:: @ 82077A3
+PetalburgCity_House1_EventScript_Woman::
 	msgbox PetalburgCity_House1_Text_GoOnAdventure, MSGBOX_NPC
 	end
 
-PetalburgCity_House1_Text_TravelingIsWonderful: @ 82077AC
+PetalburgCity_House1_Text_TravelingIsWonderful:
 	.string "Traveling is wonderful!\p"
 	.string "When I was young, I roamed the seas\n"
 	.string "and the mountains!$"
 
-PetalburgCity_House1_Text_GoOnAdventure: @ 82077FB
+PetalburgCity_House1_Text_GoOnAdventure:
 	.string "Sigh…\p"
 	.string "I wish I could go on an adventure\n"
 	.string "with some Pokémon…\p"

@@ -1,40 +1,40 @@
 .set LOCALID_WALLACE, 1
 
-SkyPillar_Outside_MapScripts:: @ 82392A8
+SkyPillar_Outside_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, SkyPillar_Outside_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_Outside_OnFrame
 	.byte 0
 
-SkyPillar_Outside_OnTransition: @ 82392B8
+SkyPillar_Outside_OnTransition:
 	compare VAR_SOOTOPOLIS_CITY_STATE, 3
 	call_if_eq SkyPillar_Outside_EventScript_HideMapNamePopup
 	compare VAR_SOOTOPOLIS_CITY_STATE, 4
 	call_if_ge SkyPillar_Outside_EventScript_CheckSetAbnormalWeather
 	end
 
-SkyPillar_Outside_EventScript_HideMapNamePopup:: @ 82392CF
+SkyPillar_Outside_EventScript_HideMapNamePopup::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
-SkyPillar_Outside_EventScript_CheckSetAbnormalWeather:: @ 82392D3
+SkyPillar_Outside_EventScript_CheckSetAbnormalWeather::
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	return
 
-SkyPillar_Outside_OnLoad: @ 82392DD
+SkyPillar_Outside_OnLoad:
 	call_if_set FLAG_WALLACE_GOES_TO_SKY_PILLAR, SkyPillar_Outside_EventScript_OpenDoor
 	end
 
-SkyPillar_Outside_EventScript_OpenDoor:: @ 82392E7
+SkyPillar_Outside_EventScript_OpenDoor::
 	setmetatile 14, 4, METATILE_Pacifidlog_SkyPillar_DoorOpen_Top, 0
 	setmetatile 14, 5, METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom, 0
 	return
 
-SkyPillar_Outside_OnFrame: @ 82392FA
+SkyPillar_Outside_OnFrame:
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_WallaceScene
 	.2byte 0
 
-SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
+SkyPillar_Outside_EventScript_WallaceScene::
 	lockall
 	applymovement LOCALID_WALLACE, SkyPillar_Outside_Movement_WallaceApproachPlayer
 	waitmovement 0
@@ -91,7 +91,7 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	releaseall
 	end
 
-SkyPillar_Outside_Movement_WallaceApproachPlayer: @ 82393D3
+SkyPillar_Outside_Movement_WallaceApproachPlayer:
 	walk_down
 	walk_down
 	walk_down
@@ -104,7 +104,7 @@ SkyPillar_Outside_Movement_WallaceApproachPlayer: @ 82393D3
 	walk_right
 	step_end
 
-SkyPillar_Outside_Movement_WallaceClimbSkyPillar: @ 82393DE
+SkyPillar_Outside_Movement_WallaceClimbSkyPillar:
 	walk_left
 	walk_left
 	walk_left
@@ -119,7 +119,7 @@ SkyPillar_Outside_Movement_WallaceClimbSkyPillar: @ 82393DE
 	walk_up
 	step_end
 
-SkyPillar_Outside_Movement_PlayerClimbSkyPillar: @ 82393EB
+SkyPillar_Outside_Movement_PlayerClimbSkyPillar:
 	walk_left
 	walk_left
 	walk_left
@@ -134,17 +134,17 @@ SkyPillar_Outside_Movement_PlayerClimbSkyPillar: @ 82393EB
 	walk_up
 	step_end
 
-SkyPillar_Outside_EventScript_Wallace:: @ 82393F8
+SkyPillar_Outside_EventScript_Wallace::
 	end
 
-SkyPillar_Outside_EventScript_ClosedDoor:: @ 82393F9
+SkyPillar_Outside_EventScript_ClosedDoor::
 	msgbox SkyPillar_Outside_Text_DoorIsClosed, MSGBOX_SIGN
 	end
 
-SkyPillar_Outside_Text_DoorIsClosed: @ 8239402
+SkyPillar_Outside_Text_DoorIsClosed:
 	.string "The door is closed.$"
 
-SkyPillar_Outside_Text_OpenedDoorToSkyPillar: @ 8239416
+SkyPillar_Outside_Text_OpenedDoorToSkyPillar:
 	.string "Wallace: Oh, my, I'm terribly sorry!\p"
 	.string "In my haste, I didn't notice that\n"
 	.string "I'd left you behind!\p"
@@ -152,16 +152,16 @@ SkyPillar_Outside_Text_OpenedDoorToSkyPillar: @ 8239416
 	.string "the Sky Pillar.\p"
 	.string "{PLAYER}{KUN}, let's be on our way!$"
 
-SkyPillar_Outside_Text_EarthquakeNotMomentToWaste: @ 82394BC
+SkyPillar_Outside_Text_EarthquakeNotMomentToWaste:
 	.string "Wallace: It's an earthquake!\p"
 	.string "There's not a moment to waste!\n"
 	.string "We've got to hurry!$"
 
-SkyPillar_Outside_Text_SituationGettingWorse: @ 823950C
+SkyPillar_Outside_Text_SituationGettingWorse:
 	.string "Wallace: Hmm…\n"
 	.string "The situation is getting worse…$"
 
-SkyPillar_Outside_Text_GotToGoBackForSootopolis: @ 823953A
+SkyPillar_Outside_Text_GotToGoBackForSootopolis:
 	.string "Wallace: This isn't good…\p"
 	.string "The weather distortion is spreading\n"
 	.string "even here…\p"

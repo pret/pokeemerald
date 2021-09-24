@@ -1,7 +1,7 @@
-MossdeepCity_House4_MapScripts:: @ 8222DD7
+MossdeepCity_House4_MapScripts::
 	.byte 0
 
-MossdeepCity_House4_EventScript_Woman:: @ 8222DD8
+MossdeepCity_House4_EventScript_Woman::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_House4_EventScript_CanBattleAtSecretBases
@@ -9,12 +9,12 @@ MossdeepCity_House4_EventScript_Woman:: @ 8222DD8
 	release
 	end
 
-MossdeepCity_House4_EventScript_CanBattleAtSecretBases:: @ 8222DED
+MossdeepCity_House4_EventScript_CanBattleAtSecretBases::
 	msgbox MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_House4_EventScript_NinjaBoy:: @ 8222DF7
+MossdeepCity_House4_EventScript_NinjaBoy::
 	lock
 	faceplayer
 	special CheckPlayerHasSecretBase
@@ -25,12 +25,12 @@ MossdeepCity_House4_EventScript_NinjaBoy:: @ 8222DF7
 	release
 	end
 
-MossdeepCity_House4_EventScript_NoSecretBase:: @ 8222E14
+MossdeepCity_House4_EventScript_NoSecretBase::
 	msgbox MossdeepCity_House4_Text_MakeSecretBase, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_House4_EventScript_Skitty:: @ 8222E1E
+MossdeepCity_House4_EventScript_Skitty::
 	lock
 	faceplayer
 	waitse
@@ -40,23 +40,23 @@ MossdeepCity_House4_EventScript_Skitty:: @ 8222E1E
 	release
 	end
 
-MossdeepCity_House4_Text_BrotherLikesToFindBases: @ 8222E31
+MossdeepCity_House4_Text_BrotherLikesToFindBases:
 	.string "My little brother says he likes to go\n"
 	.string "find people's Secret Bases.$"
 
-MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle: @ 8222E73
+MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle:
 	.string "My little brother says he likes to\n"
 	.string "visit people's Secret Bases and have\l"
 	.string "Pokémon battles.$"
 
-MossdeepCity_House4_Text_YouMadeSecretBaseNearX: @ 8222ECC
+MossdeepCity_House4_Text_YouMadeSecretBaseNearX:
 	.string "Was it you who made a Secret Base\n"
 	.string "near {STR_VAR_1}?$"
 
-MossdeepCity_House4_Text_MakeSecretBase: @ 8222EF7
+MossdeepCity_House4_Text_MakeSecretBase:
 	.string "You should make a Secret Base\n"
 	.string "somewhere. I'll go find it!$"
 
-MossdeepCity_House4_Text_Skitty: @ 8222F31
+MossdeepCity_House4_Text_Skitty:
 	.string "Skitty: Miyaan?$"
 

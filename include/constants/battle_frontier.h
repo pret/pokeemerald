@@ -51,7 +51,7 @@
 #define MAX_BATTLE_FRONTIER_POINTS 9999
 #define MAX_STREAK 9999
 
-// These sets of facility ids would be redunant if the order was consistent
+// These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous
 #define RANKING_HALL_BATTLE_TOWER_SINGLES   0
 #define RANKING_HALL_BATTLE_TOWER_DOUBLES   1
@@ -77,6 +77,21 @@
 #define FRONTIER_MANIAC_FACILITY_COUNT        10
 
 #define FRONTIER_MANIAC_MESSAGE_COUNT 3
+
+// Frontier TV Show
+#define FRONTIER_SHOW_TOWER_SINGLES      1
+#define FRONTIER_SHOW_TOWER_DOUBLES      2
+#define FRONTIER_SHOW_TOWER_MULTIS       3
+#define FRONTIER_SHOW_TOWER_LINK_MULTIS  4
+#define FRONTIER_SHOW_DOME_SINGLES       5
+#define FRONTIER_SHOW_DOME_DOUBLES       6
+#define FRONTIER_SHOW_FACTORY_SINGLES    7
+#define FRONTIER_SHOW_FACTORY_DOUBLES    8
+#define FRONTIER_SHOW_PIKE               9
+#define FRONTIER_SHOW_ARENA              10
+#define FRONTIER_SHOW_PALACE_SINGLES     11
+#define FRONTIER_SHOW_PALACE_DOUBLES     12
+#define FRONTIER_SHOW_PYRAMID            13
 
 // Frontier Gambler
 #define FRONTIER_GAMBLER_WAITING     0

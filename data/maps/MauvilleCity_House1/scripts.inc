@@ -1,7 +1,7 @@
-MauvilleCity_House1_MapScripts:: @ 820F975
+MauvilleCity_House1_MapScripts::
 	.byte 0
 
-MauvilleCity_House1_EventScript_RockSmashDude:: @ 820F976
+MauvilleCity_House1_EventScript_RockSmashDude::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM06, MauvilleCity_House1_EventScript_ReceivedRockSmash
@@ -13,12 +13,12 @@ MauvilleCity_House1_EventScript_RockSmashDude:: @ 820F976
 	release
 	end
 
-MauvilleCity_House1_EventScript_ReceivedRockSmash:: @ 820F9A5
+MauvilleCity_House1_EventScript_ReceivedRockSmash::
 	msgbox MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_House1_Text_ImRockSmashDudeTakeThis: @ 820F9AF
+MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
 	.string "Woohoo!\p"
 	.string "I hear people call me the Rock Smash\n"
 	.string "Guy, but I find that sort of degrading.\p"
@@ -30,7 +30,7 @@ MauvilleCity_House1_Text_ImRockSmashDudeTakeThis: @ 820F9AF
 	.string "I like that!\n"
 	.string "Here, take this Hidden Machine!$"
 
-MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
+MauvilleCity_House1_Text_ExplainRockSmash:
 	.string "That HM contains Rock Smash.\p"
 	.string "If you come across large boulders\n"
 	.string "that block your path…\p"
@@ -39,7 +39,7 @@ MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
 	.string "Yes, sir! Smash rocks aside, I say!\n"
 	.string "Woohoo!$"
 
-MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
+MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock:
 	.string "Oh, yes, if you smash a rock, a Pokémon\n"
 	.string "could come flying out of hiding.\p"
 	.string "Woohoo!$"

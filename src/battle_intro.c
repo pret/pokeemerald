@@ -13,8 +13,8 @@
 
 static EWRAM_DATA u16 sBgCnt = 0;
 
-extern const u8 gUnknown_0859741A[];
-extern const u8 gUnknown_0859741E[];
+extern const u8 gBattleAnimBgCntSet[];
+extern const u8 gBattleAnimBgCntGet[];
 
 static void BattleIntroSlide1(u8);
 static void BattleIntroSlide2(u8);
@@ -24,23 +24,23 @@ static void BattleIntroSlidePartner(u8);
 
 static const TaskFunc sBattleIntroSlideFuncs[] =
 {
-    BattleIntroSlide1, // BATTLE_TERRAIN_GRASS
-    BattleIntroSlide1, // BATTLE_TERRAIN_LONG_GRASS
-    BattleIntroSlide2, // BATTLE_TERRAIN_SAND
-    BattleIntroSlide2, // BATTLE_TERRAIN_UNDERWATER
-    BattleIntroSlide2, // BATTLE_TERRAIN_WATER
-    BattleIntroSlide1, // BATTLE_TERRAIN_POND
-    BattleIntroSlide1, // BATTLE_TERRAIN_MOUNTAIN
-    BattleIntroSlide1, // BATTLE_TERRAIN_CAVE
-    BattleIntroSlide3, // BATTLE_TERRAIN_BUILDING
-    BattleIntroSlide3, // BATTLE_TERRAIN_PLAIN
+    [BATTLE_TERRAIN_GRASS]      = BattleIntroSlide1,
+    [BATTLE_TERRAIN_LONG_GRASS] = BattleIntroSlide1,
+    [BATTLE_TERRAIN_SAND]       = BattleIntroSlide2,
+    [BATTLE_TERRAIN_UNDERWATER] = BattleIntroSlide2,
+    [BATTLE_TERRAIN_WATER]      = BattleIntroSlide2,
+    [BATTLE_TERRAIN_POND]       = BattleIntroSlide1,
+    [BATTLE_TERRAIN_MOUNTAIN]   = BattleIntroSlide1,
+    [BATTLE_TERRAIN_CAVE]       = BattleIntroSlide1,
+    [BATTLE_TERRAIN_BUILDING]   = BattleIntroSlide3,
+    [BATTLE_TERRAIN_PLAIN]      = BattleIntroSlide3,
 };
 
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 {
     if (bgId < 4)
     {
-        sBgCnt = GetGpuReg(gUnknown_0859741A[bgId]);
+        sBgCnt = GetGpuReg(gBattleAnimBgCntSet[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
@@ -66,7 +66,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
             break;
         }
 
-        SetGpuReg(gUnknown_0859741A[bgId], sBgCnt);
+        SetGpuReg(gBattleAnimBgCntSet[bgId], sBgCnt);
     }
 }
 
@@ -76,7 +76,7 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId)
 
     if (bgId < 4)
     {
-        bgCnt = GetGpuReg(gUnknown_0859741E[bgId]);
+        bgCnt = GetGpuReg(gBattleAnimBgCntGet[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
@@ -98,6 +98,9 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId)
 
     return 0;
 }
+
+#define tState data[0]
+#define tTerrain data[1]
 
 void HandleIntroSlide(u8 terrain)
 {
@@ -125,8 +128,8 @@ void HandleIntroSlide(u8 terrain)
         taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
     }
 
-    gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = terrain;
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tTerrain = terrain;
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].data[3] = 0;
     gTasks[taskId].data[4] = 0;
@@ -134,7 +137,7 @@ void HandleIntroSlide(u8 terrain)
     gTasks[taskId].data[6] = 0;
 }
 
-void sub_811828C(u8 taskId)
+static void BattleIntroSlideEnd(u8 taskId)
 {
     DestroyTask(taskId);
     gBattle_BG1_X = 0;
@@ -153,24 +156,24 @@ static void BattleIntroSlide1(u8 taskId)
     int i;
 
     gBattle_BG1_X += 6;
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             gTasks[taskId].data[2] = 16;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         else
         {
             gTasks[taskId].data[2] = 1;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
         if (--gTasks[taskId].data[2] == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         }
         break;
@@ -178,7 +181,7 @@ static void BattleIntroSlide1(u8 taskId)
         gBattle_WIN0V -= 0xFF;
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gIntroSlideFlags &= ~1;
@@ -191,7 +194,7 @@ static void BattleIntroSlide1(u8 taskId)
         }
         else
         {
-            if (gTasks[taskId].data[1] == 1)
+            if (gTasks[taskId].tTerrain == BATTLE_TERRAIN_LONG_GRASS)
             {
                 if (gBattle_BG1_Y != 0xFFB0)
                     gBattle_BG1_Y -= 2;
@@ -219,7 +222,7 @@ static void BattleIntroSlide1(u8 taskId)
         if (!gTasks[taskId].data[2])
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
@@ -228,7 +231,7 @@ static void BattleIntroSlide1(u8 taskId)
         }
         break;
     case 4:
-        sub_811828C(taskId);
+        BattleIntroSlideEnd(taskId);
         break;
     }
 }
@@ -237,18 +240,18 @@ static void BattleIntroSlide2(u8 taskId)
 {
     int i;
 
-    switch (gTasks[taskId].data[1])
+    switch (gTasks[taskId].tTerrain)
     {
-    case 2:
-    case 4:
+    case BATTLE_TERRAIN_SAND:
+    case BATTLE_TERRAIN_WATER:
         gBattle_BG1_X += 8;
         break;
-    case 3:
+    case BATTLE_TERRAIN_UNDERWATER:
         gBattle_BG1_X += 6;
         break;
     }
 
-    if (gTasks[taskId].data[1] == 4)
+    if (gTasks[taskId].tTerrain == BATTLE_TERRAIN_WATER)
     {
         gBattle_BG1_Y = Cos2(gTasks[taskId].data[6]) / 512 - 8;
         if (gTasks[taskId].data[6] < 180)
@@ -260,25 +263,25 @@ static void BattleIntroSlide2(u8 taskId)
             gTasks[taskId].data[6] = 0;
     }
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         gTasks[taskId].data[4] = 16;
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             gTasks[taskId].data[2] = 16;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         else
         {
             gTasks[taskId].data[2] = 1;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
         if (--gTasks[taskId].data[2] == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         }
         break;
@@ -286,7 +289,7 @@ static void BattleIntroSlide2(u8 taskId)
         gBattle_WIN0V -= 0xFF;
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gTasks[taskId].data[5] = 1;
@@ -328,7 +331,7 @@ static void BattleIntroSlide2(u8 taskId)
         if (!gTasks[taskId].data[2])
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
@@ -337,11 +340,11 @@ static void BattleIntroSlide2(u8 taskId)
         }
         break;
     case 4:
-        sub_811828C(taskId);
+        BattleIntroSlideEnd(taskId);
         break;
     }
 
-    if (gTasks[taskId].data[0] != 4)
+    if (gTasks[taskId].tState != 4)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[4], 0));
 }
 
@@ -350,28 +353,28 @@ static void BattleIntroSlide3(u8 taskId)
     int i;
 
     gBattle_BG1_X += 8;
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
         SetGpuReg(REG_OFFSET_BLDY, 0);
         gTasks[taskId].data[4] = BLDALPHA_BLEND(8, 8);
-        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         {
             gTasks[taskId].data[2] = 16;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         else
         {
             gTasks[taskId].data[2] = 1;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
         if (--gTasks[taskId].data[2] == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         }
         break;
@@ -379,7 +382,7 @@ static void BattleIntroSlide3(u8 taskId)
         gBattle_WIN0V -= 0xFF;
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gTasks[taskId].data[5] = 1;
@@ -416,7 +419,7 @@ static void BattleIntroSlide3(u8 taskId)
         if (!gTasks[taskId].data[2])
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
@@ -425,11 +428,11 @@ static void BattleIntroSlide3(u8 taskId)
         }
         break;
     case 4:
-        sub_811828C(taskId);
+        BattleIntroSlideEnd(taskId);
         break;
     }
 
-    if (gTasks[taskId].data[0] != 4)
+    if (gTasks[taskId].tState != 4)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[4], 0));
 }
 
@@ -437,7 +440,7 @@ static void BattleIntroSlideLink(u8 taskId)
 {
     int i;
 
-    if (gTasks[taskId].data[0] > 1 && !gTasks[taskId].data[4])
+    if (gTasks[taskId].tState > 1 && !gTasks[taskId].data[4])
     {
         u16 var0 = gBattle_BG1_X & 0x8000;
         if (var0 || gBattle_BG1_X < 80)
@@ -453,20 +456,20 @@ static void BattleIntroSlideLink(u8 taskId)
         }
     }
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         gTasks[taskId].data[2] = 32;
-        gTasks[taskId].data[0]++;
+        gTasks[taskId].tState++;
         break;
     case 1:
         if (--gTasks[taskId].data[2] == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gSprites[gBattleStruct->linkBattleVsSpriteId_V].oam.objMode = ST_OAM_OBJ_WINDOW;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].callback = sub_8038B74;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].callback = SpriteCB_VsLetterInit;
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.objMode = ST_OAM_OBJ_WINDOW;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].callback = sub_8038B74;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].callback = SpriteCB_VsLetterInit;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2);
         }
@@ -475,7 +478,7 @@ static void BattleIntroSlideLink(u8 taskId)
         gBattle_WIN0V -= 0xFF;
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gIntroSlideFlags &= ~1;
@@ -498,7 +501,7 @@ static void BattleIntroSlideLink(u8 taskId)
         if (!gTasks[taskId].data[2])
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
             SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
@@ -506,31 +509,31 @@ static void BattleIntroSlideLink(u8 taskId)
         }
         break;
     case 4:
-        sub_811828C(taskId);
+        BattleIntroSlideEnd(taskId);
         break;
     }
 }
 
 static void BattleIntroSlidePartner(u8 taskId)
 {
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         gTasks[taskId].data[2] = 1;
-        gTasks[taskId].data[0]++;
+        gTasks[taskId].tState++;
         break;
     case 1:
         if (--gTasks[taskId].data[2] == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT512x256);
             SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
             SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
             gBattle_BG0_Y = -48;
-            gBattle_BG1_X = 240;
-            gBattle_BG2_X = -240;
+            gBattle_BG1_X = DISPLAY_WIDTH;
+            gBattle_BG2_X = -DISPLAY_WIDTH;
         }
         break;
     case 2:
@@ -540,7 +543,7 @@ static void BattleIntroSlidePartner(u8 taskId)
 
         if ((gBattle_WIN0V & 0xFF00) == 0x2000)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gTasks[taskId].data[2] = 240;
             gIntroSlideFlags &= ~1;
         }
@@ -555,7 +558,7 @@ static void BattleIntroSlidePartner(u8 taskId)
         gBattle_BG1_X = gTasks[taskId].data[2];
         gBattle_BG2_X = -gTasks[taskId].data[2];
         if (!gTasks[taskId].data[2])
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         break;
     case 4:
         gBattle_BG0_Y += 2;
@@ -572,11 +575,11 @@ static void BattleIntroSlidePartner(u8 taskId)
             SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
             SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 5:
-        sub_811828C(taskId);
+        BattleIntroSlideEnd(taskId);
         break;
     }
 }
@@ -586,7 +589,7 @@ void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
     int i, j;
     u8 battler = GetBattlerAtPosition(battlerPosition);
     int offset = tilesOffset;
-    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], arg5, BG_SCREEN_SIZE);
+    CpuCopy16(gMonSpritesGfxPtr->sprites.ptr[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], arg5, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, arg5, 0x1000, tilesOffset);
     for (i = arg2; i < arg2 + 8; i++)
     {
@@ -604,7 +607,7 @@ void unref_sub_8119094(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u
 {
     int i, j, offset;
 
-    DmaCopy16(3, gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
+    DmaCopy16(3, gMonSpritesGfxPtr->sprites.ptr[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
     offset = (arg5 >> 5) - (arg7 << 9);
     for (i = arg1; i < arg1 + 8; i++)
     {

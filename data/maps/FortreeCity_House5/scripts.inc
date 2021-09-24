@@ -1,15 +1,15 @@
-FortreeCity_House5_MapScripts:: @ 8217EF1
+FortreeCity_House5_MapScripts::
 	.byte 0
 
-FortreeCity_House5_EventScript_PokefanF:: @ 8217EF2
+FortreeCity_House5_EventScript_PokefanF::
 	msgbox FortreeCity_House5_Text_TreeHousesAreGreat, MSGBOX_NPC
 	end
 
-FortreeCity_House5_EventScript_Man:: @ 8217EFB
+FortreeCity_House5_EventScript_Man::
 	msgbox FortreeCity_House5_Text_AdaptedToNature, MSGBOX_NPC
 	end
 
-FortreeCity_House5_EventScript_Zigzagoon:: @ 8217F04
+FortreeCity_House5_EventScript_Zigzagoon::
 	lock
 	faceplayer
 	waitse
@@ -19,17 +19,17 @@ FortreeCity_House5_EventScript_Zigzagoon:: @ 8217F04
 	release
 	end
 
-FortreeCity_House5_Text_TreeHousesAreGreat: @ 8217F17
+FortreeCity_House5_Text_TreeHousesAreGreat:
 	.string "The tree houses of Fortree are great!\p"
 	.string "I think it's the number one town for\n"
 	.string "living together with Pokémon.$"
 
-FortreeCity_House5_Text_AdaptedToNature: @ 8217F80
+FortreeCity_House5_Text_AdaptedToNature:
 	.string "Pokémon and people have adapted to\n"
 	.string "nature for survival.\p"
 	.string "There's no need to make nature\n"
 	.string "conform to the way we want to live.$"
 
-FortreeCity_House5_Text_Zigzagoon: @ 8217FFB
+FortreeCity_House5_Text_Zigzagoon:
 	.string "Zigzagoon: Bufuu!$"
 

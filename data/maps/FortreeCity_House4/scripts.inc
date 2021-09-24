@@ -1,13 +1,13 @@
 .set LOCALID_WINGULL, 3
 
-FortreeCity_House4_MapScripts:: @ 8217C80
+FortreeCity_House4_MapScripts::
 	.byte 0
 
-FortreeCity_House4_EventScript_Woman:: @ 8217C81
+FortreeCity_House4_EventScript_Woman::
 	msgbox FortreeCity_House4_Text_BringsWorldCloserTogether, MSGBOX_NPC
 	end
 
-FortreeCity_House4_EventScript_Boy:: @ 8217C8A
+FortreeCity_House4_EventScript_Boy::
 	lockall
 	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_ReceivedMentalHerb
 	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_WingullReturned
@@ -22,14 +22,14 @@ FortreeCity_House4_EventScript_Boy:: @ 8217C8A
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_WingullOnErrand:: @ 8217CC4
+FortreeCity_House4_EventScript_WingullOnErrand::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_AskedWingullToRunErrand, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
+FortreeCity_House4_EventScript_WingullReturned::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
@@ -40,14 +40,14 @@ FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_ReceivedMentalHerb:: @ 8217D06
+FortreeCity_House4_EventScript_ReceivedMentalHerb::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FortreeCity_House4_Movement_WingullExit: @ 8217D1A
+FortreeCity_House4_Movement_WingullExit:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_right
@@ -55,7 +55,7 @@ FortreeCity_House4_Movement_WingullExit: @ 8217D1A
 	delay_8
 	step_end
 
-FortreeCity_House4_EventScript_Wingull:: @ 8217D20
+FortreeCity_House4_EventScript_Wingull::
 	lock
 	faceplayer
 	waitse
@@ -65,21 +65,21 @@ FortreeCity_House4_EventScript_Wingull:: @ 8217D20
 	release
 	end
 
-FortreeCity_House4_Text_BringsWorldCloserTogether: @ 8217D33
+FortreeCity_House4_Text_BringsWorldCloserTogether:
 	.string "By being together with Pokémon,\n"
 	.string "people make more and more friends.\p"
 	.string "And that brings the world closer\n"
 	.string "together. I think it's wonderful!$"
 
-FortreeCity_House4_Text_GoBirdPokemon: @ 8217DB9
+FortreeCity_House4_Text_GoBirdPokemon:
 	.string "There!\n"
 	.string "Go, Bird Pokémon!$"
 
-FortreeCity_House4_Text_AskedWingullToRunErrand: @ 8217DD2
+FortreeCity_House4_Text_AskedWingullToRunErrand:
 	.string "Heheh, I asked my Wingull to run\n"
 	.string "an errand for me.$"
 
-FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb: @ 8217E05
+FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
 	.string "Good!\n"
 	.string "Welcome back, Wingull!\p"
 	.string "Huh? What is this?\n"
@@ -89,10 +89,10 @@ FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb: @ 8217E05
 	.string "But I'm not a Trainer, so you can\n"
 	.string "have it.$"
 
-FortreeCity_House4_Text_FriendsFarAwayThanksToWingull: @ 8217EA8
+FortreeCity_House4_Text_FriendsFarAwayThanksToWingull:
 	.string "Thanks to my Wingull, I have friends\n"
 	.string "who live far away.$"
 
-FortreeCity_House4_Text_Wingull: @ 8217EE0
+FortreeCity_House4_Text_Wingull:
 	.string "Wingull: Pihyoh!$"
 

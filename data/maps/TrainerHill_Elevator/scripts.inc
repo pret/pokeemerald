@@ -1,17 +1,17 @@
 .set LOCALID_ATTENDANT, 1
 
-TrainerHill_Elevator_MapScripts:: @ 826934F
+TrainerHill_Elevator_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerHill_Elevator_OnFrame
 	.byte 0
 
-TrainerHill_Elevator_OnFrame: @ 8269355
+TrainerHill_Elevator_OnFrame:
 	map_script_2 VAR_TEMP_4, 0, TrainerHill_Elevator_EventScript_EnterElevator
 	.2byte 0
 
-TrainerHill_Elevator_EventScript_Attendant:: @ 826935F
+TrainerHill_Elevator_EventScript_Attendant::
 	end
 
-TrainerHill_Elevator_EventScript_ExitToRoof:: @ 8269360
+TrainerHill_Elevator_EventScript_ExitToRoof::
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Elevator_Movement_PlayerExitElevatorToRoof
 	waitmovement 0
 	releaseall
@@ -19,7 +19,7 @@ TrainerHill_Elevator_EventScript_ExitToRoof:: @ 8269360
 	waitstate
 	end
 
-TrainerHill_Elevator_EventScript_EnterElevator:: @ 8269375
+TrainerHill_Elevator_EventScript_EnterElevator::
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Elevator_Movement_PlayerApproachAttendant
 	waitmovement 0
 	applymovement LOCALID_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFacePlayer
@@ -42,50 +42,50 @@ TrainerHill_Elevator_EventScript_EnterElevator:: @ 8269375
 	end
 
 @ Unused
-TrainerHill_Elevator_EventScript_ExitFloorSelect:: @ 82693CE
+TrainerHill_Elevator_EventScript_ExitFloorSelect::
 	goto TrainerHill_Elevator_EventScript_CloseFloorSelect
 	end
 
 @ Functionally unused
-TrainerHill_Elevator_EventScript_CloseFloorSelect:: @ 82693D4
+TrainerHill_Elevator_EventScript_CloseFloorSelect::
 	special CloseDeptStoreElevatorWindow
 	releaseall
 	end
 
-TrainerHill_Elevator_EventScript_MoveElevator:: @ 82693D9
+TrainerHill_Elevator_EventScript_MoveElevator::
 	waitse
 	special MoveElevator
 	waitstate
 	return
 
-TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator: @ 82693DF
+TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator:
 	walk_up
 	walk_up
 	walk_right
 	face_down
 	step_end
 
-TrainerHill_Elevator_Movement_PlayerApproachAttendant: @ 82693E4
+TrainerHill_Elevator_Movement_PlayerApproachAttendant:
 	delay_16
 	walk_left
 	step_end
 
-TrainerHill_Elevator_Movement_PlayerExitElevator: @ 82693E7
+TrainerHill_Elevator_Movement_PlayerExitElevator:
 	delay_16
 	walk_down
 	walk_down
 	step_end
 
-TrainerHill_Elevator_Movement_PlayerExitElevatorToRoof: @ 82693EB
+TrainerHill_Elevator_Movement_PlayerExitElevatorToRoof:
 	face_down
 	delay_16
 	step_end
 
-TrainerHill_Elevator_Movement_AttendantFacePlayer: @ 82693EE
+TrainerHill_Elevator_Movement_AttendantFacePlayer:
 	face_right
 	step_end
 
-TrainerHill_Elevator_Movement_AttendantFaceDown: @ 82693F0
+TrainerHill_Elevator_Movement_AttendantFaceDown:
 	face_down
 	step_end
 

@@ -1,36 +1,36 @@
 .set LOCALID_LUGIA, 1
 
-NavelRock_Bottom_MapScripts:: @ 8269255
+NavelRock_Bottom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Bottom_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Bottom_OnResume
 	.byte 0
 
-NavelRock_Bottom_OnTransition: @ 8269260
+NavelRock_Bottom_OnTransition:
 	call_if_set FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_HideLugia
 	call_if_unset FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_TryShowLugia
 	end
 
-NavelRock_Bottom_EventScript_HideLugia:: @ 8269273
+NavelRock_Bottom_EventScript_HideLugia::
 	setflag FLAG_HIDE_LUGIA
 	return
 
-NavelRock_Bottom_EventScript_TryShowLugia:: @ 8269277
+NavelRock_Bottom_EventScript_TryShowLugia::
 	goto_if_set FLAG_DEFEATED_LUGIA, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_LUGIA
 	return
 
-NavelRock_Bottom_OnResume: @ 8269284
+NavelRock_Bottom_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Bottom_EventScript_TryRemoveLugia
 	end
 
-NavelRock_Bottom_EventScript_TryRemoveLugia:: @ 826928E
+NavelRock_Bottom_EventScript_TryRemoveLugia::
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject LOCALID_LUGIA
 	return
 
-NavelRock_Bottom_EventScript_Lugia:: @ 82692A2
+NavelRock_Bottom_EventScript_Lugia::
 	lock
 	faceplayer
 	waitse
@@ -57,7 +57,7 @@ NavelRock_Bottom_EventScript_Lugia:: @ 82692A2
 	setvar VAR_0x8004, SPECIES_LUGIA
 	setvar VAR_0x8005, 70  @ level
 	setvar VAR_0x8006, ITEM_NONE
-	special CreateObedientEnemyMon
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate
@@ -73,13 +73,13 @@ NavelRock_Bottom_EventScript_Lugia:: @ 82692A2
 	release
 	end
 
-NavelRock_Bottom_EventScript_DefeatedLugia:: @ 8269336
+NavelRock_Bottom_EventScript_DefeatedLugia::
 	setflag FLAG_DEFEATED_LUGIA
 	setvar VAR_0x8004, SPECIES_LUGIA
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-NavelRock_Bottom_EventScript_RanFromLugia:: @ 8269344
+NavelRock_Bottom_EventScript_RanFromLugia::
 	setvar VAR_0x8004, SPECIES_LUGIA
 	goto Common_EventScript_LegendaryFlewAway
 	end

@@ -1,30 +1,30 @@
-AbandonedShip_Corridors_B1F_MapScripts:: @ 8237D84
+AbandonedShip_Corridors_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_Corridors_B1F_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, AbandonedShip_Corridors_B1F_OnLoad
 	.byte 0
 
-AbandonedShip_Corridors_B1F_OnResume: @ 8237D8F
+AbandonedShip_Corridors_B1F_OnResume:
 	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 255, 5, 4
 	end
 
-AbandonedShip_Corridors_B1F_OnLoad: @ 8237D98
+AbandonedShip_Corridors_B1F_OnLoad:
 	call_if_unset FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom
 	call_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom:: @ 8237DAB
+AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom::
 	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Locked, 1
 	return
 
-AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom:: @ 8237DB5
+AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom::
 	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, 1
 	return
 
-AbandonedShip_Corridors_B1F_EventScript_TuberM:: @ 8237DBF
+AbandonedShip_Corridors_B1F_EventScript_TuberM::
 	msgbox AbandonedShip_Corridors_B1F_Text_YayItsAShip, MSGBOX_NPC
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor:: @ 8237DC8
+AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor::
 	lockall
 	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked
 	checkitem ITEM_STORAGE_KEY, 1
@@ -39,49 +39,49 @@ AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor:: @ 8237DC8
 	releaseall
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked:: @ 8237DFF
+AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked::
 	msgbox AbandonedShip_Corridors_B1F_Text_DoorIsLocked, MSGBOX_DEFAULT
 	releaseall
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked:: @ 8237E09
+AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked::
 	msgbox AbandonedShip_Text_TheDoorIsOpen, MSGBOX_DEFAULT
 	releaseall
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_Duncan:: @ 8237E13
+AbandonedShip_Corridors_B1F_EventScript_Duncan::
 	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_DuncanIntro, AbandonedShip_Corridors_B1F_Text_DuncanDefeat
 	msgbox AbandonedShip_Corridors_B1F_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AbandonedShip_Corridors_B1F_Text_DuncanIntro: @ 8237E2A
+AbandonedShip_Corridors_B1F_Text_DuncanIntro:
 	.string "When we go out to sea, we Sailors\n"
 	.string "always bring our Pokémon.\l"
 	.string "How about a quick battle?$"
 
-AbandonedShip_Corridors_B1F_Text_DuncanDefeat: @ 8237E80
+AbandonedShip_Corridors_B1F_Text_DuncanDefeat:
 	.string "Whoops, I'm sunk!$"
 
-AbandonedShip_Corridors_B1F_Text_DuncanPostBattle: @ 8237E92
+AbandonedShip_Corridors_B1F_Text_DuncanPostBattle:
 	.string "The ship's bottom has sunk into the\n"
 	.string "depths.\p"
 	.string "If a Pokémon knew how to go underwater,\n"
 	.string "we might make some progress…$"
 
-AbandonedShip_Corridors_B1F_Text_YayItsAShip: @ 8237F03
+AbandonedShip_Corridors_B1F_Text_YayItsAShip:
 	.string "Yay!\n"
 	.string "It's a ship!$"
 
-AbandonedShip_Corridors_B1F_Text_DoorIsLocked: @ 8237F15
+AbandonedShip_Corridors_B1F_Text_DoorIsLocked:
 	.string "The door is locked.\p"
 	.string "“Storage” is painted on the door.$"
 
-AbandonedShip_Corridors_B1F_Text_InsertedStorageKey: @ 8237F4B
+AbandonedShip_Corridors_B1F_Text_InsertedStorageKey:
 	.string "{PLAYER} inserted and turned the\n"
 	.string "Storage Key.\p"
 	.string "The inserted Key stuck fast,\n"
 	.string "but the door opened.$"
 
-AbandonedShip_Text_TheDoorIsOpen: @ 8237FA5
+AbandonedShip_Text_TheDoorIsOpen:
 	.string "The door is open.$"
 

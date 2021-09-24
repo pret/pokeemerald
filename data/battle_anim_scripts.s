@@ -374,41 +374,41 @@ gBattleAnims_Moves::
 
 	.align 2
 gBattleAnims_StatusConditions::
-	.4byte Status_Poison
-	.4byte Status_Confusion
-	.4byte Status_Burn
-	.4byte Status_Infatuation
-	.4byte Status_Sleep
-	.4byte Status_Paralysis
-	.4byte Status_Freeze
-	.4byte Status_Curse
-	.4byte Status_Nightmare
+	.4byte Status_Poison                    @ B_ANIM_STATUS_PSN
+	.4byte Status_Confusion                 @ B_ANIM_STATUS_CONFUSION
+	.4byte Status_Burn                      @ B_ANIM_STATUS_BRN
+	.4byte Status_Infatuation               @ B_ANIM_STATUS_INFATUATION
+	.4byte Status_Sleep                     @ B_ANIM_STATUS_SLP
+	.4byte Status_Paralysis                 @ B_ANIM_STATUS_PRZ
+	.4byte Status_Freeze                    @ B_ANIM_STATUS_FRZ
+	.4byte Status_Curse                     @ B_ANIM_STATUS_CURSED
+	.4byte Status_Nightmare                 @ B_ANIM_STATUS_NIGHTMARE
 
 	.align 2
 gBattleAnims_General::
-	.4byte General_CastformChange
-	.4byte General_StatsChange
-	.4byte General_SubstituteFade
-	.4byte General_SubstituteAppear
-	.4byte General_PokeblockThrow
-	.4byte General_ItemKnockoff
-	.4byte General_TurnTrap
-	.4byte General_HeldItemEffect
-	.4byte General_SmokeballEscape
-	.4byte General_FocusBand
-	.4byte General_Rain
-	.4byte General_Sun
-	.4byte General_Sandstorm
-	.4byte General_Hail
-	.4byte General_LeechSeedDrain
-	.4byte General_MonHit
-	.4byte General_ItemSteal
-	.4byte General_SnatchMove
-	.4byte General_FutureSightHit
-	.4byte General_DoomDesireHit
-	.4byte General_FocusPunchSetUp
-	.4byte General_IngrainHeal
-	.4byte General_WishHeal
+	.4byte General_CastformChange           @ B_ANIM_CASTFORM_CHANGE
+	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
+	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
+	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
+	.4byte General_PokeblockThrow           @ B_ANIM_POKEBLOCK_THROW
+	.4byte General_ItemKnockoff             @ B_ANIM_ITEM_KNOCKOFF
+	.4byte General_TurnTrap                 @ B_ANIM_TURN_TRAP
+	.4byte General_HeldItemEffect           @ B_ANIM_HELD_ITEM_EFFECT
+	.4byte General_SmokeballEscape          @ B_ANIM_SMOKEBALL_ESCAPE
+	.4byte General_FocusBand                @ B_ANIM_FOCUS_BAND
+	.4byte General_Rain                     @ B_ANIM_RAIN_CONTINUES
+	.4byte General_Sun                      @ B_ANIM_SUN_CONTINUES
+	.4byte General_Sandstorm                @ B_ANIM_SANDSTORM_CONTINUES
+	.4byte General_Hail                     @ B_ANIM_HAIL_CONTINUES
+	.4byte General_LeechSeedDrain           @ B_ANIM_LEECH_SEED_DRAIN
+	.4byte General_MonHit                   @ B_ANIM_MON_HIT
+	.4byte General_ItemSteal                @ B_ANIM_ITEM_STEAL
+	.4byte General_SnatchMove               @ B_ANIM_SNATCH_MOVE
+	.4byte General_FutureSightHit           @ B_ANIM_FUTURE_SIGHT_HIT
+	.4byte General_DoomDesireHit            @ B_ANIM_DOOM_DESIRE_HIT
+	.4byte General_FocusPunchSetUp          @ B_ANIM_FOCUS_PUNCH_SETUP
+	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
+	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 
 	.align 2
 gBattleAnims_Special::
@@ -854,7 +854,7 @@ Move_TWINEEDLE:
 
 Move_FIRE_BLAST:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
-	createsoundtask sub_8158B30, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
+	createsoundtask SoundTask_FireBlast, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
 	call FireBlastRing
 	call FireBlastRing
 	call FireBlastRing
@@ -1656,12 +1656,12 @@ Explosion1:
 Move_DEFENSE_CURL:
 	loadspritegfx ANIM_TAG_ECLIPSING_ORB
 	loopsewithpan SE_M_TRI_ATTACK, SOUND_PAN_ATTACKER, 18, 3
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 0
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_ATTACKER, 0
 	createvisualtask AnimTask_DefenseCurlDeformMon, 5
 	waitforvisualfinish
 	createsprite gEclipsingOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 6, 0, 1
 	waitforvisualfinish
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
 	waitforvisualfinish
 	end
 
@@ -2628,7 +2628,7 @@ Move_FISSURE:
 	delay 40
 	restorebg
 	waitbgfadeout
-	setarg 7, 0xFFFF
+	setarg 7, -1
 	waitbgfadein
 	end
 
@@ -7254,7 +7254,7 @@ Move_IRON_TAIL:
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
 	waitforvisualfinish
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
 	clearmonbg ANIM_TARGET
 	blendoff
 	waitforvisualfinish
@@ -7274,7 +7274,7 @@ Move_POISON_TAIL:
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
 	waitforvisualfinish
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
 	clearmonbg ANIM_TARGET
 	blendoff
 	call PoisonBubblesEffect
@@ -7551,7 +7551,7 @@ Move_DISABLE:
 	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
 	createsprite gSpinningSparkleSpriteTemplate, ANIM_ATTACKER, 13, 24, -16
 	waitforvisualfinish
-	createvisualtask AnimTask_GrowAndGreyscale, 5
+	createvisualtask AnimTask_GrowAndGrayscale, 5
 	loopsewithpan SE_M_BIND, SOUND_PAN_TARGET, 15, 4
 	waitforvisualfinish
 	delay 1
@@ -7946,16 +7946,16 @@ Move_PERISH_SONG:
 	panse_1B SE_M_PERISH_SONG, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	delay 80
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_BLACK
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 4, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 5, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 6, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 7, 0
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 4, 0
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 5, 0
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 6, 0
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 7, 0
 	delay 100
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_BLACK
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 4, 1
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 5, 1
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 6, 1
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 7, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 4, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 5, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 6, 1
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 7, 1
 	waitforvisualfinish
 	end
 
@@ -9573,7 +9573,7 @@ Move_DOOM_DESIRE:
 	createvisualtask GetIsDoomDesireHitTurn, 2
 	delay 1
 	monbg ANIM_ATK_PARTNER
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_TARGET, FALSE
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_TARGET, FALSE
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 4, RGB_BLACK
 	waitforvisualfinish
 	setalpha 8, 8
@@ -9581,7 +9581,7 @@ Move_DOOM_DESIRE:
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -4, -4, 15, ANIM_ATTACKER, 1
 	waitforvisualfinish
 	delay 20
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_TARGET, TRUE
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_TARGET, TRUE
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 4, 0, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER

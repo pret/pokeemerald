@@ -1,9 +1,9 @@
 .set LOCALID_SCOTT, 1
 
-BattleFrontier_ScottsHouse_MapScripts:: @ 82636A7
+BattleFrontier_ScottsHouse_MapScripts::
 	.byte 0
 
-BattleFrontier_ScottsHouse_EventScript_Scott:: @ 82636A8
+BattleFrontier_ScottsHouse_EventScript_Scott::
 	lock
 	faceplayer
 	goto_if_set FLAG_TEMP_4, BattleFrontier_ScottsHouse_EventScript_GivenBerry
@@ -12,20 +12,20 @@ BattleFrontier_ScottsHouse_EventScript_Scott:: @ 82636A8
 	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveItems
 	end
 
-BattleFrontier_ScottsHouse_EventScript_CheckGiveItems:: @ 82636CB
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems::
 	goto_if_unset FLAG_SCOTT_GIVES_BATTLE_POINTS, BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier
 	goto_if_unset FLAG_COLLECTED_ALL_SILVER_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols
 	goto_if_unset FLAG_COLLECTED_ALL_GOLD_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols
 	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	end
 
-BattleFrontier_ScottsHouse_EventScript_CheckGiveShield:: @ 82636EC
+BattleFrontier_ScottsHouse_EventScript_CheckGiveShield::
 	goto_if_unset FLAG_RECEIVED_SILVER_SHIELD, BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield
 	goto_if_unset FLAG_RECEIVED_GOLD_SHIELD, BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
-BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols:: @ 8263704
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols::
 	goto_if_unset FLAG_SYS_TOWER_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_DOME_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PALACE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
@@ -42,7 +42,7 @@ BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols:: @ 8263704
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols:: @ 826376A
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols::
 	goto_if_unset FLAG_SYS_TOWER_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_DOME_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PALACE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
@@ -59,17 +59,17 @@ BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols:: @ 826376A
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_BerryPocketFull:: @ 82637D0
+BattleFrontier_ScottsHouse_EventScript_BerryPocketFull::
 	msgbox BattleFrontier_ScottsHouse_Text_BerryPocketStuffed, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_GivenBerry:: @ 82637DA
+BattleFrontier_ScottsHouse_EventScript_GivenBerry::
 	msgbox BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_RandomComment:: @ 82637E4
+BattleFrontier_ScottsHouse_EventScript_RandomComment::
 	random 3
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment
@@ -79,17 +79,17 @@ BattleFrontier_ScottsHouse_EventScript_RandomComment:: @ 82637E4
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment:: @ 8263807
+BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment::
 	msgbox BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment:: @ 8263811
+BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment::
 	msgbox BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield:: @ 826381B
+BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield::
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	tower_get TOWER_DATA_WIN_STREAK
@@ -102,7 +102,7 @@ BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield:: @ 826381B
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
-BattleFrontier_ScottsHouse_EventScript_GiveSilverShield:: @ 826387A
+BattleFrontier_ScottsHouse_EventScript_GiveSilverShield::
 	msgbox BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow, MSGBOX_DEFAULT
 	givedecoration DECOR_SILVER_SHIELD
 	compare VAR_RESULT, FALSE
@@ -112,17 +112,17 @@ BattleFrontier_ScottsHouse_EventScript_GiveSilverShield:: @ 826387A
 	goto BattleFrontier_ScottsHouse_EventScript_GivenShield
 	end
 
-BattleFrontier_ScottsHouse_EventScript_NoRoomForShield:: @ 82638A0
+BattleFrontier_ScottsHouse_EventScript_NoRoomForShield::
 	msgbox BattleFrontier_ScottsHouse_Text_ComeBackForThisLater, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_GivenShield:: @ 82638AA
+BattleFrontier_ScottsHouse_EventScript_GivenShield::
 	msgbox BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield:: @ 82638B4
+BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield::
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	tower_get TOWER_DATA_WIN_STREAK
@@ -135,7 +135,7 @@ BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield:: @ 82638B4
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
-BattleFrontier_ScottsHouse_EventScript_GiveGoldShield:: @ 8263913
+BattleFrontier_ScottsHouse_EventScript_GiveGoldShield::
 	msgbox BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow, MSGBOX_DEFAULT
 	givedecoration DECOR_GOLD_SHIELD
 	compare VAR_RESULT, FALSE
@@ -145,12 +145,12 @@ BattleFrontier_ScottsHouse_EventScript_GiveGoldShield:: @ 8263913
 	goto BattleFrontier_ScottsHouse_EventScript_GivenShield
 	end
 
-BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints:: @ 8263939
+BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints::
 	msgbox BattleFrontier_ScottsHouse_Text_ExpectingGreatThings, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier:: @ 8263943
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier::
 	msgbox BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -175,31 +175,31 @@ BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier:: @ 8263943
 	goto BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint
 	end
 
-BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints:: @ 82639BC
+BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints::
 	buffernumberstring 0, 4
 	setvar VAR_0x8004, 4
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
-BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints:: @ 82639CB
+BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints::
 	buffernumberstring 0, 3
 	setvar VAR_0x8004, 3
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
-BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints:: @ 82639DA
+BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints::
 	buffernumberstring 0, 2
 	setvar VAR_0x8004, 2
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
-BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint:: @ 82639E9
+BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
 	buffernumberstring 0, 1
 	setvar VAR_0x8004, 1
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
-BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints:: @ 82639F8
+BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints::
 	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	msgbox BattleFrontier_ScottsHouse_Text_ExplainBattlePoints, MSGBOX_DEFAULT
@@ -208,27 +208,27 @@ BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints:: @ 82639F8
 	release
 	end
 
-BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth:: @ 8263A13
+BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth::
 	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth:: @ 8263A1E
+BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth::
 	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast:: @ 8263A29
+BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast::
 	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
-BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest:: @ 8263A34
+BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier: @ 8263A3F
+BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 	.string "Scott: Well, hello and welcome!\n"
 	.string "Heheh… Sorry about the cramped space.\p"
 	.string "Anyway, {PLAYER}{KUN}, let me formally\n"
@@ -237,7 +237,7 @@ BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier: @ 8263A3F
 	.string "It took me years and years, but I've\l"
 	.string "finally given shape to my dream.$"
 
-BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal: @ 8263B29
+BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
 	.string "On reflection, it was a terribly long\n"
 	.string "journey…\p"
 	.string "I left home alone on a quest to find\n"
@@ -245,7 +245,7 @@ BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal: @ 8263B29
 	.string "No one can imagine how much effort\n"
 	.string "or time it took to make this real.$"
 
-BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing: @ 8263BD4
+BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
 	.string "But that's all in the past.\n"
 	.string "No point dwelling on that!\p"
 	.string "All I want for you is to enjoy battling\n"
@@ -254,11 +254,11 @@ BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing: @ 8263BD4
 	.string "as a memento for all the time our\l"
 	.string "paths crossed on our journeys.$"
 
-BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints: @ 8263CB0
+BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
 	.string "{PLAYER} obtained\n"
 	.string "{STR_VAR_1} Battle Point(s).$"
 
-BattleFrontier_ScottsHouse_Text_ExplainBattlePoints: @ 8263CD0
+BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
 	.string "Scott: You can check your Battle\n"
 	.string "Points on your Frontier Pass.\p"
 	.string "The more success you have here at\n"
@@ -267,10 +267,10 @@ BattleFrontier_ScottsHouse_Text_ExplainBattlePoints: @ 8263CD0
 	.string "Use your Battle Points the way you\n"
 	.string "see fit, like trading them for items.$"
 
-BattleFrontier_ScottsHouse_Text_ExpectingGreatThings: @ 8263DB8
+BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
 	.string "I'm expecting great things from you!$"
 
-BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers: @ 8263DDD
+BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
 	.string "Scott: Every Trainer is an individual.\n"
 	.string "They all lead lives of their own.\p"
 	.string "But when they're in a battle,\n"
@@ -282,7 +282,7 @@ BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers: @ 8263DDD
 	.string "Trainers who are serious about\l"
 	.string "battling, and invite them here.$"
 
-BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain: @ 8263F12
+BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
 	.string "Scott: Have you met any of\n"
 	.string "the Frontier Brains?\p"
 	.string "Better yet, have you obtained any\n"
@@ -292,7 +292,7 @@ BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain: @ 8263F12
 	.string "But I'm sure that seeing how tough\n"
 	.string "you are will startle even them!$"
 
-BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier: @ 8263FFE
+BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
 	.string "Scott: You don't just train for battle,\n"
 	.string "right?\p"
 	.string "I think I remember you working on\n"
@@ -302,7 +302,7 @@ BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier: @ 8263FFE
 	.string "the Battle Frontier somewhere…\l"
 	.string "Fufufu!$"
 
-BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols: @ 82640BC
+BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
 	.string "Scott: Are you enjoying things in\n"
 	.string "the Battle Frontier?\p"
 	.string "…Wait a second…\n"
@@ -317,7 +317,7 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols: @ 82640BC
 	.string "I want you to have this.\n"
 	.string "I'm sure you can put it to proper use.$"
 
-BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols: @ 8264216
+BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
 	.string "Scott: I hope you're enjoying\n"
 	.string "everything in the Battle Frontier.\p"
 	.string "…Wait a second…\n"
@@ -332,35 +332,35 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols: @ 8264216
 	.string "I think you will be able to\n"
 	.string "appreciate the value of my gift!$"
 
-BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere: @ 8264373
+BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
 	.string "I must say I have the gift of knowing\n"
 	.string "a good Trainer when I see one.\p"
 	.string "I'm so glad I had the foresight to\n"
 	.string "bring you here!$"
 
-BattleFrontier_ScottsHouse_Text_BerryPocketStuffed: @ 82643EB
+BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
 	.string "Your Berry Pocket seems to\n"
 	.string "be stuffed.$"
 
-BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow: @ 8264412
+BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
 	.string "Scott: Oh, I heard about you!\n"
 	.string "How you ruled the Battle Tower!\l"
 	.string "You beat over 50 Trainers in a row?\p"
 	.string "That's fantastic!\n"
 	.string "I want you to have this!$"
 
-BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow: @ 826449F
+BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow:
 	.string "Scott: Oh, my! I heard about you!\n"
 	.string "How you overwhelmed the Battle Tower!\l"
 	.string "You beat over 100 Trainers in a row?\p"
 	.string "That's ridiculously spectacular!\n"
 	.string "You've got to have this!$"
 
-BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings: @ 8264546
+BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings:
 	.string "I'll be expecting to hear even greater\n"
 	.string "things about you now!$"
 
-BattleFrontier_ScottsHouse_Text_ComeBackForThisLater: @ 8264583
+BattleFrontier_ScottsHouse_Text_ComeBackForThisLater:
 	.string "Oops, well, if you have too much\n"
 	.string "stuff, come back for this later.$"
 

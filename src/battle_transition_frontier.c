@@ -243,7 +243,7 @@ static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
 
-    if (sprite->pos1.x == data[0] && sprite->pos1.y == data[1])
+    if (sprite->x == data[0] && sprite->y == data[1])
     {
         sprite->callback = SpriteCallbackDummy;
     }
@@ -251,7 +251,7 @@ static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
     {
         if (data[4] == data[6])
         {
-            sprite->pos1.x += data[2];
+            sprite->x += data[2];
             data[4] = 0;
         }
         else
@@ -261,7 +261,7 @@ static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
 
         if (data[5] == data[7])
         {
-            sprite->pos1.y += data[3];
+            sprite->y += data[3];
             data[5] = 0;
         }
         else
@@ -305,8 +305,8 @@ static u8 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 arg2, s16 arg3, s16 
 
 static void SpriteCB_LogoCircleSpiral(struct Sprite *sprite)
 {
-    sprite->pos2.x = (Sin2(sprite->data[2]) * sprite->data[4]) >> 12; // div by 4096
-    sprite->pos2.y = (Cos2(sprite->data[2]) * sprite->data[4]) >> 12; // div by 4096
+    sprite->x2 = (Sin2(sprite->data[2]) * sprite->data[4]) >> 12; // div by 4096
+    sprite->y2 = (Cos2(sprite->data[2]) * sprite->data[4]) >> 12; // div by 4096
 
     sprite->data[2] = (sprite->data[2] + sprite->data[3]) % 360;
 
@@ -373,7 +373,7 @@ static bool8 FadeInCenterLogoCircle(struct Task *task)
     {
         if (task->data[3] == 31)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_BLACK);
             task->tState++;
         }
         else

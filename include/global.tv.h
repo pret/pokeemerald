@@ -1,13 +1,15 @@
 #ifndef GUARD_GLOBAL_TV_H
 #define GUARD_GLOBAL_TV_H
 
+#include "constants/tv.h"
+
 typedef union // size = 0x24
 {
     // Common
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[26];
+        /*0x02*/ u8 data[26];
         /*0x1C*/ u8 srcTrainerId3Lo;
         /*0x1D*/ u8 srcTrainerId3Hi;
         /*0x1E*/ u8 srcTrainerId2Lo;
@@ -22,7 +24,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[34];
+        /*0x02*/ u8 data[34];
     } commonInit;
 
     // Local shows
@@ -40,7 +42,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 var02;
+        /*0x02*/ u16 species;
         /*0x04*/ u16 words[6];
         /*0x10*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x18*/ u8 language;
@@ -62,16 +64,16 @@ typedef union // size = 0x24
         /*0x1C*/ u16 words[4];
     } fanclubOpinions;
 
-    // TVSHOW_UNKN_SHOWTYPE_04 (dummied out)
+    // TVSHOW_DUMMY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 words[2];
-        /*0x06*/ u16 var06;
+        /*0x06*/ u16 species;
         /*0x08*/ u8 pad_08[3];
-        /*0x0b*/ u8 string_0b[12];
+        /*0x0b*/ u8 name[12];
         /*0x17*/ u8 language;
-    } unkShow04;
+    } dummy;
 
     // TVSHOW_NAME_RATER_SHOW
     struct {
@@ -179,7 +181,7 @@ typedef union // size = 0x24
         /*0x18*/ u8 idolNameLanguage;
     } fanClubSpecial;
 
-    // TVSHOW_CONTEST_LIVE_UPDATES_2
+    // TVSHOW_LILYCOVE_CONTEST_LADY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
@@ -189,7 +191,7 @@ typedef union // size = 0x24
         /*0x16*/ u8 pokeblockState;
         /*0x17*/ u8 language;
         /*0x18*/ u8 pokemonNameLanguage;
-    } contestLiveUpdates2;
+    } contestLady;
 
     // Record Mixing Shows
     // TVSHOW_POKEMON_TODAY_CAUGHT
@@ -212,8 +214,8 @@ typedef union // size = 0x24
         /*0x02*/ u8 priceReduced;
         /*0x03*/ u8 language;
         /*0x04*/ u8 pad04[2];
-        /*0x06*/ u16 itemIds[3];
-        /*0x0C*/ u16 itemAmounts[3];
+        /*0x06*/ u16 itemIds[SMARTSHOPPER_NUM_ITEMS];
+        /*0x0C*/ u16 itemAmounts[SMARTSHOPPER_NUM_ITEMS];
         /*0x12*/ u8 shopLocation;
         /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } smartshopperShow;
@@ -401,7 +403,7 @@ typedef union // size = 0x24
         /*0x08*/ u16 species3;
         /*0x0a*/ u16 species4;
         /*0x0c*/ u8 language;
-        /*0x0d*/ u8 facility;
+        /*0x0d*/ u8 facilityAndMode;
         /*0x0e*/ u8 filler_0e[5];
         /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } frontier;

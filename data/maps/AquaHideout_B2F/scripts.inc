@@ -1,19 +1,19 @@
 .set LOCALID_MATT, 1
 .set LOCALID_SUBMARINE, 4
 
-AquaHideout_B2F_MapScripts:: @ 8233DCF
+AquaHideout_B2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, AquaHideout_B2F_OnTransition
 	.byte 0
 
-AquaHideout_B2F_OnTransition: @ 8233DD5
+AquaHideout_B2F_OnTransition:
 	call_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, AquaHideout_B2F_EventScript_PreventMattNoticing
 	end
 
-AquaHideout_B2F_EventScript_PreventMattNoticing:: @ 8233DDF
+AquaHideout_B2F_EventScript_PreventMattNoticing::
 	setvar VAR_TEMP_1, 1
 	return
 
-AquaHideout_B2F_EventScript_MattNoticePlayer:: @ 8233DE5
+AquaHideout_B2F_EventScript_MattNoticePlayer::
 	lockall
 	setvar VAR_0x8008, LOCALID_MATT
 	playse SE_PIN
@@ -25,13 +25,13 @@ AquaHideout_B2F_EventScript_MattNoticePlayer:: @ 8233DE5
 	releaseall
 	end
 
-AquaHideout_B2F_EventScript_Matt:: @ 8233E09
+AquaHideout_B2F_EventScript_Matt::
 	trainerbattle_single TRAINER_MATT, AquaHideout_B2F_Text_MattIntro, AquaHideout_B2F_Text_MattDefeat, AquaHideout_B2F_EventScript_SubmarineEscape
 	msgbox AquaHideout_B2F_Text_MattPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-AquaHideout_B2F_EventScript_SubmarineEscape:: @ 8233E25
+AquaHideout_B2F_EventScript_SubmarineEscape::
 	setvar VAR_0x8008, LOCALID_MATT
 	setvar VAR_0x8009, LOCALID_SUBMARINE
 	applymovement VAR_0x8008, Common_Movement_WalkInPlaceFastestLeft
@@ -54,7 +54,7 @@ AquaHideout_B2F_EventScript_SubmarineEscape:: @ 8233E25
 	release
 	end
 
-AquaHideout_B2F_Movement_SumbarineDepartLeft: @ 8233E80
+AquaHideout_B2F_Movement_SumbarineDepartLeft:
 	walk_left
 	walk_left
 	walk_left
@@ -62,34 +62,34 @@ AquaHideout_B2F_Movement_SumbarineDepartLeft: @ 8233E80
 	step_end
 
 @ Unused
-AquaHideout_B2F_Movement_SumbarineDepartRight: @ 8233E85
+AquaHideout_B2F_Movement_SumbarineDepartRight:
 	walk_right
 	walk_right
 	walk_right
 	walk_right
 	step_end
 
-AquaHideout_B2F_EventScript_Grunt4:: @ 8233E8A
+AquaHideout_B2F_EventScript_Grunt4::
 	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_4, AquaHideout_B2F_Text_Grunt4Intro, AquaHideout_B2F_Text_Grunt4Defeat, AquaHideout_B2F_EventScript_Grunt4Defeated
 	msgbox AquaHideout_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AquaHideout_B2F_EventScript_Grunt4Defeated:: @ 8233EA5
+AquaHideout_B2F_EventScript_Grunt4Defeated::
 	msgbox AquaHideout_B2F_Text_Grunt4PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-AquaHideout_B2F_EventScript_Grunt6:: @ 8233EAF
+AquaHideout_B2F_EventScript_Grunt6::
 	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_6, AquaHideout_B2F_Text_Grunt6Intro, AquaHideout_B2F_Text_Grunt6Defeat
 	msgbox AquaHideout_B2F_Text_Grunt6PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AquaHideout_B2F_EventScript_Grunt8:: @ 8233EC6
+AquaHideout_B2F_EventScript_Grunt8::
 	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_8, AquaHideout_B2F_Text_Grunt8Intro, AquaHideout_B2F_Text_Grunt8Defeat
 	msgbox AquaHideout_B2F_Text_Grunt8PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AquaHideout_B2F_Text_MattIntro: @ 8233EDD
+AquaHideout_B2F_Text_MattIntro:
 	.string "Hehehe…\p"
 	.string "Got here already, did you?\n"
 	.string "We underestimated you!\p"
@@ -99,16 +99,16 @@ AquaHideout_B2F_Text_MattIntro: @ 8233EDD
 	.string "I'm not stalling for time.\n"
 	.string "I'm going to pulverize you!$"
 
-AquaHideout_B2F_Text_MattDefeat: @ 8233F8D
+AquaHideout_B2F_Text_MattDefeat:
 	.string "Hehehe…\n"
 	.string "So, I lost, too…$"
 
-AquaHideout_B2F_Text_OurBossGotThroughHisPreparations: @ 8233FA6
+AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
 	.string "Hehehe!\p"
 	.string "While I was toying with you, our Boss\n"
 	.string "got through his preparations!$"
 
-AquaHideout_B2F_Text_MattPostBattle: @ 8233FF2
+AquaHideout_B2F_Text_MattPostBattle:
 	.string "Hehehe!\p"
 	.string "Our Boss has already gone on his way to\n"
 	.string "some cave under the sea!\p"
@@ -118,19 +118,19 @@ AquaHideout_B2F_Text_MattPostBattle: @ 8233FF2
 	.string "But will you find it then?\n"
 	.string "Hehehe!$"
 
-AquaHideout_B2F_Text_Grunt4Intro: @ 82340B4
+AquaHideout_B2F_Text_Grunt4Intro:
 	.string "Wahahah, I grew weary of waiting!\n"
 	.string "You owe me a battle, too!$"
 
-AquaHideout_B2F_Text_Grunt4Defeat: @ 82340F0
+AquaHideout_B2F_Text_Grunt4Defeat:
 	.string "Tired of waiting…\n"
 	.string "Lost and dazed…$"
 
-AquaHideout_B2F_Text_Grunt4PostBattle: @ 8234112
+AquaHideout_B2F_Text_Grunt4PostBattle:
 	.string "Boss…\n"
 	.string "Is this good enough?$"
 
-AquaHideout_B2F_Text_Grunt6Intro: @ 823412D
+AquaHideout_B2F_Text_Grunt6Intro:
 	.string "Warp panels, the Hideout's pride\n"
 	.string "and joy!\p"
 	.string "You're clueless about where you are,\n"
@@ -138,25 +138,25 @@ AquaHideout_B2F_Text_Grunt6Intro: @ 823412D
 	.string "Fluster and tire out the enemy, then\n"
 	.string "lower the boom! That's our plan!$"
 
-AquaHideout_B2F_Text_Grunt6Defeat: @ 82341CE
+AquaHideout_B2F_Text_Grunt6Defeat:
 	.string "What's wrong with you?\n"
 	.string "You're not tired at all!$"
 
-AquaHideout_B2F_Text_Grunt6PostBattle: @ 82341FE
+AquaHideout_B2F_Text_Grunt6PostBattle:
 	.string "That reminds me… I can't remember\n"
 	.string "where I put the Master Ball.\p"
 	.string "If I fail to guard it, our Boss will\n"
 	.string "chew me out…$"
 
-AquaHideout_B2F_Text_Grunt8Intro: @ 823426F
+AquaHideout_B2F_Text_Grunt8Intro:
 	.string "When I joined Team Aqua, the first\n"
 	.string "thing I had to learn was how these\l"
 	.string "warp panels connected.$"
 
-AquaHideout_B2F_Text_Grunt8Defeat: @ 82342CC
+AquaHideout_B2F_Text_Grunt8Defeat:
 	.string "I was too occupied thinking about\n"
 	.string "the warp panels…$"
 
-AquaHideout_B2F_Text_Grunt8PostBattle: @ 82342FF
+AquaHideout_B2F_Text_Grunt8PostBattle:
 	.string "I'll have to learn about how I can\n"
 	.string "battle more effectively…$"

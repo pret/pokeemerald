@@ -1,6 +1,6 @@
 .set LOCALID_TRICK_MASTER, 1
 
-Route110_TrickHouseEntrance_MapScripts:: @ 8269A50
+Route110_TrickHouseEntrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEntrance_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEntrance_OnWarp
@@ -15,7 +15,7 @@ Route110_TrickHouseEntrance_MapScripts:: @ 8269A50
 	@ 5: Completed previous challenge
 	@ 6: 'Trick Master' mechadoll ready to give Tent reward from final challenge (if bag was full)
 
-Route110_TrickHouseEntrance_OnTransition: @ 8269A60
+Route110_TrickHouseEntrance_OnTransition:
 	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_EnterFromCorridor
@@ -36,24 +36,24 @@ Route110_TrickHouseEntrance_OnTransition: @ 8269A60
 	case 4, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched3
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward:: @ 8269AD7
+Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward::
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	compare VAR_TRICK_HOUSE_LEVEL, 8
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 2
 	end
 
-Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward:: @ 8269AED
+Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward::
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 6
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterFromCorridor:: @ 8269AF3
+Route110_TrickHouseEntrance_EventScript_EnterFromCorridor::
 	setvar VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 5
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle:: @ 8269B03
+Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle::
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 0
 	compare VAR_TRICK_HOUSE_LEVEL, 1
 	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2
@@ -73,63 +73,63 @@ Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle:: @ 8269B03
 	call_if_eq Route110_TrickHouseEntrance_EventScript_FinishedPuzzles
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2:: @ 8269B61
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2::
 	call_if_unset FLAG_BADGE03_GET, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3:: @ 8269B6B
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3::
 	call_if_unset FLAG_BADGE04_GET, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4:: @ 8269B75
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4::
 	call_if_unset FLAG_BADGE05_GET, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5:: @ 8269B7F
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5::
 	call_if_unset FLAG_BADGE06_GET, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6:: @ 8269B89
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6::
 	call_if_unset FLAG_BADGE07_GET, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7:: @ 8269B93
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7::
 	call_if_unset FLAG_BADGE08_GET, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8:: @ 8269B9D
+Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8::
 	call_if_unset FLAG_SYS_GAME_CLEAR, Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle
 	return
 
-Route110_TrickHouseEntrance_EventScript_FinishedPuzzles:: @ 8269BA7
+Route110_TrickHouseEntrance_EventScript_FinishedPuzzles::
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 4
 	return
 
-Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle:: @ 8269BAD
+Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle::
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 3
 	return
 
-Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor:: @ 8269BB3
+Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor::
 	setobjectxyperm LOCALID_TRICK_MASTER, 5, 2
 	end
 
-Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger:: @ 8269BBB
+Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger::
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 0
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1:: @ 8269BC1
+Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1::
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched2:: @ 8269BC7
+Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched2::
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched3:: @ 8269BCD
+Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched3::
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	end
 
-Route110_TrickHouseEntrance_OnWarp: @ 8269BD3
+Route110_TrickHouseEntrance_OnWarp:
 	map_script_2 VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1, Route110_TrickHouseEntrance_EventScript_TrickMasterFound
 	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE, 0, Route110_TrickHouseEntrance_EventScript_SetTrickMasterHidingSpot
 	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE, 1, Route110_TrickHouseEntrance_EventScript_RemoveTrickMaster
@@ -140,14 +140,14 @@ Route110_TrickHouseEntrance_OnWarp: @ 8269BD3
 	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE, 6, Route110_TrickHouseEntrance_EventScript_SetTrickMasterInFrontOfDoor
 	.2byte 0
 
-Route110_TrickHouseEntrance_EventScript_TrickMasterFound:: @ 8269C15
+Route110_TrickHouseEntrance_EventScript_TrickMasterFound::
 	addobject LOCALID_TRICK_MASTER
 	showobjectat LOCALID_TRICK_MASTER, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	turnobject LOCALID_TRICK_MASTER, DIR_EAST
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetTrickMasterHidingSpot:: @ 8269C26
+Route110_TrickHouseEntrance_EventScript_SetTrickMasterHidingSpot::
 	addobject LOCALID_TRICK_MASTER
 	hideobjectat LOCALID_TRICK_MASTER, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	switch VAR_TRICK_HOUSE_LEVEL
@@ -161,59 +161,59 @@ Route110_TrickHouseEntrance_EventScript_SetTrickMasterHidingSpot:: @ 8269C26
 	case 7, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle8
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle1:: @ 8269C8C
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle1::
 	setobjectxy LOCALID_TRICK_MASTER, 6, 3
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle2:: @ 8269C94
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle2::
 	setobjectxy LOCALID_TRICK_MASTER, 11, 5
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle3:: @ 8269C9C
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle3::
 	setobjectxy LOCALID_TRICK_MASTER, 9, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle4:: @ 8269CA4
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle4::
 	setobjectxy LOCALID_TRICK_MASTER, 3, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle5:: @ 8269CAC
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle5::
 	setobjectxy LOCALID_TRICK_MASTER, 0, 5
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle6:: @ 8269CB4
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle6::
 	setobjectxy LOCALID_TRICK_MASTER, 11, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle7:: @ 8269CBC
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle7::
 	setobjectxy LOCALID_TRICK_MASTER, 8, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle8:: @ 8269CC4
+Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle8::
 	setobjectxy LOCALID_TRICK_MASTER, 4, 4
 	end
 
-Route110_TrickHouseEntrance_EventScript_RemoveTrickMaster:: @ 8269CCC
+Route110_TrickHouseEntrance_EventScript_RemoveTrickMaster::
 	removeobject LOCALID_TRICK_MASTER
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetTrickMasterFacingDoor:: @ 8269CD0
+Route110_TrickHouseEntrance_EventScript_SetTrickMasterFacingDoor::
 	addobject LOCALID_TRICK_MASTER
 	setobjectxy LOCALID_TRICK_MASTER, 5, 2
 	turnobject LOCALID_TRICK_MASTER, DIR_NORTH
 	end
 
-Route110_TrickHouseEntrance_EventScript_SetTrickMasterInFrontOfDoor:: @ 8269CDF
+Route110_TrickHouseEntrance_EventScript_SetTrickMasterInFrontOfDoor::
 	addobject LOCALID_TRICK_MASTER
 	setobjectxy LOCALID_TRICK_MASTER, 5, 2
 	turnobject LOCALID_TRICK_MASTER, DIR_SOUTH
 	end
 
-Route110_TrickHouseEntrance_OnFrame: @ 8269CEE
+Route110_TrickHouseEntrance_OnFrame:
 	map_script_2 VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1, Route110_TrickHouseEntrance_EventScript_BeginChallenge
 	.2byte 0
 
-Route110_TrickHouseEntrance_EventScript_BeginChallenge:: @ 8269CF8
+Route110_TrickHouseEntrance_EventScript_BeginChallenge::
 	lockall
 	delay 20
 	compare VAR_TRICK_HOUSE_LEVEL, 0
@@ -232,11 +232,11 @@ Route110_TrickHouseEntrance_EventScript_BeginChallenge:: @ 8269CF8
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_UnusedRelease:: @ 8269D39
+Route110_TrickHouseEntrance_EventScript_UnusedRelease::
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_TrickMaster:: @ 8269D3B
+Route110_TrickHouseEntrance_EventScript_TrickMaster::
 	lockall
 	switch VAR_TRICK_HOUSE_ENTRANCE_STATE
 	case 0, Route110_TrickHouseEntrance_EventScript_FoundTrickMaster
@@ -245,7 +245,7 @@ Route110_TrickHouseEntrance_EventScript_TrickMaster:: @ 8269D3B
 	case 6, Route110_TrickHouseEntrance_EventScript_MechadollReward
 	end
 
-Route110_TrickHouseEntrance_EventScript_FoundTrickMaster:: @ 8269D6E
+Route110_TrickHouseEntrance_EventScript_FoundTrickMaster::
 	playse SE_PIN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -274,39 +274,39 @@ Route110_TrickHouseEntrance_EventScript_FoundTrickMaster:: @ 8269D6E
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk:: @ 8269DEE
+Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundBehindTree:: @ 8269DF7
+Route110_TrickHouseEntrance_EventScript_FoundBehindTree::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedBehindTree, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundInDresser:: @ 8269E00
+Route110_TrickHouseEntrance_EventScript_FoundInDresser::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedInDresser, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundBeyondWindow:: @ 8269E09
+Route110_TrickHouseEntrance_EventScript_FoundBeyondWindow::
 	msgbox Route110_TrickHouseEntrance_Text_ConealedBeyondWindow, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundInPlanter:: @ 8269E12
+Route110_TrickHouseEntrance_EventScript_FoundInPlanter::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedInPlanter, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundInCupboard:: @ 8269E1B
+Route110_TrickHouseEntrance_EventScript_FoundInCupboard::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedInCupboard, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundBehindWindow:: @ 8269E24
+Route110_TrickHouseEntrance_EventScript_FoundBehindWindow::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedBehindWindow, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_FoundBeneathCushion:: @ 8269E2D
+Route110_TrickHouseEntrance_EventScript_FoundBeneathCushion::
 	msgbox Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouse_Movement_TrickMasterSpin: @ 8269E36
+Route110_TrickHouse_Movement_TrickMasterSpin:
 	face_up
 	delay_4
 	face_left
@@ -317,7 +317,7 @@ Route110_TrickHouse_Movement_TrickMasterSpin: @ 8269E36
 	delay_4
 	step_end
 
-Route110_TrickHouse_Movement_TrickMasterJumpAway: @ 8269E3F
+Route110_TrickHouse_Movement_TrickMasterJumpAway:
 	face_up
 	disable_anim
 	slide_up
@@ -328,11 +328,11 @@ Route110_TrickHouse_Movement_TrickMasterJumpAway: @ 8269E3F
 	slide_up
 	step_end
 
-Route110_TrickHouseEntrance_EventScript_MeetTrickMaster:: @ 8269E48
+Route110_TrickHouseEntrance_EventScript_MeetTrickMaster::
 	msgbox Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster, MSGBOX_DEFAULT
 	return
 
-Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle:: @ 8269E51
+Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle::
 	msgbox Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
@@ -348,7 +348,7 @@ Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle:: @ 8269E51
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GiveReward:: @ 8269E8F
+Route110_TrickHouseEntrance_EventScript_GiveReward::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward, MSGBOX_DEFAULT
@@ -368,7 +368,7 @@ Route110_TrickHouseEntrance_EventScript_GiveReward:: @ 8269E8F
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward:: @ 8269EEF
+Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward::
 	giveitem ITEM_RARE_CANDY
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -378,7 +378,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward:: @ 8269EEF
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward:: @ 8269F1B
+Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward::
 	giveitem ITEM_TIMER_BALL
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -388,7 +388,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward:: @ 8269F1B
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward:: @ 8269F47
+Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
 	giveitem ITEM_HARD_STONE
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -398,7 +398,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward:: @ 8269F47
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward:: @ 8269F73
+Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
 	giveitem ITEM_SMOKE_BALL
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -408,7 +408,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward:: @ 8269F73
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward:: @ 8269F9F
+Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
 	giveitem ITEM_TM12
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -418,7 +418,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward:: @ 8269F9F
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward:: @ 8269FCB
+Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward::
 	giveitem ITEM_MAGNET
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -428,7 +428,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward:: @ 8269FCB
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward:: @ 8269FF7
+Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
 	giveitem ITEM_PP_MAX
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
@@ -438,7 +438,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward:: @ 8269FF7
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GotReward:: @ 826A023
+Route110_TrickHouseEntrance_EventScript_GotReward::
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 3
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestUp
@@ -446,7 +446,7 @@ Route110_TrickHouseEntrance_EventScript_GotReward:: @ 826A023
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_MechadollReward:: @ 826A039
+Route110_TrickHouseEntrance_EventScript_MechadollReward::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT
@@ -459,21 +459,21 @@ Route110_TrickHouseEntrance_EventScript_MechadollReward:: @ 826A039
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_ChooseTent:: @ 826A070
-	multichoice 0, 0, MULTI_TENT, 1
+Route110_TrickHouseEntrance_EventScript_ChooseTent::
+	multichoice 0, 0, MULTI_TENT, TRUE
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEntrance_EventScript_GiveRedTent
 	goto Route110_TrickHouseEntrance_EventScript_GiveBlueTent
 
-Route110_TrickHouseEntrance_EventScript_GiveRedTent:: @ 826A08A
+Route110_TrickHouseEntrance_EventScript_GiveRedTent::
 	givedecoration DECOR_RED_TENT
 	return
 
-Route110_TrickHouseEntrance_EventScript_GiveBlueTent:: @ 826A092
+Route110_TrickHouseEntrance_EventScript_GiveBlueTent::
 	givedecoration DECOR_BLUE_TENT
 	return
 
-Route110_TrickHouseEntrance_EventScript_ReceivedTent:: @ 826A09A
+Route110_TrickHouseEntrance_EventScript_ReceivedTent::
 	msgbox Route110_TrickHouseEntrance_Text_ThenFarewell, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_TRICK_MASTER, Route110_TrickHousePuzzle5_Movement_MechadollShake
@@ -489,7 +489,7 @@ Route110_TrickHouseEntrance_EventScript_ReceivedTent:: @ 826A09A
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_Door:: @ 826A0D3
+Route110_TrickHouseEntrance_EventScript_Door::
 	lockall
 	switch VAR_TRICK_HOUSE_ENTRANCE_STATE
 	case 0, Route110_TrickHouseEntrance_EventScript_ItsAScroll
@@ -498,12 +498,12 @@ Route110_TrickHouseEntrance_EventScript_Door:: @ 826A0D3
 	case 5, Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage
 	end
 
-Route110_TrickHouseEntrance_EventScript_ItsAScroll:: @ 826A106
+Route110_TrickHouseEntrance_EventScript_ItsAScroll::
 	msgbox Route110_TrickHouseEntrance_Text_ItsAScroll, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GoInHolePrompt:: @ 826A110
+Route110_TrickHouseEntrance_EventScript_GoInHolePrompt::
 	msgbox Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll, MSGBOX_YESNO
 	closemessage
 	compare VAR_RESULT, YES
@@ -511,7 +511,7 @@ Route110_TrickHouseEntrance_EventScript_GoInHolePrompt:: @ 826A110
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom:: @ 826A126
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom::
 	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, 0
 	special DrawWholeMapView
 	delay 20
@@ -530,76 +530,76 @@ Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom:: @ 826A126
 	case 7, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom8
 	end
 
-Route110_TrickHouseEntrance_Movement_EnterRoom: @ 826A1A7
+Route110_TrickHouseEntrance_Movement_EnterRoom:
 	set_invisible
 	step_end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom1:: @ 826A1A9
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom1::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE1, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom2:: @ 826A1B4
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom2::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE2, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom3:: @ 826A1BF
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom3::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE3, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom4:: @ 826A1CA
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom4::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE4, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom5:: @ 826A1D5
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom5::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom6:: @ 826A1E0
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom6::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE6, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom7:: @ 826A1EB
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom7::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom8:: @ 826A1F6
+Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom8::
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE8, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote:: @ 826A201
+Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote::
 	msgbox Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage:: @ 826A20B
+Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage::
 	compare VAR_TRICK_HOUSE_LEVEL, 8
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2
 	msgbox Route110_TrickHouseEntrance_Text_ItsAScroll, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2:: @ 826A220
+Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2::
 	msgbox Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHousePuzzle_EventScript_Door:: @ 826A22A
+Route110_TrickHousePuzzle_EventScript_Door::
 	lockall
 	switch VAR_TRICK_HOUSE_LEVEL
 	case 0, Route110_TrickHousePuzzle1_EventScript_Door
@@ -612,7 +612,7 @@ Route110_TrickHousePuzzle_EventScript_Door:: @ 826A22A
 	case 7, Route110_TrickHousePuzzle8_EventScript_Door
 	end
 
-Route110_TrickHousePuzzle1_EventScript_Door:: @ 826A289
+Route110_TrickHousePuzzle1_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -623,7 +623,7 @@ Route110_TrickHousePuzzle1_EventScript_Door:: @ 826A289
 	releaseall
 	end
 
-Route110_TrickHousePuzzle2_EventScript_Door:: @ 826A2B2
+Route110_TrickHousePuzzle2_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -634,7 +634,7 @@ Route110_TrickHousePuzzle2_EventScript_Door:: @ 826A2B2
 	releaseall
 	end
 
-Route110_TrickHousePuzzle3_EventScript_Door:: @ 826A2DB
+Route110_TrickHousePuzzle3_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_3_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -645,7 +645,7 @@ Route110_TrickHousePuzzle3_EventScript_Door:: @ 826A2DB
 	releaseall
 	end
 
-Route110_TrickHousePuzzle4_EventScript_Door:: @ 826A304
+Route110_TrickHousePuzzle4_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_4_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -656,7 +656,7 @@ Route110_TrickHousePuzzle4_EventScript_Door:: @ 826A304
 	releaseall
 	end
 
-Route110_TrickHousePuzzle5_EventScript_Door:: @ 826A32D
+Route110_TrickHousePuzzle5_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_5_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -667,7 +667,7 @@ Route110_TrickHousePuzzle5_EventScript_Door:: @ 826A32D
 	releaseall
 	end
 
-Route110_TrickHousePuzzle6_EventScript_Door:: @ 826A356
+Route110_TrickHousePuzzle6_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -678,7 +678,7 @@ Route110_TrickHousePuzzle6_EventScript_Door:: @ 826A356
 	releaseall
 	end
 
-Route110_TrickHousePuzzle7_EventScript_Door:: @ 826A37F
+Route110_TrickHousePuzzle7_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle7_EventScript_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -689,7 +689,7 @@ Route110_TrickHousePuzzle7_EventScript_Door:: @ 826A37F
 	releaseall
 	end
 
-Route110_TrickHousePuzzle8_EventScript_Door:: @ 826A3A8
+Route110_TrickHousePuzzle8_EventScript_Door::
 	compare VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle8_EventScript_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
@@ -700,17 +700,17 @@ Route110_TrickHousePuzzle8_EventScript_Door:: @ 826A3A8
 	releaseall
 	end
 
-Route110_TrickHousePuzzle_EventScript_DoorLocked:: @ 826A3D1
+Route110_TrickHousePuzzle_EventScript_DoorLocked::
 	msgbox Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHousePuzzle_EventScript_ReadScrollAgain:: @ 826A3DB
+Route110_TrickHousePuzzle_EventScript_ReadScrollAgain::
 	msgbox Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHousePuzzle_EventScript_FoundScroll:: @ 826A3E5
+Route110_TrickHousePuzzle_EventScript_FoundScroll::
 	playfanfare MUS_OBTAIN_ITEM
 	message Route110_TrickHousePuzzle_Text_FoundAScroll
 	waitfanfare
@@ -718,7 +718,7 @@ Route110_TrickHousePuzzle_EventScript_FoundScroll:: @ 826A3E5
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_TrickMasterHiding:: @ 826A3F8
+Route110_TrickHouseEntrance_EventScript_TrickMasterHiding::
 	lockall
 	msgbox Route110_TrickHouseEntrance_Text_YoureBeingWatched, MSGBOX_DEFAULT
 	releaseall
@@ -731,75 +731,75 @@ Route110_TrickHouseEntrance_EventScript_TrickMasterHiding:: @ 826A3F8
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	end
 
-Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1:: @ 826A429
+Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1::
 	setvar VAR_0x8004, 6  @ x
 	setvar VAR_0x8005, 3  @ y
 	call Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle
 	return
 
-Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2:: @ 826A439
+Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2::
 	setvar VAR_0x8004, 11  @ x
 	setvar VAR_0x8005, 5   @ y
 	call Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle
 	return
 
-Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3:: @ 826A449
+Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3::
 	setvar VAR_0x8004, 9  @ x
 	setvar VAR_0x8005, 2  @ y
 	call Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle
 	return
 
-Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle:: @ 826A459
+Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
 	setvar VAR_0x8006, 0
 	dofieldeffectsparkle VAR_0x8004, VAR_0x8005, VAR_0x8006
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return
 
-Route110_TrickHouseEntrance_Text_YoureBeingWatched: @ 826A474
+Route110_TrickHouseEntrance_Text_YoureBeingWatched:
 	.string "You're being watched…$"
 
-Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk: @ 826A48A
+Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "beneath this desk? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConcealedBehindTree: @ 826A4DA
+Route110_TrickHouseEntrance_Text_ConcealedBehindTree:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "behind this tree? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConcealedInDresser: @ 826A529
+Route110_TrickHouseEntrance_Text_ConcealedInDresser:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "in this dresser? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConealedBeyondWindow: @ 826A577
+Route110_TrickHouseEntrance_Text_ConealedBeyondWindow:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "beyond this window? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConcealedInPlanter: @ 826A5C8
+Route110_TrickHouseEntrance_Text_ConcealedInPlanter:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "in this planter? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConcealedInCupboard: @ 826A616
+Route110_TrickHouseEntrance_Text_ConcealedInCupboard:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "in this cupboard? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConcealedBehindWindow: @ 826A665
+Route110_TrickHouseEntrance_Text_ConcealedBehindWindow:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "behind this window? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion: @ 826A6B6
+Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion:
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
 	.string "beneath this cushion? You're sharp!$"
 
-Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster: @ 826A709
+Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster:
 	.string "Behold!\p"
 	.string "For I am the greatest living mystery\n"
 	.string "of a man in all of Hoenn!\l"
@@ -807,7 +807,7 @@ Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster: @ 826A709
 	.string "The Trick Master!\n"
 	.string "Wahahaha! Glad to meet you!$"
 
-Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse: @ 826A78C
+Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse:
 	.string "You, you've come to challenge\n"
 	.string "my Trick House, haven't you?\p"
 	.string "That's why you're here, isn't it?\n"
@@ -817,25 +817,25 @@ Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse: @ 826A78C
 	.string "and let your challenge commence!\p"
 	.string "I shall be waiting in the back!$"
 
-Route110_TrickHouseEntrance_Text_ItsAScroll: @ 826A878
+Route110_TrickHouseEntrance_Text_ItsAScroll:
 	.string "It's a scroll.$"
 
-Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll: @ 826A887
+Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll:
 	.string "There is a big hole behind the scroll!\p"
 	.string "Want to go in?$"
 
-Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote: @ 826A8BD
+Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote:
 	.string "There is a note affixed to the scroll…\p"
 	.string "“I am leaving on a journey.\n"
 	.string "Don't look for me. Trick Master”$"
 
-Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick: @ 826A921
+Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick:
 	.string "For the next time, I'll use this trick,\n"
 	.string "and that scheme, and those ruses…\p"
 	.string "Mufufufu… If I may say so, it's\n"
 	.string "brilliantly difficult, even for me!$"
 
-Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges: @ 826A9AF
+Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges:
 	.string "Hah? What?!\n"
 	.string "Oh, it's you!\p"
 	.string "I'm in the midst of devising new tricky\n"
@@ -845,42 +845,42 @@ Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges: @ 826A9AF
 	.string "You wouldn't begrudge me that?\l"
 	.string "Come back in a little while!$"
 
-Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward: @ 826AA82
+Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward:
 	.string "Ah, it's you! You're here to accept the\n"
 	.string "reward from before, isn't that right?\l"
 	.string "Yes, right I am!\p"
 	.string "Here!\n"
 	.string "I'll give it to you now!$"
 
-Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward: @ 826AB00
+Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward:
 	.string "Hah?\n"
 	.string "Did you not come to claim your reward?$"
 
-Route110_TrickHouseEntrance_Text_MechadollWhichTent: @ 826AB2C
+Route110_TrickHouseEntrance_Text_MechadollWhichTent:
 	.string "Mechadoll 5 I am!\n"
 	.string "If reward is not taken by you,\l"
 	.string "then Trick Master you cannot follow.\p"
 	.string "Red Tent or Blue Tent,\n"
 	.string "which do you prefer?$"
 
-Route110_TrickHouseEntrance_Text_ThenFarewell: @ 826ABAE
+Route110_TrickHouseEntrance_Text_ThenFarewell:
 	.string "Then farewell.$"
 
-Route110_TrickHouseEntrance_Text_PCFullAgain: @ 826ABBD
+Route110_TrickHouseEntrance_Text_PCFullAgain:
 	.string "Your PC status: full again.\n"
 	.string "Mean, you are.$"
 
-Route110_TrickHousePuzzle_Text_FoundAScroll: @ 826ABE8
+Route110_TrickHousePuzzle_Text_FoundAScroll:
 	.string "{PLAYER} found a scroll.$"
 
-Route110_TrickHousePuzzle_Text_MemorizedSecretCode: @ 826ABFB
+Route110_TrickHousePuzzle_Text_MemorizedSecretCode:
 	.string "{PLAYER} memorized the secret code\n"
 	.string "written on the scroll.$"
 
-Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt: @ 826AC2F
+Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt:
 	.string "A secret code is written on it.$"
 
-Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere: @ 826AC4F
+Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
 	.string "The door is locked.\p"
 	.string "…On closer inspection, this is written\n"
 	.string "on it: “Write the secret code here.”$"

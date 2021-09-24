@@ -1,134 +1,134 @@
-gTrickHouse_Mechadoll_Oddish:: @ 27ECBC
+gTrickHouse_Mechadoll_Oddish::
 	.string "Oddish$"
 
-gTrickHouse_Mechadoll_Poochyena:: @ 27ECC3
+gTrickHouse_Mechadoll_Poochyena::
 	.string "Poochyena$"
 
-gTrickHouse_Mechadoll_Taillow:: @ 27ECCD
+gTrickHouse_Mechadoll_Taillow::
 	.string "Taillow$"
 
-gTrickHouse_Mechadoll_Azurill:: @ 27ECD5
+gTrickHouse_Mechadoll_Azurill::
 	.string "Azurill$"
 
-gTrickHouse_Mechadoll_Lotad:: @ 27ECDD
+gTrickHouse_Mechadoll_Lotad::
 	.string "Lotad$"
 
-gTrickHouse_Mechadoll_Wingull:: @ 27ECE3
+gTrickHouse_Mechadoll_Wingull::
 	.string "Wingull$"
 
-gTrickHouse_Mechadoll_Dustox:: @ 27ECEB
+gTrickHouse_Mechadoll_Dustox::
 	.string "Dustox$"
 
-gTrickHouse_Mechadoll_Zubat:: @ 27ECF2
+gTrickHouse_Mechadoll_Zubat::
 	.string "Zubat$"
 
-gTrickHouse_Mechadoll_Nincada:: @ 27ECF8
+gTrickHouse_Mechadoll_Nincada::
 	.string "Nincada$"
 
-gTrickHouse_Mechadoll_Ralts:: @ 27ED00
+gTrickHouse_Mechadoll_Ralts::
 	.string "Ralts$"
 
-gTrickHouse_Mechadoll_Zigzagoon:: @ 27ED06
+gTrickHouse_Mechadoll_Zigzagoon::
 	.string "Zigzagoon$"
 
-gTrickHouse_Mechadoll_Slakoth:: @ 27ED10
+gTrickHouse_Mechadoll_Slakoth::
 	.string "Slakoth$"
 
-gTrickHouse_Mechadoll_Poochyena2:: @ 27ED18
+gTrickHouse_Mechadoll_Poochyena2::
 	.string "Poochyena$"
 
-gTrickHouse_Mechadoll_Shroomish:: @ 27ED22
+gTrickHouse_Mechadoll_Shroomish::
 	.string "Shroomish$"
 
-gTrickHouse_Mechadoll_Zigzagoon2:: @ 27ED2C
+gTrickHouse_Mechadoll_Zigzagoon2::
 	.string "Zigzagoon$"
 
-gTrickHouse_Mechadoll_Poochyena3:: @ 27ED36
+gTrickHouse_Mechadoll_Poochyena3::
 	.string "Poochyena$"
 
-gTrickHouse_Mechadoll_Zubat2:: @ 27ED40
+gTrickHouse_Mechadoll_Zubat2::
 	.string "Zubat$"
 
-gTrickHouse_Mechadoll_Carvanha:: @ 27ED46
+gTrickHouse_Mechadoll_Carvanha::
 	.string "Carvanha$"
 
-gTrickHouse_Mechadoll_BurnHeal:: @ 27ED4F
+gTrickHouse_Mechadoll_BurnHeal::
 	.string "Burn Heal$"
 
-gTrickHouse_Mechadoll_HarborMail:: @ 27ED59
+gTrickHouse_Mechadoll_HarborMail::
 	.string "Harbor Mail$"
 
-gTrickHouse_Mechadoll_SamePrice:: @ 27ED65
+gTrickHouse_Mechadoll_SamePrice::
 	.string "Same price$"
 
-gTrickHouse_Mechadoll_60Yen:: @ 27ED70
+gTrickHouse_Mechadoll_60Yen::
 	.string "¥60$"
 
-gTrickHouse_Mechadoll_55Yen:: @ 27ED74
+gTrickHouse_Mechadoll_55Yen::
 	.string "¥55$"
 
-gTrickHouse_Mechadoll_Nothing:: @ 27ED78
+gTrickHouse_Mechadoll_Nothing::
 	.string "Nothing$"
 
-gTrickHouse_Mechadoll_CostMore:: @ 27ED80
+gTrickHouse_Mechadoll_CostMore::
 	.string "They will cost more.$"
 
-gTrickHouse_Mechadoll_CostLess:: @ 27ED95
+gTrickHouse_Mechadoll_CostLess::
 	.string "They will cost less.$"
 
-gTrickHouse_Mechadoll_SamePrice2:: @ 27EDAA
+gTrickHouse_Mechadoll_SamePrice2::
 	.string "Same price$"
 
-gTrickHouse_Mechadoll_Male:: @ 27EDB5
+gTrickHouse_Mechadoll_Male::
 	.string "Male$"
 
-gTrickHouse_Mechadoll_Female:: @ 27EDBA
+gTrickHouse_Mechadoll_Female::
 	.string "Female$"
 
-gTrickHouse_Mechadoll_Neither:: @ 27EDC1
+gTrickHouse_Mechadoll_Neither::
 	.string "Neither$"
 
-gTrickHouse_Mechadoll_ElderlyMen:: @ 27EDC9
+gTrickHouse_Mechadoll_ElderlyMen::
 	.string "Elderly men$"
 
-gTrickHouse_Mechadoll_ElderlyLadies:: @ 27EDD5
+gTrickHouse_Mechadoll_ElderlyLadies::
 	.string "Elderly ladies$"
 
-gTrickHouse_Mechadoll_SameNumber:: @ 27EDE4
+gTrickHouse_Mechadoll_SameNumber::
 	.string "Same number$"
 
-gTrickHouse_Mechadoll_None:: @ 27EDF0
+gTrickHouse_Mechadoll_None::
 	.string "None$"
 
-gTrickHouse_Mechadoll_One:: @ 27EDF5
+gTrickHouse_Mechadoll_One::
 	.string "1$"
 
-gTrickHouse_Mechadoll_Two:: @ 27EDF7
+gTrickHouse_Mechadoll_Two::
 	.string "2$"
 
-gTrickHouse_Mechadoll_Two2:: @ 27EDF9
+gTrickHouse_Mechadoll_Two2::
 	.string "2$"
 
-gTrickHouse_Mechadoll_Three:: @ 27EDFB
+gTrickHouse_Mechadoll_Three::
 	.string "3$"
 
-gTrickHouse_Mechadoll_Four:: @ 27EDFD
+gTrickHouse_Mechadoll_Four::
 	.string "4$"
 
-gTrickHouse_Mechadoll_Six:: @ 27EDFF
+gTrickHouse_Mechadoll_Six::
 	.string "6$"
 
-gTrickHouse_Mechadoll_Seven:: @ 27EE01
+gTrickHouse_Mechadoll_Seven::
 	.string "7$"
 
-gTrickHouse_Mechadoll_Eight:: @ 27EE03
+gTrickHouse_Mechadoll_Eight::
 	.string "8$"
 
-gTrickHouse_Mechadoll_Six2:: @ 27EE05
+gTrickHouse_Mechadoll_Six2::
 	.string "6$"
 
-gTrickHouse_Mechadoll_Seven2:: @ 27EE07
+gTrickHouse_Mechadoll_Seven2::
 	.string "7$"
 
-gTrickHouse_Mechadoll_Eight2:: @ 27EE09
+gTrickHouse_Mechadoll_Eight2::
 	.string "8$"

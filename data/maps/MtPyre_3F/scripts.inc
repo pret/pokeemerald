@@ -1,17 +1,17 @@
-MtPyre_3F_MapScripts:: @ 8231752
+MtPyre_3F_MapScripts::
 	.byte 0
 
-MtPyre_3F_EventScript_William:: @ 8231753
+MtPyre_3F_EventScript_William::
 	trainerbattle_single TRAINER_WILLIAM, MtPyre_3F_Text_WilliamIntro, MtPyre_3F_Text_WilliamDefeat
 	msgbox MtPyre_3F_Text_WilliamPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_3F_EventScript_Kayla:: @ 823176A
+MtPyre_3F_EventScript_Kayla::
 	trainerbattle_single TRAINER_KAYLA, MtPyre_3F_Text_KaylaIntro MtPyre_3F_Text_KaylaDefeat
 	msgbox MtPyre_3F_Text_KaylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_3F_EventScript_Gabrielle:: @ 8231781
+MtPyre_3F_EventScript_Gabrielle::
 	trainerbattle_single TRAINER_GABRIELLE_1, MtPyre_3F_Text_GabrielleIntro, MtPyre_3F_Text_GabrielleDefeat, MtPyre_3F_EventScript_RegisterGabrielle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -20,7 +20,7 @@ MtPyre_3F_EventScript_Gabrielle:: @ 8231781
 	release
 	end
 
-MtPyre_3F_EventScript_RegisterGabrielle:: @ 82317AD
+MtPyre_3F_EventScript_RegisterGabrielle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtPyre_3F_Text_GabrielleRegister, MSGBOX_DEFAULT
@@ -28,47 +28,47 @@ MtPyre_3F_EventScript_RegisterGabrielle:: @ 82317AD
 	release
 	end
 
-MtPyre_3F_EventScript_RematchGabrielle:: @ 82317CC
+MtPyre_3F_EventScript_RematchGabrielle::
 	trainerbattle_rematch TRAINER_GABRIELLE_1, MtPyre_3F_Text_GabrielleRematchIntro, MtPyre_3F_Text_GabrielleRematchDefeat
 	msgbox MtPyre_3F_Text_GabriellePostRematch, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_3F_Text_WilliamIntro: @ 82317E3
+MtPyre_3F_Text_WilliamIntro:
 	.string "The rich atmosphere of the mountain\n"
 	.string "has elevated my psychic power!\p"
 	.string "A mere child like you…\n"
 	.string "You dream of winning?$"
 
-MtPyre_3F_Text_WilliamDefeat: @ 8231853
+MtPyre_3F_Text_WilliamDefeat:
 	.string "I drown in self-pity…$"
 
-MtPyre_3F_Text_WilliamPostBattle: @ 8231869
+MtPyre_3F_Text_WilliamPostBattle:
 	.string "My psychic powers have surely\n"
 	.string "grown several times, but…$"
 
-MtPyre_3F_Text_KaylaIntro: @ 82318A1
+MtPyre_3F_Text_KaylaIntro:
 	.string "Ahahahaha!\p"
 	.string "This is no place for children, least\n"
 	.string "of all you!$"
 
-MtPyre_3F_Text_KaylaDefeat: @ 82318DD
+MtPyre_3F_Text_KaylaDefeat:
 	.string "I lost that cleanly…$"
 
-MtPyre_3F_Text_KaylaPostBattle: @ 82318F2
+MtPyre_3F_Text_KaylaPostBattle:
 	.string "This means my training is still not\n"
 	.string "enough…\p"
 	.string "I've got to keep working toward the\n"
 	.string "summit…\p"
 	.string "Go, me!$"
 
-MtPyre_3F_Text_GabrielleIntro: @ 8231952
+MtPyre_3F_Text_GabrielleIntro:
 	.string "Why have you come here?$"
 
-MtPyre_3F_Text_GabrielleDefeat: @ 823196A
+MtPyre_3F_Text_GabrielleDefeat:
 	.string "That was amazing!\n"
 	.string "You're a very special Trainer.$"
 
-MtPyre_3F_Text_GabriellePostBattle: @ 823199B
+MtPyre_3F_Text_GabriellePostBattle:
 	.string "Pokémon no longer of this world.\n"
 	.string "Pokémon that are with you now.\p"
 	.string "And the Pokémon that you will meet\n"
@@ -76,21 +76,21 @@ MtPyre_3F_Text_GabriellePostBattle: @ 823199B
 	.string "They are all to be equally cherished.\n"
 	.string "Please remember that.$"
 
-MtPyre_3F_Text_GabrielleRegister: @ 8231A49
+MtPyre_3F_Text_GabrielleRegister:
 	.string "I would like to see your Pokémon\n"
 	.string "when they grow up some more…\p"
 	.string "Please, I need to see your Pokénav.$"
 
-MtPyre_3F_Text_GabrielleRematchIntro: @ 8231AAB
+MtPyre_3F_Text_GabrielleRematchIntro:
 	.string "Oh, it's you…\p"
 	.string "Have you come to show me your grown\n"
 	.string "Pokémon?$"
 
-MtPyre_3F_Text_GabrielleRematchDefeat: @ 8231AE6
+MtPyre_3F_Text_GabrielleRematchDefeat:
 	.string "How amazing!\n"
 	.string "You are a special person.$"
 
-MtPyre_3F_Text_GabriellePostRematch: @ 8231B0D
+MtPyre_3F_Text_GabriellePostRematch:
 	.string "Pokémon no longer of this world.\n"
 	.string "Pokémon that are with you now.\p"
 	.string "And the Pokémon that you will meet\n"

@@ -1,21 +1,21 @@
 .set LOCALID_ATTENDANT_SINGLES, 1
 .set LOCALID_ATTENDANT_DOUBLES, 6
 
-BattleFrontier_BattleFactoryLobby_MapScripts:: @ 82583E8
+BattleFrontier_BattleFactoryLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryLobby_OnWarp
 	.byte 0
 
-BattleFrontier_BattleFactoryLobby_OnWarp: @ 82583F3
+BattleFrontier_BattleFactoryLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth:: @ 82583FD
+BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattleFactoryLobby_OnFrame: @ 8258407
+BattleFrontier_BattleFactoryLobby_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge
@@ -23,11 +23,11 @@ BattleFrontier_BattleFactoryLobby_OnFrame: @ 8258407
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge
 	.2byte 0
 
-BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus:: @ 8258431
+BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus::
 	frontier_getstatus
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving:: @ 825843A
+BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving::
 	lockall
 	msgbox BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT
 	closemessage
@@ -40,7 +40,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving:: @ 825843A
 	releaseall
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge:: @ 825849B
+BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
 	compare VAR_RESULT, TRUE
@@ -49,10 +49,10 @@ BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge:: @ 825849B
 	waitmessage
 	goto BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints
 
-BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead:: @ 82584BD
+BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead, MSGBOX_DEFAULT
 	waitmessage
-BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints:: @ 82584C6
+BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints, MSGBOX_DEFAULT
 	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
@@ -66,7 +66,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints:: @ 82584C6
 	goto BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge:: @ 8258506
+BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge::
 	lockall
 	message BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults
 	waitmessage
@@ -77,28 +77,28 @@ BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge:: @ 8258506
 	playse SE_SAVE
 	waitse
 
-BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle:: @ 825853B
+BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle::
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
 	message BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch
 	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
 
-BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle:: @ 825857D
+BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle::
 	call BattleFrontier_EventScript_SaveBattle
-BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle:: @ 8258582
+BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge:: @ 8258592
+BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge::
 	lockall
 	message BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume
 	waitmessage
@@ -110,7 +110,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge:: @ 8258592
 	setvar VAR_0x8006, 2
 	goto BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge
 
-BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant:: @ 82585CB
+BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant::
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
@@ -118,35 +118,35 @@ BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant:: @ 82585CB
 	goto BattleFrontier_BattleFactoryLobby_EventScript_Attendant
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant:: @ 82585DD
+BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	goto BattleFrontier_BattleFactoryLobby_EventScript_Attendant
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_Attendant:: @ 82585ED
+BattleFrontier_BattleFactoryLobby_EventScript_Attendant::
 	special SavePlayerParty
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle
-BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge:: @ 8258606
+BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge
 	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge
 	case 2, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
 
-BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge:: @ 8258653
+BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge::
 	message BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode
 	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
 	switch VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
@@ -157,7 +157,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge:: @ 8258653
 	case YES, BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge
 
-BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge:: @ 82586B9
+BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge::
 	setvar VAR_TEMP_0, 0
 	factory_init
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
@@ -170,7 +170,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge:: @ 82586B9
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed
 	setvar VAR_0x8006, 0
-BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge:: @ 825871A
+BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleFactoryLobby_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
@@ -186,71 +186,71 @@ BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge:: @ 825871A
 	waitstate
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant:: @ 825875C
+BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant::
 	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant:: @ 8258762
+BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant::
 	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge:: @ 8258768
+BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge
 	goto BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge
 
-BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed:: @ 8258783
+BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
 
-BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge:: @ 825879A
+BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge::
 	special LoadPlayerParty
-BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge:: @ 825879D
+BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor: @ 82587A7
+BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor:
 	walk_up
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor: @ 82587AC
+BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor:
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle:: @ 82587B1
+BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle:: @ 82587BA
+BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge:: @ 82587C3
+BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge::
 	message BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge:: @ 82587C9
+BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge::
 	message BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge:: @ 82587CF
+BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge:: @ 82587D8
+BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults:: @ 82587E1
+BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults::
 	lockall
 	frontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES
 	waitbuttonpress
@@ -258,7 +258,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults:: @ 82587E1
 	releaseall
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults:: @ 82587FA
+BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults::
 	lockall
 	frontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES
 	waitbuttonpress
@@ -266,34 +266,34 @@ BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults:: @ 82587FA
 	releaseall
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_Woman:: @ 8258813
+BattleFrontier_BattleFactoryLobby_EventScript_Woman::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves, MSGBOX_NPC
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_Camper:: @ 825881C
+BattleFrontier_BattleFactoryLobby_EventScript_Camper::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon, MSGBOX_NPC
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_Picnicker:: @ 8258825
+BattleFrontier_BattleFactoryLobby_EventScript_Picnicker::
 	lock
 	msgbox BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_FatMan:: @ 8258830
+BattleFrontier_BattleFactoryLobby_EventScript_FatMan::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints, MSGBOX_NPC
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard:: @ 8258839
+BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard:: @ 8258848
+BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
 	waitmessage
-	multichoice 17, 0, MULTI_BATTLE_FACTORY_RULES, 0
+	multichoice 17, 0, MULTI_BATTLE_FACTORY_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner
@@ -304,47 +304,47 @@ BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard:: @ 8258848
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics:: @ 82588A6
+BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner:: @ 82588B4
+BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainSwapPartnerRules, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber:: @ 82588C2
+BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNumberRules, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes:: @ 82588D0
+BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv:: @ 82588DE
+BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_ExitRules:: @ 82588EC
+BattleFrontier_BattleFactoryLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle: @ 82588EE
+BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle:
 	.string "Where the intelligence of Trainers\n"
 	.string "is put to the test!\p"
 	.string "Welcome to the Battle Factory!\p"
 	.string "I am your guide to the Battle Swap\n"
 	.string "Single Tournament.$"
 
-BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge: @ 825897A
+BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge:
 	.string "Would you like to take the Battle\n"
 	.string "Swap Single challenge?$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge: @ 82589B3
+BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge:
 	.string "The Battle Swap Single Tournament\n"
 	.string "is a Single Battle competition using\l"
 	.string "only rental Pokémon.\p"
@@ -362,25 +362,26 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge: @ 82589B3
 	.string "If you don't save, you will be\n"
 	.string "disqualified from your challenge.$"
 
-BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit: @ 8258BC5
+BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit:
 	.string "We look forward to your next visit.$"
 
-BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode: @ 8258BE9
+BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode:
 	.string "Which level do you wish to challenge?\n"
 	.string "Level 50 or Open Level?$"
 
-BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge: @ 8258C27
+BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge:
 	.string "Before you begin your challenge,\n"
 	.string "I need to save the game. Is that okay?$"
 
-BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping: @ 8258C6F
+@ Unused
+BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping:
 	.string "Okay, I will hold your Pokémon for\n"
 	.string "safekeeping while you compete.$"
 
-BattleFrontier_BattleFactoryLobby_Text_StepThisWay: @ 8258CB1
+BattleFrontier_BattleFactoryLobby_Text_StepThisWay:
 	.string "Please step this way.$"
 
-BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults: @ 8258CC7
+BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults:
 	.string "Thank you for participating!\p"
 	.string "I will return your Pokémon in exchange\n"
 	.string "for our rental Pokémon.\p"
@@ -388,58 +389,58 @@ BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults: @ 8258CC7
 	.string "Please wait.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_ReturnMons: @ 8258D54
+BattleFrontier_BattleFactoryLobby_Text_ReturnMons:
 	.string "I will return your Pokémon in exchange\n"
 	.string "for our rental Pokémon.$"
 
-BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins: @ 8258D93
+BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins:
 	.string "Congratulations! You've won seven\n"
 	.string "straight Battle Swap matches!$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak: @ 8258DD3
+BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak:
 	.string "In recognition of your 7-win streak,\n"
 	.string "we award you these Battle Point(s).$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints: @ 8258E1C
+BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints:
 	.string "Oh, oh, oh!\p"
 	.string "Your Battle Points are maxed.\p"
 	.string "Please come back after using\n"
 	.string "some Battle Points.$"
 
-BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume: @ 8258E77
+BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume:
 	.string "We've been waiting for you!\p"
 	.string "Before we resume your challenge,\n"
 	.string "I must save the game.$"
 
-BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting: @ 8258ECA
+BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting:
 	.string "I'm sorry to say this, but you didn't\n"
 	.string "save before you quit playing last time.\p"
 	.string "As a result, you have been disqualified\n"
 	.string "from your challenge.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_WellReturnMons: @ 8258F55
+BattleFrontier_BattleFactoryLobby_Text_WellReturnMons:
 	.string "We'll return your personal Pokémon.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_ReceivedPrizeItem: @ 8258F79
+BattleFrontier_BattleFactoryLobby_Text_ReceivedPrizeItem:
 	.string "{PLAYER} received the prize\n"
 	.string "{STR_VAR_1}.$"
 
-BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle: @ 8258F93
+BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle:
 	.string "Where the intelligence of Trainers\n"
 	.string "is put to the test!\p"
 	.string "Welcome to the Battle Factory!\p"
 	.string "I am your guide to the Battle Swap\n"
 	.string "Double Tournament.$"
 
-BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge: @ 825901F
+BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge:
 	.string "Would you like to take the Battle\n"
 	.string "Swap Double challenge?$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge: @ 8259058
+BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge:
 	.string "The Battle Swap Double Tournament\n"
 	.string "is a Double Battle competition using\l"
 	.string "only rental Pokémon.\p"
@@ -457,28 +458,28 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge: @ 8259058
 	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
-BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead: @ 825926A
+BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead:
 	.string "Congratulations for defeating\n"
 	.string "the Factory Head and winning\l"
 	.string "seven matches in a row!$"
 
-BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints: @ 82592BD
+BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints:
 	.string "In recognition of your wealth of\n"
 	.string "knowledge and keen intelligence,\l"
 	.string "we award you these Battle Point(s).$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave: @ 8259323
+BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave:
 	.string "Let me exchange your Pokémon\n"
 	.string "for our rental Pokémon.\p"
 	.string "I need to save the battle data,\n"
 	.string "so please wait.$"
 
-BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch: @ 8259388
+BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch:
 	.string "Would you like to record your last\n"
 	.string "Battle Factory match on your\l"
 	.string "Frontier Pass?$"
 
-BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves: @ 82593D7
+BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves:
 	.string "Hi!\n"
 	.string "You, there!\p"
 	.string "Are you thinking that the events here\n"
@@ -490,26 +491,26 @@ BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves: @ 82593D7
 	.string "about Pokémon and their moves,\l"
 	.string "it will be tough to keep winning.$"
 
-BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon: @ 82594E5
+BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon:
 	.string "I swapped for a weak Pokémon…\n"
 	.string "I thought it was a good kind to have…\p"
 	.string "They wiped the floor with us…$"
 
-BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons: @ 8259547
+BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons:
 	.string "Things haven't been going my way\n"
 	.string "at all.\p"
 	.string "You need to check your opponent's\n"
 	.string "Pokémon during battle to see if\l"
 	.string "they're any good.$"
 
-BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints: @ 82595C4
+BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints:
 	.string "You know how the staff here give you\n"
 	.string "a few hints about your next opponent?\p"
 	.string "Well, I'm a full-grown man, but I have\n"
 	.string "trouble figuring out their hints.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried: @ 8259658
+BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried:
 	.string "Like, I'm really tough, but I get bored\n"
 	.string "really easily, so I just kept swapping\l"
 	.string "and battling over and over.\p"
@@ -517,33 +518,33 @@ BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried: @ 8259658
 	.string "Battle Swap events, I noticed they\l"
 	.string "varied the rental Pokémon.$"
 
-BattleFrontier_BattleFactoryLobby_Text_RulesAreListed: @ 8259721
+BattleFrontier_BattleFactoryLobby_Text_RulesAreListed:
 	.string "The Battle Swap rules are listed.$"
 
-BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading: @ 8259743
+BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading:
 	.string "Which heading do you want to read?$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules: @ 8259766
+BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules:
 	.string "In a Battle Swap event, you may use\n"
 	.string "only three Pokémon.\p"
 	.string "Whether you are renting or swapping,\n"
 	.string "your team may not have two or more\l"
 	.string "of the same Pokémon.$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainSwapPartnerRules: @ 82597FB
+BattleFrontier_BattleFactoryLobby_Text_ExplainSwapPartnerRules:
 	.string "You may swap Pokémon only with\n"
 	.string "the Trainer you have just defeated.\p"
 	.string "You may swap for only those Pokémon\n"
 	.string "used by the beaten Trainer.$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNumberRules: @ 825987E
+BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNumberRules:
 	.string "After every battle you win, you may\n"
 	.string "swap for one of your defeated\l"
 	.string "opponent's Pokémon.\p"
 	.string "You will not be able to swap Pokémon\n"
 	.string "with the seventh Trainer in the event.$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules: @ 8259920
+BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules:
 	.string "There are two key points to be aware\n"
 	.string "of when swapping Pokémon.\p"
 	.string "First, when swapping, you can't check\n"
@@ -555,7 +556,7 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules: @ 8259920
 	.string "This sequence remains unchanged\n"
 	.string "even when swaps are made.$"
 
-BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules: @ 8259A5E
+BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules:
 	.string "In the Open Level, the rental Pokémon\n"
 	.string "and the opposing Trainers' Pokémon\l"
 	.string "are all Level 100.$"

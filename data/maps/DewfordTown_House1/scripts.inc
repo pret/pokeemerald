@@ -1,15 +1,15 @@
-DewfordTown_House1_MapScripts:: @ 81FC3CD
+DewfordTown_House1_MapScripts::
 	.byte 0
 
-DewfordTown_House1_EventScript_Man:: @ 81FC3CE
+DewfordTown_House1_EventScript_Man::
 	msgbox DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland, MSGBOX_NPC
 	end
 
-DewfordTown_House1_EventScript_Woman:: @ 81FC3D7
+DewfordTown_House1_EventScript_Woman::
 	msgbox DewfordTown_House1_Text_LifeGoesSlowlyOnIsland, MSGBOX_NPC
 	end
 
-DewfordTown_House1_EventScript_Zigzagoon:: @ 81FC3E0
+DewfordTown_House1_EventScript_Zigzagoon::
 	lock
 	faceplayer
 	waitse
@@ -19,18 +19,18 @@ DewfordTown_House1_EventScript_Zigzagoon:: @ 81FC3E0
 	release
 	end
 
-DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland: @ 81FC3F3
+DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland:
 	.string "There's a lot to be said for living on\n"
 	.string "a small island like this in harmony with\l"
 	.string "Pokémon and the family.$"
 
-DewfordTown_House1_Text_LifeGoesSlowlyOnIsland: @ 81FC45B
+DewfordTown_House1_Text_LifeGoesSlowlyOnIsland:
 	.string "I left the major port of Slateport\n"
 	.string "City when I married my husband here.\p"
 	.string "Life goes by slowly on this little\n"
 	.string "island. But being surrounded by the\l"
 	.string "beautiful sea--that's happiness, too.$"
 
-DewfordTown_House1_Text_Zigzagoon: @ 81FC510
+DewfordTown_House1_Text_Zigzagoon:
 	.string "Zigzagoon: Guguuh!$"
 

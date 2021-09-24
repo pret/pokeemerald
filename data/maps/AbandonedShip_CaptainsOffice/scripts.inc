@@ -1,7 +1,7 @@
-AbandonedShip_CaptainsOffice_MapScripts:: @ 82387E1
+AbandonedShip_CaptainsOffice_MapScripts::
 	.byte 0
 
-AbandonedShip_CaptainsOffice_EventScript_CaptSternAide:: @ 82387E2
+AbandonedShip_CaptainsOffice_EventScript_CaptSternAide::
 	lock
 	faceplayer
 	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus
@@ -13,17 +13,17 @@ AbandonedShip_CaptainsOffice_EventScript_CaptSternAide:: @ 82387E2
 	release
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner:: @ 8238810
+AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner::
 	msgbox AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner, MSGBOX_DEFAULT
 	release
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus:: @ 823881A
+AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus::
 	msgbox AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus, MSGBOX_DEFAULT
 	release
 	end
 
-AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner: @ 8238824
+AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner:
 	.string "I'm investigating this ship on behalf\n"
 	.string "of Capt. Stern.\p"
 	.string "He also asked me to find a Scanner,\n"

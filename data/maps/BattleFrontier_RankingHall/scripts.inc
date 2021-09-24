@@ -1,67 +1,67 @@
-BattleFrontier_RankingHall_MapScripts:: @ 825E4A9
+BattleFrontier_RankingHall_MapScripts::
 	.byte 0
 
-BattleFrontier_RankingHall_EventScript_TowerSinglesRecords:: @ 825E4AA
+BattleFrontier_RankingHall_EventScript_TowerSinglesRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_TOWER_SINGLES
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_TowerDoublesRecords:: @ 825E4B6
+BattleFrontier_RankingHall_EventScript_TowerDoublesRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_TOWER_DOUBLES
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_TowerMultisRecords:: @ 825E4C2
+BattleFrontier_RankingHall_EventScript_TowerMultisRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_TOWER_MULTIS
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_TowerLinkRecords:: @ 825E4CE
+BattleFrontier_RankingHall_EventScript_TowerLinkRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_TOWER_LINK
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_ArenaRecords:: @ 825E4DA
+BattleFrontier_RankingHall_EventScript_ArenaRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_ARENA
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_PalaceRecords:: @ 825E4E6
+BattleFrontier_RankingHall_EventScript_PalaceRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_PALACE
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_FactoryRecords:: @ 825E4F2
+BattleFrontier_RankingHall_EventScript_FactoryRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_FACTORY
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_DomeRecords:: @ 825E4FE
+BattleFrontier_RankingHall_EventScript_DomeRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_DOME
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_PikeRecords:: @ 825E50A
+BattleFrontier_RankingHall_EventScript_PikeRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_PIKE
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_PyramidRecords:: @ 825E516
+BattleFrontier_RankingHall_EventScript_PyramidRecords::
 	lockall
 	setvar VAR_0x8005, RANKING_HALL_BATTLE_PYRAMID
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
-BattleFrontier_RankingHall_EventScript_ShowRecords:: @ 825E522
+BattleFrontier_RankingHall_EventScript_ShowRecords::
 	special ShowRankingHallRecordsWindow
 	waitbuttonpress
 	special ScrollRankingHallRecordsWindow
@@ -70,19 +70,19 @@ BattleFrontier_RankingHall_EventScript_ShowRecords:: @ 825E522
 	releaseall
 	end
 
-BattleFrontier_RankingHall_EventScript_Attendant:: @ 825E52F
+BattleFrontier_RankingHall_EventScript_Attendant::
 	msgbox BattleFrontier_RankingHall_Text_ExplainRankingHall, MSGBOX_NPC
 	end
 
-BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign:: @ 825E538
+BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign::
 	msgbox BattleFrontier_RankingHall_Text_DomePikeFactoryRecords, MSGBOX_SIGN
 	end
 
-BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn:: @ 825E541
+BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn::
 	msgbox BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords, MSGBOX_SIGN
 	end
 
-BattleFrontier_RankingHall_EventScript_NinjaBoy:: @ 825E54A
+BattleFrontier_RankingHall_EventScript_NinjaBoy::
 	lock
 	faceplayer
 	msgbox BattleFrontier_RankingHall_Text_IsYourNameOnThisList, MSGBOX_YESNO
@@ -92,42 +92,42 @@ BattleFrontier_RankingHall_EventScript_NinjaBoy:: @ 825E54A
 	release
 	end
 
-BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList:: @ 825E569
+BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList::
 	msgbox BattleFrontier_RankingHall_Text_WowThatsSuper, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_RankingHall_EventScript_Boy:: @ 825E573
+BattleFrontier_RankingHall_EventScript_Boy::
 	msgbox BattleFrontier_RankingHall_Text_MyNamesNotUpThere, MSGBOX_NPC
 	end
 
-BattleFrontier_RankingHall_Text_ExplainRankingHall: @ 825E57C
+BattleFrontier_RankingHall_Text_ExplainRankingHall:
 	.string "This is the Ranking Hall.\p"
 	.string "This is where we recognize the immortal\n"
 	.string "Trainers who left great records in\l"
 	.string "Battle Frontier events.$"
 
-BattleFrontier_RankingHall_Text_DomePikeFactoryRecords: @ 825E5F9
+BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
 	.string "Battle Dome, Battle Pike,\n"
 	.string "and Battle Factory Records$"
 
-BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords: @ 825E62E
+BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords:
 	.string "Battle Palace, Battle Arena,\n"
 	.string "and Battle Pyramid Records$"
 
-BattleFrontier_RankingHall_Text_IsYourNameOnThisList: @ 825E666
+BattleFrontier_RankingHall_Text_IsYourNameOnThisList:
 	.string "Hi, is your name on this list?$"
 
-BattleFrontier_RankingHall_Text_WowThatsSuper: @ 825E685
+BattleFrontier_RankingHall_Text_WowThatsSuper:
 	.string "Wow, that's super!\n"
 	.string "I'll have to try harder, too!$"
 
-BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName: @ 825E6B6
+BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
 	.string "Oh, is that right?\p"
 	.string "If you saw your friend's name up here,\n"
 	.string "I bet it would make you work harder!$"
 
-BattleFrontier_RankingHall_Text_MyNamesNotUpThere: @ 825E715
+BattleFrontier_RankingHall_Text_MyNamesNotUpThere:
 	.string "Hmm…\n"
 	.string "My name's not up there…\p"
 	.string "Well, it's only natural since I haven't\n"

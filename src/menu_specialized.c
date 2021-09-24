@@ -23,16 +23,15 @@
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
-#include "constants/berry.h"
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
-EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
+EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
+EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
-static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void sub_81D24A4(struct ConditionGraph *a0);
 static void sub_81D2634(struct ConditionGraph *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
@@ -41,40 +40,40 @@ static void SetNextConditionSparkle(struct Sprite *sprite);
 static void SpriteCB_ConditionSparkle(struct Sprite *sprite);
 static void ShowAllConditionSparkles(struct Sprite *sprite);
 
-static const struct WindowTemplate sUnknown_086253E8[] =
+static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT] =
 {
-    {
+    [MAILBOXWIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x8
     },
-    {
+    [MAILBOXWIN_LIST] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 1,
         .width = 8,
         .height = 18,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x18
     },
-    {
+    [MAILBOXWIN_OPTIONS] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 11,
         .height = 8,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x18
     }
 };
 
 static const u8 sPlayerNameTextColors[] =
 {
-    TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY
+    TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY
 };
 
 static const u8 sEmptyItemName[] = _("");
@@ -208,53 +207,55 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
     .cursorKind = 0
 };
 
-bool8 sub_81D1C44(u8 count)
+bool8 MailboxMenu_Alloc(u8 count)
 {
     u8 i;
 
-    sUnknown_0203CF4C = Alloc(count * sizeof(*sUnknown_0203CF4C) + sizeof(*sUnknown_0203CF4C));
-    if (sUnknown_0203CF4C == NULL)
+    // + 1 to count for 'Cancel'
+    sMailboxList = Alloc((count + 1) * sizeof(*sMailboxList));
+    if (sMailboxList == NULL)
         return FALSE;
 
-    for (i = 0; i < ARRAY_COUNT(sUnknown_0203CF48); i++)
-        sUnknown_0203CF48[i] = 0xFF;
+    for (i = 0; i < ARRAY_COUNT(sMailboxWindowIds); i++)
+        sMailboxWindowIds[i] = WINDOW_NONE;
 
     return TRUE;
 }
 
-u8 sub_81D1C84(u8 a0)
+u8 MailboxMenu_AddWindow(u8 windowIdx)
 {
-    if (sUnknown_0203CF48[a0] == 0xFF)
+    if (sMailboxWindowIds[windowIdx] == WINDOW_NONE)
     {
-        if (a0 == 2)
+        if (windowIdx == MAILBOXWIN_OPTIONS)
         {
-            struct WindowTemplate template = sUnknown_086253E8[2];
+            struct WindowTemplate template = sWindowTemplates_MailboxMenu[windowIdx];
             template.width = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
-            sUnknown_0203CF48[2] = AddWindow(&template);
+            sMailboxWindowIds[windowIdx] = AddWindow(&template);
         }
-        else
+        else // MAILBOXWIN_TITLE or MAILBOXWIN_LIST
         {
-            sUnknown_0203CF48[a0] = AddWindow(&sUnknown_086253E8[a0]);
+            sMailboxWindowIds[windowIdx] = AddWindow(&sWindowTemplates_MailboxMenu[windowIdx]);
         }
-        SetStandardWindowBorderStyle(sUnknown_0203CF48[a0], 0);
+        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], 0);
     }
-    return sUnknown_0203CF48[a0];
+    return sMailboxWindowIds[windowIdx];
 }
 
-void sub_81D1D04(u8 a0)
+void MailboxMenu_RemoveWindow(u8 windowIdx)
 {
-    ClearStdWindowAndFrameToTransparent(sUnknown_0203CF48[a0], 0);
-    ClearWindowTilemap(sUnknown_0203CF48[a0]);
-    RemoveWindow(sUnknown_0203CF48[a0]);
-    sUnknown_0203CF48[a0] = 0xFF;
+    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], 0);
+    ClearWindowTilemap(sMailboxWindowIds[windowIdx]);
+    RemoveWindow(sMailboxWindowIds[windowIdx]);
+    sMailboxWindowIds[windowIdx] = WINDOW_NONE;
 }
 
-static u8 sub_81D1D34(u8 a0)
+// Unused
+static u8 MailboxMenu_GetWindowId(u8 windowIdx)
 {
-    return sUnknown_0203CF48[a0];
+    return sMailboxWindowIds[windowIdx];
 }
 
-static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
+static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     u8 buffer[30];
     u16 length;
@@ -262,29 +263,29 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     if (itemId == LIST_CANCEL)
         return;
 
-    StringCopy(buffer, gSaveBlock1Ptr->mail[6 + itemId].playerName);
-    sub_81DB52C(buffer);
+    StringCopy(buffer, gSaveBlock1Ptr->mail[PARTY_SIZE + itemId].playerName);
+    ConvertInternationalPlayerName(buffer);
     length = StringLength(buffer);
-    if (length <= 5)
+    if (length < PLAYER_NAME_LENGTH - 1)
         ConvertInternationalString(buffer, LANGUAGE_JAPANESE);
     AddTextPrinterParameterized4(windowId, 1, 8, y, 0, 0, sPlayerNameTextColors, -1, buffer);
 }
 
-u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
+u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
 {
     u16 i;
     for (i = 0; i < page->count; i++)
     {
-        sUnknown_0203CF4C[i].name = sEmptyItemName;
-        sUnknown_0203CF4C[i].id = i;
+        sMailboxList[i].name = sEmptyItemName;
+        sMailboxList[i].id = i;
     }
 
-    sUnknown_0203CF4C[i].name = gText_Cancel2;
-    sUnknown_0203CF4C[i].id = LIST_CANCEL;
+    sMailboxList[i].name = gText_Cancel2;
+    sMailboxList[i].id = LIST_CANCEL;
 
-    gMultiuseListMenuTemplate.items = sUnknown_0203CF4C;
+    gMultiuseListMenuTemplate.items = sMailboxList;
     gMultiuseListMenuTemplate.totalItems = page->count + 1;
-    gMultiuseListMenuTemplate.windowId = sUnknown_0203CF48[1];
+    gMultiuseListMenuTemplate.windowId = sMailboxWindowIds[MAILBOXWIN_LIST];
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = 8;
     gMultiuseListMenuTemplate.cursor_X = 0;
@@ -293,8 +294,8 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
     gMultiuseListMenuTemplate.cursorPal = 2;
     gMultiuseListMenuTemplate.fillValue = 1;
     gMultiuseListMenuTemplate.cursorShadowPal = 3;
-    gMultiuseListMenuTemplate.moveCursorFunc = sub_81D1E7C;
-    gMultiuseListMenuTemplate.itemPrintFunc = sub_81D1D44;
+    gMultiuseListMenuTemplate.moveCursorFunc = MailboxMenu_MoveCursorFunc;
+    gMultiuseListMenuTemplate.itemPrintFunc = MailboxMenu_ItemPrintFunc;
     gMultiuseListMenuTemplate.fontId = 1;
     gMultiuseListMenuTemplate.cursorKind = 0;
     gMultiuseListMenuTemplate.lettersSpacing = 0;
@@ -303,20 +304,20 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
     return ListMenuInit(&gMultiuseListMenuTemplate, page->itemsAbove, page->cursorPos);
 }
 
-static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
 }
 
-void sub_81D1E90(struct PlayerPCItemPageStruct *page)
+void MailboxMenu_AddScrollArrows(struct PlayerPCItemPageStruct *page)
 {
-    page->scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
+    page->scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
 }
 
-void sub_81D1EC0(void)
+void MailboxMenu_Free(void)
 {
-    Free(sUnknown_0203CF4C);
+    Free(sMailboxList);
 }
 
 void InitConditionGraphData(struct ConditionGraph *graph)
@@ -841,7 +842,7 @@ void MoveRelearnerPrintText(u8 *str)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     gTextFlags.canABSpeedUpPrint = TRUE;
     speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized2(3, 1, str, speed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, 3);
+    AddTextPrinterParameterized2(3, 1, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
 }
 
 bool16 MoveRelearnerRunTextPrinters(void)
@@ -880,89 +881,82 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
 // Gets the name/gender/level string for the condition menu
 static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
 {
-    u16 species, level, gender;
+    u16 box, mon, species, level, gender;
     struct BoxPokemon *boxMon;
     u8 *str;
 
+    box = boxId;
+    mon = monId;
     *(dst++) = EXT_CTRL_CODE_BEGIN;
     *(dst++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
     *(dst++) = TEXT_COLOR_BLUE;
     *(dst++) = TEXT_COLOR_TRANSPARENT;
     *(dst++) = TEXT_COLOR_LIGHT_BLUE;
-    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
-    {
+    if (GetBoxOrPartyMonData(box, mon, MON_DATA_IS_EGG, NULL))
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
+    GetBoxOrPartyMonData(box, mon, MON_DATA_NICKNAME, dst);
+    StringGetEnd10(dst);
+    species = GetBoxOrPartyMonData(box, mon, MON_DATA_SPECIES, NULL);
+    if (box == TOTAL_BOXES_COUNT) // Party mon.
+    {
+        level = GetMonData(&gPlayerParty[mon], MON_DATA_LEVEL);
+        gender = GetMonGender(&gPlayerParty[mon]);
     }
     else
     {
-        GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
-        StringGetEnd10(dst);
-        species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
-        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
-        {
-            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-            gender = GetMonGender(&gPlayerParty[monId]);
-        }
-        else
-        {
-            // Needed to match, feel free to remove.
-            boxId++;boxId--;
-            monId++;monId--;
-
-            boxMon = GetBoxedMonPtr(boxId, monId);
-            gender = GetBoxMonGender(boxMon);
-            level = GetLevelFromBoxMonExp(boxMon);
-        }
-
-        if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
-            gender = MON_GENDERLESS;
-
-        for (str = dst; *str != EOS; str++)
-            ;
-
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = EXT_CTRL_CODE_SKIP;
-        *(str++) = 60;
-
-        switch (gender)
-        {
-        default:
-            *(str++) = CHAR_SPACE;
-            break;
-        case MON_MALE:
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = TEXT_COLOR_RED;
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = EXT_CTRL_CODE_SHADOW;
-            *(str++) = TEXT_COLOR_LIGHT_RED;
-            *(str++) = CHAR_MALE;
-            break;
-        case MON_FEMALE:
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = TEXT_COLOR_GREEN;
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = EXT_CTRL_CODE_SHADOW;
-            *(str++) = TEXT_COLOR_LIGHT_GREEN;
-            *(str++) = CHAR_FEMALE;
-            break;
-        }
-
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-        *(str++) = TEXT_COLOR_BLUE;
-        *(str++) = TEXT_COLOR_TRANSPARENT;
-        *(str++) = TEXT_COLOR_LIGHT_BLUE;
-        *(str++) = CHAR_SLASH;
-        *(str++) = CHAR_EXTRA_SYMBOL;
-        *(str++) = CHAR_LV_2;
-        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-        *(str++) = CHAR_SPACE;
-        *str = EOS;
-
-        return str;
+        boxMon = GetBoxedMonPtr(box, mon);
+        gender = GetBoxMonGender(boxMon);
+        level = GetLevelFromBoxMonExp(boxMon);
     }
+
+    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+        gender = MON_GENDERLESS;
+
+    for (str = dst; *str != EOS; str++)
+        ;
+
+    *(str++) = EXT_CTRL_CODE_BEGIN;
+    *(str++) = EXT_CTRL_CODE_SKIP;
+    *(str++) = 60;
+
+    switch (gender)
+    {
+    default:
+        *(str++) = CHAR_SPACE;
+        break;
+    case MON_MALE:
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_COLOR;
+        *(str++) = TEXT_COLOR_RED;
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_SHADOW;
+        *(str++) = TEXT_COLOR_LIGHT_RED;
+        *(str++) = CHAR_MALE;
+        break;
+    case MON_FEMALE:
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_COLOR;
+        *(str++) = TEXT_COLOR_GREEN;
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_SHADOW;
+        *(str++) = TEXT_COLOR_LIGHT_GREEN;
+        *(str++) = CHAR_FEMALE;
+        break;
+    }
+
+    *(str++) = EXT_CTRL_CODE_BEGIN;
+    *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(str++) = TEXT_COLOR_BLUE;
+    *(str++) = TEXT_COLOR_TRANSPARENT;
+    *(str++) = TEXT_COLOR_LIGHT_BLUE;
+    *(str++) = CHAR_SLASH;
+    *(str++) = CHAR_EXTRA_SYMBOL;
+    *(str++) = CHAR_LV_2;
+    str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *(str++) = CHAR_SPACE;
+    *str = EOS;
+
+    return str;
 }
 
 // Buffers the string in src to dest up to n chars. If src is less than n chars, fill with spaces
@@ -983,6 +977,8 @@ static u8 *BufferConditionMenuSpacedStringN(u8 *dst, const u8 *src, s16 n)
 void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
+    u16 box = boxId;
+    u16 mon = monId;
 
     // In this and the below 2 functions, numMons is passed as the number of menu selections (which includes Cancel)
     // To indicate that the Cancel needs to be subtracted they pass an additional bool
@@ -992,21 +988,16 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
 
     if (partyId != numMons)
     {
-        GetConditionMenuMonString(nameDst, boxId, monId);
+        GetConditionMenuMonString(nameDst, box, mon);
         locationDst[0] = EXT_CTRL_CODE_BEGIN;
         locationDst[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         locationDst[2] = TEXT_COLOR_BLUE;
         locationDst[3] = TEXT_COLOR_TRANSPARENT;
         locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
-        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
-        {
+        if (box == TOTAL_BOXES_COUNT) // Party mon.
             BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
-        }
         else
-        {
-            boxId++;boxId--; // Again...Someone fix this maybe?
-            BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(boxId), 8);
-        }
+            BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(box), 8);
     }
     else
     {
@@ -1161,7 +1152,7 @@ static const union AnimCmd *const sAnims_ConditionSelectionIcon[] =
 // Just loads the generic data, up to the caller to load the actual sheet/pal for the specific mon
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {NULL, 0x800, TAG_CONDITION_MON};
+    struct SpriteSheet dataSheet = {NULL, MON_PIC_SIZE, TAG_CONDITION_MON};
 
     struct SpriteTemplate dataTemplate =
     {
@@ -1321,13 +1312,13 @@ static void SetConditionSparklePosition(struct Sprite *sprite)
 
     if (mon != NULL)
     {
-        sprite->pos1.x = mon->pos1.x + mon->pos2.x + sConditionSparkleCoords[sprite->sSparkleId][0];
-        sprite->pos1.y = mon->pos1.y + mon->pos2.y + sConditionSparkleCoords[sprite->sSparkleId][1];
+        sprite->x = mon->x + mon->x2 + sConditionSparkleCoords[sprite->sSparkleId][0];
+        sprite->y = mon->y + mon->y2 + sConditionSparkleCoords[sprite->sSparkleId][1];
     }
     else
     {
-        sprite->pos1.x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
-        sprite->pos1.y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
+        sprite->x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
+        sprite->y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
     }
 }
 

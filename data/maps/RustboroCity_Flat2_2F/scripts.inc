@@ -1,11 +1,11 @@
-RustboroCity_Flat2_2F_MapScripts:: @ 8215FD7
+RustboroCity_Flat2_2F_MapScripts::
 	.byte 0
 
-RustboroCity_Flat2_2F_EventScript_OldMan:: @ 8215FD8
+RustboroCity_Flat2_2F_EventScript_OldMan::
 	msgbox RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays, MSGBOX_NPC
 	end
 
-RustboroCity_Flat2_2F_EventScript_NinjaBoy:: @ 8215FE1
+RustboroCity_Flat2_2F_EventScript_NinjaBoy::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_PREMIER_BALL_RUSTBORO, RustboroCity_Flat2_2F_EventScript_GavePremierBall
@@ -17,21 +17,21 @@ RustboroCity_Flat2_2F_EventScript_NinjaBoy:: @ 8215FE1
 	release
 	end
 
-RustboroCity_Flat2_2F_EventScript_GavePremierBall:: @ 8216010
+RustboroCity_Flat2_2F_EventScript_GavePremierBall::
 	msgbox RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays: @ 821601A
+RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays:
 	.string "Way back in the old days, Devon was just\n"
 	.string "a teeny, tiny company.$"
 
-RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt: @ 821605A
+RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt:
 	.string "My daddy's working at the Corporation.\p"
 	.string "My daddy made this!\n"
 	.string "But I can't use it, so you can have it.$"
 
-RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo: @ 82160BD
+RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo:
 	.string "My daddy's working at the Corporation.\p"
 	.string "When I grow up, I'm going to work for\n"
 	.string "Devon, too.$"

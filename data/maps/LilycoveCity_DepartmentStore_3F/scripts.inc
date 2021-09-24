@@ -1,7 +1,7 @@
-LilycoveCity_DepartmentStore_3F_MapScripts:: @ 821FC64
+LilycoveCity_DepartmentStore_3F_MapScripts::
 	.byte 0
 
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft:: @ 821FC65
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -11,7 +11,8 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft:: @ 821FC65
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins: @ 821FC7C
+	.align 2
+LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_IRON
@@ -22,7 +23,7 @@ LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins: @ 821FC7C
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight:: @ 821FC8C
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -33,7 +34,7 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight:: @ 821FC8C
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters: @ 821FCA4
+LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_X_ATTACK
@@ -45,31 +46,31 @@ LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters: @ 821FCA4
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM:: @ 821FCB6
+LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_PokefanM:: @ 821FCBF
+LilycoveCity_DepartmentStore_3F_EventScript_PokefanM::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_Woman:: @ 821FCC8
+LilycoveCity_DepartmentStore_3F_EventScript_Woman::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon: @ 821FCD1
+LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon:
 	.string "For quickly toughening up Pokémon,\n"
 	.string "items are the best.\p"
 	.string "Protein boosts Attack,\n"
 	.string "and Calcium raises Sp. Atk.$"
 
-LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance: @ 821FD3B
+LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance:
 	.string "I want my Pokémon to have more\n"
 	.string "endurance.\p"
 	.string "I'm trying to decide whether to raise\n"
 	.string "Defense with Iron, or Sp. Def with Zinc.$"
 
-LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon: @ 821FDB4
+LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon:
 	.string "I gave a Carbos to my Pokémon,\n"
 	.string "and its Speed went up.$"
 

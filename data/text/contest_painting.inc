@@ -1,8 +1,9 @@
-gUnknown_0827EA0C:: @ 827EA0C
+gContestHallPaintingCaption::
 	.string "{STR_VAR_1}\n"
 	.string "{STR_VAR_2}'s {STR_VAR_3}$"
 
-gUnknown_0827EA17:: @ 827EA17
+@ Unused
+gContestPaintingContest::
 	.string "Contest$"
 
 gContestRankNormal::

@@ -1,1091 +1,1454 @@
-const struct Decoration gDecorations[] = {
+const struct Decoration gDecorations[] =
+{
+    [DECOR_NONE] =
     {
-        DECOR_NONE,
-        _("Small Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_DESK,
-        0,
-        DecorDesc_SMALL_DESK,
-        DecorGfx_SMALL_DESK
-    }, {
-        DECOR_SMALL_DESK,
-        _("Small Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_DESK,
-        3000,
-        DecorDesc_SMALL_DESK,
-        DecorGfx_SMALL_DESK
-    }, {
-        DECOR_POKEMON_DESK,
-        _("Pokémon Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_DESK,
-        3000,
-        DecorDesc_POKEMON_DESK,
-        DecorGfx_POKEMON_DESK
-    }, {
-        DECOR_HEAVY_DESK,
-        _("Heavy Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x2,
-        DECORCAT_DESK,
-        6000,
-        DecorDesc_HEAVY_DESK,
-        DecorGfx_HEAVY_DESK
-    }, {
-        DECOR_RAGGED_DESK,
-        _("Ragged Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x2,
-        DECORCAT_DESK,
-        6000,
-        DecorDesc_RAGGED_DESK,
-        DecorGfx_RAGGED_DESK
-    }, {
-        DECOR_COMFORT_DESK,
-        _("Comfort Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x2,
-        DECORCAT_DESK,
-        6000,
-        DecorDesc_COMFORT_DESK,
-        DecorGfx_COMFORT_DESK
-    }, {
-        DECOR_PRETTY_DESK,
-        _("Pretty Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_DESK,
-        9000,
-        DecorDesc_PRETTY_DESK,
-        DecorGfx_PRETTY_DESK
-    }, {
-        DECOR_BRICK_DESK,
-        _("Brick Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_DESK,
-        9000,
-        DecorDesc_BRICK_DESK,
-        DecorGfx_BRICK_DESK
-    }, {
-        DECOR_CAMP_DESK,
-        _("Camp Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_DESK,
-        9000,
-        DecorDesc_CAMP_DESK,
-        DecorGfx_CAMP_DESK
-    }, {
-        DECOR_HARD_DESK,
-        _("Hard Desk"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_DESK,
-        9000,
-        DecorDesc_HARD_DESK,
-        DecorGfx_HARD_DESK
-    }, {
-        DECOR_SMALL_CHAIR,
-        _("Small Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_SMALL_CHAIR,
-        DecorGfx_SMALL_CHAIR
-    }, {
-        DECOR_POKEMON_CHAIR,
-        _("Pokémon Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_POKEMON_CHAIR,
-        DecorGfx_POKEMON_CHAIR
-    }, {
-        DECOR_HEAVY_CHAIR,
-        _("Heavy Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_HEAVY_CHAIR,
-        DecorGfx_HEAVY_CHAIR
-    }, {
-        DECOR_PRETTY_CHAIR,
-        _("Pretty Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_PRETTY_CHAIR,
-        DecorGfx_PRETTY_CHAIR
-    }, {
-        DECOR_COMFORT_CHAIR,
-        _("Comfort Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_COMFORT_CHAIR,
-        DecorGfx_COMFORT_CHAIR
-    }, {
-        DECOR_RAGGED_CHAIR,
-        _("Ragged Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_RAGGED_CHAIR,
-        DecorGfx_RAGGED_CHAIR
-    }, {
-        DECOR_BRICK_CHAIR,
-        _("Brick Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_BRICK_CHAIR,
-        DecorGfx_BRICK_CHAIR
-    }, {
-        DECOR_CAMP_CHAIR,
-        _("Camp Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_CAMP_CHAIR,
-        DecorGfx_CAMP_CHAIR
-    }, {
-        DECOR_HARD_CHAIR,
-        _("Hard Chair"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_CHAIR,
-        2000,
-        DecorDesc_HARD_CHAIR,
-        DecorGfx_HARD_CHAIR
-    }, {
-        DECOR_RED_PLANT,
-        _("Red Plant"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_PLANT,
-        3000,
-        DecorDesc_RED_PLANT,
-        DecorGfx_RED_PLANT
-    }, {
-        DECOR_TROPICAL_PLANT,
-        _("Tropical Plant"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_PLANT,
-        3000,
-        DecorDesc_TROPICAL_PLANT,
-        DecorGfx_TROPICAL_PLANT
-    }, {
-        DECOR_PRETTY_FLOWERS,
-        _("Pretty Flowers"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_PLANT,
-        3000,
-        DecorDesc_PRETTY_FLOWERS,
-        DecorGfx_PRETTY_FLOWERS
-    }, {
-        DECOR_COLORFUL_PLANT,
-        _("Colorful Plant"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_2x2,
-        DECORCAT_PLANT,
-        5000,
-        DecorDesc_COLORFUL_PLANT,
-        DecorGfx_COLORFUL_PLANT
-    }, {
-        DECOR_BIG_PLANT,
-        _("Big Plant"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_2x2,
-        DECORCAT_PLANT,
-        5000,
-        DecorDesc_BIG_PLANT,
-        DecorGfx_BIG_PLANT
-    }, {
-        DECOR_GORGEOUS_PLANT,
-        _("Gorgeous Plant"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_2x2,
-        DECORCAT_PLANT,
-        5000,
-        DecorDesc_GORGEOUS_PLANT,
-        DecorGfx_GORGEOUS_PLANT
-    }, {
-        DECOR_RED_BRICK,
-        _("Red Brick"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_RED_BRICK,
-        DecorGfx_RED_BRICK
-    }, {
-        DECOR_YELLOW_BRICK,
-        _("Yellow Brick"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_YELLOW_BRICK,
-        DecorGfx_YELLOW_BRICK
-    }, {
-        DECOR_BLUE_BRICK,
-        _("Blue Brick"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_BLUE_BRICK,
-        DecorGfx_BLUE_BRICK
-    }, {
-        DECOR_RED_BALLOON,
-        _("Red Balloon"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_RED_BALLOON,
-        DecorGfx_RED_BALLOON
-    }, {
-        DECOR_BLUE_BALLOON,
-        _("Blue Balloon"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_BLUE_BALLOON,
-        DecorGfx_BLUE_BALLOON
-    }, {
-        DECOR_YELLOW_BALLOON,
-        _("Yellow Balloon"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_YELLOW_BALLOON,
-        DecorGfx_YELLOW_BALLOON
-    }, {
-        DECOR_RED_TENT,
-        _("Red Tent"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_ORNAMENT,
-        10000,
-        DecorDesc_RED_TENT,
-        DecorGfx_RED_TENT
-    }, {
-        DECOR_BLUE_TENT,
-        _("Blue Tent"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_ORNAMENT,
-        10000,
-        DecorDesc_BLUE_TENT,
-        DecorGfx_BLUE_TENT
-    }, {
-        DECOR_SOLID_BOARD,
-        _("Solid Board"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        3000,
-        DecorDesc_SOLID_BOARD,
-        DecorGfx_SOLID_BOARD
-    }, {
-        DECOR_SLIDE,
-        _("Slide"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_2x4,
-        DECORCAT_ORNAMENT,
-        8000,
-        DecorDesc_SLIDE,
-        DecorGfx_SLIDE
-    }, {
-        DECOR_FENCE_LENGTH,
-        _("Fence Length"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_FENCE_LENGTH,
-        DecorGfx_FENCE_LENGTH
-    }, {
-        DECOR_FENCE_WIDTH,
-        _("Fence Width"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        500,
-        DecorDesc_FENCE_WIDTH,
-        DecorGfx_FENCE_WIDTH
-    }, {
-        DECOR_TIRE,
-        _("Tire"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_2x2,
-        DECORCAT_ORNAMENT,
-        800,
-        DecorDesc_TIRE,
-        DecorGfx_TIRE
-    }, {
-        DECOR_STAND,
-        _("Stand"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_4x2,
-        DECORCAT_ORNAMENT,
-        7000,
-        DecorDesc_STAND,
-        DecorGfx_STAND
-    }, {
-        DECOR_MUD_BALL,
-        _("Mud Ball"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        200,
-        DecorDesc_MUD_BALL,
-        DecorGfx_MUD_BALL
-    }, {
-        DECOR_BREAKABLE_DOOR,
-        _("Breakable Door"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        3000,
-        DecorDesc_BREAKABLE_DOOR,
-        DecorGfx_BREAKABLE_DOOR
-    }, {
-        DECOR_SAND_ORNAMENT,
-        _("Sand Ornament"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        3000,
-        DecorDesc_SAND_ORNAMENT,
-        DecorGfx_SAND_ORNAMENT
-    }, {
-        DECOR_SILVER_SHIELD,
-        _("Silver Shield"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        0,
-        DecorDesc_SILVER_SHIELD,
-        DecorGfx_SILVER_SHIELD
-    }, {
-        DECOR_GOLD_SHIELD,
-        _("Gold Shield"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        0,
-        DecorDesc_GOLD_SHIELD,
-        DecorGfx_GOLD_SHIELD
-    }, {
-        DECOR_GLASS_ORNAMENT,
-        _("Glass Ornament"),
-        DECORPERM_BEHIND_FLOOR,
-        DECORSHAPE_1x2,
-        DECORCAT_ORNAMENT,
-        0,
-        DecorDesc_GLASS_ORNAMENT,
-        DecorGfx_GLASS_ORNAMENT
-    }, {
-        DECOR_TV,
-        _("TV"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        3000,
-        DecorDesc_TV,
-        DecorGfx_TV
-    }, {
-        DECOR_ROUND_TV,
-        _("Round TV"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        4000,
-        DecorDesc_ROUND_TV,
-        DecorGfx_ROUND_TV
-    }, {
-        DECOR_CUTE_TV,
-        _("Cute TV"),
-        DECORPERM_SOLID_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_ORNAMENT,
-        4000,
-        DecorDesc_CUTE_TV,
-        DecorGfx_CUTE_TV
-    }, {
-        DECOR_GLITTER_MAT,
-        _("Glitter Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        2000,
-        DecorDesc_GLITTER_MAT,
-        DecorGfx_GLITTER_MAT
-    }, {
-        DECOR_JUMP_MAT,
-        _("Jump Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        2000,
-        DecorDesc_JUMP_MAT,
-        DecorGfx_JUMP_MAT
-    }, {
-        DECOR_SPIN_MAT,
-        _("Spin Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        2000,
-        DecorDesc_SPIN_MAT,
-        DecorGfx_SPIN_MAT
-    }, {
-        DECOR_C_LOW_NOTE_MAT,
-        _("C Low Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_C_LOW_NOTE_MAT,
-        DecorGfx_C_LOW_NOTE_MAT
-    }, {
-        DECOR_D_NOTE_MAT,
-        _("D Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_D_NOTE_MAT,
-        DecorGfx_D_NOTE_MAT
-    }, {
-        DECOR_E_NOTE_MAT,
-        _("E Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_E_NOTE_MAT,
-        DecorGfx_E_NOTE_MAT
-    }, {
-        DECOR_F_NOTE_MAT,
-        _("F Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_F_NOTE_MAT,
-        DecorGfx_F_NOTE_MAT
-    }, {
-        DECOR_G_NOTE_MAT,
-        _("G Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_G_NOTE_MAT,
-        DecorGfx_G_NOTE_MAT
-    }, {
-        DECOR_A_NOTE_MAT,
-        _("A Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_A_NOTE_MAT,
-        DecorGfx_A_NOTE_MAT
-    }, {
-        DECOR_B_NOTE_MAT,
-        _("B Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_B_NOTE_MAT,
-        DecorGfx_B_NOTE_MAT
-    }, {
-        DECOR_C_HIGH_NOTE_MAT,
-        _("C High Note Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_1x1,
-        DECORCAT_MAT,
-        500,
-        DecorDesc_C_HIGH_NOTE_MAT,
-        DecorGfx_C_HIGH_NOTE_MAT
-    }, {
-        DECOR_SURF_MAT,
-        _("Surf Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_SURF_MAT,
-        DecorGfx_SURF_MAT
-    }, {
-        DECOR_THUNDER_MAT,
-        _("Thunder Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_THUNDER_MAT,
-        DecorGfx_THUNDER_MAT
-    }, {
-        DECOR_FIRE_BLAST_MAT,
-        _("Fire Blast Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_FIRE_BLAST_MAT,
-        DecorGfx_FIRE_BLAST_MAT
-    }, {
-        DECOR_POWDER_SNOW_MAT,
-        _("Powder Snow Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_POWDER_SNOW_MAT,
-        DecorGfx_POWDER_SNOW_MAT
-    }, {
-        DECOR_ATTRACT_MAT,
-        _("Attract Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_ATTRACT_MAT,
-        DecorGfx_ATTRACT_MAT
-    }, {
-        DECOR_FISSURE_MAT,
-        _("Fissure Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_FISSURE_MAT,
-        DecorGfx_FISSURE_MAT
-    }, {
-        DECOR_SPIKES_MAT,
-        _("Spikes Mat"),
-        DECORPERM_PASS_FLOOR,
-        DECORSHAPE_3x3,
-        DECORCAT_MAT,
-        4000,
-        DecorDesc_SPIKES_MAT,
-        DecorGfx_SPIKES_MAT
-    }, {
-        DECOR_BALL_POSTER,
-        _("Ball Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_1x1,
-        DECORCAT_POSTER,
-        1000,
-        DecorDesc_BALL_POSTER,
-        DecorGfx_BALL_POSTER
-    }, {
-        DECOR_GREEN_POSTER,
-        _("Green Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_1x1,
-        DECORCAT_POSTER,
-        1000,
-        DecorDesc_GREEN_POSTER,
-        DecorGfx_GREEN_POSTER
-    }, {
-        DECOR_RED_POSTER,
-        _("Red Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_1x1,
-        DECORCAT_POSTER,
-        1000,
-        DecorDesc_RED_POSTER,
-        DecorGfx_RED_POSTER
-    }, {
-        DECOR_BLUE_POSTER,
-        _("Blue Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_1x1,
-        DECORCAT_POSTER,
-        1000,
-        DecorDesc_BLUE_POSTER,
-        DecorGfx_BLUE_POSTER
-    }, {
-        DECOR_CUTE_POSTER,
-        _("Cute Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_1x1,
-        DECORCAT_POSTER,
-        1000,
-        DecorDesc_CUTE_POSTER,
-        DecorGfx_CUTE_POSTER
-    }, {
-        DECOR_PIKA_POSTER,
-        _("Pika Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_2x1,
-        DECORCAT_POSTER,
-        1500,
-        DecorDesc_PIKA_POSTER,
-        DecorGfx_PIKA_POSTER
-    }, {
-        DECOR_LONG_POSTER,
-        _("Long Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_2x1,
-        DECORCAT_POSTER,
-        1500,
-        DecorDesc_LONG_POSTER,
-        DecorGfx_LONG_POSTER
-    }, {
-        DECOR_SEA_POSTER,
-        _("Sea Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_2x1,
-        DECORCAT_POSTER,
-        1500,
-        DecorDesc_SEA_POSTER,
-        DecorGfx_SEA_POSTER
-    }, {
-        DECOR_SKY_POSTER,
-        _("Sky Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_2x1,
-        DECORCAT_POSTER,
-        1500,
-        DecorDesc_SKY_POSTER,
-        DecorGfx_SKY_POSTER
-    }, {
-        DECOR_KISS_POSTER,
-        _("Kiss Poster"),
-        DECORPERM_NA_WALL,
-        DECORSHAPE_2x1,
-        DECORCAT_POSTER,
-        1500,
-        DecorDesc_KISS_POSTER,
-        DecorGfx_KISS_POSTER
-    }, {
-        DECOR_PICHU_DOLL,
-        _("Pichu Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_PICHU_DOLL,
-        DecorGfx_PICHU_DOLL
-    }, {
-        DECOR_PIKACHU_DOLL,
-        _("Pikachu Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_PIKACHU_DOLL,
-        DecorGfx_PIKACHU_DOLL
-    }, {
-        DECOR_MARILL_DOLL,
-        _("Marill Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_MARILL_DOLL,
-        DecorGfx_MARILL_DOLL
-    }, {
-        DECOR_TOGEPI_DOLL,
-        _("Togepi Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_TOGEPI_DOLL,
-        DecorGfx_TOGEPI_DOLL
-    }, {
-        DECOR_CYNDAQUIL_DOLL,
-        _("Cyndaquil Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_CYNDAQUIL_DOLL,
-        DecorGfx_CYNDAQUIL_DOLL
-    }, {
-        DECOR_CHIKORITA_DOLL,
-        _("Chikorita Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_CHIKORITA_DOLL,
-        DecorGfx_CHIKORITA_DOLL
-    }, {
-        DECOR_TOTODILE_DOLL,
-        _("Totodile Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_TOTODILE_DOLL,
-        DecorGfx_TOTODILE_DOLL
-    }, {
-        DECOR_JIGGLYPUFF_DOLL,
-        _("Jigglypuff Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_JIGGLYPUFF_DOLL,
-        DecorGfx_JIGGLYPUFF_DOLL
-    }, {
-        DECOR_MEOWTH_DOLL,
-        _("Meowth Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_MEOWTH_DOLL,
-        DecorGfx_MEOWTH_DOLL
-    }, {
-        DECOR_CLEFAIRY_DOLL,
-        _("Clefairy Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_CLEFAIRY_DOLL,
-        DecorGfx_CLEFAIRY_DOLL
-    }, {
-        DECOR_DITTO_DOLL,
-        _("Ditto Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_DITTO_DOLL,
-        DecorGfx_DITTO_DOLL
-    }, {
-        DECOR_SMOOCHUM_DOLL,
-        _("Smoochum Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_SMOOCHUM_DOLL,
-        DecorGfx_SMOOCHUM_DOLL
-    }, {
-        DECOR_TREECKO_DOLL,
-        _("Treecko Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_TREECKO_DOLL,
-        DecorGfx_TREECKO_DOLL
-    }, {
-        DECOR_TORCHIC_DOLL,
-        _("Torchic Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_TORCHIC_DOLL,
-        DecorGfx_TORCHIC_DOLL
-    }, {
-        DECOR_MUDKIP_DOLL,
-        _("Mudkip Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_MUDKIP_DOLL,
-        DecorGfx_MUDKIP_DOLL
-    }, {
-        DECOR_DUSKULL_DOLL,
-        _("Duskull Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_DUSKULL_DOLL,
-        DecorGfx_DUSKULL_DOLL
-    }, {
-        DECOR_WYNAUT_DOLL,
-        _("Wynaut Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_WYNAUT_DOLL,
-        DecorGfx_WYNAUT_DOLL
-    }, {
-        DECOR_BALTOY_DOLL,
-        _("Baltoy Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_BALTOY_DOLL,
-        DecorGfx_BALTOY_DOLL
-    }, {
-        DECOR_KECLEON_DOLL,
-        _("Kecleon Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_KECLEON_DOLL,
-        DecorGfx_KECLEON_DOLL
-    }, {
-        DECOR_AZURILL_DOLL,
-        _("Azurill Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_AZURILL_DOLL,
-        DecorGfx_AZURILL_DOLL
-    }, {
-        DECOR_SKITTY_DOLL,
-        _("Skitty Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_SKITTY_DOLL,
-        DecorGfx_SKITTY_DOLL
-    }, {
-        DECOR_SWABLU_DOLL,
-        _("Swablu Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_SWABLU_DOLL,
-        DecorGfx_SWABLU_DOLL
-    }, {
-        DECOR_GULPIN_DOLL,
-        _("Gulpin Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_GULPIN_DOLL,
-        DecorGfx_GULPIN_DOLL
-    }, {
-        DECOR_LOTAD_DOLL,
-        _("Lotad Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_LOTAD_DOLL,
-        DecorGfx_LOTAD_DOLL
-    }, {
-        DECOR_SEEDOT_DOLL,
-        _("Seedot Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_DOLL,
-        3000,
-        DecorDesc_SEEDOT_DOLL,
-        DecorGfx_SEEDOT_DOLL
-    }, {
-        DECOR_PIKA_CUSHION,
-        _("Pika Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_PIKA_CUSHION,
-        DecorGfx_PIKA_CUSHION
-    }, {
-        DECOR_ROUND_CUSHION,
-        _("Round Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_ROUND_CUSHION,
-        DecorGfx_ROUND_CUSHION
-    }, {
-        DECOR_KISS_CUSHION,
-        _("Kiss Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_KISS_CUSHION,
-        DecorGfx_KISS_CUSHION
-    }, {
-        DECOR_ZIGZAG_CUSHION,
-        _("Zigzag Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_ZIGZAG_CUSHION,
-        DecorGfx_ZIGZAG_CUSHION
-    }, {
-        DECOR_SPIN_CUSHION,
-        _("Spin Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_SPIN_CUSHION,
-        DecorGfx_SPIN_CUSHION
-    }, {
-        DECOR_DIAMOND_CUSHION,
-        _("Diamond Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_DIAMOND_CUSHION,
-        DecorGfx_DIAMOND_CUSHION
-    }, {
-        DECOR_BALL_CUSHION,
-        _("Ball Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_BALL_CUSHION,
-        DecorGfx_BALL_CUSHION
-    }, {
-        DECOR_GRASS_CUSHION,
-        _("Grass Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_GRASS_CUSHION,
-        DecorGfx_GRASS_CUSHION
-    }, {
-        DECOR_FIRE_CUSHION,
-        _("Fire Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_FIRE_CUSHION,
-        DecorGfx_FIRE_CUSHION
-    }, {
-        DECOR_WATER_CUSHION,
-        _("Water Cushion"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x1,
-        DECORCAT_CUSHION,
-        2000,
-        DecorDesc_WATER_CUSHION,
-        DecorGfx_WATER_CUSHION
-    }, {
-        DECOR_SNORLAX_DOLL,
-        _("Snorlax Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_SNORLAX_DOLL,
-        DecorGfx_SNORLAX_DOLL
-    }, {
-        DECOR_RHYDON_DOLL,
-        _("Rhydon Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_RHYDON_DOLL,
-        DecorGfx_RHYDON_DOLL
-    }, {
-        DECOR_LAPRAS_DOLL,
-        _("Lapras Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_LAPRAS_DOLL,
-        DecorGfx_LAPRAS_DOLL
-    }, {
-        DECOR_VENUSAUR_DOLL,
-        _("Venusaur Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_VENUSAUR_DOLL,
-        DecorGfx_VENUSAUR_DOLL
-    }, {
-        DECOR_CHARIZARD_DOLL,
-        _("Charizard Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_CHARIZARD_DOLL,
-        DecorGfx_CHARIZARD_DOLL
-    }, {
-        DECOR_BLASTOISE_DOLL,
-        _("Blastoise Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_BLASTOISE_DOLL,
-        DecorGfx_BLASTOISE_DOLL
-    }, {
-        DECOR_WAILMER_DOLL,
-        _("Wailmer Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_WAILMER_DOLL,
-        DecorGfx_WAILMER_DOLL
-    }, {
-        DECOR_REGIROCK_DOLL,
-        _("Regirock Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_REGIROCK_DOLL,
-        DecorGfx_REGIROCK_DOLL
-    }, {
-        DECOR_REGICE_DOLL,
-        _("Regice Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_REGICE_DOLL,
-        DecorGfx_REGICE_DOLL
-    }, {
-        DECOR_REGISTEEL_DOLL,
-        _("Registeel Doll"),
-        DECORPERM_SPRITE,
-        DECORSHAPE_1x2,
-        DECORCAT_DOLL,
-        10000,
-        DecorDesc_REGISTEEL_DOLL,
-        DecorGfx_REGISTEEL_DOLL}
+        .id = DECOR_NONE,
+        .name = _("Small Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DESK,
+        .price = 0,
+        .description = DecorDesc_SMALL_DESK,
+        .tiles = DecorGfx_SMALL_DESK,
+    },
+ 
+    [DECOR_SMALL_DESK] =
+    {
+        .id = DECOR_SMALL_DESK,
+        .name = _("Small Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DESK,
+        .price = 3000,
+        .description = DecorDesc_SMALL_DESK,
+        .tiles = DecorGfx_SMALL_DESK,
+    },
+ 
+    [DECOR_POKEMON_DESK] =
+    {
+        .id = DECOR_POKEMON_DESK,
+        .name = _("Pokémon Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DESK,
+        .price = 3000,
+        .description = DecorDesc_POKEMON_DESK,
+        .tiles = DecorGfx_POKEMON_DESK,
+    },
+ 
+    [DECOR_HEAVY_DESK] =
+    {
+        .id = DECOR_HEAVY_DESK,
+        .name = _("Heavy Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x2,
+        .category = DECORCAT_DESK,
+        .price = 6000,
+        .description = DecorDesc_HEAVY_DESK,
+        .tiles = DecorGfx_HEAVY_DESK,
+    },
+ 
+    [DECOR_RAGGED_DESK] =
+    {
+        .id = DECOR_RAGGED_DESK,
+        .name = _("Ragged Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x2,
+        .category = DECORCAT_DESK,
+        .price = 6000,
+        .description = DecorDesc_RAGGED_DESK,
+        .tiles = DecorGfx_RAGGED_DESK,
+    },
+ 
+    [DECOR_COMFORT_DESK] =
+    {
+        .id = DECOR_COMFORT_DESK,
+        .name = _("Comfort Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x2,
+        .category = DECORCAT_DESK,
+        .price = 6000,
+        .description = DecorDesc_COMFORT_DESK,
+        .tiles = DecorGfx_COMFORT_DESK,
+    },
+ 
+    [DECOR_PRETTY_DESK] =
+    {
+        .id = DECOR_PRETTY_DESK,
+        .name = _("Pretty Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_DESK,
+        .price = 9000,
+        .description = DecorDesc_PRETTY_DESK,
+        .tiles = DecorGfx_PRETTY_DESK,
+    },
+ 
+    [DECOR_BRICK_DESK] =
+    {
+        .id = DECOR_BRICK_DESK,
+        .name = _("Brick Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_DESK,
+        .price = 9000,
+        .description = DecorDesc_BRICK_DESK,
+        .tiles = DecorGfx_BRICK_DESK,
+    },
+ 
+    [DECOR_CAMP_DESK] =
+    {
+        .id = DECOR_CAMP_DESK,
+        .name = _("Camp Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_DESK,
+        .price = 9000,
+        .description = DecorDesc_CAMP_DESK,
+        .tiles = DecorGfx_CAMP_DESK,
+    },
+ 
+    [DECOR_HARD_DESK] =
+    {
+        .id = DECOR_HARD_DESK,
+        .name = _("Hard Desk"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_DESK,
+        .price = 9000,
+        .description = DecorDesc_HARD_DESK,
+        .tiles = DecorGfx_HARD_DESK,
+    },
+ 
+    [DECOR_SMALL_CHAIR] =
+    {
+        .id = DECOR_SMALL_CHAIR,
+        .name = _("Small Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_SMALL_CHAIR,
+        .tiles = DecorGfx_SMALL_CHAIR,
+    },
+ 
+    [DECOR_POKEMON_CHAIR] =
+    {
+        .id = DECOR_POKEMON_CHAIR,
+        .name = _("Pokémon Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_POKEMON_CHAIR,
+        .tiles = DecorGfx_POKEMON_CHAIR,
+    },
+ 
+    [DECOR_HEAVY_CHAIR] =
+    {
+        .id = DECOR_HEAVY_CHAIR,
+        .name = _("Heavy Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_HEAVY_CHAIR,
+        .tiles = DecorGfx_HEAVY_CHAIR,
+    },
+ 
+    [DECOR_PRETTY_CHAIR] =
+    {
+        .id = DECOR_PRETTY_CHAIR,
+        .name = _("Pretty Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_PRETTY_CHAIR,
+        .tiles = DecorGfx_PRETTY_CHAIR,
+    },
+ 
+    [DECOR_COMFORT_CHAIR] =
+    {
+        .id = DECOR_COMFORT_CHAIR,
+        .name = _("Comfort Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_COMFORT_CHAIR,
+        .tiles = DecorGfx_COMFORT_CHAIR,
+    },
+ 
+    [DECOR_RAGGED_CHAIR] =
+    {
+        .id = DECOR_RAGGED_CHAIR,
+        .name = _("Ragged Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_RAGGED_CHAIR,
+        .tiles = DecorGfx_RAGGED_CHAIR,
+    },
+ 
+    [DECOR_BRICK_CHAIR] =
+    {
+        .id = DECOR_BRICK_CHAIR,
+        .name = _("Brick Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_BRICK_CHAIR,
+        .tiles = DecorGfx_BRICK_CHAIR,
+    },
+ 
+    [DECOR_CAMP_CHAIR] =
+    {
+        .id = DECOR_CAMP_CHAIR,
+        .name = _("Camp Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_CAMP_CHAIR,
+        .tiles = DecorGfx_CAMP_CHAIR,
+    },
+ 
+    [DECOR_HARD_CHAIR] =
+    {
+        .id = DECOR_HARD_CHAIR,
+        .name = _("Hard Chair"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CHAIR,
+        .price = 2000,
+        .description = DecorDesc_HARD_CHAIR,
+        .tiles = DecorGfx_HARD_CHAIR,
+    },
+ 
+    [DECOR_RED_PLANT] =
+    {
+        .id = DECOR_RED_PLANT,
+        .name = _("Red Plant"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_PLANT,
+        .price = 3000,
+        .description = DecorDesc_RED_PLANT,
+        .tiles = DecorGfx_RED_PLANT,
+    },
+ 
+    [DECOR_TROPICAL_PLANT] =
+    {
+        .id = DECOR_TROPICAL_PLANT,
+        .name = _("Tropical Plant"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_PLANT,
+        .price = 3000,
+        .description = DecorDesc_TROPICAL_PLANT,
+        .tiles = DecorGfx_TROPICAL_PLANT,
+    },
+ 
+    [DECOR_PRETTY_FLOWERS] =
+    {
+        .id = DECOR_PRETTY_FLOWERS,
+        .name = _("Pretty Flowers"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_PLANT,
+        .price = 3000,
+        .description = DecorDesc_PRETTY_FLOWERS,
+        .tiles = DecorGfx_PRETTY_FLOWERS,
+    },
+ 
+    [DECOR_COLORFUL_PLANT] =
+    {
+        .id = DECOR_COLORFUL_PLANT,
+        .name = _("Colorful Plant"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_2x2,
+        .category = DECORCAT_PLANT,
+        .price = 5000,
+        .description = DecorDesc_COLORFUL_PLANT,
+        .tiles = DecorGfx_COLORFUL_PLANT,
+    },
+ 
+    [DECOR_BIG_PLANT] =
+    {
+        .id = DECOR_BIG_PLANT,
+        .name = _("Big Plant"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_2x2,
+        .category = DECORCAT_PLANT,
+        .price = 5000,
+        .description = DecorDesc_BIG_PLANT,
+        .tiles = DecorGfx_BIG_PLANT,
+    },
+ 
+    [DECOR_GORGEOUS_PLANT] =
+    {
+        .id = DECOR_GORGEOUS_PLANT,
+        .name = _("Gorgeous Plant"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_2x2,
+        .category = DECORCAT_PLANT,
+        .price = 5000,
+        .description = DecorDesc_GORGEOUS_PLANT,
+        .tiles = DecorGfx_GORGEOUS_PLANT,
+    },
+ 
+    [DECOR_RED_BRICK] =
+    {
+        .id = DECOR_RED_BRICK,
+        .name = _("Red Brick"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_RED_BRICK,
+        .tiles = DecorGfx_RED_BRICK,
+    },
+ 
+    [DECOR_YELLOW_BRICK] =
+    {
+        .id = DECOR_YELLOW_BRICK,
+        .name = _("Yellow Brick"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_YELLOW_BRICK,
+        .tiles = DecorGfx_YELLOW_BRICK,
+    },
+ 
+    [DECOR_BLUE_BRICK] =
+    {
+        .id = DECOR_BLUE_BRICK,
+        .name = _("Blue Brick"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_BLUE_BRICK,
+        .tiles = DecorGfx_BLUE_BRICK,
+    },
+ 
+    [DECOR_RED_BALLOON] =
+    {
+        .id = DECOR_RED_BALLOON,
+        .name = _("Red Balloon"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_RED_BALLOON,
+        .tiles = DecorGfx_RED_BALLOON,
+    },
+ 
+    [DECOR_BLUE_BALLOON] =
+    {
+        .id = DECOR_BLUE_BALLOON,
+        .name = _("Blue Balloon"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_BLUE_BALLOON,
+        .tiles = DecorGfx_BLUE_BALLOON,
+    },
+ 
+    [DECOR_YELLOW_BALLOON] =
+    {
+        .id = DECOR_YELLOW_BALLOON,
+        .name = _("Yellow Balloon"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_YELLOW_BALLOON,
+        .tiles = DecorGfx_YELLOW_BALLOON,
+    },
+ 
+    [DECOR_RED_TENT] =
+    {
+        .id = DECOR_RED_TENT,
+        .name = _("Red Tent"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_ORNAMENT,
+        .price = 10000,
+        .description = DecorDesc_RED_TENT,
+        .tiles = DecorGfx_RED_TENT,
+    },
+ 
+    [DECOR_BLUE_TENT] =
+    {
+        .id = DECOR_BLUE_TENT,
+        .name = _("Blue Tent"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_ORNAMENT,
+        .price = 10000,
+        .description = DecorDesc_BLUE_TENT,
+        .tiles = DecorGfx_BLUE_TENT,
+    },
+ 
+    [DECOR_SOLID_BOARD] =
+    {
+        .id = DECOR_SOLID_BOARD,
+        .name = _("Solid Board"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 3000,
+        .description = DecorDesc_SOLID_BOARD,
+        .tiles = DecorGfx_SOLID_BOARD,
+    },
+ 
+    [DECOR_SLIDE] =
+    {
+        .id = DECOR_SLIDE,
+        .name = _("Slide"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_2x4,
+        .category = DECORCAT_ORNAMENT,
+        .price = 8000,
+        .description = DecorDesc_SLIDE,
+        .tiles = DecorGfx_SLIDE,
+    },
+ 
+    [DECOR_FENCE_LENGTH] =
+    {
+        .id = DECOR_FENCE_LENGTH,
+        .name = _("Fence Length"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_FENCE_LENGTH,
+        .tiles = DecorGfx_FENCE_LENGTH,
+    },
+ 
+    [DECOR_FENCE_WIDTH] =
+    {
+        .id = DECOR_FENCE_WIDTH,
+        .name = _("Fence Width"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 500,
+        .description = DecorDesc_FENCE_WIDTH,
+        .tiles = DecorGfx_FENCE_WIDTH,
+    },
+ 
+    [DECOR_TIRE] =
+    {
+        .id = DECOR_TIRE,
+        .name = _("Tire"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_2x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 800,
+        .description = DecorDesc_TIRE,
+        .tiles = DecorGfx_TIRE,
+    },
+ 
+    [DECOR_STAND] =
+    {
+        .id = DECOR_STAND,
+        .name = _("Stand"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_4x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 7000,
+        .description = DecorDesc_STAND,
+        .tiles = DecorGfx_STAND,
+    },
+ 
+    [DECOR_MUD_BALL] =
+    {
+        .id = DECOR_MUD_BALL,
+        .name = _("Mud Ball"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 200,
+        .description = DecorDesc_MUD_BALL,
+        .tiles = DecorGfx_MUD_BALL,
+    },
+ 
+    [DECOR_BREAKABLE_DOOR] =
+    {
+        .id = DECOR_BREAKABLE_DOOR,
+        .name = _("Breakable Door"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 3000,
+        .description = DecorDesc_BREAKABLE_DOOR,
+        .tiles = DecorGfx_BREAKABLE_DOOR,
+    },
+ 
+    [DECOR_SAND_ORNAMENT] =
+    {
+        .id = DECOR_SAND_ORNAMENT,
+        .name = _("Sand Ornament"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 3000,
+        .description = DecorDesc_SAND_ORNAMENT,
+        .tiles = DecorGfx_SAND_ORNAMENT,
+    },
+ 
+    [DECOR_SILVER_SHIELD] =
+    {
+        .id = DECOR_SILVER_SHIELD,
+        .name = _("Silver Shield"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 0,
+        .description = DecorDesc_SILVER_SHIELD,
+        .tiles = DecorGfx_SILVER_SHIELD,
+    },
+ 
+    [DECOR_GOLD_SHIELD] =
+    {
+        .id = DECOR_GOLD_SHIELD,
+        .name = _("Gold Shield"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 0,
+        .description = DecorDesc_GOLD_SHIELD,
+        .tiles = DecorGfx_GOLD_SHIELD,
+    },
+ 
+    [DECOR_GLASS_ORNAMENT] =
+    {
+        .id = DECOR_GLASS_ORNAMENT,
+        .name = _("Glass Ornament"),
+        .permission = DECORPERM_BEHIND_FLOOR,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_ORNAMENT,
+        .price = 0,
+        .description = DecorDesc_GLASS_ORNAMENT,
+        .tiles = DecorGfx_GLASS_ORNAMENT,
+    },
+ 
+    [DECOR_TV] =
+    {
+        .id = DECOR_TV,
+        .name = _("TV"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 3000,
+        .description = DecorDesc_TV,
+        .tiles = DecorGfx_TV,
+    },
+ 
+    [DECOR_ROUND_TV] =
+    {
+        .id = DECOR_ROUND_TV,
+        .name = _("Round TV"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 4000,
+        .description = DecorDesc_ROUND_TV,
+        .tiles = DecorGfx_ROUND_TV,
+    },
+ 
+    [DECOR_CUTE_TV] =
+    {
+        .id = DECOR_CUTE_TV,
+        .name = _("Cute TV"),
+        .permission = DECORPERM_SOLID_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_ORNAMENT,
+        .price = 4000,
+        .description = DecorDesc_CUTE_TV,
+        .tiles = DecorGfx_CUTE_TV,
+    },
+ 
+    [DECOR_GLITTER_MAT] =
+    {
+        .id = DECOR_GLITTER_MAT,
+        .name = _("Glitter Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 2000,
+        .description = DecorDesc_GLITTER_MAT,
+        .tiles = DecorGfx_GLITTER_MAT,
+    },
+ 
+    [DECOR_JUMP_MAT] =
+    {
+        .id = DECOR_JUMP_MAT,
+        .name = _("Jump Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 2000,
+        .description = DecorDesc_JUMP_MAT,
+        .tiles = DecorGfx_JUMP_MAT,
+    },
+ 
+    [DECOR_SPIN_MAT] =
+    {
+        .id = DECOR_SPIN_MAT,
+        .name = _("Spin Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 2000,
+        .description = DecorDesc_SPIN_MAT,
+        .tiles = DecorGfx_SPIN_MAT,
+    },
+ 
+    [DECOR_C_LOW_NOTE_MAT] =
+    {
+        .id = DECOR_C_LOW_NOTE_MAT,
+        .name = _("C Low Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_C_LOW_NOTE_MAT,
+        .tiles = DecorGfx_C_LOW_NOTE_MAT,
+    },
+ 
+    [DECOR_D_NOTE_MAT] =
+    {
+        .id = DECOR_D_NOTE_MAT,
+        .name = _("D Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_D_NOTE_MAT,
+        .tiles = DecorGfx_D_NOTE_MAT,
+    },
+ 
+    [DECOR_E_NOTE_MAT] =
+    {
+        .id = DECOR_E_NOTE_MAT,
+        .name = _("E Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_E_NOTE_MAT,
+        .tiles = DecorGfx_E_NOTE_MAT,
+    },
+ 
+    [DECOR_F_NOTE_MAT] =
+    {
+        .id = DECOR_F_NOTE_MAT,
+        .name = _("F Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_F_NOTE_MAT,
+        .tiles = DecorGfx_F_NOTE_MAT,
+    },
+ 
+    [DECOR_G_NOTE_MAT] =
+    {
+        .id = DECOR_G_NOTE_MAT,
+        .name = _("G Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_G_NOTE_MAT,
+        .tiles = DecorGfx_G_NOTE_MAT,
+    },
+ 
+    [DECOR_A_NOTE_MAT] =
+    {
+        .id = DECOR_A_NOTE_MAT,
+        .name = _("A Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_A_NOTE_MAT,
+        .tiles = DecorGfx_A_NOTE_MAT,
+    },
+ 
+    [DECOR_B_NOTE_MAT] =
+    {
+        .id = DECOR_B_NOTE_MAT,
+        .name = _("B Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_B_NOTE_MAT,
+        .tiles = DecorGfx_B_NOTE_MAT,
+    },
+ 
+    [DECOR_C_HIGH_NOTE_MAT] =
+    {
+        .id = DECOR_C_HIGH_NOTE_MAT,
+        .name = _("C High Note Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_MAT,
+        .price = 500,
+        .description = DecorDesc_C_HIGH_NOTE_MAT,
+        .tiles = DecorGfx_C_HIGH_NOTE_MAT,
+    },
+ 
+    [DECOR_SURF_MAT] =
+    {
+        .id = DECOR_SURF_MAT,
+        .name = _("Surf Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_SURF_MAT,
+        .tiles = DecorGfx_SURF_MAT,
+    },
+ 
+    [DECOR_THUNDER_MAT] =
+    {
+        .id = DECOR_THUNDER_MAT,
+        .name = _("Thunder Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_THUNDER_MAT,
+        .tiles = DecorGfx_THUNDER_MAT,
+    },
+ 
+    [DECOR_FIRE_BLAST_MAT] =
+    {
+        .id = DECOR_FIRE_BLAST_MAT,
+        .name = _("Fire Blast Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_FIRE_BLAST_MAT,
+        .tiles = DecorGfx_FIRE_BLAST_MAT,
+    },
+ 
+    [DECOR_POWDER_SNOW_MAT] =
+    {
+        .id = DECOR_POWDER_SNOW_MAT,
+        .name = _("Powder Snow Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_POWDER_SNOW_MAT,
+        .tiles = DecorGfx_POWDER_SNOW_MAT,
+    },
+ 
+    [DECOR_ATTRACT_MAT] =
+    {
+        .id = DECOR_ATTRACT_MAT,
+        .name = _("Attract Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_ATTRACT_MAT,
+        .tiles = DecorGfx_ATTRACT_MAT,
+    },
+ 
+    [DECOR_FISSURE_MAT] =
+    {
+        .id = DECOR_FISSURE_MAT,
+        .name = _("Fissure Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_FISSURE_MAT,
+        .tiles = DecorGfx_FISSURE_MAT,
+    },
+ 
+    [DECOR_SPIKES_MAT] =
+    {
+        .id = DECOR_SPIKES_MAT,
+        .name = _("Spikes Mat"),
+        .permission = DECORPERM_PASS_FLOOR,
+        .shape = DECORSHAPE_3x3,
+        .category = DECORCAT_MAT,
+        .price = 4000,
+        .description = DecorDesc_SPIKES_MAT,
+        .tiles = DecorGfx_SPIKES_MAT,
+    },
+ 
+    [DECOR_BALL_POSTER] =
+    {
+        .id = DECOR_BALL_POSTER,
+        .name = _("Ball Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_POSTER,
+        .price = 1000,
+        .description = DecorDesc_BALL_POSTER,
+        .tiles = DecorGfx_BALL_POSTER,
+    },
+ 
+    [DECOR_GREEN_POSTER] =
+    {
+        .id = DECOR_GREEN_POSTER,
+        .name = _("Green Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_POSTER,
+        .price = 1000,
+        .description = DecorDesc_GREEN_POSTER,
+        .tiles = DecorGfx_GREEN_POSTER,
+    },
+ 
+    [DECOR_RED_POSTER] =
+    {
+        .id = DECOR_RED_POSTER,
+        .name = _("Red Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_POSTER,
+        .price = 1000,
+        .description = DecorDesc_RED_POSTER,
+        .tiles = DecorGfx_RED_POSTER,
+    },
+ 
+    [DECOR_BLUE_POSTER] =
+    {
+        .id = DECOR_BLUE_POSTER,
+        .name = _("Blue Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_POSTER,
+        .price = 1000,
+        .description = DecorDesc_BLUE_POSTER,
+        .tiles = DecorGfx_BLUE_POSTER,
+    },
+ 
+    [DECOR_CUTE_POSTER] =
+    {
+        .id = DECOR_CUTE_POSTER,
+        .name = _("Cute Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_POSTER,
+        .price = 1000,
+        .description = DecorDesc_CUTE_POSTER,
+        .tiles = DecorGfx_CUTE_POSTER,
+    },
+ 
+    [DECOR_PIKA_POSTER] =
+    {
+        .id = DECOR_PIKA_POSTER,
+        .name = _("Pika Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_2x1,
+        .category = DECORCAT_POSTER,
+        .price = 1500,
+        .description = DecorDesc_PIKA_POSTER,
+        .tiles = DecorGfx_PIKA_POSTER,
+    },
+ 
+    [DECOR_LONG_POSTER] =
+    {
+        .id = DECOR_LONG_POSTER,
+        .name = _("Long Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_2x1,
+        .category = DECORCAT_POSTER,
+        .price = 1500,
+        .description = DecorDesc_LONG_POSTER,
+        .tiles = DecorGfx_LONG_POSTER,
+    },
+ 
+    [DECOR_SEA_POSTER] =
+    {
+        .id = DECOR_SEA_POSTER,
+        .name = _("Sea Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_2x1,
+        .category = DECORCAT_POSTER,
+        .price = 1500,
+        .description = DecorDesc_SEA_POSTER,
+        .tiles = DecorGfx_SEA_POSTER,
+    },
+ 
+    [DECOR_SKY_POSTER] =
+    {
+        .id = DECOR_SKY_POSTER,
+        .name = _("Sky Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_2x1,
+        .category = DECORCAT_POSTER,
+        .price = 1500,
+        .description = DecorDesc_SKY_POSTER,
+        .tiles = DecorGfx_SKY_POSTER,
+    },
+ 
+    [DECOR_KISS_POSTER] =
+    {
+        .id = DECOR_KISS_POSTER,
+        .name = _("Kiss Poster"),
+        .permission = DECORPERM_NA_WALL,
+        .shape = DECORSHAPE_2x1,
+        .category = DECORCAT_POSTER,
+        .price = 1500,
+        .description = DecorDesc_KISS_POSTER,
+        .tiles = DecorGfx_KISS_POSTER,
+    },
+ 
+    [DECOR_PICHU_DOLL] =
+    {
+        .id = DECOR_PICHU_DOLL,
+        .name = _("Pichu Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_PICHU_DOLL,
+        .tiles = DecorGfx_PICHU_DOLL,
+    },
+ 
+    [DECOR_PIKACHU_DOLL] =
+    {
+        .id = DECOR_PIKACHU_DOLL,
+        .name = _("Pikachu Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_PIKACHU_DOLL,
+        .tiles = DecorGfx_PIKACHU_DOLL,
+    },
+ 
+    [DECOR_MARILL_DOLL] =
+    {
+        .id = DECOR_MARILL_DOLL,
+        .name = _("Marill Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_MARILL_DOLL,
+        .tiles = DecorGfx_MARILL_DOLL,
+    },
+ 
+    [DECOR_TOGEPI_DOLL] =
+    {
+        .id = DECOR_TOGEPI_DOLL,
+        .name = _("Togepi Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_TOGEPI_DOLL,
+        .tiles = DecorGfx_TOGEPI_DOLL,
+    },
+ 
+    [DECOR_CYNDAQUIL_DOLL] =
+    {
+        .id = DECOR_CYNDAQUIL_DOLL,
+        .name = _("Cyndaquil Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_CYNDAQUIL_DOLL,
+        .tiles = DecorGfx_CYNDAQUIL_DOLL,
+    },
+ 
+    [DECOR_CHIKORITA_DOLL] =
+    {
+        .id = DECOR_CHIKORITA_DOLL,
+        .name = _("Chikorita Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_CHIKORITA_DOLL,
+        .tiles = DecorGfx_CHIKORITA_DOLL,
+    },
+ 
+    [DECOR_TOTODILE_DOLL] =
+    {
+        .id = DECOR_TOTODILE_DOLL,
+        .name = _("Totodile Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_TOTODILE_DOLL,
+        .tiles = DecorGfx_TOTODILE_DOLL,
+    },
+ 
+    [DECOR_JIGGLYPUFF_DOLL] =
+    {
+        .id = DECOR_JIGGLYPUFF_DOLL,
+        .name = _("Jigglypuff Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_JIGGLYPUFF_DOLL,
+        .tiles = DecorGfx_JIGGLYPUFF_DOLL,
+    },
+ 
+    [DECOR_MEOWTH_DOLL] =
+    {
+        .id = DECOR_MEOWTH_DOLL,
+        .name = _("Meowth Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_MEOWTH_DOLL,
+        .tiles = DecorGfx_MEOWTH_DOLL,
+    },
+ 
+    [DECOR_CLEFAIRY_DOLL] =
+    {
+        .id = DECOR_CLEFAIRY_DOLL,
+        .name = _("Clefairy Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_CLEFAIRY_DOLL,
+        .tiles = DecorGfx_CLEFAIRY_DOLL,
+    },
+ 
+    [DECOR_DITTO_DOLL] =
+    {
+        .id = DECOR_DITTO_DOLL,
+        .name = _("Ditto Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_DITTO_DOLL,
+        .tiles = DecorGfx_DITTO_DOLL,
+    },
+ 
+    [DECOR_SMOOCHUM_DOLL] =
+    {
+        .id = DECOR_SMOOCHUM_DOLL,
+        .name = _("Smoochum Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_SMOOCHUM_DOLL,
+        .tiles = DecorGfx_SMOOCHUM_DOLL,
+    },
+ 
+    [DECOR_TREECKO_DOLL] =
+    {
+        .id = DECOR_TREECKO_DOLL,
+        .name = _("Treecko Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_TREECKO_DOLL,
+        .tiles = DecorGfx_TREECKO_DOLL,
+    },
+ 
+    [DECOR_TORCHIC_DOLL] =
+    {
+        .id = DECOR_TORCHIC_DOLL,
+        .name = _("Torchic Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_TORCHIC_DOLL,
+        .tiles = DecorGfx_TORCHIC_DOLL,
+    },
+ 
+    [DECOR_MUDKIP_DOLL] =
+    {
+        .id = DECOR_MUDKIP_DOLL,
+        .name = _("Mudkip Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_MUDKIP_DOLL,
+        .tiles = DecorGfx_MUDKIP_DOLL,
+    },
+ 
+    [DECOR_DUSKULL_DOLL] =
+    {
+        .id = DECOR_DUSKULL_DOLL,
+        .name = _("Duskull Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_DUSKULL_DOLL,
+        .tiles = DecorGfx_DUSKULL_DOLL,
+    },
+ 
+    [DECOR_WYNAUT_DOLL] =
+    {
+        .id = DECOR_WYNAUT_DOLL,
+        .name = _("Wynaut Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_WYNAUT_DOLL,
+        .tiles = DecorGfx_WYNAUT_DOLL,
+    },
+ 
+    [DECOR_BALTOY_DOLL] =
+    {
+        .id = DECOR_BALTOY_DOLL,
+        .name = _("Baltoy Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_BALTOY_DOLL,
+        .tiles = DecorGfx_BALTOY_DOLL,
+    },
+ 
+    [DECOR_KECLEON_DOLL] =
+    {
+        .id = DECOR_KECLEON_DOLL,
+        .name = _("Kecleon Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_KECLEON_DOLL,
+        .tiles = DecorGfx_KECLEON_DOLL,
+    },
+ 
+    [DECOR_AZURILL_DOLL] =
+    {
+        .id = DECOR_AZURILL_DOLL,
+        .name = _("Azurill Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_AZURILL_DOLL,
+        .tiles = DecorGfx_AZURILL_DOLL,
+    },
+ 
+    [DECOR_SKITTY_DOLL] =
+    {
+        .id = DECOR_SKITTY_DOLL,
+        .name = _("Skitty Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_SKITTY_DOLL,
+        .tiles = DecorGfx_SKITTY_DOLL,
+    },
+ 
+    [DECOR_SWABLU_DOLL] =
+    {
+        .id = DECOR_SWABLU_DOLL,
+        .name = _("Swablu Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_SWABLU_DOLL,
+        .tiles = DecorGfx_SWABLU_DOLL,
+    },
+ 
+    [DECOR_GULPIN_DOLL] =
+    {
+        .id = DECOR_GULPIN_DOLL,
+        .name = _("Gulpin Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_GULPIN_DOLL,
+        .tiles = DecorGfx_GULPIN_DOLL,
+    },
+ 
+    [DECOR_LOTAD_DOLL] =
+    {
+        .id = DECOR_LOTAD_DOLL,
+        .name = _("Lotad Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_LOTAD_DOLL,
+        .tiles = DecorGfx_LOTAD_DOLL,
+    },
+ 
+    [DECOR_SEEDOT_DOLL] =
+    {
+        .id = DECOR_SEEDOT_DOLL,
+        .name = _("Seedot Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_DOLL,
+        .price = 3000,
+        .description = DecorDesc_SEEDOT_DOLL,
+        .tiles = DecorGfx_SEEDOT_DOLL,
+    },
+ 
+    [DECOR_PIKA_CUSHION] =
+    {
+        .id = DECOR_PIKA_CUSHION,
+        .name = _("Pika Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_PIKA_CUSHION,
+        .tiles = DecorGfx_PIKA_CUSHION,
+    },
+ 
+    [DECOR_ROUND_CUSHION] =
+    {
+        .id = DECOR_ROUND_CUSHION,
+        .name = _("Round Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_ROUND_CUSHION,
+        .tiles = DecorGfx_ROUND_CUSHION,
+    },
+ 
+    [DECOR_KISS_CUSHION] =
+    {
+        .id = DECOR_KISS_CUSHION,
+        .name = _("Kiss Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_KISS_CUSHION,
+        .tiles = DecorGfx_KISS_CUSHION,
+    },
+ 
+    [DECOR_ZIGZAG_CUSHION] =
+    {
+        .id = DECOR_ZIGZAG_CUSHION,
+        .name = _("Zigzag Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_ZIGZAG_CUSHION,
+        .tiles = DecorGfx_ZIGZAG_CUSHION,
+    },
+ 
+    [DECOR_SPIN_CUSHION] =
+    {
+        .id = DECOR_SPIN_CUSHION,
+        .name = _("Spin Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_SPIN_CUSHION,
+        .tiles = DecorGfx_SPIN_CUSHION,
+    },
+ 
+    [DECOR_DIAMOND_CUSHION] =
+    {
+        .id = DECOR_DIAMOND_CUSHION,
+        .name = _("Diamond Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_DIAMOND_CUSHION,
+        .tiles = DecorGfx_DIAMOND_CUSHION,
+    },
+ 
+    [DECOR_BALL_CUSHION] =
+    {
+        .id = DECOR_BALL_CUSHION,
+        .name = _("Ball Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_BALL_CUSHION,
+        .tiles = DecorGfx_BALL_CUSHION,
+    },
+ 
+    [DECOR_GRASS_CUSHION] =
+    {
+        .id = DECOR_GRASS_CUSHION,
+        .name = _("Grass Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_GRASS_CUSHION,
+        .tiles = DecorGfx_GRASS_CUSHION,
+    },
+ 
+    [DECOR_FIRE_CUSHION] =
+    {
+        .id = DECOR_FIRE_CUSHION,
+        .name = _("Fire Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_FIRE_CUSHION,
+        .tiles = DecorGfx_FIRE_CUSHION,
+    },
+ 
+    [DECOR_WATER_CUSHION] =
+    {
+        .id = DECOR_WATER_CUSHION,
+        .name = _("Water Cushion"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x1,
+        .category = DECORCAT_CUSHION,
+        .price = 2000,
+        .description = DecorDesc_WATER_CUSHION,
+        .tiles = DecorGfx_WATER_CUSHION,
+    },
+ 
+    [DECOR_SNORLAX_DOLL] =
+    {
+        .id = DECOR_SNORLAX_DOLL,
+        .name = _("Snorlax Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_SNORLAX_DOLL,
+        .tiles = DecorGfx_SNORLAX_DOLL,
+    },
+ 
+    [DECOR_RHYDON_DOLL] =
+    {
+        .id = DECOR_RHYDON_DOLL,
+        .name = _("Rhydon Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_RHYDON_DOLL,
+        .tiles = DecorGfx_RHYDON_DOLL,
+    },
+ 
+    [DECOR_LAPRAS_DOLL] =
+    {
+        .id = DECOR_LAPRAS_DOLL,
+        .name = _("Lapras Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_LAPRAS_DOLL,
+        .tiles = DecorGfx_LAPRAS_DOLL,
+    },
+ 
+    [DECOR_VENUSAUR_DOLL] =
+    {
+        .id = DECOR_VENUSAUR_DOLL,
+        .name = _("Venusaur Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_VENUSAUR_DOLL,
+        .tiles = DecorGfx_VENUSAUR_DOLL,
+    },
+ 
+    [DECOR_CHARIZARD_DOLL] =
+    {
+        .id = DECOR_CHARIZARD_DOLL,
+        .name = _("Charizard Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_CHARIZARD_DOLL,
+        .tiles = DecorGfx_CHARIZARD_DOLL,
+    },
+ 
+    [DECOR_BLASTOISE_DOLL] =
+    {
+        .id = DECOR_BLASTOISE_DOLL,
+        .name = _("Blastoise Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_BLASTOISE_DOLL,
+        .tiles = DecorGfx_BLASTOISE_DOLL,
+    },
+ 
+    [DECOR_WAILMER_DOLL] =
+    {
+        .id = DECOR_WAILMER_DOLL,
+        .name = _("Wailmer Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_WAILMER_DOLL,
+        .tiles = DecorGfx_WAILMER_DOLL,
+    },
+ 
+    [DECOR_REGIROCK_DOLL] =
+    {
+        .id = DECOR_REGIROCK_DOLL,
+        .name = _("Regirock Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_REGIROCK_DOLL,
+        .tiles = DecorGfx_REGIROCK_DOLL,
+    },
+ 
+    [DECOR_REGICE_DOLL] =
+    {
+        .id = DECOR_REGICE_DOLL,
+        .name = _("Regice Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_REGICE_DOLL,
+        .tiles = DecorGfx_REGICE_DOLL,
+    },
+ 
+    [DECOR_REGISTEEL_DOLL] =
+    {
+        .id = DECOR_REGISTEEL_DOLL,
+        .name = _("Registell Doll"),
+        .permission = DECORPERM_SPRITE,
+        .shape = DECORSHAPE_1x2,
+        .category = DECORCAT_DOLL,
+        .price = 10000,
+        .description = DecorDesc_REGISTEEL_DOLL,
+        .tiles = DecorGfx_REGISTEEL_DOLL,
+    }
 };

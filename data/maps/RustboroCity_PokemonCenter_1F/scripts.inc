@@ -1,16 +1,16 @@
 .set LOCALID_NURSE, 1
 
-RustboroCity_PokemonCenter_1F_MapScripts:: @ 8214D62
+RustboroCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-RustboroCity_PokemonCenter_1F_OnTransition: @ 8214D6D
+RustboroCity_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_RUSTBORO_CITY
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-RustboroCity_PokemonCenter_1F_EventScript_Nurse:: @ 8214D76
+RustboroCity_PokemonCenter_1F_EventScript_Nurse::
 	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -18,31 +18,31 @@ RustboroCity_PokemonCenter_1F_EventScript_Nurse:: @ 8214D76
 	release
 	end
 
-RustboroCity_PokemonCenter_1F_EventScript_Man:: @ 8214D84
+RustboroCity_PokemonCenter_1F_EventScript_Man::
 	msgbox RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonCenter_1F_EventScript_Boy:: @ 8214D8D
+RustboroCity_PokemonCenter_1F_EventScript_Boy::
 	msgbox RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonCenter_1F_EventScript_Girl:: @ 8214D96
+RustboroCity_PokemonCenter_1F_EventScript_Girl::
 	msgbox RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities: @ 8214D9F
+RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities:
 	.string "My Pokémon has a Naive nature, and my\n"
 	.string "friend's has a Jolly nature.\p"
 	.string "It's fascinating how Pokémon have\n"
 	.string "personalities!$"
 
-RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon: @ 8214E13
+RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
 	.string "Just like people, there are male and\n"
 	.string "female Pokémon.\p"
 	.string "But no one seems to have any idea how\n"
 	.string "they're different.$"
 
-RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor: @ 8214E81
+RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:
 	.string "The man next door gave me an HM!\p"
 	.string "I used it to teach my Pokémon how to\n"
 	.string "Cut down skinny trees.$"

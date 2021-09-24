@@ -2,20 +2,20 @@
 .set LOCALID_GUIDE, 2
 .set LOCALID_SCOTT, 4
 
-BattleFrontier_ReceptionGate_MapScripts:: @ 82661DA
+BattleFrontier_ReceptionGate_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_ReceptionGate_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_ReceptionGate_OnTransition
 	.byte 0
 
-BattleFrontier_ReceptionGate_OnTransition: @ 82661E5
+BattleFrontier_ReceptionGate_OnTransition:
 	setflag FLAG_LANDMARK_BATTLE_FRONTIER
 	end
 
-BattleFrontier_ReceptionGate_OnFrame: @ 82661E9
+BattleFrontier_ReceptionGate_OnFrame:
 	map_script_2 VAR_HAS_ENTERED_BATTLE_FRONTIER, 0, BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering
 	.2byte 0
 
-BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering:: @ 82661F3
+BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering::
 	lockall
 	setvar VAR_HAS_ENTERED_BATTLE_FRONTIER, 1
 	playse SE_PIN
@@ -30,7 +30,7 @@ BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering:: @ 82661F3
 	goto BattleFrontier_ReceptionGate_EventScript_ScottScene
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ScottScene:: @ 8266229
+BattleFrontier_ReceptionGate_EventScript_ScottScene::
 	msgbox BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT
 	msgbox BattleFrontier_ReceptionGate_Text_IssueFrontierPass, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
@@ -66,14 +66,14 @@ BattleFrontier_ReceptionGate_EventScript_ScottScene:: @ 8266229
 	releaseall
 	end
 
-BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter: @ 82662D2
+BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter:
 	walk_up
 	walk_up
 	walk_left
 	walk_left
 	step_end
 
-BattleFrontier_ReceptionGate_Movement_PlayerFaceScott: @ 82662D7
+BattleFrontier_ReceptionGate_Movement_PlayerFaceScott:
 	delay_16
 	delay_16
 	delay_16
@@ -82,12 +82,12 @@ BattleFrontier_ReceptionGate_Movement_PlayerFaceScott: @ 82662D7
 	step_end
 
 @ Unused
-BattleFrontier_ReceptionGate_Movement_WalkDown: @ 82662DD
+BattleFrontier_ReceptionGate_Movement_WalkDown:
 	walk_down
 	walk_down
 	step_end
 
-BattleFrontier_ReceptionGate_Movement_ScottEnter: @ 82662E0
+BattleFrontier_ReceptionGate_Movement_ScottEnter:
 	walk_down
 	walk_down
 	walk_down
@@ -97,7 +97,7 @@ BattleFrontier_ReceptionGate_Movement_ScottEnter: @ 82662E0
 	walk_left
 	step_end
 
-BattleFrontier_ReceptionGate_Movement_ScottExit: @ 82662E8
+BattleFrontier_ReceptionGate_Movement_ScottExit:
 	walk_right
 	walk_up
 	walk_up
@@ -107,7 +107,7 @@ BattleFrontier_ReceptionGate_Movement_ScottExit: @ 82662E8
 	walk_up
 	step_end
 
-BattleFrontier_ReceptionGate_Movement_GreeterFaceScott: @ 82662F0
+BattleFrontier_ReceptionGate_Movement_GreeterFaceScott:
 	delay_16
 	delay_16
 	delay_16
@@ -115,7 +115,7 @@ BattleFrontier_ReceptionGate_Movement_GreeterFaceScott: @ 82662F0
 	walk_in_place_fastest_right
 	step_end
 
-BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott: @ 82662F6
+BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott:
 	delay_16
 	delay_16
 	delay_16
@@ -123,7 +123,7 @@ BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott: @ 82662F6
 	walk_in_place_fastest_left
 	step_end
 
-BattleFrontier_ReceptionGate_EventScript_Greeter:: @ 82662FC
+BattleFrontier_ReceptionGate_EventScript_Greeter::
 	lock
 	faceplayer
 	msgbox BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT
@@ -131,14 +131,14 @@ BattleFrontier_ReceptionGate_EventScript_Greeter:: @ 82662FC
 	release
 	end
 
-BattleFrontier_ReceptionGate_EventScript_FacilityGuide:: @ 8266310
+BattleFrontier_ReceptionGate_EventScript_FacilityGuide::
 	lock
 	faceplayer
 	msgbox BattleFrontier_ReceptionGate_Text_YourGuideToFacilities, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout:: @ 8266320
+BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout::
 	message BattleFrontier_ReceptionGate_Text_LearnAboutWhich2
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST
@@ -158,67 +158,67 @@ BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout:: @ 8266320
 	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattleTower:: @ 82663AE
+BattleFrontier_ReceptionGate_EventScript_BattleTower::
 	msgbox BattleFrontier_ReceptionGate_Text_BattleTowerInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattleDome:: @ 82663BC
+BattleFrontier_ReceptionGate_EventScript_BattleDome::
 	msgbox BattleFrontier_ReceptionGate_Text_BattleDomeInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattlePalace:: @ 82663CA
+BattleFrontier_ReceptionGate_EventScript_BattlePalace::
 	msgbox BattleFrontier_ReceptionGate_Text_BattlePalaceInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattleArena:: @ 82663D8
+BattleFrontier_ReceptionGate_EventScript_BattleArena::
 	msgbox BattleFrontier_ReceptionGate_Text_BattleArenaInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattleFactory:: @ 82663E6
+BattleFrontier_ReceptionGate_EventScript_BattleFactory::
 	msgbox BattleFrontier_ReceptionGate_Text_BattleFactoryInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattlePike:: @ 82663F4
+BattleFrontier_ReceptionGate_EventScript_BattlePike::
 	msgbox BattleFrontier_ReceptionGate_Text_BattlePikeInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattlePyramid:: @ 8266402
+BattleFrontier_ReceptionGate_EventScript_BattlePyramid::
 	msgbox BattleFrontier_ReceptionGate_Text_BattlePyramidInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_RankingHall:: @ 8266410
+BattleFrontier_ReceptionGate_EventScript_RankingHall::
 	msgbox BattleFrontier_ReceptionGate_Text_RankingHallInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ExchangeCorner:: @ 826641E
+BattleFrontier_ReceptionGate_EventScript_ExchangeCorner::
 	msgbox BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide:: @ 826642C
+BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide::
 	msgbox BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ReceptionGate_EventScript_RulesGuide:: @ 8266436
+BattleFrontier_ReceptionGate_EventScript_RulesGuide::
 	lock
 	faceplayer
 	msgbox BattleFrontier_ReceptionGate_Text_YourGuideToRules, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout:: @ 8266446
+BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout::
 	message BattleFrontier_ReceptionGate_Text_LearnAboutWhat
 	waitmessage
-	multichoice 15, 0, MULTI_FRONTIER_RULES, 0
+	multichoice 15, 0, MULTI_FRONTIER_RULES, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_LevelMode
 	case 1, BattleFrontier_ReceptionGate_EventScript_Level50
@@ -229,47 +229,47 @@ BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout:: @ 8266446
 	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide
 	end
 
-BattleFrontier_ReceptionGate_EventScript_LevelMode:: @ 82664A4
+BattleFrontier_ReceptionGate_EventScript_LevelMode::
 	msgbox BattleFrontier_ReceptionGate_Text_LevelModeInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_Level50:: @ 82664B2
+BattleFrontier_ReceptionGate_EventScript_Level50::
 	msgbox BattleFrontier_ReceptionGate_Text_Level50Info, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_OpenLevel:: @ 82664C0
+BattleFrontier_ReceptionGate_EventScript_OpenLevel::
 	msgbox BattleFrontier_ReceptionGate_Text_OpenLevelInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_MonEntry:: @ 82664CE
+BattleFrontier_ReceptionGate_EventScript_MonEntry::
 	msgbox BattleFrontier_ReceptionGate_Text_MonEntryInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_HoldItems:: @ 82664DC
+BattleFrontier_ReceptionGate_EventScript_HoldItems::
 	msgbox BattleFrontier_ReceptionGate_Text_HoldItemsInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide:: @ 82664EA
+BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide::
 	msgbox BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ReceptionGate_EventScript_FrontierPassGuide:: @ 82664F4
+BattleFrontier_ReceptionGate_EventScript_FrontierPassGuide::
 	lock
 	faceplayer
 	msgbox BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout:: @ 8266504
+BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout::
 	message BattleFrontier_ReceptionGate_Text_LearnAboutWhich1
 	waitmessage
-	multichoice 16, 4, MULTI_FRONTIER_PASS_INFO, 0
+	multichoice 16, 4, MULTI_FRONTIER_PASS_INFO, FALSE
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_Symbols
 	case 1, BattleFrontier_ReceptionGate_EventScript_RecordBattle
@@ -278,62 +278,62 @@ BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout:: @ 
 	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide
 	end
 
-BattleFrontier_ReceptionGate_EventScript_Symbols:: @ 826654C
+BattleFrontier_ReceptionGate_EventScript_Symbols::
 	msgbox BattleFrontier_ReceptionGate_Text_SymbolsInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_RecordBattle:: @ 826655A
+BattleFrontier_ReceptionGate_EventScript_RecordBattle::
 	msgbox BattleFrontier_ReceptionGate_Text_RecordedBattleInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_BattlePoints:: @ 8266568
+BattleFrontier_ReceptionGate_EventScript_BattlePoints::
 	msgbox BattleFrontier_ReceptionGate_Text_BattlePointsInfo, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide:: @ 8266576
+BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide::
 	msgbox BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay: @ 8266580
+BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay:
 	.string "Is it your first time here?\n"
 	.string "Please step this way!$"
 
-BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier: @ 82665B2
+BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier:
 	.string "The front lines of Pokémon battling!\n"
 	.string "Welcome to the Battle Frontier!$"
 
-BattleFrontier_ReceptionGate_Text_IssueFrontierPass: @ 82665F7
+BattleFrontier_ReceptionGate_Text_IssueFrontierPass:
 	.string "For a first-time visitor, we issue\n"
 	.string "the Frontier Pass.\p"
 	.string "It's for use at all the facilities\n"
 	.string "in the Battle Frontier.\p"
 	.string "Here you are!$"
 
-BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass: @ 8266676
+BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass:
 	.string "{PLAYER} obtained\n"
 	.string "the Frontier Pass.$"
 
-BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass: @ 8266695
+BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass:
 	.string "{PLAYER} placed the Trainer Card\n"
 	.string "in the Frontier Pass.$"
 
-BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier: @ 82666C6
+BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier:
 	.string "We hope you enjoy all that the Battle\n"
 	.string "Frontier has to offer!$"
 
-BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame: @ 8266703
+BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame:
 	.string "???: Well, if it isn't {PLAYER}{KUN}!\n"
 	.string "You came out here!$"
 
-BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay: @ 8266733
+BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay:
 	.string "Guide: Oh! Mr. Scott, sir!\n"
 	.string "Good day to you, sir!$"
 
-BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere: @ 8266764
+BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
 	.string "Scott: It's great to see you here,\n"
 	.string "it really is!\p"
 	.string "I hope you'll take your time and\n"
@@ -343,21 +343,21 @@ BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere: @ 8266764
 	.string "I also have my quarters here, so feel\n"
 	.string "free to visit if you have time.$"
 
-BattleFrontier_ReceptionGate_Text_YourGuideToFacilities: @ 8266857
+BattleFrontier_ReceptionGate_Text_YourGuideToFacilities:
 	.string "I'm your guide to the various facilities\n"
 	.string "here in the Battle Frontier.$"
 
-BattleFrontier_ReceptionGate_Text_LearnAboutWhich2: @ 826689D
+BattleFrontier_ReceptionGate_Text_LearnAboutWhich2:
 	.string "Which would you like to learn about?$"
 
-BattleFrontier_ReceptionGate_Text_BattleTowerInfo: @ 82668C2
+BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
 	.string "It is the gigantic tower considered\n"
 	.string "to be the Battle Frontier's symbol.\p"
 	.string "There are four kinds of Battle Rooms\n"
 	.string "in the tower for Single, Double, Multi,\l"
 	.string "and Link Multi Battles.$"
 
-BattleFrontier_ReceptionGate_Text_BattleDomeInfo: @ 826696F
+BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
 	.string "The Battle Dome is the large building\n"
 	.string "shaped like a huge egg.\p"
 	.string "Events named Battle Tourneys are held\n"
@@ -366,20 +366,20 @@ BattleFrontier_ReceptionGate_Text_BattleDomeInfo: @ 826696F
 	.string "two courses--for Single and Double\l"
 	.string "Battles.$"
 
-BattleFrontier_ReceptionGate_Text_BattlePalaceInfo: @ 8266A34
+BattleFrontier_ReceptionGate_Text_BattlePalaceInfo:
 	.string "The Battle Palace is the red building\n"
 	.string "on the right of the Battle Frontier.\p"
 	.string "There are two kinds of Battle Halls\n"
 	.string "for Single and Double Battles.$"
 
-BattleFrontier_ReceptionGate_Text_BattleArenaInfo: @ 8266AC2
+BattleFrontier_ReceptionGate_Text_BattleArenaInfo:
 	.string "The Battle Arena is the dojo-like\n"
 	.string "building at the center-right of\l"
 	.string "the Battle Frontier.\p"
 	.string "An event called the Set KO Tourney\n"
 	.string "takes place at the Battle Arena.$"
 
-BattleFrontier_ReceptionGate_Text_BattleFactoryInfo: @ 8266B5D
+BattleFrontier_ReceptionGate_Text_BattleFactoryInfo:
 	.string "The Battle Factory is the large\n"
 	.string "building that is the closest to us.\p"
 	.string "An event called the Battle Swap\n"
@@ -388,20 +388,20 @@ BattleFrontier_ReceptionGate_Text_BattleFactoryInfo: @ 8266B5D
 	.string "two courses for Single and Double\l"
 	.string "Battles.$"
 
-BattleFrontier_ReceptionGate_Text_BattlePikeInfo: @ 8266C24
+BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
 	.string "The Battle Pike is the building shaped\n"
 	.string "like a Pokémon at the center-left of\l"
 	.string "the Battle Frontier.\p"
 	.string "An event called the Battle Choice\n"
 	.string "is conducted there.$"
 
-BattleFrontier_ReceptionGate_Text_BattlePyramidInfo: @ 8266CBB
+BattleFrontier_ReceptionGate_Text_BattlePyramidInfo:
 	.string "The Battle Pyramid is the enormous\n"
 	.string "pyramid.\p"
 	.string "An event called the Battle Quest\n"
 	.string "is conducted there.$"
 
-BattleFrontier_ReceptionGate_Text_RankingHallInfo: @ 8266D1C
+BattleFrontier_ReceptionGate_Text_RankingHallInfo:
 	.string "The Ranking Hall is located near\n"
 	.string "the Battle Tower.\p"
 	.string "There, you may see the most fantastic\n"
@@ -409,28 +409,28 @@ BattleFrontier_ReceptionGate_Text_RankingHallInfo: @ 8266D1C
 	.string "took on the many challenges of\l"
 	.string "the Battle Frontier.$"
 
-BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo: @ 8266DCB
+BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo:
 	.string "The Exchange Service Corner is near\n"
 	.string "the Battle Tower.\p"
 	.string "The Battle Points you have earned in\n"
 	.string "the Battle Frontier may be exchanged\l"
 	.string "for fabulous prizes there.$"
 
-BattleFrontier_ReceptionGate_Text_YourGuideToRules: @ 8266E66
+BattleFrontier_ReceptionGate_Text_YourGuideToRules:
 	.string "I'm your guide to the basic rules that\n"
 	.string "are common to all the challenges\l"
 	.string "offered by the facilities in the Battle\l"
 	.string "Frontier.$"
 
-BattleFrontier_ReceptionGate_Text_LearnAboutWhat: @ 8266EE0
+BattleFrontier_ReceptionGate_Text_LearnAboutWhat:
 	.string "What would you like to learn about?$"
 
-BattleFrontier_ReceptionGate_Text_LevelModeInfo: @ 8266F04
+BattleFrontier_ReceptionGate_Text_LevelModeInfo:
 	.string "All the challenges at the Battle\n"
 	.string "Frontier's facilities come in\l"
 	.string "two courses--Level 50 and Open Level.$"
 
-BattleFrontier_ReceptionGate_Text_Level50Info: @ 8266F69
+BattleFrontier_ReceptionGate_Text_Level50Info:
 	.string "The Level 50 course is open to Pokémon\n"
 	.string "up to and including Level 50.\p"
 	.string "Please keep in mind, however, that\n"
@@ -441,7 +441,7 @@ BattleFrontier_ReceptionGate_Text_Level50Info: @ 8266F69
 	.string "To begin, we hope you will challenge\n"
 	.string "this course.$"
 
-BattleFrontier_ReceptionGate_Text_OpenLevelInfo: @ 8267080
+BattleFrontier_ReceptionGate_Text_OpenLevelInfo:
 	.string "The Open Level course places no limit\n"
 	.string "on the levels of Pokémon entering\l"
 	.string "challenges.\p"
@@ -451,7 +451,7 @@ BattleFrontier_ReceptionGate_Text_OpenLevelInfo: @ 8267080
 	.string "However, no Trainer you face will\n"
 	.string "have any Pokémon below Level 60.$"
 
-BattleFrontier_ReceptionGate_Text_MonEntryInfo: @ 826716A
+BattleFrontier_ReceptionGate_Text_MonEntryInfo:
 	.string "Virtually any kind of Pokémon may take\n"
 	.string "on the challenges at all facilities.\p"
 	.string "Eggs and certain kinds of Pokémon,\n"
@@ -462,7 +462,7 @@ BattleFrontier_ReceptionGate_Text_MonEntryInfo: @ 826716A
 	.string "of the same kind of Pokémon are not\l"
 	.string "permitted.$"
 
-BattleFrontier_ReceptionGate_Text_HoldItemsInfo: @ 8267298
+BattleFrontier_ReceptionGate_Text_HoldItemsInfo:
 	.string "When entering a challenge at a Battle\n"
 	.string "Frontier facility, Pokémon may not\l"
 	.string "be holding the same kind of item.\p"
@@ -470,13 +470,13 @@ BattleFrontier_ReceptionGate_Text_HoldItemsInfo: @ 8267298
 	.string "entering a challenge are holding\l"
 	.string "different items.$"
 
-BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass: @ 8267357
+BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass:
 	.string "I'm your guide to the Frontier Pass.$"
 
-BattleFrontier_ReceptionGate_Text_LearnAboutWhich1: @ 826737C
+BattleFrontier_ReceptionGate_Text_LearnAboutWhich1:
 	.string "Which would you like to learn about?$"
 
-BattleFrontier_ReceptionGate_Text_SymbolsInfo: @ 82673A1
+BattleFrontier_ReceptionGate_Text_SymbolsInfo:
 	.string "There are seven facilities at\n"
 	.string "the Battle Frontier.\p"
 	.string "Trainers who gain recognition for\n"
@@ -488,7 +488,7 @@ BattleFrontier_ReceptionGate_Text_SymbolsInfo: @ 82673A1
 	.string "It's certainly not easy to win symbols.\n"
 	.string "I wish you the best of luck!$"
 
-BattleFrontier_ReceptionGate_Text_RecordedBattleInfo: @ 82674F3
+BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
 	.string "It is possible to record one battle\n"
 	.string "on your Frontier Pass.\p"
 	.string "You may record a battle you had with\n"
@@ -500,7 +500,7 @@ BattleFrontier_ReceptionGate_Text_RecordedBattleInfo: @ 82674F3
 	.string "You may choose to record your match\n"
 	.string "at the end of a battle.$"
 
-BattleFrontier_ReceptionGate_Text_BattlePointsInfo: @ 826761C
+BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
 	.string "Battle Points are rewards given to\n"
 	.string "Trainers who battled outstandingly\l"
 	.string "at the Battle Frontier.\p"

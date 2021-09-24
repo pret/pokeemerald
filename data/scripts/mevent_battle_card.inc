@@ -1,4 +1,4 @@
-MysteryEventScript_BattleCard:: @ 867513C
+MysteryEventScript_BattleCard::
 	setvaddress MysteryEventScript_BattleCard
 	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, GET_CARD_BATTLES_WON
@@ -15,7 +15,7 @@ MysteryEventScript_BattleCard:: @ 867513C
 	setflag FLAG_MYSTERY_EVENT_DONE
 	end
 
-MysteryEventScript_BattleCardInfo: @ 8675179
+MysteryEventScript_BattleCardInfo:
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftBattleCountCard
