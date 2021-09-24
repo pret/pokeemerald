@@ -36,8 +36,8 @@
 #define MAX_MENU_ITEMS 9
 #define MENU_MIDPOINT (MAX_MENU_ITEMS / 2)
 
-#define TILE_HIGHLIGHT_NONE 0x0005 // Tile number for the bg of an unselected menu item 
-#define TILE_HIGHLIGHT_BLUE 0x1005 // Tile number for the bg of a selected menu item 
+#define TILE_HIGHLIGHT_NONE 0x0005 // Tile number for the bg of an unselected menu item
+#define TILE_HIGHLIGHT_BLUE 0x1005 // Tile number for the bg of a selected menu item
 #define TILE_HIGHLIGHT_RED  0x2005 // Tile number for the bg of a menu item to swap
 
 #define TAG_POKEBLOCK_CASE  14800
@@ -792,7 +792,7 @@ static void DrawPokeblockInfo(s32 pkblId)
             }
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
         }
-        
+
         // Print the Pokéblock's feel
         ConvertIntToDecimalStringN(gStringVar1, GetPokeblocksFeel(pokeblock), STR_CONV_MODE_RIGHT_ALIGN, 2);
         PrintOnPokeblockWindow(WIN_FEEL, gStringVar1, 4);

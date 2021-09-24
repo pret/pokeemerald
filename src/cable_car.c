@@ -896,7 +896,7 @@ static void CreateCableCarSprites(void)
             gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].x2 = -gSprites[spriteId].centerToCornerVecX;
             gSprites[spriteId].y2 = -gSprites[spriteId].centerToCornerVecY;
-            
+
             // Randomly choose which direction the NPC is going
             if (!GOING_DOWN)
             {
@@ -1024,7 +1024,7 @@ static void DrawNextGroundSegmentGoingDown(void)
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 2) % 32;
     sCableCar->groundTileIdx += 2;
     sGroundSegmentY_Down = sCableCar->groundSegmentYStart;
-    
+
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {

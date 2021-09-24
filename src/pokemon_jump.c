@@ -126,7 +126,7 @@ enum {
 #define PLAY_AGAIN_YES 2
 
 #define TAG_MON1 0
-#define TAG_MON2 1 // MON2-5 used implicitly by adding multiplayer id to tag 
+#define TAG_MON2 1 // MON2-5 used implicitly by adding multiplayer id to tag
 #define TAG_MON3 2
 #define TAG_MON4 3
 #define TAG_MON5 4
@@ -1723,7 +1723,7 @@ static void UpdateVineState(void)
 
         sPokemonJump->prevVineState = sPokemonJump->vineState;
         sPokemonJump->vineState = sPokemonJump->vineStateTimer >> 8;
-        
+
         // If beginning upswing
         if (sPokemonJump->vineState > VINE_UPSWING_LOWER && sPokemonJump->prevVineState < VINE_UPSWING_LOW)
         {
@@ -1960,23 +1960,23 @@ static void HandleMonState(void)
 
 static const s8 sJumpOffsets[][48] =
 {
-    [JUMP_TYPE_NORMAL] = { -3,  -6,  -8, -10, -13, -15, -17, -19, 
-                          -21, -23, -25, -27, -28, -29, 
-                          JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, 
-                          -28, -27, -26, -25, -23, -22, -20, -18, 
+    [JUMP_TYPE_NORMAL] = { -3,  -6,  -8, -10, -13, -15, -17, -19,
+                          -21, -23, -25, -27, -28, -29,
+                          JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
+                          -28, -27, -26, -25, -23, -22, -20, -18,
                           -17, -15, -13, -11,  -8,  -6,  -4,  -1},
 
-    [JUMP_TYPE_FAST]  = { -3,  -6,  -9, -11, -14, -16, -18, -20, 
-                         -22, -24, -26, -28, -29, 
-                         JUMP_PEAK, JUMP_PEAK, 
-                         -28, -26, -24, -22, -20, -18, -16, -14, 
+    [JUMP_TYPE_FAST]  = { -3,  -6,  -9, -11, -14, -16, -18, -20,
+                         -22, -24, -26, -28, -29,
+                         JUMP_PEAK, JUMP_PEAK,
+                         -28, -26, -24, -22, -20, -18, -16, -14,
                          -11, -9,  -6,  -4,  -1},
 
-    [JUMP_TYPE_SLOW]  = { -3,  -6,  -9, -11, -13, -15, -17, -19, 
-                         -21, -23, -25, -27, -28, -29, 
-                         JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, 
-                         -29, -29, -28, -28, -27, -27, -26, -25, 
-                         -24, -22, -20, -18, -16, -14, -12, -11,  
+    [JUMP_TYPE_SLOW]  = { -3,  -6,  -9, -11, -13, -15, -17, -19,
+                         -21, -23, -25, -27, -28, -29,
+                         JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
+                         -29, -29, -28, -28, -27, -27, -26, -25,
+                         -24, -22, -20, -18, -16, -14, -12, -11,
                           -9,  -6,  -4,  -1},
 };
 
@@ -2248,13 +2248,13 @@ static void TryUpdateExcellentsRecord(u16 excellentsInRow)
 }
 
 static const u16 sPrizeItems[] = {
-    ITEM_LEPPA_BERRY, 
-    ITEM_LUM_BERRY, 
-    ITEM_SITRUS_BERRY, 
-    ITEM_FIGY_BERRY, 
-    ITEM_WIKI_BERRY, 
-    ITEM_MAGO_BERRY, 
-    ITEM_AGUAV_BERRY, 
+    ITEM_LEPPA_BERRY,
+    ITEM_LUM_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
     ITEM_IAPAPA_BERRY
 };
 
@@ -3649,15 +3649,15 @@ enum {
 };
 
 static const u8 sVenusaurStates[] = {
-    [VINE_HIGHEST]          = VENUSAUR_UP, 
-    [VINE_DOWNSWING_HIGHER] = VENUSAUR_UP, 
-    [VINE_DOWNSWING_HIGH]   = VENUSAUR_NEUTRAL, 
-    [VINE_DOWNSWING_LOW]    = VENUSAUR_NEUTRAL, 
-    [VINE_DOWNSWING_LOWER]  = VENUSAUR_DOWN, 
-    [VINE_LOWEST]           = VENUSAUR_DOWN, 
-    [VINE_UPSWING_LOWER]    = VENUSAUR_DOWN, 
-    [VINE_UPSWING_LOW]      = VENUSAUR_NEUTRAL, 
-    [VINE_UPSWING_HIGH]     = VENUSAUR_NEUTRAL, 
+    [VINE_HIGHEST]          = VENUSAUR_UP,
+    [VINE_DOWNSWING_HIGHER] = VENUSAUR_UP,
+    [VINE_DOWNSWING_HIGH]   = VENUSAUR_NEUTRAL,
+    [VINE_DOWNSWING_LOW]    = VENUSAUR_NEUTRAL,
+    [VINE_DOWNSWING_LOWER]  = VENUSAUR_DOWN,
+    [VINE_LOWEST]           = VENUSAUR_DOWN,
+    [VINE_UPSWING_LOWER]    = VENUSAUR_DOWN,
+    [VINE_UPSWING_LOW]      = VENUSAUR_NEUTRAL,
+    [VINE_UPSWING_HIGH]     = VENUSAUR_NEUTRAL,
     [VINE_UPSWING_HIGHER]   = VENUSAUR_UP,
 };
 
@@ -3665,25 +3665,25 @@ static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits
 static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_DIGITS};
 
 static const u16 sPlayerNameWindowCoords_2Players[] = {
-     6, 8, 
+     6, 8,
     16, 8
 };
 static const u16 sPlayerNameWindowCoords_3Players[] = {
-     6, 8, 
-    11, 6, 
+     6, 8,
+    11, 6,
     16, 8
 };
 static const u16 sPlayerNameWindowCoords_4Players[] = {
-     2, 6, 
-     6, 8, 
-    16, 8, 
+     2, 6,
+     6, 8,
+    16, 8,
     20, 6
 };
 static const u16 sPlayerNameWindowCoords_5Players[] = {
-     2, 6, 
-     6, 8, 
-    11, 6, 
-    16, 8, 
+     2, 6,
+     6, 8,
+    11, 6,
+    16, 8,
     20, 6
 };
 

@@ -217,7 +217,7 @@ u8 SwitchConditionSummaryIndex(u8 moveUp)
     }
 
     isNotLastMon = (monListPtr->currIndex != ((IsConditionMenuSearchMode() != 0) ? monListPtr->listCount : monListPtr->listCount - 1));
-    
+
     if (!wasNotLastMon)
         return PARTY_CONDITION_FUNC_NO_TRANSITION;
     else if (!isNotLastMon)

@@ -51,20 +51,20 @@ static const u8 sText_TransmissionFailureTryAgain[] = _("Transmission failure.\n
 
 static const struct BgTemplate sBerryFixBgTemplates[] = {
     {
-        .bg = 0, 
-        .charBaseIndex = 0, 
-        .mapBaseIndex = 30, 
-        .screenSize = 0, 
-        .paletteMode = 0, 
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
         .priority = 0,
         .baseTile = 0
-    }, 
+    },
     {
-        .bg = 1, 
-        .charBaseIndex = 1, 
-        .mapBaseIndex = 31, 
-        .screenSize = 0, 
-        .paletteMode = 0, 
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
         .priority = 1,
         .baseTile = 0
     }
@@ -72,39 +72,39 @@ static const struct BgTemplate sBerryFixBgTemplates[] = {
 
 static const struct WindowTemplate sBerryFixWindowTemplates[] = {
     {
-        .bg = 0, 
-        .tilemapLeft = 2,  
-        .tilemapTop = 4, 
-        .width = 26, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 4,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 1, 
-        .tilemapTop = 11, 
-        .width = 28, 
-        .height = 8, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 11,
+        .width = 28,
+        .height = 8,
+        .paletteNum = 15,
         .baseBlock = 53
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 0,  
-        .tilemapTop = 8, 
-        .width = 30, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 8,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 277
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 8,  
-        .tilemapTop = 0, 
-        .width = 14, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 8,
+        .tilemapTop = 0,
+        .width = 14,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 337
     },
     DUMMY_WIN_TEMPLATE
@@ -148,27 +148,27 @@ static const struct {
         gBerryFixGameboy_Gfx,
         gBerryFixGameboy_Tilemap,
         gBerryFixGameboy_Pal
-    }, 
+    },
     [SCENE_TURN_OFF_POWER] = {
         gBerryFixGameboyLogo_Gfx,
         gBerryFixGameboyLogo_Tilemap,
         gBerryFixGameboyLogo_Pal
-    }, 
+    },
     [SCENE_TRANSMITTING] = {
         gBerryFixGbaTransfer_Gfx,
         gBerryFixGbaTransfer_Tilemap,
         gBerryFixGbaTransfer_Pal
-    }, 
+    },
     [SCENE_FOLLOW_INSTRUCT] = {
         gBerryFixGbaTransferHighlight_Gfx,
         gBerryFixGbaTransferHighlight_Tilemap,
         gBerryFixGbaTransferHighlight_Pal
-    }, 
+    },
     [SCENE_TRANSMIT_FAILED] = {
         gBerryFixGbaTransferError_Gfx,
         gBerryFixGbaTransferError_Tilemap,
         gBerryFixGbaTransferError_Pal
-    }, 
+    },
     [SCENE_BEGIN] = {
         gBerryFixWindow_Gfx,
         gBerryFixWindow_Tilemap,
@@ -242,22 +242,22 @@ static void BerryFix_Main(void)
             }
             else if (++sBerryFix->timer > 180)
             {
-                MultiBootStartMaster(&sBerryFix->mb, 
-                                     gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE, 
-                                     (u32)(gMultiBootProgram_BerryGlitchFix_End - (gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE)), 
-                                     4, 
+                MultiBootStartMaster(&sBerryFix->mb,
+                                     gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE,
+                                     (u32)(gMultiBootProgram_BerryGlitchFix_End - (gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE)),
+                                     4,
                                      1);
                 sBerryFix->state = MAINSTATE_TRANSMIT;
             }
             break;
         case MAINSTATE_TRANSMIT:
-            if (TryScene(SCENE_TRANSMITTING)) 
+            if (TryScene(SCENE_TRANSMITTING))
             {
                 MultiBootMain(&sBerryFix->mb);
 
-                if (MultiBootCheckComplete(&sBerryFix->mb)) 
+                if (MultiBootCheckComplete(&sBerryFix->mb))
                     sBerryFix->state = MAINSTATE_EXIT;
-                else if (!(sBerryFix->mb.client_bit & 2)) 
+                else if (!(sBerryFix->mb.client_bit & 2))
                     sBerryFix->state = MAINSTATE_FAILED;
             }
             break;

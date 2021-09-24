@@ -384,18 +384,18 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
-    const u8 setBrailleFont[] = { 
-        EXT_CTRL_CODE_BEGIN, 
-        EXT_CTRL_CODE_SIZE, 
-        6, 
-        EOS 
+    const u8 setBrailleFont[] = {
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SIZE,
+        6,
+        EOS
     };
-    const u8 gotoLine2[] = { 
-        CHAR_NEWLINE, 
-        EXT_CTRL_CODE_BEGIN, 
-        EXT_CTRL_CODE_SHIFT_DOWN, 
-        2, 
-        EOS 
+    const u8 gotoLine2[] = {
+        CHAR_NEWLINE,
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SHIFT_DOWN,
+        2,
+        EOS
     };
 
     dest = StringCopy(dest, setBrailleFont);

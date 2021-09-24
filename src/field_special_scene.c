@@ -33,15 +33,15 @@ enum
 //. rodata
 static const s8 gTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 
-static const u8 sSSTidalSailEastMovementScript[] = 
+static const u8 sSSTidalSailEastMovementScript[] =
 {
-    MOVEMENT_ACTION_WALK_FAST_RIGHT, 
+    MOVEMENT_ACTION_WALK_FAST_RIGHT,
     MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 sSSTidalSailWestMovementScript[] = 
+static const u8 sSSTidalSailWestMovementScript[] =
 {
-    MOVEMENT_ACTION_WALK_FAST_LEFT, 
+    MOVEMENT_ACTION_WALK_FAST_LEFT,
     MOVEMENT_ACTION_STEP_END
 };
 

@@ -102,7 +102,7 @@ static const struct BgTemplate sConditionSearchResultBgTemplates[] =
     }
 };
 
-static const LoopedTask sSearchResultLoopTaskFuncs[] = 
+static const LoopedTask sSearchResultLoopTaskFuncs[] =
 {
     [CONDITION_SEARCH_FUNC_NONE]       = NULL,
     [CONDITION_SEARCH_FUNC_MOVE_UP]    = LoopedTask_MoveSearchListCursorUp,
@@ -113,7 +113,7 @@ static const LoopedTask sSearchResultLoopTaskFuncs[] =
     [CONDITION_SEARCH_FUNC_SELECT_MON] = LoopedTask_SelectSearchResult
 };
 
-static const struct WindowTemplate sSearchResultListMenuWindowTemplate = 
+static const struct WindowTemplate sSearchResultListMenuWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -664,7 +664,7 @@ static void PrintSearchResultListMenuItems(struct PokenavSub8 *searchList)
 static void InitConditionSearchListMenuTemplate(void)
 {
     struct PokenavListTemplate template;
-    
+
     template.list.monList = GetSearchResultsMonDataList();
     template.count = GetSearchResultsMonListCount();
     template.unk8 = 4;

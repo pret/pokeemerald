@@ -63,28 +63,28 @@ se_m_snore_2:
 	.byte		VOICE , 27
 	.byte		N01   , En2 , v052
 	.byte	W02
-	.byte		        Dn2 
+	.byte		        Dn2
 	.byte	W02
-	.byte		        En2 
+	.byte		        En2
 	.byte	W02
 	.byte	W01
-	.byte		        Dn2 
+	.byte		        Dn2
 	.byte	W02
-	.byte		        En2 
+	.byte		        En2
 	.byte	W03
 	.byte	W01
 	.byte		        En2 , v064
 	.byte	W02
-	.byte		        Gs2 
+	.byte		        Gs2
 	.byte	W03
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W02
-	.byte		        En2 
+	.byte		        En2
 	.byte	W02
-	.byte		        Gs2 
+	.byte		        Gs2
 	.byte	W02
 	.byte	W01
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W05
 	.byte	FINE
 

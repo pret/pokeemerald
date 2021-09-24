@@ -1149,12 +1149,12 @@ static const union AnimCmd *const sAnimTable_AshPuff[] =
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff = 
 {
-    .tileTag = TAG_NONE, 
-    .paletteTag = FLDEFF_PAL_TAG_ASH, 
-    .oam = &gObjectEventBaseOam_16x16, 
-    .anims = sAnimTable_AshPuff, 
-    .images = sPicTable_AshPuff, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_ASH,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_AshPuff,
+    .images = sPicTable_AshPuff,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_AshPuff
 };
 
@@ -1183,14 +1183,14 @@ static const union AnimCmd *const sAnimTable_AshLaunch[] =
     sAnim_AshLaunch,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch = 
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch =
 {
-    .tileTag = TAG_NONE, 
-    .paletteTag = FLDEFF_PAL_TAG_ASH, 
-    .oam = &gObjectEventBaseOam_16x16, 
-    .anims = sAnimTable_AshLaunch, 
-    .images = sPicTable_AshLaunch, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_ASH,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_AshLaunch,
+    .images = sPicTable_AshLaunch,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_AshLaunch
 };
 

@@ -20,7 +20,7 @@
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
 
-struct MirageTowerPulseBlend 
+struct MirageTowerPulseBlend
 {
     u8 taskId;
     struct PulseBlend pulseBlend;
@@ -764,7 +764,7 @@ static void UpdateDisintegrationEffect(u8* tiles, u16 randId, u8 c, u8 size, u8 
     col = width & 7;
     sDebug_DisintegrationData[2] = height & 7;
     sDebug_DisintegrationData[3] = width & 7;
-    
+
     widthTiles = width / 8;
     heightTiles = height / 8;
     sDebug_DisintegrationData[4] = width / 8;
@@ -772,11 +772,11 @@ static void UpdateDisintegrationEffect(u8* tiles, u16 randId, u8 c, u8 size, u8 
 
     var = (size / 8) * (heightTiles * 64) + (widthTiles * 64);
     sDebug_DisintegrationData[6] = var;
-    
+
     baseOffset = var + ((row * 8) + col);
     baseOffset /= 2;
     sDebug_DisintegrationData[7] = var + ((row * 8) + col);
-    
+
     flag = ((randId % 2) ^ 1);
     tileMask = (c << (flag << 2)) | 15 << (((flag ^ 1) << 2));
     tiles[baseOffset + (offset * 32)] &= tileMask;
