@@ -8056,16 +8056,20 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
     u16 targetSpecies = SPECIES_NONE;
     u16 originalSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[originalSpecies];
+
     if (formChanges == NULL)
         return SPECIES_NONE;
 
-    for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++) {
-        if (method == formChanges[i].method) {
+    for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+    {
+        if (method == formChanges[i].method)
+        {
             u32 ability = GetAbilityBySpecies(originalSpecies, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
             switch (method)
             {
             case FORM_ITEM_HOLD:
                 if (GetMonData(mon, MON_DATA_HELD_ITEM, NULL) == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
+                    targetSpecies = formChanges[i].targetSpecies;
                 break;
             case FORM_ITEM_USE: 
                 if (arg == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
@@ -8073,6 +8077,12 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                 break;
             case FORM_MOVE:
                 if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                    targetSpecies = formChanges[i].targetSpecies;
+                break;
+            case FORM_ITEM_USE_DAY:
+                RtcCalcLocalTime();
+                if (arg == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE)
+                 && (gLocalTime.hours >= 12 && gLocalTime.hours < 24))
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
             default:

@@ -5171,7 +5171,9 @@ bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE, gSpecialVar_ItemId);
+    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE_DAY, gSpecialVar_ItemId);
+    if (targetSpecies == SPECIES_NONE)
+        targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE, gSpecialVar_ItemId);
     if (targetSpecies != SPECIES_NONE)
     {
         gPartyMenuUseExitCallback = TRUE;

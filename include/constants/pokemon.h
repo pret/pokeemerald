@@ -354,6 +354,7 @@
 #define FORM_ITEM_USE         2
 #define FORM_MOVE             3
 #define FORM_WITHDRAW         4
+#define FORM_ITEM_USE_DAY     5
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL     0
