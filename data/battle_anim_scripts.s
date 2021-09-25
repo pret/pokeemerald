@@ -532,7 +532,7 @@ gBattleAnims_Moves::
 	.4byte Move_QUASH
 	.4byte Move_ACROBATICS
 	.4byte Move_REFLECT_TYPE
-	.4byte Move_RETALITATE
+	.4byte Move_RETALIATE
 	.4byte Move_FINAL_GAMBIT
 	.4byte Move_BESTOW
 	.4byte Move_INFERNO
@@ -5610,7 +5610,7 @@ Move_REFLECT_TYPE:
 	blendoff
 	end
 
-Move_RETALITATE:
+Move_RETALIATE:
 	loadspritegfx ANIM_TAG_CUT @Cut
 	monbg ANIM_DEF_PARTNER
 	setalpha 9, 8

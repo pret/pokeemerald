@@ -7778,7 +7778,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
-    case EFFECT_RETALITATE:
+    case EFFECT_RETALIATE:
         // todo
         break;
     case EFFECT_SOLARBEAM:
