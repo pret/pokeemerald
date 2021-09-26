@@ -6005,9 +6005,14 @@ BattleScript_GulpMissileGorging::
 	playanimation BS_ATTACKER, B_ANIM_GULP_MISSILE, NULL
 	waitanimation
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_GulpMissileNoDmgGorging
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+BattleScript_GulpMissileNoDmgGorging:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
 	waitanimation
@@ -6022,9 +6027,14 @@ BattleScript_GulpMissileGulping::
 	playanimation BS_ATTACKER, B_ANIM_GULP_MISSILE, NULL
 	waitanimation
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_GulpMissileNoDmgGulping
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+BattleScript_GulpMissileNoDmgGulping:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
 	waitanimation

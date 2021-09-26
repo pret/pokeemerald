@@ -24398,18 +24398,16 @@ General_TotemFlare::
 	clearmonbg ANIM_ATTACKER
 	end
 
-General_GulpMissile: @ Modified Tackle anim (placeholder)
+General_GulpMissile: @ Tackle anim (placeholder)
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
-	createsprite gHorizontalLungeSpriteTemplate, ANIM_TARGET, 2, 4, 4
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
 	delay 6
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, ANIM_ATTACKER, 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_ATTACKER, 2
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 3, 0, 6, 1
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	waitforvisualfinish
-	delay 10
-	playse SE_EFFECTIVE
 	clearmonbg ANIM_ATTACKER
 	blendoff
 	end
