@@ -17,6 +17,10 @@ FORM_MOVE:
 FORM_WITHDRAW:
     Form change activates when the Pokemon is withdrawn from the PC or Daycare.
     no parameters
+
+FORM_ITEM_USE_DAY:
+    Same as FORM_ITEM_USE, but only works during day time.
+    Used by Shaymin's Gracidea-based form change.
 */
 
 #define WHEN_LEARNED    FALSE
@@ -28,7 +32,7 @@ static const struct FormChange sGiratinaFormChangeTable[] = {
 };
 
 static const struct FormChange sShayminFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA},
+    {FORM_ITEM_USE_DAY, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA},
     {FORM_CHANGE_END},
 };
 
