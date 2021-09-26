@@ -6032,7 +6032,7 @@ BattleScript_GulpMissileGulping::
 	setgraphicalstatchangevalues
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
-	printstring STRINGID_PKMNSSTATCHANGED
+	printstring STRINGID_ATTACKERSSTATROSE
 	waitmessage 0x40
 	return
 
