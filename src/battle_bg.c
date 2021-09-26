@@ -1118,8 +1118,8 @@ void InitLinkBattleVsScreen(u8 taskId)
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.tileNum += 0x40;
             gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[0] = 0;
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[0] = 1;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_V].pos1.x;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_S].pos1.x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_V].x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_S].x;
             gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[2] = 0;
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[2] = 0;
         }
@@ -1422,7 +1422,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
 
 void DrawTerrainTypeBattleBackground(void)
 {
-    switch (gFieldStatuses & STATUS_TERRAIN_ANY)
+    switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
     {
     case STATUS_FIELD_GRASSY_TERRAIN:
         LoadMoveBg(BG_GRASSY_TERRAIN);

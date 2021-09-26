@@ -243,36 +243,36 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 53;
-            sprite->pos1.y = 68;
+            sprite->x = 53;
+            sprite->y = 68;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 86;
-            sprite->pos1.y = 68;
+            sprite->x = 86;
+            sprite->y = 68;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 101;
-            sprite->pos1.y = 68;
+            sprite->x = 101;
+            sprite->y = 68;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 116;
-            sprite->pos1.y = 68;
+            sprite->x = 116;
+            sprite->y = 68;
             break;
         case SELECTION_CONFIRM:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_RIGHT;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 153;
-            sprite->pos1.y = 80;
+            sprite->x = 153;
+            sprite->y = 80;
             break;
         case SELECTION_NONE:
             DestroySprite(sprite);
@@ -293,29 +293,29 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 53;
-            sprite->pos1.y = 92;
+            sprite->x = 53;
+            sprite->y = 92;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 86;
-            sprite->pos1.y = 92;
+            sprite->x = 86;
+            sprite->y = 92;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 101;
-            sprite->pos1.y = 92;
+            sprite->x = 101;
+            sprite->y = 92;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 116;
-            sprite->pos1.y = 92;
+            sprite->x = 116;
+            sprite->y = 92;
             break;
         case SELECTION_CONFIRM:
             // The up arrow is used as a right arrow when Confirm is selected
