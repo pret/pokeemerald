@@ -1764,11 +1764,63 @@
 	various BS_ATTACKER, VARIOUS_TOTEM_BOOST
 	.4byte \ptr
 	.endm
-
+	
 	.macro tryactivategrimneigh, battler:req
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
 
+	.macro activateitemeffects battler:req
+	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
+	.endm
+	
+	.macro pickpocketsteal
+	various 0, VARIOUS_PICKPOCKET
+	.endm
+	
+	.macro doterrainseed battler:req, ptr:req
+	various \battler, VARIOUS_TERRAIN_SEED
+	.4byte \ptr
+	.endm
+	
+	.macro makeinvisible battler:req
+	various \battler, VARIOUS_MAKE_INVISIBLE
+	.endm
+	
+	.macro tryroomservice battler:req, ptr:req
+	various \battler, VARIOUS_ROOM_SERVICE
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifterrainaffected battler:req, terrainFlags:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_TERRAIN_AFFECTED
+	.4byte \terrainFlags
+	.4byte \ptr
+	.endm
+
+	.macro jumpifpranksterblocked battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_PRANKSTER_BLOCKED
+	.4byte \ptr
+	.endm
+
+	.macro eeriespellppreduce ptr:req
+	various BS_TARGET, VARIOUS_EERIE_SPELL_PP_REDUCE
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifteamhealthy battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_TEAM_HEALTHY
+	.4byte \ptr
+	.endm
+	
+	.macro tryhealquarterhealth battler:req, ptr:req
+	various \battler, VARIOUS_TRY_HEAL_QUARTER_HP
+	.4byte \ptr
+	.endm
+	
+	.macro removeterrain
+	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
