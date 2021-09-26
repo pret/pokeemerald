@@ -3666,7 +3666,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
-            case HOLD_EFFECT_CURE_ATTRACT:
+            case HOLD_EFFECT_MENTAL_HERB:
                 if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
                 {
                     gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
@@ -3769,7 +3769,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
-            case HOLD_EFFECT_CURE_ATTRACT:
+            case HOLD_EFFECT_MENTAL_HERB:
                 if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
                 {
                     gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
