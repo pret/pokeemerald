@@ -5063,9 +5063,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             break;
         case ABILITY_GULP_MISSILE:
             if ((effect = ShouldChangeFormHpBased(gBattlerAttacker))
-             && (gCurrentMove == MOVE_SURF || gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER)
-             && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(gBattlerAttacker))
+             && ((gCurrentMove == MOVE_SURF && TARGET_TURN_DAMAGED) || gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER)
+             && IsBattlerAlive(gBattlerTarget))
             {
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
