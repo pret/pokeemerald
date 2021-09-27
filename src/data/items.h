@@ -1852,7 +1852,7 @@ const struct Item gItems[] =
         .name = _("Sitrus Berry"),
         .itemId = ITEM_SITRUS_BERRY,
         .price = 20,
-        #if I_SITRUS_BERRY_HEAL >= GEN 4
+        #if I_SITRUS_BERRY_HEAL >= GEN_4
             .holdEffect = HOLD_EFFECT_RESTORE_PCT_HP,
             .holdEffectParam = 25,
         #else
