@@ -1852,8 +1852,13 @@ const struct Item gItems[] =
         .name = _("Sitrus Berry"),
         .itemId = ITEM_SITRUS_BERRY,
         .price = 20,
-        .holdEffect = HOLD_EFFECT_RESTORE_HP,
-        .holdEffectParam = 30,
+        #if I_SITRUS_BERRY_HEAL >= GEN 4
+            .holdEffect = HOLD_EFFECT_RESTORE_PCT_HP,
+            .holdEffectParam = 25,
+        #else
+            .holdEffect = HOLD_EFFECT_RESTORE_HP,
+            .holdEffectParam = 30,
+        #endif
         .description = sSitrusBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
