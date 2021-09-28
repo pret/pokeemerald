@@ -4985,44 +4985,39 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_GULP_MISSILE:
-            gBattlerAttacker = battler;
-            gBattlerTarget = BATTLE_OPPOSITE(battler);
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(gBattlerAttacker)
-             && gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
+             && TARGET_TURN_DAMAGED)
             {
-                gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
-                gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
-                if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
                 {
-                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
+                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
+                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
+                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                    {
+                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                    }
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
+                    effect++;
                 }
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
-                effect++;
-            }
-            else if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(gBattlerAttacker)
-             && gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
-            {
-                gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
-                gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
-                if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                else if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
                 {
-                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
+                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
+                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
+                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                    {
+                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                    }
+                    SET_STATCHANGER(STAT_DEF, 1, TRUE);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
+                    effect++;
                 }
-                SET_STATCHANGER(STAT_DEF, 1, TRUE);
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
-                effect++;
             }
             break;
         }
