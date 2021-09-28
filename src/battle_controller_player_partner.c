@@ -1509,7 +1509,37 @@ static void PlayerPartnerHandlePrintSelectionString(void)
 
 static void PlayerPartnerHandleChooseAction(void)
 {
-    AI_TrySwitchOrUseItem();
+    u8 chosenMoveId;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+
+    BattleAI_SetupAIData(0xF);
+    chosenMoveId = BattleAI_ChooseMoveOrAction();
+
+    switch (chosenMoveId)
+    {
+    case AI_CHOICE_USE_ITEM:
+        BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
+        break;
+    case AI_CHOICE_SWITCH:
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+        break;
+    default:
+        if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
+            gBattlerTarget = gActiveBattler;
+        if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+        {
+            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+                gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        }
+
+        if (CanMegaEvolve(gActiveBattler)) // If partner can mega evolve, do it.
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+        else
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (gBattlerTarget << 8));
+        break;
+    }
+    
     PlayerPartnerBufferExecCompleted();
 }
 
@@ -1520,25 +1550,6 @@ static void PlayerPartnerHandleYesNoBox(void)
 
 static void PlayerPartnerHandleChooseMove(void)
 {
-    u8 chosenMoveId;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
-
-    BattleAI_SetupAIData(0xF);
-    chosenMoveId = BattleAI_ChooseMoveOrAction();
-
-    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
-        gBattlerTarget = gActiveBattler;
-    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
-    {
-        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-    }
-
-    if (CanMegaEvolve(gActiveBattler)) // If partner can mega evolve, do it.
-        BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
-    else
-        BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (gBattlerTarget << 8));
     PlayerPartnerBufferExecCompleted();
 }
 

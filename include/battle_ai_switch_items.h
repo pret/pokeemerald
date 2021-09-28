@@ -32,7 +32,7 @@ enum {
 };
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId);
-void AI_TrySwitchOrUseItem(void);
+u8 AI_TrySwitchOrUseItem(u8 currAction);
 u8 GetMostSuitableMonToSwitchInto(void);
 bool32 ShouldSwitch(void);
 

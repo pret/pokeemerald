@@ -1545,45 +1545,32 @@ static void OpponentHandlePrintSelectionString(void)
 
 static void OpponentHandleChooseAction(void)
 {
-    AI_TrySwitchOrUseItem();
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleYesNoBox(void)
-{
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleChooseMove(void)
-{
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
-        BtlController_EmitTwoReturnValues(1, 10, ChooseMoveAndTargetInBattlePalace());
-        OpponentBufferExecCompleted();
+        BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, ChooseMoveAndTargetInBattlePalace());
     }
     else
     {
         u8 chosenMoveId;
         struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
-
+        
         if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
         {
             BattleAI_SetupAIData(0xF);
             chosenMoveId = BattleAI_ChooseMoveOrAction();
-
             switch (chosenMoveId)
             {
+            case AI_CHOICE_USE_ITEM:
+                BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
+                break;
+            case AI_CHOICE_SWITCH:
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+                break;
             case AI_CHOICE_WATCH:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
                 break;
             case AI_CHOICE_FLEE:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
-                break;
-            case AI_CHOICE_SWITCH:
-                BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
-                break;
-            case 6:
-                BtlController_EmitTwoReturnValues(1, 15, gBattlerTarget);
                 break;
             default:
                 if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
@@ -1594,15 +1581,16 @@ static void OpponentHandleChooseMove(void)
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
-                if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
-                    BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
-                else
-                    BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (gBattlerTarget << 8));
+                
+                if (CanMegaEvolve(gActiveBattler)) { // If opponent can mega evolve, do it.
+                    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+                } else {
+                    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (gBattlerTarget << 8));
+                }
                 break;
             }
-            OpponentBufferExecCompleted();
         }
-        else
+        else    // Wild pokemon - use random move
         {
             u16 move;
             do
@@ -1612,15 +1600,27 @@ static void OpponentHandleChooseMove(void)
             } while (move == MOVE_NONE);
 
             if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (gActiveBattler << 8));
+                BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (gActiveBattler << 8));
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));
+                BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));
             else
-                BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
-
-            OpponentBufferExecCompleted();
+                BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
         }
     }
+    
+    OpponentBufferExecCompleted();
+}
+
+static void OpponentHandleYesNoBox(void)
+{
+    OpponentBufferExecCompleted();
+}
+
+static void OpponentHandleChooseMove(void)
+{
+    u8 *bufferB = gBattleResources->bufferB[gActiveBattler];
+    BtlController_EmitTwoReturnValues(1, 10, bufferB[2] | (bufferB[3] << 8));
+    OpponentBufferExecCompleted();
 }
 
 static void OpponentHandleChooseItem(void)
