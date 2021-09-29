@@ -569,6 +569,7 @@ EWRAM_DATA static bool8 sIsMonBeingMoved = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sAutoActionOn = 0;
+EWRAM_DATA static bool8 sJustOpenedBag = 0;
 
 // Main tasks
 static void EnterPokeStorage(u8);
@@ -3100,6 +3101,7 @@ static void Task_TakeItemForMoving(u8 taskId)
         StartCursorAnim(CURSOR_ANIM_OPEN);
         TakeItemFromMon(sInPartyMenu ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetCursorPosition());
         sStorage->state++;
+        sJustOpenedBag = FALSE;
         break;
     case 2:
         if (!IsItemIconAnimActive())
@@ -3619,6 +3621,7 @@ static void Task_GiveItemFromBag(u8 taskId)
             sWhichToReshow = SCREEN_CHANGE_ITEM_FROM_BAG - 1;
             sStorage->screenChangeType = SCREEN_CHANGE_ITEM_FROM_BAG;
             SetPokeStorageTask(Task_ChangeScreen);
+            sJustOpenedBag = TRUE;
         }
         break;
     }
@@ -6968,8 +6971,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         if (sStorage->displayMonSpecies == SPECIES_NIDORAN_F || sStorage->displayMonSpecies == SPECIES_NIDORAN_M)
             gender = MON_GENDERLESS;
-        
-        SetMonFormPSS(pokemon);
 
         StringCopyPadded(sStorage->displayMonNameText, sStorage->displayMonName, CHAR_SPACE, 5);
 
@@ -7019,6 +7020,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             StringCopyPadded(sStorage->displayMonItemName, ItemId_GetName(sStorage->displayMonItemId), CHAR_SPACE, 8);
         else
             StringFill(sStorage->displayMonItemName, CHAR_SPACE, 8);
+        SetMonFormPSS(pokemon);
     }
 }
 
@@ -10110,15 +10112,19 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     LoadDisplayMonGfx(species, pid);
 
     // Recreate icon sprite
-    if (sInPartyMenu)
+    if (!sJustOpenedBag)
     {
-        DestroyAllPartyMonIcons();
-        CreatePartyMonsSprites(TRUE);
+        if (sInPartyMenu)
+        {
+            DestroyAllPartyMonIcons();
+            CreatePartyMonsSprites(TRUE);
+        }
+        else
+        {
+            DestroyBoxMonIcon(sStorage->boxMonsSprites[sCursorPosition]);
+            CreateBoxMonIconAtPos(sCursorPosition);
+            SetBoxMonIconObjMode(sCursorPosition, GetMonData(boxMon, MON_DATA_HELD_ITEM) == ITEM_NONE);
+        }
     }
-    else
-    {
-        DestroyBoxMonIcon(sStorage->boxMonsSprites[sCursorPosition]);
-        CreateBoxMonIconAtPos(sCursorPosition);
-        SetBoxMonIconObjMode(sCursorPosition, GetMonData(boxMon, MON_DATA_HELD_ITEM) == ITEM_NONE);
-    }
+    sJustOpenedBag = FALSE;
 }
