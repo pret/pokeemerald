@@ -870,6 +870,10 @@ static void UnkUtil_Run(void);
 static void UnkUtil_CpuRun(struct UnkUtilData *);
 static void UnkUtil_DmaRun(struct UnkUtilData *);
 
+// Form changing
+void SetArceusFormPSS(struct BoxPokemon *boxMon);
+void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
+
 struct {
     const u8 *text;
     const u8 *desc;
@@ -6866,6 +6870,34 @@ static void ReshowDisplayMon(void)
         TryRefreshDisplayMon();
 }
 
+void SetArceusFormPSS(struct BoxPokemon *boxMon)
+{
+    u16 species = GetMonData(boxMon, MON_DATA_SPECIES);
+    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        //PlayCry2(targetSpecies, 0, 0x7D, 0xA);
+        SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);
+        UpdateSpeciesSpritePSS(boxMon);
+    }
+    /*
+#ifdef POKEMON_EXPANSION
+    u16 species = GetMonData(boxMon, MON_DATA_SPECIES);
+    u16 forme;
+    u8 abilityNum = GetMonData(boxMon, MON_DATA_ABILITY_NUM);
+    u16 ability = GetAbilityBySpecies(species, abilityNum);
+
+    if (GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS
+     && ability == ABILITY_MULTITYPE)
+    {
+        forme = GetArceusFormPSS(boxMon);
+        SetBoxMonData(boxMon, MON_DATA_SPECIES, &forme);
+        UpdateSpeciesSpritePSS(boxMon);
+    }
+#endif
+*/
+}
+
 static void SetDisplayMonData(void *pokemon, u8 mode)
 {
     u8 *txtPtr;
@@ -6952,6 +6984,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         if (sStorage->displayMonSpecies == SPECIES_NIDORAN_F || sStorage->displayMonSpecies == SPECIES_NIDORAN_M)
             gender = MON_GENDERLESS;
+        
+        SetArceusFormPSS(pokemon);
 
         StringCopyPadded(sStorage->displayMonNameText, sStorage->displayMonName, CHAR_SPACE, 5);
 
@@ -10077,4 +10111,16 @@ static void UnkUtil_DmaRun(struct UnkUtilData *data)
         Dma3FillLarge16_(0, data->dest, data->size);
         data->dest += 64;
     }
+}
+
+void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
+{
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+    u32 pid = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
+
+    // Update front sprite
+    sStorage->displayMonSpecies = species;
+    sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(species, otId, pid);
+    LoadDisplayMonGfx(species, pid);
 }

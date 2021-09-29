@@ -8049,12 +8049,17 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
     return targetFormId;
 }
 
-// returns SPECIES_NONE if no form change is possible
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
+{
+    return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
+}
+
+// returns SPECIES_NONE if no form change is possible
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg) 
 {
     u32 i;
     u16 targetSpecies = SPECIES_NONE;
-    u16 originalSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 originalSpecies = GetBoxMonData(mon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[originalSpecies];
 
     if (formChanges == NULL)
@@ -8064,11 +8069,11 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
     {
         if (method == formChanges[i].method)
         {
-            u32 ability = GetAbilityBySpecies(originalSpecies, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+            u32 ability = GetAbilityBySpecies(originalSpecies, GetBoxMonData(mon, MON_DATA_ABILITY_NUM, NULL));
             switch (method)
             {
             case FORM_ITEM_HOLD:
-                if (GetMonData(mon, MON_DATA_HELD_ITEM, NULL) == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
+                if (GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL) == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
             case FORM_ITEM_USE: 
@@ -8076,7 +8081,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
             case FORM_MOVE:
-                if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                if (BoxMonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
             case FORM_ITEM_USE_DAY:
