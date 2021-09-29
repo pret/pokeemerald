@@ -27,6 +27,7 @@ FORM_ITEM_USE_DAY:
 #define WHEN_FORGOTTEN  TRUE
 
 static const struct FormChange sGiratinaFormChangeTable[] = {
+    {FORM_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
     {FORM_CHANGE_END},
 };
