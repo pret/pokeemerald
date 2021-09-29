@@ -10120,6 +10120,7 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     u32 pid = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
 
     // Update front sprite
+    StartDisplayMonMosaicEffect();
     sStorage->displayMonSpecies = species;
     sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(species, otId, pid);
     LoadDisplayMonGfx(species, pid);
