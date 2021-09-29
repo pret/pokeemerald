@@ -871,7 +871,7 @@ static void UnkUtil_CpuRun(struct UnkUtilData *);
 static void UnkUtil_DmaRun(struct UnkUtilData *);
 
 // Form changing
-void SetArceusFormPSS(struct BoxPokemon *boxMon);
+void SetMonFormPSS(struct BoxPokemon *boxMon);
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
 
 struct {
@@ -6870,7 +6870,7 @@ static void ReshowDisplayMon(void)
         TryRefreshDisplayMon();
 }
 
-void SetArceusFormPSS(struct BoxPokemon *boxMon)
+void SetMonFormPSS(struct BoxPokemon *boxMon)
 {
     u16 species = GetMonData(boxMon, MON_DATA_SPECIES);
     u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
@@ -6969,7 +6969,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         if (sStorage->displayMonSpecies == SPECIES_NIDORAN_F || sStorage->displayMonSpecies == SPECIES_NIDORAN_M)
             gender = MON_GENDERLESS;
         
-        SetArceusFormPSS(pokemon);
+        SetMonFormPSS(pokemon);
 
         StringCopyPadded(sStorage->displayMonNameText, sStorage->displayMonName, CHAR_SPACE, 5);
 
