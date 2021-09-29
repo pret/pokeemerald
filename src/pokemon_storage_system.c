@@ -6880,22 +6880,6 @@ void SetArceusFormPSS(struct BoxPokemon *boxMon)
         SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);
         UpdateSpeciesSpritePSS(boxMon);
     }
-    /*
-#ifdef POKEMON_EXPANSION
-    u16 species = GetMonData(boxMon, MON_DATA_SPECIES);
-    u16 forme;
-    u8 abilityNum = GetMonData(boxMon, MON_DATA_ABILITY_NUM);
-    u16 ability = GetAbilityBySpecies(species, abilityNum);
-
-    if (GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS
-     && ability == ABILITY_MULTITYPE)
-    {
-        forme = GetArceusFormPSS(boxMon);
-        SetBoxMonData(boxMon, MON_DATA_SPECIES, &forme);
-        UpdateSpeciesSpritePSS(boxMon);
-    }
-#endif
-*/
 }
 
 static void SetDisplayMonData(void *pokemon, u8 mode)
@@ -8589,7 +8573,7 @@ static void MultiMove_RemoveMonsFromBox(void)
         u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
         for (j = sMultiMove->minColumn; j < columnCount; j++)
         {
-            DestroyBoxMonIconAtPosition(boxPosition);
+            DestroyBoxMonIconAtPosition(boxPosition);//bookmark
             ZeroBoxMonAt(boxId, boxPosition);
             boxPosition++;
         }
@@ -10126,33 +10110,15 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     LoadDisplayMonGfx(species, pid);
 
     // Recreate icon sprite
-    //DestroyPartyMonIcon(sCursorPosition);
     if (sInPartyMenu)
     {
-        /*
+        DestroyAllPartyMonIcons();
         CreatePartyMonsSprites(TRUE);
-        if (GetMonData(&boxMon, MON_DATA_HELD_ITEM) == ITEM_NONE)
-            SetPartyMonIconObjMode(sCursorPosition, 1);
-        else
-            SetBoxMonIconObjMode(sCursorPosition, 0);
-        */
     }
     else
     {
         DestroyBoxMonIcon(sStorage->boxMonsSprites[sCursorPosition]);
         CreateBoxMonIconAtPos(sCursorPosition);
         SetBoxMonIconObjMode(sCursorPosition, GetMonData(boxMon, MON_DATA_HELD_ITEM) == ITEM_NONE);
-        
     }
-    //
-    /*
-    sStorage->boxMonsSprites[sCursorPosition] = CreateMonIconSprite(sStorage->boxSpecies[sCursorPosition],
-                                                                            sStorage->boxPersonalities[sCursorPosition],
-                                                                            x, y, 2, subpriority
-    sStorage->boxMonsSprites[sCursorPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (sCursorPosition % IN_BOX_COLUMNS));
-    */
-    //DestroyBoxMonIcon(sStorage->partySprites[i])
-    //sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
-    //DestroyBoxMonIconAtPosition(boxPosition);
-
 }
