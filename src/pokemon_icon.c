@@ -1278,7 +1278,7 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
 
     struct SpriteTemplate spriteTemplate =
     {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = iconTemplate->paletteTag,
         .oam = iconTemplate->oam,
         .anims = iconTemplate->anims,

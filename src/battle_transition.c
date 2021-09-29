@@ -748,7 +748,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_Pokeball[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_POKEBALL,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_Pokeball,
@@ -797,7 +797,7 @@ static const union AnimCmd *const sSpriteAnimTable_UnusedBrendanLass[] =
 
 static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = 0x100A,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
@@ -808,7 +808,7 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 
 static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = 0x100A,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,

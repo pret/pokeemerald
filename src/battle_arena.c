@@ -453,7 +453,7 @@ static const union AnimCmd *const sJudgementIconAnimCmds[] =
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
     .tileTag = TAG_JUDGEMENT_ICON,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sJudgementIconOamData,
     .anims = sJudgementIconAnimCmds,
     .images = NULL,

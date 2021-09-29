@@ -1915,7 +1915,7 @@ static const u8 sHoldEffectToType[][2] =
 const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
     [B_POSITION_PLAYER_LEFT] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -1924,7 +1924,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [B_POSITION_OPPONENT_LEFT] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL,
@@ -1933,7 +1933,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
         .callback = SpriteCb_WildMon,
     },
     [B_POSITION_PLAYER_RIGHT] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -1942,7 +1942,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [B_POSITION_OPPONENT_RIGHT] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL,
@@ -1955,7 +1955,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
 static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 {
     [TRAINER_BACK_PIC_BRENDAN] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -1964,7 +1964,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_MAY] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -1973,7 +1973,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_RED] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -1982,7 +1982,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_LEAF] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -1991,7 +1991,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -2000,7 +2000,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -2009,7 +2009,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_WALLY] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -2018,7 +2018,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
     [TRAINER_BACK_PIC_STEVEN] = {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
@@ -2103,8 +2103,8 @@ static const struct OamData sOamData_8329F20 =
 
 static const struct SpriteTemplate gUnknown_08329F28 =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_8329F20,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
