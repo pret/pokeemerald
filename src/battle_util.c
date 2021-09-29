@@ -2491,7 +2491,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     case WEATHER_SANDSTORM:
                         if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                         {
-                            gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
+                            gBattleWeather = WEATHER_SANDSTORM_ANY;
                             gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                             gBattleScripting.battler = battler;
                             effect++;
@@ -2500,7 +2500,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     case WEATHER_DROUGHT:
                         if (!(gBattleWeather & WEATHER_SUN_ANY))
                         {
-                            gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
+                            gBattleWeather = WEATHER_SUN_ANY;
                             gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
                             gBattleScripting.battler = battler;
                             effect++;
@@ -2526,7 +2526,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITY_SAND_STREAM:
                 if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT))
                 {
-                    gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
+                    gBattleWeather = WEATHER_SANDSTORM_ANY;
                     BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -2535,7 +2535,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITY_DROUGHT:
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT))
                 {
-                    gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
+                    gBattleWeather = WEATHER_SUN_ANY;
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
                     gBattleScripting.battler = battler;
                     effect++;
