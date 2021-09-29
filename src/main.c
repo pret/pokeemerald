@@ -57,7 +57,7 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-static u16 gUnknown_03000000;
+static u16 sUnusedVar; // Never read
 
 u16 gKeyRepeatStartDelay;
 bool8 gLinkTransferringData;
@@ -117,7 +117,7 @@ void AgbMain()
         SetMainCallback2(NULL);
 
     gLinkTransferringData = FALSE;
-    gUnknown_03000000 = 0xFC0;
+    sUnusedVar = 0xFC0;
 
     for (;;)
     {

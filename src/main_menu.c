@@ -170,7 +170,7 @@
 
 // Static RAM declarations
 
-static EWRAM_DATA u8 gUnknown_02022D04 = 0;
+static EWRAM_DATA bool8 sStartedPokeBallTask = 0;
 static EWRAM_DATA u16 sCurrItemAndOptionMenuCheck = 0;
 
 static u8 sBirchSpeechMainTaskId;
@@ -201,7 +201,7 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8, u8);
 static void NewGameBirchSpeech_ClearWindow(u8);
 static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8);
 static void Task_NewGameBirchSpeech_MainSpeech(u8);
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a);
+static void NewGameBirchSpeech_WaitForThisIsPokemonText(struct TextPrinterTemplate *printer, u16 a);
 static void Task_NewGameBirchSpeech_AndYouAre(u8);
 static void Task_NewGameBirchSpeechSub_WaitForLotad(u8);
 static void Task_NewGameBirchSpeech_StartBirchLotadPlatformFade(u8);
@@ -1348,7 +1348,7 @@ static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8 taskId)
     {
         gTasks[taskId].func = Task_NewGameBirchSpeech_MainSpeech;
         StringExpandPlaceholders(gStringVar4, gText_ThisIsAPokemon);
-        AddTextPrinterWithCallbackForMessage(1, NewGameBirchSpeech_ShowPokeBallPrinterCallback);
+        AddTextPrinterWithCallbackForMessage(1, NewGameBirchSpeech_WaitForThisIsPokemonText);
         sBirchSpeechMainTaskId = taskId;
     }
 }
@@ -1411,7 +1411,7 @@ static void Task_NewGameBirchSpeech_AndYouAre(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
-        gUnknown_02022D04 = 0;
+        sStartedPokeBallTask = FALSE;
         StringExpandPlaceholders(gStringVar4, gText_Birch_AndYouAre);
         AddTextPrinterForMessage(1);
         gTasks[taskId].func = Task_NewGameBirchSpeech_StartBirchLotadPlatformFade;
@@ -2250,21 +2250,21 @@ static void NewGameBirchSpeech_ClearWindow(u8 windowId)
     CopyWindowToVram(windowId, 2);
 }
 
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a)
+static void NewGameBirchSpeech_WaitForThisIsPokemonText(struct TextPrinterTemplate *printer, u16 a)
 {
-    if (*(printer->currentChar - 2) == 8 && gUnknown_02022D04 == 0)
+    // Wait for Birch's "This is a Pokémon" text to reach the pause
+    // Then start the PokéBall release (if it hasn't been started already)
+    if (*(printer->currentChar - 2) == EXT_CTRL_CODE_PAUSE && !sStartedPokeBallTask)
     {
-        gUnknown_02022D04 = 1;
+        sStartedPokeBallTask = TRUE;
         CreateTask(Task_NewGameBirchSpeechSub_InitPokeBall, 0);
     }
 }
 
-void CreateYesNoMenuParameterized(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
+void CreateYesNoMenuParameterized(u8 x, u8 y, u16 baseTileNum, u16 baseBlock, u8 yesNoPalNum, u8 winPalNum)
 {
-    struct WindowTemplate sp;
-
-    sp = CreateWindowTemplate(0, a + 1, b + 1, 5, 4, f, d);
-    CreateYesNoMenu(&sp, c, e, 0);
+    struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, 5, 4, winPalNum, baseBlock);
+    CreateYesNoMenu(&template, baseTileNum, yesNoPalNum, 0);
 }
 
 static void NewGameBirchSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)

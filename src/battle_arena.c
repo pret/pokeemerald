@@ -917,7 +917,7 @@ void DrawArenaRefereeTextBox(void)
     FillBgTilemapBufferRect(0, 0x836, 29, 19, 1,  1, palNum);
 }
 
-void RemoveArenaRefereeTextBox(void)
+void EraseArenaRefereeTextBox(void)
 {
     u8 width;
     u8 height;
