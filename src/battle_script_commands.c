@@ -1079,7 +1079,7 @@ static bool8 AccuracyCalcHelper(u16 move)
 
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
 
-    if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && gBattleMoves[move].effect == EFFECT_THUNDER)
+    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)
      || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
     {
         JumpIfMoveFailed(7, move);
@@ -1136,7 +1136,7 @@ static void Cmd_accuracycheck(void)
 
         moveAcc = gBattleMoves[move].accuracy;
         // check Thunder on sunny weather
-        if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY && gBattleMoves[move].effect == EFFECT_THUNDER)
+        if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && gBattleMoves[move].effect == EFFECT_THUNDER)
             moveAcc = 50;
 
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
@@ -1144,7 +1144,7 @@ static void Cmd_accuracycheck(void)
 
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_COMPOUND_EYES)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
-        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & WEATHER_SANDSTORM_ANY)
+        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
             calc = (calc * 80) / 100; // 1.2 hustle loss
@@ -2342,7 +2342,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_FREEZE:
-            if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
+            if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN)
                 noSunCanFreeze = FALSE;
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_ICE))
                 break;
@@ -6617,14 +6617,14 @@ static void Cmd_trymirrormove(void)
 
 static void Cmd_setrain(void)
 {
-    if (gBattleWeather & WEATHER_RAIN_ANY)
+    if (gBattleWeather & B_WEATHER_RAIN)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
     }
     else
     {
-        gBattleWeather = WEATHER_RAIN_TEMPORARY;
+        gBattleWeather = B_WEATHER_RAIN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
         gWishFutureKnock.weatherDuration = 5;
     }
@@ -7481,14 +7481,14 @@ static void Cmd_damagetohalftargethp(void) // super fang
 
 static void Cmd_setsandstorm(void)
 {
-    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+    if (gBattleWeather & B_WEATHER_SANDSTORM)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
     }
     else
     {
-        gBattleWeather = WEATHER_SANDSTORM_TEMPORARY;
+        gBattleWeather = B_WEATHER_SANDSTORM_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
         gWishFutureKnock.weatherDuration = 5;
     }
@@ -7499,7 +7499,7 @@ static void Cmd_weatherdamage(void)
 {
     if (WEATHER_HAS_EFFECT)
     {
-        if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+        if (gBattleWeather & B_WEATHER_SANDSTORM)
         {
             if (gBattleMons[gBattlerAttacker].type1 != TYPE_ROCK
                 && gBattleMons[gBattlerAttacker].type1 != TYPE_STEEL
@@ -7520,7 +7520,7 @@ static void Cmd_weatherdamage(void)
                 gBattleMoveDamage = 0;
             }
         }
-        if (gBattleWeather & WEATHER_HAIL_ANY)
+        if (gBattleWeather & B_WEATHER_HAIL)
         {
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
@@ -8104,7 +8104,7 @@ static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a c
 {
     // first argument is unused
     if (gBattleMoves[move].effect == EFFECT_SOLARBEAM
-        && (gBattleWeather & WEATHER_SUN_ANY))
+        && (gBattleWeather & B_WEATHER_SUN))
         return 2;
 
     if (gBattleMoves[move].effect == EFFECT_SKULL_BASH
@@ -8638,14 +8638,14 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
 
 static void Cmd_setsunny(void)
 {
-    if (gBattleWeather & WEATHER_SUN_ANY)
+    if (gBattleWeather & B_WEATHER_SUN)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
     }
     else
     {
-        gBattleWeather = WEATHER_SUN_TEMPORARY;
+        gBattleWeather = B_WEATHER_SUN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
         gWishFutureKnock.weatherDuration = 5;
     }
@@ -8739,7 +8739,7 @@ static void Cmd_recoverbasedonsunlight(void)
     {
         if (gBattleWeather == 0 || !WEATHER_HAS_EFFECT)
             gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
-        else if (gBattleWeather & WEATHER_SUN_ANY)
+        else if (gBattleWeather & B_WEATHER_SUN)
             gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
         else // not sunny weather
             gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
@@ -8920,14 +8920,14 @@ static void Cmd_setminimize(void)
 
 static void Cmd_sethail(void)
 {
-    if (gBattleWeather & WEATHER_HAIL_ANY)
+    if (gBattleWeather & B_WEATHER_HAIL)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
     }
     else
     {
-        gBattleWeather = WEATHER_HAIL;
+        gBattleWeather = B_WEATHER_HAIL_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_HAIL;
         gWishFutureKnock.weatherDuration = 5;
     }
@@ -9640,15 +9640,15 @@ static void Cmd_setweatherballtype(void)
 {
     if (WEATHER_HAS_EFFECT)
     {
-        if (gBattleWeather & WEATHER_ANY)
+        if (gBattleWeather & B_WEATHER_ANY)
             gBattleScripting.dmgMultiplier = 2;
-        if (gBattleWeather & WEATHER_RAIN_ANY)
+        if (gBattleWeather & B_WEATHER_RAIN)
             *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | 0x80;
-        else if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+        else if (gBattleWeather & B_WEATHER_SANDSTORM)
             *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | 0x80;
-        else if (gBattleWeather & WEATHER_SUN_ANY)
+        else if (gBattleWeather & B_WEATHER_SUN)
             *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | 0x80;
-        else if (gBattleWeather & WEATHER_HAIL_ANY)
+        else if (gBattleWeather & B_WEATHER_HAIL)
             *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | 0x80;
         else
             *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | 0x80;
