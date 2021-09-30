@@ -6012,7 +6012,8 @@ BattleScript_GulpMissileGorging::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, FALSE, NULL
-	jumpifbyteequal gBattlerFainted, gBattlerAttacker, BattleScript_GulpMissileNoSecondEffectGorging
+	getbattlerfainted BS_ATTACKER
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
 BattleScript_GulpMissileNoDmgGorging:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
@@ -6040,25 +6041,30 @@ BattleScript_GulpMissileGulping::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, FALSE, NULL
-	jumpifbyteequal gBattlerFainted, gBattlerAttacker, BattleScript_GulpMissileNoSecondEffectGulping
-	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileGulpingRet
+	getbattlerfainted BS_ATTACKER
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_WHITE_SMOKE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_FLOWER_VEIL, BattleScript_GulpMissileNoSecondEffectGulping
 BattleScript_GulpMissileNoDmgGulping:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
 	waitanimation
+	playstatchangeanimation BS_ATTACKER, BIT_DEF, STAT_CHANGE_CANT_PREVENT | STAT_CHANGE_NEGATIVE
 	setstatchanger STAT_DEF, 1, TRUE
-	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
-	setgraphicalstatchangevalues
-	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	waitanimation
-	printstring STRINGID_ATTACKERSSTATROSE
-	waitmessage 0x40
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_GulpMissileGorgingTargetDefenseCantGoLower
+	printstring STRINGID_ATTACKERSSTATFELL
+	waitmessage B_WAIT_TIME_LONG
 	return
 BattleScript_GulpMissileNoSecondEffectGulping:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
 	waitanimation
-BattleScript_GulpMissileGulpingRet:
+	return
+BattleScript_GulpMissileGorgingTargetDefenseCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_PerishSongCountGoesDown::
