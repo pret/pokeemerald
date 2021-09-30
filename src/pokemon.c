@@ -8073,7 +8073,8 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
             switch (method)
             {
             case FORM_ITEM_HOLD:
-                if (GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL) == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
+                if ((GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL) == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                    && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
             case FORM_ITEM_USE: 

@@ -8575,7 +8575,7 @@ static void MultiMove_RemoveMonsFromBox(void)
         u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
         for (j = sMultiMove->minColumn; j < columnCount; j++)
         {
-            DestroyBoxMonIconAtPosition(boxPosition);//bookmark
+            DestroyBoxMonIconAtPosition(boxPosition);
             ZeroBoxMonAt(boxId, boxPosition);
             boxPosition++;
         }
