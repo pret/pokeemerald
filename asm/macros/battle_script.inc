@@ -1925,6 +1925,12 @@
 	1:
 	.endm
 
+	.macro jumpifflowerveilattacker jumpptr:req
+	jumpifnottype BS_ATTACKER, TYPE_GRASS, 1f
+	jumpifability BS_ATTACKER_SIDE, ABILITY_FLOWER_VEIL, \jumpptr
+	1:
+	.endm
+
 	.macro setallytonexttarget jumpptr:req
 	jumpifbyte CMP_GREATER_THAN, gBattlerTarget, 0x1, 1f
 	addbyte gBattlerTarget, 0x2

@@ -386,5 +386,7 @@ extern const u8 BattleScript_TerrainPreventsEnd2[];
 extern const u8 BattleScript_MistyTerrainPrevents[];
 extern const u8 BattleScript_ElectricTerrainPrevents[];
 extern const u8 BattleScript_DarkTypePreventsPrankster[];
+extern const u8 BattleScript_GulpMissileGorging[];
+extern const u8 BattleScript_GulpMissileGulping[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

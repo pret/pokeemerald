@@ -523,6 +523,7 @@
 #define B_ANIM_SLIDE_OFFSCREEN          26 // for Emergency Exit
 #define B_ANIM_RESTORE_BG               27 // for Terrain Endings
 #define B_ANIM_TOTEM_FLARE              28 // Totem boosts aura flare
+#define B_ANIM_GULP_MISSILE             29
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
