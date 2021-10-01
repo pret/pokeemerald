@@ -10126,9 +10126,9 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     // Update front sprite
     sStorage->displayMonSpecies = species;
     sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(species, otId, pid);
-    LoadDisplayMonGfx(species, pid);
     if (!sJustOpenedBag)
     {
+        LoadDisplayMonGfx(species, pid);
         StartDisplayMonMosaicEffect();
 
         // Recreate icon sprite
