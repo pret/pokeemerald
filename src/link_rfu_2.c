@@ -82,7 +82,7 @@ static void Debug_PrintEmpty(void);
 static void Task_Idle(u8);
 
 static const INIT_PARAM sRfuReqConfigTemplate = {
-    .maxMFrame = 4, 
+    .maxMFrame = 4,
     .MC_TimerCount = 32,
     .availSlot_flag = 0,
     .mboot_flag = 0,
@@ -91,7 +91,7 @@ static const INIT_PARAM sRfuReqConfigTemplate = {
     .userName = gHostRFUtgtUnameBuffer,
     .fastSearchParent_flag = TRUE,
     .linkRecovery_enable = FALSE,
-    .linkRecovery_period = 600, 
+    .linkRecovery_period = 600,
     .NI_failCounter_limit = 0x12c
 };
 
@@ -157,8 +157,8 @@ static const struct BlockRequest sBlockRequests[] = {
 
 static const u16 sAcceptedSerialNos[] = {
     0x0002,
-    RFU_SERIAL_7F7D, 
-    0x0000, 
+    RFU_SERIAL_7F7D,
+    0x0000,
     0xFFFF
 };
 
@@ -1554,10 +1554,10 @@ static bool8 CheckForLeavingGroupMembers(void)
     bool8 memberLeft = FALSE;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerSendStatuses[i] < RFU_STATUS_JOIN_GROUP_OK 
+        if (Rfu.partnerSendStatuses[i] < RFU_STATUS_JOIN_GROUP_OK
          || Rfu.partnerSendStatuses[i] > RFU_STATUS_JOIN_GROUP_NO)
         {
-            if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS 
+            if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS
              || gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
             {
                 if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_LEAVE_GROUP_NOTICE)
@@ -1599,7 +1599,7 @@ bool32 sub_80105EC(void)
     }
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10 
+        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10
          || Rfu.partnerRecvStatuses[i] == RFU_STATUS_11)
             return TRUE;
     }
@@ -1648,7 +1648,7 @@ static void UpdateChildStatuses(void)
     CheckForLeavingGroupMembers();
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_SUCCESS 
+        if (gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_SUCCESS
          || gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_FAILED)
         {
             if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10)
@@ -1663,7 +1663,7 @@ static s32 sub_80107A0(void)
     s32 status = RFU_STATUS_OK;
     if (Rfu.unk_c85 == 8)
     {
-        if (gRfuSlotStatusNI[Rfu.childSlot]->send.state == SLOT_STATE_SEND_SUCCESS 
+        if (gRfuSlotStatusNI[Rfu.childSlot]->send.state == SLOT_STATE_SEND_SUCCESS
          || gRfuSlotStatusNI[Rfu.childSlot]->send.state == SLOT_STATE_SEND_FAILED)
             rfu_clearSlot(TYPE_NI_SEND, Rfu.childSlot);
     }
@@ -2671,7 +2671,7 @@ static void Task_RfuReconnectWithParent(u8 taskId)
                 if (IsParentSuccessfullyReconnected())
                     DestroyTask(taskId);
             }
-            else if (GetHostRFUtgtGname()->activity == ACTIVITY_WONDER_CARD2 
+            else if (GetHostRFUtgtGname()->activity == ACTIVITY_WONDER_CARD2
                   || GetHostRFUtgtGname()->activity == ACTIVITY_WONDER_NEWS2)
             {
                 data[15]++;

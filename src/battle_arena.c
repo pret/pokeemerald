@@ -453,7 +453,7 @@ static const union AnimCmd *const sJudgementIconAnimCmds[] =
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
     .tileTag = TAG_JUDGEMENT_ICON,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sJudgementIconOamData,
     .anims = sJudgementIconAnimCmds,
     .images = NULL,
@@ -917,7 +917,7 @@ void DrawArenaRefereeTextBox(void)
     FillBgTilemapBufferRect(0, 0x836, 29, 19, 1,  1, palNum);
 }
 
-void RemoveArenaRefereeTextBox(void)
+void EraseArenaRefereeTextBox(void)
 {
     u8 width;
     u8 height;

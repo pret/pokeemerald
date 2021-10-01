@@ -86,7 +86,7 @@ static void CreateAreaMarkerSprites(void);
 static void LoadAreaUnknownGraphics(void);
 static void CreateAreaUnknownSprites(void);
 static void Task_HandlePokedexAreaScreenInput(u8);
-static void sub_813D6B4(void);
+static void ResetPokedexAreaMapBg(void);
 static void DestroyAreaMarkerSprites(void);
 
 static const u32 sAreaGlow_Pal[] = INCBIN_U32("graphics/pokedex/area_glow.gbapal");
@@ -527,7 +527,7 @@ static void BuildAreaGlowTilemap(void)
                     sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH] |= GLOW_TILE_BOTTOM;
                 if (y != AREA_SCREEN_HEIGHT - 1 && sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH] != GLOW_TILE_FULL)
                     sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH] |= GLOW_TILE_TOP;
-                
+
                 // Diagonals
                 if (x != 0 && y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH - 1] != GLOW_TILE_FULL)
                     sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH - 1] |= GLOW_TILE_BOTTOM_RIGHT;
@@ -665,7 +665,7 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
             StringFill(sPokedexAreaScreen->charBuffer, CHAR_SPACE, 16);
             break;
         case 2:
-            if (sub_81C4E90() == TRUE)
+            if (TryShowPokedexAreaMap() == TRUE)
                 return;
             PokedexAreaMapChangeBgY(-8);
             break;
@@ -697,7 +697,7 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_ALL);
             StartAreaGlow();
             ShowBg(2);
-            ShowBg(3);
+            ShowBg(3); // TryShowPokedexAreaMap will have done this already
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
             break;
         case 11:
@@ -743,7 +743,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             return;
         DestroyAreaMarkerSprites();
         sPokedexAreaScreen->screenSwitchState[0] = gTasks[taskId].data[1];
-        sub_813D6B4();
+        ResetPokedexAreaMapBg();
         DestroyTask(taskId);
         FreePokedexAreaMapBgNum();
         FREE_AND_SET_NULL(sPokedexAreaScreen);
@@ -753,7 +753,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
     gTasks[taskId].tState++;
 }
 
-static void sub_813D6B4(void)
+static void ResetPokedexAreaMapBg(void)
 {
     SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 0);
     SetBgAttribute(3, BG_ATTR_PALETTEMODE, 0);

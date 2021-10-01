@@ -683,7 +683,7 @@ static u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind)
     cursor.rowWidth = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8 + 2;
     cursor.rowHeight = GetFontAttribute(list->template.fontId, FONTATTR_MAX_LETTER_HEIGHT) + 2;
     cursor.tileTag = 0x4000;
-    cursor.palTag = SPRITE_INVALID_TAG;
+    cursor.palTag = TAG_NONE;
     cursor.palNum = 15;
 
     return ListMenuAddCursorObjectInternal(&cursor, cursorKind);
@@ -1076,7 +1076,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     spriteSheet.tag = arrowInfo->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
-    if (arrowInfo->palTag == SPRITE_INVALID_TAG)
+    if (arrowInfo->palTag == TAG_NONE)
     {
         LoadPalette(sRedArrowPal, (16 * arrowInfo->palNum) + 0x100, 0x20);
     }
@@ -1099,7 +1099,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     data->topSpriteId = AddScrollIndicatorArrowObject(arrowInfo->firstArrowType, arrowInfo->firstX, arrowInfo->firstY, arrowInfo->tileTag, arrowInfo->palTag);
     data->bottomSpriteId = AddScrollIndicatorArrowObject(arrowInfo->secondArrowType, arrowInfo->secondX, arrowInfo->secondY, arrowInfo->tileTag, arrowInfo->palTag);
 
-    if (arrowInfo->palTag == SPRITE_INVALID_TAG)
+    if (arrowInfo->palTag == TAG_NONE)
     {
         gSprites[data->topSpriteId].oam.paletteNum = arrowInfo->palNum;
         gSprites[data->bottomSpriteId].oam.paletteNum = arrowInfo->palNum;
@@ -1179,9 +1179,9 @@ void RemoveScrollIndicatorArrowPair(u8 taskId)
 {
     struct ScrollIndicatorPair *data = (void*) gTasks[taskId].data;
 
-    if (data->tileTag != SPRITE_INVALID_TAG)
+    if (data->tileTag != TAG_NONE)
         FreeSpriteTilesByTag(data->tileTag);
-    if (data->palTag != SPRITE_INVALID_TAG)
+    if (data->palTag != TAG_NONE)
         FreeSpritePaletteByTag(data->palTag);
 
     DestroySprite(&gSprites[data->topSpriteId]);
@@ -1322,7 +1322,7 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
     spriteSheet.tag = cursor->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
-    if (cursor->palTag == SPRITE_INVALID_TAG)
+    if (cursor->palTag == TAG_NONE)
     {
         LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
     }
@@ -1352,7 +1352,7 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
     gSprites[data->spriteId].subpriority = 0;
     gSprites[data->spriteId].subspriteTableNum = 0;
 
-    if (cursor->palTag == SPRITE_INVALID_TAG)
+    if (cursor->palTag == TAG_NONE)
     {
         gSprites[data->spriteId].oam.paletteNum = cursor->palNum;
     }
@@ -1374,9 +1374,9 @@ static void ListMenuRemoveRedOutlineCursorObject(u8 taskId)
 
     Free(data->subspritesPtr);
 
-    if (data->tileTag != SPRITE_INVALID_TAG)
+    if (data->tileTag != TAG_NONE)
         FreeSpriteTilesByTag(data->tileTag);
-    if (data->palTag != SPRITE_INVALID_TAG)
+    if (data->palTag != TAG_NONE)
         FreeSpritePaletteByTag(data->palTag);
 
     DestroySprite(&gSprites[data->spriteId]);
@@ -1407,7 +1407,7 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
     spriteSheet.tag = cursor->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
-    if (cursor->palTag == SPRITE_INVALID_TAG)
+    if (cursor->palTag == TAG_NONE)
     {
         LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
     }
@@ -1432,7 +1432,7 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
     gSprites[data->spriteId].x2 = 8;
     gSprites[data->spriteId].y2 = 8;
 
-    if (cursor->palTag == SPRITE_INVALID_TAG)
+    if (cursor->palTag == TAG_NONE)
     {
         gSprites[data->spriteId].oam.paletteNum = cursor->palNum;
     }
@@ -1452,9 +1452,9 @@ static void ListMenuRemoveRedArrowCursorObject(u8 taskId)
 {
     struct RedArrowCursor *data = (void*) gTasks[taskId].data;
 
-    if (data->tileTag != SPRITE_INVALID_TAG)
+    if (data->tileTag != TAG_NONE)
         FreeSpriteTilesByTag(data->tileTag);
-    if (data->palTag != SPRITE_INVALID_TAG)
+    if (data->palTag != TAG_NONE)
         FreeSpritePaletteByTag(data->palTag);
 
     DestroySprite(&gSprites[data->spriteId]);

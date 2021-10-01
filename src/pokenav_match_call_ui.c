@@ -741,11 +741,11 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fieldId)
 static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *list, u32 checkPageEntry)
 {
     // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
-    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = 
+    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] =
     {
-        [CHECK_PAGE_STRATEGY] = 2, 
-        [CHECK_PAGE_POKEMON]  = 4, 
-        [CHECK_PAGE_INTRO_1]  = 6, 
+        [CHECK_PAGE_STRATEGY] = 2,
+        [CHECK_PAGE_POKEMON]  = 4,
+        [CHECK_PAGE_INTRO_1]  = 6,
         [CHECK_PAGE_INTRO_2]  = 7
     };
 

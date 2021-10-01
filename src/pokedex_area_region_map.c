@@ -17,7 +17,7 @@ static const u32 sPokedexAreaMapAffine_Tilemap[] = INCBIN_U32("graphics/interfac
 void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
 {
     u8 mode;
-    sPokedexAreaMapBgNum = Alloc(4);
+    sPokedexAreaMapBgNum = Alloc(sizeof(sPokedexAreaMapBgNum));
     mode = template->mode;
 
     if (mode == 0)
@@ -28,8 +28,9 @@ void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
     }
     else
     {
+        // This is never reached, only a mode of 0 is given
         SetBgAttribute(template->bg, BG_ATTR_METRIC, 2);
-        SetBgAttribute(template->bg, BG_ATTR_TYPE, 1);
+        SetBgAttribute(template->bg, BG_ATTR_TYPE, BG_TYPE_AFFINE); // This does nothing. BG_ATTR_TYPE can't be set with this function
         DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Gfx, 0, template->offset, 0);
         sub_8199D3C(DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Tilemap, 0, 0, 1), template->offset, 64, 64, TRUE);
     }
@@ -41,7 +42,7 @@ void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
     *sPokedexAreaMapBgNum = template->bg;
 }
 
-bool32 sub_81C4E90(void)
+bool32 TryShowPokedexAreaMap(void)
 {
     if (!FreeTempTileDataBuffersIfPossible())
     {
@@ -56,8 +57,7 @@ bool32 sub_81C4E90(void)
 
 void FreePokedexAreaMapBgNum(void)
 {
-    if (sPokedexAreaMapBgNum != NULL)
-        FREE_AND_SET_NULL(sPokedexAreaMapBgNum);
+    TRY_FREE_AND_SET_NULL(sPokedexAreaMapBgNum);
 }
 
 void PokedexAreaMapChangeBgY(u32 a0)

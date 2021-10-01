@@ -118,7 +118,7 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
     }
 };
 
-static const LoopedTask sMenuHandlerLoopTaskFuncs[] = 
+static const LoopedTask sMenuHandlerLoopTaskFuncs[] =
 {
     [POKENAV_MENU_FUNC_NONE]                  = NULL,
     [POKENAV_MENU_FUNC_MOVE_CURSOR]           = LoopedTask_MoveMenuCursor,
@@ -179,31 +179,31 @@ struct OptionsLabelGfx
 
 static const struct OptionsLabelGfx sPokenavMenuOptionLabelGfx[POKENAV_MENU_TYPE_COUNT] =
 {
-    [POKENAV_MENU_TYPE_DEFAULT] = 
+    [POKENAV_MENU_TYPE_DEFAULT] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC] = 
+    [POKENAV_MENU_TYPE_UNLOCK_MC] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_MatchCall, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] = 
+    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_MatchCall, sOptionsLabelGfx_Ribbons, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_CONDITION] = 
+    [POKENAV_MENU_TYPE_CONDITION] =
     {
         .yStart = 56,
         .deltaY = 20,
         {sOptionsLabelGfx_Party, sOptionsLabelGfx_Search, sOptionsLabelGfx_Cancel}
     },
-    [POKENAV_MENU_TYPE_CONDITION_SEARCH] = 
+    [POKENAV_MENU_TYPE_CONDITION_SEARCH] =
     {
         .yStart = 40,
         .deltaY = 16,
@@ -341,7 +341,7 @@ bool32 OpenPokenavMenuInitial(void)
 
     if (state == NULL)
         return FALSE;
-    
+
     state->pokenavAlreadyOpen = FALSE;
     return TRUE;
 }

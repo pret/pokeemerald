@@ -384,18 +384,18 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
-    const u8 setBrailleFont[] = { 
-        EXT_CTRL_CODE_BEGIN, 
-        EXT_CTRL_CODE_SIZE, 
-        6, 
-        EOS 
+    const u8 setBrailleFont[] = {
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SIZE,
+        6,
+        EOS
     };
-    const u8 gotoLine2[] = { 
-        CHAR_NEWLINE, 
-        EXT_CTRL_CODE_BEGIN, 
-        EXT_CTRL_CODE_SHIFT_DOWN, 
-        2, 
-        EOS 
+    const u8 gotoLine2[] = {
+        CHAR_NEWLINE,
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SHIFT_DOWN,
+        2,
+        EOS
     };
 
     dest = StringCopy(dest, setBrailleFont);
@@ -630,7 +630,7 @@ bool32 IsStringJapanese(u8 *str)
 {
     while (*str != EOS)
     {
-        if (*str < CHAR_0)
+        if (*str <= JAPANESE_CHAR_END)
             if (*str != CHAR_SPACE)
                 return TRUE;
         str++;
@@ -639,13 +639,13 @@ bool32 IsStringJapanese(u8 *str)
     return FALSE;
 }
 
-bool32 sub_800924C(u8 *str, s32 n)
+bool32 IsStringNJapanese(u8 *str, s32 n)
 {
     s32 i;
 
     for (i = 0; *str != EOS && i < n; i++)
     {
-        if (*str < CHAR_0)
+        if (*str <= JAPANESE_CHAR_END)
             if (*str != CHAR_SPACE)
                 return TRUE;
         str++;

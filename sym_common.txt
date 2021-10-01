@@ -2,7 +2,7 @@
 	.include "main.o"
 	@ ../gflib/bg.o
 	.align 2
-gUnneededFireRedVariable:
+gWindowTileAutoAllocEnabled:
     .space 4
     @ ../gflib/window.o
     .align 4

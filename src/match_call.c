@@ -1051,8 +1051,8 @@ static bool32 CheckMatchCallChance(void)
     int callChance = 1;
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_LIGHTNING_ROD)
         callChance = 2;
-    
-    if (Random() % 10 < callChance * 3) 
+
+    if (Random() % 10 < callChance * 3)
         return TRUE;
     else
         return FALSE;
@@ -1062,7 +1062,7 @@ static bool32 MapAllowsMatchCall(void)
 {
     if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) || gMapHeader.regionMapSectionId == MAPSEC_SAFARI_ZONE)
         return FALSE;
-    
+
     if (gMapHeader.regionMapSectionId == MAPSEC_SOOTOPOLIS_CITY
      && FlagGet(FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA) == TRUE
      && FlagGet(FLAG_NEVER_SET_0x0DC) == FALSE)
@@ -1312,7 +1312,7 @@ static bool32 MatchCall_PrintIntro(u8 taskId)
     if (!RunMatchCallTextPrinter(tWindowId))
     {
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
-        
+
         // Ready the message
         if (!sMatchCallState.triggeredFromScript)
             SelectMatchCallMessage(sMatchCallState.trainerId, gStringVar4);
@@ -1569,7 +1569,7 @@ static const struct MatchCallText *GetBattleMatchCallText(int matchCallId, u8 *s
 {
     int mask;
     u32 textId, topic, id;
-    
+
     topic = Random() % 3;
     textId = sMatchCallTrainers[matchCallId].battleTopicTextIds[topic];
     if (!textId)
@@ -1833,7 +1833,7 @@ static void PopulateBattleFrontierStreak(int matchCallId, u8 *destStr)
         streak /= 10;
         i++;
     }
-    
+
     ConvertIntToDecimalStringN(destStr, sBattleFrontierStreakInfo.streak, STR_CONV_MODE_LEFT_ALIGN, i);
 }
 
@@ -2022,7 +2022,7 @@ static u8 GetPokedexRatingLevel(u16 numSeen)
         return 18;
     if (numSeen < 200)
         return 19;
-    
+
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), FLAG_GET_CAUGHT))
         numSeen--;
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), FLAG_GET_CAUGHT))
