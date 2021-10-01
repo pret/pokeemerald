@@ -41,7 +41,7 @@
     #define ITEM_SCIZORITE           10018
     #define ITEM_HERACRONITE         10019
     #define ITEM_HOUNDOOMINITE       10020
-    #define ITEM_HOUNDOOMINITE       10021
+    #define ITEM_TYRANITARITE        10021
     #define ITEM_SCEPTILITE          10022
     #define ITEM_BLAZIKENITE         10023
     #define ITEM_SWAMPERTITE         10024
