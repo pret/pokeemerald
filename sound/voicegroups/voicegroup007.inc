@@ -1,10 +1,5 @@
 	.align 2
 voicegroup007::
-<<<<<<< HEAD
-	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_60, 255, 0, 193, 127 
-	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_72, 255, 0, 193, 127 
-	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_84, 255, 0, 193, 127 
-=======
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_60, 255, 0, 193, 127
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_72, 255, 0, 193, 127
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_84, 255, 0, 193, 127
@@ -137,4 +132,3 @@ voicegroup007::
 	voice_square_1_alt 60, 0, 36, 2, 0, 1, 4, 2
 	voice_square_1_alt 60, 0, 21, 2, 0, 0, 15, 2
 
->>>>>>> 001a25e49cd6acdac89a62f4230aef80422e78f2
