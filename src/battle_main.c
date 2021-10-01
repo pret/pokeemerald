@@ -3465,10 +3465,13 @@ static void TryDoEventsBeforeFirstTurn(void)
         return;
 
     // Set invalid mons as absent(for example when starting a double battle with only one pokemon).
-    for (i = 0; i < gBattlersCount; i++)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
     {
-        if (gBattleMons[i].hp == 0 || gBattleMons[i].species == SPECIES_NONE)
-            gAbsentBattlerFlags |= gBitTable[i];
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattleMons[i].hp == 0 || gBattleMons[i].species == SPECIES_NONE)
+                gAbsentBattlerFlags |= gBitTable[i];
+        }
     }
 
     if (gBattleStruct->switchInAbilitiesCounter == 0)
