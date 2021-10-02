@@ -4793,7 +4793,8 @@ static void Cmd_moveend(void)
         case MOVEEND_RECOIL:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                 && !(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
-                && IsBattlerAlive(gBattlerAttacker))
+                && IsBattlerAlive(gBattlerAttacker)
+                && gBattleScripting.savedDmg != 0) // Some checks may be redundant alongside this one
             {
                 switch (gBattleMoves[gCurrentMove].effect)
                 {
