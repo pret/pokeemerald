@@ -1037,6 +1037,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
     {
         objVram = ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        xPos = 5 * (3 - (objVram - (text + 2))) - 1;
     }
     else
     {
@@ -1044,6 +1045,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
         text[1] = CHAR_LV_2;
 
         objVram = ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        xPos = 5 * (3 - (objVram - (text + 2)));
     }
 
     xPos = 5 * (3 - (objVram - (text + 2)));
@@ -1491,18 +1493,12 @@ void DestroyMegaTriggerSprite(void)
     gBattleStruct->mega.triggerSpriteId = 0xFF;
 }
 
-static const s8 sIndicatorPosSingles[][2] =
+static const s8 sIndicatorPositions[][2] =
 {
-    [B_POSITION_PLAYER_LEFT] = {53, -8},
-    [B_POSITION_OPPONENT_LEFT] = {45, -8},
-};
-
-static const s8 sIndicatorPosDoubles[][2] =
-{
-    [B_POSITION_PLAYER_LEFT] = {53, -8},
-    [B_POSITION_OPPONENT_LEFT] = {45, -8},
-    [B_POSITION_PLAYER_RIGHT] = {53, -8},
-    [B_POSITION_OPPONENT_RIGHT] = {45, -8},
+    [B_POSITION_PLAYER_LEFT] = {52, -9},
+    [B_POSITION_OPPONENT_LEFT] = {44, -9},
+    [B_POSITION_PLAYER_RIGHT] = {52, -9},
+    [B_POSITION_OPPONENT_RIGHT] = {44, -9},
 };
 
 u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
@@ -1515,16 +1511,15 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
 
     position = GetBattlerPosition(battlerId);
     GetBattlerHealthboxCoords(battlerId, &x, &y);
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-    {
-        x += sIndicatorPosDoubles[position][0];
-        y += sIndicatorPosDoubles[position][1];
-    }
-    else
-    {
-        x += sIndicatorPosSingles[position][0];
-        y += sIndicatorPosSingles[position][1];
-    }
+    
+    x += sIndicatorPositions[position][0];
+    y += sIndicatorPositions[position][1];
+
+    if (gBattleMons[battlerId].level >= 100)
+        x -= 4;
+    else if (gBattleMons[battlerId].level < 10)
+        x += 5;
+    
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
     gSprites[gSprites[gHealthboxSpriteIds[battlerId]].oam.affineParam].hOther_IndicatorSpriteId = spriteId;
 

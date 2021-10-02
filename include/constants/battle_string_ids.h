@@ -570,8 +570,16 @@
 #define STRINGID_MICLEBERRYACTIVATES             566
 #define STRINGID_PKMNSHOOKOFFTHETAUNT            567
 #define STRINGID_PKMNGOTOVERITSINFATUATION       568
+#define STRINGID_ITEMCANNOTBEREMOVED             569
+#define STRINGID_STICKYBARBTRANSFER              570
+#define STRINGID_PKMNBURNHEALED                  571
+#define STRINGID_REDCARDACTIVATE                 572
+#define STRINGID_EJECTBUTTONACTIVATE             573
+#define STRINGID_ATKGOTOVERINFATUATION           574
+#define STRINGID_TORMENTEDNOMORE                 575
+#define STRINGID_HEALBLOCKEDNOMORE               576
 
-#define BATTLESTRINGS_COUNT                      569
+#define BATTLESTRINGS_COUNT                      577
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -806,5 +814,18 @@
 #define B_MSG_SWITCHIN_SCREENCLEANER    12
 #define B_MSG_SWITCHIN_ASONE            13
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
+
+// gMentalHerbCureStringIds
+#define B_MSG_MENTALHERBCURE_INFATUATION       0
+#define B_MSG_MENTALHERBCURE_TAUNT             1
+#define B_MSG_MENTALHERBCURE_ENCORE            2
+#define B_MSG_MENTALHERBCURE_TORMENT           3
+#define B_MSG_MENTALHERBCURE_HEALBLOCK         4
+#define B_MSG_MENTALHERBCURE_DISABLE           5
+
+// gTerrainPreventsStringIds
+#define B_MSG_TERRAINPREVENTS_MISTY     0
+#define B_MSG_TERRAINPREVENTS_ELECTRIC  1
+#define B_MSG_TERRAINPREVENTS_PSYCHIC   2
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H
