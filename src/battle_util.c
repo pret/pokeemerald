@@ -983,6 +983,11 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
     [ABILITY_FLUFFY] = 1,
     [ABILITY_QUEENLY_MAJESTY] = 1,
     [ABILITY_WATER_BUBBLE] = 1,
+    [ABILITY_MIRROR_ARMOR] = 1,
+    [ABILITY_PUNK_ROCK] = 1,
+    [ABILITY_ICE_SCALES] = 1,
+    [ABILITY_ICE_FACE] = 1,
+    [ABILITY_PASTEL_VEIL] = 1,
 };
 
 static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
