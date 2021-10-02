@@ -705,11 +705,11 @@ static const u8 sText_AttackerGotOverInfatuation[] =_("{B_ATK_NAME_WITH_PREFIX} 
 static const u8 sText_TormentedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented no more!");
 static const u8 sText_HealBlockedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is cured of\nits heal block!");
 static const u8 sText_AttackerBecameFullyCharged[] = _("{B_ATK_NAME_WITH_PREFIX} became fully charged\ndue to its bond with its trainer!\p");
-static const u8 sText_AttackerBecameAshGreninja[] = _("{B_ATK_NAME_WITH_PREFIX} became Ash-{B_ATK_NAME_WITH_PREFIX}!\p");
+static const u8 sText_AttackerBecameAshSpecies[] = _("{B_ATK_NAME_WITH_PREFIX} became Ash-{B_ATK_NAME_WITH_PREFIX}!\p");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
-    [STRINGID_ATTACKERBECAMEASHGRENINJA - 12] = sText_AttackerBecameAshGreninja,
+    [STRINGID_ATTACKERBECAMEASHSPECIES - 12] = sText_AttackerBecameAshSpecies,
     [STRINGID_ATTACKERBECAMEFULLYCHARGED - 12] = sText_AttackerBecameFullyCharged,
     [STRINGID_HEALBLOCKEDNOMORE - 12] = sText_HealBlockedNoMore,
     [STRINGID_TORMENTEDNOMORE - 12] = sText_TormentedNoMore,

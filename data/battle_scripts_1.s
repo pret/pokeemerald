@@ -7721,7 +7721,7 @@ BattleScript_BattleBondActivatesOnMoveEndAttacker::
 	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
 	waitanimation
 	handleformchange BS_ATTACKER, 2
-	printstring STRINGID_ATTACKERBECAMEASHGRENINJA
+	printstring STRINGID_ATTACKERBECAMEASHSPECIES
 	return
 
 BattleScript_DancerActivates::
