@@ -10770,7 +10770,7 @@ static void Cmd_healpartystatus(void)
         else
             party = gEnemyParty;
 
-        if (gBattleMons[gBattlerAttacker].ability != ABILITY_SOUNDPROOF)
+        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SOUNDPROOF)
         {
             gBattleMons[gBattlerAttacker].status1 = 0;
             gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_NIGHTMARE);
@@ -10786,7 +10786,7 @@ static void Cmd_healpartystatus(void)
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
             && !(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
         {
-            if (gBattleMons[gActiveBattler].ability != ABILITY_SOUNDPROOF)
+            if (GetBattlerAbility(gActiveBattler) != ABILITY_SOUNDPROOF)
             {
                 gBattleMons[gActiveBattler].status1 = 0;
                 gBattleMons[gActiveBattler].status2 &= ~(STATUS2_NIGHTMARE);
