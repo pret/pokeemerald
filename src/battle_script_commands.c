@@ -8139,7 +8139,8 @@ static void Cmd_various(void)
         // Change species.
         if (gBattlescriptCurrInstr[3] == 0)
         {
-            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
+            if (!gBattleTextBuff1)
+                PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
             BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &gBattleMons[gActiveBattler].species);
             MarkBattlerForControllerExec(gActiveBattler);
         }

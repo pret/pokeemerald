@@ -5067,8 +5067,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             break;
         case ABILITY_BATTLE_BOND:
             if (gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_BATTLE_BOND
-             && gBattleResults.opponentFaintCounter != 0)
+             && gBattleResults.opponentFaintCounter != 0
+             && CalculateEnemyPartyCount() > 1)
             {
+                PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species);
                 gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerAttacker]] = gBattleMons[gBattlerAttacker].species;
                 gBattleMons[gBattlerAttacker].species = SPECIES_GRENINJA_ASH;
                 BattleScriptPushCursor();
