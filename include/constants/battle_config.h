@@ -43,6 +43,8 @@
     #define SPECIES_CRAMORANT               0
     #define SPECIES_CRAMORANT_GORGING       10015
     #define SPECIES_CRAMORANT_GULPING       10016
+    #define SPECIES_GRENINJA_BATTLE_BOND    0
+    #define SPECIES_GRENINJA_ASH            10017
 #endif
 
 // Items with peculiar battle effects.
