@@ -119,6 +119,7 @@ struct ProtectStruct
     u32 spikyShielded:1;
     u32 kingsShielded:1;
     u32 banefulBunkered:1;
+    u32 obstructed:1;
     u32 endured:1;
     u32 noValidMoves:1;
     u32 helpingHand:1;
@@ -126,7 +127,7 @@ struct ProtectStruct
     u32 stealMove:1;
     u32 prlzImmobility:1;
     u32 confusionSelfDmg:1;
-    u32 targetNotAffected:1;
+    u32 targetAffected:1;
     u32 chargingTurn:1;
     u32 fleeFlag:2; // For RunAway and Smoke Ball.
     u32 usedImprisonedMove:1;
@@ -142,8 +143,13 @@ struct ProtectStruct
     u32 usedGravityPreventedMove:1;
     u32 powderSelfDmg:1;
     u32 usedThroatChopPreventedMove:1;
+    u32 statRaised:1;
     u32 micle:1;
     u32 custap:1;    // also quick claw
+    u32 touchedProtectLike:1;
+    u32 disableEjectPack:1;
+    u32 statFell:1;
+    u32 pranksterElevated:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -216,7 +222,6 @@ struct FieldTimer
     u8 mistyTerrainTimer;
     u8 electricTerrainTimer;
     u8 psychicTerrainTimer;
-    u8 echoVoiceCounter;
     u8 gravityTimer;
     u8 fairyLockTimer;
 };
@@ -471,6 +476,12 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct StolenItem
+{
+    u16 originalItem:15;
+    u16 stolen:1;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -485,7 +496,9 @@ struct BattleStruct
     u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // Each of mons can know max 4 moves.
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
-    u8 moneyMultiplier;
+    u8 moneyMultiplier:6;
+    u8 moneyMultiplierItem:1;
+    u8 moneyMultiplierMove:1;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
@@ -587,6 +600,8 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
+    struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    u8 blunderPolicy:1; // should blunder policy activate
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -603,6 +618,7 @@ struct BattleStruct
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+#define BATTLER_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type || gBattleMons[battlerId].type3 == type))
 #define SET_BATTLER_TYPE(battlerId, type)           \
@@ -657,8 +673,9 @@ struct BattleScripting
     u16 moveEffect;
     u16 multihitMoveEffect;
     u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
-    bool8 fixedPopup;   // force ability popup to stick until manually called back
+    bool8 fixedPopup;   // Force ability popup to stick until manually called back
     u16 abilityPopupOverwrite;
+    u8 switchCase;  // Special switching conditions, eg. red card
 };
 
 // rom_80A5C6C
