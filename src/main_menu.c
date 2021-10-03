@@ -161,10 +161,7 @@
  *  - Destroys itself when done.
  */
 
-// These two defines are used with the sCurrItemAndOptionsMenuCheck,
-// to distinguish between its two parts.
-#define OPTION_MENU_FLAG 0x8000
-#define CURRENT_ITEM_MASK 0x7FFF
+#define OPTION_MENU_FLAG (1 << 15)
 
 // Static type declarations
 
@@ -685,7 +682,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
                     break;
             }
         }
-        sCurrItemAndOptionMenuCheck &= CURRENT_ITEM_MASK;  // turn off the "returning from options menu" flag
+        sCurrItemAndOptionMenuCheck &= ~OPTION_MENU_FLAG;  // turn off the "returning from options menu" flag
         tCurrItem = sCurrItemAndOptionMenuCheck;
         tItemCount = tMenuType + 2;
     }

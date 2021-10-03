@@ -69,7 +69,7 @@ EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
-EWRAM_DATA struct Unknown_806F160_Struct *gUnknown_020249B4[2] = {NULL};
+EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 
 // const rom data
 #include "data/battle_moves.h"
@@ -2084,7 +2084,7 @@ static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
     {SPECIES_SMEARGLE,  ITEM_SALAC_BERRY},
 };
 
-static const struct OamData sOamData_8329F20 =
+static const struct OamData sOamData_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -2101,11 +2101,11 @@ static const struct OamData sOamData_8329F20 =
     .affineParam = 0
 };
 
-static const struct SpriteTemplate gUnknown_08329F28 =
+static const struct SpriteTemplate sSpriteTemplate_64x64 =
 {
     .tileTag = TAG_NONE,
     .paletteTag = TAG_NONE,
-    .oam = &sOamData_8329F20,
+    .oam = &sOamData_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -3425,10 +3425,10 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
-    else if (gUnknown_020249B4[0])
-        gMultiuseSpriteTemplate = gUnknown_020249B4[0]->templates[battlerPosition];
-    else if (gUnknown_020249B4[1])
-        gMultiuseSpriteTemplate = gUnknown_020249B4[1]->templates[battlerPosition];
+    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A])
+        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A]->templates[battlerPosition];
+    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B])
+        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B]->templates[battlerPosition];
     else
         gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
@@ -5655,11 +5655,13 @@ u16 SpeciesToCryId(u16 species)
     }                                                                           \
 }
 
+// Same as DrawSpindaSpots but attempts to discern for itself whether or
+// not it's the front pic.
 static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
-        && dest != gMonSpritesGfxPtr->sprites.ptr[0]
-        && dest != gMonSpritesGfxPtr->sprites.ptr[2])
+        && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT]
+        && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_RIGHT])
         DRAW_SPINDA_SPOTS;
 }
 
@@ -6788,9 +6790,9 @@ const u8 *GetTrainerNameFromId(u16 trainerId)
 bool8 HasTwoFramesAnimation(u16 species)
 {
     return (species != SPECIES_CASTFORM
-            && species != SPECIES_DEOXYS
-            && species != SPECIES_SPINDA
-            && species != SPECIES_UNOWN);
+         && species != SPECIES_DEOXYS
+         && species != SPECIES_SPINDA
+         && species != SPECIES_UNOWN);
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
@@ -6802,174 +6804,186 @@ static bool8 ShouldSkipFriendshipChange(void)
     return FALSE;
 }
 
-static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
+// The below functions are for the 'MonSpritesGfxManager', a method of allocating
+// space for Pokémon sprites. These are only used for the summary screen Pokémon
+// sprites (unless gMonSpritesGfxPtr is in use), but were set up for more general use.
+// Only the 'default' mode (MON_SPR_GFX_MODE_NORMAL) is used, which is set
+// up to allocate 4 sprites using the battler sprite templates (gBattlerSpriteTemplates).
+// MON_SPR_GFX_MODE_BATTLE is identical but never used.
+// MON_SPR_GFX_MODE_FULL_PARTY is set up to allocate 7 sprites (party + trainer?) 
+// using a generic 64x64 template, and is also never used.
+
+// Between the unnecessarily large sizes below, a mistake allocating the spritePointers
+// field, and the fact that ultimately only 1 of the 4 sprite positions is used, this
+// system wastes a good deal of memory.
+
+#define ALLOC_FAIL_BUFFER (1 << 0)
+#define ALLOC_FAIL_STRUCT (1 << 1)
+#define GFX_MANAGER_ACTIVE 0xA3 // Arbitrary value
+#define GFX_MANAGER_SPR_SIZE (MON_PIC_SIZE * 4) // * 4 is unnecessary, MON_PIC_SIZE is sufficient
+#define GFX_MANAGER_NUM_FRAMES 4  // Only 2 frames are needed
+
+static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
 {
     u16 i, j;
-    for (i = 0; i < structPtr->field_0_0; i++)
+    for (i = 0; i < gfx->numSprites; i++)
     {
-        structPtr->templates[i] = gBattlerSpriteTemplates[i];
-        for (j = 0; j < structPtr->field_1; j++)
-        {
-            structPtr->frameImages[i * structPtr->field_1 + j].data = &structPtr->byteArrays[i][j * 0x800];
-        }
-        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_1];
+        gfx->templates[i] = gBattlerSpriteTemplates[i];
+        for (j = 0; j < gfx->numFrames; j++)
+            gfx->frameImages[i * gfx->numFrames + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
+
+        gfx->templates[i].images = &gfx->frameImages[i * gfx->numFrames];
     }
 }
 
-static void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
+static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
 {
     u16 i, j;
-    for (i = 0; i < structPtr->field_0_0; i++)
+    for (i = 0; i < gfx->numSprites; i++)
     {
-        structPtr->templates[i] = gUnknown_08329F28;
-        for (j = 0; j < structPtr->field_1; j++)
-        {
-            structPtr->frameImages[i * structPtr->field_0_0 + j].data = &structPtr->byteArrays[i][j * 0x800];
-        }
-        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_0_0];
-        structPtr->templates[i].anims = gAnims_MonPic;
-        structPtr->templates[i].paletteTag = i;
+        gfx->templates[i] = sSpriteTemplate_64x64;
+        for (j = 0; j < gfx->numFrames; j++)
+            gfx->frameImages[i * gfx->numSprites + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
+
+        gfx->templates[i].images = &gfx->frameImages[i * gfx->numSprites];
+        gfx->templates[i].anims = gAnims_MonPic;
+        gfx->templates[i].paletteTag = i;
     }
 }
 
-struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
 {
     u8 i;
-    u8 flags;
-    struct Unknown_806F160_Struct *structPtr;
+    u8 failureFlags;
+    struct MonSpritesGfxManager *gfx;
 
-    flags = 0;
-    id %= 2;
-    structPtr = AllocZeroed(sizeof(*structPtr));
-    if (structPtr == NULL)
+    failureFlags = 0;
+    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
+    gfx = AllocZeroed(sizeof(*gfx));
+    if (gfx == NULL)
         return NULL;
 
-    switch (arg1)
+    switch (mode)
     {
-    case 2:
-        structPtr->field_0_0 = 7;
-        structPtr->field_0_1 = 7;
-        structPtr->field_1 = 4;
-        structPtr->field_3_0 = 1;
-        structPtr->field_3_1 = 2;
+    case MON_SPR_GFX_MODE_FULL_PARTY:
+        gfx->numSprites = PARTY_SIZE + 1;
+        gfx->numSprites2 = PARTY_SIZE + 1;
+        gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
+        gfx->dataSize = 1;
+        gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
         break;
-    case 0:
+ // case MON_SPR_GFX_MODE_BATTLE:       
+    case MON_SPR_GFX_MODE_NORMAL:
     default:
-        structPtr->field_0_0 = 4;
-        structPtr->field_0_1 = 4;
-        structPtr->field_1 = 4;
-        structPtr->field_3_0 = 1;
-        structPtr->field_3_1 = 0;
+        gfx->numSprites = MAX_BATTLERS_COUNT;
+        gfx->numSprites2 = MAX_BATTLERS_COUNT;
+        gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
+        gfx->dataSize = 1;
+        gfx->mode = MON_SPR_GFX_MODE_NORMAL;
         break;
     }
 
-    structPtr->bytes = AllocZeroed(structPtr->field_3_0 * 0x800 * 4 * structPtr->field_0_0);
-    structPtr->byteArrays = AllocZeroed(structPtr->field_0_0 * 32);
-    if (structPtr->bytes == NULL || structPtr->byteArrays == NULL)
+    // Set up sprite / sprite pointer buffers
+    gfx->spriteBuffer = AllocZeroed(gfx->dataSize * GFX_MANAGER_SPR_SIZE * gfx->numSprites);
+    gfx->spritePointers = AllocZeroed(gfx->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
+    if (gfx->spriteBuffer == NULL || gfx->spritePointers == NULL)
     {
-        flags |= 1;
+        failureFlags |= ALLOC_FAIL_BUFFER;
     }
     else
     {
-        for (i = 0; i < structPtr->field_0_0; i++)
-            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 13));
+        for (i = 0; i < gfx->numSprites; i++)
+            gfx->spritePointers[i] = gfx->spriteBuffer + (gfx->dataSize * GFX_MANAGER_SPR_SIZE * i);
     }
 
-    structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);
-    structPtr->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * structPtr->field_0_0 * structPtr->field_1);
-    if (structPtr->templates == NULL || structPtr->frameImages == NULL)
+    // Set up sprite structs
+    gfx->templates = AllocZeroed(sizeof(struct SpriteTemplate) * gfx->numSprites);
+    gfx->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * gfx->numSprites * gfx->numFrames);
+    if (gfx->templates == NULL || gfx->frameImages == NULL)
     {
-        flags |= 2;
+        failureFlags |= ALLOC_FAIL_STRUCT;
     }
     else
     {
-        for (i = 0; i < structPtr->field_1 * structPtr->field_0_0; i++)
-            structPtr->frameImages[i].size = 0x800;
+        for (i = 0; i < gfx->numFrames * gfx->numSprites; i++)
+            gfx->frameImages[i].size = MON_PIC_SIZE;
 
-        switch (structPtr->field_3_1)
+        switch (gfx->mode)
         {
-        case 2:
-            sub_806F1FC(structPtr);
+        case MON_SPR_GFX_MODE_FULL_PARTY:
+            InitMonSpritesGfx_FullParty(gfx);
             break;
-        case 0:
-        case 1:
+        case MON_SPR_GFX_MODE_NORMAL:
+        case MON_SPR_GFX_MODE_BATTLE:
         default:
-            sub_806F160(structPtr);
+            InitMonSpritesGfx_Battle(gfx);
             break;
         }
     }
 
-    if (flags & 2)
+    // If either of the allocations failed free their respective members
+    if (failureFlags & ALLOC_FAIL_STRUCT)
     {
-        if (structPtr->frameImages != NULL)
-            FREE_AND_SET_NULL(structPtr->frameImages);
-        if (structPtr->templates != NULL)
-            FREE_AND_SET_NULL(structPtr->templates);
+        TRY_FREE_AND_SET_NULL(gfx->frameImages);
+        TRY_FREE_AND_SET_NULL(gfx->templates);
     }
-    if (flags & 1)
+    if (failureFlags & ALLOC_FAIL_BUFFER)
     {
-        if (structPtr->byteArrays != NULL)
-            FREE_AND_SET_NULL(structPtr->byteArrays);
-        if (structPtr->bytes != NULL)
-            FREE_AND_SET_NULL(structPtr->bytes);
+        TRY_FREE_AND_SET_NULL(gfx->spritePointers);
+        TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
     }
 
-    if (flags)
+    if (failureFlags)
     {
-        memset(structPtr, 0, sizeof(*structPtr));
-        Free(structPtr);
+        // Clear, something failed to allocate
+        memset(gfx, 0, sizeof(*gfx));
+        Free(gfx);
     }
     else
     {
-        structPtr->magic = 0xA3;
-        gUnknown_020249B4[id] = structPtr;
+        gfx->active = GFX_MANAGER_ACTIVE;
+        sMonSpritesGfxManagers[managerId] = gfx;
     }
 
-    return gUnknown_020249B4[id];
+    return sMonSpritesGfxManagers[managerId];
 }
 
-void sub_806F47C(u8 id)
+void DestroyMonSpritesGfxManager(u8 managerId)
 {
-    struct Unknown_806F160_Struct *structPtr;
+    struct MonSpritesGfxManager *gfx;
 
-    id %= 2;
-    structPtr = gUnknown_020249B4[id];
-    if (structPtr == NULL)
+    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
+    gfx = sMonSpritesGfxManagers[managerId];
+    if (gfx == NULL)
         return;
 
-    if (structPtr->magic != 0xA3)
+    if (gfx->active != GFX_MANAGER_ACTIVE)
     {
-        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
+        memset(gfx, 0, sizeof(*gfx));
     }
     else
     {
-
-        if (structPtr->frameImages != NULL)
-            FREE_AND_SET_NULL(structPtr->frameImages);
-        if (structPtr->templates != NULL)
-            FREE_AND_SET_NULL(structPtr->templates);
-        if (structPtr->byteArrays != NULL)
-            FREE_AND_SET_NULL(structPtr->byteArrays);
-        if (structPtr->bytes != NULL)
-            FREE_AND_SET_NULL(structPtr->bytes);
-
-        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
-        Free(structPtr);
+        TRY_FREE_AND_SET_NULL(gfx->frameImages);
+        TRY_FREE_AND_SET_NULL(gfx->templates);
+        TRY_FREE_AND_SET_NULL(gfx->spritePointers);
+        TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
+        memset(gfx, 0, sizeof(*gfx));
+        Free(gfx);
     }
 }
 
-u8 *sub_806F4F8(u8 id, u8 arg1)
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum)
 {
-    struct Unknown_806F160_Struct *structPtr = gUnknown_020249B4[id % 2];
-    if (structPtr->magic != 0xA3)
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManagers[managerId % MON_SPR_GFX_MANAGERS_COUNT];
+    if (gfx->active != GFX_MANAGER_ACTIVE)
     {
         return NULL;
     }
     else
     {
-        if (arg1 >= structPtr->field_0_0)
-            arg1 = 0;
+        if (spriteNum >= gfx->numSprites)
+            spriteNum = 0;
 
-        return structPtr->byteArrays[arg1];
+        return gfx->spritePointers[spriteNum];
     }
 }

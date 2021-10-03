@@ -1111,7 +1111,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
 
     if (gMonSpritesGfxPtr == NULL)
-        sub_806F2AC(0, 0);
+        CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
 
     SetMainCallback2(CB2_InitSummaryScreen);
 }
@@ -1500,7 +1500,7 @@ static void CloseSummaryScreen(u8 taskId)
         StopCryAndClearCrySongs();
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         if (gMonSpritesGfxPtr == NULL)
-            sub_806F47C(0);
+            DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
         FreeSummaryScreen();
         DestroyTask(taskId);
     }
@@ -3873,25 +3873,43 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
         if (gMain.inBattle)
         {
             if (ShouldIgnoreDeoxysForm(3, sMonSummaryScreen->curMonIndex))
-                HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2], gMonSpritesGfxPtr->sprites.ptr[1], summary->species2, summary->pid);
+                HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],
+                                                          gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                                          summary->species2,
+                                                          summary->pid);
             else
-                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], gMonSpritesGfxPtr->sprites.ptr[1], summary->species2, summary->pid);
+                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], 
+                                           gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                           summary->species2,
+                                           summary->pid);
         }
         else
         {
             if (gMonSpritesGfxPtr != NULL)
             {
                 if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
-                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], gMonSpritesGfxPtr->sprites.ptr[1], summary->species2, summary->pid);
+                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
+                                               gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                               summary->species2, 
+                                               summary->pid);
                 else
-                    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2], gMonSpritesGfxPtr->sprites.ptr[1], summary->species2, summary->pid);
+                    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],
+                                                              gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                                              summary->species2,
+                                                              summary->pid);
             }
             else
             {
                 if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
-                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], sub_806F4F8(0, 1), summary->species2, summary->pid);
+                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
+                                                MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
+                                                summary->species2,
+                                                summary->pid);
                 else
-                    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2], sub_806F4F8(0, 1), summary->species2, summary->pid);
+                    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],
+                                                              MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
+                                                              summary->species2,
+                                                              summary->pid);
             }
         }
         (*state)++;
@@ -3899,7 +3917,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
     case 1:
         pal = GetMonSpritePalStructFromOtIdPersonality(summary->species2, summary->OTID, summary->pid);
         LoadCompressedSpritePalette(pal);
-        SetMultiuseSpriteTemplateToPokemon(pal->tag, 1);
+        SetMultiuseSpriteTemplateToPokemon(pal->tag, B_POSITION_OPPONENT_LEFT);
         (*state)++;
         return 0xFF;
     }

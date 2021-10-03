@@ -37,8 +37,6 @@
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_NONE                   0xFF
 
-#define MAX_TRAINER_ITEMS 4
-
 // array entries for battle communication
 #define MULTIUSE_STATE          0
 #define CURSOR_POSITION         1
@@ -594,16 +592,15 @@ struct BattleSpriteData
 struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    union
-    {
-	void* ptr[4];
-	u8* byte[4];
+    union {
+    	void* ptr[MAX_BATTLERS_COUNT];
+    	u8* byte[MAX_BATTLERS_COUNT];
     } sprites;
-    struct SpriteTemplate templates[4];
-    struct SpriteFrameImage field_74[4][4];
-    u8 field_F4[0x80];
+    struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
+    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
+    u8 unusedArr[0x80];
     u8 *barFontGfx;
-    void *field_178;
+    void *unusedPtr;
     u16 *buffer;
 };
 

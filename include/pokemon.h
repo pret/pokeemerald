@@ -122,18 +122,30 @@ struct Pokemon
     u16 spDefense;
 };
 
-struct Unknown_806F160_Struct
+struct MonSpritesGfxManager
 {
-    u32 field_0_0:4;
-    u32 field_0_1:4;
-    u32 field_1:8;
-    u16 magic:8;
-    u32 field_3_0:4;
-    u32 field_3_1:4;
-    void *bytes;
-    u8 **byteArrays;
+    u32 numSprites:4;
+    u32 numSprites2:4; // Never read
+    u32 numFrames:8;
+    u32 active:8;
+    u32 dataSize:4;
+    u32 mode:4; // MON_SPR_GFX_MODE_*
+    void *spriteBuffer;
+    u8 **spritePointers;
     struct SpriteTemplate *templates;
     struct SpriteFrameImage *frameImages;
+};
+
+enum {
+    MON_SPR_GFX_MODE_NORMAL,
+    MON_SPR_GFX_MODE_BATTLE,
+    MON_SPR_GFX_MODE_FULL_PARTY,
+};
+
+enum {
+    MON_SPR_GFX_MANAGER_A,
+    MON_SPR_GFX_MANAGER_B, // Nothing ever sets up this manager.
+    MON_SPR_GFX_MANAGERS_COUNT
 };
 
 struct BattlePokemon
@@ -422,8 +434,8 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 const u8 *GetTrainerClassNameFromId(u16 trainerId);
 const u8 *GetTrainerNameFromId(u16 trainerId);
 bool8 HasTwoFramesAnimation(u16 species);
-struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
-void sub_806F47C(u8 id);
-u8 *sub_806F4F8(u8 id, u8 arg1);
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
+void DestroyMonSpritesGfxManager(u8 managerId);
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
 
 #endif // GUARD_POKEMON_H
