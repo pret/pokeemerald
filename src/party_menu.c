@@ -5166,10 +5166,9 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 }
 
 #define tState          data[0]
-#define tSpecies        data[1]
-#define tTargetSpecies  data[2]
-#define tAnimWait       data[3]
-#define tNextFunc       4
+#define tTargetSpecies  data[1]
+#define tAnimWait       data[2]
+#define tNextFunc       3
 
 static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite)
 {
@@ -5197,14 +5196,12 @@ static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite)
 static void Task_TryItemUseFormChange(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 species;
     u16 targetSpecies;
     struct Sprite *icon = &gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId];
 
     switch (gTasks[taskId].tState)
     {
     case 0:
-        species = gTasks[taskId].tSpecies;
         targetSpecies = gTasks[taskId].tTargetSpecies;
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
         CalculateMonStats(mon);
@@ -5266,7 +5263,6 @@ static void Task_TryItemUseFormChange(u8 taskId)
 bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
     u16 targetSpecies = GetFormChangeTargetSpecies(mon, ItemId_GetSecondaryId(gSpecialVar_ItemId), gSpecialVar_ItemId);
 
     if (targetSpecies != SPECIES_NONE)
@@ -5275,7 +5271,6 @@ bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
         SetWordTaskArg(taskId, tNextFunc, (u32)task);
         gTasks[taskId].func = Task_TryItemUseFormChange;
         gTasks[taskId].tState = 0;
-        gTasks[taskId].tSpecies = species;
         gTasks[taskId].tTargetSpecies = targetSpecies;
         gTasks[taskId].tAnimWait = 0;
         return TRUE;
@@ -5303,7 +5298,6 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task)
 }
 
 #undef tState
-#undef tSpecies
 #undef tTargetSpecies
 #undef tAnimWait
 #undef tNextFunc
