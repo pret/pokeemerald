@@ -8762,25 +8762,37 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     case VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER:
-        if (gBattleWeather & WEATHER_SUN_PRIMAL)
+    {
+        bool8 shouldNotClear = FALSE;
+
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (((GetBattlerAbility(i) == ABILITY_DESOLATE_LAND && gBattleWeather & WEATHER_SUN_PRIMAL)
+             || (GetBattlerAbility(i) == ABILITY_PRIMORDIAL_SEA && gBattleWeather & WEATHER_RAIN_PRIMAL)
+             || (GetBattlerAbility(i) == ABILITY_DELTA_STREAM && gBattleWeather & WEATHER_STRONG_WINDS))
+             && IsBattlerAlive(i))
+                shouldNotClear = TRUE;
+        }
+        if (gBattleWeather & WEATHER_SUN_PRIMAL && !shouldNotClear)
         {
             gBattleWeather &= ~WEATHER_SUN_PRIMAL;
             PrepareStringBattle(STRINGID_EXTREMESUNLIGHTFADED, gActiveBattler);
             gBattleCommunication[MSG_DISPLAY] = 1;
         }
-        else if (gBattleWeather & WEATHER_RAIN_PRIMAL)
+        else if (gBattleWeather & WEATHER_RAIN_PRIMAL && !shouldNotClear)
         {
             gBattleWeather &= ~WEATHER_RAIN_PRIMAL;
             PrepareStringBattle(STRINGID_HEAVYRAINLIFTED, gActiveBattler);
             gBattleCommunication[MSG_DISPLAY] = 1;
         }
-        else if (gBattleWeather & WEATHER_STRONG_WINDS)
+        else if (gBattleWeather & WEATHER_STRONG_WINDS && !shouldNotClear)
         {
             gBattleWeather &= ~WEATHER_STRONG_WINDS;
             PrepareStringBattle(STRINGID_STRONGWINDSDISSIPATED, gActiveBattler);
             gBattleCommunication[MSG_DISPLAY] = 1;
         }
         break;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
