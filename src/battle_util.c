@@ -486,14 +486,6 @@ void HandleAction_UseMove(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
 
-    GET_MOVE_TYPE(gCurrentMove, moveType);
-    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_STRONG_WINDS)
-    {
-        if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_FLYING)
-         && CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, FALSE) >= UQ_4_12(2.0))
-            BattleScriptPushCursorAndCallback(BattleScript_AttackWeakenedByStrongWinds);
-    }
-
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
@@ -8300,8 +8292,12 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
     else if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_STRONG_WINDS)
     {
-        if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING)
-         && typeEffectivenessModifier >= UQ_4_12(2.0))
+        if ((gBattleMons[battlerDef].type1 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[battlerDef].type1) >= UQ_4_12(2.0))
+         || (gBattleMons[battlerDef].type2 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[battlerDef].type2) >= UQ_4_12(2.0))
+         || (gBattleMons[battlerDef].type3 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[battlerDef].type3) >= UQ_4_12(2.0)))
             dmg = ApplyModifier(UQ_4_12(0.5), dmg);
     }
 

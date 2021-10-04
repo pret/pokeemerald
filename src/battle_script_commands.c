@@ -1914,6 +1914,9 @@ static void Cmd_typecalc(void)
 static void Cmd_adjustdamage(void)
 {
     u8 holdEffect, param;
+    u32 moveType;
+
+    GET_MOVE_TYPE(gCurrentMove, moveType);
 
     if (DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
         goto END;
@@ -1990,6 +1993,23 @@ END:
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_GemActivates;
         gLastUsedItem = gBattleMons[gBattlerAttacker].item;
+    }
+
+    // WEATHER_STRONG_WINDS prints a string when it's about to reduce the power
+    // of a move that is Super Effective against a Flying-type Pokémon.
+    if (gBattleWeather & WEATHER_STRONG_WINDS)
+    {
+        if ((gBattleMons[gBattlerTarget].type1 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[gBattlerTarget].type1) >= UQ_4_12(2.0))
+         || (gBattleMons[gBattlerTarget].type2 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[gBattlerTarget].type2) >= UQ_4_12(2.0))
+         || (gBattleMons[gBattlerTarget].type3 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[gBattlerTarget].type3) >= UQ_4_12(2.0)))
+        {
+            gBattlerAbility = gBattlerTarget;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_AttackWeakenedByStrongWinds;
+        }
     }
 }
 

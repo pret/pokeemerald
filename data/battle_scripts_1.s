@@ -7293,7 +7293,7 @@ BattleScript_AttackWeakenedByStrongWinds::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
 	waitmessage B_WAIT_TIME_LONG
-	end3
+	return
 
 BattleScript_SnowWarningActivates::
 	pause B_WAIT_TIME_SHORT
