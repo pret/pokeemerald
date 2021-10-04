@@ -38,6 +38,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
+#include "constants/battle_script_commands.h"
 #include "constants/hold_effects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
@@ -3103,7 +3104,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (!typeOverride)
         type = gBattleMoves[move].type;
     else
-        type = typeOverride & 0x3F;
+        type = typeOverride & DYNAMIC_TYPE_MASK;
 
     attack = attacker->attack;
     defense = defender->defense;

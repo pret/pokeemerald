@@ -318,7 +318,7 @@
 #define SOUND_PAN_TARGET    63
 
 // move background ids
-#define BG_DARK_ 0 // the same as BG_DARK but is unused
+#define BG_NONE 0 // the same as BG_DARK but is unused
 #define BG_DARK 1
 #define BG_GHOST 2
 #define BG_PSYCHIC 3

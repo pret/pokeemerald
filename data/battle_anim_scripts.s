@@ -2234,7 +2234,7 @@ Move_ICY_WIND:
 	playsewithpan SE_M_ICY_WIND, 0
 	waitbgfadein
 	waitforvisualfinish
-	panse_1B SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	call IcyWindSwirlingSnowballs
 	delay 5
 	call IcyWindSwirlingSnowballs
@@ -2551,7 +2551,7 @@ Move_SING:
 	monbg ANIM_DEF_PARTNER
 	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
-	panse_1B SE_M_SING, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_SING, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 0, 12
 	delay 5
 	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 12
@@ -3460,7 +3460,7 @@ Move_HEAT_WAVE:
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_FLYING_DIRT, 0, 6, 6, RGB_RED
 	createvisualtask AnimTask_LoadSandstormBackground, 5, TRUE
 	createvisualtask AnimTask_BlendBackground, 6, 6, RGB_RED
-	panse_1B SE_M_HEAT_WAVE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_HEAT_WAVE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	delay 4
 	createvisualtask AnimTask_MoveHeatWaveTargets, 5
 	delay 12
@@ -4232,7 +4232,7 @@ Move_GRASS_WHISTLE:
 	waitforvisualfinish
 	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
-	panse_1B SE_M_GRASSWHISTLE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_GRASSWHISTLE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 1, 0
 	delay 5
 	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 0
@@ -4464,7 +4464,7 @@ Move_WATER_SPORT:
 	delay 44
 	playsewithpan SE_M_SURF, SOUND_PAN_ATTACKER
 	delay 44
-	panse_1B SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	end
 
 Move_CALM_MIND:
@@ -5475,7 +5475,7 @@ SolarBeamAbsorbEffect:
 	return
 SolarBeamUnleash:
 	call SetSolarbeamBg
-	panse_1B SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createvisualtask AnimTask_CreateSmallSolarbeamOrbs, 5
 	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
 	delay 4
@@ -5527,7 +5527,7 @@ BlizzardContinue:
 	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 0, 1, -1
 	waitbgfadein
 	waitforvisualfinish
-	panse_1B SE_M_BLIZZARD, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_BLIZZARD, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	call BlizzardIceCrystals
 	call BlizzardIceCrystals
 	playsewithpan SE_M_BLIZZARD2, SOUND_PAN_TARGET
@@ -5573,7 +5573,7 @@ Move_POWDER_SNOW:
 	monbg ANIM_DEF_PARTNER
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 1, 0, 3, RGB_BLACK
 	waitforvisualfinish
-	panse_1B SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	call PowderSnowSnowballs
 	call PowderSnowSnowballs
 	playsewithpan SE_M_GUST2, SOUND_PAN_TARGET
@@ -5610,7 +5610,7 @@ Move_HYDRO_PUMP:
 	setalpha 12, 8
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 40, 1
 	delay 6
-	panse_1B SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createvisualtask AnimTask_StartSinAnimTimer, 5, 100
 	call HydroPumpBeams
 	call HydroPumpBeams
@@ -5655,7 +5655,7 @@ Move_SIGNAL_BEAM:
 	loadspritegfx ANIM_TAG_DUCK
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 25, 1
 	delay 6
-	panse_1B SE_M_BUBBLE_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
+	panse SE_M_BUBBLE_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
 	createvisualtask AnimTask_StartSinAnimTimer, 5, 100
 	call SignalBeamOrbs
 	call SignalBeamOrbs
@@ -6297,7 +6297,7 @@ Move_CRABHAMMER:
 Move_SURF:
 	createvisualtask AnimTask_CreateSurfWave, 2, FALSE
 	delay 24
-	panse_1B SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	waitforvisualfinish
 	end
 
@@ -6309,7 +6309,7 @@ Move_FLAMETHROWER:
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 46, 1
 	delay 6
 	createvisualtask AnimTask_StartSinAnimTimer, 5, 100
-	panse_1B SE_M_FLAMETHROWER, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_FLAMETHROWER, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	call FlamethrowerCreateFlames
 	call FlamethrowerCreateFlames
 	call FlamethrowerCreateFlames
@@ -6722,7 +6722,7 @@ Move_SUNNY_DAY:
 	setalpha 13, 3
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, 0x781, 1, 0, 6, RGB_WHITE
 	waitforvisualfinish
-	panse_26 SE_M_PETAL_DANCE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
+	panse_adjustnone SE_M_PETAL_DANCE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
 	call SunnyDayLightRay
 	call SunnyDayLightRay
 	call SunnyDayLightRay
@@ -7599,7 +7599,7 @@ Move_MIMIC:
 	setalpha 11, 5
 	monbg_22 ANIM_DEF_PARTNER
 	monbgprio_29
-	panse_1B SE_M_MINIMIZE, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
+	panse SE_M_MINIMIZE, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
 	createvisualtask AnimTask_ShrinkTargetCopy, 5, 128, 24
 	delay 15
 	createsprite gMimicOrbSpriteTemplate, ANIM_TARGET, 2, -12, 24
@@ -7943,7 +7943,7 @@ Move_PERISH_SONG:
 	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 15, 0, 240
 	createsprite gPerishSongMusicNote2SpriteTemplate, ANIM_ATTACKER, 4, 15, 0, 0
 	delay 20
-	panse_1B SE_M_PERISH_SONG, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_PERISH_SONG, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	delay 80
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_BLACK
 	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, 4, 0
@@ -8150,7 +8150,7 @@ Move_WISH:
 	loadspritegfx ANIM_TAG_SPARKLE_2
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 10, RGB_BLACK
 	waitforvisualfinish
-	panse_27 SE_M_REFLECT, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
+	panse_adjustall SE_M_REFLECT, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
 	createsprite gWishStarSpriteTemplate, ANIM_ATTACKER, 40
 	waitforvisualfinish
 	delay 60
@@ -8591,7 +8591,7 @@ ArmThrustLeft:
 	goto ArmThrustContinue
 
 Move_MUDDY_WATER:
-	panse_1B SE_M_WHIRLPOOL, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_WHIRLPOOL, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createvisualtask AnimTask_CreateSurfWave, 2, TRUE
 	waitforvisualfinish
 	end
@@ -8689,7 +8689,7 @@ Move_MUD_SHOT:
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 46, 1
 	delay 6
 	createvisualtask AnimTask_StartSinAnimTimer, 5, 100
-	panse_1B SE_M_WHIRLPOOL, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
+	panse SE_M_WHIRLPOOL, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
 	call MudShotOrbs
 	call MudShotOrbs
 	call MudShotOrbs
@@ -8717,7 +8717,7 @@ Move_METEOR_MASH:
 	loadspritegfx ANIM_TAG_GOLD_STARS
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	panse_1B SE_M_BARRIER, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +3, 0
+	panse SE_M_BARRIER, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +3, 0
 	fadetobg BG_COSMIC
 	waitbgfadein
 	waitforvisualfinish
@@ -8860,7 +8860,7 @@ Move_METAL_SOUND:
 	waitforvisualfinish
 	end
 MetalSoundRings:
-	panse_1B SE_M_SCREECH, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_SCREECH, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gMetalSoundSpriteTemplate, ANIM_TARGET, 2, 16, 0, 0, 0, 30, 0
 	delay 2
 	return
@@ -9154,7 +9154,7 @@ Move_ROCK_TOMB:
 
 Move_SILVER_WIND:
 	loadspritegfx ANIM_TAG_SPARKLE_6
-	panse_1B SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	playsewithpan SE_M_MORNING_SUN, 0
 	delay 0
 	monbg ANIM_DEF_PARTNER
@@ -9368,7 +9368,7 @@ Move_HYDRO_CANNON:
 	delay 10
 	createvisualtask AnimTask_InvertScreenColor, 2, 257, 257, 257
 	delay 30
-	panse_1B SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	panse SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	call HydroCannonBeam
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 10, 0, 40, 1
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, ANIM_TARGET, 0
@@ -10296,7 +10296,7 @@ Status_Nightmare:
 
 General_CastformChange:
 	createvisualtask AnimTask_IsMonInvisible, 2
-	jumpreteq 1, CastformChangeSkipAnim
+	jumpreteq TRUE, CastformChangeSkipAnim
 	goto CastformChangeContinue
 CastformChangeContinue:
 	monbg ANIM_ATTACKER

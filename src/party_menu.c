@@ -944,7 +944,7 @@ static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 item, u8 tutor)
 static void DisplayPartyPokemonDataForMultiBattle(u8 slot)
 {
     struct PartyMenuBox *menuBox = &sPartyMenuBoxes[slot];
-    u8 actualSlot = slot - (3);
+    u8 actualSlot = slot - MULTI_PARTY_SIZE;
 
     if (gMultiPartnerParty[actualSlot].species == SPECIES_NONE)
     {
@@ -6103,7 +6103,7 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 i;
 
-    for (i = 3; i < PARTY_SIZE; i++)
+    for (i = MULTI_PARTY_SIZE; i < PARTY_SIZE; i++)
     {
         if (gMultiPartnerParty[i - MULTI_PARTY_SIZE].species != SPECIES_NONE)
         {

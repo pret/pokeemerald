@@ -32,7 +32,6 @@
 #define B_ACTION_EXEC_SCRIPT            10
 #define B_ACTION_TRY_FINISH             11
 #define B_ACTION_FINISHED               12
-
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_NONE                   0xFF
@@ -50,14 +49,17 @@
 #define MSG_DISPLAY             7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  8
 
-#define MOVE_TARGET_SELECTED            0x0
-#define MOVE_TARGET_DEPENDS             0x1
-#define MOVE_TARGET_USER_OR_SELECTED    0x2
-#define MOVE_TARGET_RANDOM              0x4
-#define MOVE_TARGET_BOTH                0x8
-#define MOVE_TARGET_USER                0x10
-#define MOVE_TARGET_FOES_AND_ALLY       0x20
-#define MOVE_TARGET_OPPONENTS_FIELD     0x40
+#define MOVE_TARGET_SELECTED            0
+#define MOVE_TARGET_DEPENDS             (1 << 0)
+#define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
+#define MOVE_TARGET_RANDOM              (1 << 2)
+#define MOVE_TARGET_BOTH                (1 << 3)
+#define MOVE_TARGET_USER                (1 << 4)
+#define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
+#define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
+
+// For the second argument of GetMoveTarget, when no target override is needed
+#define NO_TARGET_OVERRIDE 0
 
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
@@ -115,7 +117,7 @@ struct ProtectStruct
     u32 confusionSelfDmg:1;
     u32 targetNotAffected:1;
     u32 chargingTurn:1;
-    u32 fleeFlag:2; // For RunAway and Smoke Ball.
+    u32 fleeType:2; // 0: Normal, 1: FLEE_ITEM, 2: FLEE_ABILITY
     u32 usedImprisonedMove:1;
     u32 loveImmobility:1;
     u32 usedDisabledMove:1;
@@ -426,7 +428,7 @@ struct BattleStruct
     u8 unused_6[3];
     u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
-    u16 castformPalette[MAX_BATTLERS_COUNT][16];
+    u16 castformPalette[NUM_CASTFORM_FORMS][16];
     union {
         struct LinkBattlerHeader linkBattlerHeader;
         u32 battleVideo[2];
@@ -447,12 +449,16 @@ struct BattleStruct
     u8 alreadyStatusedMoveAttempt; // As bits for battlers; For example when using Thunder Wave on an already paralyzed pokemon.
 };
 
-#define GET_MOVE_TYPE(move, typeArg)                        \
-{                                                           \
-    if (gBattleStruct->dynamicMoveType)                     \
-        typeArg = gBattleStruct->dynamicMoveType & 0x3F;    \
-    else                                                    \
-        typeArg = gBattleMoves[move].type;                  \
+#define F_DYNAMIC_TYPE_1 (1 << 6)
+#define F_DYNAMIC_TYPE_2 (1 << 7)
+#define DYNAMIC_TYPE_MASK (F_DYNAMIC_TYPE_1 - 1)
+
+#define GET_MOVE_TYPE(move, typeArg)                                  \
+{                                                                     \
+    if (gBattleStruct->dynamicMoveType)                               \
+        typeArg = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK; \
+    else                                                              \
+        typeArg = gBattleMoves[move].type;                            \
 }
 
 #define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
@@ -502,7 +508,7 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 levelUpHP;
-    u8 windowsType; // 0 - normal, 1 - battle arena
+    u8 windowsType; // B_WIN_TYPE_*
     u8 multiplayerId;
     u8 specialTrainerBattleType;
 };
@@ -624,8 +630,8 @@ extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
 extern u32 gUnusedFirstBattleVar1;
-extern u8 *gUnknown_0202305C;
-extern u8 *gUnknown_02023060;
+extern u8 *gBattleAnimBgTileBuffer;
+extern u8 *gBattleAnimBgTilemapBuffer;
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gActiveBattler;

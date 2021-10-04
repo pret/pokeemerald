@@ -9,7 +9,7 @@ extern u8 gRecordedBattleMultiplayerId;
 #define B_RECORD_MODE_PLAYBACK 2
 
 void RecordedBattle_Init(u8 arg0);
-void sub_8184E58(void);
+void RecordedBattle_SetTrainerInfo(void);
 void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action);
 void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear);
 u8 RecordedBattle_GetBattlerAction(u8 battlerId);
@@ -30,8 +30,8 @@ u8 GetTextSpeedInRecordedBattle(void);
 void RecordedBattle_CopyBattlerMoves(void);
 void sub_818603C(u8 arg0);
 u32 GetAiScriptsInRecordedBattle(void);
-void sub_8186444(void);
-bool8 sub_8186450(void);
+void RecordedBattle_SetPlaybackFinished(void);
+bool8 RecordedBattle_CanStopPlayback(void);
 void GetRecordedBattleRecordMixFriendName(u8 *dst);
 u8 GetRecordedBattleRecordMixFriendClass(void);
 u8 GetRecordedBattleApprenticeId(void);

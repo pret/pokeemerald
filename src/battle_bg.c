@@ -594,8 +594,8 @@ static const struct WindowTemplate gBattleArenaWindowTemplates[] =
 
 const struct WindowTemplate * const gBattleWindowTemplates[] =
 {
-    gStandardBattleWindowTemplates,
-    gBattleArenaWindowTemplates,
+    [B_WIN_TYPE_NORMAL] = gStandardBattleWindowTemplates,
+    [B_WIN_TYPE_ARENA]  = gBattleArenaWindowTemplates,
 };
 
 static const struct BattleBackground gBattleTerrainTable[] =
@@ -691,20 +691,19 @@ static const struct BattleBackground gBattleTerrainTable[] =
     },
 };
 
-static void sub_8035648(void);
+static void CB2_UnusedBattleInit(void);
 
-// Unused
-static void sub_8035608(void)
+static void UnusedBattleInit(void)
 {
     u8 spriteId;
 
     ResetSpriteData();
-    spriteId = CreateSprite(&gUnknown_0831AC88, 0, 0, 0);
+    spriteId = CreateSprite(&gUnusedBattleInitSprite, 0, 0, 0);
     gSprites[spriteId].invisible = TRUE;
-    SetMainCallback2(sub_8035648);
+    SetMainCallback2(CB2_UnusedBattleInit);
 }
 
-static void sub_8035648(void)
+static void CB2_UnusedBattleInit(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -717,13 +716,13 @@ void BattleInitBgsAndWindows(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
-        gBattleScripting.windowsType = 1;
-        SetBgTilemapBuffer(1, gUnknown_02023060);
-        SetBgTilemapBuffer(2, gUnknown_02023060);
+        gBattleScripting.windowsType = B_WIN_TYPE_ARENA;
+        SetBgTilemapBuffer(1, gBattleAnimBgTilemapBuffer);
+        SetBgTilemapBuffer(2, gBattleAnimBgTilemapBuffer);
     }
     else
     {
-        gBattleScripting.windowsType = 0;
+        gBattleScripting.windowsType = B_WIN_TYPE_NORMAL;
     }
 
     InitWindows(gBattleWindowTemplates[gBattleScripting.windowsType]);

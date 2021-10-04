@@ -251,16 +251,16 @@ static void HandleInputChooseAction(void)
 
         switch (gActionSelectionCursor[gActiveBattler])
         {
-        case 0:
+        case B_ACTION_USE_MOVE:
             BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);
             break;
-        case 1:
+        case B_ACTION_USE_ITEM:
             BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
             break;
-        case 2:
+        case B_ACTION_SWITCH:
             BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
             break;
-        case 3:
+        case B_ACTION_RUN:
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             break;
         }
@@ -858,7 +858,7 @@ static void SetLinkBattleEndCallbacks(void)
         if (gReceivedRemoteLinkPlayers == 0)
         {
             m4aSongNumStop(SE_LOW_HEALTH);
-            gMain.inBattle = 0;
+            gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(CB2_InitEndLinkBattle);
             if (gBattleOutcome == B_OUTCOME_WON)
@@ -871,7 +871,7 @@ static void SetLinkBattleEndCallbacks(void)
         if (IsLinkTaskFinished())
         {
             m4aSongNumStop(SE_LOW_HEALTH);
-            gMain.inBattle = 0;
+            gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(CB2_InitEndLinkBattle);
             if (gBattleOutcome == B_OUTCOME_WON)
@@ -901,7 +901,7 @@ void SetBattleEndCallbacks(void)
         else
         {
             m4aSongNumStop(SE_LOW_HEALTH);
-            gMain.inBattle = 0;
+            gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
         }

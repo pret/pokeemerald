@@ -115,7 +115,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     s32 i, var1, var2;
     s32 chosenMoveId = -1;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
-    u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
+    u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
     s32 percent = Random() % 100;
 
     // Heavy variable re-use here makes this hard to read without defines
@@ -438,9 +438,10 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
 {
     u8 taskId;
 
-    if (tableId == B_ANIM_CASTFORM_CHANGE && (argument & 0x80))
+    if (tableId == B_ANIM_CASTFORM_CHANGE && (argument & CASTFORM_SUBSTITUTE))
     {
-        gBattleMonForms[activeBattler] = (argument & ~(0x80));
+        // If Castform is behind substitute, set the new form but skip the animation
+        gBattleMonForms[activeBattler] = (argument & ~CASTFORM_SUBSTITUTE);
         return TRUE;
     }
     if (gBattleSpritesDataPtr->battlerData[activeBattler].behindSubstitute
@@ -593,7 +594,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + battlerId * 16;
-        LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
+        LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[CASTFORM_NORMAL]);
         LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, 0x20);
     }
 
@@ -656,7 +657,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + battlerId * 16;
-        LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
+        LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[CASTFORM_NORMAL]);
         LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, 0x20);
     }
 
@@ -895,7 +896,7 @@ void CopyBattleSpriteInvisibility(u8 battlerId)
     gBattleSpritesDataPtr->battlerData[battlerId].invisible = gSprites[gBattlerSpriteIds[battlerId]].invisible;
 }
 
-void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform)
+void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform)
 {
     u16 paletteOffset;
     u32 personalityValue;
@@ -903,7 +904,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
     u8 position;
     const u32 *lzPaletteData;
 
-    if (notTransform)
+    if (castform)
     {
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], gBattleSpritesDataPtr->animationData->animArg);
         paletteOffset = 0x100 + battlerAtk * 16;
@@ -976,8 +977,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
         if (targetSpecies == SPECIES_CASTFORM)
         {
             gSprites[gBattlerSpriteIds[battlerAtk]].anims = gMonFrontAnimsPtrTable[targetSpecies];
-            LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
-            LoadPalette(gBattleStruct->castformPalette[0] + gBattleMonForms[battlerDef] * 16, paletteOffset, 32);
+            LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[CASTFORM_NORMAL]);
+            LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerDef]], paletteOffset, 32);
         }
 
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
