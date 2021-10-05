@@ -13979,7 +13979,7 @@ Move_RISING_VOLTAGE::
 	end @to do:
 
 Move_TERRAIN_PULSE::
-	end @to do:
+	goto Move_DRAGON_PULSE @Temporary, needs to setup different animations based on terrain
 
 Move_SKITTER_SMACK::
 	end @to do:

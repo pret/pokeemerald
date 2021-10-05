@@ -379,6 +379,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDecorate                @ EFFECT_DECORATE
 	.4byte BattleScript_EffectHit                     @ EFFECT_SNIPE_SHOT
 	.4byte BattleScript_EffectTripleHit               @ EFFECT_TRIPLE_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_TERRAIN_PULSE
 
 BattleScript_EffectDecorate:
 	attackcanceler
