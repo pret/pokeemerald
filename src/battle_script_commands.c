@@ -12068,37 +12068,44 @@ static void Cmd_jumpifhasnohp(void)
 
 static void Cmd_getsecretpowereffect(void)
 {
+    gBattleScripting.moveEffect = GetSecretPowerMoveEffect();
+    gBattlescriptCurrInstr++;
+}
+
+u16 GetSecretPowerMoveEffect(void)
+{
+    u16 moveEffect;
     switch (gBattleTerrain)
     {
     case BATTLE_TERRAIN_GRASS:
-        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
+        moveEffect = MOVE_EFFECT_SLEEP;
         break;
     case BATTLE_TERRAIN_LONG_GRASS:
-        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
+        moveEffect = MOVE_EFFECT_SLEEP;
         break;
     case BATTLE_TERRAIN_SAND:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+        moveEffect = MOVE_EFFECT_ACC_MINUS_1;
         break;
     case BATTLE_TERRAIN_UNDERWATER:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+        moveEffect = MOVE_EFFECT_ATK_MINUS_1;
         break;
     case BATTLE_TERRAIN_WATER:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+        moveEffect = MOVE_EFFECT_ATK_MINUS_1;
         break;
     case BATTLE_TERRAIN_POND:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+        moveEffect = MOVE_EFFECT_ATK_MINUS_1;
         break;
     case BATTLE_TERRAIN_MOUNTAIN:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+        moveEffect = MOVE_EFFECT_ACC_MINUS_1;
         break;
     case BATTLE_TERRAIN_CAVE:
-        gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
+        moveEffect = MOVE_EFFECT_FLINCH;
         break;
     default:
-        gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
+        moveEffect = MOVE_EFFECT_PARALYSIS;
         break;
     }
-    gBattlescriptCurrInstr++;
+    return moveEffect;
 }
 
 static void Cmd_pickup(void)
