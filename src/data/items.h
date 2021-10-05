@@ -1191,12 +1191,12 @@ const struct Item gItems[] =
         .itemId = ITEM_ESCAPE_ROPE,
         .description = sEscapeRopeDesc,
         #if I_KEY_ESCAPE_ROPE >= GEN_8
-        .price = 0,
-        .importance = 1,
-        .pocket = POCKET_KEY_ITEMS,
+            .price = 0,
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
         #else
-        .price = 1000,
-        .pocket = POCKET_ITEMS,
+            .price = 1000,
+            .pocket = POCKET_ITEMS,
         #endif
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_EscapeRope,
@@ -1504,6 +1504,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -1521,6 +1522,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -1538,6 +1540,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -1555,6 +1558,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5360,6 +5364,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange,
+            .secondaryId = FORM_ITEM_USE_TIME,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
