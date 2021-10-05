@@ -4853,13 +4853,13 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
       objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
       return FALSE;
     }
-    sprite->data[1] = 1; // Enter idle state
+    sprite->data[1] = 1; // Enter active state; if the player moves the follower will appear
     return TRUE;
 }
 
 bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (gObjectEvents[gPlayerAvatar.objectEventId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER) { // do nothing if player is stationary
+    if (gPlayerAvatar.tileTransitionState == T_NOT_MOVING && !gObjectEvents[gPlayerAvatar.objectEventId].heldMovementActive ) { // do nothing if player is stationary
         return FALSE;
     } else if (!IsFollowerVisible()) {
       if (objectEvent->invisible) { // Return to shadowing state
@@ -4880,8 +4880,7 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
 
 bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    // TODO: This check for 0xFF fixes a crash on Route 111, why?
-    if (objectEvent->movementActionId == 0xFF || ObjectEventExecSingleMovementAction(objectEvent, sprite))
+    if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
     {
         objectEvent->singleMovementActive = 0;
         if (sprite->data[1]) { // restore nonzero state
@@ -4912,8 +4911,6 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     s16 y;
     s16 targetX;
     s16 targetY;
-    u32 *debugPtr = (u32*) 0x0203d000;
-    *(debugPtr) = (u32) &sprite->data[0];
 
     targetX = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x;
     targetY = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y;
