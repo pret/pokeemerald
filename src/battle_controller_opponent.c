@@ -1552,8 +1552,9 @@ static void OpponentHandleChooseAction(void)
     else
     {
         u8 chosenMoveId;
-        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
-        
+        struct ChooseMoveStruct moveInfo;
+
+        FillChooseMoveStruct(&moveInfo);        
         if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
         {
             BattleAI_SetupAIData(0xF);
@@ -1573,9 +1574,9 @@ static void OpponentHandleChooseAction(void)
                 BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
                 break;
             default:
-                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+                if (gBattleMoves[moveInfo.moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                     gBattlerTarget = gActiveBattler;
-                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+                if (gBattleMoves[moveInfo.moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
                 {
                     gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
@@ -1596,7 +1597,7 @@ static void OpponentHandleChooseAction(void)
             do
             {
                 chosenMoveId = Random() & 3;
-                move = moveInfo->moves[chosenMoveId];
+                move = moveInfo.moves[chosenMoveId];
             } while (move == MOVE_NONE);
 
             if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
