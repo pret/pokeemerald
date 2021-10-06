@@ -983,6 +983,11 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
     [ABILITY_FLUFFY] = 1,
     [ABILITY_QUEENLY_MAJESTY] = 1,
     [ABILITY_WATER_BUBBLE] = 1,
+    [ABILITY_MIRROR_ARMOR] = 1,
+    [ABILITY_PUNK_ROCK] = 1,
+    [ABILITY_ICE_SCALES] = 1,
+    [ABILITY_ICE_FACE] = 1,
+    [ABILITY_PASTEL_VEIL] = 1,
 };
 
 static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
@@ -1263,7 +1268,7 @@ void PressurePPLose(u8 target, u8 attacker, u16 move)
 {
     int moveIndex;
 
-    if (gBattleMons[target].ability != ABILITY_PRESSURE)
+    if (GetBattlerAbility(target) != ABILITY_PRESSURE)
         return;
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1295,7 +1300,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (atkSide != GetBattlerSide(i) && gBattleMons[i].ability == ABILITY_PRESSURE)
+        if (atkSide != GetBattlerSide(i) && GetBattlerAbility(i) == ABILITY_PRESSURE)
         {
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
@@ -1328,7 +1333,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleMons[i].ability == ABILITY_PRESSURE && i != attacker)
+        if (GetBattlerAbility(i) == ABILITY_PRESSURE && i != attacker)
         {
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
@@ -2723,8 +2728,8 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 gStatuses3[gActiveBattler] -= STATUS3_YAWN_TURN(1);
                 if (!(gStatuses3[gActiveBattler] & STATUS3_YAWN) && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
-                 && gBattleMons[gActiveBattler].ability != ABILITY_VITAL_SPIRIT
-                 && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler)
+                 && GetBattlerAbility(gActiveBattler) != ABILITY_VITAL_SPIRIT
+                 && GetBattlerAbility(gActiveBattler) != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler)
                  && !IsLeafGuardProtected(gActiveBattler))
                 {
                     CancelMultiTurnMoves(gActiveBattler);
@@ -3121,7 +3126,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 else
                 {
                     u8 toSub;
-                    if (gBattleMons[gBattlerAttacker].ability == ABILITY_EARLY_BIRD)
+                    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_EARLY_BIRD)
                         toSub = 2;
                     else
                         toSub = 1;
@@ -3131,7 +3136,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gBattleMons[gBattlerAttacker].status1 -= toSub;
                     if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
                     {
-                        if (gCurrentMove != MOVE_SNORE && gCurrentMove != MOVE_SLEEP_TALK)
+                        if (gChosenMove != MOVE_SNORE && gChosenMove != MOVE_SLEEP_TALK)
                         {
                             gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -3730,6 +3735,8 @@ static bool32 ShouldChangeFormHpBased(u32 battler)
         {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_VIOLET, SPECIES_MINIOR_CORE_VIOLET, 2},
         {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_YELLOW, SPECIES_MINIOR_CORE_YELLOW, 2},
         {ABILITY_SCHOOLING, SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI, 4},
+        {ABILITY_GULP_MISSILE, SPECIES_CRAMORANT, SPECIES_CRAMORANT_GORGING, 2},
+        {ABILITY_GULP_MISSILE, SPECIES_CRAMORANT, SPECIES_CRAMORANT_GULPING, 1},
     };
     u32 i;
 
@@ -4982,6 +4989,42 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_GULP_MISSILE:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(battler))
+            {
+                if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
+                {
+                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
+                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
+                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                    {
+                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                    }
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
+                    effect++;
+                }
+                else if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
+                {
+                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
+                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
+                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                    {
+                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                    }
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
+                    effect++;
+                }
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
@@ -5016,6 +5059,27 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 SetMoveEffect(FALSE, 0);
                 BattleScriptPop();
                 effect++;
+            }
+            break;
+        case ABILITY_GULP_MISSILE:
+            if (((gCurrentMove == MOVE_SURF && TARGET_TURN_DAMAGED) || gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER)
+             && (effect = ShouldChangeFormHpBased(gBattlerAttacker)))
+            {
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
+                effect++;
+            }
+            break;
+        case ABILITY_BATTLE_BOND:
+            if (gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_BATTLE_BOND
+             && gBattleResults.opponentFaintCounter != 0
+             && CalculateEnemyPartyCount() > 1)
+            {
+                PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species);
+                gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerAttacker]] = gBattleMons[gBattlerAttacker].species;
+                gBattleMons[gBattlerAttacker].species = SPECIES_GRENINJA_ASH;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_BattleBondActivatesOnMoveEndAttacker;
             }
             break;
         }
@@ -5340,11 +5404,15 @@ u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability)
 u32 IsAbilityPreventingEscape(u32 battlerId)
 {
     u32 id;
-
-    if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battlerId, TYPE_GHOST))
-        return 0;
-
-    if ((id = IsAbilityOnOpposingSide(battlerId, ABILITY_SHADOW_TAG)) && gBattleMons[battlerId].ability != ABILITY_SHADOW_TAG)
+    #if B_GHOSTS_ESCAPE >= GEN_6
+        if (IS_BATTLER_OF_TYPE(battlerId, TYPE_GHOST))
+            return 0;
+    #endif
+    #if B_SHADOW_TAG_ESCAPE >= GEN_4
+        if ((id = IsAbilityOnOpposingSide(battlerId, ABILITY_SHADOW_TAG)) && gBattleMons[battlerId].ability != ABILITY_SHADOW_TAG)
+    #else
+        if (id = IsAbilityOnOpposingSide(battlerId, ABILITY_SHADOW_TAG))
+    #endif
         return id;
     if ((id = IsAbilityOnOpposingSide(battlerId, ABILITY_ARENA_TRAP)) && IsBattlerGrounded(battlerId))
         return id;
@@ -7258,7 +7326,7 @@ static const u16 sWeightToDamageTable[] =
 };
 
 static const u8 sSpeedDiffPowerTable[] = {40, 60, 80, 120, 150};
-static const u8 sHeatCrushPowerTable[] = {40, 40, 60, 80, 100, 120};
+static const u8 sHeatCrashPowerTable[] = {40, 40, 60, 80, 100, 120};
 static const u8 sTrumpCardPowerTable[] = {200, 80, 60, 50, 40};
 
 const struct TypePower gNaturalGiftTable[] =
@@ -7430,7 +7498,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             if (gBattleMons[battlerAtk].pp[i] >= ARRAY_COUNT(sTrumpCardPowerTable))
                 basePower = sTrumpCardPowerTable[ARRAY_COUNT(sTrumpCardPowerTable) - 1];
             else
-                basePower = sTrumpCardPowerTable[i];
+                basePower = sTrumpCardPowerTable[gBattleMons[battlerAtk].pp[i]];
         }
         break;
     case EFFECT_ACROBATICS:
@@ -7453,10 +7521,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk) / GetBattlerWeight(battlerDef);
-        if (weight >= ARRAY_COUNT(sHeatCrushPowerTable))
-            basePower = sHeatCrushPowerTable[ARRAY_COUNT(sHeatCrushPowerTable) - 1];
+        if (weight >= ARRAY_COUNT(sHeatCrashPowerTable))
+            basePower = sHeatCrashPowerTable[ARRAY_COUNT(sHeatCrashPowerTable) - 1];
         else
-            basePower = sHeatCrushPowerTable[i];
+            basePower = sHeatCrashPowerTable[i];
         break;
     case EFFECT_PUNISHMENT:
         basePower = 60 + (CountBattlerStatIncreases(battlerDef, FALSE) * 20);
@@ -7512,6 +7580,15 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (IsDynamaxed(battlerDef))
             basePower *= 2;
         #endif
+        break;
+    }
+
+    // move-specific base power changes
+    switch (move)
+    {
+    case MOVE_WATER_SHURIKEN:
+        if (gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
+            basePower = 20;
         break;
     }
 
@@ -8156,6 +8233,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     u32 abilityDef = GetBattlerAbility(battlerDef);
     u32 defSide = GET_BATTLER_SIDE(battlerDef);
     u16 finalModifier = UQ_4_12(1.0);
+    u16 itemDef = gBattleMons[battlerDef].item;
 
     // check multiple targets in double battle
     if (GetMoveTargetCount(move, battlerAtk, battlerDef) >= 2)
@@ -8276,7 +8354,8 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     // berries reducing dmg
     case HOLD_EFFECT_RESIST_BERRY:
         if (moveType == GetBattlerHoldEffectParam(battlerDef)
-            && (moveType == TYPE_NORMAL || typeEffectivenessModifier >= UQ_4_12(2.0)))
+            && (moveType == TYPE_NORMAL || typeEffectivenessModifier >= UQ_4_12(2.0))
+            && !UnnerveOn(battlerDef, itemDef))
         {
             if (abilityDef == ABILITY_RIPEN)
                 MulModifier(&finalModifier, UQ_4_12(0.25));
@@ -8677,6 +8756,9 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
         {SPECIES_MINIOR_METEOR_VIOLET, SPECIES_MINIOR_CORE_VIOLET},
         {SPECIES_MINIOR_METEOR_YELLOW, SPECIES_MINIOR_CORE_YELLOW},
         {SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI},
+        {SPECIES_CRAMORANT_GORGING, SPECIES_CRAMORANT},
+        {SPECIES_CRAMORANT_GULPING, SPECIES_CRAMORANT},
+        {SPECIES_GRENINJA_ASH, SPECIES_GRENINJA_BATTLE_BOND},
     };
 
     if (isSwitchingOut) // Don't revert Mimikyu Busted when switching out

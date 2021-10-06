@@ -40,6 +40,11 @@
     #define SPECIES_BURMY                   0
     #define SPECIES_BURMY_SANDY_CLOAK       10013
     #define SPECIES_BURMY_TRASH_CLOAK       10014
+    #define SPECIES_CRAMORANT               0
+    #define SPECIES_CRAMORANT_GORGING       10015
+    #define SPECIES_CRAMORANT_GULPING       10016
+    #define SPECIES_GRENINJA_BATTLE_BOND    0
+    #define SPECIES_GRENINJA_ASH            10017
 #endif
 
 // Items with peculiar battle effects.
@@ -124,6 +129,7 @@
 #define B_GALE_WINGS                GEN_7 // In Gen7+ requires full HP to trigger.
 #define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7+, Stance Change fails if the Pokémon is unable to use a move because of confusion, paralysis, etc. In Gen6, it doesn't.
 #define B_GHOSTS_ESCAPE             GEN_7 // In Gen6+, Ghost-type Pokémon can escape even when blocked by abilities such as Shadow Tag.
+#define B_SHADOW_TAG_ESCAPE         GEN_7 // In Gen4+, if both sides have a Pokémon with Shadow Tag, all battlers can escape. Before, neither side could escape this situation.
 #define B_MOODY_ACC_EVASION         GEN_8 // In Gen8, Moody CANNOT raise Accuracy and Evasion anymore.
 #define B_FLASH_FIRE_FROZEN         GEN_7 // In Gen5+, Flash Fire can trigger even when frozen, when it couldn't before.
 #define B_SYNCHRONIZE_NATURE        GEN_8 // In Gen8, if the Pokémon with Synchronize is leading the party, it's 100% guaranteed that wild Pokémon will have the same ability, as opposed to 50% previously.
