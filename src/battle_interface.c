@@ -3206,7 +3206,7 @@ bool32 CanThrowLastUsedBall(void)
 void TryAddLastUsedBallItemSprites(void)
 {
     #if B_LAST_USED_BALL == TRUE
-    if ((gLastThrownBall == 0
+    if (gLastThrownBall == 0
       || (gLastThrownBall != 0 && !CheckBagHasItem(gLastThrownBall, 1)))
     {
         // we're out of the last used ball, so just set it to the first ball in the bag
