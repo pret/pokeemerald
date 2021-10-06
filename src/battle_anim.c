@@ -2213,6 +2213,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         case B_ANIM_DOOM_DESIRE_HIT:
         case B_ANIM_WISH_HEAL:
         case B_ANIM_MEGA_EVOLUTION:
+        case B_ANIM_GULP_MISSILE:
             hideHpBoxes = TRUE;
             break;
         default:
@@ -3227,7 +3228,7 @@ static void LoadDefaultBg(void)
     if (IsContest())
         LoadContestBgAfterMoveAnim();
     #if B_TERRAIN_BG_CHANGE == TRUE
-    else if (gFieldStatuses & STATUS_TERRAIN_ANY)
+    else if (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         DrawTerrainTypeBattleBackground();
     #endif
     else
