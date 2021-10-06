@@ -510,13 +510,9 @@ void MG_DrawCheckerboardPattern(u32 bg)
         for (j = 0; j < 32; j++)
         {
             if ((i & 1) != (j & 1))
-            {
                 FillBgTilemapBufferRect(bg, 1, j, i + 2, 1, 1, 0x11);
-            }
             else
-            {
                 FillBgTilemapBufferRect(bg, 2, j, i + 2, 1, 1, 0x11);
-            }
         }
     }
 }
@@ -593,10 +589,8 @@ bool32 unref_HideDownArrowAndWaitButton(u8 * textState)
     {
     case 0:
         HideDownArrow();
-        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
-        {
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             (*textState)++;
-        }
         break;
     case 1:
         ShowDownArrow();
@@ -609,9 +603,8 @@ bool32 unref_HideDownArrowAndWaitButton(u8 * textState)
 static bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
 {
     if (*counter == 0)
-    {
         AddTextPrinterToWindow1(str);
-    }
+
     if (++(*counter) > 120)
     {
         *counter = 0;
@@ -632,27 +625,20 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
     s32 response;
 
     if (whichMenu == 0)
-    {
         listMenuTemplate.items = sListMenuItems_CardsOrNews;
-    }
     else
-    {
         listMenuTemplate.items = sListMenuItems_WirelessOrFriend;
-    }
+
     width = Intl_GetListMenuWidth(&listMenuTemplate);
     if (width & 1)
-    {
         width++;
-    }
+
     windowTemplate.width = width;
     if (width < 30)
-    {
         windowTemplate.tilemapLeft = (30 - width) / 2;
-    }
     else
-    {
         windowTemplate.tilemapLeft = 0;
-    }
+
     response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, 0x00A, 0xE0);
     if (response != -1)
     {
@@ -672,13 +658,9 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
     case 0:
         StringExpandPlaceholders(gStringVar4, str);
         if (yesNoBoxPlacement == 0)
-        {
             *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width28);
-        }
         else
-        {
             *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width20);
-        }
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, 1, 0, 1, 0, 0, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
@@ -689,19 +671,15 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
     case 1:
         windowTemplate = sWindowTemplate_YesNoBox;
         if (yesNoBoxPlacement == 0)
-        {
             windowTemplate.tilemapTop = 9;
-        }
         else
-        {
             windowTemplate.tilemapTop = 15;
-        }
         CreateYesNoMenu(&windowTemplate, 10, 14, 0);
         (*textState)++;
         break;
     case 2:
         input = Menu_ProcessInputNoWrapClearOnChoose();
-        if (input == -1 || input == 0 || input == 1)
+        if (input == MENU_B_PRESSED || input == 0 || input == 1)
         {
             *textState = 0;
             rbox_fill_rectangle(*windowId);
@@ -711,16 +689,16 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
             return input;
         }
         break;
-    case 0xFF:
+    case (u8)MENU_B_PRESSED:
         *textState = 0;
         rbox_fill_rectangle(*windowId);
         ClearWindowTilemap(*windowId);
         CopyWindowToVram(*windowId, 1);
         RemoveWindow(*windowId);
-        return -1;
+        return MENU_B_PRESSED;
     }
 
-    return -2;
+    return MENU_NOTHING_CHOSEN;
 }
 
 static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
@@ -1237,21 +1215,21 @@ void task00_mystery_gift(u8 taskId)
         case 0:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_CARD2);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_CARD);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_CARD2);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_CARD);
             }
             break;
         case 1:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_NEWS2);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_NEWS);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_NEWS2);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_NEWS);
             }
             break;
         }
@@ -1594,10 +1572,10 @@ void task00_mystery_gift(u8 taskId)
             switch (data->IsCardOrNews)
             {
             case 0:
-                MEvent_CreateTask_Leader(ACTIVITY_WONDER_CARD2);
+                MEvent_CreateTask_Leader(ACTIVITY_WONDER_CARD);
                 break;
             case 1:
-                MEvent_CreateTask_Leader(ACTIVITY_WONDER_NEWS2);
+                MEvent_CreateTask_Leader(ACTIVITY_WONDER_NEWS);
                 break;
             }
             data->source = 1;

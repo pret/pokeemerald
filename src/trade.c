@@ -274,7 +274,7 @@ static bool32 IsLinkTradeTaskFinished(void)
 {
     if (gPlayerCurrActivity == ACTIVITY_29)
     {
-        if (gRfuSlotStatusNI[sub_800E87C(lman.acceptSlot_flag)]->send.state == 0)
+        if (gRfuSlotStatusNI[Rfu_GetIndexOfNewestChild(lman.acceptSlot_flag)]->send.state == 0)
             return TRUE;
         else
             return FALSE;
@@ -2438,80 +2438,70 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub rfuPlayer, struct GFtgtGnameSub rfuPartner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isEventLegal)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isEventLegal)
 {
-    bool8 playerHasNationalDex = rfuPlayer.hasNationalDex;
-    bool8 playerIsChampion = rfuPlayer.isChampion;
-    bool8 partnerHasNationalDex = rfuPartner.hasNationalDex;
-    bool8 partnerIsChampion = rfuPartner.isChampion;
-    u8 r1 = rfuPartner.version;
+    bool8 playerHasNationalDex = player.hasNationalDex;
+    bool8 playerIsChampion = player.isChampion;
+    bool8 partnerHasNationalDex = partner.hasNationalDex;
+    bool8 partnerIsChampion = partner.isChampion;
+    u8 partnerVersion = partner.version;
 
-    if (r1 != VERSION_EMERALD)
+    // If partner is not using Emerald, both players must be champion
+    if (partnerVersion != VERSION_EMERALD)
     {
         if (!playerIsChampion)
-        {
             return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1;
-        }
         else if (!partnerIsChampion)
-        {
             return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2;
-        }
     }
 
+    // Cannot trade illegitimate Deoxys/Mew
     if (IsDeoxysOrMewUntradable(playerSpecies, isEventLegal))
-    {
         return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
-    }
 
     if (partnerSpecies == SPECIES_EGG)
     {
+        // If partner is trading an Egg then the player must also be trading an Egg
         if (playerSpecies2 != partnerSpecies)
-        {
             return UR_TRADE_MSG_NOT_EGG;
-        }
     }
     else
     {
-        if (gBaseStats[playerSpecies2].type1 != requestedType && gBaseStats[playerSpecies2].type2 != requestedType)
-        {
+        // Player's Pokémon must be of the type the partner requested
+        if (gBaseStats[playerSpecies2].type1 != requestedType 
+         && gBaseStats[playerSpecies2].type2 != requestedType)
             return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
-        }
     }
 
+    // If the player is trading an Egg then the partner must also be trading an Egg
+    // Odd that this wasn't checked earlier, as by this point we know either the partner doesn't have an Egg or that both do.
     if (playerSpecies2 == SPECIES_EGG && playerSpecies2 != partnerSpecies)
-    {
         return UR_TRADE_MSG_MON_CANT_BE_TRADED_1;
-    }
 
+    // If the player doesn't have the National Dex then Eggs and non-Hoenn Pokémon can't be traded
     if (!playerHasNationalDex)
     {
         if (playerSpecies2 == SPECIES_EGG)
-        {
             return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
-        }
 
         if (!IsSpeciesInHoennDex(playerSpecies2))
-        {
             return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
-        }
 
         if (!IsSpeciesInHoennDex(partnerSpecies))
-        {
             return UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED;
-        }
     }
 
+    // If the partner doesn't have the National Dex then the player's offer has to be a Hoenn Pokémon
     if (!partnerHasNationalDex && !IsSpeciesInHoennDex(playerSpecies2))
-    {
         return UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON;
-    }
 
+    // Trade is allowed
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub rfuPlayer, u16 species2, u16 species, u8 isEventLegal)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, u8 isEventLegal)
 {
-    bool8 hasNationalDex = rfuPlayer.hasNationalDex;
+    bool8 hasNationalDex = player.hasNationalDex;
 
     if (IsDeoxysOrMewUntradable(species, isEventLegal))
         return CANT_REGISTER_MON;
@@ -2541,9 +2531,7 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
     {
         speciesArray[i] = GetMonData(&mon[i], MON_DATA_SPECIES2);
         if (speciesArray[i] == SPECIES_EGG)
-        {
             speciesArray[i] = SPECIES_NONE;
-        }
     }
 
     versions = 0;
@@ -2553,13 +2541,9 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
         version = gLinkPlayers[i].version & 0xFF;
         if (version == VERSION_FIRE_RED ||
             version == VERSION_LEAF_GREEN)
-        {
             versions = 0;
-        }
         else
-        {
             versions |= 1;
-        }
     }
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -2590,9 +2574,7 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         if (monIdx != i)
-        {
             numMonsLeft += speciesArray[i];
-        }
     }
 
     if (!numMonsLeft)
