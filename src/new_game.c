@@ -205,7 +205,6 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    gSaveBlock2Ptr->lastUsedBall = ITEM_POKE_BALL;
 }
 
 static void ResetMiniGamesRecords(void)
