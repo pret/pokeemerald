@@ -3694,7 +3694,8 @@ bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
           && GetBattlerAbility(battler) != ABILITY_PRIMORDIAL_SEA
           && GetBattlerAbility(battler) != ABILITY_DELTA_STREAM)
     {
-        return FALSE;
+        weatherEnumId = 0;
+        return TRUE;
     }
     else if (!(gBattleWeather & (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1])))
     {
