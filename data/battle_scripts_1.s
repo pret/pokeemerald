@@ -8426,3 +8426,9 @@ BattleScript_DarkTypePreventsPrankster::
 	waitmessage B_WAIT_TIME_LONG
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd
+
+BattleScript_MagicianActivates::
+	call BattleScript_AbilityPopUp
+	call BattleScript_ItemSteal
+	return
+

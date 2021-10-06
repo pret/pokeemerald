@@ -389,5 +389,6 @@ extern const u8 BattleScript_DarkTypePreventsPrankster[];
 extern const u8 BattleScript_GulpMissileGorging[];
 extern const u8 BattleScript_GulpMissileGulping[];
 extern const u8 BattleScript_BattleBondActivatesOnMoveEndAttacker[];
+extern const u8 BattleScript_MagicianActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

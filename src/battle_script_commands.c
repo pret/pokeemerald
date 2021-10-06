@@ -5071,6 +5071,26 @@ static void Cmd_moveend(void)
             }
             gBattleScripting.moveendState++;
             break;
+        case MOVEEND_MAGICIAN:
+            if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MAGICIAN
+              && gCurrentMove != MOVE_FLING && gCurrentMove != MOVE_NATURAL_GIFT
+              && gBattleMons[gBattlerAttacker].item == ITEM_NONE
+              && IsBattlerAlive(gBattlerAttacker)
+              && TARGET_TURN_DAMAGED
+              && CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item)
+              && !DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)
+              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+              && (GetBattlerAbility(gBattlerTarget) != ABILITY_STICKY_HOLD || !IsBattlerAlive(gBattlerTarget)))
+            {
+                StealTargetItem(gBattlerAttacker, gBattlerTarget);
+                gBattleScripting.battler = gBattlerAbility = gBattlerAttacker;
+                gEffectBattler = gBattlerTarget;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_MagicianActivates;
+                effect = TRUE;
+            }
+            gBattleScripting.moveendState++;
+            break;
         case MOVEEND_NEXT_TARGET: // For moves hitting two opposing Pokemon.
             // Set a flag if move hits either target (for throat spray that can't check damage)
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
