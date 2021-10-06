@@ -7521,7 +7521,7 @@ static void CreateCaughtBallEvolutionScreen(u16 targetSpecies, u8 x, u8 y, u16 u
         BlitBitmapToWindow(0, sCaughtBall_Gfx, x, y, 8, 16);
     else
     {
-        FillWindowPixelRect(0, PIXEL_FILL(0), x, y, 8, 16);
+        //FillWindowPixelRect(0, PIXEL_FILL(0), x, y, 8, 16); //not sure why this was even here
         PrintInfoScreenTextSmall(gText_OneDash, x+1, y);
     }
 }
