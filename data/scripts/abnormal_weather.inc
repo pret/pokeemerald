@@ -1,44 +1,44 @@
-AbnormalWeather_EventScript_PlaceTilesRoute114North:: @ 8273913
+AbnormalWeather_EventScript_PlaceTilesRoute114North::
 	setmetatile 7, 3, METATILE_Fallarbor_RedCaveEntrance_Top, 1
 	setmetatile 7, 4, METATILE_Fallarbor_RedCaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute114South:: @ 8273926
+AbnormalWeather_EventScript_PlaceTilesRoute114South::
 	setmetatile 6, 45, METATILE_Fallarbor_BrownCaveEntrance_Top, 1
 	setmetatile 6, 46, METATILE_Fallarbor_BrownCaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute115West:: @ 8273939
+AbnormalWeather_EventScript_PlaceTilesRoute115West::
 	setmetatile 21, 5, METATILE_Fallarbor_BrownCaveEntrance_Top, 1
 	setmetatile 21, 6, METATILE_Fallarbor_BrownCaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute115East:: @ 827394C
+AbnormalWeather_EventScript_PlaceTilesRoute115East::
 	setmetatile 36, 9, METATILE_Fallarbor_BrownCaveEntrance_Top, 1
 	setmetatile 36, 10, METATILE_Fallarbor_BrownCaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute116North:: @ 827395F
+AbnormalWeather_EventScript_PlaceTilesRoute116North::
 	setmetatile 59, 12, METATILE_General_CaveEntrance_Top, 1
 	setmetatile 59, 13, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute116South:: @ 8273972
+AbnormalWeather_EventScript_PlaceTilesRoute116South::
 	setmetatile 79, 5, METATILE_General_CaveEntrance_Top, 1
 	setmetatile 79, 6, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute118East:: @ 8273985
+AbnormalWeather_EventScript_PlaceTilesRoute118East::
 	setmetatile 42, 5, METATILE_General_CaveEntrance_Top, 1
 	setmetatile 42, 6, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute118West:: @ 8273998
+AbnormalWeather_EventScript_PlaceTilesRoute118West::
 	setmetatile 9, 5, METATILE_General_CaveEntrance_Top, 1
 	setmetatile 9, 6, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute105North:: @ 82739AB
+AbnormalWeather_EventScript_PlaceTilesRoute105North::
 	setmetatile 10, 28, METATILE_General_RoughWater, 0
 	setmetatile 11, 28, METATILE_General_RoughWater, 0
 	setmetatile 9, 29, METATILE_General_RoughWater, 0
@@ -53,7 +53,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute105North:: @ 82739AB
 	setmetatile 11, 31, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute105South:: @ 8273A18
+AbnormalWeather_EventScript_PlaceTilesRoute105South::
 	setmetatile 20, 53, METATILE_General_RoughWater, 0
 	setmetatile 21, 53, METATILE_General_RoughWater, 0
 	setmetatile 19, 54, METATILE_General_RoughWater, 0
@@ -68,7 +68,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute105South:: @ 8273A18
 	setmetatile 21, 56, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute125West:: @ 8273A85
+AbnormalWeather_EventScript_PlaceTilesRoute125West::
 	setmetatile 8, 16, METATILE_General_RoughWater, 0
 	setmetatile 9, 16, METATILE_General_RoughWater, 0
 	setmetatile 7, 17, METATILE_General_RoughWater, 0
@@ -83,7 +83,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute125West:: @ 8273A85
 	setmetatile 9, 19, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute125East:: @ 8273AF2
+AbnormalWeather_EventScript_PlaceTilesRoute125East::
 	setmetatile 53, 18, METATILE_General_RoughWater, 0
 	setmetatile 54, 18, METATILE_General_RoughWater, 0
 	setmetatile 52, 19, METATILE_General_RoughWater, 0
@@ -98,7 +98,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute125East:: @ 8273AF2
 	setmetatile 54, 21, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute127North:: @ 8273B5F
+AbnormalWeather_EventScript_PlaceTilesRoute127North::
 	setmetatile 57, 9, METATILE_General_RoughWater, 0
 	setmetatile 58, 9, METATILE_General_RoughWater, 0
 	setmetatile 56, 10, METATILE_General_RoughWater, 0
@@ -113,7 +113,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute127North:: @ 8273B5F
 	setmetatile 58, 12, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute127South:: @ 8273BCC
+AbnormalWeather_EventScript_PlaceTilesRoute127South::
 	setmetatile 61, 30, METATILE_General_RoughWater, 0
 	setmetatile 62, 30, METATILE_General_RoughWater, 0
 	setmetatile 60, 31, METATILE_General_RoughWater, 0
@@ -128,7 +128,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute127South:: @ 8273BCC
 	setmetatile 62, 33, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute129West:: @ 8273C39
+AbnormalWeather_EventScript_PlaceTilesRoute129West::
 	setmetatile 16, 14, METATILE_General_RoughWater, 0
 	setmetatile 17, 14, METATILE_General_RoughWater, 0
 	setmetatile 15, 15, METATILE_General_RoughWater, 0
@@ -143,7 +143,7 @@ AbnormalWeather_EventScript_PlaceTilesRoute129West:: @ 8273C39
 	setmetatile 17, 17, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_PlaceTilesRoute129East:: @ 8273CA6
+AbnormalWeather_EventScript_PlaceTilesRoute129East::
 	setmetatile 42, 19, METATILE_General_RoughWater, 0
 	setmetatile 43, 19, METATILE_General_RoughWater, 0
 	setmetatile 41, 20, METATILE_General_RoughWater, 0
@@ -158,26 +158,26 @@ AbnormalWeather_EventScript_PlaceTilesRoute129East:: @ 8273CA6
 	setmetatile 43, 22, METATILE_General_RoughWater, 0
 	return
 
-AbnormalWeather_EventScript_HideMapNamePopup:: @ 8273D13
+AbnormalWeather_EventScript_HideMapNamePopup::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
-AbnormalWeather_StartKyogreWeather:: @ 8273D17
+AbnormalWeather_StartKyogreWeather::
 	setweather WEATHER_DOWNPOUR
 	return
 
-AbnormalWeather_StartGroudonWeather:: @ 8273D1B
+AbnormalWeather_StartGroudonWeather::
 	setweather WEATHER_DROUGHT
 	return
 
-AbnormalWeather_EventScript_EndEventAndCleanup_1:: @ 8273D1F
+AbnormalWeather_EventScript_EndEventAndCleanup_1::
 	lockall
 	compare VAR_ABNORMAL_WEATHER_LOCATION, MARINE_CAVE_LOCATIONS_START
 	goto_if_ge AbnormalWeather_EventScript_ShowRainEndedMessage
 	goto AbnormalWeather_EventScript_ShowSunEndedMessage
 	end
 
-AbnormalWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
+AbnormalWeather_EventScript_EndEventAndCleanup_2::
 	closemessage
 	fadescreenswapbuffers FADE_TO_BLACK
 	setweather WEATHER_SUNNY
@@ -191,17 +191,17 @@ AbnormalWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	releaseall
 	end
 
-AbnormalWeather_EventScript_ShowRainEndedMessage:: @ 8273D51
+AbnormalWeather_EventScript_ShowRainEndedMessage::
 	msgbox gText_AbnormalWeatherEnded_Rain, MSGBOX_DEFAULT
 	goto AbnormalWeather_EventScript_EndEventAndCleanup_2
 	end
 
-AbnormalWeather_EventScript_ShowSunEndedMessage:: @ 8273D5F
+AbnormalWeather_EventScript_ShowSunEndedMessage::
 	msgbox gText_AbnormalWeatherEnded_Sun, MSGBOX_DEFAULT
 	goto AbnormalWeather_EventScript_EndEventAndCleanup_2
 	end
 
-AbnormalWeather_EventScript_CleanupMapTiles:: @ 8273D6D
+AbnormalWeather_EventScript_CleanupMapTiles::
 	switch VAR_ABNORMAL_WEATHER_LOCATION
 	case ABNORMAL_WEATHER_ROUTE_114_NORTH, AbnormalWeather_EventScript_CleanupRoute114North
 	case ABNORMAL_WEATHER_ROUTE_114_SOUTH, AbnormalWeather_EventScript_CleanupRoute114South
@@ -221,47 +221,47 @@ AbnormalWeather_EventScript_CleanupMapTiles:: @ 8273D6D
 	case ABNORMAL_WEATHER_ROUTE_129_EAST, AbnormalWeather_EventScript_CleanupRoute129East
 	return
 
-AbnormalWeather_EventScript_CleanupRoute114North:: @ 8273E23
+AbnormalWeather_EventScript_CleanupRoute114North::
 	setmetatile 7, 3, METATILE_Fallarbor_RedRockWall, 1
 	setmetatile 7, 4, METATILE_Fallarbor_RedRockWall, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute114South:: @ 8273E36
+AbnormalWeather_EventScript_CleanupRoute114South::
 	setmetatile 6, 45, METATILE_Fallarbor_BrownRockWall, 1
 	setmetatile 6, 46, METATILE_Fallarbor_BrownRockWall, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute115West:: @ 8273E49
+AbnormalWeather_EventScript_CleanupRoute115West::
 	setmetatile 21, 5, METATILE_Fallarbor_BrownRockWall, 1
 	setmetatile 21, 6, METATILE_Fallarbor_BrownRockWall, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute115East:: @ 8273E5C
+AbnormalWeather_EventScript_CleanupRoute115East::
 	setmetatile 36, 9, METATILE_Fallarbor_BrownRockWall, 1
 	setmetatile 36, 10, METATILE_Fallarbor_BrownRockWall, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute116North:: @ 8273E6F
+AbnormalWeather_EventScript_CleanupRoute116North::
 	setmetatile 59, 12, METATILE_General_RockWall_RockBase, 1
 	setmetatile 59, 13, METATILE_General_RockWall_RockBase, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute116South:: @ 8273E82
+AbnormalWeather_EventScript_CleanupRoute116South::
 	setmetatile 79, 5, METATILE_General_RockWall_RockBase, 1
 	setmetatile 79, 6, METATILE_General_RockWall_RockBase, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute118East:: @ 8273E95
+AbnormalWeather_EventScript_CleanupRoute118East::
 	setmetatile 42, 5, METATILE_General_RockWall_RockBase, 1
 	setmetatile 42, 6, METATILE_General_RockWall_GrassBase, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute118West:: @ 8273EA8
+AbnormalWeather_EventScript_CleanupRoute118West::
 	setmetatile 9, 5, METATILE_General_RockWall_RockBase, 1
 	setmetatile 9, 6, METATILE_General_RockWall_GrassBase, 1
 	return
 
-AbnormalWeather_EventScript_CleanupRoute105North:: @ 8273EBB
+AbnormalWeather_EventScript_CleanupRoute105North::
 	setmetatile 10, 28, METATILE_General_CalmWater, 0
 	setmetatile 11, 28, METATILE_General_CalmWater, 0
 	setmetatile 9, 29, METATILE_General_CalmWater, 0
@@ -276,7 +276,7 @@ AbnormalWeather_EventScript_CleanupRoute105North:: @ 8273EBB
 	setmetatile 11, 31, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute105South:: @ 8273F28
+AbnormalWeather_EventScript_CleanupRoute105South::
 	setmetatile 20, 53, METATILE_General_CalmWater, 0
 	setmetatile 21, 53, METATILE_General_CalmWater, 0
 	setmetatile 19, 54, METATILE_General_CalmWater, 0
@@ -291,7 +291,7 @@ AbnormalWeather_EventScript_CleanupRoute105South:: @ 8273F28
 	setmetatile 21, 56, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute125West:: @ 8273F95
+AbnormalWeather_EventScript_CleanupRoute125West::
 	setmetatile 8, 16, METATILE_General_CalmWater, 0
 	setmetatile 9, 16, METATILE_General_CalmWater, 0
 	setmetatile 7, 17, METATILE_General_CalmWater, 0
@@ -306,7 +306,7 @@ AbnormalWeather_EventScript_CleanupRoute125West:: @ 8273F95
 	setmetatile 9, 19, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute125East:: @ 8274002
+AbnormalWeather_EventScript_CleanupRoute125East::
 	setmetatile 53, 18, METATILE_General_CalmWater, 0
 	setmetatile 54, 18, METATILE_General_CalmWater, 0
 	setmetatile 52, 19, METATILE_General_CalmWater, 0
@@ -321,7 +321,7 @@ AbnormalWeather_EventScript_CleanupRoute125East:: @ 8274002
 	setmetatile 54, 21, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute127North:: @ 827406F
+AbnormalWeather_EventScript_CleanupRoute127North::
 	setmetatile 57, 9, METATILE_General_CalmWater, 0
 	setmetatile 58, 9, METATILE_General_CalmWater, 0
 	setmetatile 56, 10, METATILE_General_CalmWater, 0
@@ -336,7 +336,7 @@ AbnormalWeather_EventScript_CleanupRoute127North:: @ 827406F
 	setmetatile 58, 12, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute127South:: @ 82740DC
+AbnormalWeather_EventScript_CleanupRoute127South::
 	setmetatile 61, 30, METATILE_General_CalmWater, 0
 	setmetatile 62, 30, METATILE_General_CalmWater, 0
 	setmetatile 60, 31, METATILE_General_CalmWater, 0
@@ -351,7 +351,7 @@ AbnormalWeather_EventScript_CleanupRoute127South:: @ 82740DC
 	setmetatile 62, 33, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute129West:: @ 8274149
+AbnormalWeather_EventScript_CleanupRoute129West::
 	setmetatile 16, 14, METATILE_General_CalmWater, 0
 	setmetatile 17, 14, METATILE_General_CalmWater, 0
 	setmetatile 15, 15, METATILE_General_CalmWater, 0
@@ -366,7 +366,7 @@ AbnormalWeather_EventScript_CleanupRoute129West:: @ 8274149
 	setmetatile 17, 17, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_EventScript_CleanupRoute129East:: @ 82741B6
+AbnormalWeather_EventScript_CleanupRoute129East::
 	setmetatile 42, 19, METATILE_General_CalmWater, 0
 	setmetatile 43, 19, METATILE_General_CalmWater, 0
 	setmetatile 41, 20, METATILE_General_CalmWater, 0
@@ -381,7 +381,7 @@ AbnormalWeather_EventScript_CleanupRoute129East:: @ 82741B6
 	setmetatile 43, 22, METATILE_General_CalmWater, 0
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarp:: @ 8274223
+AbnormalWeather_Underwater_SetupEscapeWarp::
 	switch VAR_ABNORMAL_WEATHER_LOCATION
 	case ABNORMAL_WEATHER_ROUTE_105_NORTH, AbnormalWeather_Underwater_SetupEscapeWarpRoute105North
 	case ABNORMAL_WEATHER_ROUTE_105_SOUTH, AbnormalWeather_Underwater_SetupEscapeWarpRoute105South
@@ -393,34 +393,34 @@ AbnormalWeather_Underwater_SetupEscapeWarp:: @ 8274223
 	case ABNORMAL_WEATHER_ROUTE_129_EAST, AbnormalWeather_Underwater_SetupEscapeWarpRoute129East
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute105North:: @ 8274281
+AbnormalWeather_Underwater_SetupEscapeWarpRoute105North::
 	setescapewarp MAP_ROUTE105, 255, 11, 29
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute105South:: @ 827428A
+AbnormalWeather_Underwater_SetupEscapeWarpRoute105South::
 	setescapewarp MAP_ROUTE105, 255, 21, 54
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute125West:: @ 8274293
+AbnormalWeather_Underwater_SetupEscapeWarpRoute125West::
 	setescapewarp MAP_ROUTE125, 255, 9, 17
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute125East:: @ 827429C
+AbnormalWeather_Underwater_SetupEscapeWarpRoute125East::
 	setescapewarp MAP_ROUTE125, 255, 54, 19
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute127North:: @ 82742A5
+AbnormalWeather_Underwater_SetupEscapeWarpRoute127North::
 	setescapewarp MAP_ROUTE127, 255, 58, 10
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute127South:: @ 82742AE
+AbnormalWeather_Underwater_SetupEscapeWarpRoute127South::
 	setescapewarp MAP_ROUTE127, 255, 62, 31
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute129West:: @ 82742B7
+AbnormalWeather_Underwater_SetupEscapeWarpRoute129West::
 	setescapewarp MAP_ROUTE129, 255, 17, 15
 	return
 
-AbnormalWeather_Underwater_SetupEscapeWarpRoute129East:: @ 82742C0
+AbnormalWeather_Underwater_SetupEscapeWarpRoute129East::
 	setescapewarp MAP_ROUTE129, 255, 43, 20
 	return

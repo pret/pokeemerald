@@ -37,6 +37,7 @@
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
 #define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
 #define sABILITY_OVERWRITE gBattleScripting + 0x34
+#define sSWITCH_CASE gBattleScripting + 0x36
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 #define cMISS_TYPE gBattleCommunication + 6
@@ -173,6 +174,16 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_TERRAIN_SEED                    106
+#define VARIOUS_MAKE_INVISIBLE                  107
+#define VARIOUS_ROOM_SERVICE                    108
+#define VARIOUS_JUMP_IF_TERRAIN_AFFECTED        109
+#define VARIOUS_EERIE_SPELL_PP_REDUCE           110
+#define VARIOUS_JUMP_IF_TEAM_HEALTHY            111
+#define VARIOUS_TRY_HEAL_QUARTER_HP             112
+#define VARIOUS_REMOVE_TERRAIN                  113
+#define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -227,15 +238,24 @@
 #define MOVEEND_ITEM_EFFECTS_TARGET               13
 #define MOVEEND_MOVE_EFFECTS2                     14
 #define MOVEEND_ITEM_EFFECTS_ALL                  15
-#define MOVEEND_KINGSROCK_SHELLBELL               16
+#define MOVEEND_KINGSROCK                         16    // These item effects will occur each strike of a multi-hit move
 #define MOVEEND_SUBSTITUTE                        17
 #define MOVEEND_UPDATE_LAST_MOVES                 18
 #define MOVEEND_MIRROR_MOVE                       19
-#define MOVEEND_NEXT_TARGET                       20
-#define MOVEEND_LIFE_ORB                          21
-#define MOVEEND_DANCER                            22
-#define MOVEEND_EMERGENCY_EXIT                    23
-#define MOVEEND_CLEAR_BITS                        24
-#define MOVEEND_COUNT                             25
+#define MOVEEND_NEXT_TARGET                       20    // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_EJECT_BUTTON                      21
+#define MOVEEND_RED_CARD                          22
+#define MOVEEND_EJECT_PACK                        23
+#define MOVEEND_LIFEORB_SHELLBELL                 24    // Includes shell bell, throat spray, etc
+#define MOVEEND_PICKPOCKET                        25
+#define MOVEEND_DANCER                            26
+#define MOVEEND_EMERGENCY_EXIT                    27
+#define MOVEEND_CLEAR_BITS                        28
+#define MOVEEND_COUNT                             29
+
+// switch cases
+#define B_SWITCH_NORMAL     0
+#define B_SWITCH_HIT        1   // dragon tail, circle throw
+#define B_SWITCH_RED_CARD   2
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

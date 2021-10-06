@@ -185,6 +185,7 @@ extern struct UnusedControllerStruct gUnusedControllerStruct;
 void HandleLinkBattleSetup(void);
 void SetUpBattleVarsAndBirchZigzagoon(void);
 void InitBattleControllers(void);
+bool32 IsValidForBattle(struct Pokemon *mon);
 void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 

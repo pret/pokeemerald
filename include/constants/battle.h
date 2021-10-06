@@ -185,7 +185,8 @@
 #define HITMARKER_IGNORE_SAFEGUARD      (1 << 13)
 #define HITMARKER_SYNCHRONISE_EFFECT    (1 << 14)
 #define HITMARKER_RUN                   (1 << 15)
-// 3 free spots because of change in handling of UNDERGROUND/UNDERGWATER/ON AIR
+#define HITMARKER_IGNORE_DISGUISE       (1 << 16)
+// 3 free spots because of change in handling of UNDERGROUND/UNDERWATER/ON AIR
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
 #define HITMARKER_x100000               (1 << 20)
 #define HITMARKER_x200000               (1 << 21)
@@ -238,7 +239,7 @@
 #define STATUS_FIELD_FAIRY_LOCK                     (1 << 11)
 #define STATUS_FIELD_TERRAIN_PERMANENT              (1 << 12)   // Overworld thunderstorm generates electric terrain
 
-#define STATUS_TERRAIN_ANY              (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
+#define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
@@ -346,7 +347,8 @@
 #define MOVE_EFFECT_THROAT_CHOP         0x43
 #define MOVE_EFFECT_INCINERATE          0x44
 #define MOVE_EFFECT_BUG_BITE            0x45
-#define NUM_MOVE_EFFECTS                0x46
+#define MOVE_EFFECT_RECOIL_HP_25        0x46
+#define NUM_MOVE_EFFECTS                0x47
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
