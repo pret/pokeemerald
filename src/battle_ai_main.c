@@ -520,6 +520,9 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u32 i;
     u16 predictedMove = gLastMoves[battlerDef]; // TODO better move prediction
     
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
     
@@ -2472,7 +2475,10 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     bool32 attackerHasBadAbility = (GetAbilityRating(AI_DATA->atkAbility) < 0);
     bool32 partnerHasBadAbility = (GetAbilityRating(atkPartnerAbility) < 0);
     u16 predictedMove = gLastMoves[battlerDef]; //for now
-        
+
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
     // check what effect partner is using
     if (AI_DATA->partnerMove != 0)
     {
@@ -4751,7 +4757,10 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     u16 effect = gBattleMoves[move].effect;
     u8 moveType = gBattleMoves[move].type;
-    
+
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
     if (IsTargetingPartner(battlerAtk, battlerDef))
     {
         if ((effect == EFFECT_HEAL_PULSE || effect == EFFECT_HIT_ENEMY_HEAL_ALLY)
