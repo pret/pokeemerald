@@ -379,6 +379,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDecorate                @ EFFECT_DECORATE
 	.4byte BattleScript_EffectHit                     @ EFFECT_SNIPE_SHOT
 	.4byte BattleScript_EffectTripleHit               @ EFFECT_TRIPLE_HIT
+	.4byte BattleScript_EffectRecoilHP25              @ EFFECT_RECOIL_HP_25
 
 BattleScript_EffectDecorate:
 	attackcanceler
@@ -4909,6 +4910,12 @@ BattleScript_EffectRecoil33WithStatus:
 
 BattleScript_EffectRecoil50:
 	setmoveeffect MOVE_EFFECT_RECOIL_50 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_EffectRecoilHP25:
+	setmoveeffect MOVE_EFFECT_RECOIL_HP_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
+	incrementgamestat GAME_STAT_USED_STRUGGLE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectTeeterDance::
