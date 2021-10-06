@@ -3685,7 +3685,7 @@ u8 IsRunningFromBattleImpossible(void)
         return 0;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         return 0;
-    if (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
+    if (GetBattlerAbility(gActiveBattler) == ABILITY_RUN_AWAY)
         return 0;
 
     if ((i = IsAbilityPreventingEscape(gActiveBattler)))

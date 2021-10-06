@@ -983,6 +983,11 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
     [ABILITY_FLUFFY] = 1,
     [ABILITY_QUEENLY_MAJESTY] = 1,
     [ABILITY_WATER_BUBBLE] = 1,
+    [ABILITY_MIRROR_ARMOR] = 1,
+    [ABILITY_PUNK_ROCK] = 1,
+    [ABILITY_ICE_SCALES] = 1,
+    [ABILITY_ICE_FACE] = 1,
+    [ABILITY_PASTEL_VEIL] = 1,
 };
 
 static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
@@ -1263,7 +1268,7 @@ void PressurePPLose(u8 target, u8 attacker, u16 move)
 {
     int moveIndex;
 
-    if (gBattleMons[target].ability != ABILITY_PRESSURE)
+    if (GetBattlerAbility(target) != ABILITY_PRESSURE)
         return;
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1295,7 +1300,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (atkSide != GetBattlerSide(i) && gBattleMons[i].ability == ABILITY_PRESSURE)
+        if (atkSide != GetBattlerSide(i) && GetBattlerAbility(i) == ABILITY_PRESSURE)
         {
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
@@ -1328,7 +1333,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleMons[i].ability == ABILITY_PRESSURE && i != attacker)
+        if (GetBattlerAbility(i) == ABILITY_PRESSURE && i != attacker)
         {
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
@@ -2723,8 +2728,8 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 gStatuses3[gActiveBattler] -= STATUS3_YAWN_TURN(1);
                 if (!(gStatuses3[gActiveBattler] & STATUS3_YAWN) && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
-                 && gBattleMons[gActiveBattler].ability != ABILITY_VITAL_SPIRIT
-                 && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler)
+                 && GetBattlerAbility(gActiveBattler) != ABILITY_VITAL_SPIRIT
+                 && GetBattlerAbility(gActiveBattler) != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler)
                  && !IsLeafGuardProtected(gActiveBattler))
                 {
                     CancelMultiTurnMoves(gActiveBattler);
@@ -3121,7 +3126,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 else
                 {
                     u8 toSub;
-                    if (gBattleMons[gBattlerAttacker].ability == ABILITY_EARLY_BIRD)
+                    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_EARLY_BIRD)
                         toSub = 2;
                     else
                         toSub = 1;
