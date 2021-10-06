@@ -7324,7 +7324,7 @@ BattleScript_PrimordialSeaActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_HEAVYRAIN
 	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES, NULL
+	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
 	end3
 
