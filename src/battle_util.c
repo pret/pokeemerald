@@ -8275,7 +8275,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         && gBattleMoves[move].effect != EFFECT_FACADE && abilityAtk != ABILITY_GUTS)
         dmg = ApplyModifier(UQ_4_12(0.5), dmg);
 
-    // check weather
+    // check sunny/rain weather
     if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_RAIN_ANY)
     {
         if (moveType == TYPE_FIRE)
