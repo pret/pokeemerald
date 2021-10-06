@@ -7307,6 +7307,7 @@ BattleScript_DeltaStreamActivates::
 	end3
 
 BattleScript_AttackWeakenedByStrongWinds::
+	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
 	waitmessage B_WAIT_TIME_LONG
 	return
