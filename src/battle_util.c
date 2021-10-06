@@ -8290,16 +8290,6 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         else if (moveType == TYPE_WATER)
             dmg = ApplyModifier(UQ_4_12(0.5), dmg);
     }
-    else if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_STRONG_WINDS)
-    {
-        if ((gBattleMons[battlerDef].type1 == TYPE_FLYING
-         && GetTypeModifier(moveType, gBattleMons[battlerDef].type1) >= UQ_4_12(2.0))
-         || (gBattleMons[battlerDef].type2 == TYPE_FLYING
-         && GetTypeModifier(moveType, gBattleMons[battlerDef].type2) >= UQ_4_12(2.0))
-         || (gBattleMons[battlerDef].type3 == TYPE_FLYING
-         && GetTypeModifier(moveType, gBattleMons[battlerDef].type3) >= UQ_4_12(2.0)))
-            dmg = ApplyModifier(UQ_4_12(0.5), dmg);
-    }
 
     // check stab
     if (IS_BATTLER_OF_TYPE(battlerAtk, moveType) && move != MOVE_STRUGGLE)
@@ -8539,6 +8529,18 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
         && (gBattleMons[battlerDef].type1 == TYPE_FLYING || gBattleMons[battlerDef].type2 == TYPE_FLYING || gBattleMons[battlerDef].type3 == TYPE_FLYING))
     {
         modifier = UQ_4_12(1.0);
+    }
+
+    // WEATHER_STRONG_WINDS weakens Super Effective moves against Flying-type Pokémon
+    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_STRONG_WINDS)
+    {
+        if ((gBattleMons[battlerDef].type1 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[battlerDef].type1) >= UQ_4_12(2.0))
+         || (gBattleMons[battlerDef].type2 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[battlerDef].type2) >= UQ_4_12(2.0))
+         || (gBattleMons[battlerDef].type3 == TYPE_FLYING
+         && GetTypeModifier(moveType, gBattleMons[battlerDef].type3) >= UQ_4_12(2.0)))
+            modifier = UQ_4_12(1.0);
     }
 
     if (((GetBattlerAbility(battlerDef) == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
