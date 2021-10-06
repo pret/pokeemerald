@@ -1490,12 +1490,12 @@ const struct Item gItems[] =
         .itemId = ITEM_ESCAPE_ROPE,
         .description = sEscapeRopeDesc,
         #if I_KEY_ESCAPE_ROPE >= GEN_8
-        .price = 0,
-        .importance = 1,
-        .pocket = POCKET_KEY_ITEMS,
+            .price = 0,
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
         #else
-        .price = 1000,
-        .pocket = POCKET_ITEMS,
+            .price = 1000,
+            .pocket = POCKET_ITEMS,
         #endif
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_EscapeRope,
@@ -2966,8 +2966,14 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sRedNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_YELLOW_NECTAR] =
@@ -2978,8 +2984,14 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sYellowNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_PINK_NECTAR] =
@@ -2990,8 +3002,14 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sPinkNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_PURPLE_NECTAR] =
@@ -3002,8 +3020,14 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sPurpleNectarDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
 // Plates
@@ -5640,6 +5664,7 @@ const struct Item gItems[] =
         .itemId = ITEM_ELECTRIC_SEED,
         .price = 4000,
         .holdEffect = HOLD_EFFECT_SEEDS,
+        .holdEffectParam = HOLD_EFFECT_PARAM_ELECTRIC_TERRAIN,
         .description = sElectricSeedDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -5652,6 +5677,7 @@ const struct Item gItems[] =
         .itemId = ITEM_PSYCHIC_SEED,
         .price = 4000,
         .holdEffect = HOLD_EFFECT_SEEDS,
+        .holdEffectParam = HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN,
         .description = sPsychicSeedDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -5664,6 +5690,7 @@ const struct Item gItems[] =
         .itemId = ITEM_MISTY_SEED,
         .price = 4000,
         .holdEffect = HOLD_EFFECT_SEEDS,
+        .holdEffectParam = HOLD_EFFECT_PARAM_MISTY_TERRAIN,
         .description = sMistySeedDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -5676,6 +5703,7 @@ const struct Item gItems[] =
         .itemId = ITEM_GRASSY_SEED,
         .price = 4000,
         .holdEffect = HOLD_EFFECT_SEEDS,
+        .holdEffectParam = HOLD_EFFECT_PARAM_GRASSY_TERRAIN,
         .description = sGrassySeedDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -5805,7 +5833,7 @@ const struct Item gItems[] =
         .name = _("Mental Herb"),
         .itemId = ITEM_MENTAL_HERB,
         .price = 4000,
-        .holdEffect = HOLD_EFFECT_CURE_ATTRACT,
+        .holdEffect = HOLD_EFFECT_MENTAL_HERB,
         .description = sMentalHerbDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -6550,8 +6578,13 @@ const struct Item gItems[] =
         .name = _("Sitrus Berry"),
         .itemId = ITEM_SITRUS_BERRY,
         .price = 20,
-        .holdEffect = HOLD_EFFECT_RESTORE_HP,
-        .holdEffectParam = 30,
+        #if defined(BATTLE_ENGINE) && I_SITRUS_BERRY_HEAL >= GEN_4
+            .holdEffect = HOLD_EFFECT_RESTORE_PCT_HP,
+            .holdEffectParam = 25,
+        #else
+            .holdEffect = HOLD_EFFECT_RESTORE_HP,
+            .holdEffectParam = 30,
+        #endif
         .description = sSitrusBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
@@ -6968,7 +7001,7 @@ const struct Item gItems[] =
         .itemId = ITEM_COBA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_RESIST_BERRY,
-        .holdEffectParam = TYPE_FIGHTING,
+        .holdEffectParam = TYPE_FLYING,
         .description = sCobaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
@@ -8535,9 +8568,15 @@ const struct Item gItems[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_GRACIDEA,
         .description = sGracideaDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .pocket = POCKET_KEY_ITEMS,
+        #ifdef POKEMON_EXPANSION
+            .type = ITEM_USE_PARTY_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_FormChange,
+            .secondaryId = FORM_ITEM_USE_TIME,
+        #else
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        #endif
     },
 
     [ITEM_REVEAL_GLASS] = // Todo
