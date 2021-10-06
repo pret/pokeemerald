@@ -3878,6 +3878,7 @@ BattleScript_PerishSongLoopIncrement::
 	goto BattleScript_MoveEnd
 
 BattleScript_PerishSongBlocked::
+	copybyte sBATTLER, gBattlerTarget
 	printstring STRINGID_PKMNSXBLOCKSY2
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_PerishSongLoopIncrement

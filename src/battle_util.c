@@ -4458,7 +4458,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_MOVES_BLOCK: // 2
-        if ((gLastUsedAbility == ABILITY_SOUNDPROOF && gBattleMoves[move].flags & FLAG_SOUND)
+        if ((gLastUsedAbility == ABILITY_SOUNDPROOF && gBattleMoves[move].flags & FLAG_SOUND && gCurrentMove != MOVE_PERISH_SONG)
             || (gLastUsedAbility == ABILITY_BULLETPROOF && gBattleMoves[move].flags & FLAG_BALLISTIC))
         {
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
