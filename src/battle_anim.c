@@ -2213,6 +2213,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         case B_ANIM_DOOM_DESIRE_HIT:
         case B_ANIM_WISH_HEAL:
         case B_ANIM_MEGA_EVOLUTION:
+        case B_ANIM_GULP_MISSILE:
             hideHpBoxes = TRUE;
             break;
         default:

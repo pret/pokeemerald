@@ -379,6 +379,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDecorate                @ EFFECT_DECORATE
 	.4byte BattleScript_EffectHit                     @ EFFECT_SNIPE_SHOT
 	.4byte BattleScript_EffectTripleHit               @ EFFECT_TRIPLE_HIT
+	.4byte BattleScript_EffectRecoilHP25              @ EFFECT_RECOIL_HP_25
 	.4byte BattleScript_EffectStuffCheeks			  @ EFFECT_STUFF_CHEEKS
 
 BattleScript_EffectStuffCheeks::
@@ -4940,6 +4941,12 @@ BattleScript_EffectRecoil50:
 	setmoveeffect MOVE_EFFECT_RECOIL_50 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
+BattleScript_EffectRecoilHP25:
+	setmoveeffect MOVE_EFFECT_RECOIL_HP_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
+	incrementgamestat GAME_STAT_USED_STRUGGLE
+	goto BattleScript_EffectHit
+
 BattleScript_EffectTeeterDance::
 	attackcanceler
 	attackstring
@@ -6027,6 +6034,76 @@ BattleScript_PerishBodyActivates::
 	printstring STRINGID_PKMNSWILLPERISHIN3TURNS
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	return
+
+BattleScript_GulpMissileGorging::
+	call BattleScript_AbilityPopUp
+	playanimation BS_ATTACKER, B_ANIM_GULP_MISSILE, NULL
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_GulpMissileNoDmgGorging
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	tryfaintmon BS_ATTACKER, FALSE, NULL
+	getbattlerfainted BS_ATTACKER
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
+BattleScript_GulpMissileNoDmgGorging:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	swapattackerwithtarget
+	setmoveeffect MOVE_EFFECT_PARALYSIS
+	seteffectprimary
+	swapattackerwithtarget
+	return
+BattleScript_GulpMissileNoSecondEffectGorging:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	return
+
+BattleScript_GulpMissileGulping::
+	call BattleScript_AbilityPopUp
+	playanimation BS_ATTACKER, B_ANIM_GULP_MISSILE, NULL
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_GulpMissileNoDmgGulping
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	tryfaintmon BS_ATTACKER, FALSE, NULL
+	getbattlerfainted BS_ATTACKER
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_WHITE_SMOKE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifflowerveilattacker BattleScript_GulpMissileNoSecondEffectGulping
+BattleScript_GulpMissileNoDmgGulping:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	swapattackerwithtarget @ to make gStatDownStringIds down below print the right battler
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_GulpMissileGorgingTargetDefenseCantGoLower
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget @ restore the battlers, just in case
+	return
+BattleScript_GulpMissileNoSecondEffectGulping:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	return
+BattleScript_GulpMissileGorgingTargetDefenseCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_PerishSongCountGoesDown::
@@ -7672,6 +7749,19 @@ BattleScript_AbilityStatusEffect::
 	waitstate
 	call BattleScript_AbilityPopUp
 	seteffectsecondary
+	return
+
+BattleScript_BattleBondActivatesOnMoveEndAttacker::
+	pause 5
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ATTACKERBECAMEFULLYCHARGED
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	handleformchange BS_ATTACKER, 2
+	printstring STRINGID_ATTACKERBECAMEASHSPECIES
 	return
 
 BattleScript_DancerActivates::
