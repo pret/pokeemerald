@@ -293,7 +293,7 @@ void SetBerryBlenderLinkCallback(void);
 void SetSuppressLinkErrorMessage(bool8 flag);
 void ConvertLinkPlayerName(struct LinkPlayer *linkPlayer);
 void ClearSavedLinkPlayers(void);
-void BufferLinkErrorInfo(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected);
+void SetLinkErrorBuffer(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected);
 void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
 bool32 Link_AnyPartnersPlayingFRLG_JP(void);

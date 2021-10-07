@@ -987,8 +987,8 @@ static u32 QuitBerryCrush(MainCallback exitCallback)
 #define ERROR_EXIT(exitCallback)             \
     {                                        \
         SetMainCallback2(exitCallback);      \
-        gRfu.unk_10 = 0;                     \
-        gRfu.unk_12 = 0;                     \
+        gRfu.errorParam0 = 0;                \
+        gRfu.errorParam1 = 0;                \
         gRfu.errorState = RFU_ERROR_STATE_1; \
     }
 

@@ -108,7 +108,7 @@ static EWRAM_DATA u16 sTimeOutCounter = 0;
 EWRAM_DATA struct LinkPlayer gLocalLinkPlayer = {};
 EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
 static EWRAM_DATA struct LinkPlayer sSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
-EWRAM_DATA struct {
+static EWRAM_DATA struct {
     u32 status;
     u8 lastRecvQueueCount;
     u8 lastSendQueueCount;
@@ -140,7 +140,7 @@ static void LinkCB_WaitCloseLinkWithJP(void);
 static void LinkCB_Standby(void);
 static void LinkCB_StandbyForAll(void);
 
-static void CheckErrorStatus(void);
+static void TrySetLinkErrorBuffer(void);
 static void CB2_PrintErrorMessage(void);
 static bool8 IsSioMultiMaster(void);
 static void SetWirelessCommType0_Internal(void);
@@ -394,9 +394,7 @@ void CloseLink(void)
 {
     gReceivedRemoteLinkPlayers = FALSE;
     if (gWirelessCommType)
-    {
         LinkRfu_Shutdown();
-    }
     sLinkOpen = FALSE;
     DisableSerial();
 }
@@ -496,7 +494,7 @@ u16 LinkMain2(const u16 *heldKeys)
         ProcessRecvCmds(SIO_MULTI_CNT->id);
         if (gLinkCallback != NULL)
             gLinkCallback();
-        CheckErrorStatus();
+        TrySetLinkErrorBuffer();
     }
     return gLinkStatus;
 }
@@ -1559,10 +1557,13 @@ static void LinkCB_StandbyForAll(void)
     }
 }
 
-static void CheckErrorStatus(void)
+static void TrySetLinkErrorBuffer(void)
 {
+    // Check if a link error has occurred
     if (sLinkOpen && EXTRACT_LINK_ERRORS(gLinkStatus))
     {
+        // Link error has occurred, handle message details if
+        // necessary, then stop the link.
         if (!gSuppressLinkErrorMessage)
         {
             sLinkErrorBuffer.status = gLinkStatus;
@@ -1575,7 +1576,7 @@ static void CheckErrorStatus(void)
     }
 }
 
-void BufferLinkErrorInfo(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected)
+void SetLinkErrorBuffer(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected)
 {
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
@@ -1778,10 +1779,10 @@ void LinkPlayerFromBlock(u32 who)
         SetMainCallback2(CB2_LinkError);
 }
 
+// When this function returns TRUE the callbacks are skipped
 bool8 HandleLinkConnection(void)
 {
-    bool32 r4;
-    bool32 r5;
+    bool32 main1Failed, main2Failed;
 
     if (gWirelessCommType == 0)
     {
@@ -1792,11 +1793,13 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        r4 = RfuMain1();
-        r5 = RfuMain2();
+        main1Failed = RfuMain1(); // Always returns FALSE
+        main2Failed = RfuMain2();
         if (IsSendingKeysOverCable() == TRUE)
         {
-            if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
+            // This will never be reached.
+            // IsSendingKeysOverCable is always FALSE for wireless communication
+            if (main1Failed == TRUE || IsRfuRecvQueueEmpty() || main2Failed)
                 return TRUE;
         }
     }

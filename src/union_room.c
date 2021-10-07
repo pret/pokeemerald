@@ -2888,7 +2888,7 @@ static void Task_RunUnionRoom(u8 taskId)
         break;
     case UR_STATE_PLAYER_CONTACTED_YOU:
         PlaySE(SE_DING_DONG);
-        sub_800EF7C();
+        StopUnionRoomLinkManager();
         uroom->state = UR_STATE_RECV_CONTACT_DATA;
         uroom->recvActivityRequest[0] = 0;
         break;
