@@ -8775,7 +8775,7 @@ static void Cmd_various(void)
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
         break;
-    case  VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
+    case VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
         if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else

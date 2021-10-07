@@ -737,6 +737,9 @@ BattleScript_EffectPartingShotSwitch:
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
 	waitstate
@@ -1789,6 +1792,9 @@ BattleScript_EffectHealingWish:
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
 	waitstate
@@ -2148,6 +2154,9 @@ BattleScript_EffectHitEscape:
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
 	waitstate
@@ -4026,6 +4035,9 @@ BattleScript_EffectBatonPass::
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
 	waitstate
@@ -5862,6 +5874,9 @@ BattleScript_RoarSuccessSwitch::
 	call BattleScript_RoarSuccessRet
 	getswitchedmondata BS_TARGET
 	switchindataupdate BS_TARGET
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	switchinanim BS_TARGET, FALSE
 	waitstate
 	printstring STRINGID_PKMNWASDRAGGEDOUT
@@ -8535,6 +8550,9 @@ BattleScript_EjectButtonActivates::
 	getswitchedmondata BS_SCRIPTING
 	switchindataupdate BS_SCRIPTING
 	hpthresholds BS_SCRIPTING
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	printstring 0x3
 	switchinanim BS_SCRIPTING 0x1
 	waitstate
