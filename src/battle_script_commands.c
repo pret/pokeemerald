@@ -8790,7 +8790,8 @@ static void Cmd_various(void)
             if (((GetBattlerAbility(i) == ABILITY_DESOLATE_LAND && gBattleWeather & WEATHER_SUN_PRIMAL)
              || (GetBattlerAbility(i) == ABILITY_PRIMORDIAL_SEA && gBattleWeather & WEATHER_RAIN_PRIMAL)
              || (GetBattlerAbility(i) == ABILITY_DELTA_STREAM && gBattleWeather & WEATHER_STRONG_WINDS))
-             && IsBattlerAlive(i))
+             && IsBattlerAlive(i)
+             && !(gStatuses3[i] & STATUS3_GASTRO_ACID))
                 shouldNotClear = TRUE;
         }
         if (gBattleWeather & WEATHER_SUN_PRIMAL && !shouldNotClear)
