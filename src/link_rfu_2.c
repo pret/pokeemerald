@@ -27,7 +27,7 @@ enum {
     RFUSTATE_STOP_MANAGER_END,
     RFUSTATE_CHILD_CONNECT,
     RFUSTATE_CHILD_CONNECT_END,
-    RFUSTATE_8, // Unused
+    RFUSTATE_UNUSED,
     RFUSTATE_RECONNECTED,
     RFUSTATE_CONNECTED,
     RFUSTATE_CHILD_TRY_JOIN,
@@ -39,9 +39,6 @@ enum {
 };
 // These states are used for different purposes
 // depending on the link mode (parent, child, union room)
-#define RFUSTATE_17 17
-#define RFUSTATE_PARENT_RECONNECT 18
-
 #define RFUSTATE_PARENT_FINALIZE_START 17
 #define RFUSTATE_PARENT_FINALIZE       18
 #define RFUSTATE_UR_CONNECT     17
@@ -1443,7 +1440,7 @@ static void WaitAllReadyToCloseLink(void)
         gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
         if (gRfu.parentChild == MODE_CHILD)
         {
-            gRfu.errorState = RFU_ERROR_STATE_3;
+            gRfu.errorState = RFU_ERROR_STATE_DISCONNECTING;
             TryDisconnectRfu();
         }
         else
@@ -1982,14 +1979,14 @@ static void Task_PlayerExchangeChat(u8 taskId)
 
 static void RfuCheckErrorStatus(void)
 {
-    if (gRfu.errorState == RFU_ERROR_STATE_1 && lman.childClockSlave_flag == 0)
+    if (gRfu.errorState == RFU_ERROR_STATE_OCCURRED && lman.childClockSlave_flag == 0)
     {
         if (gMain.callback2 == c2_mystery_gift_e_reader_run || lman.init_param->mboot_flag)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
         SetLinkErrorBuffer((gRfu.errorInfo << 16) | (gRfu.errorParam0 << 8) | gRfu.errorParam1, gRfu.recvQueue.count, gRfu.sendQueue.count, RfuGetStatus() == RFU_STATUS_CONNECTION_ERROR);
-        gRfu.errorState = RFU_ERROR_STATE_2;
+        gRfu.errorState = RFU_ERROR_STATE_PROCESSED;
         CloseLink();
     }
     else if (gRfu.sendQueue.full == TRUE || gRfu.recvQueue.full == TRUE)
@@ -2100,10 +2097,10 @@ void UpdateGameData_GroupLockedIn(bool8 startedActivity)
     rfu_REQ_configGameData(0, RFU_SERIAL_GAME, (void *)&gHostRfuGameData, gHostRfuUsername);
 }
 
-void UpdateGameData_SetActivity(u8 activity, u32 flags, bool32 startedActivity)
+void UpdateGameData_SetActivity(u8 activity, u32 partnerInfo, bool32 startedActivity)
 {
     if (activity != ACTIVITY_NONE)
-        SetHostRfuGameData(activity, flags, startedActivity);
+        SetHostRfuGameData(activity, partnerInfo, startedActivity);
     rfu_REQ_configGameData(0, RFU_SERIAL_GAME, (void *)&gHostRfuGameData, gHostRfuUsername);
 }
 
@@ -2144,7 +2141,7 @@ void RfuSetErrorParams(u32 errorInfo)
         gRfu.errorParam0 = lman.param[0];
         gRfu.errorParam1 = lman.param[1];
         gRfu.errorInfo = errorInfo;
-        gRfu.errorState = RFU_ERROR_STATE_1;
+        gRfu.errorState = RFU_ERROR_STATE_OCCURRED;
     }
 }
 
@@ -2370,7 +2367,7 @@ static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        gRfu.state = RFUSTATE_17;
+        gRfu.state = RFUSTATE_UR_CONNECT;
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_DETECTED:
         RfuSetStatus(RFU_STATUS_NEW_CHILD_DETECTED, 0);
@@ -2430,7 +2427,7 @@ static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
         gRfu.childSlot = lman.param[0];
         break;
     case LMAN_MSG_CONNECT_PARENT_FAILED:
-        gRfu.state = RFUSTATE_PARENT_RECONNECT;
+        gRfu.state = RFUSTATE_UR_CONNECT_END;
         if (gRfu.connectParentFailures < 2)
         {
             gRfu.connectParentFailures++;
@@ -2483,7 +2480,7 @@ static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
         if (gRfuLinkStatus->parentChild == MODE_NEUTRAL 
             && !lman.pcswitch_flag
             && FuncIsActiveTask(Task_UnionRoomListen) == TRUE)
-            gRfu.state = RFUSTATE_17;
+            gRfu.state = RFUSTATE_UR_CONNECT;
 
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
@@ -2617,13 +2614,13 @@ static void CB2_RfuIdle(void)
     UpdatePaletteFade();
 }
 
-void InitializeRfuLinkManager_LinkLeader(u32 a0)
+void InitializeRfuLinkManager_LinkLeader(u32 groupMax)
 {
     gRfu.parentChild = MODE_PARENT;
     SetHostRfuUsername();
     rfu_LMAN_initializeManager(LinkManagerCB_Parent, NULL);
     sRfuReqConfig = sRfuReqConfigTemplate;
-    sRfuReqConfig.availSlot_flag = sAvailSlots[a0 - 1];
+    sRfuReqConfig.availSlot_flag = sAvailSlots[groupMax - 1];
     CreateTask_ParentSearchForChildren();
 }
 

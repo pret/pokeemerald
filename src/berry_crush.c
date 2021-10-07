@@ -984,12 +984,12 @@ static u32 QuitBerryCrush(MainCallback exitCallback)
     return 0;
 }
 
-#define ERROR_EXIT(exitCallback)             \
-    {                                        \
-        SetMainCallback2(exitCallback);      \
-        gRfu.errorParam0 = 0;                \
-        gRfu.errorParam1 = 0;                \
-        gRfu.errorState = RFU_ERROR_STATE_1; \
+#define ERROR_EXIT(exitCallback)                    \
+    {                                               \
+        SetMainCallback2(exitCallback);             \
+        gRfu.errorParam0 = 0;                       \
+        gRfu.errorParam1 = 0;                       \
+        gRfu.errorState = RFU_ERROR_STATE_OCCURRED; \
     }
 
 void StartBerryCrush(MainCallback exitCallback)

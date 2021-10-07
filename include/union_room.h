@@ -32,8 +32,8 @@ struct RfuPlayer
     u16 timeoutCounter;
     u8 groupScheduledAnim:2;
     bool8 useRedText:1; // Never set
-    u8 field_1B;
-    u8 filler[3];
+    u8 newPlayerCountdown;
+    u8 unused;
 };
 
 struct RfuPlayerList
@@ -108,7 +108,7 @@ struct WirelessLink_URoom
     struct RfuPlayerList *spawnPlayer;
     struct RfuIncomingPlayerList *incomingParentList;
     u16 unknown; // Never read
-    u16 field_12;
+    u16 unreadPlayerId;
     u8 state;
     u8 stateAfterPrint;
     u8 textState;
@@ -153,9 +153,9 @@ extern u8 gUnionRoomRequestedMonType;
 
 u8 CreateTask_CreateTradeMenu(void);
 void SetUsingUnionRoomStartMenu(void);
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
-void MEvent_CreateTask_Leader(u32 arg0);
+void MEvent_CreateTask_CardOrNewsWithFriend(u32 activity);
+void MEvent_CreateTask_CardOrNewsOverWireless(u32 activity);
+void MEvent_CreateTask_Leader(u32 activity);
 u8 CreateTask_ListenToWireless(void);
 void StartUnionRoomBattle(u16 battleFlags);
 

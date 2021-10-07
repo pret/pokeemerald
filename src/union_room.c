@@ -187,11 +187,11 @@ enum {
 
 // Return values for HandlePlayerListUpdate
 enum {
-    PLIST_0,
-    PLIST_1,
-    PLIST_2,
-    PLIST_3,
-    PLIST_4,
+    PLIST_NONE,
+    PLIST_NEW_PLAYER,
+    PLIST_RECENT_UPDATE,
+    PLIST_UNUSED,
+    PLIST_CONTACTED,
 };
 
 static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
@@ -414,7 +414,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->playerList->players[0].timeoutCounter = 0;
         data->playerList->players[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->playerList->players[0].useRedText = FALSE;
-        data->playerList->players[0].field_1B = 0;
+        data->playerList->players[0].newPlayerCountdown = 0;
         data->listenTaskId = CreateTask_ListenForCompatiblePartners(data->incomingPlayerList, 0xFF);
         data->bButtonCancelWindowId = AddWindow(&sWindowTemplate_BButtonCancel);
         switch (GROUP_MAX(sPlayerActivityGroupSize))
@@ -559,7 +559,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         {
             if (data->joinRequestAnswer == RFU_STATUS_JOIN_GROUP_OK)
             {
-                data->playerList->players[data->playerCount].field_1B = 0;
+                data->playerList->players[data->playerCount].newPlayerCountdown = 0;
                 RedrawListMenu(data->listTaskId);
                 data->playerCount++;
                 if (data->playerCount == GROUP_MAX(sPlayerActivityGroupSize))
@@ -867,7 +867,7 @@ static void ItemPrintFunc_PossibleGroupMembers(u8 windowId, u32 id, u8 y)
     switch (data->playerList->players[id].groupScheduledAnim)
     {
     case UNION_ROOM_SPAWN_IN:
-        if (data->playerList->players[id].field_1B != 0)
+        if (data->playerList->players[id].newPlayerCountdown != 0)
             colorIdx = UR_COLOR_GREEN;
         break;
     case UNION_ROOM_SPAWN_OUT:
@@ -913,7 +913,7 @@ static u8 LeaderUpdateGroupMembership(struct RfuPlayerList *list)
     {
         for (id = 0; id < MAX_RFU_PLAYERS; id++)
         {
-            if (data->playerList->players[id].field_1B != 0)
+            if (data->playerList->players[id].newPlayerCountdown != 0)
                 ret = UNION_ROOM_SPAWN_IN;
         }
     }
@@ -948,14 +948,14 @@ static u8 LeaderPrunePlayerList(struct RfuPlayerList *list)
         data->playerList->players[copiedCount].timeoutCounter = 0;
         data->playerList->players[copiedCount].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
         data->playerList->players[copiedCount].useRedText = FALSE;
-        data->playerList->players[copiedCount].field_1B = 0;
+        data->playerList->players[copiedCount].newPlayerCountdown = 0;
     }
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         if (data->playerList->players[i].groupScheduledAnim != UNION_ROOM_SPAWN_IN)
             continue;
-        if (data->playerList->players[i].field_1B != 64)
+        if (data->playerList->players[i].newPlayerCountdown != 64)
             continue;
 
         playerCount = i;
@@ -1382,7 +1382,7 @@ static u8 GetGroupListTextColor(struct WirelessLink_Group *data, u32 id)
             return UR_COLOR_WHITE;
         else if (data->playerList->players[id].useRedText)
             return UR_COLOR_RED;
-        else if (data->playerList->players[id].field_1B != 0)
+        else if (data->playerList->players[id].newPlayerCountdown != 0)
             return UR_COLOR_GREEN;
     }
     return UR_COLOR_DEFAULT;
@@ -1415,15 +1415,15 @@ static u8 GetNewLeaderCandidate(void)
                     if (ArePlayerDataDifferent(&data->playerList->players[i].rfu, &data->incomingPlayerList->players[id].rfu))
                     {
                         data->playerList->players[i].rfu = data->incomingPlayerList->players[id].rfu;
-                        data->playerList->players[i].field_1B = 64;
+                        data->playerList->players[i].newPlayerCountdown = 64;
                         ret = 1;
                     }
                     else
                     {
-                        if (data->playerList->players[i].field_1B != 0)
+                        if (data->playerList->players[i].newPlayerCountdown != 0)
                         {
-                            data->playerList->players[i].field_1B--;
-                            if (data->playerList->players[i].field_1B == 0)
+                            data->playerList->players[i].newPlayerCountdown--;
+                            if (data->playerList->players[i].newPlayerCountdown == 0)
                                 ret = 2;
                         }
                     }
@@ -1431,7 +1431,7 @@ static u8 GetNewLeaderCandidate(void)
                 else
                 {
                     data->playerList->players[i].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
-                    data->playerList->players[i].field_1B = 64;
+                    data->playerList->players[i].newPlayerCountdown = 64;
                     ret = 1;
                 }
 
@@ -1899,7 +1899,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->playerList->players[0].timeoutCounter = 0;
         data->playerList->players[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->playerList->players[0].useRedText = FALSE;
-        data->playerList->players[0].field_1B = 0;
+        data->playerList->players[0].newPlayerCountdown = 0;
         data->listenTaskId = CreateTask_ListenForCompatiblePartners(data->incomingPlayerList, 0xFF);
 
         winTemplate = sWindowTemplate_PlayerList;
@@ -1949,7 +1949,7 @@ static void Task_MEvent_Leader(u8 taskId)
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
-            data->playerList->players[data->playerCount].field_1B = 0;
+            data->playerList->players[data->playerCount].newPlayerCountdown = 0;
             RedrawListMenu(data->listTaskId);
             data->joinRequestAnswer = RFU_STATUS_JOIN_GROUP_OK;
             SendRfuStatusToPartner(data->joinRequestAnswer, ReadAsU16(data->playerList->players[data->playerCount].rfu.data.compatibility.playerTrainerId), data->playerList->players[data->playerCount].rfu.name);
@@ -1969,7 +1969,7 @@ static void Task_MEvent_Leader(u8 taskId)
         {
             if (data->joinRequestAnswer == RFU_STATUS_JOIN_GROUP_OK)
             {
-                data->playerList->players[data->playerCount].field_1B = 0;
+                data->playerList->players[data->playerCount].newPlayerCountdown = 0;
                 RedrawListMenu(data->listTaskId);
                 data->playerCount++;
                 CopyAndTranslatePlayerName(gStringVar1, &data->playerList->players[data->playerCount - 1]);
@@ -2430,7 +2430,7 @@ void RunUnionRoom(void)
     uroom->state = UR_STATE_INIT;
     uroom->textState = 0;
     uroom->unknown = 0;
-    uroom->field_12 = 0;
+    uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
     ListMenuLoadStdPalAt(0xD0, 1);
@@ -2610,12 +2610,12 @@ static void Task_RunUnionRoom(u8 taskId)
 
             switch (HandlePlayerListUpdate())
             {
-            case PLIST_1:
+            case PLIST_NEW_PLAYER:
                 PlaySE(SE_PC_LOGIN);
-            case PLIST_2:
+            case PLIST_RECENT_UPDATE:
                 ScheduleUnionRoomPlayerRefresh(uroom);
                 break;
-            case PLIST_4:
+            case PLIST_CONTACTED:
                 uroom->state = UR_STATE_PLAYER_CONTACTED_YOU;
                 StartScriptInteraction();
                 SetTradeBoardRegisteredMonInfo(TYPE_NORMAL, SPECIES_NONE, 0);
@@ -2643,7 +2643,7 @@ static void Task_RunUnionRoom(u8 taskId)
             break;
         case 1: // Link communicating
             TryConnectToUnionRoomParent(uroom->playerList->players[taskData[1]].rfu.name, &uroom->playerList->players[taskData[1]].rfu.data, gPlayerCurrActivity);
-            uroom->field_12 = id; // Should be just 0, but won't match any other way.
+            uroom->unreadPlayerId = id; // Should be just 0, but won't match any other way.
             uroom->state = UR_STATE_TRY_COMMUNICATING;
             break;
         case 2: // Ask to join chat
@@ -2833,7 +2833,7 @@ static void Task_RunUnionRoom(u8 taskId)
             gPlayerCurrActivity = ACTIVITY_CHAT | IN_UNION_ROOM;
             UpdateGameData_SetActivity(ACTIVITY_CHAT | IN_UNION_ROOM, 0, TRUE);
             TryConnectToUnionRoomParent(uroom->playerList->players[taskData[1]].rfu.name, &uroom->playerList->players[taskData[1]].rfu.data, gPlayerCurrActivity);
-            uroom->field_12 = taskData[1];
+            uroom->unreadPlayerId = taskData[1];
             uroom->state = UR_STATE_TRY_ACCEPT_CHAT_REQUEST_DELAY;
             taskData[3] = 0;
             break;
@@ -2942,7 +2942,7 @@ static void Task_RunUnionRoom(u8 taskId)
             else
                 UpdateGameData_SetActivity(gPlayerCurrActivity | IN_UNION_ROOM, GetLinkPlayerInfoFlags(1), TRUE);
 
-            uroom->spawnPlayer->players[0].field_1B = 0;
+            uroom->spawnPlayer->players[0].newPlayerCountdown = 0;
             taskData[3] = 0;
             if (gPlayerCurrActivity == (ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM))
             {
@@ -3298,7 +3298,7 @@ void InitUnionRoom(void)
     data->state = 0;
     data->textState = 0;
     data->unknown = 0;
-    data->field_12 = 0;
+    data->unreadPlayerId = 0;
     sUnionRoomPlayerName[0] = EOS;
 }
 
@@ -3336,8 +3336,8 @@ static void Task_InitUnionRoom(u8 taskId)
     case 3:
         switch (HandlePlayerListUpdate())
         {
-        case PLIST_1:
-        case PLIST_2:
+        case PLIST_NEW_PLAYER:
+        case PLIST_RECENT_UPDATE:
             if (sUnionRoomPlayerName[0] == EOS)
             {
                 for (i = 0; i < MAX_UNION_ROOM_LEADERS; i++)
@@ -3354,7 +3354,7 @@ static void Task_InitUnionRoom(u8 taskId)
                 }
             }
             break;
-        case PLIST_3:
+        case PLIST_UNUSED:
             break;
         }
         break;
@@ -3390,7 +3390,7 @@ static u8 HandlePlayerListUpdate(void)
     s32 i;
     u8 j;
     struct WirelessLink_URoom *data = sWirelessLinkMain.uRoom;
-    s32 retVal = PLIST_0;
+    s32 retVal = PLIST_NONE;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -3399,8 +3399,8 @@ static u8 HandlePlayerListUpdate(void)
             data->spawnPlayer->players[0].rfu = data->incomingParentList->players[i].rfu;
             data->spawnPlayer->players[0].timeoutCounter = 0;
             data->spawnPlayer->players[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
-            data->spawnPlayer->players[0].field_1B = 1;
-            return PLIST_4;
+            data->spawnPlayer->players[0].newPlayerCountdown = 1;
+            return PLIST_CONTACTED;
         }
     }
     for (j = 0; j < MAX_UNION_ROOM_LEADERS; j++)
@@ -3415,21 +3415,21 @@ static u8 HandlePlayerListUpdate(void)
                     if (ArePlayerDataDifferent(&data->playerList->players[j].rfu, &data->incomingChildList->players[i].rfu))
                     {
                         data->playerList->players[j].rfu = data->incomingChildList->players[i].rfu;
-                        data->playerList->players[j].field_1B = 64;
-                        retVal = PLIST_1;
+                        data->playerList->players[j].newPlayerCountdown = 64;
+                        retVal = PLIST_NEW_PLAYER;
                     }
-                    else if (data->playerList->players[j].field_1B != 0)
+                    else if (data->playerList->players[j].newPlayerCountdown != 0)
                     {
-                        data->playerList->players[j].field_1B--;
-                        if (data->playerList->players[j].field_1B == 0)
-                            retVal = PLIST_2;
+                        data->playerList->players[j].newPlayerCountdown--;
+                        if (data->playerList->players[j].newPlayerCountdown == 0)
+                            retVal = PLIST_RECENT_UPDATE;
                     }
                 }
                 else
                 {
                     data->playerList->players[j].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
-                    data->playerList->players[j].field_1B = 0;
-                    retVal = PLIST_2;
+                    data->playerList->players[j].newPlayerCountdown = 0;
+                    retVal = PLIST_RECENT_UPDATE;
                 }
                 data->playerList->players[j].timeoutCounter = 0;
             }
@@ -3439,7 +3439,7 @@ static u8 HandlePlayerListUpdate(void)
                 if (data->playerList->players[j].timeoutCounter >= 600)
                 {
                     data->playerList->players[j].groupScheduledAnim = UNION_ROOM_SPAWN_OUT;
-                    retVal = PLIST_2;
+                    retVal = PLIST_RECENT_UPDATE;
                 }
             }
             else if (data->playerList->players[j].groupScheduledAnim == UNION_ROOM_SPAWN_OUT)
@@ -3452,7 +3452,7 @@ static u8 HandlePlayerListUpdate(void)
     }
     for (i = 0; i < RFU_CHILD_MAX; i++)
         if (TryAddIncomingPlayerToList(&data->playerList->players[0], &data->incomingChildList->players[i], MAX_UNION_ROOM_LEADERS) != 0xFF)
-            retVal = PLIST_1;
+            retVal = PLIST_NEW_PLAYER;
 
     return retVal;
 }
@@ -3858,7 +3858,7 @@ static void ClearRfuPlayerList(struct RfuPlayer *players, u8 count)
         players[i].timeoutCounter = 255;
         players[i].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
         players[i].useRedText = FALSE;
-        players[i].field_1B = 0;
+        players[i].newPlayerCountdown = 0;
     }
 }
 
@@ -3948,7 +3948,7 @@ static u8 TryAddIncomingPlayerToList(struct RfuPlayer *players, struct RfuIncomi
                 players[i].rfu = incomingPlayer->rfu;
                 players[i].timeoutCounter = 0;
                 players[i].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
-                players[i].field_1B = 64;
+                players[i].newPlayerCountdown = 64;
                 incomingPlayer->active = FALSE;
                 return i;
             }
