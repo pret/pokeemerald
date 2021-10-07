@@ -317,10 +317,8 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 
     for (i = 0; i < RECV_QUEUE_NUM_SLOTS; i++)
     {
-        for (j = 0; j < RECV_QUEUE_SLOT_LENGTH; j++)
-        {
+        for (j = 0; j < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; j++)
             queue->slots[i][j] = 0;
-        }
     }
     queue->sendSlot = 0;
     queue->recvSlot = 0;
@@ -335,7 +333,7 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 
     for (i = 0; i < SEND_QUEUE_NUM_SLOTS; i++)
     {
-        for (j = 0; j < SEND_QUEUE_SLOT_LENGTH; j++)
+        for (j = 0; j < COMM_SLOT_LENGTH; j++)
             queue->slots[i][j] = 0;
     }
     queue->sendSlot = 0;
@@ -371,21 +369,21 @@ void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
         imeBak = REG_IME;
         REG_IME = 0;
         count = 0;
-        for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i += RECV_QUEUE_SLOT_LENGTH / MAX_RFU_PLAYERS)
+        for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i += COMM_SLOT_LENGTH)
         {
             if (data[i] == 0 && data[i + 1] == 0)
                 count++;
         }
         if (count != MAX_RFU_PLAYERS)
         {
-            for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
+            for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
                 queue->slots[queue->recvSlot][i] = data[i];
 
             queue->recvSlot++;
             queue->recvSlot %= RECV_QUEUE_NUM_SLOTS;
             queue->count++;
 
-            for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
+            for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
                 data[i] = 0;
         }
         REG_IME = imeBak;
@@ -405,22 +403,20 @@ void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
     {
         imeBak = REG_IME;
         REG_IME = 0;
-        for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
+        for (i = 0; i < COMM_SLOT_LENGTH; i++)
         {
             if (data[i] != 0)
                 break;
         }
-        if (i != SEND_QUEUE_SLOT_LENGTH)
+        if (i != COMM_SLOT_LENGTH)
         {
-            for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
-            {
+            for (i = 0; i < COMM_SLOT_LENGTH; i++)
                 queue->slots[queue->recvSlot][i] = data[i];
-            }
             queue->recvSlot++;
             queue->recvSlot %= SEND_QUEUE_NUM_SLOTS;
             queue->count++;
 
-            for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
+            for (i = 0; i < COMM_SLOT_LENGTH; i++)
                 data[i] = 0;
         }
         REG_IME = imeBak;
@@ -440,13 +436,13 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
     REG_IME = 0;
     if (queue->recvSlot == queue->sendSlot || queue->full)
     {
-        for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
+        for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
             src[i] = 0;
 
         REG_IME = imeBak;
         return FALSE;
     }
-    for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
+    for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
     {
         src[i] = queue->slots[queue->sendSlot][i];
     }
@@ -467,7 +463,7 @@ bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
 
     imeBak = REG_IME;
     REG_IME = 0;
-    for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
+    for (i = 0; i < COMM_SLOT_LENGTH; i++)
         src[i] = queue->slots[queue->sendSlot][i];
 
     queue->sendSlot++;
@@ -487,7 +483,7 @@ void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
     }
     else
     {
-        for (i = 0; i < BACKUP_QUEUE_SLOT_LENGTH; i++)
+        for (i = 0; i < COMM_SLOT_LENGTH; i++)
             queue->slots[queue->recvSlot][i] = data[i];
 
         queue->recvSlot++;
@@ -509,7 +505,7 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
 
     if (src != NULL)
     {
-        for (i = 0; i < BACKUP_QUEUE_SLOT_LENGTH; i++)
+        for (i = 0; i < COMM_SLOT_LENGTH; i++)
             src[i] = queue->slots[queue->sendSlot][i];
     }
     queue->sendSlot++;

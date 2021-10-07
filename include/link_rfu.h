@@ -25,14 +25,10 @@
 #define RFU_SERIAL_UNKNOWN             0x0000 // Unreferenced acceptable serial number. Gamecube?
 #define RFU_SERIAL_END                 0xFFFF
 
+#define COMM_SLOT_LENGTH 14
 #define RECV_QUEUE_NUM_SLOTS 32
-#define RECV_QUEUE_SLOT_LENGTH (14 * MAX_RFU_PLAYERS)
-
 #define SEND_QUEUE_NUM_SLOTS 40
-#define SEND_QUEUE_SLOT_LENGTH 14
-
 #define BACKUP_QUEUE_NUM_SLOTS 2
-#define BACKUP_QUEUE_SLOT_LENGTH 14
 
 #define RFU_PACKET_SIZE 6
 
@@ -49,8 +45,6 @@
 #define RFU_STATUS_CHILD_LEAVE_READY    10
 #define RFU_STATUS_CHILD_LEAVE          11
 #define RFU_STATUS_ACK_JOIN_GROUP       12
-
-#define CHILD_DATA_LENGTH 14
 
 // Values for disconnectMode
 enum {
@@ -143,7 +137,7 @@ struct RfuBlockSend
 
 struct RfuRecvQueue
 {
-    /* 0x000 */ u8 slots[RECV_QUEUE_NUM_SLOTS][RECV_QUEUE_SLOT_LENGTH];
+    /* 0x000 */ u8 slots[RECV_QUEUE_NUM_SLOTS][COMM_SLOT_LENGTH * MAX_RFU_PLAYERS];
     /* 0x8c0 */ vu8 recvSlot;
     /* 0x8c1 */ vu8 sendSlot;
     /* 0x8c2 */ vu8 count;
@@ -152,7 +146,7 @@ struct RfuRecvQueue
 
 struct RfuSendQueue
 {
-    /* 0x000 */ u8 slots[SEND_QUEUE_NUM_SLOTS][SEND_QUEUE_SLOT_LENGTH];
+    /* 0x000 */ u8 slots[SEND_QUEUE_NUM_SLOTS][COMM_SLOT_LENGTH];
     /* 0x230 */ vu8 recvSlot;
     /* 0x231 */ vu8 sendSlot;
     /* 0x232 */ vu8 count;
@@ -161,7 +155,7 @@ struct RfuSendQueue
 
 struct RfuBackupQueue
 {
-    /* 0x00 */ u8 slots[BACKUP_QUEUE_NUM_SLOTS][BACKUP_QUEUE_SLOT_LENGTH];
+    /* 0x00 */ u8 slots[BACKUP_QUEUE_NUM_SLOTS][COMM_SLOT_LENGTH];
     /* 0x1c */ vu8 recvSlot;
     /* 0x1d */ vu8 sendSlot;
     /* 0x1e */ vu8 count;
@@ -180,8 +174,8 @@ struct RfuManager
     /* 0x00f */ u8 unused2;
     /* 0x010 */ u16 errorParam0;
     /* 0x012 */ u16 errorParam1;
-    /* 0x014 */ u8 childRecvBuffer[RFU_CHILD_MAX][CHILD_DATA_LENGTH];
-    /* 0x04c */ u8 childSendBuffer[CHILD_DATA_LENGTH];
+    /* 0x014 */ u8 childRecvBuffer[RFU_CHILD_MAX][COMM_SLOT_LENGTH];
+    /* 0x04c */ u8 childSendBuffer[COMM_SLOT_LENGTH];
     /* 0x05a */ u8 blockRequestType;
     /* 0x05b */ u8 blockSendAttempts;
     /* 0x05c */ bool8 blockReceived[MAX_RFU_PLAYERS];
@@ -211,7 +205,7 @@ struct RfuManager
     /* 0xc3c */ vu8 linkRecovered;
     /* 0xc3d */ u8 reconnectParentId;
     /* 0xc3e */ vu8 childSlot;
-    /* 0xc3f */ u8 childRecvQueue[RECV_QUEUE_SLOT_LENGTH];
+    /* 0xc3f */ u8 childRecvQueue[COMM_SLOT_LENGTH * MAX_RFU_PLAYERS];
     /* 0xc85 */ u8 leaveGroupStatus;
     /* 0xc86 */ u8 childRecvStatus;
     /* 0xc87 */ u8 recvCmds[MAX_RFU_PLAYERS][CMD_LENGTH - 1][2];

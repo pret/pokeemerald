@@ -579,7 +579,7 @@ static void MSCCallback_Child(u16 REQ_commandID)
 {
     s32 i;
 
-    for (i = 0; i < CHILD_DATA_LENGTH; i++)
+    for (i = 0; i < COMM_SLOT_LENGTH; i++)
         gRfu.childSendBuffer[i] = 0;
 
     rfu_REQ_recvData();
@@ -922,7 +922,7 @@ static void ChildBuildSendCmd(u16 *sendCmd, u8 *dst)
     }
     else
     {
-        for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
+        for (i = 0; i < COMM_SLOT_LENGTH; i++)
             dst[i] = 0;
     }
 }
@@ -939,8 +939,8 @@ static bool32 RfuMain1_Child(void)
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         for (j = 0; j < CMD_LENGTH - 1; j++)
-            gRecvCmds[i][j] = (recv[i * SEND_QUEUE_SLOT_LENGTH + (j * 2) + 1] << 8)
-                             | recv[i * SEND_QUEUE_SLOT_LENGTH + (j * 2) + 0];
+            gRecvCmds[i][j] = (recv[i * COMM_SLOT_LENGTH + (j * 2) + 1] << 8)
+                             | recv[i * COMM_SLOT_LENGTH + (j * 2) + 0];
     }
     RfuHandleReceiveCommand(0);
     if (lman.childClockSlave_flag == 0 && gRfu.disconnectMode != RFU_DISCONNECT_NONE)
@@ -986,8 +986,8 @@ static void HandleSendFailure(u8 unused, u32 flags)
             for (j = 0; j < CMD_LENGTH - 1; j++)
             {
                 temp = j * 2;
-                sResendBlock16[j + 1] = (payload[(SEND_QUEUE_SLOT_LENGTH - 2) * i + temp + 1] << 8)
-                                       | payload[(SEND_QUEUE_SLOT_LENGTH - 2) * i + temp + 0];
+                sResendBlock16[j + 1] = (payload[(COMM_SLOT_LENGTH - 2) * i + temp + 1] << 8)
+                                       | payload[(COMM_SLOT_LENGTH - 2) * i + temp + 0];
             }
             for (j = 0; j < CMD_LENGTH - 1; j++)
             {
@@ -2953,7 +2953,7 @@ static void Debug_PrintStatus(void)
         }
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
-            for (j = 0; j < CHILD_DATA_LENGTH; j++)
+            for (j = 0; j < COMM_SLOT_LENGTH; j++)
                 Debug_PrintNum(gRfu.childRecvBuffer[i][j], j * 2, i + 11, 2);
         }
         Debug_PrintString(sASCII_NowSlot, 1, 15);
