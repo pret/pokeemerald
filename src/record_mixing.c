@@ -952,7 +952,7 @@ static void Task_DoRecordMixing(u8 taskId)
         else
             task->data[0] = 6;
         break;
-    
+
     // Mixing Ruby/Sapphire records.
     case 2:
         SetContinueGameWarpStatusToDynamicWarp();

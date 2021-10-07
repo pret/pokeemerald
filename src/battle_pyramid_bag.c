@@ -411,20 +411,20 @@ static void Task_ChooseItemsToTossFromPyramidBag(u8 taskId)
 
 void CB2_ReturnToPyramidBagMenu(void)
 {
-    GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PREV, gPyramidBagMenuState.callback);
+    GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PREV, gPyramidBagMenuState.exitCallback);
 }
 
-void GoToBattlePyramidBagMenu(u8 location, void (*callback)(void))
+void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void))
 {
     gPyramidBagMenu = AllocZeroed(sizeof(*gPyramidBagMenu));
 
     if (location != PYRAMIDBAG_LOC_PREV)
         gPyramidBagMenuState.location = location;
 
-    if (callback != NULL)
-        gPyramidBagMenuState.callback = callback;
+    if (exitCallback != NULL)
+        gPyramidBagMenuState.exitCallback = exitCallback;
 
-    gPyramidBagMenu->exitCallback = NULL;
+    gPyramidBagMenu->newScreenCallback = NULL;
     gPyramidBagMenu->toSwapPos = POS_NONE;
     gPyramidBagMenu->scrollIndicatorsTaskId = TASK_NONE;
 
@@ -452,8 +452,8 @@ static void VBlankCB_PyramidBag(void)
 
 static void CB2_LoadPyramidBagMenu(void)
 {
-    while (MenuHelpers_CallLinkSomething() != TRUE 
-        && LoadPyramidBagMenu() != TRUE 
+    while (MenuHelpers_CallLinkSomething() != TRUE
+        && LoadPyramidBagMenu() != TRUE
         && MenuHelpers_LinkSomething() != TRUE);
 }
 
@@ -624,7 +624,7 @@ static void CopyBagItemName(u8 *dst, u16 itemId)
     {
         ConvertIntToDecimalStringN(gStringVar1, ITEM_TO_BERRY(itemId), STR_CONV_MODE_LEADING_ZEROS, 2);
         CopyItemName(itemId, gStringVar2);
-        StringExpandPlaceholders(dst, gText_NumberVar1Clear7Var2);
+        StringExpandPlaceholders(dst, gText_NumberItem_TMBerry);
     }
     else
     {
@@ -696,9 +696,9 @@ static void PrintItemDescription(s32 listMenuId)
 static void AddScrollArrows(void)
 {
     if (gPyramidBagMenu->scrollIndicatorsTaskId == TASK_NONE)
-        gPyramidBagMenu->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 172, 12, 148, 
-                                                                                            gPyramidBagMenu->listMenuCount - gPyramidBagMenu->listMenuMaxShown, 
-                                                                                            TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, 
+        gPyramidBagMenu->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 172, 12, 148,
+                                                                                            gPyramidBagMenu->listMenuCount - gPyramidBagMenu->listMenuMaxShown,
+                                                                                            TAG_SCROLL_ARROW, TAG_SCROLL_ARROW,
                                                                                             &gPyramidBagMenuState.scrollPosition);
 }
 
@@ -866,10 +866,13 @@ static void Task_ClosePyramidBag(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyListMenuTask(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
-        if (gPyramidBagMenu->exitCallback != NULL)
-            SetMainCallback2(gPyramidBagMenu->exitCallback);
+
+        // If ready for a new screen (e.g. party menu for giving an item) go to that screen
+        // Otherwise exit the bag and use callback set up when the bag was first opened
+        if (gPyramidBagMenu->newScreenCallback != NULL)
+            SetMainCallback2(gPyramidBagMenu->newScreenCallback);
         else
-            SetMainCallback2(gPyramidBagMenuState.callback);
+            SetMainCallback2(gPyramidBagMenuState.exitCallback);
         RemoveScrollArrow();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -934,7 +937,7 @@ static void OpenContextMenu(u8 taskId)
     {
     default:
 //  case PYRAMIDBAG_LOC_FIELD:
-//  case PYRAMIDBAG_LOC_PARTY:    
+//  case PYRAMIDBAG_LOC_PARTY:
         gPyramidBagMenu->menuActionIds = sMenuActionIds_Field;
         gPyramidBagMenu->menuActionsCount = ARRAY_COUNT(sMenuActionIds_Field);
         break;
@@ -1249,7 +1252,7 @@ static void BagAction_Give(u8 taskId)
     }
     else if (!ItemId_GetImportance(gSpecialVar_ItemId))
     {
-        gPyramidBagMenu->exitCallback = CB2_ChooseMonToGiveItem;
+        gPyramidBagMenu->newScreenCallback = CB2_ChooseMonToGiveItem;
         CloseBattlePyramidBag(taskId);
     }
     else
@@ -1582,8 +1585,8 @@ static void ShowItemIcon(u16 itemId, bool8 isAlt)
         if (itemSpriteId != MAX_SPRITES)
         {
             *spriteId = itemSpriteId;
-            gSprites[itemSpriteId].pos2.x = 24;
-            gSprites[itemSpriteId].pos2.y = 88;
+            gSprites[itemSpriteId].x2 = 24;
+            gSprites[itemSpriteId].y2 = 88;
         }
     }
 }
@@ -1605,5 +1608,5 @@ static void SetSwapLineInvisibility(bool8 invisible)
 
 static void UpdateSwapLinePos(u8 y)
 {
-    UpdateSwapLineSpritesPos(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES | 0x80, 120, (y + 1) * 16);
+    UpdateSwapLineSpritesPos(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }

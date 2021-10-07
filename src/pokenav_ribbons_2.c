@@ -32,7 +32,7 @@ enum
 #define PALTAG_RIBBON_ICONS_5 19
 
 #define RIBBONS_PER_ROW 9
-#define GIFT_RIBBON_ROW (1 + (FIRST_GIFT_RIBBON / RIBBONS_PER_ROW)) // Gift ribbons start on a new row after the normal ribbons. 
+#define GIFT_RIBBON_ROW (1 + (FIRST_GIFT_RIBBON / RIBBONS_PER_ROW)) // Gift ribbons start on a new row after the normal ribbons.
 #define GIFT_RIBBON_START_POS (RIBBONS_PER_ROW * GIFT_RIBBON_ROW)
 
 #define MON_SPRITE_X_ON  40
@@ -828,11 +828,11 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
     }
     else
     {
-        // ribbonId here is one of the 'gift' ribbon slots, used to read 
+        // ribbonId here is one of the 'gift' ribbon slots, used to read
         // its actual value from giftRibbons to determine which specific
         // gift ribbon it is
         ribbonId = gSaveBlock1Ptr->giftRibbons[ribbonId - FIRST_GIFT_RIBBON];
-        
+
         // If 0, this gift ribbon slot is unoccupied
         if (ribbonId == 0)
             return;
@@ -962,7 +962,7 @@ static u16 DrawRibbonsMonFrontPic(s32 x, s32 y)
     u32 personality, otId;
 
     GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
-    spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, 0xFFFF);
+    spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }
@@ -997,7 +997,7 @@ static void StartMonSpriteSlide(struct Sprite *sprite, s32 startX, s32 destX, s3
 {
     u32 delta = destX - startX;
 
-    sprite->pos1.x = startX;
+    sprite->x = startX;
     sprite->sCurrX = startX << 4;
     sprite->sMoveIncr = (delta << 4) / time;
     sprite->sTime = time;
@@ -1012,15 +1012,15 @@ static void SpriteCB_MonSpriteSlide(struct Sprite *sprite)
     {
         sprite->sTime--;
         sprite->sCurrX += sprite->sMoveIncr;
-        sprite->pos1.x = sprite->sCurrX >> 4;
-        if (sprite->pos1.x <= MON_SPRITE_X_OFF)
+        sprite->x = sprite->sCurrX >> 4;
+        if (sprite->x <= MON_SPRITE_X_OFF)
             sprite->invisible = TRUE;
         else
             sprite->invisible = FALSE;
     }
     else
     {
-        sprite->pos1.x = sprite->sDestX;
+        sprite->x = sprite->sDestX;
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -1232,8 +1232,8 @@ static void UpdateAndZoomInSelectedRibbon(struct PokenavSub14 *structPtr)
     s32 x = (position % RIBBONS_PER_ROW) * 16 + 96;
     s32 y = (position / RIBBONS_PER_ROW) * 16 + 40;
 
-    structPtr->bigRibbonSprite->pos1.x = x;
-    structPtr->bigRibbonSprite->pos1.y = y;
+    structPtr->bigRibbonSprite->x = x;
+    structPtr->bigRibbonSprite->y = y;
 
     // Set new selected ribbon's gfx data
     ribbonId = GetRibbonId();

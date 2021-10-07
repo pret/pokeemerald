@@ -13,7 +13,7 @@
     and the credit sequence, where the player bikes along a grassy path.
 
     These graphics are placed in graphics/intro/scene_2 to keep
-    all of the intro graphics files together, though it includes 
+    all of the intro graphics files together, though it includes
     the related graphics that are used only by the credits.
 */
 
@@ -79,7 +79,7 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite);
 static const struct SpriteTemplate sSpriteTemplate_MovingScenery =
 {
     .tileTag = TAG_MOVING_SCENERY,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &gDummyOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1039,7 +1039,7 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
 {
     s32 x;
     s16 state = gIntroCredits_MovingSceneryState;
-    
+
     if (state != INTROCRED_SCENERY_FROZEN)
     {
         switch (state)
@@ -1048,15 +1048,15 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
             DestroySprite(sprite);
             break;
         case INTROCRED_SCENERY_NORMAL:
-            x = ((sprite->pos1.x << 16) | (u16)sprite->tXPos) + (u16)sprite->tXOffset;
-            sprite->pos1.x = x >> 16;
+            x = ((sprite->x << 16) | (u16)sprite->tXPos) + (u16)sprite->tXOffset;
+            sprite->x = x >> 16;
             sprite->tXPos = x;
-            if (sprite->pos1.x > 255)
-                sprite->pos1.x = -32;
+            if (sprite->x > 255)
+                sprite->x = -32;
             if (sprite->tHasVerticalMove)
-                sprite->pos2.y = -(gIntroCredits_MovingSceneryVBase + gIntroCredits_MovingSceneryVOffset);
+                sprite->y2 = -(gIntroCredits_MovingSceneryVBase + gIntroCredits_MovingSceneryVOffset);
             else
-                sprite->pos2.y = -gIntroCredits_MovingSceneryVBase;
+                sprite->y2 = -gIntroCredits_MovingSceneryVBase;
             break;
         }
     }
@@ -1110,10 +1110,10 @@ static void SpriteCB_Player(struct Sprite *sprite)
 static void SpriteCB_Bicycle(struct Sprite* sprite)
 {
     sprite->invisible = gSprites[sprite->sPlayerSpriteId].invisible;
-    sprite->pos1.x = gSprites[sprite->sPlayerSpriteId].pos1.x;
-    sprite->pos1.y = gSprites[sprite->sPlayerSpriteId].pos1.y + 8;
-    sprite->pos2.x = gSprites[sprite->sPlayerSpriteId].pos2.x;
-    sprite->pos2.y = gSprites[sprite->sPlayerSpriteId].pos2.y;
+    sprite->x = gSprites[sprite->sPlayerSpriteId].x;
+    sprite->y = gSprites[sprite->sPlayerSpriteId].y + 8;
+    sprite->x2 = gSprites[sprite->sPlayerSpriteId].x2;
+    sprite->y2 = gSprites[sprite->sPlayerSpriteId].y2;
 }
 
 u8 CreateIntroBrendanSprite(s16 x, s16 y)
@@ -1143,9 +1143,9 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite)
 static void SpriteCB_FlygonRightHalf(struct Sprite* sprite)
 {
     sprite->invisible = gSprites[sprite->sLeftSpriteId].invisible;
-    sprite->pos1.y = gSprites[sprite->sLeftSpriteId].pos1.y;
-    sprite->pos2.x = gSprites[sprite->sLeftSpriteId].pos2.x;
-    sprite->pos2.y = gSprites[sprite->sLeftSpriteId].pos2.y;
+    sprite->y = gSprites[sprite->sLeftSpriteId].y;
+    sprite->x2 = gSprites[sprite->sLeftSpriteId].x2;
+    sprite->y2 = gSprites[sprite->sLeftSpriteId].y2;
 }
 
 // In RS these were for Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used

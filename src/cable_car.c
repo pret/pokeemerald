@@ -596,13 +596,13 @@ static void SpriteCB_CableCar(struct Sprite *sprite)
     {
         if (!GOING_DOWN)
         {
-            sprite->pos1.x = sprite->sXPos - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->sYPos - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->x = sprite->sXPos - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->y = sprite->sYPos - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
         else
         {
-            sprite->pos1.x = sprite->sXPos + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->sYPos + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->x = sprite->sXPos + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->y = sprite->sYPos + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
     }
 }
@@ -617,20 +617,20 @@ static void SpriteCB_Player(struct Sprite *sprite)
         // Move along with cable car
         if (!GOING_DOWN)
         {
-            sprite->pos1.x = sprite->sXPos - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->sYPos - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->x = sprite->sXPos - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->y = sprite->sYPos - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
         else
         {
-            sprite->pos1.x = sprite->sXPos + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->sYPos + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->x = sprite->sXPos + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->y = sprite->sYPos + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
 
         // Bounce up and down
         switch (sprite->sState)
         {
         case 0:
-            sprite->pos2.y = 17;
+            sprite->y2 = 17;
             if (sprite->sTimer++ > 9)
             {
                 sprite->sTimer = 0;
@@ -638,7 +638,7 @@ static void SpriteCB_Player(struct Sprite *sprite)
             }
             break;
         default:
-            sprite->pos2.y = 16;
+            sprite->y2 = 16;
             if (sprite->sTimer++ > 9)
             {
                 sprite->sTimer = 0;
@@ -660,8 +660,8 @@ static void SpriteCB_HikerGoingUp(struct Sprite *sprite)
 {
     if (sprite->sTimer == 0)
     {
-        sprite->pos1.x += 2 * sprite->centerToCornerVecX;
-        sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+        sprite->x += 2 * sprite->centerToCornerVecX;
+        sprite->y += 16 + sprite->centerToCornerVecY;
     }
 
     if (++sprite->sTimer >= sprite->sDelay)
@@ -669,22 +669,22 @@ static void SpriteCB_HikerGoingUp(struct Sprite *sprite)
         switch (sprite->sSameDir)
         {
         case FALSE:
-            sprite->pos1.x++;
+            sprite->x++;
             if ((sprite->sTimer % 4) == 0)
-                sprite->pos1.y++;
+                sprite->y++;
             break;
         case TRUE:
             // Hiker moves slower if travelling with the Cable Car
             if ((sprite->sTimer % 2) != 0)
             {
-                sprite->pos1.x++;
-                if ((sprite->pos1.x % 4) == 0)
-                    sprite->pos1.y++;
+                sprite->x++;
+                if ((sprite->x % 4) == 0)
+                    sprite->y++;
             }
             break;
         }
 
-        if (sprite->pos1.y > DISPLAY_HEIGHT)
+        if (sprite->y > DISPLAY_HEIGHT)
             DestroySprite(sprite);
     }
 }
@@ -692,29 +692,29 @@ static void SpriteCB_HikerGoingUp(struct Sprite *sprite)
 static void SpriteCB_HikerGoingDown(struct Sprite *sprite)
 {
     if (sprite->sTimer == 0)
-        sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+        sprite->y += 16 + sprite->centerToCornerVecY;
 
     if (++sprite->sTimer >= sprite->sDelay)
     {
         switch (sprite->sSameDir)
         {
         case FALSE:
-            sprite->pos1.x--;
+            sprite->x--;
             if ((sprite->sTimer % 4) == 0)
-                sprite->pos1.y--;
+                sprite->y--;
             break;
         case TRUE:
             // Hiker moves slower if travelling with the Cable Car
             if ((sprite->sTimer % 2) != 0)
             {
-                sprite->pos1.x--;
-                if ((sprite->pos1.x % 4) == 0)
-                    sprite->pos1.y--;
+                sprite->x--;
+                if ((sprite->x % 4) == 0)
+                    sprite->y--;
             }
             break;
         }
 
-        if (sprite->pos1.y < 80)
+        if (sprite->y < 80)
             DestroySprite(sprite);
     }
 }
@@ -829,20 +829,20 @@ static void CreateCableCarSprites(void)
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
-                gSprites[spriteId].pos2.x = 8;
-                gSprites[spriteId].pos2.y = 16;
+                gSprites[spriteId].x2 = 8;
+                gSprites[spriteId].y2 = 16;
                 gSprites[spriteId].sXPos = 200;
                 gSprites[spriteId].sYPos = 73;
             }
             // Create car sprite
             spriteId = CreateSprite(&sSpriteTemplate_CableCar[0], 176, 43, 0x67);
-            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 32;
+            gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
             gSprites[spriteId].sXPos = 176;
             gSprites[spriteId].sYPos = 43;
             // Create door sprite
             spriteId = CreateSprite(&sSpriteTemplate_CableCar[1], 200, 99, 0x65);
-            gSprites[spriteId].pos2.x = 8;
-            gSprites[spriteId].pos2.y = 4;
+            gSprites[spriteId].x2 = 8;
+            gSprites[spriteId].y2 = 4;
             gSprites[spriteId].sXPos = 200;
             gSprites[spriteId].sYPos = 99;
             // Init weather
@@ -857,20 +857,20 @@ static void CreateCableCarSprites(void)
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
-                gSprites[spriteId].pos2.x = 8;
-                gSprites[spriteId].pos2.y = 16;
+                gSprites[spriteId].x2 = 8;
+                gSprites[spriteId].y2 = 16;
                 gSprites[spriteId].sXPos = 128;
                 gSprites[spriteId].sYPos = 39;
             }
             // Create car sprite
             spriteId = CreateSprite(&sSpriteTemplate_CableCar[0], 104, 9, 0x67);
-            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 32;
+            gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
             gSprites[spriteId].sXPos = 104;
             gSprites[spriteId].sYPos = 9;
             // Create door sprite
             spriteId = CreateSprite(&sSpriteTemplate_CableCar[1], 128, 65, 0x65);
-            gSprites[spriteId].pos2.x = 8;
-            gSprites[spriteId].pos2.y = 4;
+            gSprites[spriteId].x2 = 8;
+            gSprites[spriteId].y2 = 4;
             gSprites[spriteId].sXPos = 128;
             gSprites[spriteId].sYPos = 65;
             // Init weather
@@ -882,8 +882,8 @@ static void CreateCableCarSprites(void)
     for (i = 0; i < 9; i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_Cable, 16 * i + 96, 8 * i - 8, 0x68);
-        gSprites[spriteId].pos2.x = 8;
-        gSprites[spriteId].pos2.y = 8;
+        gSprites[spriteId].x2 = 8;
+        gSprites[spriteId].y2 = 8;
     }
 
     // 1/64 chance for an NPC to appear hiking on the ground below the Cable Car
@@ -894,9 +894,9 @@ static void CreateCableCarSprites(void)
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;
-            gSprites[spriteId].pos2.x = -gSprites[spriteId].centerToCornerVecX;
-            gSprites[spriteId].pos2.y = -gSprites[spriteId].centerToCornerVecY;
-            
+            gSprites[spriteId].x2 = -gSprites[spriteId].centerToCornerVecX;
+            gSprites[spriteId].y2 = -gSprites[spriteId].centerToCornerVecY;
+
             // Randomly choose which direction the NPC is going
             if (!GOING_DOWN)
             {
@@ -905,7 +905,7 @@ static void CreateCableCarSprites(void)
                     // Do walking west anim
                     StartSpriteAnim(&gSprites[spriteId], 6);
                     gSprites[spriteId].sSameDir = TRUE;
-                    gSprites[spriteId].pos1.y += 2;
+                    gSprites[spriteId].y += 2;
                 }
                 else
                 {
@@ -921,7 +921,7 @@ static void CreateCableCarSprites(void)
                     // Do walking east anim
                     StartSpriteAnim(&gSprites[spriteId], 7);
                     gSprites[spriteId].sSameDir = TRUE;
-                    gSprites[spriteId].pos1.y += 2;
+                    gSprites[spriteId].y += 2;
                 }
                 else
                 {
@@ -1024,7 +1024,7 @@ static void DrawNextGroundSegmentGoingDown(void)
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 2) % 32;
     sCableCar->groundTileIdx += 2;
     sGroundSegmentY_Down = sCableCar->groundSegmentYStart;
-    
+
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {

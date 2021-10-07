@@ -35,15 +35,15 @@ se_m_acid_armor_1:
 	.byte	W02
 	.byte		VOICE , 23
 	.byte		PAN   , c_v+11
-	.byte		N01   , Cn1 
+	.byte		N01   , Cn1
 	.byte	W01
 	.byte		PAN   , c_v-10
-	.byte		N01   , Cn2 
+	.byte		N01   , Cn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-37
-	.byte		N06   , Dn1 
+	.byte		N06   , Dn1
 	.byte	W01
 	.byte		BEND  , c_v-16
 	.byte	W01
@@ -55,15 +55,15 @@ se_m_acid_armor_1:
 	.byte	W01
 	.byte		VOICE , 23
 	.byte		PAN   , c_v-1
-	.byte		N01   , Fn1 
+	.byte		N01   , Fn1
 	.byte	W01
 	.byte		PAN   , c_v-10
-	.byte		N01   , Fn2 
+	.byte		N01   , Fn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-37
-	.byte		N02   , Gn0 
+	.byte		N02   , Gn0
 	.byte	W02
 	.byte		BEND  , c_v-16
 	.byte	W01
@@ -71,21 +71,21 @@ se_m_acid_armor_1:
 	.byte	W01
 	.byte		PAN   , c_v+5
 	.byte		BEND  , c_v+27
-	.byte		N02   
+	.byte		N02
 	.byte	W01
 	.byte		BEND  , c_v+46
 	.byte	W01
 	.byte		VOICE , 23
 	.byte		PAN   , c_v+10
-	.byte		N01   , Cn1 
+	.byte		N01   , Cn1
 	.byte	W02
 	.byte		PAN   , c_v-9
-	.byte		N01   , Cn2 
+	.byte		N01   , Cn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-37
-	.byte		N06   , Dn1 
+	.byte		N06   , Dn1
 	.byte	W01
 	.byte		BEND  , c_v-16
 	.byte	W01
@@ -97,10 +97,10 @@ se_m_acid_armor_1:
 	.byte	W01
 	.byte		VOICE , 23
 	.byte		PAN   , c_v+5
-	.byte		N01   , Cn1 
+	.byte		N01   , Cn1
 	.byte	W01
 	.byte		PAN   , c_v-8
-	.byte		N01   , Cn2 
+	.byte		N01   , Cn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+0
@@ -125,7 +125,7 @@ se_m_acid_armor_1:
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-37
-	.byte		N06   , Dn1 
+	.byte		N06   , Dn1
 	.byte	W01
 	.byte		BEND  , c_v-16
 	.byte	W01
@@ -140,7 +140,7 @@ se_m_acid_armor_1:
 	.byte		N01   , Fn1 , v084
 	.byte	W01
 	.byte		PAN   , c_v-10
-	.byte		N01   , Fn2 
+	.byte		N01   , Fn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+0
@@ -162,7 +162,7 @@ se_m_acid_armor_1:
 	.byte		N01   , Cn1 , v068
 	.byte	W01
 	.byte		PAN   , c_v-9
-	.byte		N01   , Cn2 
+	.byte		N01   , Cn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+0

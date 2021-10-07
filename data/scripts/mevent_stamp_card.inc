@@ -1,4 +1,4 @@
-MysteryEventScript_StampCard:: @ 8674CB0
+MysteryEventScript_StampCard::
 	setvaddress MysteryEventScript_StampCard
 	setorcopyvar VAR_RESULT, GET_MAX_STAMPS
 	specialvar VAR_0x8008, GetMysteryEventCardVal

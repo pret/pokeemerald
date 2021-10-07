@@ -242,10 +242,10 @@ static void Task_StaticCountdown_Init(u8 taskId)
     StaticCountdown_CreateSprites(taskId, data);
 
     StartSpriteAnim(&gSprites[tSpriteIds(1)], ANIM_START_MID);
-    gSprites[tSpriteIds(1)].pos2.x = -32;
+    gSprites[tSpriteIds(1)].x2 = -32;
 
     StartSpriteAnim(&gSprites[tSpriteIds(2)], ANIM_START_RIGHT);
-    gSprites[tSpriteIds(2)].pos2.x = 32;
+    gSprites[tSpriteIds(2)].x2 = 32;
 }
 
 static void Task_StaticCountdown_Free(u8 taskId)
@@ -453,7 +453,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
     case 1:
         if (sprite->sTimer == 0)
             PlaySE(SE_BALL_BOUNCE_2);
-        
+
         if (++sprite->sTimer >= 20)
         {
             // Ready for jump
@@ -477,7 +477,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         break;
     case 4:
         // Moving up from jump
-        sprite->pos1.y -= 4;
+        sprite->y -= 4;
         if (++sprite->sTimer >= 8)
         {
             if (sprite->sAnimNum < 2)
@@ -497,7 +497,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         break;
     case 5:
         // Falling after jump
-        sprite->pos1.y += 4;
+        sprite->y += 4;
         if (++sprite->sTimer >= 8)
         {
             // Land from jump
@@ -528,8 +528,8 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
 // First argument is unused.
 static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3)
 {
-    gSprites[spriteId2].pos2.y = -40;
-    gSprites[spriteId3].pos2.y = -40;
+    gSprites[spriteId2].y2 = -40;
+    gSprites[spriteId3].y2 = -40;
     gSprites[spriteId2].invisible = FALSE;
     gSprites[spriteId3].invisible = FALSE;
     gSprites[spriteId2].callback = SpriteCB_Start;
@@ -555,16 +555,16 @@ static void SpriteCB_Start(struct Sprite *sprite)
     {
     case 0:
         sYSpeed = 64;
-        sY = sprite->pos2.y << 4;
+        sY = sprite->y2 << 4;
         sState++;
     case 1:
         sY += sYSpeed;
         sYSpeed++;
-        sprite->pos2.y = sY >> 4;
-        if (sprite->pos2.y >= 0)
+        sprite->y2 = sY >> 4;
+        if (sprite->y2 >= 0)
         {
             PlaySE(SE_BALL_BOUNCE_2);
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             sState++;
         }
         break;
@@ -577,7 +577,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
             sState++;
         }
         y = gSineTable[sTimer];
-        sprite->pos2.y = -(y >> 4);
+        sprite->y2 = -(y >> 4);
         break;
     case 3:
         sTimer += 16;
@@ -587,7 +587,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
             sTimer = 0;
             sState++;
         }
-        sprite->pos2.y = -(gSineTable[sTimer] >> 5);
+        sprite->y2 = -(gSineTable[sTimer] >> 5);
         break;
     case 4:
         if (++sTimer > 40)

@@ -741,11 +741,11 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fieldId)
 static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *list, u32 checkPageEntry)
 {
     // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
-    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = 
+    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] =
     {
-        [CHECK_PAGE_STRATEGY] = 2, 
-        [CHECK_PAGE_POKEMON]  = 4, 
-        [CHECK_PAGE_INTRO_1]  = 6, 
+        [CHECK_PAGE_STRATEGY] = 2,
+        [CHECK_PAGE_POKEMON]  = 4,
+        [CHECK_PAGE_INTRO_1]  = 6,
         [CHECK_PAGE_INTRO_2]  = 7
     };
 
@@ -890,7 +890,7 @@ void ToggleMatchCallArrows(struct PokenavSub17Substruct *list, bool32 shouldHide
 void SpriteCB_MatchCallRightArrow(struct Sprite *sprite)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_LIST);
-    sprite->pos2.y = structPtr->unk888.selectedIndexOffset << 4;
+    sprite->y2 = structPtr->unk888.selectedIndexOffset << 4;
 }
 
 void SpriteCB_MatchCallDownArrow(struct Sprite *sprite)
@@ -907,7 +907,7 @@ void SpriteCB_MatchCallDownArrow(struct Sprite *sprite)
         sprite->data[0] = 0;
         offset = (sprite->data[1] + 1) & 7;
         sprite->data[1] = offset;
-        sprite->pos2.y = offset;
+        sprite->y2 = offset;
     }
 }
 
@@ -925,7 +925,7 @@ void SpriteCB_MatchCallUpArrow(struct Sprite *sprite)
         sprite->data[0] = 0;
         offset = (sprite->data[1] + 1) & 7;
         sprite->data[1] = offset;
-        sprite->pos2.y = -1 * offset;
+        sprite->y2 = -1 * offset;
     }
 }
 

@@ -23,10 +23,10 @@
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 static void Task_CallYesOrNoCallback(u8 taskId);
 
-EWRAM_DATA static struct YesNoFuncTable gUnknown_0203A138 = {0};
-EWRAM_DATA static u8 gUnknown_0203A140 = 0;
+EWRAM_DATA static struct YesNoFuncTable sYesNo = {0};
+EWRAM_DATA static u8 sMessageWindowId = 0;
 
-static TaskFunc gUnknown_0300117C;
+static TaskFunc sMessageNextTask;
 
 static const struct OamData sOamData_SwapLine =
 {
@@ -122,17 +122,17 @@ void SetVBlankHBlankCallbacksToNull(void)
     SetHBlankCallback(NULL);
 }
 
-void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
+void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
 {
-    gUnknown_0203A140 = windowId;
-    DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, arg2, arg3);
+    sMessageWindowId = windowId;
+    DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, tileNum, paletteNum);
 
     if (string != gStringVar4)
         StringExpandPlaceholders(gStringVar4, string);
 
     gTextFlags.canABSpeedUpPrint = 1;
     AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
-    gUnknown_0300117C = taskFunc;
+    sMessageNextTask = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
@@ -144,20 +144,20 @@ bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
 {
-    if (!RunTextPrintersRetIsActive(gUnknown_0203A140))
-        gUnknown_0300117C(taskId);
+    if (!RunTextPrintersRetIsActive(sMessageWindowId))
+        sMessageNextTask(taskId);
 }
 
 void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data)
 {
-    gUnknown_0203A138 = *data;
+    sYesNo = *data;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 arg2, u8 arg3, u8 arg4, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, tileStart, palette, 0);
-    gUnknown_0203A138 = *yesNo;
+    sYesNo = *yesNo;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
@@ -167,12 +167,12 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     {
     case 0:
         PlaySE(SE_SELECT);
-        gUnknown_0203A138.yesFunc(taskId);
+        sYesNo.yesFunc(taskId);
         break;
     case 1:
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        gUnknown_0203A138.noFunc(taskId);
+        sYesNo.noFunc(taskId);
         break;
     }
 }
@@ -275,11 +275,13 @@ u8 GetLRKeysPressedAndHeld(void)
     return 0;
 }
 
-bool8 sub_8122148(u16 itemId)
+bool8 IsHoldingItemAllowed(u16 itemId)
 {
+    // Enigma Berry can't be held in link areas
     if (itemId != ITEM_ENIGMA_BERRY)
         return TRUE;
-    else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+    else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
+          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
         return FALSE;
     else if (InUnionRoom() != TRUE)
         return TRUE;
@@ -323,66 +325,72 @@ bool8 MenuHelpers_CallLinkSomething(void)
         return TRUE;
 }
 
-void sub_812220C(struct ItemSlot *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount)
+void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage)
 {
     u16 i;
     struct ItemSlot *slots_ = slots;
 
-    (*usedSlotsCount) = 0;
-    for (i = 0; i < count; i++)
+    // Count the number of non-empty item slots
+    *totalItems = 0;
+    for (i = 0; i < slotsCount; i++)
     {
         if (slots_[i].itemId != ITEM_NONE)
-            (*usedSlotsCount)++;
+            (*totalItems)++;
     }
+    (*totalItems)++; // + 1 for 'Cancel'
 
-    (*usedSlotsCount)++;
-    if ((*usedSlotsCount) > maxUsedSlotsCount)
-        *arg2 = maxUsedSlotsCount;
+    // Set number of items per page
+    if (*totalItems > maxPerPage)
+        *pageItems = maxPerPage;
     else
-        *arg2 = (*usedSlotsCount);
+        *pageItems = *totalItems;
 }
 
-void sub_812225C(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 numItems)
+void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems)
 {
-    if (*scrollOffset != 0 && *scrollOffset + maxShownItems > numItems)
-        *scrollOffset = numItems - maxShownItems;
+    if (*scrollOffset != 0 && *scrollOffset + maxShownItems > totalItems)
+        *scrollOffset = totalItems - maxShownItems;
 
-    if (*scrollOffset + *cursorPos >= numItems)
+    if (*scrollOffset + *cursorPos >= totalItems)
     {
-        if (numItems == 0)
+        if (totalItems == 0)
             *cursorPos = 0;
         else
-            *cursorPos = numItems - 1;
+            *cursorPos = totalItems - 1;
     }
 }
 
-void sub_8122298(u16 *arg0, u16 *arg1, u8 arg2, u8 arg3, u8 arg4)
+void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems)
 {
     u8 i;
 
-    if (arg4 % 2 != 0)
+    if (maxShownItems % 2 != 0)
     {
-        if ((*arg1) >= arg4 / 2)
+        // Is cursor at least halfway down visible list
+        if (*cursorPos >= maxShownItems / 2)
         {
-            for (i = 0; i < (*arg1) - (arg4 / 2); i++)
+            for (i = 0; i < *cursorPos - (maxShownItems / 2); i++)
             {
-                if ((*arg0) + arg2 == arg3)
+                // Stop if reached end of list
+                if (*scrollOffset + shownItems == totalItems)
                     break;
-                (*arg1)--;
-                (*arg0)++;
+                (*cursorPos)--;
+                (*scrollOffset)++;
             }
         }
     }
     else
     {
-        if ((*arg1) >= (arg4 / 2) + 1)
+        // Is cursor at least halfway down visible list
+        if (*cursorPos >= (maxShownItems / 2) + 1)
         {
-            for (i = 0; i <= (*arg1) - (arg4 / 2); i++)
+            for (i = 0; i <= *cursorPos - (maxShownItems / 2); i++)
             {
-                if ((*arg0) + arg2 == arg3)
+                // Stop if reached end of list
+                if (*scrollOffset + shownItems == totalItems)
                     break;
-                (*arg1)--;
-                (*arg0)++;
+                (*cursorPos)--;
+                (*scrollOffset)++;
             }
         }
     }
@@ -432,16 +440,20 @@ void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible)
 void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
 {
     u8 i;
-    bool8 unknownBit = count & 0x80;
-    count &= ~(0x80);
+    bool8 hasMargin = count & SWAP_LINE_HAS_MARGIN;
+    count &= ~SWAP_LINE_HAS_MARGIN;
 
     for (i = 0; i < count; i++)
     {
-        if (i == count - 1 && unknownBit)
-            gSprites[spriteIds[i]].pos2.x = x - 8;
+        // If the list menu has a right margin, the swap line
+        // shouldn't extend all the way to the edge of the screen.
+        // If this is the last sprite in the line, move it a bit
+        // to the left to keep it out of the margin.
+        if (i == count - 1 && hasMargin)
+            gSprites[spriteIds[i]].x2 = x - 8;
         else
-            gSprites[spriteIds[i]].pos2.x = x;
+            gSprites[spriteIds[i]].x2 = x;
 
-        gSprites[spriteIds[i]].pos1.y = 1 + y;
+        gSprites[spriteIds[i]].y = 1 + y;
     }
 }

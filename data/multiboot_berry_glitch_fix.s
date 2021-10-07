@@ -1,5 +1,5 @@
 	.section .rodata
 
-gMultiBootProgram_BerryGlitchFix_Start:: @ 89A6550
+gMultiBootProgram_BerryGlitchFix_Start::
 	.incbin "berry_fix/berry_fix.gba"
-gMultiBootProgram_BerryGlitchFix_End:: @ 89AA144
+gMultiBootProgram_BerryGlitchFix_End::

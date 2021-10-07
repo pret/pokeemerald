@@ -325,7 +325,7 @@ void ToggleSecretBaseEntranceMetatile(void)
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     metatileId = MapGridGetMetatileIdAt(x, y);
-    
+
     // Look for entrance metatiles to open
     for (i = 0; i < ARRAY_COUNT(sSecretBaseEntranceMetatiles); i++)
     {
@@ -1074,7 +1074,7 @@ void DeleteRegistry_Yes_Callback(u8 taskId)
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     gSaveBlock1Ptr->secretBases[tSelectedBaseId].registryStatus = UNREGISTERED;
     BuildRegistryMenuItems(taskId);
-    sub_812225C(&tScrollOffset, &tSelectedRow, tMaxShownItems, tNumBases);
+    SetCursorWithinListBounds(&tScrollOffset, &tSelectedRow, tMaxShownItems, tNumBases);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }
@@ -1226,28 +1226,28 @@ void SecretBasePerStepCallback(u8 taskId)
                     VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SOLID_BOARD);
                 }
             }
-            else if (tileId == METATILE_SecretBase_SmallChair 
-                  || tileId == METATILE_SecretBase_PokemonChair 
-                  || tileId == METATILE_SecretBase_HeavyChair 
-                  || tileId == METATILE_SecretBase_PrettyChair 
-                  || tileId == METATILE_SecretBase_ComfortChair 
-                  || tileId == METATILE_SecretBase_RaggedChair 
-                  || tileId == METATILE_SecretBase_BrickChair 
-                  || tileId == METATILE_SecretBase_CampChair 
+            else if (tileId == METATILE_SecretBase_SmallChair
+                  || tileId == METATILE_SecretBase_PokemonChair
+                  || tileId == METATILE_SecretBase_HeavyChair
+                  || tileId == METATILE_SecretBase_PrettyChair
+                  || tileId == METATILE_SecretBase_ComfortChair
+                  || tileId == METATILE_SecretBase_RaggedChair
+                  || tileId == METATILE_SecretBase_BrickChair
+                  || tileId == METATILE_SecretBase_CampChair
                   || tileId == METATILE_SecretBase_HardChair)
             {
                 if (sInFriendSecretBase == TRUE)
                     VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_CHAIR);
             }
-            else if (tileId == METATILE_SecretBase_RedTent_DoorTop 
-                  || tileId == METATILE_SecretBase_RedTent_Door 
-                  || tileId == METATILE_SecretBase_BlueTent_DoorTop 
+            else if (tileId == METATILE_SecretBase_RedTent_DoorTop
+                  || tileId == METATILE_SecretBase_RedTent_Door
+                  || tileId == METATILE_SecretBase_BlueTent_DoorTop
                   || tileId == METATILE_SecretBase_BlueTent_Door)
             {
                 if (sInFriendSecretBase == TRUE)
                     VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_TENT);
             }
-            else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight) 
+            else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight)
                   || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_CornerLeft))
             {
                 if (sInFriendSecretBase == TRUE)
@@ -1490,7 +1490,7 @@ static void SortSecretBasesByRegistryStatus(void)
     {
         for (j = i + 1; j < SECRET_BASES_COUNT; j++)
         {
-            if ((secretBases[i].registryStatus == UNREGISTERED && secretBases[j].registryStatus == REGISTERED) 
+            if ((secretBases[i].registryStatus == UNREGISTERED && secretBases[j].registryStatus == REGISTERED)
              || (secretBases[i].registryStatus == NEW && secretBases[j].registryStatus != NEW))
             {
                 struct SecretBase temp;

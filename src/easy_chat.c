@@ -857,7 +857,7 @@ static const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
 
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
-static const u8 *const sEasyChatKeyboardAlphabet[NUM_ALPHABET_ROWS] = 
+static const u8 *const sEasyChatKeyboardAlphabet[NUM_ALPHABET_ROWS] =
 {
     gText_EasyChatKeyboard_ABCDEFothers,
     gText_EasyChatKeyboard_GHIJKL,
@@ -2908,7 +2908,7 @@ static void GetQuizTitle(u8 *dst)
     u8 name[32];
     struct SaveBlock1 *saveBlock1 = gSaveBlock1Ptr;
     DynamicPlaceholderTextUtil_Reset();
-    
+
     // Buffer author's name
     if (StringLength(saveBlock1->lilycoveLady.quiz.playerName) != 0)
     {
@@ -4118,7 +4118,7 @@ static void BufferFrameTilemap(u16 *tilemap)
         // These frames fill the screen, no need to draw top/bottom edges
         right = sPhraseFrameDimensions[frameId].left + sPhraseFrameDimensions[frameId].width;
         bottom = sPhraseFrameDimensions[frameId].top + sPhraseFrameDimensions[frameId].height;
-        
+
         // Draw middle section
         for (y = sPhraseFrameDimensions[frameId].top; y < bottom; y++)
         {
@@ -4516,7 +4516,7 @@ static void BufferLowerWindowFrame(int left, int top, int width, int height)
     bottom = top + height - 1;
     x = left;
     y = top;
-    
+
     // Draw top edge
     tilemap[y * 32 + x] = FRAME_OFFSET_GREEN + FRAME_TILE_TOP_L_CORNER;
     x++;
@@ -4635,17 +4635,17 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
         if (++sprite->sDelayTimer > 2)
         {
             sprite->sDelayTimer = 0;
-            if (++sprite->pos2.x > 0)
-                sprite->pos2.x = -6;
+            if (++sprite->x2 > 0)
+                sprite->x2 = -6;
         }
     }
 }
 
 static void SetMainCursorPos(u8 x, u8 y)
 {
-    sScreenControl->mainCursorSprite->pos1.x = x;
-    sScreenControl->mainCursorSprite->pos1.y = y;
-    sScreenControl->mainCursorSprite->pos2.x = 0;
+    sScreenControl->mainCursorSprite->x = x;
+    sScreenControl->mainCursorSprite->y = y;
+    sScreenControl->mainCursorSprite->x2 = 0;
     sScreenControl->mainCursorSprite->sDelayTimer = 0;
 }
 
@@ -4653,7 +4653,7 @@ static void StopMainCursorAnim(void)
 {
     sScreenControl->mainCursorSprite->sDelayTimer = 0;
     sScreenControl->mainCursorSprite->sAnimateCursor = FALSE;
-    sScreenControl->mainCursorSprite->pos2.x = 0;
+    sScreenControl->mainCursorSprite->x2 = 0;
 }
 
 static void StartMainCursorAnim(void)
@@ -4665,11 +4665,11 @@ static void CreateRectangleCursorSprites(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_RectangleCursor, 0, 0, 3);
     sScreenControl->rectangleCursorSpriteRight = &gSprites[spriteId];
-    sScreenControl->rectangleCursorSpriteRight->pos2.x = 32;
+    sScreenControl->rectangleCursorSpriteRight->x2 = 32;
 
     spriteId = CreateSprite(&sSpriteTemplate_RectangleCursor, 0, 0, 3);
     sScreenControl->rectangleCursorSpriteLeft = &gSprites[spriteId];
-    sScreenControl->rectangleCursorSpriteLeft->pos2.x = -32;
+    sScreenControl->rectangleCursorSpriteLeft->x2 = -32;
 
     sScreenControl->rectangleCursorSpriteRight->hFlip = TRUE;
     UpdateRectangleCursorPos();
@@ -4688,7 +4688,7 @@ static void UpdateRectangleCursorPos(void)
     s8 column;
     s8 row;
 
-    if (sScreenControl->rectangleCursorSpriteRight 
+    if (sScreenControl->rectangleCursorSpriteRight
      && sScreenControl->rectangleCursorSpriteLeft)
     {
         GetKeyboardCursorColAndRow(&column, &row);
@@ -4705,23 +4705,23 @@ static void SetRectangleCursorPos_GroupMode(s8 column, s8 row)
     {
         // In group name window
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, RECTCURSOR_ANIM_ON_GROUP);
-        sScreenControl->rectangleCursorSpriteRight->pos1.x = column * 84 + 58;
-        sScreenControl->rectangleCursorSpriteRight->pos1.y = row * 16 + 96;
+        sScreenControl->rectangleCursorSpriteRight->x = column * 84 + 58;
+        sScreenControl->rectangleCursorSpriteRight->y = row * 16 + 96;
 
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, RECTCURSOR_ANIM_ON_GROUP);
-        sScreenControl->rectangleCursorSpriteLeft->pos1.x = column * 84 + 58;
-        sScreenControl->rectangleCursorSpriteLeft->pos1.y = row * 16 + 96;
+        sScreenControl->rectangleCursorSpriteLeft->x = column * 84 + 58;
+        sScreenControl->rectangleCursorSpriteLeft->y = row * 16 + 96;
     }
     else
     {
         // In button window
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, RECTCURSOR_ANIM_ON_BUTTON);
-        sScreenControl->rectangleCursorSpriteRight->pos1.x = 216;
-        sScreenControl->rectangleCursorSpriteRight->pos1.y = row * 16 + 112;
+        sScreenControl->rectangleCursorSpriteRight->x = 216;
+        sScreenControl->rectangleCursorSpriteRight->y = row * 16 + 112;
 
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, RECTCURSOR_ANIM_ON_BUTTON);
-        sScreenControl->rectangleCursorSpriteLeft->pos1.x = 216;
-        sScreenControl->rectangleCursorSpriteLeft->pos1.y = row * 16 + 112;
+        sScreenControl->rectangleCursorSpriteLeft->x = 216;
+        sScreenControl->rectangleCursorSpriteLeft->y = row * 16 + 112;
     }
 }
 
@@ -4748,23 +4748,23 @@ static void SetRectangleCursorPos_AlphabetMode(s8 column, s8 row)
         }
 
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, anim);
-        sScreenControl->rectangleCursorSpriteRight->pos1.x = x;
-        sScreenControl->rectangleCursorSpriteRight->pos1.y = y;
+        sScreenControl->rectangleCursorSpriteRight->x = x;
+        sScreenControl->rectangleCursorSpriteRight->y = y;
 
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, anim);
-        sScreenControl->rectangleCursorSpriteLeft->pos1.x = x;
-        sScreenControl->rectangleCursorSpriteLeft->pos1.y = y;
+        sScreenControl->rectangleCursorSpriteLeft->x = x;
+        sScreenControl->rectangleCursorSpriteLeft->y = y;
     }
     else
     {
         // In button window
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, RECTCURSOR_ANIM_ON_BUTTON);
-        sScreenControl->rectangleCursorSpriteRight->pos1.x = 216;
-        sScreenControl->rectangleCursorSpriteRight->pos1.y = row * 16 + 112;
+        sScreenControl->rectangleCursorSpriteRight->x = 216;
+        sScreenControl->rectangleCursorSpriteRight->y = row * 16 + 112;
 
         StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, RECTCURSOR_ANIM_ON_BUTTON);
-        sScreenControl->rectangleCursorSpriteLeft->pos1.x = 216;
-        sScreenControl->rectangleCursorSpriteLeft->pos1.y = row * 16 + 112;
+        sScreenControl->rectangleCursorSpriteLeft->x = 216;
+        sScreenControl->rectangleCursorSpriteLeft->y = row * 16 + 112;
     }
 }
 
@@ -4784,8 +4784,8 @@ static void SpriteCB_WordSelectCursor(struct Sprite *sprite)
     if (++sprite->sDelayTimer > 2)
     {
         sprite->sDelayTimer = 0;
-        if (++sprite->pos2.x > 0)
-            sprite->pos2.x = -6;
+        if (++sprite->x2 > 0)
+            sprite->x2 = -6;
     }
 }
 
@@ -4804,9 +4804,9 @@ static void SetWordSelectCursorPos(u8 x, u8 y)
 {
     if (sScreenControl->wordSelectCursorSprite)
     {
-        sScreenControl->wordSelectCursorSprite->pos1.x = x;
-        sScreenControl->wordSelectCursorSprite->pos1.y = y;
-        sScreenControl->wordSelectCursorSprite->pos2.x = 0;
+        sScreenControl->wordSelectCursorSprite->x = x;
+        sScreenControl->wordSelectCursorSprite->y = y;
+        sScreenControl->wordSelectCursorSprite->x2 = 0;
         sScreenControl->wordSelectCursorSprite->sDelayTimer = 0;
     }
 }
@@ -4824,7 +4824,7 @@ static void CreateSideWindowSprites(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_ButtonWindow, 208, 128, 6);
     sScreenControl->buttonWindowSprite = &gSprites[spriteId];
-    sScreenControl->buttonWindowSprite->pos2.x = -64;
+    sScreenControl->buttonWindowSprite->x2 = -64;
 
     spriteId = CreateSprite(&sSpriteTemplate_ModeWindow, 208, 80, 5);
     sScreenControl->modeWindowSprite = &gSprites[spriteId];
@@ -4839,10 +4839,10 @@ static bool8 ShowSideWindow(void)
         return FALSE;
     case 0:
         // Slide button window on
-        sScreenControl->buttonWindowSprite->pos2.x += 8;
-        if (sScreenControl->buttonWindowSprite->pos2.x >= 0)
+        sScreenControl->buttonWindowSprite->x2 += 8;
+        if (sScreenControl->buttonWindowSprite->x2 >= 0)
         {
-            sScreenControl->buttonWindowSprite->pos2.x = 0;
+            sScreenControl->buttonWindowSprite->x2 = 0;
 
             // Set mode window anim
             if (!GetInAlphabetMode())
@@ -4881,8 +4881,8 @@ static bool8 DestroySideWindowSprites(void)
             sScreenControl->modeWindowState = 1;
         break;
     case 1:
-        sScreenControl->buttonWindowSprite->pos2.x -= 8;
-        if (sScreenControl->buttonWindowSprite->pos2.x <= -64)
+        sScreenControl->buttonWindowSprite->x2 -= 8;
+        if (sScreenControl->buttonWindowSprite->x2 <= -64)
         {
             DestroySprite(sScreenControl->modeWindowSprite);
             DestroySprite(sScreenControl->buttonWindowSprite);
@@ -4947,14 +4947,14 @@ static void SetScrollIndicatorXPos(bool32 inWordSelect)
     if (!inWordSelect)
     {
         // Keyboard (only relevant for group mode, can't scroll in alphabet mode)
-        sScreenControl->scrollIndicatorUpSprite->pos1.x = 96;
-        sScreenControl->scrollIndicatorDownSprite->pos1.x = 96;
+        sScreenControl->scrollIndicatorUpSprite->x = 96;
+        sScreenControl->scrollIndicatorDownSprite->x = 96;
     }
     else
     {
         // Word select
-        sScreenControl->scrollIndicatorUpSprite->pos1.x = 120;
-        sScreenControl->scrollIndicatorDownSprite->pos1.x = 120;
+        sScreenControl->scrollIndicatorUpSprite->x = 120;
+        sScreenControl->scrollIndicatorDownSprite->x = 120;
     }
 }
 
@@ -5532,16 +5532,16 @@ void InitEasyChatPhrases(void)
 
     for (i = 0; i < ARRAY_COUNT(sDefaultProfileWords); i++)
         gSaveBlock1Ptr->easyChatProfile[i] = sDefaultProfileWords[i];
-    
+
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
         gSaveBlock1Ptr->easyChatBattleStart[i] = sDefaultBattleStartWords[i];
-    
+
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
         gSaveBlock1Ptr->easyChatBattleWon[i] = sDefaultBattleWonWords[i];
-    
+
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
         gSaveBlock1Ptr->easyChatBattleLost[i] = sDefaultBattleLostWords[i];
-    
+
     for (i = 0; i < MAIL_COUNT; i++)
     {
         for (j = 0; j < MAIL_WORDS_COUNT; j++)
@@ -5585,11 +5585,11 @@ static void SetUnlockedEasyChatGroups(void)
     sWordData->numUnlockedGroups = 0;
     if (GetNationalPokedexCount(FLAG_GET_SEEN))
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_POKEMON;
-    
+
     // These groups are unlocked automatically
     for (i = EC_GROUP_TRAINER; i <= EC_GROUP_ADJECTIVES; i++)
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = i;
-    
+
     if (FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_EVENTS;
@@ -5627,7 +5627,7 @@ static u8 *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
         *str = CHAR_SPACE;
         str++;
     }
-    
+
     *str = EOS;
     return str;
 }
@@ -5646,7 +5646,7 @@ static u8 *CopyEasyChatWordPadded(u8 *dest, u16 easyChatWord, u16 totalChars)
         *str = CHAR_SPACE;
         str++;
     }
-    
+
     *str = EOS;
     return str;
 }

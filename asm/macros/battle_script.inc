@@ -1275,8 +1275,8 @@
 	various \battler, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
 	.endm
 	
-	.macro various7 battler:req
-	various \battler, 7
+	.macro resetplayerfainted
+	various BS_ATTACKER, VARIOUS_RESET_PLAYER_FAINTED
 	.endm
 	
 	.macro palaceflavortext battler:req
@@ -1303,12 +1303,12 @@
 	various \battler, VARIOUS_EMIT_YESNOBOX
 	.endm
 	
-	.macro various14 battler:req
-	various \battler, 14
+	.macro arenadrawreftextbox
+	various BS_ATTACKER, VARIOUS_DRAW_ARENA_REF_TEXT_BOX
 	.endm
 	
-	.macro various15 battler:req
-	various \battler, 15
+	.macro arenaerasereftextbox
+	various BS_ATTACKER, VARIOUS_ERASE_ARENA_REF_TEXT_BOX
 	.endm
 	
 	.macro arenajudgmentstring id:req
@@ -1340,11 +1340,11 @@
 	.endm
 	
 	.macro setalreadystatusedmoveattempt battler:req
-	various \battler, 23
+	various \battler, VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT
 	.endm
 	
-	.macro various24 battler:req
-	various \battler, 24
+	.macro palacetryescapestatus battler:req
+	various \battler, VARIOUS_PALACE_TRY_ESCAPE_STATUS
 	.endm
 	
 	.macro setoutcomeonteleport battler:req

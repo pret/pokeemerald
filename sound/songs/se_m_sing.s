@@ -46,7 +46,7 @@ se_m_sing_1:
 	.byte		MOD   , 0
 	.byte	W03
 	.byte		VOL   , 95*se_m_sing_mvl/mxv
-	.byte		N21   , Fn5 
+	.byte		N21   , Fn5
 	.byte	W06
 	.byte	W06
 se_m_sing_1_000:
@@ -128,7 +128,7 @@ se_m_sing_2:
 	.byte	W03
 	.byte		VOL   , 95*se_m_sing_mvl/mxv
 	.byte		PAN   , c_v-12
-	.byte		N21   , Fn5 
+	.byte		N21   , Fn5
 	.byte	W06
 	.byte	W06
 se_m_sing_2_000:

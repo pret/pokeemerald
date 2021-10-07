@@ -1,131 +1,131 @@
 	.align 2
-voicegroup090:: @ 8690A7C
-	voice_keysplit_all voicegroup001  @ 8690A7C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690A88
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690A94
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AA0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AAC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AB8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AC4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AD0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690ADC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AE8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690AF4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B00
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B0C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B18
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B24
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B30
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B3C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B48
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B54
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B60
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B6C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B78
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B84
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B90
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690B9C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BA8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BB4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BC0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BCC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BD8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BE4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BF0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690BFC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C08
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C14
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C20
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C2C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C38
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C44
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C50
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C5C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C68
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C74
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C80
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C8C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690C98
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CA4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CB0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CBC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CC8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CD4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CE0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CEC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690CF8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D04
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D10
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D1C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D28
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D34
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D40
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D4C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D58
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D64
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D70
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D7C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D88
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690D94
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DA0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DAC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DB8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DC4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DD0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DDC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DE8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690DF4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E00
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E0C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E18
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E24
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E30
-	voice_square_1_alt 60, 0, 0, 0, 0, 2, 4, 1  @ 8690E3C
-	voice_square_2_alt 60, 0, 0, 0, 2, 4, 1  @ 8690E48
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4880, 0, 7, 15, 0  @ 8690E54
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E60
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E6C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E78
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E84
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E90
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690E9C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690EA8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690EB4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690EC0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690ECC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690ED8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690EE4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690EF0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690EFC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F08
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F14
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F20
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F2C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F38
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F44
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F50
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F5C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F68
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F74
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F80
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F8C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690F98
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FA4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FB0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FBC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FC8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FD4
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FE0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FEC
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690FF8
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8691004
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8691010
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869101C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8691028
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8691034
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8691040
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869104C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8691058
-	voice_noise_alt 60, 0, 0, 0, 1, 7, 1  @ 8691064
-	voice_noise_alt 60, 0, 0, 0, 1, 0, 0  @ 8691070
+voicegroup090::
+	voice_keysplit_all voicegroup001
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1_alt 60, 0, 0, 0, 0, 2, 4, 1
+	voice_square_2_alt 60, 0, 0, 0, 2, 4, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4880, 0, 7, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_noise_alt 60, 0, 0, 0, 1, 7, 1
+	voice_noise_alt 60, 0, 0, 0, 1, 0, 0
 

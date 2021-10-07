@@ -29,7 +29,7 @@
     This file handles the screen where the player chooses
     which pokemon to give a pokeblock to. The subsequent scene
     of feeding the pokeblock to the pokemon is handled by
-    pokeblock_feed.c, and the rest of the pokeblock menu (and 
+    pokeblock_feed.c, and the rest of the pokeblock menu (and
     other pokeblock-related functions) are in pokeblock.c
 */
 
@@ -243,7 +243,7 @@ static const struct BgTemplate sBgTemplates[4] =
     }
 };
 
-static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] = 
+static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 {
     [WIN_NAME] = {
         .bg = 0,
@@ -275,7 +275,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
+static const struct WindowTemplate sUsePokeblockYesNoWinTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -295,7 +295,7 @@ static const u8 *const sContestStatNames[] =
     gText_Beauty3
 };
 
-static const struct SpriteSheet sSpriteSheet_UpDown = 
+static const struct SpriteSheet sSpriteSheet_UpDown =
 {
     gUsePokeblockUpDown_Gfx, 0x200, TAG_UP_DOWN
 };
@@ -314,7 +314,7 @@ static const s16 sUpDownCoordsOnGraph[FLAVOR_COUNT][2] =
     {197,  59}
 };
 
-static const struct OamData sOam_UpDown = 
+static const struct OamData sOam_UpDown =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -357,7 +357,7 @@ static const struct SpriteTemplate sSpriteTemplate_UpDown =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct OamData sOam_Condition = 
+static const struct OamData sOam_Condition =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1143,9 +1143,9 @@ static void LoadAndCreateUpDownSprites(void)
 static void SpriteCB_UpDown(struct Sprite *sprite)
 {
     if (sprite->data[0] < 6)
-        sprite->pos2.y -= 2;
+        sprite->y2 -= 2;
     else if (sprite->data[0] < 12)
-        sprite->pos2.y += 2;
+        sprite->y2 += 2;
 
     if (++sprite->data[0] > 60)
     {
@@ -1234,7 +1234,7 @@ static void UpdateMonPic(u8 loadId)
         {
             sMenu->curMonSpriteId = spriteId;
             gSprites[sMenu->curMonSpriteId].callback = SpriteCB_MonPic;
-            gSprites[sMenu->curMonSpriteId].pos2.y -= 34;
+            gSprites[sMenu->curMonSpriteId].y2 -= 34;
             sMenu->curMonTileStart = (void*)(OBJ_VRAM0 + (sMenu->curMonSheet * 32));
             sMenu->curMonPalette = (sMenu->curMonPalette * 16) + 0x100;
         }
@@ -1574,7 +1574,7 @@ static bool8 LoadNewSelection_MonToMon(void)
 
 static void SpriteCB_MonPic(struct Sprite *sprite)
 {
-    sprite->pos1.x = sMenu->curMonXOffset + 38;
+    sprite->x = sMenu->curMonXOffset + 38;
 }
 
 static void SpriteCB_SelectionIconPokeball(struct Sprite *sprite)
@@ -1594,7 +1594,7 @@ static void SpriteCB_SelectionIconCancel(struct Sprite *sprite)
 }
 
 // Calculate the max id for sparkles/stars that appear around the pokemon on the condition screen
-// All pokemon start with 1 sparkle (added by CreateConditionSparkleSprites), so the number here +1 
+// All pokemon start with 1 sparkle (added by CreateConditionSparkleSprites), so the number here +1
 // is the total number of sparkles that appear
 static void CalculateNumAdditionalSparkles(u8 monIndex)
 {
@@ -1661,13 +1661,13 @@ static bool8 LoadConditionTitle(void)
 // Literally the word "Condition", the title block that appears over the mon icon
 static void SpriteCB_Condition(struct Sprite *sprite)
 {
-    s16 prevX = sprite->pos1.x;
+    s16 prevX = sprite->x;
 
-    sprite->pos1.x += sprite->data[0];
-    if ((prevX <= sprite->data[1] && sprite->pos1.x >= sprite->data[1])
-     || (prevX >= sprite->data[1] && sprite->pos1.x <= sprite->data[1]))
+    sprite->x += sprite->data[0];
+    if ((prevX <= sprite->data[1] && sprite->x >= sprite->data[1])
+     || (prevX >= sprite->data[1] && sprite->x <= sprite->data[1]))
     {
-        sprite->pos1.x = sprite->data[1];
+        sprite->x = sprite->data[1];
         sprite->callback = SpriteCallbackDummy;
     }
 }

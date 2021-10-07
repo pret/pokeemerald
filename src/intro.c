@@ -1421,7 +1421,7 @@ static void Task_Scene2_BikeRide(u8 taskId)
         gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_FROZEN;
         DestroyTask(gTasks[taskId].tBgAnimTaskId);
     }
-    
+
     if (gIntroFrameCounter > TIMER_END_SCENE_2)
     {
         // Fade out to next scene
@@ -1490,8 +1490,8 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         sprite->sState++;
         // fallthrough
     case VOLBEAT_ENTER:
-        sprite->pos1.x -= 4;
-        if (sprite->pos1.x == 60)
+        sprite->x -= 4;
+        if (sprite->x == 60)
         {
             sprite->sState = VOLBEAT_WAIT_STATE;
             sprite->sStateDelay = 20;
@@ -1499,9 +1499,9 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         }
         break;
     case VOLBEAT_ZIP_BACKWARD:
-        sprite->pos1.x += 8;
-        sprite->pos1.y -= 2;
-        if (sprite->pos1.x == 124)
+        sprite->x += 8;
+        sprite->y -= 2;
+        if (sprite->x == 124)
         {
             sprite->sState = VOLBEAT_WAIT_STATE;
             sprite->sStateDelay = 20;
@@ -1509,8 +1509,8 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         }
         break;
     case VOLBEAT_ZIP_DOWN:
-        sprite->pos1.y += 4;
-        if (sprite->pos1.y == 80)
+        sprite->y += 4;
+        if (sprite->y == 80)
         {
             sprite->sState = VOLBEAT_WAIT_STATE;
             sprite->sStateDelay = 10;
@@ -1518,9 +1518,9 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         }
         break;
     case VOLBEAT_ZIP_FORWARD:
-        sprite->pos1.x -= 8;
-        sprite->pos1.y -= 2;
-        if (sprite->pos1.x == 60)
+        sprite->x -= 8;
+        sprite->y -= 2;
+        if (sprite->x == 60)
         {
             sprite->sState = VOLBEAT_WAIT_STATE;
             sprite->sStateDelay = 10;
@@ -1528,15 +1528,15 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         }
         break;
     case VOLBEAT_INIT_FIGURE_8:
-        sprite->pos1.x += 60;
+        sprite->x += 60;
         sprite->sSinXIdx = 0xC0;
         sprite->sSinYIdx = 0x80;
         sprite->sFig8Loops = 3;
         sprite->sState++;
         // fallthrough
     case VOLBEAT_FIGURE_8:
-        sprite->pos2.x = Sin((u8)sprite->sSinXIdx, 0x3C);
-        sprite->pos2.y = Sin((u8)sprite->sSinYIdx, 0x14);
+        sprite->x2 = Sin((u8)sprite->sSinXIdx, 0x3C);
+        sprite->y2 = Sin((u8)sprite->sSinYIdx, 0x14);
         sprite->sSinXIdx += 2;
         sprite->sSinYIdx += 4;
         if ((sprite->sSinXIdx & 0xFF) == 64)
@@ -1544,22 +1544,22 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
             sprite->hFlip = FALSE;
             if (--sprite->sFig8Loops == 0)
             {
-                sprite->pos1.x += sprite->pos2.x;
-                sprite->pos2.x = 0;
+                sprite->x += sprite->x2;
+                sprite->x2 = 0;
                 sprite->sState++;
             }
         }
         break;
     case VOLBEAT_EXIT:
-        sprite->pos1.x -= 2;
-        sprite->pos2.y = Sin((u8)sprite->sSinYIdx, 0x14);
+        sprite->x -= 2;
+        sprite->y2 = Sin((u8)sprite->sSinYIdx, 0x14);
         sprite->sSinYIdx += 4;
-        if (sprite->pos1.x < -16)
+        if (sprite->x < -16)
             DestroySprite(sprite);
         break;
     case VOLBEAT_WAIT_STATE:
         // Wait for state progression, fly idly until then
-        sprite->pos2.y = Cos((u8)sprite->sCosYIdx, 2);
+        sprite->y2 = Cos((u8)sprite->sCosYIdx, 2);
         if (!--sprite->sStateDelay)
             sprite->sState = sprite->sNextState;
         break;
@@ -1598,7 +1598,7 @@ static void SpriteCB_Torchic(struct Sprite *sprite)
             sprite->sMoveTimer += 64;
             if (sprite->sMoveTimer & 0xFF00)
             {
-                sprite->pos1.x--;
+                sprite->x--;
                 sprite->sMoveTimer &= 0xFF;
             }
         }
@@ -1609,7 +1609,7 @@ static void SpriteCB_Torchic(struct Sprite *sprite)
             sprite->sMoveTimer += 32;
             if (sprite->sMoveTimer & 0xFF00)
             {
-                sprite->pos1.x++;
+                sprite->x++;
                 sprite->sMoveTimer &= 0xFF;
             }
         }
@@ -1626,7 +1626,7 @@ static void SpriteCB_Torchic(struct Sprite *sprite)
             sprite->sMoveTimer += 64;
             if (sprite->sMoveTimer & 0xFF00)
             {
-                sprite->pos1.x--;
+                sprite->x--;
                 sprite->sMoveTimer &= 0xFF;
             }
         }
@@ -1638,9 +1638,9 @@ static void SpriteCB_Torchic(struct Sprite *sprite)
         break;
     case 4:
         if (sprite->animEnded)
-            sprite->pos1.x += 4;
+            sprite->x += 4;
 
-        if (sprite->pos1.x > 336)
+        if (sprite->x > 336)
         {
             StartSpriteAnim(sprite, TORCHIC_ANIM_RUN);
             sprite->sState++;
@@ -1648,7 +1648,7 @@ static void SpriteCB_Torchic(struct Sprite *sprite)
         break;
     case 5:
         if (gIntroFrameCounter >= TIMER_TORCHIC_EXIT)
-            sprite->pos1.x -= 2;
+            sprite->x -= 2;
         break;
     }
 }
@@ -1668,18 +1668,18 @@ static void SpriteCB_Manectric(struct Sprite *sprite)
             sprite->sState++;
         break;
     case 1:
-        sprite->pos1.x -= 2;
+        sprite->x -= 2;
         if (gIntroFrameCounter != TIMER_MANECTRIC_RUN_CIRCULAR)
             break;
-        
+
         // Initialize circular pattern running
-        sprite->pos1.y -= 12;
+        sprite->y -= 12;
         sprite->sSinIdx = 0x80;
         sprite->sCosIdx = 0;
         sprite->sState++;
         // fallthrough
     case 2:
-        if (sprite->pos1.x + sprite->pos2.x <= -32)
+        if (sprite->x + sprite->x2 <= -32)
         {
             // Manectric is offscreen now, destroy it
             DestroySprite(sprite);
@@ -1689,16 +1689,16 @@ static void SpriteCB_Manectric(struct Sprite *sprite)
             // Run in circular pattern
             if ((sprite->sSinIdx & 0xFF) < 64)
             {
-                sprite->pos2.x = Sin((u8)sprite->sSinIdx, 16);
+                sprite->x2 = Sin((u8)sprite->sSinIdx, 16);
             }
             else
             {
                 if ((sprite->sSinIdx & 0xFF) == 64)
-                    sprite->pos1.x -= 48;
-                sprite->pos2.x = Sin((u8)sprite->sSinIdx, 64);
+                    sprite->x -= 48;
+                sprite->x2 = Sin((u8)sprite->sSinIdx, 64);
             }
             sprite->sSinIdx++;
-            sprite->pos2.y = Cos((u8)sprite->sCosIdx, 12);
+            sprite->y2 = Cos((u8)sprite->sCosIdx, 12);
             sprite->sCosIdx++;
         }
         break;
@@ -2001,14 +2001,14 @@ static void SpriteCB_GroudonRocks(struct Sprite *sprite)
     // Introduce some wobble to the floating
     sprite->sTimer++;
     if (sprite->sTimer % 2 == 0)
-        sprite->pos2.y ^= 3;
+        sprite->y2 ^= 3;
 
     switch(sprite->sState)
     {
     case 0:
         // Rock floats up
         sprite->sSpeed += sGroudonRockData[sprite->sRockId][2];
-        sprite->pos1.y -= (sprite->sSpeed & 0xFF00) >> 8;
+        sprite->y -= (sprite->sSpeed & 0xFF00) >> 8;
         sprite->sSpeed &= 0xFF;
 
         // Check if Groudon scene is ending
@@ -2017,15 +2017,15 @@ static void SpriteCB_GroudonRocks(struct Sprite *sprite)
         break;
     case 1:
         // Scene zooms in, move rock offscreen
-        if (sprite->pos1.x < DISPLAY_WIDTH / 2)
-            sprite->pos1.x -= 2;
+        if (sprite->x < DISPLAY_WIDTH / 2)
+            sprite->x -= 2;
         else
-            sprite->pos1.x += 2;
+            sprite->x += 2;
 
-        if (sprite->pos1.y < DISPLAY_HEIGHT / 2)
-            sprite->pos1.y -= 2;
+        if (sprite->y < DISPLAY_HEIGHT / 2)
+            sprite->y -= 2;
         else
-            sprite->pos1.y += 2;
+            sprite->y += 2;
         break;
     }
 }
@@ -2205,7 +2205,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
     }
 }
 
-#undef tScreenX 
+#undef tScreenX
 #undef tScreenY
 #undef tZoom
 #undef tDelay
@@ -2219,7 +2219,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
 #define sUnk    data[7] // Never read
 
 // taskId is used inconsistently for these two functions.
-// The sprite callback for the bubbles will always read it, unless delay is 0 to 
+// The sprite callback for the bubbles will always read it, unless delay is 0 to
 // start (it never is), but the first function is often passed 0 instead of a
 // taskId, and the second function doesn't take/assign a taskId at all.
 // The only time an actual taskId is given is when it actually needs the
@@ -2233,9 +2233,9 @@ static void CreateKyogreBubbleSprites_Body(u8 taskId)
 
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_Bubbles, 
-                                sKyogreBubbleData[i][0], 
-                                sKyogreBubbleData[i][1], 
+        spriteId = CreateSprite(&sSpriteTemplate_Bubbles,
+                                sKyogreBubbleData[i][0],
+                                sKyogreBubbleData[i][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].sTaskId = taskId;
@@ -2252,14 +2252,14 @@ static void CreateKyogreBubbleSprites_Fins(void)
 
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_Bubbles, 
-                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][0], 
-                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][1], 
+        spriteId = CreateSprite(&sSpriteTemplate_Bubbles,
+                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][0],
+                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
 #ifdef BUGFIX
         gSprites[spriteId].sDelay = sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][2];
-#else        
+#else
         gSprites[spriteId].sDelay = sKyogreBubbleData[i][2]; // Using the wrong set of delays here
 #endif
         gSprites[spriteId].sUnk = 64;
@@ -2275,9 +2275,9 @@ static void SpriteCB_KyogreBubbles(struct Sprite *sprite)
         {
             // Animation has started, float bubbles up
             sprite->sSinIdx = (sprite->sSinIdx + 11) & 0xFF;
-            sprite->pos2.x = Sin(sprite->sSinIdx, 4);
+            sprite->x2 = Sin(sprite->sSinIdx, 4);
             sprite->sBaseY += 48;
-            sprite->pos2.y = -(sprite->sBaseY >> 8);
+            sprite->y2 = -(sprite->sBaseY >> 8);
             if (sprite->animEnded)
                 DestroySprite(sprite);
         }
@@ -2295,17 +2295,17 @@ static void SpriteCB_KyogreBubbles(struct Sprite *sprite)
         break;
     case 1:
         // Scene zooms in, move bubbles offscreen
-        if (sprite->pos1.x < DISPLAY_WIDTH / 2)
-            sprite->pos1.x -= 3;
+        if (sprite->x < DISPLAY_WIDTH / 2)
+            sprite->x -= 3;
         else
-            sprite->pos1.x += 3;
+            sprite->x += 3;
 
-        if (sprite->pos1.y < DISPLAY_HEIGHT / 2)
-            sprite->pos1.y -= 3;
+        if (sprite->y < DISPLAY_HEIGHT / 2)
+            sprite->y -= 3;
         else
-            sprite->pos1.y += 3;
+            sprite->y += 3;
 
-        if ((u16)(sprite->pos1.y - 20) > DISPLAY_HEIGHT - 20)
+        if ((u16)(sprite->y - 20) > DISPLAY_HEIGHT - 20)
             DestroySprite(sprite);
         break;
     }
@@ -2853,8 +2853,8 @@ static void SpriteCB_WaterDropHalf(struct Sprite *sprite)
     if (gSprites[sprite->data[7]].data[7] != 0)
     {
         sprite->invisible = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         StartSpriteAnim(sprite, DROP_ANIM_RIPPLE);
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
@@ -2865,10 +2865,10 @@ static void SpriteCB_WaterDropHalf(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos2.x = gSprites[sprite->data[7]].pos2.x;
-        sprite->pos2.y = gSprites[sprite->data[7]].pos2.y;
-        sprite->pos1.x = gSprites[sprite->data[7]].pos1.x;
-        sprite->pos1.y = gSprites[sprite->data[7]].pos1.y;
+        sprite->x2 = gSprites[sprite->data[7]].x2;
+        sprite->y2 = gSprites[sprite->data[7]].y2;
+        sprite->x = gSprites[sprite->data[7]].x;
+        sprite->y = gSprites[sprite->data[7]].y;
     }
 }
 
@@ -2881,12 +2881,12 @@ static void SpriteCB_WaterDrop(struct Sprite *sprite)
 
 static void SpriteCB_WaterDrop_Slide(struct Sprite *sprite)
 {
-    if (sprite->pos1.x <= 116)
+    if (sprite->x <= 116)
     {
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos1.x += 4;
-        sprite->pos2.x = -4;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x += 4;
+        sprite->x2 = -4;
         sprite->data[4] = 128;
         sprite->callback = SpriteCB_WaterDrop_ReachLeafEnd;
     }
@@ -2909,10 +2909,10 @@ static void SpriteCB_WaterDrop_Slide(struct Sprite *sprite)
         sin1 = gSineTable[(u8)data4];
         sin2 = gSineTable[(u8)(data4 + 64)];
         sprite->data[4] += 2;
-        sprite->pos2.y = sin1 / 32;
-        sprite->pos1.x--;
-        if (sprite->pos1.x & 1)
-            sprite->pos1.y++;
+        sprite->y2 = sin1 / 32;
+        sprite->x--;
+        if (sprite->x & 1)
+            sprite->y++;
         temp = -sin2 / 16;
         data2 = sprite->data[2];
         data3 = sprite->data[3];
@@ -2938,8 +2938,8 @@ static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *sprite)
         u16 sinIdx;
         sprite->data[4] -= 8;
         sinIdx = sprite->data[4];
-        sprite->pos2.x = gSineTable[(u8)(sinIdx + 64)] / 64;
-        sprite->pos2.y = gSineTable[(u8)sinIdx] / 64;
+        sprite->x2 = gSineTable[(u8)(sinIdx + 64)] / 64;
+        sprite->y2 = gSineTable[(u8)sinIdx] / 64;
     }
     else
     {
@@ -2956,8 +2956,8 @@ static void SpriteCB_WaterDrop_DangleFromLeaf(struct Sprite *sprite)
 
         sprite->data[4] += 8;
         r2 = gSineTable[(u8)sprite->data[4]] / 16 + 64;
-        sprite->pos2.x = gSineTable[(u8)(r2 + 64)] / 64;
-        sprite->pos2.y = gSineTable[(u8)r2] / 64;
+        sprite->x2 = gSineTable[(u8)(r2 + 64)] / 64;
+        sprite->y2 = gSineTable[(u8)r2] / 64;
     }
     else
     {
@@ -2967,16 +2967,16 @@ static void SpriteCB_WaterDrop_DangleFromLeaf(struct Sprite *sprite)
 
 static void SpriteCB_WaterDrop_Fall(struct Sprite *sprite)
 {
-    if (sprite->pos1.y < sprite->data[5])
+    if (sprite->y < sprite->data[5])
     {
-        sprite->pos1.y += 4;
+        sprite->y += 4;
     }
     else
     {
         sprite->data[7] = 1;
         sprite->invisible = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         StartSpriteAnim(sprite, DROP_ANIM_RIPPLE);
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
@@ -2991,16 +2991,16 @@ static void SpriteCB_WaterDrop_Fall(struct Sprite *sprite)
 // Used by the 2nd and 3rd water drops to skip the leaf slide
 static void SpriteCB_WaterDropShort(struct Sprite *sprite)
 {
-    if (sprite->pos1.y < sprite->data[5])
+    if (sprite->y < sprite->data[5])
     {
-        sprite->pos1.y += 4;
+        sprite->y += 4;
     }
     else
     {
         sprite->data[7] = 1;
         sprite->invisible = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         StartSpriteAnim(sprite, DROP_ANIM_RIPPLE);
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
@@ -3071,27 +3071,27 @@ static void SpriteCB_PlayerOnBicycle(struct Sprite *sprite)
     case 0:
         // Move forwards
         StartSpriteAnimIfDifferent(sprite, 0);
-        sprite->pos1.x--;
+        sprite->x--;
         break;
     case 1:
         // Drift backwards slowly
         StartSpriteAnimIfDifferent(sprite, 0);
         if (gIntroFrameCounter & 7)
             return;
-        sprite->pos1.x++;
+        sprite->x++;
         break;
     case 2:
         // Move backwards
-        if (sprite->pos1.x <= 120 || gIntroFrameCounter & 7)
-            sprite->pos1.x++;
+        if (sprite->x <= 120 || gIntroFrameCounter & 7)
+            sprite->x++;
         break;
     case 3:
         // Bike in place
         break;
     case 4:
         // Exit to the left
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 2;
+        if (sprite->x > -32)
+            sprite->x -= 2;
         break;
     }
 
@@ -3099,10 +3099,10 @@ static void SpriteCB_PlayerOnBicycle(struct Sprite *sprite)
         return;
 
     // Adjust y position
-    if (sprite->pos2.y != 0)
+    if (sprite->y2 != 0)
     {
         // Return to neutral after wobble
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
     }
     else
     {
@@ -3110,14 +3110,14 @@ static void SpriteCB_PlayerOnBicycle(struct Sprite *sprite)
         switch (Random() & 3)
         {
         case 0:
-            sprite->pos2.y = -1;
+            sprite->y2 = -1;
             break;
         case 1:
-            sprite->pos2.y = 1;
+            sprite->y2 = 1;
             break;
         case 2:
         case 3:
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             break;
         }
     }
@@ -3133,23 +3133,23 @@ static void SpriteCB_Flygon(struct Sprite *sprite)
     case 0:
         break;
     case 1:
-        if (sprite->pos2.x + sprite->pos1.x < DISPLAY_WIDTH + 64)
-            sprite->pos2.x += 8;
+        if (sprite->x2 + sprite->x < DISPLAY_WIDTH + 64)
+            sprite->x2 += 8;
         else
             sprite->sState = 2;
         break;
     case 2:
-        if (sprite->pos2.x + sprite->pos1.x > 120)
-            sprite->pos2.x -= 1;
+        if (sprite->x2 + sprite->x > 120)
+            sprite->x2 -= 1;
         else
             sprite->sState = 3;
         break;
     case 3:
-        if (sprite->pos2.x > 0)
-            sprite->pos2.x -= 2;
+        if (sprite->x2 > 0)
+            sprite->x2 -= 2;
         break;
     }
-    sprite->pos2.y = Sin((u8)sprite->sSinIdx, 8) - sFlygonYOffset;
+    sprite->y2 = Sin((u8)sprite->sSinIdx, 8) - sFlygonYOffset;
     sprite->sSinIdx += 4;
 }
 
@@ -3249,12 +3249,12 @@ static void SpriteCB_LogoLetter(struct Sprite *sprite)
     case 5:
         // Spread the letters out as they grow
         sprite->sLetterX += sGameFreakLettersMoveSpeed[sprite->sLetterId];
-        sprite->pos2.x = (sprite->sLetterX & 0xFF00) >> 8;
+        sprite->x2 = (sprite->sLetterX & 0xFF00) >> 8;
         if (sprite->sLetterId < 4)
         {
             // Is in first 4 letters, i.e. "Game"
-            s16 temp = sprite->pos2.x;
-            sprite->pos2.x = -temp;
+            s16 temp = sprite->x2;
+            sprite->x2 = -temp;
         }
         if (sprite->affineAnimEnded)
             DestroySprite(sprite);
@@ -3358,24 +3358,24 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
         sprite->data[3] = 0;
         break;
     case 1:
-        sprite->pos2.x = -Sin((u8)sprite->data[3], 140);
-        sprite->pos2.y = -Sin((u8)sprite->data[3], 120);
+        sprite->x2 = -Sin((u8)sprite->data[3], 140);
+        sprite->y2 = -Sin((u8)sprite->data[3], 120);
         sprite->data[1] += 7;
         sprite->data[3] += 3;
-        if (sprite->pos1.x + sprite->pos2.x <= -16)
+        if (sprite->x + sprite->x2 <= -16)
         {
             sprite->oam.priority = 3;
             sprite->sState++;
-            sprite->pos1.x = 20;
-            sprite->pos1.y = 40;
+            sprite->x = 20;
+            sprite->y = 40;
             sprite->data[1] = 0x200;
             sprite->data[2] = 0;
             sprite->data[3] = 0x10;
         }
         break;
     case 2:
-        sprite->pos2.x = Sin((u8)sprite->data[3], 34);
-        sprite->pos2.y = -Cos((u8)sprite->data[3], 60);
+        sprite->x2 = Sin((u8)sprite->data[3], 34);
+        sprite->y2 = -Cos((u8)sprite->data[3], 60);
         sprite->data[1] += 2;
         if (sprite->data[7] % 5 == 0)
             sprite->data[3]++;

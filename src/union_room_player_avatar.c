@@ -26,23 +26,23 @@ static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
 // + 2 is just to match, those elements are empty and never read
 static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][MAX_UNION_ROOM_LEADERS + 2] = {
     [MALE] = {
-        OBJ_EVENT_GFX_MAN_3, 
-        OBJ_EVENT_GFX_BLACK_BELT, 
-        OBJ_EVENT_GFX_CAMPER, 
-        OBJ_EVENT_GFX_YOUNGSTER, 
-        OBJ_EVENT_GFX_PSYCHIC_M, 
-        OBJ_EVENT_GFX_BUG_CATCHER, 
-        OBJ_EVENT_GFX_MAN_4, 
+        OBJ_EVENT_GFX_MAN_3,
+        OBJ_EVENT_GFX_BLACK_BELT,
+        OBJ_EVENT_GFX_CAMPER,
+        OBJ_EVENT_GFX_YOUNGSTER,
+        OBJ_EVENT_GFX_PSYCHIC_M,
+        OBJ_EVENT_GFX_BUG_CATCHER,
+        OBJ_EVENT_GFX_MAN_4,
         OBJ_EVENT_GFX_MAN_5
     },
     [FEMALE] = {
-        OBJ_EVENT_GFX_WOMAN_5, 
-        OBJ_EVENT_GFX_HEX_MANIAC, 
-        OBJ_EVENT_GFX_PICNICKER, 
-        OBJ_EVENT_GFX_LASS, 
-        OBJ_EVENT_GFX_LASS, 
-        OBJ_EVENT_GFX_GIRL_3, 
-        OBJ_EVENT_GFX_WOMAN_2, 
+        OBJ_EVENT_GFX_WOMAN_5,
+        OBJ_EVENT_GFX_HEX_MANIAC,
+        OBJ_EVENT_GFX_PICNICKER,
+        OBJ_EVENT_GFX_LASS,
+        OBJ_EVENT_GFX_LASS,
+        OBJ_EVENT_GFX_GIRL_3,
+        OBJ_EVENT_GFX_WOMAN_2,
         OBJ_EVENT_GFX_BEAUTY
     }
 };
@@ -101,13 +101,13 @@ static const u8 sUnionRoomLocalIds[] = {
 
 // Unused
 static const u16 sHidePlayerFlags[] = {
-    FLAG_HIDE_UNION_ROOM_PLAYER_1, 
-    FLAG_HIDE_UNION_ROOM_PLAYER_2, 
-    FLAG_HIDE_UNION_ROOM_PLAYER_3, 
-    FLAG_HIDE_UNION_ROOM_PLAYER_4, 
-    FLAG_HIDE_UNION_ROOM_PLAYER_5, 
-    FLAG_HIDE_UNION_ROOM_PLAYER_6, 
-    FLAG_HIDE_UNION_ROOM_PLAYER_7, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_1,
+    FLAG_HIDE_UNION_ROOM_PLAYER_2,
+    FLAG_HIDE_UNION_ROOM_PLAYER_3,
+    FLAG_HIDE_UNION_ROOM_PLAYER_4,
+    FLAG_HIDE_UNION_ROOM_PLAYER_5,
+    FLAG_HIDE_UNION_ROOM_PLAYER_6,
+    FLAG_HIDE_UNION_ROOM_PLAYER_7,
     FLAG_HIDE_UNION_ROOM_PLAYER_8
 };
 
@@ -400,10 +400,10 @@ void CreateUnionRoomPlayerSprites(u8 * spriteIds, s32 leaderId)
     for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
     {
         s32 id = UR_PLAYER_SPRITE_ID(leaderId, memberId);
-        spriteIds[id] = CreateObjectSprite(OBJ_EVENT_GFX_MAN_4, 
-                                           id - UR_SPRITE_START_ID, 
-                                           sUnionRoomPlayerCoords[leaderId][0] + sUnionRoomGroupOffsets[memberId][0], 
-                                           sUnionRoomPlayerCoords[leaderId][1] + sUnionRoomGroupOffsets[memberId][1], 
+        spriteIds[id] = CreateObjectSprite(OBJ_EVENT_GFX_MAN_4,
+                                           id - UR_SPRITE_START_ID,
+                                           sUnionRoomPlayerCoords[leaderId][0] + sUnionRoomGroupOffsets[memberId][0],
+                                           sUnionRoomPlayerCoords[leaderId][1] + sUnionRoomGroupOffsets[memberId][1],
                                            3, 1);
         SetObjectEventSpriteInvisibility(id - UR_SPRITE_START_ID, TRUE);
     }

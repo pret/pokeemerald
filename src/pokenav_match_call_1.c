@@ -38,16 +38,16 @@ static bool32 sub_81CB1D0(void);
 
 #include "data/text/match_call_messages.h"
 
-static const u8 sMatchCallOptionsNoCheckPage[] = 
+static const u8 sMatchCallOptionsNoCheckPage[] =
 {
-    MATCH_CALL_OPTION_CALL, 
+    MATCH_CALL_OPTION_CALL,
     MATCH_CALL_OPTION_CANCEL
 };
 
-static const u8 sMatchCallOptionsHasCheckPage[] = 
+static const u8 sMatchCallOptionsHasCheckPage[] =
 {
-    MATCH_CALL_OPTION_CALL, 
-    MATCH_CALL_OPTION_CHECK, 
+    MATCH_CALL_OPTION_CALL,
+    MATCH_CALL_OPTION_CHECK,
     MATCH_CALL_OPTION_CANCEL
 };
 

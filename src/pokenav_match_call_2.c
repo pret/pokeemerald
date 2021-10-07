@@ -119,7 +119,7 @@ static const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/8622700.gbap
 static const u16 gUnknown_08622720[] = INCBIN_U16("graphics/pokenav/pokeball_matchcall.gbapal");
 static const u32 gUnknown_08622760[] = INCBIN_U32("graphics/pokenav/pokeball_matchcall.4bpp.lz");
 
-const struct BgTemplate sMatchCallBgTemplates[3] = 
+const struct BgTemplate sMatchCallBgTemplates[3] =
 {
     {
         .bg = 1,
@@ -150,7 +150,7 @@ const struct BgTemplate sMatchCallBgTemplates[3] =
     }
 };
 
-static const LoopedTask sMatchCallLoopTaskFuncs[] = 
+static const LoopedTask sMatchCallLoopTaskFuncs[] =
 {
     [POKENAV_MC_FUNC_NONE]                = NULL,
     [POKENAV_MC_FUNC_DOWN]                = MatchCallListCursorDown,
@@ -170,7 +170,7 @@ static const LoopedTask sMatchCallLoopTaskFuncs[] =
     [POKENAV_MC_FUNC_EXIT]                = ExitMatchCall
 };
 
-static const struct WindowTemplate sMatchCallLocationWindowTemplate = 
+static const struct WindowTemplate sMatchCallLocationWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -181,7 +181,7 @@ static const struct WindowTemplate sMatchCallLocationWindowTemplate =
     .baseBlock = 16
 };
 
-static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate = 
+static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -192,7 +192,7 @@ static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate =
     .baseBlock = 38
 };
 
-static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] = 
+static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 {
     [MATCH_CALL_OPTION_CALL]   = gText_Call,
     [MATCH_CALL_OPTION_CHECK]  = gText_Check,
@@ -202,7 +202,7 @@ static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 // The series of 5 dots that appear when someone is called with Match Call
 static const u8 sText_CallingDots[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
 
-static const struct WindowTemplate sCallMsgBoxWindowTemplate = 
+static const struct WindowTemplate sCallMsgBoxWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -213,17 +213,17 @@ static const struct WindowTemplate sCallMsgBoxWindowTemplate =
     .baseBlock = 10
 };
 
-const struct CompressedSpriteSheet gUnknown_08622810[1] = 
+const struct CompressedSpriteSheet gUnknown_08622810[1] =
 {
     {gUnknown_086226B8, 0x40, 7}
 };
 
-const struct SpritePalette gUnknown_08622818[2] = 
+const struct SpritePalette gUnknown_08622818[2] =
 {
     {gUnknown_08622698, 12}
 };
 
-static const struct OamData sOptionsCursorOamData = 
+static const struct OamData sOptionsCursorOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -235,7 +235,7 @@ static const struct OamData sOptionsCursorOamData =
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-}; 
+};
 
 static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
 {
@@ -248,7 +248,7 @@ static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
     .callback = SpriteCB_OptionsCursor,
 };
 
-static const struct OamData sTrainerPicOamData = 
+static const struct OamData sTrainerPicOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1006,7 +1006,7 @@ static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
         GetMapName(mapName, mapSec, 0);
     else
         StringCopy(mapName, gText_Unknown);
-    
+
     x = GetStringCenterAlignXOffset(7, mapName, 88);
     FillWindowPixelBuffer(state->locWindowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(state->locWindowId, 7, mapName, x, 1, 0, NULL);
@@ -1074,9 +1074,9 @@ static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *state)
     PutWindowTilemap(state->msgBoxWindowId);
     CopyWindowToVram(state->msgBoxWindowId, 3);
     sprite = PauseSpinningPokenavSprite();
-    sprite->pos1.x = 24;
-    sprite->pos1.y = 112;
-    sprite->pos2.y = 0;
+    sprite->x = 24;
+    sprite->y = 112;
+    sprite->y2 = 0;
 }
 
 static void DrawMsgBoxForCloseByMsg(struct Pokenav4Struct *state)
@@ -1200,7 +1200,7 @@ static void CloseMatchCallSelectOptionsWindow(struct Pokenav4Struct *state)
 
 static void UpdateCursorGfxPos(struct Pokenav4Struct *state, int top)
 {
-    state->optionsCursorSprite->pos2.y = top * 16;
+    state->optionsCursorSprite->y2 = top * 16;
 }
 
 void SpriteCB_OptionsCursor(struct Sprite *sprite)
@@ -1208,7 +1208,7 @@ void SpriteCB_OptionsCursor(struct Sprite *sprite)
     if (++sprite->data[0] > 3)
     {
         sprite->data[0] = 0;
-        sprite->pos2.x = (sprite->pos2.x + 1) & 0x7;
+        sprite->x2 = (sprite->x2 + 1) & 0x7;
     }
 }
 
@@ -1251,16 +1251,16 @@ static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *sprite)
     case 0:
         if (CheckForSpaceForDma3Request(sprite->data[7]) != -1)
         {
-            sprite->pos2.x = -80;
+            sprite->x2 = -80;
             sprite->invisible = FALSE;
             sprite->data[0]++;
         }
         break;
     case 1:
-        sprite->pos2.x += 8;
-        if (sprite->pos2.x >= 0)
+        sprite->x2 += 8;
+        if (sprite->x2 >= 0)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sprite->callback = SpriteCallbackDummy;
         }
         break;
@@ -1269,8 +1269,8 @@ static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *sprite)
 
 static void SpriteCB_TrainerPicSlideOffscreen(struct Sprite *sprite)
 {
-    sprite->pos2.x -= 8;
-    if (sprite->pos2.x <= -80)
+    sprite->x2 -= 8;
+    if (sprite->x2 <= -80)
     {
         sprite->invisible = TRUE;
         sprite->callback = SpriteCallbackDummy;

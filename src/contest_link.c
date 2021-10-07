@@ -61,7 +61,7 @@ void Task_LinkContest_Init(u8 taskId)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         gBlockRecvBuffer[i][0] = 0xFF;
-    
+
     gTasks[taskId].tState = 0;
     gTasks[taskId].func = Task_LinkContest_StartInitFlags;
 }
@@ -99,7 +99,7 @@ bool32 LinkContest_TryLinkStandby(s16 *state)
     // Skip standby for RS cabled links
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
         return TRUE;
-    
+
     switch (*state)
     {
     case 0:

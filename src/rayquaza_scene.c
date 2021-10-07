@@ -1433,34 +1433,34 @@ static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite)
     s16 *data = sprite->data;
     data[5]++;
     data[5] &= 0x1F;
-    if (data[5] == 0 && sprite->pos1.x != 72)
+    if (data[5] == 0 && sprite->x != 72)
     {
-        sprite->pos1.x--;
-        gSprites[sprite->sGroudonBodySpriteId].pos1.x--;
-        gSprites[sGroudonShoulderSpriteId].pos1.x--;
-        gSprites[sGroudonClawSpriteId].pos1.x--;
+        sprite->x--;
+        gSprites[sprite->sGroudonBodySpriteId].x--;
+        gSprites[sGroudonShoulderSpriteId].x--;
+        gSprites[sGroudonClawSpriteId].x--;
     }
 
     switch (sprite->animCmdIndex)
     {
     case 0:
-        gSprites[sGroudonShoulderSpriteId].pos2.x = 0;
-        gSprites[sGroudonShoulderSpriteId].pos2.y = 0;
-        gSprites[sGroudonClawSpriteId].pos2.x = 0;
-        gSprites[sGroudonClawSpriteId].pos2.y = 0;
+        gSprites[sGroudonShoulderSpriteId].x2 = 0;
+        gSprites[sGroudonShoulderSpriteId].y2 = 0;
+        gSprites[sGroudonClawSpriteId].x2 = 0;
+        gSprites[sGroudonClawSpriteId].y2 = 0;
         break;
     case 1:
     case 3:
-        gSprites[sGroudonShoulderSpriteId].pos2.x = -1;
-        gSprites[sGroudonShoulderSpriteId].pos2.y = 0;
-        gSprites[sGroudonClawSpriteId].pos2.x = -1;
-        gSprites[sGroudonClawSpriteId].pos2.y = 0;
+        gSprites[sGroudonShoulderSpriteId].x2 = -1;
+        gSprites[sGroudonShoulderSpriteId].y2 = 0;
+        gSprites[sGroudonClawSpriteId].x2 = -1;
+        gSprites[sGroudonClawSpriteId].y2 = 0;
         break;
     case 2:
-        gSprites[sGroudonShoulderSpriteId].pos2.x = -1;
-        gSprites[sGroudonShoulderSpriteId].pos2.y = 1;
-        gSprites[sGroudonClawSpriteId].pos2.x = -2;
-        gSprites[sGroudonClawSpriteId].pos2.y = 1;
+        gSprites[sGroudonShoulderSpriteId].x2 = -1;
+        gSprites[sGroudonShoulderSpriteId].y2 = 1;
+        gSprites[sGroudonClawSpriteId].x2 = -2;
+        gSprites[sGroudonClawSpriteId].y2 = 1;
         break;
     }
 }
@@ -1502,58 +1502,58 @@ static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *sprite)
     s16 *data = sprite->data;
     data[5]++;
     data[5] &= 0x1F;
-    if (data[5] == 0 && sprite->pos1.x != 152)
+    if (data[5] == 0 && sprite->x != 152)
     {
-        sprite->pos1.x++;
-        gSprites[sprite->data[0] >> 8].pos1.x++;
-        gSprites[sprite->data[0] & 0xFF].pos1.x++;
-        gSprites[data[1] >> 8].pos1.x++;
-        gSprites[data[1] & 0xFF].pos1.x++;
-        gSprites[data[2] >> 8].pos1.x++;
-        gSprites[data[2] & 0xFF].pos1.x++;
-        gSprites[data[3] >> 8].pos1.x++;
-        gSprites[data[3] & 0xFF].pos1.x++;
-        gSprites[data[4] >> 8].pos1.x++;
-        gSprites[data[4] & 0xFF].pos1.x++;
+        sprite->x++;
+        gSprites[sprite->data[0] >> 8].x++;
+        gSprites[sprite->data[0] & 0xFF].x++;
+        gSprites[data[1] >> 8].x++;
+        gSprites[data[1] & 0xFF].x++;
+        gSprites[data[2] >> 8].x++;
+        gSprites[data[2] & 0xFF].x++;
+        gSprites[data[3] >> 8].x++;
+        gSprites[data[3] & 0xFF].x++;
+        gSprites[data[4] >> 8].x++;
+        gSprites[data[4] & 0xFF].x++;
     }
 
     switch (gSprites[data[2] & 0xFF].animCmdIndex)
     {
     case 0:
-        sprite->pos2.y = 0;
-        gSprites[data[0] >> 8].pos2.y = 0;
-        gSprites[data[0] & 0xFF].pos2.y = 0;
-        gSprites[data[1] >> 8].pos2.y = 0;
-        gSprites[data[1] & 0xFF].pos2.y = 0;
-        gSprites[data[2] >> 8].pos2.y = 0;
-        gSprites[data[2] & 0xFF].pos2.y = 0;
-        gSprites[data[3] >> 8].pos2.y = 0;
-        gSprites[data[3] & 0xFF].pos2.y = 0;
-        gSprites[data[4] >> 8].pos2.y = 0;
-        gSprites[data[4] & 0xFF].pos2.y = 0;
+        sprite->y2 = 0;
+        gSprites[data[0] >> 8].y2 = 0;
+        gSprites[data[0] & 0xFF].y2 = 0;
+        gSprites[data[1] >> 8].y2 = 0;
+        gSprites[data[1] & 0xFF].y2 = 0;
+        gSprites[data[2] >> 8].y2 = 0;
+        gSprites[data[2] & 0xFF].y2 = 0;
+        gSprites[data[3] >> 8].y2 = 0;
+        gSprites[data[3] & 0xFF].y2 = 0;
+        gSprites[data[4] >> 8].y2 = 0;
+        gSprites[data[4] & 0xFF].y2 = 0;
         break;
     case 1:
     case 3:
-        sprite->pos2.y = 1;
-        gSprites[data[0] >> 8].pos2.y = 1;
-        gSprites[data[0] & 0xFF].pos2.y = 1;
-        gSprites[data[1] >> 8].pos2.y = 1;
-        gSprites[data[1] & 0xFF].pos2.y = 1;
-        gSprites[data[2] >> 8].pos2.y = 1;
-        gSprites[data[2] & 0xFF].pos2.y = 1;
-        gSprites[data[3] >> 8].pos2.y = 1;
-        gSprites[data[3] & 0xFF].pos2.y = 1;
-        gSprites[data[4] >> 8].pos2.y = 1;
-        gSprites[data[4] & 0xFF].pos2.y = 1;
+        sprite->y2 = 1;
+        gSprites[data[0] >> 8].y2 = 1;
+        gSprites[data[0] & 0xFF].y2 = 1;
+        gSprites[data[1] >> 8].y2 = 1;
+        gSprites[data[1] & 0xFF].y2 = 1;
+        gSprites[data[2] >> 8].y2 = 1;
+        gSprites[data[2] & 0xFF].y2 = 1;
+        gSprites[data[3] >> 8].y2 = 1;
+        gSprites[data[3] & 0xFF].y2 = 1;
+        gSprites[data[4] >> 8].y2 = 1;
+        gSprites[data[4] & 0xFF].y2 = 1;
         break;
     case 2:
-        sprite->pos2.y = 2;
-        gSprites[data[0] >> 8].pos2.y = 2;
-        gSprites[data[0] & 0xFF].pos2.y = 2;
-        gSprites[data[1] >> 8].pos2.y = 2;
-        gSprites[data[1] & 0xFF].pos2.y = 2;
-        gSprites[data[2] >> 8].pos2.y = 2;
-        gSprites[data[4] & 0xFF].pos2.y = 2;
+        sprite->y2 = 2;
+        gSprites[data[0] >> 8].y2 = 2;
+        gSprites[data[0] & 0xFF].y2 = 2;
+        gSprites[data[1] >> 8].y2 = 2;
+        gSprites[data[1] & 0xFF].y2 = 2;
+        gSprites[data[2] >> 8].y2 = 2;
+        gSprites[data[4] & 0xFF].y2 = 2;
         break;
     }
 }
@@ -1825,34 +1825,34 @@ static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite)
     s16 *data = sprite->data;
     data[5]++;
     data[5] &= 0xF;
-    if (!(data[5] & 7) && sprite->pos1.x != 72)
+    if (!(data[5] & 7) && sprite->x != 72)
     {
-        sprite->pos1.x--;
-        gSprites[sprite->sGroudonBodySpriteId].pos1.x--;
-        gSprites[sGroudonShoulderSpriteId].pos1.x--;
-        gSprites[sGroudonClawSpriteId].pos1.x--;
+        sprite->x--;
+        gSprites[sprite->sGroudonBodySpriteId].x--;
+        gSprites[sGroudonShoulderSpriteId].x--;
+        gSprites[sGroudonClawSpriteId].x--;
     }
 
     switch (sprite->animCmdIndex)
     {
     case 0:
-        gSprites[sGroudonShoulderSpriteId].pos2.x = 0;
-        gSprites[sGroudonShoulderSpriteId].pos2.y = 0;
-        gSprites[sGroudonClawSpriteId].pos2.x = 0;
-        gSprites[sGroudonClawSpriteId].pos2.y = 0;
+        gSprites[sGroudonShoulderSpriteId].x2 = 0;
+        gSprites[sGroudonShoulderSpriteId].y2 = 0;
+        gSprites[sGroudonClawSpriteId].x2 = 0;
+        gSprites[sGroudonClawSpriteId].y2 = 0;
         break;
     case 1:
     case 3:
-        gSprites[sGroudonShoulderSpriteId].pos2.x = -1;
-        gSprites[sGroudonShoulderSpriteId].pos2.y = 0;
-        gSprites[sGroudonClawSpriteId].pos2.x = -1;
-        gSprites[sGroudonClawSpriteId].pos2.y = 0;
+        gSprites[sGroudonShoulderSpriteId].x2 = -1;
+        gSprites[sGroudonShoulderSpriteId].y2 = 0;
+        gSprites[sGroudonClawSpriteId].x2 = -1;
+        gSprites[sGroudonClawSpriteId].y2 = 0;
         break;
     case 2:
-        gSprites[sGroudonShoulderSpriteId].pos2.x = -1;
-        gSprites[sGroudonShoulderSpriteId].pos2.y = 1;
-        gSprites[sGroudonClawSpriteId].pos2.x = -2;
-        gSprites[sGroudonClawSpriteId].pos2.y = 1;
+        gSprites[sGroudonShoulderSpriteId].x2 = -1;
+        gSprites[sGroudonShoulderSpriteId].y2 = 1;
+        gSprites[sGroudonClawSpriteId].x2 = -2;
+        gSprites[sGroudonClawSpriteId].y2 = 1;
         break;
     }
 }
@@ -1860,12 +1860,12 @@ static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite)
 static void DuoFight_SlideGroudonDown(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    if (sprite->pos1.y <= DISPLAY_HEIGHT)
+    if (sprite->y <= DISPLAY_HEIGHT)
     {
-        sprite->pos1.y += 8;
-        gSprites[sprite->sGroudonBodySpriteId].pos1.y += 8;
-        gSprites[sGroudonShoulderSpriteId].pos1.y += 8;
-        gSprites[sGroudonClawSpriteId].pos1.y += 8;
+        sprite->y += 8;
+        gSprites[sprite->sGroudonBodySpriteId].y += 8;
+        gSprites[sGroudonShoulderSpriteId].y += 8;
+        gSprites[sGroudonClawSpriteId].y += 8;
     }
 }
 
@@ -1906,58 +1906,58 @@ static void SpriteCB_DuoFight_Kyogre(struct Sprite *sprite)
     s16 *data = sprite->data;
     data[5]++;
     data[5] &= 0xF;
-    if (!(data[5] & 7) && sprite->pos1.x != 152)
+    if (!(data[5] & 7) && sprite->x != 152)
     {
-        sprite->pos1.x++;
-        gSprites[sprite->data[0] >> 8].pos1.x++;
-        gSprites[sprite->data[0] & 0xFF].pos1.x++;
-        gSprites[data[1] >> 8].pos1.x++;
-        gSprites[data[1] & 0xFF].pos1.x++;
-        gSprites[data[2] >> 8].pos1.x++;
-        gSprites[data[2] & 0xFF].pos1.x++;
-        gSprites[data[3] >> 8].pos1.x++;
-        gSprites[data[3] & 0xFF].pos1.x++;
-        gSprites[data[4] >> 8].pos1.x++;
-        gSprites[data[4] & 0xFF].pos1.x++;
+        sprite->x++;
+        gSprites[sprite->data[0] >> 8].x++;
+        gSprites[sprite->data[0] & 0xFF].x++;
+        gSprites[data[1] >> 8].x++;
+        gSprites[data[1] & 0xFF].x++;
+        gSprites[data[2] >> 8].x++;
+        gSprites[data[2] & 0xFF].x++;
+        gSprites[data[3] >> 8].x++;
+        gSprites[data[3] & 0xFF].x++;
+        gSprites[data[4] >> 8].x++;
+        gSprites[data[4] & 0xFF].x++;
     }
 
     switch (gSprites[data[2] & 0xFF].animCmdIndex)
     {
     case 0:
-        sprite->pos2.y = 0;
-        gSprites[data[0] >> 8].pos2.y = 0;
-        gSprites[data[0] & 0xFF].pos2.y = 0;
-        gSprites[data[1] >> 8].pos2.y = 0;
-        gSprites[data[1] & 0xFF].pos2.y = 0;
-        gSprites[data[2] >> 8].pos2.y = 0;
-        gSprites[data[2] & 0xFF].pos2.y = 0;
-        gSprites[data[3] >> 8].pos2.y = 0;
-        gSprites[data[3] & 0xFF].pos2.y = 0;
-        gSprites[data[4] >> 8].pos2.y = 0;
-        gSprites[data[4] & 0xFF].pos2.y = 0;
+        sprite->y2 = 0;
+        gSprites[data[0] >> 8].y2 = 0;
+        gSprites[data[0] & 0xFF].y2 = 0;
+        gSprites[data[1] >> 8].y2 = 0;
+        gSprites[data[1] & 0xFF].y2 = 0;
+        gSprites[data[2] >> 8].y2 = 0;
+        gSprites[data[2] & 0xFF].y2 = 0;
+        gSprites[data[3] >> 8].y2 = 0;
+        gSprites[data[3] & 0xFF].y2 = 0;
+        gSprites[data[4] >> 8].y2 = 0;
+        gSprites[data[4] & 0xFF].y2 = 0;
         break;
     case 1:
     case 3:
-        sprite->pos2.y = 1;
-        gSprites[data[0] >> 8].pos2.y = 1;
-        gSprites[data[0] & 0xFF].pos2.y = 1;
-        gSprites[data[1] >> 8].pos2.y = 1;
-        gSprites[data[1] & 0xFF].pos2.y = 1;
-        gSprites[data[2] >> 8].pos2.y = 1;
-        gSprites[data[2] & 0xFF].pos2.y = 1;
-        gSprites[data[3] >> 8].pos2.y = 1;
-        gSprites[data[3] & 0xFF].pos2.y = 1;
-        gSprites[data[4] >> 8].pos2.y = 1;
-        gSprites[data[4] & 0xFF].pos2.y = 1;
+        sprite->y2 = 1;
+        gSprites[data[0] >> 8].y2 = 1;
+        gSprites[data[0] & 0xFF].y2 = 1;
+        gSprites[data[1] >> 8].y2 = 1;
+        gSprites[data[1] & 0xFF].y2 = 1;
+        gSprites[data[2] >> 8].y2 = 1;
+        gSprites[data[2] & 0xFF].y2 = 1;
+        gSprites[data[3] >> 8].y2 = 1;
+        gSprites[data[3] & 0xFF].y2 = 1;
+        gSprites[data[4] >> 8].y2 = 1;
+        gSprites[data[4] & 0xFF].y2 = 1;
         break;
     case 2:
-        sprite->pos2.y = 2;
-        gSprites[data[0] >> 8].pos2.y = 2;
-        gSprites[data[0] & 0xFF].pos2.y = 2;
-        gSprites[data[1] >> 8].pos2.y = 2;
-        gSprites[data[1] & 0xFF].pos2.y = 2;
-        gSprites[data[2] >> 8].pos2.y = 2;
-        gSprites[data[4] & 0xFF].pos2.y = 2;
+        sprite->y2 = 2;
+        gSprites[data[0] >> 8].y2 = 2;
+        gSprites[data[0] & 0xFF].y2 = 2;
+        gSprites[data[1] >> 8].y2 = 2;
+        gSprites[data[1] & 0xFF].y2 = 2;
+        gSprites[data[2] >> 8].y2 = 2;
+        gSprites[data[4] & 0xFF].y2 = 2;
         break;
     }
 }
@@ -1965,19 +1965,19 @@ static void SpriteCB_DuoFight_Kyogre(struct Sprite *sprite)
 static void DuoFight_SlideKyogreDown(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    if (sprite->pos1.y <= DISPLAY_HEIGHT)
+    if (sprite->y <= DISPLAY_HEIGHT)
     {
-        sprite->pos1.y += 8;
-        gSprites[sprite->data[0] >> 8].pos1.y += 8;
-        gSprites[sprite->data[0] & 0xFF].pos1.y += 8;
-        gSprites[data[1] >> 8].pos1.y += 8;
-        gSprites[data[1] & 0xFF].pos1.y += 8;
-        gSprites[data[2] >> 8].pos1.y += 8;
-        gSprites[data[2] & 0xFF].pos1.y += 8;
-        gSprites[data[3] >> 8].pos1.y += 8;
-        gSprites[data[3] & 0xFF].pos1.y += 8;
-        gSprites[data[4] >> 8].pos1.y += 8;
-        gSprites[data[4] & 0xFF].pos1.y += 8;
+        sprite->y += 8;
+        gSprites[sprite->data[0] >> 8].y += 8;
+        gSprites[sprite->data[0] & 0xFF].y += 8;
+        gSprites[data[1] >> 8].y += 8;
+        gSprites[data[1] & 0xFF].y += 8;
+        gSprites[data[2] >> 8].y += 8;
+        gSprites[data[2] & 0xFF].y += 8;
+        gSprites[data[3] >> 8].y += 8;
+        gSprites[data[3] & 0xFF].y += 8;
+        gSprites[data[4] >> 8].y += 8;
+        gSprites[data[4] & 0xFF].y += 8;
     }
 }
 
@@ -2184,13 +2184,13 @@ static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite)
 {
     if (sprite->sTimer == 0)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
-        sprite->pos2.x += sTakesFlight_SmokeCoords[sprite->sSmokeId][0];
-        sprite->pos2.y += sTakesFlight_SmokeCoords[sprite->sSmokeId][1];
+        sprite->x2 += sTakesFlight_SmokeCoords[sprite->sSmokeId][0];
+        sprite->y2 += sTakesFlight_SmokeCoords[sprite->sSmokeId][1];
     }
 
     sprite->sTimer++;
@@ -2392,7 +2392,7 @@ static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     s16 frame = sTimer;
-    
+
     // Updates to Rayquaza's coords occur more frequently
     // as time goes on (it accelerates as it emerges)
     if (frame == 0)
@@ -2433,13 +2433,13 @@ static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite)
 
     if (sTimer % sXMovePeriod == 0)
     {
-        sprite->pos2.x--;
-        gSprites[sTailSpriteId].pos2.x--;
+        sprite->x2--;
+        gSprites[sTailSpriteId].x2--;
     }
     if (sTimer % sYMovePeriod == 0)
     {
-        sprite->pos2.y++;
-        gSprites[sTailSpriteId].pos2.y++;
+        sprite->y2++;
+        gSprites[sTailSpriteId].y2++;
     }
 
     sTimer++;
@@ -2902,14 +2902,14 @@ static void SpriteCB_ChasesAway_DuoRingPush(struct Sprite *sprite)
     {
         if (!sprite->sIsKyogre)
         {
-            sprite->pos1.x -= sprite->sSpeed;
-            gSprites[sprite->sBodyPartSpriteId1].pos1.x -= sprite->sSpeed;
+            sprite->x -= sprite->sSpeed;
+            gSprites[sprite->sBodyPartSpriteId1].x -= sprite->sSpeed;
         }
         else
         {
-            sprite->pos1.x += sprite->sSpeed;
-            gSprites[sprite->sBodyPartSpriteId1].pos1.x += sprite->sSpeed;
-            gSprites[sprite->sBodyPartSpriteId2].pos1.x += sprite->sSpeed;
+            sprite->x += sprite->sSpeed;
+            gSprites[sprite->sBodyPartSpriteId1].x += sprite->sSpeed;
+            gSprites[sprite->sBodyPartSpriteId2].x += sprite->sSpeed;
         }
 
         sprite->sDecel++;
@@ -2949,18 +2949,18 @@ static void SpriteCB_ChasesAway_GroudonLeave(struct Sprite *sprite)
     case 2:
         if (sprite->animDelayCounter % 12 == 0)
         {
-            sprite->pos1.x -= 2;
-            gSprites[sprite->data[0]].pos1.x -=2;
+            sprite->x -= 2;
+            gSprites[sprite->data[0]].x -=2;
         }
-        gSprites[sprite->data[0]].pos2.y = 0;
+        gSprites[sprite->data[0]].y2 = 0;
         break;
     case 1:
     case 3:
-        gSprites[sprite->data[0]].pos2.y = -2;
+        gSprites[sprite->data[0]].y2 = -2;
         if ((sprite->animDelayCounter & 15) == 0)
         {
-            sprite->pos1.y++;
-            gSprites[sprite->data[0]].pos1.y++;
+            sprite->y++;
+            gSprites[sprite->data[0]].y++;
         }
         break;
     }
@@ -2982,10 +2982,10 @@ static void SpriteCB_ChasesAway_KyogreLeave(struct Sprite *sprite)
 {
     if ((sprite->data[4] & 3) == 0)
     {
-        if (sprite->pos2.x == 1)
-            sprite->pos2.x = -1;
+        if (sprite->x2 == 1)
+            sprite->x2 = -1;
         else
-            sprite->pos2.x = 1;
+            sprite->x2 = 1;
     }
     if (sprite->data[5] == 128)
     {
@@ -2998,10 +2998,10 @@ static void SpriteCB_ChasesAway_KyogreLeave(struct Sprite *sprite)
     }
     if (sprite->data[5] > 127)
     {
-        if (sprite->pos2.y != 32)
+        if (sprite->y2 != 32)
         {
             sprite->data[6]++;
-            sprite->pos2.y = sprite->data[6] >> 4;
+            sprite->y2 = sprite->data[6] >> 4;
         }
     }
     else
@@ -3029,8 +3029,8 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
     s16 frame = sprite->sTimer;
     if (frame <= 64)
     {
-        sprite->pos2.y += 2;
-        gSprites[sprite->sTailSpriteId].pos2.y += 2;
+        sprite->y2 += 2;
+        gSprites[sprite->sTailSpriteId].y2 += 2;
         if (sprite->sTimer == 64)
         {
             ChasesAway_SetRayquazaAnim(sprite, 1, 0, -48);
@@ -3062,8 +3062,8 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
     {
         SpriteCB_ChasesAway_RayquazaFloat(sprite);
         ChasesAway_SetRayquazaAnim(sprite, 3, 48, 16);
-        sprite->pos2.x = 1;
-        gSprites[sprite->sTailSpriteId].pos2.x = 1;
+        sprite->x2 = 1;
+        gSprites[sprite->sTailSpriteId].x2 = 1;
         PlayCry1(SPECIES_RAYQUAZA, 0);
         CreateTask(Task_ChasesAway_AnimateRing, 0);
     }
@@ -3072,8 +3072,8 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
         switch (frame)
         {
         case 376:
-            sprite->pos2.x = 0;
-            gSprites[sprite->sTailSpriteId].pos2.x = 0;
+            sprite->x2 = 0;
+            gSprites[sprite->sTailSpriteId].x2 = 0;
             SpriteCB_ChasesAway_RayquazaFloat(sprite);
             ChasesAway_SetRayquazaAnim(sprite, 2, 48, 16);
             sprite->callback = SpriteCB_ChasesAway_RayquazaFloat;
@@ -3086,8 +3086,8 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
 
     if (sprite->sTimer > 328 && (sprite->sTimer & 1) == 0)
     {
-        sprite->pos2.x *= -1;
-        gSprites[sprite->sTailSpriteId].pos2.x = sprite->pos2.x;
+        sprite->x2 *= -1;
+        gSprites[sprite->sTailSpriteId].x2 = sprite->x2;
     }
 
     sprite->sTimer++;
@@ -3098,8 +3098,8 @@ static void SpriteCB_ChasesAway_RayquazaFloat(struct Sprite *body)
     struct Sprite *tail = &gSprites[body->sTailSpriteId];
     if (!(body->sFloatTimer & tail->sTailFloatDelay))
     {
-        body->pos2.y += body->sYOffset;
-        gSprites[body->sTailSpriteId].pos2.y += body->sYOffset; // why access gSprites again? tail->pos2.y would be sufficient
+        body->y2 += body->sYOffset;
+        gSprites[body->sTailSpriteId].y2 += body->sYOffset; // why access gSprites again? tail->y2 would be sufficient
         body->sYOffset += body->sYOffsetDir;
         if (body->sYOffset >= tail->sTailFloatPeak || body->sYOffset <= -tail->sTailFloatPeak)
         {
@@ -3119,11 +3119,11 @@ static void ChasesAway_SetRayquazaAnim(struct Sprite *body, u8 animNum, s16 x, s
 {
     struct Sprite *tail = &gSprites[body->sTailSpriteId];
 
-    tail->pos1.x = body->pos1.x + x;
-    tail->pos1.y = body->pos1.y + y;
+    tail->x = body->x + x;
+    tail->y = body->y + y;
 
-    tail->pos2.x = body->pos2.x;
-    tail->pos2.y = body->pos2.y;
+    tail->x2 = body->x2;
+    tail->y2 = body->y2;
 
     StartSpriteAnim(body, animNum);
     StartSpriteAnim(tail, animNum);
