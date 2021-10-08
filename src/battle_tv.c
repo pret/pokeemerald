@@ -1130,11 +1130,11 @@ void TryPutLinkBattleTvShowOnAir(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((playerBestMonId < 3 && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
-            || (playerBestMonId >= 3 && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
+        if ((playerBestMonId < MULTI_PARTY_SIZE && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
+         || (playerBestMonId >= MULTI_PARTY_SIZE && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
         {
-            j = (opponentBestMonId < 3) ? 0 : 1;
-            PutBattleUpdateOnTheAir(sub_806EF84(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
+            j = (opponentBestMonId < MULTI_PARTY_SIZE) ? FALSE : TRUE;
+            PutBattleUpdateOnTheAir(GetOpposingLinkMultiBattlerId(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
         }
     }
     else
