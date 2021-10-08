@@ -116,8 +116,6 @@ struct PokeblockFeed
     u8 unused4;
 };
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
 extern const u16 gUnknown_0860F074[];
 
 static void HandleInitBackgrounds(void);

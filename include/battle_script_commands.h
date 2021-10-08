@@ -3,8 +3,9 @@
 
 #include "constants/pokemon.h"
 
-#define WINDOW_CLEAR            0x1
-#define WINDOW_x80              0x80
+// Arguments for 'flags' in HandleBattleWindow
+#define WINDOW_CLEAR (1 << 0)
+#define WINDOW_BG1   (1 << 7)
 
 void AI_CalcDmg(u8 battlerIdAtk, u8 battlerIdDef);
 u8 TypeCalc(u16 move, u8 battlerIdAtk, u8 battlerIdDef);
