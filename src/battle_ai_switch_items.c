@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "data.h"
 #include "pokemon.h"
 #include "random.h"
 #include "util.h"

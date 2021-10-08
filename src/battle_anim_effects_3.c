@@ -2286,7 +2286,7 @@ void AnimTask_TransformMon(u8 taskId)
         sub_80A6BFC(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
-            position = 0;
+            position = B_POSITION_PLAYER_LEFT;
         else
             position = GetBattlerPosition(gBattleAnimAttacker);
 
