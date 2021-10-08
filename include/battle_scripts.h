@@ -389,5 +389,14 @@ extern const u8 BattleScript_DarkTypePreventsPrankster[];
 extern const u8 BattleScript_GulpMissileGorging[];
 extern const u8 BattleScript_GulpMissileGulping[];
 extern const u8 BattleScript_BattleBondActivatesOnMoveEndAttacker[];
+extern const u8 BattleScript_DesolateLandActivates[];
+extern const u8 BattleScript_DesolateLandEvaporatesWaterTypeMoves[];
+extern const u8 BattleScript_PrimordialSeaActivates[];
+extern const u8 BattleScript_PrimordialSeaFizzlesOutFireTypeMoves[];
+extern const u8 BattleScript_DeltaStreamActivates[];
+extern const u8 BattleScript_MysteriousAirCurrentBlowsOn[];
+extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
+extern const u8 BattleScript_BlockedByPrimalWeatherEnd3[];
+extern const u8 BattleScript_BlockedByPrimalWeatherRet[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
