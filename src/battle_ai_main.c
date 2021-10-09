@@ -512,7 +512,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // move data
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 moveEffect = gBattleMoves[move].effect;
-    u8 moveType = gBattleMoves[move].type;
+    s32 moveType;
     u8 moveTarget = gBattleMoves[move].target;
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
     u8 effectiveness = AI_GetMoveEffectiveness(move, battlerAtk, battlerDef);
@@ -520,8 +520,13 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u32 i;
     u16 predictedMove = gLastMoves[battlerDef]; // TODO better move prediction
     
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
+
+    GET_MOVE_TYPE(move, moveType);
     
     // check non-user target
     if (!(gBattleMoves[move].target & MOVE_TARGET_USER))
@@ -748,7 +753,34 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK && IsHealBlockPreventingMove(battlerAtk, move))
         return 0; // Can't even select heal blocked move
     // primal weather check
-    //TODO
+    if (WEATHER_HAS_EFFECT)
+    {
+        if (gBattleWeather & WEATHER_PRIMAL_ANY)
+        {
+            switch (move)
+            {
+                case MOVE_SUNNY_DAY:
+                case MOVE_RAIN_DANCE:
+                case MOVE_HAIL:
+                case MOVE_SANDSTORM:
+                    RETURN_SCORE_MINUS(30);
+            }
+        }
+
+        if (!IS_MOVE_STATUS(move))
+        {
+            if (gBattleWeather & WEATHER_SUN_PRIMAL)
+            {
+                if (moveType == TYPE_WATER)
+                    RETURN_SCORE_MINUS(30);
+            }
+            else if (gBattleWeather & WEATHER_RAIN_PRIMAL)
+            {
+                if (moveType == TYPE_FIRE)
+                    RETURN_SCORE_MINUS(30);
+            }
+        }
+    }
     
     // check move effects
     switch (moveEffect)
@@ -2434,13 +2466,32 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         switch (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef))
         {
         case AI_EFFECTIVENESS_x4:
-            score += 4;
+            if (WEATHER_HAS_EFFECT
+             && gBattleWeather & WEATHER_STRONG_WINDS
+             && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
+            {
+                if (AI_RandLessThan(176)) //Consider it supereffective instead of hypereffective.
+                    score += 2;
+                else
+                    score++;
+            }
+            else
+                score += 4;
             break;
         case AI_EFFECTIVENESS_x2:
-            if (AI_RandLessThan(176))
-                score += 2;
+            if (WEATHER_HAS_EFFECT
+             && gBattleWeather & WEATHER_STRONG_WINDS
+             && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
+            {
+                break; // Don't increase score, consider it neutral.
+            }
             else
-                score++;
+            {
+                if (AI_RandLessThan(176))
+                    score += 2;
+                else
+                    score++;
+            }
             break;
         }
     }
@@ -2472,7 +2523,10 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     bool32 attackerHasBadAbility = (GetAbilityRating(AI_DATA->atkAbility) < 0);
     bool32 partnerHasBadAbility = (GetAbilityRating(atkPartnerAbility) < 0);
     u16 predictedMove = gLastMoves[battlerDef]; //for now
-        
+
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
     // check what effect partner is using
     if (AI_DATA->partnerMove != 0)
     {
@@ -4751,7 +4805,10 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     u16 effect = gBattleMoves[move].effect;
     u8 moveType = gBattleMoves[move].type;
-    
+
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
     if (IsTargetingPartner(battlerAtk, battlerDef))
     {
         if ((effect == EFFECT_HEAL_PULSE || effect == EFFECT_HIT_ENEMY_HEAL_ALLY)
