@@ -3999,8 +3999,8 @@ static void UpdateBallPos(struct Sprite *sprite)
     sprite->y2 = -cos * sprite->sBallDistToCenter >> 12;
     if (IsSEPlaying())
     {
-        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, sprite->x2);
-        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, sprite->x2);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, sprite->x2);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, sprite->x2);
     }
 }
 
@@ -4704,8 +4704,8 @@ static void SpriteCB_Taillow_FlyIn(struct Sprite *sprite)
         if (IsSEPlaying())
         {
             s8 pan = -((116 - sprite->x) / 2);
-            m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, pan);
-            m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, pan);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);
         }
     }
     else

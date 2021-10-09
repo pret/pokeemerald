@@ -1877,7 +1877,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         {
             if (tableId == gMovesWithQuietBGM[i])
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
                 break;
             }
         }
@@ -2143,7 +2143,7 @@ static void ScriptCmd_end(void)
 
     if (!continuousAnim) // May have been used for debug?
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         if (!IsContest())
         {
             sub_80A8278();
