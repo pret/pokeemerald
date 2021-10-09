@@ -7937,9 +7937,9 @@ void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *spri
 }
 
 static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a) = {
-    DoTracksGroundEffect_None,
-    DoTracksGroundEffect_Footprints,
-    DoTracksGroundEffect_BikeTireTracks,
+    [TRACKS_NONE] = DoTracksGroundEffect_None,
+    [TRACKS_FOOT] = DoTracksGroundEffect_Footprints,
+    [TRACKS_BIKE_TIRE] = DoTracksGroundEffect_BikeTireTracks,
 };
 
 void GroundEffect_SandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
