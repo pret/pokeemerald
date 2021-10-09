@@ -1481,7 +1481,7 @@ static bool8 IsNonBlockNonElevated(u8 behaviorAt, u16 behaviorBy)
 
 static bool8 IsntInitialPosition(u8 taskId, s16 x, s16 y, u16 behaviorBy)
 {
-    if (x == gTasks[taskId].tInitialX + 7 && y == gTasks[taskId].tInitialY + 7 && behaviorBy != 0)
+    if (x == gTasks[taskId].tInitialX + MAP_OFFSET && y == gTasks[taskId].tInitialY + MAP_OFFSET && behaviorBy != 0)
         return FALSE;
     return TRUE;
 }
@@ -1532,7 +1532,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                     return FALSE;
 
                 behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
-                if (behaviorAt != 0 && behaviorAt != 16)
+                if (behaviorAt != 0 && behaviorAt != OBJECT_EVENTS_COUNT)
                     return FALSE;
             }
         }
@@ -1552,7 +1552,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                 if (!IsntInitialPosition(taskId, curX, curY, behaviorBy))
                     return FALSE;
 
-                if (GetObjectEventIdByXYZ(curX, curY, 0) != 16)
+                if (GetObjectEventIdByXYZ(curX, curY, 0) != OBJECT_EVENTS_COUNT)
                     return FALSE;
             }
         }
@@ -1570,7 +1570,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                 return FALSE;
 
             behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
-            if (behaviorAt != 0 && behaviorAt != 16)
+            if (behaviorAt != 0 && behaviorAt != OBJECT_EVENTS_COUNT)
                 return FALSE;
         }
         break;
@@ -1606,7 +1606,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                     return FALSE;
             }
 
-            if (GetObjectEventIdByXYZ(curX, curY, 0) != 16)
+            if (GetObjectEventIdByXYZ(curX, curY, 0) != OBJECT_EVENTS_COUNT)
                 return FALSE;
         }
         break;
@@ -1645,8 +1645,8 @@ static void PlaceDecoration(u8 taskId)
     }
     else
     {
-        sCurDecorMapX = gTasks[taskId].tCursorX - 7;
-        sCurDecorMapY = gTasks[taskId].tCursorY - 7;
+        sCurDecorMapX = gTasks[taskId].tCursorX - MAP_OFFSET;
+        sCurDecorMapY = gTasks[taskId].tCursorY - MAP_OFFSET;
         ScriptContext1_SetupScript(SecretBase_EventScript_SetDecoration);
     }
 
@@ -1666,7 +1666,7 @@ static void PlaceDecoration_(u8 taskId)
         if (sDecorationContext.items[i] == DECOR_NONE)
         {
             sDecorationContext.items[i] = gCurDecorationItems[gCurDecorationIndex];
-            sDecorationContext.pos[i] = ((gTasks[taskId].tCursorX - 7) << 4) + (gTasks[taskId].tCursorY - 7);
+            sDecorationContext.pos[i] = ((gTasks[taskId].tCursorX - MAP_OFFSET) << 4) + (gTasks[taskId].tCursorY - MAP_OFFSET);
             break;
         }
     }
@@ -2223,7 +2223,7 @@ static void ClearRearrangementNonSprites(void)
             {
                 for (x = 0; x < sDecorRearrangementDataBuffer[i].width; x++)
                 {
-                    MapGridSetMetatileEntryAt(posX + 7 + x, posY + 7 - y, gMapHeader.mapLayout->map[posX + x + gMapHeader.mapLayout->width * (posY - y)] | 0x3000);
+                    MapGridSetMetatileEntryAt(posX + MAP_OFFSET + x, posY + MAP_OFFSET - y, gMapHeader.mapLayout->map[posX + x + gMapHeader.mapLayout->width * (posY - y)] | 0x3000);
                 }
             }
 
@@ -2461,12 +2461,12 @@ static bool8 DecorationIsUnderCursor(u8 taskId, u8 idx, struct DecorRearrangemen
     u8 yOff;
     u8 ht;
 
-    x = gTasks[taskId].tCursorX - 7;
-    y = gTasks[taskId].tCursorY - 7;
+    x = gTasks[taskId].tCursorX - MAP_OFFSET;
+    y = gTasks[taskId].tCursorY - MAP_OFFSET;
     xOff = sDecorationContext.pos[idx] >> 4;
     yOff = sDecorationContext.pos[idx] & 0x0F;
     ht = data->height;
-    if (sDecorationContext.items[idx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == METATILE_SecretBase_SandOrnament_BrokenBase)
+    if (sDecorationContext.items[idx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + MAP_OFFSET, yOff + MAP_OFFSET) == METATILE_SecretBase_SandOrnament_BrokenBase)
         ht--;
 
     if (x >= xOff && x < xOff + data->width && y > yOff - ht && y <= yOff)

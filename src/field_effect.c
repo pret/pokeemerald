@@ -3830,11 +3830,11 @@ bool8 FldEff_MoveDeoxysRock(struct Sprite* sprite)
         int xPos, yPos;
         u8 taskId;
         object = &gObjectEvents[objectEventIdBuffer];
-        xPos = object->currentCoords.x - 7;
-        yPos = object->currentCoords.y - 7;
+        xPos = object->currentCoords.x - MAP_OFFSET;
+        yPos = object->currentCoords.y - MAP_OFFSET;
         xPos = (gFieldEffectArguments[3] - xPos) * 16;
         yPos = (gFieldEffectArguments[4] - yPos) * 16;
-        ShiftObjectEventCoords(object, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
+        ShiftObjectEventCoords(object, gFieldEffectArguments[3] + MAP_OFFSET, gFieldEffectArguments[4] + MAP_OFFSET);
         taskId = CreateTask(Task_MoveDeoxysRock, 80);
         gTasks[taskId].data[1] = object->spriteId;
         gTasks[taskId].data[2] = gSprites[object->spriteId].x + xPos;

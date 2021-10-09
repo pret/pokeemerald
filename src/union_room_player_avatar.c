@@ -125,14 +125,14 @@ static u8 GetUnionRoomPlayerGraphicsId(u32 gender, u32 id)
 
 static void GetUnionRoomPlayerFacingCoords(u32 playerIdx, u32 direction, s32 * x, s32 * y)
 {
-    *x = sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0] + 7;
-    *y = sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1] + 7;
+    *x = sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0] + MAP_OFFSET;
+    *y = sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1] + MAP_OFFSET;
 }
 
 static bool32 IsUnionRoomPlayerFacingTileAt(u32 playerIdx, u32 direction, s32 x, s32 y)
 {
-    if ((sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0] + 7 == x)
-    &&  (sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1] + 7 == y))
+    if ((sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0] + MAP_OFFSET == x)
+    &&  (sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1] + MAP_OFFSET == y))
         return TRUE;
     else
         return FALSE;

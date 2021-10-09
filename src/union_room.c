@@ -11,6 +11,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "event_object_lock.h"
+#include "fieldmap.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -3989,10 +3990,10 @@ static bool32 IsPlayerFacingTradingBoard(void)
     s16 x, y;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 
-    if (x != 2 + 7)
+    if (x != 2 + MAP_OFFSET)
         return FALSE;
 
-    if (y != 1 + 7)
+    if (y != 1 + MAP_OFFSET)
         return FALSE;
 
     if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)

@@ -70,7 +70,7 @@ static u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
     {
         for (xCur = 0; xCur < gMapHeader.mapLayout->width; xCur++)
         {
-            u8 tileBehaviorId = MapGridGetMetatileBehaviorAt(xCur + 7, yCur + 7);
+            u8 tileBehaviorId = MapGridGetMetatileBehaviorAt(xCur + MAP_OFFSET, yCur + MAP_OFFSET);
             if (MetatileBehavior_IsSurfableAndNotWaterfall(tileBehaviorId) == TRUE)
             {
                 tileNum++;
@@ -95,8 +95,8 @@ static bool8 CheckFeebas(void)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-        x -= 7;
-        y -= 7;
+        x -= MAP_OFFSET;
+        y -= MAP_OFFSET;
 
         if (y >= gRoute119WaterTileData[3 * 0 + 0] && y <= gRoute119WaterTileData[3 * 0 + 1])
             route119Section = 0;
