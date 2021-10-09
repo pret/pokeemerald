@@ -4547,10 +4547,6 @@ static void Cmd_playanimation(void)
         || gBattlescriptCurrInstr[2] == B_ANIM_ILLUSION_OFF
         || gBattlescriptCurrInstr[2] == B_ANIM_FORM_CHANGE
         || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE
-        || gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES
-        || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
-        || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
-        || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES
         || gBattlescriptCurrInstr[2] == B_ANIM_PRIMAL_REVERSION)
     {
         BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -4598,9 +4594,6 @@ static void Cmd_playanimation2(void) // animation Id is stored in the first poin
         || *animationIdPtr == B_ANIM_ILLUSION_OFF
         || *animationIdPtr == B_ANIM_FORM_CHANGE
         || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE
-        || *animationIdPtr == B_ANIM_RAIN_CONTINUES
-        || *animationIdPtr == B_ANIM_SUN_CONTINUES
-        || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
         || *animationIdPtr == B_ANIM_PRIMAL_REVERSION)
     {
         BtlController_EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
