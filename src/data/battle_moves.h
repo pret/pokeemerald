@@ -7944,7 +7944,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SCALD] =
     {
-        .effect = EFFECT_SCALD,
+        #if B_UPDATED_MOVE_DATA >= GEN_6
+            .effect = EFFECT_SCALD,
+        #else
+            .effect = EFFECT_BURN_HIT,
+        #endif
         .power = 80,
         .type = TYPE_WATER,
         .accuracy = 100,
