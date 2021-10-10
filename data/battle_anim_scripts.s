@@ -823,6 +823,7 @@ gBattleAnims_General::
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
 	.4byte General_TotemFlare               @ B_ANIM_TOTEM_FLARE
 	.4byte General_GulpMissile              @ B_ANIM_GULP_MISSILE
+	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
 
 	.align 2
 gBattleAnims_Special::
@@ -24410,6 +24411,17 @@ General_GulpMissile: @ Tackle anim (placeholder)
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
+	end
+
+General_StrongWinds::
+	loadspritegfx ANIM_TAG_FLYING_DIRT
+	playsewithpan SE_M_GUST, 0
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_FLYING_DIRT, 0, 12, 12, RGB(20, 20, 20)
+	waitforvisualfinish
+	createvisualtask AnimTask_LoadWindstormBackground, 5, FALSE
+	delay 32
+	waitforvisualfinish
+	stopsound
 	end
 
 RainbowEndureEffect:
