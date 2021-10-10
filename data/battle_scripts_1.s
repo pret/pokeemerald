@@ -942,10 +942,6 @@ BattleScript_FlowerShieldMoveTargetEnd:
 	jumpifnexttargetvalid BattleScript_FlowerShieldLoop
 	end
 	
-BattleScript_RototillerRet::
-	
-	return
-
 BattleScript_EffectRototiller:
 	attackcanceler
 	attackstring

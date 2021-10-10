@@ -1416,7 +1416,7 @@ static void Cmd_attackcanceler(void)
         gProtectStructs[gBattlerTarget].bounceMove = 0;
         gProtectStructs[gBattlerTarget].usesBouncedMove = 1;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        if (BlocksPrankster(gCurrentMove, gBattlerTarget, gBattlerAttacker))
+        if (BlocksPrankster(gCurrentMove, gBattlerTarget, gBattlerAttacker, TRUE))
         {
             // Opponent used a prankster'd magic coat -> reflected status move should fail against a dark-type attacker
             gBattlerTarget = gBattlerAttacker;
@@ -7345,8 +7345,8 @@ static bool32 IsRototillerAffected(u32 battlerId)
         return FALSE;   // Only grass types affected
     if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
         return FALSE;   // Rototiller doesn't affected semi-invulnerable battlers
-    //if (!CompareStat(battlerId, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN) && !CompareStat(battlerId, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
-        //return FALSE;   // Battler unaffected if atk and spatk are maxed
+    if (BlocksPrankster(MOVE_ROTOTILLER, gBattlerAttacker, battlerId, FALSE))
+        return FALSE;
     return TRUE;
 }
 
@@ -8757,21 +8757,22 @@ static void Cmd_various(void)
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
         break;
-    case  VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
-        if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler))
+    case VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
+        if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler, TRUE))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
         return;
-        case VARIOUS_GET_ROTOTILLER_TARGETS:
+    case VARIOUS_GET_ROTOTILLER_TARGETS:
         // Gets the battlers to be affected by rototiller. If there are none, print 'But it failed!'
         {
             u32 count = 0;
             for (i = 0; i < gBattlersCount; i++)
             {
+                gSpecialStatuses[i].rototillerAffected = FALSE;
                 if (IsRototillerAffected(i))
                 {
-                    gSpecialStatuses[i].rototillerAffected = 1;
+                    gSpecialStatuses[i].rototillerAffected = TRUE;
                     count++;
                 }
             }
@@ -8785,7 +8786,7 @@ static void Cmd_various(void)
     case VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED:
         if (gSpecialStatuses[gActiveBattler].rototillerAffected)
         {
-            gSpecialStatuses[gActiveBattler].rototillerAffected = 0;
+            gSpecialStatuses[gActiveBattler].rototillerAffected = FALSE;
             gBattlescriptCurrInstr += 7;
         }
         else
@@ -10954,7 +10955,7 @@ static void Cmd_trysetperishsong(void)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
             || GetBattlerAbility(i) == ABILITY_SOUNDPROOF
-            || BlocksPrankster(gCurrentMove, gBattlerAttacker, i))
+            || BlocksPrankster(gCurrentMove, gBattlerAttacker, i, TRUE))
         {
             notAffectedCount++;
         }
