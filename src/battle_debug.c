@@ -207,6 +207,8 @@ static const u8 sText_GastroAcid[] = _("Gastro Acid");
 static const u8 sText_SmackDown[] = _("Smacked Down");
 static const u8 sText_MiracleEye[] = _("Miracle Eye");
 static const u8 sText_AquaRing[] = _("Aqua Ring");
+static const u8 sText_LaserFocus[] = _("Laser Focused");
+static const u8 sText_Electrified[] = _("Electrified");
 static const u8 sText_AuroraVeil[] = _("Aurora Veil");
 static const u8 sText_LuckyChant[] = _("Lucky Chant");
 static const u8 sText_Tailwind[] = _("Tailwind");
@@ -295,6 +297,9 @@ static const struct BitfieldInfo sStatus3Bitfield[] =
     // Magnet Rise 1, 26,
     // Heal Block 1, 27,
     {/*Aqua Ring*/ 1, 28},
+    {/*Laser Focus*/ 1, 29},
+    {/*Electrified*/ 1, 30},
+    // Power Trick 1, 31,
 };
 
 static const struct BitfieldInfo sAIBitfield[] =
@@ -408,6 +413,8 @@ static const struct ListMenuItem sStatus3ListItems[] =
     {sText_SmackDown, 8},
     {sText_MiracleEye, 9},
     {sText_AquaRing, 10},
+    {sText_LaserFocus, 11},
+    {sText_Electrified, 12},
 };
 
 static const struct ListMenuItem sSideStatusListItems[] =
