@@ -6887,7 +6887,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 if (TARGET_TURN_DAMAGED
                   && (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
                   && IsMoveMakingContact(gCurrentMove, gBattlerAttacker)
-                  && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battlerId)
+                  && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
                   && IsBattlerAlive(gBattlerAttacker)
                   && CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item)
                   && gBattleMons[gBattlerAttacker].item == ITEM_NONE)
