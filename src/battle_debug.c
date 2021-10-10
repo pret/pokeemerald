@@ -97,6 +97,7 @@ enum
     LIST_ITEM_STATUS1,
     LIST_ITEM_STATUS2,
     LIST_ITEM_STATUS3,
+    LIST_ITEM_STATUS4,
     LIST_ITEM_SIDE_STATUS,
     LIST_ITEM_AI,
     LIST_ITEM_AI_MOVES_PTS,
@@ -164,6 +165,7 @@ static const u8 sText_StatStages[] = _("Stat Stages");
 static const u8 sText_Status1[] = _("Status1");
 static const u8 sText_Status2[] = _("Status2");
 static const u8 sText_Status3[] = _("Status3");
+static const u8 sText_Status4[] = _("Status4");
 static const u8 sText_HeldItem[] = _("Held Item");
 static const u8 sText_SideStatus[] = _("Side Status");
 static const u8 sText_MaxHp[] = _("HP Max");
@@ -298,8 +300,12 @@ static const struct BitfieldInfo sStatus3Bitfield[] =
     // Heal Block 1, 27,
     {/*Aqua Ring*/ 1, 28},
     {/*Laser Focus*/ 1, 29},
-    {/*Electrified*/ 1, 30},
-    // Power Trick 1, 31,
+    // Power Trick 1, 30,
+};
+
+static const struct BitfieldInfo sStatus4Bitfield[] =
+{
+    {/*Electrified*/ 1, 0,}
 };
 
 static const struct BitfieldInfo sAIBitfield[] =
@@ -329,6 +335,7 @@ static const struct ListMenuItem sMainListItems[] =
     {sText_Status1, LIST_ITEM_STATUS1},
     {sText_Status2, LIST_ITEM_STATUS2},
     {sText_Status3, LIST_ITEM_STATUS3},
+    {sText_Status4, LIST_ITEM_STATUS4},
     {sText_SideStatus, LIST_ITEM_SIDE_STATUS},
     {sText_AI, LIST_ITEM_AI},
     {sText_AIMovePts, LIST_ITEM_AI_MOVES_PTS},
@@ -414,7 +421,11 @@ static const struct ListMenuItem sStatus3ListItems[] =
     {sText_MiracleEye, 9},
     {sText_AquaRing, 10},
     {sText_LaserFocus, 11},
-    {sText_Electrified, 12},
+};
+
+static const struct ListMenuItem sStatus4ListItems[] =
+{
+    {sText_Electrified, 0},
 };
 
 static const struct ListMenuItem sSideStatusListItems[] =
@@ -1183,6 +1194,11 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = ARRAY_COUNT(sStatus3ListItems);
         data->bitfield = sStatus3Bitfield;
         break;
+    case LIST_ITEM_STATUS4:
+        listTemplate.items = sStatus4ListItems;
+        itemsCount = ARRAY_COUNT(sStatus4ListItems);
+        data->bitfield = sStatus4Bitfield;
+        break;
     case LIST_ITEM_AI:
         listTemplate.items = sAIListItems;
         itemsCount = ARRAY_COUNT(sAIListItems);
@@ -1739,6 +1755,11 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
     case LIST_ITEM_STATUS3:
         data->modifyArrows.modifiedValPtr = &gStatuses3[data->battlerId];
         data->modifyArrows.currValue = GetBitfieldValue(gStatuses3[data->battlerId], data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount);
+        data->modifyArrows.typeOfVal = VAL_BITFIELD_32;
+        goto CASE_ITEM_STATUS;
+    case LIST_ITEM_STATUS4:
+        data->modifyArrows.modifiedValPtr = &gStatuses4[data->battlerId];
+        data->modifyArrows.currValue = GetBitfieldValue(gStatuses4[data->battlerId], data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount);
         data->modifyArrows.typeOfVal = VAL_BITFIELD_32;
         goto CASE_ITEM_STATUS;
     case LIST_ITEM_AI:

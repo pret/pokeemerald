@@ -2838,7 +2838,7 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_ELECTRIFY:
-            gStatuses3[gActiveBattler] &= ~(STATUS3_ELECTRIFIED);
+            gStatuses4[gActiveBattler] &= ~(STATUS4_ELECTRIFIED);
             gBattleStruct->turnEffectsTracker++;
         case ENDTURN_POWDER:
             gBattleMons[gActiveBattler].status2 &= ~(STATUS2_POWDER);
