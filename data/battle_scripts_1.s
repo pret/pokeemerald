@@ -6798,7 +6798,7 @@ BattleScript_PowderMoveNoEffect::
 	pause B_WAIT_TIME_SHORT
 	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_PowderMoveNoEffectPrint
 	jumpifability BS_TARGET, ABILITY_OVERCOAT, BattleScript_PowderMoveNoEffectOvercoat
-	printstring STRINGID_SAFETYGOOGLESPROTECTED
+	printstring STRINGID_SAFETYGOGGLESPROTECTED
 	goto BattleScript_PowderMoveNoEffectWaitMsg
 BattleScript_PowderMoveNoEffectOvercoat:
 	call BattleScript_AbilityPopUp

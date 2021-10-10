@@ -3397,9 +3397,10 @@ u8 AtkCanceller_UnableToUseMove(void)
                     gBattlerAbility = gBattlerTarget;
                     effect = 1;
                 }
-                else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_SAFETY_GOOGLES)
+                else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_SAFETY_GOGGLES)
                 {
-                    RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_SAFETY_GOOGLES);
+                    RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_SAFETY_GOGGLES);
+                    gLastUsedItem = gBattleMons[gBattlerTarget].item;
                     effect = 1;
                 }
 
@@ -4893,7 +4894,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         case ABILITY_EFFECT_SPORE:
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OVERCOAT
-             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOOGLES)
+             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
             {
                 i = Random() % 3;
                 if (i == 0)
