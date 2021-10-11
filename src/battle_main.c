@@ -231,6 +231,7 @@ EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
+EWRAM_DATA bool8 gCanRetaliate = FALSE;
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -2875,6 +2876,8 @@ static void BattleStartClearSetData(void)
 
     gHasFetchedBall = FALSE;
     gLastUsedBall = 0;
+
+    gCanRetaliate = FALSE;
 
     gBattlerAttacker = 0;
     gBattlerTarget = 0;
