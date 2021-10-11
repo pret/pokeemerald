@@ -905,7 +905,7 @@ static bool32 NameIsNotEmpty(const u8 *name)
 }
 
 // Save the currently connected players into the trainer records, shifting all previous records down.
-void RecordMixTrainerNames(void)
+void SaveLinkTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {

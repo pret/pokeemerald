@@ -287,7 +287,7 @@ bool32 WaitRfuState(bool32 force);
 void GetOtherPlayersInfoFlags(void);
 void InitializeRfuLinkManager_JoinGroup(void);
 void SendLeaveGroupNotice(void);
-void RecordMixTrainerNames(void);
+void SaveLinkTrainerNames(void);
 void LinkRfu_CreateConnectionAsParent(void);
 void LinkRfu_StopManagerBeforeEnteringChat(void);
 void UpdateGameData_SetActivity(u8 activity, u32 partnerInfo, bool32 startedActivity);

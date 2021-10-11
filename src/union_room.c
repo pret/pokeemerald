@@ -1649,7 +1649,7 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_SPIN_TRADE:
     case ACTIVITY_RECORD_CORNER:
-        RecordMixTrainerNames();
+        SaveLinkTrainerNames();
         break;
     }
 
@@ -1762,7 +1762,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
             sendBuff[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
             gMain.savedCallback = NULL;
             data[0] = 4;
-            RecordMixTrainerNames();
+            SaveLinkTrainerNames();
             ResetBlockReceivedFlags();
             break;
         case ACTIVITY_BERRY_BLENDER:
@@ -1771,7 +1771,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         case ACTIVITY_CONTEST_CUTE:
         case ACTIVITY_CONTEST_SMART:
         case ACTIVITY_CONTEST_TOUGH:
-            RecordMixTrainerNames();
+            SaveLinkTrainerNames();
             DestroyTask(taskId);
         default:
             EnableBothScriptContexts();
