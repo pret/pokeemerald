@@ -4515,8 +4515,13 @@ static void PrintCurrentSpeciesTypeInfo(void)
     u8 type1, type2;
 
     //type icon(s)
-    type1 = gBaseStats[species].type1;
-    type2 = gBaseStats[species].type2;
+    #ifdef TX_RANDOM_TYPE
+        type1 = GetTypeBySpecies(species, 1);
+        type2 = GetTypeBySpecies(species, 2);
+    #else
+        type1 = gBaseStats[species].type1;
+        type2 = gBaseStats[species].type2;
+    #endif
     if (species == SPECIES_NONE)
         type1 = type2 = TYPE_MYSTERY;
     
@@ -6827,6 +6832,8 @@ static void PrintStatsScreen_Left(u8 taskId)
     u8 abilities_x = 101;
     u8 abilities_y = 99;
     u8 ability0;
+    u8 ability1;
+    u8 abilityHidden;
     u8 differentEVs = 0;
     u8 EVs[6] = {gBaseStats[species].evYield_HP, gBaseStats[species].evYield_Speed, gBaseStats[species].evYield_Attack, gBaseStats[species].evYield_SpAttack, gBaseStats[species].evYield_Defense, gBaseStats[species].evYield_SpDefense};
 
@@ -7240,22 +7247,23 @@ static void PrintStatsScreen_Left(u8 taskId)
     //Abilitie(s)
     if (gTasks[taskId].data[5] == 0)
     {    
-        ability0 = gBaseStats[species].abilities[0];
+        ability0 = GetAbilityBySpecies(species, 0); //gBaseStats[species].abilities[0];
         PrintInfoScreenTextSmallWhite(gAbilityNames[ability0], abilities_x, abilities_y);
         PrintInfoScreenTextSmall(gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
 
-        if (gBaseStats[species].abilities[1] != ABILITY_NONE)
+        ability1 = GetAbilityBySpecies(species, 1);
+        if (ability1 != ABILITY_NONE) //(gBaseStats[species].abilities[1] != ABILITY_NONE)
         {
-            PrintInfoScreenTextSmallWhite(gAbilityNames[gBaseStats[species].abilities[1]], abilities_x, abilities_y + 30);
-            PrintInfoScreenTextSmall(gAbilityDescriptionPointers[gBaseStats[species].abilities[1]], abilities_x, abilities_y + 44);
+            PrintInfoScreenTextSmallWhite(gAbilityNames[ability1], abilities_x, abilities_y + 30);
+            PrintInfoScreenTextSmall(gAbilityDescriptionPointers[ability1], abilities_x, abilities_y + 44);
         }  
     }
     #ifdef POKEMON_EXPANSION
     else //Hidden abilities
     {
-        ability0 = gBaseStats[species].abilities[2];
-        PrintInfoScreenTextSmallWhite(gAbilityNames[ability0], abilities_x, abilities_y);
-        PrintInfoScreenTextSmall(gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
+        abilityHidden = GetAbilityBySpecies(species, 2);
+        PrintInfoScreenTextSmallWhite(gAbilityNames[abilityHidden], abilities_x, abilities_y);
+        PrintInfoScreenTextSmall(gAbilityDescriptionPointers[abilityHidden], abilities_x, abilities_y + 14);
     }
     #endif
 
