@@ -7566,6 +7566,15 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
 
     StringCopy(gStringVar1, gSpeciesNames[species]);
 
+    #ifdef TX_DIFFICULTY_CHALLENGES_USED
+        if (gSaveBlock1Ptr->txRandEvolutionMethodes) //tx_difficulty_challenges
+        {
+            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->txRandEvolutions, !gSaveBlock1Ptr->txRandChaos);
+            if (species == SPECIES_NONE)
+                return SPECIES_NONE;
+        }
+    #endif
+
     //Calculate number of possible direct evolutions (e.g. Eevee has 5 but torchic has 1)
     for (i = 0; i < EVOS_PER_MON; i++)
     {
