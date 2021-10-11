@@ -3753,7 +3753,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HIDDEN_POWER] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_6
+        #if B_HIDDEN_POWER_DMG >= GEN_6
             .power = 60,
         #else
             .power = 1,
