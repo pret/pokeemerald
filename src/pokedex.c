@@ -46,6 +46,9 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef TX_DIFFICULTY_CHALLENGES_USED
+    #include "tx_difficulty_challenges.h"
+#endif
 
 enum
 {
@@ -7603,6 +7606,10 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         left = !left;
 
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
+        #ifdef TX_DIFFICULTY_CHALLENGES_USED
+            if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
+                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->txRandChaos);
+        #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
         handleTargetSpeciesPrint(taskId, targetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i); //evolution mon name
 
