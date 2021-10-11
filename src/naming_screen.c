@@ -286,19 +286,26 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 
 // This handles what characters get inserted when a key is pressed
 // The keys shown on the keyboard are handled separately by sNamingScreenKeyboardText
-static const u8 sKeyboardChars[KBPAGE_COUNT * KBROW_COUNT * KBCOL_COUNT] = __(
-    "abcdef ."
-    "ghijkl ,"
-    "mnopqrs "
-    "tuvwxyz "
-    "ABCDEF ."
-    "GHIJKL ,"
-    "MNOPQRS "
-    "TUVWXYZ "
-    "01234   "
-    "56789   "
-    "!?♂♀/-  "
-    "…“”‘'   ");
+static const u8 sKeyboardChars[KBPAGE_COUNT][KBROW_COUNT][KBCOL_COUNT] = {
+    [KEYBOARD_LETTERS_LOWER] = {
+        __("abcdef ."),
+        __("ghijkl ,"),
+        __("mnopqrs "),
+        __("tuvwxyz "),
+    },
+    [KEYBOARD_LETTERS_UPPER] = {
+        __("ABCDEF ."),
+        __("GHIJKL ,"),
+        __("MNOPQRS "),
+        __("TUVWXYZ "),
+    },
+    [KEYBOARD_SYMBOLS] = {
+        __("01234   "),
+        __("56789   "),
+        __("!?♂♀/-  "),
+        __("…“”‘'   "),
+    }
+};
 
 static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
     [KEYBOARD_LETTERS_LOWER] = KBCOL_COUNT,
@@ -1780,7 +1787,7 @@ static void DrawGenderIcon(void)
 
 static u8 GetCharAtKeyboardPos(s16 x, s16 y)
 {
-    return sKeyboardChars[x + y * KBCOL_COUNT + CurrentPageToKeyboardId() * KBCOL_COUNT * KBROW_COUNT];
+    return sKeyboardChars[CurrentPageToKeyboardId()][y][x];
 }
 
 
