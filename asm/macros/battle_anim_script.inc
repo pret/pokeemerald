@@ -14,7 +14,7 @@
 	.byte 0x02
 	.4byte \template
 	.if \anim_battler == ANIM_TARGET
-	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.byte ANIMSPRITE_IS_TARGET | (\subpriority_offset & 0x7F)
 	.else
 	.byte (\subpriority_offset & 0x7F)
 	.endif
@@ -193,12 +193,12 @@
 	.4byte \ptr
 	.endm
 
-	.macro monbg_22 battler:req
+	.macro monbg_static battler:req
 	.byte 0x22
 	.byte \battler
 	.endm
 
-	.macro clearmonbg_23 battler:req
+	.macro clearmonbg_static battler:req
 	.byte 0x23
 	.byte \battler
 	.endm
@@ -233,16 +233,16 @@
 	.byte \delay
 	.endm
 
-	.macro monbgprio_28 battler:req
+	.macro splitbgprio battler:req
 	.byte 0x28
 	.byte \battler
 	.endm
 
-	.macro monbgprio_29
+	.macro splitbgprio_all
 	.byte 0x29
 	.endm
 
-	.macro monbgprio_2A battler:req
+	.macro splitbgprio_foes battler:req
 	.byte 0x2a
 	.byte \battler
 	.endm
@@ -257,12 +257,12 @@
 	.byte \battler
 	.endm
 
-	.macro doublebattle_2D battler:req
+	.macro teamattack_moveback battler:req
 	.byte 0x2d
 	.byte \battler
 	.endm
 
-	.macro doublebattle_2E battler:req
+	.macro teamattack_movefwd battler:req
 	.byte 0x2e
 	.byte \battler
 	.endm
