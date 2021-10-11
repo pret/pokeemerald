@@ -8215,22 +8215,22 @@ BattleScript_HangedOnMsgRet:
 	return
 
 BattleScript_BerryConfuseHealEnd2::
-	jumpifability BS_ATTACKER, ABILITY_RIPEN, BattleScript_BerryConfuseHealEnd2_AbilityPopup
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_BerryConfuseHealEnd2_AbilityPopup
 	goto BattleScript_BerryConfuseHealEnd2_Anim
 BattleScript_BerryConfuseHealEnd2_AbilityPopup:
 	call BattleScript_AbilityPopUp
 BattleScript_BerryConfuseHealEnd2_Anim:
-	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
-	healthbarupdate BS_ATTACKER
-	datahpupdate BS_ATTACKER
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
 	printstring STRINGID_FORXCOMMAYZ
 	waitmessage B_WAIT_TIME_LONG
 	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	removeitem BS_ATTACKER
+	removeitem BS_SCRIPTING
 	end2
 
 BattleScript_BerryConfuseHealRet::
@@ -8247,9 +8247,9 @@ BattleScript_BerryConfuseHealRet_Anim:
 	datahpupdate BS_SCRIPTING
 	printstring STRINGID_FORXCOMMAYZ
 	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
+	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_CERTAIN
 	seteffectprimary
-	removeitem BS_SCRIPTING
+	removeitem BS_TARGET
 	return
 
 BattleScript_BerryStatRaiseEnd2::
