@@ -1828,11 +1828,7 @@
 	.macro trytoclearprimalweather
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
-
-	.macro swapabilities
-	various BS_ATTACKER, VARIOUS_SWAP_ABILITIES
-	.endm
-
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
