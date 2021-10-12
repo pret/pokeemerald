@@ -1824,6 +1824,10 @@
 	.macro trytoclearprimalweather
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
+	
+	.macro getrandommirrorarmortarget
+	various BS_TARGET, VARIOUS_GET_RANDOM_MIRROR_ARMOR_TARGET
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
