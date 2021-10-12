@@ -5078,9 +5078,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                     SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
 
                                     // Heal battler PP too (if applicable)
-                                    if (gMain.inBattle
-                                     && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                     && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[temp2]))
+                                    if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT && MOVE_IS_PERMANENT(battlerId, temp2))
                                         gBattleMons[battlerId].pp[temp2] = dataUnsigned;
 
                                     retVal = FALSE;
@@ -5106,9 +5104,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
 
                                 // Heal battler PP too (if applicable)
-                                if (gMain.inBattle
-                                 && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                 && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[moveIndex]))
+                                if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT && MOVE_IS_PERMANENT(battlerId, moveIndex))
                                     gBattleMons[battlerId].pp[moveIndex] = dataUnsigned;
 
                                 retVal = FALSE;

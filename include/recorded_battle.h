@@ -8,7 +8,7 @@ extern u8 gRecordedBattleMultiplayerId;
 #define B_RECORD_MODE_RECORDING 1
 #define B_RECORD_MODE_PLAYBACK 2
 
-void RecordedBattle_Init(u8 arg0);
+void RecordedBattle_Init(u8 mode);
 void RecordedBattle_SetTrainerInfo(void);
 void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action);
 void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear);
@@ -23,12 +23,12 @@ u8 GetRecordedBattleFronterBrainSymbol(void);
 void RecordedBattle_SaveParties(void);
 u8 GetActiveBattlerLinkPlayerGender(void);
 void RecordedBattle_ClearFrontierPassFlag(void);
-void RecordedBattle_SetFrontierPassFlagFromHword(u16 arg0);
+void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags);
 u8 RecordedBattle_GetFrontierPassFlag(void);
 u8 GetBattleSceneInRecordedBattle(void);
 u8 GetTextSpeedInRecordedBattle(void);
 void RecordedBattle_CopyBattlerMoves(void);
-void sub_818603C(u8 arg0);
+void RecordedBattle_CheckMovesetChanges(u8 mode);
 u32 GetAiScriptsInRecordedBattle(void);
 void RecordedBattle_SetPlaybackFinished(void);
 bool8 RecordedBattle_CanStopPlayback(void);

@@ -1235,8 +1235,7 @@ static void Cmd_ppreduce(void)
         else
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = 0;
 
-        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
-            && !((gDisableStructs[gBattlerAttacker].mimickedMoves) & gBitTable[gCurrMovePos]))
+        if (MOVE_IS_PERMANENT(gBattlerAttacker, gCurrMovePos))
         {
             gActiveBattler = gBattlerAttacker;
             BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + gCurrMovePos, 0, 1, &gBattleMons[gBattlerAttacker].pp[gCurrMovePos]);
@@ -5436,17 +5435,14 @@ static void Cmd_yesnoboxlearnmove(void)
                     RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
                     SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
 
-                    if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId
-                        && !(gBattleMons[0].status2 & STATUS2_TRANSFORMED)
-                        && !(gDisableStructs[0].mimickedMoves & gBitTable[movePosition]))
+                    if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
                         SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
                     }
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                         && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
-                        && !(gBattleMons[2].status2 & STATUS2_TRANSFORMED)
-                        && !(gDisableStructs[2].mimickedMoves & gBitTable[movePosition]))
+                        && MOVE_IS_PERMANENT(2, movePosition))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
                         SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
@@ -8241,6 +8237,7 @@ static void Cmd_tryspiteppreduce(void)
             gBattleMons[gBattlerTarget].pp[i] -= ppToDeduct;
             gActiveBattler = gBattlerTarget;
 
+            // if (MOVE_IS_PERMANENT(gActiveBattler, i)), but backwards
             if (!(gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[i])
                 && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
             {

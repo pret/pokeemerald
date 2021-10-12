@@ -17,6 +17,11 @@
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
 #define GET_BATTLER_SIDE2(battler)        (GET_BATTLER_POSITION(battler) & BIT_SIDE)
 
+// Used to exclude moves learned temporarily by Transform or Mimic
+#define MOVE_IS_PERMANENT(battler, moveSlot)                        \
+   (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)           \
+ && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
+
 // Battle Actions
 // These determine what each battler will do in a turn
 #define B_ACTION_USE_MOVE               0

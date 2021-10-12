@@ -4340,7 +4340,7 @@ static void HandleTurnActionSelectionState(void)
                         sub_803CDF8();
                         return;
                     default:
-                        sub_818603C(2);
+                        RecordedBattle_CheckMovesetChanges(B_RECORD_MODE_PLAYBACK);
                         if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == 0xFFFF)
                         {
                             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4508,7 +4508,7 @@ static void HandleTurnActionSelectionState(void)
     // Check if everyone chose actions.
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
-        sub_818603C(1);
+        RecordedBattle_CheckMovesetChanges(B_RECORD_MODE_RECORDING);
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)

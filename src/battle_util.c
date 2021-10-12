@@ -750,8 +750,7 @@ void PressurePPLose(u8 target, u8 attacker, u16 move)
     if (gBattleMons[attacker].pp[moveIndex] != 0)
         gBattleMons[attacker].pp[moveIndex]--;
 
-    if (!(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[moveIndex]))
+    if (MOVE_IS_PERMANENT(attacker, moveIndex))
     {
         gActiveBattler = attacker;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + moveIndex, 0, 1, &gBattleMons[gActiveBattler].pp[moveIndex]);
@@ -783,9 +782,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker)
         }
     }
 
-    if (imprisonPos != 4
-        && !(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[imprisonPos]))
+    if (imprisonPos != MAX_MON_MOVES && MOVE_IS_PERMANENT(attacker, imprisonPos))
     {
         gActiveBattler = attacker;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisonPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisonPos]);
@@ -816,9 +813,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
         }
     }
 
-    if (perishSongPos != MAX_MON_MOVES
-        && !(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[perishSongPos]))
+    if (perishSongPos != MAX_MON_MOVES && MOVE_IS_PERMANENT(attacker, perishSongPos))
     {
         gActiveBattler = attacker;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
@@ -3598,7 +3593,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 case ITEM_PP_CHANGE:
-                    if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[i]))
+                    if (MOVE_IS_PERMANENT(battlerId, i))
                         gBattleMons[battlerId].pp[i] = changedPP;
                     break;
                 }
