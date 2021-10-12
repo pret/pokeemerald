@@ -297,7 +297,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_HEALBALL,
         .paletteTag = GFX_TAG_HEALBALL,
         .oam = &sBallOamData,
@@ -333,7 +333,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_DUSKBALL,
         .paletteTag = GFX_TAG_DUSKBALL,
         .oam = &sBallOamData,
@@ -351,7 +351,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_QUICKBALL,
         .paletteTag = GFX_TAG_QUICKBALL,
         .oam = &sBallOamData,
@@ -378,7 +378,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_LEVELBALL,
         .paletteTag = GFX_TAG_LEVELBALL,
         .oam = &sBallOamData,
@@ -387,7 +387,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_LUREBALL,
         .paletteTag = GFX_TAG_LUREBALL,
         .oam = &sBallOamData,
@@ -396,7 +396,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_MOONBALL,
         .paletteTag = GFX_TAG_MOONBALL,
         .oam = &sBallOamData,
@@ -405,7 +405,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_FRIENDBALL,
         .paletteTag = GFX_TAG_FRIENDBALL,
         .oam = &sBallOamData,
@@ -414,7 +414,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_LOVEBALL,
         .paletteTag = GFX_TAG_LOVEBALL,
         .oam = &sBallOamData,
@@ -423,7 +423,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_FASTBALL,
         .paletteTag = GFX_TAG_FASTBALL,
         .oam = &sBallOamData,
@@ -432,7 +432,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_HEAVYBALL,
         .paletteTag = GFX_TAG_HEAVYBALL,
         .oam = &sBallOamData,
@@ -441,7 +441,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_DREAMBALL,
         .paletteTag = GFX_TAG_DREAMBALL,
         .oam = &sBallOamData,
@@ -459,7 +459,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_SPORTBALL,
         .paletteTag = GFX_TAG_SPORTBALL,
         .oam = &sBallOamData,
@@ -468,7 +468,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_PARKBALL,
         .paletteTag = GFX_TAG_PARKBALL,
         .oam = &sBallOamData,
@@ -477,7 +477,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_BEASTBALL,
         .paletteTag = GFX_TAG_BEASTBALL,
         .oam = &sBallOamData,
@@ -486,7 +486,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
-	{
+    {
         .tileTag = GFX_TAG_CHERISHBALL,
         .paletteTag = GFX_TAG_CHERISHBALL,
         .oam = &sBallOamData,
@@ -1449,12 +1449,10 @@ void LoadBallGfx(u8 ballId)
 
     switch (ballId)
     {
-    case BALL_DIVE:
-    case BALL_LUXURY:
-    case BALL_PREMIER:
-    case BALL_LEVEL ... POKEBALL_COUNT:
-        break;
-    default:
+    case BALL_POKE ... BALL_MASTER:
+    case BALL_NET ... BALL_NEST:
+    case BALL_REPEAT:
+    case BALL_SAFARI:
         var = GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag);
         LZDecompressVram(gOpenPokeballGfx, (void *)(OBJ_VRAM0 + 0x100 + var * 32));
         break;
