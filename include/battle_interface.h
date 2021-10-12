@@ -97,5 +97,6 @@ bool32 CanThrowLastUsedBall(void);
 void TryHideLastUsedBall(void);
 void TryRestoreLastUsedBall(void);
 void TryAddLastUsedBallItemSprites(void);
+void UpdateAbilityPopup(u8 battlerId);
 
 #endif // GUARD_BATTLE_INTERFACE_H

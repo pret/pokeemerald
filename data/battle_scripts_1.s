@@ -7676,6 +7676,32 @@ BattleScript_MummyActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_WanderingSpiritActivates::
+.if B_ABILITY_POP_UP == TRUE
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	sethword sABILITY_OVERWRITE, ABILITY_WANDERING_SPIRIT
+	showabilitypopup BS_TARGET
+	pause 60
+	sethword sABILITY_OVERWRITE, 0
+	updateabilitypopup BS_TARGET
+	pause 20
+	destroyabilitypopup
+	pause 40
+	
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	copyhword sABILITY_OVERWRITE, gLastUsedAbility
+	showabilitypopup BS_ATTACKER
+	pause 60
+	sethword sABILITY_OVERWRITE, 0
+	updateabilitypopup BS_ATTACKER
+	pause 20
+	destroyabilitypopup
+	pause 40
+.endif
+	printstring STRINGID_SWAPPEDABILITIES
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_TargetsStatWasMaxedOut::
 	call BattleScript_AbilityPopUp
 	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL

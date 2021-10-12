@@ -1580,6 +1580,10 @@
 	.macro showabilitypopup battler:req
 	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
+	
+	.macro updateabilitypopup battler:req
+	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
+	.endm
 
 	.macro defogclear battler:req, clear:req, ptr:req
 	various \battler, VARIOUS_DEFOG
@@ -1823,6 +1827,10 @@
 	
 	.macro trytoclearprimalweather
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
+	.endm
+
+	.macro swapabilities
+	various BS_ATTACKER, VARIOUS_SWAP_ABILITIES
 	.endm
 
 @ helpful macros
