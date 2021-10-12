@@ -4826,10 +4826,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     break;
                 default:
                     gLastUsedAbility = gBattleMons[gBattlerAttacker].ability;
-                    
                     gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
                     gBattleMons[gBattlerTarget].ability = gLastUsedAbility;
-                    
+                    RecordAbilityBattle(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability);
+                    RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_WanderingSpiritActivates;
                     effect++;
