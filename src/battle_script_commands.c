@@ -11520,7 +11520,7 @@ static void Cmd_jumpifattackandspecialattackcannotfall(void) // memento
         && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == MIN_STAT_STAGE
         && gBattleCommunication[MISS_TYPE] != B_MSG_PROTECTED)
     #else
-    if (gBattleCommunication[MISS_TYPE] != B_MSG_PROTECTED
+    if (gBattleCommunication[MISS_TYPE] == B_MSG_PROTECTED
       || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE
       || IsBattlerProtected(gBattlerTarget, gCurrentMove)
       || DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
