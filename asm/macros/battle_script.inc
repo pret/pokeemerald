@@ -183,7 +183,7 @@
 	.byte \battler
 	.endm
 
-	.macro atk24 ptr:req
+	.macro checkteamslost ptr:req
 	.byte 0x24
 	.4byte \ptr
 	.endm
@@ -538,7 +538,7 @@
 	.byte 0x5d
 	.endm
 
-	.macro atk5E battler:req
+	.macro updatebattlermoves battler:req
 	.byte 0x5e
 	.byte \battler
 	.endm
