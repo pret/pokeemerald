@@ -72,9 +72,9 @@
 	special CallBattleTowerFunc
 	.endm
 
-	@ Unknown. Destroys some link task if using wireless link. Wait for link?
-	.macro tower_unklink
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_13
+	@ Attempts to close link connection. Used when finishing a link multi challenge.
+	.macro tower_closelink
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_TRY_CLOSE_LINK
 	special CallBattleTowerFunc
 	.endm
 

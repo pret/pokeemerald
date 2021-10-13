@@ -22,7 +22,6 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/rgb.h"
 
 #define STARTER_MON_COUNT   3

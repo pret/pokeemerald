@@ -12,7 +12,6 @@
 #include "trainer_hill.h"
 #include "constants/easy_chat.h"
 #include "constants/trainers.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 

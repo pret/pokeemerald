@@ -443,7 +443,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis:: @ 82421F2
 	end
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis:: @ 82421FC
-	tower_unklink
+	tower_closelink
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 18, 6
 	waitstate
 	end

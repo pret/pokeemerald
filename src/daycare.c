@@ -22,7 +22,6 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
-#include "constants/species.h"
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
@@ -548,8 +547,19 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     for (i = 0; i < INHERITED_IV_COUNT; i++)
     {
         // Randomly pick an IV from the available list and stop from being chosen again.
+        // BUG: Instead of removing the IV that was just picked, this
+        // removes position 0 (HP) then position 1 (DEF), then position 2. This is why HP and DEF
+        // have a lower chance to be inherited in Emerald and why the IV picked for inheritance can
+        // be repeated. Amusingly, FRLG and RS also got this wrong. They remove selectedIvs[i], which
+        // is not an index! This means that it can sometimes remove the wrong stat.
+        #ifndef BUGFIX
         selectedIvs[i] = availableIVs[Random() % (NUM_STATS - i)];
         RemoveIVIndexFromList(availableIVs, i);
+        #else
+        u8 index = Random() % (NUM_STATS - i);
+        selectedIvs[i] = availableIVs[index];
+        RemoveIVIndexFromList(availableIVs, index);
+        #endif
     }
 
     // Determine which parent each of the selected IVs should inherit from.
@@ -615,10 +625,7 @@ static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
     for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
     {
         if (gEggMoves[eggMoveIdx + i] > EGG_MOVES_SPECIES_OFFSET)
-        {
-            // TODO: the curly braces around this if statement are required for a matching build.
             break;
-        }
 
         eggMoves[i] = gEggMoves[eggMoveIdx + i];
         numEggMoves++;
@@ -1186,7 +1193,7 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     printer.y = y;
     printer.currentX = x;
     printer.currentY = y;
-    printer.style = 0;
+    printer.unk = 0;
     gTextFlags.useAlternateDownArrow = 0;
     printer.letterSpacing = 0;
     printer.lineSpacing = 1;

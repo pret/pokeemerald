@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "dma3.h"
 #include "pokeblock.h"
 #include "malloc.h"
 #include "decompress.h"
@@ -486,7 +487,7 @@ static void LoadUsePokeblockMenu(void)
     {
     case 0:
         sMenu->curMonSpriteId = 0xFF;
-        sub_81D1ED4(&sMenu->graph);
+        InitConditionGraphData(&sMenu->graph);
         sInfo->mainState++;
         break;
     case 1:
@@ -536,12 +537,12 @@ static void LoadUsePokeblockMenu(void)
         sInfo->mainState++;
         break;
     case 11:
-        sub_81D2754(sMenu->graph.unk0[0], sMenu->graph.unk14[0]);
-        sub_81D20AC(&sMenu->graph);
+        sub_81D2754(sMenu->graph.stat[0], sMenu->graph.unk14[0]);
+        InitConditionGraphState(&sMenu->graph);
         sInfo->mainState++;
         break;
     case 12:
-        if (!sub_81D20BC(&sMenu->graph))
+        if (!SetupConditionGraphScanlineParams(&sMenu->graph))
         {
             sub_81D1F84(&sMenu->graph, sMenu->graph.unk14[0], sMenu->graph.unk14[0]);
             sInfo->mainState++;
@@ -1240,8 +1241,7 @@ static void UpdateMonPic(u8 loadId)
     }
     else
     {
-        do {} while(0); // Only needed to match, feel free to remove.
-        DmaCopy16Defvars(3, sMenu->partySheets[loadId], sMenu->curMonTileStart, 0x800);
+        Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, 0x800);
         LoadPalette(sMenu->partyPalettes[loadId], sMenu->curMonPalette, 32);
     }
 }
@@ -1368,7 +1368,7 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         LoadBgTilemap(2, sMenu->tilemapBuffer, 1280, 0);
         LoadPalette(gConditionGraphData_Pal, 48, 32);
         LoadPalette(gConditionText_Pal, 240, 32);
-        sub_81D21DC(2);
+        SetConditionGraphIOWindows(2);
         break;
     default:
         sMenu->info.helperState = 0;

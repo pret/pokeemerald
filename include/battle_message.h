@@ -145,7 +145,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_STRING;                                 \
-    textVar[2] = (stringId & 0xFF);                             \
+    textVar[2] = stringId;                                      \
     textVar[3] = (stringId & 0xFF00) >> 8;                      \
     textVar[4] = B_BUFF_EOS;                                    \
 }

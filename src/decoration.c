@@ -917,9 +917,9 @@ static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, s32 itemIndex,
     if (itemIndex != -2)
     {
         if (IsDecorationIndexInSecretBase(itemIndex + 1) == TRUE)
-            blit_move_info_icon(windowId, 0x18, 0x5c, y + 2);
+            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_RED, 92, y + 2);
         else if (IsDecorationIndexInPlayersRoom(itemIndex + 1) == TRUE)
-            blit_move_info_icon(windowId, 0x19, 0x5c, y + 2);
+            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_BLUE, 92, y + 2);
     }
 }
 
@@ -1827,7 +1827,7 @@ static void Task_SelectLocation(u8 taskId)
             sPlacePutAwayYesNoFunctions[tDecorationItemsMenuCommand].yesFunc(taskId);
             return;
         }
-        
+
         if (tButton == B_BUTTON)
         {
             sPlacePutAwayYesNoFunctions[tDecorationItemsMenuCommand].noFunc(taskId);

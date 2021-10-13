@@ -3,7 +3,6 @@
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 #include "decompress.h"
 #include "event_data.h"

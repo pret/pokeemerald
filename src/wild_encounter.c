@@ -21,7 +21,6 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
-#include "constants/species.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];

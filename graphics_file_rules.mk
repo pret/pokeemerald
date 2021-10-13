@@ -709,7 +709,7 @@ $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
 $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
-$(PKNAVGFXDIR)/outline.4bpp: %.4bpp: %.png
+$(PKNAVGFXDIR)/device_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 	
 $(PKNAVGFXDIR)/ui_matchcall.4bpp: %.4bpp: %.png

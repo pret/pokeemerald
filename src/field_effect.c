@@ -2597,7 +2597,7 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
 {
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
-    StoreWordInTwoHalfwords((u16 *)&task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords(&task->data[13], (u32)gMain.vblankCallback);
     task->tWinHoriz = WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
     task->tWinVert = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     task->tWinIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
@@ -3846,7 +3846,6 @@ bool8 FldEff_MoveDeoxysRock(struct Sprite* sprite)
 
 static void Task_MoveDeoxysRock(u8 taskId)
 {
-    // BUG: Possible divide by zero
     s16 *data = gTasks[taskId].data;
     struct Sprite *sprite = &gSprites[data[1]];
     switch (data[0])
@@ -3854,8 +3853,16 @@ static void Task_MoveDeoxysRock(u8 taskId)
         case 0:
             data[4] = sprite->pos1.x << 4;
             data[5] = sprite->pos1.y << 4;
-            data[6] = (data[2] * 16 - data[4]) / data[8];
-            data[7] = (data[3] * 16 - data[5]) / data[8];
+
+            // UB: Possible divide by zero
+            #ifdef UBFIX
+            #define DIVISOR (data[8] ? data[8] : 1);
+            #else
+            #define DIVISOR (data[8])
+            #endif
+
+            data[6] = (data[2] * 16 - data[4]) / DIVISOR;
+            data[7] = (data[3] * 16 - data[5]) / DIVISOR;
             data[0]++;
         case 1:
             if (data[8] != 0)

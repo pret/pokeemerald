@@ -3,7 +3,6 @@
 #include "constants/items.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
-#include "constants/species.h"
 #include "text.h"
 #include "international_string_util.h"
 

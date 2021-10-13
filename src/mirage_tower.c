@@ -168,7 +168,7 @@ const struct PulseBlendSettings gMirageTowerPulseBlendSettings = {
     .numColors = 15,
     .delay = 5,
     .numFadeCycles = -1,
-    .maxBlendCoeff = -5,
+    .maxBlendCoeff = 11,
     .fadeType = 1,
     .restorePaletteOnUnload = FALSE,
     .unk7_7 = 1,
@@ -412,9 +412,10 @@ void DoMirageTowerCeilingCrumble(void)
 
 static void WaitCeilingCrumble(u8 taskId)
 {
-    u16 *data = (u16 *)gTasks[taskId].data;
+    u16 *data = gTasks[taskId].data;
+    data[1]++;
     // Either wait 1000 frames, or until all 16 crumble sprites and the one screen-shake task are completed.
-    if (++data[1] == 1000 || data[0] == 17)
+    if (data[1] == 1000 || data[0] == 17)
         gTasks[taskId].func = FinishCeilingCrumbleTask;
 }
 
@@ -690,7 +691,7 @@ static void DoFossilFallAndSink(u8 taskId)
         if (gSprites[sUnknown_0203CF0C->spriteId].callback != SpriteCallbackDummy)
             return;
         DestroySprite(&gSprites[sUnknown_0203CF0C->spriteId]);
-        FREE_AND_SET_NULL(sUnknown_0203CF0C->unkC);
+        FREE_AND_SET_NULL(sUnknown_0203CF0C->unkC);;
         FREE_AND_SET_NULL(sUnknown_0203CF0C->frameImage);
         FREE_AND_SET_NULL(sUnknown_0203CF0C->frameImageTiles);
         FREE_AND_SET_NULL(sUnknown_0203CF0C);
@@ -725,8 +726,8 @@ static void sub_81BF248(struct Sprite *sprite)
 
 static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
 {
+    u8 r5, r4, r0, r2;
     u16 var, var2;
-    u8 r0, r5, r4, r2;
     u8 r2_1, r4_1;
     u8 b2, c2;
 
@@ -738,25 +739,23 @@ static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
 
     r4_1 = r4 & 7;
     r2_1 = r2 & 7;
-
-    gUnknown_030012A8[2] = r4 & 7; //should be r4_1 but that doesn't match
-    gUnknown_030012A8[3] = r2 & 7; //should be r2_1 but that doesn't match
-
+    gUnknown_030012A8[2] = r4 & 7; //should be using r4_1, but that doesn't match
+    gUnknown_030012A8[3] = r2 & 7; //"
+    
     r0 = r2 / 8;
     r5 = r4 / 8;
-
-    gUnknown_030012A8[4] = r2 / 8; //should just be r0, but that doesn't match
-    gUnknown_030012A8[5] = r4 / 8; //should be just r5 but that doesn't match
+    
+    gUnknown_030012A8[4] = r2 / 8; //should be using r0, but that doesn't match
+    gUnknown_030012A8[5] = r4 / 8; //should be using r5, but that doesn't match
 
     var = (d / 8) * (r5 * 64) + (r0 * 64);
-
     gUnknown_030012A8[6] = var;
-
+    
     var2 = var + ((r4_1 * 8) + r2_1);
     var2 /= 2;
-    gUnknown_030012A8[7] = var + ((r4_1 * 8) + r2_1); // should be var2 with var2 being divided by 2 AFTER this assignment, but that doesn't match.
-
+    gUnknown_030012A8[7] = var + ((r4_1 * 8) + r2_1); //should be using var2 with var2 being divided afterwards, but that doesn't match
+    
     b2 = ((b % 2) ^ 1);
-    c2 = (c << (b2 << 2)) | (15 << (((b2 ^ 1) << 2)));
+    c2 = (c << (b2 << 2)) | 15 << (((b2 ^ 1) << 2));
     a[var2 + (e * 32)] &= c2;
 }

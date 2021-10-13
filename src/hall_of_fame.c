@@ -18,7 +18,6 @@
 #include "window.h"
 #include "credits.h"
 #include "bg.h"
-#include "constants/species.h"
 #include "constants/game_stat.h"
 #include "util.h"
 #include "string_util.h"

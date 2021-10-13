@@ -219,11 +219,10 @@ void BufferTrendyPhraseString(void)
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
-
 void TrendyPhraseIsOld(void)
 {
-    u8 result = 0;
-
+    u16 result = 0;
+    
     do
     {
         if (gSaveBlock1Ptr->easyChatPairs[0].unk0_0 - gSaveBlock1Ptr->easyChatPairs[1].unk0_0 > 1)
@@ -234,7 +233,7 @@ void TrendyPhraseIsOld(void)
             break;
         result = 1;
     } while (0);
-
+    
     gSpecialVar_Result = result;
 }
 
@@ -249,46 +248,46 @@ static bool8 sub_8122A58(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
     {
     case 0:
         if (a->unk0_0 > b->unk0_0)
-            return TRUE;
+            return 1;
         if (a->unk0_0 < b->unk0_0)
-            return FALSE;
+            return 0;
         if (a->unk0_7 > b->unk0_7)
-            return TRUE;
+            return 1;
         if (a->unk0_7 < b->unk0_7)
-            return FALSE;
+            return 0;
         break;
     case 1:
         if (a->unk0_7 > b->unk0_7)
-            return TRUE;
+            return 1;
         if (a->unk0_7 < b->unk0_7)
-            return FALSE;
+            return 0;
         if (a->unk0_0 > b->unk0_0)
-            return TRUE;
+            return 1;
         if (a->unk0_0 < b->unk0_0)
-            return FALSE;
+            return 0;
         break;
     case 2:
         if (a->unk0_0 > b->unk0_0)
-            return TRUE;
+            return 1;
         if (a->unk0_0 < b->unk0_0)
-            return FALSE;
+            return 0;
         if (a->unk0_7 > b->unk0_7)
-            return TRUE;
+            return 1;
         if (a->unk0_7 < b->unk0_7)
-            return FALSE;
+            return 0;
         if (a->unk2 > b->unk2)
-            return TRUE;
+            return 1;
         if (a->unk2 < b->unk2)
-            return FALSE;
+            return 0;
         if (a->words[0] > b->words[0])
-            return TRUE;
+            return 1;
         if (a->words[0] < b->words[0])
-            return FALSE;
+            return 0;
         if (a->words[1] > b->words[1])
-            return TRUE;
+            return 1;
         if (a->words[1] < b->words[1])
-            return FALSE;
-        return TRUE;
+            return 0;
+        return 1;
     }
     return Random() & 1;
 }

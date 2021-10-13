@@ -2121,7 +2121,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
 
 static bool8 TryAllocDisplay(void)
 {
-    sDisplay = Alloc(sizeof(struct UnionRoomChatDisplay));
+    sDisplay = Alloc(sizeof(*sDisplay));
     if (sDisplay && TryAllocSprites())
     {
         ResetBgsAndClearDma3BusyFlags(0);

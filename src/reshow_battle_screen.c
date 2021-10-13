@@ -11,7 +11,6 @@
 #include "battle_controllers.h"
 #include "link.h"
 #include "sprite.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 #include "battle_interface.h"
 #include "battle_anim.h"

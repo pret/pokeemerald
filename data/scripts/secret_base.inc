@@ -308,7 +308,7 @@ SecretBase_EventScript_PutAwayDecorationLoop:: @ 8275D39
 	compare VAR_0x8005, 0
 	goto_if_eq SecretBase_EventScript_PutAwayDecorationLoop
 	removeobject VAR_0x8006
-	setflag VAR_0x8005  @ UB: GF likely meant setvar here; setflag 0x8005 is out of bounds
+	setflag VAR_0x8005  @ UB: VAR_0x8005 is set to a flag by PutAwayDecorationIteration, but ScrCmd_setflag doesn't use VarGet
 	goto SecretBase_EventScript_PutAwayDecorationLoop
 	end
 

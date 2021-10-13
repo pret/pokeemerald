@@ -35,7 +35,6 @@
 #include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 
 extern const struct MapLayout *const gMapLayouts[];
@@ -521,19 +520,6 @@ static const u8 sTrainerTextGroups[50][2] =
     {FACILITY_CLASS_LASS, 3},
     {FACILITY_CLASS_BUG_CATCHER, 0},
     {FACILITY_CLASS_HIKER, 4},
-};
-
-enum
-{
-    HINT_EXIT_DIRECTION,
-    HINT_REMAINING_ITEMS,
-    HINT_REMAINING_TRAINERS,
-    HINT_EXIT_SHORT_REMAINING_TRAINERS,
-    HINT_EXIT_SHORT_REMAINING_ITEMS,
-    HINT_EXIT_MEDIUM_REMAINING_TRAINERS,
-    HINT_EXIT_MEDIUM_REMAINING_ITEMS,
-    HINT_EXIT_FAR_REMAINING_TRAINERS,
-    HINT_EXIT_FAR_REMAINING_ITEMS,
 };
 
 static const u8 *const sExitDirectionHintTexts1[] =
@@ -1771,7 +1757,9 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
 
         r7 &= 1;
     }
-    // free(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
+    #ifdef BUGFIX
+    free(floorLayoutOffsets);
+    #endif
 
     return (numObjects / 2) > numPlacedObjects;
 }
@@ -1823,7 +1811,9 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
         if (r8 == 4)
             break;
     }
-    // free(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
+    #ifdef BUGFIX
+    free(floorLayoutOffsets);
+    #endif
 
     return (numObjects / 2) > numPlacedObjects;
 }

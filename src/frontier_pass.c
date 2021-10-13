@@ -983,6 +983,9 @@ static void Task_HandleFrontierPassInput(u8 taskId)
                 SetMainCallback2(CB2_HideFrontierPass);
                 DestroyTask(taskId);
                 // BUG. The function should return here. Otherwise, it can play the same sound twice and destroy the same task twice.
+                #ifdef BUGFIX
+                return;
+                #endif
             }
         }
 
@@ -1195,7 +1198,7 @@ static void sub_80C6104(u8 cursorArea, u8 previousCursorArea)
             return;
         break;
     }
-
+    
     switch (cursorArea)
     {
     case CURSOR_AREA_MAP:
@@ -1209,7 +1212,7 @@ static void sub_80C6104(u8 cursorArea, u8 previousCursorArea)
             CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk28 + 72, 2, 10, 12, 3, 17);
         else
             return;
-        break; // needed
+        break; //needed to match
     case CURSOR_AREA_CANCEL:
         CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DE3374, 21, 0, 9, 2, 17);
         break;

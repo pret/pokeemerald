@@ -296,7 +296,7 @@ u8 HandleWriteSectorNBytes(u8 sectorNum, u8 *data, u16 size)
 
 u8 TryWriteSector(u8 sectorNum, u8 *data)
 {
-    if (ProgramFlashSectorAndVerify(sectorNum, data)) // is damaged?
+    if (ProgramFlashSectorAndVerify(sectorNum, data) != 0) // is damaged?
     {
         SetSectorDamagedStatus(SECTOR_DAMAGED, sectorNum); // set damaged sector bits.
         return SAVE_STATUS_ERROR;

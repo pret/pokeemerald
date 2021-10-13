@@ -5014,4 +5014,10 @@ extern const u16 gPokenavMessageBox_Pal[];
 extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
 
+// Object event pals
+extern const u16 gObjectEventPal_Brendan[];
+extern const u16 gObjectEventPal_May[];
+extern const u16 gObjectEventPal_RubySapphireBrendan[];
+extern const u16 gObjectEventPal_RubySapphireMay[];
+
 #endif //GUARD_GRAPHICS_H

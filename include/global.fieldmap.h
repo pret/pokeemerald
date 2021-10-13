@@ -195,15 +195,10 @@ struct ObjectEvent
     /*0x0C*/ struct Coords16 initialCoords;
     /*0x10*/ struct Coords16 currentCoords;
     /*0x14*/ struct Coords16 previousCoords;
-    /*0x18*/ u8 facingDirection:4;  // current direction?
-    /*0x18*/ u8 movementDirection:4;
-    /*0x19*/ union __attribute__((packed)) {
-        u8 as_byte;
-        struct __attribute__((packed)) {
-            u8 x:4;
-            u8 y:4;
-        } ALIGNED(1) as_nybbles;
-    } ALIGNED(1) range;
+    /*0x18*/ u16 facingDirection:4; // current direction?
+             u16 movementDirection:4;
+             u16 rangeX:4;
+             u16 rangeY:4;
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
     /*0x1C*/ u8 movementActionId;
@@ -219,8 +214,8 @@ struct ObjectEvent
 struct ObjectEventGraphicsInfo
 {
     /*0x00*/ u16 tileTag;
-    /*0x02*/ u16 paletteTag1;
-    /*0x04*/ u16 paletteTag2;
+    /*0x02*/ u16 paletteTag;
+    /*0x04*/ u16 reflectionPaletteTag;
     /*0x06*/ u16 size;
     /*0x08*/ s16 width;
     /*0x0A*/ s16 height;

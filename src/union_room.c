@@ -52,7 +52,6 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 // States for Task_RunUnionRoom
 enum {
@@ -479,7 +478,11 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         // BUG: sPlayerActivityGroupSize was meant below, not gPlayerCurrActivity
         //      This will be false for all but ACTIVITY_BATTLE_DOUBLE and ACTIVITY_DECLINE
         //      All this changes is which of two texts gets printed
+        #ifdef BUGFIX
+        id = (GROUP_MAX(sPlayerActivityGroupSize) == 2) ? 0 : 1;
+        #else
         id = (GROUP_MAX(gPlayerCurrActivity) == 2) ? 1 : 0;
+        #endif
         if (PrintOnTextbox(&data->textState, sPlayerUnavailableTexts[id]))
         {
             data->playerCount = sub_8013398(data->field_0);
@@ -1321,7 +1324,11 @@ static bool32 IsPartnerActivityAcceptable(u32 activity, u32 linkGroup)
     if (linkGroup == 0xFF)
         return TRUE;
 
-    if (linkGroup <= ARRAY_COUNT(sAcceptedActivityIds)) // UB: <= may access data outside the array
+    #ifdef UBFIX
+    if (linkGroup < ARRAY_COUNT(sAcceptedActivityIds))
+    #else
+    if (linkGroup <= ARRAY_COUNT(sAcceptedActivityIds))
+    #endif
     {
         const u8 *bytes = sAcceptedActivityIds[linkGroup];
 
@@ -3754,7 +3761,7 @@ static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str
     printerTemplate.y = y;
     printerTemplate.currentX = x;
     printerTemplate.currentY = y;
-    printerTemplate.style = 0;
+    printerTemplate.unk = 0;
 
     gTextFlags.useAlternateDownArrow = FALSE;
     switch (colorIdx)
@@ -4077,14 +4084,14 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct GFtgtGname * gname
     UR_AddTextPrinterParameterized(windowId, 1, uname, 8, y, colorIdx);
     if (species == SPECIES_EGG)
     {
-        UR_AddTextPrinterParameterized(windowId, 1, sText_EggTrade, 0x44, y, colorIdx);
+        UR_AddTextPrinterParameterized(windowId, 1, sText_EggTrade, 68, y, colorIdx);
     }
     else
     {
-        blit_move_info_icon(windowId, type + 1, 0x44, y);
-        UR_AddTextPrinterParameterized(windowId, 1, gSpeciesNames[species], 0x76, y, colorIdx);
+        BlitMenuInfoIcon(windowId, type + 1, 68, y);
+        UR_AddTextPrinterParameterized(windowId, 1, gSpeciesNames[species], 118, y, colorIdx);
         ConvertIntToDecimalStringN(levelStr, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        UR_AddTextPrinterParameterized(windowId, 1, levelStr, 0xC6, y, colorIdx);
+        UR_AddTextPrinterParameterized(windowId, 1, levelStr, 198, y, colorIdx);
     }
 }
 

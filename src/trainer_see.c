@@ -377,15 +377,15 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 ap
     }
 
     // preserve mapobj_unk_19 before clearing.
-    unk19_temp = trainerObj->range.as_nybbles.x;
-    unk19b_temp = trainerObj->range.as_nybbles.y;
-    trainerObj->range.as_nybbles.x = 0;
-    trainerObj->range.as_nybbles.y = 0;
+    unk19_temp = trainerObj->rangeX;
+    unk19b_temp = trainerObj->rangeY;
+    trainerObj->rangeX = 0;
+    trainerObj->rangeY = 0;
 
     collision = GetCollisionAtCoords(trainerObj, x, y, direction);
 
-    trainerObj->range.as_nybbles.x = unk19_temp;
-    trainerObj->range.as_nybbles.y = unk19b_temp;
+    trainerObj->rangeX = unk19_temp;
+    trainerObj->rangeY = unk19b_temp;
     if (collision == 4)
         return approachDistance;
 
@@ -603,7 +603,7 @@ static void sub_80B44C8(u8 taskId)
     struct ObjectEvent *objEvent;
 
     // another objEvent loaded into by loadword?
-    LoadWordFromTwoHalfwords((u16*)&task->data[1], (u32 *)&objEvent);
+    LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&objEvent);
     if (!task->data[7])
     {
         ObjectEventClearHeldMovement(objEvent);
@@ -624,7 +624,7 @@ static void sub_80B44C8(u8 taskId)
 
 void sub_80B4578(struct ObjectEvent *var)
 {
-    StoreWordInTwoHalfwords((u16 *)&gTasks[CreateTask(sub_80B44C8, 0)].data[1], (u32)var);
+    StoreWordInTwoHalfwords(&gTasks[CreateTask(sub_80B44C8, 0)].data[1], (u32)var);
 }
 
 void EndTrainerApproach(void)

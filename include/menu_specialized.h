@@ -23,7 +23,7 @@ struct UnknownSubStruct_81D1ED4
 
 struct ConditionGraph
 {
-    /*0x000*/ u8 unk0[4][FLAVOR_COUNT];
+    /*0x000*/ u8 stat[4][FLAVOR_COUNT];
     /*0x014*/ struct UnknownSubStruct_81D1ED4 unk14[4][FLAVOR_COUNT];
     /*0x064*/ struct UnknownSubStruct_81D1ED4 unk64[10][FLAVOR_COUNT];
     /*0x12C*/ struct UnknownSubStruct_81D1ED4 unk12C[FLAVOR_COUNT];
@@ -32,7 +32,7 @@ struct ConditionGraph
     /*0x350*/ u16 unk350;
     /*0x352*/ u16 unk352;
     /*0x354*/ u8 unk354;
-    /*0x355*/ u8 unk355;
+    /*0x355*/ u8 state;
 };
 
 bool8 sub_81D1C44(u8 count);
@@ -41,12 +41,12 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page);
 void sub_81D1E90(struct PlayerPCItemPageStruct *page);
 void sub_81D1EC0(void);
 void sub_81D1D04(u8 a0);
-void sub_81D1ED4(struct ConditionGraph *graph);
+void InitConditionGraphData(struct ConditionGraph *graph);
 void sub_81D2108(struct ConditionGraph *graph);
-void sub_81D21DC(u8 bg);
-void sub_81D20AC(struct ConditionGraph *graph);
+void SetConditionGraphIOWindows(u8 bg);
+void InitConditionGraphState(struct ConditionGraph *graph);
 void sub_81D2230(struct ConditionGraph *graph);
-bool8 sub_81D20BC(struct ConditionGraph *graph);
+bool8 SetupConditionGraphScanlineParams(struct ConditionGraph *graph);
 bool32 TransitionConditionGraph(struct ConditionGraph *graph);
 void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2);

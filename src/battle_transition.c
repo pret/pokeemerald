@@ -1956,10 +1956,7 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
     for (i = 0; i < 160; i++, r4 += r8)
     {
         s16 var = r4 >> 8;
-
-        var++;
-        var--;
-        gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
+        gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var & 0xffff, r3);
     }
 
     if (++task->tData3 == 81)
@@ -3973,7 +3970,7 @@ static bool8 Phase2_FrontierLogoWave_Func4(struct Task *task)
 
     for (i = 0; i < 160; i++, var6 += var8)
     {
-        const u16 index = var6 >> 8;
+        s16 index = var6 / 256;
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(index & 0xff, amplitude);
     }
 

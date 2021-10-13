@@ -380,18 +380,21 @@ static void AnimTask_AnimateGustTornadoPalette_Step(u8 taskId)
 {
     u8 data2;
     u16 temp;
+    int i, base;
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[1])
     {
-        int i, base;
         gTasks[taskId].data[10] = 0;
         data2 = gTasks[taskId].data[2];
         temp = gPlttBufferFaded[16 * data2 + 0x108];
         i = 7;
         base = data2 * 16;
 
-        for (; i > 0; --i)
+        do
+        {
             gPlttBufferFaded[base + 0x101 + i] = gPlttBufferFaded[base + 0x100 + i];
+            i--;
+        } while (i > 0);
 
         gPlttBufferFaded[base + 0x101] = temp;
     }
@@ -533,16 +536,17 @@ static void AnimFlyBallAttack_Step(struct Sprite *sprite)
 
 void DestroyAnimSpriteAfterTimer(struct Sprite *sprite)
 {
-    if (sprite->data[0]-- > 0)
-        return;
-    if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
+    if (sprite->data[0]-- <= 0)
     {
-        FreeOamMatrix(sprite->oam.matrixNum);
-        sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-    }
+        if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
+        {
+            FreeOamMatrix(sprite->oam.matrixNum);
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+        }
 
-    DestroySprite(sprite);
-    gAnimVisualTaskCount--;
+        DestroySprite(sprite);
+        gAnimVisualTaskCount--;
+    }
 }
 
 struct FeatherDanceData
@@ -563,41 +567,35 @@ struct FeatherDanceData
     u16 unkE_1:15;
 };
 
-#define ANIM_SWITCH(sprite)                  \
-    {                                        \
-        (sprite)->hFlip ^= 1;                \
-        (sprite)->animNum = (sprite)->hFlip; \
-        (sprite)->animBeginning = TRUE;      \
-        (sprite)->animEnded = FALSE;         \
-    }
-
 static void AnimFallingFeather(struct Sprite *sprite)
 {
-    u8 battler, sinIndex;
-    u32 matrixNum;
-    s16 sinVal;
+    u8 battler, matrixNum, sinIndex;
+    s16 spriteCoord;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
-    battler = (gBattleAnimArgs[7] & 0x100) ? gBattleAnimAttacker : gBattleAnimTarget;
+    if (gBattleAnimArgs[7] & 0x100)
+        battler = gBattleAnimAttacker;
+    else
+        battler = gBattleAnimTarget;
 
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
     sprite->pos1.x = GetBattlerSpriteCoord(battler, BATTLER_COORD_ATTR_HEIGHT) + gBattleAnimArgs[0];
-    sinVal = GetBattlerSpriteCoord(battler, BATTLER_COORD_ATTR_WIDTH);
-    sprite->pos1.y = sinVal + gBattleAnimArgs[1];
+    spriteCoord = GetBattlerSpriteCoord(battler, BATTLER_COORD_ATTR_WIDTH);
+    sprite->pos1.y = spriteCoord + gBattleAnimArgs[1];
 
-    data->unk8 = (u16)(sprite->pos1.y) << 8;
-    data->unkE_1 = (u16)(sinVal + gBattleAnimArgs[6]);
+    data->unk8 = sprite->pos1.y << 8;
+    data->unkE_1 = spriteCoord + gBattleAnimArgs[6];
     data->unk0_0c = 1;
-    data->unk2 = (u16)(gBattleAnimArgs[2] & 0xFF);
-    data->unkA = (u16)gBattleAnimArgs[2] >> 8;
+    data->unk2 = gBattleAnimArgs[2] & 0xFF;
+    data->unkA = (gBattleAnimArgs[2] >> 8) & 0xFF;
     data->unk4 = gBattleAnimArgs[3];
-    data->unk6 = (u16)gBattleAnimArgs[4];
-    *(u16 *)(data->unkC) = (u16)gBattleAnimArgs[5];
+    data->unk6 = gBattleAnimArgs[4];
+    *(u16*)(data->unkC) = gBattleAnimArgs[5];
 
-    if (data->unk2 >= 64 && data->unk2 < 192)
+    if (data->unk2 >= 64 && data->unk2 <= 191)
     {
         if (!IsContest())
             sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
@@ -608,7 +606,11 @@ static void AnimFallingFeather(struct Sprite *sprite)
 
         if (!(data->unk4 & 0x8000))
         {
-            ANIM_SWITCH(sprite);
+            sprite->hFlip ^= 1;
+            sprite->animNum = sprite->hFlip;
+
+            sprite->animBeginning = 1;
+            sprite->animEnded = 0;
         }
     }
     else
@@ -618,28 +620,31 @@ static void AnimFallingFeather(struct Sprite *sprite)
 
         if (data->unk4 & 0x8000)
         {
-            ANIM_SWITCH(sprite);
+            sprite->hFlip ^= 1;
+            sprite->animNum = sprite->hFlip;
+
+            sprite->animBeginning = 1;
+            sprite->animEnded = 0;
         }
     }
 
-    data->unk0_1 = data->unk2 / 64;
-    sprite->pos2.x = (gSineTable[data->unk2] * (s32)data->unkC[0]) >> 8;
+    data->unk0_1 = data->unk2 >> 6;
+    sprite->pos2.x = (gSineTable[data->unk2] * data->unkC[0]) >> 8;
     matrixNum = sprite->oam.matrixNum;
 
     sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
-    sinVal = gSineTable[sinIndex];
+    spriteCoord = gSineTable[sinIndex];
 
     gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
-    gOamMatrices[matrixNum].b = sinVal;
-    gOamMatrices[matrixNum].c = -sinVal;
+    gOamMatrices[matrixNum].b = spriteCoord;
+    gOamMatrices[matrixNum].c = -spriteCoord;
 
     sprite->callback = sub_810E520;
 }
 
 static void sub_810E520(struct Sprite *sprite)
 {
-    u8 sinIndex;
-    u32 matrixNum;
+    u8 matrixNum, sinIndex;
     s16 sinVal = 0;
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
     if (data->unk0_0a)
@@ -649,226 +654,240 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_0a = 0;
             data->unk1 = 0;
         }
-        return;
     }
-
-    switch (data->unk2 / 64)
-    {
-    case 0:
-        if ((u8)data->unk0_1 == 1) // this must be cast to u8
-        {
-            data->unk0_0d = 1;
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if ((u8)data->unk0_1 == 3)
-        {
-            data->unk0_0b ^= 1;
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if (data->unk0_0d)
-        {
-            ANIM_SWITCH(sprite);
-            if (data->unk0_0c)
-            {
-                if (!IsContest())
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->oam.priority--;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->oam.priority++;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-                else
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->subpriority -= 12;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->subpriority += 12;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-            }
-            data->unk0_0d = 0;
-        }
-        data->unk0_1 = 0;
-        break;
-    case 1:
-        if ((u8)data->unk0_1 == 0)
-        {
-            data->unk0_0d = 1;
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if ((u8)data->unk0_1 == 2)
-        {
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if (data->unk0_0d)
-        {
-            ANIM_SWITCH(sprite);
-            if (data->unk0_0c)
-            {
-                if (!IsContest())
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->oam.priority--;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->oam.priority++;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-                else
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->subpriority -= 12;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->subpriority += 12;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-            }
-            data->unk0_0d = 0;
-        }
-        data->unk0_1 = 1;
-        break;
-    case 2:
-        if ((u8)data->unk0_1 == 3)
-        {
-            data->unk0_0d = 1;
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if ((u8)data->unk0_1 == 1)
-        {
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if (data->unk0_0d)
-        {
-            ANIM_SWITCH(sprite);
-            if (data->unk0_0c)
-            {
-                if (!IsContest())
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->oam.priority--;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->oam.priority++;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-                else
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->subpriority -= 12;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->subpriority += 12;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-            }
-            data->unk0_0d = 0;
-        }
-        data->unk0_1 = 2;
-        break;
-    case 3:
-        if ((u8)data->unk0_1 == 2)
-        {
-            data->unk0_0d = 1;
-        }
-        else if ((u8)data->unk0_1 == 0)
-        {
-            data->unk0_0b ^= 1;
-            data->unk0_0a = 1;
-            data->unk1 = 0;
-        }
-        else if (data->unk0_0d)
-        {
-            ANIM_SWITCH(sprite);
-            if (data->unk0_0c)
-            {
-                if (!IsContest())
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->oam.priority--;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->oam.priority++;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-                else
-                {
-                    if (!data->unkE_0)
-                    {
-                        sprite->subpriority -= 12;
-                        data->unkE_0 ^= 1;
-                    }
-                    else
-                    {
-                        sprite->subpriority += 12;
-                        data->unkE_0 ^= 1;
-                    }
-                }
-            }
-            data->unk0_0d = 0;
-        }
-        data->unk0_1 = 3;
-        break;
-    }
-
-    sprite->pos2.x = ((s32)(data->unkC[data->unk0_0b]) * gSineTable[data->unk2]) >> 8;
-    matrixNum = sprite->oam.matrixNum;
-
-    sinIndex = ((-sprite->pos2.x >> 1) + data->unkA);
-    sinVal = gSineTable[sinIndex];
-
-    gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
-    gOamMatrices[matrixNum].b = sinVal;
-    gOamMatrices[matrixNum].c = -sinVal;
-
-    data->unk8 += data->unk6;
-    sprite->pos1.y = (s16)(data->unk8 >> 8);
-    if (data->unk4 & 0x8000)
-        data->unk2 = (data->unk2 - (data->unk4 & 0x7FFF)) & 0xFF;
     else
-        data->unk2 = (data->unk2 + (data->unk4 & 0x7FFF)) & 0xFF;
-
-    if (sprite->pos1.y + sprite->pos2.y >= data->unkE_1)
     {
-        sprite->data[0] = 0;
-        sprite->callback = DestroyAnimSpriteAfterTimer;
+        switch (data->unk2 / 64)
+        {
+        case 0: 
+            if ((u8)data->unk0_1 == 1) //casts to u8 here are necessary for matching
+            {
+                data->unk0_0d = 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if ((u8)data->unk0_1 == 3)
+            {
+                data->unk0_0b ^= 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                }
+                data->unk0_0d = 0;
+                data->unk2;
+            }
+            data->unk0_1 = 0;
+            break;
+        case 1:
+            if ((u8)data->unk0_1 == 0)
+            {
+                data->unk0_0d = 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if ((u8)data->unk0_1 == 2)
+            {
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 1;
+            break;
+        case 2:
+            if ((u8)data->unk0_1 == 3)
+            {
+                data->unk0_0d = 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if ((u8)data->unk0_1 == 1)
+            {
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 2;
+            break;
+        case 3:
+            if ((u8)data->unk0_1 == 2)
+            {
+                data->unk0_0d = 1;
+            }
+            else if ((u8)data->unk0_1 == 0)
+            {
+                data->unk0_0b ^= 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                        {
+                            sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
+                        else
+                        {
+                            sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
+                    }
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 3;
+            break;
+        }
+
+        sprite->pos2.x = ((s32)data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
+        matrixNum = sprite->oam.matrixNum;
+
+        sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
+        sinVal = gSineTable[sinIndex];
+
+        gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
+        gOamMatrices[matrixNum].b = sinVal;
+        gOamMatrices[matrixNum].c = -sinVal;
+
+        data->unk8 += data->unk6;
+        sprite->pos1.y = data->unk8 >> 8;
+        if (data->unk4 & 0x8000)
+            data->unk2 = (data->unk2 - (data->unk4 & 0x7FFF)) & 0xFF;
+        else
+            data->unk2 = (data->unk2 + (data->unk4 & 0x7FFF)) & 0xFF;
+
+        if (sprite->pos1.y + sprite->pos2.y >= data->unkE_1)
+        {
+            sprite->data[0] = 0;
+            sprite->callback = DestroyAnimSpriteAfterTimer;
+        }
     }
 }
 
@@ -912,20 +931,20 @@ static void sub_810EB40(struct Sprite *sprite)
 {
     sprite->pos2.x += sprite->data[1] >> 8;
 
-    if (sprite->data[0]++ == 5)
+    if (++sprite->data[0] == 6)
     {
         sprite->data[0] = 0;
         sprite->pos2.x = 0;
         StartSpriteAnim(sprite, 0);
     }
 
-    if (sprite->data[7]-- == 0)
+    if (--sprite->data[7] == -1)
         DestroyAnimSprite(sprite);
 }
 
 void AnimTask_DrillPeckHitSplats(u8 task)
 {
-    if ((gTasks[task].data[0] % 32) == 0)
+    if (!(gTasks[task].data[0] % 32))
     {
         gAnimVisualTaskCount++;
 
@@ -1028,8 +1047,8 @@ static void AnimDiveBall_Step2(struct Sprite *sprite)
 
 static void AnimDiveWaterSplash(struct Sprite *sprite)
 {
-    u8 matrixNum;
-    s32 t1, t2;
+    u32 matrixNum;
+    int t1, t2;
 
     switch (sprite->data[0])
     {
@@ -1051,7 +1070,7 @@ static void AnimDiveWaterSplash(struct Sprite *sprite)
         sprite->data[0]++;
         break;
     case 1:
-        if (sprite->data[2] < 12)
+        if (sprite->data[2] <= 11)
             sprite->data[1] -= 40;
         else
             sprite->data[1] += 40;
@@ -1059,7 +1078,7 @@ static void AnimDiveWaterSplash(struct Sprite *sprite)
         sprite->data[2]++;
 
         TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
-        
+
         matrixNum = sprite->oam.matrixNum;
 
         t1 = 15616;
@@ -1083,8 +1102,8 @@ static void AnimDiveWaterSplash(struct Sprite *sprite)
 // Launches a water droplet away from the specified battler. Used by Astonish and Dive
 static void AnimSprayWaterDroplet(struct Sprite *sprite)
 {
-    const u16 v1 = Random2() & 0x1ff;
-    const u16 v2 = Random2() & 0x07f;
+    int v1 = 0x1ff & Random2();
+    int v2 = 0x7f & Random2();
 
     if (v1 % 2)
         sprite->data[0] = 736 + v1;
@@ -1128,13 +1147,13 @@ static void AnimSprayWaterDroplet_Step(struct Sprite *sprite)
         sprite->pos2.y -= sprite->data[1] >> 8;
     }
 
-    sprite->data[0] -= 0; // Needed to Match
+    sprite->data[0] = sprite->data[0];
     sprite->data[1] -= 32;
 
     if (sprite->data[0] < 0)
         sprite->data[0] = 0;
 
-    if (sprite->data[3]++ == 30)
+    if (++sprite->data[3] == 31)
         DestroyAnimSprite(sprite);
 }
 
@@ -1204,12 +1223,12 @@ void unref_sub_810F184(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        const u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+        u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         gSprites[spriteId].invisible = TRUE;
     }
     else
     {
-        const u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+        u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         gSprites[spriteId].invisible = FALSE;
     }
     DestroyAnimVisualTask(taskId);

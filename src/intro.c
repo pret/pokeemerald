@@ -21,7 +21,6 @@
 #include "intro.h"
 #include "graphics.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "util.h"
 #include "title_screen.h"
 #include "constants/rgb.h"

@@ -166,11 +166,6 @@ static void SpriteCB_Confetti(struct Sprite *sprite);
 static void Task_ShowContestEntryMonPic(u8 taskId);
 static void Task_LinkContestWaitForConnection(u8 taskId);
 
-extern const u16 gObjectEventPalette8[];
-extern const u16 gObjectEventPalette17[];
-extern const u16 gObjectEventPalette33[];
-extern const u16 gObjectEventPalette34[];
-
 static const u16 sUnknown_0858D6B0[] = INCBIN_U16("graphics/unknown/unknown_58D6B0.gbapal");
 static const u8 sUnknown_0858D6D0[] = INCBIN_U8("graphics/unknown/unknown_58D6D0.4bpp");
 static const u16 sMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
@@ -880,7 +875,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         {
             HandleLoadSpecialPokePic_2(
                 &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites[1],
+                gMonSpritesGfxPtr->sprites.ptr[1],
                 species,
                 personality);
         }
@@ -888,7 +883,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         {
             HandleLoadSpecialPokePic_DontHandleDeoxys(
                 &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites[1],
+                gMonSpritesGfxPtr->sprites.ptr[1],
                 species,
                 personality);
         }
@@ -1151,12 +1146,12 @@ static void TryCreateWirelessSprites(void)
 static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 {
     u16 windowId;
-    s32 origWidth, strWidth;
+    int origWidth;
+    int strWidth;
     u8 *spriteTilePtrs[4];
     u8 *dst;
-
     {
-        struct WindowTemplate windowTemplate; //It's important the lifetime of this struct ends after the clear
+        struct WindowTemplate windowTemplate;
         memset(&windowTemplate, 0, sizeof(windowTemplate));
         windowTemplate.width = 30;
         windowTemplate.height = 2;
@@ -1165,33 +1160,33 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
     }
 
     origWidth = GetStringWidth(1, text, 0);
-    if ((strWidth = (origWidth + 9) / 8) > 30)
-        strWidth = 30;
+    strWidth = (origWidth + 9) / 8;
+    if (strWidth > 30)
+     strWidth = 30;
 
     AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
-
     {
         s32 i;
         struct Sprite *sprite;
         const u8 *src, *windowTilesPtr;
-        windowTilesPtr = (const u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
-        src = sUnknown_0858D6D0;
+        windowTilesPtr = (u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
+        src = (u8 *)(sUnknown_0858D6D0);
 
         sprite = &gSprites[spriteId];
-        spriteTilePtrs[0] = (u8 *)((OBJ_VRAM0) + sprite->oam.tileNum * 32);
+        spriteTilePtrs[0] = (u8 *)(sprite->oam.tileNum * 32 + OBJ_VRAM0);
 
         for (i = 1; i < 4; i++)
-            spriteTilePtrs[i] = (u8 *)((OBJ_VRAM0) + gSprites[sprite->data[i - 1]].oam.tileNum * 32);
-
+            spriteTilePtrs[i] = (void*)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + OBJ_VRAM0);
+    
         for (i = 0; i < 4; i++)
             CpuFill32(0, spriteTilePtrs[i], 0x400);
-
+    
         dst = spriteTilePtrs[0];
         CpuCopy32(src, dst, 0x20);
         CpuCopy32(src + 128, dst + 0x100, 0x20);
         CpuCopy32(src + 128, dst + 0x200, 0x20);
-        CpuCopy32(src + 64, dst + 0x300, 0x20);
-
+        CpuCopy32(src + 64,  dst + 0x300, 0x20);
+    
         for (i = 0; i < strWidth; i++)
         {
             dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
@@ -1203,10 +1198,10 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
         }
 
         dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
-        CpuCopy32(src + 32, dst, 0x20);
+        CpuCopy32(src + 32,  dst, 0x20);
         CpuCopy32(src + 160, dst + 0x100, 0x20);
         CpuCopy32(src + 160, dst + 0x200, 0x20);
-        CpuCopy32(src + 96, dst + 0x300, 0x20);
+        CpuCopy32(src + 96,  dst + 0x300, 0x20);
     }
     RemoveWindow(windowId);
 
@@ -1922,7 +1917,7 @@ static void AddContestTextPrinter(int windowId, u8 *str, int x)
     textPrinter.currentY = 2;
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
-    textPrinter.style = 0;
+    textPrinter.unk = 0;
     textPrinter.fgColor = 1;
     textPrinter.bgColor = 0;
     textPrinter.shadowColor = 8;
@@ -2488,16 +2483,16 @@ void LoadLinkContestPlayerPalettes(void)
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPalette33, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x160 + i * 0x10, 0x20);
                 else
-                    LoadPalette(gObjectEventPalette34, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_RubySapphireMay, 0x160 + i * 0x10, 0x20);
             }
             else
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPalette8, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_Brendan, 0x160 + i * 0x10, 0x20);
                 else
-                    LoadPalette(gObjectEventPalette17, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_May, 0x160 + i * 0x10, 0x20);
             }
         }
     }
@@ -2552,9 +2547,9 @@ void ShowContestEntryMonPic(void)
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         if (gSpecialVar_0x8006 == gContestPlayerMonIndex)
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
         else
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedSpritePalette(palette);

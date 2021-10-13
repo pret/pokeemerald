@@ -31,7 +31,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/frontier_util.h"
 #include "constants/trainers.h"
-#include "constants/species.h"
 #include "constants/game_stat.h"
 #include "constants/moves.h"
 #include "constants/items.h"
@@ -2384,13 +2383,21 @@ void ClearRankingHallRecords(void)
 {
     s32 i, j, k;
 
+    // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+    #ifdef BUGFIX
+    u8 zero = 0;
+    #define ZERO (&zero)
+    #else
+    #define ZERO 0
+    #endif
+
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
         for (j = 0; j < 2; j++)
         {
             for (k = 0; k < 3; k++)
             {
-                CopyTrainerId(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+                CopyTrainerId(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, ZERO); 
                 gSaveBlock2Ptr->hallRecords1P[i][j][k].name[0] = EOS;
                 gSaveBlock2Ptr->hallRecords1P[i][j][k].winStreak = 0;
             }
@@ -2401,8 +2408,8 @@ void ClearRankingHallRecords(void)
     {
         for (k = 0; k < 3; k++)
         {
-            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id1, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
-            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id2, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id1, ZERO);
+            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id2, ZERO);
             gSaveBlock2Ptr->hallRecords2P[j][k].name1[0] = EOS;
             gSaveBlock2Ptr->hallRecords2P[j][k].name2[0] = EOS;
             gSaveBlock2Ptr->hallRecords2P[j][k].winStreak = 0;
@@ -2508,11 +2515,12 @@ void CreateFrontierBrainPokemon(void)
     {
         if (!(selectedMonBits & 1))
             continue;
+
         do
         {
             do
             {
-                j = Random32(); //Should be one while loop, but that doesn't match
+                j = Random32(); //should just be one while loop, but that doesn't match
             } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j));
         } while (sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
         CreateMon(&gEnemyParty[monPartyId],
