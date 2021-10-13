@@ -1,9 +1,9 @@
 {
-  "id": "MAP_UNDERWATER5",
-  "name": "Underwater5",
-  "layout": "LAYOUT_UNDERWATER5",
+  "id": "MAP_UNDERWATER_ROUTE125",
+  "name": "Underwater_Route125",
+  "layout": "LAYOUT_UNDERWATER_ROUTE125",
   "music": "MUS_UNDERWATER",
-  "region_map_section": "MAPSEC_UNDERWATER_129",
+  "region_map_section": "MAPSEC_UNDERWATER_125",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",
   "map_type": "MAP_TYPE_UNDERWATER",
@@ -16,21 +16,21 @@
     {
       "direction": "emerge",
       "offset": 0,
-      "map": "MAP_ROUTE129"
+      "map": "MAP_ROUTE125"
     }
   ],
   "object_events": [],
   "warp_events": [
     {
-      "x": 26,
-      "y": 3,
+      "x": 22,
+      "y": 10,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
       "dest_warp_id": 0
     },
     {
-      "x": 32,
-      "y": 21,
+      "x": 45,
+      "y": 30,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
       "dest_warp_id": 0

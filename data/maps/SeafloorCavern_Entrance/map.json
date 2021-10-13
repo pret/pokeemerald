@@ -33,7 +33,7 @@
       "x": 10,
       "y": 18,
       "elevation": 3,
-      "dest_map": "MAP_UNDERWATER4",
+      "dest_map": "MAP_UNDERWATER_ROUTE128",
       "dest_warp_id": 0
     },
     {

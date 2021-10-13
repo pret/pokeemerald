@@ -1126,7 +1126,7 @@ static void PrintMatchCallMessage(struct Pokenav4Struct *state)
 
 static bool32 WaitForMatchCallMessageText(struct Pokenav4Struct *state)
 {
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
         gTextFlags.canABSpeedUpPrint = 1;
     else
         gTextFlags.canABSpeedUpPrint = 0;

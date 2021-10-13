@@ -190,13 +190,13 @@ static void berry_fix_main(void)
             berry_fix_mb_manager->state = 1;
             break;
         case 1:
-            if (berry_fix_text_update(5) == 5 && (gMain.newKeys & A_BUTTON))
+            if (berry_fix_text_update(5) == 5 && (JOY_NEW(A_BUTTON)))
             {
                 berry_fix_mb_manager->state = 2;
             }
             break;
         case 2:
-            if (berry_fix_text_update(0) == 0 && (gMain.newKeys & A_BUTTON))
+            if (berry_fix_text_update(0) == 0 && (JOY_NEW(A_BUTTON)))
             {
                 berry_fix_mb_manager->state = 3;
             }
@@ -235,13 +235,13 @@ static void berry_fix_main(void)
             }
             break;
         case 6:
-            if (berry_fix_text_update(3) == 3 && gMain.newKeys & A_BUTTON)
+            if (berry_fix_text_update(3) == 3 && JOY_NEW(A_BUTTON))
             {
                 DoSoftReset();
             }
             break;
         case 7:
-            if (berry_fix_text_update(4) == 4 && gMain.newKeys & A_BUTTON)
+            if (berry_fix_text_update(4) == 4 && JOY_NEW(A_BUTTON))
             {
                 berry_fix_mb_manager->state = 1;
             }

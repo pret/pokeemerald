@@ -237,7 +237,7 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
     WCSS_AddTextPrinterParameterized(0, 1, sHeaderTexts[0], GetStringCenterAlignXOffset(1, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
-    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sHeaderTexts[0]) - 1; i++)
     {
         WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
@@ -362,12 +362,12 @@ static u32 CountPlayersInGroupAndGetActivity(struct UnkStruct_x20 * unk20, u32 *
         {
             if (group_players(i) == 0)
             {
-                k = 0;
+                k = 0; //Should just be 1 without the increment after the loop ends but that doesn't match.
                 for (j = 0; j < RFU_CHILD_MAX; j++)
                 {
                     if (unk20->gname_uname.gname.child_sprite_gender[j] != 0) k++;
                 }
-                k++;
+                k++; //See above comment.
                 groupCounts[group_type(i)] += k;
             }
             else

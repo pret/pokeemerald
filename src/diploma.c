@@ -107,7 +107,7 @@ static void Task_DiplomaFadeIn(u8 taskId)
 
 static void Task_DiplomaWaitForKeyPress(u8 taskId)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_DiplomaFadeOut;

@@ -67,14 +67,12 @@ void DoBounceEffect(u8 battlerId, u8 b, s8 c, s8 d);
 void EndBounceEffect(u8 battlerId, bool8 b);
 void SpriteCb_PlayerMonFromBall(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
-void sub_8039E84(struct Sprite *sprite);
+void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void sub_8039E9C(struct Sprite *sprite);
 void nullsub_20(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
 void FaintClearSetData(void);
-void sub_803B3AC(void); // unused
-void sub_803B598(void); // unused
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
 void SwitchPartyOrder(u8 battlerId);
@@ -83,6 +81,7 @@ u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
+void SpecialStatusesClear(void);
 
 extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
 

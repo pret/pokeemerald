@@ -457,23 +457,23 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
 $(INTERFACEGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
-$(RAYQUAZAGFXDIR)/rayquaza.8bpp: %.8bpp: %.png
+$(RAYQUAZAGFXDIR)/scene_2/rayquaza.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 227
 
-$(RAYQUAZAGFXDIR)/overcast.4bpp: %.4bpp: %.png
+$(RAYQUAZAGFXDIR)/scene_2/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 313
 
-$(RAYQUAZAGFXDIR)/rayquaza_fly1.4bpp: %.4bpp: %.png
+$(RAYQUAZAGFXDIR)/scene_3/rayquaza.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 124
 
-$(RAYQUAZAGFXDIR)/rayquaza_tail_fix.4bpp: $(RAYQUAZAGFXDIR)/rayquaza_tail.4bpp
+$(RAYQUAZAGFXDIR)/scene_3/rayquaza_tail_fix.4bpp: $(RAYQUAZAGFXDIR)/scene_3/rayquaza_tail.4bpp
 	cp $< $@
 	head -c 12 /dev/zero >> $@
 
-$(RAYQUAZAGFXDIR)/chase_streaks.4bpp: %.4bpp: %.png
+$(RAYQUAZAGFXDIR)/scene_4/streaks.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
 
-$(RAYQUAZAGFXDIR)/rayquaza_chase.4bpp: %.4bpp: %.png
+$(RAYQUAZAGFXDIR)/scene_4/rayquaza.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 155
 
 graphics/picture_frame/frame5.4bpp: %.4bpp: %.png

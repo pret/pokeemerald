@@ -93,7 +93,7 @@ void CB2_GoToSellMenu(void);
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void DoWallyTutorialBagMenu(void);
 void ResetBagScrollPositions(void);
-void ChooseBerrySetCallback(void (*callback)(void));
+void ChooseBerryForMachine(void (*exitCallback)(void));
 void CB2_ChooseBerry(void);
 void Task_FadeAndCloseBagMenu(u8 taskId);
 void BagMenu_YesNo(u8, u8, const struct YesNoFuncTable*);

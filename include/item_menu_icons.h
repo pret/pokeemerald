@@ -19,7 +19,7 @@ void sub_80D4FC8(u8 arg0);
 void sub_80D4FEC(u8 arg0);
 u8 CreateBerryTagSprite(u8 id, s16 x, s16 y);
 void FreeBerryTagSpritePalette(void);
-u8 LoadSpinningBerryPicGfx(u8 berryId, u8 x, u8 y, bool8 startAffine);
+u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine);
 u8 CreateBerryFlavorCircleSprite(s16 x);
 
 #define TAG_BAG_GFX 100

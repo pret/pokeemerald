@@ -89,13 +89,13 @@ u32 sub_81CD08C(struct PokenavSub11 *structPtr)
 
     if (ret == 0)
     {
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             structPtr->unk6304 = sub_81CD19C;
             ret = 2;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             if (structPtr->unk6300 == 0)
             {
@@ -166,7 +166,7 @@ u8 sub_81CD1E4(struct PokenavSub11 *structPtr)
     struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
     u8 ret = 0;
 
-    if (gMain.heldKeys & DPAD_UP)
+    if (JOY_HELD(DPAD_UP))
     {
         if (structPtr->unk6300 == 0 || unkPtr->unk2 != 0)
         {
@@ -174,7 +174,7 @@ u8 sub_81CD1E4(struct PokenavSub11 *structPtr)
             ret = sub_81CD258(1);
         }
     }
-    else if (gMain.heldKeys & DPAD_DOWN)
+    else if (JOY_HELD(DPAD_DOWN))
     {
         if (structPtr->unk6300 == 0 || unkPtr->unk2 < unkPtr->unk0 - 1)
         {

@@ -31,7 +31,7 @@
     {
       "direction": "dive",
       "offset": 0,
-      "map": "MAP_UNDERWATER4"
+      "map": "MAP_UNDERWATER_ROUTE128"
     }
   ],
   "object_events": [

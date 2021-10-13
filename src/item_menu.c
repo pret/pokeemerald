@@ -534,14 +534,16 @@ void CB2_BagMenuFromBattle(void)
         GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
+// Choosing berry to plant
 void CB2_ChooseBerry(void)
 {
     GoToBagMenu(ITEMMENULOCATION_BERRY_TREE, BERRIES_POCKET, CB2_ReturnToFieldContinueScript);
 }
 
-void ChooseBerrySetCallback(void (*callback)(void))
+// Choosing berry for Berry Blender or Berry Crush
+void ChooseBerryForMachine(void (*exitCallback)(void))
 {
-    GoToBagMenu(ITEMMENULOCATION_BERRY_BLENDER_CRUSH, BERRIES_POCKET, callback);
+    GoToBagMenu(ITEMMENULOCATION_BERRY_BLENDER_CRUSH, BERRIES_POCKET, exitCallback);
 }
 
 void CB2_GoToSellMenu(void)
@@ -626,7 +628,6 @@ void CB2_Bag(void)
 
 bool8 SetupBagMenu(void)
 {
-    u32 index;
     u8 taskId;
 
     switch (gMain.state)
@@ -922,14 +923,14 @@ void BagMenu_ItemPrintCallback(u8 windowId, s32 itemIndex, u8 y)
 
         if (gBagPositionStruct.pocket == BERRIES_POCKET)
         {
-            ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, BERRY_CAPACITY_DIGITS);
             StringExpandPlaceholders(gStringVar4, gText_xVar1);
             offset = GetStringRightAlignXOffset(7, gStringVar4, 119);
             BagMenu_Print(windowId, 7, gStringVar4, offset, y, 0, 0, -1, 0);
         }
         else if (gBagPositionStruct.pocket != KEYITEMS_POCKET && ItemId_GetImportance(itemId) == FALSE)
         {
-            ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, 2);
+            ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
             StringExpandPlaceholders(gStringVar4, gText_xVar1);
             offset = GetStringRightAlignXOffset(7, gStringVar4, 119);
             BagMenu_Print(windowId, 7, gStringVar4, offset, y, 0, 0, -1, 0);
@@ -1136,7 +1137,7 @@ void sub_81ABC3C(u8 a)
 
 void PrintItemDepositAmount(u8 windowId, s16 numDeposited)
 {
-    u8 numDigits = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
+    u8 numDigits = (gBagPositionStruct.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, numDeposited, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 0x28), 2, 0, 0);
@@ -1144,7 +1145,7 @@ void PrintItemDepositAmount(u8 windowId, s16 numDeposited)
 
 void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 {
-    u8 numDigits = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
+    u8 numDigits = (gBagPositionStruct.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, -1, 0);
@@ -1169,7 +1170,7 @@ void Task_BagMenu_HandleInput(u8 taskId)
                 SwitchBagPocket(taskId, MENU_CURSOR_DELTA_RIGHT, 0);
                 return;
             default:
-                if (gMain.newKeys & SELECT_BUTTON)
+                if (JOY_NEW(SELECT_BUTTON))
                 {
                     if (CanSwapItems() == TRUE)
                     {
@@ -1231,12 +1232,12 @@ static u8 GetSwitchBagPocketDirection(void)
     if (gBagMenu->pocketSwitchDisabled)
         return SWITCH_POCKET_NONE;
     LRKeys = GetLRKeysPressed();
-    if ((gMain.newKeys & DPAD_LEFT) || LRKeys == MENU_L_PRESSED)
+    if (JOY_NEW(DPAD_LEFT) || LRKeys == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         return SWITCH_POCKET_LEFT;
     }
-    if ((gMain.newKeys & DPAD_RIGHT) || LRKeys == MENU_R_PRESSED)
+    if (JOY_NEW(DPAD_RIGHT) || LRKeys == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         return SWITCH_POCKET_RIGHT;
@@ -1391,7 +1392,7 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
 
     if (MenuHelpers_CallLinkSomething() != TRUE)
     {
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             PlaySE(SE_SELECT);
             ListMenuGetScrollAndRow(data[0], &gBagPositionStruct.scrollPosition[gBagPositionStruct.pocket], &gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
@@ -1409,7 +1410,7 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
                     break;
                 case LIST_CANCEL:
                     PlaySE(SE_SELECT);
-                    if (gMain.newKeys & A_BUTTON)
+                    if (JOY_NEW(A_BUTTON))
                         sub_81AC498(taskId);
                     else
                         sub_81AC590(taskId);
@@ -1660,7 +1661,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
     if (MenuHelpers_CallLinkSomething() != TRUE)
     {
         s8 cursorPos = Menu_GetCursorPos();
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             if (cursorPos > 0 && sub_81ACDFC(cursorPos - 2))
             {
@@ -1668,7 +1669,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
                 ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
             }
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (cursorPos < (gBagMenu->contextMenuNumItems - 2) && sub_81ACDFC(cursorPos + 2))
             {
@@ -1676,7 +1677,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
                 ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
             }
         }
-        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+        else if ((JOY_NEW(DPAD_LEFT)) || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if ((cursorPos & 1) && sub_81ACDFC(cursorPos - 1))
             {
@@ -1684,7 +1685,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
                 ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
             }
         }
-        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+        else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (!(cursorPos & 1) && sub_81ACDFC(cursorPos + 1))
             {
@@ -1692,12 +1693,12 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
                 ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sItemMenuActions[gBagMenu->contextMenuItemsPtr[cursorPos]].func.void_u8(taskId);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             sItemMenuActions[ITEMMENUACTION_CANCEL].func.void_u8(taskId);
@@ -1777,7 +1778,7 @@ void BagMenu_TossItems(u8 taskId)
     s16* data = gTasks[taskId].data;
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
@@ -1801,13 +1802,13 @@ void Task_ChooseHowManyToToss(u8 taskId)
     {
         PrintItemDepositAmount(gBagMenu->windowPointers[7], tItemCount);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(7);
         BagMenu_TossItems(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(7);
@@ -1820,7 +1821,7 @@ void BagMenu_ConfirmToss(u8 taskId)
     s16* data = gTasks[taskId].data;
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
@@ -1833,7 +1834,7 @@ void Task_ActuallyToss(u8 taskId)
     u16* scrollPos = &gBagPositionStruct.scrollPosition[gBagPositionStruct.pocket];
     u16* cursorPos = &gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket];
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         PlaySE(SE_SELECT);
         RemoveBagItem(gSpecialVar_ItemId, tItemCount);
@@ -1901,7 +1902,7 @@ static void BagMenu_PrintItemCantBeHeld(u8 taskId)
 
 void sub_81AD350(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_InitListsMenu(taskId);
@@ -2075,13 +2076,13 @@ static void Task_SellHowManyDialogueHandleInput(u8 taskId)
     {
         PrintItemSoldAmount(gBagMenu->windowPointers[8], tItemCount, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * tItemCount);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(8);
         DisplaySellItemPriceAndConfirm(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_PrintCursor_(data[0], 0);
@@ -2123,7 +2124,7 @@ static void BagMenu_Sell_UpdateItemListAndMoney(u8 taskId)
 
 static void BagMenu_Sell_WaitForABPress(u8 taskId)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         PlaySE(SE_SELECT);
         RemoveMoneyWindow();
@@ -2159,13 +2160,13 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
     {
         PrintItemDepositAmount(gBagMenu->windowPointers[7], tItemCount);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(7);
         BagMenu_TryDepositItem(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_PrintDescription(data[1]);
@@ -2188,7 +2189,7 @@ static void BagMenu_TryDepositItem(u8 taskId)
     else if (AddPCItem(gSpecialVar_ItemId, tItemCount) == TRUE)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
         StringExpandPlaceholders(gStringVar4, gText_DepositedVar2Var1s);
         BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
         gTasks[taskId].func = Task_ActuallyToss;
@@ -2204,7 +2205,7 @@ static void BagMenu_Deposit_WaitForABPress(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BagMenu_PrintDescription(data[1]);

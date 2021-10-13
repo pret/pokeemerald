@@ -525,7 +525,7 @@ static void CB2_WaitForPaletteExitOnKeyPress(void)
 
 static void CB2_ExitOnKeyPress(void)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sMailRead->callback2 = CB2_ExitMailReadFreeVars;

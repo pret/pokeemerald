@@ -497,6 +497,10 @@
 #define MAX_PC_ITEM_CAPACITY   999
 #define MAX_BERRY_CAPACITY     999
 
+#define BAG_ITEM_CAPACITY_DIGITS 2
+#define BERRY_CAPACITY_DIGITS 3
+#define MAX_ITEM_DIGITS BERRY_CAPACITY_DIGITS
+
 // Secondary IDs for rods
 #define OLD_ROD   0
 #define GOOD_ROD  1

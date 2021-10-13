@@ -19,14 +19,14 @@ u16 Font6Func(struct TextPrinter *textPrinter)
     switch (textPrinter->state)
     {
         case 0:
-            if (gMain.heldKeys & (A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
+            if (JOY_HELD(A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
             {
                 textPrinter->delayCounter = 0;
             }
             if (textPrinter->delayCounter && textPrinter->textSpeed)
             {
                 textPrinter->delayCounter --;
-                if (gTextFlags.canABSpeedUpPrint && gMain.newKeys & (A_BUTTON | B_BUTTON))
+                if (gTextFlags.canABSpeedUpPrint && JOY_NEW(A_BUTTON | B_BUTTON))
                 {
                     subStruct->hasPrintBeenSpedUp = TRUE;
                     textPrinter->delayCounter = 0;
@@ -135,7 +135,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             }
             DecompressGlyphFont6(char_);
             CopyGlyphToWindow(textPrinter);
-            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing;
+            textPrinter->printerTemplate.currentX += gUnknown_03002F90.width + textPrinter->printerTemplate.letterSpacing;
             return 0;
         case 1:
             if (TextPrinterWait(textPrinter))
@@ -210,8 +210,8 @@ static void DecompressGlyphFont6(u16 glyph)
     DecompressGlyphTile(glyphs + 0x8, (u16 *)(gUnknown_03002F90.unk20));
     DecompressGlyphTile(glyphs + 0x80, (u16 *)(gUnknown_03002F90.unk40));
     DecompressGlyphTile(glyphs + 0x88, (u16 *)(gUnknown_03002F90.unk60));
-    gUnknown_03002F90.unk80 = 0x10;
-    gUnknown_03002F90.unk81 = 0x10;
+    gUnknown_03002F90.width = 0x10;
+    gUnknown_03002F90.height = 0x10;
 }
 
 u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese)

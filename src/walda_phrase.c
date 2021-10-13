@@ -118,8 +118,8 @@ static u8 GetLetterTableId(u8 letter)
 static bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase)
 {
     s32 i;
-    ALIGNED(2) u8 array[12];
-    u8 charsByTableId[16];
+    u8 array[9];
+    u8 charsByTableId[15];
     u16 *ptr;
 
     if (StringLength(phrase) != 15)

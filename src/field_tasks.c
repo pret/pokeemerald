@@ -219,13 +219,13 @@ static void DummyPerStepCallback(u8 taskId)
 
 static const struct PacifidlogMetatileOffsets *GetPacifidlogBridgeMetatileOffsets(const struct PacifidlogMetatileOffsets *offsets, u16 metatileBehavior)
 {
-    if (MetatileBehavior_IsPacifilogVerticalLog1(metatileBehavior))
+    if (MetatileBehavior_IsPacifidlogVerticalLog1(metatileBehavior))
         return &offsets[0 * 2];
-    else if (MetatileBehavior_IsPacifilogVerticalLog2(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogVerticalLog2(metatileBehavior))
         return &offsets[1 * 2];
-    else if (MetatileBehavior_IsPacifilogHorizontalLog1(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog1(metatileBehavior))
         return &offsets[2 * 2];
-    else if (MetatileBehavior_IsPacifilogHorizontalLog2(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog2(metatileBehavior))
         return &offsets[3 * 2];
     else
         return NULL;
@@ -265,22 +265,22 @@ static bool32 StandingOnNewPacifidlogBridge(s16 x1, s16 y1, s16 x2, s16 y2)
 {
     u16 metatileBehavior = MapGridGetMetatileBehaviorAt(x2, y2);
 
-    if (MetatileBehavior_IsPacifilogVerticalLog1(metatileBehavior))
+    if (MetatileBehavior_IsPacifidlogVerticalLog1(metatileBehavior))
     {
         if (y1 > y2)
             return FALSE;
     }
-    else if (MetatileBehavior_IsPacifilogVerticalLog2(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogVerticalLog2(metatileBehavior))
     {
         if (y1 < y2)
             return FALSE;
     }
-    else if (MetatileBehavior_IsPacifilogHorizontalLog1(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog1(metatileBehavior))
     {
         if (x1 > x2)
             return FALSE;
     }
-    else if (MetatileBehavior_IsPacifilogHorizontalLog2(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog2(metatileBehavior))
     {
         if (x1 < x2)
             return FALSE;
@@ -292,22 +292,22 @@ static bool32 StandingOnSamePacifidlogBridge(s16 x1, s16 y1, s16 x2, s16 y2)
 {
     u16 metatileBehavior = MapGridGetMetatileBehaviorAt(x1, y1);
 
-    if (MetatileBehavior_IsPacifilogVerticalLog1(metatileBehavior))
+    if (MetatileBehavior_IsPacifidlogVerticalLog1(metatileBehavior))
     {
         if (y1 < y2)
             return FALSE;
     }
-    else if (MetatileBehavior_IsPacifilogVerticalLog2(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogVerticalLog2(metatileBehavior))
     {
         if (y1 > y2)
             return FALSE;
     }
-    else if (MetatileBehavior_IsPacifilogHorizontalLog1(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog1(metatileBehavior))
     {
         if (x1 < x2)
             return FALSE;
     }
-    else if (MetatileBehavior_IsPacifilogHorizontalLog2(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog2(metatileBehavior))
     {
         if (x1 > x2)
             return FALSE;

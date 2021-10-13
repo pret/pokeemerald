@@ -1789,7 +1789,7 @@ static bool8 Fishing_ShowDots(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tFrameCounter++;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         task->tStep = FISHING_NO_BITE;
         if (task->tRoundsPlayed != 0)
@@ -1878,7 +1878,7 @@ static bool8 Fishing_WaitForA(struct Task *task)
     task->tFrameCounter++;
     if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
         task->tStep = FISHING_GOT_AWAY;
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
         task->tStep++;
     return FALSE;
 }

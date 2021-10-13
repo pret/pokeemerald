@@ -183,7 +183,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
 {
     s16 valBefore = (*arg0);
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         (*arg0)++;
         if ((*arg0) > arg1)
@@ -199,7 +199,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         (*arg0)--;
         if ((*arg0) <= 0)
@@ -215,7 +215,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT)
     {
         (*arg0) += 10;
         if ((*arg0) > arg1)
@@ -231,7 +231,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT)
     {
         (*arg0) -= 10;
         if ((*arg0) <= 0)
@@ -255,9 +255,9 @@ u8 GetLRKeysPressed(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
             return MENU_L_PRESSED;
-        if (gMain.newKeys & R_BUTTON)
+        if (JOY_NEW(R_BUTTON))
             return MENU_R_PRESSED;
     }
 
@@ -268,9 +268,9 @@ u8 GetLRKeysPressedAndHeld(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newAndRepeatedKeys & L_BUTTON)
+        if (JOY_REPEAT(L_BUTTON))
             return MENU_L_PRESSED;
-        if (gMain.newAndRepeatedKeys & R_BUTTON)
+        if (JOY_REPEAT(R_BUTTON))
             return MENU_R_PRESSED;
     }
 

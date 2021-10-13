@@ -100,12 +100,12 @@ struct CgbChannel
     u8 le;
     u8 sw;
     u32 fr;
-    u32 wp;
-    u32 cp;
-    u32 tp;
-    u32 pp;
-    u32 np;
-    u8 d4[8];
+    u32 *wp;
+    u32 *cp;
+    void *tp;
+    void *pp;
+    void *np;
+    u32 d4[2];
 };
 
 struct MusicPlayerTrack;
@@ -138,10 +138,10 @@ struct SoundChannel
     u32 fw;
     u32 freq;
     struct WaveData *wav;
-    u32 cp;
+    s8 *cp;
     struct MusicPlayerTrack *track;
-    u32 pp;
-    u32 np;
+    void *pp;
+    void *np;
     u32 d4;
     u16 xpi;
     u16 xpc;
@@ -172,11 +172,11 @@ struct SoundInfo
     u8 pcmDmaPeriod; // number of V-blanks per PCM DMA
     u8 maxLines;
     u8 gap[3];
-    s32 pcmSamplesPerVBlank;
-    s32 pcmFreq;
-    s32 divFreq;
+    u32 pcmSamplesPerVBlank;
+    u32 pcmFreq;
+    u32 divFreq;
     struct CgbChannel *cgbChans;
-    u32 func;
+    void (*func)();
     u32 intp;
     void (*CgbSound)(void);
     void (*CgbOscOff)(u8);
@@ -184,7 +184,7 @@ struct SoundInfo
     u32 MPlayJumpTable;
     u32 plynote;
     u32 ExtVolPit;
-    u8 gap2[16];
+    u32 gap2[4];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
     s8 pcmBuffer[PCM_DMA_BUF_SIZE * 2];
 };
@@ -248,7 +248,7 @@ struct MusicPlayerTrack
     u8 key;
     u8 velocity;
     u8 runningStatus;
-    u8 keyM;
+    s8 keyM;
     u8 pitM;
     s8 keyShift;
     s8 keyShiftX;
@@ -312,7 +312,7 @@ struct MusicPlayerInfo
     struct MusicPlayerTrack *tracks;
     struct ToneData *tone;
     u32 ident;
-    u32 func;
+    void (*func)();
     u32 intp;
 };
 
@@ -447,7 +447,7 @@ void ply_tune(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_port(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_endtie(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_note(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_note(u8, struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 
 // extended sound command handler functions
 void ply_xxx(struct MusicPlayerInfo *, struct MusicPlayerTrack *);

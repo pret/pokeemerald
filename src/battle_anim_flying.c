@@ -563,14 +563,23 @@ struct FeatherDanceData
     u16 unkE_1:15;
 };
 
+#define ANIM_SWITCH(sprite)                  \
+    {                                        \
+        (sprite)->hFlip ^= 1;                \
+        (sprite)->animNum = (sprite)->hFlip; \
+        (sprite)->animBeginning = TRUE;      \
+        (sprite)->animEnded = FALSE;         \
+    }
+
 static void AnimFallingFeather(struct Sprite *sprite)
 {
-    u8 battler, matrixNum, sinIndex;
+    u8 battler, sinIndex;
+    u32 matrixNum;
     s16 sinVal;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
-    battler =  (gBattleAnimArgs[7] & 0x100) ? gBattleAnimAttacker : gBattleAnimTarget;
+    battler = (gBattleAnimArgs[7] & 0x100) ? gBattleAnimAttacker : gBattleAnimTarget;
 
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -583,12 +592,12 @@ static void AnimFallingFeather(struct Sprite *sprite)
     data->unkE_1 = (u16)(sinVal + gBattleAnimArgs[6]);
     data->unk0_0c = 1;
     data->unk2 = (u16)(gBattleAnimArgs[2] & 0xFF);
-    data->unkA = (u16)((gBattleAnimArgs[2] >> 8) & 0xFF) ;
+    data->unkA = (u16)gBattleAnimArgs[2] >> 8;
     data->unk4 = gBattleAnimArgs[3];
     data->unk6 = (u16)gBattleAnimArgs[4];
-    *(u16*)(data->unkC) = (u16)gBattleAnimArgs[5];
+    *(u16 *)(data->unkC) = (u16)gBattleAnimArgs[5];
 
-    if (data->unk2 >= 64 && data->unk2 <= 191)
+    if (data->unk2 >= 64 && data->unk2 < 192)
     {
         if (!IsContest())
             sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
@@ -599,11 +608,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
 
         if (!(data->unk4 & 0x8000))
         {
-            sprite->hFlip ^= 1;
-            sprite->animNum = sprite->hFlip;
-
-            sprite->animBeginning = 1;
-            sprite->animEnded = 0;
+            ANIM_SWITCH(sprite);
         }
     }
     else
@@ -613,15 +618,11 @@ static void AnimFallingFeather(struct Sprite *sprite)
 
         if (data->unk4 & 0x8000)
         {
-            sprite->hFlip ^= 1;
-            sprite->animNum = sprite->hFlip;
-
-            sprite->animBeginning = 1;
-            sprite->animEnded = 0;
+            ANIM_SWITCH(sprite);
         }
     }
 
-    data->unk0_1 = data->unk2/64;
+    data->unk0_1 = data->unk2 / 64;
     sprite->pos2.x = (gSineTable[data->unk2] * (s32)data->unkC[0]) >> 8;
     matrixNum = sprite->oam.matrixNum;
 
@@ -637,7 +638,8 @@ static void AnimFallingFeather(struct Sprite *sprite)
 
 static void sub_810E520(struct Sprite *sprite)
 {
-    u8 matrixNum, sinIndex;
+    u8 sinIndex;
+    u32 matrixNum;
     s16 sinVal = 0;
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
     if (data->unk0_0a)
@@ -667,10 +669,7 @@ static void sub_810E520(struct Sprite *sprite)
         }
         else if (data->unk0_0d)
         {
-            sprite->hFlip ^= 1;
-            sprite->animNum = sprite->hFlip;
-            sprite->animBeginning = TRUE;
-            sprite->animEnded = FALSE;
+            ANIM_SWITCH(sprite);
             if (data->unk0_0c)
             {
                 if (!IsContest())
@@ -718,10 +717,7 @@ static void sub_810E520(struct Sprite *sprite)
         }
         else if (data->unk0_0d)
         {
-            sprite->hFlip ^= 1;
-            sprite->animNum = sprite->hFlip;
-            sprite->animBeginning = TRUE;
-            sprite->animEnded = FALSE;
+            ANIM_SWITCH(sprite);
             if (data->unk0_0c)
             {
                 if (!IsContest())
@@ -769,10 +765,7 @@ static void sub_810E520(struct Sprite *sprite)
         }
         else if (data->unk0_0d)
         {
-            sprite->hFlip ^= 1;
-            sprite->animNum = sprite->hFlip;
-            sprite->animBeginning = TRUE;
-            sprite->animEnded = FALSE;
+            ANIM_SWITCH(sprite);
             if (data->unk0_0c)
             {
                 if (!IsContest())
@@ -819,10 +812,7 @@ static void sub_810E520(struct Sprite *sprite)
         }
         else if (data->unk0_0d)
         {
-            sprite->hFlip ^= 1;
-            sprite->animNum = sprite->hFlip;
-            sprite->animBeginning = TRUE;
-            sprite->animEnded = FALSE;
+            ANIM_SWITCH(sprite);
             if (data->unk0_0c)
             {
                 if (!IsContest())

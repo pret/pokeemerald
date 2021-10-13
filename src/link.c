@@ -99,7 +99,7 @@ u16 gLinkSavedIme;
 
 EWRAM_DATA u8 gLinkTestDebugValuesEnabled = 0;
 EWRAM_DATA u8 gUnknown_020223BD = 0;
-EWRAM_DATA u32 gUnknown_020223C0 = 0;
+EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
 EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
 EWRAM_DATA u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
 EWRAM_DATA bool8 gLinkOpen = FALSE;
@@ -445,27 +445,27 @@ static void TestBlockTransfer(u8 nothing, u8 is, u8 used)
 
 static void LinkTestProcessKeyInput(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gShouldAdvanceLinkState = 1;
     }
-    if (gMain.heldKeys & B_BUTTON)
+    if (JOY_HELD(B_BUTTON))
     {
         InitBlockSend(gHeap + 0x4000, 0x00002004);
     }
-    if (gMain.newKeys & L_BUTTON)
+    if (JOY_NEW(L_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
     }
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         SetSuppressLinkErrorMessage(TRUE);
     }
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         TrySavingData(SAVE_LINK);
     }
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
     {
         SetCloseLinkCallback();
     }
@@ -552,7 +552,7 @@ static void ProcessRecvCmds(u8 unused)
                 InitBlockSend(block, sizeof(*block));
                 break;
             }
-            case LINKCMD_SEND_HELD_KEYS:
+            case LINKCMD_BLENDER_SEND_KEYS:
                 gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
                 break;
             case LINKCMD_0x5555:
@@ -636,13 +636,13 @@ static void ProcessRecvCmds(u8 unused)
             case LINKCMD_READY_EXIT_STANDBY:
                 gReadyToExitStandby[i] = TRUE;
                 break;
-            case LINKCMD_0xAAAA:
-                sub_800A418();
+            case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
+                SetBerryBlenderLinkCallback();
                 break;
             case LINKCMD_SEND_BLOCK_REQ:
                 SendBlock(0, sBlockRequests[gRecvCmds[i][1]].address, sBlockRequests[gRecvCmds[i][1]].size);
                 break;
-            case LINKCMD_SEND_HELD_KEYS_2:
+            case LINKCMD_SEND_HELD_KEYS:
                 gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
                 break;
         }
@@ -660,8 +660,8 @@ static void BuildSendCmd(u16 command)
         case LINKCMD_READY_EXIT_STANDBY:
             gSendCmd[0] = LINKCMD_READY_EXIT_STANDBY;
             break;
-        case LINKCMD_SEND_HELD_KEYS:
-            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS;
+        case LINKCMD_BLENDER_SEND_KEYS:
+            gSendCmd[0] = LINKCMD_BLENDER_SEND_KEYS;
             gSendCmd[1] = gMain.heldKeys;
             break;
         case LINKCMD_0x5555:
@@ -687,8 +687,8 @@ static void BuildSendCmd(u16 command)
             gSendCmd[1] = sBlockSend.size;
             gSendCmd[2] = sBlockSend.multiplayerId + 0x80;
             break;
-        case LINKCMD_0xAAAA:
-            gSendCmd[0] = LINKCMD_0xAAAA;
+        case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
+            gSendCmd[0] = LINKCMD_BLENDER_NO_PBLOCK_SPACE;
             break;
         case LINKCMD_0xAAAB:
             gSendCmd[0] = LINKCMD_0xAAAB;
@@ -705,12 +705,12 @@ static void BuildSendCmd(u16 command)
         case LINKCMD_0x5566:
             gSendCmd[0] = LINKCMD_0x5566;
             break;
-        case LINKCMD_SEND_HELD_KEYS_2:
+        case LINKCMD_SEND_HELD_KEYS:
             if (gHeldKeyCodeToSend == 0 || gLinkTransferringData)
             {
                 break;
             }
-            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS_2;
+            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS;
             gSendCmd[1] = gHeldKeyCodeToSend;
             break;
     }
@@ -738,7 +738,7 @@ bool32 IsSendingKeysToLink(void)
 static void LinkCB_SendHeldKeys(void)
 {
     if (gReceivedRemoteLinkPlayers == TRUE)
-        BuildSendCmd(LINKCMD_SEND_HELD_KEYS_2);
+        BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
 }
 
 void ClearLinkCallback(void)
@@ -1009,34 +1009,36 @@ static void LinkCB_BlockSendEnd(void)
     gLinkCallback = NULL;
 }
 
-static void sub_800A3F8(void)
+static void LinkCB_BerryBlenderSendHeldKeys(void)
 {
     GetMultiplayerId();
-    BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
-    gUnknown_020223C0++;
+    BuildSendCmd(LINKCMD_BLENDER_SEND_KEYS);
+    gBerryBlenderKeySendAttempts++;
 }
 
-void sub_800A418(void)
+void SetBerryBlenderLinkCallback(void)
 {
-    gUnknown_020223C0 = 0;
+    gBerryBlenderKeySendAttempts = 0;
     if (gWirelessCommType)
     {
-        sub_800F850();
+        Rfu_SetBerryBlenderLinkCallback();
     }
     else
     {
-        gLinkCallback = sub_800A3F8;
+        gLinkCallback = LinkCB_BerryBlenderSendHeldKeys;
     }
 }
 
-u32 sub_800A44C(void)
+// Unused
+static u32 GetBerryBlenderKeySendAttempts(void)
 {
-    return gUnknown_020223C0;
+    return gBerryBlenderKeySendAttempts;
 }
 
-void sub_800A458(void)
+// Unused
+static void SendBerryBlenderNoSpaceForPokeblocks(void)
 {
-    BuildSendCmd(LINKCMD_0xAAAA);
+    BuildSendCmd(LINKCMD_BLENDER_NO_PBLOCK_SPACE);
 }
 
 u8 GetMultiplayerId(void)
@@ -1752,7 +1754,7 @@ static void CB2_PrintErrorMessage(void)
     {
         if (gWirelessCommType == 1)
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
@@ -1762,7 +1764,7 @@ static void CB2_PrintErrorMessage(void)
         }
         else if (gWirelessCommType == 2)
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 rfu_REQ_stopMode();
                 rfu_waitREQComplete();

@@ -250,7 +250,7 @@ void sub_81D1D04(u8 a0)
     sUnknown_0203CF48[a0] = 0xFF;
 }
 
-static u8 sub_81D1D34(u8 a0)
+static u8 sub_81D1D34(u8 a0) // unused
 {
     return sUnknown_0203CF48[a0];
 }

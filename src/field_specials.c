@@ -3649,14 +3649,14 @@ bool8 AbnormalWeatherHasExpired(void)
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER3))
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_ROUTE127))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
             {
-                case MAP_NUM(UNDERWATER3):
-                case MAP_NUM(UNDERWATER5):
-                case MAP_NUM(UNDERWATER6):
-                case MAP_NUM(UNDERWATER7):
+                case MAP_NUM(UNDERWATER_ROUTE127):
+                case MAP_NUM(UNDERWATER_ROUTE129):
+                case MAP_NUM(UNDERWATER_ROUTE105):
+                case MAP_NUM(UNDERWATER_ROUTE125):
                     VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
                     return FALSE;
                 default:
@@ -3888,12 +3888,14 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 
 void Script_DoRayquazaScene(void)
 {
-    if (gSpecialVar_0x8004 == 0)
+    if (!gSpecialVar_0x8004)
     {
+        // Groudon/Kyogre fight scene
         DoRayquazaScene(0, TRUE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
     else
     {
+        // Rayquaza arrives scene
         DoRayquazaScene(1, FALSE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }

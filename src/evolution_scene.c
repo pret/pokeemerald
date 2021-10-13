@@ -859,21 +859,21 @@ static void Task_EvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            if (gMain.newKeys & DPAD_UP && sEvoCursorPos != 0)
+            if (JOY_NEW(DPAD_UP) && sEvoCursorPos != 0)
             {
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(sEvoCursorPos);
                 sEvoCursorPos = 0;
                 BattleCreateYesNoCursorAt(0);
             }
-            if (gMain.newKeys & DPAD_DOWN && sEvoCursorPos == 0)
+            if (JOY_NEW(DPAD_DOWN) && sEvoCursorPos == 0)
             {
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(sEvoCursorPos);
                 sEvoCursorPos = 1;
                 BattleCreateYesNoCursorAt(1);
             }
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
@@ -889,7 +889,7 @@ static void Task_EvolutionScene(u8 taskID)
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                 }
             }
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);

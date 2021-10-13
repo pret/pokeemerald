@@ -317,7 +317,7 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
 
 void CB2_InitPokeNav(void)
 {
-    gPokenavResources = Alloc(sizeof(*gPokenavResources));
+    gPokenavResources = Alloc(sizeof(struct PokenavResources));
     if (gPokenavResources == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
@@ -345,7 +345,7 @@ static void CB2_InitPokenavForTutorial(void)
     if (gPaletteFade.active)
         return;
 
-    gPokenavResources = Alloc(sizeof(*gPokenavResources));
+    gPokenavResources = Alloc(sizeof(struct PokenavResources));
     if (gPokenavResources == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
