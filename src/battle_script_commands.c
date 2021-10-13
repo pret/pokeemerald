@@ -2651,7 +2651,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
     case MOVE_EFFECT_KNOCK_OFF:
     case MOVE_EFFECT_SMACK_DOWN:
     case MOVE_EFFECT_REMOVE_STATUS:
-    case MOVE_EFFECT_STEAL_ITEM:
     case MOVE_EFFECT_BURN_UP:
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
@@ -3146,6 +3145,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
+                // Only steal items on the final strike of Parental Bond
+                if (!(gSpecialStatuses[gBattlerAttacker].parentalBondOn == 2 && gBattleMons[gBattlerTarget].hp != 0))
                 {
                     if (!CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item))
                     {
@@ -5046,32 +5047,6 @@ static void Cmd_moveend(void)
                     }
                 }
                 break; // MOVE_EFFECT_REMOVE_STATUS
-            case MOVE_EFFECT_STEAL_ITEM:
-                if (!CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item)
-                    || gBattleMons[gBattlerAttacker].item != ITEM_NONE
-                    || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY
-                    || gBattleMons[gBattlerTarget].item == ITEM_NONE)
-                {
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveEnd; // Can't steal item, just do damage
-                }
-                else if (gBattleMons[gBattlerTarget].item
-                    && gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD) // Can steal item, but ability prevents it
-                {
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_NoItemSteal;
-
-                    gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
-                    RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-                }
-                else
-                {
-                    StealTargetItem(gBattlerAttacker, gBattlerTarget);  // Attacker steals target item
-                    gBattleStruct->changedItems[gBattlerAttacker] = gLastUsedItem; // Stolen item to be assigned later
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_ItemSteal;
-                }
-                break; // MOVE_EFFECT_STEAL_ITEM
             case MOVE_EFFECT_BURN_UP:
                 effect = TRUE;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
