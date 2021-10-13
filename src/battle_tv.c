@@ -1130,11 +1130,11 @@ void TryPutLinkBattleTvShowOnAir(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((playerBestMonId < 3 && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
-            || (playerBestMonId >= 3 && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
+        if ((playerBestMonId < MULTI_PARTY_SIZE && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
+         || (playerBestMonId >= MULTI_PARTY_SIZE && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
         {
-            j = (opponentBestMonId < 3) ? 0 : 1;
-            PutBattleUpdateOnTheAir(sub_806EF84(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
+            j = (opponentBestMonId < MULTI_PARTY_SIZE) ? FALSE : TRUE;
+            PutBattleUpdateOnTheAir(GetOpposingLinkMultiBattlerId(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
         }
     }
     else
@@ -1593,12 +1593,12 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
 
 static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot)
 {
-    if (weatherFlags & WEATHER_RAIN_ANY)
+    if (weatherFlags & B_WEATHER_RAIN)
         AddMovePoints(PTS_RAIN, moveId, moveSlot, 0);
-    else if (weatherFlags & WEATHER_SUN_ANY)
+    else if (weatherFlags & B_WEATHER_SUN)
         AddMovePoints(PTS_SUN, moveId, moveSlot, 0);
-    else if (weatherFlags & WEATHER_SANDSTORM_ANY)
+    else if (weatherFlags & B_WEATHER_SANDSTORM)
         AddMovePoints(PTS_SANDSTORM, moveId, moveSlot, 0);
-    else if (weatherFlags & WEATHER_HAIL_ANY)
+    else if (weatherFlags & B_WEATHER_HAIL)
         AddMovePoints(PTS_HAIL, moveId, moveSlot, 0);
 }

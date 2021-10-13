@@ -1769,9 +1769,7 @@ void ResetTempTileDataBuffers(void)
 {
     int i;
     for (i = 0; i < (int)ARRAY_COUNT(sTempTileDataBuffer); i++)
-    {
         sTempTileDataBuffer[i] = NULL;
-    }
     sTempTileDataBufferIdx = 0;
 }
 
@@ -1784,9 +1782,7 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
         if (sTempTileDataBufferIdx)
         {
             for (i = 0; i < sTempTileDataBufferIdx; i++)
-            {
                 FREE_AND_SET_NULL(sTempTileDataBuffer[i]);
-            }
             sTempTileDataBufferIdx = 0;
         }
         return FALSE;

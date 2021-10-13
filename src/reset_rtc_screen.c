@@ -219,7 +219,7 @@ static const union AnimCmd *const sAnims_Arrow[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = PALTAG_ARROW,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,

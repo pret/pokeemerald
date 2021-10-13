@@ -100,9 +100,9 @@ static void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8
 {
     if (!isTrainer)
     {
-        if (paletteTag == 0xFFFF)
+        if (paletteTag == TAG_NONE)
         {
-            sCreatingSpriteTemplate.paletteTag = 0xFFFF;
+            sCreatingSpriteTemplate.paletteTag = TAG_NONE;
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
@@ -113,9 +113,9 @@ static void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8
     }
     else
     {
-        if (paletteTag == 0xFFFF)
+        if (paletteTag == TAG_NONE)
         {
-            sCreatingSpriteTemplate.paletteTag = 0xFFFF;
+            sCreatingSpriteTemplate.paletteTag = TAG_NONE;
             LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
@@ -182,7 +182,7 @@ static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFront
         images[j].data = framePics + 0x800 * j;
         images[j].size = 0x800;
     }
-    sCreatingSpriteTemplate.tileTag = 0xFFFF;
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
     sCreatingSpriteTemplate.oam = &gUnknown_0860B064;
     AssignSpriteAnimsTable(isTrainer);
     sCreatingSpriteTemplate.images = images;
@@ -190,7 +190,7 @@ static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFront
     sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
     LoadPicPaletteByTagOrSlot(species, otId, personality, paletteSlot, paletteTag, isTrainer);
     spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
-    if (paletteTag == 0xFFFF)
+    if (paletteTag == TAG_NONE)
     {
         gSprites[spriteId].oam.paletteNum = paletteSlot;
     }
@@ -257,7 +257,7 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
         images[j].data = framePics + 0x800 * j;
         images[j].size = 0x800;
     }
-    sCreatingSpriteTemplate.tileTag = 0xFFFF;
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
     sCreatingSpriteTemplate.anims = gMonFrontAnimsPtrTable[species];
     sCreatingSpriteTemplate.images = images;
     if (flags2 == 0x01)
@@ -278,7 +278,7 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
     sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
     LoadPicPaletteByTagOrSlot(species, otId, personality, paletteSlot, paletteTag, FALSE);
     spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
-    if (paletteTag == 0xFFFF)
+    if (paletteTag == TAG_NONE)
     {
         gSprites[spriteId].oam.paletteNum = paletteSlot;
     }
@@ -309,7 +309,7 @@ static u16 FreeAndDestroyPicSpriteInternal(u16 spriteId)
     }
     framePics = sSpritePics[i].frames;
     images = sSpritePics[i].images;
-    if (sSpritePics[i].paletteTag != 0xFFFF)
+    if (sSpritePics[i].paletteTag != TAG_NONE)
     {
         FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
     }

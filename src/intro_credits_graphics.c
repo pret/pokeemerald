@@ -79,7 +79,7 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite);
 static const struct SpriteTemplate sSpriteTemplate_MovingScenery =
 {
     .tileTag = TAG_MOVING_SCENERY,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &gDummyOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

@@ -339,4 +339,10 @@
 
 #define MON_PIC_SIZE (64 * 64 / 2)
 
+#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
+#define BATTLE_ALIVE_ATK_SIDE       1
+#define BATTLE_ALIVE_DEF_SIDE       2
+
+#define SKIP_FRONT_ANIM (1 << 7)
+
 #endif // GUARD_CONSTANTS_POKEMON_H

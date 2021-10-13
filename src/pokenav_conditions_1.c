@@ -435,7 +435,7 @@ void CopyMonNameGenderLocation(s16 id, u8 arg1)
         if (boxId == TOTAL_BOXES_COUNT)
             CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], gText_InParty, 8);
         else
-            CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], GetBoxNamePtr(boxId), 8);
+            CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], GetBoxNamePtr(boxId), BOX_NAME_LENGTH);
     }
     else
     {

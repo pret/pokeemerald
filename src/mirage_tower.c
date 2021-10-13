@@ -153,8 +153,8 @@ static const union AnimCmd *const sAnims_FallingFossil[] =
 
 static const struct SpriteTemplate sSpriteTemplate_FallingFossil =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_FallingFossil,
     .anims = sAnims_FallingFossil,
     .images = NULL,
@@ -204,7 +204,7 @@ static const struct OamData sOamData_CeilingCrumbleSmall =
 
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleSmall = {
     .tileTag = TAG_CEILING_CRUMBLE,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleSmall,
     .anims = sAnims_CeilingCrumbleSmall,
     .images = NULL,
@@ -242,7 +242,7 @@ static const struct OamData sOamData_CeilingCrumbleLarge =
 
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge = {
     .tileTag = TAG_CEILING_CRUMBLE,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleLarge,
     .anims = sAnims_CeilingCrumbleLarge,
     .images = NULL,

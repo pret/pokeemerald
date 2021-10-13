@@ -630,7 +630,7 @@ bool32 IsStringJapanese(u8 *str)
 {
     while (*str != EOS)
     {
-        if (*str < CHAR_0)
+        if (*str <= JAPANESE_CHAR_END)
             if (*str != CHAR_SPACE)
                 return TRUE;
         str++;
@@ -639,13 +639,13 @@ bool32 IsStringJapanese(u8 *str)
     return FALSE;
 }
 
-bool32 sub_800924C(u8 *str, s32 n)
+bool32 IsStringNJapanese(u8 *str, s32 n)
 {
     s32 i;
 
     for (i = 0; *str != EOS && i < n; i++)
     {
-        if (*str < CHAR_0)
+        if (*str <= JAPANESE_CHAR_END)
             if (*str != CHAR_SPACE)
                 return TRUE;
         str++;
