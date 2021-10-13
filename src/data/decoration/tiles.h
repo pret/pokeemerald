@@ -1,4 +1,4 @@
-#define DECOR_TILE(name) (METATILE_SecretBase_##name - 0x200)
+#define DECOR_TILE(name) (METATILE_SecretBase_##name - NUM_TILES_IN_PRIMARY)
 
 const u16 DecorGfx_SMALL_DESK[] = {
     DECOR_TILE(SmallDesk)

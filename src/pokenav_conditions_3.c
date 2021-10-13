@@ -419,7 +419,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     switch (state)
     {
     case 0:
-        InitBgTemplates(sConditionSearchResultBgTemplates, NELEMS(sConditionSearchResultBgTemplates));
+        InitBgTemplates(sConditionSearchResultBgTemplates, ARRAY_COUNT(sConditionSearchResultBgTemplates));
         DecompressAndCopyTileDataToVram(1, sConditionSearchResultTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, searchList->buff);
         CopyToBgTilemapBuffer(1, sConditionSearchResultTilemap, 0, 0);

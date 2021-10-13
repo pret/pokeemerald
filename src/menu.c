@@ -144,8 +144,8 @@ void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 void InitStandardTextBoxWindows(void)
 {
     InitWindows(sStandardTextBox_WindowTemplates);
-    sStartMenuWindowId = 0xFF;
-    sMapNamePopupWindowId = 0xFF;
+    sStartMenuWindowId = WINDOW_NONE;
+    sMapNamePopupWindowId = WINDOW_NONE;
 }
 
 void FreeAllOverworldWindowBuffers(void)
@@ -490,7 +490,7 @@ u8 GetPlayerTextSpeedDelay(void)
 
 u8 sub_81979C4(u8 a1)
 {
-    if (sStartMenuWindowId == 0xFF)
+    if (sStartMenuWindowId == WINDOW_NONE)
         sStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
     return sStartMenuWindowId;
 }
@@ -502,10 +502,10 @@ u8 GetStartMenuWindowId(void)
 
 void RemoveStartMenuWindow(void)
 {
-    if (sStartMenuWindowId != 0xFF)
+    if (sStartMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sStartMenuWindowId);
-        sStartMenuWindowId = 0xFF;
+        sStartMenuWindowId = WINDOW_NONE;
     }
 }
 
@@ -521,7 +521,7 @@ u16 sub_8197A38(void)
 
 u8 AddMapNamePopUpWindow(void)
 {
-    if (sMapNamePopupWindowId == 0xFF)
+    if (sMapNamePopupWindowId == WINDOW_NONE)
         sMapNamePopupWindowId = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
     return sMapNamePopupWindowId;
 }
@@ -533,10 +533,10 @@ u8 GetMapNamePopUpWindowId(void)
 
 void RemoveMapNamePopUpWindow(void)
 {
-    if (sMapNamePopupWindowId != 0xFF)
+    if (sMapNamePopupWindowId != WINDOW_NONE)
     {
         RemoveWindow(sMapNamePopupWindowId);
-        sMapNamePopupWindowId = 0xFF;
+        sMapNamePopupWindowId = WINDOW_NONE;
     }
 }
 
@@ -815,7 +815,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
 {
     u16 width = 0;
 
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
@@ -837,7 +837,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
     u8 color[3];
     u16 width = 0;
 
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         if (a3 != 0)
         {
@@ -872,13 +872,13 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 
 void sub_81982D8(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
         CopyWindowToVram(sWindowId, 3);
 }
 
 void sub_81982F0(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
         CopyWindowToVram(sWindowId, 3);
@@ -887,13 +887,13 @@ void sub_81982F0(void)
 
 void sub_8198314(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sWindowId);
         CopyWindowToVram(sWindowId, 3);
         RemoveWindow(sWindowId);
-        sWindowId = 0xFF;
+        sWindowId = WINDOW_NONE;
     }
 }
 

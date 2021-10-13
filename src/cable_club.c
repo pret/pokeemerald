@@ -82,7 +82,7 @@ static void Task_ReestablishLinkAwaitConfirmation(u8 taskId);
 
 static void CreateLinkupTask(u8 minPlayers, u8 maxPlayers)
 {
-    if (FindTaskIdByFunc(Task_LinkupStart) == 0xFF)
+    if (FindTaskIdByFunc(Task_LinkupStart) == TASK_NONE)
     {
         u8 taskId1;
 
@@ -128,8 +128,6 @@ static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)
 
 static u32 ExchangeDataAndGetLinkupStatus(u8 minPlayers, u8 maxPlayers)
 {
-    int playerCount;
-
     switch (GetLinkPlayerDataExchangeStatusTimed(minPlayers, maxPlayers))
     {
     case EXCHANGE_COMPLETE:
@@ -511,7 +509,6 @@ static void FinishLinkup(u16 *linkupStatus, u32 taskId)
 static void Task_LinkupAwaitTrainerCardData(u8 taskId)
 {
     u8 index;
-    struct TrainerCard *trainerCards;
 
     if (CheckLinkErrored(taskId) == TRUE)
         return;
@@ -630,7 +627,7 @@ void ValidateMixingGameLanguage(void)
 {
     u32 taskId = FindTaskIdByFunc(Task_ValidateMixingGameLanguage);
 
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
     {
         taskId = CreateTask(Task_ValidateMixingGameLanguage, 80);
         gTasks[taskId].tState = 0;
@@ -993,7 +990,7 @@ static void CB2_ReturnFromUnionRoomBattle(void)
 
 void CB2_ReturnFromCableClubBattle(void)
 {
-    gBattleTypeFlags &= ~BATTLE_TYPE_20;
+    gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();

@@ -4033,9 +4033,9 @@ extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
 extern const u32 gPokenavLeftHeaderCute_Gfx[];
 extern const u32 gPokenavLeftHeaderSmart_Gfx[];
 extern const u32 gPokenavLeftHeaderTough_Gfx[];
-extern const u16 gUnknown_08DDE010[];
-extern const u32 gUnknown_08DDE030[];
-extern const u32 gUnknown_08DDE12C[];
+extern const u16 gPokenavRibbonsSummaryBg_Pal[];
+extern const u32 gPokenavRibbonsSummaryBg_Gfx[];
+extern const u32 gPokenavRibbonsSummaryBg_Tilemap[];
 
 extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
@@ -4087,8 +4087,8 @@ extern const u32 gConfetti_Gfx[];
 extern const u32 gConfetti_Pal[];
 
 extern const u32 gUnknown_08C093F0[];
-extern const u32 gSubstituteDollTilemap[];
-extern const u32 gSubstituteDollGfx[];
+extern const u32 gSubstituteDollBackGfx[];
+extern const u32 gSubstituteDollFrontGfx[];
 extern const u32 gSubstituteDollPal[];
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
@@ -4977,10 +4977,10 @@ extern const u32 gEasyChatWindow_Gfx[];
 extern const u32 gEasyChatWindow_Tilemap[];
 extern const u32 gEasyChatMode_Gfx[];
 extern const u16 gEasyChatMode_Pal[];
-extern const u32 gEasyChatCursor_Gfx[];
-extern const u16 gEasyChatCursor_Pal[];
-extern const u32 gEasyChatRightWindow_Gfx[];
-extern const u16 gEasyChatRightWindow_Pal[];
+extern const u32 gEasyChatRectangleCursor_Gfx[];
+extern const u16 gEasyChatRectangleCursor_Pal[];
+extern const u32 gEasyChatButtonWindow_Gfx[];
+extern const u16 gEasyChatButtonWindow_Pal[];
 
 // Use Pokeblock
 extern const u32 gUsePokeblockCondition_Gfx[];
@@ -5014,10 +5014,53 @@ extern const u16 gPokenavMessageBox_Pal[];
 extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
 
+// Battle Factory Screen
+extern const u8 gFrontierFactorySelectMenu_Gfx[];
+extern const u8 gFrontierFactorySelectMenu_Tilemap[];
+extern const u16 gFrontierFactorySelectMenu_Pal[];
+
 // Object event pals
 extern const u16 gObjectEventPal_Brendan[];
 extern const u16 gObjectEventPal_May[];
 extern const u16 gObjectEventPal_RubySapphireBrendan[];
 extern const u16 gObjectEventPal_RubySapphireMay[];
+
+// Mail
+extern const u16 gMailPalette_Orange[];
+extern const u16 gMailPalette_Harbor[];
+extern const u16 gMailPalette_Glitter[];
+extern const u16 gMailPalette_Mech[];
+extern const u16 gMailPalette_Wood[];
+extern const u16 gMailPalette_Wave[];
+extern const u16 gMailPalette_Bead[];
+extern const u16 gMailPalette_Shadow[];
+extern const u16 gMailPalette_Tropic[];
+extern const u16 gMailPalette_Dream[];
+extern const u16 gMailPalette_Fab[];
+extern const u16 gMailPalette_Retro[];
+extern const u8 gMailTiles_Orange[];
+extern const u8 gMailTilemap_Orange[];
+extern const u8 gMailTiles_Harbor[];
+extern const u8 gMailTilemap_Harbor[];
+extern const u8 gMailTiles_Glitter[];
+extern const u8 gMailTilemap_Glitter[];
+extern const u8 gMailTiles_Mech[];
+extern const u8 gMailTilemap_Mech[];
+extern const u8 gMailTiles_Wood[];
+extern const u8 gMailTilemap_Wood[];
+extern const u8 gMailTiles_Wave[];
+extern const u8 gMailTilemap_Wave[];
+extern const u8 gMailTiles_Bead[];
+extern const u8 gMailTilemap_Bead[];
+extern const u8 gMailTiles_Shadow[];
+extern const u8 gMailTilemap_Shadow[];
+extern const u8 gMailTiles_Tropic[];
+extern const u8 gMailTilemap_Tropic[];
+extern const u8 gMailTiles_Dream[];
+extern const u8 gMailTilemap_Dream[];
+extern const u8 gMailTiles_Fab[];
+extern const u8 gMailTilemap_Fab[];
+extern const u8 gMailTiles_Retro[];
+extern const u8 gMailTilemap_Retro[];
 
 #endif //GUARD_GRAPHICS_H

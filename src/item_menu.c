@@ -41,7 +41,6 @@
 #include "shop.h"
 #include "sound.h"
 #include "sprite.h"
-#include "string.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
@@ -87,7 +86,7 @@ u16 BagGetQuantityByPocketPosition(u8, u16);
 void BagDestroyPocketSwitchArrowPair(void);
 void TaskCloseBagMenu_2(u8);
 u8 AddItemMessageWindow(u8);
-void BagMenu_RemoveBagItemMessageindow(u8);
+void BagMenu_RemoveBagItemMessageWindow(u8);
 void set_callback3_to_bag(u8);
 void PrintItemDepositAmount(u8, s16);
 static u8 BagMenu_AddWindow(u8);
@@ -595,8 +594,8 @@ void GoToBagMenu(u8 location, u8 pocket, void ( *postExitMenuMainCallback2)())
             gBagMenu->pocketSwitchDisabled = TRUE;
         gBagMenu->exitCallback = NULL;
         gBagMenu->itemOriginalLocation = 0xFF;
-        gBagMenu->pocketScrollArrowsTask = 0xFF;
-        gBagMenu->pocketSwitchArrowsTask = 0xFF;
+        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
+        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
         memset(gBagMenu->spriteId, 0xFF, sizeof(gBagMenu->spriteId));
         memset(gBagMenu->windowPointers, 0xFF, 10);
         SetMainCallback2(CB2_Bag);
@@ -628,7 +627,6 @@ void CB2_Bag(void)
 
 bool8 SetupBagMenu(void)
 {
-    u32 index;
     u8 taskId;
 
     switch (gMain.state)
@@ -726,11 +724,11 @@ bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 19:
-        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BlendPalettes(PALETTES_ALL, 16, 0);
         gMain.state++;
         break;
     case 20:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
@@ -747,7 +745,7 @@ void BagMenu_InitBGs(void)
     ResetVramOamAndBgCntRegs();
     memset(gBagMenu->tilemapBuffer, 0, 0x800);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sBgTemplates_ItemMenu, 3);
+    InitBgsFromTemplates(0, sBgTemplates_ItemMenu, ARRAY_COUNT(sBgTemplates_ItemMenu));
     SetBgTilemapBuffer(2, gBagMenu->tilemapBuffer);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(2);
@@ -870,7 +868,7 @@ void GetItemName(s8 *dest, u16 itemId)
             }
             break;
         case BERRIES_POCKET:
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_CHERI_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+            ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
             CopyItemName(itemId, gStringVar2);
             StringExpandPlaceholders(dest, gText_NumberVar1Clear7Var2);
             break;
@@ -977,7 +975,7 @@ void BagMenu_PrintCursor(u8 y, u8 colorIndex)
 
 void CreatePocketScrollArrowPair(void)
 {
-    if (gBagMenu->pocketScrollArrowsTask == 0xFF)
+    if (gBagMenu->pocketScrollArrowsTask == TASK_NONE)
         gBagMenu->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
             172,
@@ -991,26 +989,26 @@ void CreatePocketScrollArrowPair(void)
 
 void BagDestroyPocketScrollArrowPair(void)
 {
-    if (gBagMenu->pocketScrollArrowsTask != 0xFF)
+    if (gBagMenu->pocketScrollArrowsTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gBagMenu->pocketScrollArrowsTask);
-        gBagMenu->pocketScrollArrowsTask = 0xFF;
+        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
     }
     BagDestroyPocketSwitchArrowPair();
 }
 
 void CreatePocketSwitchArrowPair(void)
 {
-    if (gBagMenu->pocketSwitchDisabled != TRUE && gBagMenu->pocketSwitchArrowsTask == 0xFF)
+    if (gBagMenu->pocketSwitchDisabled != TRUE && gBagMenu->pocketSwitchArrowsTask == TASK_NONE)
         gBagMenu->pocketSwitchArrowsTask = AddScrollIndicatorArrowPair(&sBagScrollArrowsTemplate, &gBagPositionStruct.unk6);
 }
 
 void BagDestroyPocketSwitchArrowPair(void)
 {
-    if (gBagMenu->pocketSwitchArrowsTask != 0xFF)
+    if (gBagMenu->pocketSwitchArrowsTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gBagMenu->pocketSwitchArrowsTask);
-        gBagMenu->pocketSwitchArrowsTask = 0xFF;
+        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
     }
 }
 
@@ -1024,7 +1022,7 @@ void FreeBagItemListBuffers(void)
 
 void Task_FadeAndCloseBagMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = TaskCloseBagMenu_2;
 }
 
@@ -1121,7 +1119,7 @@ void BagMenu_InitListsMenu(u8 taskId)
     s16* data = gTasks[taskId].data;
     u16* scrollPos = &gBagPositionStruct.scrollPosition[gBagPositionStruct.pocket];
     u16* cursorPos = &gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket];
-    BagMenu_RemoveBagItemMessageindow(4);
+    BagMenu_RemoveBagItemMessageWindow(4);
     DestroyListMenuTask(data[0], scrollPos, cursorPos);
     UpdatePocketItemList(gBagPositionStruct.pocket);
     SetInitialScrollAndCursorPositions(gBagPositionStruct.pocket);
@@ -1739,7 +1737,7 @@ void ItemMenu_UseOutOfBattle(u8 taskId)
     if (ItemId_GetFieldFunc(gSpecialVar_ItemId))
     {
         BagMenu_RemoveSomeWindow();
-        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == 1)
+        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU)
             BagMenu_PrintThereIsNoPokemon(taskId);
         else
         {
@@ -1990,7 +1988,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         {
             ScriptContext2_Enable();
             FreezeObjectEvents();
-            sub_808B864();
+            PlayerFreeze();
             sub_808BCF4();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
@@ -2054,7 +2052,7 @@ void BagMenu_CancelSell(u8 taskId)
     s16* data = gTasks[taskId].data;
 
     RemoveMoneyWindow();
-    BagMenu_RemoveBagItemMessageindow(4);
+    BagMenu_RemoveBagItemMessageWindow(4);
     BagMenu_PrintCursor_(data[0], 0);
     set_callback3_to_bag(taskId);
 }
@@ -2089,7 +2087,7 @@ static void Task_SellHowManyDialogueHandleInput(u8 taskId)
         BagMenu_PrintCursor_(data[0], 0);
         RemoveMoneyWindow();
         BagMenu_RemoveWindow(8);
-        BagMenu_RemoveBagItemMessageindow(4);
+        BagMenu_RemoveBagItemMessageWindow(4);
         set_callback3_to_bag(taskId);
     }
 }
@@ -2409,7 +2407,7 @@ u8 sub_81AE124(u8 which)
 u8 BagMenu_AddWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr == 0xFF)
+    if (*ptr == WINDOW_NONE)
     {
         *ptr = AddWindow(&sContextMenuWindowTemplates[which]);
         DrawStdFrameWithCustomTileAndPalette(*ptr, 0, 1, 14);
@@ -2421,35 +2419,35 @@ u8 BagMenu_AddWindow(u8 which)
 void BagMenu_RemoveWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         ScheduleBgCopyTilemapToVram(1);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
     }
 }
 
 u8 AddItemMessageWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr == 0xFF)
+    if (*ptr == WINDOW_NONE)
         *ptr = AddWindow(&sContextMenuWindowTemplates[which]);
     return *ptr;
 }
 
-void BagMenu_RemoveBagItemMessageindow(u8 which)
+void BagMenu_RemoveBagItemMessageWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearDialogWindowAndFrameToTransparent(*ptr, FALSE);
         // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         ScheduleBgCopyTilemapToVram(1);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
     }
 }
 

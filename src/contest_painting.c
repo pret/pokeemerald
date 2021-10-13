@@ -165,12 +165,11 @@ const u16 gUnknown_085B0838[] = {RGB(0, 0, 0), RGB(0, 0, 0)};
 
 void SetContestWinnerForPainting(int contestWinnerId)
 {
-    // probably fakematching
     u8 *ptr1 = &gUnknown_02039F5D;
     u8 *ptr2 = &gUnknown_02039F5C;
-	gCurContestWinner = gSaveBlock1Ptr->contestWinners[contestWinnerId - 1];
-	*ptr1 = contestWinnerId - 1;
-	*ptr2 = FALSE;
+    gCurContestWinner = gSaveBlock1Ptr->contestWinners[contestWinnerId - 1];
+    *ptr1 = contestWinnerId - 1;
+    *ptr2 = FALSE;
 }
 
 void CB2_ContestPainting(void)
@@ -251,7 +250,7 @@ static void HoldContestPainting(void)
         if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             gContestPaintingState++;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
         }
 
         if (gUnknown_030011F6)

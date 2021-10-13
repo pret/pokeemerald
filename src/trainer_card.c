@@ -414,8 +414,8 @@ static void Task_TrainerCard(u8 taskId)
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(230, 150);
         }
-        BlendPalettes(0xFFFFFFFF, 16, sData->blendColor);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, sData->blendColor);
+        BlendPalettes(PALETTES_ALL, 16, sData->blendColor);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, sData->blendColor);
         SetVBlankCallback(VblankCb_TrainerCard);
         sData->mainState++;
         break;
@@ -452,7 +452,7 @@ static void Task_TrainerCard(u8 taskId)
             }
             else
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, sData->blendColor);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
                 sData->mainState = STATE_CLOSE_CARD;
             }
         }
@@ -473,7 +473,7 @@ static void Task_TrainerCard(u8 taskId)
             }
             else if (gReceivedRemoteLinkPlayers)
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, sData->blendColor);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
                 sData->mainState = STATE_CLOSE_CARD;
             }
             else
@@ -491,7 +491,7 @@ static void Task_TrainerCard(u8 taskId)
            }
            else
            {
-               BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, sData->blendColor);
+               BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
                sData->mainState = STATE_CLOSE_CARD;
            }
         }
@@ -506,7 +506,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_CLOSE_CARD_LINK:
         if (!gReceivedRemoteLinkPlayers)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, sData->blendColor);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
             sData->mainState = STATE_CLOSE_CARD;
         }
         break;
@@ -1588,7 +1588,7 @@ static void FlipTrainerCard(void)
 
 static bool8 IsCardFlipTaskActive(void)
 {
-    if (FindTaskIdByFunc(Task_DoCardFlipTask) == 0xFF)
+    if (FindTaskIdByFunc(Task_DoCardFlipTask) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

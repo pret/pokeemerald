@@ -1627,8 +1627,8 @@ static void Task_DuoFightAnim(u8 taskId)
         StopMapMusic();
     }
 
-    BlendPalettes(-1, 0x10, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 0x10, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
     SetVBlankCallback(VBlankCB_DuoFight);
     PlaySE(SE_DOWNPOUR);
 }
@@ -1738,21 +1738,21 @@ static void Task_HandleDuoFight(u8 taskId)
 static void DuoFight_Lightning1(void)
 {
     PlaySE(SE_THUNDER);
-    BlendPalettesGradually(0x00007FFF, 0, 16, 0, RGB_WHITEALPHA, 0, 0);
-    BlendPalettesGradually(0xFFFF0000, 0, 16, 0, RGB_BLACK,      0, 1);
+    BlendPalettesGradually(PALETTES_BG & ~(0x8000), 0, 16, 0, RGB_WHITEALPHA, 0, 0);
+    BlendPalettesGradually(PALETTES_OBJECTS, 0, 16, 0, RGB_BLACK,      0, 1);
 }
 
 static void DuoFight_Lightning2(void)
 {
     PlaySE(SE_THUNDER);
-    BlendPalettesGradually(0x00007FFF, 0, 16, 16, RGB_WHITEALPHA, 0, 0);
-    BlendPalettesGradually(0xFFFF0000, 0, 16, 16, RGB_BLACK,      0, 1);
+    BlendPalettesGradually(PALETTES_BG & ~(0x8000), 0, 16, 16, RGB_WHITEALPHA, 0, 0);
+    BlendPalettesGradually(PALETTES_OBJECTS, 0, 16, 16, RGB_BLACK,      0, 1);
 }
 
 static void DuoFight_LightningLong(void)
 {
-    BlendPalettesGradually(0x00007FFF, 4, 16, 0, RGB_WHITEALPHA, 0, 0);
-    BlendPalettesGradually(0xFFFF0000, 4, 16, 0, RGB_BLACK,      0, 1);
+    BlendPalettesGradually(PALETTES_BG & ~(0x8000), 4, 16, 0, RGB_WHITEALPHA, 0, 0);
+    BlendPalettesGradually(PALETTES_OBJECTS, 4, 16, 0, RGB_BLACK,      0, 1);
 }
 
 static void DuoFight_AnimateRain(void)
@@ -1784,7 +1784,7 @@ static void DuoFight_PanOffScene(u8 taskId)
 static void DuoFightEnd(u8 taskId, s8 palDelay)
 {
     PlaySE(SE_DOWNPOUR_STOP);
-    BeginNormalPaletteFade(0xFFFFFFFF, palDelay, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, palDelay, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_DuoFightEnd;
 }
 
@@ -2045,7 +2045,7 @@ static void Task_RayTakesFlightAnim(u8 taskId)
     LoadTakesFlightSceneGfx();
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
-    BlendPalettes(-1, 16, 0);
+    BlendPalettes(PALETTES_ALL, 16, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
     CreateTask(Task_TakesFlight_CreateSmoke, 0);
     tState = 0;
@@ -2064,7 +2064,7 @@ static void Task_HandleRayTakesFlight(u8 taskId)
         // Delay, then fade in
         if (tTimer == 8)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             tScale = 0;
             tScaleSpeed = 30;
             tYCoord = 0;
@@ -2110,7 +2110,7 @@ static void Task_HandleRayTakesFlight(u8 taskId)
             if (tTimer > 295)
             {
                 tState++;
-                BeginNormalPaletteFade(0xFFFFFFFF, 6, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 6, 0, 0x10, RGB_BLACK);
             }
         }
         break;
@@ -2284,7 +2284,7 @@ static void Task_RayDescendsAnim(u8 taskId)
     LoadDescendsSceneGfx();
     SetGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-    BlendPalettes(-1, 0x10, 0);
+    BlendPalettes(PALETTES_ALL, 0x10, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
     sRayScene->revealedLightLine = 0;
     sRayScene->revealedLightTimer = 0;
@@ -2305,7 +2305,7 @@ static void Task_HandleRayDescends(u8 taskId)
         // Delay, then fade in
         if (tTimer == 8)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             tTimer = 0;
             tState++;
         }
@@ -2354,7 +2354,7 @@ static void Task_HandleRayDescends(u8 taskId)
         break;
     case 4:
         // Fade out
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_RayDescendsEnd;
         break;
     }
@@ -2501,7 +2501,7 @@ static void Task_RayChargesAnim(u8 taskId)
     InitChargesSceneBgs();
     LoadChargesSceneGfx();
     SetWindowsHideVertBorders();
-    BlendPalettes(-1, 0x10, 0);
+    BlendPalettes(PALETTES_ALL, 0x10, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
     tState = 0;
     tTimer = 0;
@@ -2523,7 +2523,7 @@ static void Task_HandleRayCharges(u8 taskId)
         // Delay, then fade in
         if (tTimer == 8)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             tTimer = 0;
             tState++;
         }
@@ -2559,7 +2559,7 @@ static void Task_HandleRayCharges(u8 taskId)
         break;
     case 3:
         // Fade out
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_RayChargesEnd;
         break;
     }
@@ -2697,7 +2697,7 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 14));
-    BlendPalettes(-1, 0x10, 0);
+    BlendPalettes(PALETTES_ALL, 0x10, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
     tState = 0;
     tTimer = 0;
@@ -2720,7 +2720,7 @@ static void Task_HandleRayChasesAway(u8 taskId)
         if (tTimer == 8)
         {
             ChasesAway_CreateTrioSprites(taskId);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             tTimer = 0;
             tState++;
         }
@@ -2760,14 +2760,14 @@ static void Task_HandleRayChasesAway(u8 taskId)
             tTimer++;
             if (tTimer % 144 == 0)
             {
-                BlendPalettesGradually(0x0000FFFE, 0, 16, 0, RGB_WHITEALPHA, 0, 0);
-                BlendPalettesGradually(0xFFFF0000, 0, 16, 0, RGB_BLACK,      0, 1);
+                BlendPalettesGradually(PALETTES_BG & ~1, 0, 16, 0, RGB_WHITEALPHA, 0, 0);
+                BlendPalettesGradually(PALETTES_OBJECTS, 0, 16, 0, RGB_BLACK,      0, 1);
             }
         }
         break;
     case 3:
         // Fade out
-        BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_RayChasesAwayEnd;
         break;
     }

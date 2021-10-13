@@ -2986,7 +2986,7 @@ static void Task_RunUnionRoom(u8 taskId)
         uroom->state = UR_STATE_START_ACTIVITY_FADE;
         break;
     case UR_STATE_START_ACTIVITY_FADE:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         uroom->state = UR_STATE_START_ACTIVITY;
         break;
     case UR_STATE_START_ACTIVITY:
@@ -3050,7 +3050,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_REGISTER_SELECT_MON_FADE:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         uroom->state = UR_STATE_REGISTER_SELECT_MON;
         break;
     case UR_STATE_REGISTER_SELECT_MON:

@@ -22,7 +22,7 @@ struct BgControl
 
         u8 unknown_2;
         u8 unknown_3;
-    } configs[4];
+    } configs[NUM_BACKGROUNDS];
 
     u16 bgVisibilityAndMode;
 };
@@ -39,8 +39,8 @@ struct BgConfig2
 };
 
 static struct BgControl sGpuBgConfigs;
-static struct BgConfig2 sGpuBgConfigs2[4];
-static u32 sDmaBusyBitfield[4];
+static struct BgConfig2 sGpuBgConfigs2[NUM_BACKGROUNDS];
+static u32 sDmaBusyBitfield[NUM_BACKGROUNDS];
 
 u32 gUnneededFireRedVariable;
 
@@ -70,7 +70,7 @@ void ResetBgControlStructs(void)
     struct BgConfig zeroedConfig = sZeroedBgControlStruct;
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_BACKGROUNDS; i++)
     {
         bgConfigs[i] = zeroedConfig;
     }
@@ -259,7 +259,7 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
             return;
         break;
     case 2:
-        if (bg < 2 || bg > 3)
+        if (bg < 2 || bg >= NUM_BACKGROUNDS)
             return;
         break;
     case 0:
@@ -290,7 +290,7 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
 
 bool8 IsInvalidBg(u8 bg)
 {
-    if (bg > 3)
+    if (bg >= NUM_BACKGROUNDS)
         return TRUE;
     else
         return FALSE;
@@ -306,7 +306,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
     int i;
     ResetBgs();
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_BACKGROUNDS; i++)
     {
         sDmaBusyBitfield[i] = 0;
     }
@@ -325,7 +325,7 @@ void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numT
     for (i = 0; i < numTemplates; i++)
     {
         bg = templates[i].bg;
-        if (bg < 4)
+        if (bg < NUM_BACKGROUNDS)
         {
             SetBgControlAttributes(bg,
                                    templates[i].charBaseIndex,
@@ -351,7 +351,7 @@ void InitBgFromTemplate(const struct BgTemplate *template)
 {
     u8 bg = template->bg;
 
-    if (bg < 4)
+    if (bg < NUM_BACKGROUNDS)
     {
         SetBgControlAttributes(bg,
                                template->charBaseIndex,
@@ -1239,7 +1239,7 @@ u32 GetBgType(u8 bg)
 
 bool32 IsInvalidBg32(u8 bg)
 {
-    if (bg > 3)
+    if (bg >= NUM_BACKGROUNDS)
         return TRUE;
     else
         return FALSE;

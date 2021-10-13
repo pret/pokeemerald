@@ -385,7 +385,7 @@ struct BattleStruct
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 unused_3[3];
-    u8 field_8B; // related to player's pokemon switching
+    u8 prevSelectedPartySlot;
     u8 unused_4[2];
     u8 stringMoveType;
     u8 expGetterBattlerId;
@@ -421,8 +421,8 @@ struct BattleStruct
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 field_180; // weird field, used in battle_main.c, once accessed as an array of u32 overwriting the field below
     u8 field_181;
-    u8 field_182;
-    u8 field_183;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi; // Last bit is 'has frontier pass'
     struct BattleEnigmaBerry battleEnigmaBerry;
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
@@ -523,7 +523,7 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId;
-    u8 field_9_x1:1;
+    u8 introAnimActive:1;
     u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
     u8 field_9_x20:1;
@@ -548,17 +548,17 @@ struct BattleHealthboxInfo
     u8 triedShinyMonAnim:1;
     u8 finishedShinyMonAnim:1;
     u8 field_1_x1E:4;
-    u8 field_1_x20:1;
-    u8 field_1_x40:1;
-    u8 field_1_x80:1;
+    u8 bgmRestored:1;
+    u8 waitForCry:1;
+    u8 healthboxSlideInStarted:1;
     u8 healthboxBounceSpriteId;
     u8 battlerBounceSpriteId;
     u8 animationState;
-    u8 field_5;
+    u8 partyStatusDelayTimer;
     u8 matrixNum;
     u8 shadowSpriteId;
-    u8 field_8;
-    u8 field_9;
+    u8 soundTimer;
+    u8 introEndDelay;
     u8 field_A;
     u8 field_B;
 };
@@ -617,7 +617,7 @@ extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
-extern u32 gUnknown_02022FF4;
+extern u32 gUnusedFirstBattleVar1;
 extern u8 *gUnknown_0202305C;
 extern u8 *gUnknown_02023060;
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
@@ -667,7 +667,7 @@ extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;
 extern u32 gHitMarker;
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_0202428C;
+extern u8 gUnusedFirstBattleVar2;
 extern u16 gSideStatuses[2];
 extern struct SideTimer gSideTimers[2];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
@@ -700,8 +700,8 @@ extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
-extern struct BattleHealthboxInfo *gUnknown_020244D8;
-extern struct BattleHealthboxInfo *gUnknown_020244DC;
+extern struct BattleHealthboxInfo *gBattleControllerOpponentHealthboxData;
+extern struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData;
 extern u16 gBattleMovePower;
 extern u16 gMoveToLearn;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
@@ -714,6 +714,6 @@ extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
-extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
 #endif // GUARD_BATTLE_H

@@ -1408,13 +1408,13 @@ void GiveLeadMonEffortRibbon(void)
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
     if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
     }
 }
 
 bool8 Special_AreLeadMonEVsMaxedOut(void)
 {
-    if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= 510)
+    if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
     {
         return TRUE;
     }
@@ -1449,7 +1449,7 @@ void SetShoalItemFlag(u16 unused)
 void PutZigzagoonInPlayerParty(void)
 {
     u16 monData;
-    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 32, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     monData = TRUE;
     SetMonData(&gPlayerParty[0], MON_DATA_ABILITY_NUM, &monData);
     monData = MOVE_TACKLE;
@@ -2667,7 +2667,7 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
     u8 taskId;
     PlaySE(SE_SELECT);
     taskId = FindTaskIdByFunc(ScrollableMultichoice_ProcessInput);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         u16 selection;
         struct Task *task = &gTasks[taskId];
@@ -2753,7 +2753,7 @@ static void sub_813A600(u8 taskId)
 void sub_813A630(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_813A600);
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
     {
         EnableBothScriptContexts();
     }
@@ -3262,7 +3262,7 @@ void sub_813ADD4(void)
     u16 scrollOffset, selectedRow;
     u8 i;
     u8 taskId = FindTaskIdByFunc(sub_813A600);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &scrollOffset, &selectedRow);
@@ -3321,7 +3321,7 @@ void GetBattleFrontierTutorMoveIndex(void)
 void sub_813AF48(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_813A600);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         DestroyListMenuTask(task->tListTaskId, NULL, NULL);

@@ -455,7 +455,7 @@ static void LinkTestProcessKeyInput(void)
     }
     if (JOY_NEW(L_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(2, 0, 0));
     }
     if (JOY_NEW(START_BUTTON))
     {
@@ -1489,7 +1489,7 @@ static void LinkCB_WaitCloseLink(void)
     if (count == linkPlayerCount)
     {
         // All ready, close link
-        gBattleTypeFlags &= ~BATTLE_TYPE_20;
+        gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
@@ -1551,7 +1551,7 @@ static void LinkCB_WaitCloseLinkWithJP(void)
     if (count == linkPlayerCount)
     {
         // All ready, close link
-        gBattleTypeFlags &= ~BATTLE_TYPE_20;
+        gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;

@@ -411,7 +411,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&animBg);
+    GetDefaultBattleAnimBgData(&animBg);
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Sandstorm, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_Sandstorm, 0);
     LoadCompressedPalette(gBattleAnimSpritePal_FlyingDirt, animBg.paletteId * 16, 32);
@@ -470,7 +470,7 @@ static void AnimTask_LoadSandstormBackground_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
+        GetDefaultBattleAnimBgData(&animBg);
         sub_80A6C68(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
@@ -731,7 +731,7 @@ static void AnimRolloutParticle(struct Sprite *sprite)
     if (TranslateAnimHorizontalArc(sprite))
     {
         u8 taskId = FindTaskIdByFunc(AnimTask_Rollout_Step);
-        if (taskId != 0xFF)
+        if (taskId != TASK_NONE)
             gTasks[taskId].data[11]--;
 
         DestroySprite(sprite);
@@ -833,7 +833,7 @@ void AnimTask_MoveSeismicTossBg(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_80A6DAC(FALSE);
+        UpdateAnimBg3ScreenSize(FALSE);
         gTasks[taskId].data[1] = 200;
     }
 
@@ -842,7 +842,7 @@ void AnimTask_MoveSeismicTossBg(u8 taskId)
 
     if (gTasks[taskId].data[0] == 120)
     {
-        sub_80A6DAC(TRUE);
+        UpdateAnimBg3ScreenSize(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 
@@ -853,7 +853,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_80A6DAC(FALSE);
+        UpdateAnimBg3ScreenSize(FALSE);
         gTasks[taskId].data[0]++;
         gTasks[taskId].data[2] = gBattle_BG3_Y;
     }
@@ -865,7 +865,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
     if (gBattleAnimArgs[7] == 0xFFF)
     {
         gBattle_BG3_Y = 0;
-        sub_80A6DAC(TRUE);
+        UpdateAnimBg3ScreenSize(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 }
