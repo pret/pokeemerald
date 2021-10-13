@@ -344,6 +344,15 @@ struct BattleTvMovePoints
     s16 points[2][PARTY_SIZE * 4];
 };
 
+struct LinkBattlerHeader
+{
+    u8 versionSignatureLo;
+    u8 versionSignatureHi;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -419,11 +428,10 @@ struct BattleStruct
     u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
-    u8 field_180; // weird field, used in battle_main.c, once accessed as an array of u32 overwriting the field below
-    u8 field_181;
-    u8 vsScreenHealthFlagsLo;
-    u8 vsScreenHealthFlagsHi; // Last bit is 'has frontier pass'
-    struct BattleEnigmaBerry battleEnigmaBerry;
+    union {
+        struct LinkBattlerHeader linkBattlerHeader;
+        u32 battleVideo[2];
+    } multiBuffer;
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;

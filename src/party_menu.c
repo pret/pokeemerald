@@ -4904,7 +4904,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     else
     {
         gPartyMenuUseExitCallback = TRUE;
-        PlayFanfareByFanfareNum(0);
+        PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
         UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         GetMonNickname(mon, gStringVar1);

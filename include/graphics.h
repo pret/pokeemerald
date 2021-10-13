@@ -4015,8 +4015,6 @@ extern const u32 gPokenavCondition_Tilemap[];
 extern const u16 gPokenavOptions_Tilemap[];
 extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
-extern const u8 gPokenavConditionMarker_Gfx[];
-extern const u16 gPokenavConditionMarker_Pal[];
 extern const u16 gPokenavLeftHeader_Pal[];
 extern const u16 gPokenavHeader_Pal[];
 extern const u32 gPokenavHeader_Gfx[];
@@ -4199,8 +4197,8 @@ extern const u32 gBattleAnimSpriteGfx_HumanoidFoot[];
 extern const u32 gBattleAnimSpriteGfx_MonsterFoot[];
 extern const u32 gBattleAnimSpriteGfx_HumanoidHand[];
 extern const u32 gBattleAnimSpriteGfx_NoiseLine[];
-extern const u32 gUnknown_08C2EA50[];
-extern const u32 gUnknown_08C2EA9C[];
+extern const u32 UnusedLevelupAnimationGfx[];
+extern const u32 UnusedLevelupAnimationTilemap[];
 extern const u32 gBattleAnimSpriteGfx_YellowUnk[];
 extern const u32 gBattleAnimSpriteGfx_RedFist[];
 extern const u32 gBattleAnimSpriteGfx_SlamHit[];
@@ -4764,8 +4762,8 @@ extern const u32 gMetalShineGfx[];
 extern const u32 gMetalShinePalette[];
 extern const u32 gMetalShineTilemap[];
 
-extern const u32 gUnknown_08C20668[];
-extern const u32 gUnknown_08C20684[];
+extern const u32 gBattleAnimMaskImage_Curse[];
+extern const u32 gBattleAnimMaskTilemap_Curse[];
 extern const u32 gBattleStatMask_Gfx[];
 extern const u32 gBattleStatMask1_Tilemap[];
 extern const u32 gBattleStatMask2_Tilemap[];
@@ -5062,5 +5060,8 @@ extern const u8 gMailTiles_Fab[];
 extern const u8 gMailTilemap_Fab[];
 extern const u8 gMailTiles_Retro[];
 extern const u8 gMailTilemap_Retro[];
+
+extern const u8 gMonMarkingsMenu_Gfx[];
+extern const u16 gMonMarkingsMenu_Pal[];
 
 #endif //GUARD_GRAPHICS_H

@@ -2387,7 +2387,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-        GetDefaultBattleAnimBgData(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
         if (IsContest())
         {
@@ -2450,8 +2450,8 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         }
         break;
     case 4:
-        GetDefaultBattleAnimBgData(&animBg);
-        sub_80A6C68(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
@@ -2568,7 +2568,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-        GetDefaultBattleAnimBgData(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
         if (IsContest())
         {
@@ -2639,8 +2639,8 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             gTasks[taskId].data[0] = 1;
         break;
     case 5:
-        GetDefaultBattleAnimBgData(&animBg);
-        sub_80A6C68(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
@@ -3866,7 +3866,7 @@ static void AnimTask_FacadeColorBlend_Step(u8 taskId)
 // The sliding circle effect used by Refresh and Aromatherapy
 void AnimTask_StatusClearedEffect(u8 taskId)
 {
-    sub_8117854(
+    StartMonScrollingBgMask(
         taskId,
         0,
         0x1A0,

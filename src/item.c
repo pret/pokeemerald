@@ -19,9 +19,6 @@
 extern u16 gUnknown_0203CF30[];
 
 // this file's functions
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 

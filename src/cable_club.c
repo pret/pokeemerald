@@ -904,7 +904,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             {
                 struct LinkPlayer *player = (struct LinkPlayer *)gBlockRecvBuffer[i];
                 gLinkPlayers[i] = *player;
-                sub_800B524(&gLinkPlayers[i]);
+                ConvertLinkPlayerName(&gLinkPlayers[i]);
                 ResetBlockReceivedFlag(i);
             }
             tState = 4;
@@ -1267,7 +1267,8 @@ static void sub_80B3AD0(u8 taskId)
 
 #define tTimer data[1]
 
-void sub_80B3AF8(u8 taskId)
+// Confirm that all cabled link players are connected
+void Task_ReconnectWithLinkPlayers(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
