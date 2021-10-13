@@ -8461,6 +8461,14 @@ BattleScript_QuickClawActivation::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_QuickDrawActivation::
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_CANACTFASTERTHANKSTO
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
 BattleScript_CustapBerryActivation::
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
