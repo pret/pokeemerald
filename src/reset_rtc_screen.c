@@ -80,33 +80,33 @@ static const struct BgTemplate sBgTemplates[] =
 static const struct WindowTemplate sWindowTemplates[] =
 {
     {
-        .bg = 0, 
-        .tilemapLeft = 1, 
-        .tilemapTop = 1, 
-        .width = 19, 
-        .height = 9, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 19,
+        .height = 9,
+        .paletteNum = 15,
         .baseBlock = 0x155
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 2, 
-        .tilemapTop = 15, 
-        .width = 27, 
-        .height = 4, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0xE9
     },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sInputTimeWindow = {
-    .bg = 0, 
-    .tilemapLeft = 4, 
-    .tilemapTop = 9, 
-    .width = 21, 
-    .height = 2, 
-    .paletteNum = 15, 
+    .bg = 0,
+    .tilemapLeft = 4,
+    .tilemapTop = 9,
+    .width = 21,
+    .height = 2,
+    .paletteNum = 15,
     .baseBlock = 0xBF
 };
 
@@ -219,7 +219,7 @@ static const union AnimCmd *const sAnims_Arrow[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = PALTAG_ARROW,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,
@@ -243,36 +243,36 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 53;
-            sprite->pos1.y = 68;
+            sprite->x = 53;
+            sprite->y = 68;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 86;
-            sprite->pos1.y = 68;
+            sprite->x = 86;
+            sprite->y = 68;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 101;
-            sprite->pos1.y = 68;
+            sprite->x = 101;
+            sprite->y = 68;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 116;
-            sprite->pos1.y = 68;
+            sprite->x = 116;
+            sprite->y = 68;
             break;
         case SELECTION_CONFIRM:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_RIGHT;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 153;
-            sprite->pos1.y = 80;
+            sprite->x = 153;
+            sprite->y = 80;
             break;
         case SELECTION_NONE:
             DestroySprite(sprite);
@@ -293,29 +293,29 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 53;
-            sprite->pos1.y = 92;
+            sprite->x = 53;
+            sprite->y = 92;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 86;
-            sprite->pos1.y = 92;
+            sprite->x = 86;
+            sprite->y = 92;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 101;
-            sprite->pos1.y = 92;
+            sprite->x = 101;
+            sprite->y = 92;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 116;
-            sprite->pos1.y = 92;
+            sprite->x = 116;
+            sprite->y = 92;
             break;
         case SELECTION_CONFIRM:
             // The up arrow is used as a right arrow when Confirm is selected
@@ -362,7 +362,7 @@ static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u
 {
     u8 *dest = gStringVar4;
 
-    // Print days    
+    // Print days
     ConvertIntToDecimalStringN(gStringVar1, days, STR_CONV_MODE_RIGHT_ALIGN, 4);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gText_Day);
@@ -648,7 +648,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     case MAINSTATE_CHECK_SAVE:
         if (!gPaletteFade.active)
         {
-            if (gSaveFileStatus == SAVE_STATUS_EMPTY 
+            if (gSaveFileStatus == SAVE_STATUS_EMPTY
              || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             {
                 ShowMessage(gText_NoSaveFileCantSetTime);

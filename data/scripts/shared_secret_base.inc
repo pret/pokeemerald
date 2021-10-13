@@ -5,25 +5,25 @@ SecretBase_MapScripts::
     map_script MAP_SCRIPT_ON_RESUME, SecretBase_OnResume
     .byte 0
 
-SecretBase_OnWarp: @ 823B498
+SecretBase_OnWarp:
     map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, SecretBase_EventScript_InitDecorations
     .2byte 0
 
-SecretBase_OnTransition: @ 823B4A2
+SecretBase_OnTransition:
     call SecretBase_EventScript_SetDecorationFlags
     special SetSecretBaseOwnerGfxId
     special InitSecretBaseVars
     end
 
-SecretBase_OnFrame: @ 823B4AE
+SecretBase_OnFrame:
     map_script_2 VAR_INIT_SECRET_BASE, 0, SecretBase_EventScript_FirstEntrance
     .2byte 0
 
-SecretBase_OnResume: @ 823B4B8
+SecretBase_OnResume:
     setstepcallback STEP_CB_SECRET_BASE
     end
 
-SecretBase_EventScript_PC:: @ 823B4BB
+SecretBase_EventScript_PC::
     lockall
     playse SE_PC_LOGIN
     message SecretBase_Text_BootUpPC
@@ -35,20 +35,20 @@ SecretBase_EventScript_PC:: @ 823B4BB
     goto SecretBase_EventScript_PCShowMainMenu
     end
 
-SecretBase_EventScript_PCShowMainMenu:: @ 823B4D3
+SecretBase_EventScript_PCShowMainMenu::
     message SecretBase_Text_WhatWouldYouLikeToDo
     waitmessage
     goto_if_set FLAG_SECRET_BASE_REGISTRY_ENABLED, SecretBase_EventScript_PCMainMenuWithRegister
     goto SecretBase_EventScript_PCMainMenuWithoutRegister
     end
 
-SecretBase_EventScript_PCCancel:: @ 823B4E8
+SecretBase_EventScript_PCCancel::
     lockall
     goto SecretBase_EventScript_PCShowMainMenu
     end
 
-SecretBase_EventScript_PCMainMenuWithRegister:: @ 823B4EF
-    multichoice 0, 0, MULTI_BASE_PC_WITH_REGISTRY, 0
+SecretBase_EventScript_PCMainMenuWithRegister::
+    multichoice 0, 0, MULTI_BASE_PC_WITH_REGISTRY, FALSE
     switch VAR_RESULT
     case 0, SecretBase_EventScript_PCDecorationMenu
     case 1, SecretBase_EventScript_PCPackUp
@@ -57,8 +57,8 @@ SecretBase_EventScript_PCMainMenuWithRegister:: @ 823B4EF
     case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
     end
 
-SecretBase_EventScript_PCMainMenuWithoutRegister:: @ 823B531
-    multichoice 0, 0, MULTI_BASE_PC_NO_REGISTRY, 0
+SecretBase_EventScript_PCMainMenuWithoutRegister::
+    multichoice 0, 0, MULTI_BASE_PC_NO_REGISTRY, FALSE
     switch VAR_RESULT
     case 0, SecretBase_EventScript_PCDecorationMenu
     case 1, SecretBase_EventScript_PCPackUp
@@ -66,7 +66,7 @@ SecretBase_EventScript_PCMainMenuWithoutRegister:: @ 823B531
     case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
     end
 
-SecretBase_EventScript_PCPackUp:: @ 823B568
+SecretBase_EventScript_PCPackUp::
     msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
     compare VAR_RESULT, NO
     goto_if_eq SecretBase_EventScript_PCShowMainMenu
@@ -75,15 +75,15 @@ SecretBase_EventScript_PCPackUp:: @ 823B568
     releaseall
     end
 
-SecretBase_EventScript_PCDecorationMenu:: @ 823B581
+SecretBase_EventScript_PCDecorationMenu::
     special ShowSecretBaseDecorationMenu
     end
 
-SecretBase_EventScript_PCRegistryMenu:: @ 823B585
+SecretBase_EventScript_PCRegistryMenu::
     special ShowSecretBaseRegistryMenu
     end
 
-SecretBase_EventScript_RecordMixingPC:: @ 823B589
+SecretBase_EventScript_RecordMixingPC::
     lockall
     message SecretBase_Text_BootUpPC
     playse SE_PC_LOGIN
@@ -95,10 +95,10 @@ SecretBase_EventScript_RecordMixingPC:: @ 823B589
     goto SecretBase_EventScript_PCRegisterMenu
     end
 
-SecretBase_EventScript_PCRegisterMenu:: @ 823B5A1
+SecretBase_EventScript_PCRegisterMenu::
     message SecretBase_Text_WhatWouldYouLikeToDo
     waitmessage
-    multichoice 0, 0, MULTI_REGISTER_MENU, 0
+    multichoice 0, 0, MULTI_REGISTER_MENU, FALSE
     switch VAR_RESULT
     case 0, SecretBase_EventScript_PCRegister
     case 1, SecretBase_EventScript_PCRegistryMenu
@@ -107,12 +107,12 @@ SecretBase_EventScript_PCRegisterMenu:: @ 823B5A1
     case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
     end
 
-SecretBase_EventScript_ShowRegisterMenu:: @ 823B5E9
+SecretBase_EventScript_ShowRegisterMenu::
     lockall
     goto SecretBase_EventScript_PCRegisterMenu
     end
 
-SecretBase_EventScript_PCRegister:: @ 823B5F0
+SecretBase_EventScript_PCRegister::
     special GetCurSecretBaseRegistrationValidity
     compare VAR_RESULT, 1
     goto_if_eq SecretBase_EventScript_AlreadyRegistered
@@ -128,7 +128,7 @@ SecretBase_EventScript_PCRegister:: @ 823B5F0
     releaseall
     end
 
-SecretBase_EventScript_AlreadyRegistered:: @ 823B62F
+SecretBase_EventScript_AlreadyRegistered::
     msgbox SecretBase_Text_AlreadyRegisteredDelete, MSGBOX_YESNO
     compare VAR_RESULT, NO
     goto_if_eq SecretBase_EventScript_PCRegisterMenu
@@ -138,51 +138,51 @@ SecretBase_EventScript_AlreadyRegistered:: @ 823B62F
     releaseall
     end
 
-SecretBase_EventScript_CantRegisterTooManyBases:: @ 823B652
+SecretBase_EventScript_CantRegisterTooManyBases::
     msgbox SecretBase_Text_TooManyBasesDeleteSome, MSGBOX_SIGN
     special DoSecretBasePCTurnOffEffect
     closemessage
     releaseall
     end
 
-SecretBase_EventScript_PCRegistryInfo:: @ 823B660
+SecretBase_EventScript_PCRegistryInfo::
     msgbox SecretBase_Text_RegistryInfo, MSGBOX_DEFAULT
     goto SecretBase_EventScript_PCRegisterMenu
     end
 
-SecretBase_EventScript_PCTurnOff:: @ 823B66E
+SecretBase_EventScript_PCTurnOff::
     special DoSecretBasePCTurnOffEffect
     closemessage
     releaseall
     end
 
 @ Unused
-SecretBase_EventScript_Poster:: @ 823B674
+SecretBase_EventScript_Poster::
     special CheckInteractedWithFriendsPosterDecor
     end
 
 @ Unused
-SecretBase_EventScript_FurnitureBottom:: @ 823B678
+SecretBase_EventScript_FurnitureBottom::
     special CheckInteractedWithFriendsFurnitureBottom
     end
 
 @ Unused
-SecretBase_EventScript_FurnitureMiddle:: @ 823B67C
+SecretBase_EventScript_FurnitureMiddle::
     special CheckInteractedWithFriendsFurnitureMiddle
     end
 
 @ Unused
-SecretBase_EventScript_FurnitureTop:: @ 823B680
+SecretBase_EventScript_FurnitureTop::
     special CheckInteractedWithFriendsFurnitureTop
     end
 
-SecretBase_EventScript_SandOrnament:: @ 823B684
+SecretBase_EventScript_SandOrnament::
     special CheckInteractedWithFriendsSandOrnament
     dofieldeffect FLDEFF_SAND_PILLAR
     waitstate
     end
 
-SecretBase_EventScript_ShieldOrToyTV:: @ 823B68C
+SecretBase_EventScript_ShieldOrToyTV::
     special InteractWithShieldOrTVDecoration
     compare VAR_RESULT, 0
     goto_if_eq SecretBase_EventScript_BattleTowerShield
@@ -194,31 +194,31 @@ SecretBase_EventScript_ShieldOrToyTV:: @ 823B68C
     goto_if_eq SecretBase_EventScript_SkittyTV
     end
 
-SecretBase_EventScript_BattleTowerShield:: @ 823B6BC
+SecretBase_EventScript_BattleTowerShield::
     msgbox SecretBase_Text_BattleTowerShield, MSGBOX_SIGN
     end
 
-SecretBase_EventScript_ToyTV:: @ 823B6C5
+SecretBase_EventScript_ToyTV::
     msgbox SecretBase_Text_ToyTV, MSGBOX_SIGN
     end
 
-SecretBase_EventScript_SeedotTV:: @ 823B6CE
+SecretBase_EventScript_SeedotTV::
     msgbox SecretBase_Text_SeedotTV, MSGBOX_SIGN
     end
 
-SecretBase_EventScript_SkittyTV:: @ 823B6D7
+SecretBase_EventScript_SkittyTV::
     msgbox SecretBase_Text_SkittyTV, MSGBOX_SIGN
     end
 
-SecretBase_Text_SmallIndentInWall:: @ 823B6E0
+SecretBase_Text_SmallIndentInWall::
     .string "There's a small indent in the wall.$"
 
-SecretBase_Text_IndentUseSecretPower:: @ 823B704
+SecretBase_Text_IndentUseSecretPower::
     .string "There's a small indent in the wall.\p"
     .string "Use the SECRET POWER?$"
 
-SecretBase_Text_DiscoveredSmallCavern:: @ 823B73E
+SecretBase_Text_DiscoveredSmallCavern::
     .string "Discovered a small cavern!$"
 
-SecretBase_Text_WantToMakeYourSecretBaseHere: @ 823B759
+SecretBase_Text_WantToMakeYourSecretBaseHere:
     .string "Want to make your SECRET BASE here?$"

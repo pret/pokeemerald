@@ -7,17 +7,17 @@
 #define LINK_KEY_CODE_DPAD_UP 0x13
 #define LINK_KEY_CODE_DPAD_LEFT 0x14
 #define LINK_KEY_CODE_DPAD_RIGHT 0x15
-#define LINK_KEY_CODE_UNK_2 0x16
+#define LINK_KEY_CODE_READY 0x16
 #define LINK_KEY_CODE_EXIT_ROOM 0x17
 #define LINK_KEY_CODE_START_BUTTON 0x18
 #define LINK_KEY_CODE_A_BUTTON 0x19
-#define LINK_KEY_CODE_UNK_4 0x1A // I'd guess this is the B button?
+#define LINK_KEY_CODE_IDLE 0x1A
 
 // These two are a hack to stop user input until link stuff can be
 // resolved.
-#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B 
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B
 #define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
-#define LINK_KEY_CODE_UNK_7 0x1D
+#define LINK_KEY_CODE_EXIT_SEAT 0x1D
 #define LINK_KEY_CODE_UNK_8 0x1E
 
 #define MOVEMENT_MODE_FREE 0
@@ -143,19 +143,18 @@ void CB2_ReturnToFieldFromMultiplayer(void);
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_ReturnToFieldContinueScript(void);
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
-void sub_80861E8(void);
+void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
 void ResetAllMultiplayerState(void);
-u32 sub_8087214(void);
-bool32 sub_808727C(void);
-u16 sub_8087288(void);
-u16 sub_808729C(void);
+u32 GetCableClubPartnersReady(void);
+u16 SetInCableClubSeat(void);
+u16 SetLinkWaitingForScript(void);
 u16 QueueExitLinkRoomKey(void);
-u16 sub_80872C4(void);
-bool32 sub_8087598(void);
-bool32 sub_80875C8(void);
-bool32 sub_8087634(void);
-bool32 sub_808766C(void);
+u16 SetStartedCableClubActivity(void);
+bool32 Overworld_LinkRecvQueueLengthMoreThan2(void);
+bool32 Overworld_RecvKeysFromLinkIsRunning(void);
+bool32 Overworld_SendKeysToLinkIsRunning(void);
+bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 
 #endif // GUARD_OVERWORLD_H

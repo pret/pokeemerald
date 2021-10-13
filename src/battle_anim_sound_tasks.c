@@ -135,8 +135,10 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
+        #ifndef UBFIX
         else
-            DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
+            DestroyAnimVisualTask(taskId); // UB: task gets destroyed twice.
+        #endif
     }
     else
     {
@@ -179,8 +181,10 @@ void SoundTask_PlayDoubleCry(u8 taskId)
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
+        #ifndef UBFIX
         else
-            DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
+            DestroyAnimVisualTask(taskId); // UB: task gets destroyed twice.
+        #endif
     }
     else
     {
@@ -345,7 +349,7 @@ void SoundTask_PlaySE2WithPanning(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-// Adjusts panning and assigns it to gAnimCustomPanning. Doesnt play sound. 
+// Adjusts panning and assigns it to gAnimCustomPanning. Doesnt play sound.
 // Used by Confuse Ray and Will-O-Wisp (see uses of gAnimCustomPanning)
 void SoundTask_AdjustPanningVar(u8 taskId)
 {
@@ -377,7 +381,7 @@ static void SoundTask_AdjustPanningVar_Step(u8 taskId)
         u16 oldPan;
         gTasks[taskId].data[10] = 0;
         oldPan = gTasks[taskId].data[11];
-        gTasks[taskId].data[11] = panIncrement + oldPan; 
+        gTasks[taskId].data[11] = panIncrement + oldPan;
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
 

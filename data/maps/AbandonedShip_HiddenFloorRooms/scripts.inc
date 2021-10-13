@@ -1,8 +1,8 @@
-AbandonedShip_HiddenFloorRooms_MapScripts:: @ 8238C49
+AbandonedShip_HiddenFloorRooms_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, AbandonedShip_HiddenFloorRooms_OnFrame
 	.byte 0
 
-AbandonedShip_HiddenFloorRooms_OnFrame: @ 8238C4F
+AbandonedShip_HiddenFloorRooms_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle
 	.2byte 0
 
@@ -13,7 +13,7 @@ AbandonedShip_HiddenFloorRooms_OnFrame: @ 8238C4F
 @ Upper row,  left column   (Rm 4)
 @ Upper row,  middle column (Rm 5)
 @ Upper row,  right column  (Rm 6)
-AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle:: @ 8238C59
+AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle::
 	setvar VAR_TEMP_1, 1
 	getplayerxy VAR_TEMP_2, VAR_TEMP_3
 	setvar VAR_TEMP_4, 1
@@ -32,19 +32,19 @@ AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle:: @ 8238C59
 	case 6, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm6
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_InMiddleRoomColumn:: @ 8238CD1
+AbandonedShip_HiddenFloorRooms_EventScript_InMiddleRoomColumn::
 	addvar VAR_TEMP_4, 1
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_InRightRoomColumn:: @ 8238CD7
+AbandonedShip_HiddenFloorRooms_EventScript_InRightRoomColumn::
 	addvar VAR_TEMP_4, 2
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_InUpperRoomRow:: @ 8238CDD
+AbandonedShip_HiddenFloorRooms_EventScript_InUpperRoomRow::
 	addvar VAR_TEMP_4, 3
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1:: @ 8238CE3
+AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1::
 	delay 20
 	dofieldeffectsparkle 10, 10, 0
 	specialvar VAR_RESULT, FoundAbandonedShipRoom4Key
@@ -54,10 +54,10 @@ AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1:: @ 8238CE3
 	delay 10
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_EnterRm2:: @ 8238D0C
+AbandonedShip_HiddenFloorRooms_EventScript_EnterRm2::
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_EnterRm3:: @ 8238D0D
+AbandonedShip_HiddenFloorRooms_EventScript_EnterRm3::
 	specialvar VAR_RESULT, FoundAbandonedShipRoom1Key
 	compare VAR_RESULT, TRUE
 	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_Rm3NoSparkle
@@ -68,10 +68,10 @@ AbandonedShip_HiddenFloorRooms_EventScript_EnterRm3:: @ 8238D0D
 	delay 10
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_Rm3NoSparkle:: @ 8238D32
+AbandonedShip_HiddenFloorRooms_EventScript_Rm3NoSparkle::
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_EnterRm4:: @ 8238D33
+AbandonedShip_HiddenFloorRooms_EventScript_EnterRm4::
 	delay 20
 	dofieldeffectsparkle 8, 5, 0
 	dofieldeffectsparkle 11, 3, 0
@@ -82,7 +82,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_EnterRm4:: @ 8238D33
 	delay 10
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_EnterRm5:: @ 8238D6B
+AbandonedShip_HiddenFloorRooms_EventScript_EnterRm5::
 	delay 20
 	dofieldeffectsparkle 16, 3, 0
 	dofieldeffectsparkle 25, 2, 0
@@ -94,32 +94,32 @@ AbandonedShip_HiddenFloorRooms_EventScript_EnterRm5:: @ 8238D6B
 	delay 10
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_EnterRm6:: @ 8238DB2
+AbandonedShip_HiddenFloorRooms_EventScript_EnterRm6::
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_Rm1KeySparkle:: @ 8238DB3
+AbandonedShip_HiddenFloorRooms_EventScript_Rm1KeySparkle::
 	dofieldeffectsparkle 42, 10, 0
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_Rm2KeySparkle:: @ 8238DC3
+AbandonedShip_HiddenFloorRooms_EventScript_Rm2KeySparkle::
 	dofieldeffectsparkle 20, 5, 0
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_Rm4KeySparkle:: @ 8238DD3
+AbandonedShip_HiddenFloorRooms_EventScript_Rm4KeySparkle::
 	dofieldeffectsparkle 1, 12, 0
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_Rm6KeySparkle:: @ 8238DE3
+AbandonedShip_HiddenFloorRooms_EventScript_Rm6KeySparkle::
 	dofieldeffectsparkle 1, 2, 0
 	return
 
-AbandonedShip_HiddenFloorRooms_EventScript_Trash:: @ 8238DF3
+AbandonedShip_HiddenFloorRooms_EventScript_Trash::
 	lockall
 	msgbox AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash, MSGBOX_DEFAULT
 	releaseall
 	end
 
-AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash: @ 8238DFE
+AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
 	.string "It's bright and shiny!\n"
 	.string "But it's just trash…$"
 

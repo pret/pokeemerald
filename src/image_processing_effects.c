@@ -733,11 +733,11 @@ static u16 QuantizePixel_BlurHard(u16 *prevPixel, u16 *curPixel, u16 *nextPixel)
     red   = GET_R(*curPixel);
     green = GET_G(*curPixel);
     blue  = GET_B(*curPixel);
-    
+
     prevAvg = (GET_R(*prevPixel) + GET_G(*prevPixel) + GET_B(*prevPixel)) / 3;
     curAvg  = (GET_R(*curPixel)  + GET_G(*curPixel)  + GET_B(*curPixel))  / 3;
     nextAvg = (GET_R(*nextPixel) + GET_G(*nextPixel) + GET_B(*nextPixel)) / 3;
-    
+
     if (prevAvg == curAvg && nextAvg == curAvg)
         return *curPixel;
 
@@ -804,8 +804,8 @@ void ConvertImageProcessingToGBA(struct ImageProcessingContext *context)
                     dest = dest_ + ((i * width + j) << 4) + (k << 1);
                     src = src_ + ((((i << 3) + k) << 3) * width) + (j << 3);
 
-                    dest[0] = src[0] | (src[1] << 4) | (src[2] << 8) | (src[3] << 0xC);
-                    dest[1] = src[4] | (src[5] << 4) | (src[6] << 8) | (src[7] << 0xC);
+                    dest[0] = src[0] | (src[1] << 4) | (src[2] << 8) | (src[3] << 12);
+                    dest[1] = src[4] | (src[5] << 4) | (src[6] << 8) | (src[7] << 12);
                 }
             }
         }
@@ -1096,7 +1096,7 @@ static u16 QuantizePixel_PrimaryColors(u16* color)
     u16 red =   GET_R(*color);
     u16 green = GET_G(*color);
     u16 blue =  GET_B(*color);
-    
+
     if (red < 12 && green < 11 && blue < 11)
         return 1;
 

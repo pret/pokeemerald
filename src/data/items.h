@@ -2148,7 +2148,7 @@ const struct Item gItems[] =
         .battleUseFunc = ItemUseInBattle_EnigmaBerry,
     },
 
-    [ITEM_0B0] =
+    [ITEM_UNUSED_BERRY_1] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2159,7 +2159,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0B1] =
+    [ITEM_UNUSED_BERRY_2] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2170,7 +2170,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0B2] =
+    [ITEM_UNUSED_BERRY_3] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,

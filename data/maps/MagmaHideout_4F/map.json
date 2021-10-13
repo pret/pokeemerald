@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_GROUDON_1",
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
       "x": 16,
       "y": 17,
       "elevation": 0,
@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_1"
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
@@ -93,7 +93,7 @@
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GROUDON_2",
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_ASLEEP",
       "x": 16,
       "y": 17,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_2"
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_ASLEEP"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_4F_EventScript_MaxRevive",
+      "script": "MagmaHideout_4F_EventScript_ItemMaxRevive",
       "flag": "FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE"
     }
   ],

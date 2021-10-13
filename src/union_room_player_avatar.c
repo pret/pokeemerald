@@ -21,23 +21,23 @@ static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
 
 static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][MAX_UNION_ROOM_PLAYERS + 2] = {
     [MALE] = {
-        OBJ_EVENT_GFX_MAN_3, 
-        OBJ_EVENT_GFX_BLACK_BELT, 
-        OBJ_EVENT_GFX_CAMPER, 
-        OBJ_EVENT_GFX_YOUNGSTER, 
-        OBJ_EVENT_GFX_PSYCHIC_M, 
-        OBJ_EVENT_GFX_BUG_CATCHER, 
-        OBJ_EVENT_GFX_MAN_4, 
+        OBJ_EVENT_GFX_MAN_3,
+        OBJ_EVENT_GFX_BLACK_BELT,
+        OBJ_EVENT_GFX_CAMPER,
+        OBJ_EVENT_GFX_YOUNGSTER,
+        OBJ_EVENT_GFX_PSYCHIC_M,
+        OBJ_EVENT_GFX_BUG_CATCHER,
+        OBJ_EVENT_GFX_MAN_4,
         OBJ_EVENT_GFX_MAN_5
     },
     [FEMALE] = {
-        OBJ_EVENT_GFX_WOMAN_5, 
-        OBJ_EVENT_GFX_HEX_MANIAC, 
-        OBJ_EVENT_GFX_PICNICKER, 
-        OBJ_EVENT_GFX_LASS, 
-        OBJ_EVENT_GFX_LASS, 
-        OBJ_EVENT_GFX_GIRL_3, 
-        OBJ_EVENT_GFX_WOMAN_2, 
+        OBJ_EVENT_GFX_WOMAN_5,
+        OBJ_EVENT_GFX_HEX_MANIAC,
+        OBJ_EVENT_GFX_PICNICKER,
+        OBJ_EVENT_GFX_LASS,
+        OBJ_EVENT_GFX_LASS,
+        OBJ_EVENT_GFX_GIRL_3,
+        OBJ_EVENT_GFX_WOMAN_2,
         OBJ_EVENT_GFX_BEAUTY
     }
 };
@@ -77,18 +77,27 @@ static const u8 sNextFacingDirection[] = {
     [DIR_EAST]  = DIR_NORTH
 };
 
-// Local id 1 is the Nurse/Attendant, 2-9 are link players
-static const u8 sUnionRoomLocalIds[] = { 9, 8, 7, 2, 6, 5, 4, 3 };
+static const u8 sUnionRoomLocalIds[] = {
+    LOCALID_UNION_ROOM_PLAYER_1,
+    LOCALID_UNION_ROOM_PLAYER_2,
+    LOCALID_UNION_ROOM_PLAYER_3,
+    LOCALID_UNION_ROOM_PLAYER_4,
+    LOCALID_UNION_ROOM_PLAYER_5,
+    LOCALID_UNION_ROOM_PLAYER_6,
+    LOCALID_UNION_ROOM_PLAYER_7,
+    LOCALID_UNION_ROOM_PLAYER_8
+};
 
-static const u16 sUnknown[] = {
-    0x2BF, 
-    0x2C0, 
-    0x2C1, 
-    0x2C2, 
-    0x2C3, 
-    0x2C4, 
-    0x2C5, 
-    0x2C6
+// Unused
+static const u16 sHidePlayerFlags[] = {
+    FLAG_HIDE_UNION_ROOM_PLAYER_1,
+    FLAG_HIDE_UNION_ROOM_PLAYER_2,
+    FLAG_HIDE_UNION_ROOM_PLAYER_3,
+    FLAG_HIDE_UNION_ROOM_PLAYER_4,
+    FLAG_HIDE_UNION_ROOM_PLAYER_5,
+    FLAG_HIDE_UNION_ROOM_PLAYER_6,
+    FLAG_HIDE_UNION_ROOM_PLAYER_7,
+    FLAG_HIDE_UNION_ROOM_PLAYER_8
 };
 
 static const u8 sMovement_UnionPlayerExit[2] = {
@@ -404,10 +413,10 @@ void CreateGroupMemberSpritesInvisible(u8 * spriteIds, s32 playerIdx)
     for (direction = DIR_NONE; direction <= DIR_EAST; direction++)
     {
         s32 id = UR_PLAYER_SPRITE_ID(playerIdx, direction);
-        spriteIds[id] = CreateObjectSprite(OBJ_EVENT_GFX_MAN_4, 
-                                           id - UR_SPRITE_START_ID, 
-                                           sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0], 
-                                           sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1], 
+        spriteIds[id] = CreateObjectSprite(OBJ_EVENT_GFX_MAN_4,
+                                           id - UR_SPRITE_START_ID,
+                                           sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0],
+                                           sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1],
                                            3, 1);
         SetObjectEventSpriteInvisibility(id - UR_SPRITE_START_ID, TRUE);
     }

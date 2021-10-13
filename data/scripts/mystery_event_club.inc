@@ -1,4 +1,4 @@
-MysteryEventClub_EventScript_Man:: @ 8291539
+MysteryEventClub_EventScript_Man::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_CHAT_USED, MysteryEventClub_EventScript_GivenProfileBefore
@@ -6,9 +6,9 @@ MysteryEventClub_EventScript_Man:: @ 8291539
 	goto MysteryEventClub_EventScript_AskToSeeProfile
 	end
 
-MysteryEventClub_EventScript_AskToSeeProfile:: @ 8291552
+MysteryEventClub_EventScript_AskToSeeProfile::
 	msgbox MysteryEventClub_Text_MayISeeYourProfile, MSGBOX_DEFAULT
-	multichoice 17, 6, MULTI_YESNOINFO_2, 0
+	multichoice 17, 6, MULTI_YESNOINFO_2, FALSE
 	switch VAR_RESULT
 	case 0, MysteryEventClub_EventScript_CreateProfile
 	case 1, MysteryEventClub_EventScript_DeclineShowProfile
@@ -16,12 +16,12 @@ MysteryEventClub_EventScript_AskToSeeProfile:: @ 8291552
 	case MULTI_B_PRESSED, MysteryEventClub_EventScript_DeclineShowProfile
 	end
 
-MysteryEventClub_EventScript_Info:: @ 8291591
+MysteryEventClub_EventScript_Info::
 	msgbox MysteryEventClub_Text_EasyChatExplanation, MSGBOX_DEFAULT
 	goto MysteryEventClub_EventScript_AskToSeeProfile
 	end
 
-MysteryEventClub_EventScript_CreateProfile:: @ 829159F
+MysteryEventClub_EventScript_CreateProfile::
 	msgbox MysteryEventClub_Text_LetsSeeItThen, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, EASY_CHAT_TYPE_PROFILE
@@ -34,12 +34,12 @@ MysteryEventClub_EventScript_CreateProfile:: @ 829159F
 	goto_if_eq MysteryEventClub_EventScript_ShowProfile
 	end
 
-MysteryEventClub_EventScript_CancelShowProfile:: @ 82915CB
+MysteryEventClub_EventScript_CancelShowProfile::
 	msgbox MysteryEventClub_Text_NotIntoItRightNow, MSGBOX_DEFAULT
 	release
 	end
 
-MysteryEventClub_EventScript_ShowProfile:: @ 82915D5
+MysteryEventClub_EventScript_ShowProfile::
 	setvar VAR_0x8004, 0
 	special ShowEasyChatProfile
 	waitmessage
@@ -48,19 +48,19 @@ MysteryEventClub_EventScript_ShowProfile:: @ 82915D5
 	release
 	end
 
-MysteryEventClub_EventScript_DeclineShowProfile:: @ 82915EB
+MysteryEventClub_EventScript_DeclineShowProfile::
 	msgbox MysteryEventClub_Text_ImagineYouWouldHaveWonderfulProfile, MSGBOX_DEFAULT
 	release
 	end
 
-MysteryEventClub_EventScript_GivenProfileBefore:: @ 82915F5
+MysteryEventClub_EventScript_GivenProfileBefore::
 	msgbox MysteryEventClub_Text_YouHaveWonderfulSmile, MSGBOX_DEFAULT
 	goto MysteryEventClub_EventScript_AskToSeeNewProfile
 	end
 
-MysteryEventClub_EventScript_AskToSeeNewProfile:: @ 8291603
+MysteryEventClub_EventScript_AskToSeeNewProfile::
 	msgbox MysteryEventClub_Text_MayISeeYourNewProfile, MSGBOX_DEFAULT
-	multichoice 17, 6, MULTI_YESNOINFO_2, 0
+	multichoice 17, 6, MULTI_YESNOINFO_2, FALSE
 	switch VAR_RESULT
 	case 0, MysteryEventClub_EventScript_CreateNewProfile
 	case 1, MysteryEventClub_EventScript_DeclineNewProfile
@@ -68,12 +68,12 @@ MysteryEventClub_EventScript_AskToSeeNewProfile:: @ 8291603
 	case MULTI_B_PRESSED, MysteryEventClub_EventScript_DeclineNewProfile
 	end
 
-MysteryEventClub_EventScript_InfoNewProfile:: @ 8291642
+MysteryEventClub_EventScript_InfoNewProfile::
 	msgbox MysteryEventClub_Text_EasyChatExplanation, MSGBOX_DEFAULT
 	goto MysteryEventClub_EventScript_AskToSeeNewProfile
 	end
 
-MysteryEventClub_EventScript_CreateNewProfile:: @ 8291650
+MysteryEventClub_EventScript_CreateNewProfile::
 	msgbox MysteryEventClub_Text_EvenBetterThanLastProfile, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, EASY_CHAT_TYPE_PROFILE
@@ -86,26 +86,26 @@ MysteryEventClub_EventScript_CreateNewProfile:: @ 8291650
 	goto_if_eq MysteryEventClub_EventScript_ShowProfile
 	end
 
-MysteryEventClub_EventScript_DeclineNewProfile:: @ 829167C
+MysteryEventClub_EventScript_DeclineNewProfile::
 	msgbox MysteryEventClub_Text_LikeProfileWayItIs, MSGBOX_DEFAULT
 	release
 	end
 
 @ Unused
-MysteryEventClub_EventScript_Ret:: @ 8291686
+MysteryEventClub_EventScript_Ret::
 	return
 
-MysteryEventClub_Text_CollectTrainerProfiles: @ 8291687
+MysteryEventClub_Text_CollectTrainerProfiles:
 	.string "Hello there, TRAINER!\n"
 	.string "You've got a wonderful smile, there.\p"
 	.string "I have a hobby--collecting the profiles\n"
 	.string "of POKéMON TRAINERS.$"
 
-MysteryEventClub_Text_MayISeeYourProfile: @ 82916FF
+MysteryEventClub_Text_MayISeeYourProfile:
 	.string "So, how about it?\n"
 	.string "May I see your profile?$"
 
-MysteryEventClub_Text_EasyChatExplanation: @ 8291729
+MysteryEventClub_Text_EasyChatExplanation:
 	.string "You make your own profile by putting\n"
 	.string "together four words or phrases.\p"
 	.string "Here, I'll show you an example of a\n"
@@ -124,37 +124,37 @@ MysteryEventClub_Text_EasyChatExplanation: @ 8291729
 	.string "Repeat for the remaining text choices,\n"
 	.string "and you'll have your very own profile.$"
 
-MysteryEventClub_Text_LetsSeeItThen: @ 8291969
+MysteryEventClub_Text_LetsSeeItThen:
 	.string "Yes! Thank you!\n"
 	.string "So, let's see it, then.$"
 
-MysteryEventClub_Text_ImagineYouWouldHaveWonderfulProfile: @ 8291991
+MysteryEventClub_Text_ImagineYouWouldHaveWonderfulProfile:
 	.string "Oh, no, really?\p"
 	.string "I imagine someone like you would have\n"
 	.string "a wonderful profile…$"
 
-MysteryEventClub_Text_NotIntoItRightNow: @ 82919DC
+MysteryEventClub_Text_NotIntoItRightNow:
 	.string "Oh? You're not into it right now?\p"
 	.string "Well, anytime is good by me!$"
 
-MysteryEventClub_Text_YouHaveWonderfulSmile: @ 8291A1B
+MysteryEventClub_Text_YouHaveWonderfulSmile:
 	.string "Hello there, TRAINER!\n"
 	.string "You've got a wonderful smile.$"
 
-MysteryEventClub_Text_MayISeeYourNewProfile: @ 8291A4F
+MysteryEventClub_Text_MayISeeYourNewProfile:
 	.string "May I see your new profile?$"
 
-MysteryEventClub_Text_EvenBetterThanLastProfile: @ 8291A6B
+MysteryEventClub_Text_EvenBetterThanLastProfile:
 	.string "Yes! Thank you!\p"
 	.string "I hope it's even better than the profile\n"
 	.string "you showed me before.$"
 
-MysteryEventClub_Text_LikeProfileWayItIs: @ 8291ABA
+MysteryEventClub_Text_LikeProfileWayItIs:
 	.string "Oh, you like your profile the way it is.\p"
 	.string "I don't blame you--it's a wonderful\n"
 	.string "profile the way it is now.$"
 
-MysteryEventClub_Text_FantasticProfile: @ 8291B22
+MysteryEventClub_Text_FantasticProfile:
 	.string "F-fantastic!\p"
 	.string "Your profile, it's wonderful!\n"
 	.string "It really says what you're about.\p"
@@ -163,7 +163,7 @@ MysteryEventClub_Text_FantasticProfile: @ 8291B22
 	.string "Thank you!$"
 
 @ Unused
-MysteryEventClub_Text_YouKnowSecretSaying: @ 8291BB7
+MysteryEventClub_Text_YouKnowSecretSaying:
 	.string "Oh?\n"
 	.string "You know the secret saying!\p"
 	.string "That means you're now a fellow member\n"

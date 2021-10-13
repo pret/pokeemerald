@@ -10,6 +10,7 @@
 #include "constants/abilities.h"
 #include "random.h"
 #include "battle_scripts.h"
+#include "constants/battle_string_ids.h"
 
 void AllocateBattleResources(void)
 {
@@ -120,7 +121,9 @@ void SwitchPartyOrderInGameMulti(u8 battlerId, u8 arg1)
     }
 }
 
-u32 sub_805725C(u8 battlerId)
+// Called when a Pokémon is unable to attack during a Battle Palace battle.
+// Check if it was because they are frozen/asleep, and if so try to cure the status.
+u32 BattlePalace_TryEscapeStatus(u8 battlerId)
 {
     u32 effect = 0;
 
@@ -133,10 +136,11 @@ u32 sub_805725C(u8 battlerId)
             {
                 if (UproarWakeUpCheck(battlerId))
                 {
+                    // Wake up from Uproar
                     gBattleMons[battlerId].status1 &= ~(STATUS1_SLEEP);
                     gBattleMons[battlerId].status2 &= ~(STATUS2_NIGHTMARE);
                     BattleScriptPushCursor();
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP_UPROAR;
                     gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
                     effect = 2;
                 }
@@ -149,6 +153,7 @@ u32 sub_805725C(u8 battlerId)
                     else
                         toSub = 1;
 
+                    // Reduce number of sleep turns
                     if ((gBattleMons[battlerId].status1 & STATUS1_SLEEP) < toSub)
                         gBattleMons[battlerId].status1 &= ~(STATUS1_SLEEP);
                     else
@@ -156,14 +161,16 @@ u32 sub_805725C(u8 battlerId)
 
                     if (gBattleMons[battlerId].status1 & STATUS1_SLEEP)
                     {
+                        // Still asleep
                         gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                         effect = 2;
                     }
                     else
                     {
+                        // Wake up
                         gBattleMons[battlerId].status2 &= ~(STATUS2_NIGHTMARE);
                         BattleScriptPushCursor();
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
                         gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
                         effect = 2;
                     }
@@ -176,14 +183,16 @@ u32 sub_805725C(u8 battlerId)
             {
                 if (Random() % 5 != 0)
                 {
+                    // Still frozen
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
                 }
                 else
                 {
+                    // Unfreeze
                     gBattleMons[battlerId].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
                 }
                 effect = 2;
             }
@@ -192,7 +201,7 @@ u32 sub_805725C(u8 battlerId)
         case 2:
             break;
         }
-
+        // Loop until reaching the final state, or stop early if Pokémon was Asleep/Frozen
     } while (gBattleCommunication[MULTIUSE_STATE] != 2 && effect == 0);
 
     if (effect == 2)

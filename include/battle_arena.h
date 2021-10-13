@@ -9,6 +9,6 @@ void BattleArena_AddSkillPoints(u8 battler);
 void BattleArena_DeductMindPoints(u8 battler, u16 stringId);
 void sub_81A586C(u8 battler);
 void DrawArenaRefereeTextBox(void);
-void RemoveArenaRefereeTextBox(void);
+void EraseArenaRefereeTextBox(void);
 
 #endif //GUARD_BATTLE_ARENA_H

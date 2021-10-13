@@ -39,7 +39,7 @@ se_m_dragon_rage_1:
 	.byte	W01
 	.byte		VOL   , 21*se_m_dragon_rage_mvl/mxv
 	.byte		BEND  , c_v+10
-	.byte		N10   , Bn2 
+	.byte		N10   , Bn2
 	.byte	W02
 	.byte		PAN   , c_v+5
 	.byte	W01
@@ -54,7 +54,7 @@ se_m_dragon_rage_1:
 	.byte		PAN   , c_v-2
 	.byte		VOL   , 21*se_m_dragon_rage_mvl/mxv
 	.byte		BEND  , c_v+18
-	.byte		N10   , Cs3 
+	.byte		N10   , Cs3
 	.byte	W03
 	.byte		PAN   , c_v+5
 	.byte		VOL   , 47*se_m_dragon_rage_mvl/mxv
@@ -69,7 +69,7 @@ se_m_dragon_rage_1:
 	.byte	W02
 	.byte		VOL   , 20*se_m_dragon_rage_mvl/mxv
 	.byte		BEND  , c_v+29
-	.byte		N10   , Dn3 
+	.byte		N10   , Dn3
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte	W01
@@ -86,7 +86,7 @@ se_m_dragon_rage_1:
 	.byte	W01
 	.byte		VOL   , 21*se_m_dragon_rage_mvl/mxv
 	.byte		BEND  , c_v+37
-	.byte		N10   , En3 
+	.byte		N10   , En3
 	.byte	W02
 	.byte		PAN   , c_v-2
 	.byte		VOL   , 46*se_m_dragon_rage_mvl/mxv
@@ -101,7 +101,7 @@ se_m_dragon_rage_1:
 	.byte		        c_v-5
 	.byte		VOL   , 20*se_m_dragon_rage_mvl/mxv
 	.byte		BEND  , c_v+42
-	.byte		N20   , Fs3 
+	.byte		N20   , Fs3
 	.byte	W02
 	.byte		VOL   , 47*se_m_dragon_rage_mvl/mxv
 	.byte	W01

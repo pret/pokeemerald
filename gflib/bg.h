@@ -25,6 +25,12 @@ enum
 	BG_ATTR_BASETILE,
 };
 
+enum {
+	BG_TYPE_NORMAL,
+	BG_TYPE_AFFINE,
+	BG_TYPE_NONE = 0xFFFF
+};
+
 struct BgTemplate
 {
     u16 bg:2;                   // 0x1, 0x2 -> 0x3
@@ -43,7 +49,7 @@ void Unused_ResetBgControlStruct(u8 bg);
 u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode);
 void SetTextModeAndHideBgs(void);
 bool8 IsInvalidBg(u8 bg);
-int DummiedOutFireRedLeafGreenTileAllocFunc(int a1, int a2, int a3, int a4);
+int BgTileAllocOp(int bg, int offset, int count, int mode);
 void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates);
 void InitBgFromTemplate(const struct BgTemplate *template);
@@ -59,7 +65,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId);
 s32 ChangeBgX(u8 bg, s32 value, u8 op);
 s32 GetBgX(u8 bg);
 s32 ChangeBgY(u8 bg, s32 value, u8 op);
-s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op);
+s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op);
 s32 GetBgY(u8 bg);
 void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle);
 u8 Unused_AdjustBgMosaic(u8 a1, u8 a2);
@@ -78,7 +84,6 @@ u16 GetBgMetricTextMode(u8 bg, u8 whichMetric);
 u32 GetBgMetricAffineMode(u8 bg, u8 whichMetric);
 u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32 screenHeight);
 void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s32 palette2);
-u32 GetBgType(u8 bg);
 bool32 IsInvalidBg32(u8 bg);
 bool32 IsTileMapOutsideWram(u8 bg);
 

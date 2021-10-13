@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_GFX_SFX_UTIL
-#define GUARD_BATTLE_GFX_SFX_UTIL
+#ifndef GUARD_BATTLE_GFX_SFX_UTIL_H
+#define GUARD_BATTLE_GFX_SFX_UTIL_H
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
@@ -39,10 +39,10 @@ void LoadAndCreateEnemyShadowSprites(void);
 void SpriteCB_SetInvisible(struct Sprite *sprite);
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);
 void HideBattlerShadowSprite(u8 battlerId);
-void sub_805EF14(void);
+void FillAroundBattleWindows(void);
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);
 
-#endif // GUARD_BATTLE_GFX_SFX_UTIL
+#endif // GUARD_BATTLE_GFX_SFX_UTIL_H

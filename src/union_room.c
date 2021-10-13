@@ -61,13 +61,13 @@ enum {
     UR_STATE_CHECK_SELECTING_MON,
     UR_STATE_MAIN,
     UR_STATE_DO_SOMETHING_PROMPT,
-    UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT,   
+    UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT,
     UR_STATE_DO_SOMETHING_PROMPT_2,
     UR_STATE_PRINT_MSG,
     UR_STATE_HANDLE_ACTIVITY_REQUEST,
-    UR_STATE_DECLINE_ACTIVITY_REQUEST,  
+    UR_STATE_DECLINE_ACTIVITY_REQUEST,
     UR_STATE_PLAYER_CONTACTED_YOU,
-    UR_STATE_RECV_CONTACT_DATA,    
+    UR_STATE_RECV_CONTACT_DATA,
     UR_STATE_PRINT_START_ACTIVITY_MSG,
     UR_STATE_START_ACTIVITY_LINK,
     UR_STATE_START_ACTIVITY_WAIT_FOR_LINK,
@@ -80,7 +80,7 @@ enum {
     UR_STATE_ACCEPT_CHAT_REQUEST,
     UR_STATE_WAIT_FOR_START_MENU,
     UR_STATE_INTERACT_WITH_PLAYER,
-    UR_STATE_TRY_COMMUNICATING,        
+    UR_STATE_TRY_COMMUNICATING,
     UR_STATE_PRINT_AND_EXIT,
     UR_STATE_SEND_ACTIVITY_REQUEST,
     UR_STATE_TRAINER_APPEARS_BUSY,
@@ -94,15 +94,15 @@ enum {
     UR_STATE_CANCEL_REQUEST_PRINT_MSG,
     UR_STATE_CANCEL_REQUEST_RESTART_LINK,
     UR_STATE_COMMUNICATING_WAIT_FOR_DATA,
-    UR_STATE_WAIT_FOR_CONTACT_DATA,    
+    UR_STATE_WAIT_FOR_CONTACT_DATA,
     UR_STATE_PRINT_CARD_INFO,
     UR_STATE_WAIT_FINISH_READING_CARD,
     UR_STATE_INTERACT_WITH_ATTENDANT,
-    UR_STATE_REGISTER_PROMPT,    
+    UR_STATE_REGISTER_PROMPT,
     UR_STATE_CANCEL_REGISTRATION_PROMPT,
     UR_STATE_CHECK_TRADING_BOARD,
     UR_STATE_TRADING_BOARD_LOAD,
-    UR_STATE_REGISTER_PROMPT_HANDLE_INPUT,    
+    UR_STATE_REGISTER_PROMPT_HANDLE_INPUT,
     UR_STATE_TRADING_BOARD_HANDLE_INPUT,
     UR_STATE_TRADE_PROMPT,
     UR_STATE_TRADE_SELECT_MON,
@@ -110,7 +110,7 @@ enum {
     UR_STATE_REGISTER_REQUEST_TYPE,
     UR_STATE_REGISTER_SELECT_MON_FADE,
     UR_STATE_REGISTER_SELECT_MON,
-    UR_STATE_REGISTER_COMPLETE,        
+    UR_STATE_REGISTER_COMPLETE,
     UR_STATE_CANCEL_REGISTRATION,
 };
 
@@ -253,10 +253,10 @@ static bool32 UR_PrintFieldMessage(const u8 *);
 static s32 GetChatLeaderActionRequestMessage(u8 *, u32, u16 *, struct WirelessLink_URoom *);
 static void Task_InitUnionRoom(u8 taskId);
 static bool8 AreGnameUnameDifferent(struct WirelessGnameUnamePair*, const struct WirelessGnameUnamePair*);
-static void ItemPrintFunc_PossibleGroupMembers(u8, s32, u8);
-static void ListMenuItemPrintFunc_UnionRoomGroups(u8, s32, u8);
-static void TradeBoardListMenuItemPrintFunc(u8, s32, u8);
-static void nullsub_14(u8, s32, u8);
+static void ItemPrintFunc_PossibleGroupMembers(u8 windowId, u32 id, u8 y);
+static void ListMenuItemPrintFunc_UnionRoomGroups(u8 windowId, u32 id, u8 y);
+static void TradeBoardListMenuItemPrintFunc(u8 windowId, u32 id, u8 y);
+static void nullsub_14(u8 windowId, u32 id, u8 y);
 
 #include "data/union_room.h"
 
@@ -319,8 +319,13 @@ static void StringExpandPlaceholders_AwaitingCommFromAnother(u8 *dst, u8 caseId)
     case ACTIVITY_CONTEST_CUTE:
     case ACTIVITY_CONTEST_SMART:
     case ACTIVITY_CONTEST_TOUGH:
-        // UB: argument *dst isn't used, instead it always prints to gStringVar4
+        // BUG: argument *dst isn't used, instead it always prints to gStringVar4
+        // not an issue in practice since Gamefreak never used any other arguments here besides gStringVar4
+        #ifndef BUGFIX
         StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
+        #else
+        StringExpandPlaceholders(dst, sText_AwaitingCommunication);
+        #endif
         break;
     }
 }
@@ -830,7 +835,7 @@ static bool8 Leader_SetStateIfMemberListChanged(struct WirelessLink_Leader *data
     return FALSE;
 }
 
-static void ItemPrintFunc_PossibleGroupMembers(u8 windowId, s32 id, u8 y)
+static void ItemPrintFunc_PossibleGroupMembers(u8 windowId, u32 id, u8 y)
 {
     struct WirelessLink_Leader *data = sWirelessLinkMain.leader;
     u8 colorIdx = UR_COLOR_DKE_WHT_LTE;
@@ -1358,7 +1363,7 @@ static u8 URoomGroupListGetTextColor(struct WirelessLink_Group *data, u32 id)
     return UR_COLOR_DKE_WHT_LTE;
 }
 
-static void ListMenuItemPrintFunc_UnionRoomGroups(u8 windowId, s32 id, u8 y)
+static void ListMenuItemPrintFunc_UnionRoomGroups(u8 windowId, u32 id, u8 y)
 {
     struct WirelessLink_Group *data = sWirelessLinkMain.group;
     u8 colorId = URoomGroupListGetTextColor(data, id);
@@ -2480,8 +2485,8 @@ static void Task_RunUnionRoom(u8 taskId)
         uroom->state = UR_STATE_CHECK_SELECTING_MON;
         break;
     case UR_STATE_CHECK_SELECTING_MON:
-        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER 
-          || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE) 
+        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER
+          || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE)
            && sUnionRoomTrade.state != URTRADE_STATE_NONE)
         {
             id = GetCursorSelectionMonId();
@@ -2666,10 +2671,10 @@ static void Task_RunUnionRoom(u8 taskId)
         ScheduleFieldMessageWithFollowupState(UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT, sHiDoSomethingTexts[id][playerGender]);
         break;
     case UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT:
-        input = ListMenuHandler_AllItemsAvailable(&uroom->textState, 
-                                                  &uroom->topListMenuWindowId, 
-                                                  &uroom->topListMenuId, 
-                                                  &sWindowTemplate_InviteToActivity, 
+        input = ListMenuHandler_AllItemsAvailable(&uroom->textState,
+                                                  &uroom->topListMenuWindowId,
+                                                  &uroom->topListMenuId,
+                                                  &sWindowTemplate_InviteToActivity,
                                                   &sListMenuTemplate_InviteToActivity);
         if (input != -1)
         {
@@ -3023,10 +3028,10 @@ static void Task_RunUnionRoom(u8 taskId)
             uroom->state = UR_STATE_REGISTER_PROMPT_HANDLE_INPUT;
         break;
     case UR_STATE_REGISTER_PROMPT_HANDLE_INPUT:
-        input = ListMenuHandler_AllItemsAvailable(&uroom->textState, 
-                                                  &uroom->tradeBoardSelectWindowId, 
-                                                  &uroom->tradeBoardDetailsWindowId, 
-                                                  &sWindowTemplate_RegisterForTrade, 
+        input = ListMenuHandler_AllItemsAvailable(&uroom->textState,
+                                                  &uroom->tradeBoardSelectWindowId,
+                                                  &uroom->tradeBoardDetailsWindowId,
+                                                  &sWindowTemplate_RegisterForTrade,
                                                   &sListMenuTemplate_RegisterForTrade);
         if (input != -1)
         {
@@ -3062,10 +3067,10 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_REGISTER_REQUEST_TYPE:
-        input = ListMenuHandler_AllItemsAvailable(&uroom->textState, 
-                                                  &uroom->tradeBoardSelectWindowId, 
-                                                  &uroom->tradeBoardDetailsWindowId, 
-                                                  &gUnknown_082F0294, 
+        input = ListMenuHandler_AllItemsAvailable(&uroom->textState,
+                                                  &uroom->tradeBoardSelectWindowId,
+                                                  &uroom->tradeBoardDetailsWindowId,
+                                                  &gUnknown_082F0294,
                                                   &sMenuTemplate_TradingBoardRequestType);
         if (input != -1)
         {
@@ -3769,9 +3774,9 @@ static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str
     case UR_COLOR_DKE_WHT_LTE:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_DARK_GREY;
+        printerTemplate.fgColor = TEXT_COLOR_DARK_GRAY;
         printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREY;
+        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
         break;
     case UR_COLOR_RED_WHT_LTR:
         printerTemplate.letterSpacing = 0;
@@ -3792,14 +3797,14 @@ static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str
         printerTemplate.lineSpacing = 0;
         printerTemplate.fgColor = TEXT_COLOR_WHITE;
         printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREY;
+        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
         break;
     case UR_COLOR_WHT_DKE_LTE:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
         printerTemplate.fgColor = TEXT_COLOR_WHITE;
-        printerTemplate.bgColor = TEXT_COLOR_DARK_GREY;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREY;
+        printerTemplate.bgColor = TEXT_COLOR_DARK_GRAY;
+        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
         break;
     case UR_COLOR_GRN_DN6_LTB:
         printerTemplate.letterSpacing = 0;
@@ -4069,9 +4074,8 @@ static s32 UnionRoomGetPlayerInteractionResponse(struct UnkStruct_Main0 *main0, 
     }
 }
 
-void nullsub_14(u8 windowId, s32 itemId, u8 y)
+void nullsub_14(u8 windowId, u32 itemId, u8 y)
 {
-
 }
 
 static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct GFtgtGname * gname, const u8 * uname, u8 colorIdx)
@@ -4095,7 +4099,7 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct GFtgtGname * gname
     }
 }
 
-static void TradeBoardListMenuItemPrintFunc(u8 windowId, s32 itemId, u8 y)
+static void TradeBoardListMenuItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     struct WirelessLink_Leader *data = sWirelessLinkMain.leader;
     struct GFtgtGname *rfu;
@@ -4415,7 +4419,7 @@ static void HandleCancelActivity(bool32 setData)
 static void UR_EnableScriptContext2AndFreezeObjectEvents(void)
 {
     ScriptContext2_Enable();
-    ScriptFreezeObjectEvents();
+    FreezeObjects_WaitForPlayer();
 }
 
 static u8 GetActivePartnerSpriteGenderParam(struct WirelessLink_URoom *data)

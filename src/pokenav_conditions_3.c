@@ -102,7 +102,7 @@ static const struct BgTemplate sConditionSearchResultBgTemplates[] =
     }
 };
 
-static const LoopedTask sSearchResultLoopTaskFuncs[] = 
+static const LoopedTask sSearchResultLoopTaskFuncs[] =
 {
     [CONDITION_SEARCH_FUNC_NONE]       = NULL,
     [CONDITION_SEARCH_FUNC_MOVE_UP]    = LoopedTask_MoveSearchListCursorUp,
@@ -113,7 +113,7 @@ static const LoopedTask sSearchResultLoopTaskFuncs[] =
     [CONDITION_SEARCH_FUNC_SELECT_MON] = LoopedTask_SelectSearchResult
 };
 
-static const struct WindowTemplate sSearchResultListMenuWindowTemplate = 
+static const struct WindowTemplate sSearchResultListMenuWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -124,8 +124,8 @@ static const struct WindowTemplate sSearchResultListMenuWindowTemplate =
     .baseBlock = 20
 };
 
-static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
 static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 bool32 PokenavCallback_Init_ConditionSearch(void)
@@ -664,7 +664,7 @@ static void PrintSearchResultListMenuItems(struct PokenavSub8 *searchList)
 static void InitConditionSearchListMenuTemplate(void)
 {
     struct PokenavListTemplate template;
-    
+
     template.list.monList = GetSearchResultsMonDataList();
     template.count = GetSearchResultsMonListCount();
     template.unk8 = 4;

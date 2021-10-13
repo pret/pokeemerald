@@ -42,9 +42,11 @@ static struct BgControl sGpuBgConfigs;
 static struct BgConfig2 sGpuBgConfigs2[NUM_BACKGROUNDS];
 static u32 sDmaBusyBitfield[NUM_BACKGROUNDS];
 
-u32 gUnneededFireRedVariable;
+u32 gWindowTileAutoAllocEnabled;
 
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
+
+static u32 GetBgType(u8 bg);
 
 void ResetBgs(void)
 {
@@ -55,7 +57,7 @@ void ResetBgs(void)
 
 static void SetBgModeInternal(u8 bgMode)
 {
-    sGpuBgConfigs.bgVisibilityAndMode &= 0xFFF8;
+    sGpuBgConfigs.bgVisibilityAndMode &= ~0x7;
     sGpuBgConfigs.bgVisibilityAndMode |= bgMode;
 }
 
@@ -66,13 +68,11 @@ u8 GetBgMode(void)
 
 void ResetBgControlStructs(void)
 {
-    struct BgConfig* bgConfigs = &sGpuBgConfigs.configs[0];
-    struct BgConfig zeroedConfig = sZeroedBgControlStruct;
     int i;
 
     for (i = 0; i < NUM_BACKGROUNDS; i++)
     {
-        bgConfigs[i] = zeroedConfig;
+        sGpuBgConfigs.configs[i] = sZeroedBgControlStruct;
     }
 }
 
@@ -175,36 +175,30 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     u16 offset;
     s8 cursor;
 
-    if (!IsInvalidBg(bg) && sGpuBgConfigs.configs[bg].visible)
-    {
-        switch (mode)
-        {
-        case 0x1:
-            offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
-            break;
-        case 0x2:
-            offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
-            break;
-        default:
-            cursor = -1;
-            goto end;
-        }
+    if (IsInvalidBg(bg) || !sGpuBgConfigs.configs[bg].visible)
+        return -1;
 
+    switch (mode)
+    {
+    case 0x1:
+        offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
         offset = destOffset + offset;
-
         cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
-
         if (cursor == -1)
-        {
             return -1;
-        }
-    }
-    else
-    {
-       return -1;
+        break;
+    case 0x2:
+        offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
+        offset = destOffset + offset;
+        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        if (cursor == -1)
+            return -1;
+        break;
+    default:
+        cursor = -1;
+        break;
     }
 
-end:
     return cursor;
 }
 
@@ -254,17 +248,17 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
 
     switch (sGpuBgConfigs.bgVisibilityAndMode & 0x7)
     {
+    default:
+    case 0:
+        return;
     case 1:
         if (bg != 2)
             return;
         break;
     case 2:
-        if (bg < 2 || bg >= NUM_BACKGROUNDS)
+        if (bg != 2 && bg != 3)
             return;
         break;
-    case 0:
-    default:
-        return;
     }
 
     src.texX = srcCenterX;
@@ -296,7 +290,8 @@ bool8 IsInvalidBg(u8 bg)
         return FALSE;
 }
 
-int DummiedOutFireRedLeafGreenTileAllocFunc(int a1, int a2, int a3, int a4)
+// From FRLG. Dummied out.
+int BgTileAllocOp(int bg, int offset, int count, int mode)
 {
     return 0;
 }
@@ -311,7 +306,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
         sDmaBusyBitfield[i] = 0;
     }
 
-    gUnneededFireRedVariable = leftoverFireRedLeafGreenVariable;
+    gWindowTileAutoAllocEnabled = leftoverFireRedLeafGreenVariable;
 }
 
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates)
@@ -400,10 +395,8 @@ u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
 
     sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
 
-    if (gUnneededFireRedVariable == 1)
-    {
-        DummiedOutFireRedLeafGreenTileAllocFunc(bg, tileOffset / 0x20, size / 0x20, 1);
-    }
+    if (gWindowTileAutoAllocEnabled == TRUE)
+        BgTileAllocOp(bg, tileOffset / 0x20, size / 0x20, 1);
 
     return cursor;
 }
@@ -531,9 +524,9 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
     case BG_ATTR_METRIC:
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             return GetBgMetricTextMode(bg, 0) * 0x800;
-        case 1:
+        case BG_TYPE_AFFINE:
             return GetBgMetricAffineMode(bg, 0) * 0x100;
         default:
             return 0;
@@ -697,7 +690,7 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
-s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
 {
     u8 mode;
     u16 temp1;
@@ -899,10 +892,10 @@ void CopyBgTilemapBufferToVram(u8 bg)
     {
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
             break;
         default:
@@ -923,7 +916,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
     {
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
         {
             const u16 * srcCopy = src;
             for (destY16 = destY; destY16 < (destY + height); destY16++)
@@ -935,7 +928,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
             }
             break;
         }
-        case 1:
+        case BG_TYPE_AFFINE:
         {
             const u8 * srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
@@ -971,7 +964,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 
         screenHeight = GetBgMetricTextMode(bg, 0x2) * 0x20;
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             srcPtr = src + ((srcY * srcWidth) + srcX) * 2;
             for (i = destX; i < (destX + rectWidth); i++)
             {
@@ -984,7 +977,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 
                 srcPtr += (srcWidth - destY) * 2;
             }
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             srcPtr = src + ((srcY * srcWidth) + srcX);
             var = GetBgMetricAffineMode(bg, 0x1);
             for (i = destX; i < (destX + rectWidth); i++)
@@ -1011,7 +1004,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
     {
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             for (y16 = y; y16 < (y + height); y16++)
             {
                 for (x16 = x; x16 < (x + width); x16++)
@@ -1020,7 +1013,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
                 }
             }
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (y16 = y; y16 < (y + height); y16++)
             {
@@ -1054,7 +1047,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
         mode2 = GetBgMetricTextMode(bg, 0x2) * 0x20;
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             for (y16 = y; y16 < (y + height); y16++)
             {
                 for (x16 = x; x16 < (x + width); x16++)
@@ -1064,7 +1057,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 }
             }
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             mode3 = GetBgMetricAffineMode(bg, 0x1);
             for (y16 = y; y16 < (y + height); y16++)
             {
@@ -1198,7 +1191,7 @@ void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s
     *dest = var;
 }
 
-u32 GetBgType(u8 bg)
+static u32 GetBgType(u8 bg)
 {
     u8 mode = GetBgMode();
 
@@ -1210,31 +1203,31 @@ u32 GetBgType(u8 bg)
         {
         case 0:
         case 1:
-            return 0;
+            return BG_TYPE_NORMAL;
         }
         break;
     case 2:
         switch (mode)
         {
         case 0:
-            return 0;
+            return BG_TYPE_NORMAL;
         case 1:
         case 2:
-            return 1;
+            return BG_TYPE_AFFINE;
         }
         break;
     case 3:
         switch (mode)
         {
         case 0:
-            return 0;
+            return BG_TYPE_NORMAL;
         case 2:
-            return 1;
+            return BG_TYPE_AFFINE;
         }
         break;
     }
 
-    return 0xFFFF;
+    return BG_TYPE_NONE;
 }
 
 bool32 IsInvalidBg32(u8 bg)

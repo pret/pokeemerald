@@ -18,7 +18,7 @@
 #define CHAR_O_ACUTE           0x0E
 #define CHAR_O_CIRCUMFLEX      0x0F
 #define CHAR_OE                0x10
-#define CHAR_U_GRAVE           0x11    
+#define CHAR_U_GRAVE           0x11
 #define CHAR_U_ACUTE           0x12
 #define CHAR_U_CIRCUMFLEX      0x13
 #define CHAR_N_TILDE           0x14
@@ -71,7 +71,7 @@
 //
 #define CHAR_i_ACUTE           0x6F
 //
-#define CHAR_UNK_SPACER        0x77
+#define CHAR_GENDERLESS        0x77 // Empty space for lack of gender icon
 //
 #define CHAR_UP_ARROW          0x79
 #define CHAR_DOWN_ARROW        0x7A
@@ -233,8 +233,8 @@
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
-#define TEXT_COLOR_DARK_GREY    0x2
-#define TEXT_COLOR_LIGHT_GREY   0x3
+#define TEXT_COLOR_DARK_GRAY    0x2
+#define TEXT_COLOR_LIGHT_GRAY   0x3
 #define TEXT_COLOR_RED          0x4
 #define TEXT_COLOR_LIGHT_RED    0x5
 #define TEXT_COLOR_GREEN        0x6
@@ -258,12 +258,16 @@
 #define PLACEHOLDER_ID_VERSION       0x7
 #define PLACEHOLDER_ID_AQUA          0x8
 #define PLACEHOLDER_ID_MAGMA         0x9
-#define PLACEHOLDER_ID_ARCHIE        0xA 
+#define PLACEHOLDER_ID_ARCHIE        0xA
 #define PLACEHOLDER_ID_MAXIE         0xB
 #define PLACEHOLDER_ID_KYOGRE        0xC
 #define PLACEHOLDER_ID_GROUDON       0xD
 
 // battle placeholders are located in battle_message.h
+
+// Hiragana from 0x1-0x50, Katakana from 0x51-0xA0.
+// This excludes Japanese punctuation, which end at 0xB0
+#define JAPANESE_CHAR_END 0xA0
 
 #define NUM_TEXT_PRINTERS 32
 

@@ -66,13 +66,12 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-// this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
 static void LoadHofGfx(void);
 static void InitHofBgs(void);
 static bool8 CreateHofConfettiSprite(void);
-static void SetCallback2AfterHallOfFameDisplay(void);
-static bool8 sub_8175024(void);
+static void StartCredits(void);
+static bool8 LoadHofBgs(void);
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);
 static void Task_Hof_SetMonDisplayTask(u8 taskId);
@@ -104,7 +103,6 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2);
 static void Task_DoDomeConfetti(u8 taskId);
 static void SpriteCB_HofConfetti(struct Sprite* sprite);
 
-// const rom data
 static const struct BgTemplate sHof_BgTemplates[] =
 {
     {
@@ -136,12 +134,19 @@ static const struct BgTemplate sHof_BgTemplates[] =
     },
 };
 
-static const struct WindowTemplate sHof_WindowTemplate = {0, 2, 2, 0xE, 6, 0xE, 1};
+static const struct WindowTemplate sHof_WindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 2,
+    .width = 14,
+    .height = 6,
+    .paletteNum = 14,
+    .baseBlock = 1
+};
 
-static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
-static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
-
-static const u8 sUnused_085E538C[] = {4, 5, 0, 0};
+static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
+static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+static const u8 sUnusedTextColors[4] = {TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_TRANSPARENT};
 
 static const struct CompressedSpriteSheet sSpriteSheet_Confetti[] =
 {
@@ -293,21 +298,21 @@ static const union AnimCmd sAnim_WhiteConfettiC[] =
 
 static const union AnimCmd * const sAnims_Confetti[] =
 {
-    sAnim_PinkConfettiA, 
-    sAnim_RedConfettiA, 
-    sAnim_BlueConfettiA, 
+    sAnim_PinkConfettiA,
+    sAnim_RedConfettiA,
+    sAnim_BlueConfettiA,
     sAnim_RedConfettiB,
-    sAnim_BlueConfettiB, 
-    sAnim_YellowConfettiA, 
-    sAnim_WhiteConfettiA, 
+    sAnim_BlueConfettiB,
+    sAnim_YellowConfettiA,
+    sAnim_WhiteConfettiA,
     sAnim_GreenConfettiA,
-    sAnim_PinkConfettiB, 
-    sAnim_BlueConfettiC, 
-    sAnim_YellowConfettiB, 
+    sAnim_PinkConfettiB,
+    sAnim_BlueConfettiC,
+    sAnim_YellowConfettiB,
     sAnim_WhiteConfettiB,
-    sAnim_GreenConfettiB, 
-    sAnim_PinkConfettiC, 
-    sAnim_RedConfettiC, 
+    sAnim_GreenConfettiB,
+    sAnim_PinkConfettiC,
+    sAnim_RedConfettiC,
     sAnim_YellowConfettiC,
     sAnim_WhiteConfettiC
 };
@@ -329,17 +334,17 @@ static const u32 sHallOfFame_Gfx[] = INCBIN_U32("graphics/misc/japanese_hof.4bpp
 
 static const struct HallofFameMon sDummyFameMon =
 {
-    .tid = 0x3EA03EA, 
-    .personality = 0, 
-    .species = SPECIES_NONE, 
-    .lvl = 0, 
+    .tid = 0x3EA03EA,
+    .personality = 0,
+    .species = SPECIES_NONE,
+    .lvl = 0,
     .nick = {0}
 };
 
 // Unused, order of party slots on Hall of Fame screen
 static const u8 sHallOfFame_SlotOrder[] = {
-    2, 1, 3, 
-    6, 4, 5, 
+    2, 1, 3,
+    6, 4, 5,
     0, 0
 };
 
@@ -383,7 +388,7 @@ static bool8 InitHallOfFameScreen(void)
         gMain.state++;
         break;
     case 3:
-        if (!sub_8175024())
+        if (!LoadHofBgs())
         {
             SetVBlankCallback(VBlankCB_HallOfFame);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
@@ -583,7 +588,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     if (currMon->species == SPECIES_EGG)
         destY += 10;
 
-    spriteId = CreatePicSprite2(currMon->species, currMon->tid, currMon->personality, 1, startX, startY, currMonId, 0xFFFF);
+    spriteId = CreatePicSprite2(currMon->species, currMon->tid, currMon->personality, 1, startX, startY, currMonId, TAG_NONE);
     gSprites[spriteId].tDestinationX = destX;
     gSprites[spriteId].tDestinationY = destY;
     gSprites[spriteId].data[0] = 0;
@@ -657,7 +662,7 @@ static void Task_Hof_DoConfetti(u8 taskId)
     if (gTasks[taskId].tFrameCount != 0)
     {
         gTasks[taskId].tFrameCount--;
-        
+
         // Create new confetti every 4th frame for the first 290 frames
         // For the last 110 frames wait for the existing confetti to fall offscreen
         if ((gTasks[taskId].tFrameCount & 3) == 0 && gTasks[taskId].tFrameCount > 110)
@@ -698,7 +703,7 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     ShowBg(0);
     ShowBg(1);
     ShowBg(3);
-    gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), 1, 120, 72, 6, 0xFFFF);
+    gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), 1, 120, 72, 6, TAG_NONE);
     AddWindow(&sHof_WindowTemplate);
     LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
     LoadPalette(GetTextWindowPalette(1), 0xE0, 0x20);
@@ -712,9 +717,9 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
     {
         gTasks[taskId].tFrameCount--;
     }
-    else if (gSprites[gTasks[taskId].tPlayerSpriteID].pos1.x != 192)
+    else if (gSprites[gTasks[taskId].tPlayerSpriteID].x != 192)
     {
-        gSprites[gTasks[taskId].tPlayerSpriteID].pos1.x++;
+        gSprites[gTasks[taskId].tPlayerSpriteID].x++;
     }
     else
     {
@@ -774,11 +779,11 @@ static void Task_Hof_HandleExit(u8 taskId)
         if (sHofMonPtr != NULL)
             FREE_AND_SET_NULL(sHofMonPtr);
 
-        SetCallback2AfterHallOfFameDisplay();
+        StartCredits();
     }
 }
 
-static void SetCallback2AfterHallOfFameDisplay(void)
+static void StartCredits(void)
 {
     SetMainCallback2(CB2_StartCreditsSequence);
 }
@@ -819,7 +824,7 @@ void CB2_DoHallOfFamePC(void)
         gMain.state++;
         break;
     case 3:
-        if (!sub_8175024())
+        if (!LoadHofBgs())
         {
             struct HallofFameTeam *fameTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
             fameTeam->mon[0] = sDummyFameMon;
@@ -931,7 +936,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
             if (currMon->species == SPECIES_EGG)
                 posY += 10;
 
-            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, 1, posX, posY, i, 0xFFFF);
+            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, 1, posX, posY, i, TAG_NONE);
             gSprites[spriteId].oam.priority = 1;
             gTasks[taskId].tMonSpriteId(i) = spriteId;
         }
@@ -973,7 +978,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
 
     currMonID = gTasks[taskId].tMonSpriteId(gTasks[taskId].tCurrMonId);
     gSprites[currMonID].oam.priority = 0;
-    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
+    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ PALETTES_OBJECTS;
     BlendPalettesUnfaded(sHofFadePalettes, 0xC, RGB(16, 29, 24));
 
     currMon = &savedTeams->mon[gTasks[taskId].tCurrMonId];
@@ -1301,7 +1306,7 @@ static void InitHofBgs(void)
     ChangeBgY(3, 0, 0);
 }
 
-static bool8 sub_8175024(void)
+static bool8 LoadHofBgs(void)
 {
     switch (sHofGfxPtr->state)
     {
@@ -1340,18 +1345,18 @@ static bool8 sub_8175024(void)
 
 static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
 {
-    if (sprite->pos1.x != sprite->tDestinationX
-        || sprite->pos1.y != sprite->tDestinationY)
+    if (sprite->x != sprite->tDestinationX
+        || sprite->y != sprite->tDestinationY)
     {
-        if (sprite->pos1.x < sprite->tDestinationX)
-            sprite->pos1.x += 15;
-        if (sprite->pos1.x > sprite->tDestinationX)
-            sprite->pos1.x -= 15;
+        if (sprite->x < sprite->tDestinationX)
+            sprite->x += 15;
+        if (sprite->x > sprite->tDestinationX)
+            sprite->x -= 15;
 
-        if (sprite->pos1.y < sprite->tDestinationY)
-            sprite->pos1.y += 10;
-        if (sprite->pos1.y > sprite->tDestinationY)
-            sprite->pos1.y -= 10;
+        if (sprite->y < sprite->tDestinationY)
+            sprite->y += 10;
+        if (sprite->y > sprite->tDestinationY)
+            sprite->y -= 10;
     }
     else
     {
@@ -1373,7 +1378,7 @@ static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
 
 static void SpriteCB_HofConfetti(struct Sprite* sprite)
 {
-    if (sprite->pos2.y > 120)
+    if (sprite->y2 > 120)
     {
         DestroySprite(sprite);
     }
@@ -1382,12 +1387,12 @@ static void SpriteCB_HofConfetti(struct Sprite* sprite)
         u16 rand;
         u8 sineIdx;
 
-        sprite->pos2.y++;
-        sprite->pos2.y += sprite->sExtraY;
+        sprite->y2++;
+        sprite->y2 += sprite->sExtraY;
 
         sineIdx = sprite->sSineIdx;
         rand = (Random() % 4) + 8;
-        sprite->pos2.x = rand * gSineTable[sineIdx] / 256;
+        sprite->x2 = rand * gSineTable[sineIdx] / 256;
 
         sprite->sSineIdx += 4;
     }
@@ -1398,7 +1403,7 @@ static bool8 CreateHofConfettiSprite(void)
     u8 spriteID;
     struct Sprite* sprite;
 
-    s16 posX = Random() % 240;
+    s16 posX = Random() % DISPLAY_WIDTH;
     s16 posY = -(Random() % 8);
 
     spriteID = CreateSprite(&sSpriteTemplate_HofConfetti, posX, posY, 0);
@@ -1502,12 +1507,12 @@ static void Task_DoDomeConfetti(u8 taskId)
         if (tTimer != 0 && tTimer % 3 == 0)
         {
             // Create new confetti every 3 frames
-            id = ConfettiUtil_AddNew(&sOamData_Confetti, 
-                              TAG_CONFETTI, 
-                              TAG_CONFETTI, 
-                              Random() % 240, 
-                              -(Random() % 8), 
-                              Random() % ARRAY_COUNT(sAnims_Confetti), 
+            id = ConfettiUtil_AddNew(&sOamData_Confetti,
+                              TAG_CONFETTI,
+                              TAG_CONFETTI,
+                              Random() % DISPLAY_WIDTH,
+                              -(Random() % 8),
+                              Random() % ARRAY_COUNT(sAnims_Confetti),
                               id);
             if (id != 0xFF)
             {
