@@ -3016,9 +3016,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_EVS_MINUS_1:
                 flags = affectsUser | certain;
                 if (mirrorArmorReflected && !affectsUser)
-                {
                     flags |= STAT_BUFF_ALLOW_PTR;
-                }
             
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE,
                   gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_1 + 1,
@@ -3063,11 +3061,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_2:
             case MOVE_EFFECT_ACC_MINUS_2:
             case MOVE_EFFECT_EVS_MINUS_2:
+                flags = affectsUser | certain;
+                if (mirrorArmorReflected && !affectsUser)
+                    flags |= STAT_BUFF_ALLOW_PTR;
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE,
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_2 + 1,
-                                    affectsUser, 0))
+                                    flags, gBattlescriptCurrInstr + 1))
                 {
-                    gBattlescriptCurrInstr++;
+                    if (!mirrorArmorReflected)
+                        gBattlescriptCurrInstr++;
                 }
                 else
                 {
