@@ -1,25 +1,15 @@
 #include "global.h"
 #include "battle.h"
-#include "constants/battle_move_effects.h"
-#include "constants/battle_script_commands.h"
 #include "battle_message.h"
 #include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
-#include "constants/moves.h"
-#include "constants/abilities.h"
 #include "item.h"
-#include "constants/items.h"
-#include "constants/hold_effects.h"
 #include "util.h"
 #include "pokemon.h"
 #include "random.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
-#include "constants/songs.h"
-#include "constants/trainers.h"
-#include "constants/battle_anim.h"
-#include "constants/map_types.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
@@ -38,7 +28,6 @@
 #include "pokemon_storage_system.h"
 #include "task.h"
 #include "naming_screen.h"
-#include "constants/battle_string_ids.h"
 #include "battle_setup.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -49,9 +38,19 @@
 #include "pokemon_summary_screen.h"
 #include "pokenav.h"
 #include "menu_specialized.h"
-#include "constants/rgb.h"
 #include "data.h"
+#include "constants/abilities.h"
+#include "constants/battle_anim.h"
+#include "constants/battle_move_effects.h"
+#include "constants/battle_string_ids.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/map_types.h"
+#include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/trainers.h"
 
 extern const u8* const gBattleScriptsForMoveEffects[];
 
@@ -147,7 +146,7 @@ static void Cmd_jumpiftype2(void);
 static void Cmd_jumpifabilitypresent(void);
 static void Cmd_endselectionscript(void);
 static void Cmd_playanimation(void);
-static void Cmd_playanimation2(void);
+static void Cmd_playanimation_var(void);
 static void Cmd_setgraphicalstatchangevalues(void);
 static void Cmd_playstatchangeanimation(void);
 static void Cmd_moveend(void);
@@ -313,7 +312,7 @@ static void Cmd_settypebasedhalvers(void);
 static void Cmd_setweatherballtype(void);
 static void Cmd_tryrecycleitem(void);
 static void Cmd_settypetoterrain(void);
-static void Cmd_pursuitrelated(void);
+static void Cmd_pursuitdoubles(void);
 static void Cmd_snatchsetbattlers(void);
 static void Cmd_removelightscreenreflect(void);
 static void Cmd_handleballthrow(void);
@@ -399,7 +398,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifabilitypresent,                    //0x43
     Cmd_endselectionscript,                      //0x44
     Cmd_playanimation,                           //0x45
-    Cmd_playanimation2,                          //0x46
+    Cmd_playanimation_var,                       //0x46
     Cmd_setgraphicalstatchangevalues,            //0x47
     Cmd_playstatchangeanimation,                 //0x48
     Cmd_moveend,                                 //0x49
@@ -565,7 +564,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setweatherballtype,                      //0xE9
     Cmd_tryrecycleitem,                          //0xEA
     Cmd_settypetoterrain,                        //0xEB
-    Cmd_pursuitrelated,                          //0xEC
+    Cmd_pursuitdoubles,                          //0xEC
     Cmd_snatchsetbattlers,                       //0xED
     Cmd_removelightscreenreflect,                //0xEE
     Cmd_handleballthrow,                         //0xEF
@@ -1115,7 +1114,7 @@ static void Cmd_accuracycheck(void)
         s8 buff;
         u16 calc;
 
-        if (move == 0)
+        if (move == ACC_CURR_MOVE)
             move = gCurrentMove;
 
         GET_MOVE_TYPE(move, type);
@@ -3183,23 +3182,23 @@ static void Cmd_jumpifstat(void)
 
 static void Cmd_jumpifstatus3condition(void)
 {
-    u32 flags;
+    u32 status;
     const u8 *jumpPtr;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    flags = T2_READ_32(gBattlescriptCurrInstr + 2);
+    status = T2_READ_32(gBattlescriptCurrInstr + 2);
     jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 7);
 
     if (gBattlescriptCurrInstr[6])
     {
-        if ((gStatuses3[gActiveBattler] & flags) != 0)
+        if ((gStatuses3[gActiveBattler] & status) != 0)
             gBattlescriptCurrInstr += 11;
         else
             gBattlescriptCurrInstr = jumpPtr;
     }
     else
     {
-        if ((gStatuses3[gActiveBattler] & flags) != 0)
+        if ((gStatuses3[gActiveBattler] & status) != 0)
             gBattlescriptCurrInstr = jumpPtr;
         else
             gBattlescriptCurrInstr += 11;
@@ -3514,8 +3513,7 @@ static void Cmd_checkteamslost(void)
         // In multi battle with Steven, skip his Pokémon
         for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) 
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
         }
     }
@@ -3523,10 +3521,8 @@ static void Cmd_checkteamslost(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) 
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
-            && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) 
-             || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
             {
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
             }
@@ -3539,10 +3535,8 @@ static void Cmd_checkteamslost(void)
     // Get total HP for the enemy's party to determine if the player has won
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) 
-        && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
-        && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) 
-         || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
+        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
+         && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
         {
             HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
         }
@@ -3982,8 +3976,8 @@ static void Cmd_playanimation(void)
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
 
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
-        || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
-        || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
+     || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
+     || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -3995,9 +3989,9 @@ static void Cmd_playanimation(void)
         gBattlescriptCurrInstr = BattleScript_Pausex20;
     }
     else if (gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES
-             || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
-             || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
-             || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
+          || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
+          || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
+          || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4015,7 +4009,8 @@ static void Cmd_playanimation(void)
     }
 }
 
-static void Cmd_playanimation2(void) // animation Id is stored in the first pointer
+// Same as playanimation, expect it takes a pointer to some animation id, instead of taking the value directly
+static void Cmd_playanimation_var(void)
 {
     const u16* argumentPtr;
     const u8* animationIdPtr;
@@ -4025,8 +4020,8 @@ static void Cmd_playanimation2(void) // animation Id is stored in the first poin
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
 
     if (*animationIdPtr == B_ANIM_STATS_CHANGE
-        || *animationIdPtr == B_ANIM_SNATCH_MOVE
-        || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
+     || *animationIdPtr == B_ANIM_SNATCH_MOVE
+     || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animationIdPtr, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4037,9 +4032,9 @@ static void Cmd_playanimation2(void) // animation Id is stored in the first poin
         gBattlescriptCurrInstr += 10;
     }
     else if (*animationIdPtr == B_ANIM_RAIN_CONTINUES
-             || *animationIdPtr == B_ANIM_SUN_CONTINUES
-             || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
-             || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
+          || *animationIdPtr == B_ANIM_SUN_CONTINUES
+          || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
+          || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animationIdPtr, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4186,7 +4181,7 @@ static void Cmd_moveend(void)
     u8 moveType = 0;
     u8 holdEffectAtk = 0;
     u16 *choicedMoveAtk = NULL;
-    u8 arg1, arg2;
+    u8 endMode, endState;
     u16 originallyUsedMove;
 
     if (gChosenMove == 0xFFFF)
@@ -4194,8 +4189,8 @@ static void Cmd_moveend(void)
     else
         originallyUsedMove = gChosenMove;
 
-    arg1 = gBattlescriptCurrInstr[1];
-    arg2 = gBattlescriptCurrInstr[2];
+    endMode = gBattlescriptCurrInstr[1];
+    endState = gBattlescriptCurrInstr[2];
 
     if (gBattleMons[gBattlerAttacker].item == ITEM_ENIGMA_BERRY)
         holdEffectAtk = gEnigmaBerries[gBattlerAttacker].holdEffect;
@@ -4450,9 +4445,9 @@ static void Cmd_moveend(void)
             break;
         }
 
-        if (arg1 == 1 && effect == FALSE)
+        if (endMode == 1 && effect == FALSE)
             gBattleScripting.moveendState = MOVEEND_COUNT;
-        if (arg1 == 2 && arg2 == gBattleScripting.moveendState)
+        if (endMode == 2 && endState == gBattleScripting.moveendState)
             gBattleScripting.moveendState = MOVEEND_COUNT;
 
     } while (gBattleScripting.moveendState != MOVEEND_COUNT && effect == FALSE);
@@ -5318,16 +5313,16 @@ static void Cmd_returntoball(void)
 
 static void Cmd_handlelearnnewmove(void)
 {
-    const u8 *jumpPtr1 = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8 *jumpPtr2 = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+    const u8 *learnedMovePtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *nothingToLearnPtr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
 
     u16 learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], gBattlescriptCurrInstr[9]);
     while (learnMove == MON_ALREADY_KNOWS_MOVE)
         learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], FALSE);
 
-    if (learnMove == 0)
+    if (learnMove == MOVE_NONE)
     {
-        gBattlescriptCurrInstr = jumpPtr2;
+        gBattlescriptCurrInstr = nothingToLearnPtr;
     }
     else if (learnMove == MON_HAS_MAX_MOVES)
     {
@@ -5352,7 +5347,7 @@ static void Cmd_handlelearnnewmove(void)
             }
         }
 
-        gBattlescriptCurrInstr = jumpPtr1;
+        gBattlescriptCurrInstr = learnedMovePtr;
     }
 }
 
@@ -9718,7 +9713,8 @@ static void Cmd_settypetoterrain(void)
     }
 }
 
-static void Cmd_pursuitrelated(void)
+// Unused
+static void Cmd_pursuitdoubles(void)
 {
     gActiveBattler = GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) ^ BIT_FLANK);
 
@@ -9731,7 +9727,7 @@ static void Cmd_pursuitrelated(void)
         gCurrentMove = MOVE_PURSUIT;
         gBattlescriptCurrInstr += 5;
         gBattleScripting.animTurn = 1;
-        gBattleScripting.field_20 = gBattlerAttacker;
+        gBattleScripting.pursuitDoublesAttacker = gBattlerAttacker;
         gBattlerAttacker = gActiveBattler;
     }
     else

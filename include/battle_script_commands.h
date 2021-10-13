@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_SCRIPT_COMMANDS_H
 
 #include "constants/pokemon.h"
+#include "constants/battle_script_commands.h"
 
 // Arguments for 'flags' in HandleBattleWindow
 #define WINDOW_CLEAR (1 << 0)

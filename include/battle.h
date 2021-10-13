@@ -41,19 +41,6 @@
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_NONE                   0xFF
 
-// array entries for battle communication
-#define MULTIUSE_STATE          0
-#define CURSOR_POSITION         1
-#define TASK_ID                 1 // task Id and cursor position share the same field
-#define SPRITES_INIT_STATE1     1 // shares the Id as well
-#define SPRITES_INIT_STATE2     2
-#define MOVE_EFFECT_BYTE        3
-#define ACTIONS_CONFIRMED_COUNT 4
-#define MULTISTRING_CHOOSER     5
-#define MISS_TYPE               6
-#define MSG_DISPLAY             7
-#define BATTLE_COMMUNICATION_ENTRIES_COUNT  8
-
 #define MOVE_TARGET_SELECTED            0
 #define MOVE_TARGET_DEPENDS             (1 << 0)
 #define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
@@ -487,6 +474,8 @@ struct BattleStruct
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
 
+// NOTE: The members of this struct have hard-coded offsets 
+//       in include/constants/battle_script_commands.h
 struct BattleScripting
 {
     s32 painSplitHp;
@@ -509,7 +498,7 @@ struct BattleScripting
     u8 battleStyle;
     u8 drawlvlupboxState;
     u8 learnMoveState;
-    u8 field_20;
+    u8 pursuitDoublesAttacker;
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 levelUpHP;
@@ -517,9 +506,6 @@ struct BattleScripting
     u8 multiplayerId;
     u8 specialTrainerBattleType;
 };
-
-// rom_80A5C6C
-
 
 struct BattleSpriteInfo
 {
