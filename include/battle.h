@@ -37,6 +37,7 @@
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_DEBUG                  20
+#define B_ACTION_THROW_BALL             21 // R to throw last used ball
 #define B_ACTION_NONE                   0xFF
 
 #define MAX_TRAINER_ITEMS 4
@@ -602,6 +603,7 @@ struct BattleStruct
     u8 quickClawBattlerId;
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
+    u8 ballSpriteIds[2];    // item gfx, window gfx
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -906,5 +908,6 @@ extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
+extern u16 gLastThrownBall;
 
 #endif // GUARD_BATTLE_H
