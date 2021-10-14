@@ -13,7 +13,7 @@
 #include "util.h"
 #include "constants/songs.h"
 
-struct Unk81D5014
+struct EReaderTaskData
 {
     u16 unk0;
     u16 unk2;
@@ -36,7 +36,7 @@ struct Unk03006370
     u32 *unk8;
 };
 
-static void sub_81D5084(u8);
+static void Task_EReader(u8);
 
 struct Unk03006370 gUnknown_03006370;
 
@@ -209,11 +209,11 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
     return 0;
 }
 
-void task_add_00_ereader(void)
+void CreateEReaderTask(void)
 {
-    struct Unk81D5014 *data;
-    u8 taskId = CreateTask(sub_81D5084, 0);
-    data = (struct Unk81D5014 *)gTasks[taskId].data;
+    struct EReaderTaskData *data;
+    u8 taskId = CreateTask(Task_EReader, 0);
+    data = (struct EReaderTaskData *)gTasks[taskId].data;
     data->unk8 = 0;
     data->unk9 = 0;
     data->unkA = 0;
@@ -244,9 +244,9 @@ static bool32 sub_81D5064(u16 *arg0, u16 arg1)
     return FALSE;
 }
 
-static void sub_81D5084(u8 taskId)
+static void Task_EReader(u8 taskId)
 {
-    struct Unk81D5014 *data = (struct Unk81D5014 *)gTasks[taskId].data;
+    struct EReaderTaskData *data = (struct EReaderTaskData *)gTasks[taskId].data;
     switch (data->unk8)
     {
     case 0:

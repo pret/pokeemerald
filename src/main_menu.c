@@ -90,7 +90,7 @@
  *  - If the user selected New Game, advance to Task_NewGameBirchSpeech_Init.
  *  - If the user selected Continue, advance to CB2_ContinueSavedGame.
  *  - If the user selected the Options menu, advance to CB2_InitOptionMenu.
- *  - If the user selected Mystery Gift, advance to CB2_MysteryGift. However,
+ *  - If the user selected Mystery Gift, advance to CB2_InitMysteryGift. However,
  *    if the wireless adapter was removed, instead advance to
  *    Task_DisplayMainMenuInvalidActionError.
  *  - Code to start a Mystery Event is present here, but is unreachable in this
@@ -1073,7 +1073,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_MYSTERY_GIFT:
-                SetMainCallback2(c2_mystery_gift);
+                SetMainCallback2(CB2_InitMysteryGift);
                 DestroyTask(taskId);
                 break;
             case ACTION_MYSTERY_EVENTS:
@@ -1081,7 +1081,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_EREADER:
-                SetMainCallback2(c2_ereader);
+                SetMainCallback2(CB2_InitEReader);
                 DestroyTask(taskId);
                 break;
             case ACTION_INVALID:

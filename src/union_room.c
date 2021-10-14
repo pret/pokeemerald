@@ -218,7 +218,7 @@ static u16 ReadAsU16(const u8 *);
 static void Task_TryBecomeLinkLeader(u8);
 static void Task_TryJoinLinkGroup(u8);
 static void Task_ListenToWireless(u8);
-static void Task_MEvent_Leader(u8);
+static void Task_SendMysteryGift(u8);
 static void Task_CardOrNewsWithFriend(u8);
 static void Task_CardOrNewsOverWireless(u8);
 static void Task_RunUnionRoom(u8);
@@ -1857,12 +1857,13 @@ static void CreateTask_StartActivity(void)
     gTasks[taskId].data[0] = 0;
 }
 
-void MEvent_CreateTask_Leader(u32 activity)
+// Sending Wonder Card/News
+void CreateTask_SendMysteryGift(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Leader *data;
 
-    taskId = CreateTask(Task_MEvent_Leader, 0);
+    taskId = CreateTask(Task_SendMysteryGift, 0);
     sWirelessLinkMain.leader = data = (void*)(gTasks[taskId].data);
 
     data->state = 0;
@@ -1871,7 +1872,7 @@ void MEvent_CreateTask_Leader(u32 activity)
     gSpecialVar_Result = LINKUP_ONGOING;
 }
 
-static void Task_MEvent_Leader(u8 taskId)
+static void Task_SendMysteryGift(u8 taskId)
 {
     struct WirelessLink_Leader *data = sWirelessLinkMain.leader;
     struct WindowTemplate winTemplate;
@@ -1944,7 +1945,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state = 7;
         break;
     case 7:
-        switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->yesNoWindowId, 0, gStringVar4))
+        switch (DoMysteryGiftYesNo(&data->textState, &data->yesNoWindowId, 0, gStringVar4))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -2065,7 +2066,7 @@ static void Task_MEvent_Leader(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 activity)
+void CreateTask_LinkMysteryGiftWithFriend(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Group *data;
@@ -2234,7 +2235,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 activity)
+void CreateTask_LinkMysteryGiftOverWireless(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Group *data;
