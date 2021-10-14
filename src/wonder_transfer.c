@@ -51,7 +51,7 @@ struct UnkStruct_203F3C8_02DC
 struct WonderCardData
 {
     /*0000*/ struct WonderCard card;
-    /*014c*/ struct MEventBuffer_3430_Sub unk_014C;
+    /*014c*/ struct MEventBuffer_3430 unk_014C;
     /*0170*/ const struct WonderGraphics * gfx;
     /*0174*/ u8 enterExitState;
     /*0175*/ u8 unk_0175;
@@ -176,7 +176,7 @@ static const struct WonderGraphics sCardGraphics[NUM_WONDER_BGS] = {
     {.textPal1 = 1, .textPal2 = 0, .textPal3 = 0, .textPal4 = 7, .tiles = sWonderCardBgGfx8, .map = sWonderCardBgTilemap8, .pal = sWonderCardBgPal8}
 };
 
-bool32 WonderCard_Init(struct WonderCard * card, struct MEventBuffer_3430_Sub * r6)
+bool32 WonderCard_Init(struct WonderCard * card, struct MEventBuffer_3430 * r6)
 {
     if (card == NULL || r6 == NULL)
         return FALSE;

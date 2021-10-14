@@ -11,20 +11,20 @@
 #include "mevent.h"
 #include "mevent_server_helpers.h"
 
-static u32 mevent_receive_func(struct mevent_srv_sub *);
-static u32 mevent_send_func(struct mevent_srv_sub *);
+static u32 mevent_receive_func(struct MysteryGiftLink *);
+static u32 mevent_send_func(struct MysteryGiftLink *);
 
-u32 mevent_srv_sub_recv(struct mevent_srv_sub * svr)
+u32 MysteryGiftLink_Recv(struct MysteryGiftLink * svr)
 {
     return svr->recvFunc(svr);
 }
 
-u32 mevent_srv_sub_send(struct mevent_srv_sub * svr)
+u32 MysteryGiftLink_Send(struct MysteryGiftLink * svr)
 {
     return svr->sendFunc(svr);
 }
 
-void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recvPlayerNo)
+void MysteryGiftLink_Init(struct MysteryGiftLink * svr, u32 sendPlayerNo, u32 recvPlayerNo)
 {
     svr->sendPlayerNo = sendPlayerNo;
     svr->recvPlayerNo = recvPlayerNo;
@@ -41,7 +41,7 @@ void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recv
     svr->recvFunc = mevent_receive_func;
 }
 
-void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void * src, u32 size)
+void MysteryGiftLink_InitSend(struct MysteryGiftLink * svr, u32 ident, const void * src, u32 size)
 {
     svr->seqno = 0;
     svr->sendIdent = ident;
@@ -54,7 +54,7 @@ void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void
     svr->sendBfr = src;
 }
 
-void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void * dest)
+void MysteryGiftLink_InitRecv(struct MysteryGiftLink * svr, u32 ident, void * dest)
 {
     svr->seqno = 0;
     svr->recvIdent = ident;
@@ -82,7 +82,7 @@ static void mevent_reset_recv(u32 recv_idx)
     ResetBlockReceivedFlag(recv_idx);
 }
 
-static bool32 mevent_receive_func(struct mevent_srv_sub * svr)
+static bool32 mevent_receive_func(struct MysteryGiftLink * svr)
 {
     struct send_recv_header header;
 
@@ -148,7 +148,7 @@ static bool32 mevent_receive_func(struct mevent_srv_sub * svr)
     return FALSE;
 }
 
-static bool32 mevent_send_func(struct mevent_srv_sub * svr)
+static bool32 mevent_send_func(struct MysteryGiftLink * svr)
 {
     struct send_recv_header header;
 

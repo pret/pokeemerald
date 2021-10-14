@@ -2230,7 +2230,7 @@ bool8 ScrCmd_checkmoneventlegal(struct ScriptContext *ctx)
 }
 
 // TODO: Should be renamed. Name implies general usage, but its specifically for Wonder Card
-// See GetSavedRamScriptIfValid, which is NULL if ValidateReceivedWonderCard returns FALSE
+// See GetSavedRamScriptIfValid, which is NULL if ValidateSavedWonderCard returns FALSE
 bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
     const u8* script = GetSavedRamScriptIfValid();

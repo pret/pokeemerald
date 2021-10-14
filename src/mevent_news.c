@@ -60,7 +60,7 @@ u16 sub_801DC20(void)
     struct MysteryEventStruct *r4 = sub_801B044();
     u16 r5;
 
-    if (!IsMysteryEventEnabled() || !ValidateReceivedWonderNews())
+    if (!IsMysteryEventEnabled() || !ValidateSavedWonderNews())
         return 0;
 
     r5 = sub_801DD44(r4);

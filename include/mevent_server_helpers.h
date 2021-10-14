@@ -3,7 +3,7 @@
 
 #define ME_SEND_BUF_SIZE 0x400
 
-struct mevent_srv_sub
+struct MysteryGiftLink
 {
     s32 seqno;
     u8 sendPlayerNo;
@@ -18,8 +18,8 @@ struct mevent_srv_sub
     u16 sendSize;
     void * recvBfr;
     const void * sendBfr;
-    u32 (*recvFunc)(struct mevent_srv_sub *);
-    u32 (*sendFunc)(struct mevent_srv_sub *);
+    u32 (*recvFunc)(struct MysteryGiftLink *);
+    u32 (*sendFunc)(struct MysteryGiftLink *);
 };
 
 struct send_recv_header
@@ -29,10 +29,10 @@ struct send_recv_header
     u16 size;
 };
 
-void mevent_srv_sub_init(struct mevent_srv_sub *, u32, u32);
-void mevent_srv_sub_init_send(struct mevent_srv_sub * manager, u32 ident, const void * src, u32 size);
-bool32 mevent_srv_sub_recv(struct mevent_srv_sub * manager);
-bool32 mevent_srv_sub_send(struct mevent_srv_sub * manager);
-void mevent_srv_sub_init_recv(struct mevent_srv_sub *, u32, void *);
+void MysteryGiftLink_Init(struct MysteryGiftLink *, u32, u32);
+void MysteryGiftLink_InitSend(struct MysteryGiftLink * manager, u32 ident, const void * src, u32 size);
+bool32 MysteryGiftLink_Recv(struct MysteryGiftLink * manager);
+bool32 MysteryGiftLink_Send(struct MysteryGiftLink * manager);
+void MysteryGiftLink_InitRecv(struct MysteryGiftLink *, u32, void *);
 
 #endif //GUARD_MEVENT_SERVER_HELPERS_H

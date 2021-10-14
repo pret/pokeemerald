@@ -52,7 +52,7 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
     svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventStruct_Unk1442CC));
     svr->cmdBuffer = cmdBuffer;
     svr->cmdidx = 0;
-    mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
+    MysteryGiftLink_Init(&svr->manager, sendPlayerNo, recvPlayerNo);
 }
 
 static void mevent_srv_free_resources(struct mevent_srv_common * svr)
@@ -66,7 +66,7 @@ static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, const void * src, u32 size)
 {
     AGB_ASSERT(size <= ME_SEND_BUF_SIZE);
-    mevent_srv_sub_init_send(&svr->manager, ident, src, size);
+    MysteryGiftLink_InitSend(&svr->manager, ident, src, size);
 }
 
 static const void * mevent_first_if_not_null_else_second(const void * a0, const void * a1)
@@ -103,7 +103,7 @@ static u32 common_mainseq_1(struct mevent_srv_common * svr)
 static u32 common_mainseq_2(struct mevent_srv_common * svr)
 {
     // do recv
-    if (mevent_srv_sub_recv(&svr->manager))
+    if (MysteryGiftLink_Recv(&svr->manager))
         svr->mainseqno = 4;
     return 1;
 }
@@ -111,7 +111,7 @@ static u32 common_mainseq_2(struct mevent_srv_common * svr)
 static u32 common_mainseq_3(struct mevent_srv_common * svr)
 {
     // do send
-    if (mevent_srv_sub_send(&svr->manager))
+    if (MysteryGiftLink_Send(&svr->manager))
         svr->mainseqno = 4;
     return 1;
 }
@@ -138,7 +138,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
     case 2:
         // receive
         AGB_ASSERT(cmd->parameter == NULL);
-        mevent_srv_sub_init_recv(&svr->manager, cmd->flag, svr->recvBuffer);
+        MysteryGiftLink_InitRecv(&svr->manager, cmd->flag, svr->recvBuffer);
         svr->mainseqno = 2;
         break;
     case 3:
@@ -196,7 +196,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         break;
     case 11:
         AGB_ASSERT(cmd->flag == FALSE);
-        svr->param = MEventStruct_Unk1442CC_CompareField_unk_16(svr->mevent_unk1442cc, cmd->parameter);
+        svr->param = MysteryGift_DoesQuestionnaireMatch(svr->mevent_unk1442cc, cmd->parameter);
         break;
     case 12:
         AGB_ASSERT(cmd->flag == FALSE);

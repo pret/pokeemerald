@@ -854,15 +854,9 @@ struct MysteryEventStruct
     u8 unk_2C[10][WONDER_NEWS_TEXT_LENGTH];
 };
 
- struct WonderNewsSaveStruct
-{
-    u32 crc;
-    struct WonderNews data;
-};
-
  struct WonderCard
 {
-    u16 unk_00;
+    u16 flagId;
     u16 unk_02;
     u32 unk_04;
     u8 unk_08_0:2;
@@ -876,13 +870,7 @@ struct MysteryEventStruct
     u8 unk_122[WONDER_CARD_TEXT_LENGTH];
 };
 
- struct WonderCardSaveStruct
-{
-    u32 crc;
-    struct WonderCard data;
-};
-
- struct MEventBuffer_3430_Sub
+ struct MEventBuffer_3430
 {
     u16 unk_00;
     u16 unk_02;
@@ -891,20 +879,17 @@ struct MysteryEventStruct
     u16 unk_08[2][7];
 };
 
- struct MEventBuffer_3430
+ struct MysteryGiftSave
 {
-    u32 crc;
-    struct MEventBuffer_3430_Sub data;
-};
-
- struct MEventBuffers
-{
-    /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
-    /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
-    /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
-    /*0x338 0x3564*/ u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
-    /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
-    /*0x344 0x3570*/ u32 unk_344[2][5];
+    u32 newsCrc;
+    struct WonderNews news;
+    u32 cardCrc;
+    struct WonderCard card;
+    u32 unkCrc;
+    struct MEventBuffer_3430 unk_3430;
+    u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
+    struct MysteryEventStruct unk_340;
+    u32 unk_344[2][5];
 }; // 0x36C 0x3598
 
 // For external event data storage. The majority of these may have never been used.
@@ -1031,7 +1016,7 @@ struct SaveBlock1
     /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ struct MEventBuffers unk_322C;
+    /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3598*/ u8 field_3598[0x180];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;

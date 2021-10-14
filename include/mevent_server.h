@@ -26,7 +26,7 @@ struct mevent_srv_common
     const void * sendBuffer2;
     u32 sendBuffer2Size;
     u32 sendWord;
-    struct mevent_srv_sub manager;
+    struct MysteryGiftLink manager;
 };
 
 void mevent_srv_new_wcard();
