@@ -153,7 +153,7 @@ bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
 bool32 TryRoomService(u8 battlerId);
 void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 void DoBurmyFormChange(u32 monId);
-bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef);
+bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
