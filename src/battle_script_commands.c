@@ -4527,12 +4527,13 @@ static void Cmd_endselectionscript(void)
 static void Cmd_playanimation(void)
 {
     const u16* argumentPtr;
+    u8 animId = gBattlescriptCurrInstr[2];
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
 
     #if B_TERRAIN_BG_CHANGE == FALSE
-    if (gBattlescriptCurrInstr[2] == B_ANIM_RESTORE_BG)
+    if (animId == B_ANIM_RESTORE_BG)
     {
         // workaround for .if not working
         gBattlescriptCurrInstr += 7;
@@ -4540,28 +4541,28 @@ static void Cmd_playanimation(void)
     }
     #endif
 
-    if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
-        || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
-        || gBattlescriptCurrInstr[2] == B_ANIM_MEGA_EVOLUTION
-        || gBattlescriptCurrInstr[2] == B_ANIM_ILLUSION_OFF
-        || gBattlescriptCurrInstr[2] == B_ANIM_FORM_CHANGE
-        || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
+    if (animId == B_ANIM_STATS_CHANGE
+        || animId == B_ANIM_SNATCH_MOVE
+        || animId == B_ANIM_MEGA_EVOLUTION
+        || animId == B_ANIM_ILLUSION_OFF
+        || animId == B_ANIM_FORM_CHANGE
+        || animId == B_ANIM_SUBSTITUTE_FADE)
     {
-        BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
+        BtlController_EmitBattleAnimation(0, animId, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 7;
     }
-    else if (gHitMarker & HITMARKER_NO_ANIMATIONS)
+    else if (gHitMarker & HITMARKER_NO_ANIMATIONS && animId != B_ANIM_RESTORE_BG)
     {
         BattleScriptPush(gBattlescriptCurrInstr + 7);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
     }
-    else if (gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES
-             || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
-             || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
-             || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
+    else if (animId == B_ANIM_RAIN_CONTINUES
+             || animId == B_ANIM_SUN_CONTINUES
+             || animId == B_ANIM_SANDSTORM_CONTINUES
+             || animId == B_ANIM_HAIL_CONTINUES)
     {
-        BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
+        BtlController_EmitBattleAnimation(0, animId, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 7;
     }
@@ -4571,7 +4572,7 @@ static void Cmd_playanimation(void)
     }
     else
     {
-        BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
+        BtlController_EmitBattleAnimation(0, animId, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 7;
     }
