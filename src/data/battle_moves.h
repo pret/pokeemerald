@@ -10780,7 +10780,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STUFF_CHEEKS] =
     {
-        .effect = EFFECT_DEFENSE_UP_2,
+        .effect = EFFECT_STUFF_CHEEKS,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

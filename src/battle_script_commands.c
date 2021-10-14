@@ -3373,16 +3373,22 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_BUG_BITE:
-                if ((gBattleMons[gEffectBattler].item >= FIRST_BERRY_INDEX && gBattleMons[gEffectBattler].item <= LAST_BERRY_INDEX)
+                if (ItemId_GetPocket(gBattleMons[gEffectBattler].item) == POCKET_BERRIES
                     && GetBattlerAbility(gEffectBattler) != ABILITY_STICKY_HOLD)
                 {
+                    // target loses their berry
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = 0;
                     CheckSetUnburden(gEffectBattler);
-
                     gActiveBattler = gEffectBattler;
+                    
                     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gEffectBattler].item);
                     MarkBattlerForControllerExec(gActiveBattler);
+                    
+                    // attacker temporarily gains their item
+                    gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerAttacker].item;
+                    gBattleMons[gBattlerAttacker].item = gLastUsedItem;
+                    
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectBugBite;
                 }
@@ -8882,6 +8888,27 @@ static void Cmd_various(void)
             return;
         }
         break;
+    case VARIOUS_CONSUME_BERRY:
+        if (ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item) == HOLD_EFFECT_NONE)
+        {
+            gBattlescriptCurrInstr += 4;
+            return;
+        }
+        
+        gBattleScripting.battler = gEffectBattler = gBattlerTarget = gActiveBattler;    // Cover all berry effect battlerId cases. e.g. ChangeStatBuffs uses target ID
+        // Do move end berry effects for just a single battler, instead of looping through all battlers
+        if (ItemBattleEffects(ITEMEFFECT_BATTLER_MOVE_END, gActiveBattler, FALSE))
+            return;
+        
+        if (gBattlescriptCurrInstr[3])
+        {
+            gBattleMons[gActiveBattler].item = gBattleStruct->changedItems[gActiveBattler];
+            gBattleStruct->changedItems[gActiveBattler] = ITEM_NONE;
+            gBattleResources->flags->flags[gActiveBattler] &= ~(RESOURCE_FLAG_UNBURDEN);
+        }
+        
+        gBattlescriptCurrInstr += 4;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
