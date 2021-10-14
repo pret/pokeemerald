@@ -5,13 +5,13 @@ use Getopt::Long;
 
 my $usage = "Usage: calcrom.pl file.map [--data]\n";
 
-(@ARGV >= 1)
+my $showData;
+GetOptions("data" => \$showData) or die $usage;
+
+(@ARGV == 1)
     or die $usage;
 open(my $file, $ARGV[0])
     or die "ERROR: could not open file '$ARGV[0]'.\n";
-
-my $showData;
-GetOptions("data" => \$showData) or die $usage;
 
 my $src = 0;
 my $asm = 0;
