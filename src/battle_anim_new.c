@@ -93,6 +93,40 @@ const struct SpriteTemplate gPowerTrickSpriteTemplate =
 
 
 //// GEN 5
+//shell smash
+const struct SpriteTemplate gShellSmashLeftShellSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_SHELL_RIGHT,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gShellSmashRightShellSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_SHELL_LEFT,
+    .paletteTag = ANIM_TAG_SHELL_LEFT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gShellSmashPurpleRocksSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_FlyingRock,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRockFragment
+};
+
 //wide guard
 const struct SpriteTemplate gWideGuardBlueConversionTemplate =
 {
