@@ -185,6 +185,7 @@
 #define VARIOUS_REMOVE_TERRAIN                  113
 #define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
 #define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     115
+#define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        116
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
