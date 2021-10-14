@@ -16,7 +16,7 @@ static EWRAM_DATA bool32 gUnknown_02022C70 = FALSE;
 static void sub_801B180(void);
 static void s_DestroyWonderNews(void);
 static bool32 sub_801B114(const struct WonderNews *data);
-static bool32 sub_801B2CC(const struct WonderCard *data);
+static bool32 ValidateWonderCardData(const struct WonderCard *data);
 static void sub_801B330(void);
 static void sub_801B368(void);
 static void sub_801B9F8(void);
@@ -140,7 +140,7 @@ bool32 sub_801B21C(const struct WonderCard *data)
 {
     struct MEventBuffer_3430_Sub *r2;
     struct WonderCard *r1;
-    if (!sub_801B2CC(data))
+    if (!ValidateWonderCardData(data))
         return FALSE;
 
     DestroyWonderCard();
@@ -156,7 +156,7 @@ bool32 ValidateReceivedWonderCard(void)
 {
     if (gSaveBlock1Ptr->unk_322C.wonderCard.crc != CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.wonderCard.data, sizeof(struct WonderCard)))
         return FALSE;
-    if (!sub_801B2CC(&gSaveBlock1Ptr->unk_322C.wonderCard.data))
+    if (!ValidateWonderCardData(&gSaveBlock1Ptr->unk_322C.wonderCard.data))
         return FALSE;
     if (!ValidateSavedRamScript())
         return FALSE;
@@ -164,7 +164,7 @@ bool32 ValidateReceivedWonderCard(void)
     return TRUE;
 }
 
-static bool32 sub_801B2CC(const struct WonderCard *data)
+static bool32 ValidateWonderCardData(const struct WonderCard *data)
 {
     if (data->unk_00 == 0)
         return FALSE;
@@ -172,7 +172,7 @@ static bool32 sub_801B2CC(const struct WonderCard *data)
         return FALSE;
     if (!(data->unk_08_6 == 0 || data->unk_08_6 == 1 || data->unk_08_6 == 2))
         return FALSE;
-    if (data->unk_08_2 > 7)
+    if (data->bgType >= NUM_WONDER_BGS)
         return FALSE;
     if (data->unk_09 > 7)
         return FALSE;

@@ -68,7 +68,7 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.text);
         src/union_room_battle.o(.text);
         src/mevent2.o(.text);
-        src/mevent_801BAAC.o(.text);
+        src/wonder_transfer.o(.text);
         src/mevent_server.o(.text);
         src/mevent_client.o(.text);
         src/mevent_server_helpers.o(.text);
@@ -454,7 +454,7 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.rodata);
         src/union_room_battle.o(.rodata);
         src/mevent2.o(.rodata);
-        src/mevent_801BAAC.o(.rodata);
+        src/wonder_transfer.o(.rodata);
         src/mevent_server.o(.rodata);
         src/mevent_client.o(.rodata);
         src/mevent_scripts.o(.rodata);

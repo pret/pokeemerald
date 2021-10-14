@@ -849,9 +849,9 @@ struct MysteryEventStruct
 {
     u16 unk_00;
     u8 unk_02;
-    u8 unk_03;
-    u8 unk_04[40];
-    u8 unk_2C[10][40];
+    u8 bgType;
+    u8 unk_04[WONDER_NEWS_TEXT_LENGTH];
+    u8 unk_2C[10][WONDER_NEWS_TEXT_LENGTH];
 };
 
  struct WonderNewsSaveStruct
@@ -866,14 +866,14 @@ struct MysteryEventStruct
     u16 unk_02;
     u32 unk_04;
     u8 unk_08_0:2;
-    u8 unk_08_2:4;
+    u8 bgType:4;
     u8 unk_08_6:2;
     u8 unk_09;
-    u8 unk_0A[40];
-    u8 unk_32[40];
-    u8 unk_5A[4][40];
-    u8 unk_FA[40];
-    u8 unk_122[40];
+    u8 unk_0A[WONDER_CARD_TEXT_LENGTH];
+    u8 unk_32[WONDER_CARD_TEXT_LENGTH];
+    u8 unk_5A[4][WONDER_CARD_TEXT_LENGTH];
+    u8 unk_FA[WONDER_CARD_TEXT_LENGTH];
+    u8 unk_122[WONDER_CARD_TEXT_LENGTH];
 };
 
  struct WonderCardSaveStruct

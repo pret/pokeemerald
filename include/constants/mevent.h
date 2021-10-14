@@ -12,4 +12,7 @@
 
 #define REQUIRED_CARD_BATTLES 3
 
+// Number of different types/colors of Wonder Card and News backgrounds
+#define NUM_WONDER_BGS 8
+
 #endif //GUARD_MEVENT_H

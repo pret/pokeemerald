@@ -14,7 +14,7 @@
 	.include "src/wireless_communication_status_screen.o"
 	.include "src/union_room_battle.o"
 	.include "src/mevent2.o"
-	.include "src/mevent_801BAAC.o"
+	.include "src/wonder_transfer.o"
 	.include "src/mevent_server.o"
 	.include "src/mevent_client.o"
 	.include "src/union_room_chat.o"
