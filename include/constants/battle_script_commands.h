@@ -186,7 +186,10 @@
 #define VARIOUS_REMOVE_TERRAIN                  113
 #define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
 #define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     115
-#define VARIOUS_CONSUME_BERRY                   116
+#define VARIOUS_GET_ROTOTILLER_TARGETS          116
+#define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 117
+#define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        118
+#define VARIOUS_CONSUME_BERRY                   119
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
