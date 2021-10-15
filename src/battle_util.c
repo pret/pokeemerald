@@ -7681,6 +7681,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     u16 basePower = CalcMoveBasePower(move, battlerAtk, battlerDef);
     u16 holdEffectModifier;
     u16 modifier = UQ_4_12(1.0);
+    u32 atkSide = GET_BATTLER_SIDE(battlerAtk);
 
     // attacker's abilities
     switch (GetBattlerAbility(battlerAtk))
@@ -7933,13 +7934,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_RETALIATE:
-        if (gCanPlayerRetaliate || gCanOpponentRetaliate)
+        if (gSideStatuses[atkSide] & SIDE_STATUS_RETALIATE)
         {
             MulModifier(&modifier, UQ_4_12(2.0));
-            if (gCanPlayerRetaliate)
-                gCanPlayerRetaliate = FALSE;
-            else if (gCanOpponentRetaliate)
-                gCanOpponentRetaliate = FALSE;
+            gSideStatuses[atkSide] &= ~SIDE_STATUS_RETALIATE;
         }
         break;
     case EFFECT_SOLARBEAM:
