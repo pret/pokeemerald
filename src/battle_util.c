@@ -7935,10 +7935,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         break;
     case EFFECT_RETALIATE:
         if (gSideStatuses[atkSide] & SIDE_STATUS_RETALIATE)
-        {
             MulModifier(&modifier, UQ_4_12(2.0));
-            gSideStatuses[atkSide] &= ~SIDE_STATUS_RETALIATE;
-        }
         break;
     case EFFECT_SOLARBEAM:
         if (WEATHER_HAS_EFFECT && gBattleWeather & (WEATHER_HAIL_ANY | WEATHER_SANDSTORM_ANY | WEATHER_RAIN_ANY))
