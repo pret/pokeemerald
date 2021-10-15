@@ -372,7 +372,7 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
         gLocalLinkPlayerId = GetMultiplayerId();
         SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
-        TrainerCard_GenerateCardForPlayer(card);
+        TrainerCard_GenerateCardForLinkPlayer(card);
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
         card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
@@ -420,7 +420,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
         gLocalLinkPlayerId = GetMultiplayerId();
         SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
-        TrainerCard_GenerateCardForPlayer(card);
+        TrainerCard_GenerateCardForLinkPlayer(card);
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
         card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
@@ -518,7 +518,7 @@ static void Task_LinkupAwaitTrainerCardData(u8 taskId)
 
     for (index = 0; index < GetLinkPlayerCount(); index++)
     {
-        CopyTrainerCardData(&gTrainerCards[index], gBlockRecvBuffer[index], gLinkPlayers[index].version);
+        CopyTrainerCardData(&gTrainerCards[index], (struct TrainerCard *)gBlockRecvBuffer[index], gLinkPlayers[index].version);
     }
 
     SetSuppressLinkErrorMessage(FALSE);

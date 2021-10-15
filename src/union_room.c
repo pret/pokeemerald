@@ -1532,13 +1532,15 @@ static void Task_ExchangeCards(u8 taskId)
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
                 recvBuff = gBlockRecvBuffer[i];
-                CopyTrainerCardData(&gTrainerCards[i], recvBuff, gLinkPlayers[i].version);
+                CopyTrainerCardData(&gTrainerCards[i], (struct TrainerCard *)recvBuff, gLinkPlayers[i].version);
             }
 
             if (GetLinkPlayerCount() == 2)
             {
+                // Note: hasAllFrontierSymbols is a re-used field.
+                // Here it is set by CreateTrainerCardInBuffer.
                 recvBuff = gBlockRecvBuffer[GetMultiplayerId() ^ 1];
-                MEventHandleReceivedWonderCard(recvBuff[48]);
+                MEventHandleReceivedWonderCard(((struct TrainerCard *)recvBuff)->hasAllFrontierSymbols);
             }
             else
             {
@@ -1626,13 +1628,14 @@ static void CB2_TransitionToCableClub(void)
 
 static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
 {
-    u16 *argAsU16Ptr = dest;
+    struct TrainerCard * card = (struct TrainerCard *)dest;
+    TrainerCard_GenerateCardForLinkPlayer(card);
 
-    TrainerCard_GenerateCardForPlayer((struct TrainerCard *)argAsU16Ptr);
+    // Below field is re-used, to be read by Task_ExchangeCards
     if (setWonderCard)
-        argAsU16Ptr[48] = GetWonderCardFlagID();
+        card->hasAllFrontierSymbols = GetWonderCardFlagID();
     else
-        argAsU16Ptr[48] = 0;
+        card->hasAllFrontierSymbols = 0;
 }
 
 static void Task_StartActivity(u8 taskId)
