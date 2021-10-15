@@ -7933,10 +7933,13 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_RETALIATE:
-        if (gCanRetaliate)
+        if (gCanPlayerRetaliate || gCanOpponentRetaliate)
         {
             MulModifier(&modifier, UQ_4_12(2.0));
-            gCanRetaliate = FALSE;
+            if (gCanPlayerRetaliate)
+                gCanPlayerRetaliate = FALSE;
+            else if (gCanOpponentRetaliate)
+                gCanOpponentRetaliate = FALSE;
         }
         break;
     case EFFECT_SOLARBEAM:
