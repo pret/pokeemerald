@@ -947,8 +947,8 @@ u32 CanThrowBall(void)
     {
         return 2;   // No room for mon
     }
-    #if B_SEMI_INVULNERABLE_CATCH >= GEN_5
-    else if (gStatuses3[B_POSITION_OPPONENT_LEFT] & STATUS3_SEMI_INVULNERABLE)
+    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
     {
         return 3;   // in semi-invulnerable state
     }
@@ -983,7 +983,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
         break;
-    #if B_SEMI_INVULNERABLE_CATCH >= GEN_5
+    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
     case 3: // Semi-Invulnerable
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
