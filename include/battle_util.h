@@ -32,6 +32,7 @@
 #define ITEMEFFECT_TARGET                       0x5
 #define ITEMEFFECT_ORBS                         0x6
 #define ITEMEFFECT_LIFEORB_SHELLBELL            0x7
+#define ITEMEFFECT_BATTLER_MOVE_END             0x8 // move end effects for just the battler, not whole field
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
@@ -47,6 +48,7 @@ struct TypePower
 
 extern const struct TypePower gNaturalGiftTable[];
 
+void HandleAction_ThrowBall(void);
 bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move);
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
@@ -152,7 +154,7 @@ bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
 bool32 TryRoomService(u8 battlerId);
 void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 void DoBurmyFormChange(u32 monId);
-bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef);
+bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 
 // ability checks
