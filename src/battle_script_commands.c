@@ -3373,7 +3373,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_BUG_BITE:
                 if (ItemId_GetPocket(gBattleMons[gEffectBattler].item) == POCKET_BERRIES
-                    && GetBattlerAbility(gEffectBattler) != ABILITY_STICKY_HOLD)
+                    && GetBattlerAbility(gEffectBattler) != ABILITY_STICKY_HOLD
+                    && !(gSpecialStatuses[gBattlerAttacker].parentalBondOn == 2 && gBattleMons[gBattlerTarget].hp != 0)) // Steal berry on final hit
                 {
                     // target loses their berry
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
