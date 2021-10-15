@@ -1850,6 +1850,8 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/level_up_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_species_table_pointers.h"
+#include "data/pokemon/form_change_tables.h"
+#include "data/pokemon/form_change_table_pointers.h"
 
 // SPECIES_NONE are ignored in the following two tables, so decrement before accessing these arrays to get the right result
 
@@ -2453,7 +2455,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_MUSHARNA - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_PIDOVE - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_TRANQUILL - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_UNFEZANT - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_UNFEZANT - 1]      = ANIM_V_STRETCH,
     [SPECIES_BLITZLE - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ZEBSTRIKA - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ROGGENROLA - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
@@ -4355,13 +4357,11 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 u32 GetUnownSpeciesId(u32 personality)
 {
-    return GetUnownLetterByPersonality(personality) + SPECIES_UNOWN_B - 1; //TODO
-    /*
     u16 unownLetter = GetUnownLetterByPersonality(personality);
+
     if (unownLetter == 0)
         return SPECIES_UNOWN;
     return unownLetter + SPECIES_UNOWN_B - 1;
-    */
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
@@ -8047,4 +8047,66 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
         }
     }
     return targetFormId;
+}
+
+// returns SPECIES_NONE if no form change is possible
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
+{
+    u32 i;
+    u16 targetSpecies = SPECIES_NONE;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+    u16 heldItem;
+    u32 ability;
+
+    if (formChanges != NULL)
+    {
+        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+
+        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        {
+            if (method == formChanges[i].method)
+            {
+                switch (method)
+                {
+                case FORM_ITEM_HOLD:
+                    if (heldItem == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_ITEM_USE:
+                    if (arg == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_MOVE:
+                    if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_ITEM_HOLD_ABILITY:
+                    if (heldItem == formChanges[i].param1 && ability == formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_ITEM_USE_TIME:
+                    RtcCalcLocalTime();
+                    if (arg == formChanges[i].param1)
+                    {
+                        switch (formChanges[i].param2)
+                        {
+                        case DAY:
+                            if (gLocalTime.hours >= 12 && gLocalTime.hours < 24)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        case NIGHT:
+                            if (gLocalTime.hours >= 0 && gLocalTime.hours < 12)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    return species != targetSpecies ? targetSpecies : SPECIES_NONE;
 }
