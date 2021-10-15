@@ -5145,14 +5145,20 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
 static void RemoveSpeciesFromIconList(u16 species)
 {
     u16 i;
+    bool8 hasFemale = FALSE;
 
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        /* This is flawed - if a male mon with gender differeneces has its icon removed from the list,
-         * but a female mon of the same species is still visible, its icon will also be cleared from the list.
-         * This may create a small but noticable visual bug when switching boxes.
-        */ 
-        if (sStorage->iconSpeciesList[i] == species || sStorage->iconSpeciesList[i] == (species | 0x8000))
+        if (sStorage->iconSpeciesList[i] == (species | 0x8000))
+        {
+            hasFemale = TRUE;
+            break;
+        }
+    }
+
+    for (i = 0; i < MAX_MON_ICONS; i++)
+    {
+        if (sStorage->iconSpeciesList[i] == species && !hasFemale)
         {
             if (--sStorage->numIconsPerSpecies[i] == 0)
                 sStorage->iconSpeciesList[i] = SPECIES_NONE;
