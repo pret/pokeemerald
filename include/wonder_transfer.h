@@ -9,7 +9,7 @@ enum {
     NEWS_INPUT_NONE = 0xFF
 };
 
-bool32 WonderCard_Init(struct WonderCard * card, struct MEventBuffer_3430 * r6);
+bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * r6);
 bool32 WonderNews_Init(const struct WonderNews * news);
 s32 WonderCard_Enter(void);
 s32 WonderNews_Enter(void);

@@ -1,195 +1,217 @@
 #include "global.h"
 #include "mevent_client.h"
 #include "mevent_server.h"
+#include "mevent.h"
 
-const u8 gText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
+static const u8 sText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
 
 
-const struct MysteryGiftClientCmd gUnknown_082F2598[] = {
-    {.instr = CLI_RECV, .parameter = 16},
-    {.instr = CLI_COPY_RECV}
+//==================
+// Client scripts
+//==================
+
+const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[] = {
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F25A8[] = {
-    {.instr = CLI_8},
-    {.instr = CLI_SEND_LOADED},
-    {.instr = CLI_RECV, .parameter = 16},
-    {.instr = CLI_COPY_RECV}
+static const struct MysteryGiftClientCmd sClientScript_SendGameData[] = {
+    {CLI_LOAD_GAME_DATA},
+    {CLI_SEND_LOADED},
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F25C8[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 10}
+static const struct MysteryGiftClientCmd sClientScript_CantAccept[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_CANT_ACCEPT}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F25D8[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 11}
+static const struct MysteryGiftClientCmd sClientScript_CommError[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_COMM_ERROR}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F25E8[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 0}
+static const struct MysteryGiftClientCmd sClientScript_NothingSent[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_NOTHING_SENT}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F25F8[] = {
-    {.instr = CLI_RECV, .parameter = 22},
-    {.instr = CLI_10},
-    {.instr = CLI_RECV, .parameter = 25},
-    {.instr = CLI_17},
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 2}
+static const struct MysteryGiftClientCmd sClientScript_SaveCard[] = {
+    {CLI_RECV, MG_LINKID_CARD},
+    {CLI_SAVE_CARD},
+    {CLI_RECV, MG_LINKID_RAM_SCRIPT},
+    {CLI_SAVE_RAM_SCRIPT},
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_CARD_RECEIVED}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F2628[] = {
-    {.instr = CLI_RECV, .parameter = 23},
-    {.instr = CLI_9},
-    {.instr = CLI_SEND_LOADED},
-    {.instr = CLI_RECV, .parameter = 16},
-    {.instr = CLI_COPY_RECV}
+static const struct MysteryGiftClientCmd sClientScript_SaveNews[] = {
+    {CLI_RECV, MG_LINKID_NEWS},
+    {CLI_SAVE_NEWS},
+    {CLI_SEND_LOADED}, // Send whether or not the News was saved (read by sServerScript_SendNews)
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F2650[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 7}
+static const struct MysteryGiftClientCmd sClientScript_HadNews[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_HAD_NEWS}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F2660[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 3}
+static const struct MysteryGiftClientCmd sClientScript_NewsReceived[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_NEWS_RECEIVED}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F2670[] = {
-    {.instr = CLI_ASK_TOSS},
-    {.instr = CLI_LOAD_TOSS_RESPONSE},
-    {.instr = CLI_SEND_LOADED},
-    {.instr = CLI_RECV, .parameter = 16},
-    {.instr = CLI_COPY_RECV}
+static const struct MysteryGiftClientCmd sClientScript_AskToss[] = {
+    {CLI_ASK_TOSS},
+    {CLI_LOAD_TOSS_RESPONSE},
+    {CLI_SEND_LOADED},
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F2698[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 9}
+static const struct MysteryGiftClientCmd sClientScript_Canceled[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_COMM_CANCELED}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F26A8[] = {
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 5}
+static const struct MysteryGiftClientCmd sClientScript_HadCard[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_HAD_CARD}
 };
 
-const struct MysteryGiftClientCmd gUnknown_082F26B8[] = {
-    {.instr = CLI_RECV, .parameter = 21},
-    {.instr = CLI_12},
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 14}
+static const struct MysteryGiftClientCmd sClientScript_DynamicError[] = {
+    {CLI_RECV, MG_LINKID_DYNAMIC_MSG},
+    {CLI_COPY_MSG},
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_BUFFER_FAILURE}
 };
 
-// Unused
-const struct MysteryGiftClientCmd gUnknown_082F26B8_1[] = {
-    {.instr = CLI_RECV, .parameter = 21},
-    {.instr = CLI_12},
-    {.instr = CLI_20},
-    {.instr = CLI_RETURN, .parameter = 13}
+static const struct MysteryGiftClientCmd sClientScript_DynamicSuccess[] = {
+    {CLI_RECV, MG_LINKID_DYNAMIC_MSG},
+    {CLI_COPY_MSG},
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_BUFFER_SUCCESS}
 };
 
-const struct mevent_cmd gUnknown_082F26F8[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F25C8), .parameter = gUnknown_082F25C8},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x0a},
-    {.instr = 18, .flag = sizeof(gUnknown_082F25D8), .parameter = gUnknown_082F25D8},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x0b},
-    {.instr = 18, .flag = sizeof(gUnknown_082F2698), .parameter = gUnknown_082F2698},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x09}
+
+//==================
+// Server scripts
+//==================
+
+// Create arguments for SVR_LOAD_CLIENT_SCRIPT or SVR_LOAD_MSG
+// (a script/text size and pointer to send to the client)
+#define PTR_ARG(pointer) .parameter = sizeof(pointer), .ptr = pointer
+
+static const struct MysteryGiftServerCmd sServerScript_CantSend[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_CantAccept)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CANT_SEND_GIFT_1}
 };
 
-const struct mevent_cmd gUnknown_082F2788[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F26B8), .parameter = gUnknown_082F26B8},
-    {.instr =  1},
-    {.instr = 20, .flag = 0x1b, .parameter = gText_CanceledReadingCard},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x09}
+static const struct MysteryGiftServerCmd sServerScript_CommError[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_CommError)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_COMM_ERROR}
 };
 
-const struct mevent_cmd gUnknown_082F27D0[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F2650), .parameter = gUnknown_082F2650},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x07}
+static const struct MysteryGiftServerCmd sServerScript_ClientCanceledNews[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_Canceled)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CLIENT_CANCELED}
 };
 
-const struct mevent_cmd gUnknown_082F2800[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F2628), .parameter = gUnknown_082F2628},
-    {.instr =  1},
-    {.instr = 14},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x13},
-    {.instr =  8},
-    {.instr =  4, .flag = 0x01, .parameter = gUnknown_082F27D0},
-    {.instr = 18, .flag = sizeof(gUnknown_082F2660), .parameter = gUnknown_082F2660},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x03}
+static const struct MysteryGiftServerCmd sServerScript_ClientCanceledCard[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_DynamicError)},
+    {SVR_SEND},
+    {SVR_LOAD_MSG, PTR_ARG(sText_CanceledReadingCard)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CLIENT_CANCELED}
 };
 
-const struct mevent_cmd gUnknown_082F2884[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F25F8), .parameter = gUnknown_082F25F8},
-    {.instr =  1},
-    {.instr = 13},
-    {.instr =  1},
-    {.instr = 15},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x02}
+static const struct MysteryGiftServerCmd sServerScript_HasNews[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_HadNews)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_HAS_NEWS}
 };
 
-const struct mevent_cmd gUnknown_082F28E4[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F2670), .parameter = gUnknown_082F2670},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x13},
-    {.instr =  8},
-    {.instr =  4, .parameter = gUnknown_082F2884},
-    {.instr =  3, .parameter = gUnknown_082F2788}
+static const struct MysteryGiftServerCmd sServerScript_SendNews[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SaveNews)},
+    {SVR_SEND},
+    {SVR_LOAD_NEWS},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_RESPONSE},
+    {SVR_READ_RESPONSE},
+    {SVR_GOTO_IF_EQ, TRUE, sServerScript_HasNews}, // Wonder News was not saved
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_NewsReceived)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_NEWS_SENT}
 };
 
-const struct mevent_cmd gUnknown_082F292C[] = {
-    {.instr = 18, .flag = sizeof(gUnknown_082F26A8), .parameter = gUnknown_082F26A8},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0, .flag = 0x05},
-    {.instr = 18, .flag = sizeof(gUnknown_082F25E8), .parameter = gUnknown_082F25E8},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x14},
-    {.instr =  0}
+static const struct MysteryGiftServerCmd sServerScript_SendCard[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SaveCard)},
+    {SVR_SEND},
+    {SVR_LOAD_CARD},
+    {SVR_SEND},
+    {SVR_LOAD_RAM_SCRIPT},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CARD_SENT}
 };
 
-const struct mevent_cmd s_mevent_wonder_news[] = {
-    {.instr = 27},
-    {.instr = 18, .flag = sizeof(gUnknown_082F25A8), .parameter = gUnknown_082F25A8},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x11},
-    {.instr =  5},
-    {.instr = 30},
-    {.instr =  4, .parameter = gUnknown_082F26F8},
-    {.instr =  3, .parameter = gUnknown_082F2800}
+static const struct MysteryGiftServerCmd sServerScript_TossPrompt[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_AskToss)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_RESPONSE},
+    {SVR_READ_RESPONSE},
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_SendCard},       // Tossed old card, send new one
+    {SVR_GOTO, .ptr = sServerScript_ClientCanceledCard} // Kept old card, cancel new one
 };
 
-const struct mevent_cmd s_mevent_wonder_card[] = {
-    {.instr = 26},
-    {.instr = 28},
-    {.instr = 18, .flag = sizeof(gUnknown_082F25A8), .parameter = gUnknown_082F25A8},
-    {.instr =  1},
-    {.instr =  2, .flag = 0x11},
-    {.instr =  5},
-    {.instr =  6},
-    {.instr =  4, .parameter = gUnknown_082F26F8},
-    {.instr =  7},
-    {.instr =  4, .flag = 0x02, .parameter = gUnknown_082F28E4},
-    {.instr =  4, .parameter = gUnknown_082F2884},
-    {.instr =  3, .parameter = gUnknown_082F292C}
+static const struct MysteryGiftServerCmd sServerScript_HasCard[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_HadCard)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_HAS_CARD}
+};
+
+static const struct MysteryGiftServerCmd sServerScript_NothingSent[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_NothingSent)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_NOTHING_SENT}
+};
+
+const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderNews[] = {
+    {SVR_COPY_SAVED_NEWS},
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SendGameData)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_GAME_DATA},
+    {SVR_COPY_GAME_DATA},
+    {SVR_CHECK_GAME_DATA_NEWS},
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_CantSend},
+    {SVR_GOTO, .ptr = sServerScript_SendNews}
+};
+
+const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderCard[] = {
+    {SVR_COPY_SAVED_CARD},
+    {SVR_COPY_SAVED_RAM_SCRIPT},
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SendGameData)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_GAME_DATA},
+    {SVR_COPY_GAME_DATA},
+    {SVR_CHECK_GAME_DATA_CARD},
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_CantSend},
+    {SVR_CHECK_EXISTING_CARD},
+    {SVR_GOTO_IF_EQ, HAS_DIFF_CARD, sServerScript_TossPrompt},
+    {SVR_GOTO_IF_EQ, HAS_NO_CARD, sServerScript_SendCard},
+    {SVR_GOTO, .ptr = sServerScript_HasCard} // HAS_SAME_CARD
 };

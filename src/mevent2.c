@@ -11,23 +11,23 @@
 #include "mevent.h"
 #include "constants/mevent.h"
 
-static EWRAM_DATA bool32 gUnknown_02022C70 = FALSE;
+static EWRAM_DATA bool32 sStatsEnabled = FALSE;
 
-static void sub_801B180(void);
-static void ClearSavedWonderNewsInternal(void);
-static bool32 ValidateWonderNews(const struct WonderNews *news);
-static bool32 ValidateWonderCard(const struct WonderCard *card);
-static void InitSavedWonderCard(void);
-static void sub_801B368(void);
-static void sub_801B9F8(void);
-static void sub_801BA8C(u32 a0, u32 a1, u32 *a2, int a3);
+static void ClearSavedWonderNewsMetadata(void);
+static void ClearSavedWonderNews(void);
+static void ClearSavedWonderCard(void);
+static bool32 ValidateWonderNews(const struct WonderNews *);
+static bool32 ValidateWonderCard(const struct WonderCard *);
+static void ClearSavedWonderCardMetadata(void);
+static void ClearSavedTrainerIds(void);
+static void IncrementCardStatForNewTrainer(u32, u32, u32 *, int);
 
 #define CALC_CRC(data) CalcCRC16WithTable((void *)&(data), sizeof(data))
 
-void sub_801AFD8(void)
+void ClearMysteryGift(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->mysteryGift, sizeof(gSaveBlock1Ptr->mysteryGift));
-    sub_801B180();
+    ClearSavedWonderNewsMetadata(); // Clear is redundant, InitSavedWonderNews would be sufficient
     InitQuestionnaireWords();
 }
 
@@ -41,14 +41,14 @@ struct WonderCard *GetSavedWonderCard(void)
     return &gSaveBlock1Ptr->mysteryGift.card;
 }
 
-struct MEventBuffer_3430 *sav1_get_mevent_buffer_2(void)
+struct WonderCardMetadata *GetSavedWonderCardMetadata(void)
 {
-    return &gSaveBlock1Ptr->mysteryGift.unk_3430;
+    return &gSaveBlock1Ptr->mysteryGift.cardMetadata;
 }
 
-struct MysteryEventStruct *sub_801B044(void)
+struct WonderNewsMetadata *GetSavedWonderNewsMetadata(void)
 {
-    return &gSaveBlock1Ptr->mysteryGift.unk_340;
+    return &gSaveBlock1Ptr->mysteryGift.newsMetadata;
 }
 
 u16 *GetQuestionnaireWordsPtr(void)
@@ -56,9 +56,10 @@ u16 *GetQuestionnaireWordsPtr(void)
     return gSaveBlock1Ptr->mysteryGift.questionnaireWords;
 }
 
-void ClearSavedWonderNews(void)
+// Equivalent to ClearSavedWonderCardAndRelated, but nothing else to clear
+void ClearSavedWonderNewsAndRelated(void)
 {
-    ClearSavedWonderNewsInternal();
+    ClearSavedWonderNews();
 }
 
 bool32 SaveWonderNews(const struct WonderNews *news)
@@ -66,7 +67,7 @@ bool32 SaveWonderNews(const struct WonderNews *news)
     if (!ValidateWonderNews(news))
         return FALSE;
 
-    ClearSavedWonderNewsInternal();
+    ClearSavedWonderNews();
     gSaveBlock1Ptr->mysteryGift.news = *news;
     gSaveBlock1Ptr->mysteryGift.newsCrc = CALC_CRC(gSaveBlock1Ptr->mysteryGift.news);
     return TRUE;
@@ -90,65 +91,65 @@ static bool32 ValidateWonderNews(const struct WonderNews *data)
     return TRUE;
 }
 
-bool32 WonderNews_Test_Unk_02(void)
+bool32 IsSendingSavedWonderNewsAllowed(void)
 {
     const struct WonderNews *data = &gSaveBlock1Ptr->mysteryGift.news;
-    if (data->unk_02 == 0)
+    if (data->sendType == SEND_TYPE_DISALLOWED)
         return FALSE;
 
     return TRUE;
 }
 
-static void ClearSavedWonderNewsInternal(void)
+static void ClearSavedWonderNews(void)
 {
     CpuFill32(0, GetSavedWonderNews(), sizeof(gSaveBlock1Ptr->mysteryGift.news));
     gSaveBlock1Ptr->mysteryGift.newsCrc = 0;
 }
 
-static void sub_801B180(void)
+static void ClearSavedWonderNewsMetadata(void)
 {
-    CpuFill32(0, sub_801B044(), sizeof(struct MysteryEventStruct));
-    sub_801DBC0();
+    CpuFill32(0, GetSavedWonderNewsMetadata(), sizeof(gSaveBlock1Ptr->mysteryGift.newsMetadata));
+    InitSavedWonderNews();
 }
 
-bool32 sub_801B1A4(const u8 *src)
+bool32 IsWonderNewsSameAsSaved(const u8 *news)
 {
-    const u8 *r5 = (const u8 *)&gSaveBlock1Ptr->mysteryGift.news;
+    const u8 *savedNews = (const u8 *)&gSaveBlock1Ptr->mysteryGift.news;
     u32 i;
     if (!ValidateSavedWonderNews())
         return FALSE;
 
-    for (i = 0; i < sizeof(struct WonderNews); i++)
+    for (i = 0; i < sizeof(gSaveBlock1Ptr->mysteryGift.news); i++)
     {
-        if (r5[i] != src[i])
+        if (savedNews[i] != news[i])
             return FALSE;
     }
 
     return TRUE;
 }
 
-void ClearSavedWonderCard(void)
+void ClearSavedWonderCardAndRelated(void)
 {
-    InitSavedWonderCard();
-    sub_801B368();
-    sub_801B9F8();
+    ClearSavedWonderCard();
+    ClearSavedWonderCardMetadata();
+    ClearSavedTrainerIds();
     ClearRamScript();
-    ClearMysteryEventFlags();
-    ClearMysteryEventVars();
+    ClearMysteryGiftFlags();
+    ClearMysteryGiftVars();
     ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 }
 
 bool32 SaveWonderCard(const struct WonderCard *card)
 {
-    struct MEventBuffer_3430 *r2;
+    struct WonderCardMetadata *metadata;
     if (!ValidateWonderCard(card))
         return FALSE;
 
-    ClearSavedWonderCard();
+    ClearSavedWonderCardAndRelated();
     memcpy(&gSaveBlock1Ptr->mysteryGift.card, card, sizeof(struct WonderCard));
     gSaveBlock1Ptr->mysteryGift.cardCrc = CALC_CRC(gSaveBlock1Ptr->mysteryGift.card);
-    r2 = &gSaveBlock1Ptr->mysteryGift.unk_3430;
-    r2->unk_06 = (&gSaveBlock1Ptr->mysteryGift.card)->unk_02;
+    metadata = &gSaveBlock1Ptr->mysteryGift.cardMetadata;
+    metadata->iconSpecies = (&gSaveBlock1Ptr->mysteryGift.card)->iconSpecies;
     return TRUE;
 }
 
@@ -168,37 +169,39 @@ static bool32 ValidateWonderCard(const struct WonderCard *card)
 {
     if (card->flagId == 0)
         return FALSE;
-    if (card->unk_08_0 > 2)
+    if (card->type >= CARD_TYPE_COUNT)
         return FALSE;
-    if (!(card->unk_08_6 == 0 || card->unk_08_6 == 1 || card->unk_08_6 == 2))
+    if (!(card->sendType == SEND_TYPE_DISALLOWED 
+       || card->sendType == SEND_TYPE_ALLOWED 
+       || card->sendType == SEND_TYPE_ALLOWED_ALWAYS))
         return FALSE;
     if (card->bgType >= NUM_WONDER_BGS)
         return FALSE;
-    if (card->unk_09 > 7)
+    if (card->maxStamps > MAX_CARD_STAMPS)
         return FALSE;
 
     return TRUE;
 }
 
-bool32 WonderCard_Test_Unk_08_6(void)
+bool32 IsSendingSavedWonderCardAllowed(void)
 {
     const struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-    if (card->unk_08_6 == 0)
+    if (card->sendType == SEND_TYPE_DISALLOWED)
         return FALSE;
 
     return TRUE;
 }
 
-static void InitSavedWonderCard(void)
+static void ClearSavedWonderCard(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->mysteryGift.card, sizeof(gSaveBlock1Ptr->mysteryGift.card));
     gSaveBlock1Ptr->mysteryGift.cardCrc = 0;
 }
 
-static void sub_801B368(void)
+static void ClearSavedWonderCardMetadata(void)
 {
-    CpuFill32(0, sav1_get_mevent_buffer_2(), 18 *sizeof(u16));
-    gSaveBlock1Ptr->mysteryGift.unkCrc = 0;
+    CpuFill32(0, GetSavedWonderCardMetadata(), sizeof(gSaveBlock1Ptr->mysteryGift.cardMetadata));
+    gSaveBlock1Ptr->mysteryGift.cardMetadataCrc = 0;
 }
 
 u16 GetWonderCardFlagID(void)
@@ -209,124 +212,126 @@ u16 GetWonderCardFlagID(void)
     return 0;
 }
 
-void WonderCard_ResetInternalReceivedFlag(struct WonderCard *buffer)
+void DisableWonderCardSending(struct WonderCard *card)
 {
-    if (buffer->unk_08_6 == 1)
-        buffer->unk_08_6 = 0;
+    if (card->sendType == SEND_TYPE_ALLOWED)
+        card->sendType = SEND_TYPE_DISALLOWED;
 }
 
 static bool32 IsWonderCardFlagIDInValidRange(u16 flagId)
 {
-    if (flagId >= 1000 && flagId < 1000 + NUM_MYSTERY_GIFT_FLAGS)
+    if (flagId >= WONDER_CARD_FLAG_OFFSET && flagId < WONDER_CARD_FLAG_OFFSET + NUM_WONDER_CARD_FLAGS)
         return TRUE;
 
     return FALSE;
 }
 
-static const u16 sMysteryGiftFlags[] =
+static const u16 sReceivedGiftFlags[] =
 {
     FLAG_RECEIVED_AURORA_TICKET,
     FLAG_RECEIVED_MYSTIC_TICKET,
     FLAG_RECEIVED_OLD_SEA_MAP,
-    FLAG_MYSTERY_GIFT_UNUSED_1,
-    FLAG_MYSTERY_GIFT_UNUSED_2,
-    FLAG_MYSTERY_GIFT_UNUSED_3,
-    FLAG_MYSTERY_GIFT_UNUSED_4,
-    FLAG_MYSTERY_GIFT_UNUSED_5,
-    FLAG_MYSTERY_GIFT_UNUSED_6,
-    FLAG_MYSTERY_GIFT_UNUSED_7,
-    FLAG_MYSTERY_GIFT_UNUSED_8,
-    FLAG_MYSTERY_GIFT_UNUSED_9,
-    FLAG_MYSTERY_GIFT_UNUSED_10,
-    FLAG_MYSTERY_GIFT_UNUSED_11,
-    FLAG_MYSTERY_GIFT_UNUSED_12,
-    FLAG_MYSTERY_GIFT_UNUSED_13,
-    FLAG_MYSTERY_GIFT_UNUSED_14,
-    FLAG_MYSTERY_GIFT_UNUSED_15,
-    FLAG_MYSTERY_GIFT_UNUSED_16,
-    FLAG_MYSTERY_GIFT_UNUSED_17,
+    FLAG_WONDER_CARD_UNUSED_1,
+    FLAG_WONDER_CARD_UNUSED_2,
+    FLAG_WONDER_CARD_UNUSED_3,
+    FLAG_WONDER_CARD_UNUSED_4,
+    FLAG_WONDER_CARD_UNUSED_5,
+    FLAG_WONDER_CARD_UNUSED_6,
+    FLAG_WONDER_CARD_UNUSED_7,
+    FLAG_WONDER_CARD_UNUSED_8,
+    FLAG_WONDER_CARD_UNUSED_9,
+    FLAG_WONDER_CARD_UNUSED_10,
+    FLAG_WONDER_CARD_UNUSED_11,
+    FLAG_WONDER_CARD_UNUSED_12,
+    FLAG_WONDER_CARD_UNUSED_13,
+    FLAG_WONDER_CARD_UNUSED_14,
+    FLAG_WONDER_CARD_UNUSED_15,
+    FLAG_WONDER_CARD_UNUSED_16,
+    FLAG_WONDER_CARD_UNUSED_17,
 };
 
-bool32 CheckReceivedGiftFromWonderCard(void)
+bool32 IsSavedWonderCardGiftNotReceived(void)
 {
     u16 value = GetWonderCardFlagID();
     if (!IsWonderCardFlagIDInValidRange(value))
         return FALSE;
 
-    if (FlagGet(sMysteryGiftFlags[value - 1000]) == TRUE)
+    // If flag is set, player has received gift from this card
+    if (FlagGet(sReceivedGiftFlags[value - WONDER_CARD_FLAG_OFFSET]) == TRUE)
         return FALSE;
 
     return TRUE;
 }
 
-static int sub_801B438(const struct MEventBuffer_3430 *data, int size)
+static int GetNumStampsInMetadata(const struct WonderCardMetadata *data, int size)
 {
-    int r3 = 0;
+    int numStamps = 0;
     int i;
     for (i = 0; i < size; i++)
     {
-        if (data->unk_08[1][i] && data->unk_08[0][i])
-            r3++;
+        if (data->stampData[STAMP_ID][i] && data->stampData[STAMP_SPECIES][i] != SPECIES_NONE)
+            numStamps++;
     }
 
-    return r3;
+    return numStamps;
 }
 
-static bool32 sub_801B460(const struct MEventBuffer_3430 *data1, const u16 *data2, int size)
+static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const u16 *stamp, int maxStamps)
 {
     int i;
-    for (i = 0; i < size; i++)
+    for (i = 0; i < maxStamps; i++)
     {
-        if (data1->unk_08[1][i] == data2[1])
+        if (metadata->stampData[STAMP_ID][i] == stamp[STAMP_ID])
             return TRUE;
-        if (data1->unk_08[0][i] == data2[0])
+        if (metadata->stampData[STAMP_SPECIES][i] == stamp[STAMP_SPECIES])
             return TRUE;
     }
 
     return FALSE;
 }
 
-static bool32 sub_801B4A4(const u16 *data)
+static bool32 ValidateStamp(const u16 *stamp)
 {
-    if (data[1] == 0)
+    if (stamp[STAMP_ID] == 0)
         return FALSE;
-    if (data[0] == 0)
+    if (stamp[STAMP_SPECIES] == SPECIES_NONE)
         return FALSE;
-    if (data[0] >= NUM_SPECIES)
+    if (stamp[STAMP_SPECIES] >= NUM_SPECIES)
         return FALSE;
     return TRUE;
 }
 
-static int sub_801B4CC(void)
+static int GetNumStampsInSavedCard(void)
 {
-    struct WonderCard *data;
+    struct WonderCard *card;
     if (!ValidateSavedWonderCard())
         return 0;
 
-    data = &gSaveBlock1Ptr->mysteryGift.card;
-    if (data->unk_08_0 != 1)
+    card = &gSaveBlock1Ptr->mysteryGift.card;
+    if (card->type != CARD_TYPE_STAMP)
         return 0;
 
-    return sub_801B438(&gSaveBlock1Ptr->mysteryGift.unk_3430, data->unk_09);
+    return GetNumStampsInMetadata(&gSaveBlock1Ptr->mysteryGift.cardMetadata, card->maxStamps);
 }
 
-bool32 sub_801B508(const u16 *data)
+bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
 {
-    struct WonderCard *buffer = &gSaveBlock1Ptr->mysteryGift.card;
-    int size = buffer->unk_09;
+    struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+    int maxStamps = card->maxStamps;
     int i;
-    if (!sub_801B4A4(data))
+    if (!ValidateStamp(stamp))
         return FALSE;
 
-    if (sub_801B460(&gSaveBlock1Ptr->mysteryGift.unk_3430, data, size))
+    if (IsStampInMetadata(&gSaveBlock1Ptr->mysteryGift.cardMetadata, stamp, maxStamps))
         return FALSE;
 
-    for (i = 0; i < size; i++)
+    for (i = 0; i < maxStamps; i++)
     {
-        if (gSaveBlock1Ptr->mysteryGift.unk_3430.unk_08[1][i] == 0 && gSaveBlock1Ptr->mysteryGift.unk_3430.unk_08[0][i] == 0)
+        if (gSaveBlock1Ptr->mysteryGift.cardMetadata.stampData[STAMP_ID][i] == 0
+         && gSaveBlock1Ptr->mysteryGift.cardMetadata.stampData[STAMP_SPECIES][i] == SPECIES_NONE)
         {
-            gSaveBlock1Ptr->mysteryGift.unk_3430.unk_08[1][i] = data[1];
-            gSaveBlock1Ptr->mysteryGift.unk_3430.unk_08[0][i] = data[0];
+            gSaveBlock1Ptr->mysteryGift.cardMetadata.stampData[STAMP_ID][i] = stamp[STAMP_ID];
+            gSaveBlock1Ptr->mysteryGift.cardMetadata.stampData[STAMP_SPECIES][i] = stamp[STAMP_SPECIES];
             return TRUE;
         }
     }
@@ -334,10 +339,10 @@ bool32 sub_801B508(const u16 *data)
     return FALSE;
 }
 
-void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 isWonderNews)
+void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 isWonderNews)
 {
     int i;
-    CpuFill32(0, data, sizeof(struct MEventStruct_Unk1442CC));
+    CpuFill32(0, data, sizeof(*data));
     data->unk_00 = 0x101;
     data->unk_04 = 1;
     data->unk_08 = 1;
@@ -355,13 +360,13 @@ void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 isWonderNews)
 
     if (ValidateSavedWonderCard())
     {
-        data->unk_14 = GetSavedWonderCard()->flagId;
-        data->unk_20 = *sav1_get_mevent_buffer_2();
-        data->unk_44 = GetSavedWonderCard()->unk_09;
+        data->flagId = GetSavedWonderCard()->flagId;
+        data->cardMetadata = *GetSavedWonderCardMetadata();
+        data->maxStamps = GetSavedWonderCard()->maxStamps;
     }
     else
     {
-        data->unk_14 = 0;
+        data->flagId = 0;
     }
 
     for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
@@ -372,11 +377,11 @@ void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 isWonderNews)
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
         data->easyChatProfile[i] = gSaveBlock1Ptr->easyChatProfile[i];
 
-    memcpy(data->romHeaderGameCode, RomHeaderGameCode, 4);
+    memcpy(data->romHeaderGameCode, RomHeaderGameCode, GAME_CODE_LENGTH);
     data->romHeaderSoftwareVersion = RomHeaderSoftwareVersion;
 }
 
-bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC *data, bool32 a1)
+bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *data, bool32 forNews)
 {
     if (data->unk_00 != 0x101)
         return FALSE;
@@ -387,7 +392,7 @@ bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC *data, bool32 a1)
     if (!(data->unk_08 & 1))
         return FALSE;
 
-    if (!a1)
+    if (!forNews)
     {
         if (!(data->unk_0C & 4))
             return FALSE;
@@ -399,30 +404,43 @@ bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC *data, bool32 a1)
     return TRUE;
 }
 
-u32 sub_801B6EC(const u16 *a0, const struct MEventStruct_Unk1442CC *a1, const void *unused)
+u32 MysteryGift_CompareCardFlags(const u16 *flagId, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
-    if (a1->unk_14 == 0)
-        return 0;
+    // Has a Wonder Card already?
+    if (data->flagId == 0)
+        return HAS_NO_CARD;
 
-    if (*a0 == a1->unk_14)
-        return 1;
+    // Has this Wonder Card already?
+    if (*flagId == data->flagId)
+        return HAS_SAME_CARD;
 
-    return 2;
+    // Player has a different Wonder Card
+    return HAS_DIFF_CARD;
 }
 
-u32 sub_801B708(const u16 *a0, const struct MEventStruct_Unk1442CC *a1, const void *unused)
+// This is referenced by the Mystery Gift server, but the instruction it's referenced in is never used,
+// so the return values here are never checked by anything.
+u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
-    int r4 = a1->unk_44 - sub_801B438(&a1->unk_20, a1->unk_44);
-    if (r4 == 0)
+    int stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
+    
+    // Has full stamp card?
+    if (stampsMissing == 0)
         return 1;
-    if (sub_801B460(&a1->unk_20, a0, a1->unk_44))
+
+    // Already has stamp?
+    if (IsStampInMetadata(&data->cardMetadata, stamp, data->maxStamps))
         return 3;
-    if (r4 == 1)
+
+    // Only 1 empty stamp left?
+    if (stampsMissing == 1)
         return 4;
+
+    // This is a new stamp
     return 2;
 }
 
-bool32 MysteryGift_DoesQuestionnaireMatch(const struct MEventStruct_Unk1442CC *data, const u16 *words)
+bool32 MysteryGift_DoesQuestionnaireMatch(const struct MysteryGiftLinkGameData *data, const u16 *words)
 {
     int i;
     for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
@@ -434,127 +452,122 @@ bool32 MysteryGift_DoesQuestionnaireMatch(const struct MEventStruct_Unk1442CC *d
     return TRUE;
 }
 
-static int sub_801B770(const struct MEventStruct_Unk1442CC *a0)
+static int GetNumStampsInLinkData(const struct MysteryGiftLinkGameData *data)
 {
-    return sub_801B438(&a0->unk_20, a0->unk_44);
+    return GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
 }
 
-u16 MEventStruct_Unk1442CC_GetValueNFrom_unk_20(const struct MEventStruct_Unk1442CC *a0, u32 command)
+u16 MysteryGift_GetCardStatFromLinkData(const struct MysteryGiftLinkGameData *data, u32 stat)
 {
-    switch (command)
+    switch (stat)
     {
-    case 0:
-        return a0->unk_20.unk_00;
-    case 1:
-        return a0->unk_20.unk_02;
-    case 2:
-        return a0->unk_20.unk_04;
-    case 3:
-        return sub_801B770(a0);
-    case 4:
-        return a0->unk_44;
+    case CARD_STAT_BATTLES_WON:
+        return data->cardMetadata.battlesWon;
+    case CARD_STAT_BATTLES_LOST:
+        return data->cardMetadata.battlesLost;
+    case CARD_STAT_NUM_TRADES:
+        return data->cardMetadata.numTrades;
+    case CARD_STAT_NUM_STAMPS:
+        return GetNumStampsInLinkData(data);
+    case CARD_STAT_MAX_STAMPS:
+        return data->maxStamps;
     default:
         AGB_ASSERT(0);
         return 0;
     }
 }
 
-static void sub_801B7D8(u32 command)
+static void IncrementCardStat(u32 statType)
 {
-    struct WonderCard *data = &gSaveBlock1Ptr->mysteryGift.card;
-    if (data->unk_08_0 == 2)
+    struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+    if (card->type == CARD_TYPE_LINK_STAT)
     {
-        u16 *dest = NULL;
-        switch (command)
+        u16 *stat = NULL;
+        switch (statType)
         {
-        case 0:
-            dest = &gSaveBlock1Ptr->mysteryGift.unk_3430.unk_00;
+        case CARD_STAT_BATTLES_WON:
+            stat = &gSaveBlock1Ptr->mysteryGift.cardMetadata.battlesWon;
             break;
-        case 1:
-            dest = &gSaveBlock1Ptr->mysteryGift.unk_3430.unk_02;
+        case CARD_STAT_BATTLES_LOST:
+            stat = &gSaveBlock1Ptr->mysteryGift.cardMetadata.battlesLost;
             break;
-        case 2:
-            dest = &gSaveBlock1Ptr->mysteryGift.unk_3430.unk_04;
+        case CARD_STAT_NUM_TRADES:
+            stat = &gSaveBlock1Ptr->mysteryGift.cardMetadata.numTrades;
             break;
-        case 3:
-            break;
-        case 4:
+        case CARD_STAT_NUM_STAMPS: // Unused
+        case CARD_STAT_MAX_STAMPS: // Unused
             break;
         }
 
-        if (dest == NULL)
-        {
+        if (stat == NULL)
             AGB_ASSERT(0);
-        }
-        else if (++(*dest) > 999)
-        {
-            *dest = 999;
-        }
+        else if (++(*stat) > MAX_WONDER_CARD_STAT)
+            *stat = MAX_WONDER_CARD_STAT;
     }
 }
 
-u16 mevent_081445C0(u32 command)
+u16 MysteryGift_GetCardStat(u32 stat)
 {
-    switch (command)
+    switch (stat)
     {
-        case GET_CARD_BATTLES_WON_INTERNAL:
+    case CARD_STAT_BATTLES_WON:
+    {
+        struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+        if (card->type == CARD_TYPE_LINK_STAT)
         {
-            struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-            if (card->unk_08_0 == 2)
-            {
-                struct MEventBuffer_3430 *buffer = &gSaveBlock1Ptr->mysteryGift.unk_3430;
-                return buffer->unk_00;
-            }
-            break;
+            struct WonderCardMetadata *metadata = &gSaveBlock1Ptr->mysteryGift.cardMetadata;
+            return metadata->battlesWon;
         }
-        case 1: // Never occurs
+        break;
+    }
+    case CARD_STAT_BATTLES_LOST:
+    {
+        struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+        if (card->type == CARD_TYPE_LINK_STAT)
         {
-            struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-            if (card->unk_08_0 == 2)
-            {
-                struct MEventBuffer_3430 *buffer = &gSaveBlock1Ptr->mysteryGift.unk_3430;
-                return buffer->unk_02;
-            }
-            break;
+            struct WonderCardMetadata *metadata = &gSaveBlock1Ptr->mysteryGift.cardMetadata;
+            return metadata->battlesLost;
         }
-        case 2: // Never occurs
+        break;
+    }
+    case CARD_STAT_NUM_TRADES:
+    {
+        struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+        if (card->type == CARD_TYPE_LINK_STAT)
         {
-            struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-            if (card->unk_08_0 == 2)
-            {
-                struct MEventBuffer_3430 *buffer = &gSaveBlock1Ptr->mysteryGift.unk_3430;
-                return buffer->unk_04;
-            }
-            break;
+            struct WonderCardMetadata *metadata = &gSaveBlock1Ptr->mysteryGift.cardMetadata;
+            return metadata->numTrades;
         }
-        case GET_NUM_STAMPS_INTERNAL:
-        {
-            struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-            if (card->unk_08_0 == 1)
-                return sub_801B4CC();
-            break;
-        }
-        case GET_MAX_STAMPS_INTERNAL:
-        {
-            struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-            if (card->unk_08_0 == 1)
-                return card->unk_09;
-            break;
-        }
+        break;
+    }
+    case CARD_STAT_NUM_STAMPS:
+    {
+        struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+        if (card->type == CARD_TYPE_STAMP)
+            return GetNumStampsInSavedCard();
+        break;
+    }
+    case CARD_STAT_MAX_STAMPS:
+    {
+        struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
+        if (card->type == CARD_TYPE_STAMP)
+            return card->maxStamps;
+        break;
+    }
     }
 
     AGB_ASSERT(0);
     return 0;
 }
 
-void ResetReceivedWonderCardFlag(void)
+void MysteryGift_DisableStats(void)
 {
-    gUnknown_02022C70 = FALSE;
+    sStatsEnabled = FALSE;
 }
 
-bool32 MEventHandleReceivedWonderCard(u16 flagId)
+bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId)
 {
-    gUnknown_02022C70 = FALSE;
+    sStatsEnabled = FALSE;
     if (flagId == 0)
         return FALSE;
 
@@ -564,67 +577,80 @@ bool32 MEventHandleReceivedWonderCard(u16 flagId)
     if (gSaveBlock1Ptr->mysteryGift.card.flagId != flagId)
         return FALSE;
 
-    gUnknown_02022C70 = TRUE;
+    sStatsEnabled = TRUE;
     return TRUE;
 }
 
-void RecordIdOfWonderCardSenderByEventType(u32 a0, u32 a1)
+void TryIncrementMysteryGiftStat(u32 stat, u32 trainerId)
 {
-    if (gUnknown_02022C70)
+    if (sStatsEnabled)
     {
-        switch (a0)
+        switch (stat)
         {
-        case 2:
-            sub_801BA8C(2, a1, gSaveBlock1Ptr->mysteryGift.unk_344[1], 5);
+        case CARD_STAT_NUM_TRADES:
+            IncrementCardStatForNewTrainer(CARD_STAT_NUM_TRADES, 
+                                            trainerId,
+                                            gSaveBlock1Ptr->mysteryGift.trainerIds[1],
+                                            ARRAY_COUNT(gSaveBlock1Ptr->mysteryGift.trainerIds[1]));
             break;
-        case 0:
-            sub_801BA8C(0, a1, gSaveBlock1Ptr->mysteryGift.unk_344[0], 5);
+        case CARD_STAT_BATTLES_WON:
+            IncrementCardStatForNewTrainer(CARD_STAT_BATTLES_WON,
+                                            trainerId,
+                                            gSaveBlock1Ptr->mysteryGift.trainerIds[0],
+                                            ARRAY_COUNT(gSaveBlock1Ptr->mysteryGift.trainerIds[0]));
             break;
-        case 1:
-            sub_801BA8C(1, a1, gSaveBlock1Ptr->mysteryGift.unk_344[0], 5);
+        case CARD_STAT_BATTLES_LOST:
+            IncrementCardStatForNewTrainer(CARD_STAT_BATTLES_LOST,
+                                            trainerId,
+                                            gSaveBlock1Ptr->mysteryGift.trainerIds[0],
+                                            ARRAY_COUNT(gSaveBlock1Ptr->mysteryGift.trainerIds[0]));
             break;
         default:
             AGB_ASSERT(0);
+            break;
         }
     }
 }
 
-static void sub_801B9F8(void)
+static void ClearSavedTrainerIds(void)
 {
-    CpuFill32(0, gSaveBlock1Ptr->mysteryGift.unk_344, sizeof(gSaveBlock1Ptr->mysteryGift.unk_344));
+    CpuFill32(0, gSaveBlock1Ptr->mysteryGift.trainerIds, sizeof(gSaveBlock1Ptr->mysteryGift.trainerIds));
 }
 
-static bool32 sub_801BA24(u32 a0, u32 *a1, int size)
+// Returns TRUE if it's a new trainer id, FALSE if an existing one.
+// In either case the given trainerId is saved in element 0
+static bool32 RecordTrainerId(u32 trainerId, u32 *trainerIds, int size)
 {
-    int i;
-    int j;
+    int i, j;
 
     for (i = 0; i < size; i++)
     {
-        if (a1[i] == a0)
+        if (trainerIds[i] == trainerId)
             break;
     }
 
     if (i == size)
     {
+        // New trainer, shift array and insert new id at front
         for (j = size - 1; j > 0; j--)
-            a1[j] = a1[j - 1];
+            trainerIds[j] = trainerIds[j - 1];
 
-        a1[0] = a0;
+        trainerIds[0] = trainerId;
         return TRUE;
     }
     else
     {
+        // Existing trainer, shift back to old slot and move id to front
         for (j = i; j > 0; j--)
-            a1[j] = a1[j - 1];
+            trainerIds[j] = trainerIds[j - 1];
 
-        a1[0] = a0;
+        trainerIds[0] = trainerId;
         return FALSE;
     }
 }
 
-static void sub_801BA8C(u32 a0, u32 a1, u32 *a2, int a3)
+static void IncrementCardStatForNewTrainer(u32 stat, u32 trainerId, u32 *trainerIds, int size)
 {
-    if (sub_801BA24(a1, a2, a3))
-        sub_801B7D8(a0);
+    if (RecordTrainerId(trainerId, trainerIds, size))
+        IncrementCardStat(stat);
 }

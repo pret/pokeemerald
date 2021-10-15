@@ -44,18 +44,18 @@ static const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_tex
 
 struct MysteryGiftTaskData
 {
-    u16 curPromptWindowId;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
+    u16 var; // Multipurpose
+    u16 unused1;
+    u16 unused2;
+    u16 unused3;
     u8 state;
     u8 textState;
-    u8 unkA;
-    u8 unkB;
+    u8 unused4;
+    u8 unused5;
     bool8 isWonderNews;
     bool8 sourceIsFriend;
-    u8 prevPromptWindowId;
-    u8 * buffer;
+    u8 msgId;
+    u8 * clientMsg;
 };
 
 static const struct BgTemplate sBGTemplates[] = {
@@ -547,7 +547,7 @@ static void ClearTextWindow(void)
     CopyWindowToVram(1, 1);
 }
 
-bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
+bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
 {
     switch (*textState)
     {
@@ -700,6 +700,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
     return MENU_NOTHING_CHOSEN;
 }
 
+// Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
 static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
     struct WindowTemplate windowTemplate;
@@ -772,7 +773,7 @@ static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 isWonderNews)
     {
     case 0:
         if (!isWonderNews)
-            WonderCard_Init(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
+            WonderCard_Init(GetSavedWonderCard(), GetSavedWonderCardMetadata());
         else
             WonderNews_Init(GetSavedWonderNews());
         (*state)++;
@@ -798,9 +799,9 @@ static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 isWonderNews)
 static bool32 ClearSavedNewsOrCard(bool32 isWonderNews)
 {
     if (!isWonderNews)
-        ClearSavedWonderCard();
+        ClearSavedWonderCardAndRelated();
     else
-        ClearSavedWonderNews();
+        ClearSavedWonderNewsAndRelated();
     return TRUE;
 }
 
@@ -843,12 +844,12 @@ static s32 AskDiscardGift(u8 * textState, u16 * windowId, bool32 isWonderNews)
 static bool32 PrintThrownAway(u8 * textState, bool32 isWonderNews)
 {
     if (!isWonderNews)
-        return MG_PrintTextOnWindow1AndWaitButton(textState, gText_WonderCardThrownAway);
+        return PrintMysteryGiftMenuMessage(textState, gText_WonderCardThrownAway);
     else
-        return MG_PrintTextOnWindow1AndWaitButton(textState, gText_WonderNewsThrownAway);
+        return PrintMysteryGiftMenuMessage(textState, gText_WonderNewsThrownAway);
 }
 
-static bool32 mevent_save_game(u8 * state)
+static bool32 SaveOnMysteryGiftMenu(u8 * state)
 {
     switch (*state)
     {
@@ -865,10 +866,8 @@ static bool32 mevent_save_game(u8 * state)
         (*state)++;
         break;
     case 3:
-        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
-        {
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             (*state)++;
-        }
         break;
     case 4:
         *state = 0;
@@ -879,70 +878,72 @@ static bool32 mevent_save_game(u8 * state)
     return FALSE;
 }
 
-static const u8 * GetStdMessage(bool32 * receivedMsg, bool8 isWonderNews, bool8 sourceIsFriend, u32 msgId)
+static const u8 * GetClientResultMessage(bool32 * successMsg, bool8 isWonderNews, bool8 sourceIsFriend, u32 msgId)
 {
     const u8 * msg = NULL;
-    *receivedMsg = FALSE;
+    *successMsg = FALSE;
 
     switch (msgId)
     {
-    case 0:
-        *receivedMsg = FALSE;
+    case CLI_MSG_NOTHING_SENT:
+        *successMsg = FALSE;
         msg = gText_NothingSentOver;
         break;
-    case 1:
-        *receivedMsg = FALSE;
+    case CLI_MSG_RECORD_UPLOADED:
+        *successMsg = FALSE;
         msg = gText_RecordUploadedViaWireless;
         break;
-    case 2:
-        *receivedMsg = TRUE;
+    case CLI_MSG_CARD_RECEIVED:
+        *successMsg = TRUE;
         msg = !sourceIsFriend ? gText_WonderCardReceived : gText_WonderCardReceivedFrom;
         break;
-    case 3:
-        *receivedMsg = TRUE;
+    case CLI_MSG_NEWS_RECEIVED:
+        *successMsg = TRUE;
         msg = !sourceIsFriend ? gText_WonderNewsReceived : gText_WonderNewsReceivedFrom;
         break;
-    case 4:
-        *receivedMsg = TRUE;
+    case CLI_MSG_STAMP_RECEIVED:
+        *successMsg = TRUE;
         msg = gText_NewStampReceived;
         break;
-    case 5:
-        *receivedMsg = FALSE;
+    case CLI_MSG_HAD_CARD:
+        *successMsg = FALSE;
         msg = gText_AlreadyHadCard;
         break;
-    case 6:
-        *receivedMsg = FALSE;
+    case CLI_MSG_HAD_STAMP:
+        *successMsg = FALSE;
         msg = gText_AlreadyHadStamp;
         break;
-    case 7:
-        *receivedMsg = FALSE;
+    case CLI_MSG_HAD_NEWS:
+        *successMsg = FALSE;
         msg = gText_AlreadyHadNews;
         break;
-    case 8:
-        *receivedMsg = FALSE;
+    case CLI_MSG_NO_ROOM_STAMPS:
+        *successMsg = FALSE;
         msg = gText_NoMoreRoomForStamps;
         break;
-    case 9:
-        *receivedMsg = FALSE;
+    case CLI_MSG_COMM_CANCELED:
+        *successMsg = FALSE;
         msg = gText_CommunicationCanceled;
         break;
-    case 10:
-        *receivedMsg = FALSE;
+    case CLI_MSG_CANT_ACCEPT:
+        *successMsg = FALSE;
         msg = !isWonderNews ? gText_CantAcceptCardFromTrainer : gText_CantAcceptNewsFromTrainer;
         break;
-    case 11:
-        *receivedMsg = FALSE;
+    case CLI_MSG_COMM_ERROR:
+        *successMsg = FALSE;
         msg = gText_CommunicationError;
         break;
-    case 12:
-        *receivedMsg = TRUE;
+    case CLI_MSG_TRAINER_RECEIVED:
+        *successMsg = TRUE;
         msg = gText_NewTrainerReceived;
         break;
-    case 13:
-        *receivedMsg = TRUE;
+    case CLI_MSG_BUFFER_SUCCESS:
+        *successMsg = TRUE;
+        // msg is NULL, use buffer
         break;
-    case 14:
-        *receivedMsg = FALSE;
+    case CLI_MSG_BUFFER_FAILURE:
+        *successMsg = FALSE;
+        // msg is NULL, use buffer
         break;
     }
 
@@ -976,91 +977,95 @@ static bool32 PrintSuccessMessage(u8 * state, const u8 * msg, u16 * timer)
     return FALSE;
 }
 
-static const u8 * mevent_message_stamp_card_etc_send_status(u32 * a0, u8 unused, u32 msgId)
+static const u8 * GetServerResultMessage(bool32 * wonderSuccess, bool8 sourceIsFriend, u32 msgId)
 {
     const u8 * result = gText_CommunicationError;
-    *a0 = 0;
+    *wonderSuccess = FALSE;
     switch (msgId)
     {
-    case 0:
+    case SVR_MSG_NOTHING_SENT:
         result = gText_NothingSentOver;
         break;
-    case 1:
+    case SVR_MSG_RECORD_UPLOADED:
         result = gText_RecordUploadedViaWireless;
         break;
-    case 2:
+    case SVR_MSG_CARD_SENT:
         result = gText_WonderCardSentTo;
-        *a0 = 1;
+        *wonderSuccess = TRUE;
         break;
-    case 3:
+    case SVR_MSG_NEWS_SENT:
         result = gText_WonderNewsSentTo;
-        *a0 = 1;
+        *wonderSuccess = TRUE;
         break;
-    case 4:
+    case SVR_MSG_STAMP_SENT:
         result = gText_StampSentTo;
         break;
-    case 5:
+    case SVR_MSG_HAS_CARD:
         result = gText_OtherTrainerHasCard;
         break;
-    case 6:
+    case SVR_MSG_HAS_STAMP:
         result = gText_OtherTrainerHasStamp;
         break;
-    case 7:
+    case SVR_MSG_HAS_NEWS:
         result = gText_OtherTrainerHasNews;
         break;
-    case 8:
+    case SVR_MSG_NO_ROOM_STAMPS:
         result = gText_NoMoreRoomForStamps;
         break;
-    case 9:
+    case SVR_MSG_CLIENT_CANCELED:
         result = gText_OtherTrainerCanceled;
         break;
-    case 10:
+    case SVR_MSG_CANT_SEND_GIFT_1:
         result = gText_CantSendGiftToTrainer;
         break;
-    case 11:
+    case SVR_MSG_COMM_ERROR:
         result = gText_CommunicationError;
         break;
-    case 12:
+    case SVR_MSG_GIFT_SENT_1:
         result = gText_GiftSentTo;
         break;
-    case 13:
+    case SVR_MSG_GIFT_SENT_2:
         result = gText_GiftSentTo;
         break;
-    case 14:
+    case SVR_MSG_CANT_SEND_GIFT_2:
         result = gText_CantSendGiftToTrainer;
         break;
     }
     return result;
 }
 
-static bool32 PrintMGSendStatus(u8 * state, u16 * arg1, u8 arg2, u32 msgId)
+static bool32 PrintServerResultMessage(u8 * state, u16 * timer, bool8 sourceIsFriend, u32 msgId)
 {
-    u32 flag;
-    const u8 * str = mevent_message_stamp_card_etc_send_status(&flag, arg2, msgId);
-    if (flag)
-        return PrintSuccessMessage(state, str, arg1);
+    bool32 wonderSuccess;
+    const u8 * str = GetServerResultMessage(&wonderSuccess, sourceIsFriend, msgId);
+    if (wonderSuccess)
+        return PrintSuccessMessage(state, str, timer);
     else
-        return MG_PrintTextOnWindow1AndWaitButton(state, str);
+        return PrintMysteryGiftMenuMessage(state, str);
 }
 
+// States for Task_MysteryGift.
+// CLIENT states are for when the player is receiving a gift, and use mevent_client.c link functions.
+// SERVER states are for when the player is sending a gift, and use mevent_server.c link functions.
+// Other states handle the general Mystery Gift menu usage.
 enum {
     MG_STATE_TO_MAIN_MENU,
     MG_STATE_MAIN_MENU,
     MG_STATE_DONT_HAVE_ANY,
-    MG_STATE_LINK_PROMPT,
-    MG_STATE_LINK_PROMPT_INPUT,
-    MG_STATE_LINK_START,
-    MG_STATE_LINK_WAIT,
-    MG_STATE_COMMUNICATING,
-    MG_STATE_COMMUNICATE,
-    MG_STATE_9,
-    MG_STATE_10,
-    MG_STATE_LINK_ASK_TOSS,
-    MG_STATE_LINK_ASK_TOSS_UNRECEIVED,
-    MG_STATE_LINK_COMPLETE_WAIT,
-    MG_STATE_LINK_COMPLETED,
-    MG_STATE_LINK_RESULT_MSG,
-    MG_STATE_LINK_ERROR_1,
+    MG_STATE_SOURCE_PROMPT,
+    MG_STATE_SOURCE_PROMPT_INPUT,
+    MG_STATE_CLIENT_LINK_START,
+    MG_STATE_CLIENT_LINK_WAIT,
+    MG_STATE_CLIENT_COMMUNICATING,
+    MG_STATE_CLIENT_LINK,
+    MG_STATE_CLIENT_YES_NO,
+    MG_STATE_CLIENT_MESSAGE,
+    MG_STATE_CLIENT_ASK_TOSS,
+    MG_STATE_CLIENT_ASK_TOSS_UNRECEIVED,
+    MG_STATE_CLIENT_LINK_END,
+    MG_STATE_CLIENT_COMM_COMPLETED,
+    MG_STATE_CLIENT_RESULT_MSG,
+    MG_STATE_CLIENT_ERROR,
     MG_STATE_SAVE_LOAD_GIFT,
     MG_STATE_LOAD_GIFT,
     MG_STATE_UNUSED,
@@ -1074,13 +1079,13 @@ enum {
     MG_STATE_GIFT_INPUT_EXIT,
     MG_STATE_RECEIVE,
     MG_STATE_SEND,
-    MG_STATE_SEND_WAIT,
-    MG_STATE_SEND_START,
-    MG_STATE_SENDING,
-    MG_STATE_SEND_FINISH,
-    MG_STATE_SEND_WAIT_END,
-    MG_STATE_SEND_END,
-    MG_STATE_LINK_ERROR_2,
+    MG_STATE_SERVER_LINK_WAIT,
+    MG_STATE_SERVER_LINK_START,
+    MG_STATE_SERVER_LINK,
+    MG_STATE_SERVER_LINK_END,
+    MG_STATE_SERVER_LINK_END_WAIT,
+    MG_STATE_SERVER_RESULT_MSG,
+    MG_STATE_SERVER_ERROR,
     MG_STATE_EXIT,
 };
 
@@ -1090,22 +1095,22 @@ static void CreateMysteryGiftTask(void)
     struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
     data->state = MG_STATE_TO_MAIN_MENU;
     data->textState = 0;
-    data->unkA = 0;
-    data->unkB = 0;
+    data->unused4 = 0;
+    data->unused5 = 0;
     data->isWonderNews = 0;
     data->sourceIsFriend = 0;
-    data->curPromptWindowId = 0;
-    data->unk2 = 0;
-    data->unk4 = 0;
-    data->unk6 = 0;
-    data->prevPromptWindowId = 0;
-    data->buffer = AllocZeroed(0x40);
+    data->var = 0;
+    data->unused1 = 0;
+    data->unused2 = 0;
+    data->unused3 = 0;
+    data->msgId = 0;
+    data->clientMsg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
 }
 
 static void Task_MysteryGift(u8 taskId)
 {
     struct MysteryGiftTaskData *data = (void *)gTasks[taskId].data;
-    u32 receivedMsg, input;
+    u32 successMsg, input;
     const u8 *msg;
 
     switch (data->state)
@@ -1115,7 +1120,7 @@ static void Task_MysteryGift(u8 taskId)
         break;
     case MG_STATE_MAIN_MENU:
         // Main Mystery Gift menu, player can select Wonder Cards or News (or exit)
-        switch (MysteryGift_HandleThreeOptionMenu(&data->textState, &data->curPromptWindowId, FALSE))
+        switch (MysteryGift_HandleThreeOptionMenu(&data->textState, &data->var, FALSE))
         {
         case 0: // "Wonder Cards"
             data->isWonderNews = FALSE;
@@ -1142,41 +1147,41 @@ static void Task_MysteryGift(u8 taskId)
         // Start prompt to ask where to read one from
         if (!data->isWonderNews)
         {
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_DontHaveCardNewOneInput))
+            if (PrintMysteryGiftMenuMessage(&data->textState, gText_DontHaveCardNewOneInput))
             {
-                data->state = MG_STATE_LINK_PROMPT;
+                data->state = MG_STATE_SOURCE_PROMPT;
                 PrintMysteryGiftOrEReaderTopMenu(FALSE, TRUE);
             }
         }
         else
         {
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_DontHaveNewsNewOneInput))
+            if (PrintMysteryGiftMenuMessage(&data->textState, gText_DontHaveNewsNewOneInput))
             {
-                data->state = MG_STATE_LINK_PROMPT;
+                data->state = MG_STATE_SOURCE_PROMPT;
                 PrintMysteryGiftOrEReaderTopMenu(FALSE, TRUE);
             }
         }
         break;
     }
-    case MG_STATE_LINK_PROMPT:
+    case MG_STATE_SOURCE_PROMPT:
         if (!data->isWonderNews)
             AddTextPrinterToWindow1(gText_WhereShouldCardBeAccessed);
         else
             AddTextPrinterToWindow1(gText_WhereShouldNewsBeAccessed);
-        data->state = MG_STATE_LINK_PROMPT_INPUT;
+        data->state = MG_STATE_SOURCE_PROMPT_INPUT;
         break;
-    case MG_STATE_LINK_PROMPT_INPUT:
+    case MG_STATE_SOURCE_PROMPT_INPUT:
         // Choose where to access the Wonder Card/News from
-        switch (MysteryGift_HandleThreeOptionMenu(&data->textState, &data->curPromptWindowId, TRUE))
+        switch (MysteryGift_HandleThreeOptionMenu(&data->textState, &data->var, TRUE))
         {
         case 0: // "Wireless Communication"
             ClearTextWindow();
-            data->state = MG_STATE_LINK_START;
+            data->state = MG_STATE_CLIENT_LINK_START;
             data->sourceIsFriend = FALSE;
             break;
         case 1: // "Friend"
             ClearTextWindow();
-            data->state = MG_STATE_LINK_START;
+            data->state = MG_STATE_CLIENT_LINK_START;
             data->sourceIsFriend = TRUE;
             break;
         case LIST_CANCEL:
@@ -1193,7 +1198,7 @@ static void Task_MysteryGift(u8 taskId)
             break;
         }
         break;
-    case MG_STATE_LINK_START:
+    case MG_STATE_CLIENT_LINK_START:
         *gStringVar1 = EOS;
         *gStringVar2 = EOS;
         *gStringVar3 = EOS;
@@ -1213,149 +1218,153 @@ static void Task_MysteryGift(u8 taskId)
                 CreateTask_LinkMysteryGiftOverWireless(ACTIVITY_WONDER_NEWS);
             break;
         }
-        data->state = MG_STATE_LINK_WAIT;
+        data->state = MG_STATE_CLIENT_LINK_WAIT;
         break;
-    case MG_STATE_LINK_WAIT:
+    case MG_STATE_CLIENT_LINK_WAIT:
         if (gReceivedRemoteLinkPlayers != 0)
         {
             ClearScreenInBg0(TRUE);
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
             MysteryGiftClient_Create(data->isWonderNews);
         }
         else if (gSpecialVar_Result == LINKUP_FAILED)
         {
             // Link failed, return to link start menu 
             ClearScreenInBg0(TRUE);
-            data->state = MG_STATE_LINK_PROMPT;
+            data->state = MG_STATE_SOURCE_PROMPT;
         }
         break;
-    case MG_STATE_COMMUNICATING:
+    case MG_STATE_CLIENT_COMMUNICATING:
         AddTextPrinterToWindow1(gText_Communicating);
-        data->state = MG_STATE_COMMUNICATE;
+        data->state = MG_STATE_CLIENT_LINK;
         break;
-    case MG_STATE_COMMUNICATE:
-        switch (MysteryGiftClient_Run(&data->curPromptWindowId))
+    case MG_STATE_CLIENT_LINK:
+        switch (MysteryGiftClient_Run(&data->var))
         {
         case CLI_RET_END:
             Rfu_SetCloseLinkCallback();
-            data->prevPromptWindowId = data->curPromptWindowId;
-            data->state = MG_STATE_LINK_COMPLETE_WAIT;
+            data->msgId = data->var;
+            data->state = MG_STATE_CLIENT_LINK_END;
             break;
-        case CLI_RET_5:
-            memcpy(data->buffer, mevent_client_get_buffer(), 0x40);
+        case CLI_RET_COPY_MSG:
+            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), 0x40);
             MysteryGiftClient_AdvanceState();
             break;
-        case CLI_RET_3:
-            data->state = MG_STATE_10;
+        case CLI_RET_PRINT_MSG:
+            data->state = MG_STATE_CLIENT_MESSAGE;
             break;
-        case CLI_RET_2:
-            data->state = MG_STATE_9;
+        case CLI_RET_YES_NO:
+            data->state = MG_STATE_CLIENT_YES_NO;
             break;
         case CLI_RET_ASK_TOSS:
-            data->state = MG_STATE_LINK_ASK_TOSS;
+            data->state = MG_STATE_CLIENT_ASK_TOSS;
             StringCopy(gStringVar1, gLinkPlayers[0].name);
             break;
         }
         break;
-    case MG_STATE_9:
-        input = DoMysteryGiftYesNo(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer());
+    case MG_STATE_CLIENT_YES_NO:
+        input = DoMysteryGiftYesNo(&data->textState, &data->var, FALSE, MysteryGiftClient_GetMsg());
         switch (input)
         {
         case 0: // Yes
-            MysteryGiftClient_SetParam(0);
+            MysteryGiftClient_SetParam(FALSE);
             MysteryGiftClient_AdvanceState();
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
             break;
         case 1: // No
         case MENU_B_PRESSED:
-            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_SetParam(TRUE);
             MysteryGiftClient_AdvanceState();
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
             break;
         }
         break;
-    case MG_STATE_10:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, mevent_client_get_buffer()))
+    case MG_STATE_CLIENT_MESSAGE:
+        if (PrintMysteryGiftMenuMessage(&data->textState, MysteryGiftClient_GetMsg()))
         {
             MysteryGiftClient_AdvanceState();
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
         }
         break;
-    case MG_STATE_LINK_ASK_TOSS:
-        input = DoMysteryGiftYesNo(&data->textState, &data->curPromptWindowId, FALSE, gText_ThrowAwayWonderCard);
+    case MG_STATE_CLIENT_ASK_TOSS:
+        // Player is receiving a new Wonder Card/News but needs to toss an existing one to make room.
+        // Ask for confirmation.
+        input = DoMysteryGiftYesNo(&data->textState, &data->var, FALSE, gText_ThrowAwayWonderCard);
         switch (input)
         {
         case 0: // Yes
-            if (CheckReceivedGiftFromWonderCard() == TRUE)
+            if (IsSavedWonderCardGiftNotReceived() == TRUE)
             {
-                data->state = MG_STATE_LINK_ASK_TOSS_UNRECEIVED;
+                data->state = MG_STATE_CLIENT_ASK_TOSS_UNRECEIVED;
             }
             else
             {
-                MysteryGiftClient_SetParam(0);
+                MysteryGiftClient_SetParam(FALSE);
                 MysteryGiftClient_AdvanceState();
-                data->state = MG_STATE_COMMUNICATING;
+                data->state = MG_STATE_CLIENT_COMMUNICATING;
             }
             break;
         case 1: // No
         case MENU_B_PRESSED:
-            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_SetParam(TRUE);
             MysteryGiftClient_AdvanceState();
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
             break;
         }
         break;
-    case MG_STATE_LINK_ASK_TOSS_UNRECEIVED:
-        input = DoMysteryGiftYesNo(&data->textState, &data->curPromptWindowId, FALSE, gText_HaventReceivedCardsGift);
+    case MG_STATE_CLIENT_ASK_TOSS_UNRECEIVED:
+        // Player has selected to toss a Wonder Card that they haven't received the gift for.
+        // Ask for confirmation again.
+        input = DoMysteryGiftYesNo(&data->textState, &data->var, FALSE, gText_HaventReceivedCardsGift);
         switch (input)
         {
         case 0: // Yes
-            MysteryGiftClient_SetParam(0);
+            MysteryGiftClient_SetParam(FALSE);
             MysteryGiftClient_AdvanceState();
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
             break;
         case 1: // No
         case MENU_B_PRESSED:
-            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_SetParam(TRUE);
             MysteryGiftClient_AdvanceState();
-            data->state = MG_STATE_COMMUNICATING;
+            data->state = MG_STATE_CLIENT_COMMUNICATING;
             break;
         }
         break;
-    case MG_STATE_LINK_COMPLETE_WAIT:
+    case MG_STATE_CLIENT_LINK_END:
         if (gReceivedRemoteLinkPlayers == 0)
         {
             DestroyWirelessStatusIndicatorSprite();
-            data->state = MG_STATE_LINK_COMPLETED;
+            data->state = MG_STATE_CLIENT_COMM_COMPLETED;
         }
         break;
-    case MG_STATE_LINK_COMPLETED:
+    case MG_STATE_CLIENT_COMM_COMPLETED:
         if (PrintStringAndWait2Seconds(&data->textState, gText_CommunicationCompleted))
         {
             if (data->sourceIsFriend == TRUE)
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
-            data->state = MG_STATE_LINK_RESULT_MSG;
+            data->state = MG_STATE_CLIENT_RESULT_MSG;
         }
         break;
-    case MG_STATE_LINK_RESULT_MSG:
-        msg = GetStdMessage(&receivedMsg, data->isWonderNews, data->sourceIsFriend, data->prevPromptWindowId);
+    case MG_STATE_CLIENT_RESULT_MSG:
+        msg = GetClientResultMessage(&successMsg, data->isWonderNews, data->sourceIsFriend, data->msgId);
         if (msg == NULL)
-            msg = data->buffer;
-        if (receivedMsg)
-            input = PrintSuccessMessage(&data->textState, msg, &data->curPromptWindowId);
+            msg = data->clientMsg;
+        if (successMsg)
+            input = PrintSuccessMessage(&data->textState, msg, &data->var);
         else
-            input = MG_PrintTextOnWindow1AndWaitButton(&data->textState, msg);
+            input = PrintMysteryGiftMenuMessage(&data->textState, msg);
         // input var re-used, here it is TRUE if the message is finished
         if (input)
         {
-            if (data->prevPromptWindowId == 3)
+            if (data->msgId == CLI_MSG_NEWS_RECEIVED)
             {
                 if (data->sourceIsFriend == TRUE)
-                    GenerateRandomNews(1);
+                    GenerateRandomWonderNews(1);
                 else
-                    GenerateRandomNews(2);
+                    GenerateRandomWonderNews(2);
             }
-            if (!receivedMsg)
+            if (!successMsg)
             {
                 // Did not receive card/news, return to main menu
                 data->state = MG_STATE_TO_MAIN_MENU;
@@ -1368,7 +1377,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_SAVE_LOAD_GIFT:
-        if (mevent_save_game(&data->textState))
+        if (SaveOnMysteryGiftMenu(&data->textState))
             data->state = MG_STATE_LOAD_GIFT;
         break;
     case MG_STATE_LOAD_GIFT:
@@ -1404,17 +1413,17 @@ static void Task_MysteryGift(u8 taskId)
         u32 result;
         if (!data->isWonderNews)
         {
-            if (WonderCard_Test_Unk_08_6())
-                result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->isWonderNews, FALSE);
+            if (IsSendingSavedWonderCardAllowed())
+                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, FALSE);
             else
-                result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->isWonderNews, TRUE);
+                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, TRUE);
         }
         else
         {
-            if (WonderNews_Test_Unk_02())
-                result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->isWonderNews, FALSE);
+            if (IsSendingSavedWonderNewsAllowed())
+                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, FALSE);
             else
-                result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->isWonderNews, TRUE);
+                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, TRUE);
         }
         switch (result)
         {
@@ -1436,11 +1445,11 @@ static void Task_MysteryGift(u8 taskId)
         break;
     }
     case MG_STATE_ASK_TOSS:
-        // Player is attempting to discard a Wonder Card/News
-        switch (AskDiscardGift(&data->textState, &data->curPromptWindowId, data->isWonderNews))
+        // Player is attempting to discard a saved Wonder Card/News
+        switch (AskDiscardGift(&data->textState, &data->var, data->isWonderNews))
         {
         case 0: // Yes
-            if (!data->isWonderNews && CheckReceivedGiftFromWonderCard() == TRUE)
+            if (!data->isWonderNews && IsSavedWonderCardGiftNotReceived() == TRUE)
                 data->state = MG_STATE_ASK_TOSS_UNRECEIVED;
             else
                 data->state = MG_STATE_TOSS;
@@ -1454,7 +1463,7 @@ static void Task_MysteryGift(u8 taskId)
     case MG_STATE_ASK_TOSS_UNRECEIVED:
         // Player has selected to toss a Wonder Card that they haven't received the gift for.
         // Ask for confirmation again.
-        switch ((u32)DoMysteryGiftYesNo(&data->textState, &data->curPromptWindowId, TRUE, gText_HaventReceivedGiftOkayToDiscard))
+        switch ((u32)DoMysteryGiftYesNo(&data->textState, &data->var, TRUE, gText_HaventReceivedGiftOkayToDiscard))
         {
         case 0: // Yes
             data->state = MG_STATE_TOSS;
@@ -1473,7 +1482,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_TOSS_SAVE:
-        if (mevent_save_game(&data->textState))
+        if (SaveOnMysteryGiftMenu(&data->textState))
             data->state = MG_STATE_TOSSED;
         break;
     case MG_STATE_TOSSED:
@@ -1489,7 +1498,7 @@ static void Task_MysteryGift(u8 taskId)
         break;
     case MG_STATE_RECEIVE:
         if (ExitWonderCardOrNews(data->isWonderNews, 1))
-            data->state = MG_STATE_LINK_PROMPT;
+            data->state = MG_STATE_SOURCE_PROMPT;
         break;
     case MG_STATE_SEND:
         if (ExitWonderCardOrNews(data->isWonderNews, 1))
@@ -1504,14 +1513,14 @@ static void Task_MysteryGift(u8 taskId)
                 break;
             }
             data->sourceIsFriend = TRUE;
-            data->state = MG_STATE_SEND_WAIT;
+            data->state = MG_STATE_SERVER_LINK_WAIT;
         }
         break;
-    case MG_STATE_SEND_WAIT:
+    case MG_STATE_SERVER_LINK_WAIT:
         if (gReceivedRemoteLinkPlayers != 0)
         {
             ClearScreenInBg0(1);
-            data->state = MG_STATE_SEND_START;
+            data->state = MG_STATE_SERVER_LINK_START;
         }
         else if (gSpecialVar_Result == LINKUP_FAILED)
         {
@@ -1519,7 +1528,7 @@ static void Task_MysteryGift(u8 taskId)
             data->state = MG_STATE_LOAD_GIFT;
         }
         break;
-    case MG_STATE_SEND_START:
+    case MG_STATE_SERVER_LINK_START:
         *gStringVar1 = EOS;
         *gStringVar2 = EOS;
         *gStringVar3 = EOS;
@@ -1527,40 +1536,40 @@ static void Task_MysteryGift(u8 taskId)
         if (!data->isWonderNews)
         {
             AddTextPrinterToWindow1(gText_SendingWonderCard);
-            mevent_srv_new_wcard();
+            MysterGiftServer_CreateForCard();
         }
         else
         {
             AddTextPrinterToWindow1(gText_SendingWonderNews);
-            mevent_srv_init_wnews();
+            MysterGiftServer_CreateForNews();
         }
-        data->state = MG_STATE_SENDING;
+        data->state = MG_STATE_SERVER_LINK;
         break;
-    case MG_STATE_SENDING:
-        if (mevent_srv_common_do_exec(&data->curPromptWindowId) == 3)
+    case MG_STATE_SERVER_LINK:
+        if (MysterGiftServer_Run(&data->var) == SVR_RET_END)
         {
-            data->prevPromptWindowId = data->curPromptWindowId;
-            data->state = MG_STATE_SEND_FINISH;
+            data->msgId = data->var;
+            data->state = MG_STATE_SERVER_LINK_END;
         }
         break;
-    case MG_STATE_SEND_FINISH:
+    case MG_STATE_SERVER_LINK_END:
         Rfu_SetCloseLinkCallback();
         StringCopy(gStringVar1, gLinkPlayers[1].name);
-        data->state = MG_STATE_SEND_WAIT_END;
+        data->state = MG_STATE_SERVER_LINK_END_WAIT;
         break;
-    case MG_STATE_SEND_WAIT_END:
+    case MG_STATE_SERVER_LINK_END_WAIT:
         if (gReceivedRemoteLinkPlayers == 0)
         {
             DestroyWirelessStatusIndicatorSprite();
-            data->state = MG_STATE_SEND_END;
+            data->state = MG_STATE_SERVER_RESULT_MSG;
         }
         break;
-    case MG_STATE_SEND_END:
-        if (PrintMGSendStatus(&data->textState, &data->curPromptWindowId, data->sourceIsFriend, data->prevPromptWindowId))
+    case MG_STATE_SERVER_RESULT_MSG:
+        if (PrintServerResultMessage(&data->textState, &data->var, data->sourceIsFriend, data->msgId))
         {
-            if (data->sourceIsFriend == TRUE && data->prevPromptWindowId == 3)
+            if (data->sourceIsFriend == TRUE && data->msgId == SVR_MSG_NEWS_SENT)
             {
-                GenerateRandomNews(3);
+                GenerateRandomWonderNews(3);
                 data->state = MG_STATE_SAVE_LOAD_GIFT;
             }
             else
@@ -1570,9 +1579,9 @@ static void Task_MysteryGift(u8 taskId)
             }
         }
         break;
-    case MG_STATE_LINK_ERROR_1:
-    case MG_STATE_LINK_ERROR_2:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_CommunicationError))
+    case MG_STATE_CLIENT_ERROR:
+    case MG_STATE_SERVER_ERROR:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gText_CommunicationError))
         {
             data->state = MG_STATE_TO_MAIN_MENU;
             PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
@@ -1580,7 +1589,7 @@ static void Task_MysteryGift(u8 taskId)
         break;
     case MG_STATE_EXIT:
         CloseLink();
-        Free(data->buffer);
+        Free(data->clientMsg);
         DestroyTask(taskId);
         SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);
         break;

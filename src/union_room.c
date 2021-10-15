@@ -1539,12 +1539,14 @@ static void Task_ExchangeCards(u8 taskId)
             {
                 // Note: hasAllFrontierSymbols is a re-used field.
                 // Here it is set by CreateTrainerCardInBuffer.
+                // If the player has a saved Wonder Card and it is the same Wonder Card
+                // as their partner then mystery gift stats are enabled.
                 recvBuff = gBlockRecvBuffer[GetMultiplayerId() ^ 1];
-                MEventHandleReceivedWonderCard(((struct TrainerCard *)recvBuff)->hasAllFrontierSymbols);
+                MysteryGift_TryEnableStatsByFlagId(((struct TrainerCard *)recvBuff)->hasAllFrontierSymbols);
             }
             else
             {
-                ResetReceivedWonderCardFlag();
+                MysteryGift_DisableStats();
             }
 
             ResetBlockReceivedFlags();
@@ -1640,7 +1642,7 @@ static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
 
 static void Task_StartActivity(u8 taskId)
 {
-    ResetReceivedWonderCardFlag();
+    MysteryGift_DisableStats();
     switch (gPlayerCurrActivity)
     {
     case ACTIVITY_BATTLE_SINGLE:
@@ -1937,7 +1939,7 @@ static void Task_SendMysteryGift(u8 taskId)
         }
         break;
     case 6:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_LinkWithFriendDropped))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_LinkWithFriendDropped))
         {
             data->playerCount = LeaderPrunePlayerList(data->playerList);
             RedrawListMenu(data->listTaskId);
@@ -2034,7 +2036,7 @@ static void Task_SendMysteryGift(u8 taskId)
         data->state++;
         break;
     case 14:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_PleaseStartOver))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_PleaseStartOver))
         {
             DestroyTask(taskId);
             gSpecialVar_Result = LINKUP_FAILED;
@@ -2212,7 +2214,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sLinkDroppedTexts[RfuGetStatus()]))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sLinkDroppedTexts[RfuGetStatus()]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2380,7 +2382,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessLinkDropped))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessLinkDropped))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2389,7 +2391,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessSearchCanceled))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessSearchCanceled))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2398,7 +2400,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 11:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sNoWonderSharedTexts[data->isWonderNews]))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sNoWonderSharedTexts[data->isWonderNews]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);

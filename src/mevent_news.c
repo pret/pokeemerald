@@ -4,51 +4,51 @@
 #include "event_data.h"
 #include "mevent_news.h"
 
-static u32 sub_801DCAC(struct MysteryEventStruct *);
-static void sub_801DD10(struct MysteryEventStruct *);
-static u32 sub_801DD44(struct MysteryEventStruct *);
-static void sub_801DCD8(struct MysteryEventStruct *);
-static void sub_801DCCC(struct MysteryEventStruct *);
+static u32 sub_801DCAC(struct WonderNewsMetadata *);
+static void sub_801DD10(struct WonderNewsMetadata *);
+static u32 sub_801DD44(struct WonderNewsMetadata *);
+static void sub_801DCD8(struct WonderNewsMetadata *);
+static void sub_801DCCC(struct WonderNewsMetadata *);
 
-void GenerateRandomNews(u32 a0)
+void GenerateRandomWonderNews(u32 a0)
 {
-    struct MysteryEventStruct *r5 = sub_801B044();
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
-    r5->unk_0_0 = a0;
+    data->unk_0_0 = a0;
     switch (a0)
     {
     case 0:
         break;
     case 1:
     case 2:
-        r5->unk_1 = (Random() % 15) + 16;
+        data->unk_1 = (Random() % 15) + 16;
         break;
     case 3:
-        r5->unk_1 = (Random() % 15) + 1;
+        data->unk_1 = (Random() % 15) + 1;
         break;
     }
 }
 
-void sub_801DBC0(void)
+void InitSavedWonderNews(void)
 {
-    struct MysteryEventStruct *r5 = sub_801B044();
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
-    r5->unk_0_0 = 0;
-    r5->unk_0_2 = 0;
-    r5->unk_0_5 = 0;
-    r5->unk_1 = 0;
+    data->unk_0_0 = 0;
+    data->unk_0_2 = 0;
+    data->unk_0_5 = 0;
+    data->unk_1 = 0;
     VarSet(VAR_0x402E, 0);
 }
 
 void sub_801DBDC(void)
 {
     u16 *r4 = GetVarPointer(VAR_0x402E);
-    struct MysteryEventStruct *r2 = sub_801B044();
-    struct MysteryEventStruct r0 = *r2;
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
+    struct WonderNewsMetadata r0 = *data;
 
     if ((u8)r0.unk_0_5 > 4 && ++(*r4) > 0x1f3)
     {
-        r2->unk_0_5 = 0;
+        data->unk_0_5 = 0;
         *r4 = 0;
     }
 }
@@ -57,33 +57,33 @@ void sub_801DBDC(void)
 u16 sub_801DC20(void)
 {
     u16 *r6 = &gSpecialVar_Result;
-    struct MysteryEventStruct *r4 = sub_801B044();
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
     u16 r5;
 
     if (!IsMysteryEventEnabled() || !ValidateSavedWonderNews())
         return 0;
 
-    r5 = sub_801DD44(r4);
+    r5 = sub_801DD44(data);
 
     switch (r5)
     {
     case 0:
         break;
     case 1:
-        *r6 = sub_801DCAC(r4);
+        *r6 = sub_801DCAC(data);
         break;
     case 2:
-        *r6 = sub_801DCAC(r4);
+        *r6 = sub_801DCAC(data);
         break;
     case 3:
         break;
     case 4:
-        *r6 = sub_801DCAC(r4);
-        sub_801DCD8(r4);
+        *r6 = sub_801DCAC(data);
+        sub_801DCD8(data);
         break;
     case 5:
-        *r6 = sub_801DCAC(r4);
-        sub_801DCCC(r4);
+        *r6 = sub_801DCAC(data);
+        sub_801DCCC(data);
         break;
     case 6:
         break;
@@ -92,43 +92,43 @@ u16 sub_801DC20(void)
     return r5;
 }
 
-static u32 sub_801DCAC(struct MysteryEventStruct *a0)
+static u32 sub_801DCAC(struct WonderNewsMetadata *data)
 {
     u32 r4;
 
-    a0->unk_0_0 = 0;
-    r4 = a0->unk_1 + 0x84;
-    a0->unk_1 = 0;
-    sub_801DD10(a0);
+    data->unk_0_0 = 0;
+    r4 = data->unk_1 + 0x84;
+    data->unk_1 = 0;
+    sub_801DD10(data);
     return r4;
 }
 
-static void sub_801DCCC(struct MysteryEventStruct *a0)
+static void sub_801DCCC(struct WonderNewsMetadata *data)
 {
-    a0->unk_0_2 = 0;
+    data->unk_0_2 = 0;
 }
 
-static void sub_801DCD8(struct MysteryEventStruct *a0)
+static void sub_801DCD8(struct WonderNewsMetadata *data)
 {
-    a0->unk_0_2++;
-    if ((u8)a0->unk_0_2 > 4)
-        a0->unk_0_2 = 4;
+    data->unk_0_2++;
+    if ((u8)data->unk_0_2 > 4)
+        data->unk_0_2 = 4;
 }
 
-static void sub_801DD10(struct MysteryEventStruct *a0)
+static void sub_801DD10(struct WonderNewsMetadata *data)
 {
-    a0->unk_0_5++;
-    if ((u8)a0->unk_0_5 > 5)
-        a0->unk_0_5 = 5;
+    data->unk_0_5++;
+    if ((u8)data->unk_0_5 > 5)
+        data->unk_0_5 = 5;
 }
 
-static u32 sub_801DD44(struct MysteryEventStruct *a0)
+static u32 sub_801DD44(struct WonderNewsMetadata *data)
 {
-    struct MysteryEventStruct r0;
-    if ((u8)a0->unk_0_5 == 5)
+    struct WonderNewsMetadata r0;
+    if ((u8)data->unk_0_5 == 5)
         return 6;
 
-    r0 = *a0;
+    r0 = *data;
     switch (r0.unk_0_0)
     {
     case 0:

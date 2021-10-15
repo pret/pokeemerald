@@ -51,7 +51,7 @@ struct UnkStruct_203F3C8_02DC
 struct WonderCardData
 {
     /*0000*/ struct WonderCard card;
-    /*014c*/ struct MEventBuffer_3430 unk_014C;
+    /*014c*/ struct WonderCardMetadata cardMetadata;
     /*0170*/ const struct WonderGraphics * gfx;
     /*0174*/ u8 enterExitState;
     /*0175*/ u8 unk_0175;
@@ -81,7 +81,14 @@ static const u8 sCard_TextColorTable[][3] = {
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
 };
-const u8 ALIGNED(4) sCard_TextYOffsets[3] = {7, 4, 7};
+
+static const u8 ALIGNED(4) sCard_TextYOffsets[CARD_TYPE_COUNT] =
+{
+    [CARD_TYPE_GIFT] = 7,
+    [CARD_TYPE_STAMP] = 4,
+    [CARD_TYPE_LINK_STAT] = 7
+};
+
 static const struct WindowTemplate sCard_WindowTemplates[] = {
     [CARD_WIN_0] = {
         .bg = 1,
@@ -176,21 +183,21 @@ static const struct WonderGraphics sCardGraphics[NUM_WONDER_BGS] = {
     {.textPal1 = 1, .textPal2 = 0, .textPal3 = 0, .textPal4 = 7, .tiles = sWonderCardBgGfx8, .map = sWonderCardBgTilemap8, .pal = sWonderCardBgPal8}
 };
 
-bool32 WonderCard_Init(struct WonderCard * card, struct MEventBuffer_3430 * r6)
+bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata)
 {
-    if (card == NULL || r6 == NULL)
+    if (card == NULL || metadata == NULL)
         return FALSE;
     sWonderCardData = AllocZeroed(sizeof(*sWonderCardData));
     if (sWonderCardData == NULL)
         return FALSE;
     sWonderCardData->card = *card;
-    sWonderCardData->unk_014C = *r6;
-    if (sWonderCardData->card.bgType >= ARRAY_COUNT(sCardGraphics))
+    sWonderCardData->cardMetadata = *metadata;
+    if (sWonderCardData->card.bgType >= NUM_WONDER_BGS)
         sWonderCardData->card.bgType = 0;
-    if (sWonderCardData->card.unk_08_0 >= ARRAY_COUNT(sCard_TextYOffsets))
-        sWonderCardData->card.unk_08_0 = 0;
-    if (sWonderCardData->card.unk_09 > ARRAY_COUNT(sWonderCardData->unk_017D))
-        sWonderCardData->card.unk_09 = 0;
+    if (sWonderCardData->card.type >= CARD_TYPE_COUNT)
+        sWonderCardData->card.type = 0;
+    if (sWonderCardData->card.maxStamps > ARRAY_COUNT(sWonderCardData->unk_017D))
+        sWonderCardData->card.maxStamps = 0;
     sWonderCardData->gfx = &sCardGraphics[sWonderCardData->card.bgType];
     return TRUE;
 }
@@ -337,20 +344,20 @@ static void BufferCardText(void)
     }
     memcpy(sWonderCardData->unk_0288, sWonderCardData->card.unk_FA, WONDER_CARD_TEXT_LENGTH);
     sWonderCardData->unk_0288[WONDER_CARD_TEXT_LENGTH] = EOS;
-    switch (sWonderCardData->card.unk_08_0)
+    switch (sWonderCardData->card.type)
     {
-    case 0:
+    case CARD_TYPE_GIFT:
         memcpy(sWonderCardData->unk_02B1, sWonderCardData->card.unk_122, WONDER_CARD_TEXT_LENGTH);
         sWonderCardData->unk_02B1[WONDER_CARD_TEXT_LENGTH] = EOS;
         break;
-    case 1:
+    case CARD_TYPE_STAMP:
         sWonderCardData->unk_02B1[0] = EOS;
         break;
-    case 2:
+    case CARD_TYPE_LINK_STAT:
         sWonderCardData->unk_02B1[0] = EOS;
-        sp0[0] = sWonderCardData->unk_014C.unk_00 < 999 ? sWonderCardData->unk_014C.unk_00 : 999;
-        sp0[1] = sWonderCardData->unk_014C.unk_02 < 999 ? sWonderCardData->unk_014C.unk_02 : 999;
-        sp0[2] = sWonderCardData->unk_014C.unk_04 < 999 ? sWonderCardData->unk_014C.unk_04 : 999;
+        sp0[0] = sWonderCardData->cardMetadata.battlesWon < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesWon : MAX_WONDER_CARD_STAT;
+        sp0[1] = sWonderCardData->cardMetadata.battlesLost < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesLost : MAX_WONDER_CARD_STAT;
+        sp0[2] = sWonderCardData->cardMetadata.numTrades < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.numTrades : MAX_WONDER_CARD_STAT;
         for (i = 0; i < 8; i++)
         {
             memset(sWonderCardData->unk_02DC[i].unk_42, EOS, sizeof(sWonderCardData->unk_02DC[i].unk_42));
@@ -410,15 +417,15 @@ static void DrawCardWindow(u8 whichWindow)
             AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, sCard_TextColorTable[sWonderCardData->gfx->textPal2], 0, sWonderCardData->unk_01E4[sp0C]);
         break;
     case CARD_WIN_2:
-        AddTextPrinterParameterized3(windowId, 3, 0, sCard_TextYOffsets[sWonderCardData->card.unk_08_0], sCard_TextColorTable[sWonderCardData->gfx->textPal3], 0, sWonderCardData->unk_0288);
-        if (sWonderCardData->card.unk_08_0 != 2)
+        AddTextPrinterParameterized3(windowId, 3, 0, sCard_TextYOffsets[sWonderCardData->card.type], sCard_TextColorTable[sWonderCardData->gfx->textPal3], 0, sWonderCardData->unk_0288);
+        if (sWonderCardData->card.type != CARD_TYPE_LINK_STAT)
         {
-            AddTextPrinterParameterized3(windowId, 3, 0, 16 + sCard_TextYOffsets[sWonderCardData->card.unk_08_0], sCard_TextColorTable[sWonderCardData->gfx->textPal3], 0, sWonderCardData->unk_02B1);
+            AddTextPrinterParameterized3(windowId, 3, 0, 16 + sCard_TextYOffsets[sWonderCardData->card.type], sCard_TextColorTable[sWonderCardData->gfx->textPal3], 0, sWonderCardData->unk_02B1);
         }
         else
         {
             s32 x = 0;
-            s32 y = sCard_TextYOffsets[sWonderCardData->card.unk_08_0] + 16;
+            s32 y = sCard_TextYOffsets[sWonderCardData->card.type] + 16;
             s32 spacing = GetFontAttribute(3, FONTATTR_LETTER_SPACING);
             for (; sp0C < sWonderCardData->unk_0175; sp0C++)
             {
@@ -438,26 +445,26 @@ static void DrawCardWindow(u8 whichWindow)
 
 static void CreateCardSprites(void)
 {
-    u8 r7 = 0;
+    u8 i = 0;
     sWonderCardData->monIconSpriteId = SPRITE_NONE;
-    if (sWonderCardData->unk_014C.unk_06 != SPECIES_NONE)
+    if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
-        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->unk_014C.unk_06), SpriteCallbackDummy, 220, 20, 0, FALSE);
+        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0, FALSE);
         gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
     }
-    if (sWonderCardData->card.unk_09 != 0 && sWonderCardData->card.unk_08_0 == 1)
+    if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
     {
         LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_IconShadow);
         LoadSpritePalette(&sSpritePalettes_IconShadow[sWonderCardData->gfx->textPal4]);
-        for (; r7 < sWonderCardData->card.unk_09; r7++)
+        for (; i < sWonderCardData->card.maxStamps; i++)
         {
-            sWonderCardData->unk_017D[r7][0] = SPRITE_NONE;
-            sWonderCardData->unk_017D[r7][1] = SPRITE_NONE;
-            sWonderCardData->unk_017D[r7][0] = CreateSprite(&sSpriteTemplate_IconShadow, 216 - 32 * r7, 144, 8);
-            if (sWonderCardData->unk_014C.unk_08[0][r7] != SPECIES_NONE)
-                sWonderCardData->unk_017D[r7][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->unk_014C.unk_08[0][r7]), 
+            sWonderCardData->unk_017D[i][0] = SPRITE_NONE;
+            sWonderCardData->unk_017D[i][1] = SPRITE_NONE;
+            sWonderCardData->unk_017D[i][0] = CreateSprite(&sSpriteTemplate_IconShadow, 216 - 32 * i, 144, 8);
+            if (sWonderCardData->cardMetadata.stampData[0][i] != SPECIES_NONE)
+                sWonderCardData->unk_017D[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[0][i]), 
                                                                                SpriteCallbackDummy,
-                                                                               216 - 32 * r7,
+                                                                               216 - 32 * i,
                                                                                136, 0, 0);
         }
     }
@@ -465,17 +472,17 @@ static void CreateCardSprites(void)
 
 static void DestroyCardSprites(void)
 {
-    u8 r6 = 0;
+    u8 i = 0;
     if (sWonderCardData->monIconSpriteId != SPRITE_NONE)
         FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->monIconSpriteId]);
-    if (sWonderCardData->card.unk_09 != 0 && sWonderCardData->card.unk_08_0 == 1)
+    if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
     {
-        for (; r6 < sWonderCardData->card.unk_09; r6++)
+        for (; i < sWonderCardData->card.maxStamps; i++)
         {
-            if (sWonderCardData->unk_017D[r6][0] != SPRITE_NONE)
-                DestroySprite(&gSprites[sWonderCardData->unk_017D[r6][0]]);
-            if (sWonderCardData->unk_017D[r6][1] != SPRITE_NONE)
-                FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->unk_017D[r6][1]]);
+            if (sWonderCardData->unk_017D[i][0] != SPRITE_NONE)
+                DestroySprite(&gSprites[sWonderCardData->unk_017D[i][0]]);
+            if (sWonderCardData->unk_017D[i][1] != SPRITE_NONE)
+                FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->unk_017D[i][1]]);
         }
         FreeSpriteTilesByTag(TAG_ICON_SHADOW);
         FreeSpritePaletteByTag(TAG_ICON_SHADOW);
