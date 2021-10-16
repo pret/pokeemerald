@@ -984,12 +984,12 @@ static u32 QuitBerryCrush(MainCallback exitCallback)
     return 0;
 }
 
-#define ERROR_EXIT(exitCallback)        \
-    {                                   \
-        SetMainCallback2(exitCallback); \
-        Rfu.unk_10 = 0;                 \
-        Rfu.unk_12 = 0;                 \
-        Rfu.errorState = 1;             \
+#define ERROR_EXIT(exitCallback)                    \
+    {                                               \
+        SetMainCallback2(exitCallback);             \
+        gRfu.errorParam0 = 0;                       \
+        gRfu.errorParam1 = 0;                       \
+        gRfu.errorState = RFU_ERROR_STATE_OCCURRED; \
     }
 
 void StartBerryCrush(MainCallback exitCallback)
@@ -2565,7 +2565,7 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
         linkState = (struct BerryCrushGame_LinkState *)gRecvCmds[i];
 
         // Skip player if we have not received a packet from them
-        if ((linkState->rfuCmd & 0xFF00) != RFUCMD_SEND_PACKET)
+        if ((linkState->rfuCmd & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
             continue;
         if (linkState->sendFlag != SEND_GAME_STATE)
             continue;
@@ -2805,7 +2805,7 @@ static void RecvLinkData(struct BerryCrushGame *game)
     for (i = 0; i < game->playerCount; i++)
         game->players[i].inputState = INPUT_STATE_NONE;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
     {
         game->playedSound = FALSE;
         return;

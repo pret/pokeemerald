@@ -256,7 +256,7 @@ SECTIONS {
         src/battle_controller_wally.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
-        src/reset_save_heap.o(.text);
+        src/reload_save.o(.text);
         src/field_region_map.o(.text);
         src/battle_anim_throw.o(.text);
         src/hall_of_fame.o(.text);

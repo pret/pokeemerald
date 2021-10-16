@@ -1,9 +1,15 @@
 #!/usr/bin/perl
 
 use IPC::Cmd qw[ run ];
+use Getopt::Long;
+
+my $usage = "Usage: calcrom.pl file.map [--data]\n";
+
+my $showData;
+GetOptions("data" => \$showData) or die $usage;
 
 (@ARGV == 1)
-    or die "ERROR: no map file specified.\n";
+    or die $usage;
 open(my $file, $ARGV[0])
     or die "ERROR: could not open file '$ARGV[0]'.\n";
 
@@ -149,17 +155,13 @@ else
     print "$undocumented symbols undocumented ($undocPct%)\n";
 }
 
-print "\n";
-my $dataTotal = $srcdata + $data;
-my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
-my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
+if ($showData)
+{
+    print "\n";
+    my $dataTotal = $srcdata + $data;
+    my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
+    my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
 
-if ($data == 0)
-{
-    print "Data porting to C is 100% complete\n"
-}
-else
-{
     print "$dataTotal total bytes of data\n";
     print "$srcdata bytes of data in src ($srcDataPct%)\n";
     print "$data bytes of data in data ($dataPct%)\n";

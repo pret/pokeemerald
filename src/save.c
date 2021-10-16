@@ -43,11 +43,12 @@ static u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
 // (u8 *)structure was removed from the first statement of the macro in Emerald.
 // This is because malloc is used to allocate addresses so storing the raw
 // addresses should not be done in the offsets information.
-#define SAVEBLOCK_CHUNK(structure, chunkNum)                                \
-{                                                                           \
-    chunkNum * SECTOR_DATA_SIZE,                                            \
-    min(sizeof(structure) - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE)  \
-}                                                                           \
+#define SAVEBLOCK_CHUNK(structure, chunkNum)                                   \
+{                                                                              \
+    chunkNum * SECTOR_DATA_SIZE,                                               \
+    sizeof(structure) >= chunkNum * SECTOR_DATA_SIZE ?                         \
+    min(sizeof(structure) - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE) : 0 \
+}
 
 static const struct SaveSectionOffsets sSaveSectionOffsets[] =
 {
@@ -126,16 +127,16 @@ static bool32 SetDamagedSectorBits(u8 op, u8 bit)
     return retVal;
 }
 
-static u8 SaveWriteToFlash(u16 a1, const struct SaveSectionLocation *location)
+static u8 SaveWriteToFlash(u16 sectorId, const struct SaveSectionLocation *location)
 {
     u32 status;
     u16 i;
 
     gFastSaveSection = &gSaveDataBuffer;
 
-    if (a1 != 0xFFFF) // for link
+    if (sectorId != 0xFFFF) // for link
     {
-        status = HandleWriteSector(a1, location);
+        status = HandleWriteSector(sectorId, location);
     }
     else
     {
@@ -169,7 +170,7 @@ static u8 HandleWriteSector(u16 sectorId, const struct SaveSectionLocation *loca
 
     sector = sectorId + gLastWrittenSector;
     sector %= SECTOR_SAVE_SLOT_LENGTH;
-    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
 
     data = location[sectorId].data;
     size = location[sectorId].size;
@@ -292,7 +293,7 @@ static u8 ClearSaveData_2(u16 sectorId, const struct SaveSectionLocation *locati
 
     sector = sectorId + gLastWrittenSector;
     sector %= SECTOR_SAVE_SLOT_LENGTH;
-    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
 
     data = location[sectorId].data;
     size = location[sectorId].size;
@@ -362,7 +363,7 @@ static u8 sav12_xor_get(u16 sectorId, const struct SaveSectionLocation *location
 
     sector = sectorId + gLastWrittenSector; // no sub 1?
     sector %= SECTOR_SAVE_SLOT_LENGTH;
-    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
 
     if (ProgramFlashByte(sector, sizeof(struct UnkSaveSection), 0x25))
     {
@@ -385,7 +386,7 @@ static u8 sub_8152CAC(u16 sectorId, const struct SaveSectionLocation *location)
 
     sector = sectorId + gLastWrittenSector - 1;
     sector %= SECTOR_SAVE_SLOT_LENGTH;
-    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
 
     if (ProgramFlashByte(sector, sizeof(struct UnkSaveSection), ((u8 *)gFastSaveSection)[sizeof(struct UnkSaveSection)]))
     {
@@ -408,7 +409,7 @@ static u8 sub_8152D44(u16 sectorId, const struct SaveSectionLocation *location)
 
     sector = sectorId + gLastWrittenSector - 1; // no sub 1?
     sector %= SECTOR_SAVE_SLOT_LENGTH;
-    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    sector += SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
 
     if (ProgramFlashByte(sector, sizeof(struct UnkSaveSection), 0x25))
     {
@@ -446,12 +447,12 @@ static u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location)
 {
     u16 i;
     u16 checksum;
-    u16 v3 = SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    u16 slotOffset = SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
     u16 id;
 
     for (i = 0; i < SECTOR_SAVE_SLOT_LENGTH; i++)
     {
-        DoReadFlashWholeSection(i + v3, gFastSaveSection);
+        DoReadFlashWholeSection(i + slotOffset, gFastSaveSection);
         id = gFastSaveSection->id;
         if (id == 0)
             gLastWrittenSector = i;
@@ -824,27 +825,29 @@ u8 Save_LoadGameData(u8 saveType)
     return status;
 }
 
-u16 sub_815355C(void)
+u16 GetSaveBlocksPointersBaseOffset(void)
 {
-    u16 i, v3;
+    u16 i, slotOffset;
     struct SaveSection* savSection;
 
     savSection = gFastSaveSection = &gSaveDataBuffer;
     if (gFlashMemoryPresent != TRUE)
-        return SAVE_STATUS_EMPTY;
+        return 0;
     UpdateSaveAddresses();
     GetSaveValidStatus(gRamSaveSectionLocations);
-    v3 = SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+    slotOffset = SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % NUM_SAVE_SLOTS);
     for (i = 0; i < SECTOR_SAVE_SLOT_LENGTH; i++)
     {
-        DoReadFlashWholeSection(i + v3, gFastSaveSection);
-        if (gFastSaveSection->id == 0)
-            return savSection->data[10] +
-                   savSection->data[11] +
-                   savSection->data[12] +
-                   savSection->data[13];
+        DoReadFlashWholeSection(i + slotOffset, gFastSaveSection);
+        
+        // Base offset for SaveBlock2 is calculated using the trainer id
+        if (gFastSaveSection->id == SECTOR_ID_SAVEBLOCK2)
+            return savSection->data[offsetof(struct SaveBlock2, playerTrainerId[0])] +
+                   savSection->data[offsetof(struct SaveBlock2, playerTrainerId[1])] +
+                   savSection->data[offsetof(struct SaveBlock2, playerTrainerId[2])] +
+                   savSection->data[offsetof(struct SaveBlock2, playerTrainerId[3])];
     }
-    return SAVE_STATUS_EMPTY;
+    return 0;
 }
 
 u32 TryReadSpecialSaveSection(u8 sector, u8* dst)

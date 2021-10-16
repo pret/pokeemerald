@@ -2202,7 +2202,7 @@ static int GetPlayersAtJumpPeak(void)
 
 static bool32 AreLinkQueuesEmpty(void)
 {
-    return !Rfu.recvQueue.count && !Rfu.sendQueue.count;
+    return !gRfu.recvQueue.count && !gRfu.sendQueue.count;
 }
 
 static int GetNumPlayersForBonus(u8 *arg0)
@@ -3945,7 +3945,7 @@ static bool32 RecvPacket_MonInfo(int multiplayerId, struct PokemonJump_MonInfo *
 {
     struct MonInfoPacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[multiplayerId][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -4010,7 +4010,7 @@ static bool32 RecvPacket_LeaderState(struct PokemonJump_Player *player, struct P
 {
     struct LeaderStatePacket packet;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[0][1], sizeof(packet));
@@ -4057,7 +4057,7 @@ static bool32 RecvPacket_MemberStateToLeader(struct PokemonJump_Player *player, 
 {
     struct MemberStatePacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[multiplayerId][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -4078,7 +4078,7 @@ static bool32 RecvPacket_MemberStateToMember(struct PokemonJump_Player *player, 
 {
     struct MemberStatePacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[multiplayerId][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
