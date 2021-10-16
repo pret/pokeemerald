@@ -3779,7 +3779,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             {
                 // Send value of gSpecialVar_0x8004 to leader
                 // Will either be BATTLE_TOWER_LINK_CONTINUE or BATTLE_TOWER_LINK_RETIRE
-                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
                 gTasks[taskId].tState++;
             }
         }
@@ -3828,7 +3828,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             else
             {
                 // Send whether or not play should continue
-                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
                 gTasks[taskId].tState++;
             }
         }

@@ -204,7 +204,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
         if (!IsLinkTaskFinished())
         {
             if (++task->data[1] > 1800)
-                GetLinkmanErrorParams(0x6000);
+                RfuSetErrorParams(F_RFU_ERROR_6 | F_RFU_ERROR_7);
         }
         else
         {

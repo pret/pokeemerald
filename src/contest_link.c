@@ -22,7 +22,7 @@ static void Task_LinkContest_InitFlags(u8);
 bool32 LinkContest_SendBlock(void *src, u16 size)
 {
     memcpy(gDecompressionBuffer, src, size);
-    if (SendBlock(bitmask_all_link_players_but_self(), gDecompressionBuffer, size))
+    if (SendBlock(BitmaskAllOtherLinkPlayers(), gDecompressionBuffer, size))
         return TRUE;
     else
         return FALSE;
@@ -162,7 +162,7 @@ void Task_LinkContest_CommunicateMonsRS(u8 taskId)
         // Only if leader. Request other players data
         if (++gTasks[taskId].tTimer > 300)
         {
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
             gTasks[taskId].tState = 1;
         }
         break;
@@ -238,7 +238,7 @@ void Task_LinkContest_CommunicateCategoryRS(u8 taskId)
     case 10:
         if (++gTasks[taskId].tTimer > 10)
         {
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
             gTasks[taskId].tState = 1;
         }
         break;
@@ -491,7 +491,7 @@ void Task_LinkContest_CommunicateLeaderIdsRS(u8 taskId)
     case 10:
         if (++gTasks[taskId].tTimer > 10)
         {
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
             gTasks[taskId].tState = 1;
         }
         break;
