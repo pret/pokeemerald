@@ -3583,7 +3583,6 @@ static void HandleEndTurn_ContinueBattle(void)
             gBattleMons[i].status2 &= ~(STATUS2_FLINCHED);
             if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & STATUS2_MULTIPLETURNS))
                 CancelMultiTurnMoves(i);
-            gSideStatuses[GET_BATTLER_SIDE(i)] &= ~SIDE_STATUS_RETALIATE;
         }
         gBattleStruct->turnEffectsTracker = 0;
         gBattleStruct->turnEffectsBattlerId = 0;
