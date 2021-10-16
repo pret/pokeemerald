@@ -590,7 +590,7 @@ static void TryShowAsTarget(u32 battlerId)
 
 static void HandleInputChooseMove(void)
 {
-    u8 moveTarget;
+    u16 moveTarget;
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
@@ -644,7 +644,7 @@ static void HandleInputChooseMove(void)
             // Show all available targets for multi-target moves
             if (B_SHOW_TARGETS)
             {
-                if ((moveTarget & MOVE_TARGET_ALL_BATTLERS) == MOVE_TARGET_ALL_BATTLERS)
+                if (moveTarget & MOVE_TARGET_ALL_BATTLERS)
                 {
                     u32 i = 0;
                     for (i = 0; i < gBattlersCount; i++)
