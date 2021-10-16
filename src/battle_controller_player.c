@@ -590,7 +590,7 @@ static void TryShowAsTarget(u32 battlerId)
 
 static void HandleInputChooseMove(void)
 {
-    u8 moveTarget;
+    u16 moveTarget;
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
