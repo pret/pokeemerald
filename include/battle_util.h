@@ -34,6 +34,33 @@
 #define ITEMEFFECT_LIFEORB_SHELLBELL            0x7
 #define ITEMEFFECT_BATTLER_MOVE_END             0x8 // move end effects for just the battler, not whole field
 
+// Move cancellers. Note that anything from CANCELLER_PRANKSTER onwards is 
+// called on each target of a multi target move, so any new cancellers should
+// probably be added before CANCELLER_PRANKSTER.
+#define CANCELLER_FLAGS            0
+#define CANCELLER_ASLEEP           1
+#define CANCELLER_FROZEN           2
+#define CANCELLER_TRUANT           3
+#define CANCELLER_RECHARGE         4
+#define CANCELLER_FLINCH           5
+#define CANCELLER_DISABLED         6
+#define CANCELLER_GRAVITY          7
+#define CANCELLER_HEAL_BLOCKED     8
+#define CANCELLER_TAUNTED          9
+#define CANCELLER_IMPRISONED      10
+#define CANCELLER_CONFUSED        11
+#define CANCELLER_PARALYSED       12
+#define CANCELLER_IN_LOVE         13
+#define CANCELLER_BIDE            14
+#define CANCELLER_THAW            15
+#define CANCELLER_POWDER_MOVE     16
+#define CANCELLER_POWDER_STATUS   17
+#define CANCELLER_THROAT_CHOP     18
+#define CANCELLER_PRANKSTER       19
+#define CANCELLER_END             20
+#define CANCELLER_PSYCHIC_TERRAIN 21
+#define CANCELLER_END2            22
+
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
 #define IS_WHOLE_SIDE_ALIVE(battler)((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
