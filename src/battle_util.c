@@ -1898,6 +1898,7 @@ enum
     ENDTURN_PSYCHIC_TERRAIN,
     ENDTURN_ION_DELUGE,
     ENDTURN_FAIRY_LOCK,
+    ENDTURN_RETALIATE,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -2327,6 +2328,12 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_FAIRY_LOCK);
             }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_RETALIATE:
+            gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnSideTracker];
+            if (gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].retaliateTimer > 0)
+                gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].retaliateTimer--;
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_FIELD_COUNT:
@@ -7709,6 +7716,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     u16 basePower = CalcMoveBasePower(move, battlerAtk, battlerDef);
     u16 holdEffectModifier;
     u16 modifier = UQ_4_12(1.0);
+    u32 atkSide = GET_BATTLER_SIDE(battlerAtk);
 
     // attacker's abilities
     switch (GetBattlerAbility(battlerAtk))
@@ -7961,7 +7969,8 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_RETALIATE:
-        // todo
+        if (gSideTimers[atkSide].retaliateTimer == 1)
+            MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_SOLARBEAM:
         if (WEATHER_HAS_EFFECT && gBattleWeather & (WEATHER_HAIL_ANY | WEATHER_SANDSTORM_ANY | WEATHER_RAIN_ANY))
