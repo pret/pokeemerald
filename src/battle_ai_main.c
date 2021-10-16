@@ -517,7 +517,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 moveEffect = gBattleMoves[move].effect;
     s32 moveType;
-    u8 moveTarget = gBattleMoves[move].target;
+    u16 moveTarget = gBattleMoves[move].target;
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
     u8 effectiveness = AI_GetMoveEffectiveness(move, battlerAtk, battlerDef);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
@@ -2514,7 +2514,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // move data
     u8 moveType = gBattleMoves[move].type;
     u16 effect = gBattleMoves[move].effect;
-    u8 target = gBattleMoves[move].target;
+    u16 target = gBattleMoves[move].target;
     // ally data
     u8 battlerAtkPartner = AI_DATA->battlerAtkPartner;
     u16 atkPartnerAbility = AI_DATA->atkPartnerAbility;
