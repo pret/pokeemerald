@@ -43,7 +43,7 @@ gSpecials::
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
-	def_special nullsub_37
+	def_special Script_StartWiredTrade
 	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames

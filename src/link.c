@@ -1,7 +1,7 @@
 #include "global.h"
 #include "m4a.h"
 #include "malloc.h"
-#include "reset_save_heap.h"
+#include "reload_save.h"
 #include "save.h"
 #include "bg.h"
 #include "window.h"
@@ -108,7 +108,7 @@ static EWRAM_DATA u16 sTimeOutCounter = 0;
 EWRAM_DATA struct LinkPlayer gLocalLinkPlayer = {};
 EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
 static EWRAM_DATA struct LinkPlayer sSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
-EWRAM_DATA struct {
+static EWRAM_DATA struct {
     u32 status;
     u8 lastRecvQueueCount;
     u8 lastSendQueueCount;
@@ -140,7 +140,7 @@ static void LinkCB_WaitCloseLinkWithJP(void);
 static void LinkCB_Standby(void);
 static void LinkCB_StandbyForAll(void);
 
-static void CheckErrorStatus(void);
+static void TrySetLinkErrorBuffer(void);
 static void CB2_PrintErrorMessage(void);
 static bool8 IsSioMultiMaster(void);
 static void SetWirelessCommType0_Internal(void);
@@ -166,11 +166,11 @@ static const u16 sLinkTestDigitsGfx[] = INCBIN_U16("graphics/interface/link_test
 static const u8 sUnusedTransparentWhite[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE}");
 static const u16 sCommErrorBg_Gfx[] = INCBIN_U16("graphics/interface/comm_error_bg.4bpp");
 static const struct BlockRequest sBlockRequests[] = {
-    {gBlockSendBuffer, 200},
-    {gBlockSendBuffer, 200},
-    {gBlockSendBuffer, 100},
-    {gBlockSendBuffer, 220},
-    {gBlockSendBuffer,  40}
+    [BLOCK_REQ_SIZE_NONE] = {gBlockSendBuffer, 200},
+    [BLOCK_REQ_SIZE_200]  = {gBlockSendBuffer, 200},
+    [BLOCK_REQ_SIZE_100]  = {gBlockSendBuffer, 100},
+    [BLOCK_REQ_SIZE_220]  = {gBlockSendBuffer, 220},
+    [BLOCK_REQ_SIZE_40]   = {gBlockSendBuffer,  40}
 };
 static const u8 sBGControlRegs[] = {
     REG_OFFSET_BG0CNT,
@@ -394,9 +394,7 @@ void CloseLink(void)
 {
     gReceivedRemoteLinkPlayers = FALSE;
     if (gWirelessCommType)
-    {
         LinkRfu_Shutdown();
-    }
     sLinkOpen = FALSE;
     DisableSerial();
 }
@@ -485,22 +483,18 @@ u16 LinkMain2(const u16 *heldKeys)
     u8 i;
 
     if (!sLinkOpen)
-    {
         return 0;
-    }
+
     for (i = 0; i < CMD_LENGTH; i++)
-    {
         gSendCmd[i] = 0;
-    }
+
     gLinkHeldKeys = *heldKeys;
     if (gLinkStatus & LINK_STAT_CONN_ESTABLISHED)
     {
         ProcessRecvCmds(SIO_MULTI_CNT->id);
         if (gLinkCallback != NULL)
-        {
             gLinkCallback();
-        }
-        CheckErrorStatus();
+        TrySetLinkErrorBuffer();
     }
     return gLinkStatus;
 }
@@ -1029,7 +1023,7 @@ u8 GetMultiplayerId(void)
     return SIO_MULTI_CNT->id;
 }
 
-u8 bitmask_all_link_players_but_self(void)
+u8 BitmaskAllOtherLinkPlayers(void)
 {
     u8 mpId;
 
@@ -1563,10 +1557,13 @@ static void LinkCB_StandbyForAll(void)
     }
 }
 
-static void CheckErrorStatus(void)
+static void TrySetLinkErrorBuffer(void)
 {
+    // Check if a link error has occurred
     if (sLinkOpen && EXTRACT_LINK_ERRORS(gLinkStatus))
     {
+        // Link error has occurred, handle message details if
+        // necessary, then stop the link.
         if (!gSuppressLinkErrorMessage)
         {
             sLinkErrorBuffer.status = gLinkStatus;
@@ -1579,7 +1576,7 @@ static void CheckErrorStatus(void)
     }
 }
 
-void BufferLinkErrorInfo(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected)
+void SetLinkErrorBuffer(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected)
 {
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
@@ -1709,7 +1706,7 @@ static void CB2_PrintErrorMessage(void)
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
                 sLinkErrorBuffer.disconnected = FALSE;
-                sub_81700F8();
+                ReloadSave();
             }
         }
         else if (gWirelessCommType == 2)
@@ -1731,12 +1728,12 @@ static void CB2_PrintErrorMessage(void)
 
 bool8 GetSioMultiSI(void)
 {
-    return (REG_SIOCNT & 0x04) != 0;
+    return (REG_SIOCNT & SIO_MULTI_SI) != 0;
 }
 
 static bool8 IsSioMultiMaster(void)
 {
-    return (REG_SIOCNT & 0x8) && !(REG_SIOCNT & 0x04);
+    return (REG_SIOCNT & SIO_MULTI_SD) && (REG_SIOCNT & SIO_MULTI_SI) == 0;
 }
 
 bool8 IsLinkConnectionEstablished(void)
@@ -1782,10 +1779,10 @@ void LinkPlayerFromBlock(u32 who)
         SetMainCallback2(CB2_LinkError);
 }
 
+// When this function returns TRUE the callbacks are skipped
 bool8 HandleLinkConnection(void)
 {
-    bool32 r4;
-    bool32 r5;
+    bool32 main1Failed, main2Failed;
 
     if (gWirelessCommType == 0)
     {
@@ -1796,11 +1793,13 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        r4 = sub_8010EC0();
-        r5 = sub_8010F1C();
+        main1Failed = RfuMain1(); // Always returns FALSE
+        main2Failed = RfuMain2();
         if (IsSendingKeysOverCable() == TRUE)
         {
-            if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
+            // This will never be reached.
+            // IsSendingKeysOverCable is always FALSE for wireless communication
+            if (main1Failed == TRUE || IsRfuRecvQueueEmpty() || main2Failed)
                 return TRUE;
         }
     }
@@ -1916,9 +1915,7 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
                     break;
                 case 1:
                     if (gLink.isMaster == LINK_MASTER && gLink.playerCount > 1)
-                    {
                         gLink.handshakeAsMaster = TRUE;
-                    }
                     break;
                 case 2:
                     gLink.state = LINK_STATE_START0;
@@ -1974,20 +1971,14 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
     }
 
     if (gLink.lag == LAG_MASTER)
-    {
         retVal |= LINK_STAT_ERROR_LAG_MASTER;
-    }
 
     if (gLink.localId >= MAX_LINK_PLAYERS)
-    {
         retVal |= LINK_STAT_ERROR_INVALID_ID;
-    }
 
     retVal2 = retVal;
     if (gLink.lag == LAG_SLAVE)
-    {
         retVal2 |= LINK_STAT_ERROR_LAG_SLAVE;
-    }
 
     return retVal2;
 }

@@ -185,9 +185,9 @@ static bool32 CheckLinkCanceled(u8 taskId)
     return FALSE;
 }
 
-static bool32 sub_80B25CC(u8 taskId)
+static bool32 CheckSioErrored(u8 taskId)
 {
-    if (GetSioMultiSI() == 1)
+    if (GetSioMultiSI() == TRUE)
     {
         gTasks[taskId].func = Task_LinkupConnectionError;
         return TRUE;
@@ -196,12 +196,12 @@ static bool32 sub_80B25CC(u8 taskId)
 }
 
 // Unused
-static void sub_80B2600(u8 taskId)
+static void Task_DelayedBlockRequest(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
     {
-        SendBlockRequest(2);
+        SendBlockRequest(BLOCK_REQ_SIZE_100);
         DestroyTask(taskId);
     }
 }
@@ -252,7 +252,7 @@ static void Task_LinkupAwaitConnection(u8 taskId)
 static void Task_LinkupConfirmWhenReady(u8 taskId)
 {
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
-     || sub_80B25CC(taskId) == TRUE
+     || CheckSioErrored(taskId) == TRUE
      || CheckLinkErrored(taskId) == TRUE)
         return;
 
@@ -269,7 +269,7 @@ static void Task_LinkupAwaitConfirmation(u8 taskId)
     s32 linkPlayerCount = GetLinkPlayerCount_2();
 
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
-     || sub_80B25CC(taskId) == TRUE
+     || CheckSioErrored(taskId) == TRUE
      || CheckLinkErrored(taskId) == TRUE)
         return;
 
@@ -291,7 +291,7 @@ static void Task_LinkupAwaitConfirmation(u8 taskId)
 static void Task_LinkupTryConfirmation(u8 taskId)
 {
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
-     || sub_80B25CC(taskId) == TRUE
+     || CheckSioErrored(taskId) == TRUE
      || CheckLinkErrored(taskId) == TRUE)
         return;
 
@@ -424,7 +424,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
         card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
-        SendBlockRequest(2);
+        SendBlockRequest(BLOCK_REQ_SIZE_100);
     }
 }
 
@@ -1172,9 +1172,11 @@ static void CreateTask_StartWiredTrade(void)
     CreateTask(Task_StartWiredTrade, 80);
 }
 
-void nullsub_37(void)
+// Unused, implemented in Ruby/Sapphire
+void Script_StartWiredTrade(void)
 {
-
+    // CreateTask_StartWiredTrade();
+    // ScriptContext1_Stop();
 }
 
 void ColosseumPlayerSpotTriggered(void)
@@ -1251,7 +1253,7 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
 
 #undef tTimer
 
-static void sub_80B3AAC(u8 taskId)
+static void Task_WaitExitToScript(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -1261,10 +1263,10 @@ static void sub_80B3AAC(u8 taskId)
 }
 
 // Unused
-static void sub_80B3AD0(u8 taskId)
+static void ExitLinkToScript(u8 taskId)
 {
     SetCloseLinkCallback();
-    gTasks[taskId].func = sub_80B3AAC;
+    gTasks[taskId].func = Task_WaitExitToScript;
 }
 
 #define tTimer data[1]
