@@ -8427,10 +8427,10 @@ static void Cmd_various(void)
         }
         return;
     case VARIOUS_JUMP_IF_SPECIES:
-        if (gBattleMons[gBattlerAttacker].species == gBattlescriptCurrInstr[3])
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
+        if (gBattleMons[gActiveBattler].species == T1_READ_16(gBattlescriptCurrInstr + 3))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
         else
-            gBattlescriptCurrInstr += 8;
+            gBattlescriptCurrInstr += 9;
         return;
     }
 

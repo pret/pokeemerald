@@ -1771,7 +1771,7 @@
 
 	.macro jumpifspecies battler:req, species:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_SPECIES
-	.byte \species
+	.2byte \species
 	.4byte \ptr
 	.endm
 
