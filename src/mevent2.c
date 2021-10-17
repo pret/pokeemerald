@@ -83,9 +83,9 @@ bool32 ValidateSavedWonderNews(void)
     return TRUE;
 }
 
-static bool32 ValidateWonderNews(const struct WonderNews *data)
+static bool32 ValidateWonderNews(const struct WonderNews *news)
 {
-    if (data->unk_00 == 0)
+    if (news->id == 0)
         return FALSE;
 
     return TRUE;
@@ -93,8 +93,8 @@ static bool32 ValidateWonderNews(const struct WonderNews *data)
 
 bool32 IsSendingSavedWonderNewsAllowed(void)
 {
-    const struct WonderNews *data = &gSaveBlock1Ptr->mysteryGift.news;
-    if (data->sendType == SEND_TYPE_DISALLOWED)
+    const struct WonderNews *news = &gSaveBlock1Ptr->mysteryGift.news;
+    if (news->sendType == SEND_TYPE_DISALLOWED)
         return FALSE;
 
     return TRUE;
@@ -177,7 +177,7 @@ static bool32 ValidateWonderCard(const struct WonderCard *card)
         return FALSE;
     if (card->bgType >= NUM_WONDER_BGS)
         return FALSE;
-    if (card->maxStamps > MAX_CARD_STAMPS)
+    if (card->maxStamps > MAX_STAMP_CARD_STAMPS)
         return FALSE;
 
     return TRUE;
@@ -339,23 +339,29 @@ bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
     return FALSE;
 }
 
+#define GAME_DATA_VALID_VAR 0x101
+#define GAME_DATA_VALID_GIFT_TYPE_1 (1 << 2)
+#define GAME_DATA_VALID_GIFT_TYPE_2 (1 << 9)
+
 void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 isWonderNews)
 {
     int i;
     CpuFill32(0, data, sizeof(*data));
-    data->unk_00 = 0x101;
-    data->unk_04 = 1;
-    data->unk_08 = 1;
+    data->validationVar = GAME_DATA_VALID_VAR;
+    data->validationFlag1 = 1;
+    data->validationFlag2 = 1;
 
     if (isWonderNews)
     {
-        data->unk_0C = 5;
-        data->unk_10 = 0x0201;
+        // Despite setting these for News, they are
+        // only ever checked for Cards
+        data->validationGiftType1 = GAME_DATA_VALID_GIFT_TYPE_1 | 1;
+        data->validationGiftType2 = GAME_DATA_VALID_GIFT_TYPE_2 | 1;
     }
     else // Wonder Card
     {
-        data->unk_0C = 4;
-        data->unk_10 = 0x0200;
+        data->validationGiftType1 = GAME_DATA_VALID_GIFT_TYPE_1;
+        data->validationGiftType2 = GAME_DATA_VALID_GIFT_TYPE_2;
     }
 
     if (ValidateSavedWonderCard())
@@ -383,21 +389,21 @@ void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 i
 
 bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *data, bool32 forNews)
 {
-    if (data->unk_00 != 0x101)
+    if (data->validationVar != GAME_DATA_VALID_VAR)
         return FALSE;
 
-    if (!(data->unk_04 & 1))
+    if (!(data->validationFlag1 & 1))
         return FALSE;
 
-    if (!(data->unk_08 & 1))
+    if (!(data->validationFlag2 & 1))
         return FALSE;
 
     if (!forNews)
     {
-        if (!(data->unk_0C & 4))
+        if (!(data->validationGiftType1 & GAME_DATA_VALID_GIFT_TYPE_1))
             return FALSE;
 
-        if (!(data->unk_10 & 0x380))
+        if (!(data->validationGiftType2 & (GAME_DATA_VALID_GIFT_TYPE_2 | 0x180)))
             return FALSE;
     }
 
@@ -581,7 +587,7 @@ bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId)
     return TRUE;
 }
 
-void TryIncrementMysteryGiftStat(u32 stat, u32 trainerId)
+void MysteryGift_TryIncrementStat(u32 stat, u32 trainerId)
 {
     if (sStatsEnabled)
     {

@@ -6,11 +6,13 @@
 
 struct MysteryGiftLinkGameData
 {
-    u32 unk_00;
-    u16 unk_04;
-    u32 unk_08;
-    u16 unk_0C;
-    u32 unk_10;
+    // It's possible these first 5 fields had some other meaningful purpose,
+    // but they are only ever set when creating this data and read to validate it.
+    u32 validationVar;
+    u16 validationFlag1;
+    u32 validationFlag2;
+    u16 validationGiftType1;
+    u32 validationGiftType2;
     u16 flagId;
     u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
     struct WonderCardMetadata cardMetadata;
@@ -50,6 +52,6 @@ u16 MysteryGift_GetCardStatFromLinkData(const struct MysteryGiftLinkGameData *da
 u16 MysteryGift_GetCardStat(u32 stat);
 void MysteryGift_DisableStats(void);
 bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId);
-void TryIncrementMysteryGiftStat(u32 stat, u32 trainerId);
+void MysteryGift_TryIncrementStat(u32 stat, u32 trainerId);
 
 #endif //GUARD_MEVENT_H

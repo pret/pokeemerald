@@ -847,7 +847,7 @@ struct WonderNewsMetadata
 
 struct WonderNews
 {
-    u16 unk_00;
+    u16 id;
     u8 sendType; // SEND_TYPE_*
     u8 bgType;
     u8 titleText[WONDER_NEWS_TEXT_LENGTH];
@@ -876,7 +876,7 @@ struct WonderCardMetadata
     u16 battlesLost;
     u16 numTrades;
     u16 iconSpecies;
-    u16 stampData[2][7];
+    u16 stampData[2][MAX_STAMP_CARD_STAMPS]; // First element is STAMP_SPECIES, second is STAMP_ID
 };
 
 struct MysteryGiftSave

@@ -13,11 +13,13 @@
 #define CARD_STAT_NUM_STAMPS    3
 #define CARD_STAT_MAX_STAMPS    4
 
+// Values for the type field of Wonder Card
 #define CARD_TYPE_GIFT       0 // Normal "Wonder Card"
 #define CARD_TYPE_STAMP      1 // "Stamp Card"
 #define CARD_TYPE_LINK_STAT  2 // Referred to as the "Battle Card", shows battle and trade stats
 #define CARD_TYPE_COUNT      3
 
+// Values for the sendType field of Wonder Card/News
 #define SEND_TYPE_DISALLOWED     0
 #define SEND_TYPE_ALLOWED        1
 #define SEND_TYPE_ALLOWED_ALWAYS 2
@@ -27,9 +29,8 @@
 #define HAS_SAME_CARD 1
 #define HAS_DIFF_CARD 2
 
+// The number of battles needed to be recorded on a Battle Card to win a prize
 #define REQUIRED_CARD_BATTLES 3
-
-#define MAX_CARD_STAMPS 7
 
 // Stamps are 32 bits. The first 16 bits are the species
 // and the second 16 bits are a number (presumably an ID of some kind)
