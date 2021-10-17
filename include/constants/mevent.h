@@ -13,7 +13,7 @@
 #define CARD_STAT_NUM_STAMPS    3
 #define CARD_STAT_MAX_STAMPS    4
 
-#define CARD_TYPE_GIFT       0
+#define CARD_TYPE_GIFT       0 // Normal "Wonder Card"
 #define CARD_TYPE_STAMP      1 // "Stamp Card"
 #define CARD_TYPE_LINK_STAT  2 // Referred to as the "Battle Card", shows battle and trade stats
 #define CARD_TYPE_COUNT      3

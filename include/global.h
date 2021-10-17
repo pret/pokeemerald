@@ -850,24 +850,24 @@ struct WonderNews
     u16 unk_00;
     u8 sendType; // SEND_TYPE_*
     u8 bgType;
-    u8 unk_04[WONDER_NEWS_TEXT_LENGTH];
-    u8 unk_2C[10][WONDER_NEWS_TEXT_LENGTH];
+    u8 titleText[WONDER_NEWS_TEXT_LENGTH];
+    u8 bodyText[WONDER_NEWS_BODY_TEXT_LINES][WONDER_NEWS_TEXT_LENGTH];
 };
 
 struct WonderCard
 {
-    u16 flagId;
+    u16 flagId; // Event flag (sReceivedGiftFlags) + WONDER_CARD_FLAG_OFFSET
     u16 iconSpecies;
-    u32 unk_04;
+    u32 idNumber;
     u8 type:2; // CARD_TYPE_*
     u8 bgType:4;
     u8 sendType:2; // SEND_TYPE_*
     u8 maxStamps;
-    u8 unk_0A[WONDER_CARD_TEXT_LENGTH];
-    u8 unk_32[WONDER_CARD_TEXT_LENGTH];
-    u8 unk_5A[4][WONDER_CARD_TEXT_LENGTH];
-    u8 unk_FA[WONDER_CARD_TEXT_LENGTH];
-    u8 unk_122[WONDER_CARD_TEXT_LENGTH];
+    u8 titleText[WONDER_CARD_TEXT_LENGTH];
+    u8 subtitleText[WONDER_CARD_TEXT_LENGTH];
+    u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH];
+    u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH];
+    u8 footerLine2Text[WONDER_CARD_TEXT_LENGTH];
 };
 
 struct WonderCardMetadata
