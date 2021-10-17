@@ -387,7 +387,7 @@ void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 i
     data->romHeaderSoftwareVersion = RomHeaderSoftwareVersion;
 }
 
-bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *data, bool32 forNews)
+bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *data, bool32 isWonderNews)
 {
     if (data->validationVar != GAME_DATA_VALID_VAR)
         return FALSE;
@@ -398,7 +398,7 @@ bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *da
     if (!(data->validationFlag2 & 1))
         return FALSE;
 
-    if (!forNews)
+    if (!isWonderNews)
     {
         if (!(data->validationGiftType1 & GAME_DATA_VALID_GIFT_TYPE_1))
             return FALSE;

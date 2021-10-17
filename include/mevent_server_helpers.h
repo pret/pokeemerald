@@ -34,16 +34,16 @@ struct MysteryGiftLink
     u16 sendCounter;
     u16 sendCRC;
     u16 sendSize;
-    void * recvBfr;
-    const void * sendBfr;
+    void * recvBuffer;
+    const void * sendBuffer;
     u32 (*recvFunc)(struct MysteryGiftLink *);
     u32 (*sendFunc)(struct MysteryGiftLink *);
 };
 
-void MysteryGiftLink_Init(struct MysteryGiftLink *, u32, u32);
-void MysteryGiftLink_InitSend(struct MysteryGiftLink * manager, u32 ident, const void * src, u32 size);
-bool32 MysteryGiftLink_Recv(struct MysteryGiftLink * manager);
-bool32 MysteryGiftLink_Send(struct MysteryGiftLink * manager);
-void MysteryGiftLink_InitRecv(struct MysteryGiftLink *, u32, void *);
+void MysteryGiftLink_Init(struct MysteryGiftLink * link, u32 sendPlayerId, u32 recvPlayerId);
+void MysteryGiftLink_InitSend(struct MysteryGiftLink * link, u32 ident, const void * src, u32 size);
+bool32 MysteryGiftLink_Recv(struct MysteryGiftLink * link);
+bool32 MysteryGiftLink_Send(struct MysteryGiftLink * link);
+void MysteryGiftLink_InitRecv(struct MysteryGiftLink * link, u32 ident, void * dest);
 
 #endif //GUARD_MEVENT_SERVER_HELPERS_H

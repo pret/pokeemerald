@@ -273,11 +273,11 @@ s32 WonderCard_Enter(void)
         sWonderCardData->enterExitState = 0;
         return 1;
     }
-    ++sWonderCardData->enterExitState;
+    sWonderCardData->enterExitState++;
     return 0;
 }
 
-s32 WonderCard_Exit(bool32 flag)
+s32 WonderCard_Exit(bool32 useCancel)
 {
     if (sWonderCardData == NULL)
         return -1;
@@ -310,7 +310,7 @@ s32 WonderCard_Exit(bool32 flag)
         FreeMonIconPalettes();
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
+        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
         CopyBgTilemapBufferToVram(0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
@@ -320,7 +320,7 @@ s32 WonderCard_Exit(bool32 flag)
         sWonderCardData->enterExitState = 0;
         return 1;
     }
-    ++sWonderCardData->enterExitState;
+    sWonderCardData->enterExitState++;
     return 0;
 }
 
@@ -737,11 +737,11 @@ s32 WonderNews_Enter(void)
         return 1;
     }
 
-    ++sWonderNewsData->enterExitState;
+    sWonderNewsData->enterExitState++;
     return 0;
 }
 
-s32 WonderNews_Exit(bool32 flag)
+s32 WonderNews_Exit(bool32 useCancel)
 {
     if (sWonderNewsData == NULL)
         return -1;
@@ -786,7 +786,7 @@ s32 WonderNews_Exit(bool32 flag)
         }
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
+        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
         MG_DrawCheckerboardPattern(3);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);
@@ -798,7 +798,7 @@ s32 WonderNews_Exit(bool32 flag)
         sWonderNewsData->enterExitState = 0;
         return 1;
     }
-    ++sWonderNewsData->enterExitState;
+    sWonderNewsData->enterExitState++;
     return 0;
 }
 
@@ -872,12 +872,12 @@ static void BufferNewsText(void)
     sWonderNewsData->titleText[WONDER_NEWS_TEXT_LENGTH] = EOS;
 
     // Copy body text
-    for (; i < WONDER_NEWS_BODY_TEXT_LINES; ++i)
+    for (; i < WONDER_NEWS_BODY_TEXT_LINES; i++)
     {
         memcpy(sWonderNewsData->bodyText[i], sWonderNewsData->news.bodyText[i], WONDER_NEWS_TEXT_LENGTH);
         sWonderNewsData->bodyText[i][WONDER_NEWS_TEXT_LENGTH] = EOS;
         if (i > 7 && sWonderNewsData->bodyText[i][0] != EOS)
-            ++sWonderNewsData->scrollEnd;
+            sWonderNewsData->scrollEnd++;
     }
     sWonderNewsData->arrowsTemplate = sNews_ArrowsTemplate;
     sWonderNewsData->arrowsTemplate.fullyDownThreshold = sWonderNewsData->scrollEnd;
@@ -899,7 +899,7 @@ static void DrawNewsWindows(void)
     AddTextPrinterParameterized3(sWonderNewsData->windowIds[NEWS_WIN_TITLE], 3, x, 6, sNews_TextColorTable[sWonderNewsData->gfx->titleTextPal], 0, sWonderNewsData->titleText);
     
     // Print body text
-    for (; i < WONDER_NEWS_BODY_TEXT_LINES; ++i)
+    for (; i < WONDER_NEWS_BODY_TEXT_LINES; i++)
         AddTextPrinterParameterized3(sWonderNewsData->windowIds[NEWS_WIN_BODY], 3, 0,
                                      16 * i + 2,
                                      sNews_TextColorTable[sWonderNewsData->gfx->bodyTextPal],
@@ -927,9 +927,9 @@ static void UpdateNewsScroll(void)
     if (sWonderNewsData->scrollTotal > 15)
     {
         if (sWonderNewsData->scrollingDown)
-            ++sWonderNewsData->scrollOffset;
+            sWonderNewsData->scrollOffset++;
         else
-            --sWonderNewsData->scrollOffset;
+            sWonderNewsData->scrollOffset--;
         sWonderNewsData->scrolling = FALSE;
         sWonderNewsData->scrollTotal = 0;
     }

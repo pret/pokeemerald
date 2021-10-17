@@ -47,8 +47,8 @@ void MysteryGiftLink_Init(struct MysteryGiftLink * link, u32 sendPlayerId, u32 r
     link->recvCRC = 0;
     link->recvSize = 0;
     link->recvCounter = 0;
-    link->sendBfr = NULL;
-    link->recvBfr = NULL;
+    link->sendBuffer = NULL;
+    link->recvBuffer = NULL;
     link->sendFunc = MGL_Send;
     link->recvFunc = MGL_Receive;
 }
@@ -63,7 +63,7 @@ void MysteryGiftLink_InitSend(struct MysteryGiftLink * link, u32 ident, const vo
         link->sendSize = size;
     else
         link->sendSize = MG_LINK_BUFFER_SIZE;
-    link->sendBfr = src;
+    link->sendBuffer = src;
 }
 
 void MysteryGiftLink_InitRecv(struct MysteryGiftLink * link, u32 ident, void * dest)
@@ -73,7 +73,7 @@ void MysteryGiftLink_InitRecv(struct MysteryGiftLink * link, u32 ident, void * d
     link->recvCounter = 0;
     link->recvCRC = 0;
     link->recvSize = 0;
-    link->recvBfr = dest;
+    link->recvBuffer = dest;
 }
 
 static void MGL_ReceiveBlock(u32 playerId, void * dest, size_t size)
@@ -130,20 +130,20 @@ static bool32 MGL_Receive(struct MysteryGiftLink * link)
             size_t blocksize = link->recvCounter * 252;
             if (link->recvSize - blocksize <= 252)
             {
-                MGL_ReceiveBlock(link->recvPlayerId, link->recvBfr + blocksize, link->recvSize - blocksize);
+                MGL_ReceiveBlock(link->recvPlayerId, link->recvBuffer + blocksize, link->recvSize - blocksize);
                 link->recvCounter++;
                 link->state++;
             }
             else
             {
-                MGL_ReceiveBlock(link->recvPlayerId, link->recvBfr + blocksize, 252);
+                MGL_ReceiveBlock(link->recvPlayerId, link->recvBuffer + blocksize, 252);
                 link->recvCounter++;
             }
             MGL_ResetReceived(link->recvPlayerId);
         }
         break;
     case 2:
-        if (CalcCRC16WithTable(link->recvBfr, link->recvSize) != link->recvCRC)
+        if (CalcCRC16WithTable(link->recvBuffer, link->recvSize) != link->recvCRC)
         {
             LinkRfu_FatalError();
             return FALSE;
@@ -170,7 +170,7 @@ static bool32 MGL_Send(struct MysteryGiftLink * link)
         {
             header.ident = link->sendIdent;
             header.size = link->sendSize;
-            header.crc = CalcCRC16WithTable(link->sendBfr, link->sendSize);
+            header.crc = CalcCRC16WithTable(link->sendBuffer, link->sendSize);
             link->sendCRC = header.crc;
             link->sendCounter = 0;
             SendBlock(0, &header, sizeof(header));
@@ -187,13 +187,13 @@ static bool32 MGL_Send(struct MysteryGiftLink * link)
                 blocksize = 252 * link->sendCounter;
                 if (link->sendSize - blocksize <= 252)
                 {
-                    SendBlock(0, link->sendBfr + blocksize, link->sendSize - blocksize);
+                    SendBlock(0, link->sendBuffer + blocksize, link->sendSize - blocksize);
                     link->sendCounter++;
                     link->state++;
                 }
                 else
                 {
-                    SendBlock(0, link->sendBfr + blocksize, 252);
+                    SendBlock(0, link->sendBuffer + blocksize, 252);
                     link->sendCounter++;
                 }
             }
@@ -202,7 +202,7 @@ static bool32 MGL_Send(struct MysteryGiftLink * link)
     case 2:
         if (IsLinkTaskFinished())
         {
-            if (CalcCRC16WithTable(link->sendBfr, link->sendSize) != link->sendCRC)
+            if (CalcCRC16WithTable(link->sendBuffer, link->sendSize) != link->sendCRC)
                 LinkRfu_FatalError();
             else
                 link->state++;

@@ -474,7 +474,7 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
     SetMainCallback2(CB2_InitTitleScreen);
 }
 
-void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 usePickOkCancel)
+void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
 {
     const u8 * header;
     const u8 * options;
@@ -482,7 +482,7 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 usePickOkCancel)
     if (!isEReader)
     {
         header = gText_MysteryGift;
-        options = !usePickOkCancel ? gText_PickOKExit : gText_PickOKCancel;
+        options = !useCancel ? gText_PickOKExit : gText_PickOKCancel;
     }
     else
     {
@@ -816,11 +816,11 @@ static bool32 ClearSavedNewsOrCard(bool32 isWonderNews)
     return TRUE;
 }
 
-static bool32 ExitWonderCardOrNews(bool32 isWonderNews, bool32 arg1)
+static bool32 ExitWonderCardOrNews(bool32 isWonderNews, bool32 useCancel)
 {
     if (!isWonderNews)
     {
-        if (WonderCard_Exit(arg1))
+        if (WonderCard_Exit(useCancel))
         {
             WonderCard_Destroy();
             return TRUE;
@@ -832,7 +832,7 @@ static bool32 ExitWonderCardOrNews(bool32 isWonderNews, bool32 arg1)
     }
     else
     {
-        if (WonderNews_Exit(arg1))
+        if (WonderNews_Exit(useCancel))
         {
             WonderNews_Destroy();
             return TRUE;
@@ -1486,7 +1486,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_TOSS:
-        if (ExitWonderCardOrNews(data->isWonderNews, 1))
+        if (ExitWonderCardOrNews(data->isWonderNews, TRUE))
         {
             ClearSavedNewsOrCard(data->isWonderNews);
             data->state = MG_STATE_TOSS_SAVE;
@@ -1504,15 +1504,15 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_GIFT_INPUT_EXIT:
-        if (ExitWonderCardOrNews(data->isWonderNews, 0))
+        if (ExitWonderCardOrNews(data->isWonderNews, FALSE))
             data->state = MG_STATE_TO_MAIN_MENU;
         break;
     case MG_STATE_RECEIVE:
-        if (ExitWonderCardOrNews(data->isWonderNews, 1))
+        if (ExitWonderCardOrNews(data->isWonderNews, TRUE))
             data->state = MG_STATE_SOURCE_PROMPT;
         break;
     case MG_STATE_SEND:
-        if (ExitWonderCardOrNews(data->isWonderNews, 1))
+        if (ExitWonderCardOrNews(data->isWonderNews, TRUE))
         {
             switch (data->isWonderNews)
             {
