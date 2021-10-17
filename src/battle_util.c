@@ -7693,6 +7693,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #endif
         break;
     }
+    case EFFECT_GRAV_APPLE:
+        if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+            MulModifier(&basePower, UQ_4_12(1.5));
+        break;
     }
 
     // move-specific base power changes
@@ -7701,10 +7705,6 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     case MOVE_WATER_SHURIKEN:
         if (gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
             basePower = 20;
-        break;
-    case MOVE_GRAV_APPLE:
-        if (gFieldStatuses & STATUS_FIELD_GRAVITY)
-            basePower = 120;
         break;
     }
 
