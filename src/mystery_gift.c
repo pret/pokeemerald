@@ -32,15 +32,18 @@
 #include "mevent_server.h"
 #include "constants/cable_club.h"
 
-void bgid_upload_textbox_1(u8 bgId);
+#define LIST_MENU_TILE_NUM 10
+#define LIST_MENU_PAL_NUM 224
+
+static void LoadMysteryGiftTextboxBorder(u8 bgId);
 static void CreateMysteryGiftTask(void);
 static void Task_MysteryGift(u8 taskId);
 
-EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
+EWRAM_DATA static u8 sDownArrowCounterAndYCoordIdx[8] = {};
 EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
 
-static const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
-static const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
+static const u16 sTextboxBorder_Pal[] = INCBIN_U16("graphics/interface/mystery_gift_textbox_border.gbapal");
+static const u32 sTextboxBorder_Gfx[] = INCBIN_U32("graphics/interface/mystery_gift_textbox_border.4bpp.lz");
 
 struct MysteryGiftTaskData
 {
@@ -96,110 +99,110 @@ static const struct BgTemplate sBGTemplates[] = {
 
 static const struct WindowTemplate sMainWindows[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x00,
-        .tilemapTop = 0x00,
-        .width = 0x1e,
-        .height = 0x02,
-        .paletteNum = 0x0c,
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 12,
         .baseBlock = 0x0013
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x01,
-        .tilemapTop = 0x0f,
-        .width = 0x1c,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 15,
+        .width = 28,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x004f
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x00,
-        .tilemapTop = 0x0f,
-        .width = 0x1e,
-        .height = 0x05,
-        .paletteNum = 0x0d,
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 15,
+        .width = 30,
+        .height = 5,
+        .paletteNum = 13,
         .baseBlock = 0x004f
     },
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width28 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x0f,
-    .width = 0x1c,
-    .height = 0x04,
-    .paletteNum = 0x0c,
+static const struct WindowTemplate sWindowTemplate_YesNoMsg_Wide = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 28,
+    .height = 4,
+    .paletteNum = 12,
     .baseBlock = 0x00e5
 };
 
-static const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width20 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x0f,
-    .width = 0x14,
-    .height = 0x04,
-    .paletteNum = 0x0c,
+static const struct WindowTemplate sWindowTemplate_YesNoMsg = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 20,
+    .height = 4,
+    .paletteNum = 12,
     .baseBlock = 0x00e5
 };
 
-static const struct WindowTemplate sMysteryGiftMenuWindowTemplate = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x0f,
-    .width = 0x13,
-    .height = 0x04,
-    .paletteNum = 0x0c,
+static const struct WindowTemplate sWindowTemplate_GiftSelect = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 19,
+    .height = 4,
+    .paletteNum = 12,
     .baseBlock = 0x00e5
 };
 
 static const struct WindowTemplate sWindowTemplate_ThreeOptions = {
-    .bg = 0x00,
-    .tilemapLeft = 0x08,
-    .tilemapTop = 0x06,
-    .width = 0x0e,
-    .height = 0x06,
-    .paletteNum = 0x0c,
+    .bg = 0,
+    .tilemapLeft = 8,
+    .tilemapTop = 6,
+    .width = 14,
+    .height = 6,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
 static const struct WindowTemplate sWindowTemplate_YesNoBox = {
-    .bg = 0x00,
-    .tilemapLeft = 0x17,
-    .tilemapTop = 0x0f,
-    .width = 0x06,
-    .height = 0x04,
-    .paletteNum = 0x0c,
+    .bg = 0,
+    .tilemapLeft = 23,
+    .tilemapTop = 15,
+    .width = 6,
+    .height = 4,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
-static const struct WindowTemplate sWindowTemplate_7by8 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x16,
-    .tilemapTop = 0x0b,
-    .width = 0x07,
-    .height = 0x08,
-    .paletteNum = 0x0c,
+static const struct WindowTemplate sWindowTemplate_GiftSelect_3Options = {
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 11,
+    .width = 7,
+    .height = 8,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
-static const struct WindowTemplate sWindowTemplate_7by6 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x16,
-    .tilemapTop = 0x0d,
-    .width = 0x07,
-    .height = 0x06,
-    .paletteNum = 0x0c,
+static const struct WindowTemplate sWindowTemplate_GiftSelect_2Options = {
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 13,
+    .width = 7,
+    .height = 6,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
-static const struct WindowTemplate sWindowTemplate_7by4 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x16,
-    .tilemapTop = 0x0f,
-    .width = 0x07,
-    .height = 0x04,
-    .paletteNum = 0x0c,
+static const struct WindowTemplate sWindowTemplate_GiftSelect_1Option = {
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 15,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
@@ -240,24 +243,24 @@ static const struct ListMenuItem sListMenuItems_ReceiveSendToss[] = {
     { gText_Receive,  0 },
     { gText_Send,     1 },
     { gText_Toss,     2 },
-    { gText_Cancel2, -2 }
+    { gText_Cancel2, LIST_CANCEL }
 };
 
 static const struct ListMenuItem sListMenuItems_ReceiveToss[] = {
     { gText_Receive,  0 },
     { gText_Toss,     2 },
-    { gText_Cancel2, -2 }
+    { gText_Cancel2, LIST_CANCEL }
 };
 
 static const struct ListMenuItem sListMenuItems_ReceiveSend[] = {
     { gText_Receive,  0 },
     { gText_Send,     1 },
-    { gText_Cancel2, -2 }
+    { gText_Cancel2, LIST_CANCEL }
 };
 
 static const struct ListMenuItem sListMenuItems_Receive[] = {
     { gText_Receive,  0 },
-    { gText_Cancel2, -2 }
+    { gText_Cancel2, LIST_CANCEL }
 };
 
 static const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
@@ -351,9 +354,9 @@ static const u8 *const Unref_082F0710[] = {
     gText_ReturnToTitle
 };
 
-ALIGNED(2) const u8 sMG_Ereader_TextColor_1[]      = { 0, 1, 2 };
-ALIGNED(2) const u8 sMG_Ereader_TextColor_1_Copy[] = { 0, 1, 2 };
-ALIGNED(2) const u8 sMG_Ereader_TextColor_2[]      = { 1, 2, 3 };
+ALIGNED(2) static const u8 sTextColors_TopMenu[]      = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
+ALIGNED(2) static const u8 sTextColors_TopMenu_Copy[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
+ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[]  = { TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
 
 static void VBlankCB_MysteryGiftEReader(void)
 {
@@ -398,7 +401,7 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
 
-        bgid_upload_textbox_1(3);
+        LoadMysteryGiftTextboxBorder(3);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
@@ -408,7 +411,7 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         gMain.state++;
         break;
     case 1:
-        LoadPalette(gUnkTextboxBorderPal, 0, 0x20);
+        LoadPalette(sTextboxBorder_Pal, 0, 0x20);
         LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
         Menu_LoadStdPalAt(0xC0);
         LoadUserWindowBorderGfx(0, 0xA, 0xE0);
@@ -487,8 +490,8 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 usePickOkCancel)
         options = gJPText_DecideStop;
     }
 
-    AddTextPrinterParameterized4(0, 1, 4, 1, 0, 0, sMG_Ereader_TextColor_1, -1, header);
-    AddTextPrinterParameterized4(0, 0, GetStringRightAlignXOffset(0, options, 0xDE), 1, 0, 0, sMG_Ereader_TextColor_1, -1, options);
+    AddTextPrinterParameterized4(0, 1, 4, 1, 0, 0, sTextColors_TopMenu, TEXT_SPEED_FF, header);
+    AddTextPrinterParameterized4(0, 0, GetStringRightAlignXOffset(0, options, 0xDE), 1, 0, 0, sTextColors_TopMenu, TEXT_SPEED_FF, options);
     CopyWindowToVram(0, 2);
     PutWindowTilemap(0);
 }
@@ -516,7 +519,7 @@ void MG_DrawCheckerboardPattern(u32 bg)
     }
 }
 
-void ClearScreenInBg0(bool32 ignoreTopTwoRows)
+static void ClearScreenInBg0(bool32 ignoreTopTwoRows)
 {
     switch (ignoreTopTwoRows)
     {
@@ -547,6 +550,9 @@ static void ClearTextWindow(void)
     CopyWindowToVram(1, 1);
 }
 
+#define DOWN_ARROW_X 208
+#define DOWN_ARROW_Y 20
+
 bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
 {
     switch (*textState)
@@ -556,12 +562,12 @@ bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
         (*textState)++;
         break;
     case 1:
-        DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+        DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
         if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
             (*textState)++;
         break;
     case 2:
-        DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+        DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
         *textState = 0;
         ClearTextWindow();
         return TRUE;
@@ -574,15 +580,16 @@ bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
 
 static void HideDownArrow(void)
 {
-    DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+    DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
 }
 
 static void ShowDownArrow(void)
 {
-    DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+    DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
 }
 
-bool32 unref_HideDownArrowAndWaitButton(u8 * textState)
+// Unused
+static bool32 HideDownArrowAndWaitButton(u8 * textState)
 {
     switch (*textState)
     {
@@ -638,7 +645,7 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
     else
         windowTemplate.tilemapLeft = 0;
 
-    response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, 0x00A, 0xE0);
+    response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, LIST_MENU_TILE_NUM, LIST_MENU_PAL_NUM);
     if (response != LIST_NOTHING_CHOSEN)
     {
         ClearWindowTilemap(2);
@@ -655,11 +662,12 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
     switch (*textState)
     {
     case 0:
+        // Print question message
         StringExpandPlaceholders(gStringVar4, str);
         if (yesNoBoxPlacement == 0)
-            *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width28);
+            *windowId = AddWindow(&sWindowTemplate_YesNoMsg_Wide);
         else
-            *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width20);
+            *windowId = AddWindow(&sWindowTemplate_YesNoMsg);
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, 1, 0, 1, 0, 0, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
@@ -668,6 +676,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
         (*textState)++;
         break;
     case 1:
+        // Create Yes/No
         windowTemplate = sWindowTemplate_YesNoBox;
         if (yesNoBoxPlacement == 0)
             windowTemplate.tilemapTop = 9;
@@ -677,6 +686,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
         (*textState)++;
         break;
     case 2:
+        // Handle Yes/No input
         input = Menu_ProcessInputNoWrapClearOnChoose();
         if (input == MENU_B_PRESSED || input == 0 || input == 1)
         {
@@ -688,7 +698,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
             return input;
         }
         break;
-    case (u8)MENU_B_PRESSED:
+    case 0xFF:
         *textState = 0;
         rbox_fill_rectangle(*windowId);
         ClearWindowTilemap(*windowId);
@@ -701,7 +711,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
 }
 
 // Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
-static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
+static s32 HandleGiftSelectMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
     struct WindowTemplate windowTemplate;
     s32 input;
@@ -709,11 +719,12 @@ static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cann
     switch (*textState)
     {
     case 0:
+        // Print menu message
         if (!cannotToss)
             StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithCards);
         else
             StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithNews);
-        *windowId = AddWindow(&sMysteryGiftMenuWindowTemplate);
+        *windowId = AddWindow(&sWindowTemplate_GiftSelect);
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, 1, 0, 1, 0, 0, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
@@ -726,16 +737,16 @@ static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cann
         if (cannotSend)
         {
             if (!cannotToss)
-                input = DoMysteryGiftListMenu(&sWindowTemplate_7by6, &sListMenu_ReceiveToss, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_2Options, &sListMenu_ReceiveToss, 1, LIST_MENU_TILE_NUM, LIST_MENU_PAL_NUM);
             else
-                input = DoMysteryGiftListMenu(&sWindowTemplate_7by4, &sListMenu_Receive, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_1Option, &sListMenu_Receive, 1, LIST_MENU_TILE_NUM, LIST_MENU_PAL_NUM);
         }
         else
         {
             if (!cannotToss)
-                input = DoMysteryGiftListMenu(&sWindowTemplate_7by8, &sListMenu_ReceiveSendToss, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_3Options, &sListMenu_ReceiveSendToss, 1, LIST_MENU_TILE_NUM, LIST_MENU_PAL_NUM);
             else
-                input = DoMysteryGiftListMenu(&sWindowTemplate_7by6, &sListMenu_ReceiveSend, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_2Options, &sListMenu_ReceiveSend, 1, LIST_MENU_TILE_NUM, LIST_MENU_PAL_NUM);
         }
         if (input != LIST_NOTHING_CHOSEN)
         {
@@ -1414,16 +1425,16 @@ static void Task_MysteryGift(u8 taskId)
         if (!data->isWonderNews)
         {
             if (IsSendingSavedWonderCardAllowed())
-                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, FALSE);
+                result = HandleGiftSelectMenu(&data->textState, &data->var, data->isWonderNews, FALSE);
             else
-                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, TRUE);
+                result = HandleGiftSelectMenu(&data->textState, &data->var, data->isWonderNews, TRUE);
         }
         else
         {
             if (IsSendingSavedWonderNewsAllowed())
-                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, FALSE);
+                result = HandleGiftSelectMenu(&data->textState, &data->var, data->isWonderNews, FALSE);
             else
-                result = HandleMysteryGiftListMenu(&data->textState, &data->var, data->isWonderNews, TRUE);
+                result = HandleGiftSelectMenu(&data->textState, &data->var, data->isWonderNews, TRUE);
         }
         switch (result)
         {
@@ -1519,12 +1530,12 @@ static void Task_MysteryGift(u8 taskId)
     case MG_STATE_SERVER_LINK_WAIT:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            ClearScreenInBg0(1);
+            ClearScreenInBg0(TRUE);
             data->state = MG_STATE_SERVER_LINK_START;
         }
         else if (gSpecialVar_Result == LINKUP_FAILED)
         {
-            ClearScreenInBg0(1);
+            ClearScreenInBg0(TRUE);
             data->state = MG_STATE_LOAD_GIFT;
         }
         break;
@@ -1601,7 +1612,7 @@ u16 GetMysteryGiftBaseBlock(void)
     return 0x1A9;
 }
 
-void bgid_upload_textbox_1(u8 bgId)
+static void LoadMysteryGiftTextboxBorder(u8 bgId)
 {
-    DecompressAndLoadBgGfxUsingHeap(bgId, gUnkTextboxBorderGfx, 0x100, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(bgId, sTextboxBorder_Gfx, 0x100, 0, 0);
 }
