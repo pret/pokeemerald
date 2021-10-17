@@ -1371,9 +1371,9 @@ static void Task_MysteryGift(u8 taskId)
             if (data->msgId == CLI_MSG_NEWS_RECEIVED)
             {
                 if (data->sourceIsFriend == TRUE)
-                    GenerateRandomWonderNews(1);
+                    GenerateRandomWonderNews(WONDER_NEWS_RECV_FRIEND);
                 else
-                    GenerateRandomWonderNews(2);
+                    GenerateRandomWonderNews(WONDER_NEWS_RECV_WIRELESS);
             }
             if (!successMsg)
             {
@@ -1580,7 +1580,7 @@ static void Task_MysteryGift(u8 taskId)
         {
             if (data->sourceIsFriend == TRUE && data->msgId == SVR_MSG_NEWS_SENT)
             {
-                GenerateRandomWonderNews(3);
+                GenerateRandomWonderNews(WONDER_NEWS_SENT);
                 data->state = MG_STATE_SAVE_LOAD_GIFT;
             }
             else

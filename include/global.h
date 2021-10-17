@@ -839,10 +839,10 @@ struct SaveTrainerHill
 
 struct WonderNewsMetadata
 {
-    u8 unk_0_0:2;
-    u8 unk_0_2:3;
-    u8 unk_0_5:3;
-    u8 unk_1;
+    u8 newsType:2;
+    u8 sentCounter:3;
+    u8 getCounter:3;
+    u8 rand;
 };
 
 struct WonderNews
