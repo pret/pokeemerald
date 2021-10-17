@@ -381,10 +381,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTripleHit               @ EFFECT_TRIPLE_HIT
 	.4byte BattleScript_EffectRecoilHP25              @ EFFECT_RECOIL_HP_25
 	.4byte BattleScript_EffectStuffCheeks             @ EFFECT_STUFF_CHEEKS
-	.4byte BattleScript_EffectGravApple               @ EFFECT_GRAV_APPLE
-
-BattleScript_EffectGravApple:
-	goto BattleScript_EffectAttackerDefenseDownHit
+	.4byte BattleScript_EffectDefenseDownHit          @ EFFECT_GRAV_APPLE
 
 BattleScript_EffectStuffCheeks::
 	attackcanceler
