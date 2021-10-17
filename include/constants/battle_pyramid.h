@@ -4,9 +4,6 @@
 #define TOTAL_ROUNDS 20
 #define PICKUP_ITEMS_PER_ROUND 10
 
-#define FLOOR_WALKABLE_METATILE 0x28D
-#define FLOOR_EXIT_METATILE 0x28E
-
 #define HINT_EXIT_DIRECTION                   0
 #define HINT_REMAINING_ITEMS                  1
 #define HINT_REMAINING_TRAINERS               2

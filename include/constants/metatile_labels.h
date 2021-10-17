@@ -788,4 +788,8 @@
 #define METATILE_SecretBase_SpikesMat_BottomMid         0x32A
 #define METATILE_SecretBase_SpikesMat_BottomRight       0x32B
 
+// gTileset_BattlePyramid
+#define METATILE_BattlePyramid_Floor 0x28D
+#define METATILE_BattlePyramid_Exit  0x28E
+
 #endif // GUARD_METATILE_LABELS_H

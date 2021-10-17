@@ -353,12 +353,14 @@ static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 ta
         // Check if there are any hidden items on the current map that haven't been picked up
         if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
-            itemX = (u16)events->bgEvents[i].x + 7;
+            itemX = (u16)events->bgEvents[i].x + MAP_OFFSET;
             distanceX = itemX - playerX;
-            itemY = (u16)events->bgEvents[i].y + 7;
+            itemY = (u16)events->bgEvents[i].y + MAP_OFFSET;
             distanceY = itemY - playerY;
 
-            if ((u16)(distanceX + 7) < 15 && (distanceY >= -5) && (distanceY < 6))
+            // Player can see 7 metatiles on either side horizontally
+            // and 5 metatiles on either side vertically
+            if (distanceX >= -7 && distanceX <= 7 && distanceY >= -5 && distanceY <= 5)
                 SetDistanceOfClosestHiddenItem(taskId, distanceX, distanceY);
         }
     }
@@ -402,27 +404,27 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     {
     // same weird temp variable behavior seen in IsHiddenItemPresentAtCoords
     case 2:
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
-        localLength = mapHeader->mapLayout->height - 7;
+        localLength = mapHeader->mapLayout->height - MAP_OFFSET;
         localY = localLength + y; // additions are reversed for some reason
         break;
     case 1:
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
-        localLength = gMapHeader.mapLayout->height + 7;
+        localLength = gMapHeader.mapLayout->height + MAP_OFFSET;
         localY = y - localLength;
         break;
     case 3:
-        localLength = mapHeader->mapLayout->width - 7;
+        localLength = mapHeader->mapLayout->width - MAP_OFFSET;
         localX = localLength + x; // additions are reversed for some reason
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
     case 4:
-        localLength = gMapHeader.mapLayout->width + 7;
+        localLength = gMapHeader.mapLayout->width + MAP_OFFSET;
         localX = x - localLength;
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
     default:
@@ -435,14 +437,16 @@ static void CheckForHiddenItemsInMapConnection(u8 taskId)
 {
     s16 playerX, playerY;
     s16 x, y;
-    s16 width = gMapHeader.mapLayout->width + 7;
-    s16 height = gMapHeader.mapLayout->height + 7;
+    s16 width = gMapHeader.mapLayout->width + MAP_OFFSET;
+    s16 height = gMapHeader.mapLayout->height + MAP_OFFSET;
 
-    s16 var1 = 7;
-    s16 var2 = 7;
+    s16 var1 = MAP_OFFSET;
+    s16 var2 = MAP_OFFSET;
 
     PlayerGetDestCoords(&playerX, &playerY);
 
+    // Player can see 7 metatiles on either side horizontally
+    // and 5 metatiles on either side vertically
     for (x = playerX - 7; x <= playerX + 7; x++)
     {
         for (y = playerY - 5; y <= playerY + 5; y++)

@@ -502,9 +502,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
                     if (sound->var00 <= 50)
                     {
                         song->volume = 0x100 + sound->volume * 16;
-                        m4aMPlayVolumeControl(&gMPlayInfo_SE2, 0xFFFF, song->volume);
+                        m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
                         song->pitch = 0x200 + song->phonemes[song->currPhoneme].pitch;
-                        m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, song->pitch);
+                        m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, song->pitch);
                     }
                     break;
                 case 1:
@@ -514,8 +514,8 @@ static void BardSing(struct Task *task, struct BardSong *song)
                         song->pitch += 64;
                     else
                         song->pitch -= 64;
-                    m4aMPlayVolumeControl(&gMPlayInfo_SE2, 0xFFFF, song->volume);
-                    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, song->pitch);
+                    m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
+                    m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, song->pitch);
                     song->voiceInflection++;
                     song->phonemeTimer--;
                     if (song->phonemeTimer == 0)

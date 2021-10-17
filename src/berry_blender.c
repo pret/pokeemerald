@@ -932,7 +932,7 @@ static const struct WindowTemplate sBlenderRecordWindowTemplate =
 
 static void UpdateHitPitch(void)
 {
-    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, 2 * (sBerryBlender->speed - MIN_ARROW_SPEED));
+    m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, 2 * (sBerryBlender->speed - MIN_ARROW_SPEED));
 }
 
 static void VBlankCB_BerryBlender(void)
