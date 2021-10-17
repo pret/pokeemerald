@@ -10738,7 +10738,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     
     [MOVE_DYNAMAX_CANNON] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_DYNAMAX_DOUBLE_DMG,
         .power = 100,
         .type = TYPE_DRAGON,
         .accuracy = 100,
