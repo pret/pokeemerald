@@ -6980,7 +6980,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             *(txtPtr)++ = TEXT_COLOR_DARK_GRAY;
             *(txtPtr)++ = TEXT_COLOR_WHITE;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_GRAY;
-            *(txtPtr)++ = CHAR_GENDERLESS;
+            *(txtPtr)++ = CHAR_SPACER; // Genderless
             break;
         }
 
