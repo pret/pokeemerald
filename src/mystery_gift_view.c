@@ -137,32 +137,32 @@ static const u32 sWonderCardBgGfx7[]     = INCBIN_U32("graphics/wonder_card/bg7.
 static const u32 sWonderCardBgTilemap7[] = INCBIN_U32("graphics/wonder_card/bg7.bin.lz");
 static const u32 sWonderCardBgGfx8[]     = INCBIN_U32("graphics/wonder_card/bg8.4bpp.lz");
 static const u32 sWonderCardBgTilemap8[] = INCBIN_U32("graphics/wonder_card/bg8.bin.lz");
-static const u16 sIconShadowPal1[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_1.gbapal");
-static const u16 sIconShadowPal2[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_2.gbapal");
-static const u16 sIconShadowPal3[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_3.gbapal");
-static const u16 sIconShadowPal4[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_4.gbapal");
-static const u16 sIconShadowPal5[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_5.gbapal");
-static const u16 sIconShadowPal6[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_6.gbapal");
-static const u16 sIconShadowPal7[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_7.gbapal");
-static const u16 sIconShadowPal8[]       = INCBIN_U16("graphics/wonder_card/icon_shadow_8.gbapal");
-static const u32 sIconShadowGfx[]        = INCBIN_U32("graphics/wonder_card/icon_shadow.4bpp.lz");
+static const u16 sStampShadowPal1[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_1.gbapal");
+static const u16 sStampShadowPal2[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_2.gbapal");
+static const u16 sStampShadowPal3[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_3.gbapal");
+static const u16 sStampShadowPal4[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_4.gbapal");
+static const u16 sStampShadowPal5[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_5.gbapal");
+static const u16 sStampShadowPal6[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_6.gbapal");
+static const u16 sStampShadowPal7[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_7.gbapal");
+static const u16 sStampShadowPal8[]      = INCBIN_U16("graphics/wonder_card/stamp_shadow_8.gbapal");
+static const u32 sStampShadowGfx[]       = INCBIN_U32("graphics/wonder_card/stamp_shadow.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheet_StampShadow = {
-    sIconShadowGfx, 0x100, TAG_STAMP_SHADOW
+    sStampShadowGfx, 0x100, TAG_STAMP_SHADOW
 };
 
 static const struct SpritePalette sSpritePalettes_StampShadow[] = {
-    {sIconShadowPal1, TAG_STAMP_SHADOW},
-    {sIconShadowPal2, TAG_STAMP_SHADOW},
-    {sIconShadowPal3, TAG_STAMP_SHADOW},
-    {sIconShadowPal4, TAG_STAMP_SHADOW},
-    {sIconShadowPal5, TAG_STAMP_SHADOW},
-    {sIconShadowPal6, TAG_STAMP_SHADOW},
-    {sIconShadowPal7, TAG_STAMP_SHADOW},
-    {sIconShadowPal8, TAG_STAMP_SHADOW}
+    {sStampShadowPal1, TAG_STAMP_SHADOW},
+    {sStampShadowPal2, TAG_STAMP_SHADOW},
+    {sStampShadowPal3, TAG_STAMP_SHADOW},
+    {sStampShadowPal4, TAG_STAMP_SHADOW},
+    {sStampShadowPal5, TAG_STAMP_SHADOW},
+    {sStampShadowPal6, TAG_STAMP_SHADOW},
+    {sStampShadowPal7, TAG_STAMP_SHADOW},
+    {sStampShadowPal8, TAG_STAMP_SHADOW}
 };
 
-static const struct SpriteTemplate sSpriteTemplate_IconShadow = {
+static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
     .tileTag = TAG_STAMP_SHADOW,
     .paletteTag = TAG_STAMP_SHADOW,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
@@ -503,7 +503,7 @@ static void CreateCardSprites(void)
         {
             sWonderCardData->stampSpriteIds[i][0] = SPRITE_NONE;
             sWonderCardData->stampSpriteIds[i][1] = SPRITE_NONE;
-            sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_IconShadow, 216 - 32 * i, 144, 8);
+            sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 144, 8);
             if (sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i] != SPECIES_NONE)
                 sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]), 
                                                                                SpriteCallbackDummy,
