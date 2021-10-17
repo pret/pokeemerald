@@ -2379,6 +2379,7 @@ enum
     ENDTURN_POWDER,
     ENDTURN_THROAT_CHOP,
     ENDTURN_SLOW_START,
+    ENDTURN_PLASMA_FISTS,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -2883,6 +2884,11 @@ u8 DoBattlerEndTurnEffects(void)
                 BattleScriptExecute(BattleScript_SlowStartEnds);
                 effect++;
             }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_PLASMA_FISTS:
+            for (i = 0; i < gBattlersCount; i++)
+                gStatuses4[i] &= ~(STATUS4_PLASMA_FISTS);
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done

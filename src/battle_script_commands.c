@@ -8910,6 +8910,10 @@ static void Cmd_various(void)
         
         gBattlescriptCurrInstr += 4;
         return;
+    case VARIOUS_APPLY_PLASMA_FISTS:
+        for (i = 0; i < gBattlersCount; i++)
+            gStatuses4[i] |= STATUS4_PLASMA_FISTS;
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

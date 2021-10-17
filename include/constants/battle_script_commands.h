@@ -190,6 +190,7 @@
 #define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 117
 #define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        118
 #define VARIOUS_CONSUME_BERRY                   119
+#define VARIOUS_APPLY_PLASMA_FISTS              120
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

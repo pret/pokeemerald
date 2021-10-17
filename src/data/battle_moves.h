@@ -10435,7 +10435,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PLASMA_FISTS] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_PLASMA_FISTS,
         .power = 100,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
