@@ -1,10 +1,10 @@
-MysteryEventScript_AlteringCave::
-	setvaddress MysteryEventScript_AlteringCave
+MysteryGiftScript_AlteringCave::
+	setvaddress MysteryGiftScript_AlteringCave
 	addvar VAR_ALTERING_CAVE_WILD_SET, 1
 	compare VAR_ALTERING_CAVE_WILD_SET, 10
-	vgoto_if_ne MysteryEventScript_AlteringCave_
+	vgoto_if_ne MysteryGiftScript_AlteringCave_
 	setvar VAR_ALTERING_CAVE_WILD_SET, 0
-MysteryEventScript_AlteringCave_:
+MysteryGiftScript_AlteringCave_:
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftAlteringCave

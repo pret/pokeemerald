@@ -8,8 +8,8 @@
 #include "script.h"
 #include "battle_tower.h"
 #include "mystery_event_script.h"
-#include "mevent.h"
-#include "mevent_server_helpers.h"
+#include "mystery_gift.h"
+#include "mystery_gift_link.h"
 
 /*
     Handles the link connection functions used by the Mystery Gift client/server.

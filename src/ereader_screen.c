@@ -4,7 +4,7 @@
 #include "ereader_helpers.h"
 #include "link.h"
 #include "main.h"
-#include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"

@@ -11,11 +11,11 @@
 #include "text_window.h"
 #include "string_util.h"
 #include "link_rfu.h"
-#include "mevent.h"
 #include "mystery_gift.h"
-#include "wonder_transfer.h"
+#include "mystery_gift_menu.h"
+#include "mystery_gift_view.h"
 #include "constants/rgb.h"
-#include "constants/mevent.h"
+#include "constants/mystery_gift.h"
 
 struct WonderGraphics
 {

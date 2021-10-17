@@ -1,5 +1,5 @@
-MysteryEventScript_MysticTicket::
-	setvaddress MysteryEventScript_MysticTicket
+MysteryGiftScript_MysticTicket::
+	setvaddress MysteryGiftScript_MysticTicket
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_MYSTIC_TICKET, MysticTicket_Obtained

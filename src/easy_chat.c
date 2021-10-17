@@ -15,7 +15,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "main.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"

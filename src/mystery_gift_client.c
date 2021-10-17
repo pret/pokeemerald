@@ -4,9 +4,9 @@
 #include "overworld.h"
 #include "script.h"
 #include "battle_tower.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "mystery_event_script.h"
-#include "mevent_client.h"
+#include "mystery_gift_client.h"
 
 enum {
     FUNC_INIT,
@@ -15,8 +15,8 @@ enum {
     FUNC_SEND,
     FUNC_RUN,
     FUNC_WAIT,
-    FUNC_RUN_GIFT_SCRIPT,
-    FUNC_RUN_BUFF_SCRIPT,
+    FUNC_RUN_MEVENT,
+    FUNC_RUN_BUFFER,
 };
 
 EWRAM_DATA static struct MysteryGiftClient * sClient = NULL;
@@ -222,8 +222,8 @@ static u32 Client_Run(struct MysteryGiftClient * client)
             MysteryGiftClient_InitSendWord(client, MG_LINKID_RESPONSE, TRUE);
         }
         break;
-    case CLI_RUN_GIFT_SCRIPT:
-        client->funcId = FUNC_RUN_GIFT_SCRIPT;
+    case CLI_RUN_MEVENT_SCRIPT:
+        client->funcId = FUNC_RUN_MEVENT;
         client->funcState = 0;
         break;
     case CLI_SAVE_STAMP:
@@ -238,7 +238,7 @@ static u32 Client_Run(struct MysteryGiftClient * client)
         break;
     case CLI_RUN_BUFFER_SCRIPT:
         memcpy(gDecompressionBuffer, client->recvBuffer, MG_LINK_BUFFER_SIZE);
-        client->funcId = FUNC_RUN_BUFF_SCRIPT;
+        client->funcId = FUNC_RUN_BUFFER;
         client->funcState = 0;
         break;
     }
@@ -256,16 +256,16 @@ static u32 Client_Wait(struct MysteryGiftClient * client)
     return CLI_RET_ACTIVE;
 }
 
-static u32 Client_RunGiftScript(struct MysteryGiftClient * client)
+static u32 Client_RunMysteryEventScript(struct MysteryGiftClient * client)
 {
     switch (client->funcState)
     {
     case 0:
-        InitMysteryGiftScriptContext(client->recvBuffer);
+        InitMysteryEventScriptContext(client->recvBuffer);
         client->funcState++;
         break;
     case 1:
-        if (!RunMysteryGiftScriptContextCommand(&client->param))
+        if (!RunMysteryEventScriptContextCommand(&client->param))
         {
             client->funcId = FUNC_RUN;
             client->funcState = 0;
@@ -296,8 +296,8 @@ static u32 MysteryGiftClient_CallFunc(struct MysteryGiftClient * client)
         [FUNC_SEND] = Client_Send,
         [FUNC_RUN]  = Client_Run,
         [FUNC_WAIT] = Client_Wait,
-        [FUNC_RUN_GIFT_SCRIPT] = Client_RunGiftScript,
-        [FUNC_RUN_BUFF_SCRIPT] = Client_RunBufferScript
+        [FUNC_RUN_MEVENT] = Client_RunMysteryEventScript,
+        [FUNC_RUN_BUFFER] = Client_RunBufferScript
     };
     return funcs[client->funcId](client);
 }

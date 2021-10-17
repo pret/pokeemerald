@@ -1,5 +1,5 @@
-MysteryEventScript_SurfPichu::
-	setvaddress MysteryEventScript_SurfPichu
+MysteryGiftScript_SurfPichu::
+	setvaddress MysteryGiftScript_SurfPichu
 	vgoto_if_unset FLAG_MYSTERY_GIFT_DONE, SurfPichu_GiveIfPossible
 	returnram
 

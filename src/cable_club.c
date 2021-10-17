@@ -18,7 +18,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "union_room.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"

@@ -1,5 +1,5 @@
-#ifndef GUARD_MEVENT_SERVER_HELPERS_H
-#define GUARD_MEVENT_SERVER_HELPERS_H
+#ifndef GUARD_MYSTERY_GIFT_LINK_H
+#define GUARD_MYSTERY_GIFT_LINK_H
 
 #define MG_LINK_BUFFER_SIZE 0x400
 
@@ -46,4 +46,4 @@ bool32 MysteryGiftLink_Recv(struct MysteryGiftLink * link);
 bool32 MysteryGiftLink_Send(struct MysteryGiftLink * link);
 void MysteryGiftLink_InitRecv(struct MysteryGiftLink * link, u32 ident, void * dest);
 
-#endif //GUARD_MEVENT_SERVER_HELPERS_H
+#endif //GUARD_MYSTERY_GIFT_LINK_H

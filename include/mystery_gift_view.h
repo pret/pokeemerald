@@ -1,5 +1,5 @@
-#ifndef GUARD_WONDER_TRANSFER_H
-#define GUARD_WONDER_TRANSFER_H
+#ifndef GUARD_MYSTERY_GIFT_VIEW_H
+#define GUARD_MYSTERY_GIFT_VIEW_H
 
 enum {
     NEWS_INPUT_A,
@@ -21,4 +21,4 @@ u32 WonderNews_GetInput(u16 input);
 void WonderNews_AddScrollIndicatorArrowPair(void);
 void WonderNews_RemoveScrollIndicatorArrowPair(void);
 
-#endif //GUARD_WONDER_TRANSFER_H
+#endif //GUARD_MYSTERY_GIFT_VIEW_H

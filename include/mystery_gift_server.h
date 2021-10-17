@@ -1,7 +1,7 @@
-#ifndef GUARD_MEVENT_SERVER_H
-#define GUARD_MEVENT_SERVER_H
+#ifndef GUARD_MYSTERY_GIFT_SERVER_H
+#define GUARD_MYSTERY_GIFT_SERVER_H
 
-#include "mevent_server_helpers.h"
+#include "mystery_gift_link.h"
 
 // Return values for Server_* functions.
 // Other than SVR_RET_END, effectively useless (not checked for).
@@ -97,4 +97,4 @@ void MysterGiftServer_CreateForCard();
 void MysterGiftServer_CreateForNews();
 u32 MysterGiftServer_Run(u16 * endVal);
 
-#endif //GUARD_MEVENT_SERVER_H
+#endif //GUARD_MYSTERY_GIFT_SERVER_H

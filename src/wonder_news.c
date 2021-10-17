@@ -1,8 +1,8 @@
 #include "global.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "random.h"
 #include "event_data.h"
-#include "mevent_news.h"
+#include "wonder_news.h"
 
 /*
     Wonder News related functions.

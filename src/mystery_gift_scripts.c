@@ -1,7 +1,7 @@
 #include "global.h"
-#include "mevent_client.h"
-#include "mevent_server.h"
-#include "mevent.h"
+#include "mystery_gift_client.h"
+#include "mystery_gift_server.h"
+#include "mystery_gift.h"
 
 static const u8 sText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
 

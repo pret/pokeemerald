@@ -1,9 +1,9 @@
 #include "global.h"
 #include "malloc.h"
 #include "script.h"
-#include "mevent.h"
-#include "mevent_server.h"
-#include "mevent_server_helpers.h"
+#include "mystery_gift.h"
+#include "mystery_gift_server.h"
+#include "mystery_gift_link.h"
 
 enum {
     FUNC_INIT,

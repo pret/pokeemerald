@@ -1,7 +1,7 @@
-#ifndef GUARD_MEVENT_CLIENT_H
-#define GUARD_MEVENT_CLIENT_H
+#ifndef GUARD_MYSTERY_GIFT_CLIENT_H
+#define GUARD_MYSTERY_GIFT_CLIENT_H
 
-#include "mevent_server_helpers.h"
+#include "mystery_gift_link.h"
 
 // Return values for client functions called by MysteryGiftClient_Run
 enum {
@@ -31,7 +31,7 @@ enum {
     CLI_COPY_MSG,
     CLI_ASK_TOSS,
     CLI_LOAD_TOSS_RESPONSE,
-    CLI_RUN_GIFT_SCRIPT,
+    CLI_RUN_MEVENT_SCRIPT,
     CLI_SAVE_STAMP,
     CLI_SAVE_RAM_SCRIPT,
     CLI_RECV_EREADER_TRAINER,
@@ -89,4 +89,4 @@ void MysteryGiftClient_AdvanceState(void);
 void * MysteryGiftClient_GetMsg(void);
 void MysteryGiftClient_SetParam(u32 value);
 
-#endif //GUARD_MEVENT_CLIENT_H
+#endif //GUARD_MYSTERY_GIFT_CLIENT_H

@@ -2,7 +2,7 @@
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/map_scripts.h"
-#include "constants/mevent.h"
+#include "constants/mystery_gift.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -15,11 +15,11 @@
 	.section .rodata
 
 	.align 2
-	.include "data/scripts/mevent_stamp_card.inc"
-	.include "data/scripts/mevent_pichu.inc"
-	.include "data/scripts/mevent_trainer.inc"
-	.include "data/scripts/mevent_battle_card.inc"
-	.include "data/scripts/mevent_aurora_ticket.inc"
-	.include "data/scripts/mevent_mystic_ticket.inc"
-	.include "data/scripts/mevent_altering_cave.inc"
-	.include "data/scripts/mevent_old_sea_map.inc"
+	.include "data/scripts/gift_stamp_card.inc"
+	.include "data/scripts/gift_pichu.inc"
+	.include "data/scripts/gift_trainer.inc"
+	.include "data/scripts/gift_battle_card.inc"
+	.include "data/scripts/gift_aurora_ticket.inc"
+	.include "data/scripts/gift_mystic_ticket.inc"
+	.include "data/scripts/gift_altering_cave.inc"
+	.include "data/scripts/gift_old_sea_map.inc"

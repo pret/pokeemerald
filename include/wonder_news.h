@@ -1,5 +1,5 @@
-#ifndef GUARD_MEVENT_NEWS_H
-#define GUARD_MEVENT_NEWS_H
+#ifndef GUARD_WONDER_NEWS_H
+#define GUARD_WONDER_NEWS_H
 
 enum {
     WONDER_NEWS_NONE,
@@ -12,4 +12,4 @@ enum {
 void InitSavedWonderNews(void);
 void GenerateRandomWonderNews(u32 newsType);
 
-#endif //GUARD_MEVENT_NEWS_H
+#endif //GUARD_WONDER_NEWS_H
