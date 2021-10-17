@@ -11103,7 +11103,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GRAV_APPLE] =
     {
-        .effect = EFFECT_DEFENSE_DOWN_HIT,
+        .effect = EFFECT_GRAV_APPLE,
         .power = 80,
         .type = TYPE_GRASS,
         .accuracy = 100,
