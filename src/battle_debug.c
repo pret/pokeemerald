@@ -1040,8 +1040,8 @@ static void Task_DebugMenuProcessInput(u8 taskId)
             if (data->modifyArrows.currentDigit != (data->modifyArrows.maxDigits - 1))
             {
                 data->modifyArrows.currentDigit++;
-                gSprites[data->modifyArrows.arrowSpriteId[0]].pos2.x += 6;
-                gSprites[data->modifyArrows.arrowSpriteId[1]].pos2.x += 6;
+                gSprites[data->modifyArrows.arrowSpriteId[0]].x2 += 6;
+                gSprites[data->modifyArrows.arrowSpriteId[1]].x2 += 6;
             }
         }
         else if (gMain.newKeys & DPAD_LEFT)
@@ -1049,8 +1049,8 @@ static void Task_DebugMenuProcessInput(u8 taskId)
             if (data->modifyArrows.currentDigit != 0)
             {
                 data->modifyArrows.currentDigit--;
-                gSprites[data->modifyArrows.arrowSpriteId[0]].pos2.x -= 6;
-                gSprites[data->modifyArrows.arrowSpriteId[1]].pos2.x -= 6;
+                gSprites[data->modifyArrows.arrowSpriteId[0]].x2 -= 6;
+                gSprites[data->modifyArrows.arrowSpriteId[1]].x2 -= 6;
             }
         }
         else if (gMain.newKeys & DPAD_UP)
@@ -1951,7 +1951,7 @@ static const u8 sText_HoldEffectAbsorbBulb[] = _("Absorb Bulb");
 static const u8 sText_HoldEffectCellBattery[] = _("Cell Battery");
 static const u8 sText_HoldEffectFairyPower[] = _("Fairy Power");
 static const u8 sText_HoldEffectMegaStone[] = _("Mega Stone");
-static const u8 sText_HoldEffectSafetyGoogles[] = _("Safety Googles");
+static const u8 sText_HoldEffectSafetyGoggles[] = _("Safety Goggles");
 static const u8 sText_HoldEffectLuminousMoss[] = _("Luminous Moss");
 static const u8 sText_HoldEffectSnowball[] = _("Snowball");
 static const u8 sText_HoldEffectWeaknessPolicy[] = _("Weakness Policy");
@@ -2091,7 +2091,7 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_CELL_BATTERY] = sText_HoldEffectCellBattery,
     [HOLD_EFFECT_FAIRY_POWER] = sText_HoldEffectFairyPower,
     [HOLD_EFFECT_MEGA_STONE] = sText_HoldEffectMegaStone,
-    [HOLD_EFFECT_SAFETY_GOOGLES] = sText_HoldEffectSafetyGoogles,
+    [HOLD_EFFECT_SAFETY_GOGGLES] = sText_HoldEffectSafetyGoggles,
     [HOLD_EFFECT_LUMINOUS_MOSS] = sText_HoldEffectLuminousMoss,
     [HOLD_EFFECT_SNOWBALL] = sText_HoldEffectSnowball,
     [HOLD_EFFECT_WEAKNESS_POLICY] = sText_HoldEffectWeaknessPolicy,

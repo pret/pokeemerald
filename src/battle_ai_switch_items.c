@@ -795,6 +795,9 @@ static bool8 ShouldUseItem(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT)
         return FALSE;
+    
+    if (gStatuses3[gActiveBattler] & STATUS3_EMBARGO)
+        return FALSE;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;

@@ -36,6 +36,7 @@ u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbil
 bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move);
 bool32 AI_WeatherHasEffect(void);
 bool32 CanAttackerFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHits);
+bool32 AI_IsTerrainAffected(u8 battlerId, u32 flags);
 bool32 AI_IsBattlerGrounded(u8 battlerId);
 bool32 HasDamagingMove(u8 battlerId);
 bool32 HasDamagingMoveOfType(u8 battlerId, u8 type);
@@ -118,10 +119,10 @@ bool32 IsUngroundingEffect(u16 effect);
 bool32 IsSemiInvulnerable(u8 battlerDef, u16 move);
 
 // status checks
-bool32 CanBeBurned(u8 battler, u16 ability);
-bool32 CanBePoisoned(u8 battler, u16 ability);
-bool32 CanBeConfused(u8 battler, u16 ability);
-bool32 CanSleep(u8 battler, u16 ability);
+bool32 AI_CanBeBurned(u8 battler, u16 ability);
+bool32 AI_CanBePoisoned(u8 battler, u16 ability);
+bool32 AI_CanBeConfused(u8 battler, u16 ability);
+bool32 AI_CanSleep(u8 battler, u16 ability);
 bool32 IsBattlerIncapacitated(u8 battler, u16 ability);
 bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove);
 bool32 ShouldPoisonSelf(u8 battler, u16 ability);

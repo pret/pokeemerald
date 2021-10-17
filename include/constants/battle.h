@@ -185,7 +185,8 @@
 #define HITMARKER_IGNORE_SAFEGUARD      (1 << 13)
 #define HITMARKER_SYNCHRONISE_EFFECT    (1 << 14)
 #define HITMARKER_RUN                   (1 << 15)
-// 3 free spots because of change in handling of UNDERGROUND/UNDERGWATER/ON AIR
+#define HITMARKER_IGNORE_DISGUISE       (1 << 16)
+// 3 free spots because of change in handling of UNDERGROUND/UNDERWATER/ON AIR
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
 #define HITMARKER_x100000               (1 << 20)
 #define HITMARKER_x200000               (1 << 21)
@@ -238,7 +239,7 @@
 #define STATUS_FIELD_FAIRY_LOCK                     (1 << 11)
 #define STATUS_FIELD_TERRAIN_PERMANENT              (1 << 12)   // Overworld thunderstorm generates electric terrain
 
-#define STATUS_TERRAIN_ANY              (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
+#define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
@@ -256,24 +257,31 @@
 #define WEATHER_RAIN_TEMPORARY      (1 << 0)
 #define WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
 #define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY            (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT)
-#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
-#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
+#define WEATHER_RAIN_PRIMAL         (1 << 3)
+#define WEATHER_RAIN_ANY            (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT | WEATHER_RAIN_PRIMAL)
+#define WEATHER_SANDSTORM_TEMPORARY (1 << 4)
+#define WEATHER_SANDSTORM_PERMANENT (1 << 5)
 #define WEATHER_SANDSTORM_ANY       (WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT)
-#define WEATHER_SUN_TEMPORARY       (1 << 5)
-#define WEATHER_SUN_PERMANENT       (1 << 6)
-#define WEATHER_SUN_ANY             (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT)
-#define WEATHER_HAIL_TEMPORARY      (1 << 7)
-#define WEATHER_HAIL_PERMANENT      (1 << 8)
+#define WEATHER_SUN_TEMPORARY       (1 << 6)
+#define WEATHER_SUN_PERMANENT       (1 << 7)
+#define WEATHER_SUN_PRIMAL          (1 << 8)
+#define WEATHER_SUN_ANY             (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT | WEATHER_SUN_PRIMAL)
+#define WEATHER_HAIL_TEMPORARY      (1 << 9)
+#define WEATHER_HAIL_PERMANENT      (1 << 10)
 #define WEATHER_HAIL_ANY            (WEATHER_HAIL_TEMPORARY | WEATHER_HAIL_PERMANENT)
-#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
+#define WEATHER_STRONG_WINDS        (1 << 11)
+#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY | WEATHER_STRONG_WINDS)
+#define WEATHER_PRIMAL_ANY          (WEATHER_RAIN_PRIMAL | WEATHER_SUN_PRIMAL | WEATHER_STRONG_WINDS)
 
 // Battle Weather as enum
-#define ENUM_WEATHER_NONE           0
-#define ENUM_WEATHER_RAIN           1
-#define ENUM_WEATHER_SUN            2
-#define ENUM_WEATHER_SANDSTORM      3
-#define ENUM_WEATHER_HAIL           4
+#define ENUM_WEATHER_NONE                 0
+#define ENUM_WEATHER_RAIN                 1
+#define ENUM_WEATHER_SUN                  2
+#define ENUM_WEATHER_SANDSTORM            3
+#define ENUM_WEATHER_HAIL                 4
+#define ENUM_WEATHER_SUN_PRIMAL           5
+#define ENUM_WEATHER_RAIN_PRIMAL          6
+#define ENUM_WEATHER_STRONG_WINDS         7
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               0x1
@@ -346,7 +354,8 @@
 #define MOVE_EFFECT_THROAT_CHOP         0x43
 #define MOVE_EFFECT_INCINERATE          0x44
 #define MOVE_EFFECT_BUG_BITE            0x45
-#define NUM_MOVE_EFFECTS                0x46
+#define MOVE_EFFECT_RECOIL_HP_25        0x46
+#define NUM_MOVE_EFFECTS                0x47
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
@@ -377,5 +386,6 @@
 #define MOVE_TARGET_FOES_AND_ALLY       0x20
 #define MOVE_TARGET_OPPONENTS_FIELD     0x40
 #define MOVE_TARGET_ALLY                0x80
+#define MOVE_TARGET_ALL_BATTLERS        (0x100 | MOVE_TARGET_USER)
 
 #endif // GUARD_CONSTANTS_BATTLE_H

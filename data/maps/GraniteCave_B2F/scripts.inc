@@ -1,3 +1,3 @@
-GraniteCave_B2F_MapScripts:: @ 822DC79
+GraniteCave_B2F_MapScripts::
 	.byte 0
 

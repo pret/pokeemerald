@@ -1764,9 +1764,84 @@
 	various BS_ATTACKER, VARIOUS_TOTEM_BOOST
 	.4byte \ptr
 	.endm
-
+	
 	.macro tryactivategrimneigh, battler:req
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
+	.endm
+	
+	.macro consumeberry battler:req, restoreItem=FALSE
+	various \battler, VARIOUS_CONSUME_BERRY
+	.byte \restoreItem
+	.endm
+
+	.macro activateitemeffects battler:req
+	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
+	.endm
+	
+	.macro pickpocketsteal
+	various 0, VARIOUS_PICKPOCKET
+	.endm
+	
+	.macro doterrainseed battler:req, ptr:req
+	various \battler, VARIOUS_TERRAIN_SEED
+	.4byte \ptr
+	.endm
+	
+	.macro makeinvisible battler:req
+	various \battler, VARIOUS_MAKE_INVISIBLE
+	.endm
+	
+	.macro tryroomservice battler:req, ptr:req
+	various \battler, VARIOUS_ROOM_SERVICE
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifterrainaffected battler:req, terrainFlags:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_TERRAIN_AFFECTED
+	.4byte \terrainFlags
+	.4byte \ptr
+	.endm
+
+	.macro jumpifpranksterblocked battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_PRANKSTER_BLOCKED
+	.4byte \ptr
+	.endm
+
+	.macro eeriespellppreduce ptr:req
+	various BS_TARGET, VARIOUS_EERIE_SPELL_PP_REDUCE
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifteamhealthy battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_TEAM_HEALTHY
+	.4byte \ptr
+	.endm
+	
+	.macro tryhealquarterhealth battler:req, ptr:req
+	various \battler, VARIOUS_TRY_HEAL_QUARTER_HP
+	.4byte \ptr
+	.endm
+	
+	.macro removeterrain
+	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
+	.endm
+	
+	.macro trytoclearprimalweather
+	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
+	.endm
+
+	.macro getrototillertargets ptr:req
+	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnotrototilleraffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED
+	.4byte \ptr
+	.endm
+
+	.macro tryactivatebattlebond battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_BATTLE_BOND
 	.endm
 
 @ helpful macros
@@ -1870,6 +1945,12 @@
 	.macro jumpifflowerveil jumpptr:req
 	jumpifnottype BS_TARGET, TYPE_GRASS, 1f
 	jumpifability BS_TARGET_SIDE, ABILITY_FLOWER_VEIL, \jumpptr
+	1:
+	.endm
+
+	.macro jumpifflowerveilattacker jumpptr:req
+	jumpifnottype BS_ATTACKER, TYPE_GRASS, 1f
+	jumpifability BS_ATTACKER_SIDE, ABILITY_FLOWER_VEIL, \jumpptr
 	1:
 	.endm
 

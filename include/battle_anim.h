@@ -147,7 +147,7 @@ void TranslateSpriteLinear(struct Sprite *sprite);
 void AnimSpriteOnMonPos(struct Sprite *sprite);
 void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
 void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
-void SetGreyscaleOrOriginalPalette(u16 palNum, bool8 restoreOriginal);
+void SetGrayscaleOrOriginalPalette(u16 palNum, bool8 restoreOriginal);
 void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds);
 bool8 RunAffineAnimFromTaskData(struct Task *task);
 void AnimThrowProjectile(struct Sprite *sprite);
@@ -442,6 +442,7 @@ extern const union AffineAnimCmd *const gAffineAnims_SpinningHandOrFoot[];
 extern const union AnimCmd *const gAnims_RevengeBigScratch[];
 
 // battle_anim_rock.c
+extern const union AnimCmd *const gAnims_FlyingRock[];
 extern const union AffineAnimCmd *const gAffineAnims_Whirlpool[];
 extern const union AffineAnimCmd *const gAffineAnims_BasicRock[];
 void AnimParticleInVortex(struct Sprite *sprite);
@@ -449,6 +450,7 @@ void AnimFallingRock(struct Sprite *sprite);
 void AnimRaiseSprite(struct Sprite *sprite);
 void AnimFallingRock_Step(struct Sprite *sprite);
 void AnimFlyingSandCrescent(struct Sprite *sprite);
+void AnimRockFragment(struct Sprite *);
 
 // battle_anim_dark.c
 void AnimClawSlash(struct Sprite *sprite);

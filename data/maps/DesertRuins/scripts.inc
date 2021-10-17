@@ -1,25 +1,25 @@
-DesertRuins_MapScripts:: @ 822D95B
+DesertRuins_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, DesertRuins_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, DesertRuins_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertRuins_OnTransition
 	.byte 0
 
-DesertRuins_OnResume: @ 822D96B
+DesertRuins_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, DesertRuins_EventScript_TryRemoveRegirock
 	end
 
-DesertRuins_EventScript_TryRemoveRegirock:: @ 822D975
+DesertRuins_EventScript_TryRemoveRegirock::
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
-DesertRuins_OnLoad: @ 822D989
+DesertRuins_OnLoad:
 	call_if_unset FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_HideRegiEntrance
 	end
 
-DesertRuins_EventScript_HideRegiEntrance:: @ 822D993
+DesertRuins_EventScript_HideRegiEntrance::
 	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
 	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
 	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
@@ -28,16 +28,16 @@ DesertRuins_EventScript_HideRegiEntrance:: @ 822D993
 	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
-DesertRuins_OnTransition: @ 822D9CA
+DesertRuins_OnTransition:
 	setflag FLAG_LANDMARK_DESERT_RUINS
 	call_if_unset FLAG_DEFEATED_REGIROCK, DesertRuins_EventScript_ShowRegirock
 	end
 
-DesertRuins_EventScript_ShowRegirock:: @ 822D9D7
+DesertRuins_EventScript_ShowRegirock::
 	clearflag FLAG_HIDE_REGIROCK
 	return
 
-DesertRuins_EventScript_CaveEntranceMiddle:: @ 822D9DB
+DesertRuins_EventScript_CaveEntranceMiddle::
 	lockall
 	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
 	braillemessage DesertRuins_Braille_UseRockSmash
@@ -46,12 +46,12 @@ DesertRuins_EventScript_CaveEntranceMiddle:: @ 822D9DB
 	releaseall
 	end
 
-DesertRuins_EventScript_BigHoleInWall:: @ 822D9EE
+DesertRuins_EventScript_BigHoleInWall::
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
-DesertRuins_EventScript_CaveEntranceSide:: @ 822D9F8
+DesertRuins_EventScript_CaveEntranceSide::
 	lockall
 	braillemessage DesertRuins_Braille_UseRockSmash
 	waitbuttonpress
@@ -59,7 +59,7 @@ DesertRuins_EventScript_CaveEntranceSide:: @ 822D9F8
 	releaseall
 	end
 
-DesertRuins_EventScript_Regirock:: @ 822DA02
+DesertRuins_EventScript_Regirock::
 	lock
 	faceplayer
 	waitse
@@ -82,12 +82,12 @@ DesertRuins_EventScript_Regirock:: @ 822DA02
 	release
 	end
 
-DesertRuins_EventScript_DefeatedRegirock:: @ 822DA49
+DesertRuins_EventScript_DefeatedRegirock::
 	setflag FLAG_DEFEATED_REGIROCK
 	goto Common_EventScript_RemoveStaticPokemon
 	end
 
-DesertRuins_EventScript_RanFromRegirock:: @ 822DA52
+DesertRuins_EventScript_RanFromRegirock::
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end
