@@ -722,7 +722,7 @@ static void BufferRibbonMonInfoText(struct PokenavMonList * item0, u8 * dest)
     }
 
     StringGetEnd10(gStringVar3);
-    dest = sub_81DB494(dest, 1, gStringVar3, 60);
+    dest = GetStringClearToWidth(dest, 1, gStringVar3, 60);
     switch (gender)
     {
     default:
@@ -741,6 +741,6 @@ static void BufferRibbonMonInfoText(struct PokenavMonList * item0, u8 * dest)
     *s++ = CHAR_EXTRA_SYMBOL;
     *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    dest = sub_81DB494(dest, 1, gStringVar1, 54);
+    dest = GetStringClearToWidth(dest, 1, gStringVar1, 54);
     ConvertIntToDecimalStringN(dest, item->data, STR_CONV_MODE_RIGHT_ALIGN, 2);
 }

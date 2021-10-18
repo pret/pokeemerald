@@ -1155,7 +1155,7 @@ void TryPutPokemonTodayOnAir(void)
                     show->pokemonToday.ball = itemLastUsed;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2Ptr->playerName);
                     StringCopy(show->pokemonToday.nickname, gBattleResults.caughtMonNick);
-                    language2 = sub_81DB604(show->pokemonToday.nickname);
+                    language2 = GetNicknameLanguage(show->pokemonToday.nickname);
                     StripExtCtrlCodes(show->pokemonToday.nickname);
                     show->pokemonToday.species = gBattleResults.caughtMonSpecies;
                     StorePlayerIdInRecordMixShow(show);

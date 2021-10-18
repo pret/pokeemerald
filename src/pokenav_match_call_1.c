@@ -413,12 +413,12 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries *matchCallEntry, 
 
     if (className && trainerName)
     {
-        u8 *str2 = sub_81DB494(str, 7, className, 69);
-        sub_81DB494(str2, 7, trainerName, 51);
+        u8 *str2 = GetStringClearToWidth(str, 7, className, 69);
+        GetStringClearToWidth(str2, 7, trainerName, 51);
     }
     else
     {
-        sub_81DB494(str, 7, NULL, 120);
+        GetStringClearToWidth(str, 7, NULL, 120);
     }
 }
 
