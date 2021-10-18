@@ -122,22 +122,22 @@ static const u8 sTileBitAttributes[] =
     [MB_WATER_SOUTH_ARROW_WARP] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
     [MB_DEEP_SOUTH_WARP] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_6F] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
-    [MB_WARP_OR_BRIDGE] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_71] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_NORTH_BRIDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_NORTH_BRIDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_OCEAN] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_LOW] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_MED] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_HIGH] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_VERTICAL_LOG_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_VERTICAL_LOG_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_HORIZONTAL_LOG_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_HORIZONTAL_LOG_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_FORTREE_BRIDGE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_79] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_ROUTE120_SOUTH_BRIDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_SOUTH_BRIDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_NORTH_BRIDGE_3] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_NORTH_BRIDGE_4] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_UNUSED_7E] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE110_BRIDGE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_MED_EDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_MED_EDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_HIGH_EDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_HIGH_EDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_UNUSED_BRIDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_UNUSED_BRIDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_COUNTER] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_81] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_82] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
@@ -833,7 +833,9 @@ bool8 MetatileBehavior_IsPlayerRoomPCOn(u8 metatileBehavior)
 
 bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_POND_WATER || metatileBehavior == MB_PUDDLE || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
+    if (metatileBehavior == MB_POND_WATER
+     || metatileBehavior == MB_PUDDLE
+     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
     else
         return FALSE;
@@ -888,10 +890,19 @@ bool8 MetatileBehavior_IsFootprints(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsBridge(u8 metatileBehavior)
+// For the sections of log bridges that span water / water's edge.
+// Note that the rest of the metatiles for these bridges use MB_NORMAL.
+// This is used to allow encounters on the water below the bridge.
+bool8 MetatileBehavior_IsBridgeOverWater(u8 metatileBehavior)
 {
-    if ((metatileBehavior == MB_WARP_OR_BRIDGE || metatileBehavior == MB_UNUSED_71 || metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_1 || metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_2)
-        || (metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_3 || metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_4 || metatileBehavior == MB_UNUSED_7E || metatileBehavior == MB_ROUTE110_BRIDGE))
+    if ((metatileBehavior == MB_BRIDGE_OVER_OCEAN
+      || metatileBehavior == MB_BRIDGE_OVER_POND_LOW
+      || metatileBehavior == MB_BRIDGE_OVER_POND_MED
+      || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH)
+      || (metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_1
+       || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_2
+       || metatileBehavior == MB_UNUSED_BRIDGE_1
+       || metatileBehavior == MB_UNUSED_BRIDGE_2))
         return TRUE;
     else
         return FALSE;
@@ -899,34 +910,39 @@ bool8 MetatileBehavior_IsBridge(u8 metatileBehavior)
 
 u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
 {
-    u8 result = metatileBehavior - MB_WARP_OR_BRIDGE;
-    if (result < 4)
-        return result;
+    // MB_BRIDGE_OVER_OCEAN     --> BRIDGE_TYPE_OCEAN     (Routes 110/119)
+    // MB_BRIDGE_OVER_POND_LOW  --> BRIDGE_TYPE_POND_LOW  (Unused)
+    // MB_BRIDGE_OVER_POND_MED  --> BRIDGE_TYPE_POND_MED  (Route 120, south)
+    // MB_BRIDGE_OVER_POND_HIGH --> BRIDGE_TYPE_POND_HIGH (Route 120, north)
+    if (metatileBehavior >= MB_BRIDGE_OVER_OCEAN
+     && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH)
+        return metatileBehavior - MB_BRIDGE_OVER_OCEAN;
 
-    result = metatileBehavior - MB_ROUTE120_SOUTH_BRIDGE_1;
-    if (result < 2)
-        return 2;
+    if (metatileBehavior >= MB_BRIDGE_OVER_POND_MED_EDGE_1 
+     && metatileBehavior <= MB_BRIDGE_OVER_POND_MED_EDGE_2)
+        return BRIDGE_TYPE_POND_MED;
 
-    result = metatileBehavior - MB_ROUTE120_NORTH_BRIDGE_3;
-    if (result < 2)
-        return 3;
+    if (metatileBehavior >= MB_BRIDGE_OVER_POND_HIGH_EDGE_1
+     && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH_EDGE_2)
+        return BRIDGE_TYPE_POND_HIGH;
 
-    return 0;
+    return BRIDGE_TYPE_OCEAN;
 }
 
-u8 MetatileBehavior_8089510(u8 metatileBehavior)
+// Used to allow fishing below the bridge metatiles.
+bool8 MetatileBehavior_IsBridgeOverWaterNoEdge(u8 metatileBehavior)
 {
-    u8 result = metatileBehavior - MB_WARP_OR_BRIDGE;
-
-    if (result < 4)
-        return 1;
+    if (metatileBehavior >= MB_BRIDGE_OVER_OCEAN
+     && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH)
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 bool8 MetatileBehavior_IsLandWildEncounter(u8 metatileBehavior)
 {
-    if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == FALSE && MetatileBehavior_IsEncounterTile(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == FALSE
+     && MetatileBehavior_IsEncounterTile(metatileBehavior) == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -934,7 +950,8 @@ bool8 MetatileBehavior_IsLandWildEncounter(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior)
 {
-    if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == TRUE && MetatileBehavior_IsEncounterTile(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == TRUE
+     && MetatileBehavior_IsEncounterTile(metatileBehavior) == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -1148,8 +1165,10 @@ bool8 MetatileBehavior_IsPacifidlogHorizontalLog2(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsPacifidlogLog(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_1 || metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_2
-        || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_1 || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_2)
+    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_1
+     || metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_2
+     || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_1
+     || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_2)
         return TRUE;
     else
         return FALSE;
@@ -1243,9 +1262,13 @@ bool8 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWarpOrBridge(u8 metatileBehavior)
+// Very odd, used to initiate a teleport-style warp.
+// No warp events seem to be on a metatile of this kind, and it's
+// used by log bridges over ocean-style water, which wouldn't make
+// sense to have a warp like this.
+bool8 MetatileBehavior_IsBridgeOverOcean(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_WARP_OR_BRIDGE)
+    if (metatileBehavior == MB_BRIDGE_OVER_OCEAN)
         return TRUE;
     else
         return FALSE;
@@ -1262,9 +1285,15 @@ bool8 MetatileBehavior_IsMossdeepGymWarp(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_POND_WATER || metatileBehavior == MB_OCEAN_WATER || metatileBehavior == MB_SEMI_DEEP_WATER || metatileBehavior == MB_DEEP_WATER
-        || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER || (metatileBehavior == MB_EASTWARD_CURRENT || metatileBehavior == MB_WESTWARD_CURRENT
-        || metatileBehavior == MB_NORTHWARD_CURRENT || metatileBehavior == MB_SOUTHWARD_CURRENT))
+    if (metatileBehavior == MB_POND_WATER
+     || metatileBehavior == MB_OCEAN_WATER
+     || metatileBehavior == MB_SEMI_DEEP_WATER
+     || metatileBehavior == MB_DEEP_WATER
+     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
+     || (metatileBehavior == MB_EASTWARD_CURRENT
+      || metatileBehavior == MB_WESTWARD_CURRENT
+      || metatileBehavior == MB_NORTHWARD_CURRENT
+      || metatileBehavior == MB_SOUTHWARD_CURRENT))
         return TRUE;
     else
         return FALSE;
