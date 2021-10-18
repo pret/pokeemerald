@@ -47,7 +47,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #ifdef TX_DIFFICULTY_CHALLENGES_USED
-    #include "tx_difficulty_challenges.h"
+    //#include "tx_difficulty_challenges.h"
 #endif
 
 enum
