@@ -24,8 +24,6 @@
 #include "m4a.h"
 #include "constants/mauville_old_man.h"
 
-#define CHAR_SONG_WORD_SEPARATOR 0x37
-
 static void InitGiddyTaleList(void);
 static void StartBardSong(bool8 useTemporaryLyrics);
 static void Task_BardSong(u8 taskId);
@@ -50,25 +48,28 @@ static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
 };
 
 static const u8 * const sGiddyAdjectives[] = {
-    gText_SoPretty,
-    gText_SoDarling,
-    gText_SoRelaxed,
-    gText_SoSunny,
-    gText_SoDesirable,
-    gText_SoExciting,
-    gText_SoAmusing,
-    gText_SoMagical
+    GiddyText_SoPretty,
+    GiddyText_SoDarling,
+    GiddyText_SoRelaxed,
+    GiddyText_SoSunny,
+    GiddyText_SoDesirable,
+    GiddyText_SoExciting,
+    GiddyText_SoAmusing,
+    GiddyText_SoMagical
 };
 
-static const u8 * const sGiddyQuestions[] = {
-    gMauvilleManText_ISoWantToGoOnAVacation,
-    gMauvilleManText_IBoughtCrayonsWith120Colors,
-    gMauvilleManText_WouldntItBeNiceIfWeCouldFloat,
-    gMauvilleManText_WhenYouWriteOnASandyBeach,
-    gMauvilleManText_WhatsTheBottomOfTheSeaLike,
-    gMauvilleManText_WhenYouSeeTheSettingSunDoesIt,
-    gMauvilleManText_LyingBackInTheGreenGrass,
-    gMauvilleManText_SecretBasesAreSoWonderful
+// Non-random lines Giddy can say. Not all are strictly
+// questions, but most are, and the player will receive
+// a Yes/No prompt afterwards regardless.
+static const u8 * const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
+    GiddyText_ISoWantToGoOnAVacation,
+    GiddyText_IBoughtCrayonsWith120Colors,
+    GiddyText_WouldntItBeNiceIfWeCouldFloat,
+    GiddyText_WhenYouWriteOnASandyBeach,
+    GiddyText_WhatsTheBottomOfTheSeaLike,
+    GiddyText_WhenYouSeeTheSettingSunDoesIt,
+    GiddyText_LyingBackInTheGreenGrass,
+    GiddyText_SecretBasesAreSoWonderful
 };
 
 static void SetupBard(void)
@@ -185,7 +186,7 @@ static void PrepareSongText(void)
         while (wordEnd != str)
         {
             if (*str == CHAR_SPACE)
-                *str = CHAR_SONG_WORD_SEPARATOR;
+                *str = CHAR_BARD_WORD_DELIMIT;
             str++;
         }
 
@@ -196,7 +197,7 @@ static void PrepareSongText(void)
         while (wordEnd != str)
         {
             if (*str == CHAR_SPACE)
-                *str = CHAR_SONG_WORD_SEPARATOR;
+                *str = CHAR_BARD_WORD_DELIMIT;
             str++;
         }
 
@@ -207,7 +208,7 @@ static void PrepareSongText(void)
         while (wordEnd != str)
         {
             if (*str == CHAR_SPACE)
-                *str = CHAR_SONG_WORD_SEPARATOR;
+                *str = CHAR_BARD_WORD_DELIMIT;
             str++;
         }
 
@@ -272,22 +273,26 @@ void GenerateGiddyLine(void)
     if (giddy->taleCounter == 0)
         InitGiddyTaleList();
 
+    // A line from Giddy is either a line following this format:
+    // "{random word} is so {adjective}! Don't you agree?",
+    // or one of the texts in sGiddyQuestions.
     if (giddy->randomWords[giddy->taleCounter] != EC_EMPTY_WORD)
     {
         u8 *stringPtr;
         u32 adjective = Random();
+        adjective %= ARRAY_COUNT(sGiddyAdjectives);
 
-        adjective %= 8;
         stringPtr = CopyEasyChatWord(gStringVar4, giddy->randomWords[giddy->taleCounter]);
-        stringPtr = StringCopy(stringPtr, gOtherText_Is);
+        stringPtr = StringCopy(stringPtr, GiddyText_Is);
         stringPtr = StringCopy(stringPtr, sGiddyAdjectives[adjective]);
-        StringCopy(stringPtr, gOtherText_DontYouAgree);
+        StringCopy(stringPtr, GiddyText_DontYouAgree);
     }
     else
     {
         StringCopy(gStringVar4, sGiddyQuestions[giddy->questionList[giddy->questionNum++]]);
     }
 
+    // 10% chance for Giddy to stop telling tales.
     if (!(Random() % 10))
         giddy->taleCounter = GIDDY_MAX_TALES;
     else
@@ -308,45 +313,53 @@ static void InitGiddyTaleList(void)
         {EC_GROUP_POKEMON_NATIONAL, 0}
     };
     u16 i;
-    u16 r10;
-    u16 r7;
-    u16 r1;
+    u16 totalWords;
+    u16 temp;
+    u16 var; // re-used
 
     // Shuffle question list
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < GIDDY_MAX_QUESTIONS; i++)
         giddy->questionList[i] = i;
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < GIDDY_MAX_QUESTIONS; i++)
     {
-        r1 = Random() % (i + 1);
-        SWAP(giddy->questionList[i], giddy->questionList[r1], r7);
+        var = Random() % (i + 1);
+        SWAP(giddy->questionList[i], giddy->questionList[var], temp);
     }
 
-    r10 = 0;
-    for (i = 0; i < 6; i++)
+    // Count total number of words in above word groups
+    totalWords = 0;
+    for (i = 0; i < ARRAY_COUNT(wordGroupsAndCount); i++)
     {
         wordGroupsAndCount[i][1] = EasyChat_GetNumWordsInGroup(wordGroupsAndCount[i][0]);
-        r10 += wordGroupsAndCount[i][1];
+        totalWords += wordGroupsAndCount[i][1];
     }
 
     giddy->questionNum = 0;
-    r7 = 0;
+    temp = 0;
     for (i = 0; i < GIDDY_MAX_TALES; i++)
     {
-        r1 = Random() % 10;
-        if (r1 < 3 && r7 < 8)
+        var = Random() % 10;
+        if (var < 3 && temp < GIDDY_MAX_QUESTIONS)
         {
+            // 30% chance for word to be empty (in which case Giddy
+            // will say one of his non-random questions), unless
+            // the limit for questions has been reached already.
             giddy->randomWords[i] = EC_EMPTY_WORD;
-            r7++;
+            temp++;
         }
         else
         {
-            s16 r2 = Random() % r10;
-            for (r1 = 0; i < 6; r1++)
-                if ((r2 -= wordGroupsAndCount[r1][1]) <= 0)
+            // Pick a random word id, then advance through the word
+            // groups until the group where that id landed.
+            s16 randWord = Random() % totalWords;
+            for (var = 0; i < ARRAY_COUNT(wordGroupsAndCount); var++)
+                if ((randWord -= wordGroupsAndCount[var][1]) <= 0)
                     break;
-            if (r1 == 6)
-                r1 = 0;
-            giddy->randomWords[i] = GetRandomEasyChatWordFromUnlockedGroup(wordGroupsAndCount[r1][0]);
+            if (var == ARRAY_COUNT(wordGroupsAndCount))
+                var = 0;
+
+            // Save the randomly selected word
+            giddy->randomWords[i] = GetRandomEasyChatWordFromUnlockedGroup(wordGroupsAndCount[var][0]);
         }
     }
 }
@@ -392,10 +405,23 @@ void ResetMauvilleOldManFlag(void)
     SetMauvilleOldManObjEventGfx();
 }
 
+// States and task data for Task_BardSong.
+// The function BardSing receives this task as an
+// argument and reads its state as well.
+enum {
+    BARD_STATE_INIT,
+    BARD_STATE_WAIT_BGM,
+    BARD_STATE_GET_WORD,
+    BARD_STATE_HANDLE_WORD,
+    BARD_STATE_WAIT_WORD,
+    BARD_STATE_PAUSE,
+};
 
-#define tState data[0]
-#define tCharIndex data[3]
-#define tCurrWord data[4]
+#define tState              data[0]
+#define tWordState          data[1]
+#define tDelay              data[2]
+#define tCharIndex          data[3]
+#define tCurrWord           data[4]
 #define tUseTemporaryLyrics data[5]
 
 #define MACRO1(a) (((a) & 3) + (((a) / 8) & 1))
@@ -418,7 +444,7 @@ static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
     gDisableTextPrinters = TRUE;
 }
 
-static void sub_8120708(const u8 * str)
+static void DrawSongTextWindow(const u8 * str)
 {
     DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, str, 0, 1, 1, DisableTextPrinters);
@@ -430,7 +456,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
 {
     switch (task->tState)
     {
-    case 0:  // Initialize song
+    case BARD_STATE_INIT:
     {
         struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
         u16 *lyrics;
@@ -446,9 +472,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
         song->currWord = 0;
     }
         break;
-    case 1:  // Wait for BGM to end
+    case BARD_STATE_WAIT_BGM:
         break;
-    case 2:  // Initialize word
+    case BARD_STATE_GET_WORD:
     {
         u16 word = song->lyrics[song->currWord];
         song->sound = GetWordSounds(word);
@@ -463,8 +489,8 @@ static void BardSing(struct Task *task, struct BardSong *song)
         }
         break;
     }
-    case 3:
-    case 4:
+    case BARD_STATE_HANDLE_WORD:
+    case BARD_STATE_WAIT_WORD:
     {
         const struct BardSound *sound = &song->sound[song->currPhoneme];
 
@@ -524,7 +550,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
         }
     }
         break;
-    case 5:
+    case BARD_STATE_PAUSE:
         break;
     }
 }
@@ -534,28 +560,30 @@ static void Task_BardSong(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     BardSing(task, &gBardSong);
+
     switch (task->tState)
     {
-    case 0:  // Initialize song
+    case BARD_STATE_INIT:
         PrepareSongText();
-        sub_8120708(gStringVar4);
-        task->data[1] = 0;
-        task->data[2] = 0;
+        DrawSongTextWindow(gStringVar4);
+        task->tWordState = 0;
+        task->tDelay = 0;
         task->tCharIndex = 0;
         task->tCurrWord = 0;
         FadeOutBGMTemporarily(4);
-        task->tState = 1;
+        task->tState = BARD_STATE_WAIT_BGM;
         break;
-    case 1:  // Wait for BGM to end
+    case BARD_STATE_WAIT_BGM:
         if (IsBGMPausedOrStopped())
-            task->tState = 2;
+            task->tState = BARD_STATE_GET_WORD;
         break;
-    case 2:  // Initialize word
+    case BARD_STATE_GET_WORD:
     {
         struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-        u8 *str = gStringVar4 + task->tCharIndex;
+        u8 *str = &gStringVar4[task->tCharIndex];
         u16 wordLen = 0;
 
+        // Read letters until delimiter
         while (*str != CHAR_SPACE
             && *str != CHAR_NEWLINE
             && *str != EXT_CTRL_CODE_BEGIN
@@ -564,6 +592,7 @@ static void Task_BardSong(u8 taskId)
             str++;
             wordLen++;
         }
+
         if (!task->tUseTemporaryLyrics)
             sUnknownBardRelated = MACRO2(bard->songLyrics[task->tCurrWord]);
         else
@@ -574,27 +603,29 @@ static void Task_BardSong(u8 taskId)
             gBardSong.length = 1;
         task->tCurrWord++;
 
-        if (task->data[2] == 0)
+        if (task->tDelay == 0)
         {
-            task->tState = 3;
-            task->data[1] = 0;
+            task->tState = BARD_STATE_HANDLE_WORD;
+            task->tWordState = 0;
         }
         else
         {
-            task->tState = 5;
-            task->data[1] = 0;
+            task->tState = BARD_STATE_PAUSE;
+            task->tWordState = 0;
         }
     }
         break;
-    case 5:
-        if (task->data[2] == 0)
-            task->tState = 3;
+    case BARD_STATE_PAUSE:
+        // Wait before singing next word
+        if (task->tDelay == 0)
+            task->tState = BARD_STATE_HANDLE_WORD;
         else
-            task->data[2]--;
+            task->tDelay--;
         break;
-    case 3:
+    case BARD_STATE_HANDLE_WORD:
         if (gStringVar4[task->tCharIndex] == EOS)
         {
+            // End song
             FadeInBGM(6);
             m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
             EnableBothScriptContexts();
@@ -602,55 +633,61 @@ static void Task_BardSong(u8 taskId)
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
         {
-
+            // Handle space
             EnableTextPrinters();
             task->tCharIndex++;
-            task->tState = 2;
-            task->data[2] = 0;
+            task->tState = BARD_STATE_GET_WORD;
+            task->tDelay = 0;
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_NEWLINE)
         {
+            // Handle newline
             task->tCharIndex++;
-            task->tState = 2;
-            task->data[2] = 0;
+            task->tState = BARD_STATE_GET_WORD;
+            task->tDelay = 0;
         }
         else if (gStringVar4[task->tCharIndex] == EXT_CTRL_CODE_BEGIN)
         {
+            // Handle ctrl code
             task->tCharIndex += 2;  // skip over control codes
-            task->tState = 2;
-            task->data[2] = 8;
+            task->tState = BARD_STATE_GET_WORD;
+            task->tDelay = 8;
         }
-        else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
+        else if (gStringVar4[task->tCharIndex] == CHAR_BARD_WORD_DELIMIT)
         {
-            gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
+            // Handle word boundary
+            gStringVar4[task->tCharIndex] = CHAR_SPACE;  // Replace with a real space
             EnableTextPrinters();
             task->tCharIndex++;
-            task->data[2] = 0;
+            task->tDelay = 0;
         }
         else
         {
-            switch (task->data[1])
+            // Handle regular word
+            switch (task->tWordState)
             {
             case 0:
                 EnableTextPrinters();
-                task->data[1]++;
+                task->tWordState++;
                 break;
             case 1:
-                task->data[1]++;
+                task->tWordState++;
                 break;
             case 2:
                 task->tCharIndex++;
-                task->data[1] = 0;
-                task->data[2] = gBardSong.length;
-                task->tState = 4;
+                task->tWordState = 0;
+                task->tDelay = gBardSong.length;
+                task->tState = BARD_STATE_WAIT_WORD;
                 break;
             }
         }
         break;
-    case 4:
-        task->data[2]--;
-        if (task->data[2] == 0)
-            task->tState = 3;
+    case BARD_STATE_WAIT_WORD:
+        // Wait for word to finish being sung.
+        // BardSing will continue to play it.
+        task->tDelay--;
+        if (task->tDelay == 0)
+            task->tState = BARD_STATE_HANDLE_WORD;
         break;
     }
     RunTextPrintersAndIsPrinter0Active();
@@ -1107,6 +1144,9 @@ static const struct Story sStorytellerStories[] = {
     }
 };
 
+static const s32 sNumStories = ARRAY_COUNT(sStorytellerStories);
+static const u32 sUnused = 8;
+
 static void StorytellerSetup(void)
 {
     s32 i;
@@ -1140,12 +1180,12 @@ static const struct Story *GetStoryByStat(u32 stat)
 {
     s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sStorytellerStories); i++)
+    for (i = 0; i < sNumStories; i++)
     {
         if (sStorytellerStories[i].stat == stat)
             return &sStorytellerStories[i];
     }
-    return &sStorytellerStories[ARRAY_COUNT(sStorytellerStories) - 1];
+    return &sStorytellerStories[sNumStories - 1];
 }
 
 static const u8 *GetStoryTitleByStat(u32 stat)
@@ -1241,28 +1281,16 @@ static void ScrambleStatList(u8 * arr, s32 count)
     }
 }
 
-struct UnknownStruct_0859F288
-{
-    s32 length;
-    u32 unused2;
-};
-
-static const struct UnknownStruct_0859F288 sStorytellerStuff = {
-    ARRAY_COUNT(sStorytellerStories),
-    sizeof(sStorytellerStuff)
-};
-
 static bool8 StorytellerInitializeRandomStat(void)
 {
-    u8 arr[sStorytellerStuff.length];
-    s32 i;
-    s32 j;
+    u8 storyIds[sNumStories];
+    s32 i, j;
 
-    ScrambleStatList(arr, ARRAY_COUNT(sStorytellerStories));
-    for (i = 0; i < (s32)ARRAY_COUNT(sStorytellerStories); i++)
+    ScrambleStatList(storyIds, sNumStories);
+    for (i = 0; i < sNumStories; i++)
     {
-        u8 stat = sStorytellerStories[arr[i]].stat;
-        u8 minVal = sStorytellerStories[arr[i]].minVal;
+        u8 stat = sStorytellerStories[storyIds[i]].stat;
+        u8 minVal = sStorytellerStories[storyIds[i]].minVal;
 
         for (j = 0; j < NUM_STORYTELLER_TALES; j++)
         {
