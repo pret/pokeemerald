@@ -8177,7 +8177,7 @@ static bool8 MultiMove_Start(void)
     {
     case 0:
         HideBg(0);
-        sub_80D304C(0x80);
+        TryLoadAllMonIconPalettesAtOffset(0x80);
         sMultiMove->state++;
         break;
     case 1:
