@@ -639,7 +639,7 @@ struct MauvilleManGiddy
     /*0x00*/ u8 id;
     /*0x01*/ u8 taleCounter;
     /*0x02*/ u8 questionNum;
-    /*0x04*/ u16 randomWords[10];
+    /*0x04*/ u16 randomWords[GIDDY_MAX_TALES];
     /*0x18*/ u8 questionList[8];
     /*0x20*/ u8 language;
 }; /*size = 0x2C*/

@@ -130,13 +130,13 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
     }
 }
 
-void ScrSpecial_GetTraderTradedFlag(void)
+void GetTraderTradedFlag(void)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
     gSpecialVar_Result = trader->alreadyTraded;
 }
 
-void ScrSpecial_DoesPlayerHaveNoDecorations(void)
+void DoesPlayerHaveNoDecorations(void)
 {
     u8 i;
 
@@ -151,7 +151,7 @@ void ScrSpecial_DoesPlayerHaveNoDecorations(void)
     gSpecialVar_Result = TRUE;
 }
 
-void ScrSpecial_IsDecorationFull(void)
+void IsDecorationCategoryFull(void)
 {
     gSpecialVar_Result = FALSE;
     if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
@@ -162,7 +162,7 @@ void ScrSpecial_IsDecorationFull(void)
     }
 }
 
-void ScrSpecial_TraderMenuGiveDecoration(void)
+void TraderShowDecorationMenu(void)
 {
     CreateTask(ShowDecorationCategoriesWindow, 0);
 }
@@ -190,7 +190,7 @@ void ExitTraderMenu(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void ScrSpecial_TraderDoDecorationTrade(void)
+void TraderDoDecorationTrade(void)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
 
@@ -202,7 +202,7 @@ void ScrSpecial_TraderDoDecorationTrade(void)
     trader->alreadyTraded = TRUE;
 }
 
-void ScrSpecial_TraderMenuGetDecoration(void)
+void TraderMenuGetDecoration(void)
 {
     u8 taskId = CreateTask(Task_HandleGetDecorationMenuInput, 0);
     CreateAvailableDecorationsMenu(taskId);
