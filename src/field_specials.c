@@ -116,8 +116,8 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused);
 static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection);
 static void CloseScrollableMultichoice(u8 taskId);
 static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId);
-static void sub_813A600(u8 taskId);
-static void sub_813A664(u8 taskId);
+static void Task_ScrollableMultichoice_WaitReturnToList(u8 taskId);
+static void Task_ScrollableMultichoice_ReturnToList(u8 taskId);
 static void ShowFrontierExchangeCornerItemIcon(u16 item);
 static void Task_DeoxysRockInteraction(u8 taskId);
 static void ChangeDeoxysRockLevel(u8 a0);
@@ -2702,10 +2702,10 @@ static void ScrollableMultichoice_ProcessInput(u8 taskId)
         {
             CloseScrollableMultichoice(taskId);
         }
-        else
+        else // Handle selection while keeping the menu open
         {
             ScrollableMultichoice_RemoveScrollArrows(taskId);
-            task->func = sub_813A600;
+            task->func = Task_ScrollableMultichoice_WaitReturnToList;
             EnableBothScriptContexts();
         }
         break;
@@ -2729,36 +2729,32 @@ static void CloseScrollableMultichoice(u8 taskId)
     EnableBothScriptContexts();
 }
 
-// Functionally unused; tKeepOpenAfterSelect is only != 0 in unused functions
-static void sub_813A600(u8 taskId)
+// Never run, tKeepOpenAfterSelect is FALSE for all scrollable multichoices.
+static void Task_ScrollableMultichoice_WaitReturnToList(u8 taskId)
 {
     switch (gTasks[taskId].tKeepOpenAfterSelect)
     {
-        case 1:
-        default:
-            break;
-        case 2:
-            gTasks[taskId].tKeepOpenAfterSelect = 1;
-            gTasks[taskId].func = sub_813A664;
-            break;
+    case 1:
+    default:
+        break;
+    case 2:
+        gTasks[taskId].tKeepOpenAfterSelect = 1;
+        gTasks[taskId].func = Task_ScrollableMultichoice_ReturnToList;
+        break;
     }
 }
 
 // Never called
-void sub_813A630(void)
+void ScrollableMultichoice_TryReturnToList(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_813A600);
+    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId == TASK_NONE)
-    {
         EnableBothScriptContexts();
-    }
     else
-    {
-        gTasks[taskId].tKeepOpenAfterSelect++;
-    }
+        gTasks[taskId].tKeepOpenAfterSelect++; // Return to list
 }
 
-static void sub_813A664(u8 taskId)
+static void Task_ScrollableMultichoice_ReturnToList(u8 taskId)
 {
     ScriptContext2_Enable();
     ScrollableMultichoice_UpdateScrollArrows(taskId);
@@ -2807,23 +2803,7 @@ static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId)
 // Removed for Emerald (replaced by ShowScrollableMultichoice)
 void ShowGlassWorkshopMenu(void)
 {
-    /*
-    u8 i;
-    ScriptContext2_Enable();
-    Menu_DrawStdWindowFrame(0, 0, 10, 11);
-    InitMenu(0, 1, 1, 5, 0, 9);
-    gUnknown_0203925C = 0;
-    ClearVerticalScrollIndicatorPalettes();
-    LoadScrollIndicatorPalette();
-    sub_810F2B4();
-    for (i = 0; i < 5; i++)
-    {
-        Menu_PrintText(gUnknown_083F83C0[i], 1, 2 * i + 1);
-    }
-    gUnknown_0203925B = 0;
-    gUnknown_0203925A = ARRAY_COUNT(gUnknown_083F83C0);
-    CreateTask(sub_810F118, 8);
-    */
+
 }
 
 void SetBattleTowerLinkPlayerGfx(void)
@@ -3252,11 +3232,11 @@ void CloseBattleFrontierTutorWindow(void)
 }
 
 // Never called
-void sub_813ADD4(void)
+void ScrollableMultichoice_RedrawPersistentMenu(void)
 {
     u16 scrollOffset, selectedRow;
     u8 i;
-    u8 taskId = FindTaskIdByFunc(sub_813A600);
+    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
@@ -3264,9 +3244,7 @@ void sub_813ADD4(void)
         SetStandardWindowBorderStyle(task->tWindowId, 0);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
-        {
             AddTextPrinterParameterized5(task->tWindowId, 1, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
-        }
 
         AddTextPrinterParameterized(task->tWindowId, 1, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
         PutWindowTilemap(task->tWindowId);
@@ -3313,9 +3291,10 @@ void GetBattleFrontierTutorMoveIndex(void)
 }
 
 // Never called
-void sub_813AF48(void)
+// Close a scrollable multichoice that stays open after selection
+void ScrollableMultichoice_ClosePersistentMenu(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_813A600);
+    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
