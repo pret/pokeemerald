@@ -294,3 +294,4 @@ u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n)
 
     return result;
 }
+
