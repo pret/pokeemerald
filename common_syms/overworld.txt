@@ -1,8 +1,0 @@
-gBGTilemapBuffers1
-gBGTilemapBuffers2
-gBGTilemapBuffers3
-gHeldKeyCodeToSend
-gFieldCallback
-gFieldCallback2
-gLocalLinkPlayerId
-gFieldLinkPlayerCount

@@ -1,5 +1,0 @@
-gUnusedWindowVar1
-gUnusedWindowVar2
-gTransparentTileNumber
-gUnusedWindowVar3
-gWindowBgTilemapBuffers
