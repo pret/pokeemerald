@@ -209,7 +209,11 @@ u8 BattleAI_ChooseMoveOrAction(void)
         ret = ChooseMoveOrAction_Singles();
     else
         ret = ChooseMoveOrAction_Doubles();
-
+    
+    // Clear protect structures, some flags may be set during AI calcs
+    // e.g. pranksterElevated from GetMovePriority
+    memset(&gProtectStructs[gActiveBattler], 0, sizeof(struct ProtectStruct));
+    
     gCurrentMove = savedCurrentMove;
     return ret;
 }
@@ -513,7 +517,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 moveEffect = gBattleMoves[move].effect;
     s32 moveType;
-    u8 moveTarget = gBattleMoves[move].target;
+    u16 moveTarget = gBattleMoves[move].target;
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
     u8 effectiveness = AI_GetMoveEffectiveness(move, battlerAtk, battlerDef);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
@@ -824,19 +828,15 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (!BattlerStatCanRise(battlerAtk, AI_DATA->atkAbility, STAT_ATK) || !HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
                 score -= 10;
             break;
-        case EFFECT_DEFENSE_UP_2:
-            if (move == MOVE_STUFF_CHEEKS && ItemId_GetPocket(gBattleMons[battlerAtk].item) != POCKET_BERRIES)
-                score -= 10;
+        case EFFECT_STUFF_CHEEKS:
+            if (ItemId_GetPocket(gBattleMons[battlerAtk].item) != POCKET_BERRIES)
+                return 0;   // cannot even select
             //fallthrough
         case EFFECT_DEFENSE_UP:
+        case EFFECT_DEFENSE_UP_2:
         case EFFECT_DEFENSE_UP_3:
         case EFFECT_DEFENSE_CURL:
             if (!BattlerStatCanRise(battlerAtk, AI_DATA->atkAbility, STAT_DEF))
-                score -= 10;
-            break;
-        case EFFECT_SPEED_UP:
-        case EFFECT_SPEED_UP_2:
-            if (!BattlerStatCanRise(battlerAtk, AI_DATA->atkAbility, STAT_SPEED))
                 score -= 10;
             break;
         case EFFECT_SPECIAL_ATTACK_UP:
@@ -2514,7 +2514,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // move data
     u8 moveType = gBattleMoves[move].type;
     u16 effect = gBattleMoves[move].effect;
-    u8 target = gBattleMoves[move].target;
+    u16 target = gBattleMoves[move].target;
     // ally data
     u8 battlerAtkPartner = AI_DATA->battlerAtkPartner;
     u16 atkPartnerAbility = AI_DATA->atkPartnerAbility;
@@ -3363,6 +3363,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_PARALYZE:
         IncreaseParalyzeScore(battlerAtk, battlerDef, move, &score);
         break;
+    case EFFECT_GRAV_APPLE:
+        if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+            score += 2;
+        // fall through
     case EFFECT_ATTACK_DOWN_HIT:
     case EFFECT_DEFENSE_DOWN_HIT:
     case EFFECT_SPECIAL_ATTACK_DOWN_HIT:

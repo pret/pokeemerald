@@ -37,6 +37,7 @@
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_DEBUG                  20
+#define B_ACTION_THROW_BALL             21 // R to throw last used ball
 #define B_ACTION_NONE                   0xFF
 
 #define MAX_TRAINER_ITEMS 4
@@ -174,6 +175,7 @@ struct SpecialStatus
     u8 instructedChosenTarget:3;
     u8 berryReduced:1;
     u8 gemBoost:1;
+    u8 rototillerAffected:1;  // to be affected by rototiller
     u8 gemParam;
     u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
     u8 dancerUsedMove:1;
@@ -209,6 +211,7 @@ struct SideTimer
     u8 tailwindBattlerId;
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
+    u8 retaliateTimer;
 };
 
 struct FieldTimer
@@ -492,7 +495,7 @@ struct BattleStruct
     u8 turnEffectsBattlerId;
     u8 turnCountersTracker;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
-    u8 moveTarget[MAX_BATTLERS_COUNT];
+    u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
     u8 wildVictorySong;
     u8 dynamicMoveType;
@@ -606,6 +609,7 @@ struct BattleStruct
     u8 quickClawBattlerId;
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
+    u8 ballSpriteIds[2];    // item gfx, window gfx
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -680,6 +684,7 @@ struct BattleScripting
     bool8 fixedPopup;   // Force ability popup to stick until manually called back
     u16 abilityPopupOverwrite;
     u8 switchCase;  // Special switching conditions, eg. red card
+    u8 overrideBerryRequirements;
 };
 
 // rom_80A5C6C
@@ -909,5 +914,6 @@ extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
+extern u16 gLastThrownBall;
 
 #endif // GUARD_BATTLE_H
