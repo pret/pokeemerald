@@ -436,7 +436,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
 
             for (j = 0; j < MAX_MON_MOVES; j++) {
                 gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][j] = AI_THINKING_STRUCT->score[j];
-                gBattleStruct->aiSimulatedDamage[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][i];
+                gBattleStruct->aiSimulatedDamage[sBattler_AI][gBattlerTarget][j] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][j];
             }
         }
     }
