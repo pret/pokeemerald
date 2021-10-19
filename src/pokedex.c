@@ -148,8 +148,6 @@ struct SearchMenuItem
     u8 selectionBgWidth;
 };
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
 struct PokedexListItem
 {
     u16 dexNum;

@@ -2388,7 +2388,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
         GetBattleAnimBg1Data(&animBg);
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, FALSE);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -2569,7 +2569,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
         GetBattleAnimBg1Data(&animBg);
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, FALSE);
         if (IsContest())
         {
             gBattle_BG1_X = -56;

@@ -318,7 +318,7 @@
 #define SOUND_PAN_TARGET    63
 
 // move background ids
-#define BG_DARK_ 0 // the same as BG_DARK but is unused
+#define BG_NONE 0 // the same as BG_DARK but is unused
 #define BG_DARK 1
 #define BG_GHOST 2
 #define BG_PSYCHIC 3
@@ -394,6 +394,9 @@
 
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
+
+// For createsprite macro to use internally
+#define ANIMSPRITE_IS_TARGET (1 << 7)
 
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0

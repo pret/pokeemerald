@@ -54,9 +54,8 @@ static void AnimTask_WaterSport_Step(u8);
 static void CreateWaterSportDroplet(struct Task*);
 static void CreateWaterPulseRingBubbles(struct Sprite*, int, int);
 
-// Both unused
-const u8 gUnknown_8593C80[] = INCBIN_U8("graphics/unknown/unknown_593C80.4bpp");
-const u8 gUnknown_8593FFC[] = INCBIN_U8("graphics/unknown/unknown_593FFC.bin");
+static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unused_water_gfx.4bpp");
+static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unused_water.bin");
 
 static const union AnimCmd sAnim_RainDrop[] =
 {
@@ -822,7 +821,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     }
     else
     {
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, 1);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, TRUE);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)

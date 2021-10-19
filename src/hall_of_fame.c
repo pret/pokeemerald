@@ -64,8 +64,6 @@ static EWRAM_DATA u32 sHofFadePalettes = 0;
 static EWRAM_DATA struct HallofFameTeam *sHofMonPtr = NULL;
 static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
 static void ClearVramOamPltt_LoadHofPal(void);
 static void LoadHofGfx(void);
 static void InitHofBgs(void);

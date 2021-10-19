@@ -38,6 +38,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
+#include "constants/battle_script_commands.h"
 #include "constants/hold_effects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
@@ -3103,7 +3104,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (!typeOverride)
         type = gBattleMoves[move].type;
     else
-        type = typeOverride & 0x3F;
+        type = typeOverride & DYNAMIC_TYPE_MASK;
 
     attack = attacker->attack;
     defense = defender->defense;
@@ -5041,7 +5042,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                                         temp2 = gActiveBattler;
                                         gActiveBattler = battlerId;
-                                        BtlController_EmitGetMonData(0, REQUEST_ALL_BATTLE, 0);
+                                        BtlController_EmitGetMonData(BUFFER_A, REQUEST_ALL_BATTLE, 0);
                                         MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = temp2;
                                     }
@@ -5077,9 +5078,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                     SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
 
                                     // Heal battler PP too (if applicable)
-                                    if (gMain.inBattle
-                                     && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                     && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[temp2]))
+                                    if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT && MOVE_IS_PERMANENT(battlerId, temp2))
                                         gBattleMons[battlerId].pp[temp2] = dataUnsigned;
 
                                     retVal = FALSE;
@@ -5105,9 +5104,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
 
                                 // Heal battler PP too (if applicable)
-                                if (gMain.inBattle
-                                 && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                 && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[moveIndex]))
+                                if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT && MOVE_IS_PERMANENT(battlerId, moveIndex))
                                     gBattleMons[battlerId].pp[moveIndex] = dataUnsigned;
 
                                 retVal = FALSE;
@@ -6875,7 +6872,7 @@ static bool8 ShouldSkipFriendshipChange(void)
 #define ALLOC_FAIL_BUFFER (1 << 0)
 #define ALLOC_FAIL_STRUCT (1 << 1)
 #define GFX_MANAGER_ACTIVE 0xA3 // Arbitrary value
-#define GFX_MANAGER_SPR_SIZE (MON_PIC_SIZE * 4) // * 4 is unnecessary, MON_PIC_SIZE is sufficient
+#define GFX_MANAGER_SPR_SIZE (MON_PIC_SIZE * 4) // Only Castform uses more than MON_PIC_SIZE, despite not displaying its forms.
 #define GFX_MANAGER_NUM_FRAMES 4  // Only 2 frames are needed
 
 static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)

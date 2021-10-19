@@ -660,14 +660,14 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
     {
         switch (bufferId)
         {
-        case 0:
+        case BUFFER_A:
             for (i = 0; i < size; i++)
             {
                 gBattleBufferA[gActiveBattler][i] = *data;
                 data++;
             }
             break;
-        case 1:
+        case BUFFER_B:
             for (i = 0; i < size; i++)
             {
                 gBattleBufferB[gActiveBattler][i] = *data;
@@ -737,7 +737,7 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
 
 static void Task_HandleSendLinkBuffersData(u8 taskId)
 {
-    u16 var;
+    u16 numPlayers;
     u16 blockSize;
 
     switch (gTasks[taskId].data[11])
@@ -759,11 +759,11 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                var = 2;
+                numPlayers = 2;
             else
-                var = (gBattleTypeFlags & BATTLE_TYPE_MULTI) ? 4 : 2;
+                numPlayers = (gBattleTypeFlags & BATTLE_TYPE_MULTI) ? 4 : 2;
 
-            if (GetLinkPlayerCount_2() >= var)
+            if (GetLinkPlayerCount_2() >= numPlayers)
             {
                 if (IsLinkMaster())
                 {
@@ -964,10 +964,10 @@ void BtlController_EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubs
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitReturnMonToBall(u8 bufferId, u8 arg1)
+void BtlController_EmitReturnMonToBall(u8 bufferId, bool8 skipAnim)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_RETURNMONTOBALL;
-    sBattleBuffersTransferData[1] = arg1;
+    sBattleBuffersTransferData[1] = skipAnim;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 2);
 }
 
@@ -1134,12 +1134,13 @@ void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringID)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, sizeof(struct BattleMsgData) + 4);
 }
 
-void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2)
+// itemId only relevant for B_ACTION_USE_ITEM
+void BtlController_EmitChooseAction(u8 bufferId, u8 action, u16 itemId)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_CHOOSEACTION;
-    sBattleBuffersTransferData[1] = arg1;
-    sBattleBuffersTransferData[2] = arg2;
-    sBattleBuffersTransferData[3] = (arg2 & 0xFF00) >> 8;
+    sBattleBuffersTransferData[1] = action;
+    sBattleBuffersTransferData[2] = itemId;
+    sBattleBuffersTransferData[3] = (itemId & 0xFF00) >> 8;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
@@ -1177,7 +1178,7 @@ void BtlController_EmitChooseItem(u8 bufferId, u8 *arg1)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abilityId, u8 *arg4)
+void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abilityId, u8 *data)
 {
     s32 i;
 
@@ -1186,7 +1187,7 @@ void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abili
     sBattleBuffersTransferData[2] = slotId;
     sBattleBuffersTransferData[3] = abilityId;
     for (i = 0; i < 3; i++)
-        sBattleBuffersTransferData[4 + i] = arg4[i];
+        sBattleBuffersTransferData[4 + i] = data[i];
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 8);  // Only 7 bytes were written.
 }
 
@@ -1280,15 +1281,19 @@ void BtlController_EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, void *data
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, size + 7);
 }
 
-void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *unusedDumbDataParameter)
+// Unused
+void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *data)
 {
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_PLAYBGM;
     sBattleBuffersTransferData[1] = songId;
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
-    for (i = 0; i < songId; i++) // ????
-        sBattleBuffersTransferData[3 + i] = *(u8*)(unusedDumbDataParameter++);
+
+    // Nonsense loop using songId as a size
+    // Would go out of bounds for any song id after SE_RG_BAG_POCKET (253)
+    for (i = 0; i < songId; i++)
+        sBattleBuffersTransferData[3 + i] = *(u8*)(data++);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, songId + 3);
 }
 
@@ -1442,8 +1447,8 @@ void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* h
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
-    sBattleBuffersTransferData[1] = flags & 0x7F;
-    sBattleBuffersTransferData[2] = (flags & 0x80) >> 7; // If true, skip delay after drawing. True during intro
+    sBattleBuffersTransferData[1] = flags & ~PARTY_SUMM_SKIP_DRAW_DELAY; // If true, skip player side
+    sBattleBuffersTransferData[2] = (flags & PARTY_SUMM_SKIP_DRAW_DELAY) >> 7; // If true, skip delay after drawing. True during intro
     sBattleBuffersTransferData[3] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     for (i = 0; i < (s32)(sizeof(struct HpAndStatus) * PARTY_SIZE); i++)
         sBattleBuffersTransferData[4 + i] = *(i + (u8*)(hpAndStatus));
@@ -1486,11 +1491,12 @@ void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 record)
+// mode is a LINK_STANDBY_* constant
+void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 mode, bool32 record)
 {
     bool8 record_ = record;
     sBattleBuffersTransferData[0] = CONTROLLER_LINKSTANDBYMSG;
-    sBattleBuffersTransferData[1] = arg1;
+    sBattleBuffersTransferData[1] = mode;
 
     if (record_)
         sBattleBuffersTransferData[3] = sBattleBuffersTransferData[2] = RecordedBattle_BufferNewBattlerData(&sBattleBuffersTransferData[4]);

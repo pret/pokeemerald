@@ -334,7 +334,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         defaultScoreMoves >>= 1;
     }
 
-    moveLimitations = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
+    moveLimitations = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
 
     // Ignore moves that aren't possible to use.
     for (i = 0; i < MAX_MON_MOVES; i++)
