@@ -8953,7 +8953,6 @@ static void Cmd_various(void)
         
         gBattlescriptCurrInstr += 4;
         return;
-    }
     case VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL:
     {
         bool8 canDoPrimalReversion = FALSE;
@@ -8969,6 +8968,7 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
