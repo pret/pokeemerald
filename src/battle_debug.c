@@ -228,7 +228,7 @@ static const u8 sText_InDoubles[] = _("In Doubles");
 static const u8 sText_HpAware[] = _("HP aware");
 static const u8 sText_Unknown[] = _("Unknown");
 static const u8 sText_InLove[] = _("In Love");
-static const u8 sText_AIMovePts[] = _("AI Move Pts");
+static const u8 sText_AIMovePts[] = _("AI Pts/Dmg");
 static const u8 sText_AiKnowledge[] = _("AI Info");
 static const u8 sText_EffectOverride[] = _("Effect Override");
 
