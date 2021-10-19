@@ -3394,7 +3394,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MEOWSTIC] =
     {
         .size = 0x45,
-        .y_offset = 6,
+        .y_offset = 3,
     },
     [SPECIES_HONEDGE] =
     {
@@ -5680,7 +5680,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MEOWSTIC_FEMALE] =
     {
         .size = 0x45,
-        .y_offset = 6,
+        .y_offset = 2,
     },
     // Aegislash
     [SPECIES_AEGISLASH_BLADE] =
