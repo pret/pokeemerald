@@ -713,6 +713,12 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
                                        gBattleStruct->aiFinalScore[data->aiBattlerId][gSprites[data->aiIconSpriteIds[j]].data[0]][i],
                                        STR_CONV_MODE_RIGHT_ALIGN, 3);
             AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 83 + count * 54, i * 15, 0, NULL);
+
+            ConvertIntToDecimalStringN(text,
+                                       gBattleStruct->aiSimulatedDamage[data->aiBattlerId][gSprites[data->aiIconSpriteIds[j]].data[0]][i],
+                                       STR_CONV_MODE_RIGHT_ALIGN, 3);
+            AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 110 + count * 54, i * 15, 0, NULL);
+
             count++;
         }
     }
@@ -780,7 +786,7 @@ static void Task_ShowAiPoints(u8 taskId)
         break;
     // Put text
     case 1:
-        winTemplate = CreateWindowTemplate(1, 0, 4, 27, 14, 15, 0x200);
+        winTemplate = CreateWindowTemplate(1, 0, 4, 30, 14, 15, 0x200);
         data->aiMovesWindowId = AddWindow(&winTemplate);
         PutWindowTilemap(data->aiMovesWindowId);
         PutMovesPointsText(data);

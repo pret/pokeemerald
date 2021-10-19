@@ -266,8 +266,10 @@ static u8 ChooseMoveOrAction_Singles(void)
         AI_THINKING_STRUCT->movesetIndex = 0;
     }
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++) {
         gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->score[i];
+        gBattleStruct->aiSimulatedDamage[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][i];
+    }
 
     // Check special AI actions.
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
@@ -432,8 +434,10 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 }
             }
 
-            for (j = 0; j < MAX_MON_MOVES; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++) {
                 gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][j] = AI_THINKING_STRUCT->score[j];
+                gBattleStruct->aiSimulatedDamage[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][i];
+            }
         }
     }
 
