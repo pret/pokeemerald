@@ -1924,6 +1924,7 @@ const u8 gText_EVO_SPECIFIC_MON_IN_PARTY[]          = _("LvlUp with {STR_VAR_2} 
 const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[]   = _("LvlUp with dark type in party");
 const u8 gText_EVO_TRADE_SPECIFIC_MON[]             = _("Traded for {STR_VAR_2}");
 const u8 gText_EVO_SPECIFIC_MAP[]                   = _("LvlUp on {STR_VAR_2}");
+const u8 gText_EVO_UNKNOWN[]                        = _("Method unknown");
 const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} has no evolution.");
 
 const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}EVOLUTIONS");

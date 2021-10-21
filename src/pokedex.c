@@ -7771,6 +7771,9 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
                 StringExpandPlaceholders(gStringVar4, gText_EVO_SPECIFIC_MAP );
                 break;
         #endif
+        default:
+            StringExpandPlaceholders(gStringVar4, gText_EVO_UNKNOWN );
+            break;
         }//Switch end
         PrintInfoScreenTextSmall(gStringVar4, base_x + depth_x*depth+base_x_offset, base_y + base_y_offset*base_i); //Print actual instructions
 
