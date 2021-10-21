@@ -4,7 +4,7 @@
 #define GET_NUM_STAMPS        0
 #define GET_MAX_STAMPS        1
 #define GET_CARD_BATTLES_WON  2
-#define GET_CARD_BATTLE_LOST  3
+#define GET_CARD_BATTLES_LOST 3
 #define GET_CARD_NUM_TRADES   4
 
 #define CARD_STAT_BATTLES_WON   0

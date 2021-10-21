@@ -1661,7 +1661,7 @@ u16 GetMysteryGiftCardStat(void)
             return MysteryGift_GetCardStat(CARD_STAT_MAX_STAMPS);
         case GET_CARD_BATTLES_WON:
             return MysteryGift_GetCardStat(CARD_STAT_BATTLES_WON);
-        case GET_CARD_BATTLE_LOST: // Never occurs
+        case GET_CARD_BATTLES_LOST: // Never occurs
             return MysteryGift_GetCardStat(CARD_STAT_BATTLES_LOST);
         case GET_CARD_NUM_TRADES: // Never occurs
             return MysteryGift_GetCardStat(CARD_STAT_NUM_TRADES);
