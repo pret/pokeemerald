@@ -2331,9 +2331,10 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_RETALIATE:
-            gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnSideTracker];
-            if (gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].retaliateTimer > 0)
-                gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].retaliateTimer--;
+            if (gSideTimers[0].retaliateTimer > 0)
+                gSideTimers[0].retaliateTimer--;
+            if (gSideTimers[1].retaliateTimer > 0)
+                gSideTimers[1].retaliateTimer--;
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_FIELD_COUNT:
