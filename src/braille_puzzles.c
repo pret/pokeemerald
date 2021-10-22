@@ -85,12 +85,12 @@ bool8 ShouldDoBrailleDigEffect(void)
 
 void DoBrailleDigEffect(void)
 {
-    MapGridSetMetatileIdAt(16, 8, METATILE_Cave_SealedChamberEntrance_TopLeft);
-    MapGridSetMetatileIdAt(17, 8, METATILE_Cave_SealedChamberEntrance_TopMid);
-    MapGridSetMetatileIdAt(18, 8, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(16, 9, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(17, 9, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(18, 9, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(10 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(10 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
@@ -112,84 +112,8 @@ bool8 CheckRelicanthWailord(void)
 }
 
 // THEORY: this was caused by block commenting out all of the older R/S braille functions but leaving the call to it itself, which creates the nullsub.
-// the code is shown below to show what this might look like.
 void ShouldDoBrailleRegirockEffectOld(void)
 {
-    /*
-        if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
-    {
-        if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
-            return TRUE;
-        else if (gSaveBlock1.pos.x == 9 && gSaveBlock1.pos.y == 23)
-            return TRUE;
-        else if (gSaveBlock1.pos.x == 11 && gSaveBlock1.pos.y == 23)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-void DoBrailleRegirockEffect(void)
-{
-    FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
-    DrawWholeMapView();
-    PlaySE(SE_BANG);
-    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
-    ScriptContext2_Disable();
-}
-
-bool8 ShouldDoBrailleRegisteelEffect(void)
-{
-    if (!FlagGet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
-    {
-        if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-void DoBrailleRegisteelEffect(void)
-{
-    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    FieldEffectStart(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
-}
-
-bool8 FldEff_UseFlyAncientTomb(void)
-{
-    u8 taskId = CreateFieldMoveTask();
-
-    gTasks[taskId].data[8] = (u32)UseRegisteelHm_Callback >> 16;
-    gTasks[taskId].data[9] = (u32)UseRegisteelHm_Callback;
-    return FALSE;
-}
-
-void UseRegisteelHm_Callback(void)
-{
-    FieldEffectActiveListRemove(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
-    UseFlyAncientTomb_Finish();
-}
-
-void UseFlyAncientTomb_Finish(void)
-{
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
-    DrawWholeMapView();
-    PlaySE(SE_BANG);
-    FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
-    ScriptContext2_Disable();
-}
-    */
 }
 
 void DoSealedChamberShakingEffect1(void)
@@ -278,12 +202,12 @@ void UseRegirockHm_Callback(void)
 
 void DoBrailleRegirockEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, METATILE_Cave_SealedChamberEntrance_TopLeft);
-    MapGridSetMetatileIdAt(15, 26, METATILE_Cave_SealedChamberEntrance_TopMid);
-    MapGridSetMetatileIdAt(16, 26, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(14, 27, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
@@ -317,12 +241,12 @@ void UseRegisteelHm_Callback(void)
 
 void DoBrailleRegisteelEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, METATILE_Cave_SealedChamberEntrance_TopLeft);
-    MapGridSetMetatileIdAt(15, 26, METATILE_Cave_SealedChamberEntrance_TopMid);
-    MapGridSetMetatileIdAt(16, 26, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(14, 27, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
@@ -332,78 +256,6 @@ void DoBrailleRegisteelEffect(void)
 // theory: another commented out DoBrailleWait and Task_BrailleWait.
 void DoBrailleWait(void)
 {
-    /*
-    if (!FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
-        CreateTask(Task_BrailleWait, 0x50);
-}
-
-void Task_BrailleWait(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    switch (data[0])
-    {
-    case 0:
-        data[1] = 7200;
-        data[0] = 1;
-        break;
-    case 1:
-        if (BrailleWait_CheckButtonPress() != FALSE)
-        {
-            MenuZeroFillScreen();
-            PlaySE(SE_SELECT);
-            data[0] = 2;
-        }
-        else
-        {
-            data[1] = data[1] - 1;
-            if (data[1] == 0)
-            {
-                MenuZeroFillScreen();
-                data[0] = 3;
-                data[1] = 30;
-            }
-        }
-        break;
-    case 2:
-        if (BrailleWait_CheckButtonPress() == FALSE)
-        {
-            data[1] = data[1] - 1;
-            if (data[1] == 0)
-                data[0] = 4;
-            break;
-        }
-        sub_8064E2C();
-        DestroyTask(taskId);
-        ScriptContext2_Disable();
-        break;
-    case 3:
-        data[1] = data[1] - 1;
-        if (data[1] == 0)
-            data[0] = 4;
-        break;
-    case 4:
-        sub_8064E2C();
-        ScriptContext1_SetupScript(S_OpenRegiceChamber);
-        DestroyTask(taskId);
-        break;
-    }
-}
-
-bool32 BrailleWait_CheckButtonPress(void)
-{
-    u16 keyMask = A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON | DPAD_ANY;
-
-    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        keyMask |= L_BUTTON | R_BUTTON;
-    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        keyMask |= L_BUTTON;
-
-    if (gMain.newKeys & keyMask)
-        return TRUE;
-    else
-        return FALSE;
-    */
 }
 
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?

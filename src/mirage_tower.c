@@ -479,7 +479,9 @@ static void SetInvisibleMirageTowerMetatiles(void)
 {
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sInvisibleMirageTowerMetatiles); i++)
-        MapGridSetMetatileIdAt(sInvisibleMirageTowerMetatiles[i].x + 7, sInvisibleMirageTowerMetatiles[i].y + 7, sInvisibleMirageTowerMetatiles[i].metatileId);
+        MapGridSetMetatileIdAt(sInvisibleMirageTowerMetatiles[i].x + MAP_OFFSET,
+                               sInvisibleMirageTowerMetatiles[i].y + MAP_OFFSET,
+                               sInvisibleMirageTowerMetatiles[i].metatileId);
     DrawWholeMapView();
 }
 

@@ -34,6 +34,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
+#include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
 
@@ -1235,16 +1236,16 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
     int x, y;
     u8 textIndex = 0;
     u16 *map = gBackupMapLayout.map;
-    map += gBackupMapLayout.width * 7 + 7;
+    map += gBackupMapLayout.width * 7 + MAP_OFFSET;
 
     for (y = 0; y < 32; map += 47, y++)
     {
         for (x = 0; x < 32; x++)
         {
-            if ((map[x] & METATILE_ID_MASK) == FLOOR_EXIT_METATILE)
+            if ((map[x] & METATILE_ID_MASK) == METATILE_BattlePyramid_Exit)
             {
-                x += 7 - gObjectEvents[gSelectedObjectEvent].initialCoords.x;
-                y += 7 - gObjectEvents[gSelectedObjectEvent].initialCoords.y;
+                x += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.x;
+                y += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.y;
                 if (x >= minDistanceForExitHint
                  || x <= -minDistanceForExitHint
                  || y >= minDistanceForExitHint
@@ -1537,17 +1538,17 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         const u16 *layoutMap = mapLayout->map;
 
         gBackupMapLayout.map = backupMapData;
-        gBackupMapLayout.width = mapLayout->width * 4 + 15;
-        gBackupMapLayout.height = mapLayout->height * 4 + 14;
+        gBackupMapLayout.width = mapLayout->width * 4 + MAP_OFFSET_W;
+        gBackupMapLayout.height = mapLayout->height * 4 + MAP_OFFSET_H;
         map = backupMapData;
-        yOffset = ((i / 4 * mapLayout->height) + 7) * gBackupMapLayout.width;
-        xOffset = (i % 4 * mapLayout->width) + 7;
+        yOffset = ((i / 4 * mapLayout->height) + MAP_OFFSET) * gBackupMapLayout.width;
+        xOffset = (i % 4 * mapLayout->width) + MAP_OFFSET;
         map += yOffset + xOffset;
         for (y = 0; y < mapLayout->height; y++)
         {
             for (x = 0; x < mapLayout->width; x++)
             {
-                if ((layoutMap[x] & METATILE_ID_MASK) != FLOOR_EXIT_METATILE)
+                if ((layoutMap[x] & METATILE_ID_MASK) != METATILE_BattlePyramid_Exit)
                 {
                     map[x] = layoutMap[x];
                 }
@@ -1558,14 +1559,14 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
                         gSaveBlock1Ptr->pos.x = (mapLayout->width * (i % 4)) + x;
                         gSaveBlock1Ptr->pos.y = (mapLayout->height * (i / 4)) + y;
                     }
-                    map[x] = (layoutMap[x] & 0xFC00) | FLOOR_WALKABLE_METATILE;
+                    map[x] = (layoutMap[x] & (METATILE_ELEVATION_MASK | METATILE_COLLISION_MASK)) | METATILE_BattlePyramid_Floor;
                 }
                 else
                 {
                     map[x] = layoutMap[x];
                 }
             }
-            map += 15 + (mapLayout->width * 4);
+            map += MAP_OFFSET_W + (mapLayout->width * 4);
             layoutMap += mapLayout->width;
         }
     }

@@ -499,7 +499,7 @@ static void Task_SendPacket(u8 taskId)
         break;
     case 1:
         if (GetMultiplayerId() == 0)
-            SendBlockRequest(1);
+            SendBlockRequest(BLOCK_REQ_SIZE_200);
         task->data[0]++;
         break;
     case 2:
@@ -981,7 +981,7 @@ static void Task_DoRecordMixing(u8 taskId)
 
     // Mixing Emerald records.
     case 6:
-        if (!sub_801048C(FALSE))
+        if (!Rfu_SetLinkRecovery(FALSE))
         {
             CreateTask(Task_LinkSave, 5);
             task->data[0]++;
@@ -992,7 +992,7 @@ static void Task_DoRecordMixing(u8 taskId)
         {
             if (gWirelessCommType)
             {
-                sub_801048C(TRUE);
+                Rfu_SetLinkRecovery(TRUE);
                 task->data[0] = 8;
             }
             else

@@ -932,7 +932,7 @@ static const struct WindowTemplate sBlenderRecordWindowTemplate =
 
 static void UpdateHitPitch(void)
 {
-    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, 2 * (sBerryBlender->speed - MIN_ARROW_SPEED));
+    m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, 2 * (sBerryBlender->speed - MIN_ARROW_SPEED));
 }
 
 static void VBlankCB_BerryBlender(void)
@@ -1355,7 +1355,7 @@ static void CB2_StartBlenderLink(void)
         {
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
-                SendBlockRequest(4);
+                SendBlockRequest(BLOCK_REQ_SIZE_40);
             sBerryBlender->mainState++;
         }
         break;
@@ -2069,7 +2069,7 @@ static bool32 CheckRecvCmdMatches(u16 recvCmd, u16 linkCmd, u16 rfuCmd)
 {
     if (gReceivedRemoteLinkPlayers && gWirelessCommType)
     {
-        if ((recvCmd & 0xFF00) == rfuCmd)
+        if ((recvCmd & RFUCMD_MASK) == rfuCmd)
             return TRUE;
     }
     else
@@ -3135,7 +3135,7 @@ static void UpdateBlenderCenter(void)
         }
         else
         {
-            if ((gRecvCmds[0][BLENDER_COMM_INPUT_STATE] & 0xFF00) == RFUCMD_BLENDER_SEND_KEYS)
+            if ((gRecvCmds[0][BLENDER_COMM_INPUT_STATE] & RFUCMD_MASK) == RFUCMD_BLENDER_SEND_KEYS)
             {
                 sBerryBlender->progressBarValue = gRecvCmds[0][BLENDER_COMM_PROGRESS_BAR];
                 sBerryBlender->arrowPos = gRecvCmds[0][BLENDER_COMM_ARROW_POS];

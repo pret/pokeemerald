@@ -586,7 +586,7 @@ void SpawnLinkPartnerObjectEvent(void)
                         linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
                     break;
             }
-            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + 7, coordOffsets[j][1] + y + 7, 0);
+            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);
             LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, 240 - i, i);
             j++;
             if (j == MAX_LINK_PLAYERS)
@@ -633,13 +633,12 @@ static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEvent
     }
 }
 
-// NOTE: Coordinates are +7, +7 from actual in-map coordinates
 static const struct UCoords8 sMauvilleGymSwitchCoords[] =
 {
-    { 7, 22},
-    {11, 19},
-    {10, 16},
-    {15, 16}
+    { 0 + MAP_OFFSET, 15 + MAP_OFFSET},
+    { 4 + MAP_OFFSET, 12 + MAP_OFFSET},
+    { 3 + MAP_OFFSET,  9 + MAP_OFFSET},
+    { 8 + MAP_OFFSET,  9 + MAP_OFFSET}
 };
 
 // Presses the stepped-on switch and raises the rest
@@ -659,10 +658,10 @@ void MauvilleGymPressSwitch(void)
 void MauvilleGymSetDefaultBarriers(void)
 {
     int x, y;
-    // All switches/barriers are within these coord ranges -7
-    for (y = 12; y < 24; y++)
+    // All switches/barriers are within these coord ranges
+    for (y = 5 + MAP_OFFSET; y < 17 + MAP_OFFSET; y++)
     {
-        for (x = 7; x < 16; x++)
+        for (x = 0 + MAP_OFFSET; x < 9 + MAP_OFFSET; x++)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
@@ -759,9 +758,9 @@ void MauvilleGymDeactivatePuzzle(void)
         MapGridSetMetatileIdAt(switchCoords->x, switchCoords->y, METATILE_MauvilleGym_PressedSwitch);
         switchCoords++;
     }
-    for (y = 12; y < 24; y++)
+    for (y = 5 + MAP_OFFSET; y < 17 + MAP_OFFSET; y++)
     {
-        for (x = 7; x < 16; x++)
+        for (x = 0 + MAP_OFFSET; x < 9 + MAP_OFFSET; x++)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
@@ -902,8 +901,8 @@ static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
     }
     for (i = 0; i < nDoors; i++)
     {
-        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 7, metatileId | METATILE_COLLISION_MASK);
-        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 8, (metatileId + 8) | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET, metatileId | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET + 1, (metatileId + 8) | METATILE_COLLISION_MASK);
     }
     DrawWholeMapView();
 }
@@ -1115,7 +1114,7 @@ static void PCTurnOnEffect_1(s16 isPcTurnedOn, s8 dx, s8 dy)
             tileId = METATILE_BrendansMaysHouse_MayPC_On;
         }
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | METATILE_COLLISION_MASK);
 }
 
 void DoPCTurnOffEffect(void)
@@ -1156,7 +1155,7 @@ static void PCTurnOffEffect(void)
     {
         tileId = METATILE_BrendansMaysHouse_MayPC_Off;
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | METATILE_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -1189,13 +1188,13 @@ static void LotteryCornerComputerEffect(struct Task *task)
         task->data[3] = 0;
         if (task->data[4] != 0)
         {
-            MapGridSetMetatileIdAt(18, 8, METATILE_Shop_Laptop1_Normal | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(18, 9, METATILE_Shop_Laptop2_Normal | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Normal | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Normal | METATILE_COLLISION_MASK);
         }
         else
         {
-            MapGridSetMetatileIdAt(18, 8, METATILE_Shop_Laptop1_Flash | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(18, 9, METATILE_Shop_Laptop2_Flash | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Flash | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Flash | METATILE_COLLISION_MASK);
         }
         DrawWholeMapView();
         task->data[4] ^= 1;
@@ -1209,8 +1208,8 @@ static void LotteryCornerComputerEffect(struct Task *task)
 
 void EndLotteryCornerComputerEffect(void)
 {
-    MapGridSetMetatileIdAt(18, 8, METATILE_Shop_Laptop1_Normal | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(18, 9, METATILE_Shop_Laptop2_Normal | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Normal | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Normal | METATILE_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -1298,7 +1297,12 @@ void IsGrassTypeInParty(void)
 
 void SpawnCameraObject(void)
 {
-    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1, MOVEMENT_TYPE_FACE_DOWN, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
+                                                  MOVEMENT_TYPE_FACE_DOWN,
+                                                  OBJ_EVENT_ID_CAMERA,
+                                                  gSaveBlock1Ptr->pos.x + MAP_OFFSET,
+                                                  gSaveBlock1Ptr->pos.y + MAP_OFFSET,
+                                                  3);
     gObjectEvents[obj].invisible = TRUE;
     CameraObjectSetFollowedSpriteId(gObjectEvents[obj].spriteId);
 }
@@ -1949,23 +1953,15 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
         if (data[2] == FALSE)
         {
             for (y = 0; y < 3; y++)
-            {
                 for (x = 0; x < 3; x++)
-                {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Ascending[y][data[0] % 3] | METATILE_COLLISION_MASK);
-                }
-            }
+                    MapGridSetMetatileIdAt(x + MAP_OFFSET + 1, y + MAP_OFFSET, sElevatorWindowTiles_Ascending[y][data[0] % 3] | METATILE_COLLISION_MASK);
         }
         // descending
         else
         {
             for (y = 0; y < 3; y++)
-            {
                 for (x = 0; x < 3; x++)
-                {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Descending[y][data[0] % 3] | METATILE_COLLISION_MASK);
-                }
-            }
+                    MapGridSetMetatileIdAt(x + MAP_OFFSET + 1, y + MAP_OFFSET, sElevatorWindowTiles_Descending[y][data[0] % 3] | METATILE_COLLISION_MASK);
         }
         DrawWholeMapView();
         data[1] = 0;
@@ -3779,7 +3775,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             {
                 // Send value of gSpecialVar_0x8004 to leader
                 // Will either be BATTLE_TOWER_LINK_CONTINUE or BATTLE_TOWER_LINK_RETIRE
-                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
                 gTasks[taskId].tState++;
             }
         }
@@ -3828,7 +3824,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             else
             {
                 // Send whether or not play should continue
-                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
                 gTasks[taskId].tState++;
             }
         }

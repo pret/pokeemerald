@@ -1136,9 +1136,9 @@ static void AllocContestResources(void)
     gContestResources->contestBgTilemaps[3] = AllocZeroed(0x1000);
     gContestResources->boxBlinkTiles1 = AllocZeroed(0x800);
     gContestResources->boxBlinkTiles2 = AllocZeroed(0x800);
-    gContestResources->field_3c = AllocZeroed(0x2000);
-    gUnknown_0202305C = gContestResources->field_3c;
-    gUnknown_02023060 = gContestResources->contestBgTilemaps[1];
+    gContestResources->animBgTileBuffer = AllocZeroed(0x2000);
+    gBattleAnimBgTileBuffer = gContestResources->animBgTileBuffer;
+    gBattleAnimBgTilemapBuffer = gContestResources->contestBgTilemaps[1];
 }
 
 static void FreeContestResources(void)
@@ -1158,10 +1158,10 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[3]);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles1);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles2);
-    FREE_AND_SET_NULL(gContestResources->field_3c);
+    FREE_AND_SET_NULL(gContestResources->animBgTileBuffer);
     FREE_AND_SET_NULL(gContestResources);
-    gUnknown_0202305C = NULL;
-    gUnknown_02023060 = NULL;
+    gBattleAnimBgTileBuffer = NULL;
+    gBattleAnimBgTilemapBuffer = NULL;
 }
 
 void CB2_StartContest(void)
@@ -3820,7 +3820,7 @@ static void Task_UpdateAppealHearts(u8 taskId)
         {
             PlaySE(SE_CONTEST_HEART);
             m4aMPlayImmInit(&gMPlayInfo_SE1);
-            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, pitchMod * 256);
+            m4aMPlayPitchControl(&gMPlayInfo_SE1, TRACKS_ALL, pitchMod * 256);
         }
         else
         {

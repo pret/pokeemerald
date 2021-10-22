@@ -8,17 +8,17 @@
 #include "overworld.h"
 #include "malloc.h"
 
-void sub_81700F8(void)
+// Reloads the game, continuing from the point of the last save
+// Used to gracefully exit after a link connection error
+void ReloadSave(void)
 {
-    u16 imeBackup;
-
-    imeBackup = REG_IME;
+    u16 imeBackup = REG_IME;
     REG_IME = 0;
     RegisterRamReset(RESET_EWRAM);
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_FORCED_BLANK);
     REG_IME = imeBackup;
     gMain.inBattle = FALSE;
-    SetSaveBlocksPointers(sub_815355C());
+    SetSaveBlocksPointers(GetSaveBlocksPointersBaseOffset());
     ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
     Save_LoadGameData(SAVE_NORMAL);

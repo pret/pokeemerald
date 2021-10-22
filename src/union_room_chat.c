@@ -997,7 +997,7 @@ static void Chat_Join(void)
         sChat->funcState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             if (SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
                 sChat->funcState++;
@@ -1198,7 +1198,7 @@ static void Chat_AskQuitChatting(void)
             sChat->funcState = 3;
             break;
         case 0:
-            sub_80104B0();
+            Rfu_StopPartnerSearch();
             PrepareSendBuffer_Disband(sChat->sendMessageBuffer);
             sChat->funcState = 4;
             sChat->tryQuitAgainTimer = 0;
@@ -1206,7 +1206,7 @@ static void Chat_AskQuitChatting(void)
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
         {
             if (!sChat->multiplayerId)
                 sChat->funcState = 6;
@@ -1257,15 +1257,15 @@ static void Chat_Exit(void)
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
             sChat->funcState++;
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 1) && !sub_8011A9C())
+        if ((GetBlockReceivedStatus() & 1) && !Rfu_IsPlayerExchangeActive())
             sChat->funcState++;
         break;
     case 5:
-        if (IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
@@ -1300,7 +1300,7 @@ static void Chat_Drop(void)
         }
         break;
     case 1:
-        if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !sub_8011A9C())
+        if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
@@ -1346,7 +1346,7 @@ static void Chat_Disbanded(void)
         }
         break;
     case 2:
-        if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
@@ -1384,7 +1384,7 @@ static void Chat_SendMessage(void)
         sChat->funcState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() == TRUE && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
             sChat->funcState++;
         break;
     case 2:
@@ -1819,7 +1819,7 @@ static void PrepareSendBuffer_Leave(u8 *buffer)
     buffer[0] = CHAT_MESSAGE_LEAVE;
     StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
     buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
-    sub_8011A50();
+    RfuSetNormalDisconnectMode();
 }
 
 static void PrepareSendBuffer_Drop(u8 *buffer)
@@ -2028,7 +2028,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         }
 
         tBlockReceivedStatus = GetBlockReceivedStatus();
-        if (!tBlockReceivedStatus && sub_8011A9C())
+        if (!tBlockReceivedStatus && Rfu_IsPlayerExchangeActive())
             return;
 
         tI = 0;
@@ -2079,13 +2079,12 @@ static void Task_ReceiveChatMessage(u8 taskId)
         {
             if (GetLinkPlayerCount() == 2)
             {
-                sub_80104B0();
+                Rfu_StopPartnerSearch();
                 sChat->exitType = 1;
                 DestroyTask(taskId);
                 return;
             }
-
-            sub_8011DE0(tCurrLinkPlayer);
+            Rfu_DisconnectPlayerById(tCurrLinkPlayer);
         }
 
         tState = 3;
@@ -2101,10 +2100,10 @@ static void Task_ReceiveChatMessage(u8 taskId)
         DestroyTask(taskId);
         break;
     case 2:
-        if (!sub_8011A9C())
+        if (!Rfu_IsPlayerExchangeActive())
         {
             if (!sChat->multiplayerId)
-                sub_80110B8(sChat->linkPlayerCount);
+                SetUnionRoomChatPlayerData(sChat->linkPlayerCount);
 
             tState = 1;
         }

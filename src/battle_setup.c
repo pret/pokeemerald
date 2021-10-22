@@ -319,7 +319,7 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
     [REMATCH_TRENT] = REMATCH(TRAINER_TRENT_1, TRAINER_TRENT_2, TRAINER_TRENT_3, TRAINER_TRENT_4, TRAINER_TRENT_5, ROUTE112),
     [REMATCH_SAWYER] = REMATCH(TRAINER_SAWYER_1, TRAINER_SAWYER_2, TRAINER_SAWYER_3, TRAINER_SAWYER_4, TRAINER_SAWYER_5, MT_CHIMNEY),
     [REMATCH_KIRA_AND_DAN] = REMATCH(TRAINER_KIRA_AND_DAN_1, TRAINER_KIRA_AND_DAN_2, TRAINER_KIRA_AND_DAN_3, TRAINER_KIRA_AND_DAN_4, TRAINER_KIRA_AND_DAN_5, ABANDONED_SHIP_ROOMS2_1F),
-    [REMATCH_WALLY_3] = REMATCH(TRAINER_WALLY_VR_2, TRAINER_WALLY_VR_3, TRAINER_WALLY_VR_4, TRAINER_WALLY_VR_5, TRAINER_WALLY_VR_5, VICTORY_ROAD_1F),
+    [REMATCH_WALLY_VR] = REMATCH(TRAINER_WALLY_VR_2, TRAINER_WALLY_VR_3, TRAINER_WALLY_VR_4, TRAINER_WALLY_VR_5, TRAINER_WALLY_VR_5, VICTORY_ROAD_1F),
     [REMATCH_ROXANNE] = REMATCH(TRAINER_ROXANNE_1, TRAINER_ROXANNE_2, TRAINER_ROXANNE_3, TRAINER_ROXANNE_4, TRAINER_ROXANNE_5, RUSTBORO_CITY),
     [REMATCH_BRAWLY] = REMATCH(TRAINER_BRAWLY_1, TRAINER_BRAWLY_2, TRAINER_BRAWLY_3, TRAINER_BRAWLY_4, TRAINER_BRAWLY_5, DEWFORD_TOWN),
     [REMATCH_WATTSON] = REMATCH(TRAINER_WATTSON_1, TRAINER_WATTSON_2, TRAINER_WATTSON_3, TRAINER_WATTSON_4, TRAINER_WATTSON_5, MAUVILLE_CITY),
@@ -460,12 +460,12 @@ static void DoTrainerBattle(void)
     TryUpdateGymLeaderRematchFromTrainer();
 }
 
-static void sub_80B0828(void)
+static void DoBattlePyramidTrainerHillBattle(void)
 {
     if (InBattlePyramid())
-        CreateBattleStartTask(GetSpecialBattleTransition(10), 0);
+        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID), 0);
     else
-        CreateBattleStartTask(GetSpecialBattleTransition(11), 0);
+        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_HILL), 0);
 
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
@@ -853,16 +853,7 @@ static u8 GetTrainerBattleTransition(void)
         return sBattleTransitionTable_Trainer[transitionType][1];
 }
 
-// 0: Battle Tower
-// 3: Battle Dome
-// 4: Battle Palace
-// 5: Battle Arena
-// 6: Battle Factory
-// 7: Battle Pike
-// 10: Battle Pyramid
-// 11: Trainer Hill
-// 12: Secret Base
-// 13: E-Reader
+#define RANDOM_TRANSITION(table)(table[Random() % ARRAY_COUNT(table)])
 u8 GetSpecialBattleTransition(s32 id)
 {
     u16 var;
@@ -873,35 +864,35 @@ u8 GetSpecialBattleTransition(s32 id)
     {
         switch (id)
         {
-        case 11:
-        case 12:
-        case 13:
+        case B_TRANSITION_GROUP_TRAINER_HILL:
+        case B_TRANSITION_GROUP_SECRET_BASE:
+        case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_POKEBALLS_TRAIL;
-        case 10:
-            return sBattleTransitionTable_BattlePyramid[Random() % ARRAY_COUNT(sBattleTransitionTable_BattlePyramid)];
-        case 3:
-            return sBattleTransitionTable_BattleDome[Random() % ARRAY_COUNT(sBattleTransitionTable_BattleDome)];
+        case B_TRANSITION_GROUP_B_PYRAMID:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
+        case B_TRANSITION_GROUP_B_DOME:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
         }
 
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
-            return sBattleTransitionTable_BattleFrontier[Random() % ARRAY_COUNT(sBattleTransitionTable_BattleFrontier)];
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattleFrontier);
     }
     else
     {
         switch (id)
         {
-        case 11:
-        case 12:
-        case 13:
+        case B_TRANSITION_GROUP_TRAINER_HILL:
+        case B_TRANSITION_GROUP_SECRET_BASE:
+        case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_BIG_POKEBALL;
-        case 10:
-            return sBattleTransitionTable_BattlePyramid[Random() % ARRAY_COUNT(sBattleTransitionTable_BattlePyramid)];
-        case 3:
-            return sBattleTransitionTable_BattleDome[Random() % ARRAY_COUNT(sBattleTransitionTable_BattleDome)];
+        case B_TRANSITION_GROUP_B_PYRAMID:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
+        case B_TRANSITION_GROUP_B_DOME:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
         }
 
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
-            return sBattleTransitionTable_BattleFrontier[Random() % ARRAY_COUNT(sBattleTransitionTable_BattleFrontier)];
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattleFrontier);
     }
 
     var = gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
@@ -1319,7 +1310,7 @@ void BattleSetup_StartTrainerBattle(void)
     gMain.savedCallback = CB2_EndTrainerBattle;
 
     if (InBattlePyramid() || InTrainerHillChallenge())
-        sub_80B0828();
+        DoBattlePyramidTrainerHillBattle();
     else
         DoTrainerBattle();
 
@@ -1575,12 +1566,14 @@ static s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 tra
     return -1;
 }
 
-static bool32 sub_80B1D94(s32 rematchTableId)
+// Returns TRUE if the given trainer (by their entry in the rematch table) is not allowed to have rematches.
+// This applies to the Elite Four and Victory Road Wally (if he's not been defeated yet)
+static bool32 IsRematchForbidden(s32 rematchTableId)
 {
     if (rematchTableId >= REMATCH_ELITE_FOUR_ENTRIES)
         return TRUE;
-    else if (rematchTableId == REMATCH_WALLY_3)
-        return (FlagGet(FLAG_DEFEATED_WALLY_VICTORY_ROAD) == FALSE);
+    else if (rematchTableId == REMATCH_WALLY_VR)
+        return !FlagGet(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
     else
         return FALSE;
 }
@@ -1609,7 +1602,7 @@ static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u
 
     for (i = 0; i <= REMATCH_SPECIAL_TRAINER_START; i++)
     {
-        if (table[i].mapGroup == mapGroup && table[i].mapNum == mapNum && !sub_80B1D94(i))
+        if (table[i].mapGroup == mapGroup && table[i].mapNum == mapNum && !IsRematchForbidden(i))
         {
             if (gSaveBlock1Ptr->trainerRematches[i] != 0)
             {

@@ -36,3 +36,4 @@ porymap.project.cfg
 .fuse_hidden*
 *.sna
 log.txt
+*.diff
