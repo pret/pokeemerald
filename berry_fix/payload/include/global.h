@@ -6,7 +6,7 @@
 // global.h from pokemon ruby
 
 // IDE support
-#if defined(__APPLE__) || defined(__CYGWIN__)
+#if defined (__APPLE__) || defined (__CYGWIN__) || defined (__INTELLISENSE__)
 #define _(x) x
 #define __(x) x
 #define INCBIN(x) {0}
@@ -16,7 +16,7 @@
 #define INCBIN_S8 INCBIN
 #define INCBIN_S16 INCBIN
 #define INCBIN_S32 INCBIN
-#endif
+#endif // IDE support
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");

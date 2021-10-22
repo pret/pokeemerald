@@ -20,11 +20,9 @@
 #define NAKED __attribute__((naked))
 
 // IDE support
-#if defined (__APPLE__) || defined (__CYGWIN__) || defined (_MSC_VER)
+#if defined (__APPLE__) || defined (__CYGWIN__) || defined (__INTELLISENSE__)
 #define _(x) x
 #define __(x) x
-
-// Fool CLion IDE
 #define INCBIN(x) {0}
 #define INCBIN_U8 INCBIN
 #define INCBIN_U16 INCBIN
