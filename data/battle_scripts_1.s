@@ -4258,6 +4258,7 @@ BattleScript_EffectRapidSpin::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
+	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
 	critcalc
 	damagecalc
 	adjustdamage
