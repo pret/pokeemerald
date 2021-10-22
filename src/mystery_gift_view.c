@@ -57,7 +57,7 @@ struct WonderCardData
     /*0175*/ u8 statFooterWidth;
     /*0176*/ u16 windowIds[CARD_WIN_COUNT];
     /*017C*/ u8 monIconSpriteId;
-    /*017D*/ u8 stampSpriteIds[MAX_STAMP_CARD_STAMPS][2]; // 2 sprites each, 1 for the shadw and 1 for the Pokémon
+    /*017D*/ u8 stampSpriteIds[MAX_STAMP_CARD_STAMPS][2]; // 2 sprites each, 1 for the shadow and 1 for the Pokémon
     /*018B*/ u8 titleText[WONDER_CARD_TEXT_LENGTH + 1];
     /*01B4*/ u8 subtitleText[WONDER_CARD_TEXT_LENGTH + 1];
     /*01DD*/ u8 idNumberText[7];
