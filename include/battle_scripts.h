@@ -366,6 +366,7 @@ extern const u8 BattleScript_PerishBodyActivates[];
 extern const u8 BattleScript_ActivateAsOne[];
 extern const u8 BattleScript_RaiseStatOnFaintingTarget[];
 extern const u8 BattleScript_QuickClawActivation[];
+extern const u8 BattleScript_QuickDrawActivation[];
 extern const u8 BattleScript_CustapBerryActivation[];
 extern const u8 BattleScript_MicleBerryActivateEnd2[];
 extern const u8 BattleScript_MicleBerryActivateRet[];
@@ -399,5 +400,6 @@ extern const u8 BattleScript_MysteriousAirCurrentBlowsOn[];
 extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 extern const u8 BattleScript_BlockedByPrimalWeatherEnd3[];
 extern const u8 BattleScript_BlockedByPrimalWeatherRet[];
+extern const u8 BattleScript_PrimalReversion[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

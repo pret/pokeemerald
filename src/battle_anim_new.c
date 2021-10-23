@@ -15,6 +15,7 @@
 #include "battle_controllers.h"
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
+#include "constants/items.h"
 
 //// function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
@@ -5050,6 +5051,15 @@ void AnimTask_TechnoBlast(u8 taskId)
 {
     if (ItemId_GetHoldEffect(gBattleMons[gBattleAnimAttacker].item) == HOLD_EFFECT_DRIVE)
         gBattleAnimArgs[0] = ItemId_GetSecondaryId(gBattleMons[gBattleAnimAttacker].item);
+    else
+        gBattleAnimArgs[0] = 0;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_PrimalReversion(u8 taskId)
+{
+    if (ItemId_GetId(gBattleMons[gBattleAnimAttacker].item) == ITEM_RED_ORB)
+        gBattleAnimArgs[0] = ItemId_GetId(gBattleMons[gBattleAnimAttacker].item);
     else
         gBattleAnimArgs[0] = 0;
     DestroyAnimVisualTask(taskId);
