@@ -523,7 +523,7 @@
 #define STRINGID_GRASSYTERRAINHEALS                   519
 #define STRINGID_ELECTRICTERRAINPREVENTS              520
 #define STRINGID_PSYCHICTERRAINPREVENTS               521
-#define STRINGID_SAFETYGOOGLESPROTECTED               522
+#define STRINGID_SAFETYGOGGLESPROTECTED               522
 #define STRINGID_FLOWERVEILPROTECTED                  523
 #define STRINGID_SWEETVEILPROTECTED                   524
 #define STRINGID_AROMAVEILPROTECTED                   525
@@ -592,8 +592,10 @@
 #define STRINGID_STRONGWINDSDISSIPATED                588
 #define STRINGID_MYSTERIOUSAIRCURRENTBLOWSON          589
 #define STRINGID_ATTACKWEAKENEDBSTRONGWINDS           590
+#define STRINGID_STUFFCHEEKSCANTSELECT                592
+#define STRINGID_PKMNREVERTEDTOPRIMAL                 593
 
-#define BATTLESTRINGS_COUNT                           591
+#define BATTLESTRINGS_COUNT                           594
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

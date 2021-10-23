@@ -169,9 +169,11 @@
 #define STATUS3_HEAL_BLOCK              (1 << 27)
 #define STATUS3_AQUA_RING               (1 << 28)
 #define STATUS3_LASER_FOCUS             (1 << 29)
-#define STATUS3_ELECTRIFIED             (1 << 30)
-#define STATUS3_POWER_TRICK             (1 << 31)
+#define STATUS3_POWER_TRICK             (1 << 30)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE)
+
+#define STATUS4_ELECTRIFIED             (1 << 0)
+#define STATUS4_PLASMA_FISTS            (1 << 1)
 
 #define HITMARKER_x10                   (1 << 4)
 #define HITMARKER_x20                   (1 << 5)
@@ -386,5 +388,6 @@
 #define MOVE_TARGET_FOES_AND_ALLY       0x20
 #define MOVE_TARGET_OPPONENTS_FIELD     0x40
 #define MOVE_TARGET_ALLY                0x80
+#define MOVE_TARGET_ALL_BATTLERS        (0x100 | MOVE_TARGET_USER)
 
 #endif // GUARD_CONSTANTS_BATTLE_H
