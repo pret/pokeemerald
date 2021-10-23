@@ -1853,6 +1853,10 @@
 	various BS_ATTACKER, VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL
 	.4byte \ptr
 	.endm
+  
+	.macro applyplasmafists
+	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
