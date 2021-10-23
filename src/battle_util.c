@@ -621,6 +621,12 @@ bool8 TryRunFromBattle(u8 battler)
         gProtectStructs[battler].fleeFlag = 1;
         effect++;
     }
+    #if B_GHOSTS_ESCAPE >= GEN_6
+    else if (IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+    {
+        effect++;
+    }
+    #endif
     else if (gBattleMons[battler].ability == ABILITY_RUN_AWAY)
     {
         if (InBattlePyramid())
