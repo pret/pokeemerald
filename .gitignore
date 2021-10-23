@@ -35,3 +35,4 @@ porymap.project.cfg
 .fuse_hidden*
 *.sna
 *.diff
+*.sym
