@@ -101,7 +101,7 @@ static EWRAM_DATA u8 *sMenuTextAllocBuffer = NULL;
 // See the corresponding GFXTAGs in src/data/trade.h
 static EWRAM_DATA u8 *sMenuTextTileBuffers[GFXTAG_MENU_TEXT_COUNT] = {NULL};
 
-EWRAM_DATA struct MailStruct gTradeMail[PARTY_SIZE] = {0};
+EWRAM_DATA struct Mail gTradeMail[PARTY_SIZE] = {0};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct {
     /*0x0000*/ u8 bg2hofs;
@@ -144,7 +144,7 @@ static EWRAM_DATA struct {
 } *sTradeMenuData = {NULL};
 
 static EWRAM_DATA struct {
-    /*0x00*/ struct Pokemon mon;
+    /*0x00*/ struct Pokemon tempMon; // Used as a temp variable when swapping Pokémon
     /*0x64*/ u32 timer;
     /*0x68*/ u32 monPersonalities[2];
     /*0x70*/ u8 filler_70[2];
@@ -238,7 +238,7 @@ static void SpriteCB_BouncingPokeballDepart(struct Sprite *);
 static void SpriteCB_BouncingPokeballDepartEnd(struct Sprite *);
 static void SpriteCB_BouncingPokeballArrive(struct Sprite *);
 static void BufferInGameTradeMonName(void);
-static void SetInGameTradeMail(struct MailStruct *, const struct InGameTrade *);
+static void SetInGameTradeMail(struct Mail *, const struct InGameTrade *);
 static void CB2_UpdateLinkTrade(void);
 static void CB2_TryFinishTrade(void);
 static void CB2_SaveAndEndTrade(void);
@@ -1054,7 +1054,7 @@ static bool8 BufferTradeParties(void)
         }
         break;
     case 13:
-        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct MailStruct) + 4);
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct Mail) + 4);
         sTradeMenuData->bufferPartyState++;
         break;
     case 15:
@@ -1065,7 +1065,7 @@ static bool8 BufferTradeParties(void)
     case 16:
         if (_GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(gTradeMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct MailStruct));
+            Trade_Memcpy(gTradeMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct Mail));
             TradeResetReceivedFlags();
             sTradeMenuData->bufferPartyState++;
         }
@@ -3043,18 +3043,16 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
     u16 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
 
     if (playerMail != MAIL_NONE)
-        ClearMailStruct(&gSaveBlock1Ptr->mail[playerMail]);
+        ClearMail(&gSaveBlock1Ptr->mail[playerMail]);
 
-    sTradeData->mon = *playerMon;
-    *playerMon = *partnerMon;
-    *partnerMon = sTradeData->mon;
+    SWAP(*playerMon, *partnerMon, sTradeData->tempMon);
 
     friendship = 70;
     if (!GetMonData(playerMon, MON_DATA_IS_EGG))
         SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
 
     if (partnerMail != MAIL_NONE)
-        GiveMailToMon2(playerMon, &gTradeMail[partnerMail]);
+        GiveMailToMon(playerMon, &gTradeMail[partnerMail]);
 
     UpdatePokedexForReceivedMon(playerPartyIdx);
     if (gReceivedRemoteLinkPlayers)
@@ -4492,7 +4490,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     const struct InGameTrade *inGameTrade = &sIngameTrades[whichInGameTrade];
     u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
 
-    struct MailStruct mail;
+    struct Mail mail;
     u8 metLocation = METLOC_IN_GAME_TRADE;
     u8 isMail;
     struct Pokemon *pokemon = &gEnemyParty[0];
@@ -4535,7 +4533,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     CalculateMonStats(&gEnemyParty[0]);
 }
 
-static void SetInGameTradeMail(struct MailStruct *mail, const struct InGameTrade *trade) {
+static void SetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trade) {
     s32 i;
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)

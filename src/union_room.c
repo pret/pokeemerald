@@ -1495,14 +1495,14 @@ static void Task_StartUnionRoomTrade(u8 taskId)
         }
         break;
     case 2:
-        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, sizeof(struct MailStruct) * PARTY_SIZE + 4);
-        if (SendBlock(0, gBlockSendBuffer, sizeof(struct MailStruct) * PARTY_SIZE + 4))
+        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, sizeof(struct Mail) * PARTY_SIZE + 4);
+        if (SendBlock(0, gBlockSendBuffer, sizeof(struct Mail) * PARTY_SIZE + 4))
             gTasks[taskId].data[0]++;
         break;
     case 3:
         if (GetBlockReceivedStatus() == 3)
         {
-            memcpy(gTradeMail, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct MailStruct) * PARTY_SIZE);
+            memcpy(gTradeMail, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct Mail) * PARTY_SIZE);
             ResetBlockReceivedFlags();
             gSelectedTradeMonPositions[TRADE_PLAYER] = monId;
             gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;

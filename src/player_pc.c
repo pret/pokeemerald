@@ -674,7 +674,7 @@ static u8 GetMailboxMailCount(void)
 
 static void Mailbox_CompactMailList(void)
 {
-    struct MailStruct temp;
+    struct Mail temp;
     u8 i, j;
 
     for (i = PARTY_SIZE; i < MAIL_COUNT - 1; i++)
@@ -850,7 +850,7 @@ static void Mailbox_HandleConfirmMoveToBag(u8 taskId)
 
 static void Mailbox_DoMailMoveToBag(u8 taskId)
 {
-    struct MailStruct *mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
+    struct Mail *mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
     if (!AddBagItem(mail->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);
@@ -858,7 +858,7 @@ static void Mailbox_DoMailMoveToBag(u8 taskId)
     else
     {
         DisplayItemMessageOnField(taskId, gText_MailToBagMessageErased, Mailbox_Cancel);
-        ClearMailStruct(mail);
+        ClearMail(mail);
         Mailbox_CompactMailList();
         gPlayerPCItemPageInfo.count--;
         if (gPlayerPCItemPageInfo.count < (gPlayerPCItemPageInfo.pageItems + gPlayerPCItemPageInfo.itemsAbove) && gPlayerPCItemPageInfo.itemsAbove != 0)

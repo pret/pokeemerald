@@ -25,7 +25,6 @@
 
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
-// this file's functions
 static void ClearDaycareMonMail(struct DaycareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
@@ -122,7 +121,7 @@ u8 CountPokemonInDaycare(struct DayCare *daycare)
     return count;
 }
 
-void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDaycareMail *daycareMail)
+void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDaycareMail *mixMail)
 {
     u8 i;
     u8 numDaycareMons = 0;
@@ -133,17 +132,18 @@ void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDay
         {
             numDaycareMons++;
             if (GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM) == ITEM_NONE)
-                daycareMail->holdsItem[i] = FALSE;
+                mixMail->cantHoldItem[i] = FALSE;
             else
-                daycareMail->holdsItem[i] = TRUE;
+                mixMail->cantHoldItem[i] = TRUE;
         }
         else
         {
-            daycareMail->holdsItem[i] = TRUE;
+            // Daycare slot empty
+            mixMail->cantHoldItem[i] = TRUE;
         }
     }
 
-    daycareMail->numDaycareMons = numDaycareMons;
+    mixMail->numDaycareMons = numDaycareMons;
 }
 
 static s8 Daycare_FindEmptySpot(struct DayCare *daycare)
@@ -165,7 +165,7 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
     {
         u8 mailId;
 
-        StringCopy(daycareMon->mail.OT_name, gSaveBlock2Ptr->playerName);
+        StringCopy(daycareMon->mail.otName, gSaveBlock2Ptr->playerName);
         GetMonNickname2(mon, daycareMon->mail.monName);
         StripExtCtrlCodes(daycareMon->mail.monName);
         daycareMon->mail.gameLanguage = GAME_LANGUAGE;
@@ -262,7 +262,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     gPlayerParty[PARTY_SIZE - 1] = pokemon;
     if (daycareMon->mail.message.itemId)
     {
-        GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &daycareMon->mail.message);
+        GiveMailToMon(&gPlayerParty[PARTY_SIZE - 1], &daycareMon->mail.message);
         ClearDaycareMonMail(&daycareMon->mail);
     }
 
@@ -352,11 +352,11 @@ static void ClearDaycareMonMail(struct DaycareMail *mail)
     s32 i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
-        mail->OT_name[i] = 0;
+        mail->otName[i] = 0;
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
         mail->monName[i] = 0;
 
-    ClearMailStruct(&mail->message);
+    ClearMail(&mail->message);
 }
 
 static void ClearDaycareMon(struct DaycareMon *daycareMon)
