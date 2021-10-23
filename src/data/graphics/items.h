@@ -630,8 +630,9 @@ const u32 gItemIcon_EonTicket[] = INCBIN_U32("graphics/items/icons/eon_ticket.4b
 
 const u32 gItemIconPalette_EonTicket[] = INCBIN_U32("graphics/items/icon_palettes/eon_ticket.gbapal.lz");
 
-const u32 gItemIcon_Orb[] = INCBIN_U32("graphics/items/icons/orb.4bpp.lz");
+const u32 gItemIcon_RedOrb[] = INCBIN_U32("graphics/items/icons/red_orb.4bpp.lz");
 const u32 gItemIconPalette_RedOrb[] = INCBIN_U32("graphics/items/icon_palettes/red_orb.gbapal.lz");
+const u32 gItemIcon_BlueOrb[] = INCBIN_U32("graphics/items/icons/blue_orb.4bpp.lz");
 const u32 gItemIconPalette_BlueOrb[] = INCBIN_U32("graphics/items/icon_palettes/blue_orb.gbapal.lz");
 
 const u32 gItemIcon_Scanner[] = INCBIN_U32("graphics/items/icons/scanner.4bpp.lz");
