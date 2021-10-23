@@ -672,6 +672,28 @@ static const struct SpritePalette sSpritePalette_MegaIndicator =
     sMegaIndicatorPal, TAG_MEGA_INDICATOR_PAL
 };
 
+static const u8 sAlphaIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/alpha_indicator.4bpp");
+static const u16 sAlphaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/alpha_indicator.gbapal");
+static const u8 sOmegaIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/omega_indicator.4bpp");
+static const u16 sOmegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/omega_indicator.gbapal");
+
+static const struct SpriteSheet sSpriteSheet_AlphaIndicator =
+{
+    sAlphaIndicatorGfx, sizeof(sAlphaIndicatorGfx), TAG_ALPHA_INDICATOR_TILE
+};
+static const struct SpritePalette sSpritePalette_AlphaIndicator =
+{
+    sAlphaIndicatorPal, TAG_ALPHA_INDICATOR_PAL
+};
+static const struct SpriteSheet sSpriteSheet_OmegaIndicator =
+{
+    sOmegaIndicatorGfx, sizeof(sOmegaIndicatorGfx), TAG_OMEGA_INDICATOR_TILE
+};
+static const struct SpritePalette sSpritePalette_OmegaIndicator =
+{
+    sOmegaIndicatorPal, TAG_OMEGA_INDICATOR_PAL
+};
+
 static const struct OamData sOamData_MegaIndicator =
 {
     .y = 0,
@@ -693,6 +715,28 @@ static const struct SpriteTemplate sSpriteTemplate_MegaIndicator =
 {
     .tileTag = TAG_MEGA_INDICATOR_TILE,
     .paletteTag = TAG_MEGA_INDICATOR_PAL,
+    .oam = &sOamData_MegaIndicator,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_MegaIndicator,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_AlphaIndicator =
+{
+    .tileTag = TAG_ALPHA_INDICATOR_TILE,
+    .paletteTag = TAG_ALPHA_INDICATOR_PAL,
+    .oam = &sOamData_MegaIndicator,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_MegaIndicator,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_OmegaIndicator =
+{
+    .tileTag = TAG_OMEGA_INDICATOR_TILE,
+    .paletteTag = TAG_OMEGA_INDICATOR_PAL,
     .oam = &sOamData_MegaIndicator,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -818,8 +862,9 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     healthBarSpritePtr->hBar_Data6 = data6;
     healthBarSpritePtr->invisible = TRUE;
 
-    // Create mega indicator sprite if is a mega evolved mon.
-    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    // Create mega indicator sprite if is a mega evolved or a primal reverted mon.
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]
+     || gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
     {
         megaIndicatorSpriteId = CreateMegaIndicatorSprite(battlerId, 0);
         gSprites[megaIndicatorSpriteId].invisible = TRUE;
@@ -926,7 +971,8 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     gSprites[healthboxSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
-    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]
+     || gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
     {
         u8 spriteId = GetMegaIndicatorSpriteId(healthboxSpriteId);
         if (spriteId != 0xFF)
@@ -1049,8 +1095,9 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 *objVram;
     u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
 
-    // Don't print Lv char if mon is mega evolved.
-    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
+    // Don't print Lv char if mon is mega evolved or primal reverted.
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]
+     || gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
     {
         objVram = ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         xPos = 5 * (3 - (objVram - (text + 2))) - 1;
@@ -1522,12 +1569,28 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     u32 spriteId, position;
     s16 x, y;
 
-    LoadSpritePalette(&sSpritePalette_MegaIndicator);
-    LoadSpriteSheet(&sSpriteSheet_MegaIndicator);
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    {
+        LoadSpritePalette(&sSpritePalette_MegaIndicator);
+        LoadSpriteSheet(&sSpriteSheet_MegaIndicator);
+    }
+    else if (gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    {
+        if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_GROUDON)
+        {
+            LoadSpritePalette(&sSpritePalette_OmegaIndicator);
+            LoadSpriteSheet(&sSpriteSheet_OmegaIndicator);
+        }
+        else if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_KYOGRE)
+        {
+            LoadSpritePalette(&sSpritePalette_AlphaIndicator);
+            LoadSpriteSheet(&sSpriteSheet_AlphaIndicator);
+        }
+    }
 
     position = GetBattlerPosition(battlerId);
     GetBattlerHealthboxCoords(battlerId, &x, &y);
-    
+
     x += sIndicatorPositions[position][0];
     y += sIndicatorPositions[position][1];
 
@@ -1535,10 +1598,20 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
         x -= 4;
     else if (gBattleMons[battlerId].level < 10)
         x += 5;
-    
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
-    gSprites[gSprites[gHealthboxSpriteIds[battlerId]].oam.affineParam].hOther_IndicatorSpriteId = spriteId;
 
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    {
+        spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
+    }
+    else if (gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    {
+        if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_GROUDON)
+            spriteId = CreateSpriteAtEnd(&sSpriteTemplate_OmegaIndicator, x, y, 0);
+        else if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_KYOGRE)
+            spriteId = CreateSpriteAtEnd(&sSpriteTemplate_AlphaIndicator, x, y, 0);
+    }
+
+    gSprites[gSprites[gHealthboxSpriteIds[battlerId]].oam.affineParam].hOther_IndicatorSpriteId = spriteId;
     gSprites[spriteId].tBattler = battlerId;
     return spriteId;
 }
