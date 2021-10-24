@@ -385,6 +385,11 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId);
 static void Task_ExitFormsScreen(u8 taskId);
 #endif
 
+//COMPATIBILITY, delete if you are using a newer version
+#define TEXT_COLOR_LIGHT_GRAY TEXT_COLOR_LIGHT_GREY
+#define TEXT_COLOR_DARK_GRAY TEXT_COLOR_DARK_GREY
+//COMPATIBILITY end
+
 //HGSS_UI Physical Special Split icon for BattleEngine (rhh)
 #ifdef BATTLE_ENGINE
 static u8 ShowSplitIcon(u32 split); //Physical/Special Split from BE
@@ -392,8 +397,12 @@ static void DestroySplitIcon(void); //Physical/Special Split from BE
 
 //Physical/Special Split from BE
 #define TAG_SPLIT_ICONS 30004
-// static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
-// static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
+
+//UNCOMMENT THE FOLLOWING 2 LINES IF YOU ARE USING THE BATTLE EXPANSION !!!!
+    // static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
+    // static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
+//UNCOMMENT THE PREVIOUS 2 LINES IF YOU ARE USING THE BATTLE EXPANSION !!!!
+
 static const struct OamData sOamData_SplitIcons =
 {
     .size = SPRITE_SIZE(16x16),
@@ -2626,7 +2635,7 @@ static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8* str, u8 left
 
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GREY;
+    color[2] = TEXT_COLOR_LIGHT_GRAY;
     AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, -1, str);
 }
 
@@ -2636,7 +2645,7 @@ static void PrintMonDexNumAndName_2(u8 windowId, u8 fontId, const u8* str, u8 le
 
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GREY;
+    color[2] = TEXT_COLOR_LIGHT_GRAY;
     AddTextPrinterParameterized4(windowId, fontId, left * 8 - 3, (top * 8) + 1, 0, 0, color, -1, str);
 }
 
@@ -3101,30 +3110,6 @@ static void CreateInterfaceSprites(u8 page)
     gSprites[spriteId].vFlip = TRUE;
 
     CreateSprite(&sScrollBarSpriteTemplate, 8, 20, 0);
-    // Start button
-    // CreateSprite(&sInterfaceTextSpriteTemplate, 16, 120, 0);
-    // Menu text
-    // spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 48, 120, 0);
-    // StartSpriteAnim(&gSprites[spriteId], 3);
-    // Select button
-    // spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 16, 144, 0);
-    // StartSpriteAnim(&gSprites[spriteId], 2);
-    // gSprites[spriteId].data[2] = 0x80;
-    // Search text
-    // spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 48, 144, 0);
-    // StartSpriteAnim(&gSprites[spriteId], 1);
-
-    // spriteId = CreateSprite(&sRotatingPokeBallSpriteTemplate, 0, 80, 2);
-    // gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    // gSprites[spriteId].oam.matrixNum = 30;
-    // gSprites[spriteId].data[0] = 30;
-    // gSprites[spriteId].data[1] = 0;
-
-    // spriteId = CreateSprite(&sRotatingPokeBallSpriteTemplate, 0, 80, 2);
-    // gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    // gSprites[spriteId].oam.matrixNum = 31;
-    // gSprites[spriteId].data[0] = 31;
-    // gSprites[spriteId].data[1] = 128;
 
     if (!IsNationalPokedexEnabled() && page == PAGE_MAIN)
     {
@@ -3488,7 +3473,7 @@ static void PrintInfoScreenText(const u8* str, u8 left, u8 top)
     u8 color[3];
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GREY;
+    color[2] = TEXT_COLOR_LIGHT_GRAY;
 
     AddTextPrinterParameterized4(0, 1, left, top, 0, 0, color, -1, str);
 }
@@ -3506,7 +3491,7 @@ static void PrintInfoScreenTextSmall(const u8* str, u8 left, u8 top)
     u8 color[3];
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GREY;
+    color[2] = TEXT_COLOR_LIGHT_GRAY;
 
     AddTextPrinterParameterized4(0, 0, left, top, 0, 0, color, 0, str);
 }
@@ -3656,15 +3641,6 @@ static void Task_LoadInfoScreen(u8 taskId)
         if (!gPaletteFade.active)
         {
             gMain.state++;
-            // if (gTasks[taskId].data[3] == 0)
-            // {
-            //     StopCryAndClearCrySongs();
-            //     PlayCry2(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, 0x7D, 0xA);
-            // }
-            // else
-            // {
-            //     gMain.state++;
-            // }
         }
         break;
     case 9:
@@ -3718,63 +3694,6 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         PlaySE(SE_PC_OFF);
         return;
     }
-    /*
-    if (JOY_NEW(A_BUTTON))
-    {
-        switch (sPokedexView->selectedScreen)
-        {
-        case AREA_SCREEN:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB_BLACK);
-            sPokedexView->screenSwitchState = 1;
-            gTasks[taskId].func = Task_SwitchScreensFromInfoScreen;
-            PlaySE(SE_PIN);
-            break;
-        case CRY_SCREEN:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
-            sPokedexView->screenSwitchState = 2;
-            gTasks[taskId].func = Task_SwitchScreensFromInfoScreen;
-            PlaySE(SE_PIN);
-            break;
-        case SIZE_SCREEN:
-            if (!sPokedexListItem->owned)
-            {
-                PlaySE(SE_FAILURE);
-            }
-            else
-            {
-                BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
-                sPokedexView->screenSwitchState = 3;
-                gTasks[taskId].func = Task_SwitchScreensFromInfoScreen;
-                PlaySE(SE_PIN);
-            }
-            break;
-        case CANCEL_SCREEN:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-            gTasks[taskId].func = Task_ExitInfoScreen;
-            PlaySE(SE_PC_OFF);
-            break;
-        }
-        return;
-    }
-    if (((JOY_NEW(DPAD_LEFT))
-     || ((JOY_NEW(L_BUTTON)) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
-     && sPokedexView->selectedScreen > 0)
-    {
-        sPokedexView->selectedScreen--;
-        HighlightScreenSelectBarItem(sPokedexView->selectedScreen, 0xD);
-        PlaySE(SE_DEX_PAGE);
-        return;
-    }
-    if (((JOY_NEW(DPAD_RIGHT))
-     || ((JOY_NEW(R_BUTTON)) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
-     && sPokedexView->selectedScreen < CANCEL_SCREEN)
-    {
-        sPokedexView->selectedScreen++;
-        HighlightScreenSelectBarItem(sPokedexView->selectedScreen, 0xD);
-        PlaySE(SE_DEX_PAGE);
-        return;
-    }
-    */
 
     if ((JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)))
     {
@@ -3845,7 +3764,6 @@ static void Task_LoadAreaScreen(u8 taskId)
         break;
     case 1:
         LoadScreenSelectBarSubmenu(0xD); //HGSS_Ui
-        // HighlightSubmenuScreenSelectBarItem(0, 0xD);
         LoadPokedexBgPalette(sPokedexView->isSearchResults);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256);
         gMain.state++;
@@ -3906,8 +3824,6 @@ static void Task_LoadCryScreen(u8 taskId)
         break;
     case 1:
         LoadTilesetTilemapHGSS(CRY_SCREEN);
-        // DecompressAndLoadBgGfxUsingHeap(3, &gPokedexMenuRest_Gfx, 0x2000, 0, 0);
-        // CopyToBgTilemapBuffer(3, &gPokedexCryScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_VU_METER);
@@ -3916,7 +3832,6 @@ static void Task_LoadCryScreen(u8 taskId)
         break;
     case 2:
         LoadScreenSelectBarMain(0xD); //HGSS_Ui
-        // HighlightSubmenuScreenSelectBarItem(1, 0xD);
         LoadPokedexBgPalette(sPokedexView->isSearchResults);
         gMain.state++;
         break;
@@ -4101,15 +4016,12 @@ static void Task_LoadSizeScreen(u8 taskId)
         break;
     case 1:
         LoadTilesetTilemapHGSS(SIZE_SCREEN);
-        // DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenuRest_Gfx, 0x2000, 0, 0);
-        // CopyToBgTilemapBuffer(3, gPokedexSizeScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         gMain.state++;
         break;
     case 2:
         LoadScreenSelectBarMain(0xD); //HGSS_Ui
-        // HighlightSubmenuScreenSelectBarItem(2, 0xD);
         LoadPokedexBgPalette(sPokedexView->isSearchResults);
         gMain.state++;
         break;
@@ -4222,7 +4134,6 @@ static void Task_SwitchScreensFromSizeScreen(u8 taskId)
 
 static void LoadScreenSelectBarMain(u16 unused)
 {
-    //CopyToBgTilemapBuffer(1, gPokedexScreenSelectBarMain_Tilemap, 0, 0);
     CopyToBgTilemapBuffer(1, gPokedexScreenSelectBarSubmenu_Tilemap_Clear, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
@@ -4335,8 +4246,6 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         break;
     case 1:
         LoadTilesetTilemapHGSS(INFO_SCREEN);
-        // DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
-        // CopyToBgTilemapBuffer(3, gPokedexInfoScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_FOOTPRINT);
@@ -4955,7 +4864,7 @@ static void PrintInfoSubMenuText(u8 windowId, const u8 *str, u8 left, u8 top)
     u8 color[3];
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GREY;
+    color[2] = TEXT_COLOR_LIGHT_GRAY;
 
     AddTextPrinterParameterized4(windowId, 1, left, top, 0, 0, color, -1, str);
 }
@@ -5352,7 +5261,7 @@ static void PrintSearchText(const u8 *str, u32 x, u32 y)
 
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_DARK_GREY;
+    color[2] = TEXT_COLOR_DARK_GRAY;
     AddTextPrinterParameterized4(0, 1, x, y, 0, 0, color, -1, str);
 }
 
@@ -6274,7 +6183,7 @@ static void LoadTilesetTilemapHGSS(u8 page)
 }
 
 //PokedexPlus HGSS_Ui Stats Page
-static const u8 sStatsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static const u8 sStatsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 static void StatsPage_PrintAToggleUpdownMoves(void)
 {
     u8 x = 9;
@@ -6312,8 +6221,6 @@ static void Task_LoadStatsScreen(u8 taskId)
         break;
     case 1:
         LoadTilesetTilemapHGSS(STATS_SCREEN);
-        // DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
-        // CopyToBgTilemapBuffer(3, gPokedexStatsScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         CopyWindowToVram(WIN_INFO, 3);
@@ -7337,7 +7244,7 @@ static void DestroySplitIcon(void)
 #endif
 
 //PokedexPlus HGSS_Ui Evolution Page
-static const u8 sEvoFormsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static const u8 sEvoFormsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 static void EvoFormsPage_PrintAToggleUpdownEvos(void)
 {
     u8 x = 9;
@@ -8032,8 +7939,6 @@ static void Task_LoadFormsScreen(u8 taskId)
         break;
     case 1:
         LoadTilesetTilemapHGSS(FORMS_SCREEN);
-        // DecompressAndLoadBgGfxUsingHeap(3, gPokedexEvo_Gfx, 0x2000, 0, 0);
-        // CopyToBgTilemapBuffer(3, gPokedexFormsScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         CopyWindowToVram(WIN_INFO, 3);
