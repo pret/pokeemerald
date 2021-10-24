@@ -2303,20 +2303,20 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
 static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
 {
     s32 i, j;
-    struct RankingHall2P record2P[4];
+    struct RankingHall2P record2P[HALL_RECORDS_COUNT + 1];
     struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
     GetPlayerHallRecords(playerHallRecords);
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < HALL_RECORDS_COUNT; i++)
         record2P[i] = gSaveBlock2Ptr->hallRecords2P[lvlMode][i];
 
-    record2P[3] = playerHallRecords->twoPlayers[lvlMode];
+    record2P[HALL_RECORDS_COUNT] = playerHallRecords->twoPlayers[lvlMode];
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
         s32 highestWinStreak = 0;
         s32 highestId = 0;
-        for (j = 0; j < 3; j++)
+        for (j = 0; j < HALL_RECORDS_COUNT; j++)
         {
             if (record2P[j].winStreak > highestWinStreak)
             {
@@ -2324,8 +2324,8 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
                 highestWinStreak = record2P[j].winStreak;
             }
         }
-        if (record2P[3].winStreak >= highestWinStreak)
-            highestId = 3;
+        if (record2P[HALL_RECORDS_COUNT].winStreak >= highestWinStreak)
+            highestId = HALL_RECORDS_COUNT;
 
         dst[i] = record2P[highestId];
         record2P[highestId].winStreak = 0;
@@ -2338,8 +2338,8 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 {
     s32 i;
     s32 x;
-    struct RankingHall1P records1P[3];
-    struct RankingHall2P records2P[3];
+    struct RankingHall1P records1P[HALL_RECORDS_COUNT];
+    struct RankingHall2P records2P[HALL_RECORDS_COUNT];
 
     StringCopy(gStringVar1, sRecordsWindowChallengeTexts[hallFacilityId][0]);
     StringExpandPlaceholders(gStringVar4, sRecordsWindowChallengeTexts[hallFacilityId][1]);
@@ -2351,13 +2351,13 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
         gSaveBlock2Ptr->frontier.opponentNames[0][PLAYER_NAME_LENGTH] = EOS;
         gSaveBlock2Ptr->frontier.opponentNames[1][PLAYER_NAME_LENGTH] = EOS;
         Fill2PRecords(records2P, lvlMode);
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < HALL_RECORDS_COUNT; i++)
             Print2PRecord(i, 1, 4, &records2P[i]);
     }
     else
     {
         Fill1PRecords(records1P, hallFacilityId, lvlMode);
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < HALL_RECORDS_COUNT; i++)
             Print1PRecord(i, 1, 4, &records1P[i], hallFacilityId);
     }
 }

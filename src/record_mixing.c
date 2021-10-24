@@ -97,7 +97,7 @@ static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 sDaycareMailRandSum;
-static struct PlayerHallRecords *gUnknown_03001168[3];
+static struct PlayerHallRecords *sPartnerHallRecords[HALL_RECORDS_COUNT];
 
 static EWRAM_DATA struct RecordMixingDaycareMail sRecordMixMail = {0};
 static EWRAM_DATA union PlayerRecord *sReceivedRecords = NULL;
@@ -278,8 +278,8 @@ static void ReceiveExchangePacket(u32 multiplayerId)
         ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(sReceivedRecords->emerald), multiplayerId);
         ReceiveGiftItem(&sReceivedRecords->emerald.giftItem, multiplayerId);
         ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(sReceivedRecords->emerald), multiplayerId);
-        ReceiveApprenticeData(sReceivedRecords->emerald.apprentices, sizeof(sReceivedRecords->emerald), (u8) multiplayerId);
-        ReceiveRankingHallRecords(&sReceivedRecords->emerald.hallRecords, sizeof(sReceivedRecords->emerald), (u8) multiplayerId);
+        ReceiveApprenticeData(sReceivedRecords->emerald.apprentices, sizeof(sReceivedRecords->emerald), (u8)multiplayerId);
+        ReceiveRankingHallRecords(&sReceivedRecords->emerald.hallRecords, sizeof(sReceivedRecords->emerald), (u8)multiplayerId);
     }
 }
 
@@ -1204,145 +1204,161 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     }
 }
 
-static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, size_t recordSize, u32 arg3, s32 linkPlayerCount)
+static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records, size_t recordSize, u32 multiplayerId, s32 linkPlayerCount)
 {
     s32 i, j, k, l;
-    s32 var_68;
+    s32 repeatTrainers;
 
+    // Load sPartnerHallRecords with link partners' hall records
     k = 0;
-    i = 0;
-    while (1)
+    for (i = 0; i < linkPlayerCount; i++)
     {
-        if (i >= linkPlayerCount)
+        if (i != multiplayerId)
+            sPartnerHallRecords[k++] = records;
+        if (k == HALL_RECORDS_COUNT)
             break;
-        if (i != arg3)
-            gUnknown_03001168[k++] = hallRecords;
-
-        if (k == 3)
-            break;
-        hallRecords += recordSize;
-        i++;
+        records += recordSize;
     }
 
+    // Get improved 1P hall records
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
         for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
         {
+            // First get the existing saved records
             for (k = 0; k < HALL_RECORDS_COUNT; k++)
                 dst->hallRecords1P[i][j][k] = gSaveBlock2Ptr->hallRecords1P[i][j][k];
 
+            // Then read the new mixed records
             for (k = 0; k < linkPlayerCount - 1; k++)
             {
-                var_68 = 0;
+                repeatTrainers = 0;
                 for (l = 0; l < HALL_RECORDS_COUNT; l++)
                 {
-                    if (GetTrainerId(dst->hallRecords1P[i][j][l].id) == GetTrainerId(gUnknown_03001168[k]->onePlayer[i][j].id))
+                    // If the new trainer is already in the existing saved records, only
+                    // use the new one if the win streak is better
+                    if (GetTrainerId(dst->hallRecords1P[i][j][l].id) == GetTrainerId(sPartnerHallRecords[k]->onePlayer[i][j].id))
                     {
-                        var_68++;
-                        if (dst->hallRecords1P[i][j][l].winStreak < gUnknown_03001168[k]->onePlayer[i][j].winStreak)
-                            dst->hallRecords1P[i][j][l] = gUnknown_03001168[k]->onePlayer[i][j];
+                        repeatTrainers++;
+                        if (dst->hallRecords1P[i][j][l].winStreak < sPartnerHallRecords[k]->onePlayer[i][j].winStreak)
+                            dst->hallRecords1P[i][j][l] = sPartnerHallRecords[k]->onePlayer[i][j];
                     }
                 }
-                if (var_68 == 0)
-                    dst->hallRecords1P[i][j][k + HALL_RECORDS_COUNT] = gUnknown_03001168[k]->onePlayer[i][j];
+
+                // If all of the mixed records are new trainers, just save them
+                if (repeatTrainers == 0)
+                    dst->hallRecords1P[i][j][k + HALL_RECORDS_COUNT] = sPartnerHallRecords[k]->onePlayer[i][j];
             }
         }
     }
 
+    // Get improved 2P hall records
     for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
     {
+        // First get the existing saved records
         for (k = 0; k < HALL_RECORDS_COUNT; k++)
             dst->hallRecords2P[j][k] = gSaveBlock2Ptr->hallRecords2P[j][k];
 
+        // Then read the new mixed records
         for (k = 0; k < linkPlayerCount - 1; k++)
         {
-            var_68 = 0;
+            repeatTrainers = 0;
             for (l = 0; l < HALL_RECORDS_COUNT; l++)
             {
-                if (GetTrainerId(dst->hallRecords2P[j][l].id1) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id1)
-                 && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id2))
+                // If the new trainer pair is already in the existing saved records, only
+                // use the new pair if the win streak is better
+                if (GetTrainerId(dst->hallRecords2P[j][l].id1) == GetTrainerId(sPartnerHallRecords[k]->twoPlayers[j].id1)
+                 && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(sPartnerHallRecords[k]->twoPlayers[j].id2))
                 {
-                    var_68++;
-                    if (dst->hallRecords2P[j][l].winStreak < gUnknown_03001168[k]->twoPlayers[j].winStreak)
-                        dst->hallRecords2P[j][l] = gUnknown_03001168[k]->twoPlayers[j];
+                    repeatTrainers++;
+                    if (dst->hallRecords2P[j][l].winStreak < sPartnerHallRecords[k]->twoPlayers[j].winStreak)
+                        dst->hallRecords2P[j][l] = sPartnerHallRecords[k]->twoPlayers[j];
                 }
             }
-            if (var_68 == 0)
-                dst->hallRecords2P[j][k + HALL_RECORDS_COUNT] = gUnknown_03001168[k]->twoPlayers[j];
+
+            // If all of the mixed records are new trainer pairs, just save them
+            if (repeatTrainers == 0)
+                dst->hallRecords2P[j][k + HALL_RECORDS_COUNT] = sPartnerHallRecords[k]->twoPlayers[j];
         }
     }
 }
 
-static void sub_80E8880(struct RankingHall1P *arg0, struct RankingHall1P *arg1)
+static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct RankingHall1P *mixRecords)
 {
     s32 i, j;
 
+    // Fill the player's 1P records with the highest win streaks from the mixed records
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
+        // Get the highest remaining win streak in the mixed hall records
         s32 highestWinStreak = 0;
         s32 highestId = -1;
-        for (j = 0; j < 6; j++)
+        for (j = 0; j < HALL_RECORDS_COUNT * 2; j++)
         {
-            if (arg1[j].winStreak > highestWinStreak)
+            if (mixRecords[j].winStreak > highestWinStreak)
             {
                 highestId = j;
-                highestWinStreak = arg1[j].winStreak;
+                highestWinStreak = mixRecords[j].winStreak;
             }
         }
 
+        // Save the win streak to the player's records, then clear it from the mixed records
         if (highestId >= 0)
         {
-            arg0[i] = arg1[highestId];
-            arg1[highestId].winStreak = 0;
+            playerRecords[i] = mixRecords[highestId];
+            mixRecords[highestId].winStreak = 0;
         }
     }
 }
 
-static void sub_80E88CC(struct RankingHall2P *arg0, struct RankingHall2P *arg1)
+static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct RankingHall2P *mixRecords)
 {
     s32 i, j;
 
-    for (i = 0; i < 3; i++)
+    // Fill the player's 2P records with the highest win streaks from the mixed records
+    for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
+        // Get the highest remaining win streak in the mixed hall records
         s32 highestWinStreak = 0;
         s32 highestId = -1;
-        for (j = 0; j < 6; j++)
+        for (j = 0; j < HALL_RECORDS_COUNT * 2; j++)
         {
-            if (arg1[j].winStreak > highestWinStreak)
+            if (mixRecords[j].winStreak > highestWinStreak)
             {
                 highestId = j;
-                highestWinStreak = arg1[j].winStreak;
+                highestWinStreak = mixRecords[j].winStreak;
             }
         }
 
+        // Save the win streak to the player's records, then clear it from the mixed records
         if (highestId >= 0)
         {
-            arg0[i] = arg1[highestId];
-            arg1[highestId].winStreak = 0;
+            playerRecords[i] = mixRecords[highestId];
+            mixRecords[highestId].winStreak = 0;
         }
     }
 }
 
-static void sub_80E8924(struct RecordMixingHallRecords *mixHallRecords)
+static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallRecords)
 {
     s32 i, j;
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
         for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-            sub_80E8880(gSaveBlock2Ptr->hallRecords1P[i][j], mixHallRecords->hallRecords1P[i][j]);
+            FillWinStreakRecords1P(gSaveBlock2Ptr->hallRecords1P[i][j], mixHallRecords->hallRecords1P[i][j]);
     }
     for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-        sub_80E88CC(gSaveBlock2Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
+        FillWinStreakRecords2P(gSaveBlock2Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
 }
 
-static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t recordSize, u32 arg2)
+static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t recordSize, u32 multiplayerId)
 {
     u8 linkPlayerCount = GetLinkPlayerCount();
     struct RecordMixingHallRecords *mixHallRecords = AllocZeroed(sizeof(*mixHallRecords));
 
-    sub_80E8578(mixHallRecords, hallRecords, recordSize, arg2, linkPlayerCount);
-    sub_80E8924(mixHallRecords);
+    GetNewHallRecords(mixHallRecords, records, recordSize, multiplayerId, linkPlayerCount);
+    SaveHighestWinStreakRecords(mixHallRecords);
 
     Free(mixHallRecords);
 }
