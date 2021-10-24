@@ -7419,8 +7419,9 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
         }
     }
 }
-static void handleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u8 base_x, u8 base_y, u8 base_y_offset, u8 base_i)
+static void HandleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u16 previousTargetSpecies, u8 base_x, u8 base_y, u8 base_y_offset, u8 base_i, bool8 isEevee)
 {
+    u8 maxI = 6;
     bool8 seen = GetSetPokedexFlag(SpeciesToNationalPokedexNum(targetSpecies), FLAG_GET_SEEN);
 
     if (seen || !HGSS_HIDE_UNSEEN_EVOLUTION_NAMES)
@@ -7430,14 +7431,31 @@ static void handleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u8 base_x, u8
     StringExpandPlaceholders(gStringVar3, gText_EVO_Name); //evolution mon name
     PrintInfoScreenTextSmall(gStringVar3, base_x, base_y + base_y_offset*base_i); //evolution mon name
 
-    if(base_i < 6)
+    //Print mon icon in the top row
+    if (isEevee)
+    {
+        maxI = 9;
+        if (targetSpecies == previousTargetSpecies)
+            return;
+        #ifdef POKEMON_EXPANSION
+            else if (targetSpecies == SPECIES_GLACEON)
+                base_i -= 1;
+            else if (targetSpecies == SPECIES_SYLVEON)
+                base_i -= 2;
+        #endif
+    }
+
+    if(base_i < maxI) 
     {
         LoadMonIconPalette(targetSpecies); //Loads pallete for current mon
         #ifndef POKEMON_EXPANSION
             gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, TRUE); //Create pokemon sprite
         #endif
         #ifdef POKEMON_EXPANSION
-            gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0); //Create pokemon sprite
+            if (isEevee)
+                gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 45 + 26*base_i, 31, 4, 0); //Create pokemon sprite
+            else
+                gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0); //Create pokemon sprite
         #endif
         gSprites[gTasks[taskId].data[4+base_i]].oam.priority = 0;
     }
@@ -7462,6 +7480,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         const struct MapHeader *mapHeader;
     #endif
     u16 targetSpecies = 0;
+    u16 previousTargetSpecies = 0;
 
     u16 item;
 
@@ -7473,8 +7492,12 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     u8 base_i = 0;
     u8 times = 0;
     u8 depth_x = 16;
+    bool8 isEevee = FALSE;
 
     StringCopy(gStringVar1, gSpeciesNames[species]);
+
+    if (species == SPECIES_EEVEE)
+        isEevee = TRUE;
 
     #ifdef TX_DIFFICULTY_CHALLENGES_USED
         if (gSaveBlock1Ptr->txRandEvolutionMethodes) //tx_difficulty_challenges
@@ -7512,13 +7535,14 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         base_i = i + depth_i;
         left = !left;
 
+        previousTargetSpecies = targetSpecies;
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
         #ifdef TX_DIFFICULTY_CHALLENGES_USED
             if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
                 targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->txRandChaos);
         #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
-        handleTargetSpeciesPrint(taskId, targetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i); //evolution mon name
+        HandleTargetSpeciesPrint(taskId, targetSpecies, previousTargetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i, isEevee); //evolution mon name
 
         switch (gEvolutionTable[species][i].method)
         {
