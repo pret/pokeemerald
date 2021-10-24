@@ -22,7 +22,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
@@ -56,7 +56,7 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
-#include "constants/mevent.h"
+#include "constants/mystery_gift.h"
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
@@ -1655,20 +1655,20 @@ void BufferLottoTicketNumber(void)
     }
 }
 
-u16 GetMysteryEventCardVal(void)
+u16 GetMysteryGiftCardStat(void)
 {
     switch (gSpecialVar_Result)
     {
         case GET_NUM_STAMPS:
-            return mevent_081445C0(GET_NUM_STAMPS_INTERNAL);
+            return MysteryGift_GetCardStat(CARD_STAT_NUM_STAMPS);
         case GET_MAX_STAMPS:
-            return mevent_081445C0(GET_MAX_STAMPS_INTERNAL);
+            return MysteryGift_GetCardStat(CARD_STAT_MAX_STAMPS);
         case GET_CARD_BATTLES_WON:
-            return mevent_081445C0(GET_CARD_BATTLES_WON_INTERNAL);
-        case 3: // Never occurs
-            return mevent_081445C0(1);
-        case 4: // Never occurs
-            return mevent_081445C0(2);
+            return MysteryGift_GetCardStat(CARD_STAT_BATTLES_WON);
+        case GET_CARD_BATTLES_LOST: // Never occurs
+            return MysteryGift_GetCardStat(CARD_STAT_BATTLES_LOST);
+        case GET_CARD_NUM_TRADES: // Never occurs
+            return MysteryGift_GetCardStat(CARD_STAT_NUM_TRADES);
         default:
             return 0;
     }

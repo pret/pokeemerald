@@ -19,8 +19,8 @@
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
-#include "mevent2.h"
 #include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -4655,9 +4655,8 @@ static void CB2_SaveAndEndTrade(void)
         if (!InUnionRoom())
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
         if (gWirelessCommType)
-        {
-            RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
-        }
+            MysteryGift_TryIncrementStat(CARD_STAT_NUM_TRADES, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+
         SetContinueGameWarpStatusToDynamicWarp();
         sub_8153380();
         gMain.state++;
