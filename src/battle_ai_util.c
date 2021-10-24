@@ -733,26 +733,102 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     else
         dmg = (critDmg + normalDmg * (critChance - 1)) / critChance;
 
-    // handle dynamic move damage
+    // Handle dynamic move damage
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_LEVEL_DAMAGE:
     case EFFECT_PSYWAVE:
-        //psywave's expected damage is equal to the user's level
-        dmg = gBattleMons[battlerAtk].level;
+    {
+        // Psywave's expected damage is equal to the user's level
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
+            dmg = 0;
+        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
+            dmg = 2 * gBattleMons[battlerAtk].level;
+        else
+            dmg = gBattleMons[battlerAtk].level;
         break;
+    }
     case EFFECT_DRAGON_RAGE:
-        dmg = 40;
+    {
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
+            dmg = 0;
+        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
+            dmg = 80;
+        else
+            dmg = 40;
         break;
+    }
     case EFFECT_SONICBOOM:
-        dmg = 20;
+    {
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
+            dmg = 0;
+        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
+            dmg = 40;
+        else
+            dmg = 20;
         break;
+    }
+    case EFFECT_MULTI_HIT:
+    {
+        if (AI_DATA->atkAbility == ABILITY_SKILL_LINK)
+            dmg *= 5;
+        else
+            dmg *= 3; // Average number of hits is three
+        break;
+    }
+    case EFFECT_TRIPLE_KICK:
+    {
+        if (AI_DATA->atkAbility == ABILITY_SKILL_LINK)
+            dmg *= 6; // Skill Link ensures the 2nd and 3rd hits will connect if the first does
+        else
+            dmg *= 5; // Triple Kick/Triple Axel's average power is almost 5x its base power
+        break;
+    }
+    case EFFECT_ENDEAVOR:
+    {
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
+            dmg = 0;
+        else
+            // If target has less HP than user, Endeavor does no damage
+            dmg = max(0, gBattleMons[battlerDef].hp - gBattleMons[battlerAtk].hp);
+        break;
+    }
+    case EFFECT_SUPER_FANG:
+    {
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
+            dmg = 0;
+        // Two hits of Super Fang halves HP twice, leaving target with 25% HP
+        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
+            dmg = gBattleMons[battlerDef].hp * 3 / 4;
+        else
+            dmg = gBattleMons[battlerDef].hp / 2;
+        break;
+    }
+    case EFFECT_FINAL_GAMBIT:
+    {
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
+            dmg = 0;
+        else
+            dmg = gBattleMons[battlerAtk].hp;
+        break;
+    }
     //case EFFECT_METAL_BURST:
     //case EFFECT_COUNTER:
     default:
         //do not add the random factor, it's an average case analysis
         //dmg *= (100 - (Random() % 10)) / 100;   // add random factor
         break;
+    }
+
+    // Handle other multi-strike moves
+    if (IsTwoStrikesMove(move))
+    {
+        dmg *= 2;
+    }
+    else if (move == MOVE_SURGING_STRIKES 
+             || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
+    {
+        dmg *= 3;
     }
 
     RestoreBattlerData(battlerAtk);
@@ -2653,7 +2729,7 @@ bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 
     return TRUE;
 }
 
-static bool32 CanBeParalyzed(u8 battler, u16 ability)
+static bool32 AI_CanBeParalyzed(u8 battler, u16 ability)
 {
     if (ability == ABILITY_LIMBER
       || IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC)
@@ -2665,7 +2741,7 @@ static bool32 CanBeParalyzed(u8 battler, u16 ability)
 
 bool32 AI_CanParalyze(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
 {
-    if (!CanBeParalyzed(battlerDef, defAbility)
+    if (!AI_CanBeParalyzed(battlerDef, defAbility)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)

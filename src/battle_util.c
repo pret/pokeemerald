@@ -217,6 +217,20 @@ static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
+static const u16 sTwoStrikeMoves[] =
+{
+    MOVE_BONEMERANG,
+    MOVE_DOUBLE_HIT,
+    MOVE_DOUBLE_IRON_BASH,
+    MOVE_DOUBLE_KICK,
+    MOVE_DRAGON_DARTS,
+    MOVE_DUAL_CHOP,
+    MOVE_DUAL_WINGBEAT,
+    MOVE_GEAR_GRIND,
+    MOVE_TWINEEDLE,
+    0xFFFF
+};
+
 bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move)
 {
     u32 ability = GetBattlerAbility(battlerAtk);
@@ -9507,5 +9521,17 @@ bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 chec
     
     return TRUE;
     #endif
+    return FALSE;
+}
+
+bool8 IsTwoStrikesMove(u16 move)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sTwoStrikeMoves); i++)
+    {
+        if (move == sTwoStrikeMoves[i])
+            return TRUE;
+    }
     return FALSE;
 }
