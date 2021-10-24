@@ -605,6 +605,7 @@ extern const u8 gText_Dex_OWN[];
 extern const u8 gText_EVO_Buttons_PE[];
 extern const u8 gText_EVO_Buttons_Decapped_PE[];
 extern const u8 gText_EVO_Name[];
+extern const u8 gText_EVO_PreEvo[];
 extern const u8 gText_EVO_FRIENDSHIP[];
 extern const u8 gText_EVO_FRIENDSHIP_DAY[];
 extern const u8 gText_EVO_FRIENDSHIP_NIGHT[];

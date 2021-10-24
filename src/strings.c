@@ -1891,6 +1891,7 @@ const u8 gText_Dex_OWN[]    = _("OWN");
 const u8 gText_EVO_Buttons_PE[]                     = _("{A_BUTTON}FORMS");
 const u8 gText_EVO_Buttons_Decapped_PE[]            = _("{A_BUTTON}Forms");
 const u8 gText_EVO_Name[]                           = _("{STR_VAR_3}:");
+const u8 gText_EVO_PreEvo[]                         = _("{STR_VAR_1} evolves from {STR_VAR_2}");
 const u8 gText_EVO_FRIENDSHIP[]                     = _("LvlUp, high friendship");
 const u8 gText_EVO_FRIENDSHIP_DAY[]                 = _("LvlUp, high friendship, day");
 const u8 gText_EVO_FRIENDSHIP_NIGHT[]               = _("Lvlup, high friendship, night");
