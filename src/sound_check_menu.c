@@ -389,7 +389,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
             if (gTasks[taskId].tBgmIndex > 0)
                 gTasks[taskId].tBgmIndex--;
             else
-                gTasks[taskId].tBgmIndex = (BW_SEQ_ME_KINOMI - (MUS_LITTLEROOT_TEST - 1));
+                gTasks[taskId].tBgmIndex = (BW_SEQ_BGM_VS_WCS - (MUS_LITTLEROOT_TEST - 1));
         }
         return TRUE;
     }
@@ -404,7 +404,7 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId) // sub_080E8688
         }
         else
         {
-            if (gTasks[taskId].tBgmIndex < (BW_SEQ_ME_KINOMI - (MUS_LITTLEROOT_TEST - 1)))
+            if (gTasks[taskId].tBgmIndex < (BW_SEQ_BGM_VS_WCS - (MUS_LITTLEROOT_TEST - 1)))
                 gTasks[taskId].tBgmIndex++;
             else
                 gTasks[taskId].tBgmIndex = 0;
@@ -1228,560 +1228,55 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_VS_FRONTIER_BRAIN, "MUS-VS-FRONTIER-BRAIN") \
     X(MUS_VS_MEW, "MUS-VS-MEW") \
     X(MUS_B_DOME_LOBBY, "MUS-B-DOME-LOBBY") \
-    X(DP_SEQ_TITLE00               , "DP-SEQ-TITLE00") \
-    X(DP_SEQ_TITLE01               , "DP-SEQ-TITLE01") \
-    X(DP_SEQ_OPENING               , "DP-SEQ-OPENING") \
-    X(DP_SEQ_TV_HOUSOU             , "DP-SEQ-TV-HOUSOU") \
-    X(DP_SEQ_TV_END                , "DP-SEQ-TV-END") \
-    X(DP_SEQ_TOWN01_D              , "DP-SEQ-TOWN01-D") \
-    X(DP_SEQ_TOWN01_N              , "DP-SEQ-TOWN01-N") \
-    X(DP_SEQ_THE_RIV               , "DP-SEQ-THE-RIV") \
-    X(DP_SEQ_ROAD_A_D              , "DP-SEQ-ROAD-A-D") \
-    X(DP_SEQ_ROAD_A_N              , "DP-SEQ-ROAD-A-N") \
-    X(DP_SEQ_D_LAKE                , "DP-SEQ-D-LAKE") \
-    X(DP_SEQ_THE_EVENT01           , "DP-SEQ-THE-EVENT01") \
     X(DP_SEQ_BA_POKE               , "DP-SEQ-BA-POKE") \
-    X(DP_SEQ_WINPOKE               , "DP-SEQ-WINPOKE") \
-    X(DP_SEQ_THE_GIRL              , "DP-SEQ-THE-GIRL") \
-    X(DP_SEQ_THE_BOY               , "DP-SEQ-THE-BOY") \
-    X(DP_SEQ_FANFA4                , "DP-SEQ-FANFA4") \
-    X(DP_SEQ_TOWN02_D              , "DP-SEQ-TOWN02-D") \
-    X(DP_SEQ_TOWN02_N              , "DP-SEQ-TOWN02-N") \
-    X(DP_SEQ_KENKYUJO              , "DP-SEQ-KENKYUJO") \
-    X(DP_SEQ_TSURETEKE             , "DP-SEQ-TSURETEKE") \
-    X(DP_SEQ_PC_01                 , "DP-SEQ-PC-01") \
-    X(DP_SEQ_PC_02                 , "DP-SEQ-PC-02") \
-    X(DP_SEQ_ASA                   , "DP-SEQ-ASA") \
-    X(DP_SEQ_EYE_BOY               , "DP-SEQ-EYE-BOY") \
-    X(DP_SEQ_EYE_GIRL              , "DP-SEQ-EYE-GIRL") \
     X(DP_SEQ_BA_TRAIN              , "DP-SEQ-BA-TRAIN") \
-    X(DP_SEQ_WINTRAIN              , "DP-SEQ-WINTRAIN") \
-    X(DP_SEQ_CITY01_D              , "DP-SEQ-CITY01-D") \
-    X(DP_SEQ_CITY01_N              , "DP-SEQ-CITY01-N") \
-    X(DP_SEQ_FANFA3                , "DP-SEQ-FANFA3") \
-    X(DP_SEQ_FS                    , "DP-SEQ-FS") \
-    X(DP_SEQ_ROAD_B_D              , "DP-SEQ-ROAD-B-D") \
-    X(DP_SEQ_ROAD_B_N              , "DP-SEQ-ROAD-B-N") \
     X(DP_SEQ_BA_RIVAL              , "DP-SEQ-BA-RIVAL") \
-    X(DP_SEQ_D_05                  , "DP-SEQ-D-05") \
-    X(DP_SEQ_WAZA                  , "DP-SEQ-WAZA") \
-    X(DP_SEQ_CITY03_D              , "DP-SEQ-CITY03-D") \
-    X(DP_SEQ_CITY03_N              , "DP-SEQ-CITY03-N") \
-    X(DP_SEQ_D_04                  , "DP-SEQ-D-04") \
-    X(DP_SEQ_GYM                   , "DP-SEQ-GYM") \
     X(DP_SEQ_BA_GYM                , "DP-SEQ-BA-GYM") \
-    X(DP_SEQ_WINTGYM               , "DP-SEQ-WINTGYM") \
-    X(DP_SEQ_BADGE                 , "DP-SEQ-BADGE") \
-    X(DP_SEQ_EYE_KID               , "DP-SEQ-EYE-KID") \
-    X(DP_SEQ_FANFA1                , "DP-SEQ-FANFA1") \
-    X(DP_SEQ_TOWN03_D              , "DP-SEQ-TOWN03-D") \
-    X(DP_SEQ_TOWN03_N              , "DP-SEQ-TOWN03-N") \
-    X(DP_SEQ_KINOMI                , "DP-SEQ-KINOMI") \
-    X(DP_SEQ_ROAD_C_D              , "DP-SEQ-ROAD-C-D") \
-    X(DP_SEQ_ROAD_C_N              , "DP-SEQ-ROAD-C-N") \
-    X(DP_SEQ_EYE_GINGA             , "DP-SEQ-EYE-GINGA") \
     X(DP_SEQ_BA_GINGA              , "DP-SEQ-BA-GINGA") \
-    X(DP_SEQ_D_02                  , "DP-SEQ-D-02") \
-    X(DP_SEQ_GONIN                 , "DP-SEQ-GONIN") \
-    X(DP_SEQ_CITY04_D              , "DP-SEQ-CITY04-D") \
-    X(DP_SEQ_CITY04_N              , "DP-SEQ-CITY04-N") \
-    X(DP_SEQ_D_GINLOBBY            , "DP-SEQ-D-GINLOBBY") \
     X(DP_SEQ_BA_GINGA3             , "DP-SEQ-BA-GINGA3") \
-    X(DP_SEQ_WINGINGA              , "DP-SEQ-WINGINGA") \
-    X(DP_SEQ_SHINKA                , "DP-SEQ-SHINKA") \
-    X(DP_SEQ_FANFA5                , "DP-SEQ-FANFA5") \
-    X(DP_SEQ_BICYCLE               , "DP-SEQ-BICYCLE") \
-    X(DP_SEQ_EYE_SPORT             , "DP-SEQ-EYE-SPORT") \
-    X(DP_SEQ_ROAD_D_D              , "DP-SEQ-ROAD-D-D") \
-    X(DP_SEQ_ROAD_D_N              , "DP-SEQ-ROAD-D-N") \
-    X(DP_SEQ_CITY05_D              , "DP-SEQ-CITY05-D") \
-    X(DP_SEQ_CITY05_N              , "DP-SEQ-CITY05-N") \
-    X(DP_SEQ_ROAD_E_D              , "DP-SEQ-ROAD-E-D") \
-    X(DP_SEQ_ROAD_E_N              , "DP-SEQ-ROAD-E-N") \
-    X(DP_SEQ_EYE_MOUNT             , "DP-SEQ-EYE-MOUNT") \
-    X(DP_SEQ_TOWN04_D              , "DP-SEQ-TOWN04-D") \
-    X(DP_SEQ_TOWN04_N              , "DP-SEQ-TOWN04-N") \
-    X(DP_SEQ_POCKETCH              , "DP-SEQ-POCKETCH") \
-    X(DP_SEQ_ROAD_F_D              , "DP-SEQ-ROAD-F-D") \
-    X(DP_SEQ_ROAD_F_N              , "DP-SEQ-ROAD-F-N") \
-    X(DP_SEQ_CITY07_D              , "DP-SEQ-CITY07-D") \
-    X(DP_SEQ_CITY07_N              , "DP-SEQ-CITY07-N") \
-    X(DP_SEQ_TOWN07_D              , "DP-SEQ-TOWN07-D") \
-    X(DP_SEQ_TOWN07_N              , "DP-SEQ-TOWN07-N") \
-    X(DP_SEQ_CITY02_D              , "DP-SEQ-CITY02-D") \
-    X(DP_SEQ_CITY02_N              , "DP-SEQ-CITY02-N") \
-    X(DP_SEQ_ROAD_SNOW_D           , "DP-SEQ-ROAD-SNOW-D") \
-    X(DP_SEQ_ROAD_SNOW_N           , "DP-SEQ-ROAD-SNOW-N") \
-    X(DP_SEQ_CITY09_D              , "DP-SEQ-CITY09-D") \
-    X(DP_SEQ_CITY09_N              , "DP-SEQ-CITY09-N") \
-    X(DP_SEQ_D_AGITO               , "DP-SEQ-D-AGITO") \
     X(DP_SEQ_BA_AGAKI              , "DP-SEQ-BA-AGAKI") \
-    X(DP_SEQ_THE_EVENT04           , "DP-SEQ-THE-EVENT04") \
-    X(DP_SEQ_D_MOUNT1              , "DP-SEQ-D-MOUNT1") \
-    X(DP_SEQ_D_MOUNT2              , "DP-SEQ-D-MOUNT2") \
-    X(DP_SEQ_THE_EVENT02           , "DP-SEQ-THE-EVENT02") \
-    X(DP_SEQ_THE_EVENT03           , "DP-SEQ-THE-EVENT03") \
     X(DP_SEQ_BA_DPOKE2             , "DP-SEQ-BA-DPOKE2") \
-    X(DP_SEQ_CITY08_D              , "DP-SEQ-CITY08-D") \
-    X(DP_SEQ_CITY08_N              , "DP-SEQ-CITY08-N") \
-    X(DP_SEQ_D_01                  , "DP-SEQ-D-01") \
-    X(DP_SEQ_EYE_ELITE             , "DP-SEQ-EYE-ELITE") \
-    X(DP_SEQ_CITY10_D              , "DP-SEQ-CITY10-D") \
-    X(DP_SEQ_CITY10_N              , "DP-SEQ-CITY10-N") \
-    X(DP_SEQ_CITY11_D              , "DP-SEQ-CITY11-D") \
-    X(DP_SEQ_CITY11_N              , "DP-SEQ-CITY11-N") \
-    X(DP_SEQ_TOWN06_D              , "DP-SEQ-TOWN06-D") \
-    X(DP_SEQ_TOWN06_N              , "DP-SEQ-TOWN06-N") \
-    X(DP_SEQ_ROAD_BZA_D            , "DP-SEQ-ROAD-BZA-D") \
-    X(DP_SEQ_ROAD_BZA_N            , "DP-SEQ-ROAD-BZA-N") \
-    X(DP_SEQ_WIFILOBBY             , "DP-SEQ-WIFILOBBY") \
-    X(DP_SEQ_BLD_TV                , "DP-SEQ-BLD-TV") \
-    X(DP_SEQ_BLD_BLD_GTC           , "DP-SEQ-BLD-BLD-GTC") \
-    X(DP_SEQ_NAMINORI              , "DP-SEQ-NAMINORI") \
-    X(DP_SEQ_WASURE                , "DP-SEQ-WASURE") \
-    X(DP_SEQ_EYE_FIGHT             , "DP-SEQ-EYE-FIGHT") \
-    X(DP_SEQ_EYE_ENKA              , "DP-SEQ-EYE-ENKA") \
-    X(DP_SEQ_TANKOU                , "DP-SEQ-TANKOU") \
-    X(DP_SEQ_HATANIGE              , "DP-SEQ-HATANIGE") \
-    X(DP_SEQ_EYE_LADY              , "DP-SEQ-EYE-LADY") \
-    X(DP_SEQ_D_03                  , "DP-SEQ-D-03") \
-    X(DP_SEQ_D_SAFARI              , "DP-SEQ-D-SAFARI") \
-    X(DP_SEQ_EYE_MYS               , "DP-SEQ-EYE-MYS") \
-    X(DP_SEQ_BLD_GAME              , "DP-SEQ-BLD-GAME") \
-    X(DP_SEQ_SLOT_ATARI            , "DP-SEQ-SLOT-ATARI") \
-    X(DP_SEQ_SLOT_OOATARI          , "DP-SEQ-SLOT-OOATARI") \
-    X(DP_SEQ_EYE_RICH              , "DP-SEQ-EYE-RICH") \
-    X(DP_SEQ_D_RYAYHY              , "DP-SEQ-D-RYAYHY") \
     X(DP_SEQ_BA_DPOKE1             , "DP-SEQ-BA-DPOKE1") \
-    X(DP_SEQ_KUSAGASA              , "DP-SEQ-KUSAGASA") \
-    X(DP_SEQ_EYE_FUN               , "DP-SEQ-EYE-FUN") \
-    X(DP_SEQ_D_KOUEN               , "DP-SEQ-D-KOUEN") \
-    X(DP_SEQ_ACCE                  , "DP-SEQ-ACCE") \
-    X(DP_SEQ_BLD_CON               , "DP-SEQ-BLD-CON") \
-    X(DP_SEQ_KINOMI1               , "DP-SEQ-KINOMI1") \
-    X(DP_SEQ_CON_TEST              , "DP-SEQ-CON-TEST") \
-    X(DP_SEQ_CO_DRESS              , "DP-SEQ-CO-DRESS") \
-    X(DP_SEQ_CO_KASHI              , "DP-SEQ-CO-KASHI") \
-    X(DP_SEQ_CO_TAKUMA             , "DP-SEQ-CO-TAKUMA") \
-    X(DP_SEQ_CO_KEKKA              , "DP-SEQ-CO-KEKKA") \
-    X(DP_SEQ_CO_FANFA              , "DP-SEQ-CO-FANFA") \
-    X(DP_SEQ_BF_TOWWER             , "DP-SEQ-BF-TOWWER") \
-    X(DP_SEQ_D_06                  , "DP-SEQ-D-06") \
     X(DP_SEQ_BA_SECRET2            , "DP-SEQ-BA-SECRET2") \
-    X(DP_SEQ_PRESENT               , "DP-SEQ-PRESENT") \
-    X(DP_SEQ_D_LEAGUE              , "DP-SEQ-D-LEAGUE") \
-    X(DP_SEQ_EYE_TENNO             , "DP-SEQ-EYE-TENNO") \
     X(DP_SEQ_BA_TENNO              , "DP-SEQ-BA-TENNO") \
-    X(DP_SEQ_WINTENNO              , "DP-SEQ-WINTENNO") \
-    X(DP_SEQ_EYE_CHAMP             , "DP-SEQ-EYE-CHAMP") \
     X(DP_SEQ_BA_CHANP              , "DP-SEQ-BA-CHANP") \
-    X(DP_SEQ_WINCHAMP              , "DP-SEQ-WINCHAMP") \
-    X(DP_SEQ_BLD_DENDO             , "DP-SEQ-BLD-DENDO") \
-    X(DP_SEQ_BLD_EV_DENDO2         , "DP-SEQ-BLD-EV-DENDO2") \
-    X(DP_SEQ_BLD_ENDING            , "DP-SEQ-BLD-ENDING") \
-    X(DP_SEQ_FUE                   , "DP-SEQ-FUE") \
-    X(DP_SEQ_AUS                   , "DP-SEQ-AUS") \
     X(DP_SEQ_BA_SECRET1            , "DP-SEQ-BA-SECRET1") \
-    X(PL_SEQ_TITLE00               , "PL-SEQ-TITLE00") \
-    X(PL_SEQ_TITLE01               , "PL-SEQ-TITLE01") \
-    X(PL_SEQ_TV_HOUSOU             , "PL-SEQ-TV-HOUSOU") \
-    X(PL_SEQ_TV_END                , "PL-SEQ-TV-END") \
-    X(PL_SEQ_PL_HANDSOME           , "PL-SEQ-PL-HANDSOME") \
-    X(PL_SEQ_PL_WIFITOWER          , "PL-SEQ-PL-WIFITOWER") \
-    X(PL_SEQ_PL_WIFIUNION          , "PL-SEQ-PL-WIFIUNION") \
-    X(PL_SEQ_PL_WIFIGAME           , "PL-SEQ-PL-WIFIGAME") \
-    X(PL_SEQ_PL_WINMINI2           , "PL-SEQ-PL-WINMINI2") \
-    X(PL_SEQ_PL_WIFIPARADE         , "PL-SEQ-PL-WIFIPARADE") \
-    X(PL_SEQ_PL_EV_GIRA            , "PL-SEQ-PL-EV-GIRA") \
-    X(PL_SEQ_PL_EV_GIRA2           , "PL-SEQ-PL-EV-GIRA2") \
-    X(PL_SEQ_PL_D_GIRATINA         , "PL-SEQ-PL-D-GIRATINA") \
     X(PL_SEQ_PL_BA_GIRA            , "PL-SEQ-PL-BA-GIRA") \
-    X(PL_SEQ_PL_GURUGURU           , "PL-SEQ-PL-GURUGURU") \
-    X(PL_SEQ_PL_PTHAIFU            , "PL-SEQ-PL-PTHAIFU") \
-    X(PL_SEQ_PL_MTKAWA             , "PL-SEQ-PL-MTKAWA") \
-    X(PL_SEQ_PL_MTKAKKO            , "PL-SEQ-PL-MTKAKKO") \
-    X(PL_SEQ_PL_MTTAKMA            , "PL-SEQ-PL-MTTAKMA") \
-    X(PL_SEQ_PL_MTUTSUK            , "PL-SEQ-PL-MTUTSUK") \
-    X(PL_SEQ_PL_MTKASHI            , "PL-SEQ-PL-MTKASHI") \
-    X(PL_SEQ_PL_TOWN02             , "PL-SEQ-PL-TOWN02") \
-    X(PL_SEQ_PL_AUDIO              , "PL-SEQ-PL-AUDIO") \
-    X(PL_SEQ_CITY11_D              , "PL-SEQ-CITY11-D") \
-    X(PL_SEQ_PL_BF_ROULETTE        , "PL-SEQ-PL-BF-ROULETTE") \
-    X(PL_SEQ_PL_DON2               , "PL-SEQ-PL-DON2") \
-    X(PL_SEQ_PL_BF_STAGE           , "PL-SEQ-PL-BF-STAGE") \
-    X(PL_SEQ_PL_BF_FACTORY         , "PL-SEQ-PL-BF-FACTORY") \
-    X(PL_SEQ_PL_BF_CASTLE          , "PL-SEQ-PL-BF-CASTLE") \
-    X(PL_SEQ_PL_FRO                , "PL-SEQ-PL-FRO") \
-    X(PL_SEQ_PL_POINTGET3          , "PL-SEQ-PL-POINTGET3") \
     X(PL_SEQ_PL_BA_BRAIN           , "PL-SEQ-PL-BA-BRAIN") \
-    X(PL_SEQ_PL_WINBRAIN           , "PL-SEQ-PL-WINBRAIN") \
     X(PL_SEQ_PL_BA_REGI            , "PL-SEQ-PL-BA-REGI") \
-    X(HG_SEQ_GS_TITLE              , "HG-SEQ-GS-TITLE") \
-    X(HG_SEQ_GS_POKEMON_THEME      , "HG-SEQ-GS-POKEMON-THEME") \
-    X(HG_SEQ_GS_STARTING           , "HG-SEQ-GS-STARTING") \
-    X(HG_SEQ_GS_T_WAKABA           , "HG-SEQ-GS-T-WAKABA") \
-    X(HG_SEQ_GS_E_TSURETEKE1       , "HG-SEQ-GS-E-TSURETEKE1") \
-    X(HG_SEQ_GS_E_SUPPORT_F        , "HG-SEQ-GS-E-SUPPORT-F") \
-    X(HG_SEQ_GS_E_SUPPORT_M        , "HG-SEQ-GS-E-SUPPORT-M") \
-    X(HG_SEQ_GS_UTSUGI_RABO        , "HG-SEQ-GS-UTSUGI-RABO") \
-    X(HG_SEQ_ME_KEYITEM            , "HG-SEQ-ME-KEYITEM") \
-    X(HG_SEQ_GS_R_1_29             , "HG-SEQ-GS-R-1-29") \
     X(HG_SEQ_GS_VS_NORAPOKE        , "HG-SEQ-GS-VS-NORAPOKE") \
-    X(HG_SEQ_GS_WIN2               , "HG-SEQ-GS-WIN2") \
-    X(HG_SEQ_GS_WIN2_NOT_FAN       , "HG-SEQ-GS-WIN2-NOT-FAN") \
-    X(HG_SEQ_ME_LVUP               , "HG-SEQ-ME-LVUP") \
-    X(HG_SEQ_GS_C_YOSHINO          , "HG-SEQ-GS-C-YOSHINO") \
-    X(HG_SEQ_GS_E_TSURETEKE2       , "HG-SEQ-GS-E-TSURETEKE2") \
-    X(HG_SEQ_GS_POKESEN            , "HG-SEQ-GS-POKESEN") \
-    X(HG_SEQ_ME_ASA                , "HG-SEQ-ME-ASA") \
-    X(HG_SEQ_GS_EYE_J_SHOUNEN      , "HG-SEQ-GS-EYE-J-SHOUNEN") \
     X(HG_SEQ_GS_VS_TRAINER         , "HG-SEQ-GS-VS-TRAINER") \
-    X(HG_SEQ_GS_WIN1               , "HG-SEQ-GS-WIN1") \
-    X(HG_SEQ_GS_R_1_30             , "HG-SEQ-GS-R-1-30") \
-    X(HG_SEQ_ME_HYOUKA1            , "HG-SEQ-ME-HYOUKA1") \
-    X(HG_SEQ_GS_C_KIKYOU           , "HG-SEQ-GS-C-KIKYOU") \
-    X(HG_SEQ_GS_TO_MADATSUBOMI1    , "HG-SEQ-GS-TO-MADATSUBOMI1") \
-    X(HG_SEQ_GS_EYE_BOUZU          , "HG-SEQ-GS-EYE-BOUZU") \
-    X(HG_SEQ_GS_FS                 , "HG-SEQ-GS-FS") \
-    X(HG_SEQ_ME_TAMAGO_GET         , "HG-SEQ-ME-TAMAGO-GET") \
-    X(HG_SEQ_GS_E_MAIKO_THEME      , "HG-SEQ-GS-E-MAIKO-THEME") \
-    X(HG_SEQ_GS_D_CHIKATSUURO      , "HG-SEQ-GS-D-CHIKATSUURO") \
-    X(HG_SEQ_ME_ITEM               , "HG-SEQ-ME-ITEM") \
-    X(HG_SEQ_GS_D_UNKNOWN_ISEKI    , "HG-SEQ-GS-D-UNKNOWN-ISEKI") \
-    X(HG_SEQ_GS_RADIO_UNKNOWN      , "HG-SEQ-GS-RADIO-UNKNOWN") \
-    X(HG_SEQ_ME_HYOUKA2            , "HG-SEQ-ME-HYOUKA2") \
-    X(HG_SEQ_GS_T_HIWADA           , "HG-SEQ-GS-T-HIWADA") \
-    X(HG_SEQ_GS_EYE_ROCKET         , "HG-SEQ-GS-EYE-ROCKET") \
     X(HG_SEQ_GS_VS_ROCKET          , "HG-SEQ-GS-VS-ROCKET") \
-    X(HG_SEQ_GS_R_4_34             , "HG-SEQ-GS-R-4-34") \
-    X(HG_SEQ_GS_E_RIVAL1           , "HG-SEQ-GS-E-RIVAL1") \
     X(HG_SEQ_GS_VS_RIVAL           , "HG-SEQ-GS-VS-RIVAL") \
-    X(HG_SEQ_GS_SHINKA             , "HG-SEQ-GS-SHINKA") \
-    X(HG_SEQ_GS_KOUKAN             , "HG-SEQ-GS-KOUKAN") \
-    X(HG_SEQ_ME_SHINKAOME          , "HG-SEQ-ME-SHINKAOME") \
-    X(HG_SEQ_GS_C_KOGANE           , "HG-SEQ-GS-C-KOGANE") \
-    X(HG_SEQ_GS_GYM                , "HG-SEQ-GS-GYM") \
     X(HG_SEQ_GS_VS_GYMREADER       , "HG-SEQ-GS-VS-GYMREADER") \
-    X(HG_SEQ_GS_WIN3               , "HG-SEQ-GS-WIN3") \
-    X(HG_SEQ_ME_BADGE              , "HG-SEQ-ME-BADGE") \
-    X(HG_SEQ_GS_RADIO_JINGLE       , "HG-SEQ-GS-RADIO-JINGLE") \
-    X(HG_SEQ_GS_AIKOTOBA           , "HG-SEQ-GS-AIKOTOBA") \
-    X(HG_SEQ_ME_WAZA               , "HG-SEQ-ME-WAZA") \
-    X(HG_SEQ_GS_GAME               , "HG-SEQ-GS-GAME") \
-    X(HG_SEQ_GS_GAMEATARI          , "HG-SEQ-GS-GAMEATARI") \
-    X(HG_SEQ_ME_CARDGAME1          , "HG-SEQ-ME-CARDGAME1") \
-    X(HG_SEQ_ME_CARDGAME2          , "HG-SEQ-ME-CARDGAME2") \
-    X(HG_SEQ_ME_ACCE               , "HG-SEQ-ME-ACCE") \
-    X(HG_SEQ_GS_WIFITOWER          , "HG-SEQ-GS-WIFITOWER") \
-    X(HG_SEQ_GS_BLD_GTC            , "HG-SEQ-GS-BLD-GTC") \
-    X(HG_SEQ_ME_HYOUKA3            , "HG-SEQ-ME-HYOUKA3") \
-    X(HG_SEQ_PL_BICYCLE            , "HG-SEQ-PL-BICYCLE") \
-    X(HG_SEQ_GS_EYE_J_SHOUJO       , "HG-SEQ-GS-EYE-J-SHOUJO") \
-    X(HG_SEQ_ME_POKEGEAR_REGIST    , "HG-SEQ-ME-POKEGEAR-REGIST") \
-    X(HG_SEQ_GS_D_KOUEN            , "HG-SEQ-GS-D-KOUEN") \
-    X(HG_SEQ_ME_KINOMI             , "HG-SEQ-ME-KINOMI") \
-    X(HG_SEQ_GS_C_ENJU             , "HG-SEQ-GS-C-ENJU") \
-    X(HG_SEQ_GS_KABURENJOU         , "HG-SEQ-GS-KABURENJOU") \
-    X(HG_SEQ_GS_TO_YAKETA          , "HG-SEQ-GS-TO-YAKETA") \
-    X(HG_SEQ_GS_E_MINAKI           , "HG-SEQ-GS-E-MINAKI") \
-    X(HG_SEQ_GS_OHKIDO_RABO        , "HG-SEQ-GS-OHKIDO-RABO") \
-    X(HG_SEQ_ME_HYOUKA4            , "HG-SEQ-ME-HYOUKA4") \
-    X(HG_SEQ_GS_R_6_38             , "HG-SEQ-GS-R-6-38") \
-    X(HG_SEQ_GS_RADIO_MARCH        , "HG-SEQ-GS-RADIO-MARCH") \
     X(HG_SEQ_GS_VS_RAIKOU          , "HG-SEQ-GS-VS-RAIKOU") \
-    X(HG_SEQ_GS_TO_TOUDAI          , "HG-SEQ-GS-TO-TOUDAI") \
-    X(HG_SEQ_GS_NAMINORI           , "HG-SEQ-GS-NAMINORI") \
-    X(HG_SEQ_GS_C_TANBA            , "HG-SEQ-GS-C-TANBA") \
-    X(HG_SEQ_ME_PT_SPECIAL         , "HG-SEQ-ME-PT-SPECIAL") \
-    X(HG_SEQ_GS_R_7_42             , "HG-SEQ-GS-R-7-42") \
-    X(HG_SEQ_GS_KAIDENPA           , "HG-SEQ-GS-KAIDENPA") \
-    X(HG_SEQ_GS_D_AJITO            , "HG-SEQ-GS-D-AJITO") \
-    X(HG_SEQ_GS_EYE_J_AYASHII      , "HG-SEQ-GS-EYE-J-AYASHII") \
-    X(HG_SEQ_GS_E_RIVAL2           , "HG-SEQ-GS-E-RIVAL2") \
-    X(HG_SEQ_GS_SENKYO             , "HG-SEQ-GS-SENKYO") \
-    X(HG_SEQ_GS_D_KOORINONUKE      , "HG-SEQ-GS-D-KOORINONUKE") \
-    X(HG_SEQ_ME_WASURE             , "HG-SEQ-ME-WASURE") \
-    X(HG_SEQ_GS_RYUUNOANA          , "HG-SEQ-GS-RYUUNOANA") \
-    X(HG_SEQ_GS_IBUKI              , "HG-SEQ-GS-IBUKI") \
     X(HG_SEQ_GS_VS_ENTEI           , "HG-SEQ-GS-VS-ENTEI") \
-    X(HG_SEQ_GS_TO_SUZU            , "HG-SEQ-GS-TO-SUZU") \
-    X(HG_SEQ_GS_E_MAIKO_MAI        , "HG-SEQ-GS-E-MAIKO-MAI") \
-    X(HG_SEQ_GS_E_HOUOU            , "HG-SEQ-GS-E-HOUOU") \
     X(HG_SEQ_GS_VS_HOUOU           , "HG-SEQ-GS-VS-HOUOU") \
-    X(HG_SEQ_GS_R_1_26             , "HG-SEQ-GS-R-1-26") \
-    X(HG_SEQ_GS_KOUSOKUSEN         , "HG-SEQ-GS-KOUSOKUSEN") \
-    X(HG_SEQ_GS_C_KUCHIBA          , "HG-SEQ-GS-C-KUCHIBA") \
     X(HG_SEQ_GS_VS_GYMREADER_KANTO , "HG-SEQ-GS-VS-GYMREADER-KANTO") \
-    X(HG_SEQ_GS_T_CHION            , "HG-SEQ-GS-T-CHION") \
-    X(HG_SEQ_GS_D_IWAYAMA          , "HG-SEQ-GS-D-IWAYAMA") \
     X(HG_SEQ_GS_VS_NORAPOKE_KANTO  , "HG-SEQ-GS-VS-NORAPOKE-KANTO") \
-    X(HG_SEQ_ME_HYOUKA5            , "HG-SEQ-ME-HYOUKA5") \
-    X(HG_SEQ_GS_C_HANADA           , "HG-SEQ-GS-C-HANADA") \
-    X(HG_SEQ_GS_R_12_24            , "HG-SEQ-GS-R-12-24") \
-    X(HG_SEQ_GS_E_LINEAR           , "HG-SEQ-GS-E-LINEAR") \
-    X(HG_SEQ_GS_RADIO_KOMORIUTA    , "HG-SEQ-GS-RADIO-KOMORIUTA") \
     X(HG_SEQ_GS_VS_SUICUNE         , "HG-SEQ-GS-VS-SUICUNE") \
-    X(HG_SEQ_GS_C_TAMAMUSHI        , "HG-SEQ-GS-C-TAMAMUSHI") \
-    X(HG_SEQ_GS_R_10_11            , "HG-SEQ-GS-R-10-11") \
-    X(HG_SEQ_GS_HUE                , "HG-SEQ-GS-HUE") \
-    X(HG_SEQ_GS_D_TOKIWANOMORI3    , "HG-SEQ-GS-D-TOKIWANOMORI3") \
-    X(HG_SEQ_GS_EYE_K_SHOUNEN      , "HG-SEQ-GS-EYE-K-SHOUNEN") \
-    X(HG_SEQ_GS_C_YAMABUKI         , "HG-SEQ-GS-C-YAMABUKI") \
-    X(HG_SEQ_GS_R_9_03             , "HG-SEQ-GS-R-9-03") \
-    X(HG_SEQ_GS_EYE_K_AYASHII      , "HG-SEQ-GS-EYE-K-AYASHII") \
-    X(HG_SEQ_GS_OTSUKIMI_EVENT     , "HG-SEQ-GS-OTSUKIMI-EVENT") \
-    X(HG_SEQ_GS_R_9_01             , "HG-SEQ-GS-R-9-01") \
-    X(HG_SEQ_GS_T_MASARA           , "HG-SEQ-GS-T-MASARA") \
-    X(HG_SEQ_GS_OHKIDO             , "HG-SEQ-GS-OHKIDO") \
-    X(HG_SEQ_ME_HYOUKA6            , "HG-SEQ-ME-HYOUKA6") \
-    X(HG_SEQ_GS_EYE_K_SHOUJO       , "HG-SEQ-GS-EYE-K-SHOUJO") \
     X(HG_SEQ_GS_VS_TRAINER_KANTO   , "HG-SEQ-GS-VS-TRAINER-KANTO") \
-    X(HG_SEQ_GS_T_GUREN            , "HG-SEQ-GS-T-GUREN") \
-    X(HG_SEQ_GS_SAFARI_ROAD        , "HG-SEQ-GS-SAFARI-ROAD") \
-    X(HG_SEQ_GS_SAFARI_HOUSE       , "HG-SEQ-GS-SAFARI-HOUSE") \
-    X(HG_SEQ_GS_SAFARI_FIELD       , "HG-SEQ-GS-SAFARI-FIELD") \
-    X(HG_SEQ_GS_RADIO_VARIETY      , "HG-SEQ-GS-RADIO-VARIETY") \
-    X(HG_SEQ_GS_TAIKAIMAE          , "HG-SEQ-GS-TAIKAIMAE") \
-    X(HG_SEQ_GS_TAIKAI             , "HG-SEQ-GS-TAIKAI") \
-    X(HG_SEQ_ME_MUSHITORI3         , "HG-SEQ-ME-MUSHITORI3") \
-    X(HG_SEQ_ME_MUSHITORI2         , "HG-SEQ-ME-MUSHITORI2") \
-    X(HG_SEQ_ME_MUSHITORI1         , "HG-SEQ-ME-MUSHITORI1") \
-    X(HG_SEQ_GS_PT_ENTR            , "HG-SEQ-GS-PT-ENTR") \
-    X(HG_SEQ_ME_PT_NEW             , "HG-SEQ-ME-PT-NEW") \
-    X(HG_SEQ_GS_PT_OPEN            , "HG-SEQ-GS-PT-OPEN") \
-    X(HG_SEQ_GS_PT_TITLE           , "HG-SEQ-GS-PT-TITLE") \
-    X(HG_SEQ_GS_PT_GAME            , "HG-SEQ-GS-PT-GAME") \
-    X(HG_SEQ_ME_PT_RESULTG         , "HG-SEQ-ME-PT-RESULTG") \
-    X(HG_SEQ_GS_PT_GAMEF           , "HG-SEQ-GS-PT-GAMEF") \
-    X(HG_SEQ_GS_PT_RESULT          , "HG-SEQ-GS-PT-RESULT") \
-    X(HG_SEQ_GS_PT_END             , "HG-SEQ-GS-PT-END") \
-    X(HG_SEQ_GS_PT_VICTORY         , "HG-SEQ-GS-PT-VICTORY") \
-    X(HG_SEQ_GS_WIFI_PRESENT       , "HG-SEQ-GS-WIFI-PRESENT") \
-    X(HG_SEQ_GS_BATTLETOWER2       , "HG-SEQ-GS-BATTLETOWER2") \
-    X(HG_SEQ_GS_BATTLETOWER        , "HG-SEQ-GS-BATTLETOWER") \
-    X(HG_SEQ_ME_BPGET              , "HG-SEQ-ME-BPGET") \
-    X(HG_SEQ_GS_BF_FACTORY         , "HG-SEQ-GS-BF-FACTORY") \
-    X(HG_SEQ_GS_BF_STAGE           , "HG-SEQ-GS-BF-STAGE") \
-    X(HG_SEQ_GS_BF_ROULETTE        , "HG-SEQ-GS-BF-ROULETTE") \
-    X(HG_SEQ_ME_ROULETTE           , "HG-SEQ-ME-ROULETTE") \
-    X(HG_SEQ_GS_BF_CASTLE          , "HG-SEQ-GS-BF-CASTLE") \
-    X(HG_SEQ_ME_CASTLE             , "HG-SEQ-ME-CASTLE") \
-    X(HG_SEQ_GS_BA_BRAIN           , "HG-SEQ-GS-BA-BRAIN") \
-    X(HG_SEQ_GS_WINBRAIN           , "HG-SEQ-GS-WINBRAIN") \
-    X(HG_SEQ_GS_RADIO_TRAINER      , "HG-SEQ-GS-RADIO-TRAINER") \
-    X(HG_SEQ_GS_GURUGURU           , "HG-SEQ-GS-GURUGURU") \
-    X(HG_SEQ_GS_WIFI_ACCESS        , "HG-SEQ-GS-WIFI-ACCESS") \
-    X(HG_SEQ_GS_WIFIUNION          , "HG-SEQ-GS-WIFIUNION") \
-    X(HG_SEQ_GS_WIFIGAME           , "HG-SEQ-GS-WIFIGAME") \
-    X(HG_SEQ_ME_MINIGAME           , "HG-SEQ-ME-MINIGAME") \
-    X(HG_SEQ_GS_WIFIPARADE         , "HG-SEQ-GS-WIFIPARADE") \
-    X(HG_SEQ_GS_RADIO_R_101        , "HG-SEQ-GS-RADIO-R-101") \
-    X(HG_SEQ_GS_RADIO_R_201        , "HG-SEQ-GS-RADIO-R-201") \
-    X(HG_SEQ_GS_PHC                , "HG-SEQ-GS-PHC") \
-    X(HG_SEQ_GS_E_G_PICHU          , "HG-SEQ-GS-E-G-PICHU") \
-    X(HG_SEQ_GS_EYE_MAIKO          , "HG-SEQ-GS-EYE-MAIKO") \
-    X(HG_SEQ_GS_E_LUGIA            , "HG-SEQ-GS-E-LUGIA") \
     X(HG_SEQ_GS_VS_LUGIA           , "HG-SEQ-GS-VS-LUGIA") \
-    X(HG_SEQ_GS_D_CHAMPROAD        , "HG-SEQ-GS-D-CHAMPROAD") \
-    X(HG_SEQ_GS_CHAMPROAD          , "HG-SEQ-GS-CHAMPROAD") \
     X(HG_SEQ_GS_VS_CHAMP           , "HG-SEQ-GS-VS-CHAMP") \
-    X(HG_SEQ_GS_E_DENDOURIRI       , "HG-SEQ-GS-E-DENDOURIRI") \
-    X(HG_SEQ_GS_ENDING             , "HG-SEQ-GS-ENDING") \
-    X(HG_SEQ_GS_ENDING2            , "HG-SEQ-GS-ENDING2") \
     X(HG_SEQ_GS_VS_KODAI           , "HG-SEQ-GS-VS-KODAI") \
-    X(HG_SEQ_GS_D_SHINTO           , "HG-SEQ-GS-D-SHINTO") \
-    X(HG_SEQ_GS_E_ARCEUS           , "HG-SEQ-GS-E-ARCEUS") \
-    X(HG_SEQ_ME_GONIN              , "HG-SEQ-ME-GONIN") \
-    X(BW_SEQ_BGM_GF_LOGO           , "BW-SEQ-BGM-GF-LOGO") \
-    X(BW_SEQ_BGM_TITLE             , "BW-SEQ-BGM-TITLE") \
-    X(BW_SEQ_BGM_TITLE01           , "BW-SEQ-BGM-TITLE01") \
-    X(BW_SEQ_BGM_POKEMON_THEME     , "BW-SEQ-BGM-POKEMON-THEME") \
-    X(BW_SEQ_BGM_STARTING          , "BW-SEQ-BGM-STARTING") \
-    X(BW_SEQ_BGM_STARTING2         , "BW-SEQ-BGM-STARTING2") \
-    X(BW_SEQ_BGM_E_OPENING         , "BW-SEQ-BGM-E-OPENING") \
-    X(BW_SEQ_BGM_T_01              , "BW-SEQ-BGM-T-01") \
     X(BW_SEQ_BGM_VS_RIVAL          , "BW-SEQ-BGM-VS-RIVAL") \
-    X(BW_SEQ_BGM_E_TSURETEKE1      , "BW-SEQ-BGM-E-TSURETEKE1") \
-    X(BW_SEQ_BGM_E_DOCTOR          , "BW-SEQ-BGM-E-DOCTOR") \
-    X(BW_SEQ_BGM_LABO              , "BW-SEQ-BGM-LABO") \
-    X(BW_SEQ_ME_KEYITEM            , "BW-SEQ-ME-KEYITEM") \
-    X(BW_SEQ_BGM_E_FRIEND          , "BW-SEQ-BGM-E-FRIEND") \
-    X(BW_SEQ_BGM_R_A               , "BW-SEQ-BGM-R-A") \
     X(BW_SEQ_BGM_VS_NORAPOKE       , "BW-SEQ-BGM-VS-NORAPOKE") \
-    X(BW_SEQ_BGM_WIN1              , "BW-SEQ-BGM-WIN1") \
-    X(BW_SEQ_ME_LVUP               , "BW-SEQ-ME-LVUP") \
-    X(BW_SEQ_BGM_T_02              , "BW-SEQ-BGM-T-02") \
-    X(BW_SEQ_BGM_E_TSURETEKE2      , "BW-SEQ-BGM-E-TSURETEKE2") \
-    X(BW_SEQ_BGM_POKECEN           , "BW-SEQ-BGM-POKECEN") \
-    X(BW_SEQ_ME_ASA                , "BW-SEQ-ME-ASA") \
-    X(BW_SEQ_ME_HYOUKA1            , "BW-SEQ-ME-HYOUKA1") \
-    X(BW_SEQ_BGM_E_SAGE            , "BW-SEQ-BGM-E-SAGE") \
-    X(BW_SEQ_BGM_R_B_SP            , "BW-SEQ-BGM-R-B-SP") \
-    X(BW_SEQ_BGM_R_B_SU            , "BW-SEQ-BGM-R-B-SU") \
-    X(BW_SEQ_BGM_R_B_AU            , "BW-SEQ-BGM-R-B-AU") \
-    X(BW_SEQ_BGM_R_B_WI            , "BW-SEQ-BGM-R-B-WI") \
-    X(BW_SEQ_ME_CALL               , "BW-SEQ-ME-CALL") \
-    X(BW_SEQ_BGM_EYE_01            , "BW-SEQ-BGM-EYE-01") \
     X(BW_SEQ_BGM_VS_TRAINER        , "BW-SEQ-BGM-VS-TRAINER") \
-    X(BW_SEQ_BGM_WIN2              , "BW-SEQ-BGM-WIN2") \
-    X(BW_SEQ_BGM_EYE_02            , "BW-SEQ-BGM-EYE-02") \
-    X(BW_SEQ_ME_ITEM               , "BW-SEQ-ME-ITEM") \
-    X(BW_SEQ_BGM_C_01              , "BW-SEQ-BGM-C-01") \
-    X(BW_SEQ_ME_HYOUKA2            , "BW-SEQ-ME-HYOUKA2") \
-    X(BW_SEQ_BGM_D_01              , "BW-SEQ-BGM-D-01") \
-    X(BW_SEQ_BGM_D_01_B1F          , "BW-SEQ-BGM-D-01-B1F") \
-    X(BW_SEQ_BGM_E_PLASMA          , "BW-SEQ-BGM-E-PLASMA") \
     X(BW_SEQ_BGM_VS_PLASMA         , "BW-SEQ-BGM-VS-PLASMA") \
-    X(BW_SEQ_BGM_WIN6              , "BW-SEQ-BGM-WIN6") \
-    X(BW_SEQ_BGM_SHINKA            , "BW-SEQ-BGM-SHINKA") \
-    X(BW_SEQ_BGM_KOUKAN            , "BW-SEQ-BGM-KOUKAN") \
-    X(BW_SEQ_ME_SHINKAOME          , "BW-SEQ-ME-SHINKAOME") \
-    X(BW_SEQ_BGM_EYE_03            , "BW-SEQ-BGM-EYE-03") \
-    X(BW_SEQ_BGM_E_RIVAL           , "BW-SEQ-BGM-E-RIVAL") \
-    X(BW_SEQ_BGM_E_TROUBLE         , "BW-SEQ-BGM-E-TROUBLE") \
-    X(BW_SEQ_BGM_C_02              , "BW-SEQ-BGM-C-02") \
-    X(BW_SEQ_ME_HYOUKA3            , "BW-SEQ-ME-HYOUKA3") \
-    X(BW_SEQ_BGM_GYM               , "BW-SEQ-BGM-GYM") \
     X(BW_SEQ_BGM_VS_GYMLEADER      , "BW-SEQ-BGM-VS-GYMLEADER") \
     X(BW_SEQ_BGM_BATTLESUPERIOR    , "BW-SEQ-BGM-BATTLESUPERIOR") \
-    X(BW_SEQ_BGM_WIN3              , "BW-SEQ-BGM-WIN3") \
-    X(BW_SEQ_ME_BADGE              , "BW-SEQ-ME-BADGE") \
-    X(BW_SEQ_ME_WAZA               , "BW-SEQ-ME-WAZA") \
-    X(BW_SEQ_BGM_GATE              , "BW-SEQ-BGM-GATE") \
-    X(BW_SEQ_BGM_H_01              , "BW-SEQ-BGM-H-01") \
-    X(BW_SEQ_BGM_C_03              , "BW-SEQ-BGM-C-03") \
-    X(BW_SEQ_BGM_EYE_12            , "BW-SEQ-BGM-EYE-12") \
-    X(BW_SEQ_BGM_R_C_SP            , "BW-SEQ-BGM-R-C-SP") \
-    X(BW_SEQ_BGM_R_C_SU            , "BW-SEQ-BGM-R-C-SU") \
-    X(BW_SEQ_BGM_R_C_AU            , "BW-SEQ-BGM-R-C-AU") \
-    X(BW_SEQ_BGM_R_C_WI            , "BW-SEQ-BGM-R-C-WI") \
-    X(BW_SEQ_BGM_EYE_11            , "BW-SEQ-BGM-EYE-11") \
-    X(BW_SEQ_BGM_C_04              , "BW-SEQ-BGM-C-04") \
-    X(BW_SEQ_BGM_E_SUPPORT         , "BW-SEQ-BGM-E-SUPPORT") \
-    X(BW_SEQ_BGM_E_EMOTION         , "BW-SEQ-BGM-E-EMOTION") \
-    X(BW_SEQ_BGM_E_N               , "BW-SEQ-BGM-E-N") \
     X(BW_SEQ_BGM_VS_N              , "BW-SEQ-BGM-VS-N") \
-    X(BW_SEQ_BGM_BATTLEPINCH       , "BW-SEQ-BGM-BATTLEPINCH") \
-    X(BW_SEQ_BGM_BICYCLE           , "BW-SEQ-BGM-BICYCLE") \
-    X(BW_SEQ_BGM_E_CHAMPION        , "BW-SEQ-BGM-E-CHAMPION") \
-    X(BW_SEQ_BGM_H_02              , "BW-SEQ-BGM-H-02") \
-    X(BW_SEQ_BGM_C_05              , "BW-SEQ-BGM-C-05") \
-    X(BW_SEQ_BGM_D_03              , "BW-SEQ-BGM-D-03") \
-    X(BW_SEQ_BGM_R_D_SP            , "BW-SEQ-BGM-R-D-SP") \
-    X(BW_SEQ_BGM_R_D_SU            , "BW-SEQ-BGM-R-D-SU") \
-    X(BW_SEQ_BGM_R_D_AU            , "BW-SEQ-BGM-R-D-AU") \
-    X(BW_SEQ_BGM_R_D_WI            , "BW-SEQ-BGM-R-D-WI") \
-    X(BW_SEQ_BGM_EYE_06            , "BW-SEQ-BGM-EYE-06") \
-    X(BW_SEQ_BGM_EYE_09            , "BW-SEQ-BGM-EYE-09") \
-    X(BW_SEQ_BGM_D_02              , "BW-SEQ-BGM-D-02") \
-    X(BW_SEQ_BGM_D_02_B1F          , "BW-SEQ-BGM-D-02-B1F") \
-    X(BW_SEQ_BGM_D_02_B2F          , "BW-SEQ-BGM-D-02-B2F") \
-    X(BW_SEQ_BGM_C_06              , "BW-SEQ-BGM-C-06") \
-    X(BW_SEQ_BGM_E_DOCTOR2         , "BW-SEQ-BGM-E-DOCTOR2") \
-    X(BW_SEQ_ME_HYOUKA4            , "BW-SEQ-ME-HYOUKA4") \
-    X(BW_SEQ_ME_WASURE             , "BW-SEQ-ME-WASURE") \
-    X(BW_SEQ_BGM_EYE_08            , "BW-SEQ-BGM-EYE-08") \
-    X(BW_SEQ_BGM_C_07              , "BW-SEQ-BGM-C-07") \
-    X(BW_SEQ_BGM_D_05              , "BW-SEQ-BGM-D-05") \
-    X(BW_SEQ_BGM_EYE_PLASMA        , "BW-SEQ-BGM-EYE-PLASMA") \
-    X(BW_SEQ_BGM_D_07              , "BW-SEQ-BGM-D-07") \
-    X(BW_SEQ_BGM_D_04              , "BW-SEQ-BGM-D-04") \
-    X(BW_SEQ_ME_ITEM_MYSTERY       , "BW-SEQ-ME-ITEM-MYSTERY") \
-    X(BW_SEQ_BGM_H_03              , "BW-SEQ-BGM-H-03") \
-    X(BW_SEQ_BGM_FS                , "BW-SEQ-BGM-FS") \
-    X(BW_SEQ_BGM_EYE_05            , "BW-SEQ-BGM-EYE-05") \
-    X(BW_SEQ_BGM_C_08_B            , "BW-SEQ-BGM-C-08-B") \
-    X(BW_SEQ_BGM_C_08_W            , "BW-SEQ-BGM-C-08-W") \
-    X(BW_SEQ_BGM_R_F               , "BW-SEQ-BGM-R-F") \
-    X(BW_SEQ_BGM_D_CHAMPROAD       , "BW-SEQ-BGM-D-CHAMPROAD") \
-    X(BW_SEQ_BGM_EYE_04            , "BW-SEQ-BGM-EYE-04") \
-    X(BW_SEQ_BGM_POKEMON_LEAGUE    , "BW-SEQ-BGM-POKEMON-LEAGUE") \
     X(BW_SEQ_BGM_VS_SHITENNO       , "BW-SEQ-BGM-VS-SHITENNO") \
-    X(BW_SEQ_BGM_E_N_CASTLE        , "BW-SEQ-BGM-E-N-CASTLE") \
-    X(BW_SEQ_BGM_N_CASTLE_BRIDGE   , "BW-SEQ-BGM-N-CASTLE-BRIDGE") \
-    X(BW_SEQ_BGM_N_CASTLE          , "BW-SEQ-BGM-N-CASTLE") \
-    X(BW_SEQ_BGM_N_ROOM            , "BW-SEQ-BGM-N-ROOM") \
-    X(BW_SEQ_BGM_E_LEGEND_COME     , "BW-SEQ-BGM-E-LEGEND-COME") \
-    X(BW_SEQ_BGM_E_LEGEND_BORN     , "BW-SEQ-BGM-E-LEGEND-BORN") \
     X(BW_SEQ_BGM_VS_SHIN           , "BW-SEQ-BGM-VS-SHIN") \
     X(BW_SEQ_BGM_VS_N_2            , "BW-SEQ-BGM-VS-N-2") \
-    X(BW_SEQ_BGM_E_G_CIS           , "BW-SEQ-BGM-E-G-CIS") \
     X(BW_SEQ_BGM_VS_G_CIS          , "BW-SEQ-BGM-VS-G-CIS") \
-    X(BW_SEQ_BGM_E_LAST            , "BW-SEQ-BGM-E-LAST") \
-    X(BW_SEQ_BGM_ENDING            , "BW-SEQ-BGM-ENDING") \
-    X(BW_SEQ_BGM_E_HANDSOME        , "BW-SEQ-BGM-E-HANDSOME") \
-    X(BW_SEQ_ME_TAMAGO_GET         , "BW-SEQ-ME-TAMAGO-GET") \
-    X(BW_SEQ_BGM_PLEASURE_BOAT     , "BW-SEQ-BGM-PLEASURE-BOAT") \
-    X(BW_SEQ_BGM_WIFI_ACCESS       , "BW-SEQ-BGM-WIFI-ACCESS") \
-    X(BW_SEQ_BGM_GLTERMINAL        , "BW-SEQ-BGM-GLTERMINAL") \
-    X(BW_SEQ_BGM_GTS               , "BW-SEQ-BGM-GTS") \
-    X(BW_SEQ_BGM_GURUGURU          , "BW-SEQ-BGM-GURUGURU") \
-    X(BW_SEQ_BGM_UNITED_NATIONS    , "BW-SEQ-BGM-UNITED-NATIONS") \
-    X(BW_SEQ_ME_HYOUKA5            , "BW-SEQ-ME-HYOUKA5") \
-    X(BW_SEQ_BGM_GEAR_STATION      , "BW-SEQ-BGM-GEAR-STATION") \
-    X(BW_SEQ_BGM_BATTLE_SUBWAY     , "BW-SEQ-BGM-BATTLE-SUBWAY") \
     X(BW_SEQ_BGM_VS_SUBWAY_TRAINER , "BW-SEQ-BGM-VS-SUBWAY-TRAINER") \
-    X(BW_SEQ_ME_BPGET              , "BW-SEQ-ME-BPGET") \
-    X(BW_SEQ_BGM_MSL_FIELD         , "BW-SEQ-BGM-MSL-FIELD") \
-    X(BW_SEQ_ME_ACCE               , "BW-SEQ-ME-ACCE") \
-    X(BW_SEQ_BGM_MSL_DRESSUP       , "BW-SEQ-BGM-MSL-DRESSUP") \
-    X(BW_SEQ_BGM_MSL_BEFORE        , "BW-SEQ-BGM-MSL-BEFORE") \
-    X(BW_SEQ_BGM_MSL_01            , "BW-SEQ-BGM-MSL-01") \
-    X(BW_SEQ_BGM_MSL_02            , "BW-SEQ-BGM-MSL-02") \
-    X(BW_SEQ_BGM_MSL_03            , "BW-SEQ-BGM-MSL-03") \
-    X(BW_SEQ_BGM_MSL_04            , "BW-SEQ-BGM-MSL-04") \
-    X(BW_SEQ_BGM_MSL_DL_MUNNA      , "BW-SEQ-BGM-MSL-DL-MUNNA") \
-    X(BW_SEQ_BGM_MSL_DL_SMASH      , "BW-SEQ-BGM-MSL-DL-SMASH") \
-    X(BW_SEQ_BGM_MSL_DL_FESTA      , "BW-SEQ-BGM-MSL-DL-FESTA") \
-    X(BW_SEQ_BGM_MSL_DL_RELIC      , "BW-SEQ-BGM-MSL-DL-RELIC") \
-    X(BW_SEQ_BGM_MSL_DL_RUNPA      , "BW-SEQ-BGM-MSL-DL-RUNPA") \
-    X(BW_SEQ_BGM_E_KANRANSYA       , "BW-SEQ-BGM-E-KANRANSYA") \
-    X(BW_SEQ_ME_AISHOU_KIDOU       , "BW-SEQ-ME-AISHOU-KIDOU") \
-    X(BW_SEQ_ME_AISHOU_H           , "BW-SEQ-ME-AISHOU-H") \
-    X(BW_SEQ_ME_AISHOU_M           , "BW-SEQ-ME-AISHOU-M") \
-    X(BW_SEQ_ME_AISHOU_L           , "BW-SEQ-ME-AISHOU-L") \
     X(BW_SEQ_BGM_VS_MOVEPOKE       , "BW-SEQ-BGM-VS-MOVEPOKE") \
-    X(BW_SEQ_BGM_T_03              , "BW-SEQ-BGM-T-03") \
-    X(BW_SEQ_BGM_H_05              , "BW-SEQ-BGM-H-05") \
-    X(BW_SEQ_BGM_R_E_SP            , "BW-SEQ-BGM-R-E-SP") \
-    X(BW_SEQ_BGM_R_E_SU            , "BW-SEQ-BGM-R-E-SU") \
-    X(BW_SEQ_BGM_R_E_AU            , "BW-SEQ-BGM-R-E-AU") \
-    X(BW_SEQ_BGM_R_E_WI            , "BW-SEQ-BGM-R-E-WI") \
-    X(BW_SEQ_BGM_EYE_07            , "BW-SEQ-BGM-EYE-07") \
-    X(BW_SEQ_BGM_PALPARK           , "BW-SEQ-BGM-PALPARK") \
-    X(BW_SEQ_BGM_PALPARK_BOX       , "BW-SEQ-BGM-PALPARK-BOX") \
-    X(BW_SEQ_BGM_PALPARK_GAME      , "BW-SEQ-BGM-PALPARK-GAME") \
-    X(BW_SEQ_BGM_EYE_10            , "BW-SEQ-BGM-EYE-10") \
-    X(BW_SEQ_BGM_C_10_B            , "BW-SEQ-BGM-C-10-B") \
-    X(BW_SEQ_BGM_C_10_W            , "BW-SEQ-BGM-C-10-W") \
-    X(BW_SEQ_BGM_GAME_SYNC         , "BW-SEQ-BGM-GAME-SYNC") \
-    X(BW_SEQ_BGM_PALACE            , "BW-SEQ-BGM-PALACE") \
-    X(BW_SEQ_ME_MISSION_START      , "BW-SEQ-ME-MISSION-START") \
-    X(BW_SEQ_BGM_PALACE2           , "BW-SEQ-BGM-PALACE2") \
-    X(BW_SEQ_ME_MISSION_CLEAR      , "BW-SEQ-ME-MISSION-CLEAR") \
-    X(BW_SEQ_ME_MISSION_FAILED     , "BW-SEQ-ME-MISSION-FAILED") \
-    X(BW_SEQ_BGM_EYE_13            , "BW-SEQ-BGM-EYE-13") \
-    X(BW_SEQ_BGM_T_05_SP           , "BW-SEQ-BGM-T-05-SP") \
-    X(BW_SEQ_BGM_T_05_SU           , "BW-SEQ-BGM-T-05-SU") \
-    X(BW_SEQ_BGM_E_SHIRONA         , "BW-SEQ-BGM-E-SHIRONA") \
     X(BW_SEQ_BGM_VS_SHIRONA        , "BW-SEQ-BGM-VS-SHIRONA") \
-    X(BW_SEQ_BGM_D_06              , "BW-SEQ-BGM-D-06") \
     X(BW_SEQ_BGM_VS_TSUYOPOKE      , "BW-SEQ-BGM-VS-TSUYOPOKE") \
-    X(BW_SEQ_BGM_NAMINORI          , "BW-SEQ-BGM-NAMINORI") \
-    X(BW_SEQ_BGM_DIVING            , "BW-SEQ-BGM-DIVING") \
-    X(BW_SEQ_BGM_T_04              , "BW-SEQ-BGM-T-04") \
-    X(BW_SEQ_BGM_H_04              , "BW-SEQ-BGM-H-04") \
-    X(BW_SEQ_BGM_WIFI_PRESENT      , "BW-SEQ-BGM-WIFI-PRESENT") \
-    X(BW_SEQ_BGM_WCS               , "BW-SEQ-BGM-WCS") \
-    X(BW_SEQ_BGM_E_SOUND_DESIGNER  , "BW-SEQ-BGM-E-SOUND-DESIGNER") \
     X(BW_SEQ_BGM_VS_RAI            , "BW-SEQ-BGM-VS-RAI") \
-    X(BW_SEQ_ME_HYOUKA6            , "BW-SEQ-ME-HYOUKA6") \
     X(BW_SEQ_BGM_VS_CHAMP          , "BW-SEQ-BGM-VS-CHAMP") \
-    X(BW_SEQ_BGM_WIN5              , "BW-SEQ-BGM-WIN5") \
-    X(BW_SEQ_BGM_E_DENDOUIRI       , "BW-SEQ-BGM-E-DENDOUIRI") \
-    X(BW_SEQ_BGM_E_INISHIE         , "BW-SEQ-BGM-E-INISHIE") \
     X(BW_SEQ_BGM_VS_WCS            , "BW-SEQ-BGM-VS-WCS") \
-    X(BW_SEQ_ME_KINOMI             , "BW-SEQ-ME-KINOMI") \
 
 #define SOUND_LIST_SE \
     X(SE_STOP, "STOP") \

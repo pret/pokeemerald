@@ -35,7 +35,7 @@ voicegroup232:: @
 	voice_directsound 112, 40, DirectSoundWaveData_hg_130jdrumh, 255, 0, 227, 171
 	voice_directsound 113, 40, DirectSoundWaveData_hg_130jdrumh, 255, 0, 227, 171
 	voice_directsound 114, 40, DirectSoundWaveData_hg_130jdrumh, 255, 0, 227, 171
-	voice_directsound 127, 64, DirectSoundWaveData_dp_clean_gt_c3_16, 255, 246, 0, 171
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 64, DirectSoundWaveData_dp_synthkick, 255, 0, 255, 171
 	voice_directsound 61, 64, DirectSoundWaveData_dp_synthkick, 255, 0, 255, 171
 	voice_directsound 60, 64, DirectSoundWaveData_dp_synthsnare, 255, 0, 255, 0

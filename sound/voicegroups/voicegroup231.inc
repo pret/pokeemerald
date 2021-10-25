@@ -4,12 +4,12 @@ voicegroup231:: @
 	voice_directsound 64, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
 	voice_directsound 65, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
 	voice_directsound 66, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
-	voice_directsound 67, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
-	voice_directsound 68, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
-	voice_directsound 60, 20, DirectSoundWaveData_dp_sheiker, 255, 242, 127, 171
-	voice_directsound 61, 20, DirectSoundWaveData_dp_sheiker, 255, 242, 127, 171
-	voice_directsound 60, 105, DirectSoundWaveData_dp_sheiker, 255, 242, 127, 171
-	voice_directsound 61, 105, DirectSoundWaveData_dp_sheiker, 255, 242, 127, 171
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 197, 0, 1
 	voice_directsound 60, 44, DirectSoundWaveData_dp_triangle_16, 255, 248, 0, 192
 	voice_directsound 24, 40, DirectSoundWaveData_hg_128jdruml, 255, 0, 227, 171
