@@ -352,6 +352,7 @@
 #define METATILE_InsideShip_IntactDoor_Bottom_Interior 0x297
 
 // gTileset_BattlePike
+#define METATILE_BattlePike_CurtainFrames_Start  0x201
 #define METATILE_BattlePike_Curtain_Stage0_Tile0 0x24A
 #define METATILE_BattlePike_Curtain_Stage0_Tile1 0x251
 #define METATILE_BattlePike_Curtain_Stage0_Tile2 0x252
