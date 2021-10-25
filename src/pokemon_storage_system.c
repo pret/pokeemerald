@@ -6980,7 +6980,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             *(txtPtr)++ = TEXT_COLOR_DARK_GRAY;
             *(txtPtr)++ = TEXT_COLOR_WHITE;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_GRAY;
-            *(txtPtr)++ = CHAR_GENDERLESS;
+            *(txtPtr)++ = CHAR_SPACER; // Genderless
             break;
         }
 
@@ -8177,7 +8177,7 @@ static bool8 MultiMove_Start(void)
     {
     case 0:
         HideBg(0);
-        sub_80D304C(0x80);
+        TryLoadAllMonIconPalettesAtOffset(0x80);
         sMultiMove->state++;
         break;
     case 1:

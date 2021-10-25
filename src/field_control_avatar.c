@@ -729,9 +729,9 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
             DoTeleportTileWarp();
             return TRUE;
         }
-        if (MetatileBehavior_IsWarpOrBridge(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsBridgeOverOcean(metatileBehavior) == TRUE)
         {
-            // Maybe unused? This MB is used by log bridges, but there's never a warp event on them
+            // Maybe unused? This MB is used by log bridges, but there's never a warp event on them.
             DoSpinExitWarp();
             return TRUE;
         }
@@ -762,7 +762,7 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
      && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
      && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
      && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsWarpOrBridge(metatileBehavior) != TRUE)
+     && MetatileBehavior_IsBridgeOverOcean(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }

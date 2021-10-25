@@ -382,27 +382,27 @@ extern const u8 EventScript_UseRockSmash[];
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
 
-//mauville_old_man
-extern const u8 gOtherText_Is[];
-extern const u8 gOtherText_DontYouAgree[];
-extern const u8 gText_SoPretty[];
-extern const u8 gText_SoDarling[];
-extern const u8 gText_SoRelaxed[];
-extern const u8 gText_SoSunny[];
-extern const u8 gText_SoDesirable[];
-extern const u8 gText_SoExciting[];
-extern const u8 gText_SoAmusing[];
-extern const u8 gText_SoMagical[];
-extern const u8 gMauvilleManText_ISoWantToGoOnAVacation[];
-extern const u8 gMauvilleManText_IBoughtCrayonsWith120Colors[];
-extern const u8 gMauvilleManText_WouldntItBeNiceIfWeCouldFloat[];
-extern const u8 gMauvilleManText_WhenYouWriteOnASandyBeach[];
-extern const u8 gMauvilleManText_WhatsTheBottomOfTheSeaLike[];
-extern const u8 gMauvilleManText_WhenYouSeeTheSettingSunDoesIt[];
-extern const u8 gMauvilleManText_LyingBackInTheGreenGrass[];
-extern const u8 gMauvilleManText_SecretBasesAreSoWonderful[];
+// Mauville Old Man (Giddy)
+extern const u8 GiddyText_Is[];
+extern const u8 GiddyText_DontYouAgree[];
+extern const u8 GiddyText_SoPretty[];
+extern const u8 GiddyText_SoDarling[];
+extern const u8 GiddyText_SoRelaxed[];
+extern const u8 GiddyText_SoSunny[];
+extern const u8 GiddyText_SoDesirable[];
+extern const u8 GiddyText_SoExciting[];
+extern const u8 GiddyText_SoAmusing[];
+extern const u8 GiddyText_SoMagical[];
+extern const u8 GiddyText_ISoWantToGoOnAVacation[];
+extern const u8 GiddyText_IBoughtCrayonsWith120Colors[];
+extern const u8 GiddyText_WouldntItBeNiceIfWeCouldFloat[];
+extern const u8 GiddyText_WhenYouWriteOnASandyBeach[];
+extern const u8 GiddyText_WhatsTheBottomOfTheSeaLike[];
+extern const u8 GiddyText_WhenYouSeeTheSettingSunDoesIt[];
+extern const u8 GiddyText_LyingBackInTheGreenGrass[];
+extern const u8 GiddyText_SecretBasesAreSoWonderful[];
 
-// mauville old man storyteller
+// Mauville Old Man (storyteller)
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_SavedGameTitle[];
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_SavedGameAction[];
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_SavedGameStory[];
