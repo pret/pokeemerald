@@ -1599,7 +1599,7 @@ static bool32 AccuracyCalcHelper(u16 move)
 
     if ((WEATHER_HAS_EFFECT &&
             (((gBattleWeather & WEATHER_RAIN_ANY) && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
-         || (((gBattleWeather & WEATHER_HAIL_ANY) && move == MOVE_BLIZZARD))))
+         || ((B_BLIZZARD_HAIL >= GEN_4 && (gBattleWeather & WEATHER_HAIL_ANY) && move == MOVE_BLIZZARD))))
      || (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
      || (gBattleMoves[move].accuracy == 0)
      || ((B_MINIMIZE_DMG_ACC >= GEN_6) && (gStatuses3[gBattlerTarget] & STATUS3_MINIMIZED) && (gBattleMoves[move].flags & FLAG_DMG_MINIMIZE)))
@@ -10922,7 +10922,7 @@ static void Cmd_settailwind(void)
     {
         gSideStatuses[side] |= SIDE_STATUS_TAILWIND;
         gSideTimers[side].tailwindBattlerId = gBattlerAttacker;
-        gSideTimers[side].tailwindTimer = (B_TAILWIND_TIMER >= GEN_5) ? 4 : 3;
+        gSideTimers[side].tailwindTimer = (B_TAILWIND_TURNS >= GEN_5) ? 4 : 3;
         gBattlescriptCurrInstr += 5;
     }
     else
@@ -11778,9 +11778,15 @@ static void Cmd_settaunt(void)
     }
     else if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
     {
-        u8 turns = 4;
-        if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))
-            turns--; // If the target hasn't yet moved this turn, Taunt lasts for only three turns (source: Bulbapedia)
+        #if B_TAUNT_TURNS >= GEN_5
+            u8 turns = 4;
+            if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))
+                turns--; // If the target hasn't yet moved this turn, Taunt lasts for only three turns (source: Bulbapedia)
+        #elif B_TAUNT_TURNS == GEN_4
+            u8 turns = (Random() & 2) + 3;
+        #else
+            u8 turns = 2;
+        #endif
 
         gDisableStructs[gBattlerTarget].tauntTimer = gDisableStructs[gBattlerTarget].tauntTimer2 = turns;
         gBattlescriptCurrInstr += 5;
