@@ -387,10 +387,10 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId);
 static void Task_ExitFormsScreen(u8 taskId);
 #endif
 
-//COMPATIBILITY, delete if you are using a newer version
+#ifndef TEXT_COLOR_LIGHT_GRAY // COMPATIBILITY
 #define TEXT_COLOR_LIGHT_GRAY TEXT_COLOR_LIGHT_GREY
 #define TEXT_COLOR_DARK_GRAY TEXT_COLOR_DARK_GREY
-//COMPATIBILITY end
+#endif
 
 //HGSS_UI Physical Special Split icon for BattleEngine (rhh)
 #ifdef BATTLE_ENGINE
