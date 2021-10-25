@@ -36,7 +36,7 @@ struct Tileset
     /*0x14*/ TilesetCB callback;
 };
 
-// Tilesets do not actually have s strict width.
+// Tilesets do not actually have a strict width.
 // This constant is simply used for the offset between rows of metatiles for
 // large tiles, such as the Battle Pike's curtain tile.
 #define TILESET_WIDTH 8
