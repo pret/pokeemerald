@@ -11,6 +11,11 @@
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
+// Rows of metatiles do not actually have a strict width.
+// This constant is used for calculations for finding the next row of metatiles
+// for constructing large tiles, such as the Battle Pike's curtain tile.
+#define METATILE_ROW_WIDTH 8
+
 enum
 {
     CONNECTION_INVALID = -1,
