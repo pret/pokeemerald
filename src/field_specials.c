@@ -3959,7 +3959,7 @@ static void Task_CloseBattlePikeCurtain(u8 taskId)
             {
                 MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + MAP_OFFSET - 1,
                                        gSaveBlock1Ptr->pos.y + y + MAP_OFFSET - 3,
-                                       (x + METATILE_BattlePike_CurtainFrames_Start) + (y * TILESET_WIDTH) + (tCurrentFrame * CURTAIN_HEIGHT * TILESET_WIDTH));
+                                       (x + METATILE_BattlePike_CurtainFrames_Start) + (y * METATILE_ROW_WIDTH) + (tCurrentFrame * CURTAIN_HEIGHT * METATILE_ROW_WIDTH));
             }
         }
         DrawWholeMapView();

@@ -11,6 +11,11 @@
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
+// Rows of metatiles do not actually have a strict width.
+// This constant is used for calculations for finding the next row of metatiles
+// for constructing large tiles, such as the Battle Pike's curtain tile.
+#define METATILE_ROW_WIDTH 8
+
 enum
 {
     CONNECTION_INVALID = -1,
@@ -35,11 +40,6 @@ struct Tileset
     /*0x10*/ u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
-
-// Tilesets do not actually have a strict width.
-// This constant is simply used for the offset between rows of metatiles for
-// large tiles, such as the Battle Pike's curtain tile.
-#define TILESET_WIDTH 8
 
 struct MapLayout
 {
