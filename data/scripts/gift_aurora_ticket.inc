@@ -1,5 +1,5 @@
-MysteryEventScript_AuroraTicket::
-	setvaddress MysteryEventScript_AuroraTicket
+MysteryGiftScript_AuroraTicket::
+	setvaddress MysteryGiftScript_AuroraTicket
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_AURORA_TICKET, AuroraTicket_Obtained

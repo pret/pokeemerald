@@ -553,14 +553,14 @@ s32 ChangeBgX(u8 bg, s32 value, u8 op)
 
     switch (op)
     {
-    case 0:
+    case BG_COORD_SET:
     default:
         sGpuBgConfigs2[bg].bg_x = value;
         break;
-    case 1:
+    case BG_COORD_ADD:
         sGpuBgConfigs2[bg].bg_x += value;
         break;
-    case 2:
+    case BG_COORD_SUB:
         sGpuBgConfigs2[bg].bg_x -= value;
         break;
     }
@@ -633,14 +633,14 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
 
     switch (op)
     {
-    case 0:
+    case BG_COORD_SET:
     default:
         sGpuBgConfigs2[bg].bg_y = value;
         break;
-    case 1:
+    case BG_COORD_ADD:
         sGpuBgConfigs2[bg].bg_y += value;
         break;
-    case 2:
+    case BG_COORD_SUB:
         sGpuBgConfigs2[bg].bg_y -= value;
         break;
     }
@@ -703,14 +703,14 @@ s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
 
     switch (op)
     {
-    case 0:
+    case BG_COORD_SET:
     default:
         sGpuBgConfigs2[bg].bg_y = value;
         break;
-    case 1:
+    case BG_COORD_ADD:
         sGpuBgConfigs2[bg].bg_y += value;
         break;
-    case 2:
+    case BG_COORD_SUB:
         sGpuBgConfigs2[bg].bg_y -= value;
         break;
     }

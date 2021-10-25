@@ -249,7 +249,7 @@ static bool32 CanFish(void)
     {
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) && !MapGridIsImpassableAt(x, y))
             return TRUE;
-        if (MetatileBehavior_8089510(tileBehavior) == TRUE)
+        if (MetatileBehavior_IsBridgeOverWaterNoEdge(tileBehavior) == TRUE)
             return TRUE;
     }
 

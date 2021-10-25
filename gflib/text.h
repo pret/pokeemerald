@@ -52,7 +52,7 @@
 #define CHAR_LV                0x34
 #define CHAR_EQUALS            0x35
 #define CHAR_SEMICOLON         0x36
-//
+#define CHAR_BARD_WORD_DELIMIT 0x37 // Empty space to separate words in Bard's song
 #define CHAR_INV_QUESTION_MARK 0x51
 #define CHAR_INV_EXCL_MARK     0x52
 #define CHAR_PK                0x53
@@ -71,7 +71,7 @@
 //
 #define CHAR_i_ACUTE           0x6F
 //
-#define CHAR_GENDERLESS        0x77 // Empty space for lack of gender icon
+#define CHAR_SPACER            0x77 // Empty space
 //
 #define CHAR_UP_ARROW          0x79
 #define CHAR_DOWN_ARROW        0x7A

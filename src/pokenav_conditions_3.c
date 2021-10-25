@@ -705,7 +705,7 @@ static void PrintSearchMonListItem(struct PokenavMonList * item, u8 * dest)
     }
 
     StringGetEnd10(gStringVar3);
-    dest = sub_81DB494(dest, 1, gStringVar3, 60);
+    dest = GetStringClearToWidth(dest, 1, gStringVar3, 60);
     switch (gender)
     {
     default:
@@ -723,5 +723,5 @@ static void PrintSearchMonListItem(struct PokenavMonList * item, u8 * dest)
     *s++ = CHAR_EXTRA_SYMBOL;
     *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    sub_81DB494(dest, 1, gStringVar1, 40);
+    GetStringClearToWidth(dest, 1, gStringVar1, 40);
 }

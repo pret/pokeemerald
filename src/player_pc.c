@@ -396,7 +396,7 @@ static void InitPlayerPCMenu(u8 taskId)
     else // Bedroom PC
         windowTemplate = sWindowTemplates_MainMenus[WIN_MAIN_MENU_BEDROOM];
 
-    windowTemplate.width = sub_81DB3D8(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
+    windowTemplate.width = GetMaxWidthInSubsetOfMenuTable(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
     sub_81995E4(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);

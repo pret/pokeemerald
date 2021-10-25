@@ -35,7 +35,7 @@
 #include "text_window.h"
 #include "title_screen.h"
 #include "window.h"
-#include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 
 /*
  * Main menu state machine
@@ -90,7 +90,7 @@
  *  - If the user selected New Game, advance to Task_NewGameBirchSpeech_Init.
  *  - If the user selected Continue, advance to CB2_ContinueSavedGame.
  *  - If the user selected the Options menu, advance to CB2_InitOptionMenu.
- *  - If the user selected Mystery Gift, advance to CB2_MysteryGift. However,
+ *  - If the user selected Mystery Gift, advance to CB2_InitMysteryGift. However,
  *    if the wireless adapter was removed, instead advance to
  *    Task_DisplayMainMenuInvalidActionError.
  *  - Code to start a Mystery Event is present here, but is unreachable in this
@@ -1070,7 +1070,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_MYSTERY_GIFT:
-                SetMainCallback2(c2_mystery_gift);
+                SetMainCallback2(CB2_InitMysteryGift);
                 DestroyTask(taskId);
                 break;
             case ACTION_MYSTERY_EVENTS:
@@ -1078,7 +1078,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_EREADER:
-                SetMainCallback2(c2_ereader);
+                SetMainCallback2(CB2_InitEReader);
                 DestroyTask(taskId);
                 break;
             case ACTION_INVALID:
@@ -1871,9 +1871,9 @@ static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *sprite)
     sprite->data[0] = y;
 }
 
-static u8 NewGameBirchSpeech_CreateLotadSprite(u8 a, u8 b)
+static u8 NewGameBirchSpeech_CreateLotadSprite(u8 x, u8 y)
 {
-    return CreatePicSprite2(SPECIES_LOTAD, SHINY_ODDS, 0, 1, a, b, 14, -1);
+    return CreateMonPicSprite_Affine(SPECIES_LOTAD, SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
 }
 
 static void AddBirchSpeechObjects(u8 taskId)

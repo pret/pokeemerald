@@ -43,7 +43,7 @@
 #include "player_pc.h"
 #include "field_specials.h"
 #include "berry_powder.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "union_room_chat.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -200,7 +200,7 @@ void NewGameInitData(void)
     ResetAllApprenticeData();
     ClearRankingHallRecords();
     InitMatchCallCounters();
-    sub_801AFD8();
+    ClearMysteryGift();
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();

@@ -1,5 +1,5 @@
-MysteryEventScript_OldSeaMap::
-	setvaddress MysteryEventScript_OldSeaMap
+MysteryGiftScript_OldSeaMap::
+	setvaddress MysteryGiftScript_OldSeaMap
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_OLD_SEA_MAP, OldSeaMap_Obtained

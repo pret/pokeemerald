@@ -18,7 +18,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "union_room.h"
-#include "mevent2.h"
+#include "mystery_gift.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"
@@ -372,7 +372,7 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
         gLocalLinkPlayerId = GetMultiplayerId();
         SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
-        TrainerCard_GenerateCardForPlayer(card);
+        TrainerCard_GenerateCardForLinkPlayer(card);
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
         card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
@@ -420,7 +420,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
         gLocalLinkPlayerId = GetMultiplayerId();
         SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
-        TrainerCard_GenerateCardForPlayer(card);
+        TrainerCard_GenerateCardForLinkPlayer(card);
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
         card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
@@ -518,7 +518,7 @@ static void Task_LinkupAwaitTrainerCardData(u8 taskId)
 
     for (index = 0; index < GetLinkPlayerCount(); index++)
     {
-        CopyTrainerCardData(&gTrainerCards[index], gBlockRecvBuffer[index], gLinkPlayers[index].version);
+        CopyTrainerCardData(&gTrainerCards[index], (struct TrainerCard *)gBlockRecvBuffer[index], gLinkPlayers[index].version);
     }
 
     SetSuppressLinkErrorMessage(FALSE);
@@ -1004,10 +1004,10 @@ void CB2_ReturnFromCableClubBattle(void)
             switch (gBattleOutcome)
             {
             case B_OUTCOME_WON:
-                RecordIdOfWonderCardSenderByEventType(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+                MysteryGift_TryIncrementStat(CARD_STAT_BATTLES_WON, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
                 break;
             case B_OUTCOME_LOST:
-                RecordIdOfWonderCardSenderByEventType(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+                MysteryGift_TryIncrementStat(CARD_STAT_BATTLES_LOST, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
                 break;
             }
         }

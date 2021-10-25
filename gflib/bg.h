@@ -21,6 +21,12 @@ enum {
 	BG_TYPE_NONE = 0xFFFF
 };
 
+enum {
+	BG_COORD_SET,
+	BG_COORD_ADD,
+	BG_COORD_SUB,
+};
+
 struct BgTemplate
 {
     u16 bg:2;                   // 0x1, 0x2 -> 0x3

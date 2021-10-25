@@ -1,10 +1,10 @@
-MysteryEventScript_BattleCard::
-	setvaddress MysteryEventScript_BattleCard
-	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
+MysteryGiftScript_BattleCard::
+	setvaddress MysteryGiftScript_BattleCard
+	vgoto_if_set FLAG_MYSTERY_GIFT_DONE, MysteryGiftScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, GET_CARD_BATTLES_WON
-	specialvar VAR_0x8008, GetMysteryEventCardVal
+	specialvar VAR_0x8008, GetMysteryGiftCardStat
 	compare VAR_0x8008, REQUIRED_CARD_BATTLES
-	vgoto_if_ne MysteryEventScript_BattleCardInfo
+	vgoto_if_ne MysteryGiftScript_BattleCardInfo
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftBattleCountCard_WonPrize
@@ -12,10 +12,10 @@ MysteryEventScript_BattleCard::
 	waitbuttonpress
 	giveitem ITEM_POTION
 	release
-	setflag FLAG_MYSTERY_EVENT_DONE
+	setflag FLAG_MYSTERY_GIFT_DONE
 	end
 
-MysteryEventScript_BattleCardInfo:
+MysteryGiftScript_BattleCardInfo:
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftBattleCountCard

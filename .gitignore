@@ -37,3 +37,4 @@ porymap.project.cfg
 *.sna
 log.txt
 *.diff
+*.sym

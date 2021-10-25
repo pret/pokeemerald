@@ -19,19 +19,18 @@
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 #define NAKED __attribute__((naked))
 
-// IDE support
-#if defined (__APPLE__) || defined (__CYGWIN__) || defined (_MSC_VER)
-#define _(x) x
-#define __(x) x
-
-// Fool CLion IDE
-#define INCBIN(x) {0}
-#define INCBIN_U8 INCBIN
-#define INCBIN_U16 INCBIN
-#define INCBIN_U32 INCBIN
-#define INCBIN_S8 INCBIN
-#define INCBIN_S16 INCBIN
-#define INCBIN_S32 INCBIN
+/// IDE support
+#if defined(__APPLE__) || defined(__CYGWIN__) || defined(__INTELLISENSE__)
+// We define these when using certain IDEs to fool preproc
+#define _(x)        (x)
+#define __(x)       (x)
+#define INCBIN(...) {0}
+#define INCBIN_U8   INCBIN
+#define INCBIN_U16  INCBIN
+#define INCBIN_U32  INCBIN
+#define INCBIN_S8   INCBIN
+#define INCBIN_S16  INCBIN
+#define INCBIN_S32  INCBIN
 #endif // IDE support
 
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
@@ -639,8 +638,8 @@ struct MauvilleManGiddy
     /*0x00*/ u8 id;
     /*0x01*/ u8 taleCounter;
     /*0x02*/ u8 questionNum;
-    /*0x04*/ u16 randomWords[10];
-    /*0x18*/ u8 questionList[8];
+    /*0x04*/ u16 randomWords[GIDDY_MAX_TALES];
+    /*0x18*/ u8 questionList[GIDDY_MAX_QUESTIONS];
     /*0x20*/ u8 language;
 }; /*size = 0x2C*/
 
@@ -837,74 +836,59 @@ struct SaveTrainerHill
     /*0x3D6E*/ u16 tag:2;
 };
 
-struct MysteryEventStruct
+struct WonderNewsMetadata
 {
-    u8 unk_0_0:2;
-    u8 unk_0_2:3;
-    u8 unk_0_5:3;
-    u8 unk_1;
+    u8 newsType:2;
+    u8 sentCounter:3;
+    u8 getCounter:3;
+    u8 rand;
 };
 
- struct WonderNews
+struct WonderNews
 {
-    u16 unk_00;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04[40];
-    u8 unk_2C[10][40];
+    u16 id;
+    u8 sendType; // SEND_TYPE_*
+    u8 bgType;
+    u8 titleText[WONDER_NEWS_TEXT_LENGTH];
+    u8 bodyText[WONDER_NEWS_BODY_TEXT_LINES][WONDER_NEWS_TEXT_LENGTH];
 };
 
- struct WonderNewsSaveStruct
+struct WonderCard
 {
-    u32 crc;
-    struct WonderNews data;
+    u16 flagId; // Event flag (sReceivedGiftFlags) + WONDER_CARD_FLAG_OFFSET
+    u16 iconSpecies;
+    u32 idNumber;
+    u8 type:2; // CARD_TYPE_*
+    u8 bgType:4;
+    u8 sendType:2; // SEND_TYPE_*
+    u8 maxStamps;
+    u8 titleText[WONDER_CARD_TEXT_LENGTH];
+    u8 subtitleText[WONDER_CARD_TEXT_LENGTH];
+    u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH];
+    u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH];
+    u8 footerLine2Text[WONDER_CARD_TEXT_LENGTH];
 };
 
- struct WonderCard
+struct WonderCardMetadata
 {
-    u16 unk_00;
-    u16 unk_02;
-    u32 unk_04;
-    u8 unk_08_0:2;
-    u8 unk_08_2:4;
-    u8 unk_08_6:2;
-    u8 unk_09;
-    u8 unk_0A[40];
-    u8 unk_32[40];
-    u8 unk_5A[4][40];
-    u8 unk_FA[40];
-    u8 unk_122[40];
+    u16 battlesWon;
+    u16 battlesLost;
+    u16 numTrades;
+    u16 iconSpecies;
+    u16 stampData[2][MAX_STAMP_CARD_STAMPS]; // First element is STAMP_SPECIES, second is STAMP_ID
 };
 
- struct WonderCardSaveStruct
+struct MysteryGiftSave
 {
-    u32 crc;
-    struct WonderCard data;
-};
-
- struct MEventBuffer_3430_Sub
-{
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
-    u16 unk_06;
-    u16 unk_08[2][7];
-};
-
- struct MEventBuffer_3430
-{
-    u32 crc;
-    struct MEventBuffer_3430_Sub data;
-};
-
- struct MEventBuffers
-{
-    /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
-    /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
-    /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
-    /*0x338 0x3564*/ u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
-    /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
-    /*0x344 0x3570*/ u32 unk_344[2][5];
+    u32 newsCrc;
+    struct WonderNews news;
+    u32 cardCrc;
+    struct WonderCard card;
+    u32 cardMetadataCrc;
+    struct WonderCardMetadata cardMetadata;
+    u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
+    struct WonderNewsMetadata newsMetadata;
+    u32 trainerIds[2][5]; // Saved ids for 10 trainers, 5 each for battles and trades 
 }; // 0x36C 0x3598
 
 // For external event data storage. The majority of these may have never been used.
@@ -981,7 +965,7 @@ struct SaveBlock1
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[DEX_FLAGS_NO];
     /*0x9BC*/ u16 berryBlenderRecords[3];
-    /*0x9C2*/ u8 field_9C2[6];
+    /*0x9C2*/ u8 unused_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
@@ -1001,7 +985,6 @@ struct SaveBlock1
     /*0x278E*/ u8 decorationPosters[10];
     /*0x2798*/ u8 decorationDolls[40];
     /*0x27C0*/ u8 decorationCushions[10];
-    /*0x27CA*/ u8 padding_27CA[2];
     /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
     /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];
     /*0x2B90*/ u16 outbreakPokemonSpecies;
@@ -1031,8 +1014,8 @@ struct SaveBlock1
     /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ struct MEventBuffers unk_322C;
-    /*0x3598*/ u8 field_3598[0x180];
+    /*0x322C*/ struct MysteryGiftSave mysteryGift;
+    /*0x3598*/ u8 unused_3598[0x180];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
@@ -1040,7 +1023,7 @@ struct SaveBlock1
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    /*0x3D5A*/ u8 filler3D5A[0xA];
+    /*0x3D5A*/ u8 unused_3D5A[10];
     /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88

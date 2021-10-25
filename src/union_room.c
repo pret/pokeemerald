@@ -24,8 +24,8 @@
 #include "load_save.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "mevent.h"
 #include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -219,7 +219,7 @@ static u16 ReadAsU16(const u8 *);
 static void Task_TryBecomeLinkLeader(u8);
 static void Task_TryJoinLinkGroup(u8);
 static void Task_ListenToWireless(u8);
-static void Task_MEvent_Leader(u8);
+static void Task_SendMysteryGift(u8);
 static void Task_CardOrNewsWithFriend(u8);
 static void Task_CardOrNewsOverWireless(u8);
 static void Task_RunUnionRoom(u8);
@@ -1533,17 +1533,21 @@ static void Task_ExchangeCards(u8 taskId)
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
                 recvBuff = gBlockRecvBuffer[i];
-                CopyTrainerCardData(&gTrainerCards[i], recvBuff, gLinkPlayers[i].version);
+                CopyTrainerCardData(&gTrainerCards[i], (struct TrainerCard *)recvBuff, gLinkPlayers[i].version);
             }
 
             if (GetLinkPlayerCount() == 2)
             {
+                // Note: hasAllFrontierSymbols is a re-used field.
+                // Here it is set by CreateTrainerCardInBuffer.
+                // If the player has a saved Wonder Card and it is the same Wonder Card
+                // as their partner then mystery gift stats are enabled.
                 recvBuff = gBlockRecvBuffer[GetMultiplayerId() ^ 1];
-                MEventHandleReceivedWonderCard(recvBuff[48]);
+                MysteryGift_TryEnableStatsByFlagId(((struct TrainerCard *)recvBuff)->hasAllFrontierSymbols);
             }
             else
             {
-                ResetReceivedWonderCardFlag();
+                MysteryGift_DisableStats();
             }
 
             ResetBlockReceivedFlags();
@@ -1627,18 +1631,19 @@ static void CB2_TransitionToCableClub(void)
 
 static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
 {
-    u16 *argAsU16Ptr = dest;
+    struct TrainerCard * card = (struct TrainerCard *)dest;
+    TrainerCard_GenerateCardForLinkPlayer(card);
 
-    TrainerCard_GenerateCardForPlayer((struct TrainerCard *)argAsU16Ptr);
+    // Below field is re-used, to be read by Task_ExchangeCards
     if (setWonderCard)
-        argAsU16Ptr[48] = GetWonderCardFlagID();
+        card->hasAllFrontierSymbols = GetWonderCardFlagID();
     else
-        argAsU16Ptr[48] = 0;
+        card->hasAllFrontierSymbols = 0;
 }
 
 static void Task_StartActivity(u8 taskId)
 {
-    ResetReceivedWonderCardFlag();
+    MysteryGift_DisableStats();
     switch (gPlayerCurrActivity)
     {
     case ACTIVITY_BATTLE_SINGLE:
@@ -1858,12 +1863,13 @@ static void CreateTask_StartActivity(void)
     gTasks[taskId].data[0] = 0;
 }
 
-void MEvent_CreateTask_Leader(u32 activity)
+// Sending Wonder Card/News
+void CreateTask_SendMysteryGift(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Leader *data;
 
-    taskId = CreateTask(Task_MEvent_Leader, 0);
+    taskId = CreateTask(Task_SendMysteryGift, 0);
     sWirelessLinkMain.leader = data = (void*)(gTasks[taskId].data);
 
     data->state = 0;
@@ -1872,7 +1878,7 @@ void MEvent_CreateTask_Leader(u32 activity)
     gSpecialVar_Result = LINKUP_ONGOING;
 }
 
-static void Task_MEvent_Leader(u8 taskId)
+static void Task_SendMysteryGift(u8 taskId)
 {
     struct WirelessLink_Leader *data = sWirelessLinkMain.leader;
     struct WindowTemplate winTemplate;
@@ -1934,7 +1940,7 @@ static void Task_MEvent_Leader(u8 taskId)
         }
         break;
     case 6:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_LinkWithFriendDropped))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_LinkWithFriendDropped))
         {
             data->playerCount = LeaderPrunePlayerList(data->playerList);
             RedrawListMenu(data->listTaskId);
@@ -1945,7 +1951,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state = 7;
         break;
     case 7:
-        switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->yesNoWindowId, 0, gStringVar4))
+        switch (DoMysteryGiftYesNo(&data->textState, &data->yesNoWindowId, 0, gStringVar4))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -2031,7 +2037,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state++;
         break;
     case 14:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_PleaseStartOver))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_PleaseStartOver))
         {
             DestroyTask(taskId);
             gSpecialVar_Result = LINKUP_FAILED;
@@ -2066,7 +2072,7 @@ static void Task_MEvent_Leader(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 activity)
+void CreateTask_LinkMysteryGiftWithFriend(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Group *data;
@@ -2209,7 +2215,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sLinkDroppedTexts[RfuGetStatus()]))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sLinkDroppedTexts[RfuGetStatus()]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2235,7 +2241,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 activity)
+void CreateTask_LinkMysteryGiftOverWireless(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Group *data;
@@ -2377,7 +2383,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessLinkDropped))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessLinkDropped))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2386,7 +2392,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessSearchCanceled))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessSearchCanceled))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2395,7 +2401,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 11:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sNoWonderSharedTexts[data->isWonderNews]))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sNoWonderSharedTexts[data->isWonderNews]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);

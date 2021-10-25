@@ -674,9 +674,11 @@ u8 BattleSetup_GetTerrainId(void)
         return BATTLE_TERRAIN_MOUNTAIN;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        if (MetatileBehavior_GetBridgeType(tileBehavior))
+        // Is BRIDGE_TYPE_POND_*?
+        if (MetatileBehavior_GetBridgeType(tileBehavior) != BRIDGE_TYPE_OCEAN)
             return BATTLE_TERRAIN_POND;
-        if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
+
+        if (MetatileBehavior_IsBridgeOverWater(tileBehavior) == TRUE)
             return BATTLE_TERRAIN_WATER;
     }
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE113) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE113))
