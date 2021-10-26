@@ -61,7 +61,7 @@ struct MailRead
     /*0x0200*/ u8 playerName[12];
     /*0x020C*/ MainCallback exitCallback;
     /*0x0210*/ MainCallback callback;
-    /*0x0214*/ struct MailStruct *mail;
+    /*0x0214*/ struct Mail *mail;
     /*0x0218*/ bool8 hasText;
     /*0x0219*/ u8 signatureWidth;
     /*0x021a*/ u8 mailType;
@@ -443,7 +443,7 @@ static const struct MailLayout sMailLayouts_Tall[] = {
     },
 };
 
-void ReadMail(struct MailStruct *mail, void (*exitCallback)(void), bool8 hasText)
+void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
 {
     u16 buffer[2];
     u16 species;

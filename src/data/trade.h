@@ -19,7 +19,7 @@ static const u32 sUnusedStructSizes[] =
     sizeof(struct SaveBlock1),
     sizeof(struct MapHeader),
  // 0x00000530, in RS
-    sizeof(struct MailStruct),  //or ObjectEvent / ObjectEventGraphicsInfo
+    sizeof(struct Mail),        //or ObjectEvent / ObjectEventGraphicsInfo
     sizeof(struct Pokemon),     //or TrainerCard
     0x00000528  // 0x000004D8, in RS
 };
