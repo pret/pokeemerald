@@ -235,9 +235,7 @@ void Task_ReturnToFieldRecordMixing(u8 taskId)
         break;
     case 1:
         if (IsLinkTaskFinished())
-        {
             task->tState++;
-        }
         break;
     case 2:
         StartSendingKeysToLink();

@@ -558,7 +558,7 @@ void ShowStartMenu(void)
     {
         FreezeObjectEvents();
         PlayerFreeze();
-        sub_808BCF4();
+        StopPlayerAvatar();
     }
     CreateStartMenuTask(Task_ShowStartMenu);
     ScriptContext2_Enable();

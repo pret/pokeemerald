@@ -1830,7 +1830,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     {
         u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode; // Unused variable.
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][0] / 7;
+        u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / 7;
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 6)
             fixedIV = GetFactoryMonFixedIV(challengeNum, 0);
         else

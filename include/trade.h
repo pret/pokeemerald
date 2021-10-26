@@ -4,13 +4,9 @@
 #include "link_rfu.h"
 #include "constants/trade.h"
 
-// Exported type declarations
-
-// Exported RAM declarations
-extern struct MailStruct gTradeMail[PARTY_SIZE];
+extern struct Mail gTradeMail[PARTY_SIZE];
 extern u8 gSelectedTradeMonPositions[2];
 
-// Exported ROM declarations
 extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 
 s32 GetGameProgressForLinkTrade(void);

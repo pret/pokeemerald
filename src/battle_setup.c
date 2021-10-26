@@ -399,7 +399,7 @@ static void DoStandardWildBattle(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    sub_808BCF4();
+    StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
     if (InBattlePyramid())
@@ -418,7 +418,7 @@ void BattleSetup_StartRoamerBattle(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    sub_808BCF4();
+    StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -432,7 +432,7 @@ static void DoSafariBattle(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    sub_808BCF4();
+    StopPlayerAvatar();
     gMain.savedCallback = CB2_EndSafariBattle;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -442,7 +442,7 @@ static void DoBattlePikeWildBattle(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    sub_808BCF4();
+    StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_PIKE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);

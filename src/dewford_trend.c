@@ -271,9 +271,7 @@ void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 
                 // Only overwrrite it if it's "trendier"
                 temp = &savedTrendsBuffer[idx];
                 if (temp->trendiness < src->trendiness)
-                {
                     *temp = *src;
-                }
             }
             src++;
         }

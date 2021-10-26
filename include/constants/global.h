@@ -53,9 +53,20 @@
 #define UNION_ROOM_KB_ROW_COUNT 10
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
-
 #define PYRAMID_BAG_ITEMS_COUNT 10
-#define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
+
+// Number of facilities for Ranking Hall.
+// 7 facilities for single mode + tower double mode + tower multi mode.
+// Excludes link modes. See RANKING_HALL_* in include/constants/battle_frontier.h
+#define HALL_FACILITIES_COUNT 9
+// Received via record mixing, 1 for each player other than yourself
+#define HALL_RECORDS_COUNT 3
+
+// Battle Frontier level modes.
+#define FRONTIER_LVL_50         0
+#define FRONTIER_LVL_OPEN       1
+#define FRONTIER_LVL_MODE_COUNT 2
+#define FRONTIER_LVL_TENT       FRONTIER_LVL_MODE_COUNT // Special usage for indicating Battle Tent
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4

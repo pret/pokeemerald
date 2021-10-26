@@ -523,7 +523,7 @@ static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct O
     if (ObjectEventIsMovementOverridden(playerObj) && !ObjectEventClearHeldMovementIfFinished(playerObj))
         return FALSE;
 
-    sub_808BCE8();
+    CancelPlayerForcedMovement();
     ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
     task->tFuncId++; // TRSEE_PLAYER_FACE_WAIT
     return FALSE;

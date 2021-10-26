@@ -2047,7 +2047,7 @@ bool8 UseRegisteredKeyItemOnField(void)
             ScriptContext2_Enable();
             FreezeObjectEvents();
             PlayerFreeze();
-            sub_808BCF4();
+            StopPlayerAvatar();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
             gTasks[taskId].tUsingRegisteredKeyItem = TRUE;
