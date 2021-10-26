@@ -778,10 +778,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     }
     case EFFECT_TRIPLE_KICK:
     {
-        if (AI_DATA->atkAbility == ABILITY_SKILL_LINK)
-            dmg *= 6; // Skill Link ensures the 2nd and 3rd hits will connect if the first does
-        else
-            dmg *= 5; // Triple Kick/Triple Axel's average power is almost 5x its base power
+        dmg *= 6;
         break;
     }
     case EFFECT_ENDEAVOR:
@@ -799,9 +796,9 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
             dmg = 0;
         // Two hits of Super Fang halves HP twice, leaving target with 25% HP
         else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
-            dmg = gBattleMons[battlerDef].hp * 3 / 4;
+            dmg = max(1, gBattleMons[battlerDef].hp * 3 / 4);
         else
-            dmg = gBattleMons[battlerDef].hp / 2;
+            dmg = max(1, gBattleMons[battlerDef].hp / 2);
         break;
     }
     case EFFECT_FINAL_GAMBIT:
