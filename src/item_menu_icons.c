@@ -382,12 +382,12 @@ static const struct CompressedTilesPal sBerryPicTable[] =
     [ITEM_TO_BERRY(ITEM_BABIRI_BERRY) - 1] = {gBerryPic_Babiri, gBerryPalette_Babiri},
     [ITEM_TO_BERRY(ITEM_CHILAN_BERRY) - 1] = {gBerryPic_Chilan, gBerryPalette_Chilan},
     [ITEM_TO_BERRY(ITEM_ROSELI_BERRY) - 1] = {gBerryPic_Roseli, gBerryPalette_Roseli},
-    [ITEM_TO_BERRY(ITEM_MICLE_BERRY)  - 1] = {},
-    [ITEM_TO_BERRY(ITEM_CUSTAP_BERRY) - 1] = {},
-    [ITEM_TO_BERRY(ITEM_JABOCA_BERRY) - 1] = {},
-    [ITEM_TO_BERRY(ITEM_ROWAP_BERRY)  - 1] = {},
-    [ITEM_TO_BERRY(ITEM_KEE_BERRY)    - 1] = {},
-    [ITEM_TO_BERRY(ITEM_MARANGA_BERRY)- 1] = {},
+    [ITEM_TO_BERRY(ITEM_MICLE_BERRY)  - 1] = {gBerryPic_Micle, gBerryPalette_Micle},
+    [ITEM_TO_BERRY(ITEM_CUSTAP_BERRY) - 1] = {gBerryPic_Custap, gBerryPalette_Custap},
+    [ITEM_TO_BERRY(ITEM_JABOCA_BERRY) - 1] = {gBerryPic_Jaboca, gBerryPalette_Jaboca},
+    [ITEM_TO_BERRY(ITEM_ROWAP_BERRY)  - 1] = {gBerryPic_Rowap, gBerryPalette_Rowap},
+    [ITEM_TO_BERRY(ITEM_KEE_BERRY)    - 1] = {gBerryPic_Kee, gBerryPalette_Kee},
+    [ITEM_TO_BERRY(ITEM_MARANGA_BERRY)- 1] = {gBerryPic_Maranga, gBerryPalette_Maranga},
 };
 
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =

@@ -148,6 +148,18 @@ static const u8 sBerryDescriptionPart1_Chilan[] = _("It can be made into a whist
 static const u8 sBerryDescriptionPart2_Chilan[] = _("produces an indescribable sound.");
 static const u8 sBerryDescriptionPart1_Roseli[] = _("In nature, they grow in wide rings");
 static const u8 sBerryDescriptionPart2_Roseli[] = _("for reasons that are still unknown.");
+static const u8 sBerryDescriptionPart1_Micle[] = _("It makes other food eaten at the");
+static const u8 sBerryDescriptionPart2_Micle[] = _("same time taste sweet.");
+static const u8 sBerryDescriptionPart1_Custap[] = _("The flesh underneath the Custap");
+static const u8 sBerryDescriptionPart2_Custap[] = _("Berry's skin is sweet and creamy soft.");
+static const u8 sBerryDescriptionPart1_Jaboca[] = _("The drupelets that make up this berry");
+static const u8 sBerryDescriptionPart2_Jaboca[] = _("pop rythmically if handled roughly.");
+static const u8 sBerryDescriptionPart1_Rowap[] = _("People once worked top-shaped pieces");
+static const u8 sBerryDescriptionPart2_Rowap[] = _("of this berry free to use as toys.");
+static const u8 sBerryDescriptionPart1_Kee[] = _("A berry that is incredibly spicy at");
+static const u8 sBerryDescriptionPart2_Kee[] = _("first, then extremely bitter.");
+static const u8 sBerryDescriptionPart1_Maranga[] = _("Its outside is very bitter, but its");
+static const u8 sBerryDescriptionPart2_Maranga[] = _("inside tastes like a sweet drink.");
 
 const struct Berry gBerries[] =
 {
@@ -1247,6 +1259,114 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 40,
         .smoothness = 70,
+    },
+
+    [ITEM_MICLE_BERRY - FIRST_BERRY_INDEX] =
+    {
+        .name = _("MICLE"),
+        .firmness = BERRY_FIRMNESS_SOFT,
+        .size = 35,
+        .maxYield = 5,
+        .minYield = 1,
+        .description1 = sBerryDescriptionPart1_Micle,
+        .description2 = sBerryDescriptionPart2_Micle,
+        .stageDuration = 24,
+        .spicy = 0,
+        .dry = 40,
+        .sweet = 10,
+        .bitter = 0,
+        .sour = 0,
+        .smoothness = 35,
+    },
+
+    [ITEM_CUSTAP_BERRY - FIRST_BERRY_INDEX] =
+    {
+        .name = _("CUSTAP"),
+        .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .size = 35,
+        .maxYield = 5,
+        .minYield = 1,
+        .description1 = sBerryDescriptionPart1_Custap,
+        .description2 = sBerryDescriptionPart2_Custap,
+        .stageDuration = 24,
+        .spicy = 0,
+        .dry = 0,
+        .sweet = 40,
+        .bitter = 10,
+        .sour = 0,
+        .smoothness = 35,
+    },
+
+    [ITEM_JABOCA_BERRY - FIRST_BERRY_INDEX] =
+    {
+        .name = _("JABOCA"),
+        .firmness = BERRY_FIRMNESS_SOFT,
+        .size = 35,
+        .maxYield = 5,
+        .minYield = 1,
+        .description1 = sBerryDescriptionPart1_Jaboca,
+        .description2 = sBerryDescriptionPart2_Jaboca,
+        .stageDuration = 24,
+        .spicy = 0,
+        .dry = 0,
+        .sweet = 0,
+        .bitter = 40,
+        .sour = 10,
+        .smoothness = 35,
+    },
+
+    [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] =
+    {
+        .name = _("ROWAP"),
+        .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .size = 35,
+        .maxYield = 5,
+        .minYield = 1,
+        .description1 = sBerryDescriptionPart1_Rowap,
+        .description2 = sBerryDescriptionPart2_Rowap,
+        .stageDuration = 24,
+        .spicy = 10,
+        .dry = 0,
+        .sweet = 0,
+        .bitter = 0,
+        .sour = 40,
+        .smoothness = 35,
+    },
+
+    [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] =
+    {
+        .name = _("KEE"),
+        .firmness = BERRY_FIRMNESS_HARD,
+        .size = 35,
+        .maxYield = 8,
+        .minYield = 2,
+        .description1 = sBerryDescriptionPart1_Kee,
+        .description2 = sBerryDescriptionPart2_Kee,
+        .stageDuration = 18,
+        .spicy = 40,
+        .dry = 40,
+        .sweet = 10,
+        .bitter = 10,
+        .sour = 10,
+        .smoothness = 35,
+    },
+
+    [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] =
+    {
+        .name = _("MARNGA"), // "Maranga" is too long
+        .firmness = BERRY_FIRMNESS_SOFT,
+        .size = 35,
+        .maxYield = 8,
+        .minYield = 2,
+        .description1 = sBerryDescriptionPart1_Maranga,
+        .description2 = sBerryDescriptionPart2_Maranga,
+        .stageDuration = 18,
+        .spicy = 10,
+        .dry = 10,
+        .sweet = 40,
+        .bitter = 40,
+        .sour = 10,
+        .smoothness = 35,
     },
 };
 
