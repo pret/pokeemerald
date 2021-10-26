@@ -191,44 +191,72 @@ static const TransitionStateFunc sFrontierCirclesSymmetricSpiralInSeq_Funcs[] =
     CirclesSymmetricSpiralInSeq_End
 };
 
+// Task data
+#define tState           data[0]
+#define tTimer           data[1]
+#define tBlend           data[2]
+#define tFadeTimer       data[3]
+#define tCircle1SpriteId data[4]
+#define tCircle2SpriteId data[5]
+#define tCircle3SpriteId data[6]
+
+#define sTargetX data[0]
+#define sTargetY data[1]
+
+// Sprite data for CreateSlidingLogoCircleSprite
+#define sSpeedX  data[2]
+#define sSpeedY  data[3]
+#define sTimerX  data[4]
+#define sTimerY  data[5]
+#define sDelayX  data[6]
+#define sDelayY  data[7]
+
+// Sprite data for CreateSpiralingLogoCircleSprite
+#define sAngle        data[2]
+#define sRotateSpeed  data[3]
+#define sRadius       data[4]
+#define sTargetRadius data[5]
+#define sRadiusDelta  data[6]
+
+
 static void LoadLogoGfx(void)
 {
-    u16 *dst1, *dst2;
+    u16 *tilemap, *tileset;
 
-    GetBg0TilesDst(&dst1, &dst2);
-    LZ77UnCompVram(sLogoCenter_Gfx, dst2);
-    LZ77UnCompVram(sLogoCenter_Tilemap, dst1);
-    LoadPalette(sLogo_Pal, 0xF0, 0x20);
+    GetBg0TilesDst(&tilemap, &tileset);
+    LZ77UnCompVram(sLogoCenter_Gfx, tileset);
+    LZ77UnCompVram(sLogoCenter_Tilemap, tilemap);
+    LoadPalette(sLogo_Pal, 0xF0, sizeof(sLogo_Pal));
     LoadCompressedSpriteSheet(&sSpriteSheet_LogoCircles);
     LoadSpritePalette(&sSpritePalette_LogoCircles);
 }
 
-static u8 CreateSlidingLogoCircleSprite(s16 x, s16 y, u8 arg2, u8 arg3, s8 arg4, s8 arg5, u8 spriteAnimNum)
+static u8 CreateSlidingLogoCircleSprite(s16 x, s16 y, u8 delayX, u8 delayY, s8 speedX, s8 speedY, u8 spriteAnimNum)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 
     switch (spriteAnimNum)
     {
     case 0:
-        gSprites[spriteId].data[0] = 120;
-        gSprites[spriteId].data[1] = 45;
+        gSprites[spriteId].sTargetX = 120;
+        gSprites[spriteId].sTargetY = 45;
         break;
     case 1:
-        gSprites[spriteId].data[0] = 89;
-        gSprites[spriteId].data[1] = 97;
+        gSprites[spriteId].sTargetX = 89;
+        gSprites[spriteId].sTargetY = 97;
         break;
     case 2:
-        gSprites[spriteId].data[0] = 151;
-        gSprites[spriteId].data[1] = 97;
+        gSprites[spriteId].sTargetX = 151;
+        gSprites[spriteId].sTargetY = 97;
         break;
     }
 
-    gSprites[spriteId].data[2] = arg4;
-    gSprites[spriteId].data[3] = arg5;
-    gSprites[spriteId].data[6] = arg2;
-    gSprites[spriteId].data[7] = arg3;
-    gSprites[spriteId].data[4] = 0;
-    gSprites[spriteId].data[5] = 0;
+    gSprites[spriteId].sSpeedX = speedX;
+    gSprites[spriteId].sSpeedY = speedY;
+    gSprites[spriteId].sDelayX = delayX;
+    gSprites[spriteId].sDelayY = delayY;
+    gSprites[spriteId].sTimerX = 0;
+    gSprites[spriteId].sTimerY = 0;
 
     StartSpriteAnim(&gSprites[spriteId], spriteAnimNum);
     gSprites[spriteId].callback = SpriteCB_LogoCircleSlide;
@@ -240,59 +268,60 @@ static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
 
-    if (sprite->x == data[0] && sprite->y == data[1])
+    if (sprite->x == sTargetX && sprite->y == sTargetY)
     {
         sprite->callback = SpriteCallbackDummy;
     }
     else
     {
-        if (data[4] == data[6])
+        if (sTimerX == sDelayX)
         {
-            sprite->x += data[2];
-            data[4] = 0;
+            sprite->x += sSpeedX;
+            sTimerX = 0;
         }
         else
         {
-            data[4]++;
+            sTimerX++;
         }
 
-        if (data[5] == data[7])
+        if (sTimerY == sDelayY)
         {
-            sprite->y += data[3];
-            data[5] = 0;
+            sprite->y += sSpeedY;
+            sTimerY = 0;
         }
         else
         {
-            data[5]++;
+            sTimerY++;
         }
     }
 }
 
-static u8 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s16 arg6, u8 spriteAnimNum)
+static u8 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 angle, s16 rotateSpeed, s16 radiusStart, s16 radiusEnd, s16 radiusDelta, u8 spriteAnimNum)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 
+    // Target coords are set but irrelevant
     switch (spriteAnimNum)
     {
     case 0:
-        gSprites[spriteId].data[0] = 120;
-        gSprites[spriteId].data[1] = 45;
+        gSprites[spriteId].sTargetX = 120;
+        gSprites[spriteId].sTargetY = 45;
         break;
     case 1:
-        gSprites[spriteId].data[0] = 89;
-        gSprites[spriteId].data[1] = 97;
+        gSprites[spriteId].sTargetX = 89;
+        gSprites[spriteId].sTargetY = 97;
         break;
     case 2:
-        gSprites[spriteId].data[0] = 151;
-        gSprites[spriteId].data[1] = 97;
+        gSprites[spriteId].sTargetX = 151;
+        gSprites[spriteId].sTargetY = 97;
         break;
     }
 
-    gSprites[spriteId].data[2] = arg2;
-    gSprites[spriteId].data[3] = arg3;
-    gSprites[spriteId].data[4] = arg4;
-    gSprites[spriteId].data[5] = arg5;
-    gSprites[spriteId].data[6] = arg6;
+    gSprites[spriteId].sAngle = angle;
+    gSprites[spriteId].sRotateSpeed = rotateSpeed;
+    gSprites[spriteId].sRadius = radiusStart;
+    gSprites[spriteId].sTargetRadius = radiusEnd;
+    gSprites[spriteId].sRadiusDelta = radiusDelta;
 
     StartSpriteAnim(&gSprites[spriteId], spriteAnimNum);
     gSprites[spriteId].callback = SpriteCB_LogoCircleSpiral;
@@ -302,34 +331,32 @@ static u8 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 arg2, s16 arg3, s16 
 
 static void SpriteCB_LogoCircleSpiral(struct Sprite *sprite)
 {
-    sprite->x2 = (Sin2(sprite->data[2]) * sprite->data[4]) >> 12; // div by 4096
-    sprite->y2 = (Cos2(sprite->data[2]) * sprite->data[4]) >> 12; // div by 4096
+    sprite->x2 = (Sin2(sprite->sAngle) * sprite->sRadius) >> 12; // div by 4096
+    sprite->y2 = (Cos2(sprite->sAngle) * sprite->sRadius) >> 12; // div by 4096
 
-    sprite->data[2] = (sprite->data[2] + sprite->data[3]) % 360;
+    sprite->sAngle = (sprite->sAngle + sprite->sRotateSpeed) % 360;
 
-    if (sprite->data[4] != sprite->data[5])
-        sprite->data[4] += sprite->data[6];
+    if (sprite->sRadius != sprite->sTargetRadius)
+        sprite->sRadius += sprite->sRadiusDelta;
     else
         sprite->callback = SpriteCallbackDummy;
 }
-
-#define tState          data[0]
 
 static void DestroyLogoCirclesGfx(struct Task *task)
 {
     FreeSpriteTilesByTag(PALTAG_LOGO_CIRCLES);
     FreeSpritePaletteByTag(PALTAG_LOGO_CIRCLES);
 
-    DestroySprite(&gSprites[task->data[4]]);
-    DestroySprite(&gSprites[task->data[5]]);
-    DestroySprite(&gSprites[task->data[6]]);
+    DestroySprite(&gSprites[task->tCircle1SpriteId]);
+    DestroySprite(&gSprites[task->tCircle2SpriteId]);
+    DestroySprite(&gSprites[task->tCircle3SpriteId]);
 }
 
 static bool8 IsLogoCirclesAnimFinished(struct Task *task)
 {
-    if (gSprites[task->data[4]].callback == SpriteCallbackDummy
-        && gSprites[task->data[5]].callback == SpriteCallbackDummy
-        && gSprites[task->data[6]].callback == SpriteCallbackDummy)
+    if (gSprites[task->tCircle1SpriteId].callback == SpriteCallbackDummy
+     && gSprites[task->tCircle2SpriteId].callback == SpriteCallbackDummy
+     && gSprites[task->tCircle3SpriteId].callback == SpriteCallbackDummy)
         return TRUE;
     else
         return FALSE;
@@ -337,13 +364,13 @@ static bool8 IsLogoCirclesAnimFinished(struct Task *task)
 
 static bool8 Circles_Init(struct Task *task)
 {
-    if (task->data[1] == 0)
+    if (task->tTimer == 0)
     {
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON);
 
-        task->data[1]++;
+        task->tTimer++;
         return FALSE;
     }
     else
@@ -355,7 +382,7 @@ static bool8 Circles_Init(struct Task *task)
         ChangeBgY(0, 0, 0);
         ChangeBgY(0, 0x500, 2);
 
-        task->data[1] = 0;
+        task->tTimer = 0;
         task->tState++;
         return TRUE;
     }
@@ -363,27 +390,27 @@ static bool8 Circles_Init(struct Task *task)
 
 static bool8 FadeInCenterLogoCircle(struct Task *task)
 {
-    if (task->data[2] == 0)
+    if (task->tBlend == 0)
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON);
 
-    if (task->data[2] == 16)
+    if (task->tBlend == 16)
     {
-        if (task->data[3] == 31)
+        if (task->tFadeTimer == 31)
         {
             BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_BLACK);
             task->tState++;
         }
         else
         {
-            task->data[3]++;
+            task->tFadeTimer++;
         }
     }
     else
     {
         u16 blnd;
 
-        task->data[2]++;
-        blnd = task->data[2];
+        task->tBlend++;
+        blnd = task->tBlend;
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(blnd, 16 - blnd));
     }
 
@@ -405,9 +432,9 @@ void Task_FrontierCirclesMeet(u8 taskId)
 
 static bool8 CirclesMeet_CreateSprites(struct Task *task)
 {
-    task->data[4] = CreateSlidingLogoCircleSprite(120, -51, 0, 0, 0,   2, 0);
-    task->data[5] = CreateSlidingLogoCircleSprite(-7,  193, 0, 0, 2,  -2, 1);
-    task->data[6] = CreateSlidingLogoCircleSprite(247, 193, 0, 0, -2, -2, 2);
+    task->tCircle1SpriteId = CreateSlidingLogoCircleSprite(120, -51, 0, 0, 0,   2, 0);
+    task->tCircle2SpriteId = CreateSlidingLogoCircleSprite(-7,  193, 0, 0, 2,  -2, 1);
+    task->tCircle3SpriteId = CreateSlidingLogoCircleSprite(247, 193, 0, 0, -2, -2, 2);
 
     task->tState++;
     return FALSE;
@@ -431,9 +458,9 @@ void Task_FrontierCirclesCross(u8 taskId)
 
 static bool8 CirclesCross_CreateSprites(struct Task *task)
 {
-    task->data[4] = CreateSlidingLogoCircleSprite(120, 197, 0, 0, 0, -4, 0);
-    task->data[5] = CreateSlidingLogoCircleSprite(241, 59,  0, 1, -4, 2, 1);
-    task->data[6] = CreateSlidingLogoCircleSprite(-1,  59,  0, 1, 4,  2, 2);
+    task->tCircle1SpriteId = CreateSlidingLogoCircleSprite(120, 197, 0, 0, 0, -4, 0);
+    task->tCircle2SpriteId = CreateSlidingLogoCircleSprite(241, 59,  0, 1, -4, 2, 1);
+    task->tCircle3SpriteId = CreateSlidingLogoCircleSprite(-1,  59,  0, 1, 4,  2, 2);
 
     task->tState++;
     return FALSE;
@@ -457,9 +484,9 @@ void Task_FrontierCirclesAsymmetricSpiral(u8 taskId)
 
 static bool8 CirclesAsymmetricSpiral_CreateSprites(struct Task *task)
 {
-    task->data[4] = CreateSpiralingLogoCircleSprite(120, 45, 12,  4, 128, 0, -4, 0);
-    task->data[5] = CreateSpiralingLogoCircleSprite(89,  97, 252, 4, 128, 0, -4, 1);
-    task->data[6] = CreateSpiralingLogoCircleSprite(151, 97, 132, 4, 128, 0, -4, 2);
+    task->tCircle1SpriteId = CreateSpiralingLogoCircleSprite(120, 45, 12,  4, 128, 0, -4, 0);
+    task->tCircle2SpriteId = CreateSpiralingLogoCircleSprite(89,  97, 252, 4, 128, 0, -4, 1);
+    task->tCircle3SpriteId = CreateSpiralingLogoCircleSprite(151, 97, 132, 4, 128, 0, -4, 2);
 
     task->tState++;
     return FALSE;
@@ -483,9 +510,9 @@ void Task_FrontierCirclesSymmetricSpiral(u8 taskId)
 
 static bool8 CirclesSymmetricSpiral_CreateSprites(struct Task *task)
 {
-    task->data[4] = CreateSpiralingLogoCircleSprite(120, 80, 284, 8, 131, 35, -3, 0);
-    task->data[5] = CreateSpiralingLogoCircleSprite(120, 80, 44,  8, 131, 35, -3, 1);
-    task->data[6] = CreateSpiralingLogoCircleSprite(121, 80, 164, 8, 131, 35, -3, 2);
+    task->tCircle1SpriteId = CreateSpiralingLogoCircleSprite(120, 80, 284, 8, 131, 35, -3, 0);
+    task->tCircle2SpriteId = CreateSpiralingLogoCircleSprite(120, 80, 44,  8, 131, 35, -3, 1);
+    task->tCircle3SpriteId = CreateSpiralingLogoCircleSprite(121, 80, 164, 8, 131, 35, -3, 2);
 
     task->tState++;
     return FALSE;
@@ -509,21 +536,21 @@ void Task_FrontierCirclesMeetInSeq(u8 taskId)
 
 static bool8 CirclesMeetInSeq_CreateSprites(struct Task *task)
 {
-    if (task->data[1] == 0)
+    if (task->tTimer == 0)
     {
-        task->data[4] = CreateSlidingLogoCircleSprite(120, -51, 0, 0, 0, 4,  0);
+        task->tCircle1SpriteId = CreateSlidingLogoCircleSprite(120, -51, 0, 0, 0, 4,  0);
     }
-    else if (task->data[1] == 16)
+    else if (task->tTimer == 16)
     {
-        task->data[5] = CreateSlidingLogoCircleSprite(-7,  193, 0, 0, 4, -4, 1);
+        task->tCircle2SpriteId = CreateSlidingLogoCircleSprite(-7,  193, 0, 0, 4, -4, 1);
     }
-    else if (task->data[1] == 32)
+    else if (task->tTimer == 32)
     {
-        task->data[6] = CreateSlidingLogoCircleSprite(247, 193, 0, 0, -4, -4, 2);
+        task->tCircle3SpriteId = CreateSlidingLogoCircleSprite(247, 193, 0, 0, -4, -4, 2);
         task->tState++;
     }
 
-    task->data[1]++;
+    task->tTimer++;
     return FALSE;
 }
 
@@ -545,21 +572,21 @@ void Task_FrontierCirclesCrossInSeq(u8 taskId)
 
 static bool8 CirclesCrossInSeq_CreateSprites(struct Task *task)
 {
-    if (task->data[1] == 0)
+    if (task->tTimer == 0)
     {
-        task->data[4] = CreateSlidingLogoCircleSprite(120, 197, 0, 0, 0, -8,  0);
+        task->tCircle1SpriteId = CreateSlidingLogoCircleSprite(120, 197, 0, 0, 0, -8,  0);
     }
-    else if (task->data[1] == 16)
+    else if (task->tTimer == 16)
     {
-        task->data[5] = CreateSlidingLogoCircleSprite(241, 78,  0, 0, -8, 1,  1);
+        task->tCircle2SpriteId = CreateSlidingLogoCircleSprite(241, 78,  0, 0, -8, 1,  1);
     }
-    else if (task->data[1] == 32)
+    else if (task->tTimer == 32)
     {
-        task->data[6] = CreateSlidingLogoCircleSprite(-1,  78,  0, 0, 8,  1,  2);
+        task->tCircle3SpriteId = CreateSlidingLogoCircleSprite(-1,  78,  0, 0, 8,  1,  2);
         task->tState++;
     }
 
-    task->data[1]++;
+    task->tTimer++;
     return FALSE;
 }
 
@@ -581,21 +608,21 @@ void Task_FrontierCirclesAsymmetricSpiralInSeq(u8 taskId)
 
 static bool8 CirclesAsymmetricSpiralInSeq_CreateSprites(struct Task *task)
 {
-    if (task->data[1] == 0)
+    if (task->tTimer == 0)
     {
-        task->data[4] = CreateSpiralingLogoCircleSprite(120, 45, 12,  4, 128, 0, -4, 0);
+        task->tCircle1SpriteId = CreateSpiralingLogoCircleSprite(120, 45, 12,  4, 128, 0, -4, 0);
     }
-    else if (task->data[1] == 16)
+    else if (task->tTimer == 16)
     {
-        task->data[5] = CreateSpiralingLogoCircleSprite(89,  97, 252, 4, 128, 0, -4, 1);
+        task->tCircle2SpriteId = CreateSpiralingLogoCircleSprite(89,  97, 252, 4, 128, 0, -4, 1);
     }
-    else if (task->data[1] == 32)
+    else if (task->tTimer == 32)
     {
-        task->data[6] = CreateSpiralingLogoCircleSprite(151, 97, 132, 4, 128, 0, -4, 2);
+        task->tCircle3SpriteId = CreateSpiralingLogoCircleSprite(151, 97, 132, 4, 128, 0, -4, 2);
         task->tState++;
     }
 
-    task->data[1]++;
+    task->tTimer++;
     return FALSE;
 }
 
@@ -617,21 +644,21 @@ void Task_FrontierCirclesSymmetricSpiralInSeq(u8 taskId)
 
 static bool8 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task)
 {
-    if (task->data[1] == 0)
+    if (task->tTimer == 0)
     {
-        task->data[4] = CreateSpiralingLogoCircleSprite(120, 80, 284, 8, 131, 35, -3, 0);
+        task->tCircle1SpriteId = CreateSpiralingLogoCircleSprite(120, 80, 284, 8, 131, 35, -3, 0);
     }
-    else if (task->data[1] == 16)
+    else if (task->tTimer == 16)
     {
-        task->data[5] = CreateSpiralingLogoCircleSprite(120, 80, 44,  8, 131, 35, -3, 1);
+        task->tCircle2SpriteId = CreateSpiralingLogoCircleSprite(120, 80, 44,  8, 131, 35, -3, 1);
     }
-    else if (task->data[1] == 32)
+    else if (task->tTimer == 32)
     {
-        task->data[6] = CreateSpiralingLogoCircleSprite(121, 80, 164, 8, 131, 35, -3, 2);
+        task->tCircle3SpriteId = CreateSpiralingLogoCircleSprite(121, 80, 164, 8, 131, 35, -3, 2);
         task->tState++;
     }
 
-    task->data[1]++;
+    task->tTimer++;
     return FALSE;
 }
 
