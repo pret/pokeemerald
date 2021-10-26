@@ -41,7 +41,7 @@ struct MenuAction
     } func;
 };
 
-extern const u16 gUnknown_0860F074[];
+extern const u16 gStandardMenuPalette[];
 
 void FreeAllOverworldWindowBuffers(void);
 void InitStandardTextBoxWindows(void);
@@ -125,5 +125,6 @@ void ResetBgPositions(void);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
 void sub_8198C78(void);
 void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs);
+void Menu_LoadStdPal(void);
 
 #endif // GUARD_MENU_H

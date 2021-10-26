@@ -3115,7 +3115,7 @@ static void LoadKeyboardSwapWindow(void)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     LoadUserWindowBorderGfx(3, 1, 0xD0);
     LoadUserWindowBorderGfx_(3, 0xA, 0x20);
-    LoadPalette(gUnknown_0860F074, 0xE0,  0x20);
+    LoadPalette(gStandardMenuPalette, 0xE0,  0x20);
 }
 
 static void InitScanlineEffect(void)

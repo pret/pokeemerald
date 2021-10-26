@@ -17,6 +17,7 @@ PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
 OBJEVENTGFXDIR := graphics/object_events
 MISCGFXDIR := graphics/misc
+JPCONTESTGFXDIR := graphics/contest/japanese
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -385,7 +386,7 @@ $(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp \
 						   $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
 	@cat $^ >$@
 
-$(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
+$(INTERFACEGFXDIR)/battle_bar.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
 									$(INTERFACEGFXDIR)/numbers1.4bpp \
 									$(INTERFACEGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
@@ -402,20 +403,20 @@ $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
 $(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
 
-$(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_floor.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_symbols.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_meter.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_classes.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
+$(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
+						   			 $(JPCONTESTGFXDIR)/floor.4bpp \
+						   			 $(JPCONTESTGFXDIR)/frame_2.4bpp \
+						   			 $(JPCONTESTGFXDIR)/symbols.4bpp \
+						   			 $(JPCONTESTGFXDIR)/meter.4bpp \
+						   			 $(JPCONTESTGFXDIR)/letters.4bpp \
+						   			 $(JPCONTESTGFXDIR)/numbers.4bpp
 	@cat $^ >$@
 
-$(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp \
-									$(UNUSEDGFXDIR)/old_contest_2_2.4bpp
+$(JPCONTESTGFXDIR)/composite_2.4bpp: $(JPCONTESTGFXDIR)/interface.4bpp \
+						   			 $(JPCONTESTGFXDIR)/audience.4bpp
 	@cat $^ >$@
 
-$(UNKNOWNGFXDIR)/unknown_C19470.4bpp: %.4bpp: %.png
+$(JPCONTESTGFXDIR)/voltage.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
 $(BTLANMSPRGFXDIR)/ice_crystals.4bpp: $(BTLANMSPRGFXDIR)/ice_crystals_0.4bpp \

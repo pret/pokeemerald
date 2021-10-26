@@ -2451,7 +2451,7 @@ static void LoadBagMenuTextWindows(void)
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadMessageBoxGfx(0, 10, 0xD0);
     ListMenuLoadStdPalAt(0xC0, 1);
-    LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(&gStandardMenuPalette, 0xF0, 0x20);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
