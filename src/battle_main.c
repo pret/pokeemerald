@@ -4978,6 +4978,17 @@ static void HandleEndTurn_FinishBattle(void)
             UndoFormChange(i, B_SIDE_PLAYER, FALSE);
             DoBurmyFormChange(i);
         }
+    #if B_RECALCULATE_STATS >= GEN_5
+        // Recalculate the stats of every party member before the end
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
+             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+            {
+                CalculateMonStats(&gPlayerParty[i]);
+            }
+        }
+    #endif
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
     }
