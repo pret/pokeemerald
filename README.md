@@ -8,7 +8,7 @@ Check out my other branches for music from select soundtracks:
 * [**DPPt and HGSS Music**](https://github.com/CyanSMP64/pokeemerald/tree/dppt_hgss_music). (Requires 2877024 bytes (~2.74 MB) of free space.)
 * [**BW Music**](https://github.com/CyanSMP64/pokeemerald/tree/bw_music). (Requires 3710592 bytes (~3.54 MB) of free space.)
 * [**HGSS and BW Music**](https://github.com/CyanSMP64/pokeemerald/tree/hgss_bw_music). (Requires 4619264 bytes (~4.41 MB) of free space.)
-* **DPPt, HGSS and BW Music**. (Requires 6009792 bytes (~5.73 MB) of free space.)
+* [**DPPt, HGSS and BW Music**](https://github.com/CyanSMP64/pokeemerald/tree/dppt_hgss_bw_music). (Requires 6009792 bytes (~5.73 MB) of free space.)
 
 If you have space concerns and/or only wish to use select music from this branch, feel free to contact me on Discord at *@Furret#7777*.
 
