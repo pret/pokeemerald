@@ -40,7 +40,7 @@
     register u32 r_src asm("r0") = eval_src;      \
     register u32 r_dst asm("r1") = eval_dst;      \
     register u32 r_ctl asm("r2") = eval_ctl;      \
-    asm volatile("stmia %0!, {%1, %2, %3}" : "+l" (dmaRegs) : "l" (r_src), "l" (r_dst), "l" (r_ctl) : "memory");  \}
+    asm volatile("stmia %0!, {%1, %2, %3}" : "+l" (dmaRegs) : "l" (r_src), "l" (r_dst), "l" (r_ctl) : "memory");  \
 }
 
 #define DMA_FILL(dmaNum, value, dest, size, bit)                                              \
