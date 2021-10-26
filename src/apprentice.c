@@ -911,7 +911,7 @@ static void Script_PrintApprenticeMessage(void)
     ScriptContext2_Enable();
     FreezeObjectEvents();
     PlayerFreeze();
-    sub_808BCF4();
+    StopPlayerAvatar();
     DrawDialogueFrame(0, 1);
     PrintApprenticeMessage();
 }
