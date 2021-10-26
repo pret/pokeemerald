@@ -1180,7 +1180,7 @@ static void StartMatchCall(void)
         ScriptContext2_Enable();
         FreezeObjectEvents();
         PlayerFreeze();
-        sub_808BCF4();
+        StopPlayerAvatar();
     }
 
     PlaySE(SE_POKENAV_CALL);
