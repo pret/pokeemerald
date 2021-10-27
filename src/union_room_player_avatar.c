@@ -77,18 +77,27 @@ static const u8 sNextFacingDirection[] = {
     [DIR_EAST]  = DIR_NORTH
 };
 
-// Local id 1 is the Nurse/Attendant, 2-9 are link players
-static const u8 sUnionRoomLocalIds[] = { 9, 8, 7, 2, 6, 5, 4, 3 };
+static const u8 sUnionRoomLocalIds[] = {
+    LOCALID_UNION_ROOM_PLAYER_1,
+    LOCALID_UNION_ROOM_PLAYER_2,
+    LOCALID_UNION_ROOM_PLAYER_3,
+    LOCALID_UNION_ROOM_PLAYER_4,
+    LOCALID_UNION_ROOM_PLAYER_5,
+    LOCALID_UNION_ROOM_PLAYER_6,
+    LOCALID_UNION_ROOM_PLAYER_7,
+    LOCALID_UNION_ROOM_PLAYER_8
+};
 
-static const u16 sUnknown[] = {
-    0x2BF, 
-    0x2C0, 
-    0x2C1, 
-    0x2C2, 
-    0x2C3, 
-    0x2C4, 
-    0x2C5, 
-    0x2C6
+// Unused
+static const u16 sHidePlayerFlags[] = {
+    FLAG_HIDE_UNION_ROOM_PLAYER_1, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_2, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_3, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_4, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_5, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_6, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_7, 
+    FLAG_HIDE_UNION_ROOM_PLAYER_8
 };
 
 static const u8 sMovement_UnionPlayerExit[2] = {

@@ -1,16 +1,16 @@
 .set LOCALID_NURSE, 1
 
-PetalburgCity_PokemonCenter_1F_MapScripts:: @ 82079E8
+PetalburgCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-PetalburgCity_PokemonCenter_1F_OnTransition: @ 82079F3
+PetalburgCity_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-PetalburgCity_PokemonCenter_1F_EventScript_Nurse:: @ 82079FC
+PetalburgCity_PokemonCenter_1F_EventScript_Nurse::
 	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -18,15 +18,15 @@ PetalburgCity_PokemonCenter_1F_EventScript_Nurse:: @ 82079FC
 	release
 	end
 
-PetalburgCity_PokemonCenter_1F_EventScript_FatMan:: @ 8207A0A
+PetalburgCity_PokemonCenter_1F_EventScript_FatMan::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem, MSGBOX_NPC
 	end
 
-PetalburgCity_PokemonCenter_1F_EventScript_Youngster:: @ 8207A13
+PetalburgCity_PokemonCenter_1F_EventScript_Youngster::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP, MSGBOX_NPC
 	end
 
-PetalburgCity_PokemonCenter_1F_EventScript_Woman:: @ 8207A1C
+PetalburgCity_PokemonCenter_1F_EventScript_Woman::
 	lock
 	faceplayer
 	msgbox PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon, MSGBOX_DEFAULT
@@ -36,7 +36,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_Woman:: @ 8207A1C
 	release
 	end
 
-PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo:: @ 8207A38
+PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo::
 	compare VAR_STARTER_MON, 0
 	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType
 	compare VAR_STARTER_MON, 1
@@ -46,36 +46,36 @@ PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo:: @ 8207A38
 	release
 	end
 
-PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType:: @ 8207A5B
+PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType, MSGBOX_DEFAULT
 	return
 
-PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType:: @ 8207A64
+PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType, MSGBOX_DEFAULT
 	return
 
-PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType:: @ 8207A6D
+PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType, MSGBOX_DEFAULT
 	return
 
-PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem: @ 8207A76
+PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem:
 	.string "That PC-based POKéMON Storage\n"
 	.string "System…\p"
 	.string "Whoever made it must be some kind\n"
 	.string "of a scientific wizard!$"
 
-PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP: @ 8207AD6
+PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP:
 	.string "When my POKéMON ate an\n"
 	.string "ORAN BERRY, it regained HP!$"
 
-PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon: @ 8207B09
+PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon:
 	.string "There are many types of POKéMON.\p"
 	.string "All types have their strengths and\n"
 	.string "weaknesses against other types.\p"
 	.string "Depending on the types of POKéMON,\n"
 	.string "a battle could be easy or hard.$"
 
-PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType: @ 8207BB0
+PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType:
 	.string "For example, your TREECKO\n"
 	.string "is a GRASS type.\p"
 	.string "It's strong against the WATER and\n"
@@ -83,7 +83,7 @@ PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType: @ 8207BB0
 	.string "But, it's weak against FIRE-type\n"
 	.string "POKéMON.$"
 
-PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType: @ 8207C35
+PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType:
 	.string "For example, your TORCHIC\n"
 	.string "is a FIRE type.\p"
 	.string "It's strong against the GRASS and\n"
@@ -91,7 +91,7 @@ PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType: @ 8207C35
 	.string "But, it's weak against WATER-type\n"
 	.string "POKéMON.$"
 
-PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType: @ 8207CB7
+PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType:
 	.string "For example, your MUDKIP\n"
 	.string "is a WATER type.\p"
 	.string "It's strong against the FIRE type.\p"
