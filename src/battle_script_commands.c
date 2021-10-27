@@ -54,6 +54,7 @@
 #include "constants/rgb.h"
 #include "data.h"
 #include "constants/party_menu.h"
+#include "battle_util.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
@@ -1498,7 +1499,7 @@ static void Cmd_attackcanceler(void)
      && ((!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))
      && gBattleMoves[gCurrentMove].effect != EFFECT_SUCKER_PUNCH)
     {
-        if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
+        if (IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
             gProtectStructs[gBattlerAttacker].touchedProtectLike = 1;
         CancelMultiTurnMoves(gBattlerAttacker);
         gMoveResultFlags |= MOVE_RESULT_MISSED;
@@ -8977,6 +8978,57 @@ static void Cmd_various(void)
         for (i = 0; i < gBattlersCount; i++)
             gStatuses4[i] |= STATUS4_PLASMA_FISTS;
         break;
+    case VARIOUS_PHOTON_GEYSER_CHECK:
+    {
+        u32 attStat = gBattleMons[gActiveBattler].attack;
+        u8 atkStage = gBattleMons[gActiveBattler].statStages[STAT_ATK];
+        u32 spaStat = gBattleMons[gActiveBattler].spAttack;
+
+        attStat *= gStatStageRatios[atkStage][0];
+        attStat /= gStatStageRatios[atkStage][1];
+
+        atkStage = gBattleMons[gActiveBattler].statStages[STAT_SPATK];
+        spaStat *= gStatStageRatios[atkStage][0];
+        spaStat /= gStatStageRatios[atkStage][1];
+
+        if (attStat > spaStat)
+            gSwapDamageCategory = TRUE;
+        break;
+    }
+    case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
+    {
+        u32 attStat = gBattleMons[gBattlerAttacker].attack;
+        u8 atkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        u32 attStatDef = gBattleMons[gBattlerTarget].attack;
+        u32 physical;
+
+        u32 spaStat = gBattleMons[gBattlerAttacker].spAttack;
+        u32 spaStatDef = gBattleMons[gBattlerTarget].spAttack;
+        u32 special;
+
+        attStat *= gStatStageRatios[atkStage][0];
+        attStat /= gStatStageRatios[atkStage][1];
+
+        atkStage = gBattleMons[gBattlerTarget].statStages[STAT_ATK];
+        attStatDef *= gStatStageRatios[atkStage][0];
+        attStatDef /= gStatStageRatios[atkStage][1];
+
+        physical = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attStat) / attStatDef) / 50);
+
+        atkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
+        spaStat *= gStatStageRatios[atkStage][0];
+        spaStat /= gStatStageRatios[atkStage][1];
+
+        atkStage = gBattleMons[gBattlerTarget].statStages[STAT_SPATK];
+        spaStatDef *= gStatStageRatios[atkStage][0];
+        spaStatDef /= gStatStageRatios[atkStage][1];
+
+        special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * spaStat) / spaStatDef) / 50);
+
+        if (((physical > special) || (physical == special && (Random() % 2) == 0)))
+            gSwapDamageCategory = TRUE;
+        break;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
@@ -13272,4 +13324,3 @@ static bool32 CriticalCapture(u32 odds)
         return FALSE;
     #endif
 }
-

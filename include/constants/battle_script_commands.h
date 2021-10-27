@@ -193,6 +193,8 @@
 #define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL   120
 #define VARIOUS_HANDLE_PRIMAL_REVERSION         121
 #define VARIOUS_APPLY_PLASMA_FISTS              122
+#define VARIOUS_PHOTON_GEYSER_CHECK             123
+#define VARIOUS_SHELL_SIDE_ARM_CHECK            124
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
