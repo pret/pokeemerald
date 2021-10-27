@@ -3335,7 +3335,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_TRAP:
     case EFFECT_MEAN_LOOK:
         if (HasMoveEffect(battlerDef, EFFECT_RAPID_SPIN)
-          || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST)
+          || (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
           || gBattleMons[battlerDef].status2 & STATUS2_WRAPPED)
         {
             break; // in this case its a bad attacking move
