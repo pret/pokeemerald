@@ -7271,7 +7271,7 @@ bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
 {
     if (!(gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
     {
-        if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gSwapDamageCategory == TRUE)
+        if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gSwapDamageCategory)
             return TRUE;
         else
             return FALSE;
@@ -9077,7 +9077,7 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
 
 u8 GetBattleMoveSplit(u32 moveId)
 {
-    if (gSwapDamageCategory == TRUE)  // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    if (gSwapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
         return SPLIT_PHYSICAL;
     else if (IS_MOVE_STATUS(moveId) || B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
         return gBattleMoves[moveId].split;

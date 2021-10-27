@@ -1731,14 +1731,6 @@
 	.4byte \ptr
 	.endm
 
-	.macro photongeysercheck
-	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
-	.endm
-
-	.macro shellsidearmcheck
-	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
-	.endm
-
 	.macro trysetfairylock ptr:req
 	various BS_ATTACKER, VARIOUS_TRY_FAIRY_LOCK
 	.4byte \ptr
@@ -1864,6 +1856,14 @@
   
 	.macro applyplasmafists
 	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
+	.endm
+
+	.macro photongeysercheck
+	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
+	.endm
+
+	.macro shellsidearmcheck
+	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
 @ helpful macros
