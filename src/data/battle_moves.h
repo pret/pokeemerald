@@ -7415,6 +7415,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
+        .argument = MOVE_EFFECT_FEINT,
     },
 
     [MOVE_HONE_CLAWS] =
@@ -9691,15 +9692,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HYPERSPACE_FURY] =
     {
-        .effect = EFFECT_PLACEHOLDER,
-        .power = 0,
+        .effect = EFFECT_HYPERSPACE_FURY,
+        .power = 100,
         .type = TYPE_DARK,
         .accuracy = 0,
-        .pp = 0,
-        .secondaryEffectChance = 0,
+        .pp = 5,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIT_IN_SUBSTITUTE,
         .split = SPLIT_PHYSICAL,
     },
 

@@ -1858,6 +1858,12 @@
 	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
 	.endm
 
+	.macro jumpifspecies battler:req, species:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SPECIES
+	.2byte \species
+	.4byte \ptr
+	.endm
+
 	.macro photongeysercheck
 	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
 	.endm

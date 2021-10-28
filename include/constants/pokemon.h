@@ -281,32 +281,33 @@
 #define EV_ITEM_RAISE_LIMIT 100
 
 // Battle move flags
-#define FLAG_MAKES_CONTACT          (1 << 0)
-#define FLAG_PROTECT_AFFECTED       (1 << 1)
-#define FLAG_MAGIC_COAT_AFFECTED    (1 << 2)
-#define FLAG_SNATCH_AFFECTED        (1 << 3)
-#define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
-#define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
-#define FLAG_HIGH_CRIT              (1 << 6)
-#define FLAG_RECKLESS_BOOST         (1 << 7)
-#define FLAG_IRON_FIST_BOOST        (1 << 8)
-#define FLAG_SHEER_FORCE_BOOST      (1 << 9)
-#define FLAG_STRONG_JAW_BOOST       (1 << 10)
-#define FLAG_MEGA_LAUNCHER_BOOST    (1 << 11)
-#define FLAG_STAT_STAGES_IGNORED    (1 << 12)
-#define FLAG_DMG_MINIMIZE           (1 << 13)
-#define FLAG_DMG_UNDERGROUND        (1 << 14)
-#define FLAG_DMG_UNDERWATER         (1 << 15)
-#define FLAG_SOUND                  (1 << 16)
-#define FLAG_BALLISTIC              (1 << 17)
-#define FLAG_PROTECTION_MOVE        (1 << 18)
-#define FLAG_POWDER                 (1 << 19)
-#define FLAG_TARGET_ABILITY_IGNORED (1 << 20)
-#define FLAG_DANCE                  (1 << 21)
-#define FLAG_DMG_2X_IN_AIR          (1 << 22) // If target is in the air, can hit and deal double damage.
-#define FLAG_DMG_IN_AIR             (1 << 23) // If target is in the air, can hit.
+#define FLAG_MAKES_CONTACT                        (1 << 0)
+#define FLAG_PROTECT_AFFECTED                     (1 << 1)
+#define FLAG_MAGIC_COAT_AFFECTED                  (1 << 2)
+#define FLAG_SNATCH_AFFECTED                      (1 << 3)
+#define FLAG_MIRROR_MOVE_AFFECTED                 (1 << 4)
+#define FLAG_KINGS_ROCK_AFFECTED                  (1 << 5)
+#define FLAG_HIGH_CRIT                            (1 << 6)
+#define FLAG_RECKLESS_BOOST                       (1 << 7)
+#define FLAG_IRON_FIST_BOOST                      (1 << 8)
+#define FLAG_SHEER_FORCE_BOOST                    (1 << 9)
+#define FLAG_STRONG_JAW_BOOST                     (1 << 10)
+#define FLAG_MEGA_LAUNCHER_BOOST                  (1 << 11)
+#define FLAG_STAT_STAGES_IGNORED                  (1 << 12)
+#define FLAG_DMG_MINIMIZE                         (1 << 13)
+#define FLAG_DMG_UNDERGROUND                      (1 << 14)
+#define FLAG_DMG_UNDERWATER                       (1 << 15)
+#define FLAG_SOUND                                (1 << 16)
+#define FLAG_BALLISTIC                            (1 << 17)
+#define FLAG_PROTECTION_MOVE                      (1 << 18)
+#define FLAG_POWDER                               (1 << 19)
+#define FLAG_TARGET_ABILITY_IGNORED               (1 << 20)
+#define FLAG_DANCE                                (1 << 21)
+#define FLAG_DMG_2X_IN_AIR                        (1 << 22) // If target is in the air, can hit and deal double damage.
+#define FLAG_DMG_IN_AIR                           (1 << 23) // If target is in the air, can hit.
 #define FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING (1 << 24) // Makes a Ground type move do 1x damage to flying and levitating targets
-#define FLAG_THAW_USER              (1 << 25)
+#define FLAG_THAW_USER                            (1 << 25)
+#define FLAG_HIT_IN_SUBSTITUTE                    (1 << 26) // Hyperspace Fury
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0

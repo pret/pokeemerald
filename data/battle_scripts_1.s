@@ -11,6 +11,7 @@
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
 #include "constants/battle_config.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -390,6 +391,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFreezyFrost             @ EFFECT_FREEZY_FROST
 	.4byte BattleScript_EffectSparklySwirl            @ EFFECT_SPARKLY_SWIRL
 	.4byte BattleScript_EffectPlasmaFists             @ EFFECT_PLASMA_FISTS
+	.4byte BattleScript_EffectHyperspaceFury          @ EFFECT_HYPERSPACE_FURY
 	.4byte BattleScript_EffectPhotonGeyser            @ EFFECT_PHOTON_GEYSER
 	.4byte BattleScript_EffectShellSideArm            @ EFFECT_SHELL_SIDE_ARM
 
@@ -421,6 +423,34 @@ BattleScript_EffectPhotonGeyser:
 	seteffectwithchance
 	tryfaintmon BS_TARGET, FALSE, NULL
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectHyperspaceFury:
+	jumpifspecies BS_ATTACKER, SPECIES_TREECKO, BattleScript_EffectHyperspaceFuryUnbound
+	jumpifspecies BS_ATTACKER, SPECIES_MUDKIP, BattleScript_ButHoopaCantUseIt
+	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectHyperspaceFuryUnbound::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	pause B_WAIT_TIME_LONG
+	ppreduce
+	setmoveeffect MOVE_EFFECT_FEINT
+	seteffectwithchance
+	setmoveeffect MOVE_EFFECT_DEF_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_HitFromCritCalc
+
+BattleScript_ButHoopaCantUseIt:
+	printstring STRINGID_BUTHOOPACANTUSEIT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_HyperspaceFuryRemoveProtect::
+	printstring STRINGID_BROKETHROUGHPROTECTION
+	waitmessage B_WAIT_TIME_LONG
+	return
 
 BattleScript_EffectPlasmaFists:
 	attackcanceler
