@@ -8698,12 +8698,6 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
         }
         return;
-    case VARIOUS_JUMP_IF_SPECIES:
-        if (gBattleMons[gActiveBattler].species == T1_READ_16(gBattlescriptCurrInstr + 3))
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
-        else
-            gBattlescriptCurrInstr += 9;
-        return;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
@@ -8983,6 +8977,18 @@ static void Cmd_various(void)
         for (i = 0; i < gBattlersCount; i++)
             gStatuses4[i] |= STATUS4_PLASMA_FISTS;
         break;
+    case VARIOUS_JUMP_IF_SPECIES:
+        if (gBattleMons[gActiveBattler].species == T1_READ_16(gBattlescriptCurrInstr + 3))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+        else
+            gBattlescriptCurrInstr += 9;
+        return;
+    case VARIOUS_JUMP_IF_PROTECTED:
+        if (IS_BATTLER_PROTECTED(gActiveBattler))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;

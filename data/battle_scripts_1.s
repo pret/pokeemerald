@@ -394,7 +394,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHyperspaceFury          @ EFFECT_HYPERSPACE_FURY
 
 BattleScript_EffectHyperspaceFury:
-	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectAttackerDefenseDownHit
+	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHyperspaceFuryUnbound
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA, BattleScript_ButHoopaCantUseIt
 	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
 	waitmessage B_WAIT_TIME_LONG
@@ -403,6 +403,78 @@ BattleScript_ButHoopaCantUseIt:
 	printstring STRINGID_BUTHOOPACANTUSEIT
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+BattleScript_EffectHyperspaceFuryUnbound:
+	attackcanceler
+	jumpifprotected BS_TARGET, BattleScript_HyperspaceFuryBrokeThroughProtection
+	argumenttomoveeffect
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET, FALSE, NULL
+	swapattackerwithtarget @ to make gStatDownStringIds down below print the right battler
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_HyperspaceFuryTargetDefenseCantGoLower
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget @ restore the battlers, just in case
+	goto BattleScript_MoveEnd
+
+BattleScript_HyperspaceFuryBrokeThroughProtection::
+	argumenttomoveeffect
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_LONG
+	printstring STRINGID_BROKETHROUGHPROTECTION
+	waitmessage B_WAIT_TIME_LONG
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET, FALSE, NULL
+	swapattackerwithtarget @ to make gStatDownStringIds down below print the right battler
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_HyperspaceFuryTargetDefenseCantGoLower
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget @ restore the battlers, just in case
+	goto BattleScript_MoveEnd
+	return
+
+BattleScript_HyperspaceFuryTargetDefenseCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage B_WAIT_TIME_LONG
+	return
 
 BattleScript_EffectPlasmaFists:
 	attackcanceler
