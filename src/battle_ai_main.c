@@ -1530,7 +1530,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_RECYCLE:
-            if (gBattleStruct->usedHeldItems[battlerAtk] == 0 || gBattleMons[battlerAtk].item != 0)
+            if (GetUsedHeldItem(battlerAtk) == 0 || gBattleMons[battlerAtk].item != 0)
                 score -= 10;
             break;
         case EFFECT_IMPRISON:
@@ -1951,7 +1951,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_BELCH:
-            if (ItemId_GetPocket(gBattleStruct->usedHeldItems[battlerAtk]) != POCKET_BERRIES)
+            if (ItemId_GetPocket(GetUsedHeldItem(battlerAtk)) != POCKET_BERRIES)
                 score -= 10; // attacker has not consumed a berry
             break;
         case EFFECT_YAWN:
@@ -4097,9 +4097,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 3;
         break;
     case EFFECT_RECYCLE:
-        if (gBattleStruct->usedHeldItems[battlerAtk] != ITEM_NONE)
+        if (GetUsedHeldItem(battlerAtk) != ITEM_NONE)
             score++;
-        if (IsRecycleEncouragedItem(gBattleStruct->usedHeldItems[battlerAtk]))
+        if (IsRecycleEncouragedItem(GetUsedHeldItem(battlerAtk)))
             score++;
         break;
     case EFFECT_BRICK_BREAK:
