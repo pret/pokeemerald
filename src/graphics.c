@@ -41,6 +41,15 @@ const u32 gBattleAnimSpritePal_MegaParticles[] = INCBIN_U32("graphics/battle_ani
 const u32 gBattleAnimSpriteGfx_MegaSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/mega_symbol.4bpp.lz");
 const u32 gBattleAnimSpritePal_MegaSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/mega_symbol.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_AlphaSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/alpha_symbol.4bpp.lz");
+const u32 gBattleAnimSpritePal_AlphaSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/alpha_symbol.gbapal.lz");
+
+const u32 gBattleAnimSpriteGfx_OmegaSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/omega_symbol.4bpp.lz");
+const u32 gBattleAnimSpritePal_OmegaSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/omega_symbol.gbapal.lz");
+
+const u32 gBattleAnimSpriteGfx_PrimalParticles[] = INCBIN_U32("graphics/battle_anims/sprites/primal_particles.4bpp.lz");
+const u32 gBattleAnimSpritePal_PrimalParticles[] = INCBIN_U32("graphics/battle_anims/sprites/primal_particles.gbapal.lz");
+
 const u32 gBattleAnimSpriteGfx_FlashCannonBall[] = INCBIN_U32("graphics/battle_anims/sprites/flash_cannon_ball.4bpp.lz");
 const u32 gBattleAnimSpritePal_FlashCannonBall[] = INCBIN_U32("graphics/battle_anims/sprites/flash_cannon_ball.gbapal.lz");
 

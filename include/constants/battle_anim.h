@@ -391,6 +391,9 @@
 #define ANIM_TAG_DREEPY                     (ANIM_SPRITES_START + 379)
 #define ANIM_TAG_ICE_ROCK_SINGLE            (ANIM_SPRITES_START + 380)
 #define ANIM_TAG_STONE_PILLAR_MULTI         (ANIM_SPRITES_START + 381)
+#define ANIM_TAG_ALPHA_SYMBOL               (ANIM_SPRITES_START + 382)
+#define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 383)
+#define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -525,6 +528,7 @@
 #define B_ANIM_TOTEM_FLARE              28 // Totem boosts aura flare
 #define B_ANIM_GULP_MISSILE             29
 #define B_ANIM_STRONG_WINDS             30
+#define B_ANIM_PRIMAL_REVERSION         31
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
