@@ -9701,7 +9701,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIT_IN_SUBSTITUTE,
         .split = SPLIT_PHYSICAL,
-        .argument = MOVE_EFFECT_FEINT,
     },
 
     [MOVE_SHORE_UP] =

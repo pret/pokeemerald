@@ -401,5 +401,6 @@ extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 extern const u8 BattleScript_BlockedByPrimalWeatherEnd3[];
 extern const u8 BattleScript_BlockedByPrimalWeatherRet[];
 extern const u8 BattleScript_PrimalReversion[];
+extern const u8 BattleScript_HyperspaceFuryRemoveProtect[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
