@@ -211,7 +211,7 @@
 #define EXT_CTRL_CODE_SHADOW                 0x03
 #define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 0x04
 #define EXT_CTRL_CODE_PALETTE                0x05
-#define EXT_CTRL_CODE_SIZE                   0x06
+#define EXT_CTRL_CODE_FONT                   0x06
 #define EXT_CTRL_CODE_RESET_SIZE             0x07
 #define EXT_CTRL_CODE_PAUSE                  0x08
 #define EXT_CTRL_CODE_PAUSE_UNTIL_PRESS      0x09
