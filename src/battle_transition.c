@@ -80,8 +80,8 @@ struct RectangularSpiralLine
     u8 state;
     s16 position;
     u8 moveIdx;
-    s16 skipPosition;
-    u8 field_8;
+    s16 reboundPosition;
+    bool8 outward;
 };
 
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
@@ -227,8 +227,8 @@ static bool8 FrontierLogoWiggle_Init(struct Task *task);
 static bool8 FrontierLogoWiggle_SetGfx(struct Task *task);
 static bool8 FrontierLogoWave_Init(struct Task *task);
 static bool8 FrontierLogoWave_SetGfx(struct Task *task);
-static bool8 FrontierLogoWave_Func3(struct Task *task);
-static bool8 FrontierLogoWave_Func4(struct Task *task);
+static bool8 FrontierLogoWave_InitScanline(struct Task *task);
+static bool8 FrontierLogoWave_Main(struct Task *task);
 static bool8 Rayquaza_Init(struct Task *task);
 static bool8 Rayquaza_SetGfx(struct Task *task);
 static bool8 Rayquaza_PaletteFlash(struct Task *task);
@@ -241,13 +241,13 @@ static bool8 FrontierSquares_Draw(struct Task *task);
 static bool8 FrontierSquares_Shrink(struct Task *task);
 static bool8 FrontierSquares_End(struct Task *task);
 static bool8 FrontierSquaresSpiral_Init(struct Task *task);
-static bool8 FrontierSquaresSpiral_Func2(struct Task *task);
-static bool8 FrontierSquaresSpiral_Func3(struct Task *task);
-static bool8 FrontierSquaresSpiral_Func4(struct Task *task);
+static bool8 FrontierSquaresSpiral_Outward(struct Task *task);
+static bool8 FrontierSquaresSpiral_SetBlack(struct Task *task);
+static bool8 FrontierSquaresSpiral_Inward(struct Task *task);
 static bool8 FrontierSquaresScroll_Init(struct Task *task);
-static bool8 FrontierSquaresScroll_Func2(struct Task *task);
-static bool8 FrontierSquaresScroll_Func3(struct Task *task);
-static bool8 FrontierSquaresScroll_Func4(struct Task *task);
+static bool8 FrontierSquaresScroll_Draw(struct Task *task);
+static bool8 FrontierSquaresScroll_SetBlack(struct Task *task);
+static bool8 FrontierSquaresScroll_Erase(struct Task *task);
 static bool8 FrontierSquaresScroll_End(struct Task *task);
 static bool8 Mugshot_Init(struct Task *task);
 static bool8 Mugshot_SetGfx(struct Task *task);
@@ -625,52 +625,73 @@ static const TransitionStateFunc sRectangularSpiral_Funcs[] =
 };
 
 #define SPIRAL_END (-1)
-#define SPIRAL_SKIP (-2)
+#define SPIRAL_REBOUND (-2)
 
-static const s16 gUnknown_085C8C90[] = {1, 27, 275, SPIRAL_END};
-static const s16 gUnknown_085C8C98[] = {2, 486, SPIRAL_END};
-static const s16 gUnknown_085C8C9E[] = {3, 262, SPIRAL_END};
-static const s16 gUnknown_085C8CA4[] = {4, 507, SPIRAL_SKIP};
+// Note that the directions are inverted for the lines originating at the bottom.
+// i.e. MOVE_RIGHT is a right move for the top lines and a left move for the inverted bottom lines.
+enum {
+    MOVE_RIGHT = 1,
+    MOVE_LEFT,
+    MOVE_UP,
+    MOVE_DOWN,
+};
 
-static const s16 gUnknown_085C8CAA[] = {1, 213, SPIRAL_END};
-static const s16 gUnknown_085C8CB0[] = {2, 548, SPIRAL_SKIP};
-static const s16 gUnknown_085C8CB6[] = {3, 196, SPIRAL_END};
-static const s16 gUnknown_085C8CBC[] = {4, 573, 309, SPIRAL_END};
+// Offsets of the movement data for spiraling in either direction.
+#define SPIRAL_INWARD_START  0
+#define SPIRAL_INWARD_END    3
+#define SPIRAL_OUTWARD_START 4
+#define SPIRAL_OUTWARD_END   7
 
-static const s16 gUnknown_085C8CC4[] = {1, 474, SPIRAL_END};
-static const s16 gUnknown_085C8CCA[] = {2, 295, 32, SPIRAL_END};
-static const s16 gUnknown_085C8CD2[] = {3, 58, SPIRAL_END};
-static const s16 gUnknown_085C8CD8[] = {4, 455, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_InwardRight[]  = {MOVE_RIGHT,  27, 275, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_InwardLeft[]   = {MOVE_LEFT,  486, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_InwardUp[]     = {MOVE_UP,    262, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_InwardDown[]   = {MOVE_DOWN,  507, SPIRAL_REBOUND};
 
-static const s16 gUnknown_085C8CDE[] = {1, 540, SPIRAL_END};
-static const s16 gUnknown_085C8CE4[] = {2, 229, SPIRAL_END};
-static const s16 gUnknown_085C8CEA[] = {3, 244, 28, SPIRAL_END};
-static const s16 gUnknown_085C8CF2[] = {4, 517, SPIRAL_END};
+static const s16 sRectangularSpiral_Minor_InwardRight[]  = {MOVE_RIGHT, 213, SPIRAL_END};
+static const s16 sRectangularSpiral_Minor_InwardLeft[]   = {MOVE_LEFT,  548, SPIRAL_REBOUND};
+static const s16 sRectangularSpiral_Minor_InwardUp[]     = {MOVE_UP,    196, SPIRAL_END};
+static const s16 sRectangularSpiral_Minor_InwardDown[]   = {MOVE_DOWN,  573, 309, SPIRAL_END};
+
+static const s16 sRectangularSpiral_Minor_OutwardRight[] = {MOVE_RIGHT, 474, SPIRAL_END};
+static const s16 sRectangularSpiral_Minor_OutwardLeft[]  = {MOVE_LEFT,  295, 32, SPIRAL_END};
+static const s16 sRectangularSpiral_Minor_OutwardUp[]    = {MOVE_UP,     58, SPIRAL_END};
+static const s16 sRectangularSpiral_Minor_OutwardDown[]  = {MOVE_DOWN,  455, SPIRAL_END};
+
+static const s16 sRectangularSpiral_Major_OutwardRight[] = {MOVE_RIGHT, 540, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_OutwardLeft[]  = {MOVE_LEFT,  229, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_OutwardUp[]    = {MOVE_UP,    244, 28, SPIRAL_END};
+static const s16 sRectangularSpiral_Major_OutwardDown[]  = {MOVE_DOWN,  517, SPIRAL_END};
 
 // Move data for spiral lines starting in the top left / bottom right
 static const s16 *const sRectangularSpiral_MoveDataTable_MajorDiagonal[] =
 {
-    gUnknown_085C8C90,
-    gUnknown_085C8CA4,
-    gUnknown_085C8C98,
-    gUnknown_085C8C9E,
-    gUnknown_085C8CEA,
-    gUnknown_085C8CE4,
-    gUnknown_085C8CF2,
-    gUnknown_085C8CDE
+    [SPIRAL_INWARD_START] =
+    sRectangularSpiral_Major_InwardRight,
+    sRectangularSpiral_Major_InwardDown,
+    sRectangularSpiral_Major_InwardLeft,
+    sRectangularSpiral_Major_InwardUp,
+
+    [SPIRAL_OUTWARD_START] =
+    sRectangularSpiral_Major_OutwardUp,
+    sRectangularSpiral_Major_OutwardLeft,
+    sRectangularSpiral_Major_OutwardDown,
+    sRectangularSpiral_Major_OutwardRight
 };
 
 // Move data for spiral lines starting in the top right / bottom left
 static const s16 *const sRectangularSpiral_MoveDataTable_MinorDiagonal[] =
 {
-    gUnknown_085C8CBC,
-    gUnknown_085C8CB0,
-    gUnknown_085C8CB6,
-    gUnknown_085C8CAA,
-    gUnknown_085C8CCA,
-    gUnknown_085C8CD8,
-    gUnknown_085C8CC4,
-    gUnknown_085C8CD2
+    [SPIRAL_INWARD_START] =
+    sRectangularSpiral_Minor_InwardDown,
+    sRectangularSpiral_Minor_InwardLeft,
+    sRectangularSpiral_Minor_InwardUp,
+    sRectangularSpiral_Minor_InwardRight,
+
+    [SPIRAL_OUTWARD_START] =
+    sRectangularSpiral_Minor_OutwardLeft,
+    sRectangularSpiral_Minor_OutwardDown,
+    sRectangularSpiral_Minor_OutwardRight,
+    sRectangularSpiral_Minor_OutwardUp
 };
 
 static const s16 *const *const sRectangularSpiral_MoveDataTables[] =
@@ -738,7 +759,7 @@ static const TransitionStateFunc sAngledWipes_Funcs[] =
 
 static const s16 sAngledWipes_MoveData[NUM_ANGLED_WIPES][5] =
 {
-// startX          startY          endX             endY            yDirection
+// startX          startY          endX            endY            yDirection
     {56,            0,              0,              DISPLAY_HEIGHT, 0},
     {104,           DISPLAY_HEIGHT, DISPLAY_WIDTH,  88,             1},
     {DISPLAY_WIDTH, 72,             56,             0,              1},
@@ -908,8 +929,8 @@ static const TransitionStateFunc sFrontierLogoWave_Funcs[] =
 {
     FrontierLogoWave_Init,
     FrontierLogoWave_SetGfx,
-    FrontierLogoWave_Func3,
-    FrontierLogoWave_Func4
+    FrontierLogoWave_InitScanline,
+    FrontierLogoWave_Main
 };
 
 static const TransitionStateFunc sFrontierSquares_Funcs[] =
@@ -923,38 +944,54 @@ static const TransitionStateFunc sFrontierSquares_Funcs[] =
 static const TransitionStateFunc sFrontierSquaresSpiral_Funcs[] =
 {
     FrontierSquaresSpiral_Init,
-    FrontierSquaresSpiral_Func2,
-    FrontierSquaresSpiral_Func3,
-    FrontierSquaresSpiral_Func4,
+    FrontierSquaresSpiral_Outward,
+    FrontierSquaresSpiral_SetBlack,
+    FrontierSquaresSpiral_Inward,
     FrontierSquares_End
 };
 
 static const TransitionStateFunc sFrontierSquaresScroll_Funcs[] =
 {
     FrontierSquaresScroll_Init,
-    FrontierSquaresScroll_Func2,
-    FrontierSquaresScroll_Func3,
-    FrontierSquaresScroll_Func4,
+    FrontierSquaresScroll_Draw,
+    FrontierSquaresScroll_SetBlack,
+    FrontierSquaresScroll_Erase,
     FrontierSquaresScroll_End
 };
 
-static const u8 gUnknown_085C9A30[] = {
-    0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22,
-    0x1b, 0x14, 0x0d, 0x06, 0x05, 0x04, 0x03,
-    0x02, 0x01, 0x00, 0x07, 0x0e, 0x15, 0x16,
-    0x17, 0x18, 0x19, 0x1a, 0x13, 0x0c, 0x0b,
-    0x0a, 0x09, 0x08, 0x0f, 0x10, 0x11, 0x12
+// Dimensions for the 2 non-scrolling frontier square transitions.
+// SQUARE_SIZE is the same in the scrolling version but it uses
+// more because it needs to show more than can be shown at a single
+// time n-screen.
+#define SQUARE_SIZE 4
+#define MARGIN_SIZE 1 // Squares do not fit evenly across the width, so there is a margin on either side.
+#define NUM_SQUARES_PER_ROW ((DISPLAY_WIDTH - (MARGIN_SIZE * 8 * 2)) / (SQUARE_SIZE * 8))
+#define NUM_SQUARES_PER_COL (DISPLAY_HEIGHT / (SQUARE_SIZE * 8))
+#define NUM_SQUARES         (NUM_SQUARES_PER_ROW * NUM_SQUARES_PER_COL)
+
+// The order in which the squares should appear/disappear to create
+// the spiral effect. Spiraling inward starts with the first element,
+// and spiraling outward starts with the last. The positions are the
+// squares numbered left-to-right top-to-bottom.
+static const u8 sFrontierSquaresSpiral_Positions[NUM_SQUARES] = {
+    28, 29, 30, 31, 32, 33, 34,
+    27, 20, 13,  6,  5,  4,  3,
+     2,  1,  0,  7, 14, 21, 22,
+    23, 24, 25, 26, 19, 12, 11,
+    10,  9,  8, 15, 16, 17, 18
 };
 
-static const u8 gUnknown_085C9A53[] = {
-    0x00, 0x10, 0x29, 0x16, 0x2c, 0x02, 0x2b, 0x15,
-    0x2e, 0x1b, 0x09, 0x30, 0x26, 0x05, 0x39, 0x3b,
-    0x0c, 0x3f, 0x23, 0x1c, 0x0a, 0x35, 0x07, 0x31,
-    0x27, 0x17, 0x37, 0x01, 0x3e, 0x11, 0x3d, 0x1e,
-    0x06, 0x22, 0x0f, 0x33, 0x20, 0x3a, 0x0d, 0x2d,
-    0x25, 0x34, 0x0b, 0x18, 0x3c, 0x13, 0x38, 0x21,
-    0x1d, 0x32, 0x28, 0x36, 0x0e, 0x03, 0x2f, 0x14,
-    0x12, 0x19, 0x04, 0x24, 0x1a, 0x2a, 0x1f, 0x08
+// In the scrolling version the squares appear/disappear in a "random" order
+// dictated by the list below.
+static const u8 sFrontierSquaresScroll_Positions[] = {
+     0, 16, 41, 22, 44,  2, 43, 21,
+    46, 27,  9, 48, 38,  5, 57, 59,
+    12, 63, 35, 28, 10, 53,  7, 49,
+    39, 23, 55,  1, 62, 17, 61, 30,
+     6, 34, 15, 51, 32, 58, 13, 45,
+    37, 52, 11, 24, 60, 19, 56, 33,
+    29, 50, 40, 54, 14,  3, 47, 20,
+    18, 25,  4, 36, 26, 42, 31,  8
 };
 
 //---------------------------
@@ -1036,7 +1073,7 @@ static void Task_BattleTransition(u8 taskId)
 static bool8 Transition_StartIntro(struct Task *task)
 {
     SetWeatherScreenFadeOut();
-    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
+    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, sizeof(gPlttBufferUnfaded));
     if (sTasks_Intro[task->tTransitionId] != NULL)
     {
         CreateTask(sTasks_Intro[task->tTransitionId], 4);
@@ -3158,40 +3195,40 @@ static bool8 RectangularSpiral_Init(struct Task *task)
 
     GetBg0TilesDst(&tilemap, &tileset);
     CpuCopy16(sShrinkingBoxTileset, tileset, 0x20);
-    CpuCopy16(sShrinkingBoxTileset + 0x70, tileset + 0x20, 0x20);
+    CpuCopy16(&sShrinkingBoxTileset[0x70], &tileset[0x20], 0x20);
     CpuFill16(0xF0 << 8, tilemap, BG_SCREEN_SIZE);
     LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
 
     task->data[3] = 1;
     task->tState++;
 
-    // Top left
-    sRectangularSpiralLines[0].state = 0;
+    // Line starting in top left
+    sRectangularSpiralLines[0].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[0].position = -1;
     sRectangularSpiralLines[0].moveIdx = 1;
-    sRectangularSpiralLines[0].skipPosition = 308;
-    sRectangularSpiralLines[0].field_8 = 0;
+    sRectangularSpiralLines[0].reboundPosition = 308;
+    sRectangularSpiralLines[0].outward = FALSE;
 
-    // Bottom right
-    sRectangularSpiralLines[1].state = 0;
+    // Line starting in bottom right
+    sRectangularSpiralLines[1].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[1].position = -1;
     sRectangularSpiralLines[1].moveIdx = 1;
-    sRectangularSpiralLines[1].skipPosition = 308;
-    sRectangularSpiralLines[1].field_8 = 0;
+    sRectangularSpiralLines[1].reboundPosition = 308;
+    sRectangularSpiralLines[1].outward = FALSE;
 
-    // Top right
-    sRectangularSpiralLines[2].state = 0;
+    // Line starting in top right
+    sRectangularSpiralLines[2].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[2].position = -3;
     sRectangularSpiralLines[2].moveIdx = 1;
-    sRectangularSpiralLines[2].skipPosition = 307;
-    sRectangularSpiralLines[2].field_8 = 0;
+    sRectangularSpiralLines[2].reboundPosition = 307;
+    sRectangularSpiralLines[2].outward = FALSE;
 
-    // Bottom left
-    sRectangularSpiralLines[3].state = 0;
+    // Line starting in bottom left
+    sRectangularSpiralLines[3].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[3].position = -3;
     sRectangularSpiralLines[3].moveIdx = 1;
-    sRectangularSpiralLines[3].skipPosition = 307;
-    sRectangularSpiralLines[3].field_8 = 0;
+    sRectangularSpiralLines[3].reboundPosition = 307;
+    sRectangularSpiralLines[3].outward = FALSE;
 
     return FALSE;
 }
@@ -3219,7 +3256,7 @@ static bool8 RectangularSpiral_Main(struct Task *task)
                 done = FALSE;
                 position = sRectangularSpiralLines[j].position;
                 
-                // Invert position for the two bottom lines
+                // Invert position for the two lines that start at the bottom.
                 if ((j % 2) == 1)
                     position = 637 - position;
 
@@ -3248,6 +3285,10 @@ static bool8 RectangularSpiral_End(struct Task *task)
 static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, struct RectangularSpiralLine *line)
 {
     const s16 *moveData = moveDataTable[line->state];
+    
+    // Has spiral finished?
+    // Note that most move data arrays endsin SPIRAL_END but it is
+    // only ever reached on the final array of spiraling outward.
     if (moveData[line->moveIdx] == SPIRAL_END)
         return FALSE;
 
@@ -3257,18 +3298,22 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
     sDebug_RectangularSpiralData = moveData[2];
     sDebug_RectangularSpiralData = moveData[3];
 
+    // Note that for the two lines originating at the bottom the 
+    // position is inverted, so the directions are flipped.
+    // i.e. position += 1 is right for the top lines and left 
+    // for their inverted partners on the bottom.
     switch (moveData[0])
     {
-    case 1:
+    case MOVE_RIGHT:
         line->position += 1;
         break;
-    case 2:
+    case MOVE_LEFT:
         line->position -= 1;
         break;
-    case 3:
+    case MOVE_UP:
         line->position -= 32;
         break;
-    case 4:
+    case MOVE_DOWN:
         line->position += 32;
         break;
     }
@@ -3278,31 +3323,40 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
     if (line->position >= 640 || moveData[line->moveIdx] == SPIRAL_END)
         return FALSE;
 
-    if (line->field_8 == 0 && moveData[line->moveIdx] == SPIRAL_SKIP)
+    if (!line->outward && moveData[line->moveIdx] == SPIRAL_REBOUND)
     {
-        line->field_8 = 1;
+        // Line has reached the final point of spiraling inward.
+        // Time to flip and start spiraling outward.
+        line->outward = TRUE;
         line->moveIdx = 1;
-        line->position = line->skipPosition;
-        line->state = 4;
+        line->position = line->reboundPosition;
+        line->state = SPIRAL_OUTWARD_START;
     }
 
+    // Reached move target, advance to next movement.
     if (line->position == moveData[line->moveIdx])
     {
         line->state++;
-        if (line->field_8 == 1)
+        if (line->outward == TRUE)
         {
-            if (line->state > 7)
+            if (line->state > SPIRAL_OUTWARD_END)
             {
+                // Still spiraling outward, loop back to the first state
+                // but use the second set of move targets.
+                // For example, the 28 in sRectangularSpiral_Major_OutwardUp
                 line->moveIdx++;
-                line->state = 4;
+                line->state = SPIRAL_OUTWARD_START;
             }
         }
         else
         {
-            if (line->state > 3)
+            if (line->state > SPIRAL_INWARD_END)
             {
+                // Still spiraling inward, loop back to the first state
+                // but use the second set of move targets.
+                // For example, the 275 in sRectangularSpiral_Major_InwardRight
                 line->moveIdx++;
-                line->state = 0;
+                line->state = SPIRAL_INWARD_START;
             }
         }
     }
@@ -4181,6 +4235,7 @@ static bool8 UpdateBlackWipe(s16 *data, bool8 xExact, bool8 yExact)
 // B_TRANSITION_FRONTIER_LOGO_WIGGLE
 //-----------------------------------
 
+#define tSinIndex  data[4]
 #define tAmplitude data[5]
 
 static bool8 FrontierLogoWiggle_Init(struct Task *task)
@@ -4203,7 +4258,7 @@ static bool8 FrontierLogoWiggle_SetGfx(struct Task *task)
 
     GetBg0TilesDst(&tilemap, &tileset);
     LZ77UnCompVram(sFrontierLogo_Tilemap, tilemap);
-    SetSinWave(gScanlineEffectRegBuffers[0], 0, task->data[4], 0x84, task->tAmplitude, DISPLAY_HEIGHT);
+    SetSinWave(gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude, DISPLAY_HEIGHT);
 
     task->tState++;
     return TRUE;
@@ -4214,6 +4269,7 @@ static void Task_FrontierLogoWiggle(u8 taskId)
     while (sFrontierLogoWiggle_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
+#undef tSinIndex
 #undef tAmplitude
 
 //---------------------------------
@@ -4270,7 +4326,7 @@ static bool8 FrontierLogoWave_SetGfx(struct Task *task)
     return TRUE;
 }
 
-static bool8 FrontierLogoWave_Func3(struct Task *task)
+static bool8 FrontierLogoWave_InitScanline(struct Task *task)
 {
     u8 i;
 
@@ -4285,7 +4341,7 @@ static bool8 FrontierLogoWave_Func3(struct Task *task)
     return TRUE;
 }
 
-static bool8 FrontierLogoWave_Func4(struct Task *task)
+static bool8 FrontierLogoWave_Main(struct Task *task)
 {
     u8 i;
     u16 sinVal, amplitude, sinSpread;
@@ -4300,8 +4356,8 @@ static bool8 FrontierLogoWave_Func4(struct Task *task)
 
     if (task->tTimer >= 70)
     {
-        // Decrease amount logo moves up and down
-        // until it rests in the middle of the screen.
+        // Decrease amount of logo movement and distortion
+        // until it rests normally in the middle of the screen.
         if (task->tAmplitudeVal - 384 >= 0)
             task->tAmplitudeVal -= 384;
         else
@@ -4319,7 +4375,7 @@ static bool8 FrontierLogoWave_Func4(struct Task *task)
         sTransitionData->BLDALPHA = BLDALPHA_BLEND(task->tBlendTarget2, task->tBlendTarget1);
     }
 
-    // Move logo up and down
+    // Move logo up and down and distort it
     for (i = 0; i < DISPLAY_HEIGHT; i++, sinVal += sinSpread)
     {
         s16 index = sinVal / 256;
@@ -4369,10 +4425,6 @@ static void HBlankCB_FrontierLogoWave(void)
 // and B_TRANSITION_FRONTIER_SQUARES_SPIRAL
 //----------------------------------------------------------------------
 
-#define NUM_SQUARES_PER_ROW 7
-#define NUM_SQUARES_PER_COL 5
-#define SQUARE_SIZE 4
-
 #define tPosX             data[2]
 #define tPosY             data[3]
 #define tRowPos           data[4]
@@ -4402,13 +4454,13 @@ static bool8 FrontierSquares_Init(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     LZ77UnCompVram(sFrontierSquares_FilledBg_Tileset, tileset);
 
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
-    FillBgTilemapBufferRect(0, 1, 0, 0, 1, 0x20, 0xF);
-    FillBgTilemapBufferRect(0, 1, 0x1D, 0, 1, 0x20, 0xF);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
+    FillBgTilemapBufferRect(0, 1, 0, 0, MARGIN_SIZE, 32, 15);
+    FillBgTilemapBufferRect(0, 1, 30 - MARGIN_SIZE, 0, MARGIN_SIZE, 32, 15);
     CopyBgTilemapBufferToVram(0);
     LoadPalette(sFrontierSquares_Palette, 0xF0, sizeof(sFrontierSquares_Palette));
 
-    task->tPosX = 1;
+    task->tPosX = MARGIN_SIZE;
     task->tPosY = 0;
     task->tRowPos = 0;
     task->tShrinkDelay = 10;
@@ -4429,7 +4481,7 @@ static bool8 FrontierSquares_Draw(struct Task *task)
     task->tPosX += SQUARE_SIZE;
     if (++task->tRowPos == NUM_SQUARES_PER_ROW)
     {
-        task->tPosX = 1;
+        task->tPosX = MARGIN_SIZE;
         task->tPosY += SQUARE_SIZE;
         task->tRowPos = 0;
         if (task->tPosY >= NUM_SQUARES_PER_COL * SQUARE_SIZE)
@@ -4452,8 +4504,8 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
         case 0:
             for (i = 250; i < 255; i++)
             {
-                gPlttBufferUnfaded[i] = 0;
-                gPlttBufferFaded[i] = 0;
+                gPlttBufferUnfaded[i] = RGB_BLACK;
+                gPlttBufferFaded[i] = RGB_BLACK;
             }
             break;
         case 1:
@@ -4467,7 +4519,7 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
             LZ77UnCompVram(sFrontierSquares_Shrink2_Tileset, tileset);
             break;
         default:
-            FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
+            FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
             CopyBgTilemapBufferToVram(0);
             task->tState++;
             return FALSE;
@@ -4487,6 +4539,9 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
 #undef tShrinkDelayTimer
 #undef tShrinkDelay
 
+#define tSquareNum data[2]
+#define tFadeFlag  data[3]
+
 static bool8 FrontierSquaresSpiral_Init(struct Task *task)
 {
     u16 *tilemap, *tileset;
@@ -4494,83 +4549,81 @@ static bool8 FrontierSquaresSpiral_Init(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     LZ77UnCompVram(sFrontierSquares_FilledBg_Tileset, tileset);
 
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
-    FillBgTilemapBufferRect(0, 1, 0, 0, 1, 0x20, 0xF);
-    FillBgTilemapBufferRect(0, 1, 0x1D, 0, 1, 0x20, 0xF);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
+    FillBgTilemapBufferRect(0, 1, 0, 0, MARGIN_SIZE, 32, 15);
+    FillBgTilemapBufferRect(0, 1, 30 - MARGIN_SIZE, 0, MARGIN_SIZE, 32, 15);
     CopyBgTilemapBufferToVram(0);
     LoadPalette(sFrontierSquares_Palette, 0xE0, sizeof(sFrontierSquares_Palette));
     LoadPalette(sFrontierSquares_Palette, 0xF0, sizeof(sFrontierSquares_Palette));
-    BlendPalette(0xE0, 16, 8, 0);
+    BlendPalette(0xE0, 16, 8, RGB_BLACK);
 
-    task->data[2] = 34;
-    task->data[3] = 0;
+    task->tSquareNum = NUM_SQUARES - 1;
+    task->tFadeFlag = 0;
 
     task->tState++;
     return FALSE;
 }
 
-static bool8 FrontierSquaresSpiral_Func2(struct Task *task)
+static bool8 FrontierSquaresSpiral_Outward(struct Task *task)
 {
-    u8 var = gUnknown_085C9A30[task->data[2]];
-    u8 varMod = var % 7;
-    u8 varDiv = var / 7;
-    CopyRectToBgTilemapBufferRect(0, &sFrontierSquares_Tilemap, 0, 0, 4, 4, 4 * varMod + 1, 4 * varDiv, 4, 4, 0xF, 0, 0);
+    u8 pos = sFrontierSquaresSpiral_Positions[task->tSquareNum];
+    u8 x = pos % NUM_SQUARES_PER_ROW;
+    u8 y = pos / NUM_SQUARES_PER_ROW;
+    CopyRectToBgTilemapBufferRect(0, sFrontierSquares_Tilemap, 0, 0,
+                                  SQUARE_SIZE, SQUARE_SIZE,
+                                  SQUARE_SIZE * x + MARGIN_SIZE, SQUARE_SIZE * y,
+                                  SQUARE_SIZE, SQUARE_SIZE,
+                                  15, 0, 0);
     CopyBgTilemapBufferToVram(0);
 
-    if (--task->data[2] < 0)
+    if (--task->tSquareNum < 0)
         task->tState++;
     return FALSE;
 }
 
-static bool8 FrontierSquaresSpiral_Func3(struct Task *task)
+// Now that the overworld is completely covered by the squares,
+// set it to black so it's not revealed when the squares are removed.
+static bool8 FrontierSquaresSpiral_SetBlack(struct Task *task)
 {
-    BlendPalette(0xE0, 16, 3, 0);
+    BlendPalette(0xE0, 16, 3, RGB_BLACK);
     BlendPalettes(PALETTES_ALL & ~(1 << 15 | 1 << 14), 16, RGB_BLACK);
 
-    task->data[2] = 0;
-    task->data[3] = 0;
+    task->tSquareNum = 0;
+    task->tFadeFlag = 0;
 
     task->tState++;
     return FALSE;
 }
 
-static bool8 FrontierSquaresSpiral_Func4(struct Task *task)
+// Spiral inward erasing the squares
+static bool8 FrontierSquaresSpiral_Inward(struct Task *task)
 {
-    if ((task->data[3] ^= 1))
+    // Each square is faded first, then the one that was faded last move is erased.
+    if (task->tFadeFlag ^= 1)
     {
-        CopyRectToBgTilemapBufferRect(
-        0,
-        sFrontierSquares_Tilemap,
-        0,
-        0,
-        4,
-        4,
-        4 * (gUnknown_085C9A30[task->data[2]] % 7) + 1,
-        4 * (gUnknown_085C9A30[task->data[2]] / 7),
-        4,
-        4,
-        0xE,
-        0,
-        0);
+        // Shade square
+        CopyRectToBgTilemapBufferRect(0, sFrontierSquares_Tilemap, 0, 0,
+                                      SQUARE_SIZE, SQUARE_SIZE,
+                                      SQUARE_SIZE * (sFrontierSquaresSpiral_Positions[task->tSquareNum] % NUM_SQUARES_PER_ROW) + MARGIN_SIZE,
+                                      SQUARE_SIZE * (sFrontierSquaresSpiral_Positions[task->tSquareNum] / NUM_SQUARES_PER_ROW),
+                                      SQUARE_SIZE, SQUARE_SIZE,
+                                      14, 0, 0);
     }
     else
     {
-        if (task->data[2] > 0)
+        if (task->tSquareNum > 0)
         {
-            FillBgTilemapBufferRect(
-            0,
-            1,
-            4 * (gUnknown_085C9A30[task->data[2] - 1] % 7) + 1,
-            4 * (gUnknown_085C9A30[task->data[2] - 1] / 7),
-            4,
-            4,
-            0xF);
+            // Erase square
+            FillBgTilemapBufferRect(0, 1,
+                                    SQUARE_SIZE * (sFrontierSquaresSpiral_Positions[task->tSquareNum - 1] % NUM_SQUARES_PER_ROW) + MARGIN_SIZE,
+                                    SQUARE_SIZE * (sFrontierSquaresSpiral_Positions[task->tSquareNum - 1] / NUM_SQUARES_PER_ROW),
+                                    SQUARE_SIZE, SQUARE_SIZE,
+                                    15);
         }
-
-        task->data[2]++;
+        task->tSquareNum++;
     }
 
-    if (task->data[2] > 34)
+    if (task->tSquareNum >= NUM_SQUARES)
         task->tState++;
 
     CopyBgTilemapBufferToVram(0);
@@ -4579,26 +4632,30 @@ static bool8 FrontierSquaresSpiral_Func4(struct Task *task)
 
 static bool8 FrontierSquares_End(struct Task *task)
 {
-    FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
     BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
     DestroyTask(FindTaskIdByFunc(task->func));
     return FALSE;
 }
 
-// sub task for phase2 32
-#define tSub32_X_delta  data[0]
-#define tSub32_Y_delta  data[1]
-#define tSub32_Bool     data[2]
+#undef tSquareNum
+#undef tFadeFlag
 
-static void sub_814ABE4(u8 taskId)
+#define tScrollXDir       data[0]
+#define tScrollYDir       data[1]
+#define tScrollUpdateFlag data[2]
+
+#define tSquareNum        data[2]
+
+static void Task_ScrollBg(u8 taskId)
 {
-    if (!(gTasks[taskId].tSub32_Bool ^= 1))
+    if (!(gTasks[taskId].tScrollUpdateFlag ^= 1))
     {
         SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
         SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
-        gBattle_BG0_X += gTasks[taskId].tSub32_X_delta;
-        gBattle_BG0_Y += gTasks[taskId].tSub32_Y_delta;
+        gBattle_BG0_X += gTasks[taskId].tScrollXDir;
+        gBattle_BG0_Y += gTasks[taskId].tScrollYDir;
     }
 }
 
@@ -4609,7 +4666,7 @@ static bool8 FrontierSquaresScroll_Init(struct Task *task)
 
     GetBg0TilesDst(&tilemap, &tileset);
     LZ77UnCompVram(sFrontierSquares_FilledBg_Tileset, tileset);
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
     LoadPalette(sFrontierSquares_Palette, 0xF0, sizeof(sFrontierSquares_Palette));
 
@@ -4618,25 +4675,27 @@ static bool8 FrontierSquaresScroll_Init(struct Task *task)
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
 
-    task->data[2] = 0;
-    taskId = CreateTask(sub_814ABE4, 1);
+    task->tSquareNum = 0;
+
+    // Start scrolling bg in a random direction.
+    taskId = CreateTask(Task_ScrollBg, 1);
     switch (Random() % 4)
     {
-    case 0:
-        gTasks[taskId].tSub32_X_delta = 1;
-        gTasks[taskId].tSub32_Y_delta = 1;
+    case 0: // Down/right
+        gTasks[taskId].tScrollXDir = 1;
+        gTasks[taskId].tScrollYDir = 1;
         break;
-    case 1:
-        gTasks[taskId].tSub32_X_delta = -1;
-        gTasks[taskId].tSub32_Y_delta = -1;
+    case 1: // Up/left
+        gTasks[taskId].tScrollXDir = -1;
+        gTasks[taskId].tScrollYDir = -1;
         break;
-    case 2:
-        gTasks[taskId].tSub32_X_delta = 1;
-        gTasks[taskId].tSub32_Y_delta = -1;
+    case 2: // Up/right
+        gTasks[taskId].tScrollXDir = 1;
+        gTasks[taskId].tScrollYDir = -1;
         break;
-    default:
-        gTasks[taskId].tSub32_X_delta = -1;
-        gTasks[taskId].tSub32_Y_delta = 1;
+    default: // Down/left
+        gTasks[taskId].tScrollXDir = -1;
+        gTasks[taskId].tScrollYDir = 1;
         break;
     }
 
@@ -4644,64 +4703,56 @@ static bool8 FrontierSquaresScroll_Init(struct Task *task)
     return FALSE;
 }
 
-static bool8 FrontierSquaresScroll_Func2(struct Task *task)
+static bool8 FrontierSquaresScroll_Draw(struct Task *task)
 {
-    u8 var = gUnknown_085C9A53[task->data[2]];
-    u8 varDiv = var / 8;
-    u8 varAnd = var & 7;
+    u8 pos = sFrontierSquaresScroll_Positions[task->tSquareNum];
+    u8 x = pos / (NUM_SQUARES_PER_ROW + 1); // +1 because during scroll an additional column covers the margin.
+    u8 y = pos % (NUM_SQUARES_PER_ROW + 1);
 
-    CopyRectToBgTilemapBufferRect(
-    0,
-    &sFrontierSquares_Tilemap,
-    0,
-    0,
-    4,
-    4,
-    4 * varDiv + 1,
-    4 * varAnd,
-    4,
-    4,
-    0xF,
-    0,
-    0);
+    CopyRectToBgTilemapBufferRect(0, &sFrontierSquares_Tilemap, 0, 0,
+                                  SQUARE_SIZE, SQUARE_SIZE,
+                                  SQUARE_SIZE * x + MARGIN_SIZE, SQUARE_SIZE * y,
+                                  SQUARE_SIZE, SQUARE_SIZE,
+                                  15, 0, 0);
     CopyBgTilemapBufferToVram(0);
 
-    if (++task->data[2] > 63)
+    if (++task->tSquareNum >= (int)ARRAY_COUNT(sFrontierSquaresScroll_Positions))
         task->tState++;
     return 0;
 }
 
-static bool8 FrontierSquaresScroll_Func3(struct Task *task)
+// Now that the overworld is completely covered by the squares,
+// set it to black so it's not revealed when the squares are removed.
+static bool8 FrontierSquaresScroll_SetBlack(struct Task *task)
 {
     BlendPalettes(PALETTES_ALL & ~(1 << 15), 16, RGB_BLACK);
 
-    task->data[2] = 0;
+    task->tSquareNum = 0;
 
     task->tState++;
     return FALSE;
 }
 
-static bool8 FrontierSquaresScroll_Func4(struct Task *task)
+static bool8 FrontierSquaresScroll_Erase(struct Task *task)
 {
-    u8 var = gUnknown_085C9A53[task->data[2]];
-    u8 varDiv = var / 8;
-    u8 varAnd = var % 8;
+    u8 pos = sFrontierSquaresScroll_Positions[task->tSquareNum];
+    u8 x = pos / (NUM_SQUARES_PER_ROW + 1);
+    u8 y = pos % (NUM_SQUARES_PER_ROW + 1);
 
-    FillBgTilemapBufferRect(0, 1, 4 * varDiv + 1, 4 * varAnd, 4, 4, 0xF);
+    FillBgTilemapBufferRect(0, 1,
+                            SQUARE_SIZE * x + MARGIN_SIZE, SQUARE_SIZE * y,
+                            SQUARE_SIZE, SQUARE_SIZE,
+                            15);
     CopyBgTilemapBufferToVram(0);
 
-    if (++task->data[2] > 63)
+    if (++task->tSquareNum >= (int)ARRAY_COUNT(sFrontierSquaresScroll_Positions))
     {
-        DestroyTask(FindTaskIdByFunc(sub_814ABE4));
+        DestroyTask(FindTaskIdByFunc(Task_ScrollBg));
         task->tState++;
     }
 
     return FALSE;
 }
-
-#undef tSub32_X_delta
-#undef tSub32_Y_delta
-#undef tSub32_Bool
 
 static bool8 FrontierSquaresScroll_End(struct Task *task)
 {
@@ -4710,7 +4761,7 @@ static bool8 FrontierSquaresScroll_End(struct Task *task)
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
 
-    FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
     BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
 
@@ -4721,3 +4772,8 @@ static bool8 FrontierSquaresScroll_End(struct Task *task)
 #endif
     return FALSE;
 }
+
+#undef tScrollXDir
+#undef tScrollYDir
+#undef tScrollUpdateFlag
+#undef tSquareNum
