@@ -2792,7 +2792,7 @@ static void SwitchSelectedMons(u8 taskId)
 // returns FALSE if the slot has slid fully offscreen / back onscreen
 static bool8 TryMovePartySlot(s16 x, s16 width, u8 *leftMove, u8 *newX, u8 *newWidth)
 {
-    if ((x + width) < 0)
+    if (x + width < 0)
         return FALSE;
     if (x > 31)
         return FALSE;
@@ -2807,7 +2807,7 @@ static bool8 TryMovePartySlot(s16 x, s16 width, u8 *leftMove, u8 *newX, u8 *newW
     {
         *leftMove = 0;
         *newX = x;
-        if ((x + width) > 31)
+        if (x + width > 31)
             *newWidth = 32 - x;
         else
             *newWidth = width;
@@ -2818,14 +2818,13 @@ static bool8 TryMovePartySlot(s16 x, s16 width, u8 *leftMove, u8 *newX, u8 *newW
 
 static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width, s16 height, s16 dir)
 {
-    // The use of the dimension parameters here is a mess
-    u8 leftMove, newX, newWidth; // leftMove is used as a srcX, newX is used as both x and srcHeight, newWidth is used as both width and destY
+    u8 srcX, newX, newWidth;
 
-    if (TryMovePartySlot(x, width, &leftMove, &newX, &newWidth))
+    if (TryMovePartySlot(x, width, &srcX, &newX, &newWidth))
     {
         FillBgTilemapBufferRect_Palette0(0, 0, newX, y, newWidth, height);
-        if (TryMovePartySlot(x + dir, width, &leftMove, &newX, &newWidth))
-            CopyRectToBgTilemapBufferRect(0, rectSrc, leftMove, 0, width, height, newX, y, newWidth, height, 17, 0, 0);
+        if (TryMovePartySlot(x + dir, width, &srcX, &newX, &newWidth))
+            CopyRectToBgTilemapBufferRect(0, rectSrc, srcX, 0, width, height, newX, y, newWidth, height, 17, 0, 0);
     }
 }
 
