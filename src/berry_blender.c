@@ -2785,7 +2785,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
         }
         break;
     case 2:
-        FullSaveGame();
+        WriteSaveBlock2();
         sBerryBlender->linkPlayAgainState++;
         sBerryBlender->framesToWait = 0;
         break;
@@ -2799,7 +2799,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
     case 4:
         if (IsLinkTaskFinished())
         {
-            if (CheckSaveFile())
+            if (WriteSaveBlock1Sector())
             {
                 sBerryBlender->linkPlayAgainState = 5;
             }
