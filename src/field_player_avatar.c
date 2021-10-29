@@ -1403,7 +1403,7 @@ void SetPlayerInvisibility(bool8 invisible)
 void SetPlayerAvatarFieldMove(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_FIELD_MOVE);
 }
 
 static void SetPlayerAvatarFishing(u8 direction)

@@ -17,6 +17,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -902,15 +903,13 @@ static void CreateCableCarSprites(void)
             {
                 if (rval % 2)
                 {
-                    // Do walking west anim
-                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_WEST);
                     gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].y += 2;
                 }
                 else
                 {
-                    // Do walking east anim
-                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_EAST);
                     gSprites[spriteId].sSameDir = FALSE;
                 }
             }
@@ -918,15 +917,13 @@ static void CreateCableCarSprites(void)
             {
                 if (rval % 2)
                 {
-                    // Do walking east anim
-                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_EAST);
                     gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].y += 2;
                 }
                 else
                 {
-                    // Do walking west anim
-                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_WEST);
                     gSprites[spriteId].sSameDir = FALSE;
                 }
             }
