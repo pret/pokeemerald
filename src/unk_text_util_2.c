@@ -80,7 +80,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                         case EXT_CTRL_CODE_PALETTE:
                             textPrinter->printerTemplate.currentChar++;
                             return 2;
-                        case EXT_CTRL_CODE_SIZE:
+                        case EXT_CTRL_CODE_FONT:
                             subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
                             textPrinter->printerTemplate.currentChar++;
                             return 2;
