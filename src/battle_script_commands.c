@@ -5416,7 +5416,7 @@ static void Cmd_sethealblock(void)
 
 static void Cmd_returnatktoball(void)
 {
-    gActiveBattler = gBattlerAttacker;    
+    gActiveBattler = gBattlerAttacker;
     if (!(gHitMarker & HITMARKER_FAINTED(gActiveBattler)))
     {
         BtlController_EmitReturnMonToBall(0, 0);
