@@ -12290,7 +12290,6 @@ static void Cmd_trygetintimidatetarget(void)
 static void Cmd_switchoutabilities(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    
     if (gBattleMons[gActiveBattler].ability == ABILITY_NEUTRALIZING_GAS)
     {
         gBattleMons[gActiveBattler].ability = ABILITY_NONE;
