@@ -124,8 +124,9 @@ struct LinkStatus
     u32 errors:7;
 };
 
-#define MASTER_HANDSHAKE 0x8FFF
-#define SLAVE_HANDSHAKE  0xB9A0
+#define MASTER_HANDSHAKE  0x8FFF
+#define SLAVE_HANDSHAKE   0xB9A0
+#define EREADER_HANDSHAKE 0xCCD0
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -208,7 +209,7 @@ struct Link
     /* 0x001 */ u8 state;
     /* 0x002 */ u8 localId; // local multi-player ID
     /* 0x003 */ u8 playerCount;
-    /* 0x004 */ u16 tempRecvBuffer[4];
+    /* 0x004 */ u16 handshakeBuffer[MAX_LINK_PLAYERS];
     /* 0x00c */ bool8 receivedNothing;
     /* 0x00d */ s8 serialIntrCounter;
     /* 0x00e */ bool8 handshakeAsMaster;

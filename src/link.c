@@ -2192,30 +2192,26 @@ static bool8 DoHandshake(void)
     {
         REG_SIOMLT_SEND = SLAVE_HANDSHAKE;
     }
-    *(u64 *)gLink.tempRecvBuffer = REG_SIOMLT_RECV;
+    *(u64 *)gLink.handshakeBuffer = REG_SIOMLT_RECV;
     REG_SIOMLT_RECV = 0;
     gLink.handshakeAsMaster = FALSE;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
-        if ((gLink.tempRecvBuffer[i] & ~0x3) == SLAVE_HANDSHAKE || gLink.tempRecvBuffer[i] == MASTER_HANDSHAKE)
+        if ((gLink.handshakeBuffer[i] & ~0x3) == SLAVE_HANDSHAKE || gLink.handshakeBuffer[i] == MASTER_HANDSHAKE)
         {
             playerCount++;
-            if (minRecv > gLink.tempRecvBuffer[i] && gLink.tempRecvBuffer[i] != 0)
-            {
-                minRecv = gLink.tempRecvBuffer[i];
-            }
+            if (minRecv > gLink.handshakeBuffer[i] && gLink.handshakeBuffer[i] != 0)
+                minRecv = gLink.handshakeBuffer[i];
         }
         else
         {
-            if (gLink.tempRecvBuffer[i] != 0xFFFF)
-            {
+            if (gLink.handshakeBuffer[i] != 0xFFFF)
                 playerCount = 0;
-            }
             break;
         }
     }
     gLink.playerCount = playerCount;
-    if (gLink.playerCount > 1 && gLink.playerCount == sHandshakePlayerCount && gLink.tempRecvBuffer[0] == MASTER_HANDSHAKE)
+    if (gLink.playerCount > 1 && gLink.playerCount == sHandshakePlayerCount && gLink.handshakeBuffer[0] == MASTER_HANDSHAKE)
     {
         return TRUE;
     }
