@@ -8990,6 +8990,12 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 9;
         return;
+    case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:
+        if (IsLeafGuardProtected(gActiveBattler))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -11514,9 +11520,9 @@ static void Cmd_recoverbasedonsunlight(void)
         }
         else
         {
-            if (!(gBattleWeather & WEATHER_ANY) || !WEATHER_HAS_EFFECT)
+            if (!(gBattleWeather & WEATHER_ANY) || !WEATHER_HAS_EFFECT || GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
-            else if (IsBattlerWeatherAffected(gBattlerAttacker, WEATHER_SUN_ANY))
+            else if (gBattleWeather & WEATHER_SUN_ANY)
                 gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
             else // not sunny weather
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;

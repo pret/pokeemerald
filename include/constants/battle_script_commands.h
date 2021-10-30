@@ -195,6 +195,7 @@
 #define VARIOUS_APPLY_PLASMA_FISTS              122
 #define VARIOUS_JUMP_IF_SPECIES                 123
 #define VARIOUS_JUMP_IF_WEATHER_AFFECTED        124
+#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    125
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

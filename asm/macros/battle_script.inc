@@ -1989,10 +1989,9 @@
 	goto \jumpptr
 	.endm
 
-	.macro jumpifleafguard jumpptr:req
-	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, 1f
-	jumpifability BS_TARGET, ABILITY_LEAF_GUARD, \jumpptr
-	1:
+	.macro jumpifleafguardprotected battler:req, jumpptr:req
+	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
+	.4byte \jumpptr
 	.endm
 
 	.macro jumpifsafeguard jumpptr:req
