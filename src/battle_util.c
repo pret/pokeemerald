@@ -4846,6 +4846,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 case ABILITY_DISGUISE:
                 case ABILITY_FLOWER_GIFT:
                 case ABILITY_GULP_MISSILE:
+                case ABILITY_HUNGER_SWITCH:
                 case ABILITY_ICE_FACE:
                 case ABILITY_ILLUSION:
                 case ABILITY_IMPOSTER:
