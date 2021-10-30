@@ -8916,13 +8916,20 @@ BattleScript_DarkTypePreventsPrankster::
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd
 
+sByteFour:
+.byte MAX_BATTLERS_COUNT
+
 BattleScript_NeutralizingGasExits::
+	savetarget
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_NEUTRALIZINGGASOVER
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gBattlerTarget, 0
 BattleScript_NeutralizingGasExitsLoop:
+	jumpifbyteequal gEffectBattler, gBattlerTarget, BattleScript_NeutralizingGasExitsIncrement	@ skip over battler switching out
 	switchinabilities BS_TARGET
+BattleScript_NeutralizingGasExitsIncrement:
 	addbyte gBattlerTarget, 1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_NeutralizingGasExitsLoop
+	jumpifbytenotequal gBattlerTarget, sByteFour, BattleScript_NeutralizingGasExitsLoop	@ SOMEHOW, comparing to gBattlersCount is problematic.
+	restoretarget
 	return
