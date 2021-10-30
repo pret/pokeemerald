@@ -478,7 +478,7 @@ gBattleAnims_Moves::
 	.4byte Move_HEAD_SMASH
 	.4byte Move_DOUBLE_HIT
 	.4byte Move_ROAR_OF_TIME
-	.4byte Move_SPECIAL_REND
+	.4byte Move_SPACIAL_REND
 	.4byte Move_LUNAR_DANCE
 	.4byte Move_CRUSH_GRIP
 	.4byte Move_MAGMA_STORM
@@ -4166,7 +4166,7 @@ Move_ROAR_OF_TIME:
 	waitforvisualfinish
 	end
 
-Move_SPECIAL_REND:
+Move_SPACIAL_REND:
 	loadspritegfx ANIM_TAG_PUNISHMENT_BLADES
 	loadspritegfx ANIM_TAG_PINK_HEART_2       @ANIM_TAG_BERRY_EATEN
 	monbg ANIM_ATK_PARTNER
