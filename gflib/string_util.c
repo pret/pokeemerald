@@ -206,7 +206,7 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
         }
         else if (state == WRITING_SPACES)
         {
-            *dest++ = 0x77;
+            *dest++ = CHAR_SPACER;
         }
 
         value = temp;
@@ -262,7 +262,7 @@ u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode
         }
         else if (state == WRITING_SPACES)
         {
-            *dest++ = 0x77;
+            *dest++ = CHAR_SPACER;
         }
 
         value = temp;
@@ -322,7 +322,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
         }
         else if (state == WRITING_SPACES)
         {
-            *dest++ = 0x77;
+            *dest++ = CHAR_SPACER;
         }
 
         value = temp;
@@ -414,7 +414,7 @@ u8 *StringBraille(u8 *dest, const u8 *src)
             break;
         default:
             *dest++ = c;
-            *dest++ = c + 0x40;
+            *dest++ = c + NUM_BRAILLE_CHARS;
             break;
         }
     }

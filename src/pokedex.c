@@ -4167,10 +4167,10 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
         buffer[i++] = feet / 10 + CHAR_0;
         buffer[i++] = (feet % 10) + CHAR_0;
     }
-    buffer[i++] = CHAR_SGL_QUOT_RIGHT;
+    buffer[i++] = CHAR_SGL_QUOTE_RIGHT;
     buffer[i++] = (inches / 10) + CHAR_0;
     buffer[i++] = (inches % 10) + CHAR_0;
-    buffer[i++] = CHAR_DBL_QUOT_RIGHT;
+    buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
 }

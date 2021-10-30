@@ -1792,3 +1792,9 @@
 	setfieldeffectargument 2, \priority
 	dofieldeffect FLDEFF_SPARKLE
 	.endm
+
+	.macro braillemsgbox text:req
+	braillemessage \text
+	waitbuttonpress
+	closebraillemessage
+	.endm
