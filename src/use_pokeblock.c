@@ -876,7 +876,7 @@ static void AskUsePokeblock(void)
     StringCopy(gStringVar4, stringBuffer);
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, 3);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
@@ -952,7 +952,7 @@ static void PrintWontEatAnymore(void)
 {
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, 1, gText_WontEatAnymore, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gText_WontEatAnymore, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, 3);
 }
@@ -966,7 +966,7 @@ static void EraseMenuWindow(void)
 
 static void PrintMenuWindowText(const u8 *message)
 {
-    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
 }
 
 static void BufferEnhancedStatText(u8 *dest, u8 statId, s16 enhancement)
@@ -1389,12 +1389,12 @@ static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
     FillWindowPixelBuffer(WIN_NATURE, PIXEL_FILL(0));
     if (sMenu->info.curSelection != sMenu->info.numSelections - 1)
     {
-        AddTextPrinterParameterized(WIN_NAME, 1, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_NAME, FONT_NORMAL, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
         partyIndex = GetPartyIdFromSelectionId(sMenu->info.curSelection);
         nature = GetNature(&gPlayerParty[partyIndex]);
         str = StringCopy(sMenu->info.natureText, gText_NatureSlash);
         str = StringCopy(str, gNatureNamePointers[nature]);
-        AddTextPrinterParameterized3(WIN_NATURE, 1, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);
+        AddTextPrinterParameterized3(WIN_NATURE, FONT_NORMAL, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);
     }
 
     if (firstPrint)

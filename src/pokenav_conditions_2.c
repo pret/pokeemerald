@@ -572,23 +572,23 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
         if (GetConditionGraphCurrentMonIndex() != GetMonListCount() - 1 || IsConditionMenuSearchMode() == TRUE)
         {
             str = GetConditionMonNameBuffer(bufferIndex);
-            AddTextPrinterParameterized(structPtr->nameGenderWindowId, 1, str, 0, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->nameGenderWindowId, FONT_NORMAL, str, 0, 1, 0, NULL);
         }
         break;
     case 2:
         if (IsConditionMenuSearchMode() == TRUE)
         {
             str = GetConditionMonLocationBuffer(bufferIndex);
-            AddTextPrinterParameterized(structPtr->nameGenderWindowId, 1, str, 0, 17, 0, NULL);
+            AddTextPrinterParameterized(structPtr->nameGenderWindowId, FONT_NORMAL, str, 0, 17, 0, NULL);
             text[0] = EXT_CTRL_CODE_BEGIN;
             text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
             text[2] = TEXT_COLOR_BLUE;
             text[3] = TEXT_COLOR_TRANSPARENT;
             text[4] = TEXT_COLOR_LIGHT_BLUE;
             StringCopy(text + 5, gText_Number2);
-            AddTextPrinterParameterized(structPtr->listIndexWindowId, 1, text, 4, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->listIndexWindowId, FONT_NORMAL, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(text + 5, GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);
-            AddTextPrinterParameterized(structPtr->listIndexWindowId, 1, text, 28, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->listIndexWindowId, FONT_NORMAL, text, 28, 1, 0, NULL);
         }
         break;
     case 3:

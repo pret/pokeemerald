@@ -734,7 +734,7 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fieldId)
     u32 top = (list->listWindow.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, top << 4, list->listWindow.unk4, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, 7, 2, (top << 4) + 1, colors, -1, fieldNames[fieldId]);
+    AddTextPrinterParameterized3(list->listWindow.windowId, FONT_NARROW, 2, (top << 4) + 1, colors, -1, fieldNames[fieldId]);
     CopyWindowRectToVram(list->listWindow.windowId, 2, 0, top << 1, list->listWindow.unk4, 2);
 }
 
@@ -755,7 +755,7 @@ static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct Pok
     if (str != NULL)
     {
         sub_81DB620(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
-        AddTextPrinterParameterized(list->listWindow.windowId, 7, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
         CopyWindowRectToVram(list->listWindow.windowId, 2, 0, r6 * 2, list->listWindow.unk4, 2);
     }
 }

@@ -447,7 +447,7 @@ static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
 static void DrawSongTextWindow(const u8 * str)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, str, 0, 1, 1, DisableTextPrinters);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
     gDisableTextPrinters = TRUE;
     CopyWindowToVram(0, 3);
 }
@@ -1324,7 +1324,7 @@ static void StorytellerDisplayStory(u32 player)
 static void PrintStoryList(void)
 {
     s32 i;
-    s32 width = GetStringWidth(1, gText_Exit, 0);
+    s32 width = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         s32 curWidth;
@@ -1332,7 +1332,7 @@ static void PrintStoryList(void)
 
         if (gameStatID == 0)
             break;
-        curWidth = GetStringWidth(1, GetStoryTitleByStat(gameStatID), 0);
+        curWidth = GetStringWidth(FONT_NORMAL, GetStoryTitleByStat(gameStatID), 0);
         if (curWidth > width)
             width = curWidth;
     }
@@ -1343,9 +1343,9 @@ static void PrintStoryList(void)
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
         if (gameStatID == 0)
             break;
-        AddTextPrinterParameterized(sStorytellerWindowId, 1, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
+        AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
     }
-    AddTextPrinterParameterized(sStorytellerWindowId, 1, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
     CopyWindowToVram(sStorytellerWindowId, 3);
 }

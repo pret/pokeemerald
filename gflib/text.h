@@ -7,8 +7,20 @@
 
 #define TEXT_SPEED_FF 0xFF
 
-enum
-{
+enum {
+    FONT_SMALL,
+    FONT_NORMAL,
+    FONT_SHORT,
+    FONT_SHORT_COPY_1,
+    FONT_SHORT_COPY_2,
+    FONT_SHORT_COPY_3,
+    FONT_BRAILLE,
+    FONT_NARROW,
+    FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
+    FONT_BOLD, // JP glyph set only
+};
+
+enum {
     FONTATTR_MAX_LETTER_WIDTH,
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
@@ -21,12 +33,12 @@ enum
 
 struct TextPrinterSubStruct
 {
-    u8 glyphId:4;  // 0x14
+    u8 fontId:4;  // 0x14
     bool8 hasPrintBeenSpedUp:1;
     u8 unk:3;
     u8 downArrowDelay:5;
     u8 downArrowYPosIdx:2;
-    bool8 hasGlyphIdBeenSet:1;
+    bool8 hasFontIdBeenSet:1;
     u8 autoScrollDelay;
 };
 
@@ -111,7 +123,6 @@ extern TextFlags gTextFlags;
 extern u8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
 
-void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 bool16 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
@@ -127,15 +138,6 @@ void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 u8 GetMenuCursorDimensionByFont(u8, u8);
 
-u16 Font0Func(struct TextPrinter *textPrinter);
-u16 Font1Func(struct TextPrinter *textPrinter);
-u16 Font2Func(struct TextPrinter *textPrinter);
-u16 Font3Func(struct TextPrinter *textPrinter);
-u16 Font4Func(struct TextPrinter *textPrinter);
-u16 Font5Func(struct TextPrinter *textPrinter);
-u16 Font7Func(struct TextPrinter *textPrinter);
-u16 Font8Func(struct TextPrinter *textPrinter);
-
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
@@ -144,8 +146,6 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
 u16 RenderText(struct TextPrinter *textPrinter);
-u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing);
-u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str);
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y);
@@ -155,20 +155,9 @@ u8 GetKeypadIconHeight(u8 keypadIconId);
 void SetDefaultFontsPointer(void);
 u8 GetFontAttribute(u8 fontId, u8 attributeId);
 u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
-void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese);
-u32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese);
-u32 GetGlyphWidthFont7(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont8(u16 glyphId, bool32 isJapanese);
-u32 GetGlyphWidthFont8(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese);
-u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese);
-u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont9(u16 glyphId);
 
-// unk_text_util_2.c
-u16 Font6Func(struct TextPrinter *textPrinter);
-u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
+// braille.c
+u16 FontFunc_Braille(struct TextPrinter *textPrinter);
+u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese);
 
 #endif // GUARD_TEXT_H

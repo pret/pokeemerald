@@ -535,7 +535,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav5Struct_2 *state)
     case MAPSECTYPE_CITY_CANFLY:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
         PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
-        AddTextPrinterParameterized(state->infoWindowId, 7, regionMap->mapSecName, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SPEED_FF, NULL);
         DrawCityMap(state, regionMap->mapSecId, regionMap->posWithinMapSec);
         CopyWindowToVram(state->infoWindowId, 3);
         SetCityZoomTextInvisibility(FALSE);
@@ -543,7 +543,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav5Struct_2 *state)
     case MAPSECTYPE_CITY_CANTFLY:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
         PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
-        AddTextPrinterParameterized(state->infoWindowId, 7, regionMap->mapSecName, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SPEED_FF, NULL);
         FillBgTilemapBufferRect(1, 0x1041, 17, 6, 12, 11, 17);
         CopyWindowToVram(state->infoWindowId, 3);
         SetCityZoomTextInvisibility(TRUE);
@@ -552,7 +552,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav5Struct_2 *state)
     case MAPSECTYPE_BATTLE_FRONTIER:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
         PutWindowTilemap(state->infoWindowId);
-        AddTextPrinterParameterized(state->infoWindowId, 7, regionMap->mapSecName, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SPEED_FF, NULL);
         PrintLandmarkNames(state, regionMap->mapSecId, regionMap->posWithinMapSec);
         CopyWindowToVram(state->infoWindowId, 3);
         SetCityZoomTextInvisibility(TRUE);
@@ -654,7 +654,7 @@ static void PrintLandmarkNames(struct Pokenav5Struct_2 *state, int mapSecId, int
             break;
 
         StringCopyPadded(gStringVar1, landmarkName, CHAR_SPACE, 12);
-        AddTextPrinterParameterized(state->infoWindowId, 7, gStringVar1, 0, i * 16 + 17, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, gStringVar1, 0, i * 16 + 17, TEXT_SPEED_FF, NULL);
         i++;
     }
 }

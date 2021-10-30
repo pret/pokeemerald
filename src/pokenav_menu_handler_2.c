@@ -1133,9 +1133,9 @@ static void PrintCurrentOptionDescription(void)
     struct Pokenav2Struct * ptr = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_ICONS);
     int menuItem = GetCurrentMenuItemId();
     const u8 * s = sPageDescriptions[menuItem];
-    u32 width = GetStringWidth(1, s, -1);
+    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
 }
 
 // Printed when Ribbons is selected if no PC/party mons have ribbons
@@ -1144,9 +1144,9 @@ static void PrintNoRibbonWinners(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_ICONS);
     const u8 * s = gText_NoRibbonWinners;
-    u32 width = GetStringWidth(1, s, -1);
+    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(void)

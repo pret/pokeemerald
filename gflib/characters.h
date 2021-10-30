@@ -248,17 +248,6 @@
 #define TEXT_DYNAMIC_COLOR_5    0xE // Usually blue-green
 #define TEXT_DYNAMIC_COLOR_6    0xF // Usually cerulean
 
-#define FONT_0 0
-#define FONT_1 1
-#define FONT_2 2 
-#define FONT_3 3
-#define FONT_4 4
-#define FONT_5 5
-#define FONT_6 6
-#define FONT_7 7
-#define FONT_8 8
-
-
 #define PLACEHOLDER_ID_UNKNOWN       0x0
 #define PLACEHOLDER_ID_PLAYER        0x1
 #define PLACEHOLDER_ID_STRING_VAR_1  0x2

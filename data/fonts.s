@@ -4,52 +4,52 @@
 	.section .rodata
 
 	.align 2
-gFont8LatinGlyphs::
-	.incbin "graphics/fonts/font8.latfont"
+gFontSmallNarrowLatinGlyphs::
+	.incbin "graphics/fonts/small_narrow/glyphs.latfont"
 
 	.align 2
-gFont8LatinGlyphWidths::
-	.include "graphics/fonts/font8_latin_widths.inc"
+gFontSmallNarrowLatinGlyphWidths::
+	.include "graphics/fonts/small_narrow/latin_widths.inc"
 
 	.align 2
-gFont0LatinGlyphs::
-	.incbin "graphics/fonts/font0.latfont"
+gFontSmallLatinGlyphs::
+	.incbin "graphics/fonts/small/glyphs.latfont"
 
 	.align 2
-gFont0LatinGlyphWidths::
-	.include "graphics/fonts/font0_latin_widths.inc"
+gFontSmallLatinGlyphWidths::
+	.include "graphics/fonts/small/latin_widths.inc"
 
 	.align 2
-gFont7LatinGlyphs::
-	.incbin "graphics/fonts/font7.latfont"
+gFontNarrowLatinGlyphs::
+	.incbin "graphics/fonts/narrow/glyphs.latfont"
 
 	.align 2
-gFont7LatinGlyphWidths::
-	.include "graphics/fonts/font7_latin_widths.inc"
+gFontNarrowLatinGlyphWidths::
+	.include "graphics/fonts/narrow/latin_widths.inc"
 
 	.align 2
-gFont2LatinGlyphs::
-	.incbin "graphics/fonts/font2.latfont"
+gFontShortLatinGlyphs::
+	.incbin "graphics/fonts/short/glyphs.latfont"
 
 	.align 2
-gFont2LatinGlyphWidths::
-	.include "graphics/fonts/font2_latin_widths.inc"
+gFontShortLatinGlyphWidths::
+	.include "graphics/fonts/short/latin_widths.inc"
 
 	.align 2
-gFont1LatinGlyphs::
-	.incbin "graphics/fonts/font1.latfont"
+gFontNormalLatinGlyphs::
+	.incbin "graphics/fonts/normal/glyphs.latfont"
 
 	.align 2
-gFont1LatinGlyphWidths::
-	.include "graphics/fonts/font1_latin_widths.inc"
+gFontNormalLatinGlyphWidths::
+	.include "graphics/fonts/normal/latin_widths.inc"
 
 	.align 2
-gFont0JapaneseGlyphs::
-	.incbin "graphics/fonts/font0.hwjpnfont"
+gFontSmallJapaneseGlyphs::
+	.incbin "graphics/fonts/small/glyphs.hwjpnfont"
 
 	.align 2
-gFont1JapaneseGlyphs::
-	.incbin "graphics/fonts/font1.hwjpnfont"
+gFontNormalJapaneseGlyphs::
+	.incbin "graphics/fonts/normal/glyphs.hwjpnfont"
 
 	.align 2
 gUnusedJapaneseFireRedLeafGreenMaleFontGlyphs::
@@ -68,9 +68,9 @@ gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphWidths::
 	.include "graphics/fonts/unused_japanese_frlg_female_font_widths.inc"
 
 	.align 2
-gFont2JapaneseGlyphs::
-	.incbin "graphics/fonts/font2.fwjpnfont"
+gFontShortJapaneseGlyphs::
+	.incbin "graphics/fonts/short/glyphs.fwjpnfont"
 
 	.align 2
-gFont2JapaneseGlyphWidths::
-	.include "graphics/fonts/font2_japanese_widths.inc"
+gFontShortJapaneseGlyphWidths::
+	.include "graphics/fonts/short/japanese_widths.inc"

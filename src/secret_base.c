@@ -214,7 +214,7 @@ static const struct ListMenuTemplate sRegistryListMenuTemplate =
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 1,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0,
 };
 
