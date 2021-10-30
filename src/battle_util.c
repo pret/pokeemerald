@@ -4961,7 +4961,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
-             && CanBePoisoned(gBattlerAttacker)
+             && CanBePoisoned(gBattlerAttacker, gBattlerTarget)
              && IsMoveMakingContact(move, gBattlerAttacker)
              && (Random() % 3) == 0)
             {
@@ -5148,8 +5148,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerTarget].hp != 0
              && !gProtectStructs[gBattlerTarget].confusionSelfDmg
-             && CanBePoisoned(gBattlerTarget)
+             && CanBePoisoned(gBattlerAttacker, gBattlerTarget)
              && IsMoveMakingContact(move, gBattlerAttacker)
+             && TARGET_TURN_DAMAGED // Need to actually hit the target
              && (Random() % 3) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
@@ -5589,18 +5590,19 @@ bool32 CanSleep(u8 battlerId)
     return TRUE;
 }
 
-bool32 CanBePoisoned(u8 battlerId)
+bool32 CanBePoisoned(u8 battlerAttacker, u8 battlerTarget)
 {
-    u16 ability = GetBattlerAbility(battlerId);
-    if (IS_BATTLER_OF_TYPE(battlerId, TYPE_POISON)
-     || IS_BATTLER_OF_TYPE(battlerId, TYPE_STEEL)
-     || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD
-     || gBattleMons[battlerId].status1 & STATUS1_ANY
+    u16 ability = GetBattlerAbility(battlerTarget);
+    
+    if (!(CanPoisonType(battlerAttacker, battlerTarget))
+     || gSideStatuses[GetBattlerSide(battlerTarget)] & SIDE_STATUS_SAFEGUARD
+     || gBattleMons[battlerTarget].status1 & STATUS1_ANY
      || ability == ABILITY_IMMUNITY
      || ability == ABILITY_COMATOSE
-     || gBattleMons[battlerId].status1 & STATUS1_ANY
-     || IsAbilityStatusProtected(battlerId)
-     || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
+     || IsAbilityOnSide(battlerTarget, ABILITY_PASTEL_VEIL)
+     || gBattleMons[battlerTarget].status1 & STATUS1_ANY
+     || IsAbilityStatusProtected(battlerTarget)
+     || IsBattlerTerrainAffected(battlerTarget, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
 }

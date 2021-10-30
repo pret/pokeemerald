@@ -2682,9 +2682,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
                 RESET_RETURN
             }
-            if (!CanPoisonType(gBattleScripting.battler, gEffectBattler))
-                break;
-            if (!CanBePoisoned(gEffectBattler))
+            if (!CanBePoisoned(gBattleScripting.battler, gEffectBattler))
                 break;
 
             statusChanged = TRUE;
@@ -2809,11 +2807,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
             }
             if (gBattleMons[gEffectBattler].status1)
                 break;
-            if (CanPoisonType(gBattleScripting.battler, gEffectBattler))
+            if (CanBePoisoned(gBattleScripting.battler, gEffectBattler))
             {
-                if (!CanBePoisoned(gEffectBattler))
-                    break;
-
                 // It's redundant, because at this point we know the status1 value is 0.
                 gBattleMons[gEffectBattler].status1 &= ~(STATUS1_TOXIC_POISON);
                 gBattleMons[gEffectBattler].status1 &= ~(STATUS1_POISON);
@@ -7257,9 +7252,8 @@ static void HandleTerrainMove(u32 moveEffect)
 
 bool32 CanPoisonType(u8 battlerAttacker, u8 battlerTarget)
 {
-    return (GetBattlerAbility(battlerAttacker) == ABILITY_CORROSION
-            || !(IS_BATTLER_OF_TYPE(battlerTarget, TYPE_POISON)
-                || IS_BATTLER_OF_TYPE(battlerTarget, TYPE_STEEL)));
+    return ((GetBattlerAbility(battlerAttacker) == ABILITY_CORROSION && gBattleMoves[gCurrentMove].split == SPLIT_STATUS)
+            || !(IS_BATTLER_OF_TYPE(battlerTarget, TYPE_POISON) || IS_BATTLER_OF_TYPE(battlerTarget, TYPE_STEEL)));
 }
 
 bool32 CanParalyzeType(u8 battlerAttacker, u8 battlerTarget)
