@@ -8001,6 +8001,8 @@ BattleScript_WanderingSpiritActivates::
 .endif
 	printstring STRINGID_SWAPPEDABILITIES
 	waitmessage B_WAIT_TIME_LONG
+	switchinabilities BS_ATTACKER
+	switchinabilities BS_TARGET
 	return
 
 BattleScript_TargetsStatWasMaxedOut::
