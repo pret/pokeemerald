@@ -45,6 +45,8 @@
     #define SPECIES_CRAMORANT_GULPING       10016
     #define SPECIES_GRENINJA_BATTLE_BOND    0
     #define SPECIES_GRENINJA_ASH            10017
+    #define SPECIES_HOOPA                   0
+    #define SPECIES_HOOPA_UNBOUND           10018
 #endif
 
 // Items with peculiar battle effects.
@@ -146,6 +148,7 @@
 #define B_CRASH_IF_TARGET_IMMUNE    GEN_7 // In Gen4+, The user of Jump Kick or High Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
 #define B_MEMENTO_FAIL              GEN_7 // In Gen4+, Memento fails if there is no target or if the target is protected or behind substitute. But not if Atk/Sp. Atk are at -6.
 #define B_GLARE_GHOST               GEN_7 // In Gen4+, Glare can hit Ghost-type Pokémon normally.
+#define B_SKILL_SWAP                GEN_7 // In Gen4+, Skill Swap triggers switch-in abilities after use.
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_7 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.

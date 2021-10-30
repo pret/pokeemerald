@@ -2124,7 +2124,7 @@ static void Cmd_healthbarupdate(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
@@ -2161,7 +2161,7 @@ static void Cmd_datahpupdate(void)
     else
         moveType = gBattleMoves[gCurrentMove].type;
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
         if (DoesSubstituteBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove) && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
@@ -2207,9 +2207,9 @@ static void Cmd_datahpupdate(void)
             }
             else // hp goes down
             {
-                if (gHitMarker & HITMARKER_x20)
+                if (gHitMarker & HITMARKER_SKIP_DMG_TRACK)
                 {
-                    gHitMarker &= ~(HITMARKER_x20);
+                    gHitMarker &= ~(HITMARKER_SKIP_DMG_TRACK);
                 }
                 else
                 {
@@ -2231,10 +2231,10 @@ static void Cmd_datahpupdate(void)
                     gBattleMons[gActiveBattler].hp = 0;
                 }
 
-                if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_x100000))
+                if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
 
-                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_x100000) && gCurrentMove != MOVE_PAIN_SPLIT)
+                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                 {
                     gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -2249,7 +2249,7 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_x100000))
+                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                 {
                     gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;
@@ -2265,7 +2265,7 @@ static void Cmd_datahpupdate(void)
                     }
                 }
             }
-            gHitMarker &= ~(HITMARKER_x100000);
+            gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
             BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, 0, 2, &gBattleMons[gActiveBattler].hp);
             MarkBattlerForControllerExec(gActiveBattler);
         }
@@ -3279,15 +3279,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_FEINT:
-                if (gProtectStructs[gBattlerTarget].protected
-                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_WIDE_GUARD
-                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_QUICK_GUARD
-                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_CRAFTY_SHIELD
-                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_MAT_BLOCK
-                    || gProtectStructs[gBattlerTarget].spikyShielded
-                    || gProtectStructs[gBattlerTarget].kingsShielded
-                    || gProtectStructs[gBattlerTarget].banefulBunkered
-                    || gProtectStructs[gBattlerTarget].obstructed)
+                if (IS_BATTLER_PROTECTED(gBattlerTarget))
                 {
                     gProtectStructs[gBattlerTarget].protected = 0;
                     gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_WIDE_GUARD);
@@ -3302,6 +3294,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
+                    }
+                    else if (gCurrentMove == MOVE_HYPERSPACE_FURY)
+                    {
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = BattleScript_HyperspaceFuryRemoveProtect;
                     }
                 }
                 break;
@@ -6800,10 +6797,10 @@ static void Cmd_removeitem(void)
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     itemId = gBattleMons[gActiveBattler].item;
 
-    // Popped Air Balloon cannot be restored by no means.
+    // Popped Air Balloon cannot be restored by any means.
     if (GetBattlerHoldEffect(gActiveBattler, TRUE) != HOLD_EFFECT_AIR_BALLOON)
-        gBattleStruct->usedHeldItems[gActiveBattler] = itemId;
-
+        gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gActiveBattler]][GetBattlerSide(gActiveBattler)] = itemId; // Remember if switched out
+    
     gBattleMons[gActiveBattler].item = 0;
     CheckSetUnburden(gActiveBattler);
 
@@ -8987,6 +8984,12 @@ static void Cmd_various(void)
         for (i = 0; i < gBattlersCount; i++)
             gStatuses4[i] |= STATUS4_PLASMA_FISTS;
         break;
+    case VARIOUS_JUMP_IF_SPECIES:
+        if (gBattleMons[gActiveBattler].species == T1_READ_16(gBattlescriptCurrInstr + 3))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+        else
+            gBattlescriptCurrInstr += 9;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -12524,6 +12527,8 @@ bool32 DoesSubstituteBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
         return FALSE;
     else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
         return FALSE;
+    else if (gBattleMoves[move].flags & FLAG_HIT_IN_SUBSTITUTE)
+        return FALSE;
     else
         return TRUE;
 }
@@ -12553,7 +12558,7 @@ static void Cmd_tryrecycleitem(void)
     u16 *usedHeldItem;
 
     gActiveBattler = gBattlerAttacker;
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler];
+    usedHeldItem = &gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gActiveBattler]][GetBattlerSide(gActiveBattler)];
     if (*usedHeldItem != 0 && gBattleMons[gActiveBattler].item == 0)
     {
         gLastUsedItem = *usedHeldItem;
