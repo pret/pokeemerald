@@ -54,6 +54,7 @@
 #include "constants/rgb.h"
 #include "data.h"
 #include "constants/party_menu.h"
+#include "battle_util.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
@@ -9004,6 +9005,21 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_TRY_TO_APPLY_MIMICRY:
+    {
+        bool8 isMimicryDone = FALSE;
+
+        if (GetBattlerAbility(gActiveBattler) == ABILITY_MIMICRY)
+        {
+            TryToApplyMimicry(gActiveBattler, TRUE);
+            isMimicryDone = TRUE;
+        }
+        if (!isMimicryDone)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
