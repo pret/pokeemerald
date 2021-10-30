@@ -597,8 +597,10 @@
 #define STRINGID_BUTPOKEMONCANTUSETHEMOVE             594
 #define STRINGID_BUTHOOPACANTUSEIT                    595
 #define STRINGID_BROKETHROUGHPROTECTION               596
+#define STRINGID_NEUTRALIZINGGASENTERS                597
+#define STRINGID_NEUTRALIZINGGASOVER                  598
 
-#define BATTLESTRINGS_COUNT                           597
+#define BATTLESTRINGS_COUNT                           599
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -833,6 +835,7 @@
 #define B_MSG_SWITCHIN_SCREENCLEANER    12
 #define B_MSG_SWITCHIN_ASONE            13
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
+#define B_MSG_SWITCHIN_NEUTRALIZING_GAS 15
 
 // gMentalHerbCureStringIds
 #define B_MSG_MENTALHERBCURE_INFATUATION       0

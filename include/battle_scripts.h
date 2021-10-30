@@ -261,6 +261,7 @@ extern const u8 BattleScript_AttackerAbilityStatRaiseEnd3[];
 extern const u8 BattleScript_PoisonHealActivates[];
 extern const u8 BattleScript_BadDreamsActivates[];
 extern const u8 BattleScript_SwitchInAbilityMsg[];
+extern const u8 BattleScript_SwitchInAbilityMsgRet[];
 extern const u8 BattleScript_ToxicSpikesPoisoned[];
 extern const u8 BattleScript_ToxicSpikesAbsorbed[];
 extern const u8 BattleScript_StickyWebOnSwitchIn[];
@@ -402,5 +403,6 @@ extern const u8 BattleScript_BlockedByPrimalWeatherEnd3[];
 extern const u8 BattleScript_BlockedByPrimalWeatherRet[];
 extern const u8 BattleScript_PrimalReversion[];
 extern const u8 BattleScript_HyperspaceFuryRemoveProtect[];
+extern const u8 BattleScript_NeutralizingGasExits[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

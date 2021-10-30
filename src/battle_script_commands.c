@@ -5416,7 +5416,7 @@ static void Cmd_sethealblock(void)
 
 static void Cmd_returnatktoball(void)
 {
-    gActiveBattler = gBattlerAttacker;
+    gActiveBattler = gBattlerAttacker;    
     if (!(gHitMarker & HITMARKER_FAINTED(gActiveBattler)))
     {
         BtlController_EmitReturnMonToBall(0, 0);
@@ -6077,8 +6077,17 @@ static void Cmd_switchineffects(void)
 
     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
     gSpecialStatuses[gActiveBattler].flag40 = 0;
-
-    if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
+    
+    // Neutralizing Gas announces itself before hazards
+    if (gBattleMons[gActiveBattler].ability == ABILITY_NEUTRALIZING_GAS && gSpecialStatuses[gActiveBattler].announceNeutralizingGas == 0)
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_NEUTRALIZING_GAS;
+        gSpecialStatuses[gActiveBattler].announceNeutralizingGas = TRUE;
+        gBattlerAbility = gActiveBattler;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_SwitchInAbilityMsgRet;
+    }
+    else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
         && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD
         && IsBattlerAffectedByHazards(gActiveBattler, FALSE)
@@ -6240,7 +6249,7 @@ static void Cmd_endlinkbattle(void)
 }
 
 static void Cmd_returntoball(void)
-{
+{    
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     BtlController_EmitReturnMonToBall(0, 1);
     MarkBattlerForControllerExec(gActiveBattler);
@@ -12281,25 +12290,34 @@ static void Cmd_trygetintimidatetarget(void)
 static void Cmd_switchoutabilities(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-
-    switch (GetBattlerAbility(gActiveBattler))
+    
+    if (gBattleMons[gActiveBattler].ability == ABILITY_NEUTRALIZING_GAS)
     {
-    case ABILITY_NATURAL_CURE:
-        gBattleMons[gActiveBattler].status1 = 0;
-        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[*(gBattleStruct->field_58 + gActiveBattler)], 4, &gBattleMons[gActiveBattler].status1);
-        MarkBattlerForControllerExec(gActiveBattler);
-        break;
-    case ABILITY_REGENERATOR:
-        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 3;
-        gBattleMoveDamage += gBattleMons[gActiveBattler].hp;
-        if (gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
-            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP;
-        BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, gBitTable[*(gBattleStruct->field_58 + gActiveBattler)], 2, &gBattleMoveDamage);
-        MarkBattlerForControllerExec(gActiveBattler);
-        break;
+        gBattleMons[gActiveBattler].ability = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_NeutralizingGasExits;
     }
-
-    gBattlescriptCurrInstr += 2;
+    else
+    {
+        switch (GetBattlerAbility(gActiveBattler))
+        {
+        case ABILITY_NATURAL_CURE:
+            gBattleMons[gActiveBattler].status1 = 0;
+            BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[*(gBattleStruct->field_58 + gActiveBattler)], 4, &gBattleMons[gActiveBattler].status1);
+            MarkBattlerForControllerExec(gActiveBattler);
+            break;
+        case ABILITY_REGENERATOR:
+            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 3;
+            gBattleMoveDamage += gBattleMons[gActiveBattler].hp;
+            if (gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP;
+            BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, gBitTable[*(gBattleStruct->field_58 + gActiveBattler)], 2, &gBattleMoveDamage);
+            MarkBattlerForControllerExec(gActiveBattler);
+            break;
+        }
+        
+        gBattlescriptCurrInstr += 2;
+    }
 }
 
 static void Cmd_jumpifhasnohp(void)
