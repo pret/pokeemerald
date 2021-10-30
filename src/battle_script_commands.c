@@ -6249,7 +6249,7 @@ static void Cmd_endlinkbattle(void)
 }
 
 static void Cmd_returntoball(void)
-{    
+{
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     BtlController_EmitReturnMonToBall(0, 1);
     MarkBattlerForControllerExec(gActiveBattler);
