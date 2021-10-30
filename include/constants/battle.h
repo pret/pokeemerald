@@ -176,7 +176,7 @@
 #define STATUS4_PLASMA_FISTS            (1 << 1)
 
 #define HITMARKER_x10                   (1 << 4)
-#define HITMARKER_x20                   (1 << 5)
+#define HITMARKER_SKIP_DMG_TRACK        (1 << 5)
 #define HITMARKER_DESTINYBOND           (1 << 6)
 #define HITMARKER_NO_ANIMATIONS         (1 << 7)
 #define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
@@ -190,7 +190,7 @@
 #define HITMARKER_IGNORE_DISGUISE       (1 << 16)
 // 3 free spots because of change in handling of UNDERGROUND/UNDERWATER/ON AIR
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
-#define HITMARKER_x100000               (1 << 20)
+#define HITMARKER_PASSIVE_DAMAGE        (1 << 20)
 #define HITMARKER_x200000               (1 << 21)
 #define HITMARKER_x400000               (1 << 22)
 #define HITMARKER_x800000               (1 << 23)
