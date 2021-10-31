@@ -6636,7 +6636,7 @@ Move_HURRICANE:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
-	fadetobg BG_HIGH_SPEED
+	fadetobg BG_HURRICANE
 	waitbgfadeout
 	launchtask AnimTask_StartSlidingBg 0x5 0x4 0x1000 0x0 0x1 0xffff
 	waitbgfadein
