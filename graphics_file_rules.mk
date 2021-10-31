@@ -289,57 +289,41 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 
 ### Fonts ###
 
-$(FONTGFXDIR)/small/glyphs.latfont: $(FONTGFXDIR)/small/latin.png
+$(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/normal/glyphs.latfont: $(FONTGFXDIR)/normal/latin.png
+$(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/short/glyphs.latfont: $(FONTGFXDIR)/short/latin.png
+$(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/narrow/glyphs.latfont: $(FONTGFXDIR)/narrow/latin.png
+$(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/small_narrow/glyphs.latfont: $(FONTGFXDIR)/small_narrow/latin.png
+$(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/small/glyphs.hwjpnfont: $(FONTGFXDIR)/small/japanese.png
+$(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/normal/glyphs.hwjpnfont: $(FONTGFXDIR)/normal/japanese.png
+$(FONTGFXDIR)/normal.hwjpnfont: $(FONTGFXDIR)/japanese_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/bold_glyphs.hwjpnfont: $(FONTGFXDIR)/bold_japanese.png
+$(FONTGFXDIR)/bold.hwjpnfont: $(FONTGFXDIR)/japanese_bold.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/short/glyphs.fwjpnfont: $(FONTGFXDIR)/short/japanese.png
+$(FONTGFXDIR)/short.fwjpnfont: $(FONTGFXDIR)/japanese_short.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/braille_glyphs.fwjpnfont: $(FONTGFXDIR)/braille.png
+$(FONTGFXDIR)/braille.fwjpnfont: $(FONTGFXDIR)/braille.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/unused_frlg_male.fwjpnfont: $(FONTGFXDIR)/unused_japanese_frlg_male_font.png
+$(FONTGFXDIR)/frlg_male.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_male_font.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/unused_frlg_female.fwjpnfont: $(FONTGFXDIR)/unused_japanese_frlg_female_font.png
+$(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female_font.png
 	$(GFX) $< $@
-
-$(FONTGFXDIR)/down_arrow.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/down_arrow_rs.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/unused_frlg_blanked_down_arrow.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/unused_frlg_down_arrow.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/keypad_icons.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
 
 
 ### Miscellaneous ###

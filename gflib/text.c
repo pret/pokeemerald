@@ -11,6 +11,7 @@
 #include "blit.h"
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
+#include "fonts.h"
 
 static u16 FontFunc_Small(struct TextPrinter *);
 static u16 FontFunc_Normal(struct TextPrinter *);
@@ -222,22 +223,7 @@ static const u8 sMenuCursorDimensions[][2] =
     [FONT_BOLD]         = {}
 };
 
-const u16 gFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold_glyphs.hwjpnfont");
-
-extern const u16 gFontNormalLatinGlyphs[];
-extern const u8 gFontNormalLatinGlyphWidths[];
-extern const u16 gFontNormalJapaneseGlyphs[];
-extern const u16 gFontSmallLatinGlyphs[];
-extern const u8 gFontSmallLatinGlyphWidths[];
-extern const u16 gFontSmallJapaneseGlyphs[];
-extern const u16 gFontShortLatinGlyphs[];
-extern const u8 gFontShortLatinGlyphWidths[];
-extern const u16 gFontShortJapaneseGlyphs[];
-extern const u8 gFontShortJapaneseGlyphWidths[];
-extern const u16 gFontNarrowLatinGlyphs[];
-extern const u8 gFontNarrowLatinGlyphWidths[];
-extern const u16 gFontSmallNarrowLatinGlyphs[];
-extern const u8 gFontSmallNarrowLatinGlyphWidths[];
+const u16 gFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
@@ -1510,7 +1496,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     return width;
 }
 
-u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
+u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
 {
     u8 shadowColor;
     u8 *strLocal;
