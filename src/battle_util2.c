@@ -142,7 +142,7 @@ u32 sub_805725C(u8 battlerId)
                 {
                     u32 toSub;
 
-                    if (gBattleMons[battlerId].ability == ABILITY_EARLY_BIRD)
+                    if (GetBattlerAbility(battlerId) == ABILITY_EARLY_BIRD)
                         toSub = 2;
                     else
                         toSub = 1;
