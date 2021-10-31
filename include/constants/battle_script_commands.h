@@ -194,6 +194,7 @@
 #define VARIOUS_HANDLE_PRIMAL_REVERSION         121
 #define VARIOUS_APPLY_PLASMA_FISTS              122
 #define VARIOUS_JUMP_IF_SPECIES                 123
+#define VARIOUS_UPDATE_ABILITY_POPUP            124
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

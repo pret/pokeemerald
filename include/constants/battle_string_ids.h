@@ -598,8 +598,9 @@
 #define STRINGID_BUTHOOPACANTUSEIT                    595
 #define STRINGID_BROKETHROUGHPROTECTION               596
 #define STRINGID_ABILITYALLOWSONLYMOVE                597
+#define STRINGID_SWAPPEDABILITIES                     598
 
-#define BATTLESTRINGS_COUNT                           598
+#define BATTLESTRINGS_COUNT                           599
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
