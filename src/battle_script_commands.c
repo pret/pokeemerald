@@ -8992,7 +8992,7 @@ static void Cmd_various(void)
         return;
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:
         if (IsLeafGuardProtected(gActiveBattler))
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
         return;
