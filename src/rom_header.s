@@ -1,3 +1,10 @@
+@ Note: ROM header data is empty space here.
+@       It's populated by gbafix using data provided in the Makefile. 
+
+	.global Start
+Start: @ 8000000
+	b Init
+
 	.global RomHeaderNintendoLogo
 RomHeaderNintendoLogo:
 	.space 156
