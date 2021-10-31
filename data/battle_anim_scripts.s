@@ -13947,6 +13947,8 @@ Move_STEEL_BEAM::
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
 	loadspritegfx ANIM_TAG_GUST
 	launchtask AnimTask_ElectricChargingParticles 0x2 0x4 0x0 0x14 0x0 0x2
+	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
+	delay 20
 	loadspritegfx ANIM_TAG_STEEL_BEAM
 	call SetSteelBeamBackground
 	panse_1B SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
