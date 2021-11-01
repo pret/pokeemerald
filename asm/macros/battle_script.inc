@@ -1863,6 +1863,10 @@
 	.2byte \species
 	.4byte \ptr
 	.endm
+	
+	.macro tryendneutralizinggas battler:req
+	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
