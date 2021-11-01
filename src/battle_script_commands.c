@@ -2123,7 +2123,7 @@ static void Cmd_healthbarupdate(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
@@ -2160,7 +2160,7 @@ static void Cmd_datahpupdate(void)
     else
         moveType = gBattleMoves[gCurrentMove].type;
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
         if (DoesSubstituteBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove) && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
@@ -2206,9 +2206,9 @@ static void Cmd_datahpupdate(void)
             }
             else // hp goes down
             {
-                if (gHitMarker & HITMARKER_x20)
+                if (gHitMarker & HITMARKER_SKIP_DMG_TRACK)
                 {
-                    gHitMarker &= ~(HITMARKER_x20);
+                    gHitMarker &= ~(HITMARKER_SKIP_DMG_TRACK);
                 }
                 else
                 {
@@ -2230,10 +2230,10 @@ static void Cmd_datahpupdate(void)
                     gBattleMons[gActiveBattler].hp = 0;
                 }
 
-                if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_x100000))
+                if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
 
-                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_x100000) && gCurrentMove != MOVE_PAIN_SPLIT)
+                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                 {
                     gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -2248,7 +2248,7 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_x100000))
+                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                 {
                     gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;
@@ -2264,7 +2264,7 @@ static void Cmd_datahpupdate(void)
                     }
                 }
             }
-            gHitMarker &= ~(HITMARKER_x100000);
+            gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
             BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, 0, 2, &gBattleMons[gActiveBattler].hp);
             MarkBattlerForControllerExec(gActiveBattler);
         }
@@ -4942,7 +4942,7 @@ static void Cmd_moveend(void)
             break;
         case MOVEEND_CHOICE_MOVE: // update choice band move
             if (gHitMarker & HITMARKER_OBEYS
-             && HOLD_EFFECT_CHOICE(holdEffectAtk)
+             && (HOLD_EFFECT_CHOICE(holdEffectAtk) || GetBattlerAbility(gBattlerAttacker) == ABILITY_GORILLA_TACTICS)
              && gChosenMove != MOVE_STRUGGLE
              && (*choicedMoveAtk == 0 || *choicedMoveAtk == 0xFFFF))
             {
@@ -6805,10 +6805,10 @@ static void Cmd_removeitem(void)
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     itemId = gBattleMons[gActiveBattler].item;
 
-    // Popped Air Balloon cannot be restored by no means.
+    // Popped Air Balloon cannot be restored by any means.
     if (GetBattlerHoldEffect(gActiveBattler, TRUE) != HOLD_EFFECT_AIR_BALLOON)
-        gBattleStruct->usedHeldItems[gActiveBattler] = itemId;
-
+        gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gActiveBattler]][GetBattlerSide(gActiveBattler)] = itemId; // Remember if switched out
+    
     gBattleMons[gActiveBattler].item = 0;
     CheckSetUnburden(gActiveBattler);
 
@@ -8396,6 +8396,9 @@ static void Cmd_various(void)
         return;
     case VARIOUS_ABILITY_POPUP:
         CreateAbilityPopUp(gActiveBattler, gBattleMons[gActiveBattler].ability, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0);
+        break;
+    case VARIOUS_UPDATE_ABILITY_POPUP:
+        UpdateAbilityPopup(gActiveBattler);
         break;
     case VARIOUS_DEFOG:
         if (T1_READ_8(gBattlescriptCurrInstr + 3)) // Clear
@@ -12581,7 +12584,7 @@ static void Cmd_tryrecycleitem(void)
     u16 *usedHeldItem;
 
     gActiveBattler = gBattlerAttacker;
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler];
+    usedHeldItem = &gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gActiveBattler]][GetBattlerSide(gActiveBattler)];
     if (*usedHeldItem != 0 && gBattleMons[gActiveBattler].item == 0)
     {
         gLastUsedItem = *usedHeldItem;

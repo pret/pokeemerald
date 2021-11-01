@@ -394,6 +394,7 @@
 #define ANIM_TAG_ALPHA_SYMBOL               (ANIM_SPRITES_START + 382)
 #define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
+#define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 385)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -495,6 +496,8 @@
 #define BG_HYPER_BEAM                           75
 #define BG_DYNAMAX_CANNON                       76
 #define BG_AURA_SPHERE                          77
+#define BG_STEEL_BEAM_OPPONENT                  78
+#define BG_STEEL_BEAM_PLAYER                    79
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0

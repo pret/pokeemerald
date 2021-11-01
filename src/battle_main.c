@@ -2862,7 +2862,6 @@ static void BattleStartClearSetData(void)
         gBattleResources->flags->flags[i] = 0;
         gPalaceSelectionBattleScripts[i] = 0;
         gBattleStruct->lastTakenMove[i] = 0;
-        gBattleStruct->usedHeldItems[i] = 0;
         gBattleStruct->choicedMove[i] = 0;
         gBattleStruct->changedItems[i] = 0;
         gBattleStruct->lastTakenMoveFrom[i][0] = 0;
@@ -2935,7 +2934,11 @@ static void BattleStartClearSetData(void)
     gBattleStruct->mega.triggerSpriteId = 0xFF;
     
     for (i = 0; i < PARTY_SIZE; i++)
+    {
+        gBattleStruct->usedHeldItems[i][0] = 0;
+        gBattleStruct->usedHeldItems[i][1] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+    }
 }
 
 void SwitchInClearSetData(void)
@@ -3639,7 +3642,7 @@ void BattleTurnPassed(void)
     gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
     gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
     gHitMarker &= ~(HITMARKER_x400000);
-    gHitMarker &= ~(HITMARKER_x100000);
+    gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
     gBattleScripting.moveendState = 0;
@@ -4776,7 +4779,7 @@ static void RunTurnActionsFunctions(void)
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
-        gHitMarker &= ~(HITMARKER_x100000);
+        gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
     else

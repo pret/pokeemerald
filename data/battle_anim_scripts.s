@@ -478,7 +478,7 @@ gBattleAnims_Moves::
 	.4byte Move_HEAD_SMASH
 	.4byte Move_DOUBLE_HIT
 	.4byte Move_ROAR_OF_TIME
-	.4byte Move_SPECIAL_REND
+	.4byte Move_SPACIAL_REND
 	.4byte Move_LUNAR_DANCE
 	.4byte Move_CRUSH_GRIP
 	.4byte Move_MAGMA_STORM
@@ -4166,7 +4166,7 @@ Move_ROAR_OF_TIME:
 	waitforvisualfinish
 	end
 
-Move_SPECIAL_REND:
+Move_SPACIAL_REND:
 	loadspritegfx ANIM_TAG_PUNISHMENT_BLADES
 	loadspritegfx ANIM_TAG_PINK_HEART_2       @ANIM_TAG_BERRY_EATEN
 	monbg ANIM_ATK_PARTNER
@@ -13940,47 +13940,64 @@ Move_ETERNA_BEAM::
 	goto Move_HYPER_BEAM
 
 Move_STEEL_BEAM::
+	loadspritegfx ANIM_TAG_CLAW_SLASH
+	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 28, 2
+	createvisualtask AnimTask_MetallicShine, 5, 0, 0, 0
+	delay 48
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
 	loadspritegfx ANIM_TAG_GUST
-	loadspritegfx ANIM_TAG_SPIKES
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x0 0x0 0x10 0x6B59   @To gray
 	launchtask AnimTask_ElectricChargingParticles 0x2 0x4 0x0 0x14 0x0 0x2
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
-	delay 0x14
-	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 0x9, 15
-	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_ATTACKER 0x0 0x4 72 0x1
-	call SteelBeamShards
-	call SteelBeamShards
-	launchtemplate gSlideMonToOffsetSpriteTemplate 0x2 0x5 ANIM_TARGET, -30, 0x0 TRUE 145
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
-	call SteelBeamShards
+	delay 20
+	loadspritegfx ANIM_TAG_STEEL_BEAM
+	call SetSteelBeamBackground
+	panse_1B SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	createvisualtask AnimTask_CreateSmallSteelBeamOrbs, 5
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 1, 0, 10, RGB(24, 24, 48)
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
+	delay 4
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 65, 1
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
+	delay 4
+	call SteelBeam_Continuity
+	call SteelBeam_Continuity
 	waitforvisualfinish
-	launchtemplate gSlideMonToOriginalPosSpriteTemplate 0x2 0x3 ANIM_TARGET 0x0 0x6
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0xE 0x0 0x6B59    @From gray
-	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 1, 10, 0, RGB(24, 24, 48)
+	call UnsetHighSpeedBg
 	end
-SteelBeamShards:
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0x0 0x0
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xa 0x5
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xfff6 0xfffb
-	delay 0x2
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0x14 0xa
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xffec 0xfff6
-	delay 0x2
+SteelBeam_Continuity:
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
+	delay 4
+	createsprite gSteelBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
+	delay 4
+	return
+SetSteelBeamBackground:
+	createvisualtask AnimTask_GetAttackerSide, 2
+	jumprettrue SetSteelBeamBgPlayer
+	fadetobg BG_STEEL_BEAM_OPPONENT
+	goto SetHighSpeedBgFade
+SetSteelBeamBgPlayer:
+	fadetobg BG_STEEL_BEAM_PLAYER
 
 Move_EXPANDING_FORCE::
 	end @to do:
