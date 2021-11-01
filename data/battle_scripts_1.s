@@ -8962,9 +8962,7 @@ BattleScript_NeutralizingGasExits::
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gBattlerTarget, 0
 BattleScript_NeutralizingGasExitsLoop:
-	jumpifbyteequal gEffectBattler, gBattlerTarget, BattleScript_NeutralizingGasExitsIncrement	@ skip over battler switching out
 	switchinabilities BS_TARGET
-BattleScript_NeutralizingGasExitsIncrement:
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, sByteFour, BattleScript_NeutralizingGasExitsLoop	@ SOMEHOW, comparing to gBattlersCount is problematic.
 	restoretarget

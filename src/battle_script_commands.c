@@ -12312,7 +12312,6 @@ static void Cmd_switchoutabilities(void)
     if (gBattleMons[gActiveBattler].ability == ABILITY_NEUTRALIZING_GAS)
     {
         gBattleMons[gActiveBattler].ability = ABILITY_NONE;
-        gEffectBattler = gActiveBattler;
         BattleScriptPush(gBattlescriptCurrInstr);
         gBattlescriptCurrInstr = BattleScript_NeutralizingGasExits;
     }
