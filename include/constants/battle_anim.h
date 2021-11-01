@@ -342,9 +342,9 @@
 #define BG_FISSURE 21
 #define BG_BUG_OPPONENT 22
 #define BG_BUG_PLAYER 23
-#define BG_SOLARBEAM_OPPONENT 24
-#define BG_SOLARBEAM_PLAYER 25
-#define BG_SOLARBEAM_CONTESTS 26
+#define BG_SOLAR_BEAM_OPPONENT 24
+#define BG_SOLAR_BEAM_PLAYER 25
+#define BG_SOLAR_BEAM_CONTESTS 26
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0

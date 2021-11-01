@@ -1619,7 +1619,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_FISSURE]             = {gBattleAnimBgImage_Fissure,    gBattleAnimBgPalette_Fissure,    gBattleAnimBgTilemap_Fissure},
     [BG_BUG_OPPONENT]        = {gBattleAnimBgImage_Highspeed,  gBattleAnimBgPalette_Bug,        gBattleAnimBgTilemap_HighspeedOpponent},
     [BG_BUG_PLAYER]          = {gBattleAnimBgImage_Highspeed,  gBattleAnimBgPalette_Bug,        gBattleAnimBgTilemap_HighspeedPlayer},
-    [BG_SOLARBEAM_OPPONENT]  = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_Solarbeam,  gBattleAnimBgTilemap_ImpactOpponent},
-    [BG_SOLARBEAM_PLAYER]    = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_Solarbeam,  gBattleAnimBgTilemap_ImpactPlayer},
-    [BG_SOLARBEAM_CONTESTS]  = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_Solarbeam,  gBattleAnimBgTilemap_ImpactContests},
+    [BG_SOLAR_BEAM_OPPONENT] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactOpponent},
+    [BG_SOLAR_BEAM_PLAYER]   = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactPlayer},
+    [BG_SOLAR_BEAM_CONTESTS] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactContests},
 };
