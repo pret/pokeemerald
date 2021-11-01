@@ -6346,6 +6346,7 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
     }
     sprite->data[6] |= (direction == DIR_EAST ? 1 : 0) << 4;
     ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+    objectEvent->inanimate = FALSE;
     return MovementAction_ExitPokeball_Step1(objectEvent, sprite);
 }
 
@@ -6446,6 +6447,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
       FreeSpriteOamMatrix(sprite);
       sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
       ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+      objectEvent->inanimate = FALSE;
     }
     return FALSE;
 }

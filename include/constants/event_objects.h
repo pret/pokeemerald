@@ -240,10 +240,10 @@
 #define OBJ_EVENT_GFX_LINK_RS_MAY                236
 #define OBJ_EVENT_GFX_LUGIA                      237
 #define OBJ_EVENT_GFX_HOOH                       238
-#define OBJ_EVENT_GFX_ANIMATED_BALL              239
-#define OBJ_EVENT_GFX_OW_MON                     240
+#define OBJ_EVENT_GFX_ANIMATED_BALL              OBJ_EVENT_GFX_ITEM_BALL // replaces ITEM_BALL
+#define OBJ_EVENT_GFX_OW_MON                     OBJ_EVENT_GFX_REGICE
 
-#define NUM_OBJ_EVENT_GFX                        241
+#define NUM_OBJ_EVENT_GFX                        239
 
 
 // These are dynamic object gfx ids.

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_REGIROCK",
+      "graphics_id": "OBJ_EVENT_GFX_OW_MON",
       "x": 8,
       "y": 7,
       "elevation": 3,

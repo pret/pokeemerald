@@ -12,10 +12,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_REGICE",
+      "graphics_id": "OBJ_EVENT_GFX_OW_MON",
       "x": 8,
       "y": 7,
       "elevation": 3,
@@ -51,7 +51,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
