@@ -33,10 +33,8 @@ static void AnimTask_BlendMonInAndOut_Step(u8 taskId);
 static bool8 sub_80A7238(void);
 static void sub_80A8D78(struct Task *task, u8 taskId);
 
-// EWRAM vars
-EWRAM_DATA static union AffineAnimCmd *gAnimTaskAffineAnim = NULL;
+EWRAM_DATA static union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
 
-// Const rom data
 static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 {
     { // Single battle
@@ -56,10 +54,10 @@ static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 // One entry for each of the four Castform forms.
 const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS] =
 {
-    [CASTFORM_NORMAL] = { .size = 0x44, .y_offset = 17 },
-    [CASTFORM_FIRE]   = { .size = 0x66, .y_offset =  9 },
-    [CASTFORM_WATER]  = { .size = 0x46, .y_offset =  9 },
-    [CASTFORM_ICE]    = { .size = 0x86, .y_offset =  8 },
+    [CASTFORM_NORMAL] = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 17 },
+    [CASTFORM_FIRE]   = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
+    [CASTFORM_WATER]  = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
+    [CASTFORM_ICE]    = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
 };
 
 static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
@@ -1740,34 +1738,34 @@ void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union Aff
 
 bool8 RunAffineAnimFromTaskData(struct Task *task)
 {
-    gAnimTaskAffineAnim = &((union AffineAnimCmd *)LoadPointerFromVars(task->data[13], task->data[14]))[task->data[7]];
-    switch (gAnimTaskAffineAnim->type)
+    sAnimTaskAffineAnim = &((union AffineAnimCmd *)LoadPointerFromVars(task->data[13], task->data[14]))[task->data[7]];
+    switch (sAnimTaskAffineAnim->type)
     {
     default:
-        if (!gAnimTaskAffineAnim->frame.duration)
+        if (!sAnimTaskAffineAnim->frame.duration)
         {
-            task->data[10] = gAnimTaskAffineAnim->frame.xScale;
-            task->data[11] = gAnimTaskAffineAnim->frame.yScale;
-            task->data[12] = gAnimTaskAffineAnim->frame.rotation;
+            task->data[10] = sAnimTaskAffineAnim->frame.xScale;
+            task->data[11] = sAnimTaskAffineAnim->frame.yScale;
+            task->data[12] = sAnimTaskAffineAnim->frame.rotation;
             task->data[7]++;
-            gAnimTaskAffineAnim++;
+            sAnimTaskAffineAnim++;
         }
-        task->data[10] += gAnimTaskAffineAnim->frame.xScale;
-        task->data[11] += gAnimTaskAffineAnim->frame.yScale;
-        task->data[12] += gAnimTaskAffineAnim->frame.rotation;
+        task->data[10] += sAnimTaskAffineAnim->frame.xScale;
+        task->data[11] += sAnimTaskAffineAnim->frame.yScale;
+        task->data[12] += sAnimTaskAffineAnim->frame.rotation;
         SetSpriteRotScale(task->data[15], task->data[10], task->data[11], task->data[12]);
         SetBattlerSpriteYOffsetFromYScale(task->data[15]);
-        if (++task->data[8] >= gAnimTaskAffineAnim->frame.duration)
+        if (++task->data[8] >= sAnimTaskAffineAnim->frame.duration)
         {
             task->data[8] = 0;
             task->data[7]++;
         }
         break;
     case AFFINEANIMCMDTYPE_JUMP:
-        task->data[7] = gAnimTaskAffineAnim->jump.target;
+        task->data[7] = sAnimTaskAffineAnim->jump.target;
         break;
     case AFFINEANIMCMDTYPE_LOOP:
-        if (gAnimTaskAffineAnim->loop.count)
+        if (sAnimTaskAffineAnim->loop.count)
         {
             if (task->data[9])
             {
@@ -1779,7 +1777,7 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
             }
             else
             {
-                task->data[9] = gAnimTaskAffineAnim->loop.count;
+                task->data[9] = sAnimTaskAffineAnim->loop.count;
             }
             if (!task->data[7])
             {
@@ -1788,8 +1786,8 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
             for (;;)
             {
                 task->data[7]--;
-                gAnimTaskAffineAnim--;
-                if (gAnimTaskAffineAnim->type == AFFINEANIMCMDTYPE_LOOP)
+                sAnimTaskAffineAnim--;
+                if (sAnimTaskAffineAnim->type == AFFINEANIMCMDTYPE_LOOP)
                 {
                     task->data[7]++;
                     return TRUE;
@@ -1813,12 +1811,12 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
 // matrix's scale in the y dimension.
 void SetBattlerSpriteYOffsetFromYScale(u8 spriteId)
 {
-    int var = 64 - GetBattlerYDeltaFromSpriteId(spriteId) * 2;
+    int var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(spriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
     int var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
 
-    if (var2 > 128)
-        var2 = 128;
+    if (var2 > MON_PIC_HEIGHT * 2)
+        var2 = MON_PIC_HEIGHT * 2;
     gSprites[spriteId].y2 = (var - var2) / 2;
 }
 
@@ -1826,12 +1824,12 @@ void SetBattlerSpriteYOffsetFromYScale(u8 spriteId)
 // matrix's scale in the y dimension.
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId)
 {
-    int var = 64 - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
+    int var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
     int var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
 
-    if (var2 > 128)
-        var2 = 128;
+    if (var2 > MON_PIC_HEIGHT * 2)
+        var2 = MON_PIC_HEIGHT * 2;
     gSprites[spriteId].y2 = (var - var2) / 2;
 }
 
@@ -1882,7 +1880,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
             }
         }
     }
-    return 64;
+    return MON_PIC_HEIGHT;
 }
 
 void StorePointerInVars(s16 *lo, s16 *hi, const void *ptr)
@@ -2209,17 +2207,17 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
     switch (attr)
     {
     case BATTLER_COORD_ATTR_HEIGHT:
-        return (coords->size & 0xf) * 8;
+        return GET_MON_COORDS_HEIGHT(coords->size);
     case BATTLER_COORD_ATTR_WIDTH:
-        return (coords->size >> 4) * 8;
+        return GET_MON_COORDS_WIDTH(coords->size);
     case BATTLER_COORD_ATTR_LEFT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - ((coords->size >> 4) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - (GET_MON_COORDS_WIDTH(coords->size) / 2);
     case BATTLER_COORD_ATTR_RIGHT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + ((coords->size >> 4) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + (GET_MON_COORDS_WIDTH(coords->size) / 2);
     case BATTLER_COORD_ATTR_TOP:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - ((coords->size & 0xf) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - (GET_MON_COORDS_HEIGHT(coords->size) / 2);
     case BATTLER_COORD_ATTR_BOTTOM:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + ((coords->size & 0xf) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + (GET_MON_COORDS_HEIGHT(coords->size) / 2);
     case BATTLER_COORD_ATTR_RAW_BOTTOM:
         ret = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 31;
         return ret - coords->y_offset;

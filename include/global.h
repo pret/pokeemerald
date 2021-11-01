@@ -120,10 +120,12 @@
     f;                       \
 })
 
-#define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
+#define DIV_ROUND_UP(val, roundBy)(((val) / (roundBy)) + (((val) % (roundBy)) ? 1 : 0))
 
-#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(NUM_SPECIES))
-#define NUM_FLAG_BYTES (ROUND_BITS_TO_BYTES(FLAGS_COUNT))
+#define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, 8)
+
+#define DEX_FLAGS_NO ROUND_BITS_TO_BYTES(NUM_SPECIES)
+#define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 
 struct Coords8
 {
