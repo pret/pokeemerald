@@ -26,27 +26,27 @@ struct GFRomHeader
     u32 pokedexOffset;
     u32 seen1Offset;
     u32 seen2Offset;
-    u32 unk_01;
-    u32 unk_02;
-    u32 unk_03;
-    u32 dexCount;
-    u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
-    u8 unk_07;
-    u8 unk_08;
-    u8 unk_09;
-    u8 unk_0A;
-    u8 unk_0B;
-    u8 unk_0C;
-    u8 unk_0D;
-    u8 unk_0E;
-    u8 unk_0F;
-    u8 unk_10;
-    u8 unk_11;
-    u8 unk_12;
-    u8 unk_13;
-    u8 unk_14;
+    u32 pokedexVar;
+    u32 pokedexFlag;
+    u32 mysteryEventFlag;
+    u32 pokedexCount;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+    u8 unk17;
     u32 saveBlock2Size;
     u32 saveBlock1Size;
     u32 partyCountOffset;
@@ -59,7 +59,7 @@ struct GFRomHeader
     u32 frontierStatusOffset2;
     u32 externalEventFlagsOffset;
     u32 externalEventDataOffset;
-    u32 unk_15;
+    u32 unk18;
     const struct BaseStats * baseStats;
     const u8 (* abilityNames)[];
     const u8 * const * abilityDescriptions;
@@ -68,23 +68,24 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * ballGfx;
     const struct CompressedSpritePalette * ballPalettes;
     u32 gcnLinkFlagsOffset;
-    u32 unk_16;
-    u32 unk_17;
-    u8 unk_18;
-    u8 unk_19;
-    u8 unk_1A;
-    u8 unk_1B;
-    u32 unk_1C;
+    u32 gameClearFlag;
+    u32 ribbonFlag;
+    u8 bagCountItems;
+    u8 bagCountKeyItems;
+    u8 bagCountPokeballs;
+    u8 bagCountTMHMs;
+    u8 bagCountBerries;
+    u8 pcItemsCount;
     u32 pcItemsOffset;
     u32 giftRibbonsOffset;
     u32 enigmaBerryOffset;
     u32 mapViewOffset;
-    u32 unk_1D;
-    u32 unk_1E;
+    u32 unk19;
+    u32 unk20;
 };
 
 // This seems to need to be in the text section for some reason.
-// To avoid a changed section warning it's put in a special .text.consts section instead of .text.
+// To avoid a changed section attributes warning it's put in a special .text.consts section.
 __attribute__((section(".text.consts")))
 static const struct GFRomHeader sGFRomHeader = {
     .version = GAME_VERSION,
@@ -105,27 +106,27 @@ static const struct GFRomHeader sGFRomHeader = {
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
     .seen1Offset = offsetof(struct SaveBlock1, seen1),
     .seen2Offset = offsetof(struct SaveBlock1, seen2),
-    .unk_01 = 0x00000046,
-    .unk_02 = 0x000008e4,
-    .unk_03 = 0x000008ac,
-    .dexCount = NATIONAL_DEX_COUNT,
-    .unk_04 = 0x07,
-    .unk_05 = 0x0a,
-    .unk_06 = 0x0a,
-    .unk_07 = 0x0a,
-    .unk_08 = 0x0c,
-    .unk_09 = 0x0c,
-    .unk_0A = 0x06,
-    .unk_0B = 0x0c,
-    .unk_0C = 0x06,
-    .unk_0D = 0x10,
-    .unk_0E = 0x12,
-    .unk_0F = 0x0c,
-    .unk_10 = 0x0f,
-    .unk_11 = 0x0b,
-    .unk_12 = 0x01,
-    .unk_13 = 0x08,
-    .unk_14 = 0x0c,
+    .pokedexVar = VAR_NATIONAL_DEX - VARS_START,
+    .pokedexFlag = FLAG_RECEIVED_POKEDEX_FROM_BIRCH,
+    .mysteryEventFlag = FLAG_SYS_MYSTERY_EVENT_ENABLE,
+    .pokedexCount = NATIONAL_DEX_COUNT,
+    .unk1 = 0x07,
+    .unk2 = 0x0a,
+    .unk3 = 0x0a,
+    .unk4 = 0x0a,
+    .unk5 = 0x0c,
+    .unk6 = 0x0c,
+    .unk7 = 0x06,
+    .unk8 = 0x0c,
+    .unk9 = 0x06,
+    .unk10 = 0x10,
+    .unk11 = 0x12,
+    .unk12 = 0x0c,
+    .unk13 = 0x0f,
+    .unk14 = 0x0b,
+    .unk15 = 0x01,
+    .unk16 = 0x08,
+    .unk17 = 0x0c,
     .saveBlock2Size = sizeof(struct SaveBlock2),
     .saveBlock1Size = sizeof(struct SaveBlock1),
     .partyCountOffset = offsetof(struct SaveBlock1, playerPartyCount),
@@ -138,7 +139,7 @@ static const struct GFRomHeader sGFRomHeader = {
     .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
     .externalEventFlagsOffset = offsetof(struct SaveBlock1, externalEventFlags),
     .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
-    .unk_15 = 0x00000000,
+    .unk18 = 0x00000000,
     .baseStats = gBaseStats,
     .abilityNames = gAbilityNames,
     .abilityDescriptions = gAbilityDescriptionPointers,
@@ -147,18 +148,18 @@ static const struct GFRomHeader sGFRomHeader = {
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
     .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
-    .unk_16 = 0x00000864,
-    .unk_17 = 0x0000089b,
-    .unk_18 = 0x1e,
-    .unk_19 = 0x1e,
-    .unk_1A = 0x10,
-    .unk_1B = 0x40,
-    .unk_1C = 0x0000322e, // offsetof(struct SaveBlock1, ? part-way into mysteryGift)
+    .gameClearFlag = FLAG_SYS_GAME_CLEAR,
+    .ribbonFlag = FLAG_SYS_RIBBON_GET,
+    .bagCountItems = BAG_ITEMS_COUNT,
+    .bagCountKeyItems = BAG_KEYITEMS_COUNT,
+    .bagCountPokeballs = BAG_POKEBALLS_COUNT,
+    .bagCountTMHMs = BAG_TMHM_COUNT,
+    .bagCountBerries = BAG_BERRIES_COUNT,
+    .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
     .enigmaBerryOffset = offsetof(struct SaveBlock1, enigmaBerry),
     .mapViewOffset = offsetof(struct SaveBlock1, mapView),
-    .unk_1D = 0x00000000,
-    .unk_1E = 0x00000000,
+    .unk19 = 0x00000000,
+    .unk20 = 0x00000000, // 0xFFFFFFFF in FRLG
 };
-
