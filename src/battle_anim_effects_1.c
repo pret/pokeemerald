@@ -26,9 +26,9 @@ struct {
 static void AnimMovePowderParticle(struct Sprite *);
 static void AnimMovePowderParticle_Step(struct Sprite *);
 static void AnimPowerAbsorptionOrb(struct Sprite *);
-static void AnimSolarbeamBigOrb(struct Sprite *);
-static void AnimSolarbeamSmallOrb(struct Sprite *);
-static void AnimSolarbeamSmallOrb_Step(struct Sprite *);
+static void AnimSolarBeamBigOrb(struct Sprite *);
+static void AnimSolarBeamSmallOrb(struct Sprite *);
+static void AnimSolarBeamSmallOrb_Step(struct Sprite *);
 static void AnimAbsorptionOrb(struct Sprite *);
 static void AnimAbsorptionOrb_Step(struct Sprite *);
 static void AnimHyperBeamOrb(struct Sprite *);
@@ -208,49 +208,49 @@ const struct SpriteTemplate gPoisonPowderParticleSpriteTemplate =
     .callback = AnimMovePowderParticle,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds1[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds2[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds2[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds3[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds3[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds4[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds4[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds5[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds5[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds6[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds6[] =
 {
     ANIMCMD_FRAME(5, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamBigOrbAnimCmds7[] =
+const union AnimCmd gSolarBeamBigOrbAnimCmds7[] =
 {
     ANIMCMD_FRAME(6, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSolarbeamSmallOrbAnimCms[] =
+const union AnimCmd gSolarBeamSmallOrbAnimCms[] =
 {
     ANIMCMD_FRAME(7, 1),
     ANIMCMD_END,
@@ -262,20 +262,20 @@ const union AnimCmd gPowerAbsorptionOrbAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSolarbeamBigOrbAnimTable[] =
+const union AnimCmd *const gSolarBeamBigOrbAnimTable[] =
 {
-    gSolarbeamBigOrbAnimCmds1,
-    gSolarbeamBigOrbAnimCmds2,
-    gSolarbeamBigOrbAnimCmds3,
-    gSolarbeamBigOrbAnimCmds4,
-    gSolarbeamBigOrbAnimCmds5,
-    gSolarbeamBigOrbAnimCmds6,
-    gSolarbeamBigOrbAnimCmds7,
+    gSolarBeamBigOrbAnimCmds1,
+    gSolarBeamBigOrbAnimCmds2,
+    gSolarBeamBigOrbAnimCmds3,
+    gSolarBeamBigOrbAnimCmds4,
+    gSolarBeamBigOrbAnimCmds5,
+    gSolarBeamBigOrbAnimCmds6,
+    gSolarBeamBigOrbAnimCmds7,
 };
 
-const union AnimCmd *const gSolarbeamSmallOrbAnimTable[] =
+const union AnimCmd *const gSolarBeamSmallOrbAnimTable[] =
 {
-    gSolarbeamSmallOrbAnimCms,
+    gSolarBeamSmallOrbAnimCms,
 };
 
 const union AnimCmd *const gPowerAbsorptionOrbAnimTable[] =
@@ -303,26 +303,26 @@ const struct SpriteTemplate gPowerAbsorptionOrbSpriteTemplate =
     .callback = AnimPowerAbsorptionOrb,
 };
 
-const struct SpriteTemplate gSolarbeamBigOrbSpriteTemplate =
+const struct SpriteTemplate gSolarBeamBigOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSolarbeamBigOrb,
+    .callback = AnimSolarBeamBigOrb,
 };
 
-const struct SpriteTemplate gSolarbeamSmallOrbSpriteTemplate =
+const struct SpriteTemplate gSolarBeamSmallOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamSmallOrbAnimTable,
+    .anims = gSolarBeamSmallOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSolarbeamSmallOrb,
+    .callback = AnimSolarBeamSmallOrb,
 };
 
 const union AffineAnimCmd gStockpileAbsorptionOrbAffineCmds[] = {
@@ -371,7 +371,7 @@ const struct SpriteTemplate gHyperBeamOrbSpriteTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimHyperBeamOrb,
@@ -2252,7 +2252,7 @@ static void AnimPowerAbsorptionOrb(struct Sprite* sprite)
 // arg 1: initial y pixel offset
 // arg 2: duration
 // arg 3: sprite anim number
-static void AnimSolarbeamBigOrb(struct Sprite* sprite)
+static void AnimSolarBeamBigOrb(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
     StartSpriteAnim(sprite, gBattleAnimArgs[3]);
@@ -2264,12 +2264,12 @@ static void AnimSolarbeamBigOrb(struct Sprite* sprite)
 }
 
 // Moves a small orb in a wavy pattern towards the target mon.
-// The small orb "circles" the big orbs in AnimSolarbeamBigOrb.
+// The small orb "circles" the big orbs in AnimSolarBeamBigOrb.
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: duration
 // arg 3: initial wave offset
-static void AnimSolarbeamSmallOrb(struct Sprite* sprite)
+static void AnimSolarBeamSmallOrb(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -2279,11 +2279,11 @@ static void AnimSolarbeamSmallOrb(struct Sprite* sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = gBattleAnimArgs[3];
-    sprite->callback = AnimSolarbeamSmallOrb_Step;
+    sprite->callback = AnimSolarBeamSmallOrb_Step;
     sprite->callback(sprite);
 }
 
-static void AnimSolarbeamSmallOrb_Step(struct Sprite* sprite)
+static void AnimSolarBeamSmallOrb_Step(struct Sprite* sprite)
 {
     if (AnimTranslateLinear(sprite))
     {
@@ -2302,10 +2302,10 @@ static void AnimSolarbeamSmallOrb_Step(struct Sprite* sprite)
     }
 }
 
-// Creates 15 small secondary orbs used in the solarbeam anim effect.
+// Creates 15 small secondary orbs used in the SolarBeam anim effect.
 // There is a 7-frame delay between each of them.
 // No args.
-void AnimTask_CreateSmallSolarbeamOrbs(u8 taskId)
+void AnimTask_CreateSmallSolarBeamOrbs(u8 taskId)
 {
     if (--gTasks[taskId].data[0] == -1)
     {
@@ -2315,7 +2315,7 @@ void AnimTask_CreateSmallSolarbeamOrbs(u8 taskId)
         gBattleAnimArgs[1] = 0;
         gBattleAnimArgs[2] = 80;
         gBattleAnimArgs[3] = 0;
-        CreateSpriteAndAnimate(&gSolarbeamSmallOrbSpriteTemplate, 0, 0, GetBattlerSpriteSubpriority(gBattleAnimTarget) + 1);
+        CreateSpriteAndAnimate(&gSolarBeamSmallOrbSpriteTemplate, 0, 0, GetBattlerSpriteSubpriority(gBattleAnimTarget) + 1);
     }
 
     if (gTasks[taskId].data[1] == 15)
