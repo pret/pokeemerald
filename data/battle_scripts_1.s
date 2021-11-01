@@ -3551,16 +3551,6 @@ BattleScript_EffectConfuseHit::
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	goto BattleScript_EffectHit
 
-BattleScript_EffectTwineedle::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	sethword sMULTIHIT_EFFECT, MOVE_EFFECT_POISON
-	attackstring
-	ppreduce
-	setmultihitcounter 2
-	initmultihitstring
-	goto BattleScript_MultiHitLoop
-
 BattleScript_EffectSubstitute::
 	attackcanceler
 	ppreduce
