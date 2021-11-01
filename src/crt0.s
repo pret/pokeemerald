@@ -3,6 +3,7 @@
 	.syntax unified
 
 	.arm
+
 	.align 2, 0
 	.global Init
 Init: @ 8000204
