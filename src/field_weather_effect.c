@@ -1181,7 +1181,7 @@ void Thunderstorm_Main(void)
     case TSTORM_STATE_FADE_THUNDER_LONG:
         if (--gWeatherPtr->thunderDelay == 0)
         {
-            sub_80ABC7C(19, 3, 5);
+            ApplyWeatherGammaShiftIfIdle_Gradual(19, 3, 5);
             gWeatherPtr->initStep++;
         }
         break;

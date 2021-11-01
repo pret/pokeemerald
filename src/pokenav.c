@@ -212,7 +212,7 @@ u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority)
 {
     u16 taskId;
 
-    if (!IsUpdateLinkStateCBActive())
+    if (!IsOverworldLinkActive())
         taskId = CreateTask(Task_RunLoopedTask, priority);
     else
         taskId = CreateTask(Task_RunLoopedTask_LinkMode, priority);
@@ -288,7 +288,7 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
     s16 *state;
     u32 action;
 
-    if (Overworld_LinkRecvQueueLengthMoreThan2())
+    if (Overworld_IsRecvQueueAtMax())
         return;
 
     task = (LoopedTask)GetWordTaskArg(taskId, 1);

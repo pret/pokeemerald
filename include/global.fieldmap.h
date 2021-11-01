@@ -211,7 +211,7 @@ struct ObjectEvent
     /*0x1F*/ u8 previousMetatileBehavior;
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
-    /*0x22*/ u8 playerCopyableMovement;
+    /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
     /*size = 0x24*/
 };
 

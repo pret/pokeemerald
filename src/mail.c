@@ -593,10 +593,8 @@ static bool8 MailReadBuildGraphics(void)
             }
             break;
         case 15:
-            if (Overworld_LinkRecvQueueLengthMoreThan2() == TRUE)
-            {
+            if (Overworld_IsRecvQueueAtMax() == TRUE)
                 return FALSE;
-            }
             break;
         case 16:
             SetVBlankCallback(VBlankCB_MailRead);
@@ -641,7 +639,7 @@ static void CB2_InitMailRead(void)
             SetMainCallback2(CB2_MailRead);
             break;
         }
-    } while (MenuHelpers_LinkSomething() != TRUE);
+    } while (MenuHelpers_IsLinkActive() != TRUE);
 }
 
 static void BufferMailText(void)

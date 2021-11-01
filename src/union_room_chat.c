@@ -249,7 +249,7 @@ static void SetBgTilemapBuffers(void);
 static void ClearBg0(void);
 static void LoadChatWindowBorderGfx(void);
 static void LoadChatWindowGfx(void);
-static void sub_8020680(void);
+static void LoadChatUnkPalette(void);
 static void LoadChatMessagesWindow(void);
 static void LoadKeyboardWindow(void);
 static void LoadKeyboardSwapWindow(void);
@@ -1983,10 +1983,10 @@ static int GetShouldShowCaseToggleIcon(void)
 {
     u8 *str = GetLastCharOfMessagePtr();
     u32 character = *str;
-    if (character > 0xFF || sCaseToggleTable[character] == character || sCaseToggleTable[character] == 0)
-        return 3;
+    if (character > EOS || sCaseToggleTable[character] == character || sCaseToggleTable[character] == CHAR_SPACE)
+        return 3; // Don't show
     else
-        return 0;
+        return 0; // Show
 }
 
 static u8 *GetChatHostName(void)
@@ -2063,7 +2063,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         switch (buffer[0])
         {
             default:
-            case CHAT_MESSAGE_CHAT:     tNextState = 3; break;
+            case CHAT_MESSAGE_CHAT:    tNextState = 3; break;
             case CHAT_MESSAGE_JOIN:    tNextState = 3; break;
             case CHAT_MESSAGE_LEAVE:   tNextState = 4; break;
             case CHAT_MESSAGE_DROP:    tNextState = 5; break;
@@ -2246,7 +2246,7 @@ static bool32 Display_LoadGfx(u8 *state)
         LoadChatWindowGfx();
         break;
     case 4:
-        sub_8020680();
+        LoadChatUnkPalette();
         break;
     case 5:
         LoadChatMessagesWindow();
@@ -3074,7 +3074,7 @@ static void LoadChatWindowGfx(void)
     CopyBgTilemapBufferToVram(2);
 }
 
-static void sub_8020680(void)
+static void LoadChatUnkPalette(void)
 {
     LoadPalette(sUnk_Palette1, 0x80, sizeof(sUnk_Palette1));
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);

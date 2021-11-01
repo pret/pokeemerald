@@ -136,8 +136,8 @@ static const u8 sTileBitAttributes[] =
     [MB_BRIDGE_OVER_POND_MED_EDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_BRIDGE_OVER_POND_HIGH_EDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_BRIDGE_OVER_POND_HIGH_EDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_UNUSED_BRIDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_UNUSED_BRIDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_UNUSED_BRIDGE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BIKE_BRIDGE_OVER_BARRIER] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_COUNTER] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_81] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_82] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
@@ -208,7 +208,7 @@ static const u8 sTileBitAttributes[] =
     [MB_HOLDS_LARGE_DECORATION] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SECRET_BASE_TV_SHIELD] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PLAYER_ROOM_PC_ON] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_C6] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SECRET_BASE_DECORATION_BASE] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_SECRET_BASE_POSTER] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_C8] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_C9] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
@@ -711,9 +711,9 @@ bool8 MetatileBehavior_IsSecretBaseImpassable(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB_C6(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSecretBaseDecorationBase(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_C6)
+    if (metatileBehavior == MB_SECRET_BASE_DECORATION_BASE)
         return TRUE;
     else
         return FALSE;
@@ -901,8 +901,8 @@ bool8 MetatileBehavior_IsBridgeOverWater(u8 metatileBehavior)
       || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH)
       || (metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_1
        || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_2
-       || metatileBehavior == MB_UNUSED_BRIDGE_1
-       || metatileBehavior == MB_UNUSED_BRIDGE_2))
+       || metatileBehavior == MB_UNUSED_BRIDGE
+       || metatileBehavior == MB_BIKE_BRIDGE_OVER_BARRIER))
         return TRUE;
     else
         return FALSE;
@@ -1262,12 +1262,11 @@ bool8 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-// Very odd, used to initiate a teleport-style warp.
-// No warp events seem to be on a metatile of this kind, and it's
-// used by log bridges over ocean-style water, which wouldn't make
-// sense to have a warp like this.
-bool8 MetatileBehavior_IsBridgeOverOcean(u8 metatileBehavior)
+bool8 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior)
 {
+    // This metatile behavior is re-used for some reason by
+    // the Union Room exit metatile. This function is used to
+    // initiate a teleport-style warp.
     if (metatileBehavior == MB_BRIDGE_OVER_OCEAN)
         return TRUE;
     else

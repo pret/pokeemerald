@@ -5,6 +5,7 @@
 #define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50
+#define OVERWORLD_RECV_QUEUE_MAX 3
 #define BLOCK_BUFFER_SIZE 0x100
 
 #define LINK_SLAVE 0
@@ -301,7 +302,7 @@ bool32 Link_AnyPartnersPlayingFRLG_JP(void);
 void ResetLinkPlayerCount(void);
 void SaveLinkPlayers(u8 a0);
 void SetWirelessCommType0(void);
-bool32 IsLinkRecvQueueLengthAtLeast3(void);
+bool32 IsLinkRecvQueueAtOverworldMax(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;
