@@ -113,7 +113,7 @@ void GetBattleAnimBgData(struct BattleAnimBgData*, u32 arg1);
 u8 GetBattlerSpriteSubpriority(u8 battlerId);
 bool8 TranslateAnimHorizontalArc(struct Sprite *sprite);
 void sub_80A6630(struct Sprite *sprite);
-void TranslateMonSpriteLinearFixedPoint(struct Sprite *sprite);
+void TranslateSpriteLinearByIdFixedPoint(struct Sprite *sprite);
 void ResetSpriteRotScale(u8 spriteId);
 void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
@@ -123,7 +123,7 @@ u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 atta
 u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLeft, u8 opponentRight);
 u8 AnimDummyReturnArg(u8 battler);
 s16 CloneBattlerSpriteWithBlend(u8);
-void obj_delete_but_dont_free_vram(struct Sprite*);
+void DestroySpriteWithActiveSheet(struct Sprite*);
 u8 CreateInvisibleSpriteCopy(int, u8, int);
 void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData*, const void*, bool32);
 void AnimLoadCompressedBgGfx(u32, const u32*, u32);
@@ -138,7 +138,7 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const void *src);
 void InitAnimFastLinearTranslationWithSpeed(struct Sprite *sprite);
 bool8 AnimFastTranslateLinear(struct Sprite *sprite);
 void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite);
-void TranslateMonSpriteLinear(struct Sprite *sprite);
+void TranslateSpriteLinearById(struct Sprite *sprite);
 void TranslateSpriteLinear(struct Sprite *sprite);
 void AnimSpriteOnMonPos(struct Sprite *sprite);
 void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
@@ -157,7 +157,7 @@ void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 u8 GetBattlerSide(u8 battler);
 u8 GetBattlerPosition(u8 battler);
 u8 GetBattlerAtPosition(u8 position);
-void sub_80A64EC(struct Sprite *sprite);
+void ConvertPosDataToTranslateLinearData(struct Sprite *sprite);
 void InitAnimFastLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
 
 enum

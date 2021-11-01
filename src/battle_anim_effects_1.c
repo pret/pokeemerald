@@ -4442,7 +4442,7 @@ static void AnimBowMon_Step1(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     StoreSpriteCallbackInData6(sprite, AnimBowMon_Step1_Callback);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void AnimBowMon_Step1_Callback(struct Sprite* sprite)
@@ -4472,7 +4472,7 @@ static void AnimBowMon_Step2(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     StoreSpriteCallbackInData6(sprite, AnimBowMon_Step4);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void AnimBowMon_Step3(struct Sprite* sprite)
@@ -5226,7 +5226,7 @@ static void AnimDoubleTeam(struct Sprite* sprite)
     if (sprite->data[0] > 64)
     {
         gTasks[sprite->data[2]].data[3]--;
-        obj_delete_but_dont_free_vram(sprite);
+        DestroySpriteWithActiveSheet(sprite);
     }
     else
     {

@@ -2113,7 +2113,7 @@ static void CreateMinimizeSprite(struct Task* task, u8 taskId)
     {
         if ((matrixNum = AllocOamMatrix()) == 0xFF)
         {
-            obj_delete_but_dont_free_vram(&gSprites[spriteId]);
+            DestroySpriteWithActiveSheet(&gSprites[spriteId]);
         }
         else
         {
@@ -2141,7 +2141,7 @@ static void ClonedMinizeSprite_Step(struct Sprite *sprite)
     {
         gTasks[sprite->data[1]].data[sprite->data[2]]--;
         FreeOamMatrix(sprite->oam.matrixNum);
-        obj_delete_but_dont_free_vram(sprite);
+        DestroySpriteWithActiveSheet(sprite);
     }
 }
 

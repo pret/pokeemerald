@@ -567,7 +567,7 @@ static void AnimTask_NightmareClone_Step(u8 taskId)
             break;
         if (task->data[1] <= 80)
             break;
-        obj_delete_but_dont_free_vram(&gSprites[task->data[0]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[0]]);
         task->data[4] = 1;
         break;
     case 1:
@@ -723,7 +723,7 @@ static void AnimTask_SpiteTargetShadow_Step3(u8 taskId)
         break;
     case 2:
         gSprites[task->data[14]].invisible = TRUE;
-        obj_delete_but_dont_free_vram(&gSprites[task->data[0]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[0]]);
         FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);

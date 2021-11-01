@@ -1108,7 +1108,7 @@ static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId)
             task->data[0]++;
         break;
     case 2:
-        obj_delete_but_dont_free_vram(&gSprites[task->data[15]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[15]]);
         task->data[0]++;
         break;
     case 3:

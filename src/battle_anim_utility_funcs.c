@@ -267,7 +267,7 @@ static void AnimMonTrace(struct Sprite *sprite)
     else
     {
         gTasks[sprite->data[1]].data[sprite->data[2]]--;
-        obj_delete_but_dont_free_vram(sprite);
+        DestroySpriteWithActiveSheet(sprite);
     }
 }
 
