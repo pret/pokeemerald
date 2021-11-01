@@ -217,20 +217,6 @@ static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
     ABILITY_GULP_MISSILE,
 };
 
-static const u16 sTwoStrikeMoves[] =
-{
-    MOVE_BONEMERANG,
-    MOVE_DOUBLE_HIT,
-    MOVE_DOUBLE_IRON_BASH,
-    MOVE_DOUBLE_KICK,
-    MOVE_DRAGON_DARTS,
-    MOVE_DUAL_CHOP,
-    MOVE_DUAL_WINGBEAT,
-    MOVE_GEAR_GRIND,
-    MOVE_TWINEEDLE,
-    0xFFFF
-};
-
 static u8 CalcBeatUpPower(void)
 {
     struct Pokemon *party;
@@ -3571,7 +3557,7 @@ u8 AtkCanceller_UnableToUseMove(void)
 
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
-            else if (IsTwoStrikesMove(gCurrentMove))
+            else if (gBattleMoves[gCurrentMove].flags & FLAG_TWO_STRIKES)
             {
                 gMultiHitCounter = 2;
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
@@ -9713,16 +9699,4 @@ bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 chec
 u16 GetUsedHeldItem(u8 battler)
 {
     return gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)];
-}
-
-bool8 IsTwoStrikesMove(u16 move)
-{
-    u32 i;
-
-    for (i = 0; i < ARRAY_COUNT(sTwoStrikeMoves); i++)
-    {
-        if (move == sTwoStrikeMoves[i])
-            return TRUE;
-    }
-    return FALSE;
 }
