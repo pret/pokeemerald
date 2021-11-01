@@ -334,8 +334,8 @@ static void InitTradeMenu(void)
     gPaletteFade.bufferTransferDisabled = TRUE;
 
     SetVBlankCallback(VBlankCB_TradeMenu);
-    LoadPalette(gUnknown_0860F074, 0xF0, 20);
-    LoadPalette(gUnknown_0860F074, 0xD0, 20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 20);
+    LoadPalette(gStandardMenuPalette, 0xD0, 20);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sTradeMenuBgTemplates, ARRAY_COUNT(sTradeMenuBgTemplates));
     SetBgTilemapBuffer(1, sTradeMenuData->tilemapBuffer);
@@ -913,7 +913,7 @@ static void LoadTradeBgGfx(u8 state)
     case 0:
         LoadPalette(gTradeMenu_Pal, 0, 0x60);
         LoadBgTiles(1, gTradeMenu_Gfx, 0x1280, 0);
-        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DDCF04, 0, 0, 32, 20, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenu_Tilemap, 0, 0, 32, 20, 0);
         LoadBgTilemap(2, sTradeStripesBG2Tilemap, 0x800, 0);
         break;
     case 1:
@@ -924,9 +924,7 @@ static void LoadTradeBgGfx(u8 state)
         break;
     case 2:
         for (i = 0; i < 4; i++)
-        {
             SetGpuReg(REG_OFFSET_BG0HOFS + (i * 2), 0);
-        }
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);

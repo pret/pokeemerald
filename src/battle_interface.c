@@ -617,7 +617,7 @@ static const struct SubspriteTable sUnknown_0832C2CC[] =
 };
 
 // unused unknown image
-static const u8 sUnknown_0832C2D4[] = INCBIN_U8("graphics/battle_interface/unknown_32C2D4.4bpp");
+static const u8 sUnusedStatusSummary[] = INCBIN_U8("graphics/battle_interface/unused_status_summary.4bpp");
 
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
 {
@@ -640,7 +640,7 @@ static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 };
 
 // unused oam data
-static const struct OamData sUnknown_0832C354 =
+static const struct OamData sOamData_Unused64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,

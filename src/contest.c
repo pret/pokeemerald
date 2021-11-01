@@ -666,7 +666,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols =
 
 const struct CompressedSpritePalette sSpritePalette_JudgeSymbols =
 {
-    .data = gContest3Pal,
+    .data = gContestJudgeSymbolsPal,
     .tag = TAG_CONTEST_SYMBOLS_PAL
 };
 
@@ -1028,11 +1028,11 @@ void LoadContestBgAfterMoveAnim(void)
 {
     s32 i;
 
-    LZDecompressVram(gContestMiscGfx, (void *)VRAM);
+    LZDecompressVram(gContestInterfaceGfx, (void *)VRAM);
     LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
-    CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
+    CopyToBgTilemapBuffer(3, gContestAudienceTilemap, 0, 0);
     CopyBgTilemapBufferToVram(3);
-    LoadCompressedPalette(gOldContestPalette, 0, 0x200);
+    LoadCompressedPalette(gContestInterfaceAudiencePalette, 0, 0x200);
     LoadContestPalettes();
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1310,24 +1310,24 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
         break;
     case 1:
-        LZDecompressVram(gContestMiscGfx, (void *)VRAM);
+        LZDecompressVram(gContestInterfaceGfx, (void *)VRAM);
         break;
     case 2:
         LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
         DmaCopyLarge32(3, (void *)(BG_SCREEN_ADDR(4)), eUnzippedContestAudience_Gfx, 0x2000, 0x1000);
         break;
     case 3:
-        CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
+        CopyToBgTilemapBuffer(3, gContestAudienceTilemap, 0, 0);
         CopyBgTilemapBufferToVram(3);
         break;
     case 4:
-        CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
+        CopyToBgTilemapBuffer(2, gContestInterfaceTilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
         // This is a bug, and copies random junk. savedJunk is never read.
         DmaCopy32Defvars(3, gContestResources->contestBgTilemaps[2], eContestTempSave.savedJunk, sizeof(eContestTempSave.savedJunk));
         break;
     case 5:
-        LoadCompressedPalette(gOldContestPalette, 0, 0x200);
+        LoadCompressedPalette(gContestInterfaceAudiencePalette, 0, 0x200);
         CpuCopy32(gPlttBufferUnfaded + 128, tempPalette1, 16 * sizeof(u16));
         CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
         CpuCopy32(tempPalette2, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
@@ -5089,7 +5089,7 @@ static void SetBgForCurtainDrop(void)
 
     CpuFill32(0, gContestResources->contestBgTilemaps[1], 0x1000);
 
-    CopyToBgTilemapBuffer(1, gUnknown_08C17980, 0, 0);
+    CopyToBgTilemapBuffer(1, gContestCurtainTilemap, 0, 0);
     Contest_SetBgCopyFlags(1);
 
     for (i = 0; i < CONTESTANT_COUNT; i++)

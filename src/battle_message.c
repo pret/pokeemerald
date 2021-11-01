@@ -8,6 +8,7 @@
 #include "data.h"
 #include "event_data.h"
 #include "frontier_util.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "link.h"
@@ -42,18 +43,13 @@ struct BattleWindowText
     u8 shadowColor;
 };
 
-extern const u16 gUnknown_08D85620[];
-
-// this file's functions
 static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
-// EWRAM vars
 static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
-// const rom data
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
 
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
@@ -2058,7 +2054,6 @@ static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
 
 static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
-// code
 void BufferStringBattle(u16 stringID)
 {
     s32 i;
@@ -3125,7 +3120,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 void SetPpNumbersPaletteInMoveSelection(void)
 {
     struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
-    const u16 *palPtr = gUnknown_08D85620;
+    const u16 *palPtr = gPPTextPalette;
     u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBattler]],
                          chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBattler]]);
 

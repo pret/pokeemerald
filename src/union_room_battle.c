@@ -132,7 +132,7 @@ void CB2_UnionRoomBattle(void)
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
         LoadUserWindowBorderGfx(0, 1, 0xD0);
         LoadUserWindowBorderGfx_(0, 1, 0xD0);
-        sub_819789C();
+        Menu_LoadStdPal();
         SetVBlankCallback(VBlankCB_UnionRoomBattle);
         gMain.state++;
         break;

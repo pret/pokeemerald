@@ -116,8 +116,6 @@ struct PokeblockFeed
     u8 unused4;
 };
 
-extern const u16 gUnknown_0860F074[];
-
 static void HandleInitBackgrounds(void);
 static void HandleInitWindows(void);
 static void LaunchPokeblockFeedTask(void);
@@ -786,7 +784,7 @@ static void HandleInitWindows(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);

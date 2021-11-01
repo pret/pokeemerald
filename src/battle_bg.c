@@ -1124,13 +1124,13 @@ void DrawBattleEntryBackground(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        LZDecompressVram(gUnknown_08D778F0, (void*)(BG_CHAR_ADDR(1)));
+        LZDecompressVram(gBattleVSFrame_Gfx, (void*)(BG_CHAR_ADDR(1)));
         LZDecompressVram(gVsLettersGfx, (void*)OBJ_VRAM0);
-        LoadCompressedPalette(gUnknown_08D77AE4, 0x60, 0x20);
+        LoadCompressedPalette(gBattleVSFrame_Pal, 0x60, 0x20);
         SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
         SetGpuReg(REG_OFFSET_BG1CNT, 0x5C04);
-        CopyToBgTilemapBuffer(1, gUnknown_08D779D8, 0, 0);
-        CopyToBgTilemapBuffer(2, gUnknown_08D779D8, 0, 0);
+        CopyToBgTilemapBuffer(1, gBattleVSFrame_Tilemap, 0, 0);
+        CopyToBgTilemapBuffer(2, gBattleVSFrame_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
@@ -1148,10 +1148,12 @@ void DrawBattleEntryBackground(void)
         }
         else
         {
+            // Set up bg for the multi battle intro where both teams slide in facing the screen.
+            // Note Steven's multi battle (which has a dedicated back pic) is excluded above.
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 2);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 2);
-            CopyToBgTilemapBuffer(1, gUnknown_08D857A8, 0, 0);
-            CopyToBgTilemapBuffer(2, gUnknown_08D85A1C, 0, 0);
+            CopyToBgTilemapBuffer(1, gMultiBattleIntroBg_Opponent_Tilemap, 0, 0);
+            CopyToBgTilemapBuffer(2, gMultiBattleIntroBg_Player_Tilemap, 0, 0);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
         }

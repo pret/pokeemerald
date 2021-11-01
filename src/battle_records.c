@@ -24,21 +24,18 @@
 #include "trainer_hill.h"
 #include "constants/rgb.h"
 
-// this file's functions
 static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
 static void Task_BeginPaletteFade(u8 taskId);
 static void Task_ExitTrainerHillRecords(u8 taskId);
 static void RemoveTrainerHillRecordsWindow(u8 windowId);
 static void CB2_ShowTrainerHillRecords(void);
 
-// EWRAM variables
 EWRAM_DATA u8 gRecordsWindowId = 0;
 EWRAM_DATA static u8 *sTilemapBuffer = NULL;
 
-// const rom data
-static const u32 sTrainerHillWindowTileset[] = INCBIN_U32("graphics/unknown/unknown_5B3484.4bpp");
-static const u16 sTrainerHillWindowPalette[] = INCBIN_U16("graphics/unknown/unknown_5B3484.gbapal");
-static const u32 sTrainerHillWindowTilemap[] = INCBIN_U32("graphics/unknown/unknown_5B3564.bin");
+static const u32 sTrainerHillWindowTileset[] = INCBIN_U32("graphics/trainer_hill/records_window.4bpp");
+static const u16 sTrainerHillWindowPalette[] = INCBIN_U16("graphics/trainer_hill/records_window.gbapal");
+static const u32 sTrainerHillWindowTilemap[] = INCBIN_U32("graphics/trainer_hill/records_window.bin");
 
 static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =
 {

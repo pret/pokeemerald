@@ -785,7 +785,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
 
 void LoadBattleBarGfx(u8 arg0)
 {
-    LZDecompressWram(gUnknown_08C093F0, gMonSpritesGfxPtr->barFontGfx);
+    LZDecompressWram(gBattleInterfaceGfx_BattleBar, gMonSpritesGfxPtr->barFontGfx);
 }
 
 bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId)
