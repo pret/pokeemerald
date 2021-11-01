@@ -169,12 +169,14 @@
 #define STATUS3_HEAL_BLOCK              (1 << 27)
 #define STATUS3_AQUA_RING               (1 << 28)
 #define STATUS3_LASER_FOCUS             (1 << 29)
-#define STATUS3_ELECTRIFIED             (1 << 30)
-#define STATUS3_POWER_TRICK             (1 << 31)
+#define STATUS3_POWER_TRICK             (1 << 30)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE)
 
+#define STATUS4_ELECTRIFIED             (1 << 0)
+#define STATUS4_PLASMA_FISTS            (1 << 1)
+
 #define HITMARKER_x10                   (1 << 4)
-#define HITMARKER_x20                   (1 << 5)
+#define HITMARKER_SKIP_DMG_TRACK        (1 << 5)
 #define HITMARKER_DESTINYBOND           (1 << 6)
 #define HITMARKER_NO_ANIMATIONS         (1 << 7)
 #define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
@@ -188,7 +190,7 @@
 #define HITMARKER_IGNORE_DISGUISE       (1 << 16)
 // 3 free spots because of change in handling of UNDERGROUND/UNDERWATER/ON AIR
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
-#define HITMARKER_x100000               (1 << 20)
+#define HITMARKER_PASSIVE_DAMAGE        (1 << 20)
 #define HITMARKER_x200000               (1 << 21)
 #define HITMARKER_x400000               (1 << 22)
 #define HITMARKER_x800000               (1 << 23)
@@ -383,7 +385,6 @@
 #define MOVE_TARGET_FOES_AND_ALLY       0x20
 #define MOVE_TARGET_OPPONENTS_FIELD     0x40
 #define MOVE_TARGET_ALLY                0x80
-
-#define MOVE_TARGET_ALL_BATTLERS        (MOVE_TARGET_BOTH | MOVE_TARGET_OPPONENTS_FIELD)
+#define MOVE_TARGET_ALL_BATTLERS        (0x100 | MOVE_TARGET_USER)
 
 #endif // GUARD_CONSTANTS_BATTLE_H

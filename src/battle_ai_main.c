@@ -177,10 +177,10 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     }
 
     sBattler_AI = gActiveBattler;
-    // Simulate dmg for all AI moves against all opposing targets
+    // Simulate dmg for all AI moves against all other targets
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (GET_BATTLER_SIDE2(sBattler_AI) == GET_BATTLER_SIDE2(gBattlerTarget))
+        if (sBattler_AI == gBattlerTarget)
             continue;
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -209,7 +209,11 @@ u8 BattleAI_ChooseMoveOrAction(void)
         ret = ChooseMoveOrAction_Singles();
     else
         ret = ChooseMoveOrAction_Doubles();
-
+    
+    // Clear protect structures, some flags may be set during AI calcs
+    // e.g. pranksterElevated from GetMovePriority
+    memset(&gProtectStructs[gActiveBattler], 0, sizeof(struct ProtectStruct));
+    
     gCurrentMove = savedCurrentMove;
     return ret;
 }
@@ -262,8 +266,10 @@ static u8 ChooseMoveOrAction_Singles(void)
         AI_THINKING_STRUCT->movesetIndex = 0;
     }
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++) {
         gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->score[i];
+        gBattleStruct->aiSimulatedDamage[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][i];
+    }
 
     // Check special AI actions.
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
@@ -428,8 +434,10 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 }
             }
 
-            for (j = 0; j < MAX_MON_MOVES; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++) {
                 gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][j] = AI_THINKING_STRUCT->score[j];
+                gBattleStruct->aiSimulatedDamage[sBattler_AI][gBattlerTarget][j] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][j];
+            }
         }
     }
 
@@ -513,7 +521,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 moveEffect = gBattleMoves[move].effect;
     s32 moveType;
-    u8 moveTarget = gBattleMoves[move].target;
+    u16 moveTarget = gBattleMoves[move].target;
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
     u8 effectiveness = AI_GetMoveEffectiveness(move, battlerAtk, battlerDef);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
@@ -1522,7 +1530,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_RECYCLE:
-            if (gBattleStruct->usedHeldItems[battlerAtk] == 0 || gBattleMons[battlerAtk].item != 0)
+            if (GetUsedHeldItem(battlerAtk) == 0 || gBattleMons[battlerAtk].item != 0)
                 score -= 10;
             break;
         case EFFECT_IMPRISON:
@@ -1943,7 +1951,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_BELCH:
-            if (ItemId_GetPocket(gBattleStruct->usedHeldItems[battlerAtk]) != POCKET_BERRIES)
+            if (ItemId_GetPocket(GetUsedHeldItem(battlerAtk)) != POCKET_BERRIES)
                 score -= 10; // attacker has not consumed a berry
             break;
         case EFFECT_YAWN:
@@ -2510,7 +2518,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // move data
     u8 moveType = gBattleMoves[move].type;
     u16 effect = gBattleMoves[move].effect;
-    u8 target = gBattleMoves[move].target;
+    u16 target = gBattleMoves[move].target;
     // ally data
     u8 battlerAtkPartner = AI_DATA->battlerAtkPartner;
     u16 atkPartnerAbility = AI_DATA->atkPartnerAbility;
@@ -3327,7 +3335,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_TRAP:
     case EFFECT_MEAN_LOOK:
         if (HasMoveEffect(battlerDef, EFFECT_RAPID_SPIN)
-          || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST)
+          || (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
           || gBattleMons[battlerDef].status2 & STATUS2_WRAPPED)
         {
             break; // in this case its a bad attacking move
@@ -3359,6 +3367,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_PARALYZE:
         IncreaseParalyzeScore(battlerAtk, battlerDef, move, &score);
         break;
+    case EFFECT_GRAV_APPLE:
+        if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+            score += 2;
+        // fall through
     case EFFECT_ATTACK_DOWN_HIT:
     case EFFECT_DEFENSE_DOWN_HIT:
     case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
@@ -4085,9 +4097,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 3;
         break;
     case EFFECT_RECYCLE:
-        if (gBattleStruct->usedHeldItems[battlerAtk] != ITEM_NONE)
+        if (GetUsedHeldItem(battlerAtk) != ITEM_NONE)
             score++;
-        if (IsRecycleEncouragedItem(gBattleStruct->usedHeldItems[battlerAtk]))
+        if (IsRecycleEncouragedItem(GetUsedHeldItem(battlerAtk)))
             score++;
         break;
     case EFFECT_BRICK_BREAK:

@@ -1543,6 +1543,11 @@
 	.byte \case
 	.endm
 
+	.macro handleprimalreversion battler:req, case:req
+	various \battler, VARIOUS_HANDLE_PRIMAL_REVERSION
+	.byte \case
+	.endm
+
 	.macro handleformchange battler:req, case:req
 	various \battler, VARIOUS_HANDLE_FORM_CHANGE
 	.byte \case
@@ -1579,6 +1584,10 @@
 
 	.macro showabilitypopup battler:req
 	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+	
+	.macro updateabilitypopup battler:req
+	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
 	.endm
 
 	.macro defogclear battler:req, clear:req, ptr:req
@@ -1842,6 +1851,21 @@
 
 	.macro tryactivatebattlebond battler:req
 	various \battler, VARIOUS_TRY_ACTIVATE_BATTLE_BOND
+	.endm
+
+	.macro jumpifcantreverttoprimal ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL
+	.4byte \ptr
+	.endm
+  
+	.macro applyplasmafists
+	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
+	.endm
+
+	.macro jumpifspecies battler:req, species:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SPECIES
+	.2byte \species
+	.4byte \ptr
 	.endm
 
 @ helpful macros

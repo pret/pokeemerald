@@ -109,7 +109,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u32 SetRandomTarget(u32 battlerId);
-u8 GetMoveTarget(u16 move, u8 setTarget);
+u32 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating);
 u32 GetBattlerHoldEffectParam(u8 battlerId);
@@ -155,6 +155,7 @@ bool32 TryRoomService(u8 battlerId);
 void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 void DoBurmyFormChange(u32 monId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
+u16 GetUsedHeldItem(u8 battler);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 
 // ability checks

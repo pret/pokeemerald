@@ -151,6 +151,7 @@ struct ProtectStruct
     u32 disableEjectPack:1;
     u32 statFell:1;
     u32 pranksterElevated:1;
+    u32 quickDraw:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -216,6 +217,7 @@ struct SideTimer
     u8 tailwindBattlerId;
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
+    u8 retaliateTimer;
 };
 
 struct FieldTimer
@@ -468,10 +470,14 @@ struct MegaEvolutionData
     bool8 alreadyEvolved[4]; // Array id is used for mon position.
     u16 evolvedSpecies[MAX_BATTLERS_COUNT];
     u16 playerEvolvedSpecies;
+    u8 primalRevertedPartyIds[2]; // As flags using gBitTable;
+    u16 primalRevertedSpecies[MAX_BATTLERS_COUNT];
+    u16 playerPrimalRevertedSpecies;
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;
     bool8 isWishMegaEvo;
+    bool8 isPrimalReversion;
 };
 
 struct Illusion
@@ -495,7 +501,7 @@ struct BattleStruct
     u8 turnEffectsBattlerId;
     u8 turnCountersTracker;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
-    u8 moveTarget[MAX_BATTLERS_COUNT];
+    u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
     u8 wildVictorySong;
     u8 dynamicMoveType;
@@ -546,7 +552,7 @@ struct BattleStruct
     u16 synchronizeMoveEffect;
     bool8 anyMonHasTransformed;
     void (*savedCallback)(void);
-    u16 usedHeldItems[MAX_BATTLERS_COUNT];
+    u16 usedHeldItems[PARTY_SIZE][2];   // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
@@ -600,6 +606,7 @@ struct BattleStruct
     bool8 spriteIgnore0Hp;
     struct Illusion illusion[MAX_BATTLERS_COUNT];
     s8 aiFinalScore[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // AI, target, moves to make debugging easier
+    s32 aiSimulatedDamage[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, move to make debugging easier
     u8 soulheartBattlerId;
     u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
     bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
@@ -635,6 +642,16 @@ struct BattleStruct
     gBattleMons[battlerId].type2 = type;            \
     gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+
+#define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD          \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD        \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_MAT_BLOCK            \
+                                        || gProtectStructs[battlerId].spikyShielded                                    \
+                                        || gProtectStructs[battlerId].kingsShielded                                    \
+                                        || gProtectStructs[battlerId].banefulBunkered                                  \
+                                        || gProtectStructs[battlerId].obstructed)                                      \
 
 #define GET_STAT_BUFF_ID(n)((n & 7))              // first three bits 0x1, 0x2, 0x4
 #define GET_STAT_BUFF_VALUE_WITH_SIGN(n)((n & 0xF8))
@@ -864,6 +881,7 @@ extern u8 gUnusedFirstBattleVar2;
 extern u32 gSideStatuses[2];
 extern struct SideTimer gSideTimers[2];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+extern u32 gStatuses4[MAX_BATTLERS_COUNT];
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 extern u16 gPauseCounterBattle;
 extern u16 gPaydayMoney;
