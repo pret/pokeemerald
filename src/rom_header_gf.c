@@ -83,7 +83,9 @@ struct GFRomHeader
     u32 unk_1E;
 };
 
-__attribute__((section(".text")))
+// This seems to need to be in the text section for some reason.
+// To avoid a changed section warning it's put in a special .text.consts section instead of .text.
+__attribute__((section(".text.consts")))
 static const struct GFRomHeader sGFRomHeader = {
     .version = GAME_VERSION,
     .language = GAME_LANGUAGE,
