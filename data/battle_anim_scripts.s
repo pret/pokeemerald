@@ -2502,15 +2502,24 @@ Move_GIGA_IMPACT:
 	waitforvisualfinish
 	delay 11
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 26, 0, 0, 5
-	delay 6
-	@monbg ANIM_DEF_PARTNER
-	@setalpha 12, 8
-	@createvisualtask AnimTask_WindUpLunge, 5, 7, 0, -18, 8, 23, 10, 40, 10
-	@delay 35
-	createsprite gComplexPaletteBlendSpriteTemplate, 2, 7, 31, 3, 1, 0, 10, 0, 0
+	createvisualtask AnimTask_IsContest, 2
+	jumprettrue SetGigaImpactContestsBG
+	createvisualtask AnimTask_IsTargetPlayerSide, 2
+	jumpretfalse SetGigaImpactOpponentBG
+	goto SetGigaImpactPlayerBG
+SetGigaImpactOpponentBG:
+	fadetobg BG_GIGA_IMPACT_OPPONENT
+	goto GigaImpactContinuity
+SetGigaImpactPlayerBG:
+	fadetobg BG_GIGA_IMPACT_PLAYER
+	goto GigaImpactContinuity
+SetGigaImpactContestsBG:
+	fadetobg BG_GIGA_IMPACT_CONTEST
+	goto GigaImpactContinuity
+GigaImpactContinuity:
+	waitbgfadeout
 	createsprite gBasicHitSplatSpriteTemplate, 4, 4, -10, 0, 1, 0
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
-	call SetImpactBackground
 	delay 1
 	createsprite gSlideMonToOffsetSpriteTemplate 2, 5, 1, -16, 0, 0, 4
 	waitforvisualfinish
@@ -2525,6 +2534,7 @@ Move_GIGA_IMPACT:
 	blendoff
 	restorebg
 	waitbgfadein
+	waitforvisualfinish
 	end
 
 Move_NASTY_PLOT:
