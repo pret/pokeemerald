@@ -8927,10 +8927,30 @@ BattleScript_DarkTypePreventsPrankster::
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd
 
-BattleScript_PastelVeilActivates::
+BattleScript_PastelVeilActivatesOld::
 	call BattleScript_AbilityPopUp
 	printfromtable gSwitchInAbilityStringIds
 	curestatus BS_SCRIPTING
 	updatestatusicon BS_SCRIPTING
 	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_PastelVeilActivates::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds	
+	waitmessage B_WAIT_TIME_LONG
+	copybyte gBattlerTarget, gBattlerAttacker
+	setbyte gBattleCommunication, 0
+BattleScript_PastelVeil_TryCurePoison:
+	jumpifstatus BS_TARGET, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_PastelVeilCurePoison
+	goto BattleScript_PastelVeilEnd
+BattleScript_PastelVeilCurePoison:
+	curestatus BS_TARGET
+	updatestatusicon BS_TARGET
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_PastelVeilEnd
+	addbyte gBattleCommunication, 1
+	jumpifnoally BS_TARGET, BattleScript_PastelVeilEnd
+	setallytonexttarget BattleScript_PastelVeil_TryCurePoison
+	goto BattleScript_MoveEnd
+BattleScript_PastelVeilEnd:
 	end3
