@@ -71,12 +71,12 @@ static void (*const sMachBikeTransitions[])(u8) =
     MachBikeTransition_TrySlowDown,
 };
 
-// bikeFrameCounter is input which is represented by sMachBikeSpeeds in order: 0 is normal speed (1 speed), 1 is fast speed (2 speed), 2 is faster speed
+// bikeFrameCounter is input which is represented by sMachBikeSpeeds in order
 static void (*const sMachBikeSpeedCallbacks[])(u8) =
 {
-    PlayerGoSpeed1, // normal speed (1 speed)
-    PlayerGoSpeed2, // fast speed (2 speed)
-    PlayerGoSpeed4, // faster speed
+    PlayerWalkNormal,
+    PlayerWalkFast,
+    PlayerWalkFaster,
 };
 
 static void (*const sAcroBikeTransitions[])(u8) =
