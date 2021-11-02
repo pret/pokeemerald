@@ -300,7 +300,7 @@
 #define BRAILLE_CHAR_O               0x19
 //
 #define BRAILLE_CHAR_N               0x1B
-#define BRAILLE_CHAR_EXCL_MARK 0x1C
+#define BRAILLE_CHAR_EXCL_MARK       0x1C
 #define BRAILLE_CHAR_R               0x1D
 #define BRAILLE_CHAR_T               0x1E
 #define BRAILLE_CHAR_Q               0x1F

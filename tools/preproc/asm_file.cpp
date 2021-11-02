@@ -371,7 +371,7 @@ int AsmFile::ReadBraille(unsigned char* s)
         { ':', BRAILLE_CHAR_COLON },
         { ';', BRAILLE_CHAR_SEMICOLON },
         { '-', BRAILLE_CHAR_HYPHEN },
-        { '/', BRAILLE_CHAR_PAREN },
+        { '/', BRAILLE_CHAR_SLASH },
         { '(', BRAILLE_CHAR_PAREN },
         { ')', BRAILLE_CHAR_PAREN },
         { '\'', BRAILLE_CHAR_APOSTROPHE },
