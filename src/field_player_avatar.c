@@ -970,10 +970,10 @@ void PlayerRideWaterCurrent(u8 a)
     PlayerSetAnimId(GetRideWaterCurrentMovementAction(a), 2);
 }
 
-// fastest speed (4 speed)
+// faster speed
 void PlayerGoSpeed4(u8 a)
 {
-    PlayerSetAnimId(GetWalkFastestMovementAction(a), 2);
+    PlayerSetAnimId(GetWalkFasterMovementAction(a), 2);
 }
 
 static void PlayerRun(u8 a)
