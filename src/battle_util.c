@@ -4064,19 +4064,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         case ABILITY_PASTEL_VEIL:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                u32 side = GetBattlerSide(battler);
-
-                for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-                {
-                    if (IsBattlerAlive(i) && GetBattlerSide(i) == side
-                        && (gBattleMons[i].status1 & STATUS1_POISON || gBattleMons[i].status1 & STATUS1_TOXIC_POISON))
-                    {
-                        gActiveBattler = gBattleScripting.battler = gEffectBattler = i;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_PASTEL_VEIL;
-                        BattleScriptPushCursorAndCallback(BattleScript_PastelVeilActivates);
-                        effect++;
-                    }
-                }
+                gBattlerTarget = battler;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_PASTEL_VEIL;
+                BattleScriptPushCursorAndCallback(BattleScript_PastelVeilActivates);
+                effect++;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
             }
             break;
