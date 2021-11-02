@@ -7874,6 +7874,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #if B_BEAT_UP_DMG >= GEN_5
         basePower = CalcBeatUpPower();
         #endif
+        break;
     }
 
     // move-specific base power changes
