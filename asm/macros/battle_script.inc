@@ -1861,6 +1861,12 @@
 	.macro applyplasmafists
 	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
 	.endm
+	
+	.macro jumpifweatheraffected battler:req, weather:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_WEATHER_AFFECTED
+	.4byte \weather
+	.4byte \ptr
+	.endm
 
 	.macro jumpifspecies battler:req, species:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_SPECIES
@@ -1987,10 +1993,9 @@
 	goto \jumpptr
 	.endm
 
-	.macro jumpifleafguard jumpptr:req
-	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, 1f
-	jumpifability BS_TARGET, ABILITY_LEAF_GUARD, \jumpptr
-	1:
+	.macro jumpifleafguardprotected battler:req, jumpptr:req
+	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
+	.4byte \jumpptr
 	.endm
 
 	.macro jumpifsafeguard jumpptr:req
