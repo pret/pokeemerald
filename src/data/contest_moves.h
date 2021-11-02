@@ -5687,7 +5687,7 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
         .comboMoves = {COMBO_STARTER_PSYCHIC_TERRAIN}
     },
 
-    [MOVE_VENOM_DRENCH] =
+    [MOVE_STEEL_ROLLER] =
     {
         .effect = CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
