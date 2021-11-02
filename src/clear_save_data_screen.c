@@ -205,5 +205,5 @@ static void InitClearSaveDataScreenWindows(void)
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     LoadWindowGfx(0, 0, 2, 224);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 }

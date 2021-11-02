@@ -683,7 +683,7 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 
     for (i = 0; i < 5; i++)
     {

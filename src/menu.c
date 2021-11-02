@@ -60,7 +60,7 @@ static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
 static EWRAM_DATA u16 sTempTileDataBufferIdx = 0;
 static EWRAM_DATA void *sTempTileDataBuffer[0x20] = {NULL};
 
-const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
+const u16 gStandardMenuPalette[] = INCBIN_U16("graphics/interface/860F074.gbapal");
 
 static const u8 sTextSpeedFrameDelays[] =
 {
@@ -433,26 +433,28 @@ void sub_819786C(u8 windowId, bool8 copyToVram)
     DrawDialogFrameWithCustomTileAndPalette(windowId, copyToVram, DLG_WINDOW_BASE_TILE_NUM, 0xF);
 }
 
-void sub_819789C(void)
+void Menu_LoadStdPal(void)
 {
-    LoadPalette(gUnknown_0860F074, STD_WINDOW_PALETTE_NUM * 0x10, 0x14);
+    LoadPalette(gStandardMenuPalette, STD_WINDOW_PALETTE_NUM * 0x10, 0x14);
 }
 
 void Menu_LoadStdPalAt(u16 offset)
 {
-    LoadPalette(gUnknown_0860F074, offset, 0x14);
+    LoadPalette(gStandardMenuPalette, offset, 0x14);
 }
 
-const u16 *sub_81978C8(void)
+// Unused
+static const u16 *Menu_GetStdPal(void)
 {
-    return gUnknown_0860F074;
+    return gStandardMenuPalette;
 }
 
-u16 sub_81978D0(u8 colorNum)
+// Unused
+static u16 Menu_GetStdPalColor(u8 colorNum)
 {
     if (colorNum > 15)
         colorNum = 0;
-    return gUnknown_0860F074[colorNum];
+    return gStandardMenuPalette[colorNum];
 }
 
 void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)

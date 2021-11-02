@@ -358,7 +358,7 @@ static const union AffineAnimCmd * const sAffineAnims_PyramidBag[] =
     [ANIM_BAG_SHAKE] = sAffineAnim_PyramidBag_Shake,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_PyramidBag = {gBattleFrontierGfx_PyramidBag, 0x0800, TAG_PYRAMID_BAG};
+static const struct CompressedSpriteSheet sSpriteSheet_PyramidBag = {gBattlePyramidBag_Gfx, 0x0800, TAG_PYRAMID_BAG};
 
 static const struct SpriteTemplate sSpriteTemplate_PyramidBag =
 {
@@ -573,12 +573,12 @@ static bool8 LoadPyramidBagGfx(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gBattleFrontierGfx_PyramidBagTileMap, gPyramidBagMenu->tilemapBuffer);
+            LZDecompressWram(gBattlePyramidBagTilemap, gPyramidBagMenu->tilemapBuffer);
             gPyramidBagMenu->state++;
         }
         break;
     case 2:
-        LoadCompressedPalette(gUnknown_08D9AF44, 0, 32);
+        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, 0, 32);
         gPyramidBagMenu->state++;
         break;
     case 3:
@@ -1443,7 +1443,7 @@ static void InitPyramidBagWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x1, 0xE0);
     LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates); i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -1541,7 +1541,7 @@ static void LoadPyramidBagPalette(void)
     struct SpritePalette spritePalette;
     u16 *palPtr = Alloc(0x40);
 
-    LZDecompressWram(gBattleFrontierGfx_PyramidBag_Pal, palPtr);
+    LZDecompressWram(gBattlePyramidBag_Pal, palPtr);
     spritePalette.data = palPtr + (gSaveBlock2Ptr->frontier.lvlMode * 16);
     spritePalette.tag = TAG_PYRAMID_BAG;
     LoadSpritePalette(&spritePalette);

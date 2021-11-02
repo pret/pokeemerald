@@ -95,10 +95,6 @@ enum
     PKBL_GIVE_TO_LADY
 };
 
-
-extern const u16 gUnknown_0860F074[];
-
-// this file's functions
 static void CB2_InitPokeblockMenu(void);
 static bool8 InitPokeblockMenu(void);
 static bool8 LoadPokeblockMenuGfx(void);
@@ -685,7 +681,7 @@ static void HandleInitWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
