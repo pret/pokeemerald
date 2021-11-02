@@ -8926,3 +8926,11 @@ BattleScript_DarkTypePreventsPrankster::
 	waitmessage B_WAIT_TIME_LONG
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd
+
+BattleScript_PastelVeilActivates::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	curestatus BS_SCRIPTING
+	updatestatusicon BS_SCRIPTING
+	waitmessage B_WAIT_TIME_LONG
+	end3
