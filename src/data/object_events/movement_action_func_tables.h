@@ -602,14 +602,6 @@ u8 (*const gMovementActionFuncs_FaceRight[])(struct ObjectEvent *, struct Sprite
     MovementAction_PauseSpriteAnim,
 };
 
-enum {
-    MOVE_SPEED_NORMAL, // walking
-    MOVE_SPEED_FAST_1, // running / surfing / sliding (ice tile)
-    MOVE_SPEED_FAST_2, // water current / acro bike
-    MOVE_SPEED_FASTER, // mach bike's max speed
-    MOVE_SPEED_FASTEST,
-};
-
 static u8 (*const sDirectionAnimFuncsBySpeed[])(u8) = {
     [MOVE_SPEED_NORMAL] = GetMoveDirectionAnimNum,
     [MOVE_SPEED_FAST_1] = GetMoveDirectionFastAnimNum,

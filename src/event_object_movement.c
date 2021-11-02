@@ -32,6 +32,14 @@
 
 // this file was known as evobjmv.c in Game Freak's original source
 
+enum {
+    MOVE_SPEED_NORMAL, // walking
+    MOVE_SPEED_FAST_1, // running / surfing / sliding (ice tile)
+    MOVE_SPEED_FAST_2, // water current / acro bike
+    MOVE_SPEED_FASTER, // mach bike's max speed
+    MOVE_SPEED_FASTEST,
+};
+
 // Sprite data used throughout
 #define sObjEventId   data[0]
 #define sTypeFuncId   data[1] // Index into corresponding gMovementTypeFuncs_* table
