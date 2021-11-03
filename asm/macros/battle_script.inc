@@ -1838,6 +1838,10 @@
 	.macro trytoclearprimalweather
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
+	
+	.macro setattackertostickywebuser
+	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
+	.endm
 
 	.macro getrototillertargets ptr:req
 	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS

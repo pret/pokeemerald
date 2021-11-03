@@ -2586,6 +2586,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
 {
     s32 i, byTwo, affectsUser = 0;
     bool32 statusChanged = FALSE;
+    bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
+    u32 flags = 0;
     
     switch (gBattleScripting.moveEffect) // Set move effects which happen later on
     {
@@ -3016,11 +3018,16 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_1:
             case MOVE_EFFECT_ACC_MINUS_1:
             case MOVE_EFFECT_EVS_MINUS_1:
+                flags = affectsUser;
+                if (mirrorArmorReflected && !affectsUser)
+                    flags |= STAT_BUFF_ALLOW_PTR;
+            
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE,
-                                    gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_1 + 1,
-                                     affectsUser, 0))
+                  gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_1 + 1,
+                  flags, gBattlescriptCurrInstr + 1))
                 {
-                    gBattlescriptCurrInstr++;
+                    if (!mirrorArmorReflected)
+                        gBattlescriptCurrInstr++;
                 }
                 else
                 {
@@ -3058,11 +3065,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_2:
             case MOVE_EFFECT_ACC_MINUS_2:
             case MOVE_EFFECT_EVS_MINUS_2:
+                flags = affectsUser;
+                if (mirrorArmorReflected && !affectsUser)
+                    flags |= STAT_BUFF_ALLOW_PTR;
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE,
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_2 + 1,
-                                    affectsUser, 0))
+                                    flags, gBattlescriptCurrInstr + 1))
                 {
-                    gBattlescriptCurrInstr++;
+                    if (!mirrorArmorReflected)
+                        gBattlescriptCurrInstr++;
                 }
                 else
                 {
@@ -9005,6 +9016,14 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_SET_ATTACKER_STICKY_WEB_USER:
+        // For Mirror Armor: "If the Pokémon with this Ability is affected by Sticky Web, the effect is reflected back to the Pokémon which set it up.
+        //  If Pokémon which set up Sticky Web is not on the field, no Pokémon have their Speed lowered."
+        gBattlerAttacker = gBattlerTarget;  // Initialize 'fail' condition
+        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        if (gBattleStruct->stickyWebUser != 0xFF)
+            gBattlerAttacker = gBattleStruct->stickyWebUser;
+        break;
     case VARIOUS_TRY_TO_APPLY_MIMICRY:
     {
         bool8 isMimicryDone = FALSE;
@@ -9553,8 +9572,9 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     bool32 certain = FALSE;
     bool32 notProtectAffected = FALSE;
     u32 index;
+    bool32 affectsUser = (flags & MOVE_EFFECT_AFFECTS_USER);
 
-    if (flags & MOVE_EFFECT_AFFECTS_USER)
+    if (affectsUser)
         gActiveBattler = gBattlerAttacker;
     else
         gActiveBattler = gBattlerTarget;
@@ -9655,8 +9675,9 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             }
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if (GetBattlerAbility(gActiveBattler) == ABILITY_KEEN_EYE
-                 && !certain && statId == STAT_ACC)
+        else if (!certain
+          && ((GetBattlerAbility(gActiveBattler) == ABILITY_KEEN_EYE && statId == STAT_ACC)
+           || (GetBattlerAbility(gActiveBattler) == ABILITY_HYPER_CUTTER && statId == STAT_ATK)))
         {
             if (flags == STAT_BUFF_ALLOW_PTR)
             {
@@ -9669,17 +9690,16 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             }
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if (GetBattlerAbility(gActiveBattler) == ABILITY_HYPER_CUTTER
-                 && !certain && statId == STAT_ATK)
+        else if (GetBattlerAbility(gActiveBattler) == ABILITY_MIRROR_ARMOR && !affectsUser && gBattlerAttacker != gBattlerTarget && gActiveBattler == gBattlerTarget)
         {
             if (flags == STAT_BUFF_ALLOW_PTR)
             {
+                SET_STATCHANGER(statId, GET_STAT_BUFF_VALUE(statValue) | STAT_BUFF_NEGATIVE, TRUE);
                 BattleScriptPush(BS_ptr);
                 gBattleScripting.battler = gActiveBattler;
                 gBattlerAbility = gActiveBattler;
-                gBattlescriptCurrInstr = BattleScript_AbilityNoSpecificStatLoss;
-                gLastUsedAbility = GetBattlerAbility(gActiveBattler);
-                RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
+                gBattlescriptCurrInstr = BattleScript_MirrorArmorReflect;
+                RecordAbilityBattle(gActiveBattler, gBattleMons[gActiveBattler].ability);
             }
             return STAT_CHANGE_DIDNT_WORK;
         }
@@ -11575,6 +11595,7 @@ static void Cmd_setstickyweb(void)
     {
         gSideStatuses[targetSide] |= SIDE_STATUS_STICKY_WEB;
         gSideTimers[targetSide].stickyWebAmount = 1;
+        gBattleStruct->stickyWebUser = gBattlerAttacker;    // For Mirror Armor
         gBattlescriptCurrInstr += 5;
     }
 }
