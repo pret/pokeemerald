@@ -5437,16 +5437,16 @@ static bool32 WaitForWallpaperGfxLoad(void)
 
 static void DrawWallpaper(const void *tilemap, s8 direction, u8 offset)
 {
-    s16 var = offset * 256;
-    s16 var2 = (offset * 2) + 3;
+    s16 tileOffset = offset * 256;
+    s16 paletteNum = (offset * 2) + 3;
     s16 x = ((sStorage->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
 
-    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, var, var2);
+    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 20, 18, x, 2, 20, 18, 17, tileOffset, paletteNum);
 
     if (direction == 0)
         return;
     if (direction > 0)
-        x += 0x14;
+        x += 20;
     else
         x -= 4;
 

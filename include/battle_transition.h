@@ -1,12 +1,11 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
-void TestBattleTransition(u8 transitionId);
 void BattleTransition_StartOnField(u8 transitionId);
 void BattleTransition_Start(u8 transitionId);
 bool8 IsBattleTransitionDone(void);
-bool8 FldEff_Pokeball(void);
-void TransitionPhase1_Task_RunFuncs(u8 taskId);
+bool8 FldEff_PokeballTrail(void);
+void Task_BattleTransition_Intro(u8 taskId);
 void GetBg0TilesDst(u16 **tilemap, u16 **tileset);
 
 extern const struct SpritePalette gSpritePalette_Pokeball;
@@ -26,13 +25,13 @@ enum {
     B_TRANSITION_SHUFFLE,
     B_TRANSITION_BIG_POKEBALL,
     B_TRANSITION_POKEBALLS_TRAIL,
-    B_TRANSITION_CLOCKWISE_BLACKFADE,
+    B_TRANSITION_CLOCKWISE_WIPE,
     B_TRANSITION_RIPPLE,
     B_TRANSITION_WAVE,
     B_TRANSITION_SLICE,
-    B_TRANSITION_WHITEFADE,
+    B_TRANSITION_WHITE_BARS_FADE,
     B_TRANSITION_GRID_SQUARES,
-    B_TRANSITION_SHARDS,
+    B_TRANSITION_ANGLED_WIPES,
     B_TRANSITION_SIDNEY,
     B_TRANSITION_PHOEBE,
     B_TRANSITION_GLACIA,
@@ -47,8 +46,8 @@ enum {
     B_TRANSITION_GROUDON,
     B_TRANSITION_RAYQUAZA,
     B_TRANSITION_SHRED_SPLIT,
-    B_TRANSITION_BLACKHOLE1,
-    B_TRANSITION_BLACKHOLE2,
+    B_TRANSITION_BLACKHOLE,
+    B_TRANSITION_BLACKHOLE_PULSATE,
     B_TRANSITION_RECTANGULAR_SPIRAL,
     B_TRANSITION_FRONTIER_LOGO_WIGGLE,
     B_TRANSITION_FRONTIER_LOGO_WAVE,
