@@ -3394,10 +3394,18 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_RELIC_SONG:
-                if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA)
+                if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE)
                 {
-                    gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
-                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
+                    if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA)
+                    {
+                        gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
+                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
+                    }
+                    else if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE)
+                    {
+                        gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA;
+                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
+                    }
                 }
                 break;
             }
