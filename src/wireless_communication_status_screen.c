@@ -236,12 +236,12 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    WCSS_AddTextPrinterParameterized(0, 1, sHeaderTexts[0], GetStringCenterAlignXOffset(1, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
+    WCSS_AddTextPrinterParameterized(0, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
     for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
     {
-        WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+        WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
-    WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
+    WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 2);
     PutWindowTilemap(1);
@@ -280,9 +280,9 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != GROUPTYPE_TOTAL)
-                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
                 else
-                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 98, COLORMODE_RED);
+                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
             }
             PutWindowTilemap(2);
             CopyWindowToVram(2, 3);

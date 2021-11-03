@@ -874,7 +874,7 @@ static void InitMatchCallPokenavListMenuTemplate(void)
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 3;
-    template.fontId = 7;
+    template.fontId = FONT_NARROW;
     template.listFunc.unk10_2 = BufferMatchCallNameAndDesc;
     template.unk14 = TryDrawRematchPokeballIcon;
     sub_81C81D4(&sMatchCallBgTemplates[2], &template, 2);
@@ -986,14 +986,14 @@ static void PrintNumberOfBattles(u16 windowId)
 static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, int top)
 {
     int y = top * 16 + 1;
-    AddTextPrinterParameterized(windowId, 7, str, 2, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, y, TEXT_SPEED_FF, NULL);
 }
 
 static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
 {
-    int x = GetStringRightAlignXOffset(7, str, 86);
+    int x = GetStringRightAlignXOffset(FONT_NARROW, str, 86);
     int y = top * 16 + 1;
-    AddTextPrinterParameterized(windowId, 7, str, x, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SPEED_FF, NULL);
 }
 
 static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
@@ -1007,9 +1007,9 @@ static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
     else
         StringCopy(mapName, gText_Unknown);
 
-    x = GetStringCenterAlignXOffset(7, mapName, 88);
+    x = GetStringCenterAlignXOffset(FONT_NARROW, mapName, 88);
     FillWindowPixelBuffer(state->locWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(state->locWindowId, 7, mapName, x, 1, 0, NULL);
+    AddTextPrinterParameterized(state->locWindowId, FONT_NARROW, mapName, x, 1, 0, NULL);
 }
 
 static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *state)
@@ -1023,7 +1023,7 @@ static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *state)
         if (optionText == MATCH_CALL_OPTION_COUNT)
             break;
 
-        AddTextPrinterParameterized(state->infoBoxWindowId, 7, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoBoxWindowId, FONT_NARROW, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SPEED_FF, NULL);
     }
 
     CopyWindowToVram(state->infoBoxWindowId, 2);
@@ -1095,7 +1095,7 @@ static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav4Struct *state)
 
 static void PrintCallingDots(struct Pokenav4Struct *state)
 {
-    AddTextPrinterParameterized(state->msgBoxWindowId, 1, sText_CallingDots, 32, 1, 1, NULL);
+    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, sText_CallingDots, 32, 1, 1, NULL);
 }
 
 static bool32 WaitForCallingDotsText(struct Pokenav4Struct *state)
@@ -1106,7 +1106,7 @@ static bool32 WaitForCallingDotsText(struct Pokenav4Struct *state)
 
 static void PrintTrainerIsCloseBy(struct Pokenav4Struct *state)
 {
-    AddTextPrinterParameterized(state->msgBoxWindowId, 1, gText_TrainerCloseBy, 0, 1, 1, NULL);
+    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, gText_TrainerCloseBy, 0, 1, 1, NULL);
 }
 
 static bool32 WaitForTrainerIsCloseByText(struct Pokenav4Struct *state)
@@ -1120,7 +1120,7 @@ static void PrintMatchCallMessage(struct Pokenav4Struct *state)
     int index = GetSelectedPokenavListIndex();
     const u8 *str = GetMatchCallMessageText(index, &state->unkF);
     u8 speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized(state->msgBoxWindowId, 1, str, 32, 1, speed, NULL);
+    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
 }
 
 static bool32 WaitForMatchCallMessageText(struct Pokenav4Struct *state)

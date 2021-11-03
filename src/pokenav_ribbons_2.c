@@ -809,7 +809,7 @@ static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
     FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
-    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, 1, color, -1, gStringVar4);
+    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, 1, color, -1, gStringVar4);
     CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
 }
 
@@ -824,7 +824,7 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
     {
         // Print normal ribbon name/description
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, (i * 16) + 1, color, -1, gRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, -1, gRibbonDescriptionPointers[ribbonId][i]);
     }
     else
     {
@@ -840,7 +840,7 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
         // Print gift ribbon name/description
         ribbonId--;
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
     }
 
     CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
@@ -877,7 +877,7 @@ static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
-    AddTextPrinterParameterized(windowId, 1, gStringVar3, 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar3, 0, 1, TEXT_SPEED_FF, NULL);
     switch (gender)
     {
     case MON_MALE:
@@ -896,7 +896,7 @@ static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
     *(txtPtr++) = CHAR_EXTRA_SYMBOL;
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    AddTextPrinterParameterized(windowId, 1, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(windowId, 2);
 }
 
@@ -932,8 +932,8 @@ static void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr)
     txtPtr = ConvertIntToDecimalStringN(gStringVar1, id, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *(txtPtr++) = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, count, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    x = GetStringCenterAlignXOffset(1, gStringVar1, 56);
-    AddTextPrinterParameterized(structPtr->listIdxWindowId, 1, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar1, 56);
+    AddTextPrinterParameterized(structPtr->listIdxWindowId, FONT_NORMAL, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(structPtr->listIdxWindowId, 2);
 }
 

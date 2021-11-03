@@ -1909,7 +1909,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 void FrontierSpeechToString(const u16 *words)
 {
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);
-    if (GetStringWidth(1, gStringVar4, -1) > 204u)
+    if (GetStringWidth(FONT_NORMAL, gStringVar4, -1) > 204u)
     {
         s32 i = 0;
 

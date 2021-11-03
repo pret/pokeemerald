@@ -1543,7 +1543,7 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
         moveNameBuffer = StringCopy(moveNameBuffer, gMoveNames[move]);
 
         FillWindowPixelBuffer(i + MOVE_WINDOWS_START, PIXEL_FILL(0));
-        Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, 7);
+        Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, FONT_NARROW);
     }
 
     DrawMoveSelectArrow(eContest.playerMoveChoice);
@@ -3029,10 +3029,10 @@ static void PrintContestantTrainerNameWithColor(u8 contestant, u8 color)
     StringCopy(buffer, gText_Slash);
     StringAppend(buffer, gContestMons[contestant].trainerName);
     Contest_CopyStringWithColor(buffer, color);
-    offset = GetStringRightAlignXOffset(7, gDisplayedStringBattle, 0x60);
+    offset = GetStringRightAlignXOffset(FONT_NARROW, gDisplayedStringBattle, 0x60);
     if (offset > 55)
         offset = 55;
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, FONT_NARROW);
 }
 
 static void PrintContestantMonName(u8 contestant)
@@ -3043,7 +3043,7 @@ static void PrintContestantMonName(u8 contestant)
 static void PrintContestantMonNameWithColor(u8 contestant, u8 color)
 {
     Contest_CopyStringWithColor(gContestMons[contestant].nickname, color);
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, FONT_NARROW);
 }
 
 static u16 CalculateContestantRound1Points(u8 who, u8 contestCategory)
@@ -4273,7 +4273,7 @@ static void ContestDebugDoPrint(void)
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
             ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 55, 1, FONT_NARROW);
         }
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -4285,7 +4285,7 @@ static void ContestDebugDoPrint(void)
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
             ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 5, 1, FONT_NARROW);
         }
         SwapMoveDescAndContestTilemaps();
         break;
@@ -5410,7 +5410,7 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
 
     printerTemplate.currentChar = b;
     printerTemplate.windowId = windowId;
-    printerTemplate.fontId = 1;
+    printerTemplate.fontId = FONT_NORMAL;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
     printerTemplate.currentX = 0;
@@ -5457,7 +5457,7 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
 
     printerTemplate.currentChar = currChar;
     printerTemplate.windowId = 4;
-    printerTemplate.fontId = 1;
+    printerTemplate.fontId = FONT_NORMAL;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
     printerTemplate.currentX = 0;
@@ -5968,7 +5968,7 @@ static void ContestDebugPrintBitStrings(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             txtPtr = StringCopy(text1, gText_CDot);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, FONT_NARROW);
             bits = gContestResources->tv[i].winnerFlags;
             for (j = 7; j > -1; j--) // Weird loop.
             {
@@ -5981,7 +5981,7 @@ static void ContestDebugPrintBitStrings(void)
 
             text2[j] = EOS;
             Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, FONT_NARROW);
         }
     }
     else // CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
@@ -6001,8 +6001,8 @@ static void ContestDebugPrintBitStrings(void)
                 text2[j] = text1[j];
 
             text2[j] = EOS;
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, FONT_NARROW);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, FONT_NARROW);
         }
     }
     SwapMoveDescAndContestTilemaps();
@@ -6031,10 +6031,10 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
                 || *nickname == CHAR_SLASH
                 || *nickname == CHAR_HYPHEN
                 || *nickname == CHAR_ELLIPSIS
-                || *nickname == CHAR_DBL_QUOT_LEFT
-                || *nickname == CHAR_DBL_QUOT_RIGHT
-                || *nickname == CHAR_SGL_QUOT_LEFT
-                || *nickname == CHAR_DBL_QUOT_LEFT) // Most likely a typo, CHAR_SGL_QUOT_RIGHT should be here instead.
+                || *nickname == CHAR_DBL_QUOTE_LEFT
+                || *nickname == CHAR_DBL_QUOTE_RIGHT
+                || *nickname == CHAR_SGL_QUOTE_LEFT
+                || *nickname == CHAR_DBL_QUOTE_LEFT) // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
             {
                 nickname++;
             }
