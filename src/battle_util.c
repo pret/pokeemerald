@@ -8957,6 +8957,7 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
     {
         {SPECIES_MIMIKYU_BUSTED, SPECIES_MIMIKYU},
         {SPECIES_GRENINJA_ASH, SPECIES_GRENINJA_BATTLE_BOND},
+        {SPECIES_MELOETTA_PIROUETTE, SPECIES_MELOETTA},
         {SPECIES_AEGISLASH_BLADE, SPECIES_AEGISLASH},
         {SPECIES_DARMANITAN_ZEN_MODE, SPECIES_DARMANITAN},
         {SPECIES_MINIOR, SPECIES_MINIOR_CORE_RED},
@@ -8971,8 +8972,8 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
         {SPECIES_CRAMORANT_GULPING, SPECIES_CRAMORANT},
     };
 
-    if (isSwitchingOut) // Don't revert Mimikyu Busted or Ash-Greninja when switching out
-        i = 2;
+    if (isSwitchingOut) // Don't revert Mimikyu, Greninja, Meloetta when switching out
+        i = 3;
     else
         i = 0;
 
