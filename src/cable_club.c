@@ -1078,7 +1078,7 @@ static void Task_EnterCableClubSeat(u8 taskId)
     case 3:
         // Exit, failure
         SetLinkWaitingForScript();
-        sub_8197AE8(TRUE);
+        EraseFieldMessageBox(TRUE);
         DestroyTask(taskId);
         EnableBothScriptContexts();
         break;

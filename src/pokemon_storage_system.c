@@ -1699,7 +1699,7 @@ static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
 
     DrawStdWindowFrame(windowId, FALSE);
     PrintMenuTable(windowId, OPTIONS_COUNT, (void *)sMainMenuTexts);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, OPTIONS_COUNT, whichMenu);
+    InitMenuInUpperLeftCornerNormal(windowId, OPTIONS_COUNT, whichMenu);
     *windowIdPtr = windowId;
 }
 
@@ -8024,7 +8024,7 @@ static void AddMenu(void)
     ClearWindowTilemap(sStorage->menuWindowId);
     DrawStdFrameWithCustomTileAndPalette(sStorage->menuWindowId, FALSE, 11, 14);
     PrintMenuTable(sStorage->menuWindowId, sStorage->menuItemsCount, (void*)sStorage->menuItems);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sStorage->menuWindowId, sStorage->menuItemsCount, 0);
+    InitMenuInUpperLeftCornerNormal(sStorage->menuWindowId, sStorage->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     sStorage->menuUnusedField = 0;
 }

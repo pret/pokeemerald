@@ -645,7 +645,7 @@ static void CreateApprenticeMenu(u8 menu)
     for (i = 0; i < count; i++)
         AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
 
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, count, 0);
     CreateChooseAnswerTask(TRUE, count, windowId);
 }
 

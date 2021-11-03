@@ -109,7 +109,7 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
     windowId = CreateWindowFromRect(left, top, newWidth, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
     PrintMenuTable(windowId, count, actions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, cursorPos);
+    InitMenuInUpperLeftCornerNormal(windowId, count, cursorPos);
     ScheduleBgCopyTilemapToVram(0);
     InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
 }
@@ -372,7 +372,7 @@ static void CreatePCMultichoice(void)
 
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, numChoices, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
     CopyWindowToVram(windowId, COPYWIN_FULL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
 }
@@ -532,7 +532,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
             }
         }
 
-        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, count - 1);
+        InitMenuInUpperLeftCornerNormal(windowId, count, count - 1);
         CopyWindowToVram(windowId, COPYWIN_FULL);
         InitMultichoiceCheckWrap(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
     }
@@ -696,7 +696,7 @@ static void CreateStartMenuForPokenavTutorial(void)
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionSave, 8, 89, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionOption, 8, 105, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
-    sub_81983AC(windowId, FONT_NORMAL, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
+    InitMenuNormal(windowId, FONT_NORMAL, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }

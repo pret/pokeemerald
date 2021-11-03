@@ -48,13 +48,24 @@ struct Menu
     bool8 APressMuted;
 };
 
+static u16 AddWindowParameterized(u8, u8, u8, u8, u8, u8, u16);
+static void WindowFunc_DrawStandardFrame(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_DrawDialogueFrame(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_ClearStdWindowAndFrame(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_ClearDialogWindowAndFrame(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8, u8, u8, u8, u8, u8);
+static void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
+
 static EWRAM_DATA u8 sStartMenuWindowId = 0;
 static EWRAM_DATA u8 sMapNamePopupWindowId = 0;
 static EWRAM_DATA struct Menu sMenu = {0};
 static EWRAM_DATA u16 sTileNum = 0;
 static EWRAM_DATA u8 sPaletteNum = 0;
 static EWRAM_DATA u8 sYesNoWindowId = 0;
-static EWRAM_DATA u8 sWindowId = 0;
+static EWRAM_DATA u8 sHofPCTopBarWindowId = 0;
 static EWRAM_DATA u16 sFiller = 0;  // needed to align
 static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
 static EWRAM_DATA u16 sTempTileDataBufferIdx = 0;
@@ -94,10 +105,10 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
     .baseBlock = 0x125
 };
 
-const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+static const u16 sHofPC_TopBar_Pal[] = INCBIN_U16("graphics/interface/hof_pc_topbar.gbapal");
+static const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
-// Table of move info icon offsets in graphics/interface_fr/menu.png
+// Table of move info icon offsets in graphics/interface/menu_info.png
 static const struct MenuInfoIcon sMenuInfoIcons[] =
 {   // { width, height, offset }
     { 12, 12, 0x00 },  // Unused
@@ -127,18 +138,6 @@ static const struct MenuInfoIcon sMenuInfoIcons[] =
     [MENU_INFO_ICON_BALL_RED]  = {  8,  8, 0xAE }, // For placed decorations in Secret Base
     [MENU_INFO_ICON_BALL_BLUE] = {  8,  8, 0xAF }, // For placed decorations in player's room
 };
-
-
-// Forward declarations
-void WindowFunc_DrawStandardFrame(u8, u8, u8, u8, u8, u8);
-void WindowFunc_DrawDialogueFrame(u8, u8, u8, u8, u8, u8);
-void WindowFunc_ClearStdWindowAndFrame(u8, u8, u8, u8, u8, u8);
-void WindowFunc_ClearDialogWindowAndFrame(u8, u8, u8, u8, u8, u8);
-void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
-void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8, u8, u8, u8, u8, u8);
-void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
-void WindowFunc_ClearStdWindowAndFrameToTransparent(u8, u8, u8, u8, u8, u8);
-void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
 void InitStandardTextBoxWindows(void)
 {
@@ -249,7 +248,7 @@ void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)
         CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     int i;
 
@@ -316,7 +315,7 @@ void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width
                             STD_WINDOW_PALETTE_NUM);
 }
 
-void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg,
                             DLG_WINDOW_BASE_TILE_NUM + 1,
@@ -411,12 +410,12 @@ void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width
                             DLG_WINDOW_PALETTE_NUM);
 }
 
-void WindowFunc_ClearStdWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_ClearStdWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, STD_WINDOW_PALETTE_NUM);
 }
 
-void WindowFunc_ClearDialogWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_ClearDialogWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg, 0, tilemapLeft - 3, tilemapTop - 1, width + 6, height + 2, STD_WINDOW_PALETTE_NUM);
 }
@@ -489,10 +488,10 @@ u8 GetPlayerTextSpeedDelay(void)
     return sTextSpeedFrameDelays[speed];
 }
 
-u8 sub_81979C4(u8 a1)
+u8 AddStartMenuWindow(u8 numActions)
 {
     if (sStartMenuWindowId == WINDOW_NONE)
-        sStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
+        sStartMenuWindowId = AddWindowParameterized(0, 22, 1, 7, (numActions * 2) + 2, 15, 0x139);
     return sStartMenuWindowId;
 }
 
@@ -525,7 +524,7 @@ static u16 GetStandardFrameBaseTileNum(void)
 u8 AddMapNamePopUpWindow(void)
 {
     if (sMapNamePopupWindowId == WINDOW_NONE)
-        sMapNamePopupWindowId = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
+        sMapNamePopupWindowId = AddWindowParameterized(0, 1, 1, 10, 3, 14, 0x107);
     return sMapNamePopupWindowId;
 }
 
@@ -549,7 +548,7 @@ void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct Text
     AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, 2, 1, 3);
 }
 
-void sub_8197AE8(bool8 copyToVram)
+void EraseFieldMessageBox(bool8 copyToVram)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x11);
     if (copyToVram == TRUE)
@@ -568,7 +567,7 @@ void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 
 }
 
 // Never used.
-void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum)
+static void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum)
 {
     sTileNum = tileNum;
     sPaletteNum = GetWindowAttribute(windowId, WINDOW_PALETTE_NUM);
@@ -579,7 +578,7 @@ void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum)
         CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg,
                             sTileNum + 1,
@@ -684,7 +683,7 @@ void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
         CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg, 0, tilemapLeft - 3, tilemapTop - 1, width + 6, height + 2, 0);
 }
@@ -712,7 +711,7 @@ void DrawStdFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 baseTileNum)
         CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg,
                             sTileNum + 0,
@@ -781,12 +780,13 @@ void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
         CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 0);
 }
 
-u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
+// Creates the window used to display the info bar at the top of the HOF PC that shows the controls and team number.
+u8 HofPCTopBar_AddWindow(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
 {
     struct WindowTemplate window;
     memset(&window, 0, sizeof(window));
@@ -798,51 +798,54 @@ u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
 
     window.tilemapTop = yPos;
     window.height = 2;
-    window.tilemapLeft = 0x1E - xPos;
+    window.tilemapLeft = 30 - xPos;
     window.width = xPos;
     window.paletteNum = palette;
     window.baseBlock = baseTile;
 
-    sWindowId = AddWindow(&window);
+    sHofPCTopBarWindowId = AddWindow(&window);
 
     if (palette > 15)
         palette = 15 * 16;
     else
         palette *= 16;
 
-    LoadPalette(gUnknown_0860F0B0, palette, sizeof(gUnknown_0860F0B0));
-    return sWindowId;
+    LoadPalette(sHofPC_TopBar_Pal, palette, sizeof(sHofPC_TopBar_Pal));
+    return sHofPCTopBarWindowId;
 }
 
-void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
+// All the below functions checking WINDOW_NONE only handle failure of AddWindow in the above function.
+// Because sHofPCTopBarWindowId is not initialized to WINDOW_NONE anywhere it does not handle
+// the window not having been drawn yet.
+void HofPCTopBar_Print(const u8 *string, u8 left, bool8 copyToVram)
 {
     u16 width = 0;
 
-    if (sWindowId != WINDOW_NONE)
+    if (sHofPCTopBarWindowId != WINDOW_NONE)
     {
-        PutWindowTilemap(sWindowId);
-        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
+        PutWindowTilemap(sHofPCTopBarWindowId);
+        FillWindowPixelBuffer(sHofPCTopBarWindowId, PIXEL_FILL(15));
         width = GetStringWidth(FONT_SMALL, string, 0);
-        AddTextPrinterParameterized3(sWindowId,
+        AddTextPrinterParameterized3(sHofPCTopBarWindowId,
                   FONT_SMALL,
-                  0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
+                  236 - (GetWindowAttribute(sHofPCTopBarWindowId, WINDOW_TILEMAP_LEFT) * 8) - left - width,
                   1,
                   sTextColors,
                   0,
                   string);
         if (copyToVram)
-            CopyWindowToVram(sWindowId, COPYWIN_FULL);
+            CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
     }
 }
 
-void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyToVram)
+void HofPCTopBar_PrintPair(const u8 *string, const u8 *string2, bool8 noBg, u8 left, bool8 copyToVram)
 {
     u8 color[3];
     u16 width = 0;
 
-    if (sWindowId != WINDOW_NONE)
+    if (sHofPCTopBarWindowId != WINDOW_NONE)
     {
-        if (a3 != 0)
+        if (noBg)
         {
             color[0] = TEXT_COLOR_TRANSPARENT;
             color[1] = TEXT_COLOR_WHITE;
@@ -854,53 +857,55 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
             color[1] = TEXT_COLOR_WHITE;
             color[2] = TEXT_COLOR_DARK_GRAY;
         }
-        PutWindowTilemap(sWindowId);
-        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
+        PutWindowTilemap(sHofPCTopBarWindowId);
+        FillWindowPixelBuffer(sHofPCTopBarWindowId, PIXEL_FILL(15));
         if (string2 != NULL)
         {
             width = GetStringWidth(FONT_SMALL, string2, 0);
-            AddTextPrinterParameterized3(sWindowId,
+            AddTextPrinterParameterized3(sHofPCTopBarWindowId,
                       FONT_SMALL,
-                      0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
+                      236 - (GetWindowAttribute(sHofPCTopBarWindowId, WINDOW_TILEMAP_LEFT) * 8) - left - width,
                       1,
                       color,
                       0,
                       string2);
         }
-        AddTextPrinterParameterized4(sWindowId, FONT_NORMAL, 4, 1, 0, 0, color, 0, string);
+        AddTextPrinterParameterized4(sHofPCTopBarWindowId, FONT_NORMAL, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
-            CopyWindowToVram(sWindowId, COPYWIN_FULL);
+            CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
     }
 }
 
-void sub_81982D8(void)
+// Unused
+static void HofPCTopBar_CopyToVram(void)
 {
-    if (sWindowId != WINDOW_NONE)
-        CopyWindowToVram(sWindowId, COPYWIN_FULL);
+    if (sHofPCTopBarWindowId != WINDOW_NONE)
+        CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
 }
 
-void sub_81982F0(void)
+// Unused
+static void HofPCTopBar_Clear(void)
 {
-    if (sWindowId != WINDOW_NONE)
+    if (sHofPCTopBarWindowId != WINDOW_NONE)
     {
-        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
-        CopyWindowToVram(sWindowId, COPYWIN_FULL);
+        FillWindowPixelBuffer(sHofPCTopBarWindowId, PIXEL_FILL(15));
+        CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
     }
 }
 
-void sub_8198314(void)
+void HofPCTopBar_RemoveWindow(void)
 {
-    if (sWindowId != WINDOW_NONE)
+    if (sHofPCTopBarWindowId != WINDOW_NONE)
     {
-        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
-        ClearWindowTilemap(sWindowId);
-        CopyWindowToVram(sWindowId, COPYWIN_FULL);
-        RemoveWindow(sWindowId);
-        sWindowId = WINDOW_NONE;
+        FillWindowPixelBuffer(sHofPCTopBarWindowId, PIXEL_FILL(0));
+        ClearWindowTilemap(sHofPCTopBarWindowId);
+        CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
+        RemoveWindow(sHofPCTopBarWindowId);
+        sHofPCTopBarWindowId = WINDOW_NONE;
     }
 }
 
-u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, u8 a7)
+static u8 InitMenu(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, bool8 muteAPress)
 {
     s32 pos;
 
@@ -911,7 +916,7 @@ u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numC
     sMenu.windowId = windowId;
     sMenu.fontId = fontId;
     sMenu.optionHeight = cursorHeight;
-    sMenu.APressMuted = a7;
+    sMenu.APressMuted = muteAPress;
 
     pos = initialCursorPos;
 
@@ -924,15 +929,17 @@ u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numC
     return sMenu.cursorPos;
 }
 
-u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
+// There is no muted version of this, so the version that plays sound when A is pressed is the "Normal" one.
+u8 InitMenuNormal(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
 {
-    return sub_8198348(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos, 0);
+    return InitMenu(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos, FALSE);
 }
 
-u8 sub_81983EC(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initialCursorPos)
+// Unused
+static u8 InitMenuDefaultCursorHeight(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initialCursorPos)
 {
     u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
-    return sub_81983AC(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos);
+    return InitMenuNormal(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos);
 }
 
 void RedrawMenuCursor(u8 oldPos, u8 newPos)
@@ -1098,29 +1105,27 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
+void PrintMenuActionTextsAtPos(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
 {
     u8 i;
     for (i = 0; i < itemCount; i++)
-    {
-        AddTextPrinterParameterized(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, 0xFF, NULL);
-    }
+        AddTextPrinterParameterized(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void sub_81987BC(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, u8 a6, u8 a7)
+// Unused
+static void PrintMenuActionTextsWithSpacing(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, u8 letterSpacing, u8 lineSpacing)
 {
     u8 i;
     for (i = 0; i < itemCount; i++)
-    {
-        AddTextPrinterParameterized5(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, 0xFF, NULL, a6, a7);
-    }
+        AddTextPrinterParameterized5(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SPEED_FF, NULL, letterSpacing, lineSpacing);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void sub_8198854(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
+// Unused
+static void PrintMenuActionTextsAtTop(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
 {
-    PrintTextArray(windowId, fontId, GetFontAttribute(fontId, 0), 1, lineHeight, itemCount, menuActions);
+    PrintMenuActionTextsAtPos(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, lineHeight, itemCount, menuActions);
 }
 
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
@@ -1144,13 +1149,14 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
         printer.currentChar = menuActions[actionIds[i]].text;
         printer.y = (lineHeight * i) + top;
         printer.currentY = printer.y;
-        AddTextPrinter(&printer, 0xFF, NULL);
+        AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
     }
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void sub_81989B8(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
+// Unused
+static void AddItemMenuActionTextPrintersAtTop(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, menuActions, actionIds);
 }
@@ -1173,14 +1179,15 @@ struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 
     return template;
 }
 
-u16 sub_8198AA4(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
+u16 AddWindowParameterized(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
     struct WindowTemplate template;
     SetWindowTemplateFields(&template, bg, left, top, width, height, paletteNum, baseBlock);
     return AddWindow(&template);
 }
 
-void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+// As opposed to CreateYesNoMenu, which has a hard-coded position.
+static void CreateYesNoMenuAtPos(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextPrinterTemplate printer;
 
@@ -1203,12 +1210,12 @@ void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top
 
     AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
 
-    sub_81983AC(sYesNoWindowId, fontId, left, top, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT), 2, initialCursorPos);
+    InitMenuNormal(sYesNoWindowId, fontId, left, top, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT), 2, initialCursorPos);
 }
 
-void sub_8198C34(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum, u8 paletteNum)
+static void CreateYesNoMenuInTopLeft(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum, u8 paletteNum)
 {
-    sub_8198AF8(window, fontId, 0, 1, baseTileNum, paletteNum, 0);
+    CreateYesNoMenuAtPos(window, fontId, 0, 1, baseTileNum, paletteNum, 0);
 }
 
 s8 Menu_ProcessInputNoWrapClearOnChoose(void)
@@ -1232,9 +1239,7 @@ void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u
     for (i = 0; i < a7; i++)
     {
         for (j = 0; j < a6; j++)
-        {
-            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, 0xFF, NULL);
-        }
+            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, TEXT_SPEED_FF, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1268,7 +1273,7 @@ void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth
             printer.y = (GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) * i) + top;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
-            AddTextPrinter(&printer, 0xFF, NULL);
+            AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
         }
     }
 
@@ -1593,7 +1598,8 @@ u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, boo
     return Menu_MoveCursor(0);
 }
 
-u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 itemCount, u8 initialCursorPos)
+// There is no muted version of this function, so the version that plays sound when A is pressed is the "Normal" one.
+u8 InitMenuInUpperLeftCornerNormal(u8 windowId, u8 itemCount, u8 initialCursorPos)
 {
     return InitMenuInUpperLeftCorner(windowId, itemCount, initialCursorPos, FALSE);
 }
@@ -1603,9 +1609,7 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActi
     u32 i;
 
     for (i = 0; i < itemCount; i++)
-    {
-        AddTextPrinterParameterized(windowId, 1, menuActions[i].text, 8, (i * 16) + 1, 0xFF, NULL);
-    }
+        AddTextPrinterParameterized(windowId, 1, menuActions[i].text, 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1631,7 +1635,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *menuActions
         printer.currentChar = menuActions[actionIds[i]].text;
         printer.y = (i * 16) + 1;
         printer.currentY = (i * 16) + 1;
-        AddTextPrinter(&printer, 0xFF, NULL);
+        AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
     }
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1658,8 +1662,8 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
-    AddTextPrinter(&printer, 0xFF, NULL);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sYesNoWindowId, 2, initialCursorPos);
+    AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+    InitMenuInUpperLeftCornerNormal(sYesNoWindowId, 2, initialCursorPos);
 }
 
 void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *menuActions)
@@ -1669,7 +1673,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
     for (i = 0; i < rows; i++)
     {
         for (j = 0; j < columns; j++)
-            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1698,7 +1702,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
             printer.y = (16 * i) + 1;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
-            AddTextPrinter(&printer, 0xFF, NULL);
+            AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
         }
     }
 
@@ -2008,7 +2012,7 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 
     StringExpandPlaceholders(gStringVar4, src);
 
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, 0xFF, 0);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SPEED_FF, 0);
 }
 
 // Unused. Similar to BlitBitmapRect4Bit.
@@ -2105,13 +2109,13 @@ void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
     {
         case 0:
         default:
-            palette = gFireRedMenuElements1_Pal;
+            palette = gMenuInfoElements1_Pal;
             break;
         case 1:
-            palette = gFireRedMenuElements2_Pal;
+            palette = gMenuInfoElements2_Pal;
             break;
         case 2:
-            palette = gFireRedMenuElements3_Pal;
+            palette = gMenuInfoElements3_Pal;
             break;
     }
 
@@ -2120,7 +2124,7 @@ void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
 
 void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y)
 {
-    BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + sMenuInfoIcons[iconId].offset * 32, 0, 0, 128, 128, x, y, sMenuInfoIcons[iconId].width, sMenuInfoIcons[iconId].height);
+    BlitBitmapRectToWindow(windowId, &gMenuInfoElements_Gfx[sMenuInfoIcons[iconId].offset * 32], 0, 0, 128, 128, x, y, sMenuInfoIcons[iconId].width, sMenuInfoIcons[iconId].height);
 }
 
 void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)

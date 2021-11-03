@@ -343,7 +343,6 @@ static const struct HallofFameMon sDummyFameMon =
 static const u8 sHallOfFame_SlotOrder[] = {
     2, 1, 3,
     6, 4, 5,
-    0, 0
 };
 
 // code
@@ -862,7 +861,7 @@ void CB2_DoHallOfFamePC(void)
 
 static void Task_HofPC_CopySaveData(u8 taskId)
 {
-    sub_81980F0(0, 0x1E, 0, 0xC, 0x226);
+    HofPCTopBar_AddWindow(0, 30, 0, 12, 0x226);
     if (Save_LoadGameData(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
     {
         gTasks[taskId].func = Task_HofPC_PrintDataIsCorrupted;
@@ -950,9 +949,9 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
 
     if (gTasks[taskId].tCurrTeamNo <= 0)
-        sub_8198204(gStringVar4, gText_PickCancel, 0, 0, TRUE);
+        HofPCTopBar_PrintPair(gStringVar4, gText_PickCancel, FALSE, 0, TRUE);
     else
-        sub_8198204(gStringVar4, gText_PickNextCancel, 0, 0, TRUE);
+        HofPCTopBar_PrintPair(gStringVar4, gText_PickNextCancel, FALSE, 0, TRUE);
 
     gTasks[taskId].func = Task_HofPC_PrintMonInfo;
 }
@@ -1073,7 +1072,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
         HideBg(0);
         HideBg(1);
         HideBg(3);
-        sub_8198314();
+        HofPCTopBar_RemoveWindow();
         FreeAllWindowBuffers();
         UnsetBgTilemapBuffer(1);
         UnsetBgTilemapBuffer(3);
@@ -1091,7 +1090,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
 
 static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
-    sub_8198180(gText_AButtonExit, 8, TRUE);
+    HofPCTopBar_Print(gText_AButtonExit, 8, TRUE);
     DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, COPYWIN_FULL);

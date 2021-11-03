@@ -2743,7 +2743,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
         AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, FONT_NORMAL, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
         AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, FONT_NORMAL, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
         DrawTextBorderOuter(sDisplay->yesNoMenuWindowId, 1, 13);
-        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sDisplay->yesNoMenuWindowId, 2, initialCursorPos);
+        InitMenuInUpperLeftCornerNormal(sDisplay->yesNoMenuWindowId, 2, initialCursorPos);
     }
 }
 
@@ -2987,8 +2987,8 @@ static void ShowKeyboardSwapMenu(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    PrintTextArray(3, FONT_SHORT, 8, 1, 14, 5, sKeyboardPageTitleTexts);
-    sub_81983AC(3, FONT_SHORT, 0, 1, 14, 5, GetCurrentKeyboardPage());
+    PrintMenuActionTextsAtPos(3, FONT_SHORT, 8, 1, 14, 5, sKeyboardPageTitleTexts);
+    InitMenuNormal(3, FONT_SHORT, 0, 1, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 

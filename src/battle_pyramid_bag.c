@@ -979,7 +979,7 @@ static void OpenContextMenu(u8 taskId)
 static void PrintMenuActionText_SingleRow(u8 windowId)
 {
     AddItemMenuActionTextPrinters(windowId, FONT_NARROW, 8, 1, 0, 0x10, gPyramidBagMenu->menuActionsCount, sMenuActions, gPyramidBagMenu->menuActionIds);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, gPyramidBagMenu->menuActionsCount, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, gPyramidBagMenu->menuActionsCount, 0);
 }
 
 static void PrintMenuActionText_MultiRow(u8 windowId, u8 horizontalCount, u8 verticalCount)

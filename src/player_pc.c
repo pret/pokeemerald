@@ -400,7 +400,7 @@ static void InitPlayerPCMenu(u8 taskId)
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
     sub_81995E4(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, sTopMenuNumOptions, 0);
+    InitMenuInUpperLeftCornerNormal(tWindowId, sTopMenuNumOptions, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = PlayerPCProcessMenuInput;
 }
@@ -511,7 +511,7 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
     PrintMenuTable(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), sItemStorage_MenuActions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, 4, var);
+    InitMenuInUpperLeftCornerNormal(tWindowId, 4, var);
     ScheduleBgCopyTilemapToVram(0);
     ItemStorageMenuPrint(sItemStorage_OptionDescriptions[var]);
 }
@@ -753,7 +753,7 @@ static void Mailbox_PrintMailOptions(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_OPTIONS);
     PrintMenuTable(windowId, ARRAY_COUNT(gMailboxMailOptions), gMailboxMailOptions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 4, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, 4, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Mailbox_MailOptionsProcessInput;
 }

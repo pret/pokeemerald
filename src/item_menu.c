@@ -1668,7 +1668,7 @@ static void OpenContextMenu(u8 taskId)
 static void PrintContextMenuItems(u8 windowId)
 {
     AddItemMenuActionTextPrinters(windowId, FONT_NARROW, 8, 1, 0, 16, gBagMenu->contextMenuNumItems, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, gBagMenu->contextMenuNumItems, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, gBagMenu->contextMenuNumItems, 0);
 }
 
 static void PrintContextMenuItemGrid(u8 windowId, u8 columns, u8 rows)
