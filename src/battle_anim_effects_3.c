@@ -22,6 +22,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/weather.h"
+#include "constants/hold_effects.h"
 
 extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
 
@@ -5526,10 +5527,12 @@ static void AnimRecycle_Step(struct Sprite *sprite)
 
 void AnimTask_GetWeather(u8 taskId)
 {
+    bool32 utilityUmbrellaAffected = GetBattlerHoldEffect(gBattleAnimAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA;
+    
     gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_NONE;
-    if (gWeatherMoveAnim & WEATHER_SUN_ANY)
+    if (gWeatherMoveAnim & WEATHER_SUN_ANY && !utilityUmbrellaAffected)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SUN;
-    else if (gWeatherMoveAnim & WEATHER_RAIN_ANY)
+    else if (gWeatherMoveAnim & WEATHER_RAIN_ANY && !utilityUmbrellaAffected)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_RAIN;
     else if (gWeatherMoveAnim & WEATHER_SANDSTORM_ANY)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SANDSTORM;

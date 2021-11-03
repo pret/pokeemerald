@@ -4289,9 +4289,9 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     // weather abilities
     if (WEATHER_HAS_EFFECT)
     {
-        if (ability == ABILITY_SWIFT_SWIM       && gBattleWeather & WEATHER_RAIN_ANY)
+        if (ability == ABILITY_SWIFT_SWIM       && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & WEATHER_RAIN_ANY)
             speed *= 2;
-        else if (ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY)
+        else if (ability == ABILITY_CHLOROPHYLL && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & WEATHER_SUN_ANY)
             speed *= 2;
         else if (ability == ABILITY_SAND_RUSH   && gBattleWeather & WEATHER_SANDSTORM_ANY)
             speed *= 2;
@@ -5123,6 +5123,7 @@ void RunBattleScriptCommands(void)
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 {
     u32 moveType, ateType, attackerAbility;
+    u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (move == MOVE_STRUGGLE)
         return;
@@ -5135,11 +5136,11 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     {
         if (WEATHER_HAS_EFFECT)
         {
-            if (gBattleWeather & WEATHER_RAIN_ANY)
+            if (gBattleWeather & WEATHER_RAIN_ANY && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
                 gBattleStruct->dynamicMoveType = TYPE_WATER | 0x80;
             else if (gBattleWeather & WEATHER_SANDSTORM_ANY)
                 gBattleStruct->dynamicMoveType = TYPE_ROCK | 0x80;
-            else if (gBattleWeather & WEATHER_SUN_ANY)
+            else if (gBattleWeather & WEATHER_SUN_ANY && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
                 gBattleStruct->dynamicMoveType = TYPE_FIRE | 0x80;
             else if (gBattleWeather & WEATHER_HAIL_ANY)
                 gBattleStruct->dynamicMoveType = TYPE_ICE | 0x80;
@@ -5163,7 +5164,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     }
     else if (gBattleMoves[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM)
     {
-        if (GetBattlerHoldEffect(battlerAtk, TRUE) == gBattleMoves[move].argument)
+        if (holdEffect == gBattleMoves[move].argument)
             gBattleStruct->dynamicMoveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item) | 0x80;
     }
     else if (gBattleMoves[move].effect == EFFECT_REVELATION_DANCE)
@@ -5223,7 +5224,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
     // Check if a gem should activate.
     GET_MOVE_TYPE(move, moveType);
-    if (GetBattlerHoldEffect(battlerAtk, TRUE) == HOLD_EFFECT_GEMS
+    if (holdEffect == HOLD_EFFECT_GEMS
         && moveType == ItemId_GetSecondaryId(gBattleMons[battlerAtk].item))
     {
         gSpecialStatuses[battlerAtk].gemParam = GetBattlerHoldEffectParam(battlerAtk);
