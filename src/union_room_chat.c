@@ -458,10 +458,10 @@ static const u8 sCaseToggleTable[256] = {
     [CHAR_LEFT_PAREN] = CHAR_LEFT_PAREN,
     [CHAR_RIGHT_PAREN] = CHAR_RIGHT_PAREN,
     [CHAR_AMPERSAND] = CHAR_AMPERSAND,
-    [CHAR_DBL_QUOT_LEFT] = CHAR_DBL_QUOT_LEFT,
-    [CHAR_DBL_QUOT_RIGHT] = CHAR_DBL_QUOT_RIGHT,
-    [CHAR_SGL_QUOT_LEFT] = CHAR_SGL_QUOT_LEFT,
-    [CHAR_SGL_QUOT_RIGHT] = CHAR_SGL_QUOT_RIGHT,
+    [CHAR_DBL_QUOTE_LEFT] = CHAR_DBL_QUOTE_LEFT,
+    [CHAR_DBL_QUOTE_RIGHT] = CHAR_DBL_QUOTE_RIGHT,
+    [CHAR_SGL_QUOTE_LEFT] = CHAR_SGL_QUOTE_LEFT,
+    [CHAR_SGL_QUOTE_RIGHT] = CHAR_SGL_QUOTE_RIGHT,
     [CHAR_MASCULINE_ORDINAL] = CHAR_MASCULINE_ORDINAL,
     [CHAR_FEMININE_ORDINAL] = CHAR_FEMININE_ORDINAL,
     [CHAR_BULLET] = CHAR_BULLET,
@@ -2740,8 +2740,8 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     {
         FillWindowPixelBuffer(sDisplay->yesNoMenuWindowId, PIXEL_FILL(1));
         PutWindowTilemap(sDisplay->yesNoMenuWindowId);
-        AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, 1, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, 1, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, FONT_NORMAL, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, FONT_NORMAL, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
         DrawTextBorderOuter(sDisplay->yesNoMenuWindowId, 1, 13);
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sDisplay->yesNoMenuWindowId, 2, initialCursorPos);
     }
@@ -2811,7 +2811,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
         DrawTextBorderInner(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
-            1,
+            FONT_NORMAL,
             str,
             sDisplayStdMessages[msgId].x + 8,
             sDisplayStdMessages[msgId].y + 8,
@@ -2825,7 +2825,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
         DrawTextBorderOuter(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
-            1,
+            FONT_NORMAL,
             str,
             sDisplayStdMessages[msgId].x,
             sDisplayStdMessages[msgId].y,
@@ -2877,7 +2877,7 @@ static void DrawTextEntryMessage(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shad
     strBuffer[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
     strBuffer[2] = 8;
     StringCopy(&strBuffer[3], str);
-    AddTextPrinterParameterized3(1, 2, x * 8, 1, color, TEXT_SPEED_FF, strBuffer);
+    AddTextPrinterParameterized3(1, FONT_SHORT, x * 8, 1, color, TEXT_SPEED_FF, strBuffer);
 }
 
 static void PrintCurrentKeyboardPage(void)
@@ -2912,7 +2912,7 @@ static void PrintCurrentKeyboardPage(void)
                 return;
 
             StringCopy(&str[3], sUnionRoomKeyboardText[page][i]);
-            AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
+            AddTextPrinterParameterized3(2, FONT_SMALL, left, top, color, TEXT_SPEED_FF, str);
         }
     }
     else
@@ -2921,9 +2921,9 @@ static void PrintCurrentKeyboardPage(void)
         for (i = 0, top = 0; i < UNION_ROOM_KB_ROW_COUNT; i++, top += 12)
         {
             str2 = GetRegisteredTextByRow(i);
-            if (GetStringWidth(0, str2, 0) <= 40)
+            if (GetStringWidth(FONT_SMALL, str2, 0) <= 40)
             {
-                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str2);
+                AddTextPrinterParameterized3(2, FONT_SMALL, left, top, color, TEXT_SPEED_FF, str2);
             }
             else
             {
@@ -2932,10 +2932,10 @@ static void PrintCurrentKeyboardPage(void)
                 {
                     length--;
                     StringCopyN_Multibyte(str, str2, length);
-                } while (GetStringWidth(0, str, 0) > 35);
+                } while (GetStringWidth(FONT_SMALL, str, 0) > 35);
 
-                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
-                AddTextPrinterParameterized3(2, 0, left + 35, top, color, TEXT_SPEED_FF, sText_Ellipsis);
+                AddTextPrinterParameterized3(2, FONT_SMALL, left, top, color, TEXT_SPEED_FF, str);
+                AddTextPrinterParameterized3(2, FONT_SMALL, left + 35, top, color, TEXT_SPEED_FF, sText_Ellipsis);
             }
         }
     }
@@ -2987,8 +2987,8 @@ static void ShowKeyboardSwapMenu(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    PrintTextArray(3, 2, 8, 1, 14, 5, sKeyboardPageTitleTexts);
-    sub_81983AC(3, 2, 0, 1, 14, 5, GetCurrentKeyboardPage());
+    PrintTextArray(3, FONT_SHORT, 8, 1, 14, 5, sKeyboardPageTitleTexts);
+    sub_81983AC(3, FONT_SHORT, 0, 1, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 
@@ -3006,7 +3006,7 @@ static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
     color[1] = colorIdx * 2 + 2;
     color[2] = colorIdx * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);
-    AddTextPrinterParameterized3(0, 2, 0, row * 15 + 1, color, TEXT_SPEED_FF, str);
+    AddTextPrinterParameterized3(0, FONT_SHORT, 0, row * 15 + 1, color, TEXT_SPEED_FF, str);
 }
 
 static void ResetGpuBgState(void)

@@ -1644,8 +1644,8 @@ static void ErrorMsg_MoveCloserToPartner(void)
     LoadPalette(sWirelessLinkDisplayPal, 0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(0, 3, 2, 6, sTextColors, 0, gText_CommErrorEllipsis);
-    AddTextPrinterParameterized3(2, 3, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
+    AddTextPrinterParameterized3(0, FONT_SHORT_COPY_1, 2, 6, sTextColors, 0, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(2, FONT_SHORT_COPY_1, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
@@ -1657,7 +1657,7 @@ static void ErrorMsg_CheckConnections(void)
     LoadBgTiles(0, sCommErrorBg_Gfx, 0x20, 0);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(1, 3, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
+    AddTextPrinterParameterized3(1, FONT_SHORT_COPY_1, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);
     CopyWindowToVram(1, 0);
@@ -1692,9 +1692,9 @@ static void CB2_PrintErrorMessage(void)
             break;
         case 130:
             if (gWirelessCommType == 2)
-                AddTextPrinterParameterized3(0, 3, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
+                AddTextPrinterParameterized3(0, FONT_SHORT_COPY_1, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
             else if (gWirelessCommType == 1)
-                AddTextPrinterParameterized3(0, 3, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
+                AddTextPrinterParameterized3(0, FONT_SHORT_COPY_1, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
             break;
     }
     if (gMain.state == 160)

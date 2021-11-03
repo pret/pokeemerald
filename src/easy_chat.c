@@ -3176,7 +3176,7 @@ static bool8 UpdateMainCursor(void)
         else
         {
             CopyEasyChatWord(str, *ecWord);
-            stringWidth = GetStringWidth(1, str, 0);
+            stringWidth = GetStringWidth(FONT_NORMAL, str, 0);
         }
 
         trueStringWidth = stringWidth + 17;
@@ -3930,9 +3930,9 @@ static void PrintTitle(void)
     if (!titleText)
         return;
 
-    xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
+    xOffset = GetStringCenterAlignXOffset(FONT_NORMAL, titleText, 144);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    PrintEasyChatTextWithColors(0, 1, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    PrintEasyChatTextWithColors(0, FONT_NORMAL, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -4003,10 +4003,10 @@ static void PrintEasyChatStdMessage(u8 msgId)
 
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     if (text1)
-        PrintEasyChatText(1, 1, text1, 0, 1, TEXT_SPEED_FF, 0);
+        PrintEasyChatText(1, FONT_NORMAL, text1, 0, 1, TEXT_SPEED_FF, 0);
 
     if (text2)
-        PrintEasyChatText(1, 1, text2, 0, 17, TEXT_SPEED_FF, 0);
+        PrintEasyChatText(1, FONT_NORMAL, text2, 0, 17, TEXT_SPEED_FF, 0);
 
     CopyWindowToVram(1, 3);
 }
@@ -4099,7 +4099,7 @@ static void PrintCurrentPhrase(void)
         }
 
         *str = EOS;
-        PrintEasyChatText(sScreenControl->windowId, 1, sScreenControl->phrasePrintBuffer, 0, i * 16 + 1, TEXT_SPEED_FF, 0);
+        PrintEasyChatText(sScreenControl->windowId, FONT_NORMAL, sScreenControl->phrasePrintBuffer, 0, i * 16 + 1, TEXT_SPEED_FF, 0);
     }
 
     CopyWindowToVram(sScreenControl->windowId, 3);
@@ -4245,7 +4245,7 @@ static void PrintKeyboardGroupNames(void)
                 return;
             }
 
-            PrintEasyChatText(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
+            PrintEasyChatText(2, FONT_NORMAL, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
         }
 
         y += 16;
@@ -4257,7 +4257,7 @@ static void PrintKeyboardAlphabet(void)
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardAlphabet); i++)
-        PrintEasyChatText(2, 1, sEasyChatKeyboardAlphabet[i], 10, 97 + i * 16, TEXT_SPEED_FF, NULL);
+        PrintEasyChatText(2, FONT_NORMAL, sEasyChatKeyboardAlphabet[i], 10, 97 + i * 16, TEXT_SPEED_FF, NULL);
 }
 
 static void PrintInitialWordSelectText(void)
@@ -4328,9 +4328,9 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
             {
                 CopyEasyChatWordPadded(sScreenControl->wordSelectPrintBuffer, easyChatWord, 0);
                 if (!DummyWordCheck(easyChatWord))
-                    PrintEasyChatText(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, NULL);
+                    PrintEasyChatText(2, FONT_NORMAL, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, NULL);
                 else // Never reached
-                    PrintEasyChatTextWithColors(2, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
+                    PrintEasyChatTextWithColors(2, FONT_NORMAL, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
             }
         }
 
@@ -5082,7 +5082,7 @@ static void AddMainScreenButtonWindow(void)
         if (str)
         {
             int x = sFooterOptionXOffsets[footerIndex][i];
-            PrintEasyChatText(windowId, 1, str, x, 1, 0, NULL);
+            PrintEasyChatText(windowId, FONT_NORMAL, str, x, 1, 0, NULL);
         }
     }
 

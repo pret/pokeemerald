@@ -5065,7 +5065,7 @@ static void InitMovementNormal(struct ObjectEvent *objectEvent, struct Sprite *s
 
 static void StartRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
-    InitNpcForMovement(objectEvent, sprite, direction, 1);
+    InitNpcForMovement(objectEvent, sprite, direction, MOVE_SPEED_FAST_1);
     SetStepAnimHandleAlternation(objectEvent, sprite, GetRunningDirectionAnimNum(objectEvent->facingDirection));
 }
 
@@ -8223,15 +8223,19 @@ static const SpriteStepFunc sStep8Funcs[] = {
 };
 
 static const SpriteStepFunc *const sNpcStepFuncTables[] = {
-    sStep1Funcs,
-    sStep2Funcs,
-    sStep3Funcs,
-    sStep4Funcs,
-    sStep8Funcs,
+    [MOVE_SPEED_NORMAL] = sStep1Funcs,
+    [MOVE_SPEED_FAST_1] = sStep2Funcs,
+    [MOVE_SPEED_FAST_2] = sStep3Funcs,
+    [MOVE_SPEED_FASTER] = sStep4Funcs,
+    [MOVE_SPEED_FASTEST] = sStep8Funcs,
 };
 
 static const s16 sStepTimes[] = {
-    16, 8, 6, 4, 2
+    [MOVE_SPEED_NORMAL] = 16,
+    [MOVE_SPEED_FAST_1] = 8,
+    [MOVE_SPEED_FAST_2] = 6,
+    [MOVE_SPEED_FASTER] = 4,
+    [MOVE_SPEED_FASTEST] = 2,
 };
 
 static bool8 NpcTakeStep(struct Sprite *sprite)

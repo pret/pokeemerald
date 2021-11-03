@@ -1310,7 +1310,7 @@ bool8 ScrCmd_messageinstant(struct ScriptContext *ctx)
         msg = (const u8 *)ctx->data[0];
     LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
-    AddTextPrinterParameterized(0, 1, msg, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, msg, 0, 1, 0, 0);
     return FALSE;
 }
 
@@ -1497,7 +1497,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     // in Emerald they are unused and position is calculated below instead
     StringExpandPlaceholders(gStringVar4, ptr + 6);
 
-    width = GetStringWidth(6, gStringVar4, -1) / 8u;
+    width = GetStringWidth(FONT_BRAILLE, gStringVar4, -1) / 8u;
 
     if (width > 28)
         width = 28;
@@ -1532,7 +1532,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     DrawStdWindowFrame(gBrailleWindowId, 0);
     PutWindowTilemap(gBrailleWindowId);
     FillWindowPixelBuffer(gBrailleWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(gBrailleWindowId, 6, gStringVar4, xText, yText, 0xFF, 0x0);
+    AddTextPrinterParameterized(gBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, 0xFF, 0x0);
     CopyWindowToVram(gBrailleWindowId, 3);
     return FALSE;
 }

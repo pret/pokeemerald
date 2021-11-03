@@ -1358,7 +1358,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         txtColor[0] = zero2;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
-    AddTextPrinterParameterized4(windowId, 1, 0, 1, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, -1, string);
 
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6u)
@@ -1402,7 +1402,7 @@ static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgC
     txtColor[0] = bgColor;
     txtColor[1] = fgColor;
     txtColor[2] = shadowColor;
-    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, txtColor, -1, string);
     CpuCopy16(tileData1, dst, tileSize);
     CpuCopy16(tileData2, dst + offset, tileSize);
     RemoveWindow(windowId);
@@ -1561,7 +1561,7 @@ static void Task_PCMainMenu(u8 taskId)
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         CopyWindowToVram(task->tWindowId, 3);
         task->tState++;
@@ -1585,7 +1585,7 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 task->tSelectedOption = task->tNextOption;
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 1, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
             }
             break;
         case MENU_B_PRESSED:
@@ -1601,14 +1601,14 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 1, gText_PartyFull, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PartyFull, 0, NULL, 2, 1, 3);
                 task->tState = STATE_ERROR_MSG;
             }
             else if (task->tInput == OPTION_DEPOSIT && CountPartyMons() == 1)
             {
                 // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 1, gText_JustOnePkmn, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, FONT_NORMAL, gText_JustOnePkmn, 0, NULL, 2, 1, 3);
                 task->tState = STATE_ERROR_MSG;
             }
             else
@@ -1626,7 +1626,7 @@ static void Task_PCMainMenu(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 1, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
             task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_UP))
@@ -1636,7 +1636,7 @@ static void Task_PCMainMenu(u8 taskId)
             Menu_MoveCursor(-1);
             task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 1, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
             task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -1646,7 +1646,7 @@ static void Task_PCMainMenu(u8 taskId)
             Menu_MoveCursor(1);
             task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 1, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
             task->tState = STATE_HANDLE_INPUT;
         }
         break;
@@ -1950,14 +1950,14 @@ static void ChooseBoxMenu_PrintInfo(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
 
     // Print box name
-    center = GetStringCenterAlignXOffset(1, boxName, 64);
-    AddTextPrinterParameterized3(windowId, 1, center, 1, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, boxName);
+    center = GetStringCenterAlignXOffset(FONT_NORMAL, boxName, 64);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 1, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, boxName);
 
     // Print #/30 for number of Pokémon in the box
     ConvertIntToDecimalStringN(numBoxMonsText, numInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringAppend(numBoxMonsText, sText_OutOf30);
-    center = GetStringCenterAlignXOffset(1, numBoxMonsText, 64);
-    AddTextPrinterParameterized3(windowId, 1, center, 17, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, numBoxMonsText);
+    center = GetStringCenterAlignXOffset(FONT_NORMAL, numBoxMonsText, 64);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 17, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, numBoxMonsText);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(sChooseBoxMenu->tileTag) * 32), 0x400);
@@ -4005,17 +4005,17 @@ static void PrintDisplayMonInfo(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        AddTextPrinterParameterized(0, 1, sStorage->displayMonNameText, 6, 0, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, 2, sStorage->displayMonSpeciesName, 6, 15, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, 2, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, 0, sStorage->displayMonItemName, 6, 43, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SPEED_FF, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, 0, sStorage->displayMonItemName, 6, 0, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, 1, sStorage->displayMonNameText, 6, 13, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, 2, sStorage->displayMonSpeciesName, 6, 28, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, 2, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SPEED_FF, NULL);
     }
 
     CopyWindowToVram(0, 2);
@@ -4319,7 +4319,7 @@ static void PrintMessage(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, 1, sStorage->messageText, 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SPEED_FF, NULL);
     DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
@@ -5437,16 +5437,16 @@ static bool32 WaitForWallpaperGfxLoad(void)
 
 static void DrawWallpaper(const void *tilemap, s8 direction, u8 offset)
 {
-    s16 var = offset * 256;
-    s16 var2 = (offset * 2) + 3;
+    s16 tileOffset = offset * 256;
+    s16 paletteNum = (offset * 2) + 3;
     s16 x = ((sStorage->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
 
-    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, var, var2);
+    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 20, 18, x, 2, 20, 18, 17, tileOffset, paletteNum);
 
     if (direction == 0)
         return;
     if (direction > 0)
-        x += 0x14;
+        x += 20;
     else
         x -= 4;
 
@@ -5635,7 +5635,7 @@ static void CycleBoxTitleColor(void)
 
 static s16 GetBoxTitleBaseX(const u8 *string)
 {
-    return DISPLAY_WIDTH - 64 - GetStringWidth(1, string, 0) / 2;
+    return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_NORMAL, string, 0) / 2;
 }
 
 
@@ -9203,7 +9203,7 @@ static void PrintItemDescription(void)
         description = ItemId_GetDescription(sStorage->displayMonItemId);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    AddTextPrinterParameterized5(2, 1, description, 4, 0, 0, NULL, 0, 1);
+    AddTextPrinterParameterized5(2, FONT_NORMAL, description, 4, 0, 0, NULL, 0, 1);
 }
 
 static void InitItemInfoWindow(void)

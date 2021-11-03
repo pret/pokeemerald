@@ -306,8 +306,8 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
         StringExpandPlaceholders(gStringVar4, sMuseumCaptions[category]);
     }
 
-    x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
-    AddTextPrinterParameterized(sWindowId, 1, gStringVar4, x, 1, 0, 0);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
+    AddTextPrinterParameterized(sWindowId, FONT_NORMAL, gStringVar4, x, 1, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 

@@ -40,7 +40,7 @@ int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
 
     for (maxWidth = 0, i = 0; i < numActions; i++)
     {
-        int stringWidth = GetStringWidth(1, actions[i].text, 0);
+        int stringWidth = GetStringWidth(FONT_NORMAL, actions[i].text, 0);
         if (stringWidth > maxWidth)
             maxWidth = stringWidth;
     }
@@ -54,7 +54,7 @@ int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8* a
 
     for (maxWidth = 0, i = 0; i < numActions; i++)
     {
-        int stringWidth = GetStringWidth(1, actions[actionIds[i]].text, 0);
+        int stringWidth = GetStringWidth(FONT_NORMAL, actions[actionIds[i]].text, 0);
         if (stringWidth > maxWidth)
             maxWidth = stringWidth;
     }
