@@ -2586,7 +2586,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     s32 i, byTwo, affectsUser = 0;
     bool32 statusChanged = FALSE;
     bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
-    u32 flags;
+    u32 flags = 0;
     
     switch (gBattleScripting.moveEffect) // Set move effects which happen later on
     {
@@ -3017,7 +3017,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_1:
             case MOVE_EFFECT_ACC_MINUS_1:
             case MOVE_EFFECT_EVS_MINUS_1:
-                flags = affectsUser | certain;
+                flags = affectsUser;
                 if (mirrorArmorReflected && !affectsUser)
                     flags |= STAT_BUFF_ALLOW_PTR;
             
@@ -3064,7 +3064,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_2:
             case MOVE_EFFECT_ACC_MINUS_2:
             case MOVE_EFFECT_EVS_MINUS_2:
-                flags = affectsUser | certain;
+                flags = affectsUser;
                 if (mirrorArmorReflected && !affectsUser)
                     flags |= STAT_BUFF_ALLOW_PTR;
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE,
@@ -9567,7 +9567,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     bool32 certain = FALSE;
     bool32 notProtectAffected = FALSE;
     u32 index;
-    bool32 affectsUser = flags & MOVE_EFFECT_AFFECTS_USER;
+    bool32 affectsUser = (flags & MOVE_EFFECT_AFFECTS_USER);
 
     if (affectsUser)
         gActiveBattler = gBattlerAttacker;
