@@ -1925,7 +1925,7 @@ BattleScript_MimicryLoop_NextBattler:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_MimicryLoopIter
 	restoretarget
-	end
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectTopsyTurvy:
 	attackcanceler

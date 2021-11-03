@@ -2319,8 +2319,10 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
                 for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+                {
                     if (GetBattlerAbility(i) == ABILITY_MIMICRY)
                         RestoreBattlerOriginalTypes(i);
+                }
                 BattleScriptExecute(BattleScript_ElectricTerrainEnds);
                 effect++;
             }
@@ -2332,8 +2334,10 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN);
                 for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+                {
                     if (GetBattlerAbility(i) == ABILITY_MIMICRY)
                         RestoreBattlerOriginalTypes(i);
+                }
                 BattleScriptExecute(BattleScript_MistyTerrainEnds);
                 effect++;
             }
@@ -2347,8 +2351,10 @@ u8 DoFieldEndTurnEffects(void)
                 {
                     gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
                     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+                    {
                         if (GetBattlerAbility(i) == ABILITY_MIMICRY)
                             RestoreBattlerOriginalTypes(i);
+                    }
                 }
                 BattleScriptExecute(BattleScript_GrassyTerrainHeals);
                 effect++;
@@ -2361,8 +2367,10 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_PSYCHIC_TERRAIN);
                 for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+                {
                     if (GetBattlerAbility(i) == ABILITY_MIMICRY)
                         RestoreBattlerOriginalTypes(i);
+                }
                 BattleScriptExecute(BattleScript_PsychicTerrainEnds);
                 effect++;
             }
