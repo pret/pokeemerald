@@ -391,6 +391,10 @@
 #define ANIM_TAG_DREEPY                     (ANIM_SPRITES_START + 379)
 #define ANIM_TAG_ICE_ROCK_SINGLE            (ANIM_SPRITES_START + 380)
 #define ANIM_TAG_STONE_PILLAR_MULTI         (ANIM_SPRITES_START + 381)
+#define ANIM_TAG_ALPHA_SYMBOL               (ANIM_SPRITES_START + 382)
+#define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 383)
+#define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
+#define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 385)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -458,7 +462,7 @@
 #define BG_WATER_2                              41
 #define BG_POISON                               42
 #define BG_AEROBLAST                            43
-#define BG_HIGH_SPEED                           44  //hurricane, close combat
+#define BG_HURRICANE                            44  
 #define BG_ELECTRIC_TERRAIN                     45
 #define BG_GRASSY_TERRAIN                       46
 #define BG_MISTY_TERRAIN                        47
@@ -492,6 +496,8 @@
 #define BG_HYPER_BEAM                           75
 #define BG_DYNAMAX_CANNON                       76
 #define BG_AURA_SPHERE                          77
+#define BG_STEEL_BEAM_OPPONENT                  78
+#define BG_STEEL_BEAM_PLAYER                    79
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0
@@ -523,6 +529,9 @@
 #define B_ANIM_SLIDE_OFFSCREEN          26 // for Emergency Exit
 #define B_ANIM_RESTORE_BG               27 // for Terrain Endings
 #define B_ANIM_TOTEM_FLARE              28 // Totem boosts aura flare
+#define B_ANIM_GULP_MISSILE             29
+#define B_ANIM_STRONG_WINDS             30
+#define B_ANIM_PRIMAL_REVERSION         31
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

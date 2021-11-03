@@ -1543,6 +1543,11 @@
 	.byte \case
 	.endm
 
+	.macro handleprimalreversion battler:req, case:req
+	various \battler, VARIOUS_HANDLE_PRIMAL_REVERSION
+	.byte \case
+	.endm
+
 	.macro handleformchange battler:req, case:req
 	various \battler, VARIOUS_HANDLE_FORM_CHANGE
 	.byte \case
@@ -1579,6 +1584,10 @@
 
 	.macro showabilitypopup battler:req
 	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+	
+	.macro updateabilitypopup battler:req
+	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
 	.endm
 
 	.macro defogclear battler:req, clear:req, ptr:req
@@ -1768,6 +1777,11 @@
 	.macro tryactivategrimneigh, battler:req
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
+	
+	.macro consumeberry battler:req, restoreItem=FALSE
+	various \battler, VARIOUS_CONSUME_BERRY
+	.byte \restoreItem
+	.endm
 
 	.macro activateitemeffects battler:req
 	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
@@ -1821,6 +1835,49 @@
 	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
 	.endm
 	
+	.macro trytoclearprimalweather
+	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
+	.endm
+	
+	.macro setattackertostickywebuser
+	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
+	.endm
+
+	.macro getrototillertargets ptr:req
+	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnotrototilleraffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED
+	.4byte \ptr
+	.endm
+
+	.macro tryactivatebattlebond battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_BATTLE_BOND
+	.endm
+
+	.macro jumpifcantreverttoprimal ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL
+	.4byte \ptr
+	.endm
+  
+	.macro applyplasmafists
+	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
+	.endm
+	
+	.macro jumpifweatheraffected battler:req, weather:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_WEATHER_AFFECTED
+	.4byte \weather
+	.4byte \ptr
+	.endm
+
+	.macro jumpifspecies battler:req, species:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SPECIES
+	.2byte \species
+	.4byte \ptr
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
@@ -1925,6 +1982,12 @@
 	1:
 	.endm
 
+	.macro jumpifflowerveilattacker jumpptr:req
+	jumpifnottype BS_ATTACKER, TYPE_GRASS, 1f
+	jumpifability BS_ATTACKER_SIDE, ABILITY_FLOWER_VEIL, \jumpptr
+	1:
+	.endm
+
 	.macro setallytonexttarget jumpptr:req
 	jumpifbyte CMP_GREATER_THAN, gBattlerTarget, 0x1, 1f
 	addbyte gBattlerTarget, 0x2
@@ -1934,10 +1997,9 @@
 	goto \jumpptr
 	.endm
 
-	.macro jumpifleafguard jumpptr:req
-	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, 1f
-	jumpifability BS_TARGET, ABILITY_LEAF_GUARD, \jumpptr
-	1:
+	.macro jumpifleafguardprotected battler:req, jumpptr:req
+	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
+	.4byte \jumpptr
 	.endm
 
 	.macro jumpifsafeguard jumpptr:req
