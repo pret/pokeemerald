@@ -655,9 +655,9 @@ static void PrintSearchResultListMenuItems(struct PokenavSub8 *searchList)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     *gStringVar1 = EOS;
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar2, gText_NumberF700);
-    AddTextPrinterParameterized(searchList->winid, 1, gStringVar2, 4, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar2, 4, 1, 0xFF, NULL);
     ConvertIntToDecimalStringN(gStringVar1, r7, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized(searchList->winid, 1, gStringVar1, 34, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar1, 34, 1, 0xFF, NULL);
     CopyWindowToVram(searchList->winid, 2);
 }
 
@@ -674,7 +674,7 @@ static void InitConditionSearchListMenuTemplate(void)
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;
-    template.fontId = 1;
+    template.fontId = FONT_NORMAL;
     template.listFunc.printMonFunc = PrintSearchMonListItem;
     template.unk14 = NULL;
     sub_81C81D4(&sConditionSearchResultBgTemplates[1], &template, 0);
@@ -705,7 +705,7 @@ static void PrintSearchMonListItem(struct PokenavMonList * item, u8 * dest)
     }
 
     StringGetEnd10(gStringVar3);
-    dest = GetStringClearToWidth(dest, 1, gStringVar3, 60);
+    dest = GetStringClearToWidth(dest, FONT_NORMAL, gStringVar3, 60);
     switch (gender)
     {
     default:
@@ -723,5 +723,5 @@ static void PrintSearchMonListItem(struct PokenavMonList * item, u8 * dest)
     *s++ = CHAR_EXTRA_SYMBOL;
     *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    GetStringClearToWidth(dest, 1, gStringVar1, 40);
+    GetStringClearToWidth(dest, FONT_NORMAL, gStringVar1, 40);
 }

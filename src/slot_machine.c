@@ -1253,7 +1253,7 @@ static bool8 SlotAction_HandleBetInput(struct Task *task)
 static bool8 SlotAction_PrintMsg_Need3Coins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = SLOT_ACTION_WAIT_MSG_NEED_3_COINS;
     return FALSE;
@@ -1518,7 +1518,7 @@ static bool8 SlotAction_NoMatches(struct Task *task)
 static bool8 SlotAction_AskQuit(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = SLOT_ACTION_HANDLE_QUIT_INPUT;
@@ -1550,7 +1550,7 @@ static bool8 SlotAction_HandleQuitInput(struct Task *task)
 static bool8 SlotAction_PrintMsg_9999Coins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = SLOT_ACTION_WAIT_MSG_MAX_COINS;
     return FALSE;
@@ -1571,7 +1571,7 @@ static bool8 SlotAction_WaitMsg_9999Coins(struct Task *task)
 static bool8 SlotAction_PrintMsg_NoMoreCoins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = SLOT_ACTION_WAIT_MSG_NO_MORE_COINS;
     return FALSE;
@@ -3444,7 +3444,7 @@ static void InfoBox_DrawWindow(struct Task *task)
 
 static void InfoBox_AddText(struct Task *task)
 {
-    AddTextPrinterParameterized3(1, 1, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, 3);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
     task->tState++;

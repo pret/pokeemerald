@@ -4312,7 +4312,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     }
 
     // Initialize the text printer
-    textPrinter.fontId = 2;
+    textPrinter.fontId = FONT_SHORT;
     textPrinter.x = 0;
     textPrinter.y = 0;
     textPrinter.currentX = textPrinter.x;
@@ -4393,7 +4393,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     else
         textPrinter.currentChar = sBattleDomePotentialTexts[trainerTourneyId];
 
-    textPrinter.fontId = 1;
+    textPrinter.fontId = FONT_NORMAL;
     textPrinter.windowId = windowId + 4;
     textPrinter.currentX = 0;
     textPrinter.y = 4;
@@ -4859,7 +4859,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
     textPrinter.currentChar = gStringVar4;
     textPrinter.windowId = windowId + 8;
-    textPrinter.fontId = 1;
+    textPrinter.fontId = FONT_NORMAL;
     PutWindowTilemap(windowId + 8);
     CopyWindowToVram(windowId + 8, 3);
     textPrinter.currentX = 0;
@@ -4874,7 +4874,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     else
         CopyDomeTrainerName(gStringVar1, trainerIds[0]);
 
-    textPrinter.fontId = 2;
+    textPrinter.fontId = FONT_SHORT;
     textPrinter.letterSpacing = 2;
     textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId + 6;
@@ -5339,7 +5339,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 4:
-        textPrinter.fontId = 2;
+        textPrinter.fontId = FONT_SHORT;
         textPrinter.currentChar = gText_BattleTourney;
         textPrinter.windowId = 2;
         textPrinter.x = 0;
@@ -5524,7 +5524,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
         {
             gTasks[taskId].tState = STATE_DELAY;
             gTasks[taskId].data[3] = 64;
-            textPrinter.fontId = 2;
+            textPrinter.fontId = FONT_SHORT;
             textPrinter.x = 0;
             textPrinter.y = 0;
             textPrinter.letterSpacing = 2;
