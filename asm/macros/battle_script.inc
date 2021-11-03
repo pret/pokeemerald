@@ -1839,8 +1839,8 @@
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
 	
-	.macro getrandommirrorarmortarget
-	various BS_TARGET, VARIOUS_GET_RANDOM_MIRROR_ARMOR_TARGET
+	.macro setattackertostickywebuser
+	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
 	.endm
 
 	.macro getrototillertargets ptr:req

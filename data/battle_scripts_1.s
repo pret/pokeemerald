@@ -2910,10 +2910,11 @@ BattleScript_MirrorArmorReflectWontFall:
 	copybyte gBattlerTarget, gBattlerAttacker	@ STRINGID_STATSWONTDECREASE uses target
 	goto BattleScript_MirrorArmorReflectPrintString
 
+@ gBattlerTarget is battler with Mirror Armor
 BattleScript_MirrorArmorReflectStickyWeb:
 	call BattleScript_AbilityPopUp
-	getrandommirrorarmortarget
-	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_AbilityNoSpecificStatLossPrint
+	setattackertostickywebuser
+	jumpifbyteequal gBattlerAttacker, gBattlerTarget, BattleScript_StickyWebOnSwitchInEnd	@ Sticky web user not on field -> no stat loss
 	goto BattleScript_MirrorArmorReflectStatLoss 
 	
 BattleScript_StatDown::

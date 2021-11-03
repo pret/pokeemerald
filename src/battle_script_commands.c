@@ -9015,24 +9015,13 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
-    case VARIOUS_GET_RANDOM_MIRROR_ARMOR_TARGET:
-        i = BATTLE_OPPOSITE(gActiveBattler);
-        gBattlerAttacker = gBattlerTarget;
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-        {
-            if (IsBattlerAlive(i)
-              && !(gBattleMons[i].status2 & STATUS2_SUBSTITUTE))
-                gBattlerAttacker = i;
-            else if (IsBattlerAlive(BATTLE_PARTNER(i))
-              && !(gBattleMons[BATTLE_PARTNER(i)].status2 & STATUS2_SUBSTITUTE))
-                gBattlerAttacker = BATTLE_PARTNER(i);
-        }
-        else
-        {
-            if (IsBattlerAlive(i) && !(gBattleMons[i].status2 & STATUS2_SUBSTITUTE))
-                gBattlerAttacker = i;
-        }
+    case VARIOUS_SET_ATTACKER_STICKY_WEB_USER:
+        // For Mirror Armor: "If the Pokémon with this Ability is affected by Sticky Web, the effect is reflected back to the Pokémon which set it up.
+        //  If Pokémon which set up Sticky Web is not on the field, no Pokémon have their Speed lowered."
+        gBattlerAttacker = gBattlerTarget;  // Initialize 'fail' condition
         SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        if (gBattleStruct->stickyWebUser != 0xFF)
+            gBattlerAttacker = gBattleStruct->stickyWebUser;
         break;
     }
 
@@ -11590,6 +11579,7 @@ static void Cmd_setstickyweb(void)
     {
         gSideStatuses[targetSide] |= SIDE_STATUS_STICKY_WEB;
         gSideTimers[targetSide].stickyWebAmount = 1;
+        gBattleStruct->stickyWebUser = gBattlerAttacker;    // For Mirror Armor
         gBattlescriptCurrInstr += 5;
     }
 }
