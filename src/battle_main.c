@@ -2933,6 +2933,8 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
     
+    gBattleStruct->stickyWebUser = 0xFF;
+    
     for (i = 0; i < PARTY_SIZE; i++)
     {
         gBattleStruct->usedHeldItems[i][0] = 0;
@@ -3030,6 +3032,9 @@ void SwitchInClearSetData(void)
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][3] = 0;
     gBattleStruct->lastMoveFailed &= ~(gBitTable[gActiveBattler]);
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
+    
+    if (gActiveBattler == gBattleStruct->stickyWebUser)
+        gBattleStruct->stickyWebUser = 0xFF;    // Switched into sticky web user slot so reset it
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3127,6 +3132,9 @@ void FaintClearSetData(void)
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][3] = 0;
 
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
+    
+    if (gActiveBattler == gBattleStruct->stickyWebUser)
+        gBattleStruct->stickyWebUser = 0xFF;    // User of sticky web fainted, so reset the stored battler ID
 
     for (i = 0; i < gBattlersCount; i++)
     {

@@ -404,5 +404,7 @@ extern const u8 BattleScript_PrimalReversion[];
 extern const u8 BattleScript_HyperspaceFuryRemoveProtect[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGorillaTactics[];
 extern const u8 BattleScript_WanderingSpiritActivates[];
+extern const u8 BattleScript_MirrorArmorReflect[];
+extern const u8 BattleScript_GooeyActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
