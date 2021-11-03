@@ -2276,7 +2276,7 @@ static bool32 Display_ShowKeyboardSwapMenu(u8 *state)
     {
     case 0:
         ShowKeyboardSwapMenu();
-        CopyWindowToVram(3, 3);
+        CopyWindowToVram(3, COPYWIN_FULL);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -2292,7 +2292,7 @@ static bool32 Display_HideKeyboardSwapMenu(u8 *state)
     {
     case 0:
         HideKeyboardSwapMenu();
-        CopyWindowToVram(3, 3);
+        CopyWindowToVram(3, COPYWIN_FULL);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -2312,7 +2312,7 @@ static bool32 Display_SwitchPages(u8 *state)
             return TRUE;
 
         PrintCurrentKeyboardPage();
-        CopyWindowToVram(2, 2);
+        CopyWindowToVram(2, COPYWIN_GFX);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -2345,7 +2345,7 @@ static bool32 Display_AskQuitChatting(u8 *state)
     case 0:
         AddStdMessageWindow(STDMESSAGE_QUIT_CHATTING, 0);
         AddYesNoMenuAt(23, 11, 1);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -2389,7 +2389,7 @@ static bool32 Display_UpdateMessageBuffer(u8 *state)
         FillTextEntryWindow(x, width, 0);
         str = GetMessageEntryBuffer();
         DrawTextEntryMessage(0, str, 3, 1, 2);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -2418,13 +2418,13 @@ static bool32 Display_AskRegisterText(u8 *state)
         length = StringLength_Multibyte(str);
         FillTextEntryWindow(x, length, PIXEL_FILL(6));
         DrawTextEntryMessage(x, str, 0, 4, 5);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             AddStdMessageWindow(STDMESSAGE_REGISTER_WHERE, 16);
-            CopyWindowToVram(sDisplay->messageWindowId, 3);
+            CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         }
         else
         {
@@ -2459,13 +2459,13 @@ static bool32 Display_CancelRegister(u8 *state)
         length = StringLength_Multibyte(str);
         FillTextEntryWindow(x, length, PIXEL_FILL(0));
         DrawTextEntryMessage(x, str, 3, 1, 2);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             HideStdMessageWindow();
-            CopyWindowToVram(sDisplay->messageWindowId, 3);
+            CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         }
         else
         {
@@ -2497,7 +2497,7 @@ static bool32 Display_ReturnToKeyboard(u8 *state)
     {
     case 0:
         PrintCurrentKeyboardPage();
-        CopyWindowToVram(2, 2);
+        CopyWindowToVram(2, COPYWIN_GFX);
         (*state)++;
         break;
     case 1:
@@ -2523,7 +2523,7 @@ static bool32 Display_ScrollChat(u8 *state)
         str = GetLastReceivedMessage();
         colorIdx = GetReceivedPlayerIndex();
         PrintChatMessage(row, str, colorIdx);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -2543,7 +2543,7 @@ static bool32 Display_ScrollChat(u8 *state)
         // fall through
     case 2:
         ScrollWindow(0, 0, 5, PIXEL_FILL(1));
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         sDisplay->scrollCount++;
         (*state)++;
         // fall through
@@ -2588,7 +2588,7 @@ static bool32 Display_PrintInputText(u8 *state)
     {
     case 0:
         AddStdMessageWindow(STDMESSAGE_INPUT_TEXT, 16);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2604,7 +2604,7 @@ static bool32 Display_PrintExitingChat(u8 *state)
     {
     case 0:
         AddStdMessageWindow(STDMESSAGE_EXITING_CHAT, 0);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2625,7 +2625,7 @@ static bool32 Display_PrintLeaderLeft(u8 *state)
         str = GetChatHostName();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
         AddStdMessageWindow(STDMESSAGE_LEADER_LEFT, 0);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2642,7 +2642,7 @@ static bool32 Display_AskSave(u8 *state)
     case 0:
         AddStdMessageWindow(STDMESSAGE_ASK_SAVE, 0);
         AddYesNoMenuAt(23, 10, 1);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2659,7 +2659,7 @@ static bool32 Display_AskOverwriteSave(u8 *state)
     case 0:
         AddStdMessageWindow(STDMESSAGE_ASK_OVERWRITE, 0);
         AddYesNoMenuAt(23, 10, 1);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2675,7 +2675,7 @@ static bool32 Display_PrintSavingDontTurnOff(u8 *state)
     {
     case 0:
         AddStdMessageWindow(STDMESSAGE_SAVING_NO_OFF, 0);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2693,7 +2693,7 @@ static bool32 Display_PrintSavedTheGame(u8 *state)
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         AddStdMessageWindow(STDMESSAGE_SAVED_THE_GAME, 0);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2710,7 +2710,7 @@ static bool32 Display_AskConfirmLeaderLeave(u8 *state)
     case 0:
         AddStdMessageWindow(STDMESSAGE_WARN_LEADER_LEAVE, 0);
         AddYesNoMenuAt(23, 10, 1);
-        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        CopyWindowToVram(sDisplay->messageWindowId, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -3085,14 +3085,14 @@ static void LoadChatMessagesWindow(void)
     LoadPalette(sUnk_Palette2, 0xF0, sizeof(sUnk_Palette2));
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void LoadKeyboardWindow(void)
 {
     PutWindowTilemap(2);
     PrintCurrentKeyboardPage();
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_FULL);
 }
 
 static void LoadTextEntryWindow(void)
@@ -3107,7 +3107,7 @@ static void LoadTextEntryWindow(void)
 
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void LoadKeyboardSwapWindow(void)

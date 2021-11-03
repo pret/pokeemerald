@@ -1125,7 +1125,7 @@ static void AddOptionDescriptionWindow(void)
     ptr->optionDescWindowId = AddWindow(&sOptionDescWindowTemplate);
     PutWindowTilemap(ptr->optionDescWindowId);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    CopyWindowToVram(ptr->optionDescWindowId, 3);
+    CopyWindowToVram(ptr->optionDescWindowId, COPYWIN_FULL);
 }
 
 static void PrintCurrentOptionDescription(void)

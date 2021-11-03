@@ -334,7 +334,7 @@ void ShowLinkBattleRecords(void)
     }
 
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, 3);
+    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
 
 void RemoveRecordsWindow(void)
@@ -382,7 +382,7 @@ static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     RemoveWindow(windowId);
 }
 

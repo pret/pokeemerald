@@ -614,7 +614,7 @@ void PrintOnTrainerHillRecordsWindow(void)
     }
 
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
     FreeDataStruct();
 }
 

@@ -275,13 +275,13 @@ void CopyWindowToVram(u8 windowId, u8 mode)
 
     switch (mode)
     {
-    case 1:
+    case COPYWIN_MAP:
         CopyBgTilemapBufferToVram(windowLocal.window.bg);
         break;
-    case 2:
+    case COPYWIN_GFX:
         LoadBgTiles(windowLocal.window.bg, windowLocal.tileData, windowSize, windowLocal.window.baseBlock);
         break;
-    case 3:
+    case COPYWIN_FULL:
         LoadBgTiles(windowLocal.window.bg, windowLocal.tileData, windowSize, windowLocal.window.baseBlock);
         CopyBgTilemapBufferToVram(windowLocal.window.bg);
         break;
@@ -307,13 +307,13 @@ void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h)
 
         switch (mode)
         {
-        case 1:
+        case COPYWIN_MAP:
             CopyBgTilemapBufferToVram(windowLocal.window.bg);
             break;
-        case 2:
+        case COPYWIN_GFX:
             LoadBgTiles(windowLocal.window.bg, windowLocal.tileData + (rectPos * 32), rectSize, windowLocal.window.baseBlock + rectPos);
             break;
-        case 3:
+        case COPYWIN_FULL:
             LoadBgTiles(windowLocal.window.bg, windowLocal.tileData + (rectPos * 32), rectSize, windowLocal.window.baseBlock + rectPos);
             CopyBgTilemapBufferToVram(windowLocal.window.bg);
             break;
@@ -693,13 +693,13 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
 
     switch (mode)
     {
-    case 1:
+    case COPYWIN_MAP:
         CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
         break;
-    case 2:
+    case COPYWIN_GFX:
         LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
         break;
-    case 3:
+    case COPYWIN_FULL:
         LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
         CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
         break;

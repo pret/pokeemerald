@@ -140,7 +140,7 @@ static void DisplayDiplomaText(void)
     StringExpandPlaceholders(gStringVar4, gText_PokedexDiploma);
     PrintDiplomaText(gStringVar4, 0, 1);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static const struct BgTemplate sDiplomaBgTemplates[2] =

@@ -1144,7 +1144,7 @@ static void ItemStorage_CreateListMenu(u8 taskId)
         text = gText_WithdrawItem;
     x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 104);
     AddTextPrinterParameterized(sItemStorageMenu->windowIds[ITEMPC_WIN_TITLE], FONT_NORMAL, text, x, 1, 0, NULL);
-    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], 2);
+    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], COPYWIN_GFX);
     ItemStorage_CompactList();
     ItemStorage_CompactCursor();
     ItemStorage_RefreshListMenu();

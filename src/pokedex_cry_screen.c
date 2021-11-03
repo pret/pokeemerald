@@ -432,7 +432,7 @@ static void DrawWaveformSegment(u8 position, u8 amplitude)
 
 static void DrawWaveformWindow(u8 windowId)
 {
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 // rsVertical is leftover from a very different version of this function in RS

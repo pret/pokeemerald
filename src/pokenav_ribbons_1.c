@@ -652,7 +652,7 @@ static void AddRibbonsMonListWindow(struct PokenavSub10 *monMenu)
     PutWindowTilemap(monMenu->winid);
     r2 = GetRibbonsMonListCount();
     sub_81D02B0(monMenu->winid, 0, r2);
-    CopyWindowToVram(monMenu->winid, 1);
+    CopyWindowToVram(monMenu->winid, COPYWIN_MAP);
     sub_81D0288(monMenu);
 }
 
@@ -661,7 +661,7 @@ static void sub_81D0288(struct PokenavSub10 *monMenu)
     s32 r4 = GetSelectedPokenavListIndex();
     s32 r2 = GetRibbonsMonListCount();
     sub_81D02B0(monMenu->winid, r4 + 1, r2);
-    CopyWindowToVram(monMenu->winid, 2);
+    CopyWindowToVram(monMenu->winid, COPYWIN_GFX);
 }
 
 static void sub_81D02B0(s32 windowId, s32 val1, s32 val2)

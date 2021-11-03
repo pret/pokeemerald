@@ -387,7 +387,7 @@ static void ShowSafariBallsWindow(void)
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
-    CopyWindowToVram(sSafariBallsWindowId, 2);
+    CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
 }
 
 static void ShowPyramidFloorWindow(void)
@@ -402,7 +402,7 @@ static void ShowPyramidFloorWindow(void)
     StringCopy(gStringVar1, sPyramidFloorNames[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     AddTextPrinterParameterized(sBattlePyramidFloorWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
-    CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
+    CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
 }
 
 static void RemoveExtraStartMenuWindows(void)
@@ -410,7 +410,7 @@ static void RemoveExtraStartMenuWindows(void)
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
-        CopyWindowToVram(sSafariBallsWindowId, 2);
+        CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
         RemoveWindow(sSafariBallsWindowId);
     }
     if (InBattlePyramid())
@@ -483,7 +483,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 5:
         sStartMenuCursorPos = sub_81983AC(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
-        CopyWindowToVram(GetStartMenuWindowId(), TRUE);
+        CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
 
@@ -1247,7 +1247,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
                                         TEXT_COLOR_LIGHT_GRAY);
             DrawTextBorderOuter(0, 8, 14);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_FULL);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
 
             if (gWirelessCommType != 0 && InUnionRoom())
@@ -1363,7 +1363,7 @@ static void ShowSaveInfoWindow(void)
     xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
     AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
-    CopyWindowToVram(sSaveInfoWindowId, 2);
+    CopyWindowToVram(sSaveInfoWindowId, COPYWIN_GFX);
 }
 
 static void RemoveSaveInfoWindow(void)

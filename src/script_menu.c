@@ -280,7 +280,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
         SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, 0);
         PrintMenuGridTable(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, sMultichoiceLists[multichoiceId].list);
         InitMenuActionGrid(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, 0);
-        CopyWindowToVram(gTasks[taskId].tWindowId, 3);
+        CopyWindowToVram(gTasks[taskId].tWindowId, COPYWIN_FULL);
         return TRUE;
     }
 }
@@ -373,7 +373,7 @@ static void CreatePCMultichoice(void)
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, numChoices, 0);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
 }
 
@@ -533,7 +533,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
 
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, count - 1);
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
         InitMultichoiceCheckWrap(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
     }
 }
@@ -698,7 +698,7 @@ static void CreateStartMenuForPokenavTutorial(void)
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
     sub_81983AC(windowId, FONT_NORMAL, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 #define tWindowId       data[6]

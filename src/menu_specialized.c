@@ -754,7 +754,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x29, TEXT_SPEED_FF, NULL);
     if (chosenMove == LIST_CANCEL)
     {
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         return;
     }
     move = &gBattleMoves[chosenMove];
@@ -813,7 +813,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 
     if (chosenMove == MENU_NOTHING_CHOSEN)
     {
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         return;
     }
 
@@ -824,7 +824,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     str = gContestEffectDescriptionPointers[move->effect];
     AddTextPrinterParameterized(1, FONT_NARROW, str, 0, 0x41, TEXT_SPEED_FF, NULL);
 
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)

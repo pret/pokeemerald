@@ -596,9 +596,9 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
         {
         case 0:
             if (winMode)
-                CopyWindowToVram(structPtr->nameGenderWindowId, 3);
+                CopyWindowToVram(structPtr->nameGenderWindowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->nameGenderWindowId, 2);
+                CopyWindowToVram(structPtr->nameGenderWindowId, COPYWIN_GFX);
 
             if (IsConditionMenuSearchMode() == TRUE)
             {
@@ -612,9 +612,9 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
             }
         case 1:
             if (winMode)
-                CopyWindowToVram(structPtr->listIndexWindowId, 3);
+                CopyWindowToVram(structPtr->listIndexWindowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->listIndexWindowId, 2);
+                CopyWindowToVram(structPtr->listIndexWindowId, COPYWIN_GFX);
 
             structPtr->windowModeState = 0;
             return TRUE;
@@ -628,8 +628,8 @@ void CopyUnusedConditionWindowsToVram(void)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
 
-    CopyWindowToVram(structPtr->unusedWindowId1, 3);
-    CopyWindowToVram(structPtr->unusedWindowId2, 3);
+    CopyWindowToVram(structPtr->unusedWindowId1, COPYWIN_FULL);
+    CopyWindowToVram(structPtr->unusedWindowId2, COPYWIN_FULL);
 }
 
 void sub_81CE964(struct Sprite *sprite)

@@ -802,7 +802,7 @@ static void DrawPokeblockInfo(s32 pkblId)
         for (i = 0; i < FLAVOR_COUNT; i++)
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
 
-        CopyWindowToVram(7, 2);
+        CopyWindowToVram(7, COPYWIN_GFX);
     }
 
     ScheduleBgCopyTilemapToVram(0);

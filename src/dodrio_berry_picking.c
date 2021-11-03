@@ -2968,7 +2968,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
         window.width = width;
         tWindowId = AddWindow(&window);
         PrintRecordsText(tWindowId, width);
-        CopyWindowToVram(tWindowId, 3);
+        CopyWindowToVram(tWindowId, COPYWIN_FULL);
         tState++;
         break;
     case 1:
@@ -2979,7 +2979,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(tWindowId);
-            CopyWindowToVram(tWindowId, 1);
+            CopyWindowToVram(tWindowId, COPYWIN_MAP);
             tState++;
         }
         break;
@@ -4650,7 +4650,7 @@ static void ShowNames(void)
                 colorsId = COLORID_BLUE;
             name = GetPlayerName(playerId);
             AddTextPrinterParameterized3(sGfx->windowIds[i], FONT_NORMAL, left, 1, sTextColorTable[colorsId], -1, name);
-            CopyWindowToVram(sGfx->windowIds[i], 2);
+            CopyWindowToVram(sGfx->windowIds[i], COPYWIN_GFX);
             window.baseBlock += 0xE;
             DrawMessageWindow(&window);
         }
@@ -4798,8 +4798,8 @@ static void ShowResults(void)
                     AddTextPrinterParameterized(sGfx->windowIds[1], FONT_NORMAL, gStringVar4, sResultsXCoords[j] - width, sResultsYCoords[i], -1, NULL);
             }
         }
-        CopyWindowToVram(sGfx->windowIds[0], 2);
-        CopyWindowToVram(sGfx->windowIds[1], 2);
+        CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
+        CopyWindowToVram(sGfx->windowIds[1], COPYWIN_GFX);
         sGfx->state++;
         break;
     case 3:
@@ -4831,8 +4831,8 @@ static void ShowResults(void)
         break;
     case 6:
         PrintRankedScores(numPlayers);
-        CopyWindowToVram(sGfx->windowIds[0], 2);
-        CopyWindowToVram(sGfx->windowIds[1], 2);
+        CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
+        CopyWindowToVram(sGfx->windowIds[1], COPYWIN_GFX);
         sGfx->state++;
         break;
     case 7:
@@ -4890,8 +4890,8 @@ static void ShowResults(void)
                 DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_FilledStorageSpace);
             AddTextPrinterParameterized(sGfx->windowIds[1], FONT_NORMAL, gStringVar4, 0, 41, -1, NULL);
         }
-        CopyWindowToVram(sGfx->windowIds[0], 2);
-        CopyWindowToVram(sGfx->windowIds[1], 2);
+        CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
+        CopyWindowToVram(sGfx->windowIds[1], COPYWIN_GFX);
         sGfx->state++;
         break;
     case 10:
@@ -4950,8 +4950,8 @@ static void Msg_WantToPlayAgain(void)
         AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_Yes, 8, 1, -1, NULL);
         AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_No, 8, 17, -1, NULL);
         AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_SelectorArrow2, 0, 1, -1, NULL);
-        CopyWindowToVram(sGfx->windowIds[WIN_PLAY_AGAIN], 2);
-        CopyWindowToVram(sGfx->windowIds[WIN_YES_NO], 2);
+        CopyWindowToVram(sGfx->windowIds[WIN_PLAY_AGAIN], COPYWIN_GFX);
+        CopyWindowToVram(sGfx->windowIds[WIN_YES_NO], COPYWIN_GFX);
         sGfx->state++;
         break;
     case 2:
@@ -4973,7 +4973,7 @@ static void Msg_WantToPlayAgain(void)
         AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_Yes, 8, 1, -1, NULL);
         AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_No, 8, 17, -1, NULL);
         AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_SelectorArrow2, 0, ((y - 1) * 16) + 1, -1, NULL);
-        CopyWindowToVram(sGfx->windowIds[WIN_YES_NO], 3);
+        CopyWindowToVram(sGfx->windowIds[WIN_YES_NO], COPYWIN_FULL);
 
         // Increment state only if A or B button have been pressed.
         if (JOY_NEW(A_BUTTON))
@@ -5029,7 +5029,7 @@ static void Msg_SavingDontTurnOff(void)
         sGfx->state++;
         break;
     case 1:
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         sGfx->state++;
         break;
     case 2:
@@ -5064,7 +5064,7 @@ static void Msg_CommunicationStandby(void)
     case 1:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_CommunicationStandby3, 0, 5, -1, NULL);
-        CopyWindowToVram(sGfx->windowIds[0], 2);
+        CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
         sGfx->state++;
         break;
     case 2:
@@ -5104,7 +5104,7 @@ static void Msg_SomeoneDroppedOut(void)
     case 1:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_SomeoneDroppedOut, 0, 5, -1, NULL);
-        CopyWindowToVram(sGfx->windowIds[0], 2);
+        CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
         sGfx->state++;
         break;
     case 2:

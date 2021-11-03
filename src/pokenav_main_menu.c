@@ -555,7 +555,7 @@ static void InitHelpBar(void)
     structPtr->helpBarWindowId = 0;
     DrawHelpBar(structPtr->helpBarWindowId);
     PutWindowTilemap(structPtr->helpBarWindowId);
-    CopyWindowToVram(structPtr->helpBarWindowId, 3); // TODO: Use a defined constant here.
+    CopyWindowToVram(structPtr->helpBarWindowId, COPYWIN_FULL);
 }
 
 void PrintHelpBarText(u32 textId)

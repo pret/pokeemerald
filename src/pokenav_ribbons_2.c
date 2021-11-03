@@ -810,7 +810,7 @@ static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
     FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
     AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, 1, color, -1, gStringVar4);
-    CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
+    CopyWindowToVram(structPtr->ribbonCountWindowId, COPYWIN_GFX);
 }
 
 static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
@@ -843,7 +843,7 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
             AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
     }
 
-    CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
+    CopyWindowToVram(structPtr->ribbonCountWindowId, COPYWIN_GFX);
 }
 
 static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
@@ -897,7 +897,7 @@ static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 static const struct WindowTemplate sRibbonMonListIndexWindowTemplate[] =
@@ -934,7 +934,7 @@ static void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr)
     ConvertIntToDecimalStringN(txtPtr, count, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar1, 56);
     AddTextPrinterParameterized(structPtr->listIdxWindowId, FONT_NORMAL, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(structPtr->listIdxWindowId, 2);
+    CopyWindowToVram(structPtr->listIdxWindowId, COPYWIN_GFX);
 }
 
 static void ResetSpritesAndDrawMonFrontPic(struct PokenavSub14 *structPtr)

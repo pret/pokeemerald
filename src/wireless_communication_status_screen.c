@@ -243,9 +243,9 @@ static void PrintHeaderTexts(void)
     }
     WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 #define tState data[0]
@@ -285,7 +285,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
                     WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
             }
             PutWindowTilemap(2);
-            CopyWindowToVram(2, 3);
+            CopyWindowToVram(2, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {

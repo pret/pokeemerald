@@ -493,7 +493,7 @@ static void Task_ResetRtc_HandleInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         PrintTime(tWindowId, 0, 1, tDays, tHours, tMinutes, tSeconds);
-        CopyWindowToVram(tWindowId, 2);
+        CopyWindowToVram(tWindowId, COPYWIN_GFX);
     }
 }
 
@@ -599,7 +599,7 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
             gSaveBlock2Ptr->lastBerryTreeUpdate.seconds);
 
         ShowMessage(gText_ResetRTCConfirmCancel);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         ScheduleBgCopyTilemapToVram(0);
         tState++;
     case 1:

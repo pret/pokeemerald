@@ -177,7 +177,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
                     ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance -= sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed];
                 }
-                CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
+                CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
             }
             else
             {

@@ -3934,7 +3934,7 @@ static void PrintTitle(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PrintEasyChatTextWithColors(0, FONT_NORMAL, titleText, xOffset, 1, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void PrintEasyChatText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -4008,7 +4008,7 @@ static void PrintEasyChatStdMessage(u8 msgId)
     if (text2)
         PrintEasyChatText(1, FONT_NORMAL, text2, 0, 17, TEXT_SPEED_FF, 0);
 
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void CreateEasyChatYesNoMenu(u8 initialCursorPos)
@@ -4102,7 +4102,7 @@ static void PrintCurrentPhrase(void)
         PrintEasyChatText(sScreenControl->windowId, FONT_NORMAL, sScreenControl->phrasePrintBuffer, 0, i * 16 + 1, TEXT_SPEED_FF, 0);
     }
 
-    CopyWindowToVram(sScreenControl->windowId, 3);
+    CopyWindowToVram(sScreenControl->windowId, COPYWIN_FULL);
 }
 
 static void BufferFrameTilemap(u16 *tilemap)
@@ -4216,7 +4216,7 @@ static void InitLowerWindowText(u32 whichText)
         break;
     }
 
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static void PrintKeyboardText(void)
@@ -4337,7 +4337,7 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
         y += 16;
     }
 
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
@@ -4369,7 +4369,7 @@ static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
 static void ClearWordSelectWindow(void)
 {
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static void InitLowerWindowAnim(int winAnimType)

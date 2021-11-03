@@ -644,7 +644,7 @@ static void AddSearchResultListMenuWindow(struct PokenavSub8 *searchList)
 {
     searchList->winid = AddWindow(&sSearchResultListMenuWindowTemplate);
     PutWindowTilemap(searchList->winid);
-    CopyWindowToVram(searchList->winid, 1);
+    CopyWindowToVram(searchList->winid, COPYWIN_MAP);
     PrintSearchResultListMenuItems(searchList);
 }
 
@@ -658,7 +658,7 @@ static void PrintSearchResultListMenuItems(struct PokenavSub8 *searchList)
     AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar2, 4, 1, 0xFF, NULL);
     ConvertIntToDecimalStringN(gStringVar1, r7, STR_CONV_MODE_RIGHT_ALIGN, 3);
     AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar1, 34, 1, 0xFF, NULL);
-    CopyWindowToVram(searchList->winid, 2);
+    CopyWindowToVram(searchList->winid, COPYWIN_GFX);
 }
 
 static void InitConditionSearchListMenuTemplate(void)

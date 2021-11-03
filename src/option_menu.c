@@ -251,7 +251,7 @@ void CB2_InitOptionMenu(void)
         FrameType_DrawChoices(gTasks[taskId].data[TD_FRAMETYPE]);
         HighlightOptionMenuItem(gTasks[taskId].data[TD_MENUSELECTION]);
 
-        CopyWindowToVram(WIN_OPTIONS, 3);
+        CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
         gMain.state++;
         break;
     }
@@ -351,7 +351,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         if (sArrowPressed)
         {
             sArrowPressed = FALSE;
-            CopyWindowToVram(WIN_OPTIONS, 2);
+            CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
         }
     }
 }
@@ -627,7 +627,7 @@ static void DrawTextOption(void)
 {
     FillWindowPixelBuffer(WIN_TEXT_OPTION, PIXEL_FILL(1));
     AddTextPrinterParameterized(WIN_TEXT_OPTION, FONT_NORMAL, gText_Option, 8, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(WIN_TEXT_OPTION, 3);
+    CopyWindowToVram(WIN_TEXT_OPTION, COPYWIN_FULL);
 }
 
 static void DrawOptionMenuTexts(void)
@@ -636,10 +636,8 @@ static void DrawOptionMenuTexts(void)
 
     FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
-    {
         AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
-    }
-    CopyWindowToVram(WIN_OPTIONS, 3);
+    CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
 
 #define TILE_TOP_CORNER_L 0x1A2

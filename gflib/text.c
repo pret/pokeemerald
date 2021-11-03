@@ -297,7 +297,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
         }
 
         if (speed != TEXT_SPEED_FF)
-            CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, 2);
+            CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, COPYWIN_GFX);
         gTextPrinters[printerTemplate->windowId].active = 0;
     }
     gDisableTextPrinters = 0;
@@ -318,7 +318,7 @@ void RunTextPrinters(void)
                 switch (temp)
                 {
                 case 0:
-                    CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
+                    CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                 case 3:
                     if (gTextPrinters[i].callback != 0)
                         gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
@@ -815,7 +815,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentY,
                 8,
                 16);
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
 
             subStruct->downArrowDelay = 8;
             subStruct->downArrowYPosIdx++;
@@ -832,7 +832,7 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
         textPrinter->printerTemplate.currentY,
         8,
         16);
-    CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
+    CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
 }
 
 bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
@@ -922,7 +922,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
                 y - 2,
                 0x8,
                 0x10);
-            CopyWindowToVram(windowId, 0x2);
+            CopyWindowToVram(windowId, COPYWIN_GFX);
             *counter = 8;
             ++*yCoordIndex;
         }
@@ -1199,7 +1199,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance -= speed;
             }
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
         }
         else
         {

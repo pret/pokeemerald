@@ -1562,8 +1562,8 @@ static void Task_PCMainMenu(u8 taskId)
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
-        CopyWindowToVram(0, 3);
-        CopyWindowToVram(task->tWindowId, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
         break;
     case STATE_FADE_IN:
@@ -4018,7 +4018,7 @@ static void PrintDisplayMonInfo(void)
         AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SPEED_FF, NULL);
     }
 
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     if (sStorage->displayMonSpecies != SPECIES_NONE)
     {
         UpdateMonMarkingTiles(sStorage->displayMonMarkings, sStorage->markingComboTilesPtr);
@@ -4322,7 +4322,7 @@ static void PrintMessage(u8 id)
     AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SPEED_FF, NULL);
     DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -8191,7 +8191,7 @@ static bool8 MultiMove_Start(void)
         MultiMove_SetIconToBg(sMultiMove->fromColumn, sMultiMove->fromRow);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sStorage->multiMoveWindowId);
-        CopyWindowToVram8Bit(sStorage->multiMoveWindowId, 3);
+        CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_FULL);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
         StartCursorAnim(CURSOR_ANIM_OPEN);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
@@ -8247,7 +8247,7 @@ static bool8 MultiMove_ChangeSelection(void)
             MultiMove_UpdateSelectedIcons();
             sMultiMove->toColumn = sMultiMove->cursorColumn;
             sMultiMove->toRow = sMultiMove->cursorRow;
-            CopyWindowToVram8Bit(sStorage->multiMoveWindowId, 2);
+            CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_GFX);
             sMultiMove->state++;
         }
         break;

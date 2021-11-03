@@ -479,7 +479,7 @@ static void DrawCardWindow(u8 whichWindow)
         }
         break;
     }
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void CreateCardSprites(void)
@@ -905,8 +905,8 @@ static void DrawNewsWindows(void)
                                      sNews_TextColorTable[sWonderNewsData->gfx->bodyTextPal],
                                      0, sWonderNewsData->bodyText[i]);
 
-    CopyWindowToVram(sWonderNewsData->windowIds[NEWS_WIN_TITLE], 3);
-    CopyWindowToVram(sWonderNewsData->windowIds[NEWS_WIN_BODY], 3);
+    CopyWindowToVram(sWonderNewsData->windowIds[NEWS_WIN_TITLE], COPYWIN_FULL);
+    CopyWindowToVram(sWonderNewsData->windowIds[NEWS_WIN_BODY], COPYWIN_FULL);
 }
 
 static void UpdateNewsScroll(void)

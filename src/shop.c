@@ -303,7 +303,7 @@ static u8 CreateShopMenu(u8 martType)
     PrintMenuTable(sMartInfo.windowId, numMenuItems, sMartInfo.menuActions);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sMartInfo.windowId, numMenuItems, 0);
     PutWindowTilemap(sMartInfo.windowId);
-    CopyWindowToVram(sMartInfo.windowId, 1);
+    CopyWindowToVram(sMartInfo.windowId, COPYWIN_MAP);
 
     return CreateTask(Task_ShopMenu, 8);
 }

@@ -1616,7 +1616,7 @@ static void PrintPlayerNames(void)
                 Blender_AddTextPrinter(i, text, xPos, 1, 0, 1);
 
             PutWindowTilemap(i);
-            CopyWindowToVram(i, 3);
+            CopyWindowToVram(i, COPYWIN_FULL);
         }
     }
 }
@@ -2684,7 +2684,7 @@ static void CB2_EndBlenderGame(void)
                 if (sBerryBlender->arrowIdToPlayerId[i] != NO_PLAYER)
                 {
                     PutWindowTilemap(i);
-                    CopyWindowToVram(i, 3);
+                    CopyWindowToVram(i, COPYWIN_FULL);
                 }
             }
             break;
@@ -2696,7 +2696,7 @@ static void CB2_EndBlenderGame(void)
                 if (sBerryBlender->arrowIdToPlayerId[i] != NO_PLAYER)
                 {
                     PutWindowTilemap(i);
-                    CopyWindowToVram(i, 3);
+                    CopyWindowToVram(i, COPYWIN_FULL);
                 }
             }
             break;
@@ -3545,7 +3545,7 @@ static bool8 PrintBlendingResults(void)
             sBerryBlender->framesToWait = 0;
             sBerryBlender->mainState++;
 
-            CopyWindowToVram(5, 2);
+            CopyWindowToVram(5, COPYWIN_GFX);
         }
         break;
     case 4:
@@ -3562,7 +3562,7 @@ static bool8 PrintBlendingResults(void)
             if (sBerryBlender->arrowIdToPlayerId[i] != NO_PLAYER)
             {
                 PutWindowTilemap(i);
-                CopyWindowToVram(i, 3);
+                CopyWindowToVram(i, COPYWIN_FULL);
             }
         }
 
@@ -3731,7 +3731,7 @@ static bool8 PrintBlendingRanking(void)
         }
 
         PutWindowTilemap(5);
-        CopyWindowToVram(5, 3);
+        CopyWindowToVram(5, COPYWIN_FULL);
 
         sBerryBlender->framesToWait = 0;
         sBerryBlender->mainState++;
@@ -3788,7 +3788,7 @@ void ShowBerryBlenderRecordWindow(void)
     }
 
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, 3);
+    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
 
 static void Task_PlayPokeblockFanfare(u8 taskId)
@@ -3890,7 +3890,7 @@ static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)
         DrawDialogFrameWithCustomTileAndPalette(4, FALSE, 0x14, 0xF);
         Blender_AddTextPrinter(4, string, 0, 1, textSpeed, 0);
         PutWindowTilemap(4);
-        CopyWindowToVram(4, 3);
+        CopyWindowToVram(4, COPYWIN_FULL);
         (*textState)++;
         break;
     case 1:

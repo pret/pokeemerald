@@ -2439,7 +2439,7 @@ static void CopyPocketNameToWindow(u32 a)
     CpuCopy32(tileDataBuffer[0][a], windowTileData, 0x100); // Top half of pocket name
     b = a + 16;
     CpuCopy32(tileDataBuffer[0][b], windowTileData + 0x100, 0x100); // Bottom half of pocket name
-    CopyWindowToVram(WIN_POCKET_NAME, 2);
+    CopyWindowToVram(WIN_POCKET_NAME, COPYWIN_GFX);
 }
 
 static void LoadBagMenuTextWindows(void)
@@ -2544,7 +2544,7 @@ static void PrepareTMHMMoveWindow(void)
     BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_POWER, 0, 12);
     BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_ACCURACY, 0, 24);
     BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_PP, 0, 36);
-    CopyWindowToVram(WIN_TMHM_INFO_ICONS, 2);
+    CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
 }
 
 static void PrintTMHMMoveData(u16 itemId)
@@ -2558,7 +2558,7 @@ static void PrintTMHMMoveData(u16 itemId)
     {
         for (i = 0; i < 4; i++)
             BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gText_ThreeDashes, 7, i * 12, 0, 0, TEXT_SPEED_FF, COLORID_TMHM_INFO);
-        CopyWindowToVram(WIN_TMHM_INFO, 2);
+        CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
     }
     else
     {
@@ -2593,6 +2593,6 @@ static void PrintTMHMMoveData(u16 itemId)
         ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveId].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
         BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 36, 0, 0, TEXT_SPEED_FF, COLORID_TMHM_INFO);
 
-        CopyWindowToVram(WIN_TMHM_INFO, 2);
+        CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
     }
 }

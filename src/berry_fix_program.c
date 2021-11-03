@@ -319,9 +319,9 @@ static void BerryFix_GpuSet(void)
     left = (208 - width) / 2;
     AddTextPrinterParameterized3(0, FONT_NORMAL, left, 2, sBerryProgramTextColors, TEXT_SPEED_FF, sText_BerryProgramUpdate);
 
-    CopyWindowToVram(2, 2);
-    CopyWindowToVram(3, 2);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(3, COPYWIN_GFX);
+    CopyWindowToVram(0, COPYWIN_GFX);
 }
 
 static int BerryFix_TrySetScene(int scene)
@@ -348,7 +348,7 @@ static void BerryFix_SetScene(int scene)
     FillWindowPixelBuffer(1, PIXEL_FILL(10));
     AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0, sBerryProgramTextColors, -1, sBerryProgramTexts[scene]);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     switch (scene)
     {
     case SCENE_ENSURE_CONNECT:

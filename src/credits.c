@@ -369,7 +369,7 @@ static void InitCreditsBgsAndWindows(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
 }
 
@@ -761,7 +761,7 @@ static void Task_UpdatePage(u8 taskId)
                         sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->text,
                          5 + i * 16,
                          sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->isTitle);
-                CopyWindowToVram(0, 2);
+                CopyWindowToVram(0, COPYWIN_GFX);
 
                 gTasks[taskId].tCurrentPage++;
                 gTasks[taskId].tState++;
@@ -811,7 +811,7 @@ static void Task_UpdatePage(u8 taskId)
         {
             // Still more Credits pages to show, return to state 2 to print
             FillWindowPixelBuffer(0, PIXEL_FILL(0));
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
             gTasks[taskId].tState = 2;
         }
         return;

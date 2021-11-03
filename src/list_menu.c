@@ -330,7 +330,7 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         gMultiuseListMenuTemplate = *listMenuTemplate;
         gMultiuseListMenuTemplate.windowId = sMysteryGiftLinkMenu.windowId;
         sMysteryGiftLinkMenu.listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-        CopyWindowToVram(sMysteryGiftLinkMenu.windowId, 1);
+        CopyWindowToVram(sMysteryGiftLinkMenu.windowId, COPYWIN_MAP);
         sMysteryGiftLinkMenu.state = 1;
         break;
     case 1:
@@ -364,7 +364,7 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
                 }
             }
 
-            CopyWindowToVram(sMysteryGiftLinkMenu.windowId, 1);
+            CopyWindowToVram(sMysteryGiftLinkMenu.windowId, COPYWIN_MAP);
         }
         break;
     case 2:
@@ -381,7 +381,7 @@ u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 scrollOffset, u16
 {
     u8 taskId = ListMenuInitInternal(listMenuTemplate, scrollOffset, selectedRow);
     PutWindowTilemap(listMenuTemplate->windowId);
-    CopyWindowToVram(listMenuTemplate->windowId, 2);
+    CopyWindowToVram(listMenuTemplate->windowId, COPYWIN_GFX);
 
     return taskId;
 }
@@ -401,7 +401,7 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
                                             rect[i].height,
                                             rect[i].palNum);
     }
-    CopyWindowToVram(listMenuTemplate->windowId, 2);
+    CopyWindowToVram(listMenuTemplate->windowId, COPYWIN_GFX);
 
     return taskId;
 }
@@ -489,7 +489,7 @@ void RedrawListMenu(u8 listTaskId)
     FillWindowPixelBuffer(list->template.windowId, PIXEL_FILL(list->template.fillValue));
     ListMenuPrintEntries(list, list->scrollOffset, 0, list->template.maxShowed);
     ListMenuDrawCursor(list);
-    CopyWindowToVram(list->template.windowId, 2);
+    CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
 }
 
 // unused
@@ -862,7 +862,7 @@ static bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAn
             ListMenuErasePrintedCursor(list, oldSelectedRow);
             ListMenuDrawCursor(list);
             ListMenuCallSelectionChangedCallback(list, FALSE);
-            CopyWindowToVram(list->template.windowId, 2);
+            CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
             break;
         case 2:
         case 3:
@@ -870,7 +870,7 @@ static bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAn
             ListMenuScroll(list, cursorCount, movingDown);
             ListMenuDrawCursor(list);
             ListMenuCallSelectionChangedCallback(list, FALSE);
-            CopyWindowToVram(list->template.windowId, 2);
+            CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
             break;
         }
     }
