@@ -401,7 +401,7 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
     }
 
     x = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_NORMAL, string, DISPLAY_WIDTH, 1);
-    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 1, 0, color, -1, string);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 1, 0, color, TEXT_SKIP_DRAW, string);
 }
 
 #define tMainTaskId data[1]

@@ -305,19 +305,19 @@ static void BerryFix_GpuSet(void)
 
     width = GetStringWidth(FONT_SMALL, sText_Emerald, 0);
     left = (120 - width) / 2;
-    AddTextPrinterParameterized3(2, FONT_SMALL, left, 3, sGameTitleTextColors, TEXT_SPEED_FF, sText_Emerald);
+    AddTextPrinterParameterized3(2, FONT_SMALL, left, 3, sGameTitleTextColors, TEXT_SKIP_DRAW, sText_Emerald);
 
     width = GetStringWidth(FONT_SMALL, sText_RubySapphire, 0);
     left = (120 - width) / 2 + 120;
-    AddTextPrinterParameterized3(2, FONT_SMALL, left, 3, sGameTitleTextColors, TEXT_SPEED_FF, sText_RubySapphire);
+    AddTextPrinterParameterized3(2, FONT_SMALL, left, 3, sGameTitleTextColors, TEXT_SKIP_DRAW, sText_RubySapphire);
 
     width = GetStringWidth(FONT_SMALL, sText_RubySapphire, 0);
     left = (112 - width) / 2;
-    AddTextPrinterParameterized3(3, FONT_SMALL, left, 0, sGameTitleTextColors, TEXT_SPEED_FF, sText_RubySapphire);
+    AddTextPrinterParameterized3(3, FONT_SMALL, left, 0, sGameTitleTextColors, TEXT_SKIP_DRAW, sText_RubySapphire);
 
     width = GetStringWidth(FONT_NORMAL, sText_BerryProgramUpdate, 0);
     left = (208 - width) / 2;
-    AddTextPrinterParameterized3(0, FONT_NORMAL, left, 2, sBerryProgramTextColors, TEXT_SPEED_FF, sText_BerryProgramUpdate);
+    AddTextPrinterParameterized3(0, FONT_NORMAL, left, 2, sBerryProgramTextColors, TEXT_SKIP_DRAW, sText_BerryProgramUpdate);
 
     CopyWindowToVram(2, COPYWIN_GFX);
     CopyWindowToVram(3, COPYWIN_GFX);
@@ -346,7 +346,7 @@ static void BerryFix_SetScene(int scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     FillWindowPixelBuffer(1, PIXEL_FILL(10));
-    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0, sBerryProgramTextColors, -1, sBerryProgramTexts[scene]);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0, sBerryProgramTextColors, TEXT_SKIP_DRAW, sBerryProgramTexts[scene]);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);
     switch (scene)

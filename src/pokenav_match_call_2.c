@@ -986,14 +986,14 @@ static void PrintNumberOfBattles(u16 windowId)
 static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, int top)
 {
     int y = top * 16 + 1;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
 {
     int x = GetStringRightAlignXOffset(FONT_NARROW, str, 86);
     int y = top * 16 + 1;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
@@ -1023,7 +1023,7 @@ static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *state)
         if (optionText == MATCH_CALL_OPTION_COUNT)
             break;
 
-        AddTextPrinterParameterized(state->infoBoxWindowId, FONT_NARROW, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoBoxWindowId, FONT_NARROW, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);

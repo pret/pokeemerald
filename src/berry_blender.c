@@ -3495,7 +3495,7 @@ static bool8 PrintBlendingResults(void)
             u8 *txtPtr;
 
             xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sText_BlendingResults, 0xA8);
-            Blender_AddTextPrinter(5, sText_BlendingResults, xPos, 1, TEXT_SPEED_FF, 0);
+            Blender_AddTextPrinter(5, sText_BlendingResults, xPos, 1, TEXT_SKIP_DRAW, 0);
 
             if (sBerryBlender->numPlayers == BLENDER_MAX_PLAYERS)
                 yPos = 17;
@@ -3510,15 +3510,15 @@ static bool8 PrintBlendingResults(void)
                 StringAppend(sBerryBlender->stringVar, sText_Dot);
                 StringAppend(sBerryBlender->stringVar, gText_Space);
                 StringAppend(sBerryBlender->stringVar, gLinkPlayers[place].name);
-                Blender_AddTextPrinter(5, sBerryBlender->stringVar, 8, yPos, TEXT_SPEED_FF, 3);
+                Blender_AddTextPrinter(5, sBerryBlender->stringVar, 8, yPos, TEXT_SKIP_DRAW, 3);
 
                 StringCopy(sBerryBlender->stringVar, sBerryBlender->blendedBerries[place].name);
                 ConvertInternationalString(sBerryBlender->stringVar, gLinkPlayers[place].language);
                 StringAppend(sBerryBlender->stringVar, sText_SpaceBerry);
-                Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0x54, yPos, TEXT_SPEED_FF, 3);
+                Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0x54, yPos, TEXT_SKIP_DRAW, 3);
             }
 
-            Blender_AddTextPrinter(5, sText_MaximumSpeed, 0, 0x51, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sText_MaximumSpeed, 0, 0x51, TEXT_SKIP_DRAW, 3);
             ConvertIntToDecimalStringN(sBerryBlender->stringVar, sBerryBlender->maxRPM / 100, STR_CONV_MODE_RIGHT_ALIGN, 3);
             StringAppend(sBerryBlender->stringVar, sText_Dot);
 
@@ -3527,8 +3527,8 @@ static bool8 PrintBlendingResults(void)
             StringAppend(sBerryBlender->stringVar, sText_RPM);
 
             xPos = GetStringRightAlignXOffset(FONT_NORMAL, sBerryBlender->stringVar, 0xA8);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x51, TEXT_SPEED_FF, 3);
-            Blender_AddTextPrinter(5, sText_Time, 0, 0x61, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x51, TEXT_SKIP_DRAW, 3);
+            Blender_AddTextPrinter(5, sText_Time, 0, 0x61, TEXT_SKIP_DRAW, 3);
 
             seconds = (sBerryBlender->gameFrameTime / 60) % 60;
             minutes = (sBerryBlender->gameFrameTime / (60 * 60));
@@ -3540,7 +3540,7 @@ static bool8 PrintBlendingResults(void)
             StringAppend(sBerryBlender->stringVar, sText_Sec);
 
             xPos = GetStringRightAlignXOffset(FONT_NORMAL, sBerryBlender->stringVar, 0xA8);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x61, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x61, TEXT_SKIP_DRAW, 3);
 
             sBerryBlender->framesToWait = 0;
             sBerryBlender->mainState++;
@@ -3694,7 +3694,7 @@ static bool8 PrintBlendingRanking(void)
     case 3:
         DrawStdFrameWithCustomTileAndPalette(5, 0, 1, 0xD);
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sText_Ranking, 168);
-        Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SPEED_FF, 0);
+        Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SKIP_DRAW, 0);
 
         sBerryBlender->scoreIconIds[SCORE_BEST] = CreateSprite(&sSpriteTemplate_ScoreSymbols, 128, 52, 0);
         StartSpriteAnim(&gSprites[sBerryBlender->scoreIconIds[SCORE_BEST]], SCOREANIM_BEST_STATIC);
@@ -3718,16 +3718,16 @@ static bool8 PrintBlendingRanking(void)
             StringAppend(sBerryBlender->stringVar, sText_Dot);
             StringAppend(sBerryBlender->stringVar, gText_Space);
             StringAppend(sBerryBlender->stringVar, gLinkPlayers[place].name);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0, yPos, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0, yPos, TEXT_SKIP_DRAW, 3);
 
             ConvertIntToDecimalStringN(sBerryBlender->stringVar, sBerryBlender->scores[place][SCORE_BEST], STR_CONV_MODE_RIGHT_ALIGN, 3);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 78, yPos, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 78, yPos, TEXT_SKIP_DRAW, 3);
 
             ConvertIntToDecimalStringN(sBerryBlender->stringVar, sBerryBlender->scores[place][SCORE_GOOD], STR_CONV_MODE_RIGHT_ALIGN, 3);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 78 + 32, yPos, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 78 + 32, yPos, TEXT_SKIP_DRAW, 3);
 
             ConvertIntToDecimalStringN(sBerryBlender->stringVar, sBerryBlender->scores[place][SCORE_MISS], STR_CONV_MODE_RIGHT_ALIGN, 3);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 78 + 64, yPos, TEXT_SPEED_FF, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, 78 + 64, yPos, TEXT_SKIP_DRAW, 3);
         }
 
         PutWindowTilemap(5);

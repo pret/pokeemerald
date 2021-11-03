@@ -6053,7 +6053,7 @@ static void DrawLevelUpBannerText(void)
     printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
     printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
 
-    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 
     txtPtr = gStringVar4;
     *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
@@ -6083,7 +6083,7 @@ static void DrawLevelUpBannerText(void)
 
     printerTemplate.y = 10;
     printerTemplate.currentY = 10;
-    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 
     CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, COPYWIN_GFX);
 }

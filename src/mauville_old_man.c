@@ -1343,9 +1343,9 @@ static void PrintStoryList(void)
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
         if (gameStatID == 0)
             break;
-        AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
+        AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     }
-    AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Exit, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
     CopyWindowToVram(sStorytellerWindowId, COPYWIN_FULL);
 }

@@ -3852,7 +3852,7 @@ static void PrintUnionRoomText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y
         break;
     }
 
-    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 }
 
 static void ClearRfuPlayerList(struct RfuPlayer *players, u8 count)

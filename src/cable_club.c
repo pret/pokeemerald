@@ -100,7 +100,7 @@ static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
     SetStandardWindowBorderStyle(windowId, 0);
     StringExpandPlaceholders(gStringVar4, gText_NumPlayerLink);
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 88);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, xPos, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, xPos, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 

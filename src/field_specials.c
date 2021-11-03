@@ -1911,10 +1911,10 @@ void ShowDeptStoreElevatorFloorSelect(void)
     SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
 
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
 
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
     CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
@@ -3236,9 +3236,9 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
         SetStandardWindowBorderStyle(task->tWindowId, 0);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
-            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
+            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
 
-        AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
     }

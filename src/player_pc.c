@@ -1027,13 +1027,13 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
         if (sItemStorageMenu->toSwapPos != NOT_SWAPPING)
         {
             if (sItemStorageMenu->toSwapPos == (u8)id)
-                ItemStorage_DrawSwapArrow(yOffset, 0, TEXT_SPEED_FF);
+                ItemStorage_DrawSwapArrow(yOffset, 0, TEXT_SKIP_DRAW);
             else
-                ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SPEED_FF);
+                ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SKIP_DRAW);
         }
         ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pcItems[id].quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_xVar1);
-        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar4, GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 104), yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar4, GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 104), yOffset, TEXT_SKIP_DRAW, NULL);
     }
 }
 

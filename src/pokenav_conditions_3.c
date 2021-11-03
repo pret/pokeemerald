@@ -655,9 +655,9 @@ static void PrintSearchResultListMenuItems(struct PokenavSub8 *searchList)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     *gStringVar1 = EOS;
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar2, gText_NumberF700);
-    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar2, 4, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar2, 4, 1, TEXT_SKIP_DRAW, NULL);
     ConvertIntToDecimalStringN(gStringVar1, r7, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar1, 34, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar1, 34, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(searchList->winid, COPYWIN_GFX);
 }
 

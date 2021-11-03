@@ -367,7 +367,7 @@ static void FindMapsWithMon(u16 species)
             }
         }
 
-        for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
+        for (i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED); i++)
         {
             if (MapHasMon(&gWildMonHeaders[i], species))
             {

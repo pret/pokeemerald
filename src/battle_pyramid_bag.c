@@ -673,7 +673,7 @@ static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
                                2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 119);
-    PyramidBagPrint_Quantity(windowId, gStringVar4, xAlign, y, 0, 0, TEXT_SPEED_FF, COLORID_DARK_GRAY);
+    PyramidBagPrint_Quantity(windowId, gStringVar4, xAlign, y, 0, 0, TEXT_SKIP_DRAW, COLORID_DARK_GRAY);
 }
 
 static void PrintItemDescription(s32 listMenuId)

@@ -674,7 +674,7 @@ static void sub_81D02B0(s32 windowId, s32 val1, s32 val2)
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, val2, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(FONT_NORMAL, strbuf, 56);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, strbuf, x, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, strbuf, x, 1, TEXT_SKIP_DRAW, NULL);
 }
 
 static void InitMonRibbonPokenavListMenuTemplate(void)

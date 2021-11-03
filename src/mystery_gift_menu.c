@@ -490,8 +490,8 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
         options = gJPText_DecideStop;
     }
 
-    AddTextPrinterParameterized4(0, FONT_NORMAL, 4, 1, 0, 0, sTextColors_TopMenu, TEXT_SPEED_FF, header);
-    AddTextPrinterParameterized4(0, FONT_SMALL, GetStringRightAlignXOffset(FONT_SMALL, options, 0xDE), 1, 0, 0, sTextColors_TopMenu, TEXT_SPEED_FF, options);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, 4, 1, 0, 0, sTextColors_TopMenu, TEXT_SKIP_DRAW, header);
+    AddTextPrinterParameterized4(0, FONT_SMALL, GetStringRightAlignXOffset(FONT_SMALL, options, 0xDE), 1, 0, 0, sTextColors_TopMenu, TEXT_SKIP_DRAW, options);
     CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(0);
 }

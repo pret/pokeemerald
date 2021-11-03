@@ -604,7 +604,7 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
                                      gListMenuOverride.fontId,
                                      x, y,
                                      gListMenuOverride.lettersSpacing,
-                                     0, colors, TEXT_SPEED_FF, str);
+                                     0, colors, TEXT_SKIP_DRAW, str);
 
         gListMenuOverride.enabled = FALSE;
     }
@@ -617,7 +617,7 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
                                      list->template.fontId,
                                      x, y,
                                      list->template.lettersSpacing,
-                                     0, colors, TEXT_SPEED_FF, str);
+                                     0, colors, TEXT_SKIP_DRAW, str);
     }
 }
 

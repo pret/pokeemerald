@@ -353,22 +353,22 @@ static void CreatePCMultichoice(void)
         numChoices = 4;
         windowId = CreateWindowFromRect(0, 0, width, 8);
         SetStandardWindowBorderStyle(windowId, 0);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame, y, 33, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 49, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame, y, 33, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 49, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
         numChoices = 3;
         windowId = CreateWindowFromRect(0, 0, width, 6);
         SetStandardWindowBorderStyle(windowId, 0);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 33, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 33, TEXT_SKIP_DRAW, NULL);
     }
 
     // Change PC name if player has met Lanette
     if (FlagGet(FLAG_SYS_PC_LANETTE))
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, y, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, y, 1, TEXT_SKIP_DRAW, NULL);
     else
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, y, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, y, 1, TEXT_SKIP_DRAW, NULL);
 
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
@@ -527,7 +527,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         {
             if (sLilycoveSSTidalSelections[i] != 0xFF)
             {
-                AddTextPrinterParameterized(windowId, FONT_NORMAL, sLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16 + 1, TEXT_SPEED_FF, NULL);
+                AddTextPrinterParameterized(windowId, FONT_NORMAL, sLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16 + 1, TEXT_SKIP_DRAW, NULL);
                 selectionCount++;
             }
         }
@@ -688,14 +688,14 @@ static void CreateStartMenuForPokenavTutorial(void)
 {
     u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
     SetStandardWindowBorderStyle(windowId, 0);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokedex, 8, 9, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokemon, 8, 25, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionBag, 8, 41, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokenav, 8, 57, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gSaveBlock2Ptr->playerName, 8, 73, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionSave, 8, 89, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionOption, 8, 105, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokedex, 8, 9, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokemon, 8, 25, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionBag, 8, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokenav, 8, 57, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gSaveBlock2Ptr->playerName, 8, 73, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionSave, 8, 89, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionOption, 8, 105, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionExit, 8, 121, TEXT_SKIP_DRAW, NULL);
     InitMenuNormal(windowId, FONT_NORMAL, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
     CopyWindowToVram(windowId, COPYWIN_FULL);

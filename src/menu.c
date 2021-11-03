@@ -1109,7 +1109,7 @@ void PrintMenuActionTextsAtPos(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineH
 {
     u8 i;
     for (i = 0; i < itemCount; i++)
-        AddTextPrinterParameterized(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -1118,7 +1118,7 @@ static void PrintMenuActionTextsWithSpacing(u8 windowId, u8 fontId, u8 left, u8 
 {
     u8 i;
     for (i = 0; i < itemCount; i++)
-        AddTextPrinterParameterized5(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SPEED_FF, NULL, letterSpacing, lineSpacing);
+        AddTextPrinterParameterized5(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SKIP_DRAW, NULL, letterSpacing, lineSpacing);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -1149,7 +1149,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
         printer.currentChar = menuActions[actionIds[i]].text;
         printer.y = (lineHeight * i) + top;
         printer.currentY = printer.y;
-        AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+        AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1208,7 +1208,7 @@ static void CreateYesNoMenuAtPos(const struct WindowTemplate *window, u8 fontId,
     printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
-    AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
 
     InitMenuNormal(sYesNoWindowId, fontId, left, top, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT), 2, initialCursorPos);
 }
@@ -1239,7 +1239,7 @@ void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u
     for (i = 0; i < a7; i++)
     {
         for (j = 0; j < a6; j++)
-            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, TEXT_SKIP_DRAW, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1273,7 +1273,7 @@ void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth
             printer.y = (GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) * i) + top;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
-            AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+            AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
         }
     }
 
@@ -1609,7 +1609,7 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActi
     u32 i;
 
     for (i = 0; i < itemCount; i++)
-        AddTextPrinterParameterized(windowId, 1, menuActions[i].text, 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, 1, menuActions[i].text, 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1635,7 +1635,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *menuActions
         printer.currentChar = menuActions[actionIds[i]].text;
         printer.y = (i * 16) + 1;
         printer.currentY = (i * 16) + 1;
-        AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+        AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1662,7 +1662,7 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
-    AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(sYesNoWindowId, 2, initialCursorPos);
 }
 
@@ -1673,7 +1673,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
     for (i = 0; i < rows; i++)
     {
         for (j = 0; j < columns; j++)
-            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1702,7 +1702,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
             printer.y = (16 * i) + 1;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
-            AddTextPrinter(&printer, TEXT_SPEED_FF, NULL);
+            AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
         }
     }
 
@@ -2012,7 +2012,7 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 
     StringExpandPlaceholders(gStringVar4, src);
 
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SPEED_FF, 0);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SKIP_DRAW, 0);
 }
 
 // Unused. Similar to BlitBitmapRect4Bit.

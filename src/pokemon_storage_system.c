@@ -1358,7 +1358,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         txtColor[0] = zero2;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
 
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6u)
@@ -1402,7 +1402,7 @@ static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgC
     txtColor[0] = bgColor;
     txtColor[1] = fgColor;
     txtColor[2] = shadowColor;
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
     CpuCopy16(tileData1, dst, tileSize);
     CpuCopy16(tileData2, dst + offset, tileSize);
     RemoveWindow(windowId);
@@ -1561,7 +1561,7 @@ static void Task_PCMainMenu(u8 taskId)
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, 2, 1, 3);
         CopyWindowToVram(0, COPYWIN_FULL);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
@@ -1951,13 +1951,13 @@ static void ChooseBoxMenu_PrintInfo(void)
 
     // Print box name
     center = GetStringCenterAlignXOffset(FONT_NORMAL, boxName, 64);
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 1, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, boxName);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 1, sChooseBoxMenu_TextColors, TEXT_SKIP_DRAW, boxName);
 
     // Print #/30 for number of Pokémon in the box
     ConvertIntToDecimalStringN(numBoxMonsText, numInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringAppend(numBoxMonsText, sText_OutOf30);
     center = GetStringCenterAlignXOffset(FONT_NORMAL, numBoxMonsText, 64);
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 17, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, numBoxMonsText);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 17, sChooseBoxMenu_TextColors, TEXT_SKIP_DRAW, numBoxMonsText);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(sChooseBoxMenu->tileTag) * 32), 0x400);
@@ -4005,17 +4005,17 @@ static void PrintDisplayMonInfo(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(0, COPYWIN_GFX);
@@ -4319,7 +4319,7 @@ static void PrintMessage(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);

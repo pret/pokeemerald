@@ -643,7 +643,7 @@ static void CreateApprenticeMenu(u8 menu)
     SetStandardWindowBorderStyle(windowId, 0);
 
     for (i = 0; i < count; i++)
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
 
     InitMenuInUpperLeftCornerNormal(windowId, count, 0);
     CreateChooseAnswerTask(TRUE, count, windowId);
