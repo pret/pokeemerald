@@ -1065,14 +1065,14 @@ bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgM
     return FALSE;
 }
 
-u32 AI_IsAbilityOnSide(u32 battlerId, u32 ability)
+bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability)
 {
     if (IsBattlerAlive(battlerId) && AI_GetAbility(battlerId) == ability)
-        return battlerId + 1;
+        return TRUE;
     else if (IsBattlerAlive(BATTLE_PARTNER(battlerId)) && AI_GetAbility(BATTLE_PARTNER(battlerId)) == ability)
-        return BATTLE_PARTNER(battlerId) + 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 // does NOT include ability suppression checks

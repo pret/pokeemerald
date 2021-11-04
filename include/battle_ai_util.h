@@ -54,7 +54,7 @@ bool32 IsRecycleEncouragedItem(u16 item);
 bool32 CanKnockOffItem(u8 battler, u16 item);
 bool32 IsAbilityOfRating(u16 ability, s8 rating);
 s8 GetAbilityRating(u16 ability);
-u32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
+bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
