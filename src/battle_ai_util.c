@@ -738,95 +738,39 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     {
     case EFFECT_LEVEL_DAMAGE:
     case EFFECT_PSYWAVE:
-    {
-        // Psywave's expected damage is equal to the user's level
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
-            dmg = 0;
-        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
-            dmg = 2 * gBattleMons[battlerAtk].level;
-        else
-            dmg = gBattleMons[battlerAtk].level;
+        dmg = gBattleMons[battlerAtk].level * (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND ? 2 : 1);
         break;
-    }
     case EFFECT_DRAGON_RAGE:
-    {
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
-            dmg = 0;
-        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
-            dmg = 80;
-        else
-            dmg = 40;
+        dmg = 40 * (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND ? 2 : 1);
         break;
-    }
     case EFFECT_SONICBOOM:
-    {
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
-            dmg = 0;
-        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
-            dmg = 40;
-        else
-            dmg = 20;
+        dmg = 20 * (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND ? 2 : 1);
         break;
-    }
     case EFFECT_MULTI_HIT:
-    {
-        if (AI_DATA->atkAbility == ABILITY_SKILL_LINK)
-            dmg *= 5;
-        else
-            dmg *= 3; // Average number of hits is three
+        dmg *= (AI_DATA->atkAbility == ABILITY_SKILL_LINK ? 5 : 3);
         break;
-    }
     case EFFECT_TRIPLE_KICK:
-    {
-        dmg *= 6;
+        dmg *= (AI_DATA->atkAbility == ABILITY_SKILL_LINK ? 6 : 5);
         break;
-    }
     case EFFECT_ENDEAVOR:
-    {
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
-            dmg = 0;
-        else
-            // If target has less HP than user, Endeavor does no damage
-            dmg = max(0, gBattleMons[battlerDef].hp - gBattleMons[battlerAtk].hp);
+        // If target has less HP than user, Endeavor does no damage
+        dmg = max(0, gBattleMons[battlerDef].hp - gBattleMons[battlerAtk].hp);
         break;
-    }
     case EFFECT_SUPER_FANG:
-    {
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
-            dmg = 0;
-        // Two hits of Super Fang halves HP twice, leaving target with 25% HP
-        else if (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND)
-            dmg = max(2, gBattleMons[battlerDef].hp * 3 / 4);
-        else
-            dmg = max(1, gBattleMons[battlerDef].hp / 2);
+        dmg = (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND
+            ? max(2, gBattleMons[battlerDef].hp * 3 / 4)
+            : max(1, gBattleMons[battlerDef].hp / 2));
         break;
-    }
     case EFFECT_FINAL_GAMBIT:
-    {
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0)
-            dmg = 0;
-        else
-            dmg = gBattleMons[battlerAtk].hp;
-        break;
-    }
-    //case EFFECT_METAL_BURST:
-    //case EFFECT_COUNTER:
-    default:
-        //do not add the random factor, it's an average case analysis
-        //dmg *= (100 - (Random() % 10)) / 100;   // add random factor
+        dmg = gBattleMons[battlerAtk].hp;
         break;
     }
 
     // Handle other multi-strike moves
     if (IsTwoStrikesMove(move))
-    {
         dmg *= 2;
-    }
-    else if (move == MOVE_SURGING_STRIKES 
-             || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
-    {
+    else if (move == MOVE_SURGING_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
         dmg *= 3;
-    }
 
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
