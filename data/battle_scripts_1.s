@@ -405,7 +405,7 @@ BattleScript_EffectClangorousSoul:
 	attackstring
 	ppreduce
 	cutonethirdhpraisestats BattleScript_ButItFailed
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	attackanimation
 	waitanimation
 	healthbarupdate BS_ATTACKER

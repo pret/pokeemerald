@@ -9038,7 +9038,7 @@ static void Cmd_various(void)
         {
             bool8 atLeastOneStatBoosted = FALSE;
             bool8 hasContrary = (GetBattlerAbility(gBattlerAttacker) == ABILITY_CONTRARY);
-            u16 hpFraction = min(1, gBattleMons[gBattlerAttacker].maxHP / 3);
+            u16 hpFraction = max(1, gBattleMons[gBattlerAttacker].maxHP / 3);
 
             for (i = 1; i < NUM_STATS; i++)
             {
