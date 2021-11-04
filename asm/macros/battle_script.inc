@@ -1888,11 +1888,6 @@
 	.4byte \ptr
 	.endm
 
-	.macro trynextdart ptr:req
-	various BS_ATTACKER, VARIOUS_TRY_NEXT_DART
-	.4byte \ptr
-	.endm
-
 	.macro checkpoltergeist battler:req, ptr:req
 	various \battler, VARIOUS_CHECK_POLTERGEIST
 	.4byte \ptr

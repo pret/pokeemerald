@@ -423,7 +423,7 @@ BattleScript_EffectOctolock:
 	attackanimation
 	waitanimation
 	printstring STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_OctolockEndTurn::
@@ -438,13 +438,13 @@ BattleScript_OctolockLowerDef:
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_OctolockTryLowerSpDef
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_OctolockTryLowerSpDef
 	printfromtable gStatUpStringIds
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 BattleScript_OctolockTryLowerSpDef::
 	setstatchanger STAT_SPDEF, 1, TRUE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_OctolockEnd2
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_OctolockEnd2
 	printfromtable gStatUpStringIds
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 BattleScript_OctolockEnd2::
 	end2
 
@@ -454,7 +454,7 @@ BattleScript_EffectPoltergeist:
 	ppreduce
 	checkpoltergeist BS_TARGET, BattleScript_ButItFailed
 	printstring STRINGID_ABOUTTOUSEPOLTERGEIST
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectTarShot:
@@ -470,11 +470,11 @@ BattleScript_EffectTarShot:
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printfromtable gStatDownStringIds
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 BattleScript_TryTarShot:
 	trytarshot BS_TARGET, BattleScript_MoveEnd
 	printstring STRINGID_PKMNBECAMEWEAKERTOFIRE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectNoRetreat:
@@ -490,7 +490,7 @@ BattleScript_EffectNoRetreat:
 	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE
 	seteffectprimary
 	printstring STRINGID_CANTESCAPEDUETOUSEDMOVE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectJawLock:
@@ -499,7 +499,7 @@ BattleScript_EffectJawLock:
 
 BattleScript_BothCanNoLongerEscape::
 	printstring STRINGID_BOTHCANNOLONGERESCAPE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_EffectHyperspaceFury:
@@ -6398,7 +6398,7 @@ BattleScript_AttackerItemStatRaise::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
 	printstring STRINGID_USINGITEMSTATOFPKMNROSE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_ATTACKER
 BattleScript_AttackerItemStatRaiseRet:
 	return
@@ -9036,7 +9036,7 @@ BattleScript_StickyBarbTransfer::
 BattleScript_RedCardActivates::
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_REDCARDACTIVATE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	swapattackerwithtarget
 	jumpifstatus3 BS_EFFECT_BATTLER, STATUS3_ROOTED, BattleScript_RedCardIngrain
 	jumpifability BS_EFFECT_BATTLER, ABILITY_SUCTION_CUPS, BattleScript_RedCardSuctionCups
@@ -9047,13 +9047,13 @@ BattleScript_RedCardEnd:
 	return
 BattleScript_RedCardIngrain:
 	printstring STRINGID_PKMNANCHOREDITSELF
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
 	swapattackerwithtarget
 	return
 BattleScript_RedCardSuctionCups:
 	printstring STRINGID_PKMNANCHORSITSELFWITH	
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
 	swapattackerwithtarget
 	return
@@ -9062,7 +9062,7 @@ BattleScript_EjectButtonActivates::
 	makevisible BS_ATTACKER
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_EJECTBUTTONACTIVATE
-	waitmessage 0x40
+	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
 	makeinvisible BS_SCRIPTING
 	openpartyscreen BS_SCRIPTING, BattleScript_EjectButtonEnd
