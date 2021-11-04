@@ -175,7 +175,4 @@ bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 
-// Move checks
-bool8 IsTwoStrikesMove(u16 move);
-
 #endif // GUARD_BATTLE_UTIL_H
