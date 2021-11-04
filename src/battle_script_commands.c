@@ -2992,7 +2992,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_PLUS_1:
             case MOVE_EFFECT_ACC_PLUS_1:
             case MOVE_EFFECT_EVS_PLUS_1:
-                if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(1),
+                if (NoAliveMonsForEitherParty()
+                  || ChangeStatBuffs(SET_STAT_BUFF_VALUE(1),
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_PLUS_1 + 1,
                                     affectsUser, 0))
                 {
@@ -3153,8 +3154,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_ALL_STATS_UP:
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_AllStatsUp;
+                if (NoAliveMonsForEitherParty())
+                {
+                    gBattlescriptCurrInstr++;
+                }
+                else
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_AllStatsUp;
+                }
                 break;
             case MOVE_EFFECT_RAPIDSPIN:
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
