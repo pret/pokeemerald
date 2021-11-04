@@ -198,6 +198,11 @@
 #define VARIOUS_JUMP_IF_WEATHER_AFFECTED        125
 #define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    126
 #define VARIOUS_SET_ATTACKER_STICKY_WEB_USER    127
+#define VARIOUS_TRY_NO_RETREAT                  128
+#define VARIOUS_TRY_TAR_SHOT                    129
+#define VARIOUS_CHECK_POLTERGEIST               130
+#define VARIOUS_SET_OCTOLOCK                    131
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS          132
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

@@ -420,7 +420,7 @@
 #define STRINGID_HURLEDINTOTHEAIR                     416
 #define STRINGID_HELDITEMSLOSEEFFECTS                 417
 #define STRINGID_FELLSTRAIGHTDOWN                     418
-#define STRINGID_TRANSFORMEDINTOWATERTYPE             419
+#define STRINGID_TARGETCHANGEDTYPE                    419
 #define STRINGID_PKMNACQUIREDSIMPLE                   420
 #define STRINGID_EMPTYSTRING5                         421
 #define STRINGID_KINDOFFER                            422
@@ -601,8 +601,13 @@
 #define STRINGID_SWAPPEDABILITIES                     598
 #define STRINGID_PASTELVEILPROTECTED                  599
 #define STRINGID_PASTELVEILENTERS                     600
+#define STRINGID_BOTHCANNOLONGERESCAPE                601
+#define STRINGID_CANTESCAPEDUETOUSEDMOVE              602
+#define STRINGID_PKMNBECAMEWEAKERTOFIRE               603
+#define STRINGID_ABOUTTOUSEPOLTERGEIST                604
+#define STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE       605
 
-#define BATTLESTRINGS_COUNT                           601
+#define BATTLESTRINGS_COUNT                           606
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

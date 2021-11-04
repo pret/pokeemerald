@@ -2382,6 +2382,7 @@ enum
     ENDTURN_NIGHTMARES,
     ENDTURN_CURSE,
     ENDTURN_WRAP,
+    ENDTURN_OCTOLOCK,
     ENDTURN_UPROAR,
     ENDTURN_THRASH,
     ENDTURN_FLINCH,
@@ -2648,6 +2649,18 @@ u8 DoBattlerEndTurnEffects(void)
                     gBattlescriptCurrInstr = BattleScript_WrapEnds;
                 }
                 BattleScriptExecute(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_OCTOLOCK:
+            if (gDisableStructs[gActiveBattler].octolock 
+             && !(GetBattlerAbility(gActiveBattler) == ABILITY_CLEAR_BODY 
+                  || GetBattlerAbility(gActiveBattler) == ABILITY_FULL_METAL_BODY 
+                  || GetBattlerAbility(gActiveBattler) == ABILITY_WHITE_SMOKE))
+            {
+                gBattlerTarget = gActiveBattler;
+                BattleScriptExecute(BattleScript_OctolockEndTurn);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;
@@ -7731,6 +7744,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             && (gDisableStructs[battlerDef].isFirstTurn != 2 || B_PAYBACK_SWITCH_BOOST < GEN_5))
             basePower *= 2;
         break;
+    case EFFECT_BOLT_BEAK:
+        if (GetBattlerTurnOrderNum(battlerAtk) < GetBattlerTurnOrderNum(battlerDef))
+            basePower *= 2;
+        break;
     case EFFECT_ROUND:
         if (gChosenMoveByBattler[BATTLE_PARTNER(battlerAtk)] == MOVE_ROUND && !(gAbsentBattlerFlags & gBitTable[BATTLE_PARTNER(battlerAtk)]))
             basePower *= 2;
@@ -8741,6 +8758,8 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
         modifier = CalcTypeEffectivenessMultiplierInternal(move, moveType, battlerAtk, battlerDef, recordAbilities, modifier);
         if (gBattleMoves[move].effect == EFFECT_TWO_TYPED_MOVE)
             modifier = CalcTypeEffectivenessMultiplierInternal(move, gBattleMoves[move].argument, battlerAtk, battlerDef, recordAbilities, modifier);
+        else if (moveType == TYPE_FIRE && gDisableStructs[battlerDef].tarShot)
+            modifier = CalcTypeEffectivenessMultiplierInternal(move, moveType, battlerAtk, battlerDef, recordAbilities, UQ_4_12(2.0));
     }
 
     if (recordAbilities)
