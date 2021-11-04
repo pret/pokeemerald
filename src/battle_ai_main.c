@@ -588,7 +588,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     score -= 5;
                     break;
                 case EFFECT_CURSE:
-                    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
+                    if (IS_BATTLER_OF_TYPE(battlerAtk, TYPE_GHOST)) // Don't use Curse if you're a ghost type vs a Magic Guard user, they'll take no damage.
                         score -= 5;
                     break;
                 }
