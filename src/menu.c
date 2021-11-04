@@ -1232,7 +1232,7 @@ void EraseYesNoWindow(void)
     RemoveWindow(sYesNoWindowId);
 }
 
-void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *menuActions)
+static void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *menuActions)
 {
     u8 i;
     u8 j;
@@ -1244,7 +1244,8 @@ void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *menuActions)
+// Unused
+static void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *menuActions)
 {
     sub_8198C94(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a3, a4, a5, menuActions);
 }
@@ -1286,7 +1287,7 @@ static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, 
     PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, menuActions, actionIds);
 }
 
-u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, u8 a6, u8 a7, u8 numChoices, u8 a9)
+static u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 optionHeight, u8 columns, u8 rows, u8 numChoices, u8 cursorPos)
 {
     s32 pos;
 
@@ -1296,12 +1297,12 @@ u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, 
     sMenu.maxCursorPos = numChoices - 1;
     sMenu.windowId = windowId;
     sMenu.fontId = fontId;
-    sMenu.optionWidth = a4;
-    sMenu.optionHeight = cursorHeight;
-    sMenu.columns = a6;
-    sMenu.rows = a7;
+    sMenu.optionWidth = optionWidth;
+    sMenu.optionHeight = optionHeight;
+    sMenu.columns = columns;
+    sMenu.rows = rows;
 
-    pos = a9;
+    pos = cursorPos;
 
     if (pos < 0 || pos > sMenu.maxCursorPos)
         sMenu.cursorPos = 0;
@@ -1314,14 +1315,14 @@ u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, 
 }
 
 // Unused
-u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7)
+static u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 width, u8 columns, u8 rows, u8 cursorPos)
 {
     u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
-    u8 numChoices = a5 * a6;
-    return sub_8198F58(windowId, fontId, left, top, a4, cursorHeight, a5, a6, numChoices, a7);
+    u8 numChoices = columns * rows;
+    return sub_8198F58(windowId, fontId, left, top, width, cursorHeight, columns, rows, numChoices, cursorPos);
 }
 
-void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
+static void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     u8 cursorHeight = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
@@ -1414,7 +1415,8 @@ u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
     }
 }
 
-s8 sub_8199284(void)
+// Unused
+static s8 sub_8199284(void)
 {
     if (JOY_NEW(A_BUTTON))
     {
@@ -1494,7 +1496,8 @@ s8 Menu_ProcessInputGridLayout(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 sub_81993D8(void)
+// Unused
+static s8 sub_81993D8(void)
 {
     if (JOY_NEW(A_BUTTON))
     {
@@ -1505,25 +1508,25 @@ s8 sub_81993D8(void)
     {
         return MENU_B_PRESSED;
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1533,8 +1536,8 @@ s8 sub_81993D8(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-//Unused
-s8 sub_8199484(void)
+// Unused
+static s8 sub_8199484(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -1678,7 +1681,8 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *menuActions, const u8 *actionIds)
+// Unused
+static void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     u8 j;
@@ -1893,31 +1897,26 @@ void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width; j++)
-        {
             dest[(i * width) + j] = src[(i + top) * 32 + j + left];
-        }
     }
 }
 
-void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP)
+void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 isAffine)
 {
     int i;
     int area = width * height;
-    if (is8BPP == TRUE)
+    if (isAffine == TRUE)
     {
         u8 *as8BPP = ptr;
         for (i = 0; i < area; i++)
-        {
             as8BPP[i] += delta;
-        }
     }
     else
     {
+        // Limit add to first 10 bits
         u16 *as4BPP = ptr;
         for (i = 0; i < area; i++)
-        {
             as4BPP[i] = (as4BPP[i] & 0xFC00) | ((as4BPP[i] + delta) & 0x3FF);
-        }
     }
 }
 
@@ -2016,7 +2015,7 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 }
 
 // Unused. Similar to BlitBitmapRect4Bit.
-void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
+static void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
     int loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     const u8 *pixelsSrc;
@@ -2091,12 +2090,14 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
     }
 }
 
-void sub_819A25C(u8 palOffset, u16 speciesId)
+// Unused
+static void sub_819A25C(u8 palOffset, u16 speciesId)
 {
     LoadPalette(GetValidMonIconPalettePtr(speciesId), palOffset, 0x20);
 }
 
-void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
+// Unused
+static void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
 {
     BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
 }

@@ -109,7 +109,7 @@ u8 GetMapNamePopUpWindowId(void);
 u8 AddMapNamePopUpWindow(void);
 void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing);
 void SetBgTilemapPalette(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
-void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP);
+void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 is8BPP);
 void EraseFieldMessageBox(bool8 copyToVram);
 void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *strs);
 s8 Menu_ProcessInputGridLayout(void);
