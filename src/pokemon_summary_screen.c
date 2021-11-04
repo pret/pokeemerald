@@ -1146,7 +1146,7 @@ static void VBlank(void)
 
 static void CB2_InitSummaryScreen(void)
 {
-    while (MenuHelpers_CallLinkSomething() != TRUE && LoadGraphics() != TRUE && MenuHelpers_LinkSomething() != TRUE);
+    while (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && LoadGraphics() != TRUE && MenuHelpers_IsLinkActive() != TRUE);
 }
 
 static bool8 LoadGraphics(void)
@@ -1490,7 +1490,7 @@ static void BeginCloseSummaryScreen(u8 taskId)
 
 static void CloseSummaryScreen(u8 taskId)
 {
-    if (MenuHelpers_CallLinkSomething() != TRUE && !gPaletteFade.active)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
         SetMainCallback2(sMonSummaryScreen->callback);
         gLastViewedMonIndex = sMonSummaryScreen->curMonIndex;
@@ -1508,7 +1508,7 @@ static void CloseSummaryScreen(u8 taskId)
 
 static void Task_HandleInput(u8 taskId)
 {
-    if (MenuHelpers_CallLinkSomething() != TRUE && !gPaletteFade.active)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -1660,7 +1660,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].data[2] = 0;
         break;
     default:
-        if (MenuHelpers_CallLinkSomething() == 0 && FuncIsActiveTask(Task_ShowStatusWindow) == 0)
+        if (!MenuHelpers_ShouldWaitForLinkRecv() && !FuncIsActiveTask(Task_ShowStatusWindow))
         {
             data[0] = 0;
             gTasks[taskId].func = Task_HandleInput;
@@ -1889,7 +1889,7 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (MenuHelpers_CallLinkSomething() != 1)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -2029,7 +2029,7 @@ static void Task_HandleInput_MovePositionSwitch(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -2170,7 +2170,7 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         if (gPaletteFade.active != TRUE)
         {

@@ -1317,28 +1317,28 @@ static void UpdateGridSelectionRect(u8 selectionId)
     switch (selectionId)
     {
     case SELECTION_NONE:
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         break;
     case COL_WYNAUT:
     case COL_AZURILL:
     case COL_SKITTY:
     case COL_MAKUHITA:
         temp0 = (selectionId * 3 + 14);
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         SetTilemapRect(&sRoulette->tilemapBuffers[0][0], &sRoulette->gridTilemap[281], temp0, 7, 3, 13);
         break;
     case ROW_ORANGE:
     case ROW_GREEN:
     case ROW_PURPLE:
         temp1 = ((selectionId - 1) / 5 * 3 + 10);
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         SetTilemapRect(&sRoulette->tilemapBuffers[0][0], &sRoulette->gridTilemap[320], 14, temp1, 16, 3);
         break;
     // Individual square
     default:
         temp0 = GET_COL(selectionId) * 3 + 14;
         temp1 = ((selectionId - 1) / 5 * 3 + 7);
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         SetTilemapRect(&sRoulette->tilemapBuffers[0][0], &sRoulette->gridTilemap[272], temp0, temp1, 3, 3);
         break;
     }

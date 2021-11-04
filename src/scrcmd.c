@@ -1208,7 +1208,7 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 // The player is frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 {
-    if (IsUpdateLinkStateCBActive())
+    if (IsOverworldLinkActive())
     {
         return FALSE;
     }
@@ -1224,7 +1224,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 // The player and selected object are frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lock(struct ScriptContext *ctx)
 {
-    if (IsUpdateLinkStateCBActive())
+    if (IsOverworldLinkActive())
     {
         return FALSE;
     }
@@ -2197,7 +2197,7 @@ bool8 ScrCmd_selectapproachingtrainer(struct ScriptContext *ctx)
 
 bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
 {
-    if (IsUpdateLinkStateCBActive())
+    if (IsOverworldLinkActive())
     {
         return FALSE;
     }

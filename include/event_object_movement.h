@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENT_OBJECT_MOVEMENT_H
 #define GUARD_EVENT_OBJECT_MOVEMENT_H
 
+#include "constants/event_object_movement.h"
+
 enum SpinnerRunnerFollowPatterns
 {
     RUNFOLLOW_ANY,
@@ -395,13 +397,13 @@ u8 MovementType_CopyPlayer_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_CopyPlayer_Step2(struct ObjectEvent *, struct Sprite *);
 bool8 CopyablePlayerMovement_None(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 CopyablePlayerMovement_FaceDirection(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
-bool8 CopyablePlayerMovement_GoSpeed0(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
-bool8 CopyablePlayerMovement_GoSpeed1(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
-bool8 CopyablePlayerMovement_GoSpeed2(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_WalkNormal(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_WalkFast(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_WalkFaster(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 CopyablePlayerMovement_Slide(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
-bool8 cph_IM_DIFFERENT(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
-bool8 CopyablePlayerMovement_GoSpeed4(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_JumpInPlace(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 CopyablePlayerMovement_Jump(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_Jump2(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 u8 MovementType_CopyPlayerInGrass_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_Buried_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_WalkInPlace_Step0(struct ObjectEvent *, struct Sprite *);

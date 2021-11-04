@@ -1832,9 +1832,9 @@ u32 GetLinkRecvQueueLength(void)
     return gLink.recvQueue.count;
 }
 
-bool32 IsLinkRecvQueueLengthAtLeast3(void)
+bool32 IsLinkRecvQueueAtOverworldMax(void)
 {
-    if (GetLinkRecvQueueLength() > 2)
+    if (GetLinkRecvQueueLength() >= OVERWORLD_RECV_QUEUE_MAX)
         return TRUE;
 
     return FALSE;
