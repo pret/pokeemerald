@@ -12834,7 +12834,7 @@ static void Cmd_handleballthrow(void)
             gBattleSpritesDataPtr->animationData->criticalCaptureSuccess = 0;
             if (CriticalCapture(odds))
             {
-                maxShakes = 1;  //critical capture doesn't gauarantee capture
+                maxShakes = 1;  //critical capture doesn't guarantee capture
                 gBattleSpritesDataPtr->animationData->isCriticalCapture = 1;
             }
             else
