@@ -145,8 +145,8 @@ struct ProtectStruct
     u32 powderSelfDmg:1;
     u32 usedThroatChopPreventedMove:1;
     u32 statRaised:1;
-    u32 micle:1;
-    u32 custap:1;    // also quick claw
+    u32 usedMicleBerry:1;
+    u32 usedCustapBerry:1;    // also quick claw
     u32 touchedProtectLike:1;
     u32 disableEjectPack:1;
     u32 statFell:1;
