@@ -170,8 +170,8 @@ u32 LoopedTask_sub_81C8254(s32 state)
 void sub_81C82E4(struct PokenavSub17 *matchCall)
 {
     u16 tileNum = (matchCall->list.listWindow.unk1 << 12) | matchCall->list.listWindow.unk6;
-    sub_8199DF0(matchCall->list.listWindow.bg, PIXEL_FILL(1), matchCall->list.listWindow.unk6, 1);
-    sub_8199DF0(matchCall->list.listWindow.bg, PIXEL_FILL(4), matchCall->list.listWindow.unk6 + 1, 1);
+    BgDmaFill(matchCall->list.listWindow.bg, PIXEL_FILL(1), matchCall->list.listWindow.unk6, 1);
+    BgDmaFill(matchCall->list.listWindow.bg, PIXEL_FILL(4), matchCall->list.listWindow.unk6 + 1, 1);
     SetBgTilemapBuffer(matchCall->list.listWindow.bg, matchCall->tilemapBuffer);
     FillBgTilemapBufferRect_Palette0(matchCall->list.listWindow.bg, tileNum, 0, 0, 32, 32);
     ChangeBgY(matchCall->list.listWindow.bg, 0, BG_COORD_SET);

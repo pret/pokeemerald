@@ -399,7 +399,7 @@ static void InitPlayerPCMenu(u8 taskId)
     windowTemplate.width = GetMaxWidthInSubsetOfMenuTable(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
-    sub_81995E4(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
+    PrintMenuActionTextsInUpperLeftCorner(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
     InitMenuInUpperLeftCornerNormal(tWindowId, sTopMenuNumOptions, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = PlayerPCProcessMenuInput;

@@ -501,8 +501,8 @@ static void FreeCityZoomViewGfx(void)
 
 static void LoadPokenavRegionMapGfx(struct Pokenav5Struct_2 *state)
 {
-    sub_8199DF0(1, PIXEL_FILL(0), 0x40, 1);
-    sub_8199DF0(1, PIXEL_FILL(1), 0x41, 1);
+    BgDmaFill(1, PIXEL_FILL(0), 0x40, 1);
+    BgDmaFill(1, PIXEL_FILL(1), 0x41, 1);
     CpuFill16(0x1040, state->tilemapBuffer, 0x800);
     SetBgTilemapBuffer(1, state->tilemapBuffer);
     state->infoWindowId = AddWindow(&sMapSecInfoWindowTemplate);

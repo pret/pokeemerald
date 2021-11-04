@@ -1149,7 +1149,7 @@ static void ShowPokeblockActionsWindow(u8 taskId)
 
     DestroyScrollArrows();
     DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 1, 0xE);
-    sub_81995E4(tWindowId, sPokeblockMenu->numActions, sPokeblockMenuActions, sPokeblockMenu->pokeblockActionIds);
+    PrintMenuActionTextsInUpperLeftCorner(tWindowId, sPokeblockMenu->numActions, sPokeblockMenuActions, sPokeblockMenu->pokeblockActionIds);
     InitMenuInUpperLeftCornerNormal(tWindowId, sPokeblockMenu->numActions, 0);
     PutWindowTilemap(tWindowId);
     ScheduleBgCopyTilemapToVram(1);

@@ -978,7 +978,7 @@ static void OpenContextMenu(u8 taskId)
 
 static void PrintMenuActionText_SingleRow(u8 windowId)
 {
-    AddItemMenuActionTextPrinters(windowId, FONT_NARROW, 8, 1, 0, 0x10, gPyramidBagMenu->menuActionsCount, sMenuActions, gPyramidBagMenu->menuActionIds);
+    PrintMenuActionTexts(windowId, FONT_NARROW, 8, 1, 0, 0x10, gPyramidBagMenu->menuActionsCount, sMenuActions, gPyramidBagMenu->menuActionIds);
     InitMenuInUpperLeftCornerNormal(windowId, gPyramidBagMenu->menuActionsCount, 0);
 }
 
@@ -1020,7 +1020,7 @@ static void HandleMenuActionInput_2x2(u8 taskId)
             if (id > 0 && IsValidMenuAction(id - 2))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
             }
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -1028,7 +1028,7 @@ static void HandleMenuActionInput_2x2(u8 taskId)
             if (id < gPyramidBagMenu->menuActionsCount - 2 && IsValidMenuAction(id + 2))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
             }
         }
         else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
@@ -1036,7 +1036,7 @@ static void HandleMenuActionInput_2x2(u8 taskId)
             if (id & 1 && IsValidMenuAction(id - 1))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
             }
         }
         else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
@@ -1044,7 +1044,7 @@ static void HandleMenuActionInput_2x2(u8 taskId)
             if (!(id & 1) && IsValidMenuAction(id + 1))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
             }
         }
         else if (JOY_NEW(A_BUTTON))

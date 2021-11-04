@@ -288,7 +288,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
 static void Task_HandleMultichoiceGridInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s8 selection = Menu_ProcessInputGridLayout();
+    s8 selection = Menu_ProcessGridInput();
 
     switch (selection)
     {
@@ -379,7 +379,7 @@ static void CreatePCMultichoice(void)
 
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
-    sub_819786C(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_WhichPCShouldBeAccessed, 0, NULL, 2, 1, 3);
 }
 

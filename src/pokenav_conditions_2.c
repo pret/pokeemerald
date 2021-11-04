@@ -240,8 +240,8 @@ u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         SetConditionGraphIOWindows(2);
         return LT_INC_AND_PAUSE;
     case 5:
-        sub_8199DF0(1, 0, 0, 1);
-        sub_8199DF0(1, 17, 1, 1);
+        BgDmaFill(1, 0, 0, 1);
+        BgDmaFill(1, 17, 1, 1);
         CpuFill32(0, structPtr->tilemapBuffers[1], BG_SCREEN_SIZE);
         SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
         return LT_INC_AND_PAUSE;

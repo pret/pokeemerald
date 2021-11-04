@@ -71,7 +71,7 @@ static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
 static EWRAM_DATA u16 sTempTileDataBufferIdx = 0;
 static EWRAM_DATA void *sTempTileDataBuffer[0x20] = {NULL};
 
-const u16 gStandardMenuPalette[] = INCBIN_U16("graphics/interface/860F074.gbapal");
+const u16 gStandardMenuPalette[] = INCBIN_U16("graphics/interface/std_menu.gbapal");
 
 static const u8 sTextSpeedFrameDelays[] =
 {
@@ -425,7 +425,7 @@ void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram)
     DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
 }
 
-void sub_819786C(u8 windowId, bool8 copyToVram)
+void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram)
 {
     LoadMessageBoxGfx(windowId, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
     DrawDialogFrameWithCustomTileAndPalette(windowId, copyToVram, DLG_WINDOW_BASE_TILE_NUM, 0xF);
@@ -1128,7 +1128,7 @@ static void PrintMenuActionTextsAtTop(u8 windowId, u8 fontId, u8 lineHeight, u8 
     PrintMenuActionTextsAtPos(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, lineHeight, itemCount, menuActions);
 }
 
-void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
+void PrintMenuActionTexts(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     struct TextPrinterTemplate printer;
@@ -1156,9 +1156,9 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
 }
 
 // Unused
-static void AddItemMenuActionTextPrintersAtTop(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
+static void PrintMenuActionTextsAtTopById(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
-    AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, menuActions, actionIds);
+    PrintMenuActionTexts(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, menuActions, actionIds);
 }
 
 void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
@@ -1232,22 +1232,22 @@ void EraseYesNoWindow(void)
     RemoveWindow(sYesNoWindowId);
 }
 
-static void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *menuActions)
+static void PrintMenuActionGridText(u8 windowId, u8 fontId, u8 left, u8 top, u8 width, u8 height, u8 columns, u8 rows, const struct MenuAction *menuActions)
 {
     u8 i;
     u8 j;
-    for (i = 0; i < a7; i++)
+    for (i = 0; i < rows; i++)
     {
-        for (j = 0; j < a6; j++)
-            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, TEXT_SKIP_DRAW, NULL);
+        for (j = 0; j < columns; j++)
+            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * columns) + j].text, (width * j) + left, (height * i) + top, TEXT_SKIP_DRAW, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 // Unused
-static void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *menuActions)
+static void PrintMenuActionGridTextAtTop(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *menuActions)
 {
-    sub_8198C94(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a3, a4, a5, menuActions);
+    PrintMenuActionGridText(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, a2, a3, a4, a5, menuActions);
 }
 
 void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
@@ -1287,7 +1287,7 @@ static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, 
     PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, menuActions, actionIds);
 }
 
-static u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 optionHeight, u8 columns, u8 rows, u8 numChoices, u8 cursorPos)
+static u8 InitMenuGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 optionHeight, u8 columns, u8 rows, u8 numChoices, u8 cursorPos)
 {
     s32 pos;
 
@@ -1310,42 +1310,34 @@ static u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u
         sMenu.cursorPos = pos;
 
     // Why call this when it's not gonna move?
-    ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
+    ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
     return sMenu.cursorPos;
 }
 
 // Unused
-static u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 width, u8 columns, u8 rows, u8 cursorPos)
+static u8 InitMenuGridDefaultCursorHeight(u8 windowId, u8 fontId, u8 left, u8 top, u8 width, u8 columns, u8 rows, u8 cursorPos)
 {
     u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
     u8 numChoices = columns * rows;
-    return sub_8198F58(windowId, fontId, left, top, width, cursorHeight, columns, rows, numChoices, cursorPos);
+    return InitMenuGrid(windowId, fontId, left, top, width, cursorHeight, columns, rows, numChoices, cursorPos);
 }
 
-static void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
+// Erase cursor at old position, draw cursor at new position.
+static void MoveMenuGridCursor(u8 oldCursorPos, u8 newCursorPos)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     u8 cursorHeight = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
+
     u8 xPos = (oldCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     u8 yPos = (oldCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
-    FillWindowPixelRect(sMenu.windowId,
-                        PIXEL_FILL(1),
-                        xPos,
-                        yPos,
-                        cursorWidth,
-                        cursorHeight);
+    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), xPos, yPos, cursorWidth, cursorHeight);
+
     xPos = (newCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     yPos = (newCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
-    AddTextPrinterParameterized(sMenu.windowId,
-                      sMenu.fontId,
-                      gText_SelectorArrow3,
-                      xPos,
-                      yPos,
-                      0,
-                      0);
+    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, xPos, yPos, 0, 0);
 }
 
-u8 ChangeListMenuCursorPosition(s8 deltaX, s8 deltaY)
+u8 ChangeMenuGridCursorPosition(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -1376,7 +1368,7 @@ u8 ChangeListMenuCursorPosition(s8 deltaX, s8 deltaY)
     }
     else
     {
-        sub_8199060(oldPos, sMenu.cursorPos);
+        MoveMenuGridCursor(oldPos, sMenu.cursorPos);
         return sMenu.cursorPos;
     }
 }
@@ -1410,13 +1402,13 @@ u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
     }
     else
     {
-        sub_8199060(oldPos, sMenu.cursorPos);
+        MoveMenuGridCursor(oldPos, sMenu.cursorPos);
         return sMenu.cursorPos;
     }
 }
 
 // Unused
-static s8 sub_8199284(void)
+static s8 Menu_ProcessGridInput_NoSoundLimit(void)
 {
     if (JOY_NEW(A_BUTTON))
     {
@@ -1430,32 +1422,32 @@ static s8 sub_8199284(void)
     else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
 
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 Menu_ProcessInputGridLayout(void)
+s8 Menu_ProcessGridInput(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -1497,7 +1489,7 @@ s8 Menu_ProcessInputGridLayout(void)
 }
 
 // Unused
-static s8 sub_81993D8(void)
+static s8 Menu_ProcessGridInputRepeat_NoSoundLimit(void)
 {
     if (JOY_NEW(A_BUTTON))
     {
@@ -1511,25 +1503,25 @@ static s8 sub_81993D8(void)
     else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
-        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
+        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
 
@@ -1537,7 +1529,7 @@ static s8 sub_81993D8(void)
 }
 
 // Unused
-static s8 sub_8199484(void)
+static s8 Menu_ProcessGridInputRepeat(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -1617,7 +1609,7 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActi
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
+void PrintMenuActionTextsInUpperLeftCorner(u8 windowId, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     struct TextPrinterTemplate printer;
@@ -1682,7 +1674,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
 }
 
 // Unused
-static void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *menuActions, const u8 *actionIds)
+static void PrintMenuActionGridTextNoSpacing(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     u8 j;
@@ -1697,12 +1689,12 @@ static void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const s
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
-    for (i = 0; i < itemCount2; i++)
+    for (i = 0; i < rows; i++)
     {
-        for (j = 0; j < itemCount; j++)
+        for (j = 0; j < columns; j++)
         {
-            printer.currentChar = menuActions[actionIds[(itemCount * i) + j]].text;
-            printer.x = (a4 * j) + 8;
+            printer.currentChar = menuActions[actionIds[(columns * i) + j]].text;
+            printer.x = (optionWidth * j) + 8;
             printer.y = (16 * i) + 1;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
@@ -1736,7 +1728,7 @@ u8 InitMenuActionGrid(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initi
         sMenu.cursorPos = pos;
 
     // Why call this when it's not gonna move?
-    ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
+    ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
     return sMenu.cursorPos;
 }
 
@@ -1932,11 +1924,11 @@ void ResetBgPositions(void)
     ChangeBgY(3, 0, BG_COORD_SET);
 }
 
-void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
+void BgDmaFill(u32 bg, u8 value, int offset, int size)
 {
-    int temp = (!GetBgAttribute(bg, BG_ATTR_PALETTEMODE)) ? 0x20 : 0x40;
-    void *addr = (void *)((GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX) * 0x4000) + (GetBgAttribute(bg, BG_ATTR_BASETILE) + a2) * temp);
-    RequestDma3Fill(a1 << 24 | a1 << 16 | a1 << 8 | a1, addr + VRAM, a3 * temp, 1);
+    int temp = (!GetBgAttribute(bg, BG_ATTR_PALETTEMODE)) ? 32 : 64;
+    void *addr = (void *)((GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX) * 0x4000) + (GetBgAttribute(bg, BG_ATTR_BASETILE) + offset) * temp);
+    RequestDma3Fill(value << 24 | value << 16 | value << 8 | value, VRAM + addr, size * temp, 1);
 }
 
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
@@ -2014,8 +2006,7 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
     AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SKIP_DRAW, 0);
 }
 
-// Unused. Similar to BlitBitmapRect4Bit.
-static void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
+static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
     int loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     const u8 *pixelsSrc;
@@ -2032,8 +2023,8 @@ static void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
     else
         yEnd = srcY + height;
 
-    multiplierSrcY = (src->width + (src->width & 7)) >> 3;
-    multiplierDstY = (dst->width + (dst->width & 7)) >> 3;
+    multiplierSrcY = (src->width + (src->width % 8)) >> 3;
+    multiplierDstY = (dst->width + (dst->width % 8)) >> 3;
 
     for (loopSrcY = srcY, loopDstY = dstY; loopSrcY < yEnd; loopSrcY++, loopDstY++)
     {
@@ -2042,14 +2033,14 @@ static void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
             pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 29) >> 27);
             pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 29) >> 27);
 
-            if ((uintptr_t)pixelsDst & 0x1)
+            if ((uintptr_t)pixelsDst & 1)
             {
                 pixelsDst--;
-                if (loopDstX & 0x1)
+                if (loopDstX & 1)
                 {
                     toOrr = *(vu16*)pixelsDst;
                     toOrr &= 0x0fff;
-                    if (loopSrcX & 0x1)
+                    if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 8);
                     else
                         toOrr |= ((*pixelsSrc & 0x0f) << 12);
@@ -2058,7 +2049,7 @@ static void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
                 {
                     toOrr = *(vu16*)pixelsDst;
                     toOrr &= 0xf0ff;
-                    if (loopSrcX & 0x1)
+                    if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 4);
                     else
                         toOrr |= ((*pixelsSrc & 0x0f) << 8);
@@ -2091,13 +2082,13 @@ static void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
 }
 
 // Unused
-static void sub_819A25C(u8 palOffset, u16 speciesId)
+static void LoadMonIconPalAtOffset(u8 palOffset, u16 speciesId)
 {
     LoadPalette(GetValidMonIconPalettePtr(speciesId), palOffset, 0x20);
 }
 
 // Unused
-static void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
+static void DrawMonIconAtPos(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
 {
     BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
 }

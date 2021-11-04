@@ -578,7 +578,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            sub_8199DF0(1, 0, 0, 1);
+            BgDmaFill(1, 0, 0, 1);
             DecompressAndCopyTileDataToVram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
             SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);

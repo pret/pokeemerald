@@ -335,7 +335,7 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
-        sub_8199DF0(1, 0, 0, 1);
+        BgDmaFill(1, 0, 0, 1);
         SetBgTilemapBuffer(1, state->unk24);
         FillBgTilemapBufferRect_Palette0(1, 0x1000, 0, 0, 32, 20);
         CopyPaletteIntoBufferUnfaded(gUnknown_086226E0, 0x10, 0x20);

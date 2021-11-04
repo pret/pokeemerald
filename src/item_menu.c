@@ -1667,7 +1667,7 @@ static void OpenContextMenu(u8 taskId)
 
 static void PrintContextMenuItems(u8 windowId)
 {
-    AddItemMenuActionTextPrinters(windowId, FONT_NARROW, 8, 1, 0, 16, gBagMenu->contextMenuNumItems, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
+    PrintMenuActionTexts(windowId, FONT_NARROW, 8, 1, 0, 16, gBagMenu->contextMenuNumItems, sItemMenuActions, gBagMenu->contextMenuItemsPtr);
     InitMenuInUpperLeftCornerNormal(windowId, gBagMenu->contextMenuNumItems, 0);
 }
 
@@ -1720,7 +1720,7 @@ static void Task_ItemContext_MultipleRows(u8 taskId)
             if (cursorPos > 0 && IsValidContextMenuPos(cursorPos - 2))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
             }
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -1728,7 +1728,7 @@ static void Task_ItemContext_MultipleRows(u8 taskId)
             if (cursorPos < (gBagMenu->contextMenuNumItems - 2) && IsValidContextMenuPos(cursorPos + 2))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
             }
         }
         else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
@@ -1736,7 +1736,7 @@ static void Task_ItemContext_MultipleRows(u8 taskId)
             if ((cursorPos & 1) && IsValidContextMenuPos(cursorPos - 1))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
             }
         }
         else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
@@ -1744,7 +1744,7 @@ static void Task_ItemContext_MultipleRows(u8 taskId)
             if (!(cursorPos & 1) && IsValidContextMenuPos(cursorPos + 1))
             {
                 PlaySE(SE_SELECT);
-                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
+                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
             }
         }
         else if (JOY_NEW(A_BUTTON))
