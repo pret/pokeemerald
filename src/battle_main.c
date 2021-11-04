@@ -2933,6 +2933,8 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
     
+    gBattleStruct->stickyWebUser = 0xFF;
+    
     for (i = 0; i < PARTY_SIZE; i++)
     {
         gBattleStruct->usedHeldItems[i][0] = 0;
@@ -3030,6 +3032,9 @@ void SwitchInClearSetData(void)
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][3] = 0;
     gBattleStruct->lastMoveFailed &= ~(gBitTable[gActiveBattler]);
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
+    
+    if (gActiveBattler == gBattleStruct->stickyWebUser)
+        gBattleStruct->stickyWebUser = 0xFF;    // Switched into sticky web user slot so reset it
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3079,35 +3084,35 @@ void FaintClearSetData(void)
 
     memset(&gDisableStructs[gActiveBattler], 0, sizeof(struct DisableStruct));
 
-    gProtectStructs[gActiveBattler].protected = 0;
-    gProtectStructs[gActiveBattler].spikyShielded = 0;
-    gProtectStructs[gActiveBattler].kingsShielded = 0;
-    gProtectStructs[gActiveBattler].banefulBunkered = 0;
-    gProtectStructs[gActiveBattler].obstructed = 0;
-    gProtectStructs[gActiveBattler].endured = 0;
-    gProtectStructs[gActiveBattler].noValidMoves = 0;
-    gProtectStructs[gActiveBattler].helpingHand = 0;
-    gProtectStructs[gActiveBattler].bounceMove = 0;
-    gProtectStructs[gActiveBattler].stealMove = 0;
-    gProtectStructs[gActiveBattler].prlzImmobility = 0;
-    gProtectStructs[gActiveBattler].confusionSelfDmg = 0;
-    gProtectStructs[gActiveBattler].targetAffected = 0;
-    gProtectStructs[gActiveBattler].chargingTurn = 0;
+    gProtectStructs[gActiveBattler].protected = FALSE;
+    gProtectStructs[gActiveBattler].spikyShielded = FALSE;
+    gProtectStructs[gActiveBattler].kingsShielded = FALSE;
+    gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+    gProtectStructs[gActiveBattler].obstructed = FALSE;
+    gProtectStructs[gActiveBattler].endured = FALSE;
+    gProtectStructs[gActiveBattler].noValidMoves = FALSE;
+    gProtectStructs[gActiveBattler].helpingHand = FALSE;
+    gProtectStructs[gActiveBattler].bounceMove = FALSE;
+    gProtectStructs[gActiveBattler].stealMove = FALSE;
+    gProtectStructs[gActiveBattler].prlzImmobility = FALSE;
+    gProtectStructs[gActiveBattler].confusionSelfDmg = FALSE;
+    gProtectStructs[gActiveBattler].targetAffected = FALSE;
+    gProtectStructs[gActiveBattler].chargingTurn = FALSE;
     gProtectStructs[gActiveBattler].fleeFlag = 0;
-    gProtectStructs[gActiveBattler].usedImprisonedMove = 0;
-    gProtectStructs[gActiveBattler].loveImmobility = 0;
-    gProtectStructs[gActiveBattler].usedDisabledMove = 0;
-    gProtectStructs[gActiveBattler].usedTauntedMove = 0;
-    gProtectStructs[gActiveBattler].flag2Unknown = 0;
-    gProtectStructs[gActiveBattler].flinchImmobility = 0;
-    gProtectStructs[gActiveBattler].notFirstStrike = 0;
-    gProtectStructs[gActiveBattler].usedHealBlockedMove = 0;
-    gProtectStructs[gActiveBattler].usesBouncedMove = 0;
-    gProtectStructs[gActiveBattler].usedGravityPreventedMove = 0;
-    gProtectStructs[gActiveBattler].usedThroatChopPreventedMove = 0;
-    gProtectStructs[gActiveBattler].statRaised = 0;
-    gProtectStructs[gActiveBattler].statFell = 0;
-    gProtectStructs[gActiveBattler].pranksterElevated = 0;
+    gProtectStructs[gActiveBattler].usedImprisonedMove = FALSE;
+    gProtectStructs[gActiveBattler].loveImmobility = FALSE;
+    gProtectStructs[gActiveBattler].usedDisabledMove = FALSE;
+    gProtectStructs[gActiveBattler].usedTauntedMove = FALSE;
+    gProtectStructs[gActiveBattler].flag2Unknown = FALSE;
+    gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
+    gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
+    gProtectStructs[gActiveBattler].usedHealBlockedMove = FALSE;
+    gProtectStructs[gActiveBattler].usesBouncedMove = FALSE;
+    gProtectStructs[gActiveBattler].usedGravityPreventedMove = FALSE;
+    gProtectStructs[gActiveBattler].usedThroatChopPreventedMove = FALSE;
+    gProtectStructs[gActiveBattler].statRaised = FALSE;
+    gProtectStructs[gActiveBattler].statFell = FALSE;
+    gProtectStructs[gActiveBattler].pranksterElevated = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -3127,6 +3132,9 @@ void FaintClearSetData(void)
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][3] = 0;
 
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
+    
+    if (gActiveBattler == gBattleStruct->stickyWebUser)
+        gBattleStruct->stickyWebUser = 0xFF;    // User of sticky web fainted, so reset the stored battler ID
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -4418,7 +4426,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      || (!IsAbilityOnOpposingSide(battler1, ABILITY_UNNERVE)
       && holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY
       && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item))))
-        gProtectStructs[battler1].custap = TRUE;
+        gProtectStructs[battler1].usedCustapBerry = TRUE;
 
     // Battler 2
     speedBattler2 = GetBattlerTotalSpeedStat(battler2);
@@ -4432,7 +4440,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      || (!IsAbilityOnOpposingSide(battler2, ABILITY_UNNERVE)
       && holdEffectBattler2 == HOLD_EFFECT_CUSTAP_BERRY
       && HasEnoughHpToEatBerry(battler2, 4, gBattleMons[battler2].item))))
-        gProtectStructs[battler2].custap = TRUE;
+        gProtectStructs[battler2].usedCustapBerry = TRUE;
 
     if (!ignoreChosenMoves)
     {
@@ -4452,9 +4460,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
             strikesFirst = 0;
         else if (!gProtectStructs[battler1].quickDraw && gProtectStructs[battler2].quickDraw)
             strikesFirst = 1;
-        else if (gProtectStructs[battler1].custap && !gProtectStructs[battler2].custap)
+        else if (gProtectStructs[battler1].usedCustapBerry && !gProtectStructs[battler2].usedCustapBerry)
             strikesFirst = 0;
-        else if (gProtectStructs[battler2].custap && !gProtectStructs[battler1].custap)
+        else if (gProtectStructs[battler2].usedCustapBerry && !gProtectStructs[battler1].usedCustapBerry)
             strikesFirst = 1;
         else if (holdEffectBattler1 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler2 != HOLD_EFFECT_LAGGING_TAIL)
             strikesFirst = 1;
@@ -4615,10 +4623,10 @@ static void TurnValuesCleanUp(bool8 var0)
     {
         if (var0)
         {
-            gProtectStructs[gActiveBattler].protected = 0;
-            gProtectStructs[gActiveBattler].spikyShielded = 0;
-            gProtectStructs[gActiveBattler].kingsShielded = 0;
-            gProtectStructs[gActiveBattler].banefulBunkered = 0;
+            gProtectStructs[gActiveBattler].protected = FALSE;
+            gProtectStructs[gActiveBattler].spikyShielded = FALSE;
+            gProtectStructs[gActiveBattler].kingsShielded = FALSE;
+            gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
         }
         else
         {
@@ -4713,14 +4721,14 @@ static void CheckQuickClaw_CustapBerryActivation(void)
             gBattleStruct->quickClawBattlerId++;
             if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
              && gChosenMoveByBattler[gActiveBattler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
-             && (gProtectStructs[gActiveBattler].custap || gProtectStructs[gActiveBattler].quickDraw)
+             && (gProtectStructs[gActiveBattler].usedCustapBerry || gProtectStructs[gActiveBattler].quickDraw)
              && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
              && !(gDisableStructs[gBattlerAttacker].truantCounter)
              && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                if (gProtectStructs[gActiveBattler].custap)
+                if (gProtectStructs[gActiveBattler].usedCustapBerry)
                 {
-                    gProtectStructs[gActiveBattler].custap = FALSE;
+                    gProtectStructs[gActiveBattler].usedCustapBerry = FALSE;
                     gLastUsedItem = gBattleMons[gActiveBattler].item;
                     PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
                     if (GetBattlerHoldEffect(gActiveBattler, FALSE) == HOLD_EFFECT_CUSTAP_BERRY)
@@ -5130,7 +5138,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
     gBattleStruct->dynamicMoveType = 0;
     gBattleStruct->ateBoost[battlerAtk] = 0;
-    gSpecialStatuses[battlerAtk].gemBoost = 0;
+    gSpecialStatuses[battlerAtk].gemBoost = FALSE;
 
     if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
     {
@@ -5232,7 +5240,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
         && moveType == ItemId_GetSecondaryId(gBattleMons[battlerAtk].item))
     {
         gSpecialStatuses[battlerAtk].gemParam = GetBattlerHoldEffectParam(battlerAtk);
-        gSpecialStatuses[battlerAtk].gemBoost = 1;
+        gSpecialStatuses[battlerAtk].gemBoost = TRUE;
     }
 }
 

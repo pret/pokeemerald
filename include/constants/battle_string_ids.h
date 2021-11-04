@@ -599,8 +599,10 @@
 #define STRINGID_BROKETHROUGHPROTECTION               596
 #define STRINGID_ABILITYALLOWSONLYMOVE                597
 #define STRINGID_SWAPPEDABILITIES                     598
+#define STRINGID_PASTELVEILPROTECTED                  599
+#define STRINGID_PASTELVEILENTERS                     600
 
-#define BATTLESTRINGS_COUNT                           599
+#define BATTLESTRINGS_COUNT                           601
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -835,6 +837,7 @@
 #define B_MSG_SWITCHIN_SCREENCLEANER    12
 #define B_MSG_SWITCHIN_ASONE            13
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
+#define B_MSG_SWITCHIN_PASTEL_VEIL      15
 
 // gMentalHerbCureStringIds
 #define B_MSG_MENTALHERBCURE_INFATUATION       0
