@@ -1888,6 +1888,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro cantarshotwork battler:req, ptr:req
+	various \battler, VARIOUS_CAN_TAR_SHOT_WORK
+	.4byte \ptr
+	.endm
+
 	.macro checkpoltergeist battler:req, ptr:req
 	various \battler, VARIOUS_CHECK_POLTERGEIST
 	.4byte \ptr

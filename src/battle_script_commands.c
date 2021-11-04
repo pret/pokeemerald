@@ -9107,6 +9107,15 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_CAN_TAR_SHOT_WORK:
+        // Tar Shot will fail if it's already been used on the target and its speed can't be lowered further
+        if (gDisableStructs[gActiveBattler].tarShot 
+            && (gBattleMons[gActiveBattler].statStages[STAT_SPEED] == MIN_STAT_STAGE
+                || (gBattleMons[gActiveBattler].statStages[STAT_SPEED] == MAX_STAT_STAGE && GetBattlerAbility(gActiveBattler) == ABILITY_CONTRARY)))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;

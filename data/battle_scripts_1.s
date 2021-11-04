@@ -461,6 +461,7 @@ BattleScript_EffectTarShot:
 	attackcanceler
 	jumpifsubstituteblocks BattleScript_ButItFailedAtkStringPpReduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	cantarshotwork BS_TARGET, BattleScript_ButItFailedAtkStringPpReduce
 	attackstring
 	ppreduce
 	setstatchanger STAT_SPEED, 1, TRUE
