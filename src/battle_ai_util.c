@@ -2616,7 +2616,7 @@ bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, 
 bool32 AI_CanBePoisoned(u8 battler, u16 ability)
 {
     if (ability == ABILITY_IMMUNITY
-      || ability == ABILITY_PASTEL_VEIL
+      || IsAbilityOnSide(battler, ABILITY_PASTEL_VEIL)
       || gBattleMons[battler].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battler)
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
