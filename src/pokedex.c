@@ -4247,6 +4247,9 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         }
         break;
     case 1:
+        sPokedexView = AllocZeroed(sizeof(struct PokedexView)); //for type icons
+        ResetPokedexView(sPokedexView);
+
         LoadTilesetTilemapHGSS(INFO_SCREEN);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
@@ -4258,6 +4261,9 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
+        sPokedexView->typeIconSpriteIds[0] = 0xFF;
+        sPokedexView->typeIconSpriteIds[1] = 0xFF;
+        CreateTypeIconSprites();
         gTasks[taskId].tState++;
         break;
     case 3:
@@ -4300,6 +4306,8 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(0x0000FFFF, 0, 0, 16, RGB_BLACK);
+        SetSpriteInvisibility(0, TRUE);
+        SetSpriteInvisibility(1, TRUE);
         gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
         gTasks[taskId].func = Task_ExitCaughtMonPage;
     }
@@ -4421,13 +4429,17 @@ static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
     sprite->pos1.y = y + 8;
     SetSpriteInvisibility(spriteArrayId, FALSE);
 }
-static void PrintCurrentSpeciesTypeInfo(void)
+static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
 {
-    u16 species = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
     u32 i;
     u16 dexNum = SpeciesToNationalPokedexNum(species);
     u8 type1, type2;
 
+    if (!newEntry)
+    {
+        species = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
+        dexNum = SpeciesToNationalPokedexNum(species);
+    }
     //type icon(s)
     #ifdef TX_DIFFICULTY_CHALLENGES_USED
         type1 = GetTypeBySpecies(species, 1);
@@ -4472,7 +4484,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
 {
     u8 str[16];
     u8 str2[32];
-    u16 natNum;
+    u16 species;
     const u8 *name;
     const u8 *category;
     const u8 *description;
@@ -4485,9 +4497,9 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         value = num;
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
     PrintInfoScreenTextWhite(str, 123, 17); //HGSS_Ui
-    natNum = NationalPokedexNumToSpecies(num);
-    if (natNum)
-        name = gSpeciesNames[natNum];
+    species = NationalPokedexNumToSpecies(num);
+    if (species)
+        name = gSpeciesNames[species];
     else
         name = sText_TenDashes2;
     PrintInfoScreenTextWhite(name, 157, 17); //HGSS_Ui
@@ -4522,11 +4534,8 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(1, description, 0xF0), 93); //HGSS_Ui
 
     //Type Icon(s) //HGSS_Ui
-    if (owned && !newEntry)
-    {
-        description = gPokedexEntries[num].description;
-        PrintCurrentSpeciesTypeInfo(); //HGSS_Ui
-    }
+    if (owned)
+        PrintCurrentSpeciesTypeInfo(newEntry, species); //HGSS_Ui
 }
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
