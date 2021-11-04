@@ -1337,24 +1337,20 @@ static void Cmd_attackcanceler(void)
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    if (moveType == TYPE_FIRE
-     && (gBattleWeather & WEATHER_RAIN_PRIMAL)
-     && WEATHER_HAS_EFFECT
-     && gBattleMoves[gCurrentMove].power)
+    if (WEATHER_HAS_EFFECT && gBattleMoves[gCurrentMove].power)
     {
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_PrimordialSeaFizzlesOutFireTypeMoves;
-        return;
-    }
-
-    if (moveType == TYPE_WATER
-     && (gBattleWeather & WEATHER_SUN_PRIMAL)
-     && WEATHER_HAS_EFFECT
-     && gBattleMoves[gCurrentMove].power)
-    {
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_DesolateLandEvaporatesWaterTypeMoves;
-        return;
+        if (moveType == TYPE_FIRE && (gBattleWeather & WEATHER_RAIN_PRIMAL))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_PrimordialSeaFizzlesOutFireTypeMoves;
+            return;
+        }
+        else if (moveType == TYPE_WATER && (gBattleWeather & WEATHER_SUN_PRIMAL))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_DesolateLandEvaporatesWaterTypeMoves;
+            return;
+        }
     }
 
     if (gBattleOutcome != 0)
