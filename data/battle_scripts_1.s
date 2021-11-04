@@ -427,22 +427,24 @@ BattleScript_EffectOctolock:
 	goto BattleScript_MoveEnd
 
 BattleScript_OctolockEndTurn::
-	playanimation BS_ATTACKER, B_ANIM_TURN_TRAP, 0
 	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_OctolockLowerDef
 	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_OctolockTryLowerSpDef
 	goto BattleScript_OctolockEnd2
 BattleScript_OctolockLowerDef:
-	playstatchangeanimation BS_ATTACKER, BIT_SPATK | BIT_SPDEF, STAT_CHANGE_NEGATIVE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE
 	jumpifability BS_TARGET, ABILITY_BIG_PECKS, BattleScript_OctolockTryLowerSpDef
 	setstatchanger STAT_DEF, 1, TRUE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_OctolockTryLowerSpDef
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_OctolockTryLowerSpDef
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_OctolockTryLowerSpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_OctolockTryLowerSpDef
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_OctolockTryLowerSpDef::
+BattleScript_OctolockTryLowerSpDef:
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_OctolockSkipSpDefAnim
+	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, STAT_CHANGE_NEGATIVE
+BattleScript_OctolockSkipSpDefAnim:
 	setstatchanger STAT_SPDEF, 1, TRUE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_OctolockEnd2
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_OctolockEnd2
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_OctolockEnd2
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_OctolockEnd2
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_OctolockEnd2::
