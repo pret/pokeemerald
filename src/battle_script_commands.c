@@ -9039,6 +9039,13 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
+    case VARIOUS_TRY_TO_REVERT_MIMICRY:
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (GetBattlerAbility(i) == ABILITY_MIMICRY)
+                RestoreBattlerOriginalTypes(i);
+        }
+        break;
     }
 
     gBattlescriptCurrInstr += 3;
