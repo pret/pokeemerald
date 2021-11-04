@@ -1310,7 +1310,7 @@ static void StartEasyChatScreen(u8 taskId, TaskFunc taskFunc)
 
 static void Task_InitEasyChatScreen(u8 taskId)
 {
-    if (!IsUpdateLinkStateCBActive())
+    if (!IsOverworldLinkActive())
     {
         while (InitEasyChatScreen(taskId));
     }

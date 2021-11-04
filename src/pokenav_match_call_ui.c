@@ -6,6 +6,7 @@
 #include "bg.h"
 #include "menu.h"
 #include "decompress.h"
+#include "international_string_util.h"
 
 // TODO: This UI isnt just for match call, seems to be the general pokenav list UI
 
@@ -65,8 +66,6 @@ struct PokenavSub17
     s32 unk89C;
     u32 loopedTaskId;
 };
-
-extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
 
 void sub_81C82E4(struct PokenavSub17 *matchCall);
 bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3);
@@ -754,7 +753,7 @@ static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct Pok
 
     if (str != NULL)
     {
-        sub_81DB620(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
+        FillWindowTilesByRow(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
         AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
         CopyWindowRectToVram(list->listWindow.windowId, 2, 0, r6 * 2, list->listWindow.unk4, 2);
     }

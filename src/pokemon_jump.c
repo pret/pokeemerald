@@ -3197,7 +3197,7 @@ static void LoadPokeJumpGfx(void)
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        sub_8098C6C(0, 1, 0xE0);
+        LoadUserWindowBorderGfxOnBg(0, 1, 0xE0);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);

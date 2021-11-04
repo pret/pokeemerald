@@ -82,6 +82,7 @@
 #define MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP          0x4E
 #define MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT        0x4F
 #define MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT       0x50
+#define NUM_MOVEMENT_TYPES                             0x51
 
 #define MOVEMENT_ACTION_FACE_DOWN                       0x0
 #define MOVEMENT_ACTION_FACE_UP                         0x1
@@ -317,5 +318,19 @@
 #define ANIM_HOOKED_POKEMON_NORTH 9
 #define ANIM_HOOKED_POKEMON_WEST  10
 #define ANIM_HOOKED_POKEMON_EAST  11
+
+// IDs for how NPCs that copy player movement should respond.
+// Most go unused.
+#define COPY_MOVE_NONE           0
+#define COPY_MOVE_FACE           1
+#define COPY_MOVE_WALK           2
+#define COPY_MOVE_WALK_FAST      3
+#define COPY_MOVE_WALK_FASTER    4
+#define COPY_MOVE_SLIDE          5
+#define COPY_MOVE_JUMP_IN_PLACE  6
+#define COPY_MOVE_JUMP           7
+#define COPY_MOVE_JUMP2          8
+#define COPY_MOVE_EMPTY_1        9
+#define COPY_MOVE_EMPTY_2       10
 
 #endif // GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H

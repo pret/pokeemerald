@@ -278,51 +278,45 @@ u8 GetLRKeysPressedAndHeld(void)
 bool8 IsHoldingItemAllowed(u16 itemId)
 {
     // Enigma Berry can't be held in link areas
-    if (itemId != ITEM_ENIGMA_BERRY)
-        return TRUE;
-    else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
-          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+    if (itemId == ITEM_ENIGMA_BERRY
+     && ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
+       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+       || InUnionRoom() == TRUE))
         return FALSE;
-    else if (InUnionRoom() != TRUE)
-        return TRUE;
     else
-        return FALSE;
+        return TRUE;
 }
 
 bool8 IsWritingMailAllowed(u16 itemId)
 {
-    if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
+    if ((IsOverworldLinkActive() == TRUE || InUnionRoom() == TRUE) && ItemIsMail(itemId) == TRUE)
+        return FALSE;
+    else
         return TRUE;
-    else if (ItemIsMail(itemId) != TRUE)
+}
+
+bool8 MenuHelpers_IsLinkActive(void)
+{
+    if (IsOverworldLinkActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MenuHelpers_LinkSomething(void)
+static bool8 IsActiveOverworldLinkBusy(void)
 {
-    if (IsUpdateLinkStateCBActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
-        return TRUE;
-    else
+    if (!MenuHelpers_IsLinkActive())
         return FALSE;
+    else
+        return Overworld_IsRecvQueueAtMax();
 }
 
-static bool8 sub_81221D0(void)
+bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
 {
-    if (!MenuHelpers_LinkSomething())
-        return FALSE;
-    else
-        return Overworld_LinkRecvQueueLengthMoreThan2();
-}
-
-bool8 MenuHelpers_CallLinkSomething(void)
-{
-    if (sub_81221D0() == TRUE)
+    if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE )
         return TRUE;
-    else if (IsLinkRecvQueueLengthAtLeast3() != TRUE)
-        return FALSE;
     else
-        return TRUE;
+        return FALSE;
 }
 
 void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage)
