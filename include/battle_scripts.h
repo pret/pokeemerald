@@ -407,5 +407,6 @@ extern const u8 BattleScript_WanderingSpiritActivates[];
 extern const u8 BattleScript_MirrorArmorReflect[];
 extern const u8 BattleScript_GooeyActivates[];
 extern const u8 BattleScript_PastelVeilActivates[];
+extern const u8 BattleScript_AttackerFormChangeEnd3NoPopup[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

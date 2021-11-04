@@ -6980,6 +6980,7 @@ BattleScript_AttackerFormChange::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
+BattleScript_AttackerFormChangeNoPopup::
 	handleformchange BS_ATTACKER, 0
 	handleformchange BS_ATTACKER, 1
 	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
@@ -6989,6 +6990,10 @@ BattleScript_AttackerFormChange::
 	
 BattleScript_AttackerFormChangeEnd3::
 	call BattleScript_AttackerFormChange
+	end3
+
+BattleScript_AttackerFormChangeEnd3NoPopup::
+	call BattleScript_AttackerFormChangeNoPopup
 	end3
 
 BattleScript_BallFetch::
