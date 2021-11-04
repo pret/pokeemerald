@@ -2724,6 +2724,11 @@ const struct Item gItems[] =
         .name = _("Soul Dew"),
         .itemId = ITEM_SOUL_DEW,
         .price = 0,
+        #if defined(BATTLE_ENGINE) && I_SOUL_DEW_BOOST >= GEN_7
+            .holdEffectParam = 20,
+        #elif defined(BATTLE_ENGINE) && I_SOUL_DEW_BOOST <= GEN_6
+            .holdEffectParam = 50,
+        #endif
         .holdEffect = HOLD_EFFECT_SOUL_DEW,
         .description = sSoulDewDesc,
         .pocket = POCKET_ITEMS,
