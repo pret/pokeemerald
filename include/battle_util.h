@@ -158,6 +158,7 @@ bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 chec
 u16 GetUsedHeldItem(u8 battler);
 bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
 void TryToApplyMimicry(u8 battlerId, bool8 various);
+void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);
 
 // ability checks

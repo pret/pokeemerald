@@ -1934,6 +1934,17 @@ void TryToApplyMimicry(u8 battlerId, bool8 various)
     }
 }
 
+void TryToRevertMimicry(void)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (GetBattlerAbility(i) == ABILITY_MIMICRY)
+            RestoreBattlerOriginalTypes(i);
+    }
+}
+
 enum
 {
     ENDTURN_ORDER,
@@ -2318,11 +2329,7 @@ u8 DoFieldEndTurnEffects(void)
               && (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.electricTerrainTimer == 0))
             {
                 gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
-                for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-                {
-                    if (GetBattlerAbility(i) == ABILITY_MIMICRY)
-                        RestoreBattlerOriginalTypes(i);
-                }
+                TryToRevertMimicry();
                 BattleScriptExecute(BattleScript_ElectricTerrainEnds);
                 effect++;
             }
@@ -2333,11 +2340,7 @@ u8 DoFieldEndTurnEffects(void)
               && (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.mistyTerrainTimer == 0))
             {
                 gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN);
-                for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-                {
-                    if (GetBattlerAbility(i) == ABILITY_MIMICRY)
-                        RestoreBattlerOriginalTypes(i);
-                }
+                TryToRevertMimicry();
                 BattleScriptExecute(BattleScript_MistyTerrainEnds);
                 effect++;
             }
@@ -2350,11 +2353,7 @@ u8 DoFieldEndTurnEffects(void)
                   && (gFieldTimers.grassyTerrainTimer == 0 || --gFieldTimers.grassyTerrainTimer == 0))
                 {
                     gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
-                    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-                    {
-                        if (GetBattlerAbility(i) == ABILITY_MIMICRY)
-                            RestoreBattlerOriginalTypes(i);
-                    }
+                    TryToRevertMimicry();
                 }
                 BattleScriptExecute(BattleScript_GrassyTerrainHeals);
                 effect++;
@@ -2366,11 +2365,7 @@ u8 DoFieldEndTurnEffects(void)
               && (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.psychicTerrainTimer == 0))
             {
                 gFieldStatuses &= ~(STATUS_FIELD_PSYCHIC_TERRAIN);
-                for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-                {
-                    if (GetBattlerAbility(i) == ABILITY_MIMICRY)
-                        RestoreBattlerOriginalTypes(i);
-                }
+                TryToRevertMimicry();
                 BattleScriptExecute(BattleScript_PsychicTerrainEnds);
                 effect++;
             }

@@ -8865,11 +8865,7 @@ static void Cmd_various(void)
             break;
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
-        for (i = 0; i < gBattlersCount; i++) // restore the types of Pokémon with Mimicry
-        {
-            if (GetBattlerAbility(i) == ABILITY_MIMICRY)
-                RestoreBattlerOriginalTypes(i);
-        }
+        TryToRevertMimicry(); // restore the types of Pokémon with Mimicry
         break;
     case VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
         if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler, TRUE))
