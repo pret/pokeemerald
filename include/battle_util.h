@@ -161,7 +161,7 @@ void TryToApplyMimicry(u8 battlerId, bool8 various);
 void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);
 
-// ability checks
+// Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
 bool32 IsRolePlayBannedAbility(u16 ability);
 bool32 IsSkillSwapBannedAbility(u16 ability);
