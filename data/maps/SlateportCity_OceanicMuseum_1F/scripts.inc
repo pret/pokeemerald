@@ -9,14 +9,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_EntranceAttendant::
 
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeLeft::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeRight::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee
 	end
@@ -205,12 +205,12 @@ SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitNorth:
 	delay_16
 	delay_8
 	delay_4
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitWestEast:
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit:

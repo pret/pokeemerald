@@ -48,8 +48,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat
 	applymovement LOCALID_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
 	waitmovement 0
-	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFastestDown
-	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_MeddlingKid, MSGBOX_DEFAULT
 	closemessage
@@ -73,7 +73,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	fadescreen FADE_FROM_BLACK
 	delay 30
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_DEVON_GOODS
@@ -101,12 +101,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch::
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts::
-	applymovement LOCALID_CAPT_STERN, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_CAPT_STERN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
@@ -123,7 +123,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest::
 SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth:
 	walk_left
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest:
@@ -131,7 +131,7 @@ SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest:
 	walk_left
 	walk_left
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_Unused:
@@ -173,7 +173,7 @@ SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle:
 SlateportCity_OceanicMuseum_2F_Movement_FirstGruntEnter:
 	walk_down
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_FirstGruntApproach:
@@ -217,7 +217,7 @@ SlateportCity_OceanicMuseum_2F_Movement_GruntMoveForArchie:
 	delay_16
 	delay_8
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 SlateportCity_OceanicMuseum_2F_EventScript_WaterQualitySample1::

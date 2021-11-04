@@ -24,7 +24,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	copyvar VAR_0x8008, VAR_RESULT
 	special BufferLottoTicketNumber
 	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait, MSGBOX_DEFAULT
-	applymovement LOCALID_LOTTERY_CLERK, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_LOTTERY_CLERK, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	playse SE_PC_ON
 	special DoLotteryCornerComputerEffect

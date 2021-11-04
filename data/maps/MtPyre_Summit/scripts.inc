@@ -42,7 +42,7 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
 	compare VAR_0x8008, 0
@@ -95,7 +95,7 @@ MtPyre_Summit_EventScript_ArchieFacePlayer2::
 MtPyre_Summit_EventScript_OldLadyApproachPlayer0::
 	applymovement LOCALID_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer0
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -107,14 +107,14 @@ MtPyre_Summit_EventScript_OldLadyApproachPlayer1::
 MtPyre_Summit_EventScript_OldLadyApproachPlayer2::
 	applymovement LOCALID_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer2
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 MtPyre_Summit_Movement_OldLadyApproachPlayer0:
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MtPyre_Summit_Movement_OldLadyApproachPlayer1:
@@ -124,17 +124,17 @@ MtPyre_Summit_Movement_OldLadyApproachPlayer1:
 MtPyre_Summit_Movement_OldLadyApproachPlayer2:
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 MtPyre_Summit_Movement_ArchieFacePlayer0:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtPyre_Summit_Movement_ArchieFacePlayer2:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtPyre_Summit_EventScript_OldMan::
@@ -216,7 +216,7 @@ MtPyre_Summit_EventScript_ArchieMaxieTrigger2::
 	end
 
 MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 60
 	compare VAR_0x8008, 0
@@ -301,7 +301,7 @@ MtPyre_Summit_EventScript_MaxieApproachArchie0::
 	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
 	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie0
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -309,7 +309,7 @@ MtPyre_Summit_EventScript_MaxieApproachArchie1::
 	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
 	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie1
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -317,20 +317,20 @@ MtPyre_Summit_EventScript_MaxieApproachArchie2::
 	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
 	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie2
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 MtPyre_Summit_Movement_PlayerFaceMaxie0:
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 MtPyre_Summit_Movement_PlayerFaceMaxie:
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MtPyre_Summit_Movement_ArchieExit:
@@ -355,26 +355,26 @@ MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit0:
 	delay_16
 	delay_8
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit1:
 	delay_16
 	delay_8
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit2:
 	delay_16
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtPyre_Summit_Movement_MaxieApproachPlayer0:
@@ -388,24 +388,24 @@ MtPyre_Summit_Movement_MaxieApproachPlayer1:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 MtPyre_Summit_Movement_MaxieApproachPlayer2:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 MtPyre_Summit_Movement_ArchieWatchMaxie:
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 MtPyre_Summit_Movement_PlayerWatchMaxie:
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtPyre_Summit_Movement_MaxieApproachArchie0:
@@ -413,21 +413,21 @@ MtPyre_Summit_Movement_MaxieApproachArchie0:
 	walk_right
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MtPyre_Summit_Movement_MaxieApproachArchie1:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MtPyre_Summit_Movement_MaxieApproachArchie2:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MtPyre_Summit_EventScript_Grunt1::

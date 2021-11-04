@@ -567,7 +567,7 @@ BerryBlender_EventScript_ExpertMGiveBerry:
 	end
 
 BerryBlender_Movement_BlendLeaderWalkInPlace:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BerryBlender_EventScript_BerryBlenderLink::

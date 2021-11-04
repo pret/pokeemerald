@@ -214,22 +214,22 @@ Route110_TrickHouseEnd_EventScript_NoRoomForTent::
 	return
 
 Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth::
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth::
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest::
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast::
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -243,7 +243,7 @@ Route110_TrickHouseEnd_EventScript_TrickMasterExitTrigger::
 	applymovement LOCALID_TRICK_MASTER, Route110_TrickHouseEnd_Movement_TrickMasterSurprise
 	waitmovement 0
 	playse SE_M_EXPLOSION
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_YoureIgnoringMe, MSGBOX_DEFAULT
 	closemessage
