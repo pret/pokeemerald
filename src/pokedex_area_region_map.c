@@ -38,8 +38,8 @@ void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
         AddValToTilemapBuffer(tilemap, template->offset, 64, 64, TRUE); // template->offset is always 0, so this does nothing.
     }
 
-    ChangeBgX(template->bg, 0, 0);
-    ChangeBgY(template->bg, 0, 0);
+    ChangeBgX(template->bg, 0, BG_COORD_SET);
+    ChangeBgY(template->bg, 0, BG_COORD_SET);
     SetBgAttribute(template->bg, BG_ATTR_PALETTEMODE, 1);
     CpuCopy32(sPokedexAreaMap_Pal, &gPlttBufferUnfaded[0x70], 0x60);
     *sPokedexAreaMapBgNum = template->bg;
@@ -65,5 +65,5 @@ void FreePokedexAreaMapBgNum(void)
 
 void PokedexAreaMapChangeBgY(u32 a0)
 {
-    ChangeBgY(*sPokedexAreaMapBgNum, a0 * 0x100, 0);
+    ChangeBgY(*sPokedexAreaMapBgNum, a0 * 0x100, BG_COORD_SET);
 }

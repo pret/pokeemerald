@@ -515,11 +515,11 @@ static void LoadPokenavRegionMapGfx(struct Pokenav5Struct_2 *state)
     CopyPaletteIntoBufferUnfaded(sMapSecInfoWindow_Pal, 0x10, 0x20);
     CopyPaletteIntoBufferUnfaded(gRegionMapCityZoomTiles_Pal, 0x30, 0x20);
     if (!IsRegionMapZoomed())
-        ChangeBgY(1, -0x6000, 0);
+        ChangeBgY(1, -0x6000, BG_COORD_SET);
     else
-        ChangeBgY(1, 0, 0);
+        ChangeBgY(1, 0, BG_COORD_SET);
 
-    ChangeBgX(1, 0, 0);
+    ChangeBgX(1, 0, BG_COORD_SET);
 }
 
 static bool32 TryFreeTempTileDataBuffers(void)
@@ -587,9 +587,9 @@ static void Task_ChangeBgYForZoom(u8 taskId)
 {
     if (gTasks[taskId].tZoomIn)
     {
-        if (ChangeBgY(1, 0x480, 1) >= 0)
+        if (ChangeBgY(1, 0x480, BG_COORD_ADD) >= 0)
         {
-            ChangeBgY(1, 0, 0);
+            ChangeBgY(1, 0, BG_COORD_SET);
             DestroyTask(taskId);
         }
 
@@ -597,9 +597,9 @@ static void Task_ChangeBgYForZoom(u8 taskId)
     }
     else
     {
-        if (ChangeBgY(1, 0x480, 2) <= -0x6000)
+        if (ChangeBgY(1, 0x480, BG_COORD_SUB) <= -0x6000)
         {
-            ChangeBgY(1, -0x6000, 0);
+            ChangeBgY(1, -0x6000, BG_COORD_SET);
             DestroyTask(taskId);
         }
 

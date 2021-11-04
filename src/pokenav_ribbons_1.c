@@ -439,8 +439,8 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
             return LT_PAUSE;
         if (!UpdateMonListBgs())
             return LT_PAUSE;
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         ShowBg(1);
         return LT_INC_AND_PAUSE;
     case 2:

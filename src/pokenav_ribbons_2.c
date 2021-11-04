@@ -631,10 +631,10 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             CreateBigRibbonSprite(structPtr);
-            ChangeBgX(1, 0, 0);
-            ChangeBgY(1, 0, 0);
-            ChangeBgX(2, 0, 0);
-            ChangeBgY(2, 0, 0);
+            ChangeBgX(1, 0, BG_COORD_SET);
+            ChangeBgY(1, 0, BG_COORD_SET);
+            ChangeBgX(2, 0, BG_COORD_SET);
+            ChangeBgY(2, 0, BG_COORD_SET);
             ShowBg(1);
             ShowBg(2);
             HideBg(3);

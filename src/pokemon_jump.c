@@ -3732,7 +3732,7 @@ static void SetMonSpriteY(u32 id, s16 y)
 static void UpdateVineSwing(int vineState)
 {
     UpdateVineAnim(sPokemonJumpGfx, vineState);
-    ChangeBgY(BG_VENUSAUR, (sVenusaurStates[vineState] * 5) << 13, 0);
+    ChangeBgY(BG_VENUSAUR, (sVenusaurStates[vineState] * 5) << 13, BG_COORD_SET);
 }
 
 static int DoSameJumpTimeBonus(u8 flags)
@@ -3896,8 +3896,8 @@ static void DrawPlayerNameWindows(void)
 static void ShowBonus(u8 bonusId)
 {
     sPokemonJumpGfx->bonusTimer = 0;
-    ChangeBgX(BG_BONUSES, (bonusId / 2) * 256 * 256, 0);
-    ChangeBgY(BG_BONUSES, (((bonusId % 2) * 256) - 40) * 256, 0);
+    ChangeBgX(BG_BONUSES, (bonusId / 2) * 256 * 256, BG_COORD_SET);
+    ChangeBgY(BG_BONUSES, (((bonusId % 2) * 256) - 40) * 256, BG_COORD_SET);
     ShowBg(BG_BONUSES);
     CreateTask(Task_UpdateBonus, 4);
 }
@@ -3910,7 +3910,7 @@ static bool32 UpdateBonus(void)
     }
     else
     {
-        ChangeBgY(BG_BONUSES, 128, 1);
+        ChangeBgY(BG_BONUSES, 128, BG_COORD_ADD);
         if (++sPokemonJumpGfx->bonusTimer >= 32)
             HideBg(BG_BONUSES);
         return TRUE;

@@ -2803,7 +2803,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
         str = sDisplayStdMessages[msgId].text;
     }
 
-    ChangeBgY(0, bg0vofs * 256, 0);
+    ChangeBgY(0, bg0vofs * 256, BG_COORD_SET);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (sDisplayStdMessages[msgId].boxType == 1)
@@ -2846,7 +2846,7 @@ static void HideStdMessageWindow(void)
         ClearWindowTilemap(sDisplay->messageWindowId);
     }
 
-    ChangeBgY(0, 0, 0);
+    ChangeBgY(0, 0, BG_COORD_SET);
 }
 
 static void DestroyStdMessageWindow(void)
@@ -3011,14 +3011,14 @@ static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
 
 static void ResetGpuBgState(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);

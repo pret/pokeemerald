@@ -290,10 +290,10 @@ static void BerryFix_GpuSet(void)
     ResetBgsAndClearDma3BusyFlags(0);
 
     InitBgsFromTemplates(0, sBerryFixBgTemplates, ARRAY_COUNT(sBerryFixBgTemplates));
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     InitWindows(sBerryFixWindowTemplates);
     DeactivateAllTextPrinters();
 

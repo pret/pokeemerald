@@ -5281,10 +5281,10 @@ static void Task_ShowTourneyTree(u8 taskId)
         gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0xB00, 0);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0xB00, BG_COORD_SET);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -5597,8 +5597,8 @@ static void CB2_TourneyTree(void)
 
 static void VblankCb_TourneyInfoCard(void)
 {
-    ChangeBgX(3, 0x80, 1);
-    ChangeBgY(3, 0x80, 2);
+    ChangeBgX(3, 0x80, BG_COORD_ADD);
+    ChangeBgY(3, 0x80, BG_COORD_SUB);
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
@@ -5693,8 +5693,8 @@ static void VblankCb_TourneyTree(void)
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    ChangeBgY(2, 0x80, 2);
-    ChangeBgY(3, 0x80, 1);
+    ChangeBgY(2, 0x80, BG_COORD_SUB);
+    ChangeBgY(3, 0x80, BG_COORD_ADD);
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();

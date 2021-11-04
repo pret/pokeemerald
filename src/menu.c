@@ -153,8 +153,8 @@ void FreeAllOverworldWindowBuffers(void)
 
 void InitTextBoxGfxAndPrinters(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
     DeactivateAllTextPrinters();
     LoadMessageBoxAndBorderGfx();
 }
@@ -1922,14 +1922,14 @@ void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 i
 
 void ResetBgPositions(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 }
 
 void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)

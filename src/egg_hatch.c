@@ -495,10 +495,10 @@ static void CB2_EggHatch_0(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
 
         SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
         SetBgTilemapBuffer(1, Alloc(0x1000));

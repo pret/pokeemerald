@@ -3827,8 +3827,8 @@ static void SetScrollingBackground(void)
 
 static void ScrollBackground(void)
 {
-    ChangeBgX(3, 128, 1);
-    ChangeBgY(3, 128, 2);
+    ChangeBgX(3, 128, BG_COORD_ADD);
+    ChangeBgY(3, 128, BG_COORD_SUB);
 }
 
 static void LoadPokeStorageMenuGfx(void)
@@ -8184,8 +8184,8 @@ static bool8 MultiMove_Start(void)
         GetCursorBoxColumnAndRow(&sMultiMove->fromColumn, &sMultiMove->fromRow);
         sMultiMove->toColumn = sMultiMove->fromColumn;
         sMultiMove->toRow = sMultiMove->fromRow;
-        ChangeBgX(0, -1024, 0);
-        ChangeBgY(0, -1024, 0);
+        ChangeBgX(0, -1024, BG_COORD_SET);
+        ChangeBgY(0, -1024, BG_COORD_SET);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillWindowPixelBuffer8Bit(sStorage->multiMoveWindowId, PIXEL_FILL(0));
         MultiMove_SetIconToBg(sMultiMove->fromColumn, sMultiMove->fromRow);
@@ -8499,8 +8499,8 @@ static u8 MultiMove_UpdateMove(void)
 {
     if (sMultiMove->bgMoveSteps != 0)
     {
-        ChangeBgX(0, sMultiMove->bgX, 1);
-        ChangeBgY(0, sMultiMove->bgY, 1);
+        ChangeBgX(0, sMultiMove->bgX, BG_COORD_ADD);
+        ChangeBgY(0, sMultiMove->bgY, BG_COORD_ADD);
         sMultiMove->bgMoveSteps--;
     }
 
@@ -8605,8 +8605,8 @@ static void MultiMove_SetPlacedMonData(void)
 
 static void MultiMove_ResetBg(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
     SetBgAttribute(0, BG_ATTR_PALETTEMODE, 0);
     ClearGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);

@@ -174,9 +174,9 @@ void sub_81C82E4(struct PokenavSub17 *matchCall)
     sub_8199DF0(matchCall->list.listWindow.bg, PIXEL_FILL(4), matchCall->list.listWindow.unk6 + 1, 1);
     SetBgTilemapBuffer(matchCall->list.listWindow.bg, matchCall->tilemapBuffer);
     FillBgTilemapBufferRect_Palette0(matchCall->list.listWindow.bg, tileNum, 0, 0, 32, 32);
-    ChangeBgY(matchCall->list.listWindow.bg, 0, 0);
-    ChangeBgX(matchCall->list.listWindow.bg, 0, 0);
-    ChangeBgY(matchCall->list.listWindow.bg, matchCall->list.listWindow.unk3 << 11, 2);
+    ChangeBgY(matchCall->list.listWindow.bg, 0, BG_COORD_SET);
+    ChangeBgX(matchCall->list.listWindow.bg, 0, BG_COORD_SET);
+    ChangeBgY(matchCall->list.listWindow.bg, matchCall->list.listWindow.unk3 << 11, BG_COORD_SUB);
     CopyBgTilemapBufferToVram(matchCall->list.listWindow.bg);
 }
 
@@ -296,9 +296,9 @@ void sub_81C8568(s32 a0, struct PokenavSub17Substruct *list)
     list->unk20 = GetBgY(list->listWindow.bg);
     list->unk24 = list->unk20 + (a0 << 12);
     if (a0 > 0)
-        list->unk30 = 1;
+        list->unk30 = BG_COORD_ADD;
     else
-        list->unk30 = 2;
+        list->unk30 = BG_COORD_SUB;
     list->unk2C = a0;
     list->loopedTaskId = CreateLoopedTask(LoopedTask_sub_81C85A0, 6);
 }
@@ -320,12 +320,12 @@ u32 LoopedTask_sub_81C85A0(s32 state)
         flag = FALSE;
         y = GetBgY(subPtr->listWindow.bg);
         v1 = ChangeBgY(subPtr->listWindow.bg, 0x1000, subPtr->unk30);
-        if (subPtr->unk30 == 2)
+        if (subPtr->unk30 == BG_COORD_SUB)
         {
             if ((y > subPtr->unk24 || y <= subPtr->unk20) && v1 <= subPtr->unk24)
                 flag = TRUE;
         }
-        else
+        else // BG_COORD_ADD
         {
             if ((y < subPtr->unk24 || y >= subPtr->unk20) && v1 >= subPtr->unk24)
                 flag = TRUE;
@@ -334,7 +334,7 @@ u32 LoopedTask_sub_81C85A0(s32 state)
         if (flag)
         {
             subPtr->listWindow.unkA = (subPtr->listWindow.unkA + subPtr->unk2C) & 0xF;
-            ChangeBgY(subPtr->listWindow.bg, subPtr->unk24, 0);
+            ChangeBgY(subPtr->listWindow.bg, subPtr->unk24, BG_COORD_SET);
             return LT_FINISH;
         }
         return LT_PAUSE;

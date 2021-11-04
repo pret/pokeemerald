@@ -6056,7 +6056,7 @@ static void Task_InitMultiPartnerPartySlideIn(u8 taskId)
     // The first slide step also sets the sprites offscreen
     gTasks[taskId].tXPos = 256;
     SlideMultiPartyMenuBoxSpritesOneStep(taskId);
-    ChangeBgX(2, 0x10000, 0);
+    ChangeBgX(2, 0x10000, BG_COORD_SET);
     gTasks[taskId].func = Task_MultiPartnerPartySlideIn;
 }
 
@@ -6112,7 +6112,7 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].statusSpriteId, tXPos - 8);
         }
     }
-    ChangeBgX(2, 0x800, 1);
+    ChangeBgX(2, 0x800, BG_COORD_ADD);
 }
 
 #undef tXpos

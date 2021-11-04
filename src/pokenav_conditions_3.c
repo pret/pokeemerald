@@ -448,8 +448,8 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     case 4:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         ShowBg(1);
         ShowBg(2);
         HideBg(3);

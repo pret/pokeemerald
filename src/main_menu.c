@@ -583,10 +583,10 @@ static u32 InitMainMenu(bool8 returningFromOptionsMenu)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_WHITEALPHA); // fade to white
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sMainMenuBgTemplates, ARRAY_COUNT(sMainMenuBgTemplates));
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     InitWindows(sWindowTemplates_MainMenu);
     DeactivateAllTextPrinters();
     LoadMainMenuWindowFrameTiles(0, MAIN_MENU_BORDER_TILE);
@@ -861,8 +861,8 @@ static void Task_DisplayMainMenu(u8 taskId)
                 gTasks[tScrollArrowTaskId].func = Task_ScrollIndicatorArrowPairOnMainMenu;
                 if (sCurrItemAndOptionMenuCheck == 4)
                 {
-                    ChangeBgY(0, 0x2000, 1);
-                    ChangeBgY(1, 0x2000, 1);
+                    ChangeBgY(0, 0x2000, BG_COORD_ADD);
+                    ChangeBgY(1, 0x2000, BG_COORD_ADD);
                     tIsScrolled = TRUE;
                     gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = TRUE;
                 }
@@ -901,8 +901,8 @@ static bool8 HandleMainMenuInput(u8 taskId)
     {
         if (tMenuType == HAS_MYSTERY_EVENTS && tIsScrolled == TRUE && tCurrItem == 1)
         {
-            ChangeBgY(0, 0x2000, 2);
-            ChangeBgY(1, 0x2000, 2);
+            ChangeBgY(0, 0x2000, BG_COORD_SUB);
+            ChangeBgY(1, 0x2000, BG_COORD_SUB);
             gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = tIsScrolled = FALSE;
         }
         tCurrItem--;
@@ -913,8 +913,8 @@ static bool8 HandleMainMenuInput(u8 taskId)
     {
         if (tMenuType == HAS_MYSTERY_EVENTS && tCurrItem == 3 && tIsScrolled == FALSE)
         {
-            ChangeBgY(0, 0x2000, 1);
-            ChangeBgY(1, 0x2000, 1);
+            ChangeBgY(0, 0x2000, BG_COORD_ADD);
+            ChangeBgY(1, 0x2000, BG_COORD_ADD);
             gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = tIsScrolled = TRUE;
         }
         tCurrItem++;
@@ -1048,8 +1048,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 }
                 break;
         }
-        ChangeBgY(0, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         switch (action)
         {
             case ACTION_NEW_GAME:

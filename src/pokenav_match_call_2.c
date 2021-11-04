@@ -322,8 +322,8 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
     {
     case 0:
         InitBgTemplates(sMatchCallBgTemplates, ARRAY_COUNT(sMatchCallBgTemplates));
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
         DecompressAndCopyTileDataToVram(2, sMatchCallUI_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(2, state->unk1024);
         CopyToBgTilemapBuffer(2, sMatchCallUI_Tilemap, 0, 0);
@@ -367,8 +367,8 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         PrintMatchCallLocation(state, 0);
         return LT_INC_AND_PAUSE;
     case 6:
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         ShowBg(2);
         ShowBg(3);
         ShowBg(1);

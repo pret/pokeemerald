@@ -3900,14 +3900,14 @@ static bool8 InitEasyChatScreenControl_(void)
 
 static void InitEasyChatBgs(void)
 {
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
 }
 
@@ -4550,7 +4550,7 @@ static void BufferLowerWindowFrame(int left, int top, int width, int height)
 
 static void ResetLowerWindowScroll(void)
 {
-    ChangeBgY(2, 0x800, 0);
+    ChangeBgY(2, 0x800, BG_COORD_SET);
     sScreenControl->scrollOffset = 0;
 }
 
@@ -4572,7 +4572,7 @@ static void InitLowerWindowScroll(s16 scrollChange, u8 speed)
     }
     else
     {
-        ChangeBgY(2, bgY, 0);
+        ChangeBgY(2, bgY, BG_COORD_SET);
     }
 }
 
@@ -4587,7 +4587,7 @@ static bool8 UpdateLowerWindowScroll(void)
     }
     else
     {
-        ChangeBgY(2, sScreenControl->scrollSpeed, 1);
+        ChangeBgY(2, sScreenControl->scrollSpeed, BG_COORD_ADD);
         return TRUE;
     }
 }

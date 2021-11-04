@@ -678,10 +678,10 @@ s32 WonderNews_Enter(void)
     case 1:
         if (UpdatePaletteFade())
             return 0;
-        ChangeBgY(0, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(26, 152));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
@@ -753,7 +753,7 @@ s32 WonderNews_Exit(bool32 useCancel)
     case 1:
         if (UpdatePaletteFade())
             return 0;
-        ChangeBgY(2, 0, 0);
+        ChangeBgY(2, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, 0);
@@ -777,8 +777,8 @@ s32 WonderNews_Exit(bool32 useCancel)
         RemoveWindow(sWonderNewsData->windowIds[NEWS_WIN_TITLE]);
         break;
     case 4:
-        ChangeBgY(2, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         if (sWonderNewsData->arrowTaskId != TASK_NONE)
         {
             RemoveScrollIndicatorArrowPair(sWonderNewsData->arrowTaskId);

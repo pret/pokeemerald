@@ -189,10 +189,10 @@ static void CB2_InitWirelessCommunicationScreen(void)
     sStatusScreen->taskId = CreateTask(Task_WirelessCommunicationScreen, 0);
     sStatusScreen->rfuTaskId = CreateTask_ListenToWireless();
     sStatusScreen->prevGroupCounts[GROUPTYPE_TOTAL] = 1;
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     LoadPalette(sBgTiles_Pal, 0x00, 0x20);
     Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
