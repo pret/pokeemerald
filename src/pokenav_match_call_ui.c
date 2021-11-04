@@ -755,6 +755,7 @@ static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct Pok
     {
         FillWindowTilesByRow(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
         AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_GFX, 0, r6 * 2, list->listWindow.unk4, 2);
     }
 }
 
