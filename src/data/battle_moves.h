@@ -10813,7 +10813,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TAR_SHOT] =
     {
-        .effect = EFFECT_SPEED_DOWN,
+        .effect = EFFECT_TAR_SHOT,
         .power = 0,
         .type = TYPE_ROCK,
         .accuracy = 100,
