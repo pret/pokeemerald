@@ -19,6 +19,6 @@ void PadNameString(u8 *dest, u8 padChar);
 void ConvertInternationalPlayerNameStripChar(u8 *, u8);
 void ConvertInternationalContestantName(u8 *);
 int GetNicknameLanguage(u8 *);
-void sub_81DB620(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
+void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
 
 #endif // GUARD_INTERNATIONAL_STRING_UTIL_H

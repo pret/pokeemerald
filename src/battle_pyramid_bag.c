@@ -452,9 +452,9 @@ static void VBlankCB_PyramidBag(void)
 
 static void CB2_LoadPyramidBagMenu(void)
 {
-    while (MenuHelpers_CallLinkSomething() != TRUE
+    while (MenuHelpers_ShouldWaitForLinkRecv() != TRUE
         && LoadPyramidBagMenu() != TRUE
-        && MenuHelpers_LinkSomething() != TRUE);
+        && MenuHelpers_IsLinkActive() != TRUE);
 }
 
 static bool8 LoadPyramidBagMenu(void)
@@ -484,7 +484,7 @@ static bool8 LoadPyramidBagMenu(void)
             gMain.state++;
             break;
         case 5:
-            if (!MenuHelpers_LinkSomething())
+            if (!MenuHelpers_IsLinkActive())
                 ResetTasks();
             gMain.state++;
             break;
@@ -885,7 +885,7 @@ static void Task_ClosePyramidBag(u8 taskId)
 static void Task_HandlePyramidBagInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (MenuHelpers_CallLinkSomething() == TRUE || gPaletteFade.active)
+    if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || gPaletteFade.active)
         return;
 
     if (JOY_NEW(SELECT_BUTTON))
@@ -990,7 +990,7 @@ static void PrintMenuActionText_MultiRow(u8 windowId, u8 horizontalCount, u8 ver
 
 static void HandleMenuActionInput_SingleRow(u8 taskId)
 {
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s32 id = Menu_ProcessInputNoWrap();
         switch (id)
@@ -1012,7 +1012,7 @@ static void HandleMenuActionInput_SingleRow(u8 taskId)
 
 static void HandleMenuActionInput_2x2(u8 taskId)
 {
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s8 id = Menu_GetCursorPos();
         if (JOY_NEW(DPAD_UP))
@@ -1325,7 +1325,7 @@ static void Task_BeginItemSwap(u8 taskId)
 static void Task_ItemSwapHandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         if (JOY_NEW(SELECT_BUTTON))
         {

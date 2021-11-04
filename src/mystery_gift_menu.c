@@ -347,7 +347,7 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = 0
 };
 
-static const u8 *const Unref_082F0710[] = {
+static const u8 *const sUnusedMenuTexts[] = {
     gText_VarietyOfEventsImportedWireless,
     gText_WonderCardsInPossession,
     gText_ReadNewsThatArrived,

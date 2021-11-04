@@ -421,7 +421,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
             return SecretBase_EventScript_SandOrnament;
         if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
             return SecretBase_EventScript_ShieldOrToyTV;
-        if (MetatileBehavior_IsMB_C6(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsSecretBaseDecorationBase(metatileBehavior) == TRUE)
         {
             CheckInteractedWithFriendsFurnitureBottom();
             return NULL;
@@ -729,9 +729,8 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
             DoTeleportTileWarp();
             return TRUE;
         }
-        if (MetatileBehavior_IsBridgeOverOcean(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsUnionRoomWarp(metatileBehavior) == TRUE)
         {
-            // Maybe unused? This MB is used by log bridges, but there's never a warp event on them.
             DoSpinExitWarp();
             return TRUE;
         }
@@ -762,7 +761,7 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
      && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
      && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
      && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsBridgeOverOcean(metatileBehavior) != TRUE)
+     && MetatileBehavior_IsUnionRoomWarp(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }

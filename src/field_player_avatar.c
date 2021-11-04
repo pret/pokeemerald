@@ -225,10 +225,10 @@ static void (*const sPlayerAvatarTransitionFuncs[])(struct ObjectEvent *) =
 
 static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
 {
-    MetatileBehavior_IsSouthArrowWarp,
-    MetatileBehavior_IsNorthArrowWarp,
-    MetatileBehavior_IsWestArrowWarp,
-    MetatileBehavior_IsEastArrowWarp,
+    [DIR_SOUTH - 1] = MetatileBehavior_IsSouthArrowWarp,
+    [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
+    [DIR_WEST - 1]  = MetatileBehavior_IsWestArrowWarp,
+    [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
 };
 
 static const u8 sRivalAvatarGfxIds[][2] =
@@ -281,10 +281,10 @@ static const u8 sPlayerAvatarGfxToStateFlag[2][5][2] =
 
 static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
 {
-    MetatileBehavior_IsSouthArrowWarp,
-    MetatileBehavior_IsNorthArrowWarp,
-    MetatileBehavior_IsWestArrowWarp,
-    MetatileBehavior_IsEastArrowWarp,
+    [DIR_SOUTH - 1] = MetatileBehavior_IsSouthArrowWarp,
+    [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
+    [DIR_WEST - 1]  = MetatileBehavior_IsWestArrowWarp,
+    [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
 };
 
 static bool8 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
@@ -929,9 +929,9 @@ static bool8 PlayerCheckIfAnimFinishedOrInactive(void)
     return ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]);
 }
 
-static void PlayerSetCopyableMovement(u8 a)
+static void PlayerSetCopyableMovement(u8 movement)
 {
-    gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement = a;
+    gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement = movement;
 }
 
 u8 PlayerGetCopyableMovement(void)
@@ -955,65 +955,65 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
 
 void PlayerWalkNormal(u8 direction)
 {
-    PlayerSetAnimId(GetWalkNormalMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkNormalMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerWalkFast(u8 direction)
 {
-    PlayerSetAnimId(GetWalkFastMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkFastMovementAction(direction), COPY_MOVE_WALK);
 }
 
-void PlayerRideWaterCurrent(u8 a)
+void PlayerRideWaterCurrent(u8 direction)
 {
-    PlayerSetAnimId(GetRideWaterCurrentMovementAction(a), 2);
+    PlayerSetAnimId(GetRideWaterCurrentMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerWalkFaster(u8 direction)
 {
-    PlayerSetAnimId(GetWalkFasterMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkFasterMovementAction(direction), COPY_MOVE_WALK);
 }
 
-static void PlayerRun(u8 a)
+static void PlayerRun(u8 direction)
 {
-    PlayerSetAnimId(GetPlayerRunMovementAction(a), 2);
+    PlayerSetAnimId(GetPlayerRunMovementAction(direction), COPY_MOVE_WALK);
 }
 
-void PlayerOnBikeCollide(u8 a)
+void PlayerOnBikeCollide(u8 direction)
 {
-    PlayCollisionSoundIfNotFacingWarp(a);
-    PlayerSetAnimId(GetWalkInPlaceNormalMovementAction(a), 2);
+    PlayCollisionSoundIfNotFacingWarp(direction);
+    PlayerSetAnimId(GetWalkInPlaceNormalMovementAction(direction), COPY_MOVE_WALK);
 }
 
-void PlayerOnBikeCollideWithFarawayIslandMew(u8 a)
+void PlayerOnBikeCollideWithFarawayIslandMew(u8 direction)
 {
-    PlayerSetAnimId(GetWalkInPlaceNormalMovementAction(a), 2);
+    PlayerSetAnimId(GetWalkInPlaceNormalMovementAction(direction), COPY_MOVE_WALK);
 }
 
-static void PlayerNotOnBikeCollide(u8 a)
+static void PlayerNotOnBikeCollide(u8 direction)
 {
-    PlayCollisionSoundIfNotFacingWarp(a);
-    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(a), 2);
+    PlayCollisionSoundIfNotFacingWarp(direction);
+    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(direction), COPY_MOVE_WALK);
 }
 
-static void PlayerNotOnBikeCollideWithFarawayIslandMew(u8 a)
+static void PlayerNotOnBikeCollideWithFarawayIslandMew(u8 direction)
 {
-    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(a), 2);
+    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerFaceDirection(u8 direction)
 {
-    PlayerSetAnimId(GetFaceDirectionMovementAction(direction), 1);
+    PlayerSetAnimId(GetFaceDirectionMovementAction(direction), COPY_MOVE_FACE);
 }
 
 void PlayerTurnInPlace(u8 direction)
 {
-    PlayerSetAnimId(GetWalkInPlaceFastMovementAction(direction), 1);
+    PlayerSetAnimId(GetWalkInPlaceFastMovementAction(direction), COPY_MOVE_FACE);
 }
 
 void PlayerJumpLedge(u8 direction)
 {
     PlaySE(SE_LEDGE);
-    PlayerSetAnimId(GetJump2MovementAction(direction), 8);
+    PlayerSetAnimId(GetJump2MovementAction(direction), COPY_MOVE_JUMP2);
 }
 
 // Stop player on current facing direction once they're done moving and if they're not currently Acro Biking on bumpy slope
@@ -1029,81 +1029,82 @@ void PlayerFreeze(void)
 // wheelie idle
 void PlayerIdleWheelie(u8 direction)
 {
-    PlayerSetAnimId(GetAcroWheelieFaceDirectionMovementAction(direction), 1);
+    PlayerSetAnimId(GetAcroWheelieFaceDirectionMovementAction(direction), COPY_MOVE_FACE);
 }
 
 // normal to wheelie
 void PlayerStartWheelie(u8 direction)
 {
-    PlayerSetAnimId(GetAcroPopWheelieFaceDirectionMovementAction(direction), 1);
+    PlayerSetAnimId(GetAcroPopWheelieFaceDirectionMovementAction(direction), COPY_MOVE_FACE);
 }
 
 // wheelie to normal
 void PlayerEndWheelie(u8 direction)
 {
-    PlayerSetAnimId(GetAcroEndWheelieFaceDirectionMovementAction(direction), 1);
+    PlayerSetAnimId(GetAcroEndWheelieFaceDirectionMovementAction(direction), COPY_MOVE_FACE);
 }
 
 // wheelie hopping standing
-void PlayerStandingHoppingWheelie(u8 a)
+void PlayerStandingHoppingWheelie(u8 direction)
 {
     PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(a), 1);
+    PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(direction), COPY_MOVE_FACE);
 }
 
 // wheelie hopping moving
-void PlayerMovingHoppingWheelie(u8 a)
+void PlayerMovingHoppingWheelie(u8 direction)
 {
     PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(a), 2);
+    PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(direction), COPY_MOVE_WALK);
 }
 
 // wheelie hopping ledge
-void PlayerLedgeHoppingWheelie(u8 a)
+void PlayerLedgeHoppingWheelie(u8 direction)
 {
     PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(a), 8);
+    PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(direction), COPY_MOVE_JUMP2);
 }
 
 // acro turn jump
 void PlayerAcroTurnJump(u8 direction)
 {
     PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
+    PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), COPY_MOVE_FACE);
 }
 
 void PlayerWheelieInPlace(u8 direction)
 {
     PlaySE(SE_WALL_HIT);
-    PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerPopWheelieWhileMoving(u8 direction)
 {
-    PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerWheelieMove(u8 direction)
 {
-    PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerEndWheelieWhileMoving(u8 direction)
 {
-    PlayerSetAnimId(GetAcroEndWheelieMoveDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroEndWheelieMoveDirectionMovementAction(direction), COPY_MOVE_WALK);
 }
 
-static void PlayCollisionSoundIfNotFacingWarp(u8 a)
+static void PlayCollisionSoundIfNotFacingWarp(u8 direction)
 {
     s16 x, y;
     u8 metatileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
 
-    if (!sArrowWarpMetatileBehaviorChecks[a - 1](metatileBehavior))
+    if (!sArrowWarpMetatileBehaviorChecks[direction - 1](metatileBehavior))
     {
-        if (a == 2)
+        // Check if walking up into a door
+        if (direction == DIR_NORTH)
         {
             PlayerGetDestCoords(&x, &y);
-            MoveCoords(2, &x, &y);
+            MoveCoords(direction, &x, &y);
             if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
                 return;
         }

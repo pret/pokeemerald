@@ -104,7 +104,7 @@ static void HblankCb_TourneyTree(void);
 static void VblankCb_TourneyTree(void);
 static u8 UpdateTourneyTreeCursor(u8 taskId);
 static void DecideRoundWinners(u8 roundId);
-static u8 sub_81953E8(u8 tournamentId, u8);
+static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8);
 static void DrawTourneyAdvancementLine(u8, u8);
 static void SpriteCb_HorizontalScrollArrow(struct Sprite *sprite);
 static void SpriteCb_VerticalScrollArrow(struct Sprite *sprite);
@@ -1197,7 +1197,7 @@ static const u8 sLastMatchCardNum[DOME_ROUNDS_COUNT] =
     [DOME_FINAL]     = 30
 };
 
-static const u8 gUnknown_0860D1A0[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUNDS_COUNT] =
+static const u8 sTrainerAndRoundToLastMatchCardNum[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUNDS_COUNT] =
 {
     {16, 24, 28, 30},
     {17, 24, 28, 30},
@@ -1209,7 +1209,7 @@ static const u8 gUnknown_0860D1A0[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUND
     {23, 27, 29, 30},
 };
 
-static const u8 gUnknown_0860D1C0[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
+static const u8 sTournamentIdToPairedTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
 
 // The first line of text on a trainers info card. It describes their potential to win, based on their seed in the tournament tree.
 // Dome Ace Tucker has their own separate potential text.
@@ -4178,7 +4178,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
         if (input == INFOCARD_INPUT_AB)
         {
             if (sInfoCard->pos != 0)
-                gTasks[taskId2].data[1] = gUnknown_0860D1A0[position / 2][sInfoCard->pos - 1];
+                gTasks[taskId2].data[1] = sTrainerAndRoundToLastMatchCardNum[position / 2][sInfoCard->pos - 1];
             else
                 gTasks[taskId2].data[1] = position;
         }
@@ -4218,9 +4218,9 @@ static u8 Task_GetInfoCardInput(u8 taskId)
         if (input == INFOCARD_INPUT_AB)
         {
             if (sInfoCard->pos == 0) // On left trainer info card
-                gTasks[taskId2].data[1] = gUnknown_0860D1C0[sInfoCard->tournamentIds[0]];
+                gTasks[taskId2].data[1] = sTournamentIdToPairedTrainerIds[sInfoCard->tournamentIds[0]];
             else if (sInfoCard->pos == 2) // On right trainer info card
-                gTasks[taskId2].data[1] = gUnknown_0860D1C0[sInfoCard->tournamentIds[1]];
+                gTasks[taskId2].data[1] = sTournamentIdToPairedTrainerIds[sInfoCard->tournamentIds[1]];
             else // On match info card
                 gTasks[taskId2].data[1] = position;
         }
@@ -5224,7 +5224,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
     {
         for (i = 0; i < roundId - 1; i++)
         {
-            if (gSaveBlock2Ptr->frontier.domeWinningMoves[sub_81953E8(winnerTournamentId, i)] == moveIds[j])
+            if (gSaveBlock2Ptr->frontier.domeWinningMoves[GetOpposingNPCTournamentIdByRound(winnerTournamentId, i)] == moveIds[j])
                 break;
         }
         if (i != roundId - 1)
@@ -5934,10 +5934,10 @@ int TrainerIdToDomeTournamentId(u16 trainerId)
     return i;
 }
 
-static u8 sub_81953E8(u8 tournamentId, u8 round)
+static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8 round)
 {
     u8 tournamentIds[2];
-    BufferDomeWinString(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][round] - 16, tournamentIds);
+    BufferDomeWinString(sTrainerAndRoundToLastMatchCardNum[sTournamentIdToPairedTrainerIds[tournamentId] / 2][round] - 16, tournamentIds);
     if (tournamentId == tournamentIds[0])
         return tournamentIds[1];
     else

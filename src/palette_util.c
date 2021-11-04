@@ -439,7 +439,7 @@ void UpdatePulseBlend(struct PulseBlend *pulseBlend)
 }
 
 // Below used for the Roulette grid
-void ClearTilemapRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
+void FillTilemapRect(u16 *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u8 i;
@@ -450,9 +450,7 @@ void ClearTilemapRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
     {
         _dest = dest + i * 32;
         for (j = 0; j < width; j++)
-        {
-            *_dest++ = src;
-        }
+            *_dest++ = value;
     }
 }
 
@@ -468,8 +466,39 @@ void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
     {
         _dest = dest + i * 32;
         for (j = 0; j < width; j++)
-        {
             *_dest++ = *_src++;
+    }
+}
+
+static void FillTilemapRect_Unused(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
+{
+    u8 i, j;
+    u8 x, y;
+
+    for (i = 0, y = top; i < height; i++)
+    {
+        for (x = left, j = 0; j < width; j++)
+        {
+            *(u16 *)((dest) + (y * 64 + x * 2)) = value;
+            x = (x + 1) % 32;
         }
+        y = (y + 1) % 32;
+    }
+}
+
+static void SetTilemapRect_Unused(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
+{
+    u8 i, j;
+    u8 x, y;
+    const u16 *_src;
+
+    for (i = 0, _src = src, y = top; i < height; i++)
+    {
+        for (x = left, j = 0; j < width; j++)
+        {
+            *(u16 *)((dest) + (y * 64 + x * 2)) = *(_src++);
+            x = (x + 1) % 32;
+        }
+        y = (y + 1) % 32;
     }
 }

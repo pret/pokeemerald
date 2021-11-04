@@ -688,11 +688,11 @@ void PreparePokeblockFeedScene(void)
 {
     while (1)
     {
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE)
             break;
         if (LoadPokeblockFeedScene() == TRUE)
             break;
-        if (MenuHelpers_LinkSomething() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
