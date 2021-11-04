@@ -52,7 +52,7 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte gMoveNames
 	.4byte gDecorations
 
-	.4byte 0x00001270 @ offsetof(struct SaveBlock1, flags) 
+	.4byte 0x00001270 @ offsetof(struct SaveBlock1, flags)
 	.4byte 0x0000139c @ offsetof(struct SaveBlock1, vars)
 	.4byte 0x00000018 @ offsetof(struct SaveBlock2, pokedex)
 	.4byte 0x00000988 @ offsetof(struct SaveBlock1, seen1)
@@ -94,7 +94,7 @@ GPIOPortReadEnable: @ 80000C8
 
 	.byte 0x1e, 0x1e, 0x10, 0x40
 
-	.4byte 0x0000322e @ offsetof(struct SaveBlock1, ? part-way into unk_322C)
+	.4byte 0x0000322e @ offsetof(struct SaveBlock1, ? part-way into mysteryGift)
 	.4byte 0x00000498 @ offsetof(struct SaveBlock1, pcItems)
 	.4byte 0x000031a8 @ offsetof(struct SaveBlock1, giftRibbons)
 	.4byte 0x000031f8 @ offsetof(struct SaveBlock1, enigmaBerry)

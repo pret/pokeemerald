@@ -32,7 +32,7 @@ enum
 #define PALTAG_RIBBON_ICONS_5 19
 
 #define RIBBONS_PER_ROW 9
-#define GIFT_RIBBON_ROW (1 + (FIRST_GIFT_RIBBON / RIBBONS_PER_ROW)) // Gift ribbons start on a new row after the normal ribbons. 
+#define GIFT_RIBBON_ROW (1 + (FIRST_GIFT_RIBBON / RIBBONS_PER_ROW)) // Gift ribbons start on a new row after the normal ribbons.
 #define GIFT_RIBBON_START_POS (RIBBONS_PER_ROW * GIFT_RIBBON_ROW)
 
 #define MON_SPRITE_X_ON  40
@@ -809,7 +809,7 @@ static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
     FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
-    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, 1, color, -1, gStringVar4);
+    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, 1, color, -1, gStringVar4);
     CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
 }
 
@@ -824,15 +824,15 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
     {
         // Print normal ribbon name/description
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, (i * 16) + 1, color, -1, gRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, -1, gRibbonDescriptionPointers[ribbonId][i]);
     }
     else
     {
-        // ribbonId here is one of the 'gift' ribbon slots, used to read 
+        // ribbonId here is one of the 'gift' ribbon slots, used to read
         // its actual value from giftRibbons to determine which specific
         // gift ribbon it is
         ribbonId = gSaveBlock1Ptr->giftRibbons[ribbonId - FIRST_GIFT_RIBBON];
-        
+
         // If 0, this gift ribbon slot is unoccupied
         if (ribbonId == 0)
             return;
@@ -840,7 +840,7 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
         // Print gift ribbon name/description
         ribbonId--;
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
     }
 
     CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
@@ -877,7 +877,7 @@ static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
-    AddTextPrinterParameterized(windowId, 1, gStringVar3, 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar3, 0, 1, TEXT_SPEED_FF, NULL);
     switch (gender)
     {
     case MON_MALE:
@@ -896,7 +896,7 @@ static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
     *(txtPtr++) = CHAR_EXTRA_SYMBOL;
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    AddTextPrinterParameterized(windowId, 1, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(windowId, 2);
 }
 
@@ -932,8 +932,8 @@ static void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr)
     txtPtr = ConvertIntToDecimalStringN(gStringVar1, id, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *(txtPtr++) = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, count, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    x = GetStringCenterAlignXOffset(1, gStringVar1, 56);
-    AddTextPrinterParameterized(structPtr->listIdxWindowId, 1, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar1, 56);
+    AddTextPrinterParameterized(structPtr->listIdxWindowId, FONT_NORMAL, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(structPtr->listIdxWindowId, 2);
 }
 
@@ -962,7 +962,7 @@ static u16 DrawRibbonsMonFrontPic(s32 x, s32 y)
     u32 personality, otId;
 
     GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
-    spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, 0xFFFF);
+    spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }
@@ -997,7 +997,7 @@ static void StartMonSpriteSlide(struct Sprite *sprite, s32 startX, s32 destX, s3
 {
     u32 delta = destX - startX;
 
-    sprite->pos1.x = startX;
+    sprite->x = startX;
     sprite->sCurrX = startX << 4;
     sprite->sMoveIncr = (delta << 4) / time;
     sprite->sTime = time;
@@ -1012,15 +1012,15 @@ static void SpriteCB_MonSpriteSlide(struct Sprite *sprite)
     {
         sprite->sTime--;
         sprite->sCurrX += sprite->sMoveIncr;
-        sprite->pos1.x = sprite->sCurrX >> 4;
-        if (sprite->pos1.x <= MON_SPRITE_X_OFF)
+        sprite->x = sprite->sCurrX >> 4;
+        if (sprite->x <= MON_SPRITE_X_OFF)
             sprite->invisible = TRUE;
         else
             sprite->invisible = FALSE;
     }
     else
     {
-        sprite->pos1.x = sprite->sDestX;
+        sprite->x = sprite->sDestX;
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -1232,8 +1232,8 @@ static void UpdateAndZoomInSelectedRibbon(struct PokenavSub14 *structPtr)
     s32 x = (position % RIBBONS_PER_ROW) * 16 + 96;
     s32 y = (position / RIBBONS_PER_ROW) * 16 + 40;
 
-    structPtr->bigRibbonSprite->pos1.x = x;
-    structPtr->bigRibbonSprite->pos1.y = y;
+    structPtr->bigRibbonSprite->x = x;
+    structPtr->bigRibbonSprite->y = y;
 
     // Set new selected ribbon's gfx data
     ribbonId = GetRibbonId();

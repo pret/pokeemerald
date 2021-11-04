@@ -6,6 +6,7 @@
 #include "bg.h"
 #include "menu.h"
 #include "decompress.h"
+#include "international_string_util.h"
 
 // TODO: This UI isnt just for match call, seems to be the general pokenav list UI
 
@@ -65,8 +66,6 @@ struct PokenavSub17
     s32 unk89C;
     u32 loopedTaskId;
 };
-
-extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
 
 void sub_81C82E4(struct PokenavSub17 *matchCall);
 bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3);
@@ -734,18 +733,18 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fieldId)
     u32 top = (list->listWindow.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, top << 4, list->listWindow.unk4, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, 7, 2, (top << 4) + 1, colors, -1, fieldNames[fieldId]);
+    AddTextPrinterParameterized3(list->listWindow.windowId, FONT_NARROW, 2, (top << 4) + 1, colors, -1, fieldNames[fieldId]);
     CopyWindowRectToVram(list->listWindow.windowId, 2, 0, top << 1, list->listWindow.unk4, 2);
 }
 
 static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *list, u32 checkPageEntry)
 {
     // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
-    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = 
+    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] =
     {
-        [CHECK_PAGE_STRATEGY] = 2, 
-        [CHECK_PAGE_POKEMON]  = 4, 
-        [CHECK_PAGE_INTRO_1]  = 6, 
+        [CHECK_PAGE_STRATEGY] = 2,
+        [CHECK_PAGE_POKEMON]  = 4,
+        [CHECK_PAGE_INTRO_1]  = 6,
         [CHECK_PAGE_INTRO_2]  = 7
     };
 
@@ -754,8 +753,8 @@ static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct Pok
 
     if (str != NULL)
     {
-        sub_81DB620(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
-        AddTextPrinterParameterized(list->listWindow.windowId, 7, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
+        FillWindowTilesByRow(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
+        AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
         CopyWindowRectToVram(list->listWindow.windowId, 2, 0, r6 * 2, list->listWindow.unk4, 2);
     }
 }
@@ -890,7 +889,7 @@ void ToggleMatchCallArrows(struct PokenavSub17Substruct *list, bool32 shouldHide
 void SpriteCB_MatchCallRightArrow(struct Sprite *sprite)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_LIST);
-    sprite->pos2.y = structPtr->unk888.selectedIndexOffset << 4;
+    sprite->y2 = structPtr->unk888.selectedIndexOffset << 4;
 }
 
 void SpriteCB_MatchCallDownArrow(struct Sprite *sprite)
@@ -907,7 +906,7 @@ void SpriteCB_MatchCallDownArrow(struct Sprite *sprite)
         sprite->data[0] = 0;
         offset = (sprite->data[1] + 1) & 7;
         sprite->data[1] = offset;
-        sprite->pos2.y = offset;
+        sprite->y2 = offset;
     }
 }
 
@@ -925,7 +924,7 @@ void SpriteCB_MatchCallUpArrow(struct Sprite *sprite)
         sprite->data[0] = 0;
         offset = (sprite->data[1] + 1) & 7;
         sprite->data[1] = offset;
-        sprite->pos2.y = -1 * offset;
+        sprite->y2 = -1 * offset;
     }
 }
 

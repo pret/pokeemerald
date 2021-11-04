@@ -167,8 +167,8 @@ static const union AnimCmd *const sSpriteAnimTable_Icons[] =
 
 static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 {
-    .tileTag = 0xffff,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_ExclamationQuestionMark,
@@ -178,7 +178,7 @@ static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 
 static const struct SpriteTemplate sSpriteTemplate_HeartIcon =
 {
-    .tileTag = 0xffff,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
@@ -523,7 +523,7 @@ static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct O
     if (ObjectEventIsMovementOverridden(playerObj) && !ObjectEventClearHeldMovementIfFinished(playerObj))
         return FALSE;
 
-    sub_808BCE8();
+    CancelPlayerForcedMovement();
     ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
     task->tFuncId++; // TRSEE_PLAYER_FACE_WAIT
     return FALSE;
@@ -756,10 +756,10 @@ static void SpriteCB_TrainerIcons(struct Sprite *sprite)
     {
         struct Sprite *objEventSprite = &gSprites[gObjectEvents[objEventId].spriteId];
         sprite->sData4 += sprite->sData3;
-        sprite->pos1.x = objEventSprite->pos1.x;
-        sprite->pos1.y = objEventSprite->pos1.y - 16;
-        sprite->pos2.x = objEventSprite->pos2.x;
-        sprite->pos2.y = objEventSprite->pos2.y + sprite->sData4;
+        sprite->x = objEventSprite->x;
+        sprite->y = objEventSprite->y - 16;
+        sprite->x2 = objEventSprite->x2;
+        sprite->y2 = objEventSprite->y2 + sprite->sData4;
         if (sprite->sData4)
             sprite->sData3++;
         else

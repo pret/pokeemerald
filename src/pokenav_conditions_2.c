@@ -30,7 +30,7 @@ const u32 gUnknown_08623228[] = INCBIN_U32("graphics/pokenav/8623228.4bpp.lz");
 const u32 sConditionGraph_Tilemap[] = INCBIN_U32("graphics/pokenav/862323C.bin.lz");
 const u16 sConditionGraphMonMarkingsPal[] = INCBIN_U16("graphics/pokenav/8623338.gbapal");
 
-const struct BgTemplate sPartyConditionBgTemplates[3] = 
+const struct BgTemplate sPartyConditionBgTemplates[3] =
 {
     {
         .bg = 1,
@@ -61,7 +61,7 @@ const struct BgTemplate sPartyConditionBgTemplates[3] =
     }
 };
 
-const struct WindowTemplate sMonNameGenderWindowTemplate = 
+const struct WindowTemplate sMonNameGenderWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 13,
@@ -72,7 +72,7 @@ const struct WindowTemplate sMonNameGenderWindowTemplate =
     .baseBlock = 2
 };
 
-const struct WindowTemplate sConditionGraphListIdWindowTemplate = 
+const struct WindowTemplate sConditionGraphListIdWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -83,7 +83,7 @@ const struct WindowTemplate sConditionGraphListIdWindowTemplate =
     .baseBlock = 0x36
 };
 
-const struct WindowTemplate sUnusedWindowTemplate1 = 
+const struct WindowTemplate sUnusedWindowTemplate1 =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -94,7 +94,7 @@ const struct WindowTemplate sUnusedWindowTemplate1 =
     .baseBlock = 0x44
 };
 
-const struct WindowTemplate sUnusedWindowTemplate2 = 
+const struct WindowTemplate sUnusedWindowTemplate2 =
 {
     .bg = 1,
     .tilemapLeft = 13,
@@ -572,23 +572,23 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
         if (GetConditionGraphCurrentMonIndex() != GetMonListCount() - 1 || IsConditionMenuSearchMode() == TRUE)
         {
             str = GetConditionMonNameBuffer(bufferIndex);
-            AddTextPrinterParameterized(structPtr->nameGenderWindowId, 1, str, 0, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->nameGenderWindowId, FONT_NORMAL, str, 0, 1, 0, NULL);
         }
         break;
     case 2:
         if (IsConditionMenuSearchMode() == TRUE)
         {
             str = GetConditionMonLocationBuffer(bufferIndex);
-            AddTextPrinterParameterized(structPtr->nameGenderWindowId, 1, str, 0, 17, 0, NULL);
+            AddTextPrinterParameterized(structPtr->nameGenderWindowId, FONT_NORMAL, str, 0, 17, 0, NULL);
             text[0] = EXT_CTRL_CODE_BEGIN;
             text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
             text[2] = TEXT_COLOR_BLUE;
             text[3] = TEXT_COLOR_TRANSPARENT;
             text[4] = TEXT_COLOR_LIGHT_BLUE;
             StringCopy(text + 5, gText_Number2);
-            AddTextPrinterParameterized(structPtr->listIndexWindowId, 1, text, 4, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->listIndexWindowId, FONT_NORMAL, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(text + 5, GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);
-            AddTextPrinterParameterized(structPtr->listIndexWindowId, 1, text, 28, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->listIndexWindowId, FONT_NORMAL, text, 28, 1, 0, NULL);
         }
         break;
     case 3:
@@ -672,8 +672,8 @@ void CreateMonMarkingsOrPokeballIndicators(void)
         BufferMonMarkingsMenuTiles();
         sprite = CreateMonMarkingAllCombosSprite(0x69, 0x69, sConditionGraphMonMarkingsPal);
         sprite->oam.priority = 3;
-        sprite->pos1.x = 192;
-        sprite->pos1.y = 32;
+        sprite->x = 192;
+        sprite->y = 32;
         sprite->callback = MonMarkingsCallback;
         structPtr->monMarksSprite = sprite;
         PokenavFillPalette(IndexOfSpritePaletteTag(0x69), 0);
@@ -792,7 +792,7 @@ void FreePartyConditionSubstruct2(void)
 void MonPicGfxSpriteCallback(struct Sprite *sprite)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
-    sprite->pos1.x = structPtr->monTransitionX + 38;
+    sprite->x = structPtr->monTransitionX + 38;
 }
 
 void CreateConditionMonPic(u8 id)

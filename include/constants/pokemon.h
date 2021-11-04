@@ -225,7 +225,7 @@
 // 1 bit each in the Pokémon struct. Gen 4 hard-codes
 // each of these to the given name. In Gen 3 they're
 // used to get an index into giftRibbons in the save block,
-// which can have a value 0-64 (0 is 'no ribbon') that 
+// which can have a value 0-64 (0 is 'no ribbon') that
 // corresponds to one of the special ribbons listed
 // in gGiftRibbonDescriptionPointers. Most of these were
 // never distributed
@@ -271,15 +271,6 @@
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
 
 #define MAX_FRIENDSHIP  0xFF
-
-#define STATUS_PRIMARY_NONE      0
-#define STATUS_PRIMARY_POISON    1
-#define STATUS_PRIMARY_PARALYSIS 2
-#define STATUS_PRIMARY_SLEEP     3
-#define STATUS_PRIMARY_FREEZE    4
-#define STATUS_PRIMARY_BURN      5
-#define STATUS_PRIMARY_POKERUS   6
-#define STATUS_PRIMARY_FAINTED   7
 
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
@@ -347,5 +338,11 @@
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
 #define MON_PIC_SIZE (64 * 64 / 2)
+
+#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
+#define BATTLE_ALIVE_ATK_SIDE       1
+#define BATTLE_ALIVE_DEF_SIDE       2
+
+#define SKIP_FRONT_ANIM (1 << 7)
 
 #endif // GUARD_CONSTANTS_POKEMON_H

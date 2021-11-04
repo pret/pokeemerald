@@ -118,7 +118,7 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
     }
 };
 
-static const LoopedTask sMenuHandlerLoopTaskFuncs[] = 
+static const LoopedTask sMenuHandlerLoopTaskFuncs[] =
 {
     [POKENAV_MENU_FUNC_NONE]                  = NULL,
     [POKENAV_MENU_FUNC_MOVE_CURSOR]           = LoopedTask_MoveMenuCursor,
@@ -179,31 +179,31 @@ struct OptionsLabelGfx
 
 static const struct OptionsLabelGfx sPokenavMenuOptionLabelGfx[POKENAV_MENU_TYPE_COUNT] =
 {
-    [POKENAV_MENU_TYPE_DEFAULT] = 
+    [POKENAV_MENU_TYPE_DEFAULT] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC] = 
+    [POKENAV_MENU_TYPE_UNLOCK_MC] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_MatchCall, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] = 
+    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_MatchCall, sOptionsLabelGfx_Ribbons, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_CONDITION] = 
+    [POKENAV_MENU_TYPE_CONDITION] =
     {
         .yStart = 56,
         .deltaY = 20,
         {sOptionsLabelGfx_Party, sOptionsLabelGfx_Search, sOptionsLabelGfx_Cancel}
     },
-    [POKENAV_MENU_TYPE_CONDITION_SEARCH] = 
+    [POKENAV_MENU_TYPE_CONDITION_SEARCH] =
     {
         .yStart = 40,
         .deltaY = 16,
@@ -343,7 +343,7 @@ bool32 OpenPokenavMenuInitial(void)
 
     if (state == NULL)
         return FALSE;
-    
+
     state->pokenavAlreadyOpen = FALSE;
     return TRUE;
 }
@@ -783,7 +783,7 @@ static void CreateMenuOptionSprites(void)
         {
             u8 spriteId = CreateSprite(&sMenuOptionSpriteTemplate, 0x8c, 20 * i + 40, 3);
             unk->iconSprites[i][j] = &gSprites[spriteId];
-            gSprites[spriteId].pos2.x = 32 * j;
+            gSprites[spriteId].x2 = 32 * j;
         }
     }
 }
@@ -824,9 +824,9 @@ static void DrawOptionLabelGfx(const u16 *const *tiles, s32 yPos, s32 deltaY)
                 unk->iconSprites[i][j]->oam.tileNum = (*tiles)[0] + sp04 + 8 * j;
                 unk->iconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag((*tiles)[1] + 4);
                 unk->iconSprites[i][j]->invisible = TRUE;
-                unk->iconSprites[i][j]->pos1.y = yPos;
-                unk->iconSprites[i][j]->pos1.x = 0x8c;
-                unk->iconSprites[i][j]->pos2.x = 32 * j;
+                unk->iconSprites[i][j]->y = yPos;
+                unk->iconSprites[i][j]->x = 0x8c;
+                unk->iconSprites[i][j]->x2 = 32 * j;
             }
             unk->iconVisible[i] = TRUE;
         }
@@ -937,7 +937,7 @@ static void SetMenuOptionGfxParamsInactive(struct Sprite ** sprites, s32 x, s32 
 
     for (i = 0; i < 4; i++)
     {
-        (*sprites)->pos1.x = x;
+        (*sprites)->x = x;
         (*sprites)->data[0] = a3;
         (*sprites)->data[1] = 16 * (a2 - x) / a3;
         (*sprites)->data[2] = 16 * x;
@@ -989,11 +989,11 @@ static void sub_81CA474(struct Sprite * sprite)
     if (sprite->data[0] != -1)
     {
         sprite->data[2] += sprite->data[1];
-        sprite->pos1.x = sprite->data[2] >> 4;
+        sprite->x = sprite->data[2] >> 4;
     }
     else
     {
-        sprite->pos1.x = sprite->data[7];
+        sprite->x = sprite->data[7];
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -1009,8 +1009,8 @@ static void sub_81CA4AC(struct Sprite * sprite)
             StartSpriteAffineAnim(sprite, 1);
             sprite->data[1]++;
             sprite->data[2] = 0x100;
-            sprite->pos1.x += sprite->pos2.x;
-            sprite->pos2.x = 0;
+            sprite->x += sprite->x2;
+            sprite->x2 = 0;
         }
         else
         {
@@ -1021,16 +1021,16 @@ static void sub_81CA4AC(struct Sprite * sprite)
             switch (sprite->data[7])
             {
             case 0:
-                sprite->pos2.x = -r1 * 3;
+                sprite->x2 = -r1 * 3;
                 break;
             case 1:
-                sprite->pos2.x = -r1;
+                sprite->x2 = -r1;
                 break;
             case 2:
-                sprite->pos2.x = r1;
+                sprite->x2 = r1;
                 break;
             case 3:
-                sprite->pos2.x = r1 * 3;
+                sprite->x2 = r1 * 3;
                 break;
             }
             if (sprite->affineAnimEnded)
@@ -1135,9 +1135,9 @@ static void PrintCurrentOptionDescription(void)
     struct Pokenav2Struct * ptr = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_ICONS);
     int menuItem = GetCurrentMenuItemId();
     const u8 * s = sPageDescriptions[menuItem];
-    u32 width = GetStringWidth(1, s, -1);
+    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
 }
 
 // Printed when Ribbons is selected if no PC/party mons have ribbons
@@ -1146,9 +1146,9 @@ static void PrintNoRibbonWinners(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_ICONS);
     const u8 * s = gText_NoRibbonWinners;
-    u32 width = GetStringWidth(1, s, -1);
+    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(void)

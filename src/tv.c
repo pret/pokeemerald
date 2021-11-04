@@ -36,6 +36,7 @@
 #include "data.h"
 #include "constants/battle_frontier.h"
 #include "constants/contest.h"
+#include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/lilycove_lady.h"
@@ -198,31 +199,31 @@ static const struct {
     {
         .species = SPECIES_SEEDOT,
         .moves = {MOVE_BIDE, MOVE_HARDEN, MOVE_LEECH_SEED},
-        .level = 3, 
+        .level = 3,
         .location = MAP_NUM(ROUTE102)
     },
     {
         .species = SPECIES_NUZLEAF,
         .moves = {MOVE_HARDEN, MOVE_GROWTH, MOVE_NATURE_POWER, MOVE_LEECH_SEED},
-        .level = 15, 
+        .level = 15,
         .location = MAP_NUM(ROUTE114),
     },
     {
         .species = SPECIES_SEEDOT,
         .moves = {MOVE_HARDEN, MOVE_GROWTH, MOVE_NATURE_POWER, MOVE_LEECH_SEED},
-        .level = 13, 
+        .level = 13,
         .location = MAP_NUM(ROUTE117),
     },
     {
         .species = SPECIES_SEEDOT,
         .moves = {MOVE_GIGA_DRAIN, MOVE_FRUSTRATION, MOVE_SOLAR_BEAM, MOVE_LEECH_SEED},
-        .level = 25, 
+        .level = 25,
         .location = MAP_NUM(ROUTE120),
     },
     {
         .species = SPECIES_SKITTY,
         .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_ATTRACT},
-        .level = 8, 
+        .level = 8,
         .location = MAP_NUM(ROUTE116),
     }
 };
@@ -335,19 +336,19 @@ static const u8 *const sTVPokemonTodaySuccessfulTextGroup[] = {
 };
 
 static const u8 *const sTVTodaysSmartShopperTextGroup[] = {
-    gTVTodaysSmartShopperText00,
-    gTVTodaysSmartShopperText01,
-    gTVTodaysSmartShopperText02,
-    gTVTodaysSmartShopperText03,
-    gTVTodaysSmartShopperText04,
-    gTVTodaysSmartShopperText05,
-    gTVTodaysSmartShopperText06,
-    gTVTodaysSmartShopperText07,
-    gTVTodaysSmartShopperText08,
-    gTVTodaysSmartShopperText09,
-    gTVTodaysSmartShopperText10,
-    gTVTodaysSmartShopperText11,
-    gTVTodaysSmartShopperText12
+    [SMARTSHOPPER_STATE_INTRO]          = SmartShopper_Text_Intro,
+    [SMARTSHOPPER_STATE_CLERK_NORMAL]   = SmartShopper_Text_ClerkNormal,
+    [SMARTSHOPPER_STATE_RAND_COMMENT_1] = SmartShopper_Text_RandomComment1,
+    [SMARTSHOPPER_STATE_RAND_COMMENT_2] = SmartShopper_Text_RandomComment2,
+    [SMARTSHOPPER_STATE_RAND_COMMENT_3] = SmartShopper_Text_RandomComment3,
+    [SMARTSHOPPER_STATE_RAND_COMMENT_4] = SmartShopper_Text_RandomComment4,
+    [SMARTSHOPPER_STATE_SECOND_ITEM]    = SmartShopper_Text_SecondItem,
+    [SMARTSHOPPER_STATE_THIRD_ITEM]     = SmartShopper_Text_ThirdItem,
+    [SMARTSHOPPER_STATE_DURING_SALE]    = SmartShopper_Text_DuringSale,
+    [SMARTSHOPPER_STATE_OUTRO_NORMAL]   = SmartShopper_Text_OutroNormal,
+    [SMARTSHOPPER_STATE_IS_VIP]         = SmartShopper_Text_IsVIP,
+    [SMARTSHOPPER_STATE_CLERK_MAX]      = SmartShopper_Text_ClerkMax,
+    [SMARTSHOPPER_STATE_OUTRO_MAX]      = SmartShopper_Text_OutroMax
 };
 
 static const u8 *const sTVBravoTrainerTextGroup[] = {
@@ -647,50 +648,50 @@ static const u8 *const sTVWhatsNo1InHoennTodayTextGroup[] = {
     gTVWhatsNo1InHoennTodayText08
 };
 
-static const u8 *const sTVSecretBaseSecretsTextGroup[SBSECRETS_NUM_STATES] = 
+static const u8 *const sTVSecretBaseSecretsTextGroup[SBSECRETS_NUM_STATES] =
 {
-    [SBSECRETS_STATE_INTRO]               = TVSecretBaseSecrets_Text_Intro, 
+    [SBSECRETS_STATE_INTRO]               = TVSecretBaseSecrets_Text_Intro,
     [SBSECRETS_STATE_DO_NEXT1]            = TVSecretBaseSecrets_Text_WhatWillPlayerDoNext1,
     [SBSECRETS_STATE_DO_NEXT2]            = TVSecretBaseSecrets_Text_WhatWillPlayerDoNext2,
     [SBSECRETS_STATE_TOOK_X_STEPS]        = TVSecretBaseSecrets_Text_TookXStepsBeforeLeaving,
-    [SBSECRETS_STATE_BASE_INTEREST_LOW]   = TVSecretBaseSecrets_Text_BaseFailedToInterestPlayer, 
-    [SBSECRETS_STATE_BASE_INTEREST_MED]   = TVSecretBaseSecrets_Text_PlayerEnjoyedBase, 
+    [SBSECRETS_STATE_BASE_INTEREST_LOW]   = TVSecretBaseSecrets_Text_BaseFailedToInterestPlayer,
+    [SBSECRETS_STATE_BASE_INTEREST_MED]   = TVSecretBaseSecrets_Text_PlayerEnjoyedBase,
     [SBSECRETS_STATE_BASE_INTEREST_HIGH]  = TVSecretBaseSecrets_Text_PlayerHugeFanOfBase,
-    [SBSECRETS_STATE_OUTRO]               = TVSecretBaseSecrets_Text_Outro, 
-    [SBSECRETS_STATE_NOTHING_USED1]       = TVSecretBaseSecrets_Text_StoppedMoving1, 
-    [SBSECRETS_STATE_NOTHING_USED2]       = TVSecretBaseSecrets_Text_StoppedMoving2, 
-    [SBSECRETS_STATE_USED_CHAIR]          = TVSecretBaseSecrets_Text_UsedChair, 
-    [SBSECRETS_STATE_USED_BALLOON]        = TVSecretBaseSecrets_Text_UsedBalloon, 
-    [SBSECRETS_STATE_USED_TENT]           = TVSecretBaseSecrets_Text_UsedTent, 
-    [SBSECRETS_STATE_USED_PLANT]          = TVSecretBaseSecrets_Text_UsedPlant, 
-    [SBSECRETS_STATE_USED_GOLD_SHIELD]    = TVSecretBaseSecrets_Text_UsedGoldShield, 
-    [SBSECRETS_STATE_USED_SILVER_SHIELD]  = TVSecretBaseSecrets_Text_UsedSilverShield, 
-    [SBSECRETS_STATE_USED_GLASS_ORNAMENT] = TVSecretBaseSecrets_Text_UsedGlassOrnament, 
-    [SBSECRETS_STATE_USED_TV]             = TVSecretBaseSecrets_Text_UsedTV, 
-    [SBSECRETS_STATE_USED_MUD_BALL]       = TVSecretBaseSecrets_Text_UsedMudBall, 
-    [SBSECRETS_STATE_USED_BAG]            = TVSecretBaseSecrets_Text_UsedBag, 
-    [SBSECRETS_STATE_USED_CUSHION]        = TVSecretBaseSecrets_Text_UsedCushion, 
-    [SBSECRETS_STATE_HIT_CUSHION]         = TVSecretBaseSecrets_Text_HitCushion, 
-    [SBSECRETS_STATE_HUGGED_CUSHION]      = TVSecretBaseSecrets_Text_HuggedCushion, 
-    [SBSECRETS_STATE_BATTLED_WON]         = TVSecretBaseSecrets_Text_BattledWon, 
-    [SBSECRETS_STATE_BATTLED_LOST]        = TVSecretBaseSecrets_Text_BattledLost, 
-    [SBSECRETS_STATE_DECLINED_BATTLE]     = TVSecretBaseSecrets_Text_DeclinedBattle, 
-    [SBSECRETS_STATE_USED_POSTER]         = TVSecretBaseSecrets_Text_UsedPoster, 
-    [SBSECRETS_STATE_USED_NOTE_MAT]       = TVSecretBaseSecrets_Text_UsedNoteMat, 
-    [SBSECRETS_STATE_BATTLED_DRAW]        = TVSecretBaseSecrets_Text_BattledDraw, 
-    [SBSECRETS_STATE_USED_SPIN_MAT]       = TVSecretBaseSecrets_Text_UsedSpinMat, 
-    [SBSECRETS_STATE_USED_SAND_ORNAMENT]  = TVSecretBaseSecrets_Text_UsedSandOrnament, 
-    [SBSECRETS_STATE_USED_DESK]           = TVSecretBaseSecrets_Text_UsedDesk, 
-    [SBSECRETS_STATE_USED_BRICK]          = TVSecretBaseSecrets_Text_UsedBrick, 
-    [SBSECRETS_STATE_USED_SOLID_BOARD]    = TVSecretBaseSecrets_Text_UsedSolidBoard, 
-    [SBSECRETS_STATE_USED_FENCE]          = TVSecretBaseSecrets_Text_UsedFence, 
-    [SBSECRETS_STATE_USED_GLITTER_MAT]    = TVSecretBaseSecrets_Text_UsedGlitterMat, 
-    [SBSECRETS_STATE_USED_TIRE]           = TVSecretBaseSecrets_Text_UsedTire, 
-    [SBSECRETS_STATE_USED_STAND]          = TVSecretBaseSecrets_Text_UsedStand, 
+    [SBSECRETS_STATE_OUTRO]               = TVSecretBaseSecrets_Text_Outro,
+    [SBSECRETS_STATE_NOTHING_USED1]       = TVSecretBaseSecrets_Text_StoppedMoving1,
+    [SBSECRETS_STATE_NOTHING_USED2]       = TVSecretBaseSecrets_Text_StoppedMoving2,
+    [SBSECRETS_STATE_USED_CHAIR]          = TVSecretBaseSecrets_Text_UsedChair,
+    [SBSECRETS_STATE_USED_BALLOON]        = TVSecretBaseSecrets_Text_UsedBalloon,
+    [SBSECRETS_STATE_USED_TENT]           = TVSecretBaseSecrets_Text_UsedTent,
+    [SBSECRETS_STATE_USED_PLANT]          = TVSecretBaseSecrets_Text_UsedPlant,
+    [SBSECRETS_STATE_USED_GOLD_SHIELD]    = TVSecretBaseSecrets_Text_UsedGoldShield,
+    [SBSECRETS_STATE_USED_SILVER_SHIELD]  = TVSecretBaseSecrets_Text_UsedSilverShield,
+    [SBSECRETS_STATE_USED_GLASS_ORNAMENT] = TVSecretBaseSecrets_Text_UsedGlassOrnament,
+    [SBSECRETS_STATE_USED_TV]             = TVSecretBaseSecrets_Text_UsedTV,
+    [SBSECRETS_STATE_USED_MUD_BALL]       = TVSecretBaseSecrets_Text_UsedMudBall,
+    [SBSECRETS_STATE_USED_BAG]            = TVSecretBaseSecrets_Text_UsedBag,
+    [SBSECRETS_STATE_USED_CUSHION]        = TVSecretBaseSecrets_Text_UsedCushion,
+    [SBSECRETS_STATE_HIT_CUSHION]         = TVSecretBaseSecrets_Text_HitCushion,
+    [SBSECRETS_STATE_HUGGED_CUSHION]      = TVSecretBaseSecrets_Text_HuggedCushion,
+    [SBSECRETS_STATE_BATTLED_WON]         = TVSecretBaseSecrets_Text_BattledWon,
+    [SBSECRETS_STATE_BATTLED_LOST]        = TVSecretBaseSecrets_Text_BattledLost,
+    [SBSECRETS_STATE_DECLINED_BATTLE]     = TVSecretBaseSecrets_Text_DeclinedBattle,
+    [SBSECRETS_STATE_USED_POSTER]         = TVSecretBaseSecrets_Text_UsedPoster,
+    [SBSECRETS_STATE_USED_NOTE_MAT]       = TVSecretBaseSecrets_Text_UsedNoteMat,
+    [SBSECRETS_STATE_BATTLED_DRAW]        = TVSecretBaseSecrets_Text_BattledDraw,
+    [SBSECRETS_STATE_USED_SPIN_MAT]       = TVSecretBaseSecrets_Text_UsedSpinMat,
+    [SBSECRETS_STATE_USED_SAND_ORNAMENT]  = TVSecretBaseSecrets_Text_UsedSandOrnament,
+    [SBSECRETS_STATE_USED_DESK]           = TVSecretBaseSecrets_Text_UsedDesk,
+    [SBSECRETS_STATE_USED_BRICK]          = TVSecretBaseSecrets_Text_UsedBrick,
+    [SBSECRETS_STATE_USED_SOLID_BOARD]    = TVSecretBaseSecrets_Text_UsedSolidBoard,
+    [SBSECRETS_STATE_USED_FENCE]          = TVSecretBaseSecrets_Text_UsedFence,
+    [SBSECRETS_STATE_USED_GLITTER_MAT]    = TVSecretBaseSecrets_Text_UsedGlitterMat,
+    [SBSECRETS_STATE_USED_TIRE]           = TVSecretBaseSecrets_Text_UsedTire,
+    [SBSECRETS_STATE_USED_STAND]          = TVSecretBaseSecrets_Text_UsedStand,
     [SBSECRETS_STATE_USED_BREAKABLE_DOOR] = TVSecretBaseSecrets_Text_BrokeDoor,
-    [SBSECRETS_STATE_USED_DOLL]           = TVSecretBaseSecrets_Text_UsedDoll, 
-    [SBSECRETS_STATE_USED_SLIDE]          = TVSecretBaseSecrets_Text_UsedSlide, 
-    [SBSECRETS_STATE_DECLINED_SLIDE]      = TVSecretBaseSecrets_Text_UsedSlideButDidntGoDown, 
+    [SBSECRETS_STATE_USED_DOLL]           = TVSecretBaseSecrets_Text_UsedDoll,
+    [SBSECRETS_STATE_USED_SLIDE]          = TVSecretBaseSecrets_Text_UsedSlide,
+    [SBSECRETS_STATE_DECLINED_SLIDE]      = TVSecretBaseSecrets_Text_UsedSlideButDidntGoDown,
     [SBSECRETS_STATE_USED_JUMP_MAT]       = TVSecretBaseSecrets_Text_UsedJumpMat
 };
 
@@ -721,8 +722,8 @@ static const u8 *const sTVInSearchOfTrainersTextGroup[] = {
 };
 
 // Secret Base Secrets TV Show states for actions that can be taken in a secret base
-// The flags that determine whether or not the action was taken are commented 
-const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] = 
+// The flags that determine whether or not the action was taken are commented
+const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
 {
     SBSECRETS_STATE_USED_CHAIR,             // SECRET_BASE_USED_CHAIR
     SBSECRETS_STATE_USED_BALLOON,           // SECRET_BASE_USED_BALLOON
@@ -816,7 +817,7 @@ u8 FindAnyTVShowOnTheAir(void)
     if (slot == 0xFF)
         return 0xFF;
 
-    if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE 
+    if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE
      && gSaveBlock1Ptr->tvShows[slot].common.kind == TVSHOW_MASS_OUTBREAK)
         return FindFirstActiveTVShowThatIsNotAMassOutbreak();
 
@@ -836,7 +837,7 @@ void UpdateTVScreensOnMap(int width, int height)
         break;
 //  case PLAYERS_HOUSE_TV_NONE:
     default:
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F) 
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
         {
             // NPC in Lilycove Hotel is always watching TV
@@ -890,8 +891,8 @@ static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 1; i++)
     {
-        if (gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_OFF_AIR 
-         && gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_MASS_OUTBREAK 
+        if (gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_OFF_AIR
+         && gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_MASS_OUTBREAK
          && gSaveBlock1Ptr->tvShows[i].common.active == TRUE)
             return i;
     }
@@ -944,7 +945,7 @@ void GabbyAndTyBeforeInterview(void)
         gSaveBlock1Ptr->gabbyAndTyData.battleNum++;
     }
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.playerMonWasDamaged;
-    
+
     if (gBattleResults.playerFaintCounter != 0)
         gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = TRUE;
     else
@@ -1154,7 +1155,7 @@ void TryPutPokemonTodayOnAir(void)
                     show->pokemonToday.ball = itemLastUsed;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2Ptr->playerName);
                     StringCopy(show->pokemonToday.nickname, gBattleResults.caughtMonNick);
-                    language2 = sub_81DB604(show->pokemonToday.nickname);
+                    language2 = GetNicknameLanguage(show->pokemonToday.nickname);
                     StripExtCtrlCodes(show->pokemonToday.nickname);
                     show->pokemonToday.species = gBattleResults.caughtMonSpecies;
                     StorePlayerIdInRecordMixShow(show);
@@ -2353,7 +2354,7 @@ bool8 ShouldHideFanClubInterviewer(void)
     if (gSaveBlock1Ptr->linkBattleRecords.entries[0].name[0] == EOS)
         return TRUE;
     #endif
-    
+
     return FALSE;
 }
 
@@ -2612,8 +2613,8 @@ static u8 FindAnyPokeNewsOnTheAir(void)
 
     for (i = 0; i < POKE_NEWS_COUNT; i++)
     {
-        if (gSaveBlock1Ptr->pokeNews[i].kind != POKENEWS_NONE 
-         && gSaveBlock1Ptr->pokeNews[i].state == 1 
+        if (gSaveBlock1Ptr->pokeNews[i].kind != POKENEWS_NONE
+         && gSaveBlock1Ptr->pokeNews[i].state == 1
          && gSaveBlock1Ptr->pokeNews[i].days < 3)
             return i;
     }
@@ -2795,7 +2796,7 @@ size_t CountDigits(int value)
     return 1;
 }
 
-static void sub_80EF40C(u8 varIdx, TVShow *show)
+static void SmartShopper_BufferPurchaseTotal(u8 varIdx, TVShow *show)
 {
     u8 i;
     int price;
@@ -2823,8 +2824,8 @@ static bool8 IsRecordMixShowAlreadySpawned(u8 kind, bool8 delete)
     playerId = GetPlayerIDAsU32();
     for (i = NUM_NORMAL_TVSHOW_SLOTS; i < LAST_TVSHOW_IDX; i++)
     {
-        if (shows[i].common.kind == kind 
-         && (playerId & 0xFF) == shows[i].common.trainerIdLo 
+        if (shows[i].common.kind == kind
+         && (playerId & 0xFF) == shows[i].common.trainerIdLo
          && ((playerId >> 8) & 0xFF) == shows[i].common.trainerIdHi)
         {
             if (delete == TRUE)
@@ -3148,7 +3149,7 @@ static void GetRandomWordFromShow(TVShow *show)
     u8 i;
 
     i = Random() % ARRAY_COUNT(show->fanclubLetter.words);
-    
+
     // From random point, get first non-empty word
     while (TRUE)
     {
@@ -3431,7 +3432,7 @@ void GetMomOrDadStringForTVMessage(void)
 void HideBattleTowerReporter(void)
 {
     VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
-    RemoveObjectEventByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(LOCALID_BATTLE_TOWER_LOBBY_REPORTER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
 
@@ -3457,7 +3458,7 @@ void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
             else if (version == VERSION_EMERALD && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
                 TranslateJapaneseEmeraldShows((*rmBuffer)[i]);
         }
-        
+
         // Position player's TV shows in argument list depending on link id
         switch (playersLinkId)
         {
@@ -3546,7 +3547,7 @@ static bool8 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COU
         success = TryMixOutbreakTVShow(&tv1[sCurTVShowSlot], &tv2[sTVShowMixingCurSlot], idx);
         break;
     }
-    
+
     // Show was mixed, delete from array
     if (success == TRUE)
     {
@@ -3560,7 +3561,7 @@ static bool8 TryMixNormalTVShow(TVShow *dest, TVShow *src, u8 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
-    if ((linkTrainerId & 0xFF) == src->common.trainerIdLo 
+    if ((linkTrainerId & 0xFF) == src->common.trainerIdLo
     && ((linkTrainerId >> 8) & 0xFF) == src->common.trainerIdHi)
         return FALSE;
 
@@ -3577,11 +3578,11 @@ static bool8 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u8 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
-    if ((linkTrainerId & 0xFF) == src->common.srcTrainerIdLo 
+    if ((linkTrainerId & 0xFF) == src->common.srcTrainerIdLo
     && ((linkTrainerId >> 8) & 0xFF) == src->common.srcTrainerIdHi)
         return FALSE;
 
-    if ((linkTrainerId & 0xFF) == src->common.trainerIdLo 
+    if ((linkTrainerId & 0xFF) == src->common.trainerIdLo
     && ((linkTrainerId >> 8) & 0xFF) == src->common.trainerIdHi)
         return FALSE;
 
@@ -3598,7 +3599,7 @@ static bool8 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u8 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
-    if ((linkTrainerId & 0xFF) == src->common.trainerIdLo 
+    if ((linkTrainerId & 0xFF) == src->common.trainerIdLo
     && ((linkTrainerId >> 8) & 0xFF) == src->common.trainerIdHi)
         return FALSE;
 
@@ -3834,7 +3835,7 @@ void ReceivePokeNewsData(void *src, u32 size, u8 playersLinkId)
             memcpy((*rmBuffer2)[i], src + i * size, sizeof((*rmBuffer2)[i]));
 
         rmBuffer = rmBuffer2;
-        
+
         // Position player's PokeNews in argument list depending on link id
         switch (playersLinkId)
         {
@@ -4027,7 +4028,7 @@ void SanitizeTVShowsForRuby(TVShow *shows)
     {
         if (curShow->bravoTrainerTower.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
         {
-            if ((curShow->bravoTrainerTower.language == LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage != LANGUAGE_JAPANESE) 
+            if ((curShow->bravoTrainerTower.language == LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage != LANGUAGE_JAPANESE)
              || (curShow->bravoTrainerTower.language != LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage == LANGUAGE_JAPANESE))
                 memset(curShow, 0, sizeof(TVShow));
         }
@@ -4470,78 +4471,85 @@ static void DoTVShowTodaysSmartShopper(void)
     state = sTVShowState;
     switch(state)
     {
-    case 0:
+    case SMARTSHOPPER_STATE_INTRO:
         TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
         GetMapName(gStringVar2, show->smartshopperShow.shopLocation, 0);
         if (show->smartshopperShow.itemAmounts[0] >= 255)
-            sTVShowState = 11;
+            sTVShowState = SMARTSHOPPER_STATE_CLERK_MAX;
         else
-            sTVShowState = 1;
+            sTVShowState = SMARTSHOPPER_STATE_CLERK_NORMAL;
         break;
-    case 1:
+    case SMARTSHOPPER_STATE_CLERK_NORMAL:
         TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
         StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[0]));
         ConvertIntToDecimalString(2, show->smartshopperShow.itemAmounts[0]);
-        sTVShowState += 1 + (Random() % 4);
+        // Pick a random comment (SMARTSHOPPER_STATE_RAND_COMMENT_#)
+        sTVShowState += SMARTSHOPPER_STATE_CLERK_NORMAL + (Random() % (SMARTSHOPPER_STATE_RAND_COMMENT_4 - SMARTSHOPPER_STATE_RAND_COMMENT_1 + 1));
         break;
-    case 2:
-    case 4:
-    case 5:
+    case SMARTSHOPPER_STATE_RAND_COMMENT_1:
+    case SMARTSHOPPER_STATE_RAND_COMMENT_3:
+    case SMARTSHOPPER_STATE_RAND_COMMENT_4:
         if (show->smartshopperShow.itemIds[1] != ITEM_NONE)
-            sTVShowState = 6;
+            sTVShowState = SMARTSHOPPER_STATE_SECOND_ITEM;
         else
-            sTVShowState = 10;
+            sTVShowState = SMARTSHOPPER_STATE_IS_VIP;
         break;
-    case 3:
+    case SMARTSHOPPER_STATE_RAND_COMMENT_2:
         ConvertIntToDecimalString(2, show->smartshopperShow.itemAmounts[0] + 1);
         if (show->smartshopperShow.itemIds[1] != ITEM_NONE)
-            sTVShowState = 6;
+            sTVShowState = SMARTSHOPPER_STATE_SECOND_ITEM;
         else
-            sTVShowState = 10;
+            sTVShowState = SMARTSHOPPER_STATE_IS_VIP;
         break;
-    case 6:
+    case SMARTSHOPPER_STATE_SECOND_ITEM:
+        // Clerk describes 2nd type of item player purchased
         StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[1]));
         ConvertIntToDecimalString(2, show->smartshopperShow.itemAmounts[1]);
         if (show->smartshopperShow.itemIds[2] != ITEM_NONE)
-            sTVShowState = 7;
+            sTVShowState = SMARTSHOPPER_STATE_THIRD_ITEM;
         else if (show->smartshopperShow.priceReduced == TRUE)
-            sTVShowState = 8;
+            sTVShowState = SMARTSHOPPER_STATE_DURING_SALE;
         else
-            sTVShowState = 9;
+            sTVShowState = SMARTSHOPPER_STATE_OUTRO_NORMAL;
         break;
-    case 7:
+    case SMARTSHOPPER_STATE_THIRD_ITEM:
+        // Clerk describes 3rd type of item player purchased
         StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[2]));
         ConvertIntToDecimalString(2, show->smartshopperShow.itemAmounts[2]);
         if (show->smartshopperShow.priceReduced == TRUE)
-            sTVShowState = 8;
+            sTVShowState = SMARTSHOPPER_STATE_DURING_SALE;
         else
-            sTVShowState = 9;
+            sTVShowState = SMARTSHOPPER_STATE_OUTRO_NORMAL;
         break;
-    case 8:
+    case SMARTSHOPPER_STATE_DURING_SALE:
         if (show->smartshopperShow.itemAmounts[0] >= 255)
-            sTVShowState = 12;
+            sTVShowState = SMARTSHOPPER_STATE_OUTRO_MAX;
         else
-            sTVShowState = 9;
+            sTVShowState = SMARTSHOPPER_STATE_OUTRO_NORMAL;
         break;
-    case 9:
-        sub_80EF40C(1, show);
+    case SMARTSHOPPER_STATE_OUTRO_NORMAL:
+        SmartShopper_BufferPurchaseTotal(1, show);
         TVShowDone();
         break;
-    case 10:
+    case SMARTSHOPPER_STATE_IS_VIP:
+        // Clerk says customer is a VIP
+        // Said if player only purchased one type of item
         if (show->smartshopperShow.priceReduced == TRUE)
-            sTVShowState = 8;
+            sTVShowState = SMARTSHOPPER_STATE_DURING_SALE;
         else
-            sTVShowState = 9;
+            sTVShowState = SMARTSHOPPER_STATE_OUTRO_NORMAL;
         break;
-    case 11:
+    case SMARTSHOPPER_STATE_CLERK_MAX:
+        // Clerk's comments if player purchased maximum number of 1st item
         TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
         StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[0]));
         if (show->smartshopperShow.priceReduced == TRUE)
-            sTVShowState = 8;
+            sTVShowState = SMARTSHOPPER_STATE_DURING_SALE;
         else
-            sTVShowState = 12;
+            sTVShowState = SMARTSHOPPER_STATE_OUTRO_MAX;
         break;
-    case 12:
+    case SMARTSHOPPER_STATE_OUTRO_MAX:
+        // Outro comments if player purchased maximum number of 1st item
         TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
         TVShowDone();
         break;
@@ -4889,7 +4897,7 @@ static void DoTVShowPokemonNewsMassOutbreak(void)
     ShowFieldMessage(sTVMassOutbreakTextGroup[sTVShowState]);
 }
 
-// TV Show that plays after a Link Contest. 
+// TV Show that plays after a Link Contest.
 // First talks about the winner and something they did, then about a losing player and something they did
 // The show is only generated when the player wins, but can be record mixed to other games
 // Each state buffers any needed data for a message to print from sTVContestLiveUpdatesTextGroup

@@ -20,14 +20,11 @@
 #include "decompress.h"
 #include "constants/rgb.h"
 
-// this file's functions
 static void CB2_MysteryEventMenu(void);
 static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed);
 
-// EWRAM vars
-static EWRAM_DATA u8 sUnknown_0203BCF8 = 0; // set but unused
+static EWRAM_DATA u8 sUnused = 0; // set but unused
 
-// const rom data
 static const struct BgTemplate sBgTemplates[] =
 {
     {
@@ -270,7 +267,7 @@ static void CB2_MysteryEventMenu(void)
         if (!IsTextPrinterActive(0))
         {
             gMain.state++;
-            sUnknown_0203BCF8 = 0;
+            sUnused = 0;
         }
         break;
     case 14:
@@ -315,5 +312,5 @@ static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 sp
     textColor[2] = 3;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(textColor[0]));
-    AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, textColor, speed, text);
 }

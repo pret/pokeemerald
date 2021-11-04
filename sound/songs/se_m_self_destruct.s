@@ -25,9 +25,9 @@ se_m_self_destruct_1:
 	.byte		BEND  , c_v+0
 	.byte		N01   , Gn3 , v127
 	.byte	W01
-	.byte		        Cn3 
+	.byte		        Cn3
 	.byte	W01
-	.byte		N24   , An3 
+	.byte		N24   , An3
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte	W04
