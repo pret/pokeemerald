@@ -601,8 +601,9 @@
 #define STRINGID_SWAPPEDABILITIES                     598
 #define STRINGID_PASTELVEILPROTECTED                  599
 #define STRINGID_PASTELVEILENTERS                     600
+#define STRINGID_BATTLERTYPECHANGEDTO                 601
 
-#define BATTLESTRINGS_COUNT                           601
+#define BATTLESTRINGS_COUNT                           602
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
