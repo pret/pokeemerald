@@ -367,7 +367,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectGeomancy                @ EFFECT_GEOMANCY
 	.4byte BattleScript_EffectFairyLock               @ EFFECT_FAIRY_LOCK
 	.4byte BattleScript_EffectAllySwitch              @ EFFECT_ALLY_SWITCH
-	.4byte BattleScript_EffectRelicSong                @ EFFECT_RELIC_SONG
+	.4byte BattleScript_EffectRelicSong               @ EFFECT_RELIC_SONG
 	.4byte BattleScript_EffectAttackerDefenseDownHit  @ EFFECT_ATTACKER_DEFENSE_DOWN_HIT
 	.4byte BattleScript_EffectHit                     @ EFFECT_BODY_PRESS
 	.4byte BattleScript_EffectEerieSpell              @ EFFECT_EERIE_SPELL
