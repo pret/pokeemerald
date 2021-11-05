@@ -9032,7 +9032,7 @@ static void Cmd_various(void)
         u32 physical;
         u32 special;
 
-        statStage = = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
         attackerAtkStat *= gStatStageRatios[statStage][0];
         attackerAtkStat /= gStatStageRatios[statStage][1];
 
