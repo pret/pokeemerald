@@ -1893,7 +1893,7 @@ Move_AURA_SPHERE:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
-	call SetHighSpeedBg
+	call SetAuraSphereBG
 	playsewithpan SE_M_SKY_UPPERCUT, 0
 	delay 60
 	createsprite gAuraSphereBlast, ANIM_TARGET, 3, 0
@@ -1907,6 +1907,10 @@ Move_AURA_SPHERE:
 	blendoff
 	delay 1
 	end
+
+SetAuraSphereBG:
+	fadetobg BG_AURA_SPHERE
+	goto SetHighSpeedBgFade
 
 Move_ROCK_POLISH:
 	loadspritegfx ANIM_TAG_WHITE_STREAK
@@ -2378,7 +2382,7 @@ Move_FOCUS_BLAST:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
-	call SetHighSpeedBg
+	call SetFocusBlastBG
 	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 2, 0
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	waitforvisualfinish
@@ -2390,6 +2394,10 @@ Move_FOCUS_BLAST:
 	blendoff
 	delay 1
 	end
+
+SetFocusBlastBG:
+	fadetobg BG_FOCUS_BLAST
+	goto SetHighSpeedBgFade
 
 Move_ENERGY_BALL:
 	loadspritegfx ANIM_TAG_ENERGY_BALL
@@ -3437,6 +3445,7 @@ Move_GUNK_SHOT:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
+	call SetGunkShotBG
 	createvisualtask AnimTask_ShakeMon 5, 5, ANIM_ATTACKER, 0, 2, 40, 1
 	delay 6
 	panse_1B SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 2, 0
@@ -3464,6 +3473,7 @@ Move_GUNK_SHOT:
 	call GunkShotImpact
 	call PoisonBubblesEffect
 	waitforvisualfinish
+	call UnsetHighSpeedBg
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
@@ -3479,6 +3489,10 @@ GunkShotImpact:
 	createsprite gGunkShotImpactSpriteTemplate, 4, 4, 0, 15, 1, 1
 	createsprite gGunkShotImpactSpriteTemplate, 4, 4, 0, -15, 1, 1
 	return
+SetGunkShotBG:
+	fadetobg BG_GUNK_SHOT
+	goto SetHighSpeedBgFade
+
 
 Move_IRON_HEAD:
 	loadspritegfx ANIM_TAG_GUST
