@@ -8996,50 +8996,50 @@ static void Cmd_various(void)
         return;
     case VARIOUS_PHOTON_GEYSER_CHECK:
     {
-        u32 attStat = gBattleMons[gActiveBattler].attack;
-        u8 atkStage = gBattleMons[gActiveBattler].statStages[STAT_ATK];
-        u32 spaStat = gBattleMons[gActiveBattler].spAttack;
+        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
+        u8 attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
 
-        attStat *= gStatStageRatios[atkStage][0];
-        attStat /= gStatStageRatios[atkStage][1];
+        attackerAtkStat *= gStatStageRatios[attackerAtkStage][0];
+        attackerAtkStat /= gStatStageRatios[attackerAtkStage][1];
 
-        atkStage = gBattleMons[gActiveBattler].statStages[STAT_SPATK];
-        spaStat *= gStatStageRatios[atkStage][0];
-        spaStat /= gStatStageRatios[atkStage][1];
+        attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
+        attackerSpAtkStat *= gStatStageRatios[attackerAtkStage][0];
+        attackerSpAtkStat /= gStatStageRatios[attackerAtkStage][1];
 
-        if (attStat > spaStat)
+        if (attackerAtkStat > attackerSpAtkStat)
             gSwapDamageCategory = TRUE;
         break;
     }
     case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
     {
-        u32 attStat = gBattleMons[gBattlerAttacker].attack;
-        u8 atkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
-        u32 attStatDef = gBattleMons[gBattlerTarget].attack;
+        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
+        u32 targetDefStat = gBattleMons[gBattlerTarget].defense;
+        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
+        u32 targetSpDefStat = gBattleMons[gBattlerTarget].spDefense;
+        u8 statStage;
         u32 physical;
-
-        u32 spaStat = gBattleMons[gBattlerAttacker].spAttack;
-        u32 spaStatDef = gBattleMons[gBattlerTarget].spAttack;
         u32 special;
 
-        attStat *= gStatStageRatios[atkStage][0];
-        attStat /= gStatStageRatios[atkStage][1];
+        statStage = = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        attackerAtkStat *= gStatStageRatios[statStage][0];
+        attackerAtkStat /= gStatStageRatios[statStage][1];
 
-        atkStage = gBattleMons[gBattlerTarget].statStages[STAT_ATK];
-        attStatDef *= gStatStageRatios[atkStage][0];
-        attStatDef /= gStatStageRatios[atkStage][1];
+        statStage = gBattleMons[gBattlerTarget].statStages[STAT_ATK];
+        targetDefStat *= gStatStageRatios[statStage][0];
+        targetDefStat /= gStatStageRatios[statStage][1];
 
-        physical = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attStat) / attStatDef) / 50);
+        physical = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerAtkStat) / targetDefStat) / 50);
 
-        atkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
-        spaStat *= gStatStageRatios[atkStage][0];
-        spaStat /= gStatStageRatios[atkStage][1];
+        statStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
+        attackerSpAtkStat *= gStatStageRatios[statStage][0];
+        attackerSpAtkStat /= gStatStageRatios[statStage][1];
 
-        atkStage = gBattleMons[gBattlerTarget].statStages[STAT_SPATK];
-        spaStatDef *= gStatStageRatios[atkStage][0];
-        spaStatDef /= gStatStageRatios[atkStage][1];
+        statStage = gBattleMons[gBattlerTarget].statStages[STAT_SPATK];
+        targetSpDefStat *= gStatStageRatios[statStage][0];
+        targetSpDefStat /= gStatStageRatios[statStage][1];
 
-        special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * spaStat) / spaStatDef) / 50);
+        special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
         if (((physical > special) || (physical == special && (Random() % 2) == 0)))
             gSwapDamageCategory = TRUE;
