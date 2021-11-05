@@ -54,6 +54,7 @@
 #include "constants/rgb.h"
 #include "data.h"
 #include "constants/party_menu.h"
+#include "battle_util.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
@@ -8875,6 +8876,7 @@ static void Cmd_various(void)
             break;
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
+        TryToRevertMimicry(); // restore the types of Pokémon with Mimicry
         break;
     case VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
         if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler, TRUE))
@@ -8995,6 +8997,7 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    }
     case VARIOUS_JUMP_IF_WEATHER_AFFECTED:
         {
             u32 weatherFlags = T1_READ_32(gBattlescriptCurrInstr + 3);
@@ -9004,7 +9007,6 @@ static void Cmd_various(void)
                 gBattlescriptCurrInstr += 11;
         }
         return;
-    }
     case VARIOUS_APPLY_PLASMA_FISTS:
         for (i = 0; i < gBattlersCount; i++)
             gStatuses4[i] |= STATUS4_PLASMA_FISTS;
@@ -9116,7 +9118,22 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    case VARIOUS_TRY_TO_APPLY_MIMICRY:
+    {
+        bool8 isMimicryDone = FALSE;
+
+        if (GetBattlerAbility(gActiveBattler) == ABILITY_MIMICRY)
+        {
+            TryToApplyMimicry(gActiveBattler, TRUE);
+            isMimicryDone = TRUE;
+        }
+        if (!isMimicryDone)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
+    } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
 }
@@ -12916,7 +12933,7 @@ static void Cmd_handleballthrow(void)
             gBattleSpritesDataPtr->animationData->criticalCaptureSuccess = 0;
             if (CriticalCapture(odds))
             {
-                maxShakes = 1;  //critical capture doesn't gauarantee capture
+                maxShakes = 1;  //critical capture doesn't guarantee capture
                 gBattleSpritesDataPtr->animationData->isCriticalCapture = 1;
             }
             else

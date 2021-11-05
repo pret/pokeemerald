@@ -47,6 +47,10 @@
     #define SPECIES_GRENINJA_ASH            10017
     #define SPECIES_HOOPA                   0
     #define SPECIES_HOOPA_UNBOUND           10018
+    #define SPECIES_MELOETTA                0
+    #define SPECIES_MELOETTA_PIROUETTE      10019
+    #define SPECIES_MORPEKO                 0
+    #define SPECIES_MORPEKO_HANGRY          10020
 #endif
 
 // Items with peculiar battle effects.
