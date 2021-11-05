@@ -18,6 +18,7 @@
 #define I_KEY_ESCAPE_ROPE       GEN_7   // In Gen8, Escape Rope became a Key Item. Keep in mind, this will make it free to buy in marts.
 #define I_LEGACY_HEALING_ITEMS  GEN_7   // In Gen7+, certain healing items recover less HP than they used to.
 #define I_SITRUS_BERRY_HEAL     GEN_7   // In Gen4+, Sitrus Berry was changed from healing 30 HP to healing 25% of Max HP.
+#define I_SOUL_DEW_BOOST        GEN_7   // In Gens3-6, Soul Dew boosts Lati@s' Sp. Atk and Sp. Def by 50%. In Gen7+ it boosts the power of their Psychic and Dragon type moves by 20% instead.
 
 // Ball config
 #define I_LURE_BALL_MODIFIER    GEN_7   // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
