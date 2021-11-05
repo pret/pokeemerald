@@ -8054,7 +8054,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
     return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
 }
 
-// returns SPECIES_NONE if no form change is possible
+// Returns SPECIES_NONE if no form change is possible
 u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg) 
 {
     u32 i;
