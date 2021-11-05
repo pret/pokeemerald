@@ -1200,7 +1200,7 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         break;
     case 3:
         ShowBg(0);
-        BlendPalettes(-1, 16, 0);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB_LinkBattleSave);
         EnableInterrupts(1);
         break;
