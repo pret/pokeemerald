@@ -115,7 +115,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect::
 LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator::
 	special CloseDeptStoreElevatorWindow
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	waitse
 	special MoveElevator

@@ -46,7 +46,7 @@ Route121_SafariZoneEntrance_EventScript_FirstTimeInfo::
 
 Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay, MSGBOX_YESNO

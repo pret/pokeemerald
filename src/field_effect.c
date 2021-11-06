@@ -2163,7 +2163,7 @@ static bool8 LavaridgeGym1FWarpEffect_AshPuff(struct Task *task, struct ObjectEv
         } else
         {
             task->data[1]++;
-            ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFastestMovementAction(objectEvent->facingDirection));
+            ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFasterMovementAction(objectEvent->facingDirection));
             PlaySE(SE_LAVARIDGE_FALL_WARP);
         }
     }

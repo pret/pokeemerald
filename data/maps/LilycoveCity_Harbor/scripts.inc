@@ -252,7 +252,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
 	msgbox EventTicket_Text_OldSeaMapTooFar, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_FERRY_SAILOR, Common_Movement_ExclamationMark
@@ -334,12 +334,12 @@ LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime::
 LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect::
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 30
 	removeobject LOCALID_FERRY_SAILOR
 	delay 30
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	showobjectat LOCALID_ATTENDANT, MAP_LILYCOVE_CITY_HARBOR
 	delay 30
@@ -348,7 +348,7 @@ LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect::
 	end
 
 LilycoveCity_Harbor_EventScript_GetEventTicketSailor::
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
@@ -360,7 +360,7 @@ LilycoveCity_Harbor_EventScript_GetEventTicketSailor::
 	return
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithSailor::
-	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 30
 	removeobject LOCALID_FERRY_SAILOR
@@ -424,7 +424,7 @@ LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind::
 LilycoveCity_Harbor_EventScript_BoardFerry::
 	msgbox LilycoveCity_Harbor_Text_PleaseBoard, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
@@ -455,7 +455,7 @@ LilycoveCity_Harbor_EventScript_ExitSailSelect::
 
 LilycoveCity_Harbor_Movement_PlayerBoardFerryEast:
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth:
@@ -490,7 +490,7 @@ LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayEast::
 	return
 
 LilycoveCity_Harbor_Movement_SailorOutOfWayNorth:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	lock_facing_direction
 	walk_left
 	unlock_facing_direction
@@ -503,22 +503,22 @@ LilycoveCity_Harbor_Movement_SailorOutOfWayEast:
 	step_end
 
 LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth::
-	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast::
-	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth::
-	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast::
-	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
@@ -537,7 +537,7 @@ LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast::
 	return
 
 LilycoveCity_Harbor_Movement_BrineyBoardFerry:
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_8
 	set_invisible
 	step_end
@@ -554,7 +554,7 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyNorth:
 	delay_16
 	delay_16
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	set_invisible
 	step_end
@@ -562,7 +562,7 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyNorth:
 LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyEast:
 	delay_16
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	set_invisible
 	step_end

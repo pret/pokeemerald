@@ -987,12 +987,12 @@ const u8 gWalkInPlaceFastMovementActions[] = {
     MOVEMENT_ACTION_WALK_IN_PLACE_FAST_LEFT,
     MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
 };
-const u8 gWalkInPlaceFastestMovementActions[] = {
-    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
-    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
-    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP,
-    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT,
-    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
+const u8 gWalkInPlaceFasterMovementActions[] = {
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_RIGHT,
 };
 const u8 gAcroWheelieFaceDirectionMovementActions[] = {
     MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
@@ -4407,7 +4407,7 @@ movement_type_def(MovementType_RunInPlace, gMovementTypeFuncs_RunInPlace)
 bool8 MovementType_RunInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceFastestMovementAction(objectEvent->facingDirection));
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceFasterMovementAction(objectEvent->facingDirection));
     sprite->sTypeFuncId = 1;
     return TRUE;
 }
@@ -4926,7 +4926,7 @@ dirn_to_anim(GetJumpSpecialMovementAction, gJumpSpecialMovementActions);
 dirn_to_anim(GetWalkInPlaceSlowMovementAction, gWalkInPlaceSlowMovementActions);
 dirn_to_anim(GetWalkInPlaceNormalMovementAction, gWalkInPlaceNormalMovementActions);
 dirn_to_anim(GetWalkInPlaceFastMovementAction, gWalkInPlaceFastMovementActions);
-dirn_to_anim(GetWalkInPlaceFastestMovementAction, gWalkInPlaceFastestMovementActions);
+dirn_to_anim(GetWalkInPlaceFasterMovementAction, gWalkInPlaceFasterMovementActions);
 
 bool8 ObjectEventFaceOppositeDirection(struct ObjectEvent *objectEvent, u8 direction)
 {
@@ -5753,25 +5753,25 @@ bool8 MovementAction_WalkInPlaceFastRight_Step0(struct ObjectEvent *objectEvent,
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
-bool8 MovementAction_WalkInPlaceFastestDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementAction_WalkInPlaceFasterDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     InitMoveInPlace(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFasterAnimNum(DIR_SOUTH), 4);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
-bool8 MovementAction_WalkInPlaceFastestUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementAction_WalkInPlaceFasterUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     InitMoveInPlace(objectEvent, sprite, DIR_NORTH, GetMoveDirectionFasterAnimNum(DIR_NORTH), 4);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
-bool8 MovementAction_WalkInPlaceFastestLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementAction_WalkInPlaceFasterLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     InitMoveInPlace(objectEvent, sprite, DIR_WEST, GetMoveDirectionFasterAnimNum(DIR_WEST), 4);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
-bool8 MovementAction_WalkInPlaceFastestRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementAction_WalkInPlaceFasterRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     InitMoveInPlace(objectEvent, sprite, DIR_EAST, GetMoveDirectionFasterAnimNum(DIR_EAST), 4);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);

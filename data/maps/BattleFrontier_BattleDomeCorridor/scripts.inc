@@ -56,7 +56,7 @@ BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50:
@@ -100,7 +100,7 @@ BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen:
