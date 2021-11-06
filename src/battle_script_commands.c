@@ -9036,7 +9036,7 @@ static void Cmd_various(void)
         attackerAtkStat *= gStatStageRatios[statStage][0];
         attackerAtkStat /= gStatStageRatios[statStage][1];
 
-        statStage = gBattleMons[gBattlerTarget].statStages[STAT_ATK];
+        statStage = gBattleMons[gBattlerTarget].statStages[STAT_DEF];
         targetDefStat *= gStatStageRatios[statStage][0];
         targetDefStat /= gStatStageRatios[statStage][1];
 
@@ -9046,7 +9046,7 @@ static void Cmd_various(void)
         attackerSpAtkStat *= gStatStageRatios[statStage][0];
         attackerSpAtkStat /= gStatStageRatios[statStage][1];
 
-        statStage = gBattleMons[gBattlerTarget].statStages[STAT_SPATK];
+        statStage = gBattleMons[gBattlerTarget].statStages[STAT_SPDEF];
         targetSpDefStat *= gStatStageRatios[statStage][0];
         targetSpDefStat /= gStatStageRatios[statStage][1];
 
