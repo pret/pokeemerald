@@ -83,7 +83,7 @@ void CB2_ShowDiploma(void)
     LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
-    BlendPalettes(-1, 16, 0);
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB);
