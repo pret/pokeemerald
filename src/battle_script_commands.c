@@ -9011,6 +9011,8 @@ static void Cmd_various(void)
         u8 attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
         u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
 
+        gSwapDamageCategory = FALSE;
+
         attackerAtkStat *= gStatStageRatios[attackerAtkStage][0];
         attackerAtkStat /= gStatStageRatios[attackerAtkStage][1];
 
@@ -9031,6 +9033,8 @@ static void Cmd_various(void)
         u8 statStage;
         u32 physical;
         u32 special;
+
+        gSwapDamageCategory = FALSE;
 
         statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
         attackerAtkStat *= gStatStageRatios[statStage][0];
