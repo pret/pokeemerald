@@ -283,24 +283,24 @@ DirectSoundWaveData_bicycle_bell::
 	.incbin "sound/direct_sound_samples/bicycle_bell.bin"
 
 	.align 2
-DirectSoundWaveData_8725A2C::
-	.incbin "sound/direct_sound_samples/8725A2C.bin"
+DirectSoundWaveData_unknown_1::
+	.incbin "sound/direct_sound_samples/unknown_01.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_pizzicato_strings::
 	.incbin "sound/direct_sound_samples/sc88pro_pizzicato_strings.bin"
 
 	.align 2
-DirectSoundWaveData_872762C::
-	.incbin "sound/direct_sound_samples/872762C.bin"
+DirectSoundWaveData_unknown_2::
+	.incbin "sound/direct_sound_samples/unknown_02.bin"
 
 	.align 2
-DirectSoundWaveData_872921C::
-	.incbin "sound/direct_sound_samples/872921C.bin"
+DirectSoundWaveData_unknown_3::
+	.incbin "sound/direct_sound_samples/unknown_03.bin"
 
 	.align 2
-DirectSoundWaveData_872A5D0::
-	.incbin "sound/direct_sound_samples/872A5D0.bin"
+DirectSoundWaveData_unknown_4::
+	.incbin "sound/direct_sound_samples/unknown_04.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_wind::
@@ -311,32 +311,32 @@ DirectSoundWaveData_sc88pro_bubbles::
 	.incbin "sound/direct_sound_samples/sc88pro_bubbles.bin"
 
 	.align 2
-DirectSoundWaveData_872EEA8::
-	.incbin "sound/direct_sound_samples/872EEA8.bin"
+DirectSoundWaveData_unknown_5::
+	.incbin "sound/direct_sound_samples/unknown_05.bin"
 
 	.align 2
-DirectSoundWaveData_87301B0::
-	.incbin "sound/direct_sound_samples/87301B0.bin"
+DirectSoundWaveData_unknown_6::
+	.incbin "sound/direct_sound_samples/unknown_06.bin"
 
 	.align 2
 DirectSoundWaveData_trinity_30303_mega_bass::
 	.incbin "sound/direct_sound_samples/trinity_30303_mega_bass.bin"
 
 	.align 2
-DirectSoundWaveData_8734298::
-	.incbin "sound/direct_sound_samples/8734298.bin"
+DirectSoundWaveData_unknown_7::
+	.incbin "sound/direct_sound_samples/unknown_07.bin"
 
 	.align 2
-DirectSoundWaveData_87364A8::
-	.incbin "sound/direct_sound_samples/87364A8.bin"
+DirectSoundWaveData_unknown_8::
+	.incbin "sound/direct_sound_samples/unknown_08.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_tubular_bell::
 	.incbin "sound/direct_sound_samples/sc88pro_tubular_bell.bin"
 
 	.align 2
-DirectSoundWaveData_87385E4::
-	.incbin "sound/direct_sound_samples/87385E4.bin"
+DirectSoundWaveData_unknown_9::
+	.incbin "sound/direct_sound_samples/unknown_09.bin"
 
 	.align 2
 DirectSoundWaveData_trinity_big_boned::
@@ -351,40 +351,40 @@ DirectSoundWaveData_sc88pro_xylophone::
 	.incbin "sound/direct_sound_samples/sc88pro_xylophone.bin"
 
 	.align 2
-DirectSoundWaveData_873ECD8::
-	.incbin "sound/direct_sound_samples/873ECD8.bin"
+DirectSoundWaveData_unknown_10::
+	.incbin "sound/direct_sound_samples/unknown_10.bin"
 
 	.align 2
-DirectSoundWaveData_8740818::
-	.incbin "sound/direct_sound_samples/8740818.bin"
+DirectSoundWaveData_unknown_11::
+	.incbin "sound/direct_sound_samples/unknown_11.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_accordion::
 	.incbin "sound/direct_sound_samples/sc88pro_accordion.bin"
 
 	.align 2
-DirectSoundWaveData_87424B0::
-	.incbin "sound/direct_sound_samples/87424B0.bin"
+DirectSoundWaveData_unknown_12::
+	.incbin "sound/direct_sound_samples/unknown_12.bin"
 
 	.align 2
-DirectSoundWaveData_87430C0::
-	.incbin "sound/direct_sound_samples/87430C0.bin"
+DirectSoundWaveData_unknown_13::
+	.incbin "sound/direct_sound_samples/unknown_13.bin"
 
 	.align 2
-DirectSoundWaveData_8743C50::
-	.incbin "sound/direct_sound_samples/8743C50.bin"
+DirectSoundWaveData_unknown_14::
+	.incbin "sound/direct_sound_samples/unknown_14.bin"
 
 	.align 2
-DirectSoundWaveData_87446EC::
-	.incbin "sound/direct_sound_samples/87446EC.bin"
+DirectSoundWaveData_unknown_15::
+	.incbin "sound/direct_sound_samples/unknown_15.bin"
 
 	.align 2
-DirectSoundWaveData_8745034::
-	.incbin "sound/direct_sound_samples/8745034.bin"
+DirectSoundWaveData_unknown_16::
+	.incbin "sound/direct_sound_samples/unknown_16.bin"
 
 	.align 2
-DirectSoundWaveData_8745A7C::
-	.incbin "sound/direct_sound_samples/8745A7C.bin"
+DirectSoundWaveData_unknown_17::
+	.incbin "sound/direct_sound_samples/unknown_17.bin"
 
 	.align 2
 Cry_Bulbasaur::
@@ -1943,8 +1943,8 @@ DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 
 	.align 2
-DirectSoundWaveData_88D6978::
-	.incbin "sound/direct_sound_samples/88D6978.bin"
+DirectSoundWaveData_unknown_18::
+	.incbin "sound/direct_sound_samples/unknown_18.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_nylon_str_guitar::
