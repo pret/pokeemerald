@@ -5064,3 +5064,12 @@ void AnimTask_PrimalReversion(u8 taskId)
         gBattleAnimArgs[0] = 0;
     DestroyAnimVisualTask(taskId);
 }
+
+void AnimTask_ShellSideArm(u8 taskId)
+{
+    if (gSwapDamageCategory)
+        gBattleAnimArgs[0] = TRUE;
+    else
+        gBattleAnimArgs[0] = FALSE;
+    DestroyAnimVisualTask(taskId);
+}

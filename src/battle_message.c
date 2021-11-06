@@ -725,6 +725,9 @@ static const u8 sText_ButHoopaCantUseIt[] = _("But Hoopa can't use it\nthe way i
 static const u8 sText_BrokeThroughProtection[] = _("It broke through the\n{B_DEF_NAME_WITH_PREFIX}'s protection!");
 static const u8 sText_AbilityAllowsOnlyMove[] = _("{B_ATK_ABILITY} allows the\nuse of only {B_CURRENT_MOVE}!\p");
 static const u8 sText_SwappedAbilities[] = _("{B_DEF_NAME_WITH_PREFIX} swapped Abilities\nwith its target!");
+static const u8 sText_PastelVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is protected\nby a pastel veil!");
+static const u8 sText_PastelVeilEnters[] = _("{B_DEF_NAME_WITH_PREFIX} was cured\nof its poisoning!");
+static const u8 sText_BattlerTypeChangedTo[] = _("{B_BUFF1}'s type\nchanged to {B_BUFF2}!");
 static const u8 sText_NeutralizingGasEnters[] = _("Neutralizing Gas filled the area!");
 static const u8 sText_NeutralizingGasOver[] = _("The effects of Neutralizing\nGas wore off!");
 
@@ -732,6 +735,9 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
     [STRINGID_NEUTRALIZINGGASOVER - 12] = sText_NeutralizingGasOver,
     [STRINGID_NEUTRALIZINGGASENTERS - 12] = sText_NeutralizingGasEnters,
+    [STRINGID_BATTLERTYPECHANGEDTO - 12] = sText_BattlerTypeChangedTo,
+    [STRINGID_PASTELVEILENTERS - 12] = sText_PastelVeilEnters,
+    [STRINGID_PASTELVEILPROTECTED -12] = sText_PastelVeilProtected,
     [STRINGID_SWAPPEDABILITIES - 12] = sText_SwappedAbilities,
     [STRINGID_ABILITYALLOWSONLYMOVE - 12] = sText_AbilityAllowsOnlyMove,
     [STRINGID_BROKETHROUGHPROTECTION - 12] = sText_BrokeThroughProtection,
@@ -1198,7 +1204,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNTWISTEDDIMENSIONS - 12] = sText_PkmnTwistedDimensions,
     [STRINGID_POINTEDSTONESFLOAT - 12] = sText_PointedStonesFloat,
     [STRINGID_CLOAKEDINMYSTICALMOONLIGHT - 12] = sText_CloakedInMysticalMoonlight,
-    [STRINGID_TRAPPERBYSWIRLINGMAGMA - 12] = sText_TrappedBySwirlingMagma,
+    [STRINGID_TRAPPEDBYSWIRLINGMAGMA - 12] = sText_TrappedBySwirlingMagma,
     [STRINGID_VANISHEDINSTANTLY - 12] = sText_VanishedInstantly,
     [STRINGID_PROTECTEDTEAM - 12] = sText_ProtectedTeam,
     [STRINGID_SHAREDITSGUARD - 12] = sText_SharedItsGuard,
@@ -1379,6 +1385,7 @@ const u16 gSwitchInAbilityStringIds[] =
     [B_MSG_SWITCHIN_SCREENCLEANER] = STRINGID_SCREENCLEANERENTERS,
     [B_MSG_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
     [B_MSG_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
+    [B_MSG_SWITCHIN_PASTEL_VEIL] = STRINGID_PASTELVEILENTERS,
     [B_MSG_SWITCHIN_NEUTRALIZING_GAS] = STRINGID_NEUTRALIZINGGASENTERS,
 };
 
@@ -1533,16 +1540,17 @@ const u16 gFirstTurnOfTwoStringIds[] =
     [B_MSG_TURN1_FREEZE_SHOCK]  = STRINGID_CLOAKEDINAFREEZINGLIGHT,
 };
 
-// Index copied from move's index in gTrappingMoves
+// Index copied from move's index in sTrappingMoves
 const u16 gWrappedStringIds[] =
 {
-    STRINGID_PKMNSQUEEZEDBYBIND,   // MOVE_BIND
-    STRINGID_PKMNWRAPPEDBY,        // MOVE_WRAP
-    STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_FIRE_SPIN
-    STRINGID_PKMNCLAMPED,          // MOVE_CLAMP
-    STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_WHIRLPOOL
-    STRINGID_PKMNTRAPPEDBYSANDTOMB,// MOVE_SAND_TOMB
-    STRINGID_INFESTATION,          // MOVE_INFESTATION
+    STRINGID_PKMNSQUEEZEDBYBIND,     // MOVE_BIND
+    STRINGID_PKMNWRAPPEDBY,          // MOVE_WRAP
+    STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_FIRE_SPIN
+    STRINGID_PKMNCLAMPED,            // MOVE_CLAMP
+    STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_WHIRLPOOL
+    STRINGID_PKMNTRAPPEDBYSANDTOMB,  // MOVE_SAND_TOMB
+    STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
+    STRINGID_INFESTATION,            // MOVE_INFESTATION
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1751,11 +1759,6 @@ const u16 gCaughtMonStringIds[] =
     [B_MSG_SENT_LANETTES_PC]  = STRINGID_PKMNTRANSFERREDLANETTESPC,
     [B_MSG_SOMEONES_BOX_FULL] = STRINGID_PKMNBOXSOMEONESPCFULL,
     [B_MSG_LANETTES_BOX_FULL] = STRINGID_PKMNBOXLANETTESPCFULL,
-};
-
-const u16 gTrappingMoves[] =
-{
-    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_INFESTATION, 0xFFFF
 };
 
 const u16 gRoomsStringIds[] =
