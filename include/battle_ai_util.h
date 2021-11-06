@@ -54,6 +54,7 @@ bool32 IsRecycleEncouragedItem(u16 item);
 bool32 CanKnockOffItem(u8 battler, u16 item);
 bool32 IsAbilityOfRating(u16 ability, s8 rating);
 s8 GetAbilityRating(u16 ability);
+bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
@@ -120,7 +121,6 @@ bool32 IsSemiInvulnerable(u8 battlerDef, u16 move);
 
 // status checks
 bool32 AI_CanBeBurned(u8 battler, u16 ability);
-bool32 AI_CanBePoisoned(u8 battler, u16 ability);
 bool32 AI_CanBeConfused(u8 battler, u16 ability);
 bool32 AI_CanSleep(u8 battler, u16 ability);
 bool32 IsBattlerIncapacitated(u8 battler, u16 ability);

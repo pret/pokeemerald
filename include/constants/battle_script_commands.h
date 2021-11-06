@@ -38,6 +38,7 @@
 #define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
 #define sABILITY_OVERWRITE gBattleScripting + 0x34
 #define sSWITCH_CASE gBattleScripting + 0x36
+#define sBERRY_OVERRIDE gBattleScripting + 0x37
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 #define cMISS_TYPE gBattleCommunication + 6
@@ -185,6 +186,21 @@
 #define VARIOUS_REMOVE_TERRAIN                  113
 #define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
 #define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     115
+#define VARIOUS_GET_ROTOTILLER_TARGETS          116
+#define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 117
+#define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        118
+#define VARIOUS_CONSUME_BERRY                   119
+#define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL   120
+#define VARIOUS_HANDLE_PRIMAL_REVERSION         121
+#define VARIOUS_APPLY_PLASMA_FISTS              122
+#define VARIOUS_JUMP_IF_SPECIES                 123
+#define VARIOUS_UPDATE_ABILITY_POPUP            124
+#define VARIOUS_JUMP_IF_WEATHER_AFFECTED        125
+#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    126
+#define VARIOUS_SET_ATTACKER_STICKY_WEB_USER    127
+#define VARIOUS_TRY_TO_APPLY_MIMICRY            128
+#define VARIOUS_PHOTON_GEYSER_CHECK             129
+#define VARIOUS_SHELL_SIDE_ARM_CHECK            130
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

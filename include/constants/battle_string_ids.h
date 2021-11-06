@@ -410,7 +410,7 @@
 #define STRINGID_PKMNTWISTEDDIMENSIONS                406
 #define STRINGID_POINTEDSTONESFLOAT                   407
 #define STRINGID_CLOAKEDINMYSTICALMOONLIGHT           408
-#define STRINGID_TRAPPERBYSWIRLINGMAGMA               409
+#define STRINGID_TRAPPEDBYSWIRLINGMAGMA               409
 #define STRINGID_VANISHEDINSTANTLY                    410
 #define STRINGID_PROTECTEDTEAM                        411
 #define STRINGID_SHAREDITSGUARD                       412
@@ -523,7 +523,7 @@
 #define STRINGID_GRASSYTERRAINHEALS                   519
 #define STRINGID_ELECTRICTERRAINPREVENTS              520
 #define STRINGID_PSYCHICTERRAINPREVENTS               521
-#define STRINGID_SAFETYGOOGLESPROTECTED               522
+#define STRINGID_SAFETYGOGGLESPROTECTED               522
 #define STRINGID_FLOWERVEILPROTECTED                  523
 #define STRINGID_SWEETVEILPROTECTED                   524
 #define STRINGID_AROMAVEILPROTECTED                   525
@@ -592,8 +592,18 @@
 #define STRINGID_STRONGWINDSDISSIPATED                588
 #define STRINGID_MYSTERIOUSAIRCURRENTBLOWSON          589
 #define STRINGID_ATTACKWEAKENEDBSTRONGWINDS           590
+#define STRINGID_STUFFCHEEKSCANTSELECT                592
+#define STRINGID_PKMNREVERTEDTOPRIMAL                 593
+#define STRINGID_BUTPOKEMONCANTUSETHEMOVE             594
+#define STRINGID_BUTHOOPACANTUSEIT                    595
+#define STRINGID_BROKETHROUGHPROTECTION               596
+#define STRINGID_ABILITYALLOWSONLYMOVE                597
+#define STRINGID_SWAPPEDABILITIES                     598
+#define STRINGID_PASTELVEILPROTECTED                  599
+#define STRINGID_PASTELVEILENTERS                     600
+#define STRINGID_BATTLERTYPECHANGEDTO                 601
 
-#define BATTLESTRINGS_COUNT                           591
+#define BATTLESTRINGS_COUNT                           602
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -828,6 +838,7 @@
 #define B_MSG_SWITCHIN_SCREENCLEANER    12
 #define B_MSG_SWITCHIN_ASONE            13
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
+#define B_MSG_SWITCHIN_PASTEL_VEIL      15
 
 // gMentalHerbCureStringIds
 #define B_MSG_MENTALHERBCURE_INFATUATION       0

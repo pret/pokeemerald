@@ -653,7 +653,7 @@ static const u8 sText_MistyTerrainPreventsStatus[] = _("{B_DEF_NAME_WITH_PREFIX}
 static const u8 sText_GrassyTerrainHeals[] = _("{B_ATK_NAME_WITH_PREFIX} is healed\nby the grassy terrain!");
 static const u8 sText_ElectricTerrainPreventsSleep[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith electrified terrain!");
 static const u8 sText_PsychicTerrainPreventsPriority[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith psychic terrain!");
-static const u8 sText_SafetyGooglesProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is not affected\nthanks to its {B_LAST_ITEM}!");
+static const u8 sText_SafetyGogglesProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is not affected\nthanks to its {B_LAST_ITEM}!");
 static const u8 sText_FlowerVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} surrounded itself\nwith a veil of petals!");
 static const u8 sText_SweetVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} surrounded itself\nwith a veil of sweetness!");
 static const u8 sText_AromaVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is protected\nby an aromatic veil!");
@@ -692,7 +692,7 @@ static const u8 sText_PkmnsWillPerishIn3Turns[] = _("Both Pokémon will perish\n
 static const u8 sText_AbilityRaisedStatDrastically[] = _("{B_DEF_ABILITY} raised {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} drastically!");
 static const u8 sText_AsOneEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} has two Abilities!");
 static const u8 sText_CuriousMedicineEnters[] = _("{B_EFF_NAME_WITH_PREFIX}'s\nstat changes were reset!");
-static const u8 sText_CanActFaster[] = _("{B_ATK_NAME_WITH_PREFIX} can act faster,\nthanks to {B_LAST_ITEM}!");
+static const u8 sText_CanActFaster[] = _("{B_ATK_NAME_WITH_PREFIX} can act faster,\nthanks to {B_BUFF1}!");
 static const u8 sText_MicleBerryActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted the accuracy of its\nnext move using {B_LAST_ITEM}!");
 static const u8 sText_PkmnShookOffTheTaunt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} shook off\nthe taunt!");
 static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} got over\nits infatuation!");
@@ -718,9 +718,29 @@ static const u8 sText_MysteriousAirCurrent[] = _("A mysterious air current is\np
 static const u8 sText_StrongWindsDissipated[] = _("The mysterious strong winds\nhave dissipated!{PAUSE 64}");
 static const u8 sText_MysteriousAirCurrentBlowsOn[] = _("The mysterious air current\nblows on regardless!");
 static const u8 sText_AttackWeakenedByStrongWinds[] = _("The mysterious strong winds\nweakened the attack!");
+static const u8 sText_StuffCheeksCantSelect[] = _("Stuff Cheeks cannot be\nselected without a Berry!\p");
+static const u8 sText_PkmnRevertedToPrimal[] = _("{B_ATK_NAME_WITH_PREFIX}'s Primal Reversion!\nIt reverted to its primal form!");
+static const u8 sText_ButPokemonCantUseTheMove[] = _("But {B_ATK_NAME_WITH_PREFIX} can't\nuse the move!");
+static const u8 sText_ButHoopaCantUseIt[] = _("But Hoopa can't use it\nthe way it is now!");
+static const u8 sText_BrokeThroughProtection[] = _("It broke through the\n{B_DEF_NAME_WITH_PREFIX}'s protection!");
+static const u8 sText_AbilityAllowsOnlyMove[] = _("{B_ATK_ABILITY} allows the\nuse of only {B_CURRENT_MOVE}!\p");
+static const u8 sText_SwappedAbilities[] = _("{B_DEF_NAME_WITH_PREFIX} swapped Abilities\nwith its target!");
+static const u8 sText_PastelVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is protected\nby a pastel veil!");
+static const u8 sText_PastelVeilEnters[] = _("{B_DEF_NAME_WITH_PREFIX} was cured\nof its poisoning!");
+static const u8 sText_BattlerTypeChangedTo[] = _("{B_BUFF1}'s type\nchanged to {B_BUFF2}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_BATTLERTYPECHANGEDTO - 12] = sText_BattlerTypeChangedTo,
+    [STRINGID_PASTELVEILENTERS - 12] = sText_PastelVeilEnters,
+    [STRINGID_PASTELVEILPROTECTED -12] = sText_PastelVeilProtected,
+    [STRINGID_SWAPPEDABILITIES - 12] = sText_SwappedAbilities,
+    [STRINGID_ABILITYALLOWSONLYMOVE - 12] = sText_AbilityAllowsOnlyMove,
+    [STRINGID_BROKETHROUGHPROTECTION - 12] = sText_BrokeThroughProtection,
+    [STRINGID_BUTPOKEMONCANTUSETHEMOVE - 12] = sText_ButPokemonCantUseTheMove,
+    [STRINGID_BUTHOOPACANTUSEIT - 12] = sText_ButHoopaCantUseIt,
+    [STRINGID_PKMNREVERTEDTOPRIMAL - 12] = sText_PkmnRevertedToPrimal,
+    [STRINGID_STUFFCHEEKSCANTSELECT - 12] = sText_StuffCheeksCantSelect,
     [STRINGID_ATTACKWEAKENEDBSTRONGWINDS - 12] = sText_AttackWeakenedByStrongWinds,
     [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON - 12] = sText_MysteriousAirCurrentBlowsOn,
     [STRINGID_STRONGWINDSDISSIPATED - 12] = sText_StrongWindsDissipated,
@@ -780,7 +800,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_AROMAVEILPROTECTED - 12] = sText_AromaVeilProtected,
     [STRINGID_SWEETVEILPROTECTED - 12] = sText_SweetVeilProtected,
     [STRINGID_FLOWERVEILPROTECTED - 12] = sText_FlowerVeilProtected,
-    [STRINGID_SAFETYGOOGLESPROTECTED - 12] = sText_SafetyGooglesProtected,
+    [STRINGID_SAFETYGOGGLESPROTECTED - 12] = sText_SafetyGogglesProtected,
     [STRINGID_SPECTRALTHIEFSTEAL - 12] = sText_SpectralThiefSteal,
     [STRINGID_BELCHCANTSELECT - 12] = sText_BelchCantUse,
     [STRINGID_TRAINER1LOSETEXT - 12] = sText_Trainer1LoseText,
@@ -1180,7 +1200,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNTWISTEDDIMENSIONS - 12] = sText_PkmnTwistedDimensions,
     [STRINGID_POINTEDSTONESFLOAT - 12] = sText_PointedStonesFloat,
     [STRINGID_CLOAKEDINMYSTICALMOONLIGHT - 12] = sText_CloakedInMysticalMoonlight,
-    [STRINGID_TRAPPERBYSWIRLINGMAGMA - 12] = sText_TrappedBySwirlingMagma,
+    [STRINGID_TRAPPEDBYSWIRLINGMAGMA - 12] = sText_TrappedBySwirlingMagma,
     [STRINGID_VANISHEDINSTANTLY - 12] = sText_VanishedInstantly,
     [STRINGID_PROTECTEDTEAM - 12] = sText_ProtectedTeam,
     [STRINGID_SHAREDITSGUARD - 12] = sText_SharedItsGuard,
@@ -1361,6 +1381,7 @@ const u16 gSwitchInAbilityStringIds[] =
     [B_MSG_SWITCHIN_SCREENCLEANER] = STRINGID_SCREENCLEANERENTERS,
     [B_MSG_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
     [B_MSG_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
+    [B_MSG_SWITCHIN_PASTEL_VEIL] = STRINGID_PASTELVEILENTERS,
 };
 
 const u16 gMissStringIds[] =
@@ -1514,16 +1535,17 @@ const u16 gFirstTurnOfTwoStringIds[] =
     [B_MSG_TURN1_FREEZE_SHOCK]  = STRINGID_CLOAKEDINAFREEZINGLIGHT,
 };
 
-// Index copied from move's index in gTrappingMoves
+// Index copied from move's index in sTrappingMoves
 const u16 gWrappedStringIds[] =
 {
-    STRINGID_PKMNSQUEEZEDBYBIND,   // MOVE_BIND
-    STRINGID_PKMNWRAPPEDBY,        // MOVE_WRAP
-    STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_FIRE_SPIN
-    STRINGID_PKMNCLAMPED,          // MOVE_CLAMP
-    STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_WHIRLPOOL
-    STRINGID_PKMNTRAPPEDBYSANDTOMB,// MOVE_SAND_TOMB
-    STRINGID_INFESTATION,          // MOVE_INFESTATION
+    STRINGID_PKMNSQUEEZEDBYBIND,     // MOVE_BIND
+    STRINGID_PKMNWRAPPEDBY,          // MOVE_WRAP
+    STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_FIRE_SPIN
+    STRINGID_PKMNCLAMPED,            // MOVE_CLAMP
+    STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_WHIRLPOOL
+    STRINGID_PKMNTRAPPEDBYSANDTOMB,  // MOVE_SAND_TOMB
+    STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
+    STRINGID_INFESTATION,            // MOVE_INFESTATION
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1732,11 +1754,6 @@ const u16 gCaughtMonStringIds[] =
     [B_MSG_SENT_LANETTES_PC]  = STRINGID_PKMNTRANSFERREDLANETTESPC,
     [B_MSG_SOMEONES_BOX_FULL] = STRINGID_PKMNBOXSOMEONESPCFULL,
     [B_MSG_LANETTES_BOX_FULL] = STRINGID_PKMNBOXLANETTESPCFULL,
-};
-
-const u16 gTrappingMoves[] =
-{
-    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_INFESTATION, 0xFFFF
 };
 
 const u16 gRoomsStringIds[] =
