@@ -14026,7 +14026,50 @@ Move_METEOR_BEAM::
 	end @to do:
 
 Move_SHELL_SIDE_ARM::
-	end @to do:
+	launchtask AnimTask_ShellSideArm 0x5 0x0
+	jumpargeq 0x0, TRUE, Move_SHELL_SIDE_ARM_PHYSICAL
+	jumpargeq 0x0, FALSE, Move_SHELL_SIDE_ARM_SPECIAL
+Move_SHELL_SIDE_ARM_PHYSICAL: @ Modified Body Slam, placeholder
+	loadspritegfx ANIM_TAG_IMPACT
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT, 0, 6, 6, RGB_MAGENTA
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
+	waitforvisualfinish
+	delay 11
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 26, 0, 0, 5
+	delay 6
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 4, -10, 0, ANIM_TARGET, 0
+	loopsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET, 10, 2
+	delay 1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -28, 0, 0, 3
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
+	waitforvisualfinish
+	delay 10
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 6
+	delay 5
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 6
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+Move_SHELL_SIDE_ARM_SPECIAL: @ Modified Snipe Shot, placeholder
+	loadspritegfx ANIM_TAG_IMPACT_2
+	loadspritegfx ANIM_TAG_LEER
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT_2, 0, 6, 6, RGB_MAGENTA
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_LEER, 0, 6, 6, RGB_MAGENTA
+	launchtemplate gLeerSpriteTemplate 0x82, 2 0x18 -12
+	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 0x20
+	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
+	launchtemplate gSnipeShotBallTemplate 0x82, 3, 0 0 24,
+	waitforvisualfinish
+	launchtask AnimTask_ShakeMon2 2 5 1 4 0 8, 1
+	waitforvisualfinish
+	end
 
 Move_MISTY_EXPLOSION::
 	end @to do:

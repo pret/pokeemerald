@@ -393,6 +393,37 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPlasmaFists             @ EFFECT_PLASMA_FISTS
 	.4byte BattleScript_EffectHyperspaceFury          @ EFFECT_HYPERSPACE_FURY
 	.4byte BattleScript_EffectAuraWheel               @ EFFECT_AURA_WHEEL
+	.4byte BattleScript_EffectPhotonGeyser            @ EFFECT_PHOTON_GEYSER
+	.4byte BattleScript_EffectShellSideArm            @ EFFECT_SHELL_SIDE_ARM
+
+BattleScript_EffectShellSideArm:
+	shellsidearmcheck
+	setmoveeffect MOVE_EFFECT_POISON
+	goto BattleScript_EffectHit
+
+BattleScript_EffectPhotonGeyser:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	photongeysercheck
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO, BattleScript_EffectSpeedUpHit

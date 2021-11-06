@@ -1883,6 +1883,14 @@
 	.4byte \ptr
 	.endm
 
+	.macro photongeysercheck
+	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
+	.endm
+
+	.macro shellsidearmcheck
+	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
