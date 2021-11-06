@@ -38,6 +38,7 @@ bool32 CanCamouflage(u8 battlerId);
 u16 GetNaturePowerMove(void);
 u16 GetSecretPowerMoveEffect(void);
 void StealTargetItem(u8 battlerStealer, u8 battlerItem);
+u8 GetCatchingBattler(void);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];

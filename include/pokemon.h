@@ -216,7 +216,7 @@ struct BattleMove
     u8 accuracy;
     u8 pp;
     u8 secondaryEffectChance;
-    u8 target;
+    u16 target;
     s8 priority;
     u32 flags;
     u8 split;

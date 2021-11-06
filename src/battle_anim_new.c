@@ -15,6 +15,7 @@
 #include "battle_controllers.h"
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
+#include "constants/items.h"
 
 //// function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
@@ -93,6 +94,40 @@ const struct SpriteTemplate gPowerTrickSpriteTemplate =
 
 
 //// GEN 5
+//shell smash
+const struct SpriteTemplate gShellSmashLeftShellSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_SHELL_RIGHT,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gShellSmashRightShellSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_SHELL_LEFT,
+    .paletteTag = ANIM_TAG_SHELL_LEFT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gShellSmashPurpleRocksSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_FlyingRock,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRockFragment
+};
+
 //wide guard
 const struct SpriteTemplate gWideGuardBlueConversionTemplate =
 {
@@ -5018,5 +5053,23 @@ void AnimTask_TechnoBlast(u8 taskId)
         gBattleAnimArgs[0] = ItemId_GetSecondaryId(gBattleMons[gBattleAnimAttacker].item);
     else
         gBattleAnimArgs[0] = 0;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_PrimalReversion(u8 taskId)
+{
+    if (ItemId_GetId(gBattleMons[gBattleAnimAttacker].item) == ITEM_RED_ORB)
+        gBattleAnimArgs[0] = ItemId_GetId(gBattleMons[gBattleAnimAttacker].item);
+    else
+        gBattleAnimArgs[0] = 0;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_ShellSideArm(u8 taskId)
+{
+    if (gSwapDamageCategory)
+        gBattleAnimArgs[0] = TRUE;
+    else
+        gBattleAnimArgs[0] = FALSE;
     DestroyAnimVisualTask(taskId);
 }
