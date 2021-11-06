@@ -154,6 +154,7 @@
 #define B_GLARE_GHOST               GEN_7 // In Gen4+, Glare can hit Ghost-type Pokémon normally.
 #define B_SKILL_SWAP                GEN_7 // In Gen4+, Skill Swap triggers switch-in abilities after use.
 #define B_SECRET_POWER_EFFECT       GEN_7 // Secret Power's effects change depending on the generation. See GetSecretPowerMoveEffect.
+#define B_SECRET_POWER_ANIMATION    GEN_7 // Secret Power's animations change depending on the generation.
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_7 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.

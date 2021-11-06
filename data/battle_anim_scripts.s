@@ -5,6 +5,7 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/items.h"
+#include "constants/battle_config.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
 	.include "constants/constants.inc"
@@ -23368,7 +23369,35 @@ Move_SECRET_POWER:
 	jumpargeq 0, BATTLE_TERRAIN_MOUNTAIN,       Move_ROCK_THROW
 	jumpargeq 0, BATTLE_TERRAIN_CAVE,           Move_BITE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_STRENGTH
+	jumpargeq 0, BATTLE_TERRAIN_SOARING,        Move_GUST
+	jumpargeq 0, BATTLE_TERRAIN_SKY_PILLAR,     Move_GUST
+	jumpargeq 0, BATTLE_TERRAIN_BURIAL_GROUND,  Move_SHADOW_SNEAK
+	jumpargeq 0, BATTLE_TERRAIN_PUDDLE,         Move_MUD_SHOT
+	jumpargeq 0, BATTLE_TERRAIN_MARSH,          Move_MUD_SHOT
+	jumpargeq 0, BATTLE_TERRAIN_SWAMP,          Move_MUD_SHOT
+.if B_SECRET_POWER_ANIMATION >= GEN_7
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_ICE_SHARD
+.else
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
+.endif
+	jumpargeq 0, BATTLE_TERRAIN_ICE,            Move_ICE_SHARD
+	jumpargeq 0, BATTLE_TERRAIN_VOLCANO,        Move_INCINERATE
+	jumpargeq 0, BATTLE_TERRAIN_DISTORTION_WORLD, Move_POUND
+	jumpargeq 0, BATTLE_TERRAIN_SPACE,          Move_SWIFT
+	jumpargeq 0, BATTLE_TERRAIN_ULTRA_SPACE,    Move_PSYWAVE
+.if B_SECRET_POWER_ANIMATION >= GEN_7
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_SPIT_UP
+	goto Move_SPIT_UP
+.elseif B_SECRET_POWER_ANIMATION == GEN_6
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
+	goto Move_BODY_SLAM
+.elseif B_SECRET_POWER_ANIMATION == GEN_5 || B_SECRET_POWER_ANIMATION == GEN_4
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
+	goto Move_MUD_SLAP
+.else
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_STRENGTH
 	goto Move_SLAM
+.endif
 
 Move_TWISTER:
 	loadspritegfx ANIM_TAG_LEAF
