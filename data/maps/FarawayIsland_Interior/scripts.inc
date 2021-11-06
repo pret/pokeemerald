@@ -73,7 +73,7 @@ FarawayIsland_Interior_Movement_MewMoveAndHide:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	set_invisible
 	step_end
 

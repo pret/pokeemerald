@@ -247,7 +247,7 @@ BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor:
@@ -289,7 +289,7 @@ BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_BattleArenaLobby_EventScript_ShowResults::

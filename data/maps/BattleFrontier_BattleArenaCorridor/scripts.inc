@@ -78,12 +78,12 @@ BattleFrontier_BattleArenaCorridor_Movement_AttendantWalkToDoor:
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Movement_AttendantFacePlayer:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay:
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Text_PleaseStepIn:

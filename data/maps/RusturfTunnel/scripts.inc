@@ -100,7 +100,7 @@ RusturfTunnel_EventScript_BoyfriendApproachWanda2::
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerWatchBoyfriend
 	applymovement LOCALID_WANDAS_BF, RusturfTunnel_Movement_BoyfriendApproachWanda
 	waitmovement 0
-	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -108,14 +108,14 @@ RusturfTunnel_EventScript_BoyfriendApproachWanda3::
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerWatchBoyfriend
 	applymovement LOCALID_WANDAS_BF, RusturfTunnel_Movement_BoyfriendApproachWanda
 	waitmovement 0
-	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_FaceWandasBoyfriend1::
-	applymovement LOCALID_WANDAS_BF, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_WANDAS_BF, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -184,44 +184,44 @@ RusturfTunnel_Movement_WandaExit:
 
 RusturfTunnel_Movement_PlayerWatchWandaExit:
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_Unused1:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_Unused2:
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_Unused3:
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_PlayerWatchBoyfriend1:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_PlayerWatchBoyfriend:
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 RusturfTunnel_Movement_BoyfriendFaceRight:
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_WandasBoyfriendExit1:
@@ -269,7 +269,7 @@ RusturfTunnel_Movement_BoyfriendApproachWanda:
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_fast_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 RusturfTunnel_EventScript_TunnelBlockagePos1::
@@ -362,12 +362,12 @@ RusturfTunnel_Movement_PushPlayerAsideForGrunt:
 	lock_facing_direction
 	walk_up
 	unlock_facing_direction
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 RusturfTunnel_Movement_PlayerMoveAsideForBriney:
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 RusturfTunnel_Movement_GruntEscape:
@@ -410,7 +410,7 @@ RusturfTunnel_Movement_PlayerWatchBrineyExit:
 	delay_16
 	delay_8
 	delay_4
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 RusturfTunnel_Movement_BrineyApproachPeeko2:

@@ -786,7 +786,7 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen::
 
 EventScript_UnusedBoardFerry::
 	delay 30
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	showobjectat OBJ_EVENT_ID_PLAYER, 0
 	delay 30

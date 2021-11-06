@@ -145,7 +145,7 @@ SouthernIsland_Interior_Movement_CameraPanDown:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 SouthernIsland_Interior_Movement_LatiApproach:

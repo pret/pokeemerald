@@ -94,7 +94,7 @@ SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter:
@@ -102,6 +102,6 @@ SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 

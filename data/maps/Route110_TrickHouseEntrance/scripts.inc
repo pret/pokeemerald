@@ -343,7 +343,7 @@ Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges, MSGBOX_DEFAULT
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	releaseall
 	end
@@ -441,7 +441,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
 Route110_TrickHouseEntrance_EventScript_GotReward::
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 3
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	releaseall
 	end

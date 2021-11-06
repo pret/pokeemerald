@@ -72,7 +72,7 @@ BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination::
 
 BattleFrontier_OutsideWest_EventScript_BoardFerry::
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	hideobjectat LOCALID_FERRY_ATTENDANT, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
@@ -137,16 +137,16 @@ BattleFrontier_OutsideWest_EventScript_Maniac2::
 	end
 
 BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk::
-	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons, MSGBOX_DEFAULT
-	applymovement LOCALID_MANIAC_2, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_MANIAC_2, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons, MSGBOX_DEFAULT
 	closemessage
 	delay 25
-	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFastestUp
-	applymovement LOCALID_MANIAC_2, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_MANIAC_2, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	release
 	end
@@ -168,7 +168,7 @@ BattleFrontier_OutsideWest_EventScript_Camper::
 	end
 
 BattleFrontier_OutsideWest_EventScript_CamperFaceFactory::
-	applymovement LOCALID_CAMPER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_CAMPER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -213,23 +213,23 @@ BattleFrontier_OutsideWest_EventScript_GirlShudderEast::
 	return
 
 BattleFrontier_OutsideWest_Movement_GirlShudderNorth:
-	walk_in_place_fastest_down
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_OutsideWest_Movement_GirlShudderSouth:
-	walk_in_place_fastest_up
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_OutsideWest_Movement_GirlShudderWest:
-	walk_in_place_fastest_right
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_OutsideWest_Movement_GirlShudderEast:
-	walk_in_place_fastest_left
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_OutsideWest_EventScript_Woman2::

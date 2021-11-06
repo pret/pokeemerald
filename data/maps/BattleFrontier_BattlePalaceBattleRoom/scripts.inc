@@ -252,8 +252,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserSilver::
 	frontier_givesymbol
 	applymovement LOCALID_OPPONENT, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SpenserAwaitNextTime, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
@@ -287,8 +287,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserGold::
 	frontier_givesymbol
 	applymovement LOCALID_OPPONENT, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SpenserComeSeeMeAgain, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
@@ -435,7 +435,7 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_DusclopsEnter:
 	walk_down
 	walk_right
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_AzurillEnter:
@@ -447,7 +447,7 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_AzurillEnter:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	step_end
 

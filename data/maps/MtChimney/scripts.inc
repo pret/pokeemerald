@@ -67,7 +67,7 @@ MtChimney_EventScript_Maxie::
 	call_if_eq MtChimney_EventScript_ArchieApproachPlayerEast
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq MtChimney_EventScript_ArchieApproachPlayerNorth
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox MtChimney_Text_ArchieThankYou, MSGBOX_DEFAULT
 	closemessage
@@ -323,7 +323,7 @@ MtChimney_Movement_Unused8:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MtChimney_Movement_Unused9:
@@ -359,7 +359,7 @@ MtChimney_Movement_Unused11:
 MtChimney_Movement_Unused12:
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	walk_down
 	walk_down
@@ -375,7 +375,7 @@ MtChimney_Movement_Unused13:
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	walk_down
 	walk_down
@@ -390,7 +390,7 @@ MtChimney_Movement_Unused14:
 
 MtChimney_Movement_Unused15:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	step_end
 
