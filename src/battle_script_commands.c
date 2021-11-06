@@ -7328,19 +7328,19 @@ static void HandleTerrainMove(u32 moveEffect)
     switch (moveEffect)
     {
     case EFFECT_MISTY_TERRAIN:
-        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.mistyTerrainTimer;
+        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         break;
     case EFFECT_GRASSY_TERRAIN:
-        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.grassyTerrainTimer;
+        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         break;
     case EFFECT_ELECTRIC_TERRAIN:
-        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.electricTerrainTimer;
+        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         break;
     case EFFECT_PSYCHIC_TERRAIN:
-        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.psychicTerrainTimer;
+        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
         break;
     }
@@ -8937,22 +8937,19 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;   // can heal
         return;
     case VARIOUS_REMOVE_TERRAIN:
+        gFieldTimers.terrainTimer = 0;
         switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         {
         case STATUS_FIELD_MISTY_TERRAIN:
-            gFieldTimers.mistyTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             break;
         case STATUS_FIELD_GRASSY_TERRAIN:
-            gFieldTimers.grassyTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
             break;
         case STATUS_FIELD_ELECTRIC_TERRAIN:
-            gFieldTimers.electricTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             break;
         case STATUS_FIELD_PSYCHIC_TERRAIN:
-            gFieldTimers.psychicTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 3;
             break;
         default:
