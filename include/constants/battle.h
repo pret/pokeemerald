@@ -388,6 +388,8 @@
 #define BATTLE_TERRAIN_SPACE            20
 #define BATTLE_TERRAIN_ULTRA_SPACE      21
 
+#define BATTLE_TERRAIN_COUNT            22
+
 #define B_WAIT_TIME_LONG  64
 #define B_WAIT_TIME_MED   48
 #define B_WAIT_TIME_SHORT 32
