@@ -156,9 +156,13 @@ void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 void DoBurmyFormChange(u32 monId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 u16 GetUsedHeldItem(u8 battler);
+bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
+void TryToApplyMimicry(u8 battlerId, bool8 various);
+void TryToRevertMimicry(void);
+void RestoreBattlerOriginalTypes(u8 battlerId);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 
-// ability checks
+// Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
 bool32 IsRolePlayBannedAbility(u16 ability);
 bool32 IsSkillSwapBannedAbility(u16 ability);
@@ -168,7 +172,7 @@ bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
 bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability);
 
 bool32 CanSleep(u8 battlerId);
-bool32 CanBePoisoned(u8 battlerId);
+bool32 CanBePoisoned(u8 battlerAttacker, u8 battlerTarget);
 bool32 CanBeBurned(u8 battlerId);
 bool32 CanBeParalyzed(u8 battlerId);
 bool32 CanBeFrozen(u8 battlerId);

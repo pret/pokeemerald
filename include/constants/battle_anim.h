@@ -462,7 +462,7 @@
 #define BG_WATER_2                              41
 #define BG_POISON                               42
 #define BG_AEROBLAST                            43
-#define BG_HIGH_SPEED                           44  //hurricane, close combat
+#define BG_HURRICANE                            44  
 #define BG_ELECTRIC_TERRAIN                     45
 #define BG_GRASSY_TERRAIN                       46
 #define BG_MISTY_TERRAIN                        47
@@ -565,7 +565,8 @@
 #define TRAP_ANIM_WHIRLPOOL 2
 #define TRAP_ANIM_CLAMP 3
 #define TRAP_ANIM_SAND_TOMB 4
-#define TRAP_ANIM_INFESTATION 5
+#define TRAP_ANIM_MAGMA_STORM 5
+#define TRAP_ANIM_INFESTATION 6
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0

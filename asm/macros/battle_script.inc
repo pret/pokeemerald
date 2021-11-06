@@ -1838,6 +1838,10 @@
 	.macro trytoclearprimalweather
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
+	
+	.macro setattackertostickywebuser
+	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
+	.endm
 
 	.macro getrototillertargets ptr:req
 	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS
@@ -1861,11 +1865,30 @@
 	.macro applyplasmafists
 	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
 	.endm
+	
+	.macro jumpifweatheraffected battler:req, weather:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_WEATHER_AFFECTED
+	.4byte \weather
+	.4byte \ptr
+	.endm
 
 	.macro jumpifspecies battler:req, species:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_SPECIES
 	.2byte \species
 	.4byte \ptr
+	.endm
+
+	.macro trytoapplymimicry battler:req, ptr:req
+	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
+	.4byte \ptr
+	.endm
+
+	.macro photongeysercheck
+	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
+	.endm
+
+	.macro shellsidearmcheck
+	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
 @ helpful macros
@@ -1987,10 +2010,9 @@
 	goto \jumpptr
 	.endm
 
-	.macro jumpifleafguard jumpptr:req
-	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, 1f
-	jumpifability BS_TARGET, ABILITY_LEAF_GUARD, \jumpptr
-	1:
+	.macro jumpifleafguardprotected battler:req, jumpptr:req
+	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
+	.4byte \jumpptr
 	.endm
 
 	.macro jumpifsafeguard jumpptr:req
