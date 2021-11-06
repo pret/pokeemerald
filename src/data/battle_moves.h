@@ -8614,7 +8614,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RELIC_SONG] =
     {
-        .effect = EFFECT_SLEEP_HIT,
+        .effect = EFFECT_RELIC_SONG,
         .power = 75,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -8624,6 +8624,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
+        .argument = STATUS1_SLEEP,
     },
 
     [MOVE_SECRET_SWORD] =

@@ -4305,7 +4305,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (!IsBattlerGrounded(battlerDef))
             score += 3;
         break;
-    case EFFECT_SLEEP_HIT:  // Relic Song
+    case EFFECT_RELIC_SONG:
         #if (defined SPECIES_MELOETTA && defined SPECIES_MELOETTA_PIROUETTE)
         if (AI_DATA->atkSpecies == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
             score += 3; // Change to pirouette if can do more damage

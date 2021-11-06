@@ -9062,6 +9062,7 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
         // Changed Form ID             Default Form ID               Should change on switch
         {SPECIES_MIMIKYU_BUSTED,       SPECIES_MIMIKYU,              FALSE},
         {SPECIES_GRENINJA_ASH,         SPECIES_GRENINJA_BATTLE_BOND, FALSE},
+        {SPECIES_MELOETTA_PIROUETTE,   SPECIES_MELOETTA,             FALSE},
         {SPECIES_AEGISLASH_BLADE,      SPECIES_AEGISLASH,            TRUE},
         {SPECIES_DARMANITAN_ZEN_MODE,  SPECIES_DARMANITAN,           TRUE},
         {SPECIES_MINIOR,               SPECIES_MINIOR_CORE_RED,      TRUE},
