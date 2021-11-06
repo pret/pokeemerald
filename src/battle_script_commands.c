@@ -12483,7 +12483,11 @@ u16 GetSecretPowerMoveEffect(void)
         switch (gBattleTerrain)
         {
         case BATTLE_TERRAIN_GRASS:
-            moveEffect = MOVE_EFFECT_SLEEP;
+            #if B_SECRET_POWER_EFFECT >= GEN_4
+                moveEffect = MOVE_EFFECT_SLEEP;
+            #else
+                moveEffect = MOVE_EFFECT_POISON;
+            #endif
             break;
         case BATTLE_TERRAIN_LONG_GRASS:
             moveEffect = MOVE_EFFECT_SLEEP;
@@ -12492,19 +12496,58 @@ u16 GetSecretPowerMoveEffect(void)
             moveEffect = MOVE_EFFECT_ACC_MINUS_1;
             break;
         case BATTLE_TERRAIN_UNDERWATER:
-            moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            #if B_SECRET_POWER_EFFECT >= GEN_6
+                moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            #else
+                moveEffect = MOVE_EFFECT_DEF_MINUS_1;
+            #endif
             break;
         case BATTLE_TERRAIN_WATER:
             moveEffect = MOVE_EFFECT_ATK_MINUS_1;
             break;
         case BATTLE_TERRAIN_POND:
-            moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            #if B_SECRET_POWER_EFFECT >= GEN_4
+                moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            #else
+                moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            #endif
             break;
         case BATTLE_TERRAIN_MOUNTAIN:
-            moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+            #if B_SECRET_POWER_EFFECT >= GEN_5
+                moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+            #elif B_SECRET_POWER_EFFECT == GEN_4
+                moveEffect = MOVE_EFFECT_FLINCH;
+            #else
+                moveEffect = MOVE_EFFECT_CONFUSION;
+            #endif
             break;
         case BATTLE_TERRAIN_CAVE:
+        case BATTLE_TERRAIN_BURIAL_GROUND:
+        case BATTLE_TERRAIN_SPACE:
             moveEffect = MOVE_EFFECT_FLINCH;
+            break;
+        case BATTLE_TERRAIN_SOARING:
+        case BATTLE_TERRAIN_SKY_PILLAR:
+        case BATTLE_TERRAIN_MARSH:
+        case BATTLE_TERRAIN_SWAMP:
+            moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            break;
+        case BATTLE_TERRAIN_PUDDLE:
+            #if B_SECRET_POWER_EFFECT >= GEN_5
+                moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            #else
+                moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+            #endif
+            break;
+        case BATTLE_TERRAIN_SNOW:
+        case BATTLE_TERRAIN_ICE:
+            moveEffect = MOVE_EFFECT_FREEZE;
+            break;
+        case BATTLE_TERRAIN_VOLCANO:
+            moveEffect = MOVE_EFFECT_BURN;
+            break;
+        case BATTLE_TERRAIN_ULTRA_SPACE:
+            moveEffect = MOVE_EFFECT_DEF_MINUS_1;
             break;
         default:
             moveEffect = MOVE_EFFECT_PARALYSIS;
