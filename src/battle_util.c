@@ -4635,6 +4635,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     effect++;
                 }
                 break;
+            case ABILITY_HUNGER_SWITCH:
+                if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
+                {
+                    if (gBattleMons[battler].species == SPECIES_MORPEKO)
+                    {
+                        gBattleMons[battler].species = SPECIES_MORPEKO_HANGRY;
+                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
+                    }
+                    else if (gBattleMons[battler].species == SPECIES_MORPEKO_HANGRY)
+                    {
+                        gBattleMons[battler].species = SPECIES_MORPEKO;
+                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
+                    }
+                    effect++;
+                }
+                break;
             }
         }
         break;
@@ -4900,7 +4916,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerAttacker)
              && TARGET_TURN_DAMAGED
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+             && (IsMoveMakingContact(move, gBattlerAttacker)))
             {
                 switch (gBattleMons[gBattlerAttacker].ability)
                 {
@@ -5119,7 +5135,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && (IsMoveMakingContact(move, gBattlerAttacker))
              && TARGET_TURN_DAMAGED
              && CanBeBurned(gBattlerAttacker)
              && (Random() % 3) == 0)
@@ -5135,7 +5151,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && (IsMoveMakingContact(move, gBattlerAttacker))
              && TARGET_TURN_DAMAGED
              && gBattleMons[gBattlerTarget].hp != 0
              && (Random() % 3) == 0
@@ -5211,7 +5227,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && (IsMoveMakingContact(move, gBattlerAttacker))
              && !(gStatuses3[gBattlerAttacker] & STATUS3_PERISH_SONG))
             {
                 if (!(gStatuses3[battler] & STATUS3_PERISH_SONG))
@@ -7395,13 +7411,24 @@ u32 GetBattlerHoldEffectParam(u8 battlerId)
 bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
 {
     if (!(gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
-        return FALSE;
+    {
+        if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gSwapDamageCategory)
+            return TRUE;
+        else
+            return FALSE;
+    }
     else if (GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH)
+    {
         return FALSE;
+    }
     else if (GetBattlerHoldEffect(battlerAtk, TRUE) == HOLD_EFFECT_PROTECTIVE_PADS)
+    {
         return FALSE;
+    }
     else
+    {
         return TRUE;
+    }
 }
 
 bool32 IsBattlerGrounded(u8 battlerId)
@@ -7909,7 +7936,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
            MulModifier(&modifier, UQ_4_12(1.3));
         break;
     case ABILITY_TOUGH_CLAWS:
-        if (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+        if (IsMoveMakingContact(move, battlerAtk))
            MulModifier(&modifier, UQ_4_12(1.3));
         break;
     case ABILITY_STRONG_JAW:
@@ -8059,7 +8086,11 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, holdEffectModifier);
         break;
     case HOLD_EFFECT_SOUL_DEW:
+        #if B_SOUL_DEW_BOOST >= GEN_7
+        if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && (moveType == TYPE_PSYCHIC || moveType == TYPE_DRAGON))
+        #else
         if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER))
+        #endif
             MulModifier(&modifier, holdEffectModifier);
         break;
     case HOLD_EFFECT_GEMS:
@@ -8472,6 +8503,14 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         if (!usesDefStat)
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
+#if B_SOUL_DEW_BOOST <= GEN_6
+    case HOLD_EFFECT_SOUL_DEW:
+        if ((gBattleMons[battlerDef].species == SPECIES_LATIAS || gBattleMons[battlerDef].species == SPECIES_LATIOS)
+         && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+         && !usesDefStat)
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+#endif
     }
 
     // sandstorm sp.def boost for rock types
@@ -9034,6 +9073,7 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
         // Changed Form ID             Default Form ID               Should change on switch
         {SPECIES_MIMIKYU_BUSTED,       SPECIES_MIMIKYU,              FALSE},
         {SPECIES_GRENINJA_ASH,         SPECIES_GRENINJA_BATTLE_BOND, FALSE},
+        {SPECIES_MELOETTA_PIROUETTE,   SPECIES_MELOETTA,             FALSE},
         {SPECIES_AEGISLASH_BLADE,      SPECIES_AEGISLASH,            TRUE},
         {SPECIES_DARMANITAN_ZEN_MODE,  SPECIES_DARMANITAN,           TRUE},
         {SPECIES_MINIOR,               SPECIES_MINIOR_CORE_RED,      TRUE},
@@ -9046,6 +9086,7 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
         {SPECIES_WISHIWASHI_SCHOOL,    SPECIES_WISHIWASHI,           TRUE},
         {SPECIES_CRAMORANT_GORGING,    SPECIES_CRAMORANT,            TRUE},
         {SPECIES_CRAMORANT_GULPING,    SPECIES_CRAMORANT,            TRUE},
+        {SPECIES_MORPEKO_HANGRY,       SPECIES_MORPEKO,              TRUE},
     };
 
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
@@ -9191,7 +9232,9 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
 
 u8 GetBattleMoveSplit(u32 moveId)
 {
-    if (IS_MOVE_STATUS(moveId) || B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
+    if (gSwapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+        return SPLIT_PHYSICAL;
+    else if (IS_MOVE_STATUS(moveId) || B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
         return gBattleMoves[moveId].split;
     else if (gBattleMoves[moveId].type < TYPE_MYSTERY)
         return SPLIT_PHYSICAL;

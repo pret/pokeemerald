@@ -578,6 +578,21 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
             switch (AI_DATA->defAbility)
             {
+            case ABILITY_MAGIC_GUARD:
+                switch (moveEffect)
+                {
+                case EFFECT_POISON:
+                case EFFECT_WILL_O_WISP:
+                case EFFECT_TOXIC:
+                case EFFECT_LEECH_SEED:
+                    score -= 5;
+                    break;
+                case EFFECT_CURSE:
+                    if (IS_BATTLER_OF_TYPE(battlerAtk, TYPE_GHOST)) // Don't use Curse if you're a ghost type vs a Magic Guard user, they'll take no damage.
+                        score -= 5;
+                    break;
+                }
+                break;
             case ABILITY_VOLT_ABSORB:
             case ABILITY_MOTOR_DRIVE:
             case ABILITY_LIGHTNING_ROD:
@@ -2949,7 +2964,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
     }
     
-    // ability checks
+    // attacker ability checks
     switch (AI_DATA->atkAbility)
     {
     case ABILITY_MOXIE:
@@ -2958,21 +2973,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
             if (CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
                 score += 8; // prioritize killing target for stat boost
-        }
-        break;
-    case ABILITY_MAGIC_GUARD:
-        switch (moveEffect)
-        {
-        case EFFECT_POISON:
-        case EFFECT_WILL_O_WISP:
-        case EFFECT_TOXIC:
-        case EFFECT_LEECH_SEED:
-            score -= 5;
-            break;
-        case EFFECT_CURSE:
-            if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
-                score -= 5;
-            break;
         }
         break;
     } // ability checks    
@@ -3999,7 +3999,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 2;
             break;
         case HOLD_EFFECT_TOXIC_ORB:
-            if (!ShouldPoisonSelf(battlerAtk, AI_DATA->atkAbility) && AI_CanBePoisoned(battlerDef, AI_DATA->defAbility))
+            if (!ShouldPoisonSelf(battlerAtk, AI_DATA->atkAbility))
                 score += 2;
             break;
         case HOLD_EFFECT_FLAME_ORB:
@@ -4305,7 +4305,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (!IsBattlerGrounded(battlerDef))
             score += 3;
         break;
-    case EFFECT_SLEEP_HIT:  // Relic Song
+    case EFFECT_RELIC_SONG:
         #if (defined SPECIES_MELOETTA && defined SPECIES_MELOETTA_PIROUETTE)
         if (AI_DATA->atkSpecies == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
             score += 3; // Change to pirouette if can do more damage

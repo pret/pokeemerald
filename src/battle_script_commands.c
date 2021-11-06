@@ -279,6 +279,11 @@ static const s32 sExperienceScalingFactors[] =
     159767,
 };
 
+static const u16 sTrappingMoves[] =
+{
+    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, 0xFFFF
+};
+
 #define STAT_CHANGE_WORKED      0
 #define STAT_CHANGE_DIDNT_WORK  1
 
@@ -1499,7 +1504,7 @@ static void Cmd_attackcanceler(void)
      && ((!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))
      && gBattleMoves[gCurrentMove].effect != EFFECT_SUCKER_PUNCH)
     {
-        if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
+        if (IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
             gProtectStructs[gBattlerAttacker].touchedProtectLike = TRUE;
         CancelMultiTurnMoves(gBattlerAttacker);
         gMoveResultFlags |= MOVE_RESULT_MISSED;
@@ -2978,9 +2983,9 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
                     for (gBattleCommunication[MULTISTRING_CHOOSER] = 0; ; gBattleCommunication[MULTISTRING_CHOOSER]++)
                     {
-                        if (gBattleCommunication[MULTISTRING_CHOOSER] > 5)
+                        if (gBattleCommunication[MULTISTRING_CHOOSER] > ARRAY_COUNT(sTrappingMoves) - 1)
                             break;
-                        if (gTrappingMoves[gBattleCommunication[MULTISTRING_CHOOSER]] == gCurrentMove)
+                        if (sTrappingMoves[gBattleCommunication[MULTISTRING_CHOOSER]] == gCurrentMove)
                             break;
                     }
                 }
@@ -3407,6 +3412,21 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectBugBite;
+                }
+                break;
+            case MOVE_EFFECT_RELIC_SONG:
+                if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE)
+                {
+                    if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA)
+                    {
+                        gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
+                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
+                    }
+                    else if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE)
+                    {
+                        gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA;
+                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
+                    }
                 }
                 break;
             }
@@ -8297,6 +8317,9 @@ static void Cmd_various(void)
     case VARIOUS_ARGUMENT_STATUS_EFFECT:
         switch (gBattleMoves[gCurrentMove].argument)
         {
+        case STATUS1_SLEEP:
+            gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
+            break;
         case STATUS1_BURN:
             gBattleScripting.moveEffect = MOVE_EFFECT_BURN;
             break;
@@ -9009,6 +9032,61 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 9;
         return;
+    case VARIOUS_PHOTON_GEYSER_CHECK:
+    {
+        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
+        u8 attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
+
+        gSwapDamageCategory = FALSE;
+
+        attackerAtkStat *= gStatStageRatios[attackerAtkStage][0];
+        attackerAtkStat /= gStatStageRatios[attackerAtkStage][1];
+
+        attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
+        attackerSpAtkStat *= gStatStageRatios[attackerAtkStage][0];
+        attackerSpAtkStat /= gStatStageRatios[attackerAtkStage][1];
+
+        if (attackerAtkStat > attackerSpAtkStat)
+            gSwapDamageCategory = TRUE;
+        break;
+    }
+    case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
+    {
+        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
+        u32 targetDefStat = gBattleMons[gBattlerTarget].defense;
+        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
+        u32 targetSpDefStat = gBattleMons[gBattlerTarget].spDefense;
+        u8 statStage;
+        u32 physical;
+        u32 special;
+
+        gSwapDamageCategory = FALSE;
+
+        statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
+        attackerAtkStat *= gStatStageRatios[statStage][0];
+        attackerAtkStat /= gStatStageRatios[statStage][1];
+
+        statStage = gBattleMons[gBattlerTarget].statStages[STAT_DEF];
+        targetDefStat *= gStatStageRatios[statStage][0];
+        targetDefStat /= gStatStageRatios[statStage][1];
+
+        physical = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerAtkStat) / targetDefStat) / 50);
+
+        statStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
+        attackerSpAtkStat *= gStatStageRatios[statStage][0];
+        attackerSpAtkStat /= gStatStageRatios[statStage][1];
+
+        statStage = gBattleMons[gBattlerTarget].statStages[STAT_SPDEF];
+        targetSpDefStat *= gStatStageRatios[statStage][0];
+        targetSpDefStat /= gStatStageRatios[statStage][1];
+
+        special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerSpAtkStat) / targetSpDefStat) / 50);
+
+        if (((physical > special) || (physical == special && (Random() % 2) == 0)))
+            gSwapDamageCategory = TRUE;
+        break;
+    }
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:
         if (IsLeafGuardProtected(gActiveBattler))
         {
@@ -13343,4 +13421,3 @@ static bool32 CriticalCapture(u32 odds)
         return FALSE;
     #endif
 }
-

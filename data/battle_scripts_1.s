@@ -367,7 +367,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectGeomancy                @ EFFECT_GEOMANCY
 	.4byte BattleScript_EffectFairyLock               @ EFFECT_FAIRY_LOCK
 	.4byte BattleScript_EffectAllySwitch              @ EFFECT_ALLY_SWITCH
-	.4byte BattleScript_EffectSleepHit                @ EFFECT_SLEEP_HIT
+	.4byte BattleScript_EffectRelicSong               @ EFFECT_RELIC_SONG
 	.4byte BattleScript_EffectAttackerDefenseDownHit  @ EFFECT_ATTACKER_DEFENSE_DOWN_HIT
 	.4byte BattleScript_EffectHit                     @ EFFECT_BODY_PRESS
 	.4byte BattleScript_EffectEerieSpell              @ EFFECT_EERIE_SPELL
@@ -392,10 +392,49 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSparklySwirl            @ EFFECT_SPARKLY_SWIRL
 	.4byte BattleScript_EffectPlasmaFists             @ EFFECT_PLASMA_FISTS
 	.4byte BattleScript_EffectHyperspaceFury          @ EFFECT_HYPERSPACE_FURY
+	.4byte BattleScript_EffectAuraWheel               @ EFFECT_AURA_WHEEL
+	.4byte BattleScript_EffectPhotonGeyser            @ EFFECT_PHOTON_GEYSER
+	.4byte BattleScript_EffectShellSideArm            @ EFFECT_SHELL_SIDE_ARM
+
+BattleScript_EffectShellSideArm:
+	shellsidearmcheck
+	setmoveeffect MOVE_EFFECT_POISON
+	goto BattleScript_EffectHit
+
+BattleScript_EffectPhotonGeyser:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	photongeysercheck
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
+	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO, BattleScript_EffectSpeedUpHit
+	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_HANGRY, BattleScript_EffectSpeedUpHit
+	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectHyperspaceFury:
-	jumpifspecies BS_ATTACKER, SPECIES_TREECKO, BattleScript_EffectHyperspaceFuryUnbound
-	jumpifspecies BS_ATTACKER, SPECIES_MUDKIP, BattleScript_ButHoopaCantUseIt
+	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHyperspaceFuryUnbound
+	jumpifspecies BS_ATTACKER, SPECIES_HOOPA, BattleScript_ButHoopaCantUseIt
 	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -734,9 +773,30 @@ BattleScript_EffectAttackerDefenseDownHit:
 	setmoveeffect MOVE_EFFECT_DEF_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
-BattleScript_EffectSleepHit:
-	setmoveeffect MOVE_EFFECT_SLEEP
-	goto BattleScript_EffectHit
+BattleScript_EffectRelicSong:
+	setmoveeffect MOVE_EFFECT_RELIC_SONG | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	argumentstatuseffect
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectAllySwitch:
 	attackcanceler
@@ -6989,6 +7049,7 @@ BattleScript_AttackerFormChange::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
+BattleScript_AttackerFormChangeNoPopup::
 	handleformchange BS_ATTACKER, 0
 	handleformchange BS_ATTACKER, 1
 	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
@@ -6998,6 +7059,21 @@ BattleScript_AttackerFormChange::
 	
 BattleScript_AttackerFormChangeEnd3::
 	call BattleScript_AttackerFormChange
+	end3
+
+BattleScript_AttackerFormChangeEnd3NoPopup::
+	call BattleScript_AttackerFormChangeNoPopup
+
+BattleScript_AttackerFormChangeMoveEffect::
+	waitmessage 1
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	copybyte sBATTLER, gBattlerAttacker
+	printstring STRINGID_PKMNTRANSFORMED
+	waitmessage B_WAIT_TIME_LONG
+	handleformchange BS_ATTACKER, 2 
 	end3
 
 BattleScript_BallFetch::

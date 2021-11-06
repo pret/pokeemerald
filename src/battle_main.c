@@ -232,6 +232,7 @@ EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
+EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -2941,6 +2942,8 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][1] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
     }
+
+    gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 }
 
 void SwitchInClearSetData(void)
@@ -5228,6 +5231,10 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     else if (gStatuses4[battlerAtk] & STATUS4_PLASMA_FISTS && moveType == TYPE_NORMAL)
     {
         gBattleStruct->dynamicMoveType = 0x80 | TYPE_ELECTRIC;
+    }
+    else if (move == MOVE_AURA_WHEEL && gBattleMons[battlerAtk].species == SPECIES_MORPEKO_HANGRY)
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_DARK;
     }
 
     // Check if a gem should activate.
