@@ -3040,7 +3040,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SP_DEF_PLUS_2:
             case MOVE_EFFECT_ACC_PLUS_2:
             case MOVE_EFFECT_EVS_PLUS_2:
-                if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(2),
+                if (NoAliveMonsForEitherParty()
+                  || ChangeStatBuffs(SET_STAT_BUFF_VALUE(2),
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_PLUS_2 + 1,
                                     affectsUser, 0))
                 {
