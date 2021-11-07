@@ -301,6 +301,7 @@ static bool8 sub_804F344(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static bool32 CriticalCapture(u32 odds);
+static bool8 IsFinalStrikeEffect(u16 move);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite);
 
@@ -1132,6 +1133,24 @@ static const u16 sMoveEffectsForbiddenToInstruct[] =
     EFFECT_TWO_TURNS_ATTACK,
     EFFECT_UPROAR,
     FORBIDDEN_INSTRUCT_END
+};
+
+static const u16 sFinalStrikeOnlyEffects[] =
+{
+    EFFECT_RELIC_SONG,
+    EFFECT_BUG_BITE,
+    EFFECT_THIEF,
+    EFFECT_BURN_UP,
+    EFFECT_PAY_DAY,
+    EFFECT_SECRET_POWER,
+    EFFECT_HIT_SWITCH_TARGET,
+    EFFECT_SMACK_DOWN,
+    EFFECT_SPARKLING_ARIA,
+    EFFECT_SMELLINGSALT,
+    EFFECT_WAKE_UP_SLAP,
+    EFFECT_HIT_ESCAPE,
+    EFFECT_RECOIL_HP_25,
+    EFFECT_HIT_PREVENT_ESCAPE,
 };
 
 static const u16 sNaturePowerMoves[] =
@@ -2656,13 +2675,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
     bool32 statusChanged = FALSE;
     bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
     u32 flags = 0;
-    
+
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 2 
+        && gBattleMons[gBattlerTarget].hp != 0
+        && IsFinalStrikeEffect(gCurrentMove))
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
+
     switch (gBattleScripting.moveEffect) // Set move effects which happen later on
     {
     case MOVE_EFFECT_KNOCK_OFF:
     case MOVE_EFFECT_SMACK_DOWN:
     case MOVE_EFFECT_REMOVE_STATUS:
-    case MOVE_EFFECT_BURN_UP:
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
         return;
@@ -3160,8 +3186,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
-                // Only steal items on the final strike of Parental Bond
-                if (!(gSpecialStatuses[gBattlerAttacker].parentalBondOn == 2 && gBattleMons[gBattlerTarget].hp != 0))
                 {
                     if (!CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item))
                     {
@@ -3385,8 +3409,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_BUG_BITE:
                 if (ItemId_GetPocket(gBattleMons[gEffectBattler].item) == POCKET_BERRIES
-                    && GetBattlerAbility(gEffectBattler) != ABILITY_STICKY_HOLD
-                    && !(gSpecialStatuses[gBattlerAttacker].parentalBondOn == 2 && gBattleMons[gBattlerTarget].hp != 0)) // Steal berry on final hit
+                    && GetBattlerAbility(gEffectBattler) != ABILITY_STICKY_HOLD)
                 {
                     // target loses their berry
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
@@ -5089,11 +5112,6 @@ static void Cmd_moveend(void)
                     }
                 }
                 break; // MOVE_EFFECT_REMOVE_STATUS
-            case MOVE_EFFECT_BURN_UP:
-                effect = TRUE;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_BurnUpRemoveType;
-                break;
             }
             gBattleStruct->moveEffect2 = 0;
             gBattleScripting.moveendState++;
@@ -13580,5 +13598,18 @@ bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
         return TRUE;
     }
 
+    return FALSE;
+}
+
+static bool8 IsFinalStrikeEffect(u16 move)
+{
+    u32 i;
+    u16 moveEffect = gBattleMoves[move].effect;
+
+    for (i = 0; i < ARRAY_COUNT(sFinalStrikeOnlyEffects); i++)
+    {
+        if (moveEffect == sFinalStrikeOnlyEffects[i])
+            return TRUE;
+    }
     return FALSE;
 }

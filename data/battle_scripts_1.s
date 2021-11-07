@@ -813,11 +813,9 @@ BattleScript_EffectBurnUp:
 	attackstring
 	ppreduce
 	jumpiftype BS_ATTACKER, TYPE_FIRE, BattleScript_BurnUpWorks
-	goto BattleScript_MoveEnd
+	goto BattleScript_ButItFailed
 BattleScript_BurnUpWorks:
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
-	setmoveeffect MOVE_EFFECT_BURN_UP
-	seteffectwithchance
 	critcalc
 	damagecalc
 	adjustdamage
@@ -831,6 +829,9 @@ BattleScript_BurnUpWorks:
 	critmessage
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	losetype BS_ATTACKER, TYPE_FIRE
+	printstring STRINGID_ATTACKERLOSTFIRETYPE
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET, FALSE, NULL
 	goto BattleScript_MoveEnd
