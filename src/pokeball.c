@@ -665,10 +665,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskState = wantedCry + 1;
         break;
     case 1:
+        // Play single cry
         if (ShouldPlayNormalMonCry(mon) == TRUE)
-            PlayCry3(species, pan, CRY_MODE_NORMAL);
+            PlayCry_ByMode(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry3(species, pan, CRY_MODE_WEAK);
+            PlayCry_ByMode(species, pan, CRY_MODE_WEAK);
         gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);
         break;
@@ -680,10 +681,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
     case 20:
         if (gTasks[taskId].tCryTaskFrames == 0)
         {
+            // Play first doubles cry
             if (ShouldPlayNormalMonCry(mon) == TRUE)
-                PlayCry4(species, pan, CRY_MODE_DOUBLES);
+                PlayCry_ReleaseDouble(species, pan, CRY_MODE_DOUBLES);
             else
-                PlayCry4(species, pan, CRY_MODE_WEAK_DOUBLES);
+                PlayCry_ReleaseDouble(species, pan, CRY_MODE_WEAK_DOUBLES);
 
             gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
             DestroyTask(taskId);
@@ -719,10 +721,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskFrames--;
             break;
         }
+        // Play second doubles cry
         if (ShouldPlayNormalMonCry(mon) == TRUE)
-            PlayCry4(species, pan, CRY_MODE_NORMAL);
+            PlayCry_ReleaseDouble(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry4(species, pan, CRY_MODE_WEAK);
+            PlayCry_ReleaseDouble(species, pan, CRY_MODE_WEAK);
 
         gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);

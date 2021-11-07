@@ -8500,11 +8500,11 @@ Move_BLAZE_KICK:
 
 Move_HYPER_VOICE:
 	loadspritegfx ANIM_TAG_THIN_RING
-	createvisualtask SoundTask_PlayCryWithEcho, 5, 0
+	createvisualtask SoundTask_PlayCryWithEcho, 5, FALSE
 	call HyperVoiceEffect
 	waitforvisualfinish
 	delay 8
-	createvisualtask SoundTask_PlayCryWithEcho, 5, 1
+	createvisualtask SoundTask_PlayCryWithEcho, 5, TRUE
 	call HyperVoiceEffect
 	waitforvisualfinish
 	end

@@ -3398,7 +3398,7 @@ static bool8 AnimateTradeSequenceCable(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
 
         if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
-            PlayCry1(sTradeData->monSpecies[TRADE_PLAYER], 0);
+            PlayCry_Normal(sTradeData->monSpecies[TRADE_PLAYER], 0);
 
         sTradeData->state = TS_STATE_BYE_BYE;
         sTradeData->timer = 0;
@@ -3869,7 +3869,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
 
         if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
-            PlayCry1(sTradeData->monSpecies[TRADE_PLAYER], 0);
+            PlayCry_Normal(sTradeData->monSpecies[TRADE_PLAYER], 0);
 
         sTradeData->state = TS_STATE_BYE_BYE;
         sTradeData->timer = 0;

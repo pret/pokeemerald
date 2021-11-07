@@ -1415,7 +1415,9 @@ static void WallyHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry1(species, 25);
+    // Seems that it doesn't bother using CRY_MODE_FAINT because
+    // Wally's Pokémon during the tutorial is never intended to faint.
+    PlayCry_Normal(species, 25);
     WallyBufferExecCompleted();
 }
 

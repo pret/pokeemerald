@@ -38,4 +38,11 @@
 #define DOUBLE_CRY_ROAR  2
 #define DOUBLE_CRY_GROWL 255
 
+#define CRY_PRIORITY_NORMAL 10
+#define CRY_PRIORITY_AMBIENT 1
+
+// Cry volume was changed from 125 in R/S to 120 for FRLG/Em, but was (accidentally?) not updated outside of sound.c
+#define CRY_VOLUME    120
+#define CRY_VOLUME_RS 125
+
 #endif // GUARD_CONSTANTS_SOUND_H

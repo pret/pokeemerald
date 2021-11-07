@@ -54,8 +54,6 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_REGISTER_MATCH_CALL] = { MUS_REGISTER_MATCH_CALL, 135 },
 };
 
-#define CRY_VOLUME  120 // was 125 in R/S
-
 void InitMapMusic(void)
 {
     gDisableMusic = FALSE;
@@ -300,66 +298,69 @@ bool8 IsBGMStopped(void)
     return FALSE;
 }
 
-void PlayCry1(u16 species, s8 pan)
+void PlayCry_Normal(u16 species, s8 pan)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
-    PlayCryInternal(species, pan, CRY_VOLUME, 10, CRY_MODE_NORMAL);
+    PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
 }
 
-void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority)
+void PlayCry_NormalNoDucking(u16 species, s8 pan, s8 volume, u8 priority)
 {
     PlayCryInternal(species, pan, volume, priority, CRY_MODE_NORMAL);
 }
 
-void PlayCry3(u16 species, s8 pan, u8 mode)
+// Assuming it's not CRY_MODE_DOUBLES, this is equivalent to PlayCry_Normal except it allows other modes.
+void PlayCry_ByMode(u16 species, s8 pan, u8 mode)
 {
     if (mode == CRY_MODE_DOUBLES)
     {
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
+        PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     }
     else
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
+        PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
         gPokemonCryBGMDuckingCounter = 2;
         RestoreBGMVolumeAfterPokemonCry();
     }
 }
 
-void PlayCry4(u16 species, s8 pan, u8 mode)
+// Used when releasing multiple Pokémon at once in battle.
+void PlayCry_ReleaseDouble(u16 species, s8 pan, u8 mode)
 {
     if (mode == CRY_MODE_DOUBLES)
     {
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
+        PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     }
     else
     {
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
+        PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     }
 }
 
-void PlayCry6(u16 species, s8 pan, u8 mode) // not present in R/S
+// Duck the BGM but don't restore it. Not present in R/S
+void PlayCry_DuckNoRestore(u16 species, s8 pan, u8 mode)
 {
     if (mode == CRY_MODE_DOUBLES)
     {
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
+        PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     }
     else
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
+        PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
         gPokemonCryBGMDuckingCounter = 2;
     }
 }
 
-void PlayCry5(u16 species, u8 mode)
+void PlayCry_Script(u16 species, u8 mode)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
-    PlayCryInternal(species, 0, CRY_VOLUME, 10, mode);
+    PlayCryInternal(species, 0, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
 }
@@ -470,25 +471,26 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     index = species % 128;
     table = species / 128;
 
+    #define GET_CRY(speciesIndex, tableId, reversed) \
+        ((reversed) ? &gCryTable_Reverse[(128 * (tableId)) + (speciesIndex)] : &gCryTable[(128 * (tableId)) + (speciesIndex)])
+
     switch (table)
     {
     case 0:
-        gMPlay_PokemonCry = SetPokemonCryTone(
-          reverse ? &gCryTable_Reverse[(128 * 0) + index] : &gCryTable[(128 * 0) + index]);
+        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 0, reverse));
         break;
     case 1:
-        gMPlay_PokemonCry = SetPokemonCryTone(
-          reverse ? &gCryTable_Reverse[(128 * 1) + index] : &gCryTable[(128 * 1) + index]);
+        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 1, reverse));
         break;
     case 2:
-        gMPlay_PokemonCry = SetPokemonCryTone(
-          reverse ? &gCryTable_Reverse[(128 * 2) + index] : &gCryTable[(128 * 2) + index]);
+        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 2, reverse));
         break;
     case 3:
-        gMPlay_PokemonCry = SetPokemonCryTone(
-          reverse ? &gCryTable_Reverse[(128 * 3) + index] : &gCryTable[(128 * 3) + index]);
+        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 3, reverse));
         break;
     }
+
+    #undef GET_CRY
 }
 
 bool8 IsCryFinished(void)
