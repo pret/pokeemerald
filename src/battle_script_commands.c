@@ -1097,18 +1097,76 @@ static const u16 sMoveEffectsForbiddenToInstruct[] =
     FORBIDDEN_INSTRUCT_END
 };
 
-static const u16 sNaturePowerMoves[] =
+static const u16 sNaturePowerMoves[BATTLE_TERRAIN_COUNT] =
 {
+#if B_NATURE_POWER_MOVES >= GEN_7
     [BATTLE_TERRAIN_GRASS]      = MOVE_ENERGY_BALL,
     [BATTLE_TERRAIN_LONG_GRASS] = MOVE_ENERGY_BALL,
     [BATTLE_TERRAIN_SAND]       = MOVE_EARTH_POWER,
-    [BATTLE_TERRAIN_UNDERWATER] = MOVE_HYDRO_PUMP,
     [BATTLE_TERRAIN_WATER]      = MOVE_HYDRO_PUMP,
     [BATTLE_TERRAIN_POND]       = MOVE_HYDRO_PUMP,
     [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_EARTH_POWER,
-    [BATTLE_TERRAIN_CAVE]       = MOVE_POWER_GEM,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_EARTH_POWER,
     [BATTLE_TERRAIN_BUILDING]   = MOVE_TRI_ATTACK,
-    [BATTLE_TERRAIN_PLAIN]      = MOVE_TRI_ATTACK
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_SNOW]       = MOVE_ICE_BEAM,
+#elif B_NATURE_POWER_MOVES == GEN_6
+    [BATTLE_TERRAIN_GRASS]      = MOVE_ENERGY_BALL,
+    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_ENERGY_BALL,
+    [BATTLE_TERRAIN_SAND]       = MOVE_EARTH_POWER,
+    [BATTLE_TERRAIN_WATER]      = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_POND]       = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_EARTH_POWER,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_EARTH_POWER,
+    [BATTLE_TERRAIN_BUILDING]   = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_SNOW]       = MOVE_FROST_BREATH,
+#elif B_NATURE_POWER_MOVES == GEN_5
+    [BATTLE_TERRAIN_GRASS]      = MOVE_SEED_BOMB,
+    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_SEED_BOMB,
+    [BATTLE_TERRAIN_SAND]       = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_WATER]      = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_POND]       = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_BUILDING]   = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_SNOW]       = MOVE_BLIZZARD,
+#elif B_NATURE_POWER_MOVES == GEN_4
+    [BATTLE_TERRAIN_GRASS]      = MOVE_SEED_BOMB,
+    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_SEED_BOMB,
+    [BATTLE_TERRAIN_SAND]       = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_WATER]      = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_POND]       = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_ROCK_SLIDE,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_ROCK_SLIDE,
+    [BATTLE_TERRAIN_BUILDING]   = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_SNOW]       = MOVE_BLIZZARD,
+#else // Gen 1-3
+    [BATTLE_TERRAIN_GRASS]      = MOVE_STUN_SPORE,
+    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_RAZOR_LEAF,
+    [BATTLE_TERRAIN_SAND]       = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_WATER]      = MOVE_SURF,
+    [BATTLE_TERRAIN_POND]       = MOVE_BUBBLE_BEAM,
+    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_ROCK_SLIDE,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_SHADOW_BALL,
+    [BATTLE_TERRAIN_BUILDING]   = MOVE_SWIFT,
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_SWIFT,
+    [BATTLE_TERRAIN_SNOW]       = MOVE_BLIZZARD,
+#endif
+    [BATTLE_TERRAIN_UNDERWATER]       = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_SOARING]          = MOVE_AIR_SLASH,
+    [BATTLE_TERRAIN_SKY_PILLAR]       = MOVE_AIR_SLASH,
+    [BATTLE_TERRAIN_BURIAL_GROUND]    = MOVE_SHADOW_BALL,
+    [BATTLE_TERRAIN_PUDDLE]           = MOVE_MUD_BOMB,
+    [BATTLE_TERRAIN_MARSH]            = MOVE_MUD_BOMB,
+    [BATTLE_TERRAIN_SWAMP]            = MOVE_MUD_BOMB,
+    [BATTLE_TERRAIN_ICE]              = MOVE_ICE_BEAM,
+    [BATTLE_TERRAIN_VOLCANO]          = MOVE_LAVA_PLUME,
+    [BATTLE_TERRAIN_DISTORTION_WORLD] = MOVE_TRI_ATTACK,
+    [BATTLE_TERRAIN_SPACE]            = MOVE_DRACO_METEOR,
+    [BATTLE_TERRAIN_ULTRA_SPACE]      = MOVE_PSYSHOCK,
 };
 
 static const u16 sPickupItems[] =
@@ -1153,18 +1211,38 @@ static const u8 sPickupProbabilities[] =
     30, 40, 50, 60, 70, 80, 90, 94, 98
 };
 
-static const u8 sTerrainToType[] =
+static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
 {
-    [BATTLE_TERRAIN_GRASS]      = TYPE_GRASS,
-    [BATTLE_TERRAIN_LONG_GRASS] = TYPE_GRASS,
-    [BATTLE_TERRAIN_SAND]       = TYPE_GROUND,
-    [BATTLE_TERRAIN_UNDERWATER] = TYPE_WATER,
-    [BATTLE_TERRAIN_WATER]      = TYPE_WATER,
-    [BATTLE_TERRAIN_POND]       = TYPE_WATER,
-    [BATTLE_TERRAIN_MOUNTAIN]   = TYPE_GROUND,
-    [BATTLE_TERRAIN_CAVE]       = TYPE_ROCK,
-    [BATTLE_TERRAIN_BUILDING]   = TYPE_NORMAL,
-    [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
+    [BATTLE_TERRAIN_GRASS]            = TYPE_GRASS,
+    [BATTLE_TERRAIN_LONG_GRASS]       = TYPE_GRASS,
+    [BATTLE_TERRAIN_SAND]             = TYPE_GROUND,
+    [BATTLE_TERRAIN_UNDERWATER]       = TYPE_WATER,
+    [BATTLE_TERRAIN_WATER]            = TYPE_WATER,
+    [BATTLE_TERRAIN_POND]             = TYPE_WATER,
+    [BATTLE_TERRAIN_CAVE]             = TYPE_ROCK,
+    [BATTLE_TERRAIN_BUILDING]         = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SOARING]          = TYPE_FLYING,
+    [BATTLE_TERRAIN_SKY_PILLAR]       = TYPE_FLYING,
+    [BATTLE_TERRAIN_BURIAL_GROUND]    = TYPE_GHOST,
+    [BATTLE_TERRAIN_PUDDLE]           = TYPE_GROUND,
+    [BATTLE_TERRAIN_MARSH]            = TYPE_GROUND,
+    [BATTLE_TERRAIN_SWAMP]            = TYPE_GROUND,
+    [BATTLE_TERRAIN_SNOW]             = TYPE_ICE,
+    [BATTLE_TERRAIN_ICE]              = TYPE_ICE,
+    [BATTLE_TERRAIN_VOLCANO]          = TYPE_FIRE,
+    [BATTLE_TERRAIN_DISTORTION_WORLD] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SPACE]            = TYPE_DRAGON,
+    [BATTLE_TERRAIN_ULTRA_SPACE]      = TYPE_PSYCHIC,
+#if B_CAMOUFLAGE_TYPES >= GEN_5
+    [BATTLE_TERRAIN_MOUNTAIN]         = TYPE_GROUND,
+    [BATTLE_TERRAIN_PLAIN]            = TYPE_GROUND,
+#elif B_CAMOUFLAGE_TYPES == GEN_4
+    [BATTLE_TERRAIN_MOUNTAIN]         = TYPE_ROCK,
+    [BATTLE_TERRAIN_PLAIN]            = TYPE_GROUND,
+#else
+    [BATTLE_TERRAIN_MOUNTAIN]         = TYPE_ROCK,
+    [BATTLE_TERRAIN_PLAIN]            = TYPE_NORMAL,
+#endif
 };
 
 // - ITEM_ULTRA_BALL skips Master Ball and ITEM_NONE
@@ -7250,19 +7328,19 @@ static void HandleTerrainMove(u32 moveEffect)
     switch (moveEffect)
     {
     case EFFECT_MISTY_TERRAIN:
-        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.mistyTerrainTimer;
+        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         break;
     case EFFECT_GRASSY_TERRAIN:
-        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.grassyTerrainTimer;
+        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         break;
     case EFFECT_ELECTRIC_TERRAIN:
-        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.electricTerrainTimer;
+        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         break;
     case EFFECT_PSYCHIC_TERRAIN:
-        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.psychicTerrainTimer;
+        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
         break;
     }
@@ -8858,23 +8936,20 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;   // can heal
         return;
-    case VARIOUS_REMOVE_TERRAIN:        
+    case VARIOUS_REMOVE_TERRAIN:
+        gFieldTimers.terrainTimer = 0;
         switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         {
         case STATUS_FIELD_MISTY_TERRAIN:
-            gFieldTimers.mistyTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             break;
         case STATUS_FIELD_GRASSY_TERRAIN:
-            gFieldTimers.grassyTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
             break;
         case STATUS_FIELD_ELECTRIC_TERRAIN:
-            gFieldTimers.electricTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             break;
         case STATUS_FIELD_PSYCHIC_TERRAIN:
-            gFieldTimers.psychicTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 3;
             break;
         default:
@@ -11859,13 +11934,15 @@ static void Cmd_callterrainattack(void) // nature power
 u16 GetNaturePowerMove(void)
 {
     if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
-      return MOVE_MOONBLAST;
+        return MOVE_MOONBLAST;
     else if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
-      return MOVE_THUNDERBOLT;
+        return MOVE_THUNDERBOLT;
     else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
-      return MOVE_ENERGY_BALL;
+        return MOVE_ENERGY_BALL;
     else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
-      return MOVE_PSYCHIC;
+        return MOVE_PSYCHIC;
+    else if (sNaturePowerMoves == MOVE_NONE)
+        return MOVE_TRI_ATTACK;
     return sNaturePowerMoves[gBattleTerrain];
 }
 
@@ -12449,37 +12526,112 @@ static void Cmd_jumpifhasnohp(void)
 
 static void Cmd_getsecretpowereffect(void)
 {
-    switch (gBattleTerrain)
-    {
-    case BATTLE_TERRAIN_GRASS:
-        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
-        break;
-    case BATTLE_TERRAIN_LONG_GRASS:
-        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
-        break;
-    case BATTLE_TERRAIN_SAND:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
-        break;
-    case BATTLE_TERRAIN_UNDERWATER:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
-        break;
-    case BATTLE_TERRAIN_WATER:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
-        break;
-    case BATTLE_TERRAIN_POND:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
-        break;
-    case BATTLE_TERRAIN_MOUNTAIN:
-        gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
-        break;
-    case BATTLE_TERRAIN_CAVE:
-        gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
-        break;
-    default:
-        gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
-        break;
-    }
+    gBattleScripting.moveEffect = GetSecretPowerMoveEffect();
     gBattlescriptCurrInstr++;
+}
+
+u16 GetSecretPowerMoveEffect(void)
+{
+    u16 moveEffect;
+    u32 fieldTerrain = gFieldStatuses & STATUS_FIELD_TERRAIN_ANY;
+    if (fieldTerrain)
+    {
+        switch (fieldTerrain)
+        {
+        case STATUS_FIELD_MISTY_TERRAIN:
+            moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1;
+            break;
+        case STATUS_FIELD_GRASSY_TERRAIN:
+            moveEffect = MOVE_EFFECT_SLEEP;
+            break;
+        case STATUS_FIELD_ELECTRIC_TERRAIN:
+            moveEffect = MOVE_EFFECT_PARALYSIS;
+            break;
+        case STATUS_FIELD_PSYCHIC_TERRAIN:
+            moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            break;
+        default:
+            moveEffect = MOVE_EFFECT_PARALYSIS;
+            break;
+        }
+    }
+    else
+    {    
+        switch (gBattleTerrain)
+        {
+        case BATTLE_TERRAIN_GRASS:
+            #if B_SECRET_POWER_EFFECT >= GEN_4
+                moveEffect = MOVE_EFFECT_SLEEP;
+            #else
+                moveEffect = MOVE_EFFECT_POISON;
+            #endif
+            break;
+        case BATTLE_TERRAIN_LONG_GRASS:
+            moveEffect = MOVE_EFFECT_SLEEP;
+            break;
+        case BATTLE_TERRAIN_SAND:
+            moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+            break;
+        case BATTLE_TERRAIN_UNDERWATER:
+            #if B_SECRET_POWER_EFFECT >= GEN_6
+                moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            #else
+                moveEffect = MOVE_EFFECT_DEF_MINUS_1;
+            #endif
+            break;
+        case BATTLE_TERRAIN_WATER:
+            moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            break;
+        case BATTLE_TERRAIN_POND:
+            #if B_SECRET_POWER_EFFECT >= GEN_4
+                moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+            #else
+                moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            #endif
+            break;
+        case BATTLE_TERRAIN_MOUNTAIN:
+            #if B_SECRET_POWER_EFFECT >= GEN_5
+                moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+            #elif B_SECRET_POWER_EFFECT == GEN_4
+                moveEffect = MOVE_EFFECT_FLINCH;
+            #else
+                moveEffect = MOVE_EFFECT_CONFUSION;
+            #endif
+            break;
+        case BATTLE_TERRAIN_CAVE:
+        case BATTLE_TERRAIN_BURIAL_GROUND:
+        case BATTLE_TERRAIN_SPACE:
+            moveEffect = MOVE_EFFECT_FLINCH;
+            break;
+        case BATTLE_TERRAIN_SOARING:
+        case BATTLE_TERRAIN_SKY_PILLAR:
+        case BATTLE_TERRAIN_MARSH:
+        case BATTLE_TERRAIN_SWAMP:
+            moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            break;
+        case BATTLE_TERRAIN_PUDDLE:
+            #if B_SECRET_POWER_EFFECT >= GEN_5
+                moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+            #else
+                moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+            #endif
+            break;
+        case BATTLE_TERRAIN_SNOW:
+        case BATTLE_TERRAIN_ICE:
+            moveEffect = MOVE_EFFECT_FREEZE;
+            break;
+        case BATTLE_TERRAIN_VOLCANO:
+            moveEffect = MOVE_EFFECT_BURN;
+            break;
+        case BATTLE_TERRAIN_ULTRA_SPACE:
+            moveEffect = MOVE_EFFECT_DEF_MINUS_1;
+            break;
+        default:
+            moveEffect = MOVE_EFFECT_PARALYSIS;
+            break;
+        }
+    }
+    return moveEffect;
 }
 
 static void Cmd_pickup(void)
@@ -12709,10 +12861,30 @@ bool32 CanCamouflage(u8 battlerId)
 
 static void Cmd_settypetoterrain(void)
 {
-    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, sTerrainToType[gBattleTerrain]))
+    u8 terrainType;
+    switch(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
     {
-        SET_BATTLER_TYPE(gBattlerAttacker, sTerrainToType[gBattleTerrain]);
-        PREPARE_TYPE_BUFFER(gBattleTextBuff1, sTerrainToType[gBattleTerrain]);
+    case STATUS_FIELD_ELECTRIC_TERRAIN:
+        terrainType = TYPE_ELECTRIC;
+        break;
+    case STATUS_FIELD_GRASSY_TERRAIN:
+        terrainType = TYPE_GRASS;
+        break;
+    case STATUS_FIELD_MISTY_TERRAIN:
+        terrainType = TYPE_FAIRY;
+        break;
+    case STATUS_FIELD_PSYCHIC_TERRAIN:
+        terrainType = TYPE_PSYCHIC;
+        break;
+    default:
+        terrainType = sTerrainToType[gBattleTerrain];
+        break;
+    }
+
+    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, terrainType))
+    {
+        SET_BATTLER_TYPE(gBattlerAttacker, terrainType);
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
 
         gBattlescriptCurrInstr += 5;
     }

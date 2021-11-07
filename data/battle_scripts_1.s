@@ -395,6 +395,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAuraWheel               @ EFFECT_AURA_WHEEL
 	.4byte BattleScript_EffectPhotonGeyser            @ EFFECT_PHOTON_GEYSER
 	.4byte BattleScript_EffectShellSideArm            @ EFFECT_SHELL_SIDE_ARM
+	.4byte BattleScript_EffectHit                     @ EFFECT_TERRAIN_PULSE
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
