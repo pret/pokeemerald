@@ -14082,7 +14082,87 @@ Move_RISING_VOLTAGE::
 	end @to do:
 
 Move_TERRAIN_PULSE::
-	goto Move_DRAGON_PULSE @Temporary, needs to setup different animations based on terrain
+	loadspritegfx ANIM_TAG_DRAGON_PULSE
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 7, RGB_BLACK
+	launchtask AnimTask_TerrainPulse 0x5 0x0
+	jumpargeq 0x0, TYPE_ELECTRIC, TerrainPulseElectric
+	jumpargeq 0x0, TYPE_GRASS, TerrainPulseGrass
+	jumpargeq 0x0, TYPE_FAIRY, TerrainPulseFairy
+	jumpargeq 0x0, TYPE_PSYCHIC, TerrainPulsePsychic
+TerrainPulseNormal:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB_WHITE
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 2, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB_WHITE
+	goto TerrainPulseEnd
+
+TerrainPulseElectric:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(27, 27, 0)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(27, 27, 0)
+	goto TerrainPulseEnd
+  
+TerrainPulseGrass:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(11, 26, 11)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(11, 26, 11)
+	goto TerrainPulseEnd
+
+TerrainPulseFairy:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(31, 24, 31)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(31, 24, 31)
+	goto TerrainPulseEnd
+  
+TerrainPulsePsychic:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(27, 0, 13)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(27, 0, 13)
+	goto TerrainPulseEnd
+
+TerrainPulseEnd:
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	waitforvisualfinish
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 7, 0, RGB_BLACK
+	waitforvisualfinish
+	blendoff
+	clearmonbg ANIM_TARGET
+	end
 
 Move_SKITTER_SMACK::
 	end @to do:

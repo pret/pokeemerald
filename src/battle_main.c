@@ -5204,7 +5204,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
                 gBattleStruct->dynamicMoveType = TYPE_FAIRY | 0x80;
             else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
                 gBattleStruct->dynamicMoveType = TYPE_PSYCHIC | 0x80;
-            else
+            else //failsafe
                 gBattleStruct->dynamicMoveType = TYPE_NORMAL | 0x80;
         }
     }
