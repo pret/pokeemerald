@@ -641,7 +641,7 @@ static void SpriteCB_BallThrow_Shake(struct Sprite *sprite)
 #define tCryTaskSpecies         data[0]
 #define tCryTaskPan             data[1]
 #define tCryTaskWantedCry       data[2]
-#define tCryTaskBattler            data[3]
+#define tCryTaskBattler         data[3]
 #define tCryTaskMonSpriteId     data[4]
 #define tCryTaskMonPtr1         data[5]
 #define tCryTaskMonPtr2         data[6]
@@ -666,9 +666,9 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
         break;
     case 1:
         if (ShouldPlayNormalMonCry(mon) == TRUE)
-            PlayCry3(species, pan, 0);
+            PlayCry3(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry3(species, pan, 11);
+            PlayCry3(species, pan, CRY_MODE_WEAK);
         gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);
         break;
@@ -681,9 +681,9 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
         if (gTasks[taskId].tCryTaskFrames == 0)
         {
             if (ShouldPlayNormalMonCry(mon) == TRUE)
-                PlayCry4(species, pan, 1);
+                PlayCry4(species, pan, CRY_MODE_DOUBLES);
             else
-                PlayCry4(species, pan, 12);
+                PlayCry4(species, pan, CRY_MODE_WEAK_DOUBLES);
 
             gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
             DestroyTask(taskId);
@@ -720,9 +720,9 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             break;
         }
         if (ShouldPlayNormalMonCry(mon) == TRUE)
-            PlayCry4(species, pan, 0);
+            PlayCry4(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry4(species, pan, 11);
+            PlayCry4(species, pan, CRY_MODE_WEAK);
 
         gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);

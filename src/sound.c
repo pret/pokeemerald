@@ -26,7 +26,7 @@ static u16 sFanfareCounter;
 bool8 gDisableMusic;
 
 extern struct ToneData gCryTable[];
-extern struct ToneData gCryTable2[];
+extern struct ToneData gCryTable_Reverse[];
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
@@ -303,21 +303,21 @@ bool8 IsBGMStopped(void)
 void PlayCry1(u16 species, s8 pan)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
-    PlayCryInternal(species, pan, CRY_VOLUME, 10, 0);
+    PlayCryInternal(species, pan, CRY_VOLUME, 10, CRY_MODE_NORMAL);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
 }
 
 void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority)
 {
-    PlayCryInternal(species, pan, volume, priority, 0);
+    PlayCryInternal(species, pan, volume, priority, CRY_MODE_NORMAL);
 }
 
 void PlayCry3(u16 species, s8 pan, u8 mode)
 {
-    if (mode == 1)
+    if (mode == CRY_MODE_DOUBLES)
     {
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, 1);
+        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
     }
     else
     {
@@ -330,9 +330,9 @@ void PlayCry3(u16 species, s8 pan, u8 mode)
 
 void PlayCry4(u16 species, s8 pan, u8 mode)
 {
-    if (mode == 1)
+    if (mode == CRY_MODE_DOUBLES)
     {
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, 1);
+        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
     }
     else
     {
@@ -344,9 +344,9 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
 
 void PlayCry6(u16 species, s8 pan, u8 mode) // not present in R/S
 {
-    if (mode == 1)
+    if (mode == CRY_MODE_DOUBLES)
     {
-        PlayCryInternal(species, pan, CRY_VOLUME, 10, 1);
+        PlayCryInternal(species, pan, CRY_VOLUME, 10, mode);
     }
     else
     {
@@ -366,7 +366,7 @@ void PlayCry5(u16 species, u8 mode)
 
 void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
 {
-    bool32 v0;
+    bool32 reverse;
     u32 release;
     u32 length;
     u32 pitch;
@@ -375,76 +375,80 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u8 table;
 
     species--;
+    
+    // Set default values
+    // May be overridden depending on mode.
     length = 140;
-    v0 = FALSE;
+    reverse = FALSE;
     release = 0;
     pitch = 15360;
     chorus = 0;
 
     switch (mode)
     {
-    case 0:
+    case CRY_MODE_NORMAL:
         break;
-    case 1:
+    case CRY_MODE_DOUBLES:
         length = 20;
         release = 225;
         break;
-    case 2:
+    case CRY_MODE_ENCOUNTER:
         release = 225;
         pitch = 15600;
         chorus = 20;
         volume = 90;
         break;
-    case 3:
+    case CRY_MODE_HIGH_PITCH:
         length = 50;
         release = 200;
         pitch = 15800;
         chorus = 20;
         volume = 90;
         break;
-    case 4:
+    case CRY_MODE_ECHO_END:
         length = 25;
-        v0 = TRUE;
+        reverse = TRUE;
         release = 100;
         pitch = 15600;
         chorus = 192;
         volume = 90;
         break;
-    case 5:
+    case CRY_MODE_FAINT:
         release = 200;
         pitch = 14440;
         break;
-    case 6:
+    case CRY_MODE_ECHO_START:
         release = 220;
         pitch = 15555;
         chorus = 192;
         volume = 70;
         break;
-    case 7:
+    case CRY_MODE_ROAR_1:
         length = 10;
         release = 100;
         pitch = 14848;
         break;
-    case 8:
+    case CRY_MODE_ROAR_2:
         length = 60;
         release = 225;
         pitch = 15616;
         break;
-    case 9:
+    case CRY_MODE_GROWL_1:
         length = 15;
-        v0 = TRUE;
+        reverse = TRUE;
         release = 125;
         pitch = 15200;
         break;
-    case 10:
+    case CRY_MODE_GROWL_2:
         length = 100;
         release = 225;
         pitch = 15200;
         break;
-    case 12:
+    case CRY_MODE_WEAK_DOUBLES:
         length = 20;
         release = 225;
-    case 11:
+        // fallthrough
+    case CRY_MODE_WEAK:
         pitch = 15000;
         break;
     }
@@ -463,26 +467,26 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     // If you wish to expand pokemon, you need to
     // append new cases to the switch.
     species = SpeciesToCryId(species);
-    index = species & 0x7F;
+    index = species % 128;
     table = species / 128;
 
     switch (table)
     {
     case 0:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &gCryTable2[(128 * 0) + index] : &gCryTable[(128 * 0) + index]);
+          reverse ? &gCryTable_Reverse[(128 * 0) + index] : &gCryTable[(128 * 0) + index]);
         break;
     case 1:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &gCryTable2[(128 * 1) + index] : &gCryTable[(128 * 1) + index]);
+          reverse ? &gCryTable_Reverse[(128 * 1) + index] : &gCryTable[(128 * 1) + index]);
         break;
     case 2:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &gCryTable2[(128 * 2) + index] : &gCryTable[(128 * 2) + index]);
+          reverse ? &gCryTable_Reverse[(128 * 2) + index] : &gCryTable[(128 * 2) + index]);
         break;
     case 3:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &gCryTable2[(128 * 3) + index] : &gCryTable[(128 * 3) + index]);
+          reverse ? &gCryTable_Reverse[(128 * 3) + index] : &gCryTable[(128 * 3) + index]);
         break;
     }
 }

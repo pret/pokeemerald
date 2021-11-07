@@ -168,7 +168,7 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     }
 
     if (species != SPECIES_NONE)
-        PlayCry3(species, pan, 3);
+        PlayCry3(species, pan, CRY_MODE_HIGH_PITCH);
 
     DestroyAnimVisualTask(taskId);
 }
@@ -219,10 +219,10 @@ void SoundTask_PlayDoubleCry(u8 taskId)
 
     if (species != SPECIES_NONE)
     {
-        if (gBattleAnimArgs[1] == 0xFF)
-            PlayCry3(species, pan, 9);
-        else
-            PlayCry3(species, pan, 7);
+        if (gBattleAnimArgs[1] == DOUBLE_CRY_GROWL)
+            PlayCry3(species, pan, CRY_MODE_GROWL_1);
+        else // DOUBLE_CRY_ROAR
+            PlayCry3(species, pan, CRY_MODE_ROAR_1);
 
         gTasks[taskId].func = SoundTask_PlayDoubleCry_Step;
     }
@@ -243,19 +243,19 @@ static void SoundTask_PlayDoubleCry_Step(u8 taskId)
     }
     else
     {
-        if (gTasks[taskId].data[0] == 0xFF)
+        if (gTasks[taskId].data[0] == DOUBLE_CRY_GROWL)
         {
             if (!IsCryPlaying())
             {
-                PlayCry3(species, pan, 10);
+                PlayCry3(species, pan, CRY_MODE_GROWL_2);
                 DestroyAnimVisualTask(taskId);
             }
         }
-        else
+        else // DOUBLE_CRY_ROAR
         {
             if (!IsCryPlaying())
             {
-                PlayCry3(species, pan, 8);
+                PlayCry3(species, pan, CRY_MODE_ROAR_2);
                 DestroyAnimVisualTask(taskId);
             }
         }
@@ -302,10 +302,11 @@ static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
     u16 species = gTasks[taskId].data[1];
     s8 pan = gTasks[taskId].data[2];
 
+    // Note the cases are not in order of execution
     switch (gTasks[taskId].data[9])
     {
     case 2:
-        PlayCry6(species, pan, 4);
+        PlayCry6(species, pan, CRY_MODE_ECHO_END);
         gTasks[taskId].data[9]++;
         break;
     case 1:
@@ -322,9 +323,9 @@ static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
         break;
     default:
         if (gTasks[taskId].data[10] == 0)
-            PlayCry6(species, pan, 6);
+            PlayCry6(species, pan, CRY_MODE_ECHO_START);
         else
-            PlayCry3(species, pan, 6);
+            PlayCry3(species, pan, CRY_MODE_ECHO_START);
 
         DestroyAnimVisualTask(taskId);
         break;

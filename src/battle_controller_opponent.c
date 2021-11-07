@@ -1847,7 +1847,7 @@ static void OpponentHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry3(species, 25, 5);
+    PlayCry3(species, 25, CRY_MODE_FAINT);
     OpponentBufferExecCompleted();
 }
 

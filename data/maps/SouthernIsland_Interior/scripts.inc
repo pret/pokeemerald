@@ -68,7 +68,7 @@ SouthernIsland_Interior_EventScript_Lati::
 	waitmovement 0
 	delay 50
 	waitse
-	playmoncry VAR_TEMP_4, 0
+	playmoncry VAR_TEMP_4, CRY_MODE_NORMAL
 	delay 30
 	waitmoncry
 	addobject LOCALID_LATI
