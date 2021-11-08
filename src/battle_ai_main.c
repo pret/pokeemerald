@@ -3247,6 +3247,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_DOUBLE_HIT:
     case EFFECT_TRIPLE_KICK:
         if (AI_MoveMakesContact(AI_DATA->atkAbility, AI_DATA->atkHoldEffect, move)
+          && AI_DATA->atkAbility != ABILITY_MAGIC_GUARD
           && AI_DATA->defHoldEffect == HOLD_EFFECT_ROCKY_HELMET)
             score -= 2;
         break;
