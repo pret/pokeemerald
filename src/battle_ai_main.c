@@ -2969,6 +2969,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     {
     case ABILITY_MOXIE:
     case ABILITY_BEAST_BOOST:
+    case ABILITY_CHILLING_NEIGH:
+    case ABILITY_GRIM_NEIGH:
+    case ABILITY_AS_ONE_ICE_RIDER:
+    case ABILITY_AS_ONE_SHADOW_RIDER:
         if (GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0) // attacker should go first
         {
             if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
@@ -2980,7 +2984,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // move effect checks
     switch (moveEffect)
     {
-        
     case EFFECT_HIT:
         break;
     case EFFECT_SLEEP:
@@ -4101,6 +4104,14 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         if (IsRecycleEncouragedItem(GetUsedHeldItem(battlerAtk)))
             score++;
+        if (AI_DATA->atkAbility == ABILITY_RIPEN)
+        {
+            u16 item = GetUsedHeldItem(battlerAtk);
+            if (IsStatBoostingBerry(item) && atkHpPercent > 60)
+                score++;
+            else if (IsHpRestoringBerry(item) && atkHpPercent < 60)
+                score++;    // TODO check if player can still faint us after we heal
+        }
         break;
     case EFFECT_BRICK_BREAK:
         if (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_REFLECT)

@@ -3368,6 +3368,44 @@ static const u16 sRecycleEncouragedItems[] =
     // TODO expand this
 };
 
+// Its assumed that the berry is strategically given, so no need to check benefits of the berry
+bool32 IsStatBoostingBerry(u16 item)
+{
+    switch (item)
+    {
+    case ITEM_LIECHI_BERRY:
+    case ITEM_GANLON_BERRY:
+    case ITEM_SALAC_BERRY:
+    case ITEM_PETAYA_BERRY:
+    case ITEM_APICOT_BERRY:
+    //case ITEM_LANSAT_BERRY:
+    case ITEM_STARF_BERRY:
+    #ifdef ITEM_EXPANSION
+    case ITEM_MICLE_BERRY:
+    #endif
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool32 IsHpRestoringBerry(u16 item)
+{
+    switch (item)
+    {
+    case ITEM_ORAN_BERRY:
+    case ITEM_SITRUS_BERRY:
+    case ITEM_FIGY_BERRY:
+    case ITEM_WIKI_BERRY:
+    case ITEM_MAGO_BERRY:
+    case ITEM_AGUAV_BERRY:
+    case ITEM_IAPAPA_BERRY:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 bool32 IsRecycleEncouragedItem(u16 item)
 {
     u32 i;
@@ -3389,6 +3427,9 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
     if (GetHealthPercentage(battlerAtk) < 80 && AI_RandLessThan(128))
         return;
+    
+    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return; // Damaging moves would get a score boost from AI_TryToFaint or PreferStrongestMove so we don't consider them here
 
     switch (statId)
     {
@@ -3461,6 +3502,9 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
 void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+
     if (AI_CanPoison(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove) && GetHealthPercentage(battlerDef) > 20)
     {
         if (!HasDamagingMove(battlerDef))
@@ -3481,6 +3525,9 @@ void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
     {
         (*score)++; // burning is good
@@ -3497,6 +3544,9 @@ void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+    
     if (AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
     {
         u8 atkSpeed = GetBattlerTotalSpeedStat(battlerAtk);
@@ -3515,6 +3565,9 @@ void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+    
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
         *score += 2;
     else
@@ -3530,6 +3583,9 @@ void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+    
     if (AI_CanConfuse(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove)
       && AI_DATA->defHoldEffect != HOLD_EFFECT_CURE_CONFUSION
       && AI_DATA->defHoldEffect != HOLD_EFFECT_CURE_STATUS)
