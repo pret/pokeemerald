@@ -1703,7 +1703,7 @@ u32 CountNegativeStatStages(u8 battlerId)
 
 bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_ATK] > 4
@@ -1719,7 +1719,7 @@ bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_DEF] > 4
@@ -1735,7 +1735,7 @@ bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (IsAiFaster(AI_CHECK_SLOWER)
@@ -1749,7 +1749,7 @@ bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPATK] > 4
@@ -1764,7 +1764,7 @@ bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPDEF] > 4
@@ -1779,7 +1779,7 @@ bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (defAbility != ABILITY_CONTRARY
@@ -1793,7 +1793,7 @@ bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE
@@ -3428,7 +3428,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
     if (GetHealthPercentage(battlerAtk) < 80 && AI_RandLessThan(128))
         return;
     
-    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return; // Damaging moves would get a score boost from AI_TryToFaint or PreferStrongestMove so we don't consider them here
 
     switch (statId)
@@ -3502,7 +3502,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
 void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
 
     if (AI_CanPoison(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove) && GetHealthPercentage(battlerDef) > 20)
@@ -3525,7 +3525,7 @@ void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
 
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
@@ -3544,7 +3544,7 @@ void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
     
     if (AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
@@ -3565,7 +3565,7 @@ void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
     
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
@@ -3583,7 +3583,7 @@ void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
     
     if (AI_CanConfuse(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove)
