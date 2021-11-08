@@ -2548,7 +2548,7 @@ static void AnimPetalDanceSmallFlower(struct Sprite* sprite)
     sprite->data[1] = sprite->x;
     sprite->data[2] = sprite->x;
     sprite->data[3] = sprite->y;
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = AnimPetalDanceSmallFlower_Step;
@@ -2971,8 +2971,8 @@ static void AnimIngrainOrb(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + gBattleAnimArgs[1];
         sprite->data[1] = gBattleAnimArgs[2];
         sprite->data[2] = gBattleAnimArgs[3];
         sprite->data[3] = gBattleAnimArgs[4];
@@ -3309,8 +3309,8 @@ void AnimTask_LeafBlade(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->data[4] = GetBattlerSpriteSubpriority(gBattleAnimTarget) - 1;
-    task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     task->data[10] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH);
     task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT);
     task->data[5] = (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT) ? 1 : -1;
@@ -3601,11 +3601,11 @@ static void AnimFlyingParticle(struct Sprite* sprite)
         sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
         break;
     case 2:
-        sprite->y = GetBattlerSpriteCoord(battler, 3) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[0];
         sprite->oam.priority = GetBattlerSpriteBGPriority(battler);
         break;
     case 3:
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[0];
         GetAnimBattlerSpriteId(ANIM_TARGET);
         sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
         break;
@@ -3681,13 +3681,13 @@ static void AnimNeedleArmSpike(struct Sprite* sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            a = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-            b = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+            a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+            b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
         }
         else
         {
-            a = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-            b = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+            a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+            b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
         }
 
         sprite->data[0] = gBattleAnimArgs[4];
@@ -3790,8 +3790,8 @@ static void AnimFlickeringPunch(struct Sprite* sprite)
 // arg 2: slice direction; 0 = right-to-left, 1 = left-to-right
 static void AnimCuttingSlice(struct Sprite* sprite)
 {
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         sprite->y += 8;
 
@@ -3816,32 +3816,31 @@ static void AnimCuttingSlice(struct Sprite* sprite)
 
 static void AnimAirCutterSlice(struct Sprite* sprite)
 {
-    u8 a;
-    u8 b;
+    u8 x, y;
     switch (gBattleAnimArgs[3])
     {
     case 1:
-        a = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), 0);
-        b = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), 1);
+        x = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X);
+        y = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y);
         break;
     case 2:
-        a = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-        b = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
         if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
         {
-            a = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), 0) + a) / 2;
-            b = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), 1) + b) / 2;
+            x = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X) + x) / 2;
+            y = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y) + y) / 2;
         }
         break;
     case 0:
     default:
-        a = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-        b = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
         break;
     }
 
-    sprite->x = a;
-    sprite->y = b;
+    sprite->x = x;
+    sprite->y = y;
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         sprite->y += 8;
 
@@ -3956,8 +3955,8 @@ static void AnimProtect(struct Sprite* sprite)
     if (IsContest())
         gBattleAnimArgs[1] += 8;
 
-    sprite->x = GetBattlerSpriteCoord2(gBattleAnimAttacker, 0) + gBattleAnimArgs[0];
-    sprite->y = GetBattlerSpriteCoord2(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
+    sprite->x = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_X) + gBattleAnimArgs[0];
+    sprite->y = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_Y) + gBattleAnimArgs[1];
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER || IsContest())
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker) + 1;
     else
@@ -4016,8 +4015,8 @@ static void AnimProtect_Step(struct Sprite *sprite)
 
 static void AnimMilkBottle(struct Sprite* sprite)
 {
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 0xFFE8;
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + 0xFFE8;
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
