@@ -20,7 +20,7 @@
 
 extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
-static void sub_80A6FB4(struct Sprite *sprite);
+static void AnimTranslateLinear_WithFollowup_SetCornerVecX(struct Sprite *sprite);
 static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void AnimBattlerTrace(struct Sprite *sprite);
@@ -383,7 +383,7 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
         }
         else
         {
-            return 0xff;
+            return SPRITE_NONE;
         }
     }
     else if (animBattler == ANIM_TARGET)
@@ -395,13 +395,13 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
         }
         else
         {
-            return 0xff;
+            return SPRITE_NONE;
         }
     }
     else if (animBattler == ANIM_ATK_PARTNER)
     {
         if (!IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
-            return 0xff;
+            return SPRITE_NONE;
         else
             return gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)];
     }
@@ -410,7 +410,7 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
         if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
             return gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimTarget)];
         else
-            return 0xff;
+            return SPRITE_NONE;
     }
 }
 
@@ -426,18 +426,38 @@ void SetCallbackToStoredInData6(struct Sprite *sprite)
     sprite->callback = (void (*)(struct Sprite *))callback;
 }
 
-void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
+// Sprite data for TranslateSpriteInCircle/Ellipse and related
+#define sCirclePos    data[0]
+#define sAmplitude    data[1]
+#define sCircleSpeed  data[2]
+#define sDuration     data[3]
+
+// TranslateSpriteInGrowingCircle
+#define sAmplitudeSpeed  data[4]
+#define sAmplitudeChange data[5]
+
+// TranslateSpriteInEllipse
+#define sAmplitudeX sAmplitude
+#define sAmplitudeY data[4]
+
+// TranslateSpriteInWavePattern
+#define sCirclePosX   sCirclePos
+#define sCircleSpeedX sCircleSpeed
+#define sCirclePosY   data[4]
+#define sCircleSpeedY data[5]
+
+void TranslateSpriteInCircle(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[0], sprite->data[1]);
-        sprite->data[0] += sprite->data[2];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePos, sprite->sAmplitude);
+        sprite->y2 = Cos(sprite->sCirclePos, sprite->sAmplitude);
+        sprite->sCirclePos += sprite->sCircleSpeed;
+        if (sprite->sCirclePos >= 0x100)
+            sprite->sCirclePos -= 0x100;
+        else if (sprite->sCirclePos < 0)
+            sprite->sCirclePos += 0x100;
+        sprite->sDuration--;
     }
     else
     {
@@ -445,19 +465,19 @@ void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
     }
 }
 
-void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
+void TranslateSpriteInGrowingCircle(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], (sprite->data[5] >> 8) + sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[0], (sprite->data[5] >> 8) + sprite->data[1]);
-        sprite->data[0] += sprite->data[2];
-        sprite->data[5] += sprite->data[4];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePos, (sprite->sAmplitudeChange >> 8) + sprite->sAmplitude);
+        sprite->y2 = Cos(sprite->sCirclePos, (sprite->sAmplitudeChange >> 8) + sprite->sAmplitude);
+        sprite->sCirclePos += sprite->sCircleSpeed;
+        sprite->sAmplitudeChange += sprite->sAmplitudeSpeed;
+        if (sprite->sCirclePos >= 0x100)
+            sprite->sCirclePos -= 0x100;
+        else if (sprite->sCirclePos < 0)
+            sprite->sCirclePos += 0x100;
+        sprite->sDuration--;
     }
     else
     {
@@ -466,23 +486,27 @@ void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
 }
 
 // Unused
-static void sub_80A63C8(struct Sprite *sprite)
+// Exact shape depends on arguments. Can move in a figure-8-like pattern, or circular, etc.
+static void TranslateSpriteInWavePattern(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[4], sprite->data[1]);
-        sprite->data[0] += sprite->data[2];
-        sprite->data[4] += sprite->data[5];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        if (sprite->data[4] >= 0x100)
-            sprite->data[4] -= 0x100;
-        else if (sprite->data[4] < 0)
-            sprite->data[4] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePosX, sprite->sAmplitude);
+        sprite->y2 = Cos(sprite->sCirclePosY, sprite->sAmplitude);
+        sprite->sCirclePosX += sprite->sCircleSpeedX;
+        sprite->sCirclePosY += sprite->sCircleSpeedY;
+        
+        if (sprite->sCirclePosX >= 0x100)
+            sprite->sCirclePosX -= 0x100;
+        else if (sprite->sCirclePosX < 0)
+            sprite->sCirclePosX += 0x100;
+
+        if (sprite->sCirclePosY >= 0x100)
+            sprite->sCirclePosY -= 0x100;
+        else if (sprite->sCirclePosY < 0)
+            sprite->sCirclePosY += 0x100;
+
+        sprite->sDuration--;
     }
     else
     {
@@ -490,24 +514,37 @@ static void sub_80A63C8(struct Sprite *sprite)
     }
 }
 
-void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite)
+void TranslateSpriteInEllipse(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[0], sprite->data[4]);
-        sprite->data[0] += sprite->data[2];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePos, sprite->sAmplitudeX);
+        sprite->y2 = Cos(sprite->sCirclePos, sprite->sAmplitudeY);
+        sprite->sCirclePos += sprite->sCircleSpeed;
+        if (sprite->sCirclePos >= 0x100)
+            sprite->sCirclePos -= 0x100;
+        else if (sprite->sCirclePos < 0)
+            sprite->sCirclePos += 0x100;
+        sprite->sDuration--;
     }
     else
     {
         SetCallbackToStoredInData6(sprite);
     }
 }
+
+#undef sCirclePos
+#undef sAmplitude
+#undef sCircleSpeed
+#undef sDuration
+#undef sAmplitudeSpeed
+#undef sAmplitudeChange
+#undef sAmplitudeX
+#undef sAmplitudeY
+#undef sCirclePosX
+#undef sCircleSpeedX
+#undef sCirclePosY
+#undef sCircleSpeedY
 
 // Simply waits until the sprite's data[0] hits zero.
 // This is used to let sprite anims or affine anims to run for a designated
@@ -521,7 +558,7 @@ void WaitAnimForDuration(struct Sprite *sprite)
 }
 
 // Sprite data for ConvertPosDataToTranslateLinearData
-#define sStepsX   data[0]
+#define sStepsX  data[0]
 #define sStartX  data[1]
 #define sTargetX data[2]
 #define sStartY  data[3]
@@ -679,6 +716,12 @@ static void TranslateSpriteToBattleAttackerPos(struct Sprite *sprite)
     sprite->sTargetY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->callback = AnimPosToTranslateLinear;
 }
+
+#undef sStepsX
+#undef sStartX
+#undef sTargetX
+#undef sStartY
+#undef sTargetY
 
 // Unused
 static void sub_80A67A4(struct Sprite *sprite)
@@ -913,7 +956,7 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
     }
 }
 
-void sub_80A6BFC(struct BattleAnimBgData *out, u8 unused)
+void GetBgDataForTransform(struct BattleAnimBgData *out, u8 battlerId)
 {
     out->bgTiles = gBattleAnimBgTileBuffer;
     out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
@@ -1052,17 +1095,17 @@ void StartAnimLinearTranslation(struct Sprite *sprite)
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 
 // Unused
-static void sub_80A6F14(struct Sprite *sprite)
+static void StartAnimLinearTranslation_SetCornerVecX(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_80A6FB4;
+    sprite->callback = AnimTranslateLinear_WithFollowup_SetCornerVecX;
     sprite->callback(sprite);
 }
 
@@ -1096,16 +1139,16 @@ bool8 AnimTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-void AnimTranslateLinear_WaitEnd(struct Sprite *sprite)
+void AnimTranslateLinear_WithFollowup(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
 }
 
 // Functionally unused
-static void sub_80A6FB4(struct Sprite *sprite)
+static void AnimTranslateLinear_WithFollowup_SetCornerVecX(struct Sprite *sprite)
 {
-    sub_8039E9C(sprite);
+    AnimSetCenterToCornerVecX(sprite);
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
 }
@@ -1122,7 +1165,7 @@ void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite)
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;
     InitAnimLinearTranslationWithSpeed(sprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 

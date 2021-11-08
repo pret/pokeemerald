@@ -827,7 +827,7 @@ static void AnimSuperpowerOrb_Step(struct Sprite *sprite)
 
         InitAnimLinearTranslation(sprite);
         StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-        sprite->callback = AnimTranslateLinear_WaitEnd;
+        sprite->callback = AnimTranslateLinear_WithFollowup;
     }
 }
 
@@ -923,7 +923,7 @@ static void AnimSuperpowerFireball(struct Sprite *sprite)
 
     InitAnimLinearTranslation(sprite);
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
 }
 
 static void AnimArmThrustHit_Step(struct Sprite *sprite)

@@ -1262,19 +1262,29 @@ const struct SpriteTemplate gGuardRingSpriteTemplate =
     .callback = AnimGuardRing,
 };
 
+#define sAmplitudeX  data[1]
+#define sCircleSpeed data[2]
+#define sMoveSteps   data[3]
+#define sAmplitudeY  data[4]
+
 static void AnimCirclingFinger(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->y += gBattleAnimArgs[1];
-    sprite->data[1] = gBattleAnimArgs[2];
-    sprite->data[2] = gBattleAnimArgs[4];
-    sprite->data[3] = gBattleAnimArgs[5];
-    sprite->data[4] = gBattleAnimArgs[3];
+    sprite->sAmplitudeX = gBattleAnimArgs[2];
+    sprite->sCircleSpeed = gBattleAnimArgs[4];
+    sprite->sMoveSteps = gBattleAnimArgs[5];
+    sprite->sAmplitudeY = gBattleAnimArgs[3];
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = TranslateSpriteInEllipseOverDuration;
+    sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
 }
+
+#undef sAmplitudeX
+#undef sCircleSpeed
+#undef sMoveSteps
+#undef sAmplitudeY
 
 static void AnimBouncingMusicNote(struct Sprite *sprite)
 {
@@ -1883,7 +1893,7 @@ static void AnimRazorWindTornado(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[5];
     sprite->data[3] = gBattleAnimArgs[6];
     sprite->data[4] = gBattleAnimArgs[3];
-    sprite->callback = TranslateSpriteInCircleOverDuration;
+    sprite->callback = TranslateSpriteInCircle;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
     sprite->callback(sprite);
 }

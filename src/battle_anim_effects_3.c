@@ -2283,7 +2283,7 @@ void AnimTask_TransformMon(u8 taskId)
         break;
     case 2:
         HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
-        sub_80A6BFC(&animBg, gBattleAnimAttacker);
+        GetBgDataForTransform(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
             position = B_POSITION_PLAYER_LEFT;

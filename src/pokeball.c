@@ -894,8 +894,8 @@ static void SpriteCB_BallThrow_CaptureMon(struct Sprite *sprite)
 static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
 {
     sprite->data[0] = 25;
-    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBattler, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, 3) + 24;
+    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBattler, BATTLER_COORD_X_2);
+    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, BATTLER_COORD_Y_PIC_OFFSET) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->sBattler;
     InitAnimArcTranslation(sprite);

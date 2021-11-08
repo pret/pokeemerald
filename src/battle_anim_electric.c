@@ -509,7 +509,7 @@ static void AnimUnusedCirclingShock(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = TranslateSpriteInCircleOverDuration;
+    sprite->callback = TranslateSpriteInCircle;
 }
 
 static void AnimSparkElectricity(struct Sprite *sprite)

@@ -313,7 +313,7 @@ static void AnimFallingRock(struct Sprite *sprite)
     sprite->data[5] = gBattleAnimArgs[2];
 
     StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
-    sprite->callback = TranslateSpriteInEllipseOverDuration;
+    sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
 }
 
@@ -328,7 +328,7 @@ static void AnimFallingRock_Step(struct Sprite *sprite)
     sprite->data[4] = -24;
 
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = TranslateSpriteInEllipseOverDuration;
+    sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
 }
 
