@@ -660,9 +660,9 @@ bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE
-             && moves[i] != 0xFFFF
-             && GetBattleMoveSplit(moves[i]) == split
-             && !(unusable & gBitTable[i]))
+            && moves[i] != 0xFFFF
+            && GetBattleMoveSplit(moves[i]) == split
+            && !(unusable & gBitTable[i]))
         {
             SetTypeBeforeUsingMove(moves[i], attacker);
             GET_MOVE_TYPE(moves[i], moveType);
@@ -1033,7 +1033,7 @@ bool32 IsAiFaster(u8 battler)
 bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 {
     s32 i, dmg;
-    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF & ~MOVE_LIMITATION_PP);
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
     u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1053,22 +1053,22 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits)
 {
     s32 i, dmg;
-    u32 unusable = CheckMoveLimitations(battlerAtk, 0, 0xFF & ~MOVE_LIMITATION_PP);
+    u32 moveLimitations = CheckMoveLimitations(battlerAtk, 0, 0xFF);
     u16 *moves = gBattleMons[battlerAtk].moves;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i]))
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(moveLimitations & gBitTable[i]))
         {
-            continue;
-        }
-        // Use the pre-calculated value in simulatedDmg instead of re-calculating it
-        dmg = AI_THINKING_STRUCT->simulatedDmg[battlerAtk][battlerDef][i];
+            // Use the pre-calculated value in simulatedDmg instead of re-calculating it
+            dmg = AI_THINKING_STRUCT->simulatedDmg[battlerAtk][battlerDef][i];
 
-        if (numHits)
-            dmg *= numHits;
-        if (gBattleMons[battlerDef].hp <= dmg)
-            return TRUE;
+            if (numHits)
+                dmg *= numHits;
+
+            if (gBattleMons[battlerDef].hp <= dmg)
+                return TRUE;
+        }
     }
 
     return FALSE;
@@ -1077,7 +1077,7 @@ bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits)
 bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits)
 {
     s32 i, dmg;
-    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF & ~MOVE_LIMITATION_PP);
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
 
     if (move != MOVE_NONE && move != 0xFFFF && !(unusable & gBitTable[i]) && AI_CalcDamage(move, battlerDef, battlerAtk) >= gBattleMons[battlerAtk].hp)
         return TRUE;
@@ -1089,7 +1089,7 @@ bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits)
 bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgMod)
 {
     u32 i;
-    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF & ~MOVE_LIMITATION_PP);
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
     u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
