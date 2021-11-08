@@ -5,6 +5,7 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/items.h"
+#include "constants/battle_config.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
 	.include "constants/constants.inc"
@@ -1893,7 +1894,7 @@ Move_AURA_SPHERE:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
-	call SetHighSpeedBg
+	call SetAuraSphereBG
 	playsewithpan SE_M_SKY_UPPERCUT, 0
 	delay 60
 	createsprite gAuraSphereBlast, ANIM_TARGET, 3, 0
@@ -1907,6 +1908,10 @@ Move_AURA_SPHERE:
 	blendoff
 	delay 1
 	end
+
+SetAuraSphereBG:
+	fadetobg BG_AURA_SPHERE
+	goto SetHighSpeedBgFade
 
 Move_ROCK_POLISH:
 	loadspritegfx ANIM_TAG_WHITE_STREAK
@@ -2378,7 +2383,7 @@ Move_FOCUS_BLAST:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
-	call SetHighSpeedBg
+	call SetFocusBlastBG
 	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 2, 0
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	waitforvisualfinish
@@ -2390,6 +2395,10 @@ Move_FOCUS_BLAST:
 	blendoff
 	delay 1
 	end
+
+SetFocusBlastBG:
+	fadetobg BG_FOCUS_BLAST
+	goto SetHighSpeedBgFade
 
 Move_ENERGY_BALL:
 	loadspritegfx ANIM_TAG_ENERGY_BALL
@@ -3448,6 +3457,7 @@ Move_GUNK_SHOT:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
+	call SetGunkShotBG
 	createvisualtask AnimTask_ShakeMon 5, 5, ANIM_ATTACKER, 0, 2, 40, 1
 	delay 6
 	panse_1B SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 2, 0
@@ -3475,6 +3485,7 @@ Move_GUNK_SHOT:
 	call GunkShotImpact
 	call PoisonBubblesEffect
 	waitforvisualfinish
+	call UnsetHighSpeedBg
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
@@ -3490,6 +3501,10 @@ GunkShotImpact:
 	createsprite gGunkShotImpactSpriteTemplate, 4, 4, 0, 15, 1, 1
 	createsprite gGunkShotImpactSpriteTemplate, 4, 4, 0, -15, 1, 1
 	return
+SetGunkShotBG:
+	fadetobg BG_GUNK_SHOT
+	goto SetHighSpeedBgFade
+
 
 Move_IRON_HEAD:
 	loadspritegfx ANIM_TAG_GUST
@@ -14023,7 +14038,50 @@ Move_METEOR_BEAM::
 	end @to do:
 
 Move_SHELL_SIDE_ARM::
-	end @to do:
+	launchtask AnimTask_ShellSideArm 0x5 0x0
+	jumpargeq 0x0, TRUE, Move_SHELL_SIDE_ARM_PHYSICAL
+	jumpargeq 0x0, FALSE, Move_SHELL_SIDE_ARM_SPECIAL
+Move_SHELL_SIDE_ARM_PHYSICAL: @ Modified Body Slam, placeholder
+	loadspritegfx ANIM_TAG_IMPACT
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT, 0, 6, 6, RGB_MAGENTA
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
+	waitforvisualfinish
+	delay 11
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 26, 0, 0, 5
+	delay 6
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 4, -10, 0, ANIM_TARGET, 0
+	loopsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET, 10, 2
+	delay 1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -28, 0, 0, 3
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
+	waitforvisualfinish
+	delay 10
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 6
+	delay 5
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 6
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+Move_SHELL_SIDE_ARM_SPECIAL: @ Modified Snipe Shot, placeholder
+	loadspritegfx ANIM_TAG_IMPACT_2
+	loadspritegfx ANIM_TAG_LEER
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT_2, 0, 6, 6, RGB_MAGENTA
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_LEER, 0, 6, 6, RGB_MAGENTA
+	launchtemplate gLeerSpriteTemplate 0x82, 2 0x18 -12
+	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 0x20
+	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
+	launchtemplate gSnipeShotBallTemplate 0x82, 3, 0 0 24,
+	waitforvisualfinish
+	launchtask AnimTask_ShakeMon2 2 5 1 4 0 8, 1
+	waitforvisualfinish
+	end
 
 Move_MISTY_EXPLOSION::
 	end @to do:
@@ -14035,7 +14093,87 @@ Move_RISING_VOLTAGE::
 	end @to do:
 
 Move_TERRAIN_PULSE::
-	end @to do:
+	loadspritegfx ANIM_TAG_DRAGON_PULSE
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 7, RGB_BLACK
+	launchtask AnimTask_TerrainPulse 0x5 0x0
+	jumpargeq 0x0, TYPE_ELECTRIC, TerrainPulseElectric
+	jumpargeq 0x0, TYPE_GRASS, TerrainPulseGrass
+	jumpargeq 0x0, TYPE_FAIRY, TerrainPulseFairy
+	jumpargeq 0x0, TYPE_PSYCHIC, TerrainPulsePsychic
+TerrainPulseNormal:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB_WHITE
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 2, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB_WHITE
+	goto TerrainPulseEnd
+
+TerrainPulseElectric:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(27, 27, 0)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(27, 27, 0)
+	goto TerrainPulseEnd
+  
+TerrainPulseGrass:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(11, 26, 11)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(11, 26, 11)
+	goto TerrainPulseEnd
+
+TerrainPulseFairy:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(31, 24, 31)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(31, 24, 31)
+	goto TerrainPulseEnd
+  
+TerrainPulsePsychic:
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(27, 0, 13)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15
+	call DragonPulseParticle
+	call DragonPulseParticle
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(27, 0, 13)
+	goto TerrainPulseEnd
+
+TerrainPulseEnd:
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	call DragonPulseParticle
+	waitforvisualfinish
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 7, 0, RGB_BLACK
+	waitforvisualfinish
+	blendoff
+	clearmonbg ANIM_TARGET
+	end
 
 Move_SKITTER_SMACK::
 	end @to do:
@@ -23307,17 +23445,50 @@ Move_SKY_UPPERCUT:
 	end
 
 Move_SECRET_POWER:
+	createvisualtask AnimTask_GetFieldTerrain, 5
+	jumpargeq 0, STATUS_FIELD_MISTY_TERRAIN,    Move_FAIRY_WIND
+	jumpargeq 0, STATUS_FIELD_GRASSY_TERRAIN,   Move_NEEDLE_ARM
+	jumpargeq 0, STATUS_FIELD_ELECTRIC_TERRAIN, Move_THUNDER_SHOCK
+	jumpargeq 0, STATUS_FIELD_PSYCHIC_TERRAIN,  Move_CONFUSION
 	createvisualtask AnimTask_GetBattleTerrain, 5
-	jumpargeq 0, BATTLE_TERRAIN_GRASS,      Move_NEEDLE_ARM
-	jumpargeq 0, BATTLE_TERRAIN_LONG_GRASS, Move_MAGICAL_LEAF
-	jumpargeq 0, BATTLE_TERRAIN_SAND,       Move_MUD_SHOT
-	jumpargeq 0, BATTLE_TERRAIN_UNDERWATER, Move_WATERFALL
-	jumpargeq 0, BATTLE_TERRAIN_WATER,      Move_SURF
-	jumpargeq 0, BATTLE_TERRAIN_POND,       Move_BUBBLE_BEAM
-	jumpargeq 0, BATTLE_TERRAIN_MOUNTAIN,   Move_ROCK_THROW
-	jumpargeq 0, BATTLE_TERRAIN_CAVE,       Move_BITE
-	jumpargeq 0, BATTLE_TERRAIN_BUILDING,   Move_STRENGTH
+	jumpargeq 0, BATTLE_TERRAIN_GRASS,          Move_NEEDLE_ARM
+	jumpargeq 0, BATTLE_TERRAIN_LONG_GRASS,     Move_MAGICAL_LEAF
+	jumpargeq 0, BATTLE_TERRAIN_SAND,           Move_MUD_SHOT
+	jumpargeq 0, BATTLE_TERRAIN_UNDERWATER,     Move_WATERFALL
+	jumpargeq 0, BATTLE_TERRAIN_WATER,          Move_SURF
+	jumpargeq 0, BATTLE_TERRAIN_POND,           Move_BUBBLE_BEAM
+	jumpargeq 0, BATTLE_TERRAIN_MOUNTAIN,       Move_ROCK_THROW
+	jumpargeq 0, BATTLE_TERRAIN_CAVE,           Move_BITE
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_STRENGTH
+	jumpargeq 0, BATTLE_TERRAIN_SOARING,        Move_GUST
+	jumpargeq 0, BATTLE_TERRAIN_SKY_PILLAR,     Move_GUST
+	jumpargeq 0, BATTLE_TERRAIN_BURIAL_GROUND,  Move_SHADOW_SNEAK
+	jumpargeq 0, BATTLE_TERRAIN_PUDDLE,         Move_MUD_SHOT
+	jumpargeq 0, BATTLE_TERRAIN_MARSH,          Move_MUD_SHOT
+	jumpargeq 0, BATTLE_TERRAIN_SWAMP,          Move_MUD_SHOT
+.if B_SECRET_POWER_ANIMATION >= GEN_7
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_ICE_SHARD
+.else
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
+.endif
+	jumpargeq 0, BATTLE_TERRAIN_ICE,            Move_ICE_SHARD
+	jumpargeq 0, BATTLE_TERRAIN_VOLCANO,        Move_INCINERATE
+	jumpargeq 0, BATTLE_TERRAIN_DISTORTION_WORLD, Move_POUND
+	jumpargeq 0, BATTLE_TERRAIN_SPACE,          Move_SWIFT
+	jumpargeq 0, BATTLE_TERRAIN_ULTRA_SPACE,    Move_PSYWAVE
+.if B_SECRET_POWER_ANIMATION >= GEN_7
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_SPIT_UP
+	goto Move_SPIT_UP
+.elseif B_SECRET_POWER_ANIMATION == GEN_6
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
+	goto Move_BODY_SLAM
+.elseif B_SECRET_POWER_ANIMATION == GEN_5 || B_SECRET_POWER_ANIMATION == GEN_4
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
+	goto Move_MUD_SLAP
+.else
+	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_STRENGTH
 	goto Move_SLAM
+.endif
 
 Move_TWISTER:
 	loadspritegfx ANIM_TAG_LEAF
@@ -24034,6 +24205,7 @@ General_TurnTrap:
 	jumpargeq 0, TRAP_ANIM_WHIRLPOOL, Status_Whirlpool
 	jumpargeq 0, TRAP_ANIM_CLAMP,     Status_Clamp
 	jumpargeq 0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
+	jumpargeq 0, TRAP_ANIM_MAGMA_STORM, Status_MagmaStorm
 	jumpargeq 0, TRAP_ANIM_INFESTATION, Status_Infestation
 	goto Status_BindWrap
 Status_BindWrap:
@@ -24058,6 +24230,32 @@ Status_FireSpin:
 	call FireSpinEffect
 	waitforvisualfinish
 	stopsound
+	end
+
+Status_MagmaStorm:
+	loadspritegfx ANIM_TAG_SMALL_EMBER
+	fadetobg BG_MAGMA_STORM
+	waitbgfadeout
+	createvisualtask AnimTask_MoveSeismicTossBg, 3
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	loopsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET, 5, 8
+	createvisualtask AnimTask_SeismicTossBgAccelerateDownAtEnd, 3
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 47, 1
+	createvisualtask AnimTask_BlendColorCycle, 2, 6, 4, 2, 2, 0, 12, RGB(22, 9, 7)
+	call FireSpinEffect
+	call FireSpinEffect
+	createvisualtask AnimTask_BlendColorCycle, 2, 6, 4, 2, 2, 0, 12, RGB(22, 9, 7)
+	call FireSpinEffect
+	call FireSpinEffect
+	createvisualtask AnimTask_BlendColorCycle, 2, 6, 4, 2, 2, 0, 12, RGB(22, 9, 7)
+	call FireSpinEffect
+	restorebg
+	waitbgfadeout
+	setarg 7, 0xFFF
+	waitbgfadein
+	stopsound
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
 	end
 
 Status_Whirlpool:

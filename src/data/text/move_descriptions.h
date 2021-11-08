@@ -2839,7 +2839,7 @@ static const u8 sMETEOR_BEAMDescription[] = _(
     "Sp. Attack before attacking.");
 
 static const u8 sSHELL_SIDE_ARMDescription[] = _(
-    "Uses higher of physical and\n"
+    "Deals better of physical and\n"
     "special damage. May poison.");
 
 static const u8 sMISTY_EXPLOSIONDescription[] = _(

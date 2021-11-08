@@ -145,8 +145,8 @@ struct ProtectStruct
     u32 powderSelfDmg:1;
     u32 usedThroatChopPreventedMove:1;
     u32 statRaised:1;
-    u32 micle:1;
-    u32 custap:1;    // also quick claw
+    u32 usedMicleBerry:1;
+    u32 usedCustapBerry:1;    // also quick claw
     u32 touchedProtectLike:1;
     u32 disableEjectPack:1;
     u32 statFell:1;
@@ -222,10 +222,7 @@ struct FieldTimer
     u8 wonderRoomTimer;
     u8 magicRoomTimer;
     u8 trickRoomTimer;
-    u8 grassyTerrainTimer;
-    u8 mistyTerrainTimer;
-    u8 electricTerrainTimer;
-    u8 psychicTerrainTimer;
+    u8 terrainTimer;
     u8 gravityTimer;
     u8 fairyLockTimer;
 };
@@ -612,6 +609,7 @@ struct BattleStruct
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 ballSpriteIds[2];    // item gfx, window gfx
+    u8 stickyWebUser;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -928,5 +926,6 @@ extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
+extern bool8 gSwapDamageCategory; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 
 #endif // GUARD_BATTLE_H

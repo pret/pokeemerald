@@ -1838,6 +1838,10 @@
 	.macro trytoclearprimalweather
 	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
+	
+	.macro setattackertostickywebuser
+	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
+	.endm
 
 	.macro getrototillertargets ptr:req
 	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS
@@ -1872,6 +1876,19 @@
 	various \battler, VARIOUS_JUMP_IF_SPECIES
 	.2byte \species
 	.4byte \ptr
+	.endm
+
+	.macro trytoapplymimicry battler:req, ptr:req
+	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
+	.4byte \ptr
+	.endm
+
+	.macro photongeysercheck
+	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
+	.endm
+
+	.macro shellsidearmcheck
+	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
 @ helpful macros

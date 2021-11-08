@@ -4944,7 +4944,6 @@ extern const u32 gBattleAnimBgImage_GigaImpact[];
 extern const u32 gBattleAnimBgPalette_GigaImpact[];
 extern const u32 gBattleAnimBgImage_SpacialRend[];
 extern const u32 gBattleAnimBgPalette_SpacialRend[];
-extern const u32 gBattleAnimBgImage_DarkVoid[];
 extern const u32 gBattleAnimBgPalette_DarkVoid[];
 extern const u32 gBattleAnimBgTilemap_DarkVoid[];
 extern const u32 gBattleAnimBgPalette_Dark[];
