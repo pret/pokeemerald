@@ -1272,10 +1272,10 @@ const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/are
 
 // seems to be fire red leftovers, but the menu elements is reused in the item menu for TM descriptions.
 
-const u16 gFireRedMenuElements1_Pal[] = INCBIN_U16("graphics/interface_fr/menu1.gbapal");
-const u16 gFireRedMenuElements2_Pal[] = INCBIN_U16("graphics/interface_fr/menu2.gbapal");
-const u16 gFireRedMenuElements3_Pal[] = INCBIN_U16("graphics/interface_fr/menu3.gbapal");
-const u8 gFireRedMenuElements_Gfx[] = INCBIN_U8("graphics/interface_fr/menu.4bpp"); //the types are reused for item menu
+const u16 gMenuInfoElements1_Pal[] = INCBIN_U16("graphics/interface/menu_info1.gbapal");
+const u16 gMenuInfoElements2_Pal[] = INCBIN_U16("graphics/interface/menu_info2.gbapal");
+const u16 gMenuInfoElements3_Pal[] = INCBIN_U16("graphics/interface/menu_info3.gbapal");
+const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/menu_info.4bpp"); //the types are reused for item menu
 
 const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/interface/hm.4bpp");
 

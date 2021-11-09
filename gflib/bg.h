@@ -21,6 +21,7 @@ enum {
 	BG_TYPE_NONE = 0xFFFF
 };
 
+// Modes for ChangeBgX / ChangeBgY
 enum {
 	BG_COORD_SET,
 	BG_COORD_ADD,

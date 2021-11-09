@@ -213,6 +213,6 @@ static void PrintRegionMapSecName(void)
     else
     {
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
     }
 }

@@ -1263,7 +1263,7 @@ static bool32 MatchCall_LoadGfx(u8 taskId)
     FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
     LoadPalette(sMatchCallWindow_Pal, 0xE0, sizeof(sMatchCallWindow_Pal));
     LoadPalette(sPokenavIcon_Pal, 0xF0, sizeof(sPokenavIcon_Pal));
-    ChangeBgY(0, -0x2000, 0);
+    ChangeBgY(0, -0x2000, BG_COORD_SET);
     return TRUE;
 }
 
@@ -1277,7 +1277,7 @@ static bool32 MatchCall_DrawWindow(u8 taskId)
     DrawMatchCallTextBoxBorder_Internal(tWindowId, TILE_MC_WINDOW, 14);
     WriteSequenceToBgTilemapBuffer(0, (0xF << 12) | TILE_POKENAV_ICON, 1, 15, 4, 4, 17, 1);
     tIconTaskId = CreateTask(Task_SpinPokenavIcon, 10);
-    CopyWindowToVram(tWindowId, 2);
+    CopyWindowToVram(tWindowId, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(0);
     return TRUE;
 }
@@ -1297,9 +1297,9 @@ static bool32 MatchCall_ReadyIntro(u8 taskId)
 
 static bool32 MatchCall_SlideWindowIn(u8 taskId)
 {
-    if (ChangeBgY(0, 0x600, 1) >= 0)
+    if (ChangeBgY(0, 0x600, BG_COORD_ADD) >= 0)
     {
-        ChangeBgY(0, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
         return TRUE;
     }
 
@@ -1329,7 +1329,7 @@ static bool32 MatchCall_PrintMessage(u8 taskId)
     if (!RunMatchCallTextPrinter(tWindowId) && !IsSEPlaying() && JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
-        CopyWindowToVram(tWindowId, 2);
+        CopyWindowToVram(tWindowId, COPYWIN_GFX);
         PlaySE(SE_POKENAV_HANG_UP);
         return TRUE;
     }
@@ -1340,7 +1340,7 @@ static bool32 MatchCall_PrintMessage(u8 taskId)
 static bool32 MatchCall_SlideWindowOut(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (ChangeBgY(0, 0x600, 2) <= -0x2000)
+    if (ChangeBgY(0, 0x600, BG_COORD_SUB) <= -0x2000)
     {
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 14, 30, 6);
         DestroyTask(tIconTaskId);
@@ -1357,7 +1357,7 @@ static bool32 MatchCall_EndCall(u8 taskId)
     u8 playerObjectId;
     if (!IsDma3ManagerBusyWithBgCopy() && !IsSEPlaying())
     {
-        ChangeBgY(0, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
         if (!sMatchCallState.triggeredFromScript)
         {
             LoadMessageBoxAndBorderGfx();

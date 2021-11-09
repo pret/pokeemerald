@@ -169,13 +169,13 @@ u32 LoopedTask_sub_81C8254(s32 state)
 void sub_81C82E4(struct PokenavSub17 *matchCall)
 {
     u16 tileNum = (matchCall->list.listWindow.unk1 << 12) | matchCall->list.listWindow.unk6;
-    sub_8199DF0(matchCall->list.listWindow.bg, PIXEL_FILL(1), matchCall->list.listWindow.unk6, 1);
-    sub_8199DF0(matchCall->list.listWindow.bg, PIXEL_FILL(4), matchCall->list.listWindow.unk6 + 1, 1);
+    BgDmaFill(matchCall->list.listWindow.bg, PIXEL_FILL(1), matchCall->list.listWindow.unk6, 1);
+    BgDmaFill(matchCall->list.listWindow.bg, PIXEL_FILL(4), matchCall->list.listWindow.unk6 + 1, 1);
     SetBgTilemapBuffer(matchCall->list.listWindow.bg, matchCall->tilemapBuffer);
     FillBgTilemapBufferRect_Palette0(matchCall->list.listWindow.bg, tileNum, 0, 0, 32, 32);
-    ChangeBgY(matchCall->list.listWindow.bg, 0, 0);
-    ChangeBgX(matchCall->list.listWindow.bg, 0, 0);
-    ChangeBgY(matchCall->list.listWindow.bg, matchCall->list.listWindow.unk3 << 11, 2);
+    ChangeBgY(matchCall->list.listWindow.bg, 0, BG_COORD_SET);
+    ChangeBgX(matchCall->list.listWindow.bg, 0, BG_COORD_SET);
+    ChangeBgY(matchCall->list.listWindow.bg, matchCall->list.listWindow.unk3 << 11, BG_COORD_SUB);
     CopyBgTilemapBufferToVram(matchCall->list.listWindow.bg);
 }
 
@@ -183,7 +183,7 @@ void sub_81C835C(struct PokenavListMenuWindow *listWindow)
 {
     FillWindowPixelBuffer(listWindow->windowId, PIXEL_FILL(1));
     PutWindowTilemap(listWindow->windowId);
-    CopyWindowToVram(listWindow->windowId, 1);
+    CopyWindowToVram(listWindow->windowId, COPYWIN_MAP);
 }
 
 void sub_81C837C(struct MatchCallWindowState *state, struct PokenavSub17Substruct *a1)
@@ -231,9 +231,9 @@ u32 LoopedTask_sub_81C83F0(s32 state)
         if (++structPtr->listWindow.unkC >= structPtr->listWindow.unkE)
         {
             if (structPtr->unk38 != NULL)
-                CopyWindowToVram(structPtr->listWindow.windowId, 3);
+                CopyWindowToVram(structPtr->listWindow.windowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->listWindow.windowId, 2);
+                CopyWindowToVram(structPtr->listWindow.windowId, COPYWIN_GFX);
             return LT_INC_AND_PAUSE;
         }
         else
@@ -295,9 +295,9 @@ void sub_81C8568(s32 a0, struct PokenavSub17Substruct *list)
     list->unk20 = GetBgY(list->listWindow.bg);
     list->unk24 = list->unk20 + (a0 << 12);
     if (a0 > 0)
-        list->unk30 = 1;
+        list->unk30 = BG_COORD_ADD;
     else
-        list->unk30 = 2;
+        list->unk30 = BG_COORD_SUB;
     list->unk2C = a0;
     list->loopedTaskId = CreateLoopedTask(LoopedTask_sub_81C85A0, 6);
 }
@@ -319,12 +319,12 @@ u32 LoopedTask_sub_81C85A0(s32 state)
         flag = FALSE;
         y = GetBgY(subPtr->listWindow.bg);
         v1 = ChangeBgY(subPtr->listWindow.bg, 0x1000, subPtr->unk30);
-        if (subPtr->unk30 == 2)
+        if (subPtr->unk30 == BG_COORD_SUB)
         {
             if ((y > subPtr->unk24 || y <= subPtr->unk20) && v1 <= subPtr->unk24)
                 flag = TRUE;
         }
-        else
+        else // BG_COORD_ADD
         {
             if ((y < subPtr->unk24 || y >= subPtr->unk20) && v1 >= subPtr->unk24)
                 flag = TRUE;
@@ -333,7 +333,7 @@ u32 LoopedTask_sub_81C85A0(s32 state)
         if (flag)
         {
             subPtr->listWindow.unkA = (subPtr->listWindow.unkA + subPtr->unk2C) & 0xF;
-            ChangeBgY(subPtr->listWindow.bg, subPtr->unk24, 0);
+            ChangeBgY(subPtr->listWindow.bg, subPtr->unk24, BG_COORD_SET);
             return LT_FINISH;
         }
         return LT_PAUSE;
@@ -494,7 +494,7 @@ void sub_81C8838(void)
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_LIST);
     struct MatchCallWindowState *subPtr = &structPtr->unk888;
     structPtr->list.unk38(structPtr->list.listWindow.windowId, subPtr->windowTopIndex + subPtr->selectedIndexOffset, (structPtr->list.listWindow.unkA + subPtr->selectedIndexOffset) & 0xF);
-    CopyWindowToVram(structPtr->list.listWindow.windowId, 1);
+    CopyWindowToVram(structPtr->list.listWindow.windowId, COPYWIN_MAP);
 }
 
 // TODO:
@@ -672,7 +672,7 @@ void sub_81C8B70(struct PokenavListMenuWindow *listWindow, s32 a1, s32 a2)
     if (a1 + a2 <= 16)
     {
         CpuFastFill8(PIXEL_FILL(1), v1 + a1 * v2, a2 * v2);
-        CopyWindowToVram(listWindow->windowId, 2);
+        CopyWindowToVram(listWindow->windowId, COPYWIN_GFX);
     }
     else
     {
@@ -681,13 +681,13 @@ void sub_81C8B70(struct PokenavListMenuWindow *listWindow, s32 a1, s32 a2)
 
         CpuFastFill8(PIXEL_FILL(1), v1 + a1 * v2, v3 * v2);
         CpuFastFill8(PIXEL_FILL(1), v1, v4 * v2);
-        CopyWindowToVram(listWindow->windowId, 2);
+        CopyWindowToVram(listWindow->windowId, COPYWIN_GFX);
     }
 
     for (a2--; a2 != -1; a1 = (a1 + 1) & 0xF, a2--)
         ClearRematchPokeballIcon(listWindow->windowId, a1);
 
-    CopyWindowToVram(listWindow->windowId, 1);
+    CopyWindowToVram(listWindow->windowId, COPYWIN_MAP);
 }
 
 void sub_81C8C64(struct PokenavListMenuWindow *listWindow, u32 a1)
@@ -712,18 +712,18 @@ void sub_81C8CB4(struct MatchCallWindowState *state, struct PokenavSub17Substruc
     list->unk34(state->unk10 + state->unkC * state->windowTopIndex, list->unkTextBuffer);
     list->unk38(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(4), 0, list->listWindow.unkA * 16, list->listWindow.unk4 * 8, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, list->listWindow.fontId, 8, (list->listWindow.unkA * 16) + 1, colors, TEXT_SPEED_FF, list->unkTextBuffer);
+    AddTextPrinterParameterized3(list->listWindow.windowId, list->listWindow.fontId, 8, (list->listWindow.unkA * 16) + 1, colors, TEXT_SKIP_DRAW, list->unkTextBuffer);
     sub_81C8C64(&list->listWindow, 1);
-    CopyWindowRectToVram(list->listWindow.windowId, 3, 0, list->listWindow.unkA * 2, list->listWindow.unk4, 2);
+    CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_FULL, 0, list->listWindow.unkA * 2, list->listWindow.unk4, 2);
 }
 
 void sub_81C8D4C(struct MatchCallWindowState *state, struct PokenavSub17Substruct *list)
 {
     list->unk34(state->unk10 + state->unkC * state->windowTopIndex, list->unkTextBuffer);
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, list->listWindow.unkA * 16, list->listWindow.unk4 * 8, 16);
-    AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->unkTextBuffer, 8, list->listWindow.unkA * 16 + 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->unkTextBuffer, 8, list->listWindow.unkA * 16 + 1, TEXT_SKIP_DRAW, NULL);
     sub_81C8C64(&list->listWindow, 0);
-    CopyWindowToVram(list->listWindow.windowId, 3);
+    CopyWindowToVram(list->listWindow.windowId, COPYWIN_FULL);
 }
 
 void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fieldId)
@@ -733,8 +733,8 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fieldId)
     u32 top = (list->listWindow.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, top << 4, list->listWindow.unk4, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, FONT_NARROW, 2, (top << 4) + 1, colors, -1, fieldNames[fieldId]);
-    CopyWindowRectToVram(list->listWindow.windowId, 2, 0, top << 1, list->listWindow.unk4, 2);
+    AddTextPrinterParameterized3(list->listWindow.windowId, FONT_NARROW, 2, (top << 4) + 1, colors, TEXT_SKIP_DRAW, fieldNames[fieldId]);
+    CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_GFX, 0, top << 1, list->listWindow.unk4, 2);
 }
 
 static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *list, u32 checkPageEntry)
@@ -754,8 +754,8 @@ static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct Pok
     if (str != NULL)
     {
         FillWindowTilesByRow(list->listWindow.windowId, 1, r6 * 2, list->listWindow.unk4 - 1, 2);
-        AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
-        CopyWindowRectToVram(list->listWindow.windowId, 2, 0, r6 * 2, list->listWindow.unk4, 2);
+        AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_GFX, 0, r6 * 2, list->listWindow.unk4, 2);
     }
 }
 

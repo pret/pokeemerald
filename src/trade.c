@@ -1395,9 +1395,9 @@ static void TradeMenuProcessInput(void)
             DrawTextBorderOuter(1, 1, 14);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
             PrintMenuTable(1, ARRAY_COUNT(sSelectTradeMonActions), sSelectTradeMonActions);
-            InitMenuInUpperLeftCornerPlaySoundWhenAPressed(1, 2, 0);
+            InitMenuInUpperLeftCornerNormal(1, 2, 0);
             PutWindowTilemap(1);
-            CopyWindowToVram(1, 3);
+            CopyWindowToVram(1, COPYWIN_FULL);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_SELECTED_MON;
         }
         // Cursor is in partner's party
@@ -1584,7 +1584,7 @@ static void RestoreNicknamesCoveredByYesNo(void)
     for (i = 0; i < sTradeMenuData->partyCounts[1] - 4; i++)
     {
         PutWindowTilemap(i + 12);
-        CopyWindowToVram(i + 12, 1);
+        CopyWindowToVram(i + 12, COPYWIN_MAP);
     }
 }
 
@@ -1855,9 +1855,9 @@ static void DrawTradeMenuParty(u8 whichParty)
         BufferTradeMonMoves(movesString, selectedMonParty, partyIdx);
         AddTextPrinterParameterized4((whichParty * 2) + 15, FONT_NORMAL, 0, 0, 0, 0, sTradeTextColors, 0, movesString);
         PutWindowTilemap((whichParty * 2) + 14);
-        CopyWindowToVram((whichParty * 2) + 14, 3);
+        CopyWindowToVram((whichParty * 2) + 14, COPYWIN_FULL);
         PutWindowTilemap((whichParty * 2) + 15);
-        CopyWindowToVram((whichParty * 2) + 15, 3);
+        CopyWindowToVram((whichParty * 2) + 15, COPYWIN_FULL);
         sTradeMenuData->drawPartyState[whichParty]++;
         break;
     case 4:
@@ -1929,7 +1929,7 @@ static void PrintMonNicknameForTradeMenu(u8 whichParty, u8 windowId, u8 *nicknam
     xPos = GetStringCenterAlignXOffset(FONT_SMALL, nickname, 64);
     AddTextPrinterParameterized3(windowId, FONT_SMALL, xPos, 4, sTradeTextColors, 0, nickname);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void PrintPartyNicknamesForTradeMenu(u8 whichParty)
@@ -2153,10 +2153,10 @@ static void DoQueuedActions(void)
 static void PrintTradeMessage(u8 messageId)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(0, FONT_NORMAL, sTradeMessages[messageId], 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, sTradeMessages[messageId], 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(0, 20, 12);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 LoadTradeMenuSpriteSheetsAndPalettes(void)
@@ -2899,7 +2899,7 @@ void LinkTradeDrawWindow(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void InitTradeBgInternal(void)
@@ -2907,8 +2907,8 @@ static void InitTradeBgInternal(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sTradeSequenceBgTemplates, ARRAY_COUNT(sTradeSequenceBgTemplates));
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
     SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
     SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
     SetBgTilemapBuffer(3, Alloc(BG_SCREEN_SIZE));
@@ -2976,7 +2976,7 @@ static void CB2_InGameTrade(void)
         LoadTradeMonPic(TRADE_PARTNER, 1);
         FillWindowPixelBuffer(0, PIXEL_FILL(15));
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gMain.state++;
         break;
     case 9:
@@ -3433,7 +3433,7 @@ static bool8 AnimateTradeSequenceCable(void)
         {
             SetTradeSequenceBgGpuRegs(4);
             FillWindowPixelBuffer(0, PIXEL_FILL(15));
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_FULL);
             sTradeData->state++;
         }
         break;
@@ -3904,7 +3904,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         {
             SetTradeSequenceBgGpuRegs(4);
             FillWindowPixelBuffer(0, PIXEL_FILL(15));
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_FULL);
             sTradeData->state++;
         }
         break;
@@ -4834,7 +4834,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed)
     sTradeData->textColors[1] = TEXT_COLOR_WHITE;
     sTradeData->textColors[2] = TEXT_COLOR_GREEN;
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, sTradeData->textColors, speed, str);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 #define idx               data[0]

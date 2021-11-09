@@ -1764,7 +1764,7 @@ static bool8 Fishing_InitDots(struct Task *task)
 {
     u32 randVal;
 
-    sub_819786C(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     task->tStep++;
     task->tFrameCounter = 0;
     task->tNumDots = 0;

@@ -3428,7 +3428,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
 
             for (i = windowId; i < windowId + 9; i++)
             {
-                CopyWindowToVram(i, 2);
+                CopyWindowToVram(i, COPYWIN_GFX);
                 FillWindowPixelBuffer(i, PIXEL_FILL(0));
             }
             gTasks[taskId].tState = STATE_REACT_INPUT;
@@ -4358,7 +4358,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId;
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
     textPrinter.letterSpacing = 0;
 
@@ -4380,12 +4380,12 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             textPrinter.currentX = 0;
 
         PutWindowTilemap(1 + i + windowId);
-        CopyWindowToVram(1 + i + windowId, 3);
+        CopyWindowToVram(1 + i + windowId, COPYWIN_FULL);
         AddTextPrinter(&textPrinter, 0, NULL);
     }
 
     PutWindowTilemap(windowId + 4);
-    CopyWindowToVram(windowId + 4, 3);
+    CopyWindowToVram(windowId + 4, COPYWIN_FULL);
 
     // Print text about trainers potential in the tourney
     if (trainerId == TRAINER_FRONTIER_BRAIN)
@@ -4861,7 +4861,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.windowId = windowId + 8;
     textPrinter.fontId = FONT_NORMAL;
     PutWindowTilemap(windowId + 8);
-    CopyWindowToVram(windowId + 8, 3);
+    CopyWindowToVram(windowId + 8, COPYWIN_FULL);
     textPrinter.currentX = 0;
     textPrinter.currentY = textPrinter.y = 0;
     AddTextPrinter(&textPrinter, 0, NULL);
@@ -4881,7 +4881,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
     PutWindowTilemap(windowId + 6);
-    CopyWindowToVram(windowId + 6, 3);
+    CopyWindowToVram(windowId + 6, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 
     // Print right trainer's name.
@@ -4897,7 +4897,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
     PutWindowTilemap(windowId + 7);
-    CopyWindowToVram(windowId + 7, 3);
+    CopyWindowToVram(windowId + 7, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 
     // Print match number.
@@ -4907,7 +4907,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0xA0, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
     PutWindowTilemap(windowId + 5);
-    CopyWindowToVram(windowId + 5, 3);
+    CopyWindowToVram(windowId + 5, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 }
 
@@ -5281,10 +5281,10 @@ static void Task_ShowTourneyTree(u8 taskId)
         gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0xB00, 0);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0xB00, BG_COORD_SET);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -5442,9 +5442,9 @@ static void Task_ShowTourneyTree(u8 taskId)
         PutWindowTilemap(0);
         PutWindowTilemap(1);
         PutWindowTilemap(2);
-        CopyWindowToVram(0, 3);
-        CopyWindowToVram(1, 3);
-        CopyWindowToVram(2, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(1, COPYWIN_FULL);
+        CopyWindowToVram(2, COPYWIN_FULL);
         SetHBlankCallback(HblankCb_TourneyTree);
         SetVBlankCallback(VblankCb_TourneyTree);
         if (r4 == 2)
@@ -5597,8 +5597,8 @@ static void CB2_TourneyTree(void)
 
 static void VblankCb_TourneyInfoCard(void)
 {
-    ChangeBgX(3, 0x80, 1);
-    ChangeBgY(3, 0x80, 2);
+    ChangeBgX(3, 0x80, BG_COORD_ADD);
+    ChangeBgY(3, 0x80, BG_COORD_SUB);
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
@@ -5693,8 +5693,8 @@ static void VblankCb_TourneyTree(void)
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    ChangeBgY(2, 0x80, 2);
-    ChangeBgY(3, 0x80, 1);
+    ChangeBgY(2, 0x80, BG_COORD_SUB);
+    ChangeBgY(3, 0x80, BG_COORD_ADD);
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();

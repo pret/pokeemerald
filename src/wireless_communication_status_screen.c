@@ -189,10 +189,10 @@ static void CB2_InitWirelessCommunicationScreen(void)
     sStatusScreen->taskId = CreateTask(Task_WirelessCommunicationScreen, 0);
     sStatusScreen->rfuTaskId = CreateTask_ListenToWireless();
     sStatusScreen->prevGroupCounts[GROUPTYPE_TOTAL] = 1;
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     LoadPalette(sBgTiles_Pal, 0x00, 0x20);
     Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
@@ -243,9 +243,9 @@ static void PrintHeaderTexts(void)
     }
     WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 #define tState data[0]
@@ -285,7 +285,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
                     WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
             }
             PutWindowTilemap(2);
-            CopyWindowToVram(2, 3);
+            CopyWindowToVram(2, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
@@ -344,7 +344,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
         break;
     }
 
-    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * groupCounts)

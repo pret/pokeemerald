@@ -687,7 +687,7 @@ static void DoMoveRelearnerMain(void)
             ShowTeachMoveText(TRUE);
         }
         RemoveScrollArrows();
-        CopyWindowToVram(3, 2);
+        CopyWindowToVram(3, COPYWIN_GFX);
         break;
     case MENU_STATE_TRY_OVERWRITE_MOVE:
         if (!gPaletteFade.active)

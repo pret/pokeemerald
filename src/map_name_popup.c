@@ -329,8 +329,8 @@ static void ShowMapNamePopUpWindow(void)
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
-    AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, 0xFF, NULL);
-    CopyWindowToVram(GetMapNamePopUpWindowId(), 3);
+    AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
 }
 
 #define TILE_TOP_EDGE_START 0x21D

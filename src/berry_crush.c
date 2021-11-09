@@ -1202,12 +1202,12 @@ static s32 ShowGameDisplay(void)
         SetBgTilemapBuffer(1, game->gfx.bgBuffers[0]);
         SetBgTilemapBuffer(2, game->gfx.bgBuffers[2]);
         SetBgTilemapBuffer(3, game->gfx.bgBuffers[3]);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         break;
@@ -1249,8 +1249,8 @@ static s32 ShowGameDisplay(void)
         CreateWirelessStatusIndicatorSprite(0,  0);
         CreateGameSprites(game);
         SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         break;
     case 9:
         gPaletteFade.bufferTransferDisabled = FALSE;
@@ -1778,7 +1778,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
         PrintCrushingResults(game);
         break;
     case 5:
-        CopyWindowToVram(gfx->resultsWindowId, 3);
+        CopyWindowToVram(gfx->resultsWindowId, COPYWIN_FULL);
         gfx->resultsState = 0;
         return TRUE;
     }
@@ -1841,7 +1841,7 @@ static void Task_ShowRankings(u8 taskId)
             yPos += 16;
             score = 0;
         }
-        CopyWindowToVram(tWindowId, 3);
+        CopyWindowToVram(tWindowId, COPYWIN_FULL);
         break;
     case 2:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
@@ -1938,7 +1938,7 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
                 game->players[i].name
             );
         }
-        CopyWindowToVram(game->gfx.nameWindowIds[i], 3);
+        CopyWindowToVram(game->gfx.nameWindowIds[i], COPYWIN_FULL);
     }
     CopyBgTilemapBufferToVram(0);
 }
@@ -2264,7 +2264,7 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame *game, u8 *args)
         {
             AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[args[0]], game->textSpeed, 0, 2, 1, 3);
         }
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:
         if (!IsTextPrinterActive(0))
@@ -3243,7 +3243,7 @@ static u32 Cmd_SaveGame(struct BerryCrushGame *game, u8 *args)
             return 0;
         DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, 0, 2, 1, 3);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         CreateTask(Task_LinkSave, 0);
         break;
     case 3:
@@ -3394,7 +3394,7 @@ static u32 Cmd_StopGame(struct BerryCrushGame *game, u8 *args)
             AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_NO_BERRIES], game->textSpeed, 0, 2, 1, 3);
         else
             AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_DROPPED], game->textSpeed, 0, 2, 1, 3);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:
         if (IsTextPrinterActive(0))

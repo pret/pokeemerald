@@ -421,9 +421,9 @@ static u32 LoopedTask_SlideMenuHeaderUp(s32 a0)
     case 0:
         return LT_INC_AND_PAUSE;
     case 2:
-        if (ChangeBgY(0, 384, 1) >= 0x2000u)
+        if (ChangeBgY(0, 384, BG_COORD_ADD) >= 0x2000u)
         {
-            ChangeBgY(0, 0x2000, 0);
+            ChangeBgY(0, 0x2000, BG_COORD_SET);
             return LT_FINISH;
         }
 
@@ -433,9 +433,9 @@ static u32 LoopedTask_SlideMenuHeaderUp(s32 a0)
 
 static u32 LoopedTask_SlideMenuHeaderDown(s32 a0)
 {
-    if (ChangeBgY(0, 384, 2) <= 0)
+    if (ChangeBgY(0, 384, BG_COORD_SUB) <= 0)
     {
-        ChangeBgY(0, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
         return LT_FINISH;
     }
     return LT_PAUSE;
@@ -555,7 +555,7 @@ static void InitHelpBar(void)
     structPtr->helpBarWindowId = 0;
     DrawHelpBar(structPtr->helpBarWindowId);
     PutWindowTilemap(structPtr->helpBarWindowId);
-    CopyWindowToVram(structPtr->helpBarWindowId, 3); // TODO: Use a defined constant here.
+    CopyWindowToVram(structPtr->helpBarWindowId, COPYWIN_FULL);
 }
 
 void PrintHelpBarText(u32 textId)
