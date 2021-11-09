@@ -459,18 +459,18 @@ void CreateSearchResultsLoopedTask(s32);
 u32 IsSearchResultLoopedTaskActive(void);
 void FreeSearchResultSubstruct2(void);
 
-// pokenav_ribbons_1.c
+// pokenav_ribbons_list.c
 u32 PokenavCallback_Init_MonRibbonList(void);
 u32 PokenavCallback_Init_RibbonsMonListFromSummary(void);
 u32 GetRibbonsMonListCallback(void);
-void FreeRibbonsMonList1(void);
+void FreeRibbonsMonList(void);
 bool32 OpenRibbonsMonList(void);
 bool32 OpenRibbonsMonListFromRibbonsSummary(void);
 void CreateRibbonsMonListLoopedTask(s32);
 u32 IsRibbonsMonListLoopedTaskActive(void);
-void FreeRibbonsMonList2(void);
+void FreeRibbonsMonMenu(void);
 
-// pokenav_ribbons_2.c
+// pokenav_ribbons_summary.c
 u32 PokenavCallback_Init_RibbonsSummaryMenu(void);
 u32 GetRibbonsSummaryMenuCallback(void);
 void FreeRibbonsSummaryScreen1(void);

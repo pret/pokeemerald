@@ -179,8 +179,8 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .open = OpenRibbonsMonList,
         .createLoopTask = CreateRibbonsMonListLoopedTask,
         .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList1,
-        .free2 = FreeRibbonsMonList2,
+        .free1 = FreeRibbonsMonList,
+        .free2 = FreeRibbonsMonMenu,
     },
     [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
     {
@@ -199,8 +199,8 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .open = OpenRibbonsMonListFromRibbonsSummary,
         .createLoopTask = CreateRibbonsMonListLoopedTask,
         .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList1,
-        .free2 = FreeRibbonsMonList2,
+        .free1 = FreeRibbonsMonList,
+        .free2 = FreeRibbonsMonMenu,
     },
 };
 
