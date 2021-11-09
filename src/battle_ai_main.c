@@ -4111,10 +4111,14 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (AI_DATA->atkAbility == ABILITY_RIPEN)
         {
             u16 item = GetUsedHeldItem(battlerAtk);
+            u16 toHeal = (ItemId_GetHoldEffectParam(item) == 10) ? 10 : gBattleMons[battlerAtk].maxHP / ItemId_GetHoldEffectParam(item);
+            
             if (IsStatBoostingBerry(item) && atkHpPercent > 60)
                 score++;
-            else if (IsHpRestoringBerry(item) && atkHpPercent < 60)
-                score++;    // TODO check if player can still faint us after we heal
+            else if (IsHpRestoringBerry(item) && !CanAIFaintTarget(battlerAtk, battlerDef, 0) 
+              && ((GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0 && CanTargetFaintAiWithMod(battlerDef, battlerAtk, 0, 0))
+               || !CanTargetFaintAiWithMod(battlerDef, battlerAtk, toheal, 0)))
+                score++;    // Recycle healing berry if we can't otherwise faint the target and the target wont kill us after we activate the berry
         }
         break;
     case EFFECT_BRICK_BREAK:
