@@ -222,8 +222,8 @@ static void CB2_SaveFailedScreen(void)
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
         FillWindowPixelBuffer(sWindowIds[CLOCK_WIN_ID], PIXEL_FILL(1)); // backwards?
         FillWindowPixelBuffer(sWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
-        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], 2); // again?
-        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], 1);
+        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], COPYWIN_GFX); // again?
+        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], COPYWIN_MAP);
         SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(1);

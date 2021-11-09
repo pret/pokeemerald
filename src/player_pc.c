@@ -399,8 +399,8 @@ static void InitPlayerPCMenu(u8 taskId)
     windowTemplate.width = GetMaxWidthInSubsetOfMenuTable(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
-    sub_81995E4(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, sTopMenuNumOptions, 0);
+    PrintMenuActionTextsInUpperLeftCorner(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
+    InitMenuInUpperLeftCornerNormal(tWindowId, sTopMenuNumOptions, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = PlayerPCProcessMenuInput;
 }
@@ -511,7 +511,7 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
     PrintMenuTable(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), sItemStorage_MenuActions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, 4, var);
+    InitMenuInUpperLeftCornerNormal(tWindowId, 4, var);
     ScheduleBgCopyTilemapToVram(0);
     ItemStorageMenuPrint(sItemStorage_OptionDescriptions[var]);
 }
@@ -753,7 +753,7 @@ static void Mailbox_PrintMailOptions(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_OPTIONS);
     PrintMenuTable(windowId, ARRAY_COUNT(gMailboxMailOptions), gMailboxMailOptions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 4, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, 4, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Mailbox_MailOptionsProcessInput;
 }
@@ -1027,13 +1027,13 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
         if (sItemStorageMenu->toSwapPos != NOT_SWAPPING)
         {
             if (sItemStorageMenu->toSwapPos == (u8)id)
-                ItemStorage_DrawSwapArrow(yOffset, 0, TEXT_SPEED_FF);
+                ItemStorage_DrawSwapArrow(yOffset, 0, TEXT_SKIP_DRAW);
             else
-                ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SPEED_FF);
+                ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SKIP_DRAW);
         }
         ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pcItems[id].quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_xVar1);
-        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar4, GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 104), yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar4, GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 104), yOffset, TEXT_SKIP_DRAW, NULL);
     }
 }
 
@@ -1144,7 +1144,7 @@ static void ItemStorage_CreateListMenu(u8 taskId)
         text = gText_WithdrawItem;
     x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 104);
     AddTextPrinterParameterized(sItemStorageMenu->windowIds[ITEMPC_WIN_TITLE], FONT_NORMAL, text, x, 1, 0, NULL);
-    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], 2);
+    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], COPYWIN_GFX);
     ItemStorage_CompactList();
     ItemStorage_CompactCursor();
     ItemStorage_RefreshListMenu();

@@ -802,7 +802,7 @@ static void DrawPokeblockInfo(s32 pkblId)
         for (i = 0; i < FLAVOR_COUNT; i++)
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
 
-        CopyWindowToVram(7, 2);
+        CopyWindowToVram(7, COPYWIN_GFX);
     }
 
     ScheduleBgCopyTilemapToVram(0);
@@ -1149,8 +1149,8 @@ static void ShowPokeblockActionsWindow(u8 taskId)
 
     DestroyScrollArrows();
     DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 1, 0xE);
-    sub_81995E4(tWindowId, sPokeblockMenu->numActions, sPokeblockMenuActions, sPokeblockMenu->pokeblockActionIds);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, sPokeblockMenu->numActions, 0);
+    PrintMenuActionTextsInUpperLeftCorner(tWindowId, sPokeblockMenu->numActions, sPokeblockMenuActions, sPokeblockMenu->pokeblockActionIds);
+    InitMenuInUpperLeftCornerNormal(tWindowId, sPokeblockMenu->numActions, 0);
     PutWindowTilemap(tWindowId);
     ScheduleBgCopyTilemapToVram(1);
 

@@ -17,7 +17,7 @@ SouthernIsland_Exterior_EventScript_Sailor::
 	goto_if_eq SouthernIsland_Exterior_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	hideobjectat LOCALID_SAILOR, MAP_SOUTHERN_ISLAND_EXTERIOR
@@ -49,7 +49,7 @@ Ferry_EventScript_DepartIslandBoardSouth:
 
 Ferry_EventScript_DepartIslandBoardWest:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SouthernIsland_Exterior_EventScript_Sign::

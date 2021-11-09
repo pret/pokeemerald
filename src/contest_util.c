@@ -1181,7 +1181,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
     if (strWidth > 30)
      strWidth = 30;
 
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, TEXT_SKIP_DRAW, text);
     {
         s32 i;
         struct Sprite *sprite;

@@ -1358,7 +1358,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         txtColor[0] = zero2;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
 
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6u)
@@ -1402,7 +1402,7 @@ static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgC
     txtColor[0] = bgColor;
     txtColor[1] = fgColor;
     txtColor[2] = shadowColor;
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
     CpuCopy16(tileData1, dst, tileSize);
     CpuCopy16(tileData2, dst + offset, tileSize);
     RemoveWindow(windowId);
@@ -1561,9 +1561,9 @@ static void Task_PCMainMenu(u8 taskId)
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
-        CopyWindowToVram(0, 3);
-        CopyWindowToVram(task->tWindowId, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, 2, 1, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
         break;
     case STATE_FADE_IN:
@@ -1699,7 +1699,7 @@ static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
 
     DrawStdWindowFrame(windowId, FALSE);
     PrintMenuTable(windowId, OPTIONS_COUNT, (void *)sMainMenuTexts);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, OPTIONS_COUNT, whichMenu);
+    InitMenuInUpperLeftCornerNormal(windowId, OPTIONS_COUNT, whichMenu);
     *windowIdPtr = windowId;
 }
 
@@ -1951,13 +1951,13 @@ static void ChooseBoxMenu_PrintInfo(void)
 
     // Print box name
     center = GetStringCenterAlignXOffset(FONT_NORMAL, boxName, 64);
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 1, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, boxName);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 1, sChooseBoxMenu_TextColors, TEXT_SKIP_DRAW, boxName);
 
     // Print #/30 for number of Pokémon in the box
     ConvertIntToDecimalStringN(numBoxMonsText, numInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringAppend(numBoxMonsText, sText_OutOf30);
     center = GetStringCenterAlignXOffset(FONT_NORMAL, numBoxMonsText, 64);
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 17, sChooseBoxMenu_TextColors, TEXT_SPEED_FF, numBoxMonsText);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 17, sChooseBoxMenu_TextColors, TEXT_SKIP_DRAW, numBoxMonsText);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(sChooseBoxMenu->tileTag) * 32), 0x400);
@@ -3827,8 +3827,8 @@ static void SetScrollingBackground(void)
 
 static void ScrollBackground(void)
 {
-    ChangeBgX(3, 128, 1);
-    ChangeBgY(3, 128, 2);
+    ChangeBgX(3, 128, BG_COORD_ADD);
+    ChangeBgY(3, 128, BG_COORD_SUB);
 }
 
 static void LoadPokeStorageMenuGfx(void)
@@ -4005,20 +4005,20 @@ static void PrintDisplayMonInfo(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
     }
 
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     if (sStorage->displayMonSpecies != SPECIES_NONE)
     {
         UpdateMonMarkingTiles(sStorage->displayMonMarkings, sStorage->markingComboTilesPtr);
@@ -4319,10 +4319,10 @@ static void PrintMessage(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -8024,7 +8024,7 @@ static void AddMenu(void)
     ClearWindowTilemap(sStorage->menuWindowId);
     DrawStdFrameWithCustomTileAndPalette(sStorage->menuWindowId, FALSE, 11, 14);
     PrintMenuTable(sStorage->menuWindowId, sStorage->menuItemsCount, (void*)sStorage->menuItems);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sStorage->menuWindowId, sStorage->menuItemsCount, 0);
+    InitMenuInUpperLeftCornerNormal(sStorage->menuWindowId, sStorage->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     sStorage->menuUnusedField = 0;
 }
@@ -8184,14 +8184,14 @@ static bool8 MultiMove_Start(void)
         GetCursorBoxColumnAndRow(&sMultiMove->fromColumn, &sMultiMove->fromRow);
         sMultiMove->toColumn = sMultiMove->fromColumn;
         sMultiMove->toRow = sMultiMove->fromRow;
-        ChangeBgX(0, -1024, 0);
-        ChangeBgY(0, -1024, 0);
+        ChangeBgX(0, -1024, BG_COORD_SET);
+        ChangeBgY(0, -1024, BG_COORD_SET);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillWindowPixelBuffer8Bit(sStorage->multiMoveWindowId, PIXEL_FILL(0));
         MultiMove_SetIconToBg(sMultiMove->fromColumn, sMultiMove->fromRow);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sStorage->multiMoveWindowId);
-        CopyWindowToVram8Bit(sStorage->multiMoveWindowId, 3);
+        CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_FULL);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
         StartCursorAnim(CURSOR_ANIM_OPEN);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
@@ -8247,7 +8247,7 @@ static bool8 MultiMove_ChangeSelection(void)
             MultiMove_UpdateSelectedIcons();
             sMultiMove->toColumn = sMultiMove->cursorColumn;
             sMultiMove->toRow = sMultiMove->cursorRow;
-            CopyWindowToVram8Bit(sStorage->multiMoveWindowId, 2);
+            CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_GFX);
             sMultiMove->state++;
         }
         break;
@@ -8499,8 +8499,8 @@ static u8 MultiMove_UpdateMove(void)
 {
     if (sMultiMove->bgMoveSteps != 0)
     {
-        ChangeBgX(0, sMultiMove->bgX, 1);
-        ChangeBgY(0, sMultiMove->bgY, 1);
+        ChangeBgX(0, sMultiMove->bgX, BG_COORD_ADD);
+        ChangeBgY(0, sMultiMove->bgY, BG_COORD_ADD);
         sMultiMove->bgMoveSteps--;
     }
 
@@ -8605,8 +8605,8 @@ static void MultiMove_SetPlacedMonData(void)
 
 static void MultiMove_ResetBg(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
     SetBgAttribute(0, BG_ATTR_PALETTEMODE, 0);
     ClearGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);

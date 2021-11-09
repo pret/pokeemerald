@@ -561,14 +561,14 @@ static void ResetGpuRegsAndBgs(void)
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1166,7 +1166,7 @@ static void ShowAndPrintWindows(void)
     PrintAreaDescription(sPassData->cursorArea);
 
     for (i = 0; i < WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1180,7 +1180,7 @@ static void PrintAreaDescription(u8 cursorArea)
     else if (cursorArea != CURSOR_AREA_NOTHING)
         AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
 
-    CopyWindowToVram(WINDOW_DESCRIPTION, 3);
+    CopyWindowToVram(WINDOW_DESCRIPTION, COPYWIN_FULL);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1723,7 +1723,7 @@ static void PrintOnFrontierMap(void)
     AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1755,7 +1755,7 @@ static void HandleFrontierMapCursorMove(u8 direction)
     AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
     PlaySE(SE_DEX_SCROLL);

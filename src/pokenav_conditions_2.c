@@ -199,12 +199,12 @@ u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         return LT_INC_AND_PAUSE;
     case 1:
         InitBgTemplates(sPartyConditionBgTemplates, ARRAY_COUNT(sPartyConditionBgTemplates));
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
@@ -240,8 +240,8 @@ u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         SetConditionGraphIOWindows(2);
         return LT_INC_AND_PAUSE;
     case 5:
-        sub_8199DF0(1, 0, 0, 1);
-        sub_8199DF0(1, 17, 1, 1);
+        BgDmaFill(1, 0, 0, 1);
+        BgDmaFill(1, 17, 1, 1);
         CpuFill32(0, structPtr->tilemapBuffers[1], BG_SCREEN_SIZE);
         SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
         return LT_INC_AND_PAUSE;
@@ -596,9 +596,9 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
         {
         case 0:
             if (winMode)
-                CopyWindowToVram(structPtr->nameGenderWindowId, 3);
+                CopyWindowToVram(structPtr->nameGenderWindowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->nameGenderWindowId, 2);
+                CopyWindowToVram(structPtr->nameGenderWindowId, COPYWIN_GFX);
 
             if (IsConditionMenuSearchMode() == TRUE)
             {
@@ -612,9 +612,9 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
             }
         case 1:
             if (winMode)
-                CopyWindowToVram(structPtr->listIndexWindowId, 3);
+                CopyWindowToVram(structPtr->listIndexWindowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->listIndexWindowId, 2);
+                CopyWindowToVram(structPtr->listIndexWindowId, COPYWIN_GFX);
 
             structPtr->windowModeState = 0;
             return TRUE;
@@ -628,8 +628,8 @@ void CopyUnusedConditionWindowsToVram(void)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
 
-    CopyWindowToVram(structPtr->unusedWindowId1, 3);
-    CopyWindowToVram(structPtr->unusedWindowId2, 3);
+    CopyWindowToVram(structPtr->unusedWindowId1, COPYWIN_FULL);
+    CopyWindowToVram(structPtr->unusedWindowId2, COPYWIN_FULL);
 }
 
 void sub_81CE964(struct Sprite *sprite)

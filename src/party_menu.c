@@ -754,7 +754,7 @@ static void RenderPartyMenuBox(u8 slot)
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
         else
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_MULTI_ALT);
-        CopyWindowToVram(sPartyMenuBoxes[slot].windowId, 2);
+        CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
         PutWindowTilemap(sPartyMenuBoxes[slot].windowId);
         ScheduleBgCopyTilemapToVram(2);
     }
@@ -764,7 +764,7 @@ static void RenderPartyMenuBox(u8 slot)
         {
             DrawEmptySlot(sPartyMenuBoxes[slot].windowId);
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
-            CopyWindowToVram(sPartyMenuBoxes[slot].windowId, 2);
+            CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
         }
         else
         {
@@ -2036,9 +2036,9 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
             confirmWindowId = AddWindow(&sConfirmButtonWindowTemplate);
             FillWindowPixelBuffer(confirmWindowId, PIXEL_FILL(0));
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gMenuText_Confirm, 48);
-            AddTextPrinterParameterized4(confirmWindowId, FONT_SMALL, mainOffset, 1, 0, 0, sFontColorTable[0], -1, gMenuText_Confirm);
+            AddTextPrinterParameterized4(confirmWindowId, FONT_SMALL, mainOffset, 1, 0, 0, sFontColorTable[0], TEXT_SKIP_DRAW, gMenuText_Confirm);
             PutWindowTilemap(confirmWindowId);
-            CopyWindowToVram(confirmWindowId, 2);
+            CopyWindowToVram(confirmWindowId, COPYWIN_GFX);
             cancelWindowId = AddWindow(&sMultiCancelButtonWindowTemplate);
             offset = 0;
         }
@@ -2053,15 +2053,15 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
         if (gPartyMenu.menuType != PARTY_MENU_TYPE_SPIN_TRADE)
         {
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gText_Cancel, 48);
-            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel);
+            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, gText_Cancel);
         }
         else
         {
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gText_Cancel2, 48);
-            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel2);
+            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, gText_Cancel2);
         }
         PutWindowTilemap(cancelWindowId);
-        CopyWindowToVram(cancelWindowId, 2);
+        CopyWindowToVram(cancelWindowId, COPYWIN_GFX);
         ScheduleBgCopyTilemapToVram(0);
     }
 }
@@ -2354,7 +2354,7 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct PartyMenuBox *men
         FillWindowPixelRect(menuBox->windowId, 0x0D, menuBox->infoRects->dimensions[20] + hpFraction, menuBox->infoRects->dimensions[21], menuBox->infoRects->dimensions[22] - hpFraction, 1);
         FillWindowPixelRect(menuBox->windowId, 0x02, menuBox->infoRects->dimensions[20] + hpFraction, menuBox->infoRects->dimensions[21] + 1, menuBox->infoRects->dimensions[22] - hpFraction, 2);
     }
-    CopyWindowToVram(menuBox->windowId, 2);
+    CopyWindowToVram(menuBox->windowId, COPYWIN_GFX);
 }
 
 static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox *menuBox, u8 c)
@@ -2481,7 +2481,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
         AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
     }
 
-    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, 1);
+    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
     ScheduleBgCopyTilemapToVram(2);
 
     return sPartyMenuInternal->windowId[0];
@@ -4504,11 +4504,11 @@ static void ShowMoveSelectWindow(u8 slot)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
-        AddTextPrinterParameterized(windowId, fontId, gMoveNames[move], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, fontId, gMoveNames[move], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
         if (move != MOVE_NONE)
             moveCount++;
     }
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, moveCount, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, moveCount, 0);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -4954,7 +4954,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
 
     arrayPtr[12] = CreateLevelUpStatsWindow();
     DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(arrayPtr[12], 2);
+    CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -4963,7 +4963,7 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
     s16 *arrayPtr = sPartyMenuInternal->data;
 
     DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(arrayPtr[12], 2);
+    CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -6056,7 +6056,7 @@ static void Task_InitMultiPartnerPartySlideIn(u8 taskId)
     // The first slide step also sets the sprites offscreen
     gTasks[taskId].tXPos = 256;
     SlideMultiPartyMenuBoxSpritesOneStep(taskId);
-    ChangeBgX(2, 0x10000, 0);
+    ChangeBgX(2, 0x10000, BG_COORD_SET);
     gTasks[taskId].func = Task_MultiPartnerPartySlideIn;
 }
 
@@ -6112,7 +6112,7 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].statusSpriteId, tXPos - 8);
         }
     }
-    ChangeBgX(2, 0x800, 1);
+    ChangeBgX(2, 0x800, BG_COORD_ADD);
 }
 
 #undef tXpos

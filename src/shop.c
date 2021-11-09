@@ -301,9 +301,9 @@ static u8 CreateShopMenu(u8 martType)
 
     SetStandardWindowBorderStyle(sMartInfo.windowId, 0);
     PrintMenuTable(sMartInfo.windowId, numMenuItems, sMartInfo.menuActions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sMartInfo.windowId, numMenuItems, 0);
+    InitMenuInUpperLeftCornerNormal(sMartInfo.windowId, numMenuItems, 0);
     PutWindowTilemap(sMartInfo.windowId);
-    CopyWindowToVram(sMartInfo.windowId, 1);
+    CopyWindowToVram(sMartInfo.windowId, COPYWIN_MAP);
 
     return CreateTask(Task_ShopMenu, 8);
 }
@@ -577,7 +577,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 
         StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
         x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x78);
-        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[1], -1, gStringVar4);
+        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[1], TEXT_SKIP_DRAW, gStringVar4);
     }
 }
 
@@ -1145,7 +1145,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(4, PIXEL_FILL(1));
-    PrintMoneyAmount(4, 38, 1, sShopData->totalCost, TEXT_SPEED_FF);
+    PrintMoneyAmount(4, 38, 1, sShopData->totalCost, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, BAG_ITEM_CAPACITY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(4, gStringVar4, 0, 1, 0, 0);

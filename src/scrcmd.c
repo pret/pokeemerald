@@ -49,6 +49,7 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -790,7 +791,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == 0xFF && mapNum == 0xFF)
+    if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
         SetWarpDestinationToFixedHoleWarp(x - MAP_OFFSET, y - MAP_OFFSET);
     else
         SetWarpDestination(mapGroup, mapNum, -1, x - MAP_OFFSET, y - MAP_OFFSET);
@@ -1532,8 +1533,8 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     DrawStdWindowFrame(gBrailleWindowId, 0);
     PutWindowTilemap(gBrailleWindowId);
     FillWindowPixelBuffer(gBrailleWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(gBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, 0xFF, 0x0);
-    CopyWindowToVram(gBrailleWindowId, 3);
+    AddTextPrinterParameterized(gBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(gBrailleWindowId, COPYWIN_FULL);
     return FALSE;
 }
 

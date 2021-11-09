@@ -55,7 +55,7 @@ Route104_EventScript_RivalTrigger::
 	setflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 10
 	addobject LOCALID_RIVAL
@@ -139,7 +139,7 @@ Route104_Movement_RivalApproachPlayer:
 
 Route104_Movement_PlayerFaceRival:
 	delay_4
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 Route104_EventScript_MayAskToBattle::
@@ -446,122 +446,122 @@ Route104_Movement_SailToDewfordBeforeDadCalls:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_right
 	walk_fast_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
 	step_end
 
 Route104_Movement_SailToDewfordAfterDadCalls:
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
@@ -570,46 +570,46 @@ Route104_Movement_SailToDewfordAfterDadCalls:
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -646,119 +646,119 @@ Route104_Movement_SailToDewford:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_right
 	walk_fast_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
-	walk_fastest_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
@@ -767,46 +767,46 @@ Route104_Movement_SailToDewford:
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
-	walk_fastest_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -847,7 +847,7 @@ Route104_Movement_PlayerExitBoat:
 Route104_Movement_PlayerMoveForBriney:
 	walk_down
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 Route104_Movement_BrineyBoardBoat:
@@ -857,7 +857,7 @@ Route104_Movement_BrineyBoardBoat:
 
 Route104_Movement_BrineyExitBoat:
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 Route104_EventScript_Ivan::

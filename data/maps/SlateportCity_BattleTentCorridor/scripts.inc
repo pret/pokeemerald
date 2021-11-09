@@ -43,7 +43,7 @@ SlateportCity_BattleTentCorridor_EventScript_EnterCorridor::
 SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom::
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 2, 1
 	waitdooranim
@@ -151,7 +151,7 @@ SlateportCity_BattleTentCorridor_Movement_AttendantEnter:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SlateportCity_BattleTentCorridor_Movement_AttendantExit:

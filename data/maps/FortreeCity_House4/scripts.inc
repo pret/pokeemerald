@@ -51,7 +51,7 @@ FortreeCity_House4_Movement_WingullExit:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_8
 	step_end
 

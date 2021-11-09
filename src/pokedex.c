@@ -2081,7 +2081,7 @@ static bool8 LoadPokedexListPage(u8 page)
         InitWindows(sPokemonList_WindowTemplate);
         DeactivateAllTextPrinters();
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gMain.state = 1;
         break;
     case 1:
@@ -2324,7 +2324,7 @@ static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8* str, u8 left
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
-    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 // u16 ignored is passed but never used
@@ -2412,7 +2412,7 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
         }
         break;
     }
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
 }
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
@@ -3167,7 +3167,7 @@ static void PrintInfoScreenText(const u8* str, u8 left, u8 top)
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
 
-    AddTextPrinterParameterized4(0, FONT_NORMAL, left, top, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 #define tScrolling       data[0]
@@ -3248,7 +3248,7 @@ static void Task_LoadInfoScreen(u8 taskId)
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_FOOTPRINT);
         DrawFootprint(WIN_FOOTPRINT, sPokedexListItem->dexNum);
-        CopyWindowToVram(WIN_FOOTPRINT, 2);
+        CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
         gMain.state++;
         break;
     case 2:
@@ -3264,7 +3264,7 @@ static void Task_LoadInfoScreen(u8 taskId)
         PrintMonInfo(sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
-        CopyWindowToVram(WIN_INFO, 3);
+        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -3594,8 +3594,8 @@ static void Task_LoadCryScreen(u8 taskId)
             cryMeter.yPos = 3;
             if (LoadCryMeter(&cryMeter, 3))
                 gMain.state++;
-            CopyWindowToVram(WIN_VU_METER, 2);
-            CopyWindowToVram(WIN_INFO, 3);
+            CopyWindowToVram(WIN_VU_METER, COPYWIN_GFX);
+            CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
@@ -3780,7 +3780,7 @@ static void Task_LoadSizeScreen(u8 taskId)
         SetOamMatrix(2, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale, 0, 0, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale);
         LoadPalette(sSizeScreenSilhouette_Pal, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
         gTasks[taskId].tMonSpriteId = spriteId;
-        CopyWindowToVram(WIN_INFO, 3);
+        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -3975,7 +3975,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_FOOTPRINT);
         DrawFootprint(WIN_FOOTPRINT, gTasks[taskId].tDexNum);
-        CopyWindowToVram(WIN_FOOTPRINT, 2);
+        CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
         ResetPaletteFade();
         LoadPokedexBgPalette(FALSE);
         gTasks[taskId].tState++;
@@ -3985,7 +3985,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         break;
     case 3:
         PrintMonInfo(dexNum, IsNationalPokedexEnabled(), 1, 1);
-        CopyWindowToVram(WIN_INFO, 3);
+        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
         gTasks[taskId].tState++;
@@ -4474,7 +4474,7 @@ static void PrintInfoSubMenuText(u8 windowId, const u8 *str, u8 left, u8 top)
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
 
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, left, top, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void UnusedPrintNum(u8 windowId, u16 num, u8 left, u8 top)
@@ -4781,7 +4781,7 @@ static void PrintSearchText(const u8 *str, u32 x, u32 y)
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_DARK_GRAY;
-    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void ClearSearchMenuRect(u32 x, u32 y, u32 width, u32 height)
@@ -4847,7 +4847,7 @@ static void Task_LoadSearchMenu(u8 taskId)
         SetDefaultSearchModeAndOrder(taskId);
         HighlightSelectedSearchTopBarItem(SEARCH_TOPBAR_SEARCH);
         PrintSelectedSearchParameters(taskId);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -4901,7 +4901,7 @@ static void Task_SwitchToSearchMenuTopBar(u8 taskId)
 {
     HighlightSelectedSearchTopBarItem(gTasks[taskId].tTopBarItem);
     PrintSelectedSearchParameters(taskId);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(3);
     gTasks[taskId].func = Task_HandleSearchTopBarInput;
 }
@@ -4940,7 +4940,7 @@ static void Task_HandleSearchTopBarInput(u8 taskId)
         PlaySE(SE_DEX_PAGE);
         gTasks[taskId].tTopBarItem--;
         HighlightSelectedSearchTopBarItem(gTasks[taskId].tTopBarItem);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
     }
     if (JOY_NEW(DPAD_RIGHT) && gTasks[taskId].tTopBarItem < SEARCH_TOPBAR_CANCEL)
@@ -4948,7 +4948,7 @@ static void Task_HandleSearchTopBarInput(u8 taskId)
         PlaySE(SE_DEX_PAGE);
         gTasks[taskId].tTopBarItem++;
         HighlightSelectedSearchTopBarItem(gTasks[taskId].tTopBarItem);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
     }
 }
@@ -4957,7 +4957,7 @@ static void Task_SwitchToSearchMenu(u8 taskId)
 {
     HighlightSelectedSearchMenuItem(gTasks[taskId].tTopBarItem, gTasks[taskId].tMenuItem);
     PrintSelectedSearchParameters(taskId);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(3);
     gTasks[taskId].func = Task_HandleSearchMenuInput;
 }
@@ -5013,7 +5013,7 @@ static void Task_HandleSearchMenuInput(u8 taskId)
                 EraseAndPrintSearchTextBox(gText_SearchingPleaseWait);
                 gTasks[taskId].func = Task_StartPokedexSearch;
                 PlaySE(SE_DEX_SEARCH);
-                CopyWindowToVram(0, 2);
+                CopyWindowToVram(0, COPYWIN_GFX);
             }
         }
         else
@@ -5029,7 +5029,7 @@ static void Task_HandleSearchMenuInput(u8 taskId)
         PlaySE(SE_SELECT);
         gTasks[taskId].tMenuItem = movementMap[gTasks[taskId].tMenuItem][0];
         HighlightSelectedSearchMenuItem(gTasks[taskId].tTopBarItem, gTasks[taskId].tMenuItem);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
     }
     if (JOY_NEW(DPAD_RIGHT) && movementMap[gTasks[taskId].tMenuItem][1] != 0xFF)
@@ -5037,7 +5037,7 @@ static void Task_HandleSearchMenuInput(u8 taskId)
         PlaySE(SE_SELECT);
         gTasks[taskId].tMenuItem = movementMap[gTasks[taskId].tMenuItem][1];
         HighlightSelectedSearchMenuItem(gTasks[taskId].tTopBarItem, gTasks[taskId].tMenuItem);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
     }
     if (JOY_NEW(DPAD_UP) && movementMap[gTasks[taskId].tMenuItem][2] != 0xFF)
@@ -5045,7 +5045,7 @@ static void Task_HandleSearchMenuInput(u8 taskId)
         PlaySE(SE_SELECT);
         gTasks[taskId].tMenuItem = movementMap[gTasks[taskId].tMenuItem][2];
         HighlightSelectedSearchMenuItem(gTasks[taskId].tTopBarItem, gTasks[taskId].tMenuItem);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
     }
     if (JOY_NEW(DPAD_DOWN) && movementMap[gTasks[taskId].tMenuItem][3] != 0xFF)
@@ -5053,7 +5053,7 @@ static void Task_HandleSearchMenuInput(u8 taskId)
         PlaySE(SE_SELECT);
         gTasks[taskId].tMenuItem = movementMap[gTasks[taskId].tMenuItem][3];
         HighlightSelectedSearchMenuItem(gTasks[taskId].tTopBarItem, gTasks[taskId].tMenuItem);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
     }
 }
@@ -5086,7 +5086,7 @@ static void Task_WaitAndCompleteSearch(u8 taskId)
             EraseAndPrintSearchTextBox(gText_NoMatchingPkmnWereFound);
         }
         gTasks[taskId].func = Task_SearchCompleteWaitForInput;
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
     }
 }
 
@@ -5126,7 +5126,7 @@ static void Task_SelectSearchMenuItem(u8 taskId)
     PrintSearchParameterText(taskId);
     PrintSelectorArrow(*cursorPos);
     gTasks[taskId].func = Task_HandleSearchParameterInput;
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(3);
 }
 
@@ -5151,7 +5151,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         ClearSearchParameterBoxText();
         DrawOrEraseSearchParameterBox(TRUE);
         gTasks[taskId].func = Task_SwitchToSearchMenu;
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
         return;
     }
@@ -5163,7 +5163,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         *cursorPos = gTasks[taskId].tCursorPos;
         *scrollOffset = gTasks[taskId].tScrollOffset;
         gTasks[taskId].func = Task_SwitchToSearchMenu;
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         CopyBgTilemapBufferToVram(3);
         return;
     }
@@ -5190,7 +5190,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         {
             PlaySE(SE_SELECT);
             EraseAndPrintSearchTextBox(texts[*cursorPos + *scrollOffset].description);
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
         }
         return;
     }
@@ -5216,7 +5216,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         {
             PlaySE(SE_SELECT);
             EraseAndPrintSearchTextBox(texts[*cursorPos + *scrollOffset].description);
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
         }
         return;
     }

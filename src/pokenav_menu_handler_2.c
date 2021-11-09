@@ -415,12 +415,12 @@ static u32 LoopedTask_OpenMenu(s32 state)
         CopyToBgTilemapBuffer(1, gPokenavMessageBox_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyPaletteIntoBufferUnfaded(gPokenavMessageBox_Pal, 0x10, 0x20);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         return LT_INC_AND_PAUSE;
     case 1:
         if (FreeTempTileDataBuffersIfPossible())
@@ -1125,7 +1125,7 @@ static void AddOptionDescriptionWindow(void)
     ptr->optionDescWindowId = AddWindow(&sOptionDescWindowTemplate);
     PutWindowTilemap(ptr->optionDescWindowId);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    CopyWindowToVram(ptr->optionDescWindowId, 3);
+    CopyWindowToVram(ptr->optionDescWindowId, COPYWIN_FULL);
 }
 
 static void PrintCurrentOptionDescription(void)
@@ -1168,7 +1168,7 @@ static void DestroyMovingDotsBgTask(void)
 
 static void Task_MoveBgDots(u8 taskId)
 {
-    ChangeBgX(3, 0x80, 1);
+    ChangeBgX(3, 0x80, BG_COORD_ADD);
 }
 
 static void CreateBgDotPurplePalTask(void)

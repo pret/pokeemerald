@@ -1911,13 +1911,13 @@ void ShowDeptStoreElevatorFloorSelect(void)
     SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
 
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
 
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
 }
 
 void CloseDeptStoreElevatorWindow(void)
@@ -2723,7 +2723,7 @@ static void CloseScrollableMultichoice(u8 taskId)
     Free(sScrollableMultichoice_ListMenuItem);
     ClearStdWindowAndFrameToTransparent(task->tWindowId, 1);
     FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
-    CopyWindowToVram(task->tWindowId, 2);
+    CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
     RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
     EnableBothScriptContexts();
@@ -2976,7 +2976,7 @@ void ShowBattlePointsWindow(void)
     sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
     SetStandardWindowBorderStyle(sBattlePointsWindowId, 0);
     UpdateBattlePointsWindow();
-    CopyWindowToVram(sBattlePointsWindowId, 2);
+    CopyWindowToVram(sBattlePointsWindowId, COPYWIN_GFX);
 }
 
 void CloseBattlePointsWindow(void)
@@ -2988,25 +2988,17 @@ void CloseBattlePointsWindow(void)
 void TakeFrontierBattlePoints(void)
 {
     if (gSaveBlock2Ptr->frontier.battlePoints < gSpecialVar_0x8004)
-    {
         gSaveBlock2Ptr->frontier.battlePoints = 0;
-    }
     else
-    {
         gSaveBlock2Ptr->frontier.battlePoints -= gSpecialVar_0x8004;
-    }
 }
 
 void GiveFrontierBattlePoints(void)
 {
     if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
-    {
         gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
-    }
     else
-    {
         gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004;
-    }
 }
 
 u16 GetFrontierBattlePoints(void)
@@ -3028,7 +3020,7 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
 
     sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
     SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, 0);
-    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, 2);
+    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPYWIN_GFX);
 }
 
 void CloseFrontierExchangeCornerItemIconWindow(void)
@@ -3244,11 +3236,11 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
         SetStandardWindowBorderStyle(task->tWindowId, 0);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
-            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
+            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
 
-        AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, 3);
+        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
     }
 }
 
@@ -3303,7 +3295,7 @@ void ScrollableMultichoice_ClosePersistentMenu(void)
         ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
         FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, 2);
+        CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
         RemoveWindow(task->tWindowId);
         DestroyTask(taskId);
     }

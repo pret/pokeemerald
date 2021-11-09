@@ -516,14 +516,14 @@ static void NamingScreen_InitBGs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
 
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 
     InitStandardTextBoxWindows();
     InitTextBoxGfxAndPrinters();
@@ -741,7 +741,7 @@ static void DisplaySentToPCMessage(void)
     DrawDialogueFrame(0, 0);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 MainState_WaitSentToPCMessage(void)
@@ -1781,7 +1781,7 @@ static void DrawGenderIcon(void)
             StringCopy(text, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, 0x68, 1, sGenderColors[isFemale], -1, text);
+        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, 0x68, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
     }
 }
 
@@ -1921,11 +1921,11 @@ static void DrawTextEntry(void)
         temp[1] = gText_ExpandedPlaceholder_Empty[0];
         extraWidth = (IsWideLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, temp, i * 8 + x + extraWidth, 1, 0xFF, NULL);
+        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, temp, i * 8 + x + extraWidth, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     TryDrawGenderIcon();
-    CopyWindowToVram(sNamingScreen->windows[WIN_TEXT_ENTRY], 2);
+    CopyWindowToVram(sNamingScreen->windows[WIN_TEXT_ENTRY], COPYWIN_GFX);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY]);
 }
 
@@ -2012,7 +2012,7 @@ static void PrintControls(void)
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_BANNER], PIXEL_FILL(15));
     AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_SMALL, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(sNamingScreen->windows[WIN_BANNER]);
-    CopyWindowToVram(sNamingScreen->windows[WIN_BANNER], 3);
+    CopyWindowToVram(sNamingScreen->windows[WIN_BANNER], COPYWIN_FULL);
 }
 
 static void CB2_NamingScreen(void)

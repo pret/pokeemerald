@@ -20,18 +20,18 @@ LilycoveCity_PokemonTrainerFanClub_OnFrame:
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	lockall
-	applymovement LOCALID_LASS, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_LASS, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer, MSGBOX_DEFAULT
 	applymovement LOCALID_LITTLE_GIRL, LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer
 	applymovement LOCALID_MAN, LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan, MSGBOX_DEFAULT
 	applymovement LOCALID_LITTLE_GIRL, LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	applymovement LOCALID_LITTLE_GIRL, LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer
 	waitmovement 0
@@ -41,7 +41,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 
 LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer:
 	delay_8
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	walk_down
 	walk_down
 	walk_down
@@ -60,7 +60,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer:
 
 LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer:
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer:
@@ -68,7 +68,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer:
 	walk_fast_up
 	walk_fast_up
 	walk_fast_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_OnTransition:

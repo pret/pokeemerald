@@ -173,14 +173,14 @@ void CB2_InitOptionMenu(void)
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         InitWindows(sOptionMenuWinTemplates);
         DeactivateAllTextPrinters();
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -251,7 +251,7 @@ void CB2_InitOptionMenu(void)
         FrameType_DrawChoices(gTasks[taskId].data[TD_FRAMETYPE]);
         HighlightOptionMenuItem(gTasks[taskId].data[TD_MENUSELECTION]);
 
-        CopyWindowToVram(WIN_OPTIONS, 3);
+        CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
         gMain.state++;
         break;
     }
@@ -351,7 +351,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         if (sArrowPressed)
         {
             sArrowPressed = FALSE;
-            CopyWindowToVram(WIN_OPTIONS, 2);
+            CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
         }
     }
 }
@@ -400,7 +400,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     }
 
     dst[i] = EOS;
-    AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, dst, x, y + 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, dst, x, y + 1, TEXT_SKIP_DRAW, NULL);
 }
 
 static u8 TextSpeed_ProcessInput(u8 selection)
@@ -626,8 +626,8 @@ static void ButtonMode_DrawChoices(u8 selection)
 static void DrawTextOption(void)
 {
     FillWindowPixelBuffer(WIN_TEXT_OPTION, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_TEXT_OPTION, FONT_NORMAL, gText_Option, 8, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(WIN_TEXT_OPTION, 3);
+    AddTextPrinterParameterized(WIN_TEXT_OPTION, FONT_NORMAL, gText_Option, 8, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(WIN_TEXT_OPTION, COPYWIN_FULL);
 }
 
 static void DrawOptionMenuTexts(void)
@@ -636,10 +636,8 @@ static void DrawOptionMenuTexts(void)
 
     FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
-    {
-        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
-    }
-    CopyWindowToVram(WIN_OPTIONS, 3);
+        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
 
 #define TILE_TOP_CORNER_L 0x1A2

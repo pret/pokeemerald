@@ -1199,7 +1199,7 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     printer.bgColor = 1;
     printer.shadowColor = 3;
 
-    AddTextPrinter(&printer, 0xFF, NULL);
+    AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
 }
 
 static void DaycarePrintMonNickname(struct DayCare *daycare, u8 windowId, u32 daycareSlotId, u32 y)
@@ -1285,7 +1285,7 @@ void ShowDaycareLevelMenu(void)
     menuTemplate.windowId = windowId;
     listMenuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 
     daycareMenuTaskId = CreateTask(Task_HandleDaycareLevelMenuInput, 3);
     gTasks[daycareMenuTaskId].tMenuListTaskId = listMenuTaskId;
