@@ -3389,12 +3389,12 @@ bool32 IsStatBoostingBerry(u16 item)
     }
 }
 
-bool32 IsHpRestoringBerry(u8 battlerAtk, u16 item)
+bool32 ShouldRestoreHpBerry(u8 battlerAtk, u16 item)
 {
     switch (item)
     {
     case ITEM_ORAN_BERRY:
-        if (gBattleMons[battlerAtk].maxHp <= 50)
+        if (gBattleMons[battlerAtk].maxHP <= 50)
             return TRUE;    // Only worth it in the early game
         return FALSE;
     case ITEM_SITRUS_BERRY:
