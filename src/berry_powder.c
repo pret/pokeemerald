@@ -211,7 +211,7 @@ static void PrintBerryPowderAmount(u8 windowId, int amount, u8 x, u8 y, u8 speed
 static void DrawPlayerPowderAmount(u8 windowId, u16 baseTileOffset, u8 paletteNum, u32 amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, baseTileOffset, paletteNum);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Powder, 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Powder, 0, 1, TEXT_SKIP_DRAW, NULL);
     PrintBerryPowderAmount(windowId, amount, 26, 17, 0);
 }
 

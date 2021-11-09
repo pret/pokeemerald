@@ -536,8 +536,8 @@ static void InitMirageTowerShake(u8 taskId)
     case 1:
         sMirageTowerGfxBuffer = (u8 *)AllocZeroed(MIRAGE_TOWER_GFX_LENGTH);
         sMirageTowerTilemapBuffer = (u8 *)AllocZeroed(BG_SCREEN_SIZE);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
         gTasks[taskId].tState++;
         break;
     case 2:

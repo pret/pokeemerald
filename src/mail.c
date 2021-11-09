@@ -698,8 +698,8 @@ static void PrintMailText(void)
     box_x = GetStringCenterAlignXOffset(FONT_NORMAL, signature, sMailRead->signatureWidth) + 104;
     box_y = sMailRead->layout->signatureYPos + 88;
     AddTextPrinterParameterized3(0, FONT_NORMAL, box_x, box_y, sTextColors, 0, signature);
-    CopyWindowToVram(0, 3);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void VBlankCB_MailRead(void)

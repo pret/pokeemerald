@@ -100,16 +100,16 @@ static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
     SetStandardWindowBorderStyle(windowId, 0);
     StringExpandPlaceholders(gStringVar4, gText_NumPlayerLink);
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 88);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, xPos, 1, 0xFF, NULL);
-    CopyWindowToVram(windowId, 3);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, xPos, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void ClearLinkPlayerCountWindow(u16 windowId)
 {
-    // Following this call with a copy-to-vram with mode 3 is identical to
+    // Following this call with a copy-to-vram with mode COPYWIN_FULL is identical to
     // calling ClearStdWindowAndFrame(windowId, TRUE).
     ClearStdWindowAndFrame(windowId, FALSE);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)
@@ -1078,7 +1078,7 @@ static void Task_EnterCableClubSeat(u8 taskId)
     case 3:
         // Exit, failure
         SetLinkWaitingForScript();
-        sub_8197AE8(TRUE);
+        EraseFieldMessageBox(TRUE);
         DestroyTask(taskId);
         EnableBothScriptContexts();
         break;

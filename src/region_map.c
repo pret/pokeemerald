@@ -1819,7 +1819,7 @@ static void DrawFlyDestTextWindow(void)
             DrawStdFrameWithCustomTileAndPalette(0, FALSE, 101, 13);
         }
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         ScheduleBgCopyTilemapToVram(0);
         sDrawFlyDestTextWindow = FALSE;
     }

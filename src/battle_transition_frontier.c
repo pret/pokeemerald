@@ -378,9 +378,9 @@ static bool8 Circles_Init(struct Task *task)
         LoadLogoGfx();
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgY(0, 0x500, 2);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0x500, BG_COORD_SUB);
 
         task->tTimer = 0;
         task->tState++;

@@ -1028,7 +1028,7 @@ static void ShowRegistryMenuActions(u8 taskId)
     tActionWindowId = AddWindow(&template);
     SetStandardWindowBorderStyle(tActionWindowId, 0);
     PrintMenuTable(tActionWindowId, ARRAY_COUNT(sRegistryMenuActions), sRegistryMenuActions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tActionWindowId, 2, 0);
+    InitMenuInUpperLeftCornerNormal(tActionWindowId, 2, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = HandleRegistryMenuActionsInput;
 }

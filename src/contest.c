@@ -1667,7 +1667,7 @@ static void Task_HideMoveSelectScreen(u8 taskId)
     {
         FillWindowPixelBuffer(MOVE_WINDOWS_START + i, PIXEL_FILL(0));
         PutWindowTilemap(MOVE_WINDOWS_START + i);
-        CopyWindowToVram(MOVE_WINDOWS_START + i, 2);
+        CopyWindowToVram(MOVE_WINDOWS_START + i, COPYWIN_GFX);
     }
     Contest_SetBgCopyFlags(0);
     // This seems to be a bug; it should have just copied PLTT_BUFFER_SIZE.
@@ -3377,7 +3377,7 @@ static void DrawStatusSymbols(void)
 static void ContestClearGeneralTextWindow(void)
 {
     FillWindowPixelBuffer(WIN_GENERAL_TEXT, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_GENERAL_TEXT, 2);
+    CopyWindowToVram(WIN_GENERAL_TEXT, COPYWIN_GFX);
     Contest_SetBgCopyFlags(0);
 }
 

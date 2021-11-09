@@ -5921,7 +5921,7 @@ static void Cmd_drawlvlupbox(void)
         // Draw page 1 of level up box
         DrawLevelUpWindow1();
         PutWindowTilemap(B_WIN_LEVEL_UP_BOX);
-        CopyWindowToVram(B_WIN_LEVEL_UP_BOX, 3);
+        CopyWindowToVram(B_WIN_LEVEL_UP_BOX, COPYWIN_FULL);
         gBattleScripting.drawlvlupboxState++;
         break;
     case 5:
@@ -5939,7 +5939,7 @@ static void Cmd_drawlvlupbox(void)
             // Draw page 2 of level up box
             PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
-            CopyWindowToVram(B_WIN_LEVEL_UP_BOX, 2);
+            CopyWindowToVram(B_WIN_LEVEL_UP_BOX, COPYWIN_GFX);
             gBattleScripting.drawlvlupboxState++;
         }
         break;
@@ -5956,10 +5956,10 @@ static void Cmd_drawlvlupbox(void)
         if (!SlideOutLevelUpBanner())
         {
             ClearWindowTilemap(B_WIN_LEVEL_UP_BANNER);
-            CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, 1);
+            CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, COPYWIN_MAP);
 
             ClearWindowTilemap(B_WIN_LEVEL_UP_BOX);
-            CopyWindowToVram(B_WIN_LEVEL_UP_BOX, 1);
+            CopyWindowToVram(B_WIN_LEVEL_UP_BOX, COPYWIN_MAP);
 
             SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             ShowBg(2);
@@ -6004,7 +6004,7 @@ static void InitLevelUpBanner(void)
     LoadPalette(sLevelUpBanner_Pal, 0x60, 0x20);
     CopyToWindowPixelBuffer(B_WIN_LEVEL_UP_BANNER, sLevelUpBanner_Gfx, 0, 0);
     PutWindowTilemap(B_WIN_LEVEL_UP_BANNER);
-    CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, 3);
+    CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, COPYWIN_FULL);
 
     PutMonIconOnLvlUpBanner();
 }
@@ -6053,7 +6053,7 @@ static void DrawLevelUpBannerText(void)
     printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
     printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
 
-    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 
     txtPtr = gStringVar4;
     *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
@@ -6083,9 +6083,9 @@ static void DrawLevelUpBannerText(void)
 
     printerTemplate.y = 10;
     printerTemplate.currentY = 10;
-    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 
-    CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, 2);
+    CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, COPYWIN_GFX);
 }
 
 static bool8 SlideOutLevelUpBanner(void)
