@@ -437,7 +437,7 @@ u32 GetPartyConditionCallback(void);
 void FreePartyConditionSubstruct1(void);
 bool32 LoadPartyConditionMenuGfx(void);
 bool32 IsConditionMenuSearchMode(void);
-struct ConditionGraph *GetConditionGraphDataPtr(void);
+struct ConditionGraph *GetConditionGraphPtr(void);
 u16 GetConditionGraphCurrentMonIndex(void);
 u16 GetMonListCount(void);
 u8 GetNumConditionMonSparkles(void);

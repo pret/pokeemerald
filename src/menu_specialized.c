@@ -32,8 +32,8 @@ EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
 static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
-static void sub_81D24A4(struct ConditionGraph *);
-static void sub_81D2634(struct ConditionGraph *);
+static void ConditionGraph_CalcRightHalf(struct ConditionGraph *);
+static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *);
 static void MoveRelearnerCursorCallback(s32, bool8, struct ListMenu *);
 static void MoveRelearnerDummy(void);
 static void SetNextConditionSparkle(struct Sprite *);
@@ -85,7 +85,7 @@ static const struct ScanlineEffectParams sConditionGraphScanline =
     .initState = 1,
 };
 
-static const u8 sUnknown_08625410[MAX_CONDITION + 1] =
+static const u8 sConditionToLineLength[MAX_CONDITION + 1] =
 {
      4,  5,  6,  7,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 13,
     13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17,
@@ -189,6 +189,10 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
     .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
+
+//--------------
+// Mailbox menu
+//--------------
 
 bool8 MailboxMenu_Alloc(u8 count)
 {
@@ -303,67 +307,83 @@ void MailboxMenu_Free(void)
     Free(sMailboxList);
 }
 
+//---------------------------------------
+// Condition graph
+//
+// This is the graph in the Pokénav and
+// Pokéblock case that shows a Pokémon's
+// conditions (Beauty, Tough, etc.).
+// It works by using scanlines to
+// selectively reveal a bg that has been
+// filled with the graph color.
+//---------------------------------------
+
+#define UNK_VAL(n, s)(((n) >> (s)) + (((n) >> ((s) - 1)) & 1))
+
 void ConditionGraph_Init(struct ConditionGraph *graph)
 {
     u8 i, j;
 
     for (j = 0; j < CONDITION_COUNT; j++)
     {
-        for (i = 0; i < CONDITION_GRAPH_UNK_1; i++)
+        for (i = 0; i < CONDITION_GRAPH_UPDATE_STEPS; i++)
         {
-            graph->unk64[i][j].unk0 = 0;
-            graph->unk64[i][j].unk2 = 0;
+            graph->newPositions[i][j].x = 0;
+            graph->newPositions[i][j].y = 0;
         }
-        for (i = 0; i < 4; i++)
+
+        for (i = 0; i < CONDITION_GRAPH_LOAD_MAX; i++)
         {
             graph->conditions[i][j] = 0;
-            graph->unk14[i][j].unk0 = CONDITION_GRAPH_CENTER_X;
-            graph->unk14[i][j].unk2 = CONDITION_GRAPH_UNK;
+            graph->savedPositions[i][j].x = CONDITION_GRAPH_CENTER_X;
+            graph->savedPositions[i][j].y = CONDITION_GRAPH_CENTER_Y;
         }
 
-        graph->unk12C[j].unk0 = 0;
-        graph->unk12C[j].unk2 = 0;
+        graph->curPositions[j].x = 0;
+        graph->curPositions[j].y = 0;
     }
 
-    graph->unk354 = FALSE;
-    graph->unk352 = 0;
+    graph->needsDraw = FALSE;
+    graph->updateCounter = 0;
 }
 
-void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
+// Fills the newPositions array with incremental positions between
+// old and new for the graph transition when switching between Pokémon.
+void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new)
 {
     u16 i, j;
-    s32 r5, r6;
+    s32 coord, increment;
 
     for (i = 0; i < CONDITION_COUNT; i++)
     {
-        r5 = arg1[i].unk0 << 8;
-        r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / CONDITION_GRAPH_UNK_1;
-        for (j = 0; j < CONDITION_GRAPH_UNK_2; j++)
+        coord = old[i].x << 8;
+        increment = ((new[i].x - old[i].x) << 8) / CONDITION_GRAPH_UPDATE_STEPS;
+        for (j = 0; j < CONDITION_GRAPH_UPDATE_STEPS - 1; j++)
         {
-            graph->unk64[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
-            r5 += r6;
+            graph->newPositions[j][i].x = UNK_VAL(coord, 8);
+            coord += increment;
         }
-        graph->unk64[j][i].unk0 = arg2[i].unk0;
+        graph->newPositions[j][i].x = new[i].x;
 
-        r5 = arg1[i].unk2 << 8;
-        r6 = ((arg2[i].unk2 - arg1[i].unk2) << 8) / CONDITION_GRAPH_UNK_1;
-        for (j = 0; j < CONDITION_GRAPH_UNK_2; j++)
+        coord = old[i].y << 8;
+        increment = ((new[i].y - old[i].y) << 8) / CONDITION_GRAPH_UPDATE_STEPS;
+        for (j = 0; j < CONDITION_GRAPH_UPDATE_STEPS - 1; j++)
         {
-            graph->unk64[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
-            r5 += r6;
+            graph->newPositions[j][i].y = UNK_VAL(coord, 8);
+            coord += increment;
         }
-        graph->unk64[j][i].unk2 = arg2[i].unk2;
+        graph->newPositions[j][i].y = new[i].y;
     }
 
-    graph->unk352 = 0;
+    graph->updateCounter = 0;
 }
 
-bool8 TransitionConditionGraph(struct ConditionGraph *graph)
+bool8 ConditionGraph_TryUpdate(struct ConditionGraph *graph)
 {
-    if (graph->unk352 < CONDITION_GRAPH_UNK_1)
+    if (graph->updateCounter < CONDITION_GRAPH_UPDATE_STEPS)
     {
-        sub_81D2230(graph);
-        return (++graph->unk352 != CONDITION_GRAPH_UNK_1);
+        ConditionGraph_Update(graph);
+        return (++graph->updateCounter != CONDITION_GRAPH_UPDATE_STEPS);
     }
     else
     {
@@ -371,51 +391,55 @@ bool8 TransitionConditionGraph(struct ConditionGraph *graph)
     }
 }
 
-void InitConditionGraphState(struct ConditionGraph *graph)
+void ConditionGraph_InitResetScanline(struct ConditionGraph *graph)
 {
-    graph->state = 0;
+    graph->scanlineResetState = 0;
 }
 
-bool8 SetupConditionGraphScanlineParams(struct ConditionGraph *graph)
+bool8 ConditionGraph_ResetScanline(struct ConditionGraph *graph)
 {
     struct ScanlineEffectParams params;
 
-    switch (graph->state)
+    switch (graph->scanlineResetState)
     {
     case 0:
         ScanlineEffect_Clear();
-        graph->state++;
+        graph->scanlineResetState++;
         return TRUE;
     case 1:
         params = sConditionGraphScanline;
         ScanlineEffect_SetParams(params);
-        graph->state++;
+        graph->scanlineResetState++;
         return FALSE;
     default:
         return FALSE;
     }
 }
 
-void sub_81D2108(struct ConditionGraph *graph)
+void ConditionGraph_Draw(struct ConditionGraph *graph)
 {
     u16 i;
 
-    if (!graph->unk354)
+    if (!graph->needsDraw)
         return;
 
-    sub_81D24A4(graph);
-    sub_81D2634(graph);
+    ConditionGraph_CalcRightHalf(graph);
+    ConditionGraph_CalcLeftHalf(graph);
 
     for (i = 0; i < CONDITION_GRAPH_HEIGHT; i++)
     {
-        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (graph->scanlineRight[i][0] << 8) | (graph->scanlineRight[i][1]);
-        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (graph->scanlineLeft[i][0] << 8) | (graph->scanlineLeft[i][1]);
+        // Draw right half
+        gScanlineEffectRegBuffers[1][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 0] = // double assignment
+        gScanlineEffectRegBuffers[0][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 0] = (graph->scanlineRight[i][0] << 8) | (graph->scanlineRight[i][1]);
+        // Draw left half
+        gScanlineEffectRegBuffers[1][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 1] = // double assignment
+        gScanlineEffectRegBuffers[0][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 1] = (graph->scanlineLeft[i][0] << 8) | (graph->scanlineLeft[i][1]);
     }
 
-    graph->unk354 = FALSE;
+    graph->needsDraw = FALSE;
 }
 
-void SetConditionGraphIOWindows(u8 bg)
+void ConditionGraph_InitWindow(u8 bg)
 {
     u32 flags;
 
@@ -434,146 +458,153 @@ void SetConditionGraphIOWindows(u8 bg)
     SetGpuReg(REG_OFFSET_WINOUT, flags);
 }
 
-void sub_81D2230(struct ConditionGraph *graph)
+void ConditionGraph_Update(struct ConditionGraph *graph)
 {
     u16 i;
     for (i = 0; i < CONDITION_COUNT; i++)
-        graph->unk12C[i] = graph->unk64[graph->unk352][i];
+        graph->curPositions[i] = graph->newPositions[graph->updateCounter][i];
 
-    graph->unk354 = TRUE;
+    graph->needsDraw = TRUE;
 }
 
-static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 *arg5)
+static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline, struct UCoords16 *pos1, struct UCoords16 *pos2, bool8 dir, u16 *overflowScanline)
 {
-    u16 i, r8, r10, r0, var_30;
+    u16 i, height, top, bottom, x2;
     u16 *ptr;
-    s32 r4, var_2C = 0;
+    s32 x, xIncrement = 0;
 
-    if (arg2->unk2 < arg3->unk2)
+    if (pos1->y < pos2->y)
     {
-        r10 = arg2->unk2;
-        r0 = arg3->unk2;
-        r4 = arg2->unk0 << 10;
-        var_30 = arg3->unk0;
-        r8 = r0 - r10;
-        if (r8 != 0)
-            var_2C = ((var_30 - arg2->unk0) << 10) / r8;
+        top = pos1->y;
+        bottom = pos2->y;
+        x = pos1->x << 10;
+        x2 = pos2->x;
+        height = bottom - top;
+        if (height != 0)
+            xIncrement = ((x2 - pos1->x) << 10) / height;
     }
     else
     {
-        r0 = arg2->unk2;
-        r10 = arg3->unk2;
-        r4 = arg3->unk0 << 10;
-        var_30 = arg2->unk0;
-        r8 = r0 - r10;
-        if (r8 != 0)
-            var_2C = ((var_30 - arg3->unk0) << 10) / r8;
+        bottom = pos1->y;
+        top = pos2->y;
+        x = pos2->x << 10;
+        x2 = pos1->x;
+        height = bottom - top;
+        if (height != 0)
+            xIncrement = ((x2 - pos2->x) << 10) / height;
     }
 
-    r8++;
-    if (arg5 == NULL)
+    height++;
+    if (overflowScanline == NULL)
     {
-        arg1 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
-        for (i = 0; i < r8; i++)
+        scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        for (i = 0; i < height; i++)
         {
-            arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            r4 += var_2C;
-            arg1 += 2;
+            scanline[dir] = UNK_VAL(x, 10) + dir;
+            x += xIncrement;
+            scanline += 2;
         }
 
-        ptr = arg1 - 2;
+        ptr = scanline - 2;
     }
-    else if (var_2C > 0)
+    else if (xIncrement > 0)
     {
-        arg5 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
+        overflowScanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
         // Less readable than the other loops, but it has to be written this way to match.
-        for (i = 0; i < r8; arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4, r4 += var_2C, arg5 += 2, i++)
+        for (i = 0; i < height; overflowScanline[dir] = UNK_VAL(x, 10) + dir, x += xIncrement, overflowScanline += 2, i++)
         {
-            if (r4 >= (CONDITION_GRAPH_CENTER_X << 10))
+            if (x >= (CONDITION_GRAPH_CENTER_X << 10))
                 break;
         }
 
-        graph->unk350 = r10 + i;
-        arg1 += (graph->unk350 - CONDITION_GRAPH_TOP_Y) * 2;
-        for (; i < r8; i++)
+        graph->bottom = top + i;
+        scanline += (graph->bottom - CONDITION_GRAPH_TOP_Y) * 2;
+        for (; i < height; i++)
         {
-            arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            r4 += var_2C;
-            arg1 += 2;
+            scanline[dir] = UNK_VAL(x, 10) + dir;
+            x += xIncrement;
+            scanline += 2;
         }
 
-        ptr = arg1 - 2;
+        ptr = scanline - 2;
     }
-    else if (var_2C < 0)
+    else if (xIncrement < 0)
     {
-        arg1 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
-        for (i = 0; i < r8; i++)
+        scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        for (i = 0; i < height; i++)
         {
-            arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            if (r4 < (CONDITION_GRAPH_CENTER_X << 10))
+            scanline[dir] = UNK_VAL(x, 10) + dir;
+            if (x < (CONDITION_GRAPH_CENTER_X << 10))
             {
-                arg1[arg4] = CONDITION_GRAPH_CENTER_X;
+                scanline[dir] = CONDITION_GRAPH_CENTER_X;
                 break;
             }
-            r4 += var_2C;
-            arg1 += 2;
+            x += xIncrement;
+            scanline += 2;
         }
 
-        graph->unk350 = r10 + i;
-        arg5 += (graph->unk350 - CONDITION_GRAPH_TOP_Y) * 2;
-        for (; i < r8; i++)
+        graph->bottom = top + i;
+        overflowScanline += (graph->bottom - CONDITION_GRAPH_TOP_Y) * 2;
+        for (; i < height; i++)
         {
-            arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            r4 += var_2C;
-            arg5 += 2;
+            overflowScanline[dir] = UNK_VAL(x, 10) + dir;
+            x += xIncrement;
+            overflowScanline += 2;
         }
 
-        ptr = arg5 - 2;
+        ptr = overflowScanline - 2;
     }
     else
     {
-        graph->unk350 = r10;
-        arg1 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
-        arg5 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
-        arg1[1] = arg2->unk0 + 1;
-        arg5[0] = arg3->unk0;
-        arg5[1] = CONDITION_GRAPH_CENTER_X;
+        graph->bottom = top;
+        scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        overflowScanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        scanline[1] = pos1->x + 1;
+        overflowScanline[0] = pos2->x;
+        overflowScanline[1] = CONDITION_GRAPH_CENTER_X;
         return;
     }
 
-    ptr[arg4] = arg4 + var_30;
+    ptr[dir] = dir + x2;
 }
 
-static void sub_81D24A4(struct ConditionGraph *graph)
+static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
 {
-    u16 i, r6, varMax;
+    u16 i, y, bottom;
 
-    if (graph->unk12C[0].unk2 < graph->unk12C[1].unk2)
+    // Calculate Cool -> Beauty line
+    if (graph->curPositions[GRAPH_COOL].y < graph->curPositions[GRAPH_BEAUTY].y)
     {
-        r6 = graph->unk12C[0].unk2;
-        sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[0], &graph->unk12C[1], 1, NULL);
+        y = graph->curPositions[GRAPH_COOL].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_COOL], &graph->curPositions[GRAPH_BEAUTY], TRUE, NULL);
     }
     else
     {
-        r6 = graph->unk12C[1].unk2;
-        sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[1], &graph->unk12C[0], 0, NULL);
+        y = graph->curPositions[GRAPH_BEAUTY].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_BEAUTY], &graph->curPositions[GRAPH_COOL], FALSE, NULL);
     }
 
-    sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[1], &graph->unk12C[2], 1, NULL);
+    // Calculate Beauty -> Cute line
+    // No need for conditional, positions on the Beauty line are always above the Cute line
+    ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_BEAUTY], &graph->curPositions[GRAPH_CUTE], TRUE, NULL);
 
-    i = (graph->unk12C[2].unk2 <= graph->unk12C[3].unk2);
-    sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[2], &graph->unk12C[3], i, graph->scanlineLeft[0]);
-    for (i = CONDITION_GRAPH_TOP_Y; i < r6; i++)
+    // Calculate Cute -> Tough line (includes left scanline because this crosses the halfway point)
+    i = (graph->curPositions[GRAPH_CUTE].y <= graph->curPositions[GRAPH_SMART].y);
+    ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_CUTE], &graph->curPositions[GRAPH_SMART], i, graph->scanlineLeft[0]);
+    
+    // Clear down to new top
+    for (i = CONDITION_GRAPH_TOP_Y; i < y; i++)
     {
         graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = 0;
         graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
+    for (i = graph->curPositions[GRAPH_COOL].y; i <= graph->bottom; i++)
         graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = CONDITION_GRAPH_CENTER_X;
 
-    varMax = max(graph->unk350, graph->unk12C[2].unk2);
-    for (i = varMax + 1; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
+    // Clear after new bottom
+    bottom = max(graph->bottom, graph->curPositions[GRAPH_CUTE].y);
+    for (i = bottom + 1; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
         graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = 0;
         graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] = 0;
@@ -581,42 +612,48 @@ static void sub_81D24A4(struct ConditionGraph *graph)
 
     for (i = CONDITION_GRAPH_TOP_Y; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        if (graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] == 0 && graph->scanlineRight[i - 56][1] != 0)
+        if (graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] == 0
+         && graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] != 0)
             graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = CONDITION_GRAPH_CENTER_X;
     }
 }
 
-static void sub_81D2634(struct ConditionGraph *graph)
+static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *graph)
 {
-    s32 i, r6, varMax;
+    s32 i, y, bottom;
 
-    if (graph->unk12C[0].unk2 < graph->unk12C[4].unk2)
+    // Calculate Cool -> Tough line
+    if (graph->curPositions[GRAPH_COOL].y < graph->curPositions[GRAPH_TOUGH].y)
     {
-        r6 = graph->unk12C[0].unk2;
-        sub_81D2278(graph, graph->scanlineLeft[0], &graph->unk12C[0], &graph->unk12C[4], 0, NULL);
+        y = graph->curPositions[GRAPH_COOL].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineLeft[0], &graph->curPositions[GRAPH_COOL], &graph->curPositions[GRAPH_TOUGH], FALSE, NULL);
     }
     else
     {
-        r6 = graph->unk12C[4].unk2;
-        sub_81D2278(graph, graph->scanlineLeft[0], &graph->unk12C[4], &graph->unk12C[0], 1, NULL);
+        y = graph->curPositions[GRAPH_TOUGH].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineLeft[0], &graph->curPositions[GRAPH_TOUGH], &graph->curPositions[GRAPH_COOL], TRUE, NULL);
     }
 
-    sub_81D2278(graph, graph->scanlineLeft[0], &graph->unk12C[4], &graph->unk12C[3], 0, NULL);
+    // Calculate Tough -> Smart line
+    // No need for conditional, positions on the Tough line are always above the Smart line
+    ConditionGraph_CalcLine(graph, graph->scanlineLeft[0], &graph->curPositions[GRAPH_TOUGH], &graph->curPositions[GRAPH_SMART], FALSE, NULL);
 
-    for (i = CONDITION_GRAPH_TOP_Y; i < r6; i++)
+    // Clear down to new top
+    for (i = CONDITION_GRAPH_TOP_Y; i < y; i++)
     {
-        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][0] = 0;
-        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][1] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
-        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][1] = CONDITION_GRAPH_CENTER_X;
+    for (i = graph->curPositions[GRAPH_COOL].y; i <= graph->bottom; i++)
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][1] = CONDITION_GRAPH_CENTER_X;
 
-    varMax = max(graph->unk350, graph->unk12C[3].unk2 + 1);
-    for (i = varMax; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
+    // Clear after new bottom
+    bottom = max(graph->bottom, graph->curPositions[GRAPH_SMART].y + 1);
+    for (i = bottom; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][0] = 0;
-        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][1] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
     for (i = 0; i < CONDITION_GRAPH_HEIGHT; i++)
@@ -629,35 +666,40 @@ static void sub_81D2634(struct ConditionGraph *graph)
     }
 }
 
-void sub_81D2754(u8 *conditions, struct UnknownSubStruct_81D1ED4 *arg1)
+void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions)
 {
-    u8 r2, sinIdx;
-    s8 r12;
+    u8 lineLength, sinIdx;
+    s8 posIdx;
     u16 i;
 
-    r2 = sUnknown_08625410[*(conditions++)];
-    arg1->unk0 = CONDITION_GRAPH_CENTER_X;
-    arg1->unk2 = CONDITION_GRAPH_UNK - r2;
+    // Cool is straight up-and-down (not angled), so no need for Sin
+    lineLength = sConditionToLineLength[*(conditions++)];
+    positions[GRAPH_COOL].x = CONDITION_GRAPH_CENTER_X;
+    positions[GRAPH_COOL].y = CONDITION_GRAPH_CENTER_Y - lineLength;
 
     sinIdx = 64;
-    r12 = 0;
+    posIdx = GRAPH_COOL;
     for (i = 1; i < CONDITION_COUNT; i++)
     {
         sinIdx += 51;
-        if (--r12 < 0)
-            r12 = 4;
+        if (--posIdx < 0)
+            posIdx = CONDITION_COUNT - 1;
 
-        if (r12 == 2)
+        if (posIdx == GRAPH_CUTE)
             sinIdx++;
 
-        r2 = sUnknown_08625410[*(conditions++)];
-        arg1[r12].unk0 = CONDITION_GRAPH_CENTER_X + ((r2 * gSineTable[64 + sinIdx]) >> 8);
-        arg1[r12].unk2 = CONDITION_GRAPH_UNK - ((r2 * gSineTable[sinIdx]) >> 8);
+        lineLength = sConditionToLineLength[*(conditions++)];
+        positions[posIdx].x = CONDITION_GRAPH_CENTER_X + ((lineLength * gSineTable[64 + sinIdx]) >> 8);
+        positions[posIdx].y = CONDITION_GRAPH_CENTER_Y - ((lineLength * gSineTable[sinIdx]) >> 8);
 
-        if (r12 < 3 && (r2 != 32 || r12 != 2))
-            arg1[r12].unk0 = CONDITION_GRAPH_CENTER_X + 1 + ((r2 * gSineTable[64 + sinIdx]) >> 8);
+        if (posIdx <= GRAPH_CUTE && (lineLength != 32 || posIdx != GRAPH_CUTE))
+            positions[posIdx].x++;
     }
 }
+
+//----------------
+// Move relearner
+//----------------
 
 void InitMoveRelearnerWindows(bool8 useContextWindow)
 {
@@ -834,6 +876,10 @@ void MoveRelearnerCreateYesNoMenu(void)
     CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
 }
 
+//----------------
+// Condition menu
+//----------------
+
 s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
 {
     s32 ret;
@@ -1005,15 +1051,15 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *numSparkles
 
         numSparkles[id] = GET_NUM_CONDITION_SPARKLES(GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL));
 
-        sub_81D2754(graph->conditions[id], graph->unk14[id]);
+        ConditionGraph_CalcPositions(graph->conditions[id], graph->savedPositions[id]);
     }
     else
     {
         for (i = 0; i < CONDITION_COUNT; i++)
         {
             graph->conditions[id][i] = 0;
-            graph->unk14[id][i].unk0 = CONDITION_GRAPH_CENTER_X;
-            graph->unk14[id][i].unk2 = CONDITION_GRAPH_UNK;
+            graph->savedPositions[id][i].x = CONDITION_GRAPH_CENTER_X;
+            graph->savedPositions[id][i].y = CONDITION_GRAPH_CENTER_Y;
         }
     }
 }
@@ -1052,17 +1098,17 @@ bool8 MoveConditionMonOffscreen(s16 *x)
     return (*x != -80);
 }
 
-bool8 ConditionGraph_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
+bool8 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 graphUpdating = TransitionConditionGraph(graph);
+    bool8 graphUpdating = ConditionGraph_TryUpdate(graph);
     bool8 monUpdating = MoveConditionMonOnscreen(x);
 
     return (graphUpdating || monUpdating);
 }
 
-bool8 ConditionGraph_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
+bool8 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 graphUpdating = TransitionConditionGraph(graph);
+    bool8 graphUpdating = ConditionGraph_TryUpdate(graph);
     bool8 monUpdating = MoveConditionMonOffscreen(x);
 
     return (graphUpdating || monUpdating);

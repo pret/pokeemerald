@@ -147,7 +147,7 @@ static void CreateConditionMonPic(u8 var);
 static void CreateMonMarkingsOrPokeballIndicators(void);
 static void CopyUnusedConditionWindowsToVram(void);
 static bool32 UpdateConditionGraphWindows(u8 a0, u16 a1, bool8 a2);
-static void sub_81CEE44(void);
+static void VBlankCB_PokenavConditionGraph(void);
 static void DoConditionGraphTransition(void);
 static void sub_81CEEC8(void);
 static void sub_81CEE68(void);
@@ -237,7 +237,7 @@ static u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         SetBgTilemapBuffer(2, structPtr->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
         CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, 0x30, 0x20);
-        SetConditionGraphIOWindows(2);
+        ConditionGraph_InitWindow(2);
         return LT_INC_AND_PAUSE;
     case 5:
         BgDmaFill(1, 0, 0, 1);
@@ -309,21 +309,21 @@ static u32 LoopedTask_OpenPartyConditionGraph(s32 state)
             return LT_PAUSE;
         if (!IsConditionMenuSearchMode() && AreLeftHeaderSpritesMoving())
             return LT_PAUSE;
-        SetVBlankCallback_(sub_81CEE44);
+        SetVBlankCallback_(VBlankCB_PokenavConditionGraph);
         return LT_INC_AND_PAUSE;
     case 17:
         DoConditionGraphTransition();
-        InitConditionGraphState(GetConditionGraphDataPtr());
+        ConditionGraph_InitResetScanline(GetConditionGraphPtr());
         return LT_INC_AND_PAUSE;
     case 18:
-        if (SetupConditionGraphScanlineParams(GetConditionGraphDataPtr()))
+        if (ConditionGraph_ResetScanline(GetConditionGraphPtr()))
             return LT_PAUSE;
         return LT_INC_AND_PAUSE;
     case 19:
         ToggleGraphData(TRUE);
         return LT_INC_AND_PAUSE;
     case 20:
-        if (!ConditionGraph_UpdateMonEnter(GetConditionGraphDataPtr(), &structPtr->monTransitionX))
+        if (!ConditionMenu_UpdateMonEnter(GetConditionGraphPtr(), &structPtr->monTransitionX))
         {
             ResetConditionSparkleSprites(structPtr->conditionSparkleSprites);
             if (IsConditionMenuSearchMode() == TRUE || GetConditionGraphCurrentMonIndex() != GetMonListCount())
@@ -348,7 +348,7 @@ static u32 LoopedTask_ExitPartyConditionMenu(s32 state)
         DestroyConditionSparkleSprites(structPtr->conditionSparkleSprites);
         return LT_INC_AND_CONTINUE;
     case 1:
-        if (ConditionGraph_UpdateMonExit(GetConditionGraphDataPtr(), &structPtr->monTransitionX))
+        if (ConditionMenu_UpdateMonExit(GetConditionGraphPtr(), &structPtr->monTransitionX))
             return 2;
         ToggleGraphData(FALSE);
         return LT_INC_AND_CONTINUE;
@@ -373,7 +373,7 @@ static u32 LoopedTask_ExitPartyConditionMenu(s32 state)
 static u32 LoopedTask_TransitionMons(s32 state)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
-    struct ConditionGraph *graph = GetConditionGraphDataPtr();
+    struct ConditionGraph *graph = GetConditionGraphPtr();
 
     switch (state)
     {
@@ -388,7 +388,7 @@ static u32 LoopedTask_TransitionMons(s32 state)
         DestroyConditionSparkleSprites(structPtr->conditionSparkleSprites);
         return LT_INC_AND_CONTINUE;
     case 3:
-        TransitionConditionGraph(graph);
+        ConditionGraph_TryUpdate(graph);
         return LT_INC_AND_CONTINUE;
     case 4:
         if (!MoveConditionMonOffscreen(&structPtr->monTransitionX))
@@ -411,8 +411,8 @@ static u32 LoopedTask_TransitionMons(s32 state)
             return LT_INC_AND_CONTINUE;
         return LT_PAUSE;
     case 9:
-        graph = GetConditionGraphDataPtr();
-        if (!ConditionGraph_UpdateMonEnter(graph, &structPtr->monTransitionX))
+        graph = GetConditionGraphPtr();
+        if (!ConditionMenu_UpdateMonEnter(graph, &structPtr->monTransitionX))
         {
             ResetConditionSparkleSprites(structPtr->conditionSparkleSprites);
             if (IsConditionMenuSearchMode() != TRUE && GetConditionGraphCurrentMonIndex() == GetMonListCount())
@@ -459,7 +459,7 @@ static u32 LoopedTask_MoveCursorNoTransition(s32 state)
             return LT_INC_AND_CONTINUE;
         return LT_PAUSE;
     case 8:
-        if (!ConditionGraph_UpdateMonEnter(GetConditionGraphDataPtr(), &structPtr->monTransitionX))
+        if (!ConditionMenu_UpdateMonEnter(GetConditionGraphPtr(), &structPtr->monTransitionX))
         {
             ResetConditionSparkleSprites(structPtr->conditionSparkleSprites);
             CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, GetNumConditionMonSparkles());
@@ -488,7 +488,7 @@ static u32 LoopedTask_SlideMonOut(s32 state)
         DestroyConditionSparkleSprites(structPtr->conditionSparkleSprites);
         return LT_INC_AND_CONTINUE;
     case 3:
-        if (!ConditionGraph_UpdateMonExit(GetConditionGraphDataPtr(), &structPtr->monTransitionX))
+        if (!ConditionMenu_UpdateMonExit(GetConditionGraphPtr(), &structPtr->monTransitionX))
             return LT_INC_AND_CONTINUE;
         return LT_PAUSE;
     case 4:
@@ -833,13 +833,13 @@ static void CreateConditionMonPic(u8 id)
     }
 }
 
-static void sub_81CEE44(void)
+static void VBlankCB_PokenavConditionGraph(void)
 {
-    struct ConditionGraph *graph = GetConditionGraphDataPtr();
+    struct ConditionGraph *graph = GetConditionGraphPtr();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_81D2108(graph);
+    ConditionGraph_Draw(graph);
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
@@ -858,20 +858,20 @@ static void ToggleGraphData(bool8 showBg)
 
 static void DoConditionGraphTransition(void)
 {
-    struct ConditionGraph *conditionPtr = GetConditionGraphDataPtr();
+    struct ConditionGraph *graph = GetConditionGraphPtr();
     u8 id = GetMonMarkIndex();
 
     sUnknown_030012BC = id;
-    sub_81D1F84(conditionPtr, conditionPtr->unk14[3], conditionPtr->unk14[id]);
-    TransitionConditionGraph(conditionPtr);
+    ConditionGraph_SetNewPositions(graph, graph->savedPositions[CONDITION_GRAPH_LOAD_MAX - 1], graph->savedPositions[id]);
+    ConditionGraph_TryUpdate(graph);
 }
 
 static void sub_81CEEC8(void)
 {
-    struct ConditionGraph *conditionPtr = GetConditionGraphDataPtr();
+    struct ConditionGraph *graph = GetConditionGraphPtr();
 
     if (IsConditionMenuSearchMode() || GetConditionGraphCurrentMonIndex() != GetMonListCount() - 1)
-        sub_81D1F84(conditionPtr, conditionPtr->unk14[GetMonMarkIndex()], conditionPtr->unk14[3]);
+        ConditionGraph_SetNewPositions(graph, graph->savedPositions[GetMonMarkIndex()], graph->savedPositions[CONDITION_GRAPH_LOAD_MAX - 1]);
 }
 
 u8 GetMonMarkingsData(void)

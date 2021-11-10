@@ -24,7 +24,7 @@ struct PokenavSub11
     u8 fill2[0x6320 - 0x6308];
     u8 locationText[NUM_CONDITION_MONS][24];
     u8 nameText[NUM_CONDITION_MONS][64];
-    struct ConditionGraph conditionData;
+    struct ConditionGraph graph;
     u8 numSparkles[NUM_CONDITION_MONS];
     u8 monMarks[NUM_CONDITION_MONS];
     s8 mark;
@@ -52,7 +52,7 @@ bool32 PokenavCallback_Init_PartyCondition(void)
     if (structPtr == NULL)
         return FALSE;
 
-    ConditionGraph_Init(&structPtr->conditionData);
+    ConditionGraph_Init(&structPtr->graph);
     InitPartyConditionListParameters();
     gKeyRepeatStartDelay = 20;
     structPtr->callback = HandlePartyConditionInput;
@@ -66,7 +66,7 @@ bool32 PokenavCallback_Init_ConditionGraphFromSearch(void)
     if (structPtr == NULL)
         return FALSE;
 
-    ConditionGraph_Init(&structPtr->conditionData);
+    ConditionGraph_Init(&structPtr->graph);
     InitSearchResultsConditionList();
     gKeyRepeatStartDelay = 20;
     structPtr->callback = HandlePartyConditionInput;
@@ -192,7 +192,7 @@ static u8 SwitchConditionSummaryIndex(u8 moveUp)
     struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     r7 = (moveUp) ? structPtr->unk6788 : structPtr->unk6787;
-    sub_81D1F84(&structPtr->conditionData, structPtr->conditionData.unk14[structPtr->mark], structPtr->conditionData.unk14[r7]);
+    ConditionGraph_SetNewPositions(&structPtr->graph, structPtr->graph.savedPositions[structPtr->mark], structPtr->graph.savedPositions[r7]);
     wasNotLastMon = (monListPtr->currIndex != ((IsConditionMenuSearchMode() != 0) ? monListPtr->listCount : monListPtr->listCount - 1));
     if (moveUp)
     {
@@ -491,22 +491,22 @@ static void GetMonConditionGraphData(s16 listId, u8 loadId)
     {
         boxId = monListPtr->monData[listId].boxId;
         monId = monListPtr->monData[listId].monId;
-        structPtr->conditionData.conditions[loadId][CONDITION_COOL] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        structPtr->conditionData.conditions[loadId][CONDITION_TOUGH] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        structPtr->conditionData.conditions[loadId][CONDITION_SMART] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        structPtr->conditionData.conditions[loadId][CONDITION_CUTE] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        structPtr->conditionData.conditions[loadId][CONDITION_BEAUTY] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        structPtr->graph.conditions[loadId][CONDITION_COOL] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        structPtr->graph.conditions[loadId][CONDITION_TOUGH] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        structPtr->graph.conditions[loadId][CONDITION_SMART] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        structPtr->graph.conditions[loadId][CONDITION_CUTE] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        structPtr->graph.conditions[loadId][CONDITION_BEAUTY] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
         structPtr->numSparkles[loadId] = GET_NUM_CONDITION_SPARKLES(GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL));
         structPtr->monMarks[loadId] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_MARKINGS, NULL);
-        sub_81D2754(structPtr->conditionData.conditions[loadId], structPtr->conditionData.unk14[loadId]);
+        ConditionGraph_CalcPositions(structPtr->graph.conditions[loadId], structPtr->graph.savedPositions[loadId]);
     }
     else
     {
         for (i = 0; i < CONDITION_COUNT; i++)
         {
-            structPtr->conditionData.conditions[loadId][i] = 0;
-            structPtr->conditionData.unk14[loadId][i].unk0 = CONDITION_GRAPH_CENTER_X;
-            structPtr->conditionData.unk14[loadId][i].unk2 = CONDITION_GRAPH_UNK;
+            structPtr->graph.conditions[loadId][i] = 0;
+            structPtr->graph.savedPositions[loadId][i].x = CONDITION_GRAPH_CENTER_X;
+            structPtr->graph.savedPositions[loadId][i].y = CONDITION_GRAPH_CENTER_Y;
         }
     }
 }
@@ -542,10 +542,10 @@ u16 GetConditionGraphCurrentMonIndex(void)
     return monListPtr->currIndex;
 }
 
-struct ConditionGraph *GetConditionGraphDataPtr(void)
+struct ConditionGraph *GetConditionGraphPtr(void)
 {
     struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
-    return &structPtr->conditionData;
+    return &structPtr->graph;
 }
 
 u8 GetMonMarkIndex(void)

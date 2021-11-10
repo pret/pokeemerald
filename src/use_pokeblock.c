@@ -471,7 +471,7 @@ static void VBlankCB_UsePokeblockMenu(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_81D2108(&sMenu->graph);
+    ConditionGraph_Draw(&sMenu->graph);
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
@@ -537,19 +537,19 @@ static void LoadUsePokeblockMenu(void)
         sInfo->mainState++;
         break;
     case 11:
-        sub_81D2754(sMenu->graph.conditions[0], sMenu->graph.unk14[0]);
-        InitConditionGraphState(&sMenu->graph);
+        ConditionGraph_CalcPositions(sMenu->graph.conditions[0], sMenu->graph.savedPositions[0]);
+        ConditionGraph_InitResetScanline(&sMenu->graph);
         sInfo->mainState++;
         break;
     case 12:
-        if (!SetupConditionGraphScanlineParams(&sMenu->graph))
+        if (!ConditionGraph_ResetScanline(&sMenu->graph))
         {
-            sub_81D1F84(&sMenu->graph, sMenu->graph.unk14[0], sMenu->graph.unk14[0]);
+            ConditionGraph_SetNewPositions(&sMenu->graph, sMenu->graph.savedPositions[0], sMenu->graph.savedPositions[0]);
             sInfo->mainState++;
         }
         break;
     case 13:
-        sub_81D2230(&sMenu->graph);
+        ConditionGraph_Update(&sMenu->graph);
         sInfo->mainState++;
         break;
     case 14:
@@ -781,13 +781,13 @@ static void ShowPokeblockResults(void)
         break;
     case 2:
         CalculateConditionEnhancements();
-        sub_81D2754(sInfo->conditionsAfterBlock, sMenu->graph.unk14[3]);
-        sub_81D1F84(&sMenu->graph, sMenu->graph.unk14[sMenu->curLoadId], sMenu->graph.unk14[3]);
+        ConditionGraph_CalcPositions(sInfo->conditionsAfterBlock, sMenu->graph.savedPositions[CONDITION_GRAPH_LOAD_MAX - 1]);
+        ConditionGraph_SetNewPositions(&sMenu->graph, sMenu->graph.savedPositions[sMenu->curLoadId], sMenu->graph.savedPositions[CONDITION_GRAPH_LOAD_MAX - 1]);
         LoadAndCreateUpDownSprites();
         sInfo->mainState++;
         break;
     case 3:
-        if (!TransitionConditionGraph(&sMenu->graph))
+        if (!ConditionGraph_TryUpdate(&sMenu->graph))
         {
             CalculateNumAdditionalSparkles(GetPartyIdFromSelectionId(sMenu->info.curSelection));
             if (sMenu->info.curSelection != sMenu->info.numSelections - 1)
@@ -1365,7 +1365,7 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         LoadBgTilemap(2, sMenu->tilemapBuffer, 1280, 0);
         LoadPalette(gConditionGraphData_Pal, 48, 32);
         LoadPalette(gConditionText_Pal, 240, 32);
-        SetConditionGraphIOWindows(2);
+        ConditionGraph_InitWindow(2);
         break;
     default:
         sMenu->info.helperState = 0;
@@ -1416,7 +1416,7 @@ static void UpdateSelection(bool8 up)
     else
         newLoadId = sMenu->nextLoadId;
 
-    sub_81D1F84(&sMenu->graph, sMenu->graph.unk14[sMenu->curLoadId], sMenu->graph.unk14[newLoadId]);
+    ConditionGraph_SetNewPositions(&sMenu->graph, sMenu->graph.savedPositions[sMenu->curLoadId], sMenu->graph.savedPositions[newLoadId]);
 
     if (sMenu->info.curSelection == sMenu->info.numSelections - 1)
         startedOnMon = FALSE; // moving off of Cancel
@@ -1484,7 +1484,7 @@ static bool8 LoadNewSelection_CancelToMon(void)
         sMenu->info.helperState++;
         break;
     case 2:
-        if (!ConditionGraph_UpdateMonEnter(&sMenu->graph, &sMenu->curMonXOffset))
+        if (!ConditionMenu_UpdateMonEnter(&sMenu->graph, &sMenu->curMonXOffset))
         {
             // Load the new adjacent pokemon (not the one being shown)
             LoadMonInfo(sMenu->toLoadSelection, sMenu->toLoadId);
@@ -1511,7 +1511,7 @@ static bool8 LoadNewSelection_MonToCancel(void)
     switch (sMenu->info.helperState)
     {
     case 0:
-        if (!ConditionGraph_UpdateMonExit(&sMenu->graph, &sMenu->curMonXOffset))
+        if (!ConditionMenu_UpdateMonExit(&sMenu->graph, &sMenu->curMonXOffset))
             sMenu->info.helperState++;
         break;
     case 1:
@@ -1535,7 +1535,7 @@ static bool8 LoadNewSelection_MonToMon(void)
     switch (sMenu->info.helperState)
     {
     case 0:
-        TransitionConditionGraph(&sMenu->graph);
+        ConditionGraph_TryUpdate(&sMenu->graph);
         if (!MoveConditionMonOffscreen(&sMenu->curMonXOffset))
         {
             UpdateMonPic(sMenu->curLoadId);
@@ -1547,7 +1547,7 @@ static bool8 LoadNewSelection_MonToMon(void)
         sMenu->info.helperState++;
         break;
     case 2:
-        if (!ConditionGraph_UpdateMonEnter(&sMenu->graph, &sMenu->curMonXOffset))
+        if (!ConditionMenu_UpdateMonEnter(&sMenu->graph, &sMenu->curMonXOffset))
         {
             // Load the new adjacent pokemon (not the one being shown)
             LoadMonInfo(sMenu->toLoadSelection, sMenu->toLoadId);
