@@ -314,8 +314,8 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_RUSTED_SWORD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_RUSTED_SHIELD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     // Colored Orbs
-    [ITEM_RED_ORB] = {gItemIcon_Orb, gItemIconPalette_RedOrb},
-    [ITEM_BLUE_ORB] = {gItemIcon_Orb, gItemIconPalette_BlueOrb},
+    [ITEM_RED_ORB] = {gItemIcon_RedOrb, gItemIconPalette_RedOrb},
+    [ITEM_BLUE_ORB] = {gItemIcon_BlueOrb, gItemIconPalette_BlueOrb},
     [ITEM_JADE_ORB] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     // Mega Stones
     [ITEM_VENUSAURITE] = {gItemIcon_Venusaurite, gItemIconPalette_Venusaurite},

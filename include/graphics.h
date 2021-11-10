@@ -3958,8 +3958,9 @@ extern const u32 gItemIconPalette_FairyMemory[];
 //extern const u32 gItemIcon_RustedShield[];
 //extern const u32 gItemIconPalette_RustedShield[];
 // Colored Orbs
-extern const u32 gItemIcon_Orb[];
+extern const u32 gItemIcon_RedOrb[];
 extern const u32 gItemIconPalette_RedOrb[];
+extern const u32 gItemIcon_BlueOrb[];
 extern const u32 gItemIconPalette_BlueOrb[];
 //extern const u32 gItemIcon_JadeOrb[];
 //extern const u32 gItemIconPalette_JadeOrb[];
@@ -4848,6 +4849,12 @@ extern const u32 gBerryPic_Colbur[];
 extern const u32 gBerryPic_Babiri[];
 extern const u32 gBerryPic_Chilan[];
 extern const u32 gBerryPic_Roseli[];
+extern const u32 gBerryPic_Micle[];
+extern const u32 gBerryPic_Custap[];
+extern const u32 gBerryPic_Jaboca[];
+extern const u32 gBerryPic_Rowap[];
+extern const u32 gBerryPic_Kee[];
+extern const u32 gBerryPic_Maranga[];
 extern const u32 gBerryPalette_Occa[];
 extern const u32 gBerryPalette_Passho[];
 extern const u32 gBerryPalette_Wacan[];
@@ -4866,6 +4873,12 @@ extern const u32 gBerryPalette_Colbur[];
 extern const u32 gBerryPalette_Babiri[];
 extern const u32 gBerryPalette_Chilan[];
 extern const u32 gBerryPalette_Roseli[];
+extern const u32 gBerryPalette_Micle[];
+extern const u32 gBerryPalette_Custap[];
+extern const u32 gBerryPalette_Jaboca[];
+extern const u32 gBerryPalette_Rowap[];
+extern const u32 gBerryPalette_Kee[];
+extern const u32 gBerryPalette_Maranga[];
 
 //pokenav
 extern const u16 gPokenavCondition_Pal[];
