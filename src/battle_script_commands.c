@@ -9201,13 +9201,11 @@ static void Cmd_various(void)
     case VARIOUS_CUT_1_3_HP_RAISE_STATS:
         {
             bool8 atLeastOneStatBoosted = FALSE;
-            bool8 hasContrary = (GetBattlerAbility(gBattlerAttacker) == ABILITY_CONTRARY);
             u16 hpFraction = max(1, gBattleMons[gBattlerAttacker].maxHP / 3);
 
             for (i = 1; i < NUM_STATS; i++)
             {
-                if (!(gBattleMons[gBattlerAttacker].statStages[i] == MAX_STAT_STAGE
-                      || (hasContrary && gBattleMons[gBattlerAttacker].statStages[i] == MIN_STAT_STAGE)))
+                if (CompareStat(gBattlerAttacker, i, MAX_STAT_STAGE, CMP_LESS_THAN))
                 {
                     atLeastOneStatBoosted = TRUE;
                     break;
@@ -9231,7 +9229,7 @@ static void Cmd_various(void)
         }
         else
         {
-            gDisableStructs[gActiveBattler].octolock = 1;
+            gDisableStructs[gActiveBattler].octolock = TRUE;
             gBattleMons[gActiveBattler].status2 |= STATUS2_ESCAPE_PREVENTION;
             gDisableStructs[gActiveBattler].battlerPreventingEscape = gBattlerAttacker;
             gBattlescriptCurrInstr += 7;
@@ -9252,11 +9250,13 @@ static void Cmd_various(void)
         return;
     case VARIOUS_TRY_NO_RETREAT:
         if (gDisableStructs[gActiveBattler].noRetreat)
+        {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
         else
         {
             if (!(gBattleMons[gActiveBattler].status2 & STATUS2_ESCAPE_PREVENTION))
-                gDisableStructs[gActiveBattler].noRetreat = 1;
+                gDisableStructs[gActiveBattler].noRetreat = TRUE;
             gBattlescriptCurrInstr += 7;
         }
         return;
@@ -9267,18 +9267,17 @@ static void Cmd_various(void)
         }
         else
         {
-            gDisableStructs[gActiveBattler].tarShot = 1;
+            gDisableStructs[gActiveBattler].tarShot = TRUE;
             gBattlescriptCurrInstr += 7;
         }
         return;
     case VARIOUS_CAN_TAR_SHOT_WORK:
         // Tar Shot will fail if it's already been used on the target and its speed can't be lowered further
-        if (gDisableStructs[gActiveBattler].tarShot 
-            && (gBattleMons[gActiveBattler].statStages[STAT_SPEED] == MIN_STAT_STAGE
-                || (gBattleMons[gActiveBattler].statStages[STAT_SPEED] == MAX_STAT_STAGE && GetBattlerAbility(gActiveBattler) == ABILITY_CONTRARY)))
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        else
+        if (!gDisableStructs[gActiveBattler].tarShot 
+            && CompareStat(gActiveBattler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
             gBattlescriptCurrInstr += 7;
+        else
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         return;
     case VARIOUS_TRY_TO_APPLY_MIMICRY:
     {

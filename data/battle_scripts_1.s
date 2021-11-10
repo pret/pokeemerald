@@ -445,7 +445,7 @@ BattleScript_EffectClangorousSoul:
 	attackstring
 	ppreduce
 	cutonethirdhpraisestats BattleScript_ButItFailed
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_SKIP_DMG_TRACK | HITMARKER_PASSIVE_DAMAGE | HITMARKER_IGNORE_DISGUISE
 	attackanimation
 	waitanimation
 	healthbarupdate BS_ATTACKER
@@ -471,8 +471,8 @@ BattleScript_OctolockEndTurn::
 	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_OctolockTryLowerSpDef
 	goto BattleScript_OctolockEnd2
 BattleScript_OctolockLowerDef:
-	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE
 	jumpifability BS_TARGET, ABILITY_BIG_PECKS, BattleScript_OctolockTryLowerSpDef
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE | MOVE_EFFECT_AFFECTS_USER 
 	setstatchanger STAT_DEF, 1, TRUE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_OctolockTryLowerSpDef
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_OctolockTryLowerSpDef
@@ -480,7 +480,7 @@ BattleScript_OctolockLowerDef:
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_OctolockTryLowerSpDef:
 	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_OctolockSkipSpDefAnim
-	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, STAT_CHANGE_NEGATIVE
+	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, STAT_CHANGE_NEGATIVE | MOVE_EFFECT_AFFECTS_USER
 BattleScript_OctolockSkipSpDefAnim:
 	setstatchanger STAT_SPDEF, 1, TRUE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_OctolockEnd2
