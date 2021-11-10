@@ -400,10 +400,8 @@ static void DestroySplitIcon(void); //Physical/Special Split from BE
 //Physical/Special Split from BE
 #define TAG_SPLIT_ICONS 30004
 
-//UNCOMMENT THE FOLLOWING 2 LINES IF YOU ARE USING THE BATTLE EXPANSION !!!!
-    // static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
-    // static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
-//UNCOMMENT THE PREVIOUS 2 LINES IF YOU ARE USING THE BATTLE EXPANSION !!!!
+static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
+static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
 
 static const struct OamData sOamData_SplitIcons =
 {
