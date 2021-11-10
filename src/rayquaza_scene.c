@@ -490,7 +490,7 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogreDorsalFin =
 
 static const struct ScanlineEffectParams sScanlineParams_DuoFight_Clouds =
 {
-    .dmaDest = (vu16 *)REG_ADDR_BG1HOFS,
+    .dmaDest = &REG_BG1HOFS,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
     .initState = 1
 };

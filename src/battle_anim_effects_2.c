@@ -2394,12 +2394,12 @@ void AnimTask_SketchDrawMon(u8 taskId)
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimTarget) == 1)
     {
         task->data[6] = gBattle_BG1_X;
-        params.dmaDest = (u16 *)REG_ADDR_BG1HOFS;
+        params.dmaDest = &REG_BG1HOFS;
     }
     else
     {
         task->data[6] = gBattle_BG2_X;
-        params.dmaDest = (u16 *)REG_ADDR_BG2HOFS;
+        params.dmaDest = &REG_BG2HOFS;
     }
 
     for (i = task->data[0] - 0x40; i <= task->data[0]; i++)
