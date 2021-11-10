@@ -5064,3 +5064,34 @@ void AnimTask_PrimalReversion(u8 taskId)
         gBattleAnimArgs[0] = 0;
     DestroyAnimVisualTask(taskId);
 }
+
+void AnimTask_ShellSideArm(u8 taskId)
+{
+    if (gSwapDamageCategory)
+        gBattleAnimArgs[0] = TRUE;
+    else
+        gBattleAnimArgs[0] = FALSE;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_TerrainPulse(u8 taskId)
+{
+    if (IsBattlerTerrainAffected(gBattleAnimAttacker, STATUS_FIELD_TERRAIN_ANY))
+    {
+        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_ELECTRIC;
+        else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_GRASS;
+        else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_FAIRY;
+        else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_PSYCHIC;
+        else //failsafe
+            gBattleAnimArgs[0] = 0;
+    }
+    else
+    {
+        gBattleAnimArgs[0] = 0;
+    }
+    DestroyAnimVisualTask(taskId);
+}

@@ -199,12 +199,14 @@
 #define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    126
 #define VARIOUS_SET_ATTACKER_STICKY_WEB_USER    127
 #define VARIOUS_TRY_TO_APPLY_MIMICRY            128
-#define VARIOUS_TRY_NO_RETREAT                  129
-#define VARIOUS_TRY_TAR_SHOT                    130
-#define VARIOUS_CAN_TAR_SHOT_WORK               131
-#define VARIOUS_CHECK_POLTERGEIST               132
-#define VARIOUS_SET_OCTOLOCK                    133
-#define VARIOUS_CUT_1_3_HP_RAISE_STATS          134
+#define VARIOUS_PHOTON_GEYSER_CHECK             129
+#define VARIOUS_SHELL_SIDE_ARM_CHECK            130
+#define VARIOUS_TRY_NO_RETREAT                  131
+#define VARIOUS_TRY_TAR_SHOT                    132
+#define VARIOUS_CAN_TAR_SHOT_WORK               133
+#define VARIOUS_CHECK_POLTERGEIST               134
+#define VARIOUS_SET_OCTOLOCK                    135
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

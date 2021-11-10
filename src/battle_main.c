@@ -232,6 +232,7 @@ EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
+EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -2941,6 +2942,8 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][1] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
     }
+
+    gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 }
 
 void SwitchInClearSetData(void)
@@ -5188,6 +5191,22 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     {
         if (ItemId_GetPocket(gBattleMons[battlerAtk].item) == POCKET_BERRIES)
             gBattleStruct->dynamicMoveType = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].type;
+    }
+    else if (gBattleMoves[move].effect == EFFECT_TERRAIN_PULSE)
+    {
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_TERRAIN_ANY))
+        {
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | 0x80;
+            else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_GRASS | 0x80;
+            else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_FAIRY | 0x80;
+            else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_PSYCHIC | 0x80;
+            else //failsafe
+                gBattleStruct->dynamicMoveType = TYPE_NORMAL | 0x80;
+        }
     }
 
     attackerAbility = GetBattlerAbility(battlerAtk);
