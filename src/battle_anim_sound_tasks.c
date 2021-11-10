@@ -312,7 +312,7 @@ static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 2:
-        PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_END);
+        PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_START);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -329,9 +329,9 @@ static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
         break;
     default:
         if (!gTasks[taskId].tLastCry)
-            PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_START);
+            PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_END);
         else
-            PlayCry_ByMode(species, pan, CRY_MODE_ECHO_START);
+            PlayCry_ByMode(species, pan, CRY_MODE_ECHO_END);
 
         DestroyAnimVisualTask(taskId);
         break;

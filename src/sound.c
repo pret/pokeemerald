@@ -406,7 +406,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
         chorus = 20;
         volume = 90;
         break;
-    case CRY_MODE_ECHO_END:
+    case CRY_MODE_ECHO_START:
         length = 25;
         reverse = TRUE;
         release = 100;
@@ -418,7 +418,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
         release = 200;
         pitch = 14440;
         break;
-    case CRY_MODE_ECHO_START:
+    case CRY_MODE_ECHO_END:
         release = 220;
         pitch = 15555;
         chorus = 192;
