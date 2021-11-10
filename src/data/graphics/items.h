@@ -1892,8 +1892,8 @@ const u32 gItemIconPalette_Gracidea[] = INCBIN_U32("graphics/items/icon_palettes
 
 // Misc. Key Items
 
-//const u32 gItemIcon_PokemonBoxLink[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
-//const u32 gItemIconPalette_PokemonBoxLink[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
+const u32 gItemIcon_Bicycle[] = INCBIN_U32("graphics/items/icons/bicycle.4bpp.lz");
+const u32 gItemIconPalette_Bicycle[] = INCBIN_U32("graphics/items/icon_palettes/bicycle.gbapal.lz");
 
 const u32 gItemIcon_MachBike[] = INCBIN_U32("graphics/items/icons/mach_bike.4bpp.lz");
 const u32 gItemIconPalette_MachBike[] = INCBIN_U32("graphics/items/icon_palettes/mach_bike.gbapal.lz");
@@ -1916,6 +1916,15 @@ const u32 gItemIconPalette_DowsingMachine[] = INCBIN_U32("graphics/items/icon_pa
 const u32 gItemIcon_TownMap[] = INCBIN_U32("graphics/items/icons/town_map.4bpp.lz");
 const u32 gItemIconPalette_TownMap[] = INCBIN_U32("graphics/items/icon_palettes/town_map.gbapal.lz");
 
+const u32 gItemIcon_VsSeeker[] = INCBIN_U32("graphics/items/icons/vs_seeker.4bpp.lz");
+const u32 gItemIconPalette_VsSeeker[] = INCBIN_U32("graphics/items/icon_palettes/vs_seeker.gbapal.lz");
+
+const u32 gItemIcon_TMCase[] = INCBIN_U32("graphics/items/icons/tm_case.4bpp.lz");
+const u32 gItemIconPalette_TMCase[] = INCBIN_U32("graphics/items/icon_palettes/tm_case.gbapal.lz");
+
+//const u32 gItemIcon_PokemonBoxLink[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
+//const u32 gItemIconPalette_PokemonBoxLink[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
+
 const u32 gItemIcon_CoinCase[] = INCBIN_U32("graphics/items/icons/coin_case.4bpp.lz");
 const u32 gItemIconPalette_CoinCase[] = INCBIN_U32("graphics/items/icon_palettes/coin_case.gbapal.lz");
 
@@ -1924,6 +1933,9 @@ const u32 gItemIconPalette_PowderJar[] = INCBIN_U32("graphics/items/icon_palette
 
 const u32 gItemIcon_WailmerPail[] = INCBIN_U32("graphics/items/icons/wailmer_pail.4bpp.lz");
 const u32 gItemIconPalette_WailmerPail[] = INCBIN_U32("graphics/items/icon_palettes/wailmer_pail.gbapal.lz");
+
+//const u32 gItemIcon_PokeRadar[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
+//const u32 gItemIconPalette_PokeRadar[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
 
 const u32 gItemIcon_PokeblockCase[] = INCBIN_U32("graphics/items/icons/pokeblock_case.4bpp.lz");
 const u32 gItemIconPalette_PokeblockCase[] = INCBIN_U32("graphics/items/icon_palettes/pokeblock_case.gbapal.lz");

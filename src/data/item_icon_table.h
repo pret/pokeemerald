@@ -754,7 +754,7 @@ const u32 *const gItemIconTable[][2] =
     //[ITEM_Z_RING] = {gItemIcon_ZRing, gItemIconPalette_ZRing}, // Remove
     [ITEM_DYNAMAX_BAND] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     // Misc. Key Items
-    [ITEM_POKEMON_BOX_LINK] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_BICYCLE] = {gItemIcon_Bicycle, gItemIconPalette_Bicycle},
     [ITEM_MACH_BIKE] = {gItemIcon_MachBike, gItemIconPalette_MachBike},
     [ITEM_ACRO_BIKE] = {gItemIcon_AcroBike, gItemIconPalette_AcroBike},
     [ITEM_OLD_ROD] = {gItemIcon_OldRod, gItemIconPalette_OldRod},
@@ -762,9 +762,13 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_SUPER_ROD] = {gItemIcon_SuperRod, gItemIconPalette_SuperRod},
     [ITEM_DOWSING_MACHINE] = {gItemIcon_DowsingMachine, gItemIconPalette_DowsingMachine},
     [ITEM_TOWN_MAP] = {gItemIcon_TownMap, gItemIconPalette_TownMap},
+    [ITEM_VS_SEEKER] = {gItemIcon_VsSeeker, gItemIconPalette_VsSeeker},
+    [ITEM_TM_CASE] = {gItemIcon_TMCase, gItemIconPalette_TMCase},
+    [ITEM_POKEMON_BOX_LINK] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_COIN_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
     [ITEM_POWDER_JAR] = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
     [ITEM_WAILMER_PAIL] = {gItemIcon_WailmerPail, gItemIconPalette_WailmerPail},
+    [ITEM_POKE_RADAR] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_POKEBLOCK_CASE] = {gItemIcon_PokeblockCase, gItemIconPalette_PokeblockCase},
     [ITEM_SOOT_SACK] = {gItemIcon_SootSack, gItemIconPalette_SootSack},
     // Story Key Items

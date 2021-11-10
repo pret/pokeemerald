@@ -3254,8 +3254,10 @@ static const u8 sDynamaxBandDesc[] = _( // Todo
     "?????");
 
 // Misc. Key Items
-static const u8 sPokemonBoxLinkDesc[] = _( // Todo
-    "?????");
+static const u8 sBicycleDesc[] = _(
+    "A folding bicycle\n"
+    "that is faster than\n"
+    "the Running Shoes.");
 
 static const u8 sMachBikeDesc[] = _(
     "A folding bicycle\n"
@@ -3292,6 +3294,19 @@ static const u8 sTownMapDesc[] = _(
     "anytime. Shows your\n"
     "present location.");
 
+static const u8 sVsSeekerDesc[] = _(
+    "A rechargeable unit\n"
+    "that flags battle-\n"
+    "ready Trainers.");
+
+static const u8 sTMCaseDesc[] = _(
+    "A convenient case \n"
+    "that holds TMs and\n"
+    "HMs.");
+
+static const u8 sPokemonBoxLinkDesc[] = _( // Todo
+    "?????");
+
 static const u8 sCoinCaseDesc[] = _(
     "A case that holds\n"
     "up to 9,999 Coins.");
@@ -3305,6 +3320,9 @@ static const u8 sWailmerPailDesc[] = _(
     "A tool used for\n"
     "watering Berries\n"
     "and plants.");
+
+static const u8 sPokeRadarDesc[] = _( // Todo
+    "?????");
 
 static const u8 sPokeblockCaseDesc[] = _(
     "A case for holding\n"

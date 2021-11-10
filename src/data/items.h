@@ -8707,14 +8707,16 @@ const struct Item gItems[] =
 
 // Misc. Key Items
 
-    [ITEM_POKEMON_BOX_LINK] = // Todo
+    [ITEM_BICYCLE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("Bicycle"),
+        .itemId = ITEM_BICYCLE,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
+        .description = sBicycleDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
@@ -8814,6 +8816,43 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
+    [ITEM_VS_SEEKER] =
+    {
+        .name = _("Vs. Seeker"),
+        .itemId = ITEM_VS_SEEKER,
+        .price = 0,
+        .description = sVsSeekerDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TM_CASE] =
+    {
+        .name = _("TM Case"),
+        .itemId = ITEM_TM_CASE,
+        .price = 0,
+        .description = sTMCaseDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_POKEMON_BOX_LINK] = // Todo
+    {
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
+        .price = 0,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
     [ITEM_COIN_CASE] =
     {
         .name = _("Coin Case"),
@@ -8849,6 +8888,17 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_WailmerPail,
+    },
+
+    [ITEM_POKE_RADAR] = // Todo
+    {
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
+        .price = 0,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_POKEBLOCK_CASE] =
