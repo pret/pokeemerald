@@ -256,6 +256,14 @@ enum PartyConditionFuncIds
     PARTY_CONDITION_FUNC_CLOSE_MARKINGS,
 };
 
+enum
+{
+    CONDITION_MON_0,
+    CONDITION_MON_1,
+    CONDITION_MON_2,
+    NUM_CONDITION_MONS
+};
+
 #define POKENAV_MENU_FUNC_EXIT  -1
 
 enum
@@ -432,11 +440,11 @@ bool32 IsConditionMenuSearchMode(void);
 struct ConditionGraph *GetConditionGraphDataPtr(void);
 u16 GetConditionGraphCurrentMonIndex(void);
 u16 GetMonListCount(void);
-u8 GetMonSheen(void);
-bool32 SetConditionGraphData(u8 arg0);
+u8 GetNumConditionMonSparkles(void);
+bool32 SetConditionGraphData(u8 mode);
 u8 TryGetMonMarkId(void);
-u8 *GetConditionMonNameBuffer(u8 id);
-u8 *GetConditionMonLocationBuffer(u8 id);
+u8 *GetConditionMonNameText(u8 id);
+u8 *GetConditionMonLocationText(u8 id);
 u16 GetConditionMonDataBuffer(void);
 void *GetConditionMonPicGfx(u8 id);
 void *GetConditionMonPal(u8 id);

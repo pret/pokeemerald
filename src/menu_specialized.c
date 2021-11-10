@@ -31,14 +31,14 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
-static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void sub_81D24A4(struct ConditionGraph *a0);
-static void sub_81D2634(struct ConditionGraph *a0);
-static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void nullsub_79(void);
-static void SetNextConditionSparkle(struct Sprite *sprite);
-static void SpriteCB_ConditionSparkle(struct Sprite *sprite);
-static void ShowAllConditionSparkles(struct Sprite *sprite);
+static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
+static void sub_81D24A4(struct ConditionGraph *);
+static void sub_81D2634(struct ConditionGraph *);
+static void MoveRelearnerCursorCallback(s32, bool8, struct ListMenu *);
+static void MoveRelearnerDummy(void);
+static void SetNextConditionSparkle(struct Sprite *);
+static void SpriteCB_ConditionSparkle(struct Sprite *);
+static void ShowAllConditionSparkles(struct Sprite *);
 
 static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT] =
 {
@@ -80,46 +80,29 @@ static const u8 sEmptyItemName[] = _("");
 
 static const struct ScanlineEffectParams sConditionGraphScanline =
 {
-    .dmaDest = (void*)REG_ADDR_WIN0H,
+    .dmaDest = &REG_WIN0H,
     .dmaControl = SCANLINE_EFFECT_DMACNT_32BIT,
     .initState = 1,
 };
 
-static const u8 sUnknown_08625410[] =
+static const u8 sUnknown_08625410[MAX_CONDITION + 1] =
 {
-    4,
-    5,
-    6,
-    7,
-    8,
-    9, 9,
-    10, 10,
-    0xB, 0xB,
-    0xC, 0xC,
-    0xD, 0xD,
-    0xD, 0xD,
-    0xE, 0xE, 0xE, 0xE,
-    0xF, 0xF, 0xF, 0xF,
-    0x10, 0x10, 0x10, 0x10, 0x10, 0x10,
-    0x11, 0x11, 0x11, 0x11, 0x11, 0x11,
-    0x12, 0x12, 0x12, 0x12, 0x12, 0x12,
-    0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13,
-    0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14,
-    0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15,
-    0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16,
-    0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17,
-    0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18,
-    0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19,
-    0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A,
-    0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B,
-    0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C,
-    0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D,
-    0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E,
-    0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
-    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-    0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21,
-    0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22,
-    0x23
+     4,  5,  6,  7,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 13,
+    13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17,
+    17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19,
+    19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21,
+    21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23,
+    23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24,
+    24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26,
+    26, 26, 26, 26, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27, 27, 27,
+    27, 27, 27, 27, 27, 27, 27, 28, 28, 28, 28, 28, 28, 28, 28, 28,
+    28, 28, 28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
+    29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+    30, 30, 30, 30, 30, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31,
+    31, 31, 31, 31, 31, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+    32, 32, 32, 32, 32, 32, 32, 32, 33, 33, 33, 33, 33, 33, 33, 33,
+    33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 34, 34, 34, 34, 34,
+    34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 35
 };
 
 
@@ -320,29 +303,29 @@ void MailboxMenu_Free(void)
     Free(sMailboxList);
 }
 
-void InitConditionGraphData(struct ConditionGraph *graph)
+void ConditionGraph_Init(struct ConditionGraph *graph)
 {
     u8 i, j;
 
-    for (j = 0; j < FLAVOR_COUNT; j++)
+    for (j = 0; j < CONDITION_COUNT; j++)
     {
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < CONDITION_GRAPH_UNK_1; i++)
         {
             graph->unk64[i][j].unk0 = 0;
             graph->unk64[i][j].unk2 = 0;
         }
         for (i = 0; i < 4; i++)
         {
-            graph->stat[i][j] = 0;
-            graph->unk14[i][j].unk0 = 155;
-            graph->unk14[i][j].unk2 = 91;
+            graph->conditions[i][j] = 0;
+            graph->unk14[i][j].unk0 = CONDITION_GRAPH_CENTER_X;
+            graph->unk14[i][j].unk2 = CONDITION_GRAPH_UNK;
         }
 
         graph->unk12C[j].unk0 = 0;
         graph->unk12C[j].unk2 = 0;
     }
 
-    graph->unk354 = 0;
+    graph->unk354 = FALSE;
     graph->unk352 = 0;
 }
 
@@ -351,11 +334,11 @@ void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *
     u16 i, j;
     s32 r5, r6;
 
-    for (i = 0; i < FLAVOR_COUNT; i++)
+    for (i = 0; i < CONDITION_COUNT; i++)
     {
         r5 = arg1[i].unk0 << 8;
-        r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / 10;
-        for (j = 0; j < 9; j++)
+        r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / CONDITION_GRAPH_UNK_1;
+        for (j = 0; j < CONDITION_GRAPH_UNK_2; j++)
         {
             graph->unk64[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
             r5 += r6;
@@ -363,8 +346,8 @@ void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *
         graph->unk64[j][i].unk0 = arg2[i].unk0;
 
         r5 = arg1[i].unk2 << 8;
-        r6 = ((arg2[i].unk2 - arg1[i].unk2) << 8) / 10;
-        for (j = 0; j < 9; j++)
+        r6 = ((arg2[i].unk2 - arg1[i].unk2) << 8) / CONDITION_GRAPH_UNK_1;
+        for (j = 0; j < CONDITION_GRAPH_UNK_2; j++)
         {
             graph->unk64[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
             r5 += r6;
@@ -375,12 +358,12 @@ void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *
     graph->unk352 = 0;
 }
 
-bool32 TransitionConditionGraph(struct ConditionGraph *graph)
+bool8 TransitionConditionGraph(struct ConditionGraph *graph)
 {
-    if (graph->unk352 < 10)
+    if (graph->unk352 < CONDITION_GRAPH_UNK_1)
     {
         sub_81D2230(graph);
-        return (++graph->unk352 != 10);
+        return (++graph->unk352 != CONDITION_GRAPH_UNK_1);
     }
     else
     {
@@ -417,35 +400,36 @@ void sub_81D2108(struct ConditionGraph *graph)
 {
     u16 i;
 
-    if (graph->unk354 == 0)
+    if (!graph->unk354)
         return;
 
     sub_81D24A4(graph);
     sub_81D2634(graph);
 
-    for (i = 0; i < 66; i++)
+    for (i = 0; i < CONDITION_GRAPH_HEIGHT; i++)
     {
-        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (graph->unk140[i][0] << 8) | (graph->unk140[i][1]);
-        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (graph->unk248[i][0] << 8) | (graph->unk248[i][1]);
+        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (graph->scanlineRight[i][0] << 8) | (graph->scanlineRight[i][1]);
+        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (graph->scanlineLeft[i][0] << 8) | (graph->scanlineLeft[i][1]);
     }
 
-    graph->unk354 = 0;
+    graph->unk354 = FALSE;
 }
 
 void SetConditionGraphIOWindows(u8 bg)
 {
     u32 flags;
 
-    if (bg > 3)
+    if (bg >= NUM_BACKGROUNDS)
         bg = 0;
 
     // Unset the WINOUT flag for the bg.
     flags = (WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ) & ~(1 << bg);
 
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 0, DISPLAY_WIDTH));
-    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE( 0, 155));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(56, 121));
-    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(56, 121));
+    // Set limits for graph data
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 0, DISPLAY_WIDTH)); // Right side horizontal
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE( 0, CONDITION_GRAPH_CENTER_X)); // Left side horizontal
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(CONDITION_GRAPH_TOP_Y, CONDITION_GRAPH_BOTTOM_Y)); // Right side vertical
+    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(CONDITION_GRAPH_TOP_Y, CONDITION_GRAPH_BOTTOM_Y)); // Left side vertical
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, flags);
 }
@@ -453,19 +437,18 @@ void SetConditionGraphIOWindows(u8 bg)
 void sub_81D2230(struct ConditionGraph *graph)
 {
     u16 i;
-    for (i = 0; i < FLAVOR_COUNT; i++)
+    for (i = 0; i < CONDITION_COUNT; i++)
         graph->unk12C[i] = graph->unk64[graph->unk352][i];
 
-    graph->unk354 = 1;
+    graph->unk354 = TRUE;
 }
 
 static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 *arg5)
 {
     u16 i, r8, r10, r0, var_30;
     u16 *ptr;
-    s32 r4, var_2C;
+    s32 r4, var_2C = 0;
 
-    var_2C = 0;
     if (arg2->unk2 < arg3->unk2)
     {
         r10 = arg2->unk2;
@@ -490,7 +473,7 @@ static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownS
     r8++;
     if (arg5 == NULL)
     {
-        arg1 += (r10 - 56) * 2;
+        arg1 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
         for (i = 0; i < r8; i++)
         {
             arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
@@ -502,16 +485,16 @@ static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownS
     }
     else if (var_2C > 0)
     {
-        arg5 += (r10 - 56) * 2;
+        arg5 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
         // Less readable than the other loops, but it has to be written this way to match.
         for (i = 0; i < r8; arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4, r4 += var_2C, arg5 += 2, i++)
         {
-            if (r4 >= (155 << 10))
+            if (r4 >= (CONDITION_GRAPH_CENTER_X << 10))
                 break;
         }
 
         graph->unk350 = r10 + i;
-        arg1 += (graph->unk350 - 56) * 2;
+        arg1 += (graph->unk350 - CONDITION_GRAPH_TOP_Y) * 2;
         for (; i < r8; i++)
         {
             arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
@@ -523,13 +506,13 @@ static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownS
     }
     else if (var_2C < 0)
     {
-        arg1 += (r10 - 56) * 2;
+        arg1 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
         for (i = 0; i < r8; i++)
         {
             arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            if (r4 < (155 << 10))
+            if (r4 < (CONDITION_GRAPH_CENTER_X << 10))
             {
-                arg1[arg4] = 155;
+                arg1[arg4] = CONDITION_GRAPH_CENTER_X;
                 break;
             }
             r4 += var_2C;
@@ -537,7 +520,7 @@ static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownS
         }
 
         graph->unk350 = r10 + i;
-        arg5 += (graph->unk350 - 56) * 2;
+        arg5 += (graph->unk350 - CONDITION_GRAPH_TOP_Y) * 2;
         for (; i < r8; i++)
         {
             arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
@@ -550,11 +533,11 @@ static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownS
     else
     {
         graph->unk350 = r10;
-        arg1 += (r10 - 56) * 2;
-        arg5 += (r10 - 56) * 2;
+        arg1 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
+        arg5 += (r10 - CONDITION_GRAPH_TOP_Y) * 2;
         arg1[1] = arg2->unk0 + 1;
         arg5[0] = arg3->unk0;
-        arg5[1] = 155;
+        arg5[1] = CONDITION_GRAPH_CENTER_X;
         return;
     }
 
@@ -568,38 +551,38 @@ static void sub_81D24A4(struct ConditionGraph *graph)
     if (graph->unk12C[0].unk2 < graph->unk12C[1].unk2)
     {
         r6 = graph->unk12C[0].unk2;
-        sub_81D2278(graph, graph->unk140[0], &graph->unk12C[0], &graph->unk12C[1], 1, NULL);
+        sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[0], &graph->unk12C[1], 1, NULL);
     }
     else
     {
         r6 = graph->unk12C[1].unk2;
-        sub_81D2278(graph, graph->unk140[0], &graph->unk12C[1], &graph->unk12C[0], 0, NULL);
+        sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[1], &graph->unk12C[0], 0, NULL);
     }
 
-    sub_81D2278(graph, graph->unk140[0], &graph->unk12C[1], &graph->unk12C[2], 1, NULL);
+    sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[1], &graph->unk12C[2], 1, NULL);
 
     i = (graph->unk12C[2].unk2 <= graph->unk12C[3].unk2);
-    sub_81D2278(graph, graph->unk140[0], &graph->unk12C[2], &graph->unk12C[3], i, graph->unk248[0]);
-    for (i = 56; i < r6; i++)
+    sub_81D2278(graph, graph->scanlineRight[0], &graph->unk12C[2], &graph->unk12C[3], i, graph->scanlineLeft[0]);
+    for (i = CONDITION_GRAPH_TOP_Y; i < r6; i++)
     {
-        graph->unk140[i - 56][0] = 0;
-        graph->unk140[i - 56][1] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
     for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
-        graph->unk140[i - 56][0] = 155;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = CONDITION_GRAPH_CENTER_X;
 
     varMax = max(graph->unk350, graph->unk12C[2].unk2);
-    for (i = varMax + 1; i < 122; i++)
+    for (i = varMax + 1; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        graph->unk140[i - 56][0] = 0;
-        graph->unk140[i - 56][1] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = 56; i < 122; i++)
+    for (i = CONDITION_GRAPH_TOP_Y; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        if (graph->unk140[i - 56][0] == 0 && graph->unk140[i - 56][1] != 0)
-            graph->unk140[i - 56][0] = 155;
+        if (graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] == 0 && graph->scanlineRight[i - 56][1] != 0)
+            graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = CONDITION_GRAPH_CENTER_X;
     }
 }
 
@@ -610,69 +593,69 @@ static void sub_81D2634(struct ConditionGraph *graph)
     if (graph->unk12C[0].unk2 < graph->unk12C[4].unk2)
     {
         r6 = graph->unk12C[0].unk2;
-        sub_81D2278(graph, graph->unk248[0], &graph->unk12C[0], &graph->unk12C[4], 0, NULL);
+        sub_81D2278(graph, graph->scanlineLeft[0], &graph->unk12C[0], &graph->unk12C[4], 0, NULL);
     }
     else
     {
         r6 = graph->unk12C[4].unk2;
-        sub_81D2278(graph, graph->unk248[0], &graph->unk12C[4], &graph->unk12C[0], 1, NULL);
+        sub_81D2278(graph, graph->scanlineLeft[0], &graph->unk12C[4], &graph->unk12C[0], 1, NULL);
     }
 
-    sub_81D2278(graph, graph->unk248[0], &graph->unk12C[4], &graph->unk12C[3], 0, NULL);
+    sub_81D2278(graph, graph->scanlineLeft[0], &graph->unk12C[4], &graph->unk12C[3], 0, NULL);
 
-    for (i = 56; i < r6; i++)
+    for (i = CONDITION_GRAPH_TOP_Y; i < r6; i++)
     {
-        graph->unk140[i + 10][0] = 0;
-        graph->unk140[i + 10][1] = 0;
+        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][0] = 0;
+        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][1] = 0;
     }
 
     for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
-        graph->unk140[i + 10][1] = 155;
+        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][1] = CONDITION_GRAPH_CENTER_X;
 
     varMax = max(graph->unk350, graph->unk12C[3].unk2 + 1);
-    for (i = varMax; i < 122; i++)
+    for (i = varMax; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        graph->unk140[i + 10][0] = 0;
-        graph->unk140[i + 10][1] = 0;
+        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][0] = 0;
+        graph->scanlineRight[i + CONDITION_GRAPH_UNK_1][1] = 0;
     }
 
-    for (i = 0; i < 66; i++)
+    for (i = 0; i < CONDITION_GRAPH_HEIGHT; i++)
     {
-        if (graph->unk248[i][0] >= graph->unk248[i][1])
+        if (graph->scanlineLeft[i][0] >= graph->scanlineLeft[i][1])
         {
-            graph->unk248[i][1] = 0;
-            graph->unk248[i][0] = 0;
+            graph->scanlineLeft[i][1] = 0;
+            graph->scanlineLeft[i][0] = 0;
         }
     }
 }
 
-void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1)
+void sub_81D2754(u8 *conditions, struct UnknownSubStruct_81D1ED4 *arg1)
 {
-    u8 r2, r7;
+    u8 r2, sinIdx;
     s8 r12;
     u16 i;
 
-    r2 = sUnknown_08625410[*(arg0++)];
-    arg1->unk0 = 155;
-    arg1->unk2 = 91 - r2;
+    r2 = sUnknown_08625410[*(conditions++)];
+    arg1->unk0 = CONDITION_GRAPH_CENTER_X;
+    arg1->unk2 = CONDITION_GRAPH_UNK - r2;
 
-    r7 = 64;
+    sinIdx = 64;
     r12 = 0;
-    for (i = 1; i < 5; i++)
+    for (i = 1; i < CONDITION_COUNT; i++)
     {
-        r7 += 51;
+        sinIdx += 51;
         if (--r12 < 0)
             r12 = 4;
 
         if (r12 == 2)
-            r7++;
+            sinIdx++;
 
-        r2 = sUnknown_08625410[*(arg0++)];
-        arg1[r12].unk0 = 155 + ((r2 * gSineTable[64 + r7]) >> 8);
-        arg1[r12].unk2 = 91  - ((r2 * gSineTable[r7]) >> 8);
+        r2 = sUnknown_08625410[*(conditions++)];
+        arg1[r12].unk0 = CONDITION_GRAPH_CENTER_X + ((r2 * gSineTable[64 + sinIdx]) >> 8);
+        arg1[r12].unk2 = CONDITION_GRAPH_UNK - ((r2 * gSineTable[sinIdx]) >> 8);
 
         if (r12 < 3 && (r2 != 32 || r12 != 2))
-            arg1[r12].unk0 = 156 + ((r2 * gSineTable[64 + r7]) >> 8);
+            arg1[r12].unk0 = CONDITION_GRAPH_CENTER_X + 1 + ((r2 * gSineTable[64 + sinIdx]) >> 8);
     }
 }
 
@@ -685,10 +668,8 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 
-    for (i = 0; i < 5; i++)
-    {
+    for (i = 0; i < ARRAY_COUNT(sMoveRelearnerWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(1));
-    }
 
     if (!useContextWindow)
     {
@@ -704,11 +685,11 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     PutWindowTilemap(3);
     DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
     DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
-    nullsub_79();
+    MoveRelearnerDummy();
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void nullsub_79(void)
+static void MoveRelearnerDummy(void)
 {
 
 }
@@ -720,13 +701,10 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
     gMultiuseListMenuTemplate.items = items;
 
     if (numChoices < 6)
-    {
         gMultiuseListMenuTemplate.maxShowed = numChoices;
-    }
     else
-    {
         gMultiuseListMenuTemplate.maxShowed = 6;
-    }
+
     return gMultiuseListMenuTemplate.maxShowed;
 }
 
@@ -734,7 +712,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 {
     s32 x;
     const struct BattleMove *move;
-    u8 buffer[0x20];
+    u8 buffer[32];
     const u8 *str;
 
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -1010,7 +988,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
     }
 }
 
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
@@ -1019,25 +997,23 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 
 
     if (partyId != numMons)
     {
-        graph->stat[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        graph->stat[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        graph->stat[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        graph->stat[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        graph->stat[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        graph->conditions[id][CONDITION_COOL] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        graph->conditions[id][CONDITION_TOUGH] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        graph->conditions[id][CONDITION_SMART] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        graph->conditions[id][CONDITION_CUTE] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        graph->conditions[id][CONDITION_BEAUTY] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
 
-        sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
-                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
-                 : 9;
+        numSparkles[id] = GET_NUM_CONDITION_SPARKLES(GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL));
 
-        sub_81D2754(graph->stat[id], graph->unk14[id]);
+        sub_81D2754(graph->conditions[id], graph->unk14[id]);
     }
     else
     {
-        for (i = 0; i < FLAVOR_COUNT; i++)
+        for (i = 0; i < CONDITION_COUNT; i++)
         {
-            graph->stat[id][i] = 0;
-            graph->unk14[id][i].unk0 = 155;
-            graph->unk14[id][i].unk2 = 91;
+            graph->conditions[id][i] = 0;
+            graph->unk14[id][i].unk0 = CONDITION_GRAPH_CENTER_X;
+            graph->unk14[id][i].unk2 = CONDITION_GRAPH_UNK;
         }
     }
 }
@@ -1076,7 +1052,7 @@ bool8 MoveConditionMonOffscreen(s16 *x)
     return (*x != -80);
 }
 
-bool8 TryUpdateConditionMonTransitionOn(struct ConditionGraph *graph, s16 *x)
+bool8 ConditionGraph_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
 {
     bool8 graphUpdating = TransitionConditionGraph(graph);
     bool8 monUpdating = MoveConditionMonOnscreen(x);
@@ -1084,7 +1060,7 @@ bool8 TryUpdateConditionMonTransitionOn(struct ConditionGraph *graph, s16 *x)
     return (graphUpdating || monUpdating);
 }
 
-bool8 TryUpdateConditionMonTransitionOff(struct ConditionGraph *graph, s16 *x)
+bool8 ConditionGraph_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
 {
     bool8 graphUpdating = TransitionConditionGraph(graph);
     bool8 monUpdating = MoveConditionMonOffscreen(x);
