@@ -956,21 +956,13 @@ void GabbyAndTyBeforeInterview(void)
     else
         gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem = FALSE;
 
-    if (!gBattleResults.usedMasterBall)
+    for (i = 0; i < POKEBALL_COUNT; i++)
     {
-        for (i = 0; i < POKEBALL_COUNT - 1; i++)
+        if (gBattleResults.catchAttempts[i])
         {
-            if (gBattleResults.catchAttempts[i])
-            {
-                gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
-                break;
-            }
+            gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
+            break;
         }
-    }
-    else
-    {
-        // Player threw a Master Ball at Gabby and Ty
-        gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
     }
 
     TakeGabbyAndTyOffTheAir();
@@ -1129,28 +1121,20 @@ void TryPutPokemonTodayOnAir(void)
             sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && IsRecordMixShowAlreadySpawned(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
             {
-                for (i = 0; i < POKEBALL_COUNT - 1; i++)
+                for (i = 0; i < POKEBALL_COUNT; i++)
                     ballsUsed += gBattleResults.catchAttempts[i];
 
-                if (ballsUsed != 0 || gBattleResults.usedMasterBall)
+                if (ballsUsed != 0)
                 {
                     ballsUsed = 0;
                     show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                     show->pokemonToday.kind = TVSHOW_POKEMON_TODAY_CAUGHT;
                     show->pokemonToday.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
-                    if (gBattleResults.usedMasterBall)
-                    {
-                        ballsUsed = 1;
-                        itemLastUsed = ITEM_MASTER_BALL;
-                    }
-                    else
-                    {
-                        for (i = 0; i < POKEBALL_COUNT - 1; i++)
-                            ballsUsed += gBattleResults.catchAttempts[i];
-                        if (ballsUsed > 255)
-                            ballsUsed = 255;
-                        itemLastUsed = gLastUsedItem;
-                    }
+                    for (i = 0; i < POKEBALL_COUNT; i++)
+                        ballsUsed += gBattleResults.catchAttempts[i];
+                    if (ballsUsed > 255)
+                        ballsUsed = 255;
+                    itemLastUsed = gLastUsedItem;
                     show->pokemonToday.nBallsUsed = ballsUsed;
                     show->pokemonToday.ball = itemLastUsed;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2Ptr->playerName);
@@ -1192,7 +1176,7 @@ static void TryPutPokemonTodayFailedOnTheAir(void)
 
     if (!rbernoulli(1, 1))
     {
-        for (i = 0, ballsUsed = 0; i < POKEBALL_COUNT - 1; i++)
+        for (i = 0, ballsUsed = 0; i < POKEBALL_COUNT; i++)
             ballsUsed += gBattleResults.catchAttempts[i];
         if (ballsUsed > 255)
             ballsUsed = 255;
@@ -2124,11 +2108,8 @@ void TryPutBreakingNewsOnAir(void)
         show->breakingNews.kind = TVSHOW_BREAKING_NEWS;
         show->breakingNews.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
         balls = 0;
-        for (i = 0; i < POKEBALL_COUNT - 1; i++)
+        for (i = 0; i < POKEBALL_COUNT; i++)
             balls += gBattleResults.catchAttempts[i];
-
-        if (gBattleResults.usedMasterBall)
-            balls++;
         show->breakingNews.location = gMapHeader.regionMapSectionId;
         StringCopy(show->breakingNews.playerName, gSaveBlock2Ptr->playerName);
         show->breakingNews.poke1Species = gBattleResults.playerMon1Species;
@@ -2158,10 +2139,7 @@ void TryPutBreakingNewsOnAir(void)
         switch (show->breakingNews.outcome)
         {
         case 0:
-            if (gBattleResults.usedMasterBall)
-                show->breakingNews.caughtMonBall = ITEM_MASTER_BALL;
-            else
-                show->breakingNews.caughtMonBall = gBattleResults.caughtMonBall;
+            show->breakingNews.caughtMonBall = gBattleResults.caughtMonBall;
             show->breakingNews.balls = balls;
             break;
         case 1:

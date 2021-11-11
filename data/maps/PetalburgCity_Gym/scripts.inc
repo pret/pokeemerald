@@ -383,10 +383,10 @@ PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry::
 	specialvar VAR_RESULT, IsEnigmaBerryValid
 	compare VAR_RESULT, FALSE
 	goto_if_eq PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry
-	checkitem ITEM_ENIGMA_BERRY, 1
+	checkitem ITEM_ENIGMA_BERRY_E_READER, 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry
-	checkpcitem ITEM_ENIGMA_BERRY, 1
+	checkpcitem ITEM_ENIGMA_BERRY_E_READER, 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry
 	compare VAR_ENIGMA_BERRY_AVAILABLE, 0
@@ -400,7 +400,7 @@ PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry::
 	return
 
 PetalburgCity_Gym_EventScript_GiveEnigmaBerry::
-	giveitem ITEM_ENIGMA_BERRY
+	giveitem ITEM_ENIGMA_BERRY_E_READER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_ENIGMA_BERRY_AVAILABLE, 0

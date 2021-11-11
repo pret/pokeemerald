@@ -610,7 +610,7 @@ static void LoadBerryGfx(u8 berryId)
 {
     struct CompressedSpritePalette pal;
 
-    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1 && IsEnigmaBerryValid())
+    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY_E_READER) - 1 && IsEnigmaBerryValid())
     {
         // unknown empty if statement
     }

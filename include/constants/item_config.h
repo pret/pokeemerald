@@ -18,18 +18,5 @@
 #define I_KEY_ESCAPE_ROPE       GEN_7   // In Gen8, Escape Rope became a Key Item. Keep in mind, this will make it free to buy in marts.
 #define I_LEGACY_HEALING_ITEMS  GEN_7   // In Gen7+, certain healing items recover less HP than they used to.
 #define I_SITRUS_BERRY_HEAL     GEN_7   // In Gen4+, Sitrus Berry was changed from healing 30 HP to healing 25% of Max HP.
-#define I_SOUL_DEW_BOOST        GEN_7   // In Gens3-6, Soul Dew boosts Lati@s' Sp. Atk and Sp. Def by 50%. In Gen7+ it boosts the power of their Psychic and Dragon type moves by 20% instead.
-
-// Ball config
-#define I_LURE_BALL_MODIFIER    GEN_7   // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
-#define I_NET_BALL_MODIFIER     GEN_7   // In Gen7+, Net Ball's catch multiplier is x5 instead of x3.
-#define I_REPEAT_BALL_MODIFIER  GEN_7   // In Gen7+, Repeat Ball's catch multiplier is x3.5 instead of x3.
-#define I_DUSK_BALL_MODIFIER    GEN_7   // In Gen7+, Dusk Ball's catch multiplier is x3 instead of x3.5.
-#define I_QUICK_BALL_MODIFIER   GEN_7   // In Gen5+, Quick Ball's catch multiplier is x5 instead of x4.
-#define I_DREAM_BALL_MODIFIER   GEN_8   // In Gen8+, Dream Ball's catch multiplier is x4 when the target is asleep.
-#define I_TIMER_BALL_MODIFIER   GEN_7   // In Gen5+, Timer Ball's effectiveness increases by x0.3 per turn instead of x0.1
-#define I_DIVE_BALL_MODIFIER    GEN_7   // In Gen4+, Dive Ball's effectiveness increases by when Surfing or Fishing.
-#define I_HEAVY_BALL_MODIFIER   GEN_7   // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
-#define I_NEST_BALL_MODIFIER    GEN_7   // Nest Ball's formula varies depending on the Gen. See Cmd_handleballthrow.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
