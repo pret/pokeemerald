@@ -359,7 +359,7 @@ bool32 OpenPokenavMenuNotInitial(void)
 
 static struct Pokenav2Struct * OpenPokenavMenu(void)
 {
-    struct Pokenav2Struct * state = AllocSubstruct(2, sizeof(struct Pokenav2Struct));
+    struct Pokenav2Struct * state = AllocSubstruct(POKENAV_SUBSTRUCT_MENU_ICONS, sizeof(struct Pokenav2Struct));
 
     if (state != NULL)
     {

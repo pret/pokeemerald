@@ -318,7 +318,7 @@ void MailboxMenu_Free(void)
 // filled with the graph color.
 //---------------------------------------
 
-#define UNK_VAL(n, s)(((n) >> (s)) + (((n) >> ((s) - 1)) & 1))
+#define SHIFT_RIGHT_ADJUSTED(n, s)(((n) >> (s)) + (((n) >> ((s) - 1)) & 1))
 
 void ConditionGraph_Init(struct ConditionGraph *graph)
 {
@@ -360,7 +360,7 @@ void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords
         increment = ((new[i].x - old[i].x) << 8) / CONDITION_GRAPH_UPDATE_STEPS;
         for (j = 0; j < CONDITION_GRAPH_UPDATE_STEPS - 1; j++)
         {
-            graph->newPositions[j][i].x = UNK_VAL(coord, 8);
+            graph->newPositions[j][i].x = SHIFT_RIGHT_ADJUSTED(coord, 8);
             coord += increment;
         }
         graph->newPositions[j][i].x = new[i].x;
@@ -369,7 +369,7 @@ void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords
         increment = ((new[i].y - old[i].y) << 8) / CONDITION_GRAPH_UPDATE_STEPS;
         for (j = 0; j < CONDITION_GRAPH_UPDATE_STEPS - 1; j++)
         {
-            graph->newPositions[j][i].y = UNK_VAL(coord, 8);
+            graph->newPositions[j][i].y = SHIFT_RIGHT_ADJUSTED(coord, 8);
             coord += increment;
         }
         graph->newPositions[j][i].y = new[i].y;
@@ -500,7 +500,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
         scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
         for (i = 0; i < height; i++)
         {
-            scanline[dir] = UNK_VAL(x, 10) + dir;
+            scanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
             x += xIncrement;
             scanline += 2;
         }
@@ -511,7 +511,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
     {
         overflowScanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
         // Less readable than the other loops, but it has to be written this way to match.
-        for (i = 0; i < height; overflowScanline[dir] = UNK_VAL(x, 10) + dir, x += xIncrement, overflowScanline += 2, i++)
+        for (i = 0; i < height; overflowScanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir, x += xIncrement, overflowScanline += 2, i++)
         {
             if (x >= (CONDITION_GRAPH_CENTER_X << 10))
                 break;
@@ -521,7 +521,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
         scanline += (graph->bottom - CONDITION_GRAPH_TOP_Y) * 2;
         for (; i < height; i++)
         {
-            scanline[dir] = UNK_VAL(x, 10) + dir;
+            scanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
             x += xIncrement;
             scanline += 2;
         }
@@ -533,7 +533,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
         scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
         for (i = 0; i < height; i++)
         {
-            scanline[dir] = UNK_VAL(x, 10) + dir;
+            scanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
             if (x < (CONDITION_GRAPH_CENTER_X << 10))
             {
                 scanline[dir] = CONDITION_GRAPH_CENTER_X;
@@ -547,7 +547,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
         overflowScanline += (graph->bottom - CONDITION_GRAPH_TOP_Y) * 2;
         for (; i < height; i++)
         {
-            overflowScanline[dir] = UNK_VAL(x, 10) + dir;
+            overflowScanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
             x += xIncrement;
             overflowScanline += 2;
         }
@@ -1167,8 +1167,8 @@ static const union AnimCmd sAnim_ConditionSelectionIcon_Unselected[] =
 
 static const union AnimCmd *const sAnims_ConditionSelectionIcon[] =
 {
-    sAnim_ConditionSelectionIcon_Selected,
-    sAnim_ConditionSelectionIcon_Unselected
+    [CONDITION_ICON_SELECTED] = sAnim_ConditionSelectionIcon_Selected,
+    [CONDITION_ICON_UNSELECTED] = sAnim_ConditionSelectionIcon_Unselected
 };
 
 // Just loads the generic data, up to the caller to load the actual sheet/pal for the specific mon

@@ -65,8 +65,7 @@ enum
     POKENAV_MODE_FORCE_CALL_EXIT,  // Pokenav tutorial after calling Mr. Stone
 };
 
-// TODO - refine these names
-enum Substructures
+enum
 {
     POKENAV_SUBSTRUCT_MAIN_MENU,
     POKENAV_SUBSTRUCT_MAIN_MENU_HANDLER,
@@ -76,11 +75,11 @@ enum Substructures
     POKENAV_SUBSTRUCT_MATCH_CALL_MAIN,
     POKENAV_SUBSTRUCT_MATCH_CALL_OPEN,
     POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS,
-    POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULT_LIST,
+    POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS_GFX,
     POKENAV_SUBSTRUCT_RIBBONS_MON_LIST,
     POKENAV_SUBSTRUCT_RIBBONS_MON_MENU,
-    POKENAV_SUBSTRUCT_CONDITION_GRAPH,
-    POKENAV_SUBSTRUCT_MON_MARK_MENU,
+    POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU,
+    POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX,
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST,
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU,
     POKENAV_SUBSTRUCT_15,   //unused
@@ -113,21 +112,21 @@ enum
 #define POKENAV_MENU_IDS_START 100000
 enum
 {
-	POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START,
+	POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons 
 	POKENAV_MAIN_MENU_CURSOR_ON_MAP,
-	POKENAV_CONDITION_MENU,
-	POKENAV_CONDITION_SEARCH_MENU,
+	POKENAV_CONDITION_MENU,                     // The first Condition screen where the player selects Party or Search
+	POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter
 	POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
 	POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
 	POKENAV_REGION_MAP,
-	POKENAV_CONDITION_PARTY,
-	POKENAV_CONDITION_SEARCH_RESULTS,
-	POKENAV_CONDITION_GRAPH_FROM_SEARCH, // opening condition graph from search list
-	POKENAV_RETURN_CONDITION_SEARCH,    //return to search list from condition graph
+	POKENAV_CONDITION_GRAPH_PARTY,              // The Condition graph screen when Party has been selected
+	POKENAV_CONDITION_SEARCH_RESULTS,           // The list of results from a Condition search
+	POKENAV_CONDITION_GRAPH_SEARCH,             // The Condition graph screen when a search result has been selected
+	POKENAV_RETURN_CONDITION_SEARCH,            // Exited the graph screen back to the list of Condition search results
 	POKENAV_MATCH_CALL,
-	POKENAV_RIBBONS_MON_LIST,
-	POKENAV_RIBBONS_SUMMARY_SCREEN,
-	POKENAV_RIBBONS_RETURN_TO_MON_LIST,
+	POKENAV_RIBBONS_MON_LIST,                   // The list of Pokémon with ribbons
+	POKENAV_RIBBONS_SUMMARY_SCREEN,             // The ribbon summary screen shown when a Pokémon has been selected
+	POKENAV_RIBBONS_RETURN_TO_MON_LIST,         // Exited the summary screen back to the ribbon list
 };
 
 enum
@@ -245,15 +244,15 @@ enum RegionMapFuncIds
     POKENAV_MENU_FUNC_OPEN_FEATURE,
 };
 
-enum PartyConditionFuncIds
+enum
 {
-    PARTY_CONDITION_FUNC_NONE,
-    PARTY_CONDITION_FUNC_SLIDE_MON_IN,
-    PARTY_CONDITION_FUNC_RETURN,
-    PARTY_CONDITION_FUNC_NO_TRANSITION,
-    PARTY_CONDITION_FUNC_SLIDE_MON_OUT,
-    PARTY_CONDITION_FUNC_ADD_MARKINGS,
-    PARTY_CONDITION_FUNC_CLOSE_MARKINGS,
+    CONDITION_FUNC_NONE,
+    CONDITION_FUNC_SLIDE_MON_IN,
+    CONDITION_FUNC_RETURN,
+    CONDITION_FUNC_NO_TRANSITION,
+    CONDITION_FUNC_SLIDE_MON_OUT,
+    CONDITION_FUNC_ADD_MARKINGS,
+    CONDITION_FUNC_CLOSE_MARKINGS,
 };
 
 enum
@@ -262,6 +261,13 @@ enum
     CONDITION_MON_1,
     CONDITION_MON_2,
     NUM_CONDITION_MONS
+};
+
+enum
+{
+    CONDITION_LOAD_MON_INFO,
+    CONDITION_LOAD_GRAPH,
+    CONDITION_LOAD_MON_PIC,
 };
 
 #define POKENAV_MENU_FUNC_EXIT  -1
@@ -431,17 +437,17 @@ void FreeRegionMapSubstruct1(void);
 void FreeRegionMapSubstruct2(void);
 
 // pokenav_conditions_1.c
-u32 PokenavCallback_Init_PartyCondition(void);
-u32 PokenavCallback_Init_ConditionGraphFromSearch(void);
-u32 GetPartyConditionCallback(void);
-void FreePartyConditionSubstruct1(void);
-bool32 LoadPartyConditionMenuGfx(void);
+u32 PokenavCallback_Init_ConditionGraph_Party(void);
+u32 PokenavCallback_Init_ConditionGraph_Search(void);
+u32 GetConditionGraphMenuCallback(void);
+void FreeConditionGraphMenuSubstruct1(void);
+bool32 LoadConditionGraphMenuGfx(void);
 bool32 IsConditionMenuSearchMode(void);
 struct ConditionGraph *GetConditionGraphPtr(void);
-u16 GetConditionGraphCurrentMonIndex(void);
+u16 GetConditionGraphCurrentListIndex(void);
 u16 GetMonListCount(void);
 u8 GetNumConditionMonSparkles(void);
-bool32 SetConditionGraphData(u8 mode);
+bool32 LoadNextConditionMenuMonData(u8 mode);
 u8 TryGetMonMarkId(void);
 u8 *GetConditionMonNameText(u8 id);
 u8 *GetConditionMonLocationText(u8 id);
@@ -450,10 +456,10 @@ void *GetConditionMonPicGfx(u8 id);
 void *GetConditionMonPal(u8 id);
 
 // pokenav_conditions_2.c
-bool32 OpenPartyConditionMenu(void);
-void CreatePartyConditionLoopedTask(s32);
-u32 IsPartyConditionLoopedTaskActive(void);
-void FreePartyConditionSubstruct2(void);
+bool32 OpenConditionGraphMenu(void);
+void CreateConditionGraphMenuLoopedTask(s32);
+u32 IsConditionGraphMenuLoopedTaskActive(void);
+void FreeConditionGraphMenuSubstruct2(void);
 u8 GetMonMarkingsData(void);
 
 // pokenav_conditions_3.c

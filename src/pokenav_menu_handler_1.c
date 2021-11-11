@@ -355,7 +355,7 @@ static u32 HandleConditionMenuInput(struct Pokenav1Struct *state)
             return POKENAV_MENU_FUNC_OPEN_CONDITION_SEARCH;
         case POKENAV_MENUITEM_CONDITION_PARTY:
             state->helpBarIndex = 0;
-            SetMenuIdAndCB(state, POKENAV_CONDITION_PARTY);
+            SetMenuIdAndCB(state, POKENAV_CONDITION_GRAPH_PARTY);
             return POKENAV_MENU_FUNC_OPEN_FEATURE;
         case POKENAV_MENUITEM_CONDITION_CANCEL:
             PlaySE(SE_SELECT);

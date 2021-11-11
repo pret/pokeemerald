@@ -26,6 +26,11 @@ enum {
     TAG_CONDITION_MARKINGS_MENU_2, // Used implicitly by CreateMonMarkingsMenuSprites
 };
 
+enum {
+    CONDITION_ICON_SELECTED,
+    CONDITION_ICON_UNSELECTED,
+};
+
 #define MAX_CONDITION_SPARKLES 10
 
 // The number of extra sparkles shown on a Pokémon's condition screen.

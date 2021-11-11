@@ -1577,9 +1577,9 @@ static void SpriteCB_MonPic(struct Sprite *sprite)
 static void SpriteCB_SelectionIconPokeball(struct Sprite *sprite)
 {
     if (sprite->data[0] == sMenu->info.curSelection)
-        StartSpriteAnim(sprite, 0);
+        StartSpriteAnim(sprite, CONDITION_ICON_SELECTED);
     else
-        StartSpriteAnim(sprite, 1);
+        StartSpriteAnim(sprite, CONDITION_ICON_UNSELECTED);
 }
 
 static void SpriteCB_SelectionIconCancel(struct Sprite *sprite)
