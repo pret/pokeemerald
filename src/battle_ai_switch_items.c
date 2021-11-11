@@ -1001,7 +1001,7 @@ static bool32 AI_ShouldHeal(u8 healAmount)
                 }
 
                 // AI_THINKING_STRUCT->movesetIndex is the array index of the AI's chosen move
-                if (CanAttackerFaintTarget(gActiveBattler, i, AI_THINKING_STRUCT->movesetIndex, 0) && AI_WhoStrikesFirst(gActiveBattler, i) == AI_IS_FASTER)
+                if (CanIndexMoveFaintTarget(gActiveBattler, i, AI_THINKING_STRUCT->movesetIndex, 0) && WillAIStrikeFirst())
                 {
                     // We can faint the target and move first -> don't heal
                     shouldHeal = FALSE;
