@@ -411,5 +411,7 @@ extern const u8 BattleScript_MimicryActivatesEnd3[];
 extern const u8 BattleScript_ApplyMimicry[];
 extern const u8 BattleScript_AttackerFormChangeEnd3NoPopup[];
 extern const u8 BattleScript_AttackerFormChangeMoveEffect[];
+extern const u8 BattleScript_BothCanNoLongerEscape[];
+extern const u8 BattleScript_OctolockEndTurn[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
