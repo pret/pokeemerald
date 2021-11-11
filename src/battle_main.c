@@ -3974,9 +3974,6 @@ static void HandleTurnActionSelectionState(void)
                     return;
                 case B_ACTION_DEBUG:
                     BtlController_EmitDebugMenu(0);
-                    // fallthrough
-                case B_ACTION_SAFARI_WATCH_CAREFULLY:
-                case B_ACTION_RUN:
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 }
