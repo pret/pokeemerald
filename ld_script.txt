@@ -44,6 +44,8 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
+        src/rom_header.o(.text);
+        src/rom_header_gf.o(.text.*);
         src/crt0.o(.text);
         src/main.o(.text);
         gflib/malloc.o(.text);
@@ -433,6 +435,8 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
+        src/rom_header.o(.rodata);
+        src/rom_header_gf.o(.rodata);
         src/main.o(.rodata);
         gflib/bg.o(.rodata);
         gflib/window.o(.rodata);
