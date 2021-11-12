@@ -4673,7 +4673,6 @@ static void Cmd_playanimation(void)
         return;
     }
     #endif
-    
     if (animId == B_ANIM_STATS_CHANGE
         || animId == B_ANIM_SNATCH_MOVE
         || animId == B_ANIM_MEGA_EVOLUTION
