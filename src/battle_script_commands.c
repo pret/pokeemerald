@@ -4657,52 +4657,6 @@ static void Cmd_endselectionscript(void)
     *(gBattlerAttacker + gBattleStruct->selectionScriptFinished) = TRUE;
 }
 
-static u32 ReverseStatAnimId(u16 *argumentPtr)
-{
-    u8 value = 0;
-    switch (GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger))
-    {
-    case SET_STAT_BUFF_VALUE(1): // +1
-        value = STAT_ANIM_MINUS1;
-        break;
-    case SET_STAT_BUFF_VALUE(2): // +2
-        value = STAT_ANIM_MINUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(3): // +3
-        value = STAT_ANIM_MINUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(4): // +4
-        value = STAT_ANIM_MINUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(5): // +5
-        value = STAT_ANIM_MINUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(6): // +6
-        value = STAT_ANIM_MINUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE: // -1
-        value = STAT_ANIM_PLUS1;
-        break;
-    case SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE: // -2
-        value = STAT_ANIM_PLUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(3) | STAT_BUFF_NEGATIVE: // -3
-        value = STAT_ANIM_PLUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(4) | STAT_BUFF_NEGATIVE: // -1
-        value = STAT_ANIM_PLUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(5) | STAT_BUFF_NEGATIVE: // -2
-        value = STAT_ANIM_PLUS2;
-        break;
-    case SET_STAT_BUFF_VALUE(6) | STAT_BUFF_NEGATIVE: // -3
-        value = STAT_ANIM_PLUS2;
-        break;
-    }
-    
-    *argumentPtr = GET_STAT_BUFF_ID(gBattleScripting.statChanger) + value - 1;
-}
-
 static void Cmd_playanimation(void)
 {
     u16* argumentPtr;
