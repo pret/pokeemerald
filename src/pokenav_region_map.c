@@ -74,7 +74,7 @@ static u32 LoopedTask_ExitRegionMap(s32);
 extern const u16 gRegionMapCityZoomTiles_Pal[];
 extern const u32 gRegionMapCityZoomText_Gfx[];
 
-static const u16 sMapSecInfoWindow_Pal[] = INCBIN_U16("graphics/pokenav/region_map_info_window.gbapal");
+static const u16 sMapSecInfoWindow_Pal[] = INCBIN_U16("graphics/pokenav/region_map/info_window.gbapal");
 static const u32 sRegionMapCityZoomTiles_Gfx[] = INCBIN_U32("graphics/pokenav/zoom_tiles.4bpp.lz");
 
 #include "data/region_map/city_map_tilemaps.h"
@@ -346,7 +346,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
             return LT_PAUSE;
 
         UpdateMapSecInfoWindow(state);
-        sub_81C7B40();
+        FadeToBlackExceptPrimary();
         return LT_INC_AND_PAUSE;
     case 5:
         if (IsDma3ManagerBusyWithBgCopy_(state))

@@ -94,8 +94,8 @@ u32 LoopedTask_sub_81C8870(s32 state);
 u32 LoopedTask_sub_81C8A28(s32 state);
 u32 LoopedTask_PrintCheckPageInfo(s32 state);
 
-static const u16 sMatchcallArrowPaletteData[] = INCBIN_U16("graphics/pokenav/arrows_matchcall.gbapal");
-static const u32 sMatchcallArrowSpriteSheetData[] = INCBIN_U32("graphics/pokenav/arrows_matchcall.4bpp.lz");
+static const u16 sMatchcallArrowPaletteData[] = INCBIN_U16("graphics/pokenav/list_arrows.gbapal");
+static const u32 sMatchcallArrowSpriteSheetData[] = INCBIN_U32("graphics/pokenav/list_arrows.4bpp.lz");
 
 EWRAM_DATA u32 gUnknown_0203CF44 = 0;
 

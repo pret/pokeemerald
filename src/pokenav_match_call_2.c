@@ -109,15 +109,15 @@ u32 ShowCheckPageDown(s32);
 u32 ExitCheckPage(s32);
 u32 ExitMatchCall(s32);
 
-static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/ui_matchcall.gbapal");
-static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/ui_matchcall.4bpp.lz");
-static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/ui_matchcall.bin.lz");
-static const u16 gUnknown_08622698[] = INCBIN_U16("graphics/pokenav/arrow2.gbapal");
-static const u32 gUnknown_086226B8[] = INCBIN_U32("graphics/pokenav/arrow2.4bpp.lz");
-static const u16 gUnknown_086226E0[] = INCBIN_U16("graphics/pokenav/86226E0.gbapal");
-static const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/8622700.gbapal");
-static const u16 gUnknown_08622720[] = INCBIN_U16("graphics/pokenav/pokeball_matchcall.gbapal");
-static const u32 gUnknown_08622760[] = INCBIN_U32("graphics/pokenav/pokeball_matchcall.4bpp.lz");
+static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
+static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
+static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
+static const u16 gUnknown_08622698[] = INCBIN_U16("graphics/pokenav/match_call/arrow.gbapal");
+static const u32 gUnknown_086226B8[] = INCBIN_U32("graphics/pokenav/match_call/arrow.4bpp.lz");
+static const u16 gUnknown_086226E0[] = INCBIN_U16("graphics/pokenav/match_call/86226E0.gbapal");
+static const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/match_call/8622700.gbapal");
+static const u16 gUnknown_08622720[] = INCBIN_U16("graphics/pokenav/match_call/pokeball.gbapal");
+static const u32 gUnknown_08622760[] = INCBIN_U32("graphics/pokenav/match_call/pokeball.4bpp.lz");
 
 const struct BgTemplate sMatchCallBgTemplates[3] =
 {
@@ -1062,7 +1062,7 @@ static void sub_81CC034(struct Pokenav4Struct *state)
 {
     state->msgBoxWindowId = AddWindow(&sCallMsgBoxWindowTemplate);
     LoadMatchCallWindowGfx(state->msgBoxWindowId, 1, 4);
-    sub_81C7B40();
+    FadeToBlackExceptPrimary();
 }
 
 static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *state)

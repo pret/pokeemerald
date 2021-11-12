@@ -69,7 +69,7 @@ enum
 {
     POKENAV_SUBSTRUCT_MAIN_MENU,
     POKENAV_SUBSTRUCT_MAIN_MENU_HANDLER,
-    POKENAV_SUBSTRUCT_MENU_ICONS,
+    POKENAV_SUBSTRUCT_MENU_GFX,
     POKENAV_SUBSTRUCT_REGION_MAP_STATE,
     POKENAV_SUBSTRUCT_REGION_MAP_ZOOM,
     POKENAV_SUBSTRUCT_MATCH_CALL_MAIN,
@@ -82,7 +82,7 @@ enum
     POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX,
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST,
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU,
-    POKENAV_SUBSTRUCT_15,   //unused
+    POKENAV_SUBSTRUCT_UNUSED,
     POKENAV_SUBSTRUCT_REGION_MAP,
     POKENAV_SUBSTRUCT_MATCH_CALL_LIST,
     POKENAV_SUBSTRUCT_MON_LIST,
@@ -358,7 +358,7 @@ void SlideMenuHeaderDown(void);
 bool32 MainMenuLoopedTaskIsBusy(void);
 void SetLeftHeaderSpritesInvisibility(void);
 void PokenavCopyPalette(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette);
-void sub_81C7B40(void);
+void FadeToBlackExceptPrimary(void);
 struct Sprite *PauseSpinningPokenavSprite(void);
 void ResumeSpinningPokenavSprite(void);
 void UpdateRegionMapRightHeaderTiles(u32 arg0);

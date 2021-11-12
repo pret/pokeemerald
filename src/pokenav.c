@@ -49,7 +49,6 @@ static void Task_RunLoopedTask(u8 taskId);
 static void Task_Pokenav(u8 taskId);
 static void CB2_InitPokenavForTutorial(void);
 
-// TODO: Use MENU ids
 const struct PokenavCallbacks PokenavMenuCallbacks[15] =
 {
     [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
