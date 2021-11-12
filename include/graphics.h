@@ -4698,7 +4698,6 @@ extern const u32 gItemIconPalette_GoldTeeth[];
 extern const u32 gItemIcon_CardKey[];
 extern const u32 gItemIconPalette_CardKey[];
 extern const u32 gItemIcon_LiftKey[];
-extern const u32 gItemIconPalette_Key[];
 extern const u32 gItemIcon_SilphScope[];
 extern const u32 gItemIconPalette_SilphScope[];
 extern const u32 gItemIcon_TriPass[];
