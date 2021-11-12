@@ -13103,14 +13103,32 @@ static void Cmd_snatchsetbattlers(void)
 
 static void Cmd_removelightscreenreflect(void) // brick break
 {
-    u8 opposingSide = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
-
-    if (gSideTimers[opposingSide].reflectTimer || gSideTimers[opposingSide].lightscreenTimer)
+    u8 side;
+    bool32 failed;
+    
+    #if B_BRICK_BREAK >= GEN_4
+        side = GetBattlerSide(gBattlerAttacker);
+    #else
+        side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
+    #endif
+    
+    #if B_BRICK_BREAK >= GEN_5
+        failed = (gMoveResultFlags & MOVE_RESULT_NO_EFFECT);
+    #else
+        failed = FALSE;
+    #endif
+    
+    if (!failed
+     && (gSideTimers[side].reflectTimer
+      || gSideTimers[side].lightscreenTimer
+      || gSideTimers[side].auroraVeilTimer))
     {
-        gSideStatuses[opposingSide] &= ~(SIDE_STATUS_REFLECT);
-        gSideStatuses[opposingSide] &= ~(SIDE_STATUS_LIGHTSCREEN);
-        gSideTimers[opposingSide].reflectTimer = 0;
-        gSideTimers[opposingSide].lightscreenTimer = 0;
+        gSideStatuses[side] &= ~(SIDE_STATUS_REFLECT);
+        gSideStatuses[side] &= ~(SIDE_STATUS_LIGHTSCREEN);
+        gSideStatuses[side] &= ~(SIDE_STATUS_AURORA_VEIL);
+        gSideTimers[side].reflectTimer = 0;
+        gSideTimers[side].lightscreenTimer = 0;
+        gSideTimers[side].auroraVeilTimer = 0;
         gBattleScripting.animTurn = 1;
         gBattleScripting.animTargetsHit = 1;
     }
