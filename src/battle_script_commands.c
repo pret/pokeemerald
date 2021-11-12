@@ -3443,6 +3443,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     }
                 }
                 break;
+            case MOVE_EFFECT_BURN_UP:
+                // This seems unnecessary but is done to make it work properly with Parental Bond
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_BurnUpRemoveType;
+                break;
             }
         }
     }
