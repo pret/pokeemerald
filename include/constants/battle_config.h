@@ -181,7 +181,7 @@
 #define B_LURE_BALL_MODIFIER        GEN_7 // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
 #define B_HEAVY_BALL_MODIFIER       GEN_7 // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
 #define B_DREAM_BALL_MODIFIER       GEN_8 // In Gen8, Dream Ball's catch multiplier is x4 when the target is asleep or has the ability Comatose.
-#define B_KINGS_ROCK_BOOST          GEN_7 // In Gen5+, King's Rock is boosted by Serene Grace
+#define B_SERENE_GRACE_BOOST        GEN_7 // In Gen5+, Serene Grace boosts King's Rock and Razor fang
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.

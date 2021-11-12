@@ -6860,7 +6860,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         switch (atkHoldEffect)
         {
         case HOLD_EFFECT_FLINCH:
-            #if B_KINGS_ROCK_BOOST >= GEN_5
+            #if B_SERENE_GRACE_BOOST >= GEN_5
                 if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
                     atkHoldEffectParam *= 2;
             #endif
