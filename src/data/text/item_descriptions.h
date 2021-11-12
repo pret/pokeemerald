@@ -3304,6 +3304,11 @@ static const u8 sTMCaseDesc[] = _(
     "that holds TMs and\n"
     "HMs.");
 
+static const u8 sBerryPouchDesc[] = _(
+    "A convenient\n"
+    "container that\n"
+    "holds Berries.");
+
 static const u8 sPokemonBoxLinkDesc[] = _( // Todo
     "?????");
 
@@ -3333,6 +3338,21 @@ static const u8 sSootSackDesc[] = _(
     "A sack used to\n"
     "gather and hold\n"
     "volcanic ash.");
+
+static const u8 sPokeFluteDesc[] = _(
+    "A sweet-sounding\n"
+    "flute that awakens\n"
+    "Pokémon.");
+
+static const u8 sFameCheckerDesc[] = _(
+    "Stores information\n"
+    "on famous people\n"
+    "for instant recall.");
+
+static const u8 sTeachyTVDesc[] = _(
+    "A TV set tuned to\n"
+    "an advice program\n"
+    "for Trainers.");
 
 // Story Key Items
 static const u8 sSSTicketDesc[] = _(
@@ -3423,3 +3443,68 @@ static const u8 sMagmaEmblemDesc[] = _(
     "A medal-like item in\n"
     "the same shape as\n"
     "Team Magma's mark.");
+
+static const u8 sContestPassDesc[] = _(
+    "The pass required\n"
+    "for entering\n"
+    "Pokémon Contests.");
+
+static const u8 sOaksParcelDesc[] = _(
+    "A parcel for Prof.\n"
+    "Oak from a Pokémon\n"
+    "Mart's clerk.");
+
+static const u8 sSecretKeyDesc[] = _(
+    "The key to the\n"
+    "Cinnabar Island\n"
+    "Gym's entrance.");
+
+static const u8 sBikeVoucherDesc[] = _(
+    "A voucher for\n"
+    "obtaining a bicycle\n"
+    "from the Bike Shop.");
+
+static const u8 sGoldTeethDesc[] = _(
+    "Gold dentures lost\n"
+    "by the Safari\n"
+    "Zone's Warden.");
+
+static const u8 sCardKeyDesc[] = _(
+    "A card-type door\n"
+    "key used in Silph\n"
+    "Co's office.");
+
+static const u8 sLiftKeyDesc[] = _(
+    "An elevator key\n"
+    "used in Team\n"
+    "Rocket's Hideout.");
+
+static const u8 sSilphScopeDesc[] = _(
+    "Silph Co's scope\n"
+    "makes unseeable\n"
+    "POKéMON visible.");
+
+static const u8 sTriPassDesc[] = _(
+    "A pass for ferries\n"
+    "between One, Two,\n"
+    "and Three Island.");
+
+static const u8 sRainbowPassDesc[] = _(
+    "For ferries serving\n"
+    "Vermilion and the\n"
+    "Sevii Islands.");
+
+static const u8 sTeaDesc[] = _(
+    "A thirst-quenching\n"
+    "tea prepared by an\n"
+    "old lady.");
+
+static const u8 sRubyDesc[] = _(
+    "An exquisite, red-\n"
+    "glowing gem that\n"
+    "symbolizes passion.");
+
+static const u8 sSapphireDesc[] = _(
+    "A brilliant blue gem\n"
+    "that symbolizes\n"
+    "honesty.");
