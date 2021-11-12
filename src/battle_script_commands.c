@@ -4720,9 +4720,6 @@ static void Cmd_playanimation(void)
     }
     #endif
     
-    //if (animId == B_ANIM_STATS_CHANGE && GetBattlerAbility(gActiveBattler) == ABILITY_CONTRARY)
-        //ReverseStatAnimId(argumentPtr);
-
     if (animId == B_ANIM_STATS_CHANGE
         || animId == B_ANIM_SNATCH_MOVE
         || animId == B_ANIM_MEGA_EVOLUTION
