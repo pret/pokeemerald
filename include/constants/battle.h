@@ -358,22 +358,38 @@
 #define MOVE_EFFECT_BUG_BITE            0x45
 #define MOVE_EFFECT_RECOIL_HP_25        0x46
 #define MOVE_EFFECT_RELIC_SONG          0x47
-#define NUM_MOVE_EFFECTS                0x48
+#define MOVE_EFFECT_TRAP_BOTH           0x48
+#define NUM_MOVE_EFFECTS                0x49
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
 
 // Battle terrain defines for gBattleTerrain.
-#define BATTLE_TERRAIN_GRASS        0
-#define BATTLE_TERRAIN_LONG_GRASS   1
-#define BATTLE_TERRAIN_SAND         2
-#define BATTLE_TERRAIN_UNDERWATER   3
-#define BATTLE_TERRAIN_WATER        4
-#define BATTLE_TERRAIN_POND         5
-#define BATTLE_TERRAIN_MOUNTAIN     6
-#define BATTLE_TERRAIN_CAVE         7
-#define BATTLE_TERRAIN_BUILDING     8
-#define BATTLE_TERRAIN_PLAIN        9
+#define BATTLE_TERRAIN_GRASS            0
+#define BATTLE_TERRAIN_LONG_GRASS       1
+#define BATTLE_TERRAIN_SAND             2
+#define BATTLE_TERRAIN_UNDERWATER       3
+#define BATTLE_TERRAIN_WATER            4
+#define BATTLE_TERRAIN_POND             5
+#define BATTLE_TERRAIN_MOUNTAIN         6
+#define BATTLE_TERRAIN_CAVE             7
+#define BATTLE_TERRAIN_BUILDING         8
+#define BATTLE_TERRAIN_PLAIN            9
+// New battle terrains are used for Secret Power but not fully implemented.
+#define BATTLE_TERRAIN_SOARING          10
+#define BATTLE_TERRAIN_SKY_PILLAR       11
+#define BATTLE_TERRAIN_BURIAL_GROUND    12
+#define BATTLE_TERRAIN_PUDDLE           13
+#define BATTLE_TERRAIN_MARSH            14
+#define BATTLE_TERRAIN_SWAMP            15
+#define BATTLE_TERRAIN_SNOW             16
+#define BATTLE_TERRAIN_ICE              17
+#define BATTLE_TERRAIN_VOLCANO          18
+#define BATTLE_TERRAIN_DISTORTION_WORLD 19
+#define BATTLE_TERRAIN_SPACE            20
+#define BATTLE_TERRAIN_ULTRA_SPACE      21
+
+#define BATTLE_TERRAIN_COUNT            22
 
 #define B_WAIT_TIME_LONG  64
 #define B_WAIT_TIME_MED   48
