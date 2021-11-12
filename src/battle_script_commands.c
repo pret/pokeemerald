@@ -12347,12 +12347,13 @@ static void Cmd_trywish(void)
         break;
     case 1: // heal effect
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerTarget, gWishFutureKnock.wishMonId[gBattlerTarget])
-
-        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
+        #if B_WISH >= GEN_5
+            gBattleMoveDamage = max(1, gBattleMons[gWishFutureKnock.wishMonId[gBattlerTarget]].maxHP / 2);
+        #else
+            gBattleMoveDamage = max(1, gBattleMons[gBattlerTarget].maxHP / 2);
+        #endif
+        
         gBattleMoveDamage *= -1;
-
         if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         else
