@@ -370,7 +370,7 @@ bool32 WaitForPokenavShutdownFade(void);
 void SetActiveMenuLoopTasks(void *func1, void *func2);
 void ShutdownPokenav(void);
 
-// pokenav_menu_handler_1.c
+// pokenav_menu_handler.c
 bool32 PokenavCallback_Init_MainMenuCursorOnMap(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnMatchCall(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnRibbons(void);
@@ -383,7 +383,7 @@ int GetPokenavCursorPos(void);
 int GetCurrentMenuItemId(void);
 u16 GetHelpBarTextId(void);
 
-// pokenav_menu_handler_2.c
+// pokenav_menu_handler_gfx.c
 bool32 OpenPokenavMenuInitial(void);
 bool32 OpenPokenavMenuNotInitial(void);
 void CreateMenuHandlerLoopedTask(s32 ltIdx);

@@ -311,8 +311,8 @@ SECTIONS {
         src/pokenav.o(.text);
         src/pokenav_main_menu.o(.text);
         src/pokenav_match_call_ui.o(.text);
-        src/pokenav_menu_handler_1.o(.text);
-        src/pokenav_menu_handler_2.o(.text);
+        src/pokenav_menu_handler.o(.text);
+        src/pokenav_menu_handler_gfx.o(.text);
         src/pokenav_match_call_1.o(.text);
         src/pokenav_match_call_2.o(.text);
         src/pokenav_region_map.o(.text);
@@ -666,8 +666,8 @@ SECTIONS {
         src/pokenav.o(.rodata);
         src/pokenav_main_menu.o(.rodata);
         src/pokenav_match_call_ui.o(.rodata);
-        src/pokenav_menu_handler_1.o(.rodata);
-        src/pokenav_menu_handler_2.o(.rodata);
+        src/pokenav_menu_handler.o(.rodata);
+        src/pokenav_menu_handler_gfx.o(.rodata);
         src/pokenav_match_call_1.o(.rodata);
         src/pokenav_match_call_2.o(.rodata);
         src/pokenav_region_map.o(.rodata);
