@@ -3071,7 +3071,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 if (NoAliveMonsForEitherParty()
                   || ChangeStatBuffs(SET_STAT_BUFF_VALUE(1),
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_PLUS_1 + 1,
-                                    affectsUser, 0))
+                                    affectsUser | STAT_BUFF_UPDATE_MOVE_EFFECT, 0))
                 {
                     gBattlescriptCurrInstr++;
                 }
@@ -3096,7 +3096,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE,
                   gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_1 + 1,
-                  flags, gBattlescriptCurrInstr + 1))
+                  flags | STAT_BUFF_UPDATE_MOVE_EFFECT, gBattlescriptCurrInstr + 1))
                 {
                     if (!mirrorArmorReflected)
                         gBattlescriptCurrInstr++;
@@ -3119,7 +3119,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 if (NoAliveMonsForEitherParty()
                   || ChangeStatBuffs(SET_STAT_BUFF_VALUE(2),
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_PLUS_2 + 1,
-                                    affectsUser, 0))
+                                    affectsUser | STAT_BUFF_UPDATE_MOVE_EFFECT, 0))
                 {
                     gBattlescriptCurrInstr++;
                 }
@@ -3143,7 +3143,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     flags |= STAT_BUFF_ALLOW_PTR;
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE,
                                     gBattleScripting.moveEffect - MOVE_EFFECT_ATK_MINUS_2 + 1,
-                                    flags, gBattlescriptCurrInstr + 1))
+                                    flags | STAT_BUFF_UPDATE_MOVE_EFFECT, gBattlescriptCurrInstr + 1))
                 {
                     if (!mirrorArmorReflected)
                         gBattlescriptCurrInstr++;
@@ -9815,6 +9815,72 @@ static void Cmd_setdrainedhp(void)
     gBattlescriptCurrInstr++;
 }
 
+static u16 ReverseStatChangeMoveEffect(u16 moveEffect)
+{
+    switch (moveEffect)
+    {
+    // +1
+    case MOVE_EFFECT_ATK_PLUS_1:
+        return MOVE_EFFECT_ATK_MINUS_1;
+    case MOVE_EFFECT_DEF_PLUS_1:
+        return MOVE_EFFECT_DEF_MINUS_1;
+    case MOVE_EFFECT_SPD_PLUS_1:
+        return MOVE_EFFECT_SPD_MINUS_1;
+    case MOVE_EFFECT_SP_ATK_PLUS_1:
+        return MOVE_EFFECT_SP_ATK_MINUS_1;
+    case MOVE_EFFECT_SP_DEF_PLUS_1:
+        return MOVE_EFFECT_SP_DEF_MINUS_1;
+    case MOVE_EFFECT_ACC_PLUS_1:
+        return MOVE_EFFECT_ACC_MINUS_1;
+    case MOVE_EFFECT_EVS_PLUS_1:
+        return MOVE_EFFECT_EVS_MINUS_1;
+    // -1
+    case MOVE_EFFECT_ATK_MINUS_1:
+        return MOVE_EFFECT_ATK_PLUS_1;
+    case MOVE_EFFECT_DEF_MINUS_1:
+        return MOVE_EFFECT_DEF_PLUS_1;
+    case MOVE_EFFECT_SPD_MINUS_1:
+        return MOVE_EFFECT_SPD_PLUS_1;
+    case MOVE_EFFECT_SP_ATK_MINUS_1:
+        return MOVE_EFFECT_SP_ATK_PLUS_1;
+    case MOVE_EFFECT_SP_DEF_MINUS_1:
+        return MOVE_EFFECT_SP_DEF_PLUS_1;
+    case MOVE_EFFECT_ACC_MINUS_1:
+        return MOVE_EFFECT_ACC_PLUS_1;
+    case MOVE_EFFECT_EVS_MINUS_1:
+    // +2
+    case MOVE_EFFECT_ATK_PLUS_2:
+        return MOVE_EFFECT_ATK_MINUS_2;
+    case MOVE_EFFECT_DEF_PLUS_2:
+        return MOVE_EFFECT_DEF_MINUS_2;
+    case MOVE_EFFECT_SPD_PLUS_2:
+        return MOVE_EFFECT_SPD_MINUS_2;
+    case MOVE_EFFECT_SP_ATK_PLUS_2:
+        return MOVE_EFFECT_SP_ATK_MINUS_2;
+    case MOVE_EFFECT_SP_DEF_PLUS_2:
+        return MOVE_EFFECT_SP_DEF_MINUS_2;
+    case MOVE_EFFECT_ACC_PLUS_2:
+        return MOVE_EFFECT_ACC_MINUS_2;
+    case MOVE_EFFECT_EVS_PLUS_2:
+        return MOVE_EFFECT_EVS_MINUS_2;
+    // -2
+    case MOVE_EFFECT_ATK_MINUS_2:
+        return MOVE_EFFECT_ATK_PLUS_2;
+    case MOVE_EFFECT_DEF_MINUS_2:
+        return MOVE_EFFECT_DEF_PLUS_2;
+    case MOVE_EFFECT_SPD_MINUS_2:
+        return MOVE_EFFECT_SPD_PLUS_2;
+    case MOVE_EFFECT_SP_ATK_MINUS_2:
+        return MOVE_EFFECT_SP_ATK_PLUS_2;
+    case MOVE_EFFECT_SP_DEF_MINUS_2:
+        return MOVE_EFFECT_SP_DEF_PLUS_2;
+    case MOVE_EFFECT_ACC_MINUS_2:
+        return MOVE_EFFECT_ACC_PLUS_2;
+    case MOVE_EFFECT_EVS_MINUS_2:
+        return MOVE_EFFECT_EVS_PLUS_2;
+    }
+}
+
 static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr)
 {
     bool32 certain = FALSE;
@@ -9843,6 +9909,11 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     {
         statValue ^= STAT_BUFF_NEGATIVE;
         gBattleScripting.statChanger ^= STAT_BUFF_NEGATIVE;
+        if (flags & STAT_BUFF_UPDATE_MOVE_EFFECT)
+        {
+            flags &= ~(STAT_BUFF_UPDATE_MOVE_EFFECT);
+            gBattleScripting.moveEffect = ReverseStatChangeMoveEffect(gBattleScripting.moveEffect);
+        }
     }
     else if (GetBattlerAbility(gActiveBattler) == ABILITY_SIMPLE)
     {
