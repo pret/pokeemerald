@@ -8850,6 +8850,19 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
+    [ITEM_BERRY_POUCH] =
+    {
+        .name = _("Berry Pouch"),
+        .itemId = ITEM_BERRY_POUCH,
+        .price = 0,
+        .description = sBerryPouchDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
     [ITEM_POKEMON_BOX_LINK] = // Todo
     {
         .name = _("????????"),
@@ -8931,6 +8944,44 @@ const struct Item gItems[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_POKE_FLUTE] =
+    {
+        .name = _("Poké Flute"),
+        .itemId = ITEM_POKE_FLUTE,
+        .price = 0,
+        .description = sPokeFluteDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_FAME_CHECKER] =
+    {
+        .name = _("Fame Checker"),
+        .itemId = ITEM_FAME_CHECKER,
+        .price = 0,
+        .description = sFameCheckerDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TEACHY_TV] =
+    {
+        .name = _("Teachy TV"),
+        .itemId = ITEM_TEACHY_TV,
+        .price = 0,
+        .description = sTeachyTVDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
@@ -9150,6 +9201,167 @@ const struct Item gItems[] =
         .itemId = ITEM_MAGMA_EMBLEM,
         .price = 0,
         .description = sMagmaEmblemDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_CONTEST_PASS] =
+    {
+        .name = _("Contest Pass"),
+        .itemId = ITEM_CONTEST_PASS,
+        .price = 0,
+        .description = sContestPassDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_OAKS_PARCEL] =
+    {
+        .name = _("Oak's Parcel"),
+        .itemId = ITEM_OAKS_PARCEL,
+        .price = 0,
+        .description = sOaksParcelDesc,
+        .importance = 2,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_SECRET_KEY] =
+    {
+        .name = _("Secret Key"),
+        .itemId = ITEM_SECRET_KEY,
+        .price = 0,
+        .description = sSecretKeyDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_BIKE_VOUCHER] =
+    {
+        .name = _("Bike Voucher"),
+        .itemId = ITEM_BIKE_VOUCHER,
+        .price = 0,
+        .description = sBikeVoucherDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_GOLD_TEETH] =
+    {
+        .name = _("Gold Teeth"),
+        .itemId = ITEM_GOLD_TEETH,
+        .price = 0,
+        .description = sGoldTeethDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_CARD_KEY] =
+    {
+        .name = _("Card Key"),
+        .itemId = ITEM_CARD_KEY,
+        .price = 0,
+        .description = sCardKeyDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_LIFT_KEY] =
+    {
+        .name = _("Lift Key"),
+        .itemId = ITEM_LIFT_KEY,
+        .price = 0,
+        .description = sLiftKeyDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_SILPH_SCOPE] =
+    {
+        .name = _("Silph Scope"),
+        .itemId = ITEM_SILPH_SCOPE,
+        .price = 0,
+        .description = sSilphScopeDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TRI_PASS] =
+    {
+        .name = _("Tri-Pass"),
+        .itemId = ITEM_TRI_PASS,
+        .price = 0,
+        .description = sTriPassDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_RAINBOW_PASS] =
+    {
+        .name = _("Rainbow Pass"),
+        .itemId = ITEM_RAINBOW_PASS,
+        .price = 0,
+        .description = sRainbowPassDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TEA] =
+    {
+        .name = _("Tea"),
+        .itemId = ITEM_TEA,
+        .price = 0,
+        .description = sTeaDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_RUBY] =
+    {
+        .name = _("Ruby"),
+        .itemId = ITEM_RUBY,
+        .price = 0,
+        .description = sRubyDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_SAPPHIRE] =
+    {
+        .name = _("Sapphire"),
+        .itemId = ITEM_SAPPHIRE,
+        .price = 0,
+        .description = sSapphireDesc,
         .importance = 1,
         .unk19 = 1,
         .pocket = POCKET_KEY_ITEMS,

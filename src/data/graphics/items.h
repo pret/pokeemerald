@@ -1923,6 +1923,9 @@ const u32 gItemIconPalette_VsSeeker[] = INCBIN_U32("graphics/items/icon_palettes
 const u32 gItemIcon_TMCase[] = INCBIN_U32("graphics/items/icons/tm_case.4bpp.lz");
 const u32 gItemIconPalette_TMCase[] = INCBIN_U32("graphics/items/icon_palettes/tm_case.gbapal.lz");
 
+const u32 gItemIcon_BerryPouch[] = INCBIN_U32("graphics/items/icons/berry_pouch.4bpp.lz");
+const u32 gItemIconPalette_BerryPouch[] = INCBIN_U32("graphics/items/icon_palettes/berry_pouch.gbapal.lz");
+
 //const u32 gItemIcon_PokemonBoxLink[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
 //const u32 gItemIconPalette_PokemonBoxLink[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
 
@@ -1943,6 +1946,15 @@ const u32 gItemIconPalette_PokeblockCase[] = INCBIN_U32("graphics/items/icon_pal
 
 const u32 gItemIcon_SootSack[] = INCBIN_U32("graphics/items/icons/soot_sack.4bpp.lz");
 const u32 gItemIconPalette_SootSack[] = INCBIN_U32("graphics/items/icon_palettes/soot_sack.gbapal.lz");
+
+const u32 gItemIcon_PokeFlute[] = INCBIN_U32("graphics/items/icons/poke_flute.4bpp.lz");
+const u32 gItemIconPalette_PokeFlute[] = INCBIN_U32("graphics/items/icon_palettes/poke_flute.gbapal.lz");
+
+const u32 gItemIcon_FameChecker[] = INCBIN_U32("graphics/items/icons/fame_checker.4bpp.lz");
+const u32 gItemIconPalette_FameChecker[] = INCBIN_U32("graphics/items/icon_palettes/fame_checker.gbapal.lz");
+
+const u32 gItemIcon_TeachyTV[] = INCBIN_U32("graphics/items/icons/teachy_tv.4bpp.lz");
+const u32 gItemIconPalette_TeachyTV[] = INCBIN_U32("graphics/items/icon_palettes/teachy_tv.gbapal.lz");
 
 // Story Key Items
 
@@ -1995,15 +2007,11 @@ const u32 gItemIconPalette_Meteorite[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIcon_MagmaEmblem[] = INCBIN_U32("graphics/items/icons/magma_emblem.4bpp.lz");
 const u32 gItemIconPalette_MagmaEmblem[] = INCBIN_U32("graphics/items/icon_palettes/magma_emblem.gbapal.lz");
 
-// Remove these
-/*const u32 gItemIcon_ContestPass[] = INCBIN_U32("graphics/items/icons/contest_pass.4bpp.lz");
+const u32 gItemIcon_ContestPass[] = INCBIN_U32("graphics/items/icons/contest_pass.4bpp.lz");
 const u32 gItemIconPalette_ContestPass[] = INCBIN_U32("graphics/items/icon_palettes/contest_pass.gbapal.lz");
 
 const u32 gItemIcon_OaksParcel[] = INCBIN_U32("graphics/items/icons/oaks_parcel.4bpp.lz");
 const u32 gItemIconPalette_OaksParcel[] = INCBIN_U32("graphics/items/icon_palettes/oaks_parcel.gbapal.lz");
-
-const u32 gItemIcon_PokeFlute[] = INCBIN_U32("graphics/items/icons/poke_flute.4bpp.lz");
-const u32 gItemIconPalette_PokeFlute[] = INCBIN_U32("graphics/items/icon_palettes/poke_flute.gbapal.lz");
 
 const u32 gItemIcon_SecretKey[] = INCBIN_U32("graphics/items/icons/secret_key.4bpp.lz");
 const u32 gItemIconPalette_SecretKey[] = INCBIN_U32("graphics/items/icon_palettes/secret_key.gbapal.lz");
@@ -2022,24 +2030,6 @@ const u32 gItemIcon_LiftKey[] = INCBIN_U32("graphics/items/icons/lift_key.4bpp.l
 const u32 gItemIcon_SilphScope[] = INCBIN_U32("graphics/items/icons/silph_scope.4bpp.lz");
 const u32 gItemIconPalette_SilphScope[] = INCBIN_U32("graphics/items/icon_palettes/silph_scope.gbapal.lz");
 
-const u32 gItemIcon_Bicycle[] = INCBIN_U32("graphics/items/icons/bicycle.4bpp.lz");
-const u32 gItemIconPalette_Bicycle[] = INCBIN_U32("graphics/items/icon_palettes/bicycle.gbapal.lz");
-
-const u32 gItemIcon_VSSeeker[] = INCBIN_U32("graphics/items/icons/vs_seeker.4bpp.lz");
-const u32 gItemIconPalette_VSSeeker[] = INCBIN_U32("graphics/items/icon_palettes/vs_seeker.gbapal.lz");
-
-const u32 gItemIcon_FameChecker[] = INCBIN_U32("graphics/items/icons/fame_checker.4bpp.lz");
-const u32 gItemIconPalette_FameChecker[] = INCBIN_U32("graphics/items/icon_palettes/fame_checker.gbapal.lz");
-
-const u32 gItemIcon_TMCase[] = INCBIN_U32("graphics/items/icons/tm_case.4bpp.lz");
-const u32 gItemIconPalette_TMCase[] = INCBIN_U32("graphics/items/icon_palettes/tm_case.gbapal.lz");
-
-const u32 gItemIcon_BerryPouch[] = INCBIN_U32("graphics/items/icons/berry_pouch.4bpp.lz");
-const u32 gItemIconPalette_BerryPouch[] = INCBIN_U32("graphics/items/icon_palettes/berry_pouch.gbapal.lz");
-
-const u32 gItemIcon_TeachyTV[] = INCBIN_U32("graphics/items/icons/teachy_tv.4bpp.lz");
-const u32 gItemIconPalette_TeachyTV[] = INCBIN_U32("graphics/items/icon_palettes/teachy_tv.gbapal.lz");
-
 const u32 gItemIcon_TriPass[] = INCBIN_U32("graphics/items/icons/tri_pass.4bpp.lz");
 const u32 gItemIconPalette_TriPass[] = INCBIN_U32("graphics/items/icon_palettes/tri_pass.gbapal.lz");
 
@@ -2052,4 +2042,4 @@ const u32 gItemIconPalette_Tea[] = INCBIN_U32("graphics/items/icon_palettes/tea.
 const u32 gItemIcon_Gem[] = INCBIN_U32("graphics/items/icons/gem.4bpp.lz");
 const u32 gItemIconPalette_Ruby[] = INCBIN_U32("graphics/items/icon_palettes/ruby.gbapal.lz");
 
-const u32 gItemIconPalette_Sapphire[] = INCBIN_U32("graphics/items/icon_palettes/sapphire.gbapal.lz");*/
+const u32 gItemIconPalette_Sapphire[] = INCBIN_U32("graphics/items/icon_palettes/sapphire.gbapal.lz");

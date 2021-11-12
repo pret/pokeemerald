@@ -764,6 +764,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_TOWN_MAP] = {gItemIcon_TownMap, gItemIconPalette_TownMap},
     [ITEM_VS_SEEKER] = {gItemIcon_VsSeeker, gItemIconPalette_VsSeeker},
     [ITEM_TM_CASE] = {gItemIcon_TMCase, gItemIconPalette_TMCase},
+    [ITEM_BERRY_POUCH] = {gItemIcon_BerryPouch, gItemIconPalette_BerryPouch},
     [ITEM_POKEMON_BOX_LINK] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_COIN_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
     [ITEM_POWDER_JAR] = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
@@ -771,6 +772,9 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_POKE_RADAR] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_POKEBLOCK_CASE] = {gItemIcon_PokeblockCase, gItemIconPalette_PokeblockCase},
     [ITEM_SOOT_SACK] = {gItemIcon_SootSack, gItemIconPalette_SootSack},
+    [ITEM_POKE_FLUTE] = {gItemIcon_PokeFlute, gItemIconPalette_PokeFlute},
+    [ITEM_FAME_CHECKER] = {gItemIcon_FameChecker, gItemIconPalette_FameChecker},
+    [ITEM_TEACHY_TV] = {gItemIcon_TeachyTV, gItemIconPalette_TeachyTV},
     // Story Key Items
     [ITEM_SS_TICKET] = {gItemIcon_SSTicket, gItemIconPalette_SSTicket},
     [ITEM_EON_TICKET] = {gItemIcon_EonTicket, gItemIconPalette_EonTicket},
@@ -790,6 +794,19 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_KEY_TO_ROOM_6] = {gItemIcon_KeyToRoom6, gItemIconPalette_Key},
     [ITEM_METEORITE] = {gItemIcon_Meteorite, gItemIconPalette_Meteorite},
     [ITEM_MAGMA_EMBLEM] = {gItemIcon_MagmaEmblem, gItemIconPalette_MagmaEmblem},
+    [ITEM_CONTEST_PASS] = {gItemIcon_ContestPass, gItemIconPalette_ContestPass},
+    [ITEM_OAKS_PARCEL] = {gItemIcon_OaksParcel, gItemIconPalette_OaksParcel},
+    [ITEM_SECRET_KEY] = {gItemIcon_SecretKey, gItemIconPalette_SecretKey},
+    [ITEM_BIKE_VOUCHER] = {gItemIcon_BikeVoucher, gItemIconPalette_BikeVoucher},
+    [ITEM_GOLD_TEETH] = {gItemIcon_GoldTeeth, gItemIconPalette_GoldTeeth},
+    [ITEM_CARD_KEY] = {gItemIcon_CardKey, gItemIconPalette_CardKey},
+    [ITEM_LIFT_KEY] = {gItemIcon_LiftKey, gItemIconPalette_Key},
+    [ITEM_SILPH_SCOPE] = {gItemIcon_SilphScope, gItemIconPalette_SilphScope},
+    [ITEM_TRI_PASS] = {gItemIcon_TriPass, gItemIconPalette_TriPass},
+    [ITEM_RAINBOW_PASS] = {gItemIcon_RainbowPass, gItemIconPalette_RainbowPass},
+    [ITEM_TEA] = {gItemIcon_Tea, gItemIconPalette_Tea},
+    [ITEM_RUBY] = {gItemIcon_Gem, gItemIconPalette_Ruby},
+    [ITEM_SAPPHIRE] = {gItemIcon_Gem, gItemIconPalette_Sapphire},
     // Return to field arrow
     [ITEM_FIELD_ARROW] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
