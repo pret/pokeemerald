@@ -591,7 +591,7 @@ static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
     // Calculate Cute -> Tough line (includes left scanline because this crosses the halfway point)
     i = (graph->curPositions[GRAPH_CUTE].y <= graph->curPositions[GRAPH_SMART].y);
     ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_CUTE], &graph->curPositions[GRAPH_SMART], i, graph->scanlineLeft[0]);
-    
+
     // Clear down to new top
     for (i = CONDITION_GRAPH_TOP_Y; i < y; i++)
     {

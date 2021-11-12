@@ -13,20 +13,22 @@
 #include "text.h"
 #include "constants/songs.h"
 
+#define CONDITION_MONS_LOADED 3
+
 struct Pokenav_ConditionMenu
 {
-    u32 monPal[NUM_CONDITION_MONS][0x20];
+    u32 monPal[CONDITION_MONS_LOADED][0x20];
     u8 fill[0x180];
-    u32 monPicGfx[NUM_CONDITION_MONS][MON_PIC_SIZE];
+    u32 monPicGfx[CONDITION_MONS_LOADED][MON_PIC_SIZE];
     bool8 inSearchMode;
     s16 toLoadListIndex;
     u32 (*callback)(struct Pokenav_ConditionMenu *);
     u8 fill2[0x18];
-    u8 locationText[NUM_CONDITION_MONS][24];
-    u8 nameText[NUM_CONDITION_MONS][64];
+    u8 locationText[CONDITION_MONS_LOADED][24];
+    u8 nameText[CONDITION_MONS_LOADED][64];
     struct ConditionGraph graph;
-    u8 numSparkles[NUM_CONDITION_MONS];
-    u8 monMarks[NUM_CONDITION_MONS];
+    u8 numSparkles[CONDITION_MONS_LOADED];
+    u8 monMarks[CONDITION_MONS_LOADED];
     s8 loadId;
     s8 nextLoadIdDown;
     s8 nextLoadIdUp;
@@ -239,28 +241,28 @@ bool32 LoadConditionGraphMenuGfx(void)
     switch (menu->state)
     {
     case 0:
-        CopyMonNameGenderLocation(monListPtr->currIndex, CONDITION_MON_0);
+        CopyMonNameGenderLocation(monListPtr->currIndex, 0);
         break;
     case 1:
-        GetMonConditionGraphData(monListPtr->currIndex, CONDITION_MON_0);
+        GetMonConditionGraphData(monListPtr->currIndex, 0);
         break;
     case 2:
-        ConditionGraphDrawMonPic(monListPtr->currIndex, CONDITION_MON_0);
+        ConditionGraphDrawMonPic(monListPtr->currIndex, 0);
         break;
     case 3:
         if (monListPtr->listCount == 1)
         {
-            menu->loadId = CONDITION_MON_0;
-            menu->nextLoadIdDown = CONDITION_MON_0;
-            menu->nextLoadIdUp = CONDITION_MON_0;
+            menu->loadId = 0;
+            menu->nextLoadIdDown = 0;
+            menu->nextLoadIdUp = 0;
             menu->state = 0;
             return TRUE;
         }
         else
         {
-            menu->loadId = CONDITION_MON_0;
-            menu->nextLoadIdDown = CONDITION_MON_1;
-            menu->nextLoadIdUp = CONDITION_MON_2;
+            menu->loadId = 0;
+            menu->nextLoadIdDown = 1;
+            menu->nextLoadIdUp = 2;
         }
         break;
     // These were probably ternaries just like cases 7-9, but couldn't match it any other way.
@@ -268,28 +270,28 @@ bool32 LoadConditionGraphMenuGfx(void)
         var = monListPtr->currIndex + 1;
         if (var >= monListPtr->listCount)
             var = 0;
-        CopyMonNameGenderLocation(var, CONDITION_MON_1);
+        CopyMonNameGenderLocation(var, 1);
         break;
     case 5:
         var = monListPtr->currIndex + 1;
         if (var >= monListPtr->listCount)
             var = 0;
-        GetMonConditionGraphData(var, CONDITION_MON_1);
+        GetMonConditionGraphData(var, 1);
         break;
     case 6:
         var = monListPtr->currIndex + 1;
         if (var >= monListPtr->listCount)
             var = 0;
-        ConditionGraphDrawMonPic(var, CONDITION_MON_1);
+        ConditionGraphDrawMonPic(var, 1);
         break;
     case 7:
-        CopyMonNameGenderLocation((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, CONDITION_MON_2);
+        CopyMonNameGenderLocation((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, 2);
         break;
     case 8:
-        GetMonConditionGraphData((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, CONDITION_MON_2);
+        GetMonConditionGraphData((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, 2);
         break;
     case 9:
-        ConditionGraphDrawMonPic((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, CONDITION_MON_2);
+        ConditionGraphDrawMonPic((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, 2);
         menu->state = 0;
         return TRUE;
     }
