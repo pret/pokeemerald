@@ -32,9 +32,9 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *);
 static u32 GetExitMatchCallMenuId(struct Pokenav3Struct *);
 static u32 CB2_HandleMatchCallOptionsInput(struct Pokenav3Struct *);
 static u32 CB2_HandleCheckPageInput(struct Pokenav3Struct *);
-static u32 CB2_HandleCallInput(struct Pokenav3Struct *);
+static u32 CB2_HandleCallExitInput(struct Pokenav3Struct *);
 static u32 sub_81CAD20(s32);
-static bool32 sub_81CB1D0(void);
+static bool32 ShouldDoNearbyMessage(void);
 
 #include "data/text/match_call_messages.h"
 
@@ -155,8 +155,8 @@ static u32 CB2_HandleMatchCallOptionsInput(struct Pokenav3Struct *state)
             if (GetPokenavMode() == POKENAV_MODE_FORCE_CALL_READY)
                 SetPokenavMode(POKENAV_MODE_FORCE_CALL_EXIT);
 
-            state->callback = CB2_HandleCallInput;
-            if (sub_81CB1D0())
+            state->callback = CB2_HandleCallExitInput;
+            if (ShouldDoNearbyMessage())
                 return POKENAV_MC_FUNC_NEARBY_MSG;
 
             return POKENAV_MC_FUNC_CALL_MSG;
@@ -191,12 +191,12 @@ static u32 CB2_HandleCheckPageInput(struct Pokenav3Struct *state)
     return POKENAV_MC_FUNC_NONE;
 }
 
-static u32 CB2_HandleCallInput(struct Pokenav3Struct *state)
+static u32 CB2_HandleCallExitInput(struct Pokenav3Struct *state)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         state->callback = CB2_HandleMatchCallInput;
-        return POKENAV_MC_FUNC_10;
+        return POKENAV_MC_FUNC_EXIT_CALL;
     }
 
     return POKENAV_MC_FUNC_NONE;
@@ -486,7 +486,7 @@ bool32 unref_sub_81CB16C(void)
     return FALSE;
 }
 
-static bool32 sub_81CB1D0(void)
+static bool32 ShouldDoNearbyMessage(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     int selection = GetSelectedPokenavListIndex();

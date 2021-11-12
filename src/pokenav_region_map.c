@@ -364,7 +364,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
 
         LoadLeftHeaderGfxForIndex(menuGfxId);
         ShowLeftHeaderGfx(menuGfxId, 1, 1);
-        PokenavFadeScreen(1);
+        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         return LT_INC_AND_PAUSE;
     case 7:
         if (IsPaletteFadeActive() || AreLeftHeaderSpritesMoving())
@@ -457,7 +457,7 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsPaletteFadeActive())

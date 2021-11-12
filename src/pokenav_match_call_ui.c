@@ -468,10 +468,10 @@ void sub_81C877C(void)
     structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_sub_81C8870, 6);
 }
 
-void PrintCheckPageInfo(s16 a0)
+void PrintCheckPageInfo(s16 delta)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_LIST);
-    structPtr->unk888.windowTopIndex += a0;
+    structPtr->unk888.windowTopIndex += delta;
     structPtr->unk89C = 0;
     structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_PrintCheckPageInfo, 6);
 }

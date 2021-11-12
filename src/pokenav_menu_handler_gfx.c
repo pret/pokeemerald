@@ -505,11 +505,11 @@ static u32 LoopedTask_OpenMenu(s32 state)
         ShowBg(2);
         ShowBg(3);
         if (gfx->pokenavAlreadyOpen)
-            PokenavFadeScreen(1);
+            PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         else
         {
             PlaySE(SE_POKENAV_ON);
-            PokenavFadeScreen(3);
+            PokenavFadeScreen(POKENAV_FADE_FROM_BLACK_ALL);
         }
         switch (GetPokenavMenuType())
         {
@@ -779,7 +779,7 @@ static u32 LoopedTask_OpenPokenavFeature(s32 state)
             return LT_PAUSE;
         if (AreLeftHeaderSpritesMoving())
             return LT_PAUSE;
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsPaletteFadeActive())

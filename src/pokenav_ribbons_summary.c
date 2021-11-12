@@ -638,7 +638,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
             ShowBg(1);
             ShowBg(2);
             HideBg(3);
-            PokenavFadeScreen(1);
+            PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -655,7 +655,7 @@ static u32 LoopedTask_ExitRibbonsSummaryMenu(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsPaletteFadeActive())

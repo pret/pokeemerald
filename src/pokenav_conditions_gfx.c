@@ -295,7 +295,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
             PrintHelpBarText(HELPBAR_CONDITION_MON_STATUS);
         return LT_INC_AND_PAUSE;
     case 15:
-        PokenavFadeScreen(1);
+        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         if (!IsConditionMenuSearchMode())
         {
             LoadLeftHeaderGfxForIndex(POKENAV_GFX_PARTY_MENU);
@@ -352,7 +352,7 @@ static u32 LoopedTask_ExitConditionGraphMenu(s32 state)
         ToggleGraphData(FALSE);
         return LT_INC_AND_CONTINUE;
     case 2:
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         if (!IsConditionMenuSearchMode())
             SlideMenuHeaderDown();
         return LT_INC_AND_PAUSE;

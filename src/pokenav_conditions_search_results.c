@@ -467,7 +467,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
             ShowLeftHeaderGfx(searchGfxId, 1, 0);
             ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, 1, 0);
         }
-        PokenavFadeScreen(1);
+        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         return LT_INC_AND_PAUSE;
     case 5:
         if (IsPaletteFadeActive())
@@ -617,7 +617,7 @@ static u32 LoopedTask_ExitConditionSearchMenu(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         SlideMenuHeaderDown();
         return LT_INC_AND_PAUSE;
     case 1:
@@ -637,7 +637,7 @@ static u32 LoopedTask_SelectSearchResult(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsPaletteFadeActive())

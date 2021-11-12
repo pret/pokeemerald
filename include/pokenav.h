@@ -276,7 +276,7 @@ enum
     POKENAV_MC_FUNC_CANCEL,
     POKENAV_MC_FUNC_CALL_MSG,
     POKENAV_MC_FUNC_NEARBY_MSG,
-    POKENAV_MC_FUNC_10,
+    POKENAV_MC_FUNC_EXIT_CALL,
     POKENAV_MC_FUNC_SHOW_CHECK_PAGE,
     POKENAV_MC_FUNC_CHECK_PAGE_UP,
     POKENAV_MC_FUNC_CHECK_PAGE_DOWN,
@@ -291,6 +291,14 @@ enum
     POKENAV_MAP_FUNC_ZOOM_OUT,
     POKENAV_MAP_FUNC_ZOOM_IN,
     POKENAV_MAP_FUNC_EXIT,
+};
+
+// Modes for PokenavFadeScreen
+enum {
+    POKENAV_FADE_TO_BLACK,
+    POKENAV_FADE_FROM_BLACK,
+    POKENAV_FADE_TO_BLACK_ALL,
+    POKENAV_FADE_FROM_BLACK_ALL,
 };
 
 // pokenav.c
@@ -359,8 +367,8 @@ bool32 MainMenuLoopedTaskIsBusy(void);
 void SetLeftHeaderSpritesInvisibility(void);
 void PokenavCopyPalette(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette);
 void FadeToBlackExceptPrimary(void);
-struct Sprite *PauseSpinningPokenavSprite(void);
-void ResumeSpinningPokenavSprite(void);
+struct Sprite *GetSpinningPokenavSprite(void);
+void HideSpinningPokenavSprite(void);
 void UpdateRegionMapRightHeaderTiles(u32 arg0);
 void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
 void SlideMenuHeaderUp(void);

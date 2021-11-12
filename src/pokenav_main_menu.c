@@ -473,7 +473,6 @@ void PokenavFillPalette(u32 palIndex, u16 fillValue)
 
 void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a4, u16 *palette)
 {
-
     if (a4 == 0)
     {
         CpuCopy16(src, palette, size * 2);
@@ -496,11 +495,11 @@ void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a
             g1 = ((((GET_G(*dest) << 8) - (g << 8)) / a3) * a4) >> 8;
             b1 = ((((GET_B(*dest) << 8) - (b << 8)) / a3) * a4) >> 8;
 
-            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of ((r + r1) & 0x1F) to r
-            g = (g + g1) & 0x1F; //See above
-            b = (b + b1) & 0x1F; //See above
+            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match
+            g = (g + g1) & 0x1F;
+            b = (b + b1) & 0x1F;
 
-            *palette = RGB2(r, g, b); //See above comment
+            *palette = RGB2(r, g, b);
 
             src++, dest++;
             palette++;
@@ -514,16 +513,16 @@ void PokenavFadeScreen(s32 fadeType)
 
     switch (fadeType)
     {
-    case 0:
+    case POKENAV_FADE_TO_BLACK:
         BeginNormalPaletteFade(menu->palettes, -2, 0, 16, RGB_BLACK);
         break;
-    case 1:
+    case POKENAV_FADE_FROM_BLACK:
         BeginNormalPaletteFade(menu->palettes, -2, 16, 0, RGB_BLACK);
         break;
-    case 2:
+    case POKENAV_FADE_TO_BLACK_ALL:
         BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
         break;
-    case 3:
+    case POKENAV_FADE_FROM_BLACK_ALL:
         BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         break;
     }
@@ -608,7 +607,7 @@ static void SpriteCB_SpinningPokenav(struct Sprite *sprite)
     sprite->y2 = (GetBgY(0) / 256u) * -1;
 }
 
-struct Sprite *PauseSpinningPokenavSprite(void)
+struct Sprite *GetSpinningPokenavSprite(void)
 {
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
@@ -616,10 +615,11 @@ struct Sprite *PauseSpinningPokenavSprite(void)
     return menu->spinningPokenav;
 }
 
-void ResumeSpinningPokenavSprite(void)
+void HideSpinningPokenavSprite(void)
 {
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
+    // Move sprite so it's no longer visible
     menu->spinningPokenav->x = 220;
     menu->spinningPokenav->y = 12;
     menu->spinningPokenav->callback = SpriteCB_SpinningPokenav;

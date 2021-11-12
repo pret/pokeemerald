@@ -24,100 +24,105 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
-struct Pokenav4Struct
+#define GFXTAG_CURSOR 7
+#define GFXTAG_TRAINER_PIC 8
+#define PALTAG_CURSOR 12
+#define PALTAG_TRAINER_PIC 13
+
+struct Pokenav_MatchCallGfx
 {
     bool32 (*isTaskActiveCB)(void);
     u32 loopTaskId;
-    u8 filler8[0x6];
-    u8 unkE;
+    u8 filler8[6];
+    bool8 unkE;
     u8 unkF;
     u16 locWindowId;
     u16 infoBoxWindowId;
     u16 msgBoxWindowId;
-    s16 unk16;
+    s16 pageDelta;
     u8 unused18;
     u8 unused19;
-    u16 unk1A;
+    u16 trainerPicPalOffset;
     struct Sprite *optionsCursorSprite;
     struct Sprite *trainerPicSprite;
-    u8 unk24[0x800];
-    u8 unk824[0x800];
-    u8 unk1024[0x800];
-    u8 *unk1824;
-    u8 unk1828[0x800];
-    u8 unk2028[0x20];
+    u8 bgTilemapBuffer1[BG_SCREEN_SIZE];
+    u8 unusedTilemapBuffer[BG_SCREEN_SIZE];
+    u8 bgTilemapBuffer2[BG_SCREEN_SIZE];
+    u8 *trainerPicGfxPtr;
+    u8 trainerPicGfx[0x800];
+    u8 trainerPicPal[0x20];
 };
 
 static bool32 GetCurrentLoopedTaskActive(void);
 static u32 LoopedTask_OpenMatchCall(s32);
 static void InitMatchCallPokenavListMenuTemplate(void);
 static void sub_81CBC1C(void);
-static void RemoveMatchCallSprites(void);
-static void sub_81CC034(struct Pokenav4Struct *);
-static void DrawMatchCallLeftColumnWindows(struct Pokenav4Struct *);
-static void UpdateMatchCallInfoBox(struct Pokenav4Struct *);
-static void PrintMatchCallLocation(struct Pokenav4Struct *, int);
-static void sub_81CC214(void);
-static void sub_81CBC38(int);
-static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *);
-static bool32 sub_81CBFC4(struct Pokenav4Struct *);
-static void UpdateCursorGfxPos(struct Pokenav4Struct *, int);
-static bool32 IsDma3ManagerBusyWithBgCopy1(struct Pokenav4Struct *);
-static void UpdateWindowsReturnToTrainerList(struct Pokenav4Struct *);
-static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *);
-static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav4Struct *);
-static void PrintCallingDots(struct Pokenav4Struct *);
-static bool32 WaitForCallingDotsText(struct Pokenav4Struct *);
-static void PrintMatchCallMessage(struct Pokenav4Struct *);
-static bool32 WaitForMatchCallMessageText(struct Pokenav4Struct *);
-static void DrawMsgBoxForCloseByMsg(struct Pokenav4Struct *);
-static void PrintTrainerIsCloseBy(struct Pokenav4Struct *);
-static bool32 WaitForTrainerIsCloseByText(struct Pokenav4Struct *);
-static void DrawSpinningPokenavForCall(struct Pokenav4Struct *);
-static bool32 WaitForSpinningPokenav(struct Pokenav4Struct *);
-static void UpdateWindowsToShowCheckPage(struct Pokenav4Struct *);
-static void LoadCheckPageTrainerPic(struct Pokenav4Struct *);
-static bool32 WaitForTrainerPic(struct Pokenav4Struct *);
-static void TrainerPicSlideOffscreen(struct Pokenav4Struct *);
-static void sub_81CBC64(u8 taskId);
-static void TryDrawRematchPokeballIcon(u16 windowId, u32, u32);
-static void PrintNumberRegisteredLabel(u16 windowId);
-static void PrintNumberRegistered(u16 windowId);
-static void PrintNumberOfBattlesLabel(u16 windowId);
-static void PrintNumberOfBattles(u16 windowId);
-static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, int top);
-static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top);
-static void sub_81CC2F0(struct Pokenav4Struct *, int);
-static void CloseMatchCallSelectOptionsWindow(struct Pokenav4Struct *);
+static void FreeMatchCallSprites(void);
+static void LoadCallWindowAndFade(struct Pokenav_MatchCallGfx *);
+static void DrawMatchCallLeftColumnWindows(struct Pokenav_MatchCallGfx *);
+static void UpdateMatchCallInfoBox(struct Pokenav_MatchCallGfx *);
+static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *, int);
+static void AllocMatchCallSprites(void);
+static void SetPokeballIconsFlashing(bool32);
+static void PrintMatchCallSelectionOptions(struct Pokenav_MatchCallGfx *);
+static bool32 ShowOptionsCursor(struct Pokenav_MatchCallGfx *);
+static void UpdateCursorGfxPos(struct Pokenav_MatchCallGfx *, int);
+static bool32 IsDma3ManagerBusyWithBgCopy1(struct Pokenav_MatchCallGfx *);
+static void UpdateWindowsReturnToTrainerList(struct Pokenav_MatchCallGfx *);
+static void DrawMsgBoxForMatchCallMsg(struct Pokenav_MatchCallGfx *);
+static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav_MatchCallGfx *);
+static void PrintCallingDots(struct Pokenav_MatchCallGfx *);
+static bool32 WaitForCallingDotsText(struct Pokenav_MatchCallGfx *);
+static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *);
+static bool32 WaitForMatchCallMessageText(struct Pokenav_MatchCallGfx *);
+static void DrawMsgBoxForCloseByMsg(struct Pokenav_MatchCallGfx *);
+static void PrintTrainerIsCloseBy(struct Pokenav_MatchCallGfx *);
+static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *);
+static void EraseCallMessageBox(struct Pokenav_MatchCallGfx *);
+static bool32 WaitForCallMessageBoxErase(struct Pokenav_MatchCallGfx *);
+static void UpdateWindowsToShowCheckPage(struct Pokenav_MatchCallGfx *);
+static void LoadCheckPageTrainerPic(struct Pokenav_MatchCallGfx *);
+static bool32 WaitForTrainerPic(struct Pokenav_MatchCallGfx *);
+static void TrainerPicSlideOffscreen(struct Pokenav_MatchCallGfx *);
+static void Task_FlashPokeballIcons(u8);
+static void TryDrawRematchPokeballIcon(u16, u32, u32);
+static void PrintNumberRegisteredLabel(u16);
+static void PrintNumberRegistered(u16);
+static void PrintNumberOfBattlesLabel(u16);
+static void PrintNumberOfBattles(u16);
+static void PrintMatchCallInfoLabel(u16, const u8 *, int);
+static void PrintMatchCallInfoNumber(u16, const u8 *, int);
+static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *, int);
+static void CloseMatchCallSelectOptionsWindow(struct Pokenav_MatchCallGfx *);
 static struct Sprite *CreateTrainerPicSprite(void);
-static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *sprite);
-static void SpriteCB_TrainerPicSlideOffscreen(struct Sprite *sprite);
-void SpriteCB_OptionsCursor(struct Sprite *sprite);
-u32 MatchCallListCursorDown(s32);
-u32 MatchCallListCursorUp(s32);
-u32 MatchCallListPageDown(s32);
-u32 MatchCallListPageUp(s32);
-u32 SelectMatchCallEntry(s32);
-u32 MoveMatchCallOptionsCursor(s32);
+static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *);
+static void SpriteCB_TrainerPicSlideOffscreen(struct Sprite *);
+static void SpriteCB_OptionsCursor(struct Sprite *);
+static u32 MatchCallListCursorDown(s32);
+static u32 MatchCallListCursorUp(s32);
+static u32 MatchCallListPageDown(s32);
+static u32 MatchCallListPageUp(s32);
+static u32 SelectMatchCallEntry(s32);
+static u32 MoveMatchCallOptionsCursor(s32);
 static u32 CancelMatchCallSelection(s32);
-u32 DoMatchCallMessage(s32);
-u32 DoTrainerCloseByMessage(s32);
-u32 sub_81CB888(s32);
-u32 ShowCheckPage(s32);
-u32 ShowCheckPageUp(s32);
-u32 ShowCheckPageDown(s32);
-u32 ExitCheckPage(s32);
-u32 ExitMatchCall(s32);
+static u32 DoMatchCallMessage(s32);
+static u32 DoTrainerCloseByMessage(s32);
+static u32 CloseMatchCallMessage(s32);
+static u32 ShowCheckPage(s32);
+static u32 ShowCheckPageUp(s32);
+static u32 ShowCheckPageDown(s32);
+static u32 ExitCheckPage(s32);
+static u32 ExitMatchCall(s32);
 
 static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
 static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
 static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
-static const u16 gUnknown_08622698[] = INCBIN_U16("graphics/pokenav/match_call/arrow.gbapal");
-static const u32 gUnknown_086226B8[] = INCBIN_U32("graphics/pokenav/match_call/arrow.4bpp.lz");
+static const u16 sOptionsCursor_Pal[] = INCBIN_U16("graphics/pokenav/match_call/options_cursor.gbapal");
+static const u32 sOptionsCursor_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/options_cursor.4bpp.lz");
 static const u16 gUnknown_086226E0[] = INCBIN_U16("graphics/pokenav/match_call/86226E0.gbapal");
 static const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/match_call/8622700.gbapal");
-static const u16 gUnknown_08622720[] = INCBIN_U16("graphics/pokenav/match_call/pokeball.gbapal");
-static const u32 gUnknown_08622760[] = INCBIN_U32("graphics/pokenav/match_call/pokeball.4bpp.lz");
+static const u16 sPokeball_Pal[] = INCBIN_U16("graphics/pokenav/match_call/pokeball.gbapal");
+static const u32 sPokeball_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/pokeball.4bpp.lz");
 
 const struct BgTemplate sMatchCallBgTemplates[3] =
 {
@@ -162,7 +167,7 @@ static const LoopedTask sMatchCallLoopTaskFuncs[] =
     [POKENAV_MC_FUNC_CANCEL]              = CancelMatchCallSelection,
     [POKENAV_MC_FUNC_CALL_MSG]            = DoMatchCallMessage,
     [POKENAV_MC_FUNC_NEARBY_MSG]          = DoTrainerCloseByMessage,
-    [POKENAV_MC_FUNC_10]                  = sub_81CB888,
+    [POKENAV_MC_FUNC_EXIT_CALL]           = CloseMatchCallMessage,
     [POKENAV_MC_FUNC_SHOW_CHECK_PAGE]     = ShowCheckPage,
     [POKENAV_MC_FUNC_CHECK_PAGE_UP]       = ShowCheckPageUp,
     [POKENAV_MC_FUNC_CHECK_PAGE_DOWN]     = ShowCheckPageDown,
@@ -200,27 +205,27 @@ static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 };
 
 // The series of 5 dots that appear when someone is called with Match Call
-static const u8 sText_CallingDots[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
+static const u8 sText_CallingDots[] = _("·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·\p");
 
 static const struct WindowTemplate sCallMsgBoxWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
     .tilemapTop = 12,
-    .width = 0x1C,
-    .height = 0x04,
+    .width = 28,
+    .height = 4,
     .paletteNum = 1,
     .baseBlock = 10
 };
 
-const struct CompressedSpriteSheet gUnknown_08622810[1] =
+static const struct CompressedSpriteSheet sOptionsCursorSpriteSheets[1] =
 {
-    {gUnknown_086226B8, 0x40, 7}
+    {sOptionsCursor_Gfx, 0x40, GFXTAG_CURSOR}
 };
 
-const struct SpritePalette gUnknown_08622818[2] =
+const struct SpritePalette sOptionsCursorSpritePalettes[2] =
 {
-    {gUnknown_08622698, 12}
+    {sOptionsCursor_Pal, PALTAG_CURSOR}
 };
 
 static const struct OamData sOptionsCursorOamData =
@@ -239,8 +244,8 @@ static const struct OamData sOptionsCursorOamData =
 
 static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
 {
-    .tileTag = 7,
-    .paletteTag = 12,
+    .tileTag = GFXTAG_CURSOR,
+    .paletteTag = PALTAG_CURSOR,
     .oam = &sOptionsCursorOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -264,8 +269,8 @@ static const struct OamData sTrainerPicOamData =
 
 static const struct SpriteTemplate sTrainerPicSpriteTemplate =
 {
-    .tileTag = 8,
-    .paletteTag = 13,
+    .tileTag = GFXTAG_TRAINER_PIC,
+    .paletteTag = PALTAG_TRAINER_PIC,
     .oam = &sTrainerPicOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -275,57 +280,57 @@ static const struct SpriteTemplate sTrainerPicSpriteTemplate =
 
 bool32 OpenMatchCall(void)
 {
-    struct Pokenav4Struct *state = AllocSubstruct(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN, sizeof(struct Pokenav4Struct));
-    if (!state)
+    struct Pokenav_MatchCallGfx *gfx = AllocSubstruct(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN, sizeof(struct Pokenav_MatchCallGfx));
+    if (!gfx)
         return FALSE;
 
-    state->unused19 = 0;
-    state->loopTaskId = CreateLoopedTask(LoopedTask_OpenMatchCall, 1);
-    state->isTaskActiveCB = GetCurrentLoopedTaskActive;
+    gfx->unused19 = 0;
+    gfx->loopTaskId = CreateLoopedTask(LoopedTask_OpenMatchCall, 1);
+    gfx->isTaskActiveCB = GetCurrentLoopedTaskActive;
     return TRUE;
 }
 
 void CreateMatchCallLoopedTask(s32 index)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    state->loopTaskId = CreateLoopedTask(sMatchCallLoopTaskFuncs[index], 1);
-    state->isTaskActiveCB = GetCurrentLoopedTaskActive;
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    gfx->loopTaskId = CreateLoopedTask(sMatchCallLoopTaskFuncs[index], 1);
+    gfx->isTaskActiveCB = GetCurrentLoopedTaskActive;
 }
 
 bool32 IsMatchCallLoopedTaskActive(void)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    return state->isTaskActiveCB();
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    return gfx->isTaskActiveCB();
 }
 
 void FreeMatchCallSubstruct2(void)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    RemoveMatchCallSprites();
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    FreeMatchCallSprites();
     sub_81CBC1C();
-    RemoveWindow(state->infoBoxWindowId);
-    RemoveWindow(state->locWindowId);
-    RemoveWindow(state->msgBoxWindowId);
-    FreePokenavSubstruct(6);
+    RemoveWindow(gfx->infoBoxWindowId);
+    RemoveWindow(gfx->locWindowId);
+    RemoveWindow(gfx->msgBoxWindowId);
+    FreePokenavSubstruct(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
 }
 
 static bool32 GetCurrentLoopedTaskActive(void)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    return IsLoopedTaskActive(state->loopTaskId);
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    return IsLoopedTaskActive(gfx->loopTaskId);
 }
 
-static u32 LoopedTask_OpenMatchCall(s32 taskState)
+static u32 LoopedTask_OpenMatchCall(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         InitBgTemplates(sMatchCallBgTemplates, ARRAY_COUNT(sMatchCallBgTemplates));
         ChangeBgX(2, 0, BG_COORD_SET);
         ChangeBgY(2, 0, BG_COORD_SET);
         DecompressAndCopyTileDataToVram(2, sMatchCallUI_Gfx, 0, 0, 0);
-        SetBgTilemapBuffer(2, state->unk1024);
+        SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
         CopyToBgTilemapBuffer(2, sMatchCallUI_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
         CopyPaletteIntoBufferUnfaded(sMatchCallUI_Pal, 0x20, 0x20);
@@ -336,7 +341,7 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
             return LT_PAUSE;
 
         BgDmaFill(1, 0, 0, 1);
-        SetBgTilemapBuffer(1, state->unk24);
+        SetBgTilemapBuffer(1, gfx->bgTilemapBuffer1);
         FillBgTilemapBufferRect_Palette0(1, 0x1000, 0, 0, 32, 20);
         CopyPaletteIntoBufferUnfaded(gUnknown_086226E0, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
@@ -345,10 +350,10 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
-        sub_81CC034(state);
-        DecompressAndCopyTileDataToVram(3, gUnknown_08622760, 0, 0, 0);
+        LoadCallWindowAndFade(gfx);
+        DecompressAndCopyTileDataToVram(3, sPokeball_Gfx, 0, 0, 0);
         CopyPaletteIntoBufferUnfaded(gUnknown_08622700, 0x30, 0x20);
-        CopyPaletteIntoBufferUnfaded(gUnknown_08622720, 0x50, 0x20);
+        CopyPaletteIntoBufferUnfaded(sPokeball_Pal, 0x50, 0x20);
         return LT_INC_AND_PAUSE;
     case 3:
         if (FreeTempTileDataBuffersIfPossible() || !sub_81CAE28())
@@ -360,11 +365,11 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         if (sub_81C8224())
             return LT_PAUSE;
 
-        DrawMatchCallLeftColumnWindows(state);
+        DrawMatchCallLeftColumnWindows(gfx);
         return LT_INC_AND_PAUSE;
     case 5:
-        UpdateMatchCallInfoBox(state);
-        PrintMatchCallLocation(state, 0);
+        UpdateMatchCallInfoBox(gfx);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 6:
         ChangeBgX(1, 0, BG_COORD_SET);
@@ -372,50 +377,50 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         ShowBg(2);
         ShowBg(3);
         ShowBg(1);
-        sub_81CC214();
+        AllocMatchCallSprites();
         LoadLeftHeaderGfxForIndex(3);
         ShowLeftHeaderGfx(POKENAV_GFX_MATCH_CALL_MENU, 1, 0);
-        PokenavFadeScreen(1);
+        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         return LT_INC_AND_PAUSE;
     case 7:
         if (IsPaletteFadeActive() || AreLeftHeaderSpritesMoving())
             return LT_PAUSE;
 
-        sub_81CBC38(1);
+        SetPokeballIconsFlashing(TRUE);
         return LT_FINISH;
     default:
         return LT_FINISH;
     }
 }
 
-u32 MatchCallListCursorDown(s32 taskState)
+static u32 MatchCallListCursorDown(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         switch (MatchCall_MoveCursorDown())
         {
-            case 0:
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                return 7;
-            case 2:
-                PlaySE(SE_SELECT);
-                // fall through
-            default:
-                return LT_INC_AND_PAUSE;
+        case 0:
+            break;
+        case 1:
+            PlaySE(SE_SELECT);
+            return LT_SET_STATE(2);
+        case 2:
+            PlaySE(SE_SELECT);
+            // fall through
+        default:
+            return LT_INC_AND_PAUSE;
         }
         break;
     case 1:
         if (IsMonListLoopedTaskActive())
             return LT_PAUSE;
 
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 2:
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -425,34 +430,34 @@ u32 MatchCallListCursorDown(s32 taskState)
     return LT_FINISH;
 }
 
-u32 MatchCallListCursorUp(s32 taskState)
+static u32 MatchCallListCursorUp(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         switch (MatchCall_MoveCursorUp())
         {
-            case 0:
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                return 7;
-            case 2:
-                PlaySE(SE_SELECT);
-                // fall through
-            default:
-                return LT_INC_AND_PAUSE;
+        case 0:
+            break;
+        case 1:
+            PlaySE(SE_SELECT);
+            return LT_SET_STATE(2);
+        case 2:
+            PlaySE(SE_SELECT);
+            // fall through
+        default:
+            return LT_INC_AND_PAUSE;
         }
         break;
     case 1:
         if (IsMonListLoopedTaskActive())
             return LT_PAUSE;
 
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 2:
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -462,34 +467,34 @@ u32 MatchCallListCursorUp(s32 taskState)
     return LT_FINISH;
 }
 
-u32 MatchCallListPageDown(s32 taskState)
+static u32 MatchCallListPageDown(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         switch (MatchCall_PageDown())
         {
-            case 0:
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                return 7;
-            case 2:
-                PlaySE(SE_SELECT);
-                // fall through
-            default:
-                return LT_INC_AND_PAUSE;
+        case 0:
+            break;
+        case 1:
+            PlaySE(SE_SELECT);
+            return LT_SET_STATE(2);
+        case 2:
+            PlaySE(SE_SELECT);
+            // fall through
+        default:
+            return LT_INC_AND_PAUSE;
         }
         break;
     case 1:
         if (IsMonListLoopedTaskActive())
             return LT_PAUSE;
 
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 2:
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -499,34 +504,34 @@ u32 MatchCallListPageDown(s32 taskState)
     return LT_FINISH;
 }
 
-u32 MatchCallListPageUp(s32 taskState)
+static u32 MatchCallListPageUp(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         switch (MatchCall_PageUp())
         {
-            case 0:
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                return 7;
-            case 2:
-                PlaySE(SE_SELECT);
-                // fall through
-            default:
-                return LT_INC_AND_PAUSE;
+        case 0:
+            break;
+        case 1:
+            PlaySE(SE_SELECT);
+            return LT_SET_STATE(2);
+        case 2:
+            PlaySE(SE_SELECT);
+            // fall through
+        default:
+            return LT_INC_AND_PAUSE;
         }
         break;
     case 1:
         if (IsMonListLoopedTaskActive())
             return LT_PAUSE;
 
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 2:
-        PrintMatchCallLocation(state, 0);
+        PrintMatchCallLocation(gfx, 0);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -536,18 +541,18 @@ u32 MatchCallListPageUp(s32 taskState)
     return LT_FINISH;
 }
 
-u32 SelectMatchCallEntry(s32 taskState)
+static u32 SelectMatchCallEntry(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PrintMatchCallSelectionOptions(state);
+        PrintMatchCallSelectionOptions(gfx);
         PrintHelpBarText(HELPBAR_MC_CALL_MENU);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (sub_81CBFC4(state))
+        if (ShowOptionsCursor(gfx))
             return LT_PAUSE;
         break;
     }
@@ -555,30 +560,30 @@ u32 SelectMatchCallEntry(s32 taskState)
     return LT_FINISH;
 }
 
-u32 MoveMatchCallOptionsCursor(s32 taskState)
+static u32 MoveMatchCallOptionsCursor(s32 state)
 {
-    struct Pokenav4Struct *state;
+    struct Pokenav_MatchCallGfx *gfx;
     u16 cursorPos;
 
     PlaySE(SE_SELECT);
-    state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     cursorPos = GetMatchCallOptionCursorPos();
-    UpdateCursorGfxPos(state, cursorPos);
+    UpdateCursorGfxPos(gfx, cursorPos);
     return LT_FINISH;
 }
 
-u32 CancelMatchCallSelection(s32 taskState)
+static u32 CancelMatchCallSelection(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        UpdateWindowsReturnToTrainerList(state);
+        UpdateWindowsReturnToTrainerList(gfx);
         PrintHelpBarText(HELPBAR_MC_TRAINER_LIST);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsDma3ManagerBusyWithBgCopy1(state))
+        if (IsDma3ManagerBusyWithBgCopy1(gfx))
             return LT_PAUSE;
         break;
     }
@@ -586,31 +591,31 @@ u32 CancelMatchCallSelection(s32 taskState)
     return LT_FINISH;
 }
 
-u32 DoMatchCallMessage(s32 taskState)
+static u32 DoMatchCallMessage(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         ToggleMatchCallVerticalArrows(TRUE);
-        DrawMsgBoxForMatchCallMsg(state);
+        DrawMsgBoxForMatchCallMsg(gfx);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsDma3ManagerBusyWithBgCopy2(state))
+        if (IsDma3ManagerBusyWithBgCopy2(gfx))
             return LT_PAUSE;
 
-        PrintCallingDots(state);
+        PrintCallingDots(gfx);
         PlaySE(SE_POKENAV_CALL);
-        state->unkE = 0;
+        gfx->unkE = 0;
         return LT_INC_AND_PAUSE;
     case 2:
-        if (WaitForCallingDotsText(state))
+        if (WaitForCallingDotsText(gfx))
             return LT_PAUSE;
 
-        PrintMatchCallMessage(state);
+        PrintMatchCallMessage(gfx);
         return LT_INC_AND_PAUSE;
     case 3:
-        if (WaitForMatchCallMessageText(state))
+        if (WaitForMatchCallMessageText(gfx))
             return LT_PAUSE;
         break;
     }
@@ -618,25 +623,25 @@ u32 DoMatchCallMessage(s32 taskState)
     return LT_FINISH;
 }
 
-u32 DoTrainerCloseByMessage(s32 taskState)
+static u32 DoTrainerCloseByMessage(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        DrawMsgBoxForCloseByMsg(state);
+        DrawMsgBoxForCloseByMsg(gfx);
         ToggleMatchCallVerticalArrows(TRUE);
-        state->unkE = 1;
+        gfx->unkE = 1;
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsDma3ManagerBusyWithBgCopy2(state))
+        if (IsDma3ManagerBusyWithBgCopy2(gfx))
             return LT_PAUSE;
 
-        PrintTrainerIsCloseBy(state);
+        PrintTrainerIsCloseBy(gfx);
         return LT_INC_AND_PAUSE;
     case 2:
-        if (WaitForTrainerIsCloseByText(state))
+        if (WaitForTrainerIsCloseByText(gfx))
             return LT_PAUSE;
         break;
     }
@@ -644,31 +649,31 @@ u32 DoTrainerCloseByMessage(s32 taskState)
     return LT_FINISH;
 }
 
-u32 sub_81CB888(s32 taskState)
+static u32 CloseMatchCallMessage(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     u32 result = LT_INC_AND_PAUSE;
 
-    switch (taskState)
+    switch (state)
     {
     case 0:
-        if (!state->unkE)
+        if (!gfx->unkE)
             PlaySE(SE_POKENAV_HANG_UP);
 
         PlaySE(SE_SELECT);
         break;
     case 1:
-        DrawSpinningPokenavForCall(state);
+        EraseCallMessageBox(gfx);
         break;
     case 2:
-        if (WaitForSpinningPokenav(state))
+        if (WaitForCallMessageBoxErase(gfx))
             result = LT_PAUSE;
         break;
     case 3:
-        UpdateWindowsReturnToTrainerList(state);
+        UpdateWindowsReturnToTrainerList(gfx);
         break;
     case 4:
-        if (IsDma3ManagerBusyWithBgCopy1(state))
+        if (IsDma3ManagerBusyWithBgCopy1(gfx))
             result = LT_PAUSE;
 
         PrintHelpBarText(HELPBAR_MC_TRAINER_LIST);
@@ -680,7 +685,7 @@ u32 sub_81CB888(s32 taskState)
         }
         else
         {
-            if (state->unkF)
+            if (gfx->unkF)
             {
                 sub_81C8838();
                 result = LT_INC_AND_CONTINUE;
@@ -708,28 +713,28 @@ u32 sub_81CB888(s32 taskState)
     return result;
 }
 
-u32 ShowCheckPage(s32 taskState)
+static u32 ShowCheckPage(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
         sub_81C877C();
-        UpdateWindowsToShowCheckPage(state);
+        UpdateWindowsToShowCheckPage(gfx);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMatchCallListTaskActive() || IsDma3ManagerBusyWithBgCopy1(state))
+        if (IsMatchCallListTaskActive() || IsDma3ManagerBusyWithBgCopy1(gfx))
             return LT_PAUSE;
 
         PrintHelpBarText(HELPBAR_MC_CHECK_PAGE);
         return LT_INC_AND_PAUSE;
     case 2:
         PrintCheckPageInfo(0);
-        LoadCheckPageTrainerPic(state);
+        LoadCheckPageTrainerPic(gfx);
         return LT_INC_AND_PAUSE;
     case 3:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(state) || WaitForHelpBar())
+        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx) || WaitForHelpBar())
             return LT_PAUSE;
         break;
     }
@@ -737,12 +742,12 @@ u32 ShowCheckPage(s32 taskState)
     return LT_FINISH;
 }
 
-u32 ShowCheckPageDown(s32 taskState)
+static u32 ShowCheckPageDown(s32 state)
 {
     int topId;
     int delta;
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         topId = GetMatchCallListTopIndex();
@@ -750,25 +755,25 @@ u32 ShowCheckPageDown(s32 taskState)
         if (delta)
         {
             PlaySE(SE_SELECT);
-            state->unk16 = delta;
-            TrainerPicSlideOffscreen(state);
+            gfx->pageDelta = delta;
+            TrainerPicSlideOffscreen(gfx);
             return LT_INC_AND_PAUSE;
         }
         break;
     case 1:
-        if (WaitForTrainerPic(state))
+        if (WaitForTrainerPic(gfx))
             return LT_PAUSE;
 
-        PrintMatchCallLocation(state, state->unk16);
+        PrintMatchCallLocation(gfx, gfx->pageDelta);
         return LT_INC_AND_PAUSE;
     case 2:
-        PrintCheckPageInfo(state->unk16);
+        PrintCheckPageInfo(gfx->pageDelta);
         return LT_INC_AND_PAUSE;
     case 3:
-        LoadCheckPageTrainerPic(state);
+        LoadCheckPageTrainerPic(gfx);
         return LT_INC_AND_PAUSE;
     case 4:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(state))
+        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx))
             return LT_PAUSE;
         break;
     }
@@ -776,22 +781,22 @@ u32 ShowCheckPageDown(s32 taskState)
     return LT_FINISH;
 }
 
-u32 ExitCheckPage(s32 taskState)
+static u32 ExitCheckPage(s32 state)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        TrainerPicSlideOffscreen(state);
+        TrainerPicSlideOffscreen(gfx);
         sub_81C87F0();
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(state))
+        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx))
             return LT_PAUSE;
 
         PrintHelpBarText(HELPBAR_MC_TRAINER_LIST);
-        UpdateMatchCallInfoBox(state);
+        UpdateMatchCallInfoBox(gfx);
         return LT_INC_AND_PAUSE;
     case 2:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -802,12 +807,12 @@ u32 ExitCheckPage(s32 taskState)
     return LT_FINISH;
 }
 
-u32 ShowCheckPageUp(s32 taskState)
+static u32 ShowCheckPageUp(s32 state)
 {
     int topId;
     int delta;
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    switch (taskState)
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    switch (state)
     {
     case 0:
         topId = GetMatchCallListTopIndex();
@@ -815,25 +820,25 @@ u32 ShowCheckPageUp(s32 taskState)
         if (delta)
         {
             PlaySE(SE_SELECT);
-            state->unk16 = delta;
-            TrainerPicSlideOffscreen(state);
+            gfx->pageDelta = delta;
+            TrainerPicSlideOffscreen(gfx);
             return LT_INC_AND_PAUSE;
         }
         break;
     case 1:
-        if (WaitForTrainerPic(state))
+        if (WaitForTrainerPic(gfx))
             return LT_PAUSE;
 
-        PrintMatchCallLocation(state, state->unk16);
+        PrintMatchCallLocation(gfx, gfx->pageDelta);
         return LT_INC_AND_PAUSE;
     case 2:
-        PrintCheckPageInfo(state->unk16);
+        PrintCheckPageInfo(gfx->pageDelta);
         return LT_INC_AND_PAUSE;
     case 3:
-        LoadCheckPageTrainerPic(state);
+        LoadCheckPageTrainerPic(gfx);
         return LT_INC_AND_PAUSE;
     case 4:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(state))
+        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx))
             return LT_PAUSE;
         break;
     }
@@ -841,14 +846,14 @@ u32 ShowCheckPageUp(s32 taskState)
     return LT_FINISH;
 }
 
-u32 ExitMatchCall(s32 taskState)
+static u32 ExitMatchCall(s32 state)
 {
-    switch (taskState)
+    switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        sub_81CBC38(0);
-        PokenavFadeScreen(0);
+        SetPokeballIconsFlashing(FALSE);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         SlideMenuHeaderDown();
         return LT_INC_AND_PAUSE;
     case 1:
@@ -878,35 +883,49 @@ static void InitMatchCallPokenavListMenuTemplate(void)
     template.listFunc.unk10_2 = BufferMatchCallNameAndDesc;
     template.unk14 = TryDrawRematchPokeballIcon;
     sub_81C81D4(&sMatchCallBgTemplates[2], &template, 2);
-    CreateTask(sub_81CBC64, 7);
+    CreateTask(Task_FlashPokeballIcons, 7);
 }
 
 static void sub_81CBC1C(void)
 {
     sub_81C8234();
-    DestroyTask(FindTaskIdByFunc(sub_81CBC64));
+    DestroyTask(FindTaskIdByFunc(Task_FlashPokeballIcons));
 }
 
-static void sub_81CBC38(int arg0)
+#define tSinIdx data[0]
+#define tSinVal data[1]
+#define tActive data[15]
+
+static void SetPokeballIconsFlashing(bool32 active)
 {
-    u8 taskId = FindTaskIdByFunc(sub_81CBC64);
+    u8 taskId = FindTaskIdByFunc(Task_FlashPokeballIcons);
     if (taskId != TASK_NONE)
-        gTasks[taskId].data[15] = arg0;
+        gTasks[taskId].tActive = active;
 }
 
-static void sub_81CBC64(u8 taskId)
+static void Task_FlashPokeballIcons(u8 taskId)
 {
-    s16 *taskData = gTasks[taskId].data;
-    if (taskData[15])
+    s16 *data = gTasks[taskId].data;
+    if (tActive)
     {
-        taskData[0] += 4;
-        taskData[0] &= 0x7F;
-        taskData[1] = gSineTable[taskData[0]] >> 4;
-        PokenavCopyPalette(gUnknown_08622720, gUnknown_08622720 + 0x10, 0x10, 0x10, taskData[1], gPlttBufferUnfaded + 0x50);
+        tSinIdx += 4;
+        tSinIdx &= 0x7F;
+        tSinVal = gSineTable[tSinIdx] >> 4;
+        PokenavCopyPalette(sPokeball_Pal, &sPokeball_Pal[0x10], 0x10, 0x10, tSinVal, &gPlttBufferUnfaded[0x50]);
         if (!gPaletteFade.active)
-            CpuCopy32(gPlttBufferUnfaded + 0x50, gPlttBufferFaded + 0x50, 0x20);
+            CpuCopy32(&gPlttBufferUnfaded[0x50], &gPlttBufferFaded[0x50], 0x20);
     }
 }
+
+#undef tSinIdx
+#undef tSinVal
+#undef tActive
+
+enum {
+    POKEBALL_ICON_TOP = 0x5000,
+    POKEBALL_ICON_BOTTOM,
+    POKEBALL_ICON_EMPTY,
+};
 
 static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 arg2)
 {
@@ -915,13 +934,13 @@ static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 arg2)
     tilemap += arg2 * 0x40 + 0x1D;
     if (ShouldDrawRematchPokeballIcon(rematchId))
     {
-        tilemap[0] = 0x5000;
-        tilemap[0x20] = 0x5001;
+        tilemap[0] = POKEBALL_ICON_TOP;
+        tilemap[0x20] = POKEBALL_ICON_BOTTOM;
     }
     else
     {
-        tilemap[0] = 0x5002;
-        tilemap[0x20] = 0x5002;
+        tilemap[0] = POKEBALL_ICON_EMPTY;
+        tilemap[0x20] = POKEBALL_ICON_EMPTY;
     }
 }
 
@@ -930,29 +949,29 @@ void ClearRematchPokeballIcon(u16 windowId, u32 arg0)
     u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
     u16 *tilemap = GetBgTilemapBuffer(bg);
     tilemap += arg0 * 0x40 + 0x1D;
-    tilemap[0] = 0x5002;
-    tilemap[0x20] = 0x5002;
+    tilemap[0] = POKEBALL_ICON_EMPTY;
+    tilemap[0x20] = POKEBALL_ICON_EMPTY;
 }
 
-static void DrawMatchCallLeftColumnWindows(struct Pokenav4Struct *state)
+static void DrawMatchCallLeftColumnWindows(struct Pokenav_MatchCallGfx *gfx)
 {
-    state->locWindowId = AddWindow(&sMatchCallLocationWindowTemplate);
-    state->infoBoxWindowId = AddWindow(&sMatchCallInfoBoxWindowTemplate);
-    FillWindowPixelBuffer(state->locWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(state->locWindowId);
-    FillWindowPixelBuffer(state->infoBoxWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(state->infoBoxWindowId);
-    CopyWindowToVram(state->locWindowId, COPYWIN_MAP);
+    gfx->locWindowId = AddWindow(&sMatchCallLocationWindowTemplate);
+    gfx->infoBoxWindowId = AddWindow(&sMatchCallInfoBoxWindowTemplate);
+    FillWindowPixelBuffer(gfx->locWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(gfx->locWindowId);
+    FillWindowPixelBuffer(gfx->infoBoxWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(gfx->infoBoxWindowId);
+    CopyWindowToVram(gfx->locWindowId, COPYWIN_MAP);
 }
 
-static void UpdateMatchCallInfoBox(struct Pokenav4Struct *state)
+static void UpdateMatchCallInfoBox(struct Pokenav_MatchCallGfx *gfx)
 {
-    FillWindowPixelBuffer(state->infoBoxWindowId, PIXEL_FILL(1));
-    PrintNumberRegisteredLabel(state->infoBoxWindowId);
-    PrintNumberRegistered(state->infoBoxWindowId);
-    PrintNumberOfBattlesLabel(state->infoBoxWindowId);
-    PrintNumberOfBattles(state->infoBoxWindowId);
-    CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);
+    FillWindowPixelBuffer(gfx->infoBoxWindowId, PIXEL_FILL(1));
+    PrintNumberRegisteredLabel(gfx->infoBoxWindowId);
+    PrintNumberRegistered(gfx->infoBoxWindowId);
+    PrintNumberOfBattlesLabel(gfx->infoBoxWindowId);
+    PrintNumberOfBattles(gfx->infoBoxWindowId);
+    CopyWindowToVram(gfx->infoBoxWindowId, COPYWIN_GFX);
 }
 
 static void PrintNumberRegisteredLabel(u16 windowId)
@@ -996,11 +1015,11 @@ static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
     AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
+static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
 {
     u8 mapName[32];
     int x;
-    int index = GetSelectedPokenavListIndex() + arg1;
+    int index = GetSelectedPokenavListIndex() + delta;
     int mapSec = GetMatchCallMapSec(index);
     if (mapSec != MAPSEC_NONE)
         GetMapName(mapName, mapSec, 0);
@@ -1008,207 +1027,209 @@ static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
         StringCopy(mapName, gText_Unknown);
 
     x = GetStringCenterAlignXOffset(FONT_NARROW, mapName, 88);
-    FillWindowPixelBuffer(state->locWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(state->locWindowId, FONT_NARROW, mapName, x, 1, 0, NULL);
+    FillWindowPixelBuffer(gfx->locWindowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(gfx->locWindowId, FONT_NARROW, mapName, x, 1, 0, NULL);
 }
 
-static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *state)
+static void PrintMatchCallSelectionOptions(struct Pokenav_MatchCallGfx *gfx)
 {
     u32 i;
 
-    FillWindowPixelBuffer(state->infoBoxWindowId, PIXEL_FILL(1));
+    FillWindowPixelBuffer(gfx->infoBoxWindowId, PIXEL_FILL(1));
     for (i = 0; i < MATCH_CALL_OPTION_COUNT; i++)
     {
         int optionText = GetMatchCallOptionId(i);
         if (optionText == MATCH_CALL_OPTION_COUNT)
             break;
 
-        AddTextPrinterParameterized(state->infoBoxWindowId, FONT_NARROW, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(gfx->infoBoxWindowId, FONT_NARROW, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SKIP_DRAW, NULL);
     }
 
-    CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);
+    CopyWindowToVram(gfx->infoBoxWindowId, COPYWIN_GFX);
 }
 
-static bool32 sub_81CBFC4(struct Pokenav4Struct *state)
+static bool32 ShowOptionsCursor(struct Pokenav_MatchCallGfx *gfx)
 {
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        sub_81CC2F0(state, GetMatchCallOptionCursorPos());
+        CreateOptionsCursorSprite(gfx, GetMatchCallOptionCursorPos());
         return FALSE;
     }
 
     return TRUE;
 }
 
-static void UpdateWindowsReturnToTrainerList(struct Pokenav4Struct *state)
+static void UpdateWindowsReturnToTrainerList(struct Pokenav_MatchCallGfx *gfx)
 {
-    CloseMatchCallSelectOptionsWindow(state);
-    UpdateMatchCallInfoBox(state);
+    CloseMatchCallSelectOptionsWindow(gfx);
+    UpdateMatchCallInfoBox(gfx);
 }
 
-static bool32 IsDma3ManagerBusyWithBgCopy1(struct Pokenav4Struct *state)
+static bool32 IsDma3ManagerBusyWithBgCopy1(struct Pokenav_MatchCallGfx *gfx)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-static void UpdateWindowsToShowCheckPage(struct Pokenav4Struct *state)
+static void UpdateWindowsToShowCheckPage(struct Pokenav_MatchCallGfx *gfx)
 {
-    CloseMatchCallSelectOptionsWindow(state);
-    FillWindowPixelBuffer(state->infoBoxWindowId, PIXEL_FILL(1));
-    CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);
+    CloseMatchCallSelectOptionsWindow(gfx);
+    FillWindowPixelBuffer(gfx->infoBoxWindowId, PIXEL_FILL(1));
+    CopyWindowToVram(gfx->infoBoxWindowId, COPYWIN_GFX);
 }
 
-static void sub_81CC034(struct Pokenav4Struct *state)
+static void LoadCallWindowAndFade(struct Pokenav_MatchCallGfx *gfx)
 {
-    state->msgBoxWindowId = AddWindow(&sCallMsgBoxWindowTemplate);
-    LoadMatchCallWindowGfx(state->msgBoxWindowId, 1, 4);
+    gfx->msgBoxWindowId = AddWindow(&sCallMsgBoxWindowTemplate);
+    LoadMatchCallWindowGfx(gfx->msgBoxWindowId, 1, 4);
     FadeToBlackExceptPrimary();
 }
 
-static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *state)
+static void DrawMsgBoxForMatchCallMsg(struct Pokenav_MatchCallGfx *gfx)
 {
     struct Sprite *sprite;
-    LoadMatchCallWindowGfx(state->msgBoxWindowId, 1, 4);
-    DrawMatchCallTextBoxBorder(state->msgBoxWindowId, 1, 4);
-    FillWindowPixelBuffer(state->msgBoxWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(state->msgBoxWindowId);
-    CopyWindowToVram(state->msgBoxWindowId, COPYWIN_FULL);
-    sprite = PauseSpinningPokenavSprite();
+    LoadMatchCallWindowGfx(gfx->msgBoxWindowId, 1, 4);
+    DrawMatchCallTextBoxBorder(gfx->msgBoxWindowId, 1, 4);
+    FillWindowPixelBuffer(gfx->msgBoxWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(gfx->msgBoxWindowId);
+    CopyWindowToVram(gfx->msgBoxWindowId, COPYWIN_FULL);
+    sprite = GetSpinningPokenavSprite();
     sprite->x = 24;
     sprite->y = 112;
     sprite->y2 = 0;
 }
 
-static void DrawMsgBoxForCloseByMsg(struct Pokenav4Struct *state)
+static void DrawMsgBoxForCloseByMsg(struct Pokenav_MatchCallGfx *gfx)
 {
-    LoadUserWindowBorderGfx(state->msgBoxWindowId, 1, 0x40);
-    DrawTextBorderOuter(state->msgBoxWindowId, 1, 4);
-    FillWindowPixelBuffer(state->msgBoxWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(state->msgBoxWindowId);
-    CopyWindowToVram(state->msgBoxWindowId, COPYWIN_FULL);
+    LoadUserWindowBorderGfx(gfx->msgBoxWindowId, 1, 0x40);
+    DrawTextBorderOuter(gfx->msgBoxWindowId, 1, 4);
+    FillWindowPixelBuffer(gfx->msgBoxWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(gfx->msgBoxWindowId);
+    CopyWindowToVram(gfx->msgBoxWindowId, COPYWIN_FULL);
 }
 
-static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav4Struct *state)
+static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav_MatchCallGfx *gfx)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-static void PrintCallingDots(struct Pokenav4Struct *state)
+static void PrintCallingDots(struct Pokenav_MatchCallGfx *gfx)
 {
-    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, sText_CallingDots, 32, 1, 1, NULL);
+    AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, sText_CallingDots, 32, 1, 1, NULL);
 }
 
-static bool32 WaitForCallingDotsText(struct Pokenav4Struct *state)
-{
-    RunTextPrinters();
-    return IsTextPrinterActive(state->msgBoxWindowId);
-}
-
-static void PrintTrainerIsCloseBy(struct Pokenav4Struct *state)
-{
-    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, gText_TrainerCloseBy, 0, 1, 1, NULL);
-}
-
-static bool32 WaitForTrainerIsCloseByText(struct Pokenav4Struct *state)
+static bool32 WaitForCallingDotsText(struct Pokenav_MatchCallGfx *gfx)
 {
     RunTextPrinters();
-    return IsTextPrinterActive(state->msgBoxWindowId);
+    return IsTextPrinterActive(gfx->msgBoxWindowId);
 }
 
-static void PrintMatchCallMessage(struct Pokenav4Struct *state)
+static void PrintTrainerIsCloseBy(struct Pokenav_MatchCallGfx *gfx)
+{
+    AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, gText_TrainerCloseBy, 0, 1, 1, NULL);
+}
+
+static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *gfx)
+{
+    RunTextPrinters();
+    return IsTextPrinterActive(gfx->msgBoxWindowId);
+}
+
+static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *gfx)
 {
     int index = GetSelectedPokenavListIndex();
-    const u8 *str = GetMatchCallMessageText(index, &state->unkF);
+    const u8 *str = GetMatchCallMessageText(index, &gfx->unkF);
     u8 speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
+    AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
 }
 
-static bool32 WaitForMatchCallMessageText(struct Pokenav4Struct *state)
+static bool32 WaitForMatchCallMessageText(struct Pokenav_MatchCallGfx *gfx)
 {
     if (JOY_HELD(A_BUTTON))
-        gTextFlags.canABSpeedUpPrint = 1;
+        gTextFlags.canABSpeedUpPrint = TRUE;
     else
-        gTextFlags.canABSpeedUpPrint = 0;
+        gTextFlags.canABSpeedUpPrint = FALSE;
 
     RunTextPrinters();
-    return IsTextPrinterActive(state->msgBoxWindowId);
+    return IsTextPrinterActive(gfx->msgBoxWindowId);
 }
 
-static void DrawSpinningPokenavForCall(struct Pokenav4Struct *state)
+static void EraseCallMessageBox(struct Pokenav_MatchCallGfx *gfx)
 {
-    ResumeSpinningPokenavSprite();
+    HideSpinningPokenavSprite();
     FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
     CopyBgTilemapBufferToVram(1);
 }
 
-static bool32 WaitForSpinningPokenav(struct Pokenav4Struct *state)
+static bool32 WaitForCallMessageBoxErase(struct Pokenav_MatchCallGfx *gfx)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-static void sub_81CC214(void)
+static void AllocMatchCallSprites(void)
 {
     int i;
     u8 paletteNum;
     struct SpriteSheet spriteSheet;
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_08622810); i++)
-        LoadCompressedSpriteSheet(&gUnknown_08622810[i]);
+    // Load options cursor gfx
+    for (i = 0; i < ARRAY_COUNT(sOptionsCursorSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sOptionsCursorSpriteSheets[i]);
+    Pokenav_AllocAndLoadPalettes(sOptionsCursorSpritePalettes);
+    gfx->optionsCursorSprite = NULL;
 
-    Pokenav_AllocAndLoadPalettes(gUnknown_08622818);
-    state->optionsCursorSprite = NULL;
-    spriteSheet.data = state->unk1828;
-    spriteSheet.size = 0x800;
-    spriteSheet.tag = 8;
-    state->unk1824 = (u8 *)OBJ_VRAM0 + LoadSpriteSheet(&spriteSheet) * 0x20;
-    paletteNum = AllocSpritePalette(13);
-    state->unk1A = 0x100 + paletteNum * 0x10;
-    state->trainerPicSprite = CreateTrainerPicSprite();
-    state->trainerPicSprite->invisible = TRUE;
+    // Load trainer pic gfx
+    spriteSheet.data = gfx->trainerPicGfx;
+    spriteSheet.size = sizeof(gfx->trainerPicGfx);
+    spriteSheet.tag = GFXTAG_TRAINER_PIC;
+    gfx->trainerPicGfxPtr = (u8 *)OBJ_VRAM0 + LoadSpriteSheet(&spriteSheet) * 0x20;
+    paletteNum = AllocSpritePalette(PALTAG_TRAINER_PIC);
+    gfx->trainerPicPalOffset = 0x100 + paletteNum * 0x10;
+    gfx->trainerPicSprite = CreateTrainerPicSprite();
+    gfx->trainerPicSprite->invisible = TRUE;
 }
 
-static void RemoveMatchCallSprites(void)
+static void FreeMatchCallSprites(void)
 {
-    struct Pokenav4Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
-    if (state->optionsCursorSprite)
-        DestroySprite(state->optionsCursorSprite);
-    if (state->trainerPicSprite)
-        DestroySprite(state->trainerPicSprite);
+    struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
+    if (gfx->optionsCursorSprite)
+        DestroySprite(gfx->optionsCursorSprite);
+    if (gfx->trainerPicSprite)
+        DestroySprite(gfx->trainerPicSprite);
 
-    FreeSpriteTilesByTag(8);
-    FreeSpriteTilesByTag(7);
-    FreeSpritePaletteByTag(12);
-    FreeSpritePaletteByTag(13);
+    FreeSpriteTilesByTag(GFXTAG_TRAINER_PIC);
+    FreeSpriteTilesByTag(GFXTAG_CURSOR);
+    FreeSpritePaletteByTag(PALTAG_CURSOR);
+    FreeSpritePaletteByTag(PALTAG_TRAINER_PIC);
 }
 
-static void sub_81CC2F0(struct Pokenav4Struct *state, int top)
+static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *gfx, int top)
 {
-    if (!state->optionsCursorSprite)
+    if (!gfx->optionsCursorSprite)
     {
         u8 spriteId = CreateSprite(&sOptionsCursorSpriteTemplate, 4, 80, 5);
-        state->optionsCursorSprite = &gSprites[spriteId];
-        UpdateCursorGfxPos(state, top);
+        gfx->optionsCursorSprite = &gSprites[spriteId];
+        UpdateCursorGfxPos(gfx, top);
     }
 }
 
-static void CloseMatchCallSelectOptionsWindow(struct Pokenav4Struct *state)
+static void CloseMatchCallSelectOptionsWindow(struct Pokenav_MatchCallGfx *gfx)
 {
-    DestroySprite(state->optionsCursorSprite);
-    state->optionsCursorSprite = NULL;
+    DestroySprite(gfx->optionsCursorSprite);
+    gfx->optionsCursorSprite = NULL;
 }
 
-static void UpdateCursorGfxPos(struct Pokenav4Struct *state, int top)
+static void UpdateCursorGfxPos(struct Pokenav_MatchCallGfx *gfx, int top)
 {
-    state->optionsCursorSprite->y2 = top * 16;
+    gfx->optionsCursorSprite->y2 = top * 16;
 }
 
-void SpriteCB_OptionsCursor(struct Sprite *sprite)
+static void SpriteCB_OptionsCursor(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 3)
     {
         sprite->data[0] = 0;
-        sprite->x2 = (sprite->x2 + 1) & 0x7;
+        sprite->x2 = (sprite->x2 + 1) & 7;
     }
 }
 
@@ -1218,30 +1239,30 @@ static struct Sprite *CreateTrainerPicSprite(void)
     return &gSprites[spriteId];
 }
 
-static void LoadCheckPageTrainerPic(struct Pokenav4Struct *state)
+static void LoadCheckPageTrainerPic(struct Pokenav_MatchCallGfx *gfx)
 {
     u16 cursor;
     int trainerPic = GetMatchCallTrainerPic(GetSelectedPokenavListIndex());
     if (trainerPic >= 0)
     {
-        DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], state->unk1828, SPECIES_NONE);
-        LZ77UnCompWram(gTrainerFrontPicPaletteTable[trainerPic].data, state->unk2028);
-        cursor = RequestDma3Copy(state->unk1828, state->unk1824, 0x800, 1);
-        LoadPalette(state->unk2028, state->unk1A, 0x20);
-        state->trainerPicSprite->data[0] = 0;
-        state->trainerPicSprite->data[7] = cursor;
-        state->trainerPicSprite->callback = SpriteCB_TrainerPicSlideOnscreen;
+        DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], gfx->trainerPicGfx, SPECIES_NONE);
+        LZ77UnCompWram(gTrainerFrontPicPaletteTable[trainerPic].data, gfx->trainerPicPal);
+        cursor = RequestDma3Copy(gfx->trainerPicGfx, gfx->trainerPicGfxPtr, sizeof(gfx->trainerPicGfx), 1);
+        LoadPalette(gfx->trainerPicPal, gfx->trainerPicPalOffset, sizeof(gfx->trainerPicPal));
+        gfx->trainerPicSprite->data[0] = 0;
+        gfx->trainerPicSprite->data[7] = cursor;
+        gfx->trainerPicSprite->callback = SpriteCB_TrainerPicSlideOnscreen;
     }
 }
 
-static void TrainerPicSlideOffscreen(struct Pokenav4Struct *state)
+static void TrainerPicSlideOffscreen(struct Pokenav_MatchCallGfx *gfx)
 {
-    state->trainerPicSprite->callback = SpriteCB_TrainerPicSlideOffscreen;
+    gfx->trainerPicSprite->callback = SpriteCB_TrainerPicSlideOffscreen;
 }
 
-static bool32 WaitForTrainerPic(struct Pokenav4Struct *state)
+static bool32 WaitForTrainerPic(struct Pokenav_MatchCallGfx *gfx)
 {
-    return state->trainerPicSprite->callback != SpriteCallbackDummy;
+    return gfx->trainerPicSprite->callback != SpriteCallbackDummy;
 }
 
 static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *sprite)
