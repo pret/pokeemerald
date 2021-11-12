@@ -10034,7 +10034,6 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                 statValue = -1;
             else if (gBattleMons[gActiveBattler].statStages[statId] == 2 && statValue < -2)
                 statValue = -2;
-            
             gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
             index = 1;
             if (statValue == -2)
