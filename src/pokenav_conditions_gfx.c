@@ -139,7 +139,7 @@ struct Pokenav_ConditionMenuGfx
     u8 filler2[0xFA3];
 };
 
-extern s8 GetConditionGraphMenuCurrentLoadIndex(void); // This function's declaration here is s8 vs. u8 in pokenav_conditions_1.c
+extern s8 GetConditionGraphMenuCurrentLoadIndex(void); // This function's declaration here is s8 vs. u8 in pokenav_conditions.c
 
 static u32 LoopedTask_OpenConditionGraphMenu(s32);
 static u32 GetConditionGraphMenuLoopedTaskActive(void);

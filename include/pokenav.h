@@ -436,7 +436,7 @@ bool32 IsRegionMapLoopedTaskActive(void);
 void FreeRegionMapSubstruct1(void);
 void FreeRegionMapSubstruct2(void);
 
-// pokenav_conditions_1.c
+// pokenav_conditions.c
 u32 PokenavCallback_Init_ConditionGraph_Party(void);
 u32 PokenavCallback_Init_ConditionGraph_Search(void);
 u32 GetConditionGraphMenuCallback(void);
@@ -455,14 +455,14 @@ u16 GetConditionMonDataBuffer(void);
 void *GetConditionMonPicGfx(u8 id);
 void *GetConditionMonPal(u8 id);
 
-// pokenav_conditions_2.c
+// pokenav_conditions_gfx.c
 bool32 OpenConditionGraphMenu(void);
 void CreateConditionGraphMenuLoopedTask(s32);
 u32 IsConditionGraphMenuLoopedTaskActive(void);
 void FreeConditionGraphMenuSubstruct2(void);
 u8 GetMonMarkingsData(void);
 
-// pokenav_conditions_3.c
+// pokenav_conditions_search_results.c
 u32 PokenavCallback_Init_ConditionSearch(void);
 u32 PokenavCallback_Init_ReturnToMonSearchList(void);
 u32 GetConditionSearchResultsCallback(void);
