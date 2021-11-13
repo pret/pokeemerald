@@ -733,9 +733,11 @@ static const u8 sText_CantEscapeDueToUsedMove[] = _("{B_ATK_NAME_WITH_PREFIX} ca
 static const u8 sText_PkmnBecameWeakerToFire[] = _("{B_DEF_NAME_WITH_PREFIX} became\nweaker to fire!");
 static const u8 sText_PkmnAboutToBeAttackedByItsItem[] = _("{B_DEF_NAME_WITH_PREFIX} is about\nto be attacked by its {B_BUFF1}!");
 static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PREFIX} can no longer escape\nbecause of {B_CURRENT_MOVE}!");
+static const u8 sText_TargetGotOverInfatuation[] =_("{B_DEF_NAME_WITH_PREFIX} got over\nits infatuation!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_TARGETGOTOVERINFATUATION - 12] = sText_TargetGotOverInfatuation,
     [STRINGID_BATTLERTYPECHANGEDTO - 12] = sText_BattlerTypeChangedTo,
     [STRINGID_PASTELVEILENTERS - 12] = sText_PastelVeilEnters,
     [STRINGID_PASTELVEILPROTECTED -12] = sText_PastelVeilProtected,

@@ -607,8 +607,9 @@
 #define STRINGID_PKMNBECAMEWEAKERTOFIRE               604
 #define STRINGID_ABOUTTOUSEPOLTERGEIST                605
 #define STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE       606
+#define STRINGID_TARGETGOTOVERINFATUATION             607
 
-#define BATTLESTRINGS_COUNT                           607
+#define BATTLESTRINGS_COUNT                           608
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

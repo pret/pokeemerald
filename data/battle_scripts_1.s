@@ -235,7 +235,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDragonDance             @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage              @ EFFECT_CAMOUFLAGE
 	.4byte BattleScript_EffectHit                     @ EFFECT_PLEDGE
-	.4byte BattleScript_EffectHit                     @ EFFECT_FLING
+	.4byte BattleScript_EffectFling                   @ EFFECT_FLING
 	.4byte BattleScript_EffectNaturalGift             @ EFFECT_NATURAL_GIFT
 	.4byte BattleScript_EffectWakeUpSlap              @ EFFECT_WAKE_UP_SLAP
 	.4byte BattleScript_EffectHit                     @ EFFECT_WRING_OUT
@@ -403,6 +403,78 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectOctolock                @ EFFECT_OCTOLOCK
 	.4byte BattleScript_EffectClangorousSoul          @ EFFECT_CLANGOROUS_SOUL
 	.4byte BattleScript_EffectHit                     @ EFFECT_BOLT_BEAK
+
+BattleScript_EffectFling:
+	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailed
+	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifability BS_ATTACKER, ABILITY_UNNERVE, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifflingfails BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	pause B_WAIT_TIME_SHORT
+	setlastuseditem BS_ATTACKER
+	printstring STRINGID_PKMNFLUNG
+	waitmessage B_WAIT_TIME_SHORT
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_MED
+	resultmessage
+	waitmessage B_WAIT_TIME_MED
+.if B_FLING_EMBARGO_ITEM <= GEN_4
+	jumpifstatus3 BS_TARGET, STATUS3_EMBARGO, BattleScript_FlingEnd
+.endif
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_FLAME_ORB, BattleScript_FlingFlameOrb
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_FLINCH, BattleScript_FlingFlinch
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_LIGHT_BALL, BattleScript_FlingLightBall
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_MENTAL_HERB, BattleScript_FlingMentalHerb
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_POISON_POWER, BattleScript_FlingPoisonBarb
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_TOXIC_ORB, BattleScript_FlingToxicOrb
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_RESTORE_STATS, BattleScript_FlingWhiteHerb
+BattleScript_FlingFlameOrb:
+	setmoveeffect MOVE_EFFECT_BURN
+	seteffectprimary
+	goto BattleScript_FlingEnd
+BattleScript_FlingFlinch:
+	setmoveeffect MOVE_EFFECT_FLINCH
+	seteffectprimary
+	goto BattleScript_FlingEnd
+BattleScript_FlingLightBall:
+	setmoveeffect MOVE_EFFECT_PARALYSIS
+	seteffectprimary
+	goto BattleScript_FlingEnd
+BattleScript_FlingMentalHerb:
+	curecertainstatuses BS_TARGET
+	goto BattleScript_FlingEnd
+BattleScript_FlingPoisonBarb:
+	setmoveeffect MOVE_EFFECT_POISON
+	seteffectprimary
+	goto BattleScript_FlingEnd
+BattleScript_FlingToxicOrb:
+	setmoveeffect MOVE_EFFECT_TOXIC
+	seteffectprimary
+	goto BattleScript_FlingEnd
+BattleScript_FlingWhiteHerb:
+	tryresetnegativestatstages BS_TARGET
+	swapattackerwithtarget
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage B_WAIT_TIME_MED
+	swapattackerwithtarget
+	goto BattleScript_FlingEnd
+BattleScript_FlingEnd:
+	tryfaintmon BS_TARGET, FALSE, NULL
+	removeitem BS_ATTACKER
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck

@@ -207,6 +207,10 @@
 #define VARIOUS_CHECK_POLTERGEIST               134
 #define VARIOUS_SET_OCTOLOCK                    135
 #define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
+#define VARIOUS_JUMP_IF_FLING_FAILS             137
+#define VARIOUS_JUMP_IF_HOLD_EFFECT             138
+#define VARIOUS_CURE_CERTAIN_STATUSES           139
+#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES  140
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

@@ -9287,6 +9287,106 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
+    case VARIOUS_JUMP_IF_FLING_FAILS:
+    #ifdef ITEM_EXPANSION
+        if (!ItemId_GetFlingPower(gBattleMons[gActiveBattler].item))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else if (!CanBattlerGetOrLoseItem(gActiveBattler, gBattleMons[gActiveBattler].item))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+    #else
+        if (!CanBattlerGetOrLoseItem(gActiveBattler, gBattleMons[gActiveBattler].item))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+    #endif
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+    case VARIOUS_JUMP_IF_HOLD_EFFECT:
+        if (GetBattlerHoldEffect(gActiveBattler, TRUE) == gBattlescriptCurrInstr[3])
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
+        else
+            gBattlescriptCurrInstr += 8;
+        return;
+    case VARIOUS_CURE_CERTAIN_STATUSES:
+        if (gBattleMons[gActiveBattler].status2 & STATUS2_INFATUATION)
+        {
+            gBattleMons[gActiveBattler].status2 &= ~(STATUS2_INFATUATION);
+            gBattleMons[gActiveBattler].status2 = 0;
+            BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status2);
+            MarkBattlerForControllerExec(gActiveBattler);
+            PrepareStringBattle(STRINGID_TARGETGOTOVERINFATUATION, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        else if (gBattleMons[gActiveBattler].status2 & STATUS2_TORMENT)
+        {
+            gBattleMons[gActiveBattler].status2 &= ~(STATUS2_TORMENT);
+            gBattleMons[gActiveBattler].status2 = 0;
+            BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status2);
+            MarkBattlerForControllerExec(gActiveBattler);
+            // Swap gBattlerTarget and gBattlerAttacker so STRINGID_BUFFERENDS works correctly
+            gActiveBattler = gBattlerAttacker;
+            gBattlerAttacker = gBattlerTarget;
+            gBattlerTarget = gActiveBattler;
+            gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TORMENT);
+            PrepareStringBattle(STRINGID_BUFFERENDS, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+            // Swap gBattlerTarget and gBattlerAttacker back
+            if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
+                gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
+        }
+        else if (gDisableStructs[gActiveBattler].tauntTimer != 0)
+        {
+            gDisableStructs[gActiveBattler].tauntTimer = 0;
+            // Swap gBattlerTarget and gBattlerAttacker so STRINGID_BUFFERENDS works correctly
+            gActiveBattler = gBattlerAttacker;
+            gBattlerAttacker = gBattlerTarget;
+            gBattlerTarget = gActiveBattler;
+            gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
+            PrepareStringBattle(STRINGID_BUFFERENDS, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+            // Swap gBattlerTarget and gBattlerAttacker back
+            if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
+                gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
+        }
+        else if (gDisableStructs[gActiveBattler].encoreTimer)
+        {
+            gDisableStructs[gActiveBattler].encoredMove = 0;
+            gDisableStructs[gActiveBattler].encoreTimer = 0;
+            // Swap gBattlerTarget and gBattlerAttacker so STRINGID_BUFFERENDS works correctly
+            gActiveBattler = gBattlerAttacker;
+            gBattlerAttacker = gBattlerTarget;
+            gBattlerTarget = gActiveBattler;
+            gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
+            PrepareStringBattle(STRINGID_PKMNENCOREENDED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+            // Swap gBattlerTarget and gBattlerAttacker back
+            if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
+                gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
+        }
+        else if (gDisableStructs[gActiveBattler].disableTimer)
+        {
+            gDisableStructs[gActiveBattler].disabledMove = 0;
+            // Swap gBattlerTarget and gBattlerAttacker so STRINGID_BUFFERENDS works correctly
+            gActiveBattler = gBattlerAttacker;
+            gBattlerAttacker = gBattlerTarget;
+            gBattlerTarget = gActiveBattler;
+            gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
+            PrepareStringBattle(STRINGID_PKMNMOVEDISABLEDNOMORE, gBattlerTarget);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+            // Swap gBattlerTarget and gBattlerAttacker back
+            if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
+                gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
+        }
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 7);
+        return;
+    case VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES:
+        gActiveBattler = gBattlerTarget;
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+            if (gBattleMons[gActiveBattler].statStages[i] < DEFAULT_STAT_STAGE)
+                gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
+        gBattlescriptCurrInstr += 3;
+        return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;

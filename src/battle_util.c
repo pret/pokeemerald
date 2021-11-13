@@ -7693,7 +7693,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         // todo
         break;
     case EFFECT_FLING:
-        // todo: program Fling + Unburden interaction
+    #ifdef ITEM_EXPANSION
+        basePower = ItemId_GetFlingPower(gBattleMons[battlerAtk].item);
+    #endif
         break;
     case EFFECT_ERUPTION:
         basePower = gBattleMons[battlerAtk].hp * basePower / gBattleMons[battlerAtk].maxHP;
