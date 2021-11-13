@@ -405,15 +405,18 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_BOLT_BEAK
 
 BattleScript_EffectFling:
-	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailed
+	jumpifnoflingpower BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifstatus3 BS_ATTACKER, STATUS3_EMBARGO, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailedAtkStringPpReduce
+.if B_KLUTZ_FLING_INTERACTION >= GEN_5
 	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailedAtkStringPpReduce
-	jumpifability BS_ATTACKER, ABILITY_UNNERVE, BattleScript_ButItFailedAtkStringPpReduce
-	jumpifflingfails BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
+.endif
+	setlastuseditem BS_ATTACKER
+	removeitem BS_ATTACKER
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	pause B_WAIT_TIME_SHORT
-	setlastuseditem BS_ATTACKER
 	printstring STRINGID_PKMNFLUNG
 	waitmessage B_WAIT_TIME_SHORT
 	ppreduce
@@ -431,16 +434,27 @@ BattleScript_EffectFling:
 	waitmessage B_WAIT_TIME_MED
 	resultmessage
 	waitmessage B_WAIT_TIME_MED
-.if B_FLING_EMBARGO_ITEM <= GEN_4
-	jumpifstatus3 BS_TARGET, STATUS3_EMBARGO, BattleScript_FlingEnd
-.endif
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_FLAME_ORB, BattleScript_FlingFlameOrb
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_FLINCH, BattleScript_FlingFlinch
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_LIGHT_BALL, BattleScript_FlingLightBall
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_MENTAL_HERB, BattleScript_FlingMentalHerb
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_POISON_POWER, BattleScript_FlingPoisonBarb
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_TOXIC_ORB, BattleScript_FlingToxicOrb
-	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_RESTORE_STATS, BattleScript_FlingWhiteHerb
+	jumpiflastuseditemberry BattleScript_EffectFlingConsumeBerry
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_FLAME_ORB, BattleScript_FlingFlameOrb
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_FLINCH, BattleScript_FlingFlinch
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_LIGHT_BALL, BattleScript_FlingLightBall
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_MENTAL_HERB, BattleScript_FlingMentalHerb
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_POISON_POWER, BattleScript_FlingPoisonBarb
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_TOXIC_ORB, BattleScript_FlingToxicOrb
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_RESTORE_STATS, BattleScript_FlingWhiteHerb
+BattleScript_EffectFlingConsumeBerry:
+	savebattleritem BS_TARGET
+	battleritemtolastuseditem BS_TARGET
+	setbyte sBERRY_OVERRIDE, TRUE @ override the requirements for eating berries
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	consumeberry BS_TARGET
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	setbyte sBERRY_OVERRIDE, FALSE
+	restorebattleritem BS_TARGET
+BattleScript_FlingEnd:
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
+
 BattleScript_FlingFlameOrb:
 	setmoveeffect MOVE_EFFECT_BURN
 	seteffectprimary
@@ -455,6 +469,13 @@ BattleScript_FlingLightBall:
 	goto BattleScript_FlingEnd
 BattleScript_FlingMentalHerb:
 	curecertainstatuses BS_TARGET
+	savetarget
+	copybyte gBattlerAttacker, gBattlerTarget
+	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printfromtable gMentalHerbCureStringIds
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_ATTACKER
+	restoretarget
 	goto BattleScript_FlingEnd
 BattleScript_FlingPoisonBarb:
 	setmoveeffect MOVE_EFFECT_POISON
@@ -471,10 +492,6 @@ BattleScript_FlingWhiteHerb:
 	waitmessage B_WAIT_TIME_MED
 	swapattackerwithtarget
 	goto BattleScript_FlingEnd
-BattleScript_FlingEnd:
-	tryfaintmon BS_TARGET, FALSE, NULL
-	removeitem BS_ATTACKER
-	goto BattleScript_MoveEnd
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
