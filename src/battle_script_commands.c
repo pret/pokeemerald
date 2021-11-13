@@ -1142,7 +1142,6 @@ static const u16 sFinalStrikeOnlyEffects[] =
     EFFECT_THIEF,
     EFFECT_BURN_UP,
     EFFECT_SECRET_POWER,
-    EFFECT_HIT_SWITCH_TARGET,
     EFFECT_SMACK_DOWN,
     EFFECT_SPARKLING_ARIA,
     EFFECT_SMELLINGSALT,
@@ -3274,6 +3273,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattleMoveDamage = (gBattleMons[gEffectBattler].maxHP) / 4;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
+                if (GetBattlerAbility(gEffectBattler) == ABILITY_PARENTAL_BOND)
+                    gBattleMoveDamage *= 2;
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
