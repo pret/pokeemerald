@@ -1499,7 +1499,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
 {
     u32 matchCallId;
     const struct MatchCallText *matchCallText;
-    bool32 retVal = FALSE;
+    bool32 newRematchRequest = FALSE;
 
     matchCallId = GetTrainerMatchCallId(trainerId);
     sBattleFrontierStreakInfo.facilityId = 0;
@@ -1517,7 +1517,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     else if (ShouldTrainerRequestBattle(matchCallId))
     {
         matchCallText = GetDifferentRouteMatchCallText(matchCallId, str);
-        retVal = TRUE;
+        newRematchRequest = TRUE;
         UpdateRematchIfDefeated(matchCallId);
     }
     else if (Random() % 3)
@@ -1532,7 +1532,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     }
 
     BuildMatchCallString(matchCallId, matchCallText, str);
-    return retVal;
+    return newRematchRequest;
 }
 
 static int GetTrainerMatchCallId(int trainerId)

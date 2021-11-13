@@ -61,8 +61,8 @@ static u32 LoopedTask_RibbonsListOpenSummary(s32);
 static void DrawListIndexNumber(s32, s32, s32);
 static void AddRibbonsMonListWindow(struct Pokenav_RibbonsMonMenu *);
 static void UpdateIndexNumberDisplay(struct Pokenav_RibbonsMonMenu *);
-static void InitMonRibbonPokenavListMenuTemplate(void);
-static void BufferRibbonMonInfoText(struct PokenavMonListItem *, u8 *);
+static void CreateRibbonMonsList(void);
+static void BufferRibbonMonInfoText(struct PokenavListItem *, u8 *);
 
 static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
 {
@@ -416,7 +416,7 @@ bool32 GetRibbonsMonCurrentLoopedTaskActive(void)
 void FreeRibbonsMonMenu(void)
 {
     struct Pokenav_RibbonsMonMenu * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
-    sub_81C8234();
+    DestroyPokenavList();
     RemoveWindow(menu->winid);
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
 }
@@ -447,10 +447,10 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         CopyPaletteIntoBufferUnfaded(sMonRibbonListUi_Pal, 0x20, 0x20);
-        InitMonRibbonPokenavListMenuTemplate();
+        CreateRibbonMonsList();
         return LT_INC_AND_PAUSE;
     case 3:
-        if (sub_81C8224())
+        if (IsCreatePokenavListTaskActive())
             return LT_PAUSE;
         AddRibbonsMonListWindow(menu);
         return LT_INC_AND_PAUSE;
@@ -483,7 +483,7 @@ static u32 LoopedTask_RibbonsListMoveCursorUp(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_MoveCursorUp())
+        switch (PokenavList_MoveCursorUp())
         {
         case 0:
             return LT_FINISH;
@@ -496,7 +496,7 @@ static u32 LoopedTask_RibbonsListMoveCursorUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -516,7 +516,7 @@ static u32 LoopedTask_RibbonsListMoveCursorDown(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_MoveCursorDown())
+        switch (PokenavList_MoveCursorDown())
         {
         case 0:
             return LT_FINISH;
@@ -529,7 +529,7 @@ static u32 LoopedTask_RibbonsListMoveCursorDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -549,7 +549,7 @@ static u32 LoopedTask_RibbonsListMovePageUp(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_PageUp())
+        switch (PokenavList_PageUp())
         {
         case 0:
             return LT_FINISH;
@@ -562,7 +562,7 @@ static u32 LoopedTask_RibbonsListMovePageUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -582,7 +582,7 @@ static u32 LoopedTask_RibbonsListMovePageDown(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_PageDown())
+        switch (PokenavList_PageDown())
         {
         case 0:
             return LT_FINISH;
@@ -595,7 +595,7 @@ static u32 LoopedTask_RibbonsListMovePageDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -677,32 +677,32 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
     AddTextPrinterParameterized(windowId, FONT_NORMAL, strbuf, x, 1, TEXT_SKIP_DRAW, NULL);
 }
 
-static void InitMonRibbonPokenavListMenuTemplate(void)
+static void CreateRibbonMonsList(void)
 {
     struct PokenavListTemplate template;
     template.list = (struct PokenavListItem *)GetMonRibbonMonListData();
     template.count = GetRibbonsMonListCount();
-    template.unk8 = 4;
-    template.unk6 = GetRibbonListMenuCurrIndex();
+    template.itemSize = sizeof(struct PokenavListItem);
+    template.startIndex = GetRibbonListMenuCurrIndex();
     template.item_X = 13;
     template.windowWidth = 17;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;
     template.fontId = FONT_NORMAL;
-    template.bufferItemFunc = (PokenavListItemBufferFunc)BufferRibbonMonInfoText;
-    template.unk14 = NULL;
-    sub_81C81D4(&sMonRibbonListBgTemplates[1], &template, 0);
+    template.bufferItemFunc = BufferRibbonMonInfoText;
+    template.iconDrawFunc = NULL;
+    CreatePokenavList(&sMonRibbonListBgTemplates[1], &template, 0);
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavMonListItem * item0, u8 * dest)
+static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest)
 {
     u8 gender;
     u8 level;
     u8 * s;
     const u8 * genderStr;
-    struct PokenavMonListItem * item = item0;
+    struct PokenavMonListItem * item = (struct PokenavMonListItem *)listItem;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)

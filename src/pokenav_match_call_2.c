@@ -35,7 +35,7 @@ struct Pokenav_MatchCallGfx
     u32 loopTaskId;
     u8 filler8[6];
     bool8 unkE;
-    u8 unkF;
+    bool8 newRematchRequest;
     u16 locWindowId;
     u16 infoBoxWindowId;
     u16 msgBoxWindowId;
@@ -55,7 +55,7 @@ struct Pokenav_MatchCallGfx
 
 static bool32 GetCurrentLoopedTaskActive(void);
 static u32 LoopedTask_OpenMatchCall(s32);
-static void InitMatchCallPokenavListMenuTemplate(void);
+static void CreateMatchCallList(void);
 static void sub_81CBC1C(void);
 static void FreeMatchCallSprites(void);
 static void LoadCallWindowAndFade(struct Pokenav_MatchCallGfx *);
@@ -359,10 +359,10 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         if (FreeTempTileDataBuffersIfPossible() || !sub_81CAE28())
             return LT_PAUSE;
 
-        InitMatchCallPokenavListMenuTemplate();
+        CreateMatchCallList();
         return LT_INC_AND_PAUSE;
     case 4:
-        if (sub_81C8224())
+        if (IsCreatePokenavListTaskActive())
             return LT_PAUSE;
 
         DrawMatchCallLeftColumnWindows(gfx);
@@ -399,7 +399,7 @@ static u32 MatchCallListCursorDown(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_MoveCursorDown())
+        switch (PokenavList_MoveCursorDown())
         {
         case 0:
             break;
@@ -414,7 +414,7 @@ static u32 MatchCallListCursorDown(s32 state)
         }
         break;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -436,7 +436,7 @@ static u32 MatchCallListCursorUp(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_MoveCursorUp())
+        switch (PokenavList_MoveCursorUp())
         {
         case 0:
             break;
@@ -451,7 +451,7 @@ static u32 MatchCallListCursorUp(s32 state)
         }
         break;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -473,7 +473,7 @@ static u32 MatchCallListPageDown(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_PageDown())
+        switch (PokenavList_PageDown())
         {
         case 0:
             break;
@@ -488,7 +488,7 @@ static u32 MatchCallListPageDown(s32 state)
         }
         break;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -510,7 +510,7 @@ static u32 MatchCallListPageUp(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_PageUp())
+        switch (PokenavList_PageUp())
         {
         case 0:
             break;
@@ -525,7 +525,7 @@ static u32 MatchCallListPageUp(s32 state)
         }
         break;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -597,7 +597,7 @@ static u32 DoMatchCallMessage(s32 state)
     switch (state)
     {
     case 0:
-        ToggleMatchCallVerticalArrows(TRUE);
+        PokenavList_ToggleVerticalArrows(TRUE);
         DrawMsgBoxForMatchCallMsg(gfx);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -631,7 +631,7 @@ static u32 DoTrainerCloseByMessage(s32 state)
     case 0:
         PlaySE(SE_SELECT);
         DrawMsgBoxForCloseByMsg(gfx);
-        ToggleMatchCallVerticalArrows(TRUE);
+        PokenavList_ToggleVerticalArrows(TRUE);
         gfx->unkE = 1;
         return LT_INC_AND_PAUSE;
     case 1:
@@ -685,14 +685,16 @@ static u32 CloseMatchCallMessage(s32 state)
         }
         else
         {
-            if (gfx->unkF)
+            if (gfx->newRematchRequest)
             {
-                sub_81C8838();
+                // This call was a new rematch request,
+                // add the Pokéball icon to their entry
+                PokenavList_DrawCurrentItemIcon();
                 result = LT_INC_AND_CONTINUE;
             }
             else
             {
-                ToggleMatchCallVerticalArrows(FALSE);
+                PokenavList_ToggleVerticalArrows(FALSE);
                 result = LT_FINISH;
             }
         }
@@ -704,7 +706,7 @@ static u32 CloseMatchCallMessage(s32 state)
         }
         else
         {
-            ToggleMatchCallVerticalArrows(FALSE);
+            PokenavList_ToggleVerticalArrows(FALSE);
             result = LT_FINISH;
         }
         break;
@@ -867,28 +869,28 @@ static u32 ExitMatchCall(s32 state)
     return LT_FINISH;
 }
 
-static void InitMatchCallPokenavListMenuTemplate(void)
+static void CreateMatchCallList(void)
 {
     struct PokenavListTemplate template;
     template.list = (struct PokenavListItem *)sub_81CAE94();
     template.count = GetNumberRegistered();
-    template.unk8 = 4;
-    template.unk6 = 0;
+    template.itemSize = sizeof(struct PokenavListItem);
+    template.startIndex = 0;
     template.item_X = 13;
     template.windowWidth = 16;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 3;
     template.fontId = FONT_NARROW;
-    template.bufferItemFunc = (PokenavListItemBufferFunc)BufferMatchCallNameAndDesc;
-    template.unk14 = TryDrawRematchPokeballIcon;
-    sub_81C81D4(&sMatchCallBgTemplates[2], &template, 2);
+    template.bufferItemFunc = (PokenavListBufferItemFunc)BufferMatchCallNameAndDesc;
+    template.iconDrawFunc = TryDrawRematchPokeballIcon;
+    CreatePokenavList(&sMatchCallBgTemplates[2], &template, 2);
     CreateTask(Task_FlashPokeballIcons, 7);
 }
 
 static void sub_81CBC1C(void)
 {
-    sub_81C8234();
+    DestroyPokenavList();
     DestroyTask(FindTaskIdByFunc(Task_FlashPokeballIcons));
 }
 
@@ -1137,7 +1139,7 @@ static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *gfx)
 static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *gfx)
 {
     int index = GetSelectedPokenavListIndex();
-    const u8 *str = GetMatchCallMessageText(index, &gfx->unkF);
+    const u8 *str = GetMatchCallMessageText(index, &gfx->newRematchRequest);
     u8 speed = GetPlayerTextSpeedDelay();
     AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
 }

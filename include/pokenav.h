@@ -6,7 +6,6 @@
 #include "pokemon_storage_system.h"
 
 typedef u32 (*LoopedTask)(s32 state);
-typedef void (*PokenavListItemBufferFunc)(struct PokenavListItem *, u8 *);
 
 struct PokenavMonListItem
 {
@@ -30,20 +29,22 @@ struct PokenavListItem
     } item;
 };
 
+typedef void (*PokenavListBufferItemFunc)(struct PokenavListItem *, u8 *);
+
 struct PokenavListTemplate
 {
     struct PokenavListItem * list;
     u16 count;
-    u16 unk6;
-    u8 unk8;
+    u16 startIndex;
+    u8 itemSize;
     u8 item_X;
     u8 windowWidth;
     u8 listTop;
     u8 maxShowed;
     u8 fillValue;
     u8 fontId;
-    PokenavListItemBufferFunc bufferItemFunc;
-    void (*unk14)(u16 a0, u32 a1, u32 a2);
+    PokenavListBufferItemFunc bufferItemFunc;
+    void (*iconDrawFunc)(u16 windowId, u32 listItemId, u32 baseTile);
 };
 
 struct PokenavMonList
@@ -87,7 +88,7 @@ enum
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU,
     POKENAV_SUBSTRUCT_UNUSED,
     POKENAV_SUBSTRUCT_REGION_MAP,
-    POKENAV_SUBSTRUCT_MATCH_CALL_LIST,
+    POKENAV_SUBSTRUCT_LIST,
     POKENAV_SUBSTRUCT_MON_LIST,
     POKENAV_SUBSTRUCT_COUNT,
 };
@@ -323,22 +324,22 @@ void SetPokenavVBlankCallback(void);
 void SetVBlankCallback_(IntrCallback callback);
 
 // pokenav_match_call_ui.c
+bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, s32 tileOffset);
+bool32 IsCreatePokenavListTaskActive(void);
+void DestroyPokenavList(void);
 u32 GetSelectedPokenavListIndex(void);
-bool32 sub_81C8224(void);
-int MatchCall_MoveCursorUp(void);
-int MatchCall_MoveCursorDown(void);
-int MatchCall_PageDown(void);
-int MatchCall_PageUp(void);
-bool32 IsMonListLoopedTaskActive(void);
-void ToggleMatchCallVerticalArrows(bool32 shouldHide);
-void sub_81C8838(void);
+int PokenavList_MoveCursorUp(void);
+int PokenavList_MoveCursorDown(void);
+int PokenavList_PageDown(void);
+int PokenavList_PageUp(void);
+bool32 IsMovePokenavListWindowTaskActive(void);
+void PokenavList_ToggleVerticalArrows(bool32 shouldHide);
+void PokenavList_DrawCurrentItemIcon(void);
 void sub_81C877C(void);
 bool32 IsMatchCallListTaskActive(void);
 void PrintCheckPageInfo(s16 a0);
 u32 GetMatchCallListTopIndex(void);
 void sub_81C87F0(void);
-bool32 sub_81C81D4(const struct BgTemplate *arg0, struct PokenavListTemplate *arg1, s32 arg2);
-void sub_81C8234(void);
 
 // pokenav_match_call_data.c
 bool32 MatchCall_HasCheckPage(u32 idx);
@@ -415,7 +416,7 @@ bool32 ShouldDrawRematchPokeballIcon(int index);
 void ClearRematchPokeballIcon(u16 windowId, u32 a1);
 int GetMatchCallTrainerPic(int index);
 const u8 *GetMatchCallFlavorText(int index, int textType);
-const u8 *GetMatchCallMessageText(int index, u8 *arg1);
+const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest);
 u16 GetMatchCallOptionCursorPos(void);
 u16 GetMatchCallOptionId(int arg0);
 void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry * arg0, u8 *str);

@@ -63,7 +63,7 @@ static bool32 GetSearchResultCurrentLoopedTaskActive(void);
 static u32 LoopedTask_OpenConditionSearchResults(s32);
 static void AddSearchResultListMenuWindow(struct Pokenav_SearchResultsGfx *);
 static void PrintSearchResultListMenuItems(struct Pokenav_SearchResultsGfx *);
-static void InitConditionSearchListMenuTemplate(void);
+static void CreateSearchResultsList(void);
 static void BufferSearchMonListItem(struct PokenavMonListItem *, u8 *);
 
 static const u32 sSearchMonDataIds[] = {MON_DATA_COOL, MON_DATA_BEAUTY, MON_DATA_CUTE, MON_DATA_SMART, MON_DATA_TOUGH};
@@ -415,7 +415,7 @@ bool32 GetSearchResultCurrentLoopedTaskActive(void)
 void FreeSearchResultSubstruct2(void)
 {
     struct Pokenav_SearchResultsGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS_GFX);
-    sub_81C8234();
+    DestroyPokenavList();
     RemoveWindow(gfx->winid);
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS_GFX);
 }
@@ -444,10 +444,10 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         CopyPaletteIntoBufferUnfaded(sListBg_Pal, 0x20, 32);
-        InitConditionSearchListMenuTemplate();
+        CreateSearchResultsList();
         return LT_INC_AND_PAUSE;
     case 3:
-        if (sub_81C8224())
+        if (IsCreatePokenavListTaskActive())
             return LT_PAUSE;
         AddSearchResultListMenuWindow(gfx);
         PrintHelpBarText(HELPBAR_CONDITION_MON_LIST);
@@ -485,7 +485,7 @@ static u32 LoopedTask_MoveSearchListCursorUp(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_MoveCursorUp())
+        switch (PokenavList_MoveCursorUp())
         {
         case 0:
             return LT_FINISH;
@@ -498,7 +498,7 @@ static u32 LoopedTask_MoveSearchListCursorUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -518,7 +518,7 @@ static u32 LoopedTask_MoveSearchListCursorDown(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_MoveCursorDown())
+        switch (PokenavList_MoveCursorDown())
         {
         case 0:
             return LT_FINISH;
@@ -531,7 +531,7 @@ static u32 LoopedTask_MoveSearchListCursorDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -551,7 +551,7 @@ static u32 LoopedTask_MoveSearchListPageUp(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_PageUp())
+        switch (PokenavList_PageUp())
         {
         case 0:
             return LT_FINISH;
@@ -564,7 +564,7 @@ static u32 LoopedTask_MoveSearchListPageUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -584,7 +584,7 @@ static u32 LoopedTask_MoveSearchListPageDown(s32 state)
     switch (state)
     {
     case 0:
-        switch (MatchCall_PageDown())
+        switch (PokenavList_PageDown())
         {
         case 0:
             return LT_FINISH;
@@ -597,7 +597,7 @@ static u32 LoopedTask_MoveSearchListPageDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMonListLoopedTaskActive())
+        if (IsMovePokenavListWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -668,23 +668,23 @@ static void PrintSearchResultListMenuItems(struct Pokenav_SearchResultsGfx *gfx)
     CopyWindowToVram(gfx->winid, COPYWIN_GFX);
 }
 
-static void InitConditionSearchListMenuTemplate(void)
+static void CreateSearchResultsList(void)
 {
     struct PokenavListTemplate template;
 
     template.list = (struct PokenavListItem *)GetSearchResultsMonDataList();
     template.count = GetSearchResultsMonListCount();
-    template.unk8 = 4;
-    template.unk6 = GetSearchResultsCurrentListIndex();
+    template.itemSize = sizeof(struct PokenavListItem);
+    template.startIndex = GetSearchResultsCurrentListIndex();
     template.item_X = 13;
     template.windowWidth = 17;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;
     template.fontId = FONT_NORMAL;
-    template.bufferItemFunc = (PokenavListItemBufferFunc)BufferSearchMonListItem;
-    template.unk14 = NULL;
-    sub_81C81D4(&sConditionSearchResultBgTemplates[1], &template, 0);
+    template.bufferItemFunc = (PokenavListBufferItemFunc)BufferSearchMonListItem;
+    template.iconDrawFunc = NULL;
+    CreatePokenavList(&sConditionSearchResultBgTemplates[1], &template, 0);
 }
 
 static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)
