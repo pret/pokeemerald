@@ -32,7 +32,7 @@ MarineCave_End_EventScript_Kyogre::
 	applymovement LOCALID_KYOGRE, MarineCave_End_Movement_KyogreApproach
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_KYOGRE, 2
+	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_KYOGRE

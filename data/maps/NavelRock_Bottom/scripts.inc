@@ -51,7 +51,7 @@ NavelRock_Bottom_EventScript_Lugia::
 	delay 30
 	delay 50
 	waitse
-	playmoncry SPECIES_LUGIA, 2
+	playmoncry SPECIES_LUGIA, CRY_MODE_ENCOUNTER
 	waitmoncry
 	delay 20
 	setvar VAR_0x8004, SPECIES_LUGIA

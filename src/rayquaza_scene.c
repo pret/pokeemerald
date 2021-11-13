@@ -3064,7 +3064,7 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
         ChasesAway_SetRayquazaAnim(sprite, 3, 48, 16);
         sprite->x2 = 1;
         gSprites[sprite->sTailSpriteId].x2 = 1;
-        PlayCry1(SPECIES_RAYQUAZA, 0);
+        PlayCry_Normal(SPECIES_RAYQUAZA, 0);
         CreateTask(Task_ChasesAway_AnimateRing, 0);
     }
     else

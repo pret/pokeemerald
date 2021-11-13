@@ -1254,7 +1254,7 @@ static void PlayAmbientCry(void)
         return;
     pan = (Random() % 88) + 212;
     volume = (Random() % 30) + 50;
-    PlayCry2(sAmbientCrySpecies, pan, volume, 1);
+    PlayCry_NormalNoDucking(sAmbientCrySpecies, pan, volume, CRY_PRIORITY_AMBIENT);
 }
 
 void UpdateAmbientCry(s16 *state, u16 *delayCounter)

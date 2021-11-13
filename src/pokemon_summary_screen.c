@@ -3929,9 +3929,9 @@ static void PlayMonCry(void)
     if (!summary->isEgg)
     {
         if (ShouldPlayNormalMonCry(&sMonSummaryScreen->currentMon) == TRUE)
-            PlayCry3(summary->species2, 0, 0);
+            PlayCry_ByMode(summary->species2, 0, CRY_MODE_NORMAL);
         else
-            PlayCry3(summary->species2, 0, 11);
+            PlayCry_ByMode(summary->species2, 0, CRY_MODE_WEAK);
     }
 }
 
