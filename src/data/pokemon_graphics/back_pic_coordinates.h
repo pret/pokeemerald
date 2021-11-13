@@ -5633,47 +5633,47 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_FURFROU_HEART_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_STAR_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_DIAMOND_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_DEBUTANTE_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_MATRON_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_DANDY_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_LA_REINE_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_KABUKI_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_FURFROU_PHARAOH_TRIM] =
     {
         .size = 0x78,
-        .y_offset = 0,
+        .y_offset = 2,
     },
     // Meowstic
     [SPECIES_MEOWSTIC_FEMALE] =
