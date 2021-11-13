@@ -136,6 +136,7 @@ void AnimTask_SetCamouflageBlend(u8 taskId)
         gBattleAnimArgs[4] = RGB(31, 31, 31);
         break;
     case BATTLE_TERRAIN_PLAIN:
+    default:
         gBattleAnimArgs[4] = RGB(31, 31, 31);
         break;
     }
@@ -901,6 +902,12 @@ static void UpdateMonScrollingBgMask(u8 taskId)
 void AnimTask_GetBattleTerrain(u8 taskId)
 {
     gBattleAnimArgs[0] = gBattleTerrain;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_GetFieldTerrain(u8 taskId)
+{
+    gBattleAnimArgs[0] = gFieldStatuses & STATUS_FIELD_TERRAIN_ANY;
     DestroyAnimVisualTask(taskId);
 }
 

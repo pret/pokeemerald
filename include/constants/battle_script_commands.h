@@ -201,7 +201,14 @@
 #define VARIOUS_TRY_TO_APPLY_MIMICRY            128
 #define VARIOUS_PHOTON_GEYSER_CHECK             129
 #define VARIOUS_SHELL_SIDE_ARM_CHECK            130
-#define VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE    131
+#define VARIOUS_TRY_NO_RETREAT                  131
+#define VARIOUS_TRY_TAR_SHOT                    132
+#define VARIOUS_CAN_TAR_SHOT_WORK               133
+#define VARIOUS_CHECK_POLTERGEIST               134
+#define VARIOUS_SET_OCTOLOCK                    135
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
+#define VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE    137
+
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -220,6 +227,7 @@
 // Cmd_statbuffchange
 #define STAT_BUFF_ALLOW_PTR                 (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
 #define STAT_BUFF_NOT_PROTECT_AFFECTED      (1 << 5)
+#define STAT_BUFF_UPDATE_MOVE_EFFECT        (1 << 6)
 
 // stat change flags for Cmd_playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             (1 << 0)

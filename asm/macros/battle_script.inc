@@ -1882,6 +1882,36 @@
 	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
 	.4byte \ptr
 	.endm
+	
+	.macro trynoretreat battler:req, ptr:req
+	various \battler, VARIOUS_TRY_NO_RETREAT
+	.4byte \ptr
+	.endm
+
+	.macro trytarshot battler:req, ptr:req
+	various \battler, VARIOUS_TRY_TAR_SHOT
+	.4byte \ptr
+	.endm
+
+	.macro cantarshotwork battler:req, ptr:req
+	various \battler, VARIOUS_CAN_TAR_SHOT_WORK
+	.4byte \ptr
+	.endm
+
+	.macro checkpoltergeist battler:req, ptr:req
+	various \battler, VARIOUS_CHECK_POLTERGEIST
+	.4byte \ptr
+	.endm
+
+	.macro setoctolock battler:req, ptr:req
+	various \battler, VARIOUS_SET_OCTOLOCK
+	.4byte \ptr
+	.endm
+
+	.macro cutonethirdhpraisestats ptr:req
+	various BS_ATTACKER, VARIOUS_CUT_1_3_HP_RAISE_STATS
+	.4byte \ptr
+	.endm
 
 	.macro photongeysercheck
 	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK

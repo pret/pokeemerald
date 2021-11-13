@@ -112,6 +112,9 @@ struct DisableStruct
     u8 throatChopTimer;
     u8 usedMoves:4;
     u8 wrapTurns;
+    u8 noRetreat:1;
+    u8 tarShot:1;
+    u8 octolock:1;
 };
 
 struct ProtectStruct
@@ -227,10 +230,7 @@ struct FieldTimer
     u8 wonderRoomTimer;
     u8 magicRoomTimer;
     u8 trickRoomTimer;
-    u8 grassyTerrainTimer;
-    u8 mistyTerrainTimer;
-    u8 electricTerrainTimer;
-    u8 psychicTerrainTimer;
+    u8 terrainTimer;
     u8 gravityTimer;
     u8 fairyLockTimer;
 };

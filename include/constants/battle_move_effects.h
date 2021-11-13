@@ -374,7 +374,15 @@
 #define EFFECT_AURA_WHEEL                   368
 #define EFFECT_PHOTON_GEYSER                369
 #define EFFECT_SHELL_SIDE_ARM               370
+#define EFFECT_TERRAIN_PULSE                371
+#define EFFECT_JAW_LOCK                     372
+#define EFFECT_NO_RETREAT                   373
+#define EFFECT_TAR_SHOT                     374
+#define EFFECT_POLTERGEIST                  375
+#define EFFECT_OCTOLOCK                     376
+#define EFFECT_CLANGOROUS_SOUL              377
+#define EFFECT_BOLT_BEAK                    378
 
-#define NUM_BATTLE_MOVE_EFFECTS  	        371
+#define NUM_BATTLE_MOVE_EFFECTS  	        379
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
