@@ -278,6 +278,7 @@ static u8 HandleWriteIncrementalSector(u16 numSectors, const struct SaveSectorLo
     }
     else
     {
+        // Exceeded max sector, finished
         status = SAVE_STATUS_ERROR;
     }
 
@@ -793,6 +794,10 @@ bool8 LinkFullSave_WriteSector(void)
     u8 status = HandleWriteIncrementalSector(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(SAVE_NORMAL);
+
+    // In this case "error" either means that an actual error was encountered
+    // or that the given max sector has been reached (meaning it has finished successfully).
+    // If there was an actual error the save failed screen above will also be shown.
     if (status == SAVE_STATUS_ERROR)
         return TRUE;
     else
