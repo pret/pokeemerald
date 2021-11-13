@@ -25,7 +25,7 @@ struct Pokenav3Struct
     u32 unk10;
     u32 unk14;
     u32 (*callback)(struct Pokenav3Struct*);
-    struct PokenavMatchCallEntries matchCallEntries[MAX_REMATCH_ENTRIES - 1];
+    struct PokenavMatchCallEntry matchCallEntries[MAX_REMATCH_ENTRIES - 1];
 };
 
 static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *);
@@ -298,7 +298,7 @@ int unref_sub_81CAE6C(int arg0)
     return state->matchCallEntries[arg0].headerId;
 }
 
-struct PokenavMatchCallEntries *sub_81CAE94(void)
+struct PokenavMatchCallEntry *sub_81CAE94(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     return state->matchCallEntries;
@@ -394,7 +394,7 @@ u16 GetMatchCallOptionId(int optionId)
     return state->matchCallOptions[optionId];
 }
 
-void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries *matchCallEntry, u8 *str)
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8 *str)
 {
     const u8 *trainerName;
     const u8 *className;

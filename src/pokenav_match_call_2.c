@@ -880,7 +880,7 @@ static void InitMatchCallPokenavListMenuTemplate(void)
     template.maxShowed = 8;
     template.fillValue = 3;
     template.fontId = FONT_NARROW;
-    template.listFunc.unk10_2 = BufferMatchCallNameAndDesc;
+    template.listFunc.bufferMatchCallItemFunc = BufferMatchCallNameAndDesc;
     template.unk14 = TryDrawRematchPokeballIcon;
     sub_81C81D4(&sMatchCallBgTemplates[2], &template, 2);
     CreateTask(Task_FlashPokeballIcons, 7);

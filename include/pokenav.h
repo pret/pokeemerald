@@ -7,14 +7,14 @@
 
 typedef u32 (*LoopedTask)(s32 state);
 
-struct PokenavMonList
+struct PokenavMonListItem
 {
     u8 boxId;
     u8 monId;
     u16 data;
 };
 
-struct PokenavMatchCallEntries
+struct PokenavMatchCallEntry
 {
     bool8 isSpecialTrainer;
     u8 mapSec;
@@ -24,8 +24,8 @@ struct PokenavMatchCallEntries
 struct PokenavListTemplate
 {
     union {
-        struct PokenavMonList *monList;
-        struct PokenavMatchCallEntries *matchCallEntries;
+        struct PokenavMonListItem *monList;
+        struct PokenavMatchCallEntry *matchCallEntries;
     } list;
     u16 count;
     u16 unk6;
@@ -37,17 +37,17 @@ struct PokenavListTemplate
     u8 fillValue;
     u8 fontId;
     union {
-        void (*printMonFunc)(struct PokenavMonList *item, u8 *dest);
-        void (*unk10_2)(struct PokenavMatchCallEntries *, u8 *a1);
+        void (*bufferMonItemFunc)(struct PokenavMonListItem *, u8 *);
+        void (*bufferMatchCallItemFunc)(struct PokenavMatchCallEntry *, u8 *);
     } listFunc;
     void (*unk14)(u16 a0, u32 a1, u32 a2);
 };
 
-struct PokenavSub18
+struct PokenavMonList
 {
     u16 listCount;
     u16 currIndex;
-    struct PokenavMonList monData[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
+    struct PokenavMonListItem monData[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
 };
 
 // Return values of LoopedTask functions.
@@ -406,7 +406,7 @@ void FreeMatchCallSubstruct1(void);
 int sub_81CAE28(void);
 int GetNumberRegistered(void);
 int sub_81CAE48(void);
-struct PokenavMatchCallEntries *sub_81CAE94(void);
+struct PokenavMatchCallEntry *sub_81CAE94(void);
 u16 GetMatchCallMapSec(int);
 bool32 ShouldDrawRematchPokeballIcon(int index);
 void ClearRematchPokeballIcon(u16 windowId, u32 a1);
@@ -415,7 +415,7 @@ const u8 *GetMatchCallFlavorText(int index, int textType);
 const u8 *GetMatchCallMessageText(int index, u8 *arg1);
 u16 GetMatchCallOptionCursorPos(void);
 u16 GetMatchCallOptionId(int arg0);
-void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries * arg0, u8 *str);
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry * arg0, u8 *str);
 u8 GetMatchTableMapSectionId(int rematchIndex);
 int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);

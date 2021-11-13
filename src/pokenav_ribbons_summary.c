@@ -42,7 +42,7 @@ enum
 struct Pokenav_RibbonsSummaryList
 {
     u8 unused1[8];
-    struct PokenavSub18 *monList;
+    struct PokenavMonList *monList;
     u16 selectedPos;
     u16 normalRibbonLastRowStart;
     u16 numNormalRibbons;
@@ -378,8 +378,8 @@ static u32 GetRibbonsSummaryMonListCount(void)
 static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    struct PokenavSub18 *mons = list->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
@@ -403,8 +403,8 @@ static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
 static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *otId)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    struct PokenavSub18 *mons = list->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
@@ -427,8 +427,8 @@ static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *ot
 static u32 GetCurrMonRibbonCount(void)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    struct PokenavSub18 *mons = list->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
         return GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBON_COUNT);
@@ -440,8 +440,8 @@ static void GetMonRibbons(struct Pokenav_RibbonsSummaryList *list)
 {
     u32 ribbonFlags;
     s32 i, j;
-    struct PokenavSub18 *mons = list->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
         ribbonFlags = GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBONS);

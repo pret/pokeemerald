@@ -84,7 +84,7 @@ u32 GetConditionGraphMenuCallback(void)
 
 static u32 HandleConditionMenuInput(struct Pokenav_ConditionMenu *menu)
 {
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     u32 ret = ConditionGraphHandleDpadInput(menu);
 
     if (ret == CONDITION_FUNC_NONE)
@@ -123,7 +123,7 @@ static u32 HandleConditionMenuInput(struct Pokenav_ConditionMenu *menu)
 
 static u32 OpenMarkingsMenu(struct Pokenav_ConditionMenu *menu)
 {
-    struct PokenavSub18 *monListPtr;
+    struct PokenavMonList *monListPtr;
     u8 markings;
     u32 ret = CONDITION_FUNC_NONE, boxId, monId;
 
@@ -166,7 +166,7 @@ void FreeConditionGraphMenuSubstruct1(void)
 
 static u8 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *menu)
 {
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     u8 ret = CONDITION_FUNC_NONE;
 
     if (JOY_HELD(DPAD_UP))
@@ -196,7 +196,7 @@ static u8 SwitchConditionSummaryIndex(u8 moveUp)
     u16 newLoadId;
     bool8 wasNotLastMon, isNotLastMon;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     newLoadId = (moveUp) ? menu->nextLoadIdUp : menu->nextLoadIdDown;
     ConditionGraph_SetNewPositions(&menu->graph, menu->graph.savedPositions[menu->loadId], menu->graph.savedPositions[newLoadId]);
@@ -236,7 +236,7 @@ bool32 LoadConditionGraphMenuGfx(void)
 {
     s32 var;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     switch (menu->state)
     {
@@ -337,7 +337,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
     u16 boxId, monId, gender, species, level, lvlDigits;
     struct BoxPokemon *boxMon;
     u8 *txtPtr, *str_;
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     boxId = monListPtr->monData[listId].boxId;
     monId = monListPtr->monData[listId].monId;
@@ -427,7 +427,7 @@ static void CopyMonNameGenderLocation(s16 listId, u8 loadId)
 {
     u16 boxId, i;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     if (listId != (IsConditionMenuSearchMode() ? monListPtr->listCount : monListPtr->listCount - 1))
     {
@@ -459,7 +459,7 @@ static void InitPartyConditionListParameters(void)
 {
     u16 i, count;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
-    struct PokenavSub18 *monListPtr = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavSub18));
+    struct PokenavMonList *monListPtr = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavMonList));
 
     menu->inSearchMode = FALSE;
     for (i = 0, count = 0; i < CalculatePlayerPartyCount(); i++)
@@ -492,7 +492,7 @@ static void GetMonConditionGraphData(s16 listId, u8 loadId)
 {
     u16 boxId, monId, i;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     if (listId != (IsConditionMenuSearchMode() ? monListPtr->listCount : monListPtr->listCount - 1))
     {
@@ -524,7 +524,7 @@ static void ConditionGraphDrawMonPic(s16 listId, u8 loadId)
     u16 boxId, monId, species;
     u32 personality, tid;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     if (listId == (IsConditionMenuSearchMode() ? monListPtr->listCount : monListPtr->listCount - 1))
         return;
@@ -540,13 +540,13 @@ static void ConditionGraphDrawMonPic(s16 listId, u8 loadId)
 
 u16 GetMonListCount(void)
 {
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     return monListPtr->listCount;
 }
 
 u16 GetConditionGraphCurrentListIndex(void)
 {
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     return monListPtr->currIndex;
 }
 
@@ -600,7 +600,7 @@ u8 *GetConditionMonLocationText(u8 loadId)
 
 u16 GetConditionMonDataBuffer(void)
 {
-    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     return monListPtr->monData[monListPtr->currIndex].data;
 }
 

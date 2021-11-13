@@ -29,7 +29,7 @@ struct Pokenav_RibbonsMonList
     s32 monId;
     u32 changeBgs;
     u32 saveMonList;
-    struct PokenavSub18 *monList;
+    struct PokenavMonList *monList;
 };
 
 struct Pokenav_RibbonsMonMenu
@@ -49,7 +49,7 @@ static u32 BuildPartyMonRibbonList(s32);
 static u32 InitBoxMonRibbonList(s32);
 static u32 BuildBoxMonRibbonList(s32);
 static u32 GetMonRibbonListLoopTaskFunc(s32);
-static void InsertMonListItem(struct Pokenav_RibbonsMonList *, struct PokenavMonList *);
+static void InsertMonListItem(struct Pokenav_RibbonsMonList *, struct PokenavMonListItem *);
 static u32 LoopedTask_OpenRibbonsMonList(s32);
 static bool32 GetRibbonsMonCurrentLoopedTaskActive(void);
 static u32 LoopedTask_RibbonsListMoveCursorUp(s32);
@@ -62,7 +62,7 @@ static void DrawListIndexNumber(s32, s32, s32);
 static void AddRibbonsMonListWindow(struct Pokenav_RibbonsMonMenu *);
 static void UpdateIndexNumberDisplay(struct Pokenav_RibbonsMonMenu *);
 static void InitMonRibbonPokenavListMenuTemplate(void);
-static void BufferRibbonMonInfoText(struct PokenavMonList *, u8 *);
+static void BufferRibbonMonInfoText(struct PokenavMonListItem *, u8 *);
 
 static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
 {
@@ -129,7 +129,7 @@ bool32 PokenavCallback_Init_MonRibbonList(void)
     if (list == NULL)
         return FALSE;
 
-    list->monList = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavSub18));
+    list->monList = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavMonList));
     if (list->monList == NULL)
         return FALSE;
 
@@ -214,7 +214,7 @@ static u32 UpdateMonListBgs(void)
     return list->changeBgs;
 }
 
-static struct PokenavMonList *GetMonRibbonMonListData(void)
+static struct PokenavMonListItem *GetMonRibbonMonListData(void)
 {
     struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     return list->monList->monData;
@@ -248,7 +248,7 @@ static u32 GetMonRibbonListLoopTaskFunc(s32 state)
 static u32 BuildPartyMonRibbonList(s32 state)
 {
     s32 i;
-    struct PokenavMonList item;
+    struct PokenavMonListItem item;
     struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
 
     list->monList->listCount = 0;
@@ -288,7 +288,7 @@ static u32 BuildBoxMonRibbonList(s32 state)
     s32 boxId = list->boxId;
     s32 monId = list->monId;
     s32 boxCount = 0;
-    struct PokenavMonList item;
+    struct PokenavMonListItem item;
 
     while (boxId < TOTAL_BOXES_COUNT)
     {
@@ -322,7 +322,7 @@ static u32 BuildBoxMonRibbonList(s32 state)
     return LT_FINISH;
 }
 
-static void InsertMonListItem(struct Pokenav_RibbonsMonList *list, struct PokenavMonList *item)
+static void InsertMonListItem(struct Pokenav_RibbonsMonList *list, struct PokenavMonListItem *item)
 {
     u32 left = 0;
     u32 right = list->monList->listCount;
@@ -690,19 +690,19 @@ static void InitMonRibbonPokenavListMenuTemplate(void)
     template.maxShowed = 8;
     template.fillValue = 2;
     template.fontId = FONT_NORMAL;
-    template.listFunc.printMonFunc = BufferRibbonMonInfoText;
+    template.listFunc.bufferMonItemFunc = BufferRibbonMonInfoText;
     template.unk14 = NULL;
     sub_81C81D4(&sMonRibbonListBgTemplates[1], &template, 0);
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavMonList * item0, u8 * dest)
+static void BufferRibbonMonInfoText(struct PokenavMonListItem * item0, u8 * dest)
 {
     u8 gender;
     u8 level;
     u8 * s;
     const u8 * genderStr;
-    struct PokenavMonList * item = item0;
+    struct PokenavMonListItem * item = item0;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)

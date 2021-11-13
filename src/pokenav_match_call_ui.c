@@ -49,7 +49,7 @@ struct PokenavSub17Substruct
     u32 loopedTaskId;
     s32 unk2C;
     u32 unk30;
-    void (*unk34)(struct PokenavMatchCallEntries *, u8*);
+    void (*unk34)(struct PokenavMatchCallEntry *, u8*);
     void (*unk38)(u16, u32, u32);
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
@@ -57,7 +57,6 @@ struct PokenavSub17Substruct
     u8 unkTextBuffer[0x40];
 };
 
-// Generally at index 0x11 (17)
 struct PokenavSub17
 {
     struct PokenavSub17Substruct list;
@@ -68,7 +67,7 @@ struct PokenavSub17
 };
 
 void sub_81C82E4(struct PokenavSub17 *matchCall);
-bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3);
+static bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3);
 void InitMatchCallWindowState(struct MatchCallWindowState *a0, struct PokenavListTemplate *a1);
 void SpriteCB_MatchCallUpArrow(struct Sprite *sprite);
 void SpriteCB_MatchCallDownArrow(struct Sprite *sprite);
@@ -963,13 +962,13 @@ void InitMatchCallWindowState(struct MatchCallWindowState *dst, struct PokenavLi
     }
 }
 
-bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *dest, const struct BgTemplate *bgTemplate, struct PokenavListTemplate *template, s32 a3)
+static bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *dest, const struct BgTemplate *bgTemplate, struct PokenavListTemplate *template, s32 a3)
 {
     struct WindowTemplate window;
 
     dest->listWindow.bg = bgTemplate->bg;
     dest->listWindow.unk6 = a3;
-    dest->unk34 = template->listFunc.unk10_2;
+    dest->unk34 = template->listFunc.bufferMatchCallItemFunc;
     dest->unk38 = template->unk14;
     dest->listWindow.unk1 = template->fillValue;
     dest->listWindow.unk2 = template->item_X;

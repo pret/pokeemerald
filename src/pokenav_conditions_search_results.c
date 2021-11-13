@@ -31,7 +31,7 @@ struct Pokenav_SearchResults
     u32 conditionDataId;
     bool32 returnFromGraph;
     bool32 saveResultsList;
-    struct PokenavSub18 *monList;
+    struct PokenavMonList *monList;
 };
 
 struct Pokenav_SearchResultsGfx
@@ -58,13 +58,13 @@ static u32 LoopedTask_MoveSearchListPageUp(s32);
 static u32 LoopedTask_MoveSearchListPageDown(s32);
 static u32 LoopedTask_ExitConditionSearchMenu(s32);
 static u32 LoopedTask_SelectSearchResult(s32);
-static void InsertMonListItem(struct Pokenav_SearchResults *, struct PokenavMonList *);
+static void InsertMonListItem(struct Pokenav_SearchResults *, struct PokenavMonListItem *);
 static bool32 GetSearchResultCurrentLoopedTaskActive(void);
 static u32 LoopedTask_OpenConditionSearchResults(s32);
 static void AddSearchResultListMenuWindow(struct Pokenav_SearchResultsGfx *);
 static void PrintSearchResultListMenuItems(struct Pokenav_SearchResultsGfx *);
 static void InitConditionSearchListMenuTemplate(void);
-static void PrintSearchMonListItem(struct PokenavMonList *, u8 *);
+static void BufferSearchMonListItem(struct PokenavMonListItem *, u8 *);
 
 static const u32 sSearchMonDataIds[] = {MON_DATA_COOL, MON_DATA_BEAUTY, MON_DATA_CUTE, MON_DATA_SMART, MON_DATA_TOUGH};
 
@@ -134,7 +134,7 @@ bool32 PokenavCallback_Init_ConditionSearch(void)
     if (menu == NULL)
         return FALSE;
 
-    menu->monList = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavSub18));
+    menu->monList = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavMonList));
     if (menu->monList == NULL)
         return FALSE;
 
@@ -225,7 +225,7 @@ static u32 GetReturningFromGraph(void)
     return menu->returnFromGraph;
 }
 
-static struct PokenavMonList * GetSearchResultsMonDataList(void)
+static struct PokenavMonListItem * GetSearchResultsMonDataList(void)
 {
     struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     return menu->monList->monData;
@@ -259,7 +259,7 @@ static u32 GetConditionSearchLoopedTask(s32 state)
 static u32 BuildPartyMonSearchResults(s32 state)
 {
     s32 i;
-    struct PokenavMonList item;
+    struct PokenavMonListItem item;
     struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
 
     menu->monList->listCount = 0;
@@ -295,7 +295,7 @@ static u32 BuildBoxMonSearchResults(s32 state)
     s32 boxId = menu->boxId;
     s32 monId = menu->monId;
     s32 boxCount = 0;
-    struct PokenavMonList item;
+    struct PokenavMonListItem item;
 
     while (boxId < TOTAL_BOXES_COUNT)
     {
@@ -351,7 +351,7 @@ static u32 ConvertConditionsToListRanks(s32 state)
     return LT_FINISH;
 }
 
-static void InsertMonListItem(struct Pokenav_SearchResults *menu, struct PokenavMonList *item)
+static void InsertMonListItem(struct Pokenav_SearchResults *menu, struct PokenavMonListItem *item)
 {
     u32 left = 0;
     u32 right = menu->monList->listCount;
@@ -682,12 +682,12 @@ static void InitConditionSearchListMenuTemplate(void)
     template.maxShowed = 8;
     template.fillValue = 2;
     template.fontId = FONT_NORMAL;
-    template.listFunc.printMonFunc = PrintSearchMonListItem;
+    template.listFunc.bufferMonItemFunc = BufferSearchMonListItem;
     template.unk14 = NULL;
     sub_81C81D4(&sConditionSearchResultBgTemplates[1], &template, 0);
 }
 
-static void PrintSearchMonListItem(struct PokenavMonList * item, u8 * dest)
+static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)
 {
     u8 gender;
     u8 level;

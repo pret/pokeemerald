@@ -73,7 +73,7 @@ struct UsePokeblockSession
     u8 natureText[34];
 };
 
-// This struct is identical to PokenavMonList, the struct used for managing lists of pokemon in the pokenav
+// This struct is identical to PokenavMonListItem, the struct used for managing lists of pokemon in the pokenav
 // Given that this screen is essentially duplicated in the poknav, this struct was probably the same one with
 // a more general name/purpose
 // TODO: Once the pokenav conditions screens are documented, resolve the above
