@@ -1141,7 +1141,6 @@ static const u16 sFinalStrikeOnlyEffects[] =
     EFFECT_BUG_BITE,
     EFFECT_THIEF,
     EFFECT_BURN_UP,
-    EFFECT_PAY_DAY,
     EFFECT_SECRET_POWER,
     EFFECT_HIT_SWITCH_TARGET,
     EFFECT_SMACK_DOWN,
@@ -3019,15 +3018,21 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_PAYDAY:
-                if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER)
+                // Don't scatter coins on the second hit of Parental Bond
+                if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER && gSpecialStatuses[gBattlerAttacker].parentalBondOn != 1)
                 {
                     u16 PayDay = gPaydayMoney;
                     gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
                     if (PayDay > gPaydayMoney)
                         gPaydayMoney = 0xFFFF;
+
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectPayDay;
                 }
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
+                else
+                {
+                    gBattlescriptCurrInstr++;
+                }
                 break;
             case MOVE_EFFECT_HAPPY_HOUR:
                 if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER && !gBattleStruct->moneyMultiplierMove)
