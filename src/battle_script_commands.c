@@ -13598,7 +13598,9 @@ static bool32 CriticalCapture(u32 odds)
 
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
 {
-    if (gBattleMoves[move].split != SPLIT_STATUS && !(sForbiddenMoves[move] & FORBIDDEN_PARENTAL_BOND))
+    if (gBattleMoves[move].split != SPLIT_STATUS 
+        && !(sForbiddenMoves[move] & FORBIDDEN_PARENTAL_BOND)
+        && gBattleMons[gBattlerAttacker].status2 & STATUS2_BIDE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
