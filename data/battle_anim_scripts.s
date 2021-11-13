@@ -7279,7 +7279,7 @@ Move_RELIC_SONG:
 	monbg ANIM_DEF_PARTNER
 	launchtask AnimTask_MusicNotesRainbowBlend 0x2 0x0
 	waitforvisualfinish
-	panse_1B 0x1DF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 0x2, 0x0      @ ???
+	createvisualtask SoundTask_PlayCryWithEcho, 2, ANIM_ATTACKER, 2
 	launchtask AnimTask_UproarDistortion 0x2 0x1 0x0
 	launchtemplate gUproarRingSpriteTemplate 0x3 0x6 0x0 0x0 0x0 0x0 0x1f 0x8
 	launchtemplate gJaggedMusicNoteSpriteTemplate 0x2 0x4 0x0 0x1d 0xfff4 0x0
