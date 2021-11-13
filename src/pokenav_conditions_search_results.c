@@ -672,7 +672,7 @@ static void InitConditionSearchListMenuTemplate(void)
 {
     struct PokenavListTemplate template;
 
-    template.list.monList = GetSearchResultsMonDataList();
+    template.list = (struct PokenavListItem *)GetSearchResultsMonDataList();
     template.count = GetSearchResultsMonListCount();
     template.unk8 = 4;
     template.unk6 = GetSearchResultsCurrentListIndex();
@@ -682,7 +682,7 @@ static void InitConditionSearchListMenuTemplate(void)
     template.maxShowed = 8;
     template.fillValue = 2;
     template.fontId = FONT_NORMAL;
-    template.listFunc.bufferMonItemFunc = BufferSearchMonListItem;
+    template.bufferItemFunc = (PokenavListItemBufferFunc)BufferSearchMonListItem;
     template.unk14 = NULL;
     sub_81C81D4(&sConditionSearchResultBgTemplates[1], &template, 0);
 }

@@ -680,7 +680,7 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
 static void InitMonRibbonPokenavListMenuTemplate(void)
 {
     struct PokenavListTemplate template;
-    template.list.monList = GetMonRibbonMonListData();
+    template.list = (struct PokenavListItem *)GetMonRibbonMonListData();
     template.count = GetRibbonsMonListCount();
     template.unk8 = 4;
     template.unk6 = GetRibbonListMenuCurrIndex();
@@ -690,7 +690,7 @@ static void InitMonRibbonPokenavListMenuTemplate(void)
     template.maxShowed = 8;
     template.fillValue = 2;
     template.fontId = FONT_NORMAL;
-    template.listFunc.bufferMonItemFunc = BufferRibbonMonInfoText;
+    template.bufferItemFunc = (PokenavListItemBufferFunc)BufferRibbonMonInfoText;
     template.unk14 = NULL;
     sub_81C81D4(&sMonRibbonListBgTemplates[1], &template, 0);
 }

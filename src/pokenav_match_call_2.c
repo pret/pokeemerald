@@ -870,7 +870,7 @@ static u32 ExitMatchCall(s32 state)
 static void InitMatchCallPokenavListMenuTemplate(void)
 {
     struct PokenavListTemplate template;
-    template.list.matchCallEntries = sub_81CAE94();
+    template.list = (struct PokenavListItem *)sub_81CAE94();
     template.count = GetNumberRegistered();
     template.unk8 = 4;
     template.unk6 = 0;
@@ -880,7 +880,7 @@ static void InitMatchCallPokenavListMenuTemplate(void)
     template.maxShowed = 8;
     template.fillValue = 3;
     template.fontId = FONT_NARROW;
-    template.listFunc.bufferMatchCallItemFunc = BufferMatchCallNameAndDesc;
+    template.bufferItemFunc = (PokenavListItemBufferFunc)BufferMatchCallNameAndDesc;
     template.unk14 = TryDrawRematchPokeballIcon;
     sub_81C81D4(&sMatchCallBgTemplates[2], &template, 2);
     CreateTask(Task_FlashPokeballIcons, 7);

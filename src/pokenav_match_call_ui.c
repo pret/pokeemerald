@@ -49,7 +49,7 @@ struct PokenavSub17Substruct
     u32 loopedTaskId;
     s32 unk2C;
     u32 unk30;
-    void (*unk34)(struct PokenavMatchCallEntry *, u8*);
+    PokenavListItemBufferFunc unk34;
     void (*unk38)(u16, u32, u32);
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
@@ -936,7 +936,7 @@ void ToggleMatchCallVerticalArrows(bool32 shouldHide)
 
 void InitMatchCallWindowState(struct MatchCallWindowState *dst, struct PokenavListTemplate *template)
 {
-    dst->unk10 = template->list.matchCallEntries;
+    dst->unk10 = template->list;
     dst->windowTopIndex = template->unk6;
     dst->listLength = template->count;
     dst->unkC = template->unk8;
@@ -968,7 +968,7 @@ static bool32 CopyPokenavListMenuTemplate(struct PokenavSub17Substruct *dest, co
 
     dest->listWindow.bg = bgTemplate->bg;
     dest->listWindow.unk6 = a3;
-    dest->unk34 = template->listFunc.bufferMatchCallItemFunc;
+    dest->unk34 = template->bufferItemFunc;
     dest->unk38 = template->unk14;
     dest->listWindow.unk1 = template->fillValue;
     dest->listWindow.unk2 = template->item_X;

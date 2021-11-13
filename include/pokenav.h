@@ -6,6 +6,7 @@
 #include "pokemon_storage_system.h"
 
 typedef u32 (*LoopedTask)(s32 state);
+typedef void (*PokenavListItemBufferFunc)(struct PokenavListItem *, u8 *);
 
 struct PokenavMonListItem
 {
@@ -21,12 +22,17 @@ struct PokenavMatchCallEntry
     u16 headerId;
 };
 
-struct PokenavListTemplate
+struct PokenavListItem
 {
     union {
-        struct PokenavMonListItem *monList;
-        struct PokenavMatchCallEntry *matchCallEntries;
-    } list;
+        struct PokenavMonListItem mon;
+        struct PokenavMatchCallEntry call;
+    } item;
+};
+
+struct PokenavListTemplate
+{
+    struct PokenavListItem * list;
     u16 count;
     u16 unk6;
     u8 unk8;
@@ -36,10 +42,7 @@ struct PokenavListTemplate
     u8 maxShowed;
     u8 fillValue;
     u8 fontId;
-    union {
-        void (*bufferMonItemFunc)(struct PokenavMonListItem *, u8 *);
-        void (*bufferMatchCallItemFunc)(struct PokenavMatchCallEntry *, u8 *);
-    } listFunc;
+    PokenavListItemBufferFunc bufferItemFunc;
     void (*unk14)(u16 a0, u32 a1, u32 a2);
 };
 
