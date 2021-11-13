@@ -1891,6 +1891,11 @@
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
+	.macro isparentalbondlaststrike ptr:req
+	various BS_ATTACKER, VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE
+	.4byte \ptr
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

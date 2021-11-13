@@ -201,6 +201,7 @@
 #define VARIOUS_TRY_TO_APPLY_MIMICRY            128
 #define VARIOUS_PHOTON_GEYSER_CHECK             129
 #define VARIOUS_SHELL_SIDE_ARM_CHECK            130
+#define VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE    131
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
