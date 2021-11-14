@@ -3492,7 +3492,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = 0xFFFF;
+                hpStatus[i].hp = HP_EMPTY_SLOT;
                 hpStatus[i].status = 0;
             }
             else
@@ -3510,7 +3510,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = 0xFFFF;
+                hpStatus[i].hp = HP_EMPTY_SLOT;
                 hpStatus[i].status = 0;
             }
             else
@@ -3536,7 +3536,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = 0xFFFF;
+                hpStatus[i].hp = HP_EMPTY_SLOT;
                 hpStatus[i].status = 0;
             }
             else

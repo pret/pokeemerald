@@ -1282,12 +1282,12 @@ static bool32 SavePokeJump(void)
     case 2:
         if (AreLinkQueuesEmpty())
         {
-            CreateTask(Task_LinkSave, 6);
+            CreateTask(Task_LinkFullSave, 6);
             sPokemonJump->mainState++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(Task_LinkSave))
+        if (!FuncIsActiveTask(Task_LinkFullSave))
         {
             ClearMessageWindow();
             sPokemonJump->mainState++;

@@ -611,6 +611,10 @@ extern const u8 gText_PlayersBattleResults[];
 extern const u8 gText_WinLoseDraw[];
 extern const u8 gText_ColorTransparent[];
 extern const u8 gText_Slash[];
+extern const u8 gText_HealthboxNickname[];
+extern const u8 gText_HealthboxGender_None[];
+extern const u8 gText_HealthboxGender_Male[];
+extern const u8 gText_HealthboxGender_Female[];
 
 extern const u8 gText_99TimesPlus[];
 extern const u8 gText_1MinutePlus[];
