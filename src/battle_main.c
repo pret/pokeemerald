@@ -307,7 +307,7 @@ static const u16 *const sUnused1Ptr = sUnused1;
 static const u16 sUnused2[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0x7ffe, 1, 0, 0};
 static const u16 *const sUnused2Ptr = sUnused2;
 
-static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
+static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
 // format: attacking type, defending type, damage multiplier
 // the multiplier is a (decimal) fixed-point number:
@@ -2983,7 +2983,7 @@ void SpriteCB_PlayerMonFromBall(struct Sprite *sprite)
 
 static void SpriteCB_TrainerThrowObject_Main(struct Sprite *sprite)
 {
-    sub_8039E9C(sprite);
+    AnimSetCenterToCornerVecX(sprite);
     if (sprite->animEnded)
         sprite->callback = SpriteCB_Idle;
 }
@@ -2996,10 +2996,10 @@ void SpriteCB_TrainerThrowObject(struct Sprite *sprite)
     sprite->callback = SpriteCB_TrainerThrowObject_Main;
 }
 
-void sub_8039E9C(struct Sprite *sprite)
+void AnimSetCenterToCornerVecX(struct Sprite *sprite)
 {
     if (sprite->animDelayCounter == 0)
-        sprite->centerToCornerVecX = gUnknown_0831ACE0[sprite->animCmdIndex];
+        sprite->centerToCornerVecX = sCenterToCornerVecXs[sprite->animCmdIndex];
 }
 
 void BeginBattleIntroDummy(void)
