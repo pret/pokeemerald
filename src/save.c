@@ -52,22 +52,22 @@ static u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
 
 static const struct SaveSectionOffsets sSaveSectionOffsets[] =
 {
-    SAVEBLOCK_CHUNK(gSaveblock2, 0),
+    SAVEBLOCK_CHUNK(struct SaveBlock2, 0),
 
-    SAVEBLOCK_CHUNK(gSaveblock1, 0),
-    SAVEBLOCK_CHUNK(gSaveblock1, 1),
-    SAVEBLOCK_CHUNK(gSaveblock1, 2),
-    SAVEBLOCK_CHUNK(gSaveblock1, 3),
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 0),
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 1),
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 2),
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 3),
 
-    SAVEBLOCK_CHUNK(gPokemonStorage, 0),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 1),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 2),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 3),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 4),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 5),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 6),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 7),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 8),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 0),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 1),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 2),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 3),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 4),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 5),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 6),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 7),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 8),
 };
 
 // iwram common
