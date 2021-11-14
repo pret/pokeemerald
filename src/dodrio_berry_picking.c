@@ -5035,12 +5035,12 @@ static void Msg_SavingDontTurnOff(void)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateTask(Task_LinkSave, 0);
+            CreateTask(Task_LinkFullSave, 0);
             sGfx->state++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(Task_LinkSave))
+        if (!FuncIsActiveTask(Task_LinkFullSave))
             sGfx->state++;
         break;
     default:
