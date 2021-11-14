@@ -55,22 +55,22 @@ struct
     u16 size;
 } static const sSaveSlotLayout[NUM_SECTORS_PER_SLOT] =
 {
-    SAVEBLOCK_CHUNK(gSaveblock2, 0), // SECTOR_ID_SAVEBLOCK2
+    SAVEBLOCK_CHUNK(struct SaveBlock2, 0), // SECTOR_ID_SAVEBLOCK2
 
-    SAVEBLOCK_CHUNK(gSaveblock1, 0), // SECTOR_ID_SAVEBLOCK1_START
-    SAVEBLOCK_CHUNK(gSaveblock1, 1),
-    SAVEBLOCK_CHUNK(gSaveblock1, 2),
-    SAVEBLOCK_CHUNK(gSaveblock1, 3), // SECTOR_ID_SAVEBLOCK1_END
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 0), // SECTOR_ID_SAVEBLOCK1_START
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 1),
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 2),
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 3), // SECTOR_ID_SAVEBLOCK1_END
 
-    SAVEBLOCK_CHUNK(gPokemonStorage, 0), // SECTOR_ID_PKMN_STORAGE_START
-    SAVEBLOCK_CHUNK(gPokemonStorage, 1),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 2),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 3),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 4),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 5),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 6),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 7),
-    SAVEBLOCK_CHUNK(gPokemonStorage, 8), // SECTOR_ID_PKMN_STORAGE_END
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 0), // SECTOR_ID_PKMN_STORAGE_START
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 1),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 2),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 3),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 4),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 5),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 6),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 7),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 8), // SECTOR_ID_PKMN_STORAGE_END
 };
 
 u16 gLastWrittenSector;
