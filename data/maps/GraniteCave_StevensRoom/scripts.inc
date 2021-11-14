@@ -72,7 +72,7 @@ GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit:
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 GraniteCave_StevensRoom_Movement_StevenExitSouth:

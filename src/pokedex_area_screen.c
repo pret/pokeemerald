@@ -319,7 +319,7 @@ static bool8 DrawAreaGlow(void)
         }
         return TRUE;
     case 4:
-        ChangeBgY(2, -0x800, 0);
+        ChangeBgY(2, -0x800, BG_COORD_SET);
         break;
     default:
         return FALSE;
@@ -367,7 +367,7 @@ static void FindMapsWithMon(u16 species)
             }
         }
 
-        for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
+        for (i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED); i++)
         {
             if (MapHasMon(&gWildMonHeaders[i], species))
             {

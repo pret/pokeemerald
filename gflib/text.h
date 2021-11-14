@@ -5,7 +5,9 @@
 
 #define NUM_TEXT_PRINTERS 32
 
-#define TEXT_SPEED_FF 0xFF
+// Given as a text speed when all the text should be
+// loaded at once but not copied to vram yet.
+#define TEXT_SKIP_DRAW 0xFF
 
 enum {
     FONT_SMALL,
@@ -18,6 +20,25 @@ enum {
     FONT_NARROW,
     FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
     FONT_BOLD, // JP glyph set only
+};
+
+// Return values for font functions
+enum {
+    RENDER_PRINT,
+    RENDER_FINISH,
+    RENDER_REPEAT, // Run render function again, if e.g. a control code is encountered.
+    RENDER_UPDATE,
+};
+
+// Text printer states read by RenderText / FontFunc_Braille
+enum {
+    RENDER_STATE_HANDLE_CHAR,
+    RENDER_STATE_WAIT,
+    RENDER_STATE_CLEAR,
+    RENDER_STATE_SCROLL_START,
+    RENDER_STATE_SCROLL,
+    RENDER_STATE_WAIT_SE,
+    RENDER_STATE_PAUSE,
 };
 
 enum {
@@ -128,7 +149,6 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
 bool16 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);
-u32 RenderFont(struct TextPrinter *textPrinter);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
@@ -145,7 +165,6 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
-u16 RenderText(struct TextPrinter *textPrinter);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str);
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y);

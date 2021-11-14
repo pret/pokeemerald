@@ -448,8 +448,8 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     case 4:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         ShowBg(1);
         ShowBg(2);
         HideBg(3);
@@ -644,7 +644,7 @@ static void AddSearchResultListMenuWindow(struct PokenavSub8 *searchList)
 {
     searchList->winid = AddWindow(&sSearchResultListMenuWindowTemplate);
     PutWindowTilemap(searchList->winid);
-    CopyWindowToVram(searchList->winid, 1);
+    CopyWindowToVram(searchList->winid, COPYWIN_MAP);
     PrintSearchResultListMenuItems(searchList);
 }
 
@@ -655,10 +655,10 @@ static void PrintSearchResultListMenuItems(struct PokenavSub8 *searchList)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     *gStringVar1 = EOS;
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar2, gText_NumberF700);
-    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar2, 4, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar2, 4, 1, TEXT_SKIP_DRAW, NULL);
     ConvertIntToDecimalStringN(gStringVar1, r7, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar1, 34, 1, 0xFF, NULL);
-    CopyWindowToVram(searchList->winid, 2);
+    AddTextPrinterParameterized(searchList->winid, FONT_NORMAL, gStringVar1, 34, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(searchList->winid, COPYWIN_GFX);
 }
 
 static void InitConditionSearchListMenuTemplate(void)

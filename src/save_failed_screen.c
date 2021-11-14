@@ -222,8 +222,8 @@ static void CB2_SaveFailedScreen(void)
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
         FillWindowPixelBuffer(sWindowIds[CLOCK_WIN_ID], PIXEL_FILL(1)); // backwards?
         FillWindowPixelBuffer(sWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
-        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], 2); // again?
-        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], 1);
+        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], COPYWIN_GFX); // again?
+        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], COPYWIN_MAP);
         SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(1);
@@ -363,9 +363,10 @@ static bool8 VerifySectorWipe(u16 sector)
 
     ReadFlash(sector, 0, (u8 *)ptr, SECTOR_SIZE);
 
-    for (i = 0; i < 0x400; i++, ptr++)
+    // 1/4 because ptr is u32
+    for (i = 0; i < SECTOR_SIZE / 4; i++, ptr++)
         if (*ptr)
-            return TRUE;
+            return TRUE; // Sector has nonzero data, failed
 
     return FALSE;
 }
@@ -375,6 +376,7 @@ static bool8 WipeSector(u16 sector)
     u16 i, j;
     bool8 failed = TRUE;
 
+    // Attempt to wipe sector with an arbitrary attempt limit of 130
     for (i = 0; failed && i < 130; i++)
     {
         for (j = 0; j < SECTOR_SIZE; j++)

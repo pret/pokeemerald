@@ -68,7 +68,7 @@ SouthernIsland_Interior_EventScript_Lati::
 	waitmovement 0
 	delay 50
 	waitse
-	playmoncry VAR_TEMP_4, 0
+	playmoncry VAR_TEMP_4, CRY_MODE_NORMAL
 	delay 30
 	waitmoncry
 	addobject LOCALID_LATI
@@ -145,7 +145,7 @@ SouthernIsland_Interior_Movement_CameraPanDown:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 SouthernIsland_Interior_Movement_LatiApproach:

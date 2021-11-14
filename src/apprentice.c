@@ -643,9 +643,9 @@ static void CreateApprenticeMenu(u8 menu)
     SetStandardWindowBorderStyle(windowId, 0);
 
     for (i = 0; i < count; i++)
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
 
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, count, 0);
     CreateChooseAnswerTask(TRUE, count, windowId);
 }
 
@@ -691,7 +691,7 @@ static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height)
 
     windowId = AddWindow(&winTemplate);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
     return windowId;
 }
 

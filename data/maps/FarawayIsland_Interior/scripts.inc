@@ -73,7 +73,7 @@ FarawayIsland_Interior_Movement_MewMoveAndHide:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	set_invisible
 	step_end
 
@@ -126,7 +126,7 @@ FarawayIsland_Interior_EventScript_Mew::
 	special SetMewAboveGrass
 	message FarawayIsland_Interior_Text_Mew
 	waitse
-	playmoncry SPECIES_MEW, 2
+	playmoncry SPECIES_MEW, CRY_MODE_ENCOUNTER
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq FarawayIsland_Interior_EventScript_FoundMewNorth
 	compare VAR_FACING, DIR_SOUTH

@@ -1648,8 +1648,8 @@ static void ErrorMsg_MoveCloserToPartner(void)
     AddTextPrinterParameterized3(2, FONT_SHORT_COPY_1, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
     PutWindowTilemap(2);
-    CopyWindowToVram(0, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(0, COPYWIN_NONE); // Does nothing
+    CopyWindowToVram(2, COPYWIN_FULL);
 }
 
 static void ErrorMsg_CheckConnections(void)
@@ -1660,8 +1660,8 @@ static void ErrorMsg_CheckConnections(void)
     AddTextPrinterParameterized3(1, FONT_SHORT_COPY_1, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);
-    CopyWindowToVram(1, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(1, COPYWIN_NONE); // Does nothing
+    CopyWindowToVram(2, COPYWIN_FULL);
 }
 
 static void CB2_PrintErrorMessage(void)

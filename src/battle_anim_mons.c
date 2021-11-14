@@ -724,9 +724,9 @@ static void TranslateSpriteToBattleAttackerPos(struct Sprite *sprite)
 #undef sTargetY
 
 // Unused
-static void sub_80A67A4(struct Sprite *sprite)
+static void EndUnkPaletteAnim(struct Sprite *sprite)
 {
-    ResetPaletteStructByUid(sprite->data[5]);
+    PaletteStruct_ResetById(sprite->data[5]);
     DestroySpriteAndMatrix(sprite);
 }
 

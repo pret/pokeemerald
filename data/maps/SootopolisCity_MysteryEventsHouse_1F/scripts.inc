@@ -38,7 +38,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle::
 	applymovement LOCALID_OLD_MAN, SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer
 	waitmovement 0
 	copyobjectxytoperm LOCALID_OLD_MAN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleWonComment
@@ -69,7 +69,7 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerExitStairs:
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_OldMan::
@@ -171,12 +171,12 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerEnterBasementWest:
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideLeft:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideRight:
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles:

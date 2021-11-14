@@ -48,7 +48,7 @@ SkyPillar_Top_EventScript_RayquazaFaceDown::
 SkyPillar_Top_EventScript_Rayquaza::
 	lockall
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setwildbattle SPECIES_RAYQUAZA, 70, ITEM_NONE
@@ -105,7 +105,7 @@ SkyPillar_Top_EventScript_AwakenRayquaza::
 	applymovement LOCALID_RAYQUAZA_SLEEPING, SkyPillar_Top_Movement_RayquazaStir
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -113,7 +113,7 @@ SkyPillar_Top_EventScript_AwakenRayquaza::
 	special ShakeCamera
 	waitstate
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 2  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -165,7 +165,7 @@ SkyPillar_Top_Movement_RayquazaFlyOff:
 	delay_8
 	walk_in_place_right  @ Normal, awake
 	delay_8
-	walk_fastest_up  @ Fly up
+	walk_faster_up  @ Fly up
 	slide_up
 	slide_up
 	slide_up

@@ -108,23 +108,23 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
 EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight:
 	walk_down
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromLeft:
 	walk_down
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Text_MustHaveAllGymBadges:

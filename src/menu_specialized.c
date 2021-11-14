@@ -268,7 +268,7 @@ static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
     length = StringLength(buffer);
     if (length < PLAYER_NAME_LENGTH - 1)
         ConvertInternationalString(buffer, LANGUAGE_JAPANESE);
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 8, y, 0, 0, sPlayerNameTextColors, -1, buffer);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 8, y, 0, 0, sPlayerNameTextColors, TEXT_SKIP_DRAW, buffer);
 }
 
 u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
@@ -740,30 +740,30 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     str = gText_MoveRelearnerBattleMoves;
     x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPP;
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x29, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPower;
     x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x6A);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAccuracy;
     x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x6A);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
     if (chosenMove == LIST_CANCEL)
     {
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         return;
     }
     move = &gBattleMoves[chosenMove];
     str = gTypeNames[move->type];
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
 
     x = 4 + GetStringWidth(FONT_NORMAL, gText_MoveRelearnerPP, 0);
     ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    AddTextPrinterParameterized(0, FONT_NORMAL, buffer, x, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, buffer, x, 0x29, TEXT_SKIP_DRAW, NULL);
 
     if (move->power < 2)
     {
@@ -774,7 +774,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x19, TEXT_SKIP_DRAW, NULL);
 
     if (move->accuracy == 0)
     {
@@ -785,7 +785,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
 
     str = gMoveDescriptionPointers[chosenMove - 1];
     AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
@@ -801,30 +801,30 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     str = gText_MoveRelearnerContestMovesTitle;
     x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAppeal;
     x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x5C);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerJam;
     x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x5C);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
 
     if (chosenMove == MENU_NOTHING_CHOSEN)
     {
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         return;
     }
 
     move = &gContestMoves[chosenMove];
     str = gContestMoveTypeTextPointers[move->contestCategory];
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, 4, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
 
     str = gContestEffectDescriptionPointers[move->effect];
-    AddTextPrinterParameterized(1, FONT_NARROW, str, 0, 0x41, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NARROW, str, 0, 0x41, TEXT_SKIP_DRAW, NULL);
 
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)

@@ -134,7 +134,7 @@ Route118_EventScript_StevenExit2::
 
 Route118_Movement_PlayerWatchStevenExit:
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 Route118_Movement_StevenApproachLedge0:

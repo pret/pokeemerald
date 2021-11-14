@@ -23,7 +23,7 @@ SootopolisCity_House1_EventScript_Kecleon::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_KECLEON, 0
+	playmoncry SPECIES_KECLEON, CRY_MODE_NORMAL
 	msgbox SootopolisCity_House1_Text_Kecleon, MSGBOX_DEFAULT
 	waitmoncry
 	release

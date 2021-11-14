@@ -64,7 +64,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterRoom::
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit
 	waitmovement 0
 	copyobjectxytoperm LOCALID_ATTENDANT
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -78,7 +78,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterRoom:
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant::
@@ -101,7 +101,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge::
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterElevator::
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 10, 1
 	waitdooranim

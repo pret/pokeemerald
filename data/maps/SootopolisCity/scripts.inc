@@ -238,12 +238,12 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	setvar VAR_0x8004, FALSE @ Just do Groudon/Kyogre fight scene
 	special Script_DoRayquazaScene
 	waitstate
-	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFastestLeft
-	applymovement LOCALID_GROUDON, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_GROUDON, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 60
 	waitse
-	playmoncry SPECIES_KYOGRE, 2
+	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
@@ -257,7 +257,7 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_GROUDON, 2
+	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
@@ -271,7 +271,7 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_KYOGRE, 2
+	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
@@ -338,12 +338,12 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	setvar VAR_0x8004, FALSE @ Just do Groudon/Kyogre fight scene
 	special Script_DoRayquazaScene
 	waitstate
-	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFastestLeft
-	applymovement LOCALID_GROUDON, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_GROUDON, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 60
 	waitse
-	playmoncry SPECIES_KYOGRE, 2
+	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
@@ -357,7 +357,7 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_GROUDON, 2
+	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
@@ -371,7 +371,7 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_KYOGRE, 2
+	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
 	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
@@ -536,7 +536,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanUp
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -544,7 +544,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	special ShakeCamera
 	waitstate
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 2  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -589,7 +589,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerApproachLegendaries
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -597,7 +597,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	special ShakeCamera
 	waitstate
 	waitse
-	playmoncry SPECIES_RAYQUAZA, 2
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 2  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -651,12 +651,12 @@ SootopolisCity_EventScript_SetRoughWater::
 
 SootopolisCity_Movement_RayquazaFlyOff:
 	walk_fast_up
-	walk_fastest_up
-	walk_fastest_up
-	walk_fastest_up
-	walk_fastest_up
-	walk_fastest_up
-	walk_fastest_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
 	step_end
 
 SootopolisCity_Movement_PanUp:
@@ -1055,7 +1055,7 @@ SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginWest:
@@ -1186,7 +1186,7 @@ SootopolisCity_Movement_StevenWalkToCaveOfOrigin:
 	walk_right
 	walk_right
 	delay_4
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
 	walk_right
@@ -1249,7 +1249,7 @@ SootopolisCity_Movement_PlayerWalkToCaveOfOrigin:
 
 SootopolisCity_Movement_ExpertMoveAside:
 	walk_slow_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SootopolisCity_Movement_StevenArriveCaveEntrance:
@@ -1262,7 +1262,7 @@ SootopolisCity_Movement_StevenArriveCaveEntrance:
 	walk_up
 	walk_up
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SootopolisCity_Movement_PlayerArriveCaveEntrance:
@@ -1275,7 +1275,7 @@ SootopolisCity_Movement_PlayerArriveCaveEntrance:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SootopolisCity_Movement_PlayerEnterCaveOfOrigin:
@@ -1413,12 +1413,12 @@ SootopolisCity_EventScript_GoToGym::
 
 SootopolisCity_Movement_WallaceMoveFromGym:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SootopolisCity_Movement_WallaceMoveFromGymWest:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SootopolisCity_EventScript_Maxie::

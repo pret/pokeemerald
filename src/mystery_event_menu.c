@@ -133,7 +133,7 @@ static void CB2_MysteryEventMenu(void)
     case 0:
         DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 0xD);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         ShowBg(0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         gMain.state++;
@@ -181,7 +181,7 @@ static void CB2_MysteryEventMenu(void)
                 DrawStdFrameWithCustomTileAndPalette(1, 1, 1, 0xD);
                 PrintMysteryMenuText(1, gText_LoadingEvent, 1, 2, 0);
                 PutWindowTilemap(1);
-                CopyWindowToVram(1, 3);
+                CopyWindowToVram(1, COPYWIN_FULL);
                 gMain.state++;
             }
             else if (JOY_NEW(B_BUTTON))

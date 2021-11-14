@@ -63,14 +63,14 @@ while (my $line = <$file>)
 # though. Uniq is pretty fast!
 my $base_cmd = "nm $elffname | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
 
-# This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
+# This looks for Unknown_, Unknown_, or sub_, followed by an address. Note that
 # it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
-my $undoc_cmd = "grep '[Uu]nknown_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
+my $undoc_cmd = "grep '[Uu]nknown_[0-9a-fA-F]\\{5,7\\}\\|sub_[0-9a-fA-F]\\{5,7\\}'";
 
 # This looks for every symbol with an address at the end of it. Some things are
 # given a name based on their type / location, but still have an unknown purpose.
 # For example, FooMap_EventScript_FFFFFFF.
-my $partial_doc_cmd = "grep '_[0-28][0-9a-fA-F]\\{5,6\\}'";
+my $partial_doc_cmd = "grep '_[0-28][0-9a-fA-F]\\{5,7\\}'";
 
 my $count_cmd = "wc -l";
 

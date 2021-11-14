@@ -90,7 +90,7 @@ MauvilleCity_EventScript_UncleAskPlayerToBattleWally::
 MauvilleCity_EventScript_Wally::
 	lockall
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_WallyRequestBattleAgain
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_WallyWantToChallengeGym, MSGBOX_DEFAULT
 	msgbox MauvilleCity_Text_UncleYourePushingIt, MSGBOX_DEFAULT
@@ -122,7 +122,7 @@ MauvilleCity_EventScript_WallyAndUncleExitNorth::
 	applymovement LOCALID_WALLY, MauvilleCity_Movement_WallyExitNorth1
 	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleExitNorth1
 	waitmovement 0
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerFaceUncleNorth
@@ -142,7 +142,7 @@ MauvilleCity_EventScript_WallyAndUncleExitEast::
 	applymovement LOCALID_WALLY, MauvilleCity_Movement_WallyExitEast1
 	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleExitEast1
 	waitmovement 0
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 30
 	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleApproachPlayerEast
@@ -168,7 +168,7 @@ MauvilleCity_EventScript_DefeatedWally::
 	call_if_eq MauvilleCity_EventScript_ScottApproachPlayerNorth
 	compare VAR_FACING, DIR_EAST
 	call_if_eq MauvilleCity_EventScript_ScottApproachPlayerEast
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_ScottYouDidntHoldBack, MSGBOX_DEFAULT
 	closemessage
@@ -209,13 +209,13 @@ MauvilleCity_EventScript_ScottExitEast::
 MauvilleCity_EventScript_BattleWally::
 	msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MauvilleCity_Text_ThankYouNotEnoughToBattle, MSGBOX_DEFAULT
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_UncleNoNeedToBeDown, MSGBOX_DEFAULT
 	return
@@ -280,35 +280,35 @@ MauvilleCity_Movement_WallyExitEast2:
 MauvilleCity_Movement_PlayerWatchWallyExitNorth2:
 	delay_16
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MauvilleCity_Movement_PlayerWatchWallyExitEast2:
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MauvilleCity_Movement_PlayerWatchScottExitNorth:
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MauvilleCity_Movement_PlayerWatchScottExitEast:
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MauvilleCity_Movement_PlayerWatchWallyExitEast1:
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MauvilleCity_Movement_PlayerWatchWallyExitNorth1:
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MauvilleCity_Movement_WallysUncleExitNorth1:
@@ -331,13 +331,13 @@ MauvilleCity_Movement_PlayerFaceUncleNorth:
 	delay_16
 	delay_8
 	delay_4
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MauvilleCity_Movement_WallysUncleApproachPlayerNorth:
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 MauvilleCity_Movement_WallysUncleApproachPlayerEast:
@@ -379,7 +379,7 @@ MauvilleCity_Movement_ScottApproachPlayerNorth:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 MauvilleCity_Movement_ScottApproachPlayerEast:

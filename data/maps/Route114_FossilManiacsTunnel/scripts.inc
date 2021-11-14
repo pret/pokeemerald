@@ -25,8 +25,8 @@ Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass::
 
 Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn::
 	lockall
-	applymovement LOCALID_FOSSIL_MANIAC, Common_Movement_WalkInPlaceFastestUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_FOSSIL_MANIAC, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox Route114_FossilManiacsTunnel_Text_NotSafeThatWay, MSGBOX_DEFAULT
 	setvar VAR_FOSSIL_MANIAC_STATE, 2

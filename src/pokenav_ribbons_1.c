@@ -439,8 +439,8 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
             return LT_PAUSE;
         if (!UpdateMonListBgs())
             return LT_PAUSE;
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         ShowBg(1);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -652,7 +652,7 @@ static void AddRibbonsMonListWindow(struct PokenavSub10 *monMenu)
     PutWindowTilemap(monMenu->winid);
     r2 = GetRibbonsMonListCount();
     sub_81D02B0(monMenu->winid, 0, r2);
-    CopyWindowToVram(monMenu->winid, 1);
+    CopyWindowToVram(monMenu->winid, COPYWIN_MAP);
     sub_81D0288(monMenu);
 }
 
@@ -661,7 +661,7 @@ static void sub_81D0288(struct PokenavSub10 *monMenu)
     s32 r4 = GetSelectedPokenavListIndex();
     s32 r2 = GetRibbonsMonListCount();
     sub_81D02B0(monMenu->winid, r4 + 1, r2);
-    CopyWindowToVram(monMenu->winid, 2);
+    CopyWindowToVram(monMenu->winid, COPYWIN_GFX);
 }
 
 static void sub_81D02B0(s32 windowId, s32 val1, s32 val2)
@@ -674,7 +674,7 @@ static void sub_81D02B0(s32 windowId, s32 val1, s32 val2)
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, val2, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(FONT_NORMAL, strbuf, 56);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, strbuf, x, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, strbuf, x, 1, TEXT_SKIP_DRAW, NULL);
 }
 
 static void InitMonRibbonPokenavListMenuTemplate(void)
