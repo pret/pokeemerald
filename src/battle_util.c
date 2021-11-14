@@ -3792,7 +3792,7 @@ u8 TryWeatherFormChange(u8 battler)
             ret = 0;
         else if (gBattleMonForms[battler] == 0 && weatherEffect && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & WEATHER_SUN_ANY)
             ret = 2;
-        else if (gBattleMonForms[battler] != 0 && (!weatherEffect || holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA || !(gBattleWeather & WEATHER_SUN_ANY)))
+        else if (gBattleMonForms[battler] != 0 && (!weatherEffect || holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || !(gBattleWeather & WEATHER_SUN_ANY)))
             ret = 1;
     }
 
