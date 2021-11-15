@@ -9285,12 +9285,16 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
-    case VARIOUS_JUMP_IF_NO_FLING_POWER:
+    case VARIOUS_JUMP_IF_FLING_FAILS:
     #ifdef ITEM_EXPANSION
         if (!ItemId_GetFlingPower(gBattleMons[gActiveBattler].item))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        else
+        else if (gLastUsedItem == ITEM_NONE)
+    #else
+        if (gLastUsedItem == ITEM_NONE)
     #endif
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
             gBattlescriptCurrInstr += 7;
         return;
     case VARIOUS_CURE_CERTAIN_STATUSES:

@@ -405,7 +405,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_BOLT_BEAK
 
 BattleScript_EffectFling:
-	jumpifnoflingpower BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifflingfails BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
 	jumpifstatus3 BS_ATTACKER, STATUS3_EMBARGO, BattleScript_ButItFailedAtkStringPpReduce
 	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailedAtkStringPpReduce
 .if B_KLUTZ_FLING_INTERACTION >= GEN_5
