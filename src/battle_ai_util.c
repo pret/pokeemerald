@@ -1133,18 +1133,17 @@ s32 AI_GetAbility(u32 battlerId)
     || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
     || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
         return gBattleMons[battlerId].ability;
-
+        
+    // AI has no knowledge of opponent, so it guesses which ability.
     if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
     {
-        if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
+        u16 abilityGuess = ABILITY_NONE;
+        while (abilityGuess == ABILITY_NONE)
         {
-            // AI has no knowledge of opponent, so it guesses which ability.
-            return gBaseStats[gBattleMons[battlerId].species].abilities[Random() & 1];
+            abilityGuess = gBaseStats[gBattleMons[battlerId].species].abilities[Random() % NUM_ABILITY_SLOTS];
         }
-        else
-        {
-            return gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
-        }
+        
+        return abilityGuess;
     }
     return ABILITY_NONE; // Unknown.
 }
