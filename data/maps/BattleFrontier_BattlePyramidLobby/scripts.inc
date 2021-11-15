@@ -173,7 +173,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_RESULT, 0
 	special HealPlayerParty
-	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 255, 1, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 1, 1
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

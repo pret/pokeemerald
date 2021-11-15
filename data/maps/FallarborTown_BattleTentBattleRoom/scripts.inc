@@ -71,7 +71,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 
 FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
@@ -142,7 +142,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 	delay 60
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 
 @ Unreachable code block? The flow into the next block also doesnt make sense

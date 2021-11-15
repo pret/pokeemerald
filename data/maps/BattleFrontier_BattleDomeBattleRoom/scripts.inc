@@ -164,7 +164,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent::
 	switch VAR_RESULT
 	case DOME_ROUNDS_COUNT, BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
 	setvar VAR_0x8006, 1
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 255, 5, 3
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 5, 3
 	waitstate
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney::
@@ -885,12 +885,12 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobby::
 	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, FRONTIER_MODE_DOUBLES
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 5, 11
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 5, 11
 	waitstate
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles::
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 17, 11
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 17, 11
 	waitstate
 	end
 

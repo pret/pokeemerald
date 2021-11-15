@@ -41,7 +41,7 @@ TrainerHill_1F_EventScript_DummyWarpToEntranceCounter::
 
 @ Never reached
 TrainerHill_1F_EventScript_WarpSilentToEntranceCounter::
-	warpsilent MAP_TRAINER_HILL_ENTRANCE, 255, 9, 6
+	warpsilent MAP_TRAINER_HILL_ENTRANCE, 9, 6
 	waitstate
 	end
 
@@ -53,7 +53,7 @@ TrainerHill_1F_EventScript_Lost::
 
 TrainerHill_EventScript_WarpToEntranceCounter::
 	setvar VAR_TEMP_1, 0
-	warp MAP_TRAINER_HILL_ENTRANCE, 255, 9, 6
+	warp MAP_TRAINER_HILL_ENTRANCE, 9, 6
 	waitstate
 	end
 

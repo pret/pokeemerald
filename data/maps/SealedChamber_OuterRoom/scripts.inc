@@ -5,8 +5,8 @@ SealedChamber_OuterRoom_MapScripts::
 	.byte 0
 
 SealedChamber_OuterRoom_OnResume:
-	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
-	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
+	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 12, 44
+	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 12, 44
 	end
 
 SealedChamber_OuterRoom_OnTransition:

@@ -119,7 +119,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementBattleNum::
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyWon
 	setvar VAR_0x8006, 1
-	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 8, 8
 	waitstate
 BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyWon::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
@@ -247,12 +247,12 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobby::
 	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, FRONTIER_MODE_DOUBLES
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles
-	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 4, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 4, 8
 	waitstate
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles::
-	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 14, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 14, 8
 	waitstate
 	end
 

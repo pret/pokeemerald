@@ -8,7 +8,7 @@ LilycoveCity_Harbor_MapScripts::
 	.byte 0
 
 LilycoveCity_Harbor_OnTransition:
-	setescapewarp MAP_LILYCOVE_CITY, 255, 12, 33
+	setescapewarp MAP_LILYCOVE_CITY, 12, 33
 	end
 
 LilycoveCity_Harbor_EventScript_FerryAttendant::
@@ -64,28 +64,28 @@ LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect::
 
 LilycoveCity_Harbor_EventScript_GoToSouthernIsland::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
+	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_GoToNavelRock::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_NAVEL_ROCK_HARBOR, 255, 8, 4
+	warp MAP_NAVEL_ROCK_HARBOR, 8, 4
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_GoToBirthIsland::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_BIRTH_ISLAND_HARBOR, 255, 8, 4
+	warp MAP_BIRTH_ISLAND_HARBOR, 8, 4
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_GoToFarawayIsland::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
+	warp MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38
 	waitstate
 	release
 	end
@@ -96,7 +96,7 @@ LilycoveCity_Harbor_EventScript_GoToSlateport::
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 1, 10
 	waitstate
 	release
 	end
@@ -106,7 +106,7 @@ LilycoveCity_Harbor_EventScript_GoToBattleFrontier::
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67
 	waitstate
 	release
 	end
@@ -223,7 +223,7 @@ LilycoveCity_Harbor_EventScript_EonTicketFirstTime::
 LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime::
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
-	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
+	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
 	waitstate
 	release
 	end
@@ -240,7 +240,7 @@ LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime::
 LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime::
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
-	warp MAP_BIRTH_ISLAND_HARBOR, 255, 8, 4
+	warp MAP_BIRTH_ISLAND_HARBOR, 8, 4
 	waitstate
 	release
 	end
@@ -281,7 +281,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
 	call_if_eq LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast
 	setvar VAR_0x8004, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepart
-	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
+	warp MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38
 	waitstate
 	release
 	end
@@ -289,7 +289,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
 LilycoveCity_Harbor_EventScript_GoToFarawayIslandFirstTime::
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
-	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
+	warp MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38
 	waitstate
 	release
 	end
@@ -306,7 +306,7 @@ LilycoveCity_Harbor_EventScript_MysticTicketFirstTime::
 LilycoveCity_Harbor_EventScript_GoToNavelRockFirstTime::
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
-	warp MAP_NAVEL_ROCK_HARBOR, 255, 8, 4
+	warp MAP_NAVEL_ROCK_HARBOR, 8, 4
 	waitstate
 	release
 	end
@@ -399,7 +399,7 @@ LilycoveCity_Harbor_EventScript_GoToSlateportUnused::
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 1, 10
 	waitstate
 	release
 	end
@@ -410,7 +410,7 @@ LilycoveCity_Harbor_EventScript_GoToBattleFrontierUnused::
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67
 	waitstate
 	release
 	end

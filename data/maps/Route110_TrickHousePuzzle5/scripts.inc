@@ -465,7 +465,7 @@ Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer::
 	waitmovement 0
 	msgbox Route110_TrickHousePuzzle5_Text_WaitForNextChallenge, MSGBOX_DEFAULT
 	closemessage
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 0, 21
 	waitstate
 	releaseall
 	end

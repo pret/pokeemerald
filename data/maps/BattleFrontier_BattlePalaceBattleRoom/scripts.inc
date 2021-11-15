@@ -419,12 +419,12 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobby::
 	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, FRONTIER_MODE_DOUBLES
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyDoubles
-	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 5, 7
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 5, 7
 	waitstate
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyDoubles::
-	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 19, 7
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 19, 7
 	waitstate
 	end
 

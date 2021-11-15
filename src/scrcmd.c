@@ -49,7 +49,6 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
-#include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -790,7 +789,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
         SetWarpDestinationToFixedHoleWarp(x - MAP_OFFSET, y - MAP_OFFSET);
     else
-        SetWarpDestination(mapGroup, mapNum, -1, x - MAP_OFFSET, y - MAP_OFFSET);
+        SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, x - MAP_OFFSET, y - MAP_OFFSET);
     DoFallWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -2238,6 +2237,7 @@ bool8 ScrCmd_gotowondercardscript(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// This warp is only used by the Union Room.
 // For the warp used by the Aqua Hideout, see DoTeleportTileWarp
 bool8 ScrCmd_warpspinenter(struct ScriptContext *ctx)
 {

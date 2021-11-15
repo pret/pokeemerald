@@ -16,7 +16,7 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_SetInWildMonRoom::
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 5, 6
 	waitstate
 	end
 

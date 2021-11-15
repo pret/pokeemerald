@@ -162,7 +162,7 @@ VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge::
 	msgbox VerdanturfTown_BattleTentLobby_Text_NowFollowMe, MSGBOX_DEFAULT
 	closemessage
 	call VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor
-	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 2, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

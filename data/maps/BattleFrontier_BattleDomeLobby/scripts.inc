@@ -202,7 +202,7 @@ BattleFrontier_BattleDomeLobby_EventScript_EnterChallenge::
 	closemessage
 	call BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor
 	special HealPlayerParty
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 255, 23, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 23, 6
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

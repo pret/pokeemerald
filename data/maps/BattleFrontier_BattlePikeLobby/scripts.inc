@@ -159,7 +159,7 @@ BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge::
 	call BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor
 	special HealPlayerParty
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
-	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 6, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

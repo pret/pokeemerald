@@ -388,7 +388,7 @@ CableClub_EventScript_EnterColosseum::
 	compare VAR_0x8004, USING_MULTI_BATTLE
 	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
-	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
+	warp MAP_BATTLE_COLOSSEUM_2P, 6, 8
 	special DoCableClubWarp
 	waitstate
 	end
@@ -401,7 +401,7 @@ CableClub_EventScript_PlayerApproachLinkRoomRight::
 
 CableClub_EventScript_WarpTo4PColosseum::
 	special SetCableClubWarp
-	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
+	warp MAP_BATTLE_COLOSSEUM_4P, 5, 8
 	special DoCableClubWarp
 	waitstate
 	end
@@ -491,7 +491,7 @@ CableClub_EventScript_EnterTradeCenter::
 	waitdooranim
 	release
 	special SetCableClubWarp
-	setwarp MAP_TRADE_CENTER, 255, 5, 8
+	setwarp MAP_TRADE_CENTER, 5, 8
 	special DoCableClubWarp
 	waitstate
 	end
@@ -566,7 +566,7 @@ CableClub_EventScript_EnterRecordCorner::
 	waitdooranim
 	release
 	special SetCableClubWarp
-	setwarp MAP_RECORD_CORNER, 255, 8, 9
+	setwarp MAP_RECORD_CORNER, 8, 9
 	special DoCableClubWarp
 	waitstate
 	end
@@ -968,7 +968,7 @@ CableClub_EventScript_EnterUnionRoom::
 	waitdooranim
 	special Script_ResetUnionRoomTrade
 	special SetCableClubWarp
-	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
+	warpspinenter MAP_UNION_ROOM, 7, 11
 	waitstate
 	special RunUnionRoom
 	waitstate

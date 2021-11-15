@@ -115,7 +115,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting::
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementEast
 	compare VAR_FACING, DIR_WEST
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementWest
-	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 255, 3, 1
+	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 3, 1
 	waitstate
 	release
 	end

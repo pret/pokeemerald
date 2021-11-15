@@ -7,7 +7,6 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "trig.h"
-#include "constants/maps.h"
 #include "overworld.h"
 #include "event_data.h"
 #include "secret_base.h"
@@ -2018,7 +2017,7 @@ static void CB_ExitFlyMap(void)
                     if (sMapHealLocations[sFlyMap->regionMap.mapSecId][2] != 0)
                         SetWarpDestinationToHealLocation(sMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
                     else
-                        SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], -1);
+                        SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], WARP_ID_NONE);
                     break;
                 }
                 ReturnToFieldFromFlyMapSelect();

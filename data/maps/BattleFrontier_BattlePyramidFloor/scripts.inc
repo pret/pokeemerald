@@ -70,7 +70,7 @@ BattleFrontier_BattlePyramid_EventScript_WarpToLobby::
 	pyramid_updatelight 0, PYRAMID_LIGHT_SET_RADIUS
 	pyramid_clearhelditems
 	special HealPlayerParty
-	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 7, 13
 	waitstate
 	end
 
@@ -102,12 +102,12 @@ BattlePyramid_WarpToNextFloor::
 	pyramid_seedfloor
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_RESULT, 0
-	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 255, 1, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 1, 1
 	waitstate
 	end
 
 BattlePyramid_WarpToTop::
-	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP, 255, 17, 17
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP, 17, 17
 	waitstate
 	end
 

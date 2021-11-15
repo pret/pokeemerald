@@ -206,7 +206,7 @@ SootopolisCity_EventScript_PlayerFaceLegendaries2::
 	return
 
 SootopolisCity_OnResume:
-	setdivewarp MAP_UNDERWATER_SOOTOPOLIS_CITY, 255, 9, 6
+	setdivewarp MAP_UNDERWATER_SOOTOPOLIS_CITY, 9, 6
 	end
 
 SootopolisCity_OnFrame:
@@ -565,7 +565,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	fadenewbgm MUS_SOOTOPOLIS
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 43, 32
+	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 43, 32
 	waitstate
 	end
 
@@ -618,7 +618,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	fadenewbgm MUS_SURF
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 29, 53
+	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 29, 53
 	waitstate
 	end
 
@@ -1003,7 +1003,7 @@ SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin::
 	setflag FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerEnterCaveOfOrigin
 	waitmovement 0
-	warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 255, 9, 20
+	warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 9, 20
 	waitstate
 	end
 
@@ -1460,7 +1460,7 @@ SootopolisCity_EventScript_MaxieArchieLeave::
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setvar VAR_MT_PYRE_STATE, 2
-	warpsilent MAP_SOOTOPOLIS_CITY, 255, 31, 34
+	warpsilent MAP_SOOTOPOLIS_CITY, 31, 34
 	waitstate
 	releaseall
 	end

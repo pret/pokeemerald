@@ -16,6 +16,6 @@ SkyPillar_4F_EventScript_CleanFloor::
 
 SkyPillar_4F_SetHoleWarp:
 	setstepcallback STEP_CB_CRACKED_FLOOR
-	setholewarp MAP_SKY_PILLAR_3F, 255, 0, 0
+	setholewarp MAP_SKY_PILLAR_3F
 	end
 

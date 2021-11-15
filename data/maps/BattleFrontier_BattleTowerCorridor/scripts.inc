@@ -37,7 +37,7 @@ BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor::
 
 BattleFrontier_BattleTowerCorridor_EventScript_WarpToBattleRoom::
 	setvar VAR_TEMP_0, 0
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 4, 8
 	waitstate
 	end
 

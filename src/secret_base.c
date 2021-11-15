@@ -39,7 +39,6 @@
 #include "constants/event_objects.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 #include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
@@ -446,7 +445,7 @@ void EnterSecretBase(void)
 {
     CreateTask(Task_EnterSecretBase, 0);
     FadeScreen(FADE_TO_BLACK, 0);
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 bool8 SecretBaseMapPopupEnabled(void)
@@ -490,7 +489,7 @@ static void Task_EnterNewlyCreatedSecretBase(u8 taskId)
         SetWarpDestination(
             gSaveBlock1Ptr->location.mapGroup,
             gSaveBlock1Ptr->location.mapNum,
-            -1,
+            WARP_ID_NONE,
             GET_BASE_COMPUTER_X(secretBaseGroup),
             GET_BASE_COMPUTER_Y(secretBaseGroup));
         WarpIntoMap();
@@ -700,7 +699,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
             gTasks[taskId].data[0] = 2;
         break;
     case 2:
-        SetWarpDestinationToDynamicWarp(0x7e);
+        SetWarpDestinationToDynamicWarp(WARP_ID_SECRET_BASE);
         WarpIntoMap();
         gFieldCallback = FieldCB_DefaultWarpExit;
         SetMainCallback2(CB2_LoadMap);

@@ -621,7 +621,7 @@ RustboroCity_EventScript_ReturnGoods::
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setvar VAR_RUSTBORO_CITY_STATE, 5
 	delay 30
-	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
+	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 2, 2
 	waitstate
 	releaseall
 	end

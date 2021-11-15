@@ -62,7 +62,6 @@
 #include "constants/abilities.h"
 #include "constants/layouts.h"
 #include "constants/map_types.h"
-#include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
@@ -208,7 +207,7 @@ static const struct WarpData sDummyWarpData =
 {
     .mapGroup = MAP_GROUP(UNDEFINED),
     .mapNum = MAP_NUM(UNDEFINED),
-    .warpId = -1,
+    .warpId = WARP_ID_NONE,
     .x = -1,
     .y = -1,
 };
@@ -570,7 +569,7 @@ static bool32 IsDummyWarp(struct WarpData *warp)
         return FALSE;
     else if (warp->mapNum != (s8)MAP_NUM(UNDEFINED))
         return FALSE;
-    else if (warp->warpId != -1)
+    else if (warp->warpId != WARP_ID_NONE)
         return FALSE;
     else if (warp->x != -1)
         return FALSE;
@@ -608,16 +607,20 @@ static void SetPlayerCoordsFromWarp(void)
 {
     if (gSaveBlock1Ptr->location.warpId >= 0 && gSaveBlock1Ptr->location.warpId < gMapHeader.events->warpCount)
     {
+        // warpId is a valid warp for this map, use the coords of that warp.
         gSaveBlock1Ptr->pos.x = gMapHeader.events->warps[gSaveBlock1Ptr->location.warpId].x;
         gSaveBlock1Ptr->pos.y = gMapHeader.events->warps[gSaveBlock1Ptr->location.warpId].y;
     }
     else if (gSaveBlock1Ptr->location.x >= 0 && gSaveBlock1Ptr->location.y >= 0)
     {
+        // Invalid warpId given. The given coords are valid, use those instead.
+        // WARP_ID_NONE is used to reach this intentionally.
         gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->location.x;
         gSaveBlock1Ptr->pos.y = gSaveBlock1Ptr->location.y;
     }
     else
     {
+        // Invalid warpId and coords given. Put player in center of map.
         gSaveBlock1Ptr->pos.x = gMapHeader.mapLayout->width / 2;
         gSaveBlock1Ptr->pos.y = gMapHeader.mapLayout->height / 2;
     }
@@ -659,7 +662,7 @@ void SetWarpDestinationToHealLocation(u8 healLocationId)
 {
     const struct HealLocation *warp = GetHealLocation(healLocationId);
     if (warp)
-        SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpDestination(warp->group, warp->map, WARP_ID_NONE, warp->x, warp->y);
 }
 
 void SetWarpDestinationToLastHealLocation(void)
@@ -671,7 +674,7 @@ void SetLastHealLocationWarp(u8 healLocationId)
 {
     const struct HealLocation *healLocation = GetHealLocation(healLocationId);
     if (healLocation)
-        SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
+        SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, WARP_ID_NONE, healLocation->x, healLocation->y);
 }
 
 void UpdateEscapeWarp(s16 x, s16 y)
@@ -679,7 +682,7 @@ void UpdateEscapeWarp(s16 x, s16 y)
     u8 currMapType = GetCurrentMapType();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
     if (IsMapTypeOutdoors(currMapType) && IsMapTypeOutdoors(destMapType) != TRUE)
-        SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x - MAP_OFFSET, y - MAP_OFFSET + 1);
+        SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x - MAP_OFFSET, y - MAP_OFFSET + 1);
 }
 
 void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
@@ -712,7 +715,7 @@ void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y)
     if (IsDummyWarp(&sFixedHoleWarp) == TRUE)
         sWarpDestination = gLastUsedWarp;
     else
-        SetWarpDestination(sFixedHoleWarp.mapGroup, sFixedHoleWarp.mapNum, -1, x, y);
+        SetWarpDestination(sFixedHoleWarp.mapGroup, sFixedHoleWarp.mapNum, WARP_ID_NONE, x, y);
 }
 
 static void SetWarpDestinationToContinueGameWarp(void)
@@ -729,7 +732,7 @@ void SetContinueGameWarpToHealLocation(u8 healLocationId)
 {
     const struct HealLocation *warp = GetHealLocation(healLocationId);
     if (warp)
-        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, WARP_ID_NONE, warp->x, warp->y);
 }
 
 void SetContinueGameWarpToDynamicWarp(int unused)
@@ -759,7 +762,7 @@ static bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
 
     if (connection != NULL)
     {
-        SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
+        SetWarpDestination(connection->mapGroup, connection->mapNum, WARP_ID_NONE, x, y);
     }
     else
     {
@@ -785,7 +788,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     s32 paletteIndex;
 
-    SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
+    SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, -1, -1);
 
     // Dont transition map music between BF Outside West/East
     if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER)
@@ -3143,17 +3146,17 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
     return oldFacing;
 }
 
-static u8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 a2, s16 x, s16 y)
+static bool8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (i != selfObjEventId)
         {
             if ((gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
              || (gObjectEvents[i].previousCoords.x == x && gObjectEvents[i].previousCoords.y == y))
             {
-                return 1;
+                return TRUE;
             }
         }
     }

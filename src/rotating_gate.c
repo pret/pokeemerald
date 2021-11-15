@@ -5,7 +5,6 @@
 #include "fieldmap.h"
 #include "sound.h"
 #include "sprite.h"
-#include "constants/maps.h"
 #include "constants/songs.h"
 
 #define ROTATING_GATE_TILE_TAG 0x1300

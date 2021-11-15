@@ -33,7 +33,7 @@ FarawayIsland_Entrance_EventScript_Sailor::
 	hideobjectat LOCALID_SAILOR, MAP_FARAWAY_ISLAND_ENTRANCE
 	setvar VAR_0x8004, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepartIsland
-	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
 	waitstate
 	release
 	end

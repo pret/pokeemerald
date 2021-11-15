@@ -134,7 +134,7 @@ SlateportCity_BattleTentLobby_EventScript_EnterChallenge::
 	msgbox SlateportCity_BattleTentLobby_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
 	call SlateportCity_BattleTentLobby_EventScript_WalkToDoor
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 7
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 2, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

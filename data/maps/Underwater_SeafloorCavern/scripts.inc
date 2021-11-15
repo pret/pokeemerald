@@ -33,7 +33,7 @@ Underwater_SeafloorCavern_EventScript_SetSubmarineGoneMetatiles::
 	return
 
 Underwater_SeafloorCavern_OnResume:
-	setdivewarp MAP_SEAFLOOR_CAVERN_ENTRANCE, 255, 10, 17
+	setdivewarp MAP_SEAFLOOR_CAVERN_ENTRANCE, 10, 17
 	end
 
 Underwater_SeafloorCavern_EventScript_CheckStolenSub::

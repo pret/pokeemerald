@@ -68,7 +68,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 SlateportCity_BattleTent_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 @ forced stop
 
@@ -79,14 +79,14 @@ SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	switch VAR_RESULT
 	case 3, SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon
 	setvar VAR_0x8006, 1
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 3
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 2, 3
 	waitstate
 @ forced stop
 
 SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 @ forced stop
 

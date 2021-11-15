@@ -40,7 +40,6 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/lilycove_lady.h"
-#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"

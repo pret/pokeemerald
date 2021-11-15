@@ -34,7 +34,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer::
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1
-	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F, 255, 3, 1
+	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F, 3, 1
 	waitstate
 	releaseall
 	end

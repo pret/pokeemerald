@@ -108,7 +108,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterElevator::
 	call BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevator
 	closedoor 10, 1
 	waitdooranim
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 1, 6
 	waitstate
 	releaseall
 	end
@@ -189,7 +189,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner::
 	call_if_eq BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER
-	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 255, 10, 3
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 10, 3
 	waitstate
 	release
 	end

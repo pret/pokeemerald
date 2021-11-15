@@ -192,7 +192,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge::
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FollowMe, MSGBOX_DEFAULT
 	closemessage
 	call BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor
-	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR, 255, 8, 13
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR, 8, 13
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

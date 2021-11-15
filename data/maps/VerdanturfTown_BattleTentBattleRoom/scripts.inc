@@ -59,7 +59,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
-	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
@@ -120,7 +120,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge::
 VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
-	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_PauseChallenge::

@@ -5,8 +5,8 @@ SeafloorCavern_Entrance_MapScripts::
 	.byte 0
 
 SeafloorCavern_Entrance_OnResume:
-	setdivewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 255, 6, 5
-	setescapewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 255, 6, 5
+	setdivewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 6, 5
+	setescapewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 6, 5
 	end
 
 SeafloorCavern_Entrance_EventScript_Grunt::

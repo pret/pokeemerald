@@ -4,7 +4,6 @@
 #include "mystery_gift.h"
 #include "util.h"
 #include "constants/event_objects.h"
-#include "constants/maps.h"
 #include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51

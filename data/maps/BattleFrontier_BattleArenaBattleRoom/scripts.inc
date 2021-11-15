@@ -110,7 +110,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DeclareOpponentWinner::
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent, MSGBOX_DEFAULT
 BattleFrontier_BattleArenaBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent::
@@ -210,7 +210,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge::
 BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon::
 	delay 60
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
-	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor2ndOpponent::

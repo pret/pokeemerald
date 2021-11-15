@@ -113,7 +113,7 @@ Route110_TrickHousePuzzle7_EventScript_FoundScroll::
 Route110_TrickHousePuzzle7_EventScript_TeleportPad::
 	lockall
 	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
-	warpteleport MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 3, 19
+	warpteleport MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 3, 19
 	waitstate
 	releaseall
 	end

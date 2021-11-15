@@ -3,7 +3,7 @@ AbandonedShip_Rooms_B1F_MapScripts::
 	.byte 0
 
 AbandonedShip_Rooms_B1F_OnResume:
-	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER2, 255, 17, 4
+	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER2, 17, 4
 	end
 
 AbandonedShip_Rooms_B1F_EventScript_FatMan::

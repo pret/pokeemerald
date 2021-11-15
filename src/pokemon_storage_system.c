@@ -37,7 +37,6 @@
 #include "walda_phrase.h"
 #include "window.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"

@@ -6,7 +6,7 @@ Route112_CableCarStation_MapScripts::
 	.byte 0
 
 Route112_CableCarStation_OnTransition:
-	setescapewarp MAP_ROUTE112, 255, 28, 28
+	setescapewarp MAP_ROUTE112, 28, 28
 	compare VAR_CABLE_CAR_STATION_STATE, 2
 	call_if_eq Route112_CableCarStation_EventScript_MoveAttendantAside
 	end

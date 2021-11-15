@@ -4,7 +4,7 @@ AbandonedShip_Corridors_B1F_MapScripts::
 	.byte 0
 
 AbandonedShip_Corridors_B1F_OnResume:
-	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 255, 5, 4
+	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 5, 4
 	end
 
 AbandonedShip_Corridors_B1F_OnLoad:

@@ -3,7 +3,6 @@
 #include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
-#include "constants/maps.h"
 
 // Despite having a variable to track it, the roamer is
 // hard-coded to only ever be in map group 0

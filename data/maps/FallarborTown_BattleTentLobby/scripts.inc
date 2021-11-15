@@ -161,7 +161,7 @@ FallarborTown_BattleTentLobby_EventScript_EnterChallenge::
 	msgbox FallarborTown_BattleTentLobby_Text_GuideYouToBattleTent, MSGBOX_DEFAULT
 	closemessage
 	call FallarborTown_BattleTentLobby_EventScript_WalkToDoor
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 2, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

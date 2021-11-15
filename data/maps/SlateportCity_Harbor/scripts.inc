@@ -9,7 +9,7 @@ SlateportCity_Harbor_MapScripts::
 	.byte 0
 
 SlateportCity_Harbor_OnTransition:
-	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
+	setescapewarp MAP_SLATEPORT_CITY, 28, 13
 	setvar VAR_TEMP_1, 0
 	compare VAR_SLATEPORT_HARBOR_STATE, 1
 	call_if_eq SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene
@@ -210,7 +210,7 @@ SlateportCity_Harbor_EventScript_Lilycove::
 	goto_if_eq SlateportCity_Harbor_EventScript_ChooseNewDestination
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_SLATEPORT
 	call SlateportCity_Harbor_EventScript_BoardFerry
-	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 1, 10
 	waitstate
 	release
 	end
@@ -220,7 +220,7 @@ SlateportCity_Harbor_EventScript_BattleFrontier::
 	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_ChooseNewDestination
 	call SlateportCity_Harbor_EventScript_BoardFerry
-	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67
 	waitstate
 	release
 	end

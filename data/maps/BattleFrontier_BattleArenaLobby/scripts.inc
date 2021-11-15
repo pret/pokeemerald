@@ -173,7 +173,7 @@ BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge::
 	call_if_eq BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50
 	compare VAR_RESULT, FRONTIER_LVL_OPEN
 	call_if_eq BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen
-	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 255, 9, 13
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end
