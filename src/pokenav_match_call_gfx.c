@@ -34,7 +34,7 @@ struct Pokenav_MatchCallGfx
     bool32 (*isTaskActiveCB)(void);
     u32 loopTaskId;
     u8 filler8[6];
-    bool8 unkE;
+    bool8 skipHangUpSE;
     bool8 newRematchRequest;
     u16 locWindowId;
     u16 infoBoxWindowId;
@@ -606,7 +606,7 @@ static u32 DoMatchCallMessage(s32 state)
 
         PrintCallingDots(gfx);
         PlaySE(SE_POKENAV_CALL);
-        gfx->unkE = 0;
+        gfx->skipHangUpSE = FALSE;
         return LT_INC_AND_PAUSE;
     case 2:
         if (WaitForCallingDotsText(gfx))
@@ -632,7 +632,7 @@ static u32 DoTrainerCloseByMessage(s32 state)
         PlaySE(SE_SELECT);
         DrawMsgBoxForCloseByMsg(gfx);
         PokenavList_ToggleVerticalArrows(TRUE);
-        gfx->unkE = 1;
+        gfx->skipHangUpSE = TRUE;
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy2(gfx))
@@ -657,7 +657,7 @@ static u32 CloseMatchCallMessage(s32 state)
     switch (state)
     {
     case 0:
-        if (!gfx->unkE)
+        if (!gfx->skipHangUpSE)
             PlaySE(SE_POKENAV_HANG_UP);
 
         PlaySE(SE_SELECT);

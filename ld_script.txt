@@ -313,8 +313,8 @@ SECTIONS {
         src/pokenav_list.o(.text);
         src/pokenav_menu_handler.o(.text);
         src/pokenav_menu_handler_gfx.o(.text);
-        src/pokenav_match_call_1.o(.text);
-        src/pokenav_match_call_2.o(.text);
+        src/pokenav_match_call_list.o(.text);
+        src/pokenav_match_call_gfx.o(.text);
         src/pokenav_region_map.o(.text);
         src/pokenav_conditions.o(.text);
         src/pokenav_conditions_gfx.o(.text);
@@ -668,8 +668,8 @@ SECTIONS {
         src/pokenav_list.o(.rodata);
         src/pokenav_menu_handler.o(.rodata);
         src/pokenav_menu_handler_gfx.o(.rodata);
-        src/pokenav_match_call_1.o(.rodata);
-        src/pokenav_match_call_2.o(.rodata);
+        src/pokenav_match_call_list.o(.rodata);
+        src/pokenav_match_call_gfx.o(.rodata);
         src/pokenav_region_map.o(.rodata);
         src/pokenav_conditions_gfx.o(.rodata);
         src/pokenav_conditions_search_results.o(.rodata);

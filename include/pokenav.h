@@ -403,7 +403,7 @@ bool32 IsMenuHandlerLoopedTaskActive(void);
 void FreeMenuHandlerSubstruct2(void);
 void ResetBldCnt_(void);
 
-// pokenav_match_call_1.c
+// pokenav_match_call_list.c
 bool32 PokenavCallback_Init_MatchCall(void);
 u32 GetMatchCallCallback(void);
 void FreeMatchCallSubstruct1(void);
@@ -424,7 +424,7 @@ int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int index);
 
-// pokenav_match_call_2.c
+// pokenav_match_call_gfx.c
 bool32 OpenMatchCall(void);
 void CreateMatchCallLoopedTask(s32 index);
 bool32 IsMatchCallLoopedTaskActive(void);
