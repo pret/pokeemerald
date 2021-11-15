@@ -323,7 +323,7 @@ bool32 CanViewRibbonsMenu(void);
 void SetPokenavVBlankCallback(void);
 void SetVBlankCallback_(IntrCallback callback);
 
-// pokenav_match_call_ui.c
+// pokenav_list.c
 bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, s32 tileOffset);
 bool32 IsCreatePokenavListTaskActive(void);
 void DestroyPokenavList(void);
@@ -337,7 +337,7 @@ void PokenavList_ToggleVerticalArrows(bool32 shouldHide);
 void PokenavList_DrawCurrentItemIcon(void);
 void PokenavList_EraseListForCheckPage(void);
 bool32 PokenavList_IsTaskActive(void);
-void PrintCheckPageInfo(s16 a0);
+void PrintCheckPageInfo(s16 delta);
 u32 PokenavList_GetTopIndex(void);
 void PokenavList_ReshowListFromCheckPage(void);
 
