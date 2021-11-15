@@ -414,7 +414,7 @@ static u32 MatchCallListCursorDown(s32 state)
         }
         break;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -451,7 +451,7 @@ static u32 MatchCallListCursorUp(s32 state)
         }
         break;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -488,7 +488,7 @@ static u32 MatchCallListPageDown(s32 state)
         }
         break;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -525,7 +525,7 @@ static u32 MatchCallListPageUp(s32 state)
         }
         break;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
 
         PrintMatchCallLocation(gfx, 0);
@@ -722,11 +722,11 @@ static u32 ShowCheckPage(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        sub_81C877C();
+        PokenavList_EraseListForCheckPage();
         UpdateWindowsToShowCheckPage(gfx);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMatchCallListTaskActive() || IsDma3ManagerBusyWithBgCopy1(gfx))
+        if (PokenavList_IsTaskActive() || IsDma3ManagerBusyWithBgCopy1(gfx))
             return LT_PAUSE;
 
         PrintHelpBarText(HELPBAR_MC_CHECK_PAGE);
@@ -736,7 +736,7 @@ static u32 ShowCheckPage(s32 state)
         LoadCheckPageTrainerPic(gfx);
         return LT_INC_AND_PAUSE;
     case 3:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx) || WaitForHelpBar())
+        if (PokenavList_IsTaskActive() || WaitForTrainerPic(gfx) || WaitForHelpBar())
             return LT_PAUSE;
         break;
     }
@@ -752,7 +752,7 @@ static u32 ShowCheckPageDown(s32 state)
     switch (state)
     {
     case 0:
-        topId = GetMatchCallListTopIndex();
+        topId = PokenavList_GetTopIndex();
         delta = GetIndexDeltaOfNextCheckPageDown(topId);
         if (delta)
         {
@@ -775,7 +775,7 @@ static u32 ShowCheckPageDown(s32 state)
         LoadCheckPageTrainerPic(gfx);
         return LT_INC_AND_PAUSE;
     case 4:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx))
+        if (PokenavList_IsTaskActive() || WaitForTrainerPic(gfx))
             return LT_PAUSE;
         break;
     }
@@ -791,10 +791,10 @@ static u32 ExitCheckPage(s32 state)
     case 0:
         PlaySE(SE_SELECT);
         TrainerPicSlideOffscreen(gfx);
-        sub_81C87F0();
+        PokenavList_ReshowListFromCheckPage();
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx))
+        if (PokenavList_IsTaskActive() || WaitForTrainerPic(gfx))
             return LT_PAUSE;
 
         PrintHelpBarText(HELPBAR_MC_TRAINER_LIST);
@@ -817,7 +817,7 @@ static u32 ShowCheckPageUp(s32 state)
     switch (state)
     {
     case 0:
-        topId = GetMatchCallListTopIndex();
+        topId = PokenavList_GetTopIndex();
         delta = GetIndexDeltaOfNextCheckPageUp(topId);
         if (delta)
         {
@@ -840,7 +840,7 @@ static u32 ShowCheckPageUp(s32 state)
         LoadCheckPageTrainerPic(gfx);
         return LT_INC_AND_PAUSE;
     case 4:
-        if (IsMatchCallListTaskActive() || WaitForTrainerPic(gfx))
+        if (PokenavList_IsTaskActive() || WaitForTrainerPic(gfx))
             return LT_PAUSE;
         break;
     }
@@ -929,11 +929,11 @@ enum {
     POKEBALL_ICON_EMPTY,
 };
 
-static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 arg2)
+static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 tileOffset)
 {
     u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
     u16 *tilemap = GetBgTilemapBuffer(bg);
-    tilemap += arg2 * 0x40 + 0x1D;
+    tilemap += tileOffset * 64 + 0x1D;
     if (ShouldDrawRematchPokeballIcon(rematchId))
     {
         tilemap[0] = POKEBALL_ICON_TOP;
@@ -946,11 +946,11 @@ static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 arg2)
     }
 }
 
-void ClearRematchPokeballIcon(u16 windowId, u32 arg0)
+void ClearRematchPokeballIcon(u16 windowId, u32 tileOffset)
 {
     u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
     u16 *tilemap = GetBgTilemapBuffer(bg);
-    tilemap += arg0 * 0x40 + 0x1D;
+    tilemap += tileOffset * 64 + 0x1D;
     tilemap[0] = POKEBALL_ICON_EMPTY;
     tilemap[0x20] = POKEBALL_ICON_EMPTY;
 }
@@ -1021,7 +1021,7 @@ static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
 {
     u8 mapName[32];
     int x;
-    int index = GetSelectedPokenavListIndex() + delta;
+    int index = PokenavList_GetSelectedIndex() + delta;
     int mapSec = GetMatchCallMapSec(index);
     if (mapSec != MAPSEC_NONE)
         GetMapName(mapName, mapSec, 0);
@@ -1138,7 +1138,7 @@ static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *gfx)
 
 static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *gfx)
 {
-    int index = GetSelectedPokenavListIndex();
+    int index = PokenavList_GetSelectedIndex();
     const u8 *str = GetMatchCallMessageText(index, &gfx->newRematchRequest);
     u8 speed = GetPlayerTextSpeedDelay();
     AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
@@ -1244,7 +1244,7 @@ static struct Sprite *CreateTrainerPicSprite(void)
 static void LoadCheckPageTrainerPic(struct Pokenav_MatchCallGfx *gfx)
 {
     u16 cursor;
-    int trainerPic = GetMatchCallTrainerPic(GetSelectedPokenavListIndex());
+    int trainerPic = GetMatchCallTrainerPic(PokenavList_GetSelectedIndex());
     if (trainerPic >= 0)
     {
         DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], gfx->trainerPicGfx, SPECIES_NONE);

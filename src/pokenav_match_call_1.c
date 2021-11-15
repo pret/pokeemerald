@@ -92,7 +92,7 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
     {
         state->callback = CB2_HandleMatchCallOptionsInput;
         state->optionCursorPos = 0;
-        selection = GetSelectedPokenavListIndex();
+        selection = PokenavList_GetSelectedIndex();
 
         if (!state->matchCallEntries[selection].isSpecialTrainer || MatchCall_HasCheckPage(state->matchCallEntries[selection].headerId))
         {
@@ -489,7 +489,7 @@ bool32 unref_sub_81CB16C(void)
 static bool32 ShouldDoNearbyMessage(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
-    int selection = GetSelectedPokenavListIndex();
+    int selection = PokenavList_GetSelectedIndex();
     if (!state->matchCallEntries[selection].isSpecialTrainer)
     {
         if (GetMatchCallMapSec(selection) == gMapHeader.regionMapSectionId)

@@ -200,7 +200,7 @@ static u32 HandleConditionSearchInput(struct Pokenav_SearchResults *menu)
     else if (JOY_NEW(A_BUTTON))
     {
         // Entering graph menu
-        menu->monList->currIndex = GetSelectedPokenavListIndex();
+        menu->monList->currIndex = PokenavList_GetSelectedIndex();
         menu->saveResultsList = TRUE;
         menu->callback = OpenConditionGraphFromSearchList;
         return CONDITION_SEARCH_FUNC_SELECT_MON;
@@ -241,7 +241,7 @@ static u16 GetSearchResultsMonListCount(void)
 static s32 GetSearchResultsSelectedMonRank(void)
 {
     struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
-    s32 i = GetSelectedPokenavListIndex();
+    s32 i = PokenavList_GetSelectedIndex();
     return menu->monList->monData[i].data;
 }
 
@@ -498,7 +498,7 @@ static u32 LoopedTask_MoveSearchListCursorUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -531,7 +531,7 @@ static u32 LoopedTask_MoveSearchListCursorDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -564,7 +564,7 @@ static u32 LoopedTask_MoveSearchListPageUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -597,7 +597,7 @@ static u32 LoopedTask_MoveSearchListPageDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:

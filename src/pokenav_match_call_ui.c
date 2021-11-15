@@ -29,11 +29,10 @@ struct PokenavListWindowState {
     // The index of the element at the top of the window.
     u16 windowTopIndex;
     u16 listLength;
-    u16 unk4;
+    u16 entriesOffscreen;
     // The index of the cursor, relative to the top of the window.
     u16 selectedIndexOffset;
-    u16 visibleEntries;
-    u16 unkA;
+    u16 entriesOnscreen;
     u32 listItemSize;
     void * listPtr;
 };
@@ -63,7 +62,7 @@ struct PokenavSub17
     struct PokenavSub17Substruct list;
     u8 tilemapBuffer[BG_SCREEN_SIZE];
     struct PokenavListWindowState windowState;
-    s32 unk89C;
+    s32 eraseIndex;
     u32 loopedTaskId;
 };
 
@@ -81,7 +80,7 @@ static void PrintMatchCallFlavorText(struct PokenavListWindowState *, struct Pok
 static void PrintMatchCallFieldNames(struct PokenavSub17Substruct *, u32);
 static void PrintMatchCallListTrainerName(struct PokenavListWindowState *, struct PokenavSub17Substruct *);
 static void PrintCheckPageTrainerName(struct PokenavListWindowState *, struct PokenavSub17Substruct *);
-static void sub_81C8B70(struct PokenavListMenuWindow *, s32, s32);
+static void EraseListEntry(struct PokenavListMenuWindow *, s32, s32);
 static void CreateMoveListWindowTask(s32, struct PokenavSub17Substruct *);
 static void PrintListItems(void *, u32, u32, u32, u32, struct PokenavSub17Substruct *);
 static void InitListItems(struct PokenavListWindowState *, struct PokenavSub17Substruct *);
@@ -90,14 +89,14 @@ static u32 LoopedTask_CreatePokenavList(s32);
 static bool32 IsPrintListItemsTaskActive(void);
 static u32 LoopedTask_PrintListItems(s32);
 static u32 LoopedTask_MoveListWindow(s32);
-static u32 LoopedTask_sub_81C8870(s32);
-static u32 LoopedTask_sub_81C8A28(s32);
+static u32 LoopedTask_EraseListForCheckPage(s32);
+static u32 LoopedTask_ReshowListFromCheckPage(s32);
 static u32 LoopedTask_PrintCheckPageInfo(s32);
 
 static const u16 sListArrow_Pal[] = INCBIN_U16("graphics/pokenav/list_arrows.gbapal");
 static const u32 sListArrow_Gfx[] = INCBIN_U32("graphics/pokenav/list_arrows.4bpp.lz");
 
-static EWRAM_DATA u32 gUnknown_0203CF44 = 0;
+static EWRAM_DATA u32 sMoveWindowDownIndex = 0; // Read, but pointlessly
 
 bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, s32 tileOffset)
 {
@@ -187,8 +186,8 @@ static void InitPokenavListWindow(struct PokenavListMenuWindow *listWindow)
 static void InitListItems(struct PokenavListWindowState *windowState, struct PokenavSub17Substruct *a1)
 {
     s32 numToPrint = windowState->listLength - windowState->windowTopIndex;
-    if (numToPrint > windowState->visibleEntries)
-        numToPrint = windowState->visibleEntries;
+    if (numToPrint > windowState->entriesOnscreen)
+        numToPrint = windowState->entriesOnscreen;
 
     PrintListItems(windowState->listPtr, windowState->windowTopIndex, numToPrint, windowState->listItemSize, 0, a1);
 }
@@ -214,18 +213,18 @@ static bool32 IsPrintListItemsTaskActive(void)
 
 static u32 LoopedTask_PrintListItems(s32 state)
 {
-    u32 v1;
+    u32 row;
     struct PokenavSub17Substruct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
 
     switch (state)
     {
     case 0:
-        v1 = (structPtr->listWindow.unkA + structPtr->listWindow.numPrinted + structPtr->unk10) & 0xF;
+        row = (structPtr->listWindow.unkA + structPtr->listWindow.numPrinted + structPtr->unk10) & 0xF;
         structPtr->bufferItemFunc(structPtr->listPtr, structPtr->itemTextBuffer);
         if (structPtr->iconDrawFunc != NULL)
-            structPtr->iconDrawFunc(structPtr->listWindow.windowId, structPtr->printIndex, v1);
+            structPtr->iconDrawFunc(structPtr->listWindow.windowId, structPtr->printIndex, row);
 
-        AddTextPrinterParameterized(structPtr->listWindow.windowId, structPtr->listWindow.fontId, structPtr->itemTextBuffer, 8, (v1 << 4) + 1, 255, NULL);
+        AddTextPrinterParameterized(structPtr->listWindow.windowId, structPtr->listWindow.fontId, structPtr->itemTextBuffer, 8, (row << 4) + 1, TEXT_SKIP_DRAW, NULL);
         if (++structPtr->listWindow.numPrinted >= structPtr->listWindow.numToPrint)
         {
             // Finished printing items. If icons were being drawn, draw the
@@ -250,22 +249,22 @@ static u32 LoopedTask_PrintListItems(s32 state)
     return LT_FINISH;
 }
 
-bool32 ShouldShowUpArrow(void)
+static bool32 ShouldShowUpArrow(void)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
 
     return (structPtr->windowState.windowTopIndex != 0);
 }
 
-bool32 ShouldShowDownArrow(void)
+static bool32 ShouldShowDownArrow(void)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     struct PokenavListWindowState *subPtr = &structPtr->windowState;
 
-    return (subPtr->windowTopIndex + subPtr->visibleEntries < subPtr->listLength);
+    return (subPtr->windowTopIndex + subPtr->entriesOnscreen < subPtr->listLength);
 }
 
-static void MoveListWindow(s32 delta, bool32 a1)
+static void MoveListWindow(s32 delta, bool32 printItems)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     struct PokenavListWindowState *subPtr = &structPtr->windowState;
@@ -274,16 +273,16 @@ static void MoveListWindow(s32 delta, bool32 a1)
     {
         if (subPtr->windowTopIndex + delta < 0)
             delta = -1 * subPtr->windowTopIndex;
-        if (a1)
+        if (printItems)
             PrintListItems(subPtr->listPtr, subPtr->windowTopIndex + delta, delta * -1, subPtr->listItemSize, delta, &structPtr->list);
     }
-    else if (a1)
+    else if (printItems)
     {
-        s32 temp = gUnknown_0203CF44 = subPtr->windowTopIndex + subPtr->visibleEntries;
-        if (temp + delta >= subPtr->listLength)
-            delta = subPtr->listLength - temp;
+        s32 index = sMoveWindowDownIndex = subPtr->windowTopIndex + subPtr->entriesOnscreen;
+        if (index + delta >= subPtr->listLength)
+            delta = subPtr->listLength - index;
 
-        PrintListItems(subPtr->listPtr, gUnknown_0203CF44, delta, subPtr->listItemSize, subPtr->visibleEntries, &structPtr->list);
+        PrintListItems(subPtr->listPtr, index, delta, subPtr->listItemSize, subPtr->entriesOnscreen, &structPtr->list);
     }
 
     CreateMoveListWindowTask(delta, &structPtr->list);
@@ -341,7 +340,7 @@ static u32 LoopedTask_MoveListWindow(s32 state)
     return LT_FINISH;
 }
 
-bool32 IsMovePokenavListWindowTaskActive(void)
+bool32 PokenavList_IsMoveWindowTaskActive(void)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     return IsLoopedTaskActive(structPtr->list.loopedTaskId);
@@ -376,7 +375,7 @@ int PokenavList_MoveCursorDown(void)
 
     if (structPtr->windowTopIndex + structPtr->selectedIndexOffset >= structPtr->listLength - 1)
         return 0;
-    if (structPtr->selectedIndexOffset < structPtr->visibleEntries - 1)
+    if (structPtr->selectedIndexOffset < structPtr->entriesOnscreen - 1)
     {
         structPtr->selectedIndexOffset++;
         return 1;
@@ -396,8 +395,8 @@ int PokenavList_PageUp(void)
 
     if (ShouldShowUpArrow())
     {
-        if (structPtr->windowTopIndex >= structPtr->visibleEntries)
-            scroll = structPtr->visibleEntries;
+        if (structPtr->windowTopIndex >= structPtr->entriesOnscreen)
+            scroll = structPtr->entriesOnscreen;
         else
             scroll = structPtr->windowTopIndex;
         MoveListWindow(scroll * -1, TRUE);
@@ -417,21 +416,21 @@ int PokenavList_PageDown(void)
 
     if (ShouldShowDownArrow())
     {
-        s32 windowBottomIndex = structPtr->windowTopIndex + structPtr->visibleEntries;
-        s32 scroll = structPtr->unk4 - structPtr->windowTopIndex;
+        s32 windowBottomIndex = structPtr->windowTopIndex + structPtr->entriesOnscreen;
+        s32 scroll = structPtr->entriesOffscreen - structPtr->windowTopIndex;
 
-        if (windowBottomIndex <= structPtr->unk4)
-            scroll = structPtr->visibleEntries;
+        if (windowBottomIndex <= structPtr->entriesOffscreen)
+            scroll = structPtr->entriesOnscreen;
         MoveListWindow(scroll, TRUE);
         return 2;
     }
     else
     {
         s32 cursor, lastVisibleIndex;
-        if (structPtr->listLength >= structPtr->visibleEntries)
+        if (structPtr->listLength >= structPtr->entriesOnscreen)
         {
             cursor = structPtr->selectedIndexOffset;
-            lastVisibleIndex = structPtr->visibleEntries;
+            lastVisibleIndex = structPtr->entriesOnscreen;
         }
         else
         {
@@ -447,43 +446,43 @@ int PokenavList_PageDown(void)
     }
 }
 
-u32 GetSelectedPokenavListIndex(void)
+u32 PokenavList_GetSelectedIndex(void)
 {
     struct PokenavListWindowState *structPtr = GetPokenavListWindowState();
 
     return structPtr->windowTopIndex + structPtr->selectedIndexOffset;
 }
 
-u32 GetMatchCallListTopIndex(void)
+u32 PokenavList_GetTopIndex(void)
 {
     struct PokenavListWindowState *structPtr = GetPokenavListWindowState();
 
     return structPtr->windowTopIndex;
 }
 
-void sub_81C877C(void)
+void PokenavList_EraseListForCheckPage(void)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
-    structPtr->unk89C = 0;
-    structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_sub_81C8870, 6);
+    structPtr->eraseIndex = 0;
+    structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_EraseListForCheckPage, 6);
 }
 
 void PrintCheckPageInfo(s16 delta)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     structPtr->windowState.windowTopIndex += delta;
-    structPtr->unk89C = 0;
+    structPtr->eraseIndex = 0;
     structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_PrintCheckPageInfo, 6);
 }
 
-void sub_81C87F0(void)
+void PokenavList_ReshowListFromCheckPage(void)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
-    structPtr->unk89C = 0;
-    structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_sub_81C8A28, 6);
+    structPtr->eraseIndex = 0;
+    structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_ReshowListFromCheckPage, 6);
 }
 
-bool32 IsMatchCallListTaskActive(void)
+bool32 PokenavList_IsTaskActive(void)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     return IsLoopedTaskActive(structPtr->loopedTaskId);
@@ -497,7 +496,7 @@ void PokenavList_DrawCurrentItemIcon(void)
     CopyWindowToVram(structPtr->list.listWindow.windowId, COPYWIN_MAP);
 }
 
-static u32 LoopedTask_sub_81C8870(s32 state)
+static u32 LoopedTask_EraseListForCheckPage(s32 state)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
 
@@ -507,18 +506,18 @@ static u32 LoopedTask_sub_81C8870(s32 state)
         ToggleListArrows(&structPtr->list, 1);
         // fall-through
     case 1:
-        if (structPtr->unk89C != structPtr->windowState.selectedIndexOffset)
-            sub_81C8B70(&structPtr->list.listWindow, structPtr->unk89C, 1);
+        if (structPtr->eraseIndex != structPtr->windowState.selectedIndexOffset)
+            EraseListEntry(&structPtr->list.listWindow, structPtr->eraseIndex, 1);
 
-        structPtr->unk89C++;
+        structPtr->eraseIndex++;
         return LT_INC_AND_PAUSE;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            if (structPtr->unk89C != structPtr->windowState.visibleEntries)
-                return 6;
+            if (structPtr->eraseIndex != structPtr->windowState.entriesOnscreen)
+                return LT_SET_STATE(1);
             if (structPtr->windowState.selectedIndexOffset != 0)
-                sub_81C8B70(&structPtr->list.listWindow, structPtr->unk89C, structPtr->windowState.selectedIndexOffset);
+                EraseListEntry(&structPtr->list.listWindow, structPtr->eraseIndex, structPtr->windowState.selectedIndexOffset);
 
             return LT_INC_AND_PAUSE;
         }
@@ -535,7 +534,7 @@ static u32 LoopedTask_sub_81C8870(s32 state)
         }
         return LT_PAUSE;
     case 4:
-         if (IsMovePokenavListWindowTaskActive())
+         if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
 
         structPtr->windowState.selectedIndexOffset = 0;
@@ -582,7 +581,7 @@ static u32 LoopedTask_PrintCheckPageInfo(s32 state)
     return LT_INC_AND_PAUSE;
 }
 
-static u32 LoopedTask_sub_81C8A28(s32 state)
+static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
 {
     struct PokenavSub17 *structPtr;
     struct PokenavListWindowState *windowState;
@@ -599,24 +598,26 @@ static u32 LoopedTask_sub_81C8A28(s32 state)
     switch (state)
     {
     case 0:
+        // Rewrite the name of the trainer whose check page was just being viewed.
+        // This is done to erase the red background it had.
         PrintMatchCallListTrainerName(windowState, subPtr0);
         return LT_INC_AND_PAUSE;
     case 1:
-        ptr = &structPtr->unk89C;
-        if (++(*ptr) < structPtr->windowState.visibleEntries)
+        ptr = &structPtr->eraseIndex;
+        if (++(*ptr) < structPtr->windowState.entriesOnscreen)
         {
-            sub_81C8B70(&subPtr0->listWindow, *ptr, 1);
+            EraseListEntry(&subPtr0->listWindow, *ptr, 1);
             return LT_PAUSE;
         }
 
         *ptr = 0;
-        if (windowState->listLength <= windowState->visibleEntries)
+        if (windowState->listLength <= windowState->entriesOnscreen)
         {
             if (windowState->windowTopIndex != 0)
             {
                 s32 r4 = windowState->windowTopIndex;
                 r5 = -r4;
-                sub_81C8B70(&subPtr0->listWindow, r5, r4);
+                EraseListEntry(&subPtr0->listWindow, r5, r4);
                 windowState->selectedIndexOffset = r4;
                 *ptr = r5;
                 return LT_INC_AND_PAUSE;
@@ -624,36 +625,36 @@ static u32 LoopedTask_sub_81C8A28(s32 state)
         }
         else
         {
-            if (windowState->windowTopIndex + windowState->visibleEntries > windowState->listLength)
+            if (windowState->windowTopIndex + windowState->entriesOnscreen > windowState->listLength)
             {
-                s32 r4 = windowState->windowTopIndex + windowState->visibleEntries - windowState->listLength;
+                s32 r4 = windowState->windowTopIndex + windowState->entriesOnscreen - windowState->listLength;
                 r5 = -r4;
-                sub_81C8B70(&subPtr0->listWindow, r5, r4);
+                EraseListEntry(&subPtr0->listWindow, r5, r4);
                 windowState->selectedIndexOffset = r4;
                 *ptr = r5;
                 return LT_INC_AND_PAUSE;
             }
         }
-        return 9;
+        return LT_SET_STATE(4);
     case 2:
-        MoveListWindow(structPtr->unk89C, FALSE);
+        MoveListWindow(structPtr->eraseIndex, FALSE);
         return LT_INC_AND_PAUSE;
     case 3:
-        if (!IsMovePokenavListWindowTaskActive())
+        if (!PokenavList_IsMoveWindowTaskActive())
         {
-            structPtr->unk89C = 0;
-            return 1;
+            structPtr->eraseIndex = 0;
+            return LT_INC_AND_CONTINUE;
         }
-        return 2;
+        return LT_PAUSE;
     case 4:
-        PrintListItems(windowState->listPtr, windowState->windowTopIndex + structPtr->unk89C, 1, windowState->listItemSize, structPtr->unk89C, &structPtr->list);
+        PrintListItems(windowState->listPtr, windowState->windowTopIndex + structPtr->eraseIndex, 1, windowState->listItemSize, structPtr->eraseIndex, &structPtr->list);
         return LT_INC_AND_PAUSE;
     case 5:
         if (IsPrintListItemsTaskActive())
             return LT_PAUSE;
-        if (++structPtr->unk89C >= windowState->listLength || structPtr->unk89C >= windowState->visibleEntries)
+        if (++structPtr->eraseIndex >= windowState->listLength || structPtr->eraseIndex >= windowState->entriesOnscreen)
             return LT_INC_AND_CONTINUE;
-        return 9;
+        return LT_SET_STATE(4);
     case 6:
         ToggleListArrows(subPtr0, 0);
         return LT_FINISH;
@@ -662,15 +663,15 @@ static u32 LoopedTask_sub_81C8A28(s32 state)
     return LT_FINISH;
 }
 
-static void sub_81C8B70(struct PokenavListMenuWindow *listWindow, s32 a1, s32 a2)
+static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 a1, s32 a2)
 {
     u8 *tileData = (u8*)GetWindowAttribute(listWindow->windowId, WINDOW_TILE_DATA);
-    u32 v2 = listWindow->width * 64;
+    u32 width = listWindow->width * 64;
 
     a1 = (listWindow->unkA + a1) & 0xF;
     if (a1 + a2 <= 16)
     {
-        CpuFastFill8(PIXEL_FILL(1), tileData + a1 * v2, a2 * v2);
+        CpuFastFill8(PIXEL_FILL(1), tileData + a1 * width, a2 * width);
         CopyWindowToVram(listWindow->windowId, COPYWIN_GFX);
     }
     else
@@ -678,8 +679,8 @@ static void sub_81C8B70(struct PokenavListMenuWindow *listWindow, s32 a1, s32 a2
         u32 v3 = 16 - a1;
         u32 v4 = a2 - v3;
 
-        CpuFastFill8(PIXEL_FILL(1), tileData + a1 * v2, v3 * v2);
-        CpuFastFill8(PIXEL_FILL(1), tileData, v4 * v2);
+        CpuFastFill8(PIXEL_FILL(1), tileData + a1 * width, v3 * width);
+        CpuFastFill8(PIXEL_FILL(1), tileData, v4 * width);
         CopyWindowToVram(listWindow->windowId, COPYWIN_GFX);
     }
 
@@ -689,19 +690,20 @@ static void sub_81C8B70(struct PokenavListMenuWindow *listWindow, s32 a1, s32 a2
     CopyWindowToVram(listWindow->windowId, COPYWIN_MAP);
 }
 
-void sub_81C8C64(struct PokenavListMenuWindow *listWindow, u32 a1)
+// Pointless
+static void SetListMarginTile(struct PokenavListMenuWindow *listWindow, bool32 draw)
 {
     u16 var;
-    u16 *v1 = (u16*)GetBgTilemapBuffer(GetWindowAttribute(listWindow->windowId, WINDOW_BG));
-    v1 += ((listWindow->unkA << 6) + listWindow->x) - 1;
+    u16 *tilemapBuffer = (u16*)GetBgTilemapBuffer(GetWindowAttribute(listWindow->windowId, WINDOW_BG));
+    tilemapBuffer += (listWindow->unkA << 6) + listWindow->x - 1;
 
-    if (a1 != 0)
+    if (draw)
         var = (listWindow->fillValue << 12) | (listWindow->tileOffset + 1);
     else
         var = (listWindow->fillValue << 12) | (listWindow->tileOffset);
 
-    v1[0] = var;
-    v1[0x20] = var;
+    tilemapBuffer[0] = var;
+    tilemapBuffer[0x20] = var;
 }
 
 // Print the trainer's name and title at the top of their check page
@@ -713,7 +715,7 @@ static void PrintCheckPageTrainerName(struct PokenavListWindowState *state, stru
     list->iconDrawFunc(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(4), 0, list->listWindow.unkA * 16, list->listWindow.width * 8, 16);
     AddTextPrinterParameterized3(list->listWindow.windowId, list->listWindow.fontId, 8, (list->listWindow.unkA * 16) + 1, colors, TEXT_SKIP_DRAW, list->itemTextBuffer);
-    sub_81C8C64(&list->listWindow, 1);
+    SetListMarginTile(&list->listWindow, TRUE);
     CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_FULL, 0, list->listWindow.unkA * 2, list->listWindow.width, 2);
 }
 
@@ -723,7 +725,7 @@ static void PrintMatchCallListTrainerName(struct PokenavListWindowState *state, 
     list->bufferItemFunc(state->listPtr + state->listItemSize * state->windowTopIndex, list->itemTextBuffer);
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, list->listWindow.unkA * 16, list->listWindow.width * 8, 16);
     AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->itemTextBuffer, 8, list->listWindow.unkA * 16 + 1, TEXT_SKIP_DRAW, NULL);
-    sub_81C8C64(&list->listWindow, 0);
+    SetListMarginTile(&list->listWindow, FALSE);
     CopyWindowToVram(list->listWindow.windowId, COPYWIN_FULL);
 }
 
@@ -745,8 +747,7 @@ static void PrintMatchCallFieldNames(struct PokenavSub17Substruct *list, u32 fie
 static void PrintMatchCallFlavorText(struct PokenavListWindowState *a0, struct PokenavSub17Substruct *list, u32 checkPageEntry)
 {
     // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
-    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] =
-    {
+    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = {
         [CHECK_PAGE_STRATEGY] = 2,
         [CHECK_PAGE_POKEMON]  = 4,
         [CHECK_PAGE_INTRO_1]  = 6,
@@ -768,7 +769,7 @@ static const struct CompressedSpriteSheet sListArrowSpriteSheets[] =
 {
     {
         .data = sListArrow_Gfx,
-        .size = 192,
+        .size = 0xC0,
         .tag = GFXTAG_ARROW
     }
 };
@@ -852,7 +853,7 @@ static void CreateListArrowSprites(struct PokenavListWindowState *windowState, s
     list->rightArrow = &gSprites[spriteId];
 
     x = list->listWindow.x * 8 + (list->listWindow.width - 1) * 4;
-    spriteId = CreateSprite(&sSpriteTemplate_UpDownArrow, x, list->listWindow.y * 8 + windowState->visibleEntries * 16, 7);
+    spriteId = CreateSprite(&sSpriteTemplate_UpDownArrow, x, list->listWindow.y * 8 + windowState->entriesOnscreen * 16, 7);
     list->downArrow = &gSprites[spriteId];
     list->downArrow->oam.tileNum += 2;
     list->downArrow->callback = SpriteCB_DownArrow;
@@ -954,19 +955,19 @@ static void InitPokenavListWindowState(struct PokenavListWindowState *dst, struc
     dst->windowTopIndex = template->startIndex;
     dst->listLength = template->count;
     dst->listItemSize = template->itemSize;
-    dst->visibleEntries = template->maxShowed;
-    if (dst->visibleEntries >= dst->listLength)
+    dst->entriesOnscreen = template->maxShowed;
+    if (dst->entriesOnscreen >= dst->listLength)
     {
         dst->windowTopIndex = 0;
-        dst->unk4 = 0;
+        dst->entriesOffscreen = 0;
         dst->selectedIndexOffset = template->startIndex;
     }
     else
     {
-        dst->unk4 = dst->listLength - dst->visibleEntries;
-        if (dst->windowTopIndex + dst->visibleEntries > dst->listLength)
+        dst->entriesOffscreen = dst->listLength - dst->entriesOnscreen;
+        if (dst->windowTopIndex + dst->entriesOnscreen > dst->listLength)
         {
-            dst->selectedIndexOffset = dst->windowTopIndex + dst->visibleEntries - dst->listLength;
+            dst->selectedIndexOffset = dst->windowTopIndex + dst->entriesOnscreen - dst->listLength;
             dst->windowTopIndex = template->startIndex - dst->selectedIndexOffset;
         }
         else

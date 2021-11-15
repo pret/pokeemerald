@@ -327,19 +327,19 @@ void SetVBlankCallback_(IntrCallback callback);
 bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, s32 tileOffset);
 bool32 IsCreatePokenavListTaskActive(void);
 void DestroyPokenavList(void);
-u32 GetSelectedPokenavListIndex(void);
+u32 PokenavList_GetSelectedIndex(void);
 int PokenavList_MoveCursorUp(void);
 int PokenavList_MoveCursorDown(void);
 int PokenavList_PageDown(void);
 int PokenavList_PageUp(void);
-bool32 IsMovePokenavListWindowTaskActive(void);
+bool32 PokenavList_IsMoveWindowTaskActive(void);
 void PokenavList_ToggleVerticalArrows(bool32 shouldHide);
 void PokenavList_DrawCurrentItemIcon(void);
-void sub_81C877C(void);
-bool32 IsMatchCallListTaskActive(void);
+void PokenavList_EraseListForCheckPage(void);
+bool32 PokenavList_IsTaskActive(void);
 void PrintCheckPageInfo(s16 a0);
-u32 GetMatchCallListTopIndex(void);
-void sub_81C87F0(void);
+u32 PokenavList_GetTopIndex(void);
+void PokenavList_ReshowListFromCheckPage(void);
 
 // pokenav_match_call_data.c
 bool32 MatchCall_HasCheckPage(u32 idx);

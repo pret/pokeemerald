@@ -190,7 +190,7 @@ static u32 HandleRibbonsMonListInput(struct Pokenav_RibbonsMonList *list)
     }
     if (JOY_NEW(A_BUTTON))
     {
-        list->monList->currIndex = GetSelectedPokenavListIndex();
+        list->monList->currIndex = PokenavList_GetSelectedIndex();
         list->saveMonList = 1;
         list->callback = RibbonsMonMenu_ToSummaryScreen;
         return RIBBONS_MON_LIST_FUNC_OPEN_RIBBONS_SUMMARY;
@@ -230,7 +230,7 @@ static s32 GetRibbonsMonListCount(void)
 static s32 GetMonRibbonSelectedMonData(void)
 {
     struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
-    s32 idx = GetSelectedPokenavListIndex();
+    s32 idx = PokenavList_GetSelectedIndex();
     return list->monList->monData[idx].data;
 }
 
@@ -496,7 +496,7 @@ static u32 LoopedTask_RibbonsListMoveCursorUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -529,7 +529,7 @@ static u32 LoopedTask_RibbonsListMoveCursorDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -562,7 +562,7 @@ static u32 LoopedTask_RibbonsListMovePageUp(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -595,7 +595,7 @@ static u32 LoopedTask_RibbonsListMovePageDown(s32 state)
         }
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsMovePokenavListWindowTaskActive())
+        if (PokenavList_IsMoveWindowTaskActive())
             return LT_PAUSE;
         // fallthrough
     case 2:
@@ -658,7 +658,7 @@ static void AddRibbonsMonListWindow(struct Pokenav_RibbonsMonMenu *menu)
 
 static void UpdateIndexNumberDisplay(struct Pokenav_RibbonsMonMenu *menu)
 {
-    s32 listIndex = GetSelectedPokenavListIndex();
+    s32 listIndex = PokenavList_GetSelectedIndex();
     s32 listCount = GetRibbonsMonListCount();
     DrawListIndexNumber(menu->winid, listIndex + 1, listCount);
     CopyWindowToVram(menu->winid, COPYWIN_GFX);
