@@ -67,7 +67,7 @@
 #define HOLD_EFFECT_LUCKY_PUNCH    63
 #define HOLD_EFFECT_METAL_POWDER   64
 #define HOLD_EFFECT_THICK_CLUB     65
-#define HOLD_EFFECT_LEEK          66
+#define HOLD_EFFECT_LEEK           66
 
 // Gen4 hold effects.
 #define HOLD_EFFECT_CHOICE_SCARF   67
