@@ -107,7 +107,7 @@ Route117_PokemonDayCare_EventScript_GiveMonToRaise::
 	fadescreen FADE_TO_BLACK
 	special ChooseSendDaycareMon
 	waitstate
-	compare VAR_0x8004, 255
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
 	goto_if_eq Route117_PokemonDayCare_EventScript_ComeAgain
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	compare VAR_RESULT, 0

@@ -103,7 +103,7 @@ LilycoveCity_ContestLobby_EventScript_CancelEnterContest::
 LilycoveCity_ContestLobby_EventScript_ChooseContestMon::
 	msgbox LilycoveCity_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
 	choosecontestmon
-	compare VAR_0x8004, 255
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	special TryEnterContestMon
 	compare VAR_RESULT, CANT_ENTER_CONTEST

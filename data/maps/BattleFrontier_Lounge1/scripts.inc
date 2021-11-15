@@ -14,9 +14,9 @@ BattleFrontier_Lounge1_EventScript_Breeder::
 BattleFrontier_Lounge1_EventScript_ChooseMonToShowBreeder::
 	special ChoosePartyMon
 	waitstate
-	compare VAR_0x8004, 255
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
 	goto_if_ne BattleFrontier_Lounge1_EventScript_ShowMonToBreeder
-	compare VAR_0x8004, 255
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
 	goto_if_eq BattleFrontier_Lounge1_EventScript_CancelMonSelect
 	end
 

@@ -11,7 +11,7 @@ BattleFrontier_Lounge5_EventScript_NatureGirl::
 	waitstate
 	lock
 	faceplayer
-	compare VAR_0x8004, 255
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
 	goto_if_eq BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
