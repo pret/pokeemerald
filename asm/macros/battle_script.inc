@@ -1877,6 +1877,10 @@
 	.2byte \species
 	.4byte \ptr
 	.endm
+	
+	.macro tryendneutralizinggas battler:req
+	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
+	.endm
 
 	.macro trytoapplymimicry battler:req, ptr:req
 	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY

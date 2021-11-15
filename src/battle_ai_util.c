@@ -1121,19 +1121,24 @@ bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability)
 // does NOT include ability suppression checks
 s32 AI_GetAbility(u32 battlerId)
 {
+    u32 knownAbility = GetBattlerAbility(battlerId);
+    
     // The AI knows its own ability.
     if (IsBattlerAIControlled(battlerId))
-        return gBattleMons[battlerId].ability;
+        return knownAbility;
+    
+    // Check neutralizing gas, gastro acid
+    if (knownAbility == ABILITY_NONE)
+        return knownAbility;
 
     if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
         return BATTLE_HISTORY->abilities[battlerId];
 
-    // Abilities that prevent fleeing.
-    if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
-    || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
-    || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
-        return gBattleMons[battlerId].ability;
+    // Abilities that prevent fleeing - treat as always known
+    if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
+        return knownAbility;
 
+    // Else, guess the ability
     if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
     {
         if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
@@ -1146,6 +1151,7 @@ s32 AI_GetAbility(u32 battlerId)
             return gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
         }
     }
+    
     return ABILITY_NONE; // Unknown.
 }
 
