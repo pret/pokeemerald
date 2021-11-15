@@ -3029,6 +3029,8 @@ void CloseFrontierExchangeCornerItemIconWindow(void)
     RemoveWindow(sFrontierExchangeCorner_ItemIconWindowId);
 }
 
+#define TAG_ITEM_ICON 5500
+
 static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
@@ -3046,9 +3048,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                 }
                 else
                 {
-                    FreeSpriteTilesByTag(5500);
-                    FreeSpritePaletteByTag(5500);
-                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, 5500, 5500);
+                    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
                 }
                 break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
@@ -3059,9 +3061,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                 }
                 else
                 {
-                    FreeSpriteTilesByTag(5500);
-                    FreeSpritePaletteByTag(5500);
-                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
+                    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
                 }
                 break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
@@ -3078,9 +3080,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 
 static void ShowFrontierExchangeCornerItemIcon(u16 item)
 {
-    FreeSpriteTilesByTag(5500);
-    FreeSpritePaletteByTag(5500);
-    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(5500, 5500, item);
+    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, item);
 
     if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
@@ -3416,7 +3418,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
         gFieldEffectArguments[5] = 5;
 
     FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
-    Overworld_SetObjEventTemplateCoords(1, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
+    SetObjEventTemplateCoords(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
 }
 
 static void WaitForDeoxysRockMovement(u8 taskId)

@@ -175,7 +175,6 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
 
-// IWRAM bss vars
 static void *sUnusedOverworldCallback;
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
 // This callback is called with a player's key code. It then returns an
@@ -185,7 +184,6 @@ static u16 (*sPlayerKeyInterceptCallback)(u32);
 static bool8 sReceivingFromLink;
 static u8 sRfuKeepAliveTimer;
 
-// IWRAM common
 u16 *gBGTilemapBuffers1;
 u16 *gBGTilemapBuffers2;
 u16 *gBGTilemapBuffers3;
@@ -195,7 +193,6 @@ bool8 (*gFieldCallback2)(void);
 u8 gLocalLinkPlayerId; // This is our player id in a multiplayer mode.
 u8 gFieldLinkPlayerCount;
 
-// EWRAM vars
 EWRAM_DATA static u8 sObjectEventLoadFlag = 0;
 EWRAM_DATA struct WarpData gLastUsedWarp = {0};
 EWRAM_DATA static struct WarpData sWarpDestination = {0};  // new warp position
@@ -207,11 +204,10 @@ EWRAM_DATA static u16 sAmbientCrySpecies = 0;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
 
-// const rom data
 static const struct WarpData sDummyWarpData =
 {
-    .mapGroup = -1,
-    .mapNum = -1,
+    .mapGroup = MAP_GROUP(UNDEFINED),
+    .mapNum = MAP_NUM(UNDEFINED),
     .warpId = -1,
     .x = -1,
     .y = -1,
@@ -495,7 +491,7 @@ void LoadSaveblockObjEventScripts(void)
         savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
 }
 
-void Overworld_SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
+void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
 {
     s32 i;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
@@ -512,7 +508,7 @@ void Overworld_SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
     }
 }
 
-void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
+void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 {
     s32 i;
 
@@ -570,9 +566,9 @@ static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId
 
 static bool32 IsDummyWarp(struct WarpData *warp)
 {
-    if (warp->mapGroup != -1)
+    if (warp->mapGroup != (s8)MAP_GROUP(UNDEFINED))
         return FALSE;
-    else if (warp->mapNum != -1)
+    else if (warp->mapNum != (s8)MAP_NUM(UNDEFINED))
         return FALSE;
     else if (warp->warpId != -1)
         return FALSE;
@@ -978,14 +974,14 @@ void SetDefaultFlashLevel(void)
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
 }
 
-void Overworld_SetFlashLevel(s32 flashLevel)
+void SetFlashLevel(s32 flashLevel)
 {
     if (flashLevel < 0 || flashLevel > gMaxFlashLevel)
         flashLevel = 0;
     gSaveBlock1Ptr->flashLevel = flashLevel;
 }
 
-u8 Overworld_GetFlashLevel(void)
+u8 GetFlashLevel(void)
 {
     return gSaveBlock1Ptr->flashLevel;
 }
@@ -1790,7 +1786,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
         WriteBattlePyramidViewScanlineEffectBuffer();
         ScanlineEffect_SetParams(sFlashEffectParams);
     }
-    else if ((flashLevel = Overworld_GetFlashLevel()))
+    else if ((flashLevel = GetFlashLevel()))
     {
         WriteFlashScanlineEffectBuffer(flashLevel);
         ScanlineEffect_SetParams(sFlashEffectParams);

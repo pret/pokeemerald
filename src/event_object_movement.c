@@ -1141,7 +1141,7 @@ static const u8 sPlayerDirectionToCopyDirection[][4] = {
 static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
     *objectEvent = (struct ObjectEvent){};
-    objectEvent->localId = 0xFF;
+    objectEvent->localId = OBJ_EVENT_ID_PLAYER;
     objectEvent->mapNum = MAP_NUM(UNDEFINED);
     objectEvent->mapGroup = MAP_GROUP(UNDEFINED);
     objectEvent->movementActionId = MOVEMENT_ACTION_NONE;

@@ -974,7 +974,7 @@ static u8 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRa
 // A higher flashLevel value is a smaller flash radius (more darkness). 0 is full brightness
 void AnimateFlash(u8 flashLevel)
 {
-    u8 curFlashLevel = Overworld_GetFlashLevel();
+    u8 curFlashLevel = GetFlashLevel();
     bool8 fullBrightness = FALSE;
     if (!flashLevel)
         fullBrightness = TRUE;

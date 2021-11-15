@@ -58,11 +58,11 @@ EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
-static EWRAM_DATA u16 sMovingNpcMapBank = 0;
-static EWRAM_DATA u16 sMovingNpcMapId = 0;
+static EWRAM_DATA u16 sMovingNpcMapGroup = 0;
+static EWRAM_DATA u16 sMovingNpcMapNum = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
-static u8 gBrailleWindowId;
+static u8 sBrailleWindowId;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
@@ -612,9 +612,7 @@ bool8 ScrCmd_animateflash(struct ScriptContext *ctx)
 
 bool8 ScrCmd_setflashradius(struct ScriptContext *ctx)
 {
-    u16 flashLevel = VarGet(ScriptReadHalfword(ctx));
-
-    Overworld_SetFlashLevel(flashLevel);
+    SetFlashLevel(VarGet(ScriptReadHalfword(ctx)));
     return FALSE;
 }
 
@@ -668,9 +666,7 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 
 static bool8 RunPauseTimer(void)
 {
-    sPauseCounter--;
-
-    if (sPauseCounter == 0)
+    if (--sPauseCounter == 0)
         return TRUE;
     else
         return FALSE;
@@ -945,9 +941,9 @@ bool8 ScrCmd_waitfanfare(struct ScriptContext *ctx)
 bool8 ScrCmd_playbgm(struct ScriptContext *ctx)
 {
     u16 songId = ScriptReadHalfword(ctx);
-    bool8 val = ScriptReadByte(ctx);
+    bool8 save = ScriptReadByte(ctx);
 
-    if (val == TRUE)
+    if (save == TRUE)
         Overworld_SetSavedMusic(songId);
     PlayNewMapMusic(songId);
     return FALSE;
@@ -1018,7 +1014,7 @@ bool8 ScrCmd_applymovement_at(struct ScriptContext *ctx)
 
 static bool8 WaitForMovementFinish(void)
 {
-    return ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapId, sMovingNpcMapBank);
+    return ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapNum, sMovingNpcMapGroup);
 }
 
 bool8 ScrCmd_waitmovement(struct ScriptContext *ctx)
@@ -1027,8 +1023,8 @@ bool8 ScrCmd_waitmovement(struct ScriptContext *ctx)
 
     if (localId != 0)
         sMovingNpcId = localId;
-    sMovingNpcMapBank = gSaveBlock1Ptr->location.mapGroup;
-    sMovingNpcMapId = gSaveBlock1Ptr->location.mapNum;
+    sMovingNpcMapGroup = gSaveBlock1Ptr->location.mapGroup;
+    sMovingNpcMapNum = gSaveBlock1Ptr->location.mapNum;
     SetupNativeScript(ctx, WaitForMovementFinish);
     return TRUE;
 }
@@ -1036,15 +1032,15 @@ bool8 ScrCmd_waitmovement(struct ScriptContext *ctx)
 bool8 ScrCmd_waitmovement_at(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
-    u8 mapBank;
-    u8 mapId;
+    u8 mapGroup;
+    u8 mapNum;
 
     if (localId != 0)
         sMovingNpcId = localId;
-    mapBank = ScriptReadByte(ctx);
-    mapId = ScriptReadByte(ctx);
-    sMovingNpcMapBank = mapBank;
-    sMovingNpcMapId = mapId;
+    mapGroup = ScriptReadByte(ctx);
+    mapNum = ScriptReadByte(ctx);
+    sMovingNpcMapGroup = mapGroup;
+    sMovingNpcMapNum = mapNum;
     SetupNativeScript(ctx, WaitForMovementFinish);
     return TRUE;
 }
@@ -1101,7 +1097,7 @@ bool8 ScrCmd_setobjectxyperm(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetObjEventTemplateCoords(localId, x, y);
+    SetObjEventTemplateCoords(localId, x, y);
     return FALSE;
 }
 
@@ -1178,7 +1174,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 movementType = ScriptReadByte(ctx);
 
-    Overworld_SetObjEventTemplateMovementType(localId, movementType);
+    SetObjEventTemplateMovementType(localId, movementType);
     return FALSE;
 }
 
@@ -1311,7 +1307,7 @@ bool8 ScrCmd_messageinstant(struct ScriptContext *ctx)
         msg = (const u8 *)ctx->data[0];
     LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
-    AddTextPrinterParameterized(0, FONT_NORMAL, msg, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, msg, 0, 1, 0, NULL);
     return FALSE;
 }
 
@@ -1528,13 +1524,13 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     yText = (yText - yWindow - 1) * 8;
 
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
-    gBrailleWindowId = AddWindow(&winTemplate);
-    LoadUserWindowBorderGfx(gBrailleWindowId, 0x214, 0xE0);
-    DrawStdWindowFrame(gBrailleWindowId, 0);
-    PutWindowTilemap(gBrailleWindowId);
-    FillWindowPixelBuffer(gBrailleWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(gBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(gBrailleWindowId, COPYWIN_FULL);
+    sBrailleWindowId = AddWindow(&winTemplate);
+    LoadUserWindowBorderGfx(sBrailleWindowId, 0x214, 0xE0);
+    DrawStdWindowFrame(sBrailleWindowId, 0);
+    PutWindowTilemap(sBrailleWindowId);
+    FillWindowPixelBuffer(sBrailleWindowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(sBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sBrailleWindowId, COPYWIN_FULL);
     return FALSE;
 }
 
@@ -1933,7 +1929,7 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
     u8 growthStage = ScriptReadByte(ctx);
 
     if (berry == 0)
-        PlantBerryTree(treeId, 0, growthStage, FALSE);
+        PlantBerryTree(treeId, berry, growthStage, FALSE);
     else
         PlantBerryTree(treeId, berry, growthStage, FALSE);
     return FALSE;
@@ -2230,9 +2226,7 @@ bool8 ScrCmd_checkmoneventlegal(struct ScriptContext *ctx)
     return FALSE;
 }
 
-// TODO: Should be renamed. Name implies general usage, but its specifically for Wonder Card
-// See GetSavedRamScriptIfValid, which is NULL if ValidateSavedWonderCard returns FALSE
-bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
+bool8 ScrCmd_gotowondercardscript(struct ScriptContext *ctx)
 {
     const u8* script = GetSavedRamScriptIfValid();
 
@@ -2244,7 +2238,6 @@ bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
     return FALSE;
 }
 
-// Unused
 // For the warp used by the Aqua Hideout, see DoTeleportTileWarp
 bool8 ScrCmd_warpspinenter(struct ScriptContext *ctx)
 {
@@ -2273,8 +2266,8 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 
 static void CloseBrailleWindow(void)
 {
-    ClearStdWindowAndFrame(gBrailleWindowId, 1);
-    RemoveWindow(gBrailleWindowId);
+    ClearStdWindowAndFrame(sBrailleWindowId, 1);
+    RemoveWindow(sBrailleWindowId);
 }
 
 bool8 ScrCmd_buffertrainerclassname(struct ScriptContext *ctx)
