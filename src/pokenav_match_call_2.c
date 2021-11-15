@@ -56,7 +56,7 @@ struct Pokenav_MatchCallGfx
 static bool32 GetCurrentLoopedTaskActive(void);
 static u32 LoopedTask_OpenMatchCall(s32);
 static void CreateMatchCallList(void);
-static void sub_81CBC1C(void);
+static void DestroyMatchCallList(void);
 static void FreeMatchCallSprites(void);
 static void LoadCallWindowAndFade(struct Pokenav_MatchCallGfx *);
 static void DrawMatchCallLeftColumnWindows(struct Pokenav_MatchCallGfx *);
@@ -119,12 +119,12 @@ static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui
 static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
 static const u16 sOptionsCursor_Pal[] = INCBIN_U16("graphics/pokenav/match_call/options_cursor.gbapal");
 static const u32 sOptionsCursor_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/options_cursor.4bpp.lz");
-static const u16 gUnknown_086226E0[] = INCBIN_U16("graphics/pokenav/match_call/86226E0.gbapal");
-static const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/match_call/8622700.gbapal");
+static const u16 sCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/call_window.gbapal");
+static const u16 sListWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/list_window.gbapal");
 static const u16 sPokeball_Pal[] = INCBIN_U16("graphics/pokenav/match_call/pokeball.gbapal");
 static const u32 sPokeball_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/pokeball.4bpp.lz");
 
-const struct BgTemplate sMatchCallBgTemplates[3] =
+static const struct BgTemplate sMatchCallBgTemplates[3] =
 {
     {
         .bg = 1,
@@ -223,7 +223,7 @@ static const struct CompressedSpriteSheet sOptionsCursorSpriteSheets[1] =
     {sOptionsCursor_Gfx, 0x40, GFXTAG_CURSOR}
 };
 
-const struct SpritePalette sOptionsCursorSpritePalettes[2] =
+static const struct SpritePalette sOptionsCursorSpritePalettes[2] =
 {
     {sOptionsCursor_Pal, PALTAG_CURSOR}
 };
@@ -307,7 +307,7 @@ void FreeMatchCallSubstruct2(void)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     FreeMatchCallSprites();
-    sub_81CBC1C();
+    DestroyMatchCallList();
     RemoveWindow(gfx->infoBoxWindowId);
     RemoveWindow(gfx->locWindowId);
     RemoveWindow(gfx->msgBoxWindowId);
@@ -343,7 +343,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         BgDmaFill(1, 0, 0, 1);
         SetBgTilemapBuffer(1, gfx->bgTilemapBuffer1);
         FillBgTilemapBufferRect_Palette0(1, 0x1000, 0, 0, 32, 20);
-        CopyPaletteIntoBufferUnfaded(gUnknown_086226E0, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(sCallWindow_Pal, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -352,11 +352,11 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
 
         LoadCallWindowAndFade(gfx);
         DecompressAndCopyTileDataToVram(3, sPokeball_Gfx, 0, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gUnknown_08622700, 0x30, 0x20);
+        CopyPaletteIntoBufferUnfaded(sListWindow_Pal, 0x30, 0x20);
         CopyPaletteIntoBufferUnfaded(sPokeball_Pal, 0x50, 0x20);
         return LT_INC_AND_PAUSE;
     case 3:
-        if (FreeTempTileDataBuffersIfPossible() || !sub_81CAE28())
+        if (FreeTempTileDataBuffersIfPossible() || !IsMatchCallListInitFinished())
             return LT_PAUSE;
 
         CreateMatchCallList();
@@ -872,7 +872,7 @@ static u32 ExitMatchCall(s32 state)
 static void CreateMatchCallList(void)
 {
     struct PokenavListTemplate template;
-    template.list = (struct PokenavListItem *)sub_81CAE94();
+    template.list = (struct PokenavListItem *)GetMatchCallList();
     template.count = GetNumberRegistered();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = 0;
@@ -888,7 +888,7 @@ static void CreateMatchCallList(void)
     CreateTask(Task_FlashPokeballIcons, 7);
 }
 
-static void sub_81CBC1C(void)
+static void DestroyMatchCallList(void)
 {
     DestroyPokenavList();
     DestroyTask(FindTaskIdByFunc(Task_FlashPokeballIcons));
