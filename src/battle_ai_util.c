@@ -2408,9 +2408,19 @@ static bool32 AnyUsefulStatIsRaised(u8 battler)
     return FALSE;
 }
 
+struct Pokemon *GetPartyBattlerPartyData(u8 battlerId, u8 switchBattler)
+{
+    struct Pokemon *mon;
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        mon = &gPlayerParty[switchBattler];
+    else
+        mon = &gEnemyParty[switchBattler];
+    return mon;
+}
+
 static bool32 PartyBattlerShouldAvoidHazards(u8 currBattler, u8 switchBattler)
 {
-    struct Pokemon *mon = GetBattlerPartyData(switchBattler);
+    struct Pokemon *mon = GetPartyBattlerPartyData(currBattler, switchBattler);
     u16 ability = GetMonAbility(mon);   // we know our own party data
     u16 holdEffect = GetBattlerHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM), TRUE);
     u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);
