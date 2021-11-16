@@ -51,6 +51,7 @@
     #define SPECIES_MELOETTA_PIROUETTE      10019
     #define SPECIES_MORPEKO                 0
     #define SPECIES_MORPEKO_HANGRY          10020
+    #define SPECIES_SIRFETCHD               10021
 #endif
 
 // Items with peculiar battle effects.
