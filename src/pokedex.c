@@ -387,10 +387,10 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId);
 static void Task_ExitFormsScreen(u8 taskId);
 #endif
 
-//COMPATIBILITY, delete if you are using a newer version
+#ifndef TEXT_COLOR_LIGHT_GRAY // COMPATIBILITY
 #define TEXT_COLOR_LIGHT_GRAY TEXT_COLOR_LIGHT_GREY
 #define TEXT_COLOR_DARK_GRAY TEXT_COLOR_DARK_GREY
-//COMPATIBILITY end
+#endif
 
 //HGSS_UI Physical Special Split icon for BattleEngine (rhh)
 #ifdef BATTLE_ENGINE
@@ -7778,6 +7778,9 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
                 StringExpandPlaceholders(gStringVar4, gText_EVO_SPECIFIC_MAP );
                 break;
         #endif
+        default:
+            StringExpandPlaceholders(gStringVar4, gText_EVO_UNKNOWN );
+            break;
         }//Switch end
         PrintInfoScreenTextSmall(gStringVar4, base_x + depth_x*depth+base_x_offset, base_y + base_y_offset*base_i); //Print actual instructions
 
