@@ -52,11 +52,13 @@ EventScript_PlayersHouseLatiNewsFlash::
 	releaseall
 	end
 
+@ The following is a loop for the TV show messages
+@ VAR_RESULT is set to TRUE when the show has printed its final message
 EventScript_DoTVShow::
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_ne EventScript_DoTVShow
 	goto EventScript_TurnOffTV
 	end
