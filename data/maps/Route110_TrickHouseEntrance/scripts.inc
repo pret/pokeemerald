@@ -512,7 +512,7 @@ Route110_TrickHouseEntrance_EventScript_GoInHolePrompt::
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom::
-	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, 0
+	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, FALSE
 	special DrawWholeMapView
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
@@ -618,7 +618,7 @@ Route110_TrickHousePuzzle1_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -629,7 +629,7 @@ Route110_TrickHousePuzzle2_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_2_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -640,7 +640,7 @@ Route110_TrickHousePuzzle3_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_3_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -651,7 +651,7 @@ Route110_TrickHousePuzzle4_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_4_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -662,7 +662,7 @@ Route110_TrickHousePuzzle5_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_5_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -673,7 +673,7 @@ Route110_TrickHousePuzzle6_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_6_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -684,7 +684,7 @@ Route110_TrickHousePuzzle7_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle7_EventScript_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -695,7 +695,7 @@ Route110_TrickHousePuzzle8_EventScript_Door::
 	msgbox Route110_TrickHousePuzzle8_EventScript_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_8_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end

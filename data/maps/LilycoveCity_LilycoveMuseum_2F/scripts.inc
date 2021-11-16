@@ -30,32 +30,32 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting::
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting::
-	setmetatile 10, 6, METATILE_LilycoveMuseum_Painting2_Left, 1
-	setmetatile 11, 6, METATILE_LilycoveMuseum_Painting2_Right, 1
+	setmetatile 10, 6, METATILE_LilycoveMuseum_Painting2_Left, TRUE
+	setmetatile 11, 6, METATILE_LilycoveMuseum_Painting2_Right, TRUE
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting::
-	setmetatile 18, 6, METATILE_LilycoveMuseum_Painting1_Left, 1
-	setmetatile 19, 6, METATILE_LilycoveMuseum_Painting1_Right, 1
+	setmetatile 18, 6, METATILE_LilycoveMuseum_Painting1_Left, TRUE
+	setmetatile 19, 6, METATILE_LilycoveMuseum_Painting1_Right, TRUE
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting::
-	setmetatile 14, 10, METATILE_LilycoveMuseum_Painting3_Left, 1
-	setmetatile 15, 10, METATILE_LilycoveMuseum_Painting3_Right, 1
+	setmetatile 14, 10, METATILE_LilycoveMuseum_Painting3_Left, TRUE
+	setmetatile 15, 10, METATILE_LilycoveMuseum_Painting3_Right, TRUE
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting::
-	setmetatile 6, 10, METATILE_LilycoveMuseum_Painting0_Left, 1
-	setmetatile 7, 10, METATILE_LilycoveMuseum_Painting0_Right, 1
+	setmetatile 6, 10, METATILE_LilycoveMuseum_Painting0_Left, TRUE
+	setmetatile 7, 10, METATILE_LilycoveMuseum_Painting0_Right, TRUE
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting::
-	setmetatile 2, 6, METATILE_LilycoveMuseum_Painting4_Left, 1
-	setmetatile 3, 6, METATILE_LilycoveMuseum_Painting4_Right, 1
+	setmetatile 2, 6, METATILE_LilycoveMuseum_Painting4_Left, TRUE
+	setmetatile 3, 6, METATILE_LilycoveMuseum_Painting4_Right, TRUE
 	end
 
 LilycoveCity_LilycoveMuseum_2F_OnFrame:

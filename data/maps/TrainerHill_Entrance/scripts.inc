@@ -53,7 +53,7 @@ TrainerHill_Entrance_OnLoad:
 	end
 
 TrainerHill_Entrance_EventScript_OpenCounterDoor::
-	setmetatile 17, 10, METATILE_TrainerHill_GreenFloorTile, 0
+	setmetatile 17, 10, METATILE_TrainerHill_GreenFloorTile, FALSE
 	return
 
 TrainerHill_Entrance_OnFrame:
@@ -67,7 +67,7 @@ TrainerHill_Entrance_EventScript_ExitElevator::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerExitElevator
 	waitmovement 0
-	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, 1
+	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, TRUE
 	special DrawWholeMapView
 	playse SE_CLICK
 	waitse

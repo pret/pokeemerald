@@ -20,30 +20,30 @@ Route111_OnLoad:
 	end
 
 Route111_EventScript_CloseDesertRuins::
-	setmetatile 29, 86, METATILE_General_RockWall_RockBase, 1
-	setmetatile 29, 87, METATILE_General_RockWall_SandBase, 1
+	setmetatile 29, 86, METATILE_General_RockWall_RockBase, TRUE
+	setmetatile 29, 87, METATILE_General_RockWall_SandBase, TRUE
 	return
 
 @ Show Mirage Tower just prior to disintegration. Mirage Tower is otherwise handled by the map layout
 Route111_EventScript_ShowTemporaryMirageTower::
-	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, 0
-	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, 0
-	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, 0
-	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, 0
-	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, 0
-	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, 0
-	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, 0
-	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, 0
-	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, 0
-	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, 0
-	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, 0
-	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, 0
-	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, 0
-	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, 0
-	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, 0
-	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, 0
-	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, 0
-	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, 0
+	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, FALSE
+	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, FALSE
+	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, FALSE
+	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, FALSE
+	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, FALSE
+	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, FALSE
+	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, FALSE
+	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, FALSE
+	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, FALSE
+	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, FALSE
+	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, FALSE
+	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, FALSE
+	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, FALSE
+	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, FALSE
+	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, FALSE
+	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, FALSE
+	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, FALSE
+	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, FALSE
 	return
 
 Route111_OnTransition:

@@ -26,8 +26,8 @@ SkyPillar_Outside_OnLoad:
 	end
 
 SkyPillar_Outside_EventScript_OpenDoor::
-	setmetatile 14, 4, METATILE_Pacifidlog_SkyPillar_DoorOpen_Top, 0
-	setmetatile 14, 5, METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom, 0
+	setmetatile 14, 4, METATILE_Pacifidlog_SkyPillar_DoorOpen_Top, FALSE
+	setmetatile 14, 5, METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom, FALSE
 	return
 
 SkyPillar_Outside_OnFrame:

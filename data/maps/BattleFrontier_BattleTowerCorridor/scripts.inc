@@ -8,13 +8,13 @@ BattleFrontier_BattleTowerCorridor_MapScripts::
 BattleFrontier_BattleTowerCorridor_OnLoad:
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor
-	setmetatile 12, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, 0
-	setmetatile 12, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, 0
+	setmetatile 12, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, FALSE
+	setmetatile 12, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, FALSE
 	end
 
 BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor::
-	setmetatile 15, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, 0
-	setmetatile 15, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, 0
+	setmetatile 15, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, FALSE
+	setmetatile 15, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, FALSE
 	end
 
 BattleFrontier_BattleTowerCorridor_OnFrame:

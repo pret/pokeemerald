@@ -608,46 +608,46 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_StatusMon::
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage1_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage1_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage1_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage1_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage1_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage1_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage1_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage1_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage1_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage1_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage1_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage1_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage1_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage1_Tile6, TRUE
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesLittleClosed::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage2_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage2_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage2_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage2_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage2_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage2_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage2_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage2_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage2_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage2_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage2_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage2_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage2_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage2_Tile6, TRUE
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesOpen::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage3_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage3_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage3_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage3_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage3_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage3_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage3_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage3_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage3_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage3_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage3_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage3_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage3_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage3_Tile6, TRUE
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesClosed::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage0_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage0_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage0_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage0_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage0_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage0_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage0_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage0_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage0_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage0_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage0_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage0_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage0_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage0_Tile6, TRUE
 	special DrawWholeMapView
 	return
 

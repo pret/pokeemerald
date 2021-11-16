@@ -9,12 +9,12 @@ NewMauville_Entrance_OnLoad:
 	end
 
 NewMauville_Entrance_EventScript_CloseDoor::
-	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Closed_Tile0, 1
-	setmetatile 4, 0, METATILE_Facility_NewMauvilleDoor_Closed_Tile1, 1
-	setmetatile 5, 0, METATILE_Facility_NewMauvilleDoor_Closed_Tile2, 1
-	setmetatile 3, 1, METATILE_Facility_NewMauvilleDoor_Closed_Tile3, 1
-	setmetatile 4, 1, METATILE_Facility_NewMauvilleDoor_Closed_Tile4, 1
-	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Closed_Tile5, 1
+	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Closed_Tile0, TRUE
+	setmetatile 4, 0, METATILE_Facility_NewMauvilleDoor_Closed_Tile1, TRUE
+	setmetatile 5, 0, METATILE_Facility_NewMauvilleDoor_Closed_Tile2, TRUE
+	setmetatile 3, 1, METATILE_Facility_NewMauvilleDoor_Closed_Tile3, TRUE
+	setmetatile 4, 1, METATILE_Facility_NewMauvilleDoor_Closed_Tile4, TRUE
+	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Closed_Tile5, TRUE
 	return
 
 NewMauville_Entrance_OnTransition:
@@ -33,12 +33,12 @@ NewMauville_Entrance_EventScript_Door::
 	compare VAR_RESULT, NO
 	goto_if_eq NewMauville_Entrance_EventScript_DontOpenDoor
 	msgbox NewMauville_Entrance_Text_UsedBasementKey, MSGBOX_DEFAULT
-	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, 0
-	setmetatile 4, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile1, 0
-	setmetatile 5, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile2, 0
-	setmetatile 3, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile3, 1
-	setmetatile 4, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile4, 0
-	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile5, 1
+	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, FALSE
+	setmetatile 4, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile1, FALSE
+	setmetatile 5, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile2, FALSE
+	setmetatile 3, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile3, TRUE
+	setmetatile 4, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile4, FALSE
+	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile5, TRUE
 	special DrawWholeMapView
 	playse SE_BANG
 	setvar VAR_NEW_MAUVILLE_STATE, 1

@@ -1113,12 +1113,13 @@
 	.2byte \id
 	.endm
 
-	@ Sets a berry tree's specific berry and growth stage.
-	.macro setberrytree tree_id:req, berry:req, growth_stage:req
+	@ Sets a berry tree's berry and growth stage. treeId is any BERRY_TREE_* constant (an index into berryTrees in SaveBlock1),
+	@ berry is any ITEM_TO_BERRY(ITEM_BERRY_NAME) value, and growthStage is any BERRY_STAGE_* constant.
+	.macro setberrytree treeId:req, berry:req, growthStage:req
 	.byte 0x8a
-	.byte \tree_id
+	.byte \treeId
 	.byte \berry
-	.byte \growth_stage
+	.byte \growthStage
 	.endm
 
 	@ This allows you to choose a Pokemon to use in a contest
@@ -1126,17 +1127,17 @@
 	.byte 0x8b
 	.endm
 
-	@ Starts a contest.
+	@ Starts the appeals round of a contest.
 	.macro startcontest
 	.byte 0x8c
 	.endm
 
-	@ Shows the results of a contest.
+	@ Shows the results screen of a contest.
 	.macro showcontestresults
 	.byte 0x8d
 	.endm
 
-	@ Starts a contest over a link connection.
+	@ Starts communication to initialize a link contest.
 	.macro contestlinktransfer
 	.byte 0x8e
 	.endm
@@ -1171,7 +1172,7 @@
 	.byte \disable
 	.endm
 
-	@ Spawns a secondary box showing how much money the player has.
+	@ Creates a window showing how much money the player has.
 	@ If 'disable' is set to anything but 0 then this command does nothing.
 	.macro showmoneybox x:req, y:req, disable=0
 	.byte 0x93
@@ -1180,14 +1181,14 @@
 	.byte \disable
 	.endm
 
-	@ Hides the secondary box spawned by showmoney. Consumption of the x and y arguments was dummied out.
+	@ Destroys the window created by showmoneybox. Consumption of the x and y arguments was dummied out.
 	.macro hidemoneybox
 	.byte 0x94
 	.byte 0  @ \x
 	.byte 0  @ \y
 	.endm
 
-	@ Updates the secondary box spawned by showmoney. Consumption of the x and y arguments was dummied out.
+	@ Updates the window created by showmoneybox. Consumption of the x and y arguments was dummied out.
 	@ If 'disable' is set to anything but 0 then this command does nothing.
 	.macro updatemoneybox disable=0
 	.byte 0x95
@@ -1196,10 +1197,10 @@
 	.byte \disable
 	.endm
 
-	@ Gets the price reduction for the index given.
-	.macro getpokenewsactive index:req
+	@ Gets whether the effects of the specified PokeNews program are active. newsKind is a POKENEWS_* constant.
+	.macro getpokenewsactive newsKind:req
 	.byte 0x96
-	.2byte \index
+	.2byte \newsKind
 	.endm
 
 	@ Fades the screen to and from black and white. Modes are FADE_(TO/FROM)_(WHITE/BLACK)
@@ -1215,14 +1216,18 @@
 	.byte \speed
 	.endm
 
-	.macro setflashradius word:req
+	@ Sets the flash level. A level of 0 is fully bright, a level of 1 is the largest flash radius, a level
+	@ of 7 is the smallest flash radius, a level of 8 is fully black.
+	.macro setflashlevel level:req
 	.byte 0x99
-	.2byte \word
+	.2byte \level
 	.endm
 
-	.macro animateflash byte:req
+	@ Animates the flash radius from its current size to the size it would be at the specified level.
+	@ Note that this does not actually change the current flash level. It's typically used just before a setflashlevel.
+	.macro animateflash level:req
 	.byte 0x9a
-	.byte \byte
+	.byte \level
 	.endm
 
 	.macro messageautoscroll pointer:req
@@ -1230,20 +1235,20 @@
 	.4byte \pointer
 	.endm
 
-	@ Executes the specified field effect animation.
+	@ Executes the specified field effect animation (FLDEFF_*).
 	.macro dofieldeffect animation:req
 	.byte 0x9c
 	.2byte \animation
 	.endm
 
-	@ Sets up the field effect argument argument with the value value.
-	.macro setfieldeffectargument argument:req, param:req
+	@ Sets the field effect argument at index 'argNum' to 'value.'
+	.macro setfieldeffectargument argNum:req, value:req
 	.byte 0x9d
-	.byte \argument
-	.2byte \param
+	.byte \argNum
+	.2byte \value
 	.endm
 
-	@ Blocks script execution until all playing field move animations complete.
+	@ Blocks script execution until all playing field effect animations complete.
 	.macro waitfieldeffect animation:req
 	.byte 0x9e
 	.2byte \animation
@@ -1260,20 +1265,21 @@
 	.byte 0xa0
 	.endm
 
-	@ Plays the specified (species) Pokemon's cry. You can use waitmoncry to block script execution until the sound finishes.
+	@ Plays the cry of the given species. Mode is any CRY_MODE_* constant.
+	@ You can use waitmoncry to block script execution until the cry finishes.
 	.macro playmoncry species:req, mode:req
 	.byte 0xa1
 	.2byte \species
 	.2byte \mode
 	.endm
 
-	@ Changes the metatile at (x, y) on the current map.
-	.macro setmetatile x:req, y:req, metatile_number:req, has_collision:req
+	@ Set the metatile at (x, y) on the current map to the given metatile and impassability.
+	.macro setmetatile x:req, y:req, metatileId:req, impassable:req
 	.byte 0xa2
 	.2byte \x
 	.2byte \y
-	.2byte \metatile_number
-	.2byte \has_collision
+	.2byte \metatileId
+	.2byte \impassable
 	.endm
 
 	@ Queues a weather change to the default weather for the map.
@@ -1292,7 +1298,7 @@
 	.byte 0xa5
 	.endm
 
-	@ This command manages cases in which maps have tiles that change state when stepped on (specifically, cracked/breakable floors).
+	@ Enables a function that gets called every step by Task_RunPerStepCallback.
 	.macro setstepcallback subroutine:req
 	.byte 0xa6
 	.byte \subroutine

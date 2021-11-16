@@ -153,11 +153,11 @@ gScriptCmdTable::
 	.4byte ScrCmd_getpokenewsactive         @ 0x96
 	.4byte ScrCmd_fadescreen                @ 0x97
 	.4byte ScrCmd_fadescreenspeed           @ 0x98
-	.4byte ScrCmd_setflashradius            @ 0x99
+	.4byte ScrCmd_setflashlevel             @ 0x99
 	.4byte ScrCmd_animateflash              @ 0x9a
 	.4byte ScrCmd_messageautoscroll         @ 0x9b
 	.4byte ScrCmd_dofieldeffect             @ 0x9c
-	.4byte ScrCmd_setfieldeffectarg         @ 0x9d
+	.4byte ScrCmd_setfieldeffectargument    @ 0x9d
 	.4byte ScrCmd_waitfieldeffect           @ 0x9e
 	.4byte ScrCmd_setrespawn                @ 0x9f
 	.4byte ScrCmd_checkplayergender         @ 0xa0

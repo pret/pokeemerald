@@ -34,19 +34,19 @@ SootopolisCity_EventScript_LegendariesNotArrived::
 	end
 
 SootopolisCity_EventScript_LockHouseDoors::
-	setmetatile 9, 6, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 9, 17, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 9, 26, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 44, 17, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 8, 35, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 53, 28, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 45, 6, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 48, 25, METATILE_Sootopolis_Door_Closed, 1
-	setmetatile 51, 36, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 9, 6, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 9, 17, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 9, 26, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 44, 17, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 8, 35, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 53, 28, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 45, 6, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 48, 25, METATILE_Sootopolis_Door_Closed, TRUE
+	setmetatile 51, 36, METATILE_Sootopolis_Door_Closed, TRUE
 	return
 
 SootopolisCity_EventScript_LockGymDoor::
-	setmetatile 31, 32, METATILE_Sootopolis_GymDoor_Closed, 1
+	setmetatile 31, 32, METATILE_Sootopolis_GymDoor_Closed, TRUE
 	return
 
 SootopolisCity_OnTransition:
@@ -623,30 +623,30 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	end
 
 SootopolisCity_EventScript_SetRoughWater::
-	setmetatile 27, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 28, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 29, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 30, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 27, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 28, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 29, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 30, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 27, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 28, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 29, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 30, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 32, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 33, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 34, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 35, 43, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 32, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 33, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 34, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 35, 44, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 32, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 33, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 34, 45, METATILE_Sootopolis_RoughWater, 0
-	setmetatile 35, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 27, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 28, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 29, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 30, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 27, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 28, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 29, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 30, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 27, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 28, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 29, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 30, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 32, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 33, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 34, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 35, 43, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 32, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 33, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 34, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 35, 44, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 32, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 33, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 34, 45, METATILE_Sootopolis_RoughWater, FALSE
+	setmetatile 35, 45, METATILE_Sootopolis_RoughWater, FALSE
 	return
 
 SootopolisCity_Movement_RayquazaFlyOff:

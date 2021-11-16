@@ -609,7 +609,7 @@ bool8 ScrCmd_animateflash(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_setflashradius(struct ScriptContext *ctx)
+bool8 ScrCmd_setflashlevel(struct ScriptContext *ctx)
 {
     SetFlashLevel(VarGet(ScriptReadHalfword(ctx)));
     return FALSE;
@@ -706,13 +706,13 @@ bool8 ScrCmd_setweather(struct ScriptContext *ctx)
 {
     u16 weather = VarGet(ScriptReadHalfword(ctx));
 
-    SetSav1Weather(weather);
+    SetSavedWeather(weather);
     return FALSE;
 }
 
 bool8 ScrCmd_resetweather(struct ScriptContext *ctx)
 {
-    SetSav1WeatherFromCurrMapHeader();
+    SetSavedWeatherFromCurrMapHeader();
     return FALSE;
 }
 
@@ -1982,7 +1982,7 @@ bool8 ScrCmd_dofieldeffect(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setfieldeffectarg(struct ScriptContext *ctx)
+bool8 ScrCmd_setfieldeffectargument(struct ScriptContext *ctx)
 {
     u8 argNum = ScriptReadByte(ctx);
 

@@ -13,10 +13,10 @@ MeteorFalls_1F_1R_OnLoad:
 	end
 
 MeteorFalls_1F_1R_EventScript_OpenStevensCave::
-	setmetatile 4, 1, METATILE_MeteorFalls_CaveEntrance_Top, 1
-	setmetatile 3, 2, METATILE_MeteorFalls_CaveEntrance_Left, 1
-	setmetatile 4, 2, METATILE_MeteorFalls_CaveEntrance_Bottom, 0
-	setmetatile 5, 2, METATILE_MeteorFalls_CaveEntrance_Right, 1
+	setmetatile 4, 1, METATILE_MeteorFalls_CaveEntrance_Top, TRUE
+	setmetatile 3, 2, METATILE_MeteorFalls_CaveEntrance_Left, TRUE
+	setmetatile 4, 2, METATILE_MeteorFalls_CaveEntrance_Bottom, FALSE
+	setmetatile 5, 2, METATILE_MeteorFalls_CaveEntrance_Right, TRUE
 	return
 
 MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::

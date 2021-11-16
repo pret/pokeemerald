@@ -52,7 +52,7 @@ MossdeepCity_SpaceCenter_1F_OnLoad:
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote::
-	setmetatile 2, 5, METATILE_Facility_DataPad, 1
+	setmetatile 2, 5, METATILE_Facility_DataPad, TRUE
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter::

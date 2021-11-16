@@ -12,7 +12,7 @@ MossdeepCity_StevensHouse_OnLoad:
 	end
 
 MossdeepCity_StevensHouse_EventScript_HideStevensNote::
-	setmetatile 6, 4, METATILE_GenericBuilding_TableEdge, 1
+	setmetatile 6, 4, METATILE_GenericBuilding_TableEdge, TRUE
 	return
 
 MossdeepCity_StevensHouse_OnTransition:

@@ -13,11 +13,11 @@ AbandonedShip_Corridors_B1F_OnLoad:
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom::
-	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Locked, 1
+	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Locked, TRUE
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom::
-	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, 1
+	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, TRUE
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_TuberM::

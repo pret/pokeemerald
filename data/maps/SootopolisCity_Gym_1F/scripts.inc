@@ -25,14 +25,14 @@ SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles::
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_OpenFirstStairs
 	compare VAR_ICE_STEP_COUNT, 67
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs
-	setmetatile 8, 4, METATILE_SootopolisGym_Stairs, 0
-	setmetatile 8, 5, METATILE_SootopolisGym_Stairs, 0
+	setmetatile 8, 4, METATILE_SootopolisGym_Stairs, FALSE
+	setmetatile 8, 5, METATILE_SootopolisGym_Stairs, FALSE
 SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs::
-	setmetatile 8, 10, METATILE_SootopolisGym_Stairs, 0
-	setmetatile 8, 11, METATILE_SootopolisGym_Stairs, 0
+	setmetatile 8, 10, METATILE_SootopolisGym_Stairs, FALSE
+	setmetatile 8, 11, METATILE_SootopolisGym_Stairs, FALSE
 SootopolisCity_Gym_1F_EventScript_OpenFirstStairs::
-	setmetatile 8, 15, METATILE_SootopolisGym_Stairs, 0
-	setmetatile 8, 16, METATILE_SootopolisGym_Stairs, 0
+	setmetatile 8, 15, METATILE_SootopolisGym_Stairs, FALSE
+	setmetatile 8, 16, METATILE_SootopolisGym_Stairs, FALSE
 SootopolisCity_Gym_1F_EventScript_StopCheckingStairs::
 	return
 

@@ -39,7 +39,7 @@ Route110_TrickHouseEnd_EventScript_CloseDoor::
 	end
 
 Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile::
-	setmetatile 10, 1, METATILE_GenericBuilding_TrickHouse_Door_Closed, 1
+	setmetatile 10, 1, METATILE_GenericBuilding_TrickHouse_Door_Closed, TRUE
 	return
 
 Route110_TrickHouseEnd_EventScript_TrickMaster::

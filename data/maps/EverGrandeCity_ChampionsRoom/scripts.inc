@@ -50,8 +50,8 @@ EverGrandeCity_ChampionsRoom_EventScript_Wallace::
 
 EverGrandeCity_ChampionsRoom_EventScript_Defeated::
 	playse SE_DOOR
-	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, 0
-	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, 0
+	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, FALSE
+	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, FALSE
 	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	closemessage

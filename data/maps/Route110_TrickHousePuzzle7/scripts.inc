@@ -22,53 +22,53 @@ Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles::
 
 @ Leftover from R/S, none of the below metatile scripts are ever called
 Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn::
-	setmetatile 13, 17, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Up, 0
-	setmetatile 12, 16, METATILE_TrickHousePuzzle_Lever_On, 1
+	setmetatile 13, 17, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Up, FALSE
+	setmetatile 12, 16, METATILE_TrickHousePuzzle_Lever_On, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn::
-	setmetatile 12, 13, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Up, 0
-	setmetatile 12, 11, METATILE_TrickHousePuzzle_Lever_On, 1
+	setmetatile 12, 13, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Up, FALSE
+	setmetatile 12, 11, METATILE_TrickHousePuzzle_Lever_On, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn::
-	setmetatile 7, 12, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Up, 0
-	setmetatile 5, 10, METATILE_TrickHousePuzzle_Lever_On, 1
+	setmetatile 7, 12, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Up, FALSE
+	setmetatile 5, 10, METATILE_TrickHousePuzzle_Lever_On, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn::
-	setmetatile 6, 6, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right_Alt, 0
-	setmetatile 4, 4, METATILE_TrickHousePuzzle_Lever_On, 1
+	setmetatile 6, 6, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right_Alt, FALSE
+	setmetatile 4, 4, METATILE_TrickHousePuzzle_Lever_On, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn::
-	setmetatile 8, 4, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left, 0
-	setmetatile 7, 5, METATILE_TrickHousePuzzle_Lever_On, 1
+	setmetatile 8, 4, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left, FALSE
+	setmetatile 7, 5, METATILE_TrickHousePuzzle_Lever_On, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOff::
-	setmetatile 13, 17, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Down, 0
-	setmetatile 12, 16, METATILE_TrickHousePuzzle_Lever_Off, 1
+	setmetatile 13, 17, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Down, FALSE
+	setmetatile 12, 16, METATILE_TrickHousePuzzle_Lever_Off, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOff::
-	setmetatile 12, 13, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left, 0
-	setmetatile 12, 11, METATILE_TrickHousePuzzle_Lever_Off, 1
+	setmetatile 12, 13, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left, FALSE
+	setmetatile 12, 11, METATILE_TrickHousePuzzle_Lever_Off, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOff::
-	setmetatile 7, 12, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Down, 0
-	setmetatile 5, 10, METATILE_TrickHousePuzzle_Lever_Off, 1
+	setmetatile 7, 12, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Down, FALSE
+	setmetatile 5, 10, METATILE_TrickHousePuzzle_Lever_Off, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOff::
-	setmetatile 6, 6, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left_Alt, 0
-	setmetatile 4, 4, METATILE_TrickHousePuzzle_Lever_Off, 1
+	setmetatile 6, 6, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left_Alt, FALSE
+	setmetatile 4, 4, METATILE_TrickHousePuzzle_Lever_Off, TRUE
 	return
 
 Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff::
-	setmetatile 8, 4, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right, 0
-	setmetatile 7, 5, METATILE_TrickHousePuzzle_Lever_Off, 1
+	setmetatile 8, 4, METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right, FALSE
+	setmetatile 7, 5, METATILE_TrickHousePuzzle_Lever_Off, TRUE
 	return
 
 Route110_TrickHousePuzzle7_OnTransition:

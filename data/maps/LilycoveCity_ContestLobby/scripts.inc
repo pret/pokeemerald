@@ -418,14 +418,14 @@ LilycoveCity_ContestLobby_EventScript_LeadToContestHall::
 	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistApproachCounter
 	waitmovement 0
 	playse SE_BRIDGE_WALK
-	setmetatile 12, 2, METATILE_Contest_WallShadow, 1
-	setmetatile 12, 3, METATILE_Contest_FloorShadow, 1
+	setmetatile 12, 2, METATILE_Contest_WallShadow, TRUE
+	setmetatile 12, 3, METATILE_Contest_FloorShadow, TRUE
 	special DrawWholeMapView
 	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistExitCounter
 	waitmovement 0
 	playse SE_BRIDGE_WALK
-	setmetatile 12, 2, METATILE_Contest_CounterFlap_Top, 1
-	setmetatile 12, 3, METATILE_Contest_CounterFlap_Bottom, 1
+	setmetatile 12, 2, METATILE_Contest_CounterFlap_Top, TRUE
+	setmetatile 12, 3, METATILE_Contest_CounterFlap_Bottom, TRUE
 	special DrawWholeMapView
 	delay 20
 	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistFacePlayer
@@ -939,14 +939,14 @@ LilycoveCity_ContestLobby_EventScript_LeadToLinkContestHall::
 	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistApproachCounter
 	waitmovement 0
 	playse SE_BRIDGE_WALK
-	setmetatile 17, 2, METATILE_Contest_WallShadow, 1
-	setmetatile 17, 3, METATILE_Contest_FloorShadow, 1
+	setmetatile 17, 2, METATILE_Contest_WallShadow, TRUE
+	setmetatile 17, 3, METATILE_Contest_FloorShadow, TRUE
 	special DrawWholeMapView
 	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistExitCounter
 	waitmovement 0
 	playse SE_BRIDGE_WALK
-	setmetatile 17, 2, METATILE_Contest_CounterFlap_Top, 1
-	setmetatile 17, 3, METATILE_Contest_CounterFlap_Bottom, 1
+	setmetatile 17, 2, METATILE_Contest_CounterFlap_Top, TRUE
+	setmetatile 17, 3, METATILE_Contest_CounterFlap_Bottom, TRUE
 	special DrawWholeMapView
 	delay 20
 	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer
