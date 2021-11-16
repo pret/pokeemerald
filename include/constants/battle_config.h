@@ -51,6 +51,7 @@
     #define SPECIES_MELOETTA_PIROUETTE      10019
     #define SPECIES_MORPEKO                 0
     #define SPECIES_MORPEKO_HANGRY          10020
+    #define SPECIES_SIRFETCHD               10021
 #endif
 
 // Items with peculiar battle effects.
@@ -185,6 +186,7 @@
 #define B_HEAVY_BALL_MODIFIER       GEN_7 // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
 #define B_DREAM_BALL_MODIFIER       GEN_8 // In Gen8, Dream Ball's catch multiplier is x4 when the target is asleep or has the ability Comatose.
 #define B_SERENE_GRACE_BOOST        GEN_7 // In Gen5+, Serene Grace boosts the added flinch chance of King's Rock and Razor Fang.
+#define B_LEEK_ALWAYS_CRIT          GEN_7 // In Gen6+, if a Farfetch'd or Sirfetch'd holding a Leek use a move with increased Critical Hit ratio, it will always result in a Critical Hit.
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
