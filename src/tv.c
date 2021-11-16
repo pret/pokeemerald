@@ -145,7 +145,7 @@ static void ResolveNumberOneShow(u16);
 static void TryPutFishingAdviceOnAir(void);
 static u8 MonDataIdxToRibbon(u8);
 static void TryPutNumberOneOnAir(u8);
-static bool8 IsPriceDiscounted(u8);
+static bool8 ShouldApplyPokeNewsEffect(u8);
 static void TryPutWorldOfMastersOnAir(void);
 static void InterviewBefore_FanClubLetter(void);
 static void InterviewBefore_RecentHappenings(void);
@@ -1525,7 +1525,7 @@ void TryPutSmartShopperOnAir(void)
                     show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
                     show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
                 }
-                show->smartshopperShow.priceReduced = GetPriceReduction(POKENEWS_SLATEPORT);
+                show->smartshopperShow.priceReduced = IsPokeNewsActive(POKENEWS_SLATEPORT);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
                 StorePlayerIdInRecordMixShow(show);
                 show->smartshopperShow.language = gGameLanguage;
@@ -2641,7 +2641,7 @@ void DoPokeNews(void)
     }
 }
 
-bool8 GetPriceReduction(u8 newsKind)
+bool8 IsPokeNewsActive(u8 newsKind)
 {
     u8 i;
 
@@ -2652,7 +2652,7 @@ bool8 GetPriceReduction(u8 newsKind)
     {
         if (gSaveBlock1Ptr->pokeNews[i].kind == newsKind)
         {
-            if (gSaveBlock1Ptr->pokeNews[i].state == 2 && IsPriceDiscounted(newsKind))
+            if (gSaveBlock1Ptr->pokeNews[i].state == 2 && ShouldApplyPokeNewsEffect(newsKind))
                 return TRUE;
 
             return FALSE;
@@ -2661,7 +2661,11 @@ bool8 GetPriceReduction(u8 newsKind)
     return FALSE;
 }
 
-static bool8 IsPriceDiscounted(u8 newsKind)
+// Returns TRUE if the effects of the given PokeNews should be applied.
+// For POKENEWS_SLATEPORT / POKENEWS_LILYCOVE, only apply the effect (price reduction)
+// if the player is talking to the Energy Guru / at the Dept Store Rooftop.
+// For any other type of PokeNews this is always TRUE.
+static bool8 ShouldApplyPokeNewsEffect(u8 newsKind)
 {
     switch (newsKind)
     {

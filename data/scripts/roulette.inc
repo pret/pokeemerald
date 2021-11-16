@@ -3,7 +3,7 @@ Roulette_EventScript_Table1::
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 0
-	getpricereduction POKENEWS_GAME_CORNER
+	getpokenewsactive POKENEWS_GAME_CORNER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Roulette_EventScript_Play
 	addvar VAR_0x8004, ROULETTE_SPECIAL_RATE
@@ -15,7 +15,7 @@ Roulette_EventScript_Table2::
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 1
-	getpricereduction POKENEWS_GAME_CORNER
+	getpokenewsactive POKENEWS_GAME_CORNER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Roulette_EventScript_Play
 	addvar VAR_0x8004, ROULETTE_SPECIAL_RATE

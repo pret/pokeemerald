@@ -150,7 +150,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_showmoneybox              @ 0x93
 	.4byte ScrCmd_hidemoneybox              @ 0x94
 	.4byte ScrCmd_updatemoneybox            @ 0x95
-	.4byte ScrCmd_getpricereduction         @ 0x96
+	.4byte ScrCmd_getpokenewsactive         @ 0x96
 	.4byte ScrCmd_fadescreen                @ 0x97
 	.4byte ScrCmd_fadescreenspeed           @ 0x98
 	.4byte ScrCmd_setflashradius            @ 0x99

@@ -1107,10 +1107,10 @@
 	.4byte \products
 	.endm
 
-	@ Starts up the slot machine minigame.
-	.macro playslotmachine word:req
+	@ Starts up the slot machine minigame. id is a SLOT_MACHINE_* value that influences probabilities of certain reel outcomes.
+	.macro playslotmachine id:req
 	.byte 0x89
-	.2byte \word
+	.2byte \id
 	.endm
 
 	@ Sets a berry tree's specific berry and growth stage.
@@ -1197,7 +1197,7 @@
 	.endm
 
 	@ Gets the price reduction for the index given.
-	.macro getpricereduction index:req
+	.macro getpokenewsactive index:req
 	.byte 0x96
 	.2byte \index
 	.endm

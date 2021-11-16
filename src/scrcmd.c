@@ -1936,11 +1936,11 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
+bool8 ScrCmd_getpokenewsactive(struct ScriptContext *ctx)
 {
     u16 newsKind = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = GetPriceReduction(newsKind);
+    gSpecialVar_Result = IsPokeNewsActive(newsKind);
     return FALSE;
 }
 
