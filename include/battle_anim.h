@@ -112,7 +112,6 @@ void GetBattleAnimBg1Data(struct BattleAnimBgData*);
 void GetBattleAnimBgData(struct BattleAnimBgData*, u32 arg1);
 u8 GetBattlerSpriteSubpriority(u8 battlerId);
 bool8 TranslateAnimHorizontalArc(struct Sprite *sprite);
-void sub_80A6630(struct Sprite *sprite);
 void TranslateSpriteLinearByIdFixedPoint(struct Sprite *sprite);
 void ResetSpriteRotScale(u8 spriteId);
 void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
@@ -129,7 +128,6 @@ void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData*, const vo
 void AnimLoadCompressedBgGfx(u32, const u32*, u32);
 void UpdateAnimBg3ScreenSize(bool8);
 void TranslateSpriteInGrowingCircle(struct Sprite *);
-void sub_80A653C(struct Sprite *);
 void SetBattlerSpriteYOffsetFromYScale(u8 spriteId);
 void PrepareEruptAnimTaskData(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
 u8 UpdateEruptAnimTask(struct Task *task);
