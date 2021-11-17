@@ -249,13 +249,13 @@ u8 gBattleControllerData[MAX_BATTLERS_COUNT]; // Used by the battle controllers 
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
-    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
+    &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
 
 // unused
 static const struct ScanlineEffectParams sIntroScanlineParams32Bit =
 {
-    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_32BIT, 1
+    &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_32BIT, 1
 };
 
 const struct SpriteTemplate gUnusedBattleInitSprite =

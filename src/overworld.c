@@ -313,7 +313,7 @@ static const struct BgTemplate sOverworldBgTemplates[] =
 
 static const struct ScanlineEffectParams sFlashEffectParams =
 {
-    (void *)REG_ADDR_WIN0H,
+    &REG_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1,
     0,

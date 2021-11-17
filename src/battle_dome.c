@@ -870,7 +870,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
 
 static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 {
-    .dmaDest = (void *)REG_ADDR_BG3CNT,
+    .dmaDest = &REG_BG3CNT,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
     .initState = 1,
 };

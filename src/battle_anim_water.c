@@ -960,7 +960,7 @@ static void AnimTask_SurfWaveScanlineEffect(u8 taskId)
         else
             gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
 
-        params.dmaDest = (vu16 *)REG_ADDR_BLDALPHA;
+        params.dmaDest = &REG_BLDALPHA;
         params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
         params.initState = 1;
         params.unused9 = 0;
