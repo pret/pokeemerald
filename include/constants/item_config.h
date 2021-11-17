@@ -18,6 +18,6 @@
 #define I_KEY_ESCAPE_ROPE       GEN_7   // In Gen8, Escape Rope became a Key Item. Keep in mind, this will make it free to buy in marts.
 #define I_LEGACY_HEALING_ITEMS  GEN_7   // In Gen7+, certain healing items recover less HP than they used to.
 #define I_SITRUS_BERRY_HEAL     GEN_7   // In Gen4+, Sitrus Berry was changed from healing 30 HP to healing 25% of Max HP.
-#define I_NEW_VITAMIN_EV_CAP    GEN_8   // In Gen8, the Vitamins no longer have a cap of 100 EV per stat.
+#define I_VITAMIN_EV_CAP        GEN_8   // In Gen8, the Vitamins no longer have a cap of 100 EV per stat.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
