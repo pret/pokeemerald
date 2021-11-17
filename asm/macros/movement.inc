@@ -1,4 +1,4 @@
-	.macro create_movement_action name, value
+	.macro create_movement_action name:req, value:req
 	.macro \name
 	.byte \value
 	.endm
