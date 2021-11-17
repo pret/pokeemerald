@@ -1298,7 +1298,7 @@
 	.byte 0xa5
 	.endm
 
-	@ Enables a function that gets called every step by Task_RunPerStepCallback.
+	@
 	.macro setstepcallback subroutine:req
 	.byte 0xa6
 	.byte \subroutine
