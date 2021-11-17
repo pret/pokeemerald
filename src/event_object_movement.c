@@ -1915,7 +1915,7 @@ void AllowObjectAtPosTriggerGroundEffects(s16 x, s16 y)
     }
 }
 
-void SetObjectPriority(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
+void SetObjectSubpriority(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -1930,7 +1930,7 @@ void SetObjectPriority(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
     }
 }
 
-void ResetObjectPriority(u8 localId, u8 mapNum, u8 mapGroup)
+void ResetObjectSubpriority(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;

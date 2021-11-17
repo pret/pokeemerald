@@ -283,7 +283,7 @@ ContestHall_EventScript_GetCategoryTough::
 	return
 
 ContestHall_EventScript_ContestGettingStarted::
-	buffercontesttypestring 1, VAR_0x8008
+	buffercontestname 1, VAR_0x8008
 	bufferstdstring 2, VAR_0x8009
 	call ContestHall_EventScript_GettingStarted
 	lockall

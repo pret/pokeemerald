@@ -1128,24 +1128,24 @@ bool8 ScrCmd_hideobject_at(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setobjectpriority(struct ScriptContext *ctx)
+bool8 ScrCmd_setobjectsubpriority(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
     u8 priority = ScriptReadByte(ctx);
 
-    SetObjectPriority(localId, mapNum, mapGroup, priority + 83);
+    SetObjectSubpriority(localId, mapNum, mapGroup, priority + 83);
     return FALSE;
 }
 
-bool8 ScrCmd_resetobjectpriority(struct ScriptContext *ctx)
+bool8 ScrCmd_resetobjectsubpriority(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
 
-    ResetObjectPriority(localId, mapNum, mapGroup);
+    ResetObjectSubpriority(localId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1635,12 +1635,12 @@ bool8 ScrCmd_bufferstdstring(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_buffercontesttype(struct ScriptContext *ctx)
+bool8 ScrCmd_buffercontestname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
-    u16 index = VarGet(ScriptReadHalfword(ctx));
+    u16 category = VarGet(ScriptReadHalfword(ctx));
 
-    BufferContestName(sScriptStringVars[stringVarIndex], index);
+    BufferContestName(sScriptStringVars[stringVarIndex], category);
     return FALSE;
 }
 

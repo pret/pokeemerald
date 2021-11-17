@@ -1016,74 +1016,74 @@
 
 	@ Writes the name of the given Pokemon species to the specified buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferspeciesname out:req, species:req
+	.macro bufferspeciesname stringVarId:req, species:req
 	.byte 0x7d
-	.byte \out
+	.byte \stringVarId
 	.2byte \species
 	.endm
 
 	@ Writes the name of the species of the first Pokemon in the player's party to the specified buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferleadmonspeciesname out:req
+	.macro bufferleadmonspeciesname stringVarId:req
 	.byte 0x7e
-	.byte \out
+	.byte \stringVarId
 	.endm
 
 	@ Writes the nickname of the Pokemon in 'slot' (zero-indexed) of the player's party to the specified buffer.
 	@ If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferpartymonnick out:req, slot:req
+	.macro bufferpartymonnick stringVarId:req, slot:req
 	.byte 0x7f
-	.byte \out
+	.byte \stringVarId
 	.2byte \slot
 	.endm
 
 	@ Writes the name of the specified item to the specified buffer. If itemId is >= ITEMS_COUNT,
 	@ then the name of ITEM_NONE ("????????") is buffered instead.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferitemname out:req, item:req
+	.macro bufferitemname stringVarId:req, item:req
 	.byte 0x80
-	.byte \out
+	.byte \stringVarId
 	.2byte \item
 	.endm
 
 	@ Writes the name of the specified decoration to the specified buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferdecorationname out:req, decoration:req
+	.macro bufferdecorationname stringVarId:req, decoration:req
 	.byte 0x81
-	.byte \out
+	.byte \stringVarId
 	.2byte \decoration
 	.endm
 
 	@ Writes the name of the specified move to the specified buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro buffermovename out:req, move:req
+	.macro buffermovename stringVarId:req, move:req
 	.byte 0x82
-	.byte \out
+	.byte \stringVarId
 	.2byte \move
 	.endm
 
 	@ Converts the value of input to a decimal string, and writes that string to the specified buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro buffernumberstring out:req, input:req
+	.macro buffernumberstring stringVarId:req, input:req
 	.byte 0x83
-	.byte \out
+	.byte \stringVarId
 	.2byte \input
 	.endm
 
 	@ Writes the given standard string (STDSTRING_*) to the specified buffer. Invalid std string ids are not handled.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferstdstring out:req, index:req
+	.macro bufferstdstring stringVarId:req, index:req
 	.byte 0x84
-	.byte \out
+	.byte \stringVarId
 	.2byte \index
 	.endm
 
 	@ Copies the string at the given pointer to the specified buffer.
 	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
-	.macro bufferstring out:req, text:req
+	.macro bufferstring stringVarId:req, text:req
 	.byte 0x85
-	.byte \out
+	.byte \stringVarId
 	.4byte \text
 	.endm
 
@@ -1298,25 +1298,30 @@
 	.byte 0xa5
 	.endm
 
-	@
-	.macro setstepcallback subroutine:req
+	@ Enables the overworld task specified by stepCbId (STEP_CB_*). Only 1 can be active at a time. See src/field_tasks.c for more.
+	.macro setstepcallback stepCbId:req
 	.byte 0xa6
-	.byte \subroutine
+	.byte \stepCbId
 	.endm
 
+	@ Sets the current map layout to the one specified by index (LAYOUT_*).
+	@ This should be done before the layout is loaded, typically in the ON_TRANSITION map script.
 	.macro setmaplayoutindex index:req
 	.byte 0xa7
 	.2byte \index
 	.endm
 
-	.macro setobjectpriority localId:req, map:req, priority:req
+	@ Sets the specified object's sprite's subpriority, and sets fixedPriority to TRUE.
+	@ Only used to hide the player and Briney behind the boat.
+	.macro setobjectsubpriority localId:req, map:req, subpriority:req
 	.byte 0xa8
 	.2byte \localId
 	map \map
-	.byte \priority
+	.byte \subpriority
 	.endm
 
-	.macro resetobjectpriority localId:req, map:req
+	@ Sets the specified object's fixedPriority to FALSE. Does not change the subpriority field.
+	.macro resetobjectsubpriority localId:req, map:req
 	.byte 0xa9
 	.2byte \localId
 	map \map
@@ -1357,14 +1362,14 @@
 	.byte 0xae
 	.endm
 
-	@ Sets the door tile at (x, y) to be open without an animation.
+	@ Sets the door metatile at (x, y) to be open without an animation.
 	.macro setdooropen x:req, y:req
 	.byte 0xaf
 	.2byte \x
 	.2byte \y
 	.endm
 
-	@ Sets the door tile at (x, y) to be closed without an animation.
+	@ Sets the door metatile at (x, y) to be closed without an animation.
 	.macro setdoorclosed x:req, y:req
 	.byte 0xb0
 	.2byte \x
@@ -1463,21 +1468,21 @@
 	.4byte \pointer
 	.endm
 
-	@ Spawns a secondary box showing how many Coins the player has.
+	@ Create a window showing how many Coins the player has.
 	.macro showcoinsbox x:req, y:req
 	.byte 0xc0
 	.byte \x
 	.byte \y
 	.endm
 
-	@ Hides the secondary box spawned by showcoins. It consumes its arguments but doesn't use them.
+	@ Destroys the window created by showcoins. It consumes its arguments but doesn't use them.
 	.macro hidecoinsbox x:req, y:req
 	.byte 0xc1
 	.byte \x
 	.byte \y
 	.endm
 
-	@ Updates the secondary box spawned by showcoins. It consumes its arguments but doesn't use them.
+	@ Updates the window created by showcoins. It consumes its arguments but doesn't use them.
 	.macro updatecoinsbox x:req, y:req
 	.byte 0xc2
 	.byte \x
@@ -1504,9 +1509,10 @@
 	.endm
 
 	@ Writes the name of the specified (box) PC box to the specified buffer.
-	.macro bufferboxname out:req, box:req
+	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
+	.macro bufferboxname stringVarId:req, box:req
 	.byte 0xc6
-	.byte \out
+	.byte \stringVarId
 	.2byte \box
 	.endm
 
@@ -1583,27 +1589,27 @@
 	.byte \location
 	.endm
 
-	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Moves the objects on the colored puzzle
-	@ specified by puzzleNumber one rotation
+	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Moves the objects one rotation
+	@ on the colored puzzle specified by puzzleNumber.
 	.macro moverotatingtileobjects puzzleNumber:req
 	.byte 0xd3
 	.2byte \puzzleNumber
 	.endm
 
-	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Updates the facing direction of all objects on the puzzle tiles
+	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Updates the facing direction of all objects on the puzzle tiles
 	.macro turnrotatingtileobjects
 	.byte 0xd4
 	.endm
 
-	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Allocates memory for the puzzle objects.
+	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Allocates memory for the puzzle objects.
 	@ isTrickHouse is needed to determine which of the two maps the puzzle is on, in order to know where in the tileset
-	@ the puzzle tiles start.
+	@ the puzzle tiles start (TRUE for Trick House Room, FALSE for Mossdeep Gym).
 	.macro initrotatingtilepuzzle isTrickHouse:req
 	.byte 0xd5
 	.2byte \isTrickHouse
 	.endm
 
-	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Frees the memory allocated for the puzzle objects.
+	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Frees the memory allocated for the puzzle objects.
 	.macro freerotatingtilepuzzle
 	.byte 0xd6
 	.endm
@@ -1623,6 +1629,7 @@
 	.byte 0xd9
 	.endm
 
+	@ Destroys the window created by braillemessage.
 	.macro closebraillemessage
 	.byte 0xda
 	.endm
@@ -1637,21 +1644,26 @@
 	.byte \mode
 	.endm
 
-	.macro buffertrainerclassname out:req, class:req
+	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
+	.macro buffertrainerclassname stringVarId:req, class:req
 	.byte 0xdd
-	.byte \out
+	.byte \stringVarId
 	.2byte \class
 	.endm
 
-	.macro buffertrainername out:req, trainer:req
+	@ Buffers the specified trainer's name to the given string var.
+	@ If the trainer id is >= TRAINERS_COUNT it will be treated as TRAINER_NONE.
+	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
+	.macro buffertrainername stringVarId:req, trainerId:req
 	.byte 0xde
-	.byte \out
-	.2byte \trainer
+	.byte \stringVarId
+	.2byte \trainerId
 	.endm
 
-	.macro pokenavcall pointer:req
+	@ Starts a Pokenav call with the given text.
+	.macro pokenavcall text:req
 	.byte 0xdf
-	.4byte \pointer
+	.4byte \text
 	.endm
 
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
@@ -1661,18 +1673,21 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
-	.macro buffercontesttypestring out:req, word:req
+	@ Buffers the name of the contest category to the buffer.
+	@ For example a category of CONTEST_CATEGORY_COOL will buffer the string "COOLNESS CONTEST".
+	.macro buffercontestname stringVarId:req, category:req
 	.byte 0xe1
-	.byte \out
-	.2byte \word
+	.byte \stringVarId
+	.2byte \category
 	.endm
 
-	@ Writes the name of the specified (item) item to the specified buffer. If 'item' is a Berry or ITEM_POKE_BALL
+	@ Writes the name of the specified item to the specified buffer. If 'item' is a Berry or ITEM_POKE_BALL
 	@ and if the quantity is 2 or more, the buffered string will be pluralized ("IES" or "S" appended).
 	@ If the specified item is >= ITEMS_COUNT then the name of ITEM_NONE ("????????") is buffered instead.
-	.macro bufferitemnameplural out:req, item:req, quantity:req
+	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
+	.macro bufferitemnameplural stringVarId:req, item:req, quantity:req
 	.byte 0xe2
-	.byte \out
+	.byte \stringVarId
 	.2byte \item
 	.2byte \quantity
 	.endm
@@ -1847,6 +1862,7 @@
 	dofieldeffect FLDEFF_SPARKLE
 	.endm
 
+	@ Prints a braille message, waits for an A or B press, then closes the message.
 	.macro braillemsgbox text:req
 	braillemessage \text
 	waitbuttonpress

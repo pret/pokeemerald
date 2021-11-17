@@ -168,8 +168,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_doweather                 @ 0xa5
 	.4byte ScrCmd_setstepcallback           @ 0xa6
 	.4byte ScrCmd_setmaplayoutindex         @ 0xa7
-	.4byte ScrCmd_setobjectpriority         @ 0xa8
-	.4byte ScrCmd_resetobjectpriority       @ 0xa9
+	.4byte ScrCmd_setobjectsubpriority      @ 0xa8
+	.4byte ScrCmd_resetobjectsubpriority    @ 0xa9
 	.4byte ScrCmd_createvobject             @ 0xaa
 	.4byte ScrCmd_turnvobject               @ 0xab
 	.4byte ScrCmd_opendoor                  @ 0xac
@@ -225,7 +225,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_buffertrainername         @ 0xde
 	.4byte ScrCmd_pokenavcall               @ 0xdf
 	.4byte ScrCmd_warpsootopolislegend      @ 0xe0
-	.4byte ScrCmd_buffercontesttype         @ 0xe1
+	.4byte ScrCmd_buffercontestname         @ 0xe1
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
 
 gScriptCmdTableEnd::
