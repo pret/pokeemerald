@@ -104,16 +104,19 @@ my $partial_documented_as_string;
 # Performing addition on a string converts it to a number. Any string that fails
 # to convert to a number becomes 0. So if our converted number is 0, but our string
 # is nonzero, then the conversion was an error.
+$undocumented_as_string =~ s/^\s+|\s+$//g;
 my $undocumented = $undocumented_as_string + 0;
-(($undocumented != 0) and ($undocumented_as_string ne "0"))
+(($undocumented != 0) or (($undocumented == 0) and ($undocumented_as_string eq "0")))
     or die "ERROR: Cannot convert string to num: '$undocumented_as_string'";
 
+$partial_documented_as_string =~ s/^\s+|\s+$//g;
 my $partial_documented = $partial_documented_as_string + 0;
-(($partial_documented != 0) and ($partial_documented_as_string ne "0"))
+(($partial_documented != 0) or (($partial_documented == 0) and ($partial_documented_as_string eq "0")))
 	or die "ERROR: Cannot convert string to num: '$partial_documented_as_string'";
 
+$total_syms_as_string =~ s/^\s+|\s+$//g;
 my $total_syms = $total_syms_as_string + 0;
-(($total_syms != 0) and ($total_syms_as_string ne "0"))
+(($total_syms != 0) or (($total_syms == 0) and ($total_syms_as_string eq "0")))
     or die "ERROR: Cannot convert string to num: '$total_syms_as_string'";
 
 ($total_syms != 0)
