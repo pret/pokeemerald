@@ -1016,7 +1016,7 @@
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
 	@ If given anything else it will output it directly.
-	@ Note: because the STR_VAR_# arguments given to this macro are not part of a processed string they are not
+	@ Note: Because the STR_VAR_# arguments given to this macro are not part of a processed string they are not
 	@       replaced with their charmap values, they are just passed as the literal characters "STR_VAR_#".
 	.macro stringvar id:req
 	.if \id == STR_VAR_1
@@ -1237,9 +1237,10 @@
 	.byte \level
 	.endm
 
-	.macro messageautoscroll pointer:req
+	@ Automatically scrolls through the message without player input and at a fixed speed.
+	.macro messageautoscroll text:req
 	.byte 0x9b
-	.4byte \pointer
+	.4byte \text
 	.endm
 
 	@ Executes the specified field effect animation (FLDEFF_*).
@@ -1334,19 +1335,23 @@
 	map \map
 	.endm
 
-	.macro createvobject sprite:req, byte2:req, x:req, y:req, elevation, direction
+	@ Creates a sprite with object graphics. Used when creating large groups of static NPCs that exceed
+	@ the object event limit (e.g. Contest / Battle Dome audiences and Union Room group members).
+	@ The specified id can be used to refer to the sprite again later with turnvobject.
+	.macro createvobject graphicsId:req, id:req, x:req, y:req, elevation=3, direction=DIR_SOUTH
 	.byte 0xaa
-	.byte \sprite
-	.byte \byte2
+	.byte \graphicsId
+	.byte \id
 	.2byte \x
 	.2byte \y
 	.byte \elevation
 	.byte \direction
 	.endm
 
-	.macro turnvobject index:req, direction:req
+	@ Turns a sprite created with createvobject.
+	.macro turnvobject id:req, direction:req
 	.byte 0xab
-	.byte \index
+	.byte \id
 	.byte \direction
 	.endm
 
@@ -1515,7 +1520,7 @@
 	.byte 0xc5
 	.endm
 
-	@ Writes the name of the specified (box) PC box to the specified buffer.
+	@ Writes the name of the specified PC box to the specified buffer.
 	.macro bufferboxname stringVarId:req, box:req
 	.byte 0xc6
 	stringvar \stringVarId
@@ -1627,10 +1632,13 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
+	@ Sets the selected object to the id of the currently approaching trainer.
 	.macro selectapproachingtrainer
 	.byte 0xd8
 	.endm
 
+	@ Freezes all objects immediately except the player and the approaching trainers.
+	@ The player and trainers are frozen once their movement is finished.
 	.macro lockfortrainer
 	.byte 0xd9
 	.endm
@@ -1640,9 +1648,11 @@
 	.byte 0xda
 	.endm
 
-	.macro messageinstant pointer:req
+	@ Prints and draws the message all at once rather than character by character.
+	@ Does not wait for player input to continue.
+	.macro messageinstant text:req
 	.byte 0xdb
-	.4byte \pointer
+	.4byte \text
 	.endm
 
 	.macro fadescreenswapbuffers mode:req

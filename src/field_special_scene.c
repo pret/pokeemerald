@@ -325,7 +325,7 @@ void Task_HandlePorthole(u8 taskId)
 
 static void ShowSSTidalWhileSailing(void)
 {
-    u8 spriteId = AddPseudoObjectEvent(OBJ_EVENT_GFX_SS_TIDAL, SpriteCallbackDummy, 112, 80, 0);
+    u8 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SS_TIDAL, SpriteCallbackDummy, 112, 80, 0);
 
     gSprites[spriteId].coordOffsetEnabled = FALSE;
 

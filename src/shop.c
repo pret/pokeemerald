@@ -847,7 +847,7 @@ static void BuyMenuDrawObjectEvents(void)
 
         graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[sShopData->viewportObjects[i][OBJ_EVENT_ID]].graphicsId);
 
-        spriteId = AddPseudoObjectEvent(
+        spriteId = CreateObjectGraphicsSprite(
             gObjectEvents[sShopData->viewportObjects[i][OBJ_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)sShopData->viewportObjects[i][X_COORD] * 16 + 8,
