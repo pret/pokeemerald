@@ -1,48 +1,47 @@
-const u16 gIntro1GameFreakTextFadePal[] = INCBIN_U16("graphics/intro/intro1_text.gbapal"); // game freak text blue fade
-const u16 gIntro2BrendanNoTurnPal[] = INCBIN_U16("graphics/intro/intro2_brendan_noturn.gbapal");
-const u16 gIntro3BgPal[] = INCBIN_U16("graphics/intro/intro3.gbapal");
-const u16 gIntro2VolbeatPal[] = INCBIN_U16("graphics/intro/intro2_volbeat.gbapal");
-const u16 gIntro2TorchicPal[] = INCBIN_U16("graphics/intro/intro2_torchic.gbapal");
-const u16 gIntro2ManectricPal[] = INCBIN_U16("graphics/intro/intro2_manectric.gbapal");
-const u16 gIntro2FlygonPal[] = INCBIN_U16("graphics/intro/intro2_flygon.gbapal");
+const u16 gIntroGameFreakTextFade_Pal[] = INCBIN_U16("graphics/intro/scene_1/text.gbapal"); // game freak text blue fade
+const u16 gIntroPlayer_Pal[] = INCBIN_U16("graphics/intro/scene_2/player.gbapal");
+const u16 gIntro3Bg_Pal[] = INCBIN_U16("graphics/intro/scene_3/bg.gbapal");
+const u16 gIntroVolbeat_Pal[] = INCBIN_U16("graphics/intro/scene_2/volbeat.gbapal");
+const u16 gIntroTorchic_Pal[] = INCBIN_U16("graphics/intro/scene_2/torchic.gbapal");
+const u16 gIntroManectric_Pal[] = INCBIN_U16("graphics/intro/scene_2/manectric.gbapal");
+const u16 gIntroFlygon_Pal[] = INCBIN_U16("graphics/intro/scene_2/flygon.gbapal");
 
-const u32 gIntro2VolbeatGfx[] = INCBIN_U32("graphics/intro/intro2_volbeat.4bpp.lz");
-const u32 gIntro2TorchicGfx[] = INCBIN_U32("graphics/intro/intro2_torchic.4bpp.lz");
-const u32 gIntro2ManectricGfx[] = INCBIN_U32("graphics/intro/intro2_manectric.4bpp.lz");
-const u32 gIntro2FlygonGfx[] = INCBIN_U32("graphics/intro/intro2_flygon.4bpp.lz");
-const u32 gIntro2BrendanNoTurnGfx[] = INCBIN_U32("graphics/intro/intro2_brendan_noturn.4bpp.lz");
-const u32 gIntro2MayNoTurnGfx[] = INCBIN_U32("graphics/intro/intro2_may_noturn.4bpp.lz");
+const u32 gIntroVolbeat_Gfx[] = INCBIN_U32("graphics/intro/scene_2/volbeat.4bpp.lz");
+const u32 gIntroTorchic_Gfx[] = INCBIN_U32("graphics/intro/scene_2/torchic.4bpp.lz");
+const u32 gIntroManectric_Gfx[] = INCBIN_U32("graphics/intro/scene_2/manectric.4bpp.lz");
+const u32 gIntroFlygon_Gfx[] = INCBIN_U32("graphics/intro/scene_2/flygon.4bpp.lz");
+const u32 gIntroBrendan_Gfx[] = INCBIN_U32("graphics/intro/scene_2/brendan.4bpp.lz");
+const u32 gIntroMay_Gfx[] = INCBIN_U32("graphics/intro/scene_2/may.4bpp.lz");
 
-const u32 gIntro3GroudonGfx[] = INCBIN_U32("graphics/intro/intro3_groudon.8bpp.lz");
-const u32 gIntro3GroudonTilemap[] = INCBIN_U32("graphics/intro/intro3_groudon.bin.lz");
+const u32 gIntroGroudon_Gfx[] = INCBIN_U32("graphics/intro/scene_3/groudon.8bpp.lz");
+const u32 gIntroGroudon_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/groudon.bin.lz");
 
-const u32 gIntro3KyogreGfx[] = INCBIN_U32("graphics/intro/intro3_kyogre.8bpp.lz");
-const u32 gIntro3KyogreTilemap[] = INCBIN_U32("graphics/intro/intro3_kyogre.bin.lz");
+const u32 gIntroKyogre_Gfx[] = INCBIN_U32("graphics/intro/scene_3/kyogre.8bpp.lz");
+const u32 gIntroKyogre_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/kyogre.bin.lz");
 
-const u32 gIntro3LegendBgGfx[] = INCBIN_U32("graphics/intro/legend_bg.4bpp.lz"); // groudon/kyogre/bg
+const u32 gIntroLegendBg_Gfx[] = INCBIN_U32("graphics/intro/scene_3/legend_bg.4bpp.lz"); // groudon/kyogre bg
+const u32 gIntroGroudonBg_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/groudon_bg.bin.lz");
+const u32 gIntroKyogreBg_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/kyogre_bg.bin.lz");
 
-const u32 gIntro3GroudonBgTilemap[] = INCBIN_U32("graphics/intro/legend_bg1.bin.lz");
-const u32 gIntro3KyogreBgTilemap[] = INCBIN_U32("graphics/intro/legend_bg2.bin.lz");
+const u32 gIntroClouds_Gfx[] = INCBIN_U32("graphics/intro/scene_3/clouds.4bpp.lz");
+const u32 gIntroCloudsLeft_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/clouds_left.bin.lz");
+const u32 gIntroCloudsRight_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/clouds_right.bin.lz");
+const u32 gIntroCloudsSun_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/clouds_sun.bin.lz");
 
-const u32 gIntro3CloudsGfx[] = INCBIN_U32("graphics/intro/intro3_clouds.4bpp.lz");
-const u32 gIntro3Clouds1Tilemap[] = INCBIN_U32("graphics/intro/intro3_clouds1.bin.lz");
-const u32 gIntro3Clouds2Tilemap[] = INCBIN_U32("graphics/intro/intro3_clouds2.bin.lz");
-const u32 gIntro3Clouds3Tilemap[] = INCBIN_U32("graphics/intro/intro3_clouds3.bin.lz");
+const u32 gIntroLightning_Gfx[] = INCBIN_U32("graphics/intro/scene_3/lightning.4bpp.lz");
+const u16 gIntroLightning_Pal[] = INCBIN_U16("graphics/intro/scene_3/lightning.gbapal");
 
-const u32 gIntro3LightningGfx[] = INCBIN_U32("graphics/intro/intro3_lightning.4bpp.lz");
-const u16 gIntro3LightningPal[] = INCBIN_U16("graphics/intro/intro3_lightning.gbapal");
+const u32 gIntroRayquaza_Gfx[] = INCBIN_U32("graphics/intro/scene_3/rayquaza.4bpp.lz");
+const u32 gIntroRayquaza_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/rayquaza.bin.lz");
 
-const u32 gIntro3RayquazaGfx[] = INCBIN_U32("graphics/intro/intro3_rayquaza.4bpp.lz");
-const u32 gIntro3RayquazaTilemap[] = INCBIN_U32("graphics/intro/intro3_rayquaza.bin.lz");
+const u32 gIntroUnused1_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/unused_1.bin.lz");
+const u32 gIntroUnused2_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/unused_2.bin.lz");
 
-const u32 gUnknown_D8C374[] = INCBIN_U32("graphics/unknown/unknown_D8C374.bin.lz");
-const u32 gUnknown_D8C5C4[] = INCBIN_U32("graphics/unknown/unknown_D8C5C4.bin.lz");
+const u32 gIntroRayquazaClouds_Gfx[] = INCBIN_U32("graphics/intro/scene_3/rayquaza_clouds.4bpp.lz");
+const u32 gIntroRayquazaClouds_Tilemap[] = INCBIN_U32("graphics/intro/scene_3/rayquaza_clouds.bin.lz");
 
-const u32 gIntro3Clouds2Gfx[] = INCBIN_U32("graphics/intro/intro3_clouds2.4bpp.lz"); //clouds 2, during the rayquaza flash
-const u32 gIntro3Clouds4Tilemap[] = INCBIN_U32("graphics/intro/intro3_clouds4.bin.lz");
+const u32 gIntroBubbles_Gfx[] = INCBIN_U32("graphics/intro/scene_3/bubbles.4bpp.lz");
+const u16 gIntroBubbles_Pal[] = INCBIN_U16("graphics/intro/scene_3/bubbles.gbapal");
 
-const u32 gIntro2BubblesGfx[] = INCBIN_U32("graphics/intro/intro2_bubbles.4bpp.lz");
-const u16 gIntro2BubblesPal[] = INCBIN_U16("graphics/intro/intro2_bubbles.gbapal");
-
-const u32 gIntro1FlygonGfx[] = INCBIN_U32("graphics/intro/intro1_flygon.4bpp.lz");
-const u32 gIntro1SparkleGfx[] = INCBIN_U32("graphics/intro/intro1_sparkle.4bpp.lz");
+const u32 gIntroFlygonSilhouette_Gfx[] = INCBIN_U32("graphics/intro/scene_1/flygon.4bpp.lz");
+const u32 gIntroSparkle_Gfx[] = INCBIN_U32("graphics/intro/scene_1/sparkle.4bpp.lz");

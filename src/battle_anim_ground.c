@@ -21,11 +21,11 @@ static void AnimTask_DigBounceMovement(u8);
 static void AnimTask_DigEndBounceMovementSetInvisible(u8);
 static void AnimTask_DigSetVisibleUnderground(u8);
 static void AnimTask_DigRiseUpFromHole(u8);
-static void sub_81150E0(u8, s16, s16);
+static void SetDigScanlineEffect(u8, s16, s16);
 static void AnimTask_ShakeTerrain(u8);
 static void AnimTask_ShakeBattlers(u8);
 static void SetBattlersXOffsetForShake(struct Task *);
-static void sub_81156D0(u8);
+static void WaitForFissureCompletion(u8);
 
 static const union AffineAnimCmd sAffineAnim_Bonemerang[] =
 {
@@ -141,11 +141,11 @@ const struct SpriteTemplate gDirtMoundSpriteTemplate =
 // a boomerang. After hitting the target mon, it comes back to the user.
 static void AnimBonemerangProjectile(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[0] = 20;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[5] = -40;
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimBonemerangProjectile_Step;
@@ -155,13 +155,13 @@ static void AnimBonemerangProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x2 = 0;
         sprite->data[0] = 20;
-        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->data[5] = 40;
         InitAnimArcTranslation(sprite);
         sprite->callback = AnimBonemerangProjectile_End;
@@ -186,10 +186,10 @@ static void AnimBoneHitProjectile(struct Sprite *sprite)
     InitSpritePosToAnimTarget(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
-    
+
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
@@ -207,8 +207,8 @@ static void AnimDirtScatter(struct Sprite *sprite)
 
     InitSpritePosToAnimAttacker(sprite, 1);
 
-    targetXPos = GetBattlerSpriteCoord2(gBattleAnimTarget, 2);
-    targetYPos = GetBattlerSpriteCoord2(gBattleAnimTarget, 3);
+    targetXPos = GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_X_2);
+    targetYPos = GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     xOffset = Random2() & 0x1F;
     yOffset = Random2() & 0x1F;
@@ -234,16 +234,16 @@ static void AnimMudSportDirt(struct Sprite *sprite)
     sprite->oam.tileNum++;
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
         sprite->data[0] = gBattleAnimArgs[1] > 0 ? 1 : -1;
         sprite->callback = AnimMudSportDirtRising;
     }
     else
     {
-        sprite->pos1.x = gBattleAnimArgs[1];
-        sprite->pos1.y = gBattleAnimArgs[2];
-        sprite->pos2.y = -gBattleAnimArgs[2];
+        sprite->x = gBattleAnimArgs[1];
+        sprite->y = gBattleAnimArgs[2];
+        sprite->y2 = -gBattleAnimArgs[2];
         sprite->callback = AnimMudSportDirtFalling;
     }
 }
@@ -253,11 +253,11 @@ static void AnimMudSportDirtRising(struct Sprite *sprite)
     if (++sprite->data[1] > 1)
     {
         sprite->data[1] = 0;
-        sprite->pos1.x += sprite->data[0];
+        sprite->x += sprite->data[0];
     }
 
-    sprite->pos1.y -= 4;
-    if (sprite->pos1.y < -4)
+    sprite->y -= 4;
+    if (sprite->y < -4)
         DestroyAnimSprite(sprite);
 }
 
@@ -266,10 +266,10 @@ static void AnimMudSportDirtFalling(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.y += 4;
-        if (sprite->pos2.y >= 0)
+        sprite->y2 += 4;
+        if (sprite->y2 >= 0)
         {
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             sprite->data[0]++;
         }
         break;
@@ -299,7 +299,7 @@ void AnimTask_DigDownMovement(u8 taskId)
 
 static void AnimTask_DigBounceMovement(u8 taskId)
 {
-    u8 var0;
+    u8 y;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -318,9 +318,9 @@ static void AnimTask_DigBounceMovement(u8 taskId)
             task->data[13] = gBattle_BG2_Y;
         }
 
-        var0 = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
-        task->data[14] = var0 - 32;
-        task->data[15] = var0 + 32;
+        y = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
+        task->data[14] = y - 32;
+        task->data[15] = y + 32;
         if (task->data[14] < 0)
             task->data[14] = 0;
 
@@ -328,7 +328,7 @@ static void AnimTask_DigBounceMovement(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        sub_81150E0(task->data[11], task->data[14], task->data[15]);
+        SetDigScanlineEffect(task->data[11], task->data[14], task->data[15]);
         task->data[0]++;
         break;
     case 2:
@@ -353,7 +353,7 @@ static void AnimTask_DigBounceMovement(u8 taskId)
             else
                 gBattle_BG2_Y = task->data[13] - task->data[5];
 
-            gSprites[task->data[10]].pos2.x = 272 - gSprites[task->data[10]].pos1.x;
+            gSprites[task->data[10]].x2 = DISPLAY_WIDTH + 32 - gSprites[task->data[10]].x;
             task->data[0]++;
         }
         break;
@@ -372,8 +372,8 @@ static void AnimTask_DigEndBounceMovementSetInvisible(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     gSprites[spriteId].invisible = TRUE;
-    gSprites[spriteId].pos2.x = 0;
-    gSprites[spriteId].pos2.y = 0;
+    gSprites[spriteId].x2 = 0;
+    gSprites[spriteId].y2 = 0;
 
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
         gBattle_BG1_Y = 0;
@@ -404,8 +404,8 @@ static void AnimTask_DigSetVisibleUnderground(u8 taskId)
     case 0:
         task->data[10] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         gSprites[task->data[10]].invisible = FALSE;
-        gSprites[task->data[10]].pos2.x = 0;
-        gSprites[task->data[10]].pos2.y = 160 - gSprites[task->data[10]].pos1.y;
+        gSprites[task->data[10]].x2 = 0;
+        gSprites[task->data[10]].y2 = DISPLAY_HEIGHT - gSprites[task->data[10]].y;
         task->data[0]++;
         break;
     case 1:
@@ -434,16 +434,16 @@ static void AnimTask_DigRiseUpFromHole(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        sub_81150E0(task->data[11], 0, task->data[15]);
+        SetDigScanlineEffect(task->data[11], 0, task->data[15]);
         task->data[0]++;
         break;
     case 2:
-        gSprites[task->data[10]].pos2.y = 96;
+        gSprites[task->data[10]].y2 = 96;
         task->data[0]++;
         break;
     case 3:
-        gSprites[task->data[10]].pos2.y -= 8;
-        if (gSprites[task->data[10]].pos2.y == 0)
+        gSprites[task->data[10]].y2 -= 8;
+        if (gSprites[task->data[10]].y2 == 0)
         {
             gScanlineEffect.state = 3;
             task->data[0]++;
@@ -455,7 +455,7 @@ static void AnimTask_DigRiseUpFromHole(u8 taskId)
     }
 }
 
-static void sub_81150E0(u8 useBG1, s16 y, s16 endY)
+static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
 {
     s16 bgX;
     struct ScanlineEffectParams scanlineParams;
@@ -518,11 +518,11 @@ void AnimDirtPlumeParticle(struct Sprite *sprite)
         gBattleAnimArgs[2] *= -1;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(battler, 2) + xOffset;
-    sprite->pos1.y = GetBattlerYCoordWithElevation(battler) + 30;
+    sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2) + xOffset;
+    sprite->y = GetBattlerYCoordWithElevation(battler) + 30;
     sprite->data[0] = gBattleAnimArgs[5];
-    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
-    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[4] = sprite->y + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimDirtPlumeParticle_Step;
@@ -549,8 +549,8 @@ static void AnimDigDirtMound(struct Sprite *sprite)
     else
         battler = gBattleAnimTarget;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(battler, 0) - 16 + (gBattleAnimArgs[1] * 32);
-    sprite->pos1.y = GetBattlerYCoordWithElevation(battler) + 32;
+    sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X) - 16 + (gBattleAnimArgs[1] * 32);
+    sprite->y = GetBattlerYCoordWithElevation(battler) + 32;
     sprite->oam.tileNum += gBattleAnimArgs[1] * 8;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -603,7 +603,7 @@ void AnimTask_HorizontalShake(u8 taskId)
         break;
     default: // Shake specific battler
         task->tbattlerSpriteIds(0) = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-        if (task->tbattlerSpriteIds(0) == 0xFF)
+        if (task->tbattlerSpriteIds(0) == SPRITE_NONE)
         {
             DestroyAnimVisualTask(taskId);
         }
@@ -698,7 +698,7 @@ static void AnimTask_ShakeBattlers(u8 taskId)
         break;
     case 2:
         for (i = 0; i < task->tNumBattlers; i++)
-            gSprites[task->tbattlerSpriteIds(i)].pos2.x = 0;
+            gSprites[task->tbattlerSpriteIds(i)].x2 = 0;
 
         DestroyAnimVisualTask(taskId);
         break;
@@ -717,7 +717,7 @@ static void SetBattlersXOffsetForShake(struct Task *task)
 
     for (i = 0; i < task->tNumBattlers; i++)
     {
-        gSprites[task->tbattlerSpriteIds(i)].pos2.x = xOffset;
+        gSprites[task->tbattlerSpriteIds(i)].x2 = xOffset;
     }
 }
 
@@ -743,21 +743,23 @@ void AnimTask_PositionFissureBgOnBattler(u8 taskId)
     u8 battler = (gBattleAnimArgs[0] & ANIM_TARGET) ? gBattleAnimTarget : gBattleAnimAttacker;
 
     if (gBattleAnimArgs[0] > ANIM_TARGET)
-        battler ^= 2;
+        battler = BATTLE_PARTNER(battler);
 
-    newTask = &gTasks[CreateTask(sub_81156D0, gBattleAnimArgs[1])];
-    newTask->data[1] = (32 - GetBattlerSpriteCoord(battler, 2)) & 0x1FF;
-    newTask->data[2] = (64 - GetBattlerSpriteCoord(battler, 3)) & 0xFF;
+    newTask = &gTasks[CreateTask(WaitForFissureCompletion, gBattleAnimArgs[1])];
+    newTask->data[1] = (32 - GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2)) & 0x1FF;
+    newTask->data[2] = (64 - GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET)) & 0xFF;
     gBattle_BG3_X = newTask->data[1];
     gBattle_BG3_Y = newTask->data[2];
     newTask->data[3] = gBattleAnimArgs[2];
     DestroyAnimVisualTask(taskId);
 }
 
-static void sub_81156D0(u8 taskId)
+static void WaitForFissureCompletion(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
+    // Holds the BG3 offsets until gBattleAnimArgs[7]
+    // is set to a special terminator value.
     if (gBattleAnimArgs[7] == task->data[3])
     {
         gBattle_BG3_X = 0;

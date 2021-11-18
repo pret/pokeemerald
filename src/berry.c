@@ -11,7 +11,6 @@
 #include "random.h"
 #include "string_util.h"
 #include "text.h"
-#include "constants/berry.h"
 #include "constants/event_object_movement.h"
 #include "constants/items.h"
 
@@ -890,50 +889,50 @@ const struct Berry gBerries[] =
     },
 };
 
-const struct UnkStruct_0858AB24 gUnknown_0858AB24[] = {
-    { 50,  20},
-    { 50,  20},
-    { 50,  20},
-    { 50,  20},
-    { 50,  20},
-    { 50,  30},
-    { 50,  30},
-    { 50,  30},
-    { 50,  30},
-    { 50,  30},
-    { 60,  50},
-    { 60,  50},
-    { 60,  50},
-    { 60,  50},
-    { 60,  50},
-    { 80,  70},
-    { 80,  70},
-    { 80,  70},
-    { 80,  70},
-    { 80,  70},
-    {100, 100},
-    {100, 100},
-    {100, 100},
-    {100, 100},
-    {100, 100},
-    {130, 150},
-    {130, 150},
-    {130, 150},
-    {130, 150},
-    {130, 150},
-    {160, 250},
-    {160, 250},
-    {160, 250},
-    {160, 250},
-    {160, 250},
-    {180, 500},
-    {180, 500},
-    {180, 500},
-    {180, 500},
-    {180, 500},
-    {200, 750},
-    {200, 750},
-    {150, 200}
+const struct BerryCrushBerryData gBerryCrush_BerryData[] = {
+    [ITEM_CHERI_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  50, .powder =  20},
+    [ITEM_CHESTO_BERRY - FIRST_BERRY_INDEX] = {.difficulty =  50, .powder =  20},
+    [ITEM_PECHA_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  50, .powder =  20},
+    [ITEM_RAWST_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  50, .powder =  20},
+    [ITEM_ASPEAR_BERRY - FIRST_BERRY_INDEX] = {.difficulty =  50, .powder =  20},
+    [ITEM_LEPPA_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  50, .powder =  30},
+    [ITEM_ORAN_BERRY - FIRST_BERRY_INDEX]   = {.difficulty =  50, .powder =  30},
+    [ITEM_PERSIM_BERRY - FIRST_BERRY_INDEX] = {.difficulty =  50, .powder =  30},
+    [ITEM_LUM_BERRY - FIRST_BERRY_INDEX]    = {.difficulty =  50, .powder =  30},
+    [ITEM_SITRUS_BERRY - FIRST_BERRY_INDEX] = {.difficulty =  50, .powder =  30},
+    [ITEM_FIGY_BERRY - FIRST_BERRY_INDEX]   = {.difficulty =  60, .powder =  50},
+    [ITEM_WIKI_BERRY - FIRST_BERRY_INDEX]   = {.difficulty =  60, .powder =  50},
+    [ITEM_MAGO_BERRY - FIRST_BERRY_INDEX]   = {.difficulty =  60, .powder =  50},
+    [ITEM_AGUAV_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  60, .powder =  50},
+    [ITEM_IAPAPA_BERRY - FIRST_BERRY_INDEX] = {.difficulty =  60, .powder =  50},
+    [ITEM_RAZZ_BERRY - FIRST_BERRY_INDEX]   = {.difficulty =  80, .powder =  70},
+    [ITEM_BLUK_BERRY - FIRST_BERRY_INDEX]   = {.difficulty =  80, .powder =  70},
+    [ITEM_NANAB_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  80, .powder =  70},
+    [ITEM_WEPEAR_BERRY - FIRST_BERRY_INDEX] = {.difficulty =  80, .powder =  70},
+    [ITEM_PINAP_BERRY - FIRST_BERRY_INDEX]  = {.difficulty =  80, .powder =  70},
+    [ITEM_POMEG_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 100, .powder = 100},
+    [ITEM_KELPSY_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 100, .powder = 100},
+    [ITEM_QUALOT_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 100, .powder = 100},
+    [ITEM_HONDEW_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 100, .powder = 100},
+    [ITEM_GREPA_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 100, .powder = 100},
+    [ITEM_TAMATO_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 130, .powder = 150},
+    [ITEM_CORNN_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 130, .powder = 150},
+    [ITEM_MAGOST_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 130, .powder = 150},
+    [ITEM_RABUTA_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 130, .powder = 150},
+    [ITEM_NOMEL_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 130, .powder = 150},
+    [ITEM_SPELON_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 160, .powder = 250},
+    [ITEM_PAMTRE_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 160, .powder = 250},
+    [ITEM_WATMEL_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 160, .powder = 250},
+    [ITEM_DURIN_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 160, .powder = 250},
+    [ITEM_BELUE_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 160, .powder = 250},
+    [ITEM_LIECHI_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 180, .powder = 500},
+    [ITEM_GANLON_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 180, .powder = 500},
+    [ITEM_SALAC_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 180, .powder = 500},
+    [ITEM_PETAYA_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 180, .powder = 500},
+    [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 180, .powder = 500},
+    [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 200, .powder = 750},
+    [ITEM_STARF_BERRY - FIRST_BERRY_INDEX]  = {.difficulty = 200, .powder = 750},
+    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = {.difficulty = 150, .powder = 200}
 };
 
 const struct BerryTree gBlankBerryTree = {};
@@ -1046,8 +1045,9 @@ void ClearBerryTrees(void)
 
 static bool32 BerryTreeGrow(struct BerryTree *tree)
 {
-    if (tree->growthSparkle)
+    if (tree->stopGrowth)
         return FALSE;
+
     switch (tree->stage)
     {
     case BERRY_STAGE_NO_BERRY:
@@ -1082,7 +1082,7 @@ void BerryTreeTimeUpdate(s32 minutes)
     {
         tree = &gSaveBlock1Ptr->berryTrees[i];
 
-        if (tree->berry && tree->stage && !tree->growthSparkle)
+        if (tree->berry && tree->stage && !tree->stopGrowth)
         {
             if (minutes >= GetStageDurationByBerryType(tree->berry) * 71)
             {
@@ -1111,7 +1111,7 @@ void BerryTreeTimeUpdate(s32 minutes)
     }
 }
 
-void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle)
+void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
 
@@ -1125,8 +1125,10 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle)
         tree->minutesUntilNextStage *= 4;
     }
 
-    if (!sparkle)
-        tree->growthSparkle = TRUE;
+    // Stop growth, to keep tree at this stage until the player has seen it
+    // allowGrowth is always true for berry trees the player has planted
+    if (!allowGrowth)
+        tree->stopGrowth = TRUE;
 }
 
 void RemoveBerryTree(u8 id)
@@ -1175,9 +1177,9 @@ void GetBerryCountStringByBerryType(u8 berry, u8* dest, u32 berryCount)
     GetBerryCountString(dest, GetBerryInfo(berry)->name, berryCount);
 }
 
-void ResetBerryTreeSparkleFlag(u8 id)
+void AllowBerryTreeGrowth(u8 id)
 {
-    GetBerryTreeInfo(id)->growthSparkle = FALSE;
+    GetBerryTreeInfo(id)->stopGrowth = FALSE;
 }
 
 static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree)
@@ -1262,7 +1264,7 @@ void ObjectEventInteractionGetBerryTreeData(void)
 
     id = GetObjectEventBerryTreeId(gSelectedObjectEvent);
     berry = GetBerryTypeByBerryTreeId(id);
-    ResetBerryTreeSparkleFlag(id);
+    AllowBerryTreeGrowth(id);
     localId = gSpecialVar_LastTalked;
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
@@ -1313,7 +1315,7 @@ void ObjectEventInteractionPickBerryTree(void)
 void ObjectEventInteractionRemoveBerryTree(void)
 {
     RemoveBerryTree(GetObjectEventBerryTreeId(gSelectedObjectEvent));
-    sub_8092EF0(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    SetBerryTreeJustPicked(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 bool8 PlayerHasBerries(void)
@@ -1321,7 +1323,9 @@ bool8 PlayerHasBerries(void)
     return IsBagPocketNonEmpty(POCKET_BERRIES);
 }
 
-void ResetBerryTreeSparkleFlags(void)
+// Berry tree growth is frozen at their initial stage (usually, fully grown) until the player has seen the tree
+// For all berry trees on screen, allow normal growth
+void SetBerryTreesSeen(void)
 {
     s16 cam_left;
     s16 cam_top;
@@ -1331,7 +1335,7 @@ void ResetBerryTreeSparkleFlags(void)
     s16 bottom;
     int i;
 
-    GetCameraCoords((u16*)&cam_left, (u16*)&cam_top);
+    GetCameraCoords(&cam_left, &cam_top);
     left = cam_left;
     top = cam_top + 3;
     right = cam_left + 14;
@@ -1343,7 +1347,7 @@ void ResetBerryTreeSparkleFlags(void)
             cam_left = gObjectEvents[i].currentCoords.x;
             cam_top = gObjectEvents[i].currentCoords.y;
             if (left <= cam_left && cam_left <= right && top <= cam_top && cam_top <= bottom)
-                ResetBerryTreeSparkleFlag(gObjectEvents[i].trainerRange_berryTreeId);
+                AllowBerryTreeGrowth(gObjectEvents[i].trainerRange_berryTreeId);
         }
     }
 }

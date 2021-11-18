@@ -36,7 +36,7 @@ se_m_vital_throw2_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N06   , En3 
+	.byte		N06   , En3
 	.byte	W01
 	.byte		BEND  , c_v-9
 	.byte	W01
@@ -49,7 +49,7 @@ se_m_vital_throw2_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N09   , An2 
+	.byte		N09   , An2
 	.byte	W01
 	.byte		BEND  , c_v-9
 	.byte	W01
@@ -84,10 +84,10 @@ se_m_vital_throw2_2:
 	.byte		N03   , Gs2 , v052
 	.byte	W06
 	.byte		PAN   , c_v-7
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+0
-	.byte		N03   
+	.byte		N03
 	.byte	W12
 	.byte	FINE
 

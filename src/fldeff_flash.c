@@ -16,7 +16,6 @@
 #include "constants/songs.h"
 #include "constants/map_types.h"
 
-// structures
 struct FlashStruct
 {
     u8 fromType;
@@ -26,7 +25,6 @@ struct FlashStruct
     void (*func)(void);
 };
 
-// static functions
 static void FieldCallback_Flash(void);
 static void FldEff_UseFlash(void);
 static bool8 TryDoMapTransition(void);
@@ -42,7 +40,6 @@ static void Task_EnterCaveTransition2(u8 taskId);
 static void Task_EnterCaveTransition3(u8 taskId);
 static void Task_EnterCaveTransition4(u8 taskId);
 
-// rodata
 static const struct FlashStruct sTransitionTypes[] =
 {
     {MAP_TYPE_TOWN,        MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
@@ -64,15 +61,14 @@ static const struct FlashStruct sTransitionTypes[] =
     {},
 };
 
-static const u16 gCaveTransitionPalette_White[] = INCBIN_U16("graphics/misc/cave_transition_white.gbapal");
-static const u16 gCaveTransitionPalette_Black[] = INCBIN_U16("graphics/misc/cave_transition_black.gbapal");
+static const u16 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/misc/cave_transition_white.gbapal");
+static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/misc/cave_transition_black.gbapal");
 
-static const u16 gUnknown_085B2890[] = INCBIN_U16("graphics/misc/85B2890.gbapal");
-static const u16 gUnknown_085B28A0[] = INCBIN_U16("graphics/misc/85B28A0.gbapal");
-static const u32 gCaveTransitionTilemap[] = INCBIN_U32("graphics/misc/cave_transition_map.bin.lz");
-static const u32 gCaveTransitionTiles[] = INCBIN_U32("graphics/misc/cave_transition.4bpp.lz");
+static const u16 sCaveTransitionPalette_Enter[] = INCBIN_U16("graphics/misc/cave_transition_enter.gbapal");
+static const u16 sCaveTransitionPalette_Exit[] = INCBIN_U16("graphics/misc/cave_transition_exit.gbapal");
+static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/misc/cave_transition_map.bin.lz");
+static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/misc/cave_transition.4bpp.lz");
 
-// text
 bool8 SetUpFieldMove_Flash(void)
 {
     // In Ruby and Sapphire, Registeel's tomb is opened by using Fly. In Emerald,
@@ -220,10 +216,10 @@ static void Task_ExitCaveTransition1(u8 taskId)
 static void Task_ExitCaveTransition2(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
-    LZ77UnCompVram(gCaveTransitionTilemap, (void *)(VRAM + 0xF800));
-    LoadPalette(gCaveTransitionPalette_White, 0xE0, 0x20);
-    LoadPalette(gUnknown_085B28A0, 0xE0, 0x10);
+    LZ77UnCompVram(sCaveTransitionTiles, (void *)(VRAM + 0xC000));
+    LZ77UnCompVram(sCaveTransitionTilemap, (void *)(VRAM + 0xF800));
+    LoadPalette(sCaveTransitionPalette_White, 0xE0, 0x20);
+    LoadPalette(sCaveTransitionPalette_Exit, 0xE0, 0x10);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0
                                 | BLDCNT_EFFECT_BLEND
                                 | BLDCNT_TGT2_BG1
@@ -274,11 +270,11 @@ static void Task_ExitCaveTransition4(u8 taskId)
     if (count < 8)
     {
         gTasks[taskId].data[2]++;
-        LoadPalette(&gUnknown_085B28A0[count], 0xE0, 16 - 2 * count);
+        LoadPalette(&sCaveTransitionPalette_Exit[count], 0xE0, 16 - 2 * count);
     }
     else
     {
-        LoadPalette(gCaveTransitionPalette_White, 0, 0x20);
+        LoadPalette(sCaveTransitionPalette_White, 0, 0x20);
         gTasks[taskId].func = Task_ExitCaveTransition5;
         gTasks[taskId].data[2] = 8;
     }
@@ -305,8 +301,8 @@ static void Task_EnterCaveTransition1(u8 taskId)
 static void Task_EnterCaveTransition2(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
-    LZ77UnCompVram(gCaveTransitionTilemap, (void *)(VRAM + 0xF800));
+    LZ77UnCompVram(sCaveTransitionTiles, (void *)(VRAM + 0xC000));
+    LZ77UnCompVram(sCaveTransitionTilemap, (void *)(VRAM + 0xF800));
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -319,8 +315,8 @@ static void Task_EnterCaveTransition2(u8 taskId)
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
                                 | DISPCNT_OBJ_ON);
-    LoadPalette(gCaveTransitionPalette_White, 0xE0, 0x20);
-    LoadPalette(gCaveTransitionPalette_Black, 0, 0x20);
+    LoadPalette(sCaveTransitionPalette_White, 0xE0, 0x20);
+    LoadPalette(sCaveTransitionPalette_Black, 0, 0x20);
     gTasks[taskId].func = Task_EnterCaveTransition3;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
@@ -335,7 +331,7 @@ static void Task_EnterCaveTransition3(u8 taskId)
     {
         gTasks[taskId].data[2]++;
         gTasks[taskId].data[2]++;
-        LoadPalette(&gUnknown_085B2890[15 - count], 0xE0, 2 * (count + 1));
+        LoadPalette(&sCaveTransitionPalette_Enter[15 - count], 0xE0, 2 * (count + 1));
     }
     else
     {
@@ -363,7 +359,7 @@ static void Task_EnterCaveTransition4(u8 taskId)
     }
     else
     {
-        LoadPalette(gCaveTransitionPalette_Black, 0, 0x20);
+        LoadPalette(sCaveTransitionPalette_Black, 0, 0x20);
         SetMainCallback2(gMain.savedCallback);
     }
 }

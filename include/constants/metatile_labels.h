@@ -16,7 +16,7 @@
 #define METATILE_General_MuddySlope_Frame2    0x0EA
 #define METATILE_General_MuddySlope_Frame3    0x0EB
 #define METATILE_General_SandPit_Center       0x121
-#define METATILE_General_Door                 0x021   
+#define METATILE_General_Door                 0x021
 #define METATILE_General_Door_PokeMart        0x041
 #define METATILE_General_Door_PokeCenter      0x061
 #define METATILE_General_Door_Gym             0x1CD
@@ -35,13 +35,15 @@
 #define METATILE_General_SecretBase_VineLeft  0x036
 #define METATILE_General_SecretBase_VineRight 0x037
 #define METATILE_General_RedCaveIndent        0x1A0
-#define METATILE_General_RedCaveOpen          0x1A1 
+#define METATILE_General_RedCaveOpen          0x1A1
 #define METATILE_General_YellowCaveIndent     0x1A8
 #define METATILE_General_YellowCaveOpen       0x1A9
 #define METATILE_General_BlueCaveIndent       0x1B0
 #define METATILE_General_BlueCaveOpen         0x1B1
 
 // gTileset_Building
+#define METATILE_Building_TV_Off 0x002
+#define METATILE_Building_TV_On  0x003
 #define METATILE_Building_PC_Off 0x004
 #define METATILE_Building_PC_On  0x005
 
@@ -165,6 +167,8 @@
 
 // gTileset_Cave
 #define METATILE_Cave_EntranceCover                     0x229
+#define METATILE_Cave_CrackedFloor_Hole                 0x206
+#define METATILE_Cave_CrackedFloor                      0x22F
 #define METATILE_Cave_SealedChamberEntrance_TopLeft     0x22A
 #define METATILE_Cave_SealedChamberEntrance_TopMid      0x22B
 #define METATILE_Cave_SealedChamberEntrance_TopRight    0x22C
@@ -191,6 +195,7 @@
 #define METATILE_Pacifidlog_HalfSubmergedLogs_Vertical1   0x261
 #define METATILE_Pacifidlog_SubmergedLogs_Vertical0       0x25A
 #define METATILE_Pacifidlog_SubmergedLogs_Vertical1       0x262
+#define METATILE_Pacifidlog_SkyPillar_CrackedFloor_Hole   0x237
 #define METATILE_Pacifidlog_SkyPillar_DoorOpen_Top        0x2AA
 #define METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom     0x2B2
 
@@ -347,6 +352,7 @@
 #define METATILE_InsideShip_IntactDoor_Bottom_Interior 0x297
 
 // gTileset_BattlePike
+#define METATILE_BattlePike_CurtainFrames_Start  0x201
 #define METATILE_BattlePike_Curtain_Stage0_Tile0 0x24A
 #define METATILE_BattlePike_Curtain_Stage0_Tile1 0x251
 #define METATILE_BattlePike_Curtain_Stage0_Tile2 0x252
@@ -782,5 +788,9 @@
 #define METATILE_SecretBase_SpikesMat_BottomLeft        0x329
 #define METATILE_SecretBase_SpikesMat_BottomMid         0x32A
 #define METATILE_SecretBase_SpikesMat_BottomRight       0x32B
+
+// gTileset_BattlePyramid
+#define METATILE_BattlePyramid_Floor 0x28D
+#define METATILE_BattlePyramid_Exit  0x28E
 
 #endif // GUARD_METATILE_LABELS_H

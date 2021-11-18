@@ -7,7 +7,7 @@
 
 .set __special__, 0
 		.align 2
-gSpecials:: @ 81DBA64
+gSpecials::
 	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
@@ -43,7 +43,7 @@ gSpecials:: @ 81DBA64
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
-	def_special nullsub_37
+	def_special Script_StartWiredTrade
 	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
@@ -66,8 +66,8 @@ gSpecials:: @ 81DBA64
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
 	def_special GetTrainerFlag
-	def_special EndTrainerApproach
-	def_special SetUpTrainerEncounterMusic
+	def_special DoTrainerApproach
+	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
 	def_special IsTrainerReadyForRematch
 	def_special BattleSetup_StartRematchBattle
@@ -83,20 +83,20 @@ gSpecials:: @ 81DBA64
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
 	def_special GetNextActiveShowIfMassOutbreak
-	def_special TV_IsScriptShowKindAlreadyInQueue
-	def_special CheckForBigMovieOrEmergencyNewsOnTV
+	def_special IsTVShowAlreadyInQueue
+	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
 	def_special ResetTVShowState
 	def_special GetContestWinnerId
 	def_special GetContestPlayerId
-	def_special sub_80F8814
+	def_special GetNpcContestantLocalId
 	def_special BufferContestWinnerTrainerName
 	def_special BufferContestWinnerMonName
 	def_special BufferContestTrainerAndMonNames
 	def_special GetContestMonConditionRanking
 	def_special SetContestTrainerGfxIds
 	def_special TryEnterContestMon
-	def_special sub_80F8970
+	def_special GetContestantNamesAtRank
 	def_special SetLinkContestPlayerGfx
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
@@ -108,28 +108,28 @@ gSpecials:: @ 81DBA64
 	def_special DoWateringBerryTreeAnim
 	def_special ShowEasyChatScreen
 	def_special ShowEasyChatProfile
-	def_special ScrSpecial_GetCurrentMauvilleMan
-	def_special ScrSpecial_HasBardSongBeenChanged
-	def_special ScrSpecial_SaveBardSongLyrics
-	def_special ScrSpecial_GetHipsterSpokenFlag
-	def_special ScrSpecial_SetHipsterSpokenFlag
-	def_special ScrSpecial_HipsterTeachWord
-	def_special ScrSpecial_PlayBardSong
-	def_special ScrSpecial_SetMauvilleOldManObjEventGfx
-	def_special ScrSpecial_GenerateGiddyLine
-	def_special ScrSpecial_GiddyShouldTellAnotherTale
-	def_special ScrSpecial_StorytellerGetFreeStorySlot
-	def_special ScrSpecial_StorytellerDisplayStory
-	def_special ScrSpecial_StorytellerStoryListMenu
-	def_special ScrSpecial_StorytellerUpdateStat
-	def_special ScrSpecial_StorytellerInitializeRandomStat
-	def_special ScrSpecial_HasStorytellerAlreadyRecorded
-	def_special ScrSpecial_TraderMenuGetDecoration
-	def_special ScrSpecial_GetTraderTradedFlag
-	def_special ScrSpecial_DoesPlayerHaveNoDecorations
-	def_special ScrSpecial_IsDecorationFull
-	def_special ScrSpecial_TraderMenuGiveDecoration
-	def_special ScrSpecial_TraderDoDecorationTrade
+	def_special Script_GetCurrentMauvilleMan
+	def_special HasBardSongBeenChanged
+	def_special SaveBardSongLyrics
+	def_special GetHipsterSpokenFlag
+	def_special SetHipsterSpokenFlag
+	def_special HipsterTryTeachWord
+	def_special PlayBardSong
+	def_special SetMauvilleOldManObjEventGfx
+	def_special GenerateGiddyLine
+	def_special GiddyShouldTellAnotherTale
+	def_special StorytellerGetFreeStorySlot
+	def_special Script_StorytellerDisplayStory
+	def_special StorytellerStoryListMenu
+	def_special StorytellerUpdateStat
+	def_special Script_StorytellerInitializeRandomStat
+	def_special HasStorytellerAlreadyRecorded
+	def_special TraderMenuGetDecoration
+	def_special GetTraderTradedFlag
+	def_special DoesPlayerHaveNoDecorations
+	def_special IsDecorationCategoryFull
+	def_special TraderShowDecorationMenu
+	def_special TraderDoDecorationTrade
 	def_special GetSeedotSizeRecordInfo
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
@@ -138,7 +138,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferMonNickname
 	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
-	def_special TrendyPhraseIsOld
+	def_special IsTrendyPhraseBoring
 	def_special BufferDeepLinkPhrase
 	def_special GetDewfordHallPaintingNameIndex
 	def_special SwapRegisteredBike
@@ -147,9 +147,9 @@ gSpecials:: @ 81DBA64
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
 	def_special SaveMuseumContestPainting
-	def_special DoesContestCategoryHaveWinner
-	def_special CountPlayerContestPaintings
-	def_special ShowContestWinnerPainting
+	def_special DoesContestCategoryHaveMuseumPainting
+	def_special CountPlayerMuseumPaintings
+	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
@@ -187,10 +187,10 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
 	def_special DoTVShowInSearchOfTrainers
-	def_special IsTVShowInSearchOfTrainersAiring
+	def_special IsGabbyAndTyShowOnTheAir
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToObjectEventLocalIds
+	def_special GetGabbyAndTyLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -315,7 +315,7 @@ gSpecials:: @ 81DBA64
 	def_special IsStarterInParty
 	def_special CopyCurSecretBaseOwnerName_StrVar1
 	def_special ScriptCheckFreePokemonStorageSpace
-	def_special DoSealedChamberShakingEffect1
+	def_special DoSealedChamberShakingEffect_Long
 	def_special ShowDeptStoreElevatorFloorSelect
 	def_special InteractWithShieldOrTVDecoration
 	def_special IsPokerusInParty
@@ -324,8 +324,8 @@ gSpecials:: @ 81DBA64
 	def_special StartGroudonKyogreBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
-	def_special SetUpTrainerMovement
-	def_special DoSealedChamberShakingEffect2
+	def_special SetTrainerFacingDirection
+	def_special DoSealedChamberShakingEffect_Short
 	def_special FoundBlackGlasses
 	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
@@ -354,7 +354,7 @@ gSpecials:: @ 81DBA64
 	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
-	def_special TrySetUpTrainerFanClubSpecial
+	def_special TryPutTrainerFanClubOnAir
 	def_special ShouldHideFanClubInterviewer
 	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir
@@ -400,7 +400,7 @@ gSpecials:: @ 81DBA64
 	def_special ClearQuizLadyQuestionAndAnswer
 	def_special QuizLadySetCustomQuestion
 	def_special QuizLadyTakePrizeForCustomQuiz
-	def_special GetMysteryEventCardVal
+	def_special GetMysteryGiftCardStat
 	def_special QuizLadyRecordCustomQuizData
 	def_special QuizLadySetWaitingForChallenger
 	def_special BufferQuizCorrectAnswer
@@ -430,11 +430,11 @@ gSpecials:: @ 81DBA64
 	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
-	def_special sub_801DC20
+	def_special RetrieveWonderNewsVal
 	def_special ChooseMonForWirelessMinigame
 	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
-	def_special ValidateReceivedWonderCard
+	def_special ValidateSavedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special IsPokemonJumpSpeciesInParty
 	def_special ShowPokemonJumpRecords
@@ -455,7 +455,7 @@ gSpecials:: @ 81DBA64
 	def_special ClearLinkContestFlags
 	def_special TryContestEModeLinkup
 	def_special ShowScrollableMultichoice
-	def_special sub_813A630
+	def_special ScrollableMultichoice_TryReturnToList
 	def_special BufferBattleTowerElevatorFloors
 	def_special TryStoreHeldItemsInPyramidBag
 	def_special ChooseItemsToTossFromPyramidBag
@@ -484,13 +484,13 @@ gSpecials:: @ 81DBA64
 	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
-	def_special sub_813ADD4
+	def_special ScrollableMultichoice_RedrawPersistentMenu
 	def_special ChooseMonForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
-	def_special sub_813AF48
+	def_special ScrollableMultichoice_ClosePersistentMenu
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
-	def_special CreateObedientEnemyMon
+	def_special CreateEventLegalEnemyMon
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
@@ -514,7 +514,7 @@ gSpecials:: @ 81DBA64
 	def_special SetMewAboveGrass
 	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner
-	def_special sub_813B534
+	def_special BattleTowerReconnectLink
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE

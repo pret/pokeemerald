@@ -1,7 +1,6 @@
 
 #include "global.h"
 #include "contest.h"
-#include "constants/species.h"
 
 #define CONTEST_OPPONENT_JIMMY 0
 #define CONTEST_OPPONENT_EDITH 1
@@ -100,8 +99,8 @@
 #define CONTEST_OPPONENT_TREY 94
 #define CONTEST_OPPONENT_LANE 95
 
-// All contest opponents have a common set of AI flags (which contains all of the actually 
-// useful AI scripts, as well as some dummys) and a random combination of 2-3 dummy flags. 
+// All contest opponents have a common set of AI flags (which contains all of the actually
+// useful AI scripts, as well as some dummys) and a random combination of 2-3 dummy flags.
 // Seems that like the battle AI they had more plans for this than what ended up in the final game
 #define CONTEST_AI_SET_1  (CONTEST_AI_COMMON | CONTEST_AI_DUMMY_20 | CONTEST_AI_DUMMY_21)
 #define CONTEST_AI_SET_2  (CONTEST_AI_COMMON | CONTEST_AI_DUMMY_19 | CONTEST_AI_DUMMY_25)
@@ -139,7 +138,7 @@
 
 const struct ContestWinner gDefaultContestWinners[] =
 {
-    {
+    [CONTEST_WINNER_HALL_1 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_ELECTRIKE,
@@ -148,7 +147,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("EZRA"),
         .contestRank = CONTEST_RANK_NORMAL
     },
-    {
+    [CONTEST_WINNER_HALL_2 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_TROPIUS,
@@ -157,7 +156,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("ALLAN"),
         .contestRank = CONTEST_RANK_HYPER
     },
-    {
+    [CONTEST_WINNER_HALL_3 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_XATU,
@@ -166,7 +165,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("JULIET"),
         .contestRank = CONTEST_RANK_NORMAL
     },
-    {
+    [CONTEST_WINNER_HALL_4 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_PLUSLE,
@@ -175,7 +174,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("BAILY"),
         .contestRank = CONTEST_RANK_MASTER
     },
-    {
+    [CONTEST_WINNER_HALL_5 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_SHUPPET,
@@ -184,7 +183,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("MELANY"),
         .contestRank = CONTEST_RANK_SUPER
     },
-    {
+    [CONTEST_WINNER_HALL_6 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_ZANGOOSE,
@@ -193,7 +192,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("HANA"),
         .contestRank = CONTEST_RANK_HYPER
     },
-    {
+    [CONTEST_WINNER_HALL_UNUSED_1 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_LOUDRED,
@@ -202,7 +201,7 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("BRYANT"),
         .contestRank = CONTEST_RANK_HYPER
     },
-    {
+    [CONTEST_WINNER_HALL_UNUSED_2 - 1] = {
         .personality = 0,
         .trainerId = 0xFFFF,
         .species = SPECIES_DELCATTY,
@@ -1167,7 +1166,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    [CONTEST_OPPONENT_ARIANA] = {    
+    [CONTEST_OPPONENT_ARIANA] = {
         .species = SPECIES_KECLEON,
         .nickname = _("KECON"),
         .trainerName = _("ARIANA"),
@@ -2011,7 +2010,7 @@ const struct ContestPokemon gContestOpponents[] =
         .species = SPECIES_CUBONE,
         .nickname = _("CUBIN"),
         .trainerName = _("COLTIN"),
-        .trainerGfxId = OBJ_EVENT_GFX_MAN_4, 
+        .trainerGfxId = OBJ_EVENT_GFX_MAN_4,
         .aiFlags = CONTEST_AI_SET_2,
         .whichRank = CONTEST_RANK_HYPER,
         .aiPool_Cool = FALSE,

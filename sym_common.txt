@@ -2,24 +2,24 @@
 	.include "main.o"
 	@ ../gflib/bg.o
 	.align 2
-gUnneededFireRedVariable:
+gWindowTileAutoAllocEnabled:
     .space 4
     @ ../gflib/window.o
     .align 4
 gTransparentTileNumber:
     .space 1
     .align 4
-gUnknown_03002F70:
+gWindowBgTilemapBuffers:
     .space 16
     @ ../gflib/text.o
     .align 4
 gFonts:
     .space 4
     .align 2
-gUnknown_03002F84:
+gDisableTextPrinters:
     .space 1
     .align 4
-gUnknown_03002F90:
+gCurGlyph:
     .space 132
     .align 2
 gTextFlags:

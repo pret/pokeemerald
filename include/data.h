@@ -2,9 +2,16 @@
 #define GUARD_DATA_H
 
 #include "constants/moves.h"
-#include "constants/species.h"
 
 #define SPECIES_SHINY_TAG 500
+
+#define MAX_TRAINER_ITEMS 4
+
+enum {
+    BATTLER_AFFINE_NORMAL,
+    BATTLER_AFFINE_EMERGE,
+    BATTLER_AFFINE_RETURN,
+};
 
 struct MonCoords
 {
@@ -13,6 +20,10 @@ struct MonCoords
     u8 size; // u8 width:4, height:4;
     u8 y_offset;
 };
+
+#define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
+#define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
+#define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 
 struct TrainerMonNoItemDefaultMoves
 {
@@ -61,7 +72,7 @@ struct Trainer
     /*0x02*/ u8 encounterMusic_gender; // last bit is gender
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[12];
-    /*0x10*/ u16 items[4];
+    /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
@@ -70,13 +81,13 @@ struct Trainer
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
-extern const u16 gUnknown_082FF1D8[];
-extern const u32 gUnknown_082FF1F8[];
+extern const u16 gMinigameDigits_Pal[];
+extern const u32 gMinigameDigits_Gfx[];
 
-extern const struct SpriteFrameImage gUnknown_082FF3A8[];
-extern const struct SpriteFrameImage gUnknown_082FF3C8[];
-extern const struct SpriteFrameImage gUnknown_082FF3E8[];
-extern const struct SpriteFrameImage gUnknown_082FF408[];
+extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
+extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];
+extern const struct SpriteFrameImage gBattlerPicTable_PlayerRight[];
+extern const struct SpriteFrameImage gBattlerPicTable_OpponentRight[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_May[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
@@ -86,11 +97,11 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
 
-extern const union AffineAnimCmd *const gUnknown_082FF618[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 
-extern const union AnimCmd *const gUnknown_082FF70C[];
+extern const union AnimCmd *const gAnims_MonPic[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct CompressedSpriteSheet gMonStillFrontPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];

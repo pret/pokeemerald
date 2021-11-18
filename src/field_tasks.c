@@ -174,7 +174,7 @@ void SetUpFieldTasks(void)
 void ActivatePerStepCallback(u8 callbackId)
 {
     u8 taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
-    if (taskId != 0xff)
+    if (taskId != TASK_NONE)
     {
         s32 i;
         s16 *data = gTasks[taskId].data;
@@ -199,12 +199,12 @@ void ResetFieldTasksArgs(void)
     s16 *data;
 
     taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
-    if (taskId != 0xff)
+    if (taskId != TASK_NONE)
     {
         data = gTasks[taskId].data;
     }
     taskId = FindTaskIdByFunc(Task_RunTimeBasedEvents);
-    if (taskId != 0xff)
+    if (taskId != TASK_NONE)
     {
         data = gTasks[taskId].data;
         data[1] = 0;
@@ -529,7 +529,7 @@ void SetSootopolisGymCrackedIceMetatiles(void)
         for (y = 0; y < height; y++)
         {
             if (IsIcePuzzleCoordVisited(x, y) == TRUE)
-                MapGridSetMetatileIdAt(x + 7, y + 7, METATILE_SootopolisGym_Ice_Cracked);
+                MapGridSetMetatileIdAt(x + MAP_OFFSET, y + MAP_OFFSET, METATILE_SootopolisGym_Ice_Cracked);
         }
     }
 }
@@ -586,7 +586,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
                 PlaySE(SE_ICE_CRACK);
                 MapGridSetMetatileIdAt(x, y, METATILE_SootopolisGym_Ice_Cracked);
                 CurrentMapDrawMetatileAt(x, y);
-                MarkIcePuzzleCoordVisited(x - 7, y - 7);
+                MarkIcePuzzleCoordVisited(x - MAP_OFFSET, y - MAP_OFFSET);
                 data[1] = 1;
             }
             break;
@@ -635,9 +635,12 @@ static void AshGrassPerStepCallback(u8 taskId)
     }
 }
 
+// This function uses the constants for gTileset_Cave's metatile labels, but other tilesets with
+// the CrackedFloorPerStepCallback callback use the same metatile numbers for the cracked floor
+// and hole metatiles, such as gTileset_MirageTower.
 static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
 {
-    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);// unsure what these are referring to
+    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == METATILE_Cave_CrackedFloor ? METATILE_Cave_CrackedFloor_Hole : METATILE_Pacifidlog_SkyPillar_CrackedFloor_Hole);
     CurrentMapDrawMetatileAt(x, y);
 }
 
@@ -686,7 +689,7 @@ static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
 {
     u16 tile;
     if ((--data[0]) == 0)
-        tile = 0xe8;
+        tile = METATILE_General_MuddySlope_Frame0;
     else
         tile = sMuddySlopeMetatiles[data[0] / 8];
 

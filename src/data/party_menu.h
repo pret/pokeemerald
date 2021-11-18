@@ -37,9 +37,9 @@ enum
 
 static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 {
-    [PARTY_BOX_LEFT_COLUMN] = 
+    [PARTY_BOX_LEFT_COLUMN] =
     {
-        BlitBitmapToPartyWindow_LeftColumn, 
+        BlitBitmapToPartyWindow_LeftColumn,
         {
             //The below are the x, y, width, and height for each of the following info
             24, 11, 40, 13, // Nickname
@@ -48,12 +48,12 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             38, 37, 24,  8, // HP
             53, 37, 24,  8, // Max HP
             24, 35, 48,  3  // HP bar
-        }, 
+        },
         12, 34, 64, 16      // Description text (e.g. NO USE)
     },
-    [PARTY_BOX_RIGHT_COLUMN] = 
+    [PARTY_BOX_RIGHT_COLUMN] =
     {
-        BlitBitmapToPartyWindow_RightColumn, 
+        BlitBitmapToPartyWindow_RightColumn,
         {
              // See above comment
              22,  3, 40, 13, // Nickname
@@ -62,7 +62,7 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             102, 12, 24,  8, // HP
             117, 12, 24,  8, // Max HP
              88, 10, 48,  3  // HP bar
-        }, 
+        },
         77, 4, 64, 16        // Description text
     },
 };
@@ -73,7 +73,7 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 // Pokemon icon (x, y), held item (x, y), status condition (x, y), menu pokeball (x, y)
 static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 {
-    [PARTY_LAYOUT_SINGLE] = 
+    [PARTY_LAYOUT_SINGLE] =
     {
         { 16,  40,  20,  50,  50,  52,  16,  34},
         {104,  18, 108,  28, 136,  27, 102,  25},
@@ -82,7 +82,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104,  90, 108, 100, 136,  99, 102,  97},
         {104, 114, 108, 124, 136, 123, 102, 121},
     },
-    [PARTY_LAYOUT_DOUBLE] = 
+    [PARTY_LAYOUT_DOUBLE] =
     {
         {16, 24, 20, 34, 50, 36, 16, 18},
         {16, 80, 20, 90, 50, 92, 16, 74},
@@ -91,7 +91,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104, 82, 108, 92, 136, 91, 102, 89},
         {104, 114, 108, 124, 136, 123, 102, 121},
     },
-    [PARTY_LAYOUT_MULTI] = 
+    [PARTY_LAYOUT_MULTI] =
     {
         {16, 24, 20, 34, 50, 36, 16, 18},
         {16, 80, 20, 90, 50, 92, 16, 74},
@@ -100,7 +100,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104, 82, 106, 92, 136, 91, 102, 89},
         {104, 106, 106, 116, 136, 115, 102, 113},
     },
-    [PARTY_LAYOUT_MULTI_SHOWCASE] = 
+    [PARTY_LAYOUT_MULTI_SHOWCASE] =
     {
         {16, 32, 20, 42, 50, 44, 16, 26},
         {104, 34, 106, 44, 136, 43, 102, 41},
@@ -118,12 +118,12 @@ static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_
 // Text colors for BG, FG, and Shadow in that order
 static const u8 sFontColorTable[][3] =
 {
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_DARK_GREY},  // Default
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY},  // Default
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_GREEN},      // Unused
     {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_2,  TEXT_DYNAMIC_COLOR_3},  // Gender symbol
-    {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GREY,  TEXT_COLOR_LIGHT_GREY}, // Selection actions
+    {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY}, // Selection actions
     {TEXT_COLOR_WHITE,       TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_BLUE}, // Field moves
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GREY},  // Unused
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},  // Unused
 };
 
 static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
@@ -543,7 +543,7 @@ static const struct WindowTemplate sLevelUpStatsWindowTemplate =
     .baseBlock = 0x2E9,
 };
 
-static const struct WindowTemplate sUnusedWindowTemplate_08615978 =
+static const struct WindowTemplate sUnusedWindowTemplate1 =
 {
     .bg = 2,
     .tilemapLeft = 2,
@@ -554,7 +554,7 @@ static const struct WindowTemplate sUnusedWindowTemplate_08615978 =
     .baseBlock = 0x1DF,
 };
 
-static const struct WindowTemplate sUnusedWindowTemplate_08615980 =
+static const struct WindowTemplate sUnusedWindowTemplate2 =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -669,7 +669,7 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_DONT_HAVE]  = gText_DontHave,
 };
 
-static const u16 sUnused_08615B94[] =
+static const u16 sUnusedData[] =
 {
     0x0108, 0x0151, 0x0160, 0x015b, 0x002e, 0x005c, 0x0102, 0x0153, 0x014b, 0x00ed, 0x00f1, 0x010d, 0x003a, 0x003b, 0x003f, 0x0071,
     0x00b6, 0x00f0, 0x00ca, 0x00db, 0x00da, 0x004c, 0x00e7, 0x0055, 0x0057, 0x0059, 0x00d8, 0x005b, 0x005e, 0x00f7, 0x0118, 0x0068,
@@ -1171,14 +1171,14 @@ static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 // Mask for the partners party in a multi battle. TRUE if in the partners party, FALSE otherwise
 // The 7th slot is Cancel, and the 8th slot is unreachable
 // Used only to determine whether or not to show the Deoxys form icon sprite
-static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] = 
+static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
 {
-    FALSE, 
-    TRUE, 
-    FALSE, 
-    FALSE, 
-    TRUE, 
-    TRUE, 
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
     FALSE
 };
 
@@ -1194,62 +1194,62 @@ static const u8 *const sUnused_StatStrings[] =
 
 static const u16 sTMHMMoves[] =
 {
-    MOVE_FOCUS_PUNCH,
-    MOVE_DRAGON_CLAW,
-    MOVE_WATER_PULSE,
-    MOVE_CALM_MIND,
-    MOVE_ROAR,
-    MOVE_TOXIC,
-    MOVE_HAIL,
-    MOVE_BULK_UP,
-    MOVE_BULLET_SEED,
-    MOVE_HIDDEN_POWER,
-    MOVE_SUNNY_DAY,
-    MOVE_TAUNT,
-    MOVE_ICE_BEAM,
-    MOVE_BLIZZARD,
-    MOVE_HYPER_BEAM,
-    MOVE_LIGHT_SCREEN,
-    MOVE_PROTECT,
-    MOVE_RAIN_DANCE,
-    MOVE_GIGA_DRAIN,
-    MOVE_SAFEGUARD,
-    MOVE_FRUSTRATION,
-    MOVE_SOLAR_BEAM,
-    MOVE_IRON_TAIL,
-    MOVE_THUNDERBOLT,
-    MOVE_THUNDER,
-    MOVE_EARTHQUAKE,
-    MOVE_RETURN,
-    MOVE_DIG,
-    MOVE_PSYCHIC,
-    MOVE_SHADOW_BALL,
-    MOVE_BRICK_BREAK,
-    MOVE_DOUBLE_TEAM,
-    MOVE_REFLECT,
-    MOVE_SHOCK_WAVE,
-    MOVE_FLAMETHROWER,
-    MOVE_SLUDGE_BOMB,
-    MOVE_SANDSTORM,
-    MOVE_FIRE_BLAST,
-    MOVE_ROCK_TOMB,
-    MOVE_AERIAL_ACE,
-    MOVE_TORMENT,
-    MOVE_FACADE,
-    MOVE_SECRET_POWER,
-    MOVE_REST,
-    MOVE_ATTRACT,
-    MOVE_THIEF,
-    MOVE_STEEL_WING,
-    MOVE_SKILL_SWAP,
-    MOVE_SNATCH,
-    MOVE_OVERHEAT,
-    MOVE_CUT,
-    MOVE_FLY,
-    MOVE_SURF,
-    MOVE_STRENGTH,
-    MOVE_FLASH,
-    MOVE_ROCK_SMASH,
-    MOVE_WATERFALL,
-    MOVE_DIVE,
+    [ITEM_TM01 - ITEM_TM01] = MOVE_FOCUS_PUNCH,
+    [ITEM_TM02 - ITEM_TM01] = MOVE_DRAGON_CLAW,
+    [ITEM_TM03 - ITEM_TM01] = MOVE_WATER_PULSE,
+    [ITEM_TM04 - ITEM_TM01] = MOVE_CALM_MIND,
+    [ITEM_TM05 - ITEM_TM01] = MOVE_ROAR,
+    [ITEM_TM06 - ITEM_TM01] = MOVE_TOXIC,
+    [ITEM_TM07 - ITEM_TM01] = MOVE_HAIL,
+    [ITEM_TM08 - ITEM_TM01] = MOVE_BULK_UP,
+    [ITEM_TM09 - ITEM_TM01] = MOVE_BULLET_SEED,
+    [ITEM_TM10 - ITEM_TM01] = MOVE_HIDDEN_POWER,
+    [ITEM_TM11 - ITEM_TM01] = MOVE_SUNNY_DAY,
+    [ITEM_TM12 - ITEM_TM01] = MOVE_TAUNT,
+    [ITEM_TM13 - ITEM_TM01] = MOVE_ICE_BEAM,
+    [ITEM_TM14 - ITEM_TM01] = MOVE_BLIZZARD,
+    [ITEM_TM15 - ITEM_TM01] = MOVE_HYPER_BEAM,
+    [ITEM_TM16 - ITEM_TM01] = MOVE_LIGHT_SCREEN,
+    [ITEM_TM17 - ITEM_TM01] = MOVE_PROTECT,
+    [ITEM_TM18 - ITEM_TM01] = MOVE_RAIN_DANCE,
+    [ITEM_TM19 - ITEM_TM01] = MOVE_GIGA_DRAIN,
+    [ITEM_TM20 - ITEM_TM01] = MOVE_SAFEGUARD,
+    [ITEM_TM21 - ITEM_TM01] = MOVE_FRUSTRATION,
+    [ITEM_TM22 - ITEM_TM01] = MOVE_SOLAR_BEAM,
+    [ITEM_TM23 - ITEM_TM01] = MOVE_IRON_TAIL,
+    [ITEM_TM24 - ITEM_TM01] = MOVE_THUNDERBOLT,
+    [ITEM_TM25 - ITEM_TM01] = MOVE_THUNDER,
+    [ITEM_TM26 - ITEM_TM01] = MOVE_EARTHQUAKE,
+    [ITEM_TM27 - ITEM_TM01] = MOVE_RETURN,
+    [ITEM_TM28 - ITEM_TM01] = MOVE_DIG,
+    [ITEM_TM29 - ITEM_TM01] = MOVE_PSYCHIC,
+    [ITEM_TM30 - ITEM_TM01] = MOVE_SHADOW_BALL,
+    [ITEM_TM31 - ITEM_TM01] = MOVE_BRICK_BREAK,
+    [ITEM_TM32 - ITEM_TM01] = MOVE_DOUBLE_TEAM,
+    [ITEM_TM33 - ITEM_TM01] = MOVE_REFLECT,
+    [ITEM_TM34 - ITEM_TM01] = MOVE_SHOCK_WAVE,
+    [ITEM_TM35 - ITEM_TM01] = MOVE_FLAMETHROWER,
+    [ITEM_TM36 - ITEM_TM01] = MOVE_SLUDGE_BOMB,
+    [ITEM_TM37 - ITEM_TM01] = MOVE_SANDSTORM,
+    [ITEM_TM38 - ITEM_TM01] = MOVE_FIRE_BLAST,
+    [ITEM_TM39 - ITEM_TM01] = MOVE_ROCK_TOMB,
+    [ITEM_TM40 - ITEM_TM01] = MOVE_AERIAL_ACE,
+    [ITEM_TM41 - ITEM_TM01] = MOVE_TORMENT,
+    [ITEM_TM42 - ITEM_TM01] = MOVE_FACADE,
+    [ITEM_TM43 - ITEM_TM01] = MOVE_SECRET_POWER,
+    [ITEM_TM44 - ITEM_TM01] = MOVE_REST,
+    [ITEM_TM45 - ITEM_TM01] = MOVE_ATTRACT,
+    [ITEM_TM46 - ITEM_TM01] = MOVE_THIEF,
+    [ITEM_TM47 - ITEM_TM01] = MOVE_STEEL_WING,
+    [ITEM_TM48 - ITEM_TM01] = MOVE_SKILL_SWAP,
+    [ITEM_TM49 - ITEM_TM01] = MOVE_SNATCH,
+    [ITEM_TM50 - ITEM_TM01] = MOVE_OVERHEAT,
+    [ITEM_HM01 - ITEM_TM01] = MOVE_CUT,
+    [ITEM_HM02 - ITEM_TM01] = MOVE_FLY,
+    [ITEM_HM03 - ITEM_TM01] = MOVE_SURF,
+    [ITEM_HM04 - ITEM_TM01] = MOVE_STRENGTH,
+    [ITEM_HM05 - ITEM_TM01] = MOVE_FLASH,
+    [ITEM_HM06 - ITEM_TM01] = MOVE_ROCK_SMASH,
+    [ITEM_HM07 - ITEM_TM01] = MOVE_WATERFALL,
+    [ITEM_HM08 - ITEM_TM01] = MOVE_DIVE,
 };

@@ -100,12 +100,12 @@ struct CgbChannel
     u8 le;
     u8 sw;
     u32 fr;
-    u32 *wp;
-    u32 *cp;
-    void *tp;
-    void *pp;
-    void *np;
-    u32 d4[2];
+    u32 wp;
+    u32 cp;
+    u32 tp;
+    u32 pp;
+    u32 np;
+    u8 d4[8];
 };
 
 struct MusicPlayerTrack;
@@ -138,10 +138,10 @@ struct SoundChannel
     u32 fw;
     u32 freq;
     struct WaveData *wav;
-    s8 *cp;
+    u32 cp;
     struct MusicPlayerTrack *track;
-    void *pp;
-    void *np;
+    u32 pp;
+    u32 np;
     u32 d4;
     u16 xpi;
     u16 xpc;
@@ -172,11 +172,11 @@ struct SoundInfo
     u8 pcmDmaPeriod; // number of V-blanks per PCM DMA
     u8 maxLines;
     u8 gap[3];
-    u32 pcmSamplesPerVBlank;
-    u32 pcmFreq;
-    u32 divFreq;
+    s32 pcmSamplesPerVBlank;
+    s32 pcmFreq;
+    s32 divFreq;
     struct CgbChannel *cgbChans;
-    void (*func)();
+    u32 func;
     u32 intp;
     void (*CgbSound)(void);
     void (*CgbOscOff)(u8);
@@ -184,7 +184,7 @@ struct SoundInfo
     u32 MPlayJumpTable;
     u32 plynote;
     u32 ExtVolPit;
-    u32 gap2[4];
+    u8 gap2[16];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
     s8 pcmBuffer[PCM_DMA_BUF_SIZE * 2];
 };
@@ -248,7 +248,7 @@ struct MusicPlayerTrack
     u8 key;
     u8 velocity;
     u8 runningStatus;
-    s8 keyM;
+    u8 keyM;
     u8 pitM;
     s8 keyShift;
     s8 keyShiftX;
@@ -312,7 +312,7 @@ struct MusicPlayerInfo
     struct MusicPlayerTrack *tracks;
     struct ToneData *tone;
     u32 ident;
-    void (*func)();
+    u32 func;
     u32 intp;
 };
 
@@ -419,7 +419,7 @@ void SetPokemonCryPitch(s16 val);
 void SetPokemonCryLength(u16 val);
 void SetPokemonCryRelease(u8 val);
 void SetPokemonCryProgress(u32 val);
-int IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo);
+bool32 IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo);
 void SetPokemonCryChorus(s8 val);
 void SetPokemonCryStereo(u32 val);
 void SetPokemonCryPriority(u8 val);
@@ -447,7 +447,7 @@ void ply_tune(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_port(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_endtie(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_note(u8, struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_note(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 
 // extended sound command handler functions
 void ply_xxx(struct MusicPlayerInfo *, struct MusicPlayerTrack *);

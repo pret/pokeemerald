@@ -1,10 +1,5 @@
 # Pokémon Emerald
 
-[![Build Status][travis-badge]][travis]
-
-[travis]: https://travis-ci.org/pret/pokeemerald
-[travis-badge]: https://travis-ci.org/pret/pokeemerald.svg?branch=master
-
 This is a decompilation of Pokémon Emerald.
 
 It builds the following ROM:
@@ -33,4 +28,4 @@ Other disassembly and/or decompilation projects:
 
 ## Contacts
 
-You can find us on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://kiwiirc.com/client/irc.freenode.net/?#pret).
+You can find us on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://web.libera.chat/?#pret).

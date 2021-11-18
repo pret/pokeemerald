@@ -124,7 +124,7 @@
 #define STRINGID_PKMNSTORINGENERGY          120
 #define STRINGID_PKMNUNLEASHEDENERGY        121
 #define STRINGID_PKMNFATIGUECONFUSION       122
-#define STRINGID_PKMNPICKEDUPITEM           123
+#define STRINGID_PLAYERPICKEDUPMONEY        123
 #define STRINGID_PKMNUNAFFECTED             124
 #define STRINGID_PKMNTRANSFORMEDINTO        125
 #define STRINGID_PKMNMADESUBSTITUTE         126
@@ -214,10 +214,10 @@
 #define STRINGID_STATROSE                   210
 #define STRINGID_STATHARSHLY                211
 #define STRINGID_STATFELL                   212
-#define STRINGID_PKMNSSTATCHANGED           213
-#define STRINGID_PKMNSSTATCHANGED2          214
-#define STRINGID_PKMNSSTATCHANGED3          215
-#define STRINGID_PKMNSSTATCHANGED4          216
+#define STRINGID_ATTACKERSSTATROSE          213
+#define STRINGID_DEFENDERSSTATROSE          214
+#define STRINGID_ATTACKERSSTATFELL          215
+#define STRINGID_DEFENDERSSTATFELL          216
 #define STRINGID_CRITICALHIT                217
 #define STRINGID_ONEHITKO                   218
 #define STRINGID_123POOF                    219
@@ -326,7 +326,7 @@
 #define STRINGID_SOOTHINGAROMA              322
 #define STRINGID_ITEMSCANTBEUSEDNOW         323
 #define STRINGID_FORXCOMMAYZ                324
-#define STRINGID_USINGXTHEYOFZN             325
+#define STRINGID_USINGITEMSTATOFPKMNROSE    325
 #define STRINGID_PKMNUSEDXTOGETPUMPED       326
 #define STRINGID_PKMNSXMADEYUSELESS         327
 #define STRINGID_PKMNTRAPPEDBYSANDTOMB      328
@@ -382,5 +382,219 @@
 #define STRINGID_PKMNBOXLANETTESPCFULL      378
 #define STRINGID_TRAINER1WINTEXT            379
 #define STRINGID_TRAINER2WINTEXT            380
+
+
+// The below IDs are all indexes into battle message tables,
+// used to determine which of a set of messages to print.
+// They are assigned to the MULTISTRING_CHOOSER byte of gBattleCommunication
+// and read when e.g. the command printfromtable is used.
+
+// gStatUpStringIds
+#define B_MSG_ATTACKER_STAT_ROSE 0
+#define B_MSG_DEFENDER_STAT_ROSE 1
+#define B_MSG_STAT_WONT_INCREASE 2
+#define B_MSG_STAT_ROSE_EMPTY    3
+#define B_MSG_STAT_ROSE_ITEM     4
+#define B_MSG_USED_DIRE_HIT      5
+
+// gStatDownStringIds
+#define B_MSG_ATTACKER_STAT_FELL 0
+#define B_MSG_DEFENDER_STAT_FELL 1
+#define B_MSG_STAT_WONT_DECREASE 2
+#define B_MSG_STAT_FELL_EMPTY    3
+
+// gMissStringIds
+#define B_MSG_MISSED       0
+#define B_MSG_PROTECTED    1
+#define B_MSG_AVOIDED_ATK  2
+#define B_MSG_AVOIDED_DMG  3
+#define B_MSG_GROUND_MISS  4
+
+// gAbsorbDrainStringIds
+#define B_MSG_ABSORB      0
+#define B_MSG_ABSORB_OOZE 1
+
+// gLeechSeedStringIds
+#define B_MSG_LEECH_SEED_SET   0
+#define B_MSG_LEECH_SEED_MISS  1
+#define B_MSG_LEECH_SEED_FAIL  2
+#define B_MSG_LEECH_SEED_DRAIN 3
+#define B_MSG_LEECH_SEED_OOZE  4
+
+// gFirstTurnOfTwoStringIds
+#define B_MSG_TURN1_RAZOR_WIND  0
+#define B_MSG_TURN1_SOLAR_BEAM  1
+#define B_MSG_TURN1_SKULL_BASH  2
+#define B_MSG_TURN1_SKY_ATTACK  3
+#define B_MSG_TURN1_FLY         4
+#define B_MSG_TURN1_DIG         5
+#define B_MSG_TURN1_DIVE        6
+#define B_MSG_TURN1_BOUNCE      7
+
+// gMoveWeatherChangeStringIds
+#define B_MSG_STARTED_RAIN      0
+#define B_MSG_STARTED_DOWNPOUR  1
+#define B_MSG_WEATHER_FAILED    2
+#define B_MSG_STARTED_SANDSTORM 3
+#define B_MSG_STARTED_SUNLIGHT  4
+#define B_MSG_STARTED_HAIL      5
+
+// gRainContinuesStringIds
+#define B_MSG_RAIN_CONTINUES     0
+#define B_MSG_DOWNPOUR_CONTINUES 1
+#define B_MSG_RAIN_STOPPED       2
+
+// gSandStormHailContinuesStringIds / gSandStormHailDmgStringIds/ gSandStormHailEndStringIds
+#define B_MSG_SANDSTORM  0
+#define B_MSG_HAIL       1
+
+// gReflectLightScreenSafeguardStringIds
+#define B_MSG_SIDE_STATUS_FAILED     0
+#define B_MSG_SET_REFLECT_SINGLE     1
+#define B_MSG_SET_REFLECT_DOUBLE     2
+#define B_MSG_SET_LIGHTSCREEN_SINGLE 3
+#define B_MSG_SET_LIGHTSCREEN_DOUBLE 4
+#define B_MSG_SET_SAFEGUARD          5
+
+// gProtectLikeUsedStringIds
+#define B_MSG_PROTECTED_ITSELF 0
+#define B_MSG_BRACED_ITSELF    1
+#define B_MSG_PROTECT_FAILED   2
+
+// gRestUsedStringIds
+#define B_MSG_REST           0
+#define B_MSG_REST_STATUSED  1
+
+// gWokeUpStringIds
+#define B_MSG_WOKE_UP        0
+#define B_MSG_WOKE_UP_UPROAR 1
+
+// gUproarAwakeStringIds
+#define B_MSG_CANT_SLEEP_UPROAR  0
+#define B_MSG_UPROAR_KEPT_AWAKE  1
+#define B_MSG_STAYED_AWAKE_USING 2
+
+// gUproarOverTurnStringIds
+#define B_MSG_UPROAR_CONTINUES  0
+#define B_MSG_UPROAR_ENDS       1
+
+// gStockpileUsedStringIds
+#define B_MSG_STOCKPILED     0
+#define B_MSG_CANT_STOCKPILE 1
+
+// gSwallowFailStringIds
+#define B_MSG_SWALLOW_FAILED  0
+#define B_MSG_SWALLOW_FULL_HP 1
+
+// gKOFailedStringIds
+#define B_MSG_KO_MISS       0
+#define B_MSG_KO_UNAFFECTED 1
+
+// gMistUsedStringIds
+#define B_MSG_SET_MIST    0
+#define B_MSG_MIST_FAILED 1
+
+// gFocusEnergyUsedStringIds
+#define B_MSG_GETTING_PUMPED      0
+#define B_MSG_FOCUS_ENERGY_FAILED 1
+
+// gTransformUsedStringIds
+#define B_MSG_TRANSFORMED      0
+#define B_MSG_TRANSFORM_FAILED 1
+
+// gSubstituteUsedStringIds
+#define B_MSG_SET_SUBSTITUTE    0
+#define B_MSG_SUBSTITUTE_FAILED 1
+
+// gPartyStatusHealStringIds
+#define B_MSG_BELL                     0
+#define B_MSG_BELL_SOUNDPROOF_ATTACKER 1
+#define B_MSG_BELL_SOUNDPROOF_PARTNER  2
+#define B_MSG_BELL_BOTH_SOUNDPROOF     3
+#define B_MSG_SOOTHING_AROMA           4
+
+// gFutureMoveUsedStringIds
+#define B_MSG_FUTURE_SIGHT 0
+#define B_MSG_DOOM_DESIRE  1
+
+// gItemSwapStringIds
+#define B_MSG_ITEM_SWAP_TAKEN 0
+#define B_MSG_ITEM_SWAP_GIVEN 1
+#define B_MSG_ITEM_SWAP_BOTH  2
+
+// gSportsUsedStringIds
+#define B_MSG_WEAKEN_ELECTRIC 0
+#define B_MSG_WEAKEN_FIRE     1
+
+// gCaughtMonStringIds
+#define B_MSG_SENT_SOMEONES_PC  0
+#define B_MSG_SENT_LANETTES_PC  1
+#define B_MSG_SOMEONES_BOX_FULL 2
+#define B_MSG_LANETTES_BOX_FULL 3
+
+// gInobedientStringIds
+#define B_MSG_LOAFING            0
+#define B_MSG_WONT_OBEY          1
+#define B_MSG_TURNED_AWAY        2
+#define B_MSG_PRETEND_NOT_NOTICE 3
+#define B_MSG_INCAPABLE_OF_POWER 4
+// For randomly selecting a disobey string
+// Skips the one used for Battle Palace
+#define NUM_LOAF_STRINGS 4
+
+// gSafariGetNearStringIds
+#define B_MSG_CREPT_CLOSER    0
+#define B_MSG_CANT_GET_CLOSER 1
+
+// gSafariPokeblockResultStringIds
+#define B_MSG_MON_CURIOUS    0
+#define B_MSG_MON_ENTHRALLED 1
+#define B_MSG_MON_IGNORED    2
+
+// gFlashFireStringIds
+#define B_MSG_FLASH_FIRE_BOOST    0
+#define B_MSG_FLASH_FIRE_NO_BOOST 1
+
+// gBerryEffectStringIds
+#define B_MSG_CURED_PROBLEM     0
+#define B_MSG_NORMALIZED_STATUS 1
+
+// gNoEscapeStringIds
+#define B_MSG_CANT_ESCAPE          0
+#define B_MSG_DONT_LEAVE_BIRCH     1
+#define B_MSG_PREVENTS_ESCAPE      2
+#define B_MSG_CANT_ESCAPE_2        3
+#define B_MSG_ATTACKER_CANT_ESCAPE 4
+
+// gGotPoisonedStringIds / gGotParalyzedStringIds / gFellAsleepStringIds
+// gGotBurnedStringIds / gGotFrozenStringIds / gAttractUsedStringIds
+#define B_MSG_STATUSED            0
+#define B_MSG_STATUSED_BY_ABILITY 1
+
+// gBRNPreventionStringIds / gPRLZPreventionStringIds / gPSNPreventionStringIds
+#define B_MSG_ABILITY_PREVENTS_MOVE_STATUS    0
+#define B_MSG_ABILITY_PREVENTS_ABILITY_STATUS 1
+#define B_MSG_STATUS_HAD_NO_EFFECT            2
+
+// gGotDefrostedStringIds
+#define B_MSG_DEFROSTED         0
+#define B_MSG_DEFROSTED_BY_MOVE 1
+
+// gBattlePalaceFlavorTextTable
+#define B_MSG_GLINT_IN_EYE   0
+#define B_MSG_GETTING_IN_POS 1
+#define B_MSG_GROWL_DEEPLY   2
+#define B_MSG_EAGER_FOR_MORE 3
+
+// gRefereeStringsTable
+#define B_MSG_REF_NOTHING_IS_DECIDED 0
+#define B_MSG_REF_THATS_IT           1
+#define B_MSG_REF_JUDGE_MIND         2
+#define B_MSG_REF_JUDGE_SKILL        3
+#define B_MSG_REF_JUDGE_BODY         4
+#define B_MSG_REF_PLAYER_WON         5
+#define B_MSG_REF_OPPONENT_WON       6
+#define B_MSG_REF_DRAW               7
+#define B_MSG_REF_COMMENCE_BATTLE    8
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

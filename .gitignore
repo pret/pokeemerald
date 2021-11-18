@@ -33,4 +33,6 @@ porymap.project.cfg
 .vscode/
 *.a
 .fuse_hidden*
-mgba.sh
+*.sna
+*.diff
+*.sym

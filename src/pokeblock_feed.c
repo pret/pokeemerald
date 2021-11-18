@@ -26,208 +26,279 @@
 #include "util.h"
 #include "constants/rgb.h"
 
-struct PokeblockFeedStruct
+enum {
+    ANIMDATA_ROT_IDX,
+    ANIMDATA_ROT_SPEED,
+    ANIMDATA_SIN_AMPLITUDE,
+    ANIMDATA_COS_AMPLITUDE,
+    ANIMDATA_TIME,
+    ANIMDATA_ROT_ACCEL,
+    ANIMDATA_TARGET_X,
+    ANIMDATA_TARGET_Y,
+    ANIMDATA_APPR_TIME,
+    ANIMDATA_IS_LAST,
+    NUM_ANIMDATA
+};
+
+enum {
+    AFFINE_NONE,
+    AFFINE_TURN_UP,
+    AFFINE_TURN_UP_AND_DOWN,
+    AFFINE_TURN_DOWN,
+    AFFINE_TURN_DOWN_SLOW,
+    AFFINE_TURN_DOWN_SLIGHT,
+    AFFINE_TURN_UP_HIGH,
+    AFFINE_UNUSED_1,
+    AFFINE_UNUSED_2,
+    AFFINE_UNUSED_3,
+    NUM_MON_AFFINES,
+};
+
+#define MON_X 48
+#define MON_Y 80
+
+// The animation the Pokémon does during the feeding scene depends on their nature.
+// The below values are offsets into sMonPokeblockAnims of the animation data for that nature.
+#define ANIM_HARDY   0
+#define ANIM_LONELY  (ANIM_HARDY + 3)
+#define ANIM_BRAVE   (ANIM_LONELY + 1)
+#define ANIM_ADAMANT (ANIM_BRAVE + 1)
+#define ANIM_NAUGHTY (ANIM_ADAMANT + 5)
+#define ANIM_BOLD    (ANIM_NAUGHTY + 3)
+#define ANIM_DOCILE  (ANIM_BOLD + 2)
+#define ANIM_RELAXED (ANIM_DOCILE + 1)
+#define ANIM_IMPISH  (ANIM_RELAXED + 2)
+#define ANIM_LAX     (ANIM_IMPISH + 1)
+#define ANIM_TIMID   (ANIM_LAX + 1)
+#define ANIM_HASTY   (ANIM_TIMID + 5)
+#define ANIM_SERIOUS (ANIM_HASTY + 2)
+#define ANIM_JOLLY   (ANIM_SERIOUS + 1)
+#define ANIM_NAIVE   (ANIM_JOLLY + 1)
+#define ANIM_MODEST  (ANIM_NAIVE + 4)
+#define ANIM_MILD    (ANIM_MODEST + 3)
+#define ANIM_QUIET   (ANIM_MILD + 1)
+#define ANIM_BASHFUL (ANIM_QUIET + 2)
+#define ANIM_RASH    (ANIM_BASHFUL + 3)
+#define ANIM_CALM    (ANIM_RASH + 3)
+#define ANIM_GENTLE  (ANIM_CALM + 1)
+#define ANIM_SASSY   (ANIM_GENTLE + 1)
+#define ANIM_CAREFUL (ANIM_SASSY + 1)
+#define ANIM_QUIRKY  (ANIM_CAREFUL + 5)
+
+struct PokeblockFeed
 {
     struct Sprite *monSpritePtr;
     struct Sprite savedMonSprite;
-    u8 tilemapBuffer[0x808];
-    s16 field_850[0x200];
-    s16 field_C50[0x200];
-    u8 field_1050;
+    u8 tilemapBuffer[BG_SCREEN_SIZE];
+    u8 unused1[8];
+    s16 monAnimX[0x200];
+    s16 monAnimY[0x200];
+    u8 animRunState;
     u8 animId;
-    u8 field_1052;
+    u8 unused2;
     bool8 noMonFlip;
     u16 species;
-    u16 field_1056;
-    u16 field_1058;
+    u16 monAnimLength;
+    u16 timer;
     u8 nature;
-    u8 monSpriteId_;
-    u8 field_105C;
+    u8 monSpriteId_; // Duplicated unnecessarily
+    u8 unused3;
     u8 monSpriteId;
     u8 pokeblockCaseSpriteId;
     u8 pokeblockSpriteId;
-    s16 field_1060[15];
+    s16 animData[NUM_ANIMDATA];
+    s16 monInitX;
+    s16 monInitY;
+    s16 maxAnimStageTime;
+    s16 monX;
+    s16 monY;
     s16 loadGfxState;
-    u8 unused;
+    u8 unused4;
 };
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
-extern const u16 gUnknown_0860F074[];
-
-// this file's functions
 static void HandleInitBackgrounds(void);
 static void HandleInitWindows(void);
 static void LaunchPokeblockFeedTask(void);
-static void SetPokeblockSpritePal(u8 pokeblockCaseId);
-static void sub_817A5CC(void);
-static void sub_8148108(u8 spriteId, bool8 a1);
-static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 arg1);
-static void PrepareMonToMoveToPokeblock(u8 spriteId);
-static void Task_HandleMonAtePokeblock(u8 taskId);
-static void Task_PaletteFadeToReturn(u8 taskId);
-static void sub_817A634(void);
-static void sub_817A468(struct Sprite *sprite);
-static void sub_817AB68(void);
-static void sub_817AA54(void);
-static bool8 sub_817A91C(void);
+static void SetPokeblockSpritePal(u8);
+static void CalculateMonAnimLength(void);
+static void DoPokeblockCaseThrowEffect(u8, bool8);
+static void StartMonJumpForPokeblock(u8);
+static void Task_PrintAtePokeblockMessage(u8);
+static void Task_FadeOutPokeblockFeed(u8);
+static void UpdateMonAnim(void);
+static void SpriteCB_MonJumpForPokeblock(struct Sprite *);
+static void CalculateMonAnimMovement(void);
+static void CalculateMonAnimMovementEnd(void);
+static bool8 InitMonAnimStage(void);
 static bool8 FreeMonSpriteOamMatrix(void);
-static bool8 sub_817A9E4(void);
-static bool8 LoadMonAndSceneGfx(struct Pokemon *mon);
+static bool8 DoMonAnimStep(void);
+static bool8 LoadMonAndSceneGfx(struct Pokemon *);
 static u8 CreatePokeblockSprite(void);
 static u8 CreatePokeblockCaseSpriteForFeeding(void);
-static u8 CreateMonSprite(struct Pokemon *mon);
-static void SpriteCB_ThrownPokeblock(struct Sprite* sprite);
+static u8 CreateMonSprite(struct Pokemon *);
+static void SpriteCB_ThrownPokeblock(struct Sprite *);
 
-// ram variables
-EWRAM_DATA static struct PokeblockFeedStruct *sPokeblockFeed = NULL;
+EWRAM_DATA static struct PokeblockFeed *sPokeblockFeed = NULL;
 EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
 
-// const rom data
 static const u8 sNatureToMonPokeblockAnim[NUM_NATURES][2] =
 {
-    [NATURE_HARDY] = {  0, 0 },
-    [NATURE_LONELY] = {  3, 0 },
-    [NATURE_BRAVE] = {  4, 1 },
-    [NATURE_ADAMANT] = {  5, 0 },
-    [NATURE_NAUGHTY] = { 10, 0 },
-    [NATURE_BOLD] = { 13, 0 },
-    [NATURE_DOCILE] = { 15, 0 },
-    [NATURE_RELAXED] = { 16, 2 },
-    [NATURE_IMPISH] = { 18, 0 },
-    [NATURE_LAX] = { 19, 0 },
-    [NATURE_TIMID] = { 20, 0 },
-    [NATURE_HASTY] = { 25, 0 },
-    [NATURE_SERIOUS] = { 27, 3 },
-    [NATURE_JOLLY] = { 28, 0 },
-    [NATURE_NAIVE] = { 29, 0 },
-    [NATURE_MODEST] = { 33, 4 },
-    [NATURE_MILD] = { 36, 0 },
-    [NATURE_QUIET] = { 37, 0 },
-    [NATURE_BASHFUL] = { 39, 0 },
-    [NATURE_RASH] = { 42, 0 },
-    [NATURE_CALM] = { 45, 0 },
-    [NATURE_GENTLE] = { 46, 5 },
-    [NATURE_SASSY] = { 47, 6 },
-    [NATURE_CAREFUL] = { 48, 0 },
-    [NATURE_QUIRKY] = { 53, 0 },
+    [NATURE_HARDY]   = { ANIM_HARDY,   AFFINE_NONE },
+    [NATURE_LONELY]  = { ANIM_LONELY,  AFFINE_NONE },
+    [NATURE_BRAVE]   = { ANIM_BRAVE,   AFFINE_TURN_UP },
+    [NATURE_ADAMANT] = { ANIM_ADAMANT, AFFINE_NONE },
+    [NATURE_NAUGHTY] = { ANIM_NAUGHTY, AFFINE_NONE },
+    [NATURE_BOLD]    = { ANIM_BOLD,    AFFINE_NONE },
+    [NATURE_DOCILE]  = { ANIM_DOCILE,  AFFINE_NONE },
+    [NATURE_RELAXED] = { ANIM_RELAXED, AFFINE_TURN_UP_AND_DOWN },
+    [NATURE_IMPISH]  = { ANIM_IMPISH,  AFFINE_NONE },
+    [NATURE_LAX]     = { ANIM_LAX,     AFFINE_NONE },
+    [NATURE_TIMID]   = { ANIM_TIMID,   AFFINE_NONE },
+    [NATURE_HASTY]   = { ANIM_HASTY,   AFFINE_NONE },
+    [NATURE_SERIOUS] = { ANIM_SERIOUS, AFFINE_TURN_DOWN },
+    [NATURE_JOLLY]   = { ANIM_JOLLY,   AFFINE_NONE },
+    [NATURE_NAIVE]   = { ANIM_NAIVE,   AFFINE_NONE },
+    [NATURE_MODEST]  = { ANIM_MODEST,  AFFINE_TURN_DOWN_SLOW },
+    [NATURE_MILD]    = { ANIM_MILD,    AFFINE_NONE },
+    [NATURE_QUIET]   = { ANIM_QUIET,   AFFINE_NONE },
+    [NATURE_BASHFUL] = { ANIM_BASHFUL, AFFINE_NONE },
+    [NATURE_RASH]    = { ANIM_RASH,    AFFINE_NONE },
+    [NATURE_CALM]    = { ANIM_CALM,    AFFINE_NONE },
+    [NATURE_GENTLE]  = { ANIM_GENTLE,  AFFINE_TURN_DOWN_SLIGHT },
+    [NATURE_SASSY]   = { ANIM_SASSY,   AFFINE_TURN_UP_HIGH },
+    [NATURE_CAREFUL] = { ANIM_CAREFUL, AFFINE_NONE },
+    [NATURE_QUIRKY]  = { ANIM_QUIRKY,  AFFINE_NONE },
 };
 
-static const s16 sMonPokeblockAnims[][10] =
+// Data for the animation the Pokémon does while readying to jump for the Pokéblock
+// Each nature can have up to 8 anim 'stages' it progresses through, and each stage has its own array of data.
+// The elements in each array correspond in order to the following:
+// - ANIMDATA_ROT_IDX      : Index into sin/cos table for circular movement
+// - ANIMDATA_ROT_SPEED    : Circular movement speed
+// - ANIMDATA_SIN_AMPLITUDE: How far on the x to move
+// - ANIMDATA_COS_AMPLITUDE: How far on the y to move
+// - ANIMDATA_TIME         : How long in frames this part of the animation takes
+// - ANIMDATA_ROT_ACCEL    : How much to increase circular movement speed
+// - ANIMDATA_TARGET_X     : Target x coord offset from start position
+// - ANIMDATA_TARGET_Y     : Target y coord offset from start position
+// - ANIMDATA_APPR_TIME    : The time over which the target position should be approached
+// - ANIMDATA_IS_LAST      : TRUE if it's the last anim stage for this nature, FALSE otherwise
+//
+static const s16 sMonPokeblockAnims[][NUM_ANIMDATA] =
 {
-    // HARDY
-    {   0,   4,   0,   8,  24,   0,   0,   0,  12,   0},
-    {   0,   4,   0,  16,  24,   0,   0,   0,  12,   0},
-    {   0,   4,   0,  32,  32,   0,   0,   0,  16,   1},
+    [ANIM_HARDY] =
+    {   0,   4,   0,   8,  24,   0,   0,   0,  12,   FALSE},
+    {   0,   4,   0,  16,  24,   0,   0,   0,  12,   FALSE},
+    {   0,   4,   0,  32,  32,   0,   0,   0,  16,   TRUE},
 
-    // LONELY
-    {   0,   3,   6,   0,  48,   0,   0,   0,  24,   1},
+    [ANIM_LONELY] =
+    {   0,   3,   6,   0,  48,   0,   0,   0,  24,   TRUE},
 
-    // BRAVE
-    {  64,  16, -24,   0,  32,   0,   0,   0,   0,   1},
+    [ANIM_BRAVE] =
+    {  64,  16, -24,   0,  32,   0,   0,   0,   0,   TRUE},
 
-    // ADAMANT
-    {   0,   4,   8,   0,  16,   0,  -8,   0,   0,   0},
-    {   0,   0,   0,   0,  16,   0,   0,   0,   0,   0},
-    {   0,   4,   8,   0,  16,   0,  -8,   0,   0,   0},
-    {   0,   0,   0,   0,  16,   0,   0,   0,   0,   0},
-    {   0,   4, -16,   0,   4,   0,  16,   0,   0,   1},
+    [ANIM_ADAMANT] =
+    {   0,   4,   8,   0,  16,   0,  -8,   0,   0,   FALSE},
+    {   0,   0,   0,   0,  16,   0,   0,   0,   0,   FALSE},
+    {   0,   4,   8,   0,  16,   0,  -8,   0,   0,   FALSE},
+    {   0,   0,   0,   0,  16,   0,   0,   0,   0,   FALSE},
+    {   0,   4, -16,   0,   4,   0,  16,   0,   0,   TRUE},
 
-    // NAUGHTY
-    {   0,   3,   6,   0,  12,   0,   0,   0,   6,   0},
-    {   0,   3,  -6,   0,  12,   0,   0,   0,   6,   0},
-    {   0,  16,  16,   0,  45,   1,   0,   0,   0,   1},
+    [ANIM_NAUGHTY] =
+    {   0,   3,   6,   0,  12,   0,   0,   0,   6,   FALSE},
+    {   0,   3,  -6,   0,  12,   0,   0,   0,   6,   FALSE},
+    {   0,  16,  16,   0,  45,   1,   0,   0,   0,   TRUE},
 
-    // BOLD
-    {   0,  16,   0,  24,  32,   0,   0,   0,  16,   0},
-    {   0,  16,   0,  23,  32,   0,   0,   0,  16,   1},
+    [ANIM_BOLD] =
+    {   0,  16,   0,  24,  32,   0,   0,   0,  16,   FALSE},
+    {   0,  16,   0,  23,  32,   0,   0,   0,  16,   TRUE},
 
-    // DOCILE
-    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   1},
+    [ANIM_DOCILE] =
+    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   TRUE},
 
-    // RELAXED
-    {   0,   2,   8,   0,  32,   0,   0,   0,   0,   0},
-    {   0,   2,  -8,   0,  32,   0,   0,   0,   0,   1},
+    [ANIM_RELAXED] =
+    {   0,   2,   8,   0,  32,   0,   0,   0,   0,   FALSE},
+    {   0,   2,  -8,   0,  32,   0,   0,   0,   0,   TRUE},
 
-    // IMPISH
-    {   0,  32,   2,   1,  48,   1,   0,   0,  24,   1},
+    [ANIM_IMPISH] =
+    {   0,  32,   2,   1,  48,   1,   0,   0,  24,   TRUE},
 
-    // LAX
-    {   0,   2,  16,  16, 128,   0,   0,   0,   0,   1},
+    [ANIM_LAX] =
+    {   0,   2,  16,  16, 128,   0,   0,   0,   0,   TRUE},
 
-    // TIMID
-    {   0,   2,  -8,   0,  48,   0, -24,   0,   0,   0},
-    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
-    {  64,  32,   2,   0,  36,   0,   0,   0,   0,   0},
-    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
-    {   0,   2,   8,   0,  48,   0,  24,   0,   0,   1},
+    [ANIM_TIMID] =
+    {   0,   2,  -8,   0,  48,   0, -24,   0,   0,   FALSE},
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   FALSE},
+    {  64,  32,   2,   0,  36,   0,   0,   0,   0,   FALSE},
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   FALSE},
+    {   0,   2,   8,   0,  48,   0,  24,   0,   0,   TRUE},
 
-    // HASTY
-    {  64,  24,  16,   0,  32,   0,   0,   0,   0,   0},
-    {   0,  28,   2,   1,  32,   1,   0,   0,  16,   1},
+    [ANIM_HASTY] =
+    {  64,  24,  16,   0,  32,   0,   0,   0,   0,   FALSE},
+    {   0,  28,   2,   1,  32,   1,   0,   0,  16,   TRUE},
 
-    // SERIOUS
-    {   0,   0,   0,   0,  32,   0,   0,   0,   0,   1},
+    [ANIM_SERIOUS] =
+    {   0,   0,   0,   0,  32,   0,   0,   0,   0,   TRUE},
 
-    // JOLLY
-    {  64,  16, -16,   2,  48,   0,   0,   0,  32,   1},
+    [ANIM_JOLLY] =
+    {  64,  16, -16,   2,  48,   0,   0,   0,  32,   TRUE},
 
-    // NAIVE
-    {   0,  12,  -8,   4,  24,   0,   8,   0,  12,   0},
-    {   0,  12,   8,   8,  24,   0, -16,   0,  12,   0},
-    {   0,  12,  -8,  16,  24,   0,  16,   0,  12,   0},
-    {   0,  12,   8,  28,  24,   0,  -8,   0,  12,   1},
+    [ANIM_NAIVE] =
+    {   0,  12,  -8,   4,  24,   0,   8,   0,  12,   FALSE},
+    {   0,  12,   8,   8,  24,   0, -16,   0,  12,   FALSE},
+    {   0,  12,  -8,  16,  24,   0,  16,   0,  12,   FALSE},
+    {   0,  12,   8,  28,  24,   0,  -8,   0,  12,   TRUE},
 
-    // MODEST
-    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
-    {  64,  16,  -4,   0,  32,   0,   0,   0,   0,   0},
-    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   1},
+    [ANIM_MODEST] =
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   FALSE},
+    {  64,  16,  -4,   0,  32,   0,   0,   0,   0,   FALSE},
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   TRUE},
 
-    // MILD
-    { 128,   4,   0,   8,  64,   0,   0,   0,   0,   1},
+    [ANIM_MILD] =
+    { 128,   4,   0,   8,  64,   0,   0,   0,   0,   TRUE},
 
-    // QUIET
-    {   0,   2,  16,   0,  48,   0,   0,   0,   0,   0},
-    { 128,   2,  16,   0,  48,   0,   0,   0,   0,   1},
+    [ANIM_QUIET] =
+    {   0,   2,  16,   0,  48,   0,   0,   0,   0,   FALSE},
+    { 128,   2,  16,   0,  48,   0,   0,   0,   0,   TRUE},
 
-    // BASHFUL
-    {   0,   2,  -4,   0,  48,   0, -48,   0,   0,   0},
-    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   0},
-    {   0,   2,   8,   0,  24,   0,  48,   0,   0,   1},
+    [ANIM_BASHFUL] =
+    {   0,   2,  -4,   0,  48,   0, -48,   0,   0,   FALSE},
+    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   FALSE},
+    {   0,   2,   8,   0,  24,   0,  48,   0,   0,   TRUE},
 
-    // RASH
-    {  64,   4,  64,  58,  52,   0, -88,   0,   0,   0},
-    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   0},
-    {   0,  24,  80,   0,  32,   0,  88,   0,   0,   1},
+    [ANIM_RASH] =
+    {  64,   4,  64,  58,  52,   0, -88,   0,   0,   FALSE},
+    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   FALSE},
+    {   0,  24,  80,   0,  32,   0,  88,   0,   0,   TRUE},
 
-    // CALM
-    {   0,   2,  16,   4,  64,   0,   0,   0,   0,   1},
+    [ANIM_CALM] =
+    {   0,   2,  16,   4,  64,   0,   0,   0,   0,   TRUE},
 
-    // GENTLE
-    {   0,   0,   0,   0,  32,   0,   0,   0,   0,   1},
+    [ANIM_GENTLE] =
+    {   0,   0,   0,   0,  32,   0,   0,   0,   0,   TRUE},
 
-    // SASSY
-    {   0,   0,   0,   0,  42,   0,   0,   0,   0,   1},
+    [ANIM_SASSY] =
+    {   0,   0,   0,   0,  42,   0,   0,   0,   0,   TRUE},
 
-    // CAREFUL
-    {   0,   4,   0,   8,  24,   0,   0,   0,  12,   0},
-    {   0,   0,   0,   0,  12,   0,   0,   0,   0,   0},
-    {   0,   4,   0,  12,  24,   0,   0,   0,  12,   0},
-    {   0,   0,   0,   0,  12,   0,   0,   0,   0,   0},
-    {   0,   4,   0,   4,  24,   0,   0,   0,  12,   1},
+    [ANIM_CAREFUL] =
+    {   0,   4,   0,   8,  24,   0,   0,   0,  12,   FALSE},
+    {   0,   0,   0,   0,  12,   0,   0,   0,   0,   FALSE},
+    {   0,   4,   0,  12,  24,   0,   0,   0,  12,   FALSE},
+    {   0,   0,   0,   0,  12,   0,   0,   0,   0,   FALSE},
+    {   0,   4,   0,   4,  24,   0,   0,   0,  12,   TRUE},
 
-    // QUIRKY
-    {   0,   4,  16,  12,  64,   0,   0,   0,   0,   0},
-    {   0,  -4,  16,  12,  64,   0,   0,   0,   0,   1},
+    [ANIM_QUIRKY] =
+    {   0,   4,  16,  12,  64,   0,   0,   0,   0,   FALSE},
+    {   0,  -4,  16,  12,  64,   0,   0,   0,   0,   TRUE},
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411E90[] =
+static const union AffineAnimCmd sAffineAnim_Mon_None[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411EA0[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnUp[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, 12, 1),
     AFFINEANIMCMD_FRAME(0, 0, 0, 30),
@@ -235,7 +306,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411EA0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411EC0[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnUp_Flipped[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 12, 1),
@@ -244,7 +315,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411EC0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411EE8[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnUpAndDown[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
@@ -252,7 +323,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411EE8[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411F08[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnUpAndDown_Flipped[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
@@ -261,7 +332,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F08[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411F30[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnDown[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
@@ -269,7 +340,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F30[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411F50[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnDown_Flipped[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
@@ -278,7 +349,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F50[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411F78[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnDownSlow[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
@@ -286,7 +357,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F78[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411F98[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnDownSlow_Flipped[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
@@ -295,7 +366,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F98[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411FC0[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnDownSlight[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
@@ -303,7 +374,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411FC0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8411FE0[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnDownSlight_Flipped[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
@@ -312,7 +383,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411FE0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8412008[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnUpHigh[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
@@ -320,7 +391,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8412008[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8412028[] =
+static const union AffineAnimCmd sAffineAnim_Mon_TurnUpHigh_Flipped[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
@@ -329,29 +400,33 @@ static const union AffineAnimCmd sSpriteAffineAnim_8412028[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F04FC[] =
+static const union AffineAnimCmd *const sAffineAnims_Mon[] =
 {
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411EA0,
-    sSpriteAffineAnim_8411EE8,
-    sSpriteAffineAnim_8411F30,
-    sSpriteAffineAnim_8411F78,
-    sSpriteAffineAnim_8411FC0,
-    sSpriteAffineAnim_8412008,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411EC0,
-    sSpriteAffineAnim_8411F08,
-    sSpriteAffineAnim_8411F50,
-    sSpriteAffineAnim_8411F98,
-    sSpriteAffineAnim_8411FE0,
-    sSpriteAffineAnim_8412028,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411E90,
-    sSpriteAffineAnim_8411E90,
+    // Animations for non-flipped mon sprites
+    [AFFINE_NONE]             = sAffineAnim_Mon_None,
+    [AFFINE_TURN_UP]          = sAffineAnim_Mon_TurnUp,
+    [AFFINE_TURN_UP_AND_DOWN] = sAffineAnim_Mon_TurnUpAndDown,
+    [AFFINE_TURN_DOWN]        = sAffineAnim_Mon_TurnDown,
+    [AFFINE_TURN_DOWN_SLOW]   = sAffineAnim_Mon_TurnDownSlow,
+    [AFFINE_TURN_DOWN_SLIGHT] = sAffineAnim_Mon_TurnDownSlight,
+    [AFFINE_TURN_UP_HIGH]     = sAffineAnim_Mon_TurnUpHigh,
+    [AFFINE_UNUSED_1]         = sAffineAnim_Mon_None,
+    [AFFINE_UNUSED_2]         = sAffineAnim_Mon_None,
+    [AFFINE_UNUSED_3]         = sAffineAnim_Mon_None,
+
+    // Animations for flipped mon sprites
+    [AFFINE_NONE + NUM_MON_AFFINES]             = sAffineAnim_Mon_None,
+    [AFFINE_TURN_UP + NUM_MON_AFFINES]          = sAffineAnim_Mon_TurnUp_Flipped,
+    [AFFINE_TURN_UP_AND_DOWN + NUM_MON_AFFINES] = sAffineAnim_Mon_TurnUpAndDown_Flipped,
+    [AFFINE_TURN_DOWN + NUM_MON_AFFINES]        = sAffineAnim_Mon_TurnDown_Flipped,
+    [AFFINE_TURN_DOWN_SLOW + NUM_MON_AFFINES]   = sAffineAnim_Mon_TurnDownSlow_Flipped,
+    [AFFINE_TURN_DOWN_SLIGHT + NUM_MON_AFFINES] = sAffineAnim_Mon_TurnDownSlight_Flipped,
+    [AFFINE_TURN_UP_HIGH + NUM_MON_AFFINES]     = sAffineAnim_Mon_TurnUpHigh_Flipped,
+    [AFFINE_UNUSED_1 + NUM_MON_AFFINES]         = sAffineAnim_Mon_None,
+    [AFFINE_UNUSED_2 + NUM_MON_AFFINES]         = sAffineAnim_Mon_None,
+    [AFFINE_UNUSED_3 + NUM_MON_AFFINES]         = sAffineAnim_Mon_None,
+
+    sAffineAnim_Mon_None, // ? Extra for some reason
 };
 
 static const struct BgTemplate sBackgroundTemplates[] =
@@ -378,7 +453,15 @@ static const struct BgTemplate sBackgroundTemplates[] =
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    {0, 1, 0xF, 0x1C, 4, 0xF, 0xA},
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 15,
+        .width = 28,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0xA
+    },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -401,7 +484,7 @@ static const u32* const sPokeblocksPals[] =
     [PBLOCK_CLR_GOLD - 1]      = gPokeblockGold_Pal
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
+static const union AffineAnimCmd sAffineAnim_Still[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
@@ -409,10 +492,10 @@ static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
 
 static const union AffineAnimCmd *const sSpriteAffineAnimTable_MonNoFlip[] =
 {
-    sSpriteAffineAnim_84120DC
+    sAffineAnim_Still
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
+static const union AffineAnimCmd sAffineAnim_PokeblockCase_ThrowFromVertical[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
@@ -427,7 +510,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
+static const union AffineAnimCmd sAffineAnim_PokeblockCase_ThrowFromHorizontal[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
@@ -442,22 +525,22 @@ static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F0664[] =
+static const union AffineAnimCmd *const sAffineAnims_PokeblockCase_Still[] =
 {
-    sSpriteAffineAnim_84120DC
+    sAffineAnim_Still
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F0668[] =
+static const union AffineAnimCmd *const sAffineAnims_PokeblockCase_ThrowFromVertical[] =
 {
-    sSpriteAffineAnim_84120F0
+    sAffineAnim_PokeblockCase_ThrowFromVertical
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F066C[] =
+static const union AffineAnimCmd *const sAffineAnims_PokeblockCase_ThrowFromHorizontal[] =
 {
-    sSpriteAffineAnim_8412148
+    sAffineAnim_PokeblockCase_ThrowFromHorizontal
 };
 
-static const struct OamData sThrownPokeblockOamData =
+static const struct OamData sOamData_Pokeblock =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -474,46 +557,45 @@ static const struct OamData sThrownPokeblockOamData =
     .affineParam = 0,
 };
 
-static const union AnimCmd sThrownPokeblockSpriteAnim[] =
+static const union AnimCmd sAnim_Pokeblock[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sThrownPokeblockAnimTable[] =
+static const union AnimCmd *const sAnims_Pokeblock[] =
 {
-    sThrownPokeblockSpriteAnim,
+    sAnim_Pokeblock,
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
+static const union AffineAnimCmd sAffineAnim_Pokeblock[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(-8, -8, 0, 1),
     AFFINEANIMCMD_JUMP(1)
 };
 
-static const union AffineAnimCmd *const sThrownPokeblockAffineAnimTable[] =
+static const union AffineAnimCmd *const sAffineAnims_Pokeblock[] =
 {
-    sSpriteAffineAnim_84121C0
+    sAffineAnim_Pokeblock
 };
 
-static const struct CompressedSpriteSheet sPokeblock_SpriteSheet =
+static const struct CompressedSpriteSheet sSpriteSheet_Pokeblock =
 {
-    gPokeblock_Gfx, 0x20, GFX_TAG_POKEBLOCK
+    gPokeblock_Gfx, 0x20, TAG_POKEBLOCK
 };
 
-static const struct SpriteTemplate sThrownPokeblockSpriteTemplate =
+static const struct SpriteTemplate sSpriteTemplate_Pokeblock =
 {
-    .tileTag = GFX_TAG_POKEBLOCK,
-    .paletteTag = GFX_TAG_POKEBLOCK,
-    .oam = &sThrownPokeblockOamData,
-    .anims = sThrownPokeblockAnimTable,
+    .tileTag = TAG_POKEBLOCK,
+    .paletteTag = TAG_POKEBLOCK,
+    .oam = &sOamData_Pokeblock,
+    .anims = sAnims_Pokeblock,
     .images = NULL,
-    .affineAnims = sThrownPokeblockAffineAnimTable,
+    .affineAnims = sAffineAnims_Pokeblock,
     .callback = SpriteCB_ThrownPokeblock
 };
 
-// code
 static void CB2_PokeblockFeed(void)
 {
     RunTasks();
@@ -530,7 +612,7 @@ static void VBlankCB_PokeblockFeed(void)
     TransferPlttBuffer();
 }
 
-static bool8 TransitionToPokeblockFeedScene(void)
+static bool8 LoadPokeblockFeedScene(void)
 {
     switch (gMain.state)
     {
@@ -542,7 +624,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         break;
     case 1:
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = 1;
+        gPaletteFade.bufferTransferDisabled = TRUE;
         gMain.state++;
         break;
     case 2:
@@ -567,9 +649,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         break;
     case 7:
         if (LoadMonAndSceneGfx(&gPlayerParty[gPokeblockMonId]))
-        {
             gMain.state++;
-        }
         break;
     case 8:
         sPokeblockFeed->pokeblockCaseSpriteId = CreatePokeblockCaseSpriteForFeeding();
@@ -588,12 +668,12 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 12:
-        BlendPalettes(-1, 0x10, 0);
+        BlendPalettes(PALETTES_ALL, 16, 0);
         gMain.state++;
         break;
     case 13:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-        gPaletteFade.bufferTransferDisabled = 0;
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
     default:
@@ -604,15 +684,15 @@ static bool8 TransitionToPokeblockFeedScene(void)
     return FALSE;
 }
 
-void CB2_PreparePokeblockFeedScene(void)
+void PreparePokeblockFeedScene(void)
 {
     while (1)
     {
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE)
             break;
-        if (TransitionToPokeblockFeedScene() == TRUE)
+        if (LoadPokeblockFeedScene() == TRUE)
             break;
-        if (MenuHelpers_LinkSomething() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -644,19 +724,21 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
     switch (sPokeblockFeed->loadGfxState)
     {
     case 0:
+        // Load mon gfx
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+        HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:
+        // Load mon palette
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
         trainerId = GetMonData(mon, MON_DATA_OT_ID);
         palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
 
         LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(palette->tag, 1);
+        SetMultiuseSpriteTemplateToPokemon(palette->tag, B_POSITION_OPPONENT_LEFT);
         sPokeblockFeed->loadGfxState++;
         break;
     case 2:
@@ -668,7 +750,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         sPokeblockFeed->loadGfxState++;
         break;
     case 4:
-        LoadCompressedSpriteSheet(&sPokeblock_SpriteSheet);
+        LoadCompressedSpriteSheet(&sSpriteSheet_Pokeblock);
         sPokeblockFeed->loadGfxState++;
         break;
     case 5:
@@ -684,7 +766,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
     case 7:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gUnknown_08D9BA44, sPokeblockFeed->tilemapBuffer);
+            LZDecompressWram(gPokeblockFeedBg_Tilemap, sPokeblockFeed->tilemapBuffer);
             sPokeblockFeed->loadGfxState++;
         }
         break;
@@ -702,7 +784,7 @@ static void HandleInitWindows(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
@@ -712,63 +794,68 @@ static void SetPokeblockSpritePal(u8 pokeblockCaseId)
 {
     u8 colorId = GetPokeblockData(&gSaveBlock1Ptr->pokeblocks[pokeblockCaseId], PBLOCK_COLOR);
     sPokeblockSpritePal.data = sPokeblocksPals[colorId - 1];
-    sPokeblockSpritePal.tag = GFX_TAG_POKEBLOCK;
+    sPokeblockSpritePal.tag = TAG_POKEBLOCK;
 }
 
 // defines for task data fields
 
-#define tFrames     data[0]
-#define tData1      data[1]
+#define tState            data[0]
+#define tHorizontalThrow  data[1]
+
+#define STATE_START_THROW  255 // If the length of the Pokémon's animation exceeds 255 the throw may happen twice
+#define STATE_SPAWN_PBLOCK (STATE_START_THROW + 14)
+#define STATE_START_JUMP   (STATE_SPAWN_PBLOCK + 12)
+#define STATE_PRINT_MSG    (STATE_START_JUMP + 16)
 
 static void Task_HandlePokeblockFeed(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        switch (gTasks[taskId].tFrames)
+        switch (gTasks[taskId].tState)
         {
         case 0:
-            sPokeblockFeed->field_1050 = 0;
-            sPokeblockFeed->field_1058 = 0;
-            sub_817A5CC();
+            sPokeblockFeed->animRunState = 0;
+            sPokeblockFeed->timer = 0;
+            CalculateMonAnimLength();
             break;
-        case 255:
-            DoPokeblockCaseThrowEffect(sPokeblockFeed->pokeblockCaseSpriteId, gTasks[taskId].tData1);
+        case STATE_START_THROW:
+            DoPokeblockCaseThrowEffect(sPokeblockFeed->pokeblockCaseSpriteId, gTasks[taskId].tHorizontalThrow);
             break;
-        case 269:
+        case STATE_SPAWN_PBLOCK:
             sPokeblockFeed->pokeblockSpriteId = CreatePokeblockSprite();
             break;
-        case 281:
-            PrepareMonToMoveToPokeblock(sPokeblockFeed->monSpriteId);
+        case STATE_START_JUMP:
+            StartMonJumpForPokeblock(sPokeblockFeed->monSpriteId);
             break;
-        case 297:
-            gTasks[taskId].func = Task_HandleMonAtePokeblock;
+        case STATE_PRINT_MSG:
+            gTasks[taskId].func = Task_PrintAtePokeblockMessage;
             return;
         }
 
-        if (sPokeblockFeed->field_1058 < sPokeblockFeed->field_1056)
-            sub_817A634();
-        else if (sPokeblockFeed->field_1058 == sPokeblockFeed->field_1056)
-            gTasks[taskId].tFrames = 254;
+        if (sPokeblockFeed->timer < sPokeblockFeed->monAnimLength)
+            UpdateMonAnim();
+        else if (sPokeblockFeed->timer == sPokeblockFeed->monAnimLength)
+            gTasks[taskId].tState = STATE_START_THROW - 1;
 
-        sPokeblockFeed->field_1058++;
-        gTasks[taskId].tFrames++;
+        sPokeblockFeed->timer++;
+        gTasks[taskId].tState++;
     }
 }
 
 static void LaunchPokeblockFeedTask(void)
 {
     u8 taskId = CreateTask(Task_HandlePokeblockFeed, 0);
-    gTasks[taskId].tFrames = 0;
-    gTasks[taskId].tData1 = 1;
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tHorizontalThrow = TRUE;
 }
 
-static void Task_WaitForAtePokeblockText(u8 taskId)
+static void Task_WaitForAtePokeblockMessage(u8 taskId)
 {
     if (RunTextPrintersRetIsActive(0) != TRUE)
-        gTasks[taskId].func = Task_PaletteFadeToReturn;
+        gTasks[taskId].func = Task_FadeOutPokeblockFeed;
 }
 
-static void Task_HandleMonAtePokeblock(u8 taskId)
+static void Task_PrintAtePokeblockMessage(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPokeblockMonId];
     struct Pokeblock *pokeblock = &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId];
@@ -784,18 +871,18 @@ static void Task_HandleMonAtePokeblock(u8 taskId)
     else
         StringExpandPlaceholders(gStringVar4, gText_Var1DisdainfullyAteVar2);
 
-    gTextFlags.canABSpeedUpPrint = 1;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
-    gTasks[taskId].func = Task_WaitForAtePokeblockText;
+    gTextFlags.canABSpeedUpPrint = TRUE;
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
+    gTasks[taskId].func = Task_WaitForAtePokeblockMessage;
 }
 
-static void Task_ReturnAfterPaletteFade(u8 taskId)
+static void Task_ExitPokeblockFeed(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         ResetSpriteData();
         FreeAllSpritePalettes();
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, -1, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         SetMainCallback2(gMain.savedCallback);
         DestroyTask(taskId);
         FreeAllWindowBuffers();
@@ -804,30 +891,29 @@ static void Task_ReturnAfterPaletteFade(u8 taskId)
     }
 }
 
-static void Task_PaletteFadeToReturn(u8 taskId)
+static void Task_FadeOutPokeblockFeed(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-    gTasks[taskId].func = Task_ReturnAfterPaletteFade;
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_ExitPokeblockFeed;
 }
 
-#undef tFrames
-#undef tData1
+#undef tState
+#undef tHorizontalThrow
 
-// defines for mon sprite data fields
-
-#define tDelta          data[0]
-#define tDeltaMod       data[1]
-#define tSpecies        data[2]
+// Sprite data for Pokéblock and Pokémon
+#define sSpeed   data[0]
+#define sAccel   data[1]
+#define sSpecies data[2]
 
 static u8 CreateMonSprite(struct Pokemon* mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
-    u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 48, 80, 2);
+    u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, MON_X, MON_Y, 2);
 
     sPokeblockFeed->species = species;
     sPokeblockFeed->monSpriteId_ = spriteId;
     sPokeblockFeed->nature = GetNature(mon);
-    gSprites[spriteId].tSpecies = species;
+    gSprites[spriteId].sSpecies = species;
     gSprites[spriteId].callback = SpriteCallbackDummy;
 
     sPokeblockFeed->noMonFlip = TRUE;
@@ -842,189 +928,191 @@ static u8 CreateMonSprite(struct Pokemon* mon)
     return spriteId;
 }
 
-static void PrepareMonToMoveToPokeblock(u8 spriteId)
+static void StartMonJumpForPokeblock(u8 spriteId)
 {
-    gSprites[spriteId].pos1.x = 48;
-    gSprites[spriteId].pos1.y = 80;
-    gSprites[spriteId].tDelta = -8;
-    gSprites[spriteId].tDeltaMod = 1;
-    gSprites[spriteId].callback = sub_817A468;
+    gSprites[spriteId].x = MON_X;
+    gSprites[spriteId].y = MON_Y;
+    gSprites[spriteId].sSpeed = -8;
+    gSprites[spriteId].sAccel = 1;
+    gSprites[spriteId].callback = SpriteCB_MonJumpForPokeblock;
 }
 
-static void sub_817A468(struct Sprite* sprite)
+static void SpriteCB_MonJumpForPokeblock(struct Sprite* sprite)
 {
-    sprite->pos1.x += 4;
-    sprite->pos1.y += sprite->tDelta;
-    sprite->tDelta += sprite->tDeltaMod;
+    sprite->x += 4;
+    sprite->y += sprite->sSpeed;
+    sprite->sSpeed += sprite->sAccel;
 
-    if (sprite->tDelta == 0)
-        PlayCry1(sprite->tSpecies, 0);
-    if (sprite->tDelta == 9)
+    // Play cry at jump peak
+    if (sprite->sSpeed == 0)
+        PlayCry_Normal(sprite->sSpecies, 0);
+
+    if (sprite->sSpeed == 9)
         sprite->callback = SpriteCallbackDummy;
 }
-
-#undef tDelta
-#undef tDeltaMod
-#undef tSpecies
 
 static u8 CreatePokeblockCaseSpriteForFeeding(void)
 {
     u8 spriteId = CreatePokeblockCaseSprite(188, 100, 2);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    gSprites[spriteId].affineAnims = sSpriteAffineAnimTable_85F0664;
+    gSprites[spriteId].affineAnims = sAffineAnims_PokeblockCase_Still;
     gSprites[spriteId].callback = SpriteCallbackDummy;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     return spriteId;
 }
 
-static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 a1)
+static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 horizontalThrow)
 {
     FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
 
-    if (!a1)
-        gSprites[spriteId].affineAnims = sSpriteAffineAnimTable_85F0668;
+    if (!horizontalThrow)
+        gSprites[spriteId].affineAnims = sAffineAnims_PokeblockCase_ThrowFromVertical; // Never used, horizontalThrow always TRUE
     else
-        gSprites[spriteId].affineAnims = sSpriteAffineAnimTable_85F066C;
+        gSprites[spriteId].affineAnims = sAffineAnims_PokeblockCase_ThrowFromHorizontal;
 
     InitSpriteAffineAnim(&gSprites[spriteId]);
 }
 
-// defines for the pokeblock sprite data fields
-#define tDelta          data[0]
-#define tDeltaMod       data[1]
-
 static u8 CreatePokeblockSprite(void)
 {
-    u8 spriteId = CreateSprite(&sThrownPokeblockSpriteTemplate, 174, 84, 1);
-    gSprites[spriteId].tDelta = -12;
-    gSprites[spriteId].tDeltaMod = 1;
+    u8 spriteId = CreateSprite(&sSpriteTemplate_Pokeblock, 174, 84, 1);
+    gSprites[spriteId].sSpeed = -12;
+    gSprites[spriteId].sAccel = 1;
     return spriteId;
 }
 
 static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
-    sprite->pos1.x -= 4;
-    sprite->pos1.y += sprite->tDelta;
-    sprite->tDelta += sprite->tDeltaMod;
-    if (sprite->tDelta == 10)
+    sprite->x -= 4;
+    sprite->y += sprite->sSpeed;
+    sprite->sSpeed += sprite->sAccel;
+    if (sprite->sSpeed == 10)
         DestroySprite(sprite);
 }
 
-#undef tDelta
-#undef tDeltaMod
-
-static void sub_817A5CC(void)
+static void CalculateMonAnimLength(void)
 {
     u8 animId, i;
-    struct PokeblockFeedStruct *pokeblockFeed;
+    struct PokeblockFeed *pokeblockFeed;
 
     pokeblockFeed = sPokeblockFeed;
-    pokeblockFeed->field_1056 = 1;
+    pokeblockFeed->monAnimLength = 1;
     animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
+
+    // Add up the time each stage of the animation will take
     for (i = 0; i < 8; i++, animId++)
     {
-        pokeblockFeed->field_1056 += sMonPokeblockAnims[animId][4];
-        if (sMonPokeblockAnims[animId][9] == 1)
+        pokeblockFeed->monAnimLength += sMonPokeblockAnims[animId][ANIMDATA_TIME];
+        if (sMonPokeblockAnims[animId][ANIMDATA_IS_LAST] == TRUE)
             break;
     }
 }
 
-static void sub_817A634(void)
+static void UpdateMonAnim(void)
 {
-    struct PokeblockFeedStruct *pokeblockFeed = sPokeblockFeed;
+    struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
 
-    switch (pokeblockFeed->field_1050)
+    switch (pokeblockFeed->animRunState)
     {
     case 0:
         pokeblockFeed->animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
         pokeblockFeed->monSpritePtr = &gSprites[pokeblockFeed->monSpriteId_];
         pokeblockFeed->savedMonSprite = *pokeblockFeed->monSpritePtr;
-        pokeblockFeed->field_1050 = 10;
+        pokeblockFeed->animRunState = 10;
         break;
     case 1 ... 9:
         break;
     case 10:
-        sub_817A91C();
-        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != 0)
+        InitMonAnimStage();
+        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != AFFINE_NONE)
         {
+            // Initialize affine anim
             pokeblockFeed->monSpritePtr->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             pokeblockFeed->monSpritePtr->oam.matrixNum = 0;
-            pokeblockFeed->monSpritePtr->affineAnims = sSpriteAffineAnimTable_85F04FC;
+            pokeblockFeed->monSpritePtr->affineAnims = sAffineAnims_Mon;
             InitSpriteAffineAnim(pokeblockFeed->monSpritePtr);
         }
-        pokeblockFeed->field_1050 = 50;
+        pokeblockFeed->animRunState = 50;
     case 50:
-        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != 0)
+        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != AFFINE_NONE)
         {
+            // Start affine anim
             if (!pokeblockFeed->noMonFlip) // double negation, so mon's sprite is flipped
-                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] + 10);
+                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] + NUM_MON_AFFINES);
             else
                 StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1]);
         }
-        pokeblockFeed->field_1050 = 60;
+        pokeblockFeed->animRunState = 60;
         break;
     case 60:
-        if (sub_817A9E4() == TRUE)
+        if (DoMonAnimStep() == TRUE)
         {
-            if (pokeblockFeed->field_1060[9] == 0)
+            if (!pokeblockFeed->animData[ANIMDATA_IS_LAST])
             {
+                // Continue to next stage of animation
                 pokeblockFeed->animId++;
-                sub_817A91C();
-                pokeblockFeed->field_1050 = 60;
+                InitMonAnimStage();
+                pokeblockFeed->animRunState = 60;
             }
             else
             {
+                // End animation
                 FreeOamMatrix(pokeblockFeed->monSpritePtr->oam.matrixNum);
-                pokeblockFeed->field_1050 = 70;
+                pokeblockFeed->animRunState = 70;
             }
         }
         break;
     case 70:
         FreeMonSpriteOamMatrix();
         pokeblockFeed->animId = 0;
-        pokeblockFeed->field_1050 = 0;
+        pokeblockFeed->animRunState = 0;
         break;
     case 71 ... 90:
         break;
     }
 }
 
-static bool8 sub_817A91C(void)
+static bool8 InitMonAnimStage(void)
 {
-    struct PokeblockFeedStruct *pokeblockFeed = sPokeblockFeed;
+    struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
     u8 i;
 
-    for (i = 0; i < 10; i++)
-        pokeblockFeed->field_1060[i] = sMonPokeblockAnims[pokeblockFeed->animId][i];
+    for (i = 0; i < NUM_ANIMDATA; i++)
+        pokeblockFeed->animData[i] = sMonPokeblockAnims[pokeblockFeed->animId][i];
 
-    if (pokeblockFeed->field_1060[4] == 0)
+    if (pokeblockFeed->animData[ANIMDATA_TIME] == 0)
     {
         return TRUE;
     }
     else
     {
-        pokeblockFeed->field_1060[10] = Sin(pokeblockFeed->field_1060[0], pokeblockFeed->field_1060[2]);
-        pokeblockFeed->field_1060[11] = Cos(pokeblockFeed->field_1060[0], pokeblockFeed->field_1060[3]);
-        pokeblockFeed->field_1060[12] = pokeblockFeed->field_1060[4];
-        pokeblockFeed->field_1060[13] = pokeblockFeed->monSpritePtr->pos2.x;
-        pokeblockFeed->field_1060[14] = pokeblockFeed->monSpritePtr->pos2.y;
-        sub_817AB68();
-        pokeblockFeed->field_1060[4] = pokeblockFeed->field_1060[12];
-        sub_817AA54();
-        pokeblockFeed->field_1060[4] = pokeblockFeed->field_1060[12];
+        pokeblockFeed->monInitX = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX], pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE]);
+        pokeblockFeed->monInitY = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX], pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE]);
+        pokeblockFeed->maxAnimStageTime = pokeblockFeed->animData[ANIMDATA_TIME];
+        pokeblockFeed->monX = pokeblockFeed->monSpritePtr->x2;
+        pokeblockFeed->monY = pokeblockFeed->monSpritePtr->y2;
+
+        // Calculate the positions to move to during the animation
+        // The time is counted down during this, so reset it afterwards
+        CalculateMonAnimMovement();
+        pokeblockFeed->animData[ANIMDATA_TIME] = pokeblockFeed->maxAnimStageTime;
+        CalculateMonAnimMovementEnd();
+        pokeblockFeed->animData[ANIMDATA_TIME] = pokeblockFeed->maxAnimStageTime; // Redundant
         return FALSE;
     }
 }
 
-static bool8 sub_817A9E4(void)
+static bool8 DoMonAnimStep(void)
 {
-    u16 var = sPokeblockFeed->field_1060[12] - sPokeblockFeed->field_1060[4];
+    // Update mon's position
+    u16 time = sPokeblockFeed->maxAnimStageTime - sPokeblockFeed->animData[ANIMDATA_TIME];
+    sPokeblockFeed->monSpritePtr->x2 = sPokeblockFeed->monAnimX[time];
+    sPokeblockFeed->monSpritePtr->y2 = sPokeblockFeed->monAnimY[time];
 
-    sPokeblockFeed->monSpritePtr->pos2.x = sPokeblockFeed->field_850[var];
-    sPokeblockFeed->monSpritePtr->pos2.y = sPokeblockFeed->field_C50[var];
-
-    if (--sPokeblockFeed->field_1060[4] == 0)
+    // Count down time remaining in this stage
+    // Return TRUE if this stage is complete
+    if (--sPokeblockFeed->animData[ANIMDATA_TIME] == 0)
         return TRUE;
     else
         return FALSE;
@@ -1036,66 +1124,70 @@ static bool8 FreeMonSpriteOamMatrix(void)
     return FALSE;
 }
 
-static void sub_817AA54(void)
+static void CalculateMonAnimMovementEnd(void)
 {
-    struct PokeblockFeedStruct *pokeblockFeed = sPokeblockFeed;
+    struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
     u16 i;
-    u16 r8 = pokeblockFeed->field_1060[8];
-    u16 r7 = pokeblockFeed->field_1060[12] - r8;
-    s16 var3 = pokeblockFeed->field_1060[13] + pokeblockFeed->field_1060[6];
-    s16 r9 = pokeblockFeed->field_1060[14] + pokeblockFeed->field_1060[7];
+    u16 approachTime = pokeblockFeed->animData[ANIMDATA_APPR_TIME];
+    u16 time = pokeblockFeed->maxAnimStageTime - approachTime;
+    s16 x = pokeblockFeed->monX + pokeblockFeed->animData[ANIMDATA_TARGET_X];
+    s16 y = pokeblockFeed->monY + pokeblockFeed->animData[ANIMDATA_TARGET_Y];
 
-    for (i = 0; i < r7 - 1; i++)
+    for (i = 0; i < time - 1; i++)
     {
-        s16 r1 = pokeblockFeed->field_850[r8 + i] - (var3);
-        s16 r4 = pokeblockFeed->field_C50[r8 + i] - r9;
+        s16 xOffset = pokeblockFeed->monAnimX[approachTime + i] - x;
+        s16 yOffset = pokeblockFeed->monAnimY[approachTime + i] - y;
 
-        pokeblockFeed->field_850[r8 + i] -= r1 * (i + 1) / r7;
-        pokeblockFeed->field_C50[r8 + i] -= r4 * (i + 1) / r7;
+        pokeblockFeed->monAnimX[approachTime + i] -= xOffset * (i + 1) / time;
+        pokeblockFeed->monAnimY[approachTime + i] -= yOffset * (i + 1) / time;
     }
 
-    pokeblockFeed->field_850[(r8 + r7) - 1] = var3;
-    pokeblockFeed->field_C50[(r8 + r7) - 1] = r9;
+    pokeblockFeed->monAnimX[approachTime + time - 1] = x;
+    pokeblockFeed->monAnimY[approachTime + time - 1] = y;
 }
 
-static void sub_817AB68(void)
+static void CalculateMonAnimMovement(void)
 {
-    struct PokeblockFeedStruct *pokeblockFeed = sPokeblockFeed;
-    bool8 var_24 = FALSE;
-    s16 r8 = pokeblockFeed->field_1060[13] - pokeblockFeed->field_1060[10];
-    s16 r7 = pokeblockFeed->field_1060[14] - pokeblockFeed->field_1060[11];
+    struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
+    bool8 negative = FALSE;
+    s16 x = pokeblockFeed->monX - pokeblockFeed->monInitX;
+    s16 y = pokeblockFeed->monY - pokeblockFeed->monInitY;
 
     while (1)
     {
-        u16 r5;
-        u16 r4;
-        u16 var;
+        u16 amplitude;
+        u16 time;
+        u16 acceleration;
 
-        var = abs(pokeblockFeed->field_1060[5]);
-        r5 = var + pokeblockFeed->field_1060[3];
-        pokeblockFeed->field_1060[3] = r5;
+        acceleration = abs(pokeblockFeed->animData[ANIMDATA_ROT_ACCEL]);
+        amplitude = acceleration + pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE];
+        pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE] = amplitude;
 
-        if (pokeblockFeed->field_1060[2] < 0)
-            var_24 = TRUE;
+        if (pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE] < 0)
+            negative = TRUE;
 
-        r4 = pokeblockFeed->field_1060[12] - pokeblockFeed->field_1060[4];
+        time = pokeblockFeed->maxAnimStageTime - pokeblockFeed->animData[ANIMDATA_TIME];
 
-        if (pokeblockFeed->field_1060[4] == 0)
+        if (pokeblockFeed->animData[ANIMDATA_TIME] == 0)
             break;
 
-        if (!var_24)
+        if (!negative)
         {
-            pokeblockFeed->field_850[r4] = Sin(pokeblockFeed->field_1060[0], pokeblockFeed->field_1060[2] + r5 / 0x100) + r8;
-            pokeblockFeed->field_C50[r4] = Cos(pokeblockFeed->field_1060[0], pokeblockFeed->field_1060[3] + r5 / 0x100) + r7;
+            pokeblockFeed->monAnimX[time] = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
+                                                pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE] + amplitude / 0x100) + x;
+            pokeblockFeed->monAnimY[time] = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
+                                                pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE] + amplitude / 0x100) + y;
         }
         else
         {
-            pokeblockFeed->field_850[r4] = Sin(pokeblockFeed->field_1060[0], pokeblockFeed->field_1060[2] - r5 / 0x100) + r8;
-            pokeblockFeed->field_C50[r4] = Cos(pokeblockFeed->field_1060[0], pokeblockFeed->field_1060[3] - r5 / 0x100) + r7;
+            pokeblockFeed->monAnimX[time] = Sin(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
+                                                pokeblockFeed->animData[ANIMDATA_SIN_AMPLITUDE] - amplitude / 0x100) + x;
+            pokeblockFeed->monAnimY[time] = Cos(pokeblockFeed->animData[ANIMDATA_ROT_IDX],
+                                                pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE] - amplitude / 0x100) + y;
         }
 
-        pokeblockFeed->field_1060[0] += pokeblockFeed->field_1060[1];
-        pokeblockFeed->field_1060[0] &= 0xFF;
-        pokeblockFeed->field_1060[4]--;
+        pokeblockFeed->animData[ANIMDATA_ROT_IDX] += pokeblockFeed->animData[ANIMDATA_ROT_SPEED];
+        pokeblockFeed->animData[ANIMDATA_ROT_IDX] &= 0xFF;
+        pokeblockFeed->animData[ANIMDATA_TIME]--;
     }
 }

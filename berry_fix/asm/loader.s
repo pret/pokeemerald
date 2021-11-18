@@ -109,7 +109,7 @@ _1a0:
 	strh r1, [r0, 0xa] @ SIOMLT_SEND
 	ldr r0, =_data_2f0
 	ldr r1, =gCode
-	svc 0x11 << 16
+	swi 0x11 << 16
 	ldr lr, =gCode
 	bx lr
 	.pool

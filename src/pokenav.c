@@ -14,8 +14,6 @@
 #define LOOPED_TASK_PRIMARY_ID(taskId) (taskId & 0xFFFF)
 #define LOOPED_TASK_SECONDARY_ID(taskId) (taskId >> 16)
 
-#define SUBSTRUCT_COUNT 19
-
 struct PokenavResources
 {
     u32 (*currentMenuCb1)(void);
@@ -23,7 +21,7 @@ struct PokenavResources
     u16 mode;
     u16 conditionSearchId;
     bool32 hasAnyRibbons;
-    void *field10[SUBSTRUCT_COUNT];
+    void *substructPtrs[POKENAV_SUBSTRUCT_COUNT];
 };
 
 struct PokenavCallbacks
@@ -38,7 +36,7 @@ struct PokenavCallbacks
 };
 
 static u32 GetCurrentMenuCB(void);
-static u32 sub_81C75D4(void);
+static u32 IsActiveMenuLoopTaskActive_(void);
 static bool32 SetActivePokenavMenu(u32 menuId);
 static bool32 AnyMonHasRibbon(void);
 static void InitPokenavResources(struct PokenavResources *a0);
@@ -51,10 +49,9 @@ static void Task_RunLoopedTask(u8 taskId);
 static void Task_Pokenav(u8 taskId);
 static void CB2_InitPokenavForTutorial(void);
 
-// TODO: Use MENU ids
 const struct PokenavCallbacks PokenavMenuCallbacks[15] =
 {
-    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMap,
         .callback = GetMenuHandlerCallback,
@@ -64,7 +61,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMap,
         .callback = GetMenuHandlerCallback,
@@ -74,7 +71,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionMenu,
         .callback = GetMenuHandlerCallback,
@@ -84,7 +81,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionSearchMenu,
         .callback = GetMenuHandlerCallback,
@@ -94,7 +91,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
         .callback = GetMenuHandlerCallback,
@@ -104,7 +101,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
         .callback = GetMenuHandlerCallback,
@@ -114,7 +111,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] = 
+    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_RegionMap,
         .callback = GetRegionMapCallback,
@@ -124,47 +121,47 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeRegionMapSubstruct1,
         .free2 = FreeRegionMapSubstruct2,
     },
-    [POKENAV_CONDITION_PARTY - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_GRAPH_PARTY - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_7,
-        .callback = sub_81CD070,
-        .open = sub_81CDDD4,
-        .createLoopTask = sub_81CDE2C,
-        .isLoopTaskActive = sub_81CDE64,
-        .free1 = sub_81CD1C0,
-        .free2 = sub_81CECA0,
+        .init = PokenavCallback_Init_ConditionGraph_Party,
+        .callback = GetConditionGraphMenuCallback,
+        .open = OpenConditionGraphMenu,
+        .createLoopTask = CreateConditionGraphMenuLoopedTask,
+        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
+        .free1 = FreeConditionGraphMenuSubstruct1,
+        .free2 = FreeConditionGraphMenuSubstruct2,
     },
-    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_8,
-        .callback = sub_81CEFDC,
-        .open = sub_81CF330,
-        .createLoopTask = sub_81CF3A0,
-        .isLoopTaskActive = sub_81CF3D0,
-        .free1 = sub_81CEFF0,
-        .free2 = sub_81CF3F8,
+        .init = PokenavCallback_Init_ConditionSearch,
+        .callback = GetConditionSearchResultsCallback,
+        .open = OpenConditionSearchResults,
+        .createLoopTask = CreateSearchResultsLoopedTask,
+        .isLoopTaskActive = IsSearchResultLoopedTaskActive,
+        .free1 = FreeSearchResultSubstruct1,
+        .free2 = FreeSearchResultSubstruct2,
     },
-    [POKENAV_MENU_9 - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_GRAPH_SEARCH - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_9,
-        .callback = sub_81CD070,
-        .open = sub_81CDDD4,
-        .createLoopTask = sub_81CDE2C,
-        .isLoopTaskActive = sub_81CDE64,
-        .free1 = sub_81CD1C0,
-        .free2 = sub_81CECA0,
+        .init = PokenavCallback_Init_ConditionGraph_Search,
+        .callback = GetConditionGraphMenuCallback,
+        .open = OpenConditionGraphMenu,
+        .createLoopTask = CreateConditionGraphMenuLoopedTask,
+        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
+        .free1 = FreeConditionGraphMenuSubstruct1,
+        .free2 = FreeConditionGraphMenuSubstruct2,
     },
-    [POKENAV_MENU_A - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RETURN_CONDITION_SEARCH - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_10,
-        .callback = sub_81CEFDC,
-        .open = sub_81CF368,
-        .createLoopTask = sub_81CF3A0,
-        .isLoopTaskActive = sub_81CF3D0,
-        .free1 = sub_81CEFF0,
-        .free2 = sub_81CF3F8,
+        .init = PokenavCallback_Init_ReturnToMonSearchList,
+        .callback = GetConditionSearchResultsCallback,
+        .open = OpenConditionSearchListFromGraph,
+        .createLoopTask = CreateSearchResultsLoopedTask,
+        .isLoopTaskActive = IsSearchResultLoopedTaskActive,
+        .free1 = FreeSearchResultSubstruct1,
+        .free2 = FreeSearchResultSubstruct2,
     },
-    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] = 
+    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MatchCall,
         .callback = GetMatchCallCallback,
@@ -174,35 +171,35 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMatchCallSubstruct1,
         .free2 = FreeMatchCallSubstruct2,
     },
-    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_12,
-        .callback = sub_81CFA34,
-        .open = sub_81CFDD0,
-        .createLoopTask = sub_81CFE40,
-        .isLoopTaskActive = sub_81CFE70,
-        .free1 = sub_81CFA48,
-        .free2 = sub_81CFE98,
+        .init = PokenavCallback_Init_MonRibbonList,
+        .callback = GetRibbonsMonListCallback,
+        .open = OpenRibbonsMonList,
+        .createLoopTask = CreateRibbonsMonListLoopedTask,
+        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
+        .free1 = FreeRibbonsMonList,
+        .free2 = FreeRibbonsMonMenu,
     },
-    [POKENAV_MENU_D - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_13,
-        .callback = sub_81D04A0,
-        .open = sub_81D0978,
-        .createLoopTask = sub_81D09B0,
-        .isLoopTaskActive = sub_81D09E0,
-        .free1 = sub_81D04B8,
-        .free2 = sub_81D09F4,
+        .init = PokenavCallback_Init_RibbonsSummaryMenu,
+        .callback = GetRibbonsSummaryMenuCallback,
+        .open = OpenRibbonsSummaryMenu,
+        .createLoopTask = CreateRibbonsSummaryLoopedTask,
+        .isLoopTaskActive = IsRibbonsSummaryLoopedTaskActive,
+        .free1 = FreeRibbonsSummaryScreen1,
+        .free2 = FreeRibbonsSummaryScreen2,
     },
-    [POKENAV_MENU_E - POKENAV_MENU_IDS_START] = 
+    [POKENAV_RIBBONS_RETURN_TO_MON_LIST - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_14,
-        .callback = sub_81CFA34,
-        .open = sub_81CFE08,
-        .createLoopTask = sub_81CFE40,
-        .isLoopTaskActive = sub_81CFE70,
-        .free1 = sub_81CFA48,
-        .free2 = sub_81CFE98,
+        .init = PokenavCallback_Init_RibbonsMonListFromSummary,
+        .callback = GetRibbonsMonListCallback,
+        .open = OpenRibbonsMonListFromRibbonsSummary,
+        .createLoopTask = CreateRibbonsMonListLoopedTask,
+        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
+        .free1 = FreeRibbonsMonList,
+        .free2 = FreeRibbonsMonMenu,
     },
 };
 
@@ -214,7 +211,7 @@ u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority)
 {
     u16 taskId;
 
-    if (!IsUpdateLinkStateCBActive())
+    if (!IsOverworldLinkActive())
         taskId = CreateTask(Task_RunLoopedTask, priority);
     else
         taskId = CreateTask(Task_RunLoopedTask_LinkMode, priority);
@@ -290,7 +287,7 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
     s16 *state;
     u32 action;
 
-    if (sub_8087598())
+    if (Overworld_IsRecvQueueAtMax())
         return;
 
     task = (LoopedTask)GetWordTaskArg(taskId, 1);
@@ -317,7 +314,7 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
 
 void CB2_InitPokeNav(void)
 {
-    gPokenavResources = Alloc(sizeof(struct PokenavResources));
+    gPokenavResources = Alloc(sizeof(*gPokenavResources));
     if (gPokenavResources == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
@@ -345,7 +342,7 @@ static void CB2_InitPokenavForTutorial(void)
     if (gPaletteFade.active)
         return;
 
-    gPokenavResources = Alloc(sizeof(struct PokenavResources));
+    gPokenavResources = Alloc(sizeof(*gPokenavResources));
     if (gPokenavResources == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -368,24 +365,24 @@ static void FreePokenavResources(void)
 {
     int i;
 
-    for (i = 0; i < SUBSTRUCT_COUNT; i++)
+    for (i = 0; i < POKENAV_SUBSTRUCT_COUNT; i++)
         FreePokenavSubstruct(i);
 
     FREE_AND_SET_NULL(gPokenavResources);
     InitKeys();
 }
 
-static void InitPokenavResources(struct PokenavResources *a0)
+static void InitPokenavResources(struct PokenavResources *resources)
 {
     int i;
 
-    for (i = 0; i < SUBSTRUCT_COUNT; i++)
-        a0->field10[i] = NULL;
+    for (i = 0; i < POKENAV_SUBSTRUCT_COUNT; i++)
+        resources->substructPtrs[i] = NULL;
 
-    a0->mode = POKENAV_MODE_NORMAL;
-    a0->currentMenuIndex = 0;
-    a0->hasAnyRibbons = AnyMonHasRibbon();
-    a0->currentMenuCb1 = NULL;
+    resources->mode = POKENAV_MODE_NORMAL;
+    resources->currentMenuIndex = 0;
+    resources->hasAnyRibbons = AnyMonHasRibbon();
+    resources->currentMenuCb1 = NULL;
 }
 
 static bool32 AnyMonHasRibbon(void)
@@ -453,12 +450,12 @@ static void Task_Pokenav(u8 taskId)
         tState = 4;
         break;
     case 2:
-        if (sub_81C786C())
+        if (IsActiveMenuLoopTaskActive())
             break;
         tState = 3;
     case 3:
         menuId = GetCurrentMenuCB();
-        if (menuId == -1)
+        if (menuId == POKENAV_MENU_FUNC_EXIT)
         {
             ShutdownPokenav();
             tState = 5;
@@ -479,13 +476,13 @@ static void Task_Pokenav(u8 taskId)
         }
         else if (menuId != 0)
         {
-            sub_81C7850(menuId);
-            if (sub_81C786C())
+            RunMainMenuLoopedTask(menuId);
+            if (IsActiveMenuLoopTaskActive())
                 tState = 2;
         }
         break;
     case 4:
-        if (!sub_81C75D4())
+        if (!IsActiveMenuLoopTaskActive_())
             tState = 3;
         break;
     case 5:
@@ -516,15 +513,15 @@ static bool32 SetActivePokenavMenu(u32 menuId)
     if (!PokenavMenuCallbacks[index].open())
         return FALSE;
 
-    sub_81C7834(PokenavMenuCallbacks[index].createLoopTask, PokenavMenuCallbacks[index].isLoopTaskActive);
+    SetActiveMenuLoopTasks(PokenavMenuCallbacks[index].createLoopTask, PokenavMenuCallbacks[index].isLoopTaskActive);
     gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index].callback;
     gPokenavResources->currentMenuIndex = index;
     return TRUE;
 }
 
-static u32 sub_81C75D4(void)
+static u32 IsActiveMenuLoopTaskActive_(void)
 {
-    return sub_81C786C();
+    return IsActiveMenuLoopTaskActive();
 }
 
 static u32 GetCurrentMenuCB(void)
@@ -549,19 +546,19 @@ void SetPokenavVBlankCallback(void)
 
 void *AllocSubstruct(u32 index, u32 size)
 {
-    gPokenavResources->field10[index] = Alloc(size);
-    return gPokenavResources->field10[index];
+    gPokenavResources->substructPtrs[index] = Alloc(size);
+    return gPokenavResources->substructPtrs[index];
 }
 
 void *GetSubstructPtr(u32 index)
 {
-    return gPokenavResources->field10[index];
+    return gPokenavResources->substructPtrs[index];
 }
 
 void FreePokenavSubstruct(u32 index)
 {
-    if (gPokenavResources->field10[index] != NULL)
-        FREE_AND_SET_NULL(gPokenavResources->field10[index]);
+    if (gPokenavResources->substructPtrs[index] != NULL)
+        FREE_AND_SET_NULL(gPokenavResources->substructPtrs[index]);
 }
 
 u32 GetPokenavMode(void)

@@ -1,6 +1,14 @@
 #include <limits.h>
 #include "librfu.h"
 
+// If expanding the length of the player name and wireless link functionality is
+// desired, ensure that the name string is limited in size when it's copied from the
+// saveblock to any Rfu-related fields (e.g. in SetHostRfuUsername).
+// If wireless link functionality is not desired ignore or delete this warning.
+#if RFU_USER_NAME_LENGTH < (PLAYER_NAME_LENGTH + 1)
+#warning "The Wireless Adapter hardware expects a username of no more than 8 bytes."
+#endif
+
 struct LLSFStruct
 {
     u8 frameSize;
@@ -161,7 +169,7 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
         gRfuSlotStatusUNI[i] = &gRfuSlotStatusUNI[i - 1][1];
     }
-    // remaining space in API buffer is used for `struct RfuIntrStruct`. 
+    // remaining space in API buffer is used for `struct RfuIntrStruct`.
     gRfuFixed->STWIBuffer = (struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1];
     STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], sioIntrTable_p, copyInterruptToRam);
     rfu_STC_clearAPIVariables();
@@ -1425,35 +1433,36 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     sending = ni_or_uni & 0x20;
     if (sending || ni_or_uni == 0x40)
     {
-        u8 *dataType_p; // a hack to swap instructions
-
         slotStatus_NI = gRfuSlotStatusNI[bm_slot_id];
         slotStatus_UNI = NULL;
         slotStatus_NI->send.errorCode = 0;
-        *slotStatus_NI->send.now_p = dataType_p = &slotStatus_NI->send.dataType;
+        slotStatus_NI->send.now_p[0] = &slotStatus_NI->send.dataType;
         slotStatus_NI->send.remainSize = 7;
         slotStatus_NI->send.bmSlotOrg = bmSendSlot;
         slotStatus_NI->send.bmSlot = bmSendSlot;
         slotStatus_NI->send.payloadSize = subFrameSize - frameSize;
         if (sending != 0)
-            *dataType_p = 0;
+            slotStatus_NI->send.dataType = 0;
         else
-            *dataType_p = 1;
+            slotStatus_NI->send.dataType = 1;
+
         slotStatus_NI->send.dataSize = dataSize;
         slotStatus_NI->send.src = src;
         slotStatus_NI->send.ack = 0;
         slotStatus_NI->send.phase = 0;
-    #ifndef NONMATCHING // to fix r2, r3, r4, r5 register roulette
-        asm("":::"r2");
-    #endif
         for (i = 0; i < WINDOW_COUNT; ++i)
         {
             slotStatus_NI->send.recvAckFlag[i] = 0;
             slotStatus_NI->send.n[i] = 1;
         }
         for (bm_slot_id = 0; bm_slot_id < RFU_CHILD_MAX; ++bm_slot_id)
-            if ((bmSendSlot >> bm_slot_id) & 1)
-                gRfuSlotStatusNI[bm_slot_id]->send.failCounter = 0;
+        {
+            do
+            {
+                if ((bmSendSlot >> bm_slot_id) & 1)
+                    gRfuSlotStatusNI[bm_slot_id]->send.failCounter = 0;
+            } while (0);
+        }
         gRfuLinkStatus->sendSlotNIFlag |= bmSendSlot;
         *llFrameSize_p -= subFrameSize;
         slotStatus_NI->send.state = SLOT_STATE_SEND_START;
@@ -1549,21 +1558,20 @@ u16 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot)
 
 u16 rfu_NI_stopReceivingData(u8 slotStatusIndex)
 {
-    struct NIComm *NI_comm;
     u16 imeBak;
+    struct NIComm *NI_comm;
 
     if (slotStatusIndex >= RFU_CHILD_MAX)
         return ERR_SLOT_NO;
     NI_comm = &gRfuSlotStatusNI[slotStatusIndex]->recv;
     imeBak = REG_IME;
-    ++imeBak; --imeBak; // fix imeBak, NI_comm register swap
     REG_IME = 0;
-    if (gRfuSlotStatusNI[slotStatusIndex]->recv.state & SLOT_BUSY_FLAG)
+    if (NI_comm->state & SLOT_BUSY_FLAG)
     {
-        if (gRfuSlotStatusNI[slotStatusIndex]->recv.state == SLOT_STATE_RECV_LAST)
-            gRfuSlotStatusNI[slotStatusIndex]->recv.state = SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN;
+        if (NI_comm->state == SLOT_STATE_RECV_LAST)
+            NI_comm->state = SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN;
         else
-            gRfuSlotStatusNI[slotStatusIndex]->recv.state = SLOT_STATE_RECV_FAILED;
+            NI_comm->state = SLOT_STATE_RECV_FAILED;
         gRfuLinkStatus->recvSlotNIFlag &= ~(1 << slotStatusIndex);
         rfu_STC_releaseFrame(slotStatusIndex, 1, NI_comm);
     }
@@ -1724,7 +1732,6 @@ static void rfu_constructSendLLFrame(void)
     u32 pakcketSize, currSize;
     u8 i;
     u8 *llf_p;
-    struct RfuSlotStatusNI *slotStatusNI;
 
     if (gRfuLinkStatus->parentChild != MODE_NEUTRAL
      && gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag | gRfuLinkStatus->sendSlotUNIFlag)
@@ -1758,9 +1765,6 @@ static void rfu_constructSendLLFrame(void)
             {
                 u8 *maxSize = llf_p - offsetof(struct RfuFixed, LLFBuffer[1]);
 
-                // Does the volatile qualifier make sense?
-                // It's the same as:
-                // asm("":::"memory");
                 pakcketSize = maxSize - *(u8 *volatile *)&gRfuFixed;
             }
         }

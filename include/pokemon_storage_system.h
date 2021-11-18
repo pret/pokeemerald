@@ -2,13 +2,14 @@
 #define GUARD_POKEMON_STORAGE_SYSTEM_H
 
 #define TOTAL_BOXES_COUNT       14
-#define IN_BOX_ROWS             6
-#define IN_BOX_COLUMNS          5
+#define IN_BOX_ROWS             5 // Number of rows, 6 Pokémon per row
+#define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
+#define BOX_NAME_LENGTH         8
 
 /*
-            ROWS
-COLUMNS     0   1   2   3   4   5
+            COLUMNS
+ROWS        0   1   2   3   4   5
             6   7   8   9   10  11
             12  13  14  15  16  17
             18  19  20  21  22  23
@@ -19,7 +20,7 @@ struct PokemonStorage
 {
     /*0x0000*/ u8 currentBox;
     /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
-    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][9];
+    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
     /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
 };
 
@@ -51,14 +52,13 @@ void ZeroBoxMonAt(u8 boxId, u8 boxPosition);
 void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon *dst);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 boxPosition);
 u8 *GetBoxNamePtr(u8 boxId);
-u8 GetBoxWallpaper(u8 boxId);
-void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
-s16 sub_80D214C(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3);
+s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3);
 bool8 CheckFreePokemonStorageSpace(void);
 bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition);
 u32 CountStorageNonEggMons(void);
 u32 CountAllStorageMons(void);
 bool32 AnyStorageMonWithMove(u16 moveId);
+
 void ResetWaldaWallpaper(void);
 void SetWaldaWallpaperLockedOrUnlocked(bool32 unlocked);
 bool32 IsWaldaWallpaperUnlocked(void);

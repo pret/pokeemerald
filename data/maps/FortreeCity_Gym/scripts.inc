@@ -1,21 +1,21 @@
-FortreeCity_Gym_MapScripts:: @ 82165AB
+FortreeCity_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_Gym_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FortreeCity_Gym_OnWarp
 	.byte 0
 
-FortreeCity_Gym_OnTransition: @ 82165B6
+FortreeCity_Gym_OnTransition:
 	special RotatingGate_InitPuzzle
 	end
 
-FortreeCity_Gym_OnWarp: @ 82165BA
+FortreeCity_Gym_OnWarp:
 	map_script_2 VAR_TEMP_0, VAR_TEMP_0, FortreeCity_Gym_EventScript_InitRotatingGates
 	.2byte 0
 
-FortreeCity_Gym_EventScript_InitRotatingGates:: @ 82165C4
+FortreeCity_Gym_EventScript_InitRotatingGates::
 	special RotatingGate_InitPuzzleAndGraphics
 	end
 
-FortreeCity_Gym_EventScript_Winona:: @ 82165C8
+FortreeCity_Gym_EventScript_Winona::
 	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -25,7 +25,7 @@ FortreeCity_Gym_EventScript_Winona:: @ 82165C8
 	release
 	end
 
-FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
+FortreeCity_Gym_EventScript_WinonaDefeated::
 	message FortreeCity_Gym_Text_ReceivedFeatherBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -48,7 +48,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	release
 	end
 
-FortreeCity_Gym_EventScript_GiveAerialAce2:: @ 8216646
+FortreeCity_Gym_EventScript_GiveAerialAce2::
 	giveitem ITEM_TM40
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -57,7 +57,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2:: @ 8216646
 	release
 	end
 
-FortreeCity_Gym_EventScript_GiveAerialAce:: @ 821666A
+FortreeCity_Gym_EventScript_GiveAerialAce::
 	giveitem ITEM_TM40
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
@@ -65,42 +65,42 @@ FortreeCity_Gym_EventScript_GiveAerialAce:: @ 821666A
 	setflag FLAG_RECEIVED_TM40
 	return
 
-FortreeCity_Gym_EventScript_WinonaRematch:: @ 821668D
+FortreeCity_Gym_EventScript_WinonaRematch::
 	trainerbattle_rematch_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaPreRematch, FortreeCity_Gym_Text_WinonaRematchDefeat, FortreeCity_Gym_Text_WinonaRematchNeedTwoMons
 	msgbox FortreeCity_Gym_Text_WinonaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_Jared:: @ 82166A8
+FortreeCity_Gym_EventScript_Jared::
 	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat
 	msgbox FortreeCity_Gym_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_Edwardo:: @ 82166BF
+FortreeCity_Gym_EventScript_Edwardo::
 	trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoIntro, FortreeCity_Gym_Text_EdwardoDefeat
 	msgbox FortreeCity_Gym_Text_EdwardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_Flint:: @ 82166D6
+FortreeCity_Gym_EventScript_Flint::
 	trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_FlintIntro, FortreeCity_Gym_Text_FlintDefeat
 	msgbox FortreeCity_Gym_Text_FlintPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_Ashley:: @ 82166ED
+FortreeCity_Gym_EventScript_Ashley::
 	trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyIntro, FortreeCity_Gym_Text_AshleyDefeat
 	msgbox FortreeCity_Gym_Text_AshleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_Humberto:: @ 8216704
+FortreeCity_Gym_EventScript_Humberto::
 	trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoIntro, FortreeCity_Gym_Text_HumbertoDefeat
 	msgbox FortreeCity_Gym_Text_HumbertoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_Darius:: @ 821671B
+FortreeCity_Gym_EventScript_Darius::
 	trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_DariusIntro, FortreeCity_Gym_Text_DariusDefeat
 	msgbox FortreeCity_Gym_Text_DariusPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FortreeCity_Gym_EventScript_GymGuide:: @ 8216732
+FortreeCity_Gym_EventScript_GymGuide::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_FORTREE_GYM, FortreeCity_Gym_EventScript_GymGuidePostVictory
@@ -108,34 +108,34 @@ FortreeCity_Gym_EventScript_GymGuide:: @ 8216732
 	release
 	end
 
-FortreeCity_Gym_EventScript_GymGuidePostVictory:: @ 8216747
+FortreeCity_Gym_EventScript_GymGuidePostVictory::
 	msgbox FortreeCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
 
-FortreeCity_Gym_EventScript_LeftGymStatue:: @ 8216751
+FortreeCity_Gym_EventScript_LeftGymStatue::
 	lockall
 	goto_if_set FLAG_BADGE06_GET, FortreeCity_Gym_EventScript_GymStatueCertified
 	goto FortreeCity_Gym_EventScript_GymStatue
 	end
 
-FortreeCity_Gym_EventScript_RightGymStatue:: @ 8216761
+FortreeCity_Gym_EventScript_RightGymStatue::
 	lockall
 	goto_if_set FLAG_BADGE06_GET, FortreeCity_Gym_EventScript_GymStatueCertified
 	goto FortreeCity_Gym_EventScript_GymStatue
 	end
 
-FortreeCity_Gym_EventScript_GymStatueCertified:: @ 8216771
+FortreeCity_Gym_EventScript_GymStatueCertified::
 	msgbox FortreeCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FortreeCity_Gym_EventScript_GymStatue:: @ 821677B
+FortreeCity_Gym_EventScript_GymStatue::
 	msgbox FortreeCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FortreeCity_Gym_Text_GymGuideAdvice: @ 8216785
+FortreeCity_Gym_Text_GymGuideAdvice:
 	.string "Yo, how's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
 	.string "FORTREE GYM LEADER WINONA is\n"
@@ -146,94 +146,94 @@ FortreeCity_Gym_Text_GymGuideAdvice: @ 8216785
 	.string "who are trying to take wing!\p"
 	.string "Okay, go for it!$"
 
-FortreeCity_Gym_Text_GymGuidePostVictory: @ 821687D
+FortreeCity_Gym_Text_GymGuidePostVictory:
 	.string "You did it!\n"
 	.string "You've achieved liftoff!$"
 
-FortreeCity_Gym_Text_JaredIntro: @ 82168A2
+FortreeCity_Gym_Text_JaredIntro:
 	.string "Behold the elegant battle style of\n"
 	.string "BIRD POKéMON!$"
 
-FortreeCity_Gym_Text_JaredDefeat: @ 82168D3
+FortreeCity_Gym_Text_JaredDefeat:
 	.string "You…\n"
 	.string "You're strong…$"
 
-FortreeCity_Gym_Text_JaredPostBattle: @ 82168E7
+FortreeCity_Gym_Text_JaredPostBattle:
 	.string "A TRAINER has to be smart to keep\n"
 	.string "up with unexpected turns of events.\p"
 	.string "Do you have the smarts to get to\n"
 	.string "our LEADER?$"
 
-FortreeCity_Gym_Text_EdwardoIntro: @ 821695A
+FortreeCity_Gym_Text_EdwardoIntro:
 	.string "The lovers of BIRD POKéMON aspire\n"
 	.string "to join this GYM.\p"
 	.string "As a member of the FORTREE GYM,\n"
 	.string "I'm not allowed to lose!$"
 
-FortreeCity_Gym_Text_EdwardoDefeat: @ 82169C7
+FortreeCity_Gym_Text_EdwardoDefeat:
 	.string "It was too much of a load for me\n"
 	.string "to bear…$"
 
-FortreeCity_Gym_Text_EdwardoPostBattle: @ 82169F1
+FortreeCity_Gym_Text_EdwardoPostBattle:
 	.string "The world is huge, and there are\n"
 	.string "countless tough TRAINERS.\p"
 	.string "I'm going to keep training and make\n"
 	.string "myself even stronger.$"
 
-FortreeCity_Gym_Text_FlintIntro: @ 8216A66
+FortreeCity_Gym_Text_FlintIntro:
 	.string "There's no need for WINONA, our GYM\n"
 	.string "LEADER, to deal with you!\p"
 	.string "I'm plenty good enough for you!$"
 
-FortreeCity_Gym_Text_FlintDefeat: @ 8216AC4
+FortreeCity_Gym_Text_FlintDefeat:
 	.string "WINONA, I…\n"
 	.string "I lost!$"
 
-FortreeCity_Gym_Text_FlintPostBattle: @ 8216AD7
+FortreeCity_Gym_Text_FlintPostBattle:
 	.string "WINONA is cute and she's strong.\n"
 	.string "She's the ultimate LEADER!\p"
 	.string "Blush…$"
 
-FortreeCity_Gym_Text_AshleyIntro: @ 8216B1A
+FortreeCity_Gym_Text_AshleyIntro:
 	.string "WINONA taught me personally!\n"
 	.string "You can't beat me easily!$"
 
-FortreeCity_Gym_Text_AshleyDefeat: @ 8216B51
+FortreeCity_Gym_Text_AshleyDefeat:
 	.string "I was beaten…$"
 
-FortreeCity_Gym_Text_AshleyPostBattle: @ 8216B5F
+FortreeCity_Gym_Text_AshleyPostBattle:
 	.string "Thanks to WINONA, the people of\n"
 	.string "FORTREE can live without fear.$"
 
-FortreeCity_Gym_Text_HumbertoIntro: @ 8216B9E
+FortreeCity_Gym_Text_HumbertoIntro:
 	.string "When WINONA takes to battle, her face\n"
 	.string "shines with beautiful determination…\p"
 	.string "I'm not letting you witness that\n"
 	.string "lovely sight!$"
 
-FortreeCity_Gym_Text_HumbertoDefeat: @ 8216C18
+FortreeCity_Gym_Text_HumbertoDefeat:
 	.string "Urk!\n"
 	.string "I couldn't stop you.$"
 
-FortreeCity_Gym_Text_HumbertoPostBattle: @ 8216C32
+FortreeCity_Gym_Text_HumbertoPostBattle:
 	.string "You'd better watch it!\n"
 	.string "Don't get distracted staring at WINONA\l"
 	.string "or you'll go crashing down in a heap!$"
 
-FortreeCity_Gym_Text_DariusIntro: @ 8216C96
+FortreeCity_Gym_Text_DariusIntro:
 	.string "You'd better know that there are all\n"
 	.string "sorts of FLYING-type POKéMON.\p"
 	.string "You do know that, right?$"
 
-FortreeCity_Gym_Text_DariusDefeat: @ 8216CF2
+FortreeCity_Gym_Text_DariusDefeat:
 	.string "You seem to know your stuff!$"
 
-FortreeCity_Gym_Text_DariusPostBattle: @ 8216D0F
+FortreeCity_Gym_Text_DariusPostBattle:
 	.string "Sure, you beat me all right.\n"
 	.string "But you'd better watch it! Our LEADER\l"
 	.string "WINONA's POKéMON are all business.$"
 
-FortreeCity_Gym_Text_WinonaIntro: @ 8216D75
+FortreeCity_Gym_Text_WinonaIntro:
 	.string "I am WINONA. I am the LEADER of\n"
 	.string "the FORTREE POKéMON GYM.\p"
 	.string "I have become one with BIRD POKéMON\n"
@@ -243,18 +243,18 @@ FortreeCity_Gym_Text_WinonaIntro: @ 8216D75
 	.string "Witness the elegant choreography\n"
 	.string "of BIRD POKéMON and I!$"
 
-FortreeCity_Gym_Text_WinonaDefeat: @ 8216E60
+FortreeCity_Gym_Text_WinonaDefeat:
 	.string "Never before have I seen a TRAINER\n"
 	.string "command POKéMON with more grace\l"
 	.string "than I…\p"
 	.string "In recognition of your prowess,\n"
 	.string "I present to you this GYM BADGE.$"
 
-FortreeCity_Gym_Text_ReceivedFeatherBadge: @ 8216EEC
+FortreeCity_Gym_Text_ReceivedFeatherBadge:
 	.string "{PLAYER} received the FEATHER BADGE\n"
 	.string "from WINONA.$"
 
-FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis: @ 8216F17
+FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "With the FEATHER BADGE, all POKéMON up\n"
 	.string "to LV 70, even those received through\l"
 	.string "trades, will obey your every command.\p"
@@ -263,29 +263,29 @@ FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis: @ 8216F17
 	.string "And this…\n"
 	.string "This is a gift from me.$"
 
-FortreeCity_Gym_Text_ExplainAerialAce: @ 8216FEC
+FortreeCity_Gym_Text_ExplainAerialAce:
 	.string "TM40 contains AERIAL ACE.\p"
 	.string "Its speed…\n"
 	.string "No POKéMON should be able to avoid it.\p"
 	.string "… … … … … …$"
 
-FortreeCity_Gym_Text_RegisteredWinona: @ 8217044
+FortreeCity_Gym_Text_RegisteredWinona:
 	.string "Registered GYM LEADER WINONA\n"
 	.string "in the POKéNAV.$"
 
-FortreeCity_Gym_Text_WinonaPostBattle: @ 8217071
+FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "Though I fell to you, I will remain\n"
 	.string "devoted to BIRD POKéMON.$"
 
-FortreeCity_Gym_Text_GymStatue: @ 82170AE
+FortreeCity_Gym_Text_GymStatue:
 	.string "FORTREE CITY POKéMON GYM$"
 
-FortreeCity_Gym_Text_GymStatueCertified: @ 82170C7
+FortreeCity_Gym_Text_GymStatueCertified:
 	.string "FORTREE CITY POKéMON GYM\p"
 	.string "WINONA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-FortreeCity_Gym_Text_WinonaPreRematch: @ 8217100
+FortreeCity_Gym_Text_WinonaPreRematch:
 	.string "WINONA: We humans can never escape\n"
 	.string "gravity's pull on the ground.\p"
 	.string "But by striving for excellence,\n"
@@ -295,17 +295,17 @@ FortreeCity_Gym_Text_WinonaPreRematch: @ 8217100
 	.string "Please, allow me to see your power\n"
 	.string "at full flight!$"
 
-FortreeCity_Gym_Text_WinonaRematchDefeat: @ 82171E6
+FortreeCity_Gym_Text_WinonaRematchDefeat:
 	.string "I failed to reach your height again…$"
 
-FortreeCity_Gym_Text_WinonaPostRematch: @ 821720B
+FortreeCity_Gym_Text_WinonaPostRematch:
 	.string "WINONA: Even though I have lost,\n"
 	.string "the wings of my heart remain unbroken.\p"
 	.string "I can rise and soar again and\n"
 	.string "yet again.\p"
 	.string "I am convinced of it!$"
 
-FortreeCity_Gym_Text_WinonaRematchNeedTwoMons: @ 8217292
+FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
 	.string "WINONA: We humans can never escape\n"
 	.string "gravity's pull on the ground.\p"
 	.string "But by striving for excellence,\n"
