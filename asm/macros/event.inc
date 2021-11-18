@@ -588,7 +588,7 @@
 	.2byte \decoration
 	.endm
 
-	@ Applies the movement data at movements to the specified (localId) Object. If no map is specified, then the current map is used.
+	@ Applies the movement data at movements to the specified (localId) object. If no map is specified, then the current map is used.
 	.macro applymovement localId:req, movements:req, map
 		.ifb \map
 			.byte 0x4f
@@ -603,9 +603,9 @@
 		.endif
 	.endm
 
-	@ Blocks script execution until the movements being applied to the specified (localId) Object finish.
-	@ If the specified Object is 0, then the command will block script execution until all Objects
-	@ affected by applymovement finish their movements. If the specified Object is not currently being
+	@ Blocks script execution until the movements being applied to the specified (localId) object finish.
+	@ If the specified object is 0, then the command will block script execution until all objects
+	@ affected by applymovement finish their movements. If the specified object is not currently being
 	@ manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro waitmovement localId:req, map
@@ -619,7 +619,7 @@
 		.endif
 	.endm
 
-	@ Attempts to despawn the specified (localId) Object on the specified (map_group, map_num) map.
+	@ Attempts to despawn the specified (localId) object on the specified map.
 	@ It also sets the object's visibility flag if it has one.
 	@ If no map is specified, then the current map is used.
 	.macro removeobject localId:req, map
@@ -633,8 +633,8 @@
 		.endif
 	.endm
 
-	@ Attempts to spawn the specified (localId) Object the specified (map_group, map_num) map.
-	@ Note that unlike removeobject this does not modify the OObject's flag.
+	@ Attempts to spawn the specified (localId) object the specified map.
+	@ Note that unlike removeobject this does not modify the object's flag.
 	@ If no map is specified, then the current map is used.
 	.macro addobject localId:req, map
 		.ifb \map
@@ -647,7 +647,7 @@
 		.endif
 	.endm
 
-	@ Sets the specified (localId) Object's position on the current map.
+	@ Sets the specified (localId) object's position on the current map.
 	.macro setobjectxy localId:req, x:req, y:req
 	.byte 0x57
 	.2byte \localId
