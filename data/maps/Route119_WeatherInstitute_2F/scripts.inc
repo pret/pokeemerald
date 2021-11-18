@@ -128,7 +128,7 @@ Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare::
 	message Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform
 	waitmessage
 	waitfanfare
-	bufferspeciesname 0, SPECIES_CASTFORM
+	bufferspeciesname STR_VAR_1, SPECIES_CASTFORM
 	return
 
 Route119_WeatherInstitute_2F_EventScript_ExplainCastform::

@@ -827,7 +827,7 @@ EventScript_RecordCenter_Spot3::
 	end
 
 RecordCorner_EventScript_ReceivedGiftItem::
-	bufferitemname 1, VAR_TEMP_1
+	bufferitemname STR_VAR_2, VAR_TEMP_1
 	message RecordCorner_Text_PlayerSentOverOneX
 	waitmessage
 	waitbuttonpress

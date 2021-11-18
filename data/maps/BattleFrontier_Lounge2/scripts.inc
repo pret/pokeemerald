@@ -61,43 +61,43 @@ BattleFrontier_Lounge2_EventScript_FacilityNews::
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferSingle::
-	bufferstdstring 0, STDSTRING_SINGLE
+	bufferstdstring STR_VAR_1, STDSTRING_SINGLE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferDouble::
-	bufferstdstring 0, STDSTRING_DOUBLE
+	bufferstdstring STR_VAR_1, STDSTRING_DOUBLE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferMulti::
-	bufferstdstring 0, STDSTRING_MULTI
+	bufferstdstring STR_VAR_1, STDSTRING_MULTI
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferMultiLink::
-	bufferstdstring 0, STDSTRING_MULTI_LINK
+	bufferstdstring STR_VAR_1, STDSTRING_MULTI_LINK
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattleDome::
-	bufferstdstring 0, STDSTRING_BATTLE_DOME
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_DOME
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattleFactory::
-	bufferstdstring 0, STDSTRING_BATTLE_FACTORY
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_FACTORY
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattlePalace::
-	bufferstdstring 0, STDSTRING_BATTLE_PALACE
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PALACE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattleArena::
-	bufferstdstring 0, STDSTRING_BATTLE_ARENA
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_ARENA
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattlePike::
-	bufferstdstring 0, STDSTRING_BATTLE_PIKE
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PIKE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattlePyramid::
-	bufferstdstring 0, STDSTRING_BATTLE_PYRAMID
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PYRAMID
 	return
 
 BattleFrontier_Lounge2_EventScript_Maniac1::

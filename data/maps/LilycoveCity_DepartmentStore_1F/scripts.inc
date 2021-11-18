@@ -41,7 +41,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon
 	compare VAR_0x8006, 1
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon
-	bufferitemname 0, VAR_0x8005
+	bufferitemname STR_VAR_1, VAR_0x8005
 	compare VAR_0x8004, 1
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
 	compare VAR_0x8004, 2

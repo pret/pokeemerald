@@ -27,7 +27,7 @@ PacifidlogTown_House3_EventScript_Trader::
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	waitstate
-	bufferspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou, MSGBOX_DEFAULT
 	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
 	release
@@ -39,7 +39,7 @@ PacifidlogTown_House3_EventScript_DeclineTrade::
 	end
 
 PacifidlogTown_House3_EventScript_NotRequestedMon::
-	bufferspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon, MSGBOX_DEFAULT
 	release
 	end

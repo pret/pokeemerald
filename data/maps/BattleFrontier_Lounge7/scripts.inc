@@ -249,7 +249,7 @@ BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection::
 	copyvar VAR_0x8004, VAR_TEMP_D
 	copyvar VAR_0x8005, VAR_TEMP_E
 	special BufferBattleFrontierTutorMoveName
-	buffernumberstring 1, VAR_0x8008
+	buffernumberstring STR_VAR_2, VAR_0x8008
 	copyvar VAR_0x8004, VAR_TEMP_C
 	msgbox BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints, MSGBOX_YESNO
 	compare VAR_RESULT, NO

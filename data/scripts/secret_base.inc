@@ -31,7 +31,7 @@ SecretBase_EventScript_CheckEntrance::
 	goto_if_eq SecretBase_EventScript_AlreadyHasSecretBase
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, VAR_RESULT
-	buffermovename 1, MOVE_SECRET_POWER
+	buffermovename STR_VAR_2, MOVE_SECRET_POWER
 	compare VAR_0x8007, SECRET_BASE_RED_CAVE
 	goto_if_eq SecretBase_EventScript_Cave
 	compare VAR_0x8007, SECRET_BASE_BROWN_CAVE
@@ -50,7 +50,7 @@ SecretBase_EventScript_Cave::
 	lockall
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
-	bufferpartymonnick 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_IndentUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
@@ -82,7 +82,7 @@ SecretBase_EventScript_Tree::
 	lockall
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_TreeNoSecretPower
-	bufferpartymonnick 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_TreeUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
@@ -114,7 +114,7 @@ SecretBase_EventScript_Shrub::
 	lockall
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_ShrubNoSecretPower
-	bufferpartymonnick 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_ClumpUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
@@ -221,8 +221,8 @@ SecretBase_EventScript_AlreadyHasSecretBase::
 	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
-	bufferpartymonnick 0, VAR_0x8004
-	buffermovename 1, MOVE_SECRET_POWER
+	bufferpartymonnick STR_VAR_1, VAR_0x8004
+	buffermovename STR_VAR_2, MOVE_SECRET_POWER
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	closemessage

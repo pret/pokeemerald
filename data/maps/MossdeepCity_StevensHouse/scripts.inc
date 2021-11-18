@@ -121,13 +121,13 @@ MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC::
 	end
 
 MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare::
-	bufferspeciesname 1, SPECIES_BELDUM
+	bufferspeciesname STR_VAR_2, SPECIES_BELDUM
 	removeobject LOCALID_BELDUM_BALL
 	playfanfare MUS_OBTAIN_ITEM
 	message MossdeepCity_StevensHouse_Text_ObtainedBeldum
 	waitmessage
 	waitfanfare
-	bufferspeciesname 0, SPECIES_BELDUM
+	bufferspeciesname STR_VAR_1, SPECIES_BELDUM
 	return
 
 MossdeepCity_StevensHouse_EventScript_ReceivedBeldum::

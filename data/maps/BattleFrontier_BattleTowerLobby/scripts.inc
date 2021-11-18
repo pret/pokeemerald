@@ -686,19 +686,19 @@ BattleFrontier_BattleTowerLobby_EventScript_BufferModeText::
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_BufferTextSingle::
-	bufferstdstring 0, STDSTRING_SINGLE
+	bufferstdstring STR_VAR_1, STDSTRING_SINGLE
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_BufferTextDouble::
-	bufferstdstring 0, STDSTRING_DOUBLE
+	bufferstdstring STR_VAR_1, STDSTRING_DOUBLE
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_BufferTextMulti::
-	bufferstdstring 0, STDSTRING_MULTI
+	bufferstdstring STR_VAR_1, STDSTRING_MULTI
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_BufferTextLinkMulti::
-	bufferstdstring 0, STDSTRING_MULTI_LINK
+	bufferstdstring STR_VAR_1, STDSTRING_MULTI_LINK
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_SetAttendantTalkedTo::

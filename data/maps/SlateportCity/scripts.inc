@@ -164,7 +164,7 @@ SlateportCity_Pokemart_EnergyGuru:
 SlateportCity_EventScript_EffortRibbonWoman::
 	lock
 	faceplayer
-	bufferleadmonspeciesname 0
+	bufferleadmonspeciesname STR_VAR_1
 	msgbox SlateportCity_Text_OhYourPokemon, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, LeadMonHasEffortRibbon
 	compare VAR_RESULT, TRUE
@@ -795,77 +795,77 @@ SlateportCity_EventScript_ChooseBerryPowderItem::
 	end
 
 SlateportCity_EventScript_EnergyPowder::
-	bufferitemname 0, ITEM_ENERGY_POWDER
+	bufferitemname STR_VAR_1, ITEM_ENERGY_POWDER
 	setvar VAR_0x8008, ITEM_ENERGY_POWDER
 	setvar VAR_0x8009, 50
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_EnergyRoot::
-	bufferitemname 0, ITEM_ENERGY_ROOT
+	bufferitemname STR_VAR_1, ITEM_ENERGY_ROOT
 	setvar VAR_0x8008, ITEM_ENERGY_ROOT
 	setvar VAR_0x8009, 80
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_HealPowder::
-	bufferitemname 0, ITEM_HEAL_POWDER
+	bufferitemname STR_VAR_1, ITEM_HEAL_POWDER
 	setvar VAR_0x8008, ITEM_HEAL_POWDER
 	setvar VAR_0x8009, 50
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_RevivalHerb::
-	bufferitemname 0, ITEM_REVIVAL_HERB
+	bufferitemname STR_VAR_1, ITEM_REVIVAL_HERB
 	setvar VAR_0x8008, ITEM_REVIVAL_HERB
 	setvar VAR_0x8009, 300
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_Protein::
-	bufferitemname 0, ITEM_PROTEIN
+	bufferitemname STR_VAR_1, ITEM_PROTEIN
 	setvar VAR_0x8008, ITEM_PROTEIN
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_Iron::
-	bufferitemname 0, ITEM_IRON
+	bufferitemname STR_VAR_1, ITEM_IRON
 	setvar VAR_0x8008, ITEM_IRON
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_Carbos::
-	bufferitemname 0, ITEM_CARBOS
+	bufferitemname STR_VAR_1, ITEM_CARBOS
 	setvar VAR_0x8008, ITEM_CARBOS
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_Calcium::
-	bufferitemname 0, ITEM_CALCIUM
+	bufferitemname STR_VAR_1, ITEM_CALCIUM
 	setvar VAR_0x8008, ITEM_CALCIUM
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_Zinc::
-	bufferitemname 0, ITEM_ZINC
+	bufferitemname STR_VAR_1, ITEM_ZINC
 	setvar VAR_0x8008, ITEM_ZINC
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_HPUp::
-	bufferitemname 0, ITEM_HP_UP
+	bufferitemname STR_VAR_1, ITEM_HP_UP
 	setvar VAR_0x8008, ITEM_HP_UP
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
 SlateportCity_EventScript_PPUp::
-	bufferitemname 0, ITEM_PP_UP
+	bufferitemname STR_VAR_1, ITEM_PP_UP
 	setvar VAR_0x8008, ITEM_PP_UP
 	setvar VAR_0x8009, 3000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem

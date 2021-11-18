@@ -144,12 +144,12 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink::
 	compare VAR_TEMP_1, 2
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade
 	updatemoneybox
-	bufferitemname 0, VAR_TEMP_0
+	bufferitemname STR_VAR_1, VAR_TEMP_0
 	playse SE_VEND
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
-	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, STDSTRING_ITEMS
+	bufferitemname STR_VAR_2, VAR_TEMP_0
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64  @ 1/64 chance of an additional drink dropping
 	compare VAR_RESULT, 0
@@ -160,8 +160,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink::
 	playse SE_VEND
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
-	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, STDSTRING_ITEMS
+	bufferitemname STR_VAR_2, VAR_TEMP_0
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64  @ 1/64 * the prev 1/64 chance of a third additional drink dropping, ~ 0.02% chance
 	compare VAR_RESULT, 0
@@ -172,8 +172,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink::
 	playse SE_VEND
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
-	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, STDSTRING_ITEMS
+	bufferitemname STR_VAR_2, VAR_TEMP_0
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink
 	end

@@ -68,7 +68,7 @@ PacifidlogTown_House2_EventScript_GiveFrustration::
 
 PacifidlogTown_House2_EventScript_ComeBackInXDays::
 	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
-	buffernumberstring 0, VAR_RESULT
+	buffernumberstring STR_VAR_1, VAR_RESULT
 	msgbox PacifidlogTown_House2_Text_GetGoodTMInXDays, MSGBOX_DEFAULT
 	release
 	end

@@ -27,7 +27,7 @@ FortreeCity_House1_EventScript_Trader::
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	waitstate
-	bufferspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox FortreeCity_House1_Text_MonYouTakeCare, MSGBOX_DEFAULT
 	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
@@ -39,7 +39,7 @@ FortreeCity_House1_EventScript_DeclineTrade::
 	end
 
 FortreeCity_House1_EventScript_NotRequestedMon::
-	bufferspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox FortreeCity_House1_Text_ThisIsntAMon, MSGBOX_DEFAULT
 	release
 	end

@@ -176,25 +176,25 @@ BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints::
-	buffernumberstring 0, 4
+	buffernumberstring STR_VAR_1, 4
 	setvar VAR_0x8004, 4
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
 BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints::
-	buffernumberstring 0, 3
+	buffernumberstring STR_VAR_1, 3
 	setvar VAR_0x8004, 3
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
 BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints::
-	buffernumberstring 0, 2
+	buffernumberstring STR_VAR_1, 2
 	setvar VAR_0x8004, 2
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
 BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
-	buffernumberstring 0, 1
+	buffernumberstring STR_VAR_1, 1
 	setvar VAR_0x8004, 1
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end

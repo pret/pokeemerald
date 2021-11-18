@@ -243,8 +243,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard::
 	goto Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard
 
 Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard::
-	bufferitemname 0, VAR_0x8008
-	bufferitemname 1, VAR_0x8009
+	bufferitemname STR_VAR_1, VAR_0x8008
+	bufferitemname STR_VAR_2, VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade

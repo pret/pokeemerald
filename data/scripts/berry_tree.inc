@@ -92,20 +92,20 @@ BerryTree_EventScript_GetCareAdverb::
 	goto_if_eq BerryTree_EventScript_SetAdverbPoor
 	compare VAR_0x8005, 4
 	goto_if_eq BerryTree_EventScript_SetAdverbGreat
-	bufferstring 1, BerryTree_Text_CareAdverbGood
+	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbGood
 	return
 
 BerryTree_EventScript_SetAdverbGreat::
-	bufferstring 1, BerryTree_Text_CareAdverbGreat
+	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbGreat
 	return
 
 BerryTree_EventScript_SetAdverbPoor::
-	bufferstring 1, BerryTree_Text_CareAdverbPoor
+	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbPoor
 	return
 
 @ VAR_0x8006 here is the number of berries
 BerryTree_EventScript_CheckBerryFullyGrown::
-	buffernumberstring 1, VAR_0x8006
+	buffernumberstring STR_VAR_2, VAR_0x8006
 	lock
 	faceplayer
 	special ObjectEventInteractionGetBerryCountString

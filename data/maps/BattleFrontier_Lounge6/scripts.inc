@@ -38,7 +38,7 @@ BattleFrontier_Lounge6_EventScript_DeclineTrade::
 	end
 
 BattleFrontier_Lounge6_EventScript_NotRequestedMon::
-	bufferspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon, MSGBOX_DEFAULT
 	release
 	end

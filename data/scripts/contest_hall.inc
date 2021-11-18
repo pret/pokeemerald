@@ -283,8 +283,8 @@ ContestHall_EventScript_GetCategoryTough::
 	return
 
 ContestHall_EventScript_ContestGettingStarted::
-	buffercontestname 1, VAR_0x8008
-	bufferstdstring 2, VAR_0x8009
+	buffercontestname STR_VAR_2, VAR_0x8008
+	bufferstdstring STR_VAR_3, VAR_0x8009
 	call ContestHall_EventScript_GettingStarted
 	lockall
 	applymovement LOCALID_MC, ContestHall_Movement_MCBackUp
@@ -393,7 +393,7 @@ ContestHall_EventScript_Player4WalkToCenter::
 ContestHall_EventScript_ShowContestMonPic::
 	special BufferContestTrainerAndMonNames
 	addvar VAR_0x8006, 1
-	buffernumberstring 1, VAR_0x8006
+	buffernumberstring STR_VAR_2, VAR_0x8006
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	waitmovement 0
@@ -1000,7 +1000,7 @@ ContestHall_EventScript_CongratulateWinner::
 	special BufferContestWinnerTrainerName
 	special BufferContestWinnerMonName
 	addvar VAR_0x8005, 1
-	buffernumberstring 1, VAR_0x8005
+	buffernumberstring STR_VAR_2, VAR_0x8005
 	addvar VAR_0x8005, -1
 	call ContestHall_EventScript_CongratsWinner
 	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp

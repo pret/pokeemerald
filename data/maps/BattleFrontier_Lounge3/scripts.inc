@@ -144,17 +144,17 @@ BattleFrontier_Lounge3_EventScript_LostChallenge::
 	end
 
 BattleFrontier_Lounge3_EventScript_RewardBet5::
-	buffernumberstring 0, (BET_AMOUNT_5 * 2)
+	buffernumberstring STR_VAR_1, (BET_AMOUNT_5 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_5 * 2)
 	return
 
 BattleFrontier_Lounge3_EventScript_RewardBet10::
-	buffernumberstring 0, (BET_AMOUNT_10 * 2)
+	buffernumberstring STR_VAR_1, (BET_AMOUNT_10 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_10 * 2)
 	return
 
 BattleFrontier_Lounge3_EventScript_RewardBet15::
-	buffernumberstring 0, (BET_AMOUNT_15 * 2)
+	buffernumberstring STR_VAR_1, (BET_AMOUNT_15 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_15 * 2)
 	return
 

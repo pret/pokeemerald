@@ -1014,76 +1014,83 @@
 	.2byte \move
 	.endm
 
+	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
+	@ If given anything else it will output it directly.
+	@ Note: because the STR_VAR_# arguments given to this macro are not part of a processed string they are not
+	@       replaced with their charmap values, they are just passed as the literal characters "STR_VAR_#".
+	.macro stringvar id:req
+	.if \id == STR_VAR_1
+	.byte 0
+	.elseif \id == STR_VAR_2
+	.byte 1
+	.elseif \id == STR_VAR_3
+	.byte 2
+	.else
+	.byte \id
+	.endif
+	.endm
+
 	@ Writes the name of the given Pokemon species to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferspeciesname stringVarId:req, species:req
 	.byte 0x7d
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \species
 	.endm
 
 	@ Writes the name of the species of the first Pokemon in the player's party to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferleadmonspeciesname stringVarId:req
 	.byte 0x7e
-	.byte \stringVarId
+	stringvar \stringVarId
 	.endm
 
 	@ Writes the nickname of the Pokemon in 'slot' (zero-indexed) of the player's party to the specified buffer.
 	@ If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferpartymonnick stringVarId:req, slot:req
 	.byte 0x7f
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \slot
 	.endm
 
 	@ Writes the name of the specified item to the specified buffer. If itemId is >= ITEMS_COUNT,
 	@ then the name of ITEM_NONE ("????????") is buffered instead.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferitemname stringVarId:req, item:req
 	.byte 0x80
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \item
 	.endm
 
 	@ Writes the name of the specified decoration to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferdecorationname stringVarId:req, decoration:req
 	.byte 0x81
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \decoration
 	.endm
 
 	@ Writes the name of the specified move to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro buffermovename stringVarId:req, move:req
 	.byte 0x82
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \move
 	.endm
 
 	@ Converts the value of input to a decimal string, and writes that string to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro buffernumberstring stringVarId:req, input:req
 	.byte 0x83
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \input
 	.endm
 
 	@ Writes the given standard string (STDSTRING_*) to the specified buffer. Invalid std string ids are not handled.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferstdstring stringVarId:req, index:req
 	.byte 0x84
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \index
 	.endm
 
 	@ Copies the string at the given pointer to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferstring stringVarId:req, text:req
 	.byte 0x85
-	.byte \stringVarId
+	stringvar \stringVarId
 	.4byte \text
 	.endm
 
@@ -1462,9 +1469,9 @@
 	.4byte \pointer
 	.endm
 
-	.macro vbufferstring byte:req, pointer:req
+	.macro vbufferstring stringVarIndex:req, pointer:req
 	.byte 0xbf
-	.byte \byte
+	stringvar \stringVarIndex
 	.4byte \pointer
 	.endm
 
@@ -1509,10 +1516,9 @@
 	.endm
 
 	@ Writes the name of the specified (box) PC box to the specified buffer.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferboxname stringVarId:req, box:req
 	.byte 0xc6
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \box
 	.endm
 
@@ -1644,19 +1650,17 @@
 	.byte \mode
 	.endm
 
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro buffertrainerclassname stringVarId:req, class:req
 	.byte 0xdd
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \class
 	.endm
 
 	@ Buffers the specified trainer's name to the given string var.
 	@ If the trainer id is >= TRAINERS_COUNT it will be treated as TRAINER_NONE.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro buffertrainername stringVarId:req, trainerId:req
 	.byte 0xde
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \trainerId
 	.endm
 
@@ -1677,17 +1681,16 @@
 	@ For example a category of CONTEST_CATEGORY_COOL will buffer the string "COOLNESS CONTEST".
 	.macro buffercontestname stringVarId:req, category:req
 	.byte 0xe1
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \category
 	.endm
 
 	@ Writes the name of the specified item to the specified buffer. If 'item' is a Berry or ITEM_POKE_BALL
 	@ and if the quantity is 2 or more, the buffered string will be pluralized ("IES" or "S" appended).
 	@ If the specified item is >= ITEMS_COUNT then the name of ITEM_NONE ("????????") is buffered instead.
-	@ 0: STR_VAR_1,  1: STR_VAR_2,  2: STR_VAR_3
 	.macro bufferitemnameplural stringVarId:req, item:req, quantity:req
 	.byte 0xe2
-	.byte \stringVarId
+	stringvar \stringVarId
 	.2byte \item
 	.2byte \quantity
 	.endm

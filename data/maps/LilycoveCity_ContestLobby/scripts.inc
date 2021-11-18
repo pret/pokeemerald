@@ -836,7 +836,7 @@ LilycoveCity_ContestLobby_EventScript_CancelLinkTransmissionError::
 LilycoveCity_ContestLobby_EventScript_StartLinkContest::
 	special GetContestPlayerId
 	addvar VAR_0x8004, 1
-	buffernumberstring 1, VAR_0x8004
+	buffernumberstring STR_VAR_2, VAR_0x8004
 	messageautoscroll LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX
 	waitmessage
 	subvar VAR_0x8004, 1
