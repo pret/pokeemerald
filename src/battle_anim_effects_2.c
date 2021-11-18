@@ -2404,12 +2404,12 @@ void AnimTask_SketchDrawMon(u8 taskId)
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimTarget) == 1)
     {
         task->data[6] = gBattle_BG1_X;
-        params.dmaDest = (u16 *)REG_ADDR_BG1HOFS;
+        params.dmaDest = &REG_BG1HOFS;
     }
     else
     {
         task->data[6] = gBattle_BG2_X;
-        params.dmaDest = (u16 *)REG_ADDR_BG2HOFS;
+        params.dmaDest = &REG_BG2HOFS;
     }
 
     for (i = task->data[0] - 0x40; i <= task->data[0]; i++)
@@ -3259,9 +3259,9 @@ void AnimTask_HeartsBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     GetBattleAnimBg1Data(&animBg);
-    AnimLoadCompressedBgGfx(animBg.bgId, &gBattleAnimBgImage_Attract, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_Attract, FALSE);
-    LoadCompressedPalette(&gBattleAnimBgPalette_Attract, animBg.paletteId * 16, 32);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Attract, animBg.tilesOffset);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_Attract, FALSE);
+    LoadCompressedPalette(gBattleAnimBgPalette_Attract, animBg.paletteId * 16, 32);
     gTasks[taskId].func = AnimTask_HeartsBackground_Step;
 }
 
