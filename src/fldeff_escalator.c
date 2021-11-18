@@ -10,8 +10,6 @@ static EWRAM_DATA u8 sEscalatorAnim_TaskId = 0;
 
 static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatileMasks);
 static void Task_DrawEscalator(u8 taskId);
-static void Task_DrawTeleporterHousing(u8 taskId);
-static void Task_DrawTeleporterCable(u8 taskId);
 
 #define ESCALATOR_STAGES     3
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
@@ -73,7 +71,7 @@ static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatile
     s16 i;
     s16 j;
 
-    // Check all the escalator sections and only progress the selected one to the next stage    
+    // Check all the escalator sections and only progress the selected one to the next stage
     if (!gTasks[taskId].tGoingUp)
     {
         for (i = 0; i < 3; i++)
@@ -180,7 +178,7 @@ void StopEscalator(void)
 
 bool8 IsEscalatorMoving(void)
 {
-    if (gTasks[sEscalatorAnim_TaskId].tDrawingEscalator == FALSE 
+    if (gTasks[sEscalatorAnim_TaskId].tDrawingEscalator == FALSE
      && gTasks[sEscalatorAnim_TaskId].tTransitionStage == LAST_ESCALATOR_STAGE)
         return FALSE;
     else

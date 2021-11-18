@@ -28,7 +28,6 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
-#include "string.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
@@ -36,22 +35,22 @@
 #include "text_window.h"
 #include "title_screen.h"
 #include "window.h"
-#include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 
 /*
  * Main menu state machine
  * -----------------------
- * 
+ *
  * Entry point: CB2_InitMainMenu
- * 
+ *
  * Note: States advance sequentially unless otherwise stated.
- * 
+ *
  * CB2_InitMainMenu / CB2_ReinitMainMenu
  *  - Both of these states call InitMainMenu, which does all the work.
  *  - In the Reinit case, the init code will check if the user came from
  *    the options screen. If they did, then the options menu item is
  *    pre-selected.
- * 
+ *
  * Task_MainMenuCheckSaveFile
  *  - Determines how many menu options to show based on whether
  *    the save file is Ok, empty, corrupted, etc.
@@ -60,51 +59,51 @@
  *  - If there were no errors, advance to Task_MainMenuCheckBattery.
  *  - Note that the check to enable Mystery Events would normally happen
  *    here, but this version of Emerald has them disabled.
- * 
+ *
  * Task_WaitForSaveFileErrorWindow
  *  - Wait for the text to finish printing and then for the A button
  *    to be pressed.
- * 
+ *
  * Task_MainMenuCheckBattery
  *  - If the battery is OK, advance to Task_DisplayMainMenu.
  *  - If the battery is dry, advance to Task_WaitForBatteryDryErrorWindow.
- * 
+ *
  * Task_WaitForBatteryDryErrorWindow
  *  - Wait for the text to finish printing and then for the A button
  *    to be pressed.
- * 
+ *
  * Task_DisplayMainWindow
  *  - Display the buttons to the user. If the menu is in HAS_MYSTERY_EVENTS
  *    mode, there are too many buttons for one screen and a scrollbar is added,
  *    and the scrollbar task is spawned (Task_ScrollIndicatorArrowPairOnMainMenu).
- * 
+ *
  * Task_HighlightSelectedMainMenuItem
  *  - Update the UI to match the currently selected item.
- * 
+ *
  * Task_HandleMainMenuInput
  *  - If A is pressed, advance to Task_HandleMainMenuAPressed.
  *  - If B is pressed, return to the title screen via CB2_InitTitleScreen.
  *  - If Up or Down is pressed, handle scrolling if there is a scroll bar, change
  *    the selection, then go back to Task_HighlightSelectedMainMenuItem.
- * 
+ *
  * Task_HandleMainMenuAPressed
  *  - If the user selected New Game, advance to Task_NewGameBirchSpeech_Init.
  *  - If the user selected Continue, advance to CB2_ContinueSavedGame.
  *  - If the user selected the Options menu, advance to CB2_InitOptionMenu.
- *  - If the user selected Mystery Gift, advance to CB2_MysteryGift. However,
+ *  - If the user selected Mystery Gift, advance to CB2_InitMysteryGift. However,
  *    if the wireless adapter was removed, instead advance to
  *    Task_DisplayMainMenuInvalidActionError.
  *  - Code to start a Mystery Event is present here, but is unreachable in this
  *    version.
- *    
+ *
  * Task_HandleMainMenuBPressed
  *  - Clean up the main menu and go back to CB2_InitTitleScreen.
- * 
+ *
  * Task_DisplayMainMenuInvalidActionError
  *  - Print one of three different error messages, wait for the text to stop
  *    printing, and then wait for A or B to be pressed.
  * - Then advance to Task_HandleMainMenuBPressed.
- * 
+ *
  * Task_NewGameBirchSpeechInit
  *  - Load the sprites for the intro speech, start playing music
  * Task_NewGameBirchSpeech_WaitToShowBirch
@@ -127,11 +126,11 @@
  *  - Animates by advancing to Task_NewGameBirchSpeech_SlideOutOldGenderSprite
  *    whenever the player's selection changes.
  *  - Advances to Task_NewGameBirchSpeech_WhatsYourName when done.
- * 
+ *
  * Task_NewGameBirchSpeech_SlideOutOldGenderSprite
  * Task_NewGameBirchSpeech_SlideInNewGenderSprite
  *  - Returns back to Task_NewGameBirchSpeech_ChooseGender.
- * 
+ *
  * Task_NewGameBirchSpeech_WhatsYourName
  * Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint
  * Task_NewGameBirchSpeech_WaitPressBeforeNameChoice
@@ -145,7 +144,7 @@
  * Task_NewGameBirchSpeech_ProcessNameYesNoMenu
  *  - If confirmed, advance to Task_NewGameBirchSpeech_SlidePlatformAway2.
  *  - Otherwise, return to Task_NewGameBirchSpeech_BoyOrGirl.
- * 
+ *
  * Task_NewGameBirchSpeech_SlidePlatformAway2
  * Task_NewGameBirchSpeech_ReshowBirchLotad
  * Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter
@@ -155,23 +154,20 @@
  * Task_NewGameBirchSpeech_FadePlayerToWhite
  * Task_NewGameBirchSpeech_Cleanup
  *  - Advances to CB2_NewGame.
- * 
+ *
  * Task_NewGameBirchSpeechSub_InitPokeball
  *  - Advances to Task_NewGameBirchSpeechSub_WaitForLotad
  * Task_NewGameBirchSpeechSub_WaitForLotad
  *  - Destroys itself when done.
  */
 
-// These two defines are used with the sCurrItemAndOptionsMenuCheck,
-// to distinguish between its two parts.
-#define OPTION_MENU_FLAG 0x8000
-#define CURRENT_ITEM_MASK 0x7FFF
+#define OPTION_MENU_FLAG (1 << 15)
 
 // Static type declarations
 
 // Static RAM declarations
 
-static EWRAM_DATA u8 gUnknown_02022D04 = 0;
+static EWRAM_DATA bool8 sStartedPokeBallTask = 0;
 static EWRAM_DATA u16 sCurrItemAndOptionMenuCheck = 0;
 
 static u8 sBirchSpeechMainTaskId;
@@ -202,7 +198,7 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8, u8);
 static void NewGameBirchSpeech_ClearWindow(u8);
 static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8);
 static void Task_NewGameBirchSpeech_MainSpeech(u8);
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a);
+static void NewGameBirchSpeech_WaitForThisIsPokemonText(struct TextPrinterTemplate *printer, u16 a);
 static void Task_NewGameBirchSpeech_AndYouAre(u8);
 static void Task_NewGameBirchSpeechSub_WaitForLotad(u8);
 static void Task_NewGameBirchSpeech_StartBirchLotadPlatformFade(u8);
@@ -582,15 +578,15 @@ static u32 InitMainMenu(bool8 returningFromOptionsMenu)
     ResetSpriteData();
     FreeAllSpritePalettes();
     if (returningFromOptionsMenu)
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK); // fade to black
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK); // fade to black
     else
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITEALPHA); // fade to white
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_WHITEALPHA); // fade to white
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sMainMenuBgTemplates, ARRAY_COUNT(sMainMenuBgTemplates));
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     InitWindows(sWindowTemplates_MainMenu);
     DeactivateAllTextPrinters();
     LoadMainMenuWindowFrameTiles(0, MAIN_MENU_BORDER_TILE);
@@ -686,7 +682,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
                     break;
             }
         }
-        sCurrItemAndOptionMenuCheck &= CURRENT_ITEM_MASK;  // turn off the "returning from options menu" flag
+        sCurrItemAndOptionMenuCheck &= ~OPTION_MENU_FLAG;  // turn off the "returning from options menu" flag
         tCurrItem = sCurrItemAndOptionMenuCheck;
         tItemCount = tMenuType + 2;
     }
@@ -784,12 +780,12 @@ static void Task_DisplayMainMenu(u8 taskId)
             default:
                 FillWindowPixelBuffer(0, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(1, PIXEL_FILL(0xA));
-                AddTextPrinterParameterized3(0, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(1, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(0, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 PutWindowTilemap(0);
                 PutWindowTilemap(1);
-                CopyWindowToVram(0, 2);
-                CopyWindowToVram(1, 2);
+                CopyWindowToVram(0, COPYWIN_GFX);
+                CopyWindowToVram(1, COPYWIN_GFX);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[0], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[1], MAIN_MENU_BORDER_TILE);
                 break;
@@ -797,16 +793,16 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(2, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(3, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(4, PIXEL_FILL(0xA));
-                AddTextPrinterParameterized3(2, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuContinue);
-                AddTextPrinterParameterized3(3, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
+                AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 MainMenu_FormatSavegameText();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
                 PutWindowTilemap(4);
-                CopyWindowToVram(2, 2);
-                CopyWindowToVram(3, 2);
-                CopyWindowToVram(4, 2);
+                CopyWindowToVram(2, COPYWIN_GFX);
+                CopyWindowToVram(3, COPYWIN_GFX);
+                CopyWindowToVram(4, COPYWIN_GFX);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[2], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
@@ -816,19 +812,19 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(3, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(4, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(5, PIXEL_FILL(0xA));
-                AddTextPrinterParameterized3(2, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuContinue);
-                AddTextPrinterParameterized3(3, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuMysteryGift);
-                AddTextPrinterParameterized3(5, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
+                AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift);
+                AddTextPrinterParameterized3(5, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 MainMenu_FormatSavegameText();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
                 PutWindowTilemap(4);
                 PutWindowTilemap(5);
-                CopyWindowToVram(2, 2);
-                CopyWindowToVram(3, 2);
-                CopyWindowToVram(4, 2);
-                CopyWindowToVram(5, 2);
+                CopyWindowToVram(2, COPYWIN_GFX);
+                CopyWindowToVram(3, COPYWIN_GFX);
+                CopyWindowToVram(4, COPYWIN_GFX);
+                CopyWindowToVram(5, COPYWIN_GFX);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[2], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
@@ -840,22 +836,22 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(4, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(5, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(6, PIXEL_FILL(0xA));
-                AddTextPrinterParameterized3(2, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuContinue);
-                AddTextPrinterParameterized3(3, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuMysteryGift2);
-                AddTextPrinterParameterized3(5, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuMysteryEvents);
-                AddTextPrinterParameterized3(6, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
+                AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift2);
+                AddTextPrinterParameterized3(5, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryEvents);
+                AddTextPrinterParameterized3(6, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 MainMenu_FormatSavegameText();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
                 PutWindowTilemap(4);
                 PutWindowTilemap(5);
                 PutWindowTilemap(6);
-                CopyWindowToVram(2, 2);
-                CopyWindowToVram(3, 2);
-                CopyWindowToVram(4, 2);
-                CopyWindowToVram(5, 2);
-                CopyWindowToVram(6, 2);
+                CopyWindowToVram(2, COPYWIN_GFX);
+                CopyWindowToVram(3, COPYWIN_GFX);
+                CopyWindowToVram(4, COPYWIN_GFX);
+                CopyWindowToVram(5, COPYWIN_GFX);
+                CopyWindowToVram(6, COPYWIN_GFX);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[2], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
@@ -865,8 +861,8 @@ static void Task_DisplayMainMenu(u8 taskId)
                 gTasks[tScrollArrowTaskId].func = Task_ScrollIndicatorArrowPairOnMainMenu;
                 if (sCurrItemAndOptionMenuCheck == 4)
                 {
-                    ChangeBgY(0, 0x2000, 1);
-                    ChangeBgY(1, 0x2000, 1);
+                    ChangeBgY(0, 0x2000, BG_COORD_ADD);
+                    ChangeBgY(1, 0x2000, BG_COORD_ADD);
                     tIsScrolled = TRUE;
                     gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = TRUE;
                 }
@@ -890,23 +886,23 @@ static bool8 HandleMainMenuInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         IsWirelessAdapterConnected();   // why bother calling this here? debug? Task_HandleMainMenuAPressed will check too
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_HandleMainMenuAPressed;
     }
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITEALPHA);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
-        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT));
         gTasks[taskId].func = Task_HandleMainMenuBPressed;
     }
     else if ((JOY_NEW(DPAD_UP)) && tCurrItem > 0)
     {
         if (tMenuType == HAS_MYSTERY_EVENTS && tIsScrolled == TRUE && tCurrItem == 1)
         {
-            ChangeBgY(0, 0x2000, 2);
-            ChangeBgY(1, 0x2000, 2);
+            ChangeBgY(0, 0x2000, BG_COORD_SUB);
+            ChangeBgY(1, 0x2000, BG_COORD_SUB);
             gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = tIsScrolled = FALSE;
         }
         tCurrItem--;
@@ -917,8 +913,8 @@ static bool8 HandleMainMenuInput(u8 taskId)
     {
         if (tMenuType == HAS_MYSTERY_EVENTS && tCurrItem == 3 && tIsScrolled == FALSE)
         {
-            ChangeBgY(0, 0x2000, 1);
-            ChangeBgY(1, 0x2000, 1);
+            ChangeBgY(0, 0x2000, BG_COORD_ADD);
+            ChangeBgY(1, 0x2000, BG_COORD_ADD);
             gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = tIsScrolled = TRUE;
         }
         tCurrItem++;
@@ -1052,8 +1048,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 }
                 break;
         }
-        ChangeBgY(0, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         switch (action)
         {
             case ACTION_NEW_GAME:
@@ -1074,7 +1070,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_MYSTERY_GIFT:
-                SetMainCallback2(c2_mystery_gift);
+                SetMainCallback2(CB2_InitMysteryGift);
                 DestroyTask(taskId);
                 break;
             case ACTION_MYSTERY_EVENTS:
@@ -1082,7 +1078,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_EREADER:
-                SetMainCallback2(c2_ereader);
+                SetMainCallback2(CB2_InitEReader);
                 DestroyTask(taskId);
                 break;
             case ACTION_INVALID:
@@ -1096,7 +1092,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 SetGpuReg(REG_OFFSET_BG1VOFS, 0);
                 SetGpuReg(REG_OFFSET_BG0HOFS, 0);
                 SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
                 return;
         }
         FreeAllWindowBuffers();
@@ -1153,7 +1149,7 @@ static void Task_DisplayMainMenuInvalidActionError(u8 taskId)
             if (JOY_NEW(A_BUTTON | B_BUTTON))
             {
                 PlaySE(SE_SELECT);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_HandleMainMenuBPressed;
             }
     }
@@ -1285,10 +1281,10 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
     FreeAllSpritePalettes();
     ResetAllPicSprites();
     AddBirchSpeechObjects(taskId);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     gTasks[taskId].tBG1HOFS = 0;
     gTasks[taskId].func = Task_NewGameBirchSpeech_WaitToShowBirch;
-    gTasks[taskId].tPlayerSpriteId = 0xFF;
+    gTasks[taskId].tPlayerSpriteId = SPRITE_NONE;
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].tTimer = 0xD8;
     PlayBGM(MUS_ROUTE122);
@@ -1307,8 +1303,8 @@ static void Task_NewGameBirchSpeech_WaitToShowBirch(u8 taskId)
     else
     {
         spriteId = gTasks[taskId].tBirchSpriteId;
-        gSprites[spriteId].pos1.x = 136;
-        gSprites[spriteId].pos1.y = 60;
+        gSprites[spriteId].x = 136;
+        gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 10);
@@ -1334,7 +1330,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             LoadMessageBoxGfx(0, 0xFC, 0xF0);
             NewGameBirchSpeech_ShowDialogueWindow(0, 1);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
             NewGameBirchSpeech_ClearWindow(0);
             StringExpandPlaceholders(gStringVar4, gText_Birch_Welcome);
             AddTextPrinterForMessage(1);
@@ -1349,7 +1345,7 @@ static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8 taskId)
     {
         gTasks[taskId].func = Task_NewGameBirchSpeech_MainSpeech;
         StringExpandPlaceholders(gStringVar4, gText_ThisIsAPokemon);
-        AddTextPrinterWithCallbackForMessage(1, NewGameBirchSpeech_ShowPokeBallPrinterCallback);
+        AddTextPrinterWithCallbackForMessage(1, NewGameBirchSpeech_WaitForThisIsPokemonText);
         sBirchSpeechMainTaskId = taskId;
     }
 }
@@ -1370,8 +1366,8 @@ static void Task_NewGameBirchSpeechSub_InitPokeBall(u8 taskId)
 {
     u8 spriteId = gTasks[sBirchSpeechMainTaskId].tLotadSpriteId;
 
-    gSprites[spriteId].pos1.x = 100;
-    gSprites[spriteId].pos1.y = 75;
+    gSprites[spriteId].x = 100;
+    gSprites[spriteId].y = 75;
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
@@ -1388,11 +1384,9 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
     switch (tState)
     {
         case 0:
-            if (sprite->callback == SpriteCallbackDummy)
-            {
-                sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-                goto incrementStateAndTimer;
-            }
+            if (sprite->callback != SpriteCallbackDummy)
+                return;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             break;
         case 1:
             if (gTasks[sBirchSpeechMainTaskId].tTimer >= 96)
@@ -1401,14 +1395,11 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
                 if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
                     gTasks[sBirchSpeechMainTaskId].tTimer++;
             }
-            break;
-        incrementStateAndTimer:
-        default:
-            tState++;
-            if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
-                gTasks[sBirchSpeechMainTaskId].tTimer++;
-            break;
+            return;
     }
+    tState++;
+    if (gTasks[sBirchSpeechMainTaskId].tTimer < 0x4000)
+        gTasks[sBirchSpeechMainTaskId].tTimer++;
 }
 
 #undef tState
@@ -1417,7 +1408,7 @@ static void Task_NewGameBirchSpeech_AndYouAre(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
-        gUnknown_02022D04 = 0;
+        sStartedPokeBallTask = FALSE;
         StringExpandPlaceholders(gStringVar4, gText_Birch_AndYouAre);
         AddTextPrinterForMessage(1);
         gTasks[taskId].func = Task_NewGameBirchSpeech_StartBirchLotadPlatformFade;
@@ -1465,8 +1456,8 @@ static void Task_NewGameBirchSpeech_StartPlayerFadeIn(u8 taskId)
         {
             u8 spriteId = gTasks[taskId].tBrendanSpriteId;
 
-            gSprites[spriteId].pos1.x = 180;
-            gSprites[spriteId].pos1.y = 60;
+            gSprites[spriteId].x = 180;
+            gSprites[spriteId].y = 60;
             gSprites[spriteId].invisible = FALSE;
             gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             gTasks[taskId].tPlayerSpriteId = spriteId;
@@ -1539,7 +1530,7 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
     u8 spriteId = gTasks[taskId].tPlayerSpriteId;
     if (gTasks[taskId].tIsDoneFadingSprites == 0)
     {
-        gSprites[spriteId].pos1.x += 4;
+        gSprites[spriteId].x += 4;
     }
     else
     {
@@ -1548,8 +1539,8 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
             spriteId = gTasks[taskId].tBrendanSpriteId;
-        gSprites[spriteId].pos1.x = 240;
-        gSprites[spriteId].pos1.y = 60;
+        gSprites[spriteId].x = DISPLAY_WIDTH;
+        gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
         gTasks[taskId].tPlayerSpriteId = spriteId;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
@@ -1562,13 +1553,13 @@ static void Task_NewGameBirchSpeech_SlideInNewGenderSprite(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].tPlayerSpriteId;
 
-    if (gSprites[spriteId].pos1.x > 180)
+    if (gSprites[spriteId].x > 180)
     {
-        gSprites[spriteId].pos1.x -= 4;
+        gSprites[spriteId].x -= 4;
     }
     else
     {
-        gSprites[spriteId].pos1.x = 180;
+        gSprites[spriteId].x = 180;
         if (gTasks[taskId].tIsDoneFadingSprites)
         {
             gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
@@ -1595,7 +1586,7 @@ static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8 taskId)
 {
     if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_NewGameBirchSpeech_StartNamingScreen;
     }
 }
@@ -1669,13 +1660,13 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         gSprites[gTasks[taskId].tBrendanSpriteId].invisible = TRUE;
         gSprites[gTasks[taskId].tMaySpriteId].invisible = TRUE;
         spriteId = gTasks[taskId].tBirchSpriteId;
-        gSprites[spriteId].pos1.x = 136;
-        gSprites[spriteId].pos1.y = 60;
+        gSprites[spriteId].x = 136;
+        gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         spriteId = gTasks[taskId].tLotadSpriteId;
-        gSprites[spriteId].pos1.x = 100;
-        gSprites[spriteId].pos1.y = 75;
+        gSprites[spriteId].x = 100;
+        gSprites[spriteId].y = 75;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
@@ -1722,8 +1713,8 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
             spriteId = gTasks[taskId].tBrendanSpriteId;
-        gSprites[spriteId].pos1.x = 120;
-        gSprites[spriteId].pos1.y = 60;
+        gSprites[spriteId].x = 120;
+        gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         gTasks[taskId].tPlayerSpriteId = spriteId;
@@ -1750,7 +1741,7 @@ static void Task_NewGameBirchSpeech_ShrinkPlayer(u8 taskId)
             InitSpriteAffineAnim(&gSprites[spriteId]);
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = SpriteCB_MovePlayerDownWhileShrinking;
-            BeginNormalPaletteFade(0x0000FFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
             FadeOutBGM(4);
             gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForPlayerShrink;
         }
@@ -1774,7 +1765,7 @@ static void Task_NewGameBirchSpeech_FadePlayerToWhite(u8 taskId)
         spriteId = gTasks[taskId].tPlayerSpriteId;
         gSprites[spriteId].callback = SpriteCB_Null;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        BeginNormalPaletteFade(0xFFFF0000, 0, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_OBJECTS, 0, 0, 16, RGB_WHITEALPHA);
         gTasks[taskId].func = Task_NewGameBirchSpeech_Cleanup;
     }
 }
@@ -1800,7 +1791,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     ResetBgsAndClearDma3BusyFlags(0);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    InitBgsFromTemplates(0, sMainMenuBgTemplates, 2);
+    InitBgsFromTemplates(0, sMainMenuBgTemplates, ARRAY_COUNT(sMainMenuBgTemplates));
     InitBgFromTemplate(&sBirchBgTemplate);
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
@@ -1839,12 +1830,12 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
         gTasks[taskId].tPlayerGender = MALE;
         spriteId = gTasks[taskId].tBrendanSpriteId;
     }
-    gSprites[spriteId].pos1.x = 180;
-    gSprites[spriteId].pos1.y = 60;
+    gSprites[spriteId].x = 180;
+    gSprites[spriteId].y = 60;
     gSprites[spriteId].invisible = FALSE;
     gTasks[taskId].tPlayerSpriteId = spriteId;
     SetGpuReg(REG_OFFSET_BG1HOFS, -60);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     SetGpuReg(REG_OFFSET_WININ, 0);
@@ -1864,7 +1855,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     LoadMainMenuWindowFrameTiles(0, 0xF3);
     LoadMessageBoxGfx(0, 0xFC, 0xF0);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void SpriteCB_Null(struct Sprite *sprite)
@@ -1875,14 +1866,14 @@ static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *sprite)
 {
     u32 y;
 
-    y = (sprite->pos1.y << 16) + sprite->data[0] + 0xC000;
-    sprite->pos1.y = y >> 16;
+    y = (sprite->y << 16) + sprite->data[0] + 0xC000;
+    sprite->y = y >> 16;
     sprite->data[0] = y;
 }
 
-static u8 NewGameBirchSpeech_CreateLotadSprite(u8 a, u8 b)
+static u8 NewGameBirchSpeech_CreateLotadSprite(u8 x, u8 y)
 {
-    return CreatePicSprite2(SPECIES_LOTAD, SHINY_ODDS, 0, 1, a, b, 14, -1);
+    return CreateMonPicSprite_Affine(SPECIES_LOTAD, SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
 }
 
 static void AddBirchSpeechObjects(u8 taskId)
@@ -2098,10 +2089,10 @@ static void NewGameBirchSpeech_ShowGenderMenu(void)
 {
     DrawMainMenuWindowBorder(&gNewGameBirchSpeechTextWindows[1], 0xF3);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    PrintMenuTable(1, 2, sMenuActions_Gender);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(1, 2, 0);
+    PrintMenuTable(1, ARRAY_COUNT(sMenuActions_Gender), sMenuActions_Gender);
+    InitMenuInUpperLeftCornerNormal(1, 2, 0);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
@@ -2118,20 +2109,20 @@ static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
         name = gMalePresetNames[nameId];
     else
         name = gFemalePresetNames[nameId];
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
-    gSaveBlock2Ptr->playerName[7] = 0xFF;
+    gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
 }
 
 static void CreateMainMenuErrorWindow(const u8* str)
 {
     FillWindowPixelBuffer(7, PIXEL_FILL(1));
-    AddTextPrinterParameterized(7, 1, str, 0, 1, 2, 0);
+    AddTextPrinterParameterized(7, FONT_NORMAL, str, 0, 1, 2, 0);
     PutWindowTilemap(7);
-    CopyWindowToVram(7, 2);
+    CopyWindowToVram(7, COPYWIN_GFX);
     DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[7], MAIN_MENU_BORDER_TILE);
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(9, 231));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(113, 159));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(9, DISPLAY_WIDTH - 9));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(113, DISPLAY_HEIGHT - 1));
 }
 
 static void MainMenu_FormatSavegameText(void)
@@ -2145,8 +2136,8 @@ static void MainMenu_FormatSavegameText(void)
 static void MainMenu_FormatSavegamePlayer(void)
 {
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPlayer);
-    AddTextPrinterParameterized3(2, 1, 0, 17, sTextColor_MenuInfo, -1, gStringVar4);
-    AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, gSaveBlock2Ptr->playerName, 100), 17, sTextColor_MenuInfo, -1, gSaveBlock2Ptr->playerName);
+    AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(2, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, gSaveBlock2Ptr->playerName, 100), 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
 }
 
 static void MainMenu_FormatSavegameTime(void)
@@ -2155,11 +2146,11 @@ static void MainMenu_FormatSavegameTime(void)
     u8* ptr;
 
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
-    AddTextPrinterParameterized3(2, 1, 0x6C, 17, sTextColor_MenuInfo, -1, gStringVar4);
+    AddTextPrinterParameterized3(2, FONT_NORMAL, 0x6C, 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr = 0xF0;
     ConvertIntToDecimalStringN(ptr + 1, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 17, sTextColor_MenuInfo, -1, str);
+    AddTextPrinterParameterized3(2, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, str, 0xD0), 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
 }
 
 static void MainMenu_FormatSavegamePokedex(void)
@@ -2174,9 +2165,9 @@ static void MainMenu_FormatSavegamePokedex(void)
         else
             dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
         StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPokedex);
-        AddTextPrinterParameterized3(2, 1, 0, 33, sTextColor_MenuInfo, -1, gStringVar4);
+        AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
         ConvertIntToDecimalStringN(str, dexCount, STR_CONV_MODE_LEFT_ALIGN, 3);
-        AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 100), 33, sTextColor_MenuInfo, -1, str);
+        AddTextPrinterParameterized3(2, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, str, 100), 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
     }
 }
 
@@ -2192,9 +2183,9 @@ static void MainMenu_FormatSavegameBadges(void)
             badgeCount++;
     }
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuBadges);
-    AddTextPrinterParameterized3(2, 1, 0x6C, 33, sTextColor_MenuInfo, -1, gStringVar4);
+    AddTextPrinterParameterized3(2, FONT_NORMAL, 0x6C, 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     ConvertIntToDecimalStringN(str, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
-    AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 33, sTextColor_MenuInfo, -1, str);
+    AddTextPrinterParameterized3(2, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, str, 0xD0), 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
 }
 
 static void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
@@ -2241,36 +2232,36 @@ static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void NewGameBirchSpeech_ClearWindow(u8 windowId)
 {
-    u8 bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
-    u8 maxCharWidth = GetFontAttribute(1, FONTATTR_MAX_LETTER_WIDTH);
-    u8 maxCharHeight = GetFontAttribute(1, FONTATTR_MAX_LETTER_HEIGHT);
+    u8 bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
+    u8 maxCharWidth = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
+    u8 maxCharHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
     u8 winWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
     u8 winHeight = GetWindowAttribute(windowId, WINDOW_HEIGHT);
 
     FillWindowPixelRect(windowId, bgColor, 0, 0, maxCharWidth * winWidth, maxCharHeight * winHeight);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a)
+static void NewGameBirchSpeech_WaitForThisIsPokemonText(struct TextPrinterTemplate *printer, u16 a)
 {
-    if (*(printer->currentChar - 2) == 8 && gUnknown_02022D04 == 0)
+    // Wait for Birch's "This is a Pokémon" text to reach the pause
+    // Then start the PokéBall release (if it hasn't been started already)
+    if (*(printer->currentChar - 2) == EXT_CTRL_CODE_PAUSE && !sStartedPokeBallTask)
     {
-        gUnknown_02022D04 = 1;
+        sStartedPokeBallTask = TRUE;
         CreateTask(Task_NewGameBirchSpeechSub_InitPokeBall, 0);
     }
 }
 
-void CreateYesNoMenuParameterized(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
+void CreateYesNoMenuParameterized(u8 x, u8 y, u16 baseTileNum, u16 baseBlock, u8 yesNoPalNum, u8 winPalNum)
 {
-    struct WindowTemplate sp;
-
-    sp = CreateWindowTemplate(0, a + 1, b + 1, 5, 4, f, d);
-    CreateYesNoMenu(&sp, c, e, 0);
+    struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, 5, 4, winPalNum, baseBlock);
+    CreateYesNoMenu(&template, baseTileNum, yesNoPalNum, 0);
 }
 
 static void NewGameBirchSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)

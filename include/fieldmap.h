@@ -9,6 +9,14 @@
 #define NUM_PALS_TOTAL 13
 #define MAX_MAP_DATA_SIZE 0x2800
 
+// Map coordinates are offset by 7 when using the map
+// buffer because it needs to load sufficient border
+// metatiles to fill the player's view (the player has
+// 7 metatiles of view horizontally in either direction).
+#define MAP_OFFSET 7
+#define MAP_OFFSET_W (MAP_OFFSET * 2 + 1)
+#define MAP_OFFSET_H (MAP_OFFSET * 2)
+
 #include "main.h"
 
 extern struct BackupMapLayout gBackupMapLayout;
@@ -20,16 +28,13 @@ void MapGridSetMetatileEntryAt(int, int, u16);
 void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(int, int);
 int GetMapBorderIdAt(int x, int y);
-int CanCameraMoveInDirection(int direction);
+bool32 CanCameraMoveInDirection(int direction);
 u16 GetBehaviorByMetatileId(u16 metatileId);
 void GetCameraFocusCoords(u16 *x, u16 *y);
 u8 MapGridGetMetatileLayerTypeAt(int x, int y);
 u8 MapGridGetZCoordAt(int x, int y);
 bool8 CameraMove(int deltaX, int deltaY);
-struct MapConnection *sub_8088950(u8 direction, int x, int y);
-bool8 sub_80889A8(u8 direction, int x, int y, struct MapConnection *connection);
-bool8 sub_8088A0C(int x, int src_width, int dest_width, int offset);
-void save_serialize_map(void);
+void SaveMapView(void);
 void SetCameraFocusCoords(u16 x, u16 y);
 void InitMap(void);
 void InitMapFromSavedGame(void);

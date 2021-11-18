@@ -42,7 +42,7 @@
 #define OBJ_EVENT_GFX_SCHOOL_KID_M                38
 #define OBJ_EVENT_GFX_MANIAC                      39
 #define OBJ_EVENT_GFX_HEX_MANIAC                  40
-#define OBJ_EVENT_GFX_RAYQUAZA_1                  41
+#define OBJ_EVENT_GFX_RAYQUAZA_STILL              41
 #define OBJ_EVENT_GFX_SWIMMER_M                   42
 #define OBJ_EVENT_GFX_SWIMMER_F                   43
 #define OBJ_EVENT_GFX_BLACK_BELT                  44
@@ -198,22 +198,22 @@
 #define OBJ_EVENT_GFX_MAY_DECORATING             194
 #define OBJ_EVENT_GFX_ARCHIE                     195
 #define OBJ_EVENT_GFX_MAXIE                      196
-#define OBJ_EVENT_GFX_KYOGRE_1                   197
-#define OBJ_EVENT_GFX_GROUDON_1                  198
+#define OBJ_EVENT_GFX_KYOGRE_FRONT               197
+#define OBJ_EVENT_GFX_GROUDON_FRONT              198
 #define OBJ_EVENT_GFX_FOSSIL                     199
 #define OBJ_EVENT_GFX_REGIROCK                   200
 #define OBJ_EVENT_GFX_REGICE                     201
 #define OBJ_EVENT_GFX_REGISTEEL                  202
 #define OBJ_EVENT_GFX_SKITTY                     203
-#define OBJ_EVENT_GFX_KECLEON_1                  204
-#define OBJ_EVENT_GFX_KYOGRE_2                   205
-#define OBJ_EVENT_GFX_GROUDON_2                  206
-#define OBJ_EVENT_GFX_RAYQUAZA_2                 207
+#define OBJ_EVENT_GFX_KECLEON                    204
+#define OBJ_EVENT_GFX_KYOGRE_ASLEEP              205
+#define OBJ_EVENT_GFX_GROUDON_ASLEEP             206
+#define OBJ_EVENT_GFX_RAYQUAZA                   207
 #define OBJ_EVENT_GFX_ZIGZAGOON_2                208
 #define OBJ_EVENT_GFX_PIKACHU                    209
 #define OBJ_EVENT_GFX_AZUMARILL                  210
 #define OBJ_EVENT_GFX_WINGULL                    211
-#define OBJ_EVENT_GFX_KECLEON_2                  212
+#define OBJ_EVENT_GFX_KECLEON_BRIDGE_SHADOW      212
 #define OBJ_EVENT_GFX_TUBER_M_SWIMMING           213
 #define OBJ_EVENT_GFX_AZURILL                    214
 #define OBJ_EVENT_GFX_MOM                        215
@@ -222,8 +222,8 @@
 #define OBJ_EVENT_GFX_JUAN                       218
 #define OBJ_EVENT_GFX_SCOTT                      219
 #define OBJ_EVENT_GFX_POOCHYENA                  220
-#define OBJ_EVENT_GFX_KYOGRE_3                   221
-#define OBJ_EVENT_GFX_GROUDON_3                  222
+#define OBJ_EVENT_GFX_KYOGRE_SIDE                221
+#define OBJ_EVENT_GFX_GROUDON_SIDE               222
 #define OBJ_EVENT_GFX_MYSTERY_GIFT_MAN           223
 #define OBJ_EVENT_GFX_TRICK_HOUSE_STATUE         224
 #define OBJ_EVENT_GFX_KIRLIA                     225
@@ -279,7 +279,37 @@
 
 #define FIRST_DECORATION_SPRITE_GFX OBJ_EVENT_GFX_PICHU_DOLL
 
+// Special object event local ids
 #define OBJ_EVENT_ID_PLAYER 0xFF
 #define OBJ_EVENT_ID_CAMERA 0x7F
+
+// Object event local ids referenced in C files
+#define LOCALID_ROUTE111_PLAYER_FALLING 45
+#define LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK 1
+#define LOCALID_FARAWAY_ISLAND_MEW 1
+#define LOCALID_UNION_ROOM_PLAYER_4 2
+#define LOCALID_UNION_ROOM_PLAYER_8 3
+#define LOCALID_UNION_ROOM_PLAYER_7 4
+#define LOCALID_UNION_ROOM_PLAYER_6 5
+#define LOCALID_UNION_ROOM_PLAYER_5 6
+#define LOCALID_UNION_ROOM_PLAYER_3 7
+#define LOCALID_UNION_ROOM_PLAYER_2 8
+#define LOCALID_UNION_ROOM_PLAYER_1 9
+#define LOCALID_BATTLE_TOWER_LOBBY_REPORTER 5
+#define LOCALID_TRUCK_BOX_TOP 1
+#define LOCALID_TRUCK_BOX_BOTTOM_L 2
+#define LOCALID_TRUCK_BOX_BOTTOM_R 3
+#define LOCALID_OLDALE_MART_CLERK 1
+#define LOCALID_LAVARIDGE_MART_CLERK 1
+#define LOCALID_FALLARBOR_MART_CLERK 1
+#define LOCALID_VERDANTURF_MART_CLERK 1
+#define LOCALID_PETALBURG_MART_CLERK 1
+#define LOCALID_SLATEPORT_MART_CLERK 1
+#define LOCALID_MAUVILLE_MART_CLERK 1
+#define LOCALID_RUSTBORO_MART_CLERK 1
+#define LOCALID_FORTREE_MART_CLERK 1
+#define LOCALID_MOSSDEEP_MART_CLERK 1
+#define LOCALID_SOOTOPOLIS_MART_CLERK 1
+#define LOCALID_BATTLE_FRONTIER_MART_CLERK 1
 
 #endif  // GUARD_CONSTANTS_EVENT_OBJECTS_H

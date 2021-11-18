@@ -3,6 +3,6 @@
 
 #include "main.h"
 
-void StartBerryCrush(MainCallback callback);
+void StartBerryCrush(MainCallback exitCallback);
 
 #endif // GUARD_BERRY_CRUSH_H

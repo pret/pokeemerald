@@ -14,14 +14,10 @@
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
-#include "constants/tv.h"
 
 extern u16 gUnknown_0203CF30[];
 
 // this file's functions
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
@@ -102,8 +98,8 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
     }
     else
     {
-        if (itemId >= ITEM_CHERI_BERRY && itemId <= ITEM_ENIGMA_BERRY)
-            GetBerryCountString(dst, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
+        if (itemId >= FIRST_BERRY_INDEX && itemId <= LAST_BERRY_INDEX)
+            GetBerryCountString(dst, gBerries[itemId - FIRST_BERRY_INDEX].name, quantity);
         else
             StringCopy(dst, ItemId_GetName(itemId));
     }
@@ -183,13 +179,15 @@ bool8 HasAtLeastOneBerry(void)
 
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
-    u8 i, pocket;
-    u16 slotCapacity, ownedCount;
+    u8 i;
+    u8 pocket;
+    u16 slotCapacity;
+    u16 ownedCount;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
 
-    if (InBattlePyramid() || (FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE))
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
     {
         return CheckPyramidBagHasSpace(itemId, count);
     }
@@ -212,12 +210,12 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
                 return FALSE;
             count -= (slotCapacity - ownedCount);
             if (count == 0)
-                break; //Should just be "return TRUE", since setting count to 0 means all the remaining checks until return will be false anyway, but that doesn't match
+                break; //should be return TRUE, but that doesn't match
         }
     }
 
     // Check space in empty item slots
-    if (count > 0) //if (count !=0) also works here; both match
+    if (count > 0)
     {
         for (i = 0; i < gBagPockets[pocket].capacity; i++)
         {
@@ -231,12 +229,12 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
                 }
                 else
                 {
-                    count = 0; //Should just be "return TRUE", since setting count to 0 means all the remaining checks until return will be false anyway, but that doesn't match
+                    count = 0; //should be return TRUE, but that doesn't match
                     break;
                 }
             }
         }
-        if (count > 0)    //if (count !=0) also works here; both match
+        if (count > 0)
             return FALSE; // No more item slots. The bag is full
     }
 
@@ -282,10 +280,6 @@ bool8 AddBagItem(u16 itemId, u16 count)
                 {
                     // successfully added to already existing item's count
                     SetBagItemQuantity(&newItems[i].quantity, ownedCount + count);
-
-                    // goto SUCCESS_ADD_ITEM;
-                    // is equivalent but won't match
-
                     memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
                     Free(newItems);
                     return TRUE;
@@ -305,7 +299,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
                         // don't create another instance of the item if it's at max slot capacity and count is equal to 0
                         if (count == 0)
                         {
-                            goto SUCCESS_ADD_ITEM;
+                            break;
                         }
                     }
                 }
@@ -336,7 +330,8 @@ bool8 AddBagItem(u16 itemId, u16 count)
                     {
                         // created a new slot and added quantity
                         SetBagItemQuantity(&newItems[i].quantity, count);
-                        goto SUCCESS_ADD_ITEM;
+                        count = 0;
+                        break;
                     }
                 }
             }
@@ -347,11 +342,9 @@ bool8 AddBagItem(u16 itemId, u16 count)
                 return FALSE;
             }
         }
-
-        SUCCESS_ADD_ITEM:
-            memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
-            Free(newItems);
-            return TRUE;
+        memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
+        Free(newItems);
+        return TRUE;
     }
 }
 
@@ -555,7 +548,6 @@ bool8 AddPCItem(u16 itemId, u16 count)
 
 void RemovePCItem(u8 index, u16 count)
 {
-    // UB: should use GetPCItemQuantity and SetPCItemQuantity functions
     gSaveBlock1Ptr->pcItems[index].quantity -= count;
     if (gSaveBlock1Ptr->pcItems[index].quantity == 0)
     {
@@ -821,7 +813,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
-    i = gPyramidBagCursorData.cursorPosition + gPyramidBagCursorData.scrollPosition;
+    i = gPyramidBagMenuState.cursorPosition + gPyramidBagMenuState.scrollPosition;
     if (items[i] == itemId && quantities[i] >= count)
     {
         quantities[i] -= count;

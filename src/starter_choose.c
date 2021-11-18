@@ -153,11 +153,11 @@ static const struct BgTemplate sBgTemplates[3] =
     },
 };
 
-static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY};
+static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct OamData sOam_Hand =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -174,7 +174,7 @@ static const struct OamData sOam_Hand =
 
 static const struct OamData sOam_Pokeball =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -191,7 +191,7 @@ static const struct OamData sOam_Pokeball =
 
 static const struct OamData sOam_StarterCircle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -378,7 +378,6 @@ static void VblankCB_StarterChoose(void)
 
 void CB2_ChooseStarter(void)
 {
-    u16 savedIme;
     u8 taskId;
     u8 spriteId;
 
@@ -390,14 +389,14 @@ void CB2_ChooseStarter(void)
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
 
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
@@ -426,7 +425,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeballSelect[0]);
     LoadCompressedSpriteSheet(&sSpriteSheet_StarterCircle[0]);
     LoadSpritePalettes(sSpritePalettes_StarterChoose);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
 
     EnableInterrupts(DISPSTAT_VBLANK);
     SetVBlankCallback(VblankCB_StarterChoose);
@@ -465,7 +464,7 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 2;
 
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
 }
 
 static void CB2_StarterChoose(void)
@@ -481,7 +480,7 @@ static void Task_StarterChoose(u8 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x2A8, 0xD);
-    AddTextPrinterParameterized(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_BirchInTrouble, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_HandleStarterChooseInput;
@@ -524,8 +523,8 @@ static void Task_HandleStarterChooseInput(u8 taskId)
 static void Task_WaitForStarterSprite(u8 taskId)
 {
     if (gSprites[gTasks[taskId].tCircleSpriteId].affineAnimEnded &&
-        gSprites[gTasks[taskId].tCircleSpriteId].pos1.x == STARTER_PKMN_POS_X &&
-        gSprites[gTasks[taskId].tCircleSpriteId].pos1.y == STARTER_PKMN_POS_Y)
+        gSprites[gTasks[taskId].tCircleSpriteId].x == STARTER_PKMN_POS_X &&
+        gSprites[gTasks[taskId].tCircleSpriteId].y == STARTER_PKMN_POS_Y)
     {
         gTasks[taskId].func = Task_AskConfirmStarter;
     }
@@ -533,9 +532,9 @@ static void Task_WaitForStarterSprite(u8 taskId)
 
 static void Task_AskConfirmStarter(u8 taskId)
 {
-    PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
+    PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
     CreateYesNoMenu(&sWindowTemplate_ConfirmStarter, 0x2A8, 0xD, 0);
     gTasks[taskId].func = Task_HandleConfirmStarterInput;
@@ -592,11 +591,11 @@ static void CreateStarterPokemonLabel(u8 selection)
     sStarterLabelWindowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
 
-    width = GetStringCenterAlignXOffset(7, categoryText, 0x68);
-    AddTextPrinterParameterized3(sStarterLabelWindowId, 7, width, 1, sTextColors, 0, categoryText);
+    width = GetStringCenterAlignXOffset(FONT_NARROW, categoryText, 0x68);
+    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NARROW, width, 1, sTextColors, 0, categoryText);
 
-    width = GetStringCenterAlignXOffset(1, speciesName, 0x68);
-    AddTextPrinterParameterized3(sStarterLabelWindowId, 1, width, 17, sTextColors, 0, speciesName);
+    width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 0x68);
+    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 17, sTextColors, 0, speciesName);
 
     PutWindowTilemap(sStarterLabelWindowId);
     ScheduleBgCopyTilemapToVram(0);
@@ -614,7 +613,7 @@ static void ClearStarterLabel(void)
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
     ClearWindowTilemap(sStarterLabelWindowId);
     RemoveWindow(sStarterLabelWindowId);
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     ScheduleBgCopyTilemapToVram(0);
@@ -636,7 +635,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 {
     u8 spriteId;
 
-    spriteId = CreatePicSprite2(species, SHINY_ODDS, 0, 1, x, y, 0xE, 0xFFFF);
+    spriteId = CreateMonPicSprite_Affine(species, SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }
@@ -644,9 +643,9 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 static void SpriteCB_SelectionHand(struct Sprite *sprite)
 {
     // Float up and down above selected pokeball
-    sprite->pos1.x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
-    sprite->pos1.y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
-    sprite->pos2.y = Sin(sprite->data[1], 8);
+    sprite->x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
+    sprite->y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
+    sprite->y2 = Sin(sprite->data[1], 8);
     sprite->data[1] = (u8)(sprite->data[1]) + 4;
 }
 
@@ -662,12 +661,12 @@ static void SpriteCB_Pokeball(struct Sprite *sprite)
 static void SpriteCB_StarterPokemon(struct Sprite *sprite)
 {
     // Move sprite to upper center of screen
-    if (sprite->pos1.x > STARTER_PKMN_POS_X)
-        sprite->pos1.x -= 4;
-    if (sprite->pos1.x < STARTER_PKMN_POS_X)
-        sprite->pos1.x += 4;
-    if (sprite->pos1.y > STARTER_PKMN_POS_Y)
-        sprite->pos1.y -= 2;
-    if (sprite->pos1.y < STARTER_PKMN_POS_Y)
-        sprite->pos1.y += 2;
+    if (sprite->x > STARTER_PKMN_POS_X)
+        sprite->x -= 4;
+    if (sprite->x < STARTER_PKMN_POS_X)
+        sprite->x += 4;
+    if (sprite->y > STARTER_PKMN_POS_Y)
+        sprite->y -= 2;
+    if (sprite->y < STARTER_PKMN_POS_Y)
+        sprite->y += 2;
 }

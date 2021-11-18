@@ -23,6 +23,7 @@
 #include "intro.h"
 #include "main.h"
 #include "trainer_hill.h"
+#include "constants/rgb.h"
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -56,7 +57,7 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-static u16 gUnknown_03000000;
+static u16 sUnusedVar; // Never read
 
 u16 gKeyRepeatStartDelay;
 bool8 gLinkTransferringData;
@@ -75,36 +76,22 @@ static EWRAM_DATA u16 gTrainerId = 0;
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
 static void CallCallbacks(void);
-//static void SeedRngWithRtc(void);
+static void SeedRngWithRtc(void);
 static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
 
+#define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
+
 void AgbMain()
 {
-#if MODERN
     // Modern compilers are liberal with the stack on entry to this function,
     // so RegisterRamReset may crash if it resets IWRAM.
-    RegisterRamReset(RESET_ALL & ~RESET_IWRAM);
-    asm("mov\tr1, #0xC0\n"
-        "\tlsl\tr1, r1, #0x12\n"
-        "\tmov r2, #0xFC\n"
-        "\tlsl r2, r2, #0x7\n"
-        "\tadd\tr2, r1, r2\n"
-        "\tmov\tr0, #0\n"
-        "\tmov\tr3, r0\n"
-        "\tmov\tr4, r0\n"
-        "\tmov\tr5, r0\n"
-        ".LCU0:\n"
-        "\tstmia r1!, {r0, r3, r4, r5}\n"
-        "\tcmp\tr1, r2\n"
-        "\tbcc\t.LCU0\n"
-    );
-#else
+#if !MODERN
     RegisterRamReset(RESET_ALL);
 #endif //MODERN
-    *(vu16 *)BG_PLTT = 0x7FFF;
+    *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
@@ -116,7 +103,9 @@ void AgbMain()
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
-    //SeedRngWithRtc(); see comment at SeedRngWithRtc declaration below
+#ifdef BUGFIX
+    SeedRngWithRtc(); // see comment at SeedRngWithRtc definition below
+#endif
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
@@ -128,24 +117,22 @@ void AgbMain()
         SetMainCallback2(NULL);
 
     gLinkTransferringData = FALSE;
-    gUnknown_03000000 = 0xFC0;
+    sUnusedVar = 0xFC0;
 
     for (;;)
     {
         ReadKeys();
 
-        if (!gSoftResetDisabled
-         && JOY_HELD_RAW(A_BUTTON)
-         && JOY_HELD_RAW(B_BUTTON)
-         && JOY_HELD_RAW(START_BUTTON)
-         && JOY_HELD_RAW(SELECT_BUTTON)) //The reset key combo A + B + START + SELECT
+        if (gSoftResetDisabled == FALSE
+         && (gMain.heldKeysRaw & A_BUTTON)
+         && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
             DoSoftReset();
         }
 
-        if (sub_8087634() == 1)
+        if (Overworld_SendKeysToLinkIsRunning() == TRUE)
         {
             gLinkTransferringData = TRUE;
             UpdateLinkAndCallCallbacks();
@@ -156,7 +143,7 @@ void AgbMain()
             gLinkTransferringData = FALSE;
             UpdateLinkAndCallCallbacks();
 
-            if (sub_80875C8() == 1)
+            if (Overworld_RecvKeysFromLinkIsRunning() == TRUE)
             {
                 gMain.newKeys = 0;
                 ClearSpriteCopyRequests();
@@ -185,8 +172,8 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
-    gSaveBlock2Ptr = &gSaveblock2;
-    gPokemonStoragePtr = &gPokemonStorage;
+    gSaveBlock2Ptr = &gSaveblock2.block;
+    gPokemonStoragePtr = &gPokemonStorage.block;
 }
 
 static void CallCallbacks(void)
@@ -229,13 +216,15 @@ void EnableVCountIntrAtLine150(void)
     EnableInterrupts(INTR_FLAG_VCOUNT);
 }
 
-// oops! FRLG commented this out to remove RTC, however Emerald didnt undo this!
-//static void SeedRngWithRtc(void)
-//{
-//    u32 seed = RtcGetMinuteCount();
-//    seed = (seed >> 16) ^ (seed & 0xFFFF);
-//    SeedRng(seed);
-//}
+// FRLG commented this out to remove RTC, however Emerald didn't undo this!
+#ifdef BUGFIX
+static void SeedRngWithRtc(void)
+{
+    u32 seed = RtcGetMinuteCount();
+    seed = (seed >> 16) ^ (seed & 0xFFFF);
+    SeedRng(seed);
+}
+#endif
 
 void InitKeys(void)
 {
@@ -262,7 +251,9 @@ static void ReadKeys(void)
 
     if (keyInput != 0 && gMain.heldKeys == keyInput)
     {
-        if (--gMain.keyRepeatCounter == 0)
+        gMain.keyRepeatCounter--;
+
+        if (gMain.keyRepeatCounter == 0)
         {
             gMain.newAndRepeatedKeys = keyInput;
             gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
@@ -308,7 +299,7 @@ void InitIntrHandlers(void)
 
     REG_IME = 1;
 
-    EnableInterrupts(0x1);
+    EnableInterrupts(INTR_FLAG_VBLANK);
 }
 
 void SetVBlankCallback(IntrCallback callback)
@@ -341,7 +332,7 @@ static void VBlankIntr(void)
 {
     if (gWirelessCommType != 0)
         RfuVSync();
-    else if (!gLinkVSyncDisabled)
+    else if (gLinkVSyncDisabled == FALSE)
         LinkVSync();
 
     gMain.vblankCounter1++;
@@ -360,7 +351,7 @@ static void VBlankIntr(void)
     gPcmDmaCounter = gSoundInfo.pcmDmaCounter;
 
     m4aSoundMain();
-    sub_8033648();
+    TryReceiveLinkBattleData();
 
     if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
         Random();

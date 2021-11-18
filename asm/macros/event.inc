@@ -274,8 +274,8 @@
 	.2byte \functionId
 	.endm
 
-	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific 
-	@ commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock 
+	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific
+	@ commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock
 	@ state, the script will remain blocked indefinitely (essentially a hang).
 	.macro waitstate
 	.byte 0x27
@@ -317,7 +317,7 @@
 	.byte 0x2d
 	.endm
 
-	@ Sets the values of variables 0x8000, 0x8001, and 0x8002 to the current hour, minute, and second. In FRLG, 
+	@ Sets the values of variables 0x8000, 0x8001, and 0x8002 to the current hour, minute, and second. In FRLG,
 	@ this command sets those variables to zero.
 	.macro gettime
 	.byte 0x2e
@@ -334,10 +334,10 @@
 	.byte 0x30
 	.endm
 
-	@ Plays the specified (fanfare_number) fanfare.
-	.macro playfanfare fanfare_number:req
+	@ Plays the fanfare specified by the song number. If the specified song is not a fanfare it will instead play the first song in sFanfares.
+	.macro playfanfare songNumber:req
 	.byte 0x31
-	.2byte \fanfare_number
+	.2byte \songNumber
 	.endm
 
 	@ Blocks script execution until all currently-playing fanfares finish.
@@ -345,11 +345,12 @@
 	.byte 0x32
 	.endm
 
-	@ Plays the specified (song_number) song. The byte is apparently supposed to be 0x00.
-	.macro playbgm song_number:req, unknown:req
+	@ Plays the specified (song_number) song. If save_song is TRUE, the
+	@ specified (song_number) will be saved as if savebgm was called with it.
+	.macro playbgm song_number:req, save_song:req
 	.byte 0x33
 	.2byte \song_number
-	.byte \unknown
+	.byte \save_song
 	.endm
 
 	@ Saves the specified (song_number) song to be played later.
@@ -381,7 +382,7 @@
 	.byte \speed
 	.endm
 
-	@ Sends the player to Warp warp on Map bank.map. If the specified warp is 0xFF, 
+	@ Sends the player to Warp warp on Map bank.map. If the specified warp is 0xFF,
 	@ then the player will instead be sent to (X, Y) on the map.
 	.macro warp map:req, warp:req, X:req, Y:req
 	.byte 0x39
@@ -433,7 +434,7 @@
 	.2byte \Y
 	.endm
 
-	@ Sets the warp destination that a warp to Warp 127 on Map 127.127 will connect to. 
+	@ Sets the warp destination that a warp to Warp 127 on Map 127.127 will connect to.
 	@ Useful when a map has warps that need to go to script-controlled locations (i.e. elevators).
 	.macro setdynamicwarp map:req, warp:req, X:req, Y:req
 	.byte 0x3f
@@ -473,7 +474,7 @@
 	.byte 0x43
 	.endm
 
-	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and 
+	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and
 	@ VAR_RESULT will be set to TRUE; otherwise, VAR_RESULT is set to FALSE.
 	.macro additem index:req, quantity=1
 	.byte 0x44
@@ -488,7 +489,7 @@
 	.2byte \quantity
 	.endm
 
-	@ Checks if the player has enough space in their Bag to hold quantity more of item index. Sets VAR_RESULT to 
+	@ Checks if the player has enough space in their Bag to hold quantity more of item index. Sets VAR_RESULT to
 	@ TRUE if there is room, or FALSE is there is no room.
 	.macro checkitemspace index:req, quantity:req
 	.byte 0x46
@@ -504,7 +505,7 @@
 	.2byte \quantity
 	.endm
 
-	@ Checks which Bag pocket the specified item belongs in, and writes the pocket value (POCKET_*) to VAR_RESULT. 
+	@ Checks which Bag pocket the specified item belongs in, and writes the pocket value (POCKET_*) to VAR_RESULT.
 	@ This script is used to show the name of the proper Bag pocket when the player receives an item via callstd (simplified to giveitem in XSE).
 	.macro checkitemtype index:req
 	.byte 0x48
@@ -543,7 +544,7 @@
 	.2byte \decoration
 	.endm
 
-	@ Checks if the player has enough space in their PC to hold decoration. Sets VAR_RESULT to TRUE if there is room, or 
+	@ Checks if the player has enough space in their PC to hold decoration. Sets VAR_RESULT to TRUE if there is room, or
 	@ FALSE is there is no room. In FireRed, this command is a nop. (The argument is read, but not used for anything.)
 	.macro checkdecorspace decoration:req
 	.byte 0x4e
@@ -566,9 +567,9 @@
 		.endif
 	.endm
 
-	@ Blocks script execution until the movements being applied to the specified (index) Object finish. 
-	@ If the specified Object is 0x0000, then the command will block script execution until all Objects 
-	@ affected by applymovement finish their movements. If the specified Object is not currently being 
+	@ Blocks script execution until the movements being applied to the specified (index) Object finish.
+	@ If the specified Object is 0x0000, then the command will block script execution until all Objects
+	@ affected by applymovement finish their movements. If the specified Object is not currently being
 	@ manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro waitmovement index:req, map
@@ -582,8 +583,8 @@
 		.endif
 	.endm
 
-	@ Attempts to hide the specified (index) Object on the specified (map_group, map_num) map, 
-	@ by setting its visibility flag if it has a valid one. If the Object does not have a valid 
+	@ Attempts to hide the specified (index) Object on the specified (map_group, map_num) map,
+	@ by setting its visibility flag if it has a valid one. If the Object does not have a valid
 	@ visibility flag, this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro removeobject index:req, map
@@ -597,7 +598,7 @@
 		.endif
 	.endm
 
-	@ Unsets the specified (index) Object's visibility flag on the specified (map_group, map_num) map if it has a valid one. 
+	@ Unsets the specified (index) Object's visibility flag on the specified (map_group, map_num) map if it has a valid one.
 	@ If the Object does not have a valid visibility flag, this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro addobject index:req, map
@@ -739,7 +740,7 @@
 	.endm
 
 
-	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this 
+	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this
 	@ command behind-the-scenes), and blocks script execution until the battle finishes.
 	.macro trainerbattlebegin
 	.byte 0x5d
@@ -780,7 +781,7 @@
 	.2byte \y
 	.endm
 
-	@ Copies a live object event's xy position to its template, so that if the sprite goes off screen, 
+	@ Copies a live object event's xy position to its template, so that if the sprite goes off screen,
 	@ it'll still be there when it comes back on screen.
 	.macro copyobjectxytoperm index:req
 	.byte 0x64
@@ -793,14 +794,14 @@
 	.byte \byte
 	.endm
 
-	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the 
+	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the
 	@ box and its text have been fully drawn.
 	.macro waitmessage
 	.byte 0x66
 	.endm
 
-	@ Starts displaying a standard message box containing the specified text. If text is a pointer, then the string at 
-	@ that offset will be loaded and used. If text is script bank 0, then the value of script bank 0 will be treated as 
+	@ Starts displaying a standard message box containing the specified text. If text is a pointer, then the string at
+	@ that offset will be loaded and used. If text is script bank 0, then the value of script bank 0 will be treated as
 	@ a pointer to the text. (You can use loadpointer to place a string pointer in a script bank.)
 	.macro message text:req
 	.byte 0x67
@@ -812,12 +813,12 @@
 	.byte 0x68
 	.endm
 
-	@ Ceases movement for all Objects on-screen.
+	@ Freezes all objects immediately except the player. The player is frozen once their movement is finished.
 	.macro lockall
 	.byte 0x69
 	.endm
 
-	@ If the script was called by an Object, then that Object's movement will cease.
+	@ Freezes all objects immediately except the player and the selected object. The player and selected object are frozen once their movement is finished.
 	.macro lock
 	.byte 0x6a
 	.endm
@@ -845,39 +846,41 @@
 	.byte \y
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. 
-	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with list. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
-	.macro multichoice x:req, y:req, list:req, b:req
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
+	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with multichoiceId.
+	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro multichoice x:req, y:req, multichoiceId:req, ignoreBPress:req
 	.byte 0x6f
 	.byte \x
 	.byte \y
-	.byte \list
-	.byte \b
+	.byte \multichoiceId
+	.byte \ignoreBPress
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
-	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with list. The default argument determines 
-	@ the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. 
-	@ If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
-	.macro multichoicedefault x:req, y:req, list:req, default:req, b:req
+	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with multichoiceId.
+	@ The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00.
+	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro multichoicedefault x:req, y:req, multichoiceId:req, default:req, ignoreBPress:req
 	.byte 0x70
 	.byte \x
 	.byte \y
-	.byte \list
+	.byte \multichoiceId
 	.byte \default
-	.byte \b
+	.byte \ignoreBPress
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
-	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with list.
+	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with multichoiceId.
 	@ The per_row argument determines how many list items will be shown on a single row of the box.
-	.macro multichoicegrid x:req, y:req, list:req, per_row:req, B:req
+	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro multichoicegrid x:req, y:req, multichoiceId:req, per_row:req, ignoreBPress:req
 	.byte 0x71
 	.byte \x
 	.byte \y
-	.byte \list
+	.byte \multichoiceId
 	.byte \per_row
-	.byte \B
+	.byte \ignoreBPress
 	.endm
 
 	@ Nopped in Emerald.
@@ -886,21 +889,21 @@
 	.endm
 
 	@ Nopped in Emerald, but still consumes parameters.
-	.macro erasebox byte1:req, byte2:req, byte3:req, byte4:req
+	.macro erasebox left:req, top:req, right:req, bottom:req
 	.byte 0x73
-	.byte \byte1
-	.byte \byte2
-	.byte \byte3
-	.byte \byte4
+	.byte \left
+	.byte \top
+	.byte \right
+	.byte \bottom
 	.endm
 
 	@ Nopped in Emerald, but still consumes parameters.
-	.macro drawboxtext byte1:req, byte2:req, byte3:req, byte4:req
+	.macro drawboxtext left:req, top:req, multichoiceId:req, ignoreBPress:req
 	.byte 0x74
-	.byte \byte1
-	.byte \byte2
-	.byte \byte3
-	.byte \byte4
+	.byte \left
+	.byte \top
+	.byte \multichoiceId
+	.byte \ignoreBPress
 	.endm
 
 	@ Displays a box containing the front sprite for the specified (species) Pokemon species.
@@ -916,18 +919,29 @@
 	.byte 0x76
 	.endm
 
-	@ Draws an image of the winner of the contest. In FireRed, this command is a nop. (The argument is discarded.)
-	.macro showcontestwinner a:req
+	@ Draws an image of the winner of the contest. winnerId is any CONTEST_WINNER_* constant.
+	.macro showcontestpainting winnerId:req
 	.byte 0x77
-	.byte \a
+	.byte \winnerId
 	.endm
 
-	@ Displays the string at pointer as braille text in a standard message box. The string must be formatted to use braille 
-	@ characters and needs to provide six extra starting characters that are skipped (in RS, these characters determined the 
+	@ Displays the string at pointer as braille text in a standard message box. The string must be formatted to use braille
+	@ characters and needs to provide six extra starting characters that are skipped (in RS, these characters determined the
 	@ box's size and position, but in Emerald these are calculated automatically).
 	.macro braillemessage text:req
 	.byte 0x78
 	.4byte \text
+	.endm
+
+	@ Formatting for the braille window, to be put at the start of a pointer used by braillemessage.
+	@ These are from RS and are ignored in Emerald (see ScrCmd_braillemessage, and comment above)
+	.macro brailleformat winLeft:req, winTop:req, winRight:req, winBottom:req, textLeft:req, textTop:req
+	.byte \winLeft
+	.byte \winTop
+	.byte \winRight
+	.byte \winBottom
+	.byte \textLeft
+	.byte \textTop
 	.endm
 
 	@ Gives the player one of the specified (species) Pokemon at level level holding item. The trailing 0s are unused parameters
@@ -982,7 +996,7 @@
 	.2byte \slot
 	.endm
 
-	@ Writes the name of the item at index item to the specified buffer. If the specified index is larger than 
+	@ Writes the name of the item at index item to the specified buffer. If the specified index is larger than
 	@ the number of items in the game (0x176), the name of item 0 ("????????") is buffered instead.
 	.macro bufferitemname out:req, item:req
 	.byte 0x80
@@ -1098,7 +1112,7 @@
 	.byte \check
 	.endm
 
-	@ If check is 0x00, this command will check if the player has money >= value; VAR_RESULT is set to TRUE if the player 
+	@ If check is 0x00, this command will check if the player has money >= value; VAR_RESULT is set to TRUE if the player
 	@ has enough money, or FALSE if they do not.
 	.macro checkmoney value:req, check:req
 	.byte 0x92
@@ -1194,10 +1208,10 @@
 	.endm
 
 	@ Plays the specified (species) Pokemon's cry. You can use waitcry to block script execution until the sound finishes.
-	.macro playmoncry species:req, effect:req
+	.macro playmoncry species:req, mode:req
 	.byte 0xa1
 	.2byte \species
-	.2byte \effect
+	.2byte \mode
 	.endm
 
 	@ Changes the metatile at (x, y) on the current map.
@@ -1432,7 +1446,7 @@
 	.2byte \box
 	.endm
 
-	@ Sets the color of the text in standard message boxes. 0x00 produces blue (male) text, 0x01 produces red (female) text, 
+	@ Sets the color of the text in standard message boxes. 0x00 produces blue (male) text, 0x01 produces red (female) text,
 	@ 0xFF resets the color to the default for the current OW's gender, and all other values produce black text.
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro textcolor color:req
@@ -1440,7 +1454,7 @@
 	.byte \color
 	.endm
 
-	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom 
+	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom
 	@ of the screen when the Main Menu is opened.
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro loadhelp pointer:req
@@ -1475,15 +1489,15 @@
 	.4byte \value
 	.endm
 
-	@ Makes the Pokemon in the specified slot of the player's party obedient. It will not randomly disobey orders in battle.
-	.macro setmonobedient slot:req
+	@ Sets the Pokemon in the specified slot of the player party's eventLegal bit.
+	.macro setmoneventlegal slot:req
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
-	@ Checks if the Pokemon in the specified slot of the player's party is obedient. If the Pokemon is disobedient,
-	@ VAR_RESULT is TRUE. If the Pokemon is obedient (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmonobedience slot:req
+	@ Checks if the Pokemon in the specified slot of the player's party has its eventLegal bit set. If it isn't set,
+	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
+	.macro checkmoneventlegal slot:req
 	.byte 0xce
 	.2byte \slot
 	.endm
@@ -1550,11 +1564,11 @@
 	.2byte \y
 	.endm
 
-	.macro cmdD8
+	.macro selectapproachingtrainer
 	.byte 0xd8
 	.endm
 
-	.macro cmdD9
+	.macro lockfortrainer
 	.byte 0xd9
 	.endm
 
@@ -1562,7 +1576,7 @@
 	.byte 0xda
 	.endm
 
-	.macro message3 pointer:req
+	.macro messageinstant pointer:req
 	.byte 0xdb
 	.4byte \pointer
 	.endm
@@ -1629,7 +1643,7 @@
 
 	.macro goto_if_lt dest:req @ LESS THAN
 	goto_if 0, \dest
-	.endm	
+	.endm
 
 	.macro goto_if_eq dest:req @ EQUAL
 	goto_if 1, \dest
@@ -1663,7 +1677,7 @@
 
 	.macro call_if_lt dest:req @ LESS THAN
 	call_if 0, \dest
-	.endm	
+	.endm
 
 	.macro call_if_eq dest:req @ EQUAL
 	call_if 1, \dest
@@ -1777,4 +1791,10 @@
 	setfieldeffectargument 1, \y
 	setfieldeffectargument 2, \priority
 	dofieldeffect FLDEFF_SPARKLE
+	.endm
+
+	.macro braillemsgbox text:req
+	braillemessage \text
+	waitbuttonpress
+	closebraillemessage
 	.endm

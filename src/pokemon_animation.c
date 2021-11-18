@@ -6,835 +6,865 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "data.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 
-struct UnkAnimStruct
+/*
+    This file handles the movements of the Pokémon intro animations.
+
+    Each animation type is identified by an ANIM_* constant that
+    refers to a sprite callback to start the animation. These functions
+    are named Anim_<name> or Anim_<name>_<variant>. Many of these
+    functions share additional movement functions to do a variation of the
+    same movement (e.g. a faster or larger movement).
+    Vertical and Horizontal are frequently shortened to V and H.
+
+    Every front animation uses 1 of these ANIMs, and every back animation
+    uses a BACK_ANIM_* that refers to a set of 3 ANIM functions. Which of the
+    3 that gets used depends on the Pokémon's nature (see sBackAnimationIds).
+
+    The table linking species to a BACK_ANIM is in this file (sSpeciesToBackAnimSet)
+    while the table linking species to an ANIM for their front animation is in
+    pokemon.c (sMonFrontAnimIdsTable).
+
+    These are the functions that will start an animation:
+    - LaunchAnimationTaskForFrontSprite
+    - LaunchAnimationTaskForBackSprite
+    - StartMonSummaryAnimation
+*/
+
+#define sDontFlip data[1]  // TRUE if a normal animation, FALSE if Summary Screen animation
+
+struct PokemonAnimData
 {
-    u16 field_0;
-    s16 field_2;
-    s16 field_4;
-    s16 field_6;
-    s16 field_8;
+    u16 delay;
+    s16 speed; // Only used by 2 sets of animations
+    s16 runs; // Number of times to do the animation
+    s16 rotation;
+    s16 data; // General use
 };
 
-// this file's functions
-static void pokemonanimfunc_00(struct Sprite *sprite);
-static void pokemonanimfunc_01(struct Sprite *sprite);
-static void pokemonanimfunc_02(struct Sprite *sprite);
-static void pokemonanimfunc_03(struct Sprite *sprite);
-static void pokemonanimfunc_04(struct Sprite *sprite);
-static void pokemonanimfunc_05(struct Sprite *sprite);
-static void pokemonanimfunc_06(struct Sprite *sprite);
-static void pokemonanimfunc_07(struct Sprite *sprite);
-static void pokemonanimfunc_08(struct Sprite *sprite);
-static void pokemonanimfunc_09(struct Sprite *sprite);
-static void pokemonanimfunc_0A(struct Sprite *sprite);
-static void pokemonanimfunc_0B(struct Sprite *sprite);
-static void pokemonanimfunc_0C(struct Sprite *sprite);
-static void pokemonanimfunc_0D(struct Sprite *sprite);
-static void pokemonanimfunc_0E(struct Sprite *sprite);
-static void pokemonanimfunc_0F(struct Sprite *sprite);
-static void pokemonanimfunc_10(struct Sprite *sprite);
-static void pokemonanimfunc_11(struct Sprite *sprite);
-static void pokemonanimfunc_12(struct Sprite *sprite);
-static void pokemonanimfunc_13(struct Sprite *sprite);
-static void pokemonanimfunc_14(struct Sprite *sprite);
-static void pokemonanimfunc_15(struct Sprite *sprite);
-static void pokemonanimfunc_16(struct Sprite *sprite);
-static void pokemonanimfunc_17(struct Sprite *sprite);
-static void pokemonanimfunc_18(struct Sprite *sprite);
-static void pokemonanimfunc_19(struct Sprite *sprite);
-static void pokemonanimfunc_1A(struct Sprite *sprite);
-static void pokemonanimfunc_1B(struct Sprite *sprite);
-static void pokemonanimfunc_1C(struct Sprite *sprite);
-static void pokemonanimfunc_1D(struct Sprite *sprite);
-static void pokemonanimfunc_1E(struct Sprite *sprite);
-static void pokemonanimfunc_1F(struct Sprite *sprite);
-static void pokemonanimfunc_20(struct Sprite *sprite);
-static void pokemonanimfunc_21(struct Sprite *sprite);
-static void pokemonanimfunc_22(struct Sprite *sprite);
-static void pokemonanimfunc_23(struct Sprite *sprite);
-static void pokemonanimfunc_24(struct Sprite *sprite);
-static void pokemonanimfunc_25(struct Sprite *sprite);
-static void pokemonanimfunc_26(struct Sprite *sprite);
-static void pokemonanimfunc_27(struct Sprite *sprite);
-static void pokemonanimfunc_28(struct Sprite *sprite);
-static void pokemonanimfunc_29(struct Sprite *sprite);
-static void pokemonanimfunc_2A(struct Sprite *sprite);
-static void pokemonanimfunc_2B(struct Sprite *sprite);
-static void pokemonanimfunc_2C(struct Sprite *sprite);
-static void pokemonanimfunc_2D(struct Sprite *sprite);
-static void pokemonanimfunc_2E(struct Sprite *sprite);
-static void pokemonanimfunc_2F(struct Sprite *sprite);
-static void pokemonanimfunc_30(struct Sprite *sprite);
-static void pokemonanimfunc_31(struct Sprite *sprite);
-static void pokemonanimfunc_32(struct Sprite *sprite);
-static void pokemonanimfunc_33(struct Sprite *sprite);
-static void pokemonanimfunc_34(struct Sprite *sprite);
-static void pokemonanimfunc_35(struct Sprite *sprite);
-static void pokemonanimfunc_36(struct Sprite *sprite);
-static void pokemonanimfunc_37(struct Sprite *sprite);
-static void pokemonanimfunc_38(struct Sprite *sprite);
-static void pokemonanimfunc_39(struct Sprite *sprite);
-static void pokemonanimfunc_3A(struct Sprite *sprite);
-static void pokemonanimfunc_3B(struct Sprite *sprite);
-static void pokemonanimfunc_3C(struct Sprite *sprite);
-static void pokemonanimfunc_3D(struct Sprite *sprite);
-static void pokemonanimfunc_3E(struct Sprite *sprite);
-static void pokemonanimfunc_3F(struct Sprite *sprite);
-static void pokemonanimfunc_40(struct Sprite *sprite);
-static void pokemonanimfunc_41(struct Sprite *sprite);
-static void pokemonanimfunc_42(struct Sprite *sprite);
-static void pokemonanimfunc_43(struct Sprite *sprite);
-static void pokemonanimfunc_44(struct Sprite *sprite);
-static void pokemonanimfunc_45(struct Sprite *sprite);
-static void pokemonanimfunc_46(struct Sprite *sprite);
-static void pokemonanimfunc_47(struct Sprite *sprite);
-static void pokemonanimfunc_48(struct Sprite *sprite);
-static void pokemonanimfunc_49(struct Sprite *sprite);
-static void pokemonanimfunc_4A(struct Sprite *sprite);
-static void pokemonanimfunc_4B(struct Sprite *sprite);
-static void pokemonanimfunc_4C(struct Sprite *sprite);
-static void pokemonanimfunc_4D(struct Sprite *sprite);
-static void pokemonanimfunc_4E(struct Sprite *sprite);
-static void pokemonanimfunc_4F(struct Sprite *sprite);
-static void pokemonanimfunc_50(struct Sprite *sprite);
-static void pokemonanimfunc_51(struct Sprite *sprite);
-static void pokemonanimfunc_52(struct Sprite *sprite);
-static void pokemonanimfunc_53(struct Sprite *sprite);
-static void pokemonanimfunc_54(struct Sprite *sprite);
-static void pokemonanimfunc_55(struct Sprite *sprite);
-static void pokemonanimfunc_56(struct Sprite *sprite);
-static void pokemonanimfunc_57(struct Sprite *sprite);
-static void pokemonanimfunc_58(struct Sprite *sprite);
-static void pokemonanimfunc_59(struct Sprite *sprite);
-static void pokemonanimfunc_5A(struct Sprite *sprite);
-static void pokemonanimfunc_5B(struct Sprite *sprite);
-static void pokemonanimfunc_5C(struct Sprite *sprite);
-static void pokemonanimfunc_5D(struct Sprite *sprite);
-static void pokemonanimfunc_5E(struct Sprite *sprite);
-static void pokemonanimfunc_5F(struct Sprite *sprite);
-static void pokemonanimfunc_60(struct Sprite *sprite);
-static void pokemonanimfunc_61(struct Sprite *sprite);
-static void pokemonanimfunc_62(struct Sprite *sprite);
-static void pokemonanimfunc_63(struct Sprite *sprite);
-static void pokemonanimfunc_64(struct Sprite *sprite);
-static void pokemonanimfunc_65(struct Sprite *sprite);
-static void pokemonanimfunc_66(struct Sprite *sprite);
-static void pokemonanimfunc_67(struct Sprite *sprite);
-static void pokemonanimfunc_68(struct Sprite *sprite);
-static void pokemonanimfunc_69(struct Sprite *sprite);
-static void pokemonanimfunc_6A(struct Sprite *sprite);
-static void pokemonanimfunc_6B(struct Sprite *sprite);
-static void pokemonanimfunc_6C(struct Sprite *sprite);
-static void pokemonanimfunc_6D(struct Sprite *sprite);
-static void pokemonanimfunc_6E(struct Sprite *sprite);
-static void pokemonanimfunc_6F(struct Sprite *sprite);
-static void pokemonanimfunc_70(struct Sprite *sprite);
-static void pokemonanimfunc_71(struct Sprite *sprite);
-static void pokemonanimfunc_72(struct Sprite *sprite);
-static void pokemonanimfunc_73(struct Sprite *sprite);
-static void pokemonanimfunc_74(struct Sprite *sprite);
-static void pokemonanimfunc_75(struct Sprite *sprite);
-static void pokemonanimfunc_76(struct Sprite *sprite);
-static void pokemonanimfunc_77(struct Sprite *sprite);
-static void pokemonanimfunc_78(struct Sprite *sprite);
-static void pokemonanimfunc_79(struct Sprite *sprite);
-static void pokemonanimfunc_7A(struct Sprite *sprite);
-static void pokemonanimfunc_7B(struct Sprite *sprite);
-static void pokemonanimfunc_7C(struct Sprite *sprite);
-static void pokemonanimfunc_7D(struct Sprite *sprite);
-static void pokemonanimfunc_7E(struct Sprite *sprite);
-static void pokemonanimfunc_7F(struct Sprite *sprite);
-static void pokemonanimfunc_80(struct Sprite *sprite);
-static void pokemonanimfunc_81(struct Sprite *sprite);
-static void pokemonanimfunc_82(struct Sprite *sprite);
-static void pokemonanimfunc_83(struct Sprite *sprite);
-static void pokemonanimfunc_84(struct Sprite *sprite);
-static void pokemonanimfunc_85(struct Sprite *sprite);
-static void pokemonanimfunc_86(struct Sprite *sprite);
-static void pokemonanimfunc_87(struct Sprite *sprite);
-static void pokemonanimfunc_88(struct Sprite *sprite);
-static void pokemonanimfunc_89(struct Sprite *sprite);
-static void pokemonanimfunc_8A(struct Sprite *sprite);
-static void pokemonanimfunc_8B(struct Sprite *sprite);
-static void pokemonanimfunc_8C(struct Sprite *sprite);
-static void pokemonanimfunc_8D(struct Sprite *sprite);
-static void pokemonanimfunc_8E(struct Sprite *sprite);
-static void pokemonanimfunc_8F(struct Sprite *sprite);
-static void pokemonanimfunc_90(struct Sprite *sprite);
-static void pokemonanimfunc_91(struct Sprite *sprite);
-static void pokemonanimfunc_92(struct Sprite *sprite);
-static void pokemonanimfunc_93(struct Sprite *sprite);
-static void pokemonanimfunc_94(struct Sprite *sprite);
-static void pokemonanimfunc_95(struct Sprite *sprite);
-static void pokemonanimfunc_96(struct Sprite *sprite);
+struct YellowFlashData
+{
+    bool8 isYellow;
+    u8 time;
+};
 
-static void SpriteCB_SetDummyOnAnimEnd(struct Sprite *sprite);
+static void Anim_VerticalSquishBounce(struct Sprite *sprite);
+static void Anim_CircularStretchTwice(struct Sprite *sprite);
+static void Anim_HorizontalVibrate(struct Sprite *sprite);
+static void Anim_HorizontalSlide(struct Sprite *sprite);
+static void Anim_VerticalSlide(struct Sprite *sprite);
+static void Anim_BounceRotateToSides(struct Sprite *sprite);
+static void Anim_VerticalJumpsHorizontalJumps(struct Sprite *sprite);
+static void Anim_RotateToSides(struct Sprite *sprite);
+static void Anim_RotateToSides_Twice(struct Sprite *sprite);
+static void Anim_GrowVibrate(struct Sprite *sprite);
+static void Anim_ZigzagFast(struct Sprite *sprite);
+static void Anim_SwingConcave(struct Sprite *sprite);
+static void Anim_SwingConcave_Fast(struct Sprite *sprite);
+static void Anim_SwingConvex(struct Sprite *sprite);
+static void Anim_SwingConvex_Fast(struct Sprite *sprite);
+static void Anim_HorizontalShake(struct Sprite *sprite);
+static void Anim_VerticalShake(struct Sprite *sprite);
+static void Anim_CircularVibrate(struct Sprite *sprite);
+static void Anim_Twist(struct Sprite *sprite);
+static void Anim_ShrinkGrow(struct Sprite *sprite);
+static void Anim_CircleCounterclockwise(struct Sprite *sprite);
+static void Anim_GlowBlack(struct Sprite *sprite);
+static void Anim_HorizontalStretch(struct Sprite *sprite);
+static void Anim_VerticalStretch(struct Sprite *sprite);
+static void Anim_RisingWobble(struct Sprite *sprite);
+static void Anim_VerticalShakeTwice(struct Sprite *sprite);
+static void Anim_TipMoveForward(struct Sprite *sprite);
+static void Anim_HorizontalPivot(struct Sprite *sprite);
+static void Anim_VerticalSlideWobble(struct Sprite *sprite);
+static void Anim_HorizontalSlideWobble(struct Sprite *sprite);
+static void Anim_VerticalJumps_Big(struct Sprite *sprite);
+static void Anim_Spin_Long(struct Sprite *sprite);
+static void Anim_GlowOrange(struct Sprite *sprite);
+static void Anim_GlowRed(struct Sprite *sprite);
+static void Anim_GlowBlue(struct Sprite *sprite);
+static void Anim_GlowYellow(struct Sprite *sprite);
+static void Anim_GlowPurple(struct Sprite *sprite);
+static void Anim_BackAndLunge(struct Sprite *sprite);
+static void Anim_BackFlip(struct Sprite *sprite);
+static void Anim_Flicker(struct Sprite *sprite);
+static void Anim_BackFlipBig(struct Sprite *sprite);
+static void Anim_FrontFlip(struct Sprite *sprite);
+static void Anim_TumblingFrontFlip(struct Sprite *sprite);
+static void Anim_Figure8(struct Sprite *sprite);
+static void Anim_FlashYellow(struct Sprite *sprite);
+static void Anim_SwingConcave_FastShort(struct Sprite *sprite);
+static void Anim_SwingConvex_FastShort(struct Sprite *sprite);
+static void Anim_RotateUpSlamDown(struct Sprite *sprite);
+static void Anim_DeepVerticalSquishBounce(struct Sprite *sprite);
+static void Anim_HorizontalJumps(struct Sprite *sprite);
+static void Anim_HorizontalJumpsVerticalStretch(struct Sprite *sprite);
+static void Anim_RotateToSides_Fast(struct Sprite *sprite);
+static void Anim_RotateUpToSides(struct Sprite *sprite);
+static void Anim_FlickerIncreasing(struct Sprite *sprite);
+static void Anim_TipHopForward(struct Sprite *sprite);
+static void Anim_PivotShake(struct Sprite *sprite);
+static void Anim_TipAndShake(struct Sprite *sprite);
+static void Anim_VibrateToCorners(struct Sprite *sprite);
+static void Anim_GrowInStages(struct Sprite *sprite);
+static void Anim_VerticalSpring(struct Sprite *sprite);
+static void Anim_VerticalRepeatedSpring(struct Sprite *sprite);
+static void Anim_SpringRising(struct Sprite *sprite);
+static void Anim_HorizontalSpring(struct Sprite *sprite);
+static void Anim_HorizontalRepeatedSpring_Slow(struct Sprite *sprite);
+static void Anim_HorizontalSlideShrink(struct Sprite *sprite);
+static void Anim_LungeGrow(struct Sprite *sprite);
+static void Anim_CircleIntoBackground(struct Sprite *sprite);
+static void Anim_RapidHorizontalHops(struct Sprite *sprite);
+static void Anim_FourPetal(struct Sprite *sprite);
+static void Anim_VerticalSquishBounce_Slow(struct Sprite *sprite);
+static void Anim_HorizontalSlide_Slow(struct Sprite *sprite);
+static void Anim_VerticalSlide_Slow(struct Sprite *sprite);
+static void Anim_BounceRotateToSides_Small(struct Sprite *sprite);
+static void Anim_BounceRotateToSides_Slow(struct Sprite *sprite);
+static void Anim_BounceRotateToSides_SmallSlow(struct Sprite *sprite);
+static void Anim_ZigzagSlow(struct Sprite *sprite);
+static void Anim_HorizontalShake_Slow(struct Sprite *sprite);
+static void Anim_VertialShake_Slow(struct Sprite *sprite);
+static void Anim_Twist_Twice(struct Sprite *sprite);
+static void Anim_CircleCounterclockwise_Slow(struct Sprite *sprite);
+static void Anim_VerticalShakeTwice_Slow(struct Sprite *sprite);
+static void Anim_VerticalSlideWobble_Small(struct Sprite *sprite);
+static void Anim_VerticalJumps_Small(struct Sprite *sprite);
+static void Anim_Spin(struct Sprite *sprite);
+static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite);
+static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite);
+static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite);
+static void Anim_VerticalShakeBack(struct Sprite *sprite);
+static void Anim_VerticalShakeBack_Slow(struct Sprite *sprite);
+static void Anim_VerticalShakeHorizontalSlide_Slow(struct Sprite *sprite);
+static void Anim_VerticalStretchBothEnds_Slow(struct Sprite *sprite);
+static void Anim_HorizontalStretchFar_Slow(struct Sprite *sprite);
+static void Anim_VerticalShakeLowTwice(struct Sprite *sprite);
+static void Anim_HorizontalShake_Fast(struct Sprite *sprite);
+static void Anim_HorizontalSlide_Fast(struct Sprite *sprite);
+static void Anim_HorizontalVibrate_Fast(struct Sprite *sprite);
+static void Anim_HorizontalVibrate_Fastest(struct Sprite *sprite);
+static void Anim_VerticalShakeBack_Fast(struct Sprite *sprite);
+static void Anim_VerticalShakeLowTwice_Slow(struct Sprite *sprite);
+static void Anim_VerticalShakeLowTwice_Fast(struct Sprite *sprite);
+static void Anim_CircleCounterclockwise_Long(struct Sprite *sprite);
+static void Anim_GrowStutter_Slow(struct Sprite *sprite);
+static void Anim_VerticalShakeHorizontalSlide(struct Sprite *sprite);
+static void Anim_VerticalShakeHorizontalSlide_Fast(struct Sprite *sprite);
+static void Anim_TriangleDown_Slow(struct Sprite *sprite);
+static void Anim_TriangleDown(struct Sprite *sprite);
+static void Anim_TriangleDown_Fast(struct Sprite *sprite);
+static void Anim_Grow(struct Sprite *sprite);
+static void Anim_Grow_Twice(struct Sprite *sprite);
+static void Anim_HorizontalSpring_Fast(struct Sprite *sprite);
+static void Anim_HorizontalSpring_Slow(struct Sprite *sprite);
+static void Anim_HorizontalRepeatedSpring_Fast(struct Sprite *sprite);
+static void Anim_HorizontalRepeatedSpring(struct Sprite *sprite);
+static void Anim_ShrinkGrow_Fast(struct Sprite *sprite);
+static void Anim_ShrinkGrow_Slow(struct Sprite *sprite);
+static void Anim_VerticalStretchBothEnds(struct Sprite *sprite);
+static void Anim_VerticalStretchBothEnds_Twice(struct Sprite *sprite);
+static void Anim_HorizontalStretchFar_Twice(struct Sprite *sprite);
+static void Anim_HorizontalStretchFar(struct Sprite *sprite);
+static void Anim_GrowStutter_Twice(struct Sprite *sprite);
+static void Anim_GrowStutter(struct Sprite *sprite);
+static void Anim_ConcaveArcLarge_Slow(struct Sprite *sprite);
+static void Anim_ConcaveArcLarge(struct Sprite *sprite);
+static void Anim_ConcaveArcLarge_Twice(struct Sprite *sprite);
+static void Anim_ConvexDoubleArc_Slow(struct Sprite *sprite);
+static void Anim_ConvexDoubleArc(struct Sprite *sprite);
+static void Anim_ConvexDoubleArc_Twice(struct Sprite *sprite);
+static void Anim_ConcaveArcSmall_Slow(struct Sprite *sprite);
+static void Anim_ConcaveArcSmall(struct Sprite *sprite);
+static void Anim_ConcaveArcSmall_Twice(struct Sprite *sprite);
+static void Anim_HorizontalDip(struct Sprite *sprite);
+static void Anim_HorizontalDip_Fast(struct Sprite *sprite);
+static void Anim_HorizontalDip_Twice(struct Sprite *sprite);
+static void Anim_ShrinkGrowVibrate_Fast(struct Sprite *sprite);
+static void Anim_ShrinkGrowVibrate(struct Sprite *sprite);
+static void Anim_ShrinkGrowVibrate_Slow(struct Sprite *sprite);
+static void Anim_JoltRight_Fast(struct Sprite *sprite);
+static void Anim_JoltRight(struct Sprite *sprite);
+static void Anim_JoltRight_Slow(struct Sprite *sprite);
+static void Anim_ShakeFlashYellow_Fast(struct Sprite *sprite);
+static void Anim_ShakeFlashYellow(struct Sprite *sprite);
+static void Anim_ShakeFlashYellow_Slow(struct Sprite *sprite);
+static void Anim_ShakeGlowRed_Fast(struct Sprite *sprite);
+static void Anim_ShakeGlowRed(struct Sprite *sprite);
+static void Anim_ShakeGlowRed_Slow(struct Sprite *sprite);
+static void Anim_ShakeGlowGreen_Fast(struct Sprite *sprite);
+static void Anim_ShakeGlowGreen(struct Sprite *sprite);
+static void Anim_ShakeGlowGreen_Slow(struct Sprite *sprite);
+static void Anim_ShakeGlowBlue_Fast(struct Sprite *sprite);
+static void Anim_ShakeGlowBlue(struct Sprite *sprite);
+static void Anim_ShakeGlowBlue_Slow(struct Sprite *sprite);
 
-#define STRUCT_COUNT 4
+static void WaitAnimEnd(struct Sprite *sprite);
 
-// IWRAM bss
-static struct UnkAnimStruct sUnknown_03001240[STRUCT_COUNT];
-static u8 sUnknown_03001270;
-static bool32 sUnknown_03001274;
+static struct PokemonAnimData sAnims[MAX_BATTLERS_COUNT];
+static u8 sAnimIdx;
+static bool32 sIsSummaryAnim;
 
-// const rom data
 static const u8 sSpeciesToBackAnimSet[] =
 {
-    [SPECIES_BULBASAUR] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_IVYSAUR] = BACK_ANIM_H_SLIDE,
-    [SPECIES_VENUSAUR] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_CHARMANDER] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
+    [SPECIES_BULBASAUR]  = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_IVYSAUR]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_VENUSAUR]   = BACK_ANIM_H_SHAKE,
+    [SPECIES_CHARMANDER] = BACK_ANIM_CONCAVE_ARC_SMALL,
     [SPECIES_CHARMELEON] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_CHARIZARD] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_SQUIRTLE] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_WARTORTLE] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_BLASTOISE] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_CATERPIE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_METAPOD] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_BUTTERFREE] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_WEEDLE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_KAKUNA] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_BEEDRILL] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_PIDGEY] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_PIDGEOTTO] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_PIDGEOT] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_RATTATA] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_RATICATE] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_SPEAROW] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_FEAROW] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_EKANS] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_ARBOK] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_PIKACHU] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_RAICHU] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_SANDSHREW] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_SANDSLASH] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_NIDORAN_F] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_NIDORINA] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_NIDOQUEEN] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_NIDORAN_M] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_NIDORINO] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_NIDOKING] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_CLEFAIRY] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_CLEFABLE] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_VULPIX] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_NINETALES] = BACK_ANIM_H_SLIDE_QUICK,
+    [SPECIES_CHARIZARD]  = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_SQUIRTLE]   = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_WARTORTLE]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_BLASTOISE]  = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_CATERPIE]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_METAPOD]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_BUTTERFREE] = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_WEEDLE]     = BACK_ANIM_H_SLIDE,
+    [SPECIES_KAKUNA]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_BEEDRILL]   = BACK_ANIM_H_VIBRATE,
+    [SPECIES_PIDGEY]     = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_PIDGEOTTO]  = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_PIDGEOT]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_RATTATA]    = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_RATICATE]   = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_SPEAROW]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_FEAROW]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_EKANS]      = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_ARBOK]      = BACK_ANIM_V_SHAKE,
+    [SPECIES_PIKACHU]    = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_RAICHU]     = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_SANDSHREW]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_SANDSLASH]  = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_NIDORAN_F]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_NIDORINA]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_NIDOQUEEN]  = BACK_ANIM_V_SHAKE,
+    [SPECIES_NIDORAN_M]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_NIDORINO]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_NIDOKING]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_CLEFAIRY]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_CLEFABLE]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_VULPIX]     = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_NINETALES]  = BACK_ANIM_H_VIBRATE,
     [SPECIES_JIGGLYPUFF] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_WIGGLYTUFF] = BACK_ANIM_GROW_1,
-    [SPECIES_ZUBAT] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_GOLBAT] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_ODDISH] = BACK_ANIM_H_SLIDE,
-    [SPECIES_GLOOM] = BACK_ANIM_H_SLIDE,
-    [SPECIES_VILEPLUME] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_PARAS] = BACK_ANIM_H_SLIDE,
-    [SPECIES_PARASECT] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_VENONAT] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_VENOMOTH] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_DIGLETT] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_DUGTRIO] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_MEOWTH] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_PERSIAN] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_PSYDUCK] = BACK_ANIM_H_SLIDE,
-    [SPECIES_GOLDUCK] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_MANKEY] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_PRIMEAPE] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_GROWLITHE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_ARCANINE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_POLIWAG] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_POLIWHIRL] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_POLIWRATH] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_ABRA] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_KADABRA] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_ALAKAZAM] = BACK_ANIM_GROW_2,
-    [SPECIES_MACHOP] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_MACHOKE] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_MACHAMP] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_BELLSPROUT] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_WEEPINBELL] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_VICTREEBEL] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_TENTACOOL] = BACK_ANIM_H_SLIDE,
+    [SPECIES_WIGGLYTUFF] = BACK_ANIM_GROW,
+    [SPECIES_ZUBAT]      = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_GOLBAT]     = BACK_ANIM_V_SHAKE,
+    [SPECIES_ODDISH]     = BACK_ANIM_H_SLIDE,
+    [SPECIES_GLOOM]      = BACK_ANIM_H_SLIDE,
+    [SPECIES_VILEPLUME]  = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_PARAS]      = BACK_ANIM_H_SLIDE,
+    [SPECIES_PARASECT]   = BACK_ANIM_H_SHAKE,
+    [SPECIES_VENONAT]    = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_VENOMOTH]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_DIGLETT]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_DUGTRIO]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_MEOWTH]     = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_PERSIAN]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_PSYDUCK]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_GOLDUCK]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_MANKEY]     = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_PRIMEAPE]   = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_GROWLITHE]  = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_ARCANINE]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_POLIWAG]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_POLIWHIRL]  = BACK_ANIM_V_SHAKE,
+    [SPECIES_POLIWRATH]  = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_ABRA]       = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_KADABRA]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_ALAKAZAM]   = BACK_ANIM_GROW_STUTTER,
+    [SPECIES_MACHOP]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_MACHOKE]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_MACHAMP]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_BELLSPROUT] = BACK_ANIM_V_STRETCH,
+    [SPECIES_WEEPINBELL] = BACK_ANIM_V_STRETCH,
+    [SPECIES_VICTREEBEL] = BACK_ANIM_V_STRETCH,
+    [SPECIES_TENTACOOL]  = BACK_ANIM_H_SLIDE,
     [SPECIES_TENTACRUEL] = BACK_ANIM_H_SLIDE,
-    [SPECIES_GEODUDE] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_GRAVELER] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_GOLEM] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_PONYTA] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_RAPIDASH] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SLOWPOKE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_SLOWBRO] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_MAGNEMITE] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_MAGNETON] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_FARFETCHD] = BACK_ANIM_H_SLIDE,
-    [SPECIES_DODUO] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_DODRIO] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SEEL] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_DEWGONG] = BACK_ANIM_H_SLIDE,
-    [SPECIES_GRIMER] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_MUK] = BACK_ANIM_HORIZONTAL_STRETCH,
-    [SPECIES_SHELLDER] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_CLOYSTER] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_GASTLY] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_HAUNTER] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_GENGAR] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_ONIX] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_DROWZEE] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_HYPNO] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_KRABBY] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_KINGLER] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_VOLTORB] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_ELECTRODE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_EXEGGCUTE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_EXEGGUTOR] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_CUBONE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_MAROWAK] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_HITMONLEE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_HITMONCHAN] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_LICKITUNG] = BACK_ANIM_H_SLIDE,
-    [SPECIES_KOFFING] = BACK_ANIM_GROW_1,
-    [SPECIES_WEEZING] = BACK_ANIM_GROW_1,
-    [SPECIES_RHYHORN] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_RHYDON] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_CHANSEY] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_TANGELA] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_KANGASKHAN] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_HORSEA] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_SEADRA] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_GOLDEEN] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_SEAKING] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_STARYU] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_STARMIE] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_MR_MIME] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_SCYTHER] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_JYNX] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_ELECTABUZZ] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_MAGMAR] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_PINSIR] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_TAUROS] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_MAGIKARP] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_GYARADOS] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_LAPRAS] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_DITTO] = BACK_ANIM_SHRINK_GROW_1,
-    [SPECIES_EEVEE] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_VAPOREON] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_JOLTEON] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_FLAREON] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_PORYGON] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_OMANYTE] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_OMASTAR] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_KABUTO] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_KABUTOPS] = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_GEODUDE]    = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_GRAVELER]   = BACK_ANIM_H_SHAKE,
+    [SPECIES_GOLEM]      = BACK_ANIM_H_SHAKE,
+    [SPECIES_PONYTA]     = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_RAPIDASH]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SLOWPOKE]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_SLOWBRO]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_MAGNEMITE]  = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_MAGNETON]   = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_FARFETCHD]  = BACK_ANIM_H_SLIDE,
+    [SPECIES_DODUO]      = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_DODRIO]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SEEL]       = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_DEWGONG]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_GRIMER]     = BACK_ANIM_V_STRETCH,
+    [SPECIES_MUK]        = BACK_ANIM_H_STRETCH,
+    [SPECIES_SHELLDER]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_CLOYSTER]   = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_GASTLY]     = BACK_ANIM_H_VIBRATE,
+    [SPECIES_HAUNTER]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_GENGAR]     = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_ONIX]       = BACK_ANIM_V_SHAKE,
+    [SPECIES_DROWZEE]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_HYPNO]      = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_KRABBY]     = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_KINGLER]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_VOLTORB]    = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_ELECTRODE]  = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_EXEGGCUTE]  = BACK_ANIM_H_SLIDE,
+    [SPECIES_EXEGGUTOR]  = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_CUBONE]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_MAROWAK]    = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_HITMONLEE]  = BACK_ANIM_H_SLIDE,
+    [SPECIES_HITMONCHAN] = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_LICKITUNG]  = BACK_ANIM_H_SLIDE,
+    [SPECIES_KOFFING]    = BACK_ANIM_GROW,
+    [SPECIES_WEEZING]    = BACK_ANIM_GROW,
+    [SPECIES_RHYHORN]    = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_RHYDON]     = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_CHANSEY]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_TANGELA]    = BACK_ANIM_V_STRETCH,
+    [SPECIES_KANGASKHAN] = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_HORSEA]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_SEADRA]     = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_GOLDEEN]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_SEAKING]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_STARYU]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_STARMIE]    = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_MR_MIME]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_SCYTHER]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_JYNX]       = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_ELECTABUZZ] = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_MAGMAR]     = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_PINSIR]     = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_TAUROS]     = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_MAGIKARP]   = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_GYARADOS]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_LAPRAS]     = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_DITTO]      = BACK_ANIM_SHRINK_GROW,
+    [SPECIES_EEVEE]      = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_VAPOREON]   = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_JOLTEON]    = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_FLAREON]    = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_PORYGON]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_OMANYTE]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_OMASTAR]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_KABUTO]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_KABUTOPS]   = BACK_ANIM_JOLT_RIGHT,
     [SPECIES_AERODACTYL] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SNORLAX] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_ARTICUNO] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_ZAPDOS] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_MOLTRES] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_DRATINI] = BACK_ANIM_H_SLIDE,
-    [SPECIES_DRAGONAIR] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_DRAGONITE] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_MEWTWO] = BACK_ANIM_GROW_2,
-    [SPECIES_MEW] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_CHIKORITA] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_BAYLEEF] = BACK_ANIM_H_SLIDE,
-    [SPECIES_MEGANIUM] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_CYNDAQUIL] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_QUILAVA] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_TYPHLOSION] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_TOTODILE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_CROCONAW] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_FERALIGATR] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_SENTRET] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_FURRET] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_HOOTHOOT] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_NOCTOWL] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_LEDYBA] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_LEDIAN] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_SPINARAK] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_ARIADOS] = BACK_ANIM_H_SLIDE,
-    [SPECIES_CROBAT] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_CHINCHOU] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_LANTURN] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_PICHU] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_CLEFFA] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_IGGLYBUFF] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_TOGEPI] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_TOGETIC] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_NATU] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_XATU] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_MAREEP] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_FLAAFFY] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_AMPHAROS] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_BELLOSSOM] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_MARILL] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_AZUMARILL] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_SUDOWOODO] = BACK_ANIM_H_SLIDE,
-    [SPECIES_POLITOED] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_HOPPIP] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_SKIPLOOM] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_JUMPLUFF] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_AIPOM] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_SUNKERN] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_SUNFLORA] = BACK_ANIM_H_SLIDE,
-    [SPECIES_YANMA] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_WOOPER] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_QUAGSIRE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_ESPEON] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_UMBREON] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_MURKROW] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_SLOWKING] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_MISDREAVUS] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_UNOWN] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_WOBBUFFET] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_GIRAFARIG] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_PINECO] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_FORRETRESS] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_DUNSPARCE] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_GLIGAR] = BACK_ANIM_SHRINK_GROW_1,
-    [SPECIES_STEELIX] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_SNUBBULL] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_GRANBULL] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_QWILFISH] = BACK_ANIM_GROW_2,
-    [SPECIES_SCIZOR] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SHUCKLE] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_HERACROSS] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SNEASEL] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_TEDDIURSA] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_URSARING] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_SLUGMA] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_MAGCARGO] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_SWINUB] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_PILOSWINE] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_CORSOLA] = BACK_ANIM_H_SLIDE,
-    [SPECIES_REMORAID] = BACK_ANIM_H_SLIDE,
-    [SPECIES_OCTILLERY] = BACK_ANIM_SHRINK_GROW_1,
-    [SPECIES_DELIBIRD] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_MANTINE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_SKARMORY] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_HOUNDOUR] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_HOUNDOOM] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_KINGDRA] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_PHANPY] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_DONPHAN] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_PORYGON2] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_STANTLER] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_SMEARGLE] = BACK_ANIM_H_SLIDE,
-    [SPECIES_TYROGUE] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_HITMONTOP] = BACK_ANIM_CIRCLE_MOVE_COUNTERCLOCKWISE,
-    [SPECIES_SMOOCHUM] = BACK_ANIM_H_SLIDE,
-    [SPECIES_ELEKID] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_MAGBY] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_MILTANK] = BACK_ANIM_H_SLIDE,
-    [SPECIES_BLISSEY] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_RAIKOU] = BACK_ANIM_FLASH_YELLOW_WITH_SHAKE,
-    [SPECIES_ENTEI] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_SUICUNE] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_LARVITAR] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_PUPITAR] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_TYRANITAR] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_LUGIA] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_HO_OH] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_CELEBI] = BACK_ANIM_FADE_GREEN_WITH_SHAKE,
-    [SPECIES_TREECKO] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_GROVYLE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SCEPTILE] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_TORCHIC] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_COMBUSKEN] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_BLAZIKEN] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_MUDKIP] = BACK_ANIM_H_SLIDE,
-    [SPECIES_MARSHTOMP] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_SWAMPERT] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_POOCHYENA] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_MIGHTYENA] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_ZIGZAGOON] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_LINOONE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_WURMPLE] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_SILCOON] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_BEAUTIFLY] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_CASCOON] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_DUSTOX] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_LOTAD] = BACK_ANIM_H_SLIDE,
-    [SPECIES_LOMBRE] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_LUDICOLO] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_SEEDOT] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_NUZLEAF] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_SHIFTRY] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_NINCADA] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_NINJASK] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_SHEDINJA] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_TAILLOW] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_SWELLOW] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SHROOMISH] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_BRELOOM] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_SPINDA] = BACK_ANIM_CIRCLE_MOVE_COUNTERCLOCKWISE,
-    [SPECIES_WINGULL] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_PELIPPER] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_SURSKIT] = BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_1,
-    [SPECIES_MASQUERAIN] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_WAILMER] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_WAILORD] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_SKITTY] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_DELCATTY] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_KECLEON] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_BALTOY] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_CLAYDOL] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_NOSEPASS] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_TORKOAL] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_SABLEYE] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_BARBOACH] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_WHISCASH] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_LUVDISC] = BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_2,
-    [SPECIES_CORPHISH] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_CRAWDAUNT] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_FEEBAS] = BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_1,
-    [SPECIES_MILOTIC] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_CARVANHA] = BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_2,
-    [SPECIES_SHARPEDO] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_TRAPINCH] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_VIBRAVA] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_FLYGON] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_MAKUHITA] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_HARIYAMA] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_ELECTRIKE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_MANECTRIC] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_NUMEL] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_CAMERUPT] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_SPHEAL] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_SEALEO] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_WALREIN] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_CACNEA] = BACK_ANIM_V_SHAKE_WITH_H_SLIDE,
-    [SPECIES_CACTURNE] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_SNORUNT] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_GLALIE] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_LUNATONE] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_SOLROCK] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_AZURILL] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_SPOINK] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_GRUMPIG] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_PLUSLE] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_MINUN] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_MAWILE] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_MEDITITE] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_MEDICHAM] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_SWABLU] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_ALTARIA] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_WYNAUT] = BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE,
-    [SPECIES_DUSKULL] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_DUSCLOPS] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_ROSELIA] = BACK_ANIM_FADE_GREEN_WITH_SHAKE,
-    [SPECIES_SLAKOTH] = BACK_ANIM_H_SLIDE,
-    [SPECIES_VIGOROTH] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL,
-    [SPECIES_SLAKING] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_GULPIN] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_SWALOT] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_TROPIUS] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_WHISMUR] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_LOUDRED] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_EXPLOUD] = BACK_ANIM_GROW_2,
-    [SPECIES_CLAMPERL] = BACK_ANIM_DIP_RIGHT_SIDE,
-    [SPECIES_HUNTAIL] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_GOREBYSS] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_ABSOL] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_SHUPPET] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_BANETTE] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_SEVIPER] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_ZANGOOSE] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_RELICANTH] = BACK_ANIM_H_SLIDE,
-    [SPECIES_ARON] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_LAIRON] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_AGGRON] = BACK_ANIM_V_SHAKE_WITH_PAUSE,
-    [SPECIES_CASTFORM] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_VOLBEAT] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_ILLUMISE] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_LILEEP] = BACK_ANIM_HORIZONTAL_STRETCH,
-    [SPECIES_CRADILY] = BACK_ANIM_VERTICAL_STRETCH,
-    [SPECIES_ANORITH] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_ARMALDO] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_RALTS] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_KIRLIA] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_GARDEVOIR] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_BAGON] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_SHELGON] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_SALAMENCE] = BACK_ANIM_HORIZONTAL_SHAKE,
-    [SPECIES_BELDUM] = BACK_ANIM_CIRCLE_MOVE_CLOCKWISE,
-    [SPECIES_METANG] = BACK_ANIM_JOLT_RIGHT,
-    [SPECIES_METAGROSS] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_REGIROCK] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_REGICE] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_REGISTEEL] = BACK_ANIM_VERTICAL_SHAKE,
-    [SPECIES_KYOGRE] = BACK_ANIM_FADE_BLUE_WITH_SHAKE,
-    [SPECIES_GROUDON] = BACK_ANIM_FADE_RED_WITH_SHAKE,
-    [SPECIES_RAYQUAZA] = BACK_ANIM_GROW_2,
-    [SPECIES_LATIAS] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_LATIOS] = BACK_ANIM_H_SLIDE_QUICK,
-    [SPECIES_JIRACHI] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
-    [SPECIES_DEOXYS] = BACK_ANIM_SHRINK_GROW_2,
-    [SPECIES_CHIMECHO] = BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE,
+    [SPECIES_SNORLAX]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_ARTICUNO]   = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_ZAPDOS]     = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_MOLTRES]    = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_DRATINI]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_DRAGONAIR]  = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_DRAGONITE]  = BACK_ANIM_V_SHAKE,
+    [SPECIES_MEWTWO]     = BACK_ANIM_GROW_STUTTER,
+    [SPECIES_MEW]        = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_CHIKORITA]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_BAYLEEF]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_MEGANIUM]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_CYNDAQUIL]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_QUILAVA]    = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_TYPHLOSION] = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_TOTODILE]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_CROCONAW]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_FERALIGATR] = BACK_ANIM_V_SHAKE,
+    [SPECIES_SENTRET]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_FURRET]     = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_HOOTHOOT]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_NOCTOWL]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_LEDYBA]     = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_LEDIAN]     = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_SPINARAK]   = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_ARIADOS]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_CROBAT]     = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_CHINCHOU]   = BACK_ANIM_V_STRETCH,
+    [SPECIES_LANTURN]    = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_PICHU]      = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_CLEFFA]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_IGGLYBUFF]  = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_TOGEPI]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_TOGETIC]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_NATU]       = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_XATU]       = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_MAREEP]     = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_FLAAFFY]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_AMPHAROS]   = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_BELLOSSOM]  = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_MARILL]     = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_AZUMARILL]  = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_SUDOWOODO]  = BACK_ANIM_H_SLIDE,
+    [SPECIES_POLITOED]   = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_HOPPIP]     = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_SKIPLOOM]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_JUMPLUFF]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_AIPOM]      = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_SUNKERN]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_SUNFLORA]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_YANMA]      = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_WOOPER]     = BACK_ANIM_V_STRETCH,
+    [SPECIES_QUAGSIRE]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_ESPEON]     = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_UMBREON]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_MURKROW]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_SLOWKING]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_MISDREAVUS] = BACK_ANIM_H_VIBRATE,
+    [SPECIES_UNOWN]      = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_WOBBUFFET]  = BACK_ANIM_V_STRETCH,
+    [SPECIES_GIRAFARIG]  = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_PINECO]     = BACK_ANIM_H_SHAKE,
+    [SPECIES_FORRETRESS] = BACK_ANIM_V_SHAKE,
+    [SPECIES_DUNSPARCE]  = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_GLIGAR]     = BACK_ANIM_SHRINK_GROW,
+    [SPECIES_STEELIX]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_SNUBBULL]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_GRANBULL]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_QWILFISH]   = BACK_ANIM_GROW_STUTTER,
+    [SPECIES_SCIZOR]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SHUCKLE]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_HERACROSS]  = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SNEASEL]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_TEDDIURSA]  = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_URSARING]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_SLUGMA]     = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_MAGCARGO]   = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_SWINUB]     = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_PILOSWINE]  = BACK_ANIM_H_SHAKE,
+    [SPECIES_CORSOLA]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_REMORAID]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_OCTILLERY]  = BACK_ANIM_SHRINK_GROW,
+    [SPECIES_DELIBIRD]   = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_MANTINE]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_SKARMORY]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_HOUNDOUR]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_HOUNDOOM]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_KINGDRA]    = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_PHANPY]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_DONPHAN]    = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_PORYGON2]   = BACK_ANIM_H_VIBRATE,
+    [SPECIES_STANTLER]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_SMEARGLE]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_TYROGUE]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_HITMONTOP]  = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
+    [SPECIES_SMOOCHUM]   = BACK_ANIM_H_SLIDE,
+    [SPECIES_ELEKID]     = BACK_ANIM_H_SHAKE,
+    [SPECIES_MAGBY]      = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_MILTANK]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_BLISSEY]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_RAIKOU]     = BACK_ANIM_SHAKE_FLASH_YELLOW,
+    [SPECIES_ENTEI]      = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_SUICUNE]    = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_LARVITAR]   = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_PUPITAR]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_TYRANITAR]  = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_LUGIA]      = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_HO_OH]      = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_CELEBI]     = BACK_ANIM_SHAKE_GLOW_GREEN,
+    [SPECIES_TREECKO]    = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_GROVYLE]    = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SCEPTILE]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_TORCHIC]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_COMBUSKEN]  = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_BLAZIKEN]   = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_MUDKIP]     = BACK_ANIM_H_SLIDE,
+    [SPECIES_MARSHTOMP]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_SWAMPERT]   = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_POOCHYENA]  = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_MIGHTYENA]  = BACK_ANIM_H_SHAKE,
+    [SPECIES_ZIGZAGOON]  = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_LINOONE]    = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_WURMPLE]    = BACK_ANIM_V_STRETCH,
+    [SPECIES_SILCOON]    = BACK_ANIM_H_SHAKE,
+    [SPECIES_BEAUTIFLY]  = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_CASCOON]    = BACK_ANIM_H_SHAKE,
+    [SPECIES_DUSTOX]     = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_LOTAD]      = BACK_ANIM_H_SLIDE,
+    [SPECIES_LOMBRE]     = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_LUDICOLO]   = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_SEEDOT]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_NUZLEAF]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_SHIFTRY]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_NINCADA]    = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_NINJASK]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_SHEDINJA]   = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_TAILLOW]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_SWELLOW]    = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SHROOMISH]  = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_BRELOOM]    = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_SPINDA]     = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
+    [SPECIES_WINGULL]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_PELIPPER]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_SURSKIT]    = BACK_ANIM_H_SPRING,
+    [SPECIES_MASQUERAIN] = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_WAILMER]    = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_WAILORD]    = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_SKITTY]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_DELCATTY]   = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_KECLEON]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_BALTOY]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_CLAYDOL]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_NOSEPASS]   = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_TORKOAL]    = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_SABLEYE]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_BARBOACH]   = BACK_ANIM_V_STRETCH,
+    [SPECIES_WHISCASH]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_LUVDISC]    = BACK_ANIM_H_SPRING_REPEATED,
+    [SPECIES_CORPHISH]   = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_CRAWDAUNT]  = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_FEEBAS]     = BACK_ANIM_H_SPRING,
+    [SPECIES_MILOTIC]    = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_CARVANHA]   = BACK_ANIM_H_SPRING_REPEATED,
+    [SPECIES_SHARPEDO]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_TRAPINCH]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_VIBRAVA]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_FLYGON]     = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_MAKUHITA]   = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_HARIYAMA]   = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_ELECTRIKE]  = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_MANECTRIC]  = BACK_ANIM_V_SHAKE,
+    [SPECIES_NUMEL]      = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_CAMERUPT]   = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_SPHEAL]     = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_SEALEO]     = BACK_ANIM_V_SHAKE,
+    [SPECIES_WALREIN]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_CACNEA]     = BACK_ANIM_V_SHAKE_H_SLIDE,
+    [SPECIES_CACTURNE]   = BACK_ANIM_H_SHAKE,
+    [SPECIES_SNORUNT]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_GLALIE]     = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_LUNATONE]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_SOLROCK]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_AZURILL]    = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_SPOINK]     = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_GRUMPIG]    = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_PLUSLE]     = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_MINUN]      = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_MAWILE]     = BACK_ANIM_V_SHAKE,
+    [SPECIES_MEDITITE]   = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_MEDICHAM]   = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_SWABLU]     = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_ALTARIA]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_WYNAUT]     = BACK_ANIM_CONCAVE_ARC_SMALL,
+    [SPECIES_DUSKULL]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_DUSCLOPS]   = BACK_ANIM_H_VIBRATE,
+    [SPECIES_ROSELIA]    = BACK_ANIM_SHAKE_GLOW_GREEN,
+    [SPECIES_SLAKOTH]    = BACK_ANIM_H_SLIDE,
+    [SPECIES_VIGOROTH]   = BACK_ANIM_CONCAVE_ARC_LARGE,
+    [SPECIES_SLAKING]    = BACK_ANIM_H_SHAKE,
+    [SPECIES_GULPIN]     = BACK_ANIM_V_STRETCH,
+    [SPECIES_SWALOT]     = BACK_ANIM_V_STRETCH,
+    [SPECIES_TROPIUS]    = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_WHISMUR]    = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_LOUDRED]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_EXPLOUD]    = BACK_ANIM_GROW_STUTTER,
+    [SPECIES_CLAMPERL]   = BACK_ANIM_DIP_RIGHT_SIDE,
+    [SPECIES_HUNTAIL]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_GOREBYSS]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_ABSOL]      = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_SHUPPET]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_BANETTE]    = BACK_ANIM_H_VIBRATE,
+    [SPECIES_SEVIPER]    = BACK_ANIM_V_STRETCH,
+    [SPECIES_ZANGOOSE]   = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_RELICANTH]  = BACK_ANIM_H_SLIDE,
+    [SPECIES_ARON]       = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_LAIRON]     = BACK_ANIM_V_SHAKE,
+    [SPECIES_AGGRON]     = BACK_ANIM_V_SHAKE_LOW,
+    [SPECIES_CASTFORM]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_VOLBEAT]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_ILLUMISE]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_LILEEP]     = BACK_ANIM_H_STRETCH,
+    [SPECIES_CRADILY]    = BACK_ANIM_V_STRETCH,
+    [SPECIES_ANORITH]    = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_ARMALDO]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_RALTS]      = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_KIRLIA]     = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_GARDEVOIR]  = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_BAGON]      = BACK_ANIM_V_SHAKE,
+    [SPECIES_SHELGON]    = BACK_ANIM_V_SHAKE,
+    [SPECIES_SALAMENCE]  = BACK_ANIM_H_SHAKE,
+    [SPECIES_BELDUM]     = BACK_ANIM_TRIANGLE_DOWN,
+    [SPECIES_METANG]     = BACK_ANIM_JOLT_RIGHT,
+    [SPECIES_METAGROSS]  = BACK_ANIM_V_SHAKE,
+    [SPECIES_REGIROCK]   = BACK_ANIM_V_SHAKE,
+    [SPECIES_REGICE]     = BACK_ANIM_V_SHAKE,
+    [SPECIES_REGISTEEL]  = BACK_ANIM_V_SHAKE,
+    [SPECIES_KYOGRE]     = BACK_ANIM_SHAKE_GLOW_BLUE,
+    [SPECIES_GROUDON]    = BACK_ANIM_SHAKE_GLOW_RED,
+    [SPECIES_RAYQUAZA]   = BACK_ANIM_GROW_STUTTER,
+    [SPECIES_LATIAS]     = BACK_ANIM_H_VIBRATE,
+    [SPECIES_LATIOS]     = BACK_ANIM_H_VIBRATE,
+    [SPECIES_JIRACHI]    = BACK_ANIM_CONVEX_DOUBLE_ARC,
+    [SPECIES_DEOXYS]     = BACK_ANIM_SHRINK_GROW_VIBRATE,
+    [SPECIES_CHIMECHO]   = BACK_ANIM_CONVEX_DOUBLE_ARC,
 };
 
-static const u8 sUnknown_0860AA64[][2] =
+// Equivalent to struct YellowFlashData, but doesn't match as a struct
+static const u8 sYellowFlashData[][2] =
 {
-    {0, 5},
-    {1, 1},
-    {0, 15},
-    {1, 4},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {0, 0xFF}
+    {FALSE,  5},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  4},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    {FALSE, -1}
 };
 
-static const u8 sUnknown_0860AA80[][2] =
+static const u8 sVerticalShakeData[][2] =
 {
-    {6,     30},
-    {0xFE,  15},
-    {6,     30},
-    {0xFF,  0}
+    { 6,  30},
+    {-2,  15},
+    { 6,  30},
+    {-1,   0}
 };
 
 static void (* const sMonAnimFunctions[])(struct Sprite *sprite) =
 {
-    pokemonanimfunc_00,
-    pokemonanimfunc_01,
-    pokemonanimfunc_02,
-    pokemonanimfunc_03,
-    pokemonanimfunc_04,
-    pokemonanimfunc_05,
-    pokemonanimfunc_06,
-    pokemonanimfunc_07,
-    pokemonanimfunc_08,
-    pokemonanimfunc_09,
-    pokemonanimfunc_0A,
-    pokemonanimfunc_0B,
-    pokemonanimfunc_0C,
-    pokemonanimfunc_0D,
-    pokemonanimfunc_0E,
-    pokemonanimfunc_0F,
-    pokemonanimfunc_10,
-    pokemonanimfunc_11,
-    pokemonanimfunc_12,
-    pokemonanimfunc_13,
-    pokemonanimfunc_14,
-    pokemonanimfunc_15,
-    pokemonanimfunc_16,
-    pokemonanimfunc_17,
-    pokemonanimfunc_18,
-    pokemonanimfunc_19,
-    pokemonanimfunc_1A,
-    pokemonanimfunc_1B,
-    pokemonanimfunc_1C,
-    pokemonanimfunc_1D,
-    pokemonanimfunc_1E,
-    pokemonanimfunc_1F,
-    pokemonanimfunc_20,
-    pokemonanimfunc_21,
-    pokemonanimfunc_22,
-    pokemonanimfunc_23,
-    pokemonanimfunc_24,
-    pokemonanimfunc_25,
-    pokemonanimfunc_26,
-    pokemonanimfunc_27,
-    pokemonanimfunc_28,
-    pokemonanimfunc_29,
-    pokemonanimfunc_2A,
-    pokemonanimfunc_2B,
-    pokemonanimfunc_2C,
-    pokemonanimfunc_2D,
-    pokemonanimfunc_2E,
-    pokemonanimfunc_2F,
-    pokemonanimfunc_30,
-    pokemonanimfunc_31,
-    pokemonanimfunc_32,
-    pokemonanimfunc_33,
-    pokemonanimfunc_34,
-    pokemonanimfunc_35,
-    pokemonanimfunc_36,
-    pokemonanimfunc_37,
-    pokemonanimfunc_38,
-    pokemonanimfunc_39,
-    pokemonanimfunc_3A,
-    pokemonanimfunc_3B,
-    pokemonanimfunc_3C,
-    pokemonanimfunc_3D,
-    pokemonanimfunc_3E,
-    pokemonanimfunc_3F,
-    pokemonanimfunc_40,
-    pokemonanimfunc_41,
-    pokemonanimfunc_42,
-    pokemonanimfunc_43,
-    pokemonanimfunc_44,
-    pokemonanimfunc_45,
-    pokemonanimfunc_46,
-    pokemonanimfunc_47,
-    pokemonanimfunc_48,
-    pokemonanimfunc_49,
-    pokemonanimfunc_4A,
-    pokemonanimfunc_4B,
-    pokemonanimfunc_4C,
-    pokemonanimfunc_4D,
-    pokemonanimfunc_4E,
-    pokemonanimfunc_4F,
-    pokemonanimfunc_50,
-    pokemonanimfunc_51,
-    pokemonanimfunc_52,
-    pokemonanimfunc_53,
-    pokemonanimfunc_54,
-    pokemonanimfunc_55,
-    pokemonanimfunc_56,
-    pokemonanimfunc_57,
-    pokemonanimfunc_58,
-    pokemonanimfunc_59,
-    pokemonanimfunc_5A,
-    pokemonanimfunc_5B,
-    pokemonanimfunc_5C,
-    pokemonanimfunc_5D,
-    pokemonanimfunc_5E,
-    pokemonanimfunc_5F,
-    pokemonanimfunc_60,
-    pokemonanimfunc_61,
-    pokemonanimfunc_62,
-    pokemonanimfunc_63,
-    pokemonanimfunc_64,
-    pokemonanimfunc_65,
-    pokemonanimfunc_66,
-    pokemonanimfunc_67,
-    pokemonanimfunc_68,
-    pokemonanimfunc_69,
-    pokemonanimfunc_6A,
-    pokemonanimfunc_6B,
-    pokemonanimfunc_6C,
-    pokemonanimfunc_6D,
-    pokemonanimfunc_6E,
-    pokemonanimfunc_6F,
-    pokemonanimfunc_70,
-    pokemonanimfunc_71,
-    pokemonanimfunc_72,
-    pokemonanimfunc_73,
-    pokemonanimfunc_74,
-    pokemonanimfunc_75,
-    pokemonanimfunc_76,
-    pokemonanimfunc_77,
-    pokemonanimfunc_78,
-    pokemonanimfunc_79,
-    pokemonanimfunc_7A,
-    pokemonanimfunc_7B,
-    pokemonanimfunc_7C,
-    pokemonanimfunc_7D,
-    pokemonanimfunc_7E,
-    pokemonanimfunc_7F,
-    pokemonanimfunc_80,
-    pokemonanimfunc_81,
-    pokemonanimfunc_82,
-    pokemonanimfunc_83,
-    pokemonanimfunc_84,
-    pokemonanimfunc_85,
-    pokemonanimfunc_86,
-    pokemonanimfunc_87,
-    pokemonanimfunc_88,
-    pokemonanimfunc_89,
-    pokemonanimfunc_8A,
-    pokemonanimfunc_8B,
-    pokemonanimfunc_8C,
-    pokemonanimfunc_8D,
-    pokemonanimfunc_8E,
-    pokemonanimfunc_8F,
-    pokemonanimfunc_90,
-    pokemonanimfunc_91,
-    pokemonanimfunc_92,
-    pokemonanimfunc_93,
-    pokemonanimfunc_94,
-    pokemonanimfunc_95,
-    pokemonanimfunc_96
+    [ANIM_V_SQUISH_AND_BOUNCE]               = Anim_VerticalSquishBounce,
+    [ANIM_CIRCULAR_STRETCH_TWICE]            = Anim_CircularStretchTwice,
+    [ANIM_H_VIBRATE]                         = Anim_HorizontalVibrate,
+    [ANIM_H_SLIDE]                           = Anim_HorizontalSlide,
+    [ANIM_V_SLIDE]                           = Anim_VerticalSlide,
+    [ANIM_BOUNCE_ROTATE_TO_SIDES]            = Anim_BounceRotateToSides,
+    [ANIM_V_JUMPS_H_JUMPS]                   = Anim_VerticalJumpsHorizontalJumps,
+    [ANIM_ROTATE_TO_SIDES]                   = Anim_RotateToSides, // Unused
+    [ANIM_ROTATE_TO_SIDES_TWICE]             = Anim_RotateToSides_Twice,
+    [ANIM_GROW_VIBRATE]                      = Anim_GrowVibrate,
+    [ANIM_ZIGZAG_FAST]                       = Anim_ZigzagFast,
+    [ANIM_SWING_CONCAVE]                     = Anim_SwingConcave,
+    [ANIM_SWING_CONCAVE_FAST]                = Anim_SwingConcave_Fast,
+    [ANIM_SWING_CONVEX]                      = Anim_SwingConvex,
+    [ANIM_SWING_CONVEX_FAST]                 = Anim_SwingConvex_Fast,
+    [ANIM_H_SHAKE]                           = Anim_HorizontalShake,
+    [ANIM_V_SHAKE]                           = Anim_VerticalShake,
+    [ANIM_CIRCULAR_VIBRATE]                  = Anim_CircularVibrate,
+    [ANIM_TWIST]                             = Anim_Twist,
+    [ANIM_SHRINK_GROW]                       = Anim_ShrinkGrow,
+    [ANIM_CIRCLE_C_CLOCKWISE]                = Anim_CircleCounterclockwise,
+    [ANIM_GLOW_BLACK]                        = Anim_GlowBlack,
+    [ANIM_H_STRETCH]                         = Anim_HorizontalStretch,
+    [ANIM_V_STRETCH]                         = Anim_VerticalStretch,
+    [ANIM_RISING_WOBBLE]                     = Anim_RisingWobble,
+    [ANIM_V_SHAKE_TWICE]                     = Anim_VerticalShakeTwice,
+    [ANIM_TIP_MOVE_FORWARD]                  = Anim_TipMoveForward,
+    [ANIM_H_PIVOT]                           = Anim_HorizontalPivot,
+    [ANIM_V_SLIDE_WOBBLE]                    = Anim_VerticalSlideWobble,
+    [ANIM_H_SLIDE_WOBBLE]                    = Anim_HorizontalSlideWobble,
+    [ANIM_V_JUMPS_BIG]                       = Anim_VerticalJumps_Big,
+    [ANIM_SPIN_LONG]                         = Anim_Spin_Long, // Unused
+    [ANIM_GLOW_ORANGE]                       = Anim_GlowOrange,
+    [ANIM_GLOW_RED]                          = Anim_GlowRed, // Unused
+    [ANIM_GLOW_BLUE]                         = Anim_GlowBlue,
+    [ANIM_GLOW_YELLOW]                       = Anim_GlowYellow, // Unused
+    [ANIM_GLOW_PURPLE]                       = Anim_GlowPurple, // Unused
+    [ANIM_BACK_AND_LUNGE]                    = Anim_BackAndLunge,
+    [ANIM_BACK_FLIP]                         = Anim_BackFlip, // Unused
+    [ANIM_FLICKER]                           = Anim_Flicker, // Unused
+    [ANIM_BACK_FLIP_BIG]                     = Anim_BackFlipBig, // Unused
+    [ANIM_FRONT_FLIP]                        = Anim_FrontFlip,
+    [ANIM_TUMBLING_FRONT_FLIP]               = Anim_TumblingFrontFlip, // Unused
+    [ANIM_FIGURE_8]                          = Anim_Figure8,
+    [ANIM_FLASH_YELLOW]                      = Anim_FlashYellow,
+    [ANIM_SWING_CONCAVE_FAST_SHORT]          = Anim_SwingConcave_FastShort,
+    [ANIM_SWING_CONVEX_FAST_SHORT]           = Anim_SwingConvex_FastShort, // Unused
+    [ANIM_ROTATE_UP_SLAM_DOWN]               = Anim_RotateUpSlamDown,
+    [ANIM_DEEP_V_SQUISH_AND_BOUNCE]          = Anim_DeepVerticalSquishBounce,
+    [ANIM_H_JUMPS]                           = Anim_HorizontalJumps,
+    [ANIM_H_JUMPS_V_STRETCH]                 = Anim_HorizontalJumpsVerticalStretch,
+    [ANIM_ROTATE_TO_SIDES_FAST]              = Anim_RotateToSides_Fast, // Unused
+    [ANIM_ROTATE_UP_TO_SIDES]                = Anim_RotateUpToSides,
+    [ANIM_FLICKER_INCREASING]                = Anim_FlickerIncreasing,
+    [ANIM_TIP_HOP_FORWARD]                   = Anim_TipHopForward, // Unused
+    [ANIM_PIVOT_SHAKE]                       = Anim_PivotShake, // Unused
+    [ANIM_TIP_AND_SHAKE]                     = Anim_TipAndShake, // Unused
+    [ANIM_VIBRATE_TO_CORNERS]                = Anim_VibrateToCorners, // Unused
+    [ANIM_GROW_IN_STAGES]                    = Anim_GrowInStages,
+    [ANIM_V_SPRING]                          = Anim_VerticalSpring, // Unused
+    [ANIM_V_REPEATED_SPRING]                 = Anim_VerticalRepeatedSpring, // Unused
+    [ANIM_SPRING_RISING]                     = Anim_SpringRising, // Unused
+    [ANIM_H_SPRING]                          = Anim_HorizontalSpring,
+    [ANIM_H_REPEATED_SPRING_SLOW]            = Anim_HorizontalRepeatedSpring_Slow,
+    [ANIM_H_SLIDE_SHRINK]                    = Anim_HorizontalSlideShrink, // Unused
+    [ANIM_LUNGE_GROW]                        = Anim_LungeGrow,
+    [ANIM_CIRCLE_INTO_BG]                    = Anim_CircleIntoBackground,
+    [ANIM_RAPID_H_HOPS]                      = Anim_RapidHorizontalHops,
+    [ANIM_FOUR_PETAL]                        = Anim_FourPetal,
+    [ANIM_V_SQUISH_AND_BOUNCE_SLOW]          = Anim_VerticalSquishBounce_Slow,
+    [ANIM_H_SLIDE_SLOW]                      = Anim_HorizontalSlide_Slow,
+    [ANIM_V_SLIDE_SLOW]                      = Anim_VerticalSlide_Slow,
+    [ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL]      = Anim_BounceRotateToSides_Small,
+    [ANIM_BOUNCE_ROTATE_TO_SIDES_SLOW]       = Anim_BounceRotateToSides_Slow,
+    [ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL_SLOW] = Anim_BounceRotateToSides_SmallSlow,
+    [ANIM_ZIGZAG_SLOW]                       = Anim_ZigzagSlow,
+    [ANIM_H_SHAKE_SLOW]                      = Anim_HorizontalShake_Slow,
+    [ANIM_V_SHAKE_SLOW]                      = Anim_VertialShake_Slow, // Unused
+    [ANIM_TWIST_TWICE]                       = Anim_Twist_Twice,
+    [ANIM_CIRCLE_C_CLOCKWISE_SLOW]           = Anim_CircleCounterclockwise_Slow,
+    [ANIM_V_SHAKE_TWICE_SLOW]                = Anim_VerticalShakeTwice_Slow, // Unused
+    [ANIM_V_SLIDE_WOBBLE_SMALL]              = Anim_VerticalSlideWobble_Small,
+    [ANIM_V_JUMPS_SMALL]                     = Anim_VerticalJumps_Small,
+    [ANIM_SPIN]                              = Anim_Spin,
+    [ANIM_TUMBLING_FRONT_FLIP_TWICE]         = Anim_TumblingFrontFlip_Twice,
+    [ANIM_DEEP_V_SQUISH_AND_BOUNCE_TWICE]    = Anim_DeepVerticalSquishBounce_Twice, // Unused
+    [ANIM_H_JUMPS_V_STRETCH_TWICE]           = Anim_HorizontalJumpsVerticalStretch_Twice,
+    [ANIM_V_SHAKE_BACK]                      = Anim_VerticalShakeBack,
+    [ANIM_V_SHAKE_BACK_SLOW]                 = Anim_VerticalShakeBack_Slow,
+    [ANIM_V_SHAKE_H_SLIDE_SLOW]              = Anim_VerticalShakeHorizontalSlide_Slow,
+    [ANIM_V_STRETCH_BOTH_ENDS_SLOW]          = Anim_VerticalStretchBothEnds_Slow,
+    [ANIM_H_STRETCH_FAR_SLOW]                = Anim_HorizontalStretchFar_Slow,
+    [ANIM_V_SHAKE_LOW_TWICE]                 = Anim_VerticalShakeLowTwice,
+    [ANIM_H_SHAKE_FAST]                      = Anim_HorizontalShake_Fast,
+    [ANIM_H_SLIDE_FAST]                      = Anim_HorizontalSlide_Fast,
+    [ANIM_H_VIBRATE_FAST]                    = Anim_HorizontalVibrate_Fast,
+    [ANIM_H_VIBRATE_FASTEST]                 = Anim_HorizontalVibrate_Fastest,
+    [ANIM_V_SHAKE_BACK_FAST]                 = Anim_VerticalShakeBack_Fast,
+    [ANIM_V_SHAKE_LOW_TWICE_SLOW]            = Anim_VerticalShakeLowTwice_Slow,
+    [ANIM_V_SHAKE_LOW_TWICE_FAST]            = Anim_VerticalShakeLowTwice_Fast,
+    [ANIM_CIRCLE_C_CLOCKWISE_LONG]           = Anim_CircleCounterclockwise_Long,
+    [ANIM_GROW_STUTTER_SLOW]                 = Anim_GrowStutter_Slow,
+    [ANIM_V_SHAKE_H_SLIDE]                   = Anim_VerticalShakeHorizontalSlide,
+    [ANIM_V_SHAKE_H_SLIDE_FAST]              = Anim_VerticalShakeHorizontalSlide_Fast,
+    [ANIM_TRIANGLE_DOWN_SLOW]                = Anim_TriangleDown_Slow,
+    [ANIM_TRIANGLE_DOWN]                     = Anim_TriangleDown,
+    [ANIM_TRIANGLE_DOWN_TWICE]               = Anim_TriangleDown_Fast,
+    [ANIM_GROW]                              = Anim_Grow,
+    [ANIM_GROW_TWICE]                        = Anim_Grow_Twice,
+    [ANIM_H_SPRING_FAST]                     = Anim_HorizontalSpring_Fast,
+    [ANIM_H_SPRING_SLOW]                     = Anim_HorizontalSpring_Slow,
+    [ANIM_H_REPEATED_SPRING_FAST]            = Anim_HorizontalRepeatedSpring_Fast,
+    [ANIM_H_REPEATED_SPRING]                 = Anim_HorizontalRepeatedSpring,
+    [ANIM_SHRINK_GROW_FAST]                  = Anim_ShrinkGrow_Fast,
+    [ANIM_SHRINK_GROW_SLOW]                  = Anim_ShrinkGrow_Slow,
+    [ANIM_V_STRETCH_BOTH_ENDS]               = Anim_VerticalStretchBothEnds,
+    [ANIM_V_STRETCH_BOTH_ENDS_TWICE]         = Anim_VerticalStretchBothEnds_Twice,
+    [ANIM_H_STRETCH_FAR_TWICE]               = Anim_HorizontalStretchFar_Twice,
+    [ANIM_H_STRETCH_FAR]                     = Anim_HorizontalStretchFar,
+    [ANIM_GROW_STUTTER_TWICE]                = Anim_GrowStutter_Twice,
+    [ANIM_GROW_STUTTER]                      = Anim_GrowStutter,
+    [ANIM_CONCAVE_ARC_LARGE_SLOW]            = Anim_ConcaveArcLarge_Slow,
+    [ANIM_CONCAVE_ARC_LARGE]                 = Anim_ConcaveArcLarge,
+    [ANIM_CONCAVE_ARC_LARGE_TWICE]           = Anim_ConcaveArcLarge_Twice,
+    [ANIM_CONVEX_DOUBLE_ARC_SLOW]            = Anim_ConvexDoubleArc_Slow,
+    [ANIM_CONVEX_DOUBLE_ARC]                 = Anim_ConvexDoubleArc,
+    [ANIM_CONVEX_DOUBLE_ARC_TWICE]           = Anim_ConvexDoubleArc_Twice,
+    [ANIM_CONCAVE_ARC_SMALL_SLOW]            = Anim_ConcaveArcSmall_Slow,
+    [ANIM_CONCAVE_ARC_SMALL]                 = Anim_ConcaveArcSmall,
+    [ANIM_CONCAVE_ARC_SMALL_TWICE]           = Anim_ConcaveArcSmall_Twice,
+    [ANIM_H_DIP]                             = Anim_HorizontalDip,
+    [ANIM_H_DIP_FAST]                        = Anim_HorizontalDip_Fast,
+    [ANIM_H_DIP_TWICE]                       = Anim_HorizontalDip_Twice,
+    [ANIM_SHRINK_GROW_VIBRATE_FAST]          = Anim_ShrinkGrowVibrate_Fast,
+    [ANIM_SHRINK_GROW_VIBRATE]               = Anim_ShrinkGrowVibrate,
+    [ANIM_SHRINK_GROW_VIBRATE_SLOW]          = Anim_ShrinkGrowVibrate_Slow,
+    [ANIM_JOLT_RIGHT_FAST]                   = Anim_JoltRight_Fast,
+    [ANIM_JOLT_RIGHT]                        = Anim_JoltRight,
+    [ANIM_JOLT_RIGHT_SLOW]                   = Anim_JoltRight_Slow,
+    [ANIM_SHAKE_FLASH_YELLOW_FAST]           = Anim_ShakeFlashYellow_Fast,
+    [ANIM_SHAKE_FLASH_YELLOW]                = Anim_ShakeFlashYellow,
+    [ANIM_SHAKE_FLASH_YELLOW_SLOW]           = Anim_ShakeFlashYellow_Slow,
+    [ANIM_SHAKE_GLOW_RED_FAST]               = Anim_ShakeGlowRed_Fast,
+    [ANIM_SHAKE_GLOW_RED]                    = Anim_ShakeGlowRed,
+    [ANIM_SHAKE_GLOW_RED_SLOW]               = Anim_ShakeGlowRed_Slow,
+    [ANIM_SHAKE_GLOW_GREEN_FAST]             = Anim_ShakeGlowGreen_Fast,
+    [ANIM_SHAKE_GLOW_GREEN]                  = Anim_ShakeGlowGreen,
+    [ANIM_SHAKE_GLOW_GREEN_SLOW]             = Anim_ShakeGlowGreen_Slow,
+    [ANIM_SHAKE_GLOW_BLUE_FAST]              = Anim_ShakeGlowBlue_Fast,
+    [ANIM_SHAKE_GLOW_BLUE]                   = Anim_ShakeGlowBlue,
+    [ANIM_SHAKE_GLOW_BLUE_SLOW]              = Anim_ShakeGlowBlue_Slow
 };
 
-// counting from Id 1, because 0 in sSpeciesToBackAnimSet is used for mons with no back animation
+// Each back anim set has 3 possible animations depending on nature
+// Each of the 3 animations is a slight variation of the others
+// BACK_ANIM_NONE is skipped below. GetSpeciesBackAnimSet subtracts 1 from the back anim id
 static const u8 sBackAnimationIds[] =
 {
-    0x60, 0x5f, 0x02, // 1
-    0x5e, 0x03, 0x46, // 2
-    0x6d, 0x3e, 0x6e, // 3
-    0x6f, 0x70, 0x3f, // 4
-    0x71, 0x13, 0x72, // 5
-    0x6c, 0x6b, 0x3a, // 6
-    0x64, 0x14, 0x4f, // 7
-    0x5d, 0x0f, 0x4c, // 8
-    0x61, 0x57, 0x58, // 9
-    0x67, 0x66, 0x59, // 0xA
-    0x74, 0x73, 0x5a, // 0xB
-    0x75, 0x76, 0x5b, // 0xC
-    0x77, 0x78, 0x65, // 0xD
-    0x63, 0x5c, 0x62, // 0xE
-    0x6a, 0x69, 0x68, // 0xF
-    0x7b, 0x7a, 0x79, // 0x10
-    0x7e, 0x7d, 0x7c, // 0x11
-    0x81, 0x80, 0x7f, // 0x12
-    0x84, 0x82, 0x83, // 0x13
-    0x85, 0x86, 0x87, // 0x14
-    0x88, 0x89, 0x8a, // 0x15
-    0x8b, 0x8c, 0x8d, // 0x16
-    0x8e, 0x8f, 0x90, // 0x17
-    0x91, 0x92, 0x93, // 0x18
-    0x94, 0x95, 0x96, // 0x19
+    [(BACK_ANIM_H_VIBRATE - 1) * 3]               = ANIM_H_VIBRATE_FASTEST, ANIM_H_VIBRATE_FAST, ANIM_H_VIBRATE,
+    [(BACK_ANIM_H_SLIDE - 1) * 3]                 = ANIM_H_SLIDE_FAST, ANIM_H_SLIDE, ANIM_H_SLIDE_SLOW,
+    [(BACK_ANIM_H_SPRING - 1) * 3]                = ANIM_H_SPRING_FAST, ANIM_H_SPRING, ANIM_H_SPRING_SLOW,
+    [(BACK_ANIM_H_SPRING_REPEATED - 1) * 3]       = ANIM_H_REPEATED_SPRING_FAST, ANIM_H_REPEATED_SPRING, ANIM_H_REPEATED_SPRING_SLOW,
+    [(BACK_ANIM_SHRINK_GROW - 1) * 3]             = ANIM_SHRINK_GROW_FAST, ANIM_SHRINK_GROW, ANIM_SHRINK_GROW_SLOW,
+    [(BACK_ANIM_GROW - 1) * 3]                    = ANIM_GROW_TWICE, ANIM_GROW, ANIM_GROW_IN_STAGES,
+    [(BACK_ANIM_CIRCLE_COUNTERCLOCKWISE - 1) * 3] = ANIM_CIRCLE_C_CLOCKWISE_LONG, ANIM_CIRCLE_C_CLOCKWISE, ANIM_CIRCLE_C_CLOCKWISE_SLOW,
+    [(BACK_ANIM_H_SHAKE - 1) * 3]                 = ANIM_H_SHAKE_FAST, ANIM_H_SHAKE, ANIM_H_SHAKE_SLOW,
+    [(BACK_ANIM_V_SHAKE - 1) * 3]                 = ANIM_V_SHAKE_BACK_FAST, ANIM_V_SHAKE_BACK, ANIM_V_SHAKE_BACK_SLOW,
+    [(BACK_ANIM_V_SHAKE_H_SLIDE - 1) * 3]         = ANIM_V_SHAKE_H_SLIDE_FAST, ANIM_V_SHAKE_H_SLIDE, ANIM_V_SHAKE_H_SLIDE_SLOW,
+    [(BACK_ANIM_V_STRETCH - 1) * 3]               = ANIM_V_STRETCH_BOTH_ENDS_TWICE, ANIM_V_STRETCH_BOTH_ENDS, ANIM_V_STRETCH_BOTH_ENDS_SLOW,
+    [(BACK_ANIM_H_STRETCH - 1) * 3]               = ANIM_H_STRETCH_FAR_TWICE, ANIM_H_STRETCH_FAR, ANIM_H_STRETCH_FAR_SLOW,
+    [(BACK_ANIM_GROW_STUTTER - 1) * 3]            = ANIM_GROW_STUTTER_TWICE, ANIM_GROW_STUTTER, ANIM_GROW_STUTTER_SLOW,
+    [(BACK_ANIM_V_SHAKE_LOW - 1) * 3]             = ANIM_V_SHAKE_LOW_TWICE_FAST, ANIM_V_SHAKE_LOW_TWICE, ANIM_V_SHAKE_LOW_TWICE_SLOW,
+    [(BACK_ANIM_TRIANGLE_DOWN - 1) * 3]           = ANIM_TRIANGLE_DOWN_TWICE, ANIM_TRIANGLE_DOWN, ANIM_TRIANGLE_DOWN_SLOW,
+    [(BACK_ANIM_CONCAVE_ARC_LARGE - 1) * 3]       = ANIM_CONCAVE_ARC_LARGE_TWICE, ANIM_CONCAVE_ARC_LARGE, ANIM_CONCAVE_ARC_LARGE_SLOW,
+    [(BACK_ANIM_CONVEX_DOUBLE_ARC - 1) * 3]       = ANIM_CONVEX_DOUBLE_ARC_TWICE, ANIM_CONVEX_DOUBLE_ARC, ANIM_CONVEX_DOUBLE_ARC_SLOW,
+    [(BACK_ANIM_CONCAVE_ARC_SMALL - 1) * 3]       = ANIM_CONCAVE_ARC_SMALL_TWICE, ANIM_CONCAVE_ARC_SMALL, ANIM_CONCAVE_ARC_SMALL_SLOW,
+    [(BACK_ANIM_DIP_RIGHT_SIDE - 1) * 3]          = ANIM_H_DIP_TWICE, ANIM_H_DIP, ANIM_H_DIP_FAST,
+    [(BACK_ANIM_SHRINK_GROW_VIBRATE - 1) * 3]     = ANIM_SHRINK_GROW_VIBRATE_FAST, ANIM_SHRINK_GROW_VIBRATE, ANIM_SHRINK_GROW_VIBRATE_SLOW,
+    [(BACK_ANIM_JOLT_RIGHT - 1) * 3]              = ANIM_JOLT_RIGHT_FAST, ANIM_JOLT_RIGHT, ANIM_JOLT_RIGHT_SLOW,
+    [(BACK_ANIM_SHAKE_FLASH_YELLOW - 1) * 3]      = ANIM_SHAKE_FLASH_YELLOW_FAST, ANIM_SHAKE_FLASH_YELLOW, ANIM_SHAKE_FLASH_YELLOW_SLOW,
+    [(BACK_ANIM_SHAKE_GLOW_RED - 1) * 3]          = ANIM_SHAKE_GLOW_RED_FAST, ANIM_SHAKE_GLOW_RED, ANIM_SHAKE_GLOW_RED_SLOW,
+    [(BACK_ANIM_SHAKE_GLOW_GREEN - 1) * 3]        = ANIM_SHAKE_GLOW_GREEN_FAST, ANIM_SHAKE_GLOW_GREEN, ANIM_SHAKE_GLOW_GREEN_SLOW,
+    [(BACK_ANIM_SHAKE_GLOW_BLUE - 1) * 3]         = ANIM_SHAKE_GLOW_BLUE_FAST,  ANIM_SHAKE_GLOW_BLUE, ANIM_SHAKE_GLOW_BLUE_SLOW,
 };
 
 static const u8 sBackAnimNatureModTable[NUM_NATURES] =
 {
-    [NATURE_HARDY] = 0x00,
-    [NATURE_LONELY] = 0x02,
-    [NATURE_BRAVE] = 0x00,
-    [NATURE_ADAMANT] = 0x00,
-    [NATURE_NAUGHTY] = 0x00,
-    [NATURE_BOLD] = 0x01,
-    [NATURE_DOCILE] = 0x01,
-    [NATURE_RELAXED] = 0x01,
-    [NATURE_IMPISH] = 0x00,
-    [NATURE_LAX] = 0x01,
-    [NATURE_TIMID] = 0x02,
-    [NATURE_HASTY] = 0x00,
-    [NATURE_SERIOUS] = 0x01,
-    [NATURE_JOLLY] = 0x00,
-    [NATURE_NAIVE] = 0x00,
-    [NATURE_MODEST] = 0x02,
-    [NATURE_MILD] = 0x02,
-    [NATURE_QUIET] = 0x02,
-    [NATURE_BASHFUL] = 0x02,
-    [NATURE_RASH] = 0x01,
-    [NATURE_CALM] = 0x01,
-    [NATURE_GENTLE] = 0x02,
-    [NATURE_SASSY] = 0x01,
-    [NATURE_CAREFUL] = 0x02,
-    [NATURE_QUIRKY] = 0x01,
+    [NATURE_HARDY]   = 0,
+    [NATURE_LONELY]  = 2,
+    [NATURE_BRAVE]   = 0,
+    [NATURE_ADAMANT] = 0,
+    [NATURE_NAUGHTY] = 0,
+    [NATURE_BOLD]    = 1,
+    [NATURE_DOCILE]  = 1,
+    [NATURE_RELAXED] = 1,
+    [NATURE_IMPISH]  = 0,
+    [NATURE_LAX]     = 1,
+    [NATURE_TIMID]   = 2,
+    [NATURE_HASTY]   = 0,
+    [NATURE_SERIOUS] = 1,
+    [NATURE_JOLLY]   = 0,
+    [NATURE_NAIVE]   = 0,
+    [NATURE_MODEST]  = 2,
+    [NATURE_MILD]    = 2,
+    [NATURE_QUIET]   = 2,
+    [NATURE_BASHFUL] = 2,
+    [NATURE_RASH]    = 1,
+    [NATURE_CALM]    = 1,
+    [NATURE_GENTLE]  = 2,
+    [NATURE_SASSY]   = 1,
+    [NATURE_CAREFUL] = 2,
+    [NATURE_QUIRKY]  = 1,
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_860AD48[] =
+static const union AffineAnimCmd sMonAffineAnim_0[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMDTYPE_END
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_860AD58[] =
+static const union AffineAnimCmd sMonAffineAnim_1[] =
 {
     AFFINEANIMCMD_FRAME(-256, 256, 0, 0),
     AFFINEANIMCMDTYPE_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_860AD68[] =
+static const union AffineAnimCmd *const sMonAffineAnims[] =
 {
-    sSpriteAffineAnim_860AD48,
-    sSpriteAffineAnim_860AD58
+    sMonAffineAnim_0,
+    sMonAffineAnim_1
 };
 
-// code
 static void MonAnimDummySpriteCallback(struct Sprite *sprite)
 {
 }
 
-static void sub_817F3F0(struct Sprite *sprite, u16 index, s16 amplitudeX, s16 amplitudeY)
+static void SetPosForRotation(struct Sprite *sprite, u16 index, s16 amplitudeX, s16 amplitudeY)
 {
     s16 xAdder, yAdder;
 
@@ -847,13 +877,13 @@ static void sub_817F3F0(struct Sprite *sprite, u16 index, s16 amplitudeX, s16 am
     amplitudeX *= -1;
     amplitudeY *= -1;
 
-    sprite->pos2.x = xAdder + amplitudeX;
-    sprite->pos2.y = yAdder + amplitudeY;
+    sprite->x2 = xAdder + amplitudeX;
+    sprite->y2 = yAdder + amplitudeY;
 }
 
 u8 GetSpeciesBackAnimSet(u16 species)
 {
-    if (sSpeciesToBackAnimSet[species] != 0)
+    if (sSpeciesToBackAnimSet[species] != BACK_ANIM_NONE)
         return sSpeciesToBackAnimSet[species] - 1;
     else
         return 0;
@@ -863,8 +893,8 @@ u8 GetSpeciesBackAnimSet(u16 species)
 #define tPtrHi  data[1]
 #define tPtrLo  data[2]
 #define tAnimId data[3]
-#define tSaved0 data[4]
-#define tSaved2 data[5]
+#define tBattlerId data[4]
+#define tSpeciesId data[5]
 
 // BUG: In vanilla, tPtrLo is read as an s16, so if bit 15 of the
 // address were to be set it would cause the pointer to be read
@@ -884,23 +914,23 @@ static void Task_HandleMonAnimation(u8 taskId)
 
     if (gTasks[taskId].tState == 0)
     {
-        gTasks[taskId].tSaved0 = sprite->data[0];
-        gTasks[taskId].tSaved2 = sprite->data[2];
-        sprite->data[1] = 1;
+        gTasks[taskId].tBattlerId = sprite->data[0];
+        gTasks[taskId].tSpeciesId = sprite->data[2];
+        sprite->sDontFlip = TRUE;
         sprite->data[0] = 0;
 
         for (i = 2; i < ARRAY_COUNT(sprite->data); i++)
             sprite->data[i] = 0;
 
         sprite->callback = sMonAnimFunctions[gTasks[taskId].tAnimId];
-        sUnknown_03001274 = FALSE;
+        sIsSummaryAnim = FALSE;
 
         gTasks[taskId].tState++;
     }
     if (sprite->callback == SpriteCallbackDummy)
     {
-        sprite->data[0] = gTasks[taskId].tSaved0;
-        sprite->data[2] = gTasks[taskId].tSaved2;
+        sprite->data[0] = gTasks[taskId].tBattlerId;
+        sprite->data[2] = gTasks[taskId].tSpeciesId;
         sprite->data[1] = 0;
 
         DestroyTask(taskId);
@@ -910,14 +940,15 @@ static void Task_HandleMonAnimation(u8 taskId)
 void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, u8 frontAnimId)
 {
     u8 taskId = CreateTask(Task_HandleMonAnimation, 128);
-    gTasks[taskId].tPtrHi = (u32)(sprite) >> 0x10;
+    gTasks[taskId].tPtrHi = (u32)(sprite) >> 16;
     gTasks[taskId].tPtrLo = (u32)(sprite);
     gTasks[taskId].tAnimId = frontAnimId;
 }
 
 void StartMonSummaryAnimation(struct Sprite *sprite, u8 frontAnimId)
 {
-    sUnknown_03001274 = TRUE;
+    // sDontFlip is expected to still be FALSE here, not explicitly cleared
+    sIsSummaryAnim = TRUE;
     sprite->callback = sMonAnimFunctions[frontAnimId];
 }
 
@@ -926,12 +957,13 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
     u8 nature, taskId, animId, battlerId;
 
     taskId = CreateTask(Task_HandleMonAnimation, 128);
-    gTasks[taskId].tPtrHi = (u32)(sprite) >> 0x10;
+    gTasks[taskId].tPtrHi = (u32)(sprite) >> 16;
     gTasks[taskId].tPtrLo = (u32)(sprite);
 
     battlerId = sprite->data[0];
     nature = GetNature(&gPlayerParty[gBattlerPartyIndexes[battlerId]]);
 
+    // * 3 below because each back anim has 3 variants depending on nature
     animId = 3 * backAnimSet + sBackAnimNatureModTable[nature];
     gTasks[taskId].tAnimId = sBackAnimationIds[animId];
 }
@@ -940,8 +972,8 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
 #undef tPtrHi
 #undef tPtrLo
 #undef tAnimId
-#undef tSaved0
-#undef tSaved2
+#undef tBattlerId
+#undef tSpeciesId
 
 void SetSpriteCB_MonAnimDummy(struct Sprite *sprite)
 {
@@ -970,23 +1002,23 @@ static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rot
 static void HandleStartAffineAnim(struct Sprite *sprite)
 {
     sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-    sprite->affineAnims = sSpriteAffineAnimTable_860AD68;
+    sprite->affineAnims = sMonAffineAnims;
 
-    if (sUnknown_03001274 == TRUE)
+    if (sIsSummaryAnim == TRUE)
         InitSpriteAffineAnim(sprite);
 
-    if (!sprite->data[1])
+    if (!sprite->sDontFlip)
         StartSpriteAffineAnim(sprite, 1);
     else
         StartSpriteAffineAnim(sprite, 0);
 
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
-    sprite->affineAnimPaused = 1;
+    sprite->affineAnimPaused = TRUE;
 }
 
 static void HandleSetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rotation)
 {
-    if (!sprite->data[1])
+    if (!sprite->sDontFlip)
     {
         xScale *= -1;
         rotation *= -1;
@@ -995,55 +1027,63 @@ static void HandleSetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u
     SetAffineData(sprite, xScale, yScale, rotation);
 }
 
-static void sub_817F70C(struct Sprite *sprite)
+static void TryFlipX(struct Sprite *sprite)
 {
-    if (!sprite->data[1])
-        sprite->pos2.x *= -1;
+    if (!sprite->sDontFlip)
+        sprite->x2 *= -1;
 }
 
-static bool32 sub_817F724(u8 id)
+static bool32 InitAnimData(u8 id)
 {
-    if (id >= STRUCT_COUNT)
+    if (id >= MAX_BATTLERS_COUNT)
     {
         return FALSE;
     }
     else
     {
-        sUnknown_03001240[id].field_6 = 0;
-        sUnknown_03001240[id].field_0 = 0;
-        sUnknown_03001240[id].field_4 = 1;
-        sUnknown_03001240[id].field_2 = 0;
-        sUnknown_03001240[id].field_8 = 0;
+        sAnims[id].rotation = 0;
+        sAnims[id].delay = 0;
+        sAnims[id].runs = 1;
+        sAnims[id].speed = 0;
+        sAnims[id].data = 0;
         return TRUE;
     }
 }
 
-static u8 sub_817F758(void)
+static u8 AddNewAnim(void)
 {
-    sUnknown_03001270 = (sUnknown_03001270 + 1) % STRUCT_COUNT;
-    sub_817F724(sUnknown_03001270);
-    return sUnknown_03001270;
+    sAnimIdx = (sAnimIdx + 1) % MAX_BATTLERS_COUNT;
+    InitAnimData(sAnimIdx);
+    return sAnimIdx;
 }
 
-static void sub_817F77C(struct Sprite *sprite)
+static void ResetSpriteAfterAnim(struct Sprite *sprite)
 {
     sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 
-    if (sUnknown_03001274 == TRUE)
+    if (sIsSummaryAnim == TRUE)
     {
-        if (!sprite->data[1])
-            sprite->hFlip = 1;
+        if (!sprite->sDontFlip)
+            sprite->hFlip = TRUE;
         else
-            sprite->hFlip = 0;
+            sprite->hFlip = FALSE;
 
         FreeOamMatrix(sprite->oam.matrixNum);
         sprite->oam.matrixNum |= (sprite->hFlip << 3);
         sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
     }
+#ifdef BUGFIX
+    else
+    {
+        // FIX: Reset these back to normal after they were changed so Poké Ball catch/release
+        // animations without a screen transition in between don't break
+        sprite->affineAnims = gAffineAnims_BattleSpriteOpponentSide;
+    }
+#endif // BUGFIX
 }
 
-static void pokemonanimfunc_01(struct Sprite *sprite)
+static void Anim_CircularStretchTwice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1051,8 +1091,8 @@ static void pokemonanimfunc_01(struct Sprite *sprite)
     if (sprite->data[2] > 40)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
@@ -1066,12 +1106,12 @@ static void pokemonanimfunc_01(struct Sprite *sprite)
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_02(struct Sprite *sprite)
+static void Anim_HorizontalVibrate(struct Sprite *sprite)
 {
     if (sprite->data[2] > 40)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
@@ -1081,70 +1121,70 @@ static void pokemonanimfunc_02(struct Sprite *sprite)
         else
             sign = -1;
 
-        sprite->pos2.x = Sin((sprite->data[2] * 128 / 40) % 256, 6) * sign;
+        sprite->x2 = Sin((sprite->data[2] * 128 / 40) % 256, 6) * sign;
     }
 
     sprite->data[2]++;
 }
 
-static void sub_817F8FC(struct Sprite *sprite)
+static void HorizontalSlide(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
     if (sprite->data[2] > sprite->data[0])
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
-        sprite->pos2.x = Sin((sprite->data[2] * 384 / sprite->data[0]) % 256, 6);
+        sprite->x2 = Sin((sprite->data[2] * 384 / sprite->data[0]) % 256, 6);
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_03(struct Sprite *sprite)
+static void Anim_HorizontalSlide(struct Sprite *sprite)
 {
     sprite->data[0] = 40;
-    sub_817F8FC(sprite);
-    sprite->callback = sub_817F8FC;
+    HorizontalSlide(sprite);
+    sprite->callback = HorizontalSlide;
 }
 
-static void sub_817F978(struct Sprite *sprite)
+static void VerticalSlide(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
     if (sprite->data[2] > sprite->data[0])
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = 0;
     }
     else
     {
-        sprite->pos2.y = -(Sin((sprite->data[2] * 384 / sprite->data[0]) % 256, 6));
+        sprite->y2 = -(Sin((sprite->data[2] * 384 / sprite->data[0]) % 256, 6));
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_04(struct Sprite *sprite)
+static void Anim_VerticalSlide(struct Sprite *sprite)
 {
     sprite->data[0] = 40;
-    sub_817F978(sprite);
-    sprite->callback = sub_817F978;
+    VerticalSlide(sprite);
+    sprite->callback = VerticalSlide;
 }
 
-static void sub_817F9F4(struct Sprite *sprite)
+static void VerticalJumps(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
     if (counter > 384)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
@@ -1153,12 +1193,12 @@ static void sub_817F9F4(struct Sprite *sprite)
         {
         case 0:
         case 1:
-            sprite->pos2.y = -(Sin(counter % 128, sprite->data[0] * 2));
+            sprite->y2 = -(Sin(counter % 128, sprite->data[0] * 2));
             break;
         case 2:
         case 3:
             counter -= 256;
-            sprite->pos2.y = -(Sin(counter, sprite->data[0] * 3));
+            sprite->y2 = -(Sin(counter, sprite->data[0] * 3));
             break;
         }
     }
@@ -1166,22 +1206,22 @@ static void sub_817F9F4(struct Sprite *sprite)
     sprite->data[2] += 12;
 }
 
-static void pokemonanimfunc_1E(struct Sprite *sprite)
+static void Anim_VerticalJumps_Big(struct Sprite *sprite)
 {
     sprite->data[0] = 4;
-    sub_817F9F4(sprite);
-    sprite->callback = sub_817F9F4;
+    VerticalJumps(sprite);
+    sprite->callback = VerticalJumps;
 }
 
-static void pokemonanimfunc_06(struct Sprite *sprite)
+static void Anim_VerticalJumpsHorizontalJumps(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
 
     if (counter > 768)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
@@ -1191,29 +1231,29 @@ static void pokemonanimfunc_06(struct Sprite *sprite)
         {
         case 0:
         case 1:
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             break;
         case 2:
             counter = 0;
             break;
         case 3:
-            sprite->pos2.x = -(counter % 128 * 8) / 128;
+            sprite->x2 = -(counter % 128 * 8) / 128;
             break;
         case 4:
-            sprite->pos2.x = (counter % 128) / 8 - 8;
+            sprite->x2 = (counter % 128) / 8 - 8;
             break;
         case 5:
-            sprite->pos2.x = -(counter % 128 * 8) / 128 + 8;
+            sprite->x2 = -(counter % 128 * 8) / 128 + 8;
             break;
         }
 
-        sprite->pos2.y = -(Sin(counter % 128, 8));
+        sprite->y2 = -(Sin(counter % 128, 8));
     }
 
     sprite->data[2] += 12;
 }
 
-static void pokemonanimfunc_09(struct Sprite *sprite)
+static void Anim_GrowVibrate(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1221,8 +1261,8 @@ static void pokemonanimfunc_09(struct Sprite *sprite)
     if (sprite->data[2] > 40)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
@@ -1245,32 +1285,33 @@ static void pokemonanimfunc_09(struct Sprite *sprite)
     sprite->data[2]++;
 }
 
-static const s8 sUnknown_0860AD70[][3] =
+// x delta, y delta, time
+static const s8 sZigzagData[][3] =
 {
     {-1, -1, 6},
-    {2,   0, 6},
+    { 2,  0, 6},
     {-2,  2, 6},
-    {2,   0, 6},
+    { 2,  0, 6},
     {-2, -2, 6},
-    {2,   0, 6},
+    { 2,  0, 6},
     {-2,  2, 6},
-    {2,   0, 6},
+    { 2,  0, 6},
     {-1, -1, 6},
-    {0,   0, 0},
+    { 0,  0, 0},
 };
 
-static void sub_817FC20(struct Sprite *sprite)
+static void Zigzag(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
     if (sprite->data[2] == 0)
         sprite->data[3] = 0;
 
-    if (sUnknown_0860AD70[sprite->data[3]][2] == sprite->data[2])
+    if (sZigzagData[sprite->data[3]][2] == sprite->data[2])
     {
-        if (sUnknown_0860AD70[sprite->data[3]][2] == 0)
+        if (sZigzagData[sprite->data[3]][2] == 0)
         {
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            sprite->callback = WaitAnimEnd;
         }
         else
         {
@@ -1279,81 +1320,81 @@ static void sub_817FC20(struct Sprite *sprite)
         }
     }
 
-    if (sUnknown_0860AD70[sprite->data[3]][2] == 0)
+    if (sZigzagData[sprite->data[3]][2] == 0)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
-        sprite->pos2.x += sUnknown_0860AD70[sprite->data[3]][0];
-        sprite->pos2.y += sUnknown_0860AD70[sprite->data[3]][1];
+        sprite->x2 += sZigzagData[sprite->data[3]][0];
+        sprite->y2 += sZigzagData[sprite->data[3]][1];
         sprite->data[2]++;
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
 }
 
-static void pokemonanimfunc_0A(struct Sprite *sprite)
+static void Anim_ZigzagFast(struct Sprite *sprite)
 {
-    sub_817FC20(sprite);
-    sprite->callback = sub_817FC20;
+    Zigzag(sprite);
+    sprite->callback = Zigzag;
 }
 
-static void sub_817FCDC(struct Sprite *sprite)
+static void HorizontalShake(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
 
     if (counter > 2304)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
-        sprite->pos2.x = Sin(counter % 256, sprite->data[7]);
+        sprite->x2 = Sin(counter % 256, sprite->data[7]);
     }
 
     sprite->data[2] += sprite->data[0];
 }
 
-static void pokemonanimfunc_0F(struct Sprite *sprite)
+static void Anim_HorizontalShake(struct Sprite *sprite)
 {
     sprite->data[0] = 60;
     sprite->data[7] = 3;
-    sub_817FCDC(sprite);
-    sprite->callback = sub_817FCDC;
+    HorizontalShake(sprite);
+    sprite->callback = HorizontalShake;
 }
 
-static void sub_817FD44(struct Sprite *sprite)
+static void VerticalShake(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
 
     if (counter > 2304)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = 0;
     }
     else
     {
-        sprite->pos2.y = Sin(counter % 256, 3);
+        sprite->y2 = Sin(counter % 256, 3);
     }
 
     sprite->data[2] += sprite->data[0];
 }
 
-static void pokemonanimfunc_10(struct Sprite *sprite)
+static void Anim_VerticalShake(struct Sprite *sprite)
 {
     sprite->data[0] = 60;
-    sub_817FD44(sprite);
-    sprite->callback = sub_817FD44;
+    VerticalShake(sprite);
+    sprite->callback = VerticalShake;
 }
 
-static void pokemonanimfunc_11(struct Sprite *sprite)
+static void Anim_CircularVibrate(struct Sprite *sprite)
 {
     if (sprite->data[2] > 512)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
@@ -1368,43 +1409,43 @@ static void pokemonanimfunc_11(struct Sprite *sprite)
         amplitude = Sin(sprite->data[2] / 4, 8);
         index = sprite->data[2] % 256;
 
-        sprite->pos2.y = Sin(index, amplitude) * sign;
-        sprite->pos2.x = Cos(index, amplitude) * sign;
+        sprite->y2 = Sin(index, amplitude) * sign;
+        sprite->x2 = Cos(index, amplitude) * sign;
     }
 
     sprite->data[2] += 9;
 }
 
-static void sub_817FE30(struct Sprite *sprite)
+static void Twist(struct Sprite *sprite)
 {
     s16 id = sprite->data[0];
 
-    if (sUnknown_03001240[id].field_0 != 0)
+    if (sAnims[id].delay != 0)
     {
-        sUnknown_03001240[id].field_0--;
+        sAnims[id].delay--;
     }
     else
     {
-        if (sprite->data[2] == 0 && sUnknown_03001240[id].field_8 == 0)
+        if (sprite->data[2] == 0 && sAnims[id].data == 0)
         {
             HandleStartAffineAnim(sprite);
-            sUnknown_03001240[id].field_8++;
+            sAnims[id].data++;
         }
 
-        if (sprite->data[2] > sUnknown_03001240[id].field_6)
+        if (sprite->data[2] > sAnims[id].rotation)
         {
             HandleSetAffineData(sprite, 256, 256, 0);
 
-            if (sUnknown_03001240[id].field_4 > 1)
+            if (sAnims[id].runs > 1)
             {
-                sUnknown_03001240[id].field_4--;
-                sUnknown_03001240[id].field_0 = 10;
+                sAnims[id].runs--;
+                sAnims[id].delay = 10;
                 sprite->data[2] = 0;
             }
             else
             {
-                sub_817F77C(sprite);
-                sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+                ResetSpriteAfterAnim(sprite);
+                sprite->callback = WaitAnimEnd;
             }
         }
         else
@@ -1417,103 +1458,107 @@ static void sub_817FE30(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_12(struct Sprite *sprite)
+static void Anim_Twist(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 512;
-    sUnknown_03001240[id].field_0 = 0;
-    sub_817FE30(sprite);
-    sprite->callback = sub_817FE30;
+    sAnims[id].rotation = 512;
+    sAnims[id].delay = 0;
+    Twist(sprite);
+    sprite->callback = Twist;
 }
 
-static void sub_817FF3C(struct Sprite *sprite)
+static void Spin(struct Sprite *sprite)
 {
     u8 id = sprite->data[0];
 
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
 
-    if (sprite->data[2] > sUnknown_03001240[id].field_0)
+    if (sprite->data[2] > sAnims[id].delay)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
-        sprite->data[6] = (65536 / sUnknown_03001240[id].field_8) * sprite->data[2];
+        sprite->data[6] = (65536 / sAnims[id].data) * sprite->data[2];
         HandleSetAffineData(sprite, 256, 256, sprite->data[6]);
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_1F(struct Sprite *sprite)
+static void Anim_Spin_Long(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_0 = 60;
-    sUnknown_03001240[id].field_8 = 20;
-    sub_817FF3C(sprite);
-    sprite->callback = sub_817FF3C;
+    sAnims[id].delay = 60;
+    sAnims[id].data = 20;
+    Spin(sprite);
+    sprite->callback = Spin;
 }
 
-static void sub_817FFF0(struct Sprite *sprite)
+static void CircleCounterclockwise(struct Sprite *sprite)
 {
     u8 id = sprite->data[0];
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
-    if (sprite->data[2] > sUnknown_03001240[id].field_6)
+    if (sprite->data[2] > sAnims[id].rotation)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 index = (sprite->data[2] + 192) % 256;
 
-        sprite->pos2.x = -(Cos(index, sUnknown_03001240[id].field_8 * 2));
-        sprite->pos2.y = Sin(index, sUnknown_03001240[id].field_8) + sUnknown_03001240[id].field_8;
+        sprite->x2 = -(Cos(index, sAnims[id].data * 2));
+        sprite->y2 = Sin(index, sAnims[id].data) + sAnims[id].data;
     }
 
-    sprite->data[2] += sUnknown_03001240[id].field_2;
-    sub_817F70C(sprite);
+    sprite->data[2] += sAnims[id].speed;
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_14(struct Sprite *sprite)
+static void Anim_CircleCounterclockwise(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 512;
-    sUnknown_03001240[id].field_8 = 6;
-    sUnknown_03001240[id].field_2 = 24;
-    sub_817FFF0(sprite);
-    sprite->callback = sub_817FFF0;
+    sAnims[id].rotation = 512;
+    sAnims[id].data = 6;
+    sAnims[id].speed = 24;
+    CircleCounterclockwise(sprite);
+    sprite->callback = CircleCounterclockwise;
 }
 
-static void pokemonanimfunc_15(struct Sprite *sprite)
+#define GlowColor(color, colorIncrement, speed)                         \
+{                                                                       \
+    if (sprite->data[2] == 0)                                           \
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;          \
+                                                                        \
+    if (sprite->data[2] > 128)                                          \
+    {                                                                   \
+        BlendPalette(sprite->data[7], 16, 0, (color));                  \
+        sprite->callback = WaitAnimEnd;                                 \
+    }                                                                   \
+    else                                                                \
+    {                                                                   \
+        sprite->data[6] = Sin(sprite->data[2], (colorIncrement));       \
+        BlendPalette(sprite->data[7], 16, sprite->data[6], (color));    \
+    }                                                                   \
+    sprite->data[2] += (speed);                                         \
+}
+
+static void Anim_GlowBlack(struct Sprite *sprite)
 {
-    if (sprite->data[2] == 0)
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
-
-    if (sprite->data[2] > 128)
-    {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB_BLACK);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-    }
-    else
-    {
-        sprite->data[6] = Sin(sprite->data[2], 16);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_BLACK);
-    }
-
-    sprite->data[2]++;
+    GlowColor(RGB_BLACK, 16, 1);
 }
 
-static void pokemonanimfunc_16(struct Sprite *sprite)
+static void Anim_HorizontalStretch(struct Sprite *sprite)
 {
     s16 index1 = 0, index2 = 0;
 
@@ -1523,8 +1568,8 @@ static void pokemonanimfunc_16(struct Sprite *sprite)
     if (sprite->data[2] > 40)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
@@ -1536,7 +1581,7 @@ static void pokemonanimfunc_16(struct Sprite *sprite)
             index1 = 0xFF & sprite->data[7];
         }
 
-        if (sprite->data[1] == 0)
+        if (!sprite->sDontFlip)
             sprite->data[4] = (Sin(index2, 40) - 256) + Sin(index1, 16);
         else
             sprite->data[4] = (256 - Sin(index2, 40)) - Sin(index1, 16);
@@ -1548,7 +1593,7 @@ static void pokemonanimfunc_16(struct Sprite *sprite)
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_17(struct Sprite *sprite)
+static void Anim_VerticalStretch(struct Sprite *sprite)
 {
     s16 posY = 0, index1 = 0, index2 = 0;
 
@@ -1558,9 +1603,9 @@ static void pokemonanimfunc_17(struct Sprite *sprite)
     if (sprite->data[2] > 40)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = posY;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = posY;
     }
     else
     {
@@ -1572,7 +1617,7 @@ static void pokemonanimfunc_17(struct Sprite *sprite)
             index1 = 0xFF & sprite->data[7];
         }
 
-        if (sprite->data[1] == 0)
+        if (!sprite->sDontFlip)
             sprite->data[4] = -(Sin(index2, 16)) - 256;
         else
             sprite->data[4] = Sin(index2, 16) + 256;
@@ -1582,34 +1627,34 @@ static void pokemonanimfunc_17(struct Sprite *sprite)
         if (sprite->data[5] != 256)
             posY = (256 - sprite->data[5]) / 8;
 
-        sprite->pos2.y = -(posY);
+        sprite->y2 = -(posY);
         SetAffineData(sprite, sprite->data[4], sprite->data[5], 0);
     }
 
     sprite->data[2]++;
 }
 
-static void sub_818031C(struct Sprite *sprite)
+static void VerticalShakeTwice(struct Sprite *sprite)
 {
     u8 index = sprite->data[2];
     u8 var7 = sprite->data[6];
-    u8 var5 = sUnknown_0860AA80[sprite->data[5]][0];
-    u8 var6 = sUnknown_0860AA80[sprite->data[5]][1];
+    u8 var5 = sVerticalShakeData[sprite->data[5]][0];
+    u8 var6 = sVerticalShakeData[sprite->data[5]][1];
     u8 amplitude = 0;
 
-    if (var5 != 0xFE)
+    if (var5 != (u8)-2)
         amplitude = (var6 - var7) * var5 / var6;
     else
         amplitude = 0;
 
-    if (var5 == 0xFF)
+    if (var5 == (u8)-1)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = 0;
     }
     else
     {
-        sprite->pos2.y = Sin(index, amplitude);
+        sprite->y2 = Sin(index, amplitude);
 
         if (var7 == var6)
         {
@@ -1624,18 +1669,18 @@ static void sub_818031C(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_19(struct Sprite *sprite)
+static void Anim_VerticalShakeTwice(struct Sprite *sprite)
 {
     sprite->data[0] = 48;
-    sub_818031C(sprite);
-    sprite->callback = sub_818031C;
+    VerticalShakeTwice(sprite);
+    sprite->callback = VerticalShakeTwice;
 }
 
-static void pokemonanimfunc_1A(struct Sprite *sprite)
+static void Anim_TipMoveForward(struct Sprite *sprite)
 {
     u8 counter = 0;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     counter = sprite->data[2];
 
     if (sprite->data[2] == 0)
@@ -1644,9 +1689,9 @@ static void pokemonanimfunc_1A(struct Sprite *sprite)
     if (sprite->data[2] > 35)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
@@ -1655,16 +1700,16 @@ static void pokemonanimfunc_1A(struct Sprite *sprite)
         if (counter < 10)
             HandleSetAffineData(sprite, 256, 256, counter / 2 * 512);
         else if (counter >= 10 && counter <= 29)
-            sprite->pos2.x = -(Sin(index, 5));
+            sprite->x2 = -(Sin(index, 5));
         else
             HandleSetAffineData(sprite, 256, 256, (35 - counter) / 2 * 1024);
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_1B(struct Sprite *sprite)
+static void Anim_HorizontalPivot(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1672,21 +1717,21 @@ static void pokemonanimfunc_1B(struct Sprite *sprite)
     if (sprite->data[2] > 100)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 index = (sprite->data[2] * 256) / 100;
-        sprite->pos2.y = Sin(index, 10);
+        sprite->y2 = Sin(index, 10);
         HandleSetAffineData(sprite, 256, 256, Sin(index, 3276));
     }
 
     sprite->data[2]++;
 }
 
-static void sub_81804F8(struct Sprite *sprite)
+static void VerticalSlideWobble(struct Sprite *sprite)
 {
     s32 var = 0;
     s16 index = 0;
@@ -1697,30 +1742,30 @@ static void sub_81804F8(struct Sprite *sprite)
     if (sprite->data[2] > 100)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         index = (sprite->data[2] * 256) / 100;
         var = (sprite->data[2] * 512) / 100;
         var &= 0xFF;
-        sprite->pos2.y = Sin(index, sprite->data[0]);
+        sprite->y2 = Sin(index, sprite->data[0]);
         HandleSetAffineData(sprite, 256, 256, Sin(var, 3276));
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_1C(struct Sprite *sprite)
+static void Anim_VerticalSlideWobble(struct Sprite *sprite)
 {
     sprite->data[0] = 10;
-    sub_81804F8(sprite);
-    sprite->callback = sub_81804F8;
+    VerticalSlideWobble(sprite);
+    sprite->callback = VerticalSlideWobble;
 }
 
-static void sub_81805B0(struct Sprite *sprite)
+static void RisingWobble(struct Sprite *sprite)
 {
     s32 var = 0;
     s16 index = 0;
@@ -1731,35 +1776,35 @@ static void sub_81805B0(struct Sprite *sprite)
     if (sprite->data[2] > 100)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         index = (sprite->data[2] * 256) / 100;
         var = (sprite->data[2] * 512) / 100;
         var &= 0xFF;
-        sprite->pos2.y = -(Sin(index / 2, sprite->data[0] * 2));
+        sprite->y2 = -(Sin(index / 2, sprite->data[0] * 2));
         HandleSetAffineData(sprite, 256, 256, Sin(var, 3276));
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_18(struct Sprite *sprite)
+static void Anim_RisingWobble(struct Sprite *sprite)
 {
     sprite->data[0] = 5;
-    sub_81805B0(sprite);
-    sprite->callback = sub_81805B0;
+    RisingWobble(sprite);
+    sprite->callback = RisingWobble;
 }
 
-static void pokemonanimfunc_1D(struct Sprite *sprite)
+static void Anim_HorizontalSlideWobble(struct Sprite *sprite)
 {
     s32 var;
     s16 index = 0;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     var = 0;
 
     if (sprite->data[2] == 0)
@@ -1768,26 +1813,24 @@ static void pokemonanimfunc_1D(struct Sprite *sprite)
     if (sprite->data[2] > 100)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
-        s16 toDiv = 100;
-
-        index = (sprite->data[2] * 256) / toDiv;
-        var = (sprite->data[2] * 512) / toDiv;
+        index = (sprite->data[2] * 256) / 100;
+        var = (sprite->data[2] * 512) / 100;
         var &= 0xFF;
-        sprite->pos2.x = Sin(index, 8);
+        sprite->x2 = Sin(index, 8);
         HandleSetAffineData(sprite, 256, 256, Sin(var, 3276));
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180714(struct Sprite *sprite)
+static void VerticalSquishBounce(struct Sprite *sprite)
 {
     s16 posY = 0;
 
@@ -1797,14 +1840,14 @@ static void sub_8180714(struct Sprite *sprite)
         sprite->data[3] = 0;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
     if (sprite->data[2] > sprite->data[0] * 3)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
@@ -1815,32 +1858,32 @@ static void sub_8180714(struct Sprite *sprite)
         if (yScale > 256)
             posY = (256 - yScale) / 8;
 
-        sprite->pos2.y = -(Sin(sprite->data[3], 10)) - posY;
+        sprite->y2 = -(Sin(sprite->data[3], 10)) - posY;
         HandleSetAffineData(sprite, 256 - Sin(sprite->data[4], 32), yScale, 0);
         sprite->data[2]++;
         sprite->data[4] = (sprite->data[4] + 128 / sprite->data[0]) & 0xFF;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_00(struct Sprite *sprite)
+static void Anim_VerticalSquishBounce(struct Sprite *sprite)
 {
     sprite->data[0] = 16;
-    sub_8180714(sprite);
-    sprite->callback = sub_8180714;
+    VerticalSquishBounce(sprite);
+    sprite->callback = VerticalSquishBounce;
 }
 
-static void sub_8180828(struct Sprite *sprite)
+static void ShrinkGrow(struct Sprite *sprite)
 {
     s16 posY = 0;
 
     if (sprite->data[2] > (128 / sprite->data[6]) * sprite->data[7])
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
@@ -1849,14 +1892,14 @@ static void sub_8180828(struct Sprite *sprite)
         if (yScale > 256)
             posY = (256 - yScale) / 8;
 
-        sprite->pos2.y = -(posY);
+        sprite->y2 = -(posY);
         HandleSetAffineData(sprite, Sin(sprite->data[4], 48) + 256, yScale, 0);
         sprite->data[2]++;
         sprite->data[4] = (sprite->data[4] + sprite->data[6]) & 0xFF;
     }
 }
 
-static void pokemonanimfunc_13(struct Sprite *sprite)
+static void Anim_ShrinkGrow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -1865,34 +1908,34 @@ static void pokemonanimfunc_13(struct Sprite *sprite)
         sprite->data[6] = 8;
     }
 
-    sub_8180828(sprite);
+    ShrinkGrow(sprite);
 }
 
-static const s8 sUnknown_0860AD8E[][8][3] =
+static const s8 sBounceRotateToSidesData[][8][3] =
 {
     {
-        {0,  8, 8},
-        {8, -8, 12},
-        {-8, 8, 12},
-        {8, -8, 12},
-        {-8, 8, 12},
-        {8, -8, 12},
-        {-8, 0, 12},
-        {0,  0, 0}
+        { 0,  8,  8},
+        { 8, -8, 12},
+        {-8,  8, 12},
+        { 8, -8, 12},
+        {-8,  8, 12},
+        { 8, -8, 12},
+        {-8,  0, 12},
+        { 0,  0,  0}
     },
     {
-        {0,  8, 16},
-        {8, -8, 24},
-        {-8, 8, 24},
-        {8, -8, 24},
-        {-8, 8, 24},
-        {8, -8, 24},
-        {-8, 0, 24},
-        {0,  0, 0}
+        { 0,  8, 16},
+        { 8, -8, 24},
+        {-8,  8, 24},
+        { 8, -8, 24},
+        {-8,  8, 24},
+        { 8, -8, 24},
+        {-8,  0, 24},
+        { 0,  0,  0}
     },
 };
 
-static void sub_8180900(struct Sprite *sprite)
+static void BounceRotateToSides(struct Sprite *sprite)
 {
     s16 var;
     u8 structId;
@@ -1901,12 +1944,12 @@ static void sub_8180900(struct Sprite *sprite)
     s16 r7;
     u32 arrId;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     structId = sprite->data[0];
-    var = sUnknown_03001240[structId].field_6;
-    r9 = sUnknown_0860AD8E[sUnknown_03001240[structId].field_8][sprite->data[4]][0];
-    r10 = sUnknown_0860AD8E[sUnknown_03001240[structId].field_8][sprite->data[4]][1] - r9;
-    arrId = sUnknown_03001240[structId].field_8;
+    var = sAnims[structId].rotation;
+    r9 = sBounceRotateToSidesData[sAnims[structId].data][sprite->data[4]][0];
+    r10 = sBounceRotateToSidesData[sAnims[structId].data][sprite->data[4]][1] - r9;
+    arrId = sAnims[structId].data;
     r7 = sprite->data[3];
 
     if (sprite->data[2] == 0)
@@ -1915,25 +1958,25 @@ static void sub_8180900(struct Sprite *sprite)
         sprite->data[2]++;
     }
 
-    if (sUnknown_0860AD8E[arrId][sprite->data[4]][2] == 0)
+    if (sBounceRotateToSidesData[arrId][sprite->data[4]][2] == 0)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         u16 rotation;
 
-        sprite->pos2.y = -(Sin(r7 * 128 / sUnknown_0860AD8E[arrId][sprite->data[4]][2], 10));
-        sprite->pos2.x = (r10 * r7 / sUnknown_0860AD8E[arrId][sprite->data[4]][2]) + r9;
+        sprite->y2 = -(Sin(r7 * 128 / sBounceRotateToSidesData[arrId][sprite->data[4]][2], 10));
+        sprite->x2 = (r10 * r7 / sBounceRotateToSidesData[arrId][sprite->data[4]][2]) + r9;
 
-        rotation = -(var * sprite->pos2.x) / 8;
+        rotation = -(var * sprite->x2) / 8;
         HandleSetAffineData(sprite, 256, 256, rotation);
 
-        if (r7 == sUnknown_0860AD8E[arrId][sprite->data[4]][2])
+        if (r7 == sBounceRotateToSidesData[arrId][sprite->data[4]][2])
         {
             sprite->data[4]++;
             sprite->data[3] = 0;
@@ -1944,149 +1987,79 @@ static void sub_8180900(struct Sprite *sprite)
         }
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_05(struct Sprite *sprite)
+static void Anim_BounceRotateToSides(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_6 = 4096;
-    sUnknown_03001240[id].field_8 = sprite->data[6];
-    sub_8180900(sprite);
-    sprite->callback = sub_8180900;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].rotation = 4096;
+    sAnims[id].data = sprite->data[6];
+    BounceRotateToSides(sprite);
+    sprite->callback = BounceRotateToSides;
 }
 
-static void pokemonanimfunc_20(struct Sprite *sprite)
+static void Anim_GlowOrange(struct Sprite *sprite)
 {
-    if (sprite->data[2] == 0)
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
-
-    if (sprite->data[2] > 128)
-    {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB(31, 22, 0));
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-    }
-    else
-    {
-        sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB(31, 22, 0));
-    }
-
-    sprite->data[2] += 2;
+    GlowColor(RGB(31, 22, 0), 12, 2);
 }
 
-static void pokemonanimfunc_21(struct Sprite *sprite)
+static void Anim_GlowRed(struct Sprite *sprite)
 {
-    if (sprite->data[2] == 0)
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
-
-    if (sprite->data[2] > 128)
-    {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB_RED);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-    }
-    else
-    {
-        sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_RED);
-    }
-
-    sprite->data[2] += 2;
+    GlowColor(RGB_RED, 12, 2);
 }
 
-static void pokemonanimfunc_22(struct Sprite *sprite)
+static void Anim_GlowBlue(struct Sprite *sprite)
 {
-    if (sprite->data[2] == 0)
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
-
-    if (sprite->data[2] > 128)
-    {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB_BLUE);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-    }
-    else
-    {
-        sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_BLUE);
-    }
-
-    sprite->data[2] += 2;
+    GlowColor(RGB_BLUE, 12, 2);
 }
 
-static void pokemonanimfunc_23(struct Sprite *sprite)
+static void Anim_GlowYellow(struct Sprite *sprite)
 {
-    if (sprite->data[2] == 0)
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
-
-    if (sprite->data[2] > 128)
-    {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB_YELLOW);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-    }
-    else
-    {
-        sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_YELLOW);
-    }
-
-    sprite->data[2] += 2;
+    GlowColor(RGB_YELLOW, 12, 2);
 }
 
-static void pokemonanimfunc_24(struct Sprite *sprite)
+static void Anim_GlowPurple(struct Sprite *sprite)
 {
-    if (sprite->data[2] == 0)
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
-
-    if (sprite->data[2] > 128)
-    {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB(24, 0, 24));
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-    }
-    else
-    {
-        sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB(24, 0, 24));
-    }
-
-    sprite->data[2] += 2;
+    GlowColor(RGB(24, 0, 24), 12, 2);
 }
 
-static void sub_8180CB4(struct Sprite *sprite);
-static void sub_8180CE8(struct Sprite *sprite);
-static void sub_8180D44(struct Sprite *sprite);
-static void sub_8180DC0(struct Sprite *sprite);
-static void sub_8180E28(struct Sprite *sprite);
+static void BackAndLunge_0(struct Sprite *sprite);
+static void BackAndLunge_1(struct Sprite *sprite);
+static void BackAndLunge_2(struct Sprite *sprite);
+static void BackAndLunge_3(struct Sprite *sprite);
+static void BackAndLunge_4(struct Sprite *sprite);
 
-static void pokemonanimfunc_25(struct Sprite *sprite)
+static void Anim_BackAndLunge(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
-    sprite->callback = sub_8180CB4;
+    sprite->callback = BackAndLunge_0;
 }
 
-static void sub_8180CB4(struct Sprite *sprite)
+static void BackAndLunge_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    if (++sprite->pos2.x > 7)
+    TryFlipX(sprite);
+    if (++sprite->x2 > 7)
     {
-        sprite->pos2.x = 8;
+        sprite->x2 = 8;
         sprite->data[7] = 2;
-        sprite->callback = sub_8180CE8;
+        sprite->callback = BackAndLunge_1;
     }
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180CE8(struct Sprite *sprite)
+static void BackAndLunge_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
-    sprite->pos2.x -= sprite->data[7];
+    sprite->x2 -= sprite->data[7];
     sprite->data[7]++;
-    if (sprite->pos2.x <= 0)
+    if (sprite->x2 <= 0)
     {
         s16 subResult;
         u8 var = sprite->data[7];
         sprite->data[6] = 0;
-        subResult = sprite->pos2.x;
+        subResult = sprite->x2;
 
         do
         {
@@ -2097,18 +2070,18 @@ static void sub_8180CE8(struct Sprite *sprite)
         while (subResult > -8);
 
         sprite->data[5] = 1;
-        sprite->callback = sub_8180D44;
+        sprite->callback = BackAndLunge_2;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180D44(struct Sprite *sprite)
+static void BackAndLunge_2(struct Sprite *sprite)
 {
     u8 rotation;
 
-    sub_817F70C(sprite);
-    sprite->pos2.x -= sprite->data[7];
+    TryFlipX(sprite);
+    sprite->x2 -= sprite->data[7];
     sprite->data[7]++;
     rotation = (sprite->data[5] * 6) / sprite->data[6];
 
@@ -2117,21 +2090,21 @@ static void sub_8180D44(struct Sprite *sprite)
 
     HandleSetAffineData(sprite, 256, 256, rotation * 256);
 
-    if (sprite->pos2.x < -8)
+    if (sprite->x2 < -8)
     {
-        sprite->pos2.x = -8;
+        sprite->x2 = -8;
         sprite->data[4] = 2;
         sprite->data[3] = 0;
         sprite->data[2] = rotation;
-        sprite->callback = sub_8180DC0;
+        sprite->callback = BackAndLunge_3;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180DC0(struct Sprite *sprite)
+static void BackAndLunge_3(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
     if (sprite->data[3] > 11)
     {
@@ -2141,85 +2114,85 @@ static void sub_8180DC0(struct Sprite *sprite)
 
         HandleSetAffineData(sprite, 256, 256, sprite->data[2] << 8);
         if (sprite->data[2] == 0)
-            sprite->callback = sub_8180E28;
+            sprite->callback = BackAndLunge_4;
     }
     else
     {
-        sprite->pos2.x += sprite->data[4];
+        sprite->x2 += sprite->data[4];
         sprite->data[4] *= -1;
         sprite->data[3]++;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180E28(struct Sprite *sprite)
+static void BackAndLunge_4(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
-    sprite->pos2.x += 2;
-    if (sprite->pos2.x > 0)
+    sprite->x2 += 2;
+    if (sprite->x2 > 0)
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180E78(struct Sprite *sprite);
-static void sub_8180ED0(struct Sprite *sprite);
-static void sub_8180F2C(struct Sprite *sprite);
+static void BackFlip_0(struct Sprite *sprite);
+static void BackFlip_1(struct Sprite *sprite);
+static void BackFlip_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_26(struct Sprite *sprite)
+static void Anim_BackFlip(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[3] = 0;
-    sprite->callback = sub_8180E78;
+    sprite->callback = BackFlip_0;
 }
 
-static void sub_8180E78(struct Sprite *sprite)
+static void BackFlip_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x++;
-    sprite->pos2.y--;
+    TryFlipX(sprite);
+    sprite->x2++;
+    sprite->y2--;
 
-    if (sprite->pos2.x % 2 == 0 && sprite->data[3] <= 0)
+    if (sprite->x2 % 2 == 0 && sprite->data[3] <= 0)
         sprite->data[3] = 10;
-    if (sprite->pos2.x > 7)
+    if (sprite->x2 > 7)
     {
-        sprite->pos2.x = 8;
-        sprite->pos2.y = -8;
+        sprite->x2 = 8;
+        sprite->y2 = -8;
         sprite->data[4] = 0;
-        sprite->callback = sub_8180ED0;
+        sprite->callback = BackFlip_1;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180ED0(struct Sprite *sprite)
+static void BackFlip_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x = Cos(sprite->data[4], 16) - 8;
-    sprite->pos2.y = Sin(sprite->data[4], 16) - 8;
+    TryFlipX(sprite);
+    sprite->x2 = Cos(sprite->data[4], 16) - 8;
+    sprite->y2 = Sin(sprite->data[4], 16) - 8;
 
     if (sprite->data[4] > 63)
     {
         sprite->data[2] = 160;
         sprite->data[3] = 10;
-        sprite->callback = sub_8180F2C;
+        sprite->callback = BackFlip_2;
     }
     sprite->data[4] += 8;
     if (sprite->data[4] > 64)
         sprite->data[4] = 64;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8180F2C(struct Sprite *sprite)
+static void BackFlip_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 
     if (sprite->data[3] > 0)
     {
@@ -2229,25 +2202,25 @@ static void sub_8180F2C(struct Sprite *sprite)
     {
         u32 rotation;
 
-        sprite->pos2.x = Cos(sprite->data[2], 5) - 4;
-        sprite->pos2.y = -(Sin(sprite->data[2], 5)) + 4;
+        sprite->x2 = Cos(sprite->data[2], 5) - 4;
+        sprite->y2 = -(Sin(sprite->data[2], 5)) + 4;
         sprite->data[2] -= 4;
         rotation = sprite->data[2] - 32;
         HandleSetAffineData(sprite, 256, 256, rotation * 512);
 
         if (sprite->data[2] <= 32)
         {
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            sprite->x2 = 0;
+            sprite->y2 = 0;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_27(struct Sprite *sprite)
+static void Anim_Flicker(struct Sprite *sprite)
 {
     if (sprite->data[3] > 0)
     {
@@ -2255,225 +2228,225 @@ static void pokemonanimfunc_27(struct Sprite *sprite)
     }
     else
     {
-        sprite->data[4] = (sprite->data[4] == 0) ? 1 : 0;
+        sprite->data[4] = (sprite->data[4] == 0) ? TRUE : FALSE;
         sprite->invisible = sprite->data[4];
         if (++sprite->data[2] > 19)
         {
             sprite->invisible = FALSE;
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            sprite->callback = WaitAnimEnd;
         }
         sprite->data[3] = 2;
     }
 }
 
-static void sub_8181024(struct Sprite *sprite);
-static void sub_8181068(struct Sprite *sprite);
-static void sub_81810C4(struct Sprite *sprite);
+static void BackFlipBig_0(struct Sprite *sprite);
+static void BackFlipBig_1(struct Sprite *sprite);
+static void BackFlipBig_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_28(struct Sprite *sprite)
+static void Anim_BackFlipBig(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
-    sprite->callback = sub_8181024;
+    sprite->callback = BackFlipBig_0;
 }
 
-static void sub_8181024(struct Sprite *sprite)
+static void BackFlipBig_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x--;
-    sprite->pos2.y++;
+    TryFlipX(sprite);
+    sprite->x2--;
+    sprite->y2++;
 
-    if (sprite->pos2.x <= -16)
+    if (sprite->x2 <= -16)
     {
-        sprite->pos2.x = -16;
-        sprite->pos2.y = 16;
-        sprite->callback = sub_8181068;
+        sprite->x2 = -16;
+        sprite->y2 = 16;
+        sprite->callback = BackFlipBig_1;
         sprite->data[2] = 160;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181068(struct Sprite *sprite)
+static void BackFlipBig_1(struct Sprite *sprite)
 {
     u32 rotation;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[2] -= 4;
-    sprite->pos2.x = Cos(sprite->data[2], 22);
-    sprite->pos2.y = -(Sin(sprite->data[2], 22));
+    sprite->x2 = Cos(sprite->data[2], 22);
+    sprite->y2 = -(Sin(sprite->data[2], 22));
     rotation = sprite->data[2] - 32;
     HandleSetAffineData(sprite, 256, 256, rotation * 512);
 
     if (sprite->data[2] <= 32)
-        sprite->callback = sub_81810C4;
+        sprite->callback = BackFlipBig_2;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_81810C4(struct Sprite *sprite)
+static void BackFlipBig_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x--;
-    sprite->pos2.y++;
+    TryFlipX(sprite);
+    sprite->x2--;
+    sprite->y2++;
 
-    if (sprite->pos2.x <= 0)
+    if (sprite->x2 <= 0)
     {
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181110(struct Sprite *sprite);
-static void sub_8181144(struct Sprite *sprite);
-static void sub_81811A4(struct Sprite *sprite);
+static void FrontFlip_0(struct Sprite *sprite);
+static void FrontFlip_1(struct Sprite *sprite);
+static void FrontFlip_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_29(struct Sprite *sprite)
+static void Anim_FrontFlip(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
-    sprite->callback = sub_8181110;
+    sprite->callback = FrontFlip_0;
 }
 
-static void sub_8181110(struct Sprite *sprite)
+static void FrontFlip_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x++;
-    sprite->pos2.y--;
+    TryFlipX(sprite);
+    sprite->x2++;
+    sprite->y2--;
 
-    if (sprite->pos2.x > 15)
+    if (sprite->x2 > 15)
     {
         sprite->data[2] = 0;
-        sprite->callback = sub_8181144;
+        sprite->callback = FrontFlip_1;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181144(struct Sprite *sprite)
+static void FrontFlip_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[2] += 16;
 
-    if (sprite->pos2.x <= -16)
+    if (sprite->x2 <= -16)
     {
-        sprite->pos2.x = -16;
-        sprite->pos2.y = 16;
+        sprite->x2 = -16;
+        sprite->y2 = 16;
         sprite->data[2] = 0;
-        sprite->callback = sub_81811A4;
+        sprite->callback = FrontFlip_2;
     }
     else
     {
-        sprite->pos2.x -= 2;
-        sprite->pos2.y += 2;
+        sprite->x2 -= 2;
+        sprite->y2 += 2;
     }
 
     HandleSetAffineData(sprite, 256, 256, sprite->data[2] << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_81811A4(struct Sprite *sprite)
+static void FrontFlip_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x++;
-    sprite->pos2.y--;;
+    TryFlipX(sprite);
+    sprite->x2++;
+    sprite->y2--;;
 
-    if (sprite->pos2.x >= 0)
+    if (sprite->x2 >= 0)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181214(struct Sprite *sprite);
+static void TumblingFrontFlip(struct Sprite *sprite);
 
-static void pokemonanimfunc_2A(struct Sprite *sprite)
+static void Anim_TumblingFrontFlip(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_2 = 2;
-    sub_8181214(sprite);
-    sprite->callback = sub_8181214;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].speed = 2;
+    TumblingFrontFlip(sprite);
+    sprite->callback = TumblingFrontFlip;
 }
 
-static void sub_8181214(struct Sprite *sprite)
+static void TumblingFrontFlip(struct Sprite *sprite)
 {
-    if (sUnknown_03001240[sprite->data[0]].field_0 != 0)
+    if (sAnims[sprite->data[0]].delay != 0)
     {
-        sUnknown_03001240[sprite->data[0]].field_0--;
+        sAnims[sprite->data[0]].delay--;
     }
     else
     {
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
         if (sprite->data[2] == 0)
         {
             sprite->data[2]++;
             HandleStartAffineAnim(sprite);
-            sprite->data[7] = sUnknown_03001240[sprite->data[0]].field_2;
+            sprite->data[7] = sAnims[sprite->data[0]].speed;
             sprite->data[3] = -1;
             sprite->data[4] = -1;
             sprite->data[5] = 0;
             sprite->data[6] = 0;
         }
 
-        sprite->pos2.x += (sprite->data[7] * 2 * sprite->data[3]);
-        sprite->pos2.y += (sprite->data[7] * sprite->data[4]);
+        sprite->x2 += (sprite->data[7] * 2 * sprite->data[3]);
+        sprite->y2 += (sprite->data[7] * sprite->data[4]);
         sprite->data[6] += 8;
-        if (sprite->pos2.x <= -16 || sprite->pos2.x >= 16)
+        if (sprite->x2 <= -16 || sprite->x2 >= 16)
         {
-            sprite->pos2.x = sprite->data[3] * 16;
+            sprite->x2 = sprite->data[3] * 16;
             sprite->data[3] *= -1;
             sprite->data[5]++;
         }
-        else if (sprite->pos2.y <= -16 || sprite->pos2.y >= 16)
+        else if (sprite->y2 <= -16 || sprite->y2 >= 16)
         {
-            sprite->pos2.y = sprite->data[4] * 16;
+            sprite->y2 = sprite->data[4] * 16;
             sprite->data[4] *= -1;
             sprite->data[5]++;
         }
 
-        if (sprite->data[5] > 5 && sprite->pos2.x <= 0)
+        if (sprite->data[5] > 5 && sprite->x2 <= 0)
         {
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
-            if (sUnknown_03001240[sprite->data[0]].field_4 > 1)
+            sprite->x2 = 0;
+            sprite->y2 = 0;
+            if (sAnims[sprite->data[0]].runs > 1)
             {
-                sUnknown_03001240[sprite->data[0]].field_4--;
+                sAnims[sprite->data[0]].runs--;
                 sprite->data[5] = 0;
                 sprite->data[6] = 0;
-                sUnknown_03001240[sprite->data[0]].field_0 = 10;
+                sAnims[sprite->data[0]].delay = 10;
             }
             else
             {
-                sub_817F77C(sprite);
-                sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+                ResetSpriteAfterAnim(sprite);
+                sprite->callback = WaitAnimEnd;
             }
         }
 
         HandleSetAffineData(sprite, 256, 256, sprite->data[6] << 8);
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
 }
 
-static void sub_8181370(struct Sprite *sprite);
+static void Figure8(struct Sprite *sprite);
 
-static void pokemonanimfunc_2B(struct Sprite *sprite)
+static void Anim_Figure8(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[6] = 0;
     sprite->data[7] = 0;
-    sprite->callback = sub_8181370;
+    sprite->callback = Figure8;
 }
 
-static void sub_8181370(struct Sprite *sprite)
+static void Figure8(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[6] += 4;
-    sprite->pos2.x = -(Sin(sprite->data[6], 16));
-    sprite->pos2.y = -(Sin((sprite->data[6] * 2) & 0xFF, 8));
+    sprite->x2 = -(Sin(sprite->data[6], 16));
+    sprite->y2 = -(Sin((sprite->data[6] * 2) & 0xFF, 8));
     if (sprite->data[6] > 192 && sprite->data[7] == 1)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
@@ -2487,16 +2460,16 @@ static void sub_8181370(struct Sprite *sprite)
 
     if (sprite->data[6] > 255)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_2C(struct Sprite *sprite)
+static void Anim_FlashYellow(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
@@ -2506,23 +2479,23 @@ static void pokemonanimfunc_2C(struct Sprite *sprite)
         sprite->data[4] = 0;
     }
 
-    if (sUnknown_0860AA64[sprite->data[6]][1] == 0xFF)
+    if (sYellowFlashData[sprite->data[6]][1] == (u8)-1)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         if (sprite->data[4] == 1)
         {
-            if (sUnknown_0860AA64[sprite->data[6]][0] != 0)
-                BlendPalette(sprite->data[7], 0x10, 0x10, RGB_YELLOW);
+            if (sYellowFlashData[sprite->data[6]][0])
+                BlendPalette(sprite->data[7], 16, 16, RGB_YELLOW);
             else
-                BlendPalette(sprite->data[7], 0x10, 0, RGB_YELLOW);
+                BlendPalette(sprite->data[7], 16, 0, RGB_YELLOW);
 
             sprite->data[4] = 0;
         }
 
-        if (sUnknown_0860AA64[sprite->data[6]][1] == sprite->data[5])
+        if (sYellowFlashData[sprite->data[6]][1] == sprite->data[5])
         {
             sprite->data[4] = 1;
             sprite->data[5] = 0;
@@ -2535,155 +2508,155 @@ static void pokemonanimfunc_2C(struct Sprite *sprite)
     }
 }
 
-static void sub_81814D4(struct Sprite *sprite)
+static void SwingConcave(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
 
-    sub_817F70C(sprite);
-    if (sprite->data[2] > sUnknown_03001240[sprite->data[0]].field_8)
+    TryFlipX(sprite);
+    if (sprite->data[2] > sAnims[sprite->data[0]].data)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        if (sUnknown_03001240[sprite->data[0]].field_4 > 1)
+        sprite->x2 = 0;
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sUnknown_03001240[sprite->data[0]].field_4--;
+            sAnims[sprite->data[0]].runs--;
             sprite->data[2] = 0;
         }
         else
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / sUnknown_03001240[sprite->data[0]].field_8;
-        sprite->pos2.x = -(Sin(index, 10));
+        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
+        sprite->x2 = -(Sin(index, 10));
         HandleSetAffineData(sprite, 256, 256, Sin(index, 3276));
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_2D(struct Sprite *sprite)
+static void Anim_SwingConcave_FastShort(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_8 = 50;
-    sub_81814D4(sprite);
-    sprite->callback = sub_81814D4;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].data = 50;
+    SwingConcave(sprite);
+    sprite->callback = SwingConcave;
 }
 
-static void sub_81815D4(struct Sprite *sprite)
+static void SwingConvex(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
 
-    sub_817F70C(sprite);
-    if (sprite->data[2] > sUnknown_03001240[sprite->data[0]].field_8)
+    TryFlipX(sprite);
+    if (sprite->data[2] > sAnims[sprite->data[0]].data)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        if (sUnknown_03001240[sprite->data[0]].field_4 > 1)
+        sprite->x2 = 0;
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sUnknown_03001240[sprite->data[0]].field_4--;
+            sAnims[sprite->data[0]].runs--;
             sprite->data[2] = 0;
         }
         else
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / sUnknown_03001240[sprite->data[0]].field_8;
-        sprite->pos2.x = -(Sin(index, 10));
+        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
+        sprite->x2 = -(Sin(index, 10));
         HandleSetAffineData(sprite, 256, 256, -(Sin(index, 3276)));
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_2E(struct Sprite *sprite)
+static void Anim_SwingConvex_FastShort(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_8 = 50;
-    sub_81815D4(sprite);
-    sprite->callback = sub_81815D4;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].data = 50;
+    SwingConvex(sprite);
+    sprite->callback = SwingConvex;
 }
 
-static void sub_8181708(struct Sprite *sprite);
-static void sub_8181770(struct Sprite *sprite);
-static void sub_8181794(struct Sprite *sprite);
+static void RotateUpSlamDown_0(struct Sprite *sprite);
+static void RotateUpSlamDown_1(struct Sprite *sprite);
+static void RotateUpSlamDown_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_2F(struct Sprite *sprite)
+static void Anim_RotateUpSlamDown(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[6] = -(14 * sprite->centerToCornerVecX / 10);
     sprite->data[7] = 128;
-    sprite->callback = sub_8181708;
+    sprite->callback = RotateUpSlamDown_0;
 }
 
-static void sub_8181708(struct Sprite *sprite)
+static void RotateUpSlamDown_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[7]--;
-    sprite->pos2.x = Cos(sprite->data[7], sprite->data[6]) + sprite->data[6];
+    sprite->x2 = sprite->data[6] + Cos(sprite->data[7], sprite->data[6]);
 
-    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6] += 0)); // dummy += 0 is needed to match
+    sprite->y2 = -(Sin(sprite->data[7], sprite->data[6]));
 
     HandleSetAffineData(sprite, 256, 256, (sprite->data[7] - 128) << 8);
     if (sprite->data[7] <= 120)
     {
         sprite->data[7] = 120;
         sprite->data[3] = 0;
-        sprite->callback = sub_8181770;
+        sprite->callback = RotateUpSlamDown_1;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181770(struct Sprite *sprite)
+static void RotateUpSlamDown_1(struct Sprite *sprite)
 {
     if (sprite->data[3] == 20)
     {
-        sprite->callback = sub_8181794;
+        sprite->callback = RotateUpSlamDown_2;
         sprite->data[3] = 0;
     }
 
     sprite->data[3]++;
 }
 
-static void sub_8181794(struct Sprite *sprite)
+static void RotateUpSlamDown_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[7] += 2;
-    sprite->pos2.x = Cos(sprite->data[7], sprite->data[6]) + sprite->data[6];
+    sprite->x2 = sprite->data[6] + Cos(sprite->data[7], sprite->data[6]);
 
-    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6] += 0)); // dummy += 0 is needed to match
+    sprite->y2 = -(Sin(sprite->data[7], sprite->data[6]));
 
     HandleSetAffineData(sprite, 256, 256, (sprite->data[7] - 128) << 8);
     if (sprite->data[7] >= 128)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
         sprite->data[2] = 0;
-        sub_817F77C(sprite);
-        sprite->callback = pokemonanimfunc_10;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = Anim_VerticalShake;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181810(struct Sprite *sprite)
+static void DeepVerticalSquishBounce(struct Sprite *sprite)
 {
-    if (sUnknown_03001240[sprite->data[0]].field_0 != 0)
+    if (sAnims[sprite->data[0]].delay != 0)
     {
-        sUnknown_03001240[sprite->data[0]].field_0--;
+        sAnims[sprite->data[0]].delay--;
     }
     else
     {
@@ -2698,7 +2671,7 @@ static void sub_8181810(struct Sprite *sprite)
         if (sprite->data[5] == 0)
         {
             sprite->data[7] = Sin(sprite->data[4], 256);
-            sprite->pos2.y = Sin(sprite->data[4], 16);
+            sprite->y2 = Sin(sprite->data[4], 16);
             sprite->data[6] = Sin(sprite->data[4], 32);
             HandleSetAffineData(sprite, 256 - sprite->data[6], 256 + sprite->data[7], 0);
             if (sprite->data[4] == 128)
@@ -2710,126 +2683,126 @@ static void sub_8181810(struct Sprite *sprite)
         else if (sprite->data[5] == 1)
         {
             sprite->data[7] = Sin(sprite->data[4], 32);
-            sprite->pos2.y = -(Sin(sprite->data[4], 8));
+            sprite->y2 = -(Sin(sprite->data[4], 8));
             sprite->data[6] = Sin(sprite->data[4], 128);
             HandleSetAffineData(sprite, 256 + sprite->data[6], 256 - sprite->data[7], 0);
             if (sprite->data[4] == 128)
             {
-                if (sUnknown_03001240[sprite->data[0]].field_4 > 1)
+                if (sAnims[sprite->data[0]].runs > 1)
                 {
-                    sUnknown_03001240[sprite->data[0]].field_4--;
-                    sUnknown_03001240[sprite->data[0]].field_0 = 10;
+                    sAnims[sprite->data[0]].runs--;
+                    sAnims[sprite->data[0]].delay = 10;
                     sprite->data[4] = 0;
                     sprite->data[5] = 0;
                 }
                 else
                 {
                     HandleSetAffineData(sprite, 256, 256, 0);
-                    sub_817F77C(sprite);
-                    sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+                    ResetSpriteAfterAnim(sprite);
+                    sprite->callback = WaitAnimEnd;
                 }
             }
         }
 
-        sprite->data[4] += sUnknown_03001240[sprite->data[0]].field_6;
+        sprite->data[4] += sAnims[sprite->data[0]].rotation;
     }
 }
 
-static void pokemonanimfunc_30(struct Sprite *sprite)
+static void Anim_DeepVerticalSquishBounce(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_6 = 4;
-    sub_8181810(sprite);
-    sprite->callback = sub_8181810;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].rotation = 4;
+    DeepVerticalSquishBounce(sprite);
+    sprite->callback = DeepVerticalSquishBounce;
 }
 
-static void pokemonanimfunc_31(struct Sprite *sprite)
+static void Anim_HorizontalJumps(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (counter > 512)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
         switch (sprite->data[2] / 128)
         {
         case 0:
-            sprite->pos2.x = -(counter % 128 * 8) / 128;
+            sprite->x2 = -(counter % 128 * 8) / 128;
             break;
         case 1:
-            sprite->pos2.x = (counter % 128 / 16) - 8;
+            sprite->x2 = (counter % 128 / 16) - 8;
             break;
         case 2:
-            sprite->pos2.x = (counter % 128 / 16);
+            sprite->x2 = (counter % 128 / 16);
             break;
         case 3:
-            sprite->pos2.x = -(counter % 128 * 8) / 128 + 8;
+            sprite->x2 = -(counter % 128 * 8) / 128 + 8;
             break;
         }
 
-        sprite->pos2.y = -(Sin(counter % 128, 8));
+        sprite->y2 = -(Sin(counter % 128, 8));
     }
 
     sprite->data[2] += 12;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181ABC(struct Sprite *sprite);
-static void sub_8181B4C(struct Sprite *sprite);
-static void sub_8181C2C(struct Sprite *sprite);
+static void HorizontalJumpsVerticalStretch_0(struct Sprite *sprite);
+static void HorizontalJumpsVerticalStretch_1(struct Sprite *sprite);
+static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_32(struct Sprite *sprite)
+static void Anim_HorizontalJumpsVerticalStretch(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_8 = -1;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].data = -1;
     HandleStartAffineAnim(sprite);
     sprite->data[3] = 0;
-    sub_8181ABC(sprite);
-    sprite->callback = sub_8181ABC;
+    HorizontalJumpsVerticalStretch_0(sprite);
+    sprite->callback = HorizontalJumpsVerticalStretch_0;
 }
 
-static void sub_8181ABC(struct Sprite *sprite)
+static void HorizontalJumpsVerticalStretch_0(struct Sprite *sprite)
 {
-    if (sUnknown_03001240[sprite->data[0]].field_0 != 0)
+    if (sAnims[sprite->data[0]].delay != 0)
     {
-        sUnknown_03001240[sprite->data[0]].field_0--;
+        sAnims[sprite->data[0]].delay--;
     }
     else
     {
         s32 counter;
 
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
         counter = sprite->data[2];
         if (sprite->data[2] > 128)
         {
             sprite->data[2] = 0;
-            sprite->callback = sub_8181B4C;
+            sprite->callback = HorizontalJumpsVerticalStretch_1;
         }
         else
         {
-            s32 var = 8 * sUnknown_03001240[sprite->data[0]].field_8;
-            sprite->pos2.x = var * (counter % 128) / 128;
-            sprite->pos2.y = -(Sin(counter % 128, 8));
+            s32 var = 8 * sAnims[sprite->data[0]].data;
+            sprite->x2 = var * (counter % 128) / 128;
+            sprite->y2 = -(Sin(counter % 128, 8));
             sprite->data[2] += 12;
         }
 
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
 }
 
-static void sub_8181B4C(struct Sprite *sprite)
+static void HorizontalJumpsVerticalStretch_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 48)
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->data[2] = 0;
-        sprite->callback = sub_8181C2C;
+        sprite->callback = HorizontalJumpsVerticalStretch_2;
     }
     else
     {
@@ -2838,63 +2811,62 @@ static void sub_8181B4C(struct Sprite *sprite)
         if (sprite->data[2] >= 16 && sprite->data[2] <= 31)
         {
             sprite->data[3] += 8;
-            sprite->pos2.x -= sUnknown_03001240[sprite->data[0]].field_8;
+            sprite->x2 -= sAnims[sprite->data[0]].data;
         }
 
         yDelta = 0;
         if (yScale > 256)
             yDelta = (256 - yScale) / 8;
 
-        sprite->pos2.y = -(Sin(sprite->data[3], 20)) - yDelta;
+        sprite->y2 = -(Sin(sprite->data[3], 20)) - yDelta;
         HandleSetAffineData(sprite, 256 - Sin(sprite->data[4], 32), yScale, 0);
         sprite->data[2]++;
         sprite->data[4] += 8;
         sprite->data[4] &= 0xFF;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181C2C(struct Sprite *sprite)
+static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite)
 {
     s32 counter;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     counter = sprite->data[2];
     if (counter > 128)
     {
-        if (sUnknown_03001240[sprite->data[0]].field_4 > 1)
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sUnknown_03001240[sprite->data[0]].field_4--;
-            sUnknown_03001240[sprite->data[0]].field_0 = 10;
+            sAnims[sprite->data[0]].runs--;
+            sAnims[sprite->data[0]].delay = 10;
             sprite->data[3] = 0;
             sprite->data[2] = 0;
             sprite->data[4] = 0;
-            sprite->callback = sub_8181ABC;
+            sprite->callback = HorizontalJumpsVerticalStretch_0;
         }
         else
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
 
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
+        s32 var = sAnims[sprite->data[0]].data;
 
-        const s16 var = sUnknown_03001240[sprite->data[0]].field_8;
-
-        sprite->pos2.x = var * ((counter % 128) * 8) / 128 + 8 * -var; //Should be - 8 * var instead of + 8 * -var, but that doesn't match
-        sprite->pos2.y = -(Sin(counter % 128, 8));
+        sprite->x2 = var * ((counter % 128) * 8) / 128 + 8 * -var;
+        sprite->y2 = -(Sin(counter % 128, 8));
     }
 
     sprite->data[2] += 12;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181CE8(struct Sprite *sprite)
+static void RotateToSides(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -2902,47 +2874,47 @@ static void sub_8181CE8(struct Sprite *sprite)
         sprite->data[2]++;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[7] > 254)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        if (sUnknown_03001240[sprite->data[0]].field_4 > 1)
+        if (sAnims[sprite->data[0]].runs > 1)
         {
-            sUnknown_03001240[sprite->data[0]].field_4--;
+            sAnims[sprite->data[0]].runs--;
             sprite->data[2] = 0;
             sprite->data[7] = 0;
         }
         else
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
 
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
     else
     {
         u16 rotation;
 
-        sprite->pos2.x = -(Sin(sprite->data[7], 16));
+        sprite->x2 = -(Sin(sprite->data[7], 16));
         rotation = Sin(sprite->data[7], 32);
         HandleSetAffineData(sprite, 256, 256, rotation << 8);
-        sprite->data[7] += sUnknown_03001240[sprite->data[0]].field_6;
-        sub_817F70C(sprite);
+        sprite->data[7] += sAnims[sprite->data[0]].rotation;
+        TryFlipX(sprite);
     }
 }
 
-static void pokemonanimfunc_33(struct Sprite *sprite)
+static void Anim_RotateToSides_Fast(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
-    sUnknown_03001240[id].field_6 = 4;
-    sub_8181CE8(sprite);
-    sprite->callback = sub_8181CE8;
+    u8 id = sprite->data[0] = AddNewAnim();
+    sAnims[id].rotation = 4;
+    RotateToSides(sprite);
+    sprite->callback = RotateToSides;
 }
 
-static void pokemonanimfunc_34(struct Sprite *sprite)
+static void Anim_RotateUpToSides(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -2950,30 +2922,30 @@ static void pokemonanimfunc_34(struct Sprite *sprite)
         sprite->data[2]++;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[7] > 254)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sub_817F70C(sprite);
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
+        TryFlipX(sprite);
     }
     else
     {
         u16 rotation;
 
-        sprite->pos2.x = -(Sin(sprite->data[7], 16));
-        sprite->pos2.y = -(Sin(sprite->data[7] % 128, 16));
+        sprite->x2 = -(Sin(sprite->data[7], 16));
+        sprite->y2 = -(Sin(sprite->data[7] % 128, 16));
         rotation = Sin(sprite->data[7], 32);
         HandleSetAffineData(sprite, 256, 256, rotation << 8);
         sprite->data[7] += 8;
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
 }
 
-static void pokemonanimfunc_35(struct Sprite *sprite)
+static void Anim_FlickerIncreasing(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         sprite->data[7] = 0;
@@ -2993,28 +2965,28 @@ static void pokemonanimfunc_35(struct Sprite *sprite)
     if (sprite->data[2] > 10)
     {
         sprite->invisible = FALSE;
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
     }
 }
 
-static void sub_8181F14(struct Sprite *sprite);
-static void sub_8181F50(struct Sprite *sprite);
-static void sub_8181FC0(struct Sprite *sprite);
+static void TipHopForward_0(struct Sprite *sprite);
+static void TipHopForward_1(struct Sprite *sprite);
+static void TipHopForward_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_36(struct Sprite *sprite)
+static void Anim_TipHopForward(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[7] = 0;
-    sprite->callback = sub_8181F14;
+    sprite->callback = TipHopForward_0;
 }
 
-static void sub_8181F14(struct Sprite *sprite)
+static void TipHopForward_0(struct Sprite *sprite)
 {
     if (sprite->data[7] > 31)
     {
         sprite->data[7] = 32;
         sprite->data[2] = 0;
-        sprite->callback = sub_8181F50;
+        sprite->callback = TipHopForward_1;
     }
     else
     {
@@ -3024,45 +2996,45 @@ static void sub_8181F14(struct Sprite *sprite)
     HandleSetAffineData(sprite, 256, 256, sprite->data[7] << 8);
 }
 
-static void sub_8181F50(struct Sprite *sprite)
+static void TipHopForward_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 512)
     {
-        sprite->callback = sub_8181FC0;
+        sprite->callback = TipHopForward_2;
         sprite->data[6] = 0;
     }
     else
     {
-        sprite->pos2.x = -(sprite->data[2] * 16) / 512;
-        sprite->pos2.y = -(Sin(sprite->data[2] % 128, 4));
+        sprite->x2 = -(sprite->data[2] * 16) / 512;
+        sprite->y2 = -(Sin(sprite->data[2] % 128, 4));
         sprite->data[2] += 12;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8181FC0(struct Sprite *sprite)
+static void TipHopForward_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[7] -= 2;
     if (sprite->data[7] < 0)
     {
         sprite->data[7] = 0;
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
-        sprite->pos2.x = -(Sin(sprite->data[7] * 2, 16));
+        sprite->x2 = -(Sin(sprite->data[7] * 2, 16));
     }
 
     HandleSetAffineData(sprite, 256, 256, sprite->data[7] << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_37(struct Sprite *sprite)
+static void Anim_PivotShake(struct Sprite *sprite)
 {
     u16 rotation;
 
@@ -3073,93 +3045,93 @@ static void pokemonanimfunc_37(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[7] > 255)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[7] = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         sprite->data[7] += 16;
-        sprite->pos2.x = -(Sin(sprite->data[7] % 128, 8));
-        sprite->pos2.y = -(Sin(sprite->data[7] % 128, 8));
+        sprite->x2 = -(Sin(sprite->data[7] % 128, 8));
+        sprite->y2 = -(Sin(sprite->data[7] % 128, 8));
     }
 
     rotation = Sin(sprite->data[7] % 128, 16);
     HandleSetAffineData(sprite, 256, 256, rotation << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_81820FC(struct Sprite *sprite);
-static void sub_818216C(struct Sprite *sprite);
-static void sub_81821CC(struct Sprite *sprite);
-static void sub_8182248(struct Sprite *sprite);
+static void TipAndShake_0(struct Sprite *sprite);
+static void TipAndShake_1(struct Sprite *sprite);
+static void TipAndShake_2(struct Sprite *sprite);
+static void TipAndShake_3(struct Sprite *sprite);
 
-static void pokemonanimfunc_38(struct Sprite *sprite)
+static void Anim_TipAndShake(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[7] = 0;
     sprite->data[4] = 0;
-    sprite->callback = sub_81820FC;
+    sprite->callback = TipAndShake_0;
 }
 
-static void sub_81820FC(struct Sprite *sprite)
+static void TipAndShake_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[7] > 24)
     {
         if (++sprite->data[4] > 4)
         {
             sprite->data[4] = 0;
-            sprite->callback = sub_818216C;
+            sprite->callback = TipAndShake_1;
         }
     }
     else
     {
         sprite->data[7] += 2;
-        sprite->pos2.x = Sin(sprite->data[7], 8);
-        sprite->pos2.y = -(Sin(sprite->data[7], 8));
+        sprite->x2 = Sin(sprite->data[7], 8);
+        sprite->y2 = -(Sin(sprite->data[7], 8));
     }
 
     HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_818216C(struct Sprite *sprite)
+static void TipAndShake_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[7] > 32)
     {
         sprite->data[6] = 1;
-        sprite->callback = sub_81821CC;
+        sprite->callback = TipAndShake_2;
     }
     else
     {
         sprite->data[7] += 2;
-        sprite->pos2.x = Sin(sprite->data[7], 8);
-        sprite->pos2.y = -(Sin(sprite->data[7], 8));
+        sprite->x2 = Sin(sprite->data[7], 8);
+        sprite->y2 = -(Sin(sprite->data[7], 8));
     }
 
     HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_81821CC(struct Sprite *sprite)
+static void TipAndShake_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     sprite->data[7] += (sprite->data[6] * 4);
     if (sprite->data[5] > 9)
     {
         sprite->data[7] = 32;
-        sprite->callback = sub_8182248;
+        sprite->callback = TipAndShake_3;
     }
 
-    sprite->pos2.x = Sin(sprite->data[7], 8);
-    sprite->pos2.y = -(Sin(sprite->data[7], 8));
+    sprite->x2 = Sin(sprite->data[7], 8);
+    sprite->y2 = -(Sin(sprite->data[7], 8));
     if (sprite->data[7] <= 28 || sprite->data[7] >= 36)
     {
         sprite->data[6] *= -1;
@@ -3167,36 +3139,36 @@ static void sub_81821CC(struct Sprite *sprite)
     }
 
     HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8182248(struct Sprite *sprite)
+static void TipAndShake_3(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[7] <= 0)
     {
         sprite->data[7] = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         sprite->data[7] -= 2;
-        sprite->pos2.x = Sin(sprite->data[7], 8);
-        sprite->pos2.y = -(Sin(sprite->data[7], 8));
+        sprite->x2 = Sin(sprite->data[7], 8);
+        sprite->y2 = -(Sin(sprite->data[7], 8));
     }
 
     HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_39(struct Sprite *sprite)
+static void Anim_VibrateToCorners(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 40)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
@@ -3208,23 +3180,23 @@ static void pokemonanimfunc_39(struct Sprite *sprite)
 
         if ((sprite->data[2] % 4) / 2 == 0)
         {
-            sprite->pos2.x = Sin((sprite->data[2] * 128 / 40) % 256, 16) * sign;
-            sprite->pos2.y = -(sprite->pos2.x);
+            sprite->x2 = Sin((sprite->data[2] * 128 / 40) % 256, 16) * sign;
+            sprite->y2 = -(sprite->x2);
         }
         else
         {
-            sprite->pos2.x = -(Sin((sprite->data[2] * 128 / 40) % 256, 16)) * sign;
-            sprite->pos2.y = sprite->pos2.x;
+            sprite->x2 = -(Sin((sprite->data[2] * 128 / 40) % 256, 16)) * sign;
+            sprite->y2 = sprite->x2;
         }
     }
 
     sprite->data[2]++;
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_3A(struct Sprite *sprite)
+static void Anim_GrowInStages(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
@@ -3254,8 +3226,8 @@ static void pokemonanimfunc_3A(struct Sprite *sprite)
             {
                 sprite->data[7] = 64;
                 HandleSetAffineData(sprite, 256, 256, 0);
-                sub_817F77C(sprite);
-                sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+                ResetSpriteAfterAnim(sprite);
+                sprite->callback = WaitAnimEnd;
             }
             var = Cos(sprite->data[7], 64);
         }
@@ -3287,10 +3259,10 @@ static void pokemonanimfunc_3A(struct Sprite *sprite)
         HandleSetAffineData(sprite, 256 - var, 256 - var, 0);
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_3B(struct Sprite *sprite)
+static void Anim_VerticalSpring(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -3301,23 +3273,23 @@ static void pokemonanimfunc_3B(struct Sprite *sprite)
 
     if (sprite->data[7] > 512)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 yScale;
 
-        sprite->pos2.y = Sin(sprite->data[7] % 256, 8);
+        sprite->y2 = Sin(sprite->data[7] % 256, 8);
         sprite->data[7] += 8;
         yScale = Sin(sprite->data[7] % 128, 96);
         HandleSetAffineData(sprite, 256, yScale + 256, 0);
     }
 }
 
-static void pokemonanimfunc_3C(struct Sprite *sprite)
+static void Anim_VerticalRepeatedSpring(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -3328,34 +3300,34 @@ static void pokemonanimfunc_3C(struct Sprite *sprite)
 
     if (sprite->data[7] > 256)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 yScale;
 
-        sprite->pos2.y = Sin(sprite->data[7], 16);
+        sprite->y2 = Sin(sprite->data[7], 16);
         sprite->data[7] += 4;
         yScale = Sin((sprite->data[7] % 64) * 2, 128);
         HandleSetAffineData(sprite, 256, yScale + 256, 0);
     }
 }
 
-static void sub_81825F8(struct Sprite *sprite);
-static void sub_8182648(struct Sprite *sprite);
-static void sub_81826F8(struct Sprite *sprite);
+static void SpringRising_0(struct Sprite *sprite);
+static void SpringRising_1(struct Sprite *sprite);
+static void SpringRising_2(struct Sprite *sprite);
 
-static void pokemonanimfunc_3D(struct Sprite *sprite)
+static void Anim_SpringRising(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
-    sprite->callback = sub_81825F8;
+    sprite->callback = SpringRising_0;
     sprite->data[7] = 0;
 }
 
-static void sub_81825F8(struct Sprite *sprite)
+static void SpringRising_0(struct Sprite *sprite)
 {
     s16 yScale;
 
@@ -3364,7 +3336,7 @@ static void sub_81825F8(struct Sprite *sprite)
     {
         sprite->data[7] = 0;
         sprite->data[6] = 0;
-        sprite->callback = sub_8182648;
+        sprite->callback = SpringRising_1;
         yScale = Sin(64, 128); // 128 * 1 = 128
     }
     else
@@ -3375,7 +3347,7 @@ static void sub_81825F8(struct Sprite *sprite)
     HandleSetAffineData(sprite, 256, 256 + yScale, 0);
 }
 
-static void sub_8182648(struct Sprite *sprite)
+static void SpringRising_1(struct Sprite *sprite)
 {
     s16 yScale;
 
@@ -3390,7 +3362,7 @@ static void sub_8182648(struct Sprite *sprite)
     {
         s16 sign, index;
 
-        sprite->pos2.y = -(sprite->data[6] * 4) - Sin(sprite->data[7], 8);
+        sprite->y2 = -(sprite->data[6] * 4) - Sin(sprite->data[7], 8);
         if (sprite->data[7] > 63)
         {
             sign = -1;
@@ -3409,49 +3381,49 @@ static void sub_8182648(struct Sprite *sprite)
     if (sprite->data[6] == 3)
     {
         sprite->data[7] = 0;
-        sprite->callback = sub_81826F8;
+        sprite->callback = SpringRising_2;
     }
 }
 
-static void sub_81826F8(struct Sprite *sprite)
+static void SpringRising_2(struct Sprite *sprite)
 {
     s16 yScale;
 
     sprite->data[7] += 8;
     yScale = Cos(sprite->data[7], 128);
-    sprite->pos2.y = -(Cos(sprite->data[7], 12));
+    sprite->y2 = -(Cos(sprite->data[7], 12));
     if (sprite->data[7] > 63)
     {
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
     }
 
     HandleSetAffineData(sprite, 256, 256 + yScale, 0);
 }
 
-static void sub_8182764(struct Sprite *sprite)
+static void HorizontalSpring(struct Sprite *sprite)
 {
     if (sprite->data[7] > sprite->data[5])
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
         HandleSetAffineData(sprite, 256, 256, 0);
     }
     else
     {
         s16 xScale;
 
-        sprite->pos2.x = Sin(sprite->data[7] % 256, sprite->data[4]);
+        sprite->x2 = Sin(sprite->data[7] % 256, sprite->data[4]);
         sprite->data[7] += sprite->data[6];
         xScale = Sin(sprite->data[7] % 128, 96);
         HandleSetAffineData(sprite, 256 + xScale, 256, 0);
     }
 }
 
-static void pokemonanimfunc_3E(struct Sprite *sprite)
+static void Anim_HorizontalSpring(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -3463,30 +3435,30 @@ static void pokemonanimfunc_3E(struct Sprite *sprite)
         sprite->data[4] = 8;
     }
 
-    sub_8182764(sprite);
+    HorizontalSpring(sprite);
 }
 
-static void sub_8182830(struct Sprite *sprite)
+static void HorizontalRepeatedSpring(struct Sprite *sprite)
 {
     if (sprite->data[7] > sprite->data[5])
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
         HandleSetAffineData(sprite, 256, 256, 0);
     }
     else
     {
         s16 xScale;
 
-        sprite->pos2.x = Sin(sprite->data[7] % 256, sprite->data[4]);
+        sprite->x2 = Sin(sprite->data[7] % 256, sprite->data[4]);
         sprite->data[7] += sprite->data[6];
         xScale = Sin((sprite->data[7] % 64) * 2, 128);
         HandleSetAffineData(sprite, 256 + xScale, 256, 0);
     }
 }
 
-static void pokemonanimfunc_3F(struct Sprite *sprite)
+static void Anim_HorizontalRepeatedSpring_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -3498,12 +3470,12 @@ static void pokemonanimfunc_3F(struct Sprite *sprite)
         sprite->data[4] = 16;
     }
 
-    sub_8182830(sprite);
+    HorizontalRepeatedSpring(sprite);
 }
 
-static void pokemonanimfunc_40(struct Sprite *sprite)
+static void Anim_HorizontalSlideShrink(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
@@ -3513,27 +3485,27 @@ static void pokemonanimfunc_40(struct Sprite *sprite)
 
     if (sprite->data[7] > 512)
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 scale;
 
-        sprite->pos2.x = Sin(sprite->data[7] % 256, 8);
+        sprite->x2 = Sin(sprite->data[7] % 256, 8);
         sprite->data[7] += 8;
         scale = Sin(sprite->data[7] % 128, 96);
         HandleSetAffineData(sprite, 256 + scale, 256 + scale, 0);
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_41(struct Sprite *sprite)
+static void Anim_LungeGrow(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
@@ -3543,27 +3515,27 @@ static void pokemonanimfunc_41(struct Sprite *sprite)
 
     if (sprite->data[7] > 512)
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 scale;
 
-        sprite->pos2.x = -(Sin((sprite->data[7] % 256) / 2, 16));
+        sprite->x2 = -(Sin((sprite->data[7] % 256) / 2, 16));
         sprite->data[7] += 8;
         scale = -(Sin((sprite->data[7] % 256) / 2, 64));
         HandleSetAffineData(sprite, 256 + scale, 256 + scale, 0);
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_42(struct Sprite *sprite)
+static void Anim_CircleIntoBackground(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
@@ -3573,30 +3545,30 @@ static void pokemonanimfunc_42(struct Sprite *sprite)
 
     if (sprite->data[7] > 512)
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         s16 scale;
 
-        sprite->pos2.x = -(Sin(sprite->data[7] % 256 , 8));
+        sprite->x2 = -(Sin(sprite->data[7] % 256 , 8));
         sprite->data[7] += 8;
         scale = Sin((sprite->data[7] % 256) / 2, 96);
         HandleSetAffineData(sprite, 256 + scale, 256 + scale, 0);
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_43(struct Sprite *sprite)
+static void Anim_RapidHorizontalHops(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 2048)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
         sprite->data[6] = 0;
     }
     else
@@ -3605,29 +3577,29 @@ static void pokemonanimfunc_43(struct Sprite *sprite)
         switch (caseVar)
         {
         case 0:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512;
             break;
         case 1:
-            sprite->pos2.x = (sprite->data[2] % 512 / 32) - 16;
+            sprite->x2 = (sprite->data[2] % 512 / 32) - 16;
             break;
         case 2:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32;
+            sprite->x2 = (sprite->data[2] % 512) / 32;
             break;
         case 3:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512 + 16;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512 + 16;
             break;
         }
 
-        sprite->pos2.y = -(Sin(sprite->data[2] % 128, 4));
+        sprite->y2 = -(Sin(sprite->data[2] % 128, 4));
         sprite->data[2] += 24;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_44(struct Sprite *sprite)
+static void Anim_FourPetal(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         sprite->data[6] = 0;
@@ -3656,83 +3628,83 @@ static void pokemonanimfunc_44(struct Sprite *sprite)
     switch (sprite->data[6])
     {
     case 1:
-        sprite->pos2.x = -(Cos(sprite->data[7], 8));
-        sprite->pos2.y = Sin(sprite->data[7], 8) - 8;
+        sprite->x2 = -(Cos(sprite->data[7], 8));
+        sprite->y2 = Sin(sprite->data[7], 8) - 8;
         break;
     case 2:
-        sprite->pos2.x = Sin(sprite->data[7] + 128, 8) + 8;
-        sprite->pos2.y = -(Cos(sprite->data[7], 8));
+        sprite->x2 = Sin(sprite->data[7] + 128, 8) + 8;
+        sprite->y2 = -(Cos(sprite->data[7], 8));
         break;
     case 3:
-        sprite->pos2.x = Cos(sprite->data[7], 8);
-        sprite->pos2.y = Sin(sprite->data[7] + 128, 8) + 8;
+        sprite->x2 = Cos(sprite->data[7], 8);
+        sprite->y2 = Sin(sprite->data[7] + 128, 8) + 8;
         break;
     case 0:
     case 4:
-        sprite->pos2.x = Sin(sprite->data[7], 8) - 8;
-        sprite->pos2.y = Cos(sprite->data[7], 8);
+        sprite->x2 = Sin(sprite->data[7], 8) - 8;
+        sprite->y2 = Cos(sprite->data[7], 8);
         break;
     default:
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
+        sprite->callback = WaitAnimEnd;
         break;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_45(struct Sprite *sprite)
+static void Anim_VerticalSquishBounce_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 32;
-    sub_8180714(sprite);
-    sprite->callback = sub_8180714;
+    VerticalSquishBounce(sprite);
+    sprite->callback = VerticalSquishBounce;
 }
 
-static void pokemonanimfunc_46(struct Sprite *sprite)
+static void Anim_HorizontalSlide_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 80;
-    sub_817F8FC(sprite);
-    sprite->callback = sub_817F8FC;
+    HorizontalSlide(sprite);
+    sprite->callback = HorizontalSlide;
 }
 
-static void pokemonanimfunc_47(struct Sprite *sprite)
+static void Anim_VerticalSlide_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 80;
-    sub_817F978(sprite);
-    sprite->callback = sub_817F978;
+    VerticalSlide(sprite);
+    sprite->callback = VerticalSlide;
 }
 
-static void pokemonanimfunc_48(struct Sprite *sprite)
+static void Anim_BounceRotateToSides_Small(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 2048;
-    sUnknown_03001240[id].field_8 = sprite->data[6];
-    sub_8180900(sprite);
-    sprite->callback = sub_8180900;
+    sAnims[id].rotation = 2048;
+    sAnims[id].data = sprite->data[6];
+    BounceRotateToSides(sprite);
+    sprite->callback = BounceRotateToSides;
 }
 
-static void pokemonanimfunc_49(struct Sprite *sprite)
-{
-    sprite->data[6] = 1;
-    pokemonanimfunc_05(sprite);
-}
-
-static void pokemonanimfunc_4A(struct Sprite *sprite)
+static void Anim_BounceRotateToSides_Slow(struct Sprite *sprite)
 {
     sprite->data[6] = 1;
-    pokemonanimfunc_48(sprite);
+    Anim_BounceRotateToSides(sprite);
 }
 
-static void pokemonanimfunc_4B(struct Sprite *sprite)
+static void Anim_BounceRotateToSides_SmallSlow(struct Sprite *sprite)
+{
+    sprite->data[6] = 1;
+    Anim_BounceRotateToSides_Small(sprite);
+}
+
+static void Anim_ZigzagSlow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
         sprite->data[0] = 0;
 
     if (sprite->data[0] <= 0)
     {
-        sub_817FC20(sprite);
+        Zigzag(sprite);
         sprite->data[0] = 1;
     }
     else
@@ -3741,201 +3713,202 @@ static void pokemonanimfunc_4B(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_4C(struct Sprite *sprite)
+static void Anim_HorizontalShake_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 30;
     sprite->data[7] = 3;
-    sub_817FCDC(sprite);
-    sprite->callback = sub_817FCDC;
+    HorizontalShake(sprite);
+    sprite->callback = HorizontalShake;
 }
 
-static void pokemonanimfunc_4D(struct Sprite *sprite)
+static void Anim_VertialShake_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 30;
-    sub_817FD44(sprite);
-    sprite->callback = sub_817FD44;
+    VerticalShake(sprite);
+    sprite->callback = VerticalShake;
 }
 
-static void pokemonanimfunc_4E(struct Sprite *sprite)
+static void Anim_Twist_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 1024;
-    sUnknown_03001240[id].field_0 = 0;
-    sUnknown_03001240[id].field_4 = 2;
-    sub_817FE30(sprite);
-    sprite->callback = sub_817FE30;
+    sAnims[id].rotation = 1024;
+    sAnims[id].delay = 0;
+    sAnims[id].runs = 2;
+    Twist(sprite);
+    sprite->callback = Twist;
 }
 
-static void pokemonanimfunc_4F(struct Sprite *sprite)
+static void Anim_CircleCounterclockwise_Slow(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 512;
-    sUnknown_03001240[id].field_8 = 3;
-    sUnknown_03001240[id].field_2 = 12;
-    sub_817FFF0(sprite);
-    sprite->callback = sub_817FFF0;
+    sAnims[id].rotation = 512;
+    sAnims[id].data = 3;
+    sAnims[id].speed = 12;
+    CircleCounterclockwise(sprite);
+    sprite->callback = CircleCounterclockwise;
 }
 
-static void pokemonanimfunc_50(struct Sprite *sprite)
+static void Anim_VerticalShakeTwice_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 24;
-    sub_818031C(sprite);
-    sprite->callback = sub_818031C;
+    VerticalShakeTwice(sprite);
+    sprite->callback = VerticalShakeTwice;
 }
 
-static void pokemonanimfunc_51(struct Sprite *sprite)
+static void Anim_VerticalSlideWobble_Small(struct Sprite *sprite)
 {
     sprite->data[0] = 5;
-    sub_81804F8(sprite);
-    sprite->callback = sub_81804F8;
+    VerticalSlideWobble(sprite);
+    sprite->callback = VerticalSlideWobble;
 }
 
-static void pokemonanimfunc_52(struct Sprite *sprite)
+static void Anim_VerticalJumps_Small(struct Sprite *sprite)
 {
     sprite->data[0] = 3;
-    sub_817F9F4(sprite);
-    sprite->callback = sub_817F9F4;
+    VerticalJumps(sprite);
+    sprite->callback = VerticalJumps;
 }
 
-static void pokemonanimfunc_53(struct Sprite *sprite)
+static void Anim_Spin(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_0 = 60;
-    sUnknown_03001240[id].field_8 = 30;
-    sub_817FF3C(sprite);
-    sprite->callback = sub_817FF3C;
+    sAnims[id].delay = 60;
+    sAnims[id].data = 30;
+    Spin(sprite);
+    sprite->callback = Spin;
 }
 
-static void pokemonanimfunc_54(struct Sprite *sprite)
+static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_2 = 1;
-    sUnknown_03001240[id].field_4 = 2;
-    sub_8181214(sprite);
-    sprite->callback = sub_8181214;
+    sAnims[id].speed = 1;
+    sAnims[id].runs = 2;
+    TumblingFrontFlip(sprite);
+    sprite->callback = TumblingFrontFlip;
 }
 
-static void pokemonanimfunc_55(struct Sprite *sprite)
+static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 4;
-    sUnknown_03001240[id].field_4 = 2;
-    sub_8181810(sprite);
-    sprite->callback = sub_8181810;
+    sAnims[id].rotation = 4;
+    sAnims[id].runs = 2;
+    DeepVerticalSquishBounce(sprite);
+    sprite->callback = DeepVerticalSquishBounce;
 }
 
-static void pokemonanimfunc_56(struct Sprite *sprite)
+static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_8 = 1;
-    sUnknown_03001240[id].field_4 = 2;
+    sAnims[id].data = 1;
+    sAnims[id].runs = 2;
     HandleStartAffineAnim(sprite);
     sprite->data[3] = 0;
-    sub_8181ABC(sprite);
-    sprite->callback = sub_8181ABC;
+    HorizontalJumpsVerticalStretch_0(sprite);
+    sprite->callback = HorizontalJumpsVerticalStretch_0;
 }
 
-static void pokemonanimfunc_07(struct Sprite *sprite)
+static void Anim_RotateToSides(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 2;
-    sub_8181CE8(sprite);
-    sprite->callback = sub_8181CE8;
+    sAnims[id].rotation = 2;
+    RotateToSides(sprite);
+    sprite->callback = RotateToSides;
 }
 
-static void pokemonanimfunc_08(struct Sprite *sprite)
+static void Anim_RotateToSides_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 4;
-    sUnknown_03001240[id].field_4 = 2;
-    sub_8181CE8(sprite);
-    sprite->callback = sub_8181CE8;
+    sAnims[id].rotation = 4;
+    sAnims[id].runs = 2;
+    RotateToSides(sprite);
+    sprite->callback = RotateToSides;
 }
 
-static void pokemonanimfunc_0B(struct Sprite *sprite)
+static void Anim_SwingConcave(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_8 = 100;
-    sub_81814D4(sprite);
-    sprite->callback = sub_81814D4;
+    sAnims[id].data = 100;
+    SwingConcave(sprite);
+    sprite->callback = SwingConcave;
 }
 
-static void pokemonanimfunc_0C(struct Sprite *sprite)
+static void Anim_SwingConcave_Fast(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_8 = 50;
-    sUnknown_03001240[id].field_4 = 2;
-    sub_81814D4(sprite);
-    sprite->callback = sub_81814D4;
+    sAnims[id].data = 50;
+    sAnims[id].runs = 2;
+    SwingConcave(sprite);
+    sprite->callback = SwingConcave;
 }
 
-static void pokemonanimfunc_0D(struct Sprite *sprite)
+static void Anim_SwingConvex(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_8 = 100;
-    sub_81815D4(sprite);
-    sprite->callback = sub_81815D4;
+    sAnims[id].data = 100;
+    SwingConvex(sprite);
+    sprite->callback = SwingConvex;
 }
 
-static void pokemonanimfunc_0E(struct Sprite *sprite)
+static void Anim_SwingConvex_Fast(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_8 = 50;
-    sUnknown_03001240[id].field_4 = 2;
-    sub_81815D4(sprite);
-    sprite->callback = sub_81815D4;
+    sAnims[id].data = 50;
+    sAnims[id].runs = 2;
+    SwingConvex(sprite);
+    sprite->callback = SwingConvex;
 }
 
-static void sub_8183140(struct Sprite *sprite)
+// Very similar to VerticalShake, used by back animations only
+static void VerticalShakeBack(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
     if (counter > 2304)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = 0;
     }
     else
     {
-        sprite->pos2.y = Sin((counter + 192) % 256, sprite->data[7]) + sprite->data[7];
+        sprite->y2 = Sin((counter + 192) % 256, sprite->data[7]) + sprite->data[7];
     }
 
     sprite->data[2] += sprite->data[0];
 }
 
-static void pokemonanimfunc_57(struct Sprite *sprite)
+static void Anim_VerticalShakeBack(struct Sprite *sprite)
 {
     sprite->data[0] = 60;
     sprite->data[7] = 3;
-    sub_8183140(sprite);
-    sprite->callback = sub_8183140;
+    VerticalShakeBack(sprite);
+    sprite->callback = VerticalShakeBack;
 }
 
-static void pokemonanimfunc_58(struct Sprite *sprite)
+static void Anim_VerticalShakeBack_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 30;
     sprite->data[7] = 3;
-    sub_8183140(sprite);
-    sprite->callback = sub_8183140;
+    VerticalShakeBack(sprite);
+    sprite->callback = VerticalShakeBack;
 }
 
-static void pokemonanimfunc_59(struct Sprite *sprite)
+static void Anim_VerticalShakeHorizontalSlide_Slow(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 2048)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
         sprite->data[6] = 0;
     }
     else
@@ -3944,39 +3917,39 @@ static void pokemonanimfunc_59(struct Sprite *sprite)
         switch (divCase)
         {
         case 0:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32;
+            sprite->x2 = (sprite->data[2] % 512) / 32;
             break;
         case 2:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512;
             break;
         case 1:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512 + 16;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512 + 16;
             break;
         case 3:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32 - 16;
+            sprite->x2 = (sprite->data[2] % 512) / 32 - 16;
             break;
         }
 
-        sprite->pos2.y = Sin(sprite->data[2] % 128, 4);
+        sprite->y2 = Sin(sprite->data[2] % 128, 4);
         sprite->data[2] += 24;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_81832C8(struct Sprite *sprite)
+static void VerticalStretchBothEnds(struct Sprite *sprite)
 {
     s16 index1 = 0, index2 = 0;
 
     if (sprite->data[5] > sprite->data[6])
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->data[5] = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
         if (sprite->data[4] <= 1)
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
         else
         {
@@ -3998,7 +3971,7 @@ static void sub_81832C8(struct Sprite *sprite)
             index1 = sprite->data[7] & 0xFF;
         }
 
-        if (sprite->data[1] == 0)
+        if (!sprite->sDontFlip)
             xScale = -256 - Sin(index2, 16);
         else
             xScale = 256 + Sin(index2, 16);
@@ -4010,7 +3983,7 @@ static void sub_81832C8(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_5A(struct Sprite *sprite)
+static void Anim_VerticalStretchBothEnds_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4023,10 +3996,10 @@ static void pokemonanimfunc_5A(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_81832C8(sprite);
+    VerticalStretchBothEnds(sprite);
 }
 
-static void sub_8183418(struct Sprite *sprite)
+static void HorizontalStretchFar(struct Sprite *sprite)
 {
     s16 index1 = 0, index2;
 
@@ -4036,8 +4009,8 @@ static void sub_8183418(struct Sprite *sprite)
         HandleSetAffineData(sprite, 256, 256, 0);
         if (sprite->data[4] <= 1)
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
         else
         {
@@ -4061,7 +4034,7 @@ static void sub_8183418(struct Sprite *sprite)
 
         amplitude = sprite->data[3];
 
-        if (sprite->data[1] == 0)
+        if (!sprite->sDontFlip)
             xScale = -256 + Sin(index2, amplitude) + Sin(index1, amplitude / 5 * 2);
         else
             xScale = 256 - Sin(index2, amplitude) - Sin(index1, amplitude / 5 * 2);
@@ -4071,7 +4044,7 @@ static void sub_8183418(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_5B(struct Sprite *sprite)
+static void Anim_HorizontalStretchFar_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4084,34 +4057,33 @@ static void pokemonanimfunc_5B(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_8183418(sprite);
+    HorizontalStretchFar(sprite);
 }
 
-static void sub_8183574(struct Sprite *sprite)
+static void VerticalShakeLowTwice(struct Sprite *sprite)
 {
     u8 var6, var7;
     u8 var8 = sprite->data[2];
     u8 var9 = sprite->data[6];
-    u8 var5 = sUnknown_0860AA80[sprite->data[5]][0];
-    u8 var2 = var5;
-    if (var5 != 0xFF)
+    u8 var5 = sVerticalShakeData[sprite->data[5]][0];
+    if (var5 != (u8)-1)
         var5 = sprite->data[7];
-    else
-        var5 = 0xFF; // needed to match
 
-    var6 = sUnknown_0860AA80[sprite->data[5]][1];
+    var6 = sVerticalShakeData[sprite->data[5]][1];
     var7 = 0;
-    if (var2 != 0xFE)
+    if (sVerticalShakeData[sprite->data[5]][0] != (u8)-2)
         var7 = (var6 - var9) * var5 / var6;
+    else
+        var7 = 0;
 
-    if (var5 == 0xFF)
+    if (var5 == (u8)-1)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.y = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->y2 = 0;
     }
     else
     {
-        sprite->pos2.y = Sin((var8 + 192) % 256, var7) + var7;
+        sprite->y2 = Sin((var8 + 192) % 256, var7) + var7;
         if (var9 == var6)
         {
             sprite->data[5]++;
@@ -4125,35 +4097,36 @@ static void sub_8183574(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_5C(struct Sprite *sprite)
+// Very similar in appearance to Anim_VerticalShakeTwice (especially the fast variant), but deeper
+static void Anim_VerticalShakeLowTwice(struct Sprite *sprite)
 {
     sprite->data[0] = 40;
     sprite->data[7] = 6;
-    sub_8183574(sprite);
-    sprite->callback = sub_8183574;
+    VerticalShakeLowTwice(sprite);
+    sprite->callback = VerticalShakeLowTwice;
 }
 
-static void pokemonanimfunc_5D(struct Sprite *sprite)
+static void Anim_HorizontalShake_Fast(struct Sprite *sprite)
 {
     sprite->data[0] = 70;
     sprite->data[7] = 6;
-    sub_817FCDC(sprite);
-    sprite->callback = sub_817FCDC;
+    HorizontalShake(sprite);
+    sprite->callback = HorizontalShake;
 }
 
-static void pokemonanimfunc_5E(struct Sprite *sprite)
+static void Anim_HorizontalSlide_Fast(struct Sprite *sprite)
 {
     sprite->data[0] = 20;
-    sub_817F8FC(sprite);
-    sprite->callback = sub_817F8FC;
+    HorizontalSlide(sprite);
+    sprite->callback = HorizontalSlide;
 }
 
-static void pokemonanimfunc_5F(struct Sprite *sprite)
+static void Anim_HorizontalVibrate_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] > 40)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
@@ -4163,18 +4136,18 @@ static void pokemonanimfunc_5F(struct Sprite *sprite)
         else
             sign = -1;
 
-        sprite->pos2.x = Sin((sprite->data[2] * 128 / 40) % 256, 9) * sign;
+        sprite->x2 = Sin((sprite->data[2] * 128 / 40) % 256, 9) * sign;
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_60(struct Sprite *sprite)
+static void Anim_HorizontalVibrate_Fastest(struct Sprite *sprite)
 {
     if (sprite->data[2] > 40)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-        sprite->pos2.x = 0;
+        sprite->callback = WaitAnimEnd;
+        sprite->x2 = 0;
     }
     else
     {
@@ -4184,59 +4157,59 @@ static void pokemonanimfunc_60(struct Sprite *sprite)
         else
             sign = -1;
 
-        sprite->pos2.x = Sin((sprite->data[2] * 128 / 40) % 256, 12) * sign;
+        sprite->x2 = Sin((sprite->data[2] * 128 / 40) % 256, 12) * sign;
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_61(struct Sprite *sprite)
+static void Anim_VerticalShakeBack_Fast(struct Sprite *sprite)
 {
     sprite->data[0] = 70;
     sprite->data[7] = 6;
-    sub_8183140(sprite);
-    sprite->callback = sub_8183140;
+    VerticalShakeBack(sprite);
+    sprite->callback = VerticalShakeBack;
 }
 
-static void pokemonanimfunc_62(struct Sprite *sprite)
+static void Anim_VerticalShakeLowTwice_Slow(struct Sprite *sprite)
 {
     sprite->data[0] = 24;
     sprite->data[7] = 6;
-    sub_8183574(sprite);
-    sprite->callback = sub_8183574;
+    VerticalShakeLowTwice(sprite);
+    sprite->callback = VerticalShakeLowTwice;
 }
 
-static void pokemonanimfunc_63(struct Sprite *sprite)
+static void Anim_VerticalShakeLowTwice_Fast(struct Sprite *sprite)
 {
     sprite->data[0] = 56;
     sprite->data[7] = 9;
-    sub_8183574(sprite);
-    sprite->callback = sub_8183574;
+    VerticalShakeLowTwice(sprite);
+    sprite->callback = VerticalShakeLowTwice;
 }
 
-static void pokemonanimfunc_64(struct Sprite *sprite)
+static void Anim_CircleCounterclockwise_Long(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = sub_817F758();
+    u8 id = sprite->data[0] = AddNewAnim();
 
-    sUnknown_03001240[id].field_6 = 1024;
-    sUnknown_03001240[id].field_8 = 6;
-    sUnknown_03001240[id].field_2 = 24;
-    sub_817FFF0(sprite);
-    sprite->callback = sub_817FFF0;
+    sAnims[id].rotation = 1024;
+    sAnims[id].data = 6;
+    sAnims[id].speed = 24;
+    CircleCounterclockwise(sprite);
+    sprite->callback = CircleCounterclockwise;
 }
 
-static void sub_81837DC(struct Sprite *sprite)
+static void GrowStutter(struct Sprite *sprite)
 {
     s16 index1 = 0, index2 = 0;
     if (sprite->data[5] > sprite->data[6])
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->data[5] = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
         if (sprite->data[4] <= 1)
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
         }
         else
         {
@@ -4260,7 +4233,7 @@ static void sub_81837DC(struct Sprite *sprite)
 
         amplitude = sprite->data[3];
 
-        if (sprite->data[1] == 0)
+        if (!sprite->sDontFlip)
             xScale = Sin(index2, amplitude) + (Sin(index1, amplitude / 5 * 2) - 256);
         else
             xScale = 256 - Sin(index1, amplitude / 5 * 2) - Sin(index2, amplitude);
@@ -4271,7 +4244,7 @@ static void sub_81837DC(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_65(struct Sprite *sprite)
+static void Anim_GrowStutter_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4284,15 +4257,15 @@ static void pokemonanimfunc_65(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_81837DC(sprite);
+    GrowStutter(sprite);
 }
 
-static void pokemonanimfunc_66(struct Sprite *sprite)
+static void Anim_VerticalShakeHorizontalSlide(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 2048)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
         sprite->data[6] = 0;
     }
     else
@@ -4301,32 +4274,32 @@ static void pokemonanimfunc_66(struct Sprite *sprite)
         switch (divCase)
         {
         case 0:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32;
+            sprite->x2 = (sprite->data[2] % 512) / 32;
             break;
         case 2:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512;
             break;
         case 1:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512 + 16;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512 + 16;
             break;
         case 3:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32 - 16;
+            sprite->x2 = (sprite->data[2] % 512) / 32 - 16;
             break;
         }
 
-        sprite->pos2.y = Sin(sprite->data[2] % 128, 4);
+        sprite->y2 = Sin(sprite->data[2] % 128, 4);
         sprite->data[2] += 48;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_67(struct Sprite *sprite)
+static void Anim_VerticalShakeHorizontalSlide_Fast(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] > 2048)
     {
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->callback = WaitAnimEnd;
         sprite->data[6] = 0;
     }
     else
@@ -4335,27 +4308,27 @@ static void pokemonanimfunc_67(struct Sprite *sprite)
         switch (divCase)
         {
         case 0:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32;
+            sprite->x2 = (sprite->data[2] % 512) / 32;
             break;
         case 2:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512;
             break;
         case 1:
-            sprite->pos2.x = -(sprite->data[2] % 512 * 16) / 512 + 16;
+            sprite->x2 = -(sprite->data[2] % 512 * 16) / 512 + 16;
             break;
         case 3:
-            sprite->pos2.x = (sprite->data[2] % 512) / 32 - 16;
+            sprite->x2 = (sprite->data[2] % 512) / 32 - 16;
             break;
         }
 
-        sprite->pos2.y = Sin(sprite->data[2] % 96, 4);
+        sprite->y2 = Sin(sprite->data[2] % 96, 4);
         sprite->data[2] += 64;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static const s8 sUnknown_0860ADBE[][3] =
+static const s8 sTriangleDownData[][3] =
 {
 //   x    y   timer
     {1,   1, 12},
@@ -4364,67 +4337,67 @@ static const s8 sUnknown_0860ADBE[][3] =
     {0,  0,  0}
 };
 
-static void sub_8183B4C(struct Sprite *sprite)
+static void TriangleDown(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
         sprite->data[3] = 0;
 
-    if (sUnknown_0860ADBE[sprite->data[3]][2] / sprite->data[5] == sprite->data[2])
+    if (sTriangleDownData[sprite->data[3]][2] / sprite->data[5] == sprite->data[2])
     {
         sprite->data[3]++;
         sprite->data[2] = 0;
     }
 
-    if (sUnknown_0860ADBE[sprite->data[3]][2] / sprite->data[5] == 0)
+    if (sTriangleDownData[sprite->data[3]][2] / sprite->data[5] == 0)
     {
         if (--sprite->data[6] == 0)
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            sprite->callback = WaitAnimEnd;
         else
             sprite->data[2] = 0;
     }
     else
     {
         s32 amplitude = sprite->data[5];
-        sprite->pos2.x += (sUnknown_0860ADBE[sprite->data[3]][0] * amplitude);
-        sprite->pos2.y += (sUnknown_0860ADBE[sprite->data[3]][1] * sprite->data[5]); // what's the point of the var if you're not reusing it?
+        sprite->x2 += (sTriangleDownData[sprite->data[3]][0] * amplitude);
+        sprite->y2 += (sTriangleDownData[sprite->data[3]][1] * sprite->data[5]); // Not using amplitude here. No reason for this.
         sprite->data[2]++;
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
 }
 
-static void pokemonanimfunc_68(struct Sprite *sprite)
+static void Anim_TriangleDown_Slow(struct Sprite *sprite)
 {
     sprite->data[5] = 1;
     sprite->data[6] = 1;
-    sub_8183B4C(sprite);
-    sprite->callback = sub_8183B4C;
+    TriangleDown(sprite);
+    sprite->callback = TriangleDown;
 }
 
-static void pokemonanimfunc_69(struct Sprite *sprite)
+static void Anim_TriangleDown(struct Sprite *sprite)
 {
     sprite->data[5] = 2;
     sprite->data[6] = 1;
-    sub_8183B4C(sprite);
-    sprite->callback = sub_8183B4C;
+    TriangleDown(sprite);
+    sprite->callback = TriangleDown;
 }
 
-static void pokemonanimfunc_6A(struct Sprite *sprite)
+static void Anim_TriangleDown_Fast(struct Sprite *sprite)
 {
     sprite->data[5] = 2;
     sprite->data[6] = 2;
-    sub_8183B4C(sprite);
-    sprite->callback = sub_8183B4C;
+    TriangleDown(sprite);
+    sprite->callback = TriangleDown;
 }
 
-static void sub_8183C6C(struct Sprite *sprite)
+static void Grow(struct Sprite *sprite)
 {
     if (sprite->data[7] > 255)
     {
         if (sprite->data[5] <= 1)
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
             HandleSetAffineData(sprite, 256, 256, 0);
         }
         else
@@ -4446,9 +4419,9 @@ static void sub_8183C6C(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_6B(struct Sprite *sprite)
+static void Anim_Grow(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
@@ -4458,13 +4431,13 @@ static void pokemonanimfunc_6B(struct Sprite *sprite)
         sprite->data[5] = 1;
     }
 
-    sub_8183C6C(sprite);
-    sub_817F70C(sprite);
+    Grow(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_6C(struct Sprite *sprite)
+static void Anim_Grow_Twice(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
@@ -4474,11 +4447,11 @@ static void pokemonanimfunc_6C(struct Sprite *sprite)
         sprite->data[5] = 2;
     }
 
-    sub_8183C6C(sprite);
-    sub_817F70C(sprite);
+    Grow(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_6D(struct Sprite *sprite)
+static void Anim_HorizontalSpring_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4490,10 +4463,10 @@ static void pokemonanimfunc_6D(struct Sprite *sprite)
         sprite->data[4] = 16;
     }
 
-    sub_8182764(sprite);
+    HorizontalSpring(sprite);
 }
 
-static void pokemonanimfunc_6E(struct Sprite *sprite)
+static void Anim_HorizontalSpring_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4505,10 +4478,10 @@ static void pokemonanimfunc_6E(struct Sprite *sprite)
         sprite->data[4] = 16;
     }
 
-    sub_8182764(sprite);
+    HorizontalSpring(sprite);
 }
 
-static void pokemonanimfunc_6F(struct Sprite *sprite)
+static void Anim_HorizontalRepeatedSpring_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4520,10 +4493,10 @@ static void pokemonanimfunc_6F(struct Sprite *sprite)
         sprite->data[4] = 16;
     }
 
-    sub_8182830(sprite);
+    HorizontalRepeatedSpring(sprite);
 }
 
-static void pokemonanimfunc_70(struct Sprite *sprite)
+static void Anim_HorizontalRepeatedSpring(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4535,10 +4508,10 @@ static void pokemonanimfunc_70(struct Sprite *sprite)
         sprite->data[4] = 8;
     }
 
-    sub_8182830(sprite);
+    HorizontalRepeatedSpring(sprite);
 }
 
-static void pokemonanimfunc_71(struct Sprite *sprite)
+static void Anim_ShrinkGrow_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4547,10 +4520,10 @@ static void pokemonanimfunc_71(struct Sprite *sprite)
         sprite->data[6] = 8;
     }
 
-    sub_8180828(sprite);
+    ShrinkGrow(sprite);
 }
 
-static void pokemonanimfunc_72(struct Sprite *sprite)
+static void Anim_ShrinkGrow_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4559,10 +4532,10 @@ static void pokemonanimfunc_72(struct Sprite *sprite)
         sprite->data[6] = 4;
     }
 
-    sub_8180828(sprite);
+    ShrinkGrow(sprite);
 }
 
-static void pokemonanimfunc_73(struct Sprite *sprite)
+static void Anim_VerticalStretchBothEnds(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4574,10 +4547,10 @@ static void pokemonanimfunc_73(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_81832C8(sprite);
+    VerticalStretchBothEnds(sprite);
 }
 
-static void pokemonanimfunc_74(struct Sprite *sprite)
+static void Anim_VerticalStretchBothEnds_Twice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4589,42 +4562,10 @@ static void pokemonanimfunc_74(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_81832C8(sprite);
+    VerticalStretchBothEnds(sprite);
 }
 
-static void pokemonanimfunc_75(struct Sprite *sprite)
-{
-    if (sprite->data[2] == 0)
-    {
-        sprite->data[2] = 1;
-        HandleStartAffineAnim(sprite);
-        sprite->data[4] = 2;
-        sprite->data[6] = 20;
-        sprite->data[3] = 70;
-        sprite->data[5] = 0;
-        sprite->data[7] = 0;
-    }
-
-    sub_8183418(sprite);
-}
-
-static void pokemonanimfunc_76(struct Sprite *sprite)
-{
-    if (sprite->data[2] == 0)
-    {
-        sprite->data[2] = 1;
-        HandleStartAffineAnim(sprite);
-        sprite->data[4] = 1;
-        sprite->data[6] = 30;
-        sprite->data[3] = 60;
-        sprite->data[5] = 0;
-        sprite->data[7] = 0;
-    }
-
-    sub_8183418(sprite);
-}
-
-static void pokemonanimfunc_77(struct Sprite *sprite)
+static void Anim_HorizontalStretchFar_Twice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4637,10 +4578,10 @@ static void pokemonanimfunc_77(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_81837DC(sprite);
+    HorizontalStretchFar(sprite);
 }
 
-static void pokemonanimfunc_78(struct Sprite *sprite)
+static void Anim_HorizontalStretchFar(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4653,18 +4594,50 @@ static void pokemonanimfunc_78(struct Sprite *sprite)
         sprite->data[7] = 0;
     }
 
-    sub_81837DC(sprite);
+    HorizontalStretchFar(sprite);
 }
 
-static void sub_8183FA8(struct Sprite *sprite)
+static void Anim_GrowStutter_Twice(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        sprite->data[2] = 1;
+        HandleStartAffineAnim(sprite);
+        sprite->data[4] = 2;
+        sprite->data[6] = 20;
+        sprite->data[3] = 70;
+        sprite->data[5] = 0;
+        sprite->data[7] = 0;
+    }
+
+    GrowStutter(sprite);
+}
+
+static void Anim_GrowStutter(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        sprite->data[2] = 1;
+        HandleStartAffineAnim(sprite);
+        sprite->data[4] = 1;
+        sprite->data[6] = 30;
+        sprite->data[3] = 60;
+        sprite->data[5] = 0;
+        sprite->data[7] = 0;
+    }
+
+    GrowStutter(sprite);
+}
+
+static void ConcaveArc(struct Sprite *sprite)
 {
     if (sprite->data[7] > 255)
     {
         if (sprite->data[6] <= 1)
         {
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
+            sprite->callback = WaitAnimEnd;
+            sprite->x2 = 0;
+            sprite->y2 = 0;
         }
         else
         {
@@ -4674,17 +4647,17 @@ static void sub_8183FA8(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos2.x = -(Sin(sprite->data[7], sprite->data[5]));
-        sprite->pos2.y = Sin((sprite->data[7] + 192) % 256, sprite->data[4]);
-        if (sprite->pos2.y > 0)
-            sprite->pos2.y *= -1;
+        sprite->x2 = -(Sin(sprite->data[7], sprite->data[5]));
+        sprite->y2 = Sin((sprite->data[7] + 192) % 256, sprite->data[4]);
+        if (sprite->y2 > 0)
+            sprite->y2 *= -1;
 
-        sprite->pos2.y += sprite->data[4];
+        sprite->y2 += sprite->data[4];
         sprite->data[7] += sprite->data[3];
     }
 }
 
-static void pokemonanimfunc_79(struct Sprite *sprite)
+static void Anim_ConcaveArcLarge_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4696,10 +4669,10 @@ static void pokemonanimfunc_79(struct Sprite *sprite)
         sprite->data[3] = 4;
     }
 
-    sub_8183FA8(sprite);
+    ConcaveArc(sprite);
 }
 
-static void pokemonanimfunc_7A(struct Sprite *sprite)
+static void Anim_ConcaveArcLarge(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4711,10 +4684,10 @@ static void pokemonanimfunc_7A(struct Sprite *sprite)
         sprite->data[3] = 6;
     }
 
-    sub_8183FA8(sprite);
+    ConcaveArc(sprite);
 }
 
-static void pokemonanimfunc_7B(struct Sprite *sprite)
+static void Anim_ConcaveArcLarge_Twice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4726,16 +4699,16 @@ static void pokemonanimfunc_7B(struct Sprite *sprite)
         sprite->data[3] = 8;
     }
 
-    sub_8183FA8(sprite);
+    ConcaveArc(sprite);
 }
 
-static void sub_81840C4(struct Sprite *sprite)
+static void ConvexDoubleArc(struct Sprite *sprite)
 {
     if (sprite->data[7] > 256)
     {
         if (sprite->data[6] <= sprite->data[4])
         {
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            sprite->callback = WaitAnimEnd;
         }
         else
         {
@@ -4743,8 +4716,8 @@ static void sub_81840C4(struct Sprite *sprite)
             sprite->data[7] = 0;
         }
 
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
     }
     else
     {
@@ -4755,27 +4728,27 @@ static void sub_81840C4(struct Sprite *sprite)
             if (sprite->data[7] > 256)
                 sprite->data[7] = 256;
 
-            sprite->pos2.y = -(Sin(sprite->data[7] % 256, 8));
+            sprite->y2 = -(Sin(sprite->data[7] % 256, 8));
         }
         else if (sprite->data[7] > 95)
         {
-            sprite->pos2.y = Sin(96, 6) - Sin((sprite->data[7] - 96) * 2, 4);
+            sprite->y2 = Sin(96, 6) - Sin((sprite->data[7] - 96) * 2, 4);
         }
         else
         {
-            sprite->pos2.y = Sin(sprite->data[7], 6);
+            sprite->y2 = Sin(sprite->data[7], 6);
         }
 
         posX = -(Sin(sprite->data[7] / 2, sprite->data[5]));
         if (sprite->data[4] % 2 == 0)
             posX *= -1;
 
-        sprite->pos2.x = posX;
+        sprite->x2 = posX;
         sprite->data[7] += sprite->data[3];
     }
 }
 
-static void pokemonanimfunc_7C(struct Sprite *sprite)
+static void Anim_ConvexDoubleArc_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4787,10 +4760,10 @@ static void pokemonanimfunc_7C(struct Sprite *sprite)
         sprite->data[3] = 4;
     }
 
-    sub_81840C4(sprite);
+    ConvexDoubleArc(sprite);
 }
 
-static void pokemonanimfunc_7D(struct Sprite *sprite)
+static void Anim_ConvexDoubleArc(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4802,10 +4775,10 @@ static void pokemonanimfunc_7D(struct Sprite *sprite)
         sprite->data[3] = 6;
     }
 
-    sub_81840C4(sprite);
+    ConvexDoubleArc(sprite);
 }
 
-static void pokemonanimfunc_7E(struct Sprite *sprite)
+static void Anim_ConvexDoubleArc_Twice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4817,10 +4790,10 @@ static void pokemonanimfunc_7E(struct Sprite *sprite)
         sprite->data[3] = 8;
     }
 
-    sub_81840C4(sprite);
+    ConvexDoubleArc(sprite);
 }
 
-static void pokemonanimfunc_7F(struct Sprite *sprite)
+static void Anim_ConcaveArcSmall_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4832,10 +4805,10 @@ static void pokemonanimfunc_7F(struct Sprite *sprite)
         sprite->data[3] = 4;
     }
 
-    sub_8183FA8(sprite);
+    ConcaveArc(sprite);
 }
 
-static void pokemonanimfunc_80(struct Sprite *sprite)
+static void Anim_ConcaveArcSmall(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4847,10 +4820,10 @@ static void pokemonanimfunc_80(struct Sprite *sprite)
         sprite->data[3] = 6;
     }
 
-    sub_8183FA8(sprite);
+    ConcaveArc(sprite);
 }
 
-static void pokemonanimfunc_81(struct Sprite *sprite)
+static void Anim_ConcaveArcSmall_Twice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4862,18 +4835,18 @@ static void pokemonanimfunc_81(struct Sprite *sprite)
         sprite->data[3] = 8;
     }
 
-    sub_8183FA8(sprite);
+    ConcaveArc(sprite);
 }
 
-static void sub_8184290(struct Sprite *sprite)
+static void SetHorizontalDip(struct Sprite *sprite)
 {
     u16 index = Sin((sprite->data[2] * 128) / sprite->data[7], sprite->data[5]);
     sprite->data[6] = -(index << 8);
-    sub_817F3F0(sprite, index, sprite->data[4], 0);
+    SetPosForRotation(sprite, index, sprite->data[4], 0);
     HandleSetAffineData(sprite, 256, 256, sprite->data[6]);
 }
 
-static void pokemonanimfunc_82(struct Sprite *sprite)
+static void Anim_HorizontalDip(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4888,13 +4861,13 @@ static void pokemonanimfunc_82(struct Sprite *sprite)
     if (sprite->data[2] > sprite->data[7])
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0]++;
         if (sprite->data[3] <= sprite->data[0])
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
             return;
         }
         else
@@ -4904,13 +4877,13 @@ static void pokemonanimfunc_82(struct Sprite *sprite)
     }
     else
     {
-        sub_8184290(sprite);
+        SetHorizontalDip(sprite);
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_83(struct Sprite *sprite)
+static void Anim_HorizontalDip_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4925,13 +4898,13 @@ static void pokemonanimfunc_83(struct Sprite *sprite)
     if (sprite->data[2] > sprite->data[7])
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0]++;
         if (sprite->data[3] <= sprite->data[0])
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
             return;
         }
         else
@@ -4941,13 +4914,13 @@ static void pokemonanimfunc_83(struct Sprite *sprite)
     }
     else
     {
-        sub_8184290(sprite);
+        SetHorizontalDip(sprite);
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_84(struct Sprite *sprite)
+static void Anim_HorizontalDip_Twice(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -4962,13 +4935,13 @@ static void pokemonanimfunc_84(struct Sprite *sprite)
     if (sprite->data[2] > sprite->data[7])
     {
         HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0]++;
         if (sprite->data[3] <= sprite->data[0])
         {
-            sub_817F77C(sprite);
-            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            ResetSpriteAfterAnim(sprite);
+            sprite->callback = WaitAnimEnd;
             return;
         }
         else
@@ -4978,20 +4951,20 @@ static void pokemonanimfunc_84(struct Sprite *sprite)
     }
     else
     {
-        sub_8184290(sprite);
+        SetHorizontalDip(sprite);
     }
 
     sprite->data[2]++;
 }
 
-static void sub_8184468(struct Sprite *sprite)
+static void ShrinkGrowVibrate(struct Sprite *sprite)
 {
     if (sprite->data[2] > sprite->data[7])
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         HandleSetAffineData(sprite, 256, 256, 0);
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
@@ -5017,128 +4990,128 @@ static void sub_8184468(struct Sprite *sprite)
         posY = posY_signed;
         if (posY < 0)
             posY += 7;
-        sprite->pos2.y = (u32)(posY) >> 3;
+        sprite->y2 = (u32)(posY) >> 3;
         HandleSetAffineData(sprite, sprite->data[4], sprite->data[5], 0);
     }
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_85(struct Sprite *sprite)
+static void Anim_ShrinkGrowVibrate_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
-        sprite->pos2.y += 2;
+        sprite->y2 += 2;
         sprite->data[6] = 40;
         sprite->data[7] = 80;
     }
 
-    sub_8184468(sprite);
+    ShrinkGrowVibrate(sprite);
 }
 
-static void pokemonanimfunc_86(struct Sprite *sprite)
+static void Anim_ShrinkGrowVibrate(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
-        sprite->pos2.y += 2;
+        sprite->y2 += 2;
         sprite->data[6] = 40;
         sprite->data[7] = 40;
     }
 
-    sub_8184468(sprite);
+    ShrinkGrowVibrate(sprite);
 }
 
-static void pokemonanimfunc_87(struct Sprite *sprite)
+static void Anim_ShrinkGrowVibrate_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
         HandleStartAffineAnim(sprite);
-        sprite->pos2.y += 2;
+        sprite->y2 += 2;
         sprite->data[6] = 80;
         sprite->data[7] = 80;
     }
 
-    sub_8184468(sprite);
+    ShrinkGrowVibrate(sprite);
 }
 
-static void sub_8184610(struct Sprite *sprite);
-static void sub_8184640(struct Sprite *sprite);
-static void sub_8184678(struct Sprite *sprite);
-static void sub_81846B8(struct Sprite *sprite);
+static void JoltRight_0(struct Sprite *sprite);
+static void JoltRight_1(struct Sprite *sprite);
+static void JoltRight_2(struct Sprite *sprite);
+static void JoltRight_3(struct Sprite *sprite);
 
-static void sub_81845D4(struct Sprite *sprite)
+static void JoltRight(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x -= sprite->data[2];
-    if (sprite->pos2.x <= -sprite->data[6])
+    TryFlipX(sprite);
+    sprite->x2 -= sprite->data[2];
+    if (sprite->x2 <= -sprite->data[6])
     {
-        sprite->pos2.x = -sprite->data[6];
+        sprite->x2 = -sprite->data[6];
         sprite->data[7] = 2;
-        sprite->callback = sub_8184610;
+        sprite->callback = JoltRight_0;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8184610(struct Sprite *sprite)
+static void JoltRight_0(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x += sprite->data[7];
+    TryFlipX(sprite);
+    sprite->x2 += sprite->data[7];
     sprite->data[7]++;
-    if (sprite->pos2.x >= 0)
-        sprite->callback = sub_8184640;
+    if (sprite->x2 >= 0)
+        sprite->callback = JoltRight_1;
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8184640(struct Sprite *sprite)
+static void JoltRight_1(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x += sprite->data[7];
+    TryFlipX(sprite);
+    sprite->x2 += sprite->data[7];
     sprite->data[7]++;
-    if (sprite->pos2.x > sprite->data[6])
+    if (sprite->x2 > sprite->data[6])
     {
-        sprite->pos2.x = sprite->data[6];
-        sprite->callback = sub_8184678;
+        sprite->x2 = sprite->data[6];
+        sprite->callback = JoltRight_2;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_8184678(struct Sprite *sprite)
+static void JoltRight_2(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
     if (sprite->data[3] >= sprite->data[5])
     {
-        sprite->callback = sub_81846B8;
+        sprite->callback = JoltRight_3;
     }
     else
     {
-        sprite->pos2.x += sprite->data[4];
+        sprite->x2 += sprite->data[4];
         sprite->data[4] *= -1;
         sprite->data[3]++;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void sub_81846B8(struct Sprite *sprite)
+static void JoltRight_3(struct Sprite *sprite)
 {
-    sub_817F70C(sprite);
-    sprite->pos2.x -= 2;
-    if (sprite->pos2.x <= 0)
+    TryFlipX(sprite);
+    sprite->x2 -= 2;
+    if (sprite->x2 <= 0)
     {
-        sprite->pos2.x = 0;
-        sub_817F77C(sprite);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        ResetSpriteAfterAnim(sprite);
+        sprite->callback = WaitAnimEnd;
     }
 
-    sub_817F70C(sprite);
+    TryFlipX(sprite);
 }
 
-static void pokemonanimfunc_88(struct Sprite *sprite)
+static void Anim_JoltRight_Fast(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[7] = 4;
@@ -5147,10 +5120,10 @@ static void pokemonanimfunc_88(struct Sprite *sprite)
     sprite->data[4] = 4;
     sprite->data[3] = 0;
     sprite->data[2] = 2;
-    sprite->callback = sub_81845D4;
+    sprite->callback = JoltRight;
 }
 
-static void pokemonanimfunc_89(struct Sprite *sprite)
+static void Anim_JoltRight(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[7] = 2;
@@ -5159,10 +5132,10 @@ static void pokemonanimfunc_89(struct Sprite *sprite)
     sprite->data[4] = 2;
     sprite->data[3] = 0;
     sprite->data[2] = 1;
-    sprite->callback = sub_81845D4;
+    sprite->callback = JoltRight;
 }
 
-static void pokemonanimfunc_8A(struct Sprite *sprite)
+static void Anim_JoltRight_Slow(struct Sprite *sprite)
 {
     HandleStartAffineAnim(sprite);
     sprite->data[7] = 0;
@@ -5171,12 +5144,12 @@ static void pokemonanimfunc_8A(struct Sprite *sprite)
     sprite->data[4] = 2;
     sprite->data[3] = 0;
     sprite->data[2] = 1;
-    sprite->callback = sub_81845D4;
+    sprite->callback = JoltRight;
 }
 
-static void sub_8184770(struct Sprite *sprite)
+static void SetShakeFlashYellowPos(struct Sprite *sprite)
 {
-    sprite->pos2.x = sprite->data[1];
+    sprite->x2 = sprite->data[1];
     if (sprite->data[0] > 1)
     {
         sprite->data[1] *= -1;
@@ -5188,97 +5161,91 @@ static void sub_8184770(struct Sprite *sprite)
     }
 }
 
-struct YellowBlendStruct
+static const struct YellowFlashData sShakeYellowFlashData_Fast[] =
 {
-    u8 field_0;
-    u8 field_1;
+    {FALSE,  1},
+    { TRUE,  2},
+    {FALSE, 15},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE,  1},
+    {FALSE, -1}
 };
 
-static const struct YellowBlendStruct sUnknown_0860ADCC[] =
+static const struct YellowFlashData sShakeYellowFlashData_Normal[] =
 {
-    {0, 1},
-    {1, 2},
-    {0, 15},
-    {1, 1},
-    {0, 15},
-    {1, 1},
-    {0, 15},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {1, 1},
-    {0, 1},
-    {0, 0xFF}
+    {FALSE,  5},
+    { TRUE,  1},
+    {FALSE, 15},
+    { TRUE,  4},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    { TRUE,  2},
+    {FALSE,  2},
+    {FALSE, -1}
 };
 
-static const struct YellowBlendStruct sUnknown_0860AE1C[] =
+static const struct YellowFlashData sShakeYellowFlashData_Slow[] =
 {
-    {0, 5},
-    {1, 1},
-    {0, 15},
-    {1, 4},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {1, 2},
-    {0, 2},
-    {0, 0xFF}
+    {FALSE,  1},
+    { TRUE,  1},
+    {FALSE, 20},
+    { TRUE,  1},
+    {FALSE, 20},
+    { TRUE,  1},
+    {FALSE, 20},
+    { TRUE,  1},
+    {FALSE,  1},
+    {FALSE, -1}
 };
 
-static const struct YellowBlendStruct sUnknown_0860AE54[] =
+static const struct YellowFlashData *const sShakeYellowFlashData[] =
 {
-    {0, 1},
-    {1, 1},
-    {0, 20},
-    {1, 1},
-    {0, 20},
-    {1, 1},
-    {0, 20},
-    {1, 1},
-    {0, 1},
-    {0, 0xFF}
+    sShakeYellowFlashData_Fast,
+    sShakeYellowFlashData_Normal,
+    sShakeYellowFlashData_Slow
 };
 
-static const struct YellowBlendStruct *const sUnknown_0860AE7C[] =
+static void ShakeFlashYellow(struct Sprite *sprite)
 {
-    sUnknown_0860ADCC,
-    sUnknown_0860AE1C,
-    sUnknown_0860AE54
-};
-
-static void BackAnimBlendYellow(struct Sprite *sprite)
-{
-    const struct YellowBlendStruct *array = sUnknown_0860AE7C[sprite->data[3]];
-    sub_8184770(sprite);
-    if (array[sprite->data[6]].field_1 == 0xFF)
+    const struct YellowFlashData *array = sShakeYellowFlashData[sprite->data[3]];
+    SetShakeFlashYellowPos(sprite);
+    if (array[sprite->data[6]].time == (u8)-1)
     {
-        sprite->pos2.x = 0;
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->x2 = 0;
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         if (sprite->data[4] == 1)
         {
-            if (array[sprite->data[6]].field_0 != 0)
-                BlendPalette(sprite->data[7], 0x10, 0x10, RGB_YELLOW);
+            if (array[sprite->data[6]].isYellow)
+                BlendPalette(sprite->data[7], 16, 16, RGB_YELLOW);
             else
-                BlendPalette(sprite->data[7], 0x10, 0, RGB_YELLOW);
+                BlendPalette(sprite->data[7], 16, 0, RGB_YELLOW);
 
             sprite->data[4] = 0;
         }
 
-        if (array[sprite->data[6]].field_1 == sprite->data[5])
+        if (array[sprite->data[6]].time == sprite->data[5])
         {
             sprite->data[4] = 1;
             sprite->data[5] = 0;
@@ -5291,7 +5258,7 @@ static void BackAnimBlendYellow(struct Sprite *sprite)
     }
 }
 
-static void pokemonanimfunc_8B(struct Sprite *sprite)
+static void Anim_ShakeFlashYellow_Fast(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
@@ -5302,10 +5269,10 @@ static void pokemonanimfunc_8B(struct Sprite *sprite)
         sprite->data[3] = 0;
     }
 
-    BackAnimBlendYellow(sprite);
+    ShakeFlashYellow(sprite);
 }
 
-static void pokemonanimfunc_8C(struct Sprite *sprite)
+static void Anim_ShakeFlashYellow(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
@@ -5316,10 +5283,10 @@ static void pokemonanimfunc_8C(struct Sprite *sprite)
         sprite->data[3] = 1;
     }
 
-    BackAnimBlendYellow(sprite);
+    ShakeFlashYellow(sprite);
 }
 
-static void pokemonanimfunc_8D(struct Sprite *sprite)
+static void Anim_ShakeFlashYellow_Slow(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
@@ -5330,52 +5297,62 @@ static void pokemonanimfunc_8D(struct Sprite *sprite)
         sprite->data[3] = 2;
     }
 
-    BackAnimBlendYellow(sprite);
+    ShakeFlashYellow(sprite);
 }
 
-static void BackAnimBlend(struct Sprite *sprite)
+enum {
+    SHAKEGLOW_RED,
+    SHAKEGLOW_GREEN,
+    SHAKEGLOW_BLUE,
+    SHAKEGLOW_BLACK
+};
+
+static void ShakeGlow_Blend(struct Sprite *sprite)
 {
     static const u16 sColors[] =
     {
-        RGB_RED, RGB_GREEN, RGB_BLUE, RGB_BLACK
+        [SHAKEGLOW_RED]   = RGB_RED,
+        [SHAKEGLOW_GREEN] = RGB_GREEN,
+        [SHAKEGLOW_BLUE]  = RGB_BLUE,
+        [SHAKEGLOW_BLACK] = RGB_BLACK
     };
 
     if (sprite->data[2] > 127)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB_RED);
-        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        BlendPalette(sprite->data[7], 16, 0, RGB_RED);
+        sprite->callback = WaitAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], sColors[sprite->data[1]]);
+        BlendPalette(sprite->data[7], 16, sprite->data[6], sColors[sprite->data[1]]);
     }
 }
 
-static void sub_8184934(struct Sprite *sprite)
+static void ShakeGlow_Move(struct Sprite *sprite)
 {
     if (sprite->data[3] < sprite->data[4])
     {
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
         if (sprite->data[5] > sprite->data[0])
         {
             if (++sprite->data[3] < sprite->data[4])
                 sprite->data[5] = 0;
 
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
         }
         else
         {
             s8 sign = 1 - (sprite->data[3] % 2 * 2);
-            sprite->pos2.x = sign * Sin((sprite->data[5] * 384 / sprite->data[0]) % 256, 6);
+            sprite->x2 = sign * Sin((sprite->data[5] * 384 / sprite->data[0]) % 256, 6);
             sprite->data[5]++;
         }
 
-        sub_817F70C(sprite);
+        TryFlipX(sprite);
     }
 }
 
-static void pokemonanimfunc_8E(struct Sprite *sprite)
+static void Anim_ShakeGlowRed_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5384,19 +5361,19 @@ static void pokemonanimfunc_8E(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 2;
         sprite->data[3] = 0;
-        sprite->data[1] = 0;
+        sprite->data[1] = SHAKEGLOW_RED;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_8F(struct Sprite *sprite)
+static void Anim_ShakeGlowRed(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5405,19 +5382,19 @@ static void pokemonanimfunc_8F(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 1;
         sprite->data[3] = 0;
-        sprite->data[1] = 0;
+        sprite->data[1] = SHAKEGLOW_RED;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_90(struct Sprite *sprite)
+static void Anim_ShakeGlowRed_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5426,19 +5403,19 @@ static void pokemonanimfunc_90(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 1;
         sprite->data[3] = 0;
-        sprite->data[1] = 0;
+        sprite->data[1] = SHAKEGLOW_RED;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_91(struct Sprite *sprite)
+static void Anim_ShakeGlowGreen_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5447,19 +5424,19 @@ static void pokemonanimfunc_91(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 2;
         sprite->data[3] = 0;
-        sprite->data[1] = 1;
+        sprite->data[1] = SHAKEGLOW_GREEN;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_92(struct Sprite *sprite)
+static void Anim_ShakeGlowGreen(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5468,19 +5445,19 @@ static void pokemonanimfunc_92(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 1;
         sprite->data[3] = 0;
-        sprite->data[1] = 1;
+        sprite->data[1] = SHAKEGLOW_GREEN;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_93(struct Sprite *sprite)
+static void Anim_ShakeGlowGreen_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5489,19 +5466,19 @@ static void pokemonanimfunc_93(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 1;
         sprite->data[3] = 0;
-        sprite->data[1] = 1;
+        sprite->data[1] = SHAKEGLOW_GREEN;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_94(struct Sprite *sprite)
+static void Anim_ShakeGlowBlue_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5510,19 +5487,19 @@ static void pokemonanimfunc_94(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 2;
         sprite->data[3] = 0;
-        sprite->data[1] = 2;
+        sprite->data[1] = SHAKEGLOW_BLUE;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_95(struct Sprite *sprite)
+static void Anim_ShakeGlowBlue(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5531,19 +5508,19 @@ static void pokemonanimfunc_95(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 1;
         sprite->data[3] = 0;
-        sprite->data[1] = 2;
+        sprite->data[1] = SHAKEGLOW_BLUE;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void pokemonanimfunc_96(struct Sprite *sprite)
+static void Anim_ShakeGlowBlue_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -5552,19 +5529,19 @@ static void pokemonanimfunc_96(struct Sprite *sprite)
         sprite->data[5] = 0;
         sprite->data[4] = 1;
         sprite->data[3] = 0;
-        sprite->data[1] = 2;
+        sprite->data[1] = SHAKEGLOW_BLUE;
     }
 
     if (sprite->data[2] % 2 == 0)
-        BackAnimBlend(sprite);
+        ShakeGlow_Blend(sprite);
 
     if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
-        sub_8184934(sprite);
+        ShakeGlow_Move(sprite);
 
     sprite->data[2]++;
 }
 
-static void SpriteCB_SetDummyOnAnimEnd(struct Sprite *sprite)
+static void WaitAnimEnd(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         sprite->callback = SpriteCallbackDummy;

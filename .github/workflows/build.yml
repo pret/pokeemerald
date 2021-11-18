@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GAME_VERSION: EMERALD
+      GAME_REVISION: 0
+      GAME_LANGUAGE: ENGLISH
+      MODERN: 0
+      COMPARE: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Checkout syms
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/checkout@master
+        with:
+          path: symbols
+          ref: symbols
+
+      - name: Checkout agbcc
+        uses: actions/checkout@master
+        with:
+          path: agbcc
+          repository: pret/agbcc
+
+      - name: Install binutils
+        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
+        # build-essential, git, and libpng-dev are already installed
+        # gcc-arm-none-eabi is only needed for the modern build
+        # as an alternative to dkP
+
+      - name: Install agbcc
+        run: |
+          ./build.sh
+          ./install.sh ../
+        working-directory: agbcc
+
+      - name: Compare
+        run: make -j${nproc} all syms
+
+      - name: Modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+        run: make -j${nproc} all
+
+      - name: Webhook
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        env:
+          CALCROM_DISCORD_WEBHOOK_USERNAME: OK
+          CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
+          CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
+        run: sh .github/calcrom/webhook.sh pokeemerald
+
+      - name: Move symfiles
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          cp -v *.sym symbols/
+          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
+
+      - name: Update symfiles
+        if: ${{ github.event_name == 'push' }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          branch: symbols
+          cwd: "./symbols"
+          add: "*.sym"
+          message: ${{ env.SYMBOLS_COMMIT_MSG }}

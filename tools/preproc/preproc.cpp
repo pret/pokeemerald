@@ -103,9 +103,9 @@ void PreprocAsmFile(std::string filename)
     }
 }
 
-void PreprocCFile(std::string filename)
+void PreprocCFile(const char * filename, bool isStdin)
 {
-    CFile cFile(filename);
+    CFile cFile(filename, isStdin);
     cFile.Preproc();
 }
 
@@ -132,9 +132,9 @@ char* GetFileExtension(char* filename)
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc < 3 || argc > 4)
     {
-        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE", argv[0]);
+        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE [-i]\nwhere -i denotes if input is from stdin\n", argv[0]);
         return 1;
     }
 
@@ -147,9 +147,17 @@ int main(int argc, char **argv)
 
     if ((extension[0] == 's') && extension[1] == 0)
         PreprocAsmFile(argv[1]);
-    else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
-        PreprocCFile(argv[1]);
-    else
+    else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0) {
+        if (argc == 4) {
+            if (argv[3][0] == '-' && argv[3][1] == 'i' && argv[3][2] == '\0') {
+                PreprocCFile(argv[1], true);
+            } else {
+                FATAL_ERROR("unknown argument flag \"%s\".\n", argv[3]);
+            }
+        } else {
+            PreprocCFile(argv[1], false);
+        }
+    } else
         FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
 
     return 0;

@@ -1,11 +1,11 @@
 #ifndef GUARD_DAYCARE_CONSTANTS_H
 #define GUARD_DAYCARE_CONSTANTS_H
 
-// Parent compatability scores
+// Parent compatibility scores
 #define PARENTS_INCOMPATIBLE       0
 #define PARENTS_LOW_COMPATIBILITY  20
-#define PARENTS_MED_COMPATABILITY  50
-#define PARENTS_MAX_COMPATABILITY  70
+#define PARENTS_MED_COMPATIBILITY  50
+#define PARENTS_MAX_COMPATIBILITY  70
 
 // Daycare state
 #define DAYCARE_NO_MONS     0

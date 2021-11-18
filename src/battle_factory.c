@@ -25,8 +25,8 @@ static void InitFactoryChallenge(void);
 static void GetBattleFactoryData(void);
 static void SetBattleFactoryData(void);
 static void SaveFactoryChallenge(void);
-static void nullsub_75(void);
-static void nullsub_123(void);
+static void FactoryDummy1(void);
+static void FactoryDummy2(void);
 static void SelectInitialRentalMons(void);
 static void SwapRentalMons(void);
 static void SetPerformedRentalSwap(void);
@@ -38,11 +38,19 @@ static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
 static void GetOpponentBattleStyle(void);
 static void RestorePlayerPartyHeldItems(void);
-static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 arg2);
+static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange);
 static u8 GetMoveBattleStyle(u16 move);
 
-// Const rom data.
-static const u8 sRequiredMoveCounts[] = {3, 3, 3, 2, 2, 2, 2};
+// Number of moves needed on the team to be considered using a certain battle style
+static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
+    [FACTORY_STYLE_PREPARATION - 1]   = 3,
+    [FACTORY_STYLE_SLOW_STEADY - 1]   = 3,
+    [FACTORY_STYLE_ENDURANCE - 1]     = 3,
+    [FACTORY_STYLE_HIGH_RISK - 1]     = 2,
+    [FACTORY_STYLE_WEAKENING - 1]     = 2,
+    [FACTORY_STYLE_UNPREDICTABLE - 1] = 2,
+    [FACTORY_STYLE_WEATHER - 1]       = 2
+};
 
 static const u16 sMoves_TotalPreparation[] =
 {
@@ -119,8 +127,8 @@ static void (* const sBattleFactoryFunctions[])(void) =
     [BATTLE_FACTORY_FUNC_GET_DATA]               = GetBattleFactoryData,
     [BATTLE_FACTORY_FUNC_SET_DATA]               = SetBattleFactoryData,
     [BATTLE_FACTORY_FUNC_SAVE]                   = SaveFactoryChallenge,
-    [BATTLE_FACTORY_FUNC_NULL]                   = nullsub_75,
-    [BATTLE_FACTORY_FUNC_NULL2]                  = nullsub_123,
+    [BATTLE_FACTORY_FUNC_NULL]                   = FactoryDummy1,
+    [BATTLE_FACTORY_FUNC_NULL2]                  = FactoryDummy2,
     [BATTLE_FACTORY_FUNC_SELECT_RENT_MONS]       = SelectInitialRentalMons,
     [BATTLE_FACTORY_FUNC_SWAP_RENT_MONS]         = SwapRentalMons,
     [BATTLE_FACTORY_FUNC_SET_SWAPPED]            = SetPerformedRentalSwap,
@@ -266,12 +274,12 @@ static void SaveFactoryChallenge(void)
     SaveGameFrontier();
 }
 
-static void nullsub_75(void)
+static void FactoryDummy1(void)
 {
 
 }
 
-static void nullsub_123(void)
+static void FactoryDummy2(void)
 {
 
 }
@@ -376,10 +384,10 @@ static void SetRentalsToOpponentParty(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId = gFrontierTempParty[i];
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId = gFrontierTempParty[i];
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[gFrontierTempParty[i]].itemTableId]);
     }
 }
@@ -455,13 +463,13 @@ static void SetPlayerAndOpponentParties(void)
     case 2:
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-            monId = gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId;
-            ivs = gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs;
+            monId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
+            ivs = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
             CreateMon(&gEnemyParty[i],
                       gFacilityTrainerMons[monId].species,
                       monLevel,
                       ivs,
-                      TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality,
+                      TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality,
                       OT_ID_PLAYER_ID, 0);
 
             count = 0;
@@ -484,7 +492,7 @@ static void SetPlayerAndOpponentParties(void)
             for (k = 0; k < MAX_MON_MOVES; k++)
                 SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monId].moves[k], k);
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
-            SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityNum);
+            SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum);
         }
         break;
     }
@@ -584,39 +592,58 @@ static void GenerateInitialRentalMons(void)
     }
 }
 
+// Determines if the upcoming opponent has a single most-common
+// type in its party. If there are two different types that are
+// tied, then the opponent is deemed to have no preferred type,
+// and NUMBER_OF_MON_TYPES is the result.
 static void GetOpponentMostCommonMonType(void)
 {
     u8 i;
-    u8 typesCount[NUMBER_OF_MON_TYPES];
-    u8 usedType[2];
+    u8 typeCounts[NUMBER_OF_MON_TYPES];
+    u8 mostCommonTypes[2];
 
     gFacilityTrainerMons = gBattleFrontierMons;
-    for (i = 0; i < NUMBER_OF_MON_TYPES; i++)
-        typesCount[i] = 0;
+
+    // Count the number of times each type occurs in the opponent's party.
+    for (i = TYPE_NORMAL; i < NUMBER_OF_MON_TYPES; i++)
+        typeCounts[i] = 0;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         u32 species = gFacilityTrainerMons[gFrontierTempParty[i]].species;
-
-        typesCount[gBaseStats[species].type1]++;
+        typeCounts[gBaseStats[species].type1]++;
         if (gBaseStats[species].type1 != gBaseStats[species].type2)
-            typesCount[gBaseStats[species].type2]++;
+            typeCounts[gBaseStats[species].type2]++;
     }
 
-    usedType[0] = 0;
-    usedType[1] = 0;
-    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
+    // Determine which are the two most-common types.
+    // The second most-common type is only updated if
+    // its count is equal to the most-common type.
+    mostCommonTypes[0] = TYPE_NORMAL;
+    mostCommonTypes[1] = TYPE_NORMAL;
+    for (i = TYPE_FIGHTING; i < NUMBER_OF_MON_TYPES; i++)
     {
-        if (typesCount[usedType[0]] < typesCount[i])
-            usedType[0] = i;
-        else if (typesCount[usedType[0]] == typesCount[i])
-            usedType[1] = i;
+        if (typeCounts[mostCommonTypes[0]] < typeCounts[i])
+            mostCommonTypes[0] = i;
+        else if (typeCounts[mostCommonTypes[0]] == typeCounts[i])
+            mostCommonTypes[1] = i;
     }
 
-    gSpecialVar_Result = gSpecialVar_Result; // Needed to match. Don't ask me why.
-    if (typesCount[usedType[0]] != 0 && (typesCount[usedType[0]] > typesCount[usedType[1]] || usedType[0] == usedType[1]))
-        gSpecialVar_Result = usedType[0];
+    if (typeCounts[mostCommonTypes[0]] != 0)
+    {
+        // The most-common type must be strictly greater than
+        // the second-most-common type, or the top two must be
+        // the same type.
+        if (typeCounts[mostCommonTypes[0]] > typeCounts[mostCommonTypes[1]])
+            gSpecialVar_Result = mostCommonTypes[0];
+        else if (mostCommonTypes[0] == mostCommonTypes[1])
+            gSpecialVar_Result = mostCommonTypes[0];
+        else
+            gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+    }
     else
+    {
         gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+    }
 }
 
 static void GetOpponentBattleStyle(void)
@@ -639,7 +666,7 @@ static void GetOpponentBattleStyle(void)
         }
     }
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FACTORY_STYLE_NONE;
     for (i = 1; i < FACTORY_NUM_STYLES; i++)
     {
         if (stylePoints[i] >= sRequiredMoveCounts[i - 1])

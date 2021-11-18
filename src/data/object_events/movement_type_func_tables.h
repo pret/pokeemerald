@@ -63,11 +63,11 @@ u8 (*const gMovementTypeFuncs_FaceDirection[])(struct ObjectEvent *, struct Spri
 };
 
 u8 (*const gMovementTypeFuncs_BerryTreeGrowth[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_BerryTreeGrowth_Step0,
-    MovementType_BerryTreeGrowth_Step1,
-    MovementType_BerryTreeGrowth_Step2,
-    MovementType_BerryTreeGrowth_Step3,
-    MovementType_BerryTreeGrowth_Step4,
+    MovementType_BerryTreeGrowth_Normal,
+    MovementType_BerryTreeGrowth_Move,
+    MovementType_BerryTreeGrowth_SparkleStart,
+    MovementType_BerryTreeGrowth_Sparkle,
+    MovementType_BerryTreeGrowth_SparkleEnd,
 };
 
 u8 (*const gMovementTypeFuncs_FaceDownAndUp[])(struct ObjectEvent *, struct Sprite *) = {
@@ -388,17 +388,17 @@ u8 (*const gMovementTypeFuncs_CopyPlayer[])(struct ObjectEvent *, struct Sprite 
 };
 
 bool8 (*const gCopyPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
-    CopyablePlayerMovement_None,
-    CopyablePlayerMovement_FaceDirection,
-    CopyablePlayerMovement_GoSpeed0,
-    CopyablePlayerMovement_GoSpeed1,
-    CopyablePlayerMovement_GoSpeed2,
-    CopyablePlayerMovement_Slide,
-    cph_IM_DIFFERENT,
-    CopyablePlayerMovement_GoSpeed4,
-    CopyablePlayerMovement_Jump,
-    CopyablePlayerMovement_None,
-    CopyablePlayerMovement_None,
+    [COPY_MOVE_NONE]          = CopyablePlayerMovement_None,
+    [COPY_MOVE_FACE]          = CopyablePlayerMovement_FaceDirection,
+    [COPY_MOVE_WALK]          = CopyablePlayerMovement_WalkNormal,
+    [COPY_MOVE_WALK_FAST]     = CopyablePlayerMovement_WalkFast,
+    [COPY_MOVE_WALK_FASTER]   = CopyablePlayerMovement_WalkFaster,
+    [COPY_MOVE_SLIDE]         = CopyablePlayerMovement_Slide,
+    [COPY_MOVE_JUMP_IN_PLACE] = CopyablePlayerMovement_JumpInPlace,
+    [COPY_MOVE_JUMP]          = CopyablePlayerMovement_Jump,
+    [COPY_MOVE_JUMP2]         = CopyablePlayerMovement_Jump2,
+    [COPY_MOVE_EMPTY_1]       = CopyablePlayerMovement_None,
+    [COPY_MOVE_EMPTY_2]       = CopyablePlayerMovement_None,
 };
 
 u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct Sprite *) = {
@@ -407,8 +407,8 @@ u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct 
     MovementType_CopyPlayer_Step2,
 };
 
-u8 (*const gMovementTypeFuncs_Hidden[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_Hidden_Step0,
+u8 (*const gMovementTypeFuncs_Buried[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_Buried_Step0,
 };
 
 u8 (*const gMovementTypeFuncs_WalkInPlace[])(struct ObjectEvent *, struct Sprite *) = {

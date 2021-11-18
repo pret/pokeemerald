@@ -145,7 +145,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_STRING;                                 \
-    textVar[2] = (stringId & 0xFF);                             \
+    textVar[2] = stringId;                                      \
     textVar[3] = (stringId & 0xFF00) >> 8;                      \
     textVar[4] = B_BUFF_EOS;                                    \
 }
@@ -223,7 +223,6 @@ extern const u8* const gBattleStringsTable[];
 extern const u8* const gStatNamesTable[];
 extern const u8* const gPokeblockWasTooXStringTable[];
 extern const u8* const gRefereeStringsTable[];
-extern const u8* const gStatNamesTable2[];
 extern const u8 *const gRoundsStringTable[];
 
 extern const u8 gText_PkmnIsEvolving[];
@@ -269,7 +268,7 @@ extern const u8 gText_Win[];
 extern const u8 gText_Loss[];
 extern const u8 gText_Draw[];
 extern const u8 gText_StatRose[];
-extern const u8 gText_PkmnsStatChanged2[];
+extern const u8 gText_DefendersStatRose[];
 extern const u8 gText_PkmnGettingPumped[];
 extern const u8 gText_PkmnShroudedInMist[];
 extern const u8 gText_PkmnsXPreventsSwitching[];

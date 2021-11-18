@@ -17,11 +17,6 @@
 #define FACILITY_UNION_ROOM        8
 #define FACILITY_MULTI_OR_EREADER  9  // Direct Corner multi battles, multi battle with Steven, and e-Reader battles
 
-// Battle Frontier lvl modes.
-#define FRONTIER_LVL_50   0
-#define FRONTIER_LVL_OPEN 1
-#define FRONTIER_LVL_TENT 2
-
 // Battle Frontier battle modes.
 #define FRONTIER_MODE_SINGLES      0
 #define FRONTIER_MODE_DOUBLES      1
@@ -51,32 +46,47 @@
 #define MAX_BATTLE_FRONTIER_POINTS 9999
 #define MAX_STREAK 9999
 
-// These sets of facility ids would be redunant if the order was consistent
+// These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous
-#define RANKING_HALL_BATTLE_TOWER_SINGLES   0
-#define RANKING_HALL_BATTLE_TOWER_DOUBLES   1
-#define RANKING_HALL_BATTLE_TOWER_MULTIS    2
-#define RANKING_HALL_BATTLE_DOME            3
-#define RANKING_HALL_BATTLE_PALACE          4
-#define RANKING_HALL_BATTLE_ARENA           5
-#define RANKING_HALL_BATTLE_FACTORY         6
-#define RANKING_HALL_BATTLE_PIKE            7
-#define RANKING_HALL_BATTLE_PYRAMID         8
-#define RANKING_HALL_BATTLE_TOWER_LINK      9
+#define RANKING_HALL_TOWER_SINGLES   0
+#define RANKING_HALL_TOWER_DOUBLES   1
+#define RANKING_HALL_TOWER_MULTIS    2
+#define RANKING_HALL_DOME            3
+#define RANKING_HALL_PALACE          4
+#define RANKING_HALL_ARENA           5
+#define RANKING_HALL_FACTORY         6
+#define RANKING_HALL_PIKE            7
+#define RANKING_HALL_PYRAMID         8
+#define RANKING_HALL_TOWER_LINK      9
 
-#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES   0
-#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES   1
-#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS    2
-#define FRONTIER_MANIAC_BATTLE_TOWER_LINK      3
-#define FRONTIER_MANIAC_BATTLE_DOME            4
-#define FRONTIER_MANIAC_BATTLE_FACTORY         5
-#define FRONTIER_MANIAC_BATTLE_PALACE          6
-#define FRONTIER_MANIAC_BATTLE_ARENA           7
-#define FRONTIER_MANIAC_BATTLE_PIKE            8
-#define FRONTIER_MANIAC_BATTLE_PYRAMID         9
-#define FRONTIER_MANIAC_FACILITY_COUNT        10
+#define FRONTIER_MANIAC_TOWER_SINGLES   0
+#define FRONTIER_MANIAC_TOWER_DOUBLES   1
+#define FRONTIER_MANIAC_TOWER_MULTIS    2
+#define FRONTIER_MANIAC_TOWER_LINK      3
+#define FRONTIER_MANIAC_DOME            4
+#define FRONTIER_MANIAC_FACTORY         5
+#define FRONTIER_MANIAC_PALACE          6
+#define FRONTIER_MANIAC_ARENA           7
+#define FRONTIER_MANIAC_PIKE            8
+#define FRONTIER_MANIAC_PYRAMID         9
+#define FRONTIER_MANIAC_FACILITY_COUNT  10
 
 #define FRONTIER_MANIAC_MESSAGE_COUNT 3
+
+// Frontier TV Show
+#define FRONTIER_SHOW_TOWER_SINGLES      1
+#define FRONTIER_SHOW_TOWER_DOUBLES      2
+#define FRONTIER_SHOW_TOWER_MULTIS       3
+#define FRONTIER_SHOW_TOWER_LINK_MULTIS  4
+#define FRONTIER_SHOW_DOME_SINGLES       5
+#define FRONTIER_SHOW_DOME_DOUBLES       6
+#define FRONTIER_SHOW_FACTORY_SINGLES    7
+#define FRONTIER_SHOW_FACTORY_DOUBLES    8
+#define FRONTIER_SHOW_PIKE               9
+#define FRONTIER_SHOW_ARENA              10
+#define FRONTIER_SHOW_PALACE_SINGLES     11
+#define FRONTIER_SHOW_PALACE_DOUBLES     12
+#define FRONTIER_SHOW_PYRAMID            13
 
 // Frontier Gambler
 #define FRONTIER_GAMBLER_WAITING     0
