@@ -4502,6 +4502,6 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom *d
 
 static void CopyAndTranslatePlayerName(u8 *dest, struct RfuPlayer *player)
 {
-    StringCopy7(dest, player->rfu.name);
+    StringCopy_PlayerName(dest, player->rfu.name);
     ConvertInternationalString(dest, player->rfu.data.compatibility.language);
 }
