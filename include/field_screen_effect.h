@@ -22,7 +22,7 @@ void FieldCB_ReturnToFieldNoScript(void);
 void FieldCB_ReturnToFieldNoScriptCheckMusic(void);
 void DoWarp(void);
 void DoDiveWarp(void);
-void DoSootopolisLegendWarp(void);
+void DoWhiteFadeWarp(void);
 void DoDoorWarp(void);
 void DoFallWarp(void);
 void DoEscalatorWarp(u8 metatileBehavior);

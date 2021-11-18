@@ -286,7 +286,7 @@ bool8 ScrCmd_returnram(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_killscript(struct ScriptContext *ctx)
+bool8 ScrCmd_endram(struct ScriptContext *ctx)
 {
     ClearRamScript();
     StopScript(ctx);
@@ -295,9 +295,9 @@ bool8 ScrCmd_killscript(struct ScriptContext *ctx)
 
 bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
 {
-    u8 value = ScriptReadByte(ctx);
+    u8 status = ScriptReadByte(ctx);
 
-    SetMysteryEventScriptStatus(value);
+    SetMysteryEventScriptStatus(status);
     return FALSE;
 }
 
@@ -309,7 +309,7 @@ bool8 ScrCmd_loadword(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_loadbytefromaddr(struct ScriptContext *ctx)
+bool8 ScrCmd_loadbytefromptr(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
@@ -317,7 +317,7 @@ bool8 ScrCmd_loadbytefromaddr(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_writebytetoaddr(struct ScriptContext *ctx)
+bool8 ScrCmd_setptr(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
 
@@ -405,7 +405,7 @@ bool8 ScrCmd_compare_local_to_value(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_compare_local_to_addr(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_local_to_ptr(struct ScriptContext *ctx)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
@@ -414,7 +414,7 @@ bool8 ScrCmd_compare_local_to_addr(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_compare_addr_to_local(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_ptr_to_local(struct ScriptContext *ctx)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = ctx->data[ScriptReadByte(ctx)];
@@ -423,7 +423,7 @@ bool8 ScrCmd_compare_addr_to_local(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_compare_addr_to_value(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_ptr_to_value(struct ScriptContext *ctx)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = ScriptReadByte(ctx);
@@ -432,7 +432,7 @@ bool8 ScrCmd_compare_addr_to_value(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_compare_addr_to_addr(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_ptr_to_ptr(struct ScriptContext *ctx)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
@@ -646,17 +646,17 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 
     switch (mode)
     {
-        case FADE_TO_BLACK:
-        case FADE_TO_WHITE:
-        default:
-            CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_DECOMP_BUFFER_SIZE);
-            FadeScreen(mode, 0);
-            break;
-        case FADE_FROM_BLACK:
-        case FADE_FROM_WHITE:
-            CpuCopy32(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_DECOMP_BUFFER_SIZE);
-            FadeScreen(mode, 0);
-            break;
+    case FADE_TO_BLACK:
+    case FADE_TO_WHITE:
+    default:
+        CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_DECOMP_BUFFER_SIZE);
+        FadeScreen(mode, 0);
+        break;
+    case FADE_FROM_BLACK:
+    case FADE_FROM_WHITE:
+        CpuCopy32(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_DECOMP_BUFFER_SIZE);
+        FadeScreen(mode, 0);
+        break;
     }
 
     SetupNativeScript(ctx, IsPaletteNotActive);
@@ -1653,7 +1653,7 @@ bool8 ScrCmd_bufferstring(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_vloadword(struct ScriptContext *ctx)
+bool8 ScrCmd_vbuffermessage(struct ScriptContext *ctx)
 {
     const u8 *ptr = (u8 *)(ScriptReadWord(ctx) - sAddressOffset);
 
@@ -2227,7 +2227,7 @@ bool8 ScrCmd_checkmoneventlegal(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_gotowondercardscript(struct ScriptContext *ctx)
+bool8 ScrCmd_trywondercardscript(struct ScriptContext *ctx)
 {
     const u8* script = GetSavedRamScriptIfValid();
 
@@ -2295,7 +2295,7 @@ void SetMovingNpcId(u16 npcId)
     sMovingNpcId = npcId;
 }
 
-bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
+bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -2304,7 +2304,7 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    DoSootopolisLegendWarp();
+    DoWhiteFadeWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }

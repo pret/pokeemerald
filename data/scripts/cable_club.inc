@@ -28,7 +28,7 @@ CableClub_EventScript_MysteryGiftMan::
 	end
 
 CableClub_EventScript_TryWonderCardScript::
-	gotowondercardscript
+	trywondercardscript
 CableClub_EventScript_MysteryGiftThankYou::
 	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_NPC
 	end

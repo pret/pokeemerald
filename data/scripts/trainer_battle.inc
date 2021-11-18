@@ -50,7 +50,7 @@ EventScript_DoNoIntroTrainerBattle::
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
 	special PlayTrainerEncounterMusic
-	trainerbattlebegin
+	dotrainerbattle
 	gotopostbattlescript
 
 EventScript_TryDoRematchBattle::
@@ -117,7 +117,7 @@ EventScript_ShowTrainerIntroMsg::
 	goto EventScript_DoTrainerBattle
 
 EventScript_DoTrainerBattle::
-	trainerbattlebegin
+	dotrainerbattle
 	@ Below battle mode check only needed in FRLG
 	specialvar VAR_RESULT, GetTrainerBattleMode
 	compare VAR_RESULT, TRAINER_BATTLE_SINGLE

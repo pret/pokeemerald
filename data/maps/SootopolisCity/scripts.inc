@@ -565,7 +565,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	fadenewbgm MUS_SOOTOPOLIS
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 43, 32
+	warpwhitefade MAP_SOOTOPOLIS_CITY, 43, 32
 	waitstate
 	end
 
@@ -618,7 +618,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	fadenewbgm MUS_SURF
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 29, 53
+	warpwhitefade MAP_SOOTOPOLIS_CITY, 29, 53
 	waitstate
 	end
 

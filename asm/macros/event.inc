@@ -76,63 +76,62 @@
 	.byte \function
 	.endm
 
-	@ Executes a script stored in a default RAM location.
+	@ Equivalent to the 'return' command for a RAM script.
 	.macro returnram
 	.byte 0x0c
 	.endm
 
-	@ Terminates script execution and "resets the script RAM".
-	.macro killscript
+	@ Equivalent to the 'end' command for a RAM script.
+	.macro endram
 	.byte 0x0d
 	.endm
 
-	@ Sets some status related to Mystery Event.
+	@ Sets the Mystery Event script status (MEVENT_STATUS_*).
 	.macro setmysteryeventstatus value:req
 	.byte 0x0e
 	.byte \value
 	.endm
 
-	@ Sets the specified script bank to value.
-	.macro loadword destination:req, value:req
+	@ Sets the value at the specified script data index to a fixed 4-byte value.
+	.macro loadword destIndex:req, value:req
 	.byte 0x0f
-	.byte \destination
+	.byte \destIndex
 	.4byte \value
 	.endm
 
-	@ Sets the specified script bank to value.
-	.macro loadbyte destination:req, value:req
+	@ Sets the value at the specified script data index to a fixed byte value.
+	.macro loadbyte destIndex:req, value:req
 	.byte 0x10
-	.byte \destination
+	.byte \destIndex
 	.byte \value
 	.endm
 
-	@ Sets the byte at offset to value.
-	.macro writebytetoaddr value:req, offset:req
+	@ Sets the value at the specified pointer.
+	.macro setptr value:req, ptr:req
 	.byte 0x11
 	.byte \value
-	.4byte \offset
+	.4byte \ptr
 	.endm
 
-	@ Copies the byte value at source into the specified script bank.
-	.macro loadbytefromaddr destination:req, source:req
+	@ Sets the value at the specified script data index to the value at pointer 'source'.
+	.macro loadbytefromptr destIndex:req, source:req
 	.byte 0x12
-	.byte \destination
+	.byte \destIndex
 	.4byte \source
 	.endm
 
-	@ TODO
-	@ Not sure. Judging from XSE's description I think it takes the least-significant byte in bank source and writes it to destination.
-	.macro setptrbyte source:req, destination:req
+	@ Sets the value at pointer 'destination' to the contents of the script data at 'srcIndex'.
+	.macro setptrbyte srcIndex:req, destination:req
 	.byte 0x13
-	.byte \source
+	.byte \srcIndex
 	.4byte \destination
 	.endm
 
-	@ Copies the contents of bank source into bank destination.
-	.macro copylocal destination:req, source:req
+	@ Copies the contents of the script data from one index to another.
+	.macro copylocal destIndex:req, srcIndex:req
 	.byte 0x14
-	.byte \destination
-	.byte \source
+	.byte \destIndex
+	.byte \srcIndex
 	.endm
 
 	@ Copies the byte at source to destination, replacing whatever byte was previously there.
@@ -177,56 +176,64 @@
 	.2byte \source
 	.endm
 
-	@ Compares the values of script banks a and b, after forcing the values to bytes.
-	.macro compare_local_to_local byte1:req, byte2:req
+	@ Compares the values of the script data at indexes 'local1' and 'local2'.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
+	.macro compare_local_to_local local1:req, local2:req
 	.byte 0x1b
-	.byte \byte1
-	.byte \byte2
+	.byte \local1
+	.byte \local2
 	.endm
 
-	@ Compares the least-significant byte of the value of script bank a to a fixed byte value (b).
-	.macro compare_local_to_value a:req, b:req
+	@ Compares the value of the script data at index 'local' to a fixed value.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
+	.macro compare_local_to_value local:req, value:req
 	.byte 0x1c
-	.byte \a
-	.byte \b
+	.byte \local
+	.byte \value
 	.endm
 
-	@ Compares the least-significant byte of the value of script bank a to the byte located at offset b.
-	.macro compare_local_to_addr a:req, b:req
+	@ Compares the value of the script data at index 'local' to the value at 'ptr'
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
+	.macro compare_local_to_ptr local:req, ptr:req
 	.byte 0x1d
-	.byte \a
-	.4byte \b
+	.byte \local
+	.4byte \ptr
 	.endm
 
-	@ Compares the byte located at offset a to the least-significant byte of the value of script bank b.
-	.macro compare_addr_to_local a:req, b:req
+	@ Compares the value at 'ptr' to the value of the script data at index 'local'.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
+	.macro compare_ptr_to_local ptr:req, local:req
 	.byte 0x1e
-	.4byte \a
-	.byte \b
+	.4byte \ptr
+	.byte \local
 	.endm
 
-	@ Compares the byte located at offset a to a fixed byte value (b).
-	.macro compare_addr_to_value a:req, b:req
+	@ Compares the value at 'ptr' to a fixed value.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
+	.macro compare_ptr_to_value ptr:req, value:req
 	.byte 0x1f
-	.4byte \a
-	.byte \b
+	.4byte \ptr
+	.byte \value
 	.endm
 
-	@ Compares the byte located at offset a to the byte located at offset b.
-	.macro compare_addr_to_addr a:req, b:req
+	@ Compares the value at 'ptr1' to the value at 'ptr2'.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
+	.macro compare_ptr_to_ptr ptr1:req, ptr2:req
 	.byte 0x20
-	.4byte \a
-	.4byte \b
+	.4byte \ptr1
+	.4byte \ptr2
 	.endm
 
-	@ Compares the value of `var` to a fixed word value (b).
+	@ Compares the value of 'var' to a fixed value.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
 	.macro compare_var_to_value var:req, value:req
 	.byte 0x21
 	.2byte \var
 	.2byte \value
 	.endm
 
-	@ Compares the value of `var1` to the value of `var2`.
+	@ Compares the value of 'var1' to the value of 'var2'.
+	@ The result is stored in comparisonResult to be acted on by goto_if / call_if
 	.macro compare_var_to_var var1:req, var2:req
 	.byte 0x22
 	.2byte \var1
@@ -269,9 +276,8 @@
 	.2byte SPECIAL_\function
 	.endm
 
-	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific 
-	@ commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock
-	@ state, the script will remain blocked indefinitely (essentially a hang).
+	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific 
+	@ commands and specials. Calling EnableBothScriptContexts for instance will allow execution to continue.
 	.macro waitstate
 	.byte 0x27
 	.endm
@@ -308,7 +314,7 @@
 	.2byte \minute
 	.endm
 
-	@ Runs time based events.
+	@ Updates local time using the RTC and runs time based events.
 	.macro dotimebasedevents
 	.byte 0x2d
 	.endm
@@ -649,12 +655,14 @@
 	.2byte \y
 	.endm
 
+	@ Sets the specified object's invisibility to FALSE.
 	.macro showobjectat localId:req, map:req
 	.byte 0x58
 	.2byte \localId
 	map \map
 	.endm
 
+	@ Sets the specified object's invisibility to TRUE.
 	.macro hideobjectat localId:req, map:req
 	.byte 0x59
 	.2byte \localId
@@ -673,7 +681,7 @@
 	.byte \direction
 	.endm
 
-	@ TODO
+	@ Configures the arguments for a trainer battle, then jumps to the appropriate script in scripts/trainer_battle.inc
 	.macro trainerbattle type:req, trainer:req, local_id:req, pointer1:req, pointer2, pointer3, pointer4
 	.byte 0x5c
 	.byte \type
@@ -770,9 +778,9 @@
 	.endm
 
 
-	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this
-	@ command behind-the-scenes), and blocks script execution until the battle finishes.
-	.macro trainerbattlebegin
+	@ Starts a trainer battle using the battle information stored in RAM (usually by the scripts in trainer_battle.inc, which
+	@ are run by trainerbattle), and blocks script execution until the battle finishes.
+	.macro dotrainerbattle
 	.byte 0x5d
 	.endm
 
@@ -1129,7 +1137,7 @@
 	.byte \growthStage
 	.endm
 
-	@ This allows you to choose a Pokemon to use in a contest
+	@ Opens the party menu to select a Pokemon for a contest.
 	.macro choosecontestmon
 	.byte 0x8b
 	.endm
@@ -1262,7 +1270,7 @@
 	.2byte \animation
 	.endm
 
-	@ Sets which healing place the player will return to if all of the Pokemon in their party faint.
+	@ Sets which healing location (HEAL_LOCATION_*) the player will return to if all of the Pokemon in their party faint.
 	.macro setrespawn heallocation:req
 	.byte 0x9f
 	.2byte \heallocation
@@ -1437,43 +1445,51 @@
 	.byte 0xb7
 	.endm
 
+	@ Sets a relative address to be used by the other vcommands as part of a Mystery Gift script.
 	.macro setvaddress pointer:req
 	.byte 0xb8
 	.4byte \pointer
 	.endm
 
+	@ Equivalent to goto using the relative address set by setvaddress.
 	.macro vgoto pointer:req
 	.byte 0xb9
 	.4byte \pointer
 	.endm
 
+	@ Equivalent to call using the relative address set by setvaddress.
 	.macro vcall pointer:req
 	.byte 0xba
 	.4byte \pointer
 	.endm
 
+	@ Equivalent to goto_if using the relative address set by setvaddress.
 	.macro vgoto_if byte:req, pointer:req
 	.byte 0xbb
 	.byte \byte
 	.4byte \pointer
 	.endm
 
+	@ Equivalent to call_if using the relative address set by setvaddress.
 	.macro vcall_if byte:req, pointer:req
 	.byte 0xbc
 	.byte \byte
 	.4byte \pointer
 	.endm
 
+	@ Equivalent to message using the relative address set by setvaddress.
 	.macro vmessage pointer:req
 	.byte 0xbd
 	.4byte \pointer
 	.endm
 
-	.macro vloadptr pointer:req
+	@ Expands the given text at the pointer (- the relative address set by setvaddress) into gStringVar4
+	.macro vbuffermessage ptr:req
 	.byte 0xbe
-	.4byte \pointer
+	.4byte \ptr
 	.endm
 
+	@ Equivalent to bufferstring using the relative address set by setvaddress.
 	.macro vbufferstring stringVarIndex:req, pointer:req
 	.byte 0xbf
 	stringvar \stringVarIndex
@@ -1576,7 +1592,7 @@
 
 	@ Jumps to the ram script saved from a Wonder Card. If there is no valid saved Wonder Card or if the
 	@ ram script is invalid then this does nothing.
-	.macro gotowondercardscript
+	.macro trywondercardscript
 	.byte 0xcf
 	.endm
 
@@ -1586,6 +1602,8 @@
 	.2byte \worldmapflag
 	.endm
 
+	@ Warps the player to the specified map using a teleport effect. Effect is similar to warpteleport, but
+	@ this warp has no fade out and maintains the original facing direction.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
 	.macro warpspinenter map:req, a, b, c
@@ -1625,6 +1643,8 @@
 	.byte 0xd6
 	.endm
 
+	@ Warp used by the teleport tiles in the Mossdeep Gym. Plays SE_WARP_IN and does a simple fade transition.
+	@ Also skips reloading object events by setting SKIP_OBJECT_EVENT_LOAD.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
 	.macro warpmossdeepgym map:req, a, b, c
@@ -1655,15 +1675,19 @@
 	.4byte \text
 	.endm
 
+	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gPaletteDecompressionBuffer on the fade out
+	@ and the reverse on the fade in, in effect saving gPlttBufferUnfaded to restore it.
 	.macro fadescreenswapbuffers mode:req
 	.byte 0xdc
 	.byte \mode
 	.endm
 
-	.macro buffertrainerclassname stringVarId:req, class:req
+	@ Buffers the specified trainer's class name to the given string var.
+	@ If the trainer id is >= TRAINERS_COUNT it will be treated as TRAINER_NONE.
+	.macro buffertrainerclassname stringVarId:req, trainerId:req
 	.byte 0xdd
 	stringvar \stringVarId
-	.2byte \class
+	.2byte \trainerId
 	.endm
 
 	@ Buffers the specified trainer's name to the given string var.
@@ -1680,9 +1704,10 @@
 	.4byte \text
 	.endm
 
+	@ Warp with a fade to white. Used during the Sootopolis legendary fight.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
-	.macro warpsootopolislegend map:req, a, b, c
+	.macro warpwhitefade map:req, a, b, c
 	.byte 0xe0
 	formatwarp \map, \a, \b, \c
 	.endm
@@ -1835,6 +1860,7 @@
 	YES = 1
 	NO  = 0
 
+	@ Buffers the given text and calls the relevant standard message script (see gStdScripts).
 	.macro msgbox text:req, type=MSGBOX_DEFAULT
 	loadword 0, \text
 	callstd \type
@@ -1850,17 +1876,21 @@
 	callstd STD_OBTAIN_ITEM
 	.endm
 
+	@ For picking up items in the overworld. Similar to giveitem, but with different language and
+	@ sets the flag of the last-talked to object (the item the player picked up).
 	.macro finditem item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_FIND_ITEM
 	.endm
 
+	@ Equivalent to giveitem but for a single decoration.
 	.macro givedecoration decoration:req
 	setorcopyvar VAR_0x8000, \decoration
 	callstd STD_OBTAIN_DECORATION
 	.endm
 
+	@ Registers the specified trainer in Match Call and plays a fanfare with a notification message.
 	.macro register_matchcall trainer:req
 	setvar VAR_0x8004, \trainer
 	special SetMatchCallRegisteredFlag
@@ -1868,6 +1898,7 @@
 	callstd STD_REGISTER_MATCH_CALL
 	.endm
 
+	@ Does a sparkle field effect (e.g. when the Trick Master is hiding) at the given coordinates.
 	.macro dofieldeffectsparkle x:req, y:req, priority:req
 	setfieldeffectargument 0, \x
 	setfieldeffectargument 1, \y

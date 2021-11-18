@@ -502,7 +502,7 @@ void DoDiveWarp(void)
     CreateTask(Task_WarpAndLoadMap, 10);
 }
 
-void DoSootopolisLegendWarp(void)
+void DoWhiteFadeWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
