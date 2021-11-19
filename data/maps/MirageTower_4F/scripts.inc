@@ -8,8 +8,7 @@ MirageTower_4F_EventScript_RootFossil::
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_TakeRootFossil, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MirageTower_4F_EventScript_LeaveRootFossil
+	goto_if_eq VAR_RESULT, NO, MirageTower_4F_EventScript_LeaveRootFossil
 	giveitem ITEM_ROOT_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
@@ -29,8 +28,7 @@ MirageTower_4F_EventScript_ClawFossil::
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_TakeClawFossil, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MirageTower_4F_EventScript_LeaveClawFossil
+	goto_if_eq VAR_RESULT, NO, MirageTower_4F_EventScript_LeaveClawFossil
 	giveitem ITEM_CLAW_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL

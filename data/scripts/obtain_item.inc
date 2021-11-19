@@ -11,10 +11,8 @@ EventScript_ObtainItemMessage::
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
 	checkitemtype ITEMID
 	call EventScript_BufferPocketNameAndTryFanfare
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_ObtainedItem
-	compare VAR_0x8007, FALSE
-	call_if_eq EventScript_NoRoomForItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_ObtainedItem
+	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForItem
 	return
 
 EventScript_BufferPocketNameAndTryFanfare::
@@ -28,32 +26,27 @@ EventScript_BufferPocketNameAndTryFanfare::
 
 EventScript_BufferItemsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_PlayFanfareObtainedItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferKeyItemsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_KEYITEMS
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_PlayFanfareObtainedItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferPokeballsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_PlayFanfareObtainedItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferTMHMsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_PlayFanfareObtainedTMHM
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedTMHM
 	return
 
 EventScript_BufferBerriesPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_BERRIES
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_PlayFanfareObtainedItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_ObtainedItem::
@@ -83,10 +76,8 @@ Std_ObtainDecoration::
 
 EventScript_ObtainDecorationMessage::
 	bufferdecorationname STR_VAR_2, ITEMID
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_ObtainedDecor
-	compare VAR_0x8007, FALSE
-	call_if_eq EventScript_NoRoomForDecor
+	call_if_eq VAR_0x8007, TRUE, EventScript_ObtainedDecor
+	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForDecor
 	return
 
 EventScript_ObtainedDecor::
@@ -112,10 +103,8 @@ Std_FindItem::
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
 	checkitemtype ITEMID
 	call EventScript_BufferPocketNameAndTryFanfare
-	compare VAR_0x8007, TRUE
-	call_if_eq EventScript_PickUpItem
-	compare VAR_0x8007, FALSE
-	call_if_eq EventScript_NoRoomToPickUpItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PickUpItem
+	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomToPickUpItem
 	release
 	return
 
@@ -124,16 +113,13 @@ EventScript_PickUpItem::
 	additem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, TRUE
-	call_if_eq EventScript_FoundTMHM
-	compare VAR_0x8008, FALSE
-	call_if_eq EventScript_FoundItem
+	call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
+	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
 	waitfanfare
 	waitmessage
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
 	pyramid_inchallenge
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_PutBattlePyramidItemInBag
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	return
 
@@ -164,20 +150,16 @@ EventScript_HiddenItemScript::
 	bufferitemnameplural STR_VAR_2, VAR_0x8005, 1
 	checkitemtype VAR_0x8005
 	call EventScript_BufferPocketNameAndTryFanfare
-	compare VAR_0x8007, TRUE
-	goto_if_eq EventScript_PickUpHiddenItem
-	compare VAR_0x8007, FALSE
-	goto_if_eq EventScript_NoRoomForHiddenItem
+	goto_if_eq VAR_0x8007, TRUE, EventScript_PickUpHiddenItem
+	goto_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForHiddenItem
 	end
 
 EventScript_PickUpHiddenItem::
 	copyvar VAR_0x8008, VAR_0x8004
 	copyvar VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, BufferTMHMMoveName
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_FoundHiddenTMHM
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_FoundHiddenItem
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FoundHiddenTMHM
+	goto_if_eq VAR_RESULT, FALSE, EventScript_FoundHiddenItem
 	end
 
 EventScript_FoundHiddenTMHM::

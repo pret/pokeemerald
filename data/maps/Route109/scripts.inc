@@ -282,8 +282,7 @@ Route109_EventScript_MrBriney::
 Route109_EventScript_HaveNotDeliveredDevonGood::
 	message Route109_Text_BrineySailToDewfordQuestion
 	msgbox Route109_Text_BrineySailToDewfordQuestion, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route109_EventScript_StayHere
+	goto_if_eq VAR_RESULT, NO, Route109_EventScript_StayHere
 	goto Route109_EventScript_SailToDewford
 	end
 
@@ -334,8 +333,7 @@ Route109_EventScript_SoftSandGirl::
 	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_AlreadyReceivedSoftSand
 	msgbox Route109_Text_YouCanHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_SOFT_SAND
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -399,8 +397,7 @@ Route109_EventScript_Edmond::
 Route109_EventScript_Ricky::
 	trainerbattle_single TRAINER_RICKY_1, Route109_Text_RickyIntro, Route109_Text_RickyDefeated, Route109_EventScript_RickyRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route109_EventScript_RickyRematch
+	goto_if_eq VAR_RESULT, TRUE, Route109_EventScript_RickyRematch
 	msgbox Route109_Text_RickyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -421,8 +418,7 @@ Route109_EventScript_RickyRematch::
 Route109_EventScript_Lola::
 	trainerbattle_single TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, Route109_EventScript_LolaRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route109_EventScript_LolaRematch
+	goto_if_eq VAR_RESULT, TRUE, Route109_EventScript_LolaRematch
 	msgbox Route109_Text_LolaPostBattle, MSGBOX_DEFAULT
 	release
 	end

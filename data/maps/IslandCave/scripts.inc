@@ -10,8 +10,7 @@ IslandCave_OnResume:
 
 IslandCave_EventScript_TryRemoveRegice::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne Common_EventScript_NopReturn
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -101,12 +100,9 @@ IslandCave_EventScript_Regice::
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq IslandCave_EventScript_DefeatedRegice
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq IslandCave_EventScript_RanFromRegice
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq IslandCave_EventScript_RanFromRegice
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IslandCave_EventScript_DefeatedRegice
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IslandCave_EventScript_RanFromRegice
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IslandCave_EventScript_RanFromRegice
 	setflag FLAG_DEFEATED_REGICE
 	release
 	end

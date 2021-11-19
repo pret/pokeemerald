@@ -3,8 +3,7 @@ Route110_TrickHousePuzzle1_MapScripts::
 	.byte 0
 
 Route110_TrickHousePuzzle1_OnLoad:
-	compare VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2
-	goto_if_eq Route110_TrickHousePuzzle1_EventScript_OpenDoor
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2, Route110_TrickHousePuzzle1_EventScript_OpenDoor
 	end
 
 Route110_TrickHousePuzzle1_EventScript_OpenDoor::
@@ -13,8 +12,7 @@ Route110_TrickHousePuzzle1_EventScript_OpenDoor::
 
 Route110_TrickHousePuzzle1_EventScript_Scroll::
 	lockall
-	compare VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle1_EventScript_FoundScroll
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0, Route110_TrickHousePuzzle1_EventScript_FoundScroll
 	goto Route110_TrickHousePuzzle_EventScript_ReadScrollAgain
 	end
 

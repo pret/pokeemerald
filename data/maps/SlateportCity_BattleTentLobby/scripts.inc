@@ -93,8 +93,7 @@ SlateportCity_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
 	slateporttent_getprize
-	compare VAR_RESULT, ITEM_NONE
-	goto_if_ne SlateportCity_BattleTentLobby_EventScript_GivePrize
+	goto_if_ne VAR_RESULT, ITEM_NONE, SlateportCity_BattleTentLobby_EventScript_GivePrize
 	special SavePlayerParty
 	msgbox SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
 SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge::
@@ -127,8 +126,7 @@ SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
-	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq VAR_RESULT, 0, SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed
 	setvar VAR_0x8006, 0
 SlateportCity_BattleTentLobby_EventScript_EnterChallenge::
 	msgbox SlateportCity_BattleTentLobby_Text_StepThisWay, MSGBOX_DEFAULT
@@ -204,8 +202,7 @@ SlateportCity_BattleTentLobby_EventScript_TormentGiver::
 	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
 	giveitem ITEM_TM41
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM41
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
 	release

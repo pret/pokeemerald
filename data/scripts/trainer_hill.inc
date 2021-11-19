@@ -2,12 +2,9 @@ TrainerHill_OnResume:
 	setvar VAR_TEMP_2, 0
 	trainerhill_resumetimer
 	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq TrainerHill_1F_EventScript_Lost
-	compare VAR_RESULT, B_OUTCOME_DREW
-	goto_if_eq TrainerHill_1F_EventScript_Lost
-	compare VAR_RESULT, B_OUTCOME_FORFEITED
-	goto_if_eq TrainerHill_1F_EventScript_Lost
+	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, TrainerHill_1F_EventScript_Lost
+	goto_if_eq VAR_RESULT, B_OUTCOME_DREW, TrainerHill_1F_EventScript_Lost
+	goto_if_eq VAR_RESULT, B_OUTCOME_FORFEITED, TrainerHill_1F_EventScript_Lost
 	end
 
 TrainerHill_OnWarp:
@@ -35,8 +32,7 @@ EventScript_TrainerHillTimer::
 TrainerHill_1F_EventScript_DummyWarpToEntranceCounter::
 	setvar VAR_TEMP_2, 1
 	trainerhill_getusingereader
-	compare VAR_RESULT, TRUE  @ VAR_RESULT always FALSE here
-	goto_if_eq TrainerHill_1F_EventScript_WarpSilentToEntranceCounter
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_1F_EventScript_WarpSilentToEntranceCounter  @ VAR_RESULT always FALSE here
 	end
 
 @ Never reached

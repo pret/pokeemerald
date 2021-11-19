@@ -19,16 +19,11 @@ ContestHall_OnTransition:
 ContestHall_EventScript_ReadyContestMusic::
 	call ContestHall_EventScript_TryWaitForLink
 	special GetContestMultiplayerId
-	compare VAR_RESULT, 0
-	call_if_eq ContestHall_EventScript_SaveContestMusicPlayer1
-	compare VAR_RESULT, 1
-	call_if_eq ContestHall_EventScript_SaveContestMusicPlayer2
-	compare VAR_RESULT, 2
-	call_if_eq ContestHall_EventScript_SaveContestMusicPlayer3
-	compare VAR_RESULT, 3
-	call_if_eq ContestHall_EventScript_SaveContestMusicPlayer4
-	compare VAR_RESULT, 4
-	call_if_eq ContestHall_EventScript_SaveContestMusic
+	call_if_eq VAR_RESULT, 0, ContestHall_EventScript_SaveContestMusicPlayer1
+	call_if_eq VAR_RESULT, 1, ContestHall_EventScript_SaveContestMusicPlayer2
+	call_if_eq VAR_RESULT, 2, ContestHall_EventScript_SaveContestMusicPlayer3
+	call_if_eq VAR_RESULT, 3, ContestHall_EventScript_SaveContestMusicPlayer4
+	call_if_eq VAR_RESULT, 4, ContestHall_EventScript_SaveContestMusic
 	return
 
 ContestHall_EventScript_SaveContestMusicPlayer1::
@@ -52,8 +47,7 @@ ContestHall_EventScript_SaveContestMusic::
 	return
 
 ContestHall_OnResume:
-	compare VAR_TEMP_9, 1
-	call_if_eq ContestHall_EventScript_ReShowAudience
+	call_if_eq VAR_TEMP_9, 1, ContestHall_EventScript_ReShowAudience
 	end
 
 ContestHall_EventScript_ReShowAudience::
@@ -84,8 +78,7 @@ ContestHall_EventScript_SetContestObjects::
 ContestHall_EventScript_AddRandomAudienceMembers::
 	call ContestHall_EventScript_GetRandomAudienceGfxId
 	call ContestHall_EventScript_SetRandomAudienceGfx
-	compare VAR_TEMP_0, 8
-	goto_if_lt ContestHall_EventScript_AddRandomAudienceMembers
+	goto_if_lt VAR_TEMP_0, 8, ContestHall_EventScript_AddRandomAudienceMembers
 	return
 
 ContestHall_EventScript_SetRandomAudienceGfx::
@@ -303,8 +296,7 @@ ContestHall_EventScript_RandomAudienceScientist1::
 
 ContestHall_EventScript_CreateAudience::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_CreateWirelessContestAudience
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_CreateWirelessContestAudience
 	switch VAR_CONTEST_TYPE
 	case CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_CreateNormalContestAudience
 	case CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_CreateSuperContestAudience
@@ -444,10 +436,8 @@ ContestHall_EventScript_SetExitWarpLinkContest::
 
 LilycoveCity_ContestLobby_EventScript_SetPlayerGfx::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan
-	compare VAR_RESULT, FEMALE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay
+	goto_if_eq VAR_RESULT, MALE, LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan
+	goto_if_eq VAR_RESULT, FEMALE, LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay
 	return
 
 LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan::

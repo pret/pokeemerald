@@ -29,10 +29,8 @@ SlateportCity_MapScripts::
 SlateportCity_OnTransition:
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_EnterSlateport
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_MovePeopleForSternInterview
-	compare VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1
-	call_if_eq SlateportCity_EventScript_SetReadyForScottScene
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_MovePeopleForSternInterview
+	call_if_eq VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1, SlateportCity_EventScript_SetReadyForScottScene
 	end
 
 SlateportCity_EventScript_EnterSlateport::
@@ -61,8 +59,7 @@ SlateportCity_EventScript_MovePeopleForSternInterview::
 SlateportCity_EventScript_SetReadyForScottScene::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 30
-	goto_if_eq SlateportCity_EventScript_MoveScottLeft
+	goto_if_eq VAR_0x8004, 30, SlateportCity_EventScript_MoveScottLeft
 	setobjectxyperm LOCALID_SCOTT, 23, 27
 	setobjectmovementtype LOCALID_SCOTT, MOVEMENT_TYPE_FACE_RIGHT
 	return
@@ -167,11 +164,9 @@ SlateportCity_EventScript_EffortRibbonWoman::
 	bufferleadmonspeciesname STR_VAR_1
 	msgbox SlateportCity_Text_OhYourPokemon, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, LeadMonHasEffortRibbon
-	compare VAR_RESULT, TRUE
-	call_if_eq SlateportCity_EventScript_MonHasEffortRibbon
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_EventScript_MonHasEffortRibbon
 	specialvar VAR_RESULT, Special_AreLeadMonEVsMaxedOut
-	compare VAR_RESULT, FALSE
-	call_if_eq SlateportCity_EventScript_MonEVsNotMaxed
+	call_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_MonEVsNotMaxed
 	msgbox SlateportCity_Text_PleaseGiveItThisEffortRibbon, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message SlateportCity_Text_ReceivedEffortRibbon
@@ -194,8 +189,7 @@ SlateportCity_EventScript_MonHasEffortRibbon::
 SlateportCity_EventScript_Cook::
 	lock
 	faceplayer
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_CookSternInterview
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_CookSternInterview
 	msgbox SlateportCity_Text_SeaweedFullOfLife, MSGBOX_DEFAULT
 	release
 	end
@@ -208,8 +202,7 @@ SlateportCity_EventScript_CookSternInterview::
 SlateportCity_EventScript_OldWoman::
 	lock
 	faceplayer
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_OldWomanSternInterview
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_OldWomanSternInterview
 	msgbox SlateportCity_Text_HowTownIsBornAndGrows, MSGBOX_DEFAULT
 	release
 	end
@@ -222,8 +215,7 @@ SlateportCity_EventScript_OldWomanSternInterview::
 SlateportCity_EventScript_Girl::
 	lock
 	faceplayer
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_GirlSternInterview
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_GirlSternInterview
 	goto_if_set FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_GirlSecretBase
 	msgbox SlateportCity_Text_SlateportWonderfulPlace, MSGBOX_DEFAULT
 	release
@@ -242,8 +234,7 @@ SlateportCity_EventScript_GirlSecretBase::
 SlateportCity_EventScript_RichBoy::
 	lock
 	faceplayer
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_RichBoySternInterview
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_RichBoySternInterview
 	msgbox SlateportCity_Text_GoingToCompeteInBattleTent, MSGBOX_DEFAULT
 	release
 	end
@@ -254,8 +245,7 @@ SlateportCity_EventScript_RichBoySternInterview::
 	end
 
 SlateportCity_EventScript_FatMan::
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	goto_if_eq SlateportCity_EventScript_FatManSternInterview
+	goto_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_FatManSternInterview
 	msgbox SlateportCity_Text_BushedHikingFromMauville, MSGBOX_NPC
 	end
 
@@ -266,8 +256,7 @@ SlateportCity_EventScript_FatManSternInterview::
 SlateportCity_EventScript_Man1::
 	lock
 	faceplayer
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_Man1SternInterview
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_Man1SternInterview
 	msgbox SlateportCity_Text_EveryoneCallsHimCaptStern, MSGBOX_DEFAULT
 	release
 	end
@@ -347,8 +336,7 @@ SlateportCity_EventScript_NameRatersHouseSign::
 SlateportCity_EventScript_Maniac::
 	lock
 	faceplayer
-	compare VAR_SLATEPORT_CITY_STATE, 1
-	call_if_eq SlateportCity_EventScript_ManiacSternInterview
+	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_ManiacSternInterview
 	msgbox SlateportCity_Text_GetNameRaterToHelpYou, MSGBOX_DEFAULT
 	release
 	end
@@ -760,8 +748,7 @@ SlateportCity_EventScript_BerryPowderClerk::
 SlateportCity_EventScript_ReceivedPowderJar::
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, HasEnoughBerryPowder
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_EventScript_ExplainBerryPowder
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_ExplainBerryPowder
 	msgbox SlateportCity_Text_BroughtMeSomeBerryPowder, MSGBOX_DEFAULT
 	special DisplayBerryPowderVendorMenu
 	goto SlateportCity_EventScript_ChooseBerryPowderItem
@@ -879,21 +866,17 @@ SlateportCity_EventScript_CancelPowderItemSelect::
 
 SlateportCity_EventScript_TryBuyBerryPowderItem::
 	msgbox SlateportCity_Text_ExchangeBerryPowderForItem, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SlateportCity_EventScript_ChooseBerryPowderItem
+	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_ChooseBerryPowderItem
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, HasEnoughBerryPowder
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_EventScript_NotEnoughBerryPowder
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_NotEnoughBerryPowder
 	giveitem VAR_0x8008
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_EventScript_NoRoomForBerryPowderItem
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_NoRoomForBerryPowderItem
 	copyvar VAR_0x8004, VAR_0x8009
 	special TakeBerryPowder
 	special PrintPlayerBerryPowderAmount
 	msgbox SlateportCity_Text_FineBerryPowderTradeSomethingElse, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SlateportCity_EventScript_ChooseBerryPowderItem
+	goto_if_eq VAR_RESULT, YES, SlateportCity_EventScript_ChooseBerryPowderItem
 	msgbox SlateportCity_Text_WhenYouGetMoreBringItToMe, MSGBOX_DEFAULT
 	special RemoveBerryPowderVendorMenu
 	release

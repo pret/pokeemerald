@@ -68,8 +68,7 @@ SecretBase_EventScript_PCMainMenuWithoutRegister::
 
 SecretBase_EventScript_PCPackUp::
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_PCShowMainMenu
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCShowMainMenu
 	closemessage
 	special MoveOutOfSecretBase
 	releaseall
@@ -114,14 +113,11 @@ SecretBase_EventScript_ShowRegisterMenu::
 
 SecretBase_EventScript_PCRegister::
 	special GetCurSecretBaseRegistrationValidity
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_AlreadyRegistered
-	compare VAR_RESULT, 2
-	goto_if_eq SecretBase_EventScript_CantRegisterTooManyBases
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_AlreadyRegistered
+	goto_if_eq VAR_RESULT, 2, SecretBase_EventScript_CantRegisterTooManyBases
 	special CopyCurSecretBaseOwnerName_StrVar1
 	msgbox SecretBase_Text_WantToRegisterSecretBase, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_PCRegisterMenu
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCRegisterMenu
 	msgbox SecretBase_Text_RegistrationCompleted, MSGBOX_SIGN
 	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
@@ -130,8 +126,7 @@ SecretBase_EventScript_PCRegister::
 
 SecretBase_EventScript_AlreadyRegistered::
 	msgbox SecretBase_Text_AlreadyRegisteredDelete, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_PCRegisterMenu
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCRegisterMenu
 	msgbox SecretBase_Text_DataUnregistered, MSGBOX_SIGN
 	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
@@ -184,14 +179,10 @@ SecretBase_EventScript_SandOrnament::
 
 SecretBase_EventScript_ShieldOrToyTV::
 	special InteractWithShieldOrTVDecoration
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_BattleTowerShield
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_ToyTV
-	compare VAR_RESULT, 2
-	goto_if_eq SecretBase_EventScript_SeedotTV
-	compare VAR_RESULT, 3
-	goto_if_eq SecretBase_EventScript_SkittyTV
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_BattleTowerShield
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_ToyTV
+	goto_if_eq VAR_RESULT, 2, SecretBase_EventScript_SeedotTV
+	goto_if_eq VAR_RESULT, 3, SecretBase_EventScript_SkittyTV
 	end
 
 SecretBase_EventScript_BattleTowerShield::

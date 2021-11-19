@@ -12,8 +12,7 @@ BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor::
 	delay 16
 	setvar VAR_TEMP_0, 1
 	frontier_get FRONTIER_DATA_LVL_MODE
-	compare VAR_RESULT, FRONTIER_LVL_OPEN
-	goto_if_eq BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen
+	goto_if_eq VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50
 	waitmovement 0

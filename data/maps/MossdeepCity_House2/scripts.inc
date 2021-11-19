@@ -21,10 +21,8 @@ MossdeepCity_House2_EventScript_Wingull::
 	closemessage
 	setflag FLAG_WINGULL_DELIVERED_MAIL
 	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq MossdeepCity_House2_EventScript_WingullExitNorth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq MossdeepCity_House2_EventScript_WingullExitWest
+	call_if_eq VAR_FACING, DIR_NORTH, MossdeepCity_House2_EventScript_WingullExitNorth
+	call_if_eq VAR_FACING, DIR_WEST, MossdeepCity_House2_EventScript_WingullExitWest
 	removeobject LOCALID_WINGULL
 	release
 	end

@@ -14,8 +14,7 @@ SafariZone_EventScript_Exit::
 SafariZone_EventScript_RetirePrompt::
 	lockall
 	msgbox SafariZone_Text_WouldYouLikeToExit, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SafariZone_EventScript_Retire
+	goto_if_eq VAR_RESULT, YES, SafariZone_EventScript_Retire
 	releaseall
 	end
 
@@ -43,11 +42,9 @@ SafariZone_EventScript_OutOfBalls::
 EventScript_PokeBlockFeeder::
 	lockall
 	special GetPokeblockFeederInFront
-	compare VAR_RESULT, 0xFFFF
-	goto_if_ne SafariZone_EventScript_PokeblockPresent
+	goto_if_ne VAR_RESULT, 0xFFFF, SafariZone_EventScript_PokeblockPresent
 	msgbox SafariZone_Text_PlacePokeblockOnFeeder, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SafariZone_EventScript_ChoosePokeblock
+	goto_if_eq VAR_RESULT, YES, SafariZone_EventScript_ChoosePokeblock
 	releaseall
 	end
 
@@ -55,8 +52,7 @@ SafariZone_EventScript_ChoosePokeblock::
 	fadescreen FADE_TO_BLACK
 	special OpenPokeblockCaseOnFeeder
 	waitstate
-	compare VAR_RESULT, 0xFFFF
-	goto_if_ne SafariZone_EventScript_PokeblockPlaced
+	goto_if_ne VAR_RESULT, 0xFFFF, SafariZone_EventScript_PokeblockPlaced
 	end
 
 SafariZone_EventScript_PokeblockPlaced::

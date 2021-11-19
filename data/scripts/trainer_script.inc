@@ -12,8 +12,7 @@ Std_RegisteredInMatchCall::
 
 EventScript_TryGetTrainerScript::
 	special ShouldTryGetTrainerScript
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_GotoTrainerScript
+	goto_if_eq VAR_RESULT, TRUE, EventScript_GotoTrainerScript
 	releaseall
 	end
 

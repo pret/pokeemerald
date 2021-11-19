@@ -26,10 +26,8 @@ SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon::
 	call_if_set FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
 	call_if_set FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
 	call_if_set FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
-	compare VAR_TEMP_2, CONTEST_CATEGORIES_COUNT
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves
-	compare VAR_SLATEPORT_FAN_CLUB_STATE, 2
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoMoreScarves
+	call_if_eq VAR_TEMP_2, CONTEST_CATEGORIES_COUNT, SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves
+	goto_if_eq VAR_SLATEPORT_FAN_CLUB_STATE, 2, SlateportCity_PokemonFanClub_EventScript_NoMoreScarves
 	msgbox SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing, MSGBOX_DEFAULT
 	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon
 	end
@@ -73,8 +71,7 @@ SlateportCity_PokemonFanClub_EventScript_NoHighConditions::
 
 SlateportCity_PokemonFanClub_EventScript_GiveRedScarf::
 	checkitemspace ITEM_RED_SCARF
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_RED_SCARF
 	giveitem ITEM_RED_SCARF
@@ -84,8 +81,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveRedScarf::
 
 SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf::
 	checkitemspace ITEM_BLUE_SCARF
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_BLUE_SCARF
 	giveitem ITEM_BLUE_SCARF
@@ -95,8 +91,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf::
 
 SlateportCity_PokemonFanClub_EventScript_GivePinkScarf::
 	checkitemspace ITEM_PINK_SCARF
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_PINK_SCARF
 	giveitem ITEM_PINK_SCARF
@@ -106,8 +101,7 @@ SlateportCity_PokemonFanClub_EventScript_GivePinkScarf::
 
 SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf::
 	checkitemspace ITEM_GREEN_SCARF
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_GREEN_SCARF
 	giveitem ITEM_GREEN_SCARF
@@ -117,8 +111,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf::
 
 SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf::
 	checkitemspace ITEM_YELLOW_SCARF
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_YELLOW_SCARF
 	giveitem ITEM_YELLOW_SCARF
@@ -133,8 +126,7 @@ SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf::
 
 SlateportCity_PokemonFanClub_EventScript_CheckMonCool::
 	specialvar VAR_RESULT, CheckLeadMonCool
-	compare VAR_RESULT, TRUE
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonCool
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_PokemonFanClub_EventScript_SetMonCool
 	return
 
 SlateportCity_PokemonFanClub_EventScript_SetMonCool::
@@ -143,8 +135,7 @@ SlateportCity_PokemonFanClub_EventScript_SetMonCool::
 
 SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty::
 	specialvar VAR_RESULT, CheckLeadMonBeauty
-	compare VAR_RESULT, TRUE
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonBeauty
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_PokemonFanClub_EventScript_SetMonBeauty
 	return
 
 SlateportCity_PokemonFanClub_EventScript_SetMonBeauty::
@@ -153,8 +144,7 @@ SlateportCity_PokemonFanClub_EventScript_SetMonBeauty::
 
 SlateportCity_PokemonFanClub_EventScript_CheckMonCute::
 	specialvar VAR_RESULT, CheckLeadMonCute
-	compare VAR_RESULT, TRUE
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonCute
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_PokemonFanClub_EventScript_SetMonCute
 	return
 
 SlateportCity_PokemonFanClub_EventScript_SetMonCute::
@@ -163,8 +153,7 @@ SlateportCity_PokemonFanClub_EventScript_SetMonCute::
 
 SlateportCity_PokemonFanClub_EventScript_CheckMonSmart::
 	specialvar VAR_RESULT, CheckLeadMonSmart
-	compare VAR_RESULT, TRUE
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonSmart
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_PokemonFanClub_EventScript_SetMonSmart
 	return
 
 SlateportCity_PokemonFanClub_EventScript_SetMonSmart::
@@ -173,8 +162,7 @@ SlateportCity_PokemonFanClub_EventScript_SetMonSmart::
 
 SlateportCity_PokemonFanClub_EventScript_CheckMonTough::
 	specialvar VAR_RESULT, CheckLeadMonTough
-	compare VAR_RESULT, TRUE
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonTough
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_PokemonFanClub_EventScript_SetMonTough
 	return
 
 SlateportCity_PokemonFanClub_EventScript_SetMonTough::
@@ -204,8 +192,7 @@ SlateportCity_PokemonFanClub_EventScript_SootheBellWoman::
 	goto_if_set FLAG_RECEIVED_SOOTHE_BELL, SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell
 	msgbox SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	compare VAR_RESULT, 4
-	goto_if_ge SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
+	goto_if_ge VAR_RESULT, 4, SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
 	release
 	end
 
@@ -217,8 +204,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveSootheBell::
 	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT
 	giveitem ITEM_SOOTHE_BELL
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SOOTHE_BELL
 	release
 	end

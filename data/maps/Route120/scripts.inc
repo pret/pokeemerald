@@ -13,32 +13,24 @@ Route120_OnResume:
 	end
 
 Route120_EventScript_RemoveKecleonObject::
-	compare VAR_0x8009, 0
-	call_if_eq Route120_EventScript_RemoveBridgeKecleon
-	compare VAR_0x8009, 1
-	call_if_eq Route120_EventScript_RemoveKecleon
-	compare VAR_0x8009, 2
-	call_if_eq Route120_EventScript_RemoveKecleon
-	compare VAR_0x8009, 3
-	call_if_eq Route120_EventScript_RemoveKecleon
-	compare VAR_0x8009, 4
-	call_if_eq Route120_EventScript_RemoveKecleon
-	compare VAR_0x8009, 5
-	call_if_eq Route120_EventScript_RemoveKecleon
+	call_if_eq VAR_0x8009, 0, Route120_EventScript_RemoveBridgeKecleon
+	call_if_eq VAR_0x8009, 1, Route120_EventScript_RemoveKecleon
+	call_if_eq VAR_0x8009, 2, Route120_EventScript_RemoveKecleon
+	call_if_eq VAR_0x8009, 3, Route120_EventScript_RemoveKecleon
+	call_if_eq VAR_0x8009, 4, Route120_EventScript_RemoveKecleon
+	call_if_eq VAR_0x8009, 5, Route120_EventScript_RemoveKecleon
 	return
 
 Route120_EventScript_RemoveBridgeKecleon::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne Common_EventScript_NopReturn
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject LOCALID_BRIDGE_KECLEON
 	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
 	return
 
 Route120_EventScript_RemoveKecleon::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne Common_EventScript_NopReturn
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -71,12 +63,9 @@ Route120_OnTransition:
 
 Route120_EventScript_SetWeather::
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_TEMP_1, 14
-	goto_if_le Route120_EventScript_SetSunnyWeather
-	compare VAR_TEMP_1, 60
-	goto_if_le Route120_EventScript_TrySetRainyWeather
-	compare VAR_TEMP_1, 61
-	goto_if_ge Route120_EventScript_SetCloudyWeather
+	goto_if_le VAR_TEMP_1, 14, Route120_EventScript_SetSunnyWeather
+	goto_if_le VAR_TEMP_1, 60, Route120_EventScript_TrySetRainyWeather
+	goto_if_ge VAR_TEMP_1, 61, Route120_EventScript_SetCloudyWeather
 	return
 
 Route120_EventScript_SetCloudyWeather::
@@ -88,10 +77,8 @@ Route120_EventScript_SetSunnyWeather::
 	return
 
 Route120_EventScript_TrySetRainyWeather::
-	compare VAR_TEMP_0, 7
-	goto_if_le Route120_EventScript_SetRainyWeather
-	compare VAR_TEMP_0, 19
-	goto_if_le Route120_EventScript_SetSunnyWeather
+	goto_if_le VAR_TEMP_0, 7, Route120_EventScript_SetRainyWeather
+	goto_if_le VAR_TEMP_0, 19, Route120_EventScript_SetSunnyWeather
 	goto Route120_EventScript_SetRainyWeather
 	end
 
@@ -105,10 +92,8 @@ Route120_EventScript_BerryBeauty::
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_120_RECEIVED_BERRY, Route120_EventScript_ReceivedBerry
 	msgbox Route120_Text_BerriesExpressionOfLoveIsntIt, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq Route120_EventScript_BerryLove
-	compare VAR_RESULT, NO
-	call_if_eq Route120_EventScript_BerryNotLove
+	call_if_eq VAR_RESULT, YES, Route120_EventScript_BerryLove
+	call_if_eq VAR_RESULT, NO, Route120_EventScript_BerryNotLove
 	specialvar VAR_RESULT, GetPlayerTrainerIdOnesDigit
 	switch VAR_RESULT
 	case 0, Route120_EventScript_GiveFigyBerry
@@ -150,8 +135,7 @@ Route120_EventScript_GiveIapapaBerry::
 
 Route120_EventScript_GiveBerry::
 	giveitem VAR_0x8004
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
 	msgbox Route120_Text_BerryIsRareRaiseItWithCare, MSGBOX_DEFAULT
 	release
@@ -175,8 +159,7 @@ Route120_EventScript_Steven::
 	faceplayer
 	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_StevenAskReadyForBattle
 	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route120_EventScript_StevenNotReady
+	goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
 	goto Route120_EventScript_StevenBattleKecleon
 	end
 
@@ -188,18 +171,15 @@ Route120_EventScript_StevenNotReady::
 
 Route120_EventScript_StevenAskReadyForBattle::
 	msgbox Route120_Text_StevenReadyForBattle, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route120_EventScript_StevenNotReady
+	goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
 	goto Route120_EventScript_StevenBattleKecleon
 	end
 
 Route120_EventScript_StevenBattleKecleon::
 	msgbox Route120_Text_StevenShowMeYourPower, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq Route120_EventScript_PlayerApproachKecleonNorth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq Route120_EventScript_PlayerApproachKecleonWest
+	call_if_eq VAR_FACING, DIR_NORTH, Route120_EventScript_PlayerApproachKecleonNorth
+	call_if_eq VAR_FACING, DIR_WEST, Route120_EventScript_PlayerApproachKecleonWest
 	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 20
@@ -219,12 +199,9 @@ Route120_EventScript_StevenBattleKecleon::
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq Route120_EventScript_RemoveBridgeKecleonPostBattle
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq Route120_EventScript_RemoveBridgeKecleonPostBattle
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq Route120_EventScript_RemoveBridgeKecleonPostBattle
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route120_EventScript_RemoveBridgeKecleonPostBattle
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route120_EventScript_RemoveBridgeKecleonPostBattle
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route120_EventScript_RemoveBridgeKecleonPostBattle
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
 
@@ -296,8 +273,7 @@ Route120_EventScript_Colin::
 Route120_EventScript_Robert::
 	trainerbattle_single TRAINER_ROBERT_1, Route120_Text_RobertIntro, Route120_Text_RobertDefeat, Route120_EventScript_RegisterRobert
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route120_EventScript_RematchRobert
+	goto_if_eq VAR_RESULT, TRUE, Route120_EventScript_RematchRobert
 	msgbox Route120_Text_RobertPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -328,8 +304,7 @@ Route120_EventScript_Jenna::
 Route120_EventScript_Jeffrey::
 	trainerbattle_single TRAINER_JEFFREY_1, Route120_Text_JeffreyIntro, Route120_Text_JeffreyDefeat, Route120_EventScript_RegisterJeffrey
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route120_EventScript_RematchJeffrey
+	goto_if_eq VAR_RESULT, TRUE, Route120_EventScript_RematchJeffrey
 	msgbox Route120_Text_JeffreyPostBattle, MSGBOX_DEFAULT
 	release
 	end

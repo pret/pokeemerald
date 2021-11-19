@@ -10,8 +10,7 @@ AncientTomb_OnResume:
 
 AncientTomb_EventScript_TryRemoveRegisteel::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne Common_EventScript_NopReturn
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -68,12 +67,9 @@ AncientTomb_EventScript_Registeel::
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq AncientTomb_EventScript_DefeatedRegisteel
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AncientTomb_EventScript_RanFromRegisteel
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AncientTomb_EventScript_RanFromRegisteel
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end

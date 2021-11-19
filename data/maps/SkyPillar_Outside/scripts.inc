@@ -7,10 +7,8 @@ SkyPillar_Outside_MapScripts::
 	.byte 0
 
 SkyPillar_Outside_OnTransition:
-	compare VAR_SOOTOPOLIS_CITY_STATE, 3
-	call_if_eq SkyPillar_Outside_EventScript_HideMapNamePopup
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge SkyPillar_Outside_EventScript_CheckSetAbnormalWeather
+	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_HideMapNamePopup
+	call_if_ge VAR_SOOTOPOLIS_CITY_STATE, 4, SkyPillar_Outside_EventScript_CheckSetAbnormalWeather
 	end
 
 SkyPillar_Outside_EventScript_HideMapNamePopup::

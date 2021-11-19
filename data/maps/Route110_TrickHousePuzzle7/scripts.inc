@@ -72,8 +72,7 @@ Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff::
 	return
 
 Route110_TrickHousePuzzle7_OnTransition:
-	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
-	goto_if_eq Route110_TrickHousePuzzle7_EventScript_TeleportedTransition
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_TeleportedTransition
 	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
@@ -85,8 +84,7 @@ Route110_TrickHousePuzzle7_EventScript_TeleportedTransition::
 	end
 
 Route110_TrickHousePuzzle7_OnLoad:
-	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
-	call_if_eq Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles
+	call_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles
 	end
 
 Route110_TrickHousePuzzle7_OnFrame:
@@ -99,8 +97,7 @@ Route110_TrickHousePuzzle7_EventScript_ClearState2::
 
 Route110_TrickHousePuzzle7_EventScript_Scroll::
 	lockall
-	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle7_EventScript_FoundScroll
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0, Route110_TrickHousePuzzle7_EventScript_FoundScroll
 	goto Route110_TrickHousePuzzle_EventScript_ReadScrollAgain
 	end
 

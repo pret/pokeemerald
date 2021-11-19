@@ -22,8 +22,7 @@ Common_EventScript_TransferredToPC::
 
 EventScript_TransferredSomeonesPC::
 	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_SomeonesPCBoxFull
+	goto_if_eq VAR_RESULT, TRUE, EventScript_SomeonesPCBoxFull
 	msgbox gText_PkmnTransferredSomeonesPC, MSGBOX_DEFAULT
 	return
 
@@ -35,8 +34,7 @@ EventScript_SomeonesPCBoxFull::
 
 EventScript_TransferredLanettesPC::
 	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_LanettesPCBoxFull
+	goto_if_eq VAR_RESULT, TRUE, EventScript_LanettesPCBoxFull
 	msgbox gText_PkmnTransferredLanettesPC, MSGBOX_DEFAULT
 	return
 

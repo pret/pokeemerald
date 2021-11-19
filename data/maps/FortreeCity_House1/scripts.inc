@@ -10,18 +10,15 @@ FortreeCity_House1_EventScript_Trader::
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox FortreeCity_House1_Text_YouWillTradeWontYou, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq FortreeCity_House1_EventScript_DeclineTrade
+	goto_if_eq VAR_RESULT, NO, FortreeCity_House1_EventScript_DeclineTrade
 	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
-	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
-	goto_if_eq FortreeCity_House1_EventScript_DeclineTrade
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FortreeCity_House1_EventScript_DeclineTrade
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne FortreeCity_House1_EventScript_NotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, FortreeCity_House1_EventScript_NotRequestedMon
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon

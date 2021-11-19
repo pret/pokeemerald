@@ -121,8 +121,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament::
 	applymovement LOCALID_CURATOR, Common_Movement_FacePlayer
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude, MSGBOX_DEFAULT
 	givedecoration DECOR_GLASS_ORNAMENT
-	compare VAR_RESULT, FALSE
-	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament
 	setflag FLAG_RECEIVED_GLASS_ORNAMENT
 	closemessage
 	releaseall

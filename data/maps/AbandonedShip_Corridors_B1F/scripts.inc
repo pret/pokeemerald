@@ -28,8 +28,7 @@ AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor::
 	lockall
 	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked
 	checkitem ITEM_STORAGE_KEY
-	compare VAR_RESULT, FALSE
-	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked
+	goto_if_eq VAR_RESULT, FALSE, AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked
 	msgbox AbandonedShip_Corridors_B1F_Text_InsertedStorageKey, MSGBOX_DEFAULT
 	playse SE_PIN
 	removeitem ITEM_STORAGE_KEY
