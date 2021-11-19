@@ -421,5 +421,6 @@ extern const u8 BattleScript_BeakBlastBurn[];
 extern const u8 BattleScript_ShellTrapSetUp[];
 extern const u8 BattleScript_ShellTrapExplode[];
 extern const u8 BattleScript_EffectShellTrap[];
+extern const u8 BattleScript_DefDownSpeedUp[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

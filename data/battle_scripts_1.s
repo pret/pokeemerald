@@ -570,9 +570,7 @@ BattleScript_ScaleShotPrintStrings::
 	printstring STRINGID_HITXTIMES
 	waitmessage 0x40
 BattleScript_ScaleShotEnd::
-	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	seteffectwithchance
-	setmoveeffect MOVE_EFFECT_DEF_MINUS_1 | MOVE_EFFECT_AFFECTS_USER
+	setmoveeffect MOVE_EFFECT_SCALE_SHOT | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	seteffectwithchance
 	tryfaintmon BS_TARGET, FALSE, NULL
 	moveendcase MOVEEND_SYNCHRONIZE_TARGET
@@ -7180,6 +7178,26 @@ BattleScript_DefSpDefDownTrySpDef::
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_DefSpDefDownRet::
+	return
+
+BattleScript_DefDownSpeedUp::
+	jumpifstat BS_ATTACKER, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_DefDownSpeedUpTryDef
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_DefDownSpeedUpRet
+BattleScript_DefDownSpeedUpTryDef::
+	playstatchangeanimation BS_ATTACKER, BIT_DEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_CANT_PREVENT
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR | MOVE_EFFECT_CERTAIN, BattleScript_DefDownSpeedUpTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_DefDownSpeedUpTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_DefDownSpeedUpTrySpeed:
+	playstatchangeanimation BS_ATTACKER, BIT_SPEED, 0
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR | MOVE_EFFECT_CERTAIN, BattleScript_DefDownSpeedUpRet
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_DefDownSpeedUpRet
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_DefDownSpeedUpRet::
 	return
 
 BattleScript_KnockedOff::

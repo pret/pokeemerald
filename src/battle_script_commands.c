@@ -3489,6 +3489,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
                 gBattleMons[gBattlerAttacker].status2 |= STATUS2_ESCAPE_PREVENTION;
                 break;
+            case MOVE_EFFECT_SCALE_SHOT:
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_DefDownSpeedUp;
+                break;
             }
         }
     }
@@ -9328,6 +9332,9 @@ static void Cmd_various(void)
     }
     case VARIOUS_SET_BEAK_BLAST:    
         gProtectStructs[gBattlerAttacker].beakBlastCharge = 1;
+        break;
+    case VARIOUS_SET_SHELL_TRAP:
+        gProtectStructs[gBattlerAttacker].shellTrap = 1;
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
     {

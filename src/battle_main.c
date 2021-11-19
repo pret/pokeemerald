@@ -4715,8 +4715,8 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
                     BattleScriptExecute(BattleScript_BeakBlastSetUp);
                     return;
                 case MOVE_SHELL_TRAP:
-                        BattleScriptExecute(BattleScript_ShellTrapSetUp);
-                        return;
+                    BattleScriptExecute(BattleScript_ShellTrapSetUp);
+                    return;
                 }
             }
         }
