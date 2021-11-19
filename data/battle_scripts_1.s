@@ -403,12 +403,12 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectOctolock                @ EFFECT_OCTOLOCK
 	.4byte BattleScript_EffectClangorousSoul          @ EFFECT_CLANGOROUS_SOUL
 	.4byte BattleScript_EffectHit                     @ EFFECT_BOLT_BEAK
-	.4byte BattleScript_EffectHit					  @ EFFECT_EXPANDING_FORCE
+	.4byte BattleScript_EffectHit                     @ EFFECT_EXPANDING_FORCE
 	.4byte BattleScript_EffectScaleShot               @ EFFECT_SCALE_SHOT
 	.4byte BattleScript_EffectMeteorBeam              @ EFFECT_METEOR_BEAM
 	.4byte BattleScript_EffectHit                     @ EFFECT_RISING_VOLTAGE
 	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
-	.4byte BattleScript_EffectBeakBlast               @ EFFECT_BEAK_BLAST
+	.4byte BattleScript_EffectHit                     @ EFFECT_BEAK_BLAST
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 
@@ -464,14 +464,6 @@ BattleScript_EffectCourtChange::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectBeakBlast::
-	attackcanceler
-	jumpifnodamage BattleScript_HitFromAccCheck
-	ppreduce
-	printstring STRINGID_PKMNLOSTFOCUS
-	waitmessage 0x40
-	goto BattleScript_MoveEnd
-
 BattleScript_BeakBlastSetUp::
 	setbeakblast BS_ATTACKER
 	printstring STRINGID_EMPTYSTRING3
@@ -482,17 +474,11 @@ BattleScript_BeakBlastSetUp::
 	end2
 
 BattleScript_BeakBlastBurn::
-	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
-	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
-	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
-	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_LeafGuardProtects
-	jumpifflowerveil BattleScript_FlowerVeilProtects
-	jumpifleafguardprotected BS_TARGET, BattleScript_LeafGuardProtects
-	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_BeakBlastBurnReturn
-	setmoveeffect MOVE_EFFECT_BURN | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
-BattleScript_BeakBlastBurnReturn:
+	setbyte cMULTISTRING_CHOOSER, 0
+	copybyte gEffectBattler, gBattlerAttacker
+	call BattleScript_MoveEffectBurn
 	return
+
 BattleScript_EffectCorrosiveGas::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
