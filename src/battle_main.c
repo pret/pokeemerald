@@ -4689,7 +4689,7 @@ static void CheckMegaEvolutionBeforeTurn(void)
         }
     }
 
-    #if B_MEGA_EVO_ALTER_TURN_ORDER <= GEN_6
+    #if B_MEGA_EVO_TURN_ORDER <= GEN_6
         gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
         gBattleStruct->focusPunchBattlerId = 0;
     #else
