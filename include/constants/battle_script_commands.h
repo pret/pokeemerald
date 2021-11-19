@@ -37,6 +37,8 @@
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
 #define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
 #define sABILITY_OVERWRITE gBattleScripting + 0x34
+#define sSWITCH_CASE gBattleScripting + 0x36
+#define sBERRY_OVERRIDE gBattleScripting + 0x37
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 #define cMISS_TYPE gBattleCommunication + 6
@@ -173,12 +175,45 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
-#define VARIOUS_TRY_SET_CORROSIVE_GAS           105
-#define VARIOUS_SET_BEAK_BLAST                  106
-#define VARIOUS_SWAP_SIDE_STATUSES              107
-#define VARIOUS_SET_SHELL_TRAP                  108
-#define VARIOUS_CLEAR_SHELL_TRAP                109
-#define VARIOUS_CHECK_SHELL_TRAP                110
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_TERRAIN_SEED                    106
+#define VARIOUS_MAKE_INVISIBLE                  107
+#define VARIOUS_ROOM_SERVICE                    108
+#define VARIOUS_JUMP_IF_TERRAIN_AFFECTED        109
+#define VARIOUS_EERIE_SPELL_PP_REDUCE           110
+#define VARIOUS_JUMP_IF_TEAM_HEALTHY            111
+#define VARIOUS_TRY_HEAL_QUARTER_HP             112
+#define VARIOUS_REMOVE_TERRAIN                  113
+#define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
+#define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     115
+#define VARIOUS_GET_ROTOTILLER_TARGETS          116
+#define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 117
+#define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        118
+#define VARIOUS_CONSUME_BERRY                   119
+#define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL   120
+#define VARIOUS_HANDLE_PRIMAL_REVERSION         121
+#define VARIOUS_APPLY_PLASMA_FISTS              122
+#define VARIOUS_JUMP_IF_SPECIES                 123
+#define VARIOUS_UPDATE_ABILITY_POPUP            124
+#define VARIOUS_JUMP_IF_WEATHER_AFFECTED        125
+#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    126
+#define VARIOUS_SET_ATTACKER_STICKY_WEB_USER    127
+#define VARIOUS_TRY_TO_APPLY_MIMICRY            128
+#define VARIOUS_PHOTON_GEYSER_CHECK             129
+#define VARIOUS_SHELL_SIDE_ARM_CHECK            130
+#define VARIOUS_TRY_NO_RETREAT                  131
+#define VARIOUS_TRY_TAR_SHOT                    132
+#define VARIOUS_CAN_TAR_SHOT_WORK               133
+#define VARIOUS_CHECK_POLTERGEIST               134
+#define VARIOUS_SET_OCTOLOCK                    135
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
+#define VARIOUS_TRY_END_NEUTRALIZING_GAS        137
+#define VARIOUS_TRY_SET_CORROSIVE_GAS           138
+#define VARIOUS_SET_BEAK_BLAST                  139
+#define VARIOUS_SWAP_SIDE_STATUSES              140
+#define VARIOUS_SET_SHELL_TRAP                  141
+#define VARIOUS_CLEAR_SHELL_TRAP                142
+#define VARIOUS_CHECK_SHELL_TRAP                143
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -197,6 +232,7 @@
 // Cmd_statbuffchange
 #define STAT_BUFF_ALLOW_PTR                 (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
 #define STAT_BUFF_NOT_PROTECT_AFFECTED      (1 << 5)
+#define STAT_BUFF_UPDATE_MOVE_EFFECT        (1 << 6)
 
 // stat change flags for Cmd_playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             (1 << 0)
@@ -233,15 +269,24 @@
 #define MOVEEND_ITEM_EFFECTS_TARGET               13
 #define MOVEEND_MOVE_EFFECTS2                     14
 #define MOVEEND_ITEM_EFFECTS_ALL                  15
-#define MOVEEND_KINGSROCK_SHELLBELL               16
+#define MOVEEND_KINGSROCK                         16    // These item effects will occur each strike of a multi-hit move
 #define MOVEEND_SUBSTITUTE                        17
 #define MOVEEND_UPDATE_LAST_MOVES                 18
 #define MOVEEND_MIRROR_MOVE                       19
-#define MOVEEND_NEXT_TARGET                       20
-#define MOVEEND_LIFE_ORB                          21
-#define MOVEEND_DANCER                            22
-#define MOVEEND_EMERGENCY_EXIT                    23
-#define MOVEEND_CLEAR_BITS                        24
-#define MOVEEND_COUNT                             25
+#define MOVEEND_NEXT_TARGET                       20    // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_EJECT_BUTTON                      21
+#define MOVEEND_RED_CARD                          22
+#define MOVEEND_EJECT_PACK                        23
+#define MOVEEND_LIFEORB_SHELLBELL                 24    // Includes shell bell, throat spray, etc
+#define MOVEEND_PICKPOCKET                        25
+#define MOVEEND_DANCER                            26
+#define MOVEEND_EMERGENCY_EXIT                    27
+#define MOVEEND_CLEAR_BITS                        28
+#define MOVEEND_COUNT                             29
+
+// switch cases
+#define B_SWITCH_NORMAL     0
+#define B_SWITCH_HIT        1   // dragon tail, circle throw
+#define B_SWITCH_RED_CARD   2
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

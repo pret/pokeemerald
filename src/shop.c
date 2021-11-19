@@ -91,7 +91,7 @@ static void Task_ReturnToItemListAfterDecorationPurchase(u8 taskId);
 static void Task_HandleShopMenuBuy(u8 taskId);
 static void Task_HandleShopMenuSell(u8 taskId);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
-static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y);
+static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
 
 static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
 {
@@ -552,17 +552,17 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     BuyMenuPrint(2, description, 3, 1, 0, 0);
 }
 
-static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
+static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 {
     u8 x;
 
-    if (item != LIST_CANCEL)
+    if (itemId != LIST_CANCEL)
     {
         if (sMartInfo.martType == MART_TYPE_NORMAL)
         {
             ConvertIntToDecimalStringN(
                 gStringVar1,
-                ItemId_GetPrice(item) >> GetPriceReduction(POKENEWS_SLATEPORT),
+                ItemId_GetPrice(itemId) >> GetPriceReduction(POKENEWS_SLATEPORT),
                 STR_CONV_MODE_LEFT_ALIGN,
                 5);
         }
@@ -570,7 +570,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
         {
             ConvertIntToDecimalStringN(
                 gStringVar1,
-                gDecorations[item].price,
+                gDecorations[itemId].price,
                 STR_CONV_MODE_LEFT_ALIGN,
                 5);
         }
@@ -625,8 +625,8 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdPtr = spriteId;
-            gSprites[spriteId].pos2.x = 24;
-            gSprites[spriteId].pos2.y = 88;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 88;
         }
     }
     else

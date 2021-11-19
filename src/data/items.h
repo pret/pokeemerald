@@ -2148,7 +2148,7 @@ const struct Item gItems[] =
         .battleUseFunc = ItemUseInBattle_EnigmaBerry,
     },
 
-    [ITEM_0B0] =
+    [ITEM_UNUSED_BERRY_1] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2159,7 +2159,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0B1] =
+    [ITEM_UNUSED_BERRY_2] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2170,7 +2170,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0B2] =
+    [ITEM_UNUSED_BERRY_3] =
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
@@ -2262,7 +2262,7 @@ const struct Item gItems[] =
         .name = _("MENTAL HERB"),
         .itemId = ITEM_MENTAL_HERB,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_CURE_ATTRACT,
+        .holdEffect = HOLD_EFFECT_MENTAL_HERB,
         .description = sMentalHerbDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -2680,7 +2680,7 @@ const struct Item gItems[] =
         .name = _("UP-GRADE"),
         .itemId = ITEM_UP_GRADE,
         .price = 2100,
-        .holdEffect = HOLD_EFFECT_UP_GRADE,
+        .holdEffect = HOLD_EFFECT_UPGRADE,
         .description = sUpGradeDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -2767,7 +2767,7 @@ const struct Item gItems[] =
         .name = _("STICK"),
         .itemId = ITEM_STICK,
         .price = 200,
-        .holdEffect = HOLD_EFFECT_STICK,
+        .holdEffect = HOLD_EFFECT_LEEK,
         .description = sStickDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,

@@ -37,6 +37,7 @@
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_DEBUG                  20
+#define B_ACTION_THROW_BALL             21 // R to throw last used ball
 #define B_ACTION_NONE                   0xFF
 
 #define MAX_TRAINER_ITEMS 4
@@ -61,12 +62,13 @@ struct ResourceFlags
     u32 flags[4];
 };
 
-#define RESOURCE_FLAG_FLASH_FIRE     0x1
-#define RESOURCE_FLAG_ROOST          0x2
-#define RESOURCE_FLAG_UNBURDEN       0x4
-#define RESOURCE_FLAG_INTIMIDATED    0x8
-#define RESOURCE_FLAG_TRACED         0x10
-#define RESOURCE_FLAG_EMERGENCY_EXIT 0x20
+#define RESOURCE_FLAG_FLASH_FIRE        0x1
+#define RESOURCE_FLAG_ROOST             0x2
+#define RESOURCE_FLAG_UNBURDEN          0x4
+#define RESOURCE_FLAG_INTIMIDATED       0x8
+#define RESOURCE_FLAG_TRACED            0x10
+#define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
+#define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
 
 struct DisableStruct
 {
@@ -111,6 +113,9 @@ struct DisableStruct
     u8 throatChopTimer;
     u8 usedMoves:4;
     u8 wrapTurns;
+    u8 noRetreat:1;
+    u8 tarShot:1;
+    u8 octolock:1;
 };
 
 struct ProtectStruct
@@ -119,6 +124,7 @@ struct ProtectStruct
     u32 spikyShielded:1;
     u32 kingsShielded:1;
     u32 banefulBunkered:1;
+    u32 obstructed:1;
     u32 endured:1;
     u32 noValidMoves:1;
     u32 helpingHand:1;
@@ -126,7 +132,7 @@ struct ProtectStruct
     u32 stealMove:1;
     u32 prlzImmobility:1;
     u32 confusionSelfDmg:1;
-    u32 targetNotAffected:1;
+    u32 targetAffected:1;
     u32 chargingTurn:1;
     u32 fleeFlag:2; // For RunAway and Smoke Ball.
     u32 usedImprisonedMove:1;
@@ -142,10 +148,17 @@ struct ProtectStruct
     u32 usedGravityPreventedMove:1;
     u32 powderSelfDmg:1;
     u32 usedThroatChopPreventedMove:1;
-    u32 micle:1;
-    u32 custap:1;    // also quick claw
-    u32 beakBlastCharge:1;
-    u32 shellTrap:1;
+    u32 statRaised:1;
+    u32 usedMicleBerry:1;
+    u32 usedCustapBerry:1;    // also quick claw
+    u32 touchedProtectLike:1;
+    // End of 32-bit bitfield
+    u8 disableEjectPack:1;
+    u8 statFell:1;
+    u8 pranksterElevated:1;
+    u8 quickDraw:1;
+    u8 beakBlastCharge:1;
+    u8 shellTrap:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -170,10 +183,13 @@ struct SpecialStatus
     u8 instructedChosenTarget:3;
     u8 berryReduced:1;
     u8 gemBoost:1;
+    u8 rototillerAffected:1;  // to be affected by rototiller
     u8 gemParam;
     u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
+    u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
+    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -193,7 +209,8 @@ struct SideTimer
     u8 safeguardTimer;
     u8 safeguardBattlerId;
     u8 followmeTimer;
-    u8 followmeTarget;
+    u8 followmeTarget:3;
+    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
     u8 spikesAmount;
     u8 toxicSpikesAmount;
     u8 stealthRockAmount;
@@ -204,6 +221,7 @@ struct SideTimer
     u8 tailwindBattlerId;
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
+    u8 retaliateTimer;
 };
 
 struct FieldTimer
@@ -213,11 +231,7 @@ struct FieldTimer
     u8 wonderRoomTimer;
     u8 magicRoomTimer;
     u8 trickRoomTimer;
-    u8 grassyTerrainTimer;
-    u8 mistyTerrainTimer;
-    u8 electricTerrainTimer;
-    u8 psychicTerrainTimer;
-    u8 echoVoiceCounter;
+    u8 terrainTimer;
     u8 gravityTimer;
     u8 fairyLockTimer;
 };
@@ -458,10 +472,14 @@ struct MegaEvolutionData
     bool8 alreadyEvolved[4]; // Array id is used for mon position.
     u16 evolvedSpecies[MAX_BATTLERS_COUNT];
     u16 playerEvolvedSpecies;
+    u8 primalRevertedPartyIds[2]; // As flags using gBitTable;
+    u16 primalRevertedSpecies[MAX_BATTLERS_COUNT];
+    u16 playerPrimalRevertedSpecies;
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;
     bool8 isWishMegaEvo;
+    bool8 isPrimalReversion;
 };
 
 struct Illusion
@@ -473,13 +491,19 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct StolenItem
+{
+    u16 originalItem:15;
+    u16 stolen:1;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
     u8 turnCountersTracker;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
-    u8 moveTarget[MAX_BATTLERS_COUNT];
+    u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
     u8 wildVictorySong;
     u8 dynamicMoveType;
@@ -487,7 +511,9 @@ struct BattleStruct
     u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // Each of mons can know max 4 moves.
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
-    u8 moneyMultiplier;
+    u8 moneyMultiplier:6;
+    u8 moneyMultiplierItem:1;
+    u8 moneyMultiplierMove:1;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
@@ -528,7 +554,7 @@ struct BattleStruct
     u16 synchronizeMoveEffect;
     bool8 anyMonHasTransformed;
     void (*savedCallback)(void);
-    u16 usedHeldItems[MAX_BATTLERS_COUNT];
+    u16 usedHeldItems[PARTY_SIZE][2];   // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
@@ -582,6 +608,7 @@ struct BattleStruct
     bool8 spriteIgnore0Hp;
     struct Illusion illusion[MAX_BATTLERS_COUNT];
     s8 aiFinalScore[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // AI, target, moves to make debugging easier
+    s32 aiSimulatedDamage[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, move to make debugging easier
     u8 soulheartBattlerId;
     u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
     bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
@@ -589,6 +616,10 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
+    struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    u8 blunderPolicy:1; // should blunder policy activate
+    u8 ballSpriteIds[2];    // item gfx, window gfx
+    u8 stickyWebUser;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -605,6 +636,7 @@ struct BattleStruct
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+#define BATTLER_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type || gBattleMons[battlerId].type3 == type))
 #define SET_BATTLER_TYPE(battlerId, type)           \
@@ -613,6 +645,16 @@ struct BattleStruct
     gBattleMons[battlerId].type2 = type;            \
     gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+
+#define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD          \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD        \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_MAT_BLOCK            \
+                                        || gProtectStructs[battlerId].spikyShielded                                    \
+                                        || gProtectStructs[battlerId].kingsShielded                                    \
+                                        || gProtectStructs[battlerId].banefulBunkered                                  \
+                                        || gProtectStructs[battlerId].obstructed)                                      \
 
 #define GET_STAT_BUFF_ID(n)((n & 7))              // first three bits 0x1, 0x2, 0x4
 #define GET_STAT_BUFF_VALUE_WITH_SIGN(n)((n & 0xF8))
@@ -659,8 +701,10 @@ struct BattleScripting
     u16 moveEffect;
     u16 multihitMoveEffect;
     u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
-    bool8 fixedPopup;   // force ability popup to stick until manually called back
+    bool8 fixedPopup;   // Force ability popup to stick until manually called back
     u16 abilityPopupOverwrite;
+    u8 switchCase;  // Special switching conditions, eg. red card
+    u8 overrideBerryRequirements;
 };
 
 // rom_80A5C6C
@@ -840,6 +884,7 @@ extern u8 gUnusedFirstBattleVar2;
 extern u32 gSideStatuses[2];
 extern struct SideTimer gSideTimers[2];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+extern u32 gStatuses4[MAX_BATTLERS_COUNT];
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 extern u16 gPauseCounterBattle;
 extern u16 gPaydayMoney;
@@ -890,5 +935,7 @@ extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
+extern u16 gLastThrownBall;
+extern bool8 gSwapDamageCategory; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 
 #endif // GUARD_BATTLE_H

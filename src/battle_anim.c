@@ -1564,6 +1564,10 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_DreepyMissile, 0x200, ANIM_TAG_DREEPY},
     {gBattleAnimSpriteGfx_IceRock, 0x1800, ANIM_TAG_ICE_ROCK_SINGLE},
     {gBattleAnimSpriteGfx_StonePillar, 0x1800, ANIM_TAG_STONE_PILLAR_MULTI},
+    {gBattleAnimSpriteGfx_AlphaSymbol, 0x0200, ANIM_TAG_ALPHA_SYMBOL},
+    {gBattleAnimSpriteGfx_OmegaSymbol, 0x0200, ANIM_TAG_OMEGA_SYMBOL},
+    {gBattleAnimSpriteGfx_PrimalParticles, 0x0180, ANIM_TAG_PRIMAL_PARTICLES},
+    {gBattleAnimSpriteGfx_Orbs, 0x0180, ANIM_TAG_STEEL_BEAM},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -2011,6 +2015,10 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_DreepyMissile, ANIM_TAG_DREEPY},
     {gBattleAnimSpritePal_IceRock, ANIM_TAG_ICE_ROCK_SINGLE},
     {gBattleAnimSpritePal_StonePillar, ANIM_TAG_STONE_PILLAR_MULTI},
+    {gBattleAnimSpritePal_AlphaSymbol, ANIM_TAG_ALPHA_SYMBOL},
+    {gBattleAnimSpritePal_OmegaSymbol, ANIM_TAG_OMEGA_SYMBOL},
+    {gBattleAnimSpritePal_PrimalParticles, ANIM_TAG_PRIMAL_PARTICLES},
+    {gBattleAnimSpritePal_SteelBeam, ANIM_TAG_STEEL_BEAM},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
@@ -2044,14 +2052,14 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_SOLARBEAM_CONTESTS] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_Solarbeam, gBattleAnimBgTilemap_ImpactContests},
     //new bgs
     [BG_MAGMA_STORM] = {gBattleAnimBgImage_InAir, gBattleAnimBgPalette_MagmaStorm, gBattleAnimBgTilemap_InAir},
-    [BG_GIGA_IMPACT_OPPONENT] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactOpponent},
-    [BG_GIGA_IMPACT_PLAYER] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactPlayer},
-    [BG_GIGA_IMPACT_CONTEST] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactContests},
+    [BG_GIGA_IMPACT_OPPONENT] = {gBattleAnimBgImage_GigaImpact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_GigaImpactOpponent},
+    [BG_GIGA_IMPACT_PLAYER] = {gBattleAnimBgImage_GigaImpact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_GigaImpactPlayer},
+    [BG_GIGA_IMPACT_CONTEST] = {gBattleAnimBgImage_GigaImpact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_GigaImpactContest},
     [BG_TRICK_ROOM] = {gBattleAnimBgImage_TrickRoom, gBattleAnimBgPalette_TrickRoom, gBattleAnimBgTilemap_TrickRoom},
-    [BG_ROCK_WRECKER] = {gBattleAnimBgImage_RockWrecker, gBattleAnimBgPalette_RockWrecker, gBattleAnimBgTilemap_RockWrecker},
-    [BG_SPACIAL_REND_ON_OPPONENT] = {gBattleAnimBgImage_SpacialRendOpponent, gBattleAnimBgPalette_SpacialRendOpponent, gBattleAnimBgTilemap_SpacialRendOpponent},
-    [BG_SPACIAL_REND_ON_PLAYER] = {gBattleAnimBgImage_SpacialRendPlayer, gBattleAnimBgPalette_SpacialRendPlayer, gBattleAnimBgTilemap_SpacialRendPlayer},
-    [BG_DARK_VOID] = {gBattleAnimBgImage_DarkVoid, gBattleAnimBgPalette_DarkVoid, gBattleAnimBgTilemap_DarkVoid},
+    [BG_ROCK_WRECKER] = {gBattleAnimBgImage_Hurricane, gBattleAnimBgPalette_RockWrecker, gBattleAnimBgTilemap_Hurricane},
+    [BG_SPACIAL_REND_ON_OPPONENT] = {gBattleAnimBgImage_SpacialRend, gBattleAnimBgPalette_SpacialRend, gBattleAnimBgTilemap_GigaImpactOpponent},
+    [BG_SPACIAL_REND_ON_PLAYER] = {gBattleAnimBgImage_SpacialRend, gBattleAnimBgPalette_SpacialRend, gBattleAnimBgTilemap_GigaImpactPlayer},
+    [BG_DARK_VOID] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_DarkVoid, gBattleAnimBgTilemap_DarkVoid},
     [BG_WATER] = {gBattleAnimBgImage_HydroPump, gBattleAnimBgPalette_HydroPump, gBattleAnimBgTilemap_HydroPump},
     [BG_NIGHTMARE] = {gBattleAnimBgImage_Nightmare, gBattleAnimBgPalette_Nightmare, gBattleAnimBgTilemap_Nightmare},
     [BG_LEAF_STORM] = {gBattleAnimBgImage_LeafStorm, gBattleAnimBgPalette_LeafStorm, gBattleAnimBgTilemap_LeafStorm},
@@ -2060,7 +2068,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_WATER_2] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_Waterfall, gBattleAnimBgTilemap_Waterfall},
     [BG_POISON] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_PoisonFalls, gBattleAnimBgTilemap_Waterfall},
     [BG_AEROBLAST] = {gBattleAnimBgImage_Aeroblast, gBattleAnimBgPalette_Aeroblast, gBattleAnimBgTilemap_Aeroblast},
-    [BG_HIGH_SPEED] = {gBattleAnimBgImage_HighSpeed, gBattleAnimBgPalette_HighSpeed, gBattleAnimBgTilemap_HighSpeed},
+    [BG_HURRICANE] = {gBattleAnimBgImage_Hurricane, gBattleAnimBgPalette_Hurricane, gBattleAnimBgTilemap_Hurricane},
     [BG_ELECTRIC_TERRAIN] = {gBattleAnimBgImage_ElectricTerrain, gBattleAnimBgPalette_ElectricTerrain, gBattleAnimBgTilemap_ElectricTerrain},
     [BG_GRASSY_TERRAIN] = {gBattleAnimBgImage_GrassyTerrain, gBattleAnimBgPalette_GrassyTerrain, gBattleAnimBgTilemap_GrassyTerrain},
     [BG_MISTY_TERRAIN] = {gBattleAnimBgImage_MistyTerrain, gBattleAnimBgPalette_MistyTerrain, gBattleAnimBgTilemap_MistyTerrain},
@@ -2094,6 +2102,8 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_HYPER_BEAM] = {gBattleAnimBgImage_HydroCannon, gBattleAnimBgPalette_HyperBeam, gBattleAnimBgTilemap_HydroCannon},
     [BG_DYNAMAX_CANNON] = {gBattleAnimBgImage_HydroCannon, gBattleAnimBgPalette_DynamaxCannon, gBattleAnimBgTilemap_HydroCannon},
     [BG_AURA_SPHERE] = {gBattleAnimBgImage_FocusBlast, gBattleAnimBgPalette_AuraSphere, gBattleAnimBgTilemap_FocusBlast},
+    [BG_STEEL_BEAM_OPPONENT] = {gBattleAnimBgImage_Highspeed, gBattleAnimBgPalette_SteelBeam, gBattleAnimBgTilemap_HighspeedOpponent},
+    [BG_STEEL_BEAM_PLAYER] = {gBattleAnimBgImage_Highspeed, gBattleAnimBgPalette_SteelBeam, gBattleAnimBgTilemap_HighspeedPlayer},
 };
 
 static void (* const sScriptCmdTable[])(void) =
@@ -2213,6 +2223,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         case B_ANIM_DOOM_DESIRE_HIT:
         case B_ANIM_WISH_HEAL:
         case B_ANIM_MEGA_EVOLUTION:
+        case B_ANIM_GULP_MISSILE:
             hideHpBoxes = TRUE;
             break;
         default:
@@ -2571,8 +2582,8 @@ static void sub_80A40F4(u8 taskId)
 
     newTaskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
     gTasks[newTaskId].data[t2_BATTLER_SPRITE_ID] = battlerSpriteId;
-    gTasks[newTaskId].data[1] = gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x;
-    gTasks[newTaskId].data[2] = gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y;
+    gTasks[newTaskId].data[1] = gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2;
+    gTasks[newTaskId].data[2] = gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2;
 
     if (!selfData[t1_MON_IN_BG2])
     {
@@ -2708,11 +2719,11 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
-        gBattle_BG1_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
+        gBattle_BG1_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
         if (IsContest() && IsSpeciesNotUnown(gContestResources->moveAnim->species))
             gBattle_BG1_X--;
 
-        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
+        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
         if (setSpriteInvisible)
             gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
 
@@ -2745,8 +2756,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
-        gBattle_BG2_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
-        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
+        gBattle_BG2_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
+        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
 
         if (setSpriteInvisible)
             gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
@@ -2834,8 +2845,8 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
     GetBattleAnimBg1Data(&animBg);
-    x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
-    y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
+    x = gTasks[taskId].data[1] - (gSprites[spriteId].x + gSprites[spriteId].x2);
+    y = gTasks[taskId].data[2] - (gSprites[spriteId].y + gSprites[spriteId].y2);
 
     if (gTasks[taskId].data[5] == 0)
     {
@@ -3227,7 +3238,7 @@ static void LoadDefaultBg(void)
     if (IsContest())
         LoadContestBgAfterMoveAnim();
     #if B_TERRAIN_BG_CHANGE == TRUE
-    else if (gFieldStatuses & STATUS_TERRAIN_ANY)
+    else if (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         DrawTerrainTypeBattleBackground();
     #endif
     else

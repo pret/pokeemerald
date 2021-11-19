@@ -41,6 +41,8 @@ static bool8 IsAbilityAllowingEncounter(u8 level);
 // EWRAM vars
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
+EWRAM_DATA bool8 gIsFishingEncounter = 0;
+EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 
 #include "data/wild_encounters.h"
 
@@ -164,7 +166,7 @@ static u8 ChooseWildMonIndex_Land(void)
         return 8;
     else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
         return 9;
-    else if (rand == ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_9 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_10)
         return 10;
     else
         return 11;
@@ -217,7 +219,7 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
             wildMonIndex = 7;
         if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8)
             wildMonIndex = 8;
-        if (rand == ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8)
+        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9)
             wildMonIndex = 9;
         break;
     }
@@ -652,6 +654,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             {
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                 {
+                    gIsSurfingEncounter = TRUE;
                     if (TryDoDoubleWildBattle())
                     {
                         struct Pokemon mon1 = gEnemyParty[0];
@@ -803,6 +806,7 @@ void FishingWildEncounter(u8 rod)
     }
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
     SetPokemonAnglerSpecies(species);
+    gIsFishingEncounter = TRUE;
     BattleSetup_StartWildBattle();
 }
 

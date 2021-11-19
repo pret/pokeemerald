@@ -136,6 +136,7 @@ void AnimTask_SetCamouflageBlend(u8 taskId)
         gBattleAnimArgs[4] = RGB(31, 31, 31);
         break;
     case BATTLE_TERRAIN_PLAIN:
+    default:
         gBattleAnimArgs[4] = RGB(31, 31, 31);
         break;
     }
@@ -335,8 +336,8 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnimMaskImage_Curse, animBgData.tilesOffset);
     LoadPalette(sCurseLinesPalette, animBgData.paletteId * 16 + 1, 2);
 
-    gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
-    gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
+    gBattle_BG1_X = -gSprites[spriteId].x + 32;
+    gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     gTasks[taskId].data[0] = newSpriteId;
     gTasks[taskId].data[6] = var0;
     gTasks[taskId].func = AnimTask_DrawFallingWhiteLinesOnAttacker_Step;
@@ -904,6 +905,12 @@ void AnimTask_GetBattleTerrain(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
+void AnimTask_GetFieldTerrain(u8 taskId)
+{
+    gBattleAnimArgs[0] = gFieldStatuses & STATUS_FIELD_TERRAIN_ANY;
+    DestroyAnimVisualTask(taskId);
+}
+
 void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
     gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
@@ -1082,5 +1089,11 @@ void AnimTask_SetInvisible(u8 taskId)
     u32 spriteId = gBattlerSpriteIds[battlerId];
 
     gSprites[spriteId].invisible = gBattleSpritesDataPtr->battlerData[battlerId].invisible = gBattleAnimArgs[1];
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_SetAnimTargetToAttackerOpposite(u8 taskId)
+{
+    gBattleAnimTarget = BATTLE_OPPOSITE(gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }
