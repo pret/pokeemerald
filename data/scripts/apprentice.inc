@@ -20,7 +20,7 @@ Apprentice_EventScript_AskQuestion:
 	end
 
 Apprentice_EventScript_FirstMeeting:
-	apprentice_buff 0, APPRENTICE_BUFF_NAME
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_NAME
 	apprentice_msg FALSE, APPRENTICE_MSG_PLEASE_TEACH
 Apprentice_EventScript_WhichLvlMode:
 	apprentice_menu APPRENTICE_ASK_YES_NO
@@ -29,7 +29,7 @@ Apprentice_EventScript_WhichLvlMode:
 	apprentice_menu APPRENTICE_ASK_WHICH_LEVEL
 	apprentice_setlvlmode VAR_RESULT
 	apprentice_shufflespecies
-	apprentice_buff 0, APPRENTICE_BUFF_LEVEL
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_LEVEL
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_LVL_MODE
 	call Apprentice_EventScript_SetHideFlags
 	release
@@ -46,8 +46,8 @@ Apprentice_EventScript_RejectTeach:
 
 Apprentice_EventScript_UseWhichMon:
 	apprentice_initquestion APPRENTICE_QUESTION_WHICH_MON
-	apprentice_buff 0, APPRENTICE_BUFF_SPECIES1
-	apprentice_buff 1, APPRENTICE_BUFF_SPECIES2
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_SPECIES1
+	apprentice_buff STR_VAR_2, APPRENTICE_BUFF_SPECIES2
 	apprentice_msg FALSE, APPRENTICE_MSG_WHICH_MON
 	apprentice_menu APPRENTICE_ASK_2SPECIES
 	copyvar VAR_0x8005, VAR_RESULT
@@ -58,7 +58,7 @@ Apprentice_EventScript_UseWhichMon:
 	apprentice_answeredquestion
 	apprentice_getnumpartymons
 	call_if_eq VAR_RESULT, MULTI_PARTY_SIZE, Apprentice_EventScript_LastMonSelected
-	apprentice_buff 0, VAR_0x8007
+	apprentice_buff STR_VAR_1, VAR_0x8007
 	apprentice_freequestion
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MON
 	call Apprentice_EventScript_SetHideFlags
@@ -83,7 +83,7 @@ Apprentice_EventScript_LastMonSelected:
 
 Apprentice_EventScript_UseWhatHeldItem:
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
-	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg TRUE, APPRENTICE_MSG_WHAT_HELD_ITEM
 	apprentice_freequestion
 Apprentice_EventScript_ChooseHoldItem:
@@ -93,7 +93,7 @@ Apprentice_EventScript_ChooseHoldItem:
 	goto_if_eq VAR_RESULT, FALSE, Apprentice_EventScript_ConfirmHoldNothing
 	apprentice_trysetitem
 	goto_if_eq VAR_RESULT, FALSE, Apprentice_EventScript_AlreadySuggestedItem
-	apprentice_buff 0, APPRENTICE_BUFF_ITEM
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_ITEM
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_HELD_ITEM
 	apprentice_answeredquestion
 	call Apprentice_EventScript_SetHideFlags
@@ -106,7 +106,7 @@ Apprentice_EventScript_ChooseHoldItem:
 
 Apprentice_EventScript_ConfirmHoldNothing:
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
-	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg FALSE, APPRENTICE_MSG_HOLD_NOTHING
 	apprentice_menu APPRENTICE_ASK_GIVE
 	apprentice_freequestion
@@ -126,8 +126,8 @@ Apprentice_EventScript_HoldNothing:
 @ different item if theyve already told the Apprentice to use it for another mon
 Apprentice_EventScript_AlreadySuggestedItem:
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
-	apprentice_buff 0, APPRENTICE_BUFF_ITEM
-	apprentice_buff 1, APPRENTICE_BUFF_SPECIES3
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_ITEM
+	apprentice_buff STR_VAR_2, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg FALSE, APPRENTICE_MSG_ITEM_ALREADY_SUGGESTED
 	apprentice_menu APPRENTICE_ASK_GIVE
 	apprentice_freequestion
@@ -137,9 +137,9 @@ Apprentice_EventScript_AlreadySuggestedItem:
 
 Apprentice_EventScript_UseWhichMove:
 	apprentice_initquestion APPRENTICE_QUESTION_WHICH_MOVE
-	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
-	apprentice_buff 1, APPRENTICE_BUFF_MOVE1
-	apprentice_buff 2, APPRENTICE_BUFF_MOVE2
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_SPECIES3
+	apprentice_buff STR_VAR_2, APPRENTICE_BUFF_MOVE1
+	apprentice_buff STR_VAR_3, APPRENTICE_BUFF_MOVE2
 	apprentice_msg FALSE, APPRENTICE_MSG_WHICH_MOVE
 	apprentice_menu APPRENTICE_ASK_MOVES
 	copyvar VAR_0x8005, VAR_RESULT
@@ -147,7 +147,7 @@ Apprentice_EventScript_UseWhichMove:
 	call_if_eq VAR_0x8005, 1, Apprentice_EventScript_ChoseMove2
 	apprentice_setmove
 	apprentice_answeredquestion
-	apprentice_buff 0, VAR_0x8007
+	apprentice_buff STR_VAR_1, VAR_0x8007
 	apprentice_freequestion
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MOVE
 	call Apprentice_EventScript_SetHideFlags
@@ -171,7 +171,7 @@ Apprentice_EventScript_PutWhichMonFirst:
 	apprentice_menu APPRENTICE_ASK_3SPECIES
 	apprentice_setleadmon VAR_RESULT
 	apprentice_answeredquestion
-	apprentice_buff 0, APPRENTICE_BUFF_LEAD_MON_SPECIES
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_LEAD_MON_SPECIES
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MON_FIRST
 	call Apprentice_EventScript_SetHideFlags
 	release
@@ -190,7 +190,7 @@ Apprentice_EventScript_PickWinSpeech:
 	lock
 	faceplayer
 	apprentice_save
-	apprentice_buff 0, APPRENTICE_BUFF_WIN_SPEECH
+	apprentice_buff STR_VAR_1, APPRENTICE_BUFF_WIN_SPEECH
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_WIN_SPEECH
 	apprentice_reset
 	call Apprentice_EventScript_SetHideFlags

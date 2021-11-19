@@ -118,13 +118,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobbyLost::
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobby
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon::
-	frontier_gettrainername 1
+	frontier_gettrainername STR_VAR_2
 	message BattleFrontier_BattleDomeBattleRoom_Text_TrainerIsWinner
 	waitmessage
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw::
-	frontier_gettrainername 0
+	frontier_gettrainername STR_VAR_1
 	message BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTrainer
 	waitmessage
 	return
