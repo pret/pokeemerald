@@ -1028,13 +1028,13 @@
 	@       replaced with their charmap values, they are just passed as the literal characters "STR_VAR_#".
 	.macro stringvar id:req
 	.if \id == STR_VAR_1
-	.byte 0
+		.byte 0
 	.elseif \id == STR_VAR_2
-	.byte 1
+		.byte 1
 	.elseif \id == STR_VAR_3
-	.byte 2
+		.byte 2
 	.else
-	.byte \id
+		.byte \id
 	.endif
 	.endm
 
@@ -1743,28 +1743,48 @@
 	goto_if TRUE, \dest
 	.endm
 
-	.macro goto_if_lt dest:req @ LESS THAN
-	goto_if 0, \dest
+	@ Allows 'compare' followed by a conditional goto/call to be combined into a single statement.
+	@ The following are examples of the two acceptable formats this facilitates:
+	@ compare VAR_RESULT, TRUE
+	@ goto_if_eq MyScript
+	@ - or -
+	@ goto_if_eq VAR_RESULT, TRUE, MyScript
+	@
+	@ The first two arguments to this macro are the base command, e.g. 'goto_if 1' for goto_if_eq.
+	@ The remaining arguments 'a, b, c' depend on the format:
+	@ For a single statement, 'a' and 'b' are the values to compare and 'c' is the destination pointer.
+	@ For a statement preceded by a compare, 'a' is the destination pointer and 'b/c' are not provided.
+	.macro trycompare jump:req, condition:req, a:req, b, c
+	.ifnb \c
+		compare \a, \b
+		\jump \condition, \c
+	.else
+		\jump \condition, \a
+	.endif
 	.endm
 
-	.macro goto_if_eq dest:req @ EQUAL
-	goto_if 1, \dest
+	.macro goto_if_lt a:req, b, c @ LESS THAN
+	trycompare goto_if, 0, \a, \b, \c
 	.endm
 
-	.macro goto_if_gt dest:req @ GREATER THAN
-	goto_if 2, \dest
+	.macro goto_if_eq a:req, b, c @ EQUAL
+	trycompare goto_if, 1, \a, \b, \c
 	.endm
 
-	.macro goto_if_le dest:req @ LESS THAN OR EQUAL
-	goto_if 3, \dest
+	.macro goto_if_gt a:req, b, c @ GREATER THAN
+	trycompare goto_if, 2, \a, \b, \c
 	.endm
 
-	.macro goto_if_ge dest:req @ GREATER THAN OR EQUAL
-	goto_if 4, \dest
+	.macro goto_if_le a:req, b, c @ LESS THAN OR EQUAL
+	trycompare goto_if, 3, \a, \b, \c
 	.endm
 
-	.macro goto_if_ne dest:req @ NOT EQUAL
-	goto_if 5, \dest
+	.macro goto_if_ge a:req, b, c @ GREATER THAN OR EQUAL
+	trycompare goto_if, 4, \a, \b, \c
+	.endm
+
+	.macro goto_if_ne a:req, b, c @ NOT EQUAL
+	trycompare goto_if, 5, \a, \b, \c
 	.endm
 
 	.macro call_if_unset flag:req, dest:req
@@ -1777,36 +1797,36 @@
 	call_if TRUE, \dest
 	.endm
 
-	.macro call_if_lt dest:req @ LESS THAN
-	call_if 0, \dest
+	.macro call_if_lt a:req, b, c @ LESS THAN
+	trycompare call_if, 0, \a, \b, \c
 	.endm
 
-	.macro call_if_eq dest:req @ EQUAL
-	call_if 1, \dest
+	.macro call_if_eq a:req, b, c @ EQUAL
+	trycompare call_if, 1, \a, \b, \c
 	.endm
 
-	.macro call_if_gt dest:req @ GREATER THAN
-	call_if 2, \dest
+	.macro call_if_gt a:req, b, c @ GREATER THAN
+	trycompare call_if, 2, \a, \b, \c
 	.endm
 
-	.macro call_if_le dest:req @ LESS THAN OR EQUAL
-	call_if 3, \dest
+	.macro call_if_le a:req, b, c @ LESS THAN OR EQUAL
+	trycompare call_if, 3, \a, \b, \c
 	.endm
 
-	.macro call_if_ge dest:req @ GREATER THAN OR EQUAL
-	call_if 4, \dest
+	.macro call_if_ge a:req, b, c @ GREATER THAN OR EQUAL
+	trycompare call_if, 4, \a, \b, \c
 	.endm
 
-	.macro call_if_ne dest:req @ NOT EQUAL
-	call_if 5, \dest
+	.macro call_if_ne a:req, b, c @ NOT EQUAL
+	trycompare call_if, 5, \a, \b, \c
 	.endm
 
-	.macro vgoto_if_eq dest:req
-	vgoto_if TRUE, \dest
+	.macro vgoto_if_eq a:req, b, c
+	trycompare vgoto_if, TRUE, \a, \b, \c
 	.endm
 
-	.macro vgoto_if_ne dest:req
-	vgoto_if FALSE, \dest
+	.macro vgoto_if_ne a:req, b, c
+	trycompare vgoto_if, FALSE, \a, \b, \c
 	.endm
 
 	.macro vgoto_if_unset flag:req, dest:req
