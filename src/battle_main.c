@@ -4717,8 +4717,8 @@ static void TryChangeTurnOrder(void)
                 if (GetWhoStrikesFirst(battler1, battler2, FALSE))
                     SwapTurnOrder(i, j);
             }
-	}
-     }
+        }
+    }
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
     gBattleStruct->focusPunchBattlerId = 0;
 }
