@@ -1121,19 +1121,24 @@ bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability)
 // does NOT include ability suppression checks
 s32 AI_GetAbility(u32 battlerId)
 {
+    u32 knownAbility = GetBattlerAbility(battlerId);
+    
     // The AI knows its own ability.
     if (IsBattlerAIControlled(battlerId))
-        return gBattleMons[battlerId].ability;
+        return knownAbility;
+    
+    // Check neutralizing gas, gastro acid
+    if (knownAbility == ABILITY_NONE)
+        return knownAbility;
 
     if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
         return BATTLE_HISTORY->abilities[battlerId];
 
-    // Abilities that prevent fleeing.
-    if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
-    || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
-    || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
-        return gBattleMons[battlerId].ability;
+    // Abilities that prevent fleeing - treat as always known
+    if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
+        return knownAbility;
 
+    // Else, guess the ability
     if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
     {
         if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
@@ -1146,6 +1151,7 @@ s32 AI_GetAbility(u32 battlerId)
             return gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
         }
     }
+    
     return ABILITY_NONE; // Unknown.
 }
 
@@ -2408,9 +2414,19 @@ static bool32 AnyUsefulStatIsRaised(u8 battler)
     return FALSE;
 }
 
+struct Pokemon *GetPartyBattlerPartyData(u8 battlerId, u8 switchBattler)
+{
+    struct Pokemon *mon;
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        mon = &gPlayerParty[switchBattler];
+    else
+        mon = &gEnemyParty[switchBattler];
+    return mon;
+}
+
 static bool32 PartyBattlerShouldAvoidHazards(u8 currBattler, u8 switchBattler)
 {
-    struct Pokemon *mon = GetBattlerPartyData(switchBattler);
+    struct Pokemon *mon = GetPartyBattlerPartyData(currBattler, switchBattler);
     u16 ability = GetMonAbility(mon);   // we know our own party data
     u16 holdEffect = GetBattlerHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM), TRUE);
     u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);

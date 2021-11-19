@@ -8,21 +8,23 @@
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
 
-#define ABILITYEFFECT_ON_SWITCHIN                0x0
-#define ABILITYEFFECT_ENDTURN                    0x1
-#define ABILITYEFFECT_MOVES_BLOCK                0x2
-#define ABILITYEFFECT_ABSORBING                  0x3
-#define ABILITYEFFECT_MOVE_END_ATTACKER          0x4
-#define ABILITYEFFECT_MOVE_END                   0x5
-#define ABILITYEFFECT_IMMUNITY                   0x6
-#define ABILITYEFFECT_FORECAST                   0x7
-#define ABILITYEFFECT_SYNCHRONIZE                0x8
-#define ABILITYEFFECT_ATK_SYNCHRONIZE            0x9
-#define ABILITYEFFECT_INTIMIDATE1                0xA
-#define ABILITYEFFECT_INTIMIDATE2                0xB
-#define ABILITYEFFECT_TRACE1                     0xC
-#define ABILITYEFFECT_TRACE2                     0xD
-#define ABILITYEFFECT_MOVE_END_OTHER             0xE
+#define ABILITYEFFECT_ON_SWITCHIN                0
+#define ABILITYEFFECT_ENDTURN                    1
+#define ABILITYEFFECT_MOVES_BLOCK                2
+#define ABILITYEFFECT_ABSORBING                  3
+#define ABILITYEFFECT_MOVE_END_ATTACKER          4
+#define ABILITYEFFECT_MOVE_END                   5
+#define ABILITYEFFECT_IMMUNITY                   6
+#define ABILITYEFFECT_FORECAST                   7
+#define ABILITYEFFECT_SYNCHRONIZE                8
+#define ABILITYEFFECT_ATK_SYNCHRONIZE            9
+#define ABILITYEFFECT_INTIMIDATE1                10
+#define ABILITYEFFECT_INTIMIDATE2                11
+#define ABILITYEFFECT_TRACE1                     12
+#define ABILITYEFFECT_TRACE2                     13
+#define ABILITYEFFECT_MOVE_END_OTHER             14
+#define ABILITYEFFECT_NEUTRALIZINGGAS            15
+// Special cases
 #define ABILITYEFFECT_SWITCH_IN_TERRAIN          0xFE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
@@ -102,6 +104,7 @@ u32 IsAbilityOnOpposingSide(u32 battlerId, u32 ability);
 u32 IsAbilityOnField(u32 ability);
 u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battlerId);
+bool32 IsBattlerProtected(u8 battlerId, u16 move);
 bool32 CanBattlerEscape(u32 battlerId); // no ability check
 void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
