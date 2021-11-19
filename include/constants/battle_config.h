@@ -94,7 +94,7 @@
 
 
 // Mega Evolution settings
-#define B_MEGA_EVO_ALTER_TURN_ORDER GEN_7 // In gen6, mega evolving doesn't change the turn order when mega evolving occurs. This is fixed in gen 7
+#define B_MEGA_EVO_TURN_ORDER GEN_7 // In Gen7, a Pokémon's Speed after Mega Evolution is used to determine turn order, not its Speed before.
 
 
 // Calculation settings
