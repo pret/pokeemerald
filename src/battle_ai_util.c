@@ -1141,15 +1141,13 @@ s32 AI_GetAbility(u32 battlerId)
     // Else, guess the ability
     if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
     {
-        if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
+        u16 abilityGuess = ABILITY_NONE;
+        while (abilityGuess == ABILITY_NONE)
         {
-            // AI has no knowledge of opponent, so it guesses which ability.
-            return gBaseStats[gBattleMons[battlerId].species].abilities[Random() & 1];
+            abilityGuess = gBaseStats[gBattleMons[battlerId].species].abilities[Random() % NUM_ABILITY_SLOTS];
         }
-        else
-        {
-            return gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
-        }
+        
+        return abilityGuess;
     }
     
     return ABILITY_NONE; // Unknown.
@@ -1709,7 +1707,7 @@ u32 CountNegativeStatStages(u8 battlerId)
 
 bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_ATK] > 4
@@ -1725,7 +1723,7 @@ bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_DEF] > 4
@@ -1741,7 +1739,7 @@ bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (IsAiFaster(AI_CHECK_SLOWER)
@@ -1755,7 +1753,7 @@ bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPATK] > 4
@@ -1770,7 +1768,7 @@ bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPDEF] > 4
@@ -1785,7 +1783,7 @@ bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (defAbility != ABILITY_CONTRARY
@@ -1799,7 +1797,7 @@ bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE
@@ -3384,6 +3382,47 @@ static const u16 sRecycleEncouragedItems[] =
     // TODO expand this
 };
 
+// Its assumed that the berry is strategically given, so no need to check benefits of the berry
+bool32 IsStatBoostingBerry(u16 item)
+{
+    switch (item)
+    {
+    case ITEM_LIECHI_BERRY:
+    case ITEM_GANLON_BERRY:
+    case ITEM_SALAC_BERRY:
+    case ITEM_PETAYA_BERRY:
+    case ITEM_APICOT_BERRY:
+    //case ITEM_LANSAT_BERRY:
+    case ITEM_STARF_BERRY:
+    #ifdef ITEM_EXPANSION
+    case ITEM_MICLE_BERRY:
+    #endif
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool32 ShouldRestoreHpBerry(u8 battlerAtk, u16 item)
+{
+    switch (item)
+    {
+    case ITEM_ORAN_BERRY:
+        if (gBattleMons[battlerAtk].maxHP <= 50)
+            return TRUE;    // Only worth it in the early game
+        return FALSE;
+    case ITEM_SITRUS_BERRY:
+    case ITEM_FIGY_BERRY:
+    case ITEM_WIKI_BERRY:
+    case ITEM_MAGO_BERRY:
+    case ITEM_AGUAV_BERRY:
+    case ITEM_IAPAPA_BERRY:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 bool32 IsRecycleEncouragedItem(u16 item)
 {
     u32 i;
@@ -3405,6 +3444,9 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
     if (GetHealthPercentage(battlerAtk) < 80 && AI_RandLessThan(128))
         return;
+    
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return; // Damaging moves would get a score boost from AI_TryToFaint or PreferStrongestMove so we don't consider them here
 
     switch (statId)
     {
@@ -3477,6 +3519,9 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
 void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+
     if (AI_CanPoison(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove) && GetHealthPercentage(battlerDef) > 20)
     {
         if (!HasDamagingMove(battlerDef))
@@ -3497,6 +3542,9 @@ void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
     {
         (*score)++; // burning is good
@@ -3513,6 +3561,9 @@ void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+    
     if (AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
     {
         u8 atkSpeed = GetBattlerTotalSpeedStat(battlerAtk);
@@ -3531,6 +3582,9 @@ void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+    
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
         *score += 2;
     else
@@ -3546,6 +3600,9 @@ void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+    
     if (AI_CanConfuse(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove)
       && AI_DATA->defHoldEffect != HOLD_EFFECT_CURE_CONFUSION
       && AI_DATA->defHoldEffect != HOLD_EFFECT_CURE_STATUS)
@@ -3557,4 +3614,13 @@ void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
         else
             *score += 2;
     }
+}
+
+bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move)
+{
+    if (TestMoveFlags(move, FLAG_MAKES_CONTACT)
+      && ability != ABILITY_LONG_REACH
+      && holdEffect != HOLD_EFFECT_PROTECTIVE_PADS)
+        return TRUE;
+    return FALSE;
 }

@@ -52,10 +52,13 @@ bool32 ShouldRecover(u8 battlerAtk, u8 battlerDef, u16 move, u8 healPercent);
 bool32 ShouldSetScreen(u8 battlerAtk, u8 battlerDef, u16 moveEffect);
 bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 moveIndex);
 bool32 IsRecycleEncouragedItem(u16 item);
+bool32 ShouldRestoreHpBerry(u8 battlerAtk, u16 item);
+bool32 IsStatBoostingBerry(u16 item);
 bool32 CanKnockOffItem(u8 battler, u16 item);
 bool32 IsAbilityOfRating(u16 ability, s8 rating);
 s8 GetAbilityRating(u16 ability);
 bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
+bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
