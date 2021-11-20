@@ -1089,7 +1089,7 @@ static const u16 sMoveEffectsForbiddenToInstruct[] =
     EFFECT_SEMI_INVULNERABLE,
     //EFFECT_SHELL_TRAP,
     EFFECT_SKETCH,
-    //EFFECT_SKY_DROP,
+    EFFECT_SKY_DROP,
     EFFECT_SKULL_BASH,
     EFFECT_SLEEP_TALK,
     EFFECT_SOLARBEAM,
@@ -1609,13 +1609,15 @@ static bool32 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
-    else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD)
+	// If the attacker has the ability No Guard and they aren't targeting a Pokemon involved in a Sky Drop with the move Sky Drop, move hits.
+    else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD && (move != MOVE_SKY_DROP || (gBattlerTarget != gBattleStruct->skyDropTargets[0] && gBattlerTarget != gBattleStruct->skyDropTargets[1] && gBattlerTarget != gBattleStruct->skyDropTargets[2] && gBattlerTarget != gBattleStruct->skyDropTargets[3])))
     {
         if (!JumpIfMoveFailed(7, move))
             RecordAbilityBattle(gBattlerAttacker, ABILITY_NO_GUARD);
         return TRUE;
     }
-    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_NO_GUARD)
+	// If the target has the ability No Guard and they aren't involved in a Sky Drop or the current move isn't Sky Drop, move hits.
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_NO_GUARD && (move != MOVE_SKY_DROP || (gBattlerTarget != gBattleStruct->skyDropTargets[0] && gBattlerTarget != gBattleStruct->skyDropTargets[1] && gBattlerTarget != gBattleStruct->skyDropTargets[2] && gBattlerTarget != gBattleStruct->skyDropTargets[3])))
     {
         if (!JumpIfMoveFailed(7, move))
             RecordAbilityBattle(gBattlerTarget, ABILITY_NO_GUARD);
@@ -1623,8 +1625,7 @@ static bool32 AccuracyCalcHelper(u16 move)
     }
 
     if ((gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
-        || (!(gBattleMoves[move].flags & FLAG_DMG_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
-        || (!(gBattleMoves[move].flags & FLAG_DMG_2X_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
+        || (!(gBattleMoves[move].flags & FLAG_DMG_IN_AIR || gBattleMoves[move].flags & FLAG_DMG_2X_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
         || (!(gBattleMoves[move].flags & FLAG_DMG_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
         || (!(gBattleMoves[move].flags & FLAG_DMG_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER))
     {
@@ -2929,9 +2930,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 else
                 {
                     gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
-
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
+                    
+					// If the confusion is activating due to being released from Sky Drop, go to "confused due to fatigue" script.
+					// Otherwise, do normal confusion script.
+                    if(gCurrentMove == MOVE_SKY_DROP)
+                    {
+                        gBattleMons[gEffectBattler].status2 &= ~(STATUS2_LOCK_CONFUSE);
+                        gBattlerAttacker = gEffectBattler;
+                        gBattlescriptCurrInstr = BattleScript_ThrashConfuses;
+                    }
+                    else
+                    {
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];    
+                    }
                 }
                 break;
             case MOVE_EFFECT_FLINCH:
@@ -5138,6 +5150,28 @@ static void Cmd_moveend(void)
             {
                 if (gDisableStructs[i].substituteHP == 0)
                     gBattleMons[i].status2 &= ~(STATUS2_SUBSTITUTE);
+            }
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_SKY_DROP_CONFUSE: // If a Pokemon was released from Sky Drop and was in LOCK_CONFUSE, go to "confused due to fatigue scripts and clear Sky Drop data.
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleStruct->skyDropTargets[0] == 0xFE - i)
+                {
+                    gBattlerAttacker = gBattleStruct->skyDropTargets[1];
+                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses;
+                    gBattleStruct->skyDropTargets[0] = 0xFF;
+                    gBattleStruct->skyDropTargets[1] = 0xFF;
+                    return;
+                }
+                else if (gBattleStruct->skyDropTargets[2] == 0xFE - i)
+                {
+                    gBattlerAttacker = gBattleStruct->skyDropTargets[3];
+                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses;
+                    gBattleStruct->skyDropTargets[2] = 0xFF;
+                    gBattleStruct->skyDropTargets[3] = 0xFF;
+                    return;
+                }
             }
             gBattleScripting.moveendState++;
             break;
@@ -7680,7 +7714,8 @@ static void Cmd_various(void)
         }
         return;
     case VARIOUS_GRAVITY_ON_AIRBORNE_MONS:
-        if (gStatuses3[gActiveBattler] & STATUS3_ON_AIR)
+        // Cancel all multiturn moves of IN_AIR Pokemon except those being targeted by Sky Drop.
+        if (gStatuses3[gActiveBattler] & STATUS3_ON_AIR && !(gActiveBattler == gBattleStruct->skyDropTargets[1] || gActiveBattler == gBattleStruct->skyDropTargets[3]))
             CancelMultiTurnMoves(gActiveBattler);
 
         gStatuses3[gActiveBattler] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
@@ -8892,7 +8927,7 @@ static void Cmd_various(void)
                     MarkBattlerForControllerExec(gActiveBattler);
                 }
                 
-                if (gBattleMons[gActiveBattler].pp[i] == 0)
+                if (gBattleMons[gActiveBattler].pp[i] == 0 && !(gActiveBattler == gBattleStruct->skyDropTargets[0] || gActiveBattler == gBattleStruct->skyDropTargets[2]))
                     CancelMultiTurnMoves(gActiveBattler);
                 
                 gBattlescriptCurrInstr += 7;    // continue
@@ -8958,6 +8993,101 @@ static void Cmd_various(void)
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
         TryToRevertMimicry(); // restore the types of Pokémon with Mimicry
+        break;
+    case VARIOUS_JUMP_IF_UNDER_200:
+        // If the Pokemon is less than 200 kg, or weighing less than 441 lbs, then Sky Drop will work. Otherwise, it will fail.
+        if (GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1) < 441)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+    case VARIOUS_SET_SKY_DROP:
+        gStatuses3[gBattlerTarget] |= (STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
+        /* skyDropTargets holds the information of who is the attacker and the target of Sky Drop. 
+           This is needed in the case that multiple Pokemon use Sky Drop in the same turn or if
+           the target of a Sky Drop faints while in the air.*/
+        if (gBattleStruct->skyDropTargets[0] == 0xFF)
+        {
+            gBattleStruct->skyDropTargets[0] = gBattlerAttacker;
+            gBattleStruct->skyDropTargets[1] = gBattlerTarget;
+        }
+        else
+        {
+            gBattleStruct->skyDropTargets[2] = gBattlerAttacker;
+            gBattleStruct->skyDropTargets[3] = gBattlerTarget;
+        }
+        
+        // End any multiturn effects caused by the target
+        gBattleMons[gBattlerTarget].status2 &= ~(STATUS2_MULTIPLETURNS);
+        gBattleMons[gBattlerTarget].status2 &= ~(STATUS2_UPROAR);
+        gBattleMons[gBattlerTarget].status2 &= ~(STATUS2_BIDE);
+        gDisableStructs[gBattlerTarget].rolloutTimer = 0;
+        gDisableStructs[gBattlerTarget].furyCutterCounter = 0;
+        break;
+    case VARIOUS_CLEAR_SKY_DROP:
+        if (gBattleStruct->skyDropTargets[0] == gBattlerAttacker)
+        {            
+            // Check to see if the initial target of this Sky Drop fainted before the 2nd turn of Sky Drop.
+            // If so, make the move fail. If not, clear all of the statuses and continue the move.
+            if (gBattleStruct->skyDropTargets[1] == 0xFF)
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            else
+            {
+                gStatuses3[gBattlerTarget] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
+                gBattlescriptCurrInstr += 7;
+            }
+            
+            // Clear skyDropTargets data
+            gBattleStruct->skyDropTargets[0] = 0xFF;          
+            gBattleStruct->skyDropTargets[1] = 0xFF;
+        }
+        else
+        {
+            if (gBattleStruct->skyDropTargets[3] == 0xFF)
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            else
+            {
+                gStatuses3[gBattlerTarget] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
+                gBattlescriptCurrInstr += 7;
+            }
+            
+            gBattleStruct->skyDropTargets[2] = 0xFF;
+            gBattleStruct->skyDropTargets[3] = 0xFF;
+        }
+        
+        // Confuse target if they were in the middle of Petal Dance/Outrage/Thrash when targeted.
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_LOCK_CONFUSE)
+            gBattleScripting.moveEffect = (MOVE_EFFECT_CONFUSION | MOVE_EFFECT_CERTAIN);
+        return;
+    case VARIOUS_SKY_DROP_YAWN: // If the mon that's sleeping due to Yawn was holding a Pokemon in Sky Drop, release the target and clear Sky Drop data.
+        if (gEffectBattler == gBattleStruct->skyDropTargets[0])
+        {    
+            gEffectBattler = gBattleStruct->skyDropTargets[1];
+            gBattleStruct->skyDropTargets[0] = 0xFF;
+            gBattleStruct->skyDropTargets[1] = 0xFF;    
+            gBattleMons[gEffectBattler].status2 &= ~(STATUS2_LOCK_CONFUSE);
+            if (CanBeConfused(gEffectBattler))
+            {
+                gBattlerAttacker = gEffectBattler;
+                gBattleMons[gBattlerTarget].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
+                gBattlescriptCurrInstr = BattleScript_ThrashConfuses;
+                return;
+            }
+        }
+        else if (gEffectBattler == gBattleStruct->skyDropTargets[2])
+        {    
+            gEffectBattler = gBattleStruct->skyDropTargets[3];
+            gBattleStruct->skyDropTargets[2] = 0xFF;
+            gBattleStruct->skyDropTargets[3] = 0xFF;    
+            gBattleMons[gEffectBattler].status2 &= ~(STATUS2_LOCK_CONFUSE);
+            if (CanBeConfused(gEffectBattler))
+            {
+                gBattlerAttacker = gEffectBattler;
+                gBattleMons[gBattlerTarget].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
+                gBattlescriptCurrInstr = BattleScript_ThrashConfuses;
+                return;
+            }
+        }
         break;
     case VARIOUS_JUMP_IF_PRANKSTER_BLOCKED:
         if (BlocksPrankster(gCurrentMove, gBattlerAttacker, gActiveBattler, TRUE))
@@ -11351,7 +11481,8 @@ static void Cmd_tryspiteppreduce(void)
 
             gBattlescriptCurrInstr += 5;
 
-            if (gBattleMons[gBattlerTarget].pp[i] == 0)
+            // Don't cut off Sky Drop if pp is brought to zero.
+            if (gBattleMons[gBattlerTarget].pp[i] == 0 && !(gBattlerTarget == gBattleStruct->skyDropTargets[0] || gBattlerTarget == gBattleStruct->skyDropTargets[2]))
                 CancelMultiTurnMoves(gBattlerTarget);
         }
         else
@@ -11997,6 +12128,7 @@ static void Cmd_setsemiinvulnerablebit(void)
     {
     case MOVE_FLY:
     case MOVE_BOUNCE:
+    case MOVE_SKY_DROP:
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;
     case MOVE_DIG:
