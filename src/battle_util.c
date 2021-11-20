@@ -1435,9 +1435,9 @@ void CancelMultiTurnMoves(u8 battler)
     if (gBattleStruct->skyDropTargets[0] == battler)
     {
         // Sets skyDropTargets[1] to be the battler id for the target
-        for(i = 0; i < MAX_BATTLERS_COUNT; i++)
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if(gBattleStruct->skyDropTargets[1] == i)
+            if (gBattleStruct->skyDropTargets[1] == i)
             {
                 // Clears sky dropped and on_air statuses
                 gStatuses3[i] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
@@ -1463,7 +1463,9 @@ void CancelMultiTurnMoves(u8 battler)
                         
                         // If this CancelMultiTurnMoves is occuring due to attackcanceller or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
                         if (gBattlescriptCurrInstr[0] == 0x0 || (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76))
+                        {
                             gBattleStruct->skyDropTargets[0] = 0xFE - battler;
+                        }
 
                         // If this CancelMultiTurnMoves is occuring due to cancelmultiturnmoves script
                         else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
@@ -1472,7 +1474,7 @@ void CancelMultiTurnMoves(u8 battler)
                             gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
                         }
 						
-						// If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
+                        // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
                         else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
                         {
                             gBattlerAttacker = i;
@@ -1495,9 +1497,9 @@ void CancelMultiTurnMoves(u8 battler)
     }
     else if (gBattleStruct->skyDropTargets[2] == battler)
     {
-        for(i = 0; i < MAX_BATTLERS_COUNT; i++)
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if(gBattleStruct->skyDropTargets[3] == i)
+            if (gBattleStruct->skyDropTargets[3] == i)
             {
                 gStatuses3[i] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
                 
@@ -1514,7 +1516,9 @@ void CancelMultiTurnMoves(u8 battler)
                         gBattleMons[i].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
                         
                         if (gBattlescriptCurrInstr[0] == 0x0 || (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76))
+                        {
                             gBattleStruct->skyDropTargets[2] = 0xFE - battler;
+                        }
                         else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
                         {
                             gBattlerAttacker = i;
@@ -3562,7 +3566,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS) && (Random() % 4) == 0)
             {
                 gProtectStructs[gBattlerAttacker].prlzImmobility = TRUE;
-                // This is removed in Emerald because it is called in BattleScript_MoveUsedIsParalyzed.
+                // This is removed in Emerald for some reason
                 //CancelMultiTurnMoves(gBattlerAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsParalyzed;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -9257,9 +9261,9 @@ bool32 CanMegaEvolve(u8 battlerId)
             return FALSE;
     }
 	
-	// Check if mon is currently held by Sky Drop
-	if (gStatuses3[battlerId] & STATUS3_SKY_DROPPED)
-		return FALSE;
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battlerId] & STATUS3_SKY_DROPPED)
+        return FALSE;
 
     // Gets mon data.
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
