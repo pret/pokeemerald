@@ -4707,12 +4707,8 @@ static void TryChangeTurnOrder(void)
         {
             u8 battler1 = gBattlerByTurnOrder[i];
             u8 battler2 = gBattlerByTurnOrder[j];
-            if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
-                && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
-                && gActionsByTurnOrder[i] != B_ACTION_SWITCH
-                && gActionsByTurnOrder[j] != B_ACTION_SWITCH
-                && gActionsByTurnOrder[i] != B_ACTION_THROW_BALL
-                && gActionsByTurnOrder[j] != B_ACTION_THROW_BALL)
+            if (gActionsByTurnOrder[i] = B_ACTION_USE_MOVE
+                && gActionsByTurnOrder[j] = B_ACTION_USE_MOVE)
             {
                 if (GetWhoStrikesFirst(battler1, battler2, FALSE))
                     SwapTurnOrder(i, j);
