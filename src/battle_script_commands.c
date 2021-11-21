@@ -5466,6 +5466,14 @@ static void Cmd_moveend(void)
                 *(gBattleStruct->moveTarget + gBattlerAttacker) = gSpecialStatuses[gBattlerAttacker].instructedChosenTarget & 0x3;
             if (gSpecialStatuses[gBattlerAttacker].dancerOriginalTarget)
                 *(gBattleStruct->moveTarget + gBattlerAttacker) = gSpecialStatuses[gBattlerAttacker].dancerOriginalTarget & 0x3;
+            
+            #if B_RAMPAGE_CANCELLING >= GEN_5
+            if (gBattleMoves[gCurrentMove].effect == EFFECT_RAMPAGE // If we're rampaging
+              && (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)         // And it is unusable
+              && (gBattleMons[gBattlerAttacker].status2 & STATUS2_LOCK_CONFUSE) != STATUS2_LOCK_CONFUSE_TURN(1))  // And won't end this turn
+                CancelMultiTurnMoves(gBattlerAttacker); // Cancel it
+            #endif
+            
             gProtectStructs[gBattlerAttacker].usesBouncedMove = FALSE;
             gProtectStructs[gBattlerAttacker].targetAffected = FALSE;
             gBattleStruct->ateBoost[gBattlerAttacker] = 0;

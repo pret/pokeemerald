@@ -2795,6 +2795,7 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_FLINCH:  // reset flinch
             gBattleMons[gActiveBattler].status2 &= ~(STATUS2_FLINCHED);
             gBattleStruct->turnEffectsTracker++;
+            break;
         case ENDTURN_DISABLE:  // disable
             if (gDisableStructs[gActiveBattler].disableTimer != 0)
             {
