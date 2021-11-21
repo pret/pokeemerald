@@ -193,7 +193,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
 
     opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
 
-    if (gBattleMons[GetBattlerAtPosition(opposingPosition)].ability != ABILITY_WONDER_GUARD)
+    if (GetBattlerAbility(GetBattlerAtPosition(opposingPosition)) != ABILITY_WONDER_GUARD)
         return FALSE;
 
     // Check if Pokemon has a super effective move.
@@ -286,7 +286,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     else
         return FALSE;
 
-    if (gBattleMons[gActiveBattler].ability == absorbingTypeAbility)
+    if (AI_GetAbility(gActiveBattler) == absorbingTypeAbility)
         return FALSE;
 
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
@@ -337,7 +337,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
 {
     if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
         return FALSE;
-    if (gBattleMons[gActiveBattler].ability != ABILITY_NATURAL_CURE)
+    if (AI_GetAbility(gActiveBattler) != ABILITY_NATURAL_CURE)
         return FALSE;
     if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 2)
         return FALSE;

@@ -62,12 +62,13 @@ struct ResourceFlags
     u32 flags[4];
 };
 
-#define RESOURCE_FLAG_FLASH_FIRE     0x1
-#define RESOURCE_FLAG_ROOST          0x2
-#define RESOURCE_FLAG_UNBURDEN       0x4
-#define RESOURCE_FLAG_INTIMIDATED    0x8
-#define RESOURCE_FLAG_TRACED         0x10
-#define RESOURCE_FLAG_EMERGENCY_EXIT 0x20
+#define RESOURCE_FLAG_FLASH_FIRE        0x1
+#define RESOURCE_FLAG_ROOST             0x2
+#define RESOURCE_FLAG_UNBURDEN          0x4
+#define RESOURCE_FLAG_INTIMIDATED       0x8
+#define RESOURCE_FLAG_TRACED            0x10
+#define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
+#define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
 
 struct DisableStruct
 {
@@ -184,6 +185,8 @@ struct SpecialStatus
     u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
+    u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
+    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -236,7 +239,7 @@ struct WishFutureKnock
     u8 futureSightAttacker[MAX_BATTLERS_COUNT];
     u16 futureSightMove[MAX_BATTLERS_COUNT];
     u8 wishCounter[MAX_BATTLERS_COUNT];
-    u8 wishMonId[MAX_BATTLERS_COUNT];
+    u8 wishPartyId[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
     u8 knockedOffMons[2]; // Each battler is represented by a bit. The array entry is dependent on the battler's side.
 };
