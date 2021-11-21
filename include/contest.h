@@ -294,7 +294,7 @@ struct ContestResources
     u8 * contestBgTilemaps[CONTESTANT_COUNT];
     void * boxBlinkTiles1;
     void * boxBlinkTiles2;
-    void * field_3c;
+    void * animBgTileBuffer;
 };
 
 #define eContest (*gContestResources->contest)

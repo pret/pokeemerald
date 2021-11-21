@@ -567,7 +567,7 @@ BerryBlender_EventScript_ExpertMGiveBerry:
 	end
 
 BerryBlender_Movement_BlendLeaderWalkInPlace:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BerryBlender_EventScript_BerryBlenderLink::
@@ -641,7 +641,7 @@ BerryBlender_EventScript_DoLinkBerryBlending:
 	fadescreen FADE_TO_BLACK
 	removeobject 240 @ Unclear where these local IDs come from,
 	removeobject 239 @ but presumably they'd be the 4 link players
-	removeobject 238 
+	removeobject 238
 	removeobject 237
 	special DoBerryBlending
 	waitstate

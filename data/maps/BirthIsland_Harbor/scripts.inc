@@ -12,7 +12,7 @@ BirthIsland_Harbor_EventScript_Sailor::
 	goto_if_eq BirthIsland_Harbor_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	hideobjectat LOCALID_SAILOR, MAP_BIRTH_ISLAND_HARBOR

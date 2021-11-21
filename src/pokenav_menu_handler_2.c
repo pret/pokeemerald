@@ -118,7 +118,7 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
     }
 };
 
-static const LoopedTask sMenuHandlerLoopTaskFuncs[] = 
+static const LoopedTask sMenuHandlerLoopTaskFuncs[] =
 {
     [POKENAV_MENU_FUNC_NONE]                  = NULL,
     [POKENAV_MENU_FUNC_MOVE_CURSOR]           = LoopedTask_MoveMenuCursor,
@@ -179,31 +179,31 @@ struct OptionsLabelGfx
 
 static const struct OptionsLabelGfx sPokenavMenuOptionLabelGfx[POKENAV_MENU_TYPE_COUNT] =
 {
-    [POKENAV_MENU_TYPE_DEFAULT] = 
+    [POKENAV_MENU_TYPE_DEFAULT] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC] = 
+    [POKENAV_MENU_TYPE_UNLOCK_MC] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_MatchCall, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] = 
+    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
     {
         .yStart = 42,
         .deltaY = 20,
         {sOptionsLabelGfx_RegionMap, sOptionsLabelGfx_Condition, sOptionsLabelGfx_MatchCall, sOptionsLabelGfx_Ribbons, sOptionsLabelGfx_SwitchOff}
     },
-    [POKENAV_MENU_TYPE_CONDITION] = 
+    [POKENAV_MENU_TYPE_CONDITION] =
     {
         .yStart = 56,
         .deltaY = 20,
         {sOptionsLabelGfx_Party, sOptionsLabelGfx_Search, sOptionsLabelGfx_Cancel}
     },
-    [POKENAV_MENU_TYPE_CONDITION_SEARCH] = 
+    [POKENAV_MENU_TYPE_CONDITION_SEARCH] =
     {
         .yStart = 40,
         .deltaY = 16,
@@ -341,7 +341,7 @@ bool32 OpenPokenavMenuInitial(void)
 
     if (state == NULL)
         return FALSE;
-    
+
     state->pokenavAlreadyOpen = FALSE;
     return TRUE;
 }
@@ -415,12 +415,12 @@ static u32 LoopedTask_OpenMenu(s32 state)
         CopyToBgTilemapBuffer(1, gPokenavMessageBox_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyPaletteIntoBufferUnfaded(gPokenavMessageBox_Pal, 0x10, 0x20);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         return LT_INC_AND_PAUSE;
     case 1:
         if (FreeTempTileDataBuffersIfPossible())
@@ -1125,7 +1125,7 @@ static void AddOptionDescriptionWindow(void)
     ptr->optionDescWindowId = AddWindow(&sOptionDescWindowTemplate);
     PutWindowTilemap(ptr->optionDescWindowId);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    CopyWindowToVram(ptr->optionDescWindowId, 3);
+    CopyWindowToVram(ptr->optionDescWindowId, COPYWIN_FULL);
 }
 
 static void PrintCurrentOptionDescription(void)
@@ -1133,9 +1133,9 @@ static void PrintCurrentOptionDescription(void)
     struct Pokenav2Struct * ptr = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_ICONS);
     int menuItem = GetCurrentMenuItemId();
     const u8 * s = sPageDescriptions[menuItem];
-    u32 width = GetStringWidth(1, s, -1);
+    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
 }
 
 // Printed when Ribbons is selected if no PC/party mons have ribbons
@@ -1144,9 +1144,9 @@ static void PrintNoRibbonWinners(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_ICONS);
     const u8 * s = gText_NoRibbonWinners;
-    u32 width = GetStringWidth(1, s, -1);
+    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(ptr->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(void)
@@ -1168,7 +1168,7 @@ static void DestroyMovingDotsBgTask(void)
 
 static void Task_MoveBgDots(u8 taskId)
 {
-    ChangeBgX(3, 0x80, 1);
+    ChangeBgX(3, 0x80, BG_COORD_ADD);
 }
 
 static void CreateBgDotPurplePalTask(void)

@@ -47,7 +47,7 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        src/crt0.o(.text*);
+        src/rom_header.o(.text*);
         src/*.o(.text*);
         gflib/*.o(.text*);
         asm/*.o(.text*);
@@ -114,7 +114,7 @@ SECTIONS {
     other_data :
     ALIGN(4)
     {
-        data/unknown_serial_data.o(.rodata);
+        data/ereader_link_data.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0

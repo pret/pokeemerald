@@ -165,7 +165,7 @@ SkyPillar_Top_Movement_RayquazaFlyOff:
 	delay_8
 	walk_in_place_right  @ Normal, awake
 	delay_8
-	walk_fastest_up  @ Fly up
+	walk_faster_up  @ Fly up
 	slide_up
 	slide_up
 	slide_up

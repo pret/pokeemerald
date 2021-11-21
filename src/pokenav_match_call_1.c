@@ -38,16 +38,16 @@ static bool32 sub_81CB1D0(void);
 
 #include "data/text/match_call_messages.h"
 
-static const u8 sMatchCallOptionsNoCheckPage[] = 
+static const u8 sMatchCallOptionsNoCheckPage[] =
 {
-    MATCH_CALL_OPTION_CALL, 
+    MATCH_CALL_OPTION_CALL,
     MATCH_CALL_OPTION_CANCEL
 };
 
-static const u8 sMatchCallOptionsHasCheckPage[] = 
+static const u8 sMatchCallOptionsHasCheckPage[] =
 {
-    MATCH_CALL_OPTION_CALL, 
-    MATCH_CALL_OPTION_CHECK, 
+    MATCH_CALL_OPTION_CALL,
+    MATCH_CALL_OPTION_CHECK,
     MATCH_CALL_OPTION_CANCEL
 };
 
@@ -413,12 +413,12 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries *matchCallEntry, 
 
     if (className && trainerName)
     {
-        u8 *str2 = sub_81DB494(str, 7, className, 69);
-        sub_81DB494(str2, 7, trainerName, 51);
+        u8 *str2 = GetStringClearToWidth(str, FONT_NARROW, className, 69);
+        GetStringClearToWidth(str2, FONT_NARROW, trainerName, 51);
     }
     else
     {
-        sub_81DB494(str, 7, NULL, 120);
+        GetStringClearToWidth(str, FONT_NARROW, NULL, 120);
     }
 }
 

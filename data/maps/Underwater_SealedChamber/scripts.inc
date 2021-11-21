@@ -20,9 +20,7 @@ Underwater_SealedChamber_EventScript_SurfaceSealedChamber::
 
 Underwater_SealedChamber_EventScript_Braille::
 	lockall
-	braillemessage Underwater_SealedChamber_Braille_GoUpHere
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox Underwater_SealedChamber_Braille_GoUpHere
 	releaseall
 	end
 

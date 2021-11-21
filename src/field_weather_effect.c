@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_anim.h"
 #include "event_object_movement.h"
+#include "fieldmap.h"
 #include "field_weather.h"
 #include "overworld.h"
 #include "random.h"
@@ -189,7 +190,7 @@ static void CreateCloudSprites(void)
         {
             gWeatherPtr->sprites.s1.cloudSprites[i] = &gSprites[spriteId];
             sprite = gWeatherPtr->sprites.s1.cloudSprites[i];
-            SetSpritePosToMapCoords(sCloudSpriteMapCoords[i].x + 7, sCloudSpriteMapCoords[i].y + 7, &sprite->x, &sprite->y);
+            SetSpritePosToMapCoords(sCloudSpriteMapCoords[i].x + MAP_OFFSET, sCloudSpriteMapCoords[i].y + MAP_OFFSET, &sprite->x, &sprite->y);
             sprite->coordOffsetEnabled = TRUE;
         }
         else
@@ -878,7 +879,7 @@ static const union AnimCmd *const sSnowflakeAnimCmds[] =
 
 static const struct SpriteTemplate sSnowflakeSpriteTemplate =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = PALTAG_WEATHER,
     .oam = &sSnowflakeSpriteOamData,
     .anims = sSnowflakeAnimCmds,
@@ -1180,7 +1181,7 @@ void Thunderstorm_Main(void)
     case TSTORM_STATE_FADE_THUNDER_LONG:
         if (--gWeatherPtr->thunderDelay == 0)
         {
-            sub_80ABC7C(19, 3, 5);
+            ApplyWeatherGammaShiftIfIdle_Gradual(19, 3, 5);
             gWeatherPtr->initStep++;
         }
         break;

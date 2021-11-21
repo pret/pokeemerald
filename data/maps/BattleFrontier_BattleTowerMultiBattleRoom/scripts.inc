@@ -408,7 +408,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant:
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceBattle:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_Opponent1Enter:
@@ -449,7 +449,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer:
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantReturnToPos:
 	walk_left
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft:

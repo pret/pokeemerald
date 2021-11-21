@@ -17,6 +17,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -896,21 +897,19 @@ static void CreateCableCarSprites(void)
             gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].x2 = -gSprites[spriteId].centerToCornerVecX;
             gSprites[spriteId].y2 = -gSprites[spriteId].centerToCornerVecY;
-            
+
             // Randomly choose which direction the NPC is going
             if (!GOING_DOWN)
             {
                 if (rval % 2)
                 {
-                    // Do walking west anim
-                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_WEST);
                     gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].y += 2;
                 }
                 else
                 {
-                    // Do walking east anim
-                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_EAST);
                     gSprites[spriteId].sSameDir = FALSE;
                 }
             }
@@ -918,15 +917,13 @@ static void CreateCableCarSprites(void)
             {
                 if (rval % 2)
                 {
-                    // Do walking east anim
-                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_EAST);
                     gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].y += 2;
                 }
                 else
                 {
-                    // Do walking west anim
-                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_WEST);
                     gSprites[spriteId].sSameDir = FALSE;
                 }
             }
@@ -1024,7 +1021,7 @@ static void DrawNextGroundSegmentGoingDown(void)
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 2) % 32;
     sCableCar->groundTileIdx += 2;
     sGroundSegmentY_Down = sCableCar->groundSegmentYStart;
-    
+
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {

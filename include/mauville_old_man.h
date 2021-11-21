@@ -5,7 +5,7 @@ extern struct BardSong gBardSong;
 
 void SetMauvilleOldMan(void);
 u8 GetCurrentMauvilleOldMan(void);
-void ScrSpecial_SetMauvilleOldManObjEventGfx(void);
+void SetMauvilleOldManObjEventGfx(void);
 u8 sub_81201C8(void);
 void SanitizeMauvilleOldManForRuby(OldMan *dest);
 void sub_8120670(void);
