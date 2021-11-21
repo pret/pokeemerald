@@ -786,7 +786,7 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen::
 
 EventScript_UnusedBoardFerry::
 	delay 30
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	showobjectat OBJ_EVENT_ID_PLAYER, 0
 	delay 30
@@ -956,7 +956,7 @@ gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} flew away!$"
 
 	.include "data/text/pc_transfer.inc"
-	.include "data/text/mevent.inc"
+	.include "data/text/questionnaire.inc"
 	.include "data/text/abnormal_weather.inc"
 
 EventScript_SelectWithoutRegisteredItem::
@@ -1006,7 +1006,7 @@ Common_EventScript_LegendaryFlewAway::
 	end
 
 	.include "data/scripts/pc_transfer.inc"
-	.include "data/scripts/mevent.inc"
+	.include "data/scripts/questionnaire.inc"
 	.include "data/scripts/abnormal_weather.inc"
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
@@ -1026,7 +1026,7 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/mauville_man.inc"
 	.include "data/scripts/field_move_scripts.inc"
 	.include "data/scripts/item_ball_scripts.inc"
-	.include "data/scripts/mystery_event_club.inc"
+	.include "data/scripts/profile_man.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"
 	.include "data/scripts/players_house.inc"

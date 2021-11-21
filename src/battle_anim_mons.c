@@ -37,15 +37,15 @@ static void sub_80A8D78(struct Task *task, u8 taskId);
 EWRAM_DATA static union AffineAnimCmd *gAnimTaskAffineAnim = NULL;
 
 // Const rom data
-static const struct UCoords8 sBattlerCoords[][4] =
+static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 {
-    {
+    { // Single battle
         { 72, 80 },
         { 176, 40 },
         { 48, 40 },
         { 112, 80 },
     },
-    {
+    { // Double battle
         { 32, 80 },
         { 200, 40 },
         { 90, 88 },
@@ -54,29 +54,29 @@ static const struct UCoords8 sBattlerCoords[][4] =
 };
 
 // One entry for each of the four Castform forms.
-const struct MonCoords gCastformFrontSpriteCoords[] =
+const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS] =
 {
-    { .size = 0x44, .y_offset = 17 }, // NORMAL
-    { .size = 0x66, .y_offset =  9 }, // SUN
-    { .size = 0x46, .y_offset =  9 }, // RAIN
-    { .size = 0x86, .y_offset =  8 }, // HAIL
+    [CASTFORM_NORMAL] = { .size = 0x44, .y_offset = 17 },
+    [CASTFORM_FIRE]   = { .size = 0x66, .y_offset =  9 },
+    [CASTFORM_WATER]  = { .size = 0x46, .y_offset =  9 },
+    [CASTFORM_ICE]    = { .size = 0x86, .y_offset =  8 },
 };
 
-static const u8 sCastformElevations[] =
+static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
 {
-    13, // NORMAL
-    14, // SUN
-    13, // RAIN
-    13, // HAIL
+    [CASTFORM_NORMAL] = 13,
+    [CASTFORM_FIRE]   = 14,
+    [CASTFORM_WATER]  = 13,
+    [CASTFORM_ICE]    = 13,
 };
 
 // Y position of the backsprite for each of the four Castform forms.
-static const u8 sCastformBackSpriteYCoords[] =
+static const u8 sCastformBackSpriteYCoords[NUM_CASTFORM_FORMS] =
 {
-    0, // NORMAL
-    0, // SUN
-    0, // RAIN
-    0, // HAIL
+    [CASTFORM_NORMAL] = 0,
+    [CASTFORM_FIRE]   = 0,
+    [CASTFORM_WATER]  = 0,
+    [CASTFORM_ICE]    = 0,
 };
 
 // Placeholders for pokemon sprites to be created for a move animation effect (e.g. Role Play / Snatch)
@@ -845,8 +845,8 @@ void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
 {
     if (IsContest())
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
         out->paletteId = 14;
         out->bgId = 1;
         out->tilesOffset = 0;
@@ -854,8 +854,8 @@ void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
     }
     else
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
         out->paletteId = 8;
         out->bgId = 1;
         out->tilesOffset = 0x200;
@@ -867,8 +867,8 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
 {
     if (IsContest())
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
         out->paletteId = 14;
         out->bgId = 1;
         out->tilesOffset = 0;
@@ -880,8 +880,8 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
     }
     else
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
         out->paletteId = 9;
         out->bgId = 2;
         out->tilesOffset = 0x300;
@@ -891,8 +891,8 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
 
 void sub_80A6BFC(struct BattleAnimBgData *out, u8 unused)
 {
-    out->bgTiles = gUnknown_0202305C;
-    out->bgTilemap = (u16 *)gUnknown_02023060;
+    out->bgTiles = gBattleAnimBgTileBuffer;
+    out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
     if (IsContest())
     {
         out->paletteId = 14;
@@ -929,9 +929,9 @@ void ClearBattleAnimBg(u32 bgId)
 
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
 {
-    CpuFill32(0, gUnknown_0202305C, 0x2000);
-    LZDecompressWram(src, gUnknown_0202305C);
-    LoadBgTiles(bgId, gUnknown_0202305C, 0x2000, tilesOffset);
+    CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
+    LZDecompressWram(src, gBattleAnimBgTileBuffer);
+    LoadBgTiles(bgId, gBattleAnimBgTileBuffer, 0x2000, tilesOffset);
 }
 
 static void InitAnimBgTilemapBuffer(u32 bgId, const void *src)
@@ -946,12 +946,12 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const void *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *unk, const void *src, u32 arg2)
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *data, const void *src, bool32 largeScreen)
 {
-    InitAnimBgTilemapBuffer(unk->bgId, src);
+    InitAnimBgTilemapBuffer(data->bgId, src);
     if (IsContest() == TRUE)
-        sub_80A4720(unk->paletteId, unk->bgTilemap, 0, arg2);
-    CopyBgTilemapBufferToVram(unk->bgId);
+        RelocateBattleBgPal(data->paletteId, data->bgTilemap, 0, largeScreen);
+    CopyBgTilemapBufferToVram(data->bgId);
 }
 
 u8 GetBattleBgPaletteNum(void)
@@ -1939,7 +1939,8 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80A8174(u8 priority)
+// Unused
+static void SetPriorityForVisibleBattlers(u8 priority)
 {
     if (IsBattlerSpriteVisible(gBattleAnimTarget))
         gSprites[gBattlerSpriteIds[gBattleAnimTarget]].oam.priority = priority;
@@ -1951,7 +1952,7 @@ void sub_80A8174(u8 priority)
         gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority = priority;
 }
 
-void sub_80A8278(void)
+void InitPrioritiesForVisibleBattlers(void)
 {
     int i;
 

@@ -28,18 +28,18 @@ Route128_EventScript_KyogreAwakenedScene::
 	closemessage
 	applymovement LOCALID_MAXIE, Route128_Movement_MaxieApproachArchie
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox Route128_Text_MaxieDoYouUnderstandNow, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_MAXIE, Route128_Movement_MaxieApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox Route128_Text_MaxieResposibilityFallsToArchieAndMe, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_ARCHIE, Route128_Movement_ArchieRunLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_MAXIE, Route128_Movement_MaxieWalkLeft
 	waitmovement 0
 	msgbox Route128_Text_MaxieThisDefiesBelief, MSGBOX_DEFAULT
@@ -57,19 +57,19 @@ Route128_EventScript_KyogreAwakenedScene::
 	addobject LOCALID_STEVEN
 	applymovement LOCALID_STEVEN, Route128_Movement_StevenApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox Route128_Text_StevenWhatIsHappening, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_STEVEN, Route128_Movement_StevenWalkUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox Route128_Text_StevenWholeWorldWillDrown, MSGBOX_DEFAULT
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox Route128_Text_StevenImGoingToSootopolis, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -111,12 +111,12 @@ Route128_Movement_StevenApproachPlayer:
 
 Route128_Movement_ArchieLookAround:
 	walk_fast_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route128_Movement_ArchieBackUp:
@@ -130,7 +130,7 @@ Route128_Movement_ArchieRunLeft:
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 Route128_Movement_ArchieExit:
@@ -157,7 +157,7 @@ Route128_Movement_MaxieWalkLeft:
 
 Route128_Movement_MaxieApproachArchie:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route128_Movement_MaxieExit:
@@ -175,7 +175,7 @@ Route128_Movement_MaxieExit:
 
 Route128_Movement_MaxieApproachPlayer:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route128_EventScript_Isaiah::

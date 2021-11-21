@@ -55,7 +55,7 @@ Route119_EventScript_RivalEncounter::
 	call_if_eq Route119_EventScript_RivalEnter1
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_RivalEnter2
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
@@ -234,16 +234,16 @@ Route119_EventScript_SetRivalPos2::
 
 Route119_Movement_PlayerWatchRivalExit1:
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 Route119_Movement_PlayerWatchRivalExit2:
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 Route119_Movement_RivalEnter1:

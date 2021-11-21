@@ -2508,7 +2508,7 @@ gCryTable2::
 	cry2_uncomp Cry_NecrozmaUltra
 	@ Magearna
 	cry2_uncomp Cry_Magearna
-		@ Cramorant
+	@ Cramorant
 	cry2_uncomp Cry_Cramorant
 	cry2_uncomp Cry_Cramorant
 	@ Toxtricity

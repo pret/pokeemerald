@@ -20,14 +20,11 @@
 #include "decompress.h"
 #include "constants/rgb.h"
 
-// this file's functions
 static void CB2_MysteryEventMenu(void);
 static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed);
 
-// EWRAM vars
-static EWRAM_DATA u8 sUnknown_0203BCF8 = 0; // set but unused
+static EWRAM_DATA u8 sUnused = 0; // set but unused
 
-// const rom data
 static const struct BgTemplate sBgTemplates[] =
 {
     {
@@ -136,7 +133,7 @@ static void CB2_MysteryEventMenu(void)
     case 0:
         DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 0xD);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         ShowBg(0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         gMain.state++;
@@ -184,7 +181,7 @@ static void CB2_MysteryEventMenu(void)
                 DrawStdFrameWithCustomTileAndPalette(1, 1, 1, 0xD);
                 PrintMysteryMenuText(1, gText_LoadingEvent, 1, 2, 0);
                 PutWindowTilemap(1);
-                CopyWindowToVram(1, 3);
+                CopyWindowToVram(1, COPYWIN_FULL);
                 gMain.state++;
             }
             else if (JOY_NEW(B_BUTTON))
@@ -270,7 +267,7 @@ static void CB2_MysteryEventMenu(void)
         if (!IsTextPrinterActive(0))
         {
             gMain.state++;
-            sUnknown_0203BCF8 = 0;
+            sUnused = 0;
         }
         break;
     case 14:
@@ -315,5 +312,5 @@ static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 sp
     textColor[2] = 3;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(textColor[0]));
-    AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, textColor, speed, text);
 }

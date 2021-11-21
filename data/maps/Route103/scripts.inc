@@ -169,9 +169,9 @@ Route103_EventScript_RivalExitFacingNorth2:
 Route103_Movement_WatchRivalExitFacingNorth:
 	delay_16
 	delay_4
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route103_Movement_RivalExit1:
@@ -188,7 +188,7 @@ Route103_Movement_RivalExit2:
 
 Route103_Movement_WatchRivalExitFacingEastOrWest:
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route103_EventScript_Boy::

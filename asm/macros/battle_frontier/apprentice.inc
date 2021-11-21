@@ -53,7 +53,7 @@
 	special CallApprenticeFunction
 	.endm
 
-	@ Always returns TRUE. No side effect. May have been for debug or dummied for some other reason 
+	@ Always returns TRUE. No side effect. May have been for debug or dummied for some other reason
 	.macro apprentice_shouldcheckgone
 	setvar VAR_0x8004, APPRENTICE_FUNC_CHECK_GONE
 	special CallApprenticeFunction
@@ -109,7 +109,7 @@
 	special CallApprenticeFunction
 	.endm
 
-	@ Set which mon the Apprentice should lead with 
+	@ Set which mon the Apprentice should lead with
 	.macro apprentice_setleadmon  monId:req
 	copyvar VAR_0x8005, \monId
 	setvar VAR_0x8004, APPRENTICE_FUNC_SET_LEAD_MON
@@ -141,7 +141,7 @@
 	special CallApprenticeFunction
 	.endm
 
-	@ Always returns TRUE. No side effect. May have been for debug or dummied for some other reason 
+	@ Always returns TRUE. No side effect. May have been for debug or dummied for some other reason
 	.macro apprentice_shouldleave
 	setvar VAR_0x8004, APPRENTICE_FUNC_SHOULD_LEAVE
 	special CallApprenticeFunction

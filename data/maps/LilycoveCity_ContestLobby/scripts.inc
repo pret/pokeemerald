@@ -188,7 +188,7 @@ LilycoveCity_ContestLobby_Movement_ArtistExit:
 	step_end
 
 LilycoveCity_ContestLobby_Movement_PlayerFaceArtist:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 LilycoveCity_ContestLobby_Movement_ArtistBeginToExit:
@@ -205,7 +205,7 @@ LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer:
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_TryDoLinkContestArtist::
@@ -303,7 +303,7 @@ LilycoveCity_ContestLobby_Movement_LinkArtistExit:
 	step_end
 
 LilycoveCity_ContestLobby_Movement_PlayerFaceLinkArtist:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LilycoveCity_ContestLobby_Movement_LinkArtistBeginExit:
@@ -320,7 +320,7 @@ LilycoveCity_ContestLobby_Movement_LinkArtistReturnToPlayer:
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 @ EventScript_SpeakToContestReceptionist either ends or returns after a contest entry is submitted
@@ -453,20 +453,20 @@ LilycoveCity_ContestLobby_Movement_PlayerWalkToContestHall:
 	step_end
 
 LilycoveCity_ContestLobby_Movement_PlayerApproachReceptionist:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	walk_left
 	step_end
 
 LilycoveCity_ContestLobby_Movement_ReceptionistApproachCounter:
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_ReceptionistExitCounter:
 	walk_down
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LilycoveCity_ContestLobby_Movement_ReceptionistWalkToContestHall:
@@ -481,7 +481,7 @@ LilycoveCity_ContestLobby_Movement_ReceptionistWalkToContestHall:
 	step_end
 
 LilycoveCity_ContestLobby_Movement_ReceptionistFacePlayer:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_BlackBelt::
@@ -984,13 +984,13 @@ LilycoveCity_ContestLobby_Movement_PlayerApproachLinkReceptionist:
 LilycoveCity_ContestLobby_Movement_LinkReceptionistApproachCounter:
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_LinkReceptionistExitCounter:
 	walk_down
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LilycoveCity_ContestLobby_Movement_LinkReceptionistWalkToContestHall:
@@ -1006,7 +1006,7 @@ LilycoveCity_ContestLobby_Movement_LinkReceptionistWalkToContestHall:
 	step_end
 
 LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_LittleGirl::

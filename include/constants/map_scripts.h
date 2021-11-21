@@ -9,18 +9,18 @@
     They are numbered in the order that they will be called when entering a map (from a warp or camera transition).
     NOTE: These descriptions are just of what they generally do, not what they always or have to do
 
-    3. ON_LOAD: Run after the layout is loaded (but not drawn yet). 
+    3. ON_LOAD: Run after the layout is loaded (but not drawn yet).
                 Almost exclusively used to set metatiles on the map before it's first drawn
 
     6. ON_FRAME_TABLE: Run every frame after the map has faded in, before player input is processed.
-                       This is a table of scripts that each run if their condition is satisfied.
+                       This is a table of scripts; only the first script whose condition is satisfied is run.
                        Used to trigger an event, such as the player exiting the cable car or the SS Tidal sailor announcing progress
 
     2. ON_TRANSITION: Run during the transition to the map
                       Used to set map-specific flags/vars, update object positions/movement types, set weather, etc
 
     5. ON_WARP_INTO_MAP_TABLE: Run after the map's objects are loaded.
-                               This is a table of scripts that each run if their condition is satisfied.
+                               This is a table of scripts; only the first script whose condition is satisfied is run.
                                Used to add objects to the scene or update something about the player as they warp in (e.g. their facing dir or visibility)
                                Note that ON_TRANSITION may also handle object visibility, but would do so by modifying a flag or var
 

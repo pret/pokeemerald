@@ -197,12 +197,12 @@ Route119_WeatherInstitute_2F_Movement_ShovePlayerOutOfWay:
 	delay_16
 	delay_16
 	ride_water_current_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route119_WeatherInstitute_2F_Movement_PlayerReturnToPosition:
 	slide_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer:

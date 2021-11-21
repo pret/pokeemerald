@@ -185,15 +185,15 @@ FallarborTown_BattleTentBattleRoom_Movement_PlayerEnter:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_PlayerFaceBattle:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_PlayerFaceAttendant:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter:
@@ -201,7 +201,7 @@ FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 @ Unused
@@ -225,14 +225,14 @@ FallarborTown_BattleTentBattleRoom_Movement_AttendantApproachPlayer:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_AttendantReturnToPos:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FallarborTown_BattleTentBattleRoom_OnWarp:

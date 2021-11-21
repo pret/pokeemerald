@@ -990,7 +990,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SOLAR_BEAM] =
     {
-        .effect = EFFECT_SOLARBEAM,
+        .effect = EFFECT_SOLAR_BEAM,
         .power = 120,
         .type = TYPE_GRASS,
         .accuracy = 100,

@@ -25,19 +25,19 @@ se_m_explosion_1:
 	.byte		BEND  , c_v+0
 	.byte		N01   , Ds3 , v127
 	.byte	W01
-	.byte		        As2 
+	.byte		        As2
 	.byte	W02
 	.byte		PAN   , c_v-8
-	.byte		N02   , Gn3 
+	.byte		N02   , Gn3
 	.byte	W01
 	.byte		PAN   , c_v+7
 	.byte	W03
 	.byte		        c_v+0
-	.byte		N01   , Ds3 
+	.byte		N01   , Ds3
 	.byte	W01
-	.byte		        As2 
+	.byte		        As2
 	.byte	W02
-	.byte		N54   , Fn3 
+	.byte		N54   , Fn3
 	.byte	W11
 	.byte		BEND  , c_v+3
 	.byte	W03
@@ -93,7 +93,7 @@ se_m_explosion_2:
 	.byte		VOL   , 74*se_m_explosion_mvl/mxv
 	.byte	W06
 	.byte		        125*se_m_explosion_mvl/mxv
-	.byte		N02   
+	.byte		N02
 	.byte	W01
 	.byte		VOL   , 74*se_m_explosion_mvl/mxv
 	.byte	W16

@@ -758,7 +758,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance:
 	delay_16
 	walk_left
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	delay_16
 	delay_16
@@ -800,7 +800,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance:
 	delay_16
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_TuckerStepForward:
@@ -936,7 +936,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat:
 	walk_down
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter:
@@ -947,7 +947,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter:
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerFaceLeft:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit:
