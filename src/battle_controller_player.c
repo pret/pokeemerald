@@ -609,6 +609,13 @@ static void HandleInputChooseMove(void)
             else
                 moveTarget = MOVE_TARGET_SELECTED;
         }
+        else if (moveInfo->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_EXPANDING_FORCE)
+        {
+            if (IsBattlerTerrainAffected(gActiveBattler, STATUS_FIELD_PSYCHIC_TERRAIN))
+                moveTarget = MOVE_TARGET_BOTH;
+            else
+                moveTarget = MOVE_TARGET_SELECTED;
+        }
         else
         {
             moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;

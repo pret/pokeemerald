@@ -5246,7 +5246,9 @@ static void Cmd_moveend(void)
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
                 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && !gProtectStructs[gBattlerAttacker].chargingTurn
-                && (gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH || gBattleMoves[gCurrentMove].target == MOVE_TARGET_FOES_AND_ALLY)
+                && (gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH
+                    || gBattleMoves[gCurrentMove].target == MOVE_TARGET_FOES_AND_ALLY 
+                    || (gBattleMoves[gCurrentMove].effect == EFFECT_EXPANDING_FORCE && IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_PSYCHIC_TERRAIN)))
                 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
             {
                 u8 battlerId;
