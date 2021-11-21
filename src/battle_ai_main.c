@@ -4326,10 +4326,13 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_RELIC_SONG:
         #if (defined SPECIES_MELOETTA && defined SPECIES_MELOETTA_PIROUETTE)
-        if (AI_DATA->atkSpecies == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
-            score += 3; // Change to pirouette if can do more damage
-        else if (AI_DATA->atkSpecies == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
-            score += 3; // Change to Aria if can do more damage
+        if (!(gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED)) // Don't try to change form if it's transformed.
+        {
+            if (AI_DATA->atkSpecies == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
+                score += 3; // Change to pirouette if can do more damage unless it
+            else if (AI_DATA->atkSpecies == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
+                score += 3; // Change to Aria if can do more damage
+        }
         #endif
         break;
     case EFFECT_ELECTRIC_TERRAIN:
