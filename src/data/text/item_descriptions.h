@@ -108,9 +108,14 @@ static const u8 sHeavyBallDesc[] = _(
     "Pokémon.");
 
 static const u8 sDreamBallDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_DREAM_BALL_MODIFIER >= GEN_8
+    "A Ball that works\n"
+    "well on sleeping\n"
+    "Pokémon.");
+#else
     "A Poké Ball used in\n"
-    "the Entree Forest.\n"
-    "It doesn't fail.");
+    "the Entree Forest.");
+#endif
 
 static const u8 sSafariBallDesc[] = _(
     "A special Ball that\n"
@@ -144,12 +149,20 @@ static const u8 sPotionDesc[] = _(
 static const u8 sSuperPotionDesc[] = _(
     "Restores the HP of\n"
     "a Pokémon by\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "60 points.");
+#else
+    "50 points.");
+#endif
 
 static const u8 sHyperPotionDesc[] = _(
     "Restores the HP of\n"
     "a Pokémon by\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "120 points.");
+#else
+    "200 points.");
+#endif
 
 static const u8 sMaxPotionDesc[] = _(
     "Fully restores the\n"
@@ -173,17 +186,29 @@ static const u8 sMaxReviveDesc[] = _(
 static const u8 sFreshWaterDesc[] = _(
     "A mineral water\n"
     "that restores HP\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "by 30 points.");
+#else
+    "by 50 points.");
+#endif
 
 static const u8 sSodaPopDesc[] = _(
     "A fizzy soda drink\n"
     "that restores HP\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "by 50 points.");
+#else
+    "by 60 points.");
+#endif
 
 static const u8 sLemonadeDesc[] = _(
     "A very sweet drink\n"
     "that restores HP\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "by 70 points.");
+#else
+    "by 80 points.");
+#endif
 
 static const u8 sMoomooMilkDesc[] = _(
     "A nutritious milk\n"
@@ -193,12 +218,20 @@ static const u8 sMoomooMilkDesc[] = _(
 static const u8 sEnergyPowderDesc[] = _(
     "A bitter powder\n"
     "that restores HP\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "by 60 points.");
+#else
+    "by 50 points.");
+#endif
 
 static const u8 sEnergyRootDesc[] = _(
     "A bitter root\n"
     "that restores HP\n"
+#if I_HEALTH_RECOVERY >= GEN_7
     "by 120 points.");
+#else
+    "by 200 points.");
+#endif
 
 static const u8 sHealPowderDesc[] = _(
     "A bitter powder\n"
@@ -527,34 +560,70 @@ static const u8 sEscapeRopeDesc[] = _(
 
 // Battle items
 static const u8 sXAttackDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+    "Sharply raises stat\n"
+    "Attack during\n"
+    "one battle.");
+#else
     "Raises the stat\n"
     "Attack during one\n"
     "battle.");
+#endif
 
 static const u8 sXDefenseDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+    "Sharply raises stat\n"
+    "Defense during\n"
+    "one battle.");
+#else
     "Raises the stat\n"
     "Defense during one\n"
     "battle.");
+#endif
 
 static const u8 sXSpAtkDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+    "Sharply raises stat\n"
+    "Sp. Atk during\n"
+    "one battle.");
+#else
     "Raises the stat\n"
     "Sp. Atk during one\n"
     "battle.");
+#endif
 
 static const u8 sXSpDefDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+    "Sharply raises stat\n"
+    "Sp. Def during\n"
+    "one battle.");
+#else
     "Raises the stat\n"
     "Sp. Def during one\n"
     "battle.");
+#endif
 
 static const u8 sXSpeedDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+    "Sharply raises stat\n"
+    "Speed during\n"
+    "one battle.");
+#else
     "Raises the stat\n"
     "Speed during one\n"
     "battle.");
+#endif
 
 static const u8 sXAccuracyDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+    "Sharply raises move\n"
+    "accuracy during\n"
+    "one battle.");
+#else
     "Raises accuracy\n"
     "of attack moves\n"
     "during one battle.");
+#endif
 
 static const u8 sDireHitDesc[] = _(
     "Raises the\n"
@@ -1835,9 +1904,15 @@ static const u8 sDeepSeaToothDesc[] = _(
     "of Clamperl.");
 
 static const u8 sSoulDewDesc[] = _(
+#if defined(BATTLE_ENGINE) && B_SOUL_DEW_BOOST >= GEN_7
+    "Powers up Latios' &\n"
+    "Latias' Psychic and\n"
+    "Dragon-type moves.");
+#else
     "Hold item: raises\n"
     "Sp. Atk & Sp. Def of\n"
     "Latios & Latias.");
+#endif
 
 static const u8 sAdamantOrbDesc[] = _(
     "Boosts the power of\n"
@@ -2456,9 +2531,15 @@ static const u8 sLumBerryDesc[] = _(
     "problem in battle.");
 
 static const u8 sSitrusBerryDesc[] = _(
+#if I_SITRUS_BERRY_HEAL >= GEN_4
+    "A hold item that\n"
+    "restores the user's\n"
+    "HP a little.");
+#else
     "A hold item that\n"
     "restores 30 HP in\n"
     "battle.");
+#endif
 
 static const u8 sFigyBerryDesc[] = _(
     "A hold item that\n"
