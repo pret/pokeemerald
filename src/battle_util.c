@@ -1460,20 +1460,18 @@ void CancelMultiTurnMoves(u8 battler)
                         || IsBattlerTerrainAffected(i, STATUS_FIELD_MISTY_TERRAIN)))
                     {
                         gBattleMons[i].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
-                        
+
                         // If this CancelMultiTurnMoves is occuring due to attackcanceller or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
                         if (gBattlescriptCurrInstr[0] == 0x0 || (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76))
                         {
                             gBattleStruct->skyDropTargets[0] = 0xFE - battler;
                         }
-
                         // If this CancelMultiTurnMoves is occuring due to cancelmultiturnmoves script
                         else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
                         {
                             gBattlerAttacker = i;
                             gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
                         }
-						
                         // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
                         else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
                         {
@@ -1482,12 +1480,11 @@ void CancelMultiTurnMoves(u8 battler)
                             gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 1;
                         }
                     }
-                    
                 }
                 break;
             }
         }
-        
+
         // Clear skyDropTargets data, unless this CancelMultiTurnMoves is caused by Yawn, attackcanceler, or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
         if (!(gBattleMons[gBattleStruct->skyDropTargets[1]].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[0] < 4)
         {
@@ -1502,19 +1499,20 @@ void CancelMultiTurnMoves(u8 battler)
             if (gBattleStruct->skyDropTargets[3] == i)
             {
                 gStatuses3[i] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
-                
+
                 gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
                 gSprites[gBattlerSpriteIds[i]].invisible = FALSE;
-                
+
                 if (gBattleMons[i].status2 & STATUS2_LOCK_CONFUSE && gBattleStruct->turnEffectsTracker != 24)
                 {
                     gBattleMons[i].status2 &= ~(STATUS2_LOCK_CONFUSE);
+					
                     if (!(GetBattlerAbility(i) == ABILITY_OWN_TEMPO
                         || gBattleMons[i].status2 & STATUS2_CONFUSION
                         || IsBattlerTerrainAffected(i, STATUS_FIELD_MISTY_TERRAIN)))
                     {
                         gBattleMons[i].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
-                        
+
                         if (gBattlescriptCurrInstr[0] == 0x0 || (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76))
                         {
                             gBattleStruct->skyDropTargets[2] = 0xFE - battler;
@@ -1535,7 +1533,7 @@ void CancelMultiTurnMoves(u8 battler)
                 break;
             }
         }
-        
+
         if (!(gBattleMons[gBattleStruct->skyDropTargets[3]].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[2] < 4)
         {
             gBattleStruct->skyDropTargets[2] = 0xFF;
@@ -9260,7 +9258,7 @@ bool32 CanMegaEvolve(u8 battlerId)
             && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
             return FALSE;
     }
-	
+
     // Check if mon is currently held by Sky Drop
     if (gStatuses3[battlerId] & STATUS3_SKY_DROPPED)
         return FALSE;
