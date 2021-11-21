@@ -208,9 +208,6 @@ struct SideTimer
     u8 mistBattlerId;
     u8 safeguardTimer;
     u8 safeguardBattlerId;
-    u8 followmeTimer;
-    u8 followmeTarget:3;
-    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
     u8 spikesAmount;
     u8 toxicSpikesAmount;
     u8 stealthRockAmount;
@@ -221,6 +218,10 @@ struct SideTimer
     u8 tailwindBattlerId;
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
+    // Timers below this point are not swapped by Court Change
+    u8 followmeTimer;
+    u8 followmeTarget:3;
+    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
     u8 retaliateTimer;
 };
 

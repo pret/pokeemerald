@@ -7527,6 +7527,60 @@ static bool32 IsRototillerAffected(u32 battlerId)
     return TRUE;
 }
 
+#define COURTCHANGE_SWAP(status, structField, temp)              \
+{                                                                \
+    temp = gSideStatuses[0];                                     \
+    if (gSideStatuses[1] & status)                               \
+        gSideStatuses[0] |= status;                              \
+    else                                                         \
+        gSideStatuses[0] &= ~(status);                           \
+    if (temp & status)                                           \
+        gSideStatuses[1] |= status;                              \
+    else                                                         \
+        gSideStatuses[1] &= ~(status);                           \
+    SWAP(sideTimer0->structField, sideTimer1->structField, temp);\
+}                                                                \
+
+#define UPDATE_COURTCHANGED_BATTLER(structField)\
+{                                               \
+    sideTimer0->structField ^= BIT_SIDE;        \
+    sideTimer1->structField ^= BIT_SIDE;        \
+}                                               \
+
+static bool32 CourtChangeSwapSideStatuses(void)
+{
+    struct SideTimer *sideTimer0 = &gSideTimers[0];
+    struct SideTimer *sideTimer1 = &gSideTimers[1];
+    u32 temp;
+
+    // TODO: add Pledge-related effects
+    // TODO: add Gigantamax-related effects
+
+    // Swap timers and statuses
+    COURTCHANGE_SWAP(SIDE_STATUS_REFLECT, reflectTimer, temp)
+    COURTCHANGE_SWAP(SIDE_STATUS_LIGHTSCREEN, lightscreenTimer, temp)
+    COURTCHANGE_SWAP(SIDE_STATUS_MIST, mistTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_SAFEGUARD, safeguardTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_AURORA_VEIL, auroraVeilTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_TAILWIND, tailwindTimer, temp);
+    // Lucky Chant doesn't exist in gen 8, but seems like it should be affected by Court Change
+    COURTCHANGE_SWAP(SIDE_STATUS_LUCKY_CHANT, luckyChantTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_SPIKES, spikesAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_STEALTH_ROCK, stealthRockAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_TOXIC_SPIKES, toxicSpikesAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_STICKY_WEB, stickyWebAmount, temp);
+
+    // Change battler IDs of swapped effects. Needed for the correct string when they expire
+    // E.g. "Foe's Reflect wore off!"
+    UPDATE_COURTCHANGED_BATTLER(reflectBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(lightscreenBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(mistBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(safeguardBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(auroraVeilBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(tailwindBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(luckyChantBattlerId);
+}
+
 static void Cmd_various(void)
 {
     struct Pokemon *mon;
@@ -9338,167 +9392,7 @@ static void Cmd_various(void)
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
     {
-        /* This code is a mess, but idk how to do it better without changing how Side Statuses and
-        Side timers work.
-        The problem is that not all side statuses are affected by Court Change*/
-
-        //todo: add pledge related effects
-        //todo: add gigamax related effects
-
-        //swap side status sides
-        bits = gSideStatuses[0];    //Stores sides status temp
-
-        //Reflect
-        if (gSideStatuses[1] & SIDE_STATUS_REFLECT)
-            gSideStatuses[0] |= SIDE_STATUS_REFLECT;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_REFLECT);
-        
-        if (bits & SIDE_STATUS_REFLECT)
-            gSideStatuses[1] |= SIDE_STATUS_REFLECT;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_REFLECT);
-
-        //Light screen
-        if (gSideStatuses[1] & SIDE_STATUS_LIGHTSCREEN)
-            gSideStatuses[0] |= SIDE_STATUS_LIGHTSCREEN;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_LIGHTSCREEN);
-
-        if (bits & SIDE_STATUS_LIGHTSCREEN)
-            gSideStatuses[1] |= SIDE_STATUS_LIGHTSCREEN;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_LIGHTSCREEN);
-        
-        //Safeguard
-        if (gSideStatuses[1] & SIDE_STATUS_SAFEGUARD)
-            gSideStatuses[0] |= SIDE_STATUS_SAFEGUARD;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_SAFEGUARD);
-
-        if (bits & SIDE_STATUS_SAFEGUARD)
-            gSideStatuses[1] |= SIDE_STATUS_SAFEGUARD;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_SAFEGUARD);
-
-        //Mist
-        if (gSideStatuses[1] & SIDE_STATUS_MIST)
-            gSideStatuses[0] |= SIDE_STATUS_MIST;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_MIST);
-
-        if (bits & SIDE_STATUS_MIST)
-            gSideStatuses[1] |= SIDE_STATUS_MIST;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_MIST);
-
-        //AuroraVeil
-        if (gSideStatuses[1] & SIDE_STATUS_AURORA_VEIL)
-            gSideStatuses[0] |= SIDE_STATUS_AURORA_VEIL;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_AURORA_VEIL);
-
-        if (bits & SIDE_STATUS_AURORA_VEIL)
-            gSideStatuses[1] |= SIDE_STATUS_AURORA_VEIL;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_AURORA_VEIL);
-
-        //Sticky Web
-        if (gSideStatuses[1] & SIDE_STATUS_STICKY_WEB)
-            gSideStatuses[0] |= SIDE_STATUS_STICKY_WEB;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_STICKY_WEB);
-            
-        if (bits & SIDE_STATUS_STICKY_WEB)
-            gSideStatuses[1] |= SIDE_STATUS_STICKY_WEB;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_STICKY_WEB);
-
-        //Spikes
-        if (gSideStatuses[1] & SIDE_STATUS_SPIKES)
-            gSideStatuses[0] |= SIDE_STATUS_SPIKES;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_SPIKES);
-        
-        if (bits & SIDE_STATUS_SPIKES)
-            gSideStatuses[1] |= SIDE_STATUS_SPIKES;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_SPIKES);
-
-        //Toxic Spikes
-        if (gSideStatuses[1] & SIDE_STATUS_TOXIC_SPIKES)
-            gSideStatuses[0] |= SIDE_STATUS_TOXIC_SPIKES;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_TOXIC_SPIKES);
-        
-        if (bits & SIDE_STATUS_TOXIC_SPIKES)
-            gSideStatuses[1] |= SIDE_STATUS_TOXIC_SPIKES;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_TOXIC_SPIKES);
-
-        //Stealth Rock
-        if (gSideStatuses[1] & SIDE_STATUS_STEALTH_ROCK)
-            gSideStatuses[0] |= SIDE_STATUS_STEALTH_ROCK;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_STEALTH_ROCK);
-        
-        if (bits & SIDE_STATUS_STEALTH_ROCK)
-            gSideStatuses[1] |= SIDE_STATUS_STEALTH_ROCK;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_STEALTH_ROCK);
-
-        //Tailwind
-        if (gSideStatuses[1] & SIDE_STATUS_TAILWIND)
-            gSideStatuses[0] |= SIDE_STATUS_TAILWIND;
-        else
-            gSideStatuses[0] &= ~(SIDE_STATUS_TAILWIND);
-
-        if (bits & SIDE_STATUS_TAILWIND)
-            gSideStatuses[1] |= SIDE_STATUS_TAILWIND;
-        else
-            gSideStatuses[1] &= ~(SIDE_STATUS_TAILWIND);
-
-       
-        //Swap affected status timers
-        bits = gSideTimers[0].reflectTimer; 
-        gSideTimers[0].reflectTimer = gSideTimers[1].reflectTimer;
-        gSideTimers[1].reflectTimer = bits;
-
-        bits = gSideTimers[0].lightscreenTimer; 
-        gSideTimers[0].lightscreenTimer = gSideTimers[1].lightscreenTimer;
-        gSideTimers[1].lightscreenTimer = bits;
-
-        bits = gSideTimers[0].mistTimer; 
-        gSideTimers[0].mistTimer = gSideTimers[1].mistTimer;
-        gSideTimers[1].mistTimer = bits;
-        
-        bits = gSideTimers[0].safeguardTimer; 
-        gSideTimers[0].safeguardTimer = gSideTimers[1].safeguardTimer;
-        gSideTimers[1].safeguardTimer = bits;
-
-        bits = gSideTimers[0].spikesAmount; 
-        gSideTimers[0].spikesAmount = gSideTimers[1].spikesAmount;
-        gSideTimers[1].spikesAmount = bits;
-
-        bits = gSideTimers[0].toxicSpikesAmount; 
-        gSideTimers[0].toxicSpikesAmount = gSideTimers[1].toxicSpikesAmount;
-        gSideTimers[1].toxicSpikesAmount = bits;
-
-        bits = gSideTimers[0].stealthRockAmount; 
-        gSideTimers[0].stealthRockAmount = gSideTimers[1].stealthRockAmount;
-        gSideTimers[1].stealthRockAmount = bits;
-
-        bits = gSideTimers[0].stickyWebAmount; 
-        gSideTimers[0].stickyWebAmount = gSideTimers[1].stickyWebAmount;
-        gSideTimers[1].stickyWebAmount = bits;
-
-        bits = gSideTimers[0].auroraVeilTimer; 
-        gSideTimers[0].auroraVeilTimer = gSideTimers[1].auroraVeilTimer;
-        gSideTimers[1].auroraVeilTimer = bits;
-
-        bits = gSideTimers[0].tailwindTimer; 
-        gSideTimers[0].tailwindTimer = gSideTimers[1].tailwindTimer;
-        gSideTimers[1].tailwindTimer = bits;
+        CourtChangeSwapSideStatuses();
         break;
     }
     } // End of switch (gBattlescriptCurrInstr[2])
