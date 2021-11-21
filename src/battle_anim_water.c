@@ -57,9 +57,8 @@ static void AnimAquaTail(struct Sprite *sprite);
 static void AnimKnockOffAquaTail(struct Sprite *sprite);
 static void AnimKnockOffAquaTailStep(struct Sprite *sprite);
 
-// Both unused
-const u8 gUnknown_8593C80[] = INCBIN_U8("graphics/unknown/unknown_593C80.4bpp");
-const u8 gUnknown_8593FFC[] = INCBIN_U8("graphics/unknown/unknown_593FFC.bin");
+static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unused/water_gfx.4bpp");
+static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unused/water.bin");
 
 static const union AnimCmd sAnim_RainDrop[] =
 {
@@ -1002,7 +1001,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     }
     else
     {
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, 1);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, TRUE);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     switch (gBattleAnimArgs[0])
@@ -1742,7 +1741,7 @@ static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yD
     s16 randomSomethingY;
     s16 randomSomethingX;
     u8 spriteId;
-    
+
     something = sprite->data[0] / 2;
     combinedX = sprite->x + sprite->x2;
     combinedY = sprite->y + sprite->y2;

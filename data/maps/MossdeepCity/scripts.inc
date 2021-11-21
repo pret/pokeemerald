@@ -286,7 +286,7 @@ MossdeepCity_EventScript_ScottExitEast::
 MossdeepCity_Movement_PlayerWatchScottExit:
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 MossdeepCity_Movement_ScottExitNorth:

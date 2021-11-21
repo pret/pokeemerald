@@ -58,7 +58,7 @@ DewfordTown_Hall_EventScript_ExpertM::
 	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_TVShowAboutTrend, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_EXPERT_M, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_EXPERT_M, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	release
 	end
@@ -69,7 +69,7 @@ DewfordTown_Hall_EventScript_Twin::
 	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_IsTrendMorePopularAcrossSea, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_TWIN, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TWIN, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	release
 	end
@@ -205,7 +205,7 @@ DewfordTown_Hall_EventScript_DebateReact1::
 DewfordTown_Hall_EventScript_PlayerReactWest::
 	compare VAR_FACING, DIR_EAST
 	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer1
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -229,19 +229,19 @@ DewfordTown_Hall_EventScript_PlayerReactNorthSouth::
 	return
 
 DewfordTown_Hall_EventScript_PlayerWalkInPlaceUp::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_PlayerWalkInPlaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_PlayerReactEast::
 	compare VAR_FACING, DIR_WEST
 	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer1
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 

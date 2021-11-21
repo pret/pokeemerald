@@ -390,7 +390,7 @@ LilycoveCity_EventScript_BrendanBattleFrontier::
 
 LilycoveCity_EventScript_RivalFlyAway::
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1

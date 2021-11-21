@@ -25,21 +25,21 @@ se_m_hyper_beam_1:
 	.byte		BEND  , c_v+0
 	.byte		N02   , En3 , v127
 	.byte	W03
-	.byte		N01   , As3 
+	.byte		N01   , As3
 	.byte	W03
-	.byte		N02   , Gn3 
+	.byte		N02   , Gn3
 	.byte	W03
-	.byte		N01   , Cs4 
+	.byte		N01   , Cs4
 	.byte	W03
 	.byte		PAN   , c_v+7
 	.byte		N02   , En3 , v072
 	.byte	W03
-	.byte		N01   , As3 
+	.byte		N01   , As3
 	.byte	W03
 	.byte		PAN   , c_v-7
 	.byte		N02   , Gn3 , v040
 	.byte	W03
-	.byte		N01   , Cs4 
+	.byte		N01   , Cs4
 	.byte	W03
 	.byte	FINE
 
@@ -51,16 +51,16 @@ se_m_hyper_beam_2:
 	.byte		VOL   , 110*se_m_hyper_beam_mvl/mxv
 	.byte		N01   , Cn3 , v040
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W04
-	.byte		N01   
+	.byte		N01
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W04
 se_m_hyper_beam_2_000:
 	.byte		N01   , Cn3 , v020
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W04
 	.byte	PEND
 	.byte	PATT

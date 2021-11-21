@@ -119,7 +119,7 @@ static const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/8622700.gbap
 static const u16 gUnknown_08622720[] = INCBIN_U16("graphics/pokenav/pokeball_matchcall.gbapal");
 static const u32 gUnknown_08622760[] = INCBIN_U32("graphics/pokenav/pokeball_matchcall.4bpp.lz");
 
-const struct BgTemplate sMatchCallBgTemplates[3] = 
+const struct BgTemplate sMatchCallBgTemplates[3] =
 {
     {
         .bg = 1,
@@ -150,7 +150,7 @@ const struct BgTemplate sMatchCallBgTemplates[3] =
     }
 };
 
-static const LoopedTask sMatchCallLoopTaskFuncs[] = 
+static const LoopedTask sMatchCallLoopTaskFuncs[] =
 {
     [POKENAV_MC_FUNC_NONE]                = NULL,
     [POKENAV_MC_FUNC_DOWN]                = MatchCallListCursorDown,
@@ -170,7 +170,7 @@ static const LoopedTask sMatchCallLoopTaskFuncs[] =
     [POKENAV_MC_FUNC_EXIT]                = ExitMatchCall
 };
 
-static const struct WindowTemplate sMatchCallLocationWindowTemplate = 
+static const struct WindowTemplate sMatchCallLocationWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -181,7 +181,7 @@ static const struct WindowTemplate sMatchCallLocationWindowTemplate =
     .baseBlock = 16
 };
 
-static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate = 
+static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -192,7 +192,7 @@ static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate =
     .baseBlock = 38
 };
 
-static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] = 
+static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 {
     [MATCH_CALL_OPTION_CALL]   = gText_Call,
     [MATCH_CALL_OPTION_CHECK]  = gText_Check,
@@ -202,7 +202,7 @@ static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 // The series of 5 dots that appear when someone is called with Match Call
 static const u8 sText_CallingDots[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
 
-static const struct WindowTemplate sCallMsgBoxWindowTemplate = 
+static const struct WindowTemplate sCallMsgBoxWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -213,17 +213,17 @@ static const struct WindowTemplate sCallMsgBoxWindowTemplate =
     .baseBlock = 10
 };
 
-const struct CompressedSpriteSheet gUnknown_08622810[1] = 
+const struct CompressedSpriteSheet gUnknown_08622810[1] =
 {
     {gUnknown_086226B8, 0x40, 7}
 };
 
-const struct SpritePalette gUnknown_08622818[2] = 
+const struct SpritePalette gUnknown_08622818[2] =
 {
     {gUnknown_08622698, 12}
 };
 
-static const struct OamData sOptionsCursorOamData = 
+static const struct OamData sOptionsCursorOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -235,7 +235,7 @@ static const struct OamData sOptionsCursorOamData =
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-}; 
+};
 
 static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
 {
@@ -248,7 +248,7 @@ static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
     .callback = SpriteCB_OptionsCursor,
 };
 
-static const struct OamData sTrainerPicOamData = 
+static const struct OamData sTrainerPicOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -322,8 +322,8 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
     {
     case 0:
         InitBgTemplates(sMatchCallBgTemplates, ARRAY_COUNT(sMatchCallBgTemplates));
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
         DecompressAndCopyTileDataToVram(2, sMatchCallUI_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(2, state->unk1024);
         CopyToBgTilemapBuffer(2, sMatchCallUI_Tilemap, 0, 0);
@@ -335,7 +335,7 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
-        sub_8199DF0(1, 0, 0, 1);
+        BgDmaFill(1, 0, 0, 1);
         SetBgTilemapBuffer(1, state->unk24);
         FillBgTilemapBufferRect_Palette0(1, 0x1000, 0, 0, 32, 20);
         CopyPaletteIntoBufferUnfaded(gUnknown_086226E0, 0x10, 0x20);
@@ -367,8 +367,8 @@ static u32 LoopedTask_OpenMatchCall(s32 taskState)
         PrintMatchCallLocation(state, 0);
         return LT_INC_AND_PAUSE;
     case 6:
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         ShowBg(2);
         ShowBg(3);
         ShowBg(1);
@@ -874,7 +874,7 @@ static void InitMatchCallPokenavListMenuTemplate(void)
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 3;
-    template.fontId = 7;
+    template.fontId = FONT_NARROW;
     template.listFunc.unk10_2 = BufferMatchCallNameAndDesc;
     template.unk14 = TryDrawRematchPokeballIcon;
     sub_81C81D4(&sMatchCallBgTemplates[2], &template, 2);
@@ -942,7 +942,7 @@ static void DrawMatchCallLeftColumnWindows(struct Pokenav4Struct *state)
     PutWindowTilemap(state->locWindowId);
     FillWindowPixelBuffer(state->infoBoxWindowId, PIXEL_FILL(1));
     PutWindowTilemap(state->infoBoxWindowId);
-    CopyWindowToVram(state->locWindowId, 1);
+    CopyWindowToVram(state->locWindowId, COPYWIN_MAP);
 }
 
 static void UpdateMatchCallInfoBox(struct Pokenav4Struct *state)
@@ -952,7 +952,7 @@ static void UpdateMatchCallInfoBox(struct Pokenav4Struct *state)
     PrintNumberRegistered(state->infoBoxWindowId);
     PrintNumberOfBattlesLabel(state->infoBoxWindowId);
     PrintNumberOfBattles(state->infoBoxWindowId);
-    CopyWindowToVram(state->infoBoxWindowId, 2);
+    CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);
 }
 
 static void PrintNumberRegisteredLabel(u16 windowId)
@@ -986,14 +986,14 @@ static void PrintNumberOfBattles(u16 windowId)
 static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, int top)
 {
     int y = top * 16 + 1;
-    AddTextPrinterParameterized(windowId, 7, str, 2, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
 {
-    int x = GetStringRightAlignXOffset(7, str, 86);
+    int x = GetStringRightAlignXOffset(FONT_NARROW, str, 86);
     int y = top * 16 + 1;
-    AddTextPrinterParameterized(windowId, 7, str, x, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
@@ -1006,10 +1006,10 @@ static void PrintMatchCallLocation(struct Pokenav4Struct *state, int arg1)
         GetMapName(mapName, mapSec, 0);
     else
         StringCopy(mapName, gText_Unknown);
-    
-    x = GetStringCenterAlignXOffset(7, mapName, 88);
+
+    x = GetStringCenterAlignXOffset(FONT_NARROW, mapName, 88);
     FillWindowPixelBuffer(state->locWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(state->locWindowId, 7, mapName, x, 1, 0, NULL);
+    AddTextPrinterParameterized(state->locWindowId, FONT_NARROW, mapName, x, 1, 0, NULL);
 }
 
 static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *state)
@@ -1023,10 +1023,10 @@ static void PrintMatchCallSelectionOptions(struct Pokenav4Struct *state)
         if (optionText == MATCH_CALL_OPTION_COUNT)
             break;
 
-        AddTextPrinterParameterized(state->infoBoxWindowId, 7, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->infoBoxWindowId, FONT_NARROW, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SKIP_DRAW, NULL);
     }
 
-    CopyWindowToVram(state->infoBoxWindowId, 2);
+    CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);
 }
 
 static bool32 sub_81CBFC4(struct Pokenav4Struct *state)
@@ -1055,7 +1055,7 @@ static void UpdateWindowsToShowCheckPage(struct Pokenav4Struct *state)
 {
     CloseMatchCallSelectOptionsWindow(state);
     FillWindowPixelBuffer(state->infoBoxWindowId, PIXEL_FILL(1));
-    CopyWindowToVram(state->infoBoxWindowId, 2);
+    CopyWindowToVram(state->infoBoxWindowId, COPYWIN_GFX);
 }
 
 static void sub_81CC034(struct Pokenav4Struct *state)
@@ -1072,7 +1072,7 @@ static void DrawMsgBoxForMatchCallMsg(struct Pokenav4Struct *state)
     DrawMatchCallTextBoxBorder(state->msgBoxWindowId, 1, 4);
     FillWindowPixelBuffer(state->msgBoxWindowId, PIXEL_FILL(1));
     PutWindowTilemap(state->msgBoxWindowId);
-    CopyWindowToVram(state->msgBoxWindowId, 3);
+    CopyWindowToVram(state->msgBoxWindowId, COPYWIN_FULL);
     sprite = PauseSpinningPokenavSprite();
     sprite->x = 24;
     sprite->y = 112;
@@ -1085,7 +1085,7 @@ static void DrawMsgBoxForCloseByMsg(struct Pokenav4Struct *state)
     DrawTextBorderOuter(state->msgBoxWindowId, 1, 4);
     FillWindowPixelBuffer(state->msgBoxWindowId, PIXEL_FILL(1));
     PutWindowTilemap(state->msgBoxWindowId);
-    CopyWindowToVram(state->msgBoxWindowId, 3);
+    CopyWindowToVram(state->msgBoxWindowId, COPYWIN_FULL);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav4Struct *state)
@@ -1095,7 +1095,7 @@ static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav4Struct *state)
 
 static void PrintCallingDots(struct Pokenav4Struct *state)
 {
-    AddTextPrinterParameterized(state->msgBoxWindowId, 1, sText_CallingDots, 32, 1, 1, NULL);
+    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, sText_CallingDots, 32, 1, 1, NULL);
 }
 
 static bool32 WaitForCallingDotsText(struct Pokenav4Struct *state)
@@ -1106,7 +1106,7 @@ static bool32 WaitForCallingDotsText(struct Pokenav4Struct *state)
 
 static void PrintTrainerIsCloseBy(struct Pokenav4Struct *state)
 {
-    AddTextPrinterParameterized(state->msgBoxWindowId, 1, gText_TrainerCloseBy, 0, 1, 1, NULL);
+    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, gText_TrainerCloseBy, 0, 1, 1, NULL);
 }
 
 static bool32 WaitForTrainerIsCloseByText(struct Pokenav4Struct *state)
@@ -1120,7 +1120,7 @@ static void PrintMatchCallMessage(struct Pokenav4Struct *state)
     int index = GetSelectedPokenavListIndex();
     const u8 *str = GetMatchCallMessageText(index, &state->unkF);
     u8 speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized(state->msgBoxWindowId, 1, str, 32, 1, speed, NULL);
+    AddTextPrinterParameterized(state->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
 }
 
 static bool32 WaitForMatchCallMessageText(struct Pokenav4Struct *state)

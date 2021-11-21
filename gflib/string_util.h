@@ -37,7 +37,7 @@ u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n);
 u32 StringLength_Multibyte(const u8 *str);
 u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color);
 bool32 IsStringJapanese(u8 *str);
-bool32 sub_800924C(u8 *str, s32 n);
+bool32 IsStringNJapanese(u8 *str, s32 n);
 u8 GetExtCtrlCodeLength(u8 code);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 void ConvertInternationalString(u8 *s, u8 language);

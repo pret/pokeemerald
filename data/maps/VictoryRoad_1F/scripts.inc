@@ -40,7 +40,7 @@ VictoryRoad_1F_EventScript_WallyBattleTrigger2::
 	end
 
 VictoryRoad_1F_EventScript_WallyEntranceBattle::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_VR_1, VictoryRoad_1F_Text_WallyEntranceDefeat
@@ -84,7 +84,7 @@ VictoryRoad_1F_EventScript_EntranceWally::
 	msgbox VictoryRoad_1F_Text_WallyPostEntranceBattle, MSGBOX_NPC
 	end
 
-@ This Wally appears and remains at the exit after the Hall of Fame is entered 
+@ This Wally appears and remains at the exit after the Hall of Fame is entered
 VictoryRoad_1F_EventScript_ExitWally::
 	trainerbattle_single TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle

@@ -1285,7 +1285,7 @@ ContestHall_Movement_MCBackUp:
 	step_end
 
 ContestHall_Movement_MCFaceJudge:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_Heart:
@@ -1293,24 +1293,24 @@ ContestHall_Movement_Heart:
 	step_end
 
 ContestHall_Movement_FaceContestants:
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WalkStageLeft:
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WalkStageRight:
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WinningPlayerWalkUp:
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_ContestantDelay32:
@@ -1319,15 +1319,15 @@ ContestHall_Movement_ContestantDelay32:
 	step_end
 
 ContestHall_Movement_MCFaceJudge2:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_JudgeFaceMC:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 ContestHall_Movement_FaceContestants2:
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_Player3ApproachForPrize:
@@ -1375,20 +1375,20 @@ ContestHall_Movement_Player4FaceUp:
 ContestHall_Movement_MCLookAtJudge:
 	face_up
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_JudgeLookAtMC:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_MCWalkInPlaceDown:
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_Player1WalkToCenter:
@@ -1396,7 +1396,7 @@ ContestHall_Movement_Player1WalkToCenter:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player1WalkBack:
@@ -1404,31 +1404,31 @@ ContestHall_Movement_Player1WalkBack:
 	walk_fast_left
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player2WalkToCenter:
 	walk_up
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player2WalkBack:
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player3WalkToCenter:
 	walk_up
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player3WalkBack:
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player4WalkToCenter:
@@ -1436,7 +1436,7 @@ ContestHall_Movement_Player4WalkToCenter:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player4WalkBack:
@@ -1444,7 +1444,7 @@ ContestHall_Movement_Player4WalkBack:
 	walk_fast_right
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player1ApproachForPrize:

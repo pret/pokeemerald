@@ -217,7 +217,7 @@ u8 SwitchConditionSummaryIndex(u8 moveUp)
     }
 
     isNotLastMon = (monListPtr->currIndex != ((IsConditionMenuSearchMode() != 0) ? monListPtr->listCount : monListPtr->listCount - 1));
-    
+
     if (!wasNotLastMon)
         return PARTY_CONDITION_FUNC_NO_TRANSITION;
     else if (!isNotLastMon)
@@ -372,7 +372,7 @@ u8 *CopyMonConditionNameGender(u8 *str, u16 id, bool8 arg3)
     switch (gender)
     {
     default:
-        *(str_++) = CHAR_GENDERLESS;
+        *(str_++) = CHAR_SPACER; // Genderless
         break;
     case MON_MALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
@@ -435,7 +435,7 @@ void CopyMonNameGenderLocation(s16 id, u8 arg1)
         if (boxId == TOTAL_BOXES_COUNT)
             CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], gText_InParty, 8);
         else
-            CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], GetBoxNamePtr(boxId), 8);
+            CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], GetBoxNamePtr(boxId), BOX_NAME_LENGTH);
     }
     else
     {

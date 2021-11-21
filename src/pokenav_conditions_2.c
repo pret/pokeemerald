@@ -30,7 +30,7 @@ const u32 gUnknown_08623228[] = INCBIN_U32("graphics/pokenav/8623228.4bpp.lz");
 const u32 sConditionGraph_Tilemap[] = INCBIN_U32("graphics/pokenav/862323C.bin.lz");
 const u16 sConditionGraphMonMarkingsPal[] = INCBIN_U16("graphics/pokenav/8623338.gbapal");
 
-const struct BgTemplate sPartyConditionBgTemplates[3] = 
+const struct BgTemplate sPartyConditionBgTemplates[3] =
 {
     {
         .bg = 1,
@@ -61,7 +61,7 @@ const struct BgTemplate sPartyConditionBgTemplates[3] =
     }
 };
 
-const struct WindowTemplate sMonNameGenderWindowTemplate = 
+const struct WindowTemplate sMonNameGenderWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 13,
@@ -72,7 +72,7 @@ const struct WindowTemplate sMonNameGenderWindowTemplate =
     .baseBlock = 2
 };
 
-const struct WindowTemplate sConditionGraphListIdWindowTemplate = 
+const struct WindowTemplate sConditionGraphListIdWindowTemplate =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -83,7 +83,7 @@ const struct WindowTemplate sConditionGraphListIdWindowTemplate =
     .baseBlock = 0x36
 };
 
-const struct WindowTemplate sUnusedWindowTemplate1 = 
+const struct WindowTemplate sUnusedWindowTemplate1 =
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -94,7 +94,7 @@ const struct WindowTemplate sUnusedWindowTemplate1 =
     .baseBlock = 0x44
 };
 
-const struct WindowTemplate sUnusedWindowTemplate2 = 
+const struct WindowTemplate sUnusedWindowTemplate2 =
 {
     .bg = 1,
     .tilemapLeft = 13,
@@ -199,12 +199,12 @@ u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         return LT_INC_AND_PAUSE;
     case 1:
         InitBgTemplates(sPartyConditionBgTemplates, ARRAY_COUNT(sPartyConditionBgTemplates));
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
@@ -240,8 +240,8 @@ u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         SetConditionGraphIOWindows(2);
         return LT_INC_AND_PAUSE;
     case 5:
-        sub_8199DF0(1, 0, 0, 1);
-        sub_8199DF0(1, 17, 1, 1);
+        BgDmaFill(1, 0, 0, 1);
+        BgDmaFill(1, 17, 1, 1);
         CpuFill32(0, structPtr->tilemapBuffers[1], BG_SCREEN_SIZE);
         SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
         return LT_INC_AND_PAUSE;
@@ -572,23 +572,23 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
         if (GetConditionGraphCurrentMonIndex() != GetMonListCount() - 1 || IsConditionMenuSearchMode() == TRUE)
         {
             str = GetConditionMonNameBuffer(bufferIndex);
-            AddTextPrinterParameterized(structPtr->nameGenderWindowId, 1, str, 0, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->nameGenderWindowId, FONT_NORMAL, str, 0, 1, 0, NULL);
         }
         break;
     case 2:
         if (IsConditionMenuSearchMode() == TRUE)
         {
             str = GetConditionMonLocationBuffer(bufferIndex);
-            AddTextPrinterParameterized(structPtr->nameGenderWindowId, 1, str, 0, 17, 0, NULL);
+            AddTextPrinterParameterized(structPtr->nameGenderWindowId, FONT_NORMAL, str, 0, 17, 0, NULL);
             text[0] = EXT_CTRL_CODE_BEGIN;
             text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
             text[2] = TEXT_COLOR_BLUE;
             text[3] = TEXT_COLOR_TRANSPARENT;
             text[4] = TEXT_COLOR_LIGHT_BLUE;
             StringCopy(text + 5, gText_Number2);
-            AddTextPrinterParameterized(structPtr->listIndexWindowId, 1, text, 4, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->listIndexWindowId, FONT_NORMAL, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(text + 5, GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);
-            AddTextPrinterParameterized(structPtr->listIndexWindowId, 1, text, 28, 1, 0, NULL);
+            AddTextPrinterParameterized(structPtr->listIndexWindowId, FONT_NORMAL, text, 28, 1, 0, NULL);
         }
         break;
     case 3:
@@ -596,9 +596,9 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
         {
         case 0:
             if (winMode)
-                CopyWindowToVram(structPtr->nameGenderWindowId, 3);
+                CopyWindowToVram(structPtr->nameGenderWindowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->nameGenderWindowId, 2);
+                CopyWindowToVram(structPtr->nameGenderWindowId, COPYWIN_GFX);
 
             if (IsConditionMenuSearchMode() == TRUE)
             {
@@ -612,9 +612,9 @@ bool32 UpdateConditionGraphWindows(u8 mode, u16 bufferIndex, bool8 winMode)
             }
         case 1:
             if (winMode)
-                CopyWindowToVram(structPtr->listIndexWindowId, 3);
+                CopyWindowToVram(structPtr->listIndexWindowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(structPtr->listIndexWindowId, 2);
+                CopyWindowToVram(structPtr->listIndexWindowId, COPYWIN_GFX);
 
             structPtr->windowModeState = 0;
             return TRUE;
@@ -628,8 +628,8 @@ void CopyUnusedConditionWindowsToVram(void)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
 
-    CopyWindowToVram(structPtr->unusedWindowId1, 3);
-    CopyWindowToVram(structPtr->unusedWindowId2, 3);
+    CopyWindowToVram(structPtr->unusedWindowId1, COPYWIN_FULL);
+    CopyWindowToVram(structPtr->unusedWindowId2, COPYWIN_FULL);
 }
 
 void sub_81CE964(struct Sprite *sprite)

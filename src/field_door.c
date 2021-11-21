@@ -307,7 +307,7 @@ static void door_build_blockdef(u16 *a, u16 b, const u8 *c)
 static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 y, const u8 *pal)
 {
     u16 arr[24];
-    
+
     if (gfx->size == 2)
     {
         door_build_blockdef(&arr[8], 0x3F0, pal);
@@ -346,14 +346,14 @@ static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame 
     {
         DrawClosedDoorTiles(gfx, x, y);
         if (ShouldUseMultiCorridorDoor())
-            DrawClosedDoorTiles(gfx, gSpecialVar_0x8004 + 7, gSpecialVar_0x8005 + 7);
+            DrawClosedDoorTiles(gfx, gSpecialVar_0x8004 + MAP_OFFSET, gSpecialVar_0x8005 + MAP_OFFSET);
     }
     else
     {
         CopyDoorTilesToVram(gfx, frame);
         DrawCurrentDoorAnimFrame(gfx, x, y, gfx->palette);
         if (ShouldUseMultiCorridorDoor())
-            DrawCurrentDoorAnimFrame(gfx, gSpecialVar_0x8004 + 7, gSpecialVar_0x8005 + 7, gfx->palette);
+            DrawCurrentDoorAnimFrame(gfx, gSpecialVar_0x8004 + MAP_OFFSET, gSpecialVar_0x8005 + MAP_OFFSET, gfx->palette);
     }
 }
 
@@ -524,7 +524,7 @@ bool8 FieldIsDoorAnimationRunning(void)
 u32 GetDoorSoundEffect(u32 x, u32 y)
 {
     int sound = GetDoorSoundType(sDoorAnimGraphicsTable, x, y);
-    
+
     if (sound == DOOR_SOUND_NORMAL)
         return SE_DOOR;
     else if (sound == DOOR_SOUND_SLIDING)
@@ -540,7 +540,7 @@ static bool8 ShouldUseMultiCorridorDoor(void)
 {
     if (FlagGet(FLAG_ENABLE_MULTI_CORRIDOR_DOOR))
     {
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR) 
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR))
         {
             return TRUE;

@@ -2,9 +2,11 @@
 #define GUARD_BATTLE_SCRIPT_COMMANDS_H
 
 #include "constants/pokemon.h"
+#include "constants/battle_script_commands.h"
 
-#define WINDOW_CLEAR            0x1
-#define WINDOW_x80              0x80
+// Arguments for 'flags' in HandleBattleWindow
+#define WINDOW_CLEAR (1 << 0)
+#define WINDOW_BG1   (1 << 7)
 
 struct StatFractions
 {

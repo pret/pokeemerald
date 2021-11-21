@@ -43,7 +43,7 @@
 #include "player_pc.h"
 #include "field_specials.h"
 #include "berry_powder.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "constants/items.h"
 
@@ -159,7 +159,7 @@ void NewGameInitData(void)
     ResetPokedex();
     ClearFrontierRecord();
     ClearSav1();
-    ClearMailData();
+    ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
     InitPlayerTrainerId();
@@ -201,7 +201,7 @@ void NewGameInitData(void)
     ResetAllApprenticeData();
     ClearRankingHallRecords();
     InitMatchCallCounters();
-    sub_801AFD8();
+    ClearMysteryGift();
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();

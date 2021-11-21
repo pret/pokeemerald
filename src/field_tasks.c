@@ -529,7 +529,7 @@ void SetSootopolisGymCrackedIceMetatiles(void)
         for (y = 0; y < height; y++)
         {
             if (IsIcePuzzleCoordVisited(x, y) == TRUE)
-                MapGridSetMetatileIdAt(x + 7, y + 7, METATILE_SootopolisGym_Ice_Cracked);
+                MapGridSetMetatileIdAt(x + MAP_OFFSET, y + MAP_OFFSET, METATILE_SootopolisGym_Ice_Cracked);
         }
     }
 }
@@ -586,7 +586,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
                 PlaySE(SE_ICE_CRACK);
                 MapGridSetMetatileIdAt(x, y, METATILE_SootopolisGym_Ice_Cracked);
                 CurrentMapDrawMetatileAt(x, y);
-                MarkIcePuzzleCoordVisited(x - 7, y - 7);
+                MarkIcePuzzleCoordVisited(x - MAP_OFFSET, y - MAP_OFFSET);
                 data[1] = 1;
             }
             break;
@@ -689,7 +689,7 @@ static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
 {
     u16 tile;
     if ((--data[0]) == 0)
-        tile = 0xe8;
+        tile = METATILE_General_MuddySlope_Frame0;
     else
         tile = sMuddySlopeMetatiles[data[0] / 8];
 

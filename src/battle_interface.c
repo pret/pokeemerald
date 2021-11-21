@@ -101,11 +101,11 @@ enum
     HEALTHBOX_GFX_63, //hp bar red [7 pixels]
     HEALTHBOX_GFX_64, //hp bar red [8 pixels]
     HEALTHBOX_GFX_65, //hp bar frame end
-    HEALTHBOX_GFX_66, //status ball [full]
-    HEALTHBOX_GFX_67, //status ball [empty]
-    HEALTHBOX_GFX_68, //status ball [fainted]
-    HEALTHBOX_GFX_69, //status ball [statused]
-    HEALTHBOX_GFX_70, //status ball [unused extra]
+    HEALTHBOX_GFX_STATUS_BALL, // Full
+    HEALTHBOX_GFX_STATUS_BALL_EMPTY,
+    HEALTHBOX_GFX_STATUS_BALL_FAINTED,
+    HEALTHBOX_GFX_STATUS_BALL_STATUSED,
+    HEALTHBOX_GFX_STATUS_BALL_CAUGHT,
     HEALTHBOX_GFX_STATUS_PSN_BATTLER1, //status2 "PSN"
     HEALTHBOX_GFX_72,
     HEALTHBOX_GFX_73,
@@ -151,8 +151,8 @@ enum
     HEALTHBOX_GFX_STATUS_BRN_BATTLER3, //status4 "BRN"
     HEALTHBOX_GFX_114,
     HEALTHBOX_GFX_115,
-    HEALTHBOX_GFX_116, //unknown_D12FEC
-    HEALTHBOX_GFX_117, //unknown_D1300C
+    HEALTHBOX_GFX_FRAME_END,
+    HEALTHBOX_GFX_FRAME_END_BAR,
 };
 
 // strings
@@ -502,7 +502,7 @@ static const struct SpritePalette sStatusSummaryBallsSpritePal =
 
 static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 {
-    gBattleInterface_BallDisplayGfx, 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
+    &gHealthboxElementsGfxTable[HEALTHBOX_GFX_STATUS_BALL], 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
 };
 
 static const struct OamData sOamData_StatusSummaryBalls =
@@ -566,21 +566,8 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
     }
 };
 
-// possibly text
-static const u8 sUnknown_0832C3C4[] =
-{
-    0xfc, 0x01, 0x01, 0xfc, 0x02, 0x02, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-};
-
-// possibly text
-static const u8 sUnknown_0832C3D8[] =
-{
-    0xfc, 0x01, 0x01, 0xfc, 0x02, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-};
+static const u8 sEmptyWhiteText_GrayHighlight[] = __("{COLOR WHITE}{HIGHLIGHT DARK_GRAY}              ");
+static const u8 sEmptyWhiteText_TransparentHighlight[] = __("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}              ");
 
 enum
 {
@@ -1170,7 +1157,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
     {
         u8 battler;
 
-        memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
+        memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(sEmptyWhiteText_GrayHighlight));
         battler = gSprites[healthboxSpriteId].hMain_Battler;
         if (IsDoubleBattle() == TRUE)
         {
@@ -1197,7 +1184,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             }
 
             ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_LEADING_ZEROS, 3);
-            RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 9, text);
+            RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
 
             for (i = 0; i < 3; i++)
             {
@@ -1229,7 +1216,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
                 windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, 0, &windowId);
                 HpTextIntoHealthboxObject((void*)(OBJ_VRAM0) + spriteTileNum + 0xC0, windowTileData, 2);
                 RemoveWindowOnHealthbox(windowId);
-                CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_116),
+                CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_FRAME_END),
                           (void*)(OBJ_VRAM0 + 0x680) + (gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP),
                            0x20);
             }
@@ -1249,7 +1236,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
     {
         u8 battlerId;
 
-        memcpy(text, sUnknown_0832C3D8, sizeof(sUnknown_0832C3D8));
+        memcpy(text, sEmptyWhiteText_TransparentHighlight, sizeof(sEmptyWhiteText_TransparentHighlight));
         battlerId = gSprites[healthboxSpriteId].hMain_Battler;
 
         if (gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars) // don't print text if only bars are visible
@@ -1266,7 +1253,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
             txtPtr = ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
             if (!maxOrCurrent)
                 StringCopy(txtPtr, gText_Slash);
-            RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 9, text);
+            RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
 
             for (i = var; i < var + 3; i++)
             {
@@ -1295,7 +1282,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
             {
                 if (GetBattlerSide(battlerId) == B_SIDE_PLAYER) // Impossible to reach part, because the battlerId is from the opponent's side.
                 {
-                    CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_116),
+                    CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_FRAME_END),
                           (void*)(OBJ_VRAM0) + ((gSprites[healthboxSpriteId].oam.tileNum + 52) * TILE_SIZE_4BPP),
                            0x20);
                 }
@@ -1312,12 +1299,12 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
     u8 *barFontGfx;
     u8 i, var, nature, healthBarSpriteId;
 
-    memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
+    memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(sEmptyWhiteText_GrayHighlight));
     barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].hMain_Battler) * 384)];
     var = 5;
     nature = GetNature(mon);
     StringCopy(text + 6, gNatureNamePointers[nature]);
-    RenderTextFont9(barFontGfx, 9, text);
+    RenderTextHandleBold(barFontGfx, FONT_BOLD, text);
 
     for (j = 6, i = 0; i < var; i++, j++)
     {
@@ -1349,7 +1336,7 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
     ConvertIntToDecimalStringN(text + 9, gBattleStruct->safariEscapeFactor, STR_CONV_MODE_RIGHT_ALIGN, 2);
     text[5] = CHAR_SPACE;
     text[8] = CHAR_SLASH;
-    RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 9, text);
+    RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
 
     j = healthBarSpriteId; // Needed to match for some reason.
     for (j = 0; j < 5; j++)
@@ -1403,7 +1390,7 @@ void SwapHpBarsWithHpText(void)
                 {
                     UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
                     UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gPlayerParty[gBattlerPartyIndexes[i]], HEALTHBOX_HEALTH_BAR);
-                    CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_117), (void*)(OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * TILE_SIZE_4BPP), 32);
+                    CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_FRAME_END_BAR), (void*)(OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * TILE_SIZE_4BPP), 32);
                 }
             }
             else
@@ -2179,7 +2166,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
     healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
 
     if (noStatus)
-        CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_70), (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
+        CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_STATUS_BALL_CAUGHT), (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
     else
         CpuFill32(0, (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
 }
@@ -2347,7 +2334,7 @@ static void UpdateLeftNoOfBallsTextOnHealthbox(u8 healthboxSpriteId)
     txtPtr = StringCopy(text, gText_SafariBallLeft);
     ConvertIntToDecimalStringN(txtPtr, gNumSafariBalls, STR_CONV_MODE_LEFT_ALIGN, 2);
 
-    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, GetStringRightAlignXOffset(0, text, 0x2F), 3, 2, &windowId);
+    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, GetStringRightAlignXOffset(FONT_SMALL, text, 0x2F), 3, 2, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
     SafariTextIntoHealthboxObject((void*)(OBJ_VRAM0 + 0x2C0) + spriteTileNum, windowTileData, 2);
     SafariTextIntoHealthboxObject((void*)(OBJ_VRAM0 + 0xA00) + spriteTileNum, windowTileData + 0x40, 4);
@@ -2720,7 +2707,7 @@ static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     color[1] = 1;
     color[2] = 3;
 
-    AddTextPrinterParameterized4(winId, 0, x, y, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(winId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 
     *windowId = winId;
     return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
@@ -2954,7 +2941,7 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
         name--;
 
     lastChar = *(name - 1);
-    name[0] = CHAR_SGL_QUOT_RIGHT; // apostraphe
+    name[0] = CHAR_SGL_QUOTE_RIGHT; // apostraphe
     name++;
     if (lastChar != CHAR_S && lastChar != CHAR_s)
     {

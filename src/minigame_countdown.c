@@ -447,13 +447,13 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
     switch (sprite->sState)
     {
     case 0:
-        sub_8007E18(sprite, 0x800, 0x1A);
+        SetSpriteMatrixAnchor(sprite, NO_ANCHOR, 26);
         sprite->sState++;
         // fallthrough
     case 1:
         if (sprite->sTimer == 0)
             PlaySE(SE_BALL_BOUNCE_2);
-        
+
         if (++sprite->sTimer >= 20)
         {
             // Ready for jump

@@ -29,9 +29,6 @@
 #include "constants/trainers.h"
 #include "recorded_battle.h"
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
-// this file's functions
 static void LinkOpponentHandleGetMonData(void);
 static void LinkOpponentHandleGetRawMonData(void);
 static void LinkOpponentHandleSetMonData(void);
@@ -325,7 +322,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
             }
         }
 
@@ -426,7 +423,7 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(B_WIN_MSG))
         LinkOpponentBufferExecCompleted();
 }
 
@@ -467,7 +464,7 @@ static void SwitchIn_HandleSoundAndEnd(void)
         if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
             || gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy_2)
         {
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
             LinkOpponentBufferExecCompleted();
         }
     }
@@ -560,7 +557,7 @@ static void LinkOpponentHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(1, size, monData);
+    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
     LinkOpponentBufferExecCompleted();
 }
 
@@ -1472,7 +1469,7 @@ static void LinkOpponentHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleResources->bufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
     BattleTv_SetDataBasedOnString(*stringId);
 }

@@ -1083,7 +1083,7 @@ void AnimTask_HazeScrollingFog(u8 taskId)
 
     GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, FALSE);
     LoadPalette(&gFogPalette, animBg.paletteId * 16, 32);
 
     gTasks[taskId].func = AnimTask_HazeScrollingFog_Step;
@@ -1188,7 +1188,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
 
     GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, FALSE);
     LoadPalette(&gFogPalette, animBg.paletteId * 16, 32);
 
     gTasks[taskId].data[15] = -1;

@@ -167,7 +167,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         defaultScoreMoves >>= 1;
     }
 
-    moveLimitations = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
+    moveLimitations = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
 
     // Ignore moves that aren't possible to use.
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -696,7 +696,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     accuracy = 50;
                 break;
             case ABILITY_LEAF_GUARD:
-                if (AI_WeatherHasEffect() && (gBattleWeather & WEATHER_SUN_ANY)
+                if (AI_WeatherHasEffect() && (gBattleWeather & B_WEATHER_SUN)
                   && AI_DATA->defHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA
                   && IsNonVolatileStatusMoveEffect(moveEffect))
                     RETURN_SCORE_MINUS(10);
@@ -778,7 +778,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // primal weather check
     if (WEATHER_HAS_EFFECT)
     {
-        if (gBattleWeather & WEATHER_PRIMAL_ANY)
+        if (gBattleWeather & B_WEATHER_PRIMAL_ANY)
         {
             switch (move)
             {
@@ -792,12 +792,12 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 
         if (!IS_MOVE_STATUS(move))
         {
-            if (gBattleWeather & WEATHER_SUN_PRIMAL)
+            if (gBattleWeather & B_WEATHER_SUN_PRIMAL)
             {
                 if (moveType == TYPE_WATER)
                     RETURN_SCORE_MINUS(30);
             }
-            else if (gBattleWeather & WEATHER_RAIN_PRIMAL)
+            else if (gBattleWeather & B_WEATHER_RAIN_PRIMAL)
             {
                 if (moveType == TYPE_FIRE)
                     RETURN_SCORE_MINUS(30);
@@ -1211,7 +1211,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_AURORA_VEIL:
             if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_AURORA_VEIL
               || PartnerHasSameMoveEffectWithoutTarget(AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove)
-              || !(gBattleWeather & WEATHER_HAIL_ANY))
+              || !(gBattleWeather & B_WEATHER_HAIL))
                 score -= 10;
             break;
         case EFFECT_OHKO:
@@ -1392,22 +1392,22 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             break;
         case EFFECT_SANDSTORM:
-            if (gBattleWeather & WEATHER_SANDSTORM_ANY //TODO | WEATHER_PRIMAL_ANY)
+            if (gBattleWeather & B_WEATHER_SANDSTORM //TODO | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(AI_DATA->battlerAtkPartner, AI_DATA->partnerMove))
                 score -= 8;
             break;
         case EFFECT_SUNNY_DAY:
-            if (gBattleWeather & WEATHER_SUN_ANY //TODO | WEATHER_PRIMAL_ANY)
+            if (gBattleWeather & B_WEATHER_SUN //TODO | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(AI_DATA->battlerAtkPartner, AI_DATA->partnerMove))
                 score -= 8;
             break;
         case EFFECT_RAIN_DANCE:
-            if (gBattleWeather & WEATHER_RAIN_ANY  //TODO  | WEATHER_PRIMAL_ANY)
+            if (gBattleWeather & B_WEATHER_RAIN  //TODO  | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(AI_DATA->battlerAtkPartner, AI_DATA->partnerMove))
                 score -= 8;
             break;
         case EFFECT_HAIL:
-            if (gBattleWeather & WEATHER_HAIL_ANY //TODO | WEATHER_PRIMAL_ANY)
+            if (gBattleWeather & B_WEATHER_HAIL //TODO | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(AI_DATA->battlerAtkPartner, AI_DATA->partnerMove))
                 score -= 8;
             break;
@@ -1635,7 +1635,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_MORNING_SUN:
         case EFFECT_SYNTHESIS:
         case EFFECT_MOONLIGHT:
-            if (AI_WeatherHasEffect() && (gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL_ANY)))
+            if (AI_WeatherHasEffect() && (gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)))
                 score -= 3;
             else if (AtMaxHp(battlerAtk))
                 score -= 10;
@@ -1905,9 +1905,9 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SPECTRAL_THIEF:
             break;
-        case EFFECT_SOLARBEAM:
+        case EFFECT_SOLAR_BEAM:
             if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB
-              || (AI_WeatherHasEffect() && gBattleWeather & WEATHER_SUN_ANY && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA))
+              || (AI_WeatherHasEffect() && gBattleWeather & B_WEATHER_SUN && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA))
                 break;
             if (CanTargetFaintAi(battlerDef, battlerAtk)) //Attacker can be knocked out
                 score -= 4;
@@ -2486,7 +2486,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
         case AI_EFFECTIVENESS_x4:
             if (WEATHER_HAS_EFFECT
-             && gBattleWeather & WEATHER_STRONG_WINDS
+             && gBattleWeather & B_WEATHER_STRONG_WINDS
              && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
             {
                 if (AI_RandLessThan(176)) //Consider it supereffective instead of hypereffective.
@@ -2499,7 +2499,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case AI_EFFECTIVENESS_x2:
             if (WEATHER_HAS_EFFECT
-             && gBattleWeather & WEATHER_STRONG_WINDS
+             && gBattleWeather & B_WEATHER_STRONG_WINDS
              && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
             {
                 break; // Don't increase score, consider it neutral.
@@ -3318,7 +3318,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
               || HasMoveEffect(EFFECT_SNORE, battlerAtk)
               || AI_DATA->atkAbility == ABILITY_SHED_SKIN
               || AI_DATA->atkAbility == ABILITY_EARLY_BIRD
-              || (gBattleWeather & WEATHER_RAIN_ANY && gWishFutureKnock.weatherDuration != 1 && AI_DATA->atkAbility == ABILITY_HYDRATION && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA))
+              || (gBattleWeather & B_WEATHER_RAIN && gWishFutureKnock.weatherDuration != 1 && AI_DATA->atkAbility == ABILITY_HYDRATION && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA))
             {
                 score += 2;
             }
@@ -4024,12 +4024,12 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 switch (AI_DATA->defAbility)
                 {
                 case ABILITY_SWIFT_SWIM:
-                    if (gBattleWeather & WEATHER_RAIN_ANY)
+                    if (gBattleWeather & B_WEATHER_RAIN)
                         score += 3; // Slow 'em down
                     break;
                 case ABILITY_CHLOROPHYLL:
                 case ABILITY_FLOWER_GIFT:
-                    if (gBattleWeather & WEATHER_SUN_ANY)
+                    if (gBattleWeather & B_WEATHER_SUN)
                         score += 3; // Slow 'em down
                     break;
                 }
@@ -4507,7 +4507,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_TWO_TURNS_ATTACK:
     case EFFECT_SKULL_BASH:
-    case EFFECT_SOLARBEAM:
+    case EFFECT_SOLAR_BEAM:
         if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB)
             score += 2;
         break;
@@ -4539,7 +4539,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         break;
     case EFFECT_SHORE_UP:
-        if (AI_WeatherHasEffect() && (gBattleWeather & WEATHER_SANDSTORM_ANY)
+        if (AI_WeatherHasEffect() && (gBattleWeather & B_WEATHER_SANDSTORM)
           && ShouldRecover(battlerAtk, battlerDef, move, 67))
             score += 3;
         else if (ShouldRecover(battlerAtk, battlerDef, move, 50))
@@ -4906,7 +4906,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_BELLY_DRUM:
             case EFFECT_PSYCH_UP:
             case EFFECT_MIRROR_COAT:
-            case EFFECT_SOLARBEAM:
+            case EFFECT_SOLAR_BEAM:
             case EFFECT_TWO_TURNS_ATTACK:
             case EFFECT_ERUPTION:
             case EFFECT_TICKLE:

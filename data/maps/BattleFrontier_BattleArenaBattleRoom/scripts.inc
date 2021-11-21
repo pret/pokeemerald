@@ -426,15 +426,15 @@ BattleFrontier_BattleArenaBattleRoom_Movement_PlayerStepForward:
 BattleFrontier_BattleArenaBattleRoom_Movement_PlayerWalkBackToLine:
 	walk_left
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceLeft:
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_OpponentEnter:
@@ -475,12 +475,12 @@ BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceUp:
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceDown:
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 @ Unused, redundant
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight2:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_OnWarp:
@@ -497,19 +497,19 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects::
 
 BattleFrontier_BattleArenaBattleRoom_Movement_GretaLookAroundPlayer:
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
 	delay_16
 	delay_16
 	walk_up
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward:

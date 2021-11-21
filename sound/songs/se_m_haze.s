@@ -175,7 +175,7 @@ se_m_haze_1:
 	.byte	W03
 	.byte		        6*se_m_haze_mvl/mxv
 	.byte	W02
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@
@@ -192,42 +192,42 @@ se_m_haze_2:
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        Fs4 
+	.byte		        Fs4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        Gn4 
+	.byte		        Gn4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        Gs4 
+	.byte		        Gs4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        Gn4 
+	.byte		        Gn4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        Fs4 
+	.byte		        Fs4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        Fn4 
+	.byte		        Fn4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		        En4 
+	.byte		        En4
 	.byte	W06
 	.byte	W06
 	.byte	W06
 	.byte	W06
-	.byte		N18   , Ds4 
+	.byte		N18   , Ds4
 	.byte	W06
 	.byte	W06
 	.byte	W06

@@ -3287,7 +3287,7 @@ void AnimTask_HeartsBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgGfx(animBg.bgId, &gBattleAnimBgImage_Attract, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_Attract, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_Attract, FALSE);
     LoadCompressedPalette(&gBattleAnimBgPalette_Attract, animBg.paletteId * 16, 32);
     gTasks[taskId].func = AnimTask_HeartsBackground_Step;
 }
@@ -3365,11 +3365,11 @@ void AnimTask_ScaryFace(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     GetBattleAnimBg1Data(&animBg);
     if (IsContest())
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, FALSE);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, FALSE);
     else
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, FALSE);
 
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_ScaryFace, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimBgPalette_ScaryFace, animBg.paletteId * 16, 32);
@@ -3501,7 +3501,7 @@ static void AnimOrbitScatter_Step(struct Sprite *sprite)
 {
     sprite->x2 += sprite->data[0];
     sprite->y2 += sprite->data[1];
-    if (sprite->x + sprite->x2 + 16 > ((u32)DISPLAY_WIDTH + 32) 
+    if (sprite->x + sprite->x2 + 16 > ((u32)DISPLAY_WIDTH + 32)
      || sprite->y + sprite->y2 > DISPLAY_HEIGHT || sprite->y + sprite->y2 < -16)
         DestroyAnimSprite(sprite);
 }

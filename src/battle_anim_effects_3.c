@@ -726,7 +726,7 @@ const struct SpriteTemplate gSweetScentPetalSpriteTemplate =
     .callback = AnimSweetScentPetal,
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/battle_anims/unused.gbapal");
+static const u16 sUnusedPalette[] = INCBIN_U16("graphics/battle_anims/unused/unknown.gbapal");
 
 const union AnimCmd gPainSplitAnimCmds[] =
 {
@@ -2382,7 +2382,7 @@ void AnimTask_TransformMon(u8 taskId)
         sub_80A6BFC(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
-            position = 0;
+            position = B_POSITION_PLAYER_LEFT;
         else
             position = GetBattlerPosition(gBattleAnimAttacker);
 
@@ -2484,7 +2484,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
         GetBattleAnimBg1Data(&animBg);
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, FALSE);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -2665,7 +2665,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
         GetBattleAnimBg1Data(&animBg);
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, FALSE);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -5528,15 +5528,15 @@ static void AnimRecycle_Step(struct Sprite *sprite)
 void AnimTask_GetWeather(u8 taskId)
 {
     bool32 utilityUmbrellaAffected = GetBattlerHoldEffect(gBattleAnimAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA;
-    
+
     gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_NONE;
-    if (gWeatherMoveAnim & WEATHER_SUN_ANY && !utilityUmbrellaAffected)
+    if (gWeatherMoveAnim & B_WEATHER_SUN && !utilityUmbrellaAffected)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SUN;
-    else if (gWeatherMoveAnim & WEATHER_RAIN_ANY && !utilityUmbrellaAffected)
+    else if (gWeatherMoveAnim & B_WEATHER_RAIN && !utilityUmbrellaAffected)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_RAIN;
-    else if (gWeatherMoveAnim & WEATHER_SANDSTORM_ANY)
+    else if (gWeatherMoveAnim & B_WEATHER_SANDSTORM)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SANDSTORM;
-    else if (gWeatherMoveAnim & WEATHER_HAIL_ANY)
+    else if (gWeatherMoveAnim & B_WEATHER_HAIL)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_HAIL;
 
     DestroyAnimVisualTask(taskId);

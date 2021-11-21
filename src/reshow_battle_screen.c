@@ -21,7 +21,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void);
 static bool8 LoadBattlerSpriteGfx(u8 battlerId);
 static void CreateBattlerSprite(u8 battlerId);
 static void CreateHealthboxSprite(u8 battlerId);
-static void sub_80A95F4(void);
+static void ClearBattleBgCntBaseBlocks(void);
 
 void ReshowBattleScreenDummy(void)
 {
@@ -158,25 +158,25 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         break;
     default:
         SetVBlankCallback(VBlankCB_Battle);
-        sub_80A95F4();
+        ClearBattleBgCntBaseBlocks();
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(BattleMainCB2);
-        sub_805EF14();
+        FillAroundBattleWindows();
         break;
     }
 
     gBattleScripting.reshowMainState++;
 }
 
-static void sub_80A95F4(void)
+static void ClearBattleBgCntBaseBlocks(void)
 {
-    struct BGCntrlBitfield *regBgcnt1, *regBgcnt2;
+    vBgCnt *regBgcnt1, *regBgcnt2;
 
-    regBgcnt1 = (struct BGCntrlBitfield *)(&REG_BG1CNT);
+    regBgcnt1 = (vBgCnt *)(&REG_BG1CNT);
     regBgcnt1->charBaseBlock = 0;
 
-    regBgcnt2 = (struct BGCntrlBitfield *)(&REG_BG2CNT);
+    regBgcnt2 = (vBgCnt *)(&REG_BG2CNT);
     regBgcnt2->charBaseBlock = 0;
 }
 

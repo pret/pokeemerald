@@ -38,11 +38,11 @@ EventScript_PkmnCenterNurse_IllTakeYourPkmn2::
     return
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestLeft
+    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterLeft
     waitmovement 0
     dofieldeffect FLDEFF_POKECENTER_HEAL
     waitfieldeffect FLDEFF_POKECENTER_HEAL
-    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestDown
+    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterDown
     waitmovement 0
     special HealPlayerParty
     return

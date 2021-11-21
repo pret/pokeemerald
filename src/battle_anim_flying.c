@@ -659,7 +659,7 @@ static void AnimFallingFeather_Step(struct Sprite *sprite)
     {
         switch (data->unk2 / 64)
         {
-        case 0: 
+        case 0:
             if ((u8)data->unk0_1 == 1) //casts to u8 here are necessary for matching
             {
                 data->unk0_0d = 1;

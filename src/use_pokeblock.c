@@ -29,7 +29,7 @@
     This file handles the screen where the player chooses
     which pokemon to give a pokeblock to. The subsequent scene
     of feeding the pokeblock to the pokemon is handled by
-    pokeblock_feed.c, and the rest of the pokeblock menu (and 
+    pokeblock_feed.c, and the rest of the pokeblock menu (and
     other pokeblock-related functions) are in pokeblock.c
 */
 
@@ -243,7 +243,7 @@ static const struct BgTemplate sBgTemplates[4] =
     }
 };
 
-static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] = 
+static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 {
     [WIN_NAME] = {
         .bg = 0,
@@ -275,7 +275,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
+static const struct WindowTemplate sUsePokeblockYesNoWinTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -295,7 +295,7 @@ static const u8 *const sContestStatNames[] =
     gText_Beauty3
 };
 
-static const struct SpriteSheet sSpriteSheet_UpDown = 
+static const struct SpriteSheet sSpriteSheet_UpDown =
 {
     gUsePokeblockUpDown_Gfx, 0x200, TAG_UP_DOWN
 };
@@ -314,7 +314,7 @@ static const s16 sUpDownCoordsOnGraph[FLAVOR_COUNT][2] =
     {197,  59}
 };
 
-static const struct OamData sOam_UpDown = 
+static const struct OamData sOam_UpDown =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -357,7 +357,7 @@ static const struct SpriteTemplate sSpriteTemplate_UpDown =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct OamData sOam_Condition = 
+static const struct OamData sOam_Condition =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -876,9 +876,9 @@ static void AskUsePokeblock(void)
     StringCopy(gStringVar4, stringBuffer);
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, 3);
+    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
 }
 
@@ -919,7 +919,7 @@ static void PrintFirstEnhancement(void)
 
     PrintMenuWindowText(gStringVar4);
     PutWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, 3);
+    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
 
 static bool8 TryPrintNextEnhancement(void)
@@ -943,7 +943,7 @@ static bool8 TryPrintNextEnhancement(void)
 
     BufferEnhancedStatText(gStringVar4, sInfo->statId, sInfo->enhancements[sInfo->statId]);
     PrintMenuWindowText(gStringVar4);
-    CopyWindowToVram(WIN_TEXT, 2);
+    CopyWindowToVram(WIN_TEXT, COPYWIN_GFX);
 
     return TRUE;
 }
@@ -952,21 +952,21 @@ static void PrintWontEatAnymore(void)
 {
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, 1, gText_WontEatAnymore, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gText_WontEatAnymore, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, 3);
+    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
 
 static void EraseMenuWindow(void)
 {
     rbox_fill_rectangle(WIN_TEXT);
     ClearWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, 3);
+    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
 
 static void PrintMenuWindowText(const u8 *message)
 {
-    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
 }
 
 static void BufferEnhancedStatText(u8 *dest, u8 statId, s16 enhancement)
@@ -1316,14 +1316,14 @@ static bool8 LoadUsePokeblockMenuGfx(void)
     switch (sMenu->info.helperState)
     {
     case 0:
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 136 << 6, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 136 << 6, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
@@ -1389,23 +1389,23 @@ static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
     FillWindowPixelBuffer(WIN_NATURE, PIXEL_FILL(0));
     if (sMenu->info.curSelection != sMenu->info.numSelections - 1)
     {
-        AddTextPrinterParameterized(WIN_NAME, 1, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_NAME, FONT_NORMAL, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
         partyIndex = GetPartyIdFromSelectionId(sMenu->info.curSelection);
         nature = GetNature(&gPlayerParty[partyIndex]);
         str = StringCopy(sMenu->info.natureText, gText_NatureSlash);
         str = StringCopy(str, gNatureNamePointers[nature]);
-        AddTextPrinterParameterized3(WIN_NATURE, 1, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);
+        AddTextPrinterParameterized3(WIN_NATURE, FONT_NORMAL, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);
     }
 
     if (firstPrint)
     {
-        CopyWindowToVram(WIN_NAME, 3);
-        CopyWindowToVram(WIN_NATURE, 3);
+        CopyWindowToVram(WIN_NAME, COPYWIN_FULL);
+        CopyWindowToVram(WIN_NATURE, COPYWIN_FULL);
     }
     else
     {
-        CopyWindowToVram(WIN_NAME, 2);
-        CopyWindowToVram(WIN_NATURE, 2);
+        CopyWindowToVram(WIN_NAME, COPYWIN_GFX);
+        CopyWindowToVram(WIN_NATURE, COPYWIN_GFX);
     }
 }
 
@@ -1594,7 +1594,7 @@ static void SpriteCB_SelectionIconCancel(struct Sprite *sprite)
 }
 
 // Calculate the max id for sparkles/stars that appear around the pokemon on the condition screen
-// All pokemon start with 1 sparkle (added by CreateConditionSparkleSprites), so the number here +1 
+// All pokemon start with 1 sparkle (added by CreateConditionSparkleSprites), so the number here +1
 // is the total number of sparkles that appear
 static void CalculateNumAdditionalSparkles(u8 monIndex)
 {

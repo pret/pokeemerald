@@ -34,7 +34,7 @@ se_m_attract2_1:
 	.byte	W12
 	.byte		        c_v+0
 	.byte	W06
-	.byte		N54   , Cn4 
+	.byte		N54   , Cn4
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte	W12
@@ -45,7 +45,7 @@ se_m_attract2_1:
 	.byte		        c_v+0
 	.byte	W12
 	.byte		        c_v-4
-	.byte		N54   , Dn4 
+	.byte		N54   , Dn4
 	.byte	W12
 	.byte		PAN   , c_v-10
 	.byte	W12
@@ -55,7 +55,7 @@ se_m_attract2_1:
 	.byte	W12
 	.byte		        c_v+6
 	.byte	W06
-	.byte		N54   , Cn4 
+	.byte		N54   , Cn4
 	.byte	W06
 	.byte		PAN   , c_v+9
 	.byte	W12
