@@ -13601,8 +13601,8 @@ Move_DRUM_BEATING::
 	blendoff
 	end
 
-Move_SNAP_TRAP::
-	end @ to do:
+Move_SNAP_TRAP:: @ placeholder
+	goto Move_BITE
 
 Move_PYRO_BALL::
 	loadspritegfx ANIM_TAG_FLAT_ROCK
@@ -24209,6 +24209,7 @@ General_TurnTrap:
 	jumpargeq 0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
 	jumpargeq 0, TRAP_ANIM_MAGMA_STORM, Status_MagmaStorm
 	jumpargeq 0, TRAP_ANIM_INFESTATION, Status_Infestation
+	jumpargeq 0, TRAP_ANIM_SNAP_TRAP, Status_Snap_Trap
 	goto Status_BindWrap
 Status_BindWrap:
 	loadspritegfx ANIM_TAG_TENDRILS
@@ -24294,6 +24295,9 @@ Status_Clamp:
 	blendoff
 	waitforvisualfinish
 	end
+
+Status_Snap_Trap: @ placeholder
+	goto Move_BITE
 
 Status_SandTomb:
 	loadspritegfx ANIM_TAG_MUD_SAND
