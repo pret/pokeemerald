@@ -13120,7 +13120,8 @@ static void Cmd_removelightscreenreflect(void) // brick break
     bool32 failed;
     
     #if B_BRICK_BREAK >= GEN_4
-        side = GetBattlerSide(gBattlerAttacker);
+    // From Gen 4 onwards, Brick Break can remove screens on the user's side if used on an ally
+        side = GetBattlerSide(gBattlerTarget);
     #else
         side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
     #endif
