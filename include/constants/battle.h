@@ -360,8 +360,7 @@
 #define MOVE_EFFECT_RELIC_SONG          0x47
 #define MOVE_EFFECT_TRAP_BOTH           0x48
 #define MOVE_EFFECT_SCALE_SHOT          0x49
-#define MOVE_EFFECT_MELT_ITEM           0x4A
-#define NUM_MOVE_EFFECTS                0x4B
+#define NUM_MOVE_EFFECTS                0x4A
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
