@@ -7525,15 +7525,15 @@ static bool32 IsRototillerAffected(u32 battlerId)
 
 #define COURTCHANGE_SWAP(status, structField, temp)              \
 {                                                                \
-    temp = gSideStatuses[0];                                     \
-    if (gSideStatuses[1] & status)                               \
-        gSideStatuses[0] |= status;                              \
+    temp = gSideStatuses[B_SIDE_PLAYER];                         \
+    if (gSideStatuses[B_SIDE_OPPONENT] & status)                 \
+        gSideStatuses[B_SIDE_PLAYER] |= status;                  \
     else                                                         \
-        gSideStatuses[0] &= ~(status);                           \
+        gSideStatuses[B_SIDE_PLAYER] &= ~(status);               \
     if (temp & status)                                           \
-        gSideStatuses[1] |= status;                              \
+        gSideStatuses[B_SIDE_OPPONENT] |= status;                \
     else                                                         \
-        gSideStatuses[1] &= ~(status);                           \
+        gSideStatuses[B_SIDE_OPPONENT] &= ~(status);             \
     SWAP(sideTimer0->structField, sideTimer1->structField, temp);\
 }                                                                \
 
@@ -7545,8 +7545,8 @@ static bool32 IsRototillerAffected(u32 battlerId)
 
 static bool32 CourtChangeSwapSideStatuses(void)
 {
-    struct SideTimer *sideTimer0 = &gSideTimers[0];
-    struct SideTimer *sideTimer1 = &gSideTimers[1];
+    struct SideTimer *sideTimer0 = &gSideTimers[B_SIDE_PLAYER];
+    struct SideTimer *sideTimer1 = &gSideTimers[B_SIDE_OPPONENT];
     u32 temp;
 
     // TODO: add Pledge-related effects
@@ -11290,7 +11290,8 @@ static bool8 IsTwoTurnsMove(u16 move)
         || gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK
         || gBattleMoves[move].effect == EFFECT_SOLARBEAM
         || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
-        || gBattleMoves[move].effect == EFFECT_BIDE)
+        || gBattleMoves[move].effect == EFFECT_BIDE
+        || gBattleMoves[move].effect == EFFECT_METEOR_BEAM)
         return TRUE;
     else
         return FALSE;

@@ -611,12 +611,10 @@
 #define STRINGID_NEUTRALIZINGGASOVER                  608
 #define STRINGID_PKMNINSNAPTRAP                       609
 #define STRINGID_METEORBEAMCHARGING                   610
-#define STRINGID_ITEMMELTED                           611
-#define STRINGID_HEATUPBEAK                           612
-#define STRINGID_COURTCHANGE                          613
-#define STRINGID_PREPARESHELLTRAP                     614
+#define STRINGID_HEATUPBEAK                           611
+#define STRINGID_COURTCHANGE                          612
 
-#define BATTLESTRINGS_COUNT                           615
+#define BATTLESTRINGS_COUNT                           613
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

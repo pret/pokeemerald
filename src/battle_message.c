@@ -737,17 +737,13 @@ static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PRE
 static const u8 sText_NeutralizingGasEnters[] = _("Neutralizing Gas filled the area!");
 static const u8 sText_NeutralizingGasOver[] = _("The effects of Neutralizing\nGas wore off!");
 static const u8 sText_MeteorBeamCharging[] = _("{B_ATK_NAME_WITH_PREFIX} is overflowing\nwith space energy!");
-static const u8 sText_PkmnItemMelted[] = _("{B_ATK_NAME_WITH_PREFIX} corroded\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
 static const u8 sText_HeatingUpBeak[] = _("{B_ATK_NAME_WITH_PREFIX} started\nheating up its beak!");
 static const u8 sText_CourtChange[] = _("{B_ATK_NAME_WITH_PREFIX} swapped the battle\neffects affecting each side!");
-static const u8 sText_PrepareShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set\n a shell trap!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
-    [STRINGID_PREPARESHELLTRAP - 12] = sText_PrepareShellTrap,
     [STRINGID_COURTCHANGE - 12] = sText_CourtChange,
     [STRINGID_HEATUPBEAK - 12] = sText_HeatingUpBeak,
-    [STRINGID_ITEMMELTED - 12] = sText_PkmnItemMelted,
     [STRINGID_METEORBEAMCHARGING - 12] = sText_MeteorBeamCharging,
     [STRINGID_PKMNINSNAPTRAP - 12] = sText_PkmnInSnapTrap,
     [STRINGID_NEUTRALIZINGGASOVER - 12] = sText_NeutralizingGasOver,
