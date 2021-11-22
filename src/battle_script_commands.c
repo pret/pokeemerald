@@ -9376,32 +9376,6 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
-    case VARIOUS_TRY_SET_CORROSIVE_GAS:
-    {
-        if (gBattleMons[gActiveBattler].item != 0
-            && CanBattlerGetOrLoseItem(gActiveBattler, gBattleMons[gActiveBattler].item)
-            && !NoAliveMonsForEitherParty())
-        {
-            if (GetBattlerAbility(gActiveBattler) == ABILITY_STICKY_HOLD && IsBattlerAlive(gActiveBattler))
-            {
-                gBattlerAbility = gActiveBattler;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
-            }
-            else
-            {   // Item is melted normally
-                u32 side = GetBattlerSide(gActiveBattler);
-
-                gLastUsedItem = gBattleMons[gActiveBattler].item;
-                gBattleMons[gActiveBattler].item = 0;
-                gBattleStruct->choicedMove[gActiveBattler] = 0;
-                gWishFutureKnock.meltedItemMons[side] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
-
-                CheckSetUnburden(gActiveBattler);
-                gBattlescriptCurrInstr += 7;
-            }
-        }
-    }
     case VARIOUS_SET_BEAK_BLAST:    
         gProtectStructs[gBattlerAttacker].beakBlastCharge = TRUE;
         break;

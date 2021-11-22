@@ -1925,11 +1925,6 @@
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
-	.macro trysetcorrosivegas battler:req, ptr:req
-	various \battler, VARIOUS_TRY_SET_CORROSIVE_GAS
-	.4byte \ptr
-	.endm
-
 	.macro setbeakblast battler:req
 	various \battler, VARIOUS_SET_BEAK_BLAST
 	.endm

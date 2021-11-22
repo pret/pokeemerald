@@ -11417,7 +11417,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CORROSIVE_GAS] =
     {
-        .effect = EFFECT_CORROSIVE_GAS,
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_CORROSIVE_GAS, TODO
         .power = 0,
         .type = TYPE_POISON,
         .accuracy = 100,

@@ -407,7 +407,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectScaleShot               @ EFFECT_SCALE_SHOT
 	.4byte BattleScript_EffectMeteorBeam              @ EFFECT_METEOR_BEAM
 	.4byte BattleScript_EffectHit                     @ EFFECT_RISING_VOLTAGE
-	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
 	.4byte BattleScript_EffectHit                     @ EFFECT_BEAK_BLAST
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
@@ -477,24 +476,6 @@ BattleScript_BeakBlastBurn::
 	setbyte cMULTISTRING_CHOOSER, 0
 	copybyte gEffectBattler, gBattlerAttacker
 	call BattleScript_MoveEffectBurn
-	return
-
-BattleScript_EffectCorrosiveGas::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
-	attackstring 
-	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_PrintMoveMissed
-	trysetcorrosivegas BS_TARGET, BattleScript_ButItFailed
-	attackanimation
-	waitanimation
-	printstring STRINGID_ITEMMELTED
-	waitmessage 0x40
-	goto BattleScript_MoveEnd
-
-BattleScript_MeltedItem::
-	printstring STRINGID_ITEMMELTED
-	waitmessage 0x40
 	return
 
 BattleScript_EffectMeteorBeam::
