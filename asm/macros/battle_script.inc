@@ -1946,9 +1946,10 @@
 	various \battler, VARIOUS_CLEAR_SHELL_TRAP
 	.endm
 
-	.macro checkshelltrap battler:req, ptr:req
+	.macro checkshelltrap battler:req, ptr1:req, ptr2:req
 	various \battler, VARIOUS_CHECK_SHELL_TRAP
-	.4byte \ptr
+	.4byte \ptr1
+	.4byte \ptr2
 	.endm
 
 @ helpful macros

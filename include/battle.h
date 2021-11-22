@@ -153,12 +153,13 @@ struct ProtectStruct
     u32 usedCustapBerry:1;    // also quick claw
     u32 touchedProtectLike:1;
     // End of 32-bit bitfield
-    u8 disableEjectPack:1;
-    u8 statFell:1;
-    u8 pranksterElevated:1;
-    u8 quickDraw:1;
-    u8 beakBlastCharge:1;
-    u8 shellTrap:1;
+    u16 disableEjectPack:1;
+    u16 statFell:1;
+    u16 pranksterElevated:1;
+    u16 quickDraw:1;
+    u16 beakBlastCharge:1;
+    u16 shellTrapSet:1;
+    u16 shellTrapTriggered:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;

@@ -413,7 +413,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 
 BattleScript_EffectShellTrap::
-	checkshelltrap BS_ATTACKER, BattleScript_MoveEnd
+	checkshelltrap BS_ATTACKER, BattleScript_ShellTrapExplode, BattleScript_MoveEnd
 	clearshelltrap BS_ATTACKER
 	attackcanceler
 	attackstring
