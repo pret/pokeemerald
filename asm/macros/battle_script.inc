@@ -1933,20 +1933,6 @@
 	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
 	.endm
 
-	.macro setshelltrap battler:req
-	various \battler, VARIOUS_SET_SHELL_TRAP
-	.endm
-
-	.macro clearshelltrap battler:req
-	various \battler, VARIOUS_CLEAR_SHELL_TRAP
-	.endm
-
-	.macro checkshelltrap battler:req, ptr1:req, ptr2:req
-	various \battler, VARIOUS_CHECK_SHELL_TRAP
-	.4byte \ptr1
-	.4byte \ptr2
-	.endm
-
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

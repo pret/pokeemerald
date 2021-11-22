@@ -1543,8 +1543,7 @@ static void Cmd_attackcanceler(void)
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
         gBattlescriptCurrInstr++;
     }
-    else if ((gProtectStructs[gBattlerTarget].beakBlastCharge || gProtectStructs[gBattlerTarget].shellTrapSet)
-             && IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
+    else if (gProtectStructs[gBattlerTarget].beakBlastCharge && IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
     {
         gProtectStructs[gBattlerAttacker].touchedProtectLike = TRUE;
         gBattlescriptCurrInstr++;
@@ -4993,21 +4992,6 @@ static void Cmd_moveend(void)
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_BeakBlastBurn;
                     effect = 1;
-                }
-                else if (gProtectStructs[gBattlerTarget].shellTrapSet
-                         && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
-                         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-                {
-                    u32 temp;
-                    gProtectStructs[gBattlerTarget].shellTrapTriggered = TRUE;
-                    gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
-                    // Swap battlers so target attacks attacker with Shell Trap
-                    SWAP(gBattlerAttacker, gBattlerTarget, temp);
-                    // Set current move to Shell Trap
-                    gCurrentMove = MOVE_SHELL_TRAP;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_EffectShellTrap;
-                    effect = TRUE;
                 }
             }
             gBattleScripting.moveendState++;
@@ -9378,23 +9362,6 @@ static void Cmd_various(void)
     }
     case VARIOUS_SET_BEAK_BLAST:    
         gProtectStructs[gBattlerAttacker].beakBlastCharge = TRUE;
-        break;
-    case VARIOUS_SET_SHELL_TRAP:
-        gProtectStructs[gBattlerAttacker].shellTrapSet = TRUE;
-        break;
-	case VARIOUS_CLEAR_SHELL_TRAP:
-        gProtectStructs[gBattlerAttacker].shellTrapSet = FALSE;
-        break;
-	case VARIOUS_CHECK_SHELL_TRAP:
-        // Attack with Shell Trap
-        if (gProtectStructs[gBattlerAttacker].shellTrapSet == TRUE && gProtectStructs[gBattlerAttacker].shellTrapTriggered == TRUE)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        // Attacked with Shell Trap, go to move end
-        else if (gProtectStructs[gBattlerAttacker].shellTrapSet == FALSE && gProtectStructs[gBattlerAttacker].shellTrapTriggered == TRUE)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 7);
-        // Shell Trap failed
-        else
-            gBattlescriptCurrInstr += 11;
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
     {

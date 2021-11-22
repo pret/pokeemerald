@@ -409,47 +409,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_RISING_VOLTAGE
 	.4byte BattleScript_EffectHit                     @ EFFECT_BEAK_BLAST
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
-	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
-
-BattleScript_EffectShellTrap::
-	checkshelltrap BS_ATTACKER, BattleScript_ShellTrapExplode, BattleScript_MoveEnd
-	clearshelltrap BS_ATTACKER
-	attackcanceler
-	attackstring
-	goto BattleScript_ButItFailed
-
-BattleScript_ShellTrapSetUp::
-	setshelltrap BS_ATTACKER
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 0x1
-	playanimation BS_ATTACKER B_ANIM_SHELL_TRAP_SETUP, NULL
-	printstring STRINGID_PREPARESHELLTRAP
-	waitmessage 0x40
-	end2
-
-BattleScript_ShellTrapExplode::
-	clearshelltrap BS_ATTACKER
-	attackcanceler
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage 0x40
-	resultmessage
-	waitmessage 0x40
-	seteffectwithchance
-	tryfaintmon BS_TARGET, FALSE, NULL
-	moveendall
-	end
 
 BattleScript_EffectCourtChange::
 	attackcanceler

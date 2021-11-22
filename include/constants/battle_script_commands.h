@@ -211,9 +211,6 @@
 #define VARIOUS_TRY_SET_CORROSIVE_GAS           138
 #define VARIOUS_SET_BEAK_BLAST                  139
 #define VARIOUS_SWAP_SIDE_STATUSES              140
-#define VARIOUS_SET_SHELL_TRAP                  141
-#define VARIOUS_CLEAR_SHELL_TRAP                142
-#define VARIOUS_CHECK_SHELL_TRAP                143
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
