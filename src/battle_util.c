@@ -1453,6 +1453,7 @@ bool8 WasUnableToUseMove(u8 battler)
 
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
+    u32 targetSide = GetBattlerSide(gBattlerTarget);
     // Support for Contrary ability.
     // If a move attempted to raise stat - print "won't increase".
     // If a move attempted to lower stat - print "won't decrease".
@@ -1471,8 +1472,10 @@ void PrepareStringBattle(u16 stringId, u8 battler)
               && ((GetBattlerAbility(gBattlerTarget) == ABILITY_DEFIANT && CompareStat(gBattlerTarget, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
                  || (GetBattlerAbility(gBattlerTarget) == ABILITY_COMPETITIVE && CompareStat(gBattlerTarget, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN)))
               && gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != BATTLE_PARTNER(gBattlerTarget)
-              && gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != gBattlerTarget)
+              // && gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != gBattlerTarget) // Why was this here? Needs investigating
+              && !(gBattleScripting.stickyWebStatDrop == 1 && gSideTimers[targetSide].stickyWebBattlerSide == targetSide)) // Sticky Web must have been set by the foe
     {
+        gBattleScripting.stickyWebStatDrop = 0;
         gBattlerAbility = gBattlerTarget;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_DefiantActivates;

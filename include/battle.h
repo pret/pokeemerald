@@ -211,6 +211,7 @@ struct SideTimer
     u8 toxicSpikesAmount;
     u8 stealthRockAmount;
     u8 stickyWebAmount;
+    u8 stickyWebBattlerSide; // Used for Court Change
     u8 auroraVeilTimer;
     u8 auroraVeilBattlerId;
     u8 tailwindTimer;
@@ -704,6 +705,7 @@ struct BattleScripting
     u16 abilityPopupOverwrite;
     u8 switchCase;  // Special switching conditions, eg. red card
     u8 overrideBerryRequirements;
+    u8 stickyWebStatDrop; // To prevent Defiant activating on a Court Change'd Sticky Web
 };
 
 // rom_80A5C6C

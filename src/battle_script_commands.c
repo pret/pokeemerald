@@ -7536,30 +7536,30 @@ static bool32 IsRototillerAffected(u32 battlerId)
     return TRUE;
 }
 
-#define COURTCHANGE_SWAP(status, structField, temp)              \
-{                                                                \
-    temp = gSideStatuses[B_SIDE_PLAYER];                         \
-    if (gSideStatuses[B_SIDE_OPPONENT] & status)                 \
-        gSideStatuses[B_SIDE_PLAYER] |= status;                  \
-    else                                                         \
-        gSideStatuses[B_SIDE_PLAYER] &= ~(status);               \
-    if (temp & status)                                           \
-        gSideStatuses[B_SIDE_OPPONENT] |= status;                \
-    else                                                         \
-        gSideStatuses[B_SIDE_OPPONENT] &= ~(status);             \
-    SWAP(sideTimer0->structField, sideTimer1->structField, temp);\
-}                                                                \
+#define COURTCHANGE_SWAP(status, structField, temp)                     \
+{                                                                       \
+    temp = gSideStatuses[B_SIDE_PLAYER];                                \
+    if (gSideStatuses[B_SIDE_OPPONENT] & status)                        \
+        gSideStatuses[B_SIDE_PLAYER] |= status;                         \
+    else                                                                \
+        gSideStatuses[B_SIDE_PLAYER] &= ~(status);                      \
+    if (temp & status)                                                  \
+        gSideStatuses[B_SIDE_OPPONENT] |= status;                       \
+    else                                                                \
+        gSideStatuses[B_SIDE_OPPONENT] &= ~(status);                    \
+    SWAP(sideTimerPlayer->structField, sideTimerOpp->structField, temp);\
+}                                                                       \
 
 #define UPDATE_COURTCHANGED_BATTLER(structField)\
 {                                               \
-    sideTimer0->structField ^= BIT_SIDE;        \
-    sideTimer1->structField ^= BIT_SIDE;        \
+    sideTimerPlayer->structField ^= BIT_SIDE;        \
+    sideTimerOpp->structField ^= BIT_SIDE;        \
 }                                               \
 
 static bool32 CourtChangeSwapSideStatuses(void)
 {
-    struct SideTimer *sideTimer0 = &gSideTimers[B_SIDE_PLAYER];
-    struct SideTimer *sideTimer1 = &gSideTimers[B_SIDE_OPPONENT];
+    struct SideTimer *sideTimerPlayer = &gSideTimers[B_SIDE_PLAYER];
+    struct SideTimer *sideTimerOpp = &gSideTimers[B_SIDE_OPPONENT];
     u32 temp;
 
     // TODO: add Pledge-related effects
@@ -7588,6 +7588,9 @@ static bool32 CourtChangeSwapSideStatuses(void)
     UPDATE_COURTCHANGED_BATTLER(auroraVeilBattlerId);
     UPDATE_COURTCHANGED_BATTLER(tailwindBattlerId);
     UPDATE_COURTCHANGED_BATTLER(luckyChantBattlerId);
+
+    // Track which side originally set the Sticky Web
+    SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
 }
 
 static void Cmd_various(void)
@@ -11996,6 +11999,7 @@ static void Cmd_recoverbasedonsunlight(void)
 static void Cmd_setstickyweb(void)
 {
     u8 targetSide = GetBattlerSide(gBattlerTarget);
+
     if (gSideStatuses[targetSide] & SIDE_STATUS_STICKY_WEB)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
@@ -12003,6 +12007,7 @@ static void Cmd_setstickyweb(void)
     else
     {
         gSideStatuses[targetSide] |= SIDE_STATUS_STICKY_WEB;
+        gSideTimers[targetSide].stickyWebBattlerSide = GetBattlerSide(gBattlerAttacker); // For Court Change/Defiant - set this to the user's side
         gSideTimers[targetSide].stickyWebAmount = 1;
         gBattleStruct->stickyWebUser = gBattlerAttacker;    // For Mirror Armor
         gBattlescriptCurrInstr += 5;

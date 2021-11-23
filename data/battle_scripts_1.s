@@ -6712,6 +6712,7 @@ BattleScript_ToxicSpikesPoisoned::
 BattleScript_StickyWebOnSwitchIn::
 	savetarget
 	copybyte gBattlerTarget, sBATTLER
+	setbyte sSTICKY_WEB_STAT_DROP, 1
 	printstring STRINGID_STICKYWEBSWITCHIN
 	waitmessage B_WAIT_TIME_LONG
 	jumpifability BS_TARGET, ABILITY_MIRROR_ARMOR, BattleScript_MirrorArmorReflectStickyWeb
