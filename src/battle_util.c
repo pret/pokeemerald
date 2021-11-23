@@ -871,6 +871,11 @@ void HandleAction_NothingIsFainted(void)
 
 void HandleAction_ActionFinished(void)
 {
+    #if B_RECALC_TURN_AFTER_ACTIONS >= GEN_8
+    u8 i, j;
+    u8 battler1 = 0;
+    u8 battler2 = 0;
+	#endif
     *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = 6;
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
@@ -894,6 +899,31 @@ void HandleAction_ActionFinished(void)
     gBattleCommunication[4] = 0;
     gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
+    
+    #if B_RECALC_TURN_AFTER_ACTIONS >= GEN_8
+    // i starts at `gCurrentTurnActionNumber` because we don't want to recalculate turn order for mon that have already
+    // taken action. It's been previously increased, which we want in order to not recalculate the turn of the mon that just finished its action
+    for (i = gCurrentTurnActionNumber; i < gBattlersCount - 1; i++)
+    {
+        for (j = i + 1; j < gBattlersCount; j++)
+        {
+            u8 battler1 = gBattlerByTurnOrder[i];
+            u8 battler2 = gBattlerByTurnOrder[j];
+            // We recalculate order only for action of the same priority. If any action other than switch/move has been taken, they should
+            // have been executed before. The only recalculation needed is for moves/switch. Mega evolution is handled in src/battle_main.c/TryChangeOrder
+            if((gActionsByTurnOrder[i] == B_ACTION_USE_MOVE && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE))
+            {
+                if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                    SwapTurnOrder(i, j);
+            }
+            else if ((gActionsByTurnOrder[i] == B_ACTION_SWITCH && gActionsByTurnOrder[j] == B_ACTION_SWITCH))
+            {
+                if (GetWhoStrikesFirst(battler1, battler2, TRUE)) // If the actions chosen are switching, we recalc order but ignoring the moves
+                    SwapTurnOrder(i, j);
+            }  
+        }
+    }
+    #endif
 }
 
 // rom const data

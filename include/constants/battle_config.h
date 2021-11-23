@@ -134,7 +134,6 @@
 #define B_MEGA_EVO_TURN_ORDER       GEN_7 // In Gen7, a Pokémon's Speed after Mega Evolution is used to determine turn order, not its Speed before.
 #define B_RECALC_TURN_AFTER_ACTIONS GEN_8 // In gen 8, switching/using a move have consequences for the turn order of the current turn.
 
-
 // Move data settings
 #define B_UPDATED_MOVE_DATA         GEN_8 // Updates move data in gBattleMoves, including Power, Accuracy, PP, stat changes, targets, chances of secondary effects, etc.
 #define B_PHYSICAL_SPECIAL_SPLIT    GEN_7 // In Gen3, the move's type determines if it will do physical or special damage. The split icon in the summary will reflect this.
