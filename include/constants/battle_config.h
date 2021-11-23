@@ -92,6 +92,9 @@
     #define GEN_8 5
 #endif
 
+// Mega Evolution settings
+#define B_MEGA_EVO_TURN_ORDER GEN_7 // In Gen7, a Pokémon's Speed after Mega Evolution is used to determine turn order, not its Speed before.
+
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_7 // Chances of a critical hit landing. See CalcCritChanceStage.
 #define B_CRIT_MULTIPLIER           GEN_7 // In Gen6+, critical hits multiply damage by 1.5 instead of 2.
@@ -156,6 +159,7 @@
 #define B_SKILL_SWAP                GEN_7 // In Gen4+, Skill Swap triggers switch-in abilities after use.
 #define B_BRICK_BREAK               GEN_7 // In Gen4+, you can destroy your own side's screens. In Gen 5+, screens are not removed if the target is immune.
 #define B_WISH_HP_SOURCE            GEN_7 // In Gen5+, Wish heals half of the user's max HP instead of the target's.
+#define B_RAMPAGE_CANCELLING        GEN_7 // In Gen5+, a failed Thrash, etc, will cancel except on its last turn.
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_7 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.
