@@ -827,8 +827,8 @@ gBattleAnims_General::
 	.4byte General_GulpMissile              @ B_ANIM_GULP_MISSILE
 	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
 	.4byte General_PrimalReversion          @ B_ANIM_PRIMAL_REVERSION
-	.4byte General_BeakBlastSetUp			@ B_ANIM_BEAK_BLAST_SETUP
-	.4byte General_ShellTrapSetUp			@ B_ANIM_SHELL_TRAP_SETUP
+	.4byte General_BeakBlastSetUp           @ B_ANIM_BEAK_BLAST_SETUP
+	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
 
 	.align 2
 gBattleAnims_Special::
