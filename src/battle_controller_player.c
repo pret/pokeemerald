@@ -360,7 +360,7 @@ static void HandleInputChooseTarget(void)
     s32 i;
     static const u8 identities[MAX_BATTLERS_COUNT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
     u16 move = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler]);
-    u16 moveTarget = GetMoveTargetType(gActiveBattler, move);
+    u16 moveTarget = GetBattlerMoveTargetType(gActiveBattler, move);
 
     DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);
     for (i = 0; i < gBattlersCount; i++)
@@ -612,7 +612,7 @@ static void HandleInputChooseMove(void)
         }
         else
         {
-            moveTarget = GetMoveTargetType(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
+            moveTarget = GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
 
         if (moveTarget & MOVE_TARGET_USER)

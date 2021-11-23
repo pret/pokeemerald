@@ -237,7 +237,7 @@ bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move)
 void HandleAction_UseMove(void)
 {
     u32 i, side, moveType, var = 4;
-    u16 moveTarget = GetMoveTargetType(gBattlerAttacker, gCurrentMove);
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     if (gBattleStruct->field_91 & gBitTable[gBattlerAttacker] || !IsBattlerAlive(gBattlerAttacker))
@@ -4674,7 +4674,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         break;
     case ABILITYEFFECT_MOVES_BLOCK: // 2
     {
-        u16 moveTarget = GetMoveTargetType(battler, move);
+        u16 moveTarget = GetBattlerMoveTargetType(battler, move);
 
         if ((gLastUsedAbility == ABILITY_SOUNDPROOF && gBattleMoves[move].flags & FLAG_SOUND && !(moveTarget & MOVE_TARGET_USER))
             || (gLastUsedAbility == ABILITY_BULLETPROOF && gBattleMoves[move].flags & FLAG_BALLISTIC))
@@ -7265,7 +7265,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
     if (setTarget)
         moveTarget = setTarget - 1;
     else
-        moveTarget = GetMoveTargetType(gBattlerAttacker, move);
+        moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
 
     // Special cases
     if (move == MOVE_CURSE && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
@@ -7538,7 +7538,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     else if (gProtectStructs[battlerId].protected)
         return TRUE;
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD
-             && GetMoveTargetType(gBattlerAttacker, move) & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
+             && GetBattlerMoveTargetType(gBattlerAttacker, move) & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
         return TRUE;
     else if (gProtectStructs[battlerId].banefulBunkered)
         return TRUE;
@@ -7664,7 +7664,7 @@ u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc)
 
 u32 GetMoveTargetCount(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    switch (GetMoveTargetType(gBattlerAttacker, move))
+    switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
     {
     case MOVE_TARGET_BOTH:
         return IsBattlerAlive(battlerDef)
@@ -9828,7 +9828,7 @@ bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 chec
         return FALSE;
     if (GetBattlerSide(battlerPrankster) == GetBattlerSide(battlerDef))
         return FALSE;
-    if (checkTarget && (GetMoveTargetType(battlerPrankster, move) & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)))
+    if (checkTarget && (GetBattlerMoveTargetType(battlerPrankster, move) & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)))
         return FALSE;
     if (!IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK))
         return FALSE;
@@ -9863,12 +9863,12 @@ bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags)
 
 // Gets move target before redirection effects etc. are applied
 // Possible return values are defined in battle.h following MOVE_TARGET_SELECTED
-u32 GetMoveTargetType(u8 battlerId, u16 move)
+u32 GetBattlerMoveTargetType(u8 battlerId, u16 move)
 {
     u32 target;
 
     if (gBattleMoves[move].effect == EFFECT_EXPANDING_FORCE
-        && IsBattlerTerrainAffected(gActiveBattler, STATUS_FIELD_PSYCHIC_TERRAIN))
+        && IsBattlerTerrainAffected(battlerId, STATUS_FIELD_PSYCHIC_TERRAIN))
         return MOVE_TARGET_BOTH;
     else
         return gBattleMoves[move].target;

@@ -1318,7 +1318,7 @@ static bool32 NoTargetPresent(u8 battlerId, u32 move)
     if (!IsBattlerAlive(gBattlerTarget))
         gBattlerTarget = GetMoveTarget(move, 0);
 
-    switch (GetMoveTargetType(battlerId, move))
+    switch (GetBattlerMoveTargetType(battlerId, move))
     {
     case MOVE_TARGET_SELECTED:
     case MOVE_TARGET_DEPENDS:
@@ -1741,7 +1741,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
 static void Cmd_accuracycheck(void)
 {
     u16 type, move = T2_READ_16(gBattlescriptCurrInstr + 5);
-    u16 moveTarget = GetMoveTargetType(gBattlerAttacker, move);
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
 
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
@@ -1805,7 +1805,7 @@ static void Cmd_ppreduce(void)
 
     if (!gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure)
     {
-        switch (GetMoveTargetType(gBattlerAttacker, gCurrentMove))
+        switch (GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove))
         {
         case MOVE_TARGET_FOES_AND_ALLY:
             for (i = 0; i < gBattlersCount; i++)
@@ -2104,7 +2104,7 @@ static void Cmd_multihitresultmessage(void)
 
 static void Cmd_attackanimation(void)
 {
-    u16 moveTarget = GetMoveTargetType(gBattlerAttacker, gCurrentMove);
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
     if (gBattleControllerExecFlags)
         return;
@@ -5241,7 +5241,7 @@ static void Cmd_moveend(void)
             break;
         case MOVEEND_NEXT_TARGET: // For moves hitting two opposing Pokemon.
         {
-            u16 moveTarget = GetMoveTargetType(gBattlerAttacker, gCurrentMove);
+            u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
             // Set a flag if move hits either target (for throat spray that can't check damage)
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
@@ -9522,7 +9522,7 @@ static void Cmd_jumpifnexttargetvalid(void)
 
     for (gBattlerTarget++; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattlerTarget == gBattlerAttacker && !(GetMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
+        if (gBattlerTarget == gBattlerAttacker && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
             continue;
         if (IsBattlerAlive(gBattlerTarget))
             break;
@@ -12018,7 +12018,7 @@ static void Cmd_selectfirstvalidtarget(void)
 {
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattlerTarget == gBattlerAttacker && !(GetMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
+        if (gBattlerTarget == gBattlerAttacker && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
             continue;
         if (IsBattlerAlive(gBattlerTarget))
             break;
