@@ -360,6 +360,7 @@ static void HandleInputChooseTarget(void)
     s32 i;
     static const u8 identities[MAX_BATTLERS_COUNT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
     u16 move = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler]);
+    u16 moveTarget = GetMoveTargetType(gActiveBattler, move);
 
     DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);
     for (i = 0; i < gBattlersCount; i++)
@@ -400,7 +401,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
 
-        if (gBattleMoves[move].target == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
+        if (moveTarget == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
         {
             gMultiUsePlayerCursor ^= BIT_FLANK;
         }
@@ -429,7 +430,7 @@ static void HandleInputChooseTarget(void)
                 case B_POSITION_PLAYER_RIGHT:
                     if (gActiveBattler != gMultiUsePlayerCursor)
                         i++;
-                    else if (gBattleMoves[move].target & MOVE_TARGET_USER_OR_SELECTED)
+                    else if (moveTarget & MOVE_TARGET_USER_OR_SELECTED)
                         i++;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
@@ -449,7 +450,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
 
-        if (gBattleMoves[move].target == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
+        if (moveTarget == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
         {
             gMultiUsePlayerCursor ^= BIT_FLANK;
         }
@@ -478,7 +479,7 @@ static void HandleInputChooseTarget(void)
                 case B_POSITION_PLAYER_RIGHT:
                     if (gActiveBattler != gMultiUsePlayerCursor)
                         i++;
-                    else if (gBattleMoves[move].target & MOVE_TARGET_USER_OR_SELECTED)
+                    else if (moveTarget & MOVE_TARGET_USER_OR_SELECTED)
                         i++;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
@@ -609,16 +610,9 @@ static void HandleInputChooseMove(void)
             else
                 moveTarget = MOVE_TARGET_SELECTED;
         }
-        else if (moveInfo->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_EXPANDING_FORCE)
-        {
-            if (IsBattlerTerrainAffected(gActiveBattler, STATUS_FIELD_PSYCHIC_TERRAIN))
-                moveTarget = MOVE_TARGET_BOTH;
-            else
-                moveTarget = MOVE_TARGET_SELECTED;
-        }
         else
         {
-            moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
+            moveTarget = GetMoveTargetType(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
 
         if (moveTarget & MOVE_TARGET_USER)
