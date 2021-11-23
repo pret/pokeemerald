@@ -351,7 +351,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
         return StringCopyPadded(str, gText_EggNickname, CHAR_SPACE, 12);
 
     GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, str);
-    StringGetEnd10(str);
+    StringGet_Nickname(str);
     species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
     if (boxId == TOTAL_BOXES_COUNT)
     {

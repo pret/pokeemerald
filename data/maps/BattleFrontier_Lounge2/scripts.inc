@@ -22,30 +22,18 @@ BattleFrontier_Lounge2_EventScript_AlreadyMetManiac::
 	end
 
 BattleFrontier_Lounge2_EventScript_GiveAdvice::
-	compare VAR_FRONTIER_MANIAC_FACILITY, 0
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferSingle
-	compare VAR_FRONTIER_MANIAC_FACILITY, 1
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferDouble
-	compare VAR_FRONTIER_MANIAC_FACILITY, 2
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferMulti
-	compare VAR_FRONTIER_MANIAC_FACILITY, 3
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferMultiLink
-	compare VAR_FRONTIER_MANIAC_FACILITY, 4
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferBattleDome
-	compare VAR_FRONTIER_MANIAC_FACILITY, 5
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferBattleFactory
-	compare VAR_FRONTIER_MANIAC_FACILITY, 6
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferBattlePalace
-	compare VAR_FRONTIER_MANIAC_FACILITY, 7
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferBattleArena
-	compare VAR_FRONTIER_MANIAC_FACILITY, 8
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferBattlePike
-	compare VAR_FRONTIER_MANIAC_FACILITY, 9
-	call_if_eq BattleFrontier_Lounge2_EventScript_BufferBattlePyramid
-	compare VAR_FRONTIER_MANIAC_FACILITY, 3
-	call_if_le BattleFrontier_Lounge2_EventScript_BattleTowerNews
-	compare VAR_FRONTIER_MANIAC_FACILITY, 4
-	call_if_ge BattleFrontier_Lounge2_EventScript_FacilityNews
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 0, BattleFrontier_Lounge2_EventScript_BufferSingle
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 1, BattleFrontier_Lounge2_EventScript_BufferDouble
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 2, BattleFrontier_Lounge2_EventScript_BufferMulti
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 3, BattleFrontier_Lounge2_EventScript_BufferMultiLink
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 4, BattleFrontier_Lounge2_EventScript_BufferBattleDome
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 5, BattleFrontier_Lounge2_EventScript_BufferBattleFactory
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 6, BattleFrontier_Lounge2_EventScript_BufferBattlePalace
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 7, BattleFrontier_Lounge2_EventScript_BufferBattleArena
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 8, BattleFrontier_Lounge2_EventScript_BufferBattlePike
+	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, 9, BattleFrontier_Lounge2_EventScript_BufferBattlePyramid
+	call_if_le VAR_FRONTIER_MANIAC_FACILITY, 3, BattleFrontier_Lounge2_EventScript_BattleTowerNews
+	call_if_ge VAR_FRONTIER_MANIAC_FACILITY, 4, BattleFrontier_Lounge2_EventScript_FacilityNews
 	special ShowFrontierManiacMessage
 	waitmessage
 	waitbuttonpress
@@ -61,43 +49,43 @@ BattleFrontier_Lounge2_EventScript_FacilityNews::
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferSingle::
-	bufferstdstring 0, STDSTRING_SINGLE
+	bufferstdstring STR_VAR_1, STDSTRING_SINGLE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferDouble::
-	bufferstdstring 0, STDSTRING_DOUBLE
+	bufferstdstring STR_VAR_1, STDSTRING_DOUBLE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferMulti::
-	bufferstdstring 0, STDSTRING_MULTI
+	bufferstdstring STR_VAR_1, STDSTRING_MULTI
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferMultiLink::
-	bufferstdstring 0, STDSTRING_MULTI_LINK
+	bufferstdstring STR_VAR_1, STDSTRING_MULTI_LINK
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattleDome::
-	bufferstdstring 0, STDSTRING_BATTLE_DOME
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_DOME
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattleFactory::
-	bufferstdstring 0, STDSTRING_BATTLE_FACTORY
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_FACTORY
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattlePalace::
-	bufferstdstring 0, STDSTRING_BATTLE_PALACE
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PALACE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattleArena::
-	bufferstdstring 0, STDSTRING_BATTLE_ARENA
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_ARENA
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattlePike::
-	bufferstdstring 0, STDSTRING_BATTLE_PIKE
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PIKE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferBattlePyramid::
-	bufferstdstring 0, STDSTRING_BATTLE_PYRAMID
+	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PYRAMID
 	return
 
 BattleFrontier_Lounge2_EventScript_Maniac1::

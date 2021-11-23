@@ -1138,7 +1138,7 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
         sprite->callback = SpriteCB_TradePokeballSendOff;
 #ifdef BUGFIX
         // FIX: If this is used on a sprite that has previously had an affine animation, it will not
-        // play the shrink anim properly due to being paused. Works together with the fix to `sub_817F77C`.
+        // play the shrink anim properly due to being paused. Works together with the fix to ResetSpriteAfterAnim.
         gSprites[monSpriteId].affineAnimPaused = FALSE;
 #endif // BUGFIX
         StartSpriteAffineAnim(&gSprites[monSpriteId], BATTLER_AFFINE_RETURN);

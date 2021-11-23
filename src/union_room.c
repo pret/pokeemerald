@@ -49,7 +49,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/cable_club.h"
 #include "constants/game_stat.h"
-#include "constants/maps.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -1593,8 +1592,8 @@ void StartUnionRoomBattle(u16 battleFlags)
 static void WarpForWirelessMinigame(u16 linkService, u16 x, u16 y)
 {
     VarSet(VAR_CABLE_CLUB_STATE, linkService);
-    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
-    SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
+    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x, y);
+    SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x, y);
     WarpIntoMap();
 }
 
@@ -1605,7 +1604,7 @@ static void WarpForCableClubActivity(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 l
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gLocalLinkPlayerId = GetMultiplayerId();
     SetCableClubWarp();
-    SetWarpDestination(mapGroup, mapNum, -1, x, y);
+    SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, x, y);
     WarpIntoMap();
 }
 
@@ -4503,6 +4502,6 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom *d
 
 static void CopyAndTranslatePlayerName(u8 *dest, struct RfuPlayer *player)
 {
-    StringCopy7(dest, player->rfu.name);
+    StringCopy_PlayerName(dest, player->rfu.name);
     ConvertInternationalString(dest, player->rfu.data.compatibility.language);
 }

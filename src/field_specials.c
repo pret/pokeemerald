@@ -55,7 +55,6 @@
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
-#include "constants/maps.h"
 #include "constants/mystery_gift.h"
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
@@ -960,13 +959,9 @@ u8 GetBattleOutcome(void)
 void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
-    {
-        SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
-    }
+        SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), WARP_ID_NONE, 6, 4);
     else
-    {
-        SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
-    }
+        SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), WARP_ID_NONE, 6, 4);
 }
 
 void SetHiddenItemFlag(void)
@@ -1335,15 +1330,40 @@ void BufferEReaderTrainerName(void)
 
 u16 GetSlotMachineId(void)
 {
-    static const u8 sSlotMachineRandomSeeds[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
-    static const u8 sSlotMachineIds[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-    static const u8 sSlotMachineServiceDayIds[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
+    static const u8 sSlotMachineRandomSeeds[SLOT_MACHINE_COUNT] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
+    static const u8 sSlotMachineIds[SLOT_MACHINE_COUNT] = {
+        SLOT_MACHINE_UNLUCKIEST,
+        SLOT_MACHINE_UNLUCKIER,
+        SLOT_MACHINE_UNLUCKIER,
+        SLOT_MACHINE_UNLUCKY,
+        SLOT_MACHINE_UNLUCKY,
+        SLOT_MACHINE_UNLUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIEST
+    };
+    static const u8 sSlotMachineServiceDayIds[SLOT_MACHINE_COUNT] = {
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIEST,
+        SLOT_MACHINE_LUCKIEST
+    };
 
     u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
-    if (GetPriceReduction(POKENEWS_GAME_CORNER))
-    {
+    if (IsPokeNewsActive(POKENEWS_GAME_CORNER))
         return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
-    }
+
     return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
 
@@ -1550,17 +1570,13 @@ bool8 FoundBlackGlasses(void)
 void SetRoute119Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
-    {
-        SetSav1Weather(WEATHER_ROUTE119_CYCLE);
-    }
+        SetSavedWeather(WEATHER_ROUTE119_CYCLE);
 }
 
 void SetRoute123Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
-    {
-        SetSav1Weather(WEATHER_ROUTE123_CYCLE);
-    }
+        SetSavedWeather(WEATHER_ROUTE123_CYCLE);
 }
 
 u8 GetLeadMonIndex(void)
@@ -3029,6 +3045,8 @@ void CloseFrontierExchangeCornerItemIconWindow(void)
     RemoveWindow(sFrontierExchangeCorner_ItemIconWindowId);
 }
 
+#define TAG_ITEM_ICON 5500
+
 static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
@@ -3046,9 +3064,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                 }
                 else
                 {
-                    FreeSpriteTilesByTag(5500);
-                    FreeSpritePaletteByTag(5500);
-                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, 5500, 5500);
+                    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
                 }
                 break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
@@ -3059,9 +3077,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                 }
                 else
                 {
-                    FreeSpriteTilesByTag(5500);
-                    FreeSpritePaletteByTag(5500);
-                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
+                    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
                 }
                 break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
@@ -3078,9 +3096,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 
 static void ShowFrontierExchangeCornerItemIcon(u16 item)
 {
-    FreeSpriteTilesByTag(5500);
-    FreeSpritePaletteByTag(5500);
-    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(5500, 5500, item);
+    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, item);
 
     if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
@@ -3416,7 +3434,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
         gFieldEffectArguments[5] = 5;
 
     FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
-    Overworld_SetObjEventTemplateCoords(1, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
+    SetObjEventTemplateCoords(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
 }
 
 static void WaitForDeoxysRockMovement(u8 taskId)

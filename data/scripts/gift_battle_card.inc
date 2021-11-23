@@ -3,8 +3,7 @@ MysteryGiftScript_BattleCard::
 	vgoto_if_set FLAG_MYSTERY_GIFT_DONE, MysteryGiftScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, GET_CARD_BATTLES_WON
 	specialvar VAR_0x8008, GetMysteryGiftCardStat
-	compare VAR_0x8008, REQUIRED_CARD_BATTLES
-	vgoto_if_ne MysteryGiftScript_BattleCardInfo
+	vgoto_if_ne VAR_0x8008, REQUIRED_CARD_BATTLES, MysteryGiftScript_BattleCardInfo
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftBattleCountCard_WonPrize

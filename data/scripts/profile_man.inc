@@ -28,10 +28,8 @@ ProfileMan_EventScript_CreateProfile::
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	compare VAR_RESULT, 0
-	goto_if_eq ProfileMan_EventScript_CancelShowProfile
-	compare VAR_RESULT, 1
-	goto_if_eq ProfileMan_EventScript_ShowProfile
+	goto_if_eq VAR_RESULT, 0, ProfileMan_EventScript_CancelShowProfile
+	goto_if_eq VAR_RESULT, 1, ProfileMan_EventScript_ShowProfile
 	end
 
 ProfileMan_EventScript_CancelShowProfile::
@@ -80,10 +78,8 @@ ProfileMan_EventScript_CreateNewProfile::
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	compare VAR_RESULT, 0
-	goto_if_eq ProfileMan_EventScript_CancelShowProfile
-	compare VAR_RESULT, 1
-	goto_if_eq ProfileMan_EventScript_ShowProfile
+	goto_if_eq VAR_RESULT, 0, ProfileMan_EventScript_CancelShowProfile
+	goto_if_eq VAR_RESULT, 1, ProfileMan_EventScript_ShowProfile
 	end
 
 ProfileMan_EventScript_DeclineNewProfile::

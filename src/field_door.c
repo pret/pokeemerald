@@ -5,7 +5,6 @@
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "task.h"
-#include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
 

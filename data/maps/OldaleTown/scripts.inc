@@ -76,8 +76,7 @@ OldaleTown_EventScript_GoToMartEast::
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
 	giveitem ITEM_POTION
-	compare VAR_RESULT, FALSE
-	goto_if_eq OldaleTown_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE
 	fadedefaultbgm
@@ -260,10 +259,8 @@ OldaleTown_EventScript_RivalTrigger3::
 
 OldaleTown_EventScript_ShowRivalMessage::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq OldaleTown_EventScript_ShowMayMessage
-	compare VAR_RESULT, FEMALE
-	goto_if_eq OldaleTown_EventScript_ShowBrendanMessage
+	goto_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_ShowMayMessage
+	goto_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_ShowBrendanMessage
 	end
 
 OldaleTown_EventScript_ShowMayMessage::
@@ -278,10 +275,8 @@ OldaleTown_EventScript_ShowBrendanMessage::
 
 OldaleTown_EventScript_RivalFinish::
 	closemessage
-	compare VAR_0x8009, 0
-	call_if_eq OldaleTown_EventScript_DoExitMovement1
-	compare VAR_0x8009, 1
-	call_if_eq OldaleTown_EventScript_DoExitMovement2
+	call_if_eq VAR_0x8009, 0, OldaleTown_EventScript_DoExitMovement1
+	call_if_eq VAR_0x8009, 1, OldaleTown_EventScript_DoExitMovement2
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
 	waitmovement 0
 	removeobject LOCALID_RIVAL
@@ -291,8 +286,7 @@ OldaleTown_EventScript_RivalFinish::
 	end
 
 OldaleTown_EventScript_DoExitMovement1::
-	compare VAR_FACING, DIR_SOUTH
-	goto_if_ne OldaleTown_EventScript_DoExitMovement2
+	goto_if_ne VAR_FACING, DIR_SOUTH, OldaleTown_EventScript_DoExitMovement2
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
 	waitmovement 0
 	return

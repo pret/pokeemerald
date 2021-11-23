@@ -1,8 +1,7 @@
 MysteryGiftScript_VisitingTrainer::
 	setvaddress MysteryGiftScript_VisitingTrainer
 	special ValidateEReaderTrainer
-	compare VAR_RESULT, 0
-	vgoto_if_eq MysteryGiftScript_VisitingTrainerArrived
+	vgoto_if_eq VAR_RESULT, 0, MysteryGiftScript_VisitingTrainerArrived
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftVisitingTrainerInstructions

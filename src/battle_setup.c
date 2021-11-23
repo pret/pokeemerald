@@ -43,7 +43,6 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/map_types.h"
-#include "constants/maps.h"
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
@@ -687,7 +686,7 @@ u8 BattleSetup_GetTerrainId(void)
     }
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE113) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE113))
         return BATTLE_TERRAIN_SAND;
-    if (GetSav1Weather() == WEATHER_SANDSTORM)
+    if (GetSavedWeather() == WEATHER_SANDSTORM)
         return BATTLE_TERRAIN_SAND;
 
     return BATTLE_TERRAIN_PLAIN;
@@ -700,7 +699,7 @@ static u8 GetBattleTransitionTypeByMap(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    if (Overworld_GetFlashLevel())
+    if (GetFlashLevel())
         return TRANSITION_TYPE_FLASH;
     if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {
