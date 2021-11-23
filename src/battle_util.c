@@ -875,7 +875,7 @@ void HandleAction_ActionFinished(void)
     u8 i, j;
     u8 battler1 = 0;
     u8 battler2 = 0;
-	#endif
+    #endif
     *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = 6;
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
