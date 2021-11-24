@@ -118,8 +118,8 @@
 #define B_PAYBACK_SWITCH_BOOST      GEN_7 // In Gen5+, if the opponent switches out, Payback's damage will no longer be doubled.
 #define B_HIDDEN_POWER_DMG          GEN_7 // In Gen6+, Hidden Power's base power was set to always be 60. Before, it was determined by the mon's IVs.
 #define B_ROUGH_SKIN_DMG            GEN_7 // In Gen4+, Rough Skin contact damage is 1/8th of max HP instead of 1/16th. This will also affect Iron Barbs.
-#define B_KNOCK_OFF_DMG             GEN_8 // In Gen6+, Knock Off deals 50% more damage when knocking off an item
-#define B_SPORT_DMG_REDUCTION       GEN_7 // In Gen5+, Water/Mud Sport reduce Fire/Electric Damage by 67% instead of 50%
+#define B_KNOCK_OFF_DMG             GEN_8 // In Gen6+, Knock Off deals 50% more damage when knocking off an item.
+#define B_SPORT_DMG_REDUCTION       GEN_7 // In Gen5+, Water/Mud Sport reduce Fire/Electric Damage by 67% instead of 50%.
 
 // Type settings
 #define B_GHOSTS_ESCAPE             GEN_7 // In Gen6+, abilities like Shadow Tag or moves like Mean Look fail on Ghost-type Pokémon. They can also escape any Wild Battle.
@@ -135,6 +135,7 @@
 #define B_TAILWIND_TURNS            GEN_7 // In Gen5+, Tailwind lasts 4 turns instead of 3.
 #define B_SLEEP_TURNS               GEN_7 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
 #define B_TAUNT_TURNS               GEN_7 // In Gen5+, Taunt lasts 3 turns if the user acts before the target, or 4 turns if the target acted before the user. In Gen3, taunt lasts 2 turns and in Gen 4, 3-5 turns.
+#define B_SPORT_TURNS               GEN_7 // In Gen6+, Water/Mud Sport last 5 turns, even if the user switches out.
 
 // Move data settings
 #define B_UPDATED_MOVE_DATA         GEN_8 // Updates move data in gBattleMoves, including Power, Accuracy, PP, stat changes, targets, chances of secondary effects, etc.

@@ -12955,23 +12955,41 @@ static void Cmd_settypebasedhalvers(void) // water and mud sport
 
     if (gBattleMoves[gCurrentMove].effect == EFFECT_MUD_SPORT)
     {
-        if (!(gFieldStatuses & STATUS_FIELD_MUDSPORT))
-        {
-            gFieldStatuses |= STATUS_FIELD_MUDSPORT;
-            gFieldTimers.mudSportTimer = 5;
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
-            worked = TRUE;
-        }
+        #if B_SPORT_TURNS >= GEN_6
+            if (!(gFieldStatuses & STATUS_FIELD_MUDSPORT))
+            {
+                gFieldStatuses |= STATUS_FIELD_MUDSPORT;
+                gFieldTimers.mudSportTimer = 5;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
+                worked = TRUE;
+            }
+        #else 
+            if (!(gStatuses4[gBattlerAttacker] & STATUS4_MUD_SPORT))
+            {
+                gStatuses4[gBattlerAttacker] |= STATUS4_MUD_SPORT;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
+                worked = TRUE;
+            }
+        #endif
     }
     else // water sport
     {
-        if (!(gFieldStatuses & STATUS_FIELD_WATERSPORT))
-        {
-            gFieldStatuses |= STATUS_FIELD_WATERSPORT;
-            gFieldTimers.waterSportTimer = 5;
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
-            worked = TRUE;
-        }
+        #if B_SPORT_TURNS >= GEN_6
+            if (!(gFieldStatuses & STATUS_FIELD_WATERSPORT))
+            {
+                gFieldStatuses |= STATUS_FIELD_WATERSPORT;
+                gFieldTimers.waterSportTimer = 5;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
+                worked = TRUE;
+            }
+        #else
+            if (!(gStatuses4[gBattlerAttacker] & STATUS4_WATER_SPORT))
+            {
+                gStatuses4[gBattlerAttacker] |= v;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
+                worked = TRUE;
+            }
+        #endif
     }
 
     if (worked)
