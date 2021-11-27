@@ -140,11 +140,8 @@ static EWRAM_DATA u16 sLastSelectedPokemon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 //Pokedex Plus HGSS_Ui
-EWRAM_DATA static u16 sStatsMovesLevelUp[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
-EWRAM_DATA static u16 sStatsMovesEgg[EGG_MOVES_ARRAY_COUNT] = {0};
-EWRAM_DATA static u16 sStatsMovesTMHM[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
+EWRAM_DATA static u16 sStatsMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT + EGG_MOVES_ARRAY_COUNT + NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES + TUTOR_MOVE_COUNT] = {0};
 EWRAM_DATA static u16 sStatsMovesTMHM_ID[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
-EWRAM_DATA static u16 sStatsMovesTutor[TUTOR_MOVE_COUNT] = {0};
 
 // This is written to, but never read.
 u8 gUnusedPokedexU8;
@@ -205,7 +202,7 @@ struct PokedexView
     u16 monSpriteIds[MAX_MONS_ON_SCREEN];
     u8 typeIconSpriteIds[2]; //HGSS_Ui
     u16 moveSelected; //HGSS_Ui
-    u8 moveMax; //HGSS_Ui
+    u8 movesTotal; //HGSS_Ui
     u8 statBarsSpriteId; //HGSS_Ui
     u8 statBarsBgSpriteId; //HGSS_Ui
     bool8 justScrolled; //HGSS_Ui
@@ -359,9 +356,11 @@ static void Task_LoadStatsScreen(u8 taskId);
 static void Task_SwitchScreensFromStatsScreen(u8 taskId);
 static void Task_ExitStatsScreen(u8 taskId);
 static bool8 CalculateMoves(void);
-static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry);
+static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value);
 static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId);
-static void PrintStatsScreen_MoveNameAndInfo(u8 taskId);
+static void PrintStatsScreen_Moves_Top(u8 taskId);
+static void PrintStatsScreen_Moves_Description(u8 taskId);
+static void PrintStatsScreen_Moves_Bottom(u8 taskId);
 static void PrintStatsScreen_Left(u8 taskId);
 static void PrintStatsScreen_Abilities(u8 taskId);
 static void PrintInfoScreenTextWhite(const u8* str, u8 left, u8 top);
@@ -1201,9 +1200,12 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
 #define WIN_STATS_NAME_GENDER 2
 #define WIN_STATS_LEFT 3
 #define WIN_STATS_NAVIGATION_BUTTONS 4
-#define WIN_STATS_MOVES 5
-#define WIN_STATS_ABILITIES 6
-#define WIN_STATS_LEFT_UNUSED 7
+#define WIN_STATS_MOVES_TOP 5
+#define WIN_STATS_MOVES_DESCRIPTION 7
+#define WIN_STATS_MOVES_BOTTOM 8
+#define WIN_STATS_ABILITIES 9
+#define WIN_STATS_LEFT_UNUSED 10
+#define WIN_STATS_END WIN_STATS_LEFT_UNUSED
 static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
 {
     [WIN_STATS_TOPBAR] = 
@@ -1256,15 +1258,35 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1 + 60 + 40 + 48 + 96,
     },
-    [WIN_STATS_MOVES] =
+    [WIN_STATS_MOVES_TOP] =
     {
         .bg = 2,
         .tilemapLeft = 12,
         .tilemapTop = 2,
         .width = 18,
-        .height = 10,
+        .height = 4,
         .paletteNum = 0,
         .baseBlock = 1 + 60 + 40 + 48 + 96 + 24,
+    },
+    [WIN_STATS_MOVES_DESCRIPTION] =
+    {
+        .bg = 2,
+        .tilemapLeft = 12,
+        .tilemapTop = 6,
+        .width = 18,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72,
+    },
+    [WIN_STATS_MOVES_BOTTOM] =
+    {
+        .bg = 2,
+        .tilemapLeft = 12,
+        .tilemapTop = 10,
+        .width = 18,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72,
     },
     [WIN_STATS_ABILITIES] =
     {
@@ -1274,7 +1296,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 18,
         .height = 8,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 180,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36,
     },
     [WIN_STATS_LEFT_UNUSED] =
     {
@@ -1284,7 +1306,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 12,
         .height = 4,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 180 + 144,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36 + 144,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -6310,7 +6332,7 @@ static void LoadTilesetTilemapHGSS(u8 page)
 
 //PokedexPlus HGSS_Ui Stats Page
 static const u8 sStatsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
-static void StatsPage_PrintAToggleUpdownMoves(void)
+static void StatsPage_PrintNavigationButtons(void)
 {
     u8 x = 9;
     u8 y = 0;
@@ -6321,6 +6343,20 @@ static void StatsPage_PrintAToggleUpdownMoves(void)
     // DrawKeypadIcon(WIN_NAVIGATION_BUTTONS, 10, 5, 0); //(u8 windowId, u8 keypadIconId, u16 x, u16 y)
     PutWindowTilemap(WIN_STATS_NAVIGATION_BUTTONS);
     CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, 3);
+}
+static void ResetStatsWindows(void)
+{
+    u8 i;
+
+    FreeAllWindowBuffers();
+    InitWindows(sStatsScreen_WindowTemplates);
+    //DeactivateAllTextPrinters();
+    for (i = 0; i < WIN_STATS_END + 1; i++)
+    {
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        PutWindowTilemap(i);
+        CopyWindowToVram(i, 3);
+    }
 }
 #define tMonSpriteId data[4]
 static void Task_LoadStatsScreen(u8 taskId)
@@ -6348,36 +6384,7 @@ static void Task_LoadStatsScreen(u8 taskId)
     case 1:
         LoadTilesetTilemapHGSS(STATS_SCREEN);
 
-        FreeAllWindowBuffers();
-        InitWindows(sStatsScreen_WindowTemplates);
-
-        FillWindowPixelBuffer(WIN_STATS_TOPBAR, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_TOPBAR);
-        CopyWindowToVram(WIN_STATS_TOPBAR, 3);
-
-        FillWindowPixelBuffer(WIN_STATS_NAME_GENDER, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_NAME_GENDER);
-        CopyWindowToVram(WIN_STATS_NAME_GENDER, 3);
-
-        FillWindowPixelBuffer(WIN_STATS_LEFT, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_LEFT);
-        CopyWindowToVram(WIN_STATS_LEFT, 3);
-
-        FillWindowPixelBuffer(WIN_STATS_NAVIGATION_BUTTONS, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_NAVIGATION_BUTTONS);
-        CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, 3);
-
-        FillWindowPixelBuffer(WIN_STATS_MOVES, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_MOVES);
-        CopyWindowToVram(WIN_STATS_MOVES, 3);
-
-        FillWindowPixelBuffer(WIN_STATS_ABILITIES, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_ABILITIES);
-        CopyWindowToVram(WIN_STATS_ABILITIES, 3);
-
-        FillWindowPixelBuffer(WIN_STATS_LEFT_UNUSED, PIXEL_FILL(0)); 
-        PutWindowTilemap(WIN_STATS_LEFT_UNUSED);
-        CopyWindowToVram(WIN_STATS_LEFT_UNUSED, 3);
+        ResetStatsWindows();
 
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
@@ -6403,7 +6410,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         break;
     case 4:
         sPokedexView->moveSelected = 0;
-        sPokedexView->moveMax = 0;
+        sPokedexView->movesTotal = 0;
         sPokedexView->numEggMoves = 0;
         sPokedexView->numLevelUpMoves = 0;
         sPokedexView->numTMHMMoves = 0;
@@ -6428,14 +6435,15 @@ static void Task_LoadStatsScreen(u8 taskId)
         break;
     case 6:
         gTasks[taskId].data[5] = 0;
-        FillWindowPixelRect(0, PIXEL_FILL(0), 0, 48, 240, 130);
-        PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
+        PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE);
         PrintStatsScreen_Left(taskId);
         PrintStatsScreen_Abilities(taskId);
-        PrintStatsScreen_MoveNameAndInfo(taskId);
+        PrintStatsScreen_Moves_Top(taskId);
+        PrintStatsScreen_Moves_Description(taskId);
+        PrintStatsScreen_Moves_Bottom(taskId);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
-        StatsPage_PrintAToggleUpdownMoves(); //gText_Stats_Buttons
+        StatsPage_PrintNavigationButtons(); //gText_Stats_Buttons
         gMain.state++;
         break;
     case 7:
@@ -6510,14 +6518,16 @@ static void Task_HandleStatsScreenInput(u8 taskId)
         FillWindowPixelBuffer(WIN_STATS_LEFT, PIXEL_FILL(0)); 
         PrintStatsScreen_Left(taskId);
 
+        FillWindowPixelBuffer(WIN_STATS_MOVES_DESCRIPTION, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Description(taskId);
+
+        FillWindowPixelBuffer(WIN_STATS_MOVES_BOTTOM, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Bottom(taskId);
+
         #ifdef POKEMON_EXPANSION
         FillWindowPixelBuffer(WIN_STATS_ABILITIES, PIXEL_FILL(0)); 
         PrintStatsScreen_Abilities(taskId)
         #endif
-
-        PrintStatsScreen_DestroyMoveItemIcon(taskId);
-        FillWindowPixelBuffer(WIN_STATS_MOVES, PIXEL_FILL(0));
-        PrintStatsScreen_MoveNameAndInfo(taskId);
     }
     if (JOY_NEW(B_BUTTON))
     {
@@ -6532,17 +6542,29 @@ static void Task_HandleStatsScreenInput(u8 taskId)
     {
         sPokedexView->moveSelected -= 1;
         PlaySE(SE_SELECT);
-        FillWindowPixelBuffer(WIN_STATS_MOVES, PIXEL_FILL(0));
+        FillWindowPixelBuffer(WIN_STATS_MOVES_TOP, PIXEL_FILL(0));
         PrintStatsScreen_DestroyMoveItemIcon(taskId);
-        PrintStatsScreen_MoveNameAndInfo(taskId);
+        PrintStatsScreen_Moves_Top(taskId);
+
+        FillWindowPixelBuffer(WIN_STATS_MOVES_DESCRIPTION, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Description(taskId);
+
+        FillWindowPixelBuffer(WIN_STATS_MOVES_BOTTOM, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Bottom(taskId);
     }
-    if (JOY_REPEAT(DPAD_DOWN) && sPokedexView->moveSelected < sPokedexView->moveMax -1 )
+    if (JOY_REPEAT(DPAD_DOWN) && sPokedexView->moveSelected < sPokedexView->movesTotal -1 )
     {
         sPokedexView->moveSelected = sPokedexView->moveSelected + 1;
         PlaySE(SE_SELECT);
-        FillWindowPixelBuffer(WIN_STATS_MOVES, PIXEL_FILL(0));
+        FillWindowPixelBuffer(WIN_STATS_MOVES_TOP, PIXEL_FILL(0));
         PrintStatsScreen_DestroyMoveItemIcon(taskId);
-        PrintStatsScreen_MoveNameAndInfo(taskId);
+        PrintStatsScreen_Moves_Top(taskId);
+
+        FillWindowPixelBuffer(WIN_STATS_MOVES_DESCRIPTION, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Description(taskId);
+
+        FillWindowPixelBuffer(WIN_STATS_MOVES_BOTTOM, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Bottom(taskId);
     }
 
     //Switch screens
@@ -6579,23 +6601,32 @@ static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId)
 }
 static bool8 CalculateMoves(void)
 {
-    //Moves
     u16 species = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
-    u8 numEggMoves = GetEggMovesSpecies(species, sStatsMovesEgg);
-    u8 numLevelUpMoves = GetLevelUpMovesBySpecies(species, sStatsMovesLevelUp);
-    u8 numTMHMMoves;
+
+    u16 statsMovesEgg[EGG_MOVES_ARRAY_COUNT] = {0};
+    u16 statsMovesLevelUp[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
+    u16 statsMovesTMHM[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
+    u16 statsMovesTutor[TUTOR_MOVE_COUNT] = {0};
+
+    u8 numEggMoves = GetEggMovesSpecies(species, statsMovesEgg);
+    u8 numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
+    u8 numTMHMMoves = 0;
     u8 numTutorMoves = 0;
-    u16 movestotal;
+    u16 movesTotal = 0;
     u8 i,j;
 
-    // sTutorLearnsets
-    for (i=0; i<TUTOR_MOVE_COUNT; i++)
+    //Egg moves
+    for (i=0; i < numEggMoves; i++)
     {
-        if (CanLearnTutorMove(species, i)) //if (sTutorLearnsets[species] & (1 << i))
-        {
-            sStatsMovesTutor[numTutorMoves] = gTutorMoves[i];
-            numTutorMoves++;
-        }
+        sStatsMoves[movesTotal] = statsMovesEgg[i];
+        movesTotal++;
+    }
+
+    //Level up moves
+    for (i=0; i < numLevelUpMoves; i++)
+    {
+        sStatsMoves[movesTotal] = statsMovesLevelUp[i];
+        movesTotal++;
     }
 
     //TMHM moves
@@ -6603,15 +6634,25 @@ static bool8 CalculateMoves(void)
     {
         if(CanSpeciesLearnTMHM(species, j))
         {
-            sStatsMovesTMHM[numTMHMMoves] = ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j);
+            sStatsMoves[movesTotal] = ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j);
+            movesTotal++;
             sStatsMovesTMHM_ID[numTMHMMoves] = (ITEM_TM01_FOCUS_PUNCH + j);
             numTMHMMoves++;
         }
     }
 
-    movestotal = numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves;
-    sPokedexView->moveMax = movestotal;
+    // sTutorLearnsets
+    for (i=0; i < TUTOR_MOVE_COUNT; i++)
+    {
+        if (CanLearnTutorMove(species, i)) //if (sTutorLearnsets[species] & (1 << i))
+        {
+            sStatsMoves[movesTotal] = gTutorMoves[i];
+            numTutorMoves++;
+            movesTotal++;
+        }
+    }
 
+    sPokedexView->movesTotal = movesTotal;
     sPokedexView->numEggMoves = numEggMoves;
     sPokedexView->numLevelUpMoves = numLevelUpMoves;
     sPokedexView->numTMHMMoves = numTMHMMoves;
@@ -6619,44 +6660,56 @@ static bool8 CalculateMoves(void)
 
     return TRUE;
 }
-static void PrintStatsScreen_MoveNameAndInfo(u8 taskId)
+static void PrintStatsScreen_Moves_Top(u8 taskId)
 {
     u8 numEggMoves      = sPokedexView->numEggMoves;
     u8 numLevelUpMoves  = sPokedexView->numLevelUpMoves;
     u8 numTMHMMoves     = sPokedexView->numTMHMMoves;
     u8 numTutorMoves    = sPokedexView->numTutorMoves;
-    
-    u8 selected = sPokedexView->moveSelected;
-    u8 total = sPokedexView->moveMax;
-
+    u8 selected         = sPokedexView->moveSelected;
+    u8 movesTotal       = sPokedexView->movesTotal;
+    u8 level;
+    u8 moves_x = 5;
+    u8 moves_y = 3;
     u16 move;
     u16 item;
-
-    u8 moves_x = 5; //101;
-    u8 moves_y = 3; //19;
-
-    u8 level = 0;
-
+    
     u16 species = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
 
-    //Contest
-    u8 contest_i, contest_effectValue, contest_appeal, contest_jam;
+    //Move
+    move = sStatsMoves[selected];
+
+    //Moves selected from move max
+    ConvertIntToDecimalStringN(gStringVar1, (selected+1), STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, movesTotal, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar1, gText_Stats_MoveSelectedMax);
+    PrintStatsScreenTextSmallWhite(WIN_STATS_MOVES_TOP, gStringVar1, moves_x-1, moves_y+1);
+
+    //Move name
+    StringCopy(gStringVar3, gMoveNames[move]);
+    StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 20);
+    PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar3, moves_x, moves_y + 17);
+
+    //Draw move type icon
+    if (gTasks[taskId].data[5] == 0)
+    {
+        SetTypeIconPosAndPal(gBattleMoves[move].type, moves_x + 146, moves_y + 17, 0);
+        SetSpriteInvisibility(1, TRUE);
+    }
+    else
+    {
+        SetTypeIconPosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[move].contestCategory, moves_x + 146, moves_y + 17, 1);
+        SetSpriteInvisibility(0, TRUE);
+    }
 
     //Calculate and retrieve correct move from the arrays
     if (selected < numEggMoves)
     {
-        move = sStatsMovesEgg[sPokedexView->moveSelected];
-        StringCopy(gStringVar3, gMoveNames[move]);
-        StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_ThreeDashes, moves_x + 113, moves_y + 9);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
         item = ITEM_LUCKY_EGG;
     }
     else if (selected < (numEggMoves + numLevelUpMoves))
-    {
-        move = sStatsMovesLevelUp[sPokedexView->moveSelected - numEggMoves];
-        StringCopy(gStringVar3, gMoveNames[move]);
-        StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
-        
+    {        
         #if defined (BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
             level = gLevelUpLearnsets[species][(selected-numEggMoves)].level;
         #else
@@ -6669,25 +6722,19 @@ static void PrintStatsScreen_MoveNameAndInfo(u8 taskId)
             }
         #endif
         ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3); //Move learn lvl
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_Stats_MoveLevel, moves_x + 113, moves_y + 3); //Level text
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar1, moves_x + 113, moves_y + 14); //Print level
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_MoveLevel, moves_x + 113, moves_y + 3); //Level text
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 14); //Print level
         item = ITEM_EXP_SHARE;
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves))
     {
-        move = sStatsMovesTMHM[sPokedexView->moveSelected - numEggMoves - numLevelUpMoves];
-        StringCopy(gStringVar3, gMoveNames[move]);
-        StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
         CopyItemName(sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)], gStringVar1); //TM name
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar1, moves_x + 113, moves_y + 9);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 9);
         item = sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)];
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
     {
-        move = sStatsMovesTutor[sPokedexView->moveSelected - numEggMoves - numLevelUpMoves - numTMHMMoves];
-        StringCopy(gStringVar3, gMoveNames[move]);
-        StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_ThreeDashes, moves_x + 113, moves_y + 9);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
         item = ITEM_TEACHY_TV;
     }
     else
@@ -6696,103 +6743,100 @@ static void PrintStatsScreen_MoveNameAndInfo(u8 taskId)
         item = ITEM_MASTER_BALL;
     }
 
-
-    //Move name and description
-    StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 20);
-    PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar3, moves_x, moves_y + 17); //Name
-    if (gTasks[taskId].data[5] == 0)
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar4, moves_x, moves_y + 34);
-    else
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gContestEffectDescriptionPointers[gContestMoves[move].effect], moves_x, moves_y + 34);
-
-
     //Egg/TM/Level/Tutor Item Icon
     gTasks[taskId].data[3] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
     gSprites[gTasks[taskId].data[3]].x2 = 203;
     gSprites[gTasks[taskId].data[3]].y2 = 39;
     gSprites[gTasks[taskId].data[3]].oam.priority = 0;
 
-    //Moves selected from move max
-    ConvertIntToDecimalStringN(gStringVar1, (selected+1), STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, total, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar1, gText_Stats_MoveSelectedMax);
-    PrintStatsScreenTextSmallWhite(WIN_STATS_MOVES, gStringVar1, moves_x-1, moves_y+1);
+}
+static void PrintStatsScreen_Moves_Description(u8 taskId)
+{
+    u8 selected = sPokedexView->moveSelected;
+    u16 move;
+    u8 moves_x = 5;
+    u8 moves_y = 5;
 
+    //Move
+    move = sStatsMoves[selected];
+
+    //Move description
+    if (gTasks[taskId].data[5] == 0)
+    {
+        StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+    }
+    else
+    {
+        StringCopy(gStringVar4, gContestEffectDescriptionPointers[gContestMoves[move].effect]);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+    }
+}
+static void PrintStatsScreen_Moves_Bottom(u8 taskId)
+{
+    u8 selected = sPokedexView->moveSelected;
+    u16 move;
+    u8 moves_x = 5;
+    u8 moves_y = 3;
+    //Contest
+    u8 contest_effectValue;
+    u8 contest_appeal = 0;
+    u8 contest_jam = 0;
+
+    //Move
+    move = sStatsMoves[selected];
+
+    //Power + Accuracy
     if (gTasks[taskId].data[5] == 0)
     {
         //Power
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_Power,  moves_x + 3, moves_y + 64);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Power,  moves_x + 3, moves_y);
         if (gBattleMoves[move].power < 2)
             StringCopy(gStringVar1, gText_ThreeDashes);
         else
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar1, moves_x + 48, moves_y + 64);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar1, moves_x + 48, moves_y);
         //Physical/Special Split from BE
         #ifdef BATTLE_ENGINE
             DestroySplitIcon();
             ShowSplitIcon(GetBattleMoveSplit(move));
         #endif
         //Accuracy
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_Accuracy2,  moves_x + 69, moves_y + 64);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Accuracy2,  moves_x + 69, moves_y);
         if (gBattleMoves[move].accuracy == 0)
             StringCopy(gStringVar1, gText_ThreeDashes);
         else
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar1,  moves_x + 117, moves_y + 64);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar1,  moves_x + 117, moves_y);
     }
-    else
+    else //Appeal + Jam
     {
         #ifdef BATTLE_ENGINE
             DestroySplitIcon();
             gSprites[sPokedexView->splitIconSpriteId].invisible = TRUE;
         #endif
         //Appeal
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_Appeal,  moves_x + 3, moves_y + 64);
-        contest_appeal = 0;
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Appeal,  moves_x + 3, moves_y);
         contest_effectValue = gContestEffects[gContestMoves[move].effect].appeal;
         if (contest_effectValue != 0xFF)
-            contest_effectValue /= 10;
-        for (contest_i = 0; contest_i < 8; contest_i++)
-        {
-            if (contest_effectValue != 0xFF && contest_i < contest_effectValue)
-                contest_appeal += 1;
-        }
+            contest_appeal = contest_effectValue / 10;
         ConvertIntToDecimalStringN(gStringVar1, contest_appeal, STR_CONV_MODE_RIGHT_ALIGN, 1);
         StringCopy(gStringVar2, gText_PlusSymbol);
         StringAppend(gStringVar2, gStringVar1);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar2, moves_x + 48, moves_y + 64);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar2, moves_x + 48, moves_y);
 
         //Jam
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gText_Jam,  moves_x + 69, moves_y + 64);
-        contest_jam = 0;
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Jam,  moves_x + 69, moves_y);
         contest_effectValue = gContestEffects[gContestMoves[move].effect].jam;
         if (contest_effectValue != 0xFF)
-            contest_effectValue /= 10;
-        for (contest_i = 0; contest_i < 8; contest_i++)
-        {
-            if (contest_effectValue != 0xFF && contest_i < contest_effectValue)
-                contest_jam += 1;
-        }
+            contest_jam = contest_effectValue / 10;
         ConvertIntToDecimalStringN(gStringVar1, contest_jam, STR_CONV_MODE_RIGHT_ALIGN, 1);
         StringCopy(gStringVar2, gText_Stats_Minus);
         StringAppend(gStringVar2, gStringVar1);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES, gStringVar2,  moves_x + 122, moves_y + 64);
-    }
-    
-    //Draw move type icon
-    if (gTasks[taskId].data[5] == 0)
-    {
-        SetTypeIconPosAndPal(gBattleMoves[move].type, moves_x + 146, moves_y + 17, 0);
-        SetSpriteInvisibility(1, TRUE);
-    }
-    else
-    {
-        SetTypeIconPosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[move].contestCategory, moves_x + 146, moves_y + 17, 1);
-        SetSpriteInvisibility(0, TRUE);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar2,  moves_x + 122, moves_y);
     }
 }
-// u32 value is re-used, but passed as a bool that's TRUE if national dex is enabled
-static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry) //HGSS_Ui
+static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value)
 {
     u8 str[16];
     u8 str2[32];
