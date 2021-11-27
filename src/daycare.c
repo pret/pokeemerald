@@ -800,6 +800,8 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         eggSpecies = SPECIES_PHIONE;
     if (eggSpecies == SPECIES_SINISTEA_ANTIQUE)
         eggSpecies = SPECIES_SINISTEA;
+    if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_VIVILLON)
+        eggSpecies = SPECIES_SCATTERBUG;
 
     // Make Ditto the "mother" slot if the other daycare mon is male.
     if (species[parentSlots[1]] == SPECIES_DITTO && GetBoxMonGender(&daycare->mons[parentSlots[0]].mon) != MON_FEMALE)
