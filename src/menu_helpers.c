@@ -16,7 +16,6 @@
 #include "decompress.h"
 #include "constants/songs.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 
 #define TAG_SWAP_LINE 109
 

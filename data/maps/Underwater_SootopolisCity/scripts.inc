@@ -3,6 +3,6 @@ Underwater_SootopolisCity_MapScripts::
 	.byte 0
 
 Underwater_SootopolisCity_OnResume:
-	setdivewarp MAP_SOOTOPOLIS_CITY, 255, 29, 53
+	setdivewarp MAP_SOOTOPOLIS_CITY, 29, 53
 	end
 

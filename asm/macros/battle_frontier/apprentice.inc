@@ -94,11 +94,19 @@
 	@ Buffer some APPRENTICE_BUFF_* string to the given stringvar (0 for STR_VAR_1, 1 for STR_VAR_2, 2 for STR_VAR_3)
 	.macro apprentice_buff  stringvar:req, tobuff:req
 	setvar VAR_0x8004, APPRENTICE_FUNC_BUFFER_STRING
-	setvar VAR_0x8005, \stringvar
-	.if \tobuff >= VARS_START
-	copyvar VAR_0x8006, \tobuff
+	.if \stringvar == STR_VAR_1
+		setvar VAR_0x8005, 0
+	.elseif \stringvar == STR_VAR_2
+		setvar VAR_0x8005, 1
+	.elseif \stringvar == STR_VAR_3
+		setvar VAR_0x8005, 2
 	.else
-	setvar VAR_0x8006, \tobuff
+		setvar VAR_0x8005, \stringvar
+	.endif
+	.if \tobuff >= VARS_START
+		copyvar VAR_0x8006, \tobuff
+	.else
+		setvar VAR_0x8006, \tobuff
 	.endif
 	special CallApprenticeFunction
 	.endm

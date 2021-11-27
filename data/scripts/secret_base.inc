@@ -27,33 +27,24 @@ SecretBase_Text_DiscoveredSmallEntrance:
 SecretBase_EventScript_CheckEntrance::
 	special GetSecretBaseTypeInFrontOfPlayer
 	special CheckPlayerHasSecretBase
-	compare VAR_RESULT, TRUE
-	goto_if_eq SecretBase_EventScript_AlreadyHasSecretBase
+	goto_if_eq VAR_RESULT, TRUE, SecretBase_EventScript_AlreadyHasSecretBase
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, VAR_RESULT
-	buffermovename 1, MOVE_SECRET_POWER
-	compare VAR_0x8007, SECRET_BASE_RED_CAVE
-	goto_if_eq SecretBase_EventScript_Cave
-	compare VAR_0x8007, SECRET_BASE_BROWN_CAVE
-	goto_if_eq SecretBase_EventScript_Cave
-	compare VAR_0x8007, SECRET_BASE_BLUE_CAVE
-	goto_if_eq SecretBase_EventScript_Cave
-	compare VAR_0x8007, SECRET_BASE_YELLOW_CAVE
-	goto_if_eq SecretBase_EventScript_Cave
-	compare VAR_0x8007, SECRET_BASE_TREE
-	goto_if_eq SecretBase_EventScript_Tree
-	compare VAR_0x8007, SECRET_BASE_SHRUB
-	goto_if_eq SecretBase_EventScript_Shrub
+	buffermovename STR_VAR_2, MOVE_SECRET_POWER
+	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_Cave
+	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_Cave
+	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_Cave
+	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_Cave
+	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_Tree
+	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_Shrub
 	end
 
 SecretBase_EventScript_Cave::
 	lockall
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_CaveNoSecretPower
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_IndentUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
@@ -80,12 +71,10 @@ SecretBase_EventScript_CaveEnter::
 
 SecretBase_EventScript_Tree::
 	lockall
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq SecretBase_EventScript_TreeNoSecretPower
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_TreeNoSecretPower
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_TreeUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
@@ -112,12 +101,10 @@ SecretBase_EventScript_TreeEnter::
 
 SecretBase_EventScript_Shrub::
 	lockall
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq SecretBase_EventScript_ShrubNoSecretPower
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_ShrubNoSecretPower
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_ClumpUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
@@ -161,8 +148,7 @@ SecretBase_EventScript_FirstEntrance::
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SecretBase_EventScript_SetAsBase
+	goto_if_eq VAR_RESULT, YES, SecretBase_EventScript_SetAsBase
 	closemessage
 	playse SE_EXIT
 	special ClearAndLeaveSecretBase
@@ -185,8 +171,7 @@ SecretBase_EventScript_Enter::
 	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_EXIT
 	special IsCurSecretBaseOwnedByAnotherPlayer
-	compare VAR_RESULT, FALSE
-	goto_if_eq SecretBase_EventScript_EnterPlayersBase
+	goto_if_eq VAR_RESULT, FALSE, SecretBase_EventScript_EnterPlayersBase
 	clearflag FLAG_DECORATION_0
 	special EnterSecretBase
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
@@ -202,59 +187,43 @@ SecretBase_EventScript_EnterPlayersBase::
 
 SecretBase_EventScript_AlreadyHasSecretBase::
 	checkpartymove MOVE_SECRET_POWER
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq SecretBase_EventScript_NoSecretPower
+	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_NoSecretPower
 	setfieldeffectargument 0, VAR_RESULT
 	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
 	msgbox SecretBase_Text_WouldYouLikeToMoveBases, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
 	fadescreenswapbuffers FADE_TO_BLACK
 	special MoveOutOfSecretBaseFromOutside
 	closemessage
 	fadescreenswapbuffers FADE_FROM_BLACK
 	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_CancelOnEntrance
-	bufferpartymonnick 0, VAR_0x8004
-	buffermovename 1, MOVE_SECRET_POWER
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	bufferpartymonnick STR_VAR_1, VAR_0x8004
+	buffermovename STR_VAR_2, MOVE_SECRET_POWER
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	closemessage
-	compare VAR_0x8007, SECRET_BASE_RED_CAVE
-	goto_if_eq SecretBase_EventScript_CaveUseSecretPower
-	compare VAR_0x8007, SECRET_BASE_BROWN_CAVE
-	goto_if_eq SecretBase_EventScript_CaveUseSecretPower
-	compare VAR_0x8007, SECRET_BASE_BLUE_CAVE
-	goto_if_eq SecretBase_EventScript_CaveUseSecretPower
-	compare VAR_0x8007, SECRET_BASE_YELLOW_CAVE
-	goto_if_eq SecretBase_EventScript_CaveUseSecretPower
-	compare VAR_0x8007, SECRET_BASE_TREE
-	goto_if_eq SecretBase_EventScript_TreeUseSecretPower
-	compare VAR_0x8007, SECRET_BASE_SHRUB
-	goto_if_eq SecretBase_EventScript_ShrubUseSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_CaveUseSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_CaveUseSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_CaveUseSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_CaveUseSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_TreeUseSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_ShrubUseSecretPower
 	releaseall
 	end
 
 SecretBase_EventScript_NoSecretPower::
 	lockall
-	compare VAR_0x8007, SECRET_BASE_RED_CAVE
-	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
-	compare VAR_0x8007, SECRET_BASE_BROWN_CAVE
-	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
-	compare VAR_0x8007, SECRET_BASE_BLUE_CAVE
-	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
-	compare VAR_0x8007, SECRET_BASE_YELLOW_CAVE
-	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
-	compare VAR_0x8007, SECRET_BASE_TREE
-	goto_if_eq SecretBase_EventScript_TreeNoSecretPower
-	compare VAR_0x8007, SECRET_BASE_SHRUB
-	goto_if_eq SecretBase_EventScript_ShrubNoSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_CaveNoSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_CaveNoSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_CaveNoSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_CaveNoSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_TreeNoSecretPower
+	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_ShrubNoSecretPower
 	end
 
 SecretBase_EventScript_CancelOnEntrance::
@@ -302,11 +271,9 @@ SecretBase_EventScript_PutAwayDecoration::
 
 SecretBase_EventScript_PutAwayDecorationLoop::
 	special PutAwayDecorationIteration
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_PutAwayDecorationEnd
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_PutAwayDecorationEnd
 	addvar VAR_0x8004, 1
-	compare VAR_0x8005, 0
-	goto_if_eq SecretBase_EventScript_PutAwayDecorationLoop
+	goto_if_eq VAR_0x8005, 0, SecretBase_EventScript_PutAwayDecorationLoop
 	removeobject VAR_0x8006
 	setflag VAR_0x8005  @ UB: VAR_0x8005 is set to a flag by PutAwayDecorationIteration, but ScrCmd_setflag doesn't use VarGet
 	goto SecretBase_EventScript_PutAwayDecorationLoop
@@ -317,26 +284,16 @@ SecretBase_EventScript_PutAwayDecorationEnd::
 
 SecretBase_EventScript_RecordMixTrainer::
 	special GetSecretBaseOwnerAndState
-	compare VAR_0x8004, 0
-	goto_if_eq SecretBase_EventScript_Trainer0
-	compare VAR_0x8004, 1
-	goto_if_eq SecretBase_EventScript_Trainer1
-	compare VAR_0x8004, 2
-	goto_if_eq SecretBase_EventScript_Trainer2
-	compare VAR_0x8004, 3
-	goto_if_eq SecretBase_EventScript_Trainer3
-	compare VAR_0x8004, 4
-	goto_if_eq SecretBase_EventScript_Trainer4
-	compare VAR_0x8004, 5
-	goto_if_eq SecretBase_EventScript_Trainer5
-	compare VAR_0x8004, 6
-	goto_if_eq SecretBase_EventScript_Trainer6
-	compare VAR_0x8004, 7
-	goto_if_eq SecretBase_EventScript_Trainer7
-	compare VAR_0x8004, 8
-	goto_if_eq SecretBase_EventScript_Trainer8
-	compare VAR_0x8004, 9
-	goto_if_eq SecretBase_EventScript_Trainer9
+	goto_if_eq VAR_0x8004, 0, SecretBase_EventScript_Trainer0
+	goto_if_eq VAR_0x8004, 1, SecretBase_EventScript_Trainer1
+	goto_if_eq VAR_0x8004, 2, SecretBase_EventScript_Trainer2
+	goto_if_eq VAR_0x8004, 3, SecretBase_EventScript_Trainer3
+	goto_if_eq VAR_0x8004, 4, SecretBase_EventScript_Trainer4
+	goto_if_eq VAR_0x8004, 5, SecretBase_EventScript_Trainer5
+	goto_if_eq VAR_0x8004, 6, SecretBase_EventScript_Trainer6
+	goto_if_eq VAR_0x8004, 7, SecretBase_EventScript_Trainer7
+	goto_if_eq VAR_0x8004, 8, SecretBase_EventScript_Trainer8
+	goto_if_eq VAR_0x8004, 9, SecretBase_EventScript_Trainer9
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
@@ -344,16 +301,13 @@ SecretBase_EventScript_Trainer0::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer0PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer0PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer0PostBattle
 	msgbox SecretBase_Text_Trainer0Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer0DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer0DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer0DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer0DeclineBattle
 	msgbox SecretBase_Text_Trainer0AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -381,16 +335,13 @@ SecretBase_EventScript_Trainer1::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer1PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer1PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer1PostBattle
 	msgbox SecretBase_Text_Trainer1Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer1DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer1DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer1DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer1DeclineBattle
 	msgbox SecretBase_Text_Trainer1AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -418,16 +369,13 @@ SecretBase_EventScript_Trainer2::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer2PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer2PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer2PostBattle
 	msgbox SecretBase_Text_Trainer2Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer2DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer2DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer2DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer2DeclineBattle
 	msgbox SecretBase_Text_Trainer2AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -455,16 +403,13 @@ SecretBase_EventScript_Trainer3::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer3PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer3PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer3PostBattle
 	msgbox SecretBase_Text_Trainer3Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer3DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer3DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer3DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer3DeclineBattle
 	msgbox SecretBase_Text_Trainer3AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -492,16 +437,13 @@ SecretBase_EventScript_Trainer4::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer4PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer4PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer4PostBattle
 	msgbox SecretBase_Text_Trainer4Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer4DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer4DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer4DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer4DeclineBattle
 	msgbox SecretBase_Text_Trainer4AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -529,16 +471,13 @@ SecretBase_EventScript_Trainer5::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer5PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer5PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer5PostBattle
 	msgbox SecretBase_Text_Trainer5Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer5DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer5DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer5DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer5DeclineBattle
 	msgbox SecretBase_Text_Trainer5AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -566,16 +505,13 @@ SecretBase_EventScript_Trainer6::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer6PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer6PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer6PostBattle
 	msgbox SecretBase_Text_Trainer6Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer6DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer6DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer6DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer6DeclineBattle
 	msgbox SecretBase_Text_Trainer6AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -603,16 +539,13 @@ SecretBase_EventScript_Trainer7::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer7PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer7PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer7PostBattle
 	msgbox SecretBase_Text_Trainer7Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer7DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer7DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer7DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer7DeclineBattle
 	msgbox SecretBase_Text_Trainer7AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -640,16 +573,13 @@ SecretBase_EventScript_Trainer8::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer8PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer8PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer8PostBattle
 	msgbox SecretBase_Text_Trainer8Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer8DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer8DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer8DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer8DeclineBattle
 	msgbox SecretBase_Text_Trainer8AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -677,16 +607,13 @@ SecretBase_EventScript_Trainer9::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer9PreChampion
-	compare VAR_RESULT, 1
-	goto_if_eq SecretBase_EventScript_Trainer9PostBattle
+	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_Trainer9PostBattle
 	msgbox SecretBase_Text_Trainer9Intro, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SecretBase_EventScript_Trainer9DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_Trainer9DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SecretBase_EventScript_Trainer9DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer9DeclineBattle
 	msgbox SecretBase_Text_Trainer9AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
 	end
@@ -715,12 +642,9 @@ SecretBase_EventScript_BattleTrainer::
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	compare VAR_RESULT, B_OUTCOME_DREW
-	call_if_eq SecretBase_EventScript_DrewSecretBaseBattle
-	compare VAR_RESULT, B_OUTCOME_WON
-	call_if_eq SecretBase_EventScript_WonSecretBaseBattle
-	compare VAR_RESULT, B_OUTCOME_LOST
-	call_if_eq SecretBase_EventScript_LostSecretBaseBattle
+	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SecretBase_EventScript_DrewSecretBaseBattle
+	call_if_eq VAR_RESULT, B_OUTCOME_WON, SecretBase_EventScript_WonSecretBaseBattle
+	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SecretBase_EventScript_LostSecretBaseBattle
 	special HealPlayerParty
 	release
 	end
