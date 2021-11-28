@@ -8,6 +8,7 @@
 #include "bike.h"
 #include "coins.h"
 #include "data.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
@@ -941,11 +942,14 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
+    #ifdef TX_DEBUGGING
     if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
         static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
-        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);        
-    } //
-    else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
+        return;
+    }
+    #endif
+    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
