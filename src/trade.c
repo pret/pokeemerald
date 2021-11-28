@@ -3398,7 +3398,7 @@ static bool8 AnimateTradeSequenceCable(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
 
         if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
-            PlayCry1(sTradeData->monSpecies[TRADE_PLAYER], 0);
+            PlayCry_Normal(sTradeData->monSpecies[TRADE_PLAYER], 0);
 
         sTradeData->state = TS_STATE_BYE_BYE;
         sTradeData->timer = 0;
@@ -3869,7 +3869,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
 
         if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
-            PlayCry1(sTradeData->monSpecies[TRADE_PLAYER], 0);
+            PlayCry_Normal(sTradeData->monSpecies[TRADE_PLAYER], 0);
 
         sTradeData->state = TS_STATE_BYE_BYE;
         sTradeData->timer = 0;
@@ -4654,30 +4654,29 @@ static void CB2_SaveAndEndTrade(void)
             MysteryGift_TryIncrementStat(CARD_STAT_NUM_TRADES, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
 
         SetContinueGameWarpStatusToDynamicWarp();
-        sub_8153380();
+        LinkFullSave_Init();
         gMain.state++;
         sTradeData->timer = 0;
         break;
     case 51:
         if (++sTradeData->timer == 5)
-        {
             gMain.state++;
-        }
         break;
     case 52:
-        if (sub_81533AC())
+        if (LinkFullSave_WriteSector())
         {
             ClearContinueGameWarpStatus2();
             gMain.state = 4;
         }
         else
         {
+            // Save isn't finished, delay again
             sTradeData->timer = 0;
             gMain.state = 51;
         }
         break;
     case 4:
-        sub_81533E0();
+        LinkFullSave_ReplaceLastSector();
         gMain.state = 40;
         sTradeData->timer = 0;
         break;
@@ -4709,7 +4708,7 @@ static void CB2_SaveAndEndTrade(void)
     case 42:
         if (_IsLinkTaskFinished())
         {
-            sub_8153408();
+            LinkFullSave_SetLastSectorSecurity();
             gMain.state = 5;
         }
         break;
@@ -4965,7 +4964,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
             StringExpandPlaceholders(gStringVar4, gText_SavingDontTurnOffPower);
             DrawTextOnTradeWindow(0, gStringVar4, 0);
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
-            sub_8153380();
+            LinkFullSave_Init();
             sTradeData->timer = 0;
         }
         break;
@@ -4974,7 +4973,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
             gMain.state = 4;
         break;
     case 4:
-        if (sub_81533AC())
+        if (LinkFullSave_WriteSector())
         {
             gMain.state = 5;
         }
@@ -4985,7 +4984,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         }
         break;
     case 5:
-        sub_81533E0();
+        LinkFullSave_ReplaceLastSector();
         gMain.state = 6;
         sTradeData->timer = 0;
         break;
@@ -5013,7 +5012,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 8:
         if (_IsLinkTaskFinished())
         {
-            sub_8153408();
+            LinkFullSave_SetLastSectorSecurity();
             gMain.state = 9;
         }
         break;

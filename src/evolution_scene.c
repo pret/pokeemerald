@@ -1094,7 +1094,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_INTRO_CRY:
         if (!IsTextPrinterActive(0))
         {
-            PlayCry1(gTasks[taskId].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskId].tPreEvoSpecies, 0);
             gTasks[taskId].tState++;
         }
         break;

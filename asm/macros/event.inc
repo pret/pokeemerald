@@ -334,10 +334,10 @@
 	.byte 0x30
 	.endm
 
-	@ Plays the specified (fanfare_number) fanfare.
-	.macro playfanfare fanfare_number:req
+	@ Plays the fanfare specified by the song number. If the specified song is not a fanfare it will instead play the first song in sFanfares.
+	.macro playfanfare songNumber:req
 	.byte 0x31
-	.2byte \fanfare_number
+	.2byte \songNumber
 	.endm
 
 	@ Blocks script execution until all currently-playing fanfares finish.
@@ -1208,10 +1208,10 @@
 	.endm
 
 	@ Plays the specified (species) Pokemon's cry. You can use waitcry to block script execution until the sound finishes.
-	.macro playmoncry species:req, effect:req
+	.macro playmoncry species:req, mode:req
 	.byte 0xa1
 	.2byte \species
-	.2byte \effect
+	.2byte \mode
 	.endm
 
 	@ Changes the metatile at (x, y) on the current map.

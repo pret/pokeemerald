@@ -447,6 +447,9 @@
 // Flag for BattlePutTextOnWindow. Never set
 #define B_WIN_COPYTOVRAM (1 << 7)
 
+// Indicator for the party summary bar to display an empty slot.
+#define HP_EMPTY_SLOT 0xFFFF
+
 #define MOVE_TARGET_SELECTED            0
 #define MOVE_TARGET_DEPENDS             (1 << 0)
 #define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)

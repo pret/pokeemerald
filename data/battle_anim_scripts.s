@@ -2,6 +2,7 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/items.h"
@@ -18776,7 +18777,7 @@ Move_ROAR:
 	monbg ANIM_ATTACKER
 	splitbgprio ANIM_ATTACKER
 	setalpha 8, 8
-	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, 2
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_ROAR
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, ANIM_ATTACKER, 1
 	call RoarEffect
 	delay 20
@@ -18801,7 +18802,7 @@ RoarEffect:
 
 Move_GROWL:
 	loadspritegfx ANIM_TAG_NOISE_LINE
-	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, 255
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_GROWL
 	call RoarEffect
 	delay 10
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 9, 1
@@ -22303,14 +22304,15 @@ Move_BLAZE_KICK:
 
 Move_HYPER_VOICE:
 	loadspritegfx ANIM_TAG_THIN_RING
-	createvisualtask SoundTask_PlayCryWithEcho, 5, 0
+	createvisualtask SoundTask_PlayCryWithEcho, 5, FALSE
 	call HyperVoiceEffect
 	waitforvisualfinish
 	delay 8
-	createvisualtask SoundTask_PlayCryWithEcho, 5, 1
+	createvisualtask SoundTask_PlayCryWithEcho, 5, TRUE
 	call HyperVoiceEffect
 	waitforvisualfinish
 	end
+
 HyperVoiceEffect:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 8, 0, RGB_YELLOW
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 5, ANIM_ATTACKER, 0

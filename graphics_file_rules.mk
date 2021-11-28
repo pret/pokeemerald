@@ -697,7 +697,7 @@ $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
 $(PKNAVGFXDIR)/device_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 	
-$(PKNAVGFXDIR)/ui_matchcall.4bpp: %.4bpp: %.png
+$(PKNAVGFXDIR)/match_call/ui.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 13
 
 $(INTERFACEGFXDIR)/region_map.8bpp: %.8bpp: %.png

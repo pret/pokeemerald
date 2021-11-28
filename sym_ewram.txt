@@ -143,7 +143,7 @@
 	.include "src/pokedex_area_region_map.o"
 	.include "src/battle_pyramid_bag.o"
 	.include "src/pokenav.o"
-	.include "src/pokenav_match_call_ui.o"
+	.include "src/pokenav_list.o"
 	.include "src/menu_specialized.o"
 	.include "src/faraway_island.o"
 	.include "src/trainer_hill.o"

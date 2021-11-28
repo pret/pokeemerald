@@ -4284,7 +4284,7 @@ static void SpriteCB_GrowingSuperpower(struct Sprite *sprite)
 
     InitAnimLinearTranslation(sprite);
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
 }
 
 static void SpriteCB_CentredSpiderWeb(struct Sprite* sprite)
@@ -4966,7 +4966,7 @@ static void AnimHappyHourCoinShower(struct Sprite *sprite)
     sprite->data[4] = -70;
     sprite->data[5] = gBattleAnimArgs[2];
     StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
-    sprite->callback = TranslateSpriteInEllipseOverDuration;
+    sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
 }
 
