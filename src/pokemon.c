@@ -6533,9 +6533,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 if (gEvolutionTable[species][i].param <= level)
                 {
                     u8 nature = GetNature(mon);
-                    #ifdef GBA_PRINTF
-                        mgba_printf(MGBA_LOG_DEBUG, "nat = %d", nature);
-                    #endif
                     switch (nature)
                     {
                         case NATURE_HARDY:
