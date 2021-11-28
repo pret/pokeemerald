@@ -3309,7 +3309,7 @@ static void Task_LoadInfoScreen(u8 taskId)
             if (!gTasks[taskId].tSkipCry)
             {
                 StopCryAndClearCrySongs();
-                PlayCry2(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, 125, 10);
+                PlayCry_NormalNoDucking(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             }
             else
             {
@@ -4010,7 +4010,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
     case 6:
         if (!gPaletteFade.active)
         {
-            PlayCry1(NationalPokedexNumToSpecies(dexNum), 0);
+            PlayCry_Normal(NationalPokedexNumToSpecies(dexNum), 0);
             gTasks[taskId].tPalTimer = 0;
             gTasks[taskId].func = Task_HandleCaughtMonPageInput;
         }

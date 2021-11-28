@@ -1116,7 +1116,7 @@ u16 GetIconSpeciesNoPersonality(u16 species)
     }
     else
     {
-        if (species > (SPECIES_UNOWN_B - 1))
+        if (species > NUM_SPECIES)
             species = INVALID_ICON_SPECIES;
         return GetIconSpecies(species, 0);
     }

@@ -1187,10 +1187,10 @@ static void StartMatchCall(void)
     CreateTask(ExecuteMatchCall, 1);
 }
 
-static const u16 sMatchCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call_window.gbapal");
-static const u8 sMatchCallWindow_Gfx[] = INCBIN_U8("graphics/pokenav/match_call_window.4bpp");
-static const u16 sPokenavIcon_Pal[] = INCBIN_U16("graphics/pokenav/icon.gbapal");
-static const u32 sPokenavIcon_Gfx[] = INCBIN_U32("graphics/pokenav/icon.4bpp.lz");
+static const u16 sMatchCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/window.gbapal");
+static const u8 sMatchCallWindow_Gfx[] = INCBIN_U8("graphics/pokenav/match_call/window.4bpp");
+static const u16 sPokenavIcon_Pal[] = INCBIN_U16("graphics/pokenav/match_call/nav_icon.gbapal");
+static const u32 sPokenavIcon_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/nav_icon.4bpp.lz");
 
 static const u8 sText_PokenavCallEllipsis[] = _("………………\p");
 
@@ -1499,7 +1499,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
 {
     u32 matchCallId;
     const struct MatchCallText *matchCallText;
-    bool32 retVal = FALSE;
+    bool32 newRematchRequest = FALSE;
 
     matchCallId = GetTrainerMatchCallId(trainerId);
     sBattleFrontierStreakInfo.facilityId = 0;
@@ -1517,7 +1517,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     else if (ShouldTrainerRequestBattle(matchCallId))
     {
         matchCallText = GetDifferentRouteMatchCallText(matchCallId, str);
-        retVal = TRUE;
+        newRematchRequest = TRUE;
         UpdateRematchIfDefeated(matchCallId);
     }
     else if (Random() % 3)
@@ -1532,7 +1532,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     }
 
     BuildMatchCallString(matchCallId, matchCallText, str);
-    return retVal;
+    return newRematchRequest;
 }
 
 static int GetTrainerMatchCallId(int trainerId)

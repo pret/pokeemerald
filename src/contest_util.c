@@ -1578,7 +1578,7 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
     {
         if (++sprite->data[0] == 10)
         {
-            PlayCry1(sprite->data[1], 0);
+            PlayCry_Normal(sprite->data[1], 0);
             sprite->data[1] = 0;
         }
     }

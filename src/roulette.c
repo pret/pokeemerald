@@ -4449,13 +4449,13 @@ static void SetBallStuck(struct Sprite *sprite)
     if (sRoulette->useTaillow)
     {
         if (sprite->sStuckOnWheelLeft)
-            PlayCry1(SPECIES_TAILLOW, -63);
+            PlayCry_Normal(SPECIES_TAILLOW, -63);
         else
-            PlayCry1(SPECIES_TAILLOW, 63);
+            PlayCry_Normal(SPECIES_TAILLOW, 63);
     }
     else
     {
-        PlayCry1(SPECIES_SHROOMISH, -63);
+        PlayCry_Normal(SPECIES_SHROOMISH, -63);
     }
 
     slotsToSkip = 2;
@@ -4719,9 +4719,9 @@ static void SpriteCB_Taillow_FlyIn(struct Sprite *sprite)
         {
             m4aSongNumStartOrChange(SE_TAILLOW_WING_FLAP);
             if (sRoulette->ball->sStuckOnWheelLeft == 0)
-                PlayCry1(SPECIES_TAILLOW, 63);
+                PlayCry_Normal(SPECIES_TAILLOW, 63);
             else
-                PlayCry1(SPECIES_TAILLOW, -63);
+                PlayCry_Normal(SPECIES_TAILLOW, -63);
             StartSpriteAnim(sprite, sRoulette->ball->sStuckOnWheelLeft + 2);
             sprite->data[1] = 45;
             sprite->callback = SpriteCB_Taillow_PickUpBall;

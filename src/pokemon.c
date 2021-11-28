@@ -6720,14 +6720,14 @@ void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, 
     {
         // No animation, only check if cry needs to be played
         if (!noCry)
-            PlayCry1(species, pan);
+            PlayCry_Normal(species, pan);
         sprite->callback = SpriteCallbackDummy;
     }
     else
     {
         if (!noCry)
         {
-            PlayCry1(species, pan);
+            PlayCry_Normal(species, pan);
             if (HasTwoFramesAnimation(species))
                 StartSpriteAnim(sprite, 1);
         }

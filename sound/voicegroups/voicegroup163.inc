@@ -58,7 +58,7 @@ voicegroup163::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable3
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_directsound 60, 0, DirectSoundWaveData_88D6978, 255, 0, 206, 204
+	voice_directsound 60, 0, DirectSoundWaveData_unknown_18, 255, 0, 206, 204
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -92,7 +92,7 @@ voicegroup163::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4900, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_14, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

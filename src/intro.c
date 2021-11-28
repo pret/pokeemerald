@@ -1145,7 +1145,7 @@ void CB2_InitCopyrightScreenAfterBootup(void)
         SetSaveBlocksPointers(GetSaveBlocksPointersBaseOffset());
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
-        Save_LoadGameData(SAVE_NORMAL);
+        LoadGameSave(SAVE_NORMAL);
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             Sav2_ClearSetDefault();
         SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
@@ -1848,7 +1848,7 @@ static void Task_Scene3_StartGroudon(u8 taskId)
 {
     gTasks[taskId].tState = 0;
     gTasks[taskId].func = Task_Scene3_Groudon;
-    ScanlineEffect_InitWave(0, 160, 4, 4, 1, 4, 0);
+    ScanlineEffect_InitWave(0, 160, 4, 4, 1, SCANLINE_EFFECT_REG_BG1HOFS, 0);
 }
 
 #define tScreenX data[1]
@@ -1925,7 +1925,7 @@ static void Task_Scene3_Groudon(u8 taskId)
             tScreenX = 80;
             tScreenY = 41;
             tDelay = 16;
-            PlayCryInternal(SPECIES_GROUDON, 0, 100, 10, 0);
+            PlayCryInternal(SPECIES_GROUDON, 0, 100, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
             tState++;
         }
         break;
@@ -2058,7 +2058,7 @@ static void Task_Scene3_LoadKyogre(u8 taskId)
     gTasks[taskId].tDelay = 16;
     gTasks[taskId].tZoom = 256;
     PanFadeAndZoomScreen(gTasks[taskId].tScreenX, gTasks[taskId].tScreenY, gTasks[taskId].tZoom, 0);
-    ScanlineEffect_InitWave(0, 0xA0, 4, 4, 1, 6, 0);
+    ScanlineEffect_InitWave(0, 0xA0, 4, 4, 1, SCANLINE_EFFECT_REG_BG1VOFS, 0);
 }
 
 static void Task_Scene3_Kyogre(u8 taskId)
@@ -2127,7 +2127,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
             {
                 tDelay = 1;
                 tState++;
-                PlayCryInternal(SPECIES_KYOGRE, 0, 120, 10, 0);
+                PlayCryInternal(SPECIES_KYOGRE, 0, 120, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
             }
         }
         break;

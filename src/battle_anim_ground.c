@@ -141,11 +141,11 @@ const struct SpriteTemplate gDirtMoundSpriteTemplate =
 // a boomerang. After hitting the target mon, it comes back to the user.
 static void AnimBonemerangProjectile(struct Sprite *sprite)
 {
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[0] = 20;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[5] = -40;
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimBonemerangProjectile_Step;
@@ -160,8 +160,8 @@ static void AnimBonemerangProjectile_Step(struct Sprite *sprite)
         sprite->y2 = 0;
         sprite->x2 = 0;
         sprite->data[0] = 20;
-        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->data[5] = 40;
         InitAnimArcTranslation(sprite);
         sprite->callback = AnimBonemerangProjectile_End;
@@ -188,8 +188,8 @@ static void AnimBoneHitProjectile(struct Sprite *sprite)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
@@ -207,8 +207,8 @@ static void AnimDirtScatter(struct Sprite *sprite)
 
     InitSpritePosToAnimAttacker(sprite, 1);
 
-    targetXPos = GetBattlerSpriteCoord2(gBattleAnimTarget, 2);
-    targetYPos = GetBattlerSpriteCoord2(gBattleAnimTarget, 3);
+    targetXPos = GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_X_2);
+    targetYPos = GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     xOffset = Random2() & 0x1F;
     yOffset = Random2() & 0x1F;
@@ -234,8 +234,8 @@ static void AnimMudSportDirt(struct Sprite *sprite)
     sprite->oam.tileNum++;
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
         sprite->data[0] = gBattleAnimArgs[1] > 0 ? 1 : -1;
         sprite->callback = AnimMudSportDirtRising;
     }
@@ -518,7 +518,7 @@ void AnimDirtPlumeParticle(struct Sprite *sprite)
         gBattleAnimArgs[2] *= -1;
     }
 
-    sprite->x = GetBattlerSpriteCoord(battler, 2) + xOffset;
+    sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2) + xOffset;
     sprite->y = GetBattlerYCoordWithElevation(battler) + 30;
     sprite->data[0] = gBattleAnimArgs[5];
     sprite->data[2] = sprite->x + gBattleAnimArgs[2];
@@ -549,7 +549,7 @@ static void AnimDigDirtMound(struct Sprite *sprite)
     else
         battler = gBattleAnimTarget;
 
-    sprite->x = GetBattlerSpriteCoord(battler, 0) - 16 + (gBattleAnimArgs[1] * 32);
+    sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X) - 16 + (gBattleAnimArgs[1] * 32);
     sprite->y = GetBattlerYCoordWithElevation(battler) + 32;
     sprite->oam.tileNum += gBattleAnimArgs[1] * 8;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);

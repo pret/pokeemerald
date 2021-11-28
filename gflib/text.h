@@ -117,13 +117,6 @@ struct GlyphWidthFunc
     u32 (*func)(u16 glyphId, bool32 isJapanese);
 };
 
-struct KeypadIcon
-{
-    u16 tileOffset;
-    u8 width;
-    u8 height;
-};
-
 typedef struct {
     bool8 canABSpeedUpPrint:1;
     bool8 useAlternateDownArrow:1;
@@ -153,7 +146,6 @@ void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void DecompressGlyphTile(const void *src_, void *dest_);
-u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 u8 GetMenuCursorDimensionByFont(u8, u8);

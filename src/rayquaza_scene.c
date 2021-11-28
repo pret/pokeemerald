@@ -490,7 +490,7 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogreDorsalFin =
 
 static const struct ScanlineEffectParams sScanlineParams_DuoFight_Clouds =
 {
-    .dmaDest = (vu16 *)REG_ADDR_BG1HOFS,
+    .dmaDest = &REG_BG1HOFS,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
     .initState = 1
 };
@@ -3064,7 +3064,7 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
         ChasesAway_SetRayquazaAnim(sprite, 3, 48, 16);
         sprite->x2 = 1;
         gSprites[sprite->sTailSpriteId].x2 = 1;
-        PlayCry1(SPECIES_RAYQUAZA, 0);
+        PlayCry_Normal(SPECIES_RAYQUAZA, 0);
         CreateTask(Task_ChasesAway_AnimateRing, 0);
     }
     else
