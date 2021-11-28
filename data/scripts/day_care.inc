@@ -114,7 +114,7 @@ Route117_PokemonDayCare_EventScript_GiveMonToRaise::
 	goto_if_eq Route117_PokemonDayCare_EventScript_OnlyOneAliveMon
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
-	playmoncry VAR_0x8005, 0
+	playmoncry VAR_0x8005, CRY_MODE_NORMAL
 	msgbox Route117_PokemonDayCare_Text_WellRaiseYourMon, MSGBOX_DEFAULT
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
@@ -220,7 +220,7 @@ Route117_PokemonDayCare_EventScript_RetrieveMon::
 	playse SE_SHOP
 	msgbox Route117_PokemonDayCare_Text_HeresYourMon, MSGBOX_DEFAULT
 	waitse
-	playmoncry VAR_RESULT, 0
+	playmoncry VAR_RESULT, CRY_MODE_NORMAL
 	msgbox Route117_PokemonDayCare_Text_TookBackMon, MSGBOX_DEFAULT
 	waitmoncry
 	specialvar VAR_RESULT, GetDaycareState

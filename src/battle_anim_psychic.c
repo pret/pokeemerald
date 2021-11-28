@@ -650,8 +650,8 @@ static void AnimQuestionMark(struct Sprite *sprite)
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         x = -x;
 
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + x;
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + y;
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + x;
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + y;
 
     if (sprite->y < 16)
         sprite->y = 16;
@@ -1108,7 +1108,7 @@ static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId)
             task->data[0]++;
         break;
     case 2:
-        obj_delete_but_dont_free_vram(&gSprites[task->data[15]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[15]]);
         task->data[0]++;
         break;
     case 3:

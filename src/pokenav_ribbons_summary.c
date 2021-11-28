@@ -39,10 +39,10 @@ enum
 #define MON_SPRITE_X_OFF -32
 #define MON_SPRITE_Y     104
 
-struct PokenavSub13
+struct Pokenav_RibbonsSummaryList
 {
     u8 unused1[8];
-    struct PokenavSub18 *monList;
+    struct PokenavMonList *monList;
     u16 selectedPos;
     u16 normalRibbonLastRowStart;
     u16 numNormalRibbons;
@@ -50,10 +50,10 @@ struct PokenavSub13
     u32 ribbonIds[FIRST_GIFT_RIBBON];
     u32 giftRibbonIds[NUM_GIFT_RIBBONS];
     u32 unused2;
-    u32 (*callback)(struct PokenavSub13 *);
+    u32 (*callback)(struct Pokenav_RibbonsSummaryList *);
 };
 
-struct PokenavSub14
+struct Pokenav_RibbonsSummaryMenu
 {
     u32 (*callback)(void);
     u32 loopedTaskId;
@@ -71,31 +71,31 @@ struct PokenavSub14
 static u32 sRibbonDraw_Total;
 static u32 sRibbonDraw_Current;
 
-static void PrintCurrentMonRibbonCount(struct PokenavSub14 *);
-static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *);
-static void PrintRibbonsMonListIndex(struct PokenavSub14 *);
-static void ZoomOutSelectedRibbon(struct PokenavSub14 *);
-static void UpdateAndZoomInSelectedRibbon(struct PokenavSub14 *);
-static void PrintRibbonNameAndDescription(struct PokenavSub14 *);
-static void ResetSpritesAndDrawMonFrontPic(struct PokenavSub14 *);
-static void AddRibbonListIndexWindow(struct PokenavSub14 *);
-static void DestroyRibbonsMonFrontPic(struct PokenavSub14 *);
-static void SlideMonSpriteOff(struct PokenavSub14 *);
-static void SlideMonSpriteOn(struct PokenavSub14 *);
-static void AddRibbonCountWindow(struct PokenavSub14 *);
-static void CreateBigRibbonSprite(struct PokenavSub14 *);
-static void AddRibbonSummaryMonNameWindow(struct PokenavSub14 *);
-static void DrawAllRibbonsSmall(struct PokenavSub14 *);
-static bool32 IsRibbonAnimating(struct PokenavSub14 *);
-static bool32 IsMonSpriteAnimating(struct PokenavSub14 *);
-static void GetMonRibbons(struct PokenavSub13 *);
-static u32 HandleExpandedRibbonInput(struct PokenavSub13 *);
-static u32 RibbonsSummaryHandleInput(struct PokenavSub13 *);
-static u32 ReturnToRibbonsListFromSummary(struct PokenavSub13 *);
-static bool32 TrySelectRibbonUp(struct PokenavSub13 *);
-static bool32 TrySelectRibbonRight(struct PokenavSub13 *);
-static bool32 TrySelectRibbonLeft(struct PokenavSub13 *);
-static bool32 TrySelectRibbonDown(struct PokenavSub13 *);
+static void PrintCurrentMonRibbonCount(struct Pokenav_RibbonsSummaryMenu *);
+static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *);
+static void PrintRibbonsMonListIndex(struct Pokenav_RibbonsSummaryMenu *);
+static void ZoomOutSelectedRibbon(struct Pokenav_RibbonsSummaryMenu *);
+static void UpdateAndZoomInSelectedRibbon(struct Pokenav_RibbonsSummaryMenu *);
+static void PrintRibbonNameAndDescription(struct Pokenav_RibbonsSummaryMenu *);
+static void ResetSpritesAndDrawMonFrontPic(struct Pokenav_RibbonsSummaryMenu *);
+static void AddRibbonListIndexWindow(struct Pokenav_RibbonsSummaryMenu *);
+static void DestroyRibbonsMonFrontPic(struct Pokenav_RibbonsSummaryMenu *);
+static void SlideMonSpriteOff(struct Pokenav_RibbonsSummaryMenu *);
+static void SlideMonSpriteOn(struct Pokenav_RibbonsSummaryMenu *);
+static void AddRibbonCountWindow(struct Pokenav_RibbonsSummaryMenu *);
+static void CreateBigRibbonSprite(struct Pokenav_RibbonsSummaryMenu *);
+static void AddRibbonSummaryMonNameWindow(struct Pokenav_RibbonsSummaryMenu *);
+static void DrawAllRibbonsSmall(struct Pokenav_RibbonsSummaryMenu *);
+static bool32 IsRibbonAnimating(struct Pokenav_RibbonsSummaryMenu *);
+static bool32 IsMonSpriteAnimating(struct Pokenav_RibbonsSummaryMenu *);
+static void GetMonRibbons(struct Pokenav_RibbonsSummaryList *);
+static u32 HandleExpandedRibbonInput(struct Pokenav_RibbonsSummaryList *);
+static u32 RibbonsSummaryHandleInput(struct Pokenav_RibbonsSummaryList *);
+static u32 ReturnToRibbonsListFromSummary(struct Pokenav_RibbonsSummaryList *);
+static bool32 TrySelectRibbonUp(struct Pokenav_RibbonsSummaryList *);
+static bool32 TrySelectRibbonRight(struct Pokenav_RibbonsSummaryList *);
+static bool32 TrySelectRibbonLeft(struct Pokenav_RibbonsSummaryList *);
+static bool32 TrySelectRibbonDown(struct Pokenav_RibbonsSummaryList *);
 static bool32 GetCurrentLoopedTaskActive(void);
 static u32 GetRibbonsSummaryCurrentIndex(void);
 static u32 GetRibbonsSummaryMonListCount(void);
@@ -186,16 +186,16 @@ static const LoopedTask sRibbonsSummaryMenuLoopTaskFuncs[] =
 
 bool32 PokenavCallback_Init_RibbonsSummaryMenu(void)
 {
-    struct PokenavSub13 *structPtr = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST, sizeof(struct PokenavSub13));
-    if (structPtr == NULL)
+    struct Pokenav_RibbonsSummaryList *list = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST, sizeof(struct Pokenav_RibbonsSummaryList));
+    if (list == NULL)
         return FALSE;
 
-    structPtr->monList = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
-    if (structPtr->monList == NULL)
+    list->monList = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    if (list->monList == NULL)
         return FALSE;
 
-    GetMonRibbons(structPtr);
-    structPtr->callback = RibbonsSummaryHandleInput;
+    GetMonRibbons(list);
+    list->callback = RibbonsSummaryHandleInput;
     gKeyRepeatContinueDelay = 3;
     gKeyRepeatStartDelay = 10;
     return TRUE;
@@ -203,8 +203,8 @@ bool32 PokenavCallback_Init_RibbonsSummaryMenu(void)
 
 u32 GetRibbonsSummaryMenuCallback(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    return structPtr->callback(structPtr);
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return list->callback(list);
 }
 
 void FreeRibbonsSummaryScreen1(void)
@@ -213,150 +213,150 @@ void FreeRibbonsSummaryScreen1(void)
 }
 
 // Handles input when a specific ribbon is not currently selected
-static u32 RibbonsSummaryHandleInput(struct PokenavSub13 *structPtr)
+static u32 RibbonsSummaryHandleInput(struct Pokenav_RibbonsSummaryList *list)
 {
     // Handle Up/Down movement to select a new Pokémon to show ribbons for
-    if (JOY_REPEAT(DPAD_UP) && structPtr->monList->currIndex != 0)
+    if (JOY_REPEAT(DPAD_UP) && list->monList->currIndex != 0)
     {
-        structPtr->monList->currIndex--;
-        structPtr->selectedPos = 0;
-        GetMonRibbons(structPtr);
+        list->monList->currIndex--;
+        list->selectedPos = 0;
+        GetMonRibbons(list);
         return RIBBONS_SUMMARY_FUNC_SWITCH_MONS;
     }
-    if (JOY_REPEAT(DPAD_DOWN) && structPtr->monList->currIndex < structPtr->monList->listCount - 1)
+    if (JOY_REPEAT(DPAD_DOWN) && list->monList->currIndex < list->monList->listCount - 1)
     {
-        structPtr->monList->currIndex++;
-        structPtr->selectedPos = 0;
-        GetMonRibbons(structPtr);
+        list->monList->currIndex++;
+        list->selectedPos = 0;
+        GetMonRibbons(list);
         return RIBBONS_SUMMARY_FUNC_SWITCH_MONS;
     }
 
     if (JOY_NEW(A_BUTTON))
     {
         // Enter ribbon selection
-        structPtr->callback = HandleExpandedRibbonInput;
+        list->callback = HandleExpandedRibbonInput;
         return RIBBONS_SUMMARY_FUNC_SELECT_RIBBON;
     }
     if (JOY_NEW(B_BUTTON))
     {
         // Exit ribbon summary menu
-        structPtr->callback = ReturnToRibbonsListFromSummary;
+        list->callback = ReturnToRibbonsListFromSummary;
         return RIBBONS_SUMMARY_FUNC_EXIT;
     }
     return RIBBONS_SUMMARY_FUNC_NONE;
 }
 
 // Handles input when a ribbon is selected
-static u32 HandleExpandedRibbonInput(struct PokenavSub13 *structPtr)
+static u32 HandleExpandedRibbonInput(struct Pokenav_RibbonsSummaryList *list)
 {
     // Handle movement while a ribbon is selected
-    if (JOY_REPEAT(DPAD_UP) && TrySelectRibbonUp(structPtr))
+    if (JOY_REPEAT(DPAD_UP) && TrySelectRibbonUp(list))
         return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
-    if (JOY_REPEAT(DPAD_DOWN) && TrySelectRibbonDown(structPtr))
+    if (JOY_REPEAT(DPAD_DOWN) && TrySelectRibbonDown(list))
         return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
-    if (JOY_REPEAT(DPAD_LEFT) && TrySelectRibbonLeft(structPtr))
+    if (JOY_REPEAT(DPAD_LEFT) && TrySelectRibbonLeft(list))
         return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
-    if (JOY_REPEAT(DPAD_RIGHT) && TrySelectRibbonRight(structPtr))
+    if (JOY_REPEAT(DPAD_RIGHT) && TrySelectRibbonRight(list))
         return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
 
     if (JOY_NEW(B_BUTTON))
     {
         // Exit ribbon selection
-        structPtr->callback = RibbonsSummaryHandleInput;
+        list->callback = RibbonsSummaryHandleInput;
         return RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL;
     }
     return RIBBONS_SUMMARY_FUNC_NONE;
 }
 
-static u32 ReturnToRibbonsListFromSummary(struct PokenavSub13 *structPtr)
+static u32 ReturnToRibbonsListFromSummary(struct Pokenav_RibbonsSummaryList *list)
 {
     return POKENAV_RIBBONS_RETURN_TO_MON_LIST;
 }
 
-static bool32 TrySelectRibbonUp(struct PokenavSub13 *structPtr)
+static bool32 TrySelectRibbonUp(struct Pokenav_RibbonsSummaryList *list)
 {
-    if (structPtr->selectedPos < FIRST_GIFT_RIBBON)
+    if (list->selectedPos < FIRST_GIFT_RIBBON)
     {
         // In normal ribbons, try to move up a row
-        if (structPtr->selectedPos < RIBBONS_PER_ROW)
+        if (list->selectedPos < RIBBONS_PER_ROW)
             return FALSE;
 
-        structPtr->selectedPos -= RIBBONS_PER_ROW;
+        list->selectedPos -= RIBBONS_PER_ROW;
         return TRUE;
     }
-    if (structPtr->numNormalRibbons != 0)
+    if (list->numNormalRibbons != 0)
     {
         // In gift ribbons, try to move up into normal ribbons
         // If there's > 1 row of gift ribbons (not normally possible)
         // it's impossible to move up between them
-        u32 ribbonPos = structPtr->selectedPos - GIFT_RIBBON_START_POS;
-        structPtr->selectedPos = ribbonPos + structPtr->normalRibbonLastRowStart;
-        if (structPtr->selectedPos >= structPtr->numNormalRibbons)
-            structPtr->selectedPos = structPtr->numNormalRibbons - 1;
+        u32 ribbonPos = list->selectedPos - GIFT_RIBBON_START_POS;
+        list->selectedPos = ribbonPos + list->normalRibbonLastRowStart;
+        if (list->selectedPos >= list->numNormalRibbons)
+            list->selectedPos = list->numNormalRibbons - 1;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 TrySelectRibbonDown(struct PokenavSub13 *structPtr)
+static bool32 TrySelectRibbonDown(struct Pokenav_RibbonsSummaryList *list)
 {
-    if (structPtr->selectedPos >= FIRST_GIFT_RIBBON)
+    if (list->selectedPos >= FIRST_GIFT_RIBBON)
         return FALSE;
-    if (structPtr->selectedPos < structPtr->normalRibbonLastRowStart)
+    if (list->selectedPos < list->normalRibbonLastRowStart)
     {
         // Not in last row of normal ribbons, advance to next row
-        structPtr->selectedPos += RIBBONS_PER_ROW;
-        if (structPtr->selectedPos >= structPtr->numNormalRibbons)
-            structPtr->selectedPos = structPtr->numNormalRibbons - 1;
+        list->selectedPos += RIBBONS_PER_ROW;
+        if (list->selectedPos >= list->numNormalRibbons)
+            list->selectedPos = list->numNormalRibbons - 1;
         return TRUE;
     }
-    if (structPtr->numGiftRibbons != 0)
+    if (list->numGiftRibbons != 0)
     {
         // In/beyond last of row of normal ribbons and gift ribbons present, move down to gift ribbon row
-        int ribbonPos = structPtr->selectedPos - structPtr->normalRibbonLastRowStart;
-        if (ribbonPos >= structPtr->numGiftRibbons)
-            ribbonPos = structPtr->numGiftRibbons - 1;
+        int ribbonPos = list->selectedPos - list->normalRibbonLastRowStart;
+        if (ribbonPos >= list->numGiftRibbons)
+            ribbonPos = list->numGiftRibbons - 1;
 
-        structPtr->selectedPos = ribbonPos + GIFT_RIBBON_START_POS;
+        list->selectedPos = ribbonPos + GIFT_RIBBON_START_POS;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 TrySelectRibbonLeft(struct PokenavSub13 *structPtr)
+static bool32 TrySelectRibbonLeft(struct Pokenav_RibbonsSummaryList *list)
 {
-    u16 column = structPtr->selectedPos % RIBBONS_PER_ROW;
+    u16 column = list->selectedPos % RIBBONS_PER_ROW;
     if (column != 0)
     {
-        structPtr->selectedPos--;
+        list->selectedPos--;
         return TRUE;
     }
 
     return FALSE;
 }
 
-static bool32 TrySelectRibbonRight(struct PokenavSub13 *structPtr)
+static bool32 TrySelectRibbonRight(struct Pokenav_RibbonsSummaryList *list)
 {
-    int column = structPtr->selectedPos % RIBBONS_PER_ROW;
+    int column = list->selectedPos % RIBBONS_PER_ROW;
 
     if (column >= RIBBONS_PER_ROW - 1)
         return FALSE;
 
-    if (structPtr->selectedPos < GIFT_RIBBON_START_POS)
+    if (list->selectedPos < GIFT_RIBBON_START_POS)
     {
         // Move right in normal ribbon row
-        if (structPtr->selectedPos < structPtr->numNormalRibbons - 1)
+        if (list->selectedPos < list->numNormalRibbons - 1)
         {
-            structPtr->selectedPos++;
+            list->selectedPos++;
             return TRUE;
         }
     }
     else
     {
         // Move right in gift ribbon row
-        if (column < structPtr->numGiftRibbons - 1)
+        if (column < list->numGiftRibbons - 1)
         {
-            structPtr->selectedPos++;
+            list->selectedPos++;
             return TRUE;
         }
     }
@@ -365,21 +365,21 @@ static bool32 TrySelectRibbonRight(struct PokenavSub13 *structPtr)
 
 static u32 GetRibbonsSummaryCurrentIndex(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    return structPtr->monList->currIndex;
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return list->monList->currIndex;
 }
 
 static u32 GetRibbonsSummaryMonListCount(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    return structPtr->monList->listCount;
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return list->monList->listCount;
 }
 
 static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    struct PokenavSub18 *mons = structPtr->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
@@ -402,9 +402,9 @@ static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
 
 static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *otId)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    struct PokenavSub18 *mons = structPtr->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
@@ -426,9 +426,9 @@ static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *ot
 
 static u32 GetCurrMonRibbonCount(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    struct PokenavSub18 *mons = structPtr->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
         return GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBON_COUNT);
@@ -436,20 +436,20 @@ static u32 GetCurrMonRibbonCount(void)
         return GetBoxMonDataAt(monInfo->boxId, monInfo->monId, MON_DATA_RIBBON_COUNT);
 }
 
-static void GetMonRibbons(struct PokenavSub13 *structPtr)
+static void GetMonRibbons(struct Pokenav_RibbonsSummaryList *list)
 {
     u32 ribbonFlags;
     s32 i, j;
-    struct PokenavSub18 *mons = structPtr->monList;
-    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
+    struct PokenavMonList *mons = list->monList;
+    struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
         ribbonFlags = GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBONS);
     else
         ribbonFlags = GetBoxMonDataAt(monInfo->boxId, monInfo->monId, MON_DATA_RIBBONS);
 
-    structPtr->numNormalRibbons = 0;
-    structPtr->numGiftRibbons = 0;
+    list->numNormalRibbons = 0;
+    list->numGiftRibbons = 0;
     for (i = 0; i < ARRAY_COUNT(sRibbonData); i++)
     {
         // For all non-contest ribbons, numRibbons will be 1 if they have it, 0 if they don't
@@ -458,119 +458,119 @@ static void GetMonRibbons(struct PokenavSub13 *structPtr)
         if (!sRibbonData[i].isGiftRibbon)
         {
             for (j = 0; j < numRibbons; j++)
-                structPtr->ribbonIds[structPtr->numNormalRibbons++] = sRibbonData[i].ribbonId + j;
+                list->ribbonIds[list->numNormalRibbons++] = sRibbonData[i].ribbonId + j;
         }
         else
         {
             for (j = 0; j < numRibbons; j++)
-                structPtr->giftRibbonIds[structPtr->numGiftRibbons++] = sRibbonData[i].ribbonId + j;
+                list->giftRibbonIds[list->numGiftRibbons++] = sRibbonData[i].ribbonId + j;
         }
         ribbonFlags >>= sRibbonData[i].numBits;
     }
 
-    if (structPtr->numNormalRibbons != 0)
+    if (list->numNormalRibbons != 0)
     {
-        structPtr->normalRibbonLastRowStart = ((structPtr->numNormalRibbons - 1) / RIBBONS_PER_ROW) * RIBBONS_PER_ROW;
-        structPtr->selectedPos = 0;
+        list->normalRibbonLastRowStart = ((list->numNormalRibbons - 1) / RIBBONS_PER_ROW) * RIBBONS_PER_ROW;
+        list->selectedPos = 0;
     }
     else
     {
         // There are no normal ribbons, move cursor to first gift ribbon
-        structPtr->normalRibbonLastRowStart = 0;
-        structPtr->selectedPos = GIFT_RIBBON_START_POS;
+        list->normalRibbonLastRowStart = 0;
+        list->selectedPos = GIFT_RIBBON_START_POS;
     }
 }
 
 static u32 *GetNormalRibbonIds(u32 *size)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    *size = structPtr->numNormalRibbons;
-    return structPtr->ribbonIds;
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    *size = list->numNormalRibbons;
+    return list->ribbonIds;
 }
 
 static u32 *GetGiftRibbonIds(u32 *size)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    *size = structPtr->numGiftRibbons;
-    return structPtr->giftRibbonIds;
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    *size = list->numGiftRibbons;
+    return list->giftRibbonIds;
 }
 
 static u16 GetSelectedPosition(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    return structPtr->selectedPos;
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return list->selectedPos;
 }
 
 static u32 GetRibbonId(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    int ribbonPos = structPtr->selectedPos;
+    struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    int ribbonPos = list->selectedPos;
     if (ribbonPos < FIRST_GIFT_RIBBON)
-        return structPtr->ribbonIds[ribbonPos];
+        return list->ribbonIds[ribbonPos];
     else
-        return structPtr->giftRibbonIds[ribbonPos - GIFT_RIBBON_START_POS];
+        return list->giftRibbonIds[ribbonPos - GIFT_RIBBON_START_POS];
 }
 
 bool32 OpenRibbonsSummaryMenu(void)
 {
-    struct PokenavSub14 *structPtr = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU, sizeof(struct PokenavSub14));
-    if (structPtr == NULL)
+    struct Pokenav_RibbonsSummaryMenu *menu = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU, sizeof(struct Pokenav_RibbonsSummaryMenu));
+    if (menu == NULL)
         return FALSE;
 
-    structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_OpenRibbonsSummaryMenu, 1);
-    structPtr->callback = GetCurrentLoopedTaskActive;
+    menu->loopedTaskId = CreateLoopedTask(LoopedTask_OpenRibbonsSummaryMenu, 1);
+    menu->callback = GetCurrentLoopedTaskActive;
     return TRUE;
 }
 
 void CreateRibbonsSummaryLoopedTask(s32 id)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
-    structPtr->loopedTaskId = CreateLoopedTask(sRibbonsSummaryMenuLoopTaskFuncs[id], 1);
-    structPtr->callback = GetCurrentLoopedTaskActive;
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    menu->loopedTaskId = CreateLoopedTask(sRibbonsSummaryMenuLoopTaskFuncs[id], 1);
+    menu->callback = GetCurrentLoopedTaskActive;
 }
 
 u32 IsRibbonsSummaryLoopedTaskActive(void)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
-    return structPtr->callback();
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    return menu->callback();
 }
 
 void FreeRibbonsSummaryScreen2(void)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
-    RemoveWindow(structPtr->ribbonCountWindowId);
-    RemoveWindow(structPtr->nameWindowId);
-    RemoveWindow(structPtr->listIdxWindowId);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    RemoveWindow(menu->ribbonCountWindowId);
+    RemoveWindow(menu->nameWindowId);
+    RemoveWindow(menu->listIdxWindowId);
 #ifndef BUGFIX
-    RemoveWindow(structPtr->unusedWindowId); // Removing window, but window id is never set
+    RemoveWindow(menu->unusedWindowId); // Removing window, but window id is never set
 #endif
-    DestroyRibbonsMonFrontPic(structPtr);
+    DestroyRibbonsMonFrontPic(menu);
     FreeSpriteTilesByTag(GFXTAG_RIBBON_ICONS_BIG);
     FreeSpritePaletteByTag(PALTAG_RIBBON_ICONS_1);
     FreeSpritePaletteByTag(PALTAG_RIBBON_ICONS_2);
     FreeSpritePaletteByTag(PALTAG_RIBBON_ICONS_3);
     FreeSpritePaletteByTag(PALTAG_RIBBON_ICONS_4);
     FreeSpritePaletteByTag(PALTAG_RIBBON_ICONS_5);
-    FreeSpriteOamMatrix(structPtr->bigRibbonSprite);
-    DestroySprite(structPtr->bigRibbonSprite);
+    FreeSpriteOamMatrix(menu->bigRibbonSprite);
+    DestroySprite(menu->bigRibbonSprite);
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
 }
 
 static bool32 GetCurrentLoopedTaskActive(void)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
-    return IsLoopedTaskActive(structPtr->loopedTaskId);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    return IsLoopedTaskActive(menu->loopedTaskId);
 }
 
 static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
         InitBgTemplates(sBgTemplates, ARRAY_COUNT(sBgTemplates));
         DecompressAndCopyTileDataToVram(2, gPokenavRibbonsSummaryBg_Gfx, 0, 0, 0);
-        SetBgTilemapBuffer(2, structPtr->tilemapBuffers[0]);
+        SetBgTilemapBuffer(2, menu->tilemapBuffers[0]);
         CopyToBgTilemapBuffer(2, gPokenavRibbonsSummaryBg_Tilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, 0x10, 0x20);
         CopyBgTilemapBufferToVram(2);
@@ -580,7 +580,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
         {
             BgDmaFill(1, 0, 0, 1);
             DecompressAndCopyTileDataToVram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
-            SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
+            SetBgTilemapBuffer(1, menu->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
             CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, 0x20, 0xA0);
             CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, 0xA0, 0x20);
@@ -591,21 +591,21 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            AddRibbonCountWindow(structPtr);
+            AddRibbonCountWindow(menu);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            AddRibbonSummaryMonNameWindow(structPtr);
+            AddRibbonSummaryMonNameWindow(menu);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
     case 4:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            AddRibbonListIndexWindow(structPtr);
+            AddRibbonListIndexWindow(menu);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -619,18 +619,18 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
     case 6:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            ResetSpritesAndDrawMonFrontPic(structPtr);
+            ResetSpritesAndDrawMonFrontPic(menu);
             return LT_INC_AND_CONTINUE;
         }
         return LT_PAUSE;
     case 7:
-        DrawAllRibbonsSmall(structPtr);
+        DrawAllRibbonsSmall(menu);
         PrintHelpBarText(HELPBAR_RIBBONS_LIST);
         return LT_INC_AND_PAUSE;
     case 8:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateBigRibbonSprite(structPtr);
+            CreateBigRibbonSprite(menu);
             ChangeBgX(1, 0, BG_COORD_SET);
             ChangeBgY(1, 0, BG_COORD_SET);
             ChangeBgX(2, 0, BG_COORD_SET);
@@ -638,7 +638,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
             ShowBg(1);
             ShowBg(2);
             HideBg(3);
-            PokenavFadeScreen(1);
+            PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -655,7 +655,7 @@ static u32 LoopedTask_ExitRibbonsSummaryMenu(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        PokenavFadeScreen(0);
+        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsPaletteFadeActive())
@@ -667,38 +667,38 @@ static u32 LoopedTask_ExitRibbonsSummaryMenu(s32 state)
 
 static u32 LoopedTask_SwitchRibbonsSummaryMon(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        SlideMonSpriteOff(structPtr);
+        SlideMonSpriteOff(menu);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (!IsMonSpriteAnimating(structPtr))
+        if (!IsMonSpriteAnimating(menu))
         {
-            PrintRibbbonsSummaryMonInfo(structPtr);
+            PrintRibbbonsSummaryMonInfo(menu);
             return LT_INC_AND_CONTINUE;
         }
         return LT_PAUSE;
     case 2:
-        DrawAllRibbonsSmall(structPtr);
+        DrawAllRibbonsSmall(menu);
         return LT_INC_AND_CONTINUE;
     case 3:
-        PrintRibbonsMonListIndex(structPtr);
+        PrintRibbonsMonListIndex(menu);
         return LT_INC_AND_CONTINUE;
     case 4:
-        PrintCurrentMonRibbonCount(structPtr);
+        PrintCurrentMonRibbonCount(menu);
         return LT_INC_AND_CONTINUE;
     case 5:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            SlideMonSpriteOn(structPtr);
+            SlideMonSpriteOn(menu);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
     case 6:
-        if (IsMonSpriteAnimating(structPtr))
+        if (IsMonSpriteAnimating(menu))
             return LT_PAUSE;
     }
     return LT_FINISH;
@@ -706,17 +706,17 @@ static u32 LoopedTask_SwitchRibbonsSummaryMon(s32 state)
 
 static u32 LoopedTask_ExpandSelectedRibbon(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        UpdateAndZoomInSelectedRibbon(structPtr);
+        UpdateAndZoomInSelectedRibbon(menu);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (!IsRibbonAnimating(structPtr))
+        if (!IsRibbonAnimating(menu))
         {
-            PrintRibbonNameAndDescription(structPtr);
+            PrintRibbonNameAndDescription(menu);
             PrintHelpBarText(HELPBAR_RIBBONS_CHECK);
             return LT_INC_AND_PAUSE;
         }
@@ -730,24 +730,24 @@ static u32 LoopedTask_ExpandSelectedRibbon(s32 state)
 
 static u32 LoopedTask_MoveRibbonsCursorExpanded(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        ZoomOutSelectedRibbon(structPtr);
+        ZoomOutSelectedRibbon(menu);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (!IsRibbonAnimating(structPtr))
+        if (!IsRibbonAnimating(menu))
         {
-            UpdateAndZoomInSelectedRibbon(structPtr);
+            UpdateAndZoomInSelectedRibbon(menu);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
     case 2:
-        if (!IsRibbonAnimating(structPtr))
+        if (!IsRibbonAnimating(menu))
         {
-            PrintRibbonNameAndDescription(structPtr);
+            PrintRibbonNameAndDescription(menu);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -760,17 +760,17 @@ static u32 LoopedTask_MoveRibbonsCursorExpanded(s32 state)
 
 static u32 LoopedTask_ShrinkExpandedRibbon(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    struct Pokenav_RibbonsSummaryMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        ZoomOutSelectedRibbon(structPtr);
+        ZoomOutSelectedRibbon(menu);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (!IsRibbonAnimating(structPtr))
+        if (!IsRibbonAnimating(menu))
         {
-            PrintCurrentMonRibbonCount(structPtr);
+            PrintCurrentMonRibbonCount(menu);
             PrintHelpBarText(HELPBAR_RIBBONS_LIST);
             return LT_INC_AND_PAUSE;
         }
@@ -793,14 +793,14 @@ static const struct WindowTemplate sRibbonCountWindowTemplate =
     .baseBlock = 0x14,
 };
 
-static void AddRibbonCountWindow(struct PokenavSub14 *structPtr)
+static void AddRibbonCountWindow(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    structPtr->ribbonCountWindowId = AddWindow(&sRibbonCountWindowTemplate);
-    PutWindowTilemap(structPtr->ribbonCountWindowId);
-    PrintCurrentMonRibbonCount(structPtr);
+    menu->ribbonCountWindowId = AddWindow(&sRibbonCountWindowTemplate);
+    PutWindowTilemap(menu->ribbonCountWindowId);
+    PrintCurrentMonRibbonCount(menu);
 }
 
-static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
+static void PrintCurrentMonRibbonCount(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
@@ -808,23 +808,23 @@ static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
-    FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
-    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, 1, color, TEXT_SKIP_DRAW, gStringVar4);
-    CopyWindowToVram(structPtr->ribbonCountWindowId, COPYWIN_GFX);
+    FillWindowPixelBuffer(menu->ribbonCountWindowId, PIXEL_FILL(4));
+    AddTextPrinterParameterized3(menu->ribbonCountWindowId, FONT_NORMAL, 0, 1, color, TEXT_SKIP_DRAW, gStringVar4);
+    CopyWindowToVram(menu->ribbonCountWindowId, COPYWIN_GFX);
 }
 
-static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
+static void PrintRibbonNameAndDescription(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     s32 i;
     u32 ribbonId = GetRibbonId();
     u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
-    FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
+    FillWindowPixelBuffer(menu->ribbonCountWindowId, PIXEL_FILL(4));
     if (ribbonId < FIRST_GIFT_RIBBON)
     {
         // Print normal ribbon name/description
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, TEXT_SKIP_DRAW, gRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(menu->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, TEXT_SKIP_DRAW, gRibbonDescriptionPointers[ribbonId][i]);
     }
     else
     {
@@ -840,10 +840,10 @@ static void PrintRibbonNameAndDescription(struct PokenavSub14 *structPtr)
         // Print gift ribbon name/description
         ribbonId--;
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, TEXT_SKIP_DRAW, gGiftRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(menu->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, TEXT_SKIP_DRAW, gGiftRibbonDescriptionPointers[ribbonId][i]);
     }
 
-    CopyWindowToVram(structPtr->ribbonCountWindowId, COPYWIN_GFX);
+    CopyWindowToVram(menu->ribbonCountWindowId, COPYWIN_GFX);
 }
 
 static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
@@ -857,23 +857,23 @@ static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
     .baseBlock = 0x54,
 };
 
-static void AddRibbonSummaryMonNameWindow(struct PokenavSub14 *structPtr)
+static void AddRibbonSummaryMonNameWindow(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    structPtr->nameWindowId = AddWindow(&sRibbonSummaryMonNameWindowTemplate);
-    PutWindowTilemap(structPtr->nameWindowId);
-    PrintRibbbonsSummaryMonInfo(structPtr);
+    menu->nameWindowId = AddWindow(&sRibbonSummaryMonNameWindowTemplate);
+    PutWindowTilemap(menu->nameWindowId);
+    PrintRibbbonsSummaryMonInfo(menu);
 }
 
 static const u8 sMaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
 static const u8 sFemaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
 static const u8 sGenderlessIconString[] = _("{UNK_SPACER}");
 
-static void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
+static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     const u8 *genderTxt;
     u8 *txtPtr;
     u8 level, gender;
-    u16 windowId = structPtr->nameWindowId;
+    u16 windowId = menu->nameWindowId;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
@@ -914,15 +914,15 @@ static const struct WindowTemplate sRibbonMonListIndexWindowTemplate[] =
     {},
 };
 
-static void AddRibbonListIndexWindow(struct PokenavSub14 *structPtr)
+static void AddRibbonListIndexWindow(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    structPtr->listIdxWindowId = AddWindow(sRibbonMonListIndexWindowTemplate);
-    FillWindowPixelBuffer(structPtr->listIdxWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(structPtr->listIdxWindowId);
-    PrintRibbonsMonListIndex(structPtr);
+    menu->listIdxWindowId = AddWindow(sRibbonMonListIndexWindowTemplate);
+    FillWindowPixelBuffer(menu->listIdxWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(menu->listIdxWindowId);
+    PrintRibbonsMonListIndex(menu);
 }
 
-static void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr)
+static void PrintRibbonsMonListIndex(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     s32 x;
     u8 *txtPtr;
@@ -933,24 +933,24 @@ static void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr)
     *(txtPtr++) = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, count, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar1, 56);
-    AddTextPrinterParameterized(structPtr->listIdxWindowId, FONT_NORMAL, gStringVar1, x, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(structPtr->listIdxWindowId, COPYWIN_GFX);
+    AddTextPrinterParameterized(menu->listIdxWindowId, FONT_NORMAL, gStringVar1, x, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(menu->listIdxWindowId, COPYWIN_GFX);
 }
 
-static void ResetSpritesAndDrawMonFrontPic(struct PokenavSub14 *structPtr)
+static void ResetSpritesAndDrawMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     u16 species;
     u32 personality, otId;
 
     GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
     ResetAllPicSprites();
-    structPtr->monSpriteId = DrawRibbonsMonFrontPic(MON_SPRITE_X_ON, MON_SPRITE_Y);
+    menu->monSpriteId = DrawRibbonsMonFrontPic(MON_SPRITE_X_ON, MON_SPRITE_Y);
     PokenavFillPalette(15, 0);
 }
 
-static void DestroyRibbonsMonFrontPic(struct PokenavSub14 *structPtr)
+static void DestroyRibbonsMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    FreeAndDestroyMonPicSprite(structPtr->monSpriteId);
+    FreeAndDestroyMonPicSprite(menu->monSpriteId);
 }
 
 // x and y arguments are ignored
@@ -967,25 +967,25 @@ static u16 DrawRibbonsMonFrontPic(s32 x, s32 y)
     return spriteId;
 }
 
-static void SlideMonSpriteOff(struct PokenavSub14 *structPtr)
+static void SlideMonSpriteOff(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    StartMonSpriteSlide(&gSprites[structPtr->monSpriteId], MON_SPRITE_X_ON, MON_SPRITE_X_OFF, 6);
+    StartMonSpriteSlide(&gSprites[menu->monSpriteId], MON_SPRITE_X_ON, MON_SPRITE_X_OFF, 6);
 }
 
-static void SlideMonSpriteOn(struct PokenavSub14 *structPtr)
+static void SlideMonSpriteOn(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     // Switch to new mon sprite
-    FreeAndDestroyMonPicSprite(structPtr->monSpriteId);
-    structPtr->monSpriteId = DrawRibbonsMonFrontPic(MON_SPRITE_X_OFF, MON_SPRITE_Y);
+    FreeAndDestroyMonPicSprite(menu->monSpriteId);
+    menu->monSpriteId = DrawRibbonsMonFrontPic(MON_SPRITE_X_OFF, MON_SPRITE_Y);
 
     // Slide on
-    StartMonSpriteSlide(&gSprites[structPtr->monSpriteId], MON_SPRITE_X_OFF, MON_SPRITE_X_ON, 6);
+    StartMonSpriteSlide(&gSprites[menu->monSpriteId], MON_SPRITE_X_OFF, MON_SPRITE_X_ON, 6);
 }
 
 // Is Pokémon summary sprite still sliding off/on
-static bool32 IsMonSpriteAnimating(struct PokenavSub14 *structPtr)
+static bool32 IsMonSpriteAnimating(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    return (gSprites[structPtr->monSpriteId].callback != SpriteCallbackDummy);
+    return (gSprites[menu->monSpriteId].callback != SpriteCallbackDummy);
 }
 
 #define sCurrX    data[0]
@@ -1030,7 +1030,7 @@ static void SpriteCB_MonSpriteSlide(struct Sprite *sprite)
 #undef sTime
 #undef sDestX
 
-static void DrawAllRibbonsSmall(struct PokenavSub14 *structPtr)
+static void DrawAllRibbonsSmall(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     u32 *ribbonIds;
 
@@ -1211,7 +1211,7 @@ static const struct SpriteTemplate sSpriteTemplate_RibbonIconBig =
 };
 
 // Create dummy sprite to be used for the zoomed in version of the selected ribbon
-static void CreateBigRibbonSprite(struct PokenavSub14 *structPtr)
+static void CreateBigRibbonSprite(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     u8 spriteId;
 
@@ -1219,45 +1219,45 @@ static void CreateBigRibbonSprite(struct PokenavSub14 *structPtr)
     Pokenav_AllocAndLoadPalettes(sSpritePalettes_RibbonIcons);
 
     spriteId = CreateSprite(&sSpriteTemplate_RibbonIconBig, 0, 0, 0);
-    structPtr->bigRibbonSprite = &gSprites[spriteId];
-    structPtr->bigRibbonSprite->invisible = TRUE;
+    menu->bigRibbonSprite = &gSprites[spriteId];
+    menu->bigRibbonSprite->invisible = TRUE;
 }
 
 #define sInvisibleWhenDone data[0]
 
-static void UpdateAndZoomInSelectedRibbon(struct PokenavSub14 *structPtr)
+static void UpdateAndZoomInSelectedRibbon(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     u32 ribbonId;
     s32 position = GetSelectedPosition();
     s32 x = (position % RIBBONS_PER_ROW) * 16 + 96;
     s32 y = (position / RIBBONS_PER_ROW) * 16 + 40;
 
-    structPtr->bigRibbonSprite->x = x;
-    structPtr->bigRibbonSprite->y = y;
+    menu->bigRibbonSprite->x = x;
+    menu->bigRibbonSprite->y = y;
 
     // Set new selected ribbon's gfx data
     ribbonId = GetRibbonId();
-    structPtr->bigRibbonSprite->oam.tileNum = (sRibbonGfxData[ribbonId].tileNumOffset * 16) + GetSpriteTileStartByTag(GFXTAG_RIBBON_ICONS_BIG);
-    structPtr->bigRibbonSprite->oam.paletteNum = IndexOfSpritePaletteTag(sRibbonGfxData[ribbonId].palNumOffset + PALTAG_RIBBON_ICONS_1);
+    menu->bigRibbonSprite->oam.tileNum = (sRibbonGfxData[ribbonId].tileNumOffset * 16) + GetSpriteTileStartByTag(GFXTAG_RIBBON_ICONS_BIG);
+    menu->bigRibbonSprite->oam.paletteNum = IndexOfSpritePaletteTag(sRibbonGfxData[ribbonId].palNumOffset + PALTAG_RIBBON_ICONS_1);
 
     // Start zoom in animation
-    StartSpriteAffineAnim(structPtr->bigRibbonSprite, RIBBONANIM_ZOOM_IN);
-    structPtr->bigRibbonSprite->invisible = FALSE;
-    structPtr->bigRibbonSprite->sInvisibleWhenDone = FALSE;
-    structPtr->bigRibbonSprite->callback = SpriteCB_WaitForRibbonAnimation;
+    StartSpriteAffineAnim(menu->bigRibbonSprite, RIBBONANIM_ZOOM_IN);
+    menu->bigRibbonSprite->invisible = FALSE;
+    menu->bigRibbonSprite->sInvisibleWhenDone = FALSE;
+    menu->bigRibbonSprite->callback = SpriteCB_WaitForRibbonAnimation;
 }
 
 // Start animation to zoom out of selected ribbon
-static void ZoomOutSelectedRibbon(struct PokenavSub14 *structPtr)
+static void ZoomOutSelectedRibbon(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    structPtr->bigRibbonSprite->sInvisibleWhenDone = TRUE;
-    StartSpriteAffineAnim(structPtr->bigRibbonSprite, RIBBONANIM_ZOOM_OUT);
-    structPtr->bigRibbonSprite->callback = SpriteCB_WaitForRibbonAnimation;
+    menu->bigRibbonSprite->sInvisibleWhenDone = TRUE;
+    StartSpriteAffineAnim(menu->bigRibbonSprite, RIBBONANIM_ZOOM_OUT);
+    menu->bigRibbonSprite->callback = SpriteCB_WaitForRibbonAnimation;
 }
 
-static bool32 IsRibbonAnimating(struct PokenavSub14 *structPtr)
+static bool32 IsRibbonAnimating(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    return (structPtr->bigRibbonSprite->callback != SpriteCallbackDummy);
+    return (menu->bigRibbonSprite->callback != SpriteCallbackDummy);
 }
 
 static void SpriteCB_WaitForRibbonAnimation(struct Sprite *sprite)

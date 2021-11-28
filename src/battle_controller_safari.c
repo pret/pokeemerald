@@ -616,7 +616,7 @@ static void SafariHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry1(species, 25);
+    PlayCry_Normal(species, 25);
     SafariBufferExecCompleted();
 }
 

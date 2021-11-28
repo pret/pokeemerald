@@ -1269,11 +1269,11 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();
-            FullSaveGame();
+            WriteSaveBlock2();
             *state = 2;
             break;
         case 2:
-            if (CheckSaveFile())
+            if (WriteSaveBlock1Sector())
             {
                 ClearContinueGameWarpStatus2();
                 *state = 3;
@@ -1290,11 +1290,11 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(Task_LinkSave, 5);
+            CreateTask(Task_LinkFullSave, 5);
             *state = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(Task_LinkSave))
+            if (!FuncIsActiveTask(Task_LinkFullSave))
             {
                 *state = 3;
             }
@@ -1374,23 +1374,23 @@ static void RemoveSaveInfoWindow(void)
 
 static void Task_WaitForBattleTowerLinkSave(u8 taskId)
 {
-    if (!FuncIsActiveTask(Task_LinkSave))
+    if (!FuncIsActiveTask(Task_LinkFullSave))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();
     }
 }
 
-#define tPartialSave data[2]
+#define tInBattleTower data[2]
 
 void SaveForBattleTowerLink(void)
 {
-    u8 taskId = CreateTask(Task_LinkSave, 5);
-    gTasks[taskId].tPartialSave = TRUE;
+    u8 taskId = CreateTask(Task_LinkFullSave, 5);
+    gTasks[taskId].tInBattleTower = TRUE;
     gTasks[CreateTask(Task_WaitForBattleTowerLinkSave, 6)].data[1] = taskId;
 }
 
-#undef tPartialSave
+#undef tInBattleTower
 
 static void HideStartMenuWindow(void)
 {

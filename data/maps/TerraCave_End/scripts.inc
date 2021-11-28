@@ -32,7 +32,7 @@ TerraCave_End_EventScript_Groudon::
 	applymovement LOCALID_GROUDON, TerraCave_End_Movement_GroudonApproach
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_GROUDON, 2
+	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_GROUDON

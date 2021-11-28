@@ -5234,7 +5234,7 @@ static void Task_TryItemUseFormChange(u8 taskId)
         break;
     case 4:
         targetSpecies = gTasks[taskId].tTargetSpecies;
-        PlayCry1(targetSpecies, 0);
+        PlayCry_Normal(targetSpecies, 0);
         gTasks[taskId].tState++;
         break;
     case 5:

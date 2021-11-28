@@ -313,7 +313,7 @@ static const struct BgTemplate sOverworldBgTemplates[] =
 
 static const struct ScanlineEffectParams sFlashEffectParams =
 {
-    (void *)REG_ADDR_WIN0H,
+    &REG_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1,
     0,
@@ -1254,7 +1254,7 @@ static void PlayAmbientCry(void)
         return;
     pan = (Random() % 88) + 212;
     volume = (Random() % 30) + 50;
-    PlayCry2(sAmbientCrySpecies, pan, volume, 1);
+    PlayCry_NormalNoDucking(sAmbientCrySpecies, pan, volume, CRY_PRIORITY_AMBIENT);
 }
 
 void UpdateAmbientCry(s16 *state, u16 *delayCounter)
