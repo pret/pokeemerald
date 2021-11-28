@@ -45,7 +45,6 @@ enum {
 #define sTypeFuncId   data[1] // Index into corresponding gMovementTypeFuncs_* table
 #define sActionFuncId data[2] // Index into corresponding gMovementActionFuncs_* table
 #define sDirection    data[3]
-#define sSpeed        data[4]
 
 
 #define movement_type_def(setup, table) \
@@ -5386,7 +5385,7 @@ enum {
     JUMP_TYPE_NORMAL,
 };
 
-static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed, u8 type)
+static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
     s16 displacements[ARRAY_COUNT(sJumpInitDisplacements)];
     s16 x;
@@ -5396,21 +5395,23 @@ static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 
     x = 0;
     y = 0;
     SetObjectEventDirection(objectEvent, direction);
-    MoveCoordsInDirection(direction, &x, &y, displacements[speed], displacements[speed]);
+    MoveCoordsInDirection(direction, &x, &y, displacements[distance], displacements[distance]);
     ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
-    SetJumpSpriteData(sprite, direction, speed, type);
+    SetJumpSpriteData(sprite, direction, distance, type);
     sprite->sActionFuncId = 1;
     sprite->animPaused = FALSE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->disableCoveringGroundEffects = TRUE;
 }
 
-static void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed, u8 type)
+static void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
-    InitJump(objectEvent, sprite, direction, speed, type);
+    InitJump(objectEvent, sprite, direction, distance, type);
     SetStepAnimHandleAlternation(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
     DoShadowFieldEffect(objectEvent);
 }
+
+#define sDistance data[4]
 
 static u8 UpdateJumpAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 callback(struct Sprite *))
 {
@@ -5421,11 +5422,11 @@ static u8 UpdateJumpAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite,
 
     memcpy(displacements, sJumpDisplacements, sizeof sJumpDisplacements);
     result = callback(sprite);
-    if (result == JUMP_HALFWAY && displacements[sprite->sSpeed] != 0)
+    if (result == JUMP_HALFWAY && displacements[sprite->sDistance] != 0)
     {
         x = 0;
         y = 0;
-        MoveCoordsInDirection(objectEvent->movementDirection, &x, &y, displacements[sprite->sSpeed], displacements[sprite->sSpeed]);
+        MoveCoordsInDirection(objectEvent->movementDirection, &x, &y, displacements[sprite->sDistance], displacements[sprite->sDistance]);
         ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
         objectEvent->triggerGroundEffectsOnMove = TRUE;
         objectEvent->disableCoveringGroundEffects = TRUE;
@@ -5439,6 +5440,8 @@ static u8 UpdateJumpAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite,
     }
     return result;
 }
+
+#undef sDistance
 
 static u8 DoJumpAnimStep(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
@@ -6800,9 +6803,9 @@ bool8 MovementAction_Figure8_Step1(struct ObjectEvent *objectEvent, struct Sprit
     return FALSE;
 }
 
-static void InitAcroWheelieJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed, u8 type)
+static void InitAcroWheelieJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
-    InitJump(objectEvent, sprite, direction, speed, type);
+    InitJump(objectEvent, sprite, direction, distance, type);
     StartSpriteAnimIfDifferent(sprite, GetAcroWheelieDirectionAnimNum(direction));
     DoShadowFieldEffect(objectEvent);
 }
@@ -8166,6 +8169,7 @@ static void Step8(struct Sprite *sprite, u8 dir)
     sprite->y += 8 * (u16) sDirectionToVectors[dir].y;
 }
 
+#define sSpeed data[4]
 #define sTimer data[5]
 
 static void SetSpriteDataForNormalStep(struct Sprite *sprite, u8 direction, u8 speed)
@@ -8259,6 +8263,7 @@ static bool8 NpcTakeStep(struct Sprite *sprite)
     return TRUE;
 }
 
+#undef sSpeed
 #undef sTimer
 
 #define sTimer     data[4]
@@ -8393,34 +8398,35 @@ static s16 GetJumpY(s16 i, u8 type)
     return sJumpYTable[type][i];
 }
 
+#define sDistance  data[4]
 #define sJumpType  data[5]
 #define sTimer     data[6]
 
-static void SetJumpSpriteData(struct Sprite *sprite, u8 direction, u8 speed, u8 type)
+static void SetJumpSpriteData(struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
     sprite->sDirection = direction;
-    sprite->sSpeed = speed;
+    sprite->sDistance = distance;
     sprite->sJumpType = type;
     sprite->sTimer = 0;
 }
 
 static u8 DoJumpSpriteMovement(struct Sprite *sprite)
 {
-    s16 speedToTime[] = {16, 16, 32};
-    u8 speedToShift[] = {0, 0, 1};
+    s16 distanceToTime[] = {16, 16, 32};
+    u8 distanceToShift[] = {0, 0, 1};
     u8 result = 0;
 
-    if (sprite->sSpeed)
+    if (sprite->sDistance)
         Step1(sprite, sprite->sDirection);
 
-    sprite->y2 = GetJumpY(sprite->sTimer >> speedToShift[sprite->sSpeed], sprite->sJumpType);
+    sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], sprite->sJumpType);
 
     sprite->sTimer++;
 
-    if (sprite->sTimer == speedToTime[sprite->sSpeed] >> 1)
+    if (sprite->sTimer == distanceToTime[sprite->sDistance] >> 1)
         result = JUMP_HALFWAY;
 
-    if (sprite->sTimer >= speedToTime[sprite->sSpeed])
+    if (sprite->sTimer >= distanceToTime[sprite->sDistance])
     {
         sprite->y2 = 0;
         result = JUMP_FINISHED;
@@ -8431,21 +8437,21 @@ static u8 DoJumpSpriteMovement(struct Sprite *sprite)
 
 static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite)
 {
-    s16 speedToTime[] = {32, 32, 64};
-    u8 speedToShift[] = {1, 1, 2};
+    s16 distanceToTime[] = {32, 32, 64};
+    u8 distanceToShift[] = {1, 1, 2};
     u8 result = 0;
 
-    if (sprite->sSpeed && !(sprite->sTimer & 1))
+    if (sprite->sDistance && !(sprite->sTimer & 1))
         Step1(sprite, sprite->sDirection);
 
-    sprite->y2 = GetJumpY(sprite->sTimer >> speedToShift[sprite->sSpeed], sprite->sJumpType);
+    sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], sprite->sJumpType);
 
     sprite->sTimer++;
 
-    if (sprite->sTimer == speedToTime[sprite->sSpeed] >> 1)
+    if (sprite->sTimer == distanceToTime[sprite->sDistance] >> 1)
         result = JUMP_HALFWAY;
 
-    if (sprite->sTimer >= speedToTime[sprite->sSpeed])
+    if (sprite->sTimer >= distanceToTime[sprite->sDistance])
     {
         sprite->y2 = 0;
         result = JUMP_FINISHED;
@@ -8454,7 +8460,7 @@ static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite)
     return result;
 }
 
-#undef sSpeed
+#undef sDistance
 #undef sJumpType
 #undef sTimer
 
