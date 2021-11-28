@@ -21,8 +21,6 @@ struct UnknownPokemonStruct4
     /*0x1D*/ u8 language;
 };
 
-struct ChooseMoveStruct;
-
 #define TYPE_NAME_LENGTH 6
 #define ABILITY_NAME_LENGTH 12
 
@@ -72,7 +70,6 @@ void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
-void FillChooseMoveStruct(struct ChooseMoveStruct *moveInfo);
 
 extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
 
