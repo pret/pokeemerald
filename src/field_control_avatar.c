@@ -20,6 +20,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "pokemon_debug.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -130,6 +131,14 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+
+    #ifdef POKEMON_DEBUG
+    if ((heldKeys & R_BUTTON) && input->pressedStartButton)
+    {
+        input->input_field_1_2 = TRUE;
+        input->pressedStartButton = FALSE;
+    }
+    #endif
 }
 
 int ProcessPlayerFieldInput(struct FieldInput *input)
@@ -188,6 +197,21 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
+
+    
+    #ifdef POKEMON_DEBUG
+    if (input->input_field_1_2)
+    {
+        //PlaySE(SE_WIN_OPEN);
+        //Debug_ShowMainMenu();
+
+        //PlayRainStoppingSoundEffect();
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_Debug_Pokemon);
+    
+        return TRUE;
+    }
+    #endif
 
     return FALSE;
 }
