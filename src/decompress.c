@@ -3,6 +3,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "pokemon.h"
+#include "pokemon_debug.h"
 #include "text.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
@@ -113,6 +114,7 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }
 
+#ifdef POKEMON_DEBUG
 static void LoadSpecialPokePicCustom(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic, bool8 isFemale)
 {
     if (species == SPECIES_UNOWN)
@@ -149,6 +151,7 @@ void HandleLoadSpecialPokePicCustom(const struct CompressedSpriteSheet *src, voi
 
     LoadSpecialPokePicCustom(src, dest, species, personality, isFrontPic, isFemale);
 }
+#endif
 
 void Unused_LZDecompressWramIndirect(const void **src, void *dest)
 {

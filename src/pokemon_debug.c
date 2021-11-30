@@ -38,7 +38,7 @@
 #define DEBUG_MON_Y 14
 #define DEBUG_MON_BACK_X 32
 #define DEBUG_MON_BACK_Y 50
-#define DEBUG_ICON_X 148
+#define DEBUG_ICON_X 158
 #define DEBUG_ICON_Y 90
 #define DEBUG_MON_SHINY 0
 #define DEBUG_MON_NORMAL 9
@@ -78,7 +78,7 @@ struct PokemonDebugMenu
     u8 backspriteId;
     u8 iconspriteId;
     bool8 isShiny;
-    u8 gender;
+    bool8 isFemale;
     struct PokemonDebugModifyArrows modifyArrows;
     u8 modifyWindowId;
     u8 messageBoxWindowId;
@@ -103,7 +103,7 @@ static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
     .bg = 0,
     .tilemapLeft =1,
     .tilemapTop = 207,
-    .width = 14,
+    .width = 22,
     .height = 8,
     .paletteNum = 0xF,
     .baseBlock = 0x300
@@ -184,12 +184,18 @@ static void PrintOnCurrentMonWindow(u8 windowId, u16 monId)
 }
 */
 
-static void PrintInstructionsOnWindow(u8 windowId)
+static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data)
 {
-    u8 text[] = _("A - Shiny  START - Cry\nL - Back    R - Front$");
+    u8 text[] = _("A - Shiny  START - Cry\nL - Back  R - Front$");
+    u8 textGender[] = _("A - Shiny  START - Cry\nL - Back  R - Front SEL - Gender$");
+    u16 species = data->modifyArrows.currValue;
+    
 
     FillWindowPixelBuffer(windowId, 0x11);
-    AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
+    if (SpeciesHasGenderDifference[species])
+        AddTextPrinterParameterized(windowId, 1, textGender, 0, 0, 0, NULL);
+    else
+        AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
     CopyWindowToVram(windowId, 3);
 }
 
@@ -217,7 +223,7 @@ static void PrintDigitChars(struct PokemonDebugMenu *data)
 {
     s32 i;
     u16 species = data->modifyArrows.currValue;
-    u8 text[MODIFY_DIGITS_MAX + POKEMON_NAME_LENGTH + 4];
+    u8 text[MODIFY_DIGITS_MAX + POKEMON_NAME_LENGTH + 8];
 
     for (i = 0; i < data->modifyArrows.maxDigits; i++)
         text[i] = data->modifyArrows.charDigits[i];
@@ -227,10 +233,10 @@ static void PrintDigitChars(struct PokemonDebugMenu *data)
 
     if (SpeciesHasGenderDifference[species])
     {
-        if (data->gender == GENDER_MALE)
-            text[i++] = CHAR_MALE;
+        if (data->isFemale)
+            text[i++] = CHAR_FEMALE;
         else
-            text[i++] = CHAR_FEMALE;   
+            text[i++] = CHAR_MALE;   
         text[i++] = CHAR_HYPHEN;
     }
 
@@ -376,18 +382,18 @@ static void UpdateBattlerValue(struct PokemonDebugMenu *data)
 }
 
 //Sprite functions
-static const struct CompressedSpritePalette *GetMonSpritePalStructCustom(u16 species, u8 gender, bool8 isShiny)
+static const struct CompressedSpritePalette *GetMonSpritePalStructCustom(u16 species, bool8 isFemale, bool8 isShiny)
 {
     if (isShiny)
     {
-        if (SpeciesHasGenderDifference[species] && gender == GENDER_FEMALE)
+        if (SpeciesHasGenderDifference[species] && isFemale)
             return &gMonShinyPaletteTableFemale[species];
         else
             return &gMonShinyPaletteTable[species];
     }
     else
     {
-        if (SpeciesHasGenderDifference[species] && gender == GENDER_FEMALE)
+        if (SpeciesHasGenderDifference[species] && isFemale)
             return &gMonPaletteTableFemale[species];
         else
             return &gMonPaletteTable[species];
@@ -643,12 +649,12 @@ void CB2_Debug_Pokemon(void)
 
             data->InstructionsWindowId = AddWindow(&sDebugPokemonInstructionsTemplate);
             PutWindowTilemap(data->InstructionsWindowId);
-            PrintInstructionsOnWindow(data->InstructionsWindowId);
+            PrintInstructionsOnWindow(data->InstructionsWindowId, data);
 
-            HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->gender);
+            HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->isFemale);
             data->isShiny = FALSE;
-            data->gender = GENDER_MALE;
-            palette = GetMonSpritePalStructCustom(species, data->gender, data->isShiny);
+            data->isFemale = FALSE;
+            palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
             LoadCompressedSpritePalette(palette);
             SetMultiuseSpriteTemplateToPokemon(species, 1);
             gMultiuseSpriteTemplate.paletteTag = palette->tag;
@@ -656,8 +662,8 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
 
-            HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->gender);
-            palette = GetMonSpritePalStructCustom(species, data->gender, data->isShiny);
+            HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
+            palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
             LoadCompressedSpritePalette(palette);
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             gMultiuseSpriteTemplate.paletteTag = palette->tag;
@@ -668,7 +674,7 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->backspriteId].oam.priority = 0;
 
             //Icon Sprite
-            data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isShiny);
+            data->iconspriteId = CreateMonIconCustom(species, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isShiny, data->isFemale, data->isShiny);
             gSprites[data->iconspriteId].oam.priority = 0;
 
             //Modify Arrows
@@ -780,10 +786,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
     }
     else if (JOY_NEW(SELECT_BUTTON) && SpeciesHasGenderDifference[data->currentmonId])
     {
-        if (data->gender == GENDER_MALE)
-            data->gender = GENDER_FEMALE;
-        else
-            data->gender = GENDER_MALE;
+        data->isFemale = !data->isFemale;
         PrintDigitChars(data);
         UpdateBattlerValue(data);
         ReloadPokemonSprites(data);
@@ -793,7 +796,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
     {
         if (TryMoveDigit(&data->modifyArrows, FALSE))
         {
-            data->gender = GENDER_MALE;
+            data->isFemale = FALSE;
             PrintDigitChars(data);
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
@@ -807,7 +810,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
     {
         if (TryMoveDigit(&data->modifyArrows, TRUE))
         {
-            data->gender = GENDER_MALE;
+            data->isFemale = FALSE;
             PrintDigitChars(data);
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
@@ -859,8 +862,10 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
 
     LoadMonIconPalettes();
 
-    HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->gender);
-    palette = GetMonSpritePalStructCustom(species, data->gender, data->isShiny);
+    PrintInstructionsOnWindow(data->InstructionsWindowId, data);
+
+    HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->isFemale);
+    palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
     LoadCompressedSpritePalette(palette);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
     gMultiuseSpriteTemplate.paletteTag = palette->tag;
@@ -868,8 +873,8 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
     
-    HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->gender);
-    palette = GetMonSpritePalStructCustom(species, data->gender, data->isShiny);
+    HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
+    palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
     LoadCompressedSpritePalette(palette);
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     gMultiuseSpriteTemplate.paletteTag = palette->tag;
@@ -880,7 +885,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     gSprites[data->backspriteId].oam.priority = 0;
 
     //Icon Sprite
-    data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isShiny);
+    data->iconspriteId = CreateMonIconCustom(species, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isShiny, data->isFemale, data->isShiny);
     gSprites[data->iconspriteId].oam.priority = 0;
     
     //Modify Arrows
