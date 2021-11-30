@@ -85,19 +85,6 @@ struct PokemonDebugMenu
 };
 
 //WindowTemplates
-/*
-static const struct WindowTemplate sCurrentTitleTemplate =
-{
-    .bg = 0,
-    .tilemapLeft =1,
-    .tilemapTop = 0,
-    .width = 14,
-    .height = 2,
-    .paletteNum = 0xF,
-    .baseBlock = 0x200
-};
-*/
-
 static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
 {
     .bg = 0,
@@ -163,26 +150,6 @@ static void PadString(const u8 *src, u8 *dst)
 
     dst[i] = EOS;
 }
-
-/*
-static void PrintOnCurrentMonWindow(u8 windowId, u16 monId)
-{
-    u8 text[POKEMON_NAME_LENGTH + 10];
-
-    text[0] = CHAR_0 + monId / 100;
-    text[1] = CHAR_0 + (monId % 100) / 10;
-    text[2] = CHAR_0 + (monId % 100) % 10;
-    text[3] = CHAR_SPACE;
-    text[4] = CHAR_HYPHEN;
-    text[5] = CHAR_SPACE;
-
-    StringCopy(&text[6], gSpeciesNames[monId]);
-
-    FillWindowPixelBuffer(windowId, 0x11);
-    AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
-    CopyWindowToVram(windowId, 3);
-}
-*/
 
 static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data)
 {
@@ -400,196 +367,6 @@ static const struct CompressedSpritePalette *GetMonSpritePalStructCustom(u16 spe
     }
 }
 
-/*
-// One entry for each of the four Castform forms.
-extern const struct MonCoords gCastformFrontSpriteCoords[];
-static const u8 sCastformElevations[] =
-{
-    13, // NORMAL
-    14, // SUN
-    13, // RAIN
-    13, // HAIL
-};
-// Const rom data
-static const struct UCoords8 sBattlerCoords[][4] =
-{
-    {
-        { 72, 80 },
-        { 176, 40 },
-        { 48, 40 },
-        { 112, 80 },
-    },
-    {
-        { 32, 80 },
-        { 200, 40 },
-        { 90, 88 },
-        { 152, 32 },
-    },
-};
-static u8 GetBattlerYDeltaCustom(u8 pic_type, u16 species)
-{
-    u32 personality;
-    u8 ret;
-    u16 coordSpecies;
-
-    if (pic_type == MON_PIC_BACK)
-    {
-        if (species == SPECIES_UNOWN)
-        {
-            //coordSpecies = GetUnownSpeciesId(personality);
-            //ret = gMonBackPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
-            ret = 0; //sCastformBackSpriteYCoords[0]]; //all of them are 0???
-        else if (species > NUM_SPECIES)
-            ret = gMonBackPicCoords[0].y_offset;
-        else
-            ret = gMonBackPicCoords[species].y_offset;
-    }
-    else
-    {
-        if (species == SPECIES_UNOWN)
-        {
-            //coordSpecies = GetUnownSpeciesId(personality);
-            //ret = gMonFrontPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
-            ret = gCastformFrontSpriteCoords[0].y_offset;
-        else if (species > NUM_SPECIES)
-            ret = gMonFrontPicCoords[0].y_offset;
-        else
-            ret = gMonFrontPicCoords[species].y_offset;
-    }
-    return ret;
-}
-static u8 GetBattlerElevationCustom(u8 pic_type, u16 species)
-{
-    u8 ret = 0;
-    if (pic_type == MON_PIC_FRONT)
-    {
-        if (species == SPECIES_CASTFORM)
-            ret = sCastformElevations[0];
-        else if (species > NUM_SPECIES)
-            ret = gEnemyMonElevation[0];
-        else
-            ret = gEnemyMonElevation[species];
-    }
-    return ret;
-}
-u8 GetBattlerSpriteFinal_YCustom(u8 pic_type, u16 species, bool8 a3)
-{
-    u16 offset;
-    u8 y;
-
-    if (pic_type == MON_PIC_BACK)
-        offset = GetBattlerYDeltaCustom(pic_type, species);
-    else
-    {
-        offset = GetBattlerYDeltaCustom(pic_type, species);
-        offset -= GetBattlerElevationCustom(pic_type, species);
-    }
-    y = offset + sBattlerCoords[0][pic_type].y;
-    if (a3)
-    {
-        if (pic_type == MON_PIC_BACK)
-            y += 8;
-        if (y > 104)
-            y = 104;
-    }
-    return y;
-}
-static u8 GetBattlerSpriteCoordCustom(u16 species, u8 pic_type, u8 coordType)
-{
-    u8 retVal;
-
-    switch (coordType)
-    {
-    case BATTLER_COORD_X:
-    case BATTLER_COORD_X_2:
-        retVal = sBattlerCoords[0][pic_type].x;
-        break;
-    case BATTLER_COORD_Y:
-        retVal = sBattlerCoords[0][pic_type].y;
-        break;
-    case BATTLER_COORD_Y_PIC_OFFSET:
-        retVal = GetBattlerSpriteFinal_YCustom(pic_type, species, TRUE);
-        break;
-    case BATTLER_COORD_Y_PIC_OFFSET_DEFAULT: 
-        retVal = GetBattlerSpriteFinal_YCustom(pic_type, species, FALSE);
-        break;
-    }
-
-    return retVal;
-}
-static s16 GetBattlerSpriteCoordAttrCustom(u16 species, u8 pic_type, u8 attr, bool8 transformSpecies)
-{
-    u32 personality;
-    int ret = 0;
-    const struct MonCoords *coords;
-
-
-    if (pic_type == MON_PIC_BACK)
-    {
-        if (!transformSpecies)
-            //personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-        else
-            //personality = gTransformedPersonalities[battlerId];
-        
-        if (species == SPECIES_UNOWN)
-        {
-            //species = GetUnownSpeciesId(personality);
-            coords = &gMonBackPicCoords[species];
-        }
-        else if (species > NUM_SPECIES)
-            coords = &gMonBackPicCoords[0];
-        else
-            coords = &gMonBackPicCoords[species];
-    }
-    else
-    {
-        if (!transformSpecies)
-            //personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-        else
-            //personality = gTransformedPersonalities[battlerId];
-        
-        if (species == SPECIES_UNOWN)
-        {
-            //species = GetUnownSpeciesId(personality);
-            coords = &gMonFrontPicCoords[species];
-        }
-        else if (species == SPECIES_CASTFORM)
-            coords = &gCastformFrontSpriteCoords[0];
-        else if (species > NUM_SPECIES)
-            coords = &gMonFrontPicCoords[0];
-        else
-            coords = &gMonFrontPicCoords[species];
-    }
-
-
-    switch (attr)
-    {
-    case BATTLER_COORD_ATTR_HEIGHT:
-        return (coords->size & 0xf) * 8;
-    case BATTLER_COORD_ATTR_WIDTH:
-        return (coords->size >> 4) * 8;
-    case BATTLER_COORD_ATTR_LEFT:
-        return GetBattlerSpriteCoordCustom(species, pic_type, BATTLER_COORD_X_2) - ((coords->size >> 4) * 4);
-    case BATTLER_COORD_ATTR_RIGHT:
-        return GetBattlerSpriteCoordCustom(species, pic_type, BATTLER_COORD_X_2) + ((coords->size >> 4) * 4);
-    case BATTLER_COORD_ATTR_TOP:
-        return GetBattlerSpriteCoordCustom(species, pic_type, BATTLER_COORD_Y_PIC_OFFSET) - ((coords->size & 0xf) * 4);
-    case BATTLER_COORD_ATTR_BOTTOM:
-        return GetBattlerSpriteCoordCustom(species, pic_type, BATTLER_COORD_Y_PIC_OFFSET) + ((coords->size & 0xf) * 4);
-    case BATTLER_COORD_ATTR_RAW_BOTTOM:
-        ret = GetBattlerSpriteCoordCustom(species, pic_type, BATTLER_COORD_Y) + 31;
-        return ret - coords->y_offset;
-    default:
-        return 0;
-    }
-
-}
-*/
-
 // *******************************
 // Main functions
 void CB2_Debug_Pokemon(void)
@@ -627,7 +404,6 @@ void CB2_Debug_Pokemon(void)
 
             LoadPalette(sBgColor, 0, 2);
             LoadMonIconPalettes();
-            //LoadPalette(GetOverworldTextboxPalettePtr(), 0xf0, 16);
 
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
             ShowBg(0);
@@ -641,11 +417,6 @@ void CB2_Debug_Pokemon(void)
 
             data->currentmonId = 1;
             species = data->currentmonId;
-            /*
-            data->currentmonWindowId = AddWindow(&sCurrentTitleTemplate);
-            PutWindowTilemap(data->currentmonWindowId);
-            PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
-            */
 
             data->InstructionsWindowId = AddWindow(&sDebugPokemonInstructionsTemplate);
             PutWindowTilemap(data->InstructionsWindowId);
@@ -667,7 +438,6 @@ void CB2_Debug_Pokemon(void)
             LoadCompressedSpritePalette(palette);
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             gMultiuseSpriteTemplate.paletteTag = palette->tag;
-            //offset_y = GetBattlerSpriteCoordAttrCustom(species, MON_PIC_BACK, BATTLER_COORD_ATTR_BOTTOM, FALSE);
             offset_y = gMonBackPicCoords[species].y_offset;
             data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 30 + offset_y, 0);
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
@@ -878,7 +648,6 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     LoadCompressedSpritePalette(palette);
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     gMultiuseSpriteTemplate.paletteTag = palette->tag;
-    //offset_y = GetBattlerSpriteCoordAttrCustom(species, MON_PIC_BACK, BATTLER_COORD_ATTR_BOTTOM, FALSE);
     offset_y = gMonBackPicCoords[species].y_offset;
     data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 30 + offset_y, 0);
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
