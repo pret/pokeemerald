@@ -127,7 +127,7 @@ static const struct WindowTemplate sPokemonDebugMsgBoxWindowTemplate =
     .tilemapTop = 14,
     .width = 11,
     .height = 1,
-    .paletteNum = 0,
+    .paletteNum = 0xF,
     .baseBlock = 0x100
 };
 
@@ -688,7 +688,7 @@ void CB2_Debug_Pokemon(void)
             data->messageBoxWindowId = AddWindow(&sPokemonDebugMsgBoxWindowTemplate);
             PutWindowTilemap(data->messageBoxWindowId);
             CopyWindowToVram(data->messageBoxWindowId, 3);
-            FillWindowPixelRect(data->messageBoxWindowId, PIXEL_FILL(0x1), 0, 0, 90, 4);
+            FillWindowPixelRect(data->messageBoxWindowId, PIXEL_FILL(0x2), 0, 0, 90, 4);
 
             gMain.state++;
             break;
