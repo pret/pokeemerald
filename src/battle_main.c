@@ -64,6 +64,8 @@
 #include "constants/trainers.h"
 #include "cable_club.h"
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
@@ -3541,12 +3543,18 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Primal Reversion
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (CanMegaEvolve(i)
-         && GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
+        if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
         {
-            gBattlerAttacker = i;
-            BattleScriptExecute(BattleScript_PrimalReversion);
-            return;
+            for (j = 0; j < EVOS_PER_MON; j++)
+            {
+                if (gEvolutionTable[gBattleMons[i].species][j].targetSpecies != SPECIES_NONE
+                 && gEvolutionTable[gBattleMons[i].species][j].method == EVO_PRIMAL_REVERSION)
+                {
+                    gBattlerAttacker = i;
+                    BattleScriptExecute(BattleScript_PrimalReversion);
+                    return;
+                }
+            }
         }
     }
     
