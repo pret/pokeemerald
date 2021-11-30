@@ -113,6 +113,43 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }
 
+static void LoadSpecialPokePicCustom(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic, bool8 isFemale)
+{
+    if (species == SPECIES_UNOWN)
+    {
+        u32 id = GetUnownSpeciesId(personality);
+
+        if (!isFrontPic)
+            LZ77UnCompWram(gMonBackPicTable[id].data, dest);
+        else
+            LZ77UnCompWram(gMonFrontPicTable[id].data, dest);
+    }
+    else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
+        LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
+    else if (SpeciesHasGenderDifference[species] && isFemale)
+    {
+        if (isFrontPic)
+            LZ77UnCompWram(gMonFrontPicTableFemale[species].data, dest);
+        else
+            LZ77UnCompWram(gMonBackPicTableFemale[species].data, dest);
+    }
+    else
+        LZ77UnCompWram(src->data, dest);
+
+    DrawSpindaSpots(species, personality, dest, isFrontPic);
+}
+void HandleLoadSpecialPokePicCustom(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFemale)
+{
+    bool8 isFrontPic;
+
+    if (src == &gMonFrontPicTable[species])
+        isFrontPic = TRUE; // frontPic
+    else
+        isFrontPic = FALSE; // backPic
+
+    LoadSpecialPokePicCustom(src, dest, species, personality, isFrontPic, isFemale);
+}
+
 void Unused_LZDecompressWramIndirect(const void **src, void *dest)
 {
     LZ77UnCompWram(*src, dest);
