@@ -1924,12 +1924,20 @@ static const u8 sText_HoldEffectPsychicPower[] = _("Psychic Power");
 static const u8 sText_HoldEffectFirePower[] = _("Fire Power");
 static const u8 sText_HoldEffectDragonPower[] = _("Dragon Power");
 static const u8 sText_HoldEffectNormalPower[] = _("Normal Power");
-static const u8 sText_HoldEffectUpGrade[] = _("Up Grade");
+#ifdef ITEM_EXPANSION
+static const u8 sText_HoldEffectUpgrade[] = _("Upgrade");
+#else
+static const u8 sText_HoldEffectUpgrade[] = _("Up Grade");
+#endif
 static const u8 sText_HoldEffectShellBell[] = _("Shell Bell");
 static const u8 sText_HoldEffectLuckyPunch[] = _("Lucky Punch");
 static const u8 sText_HoldEffectMetalPowder[] = _("Metal Powder");
 static const u8 sText_HoldEffectThickClub[] = _("Thick Club");
-static const u8 sText_HoldEffectStick[] = _("Stick");
+#ifdef ITEM_EXPANSION
+static const u8 sText_HoldEffectLeek[] = _("Leek");
+#else
+static const u8 sText_HoldEffectLeek[] = _("Stick");
+#endif
 static const u8 sText_HoldEffectChoiceScarf[] = _("Choice Scarf");
 static const u8 sText_HoldEffectChoiceSpecs[] = _("Choice Specs");
 static const u8 sText_HoldEffectDampRock[] = _("Damp Rock");
@@ -2064,12 +2072,12 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_FIRE_POWER] = sText_HoldEffectFirePower,
     [HOLD_EFFECT_DRAGON_POWER] = sText_HoldEffectDragonPower,
     [HOLD_EFFECT_NORMAL_POWER] = sText_HoldEffectNormalPower,
-    [HOLD_EFFECT_UP_GRADE] = sText_HoldEffectUpGrade,
+    [HOLD_EFFECT_UPGRADE] = sText_HoldEffectUpgrade,
     [HOLD_EFFECT_SHELL_BELL] = sText_HoldEffectShellBell,
     [HOLD_EFFECT_LUCKY_PUNCH] = sText_HoldEffectLuckyPunch,
     [HOLD_EFFECT_METAL_POWDER] = sText_HoldEffectMetalPowder,
     [HOLD_EFFECT_THICK_CLUB] = sText_HoldEffectThickClub,
-    [HOLD_EFFECT_STICK] = sText_HoldEffectStick,
+    [HOLD_EFFECT_LEEK] = sText_HoldEffectLeek,
     [HOLD_EFFECT_CHOICE_SCARF] = sText_HoldEffectChoiceScarf,
     [HOLD_EFFECT_CHOICE_SPECS] = sText_HoldEffectChoiceSpecs,
     [HOLD_EFFECT_DAMP_ROCK] = sText_HoldEffectDampRock,

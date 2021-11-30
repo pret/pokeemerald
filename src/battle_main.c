@@ -49,6 +49,7 @@
 #include "trig.h"
 #include "tv.h"
 #include "util.h"
+#include "wild_encounter.h"
 #include "window.h"
 #include "constants/abilities.h"
 #include "constants/battle_config.h"
@@ -103,6 +104,7 @@ static void RunTurnActionsFunctions(void);
 static void SetActionsAndBattlersTurnOrder(void);
 static void sub_803CDF8(void);
 static bool8 AllAtActionConfirmed(void);
+static void TryChangeTurnOrder(void);
 static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
 static void CheckMegaEvolutionBeforeTurn(void);
 static void CheckQuickClaw_CustapBerryActivation(void);
@@ -232,6 +234,7 @@ EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
+EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -2941,6 +2944,8 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][1] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
     }
+
+    gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 }
 
 void SwitchInClearSetData(void)
@@ -3544,7 +3549,11 @@ static void TryDoEventsBeforeFirstTurn(void)
             return;
         }
     }
-
+    
+    // Check neutralizing gas
+    if (AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, 0, 0, 0, 0) != 0)
+        return;
+    
     // Check all switch in abilities happening from the fastest mon to slowest.
     while (gBattleStruct->switchInAbilitiesCounter < gBattlersCount)
     {
@@ -3883,7 +3892,7 @@ static void HandleTurnActionSelectionState(void)
                                                             gBattleMons[gActiveBattler].ppBonuses,
                                                             i);
                         }
-
+                        
                         BtlController_EmitChooseMove(0, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0, FALSE, &moveInfo);
                         MarkBattlerForControllerExec(gActiveBattler);
                     }
@@ -4680,9 +4689,36 @@ static void CheckMegaEvolutionBeforeTurn(void)
         }
     }
 
+    #if B_MEGA_EVO_TURN_ORDER <= GEN_6
+        gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
+        gBattleStruct->focusPunchBattlerId = 0;
+    #else
+        gBattleMainFunc = TryChangeTurnOrder; // This will just do nothing if no mon has mega evolved
+    #endif  
+}
+
+// In gen7, priority and speed are recalculated during the turn in which a pokemon mega evolves
+static void TryChangeTurnOrder(void)
+{
+    s32 i, j;
+    for (i = 0; i < gBattlersCount - 1; i++)
+    {
+        for (j = i + 1; j < gBattlersCount; j++)
+        {
+            u8 battler1 = gBattlerByTurnOrder[i];
+            u8 battler2 = gBattlerByTurnOrder[j];
+            if (gActionsByTurnOrder[i] == B_ACTION_USE_MOVE
+                && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE)
+            {
+                if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                    SwapTurnOrder(i, j);
+            }
+        }
+    }
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
     gBattleStruct->focusPunchBattlerId = 0;
 }
+
 
 static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
@@ -5018,6 +5054,8 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
+        gIsFishingEncounter = FALSE;
+        gIsSurfingEncounter = FALSE;
         ResetSpriteData();
         if (gLeveledUpInBattle && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
         {
@@ -5189,6 +5227,22 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
         if (ItemId_GetPocket(gBattleMons[battlerAtk].item) == POCKET_BERRIES)
             gBattleStruct->dynamicMoveType = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].type;
     }
+    else if (gBattleMoves[move].effect == EFFECT_TERRAIN_PULSE)
+    {
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_TERRAIN_ANY))
+        {
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | 0x80;
+            else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_GRASS | 0x80;
+            else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_FAIRY | 0x80;
+            else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+                gBattleStruct->dynamicMoveType = TYPE_PSYCHIC | 0x80;
+            else //failsafe
+                gBattleStruct->dynamicMoveType = TYPE_NORMAL | 0x80;
+        }
+    }
 
     attackerAbility = GetBattlerAbility(battlerAtk);
     GET_MOVE_TYPE(move, moveType);
@@ -5228,6 +5282,10 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     else if (gStatuses4[battlerAtk] & STATUS4_PLASMA_FISTS && moveType == TYPE_NORMAL)
     {
         gBattleStruct->dynamicMoveType = 0x80 | TYPE_ELECTRIC;
+    }
+    else if (move == MOVE_AURA_WHEEL && gBattleMons[battlerAtk].species == SPECIES_MORPEKO_HANGRY)
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_DARK;
     }
 
     // Check if a gem should activate.

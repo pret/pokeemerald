@@ -1539,6 +1539,7 @@ static void PlayerPartnerHandleChooseMove(void)
         BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
     else
         BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (gBattlerTarget << 8));
+    
     PlayerPartnerBufferExecCompleted();
 }
 

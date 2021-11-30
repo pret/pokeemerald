@@ -12,12 +12,14 @@
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/battle_ai.h"
 
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent);
 static bool8 ShouldUseItem(void);
 
+// Functions
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
     if (BATTLE_TWO_VS_ONE_OPPONENT && (battlerId & BIT_SIDE) == B_SIDE_OPPONENT)
@@ -82,7 +84,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
 
     opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
 
-    if (gBattleMons[GetBattlerAtPosition(opposingPosition)].ability != ABILITY_WONDER_GUARD)
+    if (GetBattlerAbility(GetBattlerAtPosition(opposingPosition)) != ABILITY_WONDER_GUARD)
         return FALSE;
 
     // Check if Pokemon has a super effective move.
@@ -176,7 +178,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     else
         return FALSE;
 
-    if (gBattleMons[gActiveBattler].ability == absorbingTypeAbility)
+    if (AI_GetAbility(gActiveBattler) == absorbingTypeAbility)
         return FALSE;
 
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
@@ -228,7 +230,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
 {
     if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
         return FALSE;
-    if (gBattleMons[gActiveBattler].ability != ABILITY_NATURAL_CURE)
+    if (AI_GetAbility(gActiveBattler) != ABILITY_NATURAL_CURE)
         return FALSE;
     if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 2)
         return FALSE;
@@ -407,7 +409,6 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
                 if (AI_GetTypeEffectiveness(move, gActiveBattler, battlerIn1) >= UQ_4_12(2.0) && Random() % moduloPercent == 0)
                 {
                     *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -436,6 +437,7 @@ bool32 ShouldSwitch(void)
         return FALSE;
 
     availableToSwitch = 0;
+    
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         battlerIn1 = gActiveBattler;
@@ -564,6 +566,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
+    // AI has decided it shouldn't switch or use an item, so it will now choose a move to use
     BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
@@ -851,7 +854,8 @@ static bool8 ShouldUseItem(void)
                 break;
             if (gBattleMons[gActiveBattler].hp == 0)
                 break;
-            if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4 || gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > itemEffects[paramOffset])
+            if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4
+              || gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > itemEffects[paramOffset])
                 shouldUse = TRUE;
             break;
         case AI_ITEM_CURE_CONDITION:
