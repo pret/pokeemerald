@@ -23,7 +23,7 @@ struct MonIconSpriteTemplate
 
 // static functions
 static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
-#ifdef POKEMON_DEBUG
+#ifdef P_ENABLE_DEBUG
 static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale);
 static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale);
 #endif
@@ -2580,7 +2580,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
     return spriteId;
 }
 
-#ifdef POKEMON_DEBUG
+#ifdef P_ENABLE_DEBUG
 u8 CreateMonIconCustom(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality, bool8 isFemale, bool8 isShiny)
 {
     u8 spriteId;
@@ -2678,7 +2678,7 @@ const u8 *GetMonIconPtr(u16 species, u32 personality)
     return GetMonIconTiles(GetIconSpecies(species, personality), personality);
 }
 
-#ifdef POKEMON_DEBUG
+#ifdef P_ENABLE_DEBUG
 static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale)
 {
     return GetMonIconTilesCustom(GetIconSpecies(species, personality), isFemale);
@@ -2754,7 +2754,7 @@ const u8* GetMonIconTiles(u16 species, u32 personality)
     return iconSprite;
 }
 
-#ifdef POKEMON_DEBUG
+#ifdef P_ENABLE_DEBUG
 static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale)
 {
     const u8* iconSprite = gMonIconTable[species];

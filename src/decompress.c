@@ -114,7 +114,7 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }
 
-#ifdef POKEMON_DEBUG
+#ifdef P_ENABLE_DEBUG
 static void LoadSpecialPokePicCustom(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic, bool8 isFemale)
 {
     if (species == SPECIES_UNOWN)
