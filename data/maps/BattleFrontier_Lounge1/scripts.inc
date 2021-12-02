@@ -14,10 +14,8 @@ BattleFrontier_Lounge1_EventScript_Breeder::
 BattleFrontier_Lounge1_EventScript_ChooseMonToShowBreeder::
 	special ChoosePartyMon
 	waitstate
-	compare VAR_0x8004, 255
-	goto_if_ne BattleFrontier_Lounge1_EventScript_ShowMonToBreeder
-	compare VAR_0x8004, 255
-	goto_if_eq BattleFrontier_Lounge1_EventScript_CancelMonSelect
+	goto_if_ne VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge1_EventScript_ShowMonToBreeder
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge1_EventScript_CancelMonSelect
 	end
 
 BattleFrontier_Lounge1_EventScript_BreederIntro::
@@ -34,17 +32,12 @@ BattleFrontier_Lounge1_EventScript_AlreadyMetBreeder::
 @ VAR_0x8007: IV of the highest IV stat
 BattleFrontier_Lounge1_EventScript_ShowMonToBreeder::
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq BattleFrontier_Lounge1_EventScript_ShowEggToBreeder
+	goto_if_eq VAR_RESULT, SPECIES_EGG, BattleFrontier_Lounge1_EventScript_ShowEggToBreeder
 	special BufferVarsForIVRater
-	compare VAR_0x8005, 90   @ Average of 15
-	goto_if_le BattleFrontier_Lounge1_EventScript_AverageTotalIVs
-	compare VAR_0x8005, 120  @ Average of 20
-	goto_if_le BattleFrontier_Lounge1_EventScript_AboveAverageTotalIVs
-	compare VAR_0x8005, 150  @ Average of 25
-	goto_if_le BattleFrontier_Lounge1_EventScript_HighTotalIVs
-	compare VAR_0x8005, 151  @ Average of > 25
-	goto_if_ge BattleFrontier_Lounge1_EventScript_VeryHighTotalIVs
+	goto_if_le VAR_0x8005, 90, BattleFrontier_Lounge1_EventScript_AverageTotalIVs       @ Average of 15
+	goto_if_le VAR_0x8005, 120, BattleFrontier_Lounge1_EventScript_AboveAverageTotalIVs @ Average of 20
+	goto_if_le VAR_0x8005, 150, BattleFrontier_Lounge1_EventScript_HighTotalIVs         @ Average of 25
+	goto_if_ge VAR_0x8005, 151, BattleFrontier_Lounge1_EventScript_VeryHighTotalIVs     @ Average of > 25
 	end
 
 BattleFrontier_Lounge1_EventScript_ShowEggToBreeder::
@@ -54,30 +47,20 @@ BattleFrontier_Lounge1_EventScript_ShowEggToBreeder::
 
 @ Comment on the highest IV stat
 BattleFrontier_Lounge1_EventScript_HighestIVStat::
-	compare VAR_0x8006, STAT_HP
-	goto_if_eq BattleFrontier_Lounge1_EventScript_HighestIVHP
-	compare VAR_0x8006, STAT_ATK
-	goto_if_eq BattleFrontier_Lounge1_EventScript_HighestIVAtk
-	compare VAR_0x8006, STAT_DEF
-	goto_if_eq BattleFrontier_Lounge1_EventScript_HighestIVDef
-	compare VAR_0x8006, STAT_SPEED
-	goto_if_eq BattleFrontier_Lounge1_EventScript_HighestIVSpeed
-	compare VAR_0x8006, STAT_SPATK
-	goto_if_eq BattleFrontier_Lounge1_EventScript_HighestIVSpAtk
-	compare VAR_0x8006, STAT_SPDEF
-	goto_if_eq BattleFrontier_Lounge1_EventScript_HighestIVSpDef
+	goto_if_eq VAR_0x8006, STAT_HP, BattleFrontier_Lounge1_EventScript_HighestIVHP
+	goto_if_eq VAR_0x8006, STAT_ATK, BattleFrontier_Lounge1_EventScript_HighestIVAtk
+	goto_if_eq VAR_0x8006, STAT_DEF, BattleFrontier_Lounge1_EventScript_HighestIVDef
+	goto_if_eq VAR_0x8006, STAT_SPEED, BattleFrontier_Lounge1_EventScript_HighestIVSpeed
+	goto_if_eq VAR_0x8006, STAT_SPATK, BattleFrontier_Lounge1_EventScript_HighestIVSpAtk
+	goto_if_eq VAR_0x8006, STAT_SPDEF, BattleFrontier_Lounge1_EventScript_HighestIVSpDef
 	end
 
 @ Comment on the highest IV value
 BattleFrontier_Lounge1_EventScript_HighestIVValue::
-	compare VAR_0x8007, 15
-	goto_if_le BattleFrontier_Lounge1_EventScript_HighestIVLow
-	compare VAR_0x8007, 25
-	goto_if_le BattleFrontier_Lounge1_EventScript_HighestIVMid
-	compare VAR_0x8007, 30
-	goto_if_le BattleFrontier_Lounge1_EventScript_HighestIVHigh
-	compare VAR_0x8007, 31
-	goto_if_ge BattleFrontier_Lounge1_EventScript_HighestIVMax
+	goto_if_le VAR_0x8007, 15, BattleFrontier_Lounge1_EventScript_HighestIVLow
+	goto_if_le VAR_0x8007, 25, BattleFrontier_Lounge1_EventScript_HighestIVMid
+	goto_if_le VAR_0x8007, 30, BattleFrontier_Lounge1_EventScript_HighestIVHigh
+	goto_if_ge VAR_0x8007, 31, BattleFrontier_Lounge1_EventScript_HighestIVMax
 	end
 
 BattleFrontier_Lounge1_EventScript_EndBreederComments::

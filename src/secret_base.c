@@ -39,7 +39,6 @@
 #include "constants/event_objects.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 #include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
@@ -446,7 +445,7 @@ void EnterSecretBase(void)
 {
     CreateTask(Task_EnterSecretBase, 0);
     FadeScreen(FADE_TO_BLACK, 0);
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 bool8 SecretBaseMapPopupEnabled(void)
@@ -490,7 +489,7 @@ static void Task_EnterNewlyCreatedSecretBase(u8 taskId)
         SetWarpDestination(
             gSaveBlock1Ptr->location.mapGroup,
             gSaveBlock1Ptr->location.mapNum,
-            -1,
+            WARP_ID_NONE,
             GET_BASE_COMPUTER_X(secretBaseGroup),
             GET_BASE_COMPUTER_Y(secretBaseGroup));
         WarpIntoMap();
@@ -700,7 +699,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
             gTasks[taskId].data[0] = 2;
         break;
     case 2:
-        SetWarpDestinationToDynamicWarp(0x7e);
+        SetWarpDestinationToDynamicWarp(WARP_ID_SECRET_BASE);
         WarpIntoMap();
         gFieldCallback = FieldCB_DefaultWarpExit;
         SetMainCallback2(CB2_LoadMap);
@@ -1215,108 +1214,107 @@ void SecretBasePerStepCallback(u8 taskId)
         tState = 1;
         break;
     case 1:
+        // End if player hasn't moved
         PlayerGetDestCoords(&x, &y);
-        if (x != tPlayerX || y != tPlayerY)
-        {
-            tPlayerX = x;
-            tPlayerY = y;
-            VarSet(VAR_SECRET_BASE_STEP_COUNTER, VarGet(VAR_SECRET_BASE_STEP_COUNTER) + 1);
-            behavior = MapGridGetMetatileBehaviorAt(x, y);
-            tileId = MapGridGetMetatileIdAt(x, y);
-            if (tileId == METATILE_SecretBase_SolidBoard_Top || tileId == METATILE_SecretBase_SolidBoard_Bottom)
-            {
-                if (sInFriendSecretBase == TRUE)
-                {
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SOLID_BOARD);
-                }
-            }
-            else if (tileId == METATILE_SecretBase_SmallChair
-                  || tileId == METATILE_SecretBase_PokemonChair
-                  || tileId == METATILE_SecretBase_HeavyChair
-                  || tileId == METATILE_SecretBase_PrettyChair
-                  || tileId == METATILE_SecretBase_ComfortChair
-                  || tileId == METATILE_SecretBase_RaggedChair
-                  || tileId == METATILE_SecretBase_BrickChair
-                  || tileId == METATILE_SecretBase_CampChair
-                  || tileId == METATILE_SecretBase_HardChair)
-            {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_CHAIR);
-            }
-            else if (tileId == METATILE_SecretBase_RedTent_DoorTop
-                  || tileId == METATILE_SecretBase_RedTent_Door
-                  || tileId == METATILE_SecretBase_BlueTent_DoorTop
-                  || tileId == METATILE_SecretBase_BlueTent_Door)
-            {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_TENT);
-            }
-            else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight)
-                  || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_CornerLeft))
-            {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_STAND);
-            }
-            else if (behavior == MB_IMPASSABLE_WEST_AND_EAST && tileId == METATILE_SecretBase_Slide_StairLanding)
-            {
-                if (sInFriendSecretBase == TRUE)
-                {
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_USED_SLIDE);
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_DECLINED_SLIDE);
-                }
-            }
-            else if (behavior == MB_SLIDE_SOUTH && tileId == METATILE_SecretBase_Slide_SlideTop)
-            {
-                if (sInFriendSecretBase == TRUE)
-                {
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SLIDE);
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_DECLINED_SLIDE);
-                }
-            }
-            else if (MetatileBehavior_IsSecretBaseGlitterMat(behavior) == TRUE)
-            {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_GLITTER_MAT);
-            }
-            else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
-            {
-                PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
-                if (sInFriendSecretBase == TRUE)
-                {
-                    switch ((int)MapGridGetMetatileIdAt(x, y))
-                    {
-                    case METATILE_SecretBase_RedBalloon:
-                    case METATILE_SecretBase_BlueBalloon:
-                    case METATILE_SecretBase_YellowBalloon:
-                        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_BALLOON);
-                        break;
-                    case METATILE_SecretBase_MudBall:
-                        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_MUD_BALL);
-                        break;
-                    }
-                }
-            }
-            else if (MetatileBehavior_IsSecretBaseBreakableDoor(behavior) == TRUE)
-            {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_BREAKABLE_DOOR);
+        if (x == tPlayerX && y == tPlayerY)
+            return;
 
-                ShatterSecretBaseBreakableDoor(x, y);
-            }
-            else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_NOTE_MAT);
-            }
-            else if (MetatileBehavior_IsSecretBaseJumpMat(behavior) == TRUE)
+        tPlayerX = x;
+        tPlayerY = y;
+        VarSet(VAR_SECRET_BASE_STEP_COUNTER, VarGet(VAR_SECRET_BASE_STEP_COUNTER) + 1);
+        behavior = MapGridGetMetatileBehaviorAt(x, y);
+        tileId = MapGridGetMetatileIdAt(x, y);
+        if (tileId == METATILE_SecretBase_SolidBoard_Top || tileId == METATILE_SecretBase_SolidBoard_Bottom)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SOLID_BOARD);
+        }
+        else if (tileId == METATILE_SecretBase_SmallChair
+              || tileId == METATILE_SecretBase_PokemonChair
+              || tileId == METATILE_SecretBase_HeavyChair
+              || tileId == METATILE_SecretBase_PrettyChair
+              || tileId == METATILE_SecretBase_ComfortChair
+              || tileId == METATILE_SecretBase_RaggedChair
+              || tileId == METATILE_SecretBase_BrickChair
+              || tileId == METATILE_SecretBase_CampChair
+              || tileId == METATILE_SecretBase_HardChair)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_CHAIR);
+        }
+        else if (tileId == METATILE_SecretBase_RedTent_DoorTop
+              || tileId == METATILE_SecretBase_RedTent_Door
+              || tileId == METATILE_SecretBase_BlueTent_DoorTop
+              || tileId == METATILE_SecretBase_BlueTent_Door)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_TENT);
+        }
+        else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight)
+              || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_CornerLeft))
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_STAND);
+        }
+        else if (behavior == MB_IMPASSABLE_WEST_AND_EAST && tileId == METATILE_SecretBase_Slide_StairLanding)
+        {
+            if (sInFriendSecretBase == TRUE)
             {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_JUMP_MAT);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_USED_SLIDE);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_DECLINED_SLIDE);
             }
-            else if (MetatileBehavior_IsSecretBaseSpinMat(behavior) == TRUE)
+        }
+        else if (behavior == MB_SLIDE_SOUTH && tileId == METATILE_SecretBase_Slide_SlideTop)
+        {
+            if (sInFriendSecretBase == TRUE)
             {
-                if (sInFriendSecretBase == TRUE)
-                    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SPIN_MAT);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SLIDE);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_DECLINED_SLIDE);
             }
+        }
+        else if (MetatileBehavior_IsSecretBaseGlitterMat(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_GLITTER_MAT);
+        }
+        else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
+        {
+            PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
+            if (sInFriendSecretBase == TRUE)
+            {
+                switch ((int)MapGridGetMetatileIdAt(x, y))
+                {
+                case METATILE_SecretBase_RedBalloon:
+                case METATILE_SecretBase_BlueBalloon:
+                case METATILE_SecretBase_YellowBalloon:
+                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_BALLOON);
+                    break;
+                case METATILE_SecretBase_MudBall:
+                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_MUD_BALL);
+                    break;
+                }
+            }
+        }
+        else if (MetatileBehavior_IsSecretBaseBreakableDoor(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_BREAKABLE_DOOR);
+
+            ShatterSecretBaseBreakableDoor(x, y);
+        }
+        else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_NOTE_MAT);
+        }
+        else if (MetatileBehavior_IsSecretBaseJumpMat(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_JUMP_MAT);
+        }
+        else if (MetatileBehavior_IsSecretBaseSpinMat(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SPIN_MAT);
         }
         break;
     case 2:

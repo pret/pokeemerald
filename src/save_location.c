@@ -1,6 +1,5 @@
 #include "global.h"
 #include "save_location.h"
-#include "constants/maps.h"
 
 #define LIST_END 0xFFFF
 
