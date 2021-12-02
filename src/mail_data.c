@@ -157,7 +157,7 @@ void ClearMailItemId(u8 mailId)
     gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
 }
 
-u8 TakeMailFromMon2(struct Pokemon *mon)
+u8 TakeMailFromMonAndSave(struct Pokemon *mon)
 {
     u8 i;
     u8 newHeldItem[2];
@@ -179,6 +179,7 @@ u8 TakeMailFromMon2(struct Pokemon *mon)
         }
     }
 
+    // No space to save mail
     return MAIL_NONE;
 }
 

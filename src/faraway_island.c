@@ -7,7 +7,6 @@
 #include "sprite.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
-#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 
 static u8 GetValidMewMoveDirection(u8);

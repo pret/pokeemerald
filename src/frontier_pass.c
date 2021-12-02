@@ -26,7 +26,6 @@
 #include "overworld.h"
 #include "math_util.h"
 #include "constants/battle_frontier.h"
-#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"

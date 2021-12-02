@@ -13,16 +13,13 @@ RustboroCity_MapScripts::
 RustboroCity_OnTransition:
 	setflag FLAG_VISITED_RUSTBORO_CITY
 	call Common_EventScript_SetupRivalGfxId
-	compare VAR_RUSTBORO_CITY_STATE, 6
-	call_if_eq RustboroCity_EventScript_HideMapNamePopup
+	call_if_eq VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_HideMapNamePopup
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_RUSTBORO_CITY_STATE, 6
-	goto_if_eq RustboroCity_EventScript_PositionScientistForExit
+	goto_if_eq VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_PositionScientistForExit
 	end
 
 RustboroCity_EventScript_PositionScientistForExit::
-	compare VAR_TEMP_0, 11
-	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
+	goto_if_eq VAR_TEMP_0, 11, RustboroCity_EventScript_PositionScientistLeftExit
 	setobjectxyperm LOCALID_SCIENTIST, 12, 15
 	end
 
@@ -506,14 +503,10 @@ RustboroCity_EventScript_HelpGetGoodsTrigger3::
 	end
 
 RustboroCity_EventScript_EmployeeAskToGetGoods::
-	compare VAR_TEMP_1, 0
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerUp1
-	compare VAR_TEMP_1, 1
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerLeft1
-	compare VAR_TEMP_1, 2
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerDown1
-	compare VAR_TEMP_1, 3
-	call_if_eq RustboroCity_EventScript_EmployeeApproachPlayerDown1
+	call_if_eq VAR_TEMP_1, 0, RustboroCity_EventScript_EmployeeFacePlayerUp1
+	call_if_eq VAR_TEMP_1, 1, RustboroCity_EventScript_EmployeeFacePlayerLeft1
+	call_if_eq VAR_TEMP_1, 2, RustboroCity_EventScript_EmployeeFacePlayerDown1
+	call_if_eq VAR_TEMP_1, 3, RustboroCity_EventScript_EmployeeApproachPlayerDown1
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
 	setvar VAR_RUSTBORO_CITY_STATE, 3
 	copyobjectxytoperm LOCALID_DEVON_EMPLOYEE
@@ -601,27 +594,21 @@ RustboroCity_EventScript_ReturnGoodsTrigger3::
 	end
 
 RustboroCity_EventScript_ReturnGoods::
-	compare VAR_TEMP_1, 0
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerUp2
-	compare VAR_TEMP_1, 1
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerLeft2
-	compare VAR_TEMP_1, 2
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerDown2
-	compare VAR_TEMP_1, 3
-	call_if_eq RustboroCity_EventScript_EmployeeApproachPlayerDown2
-	compare VAR_TEMP_1, 4
-	call_if_eq RustboroCity_EventScript_EmployeeFacePlayerRight
+	call_if_eq VAR_TEMP_1, 0, RustboroCity_EventScript_EmployeeFacePlayerUp2
+	call_if_eq VAR_TEMP_1, 1, RustboroCity_EventScript_EmployeeFacePlayerLeft2
+	call_if_eq VAR_TEMP_1, 2, RustboroCity_EventScript_EmployeeFacePlayerDown2
+	call_if_eq VAR_TEMP_1, 3, RustboroCity_EventScript_EmployeeApproachPlayerDown2
+	call_if_eq VAR_TEMP_1, 4, RustboroCity_EventScript_EmployeeFacePlayerRight
 	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL
-	compare VAR_RESULT, FALSE
-	call_if_eq RustboroCity_EventScript_BagFull
+	call_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
 	msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setvar VAR_RUSTBORO_CITY_STATE, 5
 	delay 30
-	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
+	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 2, 2
 	waitstate
 	releaseall
 	end
@@ -699,10 +686,8 @@ RustboroCity_EventScript_Rival::
 
 RustboroCity_EventScript_PlayRivalMusic::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq RustboroCity_EventScript_PlayMayMusic
-	compare VAR_RESULT, FEMALE
-	goto_if_eq RustboroCity_EventScript_PlayBrendanMusic
+	goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_PlayMayMusic
+	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_PlayBrendanMusic
 	return
 
 RustboroCity_EventScript_PlayMayMusic::
@@ -843,10 +828,8 @@ RustboroCity_EventScript_RivalTrigger7::
 
 RustboroCity_EventScript_RivalEncounter::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq RustboroCity_EventScript_MayEncounter
-	compare VAR_RESULT, FEMALE
-	goto_if_eq RustboroCity_EventScript_BrendanEncounter
+	goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_MayEncounter
+	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_BrendanEncounter
 	end
 
 RustboroCity_EventScript_MayEncounter::
@@ -866,8 +849,7 @@ RustboroCity_EventScript_MayEncounter::
 	setvar VAR_ROUTE104_STATE, 2
 	setvar VAR_0x8008, 0
 	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq RustboroCity_EventScript_BattleMay
+	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
 	msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
@@ -876,8 +858,7 @@ RustboroCity_EventScript_MayEncounter::
 RustboroCity_EventScript_MayAskToBattle::
 	setvar VAR_0x8008, 1
 	msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq RustboroCity_EventScript_BattleMay
+	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
 	msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -892,8 +873,7 @@ RustboroCity_EventScript_BattleMay::
 
 RustboroCity_EventScript_MayBrineyHint::
 	msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
-	compare VAR_0x8008, 0
-	call_if_eq RustboroCity_EventScript_RestoreBgm
+	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 
@@ -936,8 +916,7 @@ RustboroCity_EventScript_BrendanEncounter::
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
 	msgbox RustboroCity_Text_BrendanPassedBrineyWantToBattle, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq RustboroCity_EventScript_BattleBrendan
+	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
 	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
@@ -945,8 +924,7 @@ RustboroCity_EventScript_BrendanEncounter::
 
 RustboroCity_EventScript_BrendanAskToBattle::
 	msgbox RustboroCity_Text_BrendanWantToBattle, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq RustboroCity_EventScript_BattleBrendan
+	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
 	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -961,8 +939,7 @@ RustboroCity_EventScript_BattleBrendan::
 
 RustboroCity_EventScript_BrendanBrineyHint::
 	msgbox RustboroCity_Text_BrendanMrBrineyHint, MSGBOX_DEFAULT
-	compare VAR_0x8008, 0
-	call_if_eq RustboroCity_EventScript_RestoreBgm
+	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 

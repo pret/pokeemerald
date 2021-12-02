@@ -16,7 +16,7 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_SetInWildMonRoom::
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 5, 6
 	waitstate
 	end
 
@@ -32,10 +32,8 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_TurnPlayerNorth::
 BattleFrontier_BattlePikeRoomWildMons_OnResume:
 	call BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves
 	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost
-	compare VAR_RESULT, B_OUTCOME_DREW
-	goto_if_eq BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost
+	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost
+	goto_if_eq VAR_RESULT, B_OUTCOME_DREW, BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost
 	end
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost::

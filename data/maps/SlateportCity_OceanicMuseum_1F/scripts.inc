@@ -22,10 +22,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeRight::
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee::
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee
+	goto_if_eq VAR_RESULT, YES, SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee
 	closemessage
 	hidemoneybox
 	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter
@@ -34,12 +33,11 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee::
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee::
-	checkmoney 50, 0
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
+	checkmoney 50
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
 	playse SE_SHOP
-	removemoney 50, 0
-	updatemoneybox 0, 0
+	removemoney 50
+	updatemoneybox
 	msgbox SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox
@@ -154,19 +152,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt::
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM46
-	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
+	goto_if_eq VAR_RESULT, 0, SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
 	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth
-	compare VAR_FACING, DIR_SOUTH
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth
-	compare VAR_FACING, DIR_WEST
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
-	compare VAR_FACING, DIR_EAST
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
+	goto_if_eq VAR_FACING, DIR_NORTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth
+	goto_if_eq VAR_FACING, DIR_SOUTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth
+	goto_if_eq VAR_FACING, DIR_WEST, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
+	goto_if_eq VAR_FACING, DIR_EAST, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth::

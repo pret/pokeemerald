@@ -4,15 +4,13 @@ MysteryGiftScript_AuroraTicket::
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_AURORA_TICKET, AuroraTicket_Obtained
 	vgoto_if_set FLAG_BATTLED_DEOXYS, AuroraTicket_Obtained
-	checkitem ITEM_AURORA_TICKET, 1
-	compare VAR_RESULT, TRUE
-	vgoto_if_eq AuroraTicket_Obtained
+	checkitem ITEM_AURORA_TICKET
+	vgoto_if_eq VAR_RESULT, TRUE, AuroraTicket_Obtained
 	vmessage sText_AuroraTicketForYou
 	waitmessage
 	waitbuttonpress
-	checkitemspace ITEM_AURORA_TICKET, 1
-	compare VAR_RESULT, FALSE
-	vgoto_if_eq AuroraTicket_NoBagSpace
+	checkitemspace ITEM_AURORA_TICKET
+	vgoto_if_eq VAR_RESULT, FALSE, AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	setflag FLAG_RECEIVED_AURORA_TICKET

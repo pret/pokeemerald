@@ -6,8 +6,7 @@ SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	braillemsgbox SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth
 	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
 	specialvar VAR_RESULT, CheckRelicanthWailord
-	compare VAR_RESULT, FALSE
-	goto_if_eq SealedChamber_InnerRoom_EventScript_NoEffect
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_NoEffect
 	fadeoutbgm 0
 	playse SE_TRUCK_MOVE
 	special DoSealedChamberShakingEffect_Long

@@ -15,8 +15,7 @@ RusturfTunnel_OnFrame:
 	.2byte 0
 
 RusturfTunnel_OnTransition:
-	compare VAR_RUSTURF_TUNNEL_STATE, 2
-	call_if_eq RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
+	call_if_eq VAR_RUSTURF_TUNNEL_STATE, 2, RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
 	end
 
 RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos::
@@ -56,36 +55,25 @@ RusturfTunnel_EventScript_AlreadySpokenTo::
 
 RusturfTunnel_EventScript_ClearTunnelScene::
 	lockall
-	compare VAR_TEMP_1, 1
-	call_if_eq RusturfTunnel_EventScript_FaceWandasBoyfriend1
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_FaceWandasBoyfriend2
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_FaceWandasBoyfriend3
+	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_FaceWandasBoyfriend1
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_FaceWandasBoyfriend2
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_FaceWandasBoyfriend3
 	call RusturfTunnel_EventScript_WandasBoyfriendNotice
 	msgbox RusturfTunnel_Text_YouShatteredBoulderTakeHM, MSGBOX_DEFAULT
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
 	giveitem ITEM_HM04
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_TEMP_1, 1
-	call_if_eq RusturfTunnel_EventScript_BoyfriendApproachWanda1
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_BoyfriendApproachWanda2
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_BoyfriendApproachWanda3
+	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_BoyfriendApproachWanda1
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_BoyfriendApproachWanda2
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_BoyfriendApproachWanda3
 	msgbox RusturfTunnel_Text_WandaReunion, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_TEMP_1, 1
-	call_if_eq RusturfTunnel_EventScript_WandaAndBoyfriendExit1
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_WandaAndBoyfriendExit
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_WandaAndBoyfriendExit
+	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_WandaAndBoyfriendExit1
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_WandaAndBoyfriendExit
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_WandaAndBoyfriendExit
 	call RusturfTunnel_EventScript_SetRusturfTunnelOpen
 	releaseall
 	end

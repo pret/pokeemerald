@@ -397,7 +397,7 @@ static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
         *level = GetLevelFromBoxMonExp(boxMon);
         GetBoxMonData(boxMon, MON_DATA_NICKNAME, nick);
     }
-    StringGetEnd10(nick);
+    StringGet_Nickname(nick);
 }
 
 static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *otId)
