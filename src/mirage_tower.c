@@ -15,7 +15,6 @@
 #include "task.h"
 #include "window.h"
 #include "constants/event_objects.h"
-#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"

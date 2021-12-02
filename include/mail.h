@@ -27,7 +27,7 @@ u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer);
 u8 GiveMailToMon(struct Pokemon *mon, struct Mail *mail);
 void TakeMailFromMon(struct Pokemon *mon);
 void ClearMailItemId(u8 mailId);
-u8 TakeMailFromMon2(struct Pokemon *mon);
+u8 TakeMailFromMonAndSave(struct Pokemon *mon);
 bool8 ItemIsMail(u16 itemId);
 
 #endif // GUARD_MAIL_H

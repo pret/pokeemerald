@@ -127,7 +127,7 @@ void BufferApprenticeChallengeText(u8 saveApprenticeId)
     for (i = 0; num != 0 && i < APPRENTICE_COUNT; num /= 10, i++)
         ;
 
-    StringCopy7(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].playerName);
+    StringCopy_PlayerName(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].playerName);
     ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].language);
     ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[saveApprenticeId].number, STR_CONV_MODE_RIGHT_ALIGN, i);
     challengeText = sApprenticeChallengeTexts[gSaveBlock2Ptr->apprentices[saveApprenticeId].id];

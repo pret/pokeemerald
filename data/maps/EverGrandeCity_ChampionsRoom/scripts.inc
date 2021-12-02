@@ -50,24 +50,20 @@ EverGrandeCity_ChampionsRoom_EventScript_Wallace::
 
 EverGrandeCity_ChampionsRoom_EventScript_Defeated::
 	playse SE_DOOR
-	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, 0
-	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, 0
+	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, FALSE
+	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, FALSE
 	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	closemessage
 	playse SE_DOOR
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic
-	compare VAR_RESULT, FEMALE
-	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic
+	call_if_eq VAR_RESULT, MALE, EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic
+	call_if_eq VAR_RESULT, FEMALE, EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic
 	addobject LOCALID_RIVAL
 	call EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_MayAdvice
-	compare VAR_RESULT, FEMALE
-	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice
+	goto_if_eq VAR_RESULT, MALE, EverGrandeCity_ChampionsRoom_EventScript_MayAdvice
+	goto_if_eq VAR_RESULT, FEMALE, EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic::
@@ -132,16 +128,14 @@ EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF::
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside, MSGBOX_DEFAULT
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations
-	compare VAR_RESULT, FEMALE
-	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations
+	call_if_eq VAR_RESULT, MALE, EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations
+	call_if_eq VAR_RESULT, FEMALE, EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations
 	closemessage
 	applymovement LOCALID_WALLACE, EverGrandeCity_ChampionsRoom_Movement_WallaceExit
 	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerExit
 	waitmovement 0
 	setflag FLAG_HIDE_PETALBURG_GYM_GREETER
-	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 255, 7, 16
+	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 7, 16
 	waitstate
 	releaseall
 	end

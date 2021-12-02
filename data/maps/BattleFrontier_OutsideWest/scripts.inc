@@ -20,9 +20,8 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	checkitem ITEM_SS_TICKET, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq BattleFrontier_OutsideWest_EventScript_NoSSTicket
+	checkitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_OutsideWest_EventScript_NoSSTicket
 	message BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo
 	waitmessage
 	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination
@@ -44,22 +43,20 @@ BattleFrontier_OutsideWest_EventScript_NoSSTicket::
 
 BattleFrontier_OutsideWest_EventScript_FerryToSlateport::
 	msgbox BattleFrontier_OutsideWest_Text_SlateportItIs, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
 	msgbox BattleFrontier_OutsideWest_Text_PleaseBoardFerry, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_BoardFerry
-	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 8, 11
 	waitstate
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_FerryToLilycove::
 	msgbox BattleFrontier_OutsideWest_Text_LilycoveItIs, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
 	msgbox BattleFrontier_OutsideWest_Text_PleaseBoardFerry, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_BoardFerry
-	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
 	waitstate
 	release
 	end
@@ -155,14 +152,10 @@ BattleFrontier_OutsideWest_EventScript_Camper::
 	lock
 	faceplayer
 	delay 20
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq BattleFrontier_OutsideWest_EventScript_CamperFaceFactory
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory
-	compare VAR_FACING, DIR_WEST
-	call_if_eq BattleFrontier_OutsideWest_EventScript_CamperFaceFactory
-	compare VAR_FACING, DIR_EAST
-	call_if_eq BattleFrontier_OutsideWest_EventScript_CamperFaceFactory
+	call_if_eq VAR_FACING, DIR_NORTH, BattleFrontier_OutsideWest_EventScript_CamperFaceFactory
+	call_if_eq VAR_FACING, DIR_SOUTH, BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory
+	call_if_eq VAR_FACING, DIR_WEST, BattleFrontier_OutsideWest_EventScript_CamperFaceFactory
+	call_if_eq VAR_FACING, DIR_EAST, BattleFrontier_OutsideWest_EventScript_CamperFaceFactory
 	msgbox BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons, MSGBOX_DEFAULT
 	release
 	end
@@ -180,14 +173,10 @@ BattleFrontier_OutsideWest_EventScript_Girl::
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper
 	waitmessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq BattleFrontier_OutsideWest_EventScript_GirlShudderNorth
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq BattleFrontier_OutsideWest_EventScript_GirlShudderSouth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq BattleFrontier_OutsideWest_EventScript_GirlShudderWest
-	compare VAR_FACING, DIR_EAST
-	call_if_eq BattleFrontier_OutsideWest_EventScript_GirlShudderEast
+	call_if_eq VAR_FACING, DIR_NORTH, BattleFrontier_OutsideWest_EventScript_GirlShudderNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, BattleFrontier_OutsideWest_EventScript_GirlShudderSouth
+	call_if_eq VAR_FACING, DIR_WEST, BattleFrontier_OutsideWest_EventScript_GirlShudderWest
+	call_if_eq VAR_FACING, DIR_EAST, BattleFrontier_OutsideWest_EventScript_GirlShudderEast
 	waitbuttonpress
 	release
 	end
@@ -237,8 +226,7 @@ BattleFrontier_OutsideWest_EventScript_Woman2::
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors, MSGBOX_DEFAULT
 	random 2
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors
+	goto_if_eq VAR_RESULT, 1, BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors
 	goto BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors
 	end
 

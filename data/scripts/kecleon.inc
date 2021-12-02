@@ -48,17 +48,15 @@ Route119_EventScript_Kecleon2::
 	end
 
 EventScript_Kecleon::
-	checkitem ITEM_DEVON_SCOPE, 1
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_AskUseDevonScope
+	checkitem ITEM_DEVON_SCOPE
+	goto_if_eq VAR_RESULT, TRUE, EventScript_AskUseDevonScope
 	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_DEFAULT
 	release
 	end
 
 EventScript_AskUseDevonScope::
 	msgbox Kecleon_Text_WantToUseDevonScope, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq EventScript_BattleKecleon
+	goto_if_eq VAR_RESULT, YES, EventScript_BattleKecleon
 	release
 	end
 
@@ -78,12 +76,9 @@ EventScript_BattleKecleon::
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq EventScript_RemoveKecleon
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq EventScript_RemoveKecleon
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq EventScript_RemoveKecleon
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EventScript_RemoveKecleon
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EventScript_RemoveKecleon
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EventScript_RemoveKecleon
 	release
 	end
 

@@ -24,16 +24,14 @@ TrainerHill_Entrance_OnResume:
 	trainerhill_resumetimer
 	setvar VAR_TEMP_0, 0
 	trainerhill_getusingereader
-	compare VAR_RESULT, FALSE  @ VAR_RESULT always FALSE here
-	goto_if_eq TrainerHill_Entrance_EventScript_TryFaceAttendant
+	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_TryFaceAttendant  @ VAR_RESULT always FALSE here
 	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 6
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant
 	end
 
 TrainerHill_Entrance_EventScript_TryFaceAttendant::
 	trainerhill_getwon
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant
 	end
 
@@ -48,12 +46,11 @@ TrainerHill_Entrance_OnReturn:
 	end
 
 TrainerHill_Entrance_OnLoad:
-	compare VAR_TEMP_D, 17
-	call_if_eq TrainerHill_Entrance_EventScript_OpenCounterDoor
+	call_if_eq VAR_TEMP_D, 17, TrainerHill_Entrance_EventScript_OpenCounterDoor
 	end
 
 TrainerHill_Entrance_EventScript_OpenCounterDoor::
-	setmetatile 17, 10, METATILE_TrainerHill_GreenFloorTile, 0
+	setmetatile 17, 10, METATILE_TrainerHill_GreenFloorTile, FALSE
 	return
 
 TrainerHill_Entrance_OnFrame:
@@ -67,7 +64,7 @@ TrainerHill_Entrance_EventScript_ExitElevator::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerExitElevator
 	waitmovement 0
-	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, 1
+	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, TRUE
 	special DrawWholeMapView
 	playse SE_CLICK
 	waitse
@@ -115,8 +112,7 @@ TrainerHill_Entrance_EventScript_Attendant::
 	lock
 	faceplayer
 	trainerhill_inchallenge
-	compare VAR_RESULT, FALSE
-	goto_if_eq TrainerHill_Entrance_EventScript_ThanksForPlaying
+	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_ThanksForPlaying
 	msgbox TrainerHill_Entrance_Text_HopeYouGiveItYourBest, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_AttendantEnd
 
@@ -132,11 +128,9 @@ TrainerHill_Entrance_EventScript_EntryTrigger::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_Closed
 	msgbox TrainerHill_Entrance_Text_WelcomeToTrainerHill, MSGBOX_DEFAULT
 	trainerhill_getsaved
-	compare VAR_RESULT, FALSE
-	call_if_eq TrainerHill_Entrance_EventScript_SaveGame
+	call_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveGame
 	trainerhill_allfloorsused
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerHill_Entrance_EventScript_AllFloorsUsed
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_AllFloorsUsed
 	msgbox TrainerHill_Entrance_Text_TrainersUpToFloorX, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_AskChallengeTrainers
 
@@ -186,8 +180,7 @@ TrainerHill_Entrance_EventScript_SaveGame::
 	trainerhill_setsaved
 	setvar VAR_TEMP_5, 1
 	call Common_EventScript_SaveGame
-	compare VAR_RESULT, FALSE
-	goto_if_eq TrainerHill_Entrance_EventScript_SaveFailed
+	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveFailed
 	trainerhill_setsaved
 	return
 

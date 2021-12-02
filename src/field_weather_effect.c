@@ -2487,19 +2487,19 @@ static void CreateAbnormalWeatherTask(void)
 static u8 TranslateWeatherNum(u8);
 static void UpdateRainCounter(u8, u8);
 
-void SetSav1Weather(u32 weather)
+void SetSavedWeather(u32 weather)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }
 
-u8 GetSav1Weather(void)
+u8 GetSavedWeather(void)
 {
     return gSaveBlock1Ptr->weather;
 }
 
-void SetSav1WeatherFromCurrMapHeader(void)
+void SetSavedWeatherFromCurrMapHeader(void)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
@@ -2508,19 +2508,19 @@ void SetSav1WeatherFromCurrMapHeader(void)
 
 void SetWeather(u32 weather)
 {
-    SetSav1Weather(weather);
-    SetNextWeather(GetSav1Weather());
+    SetSavedWeather(weather);
+    SetNextWeather(GetSavedWeather());
 }
 
 void SetWeather_Unused(u32 weather)
 {
-    SetSav1Weather(weather);
-    SetCurrentAndNextWeather(GetSav1Weather());
+    SetSavedWeather(weather);
+    SetCurrentAndNextWeather(GetSavedWeather());
 }
 
 void DoCurrentWeather(void)
 {
-    u8 weather = GetSav1Weather();
+    u8 weather = GetSavedWeather();
 
     if (weather == WEATHER_ABNORMAL)
     {
@@ -2539,7 +2539,7 @@ void DoCurrentWeather(void)
 
 void ResumePausedWeather(void)
 {
-    u8 weather = GetSav1Weather();
+    u8 weather = GetSavedWeather();
 
     if (weather == WEATHER_ABNORMAL)
     {

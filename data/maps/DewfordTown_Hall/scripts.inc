@@ -11,8 +11,7 @@ DewfordTown_Hall_EventScript_Girl::
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
 	special IsTrendyPhraseBoring
-	compare VAR_RESULT, TRUE
-	goto_if_eq DewfordTown_Hall_EventScript_GirlBoredOfTrend
+	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Hall_EventScript_GirlBoredOfTrend
 	msgbox DewfordTown_Hall_Text_CantImagineLifeWithoutTrend, MSGBOX_DEFAULT
 	release
 	end
@@ -36,10 +35,8 @@ DewfordTown_Hall_EventScript_Man::
 	call Common_EventScript_BufferTrendyPhrase
 	special BufferDeepLinkPhrase
 	msgbox DewfordTown_Hall_Text_DeepLinkBetweenXAndY, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq DewfordTown_Hall_EventScript_ConfirmTrendLink
-	compare VAR_RESULT, NO
-	goto_if_eq DewfordTown_Hall_EventScript_RejectTrendLink
+	goto_if_eq VAR_RESULT, YES, DewfordTown_Hall_EventScript_ConfirmTrendLink
+	goto_if_eq VAR_RESULT, NO, DewfordTown_Hall_EventScript_RejectTrendLink
 	end
 
 DewfordTown_Hall_EventScript_ConfirmTrendLink::
@@ -196,15 +193,12 @@ DewfordTown_Hall_EventScript_DontMovePlayer1::
 DewfordTown_Hall_EventScript_DebateReact1::
 	applymovement LOCALID_PSYCHIC_M, DewfordTown_Hall_Movement_PsychicWalkInPlaceLeft
 	waitmovement 0
-	compare VAR_0x8008, 0
-	goto_if_eq DewfordTown_Hall_EventScript_PlayerReactWest
-	compare VAR_0x8008, 1
-	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer2
+	goto_if_eq VAR_0x8008, 0, DewfordTown_Hall_EventScript_PlayerReactWest
+	goto_if_eq VAR_0x8008, 1, DewfordTown_Hall_EventScript_DontMovePlayer2
 	end
 
 DewfordTown_Hall_EventScript_PlayerReactWest::
-	compare VAR_FACING, DIR_EAST
-	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer1
+	goto_if_eq VAR_FACING, DIR_EAST, DewfordTown_Hall_EventScript_DontMovePlayer1
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
@@ -215,17 +209,13 @@ DewfordTown_Hall_EventScript_DontMovePlayer2::
 DewfordTown_Hall_EventScript_DebateReact2::
 	applymovement LOCALID_SCHOOL_KID_M, DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight
 	waitmovement 0
-	compare VAR_0x8008, 0
-	goto_if_eq DewfordTown_Hall_EventScript_PlayerReactNorthSouth
-	compare VAR_0x8008, 1
-	goto_if_eq DewfordTown_Hall_EventScript_PlayerReactEast
+	goto_if_eq VAR_0x8008, 0, DewfordTown_Hall_EventScript_PlayerReactNorthSouth
+	goto_if_eq VAR_0x8008, 1, DewfordTown_Hall_EventScript_PlayerReactEast
 	end
 
 DewfordTown_Hall_EventScript_PlayerReactNorthSouth::
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq DewfordTown_Hall_EventScript_PlayerWalkInPlaceUp
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq DewfordTown_Hall_EventScript_PlayerWalkInPlaceDown
+	call_if_eq VAR_FACING, DIR_NORTH, DewfordTown_Hall_EventScript_PlayerWalkInPlaceUp
+	call_if_eq VAR_FACING, DIR_SOUTH, DewfordTown_Hall_EventScript_PlayerWalkInPlaceDown
 	return
 
 DewfordTown_Hall_EventScript_PlayerWalkInPlaceUp::
@@ -239,8 +229,7 @@ DewfordTown_Hall_EventScript_PlayerWalkInPlaceDown::
 	return
 
 DewfordTown_Hall_EventScript_PlayerReactEast::
-	compare VAR_FACING, DIR_WEST
-	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer1
+	goto_if_eq VAR_FACING, DIR_WEST, DewfordTown_Hall_EventScript_DontMovePlayer1
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
@@ -260,8 +249,7 @@ DewfordTown_Hall_EventScript_SludgeBombMan::
 	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
 	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
 	giveitem ITEM_TM36
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
 	release
 	end

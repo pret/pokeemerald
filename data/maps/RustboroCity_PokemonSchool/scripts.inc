@@ -78,14 +78,11 @@ RustboroCity_PokemonSchool_EventScript_Teacher::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_GaveQuickClaw
-	compare VAR_FACING, DIR_EAST
-	call_if_eq RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
-	compare VAR_FACING, DIR_WEST
-	call_if_eq RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
+	call_if_eq VAR_FACING, DIR_EAST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
+	call_if_eq VAR_FACING, DIR_WEST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
 	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
 	giveitem ITEM_QUICK_CLAW
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0

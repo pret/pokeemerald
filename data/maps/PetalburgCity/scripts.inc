@@ -11,14 +11,10 @@ PetalburgCity_MapScripts::
 
 PetalburgCity_OnTransition:
 	setflag FLAG_VISITED_PETALBURG_CITY
-	compare VAR_PETALBURG_CITY_STATE, 0
-	call_if_eq PetalburgCity_EventScript_MoveGymBoyToWestEntrance
-	compare VAR_PETALBURG_CITY_STATE, 2
-	call_if_eq PetalburgCity_EventScript_DisableMapNameAndMusic
-	compare VAR_PETALBURG_CITY_STATE, 4
-	call_if_eq PetalburgCity_EventScript_DisableMapNameAndMusic
-	compare VAR_PETALBURG_GYM_STATE, 8
-	call_if_eq PetalburgCity_EventScript_SetGymDoorsUnlocked
+	call_if_eq VAR_PETALBURG_CITY_STATE, 0, PetalburgCity_EventScript_MoveGymBoyToWestEntrance
+	call_if_eq VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_DisableMapNameAndMusic
+	call_if_eq VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_DisableMapNameAndMusic
+	call_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_EventScript_SetGymDoorsUnlocked
 	end
 
 PetalburgCity_EventScript_MoveGymBoyToWestEntrance::
@@ -60,7 +56,7 @@ PetalburgCity_EventScript_WallyTutorial::
 	clearflag FLAG_DONT_TRANSITION_MUSIC
 	special LoadPlayerParty
 	setvar VAR_PETALBURG_GYM_STATE, 1
-	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
+	warp MAP_PETALBURG_CITY_GYM, 4, 108
 	waitstate
 	releaseall
 	end
@@ -85,7 +81,7 @@ PetalburgCity_EventScript_WalkToWallyHouse::
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadedefaultbgm
 	clearflag FLAG_DONT_TRANSITION_MUSIC
-	warp MAP_PETALBURG_CITY_WALLYS_HOUSE, 255, 2, 4
+	warp MAP_PETALBURG_CITY_WALLYS_HOUSE, 2, 4
 	waitstate
 	releaseall
 	end
@@ -277,24 +273,16 @@ PetalburgCity_EventScript_ShowGymToPlayer::
 	waitmovement 0
 	applymovement LOCALID_GYM_BOY, Common_Movement_Delay48
 	waitmovement 0
-	compare VAR_0x8008, 0
-	call_if_eq PetalburgCity_EventScript_BoyApproachPlayer0
-	compare VAR_0x8008, 1
-	call_if_eq PetalburgCity_EventScript_BoyApproachPlayer1
-	compare VAR_0x8008, 2
-	call_if_eq PetalburgCity_EventScript_BoyApproachPlayer2
-	compare VAR_0x8008, 3
-	call_if_eq PetalburgCity_EventScript_BoyApproachPlayer3
+	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_BoyApproachPlayer0
+	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_BoyApproachPlayer1
+	call_if_eq VAR_0x8008, 2, PetalburgCity_EventScript_BoyApproachPlayer2
+	call_if_eq VAR_0x8008, 3, PetalburgCity_EventScript_BoyApproachPlayer3
 	msgbox PetalburgCity_Text_AreYouRookieTrainer, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_0x8008, 0
-	call_if_eq PetalburgCity_EventScript_LeadPlayerToGym0
-	compare VAR_0x8008, 1
-	call_if_eq PetalburgCity_EventScript_LeadPlayerToGym1
-	compare VAR_0x8008, 2
-	call_if_eq PetalburgCity_EventScript_LeadPlayerToGym2
-	compare VAR_0x8008, 3
-	call_if_eq PetalburgCity_EventScript_LeadPlayerToGym3
+	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_LeadPlayerToGym0
+	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_LeadPlayerToGym1
+	call_if_eq VAR_0x8008, 2, PetalburgCity_EventScript_LeadPlayerToGym2
+	call_if_eq VAR_0x8008, 3, PetalburgCity_EventScript_LeadPlayerToGym3
 	msgbox PetalburgCity_Text_ThisIsPetalburgGym, MSGBOX_DEFAULT
 	applymovement LOCALID_GYM_BOY, Common_Movement_WalkInPlaceFasterRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
@@ -571,14 +559,10 @@ PetalburgCity_EventScript_Scott::
 	delay 30
 	msgbox PetalburgCity_Text_ImLookingForTalentedTrainers, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_0x8008, 0
-	call_if_eq PetalburgCity_EventScript_ScottExit0
-	compare VAR_0x8008, 1
-	call_if_eq PetalburgCity_EventScript_ScottExit1
-	compare VAR_0x8008, 2
-	call_if_eq PetalburgCity_EventScript_ScottExit2
-	compare VAR_0x8008, 3
-	call_if_eq PetalburgCity_EventScript_ScottExit3
+	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_ScottExit0
+	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_ScottExit1
+	call_if_eq VAR_0x8008, 2, PetalburgCity_EventScript_ScottExit2
+	call_if_eq VAR_0x8008, 3, PetalburgCity_EventScript_ScottExit3
 	setvar VAR_SCOTT_PETALBURG_ENCOUNTER, 1
 	removeobject LOCALID_SCOTT
 	releaseall

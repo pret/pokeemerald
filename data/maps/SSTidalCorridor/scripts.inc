@@ -45,10 +45,8 @@ SSTidalRooms_EventScript_ArrivedInLilycove::
 	return
 
 SSTidalCorridor_EventScript_ReachedStepCount::
-	compare VAR_SS_TIDAL_STATE, SS_TIDAL_DEPART_SLATEPORT
-	goto_if_eq SSTidalCorridor_EventScript_HalfwayToLilycove
-	compare VAR_SS_TIDAL_STATE, SS_TIDAL_HALFWAY_SLATEPORT
-	goto_if_eq SSTidalCorridor_EventScript_ArrivedInSlateport
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_DEPART_SLATEPORT, SSTidalCorridor_EventScript_HalfwayToLilycove
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_HALFWAY_SLATEPORT, SSTidalCorridor_EventScript_ArrivedInSlateport
 	end
 
 SSTidalCorridor_EventScript_HalfwayToLilycove::
@@ -117,10 +115,8 @@ SSTidalCorridor_EventScript_Cabin4Sign::
 SSTidalCorridor_EventScript_ExitSailor::
 	lock
 	faceplayer
-	compare VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_LILYCOVE
-	goto_if_eq SSTidalCorridor_EventScript_ExitLilycove
-	compare VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_SLATEPORT
-	goto_if_eq SSTidalCorridor_EventScript_ExitSlateport
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_LILYCOVE, SSTidalCorridor_EventScript_ExitLilycove
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_SLATEPORT, SSTidalCorridor_EventScript_ExitSlateport
 	msgbox SSTidalCorridor_Text_CanRestInCabin2, MSGBOX_DEFAULT
 	release
 	end
@@ -129,7 +125,7 @@ SSTidalCorridor_EventScript_ExitLilycove::
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_WeveArrived, MSGBOX_DEFAULT
 	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_HideSnatchGiver
-	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
 	waitstate
 	release
 	end
@@ -138,7 +134,7 @@ SSTidalCorridor_EventScript_ExitSlateport::
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_WeveArrived, MSGBOX_DEFAULT
 	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_HideSnatchGiver
-	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 8, 11
 	waitstate
 	release
 	end
@@ -149,10 +145,8 @@ SSTidalCorridor_EventScript_HideSnatchGiver::
 
 SSTidalCorridor_EventScript_Porthole::
 	lockall
-	compare VAR_SS_TIDAL_STATE, SS_TIDAL_DEPART_SLATEPORT
-	goto_if_eq SSTidalCorridor_EventScript_LookThroughPorthole
-	compare VAR_SS_TIDAL_STATE, SS_TIDAL_HALFWAY_SLATEPORT
-	goto_if_eq SSTidalCorridor_EventScript_LookThroughPorthole
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_DEPART_SLATEPORT, SSTidalCorridor_EventScript_LookThroughPorthole
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_HALFWAY_SLATEPORT, SSTidalCorridor_EventScript_LookThroughPorthole
 	msgbox SSTidalCorridor_Text_HorizonSpreadsBeyondPorthole, MSGBOX_DEFAULT
 	releaseall
 	end

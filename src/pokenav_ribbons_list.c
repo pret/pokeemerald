@@ -721,7 +721,7 @@ static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest
         GetBoxMonData(mon, MON_DATA_NICKNAME, gStringVar3);
     }
 
-    StringGetEnd10(gStringVar3);
+    StringGet_Nickname(gStringVar3);
     dest = GetStringClearToWidth(dest, FONT_NORMAL, gStringVar3, 60);
     switch (gender)
     {
