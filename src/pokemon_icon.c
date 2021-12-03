@@ -2678,7 +2678,7 @@ const u8 *GetMonIconPtr(u16 species, u32 personality)
     return GetMonIconTiles(GetIconSpecies(species, personality), personality);
 }
 
-#if P_ENABLE_DEBUG
+#if P_ENABLE_DEBUG == TRUE
 static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale)
 {
     return GetMonIconTilesCustom(GetIconSpecies(species, personality), isFemale);
