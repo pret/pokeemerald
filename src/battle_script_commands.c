@@ -3169,11 +3169,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
                     }
                     else if (gBattleMons[gBattlerAttacker].item != 0
-                    #ifdef ITEM_EXPANSION
-                        || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY_E_READER
-                    #else
                         || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY
-                    #endif
                         || gBattleMons[gBattlerTarget].item == 0)
                     {
                         gBattlescriptCurrInstr++;
