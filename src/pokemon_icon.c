@@ -23,7 +23,7 @@ struct MonIconSpriteTemplate
 
 // static functions
 static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
-#if P_ENABLE_DEBUG
+#if P_ENABLE_DEBUG == TRUE
 static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale);
 static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale);
 #endif
