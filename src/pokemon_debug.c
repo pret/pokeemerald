@@ -1,4 +1,4 @@
-//Credits: Gamer2020, AsparagusEduardo
+//Credits: Gamer2020, AsparagusEduardo, TheXaman
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -118,6 +118,7 @@ static const struct WindowTemplate sPokemonDebugMsgBoxWindowTemplate =
     .baseBlock = 0x100
 };
 
+#if P_ENABLE_DEBUG
 //Function declarations
 static void PrintDigitChars(struct PokemonDebugMenu *data);
 static void SetUpModifyArrows(struct PokemonDebugMenu *data);
@@ -676,3 +677,5 @@ static void Exit_Debug_Pokemon(u8 taskId)
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
     }
 }
+
+#endif
