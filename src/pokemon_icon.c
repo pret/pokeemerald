@@ -2580,7 +2580,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
     return spriteId;
 }
 
-#if P_ENABLE_DEBUG
+#if P_ENABLE_DEBUG == TRUE
 u8 CreateMonIconCustom(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality, bool8 isFemale, bool8 isShiny)
 {
     u8 spriteId;
