@@ -614,14 +614,14 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_APICOT_BERRY] = {gItemIcon_ApicotBerry, gItemIconPalette_ApicotBerry},
     [ITEM_LANSAT_BERRY] = {gItemIcon_LansatBerry, gItemIconPalette_LansatBerry},
     [ITEM_STARF_BERRY] = {gItemIcon_StarfBerry, gItemIconPalette_StarfBerry},
-    [ITEM_ENIGMA_BERRY] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
+    [ITEM_ENIGMA_BERRY_NEW] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_MICLE_BERRY] = {gItemIcon_MicleBerry, gItemIconPalette_MicleBerry},
     [ITEM_CUSTAP_BERRY] = {gItemIcon_CustapBerry, gItemIconPalette_CustapBerry},
     [ITEM_JABOCA_BERRY] = {gItemIcon_JabocaBerry, gItemIconPalette_JabocaBerry},
     [ITEM_ROWAP_BERRY] = {gItemIcon_RowapBerry, gItemIconPalette_RowapBerry},
     [ITEM_KEE_BERRY] = {gItemIcon_KeeBerry, gItemIconPalette_KeeBerry},
     [ITEM_MARANGA_BERRY] = {gItemIcon_MarangaBerry, gItemIconPalette_MarangaBerry},
-    [ITEM_ENIGMA_BERRY_E_READER] = {gItemIcon_EnigmaBerry, gItemIconPalette_EnigmaBerry},
+    [ITEM_ENIGMA_BERRY] = {gItemIcon_EnigmaBerry, gItemIconPalette_EnigmaBerry},
     // TMs/HMs
     [ITEM_TM01] = {gItemIcon_TM, gItemIconPalette_FightingTMHM},
     [ITEM_TM02] = {gItemIcon_TM, gItemIconPalette_DragonTMHM},
