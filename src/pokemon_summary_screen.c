@@ -1556,7 +1556,7 @@ static void Task_HandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
-        #if P_ENABLE_DEBUG
+        #if P_ENABLE_DEBUG == TRUE
         else if (JOY_NEW(SELECT_BUTTON))
         {
             sMonSummaryScreen->callback = CB2_Debug_Pokemon;
