@@ -1,4 +1,4 @@
-//Credits: Gamer2020, AsparagusEduardo, TheXaman
+//Credits: Gamer2020, AsparagusEduardo, TheXaman, ShinyDragonHunter
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -18,6 +18,7 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
+#include "pokemon.h"
 #include "pokemon_animation.h"
 #include "pokemon_debug.h"
 #include "pokemon_icon.h"
@@ -34,8 +35,8 @@
 #include "constants/items.h"
 
 //Defines
-#define DEBUG_MON_X 140
-#define DEBUG_MON_Y 14
+#define DEBUG_MON_X 137
+#define DEBUG_MON_Y 18
 #define DEBUG_MON_BACK_X 32
 #define DEBUG_MON_BACK_Y 50
 #define DEBUG_ICON_X 158
@@ -154,16 +155,28 @@ static void PadString(const u8 *src, u8 *dst)
 
 static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data)
 {
-    u8 text[] = _("A - Shiny  START - Cry\nL - Back  R - Front$");
-    u8 textGender[] = _("A - Shiny  START - Cry\nL - Back  R - Front SEL - Gender$");
+    u8 text[] = _("{A_BUTTON} Shiny\n{L_BUTTON} Back  {R_BUTTON} Front$");
+    u8 textGender[] = _("{A_BUTTON} Shiny\n{L_BUTTON} Back  {R_BUTTON} Front {SELECT_BUTTON} Gender$");
+    u8 textForms[] = _("{A_BUTTON} Shiny  {START_BUTTON} Forms\n{L_BUTTON} Back  {R_BUTTON} Front$");
+    u8 textGenderForms[] = _("{A_BUTTON} Shiny  {START_BUTTON} Forms\n{L_BUTTON} Back  {R_BUTTON} Front {SELECT_BUTTON} Gender$");
     u16 species = data->modifyArrows.currValue;
     
 
     FillWindowPixelBuffer(windowId, 0x11);
     if (SpeciesHasGenderDifference[species])
-        AddTextPrinterParameterized(windowId, 1, textGender, 0, 0, 0, NULL);
+    {
+        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+            AddTextPrinterParameterized(windowId, 1, textGenderForms, 0, 0, 0, NULL);
+        else
+            AddTextPrinterParameterized(windowId, 1, textGender, 0, 0, 0, NULL);
+    }
     else
-        AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
+    {
+        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+            AddTextPrinterParameterized(windowId, 1, textForms, 0, 0, 0, NULL);
+        else
+            AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
+    }
     CopyWindowToVram(windowId, 3);
 }
 
@@ -416,7 +429,7 @@ void CB2_Debug_Pokemon(void)
             data = AllocZeroed(sizeof(struct PokemonDebugMenu));
             SetStructPtr(taskId, data);
 
-            data->currentmonId = 1;
+            data->currentmonId = SPECIES_BULBASAUR;
             species = data->currentmonId;
 
             data->InstructionsWindowId = AddWindow(&sDebugPokemonInstructionsTemplate);
@@ -527,10 +540,12 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
 
     if (JOY_NEW(L_BUTTON))
     {
+        PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         LaunchAnimationTaskForBackSprite(Backsprite, GetSpeciesBackAnimSet(data->currentmonId));
     }
     else if (JOY_NEW(R_BUTTON))
     {
+        PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         if (HasTwoFramesAnimation(data->currentmonId))
             StartSpriteAnim(Frontsprite, 1);
         BattleAnimateFrontSprite(Frontsprite, data->currentmonId, TRUE, 1);
@@ -547,13 +562,27 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Exit_Debug_Pokemon;
         PlaySE(SE_PC_OFF);
     }
     else if (JOY_NEW(START_BUTTON))
     {
-        PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
+        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+        {
+            struct PokemonDebugModifyArrows *modArrows = &data->modifyArrows;
+            u8 formId = GetFormIdFromFormSpeciesId(data->currentmonId);
+            if (gFormSpeciesIdTables[data->currentmonId][formId + 1] != FORM_SPECIES_END)
+                modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId + 1);
+            else
+                modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][0];
+                
+            PrintDigitChars(data);
+            UpdateBattlerValue(data);
+            ReloadPokemonSprites(data);
+            while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
+            PlaySE(SE_DEX_SCROLL);
+        }
     }
     else if (JOY_NEW(SELECT_BUTTON) && SpeciesHasGenderDifference[data->currentmonId])
     {
@@ -562,6 +591,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         UpdateBattlerValue(data);
         ReloadPokemonSprites(data);
         while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
+        PlaySE(SE_DEX_SCROLL);
     }
     else if (JOY_NEW(DPAD_DOWN)) // || gMain.heldKeys & DPAD_DOWN)
     {
@@ -673,7 +703,7 @@ static void Exit_Debug_Pokemon(u8 taskId)
         Free(data);
         FreeMonSpritesGfx();
         DestroyTask(taskId);
-        SetMainCallback2(CB2_ReturnToField);
+        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
     }
 }
