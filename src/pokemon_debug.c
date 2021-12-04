@@ -36,9 +36,9 @@
 #include "constants/items.h"
 
 //Defines
-#define DEBUG_MON_X 137
-#define DEBUG_MON_Y 18
-#define DEBUG_MON_BACK_X 32
+#define DEBUG_MON_X 144
+#define DEBUG_MON_Y 11
+#define DEBUG_MON_BACK_X 40
 #define DEBUG_MON_BACK_Y 50
 #define DEBUG_ICON_X 158
 #define DEBUG_ICON_Y 90
