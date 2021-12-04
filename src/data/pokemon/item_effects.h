@@ -36,7 +36,7 @@ const u8 gItemEffect_MaxPotion[7] = {
 
 const u8 gItemEffect_HyperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 120, // Amount of HP to recover
 #else
     [6] = 200, // Amount of HP to recover
@@ -45,7 +45,7 @@ const u8 gItemEffect_HyperPotion[7] = {
 
 const u8 gItemEffect_SuperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 60, // Amount of HP to recover
 #else
     [6] = 50, // Amount of HP to recover
@@ -68,7 +68,7 @@ const u8 gItemEffect_MaxRevive[7] = {
 
 const u8 gItemEffect_FreshWater[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 30, // Amount of HP to recover
 #else
     [6] = 50, // Amount of HP to recover
@@ -77,7 +77,7 @@ const u8 gItemEffect_FreshWater[7] = {
 
 const u8 gItemEffect_SodaPop[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 50, // Amount of HP to recover
 #else
     [6] = 60, // Amount of HP to recover
@@ -86,7 +86,7 @@ const u8 gItemEffect_SodaPop[7] = {
 
 const u8 gItemEffect_Lemonade[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 70, // Amount of HP to recover
 #else
     [6] = 80, // Amount of HP to recover
@@ -101,7 +101,7 @@ const u8 gItemEffect_MoomooMilk[7] = {
 const u8 gItemEffect_EnergyPowder[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 60, // Amount of HP to recover
 #else
     [6] = 50, // Amount of HP to recover
@@ -114,7 +114,7 @@ const u8 gItemEffect_EnergyPowder[10] = {
 const u8 gItemEffect_EnergyRoot[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
-#if I_LEGACY_HEALING_ITEMS >= GEN_7
+#if I_HEALTH_RECOVERY >= GEN_7
     [6] = 120, // Amount of HP to recover
 #else
     [6] = 200, // Amount of HP to recover
