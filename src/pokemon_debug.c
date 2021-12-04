@@ -448,7 +448,7 @@ void CB2_Debug_Pokemon(void)
             AllocateMonSpritesGfx();
 
             LoadPalette(sBgColor, 0, 2);
-            LoadMonIconPalettes();
+            LoadMonIconPalette(SPECIES_BULBASAUR);
 
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
             ShowBg(0);
@@ -686,12 +686,10 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     ResetPaletteFade();
     FreeAllSpritePalettes();
     ResetAllPicSprites();
-    AllocateMonSpritesGfx();
-
-    FreeAllSpritePalettes();
     FreeMonIconPalettes();
 
-    LoadMonIconPalettes();
+    AllocateMonSpritesGfx();
+    LoadMonIconPalette(species);
 
     PrintInstructionsOnWindow(data->InstructionsWindowId, data);
 
