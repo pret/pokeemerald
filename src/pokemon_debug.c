@@ -410,20 +410,6 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, 0x20);
     LoadPalette(gDecompressionBuffer, 0x80 + battlerId * 16, 0x20);
-
-    //if (species == SPECIES_CASTFORM)
-    //{
-    //    paletteOffset = 0x100 + battlerId * 16;
-    //    LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
-    //    LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, 0x20);
-    //}
-
-    // transform's pink color
-    //if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
-    //{
-    //    BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
-    //    CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
-    //}
 }
 
 // *******************************
@@ -582,12 +568,12 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
     struct Sprite *Frontsprite = &gSprites[data->frontspriteId];
     struct Sprite *Backsprite = &gSprites[data->backspriteId];
 
-    if (JOY_NEW(L_BUTTON))
+    if (JOY_NEW(L_BUTTON) && (Backsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         LaunchAnimationTaskForBackSprite(Backsprite, GetSpeciesBackAnimSet(data->currentmonId));
     }
-    else if (JOY_NEW(R_BUTTON))
+    else if (JOY_NEW(R_BUTTON) && (Frontsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         if (HasTwoFramesAnimation(data->currentmonId))
