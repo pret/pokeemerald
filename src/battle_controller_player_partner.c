@@ -1534,10 +1534,12 @@ static void PlayerPartnerHandleChooseMove(void)
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
 
-    if (CanMegaEvolve(gActiveBattler)) // If partner can mega evolve, do it.
+    // If partner can mega evolve, do it.
+    if (CanMegaEvolve(gActiveBattler))
         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
     else
         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+
     PlayerPartnerBufferExecCompleted();
 }
 

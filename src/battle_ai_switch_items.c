@@ -83,7 +83,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
 
     opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
 
-    if (gBattleMons[GetBattlerAtPosition(opposingPosition)].ability != ABILITY_WONDER_GUARD)
+    if (GetBattlerAbility(GetBattlerAtPosition(opposingPosition)) != ABILITY_WONDER_GUARD)
         return FALSE;
 
     // Check if Pokemon has a super effective move.
@@ -177,7 +177,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     else
         return FALSE;
 
-    if (gBattleMons[gActiveBattler].ability == absorbingTypeAbility)
+    if (AI_GetAbility(gActiveBattler) == absorbingTypeAbility)
         return FALSE;
 
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
@@ -229,7 +229,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
 {
     if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
         return FALSE;
-    if (gBattleMons[gActiveBattler].ability != ABILITY_NATURAL_CURE)
+    if (AI_GetAbility(gActiveBattler) != ABILITY_NATURAL_CURE)
         return FALSE;
     if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 2)
         return FALSE;
@@ -437,6 +437,7 @@ bool32 ShouldSwitch(void)
         return FALSE;
 
     availableToSwitch = 0;
+
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         battlerIn1 = gActiveBattler;
@@ -852,7 +853,8 @@ static bool8 ShouldUseItem(void)
                 break;
             if (gBattleMons[gActiveBattler].hp == 0)
                 break;
-            if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4 || gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > itemEffects[paramOffset])
+            if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4
+                || gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > itemEffects[paramOffset])
                 shouldUse = TRUE;
             break;
         case AI_ITEM_CURE_CONDITION:

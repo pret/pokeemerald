@@ -1542,7 +1542,7 @@ static void OpponentHandlePrintSelectionString(void)
 
 static void OpponentHandleChooseAction(void)
 {
-    AI_TrySwitchOrUseItem();
+    AI_TrySwitchOrUseItem();    // TODO consider move choice first
     OpponentBufferExecCompleted();
 }
 
@@ -1591,7 +1591,9 @@ static void OpponentHandleChooseMove(void)
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
-                if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
+
+                // If opponent can mega evolve, do it.
+                if (CanMegaEvolve(gActiveBattler))
                     BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
                 else
                     BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
@@ -1599,7 +1601,7 @@ static void OpponentHandleChooseMove(void)
             }
             OpponentBufferExecCompleted();
         }
-        else
+        else // Wild pokemon - use random move
         {
             u16 move;
             do
