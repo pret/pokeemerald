@@ -33,6 +33,14 @@ void ItemUseInBattle_EnigmaBerry(u8);
 void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseDigOrEscapeRopeOnCurMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
-u32 CanThrowBall(void);
+
+enum {
+    BALL_FAIL_TWO_PRESENT_MONS,
+    BALL_FAIL_NO_ROOM,
+    BALL_FAIL_SEMI_INVULNERABLE,
+    BALL_SUCCESS,
+};
+
+bool32 CanThrowBall(void);
 
 #endif // GUARD_ITEM_USE_H
