@@ -827,6 +827,7 @@ gBattleAnims_General::
 	.4byte General_GulpMissile              @ B_ANIM_GULP_MISSILE
 	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
 	.4byte General_PrimalReversion          @ B_ANIM_PRIMAL_REVERSION
+	.4byte General_AquaRingHeal				@ B_ANIM_AQUA_RING_HEAL
 
 	.align 2
 gBattleAnims_Special::
@@ -1707,10 +1708,12 @@ Move_HEART_SWAP:
 	end
 
 Move_AQUA_RING:
+General_AquaRingHeal:
 	loadspritegfx ANIM_TAG_BLUE_STAR
 	loadspritegfx ANIM_TAG_SMALL_BUBBLES
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	loadspritegfx ANIM_TAG_GUARD_RING
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_GUARD_RING, 0, 14, 14, RGB_BLUE
 	monbg ANIM_ATK_PARTNER
 	setalpha 12, 8
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 23, 1
@@ -1751,9 +1754,6 @@ Move_AQUA_RING:
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
-	delay 1
-	call HealingEffect
-	waitforvisualfinish
 	end
 
 Move_MAGNET_RISE:
