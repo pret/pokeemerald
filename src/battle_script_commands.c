@@ -4113,6 +4113,28 @@ static void Cmd_getexp(void)
     }
 }
 
+#ifdef B_NEW_MULTI_BATTLE_DEFEAT_CONDITION == TRUE
+static bool32 NoAliveMonsForPlayerAndPartner(void)
+{
+    u32 i;
+    u32 HP_count = 0;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && (gPartnerTrainerId == TRAINER_STEVEN_PARTNER || gPartnerTrainerId >= TRAINER_CUSTOM_PARTNER))
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
+            {
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
+            }
+        }
+    }
+
+    return (HP_count == 0);
+}
+#endif
+
 static bool32 NoAliveMonsForPlayer(void)
 {
     u32 i;
@@ -4168,7 +4190,11 @@ static void Cmd_unknown_24(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if (NoAliveMonsForPlayer())
+    #ifdef B_NEW_MULTI_BATTLE_DEFEAT_CONDITION == TRUE
+    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER) && NoAliveMonsForPlayerAndPartner())
+        gBattleOutcome |= B_OUTCOME_LOST;
+    #endif
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)) && NoAliveMonsForPlayer())
         gBattleOutcome |= B_OUTCOME_LOST;
     if (NoAliveMonsForOpponent())
         gBattleOutcome |= B_OUTCOME_WON;

@@ -226,8 +226,9 @@
 #define B_LAST_USED_BALL            TRUE     // If TRUE, the "last used ball" feature from Gen 7 will be implemented
 #define B_LAST_USED_BALL_BUTTON     R_BUTTON // If last used ball is implemented, this button (or button combo) will trigger throwing the last used ball.
 
-// Other
-#define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
+// Other settings
+#define B_DOUBLE_WILD_CHANCE                0    // % chance of encountering two Pokémon in a Wild Encounter.
+#define B_NEW_MULTI_BATTLE_DEFEAT_CONDITION TRUE // In Gen5+, multi battles end when the Player and also their Partner don't have any more Pokémon to fight.
 
 // Animation Settings
 #define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.
