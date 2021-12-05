@@ -35,10 +35,10 @@ u8 CanUseDigOrEscapeRopeOnCurMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 
 enum {
-    BALL_FAIL_TWO_PRESENT_MONS,
-    BALL_FAIL_NO_ROOM,
-    BALL_FAIL_SEMI_INVULNERABLE,
-    BALL_SUCCESS,
+    BALL_THROW_UNABLE_TWO_MONS,
+    BALL_THROW_UNABLE_NO_ROOM,
+    BALL_THROW_UNABLE_SEMI_INVULNERABLE,
+    BALL_THROW_ABLE,
 };
 
 bool32 CanThrowBall(void);

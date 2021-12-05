@@ -936,33 +936,33 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
-static u32 GetBallThrowFailState(void)
+static u32 GetBallThrowableState(void)
 {
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
-        return BALL_FAIL_TWO_PRESENT_MONS;
+        return BALL_THROW_UNABLE_TWO_MONS;
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
-        return BALL_FAIL_NO_ROOM;
+        return BALL_THROW_UNABLE_NO_ROOM;
 #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
     else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
-        return BALL_FAIL_SEMI_INVULNERABLE;
+        return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
 #endif
 
-    return BALL_SUCCESS;
+    return BALL_THROW_ABLE;
 }
 
 bool32 CanThrowBall(void)
 {
-    return (GetBallThrowFailState() == BALL_SUCCESS);
+    return (GetBallThrowableState() == BALL_THROW_ABLE);
 }
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    switch (GetBallThrowFailState())
+    switch (GetBallThrowableState())
     {
-    case BALL_SUCCESS:
+    case BALL_THROW_ABLE:
     default:
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
@@ -970,20 +970,20 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             CloseBattlePyramidBag(taskId);
         break;
-    case BALL_FAIL_TWO_PRESENT_MONS:
+    case BALL_THROW_UNABLE_TWO_MONS:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_TwoMons, Task_CloseBattlePyramidBagMessage);
         break;
-    case BALL_FAIL_NO_ROOM:
+    case BALL_THROW_UNABLE_NO_ROOM:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, gText_BoxFull, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
         break;
     #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
-    case BALL_FAIL_SEMI_INVULNERABLE:
+    case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
