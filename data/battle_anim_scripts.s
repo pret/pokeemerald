@@ -827,7 +827,7 @@ gBattleAnims_General::
 	.4byte General_GulpMissile              @ B_ANIM_GULP_MISSILE
 	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
 	.4byte General_PrimalReversion          @ B_ANIM_PRIMAL_REVERSION
-	.4byte General_AquaRingHeal				@ B_ANIM_AQUA_RING_HEAL
+	.4byte General_AquaRingHeal             @ B_ANIM_AQUA_RING_HEAL
 
 	.align 2
 gBattleAnims_Special::
