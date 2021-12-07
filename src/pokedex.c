@@ -7347,9 +7347,9 @@ static void PrintStatsScreen_Abilities(u8 taskId)
     u16 species = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
     u8 abilities_x = 5;
     u8 abilities_y = 3;
-    u8 ability0;
-    u8 ability1;
-    u8 abilityHidden;
+    u16 ability0;
+    u16 ability1;
+    u16 abilityHidden;
 
     //Abilitie(s)
     #ifdef POKEMON_EXPANSION
