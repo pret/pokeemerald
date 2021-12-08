@@ -3271,7 +3271,7 @@ static void DoBattleIntro(void)
                 gBattleStruct->hpOnSwitchout[GetBattlerSide(gActiveBattler)] = gBattleMons[gActiveBattler].hp;
                 gBattleMons[gActiveBattler].status2 = 0;
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
-                    gBattleMons[gActiveBattler].statStages[i] = 6;
+                    gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
             }
 
             // Draw sprite.

@@ -1323,7 +1323,7 @@ static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
 static bool32 NoTargetPresent(u32 move)
 {
     if (!IsBattlerAlive(gBattlerTarget))
-        gBattlerTarget = GetMoveTarget(move, 0);
+        gBattlerTarget = GetMoveTarget(move, NO_TARGET_OVERRIDE);
 
     switch (gBattleMoves[move].target)
     {
@@ -1673,16 +1673,16 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
     if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE)
-        evasionStage = DEFAULT_STAT_STAGE ;
+        evasionStage = DEFAULT_STAT_STAGE;
     if (gBattleMoves[move].flags & FLAG_STAT_STAGES_IGNORED)
-        evasionStage = DEFAULT_STAT_STAGE ;
+        evasionStage = DEFAULT_STAT_STAGE;
     if (defAbility == ABILITY_UNAWARE)
-        accStage = DEFAULT_STAT_STAGE ;
+        accStage = DEFAULT_STAT_STAGE;
 
     if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT || gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
         buff = accStage;
     else
-        buff = accStage + DEFAULT_STAT_STAGE  - evasionStage;
+        buff = accStage + DEFAULT_STAT_STAGE - evasionStage;
 
     if (buff < MIN_STAT_STAGE)
         buff = MIN_STAT_STAGE;
@@ -3318,13 +3318,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_CLEAR_SMOG:
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
-                    if (gBattleMons[gEffectBattler].statStages[i] != 6)
+                    if (gBattleMons[gEffectBattler].statStages[i] != DEFAULT_STAT_STAGE)
                         break;
                 }
                 if ((gSpecialStatuses[gEffectBattler].physicalDmg || gSpecialStatuses[gEffectBattler].specialDmg) && i != NUM_BATTLE_STATS)
                 {
                     for (i = 0; i < NUM_BATTLE_STATS; i++)
-                        gBattleMons[gEffectBattler].statStages[i] = 6;
+                        gBattleMons[gEffectBattler].statStages[i] = DEFAULT_STAT_STAGE;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectClearSmog;
                 }
@@ -3377,14 +3377,14 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattleScripting.animArg1 = 0;
                 for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
                 {
-                    if (gBattleMons[gBattlerTarget].statStages[i] > 6 && gBattleMons[gBattlerAttacker].statStages[i] != 12)
+                    if (gBattleMons[gBattlerTarget].statStages[i] > DEFAULT_STAT_STAGE && gBattleMons[gBattlerAttacker].statStages[i] != MAX_STAT_STAGE)
                     {
                         gBattleStruct->stolenStats[0] |= gBitTable[i];
                         // Store by how many stages to raise the stat.
-                        gBattleStruct->stolenStats[i] = gBattleMons[gBattlerTarget].statStages[i] - 6;
-                        while (gBattleMons[gBattlerAttacker].statStages[i] + gBattleStruct->stolenStats[i] > 12)
+                        gBattleStruct->stolenStats[i] = gBattleMons[gBattlerTarget].statStages[i] - DEFAULT_STAT_STAGE;
+                        while (gBattleMons[gBattlerAttacker].statStages[i] + gBattleStruct->stolenStats[i] > MAX_STAT_STAGE)
                             gBattleStruct->stolenStats[i]--;
-                        gBattleMons[gBattlerTarget].statStages[i] = 6;
+                        gBattleMons[gBattlerTarget].statStages[i] = DEFAULT_STAT_STAGE;
 
                         if (gBattleStruct->stolenStats[i] >= 2)
                             byTwo++;
@@ -8194,10 +8194,10 @@ static void Cmd_various(void)
     case VARIOUS_INVERT_STAT_STAGES:
         for (i = 0; i < NUM_BATTLE_STATS; i++)
         {
-            if (gBattleMons[gActiveBattler].statStages[i] < 6) // Negative becomes positive.
-                gBattleMons[gActiveBattler].statStages[i] = 6 + (6 - gBattleMons[gActiveBattler].statStages[i]);
-            else if (gBattleMons[gActiveBattler].statStages[i] > 6) // Positive becomes negative.
-                gBattleMons[gActiveBattler].statStages[i] = 6 - (gBattleMons[gActiveBattler].statStages[i] - 6);
+            if (gBattleMons[gActiveBattler].statStages[i] < DEFAULT_STAT_STAGE) // Negative becomes positive.
+                gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE + (DEFAULT_STAT_STAGE - gBattleMons[gActiveBattler].statStages[i]);
+            else if (gBattleMons[gActiveBattler].statStages[i] > DEFAULT_STAT_STAGE) // Positive becomes negative.
+                gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE - (gBattleMons[gActiveBattler].statStages[i] - DEFAULT_STAT_STAGE);
         }
         break;
     case VARIOUS_SET_TERRAIN:
@@ -8227,7 +8227,7 @@ static void Cmd_various(void)
             default:
                 gCalledMove = move;
                 gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-                gBattlerTarget = GetMoveTarget(gCalledMove, 0);
+                gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
                 gStatuses3[gBattlerAttacker] |= STATUS3_ME_FIRST;
                 gBattlescriptCurrInstr += 7;
                 break;
@@ -8478,7 +8478,7 @@ static void Cmd_various(void)
         {
             gCalledMove = gLastUsedMove;
             gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-            gBattlerTarget = GetMoveTarget(gCalledMove, 0);
+            gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
             gBattlescriptCurrInstr += 7;
         }
         return;
@@ -8836,7 +8836,7 @@ static void Cmd_various(void)
         }
         return;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
-        if (ItemBattleEffects(1, gActiveBattler, FALSE))
+        if (ItemBattleEffects(ITEMEFFECT_NORMAL, gActiveBattler, FALSE))
             return;
         break;
     case VARIOUS_ROOM_SERVICE:

@@ -1768,7 +1768,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
             limitations++;
         }
     }
-    if ((GetBattlerAbility(gActiveBattler) == ABILITY_GORILLA_TACTICS) && *choicedMove != MOVE_NONE 
+    if ((GetBattlerAbility(gActiveBattler) == ABILITY_GORILLA_TACTICS) && *choicedMove != MOVE_NONE
               && *choicedMove != 0xFFFF && *choicedMove != move)
     {
         gCurrentMove = *choicedMove;
@@ -3764,46 +3764,46 @@ u8 TryWeatherFormChange(u8 battler)
     {
         if (GetBattlerAbility(battler) != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
         {
-            ret = 0;
+            ret = 0; // No change
         }
         else if (!weatherEffect && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
         {
             SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-            ret = 1;
+            ret = CASTFORM_NORMAL + 1;
         }
         else if (!weatherEffect)
         {
-            ret = 0;
+            ret = 0; // No change
         }
         else if (holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL)))
         {
             SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-            ret = 1;
+            ret = CASTFORM_NORMAL + 1;
         }
         else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
         {
             SET_BATTLER_TYPE(battler, TYPE_FIRE);
-            ret = 2;
+            ret = CASTFORM_FIRE + 1;
         }
         else if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
         {
             SET_BATTLER_TYPE(battler, TYPE_WATER);
-            ret = 3;
+            ret = CASTFORM_WATER + 1;
         }
         else if (gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
         {
             SET_BATTLER_TYPE(battler, TYPE_ICE);
-            ret = 4;
+            ret = CASTFORM_ICE + 1;
         }
     }
     else if (gBattleMons[battler].species == SPECIES_CHERRIM)
     {
         if (GetBattlerAbility(battler) != ABILITY_FLOWER_GIFT || gBattleMons[battler].hp == 0)
-            ret = 0;
+            ret = 0; // No change
         else if (gBattleMonForms[battler] == 0 && weatherEffect && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
-            ret = 2;
+            ret = CHERRIM_SUNSHINE + 1;
         else if (gBattleMonForms[battler] != 0 && (!weatherEffect || holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || !(gBattleWeather & B_WEATHER_SUN)))
-            ret = 1;
+            ret = CHERRIM_OVERCAST + 1;
     }
 
     return ret;
@@ -4166,7 +4166,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_PASTEL_VEIL;
                 BattleScriptPushCursorAndCallback(BattleScript_PastelVeilActivates);
                 effect++;
-                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
             }
             break;
         case ABILITY_ANTICIPATION:

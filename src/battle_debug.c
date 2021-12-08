@@ -1325,10 +1325,10 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         {
             u8 *txtPtr = StringCopy(text, gStatNamesTable[STAT_ATK + i]);
             txtPtr[0] = CHAR_SPACE;
-            if (gBattleMons[data->battlerId].statStages[STAT_ATK + i] >= 6)
+            if (gBattleMons[data->battlerId].statStages[STAT_ATK + i] >= DEFAULT_STAT_STAGE)
             {
                 txtPtr[1] = CHAR_PLUS;
-                txtPtr[2] = CHAR_0 + (gBattleMons[data->battlerId].statStages[STAT_ATK + i] - 6);
+                txtPtr[2] = CHAR_0 + (gBattleMons[data->battlerId].statStages[STAT_ATK + i] - DEFAULT_STAT_STAGE);
             }
             else
             {

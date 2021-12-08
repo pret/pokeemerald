@@ -449,7 +449,7 @@
 	moveend 2, \to
 	.endm
 
-	.macro sethealblock ptr
+	.macro sethealblock ptr:req
 	.byte 0x4a
 	.4byte \ptr
 	.endm
@@ -607,7 +607,7 @@
 	.byte 0x68
 	.endm
 
-	.macro setgravity ptr
+	.macro setgravity ptr:req
 	.byte 0x69
 	.4byte \ptr
 	.endm
@@ -726,7 +726,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro setmiracleeye ptr
+	.macro setmiracleeye ptr:req
 	.byte 0x83
 	.4byte \ptr
 	.endm
@@ -959,7 +959,7 @@
 	.byte 0xb5
 	.endm
 
-	.macro setembargo ptr
+	.macro setembargo ptr:req
 	.byte 0xb6
 	.4byte \ptr
 	.endm
@@ -1008,7 +1008,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro setstickyweb ptr
+	.macro setstickyweb ptr:req
 	.byte 0xc1
 	.4byte \ptr
 	.endm
@@ -1107,7 +1107,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro setgastroacid ptr
+	.macro setgastroacid ptr:req
 	.byte 0xd6
 	.4byte \ptr
 	.endm
@@ -1141,7 +1141,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro setuserstatus3 flags ptr
+	.macro setuserstatus3 flags:req, ptr:req
 	.byte 0xdd
 	.4byte \flags
 	.4byte \ptr
@@ -1199,7 +1199,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro jumpifsubstituteblocks ptr
+	.macro jumpifsubstituteblocks ptr:req
 	.byte 0xe9
 	.4byte \ptr
 	.endm
@@ -1884,7 +1884,7 @@
 	.2byte \species
 	.4byte \ptr
 	.endm
-	
+
 	.macro tryendneutralizinggas battler:req
 	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
 	.endm
@@ -1994,7 +1994,7 @@
 	jumpifhalfword CMP_NOT_EQUAL, gChosenMove, \move, \jumpptr
 	.endm
 
-	.macro jumpifstatus3 battler, status:req, jumpptr:req
+	.macro jumpifstatus3 battler:req, status:req, jumpptr:req
 	jumpifstatus3condition \battler, \status, FALSE, \jumpptr
 	.endm
 

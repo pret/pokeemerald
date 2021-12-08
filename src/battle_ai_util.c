@@ -659,7 +659,7 @@ bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
 {
     s32 i, moveType;
     u32 usable = 0;
-    u32 unusable = CheckMoveLimitations(attacker, 0, 0xFF);
+    u32 unusable = CheckMoveLimitations(attacker, 0, MOVE_LIMITATIONS_ALL);
     u16 *moves = GetMovesArray(attacker);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1033,7 +1033,7 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2)
 bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 {
     s32 i, dmg;
-    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, MOVE_LIMITATIONS_ALL);
     u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1053,7 +1053,7 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits)
 {
     s32 i, dmg;
-    u32 moveLimitations = CheckMoveLimitations(battlerAtk, 0, 0xFF);
+    u32 moveLimitations = CheckMoveLimitations(battlerAtk, 0, MOVE_LIMITATIONS_ALL);
     u16 *moves = gBattleMons[battlerAtk].moves;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1077,7 +1077,7 @@ bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits)
 bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits)
 {
     s32 i, dmg;
-    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, MOVE_LIMITATIONS_ALL);
 
     if (move != MOVE_NONE && move != 0xFFFF && !(unusable & gBitTable[i]) && AI_CalcDamage(move, battlerDef, battlerAtk) >= gBattleMons[battlerAtk].hp)
         return TRUE;
@@ -1089,7 +1089,7 @@ bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits)
 bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgMod)
 {
     u32 i;
-    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, MOVE_LIMITATIONS_ALL);
     s32 dmg;
     u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
     u32 hpCheck = gBattleMons[battlerAtk].hp + hpMod;
@@ -1909,7 +1909,7 @@ bool32 HasMoveWithLowAccuracy(u8 battlerAtk, u8 battlerDef, u8 accCheck, bool32 
 {
     s32 i;
     u16 *moves = GetMovesArray(battlerAtk);
-    u8 moveLimitations = CheckMoveLimitations(battlerAtk, 0, 0xFF);
+    u8 moveLimitations = CheckMoveLimitations(battlerAtk, 0, MOVE_LIMITATIONS_ALL);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1934,7 +1934,7 @@ bool32 HasMoveWithLowAccuracy(u8 battlerAtk, u8 battlerDef, u8 accCheck, bool32 
 
 bool32 HasSleepMoveWithLowAccuracy(u8 battlerAtk, u8 battlerDef)
 {
-    u8 moveLimitations = CheckMoveLimitations(battlerAtk, 0, 0xFF);
+    u8 moveLimitations = CheckMoveLimitations(battlerAtk, 0, MOVE_LIMITATIONS_ALL);
     u32 i;
     u16 *moves = GetMovesArray(battlerAtk);
 
