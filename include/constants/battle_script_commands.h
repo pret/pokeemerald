@@ -208,6 +208,8 @@
 #define VARIOUS_SET_OCTOLOCK                    135
 #define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
 #define VARIOUS_TRY_END_NEUTRALIZING_GAS        137
+#define VARIOUS_CAN_TELEPORT                    138
+#define VARIOUS_GET_BATTLER_SIDE                139
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

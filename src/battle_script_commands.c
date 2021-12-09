@@ -7505,6 +7505,37 @@ static bool32 IsRototillerAffected(u32 battlerId)
     return TRUE;
 }
 
+static bool32 CanTeleport(u8 battlerId)
+{
+    struct Pokemon* party = NULL;
+    u32 species, count, i;
+
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        species = GetMonData(&party[i], MON_DATA_SPECIES2);
+        if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&party[i], MON_DATA_HP) != 0)
+            count++;
+    }
+
+    switch (GetBattlerSide(battlerId))
+    {
+    case B_SIDE_OPPONENT:
+        if (WILD_DOUBLE_BATTLE || gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            return FALSE;
+    case B_SIDE_PLAYER:
+        if (((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && count >= 3) || (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && count >= 2)))
+            return TRUE;
+    default:
+        break;
+    }
+
+    return FALSE;
+}
+
 static void Cmd_various(void)
 {
     struct Pokemon *mon;
@@ -9281,6 +9312,15 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
+    case VARIOUS_CAN_TELEPORT:
+        gBattleCommunication[0] = CanTeleport(gActiveBattler);
+        break;
+    case VARIOUS_GET_BATTLER_SIDE:
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+            gBattleCommunication[0] = B_SIDE_PLAYER;
+        else
+            gBattleCommunication[0] = B_SIDE_OPPONENT;
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
