@@ -25,18 +25,13 @@ struct LoadedSaveData
  /*0x00F0*/ struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
  /*0x0130*/ struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
  /*0x0230*/ struct ItemSlot berries[BAG_BERRIES_COUNT];
- /*0x02E8*/ struct MailStruct mail[MAIL_COUNT];
+ /*0x02E8*/ struct Mail mail[MAIL_COUNT];
 };
 
 // EWRAM DATA
-EWRAM_DATA struct SaveBlock2 gSaveblock2 = {0};
-EWRAM_DATA u8 gSaveblock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
-
-EWRAM_DATA struct SaveBlock1 gSaveblock1 = {0};
-EWRAM_DATA u8 gSaveblock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
-
-EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gSaveblock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA struct SaveBlock2DMA gSaveblock2 = {0};
+EWRAM_DATA struct SaveBlock1DMA gSaveblock1 = {0};
+EWRAM_DATA struct PokemonStorageDMA gPokemonStorage = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;
@@ -63,14 +58,15 @@ void CheckForFlashMemory(void)
 
 void ClearSav2(void)
 {
-    CpuFill16(0, &gSaveblock2, sizeof(struct SaveBlock2) + sizeof(gSaveblock2_DMA));
+    CpuFill16(0, &gSaveblock2, sizeof(struct SaveBlock2DMA));
 }
 
 void ClearSav1(void)
 {
-    CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1) + sizeof(gSaveblock1_DMA));
+    CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1DMA));
 }
 
+// Offset is the sum of the trainer id bytes
 void SetSaveBlocksPointers(u16 offset)
 {
     struct SaveBlock1** sav1_LocalVar = &gSaveBlock1Ptr;
@@ -197,13 +193,13 @@ void LoadObjectEvents(void)
         gObjectEvents[i] = gSaveBlock1Ptr->objectEvents[i];
 }
 
-void SaveSerializedGame(void)
+void CopyPartyAndObjectsToSave(void)
 {
     SavePlayerParty();
     SaveObjectEvents();
 }
 
-void LoadSerializedGame(void)
+void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();

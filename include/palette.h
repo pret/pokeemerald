@@ -49,8 +49,8 @@ struct PaletteFadeControl
 extern struct PaletteFadeControl gPaletteFade;
 extern u32 gPlttBufferTransferPending;
 extern u8 gPaletteDecompressionBuffer[];
-extern u16 gPlttBufferUnfaded[];
-extern u16 gPlttBufferFaded[];
+extern u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE];
+extern u16 gPlttBufferFaded[PLTT_BUFFER_SIZE];
 
 void LoadCompressedPalette(const u32 *, u16, u16);
 void LoadPalette(const void *, u16, u16);
@@ -58,15 +58,9 @@ void FillPalette(u16, u16, u16);
 void TransferPlttBuffer(void);
 u8 UpdatePaletteFade(void);
 void ResetPaletteFade(void);
-void ReadPlttIntoBuffers(void);
 bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
-bool8 unref_sub_8073D3C(u32, u8, u8, u8, u16);
-void unref_sub_8073D84(u8, u32 *);
-void ResetPaletteStructByUid(u16);
-void ResetPaletteStruct(u8);
+void PaletteStruct_ResetById(u16);
 void ResetPaletteFadeControl(void);
-void unref_sub_8074168(u16);
-void unref_sub_8074194(u16);
 void InvertPlttBuffer(u32);
 void TintPlttBuffer(u32, s8, s8, s8);
 void UnfadePlttBuffer(u32);

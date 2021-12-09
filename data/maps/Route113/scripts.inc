@@ -14,10 +14,8 @@ Route113_OnTransition:
 
 Route113_EventScript_CheckSetAshWeather::
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_TEMP_0, 19
-	goto_if_lt Route113_EventScript_DontSetAshWeather
-	compare VAR_TEMP_0, 84
-	goto_if_gt Route113_EventScript_DontSetAshWeather
+	goto_if_lt VAR_TEMP_0, 19, Route113_EventScript_DontSetAshWeather
+	goto_if_gt VAR_TEMP_0, 84, Route113_EventScript_DontSetAshWeather
 	setweather WEATHER_VOLCANIC_ASH
 	return
 
@@ -61,8 +59,7 @@ Route113_EventScript_Dillon::
 Route113_EventScript_Madeline::
 	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, Route113_EventScript_RegisterMadeline
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route113_EventScript_RematchMadeline
+	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchMadeline
 	msgbox Route113_Text_MadelinePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -83,8 +80,7 @@ Route113_EventScript_RematchMadeline::
 Route113_EventScript_Lao::
 	trainerbattle_single TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, Route113_EventScript_RegisterLao
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route113_EventScript_RematchLao
+	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchLao
 	msgbox Route113_Text_LaoPostBattle, MSGBOX_DEFAULT
 	release
 	end

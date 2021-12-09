@@ -144,7 +144,7 @@ static void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyIte
     if (!isUsingRegisteredKeyItemOnField)
     {
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_DadsAdvice, Task_CloseBattlePyramidBagMessage);
     }
@@ -183,7 +183,7 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
 // Mail in the bag menu can't have a message but it can be checked (view the mail background, no message)
 static void CB2_CheckMail(void)
 {
-    struct MailStruct mail;
+    struct Mail mail;
     mail.itemId = gSpecialVar_ItemId;
     ReadMail(&mail, CB2_ReturnToBagMenuPocket, 0);
 }
@@ -250,7 +250,7 @@ static bool32 CanFish(void)
     {
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) && !MapGridIsImpassableAt(x, y))
             return TRUE;
-        if (MetatileBehavior_8089510(tileBehavior) == TRUE)
+        if (MetatileBehavior_IsBridgeOverWaterNoEdge(tileBehavior) == TRUE)
             return TRUE;
     }
 
@@ -354,12 +354,14 @@ static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 ta
         // Check if there are any hidden items on the current map that haven't been picked up
         if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
-            itemX = (u16)events->bgEvents[i].x + 7;
+            itemX = (u16)events->bgEvents[i].x + MAP_OFFSET;
             distanceX = itemX - playerX;
-            itemY = (u16)events->bgEvents[i].y + 7;
+            itemY = (u16)events->bgEvents[i].y + MAP_OFFSET;
             distanceY = itemY - playerY;
 
-            if ((u16)(distanceX + 7) < 15 && (distanceY >= -5) && (distanceY < 6))
+            // Player can see 7 metatiles on either side horizontally
+            // and 5 metatiles on either side vertically
+            if (distanceX >= -7 && distanceX <= 7 && distanceY >= -5 && distanceY <= 5)
                 SetDistanceOfClosestHiddenItem(taskId, distanceX, distanceY);
         }
     }
@@ -403,27 +405,27 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     {
     // same weird temp variable behavior seen in IsHiddenItemPresentAtCoords
     case 2:
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
-        localLength = mapHeader->mapLayout->height - 7;
+        localLength = mapHeader->mapLayout->height - MAP_OFFSET;
         localY = localLength + y; // additions are reversed for some reason
         break;
     case 1:
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
-        localLength = gMapHeader.mapLayout->height + 7;
+        localLength = gMapHeader.mapLayout->height + MAP_OFFSET;
         localY = y - localLength;
         break;
     case 3:
-        localLength = mapHeader->mapLayout->width - 7;
+        localLength = mapHeader->mapLayout->width - MAP_OFFSET;
         localX = localLength + x; // additions are reversed for some reason
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
     case 4:
-        localLength = gMapHeader.mapLayout->width + 7;
+        localLength = gMapHeader.mapLayout->width + MAP_OFFSET;
         localX = x - localLength;
-        localOffset = connection->offset + 7;
+        localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
     default:
@@ -436,14 +438,16 @@ static void CheckForHiddenItemsInMapConnection(u8 taskId)
 {
     s16 playerX, playerY;
     s16 x, y;
-    s16 width = gMapHeader.mapLayout->width + 7;
-    s16 height = gMapHeader.mapLayout->height + 7;
+    s16 width = gMapHeader.mapLayout->width + MAP_OFFSET;
+    s16 height = gMapHeader.mapLayout->height + MAP_OFFSET;
 
-    s16 var1 = 7;
-    s16 var2 = 7;
+    s16 var1 = MAP_OFFSET;
+    s16 var2 = MAP_OFFSET;
 
     PlayerGetDestCoords(&playerX, &playerY);
 
+    // Player can see 7 metatiles on either side horizontally
+    // and 5 metatiles on either side vertically
     for (x = playerX - 7; x <= playerX + 7; x++)
     {
         for (y = playerY - 5; y <= playerY + 5; y++)
@@ -609,7 +613,7 @@ static void Task_StandingOnHiddenItem(u8 taskId)
 
 void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
 {
-    if (MenuHelpers_LinkSomething() == TRUE) // link func
+    if (MenuHelpers_IsLinkActive() == TRUE)
     {
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
     }
@@ -648,7 +652,7 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
     {
-        DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
     }
     else
     {
@@ -663,7 +667,7 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
 
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
     {
-        DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
     }
     else
     {
@@ -779,9 +783,9 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
     if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
-        DisplayItemMessage(taskId, 1, gText_BootedUpHM, BootUpSoundTMHM); // HM
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_BootedUpHM, BootUpSoundTMHM); // HM
     else
-        DisplayItemMessage(taskId, 1, gText_BootedUpTM, BootUpSoundTMHM); // TM
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_BootedUpTM, BootUpSoundTMHM); // TM
 }
 
 static void BootUpSoundTMHM(u8 taskId)
@@ -796,7 +800,7 @@ static void Task_ShowTMHMContainedMessage(u8 taskId)
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gText_TMHMContainedVar1);
-        DisplayItemMessage(taskId, 1, gStringVar4, UseTMHMYesNo);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, UseTMHMYesNo);
     }
 }
 
@@ -833,7 +837,7 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
     if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
         gTasks[taskId].func = Task_StartUseRepel;
     else if (!InBattlePyramid())
-        DisplayItemMessage(taskId, 1, gText_RepelEffectsLingered, CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_RepelEffectsLingered, CloseItemMessage);
     else
         DisplayItemMessageInBattlePyramid(taskId, gText_RepelEffectsLingered, Task_CloseBattlePyramidBagMessage);
 }
@@ -857,7 +861,7 @@ static void Task_UseRepel(u8 taskId)
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
         RemoveUsedItem();
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
@@ -869,7 +873,7 @@ static void Task_UsedBlackWhiteFlute(u8 taskId)
     {
         PlaySE(SE_GLASS_FLUTE);
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
@@ -973,20 +977,20 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         break;
     case 1:  // There are two present pokemon.
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_TwoMons, Task_CloseBattlePyramidBagMessage);
         break;
     case 2: // No room for mon
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gText_BoxFull, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
         break;
     #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
     case 3: // Semi-Invulnerable
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
         break;
@@ -1012,7 +1016,7 @@ static void Task_UseStatIncreaseItem(u8 taskId)
         PlaySE(SE_USE_ITEM);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, UseStatIncreaseItem(gSpecialVar_ItemId), Task_CloseStatIncreaseMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, UseStatIncreaseItem(gSpecialVar_ItemId), Task_CloseStatIncreaseMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, UseStatIncreaseItem(gSpecialVar_ItemId), Task_CloseStatIncreaseMessage);
     }
@@ -1026,7 +1030,7 @@ void ItemUseInBattle_StatIncrease(u8 taskId)
     if (ExecuteTableBasedItemEffect(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gText_WontHaveEffect, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_WontHaveEffect, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_WontHaveEffect, Task_CloseBattlePyramidBagMessage);
     }
@@ -1078,7 +1082,7 @@ void ItemUseInBattle_Escape(u8 taskId)
     {
         RemoveUsedItem();
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, Task_FadeAndCloseBagMenu);
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FadeAndCloseBagMenu);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, CloseBattlePyramidBag);
     }

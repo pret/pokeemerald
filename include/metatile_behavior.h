@@ -1,6 +1,14 @@
 #ifndef GUARD_METATILE_BEHAVIOR_H
 #define GUARD_METATILE_BEHAVIOR_H
 
+// Return values for MetatileBehavior_GetBridgeType
+enum {
+    BRIDGE_TYPE_OCEAN, // For log bridges over 'ocean' style water (Routes 110/119 use this).
+    BRIDGE_TYPE_POND_LOW,
+    BRIDGE_TYPE_POND_MED,
+    BRIDGE_TYPE_POND_HIGH,
+};
+
 bool8 MetatileBehavior_IsATile(u8);
 bool8 MetatileBehavior_IsEncounterTile(u8);
 bool8 MetatileBehavior_IsJumpEast(u8);
@@ -15,7 +23,6 @@ bool8 MetatileBehavior_IsIce(u8);
 bool8 MetatileBehavior_IsWarpDoor(u8);
 bool8 MetatileBehavior_IsDoor(u8);
 bool8 MetatileBehavior_IsEscalator(u8);
-bool8 MetatileBehavior_IsMB_04(u8);
 bool8 MetatileBehavior_IsLadder(u8);
 bool8 MetatileBehavior_IsNonAnimDoor(u8);
 bool8 MetatileBehavior_IsDeepSouthWarp(u8);
@@ -28,7 +35,6 @@ bool8 MetatileBehavior_IsArrowWarp(u8);
 bool8 MetatileBehavior_IsForcedMovementTile(u8);
 bool8 MetatileBehavior_IsIce_2(u8);
 bool8 MetatileBehavior_IsTrickHouseSlipperyFloor(u8);
-bool8 MetatileBehavior_IsMB_05(u8);
 bool8 MetatileBehavior_IsWalkNorth(u8);
 bool8 MetatileBehavior_IsWalkSouth(u8);
 bool8 MetatileBehavior_IsWalkWest(u8);
@@ -51,14 +57,12 @@ bool8 MetatileBehavior_IsSecretBaseTree(u8);
 bool8 MetatileBehavior_IsSecretBaseShrub(u8);
 bool8 MetatileBehavior_IsSecretBasePC(u8);
 bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8);
-bool8 MetatileBehavior_IsMB_B2(u8);
 bool8 MetatileBehavior_IsBlockDecoration(u8);
 bool8 MetatileBehavior_IsSecretBaseImpassable(u8);
-bool8 MetatileBehavior_IsMB_C6(u8);
+bool8 MetatileBehavior_IsSecretBaseDecorationBase(u8);
 bool8 MetatileBehavior_IsSecretBasePoster(u8);
 bool8 MetatileBehavior_IsNormal(u8);
 bool8 MetatileBehavior_IsSecretBaseNorthWall(u8);
-bool8 MetatileBehavior_IsMB_B2_Duplicate(u8);
 bool8 MetatileBehavior_HoldsSmallDecoration(u8);
 bool8 MetatileBehavior_HoldsLargeDecoration(u8);
 bool8 MetatileBehavior_IsSecretBaseHole(u8);
@@ -76,9 +80,9 @@ bool8 MetatileBehavior_IsLongGrass(u8);
 bool8 MetatileBehavior_IsBerryTreeSoil(u8);
 bool8 MetatileBehavior_IsAshGrass(u8);
 bool8 MetatileBehavior_IsFootprints(u8);
-bool8 MetatileBehavior_IsBridge(u8);
+bool8 MetatileBehavior_IsBridgeOverWater(u8);
 u8 MetatileBehavior_GetBridgeType(u8);
-u8 MetatileBehavior_8089510(u8);
+bool8 MetatileBehavior_IsBridgeOverWaterNoEdge(u8);
 bool8 MetatileBehavior_IsLandWildEncounter(u8);
 bool8 MetatileBehavior_IsWaterWildEncounter(u8);
 bool8 MetatileBehavior_IsIndoorEncounter(u8);
@@ -89,7 +93,6 @@ bool8 MetatileBehavior_IsShallowFlowingWater(u8);
 bool8 MetatileBehavior_IsThinIce(u8);
 bool8 MetatileBehavior_IsCrackedIce(u8);
 bool8 MetatileBehavior_IsDeepOrOceanWater(u8);
-bool8 MetatileBehavior_IsMB_18_OrMB_1A(u8);
 bool8 MetatileBehavior_IsSurfableAndNotWaterfall(u8);
 bool8 MetatileBehavior_IsEastBlocked(u8);
 bool8 MetatileBehavior_IsWestBlocked(u8);
@@ -99,10 +102,10 @@ bool8 MetatileBehavior_IsShortGrass(u8);
 bool8 MetatileBehavior_IsHotSprings(u8);
 bool8 MetatileBehavior_IsWaterfall(u8);
 bool8 MetatileBehavior_IsFortreeBridge(u8);
-bool8 MetatileBehavior_IsPacifidlogVerticalLog1(u8);
-bool8 MetatileBehavior_IsPacifidlogVerticalLog2(u8);
-bool8 MetatileBehavior_IsPacifidlogHorizontalLog1(u8);
-bool8 MetatileBehavior_IsPacifidlogHorizontalLog2(u8);
+bool8 MetatileBehavior_IsPacifidlogVerticalLogTop(u8);
+bool8 MetatileBehavior_IsPacifidlogVerticalLogBottom(u8);
+bool8 MetatileBehavior_IsPacifidlogHorizontalLogLeft(u8);
+bool8 MetatileBehavior_IsPacifidlogHorizontalLogRight(u8);
 bool8 MetatileBehavior_IsPacifidlogLog(u8);
 bool8 MetatileBehavior_IsTrickHousePuzzleDoor(u8);
 bool8 MetatileBehavior_IsRegionMap(u8);
@@ -115,7 +118,7 @@ bool8 MetatileBehavior_IsSecretBaseSpinMat(u8);
 bool8 MetatileBehavior_IsLavaridgeB1FWarp(u8);
 bool8 MetatileBehavior_IsLavaridge1FWarp(u8);
 bool8 MetatileBehavior_IsAquaHideoutWarp(u8);
-bool8 MetatileBehavior_IsWarpOrBridge(u8);
+bool8 MetatileBehavior_IsUnionRoomWarp(u8);
 bool8 MetatileBehavior_IsMossdeepGymWarp(u8);
 bool8 MetatileBehavior_IsSurfableFishableWater(u8);
 bool8 MetatileBehavior_IsMtPyreHole(u8);

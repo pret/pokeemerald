@@ -1,7 +1,11 @@
 #ifndef GUARD_CONSTANTS_UNION_ROOM_H
 #define GUARD_CONSTANTS_UNION_ROOM_H
 
-#define MAX_UNION_ROOM_PLAYERS 8
+// The number of possible group leaders visible in the Union Room.
+// Note that this is different than the number of people actively
+// connected as children via the Wireless Adapter, which cannot
+// exceed RFU_CHILD_MAX (4), for a total of 5 including the player.
+#define MAX_UNION_ROOM_LEADERS 8
 
 #define UNION_ROOM_SPAWN_NONE 0
 #define UNION_ROOM_SPAWN_IN   1
@@ -13,8 +17,8 @@
 #define ACTIVITY_BATTLE_MULTI       3
 #define ACTIVITY_TRADE              4
 #define ACTIVITY_CHAT               5
-#define ACTIVITY_WONDER_CARD        6
-#define ACTIVITY_WONDER_NEWS        7
+#define ACTIVITY_WONDER_CARD_DUP    6 // Duplicates of later WONDER constants
+#define ACTIVITY_WONDER_NEWS_DUP    7 //
 #define ACTIVITY_CARD               8
 #define ACTIVITY_POKEMON_JUMP       9
 #define ACTIVITY_BERRY_CRUSH        10
@@ -32,9 +36,8 @@
 #define ACTIVITY_NPCTALK            19
 #define ACTIVITY_PLYRTALK           20
 
-// Duplicate IDs?
-#define ACTIVITY_WONDER_CARD2       21
-#define ACTIVITY_WONDER_NEWS2       22
+#define ACTIVITY_WONDER_CARD        21
+#define ACTIVITY_WONDER_NEWS        22
 
 #define ACTIVITY_CONTEST_COOL       23
 #define ACTIVITY_CONTEST_BEAUTY     24
@@ -45,15 +48,6 @@
 #define ACTIVITY_29                 29
 
 #define IN_UNION_ROOM               (1 << 6)
-
-// Used in UR_AddTextPrinterParameterized
-#define UR_COLOR_DKE_WHT_LTE 0
-#define UR_COLOR_RED_WHT_LTR 1
-#define UR_COLOR_GRN_WHT_LTG 2
-#define UR_COLOR_WHT_WHT_LTE 3
-#define UR_COLOR_WHT_DKE_LTE 4
-#define UR_COLOR_GRN_DN6_LTB 5
-#define UR_COLOR_DN5_DN6_LTB 6
 
 #define LINK_GROUP_SINGLE_BATTLE        0
 #define LINK_GROUP_DOUBLE_BATTLE        1
