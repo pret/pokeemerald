@@ -7,10 +7,8 @@ SkyPillar_Outside_MapScripts::
 	.byte 0
 
 SkyPillar_Outside_OnTransition:
-	compare VAR_SOOTOPOLIS_CITY_STATE, 3
-	call_if_eq SkyPillar_Outside_EventScript_HideMapNamePopup
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge SkyPillar_Outside_EventScript_CheckSetAbnormalWeather
+	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_HideMapNamePopup
+	call_if_ge VAR_SOOTOPOLIS_CITY_STATE, 4, SkyPillar_Outside_EventScript_CheckSetAbnormalWeather
 	end
 
 SkyPillar_Outside_EventScript_HideMapNamePopup::
@@ -26,8 +24,8 @@ SkyPillar_Outside_OnLoad:
 	end
 
 SkyPillar_Outside_EventScript_OpenDoor::
-	setmetatile 14, 4, METATILE_Pacifidlog_SkyPillar_DoorOpen_Top, 0
-	setmetatile 14, 5, METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom, 0
+	setmetatile 14, 4, METATILE_Pacifidlog_SkyPillar_DoorOpen_Top, FALSE
+	setmetatile 14, 5, METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom, FALSE
 	return
 
 SkyPillar_Outside_OnFrame:
@@ -38,7 +36,7 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	lockall
 	applymovement LOCALID_WALLACE, SkyPillar_Outside_Movement_WallaceApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox SkyPillar_Outside_Text_OpenedDoorToSkyPillar, MSGBOX_DEFAULT
 	closemessage
@@ -62,13 +60,13 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	special ShakeCamera
 	waitstate
 	delay 20
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 10
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	msgbox SkyPillar_Outside_Text_SituationGettingWorse, MSGBOX_DEFAULT

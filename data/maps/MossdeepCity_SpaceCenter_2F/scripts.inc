@@ -15,10 +15,8 @@ MossdeepCity_SpaceCenter_2F_MapScripts::
 	.byte 0
 
 MossdeepCity_SpaceCenter_2F_OnTransition:
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians
-	compare VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
-	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_MoveDefeatedGrunts
+	call_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians
+	call_if_eq VAR_MOSSDEEP_SPACE_CENTER_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_MoveDefeatedGrunts
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians::
@@ -48,13 +46,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
+	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
 	msgbox MossdeepCity_SpaceCenter_2F_Text_GoodAnswer, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_PlayerExit
 	waitmovement 0
-	warp MAP_MOSSDEEP_CITY_SPACE_CENTER_1F, 255, 13, 1
+	warp MAP_MOSSDEEP_CITY_SPACE_CENTER_1F, 13, 1
 	waitstate
 	releaseall
 	end
@@ -68,13 +65,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts::
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat
 	applymovement LOCALID_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
 	applymovement LOCALID_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
@@ -109,10 +106,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_Scientist::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
+	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
+	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
 	end
 
@@ -130,10 +125,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_Gentleman::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
+	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
+	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
 	goto MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
 	end
 
@@ -151,10 +144,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_RichBoy::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
+	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
+	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
 	goto MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
 	end
 
@@ -246,24 +237,22 @@ MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special SavePlayerParty
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
-	compare VAR_RESULT, 0
-	goto_if_ne MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
+	goto_if_ne VAR_RESULT, 0, MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
 	special LoadPlayerParty
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
 
@@ -286,12 +275,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement LOCALID_MAXIE, Common_Movement_WalkInPlaceFastestLeft
-	applymovement LOCALID_TABITHA, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_MAXIE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_TABITHA, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 60
-	applymovement LOCALID_MAXIE, Common_Movement_WalkInPlaceFastestUp
-	applymovement LOCALID_TABITHA, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MAXIE, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_TABITHA, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp, MSGBOX_DEFAULT
@@ -358,10 +347,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer::
 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall::
 	lockall
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
-	compare VAR_RESULT, FEMALE
-	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
+	call_if_eq VAR_RESULT, MALE, MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
+	call_if_eq VAR_RESULT, FEMALE, MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
 	closemessage
 	clearflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
 	releaseall
