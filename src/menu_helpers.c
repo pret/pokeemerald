@@ -276,8 +276,8 @@ u8 GetLRKeysPressedAndHeld(void)
 
 bool8 IsHoldingItemAllowed(u16 itemId)
 {
-    // e-Reader Enigma Berry can't be held in link areas
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER
+    // Enigma Berry can't be held in link areas
+    if (itemId == ITEM_ENIGMA_BERRY
      && ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
        || InUnionRoom() == TRUE))
