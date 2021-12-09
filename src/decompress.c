@@ -118,7 +118,7 @@ void Unused_LZDecompressWramIndirect(const void **src, void *dest)
     LZ77UnCompWram(*src, dest);
 }
 
-void sub_803471C(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
+static void StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
 {
     /*
       This function appears to emulate behaviour found in the GB(C) versions regarding how the Pokemon images

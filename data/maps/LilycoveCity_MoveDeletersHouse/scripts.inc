@@ -18,20 +18,16 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
-	compare VAR_0x8004, 255
-	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	special IsSelectedMonEgg
-	compare VAR_RESULT, TRUE
-	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
+	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
 	special GetNumMovesSelectedMonHas
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
+	goto_if_eq VAR_RESULT, 1, LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special MoveDeleterChooseMoveToForget
 	fadescreen FADE_FROM_BLACK
-	compare VAR_0x8005, MAX_MON_MOVES
-	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+	goto_if_eq VAR_0x8005, MAX_MON_MOVES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
 	switch VAR_RESULT
@@ -42,8 +38,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 
 LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove::
 	special IsLastMonThatKnowsSurf
-	compare VAR_RESULT, TRUE
-	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
+	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
 	special MoveDeleterForgetMove
 	playfanfare MUS_MOVE_DELETED
 	waitfanfare

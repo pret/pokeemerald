@@ -13,7 +13,7 @@ FortreeCity_House5_EventScript_Zigzagoon::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_ZIGZAGOON, 0
+	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
 	msgbox FortreeCity_House5_Text_Zigzagoon, MSGBOX_DEFAULT
 	waitmoncry
 	release

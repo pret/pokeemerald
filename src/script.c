@@ -1,8 +1,9 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "util.h"
+#include "constants/event_objects.h"
 #include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
@@ -398,16 +399,18 @@ const u8 *GetRamScript(u8 objectId, const u8 *script)
     }
 }
 
+#define NO_OBJECT OBJ_EVENT_ID_PLAYER
+
 bool32 ValidateSavedRamScript(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return FALSE;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
         return FALSE;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
         return FALSE;
-    if (scriptData->objectId != 0xFF)
+    if (scriptData->objectId != NO_OBJECT)
         return FALSE;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
         return FALSE;
@@ -417,15 +420,15 @@ bool32 ValidateSavedRamScript(void)
 u8 *GetSavedRamScriptIfValid(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!ValidateReceivedWonderCard())
+    if (!ValidateSavedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
         return NULL;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
         return NULL;
-    if (scriptData->objectId != 0xFF)
+    if (scriptData->objectId != NO_OBJECT)
         return NULL;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
     {
@@ -442,5 +445,5 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
 {
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
-    InitRamScript(script, scriptSize, 0xFF, 0xFF, 0xFF);
+    InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), NO_OBJECT);
 }

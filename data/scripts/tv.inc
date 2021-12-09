@@ -3,29 +3,23 @@ EventScript_TV::
 	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
 	specialvar VAR_RESULT, CheckForPlayersHouseNews
-	compare VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE
-	goto_if_eq EventScript_PlayersHouseMovie
-	compare VAR_RESULT, PLAYERS_HOUSE_TV_LATI
-	goto_if_eq EventScript_PlayersHouseLatiNewsFlash
+	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE, EventScript_PlayersHouseMovie
+	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_LATI, EventScript_PlayersHouseLatiNewsFlash
 	goto_if_unset FLAG_SYS_TV_START, EventScript_MomDadMightLikeThis1
 	goto_if_set FLAG_SYS_TV_WATCH, EventScript_MomDadMightLikeThis1
 	specialvar VAR_RESULT, IsGabbyAndTyShowOnTheAir
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_DoInSearchOfTrainers
+	goto_if_eq VAR_RESULT, TRUE, EventScript_DoInSearchOfTrainers
 	goto EventScript_TryDoPokeNews
 	end
 
 EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
-	compare VAR_0x8004, 255
-	goto_if_eq EventScript_MomDadMightLikeThis2
+	goto_if_eq VAR_0x8004, 255, EventScript_MomDadMightLikeThis2
 	specialvar VAR_RESULT, GetNextActiveShowIfMassOutbreak
-	compare VAR_RESULT, 255
-	goto_if_eq EventScript_MomDadMightLikeThis2
+	goto_if_eq VAR_RESULT, 255, EventScript_MomDadMightLikeThis2
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, GetSelectedTVShow
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_DoTVShow
+	goto_if_ne VAR_RESULT, 0, EventScript_DoTVShow
 	end
 
 EventScript_MomDadMightLikeThis1::
@@ -52,12 +46,13 @@ EventScript_PlayersHouseLatiNewsFlash::
 	releaseall
 	end
 
+@ The following is a loop for the TV show messages
+@ VAR_RESULT is set to TRUE when the show has printed its final message
 EventScript_DoTVShow::
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
-	compare VAR_RESULT, 1
-	goto_if_ne EventScript_DoTVShow
+	goto_if_ne VAR_RESULT, TRUE, EventScript_DoTVShow
 	goto EventScript_TurnOffTV
 	end
 
@@ -75,8 +70,7 @@ EventScript_MomDadMightLikeThis2::
 
 EventScript_TryDoPokeNews::
 	special DoPokeNews
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_TryDoTVShow
+	goto_if_eq VAR_RESULT, FALSE, EventScript_TryDoTVShow
 	waitmessage
 	waitbuttonpress
 	goto EventScript_TurnOffTV
@@ -86,7 +80,6 @@ EventScript_DoInSearchOfTrainers::
 	special DoTVShowInSearchOfTrainers
 	waitmessage
 	waitbuttonpress
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoInSearchOfTrainers
+	goto_if_eq VAR_RESULT, 0, EventScript_DoInSearchOfTrainers
 	goto EventScript_TurnOffTV
 	end
