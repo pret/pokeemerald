@@ -3247,7 +3247,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     }
 
     coord1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
-    coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+    coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
     spriteId = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, coord1 + xOffset, coord2, 5, personality, otId, gBattleAnimTarget);
 
     gSprites[spriteId].oam.priority = priority;

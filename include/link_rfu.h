@@ -102,7 +102,7 @@ struct RfuGameCompatibilityData
 struct __attribute__((packed, aligned(2))) RfuGameData
 {
     struct RfuGameCompatibilityData compatibility;
-    u8 partnerInfo[RFU_CHILD_MAX]; 
+    u8 partnerInfo[RFU_CHILD_MAX];
     u16 tradeSpecies;
     u8 activity:7;
     u8 startedActivity:1;
