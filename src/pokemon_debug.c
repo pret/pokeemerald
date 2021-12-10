@@ -40,13 +40,13 @@
 #define DEBUG_MON_Y 11
 #define DEBUG_MON_BACK_X 40
 #define DEBUG_MON_BACK_Y 50
-#define DEBUG_ICON_X 158
-#define DEBUG_ICON_Y 90
+#define DEBUG_ICON_X 19//158 + 32
+#define DEBUG_ICON_Y 19//90 + 40
 #define DEBUG_MON_SHINY 0
 #define DEBUG_MON_NORMAL 9
 
 #define MODIFY_DIGITS_MAX 4
-#define MODIFY_DIGITS_ARROW_X 22
+#define MODIFY_DIGITS_ARROW_X 38
 #define MODIFY_DIGITS_ARROW1_Y 12
 #define MODIFY_DIGITS_ARROW2_Y 36
 
@@ -101,7 +101,7 @@ static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
 static const struct WindowTemplate sModifyWindowTemplate =
 {
     .bg = 0,
-    .tilemapLeft = 2,
+    .tilemapLeft = 4,
     .tilemapTop = 2,
     .width = 14,
     .height = 2,
@@ -488,7 +488,7 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->backspriteId].oam.priority = 0;
 
             //Icon Sprite
-            data->iconspriteId = CreateMonIconCustom(species, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isShiny, data->isFemale, data->isShiny);
+            data->iconspriteId = CreateMonIconCustom(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, data->isShiny, data->isFemale, data->isShiny);
             gSprites[data->iconspriteId].oam.priority = 0;
 
             //Modify Arrows
@@ -712,7 +712,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     gSprites[data->backspriteId].oam.priority = 0;
 
     //Icon Sprite
-    data->iconspriteId = CreateMonIconCustom(species, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isShiny, data->isFemale, data->isShiny);
+    data->iconspriteId = CreateMonIconCustom(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, data->isShiny, data->isFemale, data->isShiny);
     gSprites[data->iconspriteId].oam.priority = 0;
     
     //Modify Arrows
