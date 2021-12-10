@@ -36,7 +36,7 @@ se_m_toxic_1:
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , Cn2 
+	.byte		N02   , Cn2
 	.byte	W02
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v+16
@@ -44,18 +44,18 @@ se_m_toxic_1:
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
 	.byte	W01
-	.byte		N01   
+	.byte		N01
 	.byte	W01
 	.byte		PAN   , c_v+8
-	.byte		N01   , Cn3 
+	.byte		N01   , Cn3
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v-16
-	.byte		N01   , Dn2 
+	.byte		N01   , Dn2
 	.byte	W02
 	.byte		VOICE , 23
 	.byte		PAN   , c_v+0
-	.byte		N01   , Cn2 
+	.byte		N01   , Cn2
 	.byte	W01
 	.byte		VOICE , 31
 	.byte		PAN   , c_v+16
@@ -64,10 +64,10 @@ se_m_toxic_1:
 	.byte		VOICE , 23
 	.byte		PAN   , c_v-8
 	.byte		BEND  , c_v+16
-	.byte		N01   , Cn3 
+	.byte		N01   , Cn3
 	.byte	W02
 	.byte		PAN   , c_v+8
-	.byte		N01   , Cn2 
+	.byte		N01   , Cn2
 	.byte	W08
 	.byte	FINE
 

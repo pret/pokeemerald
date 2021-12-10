@@ -1,51 +1,51 @@
 static const u16 sFrontierExchangeCorner_Decor1[] =
-{ 
-    DECOR_KISS_POSTER, 
-    DECOR_KISS_CUSHION, 
-    DECOR_SMOOCHUM_DOLL, 
-    DECOR_TOGEPI_DOLL, 
-    DECOR_MEOWTH_DOLL, 
-    DECOR_CLEFAIRY_DOLL, 
-    DECOR_DITTO_DOLL, 
-    DECOR_CYNDAQUIL_DOLL, 
-    DECOR_CHIKORITA_DOLL, 
-    DECOR_TOTODILE_DOLL, 
-    0xFFFF 
+{
+    DECOR_KISS_POSTER,
+    DECOR_KISS_CUSHION,
+    DECOR_SMOOCHUM_DOLL,
+    DECOR_TOGEPI_DOLL,
+    DECOR_MEOWTH_DOLL,
+    DECOR_CLEFAIRY_DOLL,
+    DECOR_DITTO_DOLL,
+    DECOR_CYNDAQUIL_DOLL,
+    DECOR_CHIKORITA_DOLL,
+    DECOR_TOTODILE_DOLL,
+    0xFFFF
 };
 
 static const u16 sFrontierExchangeCorner_Decor2[] =
-{ 
-    DECOR_LAPRAS_DOLL, 
-    DECOR_SNORLAX_DOLL, 
-    DECOR_VENUSAUR_DOLL, 
-    DECOR_CHARIZARD_DOLL, 
-    DECOR_BLASTOISE_DOLL, 
-    0xFFFF 
+{
+    DECOR_LAPRAS_DOLL,
+    DECOR_SNORLAX_DOLL,
+    DECOR_VENUSAUR_DOLL,
+    DECOR_CHARIZARD_DOLL,
+    DECOR_BLASTOISE_DOLL,
+    0xFFFF
 };
 
 static const u16 sFrontierExchangeCorner_Vitamins[] =
-{ 
-    ITEM_PROTEIN, 
-    ITEM_CALCIUM, 
-    ITEM_IRON, 
-    ITEM_ZINC, 
-    ITEM_CARBOS, 
-    ITEM_HP_UP, 
-    0xFFFF 
+{
+    ITEM_PROTEIN,
+    ITEM_CALCIUM,
+    ITEM_IRON,
+    ITEM_ZINC,
+    ITEM_CARBOS,
+    ITEM_HP_UP,
+    0xFFFF
 };
 
 static const u16 sFrontierExchangeCorner_HoldItems[] =
-{ 
-    ITEM_LEFTOVERS, 
-    ITEM_WHITE_HERB, 
-    ITEM_QUICK_CLAW, 
-    ITEM_MENTAL_HERB, 
-    ITEM_BRIGHT_POWDER, 
-    ITEM_CHOICE_BAND, 
-    ITEM_KINGS_ROCK, 
-    ITEM_FOCUS_BAND, 
-    ITEM_SCOPE_LENS, 
-    0xFFFF 
+{
+    ITEM_LEFTOVERS,
+    ITEM_WHITE_HERB,
+    ITEM_QUICK_CLAW,
+    ITEM_MENTAL_HERB,
+    ITEM_BRIGHT_POWDER,
+    ITEM_CHOICE_BAND,
+    ITEM_KINGS_ROCK,
+    ITEM_FOCUS_BAND,
+    ITEM_SCOPE_LENS,
+    0xFFFF
 };
 
 static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =
@@ -63,7 +63,7 @@ static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =
     gText_Exit,
 };
 
-static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] = 
+static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
 {
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
@@ -73,7 +73,7 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] = 
+static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
 {
     BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
     BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc,
@@ -84,7 +84,7 @@ static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] = 
+static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
 {
     BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc,
     BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc,

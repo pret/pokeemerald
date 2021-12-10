@@ -75,7 +75,7 @@ static void Task_FinishRoundOfAppeals(u8);
 static void Task_ReadyUpdateHeartSliders(u8);
 static void Task_UpdateHeartSliders(u8);
 static void Task_WaitForHeartSliders(u8);
-static void sub_80DA348(u8);
+static void Task_RestorePlttBufferUnfaded(u8);
 static void Task_WaitPrintRoundResult(u8);
 static void Task_PrintRoundResultText(u8);
 static void Task_ReUpdateHeartSliders(u8);
@@ -666,7 +666,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols =
 
 const struct CompressedSpritePalette sSpritePalette_JudgeSymbols =
 {
-    .data = gContest3Pal,
+    .data = gContestJudgeSymbolsPal,
     .tag = TAG_CONTEST_SYMBOLS_PAL
 };
 
@@ -1028,11 +1028,11 @@ void LoadContestBgAfterMoveAnim(void)
 {
     s32 i;
 
-    LZDecompressVram(gContestMiscGfx, (void *)VRAM);
+    LZDecompressVram(gContestInterfaceGfx, (void *)VRAM);
     LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
-    CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
+    CopyToBgTilemapBuffer(3, gContestAudienceTilemap, 0, 0);
     CopyBgTilemapBufferToVram(3);
-    LoadCompressedPalette(gOldContestPalette, 0, 0x200);
+    LoadCompressedPalette(gContestInterfaceAudiencePalette, 0, 0x200);
     LoadContestPalettes();
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1103,10 +1103,10 @@ static void InitContestResources(void)
     eContestAI = (struct ContestAIInfo){};
     *gContestResources->excitement = (struct ContestExcitement){};
     memset(eContestGfxState, 0, CONTESTANT_COUNT * sizeof(struct ContestGraphicsState));
-    
+
     if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         SortContestants(FALSE);
-    
+
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         eContestantStatus[i].nextTurnOrder = 0xFF;
@@ -1136,9 +1136,9 @@ static void AllocContestResources(void)
     gContestResources->contestBgTilemaps[3] = AllocZeroed(0x1000);
     gContestResources->boxBlinkTiles1 = AllocZeroed(0x800);
     gContestResources->boxBlinkTiles2 = AllocZeroed(0x800);
-    gContestResources->field_3c = AllocZeroed(0x2000);
-    gUnknown_0202305C = gContestResources->field_3c;
-    gUnknown_02023060 = gContestResources->contestBgTilemaps[1];
+    gContestResources->animBgTileBuffer = AllocZeroed(0x2000);
+    gBattleAnimBgTileBuffer = gContestResources->animBgTileBuffer;
+    gBattleAnimBgTilemapBuffer = gContestResources->contestBgTilemaps[1];
 }
 
 static void FreeContestResources(void)
@@ -1158,10 +1158,10 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[3]);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles1);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles2);
-    FREE_AND_SET_NULL(gContestResources->field_3c);
+    FREE_AND_SET_NULL(gContestResources->animBgTileBuffer);
     FREE_AND_SET_NULL(gContestResources);
-    gUnknown_0202305C = NULL;
-    gUnknown_02023060 = NULL;
+    gBattleAnimBgTileBuffer = NULL;
+    gBattleAnimBgTilemapBuffer = NULL;
 }
 
 void CB2_StartContest(void)
@@ -1310,24 +1310,24 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
         break;
     case 1:
-        LZDecompressVram(gContestMiscGfx, (void *)VRAM);
+        LZDecompressVram(gContestInterfaceGfx, (void *)VRAM);
         break;
     case 2:
         LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
         DmaCopyLarge32(3, (void *)(BG_SCREEN_ADDR(4)), eUnzippedContestAudience_Gfx, 0x2000, 0x1000);
         break;
     case 3:
-        CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
+        CopyToBgTilemapBuffer(3, gContestAudienceTilemap, 0, 0);
         CopyBgTilemapBufferToVram(3);
         break;
     case 4:
-        CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
+        CopyToBgTilemapBuffer(2, gContestInterfaceTilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
         // This is a bug, and copies random junk. savedJunk is never read.
         DmaCopy32Defvars(3, gContestResources->contestBgTilemaps[2], eContestTempSave.savedJunk, sizeof(eContestTempSave.savedJunk));
         break;
     case 5:
-        LoadCompressedPalette(gOldContestPalette, 0, 0x200);
+        LoadCompressedPalette(gContestInterfaceAudiencePalette, 0, 0x200);
         CpuCopy32(gPlttBufferUnfaded + 128, tempPalette1, 16 * sizeof(u16));
         CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
         CpuCopy32(tempPalette2, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
@@ -1543,7 +1543,7 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
         moveNameBuffer = StringCopy(moveNameBuffer, gMoveNames[move]);
 
         FillWindowPixelBuffer(i + MOVE_WINDOWS_START, PIXEL_FILL(0));
-        Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, 7);
+        Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, FONT_NARROW);
     }
 
     DrawMoveSelectArrow(eContest.playerMoveChoice);
@@ -1667,7 +1667,7 @@ static void Task_HideMoveSelectScreen(u8 taskId)
     {
         FillWindowPixelBuffer(MOVE_WINDOWS_START + i, PIXEL_FILL(0));
         PutWindowTilemap(MOVE_WINDOWS_START + i);
-        CopyWindowToVram(MOVE_WINDOWS_START + i, 2);
+        CopyWindowToVram(MOVE_WINDOWS_START + i, COPYWIN_GFX);
     }
     Contest_SetBgCopyFlags(0);
     // This seems to be a bug; it should have just copied PLTT_BUFFER_SIZE.
@@ -2553,10 +2553,10 @@ static void Task_UpdateHeartSliders(u8 taskId)
 static void Task_WaitForHeartSliders(u8 taskId)
 {
     if (SlidersDoneUpdating())
-        gTasks[taskId].func = sub_80DA348;
+        gTasks[taskId].func = Task_RestorePlttBufferUnfaded;
 }
 
-static void sub_80DA348(u8 taskId)
+static void Task_RestorePlttBufferUnfaded(u8 taskId)
 {
     DmaCopy32Defvars(3, eContestTempSave.cachedPlttBufferUnfaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;
@@ -2794,7 +2794,7 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].highestRank = 0;
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
-    StringGetEnd10(name);
+    StringGet_Nickname(name);
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         StripMonNameForLinkContest(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
@@ -3029,10 +3029,10 @@ static void PrintContestantTrainerNameWithColor(u8 contestant, u8 color)
     StringCopy(buffer, gText_Slash);
     StringAppend(buffer, gContestMons[contestant].trainerName);
     Contest_CopyStringWithColor(buffer, color);
-    offset = GetStringRightAlignXOffset(7, gDisplayedStringBattle, 0x60);
+    offset = GetStringRightAlignXOffset(FONT_NARROW, gDisplayedStringBattle, 0x60);
     if (offset > 55)
         offset = 55;
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, FONT_NARROW);
 }
 
 static void PrintContestantMonName(u8 contestant)
@@ -3043,7 +3043,7 @@ static void PrintContestantMonName(u8 contestant)
 static void PrintContestantMonNameWithColor(u8 contestant, u8 color)
 {
     Contest_CopyStringWithColor(gContestMons[contestant].nickname, color);
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, FONT_NARROW);
 }
 
 static u16 CalculateContestantRound1Points(u8 who, u8 contestCategory)
@@ -3121,10 +3121,10 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     u8 spriteId;
     species = SanitizeSpecies(species);
 
-    HandleLoadSpecialPokePic(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[0], species, personality);
+    HandleLoadSpecialPokePic(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], species, personality);
 
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x120, 0x20);
-    SetMultiuseSpriteTemplateToPokemon(species, 0);
+    SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_PLAYER_LEFT);
 
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x70, GetBattlerSpriteFinal_Y(2, species, FALSE), 30);
     gSprites[spriteId].oam.paletteNum = 2;
@@ -3339,9 +3339,9 @@ static bool8 DrawStatusSymbol(u8 contestant)
     u16 symbolOffset = 0;
     u8 contestantOffset = gContestantTurnOrder[contestant] * 5 + 2;
 
-    if (eContestantStatus[contestant].resistant 
-     || eContestantStatus[contestant].immune 
-     || eContestantStatus[contestant].jamSafetyCount != 0 
+    if (eContestantStatus[contestant].resistant
+     || eContestantStatus[contestant].immune
+     || eContestantStatus[contestant].jamSafetyCount != 0
      || eContestantStatus[contestant].jamReduction != 0)
         symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_CIRCLE);
     else if (eContestantStatus[contestant].nervous)
@@ -3374,7 +3374,7 @@ static void DrawStatusSymbols(void)
 static void ContestClearGeneralTextWindow(void)
 {
     FillWindowPixelBuffer(WIN_GENERAL_TEXT, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_GENERAL_TEXT, 2);
+    CopyWindowToVram(WIN_GENERAL_TEXT, COPYWIN_GFX);
     Contest_SetBgCopyFlags(0);
 }
 
@@ -3817,7 +3817,7 @@ static void Task_UpdateAppealHearts(u8 taskId)
         {
             PlaySE(SE_CONTEST_HEART);
             m4aMPlayImmInit(&gMPlayInfo_SE1);
-            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, pitchMod * 256);
+            m4aMPlayPitchControl(&gMPlayInfo_SE1, TRACKS_ALL, pitchMod * 256);
         }
         else
         {
@@ -4270,7 +4270,7 @@ static void ContestDebugDoPrint(void)
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
             ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 55, 1, FONT_NARROW);
         }
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -4282,7 +4282,7 @@ static void ContestDebugDoPrint(void)
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
             ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 5, 1, FONT_NARROW);
         }
         SwapMoveDescAndContestTilemaps();
         break;
@@ -4333,7 +4333,7 @@ void SortContestants(bool8 useRanking)
                     s32 j;
                     for (j = i; j > v3; j--)
                         gContestantTurnOrder[j] = gContestantTurnOrder[j - 1];
-                        
+
                     // Insert into the new spot.
                     gContestantTurnOrder[v3] = i;
                     break;
@@ -4348,7 +4348,7 @@ void SortContestants(bool8 useRanking)
         }
 
         // Invert gContestantTurnOrder; above, it was a list of contestant IDs. Now it's a list of turn orderings.
-        // 
+        //
         // For example, if contestant 3 had the first turn, then `gContestantTurnOrder[1] = 3`. The turn is the index,
         // the contestant is the data. After inverting the list, `gContestantTurnOrder[3] = 1`. The contestant is the index,
         // and the turn is the data.
@@ -4383,7 +4383,7 @@ void SortContestants(bool8 useRanking)
         }
 
         // Randomize the order of contestants with tied rankings using Selection Sort.
-        // 
+        //
         // Look through the array for tied ranks, and use randomOrdering to break the tie.
         // This ensures that contestants with the same rank will be randomly ordered. This
         // uses an in-place slection sort, which involves a lot of extra swapping.
@@ -4759,13 +4759,13 @@ static void Task_ApplauseOverflowAnimation(u8 taskId)
     if (++gTasks[taskId].data[0] == 1)
     {
         gTasks[taskId].data[0] = 0;
-        
+
         // Alternate between normal colors and white.
         if (gTasks[taskId].data[3] == 0)
             gTasks[taskId].data[4]++;
         else
             gTasks[taskId].data[4]--;
-        
+
         BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], RGB_WHITE);
 
         // At the maximum or minimum blending, switch directions.
@@ -5086,7 +5086,7 @@ static void SetBgForCurtainDrop(void)
 
     CpuFill32(0, gContestResources->contestBgTilemaps[1], 0x1000);
 
-    CopyToBgTilemapBuffer(1, gUnknown_08C17980, 0, 0);
+    CopyToBgTilemapBuffer(1, gContestCurtainTilemap, 0, 0);
     Contest_SetBgCopyFlags(1);
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -5407,7 +5407,7 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
 
     printerTemplate.currentChar = b;
     printerTemplate.windowId = windowId;
-    printerTemplate.fontId = 1;
+    printerTemplate.fontId = FONT_NORMAL;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
     printerTemplate.currentX = 0;
@@ -5454,7 +5454,7 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
 
     printerTemplate.currentChar = currChar;
     printerTemplate.windowId = 4;
-    printerTemplate.fontId = 1;
+    printerTemplate.fontId = FONT_NORMAL;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
     printerTemplate.currentX = 0;
@@ -5953,7 +5953,7 @@ static void ContestDebugPrintBitStrings(void)
 
     if (!gEnableContestDebugging)
         return;
-    
+
     if (eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS && eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS)
         return;
 
@@ -5965,7 +5965,7 @@ static void ContestDebugPrintBitStrings(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             txtPtr = StringCopy(text1, gText_CDot);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, FONT_NARROW);
             bits = gContestResources->tv[i].winnerFlags;
             for (j = 7; j > -1; j--) // Weird loop.
             {
@@ -5978,7 +5978,7 @@ static void ContestDebugPrintBitStrings(void)
 
             text2[j] = EOS;
             Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, FONT_NARROW);
         }
     }
     else // CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
@@ -5998,8 +5998,8 @@ static void ContestDebugPrintBitStrings(void)
                 text2[j] = text1[j];
 
             text2[j] = EOS;
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
-            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, FONT_NARROW);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, FONT_NARROW);
         }
     }
     SwapMoveDescAndContestTilemaps();
@@ -6028,10 +6028,10 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
                 || *nickname == CHAR_SLASH
                 || *nickname == CHAR_HYPHEN
                 || *nickname == CHAR_ELLIPSIS
-                || *nickname == CHAR_DBL_QUOT_LEFT
-                || *nickname == CHAR_DBL_QUOT_RIGHT
-                || *nickname == CHAR_SGL_QUOT_LEFT
-                || *nickname == CHAR_DBL_QUOT_LEFT) // Most likely a typo, CHAR_SGL_QUOT_RIGHT should be here instead.
+                || *nickname == CHAR_DBL_QUOTE_LEFT
+                || *nickname == CHAR_DBL_QUOTE_RIGHT
+                || *nickname == CHAR_SGL_QUOTE_LEFT
+                || *nickname == CHAR_DBL_QUOTE_LEFT) // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
             {
                 nickname++;
             }

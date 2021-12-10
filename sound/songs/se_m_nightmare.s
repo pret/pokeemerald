@@ -37,10 +37,10 @@ se_m_nightmare_1:
 	.byte		N03   , Fs3 , v088
 	.byte	W06
 	.byte		PAN   , c_v+0
-	.byte		N03   , Ds3 
+	.byte		N03   , Ds3
 	.byte	W06
 	.byte		PAN   , c_v-16
-	.byte		N03   
+	.byte		N03
 	.byte	W09
 	.byte		PAN   , c_v-1
 	.byte		N03   , An2 , v096
@@ -56,10 +56,10 @@ se_m_nightmare_1:
 	.byte	W03
 	.byte	W03
 	.byte		PAN   , c_v-1
-	.byte		N03   , Fn3 
+	.byte		N03   , Fn3
 	.byte	W06
 	.byte		PAN   , c_v+16
-	.byte		N03   
+	.byte		N03
 	.byte	W15
 	.byte	FINE
 
@@ -77,55 +77,55 @@ se_m_nightmare_2:
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+36
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v+17
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+2
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v-8
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+12
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v+6
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+0
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v-6
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-19
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v-31
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-44
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v-55
-	.byte		N03   
+	.byte		N03
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-64
-	.byte		N03   
+	.byte		N03
 	.byte	W18
 	.byte	FINE
 

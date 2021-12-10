@@ -43,7 +43,7 @@ gSpecials::
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
-	def_special nullsub_37
+	def_special Script_StartWiredTrade
 	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
@@ -108,28 +108,28 @@ gSpecials::
 	def_special DoWateringBerryTreeAnim
 	def_special ShowEasyChatScreen
 	def_special ShowEasyChatProfile
-	def_special ScrSpecial_GetCurrentMauvilleMan
-	def_special ScrSpecial_HasBardSongBeenChanged
-	def_special ScrSpecial_SaveBardSongLyrics
-	def_special ScrSpecial_GetHipsterSpokenFlag
-	def_special ScrSpecial_SetHipsterSpokenFlag
-	def_special ScrSpecial_HipsterTeachWord
-	def_special ScrSpecial_PlayBardSong
-	def_special ScrSpecial_SetMauvilleOldManObjEventGfx
-	def_special ScrSpecial_GenerateGiddyLine
-	def_special ScrSpecial_GiddyShouldTellAnotherTale
-	def_special ScrSpecial_StorytellerGetFreeStorySlot
-	def_special ScrSpecial_StorytellerDisplayStory
-	def_special ScrSpecial_StorytellerStoryListMenu
-	def_special ScrSpecial_StorytellerUpdateStat
-	def_special ScrSpecial_StorytellerInitializeRandomStat
-	def_special ScrSpecial_HasStorytellerAlreadyRecorded
-	def_special ScrSpecial_TraderMenuGetDecoration
-	def_special ScrSpecial_GetTraderTradedFlag
-	def_special ScrSpecial_DoesPlayerHaveNoDecorations
-	def_special ScrSpecial_IsDecorationFull
-	def_special ScrSpecial_TraderMenuGiveDecoration
-	def_special ScrSpecial_TraderDoDecorationTrade
+	def_special Script_GetCurrentMauvilleMan
+	def_special HasBardSongBeenChanged
+	def_special SaveBardSongLyrics
+	def_special GetHipsterSpokenFlag
+	def_special SetHipsterSpokenFlag
+	def_special HipsterTryTeachWord
+	def_special PlayBardSong
+	def_special SetMauvilleOldManObjEventGfx
+	def_special GenerateGiddyLine
+	def_special GiddyShouldTellAnotherTale
+	def_special StorytellerGetFreeStorySlot
+	def_special Script_StorytellerDisplayStory
+	def_special StorytellerStoryListMenu
+	def_special StorytellerUpdateStat
+	def_special Script_StorytellerInitializeRandomStat
+	def_special HasStorytellerAlreadyRecorded
+	def_special TraderMenuGetDecoration
+	def_special GetTraderTradedFlag
+	def_special DoesPlayerHaveNoDecorations
+	def_special IsDecorationCategoryFull
+	def_special TraderShowDecorationMenu
+	def_special TraderDoDecorationTrade
 	def_special GetSeedotSizeRecordInfo
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
@@ -315,7 +315,7 @@ gSpecials::
 	def_special IsStarterInParty
 	def_special CopyCurSecretBaseOwnerName_StrVar1
 	def_special ScriptCheckFreePokemonStorageSpace
-	def_special DoSealedChamberShakingEffect1
+	def_special DoSealedChamberShakingEffect_Long
 	def_special ShowDeptStoreElevatorFloorSelect
 	def_special InteractWithShieldOrTVDecoration
 	def_special IsPokerusInParty
@@ -325,7 +325,7 @@ gSpecials::
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
 	def_special SetTrainerFacingDirection
-	def_special DoSealedChamberShakingEffect2
+	def_special DoSealedChamberShakingEffect_Short
 	def_special FoundBlackGlasses
 	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
@@ -400,7 +400,7 @@ gSpecials::
 	def_special ClearQuizLadyQuestionAndAnswer
 	def_special QuizLadySetCustomQuestion
 	def_special QuizLadyTakePrizeForCustomQuiz
-	def_special GetMysteryEventCardVal
+	def_special GetMysteryGiftCardStat
 	def_special QuizLadyRecordCustomQuizData
 	def_special QuizLadySetWaitingForChallenger
 	def_special BufferQuizCorrectAnswer
@@ -430,11 +430,11 @@ gSpecials::
 	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
-	def_special sub_801DC20
+	def_special RetrieveWonderNewsVal
 	def_special ChooseMonForWirelessMinigame
 	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
-	def_special ValidateReceivedWonderCard
+	def_special ValidateSavedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special IsPokemonJumpSpeciesInParty
 	def_special ShowPokemonJumpRecords
@@ -455,7 +455,7 @@ gSpecials::
 	def_special ClearLinkContestFlags
 	def_special TryContestEModeLinkup
 	def_special ShowScrollableMultichoice
-	def_special sub_813A630
+	def_special ScrollableMultichoice_TryReturnToList
 	def_special BufferBattleTowerElevatorFloors
 	def_special TryStoreHeldItemsInPyramidBag
 	def_special ChooseItemsToTossFromPyramidBag
@@ -484,10 +484,10 @@ gSpecials::
 	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
-	def_special sub_813ADD4
+	def_special ScrollableMultichoice_RedrawPersistentMenu
 	def_special ChooseMonForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
-	def_special sub_813AF48
+	def_special ScrollableMultichoice_ClosePersistentMenu
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
 	def_special CreateEventLegalEnemyMon
