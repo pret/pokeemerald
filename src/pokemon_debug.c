@@ -36,8 +36,8 @@
 #include "constants/items.h"
 
 //Defines
-#define DEBUG_MON_X 144
-#define DEBUG_MON_Y 11
+#define DEBUG_MON_X 144 + 32
+#define DEBUG_MON_Y 11 + 40
 #define DEBUG_MON_BACK_X 62
 #define DEBUG_MON_BACK_Y 80
 #define DEBUG_ICON_X 19
@@ -369,8 +369,8 @@ static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data
 {
     u8 text[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny$");
     u8 textGender[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{SELECT_BUTTON} Gender$");
-    u8 textForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{START_BUTTON} Forms$");
-    u8 textGenderForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{START_BUTTON} Forms {SELECT_BUTTON} Gender$");
+    u8 textForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny  {START_BUTTON} Forms$");
+    u8 textGenderForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny  {START_BUTTON} Forms\n{SELECT_BUTTON} Gender$");
     u16 species = data->modifyArrows.currValue;
     
 
@@ -721,25 +721,28 @@ void CB2_Debug_Pokemon(void)
             //Print instructions
             PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
 
+            //Palettes
+            palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
+            LoadCompressedSpritePalette(palette);
             //Front
             HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->isFemale);
             data->isShiny = FALSE;
             data->isFemale = FALSE;
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
             SetMultiuseSpriteTemplateToPokemon(species, 1);
-            data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
+            gMultiuseSpriteTemplate.paletteTag = palette->tag;
+            data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X, DEBUG_MON_Y, 0);
             gSprites[data->frontspriteId].oam.paletteNum = 1;
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
 
             //Back
             HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
-            palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
-            LoadCompressedSpritePalette(palette);
+            BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 4);
             SetMultiuseSpriteTemplateToPokemon(species, 2);
-            gMultiuseSpriteTemplate.paletteTag = palette->tag;
             offset_y = gMonBackPicCoords[species].y_offset;
             data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
+            gSprites[data->backspriteId].oam.paletteNum = 4;
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
             gSprites[data->backspriteId].oam.priority = 0;
 
@@ -991,23 +994,26 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     //Update instructions
     PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
 
+    //Palettes
+    palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
+    LoadCompressedSpritePalette(palette);
     //Front
     HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->isFemale);
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
-    data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
+    gMultiuseSpriteTemplate.paletteTag = palette->tag;
+    data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X, DEBUG_MON_Y, 0);
     gSprites[data->frontspriteId].oam.paletteNum = 1;
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
     
     //Back
     HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
-    palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
-    LoadCompressedSpritePalette(palette);
+    BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 4);
     SetMultiuseSpriteTemplateToPokemon(species, 2);
-    gMultiuseSpriteTemplate.paletteTag = palette->tag;
     offset_y = gMonBackPicCoords[species].y_offset;
     data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
+    gSprites[data->backspriteId].oam.paletteNum = 4;
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
