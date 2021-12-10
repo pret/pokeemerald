@@ -9,6 +9,7 @@
 #include "decompress.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "item.h"
 #include "item_icon.h"
 #include "list_menu.h"
@@ -84,15 +85,56 @@ struct PokemonDebugMenu
     struct PokemonDebugModifyArrows modifyArrows;
     u8 animIdBack;
     u8 animIdFront;
+    u8 battleBgType;
+    u8 battleTerrain;
+};
+
+static const struct BgTemplate sBgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 24,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 28,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+   {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 26,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
 };
 
 //WindowTemplates
 #define WIN_NAME_NUMBERS 0
 #define WIN_INSTRUCTIONS 1
-#define WIN_BACK_SPRITE_LINE 2
-#define WIN_ANIM_INFORMATION_FRONT 3
-#define WIN_ANIM_INFORMATION_BACK 4
-#define WIN_END 5
+#define WIN_ANIM_INFORMATION_FRONT 2
+#define WIN_ANIM_INFORMATION_BACK 3
+#define WIN_END 4
 static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
 {
     [WIN_NAME_NUMBERS] = {
@@ -113,15 +155,6 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .paletteNum = 0xF,
         .baseBlock = 1 + 28
     },
-    [WIN_BACK_SPRITE_LINE] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 14,
-        .width = 11,
-        .height = 1,
-        .paletteNum = 0xF,
-        .baseBlock = 1 + 28 + 75
-    },
     [WIN_ANIM_INFORMATION_FRONT] = {
         .bg = 0,
         .tilemapLeft = 14,
@@ -129,7 +162,7 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .width = 16,
         .height = 3,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 28 + 75 + 11
+        .baseBlock = 1 + 28 + 75
     },
     [WIN_ANIM_INFORMATION_BACK] = {
         .bg = 0,
@@ -138,7 +171,7 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .width = 16,
         .height = 3,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 28 + 75 + 11 + 48
+        .baseBlock = 1 + 28 + 75 + 48
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -623,6 +656,107 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
     LoadPalette(gDecompressionBuffer, 0x80 + battlerId * 16, 0x20);
 }
 
+//Battle background functions
+struct BattleBackground
+{
+    const void *tileset;
+    const void *tilemap;
+    const void *entryTileset;
+    const void *entryTilemap;
+    const void *palette;
+};
+extern const struct BattleBackground sBattleTerrainTable[];
+#define MAP_BATTLE_SCENE_NORMAL       0
+#define MAP_BATTLE_SCENE_GYM          1
+#define MAP_BATTLE_SCENE_MAGMA        2
+#define MAP_BATTLE_SCENE_AQUA         3
+#define MAP_BATTLE_SCENE_SIDNEY       4
+#define MAP_BATTLE_SCENE_PHOEBE       5
+#define MAP_BATTLE_SCENE_GLACIA       6
+#define MAP_BATTLE_SCENE_DRAKE        7
+#define MAP_BATTLE_SCENE_FRONTIER     8
+#define MAP_BATTLE_SCENE_LEADER       9
+#define MAP_BATTLE_SCENE_WALLACE      10
+#define MAP_BATTLE_SCENE_GROUDON      11
+#define MAP_BATTLE_SCENE_KYOGRE       12
+#define MAP_BATTLE_SCENE_RAYQUAZA     13
+static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
+{
+    switch (battleBgType)
+    {
+    default:
+    case MAP_BATTLE_SCENE_NORMAL:
+        LZDecompressVram(sBattleTerrainTable[battleTerrain].tileset, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(sBattleTerrainTable[battleTerrain].tilemap, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(sBattleTerrainTable[battleTerrain].palette, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_GYM:
+        LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_BuildingGym, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_MAGMA:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumMagma, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_AQUA:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumAqua, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_SIDNEY:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumSidney, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_PHOEBE:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumPhoebe, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_GLACIA:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumGlacia, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_DRAKE:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumDrake, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_FRONTIER:
+        LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_Frontier, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_LEADER:
+        LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_BuildingLeader, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_WALLACE:
+        LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_StadiumWallace, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_GROUDON:
+        LZDecompressVram(gBattleTerrainTiles_Cave, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Cave, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_Groudon, 0x20, 0x60);
+    case MAP_BATTLE_SCENE_KYOGRE:
+        LZDecompressVram(gBattleTerrainTiles_Water, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Water, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_Kyogre, 0x20, 0x60);
+        break;
+    case MAP_BATTLE_SCENE_RAYQUAZA:
+        LZDecompressVram(gBattleTerrainTiles_Rayquaza, (void*)(BG_CHAR_ADDR(2)));
+        LZDecompressVram(gBattleTerrainTilemap_Rayquaza, (void*)(BG_SCREEN_ADDR(26)));
+        LoadCompressedPalette(gBattleTerrainPalette_Rayquaza, 0x20, 0x60);
+        break;    
+    }
+}
+
 // *******************************
 // Main functions
 static void UpdateMonAnimNames(u8 taskId)
@@ -657,8 +791,6 @@ static void ResetPokemonDebugWindows(void)
 
     for (i = 0; i < WIN_END + 1; i++)
     {
-        if (i == WIN_BACK_SPRITE_LINE)
-            continue;
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
         CopyWindowToVram(i, 3);
@@ -692,11 +824,18 @@ void CB2_Debug_Pokemon(void)
             FreeAllSpritePalettes();
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
+            //BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+
+            FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
             gMain.state++;
             break;
         case 2:
-            FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
-            ResetPokemonDebugWindows();
+            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+            data->battleTerrain = 0;
+            data->battleBgType = 0;
+            LoadBattleBg(data->battleBgType, data->battleTerrain);
+            
+            ResetPokemonDebugWindows();            
             gMain.state++;
             break;
         case 3:
@@ -708,6 +847,8 @@ void CB2_Debug_Pokemon(void)
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
             ShowBg(0);
             ShowBg(1);
+            ShowBg(2);
+            ShowBg(3);
 
             //input task handler
             taskId = CreateTask(Handle_Input_Debug_Pokemon, 0);
@@ -753,11 +894,6 @@ void CB2_Debug_Pokemon(void)
             //Modify Arrows
             SetUpModifyArrows(data);
             PrintDigitChars(data);
-
-            //MessageBox line
-            PutWindowTilemap(WIN_BACK_SPRITE_LINE);
-            FillWindowPixelRect(WIN_BACK_SPRITE_LINE, PIXEL_FILL(0x2), 0, 0, 90, 4);
-            CopyWindowToVram(WIN_BACK_SPRITE_LINE, 3);
 
             //Anim names
             data->animIdBack = GetSpeciesBackAnimSet(species) + 1;
@@ -990,6 +1126,9 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
 
     AllocateMonSpritesGfx();
     LoadMonIconPalette(species);
+
+    //Battle background
+    LoadBattleBg(data->battleBgType, data->battleTerrain);
 
     //Update instructions
     PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
