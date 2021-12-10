@@ -827,14 +827,14 @@ void CB2_Debug_Pokemon(void)
             //BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
+            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+            data->battleBgType = 0;
+            data->battleTerrain = 0;
+            LoadBattleBg(data->battleBgType , data->battleTerrain);
+            
             gMain.state++;
             break;
         case 2:
-            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-            data->battleTerrain = 0;
-            data->battleBgType = 0;
-            LoadBattleBg(data->battleBgType, data->battleTerrain);
-            
             ResetPokemonDebugWindows();            
             gMain.state++;
             break;
