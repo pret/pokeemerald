@@ -675,7 +675,7 @@ const struct SpriteFrameImage *const gBerryTreePicTablePointers[] = {
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX]  = sPicTable_GrepaBerryTree,
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX]  = sPicTable_LansatBerryTree,
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX]   = sPicTable_CornnBerryTree,
-    [ITEM_ENIGMA_BERRY_NEW - FIRST_BERRY_INDEX]  = sPicTable_DurinBerryTree,
+    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX]  = sPicTable_DurinBerryTree,
     [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX]    = sPicTable_OccaBerryTree,
     [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX]  = sPicTable_CornnBerryTree,
     [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX]   = sPicTable_RazzBerryTree,
@@ -700,7 +700,6 @@ const struct SpriteFrameImage *const gBerryTreePicTablePointers[] = {
     [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX]   = sPicTable_RowapBerryTree,
     [ITEM_KEE_BERRY - FIRST_BERRY_INDEX]     = sPicTable_PechaBerryTree,
     [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] = sPicTable_OccaBerryTree,
-    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX]  = sPicTable_DurinBerryTree,
 };
 
 const u8 *const gBerryTreePaletteSlotTablePointers[] = {
@@ -746,7 +745,7 @@ const u8 *const gBerryTreePaletteSlotTablePointers[] = {
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Grepa,
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Lansat,
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Cornn,
-    [ITEM_ENIGMA_BERRY_NEW - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Durin,
+    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Durin,
     [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Occa,
     [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Cornn,
     [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Razz,
@@ -771,7 +770,6 @@ const u8 *const gBerryTreePaletteSlotTablePointers[] = {
     [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Rowap,
     [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Pecha,
     [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Occa,
-    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Durin,
 };
 
 const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
@@ -817,7 +815,7 @@ const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
-    [ITEM_ENIGMA_BERRY_NEW - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
@@ -842,5 +840,4 @@ const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
     [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
-    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
 };

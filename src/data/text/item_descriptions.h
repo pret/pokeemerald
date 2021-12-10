@@ -2710,7 +2710,7 @@ static const u8 sStarfBerryDesc[] = _(
     "sharply boosts a\n"
     "stat in a pinch.");
 
-static const u8 sEnigmaBerryNewDesc[] = _( // Todo
+static const u8 sEnigmaBerryDesc[] = _( // Todo
     "?????");
 
 static const u8 sMicleBerryDesc[] = _(
@@ -2743,7 +2743,7 @@ static const u8 sMarangaBerryDesc[] = _(
     "move, it raises the\n"
     "Sp. Def. a bit.");
 
-static const u8 sEnigmaBerryDesc[] = _(
+static const u8 sEnigmaBerryEReaderDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
     "Plant in loamy soil\n"
     "to grow a mystery.");
