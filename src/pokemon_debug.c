@@ -82,42 +82,53 @@ struct PokemonDebugMenu
     bool8 isShiny;
     bool8 isFemale;
     struct PokemonDebugModifyArrows modifyArrows;
-    u8 modifyWindowId;
-    u8 messageBoxWindowId;
 };
 
 //WindowTemplates
-static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
+#define WIN_NAME_NUMBERS 0
+#define WIN_INSTRUCTIONS 1
+#define WIN_BACK_SPRITE_LINE 2
+#define WIN_ANIM_INFORMATION 3
+#define WIN_END 4
+static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
 {
-    .bg = 0,
-    .tilemapLeft =1,
-    .tilemapTop = 207,
-    .width = 22,
-    .height = 8,
-    .paletteNum = 0xF,
-    .baseBlock = 0x300
-};
-
-static const struct WindowTemplate sModifyWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 4,
-    .tilemapTop = 2,
-    .width = 14,
-    .height = 2,
-    .paletteNum = 0xF,
-    .baseBlock = 0x200
-};
-
-static const struct WindowTemplate sPokemonDebugMsgBoxWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 3,
-    .tilemapTop = 14,
-    .width = 11,
-    .height = 1,
-    .paletteNum = 0xF,
-    .baseBlock = 0x100
+    [WIN_NAME_NUMBERS] = {
+        .bg = 0,
+        .tilemapLeft = 4,
+        .tilemapTop = 2,
+        .width = 14,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 1 + 640
+    },
+    [WIN_INSTRUCTIONS] = {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 15,
+        .width = 15,
+        .height = 5,
+        .paletteNum = 0xF,
+        .baseBlock = 1 + 640 + 28
+    },
+    [WIN_BACK_SPRITE_LINE] = {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 14,
+        .width = 11,
+        .height = 1,
+        .paletteNum = 0xF,
+        .baseBlock = 1 + 640 + 28 + 75
+    },
+    [WIN_ANIM_INFORMATION] = {
+        .bg = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 14,
+        .width = 11,
+        .height = 1,
+        .paletteNum = 0xF,
+        .baseBlock = 1 + 640 + 28 + 75 + 11 + 30
+    },
+    DUMMY_WIN_TEMPLATE,
 };
 
 #if P_ENABLE_DEBUG
@@ -225,8 +236,8 @@ static void PrintDigitChars(struct PokemonDebugMenu *data)
     text[i++] = CHAR_SPACE;
     StringCopy(&text[i], gSpeciesNames[species]);
 
-    FillWindowPixelBuffer(data->modifyWindowId, 0x11);
-    AddTextPrinterParameterized(data->modifyWindowId, 1, text, 3, 0, 0, NULL);
+    FillWindowPixelBuffer(WIN_NAME_NUMBERS, 0x11);
+    AddTextPrinterParameterized(WIN_NAME_NUMBERS, 1, text, 3, 0, 0, NULL);
 }
 
 static u32 CharDigitsToValue(u8 *charDigits, u8 maxDigits)
@@ -414,6 +425,20 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
 
 // *******************************
 // Main functions
+static void ResetPokemonDebugWindows(void)
+{
+    u8 i;
+
+    FreeAllWindowBuffers();
+    InitWindows(sPokemonDebugWindowTemplate);
+
+    for (i = 0; i < WIN_END + 1; i++)
+    {
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        PutWindowTilemap(i);
+        CopyWindowToVram(i, 2);
+    }
+}
 void CB2_Debug_Pokemon(void)
 {
     u8 taskId;
@@ -445,6 +470,11 @@ void CB2_Debug_Pokemon(void)
             gMain.state++;
             break;
         case 2:
+            FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
+            ResetPokemonDebugWindows();
+            gMain.state++;
+            break;
+        case 3:
             AllocateMonSpritesGfx();
 
             LoadPalette(sBgColor, 0, 2);
@@ -463,10 +493,10 @@ void CB2_Debug_Pokemon(void)
             data->currentmonId = SPECIES_BULBASAUR;
             species = data->currentmonId;
 
-            data->InstructionsWindowId = AddWindow(&sDebugPokemonInstructionsTemplate);
-            PutWindowTilemap(data->InstructionsWindowId);
-            PrintInstructionsOnWindow(data->InstructionsWindowId, data);
+            //Print instructions
+            PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
 
+            //Front
             HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->isFemale);
             data->isShiny = FALSE;
             data->isFemale = FALSE;
@@ -477,6 +507,7 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
 
+            //Back
             HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
             palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
             LoadCompressedSpritePalette(palette);
@@ -492,21 +523,15 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->iconspriteId].oam.priority = 0;
 
             //Modify Arrows
-            data->modifyWindowId = AddWindow(&sModifyWindowTemplate);
-            PutWindowTilemap(data->modifyWindowId);
-            CopyWindowToVram(data->modifyWindowId, 3);
             SetUpModifyArrows(data);
             PrintDigitChars(data);
 
             //MessageBox line
-            data->messageBoxWindowId = AddWindow(&sPokemonDebugMsgBoxWindowTemplate);
-            PutWindowTilemap(data->messageBoxWindowId);
-            CopyWindowToVram(data->messageBoxWindowId, 3);
-            FillWindowPixelRect(data->messageBoxWindowId, PIXEL_FILL(0x2), 0, 0, 90, 4);
+            FillWindowPixelRect(WIN_BACK_SPRITE_LINE, PIXEL_FILL(0x2), 0, 0, 90, 4);
 
             gMain.state++;
             break;
-        case 3:
+        case 4:
             EnableInterrupts(1);
             SetVBlankCallback(VBlankCB);
             SetMainCallback2(CB2_Debug_Runner);
@@ -691,8 +716,10 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     AllocateMonSpritesGfx();
     LoadMonIconPalette(species);
 
-    PrintInstructionsOnWindow(data->InstructionsWindowId, data);
+    //Update instructions
+    PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
 
+    //Front
     HandleLoadSpecialPokePicCustom(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, 0, data->isFemale);
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
@@ -701,6 +728,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
     
+    //Back
     HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
     palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
     LoadCompressedSpritePalette(palette);
