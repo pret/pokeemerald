@@ -38,15 +38,15 @@
 //Defines
 #define DEBUG_MON_X 144
 #define DEBUG_MON_Y 11
-#define DEBUG_MON_BACK_X 40
-#define DEBUG_MON_BACK_Y 50
-#define DEBUG_ICON_X 19//158 + 32
-#define DEBUG_ICON_Y 19//90 + 40
+#define DEBUG_MON_BACK_X 62
+#define DEBUG_MON_BACK_Y 80
+#define DEBUG_ICON_X 19
+#define DEBUG_ICON_Y 19
 #define DEBUG_MON_SHINY 0
 #define DEBUG_MON_NORMAL 9
 
 #define MODIFY_DIGITS_MAX 4
-#define MODIFY_DIGITS_ARROW_X 38
+#define MODIFY_DIGITS_ARROW_X 41
 #define MODIFY_DIGITS_ARROW1_Y 12
 #define MODIFY_DIGITS_ARROW2_Y 36
 
@@ -82,14 +82,17 @@ struct PokemonDebugMenu
     bool8 isShiny;
     bool8 isFemale;
     struct PokemonDebugModifyArrows modifyArrows;
+    u8 animIdBack;
+    u8 animIdFront;
 };
 
 //WindowTemplates
 #define WIN_NAME_NUMBERS 0
 #define WIN_INSTRUCTIONS 1
 #define WIN_BACK_SPRITE_LINE 2
-#define WIN_ANIM_INFORMATION 3
-#define WIN_END 4
+#define WIN_ANIM_INFORMATION_FRONT 3
+#define WIN_ANIM_INFORMATION_BACK 4
+#define WIN_END 5
 static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
 {
     [WIN_NAME_NUMBERS] = {
@@ -99,7 +102,7 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .width = 14,
         .height = 2,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 640
+        .baseBlock = 1
     },
     [WIN_INSTRUCTIONS] = {
         .bg = 0,
@@ -108,30 +111,227 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .width = 15,
         .height = 5,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 640 + 28
+        .baseBlock = 1 + 28
     },
     [WIN_BACK_SPRITE_LINE] = {
         .bg = 0,
-        .tilemapLeft = 3,
+        .tilemapLeft = 2,
         .tilemapTop = 14,
         .width = 11,
         .height = 1,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 640 + 28 + 75
+        .baseBlock = 1 + 28 + 75
     },
-    [WIN_ANIM_INFORMATION] = {
+    [WIN_ANIM_INFORMATION_FRONT] = {
         .bg = 0,
-        .tilemapLeft = 16,
-        .tilemapTop = 14,
-        .width = 11,
-        .height = 1,
+        .tilemapLeft = 14,
+        .tilemapTop = 12,
+        .width = 16,
+        .height = 3,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 640 + 28 + 75 + 11 + 30
+        .baseBlock = 1 + 28 + 75 + 11
+    },
+    [WIN_ANIM_INFORMATION_BACK] = {
+        .bg = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 15,
+        .width = 16,
+        .height = 3,
+        .paletteNum = 0xF,
+        .baseBlock = 1 + 28 + 75 + 11 + 48
     },
     DUMMY_WIN_TEMPLATE,
 };
 
 #if P_ENABLE_DEBUG
+extern const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1];
+const u8 gBackAnimNames[][23 + 1] =
+{
+    [BACK_ANIM_NONE]                    = _("NONE"),
+    [BACK_ANIM_H_VIBRATE]               = _("H VIBRATE"),
+    [BACK_ANIM_H_SLIDE]                 = _("H SLIDE"),
+    [BACK_ANIM_H_SPRING]                = _("H SPRING"),
+    [BACK_ANIM_H_SPRING_REPEATED]       = _("H SPRING REPEATED"),
+    [BACK_ANIM_SHRINK_GROW]             = _("SHRINK GROW"),
+    [BACK_ANIM_GROW]                    = _("GROW"),
+    [BACK_ANIM_CIRCLE_COUNTERCLOCKWISE] = _("CIRCLE COUNTERCLOCKWISE"),
+    [BACK_ANIM_H_SHAKE]                 = _("H SHAKE"),
+    [BACK_ANIM_V_SHAKE]                 = _("V SHAKE"),
+    [BACK_ANIM_V_SHAKE_H_SLIDE]         = _("V SHAKE H SLIDE"),
+    [BACK_ANIM_V_STRETCH]               = _("V STRETCH"),
+    [BACK_ANIM_H_STRETCH]               = _("H STRETCH"),
+    [BACK_ANIM_GROW_STUTTER]            = _("GROW STUTTER"),
+    [BACK_ANIM_V_SHAKE_LOW]             = _("V SHAKE LOW"),
+    [BACK_ANIM_TRIANGLE_DOWN]           = _("TRIANGLE DOWN"),
+    [BACK_ANIM_CONCAVE_ARC_LARGE]       = _("CONCAVE ARC LARGE"),
+    [BACK_ANIM_CONVEX_DOUBLE_ARC]       = _("CONVEX DOUBLE ARC"),
+    [BACK_ANIM_CONCAVE_ARC_SMALL]       = _("CONCAVE ARC SMALL"),
+    [BACK_ANIM_DIP_RIGHT_SIDE]          = _("DIP RIGHT SIDE"),
+    [BACK_ANIM_SHRINK_GROW_VIBRATE]     = _("SHRINK GROW VIBRATE"),
+    [BACK_ANIM_JOLT_RIGHT]              = _("JOLT RIGHT"),
+    [BACK_ANIM_SHAKE_FLASH_YELLOW]      = _("SHAKE FLASH YELLOW"),
+    [BACK_ANIM_SHAKE_GLOW_RED]          = _("SHAKE GLOW RED"),
+    [BACK_ANIM_SHAKE_GLOW_GREEN]        = _("SHAKE GLOW GREEN"),
+    [BACK_ANIM_SHAKE_GLOW_BLUE]         = _("SHAKE GLOW BLUE"),
+};
+const u8 gFrontAnimNames[][34] =
+{
+    [ANIM_V_SQUISH_AND_BOUNCE]               = _("V SQUISH AND BOUNCE"),
+    [ANIM_CIRCULAR_STRETCH_TWICE]            = _("CIRCULAR STRETCH TWICE"),
+    [ANIM_H_VIBRATE]                         = _("H VIBRATE"),
+    [ANIM_H_SLIDE]                           = _("H SLIDE"),
+    [ANIM_V_SLIDE]                           = _("V SLIDE"),
+    [ANIM_BOUNCE_ROTATE_TO_SIDES]            = _("BOUNCE ROTATE TO SIDES"),
+    [ANIM_V_JUMPS_H_JUMPS]                   = _("V JUMPS H JUMPS"),
+    [ANIM_ROTATE_TO_SIDES]                   = _("ROTATE TO SIDES"),
+    [ANIM_ROTATE_TO_SIDES_TWICE]             = _("ROTATE TO SIDES TWICE"),
+    [ANIM_GROW_VIBRATE]                      = _("GROW VIBRATE"),
+    [ANIM_ZIGZAG_FAST]                       = _("ZIGZAG FAST"),
+    [ANIM_SWING_CONCAVE]                     = _("SWING CONCAVE"),
+    [ANIM_SWING_CONCAVE_FAST]                = _("SWING CONCAVE FAST"),
+    [ANIM_SWING_CONVEX]                      = _("SWING CONVEX"),
+    [ANIM_SWING_CONVEX_FAST]                 = _("SWING CONVEX FAST"),
+    [ANIM_H_SHAKE]                           = _("H SHAKE"),
+    [ANIM_V_SHAKE]                           = _("V SHAKE"),
+    [ANIM_CIRCULAR_VIBRATE]                  = _("CIRCULAR VIBRATE"),
+    [ANIM_TWIST]                             = _("TWIST"),
+    [ANIM_SHRINK_GROW]                       = _("SHRINK GROW"),
+    [ANIM_CIRCLE_C_CLOCKWISE]                = _("CIRCLE C CLOCKWISE"),
+    [ANIM_GLOW_BLACK]                        = _("GLOW BLACK"),
+    [ANIM_H_STRETCH]                         = _("H STRETCH"),
+    [ANIM_V_STRETCH]                         = _("V STRETCH"),
+    [ANIM_RISING_WOBBLE]                     = _("RISING WOBBLE"),
+    [ANIM_V_SHAKE_TWICE]                     = _("V SHAKE TWICE"),
+    [ANIM_TIP_MOVE_FORWARD]                  = _("TIP MOVE FORWARD"),
+    [ANIM_H_PIVOT]                           = _("H PIVOT"),
+    [ANIM_V_SLIDE_WOBBLE]                    = _("V SLIDE WOBBLE"),
+    [ANIM_H_SLIDE_WOBBLE]                    = _("H SLIDE WOBBLE"),
+    [ANIM_V_JUMPS_BIG]                       = _("V JUMPS BIG"),
+    [ANIM_SPIN_LONG]                         = _("SPIN LONG"),
+    [ANIM_GLOW_ORANGE]                       = _("GLOW ORANGE"),
+    [ANIM_GLOW_RED]                          = _("GLOW RED"),
+    [ANIM_GLOW_BLUE]                         = _("GLOW BLUE"),
+    [ANIM_GLOW_YELLOW]                       = _("GLOW YELLOW"),
+    [ANIM_GLOW_PURPLE]                       = _("GLOW PURPLE"),
+    [ANIM_BACK_AND_LUNGE]                    = _("BACK AND LUNGE"),
+    [ANIM_BACK_FLIP]                         = _("BACK FLIP"),
+    [ANIM_FLICKER]                           = _("FLICKER"),
+    [ANIM_BACK_FLIP_BIG]                     = _("BACK FLIP BIG"),
+    [ANIM_FRONT_FLIP]                        = _("FRONT FLIP"),
+    [ANIM_TUMBLING_FRONT_FLIP]               = _("TUMBLING FRONT FLIP"),
+    [ANIM_FIGURE_8]                          = _("FIGURE 8"),
+    [ANIM_FLASH_YELLOW]                      = _("FLASH YELLOW"),
+    [ANIM_SWING_CONCAVE_FAST_SHORT]          = _("SWING CONCAVE FAST SHORT"),
+    [ANIM_SWING_CONVEX_FAST_SHORT]           = _("SWING CONVEX FAST SHORT"),
+    [ANIM_ROTATE_UP_SLAM_DOWN]               = _("ROTATE UP SLAM DOWN"),
+    [ANIM_DEEP_V_SQUISH_AND_BOUNCE]          = _("DEEP V SQUISH AND BOUNCE"),
+    [ANIM_H_JUMPS]                           = _("H JUMPS"),
+    [ANIM_H_JUMPS_V_STRETCH]                 = _("H JUMPS V STRETCH"),
+    [ANIM_ROTATE_TO_SIDES_FAST]              = _("ROTATE TO SIDES FAST"),
+    [ANIM_ROTATE_UP_TO_SIDES]                = _("ROTATE UP TO SIDES"),
+    [ANIM_FLICKER_INCREASING]                = _("FLICKER INCREASING"),
+    [ANIM_TIP_HOP_FORWARD]                   = _("TIP HOP FORWARD"),
+    [ANIM_PIVOT_SHAKE]                       = _("PIVOT SHAKE"),
+    [ANIM_TIP_AND_SHAKE]                     = _("TIP AND SHAKE"),
+    [ANIM_VIBRATE_TO_CORNERS]                = _("VIBRATE TO CORNERS"),
+    [ANIM_GROW_IN_STAGES]                    = _("GROW IN STAGES"),
+    [ANIM_V_SPRING]                          = _("V SPRING"),
+    [ANIM_V_REPEATED_SPRING]                 = _("V REPEATED SPRING"),
+    [ANIM_SPRING_RISING]                     = _("SPRING RISING"),
+    [ANIM_H_SPRING]                          = _("H SPRING"),
+    [ANIM_H_REPEATED_SPRING_SLOW]            = _("H REPEATED SPRING SLOW"),
+    [ANIM_H_SLIDE_SHRINK]                    = _("H SLIDE SHRINK"),
+    [ANIM_LUNGE_GROW]                        = _("LUNGE GROW"),
+    [ANIM_CIRCLE_INTO_BG]                    = _("CIRCLE INTO BG"),
+    [ANIM_RAPID_H_HOPS]                      = _("RAPID H HOPS"),
+    [ANIM_FOUR_PETAL]                        = _("FOUR PETAL"),
+    [ANIM_V_SQUISH_AND_BOUNCE_SLOW]          = _("V SQUISH AND BOUNCE SLOW"),
+    [ANIM_H_SLIDE_SLOW]                      = _("H SLIDE SLOW"),
+    [ANIM_V_SLIDE_SLOW]                      = _("V SLIDE SLOW"),
+    [ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL]      = _("BOUNCE ROTATE TO SIDES SMALL"),
+    [ANIM_BOUNCE_ROTATE_TO_SIDES_SLOW]       = _("BOUNCE ROTATE TO SIDES SLOW"),
+    [ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL_SLOW] = _("BOUNCE ROTATE TO SIDES SMALL SLOW"),
+    [ANIM_ZIGZAG_SLOW]                       = _("ZIGZAG SLOW"),
+    [ANIM_H_SHAKE_SLOW]                      = _("H SHAKE SLOW"),
+    [ANIM_V_SHAKE_SLOW]                      = _("V SHAKE SLOW"),
+    [ANIM_TWIST_TWICE]                       = _("TWIST TWICE"),
+    [ANIM_CIRCLE_C_CLOCKWISE_SLOW]           = _("CIRCLE C CLOCKWISE SLOW"),
+    [ANIM_V_SHAKE_TWICE_SLOW]                = _("V SHAKE TWICE SLOW"),
+    [ANIM_V_SLIDE_WOBBLE_SMALL]              = _("V SLIDE WOBBLE SMALL"),
+    [ANIM_V_JUMPS_SMALL]                     = _("V JUMPS SMALL"),
+    [ANIM_SPIN]                              = _("SPIN"),
+    [ANIM_TUMBLING_FRONT_FLIP_TWICE]         = _("TUMBLING FRONT FLIP TWICE"),
+    [ANIM_DEEP_V_SQUISH_AND_BOUNCE_TWICE]    = _("DEEP V SQUISH AND BOUNCE TWICE"),
+    [ANIM_H_JUMPS_V_STRETCH_TWICE]           = _("H JUMPS V STRETCH TWICE"),
+    [ANIM_V_SHAKE_BACK]                      = _("V SHAKE BACK"),
+    [ANIM_V_SHAKE_BACK_SLOW]                 = _("V SHAKE BACK SLOW"),
+    [ANIM_V_SHAKE_H_SLIDE_SLOW]              = _("V SHAKE H SLIDE SLOW"),
+    [ANIM_V_STRETCH_BOTH_ENDS_SLOW]          = _("V STRETCH BOTH ENDS SLOW"),
+    [ANIM_H_STRETCH_FAR_SLOW]                = _("H STRETCH FAR SLOW"),
+    [ANIM_V_SHAKE_LOW_TWICE]                 = _("V SHAKE LOW TWICE"),
+    [ANIM_H_SHAKE_FAST]                      = _("H SHAKE FAST"),
+    [ANIM_H_SLIDE_FAST]                      = _("H SLIDE FAST"),
+    [ANIM_H_VIBRATE_FAST]                    = _("H VIBRATE FAST"),
+    [ANIM_H_VIBRATE_FASTEST]                 = _("H VIBRATE FASTEST"),
+    [ANIM_V_SHAKE_BACK_FAST]                 = _("V SHAKE BACK FAST"),
+    [ANIM_V_SHAKE_LOW_TWICE_SLOW]            = _("V SHAKE LOW TWICE SLOW"),
+    [ANIM_V_SHAKE_LOW_TWICE_FAST]            = _("V SHAKE LOW TWICE FAST"),
+    [ANIM_CIRCLE_C_CLOCKWISE_LONG]           = _("CIRCLE C CLOCKWISE LONG"),
+    [ANIM_GROW_STUTTER_SLOW]                 = _("GROW STUTTER SLOW"),
+    [ANIM_V_SHAKE_H_SLIDE]                   = _("V SHAKE H SLIDE"),
+    [ANIM_V_SHAKE_H_SLIDE_FAST]              = _("V SHAKE H SLIDE FAST"),
+    [ANIM_TRIANGLE_DOWN_SLOW]                = _("TRIANGLE DOWN SLOW"),
+    [ANIM_TRIANGLE_DOWN]                     = _("TRIANGLE DOWN"),
+    [ANIM_TRIANGLE_DOWN_TWICE]               = _("TRIANGLE DOWN TWICE"),
+    [ANIM_GROW]                              = _("GROW"),
+    [ANIM_GROW_TWICE]                        = _("GROW TWICE"),
+    [ANIM_H_SPRING_FAST]                     = _("H SPRING FAST"),
+    [ANIM_H_SPRING_SLOW]                     = _("H SPRING SLOW"),
+    [ANIM_H_REPEATED_SPRING_FAST]            = _("H REPEATED SPRING FAST"),
+    [ANIM_H_REPEATED_SPRING]                 = _("H REPEATED SPRING"),
+    [ANIM_SHRINK_GROW_FAST]                  = _("SHRINK GROW FAST"),
+    [ANIM_SHRINK_GROW_SLOW]                  = _("SHRINK GROW SLOW"),
+    [ANIM_V_STRETCH_BOTH_ENDS]               = _("V STRETCH BOTH ENDS"),
+    [ANIM_V_STRETCH_BOTH_ENDS_TWICE]         = _("V STRETCH BOTH ENDS TWICE"),
+    [ANIM_H_STRETCH_FAR_TWICE]               = _("H STRETCH FAR TWICE"),
+    [ANIM_H_STRETCH_FAR]                     = _("H STRETCH FAR"),
+    [ANIM_GROW_STUTTER_TWICE]                = _("GROW STUTTER TWICE"),
+    [ANIM_GROW_STUTTER]                      = _("GROW STUTTER"),
+    [ANIM_CONCAVE_ARC_LARGE_SLOW]            = _("CONCAVE ARC LARGE SLOW"),
+    [ANIM_CONCAVE_ARC_LARGE]                 = _("CONCAVE ARC LARGE"),
+    [ANIM_CONCAVE_ARC_LARGE_TWICE]           = _("CONCAVE ARC LARGE TWICE"),
+    [ANIM_CONVEX_DOUBLE_ARC_SLOW]            = _("CONVEX DOUBLE ARC SLOW"),
+    [ANIM_CONVEX_DOUBLE_ARC]                 = _("CONVEX DOUBLE ARC"),
+    [ANIM_CONVEX_DOUBLE_ARC_TWICE]           = _("CONVEX DOUBLE ARC TWICE"),
+    [ANIM_CONCAVE_ARC_SMALL_SLOW]            = _("CONCAVE ARC SMALL SLOW"),
+    [ANIM_CONCAVE_ARC_SMALL]                 = _("CONCAVE ARC SMALL"),
+    [ANIM_CONCAVE_ARC_SMALL_TWICE]           = _("CONCAVE ARC SMALL TWICE"),
+    [ANIM_H_DIP]                             = _("H DIP"),
+    [ANIM_H_DIP_FAST]                        = _("H DIP FAST"),
+    [ANIM_H_DIP_TWICE]                       = _("H DIP TWICE"),
+    [ANIM_SHRINK_GROW_VIBRATE_FAST]          = _("SHRINK GROW VIBRATE FAST"),
+    [ANIM_SHRINK_GROW_VIBRATE]               = _("SHRINK GROW VIBRATE"),
+    [ANIM_SHRINK_GROW_VIBRATE_SLOW]          = _("SHRINK GROW VIBRATE SLOW"),
+    [ANIM_JOLT_RIGHT_FAST]                   = _("JOLT RIGHT FAST"),
+    [ANIM_JOLT_RIGHT]                        = _("JOLT RIGHT"),
+    [ANIM_JOLT_RIGHT_SLOW]                   = _("JOLT RIGHT SLOW"),
+    [ANIM_SHAKE_FLASH_YELLOW_FAST]           = _("SHAKE FLASH YELLOW FAST"),
+    [ANIM_SHAKE_FLASH_YELLOW]                = _("SHAKE FLASH YELLOW"),
+    [ANIM_SHAKE_FLASH_YELLOW_SLOW]           = _("SHAKE FLASH YELLOW SLOW"),
+    [ANIM_SHAKE_GLOW_RED_FAST]               = _("SHAKE GLOW RED FAST"),
+    [ANIM_SHAKE_GLOW_RED]                    = _("SHAKE GLOW RED"),
+    [ANIM_SHAKE_GLOW_RED_SLOW]               = _("SHAKE GLOW RED SLOW"),
+    [ANIM_SHAKE_GLOW_GREEN_FAST]             = _("SHAKE GLOW GREEN FAST"),
+    [ANIM_SHAKE_GLOW_GREEN]                  = _("SHAKE GLOW GREEN"),
+    [ANIM_SHAKE_GLOW_GREEN_SLOW]             = _("SHAKE GLOW GREEN SLOW"),
+    [ANIM_SHAKE_GLOW_BLUE_FAST]              = _("SHAKE GLOW BLUE FAST"),
+    [ANIM_SHAKE_GLOW_BLUE]                   = _("SHAKE GLOW BLUE"),
+    [ANIM_SHAKE_GLOW_BLUE_SLOW]              = _("SHAKE GLOW BLUE SLOW"),
+    [ANIM_SHAKE_GLOW_BLACK_SLOW]             = _("SHAKE GLOW BLACK SLOW"),
+    [ANIM_SHAKE_GLOW_WHITE_SLOW]             = _("SHAKE GLOW WHITE SLOW"),
+    [ANIM_SHAKE_GLOW_PURPLE_SLOW]            = _("SHAKE GLOW PURPLE SLOW"),
+};
+
 //Function declarations
 static void PrintDigitChars(struct PokemonDebugMenu *data);
 static void SetUpModifyArrows(struct PokemonDebugMenu *data);
@@ -167,10 +367,10 @@ static void PadString(const u8 *src, u8 *dst)
 
 static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data)
 {
-    u8 text[] = _("{A_BUTTON} Shiny\n{L_BUTTON} Back  {R_BUTTON} Front$");
-    u8 textGender[] = _("{A_BUTTON} Shiny\n{L_BUTTON} Back  {R_BUTTON} Front {SELECT_BUTTON} Gender$");
-    u8 textForms[] = _("{A_BUTTON} Shiny  {START_BUTTON} Forms\n{L_BUTTON} Back  {R_BUTTON} Front$");
-    u8 textGenderForms[] = _("{A_BUTTON} Shiny  {START_BUTTON} Forms\n{L_BUTTON} Back  {R_BUTTON} Front {SELECT_BUTTON} Gender$");
+    u8 text[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny$");
+    u8 textGender[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{SELECT_BUTTON} Gender$");
+    u8 textForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{START_BUTTON} Forms$");
+    u8 textGenderForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{START_BUTTON} Forms {SELECT_BUTTON} Gender$");
     u16 species = data->modifyArrows.currValue;
     
 
@@ -178,16 +378,16 @@ static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data
     if (SpeciesHasGenderDifference[species])
     {
         if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-            AddTextPrinterParameterized(windowId, 1, textGenderForms, 0, 0, 0, NULL);
+            AddTextPrinterParameterized(windowId, 0, textGenderForms, 0, 0, 0, NULL);
         else
-            AddTextPrinterParameterized(windowId, 1, textGender, 0, 0, 0, NULL);
+            AddTextPrinterParameterized(windowId, 0, textGender, 0, 0, 0, NULL);
     }
     else
     {
         if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-            AddTextPrinterParameterized(windowId, 1, textForms, 0, 0, 0, NULL);
+            AddTextPrinterParameterized(windowId, 0, textForms, 0, 0, 0, NULL);
         else
-            AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
+            AddTextPrinterParameterized(windowId, 0, text, 0, 0, 0, NULL);
     }
     CopyWindowToVram(windowId, 3);
 }
@@ -237,7 +437,7 @@ static void PrintDigitChars(struct PokemonDebugMenu *data)
     StringCopy(&text[i], gSpeciesNames[species]);
 
     FillWindowPixelBuffer(WIN_NAME_NUMBERS, 0x11);
-    AddTextPrinterParameterized(WIN_NAME_NUMBERS, 1, text, 3, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_NAME_NUMBERS, 1, text, 6, 0, 0, NULL);
 }
 
 static u32 CharDigitsToValue(u8 *charDigits, u8 maxDigits)
@@ -425,6 +625,29 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
 
 // *******************************
 // Main functions
+static void UpdateMonAnimNames(u8 taskId)
+{
+    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    u8 frontAnim = data->animIdFront;
+    u8 backAnim = data->animIdBack;
+    u8 textFront[] = _("FRONT {R_BUTTON} + {DPAD_LEFTRIGHT}$");
+    u8 textBack[] = _("BACK {L_BUTTON} + {DPAD_LEFTRIGHT}$");
+    u8 text[34];
+    u8 fontId = 0;
+
+    //Front
+    FillWindowPixelBuffer(WIN_ANIM_INFORMATION_FRONT, PIXEL_FILL(0));
+    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_FRONT, fontId, textFront, 0, 0, 0, NULL);
+    StringCopy(text, gFrontAnimNames[frontAnim]);
+    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_FRONT, fontId, text, 4, 12, 0, NULL);
+
+    //Back
+    FillWindowPixelBuffer(WIN_ANIM_INFORMATION_BACK, PIXEL_FILL(0));
+    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_BACK, fontId, textBack, 0, 0, 0, NULL);
+    StringCopy(text, gBackAnimNames[backAnim]);
+    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_BACK, fontId, text, 4, 12, 0, NULL);
+}
+
 static void ResetPokemonDebugWindows(void)
 {
     u8 i;
@@ -434,9 +657,11 @@ static void ResetPokemonDebugWindows(void)
 
     for (i = 0; i < WIN_END + 1; i++)
     {
+        if (i == WIN_BACK_SPRITE_LINE)
+            continue;
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, 2);
+        CopyWindowToVram(i, 3);
     }
 }
 void CB2_Debug_Pokemon(void)
@@ -514,7 +739,7 @@ void CB2_Debug_Pokemon(void)
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             gMultiuseSpriteTemplate.paletteTag = palette->tag;
             offset_y = gMonBackPicCoords[species].y_offset;
-            data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 30 + offset_y, 0);
+            data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
             gSprites[data->backspriteId].oam.priority = 0;
 
@@ -527,7 +752,14 @@ void CB2_Debug_Pokemon(void)
             PrintDigitChars(data);
 
             //MessageBox line
+            PutWindowTilemap(WIN_BACK_SPRITE_LINE);
             FillWindowPixelRect(WIN_BACK_SPRITE_LINE, PIXEL_FILL(0x2), 0, 0, 90, 4);
+            CopyWindowToVram(WIN_BACK_SPRITE_LINE, 3);
+
+            //Anim names
+            data->animIdBack = GetSpeciesBackAnimSet(species) + 1;
+            data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
+            UpdateMonAnimNames(taskId);
 
             gMain.state++;
             break;
@@ -592,19 +824,54 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
     struct Sprite *Frontsprite = &gSprites[data->frontspriteId];
     struct Sprite *Backsprite = &gSprites[data->backspriteId];
-
-    if (JOY_NEW(L_BUTTON) && (Backsprite->callback == SpriteCallbackDummy))
+    
+    //Back
+    if (JOY_HELD(L_BUTTON) && JOY_NEW(DPAD_LEFT))
+    {
+        if (data->animIdBack <= 1)
+            data->animIdBack = BACK_ANIM_SHAKE_GLOW_BLUE;
+        else
+            data->animIdBack -= 1;
+        UpdateMonAnimNames(taskId);
+    }
+    else if (JOY_HELD(L_BUTTON) && JOY_NEW(DPAD_RIGHT))
+    {
+        if (data->animIdBack >= BACK_ANIM_SHAKE_GLOW_BLUE)
+            data->animIdBack = 1;
+        else
+            data->animIdBack += 1;
+        UpdateMonAnimNames(taskId);
+    }
+    else if (JOY_NEW(L_BUTTON)  && (Backsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
-        LaunchAnimationTaskForBackSprite(Backsprite, GetSpeciesBackAnimSet(data->currentmonId));
+        LaunchAnimationTaskForBackSprite(Backsprite, data->animIdBack-1);
+    }
+    //Front
+    else if (JOY_HELD(R_BUTTON) && JOY_NEW(DPAD_LEFT))
+    {
+        if (data->animIdFront <= 0)
+            data->animIdFront = ANIM_SHAKE_GLOW_PURPLE_SLOW;
+        else
+            data->animIdFront -= 1;
+        UpdateMonAnimNames(taskId);
+    }
+    else if (JOY_HELD(R_BUTTON) && JOY_NEW(DPAD_RIGHT))
+    {
+        if (data->animIdFront >= ANIM_SHAKE_GLOW_PURPLE_SLOW)
+            data->animIdFront = 0;
+        else
+            data->animIdFront += 1;
+        UpdateMonAnimNames(taskId);
     }
     else if (JOY_NEW(R_BUTTON) && (Frontsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         if (HasTwoFramesAnimation(data->currentmonId))
             StartSpriteAnim(Frontsprite, 1);
-        BattleAnimateFrontSprite(Frontsprite, data->currentmonId, TRUE, 1);
+        LaunchAnimationTaskForFrontSprite(Frontsprite, data->animIdFront);
     }
+    //Rest
     else if (JOY_NEW(A_BUTTON))
     {
         data->isShiny = !data->isShiny;
@@ -656,6 +923,9 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
             PrintDigitChars(data);
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
+            data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
+            data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
+            UpdateMonAnimNames(taskId);
         }
 
         PlaySE(SE_DEX_SCROLL);
@@ -670,10 +940,12 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
             PrintDigitChars(data);
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
+            data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
+            data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
+            UpdateMonAnimNames(taskId);
         }
 
         PlaySE(SE_DEX_SCROLL);
-
     }
     else if (JOY_NEW(DPAD_LEFT)) // || gMain.heldKeys & DPAD_LEFT)
     {
@@ -735,7 +1007,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     gMultiuseSpriteTemplate.paletteTag = palette->tag;
     offset_y = gMonBackPicCoords[species].y_offset;
-    data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 30 + offset_y, 0);
+    data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
