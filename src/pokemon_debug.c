@@ -95,39 +95,39 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
 {
     [WIN_NAME_NUMBERS] = {
         .bg = 0,
-        .tilemapLeft = 4,
-        .tilemapTop = 2,
-        .width = 14,
+        .tilemapLeft = 15,
+        .tilemapTop = 12,
+        .width = 15,
         .height = 2,
         .paletteNum = 0xF,
         .baseBlock = 1
     },
     [WIN_INSTRUCTIONS] = {
         .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 15,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
         .width = 15,
-        .height = 5,
+        .height = 4,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 28
+        .baseBlock = 1 + 30
     },
-    [WIN_ANIM_INFORMATION_FRONT] = {
+    [WIN_BOTTOM_LEFT] = {
         .bg = 0,
-        .tilemapLeft = 14,
-        .tilemapTop = 12,
-        .width = 16,
-        .height = 3,
+        .tilemapLeft = 1,
+        .tilemapTop = 14,
+        .width = 5,
+        .height = 6,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 28 + 75
+        .baseBlock = 1 + 30 + 60
     },
-    [WIN_ANIM_INFORMATION_BACK] = {
+    [WIN_BOTTOM_RIGHT] = {
         .bg = 0,
-        .tilemapLeft = 14,
-        .tilemapTop = 15,
-        .width = 16,
-        .height = 3,
+        .tilemapLeft = 6,
+        .tilemapTop = 14,
+        .width = 25,
+        .height = 6,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 28 + 75 + 48
+        .baseBlock = 1 + 30 + 60 + 30
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -319,7 +319,36 @@ const u8 gFrontAnimNames[][34] =
     [ANIM_SHAKE_GLOW_WHITE_SLOW]             = _("SHAKE GLOW WHITE SLOW"),
     [ANIM_SHAKE_GLOW_PURPLE_SLOW]            = _("SHAKE GLOW PURPLE SLOW"),
 };
-
+const u8 gBattleBackgroundNames[][30] = 
+{
+    [MAP_BATTLE_SCENE_NORMAL]   = _("NORMAL                  "),
+    [MAP_BATTLE_SCENE_GYM]      = _("GYM                     "),
+    [MAP_BATTLE_SCENE_MAGMA]    = _("MAGMA                   "),
+    [MAP_BATTLE_SCENE_AQUA]     = _("AQUA                    "),
+    [MAP_BATTLE_SCENE_SIDNEY]   = _("SIDNEY                  "),
+    [MAP_BATTLE_SCENE_PHOEBE]   = _("PHOEBE                  "),
+    [MAP_BATTLE_SCENE_GLACIA]   = _("GLACIA                  "),
+    [MAP_BATTLE_SCENE_DRAKE]    = _("DRAKE                   "),
+    [MAP_BATTLE_SCENE_FRONTIER] = _("FRONTIER                "),
+    [MAP_BATTLE_SCENE_LEADER]   = _("LEADER                  "),
+    [MAP_BATTLE_SCENE_WALLACE]  = _("WALLACE                 "),
+    [MAP_BATTLE_SCENE_GROUDON]  = _("GROUDON                 "),
+    [MAP_BATTLE_SCENE_KYOGRE]   = _("KYOGRE                  "),
+    [MAP_BATTLE_SCENE_RAYQUAZA] = _("RAYQUAZA                "),
+};
+const u8 gBattleBackgroundTerrainNames[][26] = 
+{
+    [BATTLE_TERRAIN_GRASS]      = _("NORMAL - GRASS           "),
+    [BATTLE_TERRAIN_LONG_GRASS] = _("NORMAL - LONG GRASS      "),
+    [BATTLE_TERRAIN_SAND]       = _("NORMAL - SAND            "),
+    [BATTLE_TERRAIN_UNDERWATER] = _("NORMAL - UNDERWATER      "),
+    [BATTLE_TERRAIN_WATER]      = _("NORMAL - WATER           "),
+    [BATTLE_TERRAIN_POND]       = _("NORMAL - POND            "),
+    [BATTLE_TERRAIN_MOUNTAIN]   = _("NORMAL - MOUNTAIN        "),
+    [BATTLE_TERRAIN_CAVE]       = _("NORMAL - CAVE            "),
+    [BATTLE_TERRAIN_BUILDING]   = _("NORMAL - BUILDING        "),
+    [BATTLE_TERRAIN_PLAIN]      = _("NORMAL - PLAIN           "),
+};
 //Function declarations
 static void PrintDigitChars(struct PokemonDebugMenu *data);
 static void SetUpModifyArrows(struct PokemonDebugMenu *data);
@@ -346,31 +375,45 @@ static void PadString(const u8 *src, u8 *dst)
     dst[i] = EOS;
 }
 
-static void PrintInstructionsOnWindow(u8 windowId, struct PokemonDebugMenu *data)
+static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
 {
-    u8 text[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny$");
-    u8 textGender[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny\n{SELECT_BUTTON} Gender$");
-    u8 textForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny  {START_BUTTON} Forms$");
-    u8 textGenderForms[] = _("{L_BUTTON} Back  {R_BUTTON} Front\n{A_BUTTON} Shiny  {START_BUTTON} Forms\n{SELECT_BUTTON} Gender$");
+    u8 fontId = 0;
+    u8 x = 2;
+    u8 textInstructions[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Exit  {A_BUTTON} Submenu$");
+    u8 textInstructionsGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Exit  {A_BUTTON} Submenu$");
+    u8 textInstructionsInSubmenu[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back$");
+    u8 textInstructionsInSubmenuGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back$");
+
+    u8 textBottom[] = _("BACK:\nFRONT:\nBG:$");
+    u8 textBottomForms[] = _("BACK:\nFRONT:\nBG:\nFORMS:$");
     u16 species = data->modifyArrows.currValue;
     
-
-    FillWindowPixelBuffer(windowId, 0x11);
-    if (SpeciesHasGenderDifference[species])
+    //Instruction window
+    FillWindowPixelBuffer(WIN_INSTRUCTIONS, 0x11);
+    if (data->inSubmenu)
     {
-        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-            AddTextPrinterParameterized(windowId, 0, textGenderForms, 0, 0, 0, NULL);
+        if (SpeciesHasGenderDifference[species])
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsInSubmenuGender, x, 0, 0, NULL);
         else
-            AddTextPrinterParameterized(windowId, 0, textGender, 0, 0, 0, NULL);
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsInSubmenu, x, 0, 0, NULL);
     }
     else
     {
-        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-            AddTextPrinterParameterized(windowId, 0, textForms, 0, 0, 0, NULL);
+        if (SpeciesHasGenderDifference[species])
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsGender, x, 0, 0, NULL);
         else
-            AddTextPrinterParameterized(windowId, 0, text, 0, 0, 0, NULL);
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructions, x, 0, 0, NULL);
     }
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(WIN_INSTRUCTIONS, 3);
+
+    //Bottom left text
+    if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomForms, 0, 0, 0, NULL);
+    else
+    {
+        FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
+        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottom, 0, 0, 0, NULL);
+    }
 }
 
 static void VBlankCB(void)
@@ -462,6 +505,15 @@ static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits)
         charDigits[i] = valueDigits[i] + CHAR_0;
 }
 
+static void SetArrowInvisibility(struct PokemonDebugMenu *data)
+{
+    bool8 invisible = data->inSubmenu;
+    gSprites[data->modifyArrows.arrowSpriteId[0]].invisible = invisible;
+    gSprites[data->modifyArrows.arrowSpriteId[1]].invisible = invisible;
+    gSprites[data->optionArrows.arrowSpriteId[0]].invisible = !invisible;
+    //gSprites[data->optionArrows.arrowSpriteId[1]].invisible = !invisible;
+}
+
 static void SetUpModifyArrows(struct PokemonDebugMenu *data)
 {
     LoadSpritePalette(&sSpritePalette_Arrow);
@@ -478,6 +530,19 @@ static void SetUpModifyArrows(struct PokemonDebugMenu *data)
 
     data->modifyArrows.currentDigit = 0;
     ValueToCharDigits(data->modifyArrows.charDigits, data->modifyArrows.currValue, data->modifyArrows.maxDigits);
+}
+
+static void SetUpOptionArrows(struct PokemonDebugMenu *data)
+{
+    LoadSpritePalette(&sSpritePalette_Arrow);
+    data->optionArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y, 0);
+    //data->optionArrows.arrowSpriteId[1] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_2_X, OPTIONS_ARROW_Y, 0);
+    gSprites[data->optionArrows.arrowSpriteId[0]].animNum = 2;
+
+    data->optionArrows.currentDigit = 0;
+
+    gSprites[data->optionArrows.arrowSpriteId[0]].invisible = TRUE;
+    //gSprites[data->optionArrows.arrowSpriteId[1]].invisible = TRUE;
 }
 
 static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp)
@@ -681,6 +746,71 @@ static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
         break;    
     }
 }
+static void PrintBattleBgName(u8 taskId)
+{
+    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    u8 fontId = 0;
+    u8 text[30+1];
+
+    if (data->battleBgType == 0)
+        StringCopy(text, gBattleBackgroundTerrainNames[data->battleTerrain]);
+    else
+        StringCopy(text, gBattleBackgroundNames[data->battleBgType]);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 0, 24, 0, NULL);
+}
+static void UpdateBattleBg(u8 taskId, bool8 increment)
+{
+    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+
+    if (data->battleBgType == 0)
+    {
+        if (increment)
+        {
+            if (data->battleTerrain == BATTLE_TERRAIN_PLAIN)
+                data->battleBgType += 1;
+            else
+                data->battleTerrain += 1;
+        }
+        else
+        {
+            if (data->battleTerrain == BATTLE_TERRAIN_GRASS)
+                data->battleBgType = MAP_BATTLE_SCENE_RAYQUAZA;
+            else
+                data->battleTerrain -= 1;
+        }
+    }
+    else if (data->battleBgType == MAP_BATTLE_SCENE_GYM)
+    {
+        if (increment)
+            data->battleBgType += 1;
+        else
+        {
+            data->battleBgType = MAP_BATTLE_SCENE_NORMAL;
+            data->battleTerrain = BATTLE_TERRAIN_PLAIN;
+        }
+    }
+    else if (data->battleBgType == MAP_BATTLE_SCENE_RAYQUAZA)
+    {
+        if (increment)
+        {
+            data->battleBgType = MAP_BATTLE_SCENE_NORMAL;
+            data->battleTerrain = BATTLE_TERRAIN_GRASS;
+        }
+        else
+            data->battleBgType -= 1;
+    }
+    else
+    {
+        if (increment)
+            data->battleBgType += 1;
+        else 
+            data->battleBgType -= 1;
+    }
+
+    PrintBattleBgName(taskId);
+
+    LoadBattleBg(data->battleBgType, data->battleTerrain);
+}
 
 // *******************************
 // Main functions
@@ -689,22 +819,23 @@ static void UpdateMonAnimNames(u8 taskId)
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
     u8 frontAnim = data->animIdFront;
     u8 backAnim = data->animIdBack;
-    u8 textFront[] = _("FRONT {R_BUTTON} + {DPAD_LEFTRIGHT}$");
-    u8 textBack[] = _("BACK {L_BUTTON} + {DPAD_LEFTRIGHT}$");
     u8 text[34];
     u8 fontId = 0;
+    u8 textL[] = _("{L_BUTTON}");
+    u8 textR[] = _("{R_BUTTON}");
 
-    //Front
-    FillWindowPixelBuffer(WIN_ANIM_INFORMATION_FRONT, PIXEL_FILL(0));
-    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_FRONT, fontId, textFront, 0, 0, 0, NULL);
-    StringCopy(text, gFrontAnimNames[frontAnim]);
-    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_FRONT, fontId, text, 4, 12, 0, NULL);
+    FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
 
     //Back
-    FillWindowPixelBuffer(WIN_ANIM_INFORMATION_BACK, PIXEL_FILL(0));
-    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_BACK, fontId, textBack, 0, 0, 0, NULL);
     StringCopy(text, gBackAnimNames[backAnim]);
-    AddTextPrinterParameterized(WIN_ANIM_INFORMATION_BACK, fontId, text, 4, 12, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textL, 0, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 20, 0, 0, NULL);
+    //Front
+    StringCopy(text, gFrontAnimNames[frontAnim]);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textR, 0, 12, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 20, 12, 0, NULL);
+
+    PrintBattleBgName(taskId);
 }
 
 static void ResetPokemonDebugWindows(void)
@@ -762,7 +893,7 @@ void CB2_Debug_Pokemon(void)
             gMain.state++;
             break;
         case 2:
-            ResetPokemonDebugWindows();            
+            ResetPokemonDebugWindows();
             gMain.state++;
             break;
         case 3:
@@ -787,7 +918,7 @@ void CB2_Debug_Pokemon(void)
             species = data->currentmonId;
 
             //Print instructions
-            PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
+            PrintInstructionsOnWindow(data);
 
             //Palettes
             palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
@@ -822,10 +953,16 @@ void CB2_Debug_Pokemon(void)
             SetUpModifyArrows(data);
             PrintDigitChars(data);
 
+            //Option Arrows
+            SetUpOptionArrows(data);
+
             //Anim names
             data->animIdBack = GetSpeciesBackAnimSet(species) + 1;
             data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
             UpdateMonAnimNames(taskId);
+
+            //BattleNg Name
+            PrintBattleBgName(taskId);
 
             gMain.state++;
             break;
@@ -885,60 +1022,102 @@ static void ResetBGs_Debug_Menu(u16 a)
     }
 }
 
+static void UpdateSubmenuOptionValue(u8 taskId, bool8 increment)
+{
+    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    u8 option = data->submenuYpos;
+
+    switch (option)
+    {
+    case 0:
+        if (increment)
+        {
+            if (data->animIdBack >= BACK_ANIM_SHAKE_GLOW_BLUE)
+                data->animIdBack = 1;
+            else
+                data->animIdBack += 1;
+        }
+        else
+        {
+            if (data->animIdBack <= 1)
+                data->animIdBack = BACK_ANIM_SHAKE_GLOW_BLUE;
+            else
+                data->animIdBack -= 1;
+        }
+        UpdateMonAnimNames(taskId);
+        break;
+    case 1:
+        if (increment)
+        {
+            if (data->animIdFront >= ANIM_SHAKE_GLOW_PURPLE_SLOW)
+                data->animIdFront = 0;
+            else
+                data->animIdFront += 1;
+            }
+        else
+        {
+            if (data->animIdFront <= 0)
+                data->animIdFront = ANIM_SHAKE_GLOW_PURPLE_SLOW;
+            else
+                data->animIdFront -= 1;
+        }
+        UpdateMonAnimNames(taskId);
+        break;
+    case 2:
+        UpdateBattleBg(taskId, increment);
+        break;
+    case 3:
+        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+        {
+            struct PokemonDebugModifyArrows *modArrows = &data->modifyArrows;
+            u8 formId = GetFormIdFromFormSpeciesId(data->currentmonId);
+            if (increment)
+            {
+                if (gFormSpeciesIdTables[data->currentmonId][formId + 1] != FORM_SPECIES_END)
+                    modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId + 1);
+                else
+                    modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][0];
+            }
+            else
+            {
+                if (gFormSpeciesIdTables[data->currentmonId][formId] == gFormSpeciesIdTables[data->currentmonId][0])
+                    modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][0];
+                else
+                    modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId - 1);
+            }
+                
+            UpdateBattlerValue(data);
+            ReloadPokemonSprites(data);
+            while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
+            PlaySE(SE_DEX_SCROLL);
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+
 static void Handle_Input_Debug_Pokemon(u8 taskId)
 {
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
     struct Sprite *Frontsprite = &gSprites[data->frontspriteId];
     struct Sprite *Backsprite = &gSprites[data->backspriteId];
-    
-    //Back
-    if (JOY_HELD(L_BUTTON) && JOY_NEW(DPAD_LEFT))
-    {
-        if (data->animIdBack <= 1)
-            data->animIdBack = BACK_ANIM_SHAKE_GLOW_BLUE;
-        else
-            data->animIdBack -= 1;
-        UpdateMonAnimNames(taskId);
-    }
-    else if (JOY_HELD(L_BUTTON) && JOY_NEW(DPAD_RIGHT))
-    {
-        if (data->animIdBack >= BACK_ANIM_SHAKE_GLOW_BLUE)
-            data->animIdBack = 1;
-        else
-            data->animIdBack += 1;
-        UpdateMonAnimNames(taskId);
-    }
-    else if (JOY_NEW(L_BUTTON)  && (Backsprite->callback == SpriteCallbackDummy))
+
+    if (JOY_NEW(L_BUTTON)  && (Backsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         LaunchAnimationTaskForBackSprite(Backsprite, data->animIdBack-1);
     }
-    //Front
-    else if (JOY_HELD(R_BUTTON) && JOY_NEW(DPAD_LEFT))
-    {
-        if (data->animIdFront <= 0)
-            data->animIdFront = ANIM_SHAKE_GLOW_PURPLE_SLOW;
-        else
-            data->animIdFront -= 1;
-        UpdateMonAnimNames(taskId);
-    }
-    else if (JOY_HELD(R_BUTTON) && JOY_NEW(DPAD_RIGHT))
-    {
-        if (data->animIdFront >= ANIM_SHAKE_GLOW_PURPLE_SLOW)
-            data->animIdFront = 0;
-        else
-            data->animIdFront += 1;
-        UpdateMonAnimNames(taskId);
-    }
-    else if (JOY_NEW(R_BUTTON) && (Frontsprite->callback == SpriteCallbackDummy))
+
+    if (JOY_NEW(R_BUTTON) && (Frontsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
         if (HasTwoFramesAnimation(data->currentmonId))
             StartSpriteAnim(Frontsprite, 1);
         LaunchAnimationTaskForFrontSprite(Frontsprite, data->animIdFront);
     }
-    //Rest
-    else if (JOY_NEW(A_BUTTON))
+    if (JOY_NEW(START_BUTTON))
     {
         data->isShiny = !data->isShiny;
         
@@ -948,31 +1127,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         ReloadPokemonSprites(data);
 
     }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-        gTasks[taskId].func = Exit_Debug_Pokemon;
-        PlaySE(SE_PC_OFF);
-    }
-    else if (JOY_NEW(START_BUTTON))
-    {
-        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-        {
-            struct PokemonDebugModifyArrows *modArrows = &data->modifyArrows;
-            u8 formId = GetFormIdFromFormSpeciesId(data->currentmonId);
-            if (gFormSpeciesIdTables[data->currentmonId][formId + 1] != FORM_SPECIES_END)
-                modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId + 1);
-            else
-                modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][0];
-                
-            PrintDigitChars(data);
-            UpdateBattlerValue(data);
-            ReloadPokemonSprites(data);
-            while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
-            PlaySE(SE_DEX_SCROLL);
-        }
-    }
-    else if (JOY_NEW(SELECT_BUTTON) && SpeciesHasGenderDifference[data->currentmonId])
+    if (JOY_NEW(SELECT_BUTTON) && SpeciesHasGenderDifference[data->currentmonId])
     {
         data->isFemale = !data->isFemale;
         PrintDigitChars(data);
@@ -981,54 +1136,120 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
         PlaySE(SE_DEX_SCROLL);
     }
-    else if (JOY_NEW(DPAD_DOWN)) // || gMain.heldKeys & DPAD_DOWN)
+
+    if (!data->inSubmenu)
     {
-        if (TryMoveDigit(&data->modifyArrows, FALSE))
+        if (JOY_NEW(A_BUTTON))
         {
-            data->isFemale = FALSE;
-            PrintDigitChars(data);
-            UpdateBattlerValue(data);
-            ReloadPokemonSprites(data);
-            data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
-            data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
-            UpdateMonAnimNames(taskId);
+            data->inSubmenu = TRUE;
+            SetArrowInvisibility(data);
+            PrintInstructionsOnWindow(data);
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            gTasks[taskId].func = Exit_Debug_Pokemon;
+            PlaySE(SE_PC_OFF);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            if (TryMoveDigit(&data->modifyArrows, FALSE))
+            {
+                data->isFemale = FALSE;
+                PrintDigitChars(data);
+                UpdateBattlerValue(data);
+                ReloadPokemonSprites(data);
+                data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
+                data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
+                UpdateMonAnimNames(taskId);
+            }
+            PlaySE(SE_DEX_SCROLL);
+            while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
+        }
+        else if (JOY_NEW(DPAD_UP))
+        {
+            if (TryMoveDigit(&data->modifyArrows, TRUE))
+            {
+                data->isFemale = FALSE;
+                PrintDigitChars(data);
+                UpdateBattlerValue(data);
+                ReloadPokemonSprites(data);
+                data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
+                data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
+                UpdateMonAnimNames(taskId);
+            }
+
+            PlaySE(SE_DEX_SCROLL);
+        }
+        else if (JOY_NEW(DPAD_LEFT))
+        {
+            if (data->modifyArrows.currentDigit != 0)
+            {
+                data->modifyArrows.currentDigit--;
+                gSprites[data->modifyArrows.arrowSpriteId[0]].x2 -= 6;
+                gSprites[data->modifyArrows.arrowSpriteId[1]].x2 -= 6;
+            }
+        }
+        else if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (data->modifyArrows.currentDigit != (data->modifyArrows.maxDigits - 1))
+            {
+                data->modifyArrows.currentDigit++;
+                gSprites[data->modifyArrows.arrowSpriteId[0]].x2 += 6;
+                gSprites[data->modifyArrows.arrowSpriteId[1]].x2 += 6;
+            }
         }
 
-        PlaySE(SE_DEX_SCROLL);
-
-        while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
     }
-    else if (JOY_NEW(DPAD_UP)) // || gMain.heldKeys & DPAD_UP)
+    else //Submenu
     {
-        if (TryMoveDigit(&data->modifyArrows, TRUE))
+        if (JOY_NEW(B_BUTTON))
         {
-            data->isFemale = FALSE;
-            PrintDigitChars(data);
-            UpdateBattlerValue(data);
-            ReloadPokemonSprites(data);
-            data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
-            data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
-            UpdateMonAnimNames(taskId);
+            data->inSubmenu = FALSE;
+            if (data->submenuYpos == 3)
+            {
+                data->submenuYpos = 2;
+                data->optionArrows.currentDigit = data->submenuYpos;
+                gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
+            }
+            SetArrowInvisibility(data);
+            PrintInstructionsOnWindow(data);
         }
-
-        PlaySE(SE_DEX_SCROLL);
-    }
-    else if (JOY_NEW(DPAD_LEFT)) // || gMain.heldKeys & DPAD_LEFT)
-    {
-        if (data->modifyArrows.currentDigit != 0)
+        else if (JOY_NEW(DPAD_DOWN))
         {
-            data->modifyArrows.currentDigit--;
-            gSprites[data->modifyArrows.arrowSpriteId[0]].x2 -= 6;
-            gSprites[data->modifyArrows.arrowSpriteId[1]].x2 -= 6;
+            data->submenuYpos += 1;
+            if (data->submenuYpos >= 3)
+            {
+                if ((gFormSpeciesIdTables[data->currentmonId] == NULL) || (data->submenuYpos >= 4))
+                    data->submenuYpos = 0;
+            }
+            data->optionArrows.currentDigit = data->submenuYpos;
+            gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
+            //gSprites[data->optionArrows.arrowSpriteId[1]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
         }
-    }
-    else if (JOY_NEW(DPAD_RIGHT)) // || gMain.heldKeys & DPAD_RIGHT)
-    {
-        if (data->modifyArrows.currentDigit != (data->modifyArrows.maxDigits - 1))
+        else if (JOY_NEW(DPAD_UP))
         {
-            data->modifyArrows.currentDigit++;
-            gSprites[data->modifyArrows.arrowSpriteId[0]].x2 += 6;
-            gSprites[data->modifyArrows.arrowSpriteId[1]].x2 += 6;
+            if (data->submenuYpos == 0)
+            {
+                if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+                    data->submenuYpos = 3;
+                else
+                    data->submenuYpos = 2;
+            }
+            else
+                data->submenuYpos -= 1;
+
+            data->optionArrows.currentDigit = data->submenuYpos;
+            gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
+            //gSprites[data->optionArrows.arrowSpriteId[1]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
+        }
+        else if (JOY_NEW(DPAD_LEFT))
+        {
+            UpdateSubmenuOptionValue(taskId, FALSE);
+        }
+        else if (JOY_NEW(DPAD_RIGHT))
+        {
+            UpdateSubmenuOptionValue(taskId, TRUE);
         }
     }
 }
@@ -1054,11 +1275,8 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     AllocateMonSpritesGfx();
     LoadMonIconPalette(species);
 
-    //Battle background
-    LoadBattleBg(data->battleBgType, data->battleTerrain);
-
     //Update instructions
-    PrintInstructionsOnWindow(WIN_INSTRUCTIONS, data);
+    PrintInstructionsOnWindow(data);
 
     //Palettes
     palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
@@ -1092,6 +1310,15 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     data->modifyArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X + (data->modifyArrows.currentDigit * 6), MODIFY_DIGITS_ARROW1_Y, 0);
     data->modifyArrows.arrowSpriteId[1] = CreateSprite(&sSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X + (data->modifyArrows.currentDigit * 6), MODIFY_DIGITS_ARROW2_Y, 0);
     gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
+
+    //Option Arrows
+    LoadSpritePalette(&sSpritePalette_Arrow);
+    data->optionArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12, 0);
+    //data->optionArrows.arrowSpriteId[1] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_2_X, OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12, 0);
+    gSprites[data->optionArrows.arrowSpriteId[0]].animNum = 2;
+
+    //Arrow invisibility
+    SetArrowInvisibility(data);
 }
 
 static void Exit_Debug_Pokemon(u8 taskId)

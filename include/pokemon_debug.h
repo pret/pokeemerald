@@ -17,6 +17,13 @@ struct PokemonDebugModifyArrows
     u8 typeOfVal;
 };
 
+struct PokemonDebugOptionArrows
+{
+    u8 arrowSpriteId[2];
+    u8 currentDigit;
+    void *modifiedValPtr;
+};
+
 struct PokemonDebugMenu
 {
     u16 currentmonId;
@@ -28,10 +35,13 @@ struct PokemonDebugMenu
     bool8 isShiny;
     bool8 isFemale;
     struct PokemonDebugModifyArrows modifyArrows;
+    struct PokemonDebugOptionArrows optionArrows;
     u8 animIdBack;
     u8 animIdFront;
     u8 battleBgType;
     u8 battleTerrain;
+    bool8 inSubmenu;
+    u8 submenuYpos;
 };
 
 void CB2_Debug_Pokemon(void);
