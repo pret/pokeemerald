@@ -24,6 +24,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
+#if !P_ENABLE_DEBUG
 struct BattleBackground
 {
     const void *tileset;
@@ -32,6 +33,7 @@ struct BattleBackground
     const void *entryTilemap;
     const void *palette;
 };
+#endif
 
 // .rodata
 static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?

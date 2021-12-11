@@ -32,63 +32,24 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "text_window.h"
 #include "trainer_pokemon_sprites.h"
 
 #include "constants/items.h"
 
-//Defines
-#define DEBUG_MON_X 144 + 32
-#define DEBUG_MON_Y 11 + 40
-#define DEBUG_MON_BACK_X 62
-#define DEBUG_MON_BACK_Y 80
-#define DEBUG_ICON_X 19
-#define DEBUG_ICON_Y 19
-#define DEBUG_MON_SHINY 0
-#define DEBUG_MON_NORMAL 9
-
-#define MODIFY_DIGITS_MAX 4
-#define MODIFY_DIGITS_ARROW_X 41
-#define MODIFY_DIGITS_ARROW1_Y 12
-#define MODIFY_DIGITS_ARROW2_Y 36
-
-#define GENDER_MALE 0
-#define GENDER_FEMALE 1
-#define MON_PIC_BACK 0
-#define MON_PIC_FRONT 1
-
+#if P_ENABLE_DEBUG
+extern const struct BattleBackground sBattleTerrainTable[];
+extern const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1];
 static const u16 sBgColor[] = {RGB_WHITE};
 
-//Structs
-struct PokemonDebugModifyArrows
+static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
 {
-    u8 arrowSpriteId[2];
-    u16 minValue;
-    u16 maxValue;
-    int currValue;
-    u8 currentDigit;
-    u8 maxDigits;
-    u8 charDigits[MODIFY_DIGITS_MAX];
-    void *modifiedValPtr;
-    u8 typeOfVal;
-};
+    u8 *taskDataPtr = (u8*)(&gTasks[taskId].data[0]);
 
-struct PokemonDebugMenu
-{
-    u16 currentmonId;
-    u8 currentmonWindowId;
-    u8 InstructionsWindowId;
-    u8 frontspriteId;
-    u8 backspriteId;
-    u8 iconspriteId;
-    bool8 isShiny;
-    bool8 isFemale;
-    struct PokemonDebugModifyArrows modifyArrows;
-    u8 animIdBack;
-    u8 animIdFront;
-    u8 battleBgType;
-    u8 battleTerrain;
-};
+    return (struct PokemonDebugMenu*)(T1_READ_PTR(taskDataPtr));
+}
 
+//BgTemplates
 static const struct BgTemplate sBgTemplates[] =
 {
     {
@@ -130,11 +91,6 @@ static const struct BgTemplate sBgTemplates[] =
 };
 
 //WindowTemplates
-#define WIN_NAME_NUMBERS 0
-#define WIN_INSTRUCTIONS 1
-#define WIN_ANIM_INFORMATION_FRONT 2
-#define WIN_ANIM_INFORMATION_BACK 3
-#define WIN_END 4
 static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
 {
     [WIN_NAME_NUMBERS] = {
@@ -176,8 +132,7 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-#if P_ENABLE_DEBUG
-extern const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1];
+//Lookup tables
 const u8 gBackAnimNames[][23 + 1] =
 {
     [BACK_ANIM_NONE]                    = _("NONE"),
@@ -376,13 +331,6 @@ static void ResetBGs_Debug_Menu(u16);
 static void Handle_Input_Debug_Pokemon(u8);
 static void ReloadPokemonSprites(struct PokemonDebugMenu *data);
 static void Exit_Debug_Pokemon(u8);
-
-static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
-{
-    u8 *taskDataPtr = (u8*)(&gTasks[taskId].data[0]);
-
-    return (struct PokemonDebugMenu*)(T1_READ_PTR(taskDataPtr));
-}
 
 //Text handling functions
 static void PadString(const u8 *src, u8 *dst)
@@ -657,29 +605,6 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
 }
 
 //Battle background functions
-struct BattleBackground
-{
-    const void *tileset;
-    const void *tilemap;
-    const void *entryTileset;
-    const void *entryTilemap;
-    const void *palette;
-};
-extern const struct BattleBackground sBattleTerrainTable[];
-#define MAP_BATTLE_SCENE_NORMAL       0
-#define MAP_BATTLE_SCENE_GYM          1
-#define MAP_BATTLE_SCENE_MAGMA        2
-#define MAP_BATTLE_SCENE_AQUA         3
-#define MAP_BATTLE_SCENE_SIDNEY       4
-#define MAP_BATTLE_SCENE_PHOEBE       5
-#define MAP_BATTLE_SCENE_GLACIA       6
-#define MAP_BATTLE_SCENE_DRAKE        7
-#define MAP_BATTLE_SCENE_FRONTIER     8
-#define MAP_BATTLE_SCENE_LEADER       9
-#define MAP_BATTLE_SCENE_WALLACE      10
-#define MAP_BATTLE_SCENE_GROUDON      11
-#define MAP_BATTLE_SCENE_KYOGRE       12
-#define MAP_BATTLE_SCENE_RAYQUAZA     13
 static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
 {
     switch (battleBgType)
@@ -796,6 +721,7 @@ static void ResetPokemonDebugWindows(void)
         CopyWindowToVram(i, 3);
     }
 }
+
 void CB2_Debug_Pokemon(void)
 {
     u8 taskId;
@@ -824,7 +750,8 @@ void CB2_Debug_Pokemon(void)
             FreeAllSpritePalettes();
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
-            //BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            LoadPalette(GetTextWindowPalette(0), 15*16, 0x40);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
             InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
