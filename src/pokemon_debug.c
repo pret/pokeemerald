@@ -511,7 +511,6 @@ static void SetArrowInvisibility(struct PokemonDebugMenu *data)
     gSprites[data->modifyArrows.arrowSpriteId[0]].invisible = invisible;
     gSprites[data->modifyArrows.arrowSpriteId[1]].invisible = invisible;
     gSprites[data->optionArrows.arrowSpriteId[0]].invisible = !invisible;
-    //gSprites[data->optionArrows.arrowSpriteId[1]].invisible = !invisible;
 }
 
 static void SetUpModifyArrows(struct PokemonDebugMenu *data)
@@ -536,13 +535,11 @@ static void SetUpOptionArrows(struct PokemonDebugMenu *data)
 {
     LoadSpritePalette(&sSpritePalette_Arrow);
     data->optionArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y, 0);
-    //data->optionArrows.arrowSpriteId[1] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_2_X, OPTIONS_ARROW_Y, 0);
     gSprites[data->optionArrows.arrowSpriteId[0]].animNum = 2;
 
     data->optionArrows.currentDigit = 0;
 
     gSprites[data->optionArrows.arrowSpriteId[0]].invisible = TRUE;
-    //gSprites[data->optionArrows.arrowSpriteId[1]].invisible = TRUE;
 }
 
 static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp)
@@ -1225,7 +1222,6 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
             }
             data->optionArrows.currentDigit = data->submenuYpos;
             gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
-            //gSprites[data->optionArrows.arrowSpriteId[1]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
         }
         else if (JOY_NEW(DPAD_UP))
         {
@@ -1241,7 +1237,6 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
 
             data->optionArrows.currentDigit = data->submenuYpos;
             gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
-            //gSprites[data->optionArrows.arrowSpriteId[1]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
         }
         else if (JOY_NEW(DPAD_LEFT))
         {
@@ -1314,7 +1309,6 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     //Option Arrows
     LoadSpritePalette(&sSpritePalette_Arrow);
     data->optionArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12, 0);
-    //data->optionArrows.arrowSpriteId[1] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_2_X, OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12, 0);
     gSprites[data->optionArrows.arrowSpriteId[0]].animNum = 2;
 
     //Arrow invisibility
