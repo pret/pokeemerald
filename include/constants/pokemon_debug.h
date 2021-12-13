@@ -2,8 +2,6 @@
 #define GUARD_CONSTANTS_POKEMON_DEBUG_H
 
 //Defines
-#define DEBUG_MON_X 144 + 32
-#define DEBUG_MON_Y 11 + 40
 #define DEBUG_MON_BACK_X 62
 #define DEBUG_MON_BACK_Y 80
 #define DEBUG_ICON_X 220

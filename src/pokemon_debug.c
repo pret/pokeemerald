@@ -2,6 +2,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_gfx_sfx_util.h"
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -39,6 +40,11 @@
 
 #if P_ENABLE_DEBUG
 extern const struct BattleBackground sBattleTerrainTable[];
+extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
+extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
+extern const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] ;
+extern const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS];
+extern const u8 sCastformElevations[NUM_CASTFORM_FORMS];
 extern const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1];
 static const u16 sBgColor[] = {RGB_WHITE};
 
@@ -666,6 +672,84 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
     LoadPalette(gDecompressionBuffer, 0x80 + battlerId * 16, 0x20);
 }
 
+static bool8 IsCastformForm(species)
+{
+    if (species == SPECIES_CASTFORM || species == SPECIES_CASTFORM_SUNNY || species == SPECIES_CASTFORM_RAINY || species == SPECIES_CASTFORM_SNOWY)
+        return TRUE;
+
+    return FALSE;
+}
+
+static u8 GetCastformYCustom(species)
+{
+    u8 ret;
+    switch (species)
+    {
+    case SPECIES_CASTFORM:
+        ret = gCastformFrontSpriteCoords[CASTFORM_NORMAL].y_offset;
+        break;
+    case SPECIES_CASTFORM_SUNNY:
+        ret = gCastformFrontSpriteCoords[CASTFORM_FIRE].y_offset;
+        break;
+    case SPECIES_CASTFORM_RAINY:
+        ret = gCastformFrontSpriteCoords[CASTFORM_WATER].y_offset;
+        break;
+    case SPECIES_CASTFORM_SNOWY:
+        ret = gCastformFrontSpriteCoords[CASTFORM_ICE].y_offset;
+        break;
+    }
+    return ret;
+}
+
+u8 GetBattlerSpriteFinal_YCustom(u16 species)
+{
+    u16 offset;
+    u8 y;
+
+    if (IsCastformForm(species))
+        offset = GetCastformYCustom(species);
+    else
+        offset = gMonFrontPicCoords[species].y_offset;
+    
+
+    if (IsCastformForm(species))
+        offset -= sCastformElevations[species];
+    else
+        offset -= gEnemyMonElevation[species];
+
+
+    y = offset + sBattlerCoords[0][1].y;
+
+    if (y > DISPLAY_HEIGHT - MON_PIC_HEIGHT + 8)
+        y = DISPLAY_HEIGHT - MON_PIC_HEIGHT + 8;
+    
+    return y;
+}
+
+void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
+{
+    bool8 invisible = FALSE;
+    u8 frontSpriteId = shadowSprite->data[0];
+    struct Sprite *battlerSprite = &gSprites[frontSpriteId];
+
+    shadowSprite->x = battlerSprite->x;
+    shadowSprite->x2 = battlerSprite->x2;
+    shadowSprite->invisible = invisible;
+}
+static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u8 x, u8 y, u16 species)
+{
+    if (gEnemyMonElevation[species] == 0)
+        return;
+    LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
+
+    data->frontShadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y + 29, 0xC8);
+    gSprites[data->frontShadowSpriteId].data[0] = data->frontspriteId;
+    
+    gSprites[data->frontShadowSpriteId].callback = SpriteCB_EnemyShadowCustom;
+    gSprites[data->frontShadowSpriteId].oam.priority = 0;
+    gSprites[data->frontShadowSpriteId].invisible = FALSE;
+}
+
 //Battle background functions
 static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
 {
@@ -855,8 +939,10 @@ void CB2_Debug_Pokemon(void)
     u8 taskId;
     const struct CompressedSpritePalette *palette;
     struct PokemonDebugMenu *data;
-    s16 offset_x, offset_y;
     u16 species;
+    s16 offset_y;
+    u8 front_x = sBattlerCoords[0][1].x;
+    u8 front_y;
 
     switch (gMain.state)
     {
@@ -927,10 +1013,13 @@ void CB2_Debug_Pokemon(void)
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
             SetMultiuseSpriteTemplateToPokemon(species, 1);
             gMultiuseSpriteTemplate.paletteTag = palette->tag;
-            data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X, DEBUG_MON_Y, 0);
+            front_y = GetBattlerSpriteFinal_YCustom(species);
+            data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
             gSprites[data->frontspriteId].oam.paletteNum = 1;
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
+            //Front Shadow
+            LoadAndCreateEnemyShadowSpriteCustom(data, front_x, front_y, species);
 
             //Back
             HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
@@ -1251,10 +1340,11 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
 
 static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
 {
-    s16 offset_x = 0; 
-    s16 offset_y = 0;
-    u16 species = data->currentmonId;
     const struct CompressedSpritePalette *palette;
+    u16 species = data->currentmonId;
+    s16 offset_y;
+    u8 front_x = sBattlerCoords[0][1].x;
+    u8 front_y;   
 
     DestroySprite(&gSprites[data->frontspriteId]);
     DestroySprite(&gSprites[data->backspriteId]);
@@ -1281,18 +1371,21 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
     gMultiuseSpriteTemplate.paletteTag = palette->tag;
-    data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X, DEBUG_MON_Y, 0);
+    front_y = GetBattlerSpriteFinal_YCustom(species);
+    data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
     gSprites[data->frontspriteId].oam.paletteNum = 1;
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
+    //Front Shadow
+    LoadAndCreateEnemyShadowSpriteCustom(data, front_x, front_y, species);
     
     //Back
     HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
-    BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 4);
+    BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 5);
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     offset_y = gMonBackPicCoords[species].y_offset;
     data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
-    gSprites[data->backspriteId].oam.paletteNum = 4;
+    gSprites[data->backspriteId].oam.paletteNum = 5;
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
