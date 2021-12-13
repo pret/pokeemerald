@@ -1856,7 +1856,7 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/form_change_table_pointers.h"
 
 // SPECIES_NONE are ignored in the following two tables, so decrement before accessing these arrays to get the right result
-#if P_ENABLE_DEBUG
+#if P_ENABLE_DEBUG == TRUE
 const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 #else
 static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =

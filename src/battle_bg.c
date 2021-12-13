@@ -600,7 +600,7 @@ const struct WindowTemplate * const gBattleWindowTemplates[] =
     [B_WIN_TYPE_ARENA]  = gBattleArenaWindowTemplates,
 };
 
-#if P_ENABLE_DEBUG
+#if P_ENABLE_DEBUG == TRUE
 const struct BattleBackground sBattleTerrainTable[] =
 #else
 static const struct BattleBackground sBattleTerrainTable[] =

@@ -38,7 +38,7 @@
 
 #include "constants/items.h"
 
-#if P_ENABLE_DEBUG
+#if P_ENABLE_DEBUG == TRUE
 extern const struct BattleBackground sBattleTerrainTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
