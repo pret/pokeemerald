@@ -674,7 +674,7 @@ void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isS
 
 static bool8 IsCastformForm(species)
 {
-    if (species == SPECIES_CASTFORM || species == SPECIES_CASTFORM_SUNNY || species == SPECIES_CASTFORM_RAINY || species == SPECIES_CASTFORM_SNOWY)
+    if (species == SPECIES_CASTFORM_SUNNY || species == SPECIES_CASTFORM_RAINY || species == SPECIES_CASTFORM_SNOWY)
         return TRUE;
 
     return FALSE;
@@ -706,14 +706,12 @@ u8 GetBattlerSpriteFinal_YCustom(u16 species)
     u16 offset;
     u8 y;
 
-    if (IsCastformForm(species))
-        offset = GetCastformYCustom(species);
-    else
-        offset = gMonFrontPicCoords[species].y_offset;
+    offset = gMonFrontPicCoords[species].y_offset;
     
-
-    if (IsCastformForm(species))
-        offset -= sCastformElevations[species];
+    if (species == SPECIES_CASTFORM)
+        offset -= sCastformElevations[0];
+    else if (IsCastformForm(species))
+        offset -= sCastformElevations[species - SPECIES_CASTFORM_SUNNY + 1];
     else
         offset -= gEnemyMonElevation[species];
 
@@ -738,7 +736,7 @@ void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
 }
 static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u8 x, u8 y, u16 species)
 {
-    if (gEnemyMonElevation[species] == 0)
+    if (gEnemyMonElevation[species] == 0 && !IsCastformForm(species))
         return;
     LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
 
