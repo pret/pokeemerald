@@ -19,9 +19,28 @@ struct PokemonDebugModifyArrows
 
 struct PokemonDebugOptionArrows
 {
-    u8 arrowSpriteId[2];
+    u8 arrowSpriteId[1];
     u8 currentDigit;
-    void *modifiedValPtr;
+};
+
+struct PokemonDebugYPosModifiyArrows
+{
+    u8 arrowSpriteId[1];
+    u8 currentDigit;
+};
+
+struct PokemonSpriteConstValues
+{
+    u8 backPicCoords;
+    u8 frontPicCoords;
+    u8 frontElevation;
+};
+
+struct PokemonSpriteOffsets
+{
+    s8 offset_back_picCoords;
+    s8 offset_front_picCoords;
+    s8 offset_front_elevation;
 };
 
 struct PokemonDebugMenu
@@ -37,12 +56,15 @@ struct PokemonDebugMenu
     bool8 isFemale;
     struct PokemonDebugModifyArrows modifyArrows;
     struct PokemonDebugOptionArrows optionArrows;
+    struct PokemonDebugYPosModifiyArrows yPosModifyArrows;
+    struct PokemonSpriteConstValues constSpriteValues;
+    struct PokemonSpriteOffsets offsetsSpriteValues;
     u8 animIdBack;
     u8 animIdFront;
     u8 battleBgType;
     u8 battleTerrain;
-    bool8 inSubmenu;
-    u8 submenuYpos;
+    u8 currentSubmenu;
+    u8 submenuYpos[3];
 };
 
 void CB2_Debug_Pokemon(void);

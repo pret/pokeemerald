@@ -123,19 +123,19 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 14,
-        .width = 5,
+        .width = 6,
         .height = 6,
         .paletteNum = 0xF,
         .baseBlock = 1 + 30 + 60
     },
     [WIN_BOTTOM_RIGHT] = {
         .bg = 0,
-        .tilemapLeft = 6,
+        .tilemapLeft = 7,
         .tilemapTop = 14,
-        .width = 25,
+        .width = 24,
         .height = 6,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 30 + 60 + 30
+        .baseBlock = 1 + 30 + 60 + 36
     },
     [WIN_FOOTPRINT] =
     {
@@ -145,7 +145,7 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .width = 2,
         .height = 2,
         .paletteNum = 0xF,
-        .baseBlock = 1 + 30 + 60 + 30 + 150,
+        .baseBlock = 1 + 30 + 60 + 36 + 144,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -397,41 +397,55 @@ static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
 {
     u8 fontId = 0;
     u8 x = 2;
-    u8 textInstructions[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Exit  {A_BUTTON} Submenu$");
-    u8 textInstructionsGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Exit  {A_BUTTON} Submenu$");
-    u8 textInstructionsInSubmenu[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back$");
-    u8 textInstructionsInSubmenuGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back$");
+    u8 textInstructions[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Exit  {A_BUTTON} Submenu 1$");
+    u8 textInstructionsGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Exit  {A_BUTTON} Submenu 1$");
+    u8 textInstructionsSubmenuOne[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back {A_BUTTON}  Submenu 2$");
+    u8 textInstructionsSubmenuOneGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back  {A_BUTTON} Submenu 2$");
+    u8 textInstructionsSubmenuTwo[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back$");
+    u8 textInstructionsSubmenuTwoGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back$");
+    
 
     u8 textBottom[] = _("BACK:\nFRONT:\nBG:$");
     u8 textBottomForms[] = _("BACK:\nFRONT:\nBG:\nFORMS:$");
+    u8 textBottomSubmenuTwo[] = _("B coords:\nF coords:\nF elev:");
     u16 species = data->modifyArrows.currValue;
     
     //Instruction window
     FillWindowPixelBuffer(WIN_INSTRUCTIONS, 0x11);
-    if (data->inSubmenu)
-    {
-        if (SpeciesHasGenderDifference[species])
-            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsInSubmenuGender, x, 0, 0, NULL);
-        else
-            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsInSubmenu, x, 0, 0, NULL);
-    }
-    else
+    if (data->currentSubmenu == 0)
     {
         if (SpeciesHasGenderDifference[species])
             AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsGender, x, 0, 0, NULL);
         else
             AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructions, x, 0, 0, NULL);
     }
+    else if (data->currentSubmenu == 1)
+    {
+        if (SpeciesHasGenderDifference[species])
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuOneGender, x, 0, 0, NULL);
+        else
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuOne, x, 0, 0, NULL);
+    }
+    else if (data->currentSubmenu == 2)
+    {
+        if (SpeciesHasGenderDifference[species])
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuTwoGender, x, 0, 0, NULL);
+        else
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuTwo, x, 0, 0, NULL);
+    }
     CopyWindowToVram(WIN_INSTRUCTIONS, 3);
 
     //Bottom left text
-    if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomForms, 0, 0, 0, NULL);
-    else
+    FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
+    if (data->currentSubmenu != 2)
     {
-        FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
-        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottom, 0, 0, 0, NULL);
+        if (gFormSpeciesIdTables[data->currentmonId] != NULL)
+            AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomForms, 0, 0, 0, NULL);
+        else
+            AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottom, 0, 0, 0, NULL);
     }
+    else
+        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomSubmenuTwo, 0, 0, 0, NULL);
 }
 
 static void VBlankCB(void)
@@ -525,10 +539,28 @@ static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits)
 
 static void SetArrowInvisibility(struct PokemonDebugMenu *data)
 {
-    bool8 invisible = data->inSubmenu;
-    gSprites[data->modifyArrows.arrowSpriteId[0]].invisible = invisible;
-    gSprites[data->modifyArrows.arrowSpriteId[1]].invisible = invisible;
-    gSprites[data->optionArrows.arrowSpriteId[0]].invisible = !invisible;
+    bool8 invisible = data->currentSubmenu;
+    switch (data->currentSubmenu)
+    {
+    case 0:
+        gSprites[data->modifyArrows.arrowSpriteId[0]].invisible = FALSE;
+        gSprites[data->modifyArrows.arrowSpriteId[1]].invisible = FALSE;
+        gSprites[data->optionArrows.arrowSpriteId[0]].invisible = TRUE;
+        gSprites[data->yPosModifyArrows.arrowSpriteId[0]].invisible = TRUE;
+        break;
+    case 1:
+        gSprites[data->modifyArrows.arrowSpriteId[0]].invisible = TRUE;
+        gSprites[data->modifyArrows.arrowSpriteId[1]].invisible = TRUE;
+        gSprites[data->optionArrows.arrowSpriteId[0]].invisible = FALSE;
+        gSprites[data->yPosModifyArrows.arrowSpriteId[0]].invisible = TRUE;
+        break;
+    case 2:
+        gSprites[data->modifyArrows.arrowSpriteId[0]].invisible = TRUE;
+        gSprites[data->modifyArrows.arrowSpriteId[1]].invisible = TRUE;
+        gSprites[data->optionArrows.arrowSpriteId[0]].invisible = TRUE;
+        gSprites[data->yPosModifyArrows.arrowSpriteId[0]].invisible = FALSE;
+        break;
+    }
 }
 
 static void SetUpModifyArrows(struct PokemonDebugMenu *data)
@@ -558,6 +590,17 @@ static void SetUpOptionArrows(struct PokemonDebugMenu *data)
     data->optionArrows.currentDigit = 0;
 
     gSprites[data->optionArrows.arrowSpriteId[0]].invisible = TRUE;
+}
+
+static void SetUpYPosModifyArrows(struct PokemonDebugMenu *data)
+{
+    LoadSpritePalette(&sSpritePalette_Arrow);
+    data->yPosModifyArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y, 0);
+    gSprites[data->yPosModifyArrows.arrowSpriteId[0]].animNum = 2;
+
+    data->yPosModifyArrows.currentDigit = 0;
+
+    gSprites[data->yPosModifyArrows.arrowSpriteId[0]].invisible = TRUE;
 }
 
 static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp)
@@ -654,7 +697,7 @@ static const struct CompressedSpritePalette *GetMonSpritePalStructCustom(u16 spe
     }
 }
 
-void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u8 battlerId)
+static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u8 battlerId)
 {
     u16 paletteOffset;
     const void *lzPaletteData;
@@ -713,21 +756,39 @@ static u8 GetCastformYCustom(species)
     return ret;
 }
 
-u8 GetBattlerSpriteFinal_YCustom(u16 species)
+static u8 GetElevationValue(u16 species)
+{
+    u8 val;
+    if (species == SPECIES_CASTFORM)
+        val = sCastformElevations[0];
+    else if (IsCastformForm(species))
+        val = sCastformElevations[species - SPECIES_CASTFORM_SUNNY + 1];
+    else
+        val = gEnemyMonElevation[species];
+
+    return val;
+}
+
+static void SetConstSpriteValues(struct PokemonDebugMenu *data)
+{
+    u16 species = data->currentmonId;
+    data->constSpriteValues.frontPicCoords = gMonFrontPicCoords[species].y_offset;
+    data->constSpriteValues.frontElevation = GetElevationValue(species);
+    data->constSpriteValues.backPicCoords = gMonBackPicCoords[species].y_offset;
+}
+
+static u8 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 offset_elevation)
 {
     u16 offset;
     u8 y;
 
-    offset = gMonFrontPicCoords[species].y_offset;
-    
-    if (species == SPECIES_CASTFORM)
-        offset -= sCastformElevations[0];
-    else if (IsCastformForm(species))
-        offset -= sCastformElevations[species - SPECIES_CASTFORM_SUNNY + 1];
-    else
-        offset -= gEnemyMonElevation[species];
+    //FrontPicCoords
+    offset = gMonFrontPicCoords[species].y_offset + offset_picCoords;
+        
+    //Elevation
+    offset -= GetElevationValue(species) + offset_elevation;
 
-
+    //Main position
     y = offset + sBattlerCoords[0][1].y;
 
     if (y > DISPLAY_HEIGHT - MON_PIC_HEIGHT + 8)
@@ -736,7 +797,7 @@ u8 GetBattlerSpriteFinal_YCustom(u16 species)
     return y;
 }
 
-void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
+static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
 {
     bool8 invisible = FALSE;
     u8 frontSpriteId = shadowSprite->data[0];
@@ -746,12 +807,15 @@ void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
     shadowSprite->x2 = battlerSprite->x2;
     shadowSprite->invisible = invisible;
 }
-static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u8 x, u8 y, u16 species)
+static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u16 species)
 {
+    u8 x, y;
     if (gEnemyMonElevation[species] == 0 && !IsCastformForm(species))
         return;
     LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
     LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
+    x = sBattlerCoords[0][1].x;
+    y = sBattlerCoords[0][1].y;
 
     data->frontShadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y + 29, 0xC8);
     gSprites[data->frontShadowSpriteId].data[0] = data->frontspriteId;
@@ -955,6 +1019,57 @@ static void UpdateMonAnimNames(u8 taskId)
     PrintBattleBgName(taskId);
 }
 
+static void UpdateYPosOffsetText(struct PokemonDebugMenu *data)
+{
+    u8 text[34];
+    u8 fontId = 0;
+    u8 textConst[] = _("const val:");
+    u8 textNew[] = _("new val:");
+    u8 x_const_val = 50;
+    u8 x_new_text = 70;
+    u8 x_new_val = 110;
+    u8 y = 0;
+
+    u8 backPicCoords    = data->constSpriteValues.backPicCoords;
+    u8 frontPicCoords   = data->constSpriteValues.frontPicCoords;
+    u8 frontElevation   = data->constSpriteValues.frontElevation;
+
+    s8 offset_back_picCoords    = data->offsetsSpriteValues.offset_back_picCoords;
+    s8 offset_front_picCoords   = data->offsetsSpriteValues.offset_front_picCoords;
+    s8 offset_front_elevation   = data->offsetsSpriteValues.offset_front_elevation;
+
+    u8 newBackPicCoords    = backPicCoords   +  offset_back_picCoords;
+    u8 newFrontPicCoords   = frontPicCoords  +  offset_front_picCoords;
+    u8 newFrontElevation   = frontElevation  +  offset_front_elevation;
+
+    FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
+
+    //Back
+    y = 0;
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textConst, 0, y, 0, NULL);
+    ConvertIntToDecimalStringN(text, backPicCoords , STR_CONV_MODE_LEFT_ALIGN, 2);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_const_val, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
+    ConvertIntToDecimalStringN(text, newBackPicCoords , STR_CONV_MODE_LEFT_ALIGN, 2);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
+    //Front picCoords
+    y = 12;
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textConst, 0, y, 0, NULL);
+    ConvertIntToDecimalStringN(text, frontPicCoords , STR_CONV_MODE_LEFT_ALIGN, 2);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_const_val, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
+    ConvertIntToDecimalStringN(text, newFrontPicCoords , STR_CONV_MODE_LEFT_ALIGN, 2);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
+    //Front elevation
+    y = 24;
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textConst, 0, y, 0, NULL);
+    ConvertIntToDecimalStringN(text, frontElevation , STR_CONV_MODE_LEFT_ALIGN, 2);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_const_val, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
+    ConvertIntToDecimalStringN(text, newFrontElevation , STR_CONV_MODE_LEFT_ALIGN, 2);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
+}
+
 static void ResetPokemonDebugWindows(void)
 {
     u8 i;
@@ -1049,13 +1164,13 @@ void CB2_Debug_Pokemon(void)
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
             SetMultiuseSpriteTemplateToPokemon(species, 1);
             gMultiuseSpriteTemplate.paletteTag = palette->tag;
-            front_y = GetBattlerSpriteFinal_YCustom(species);
+            front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
             data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
             gSprites[data->frontspriteId].oam.paletteNum = 1;
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
             //Front Shadow
-            LoadAndCreateEnemyShadowSpriteCustom(data, front_x, front_y, species);
+            LoadAndCreateEnemyShadowSpriteCustom(data, species);
 
             //Back
             HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
@@ -1075,8 +1190,11 @@ void CB2_Debug_Pokemon(void)
             SetUpModifyArrows(data);
             PrintDigitChars(data);
 
-            //Option Arrows
+            //Option Arrow
             SetUpOptionArrows(data);
+
+            //Modify Y Pos Arrow
+            SetUpYPosModifyArrows(data);
 
             //Anim names
             data->animIdBack = GetSpeciesBackAnimSet(species) + 1;
@@ -1148,10 +1266,10 @@ static void ResetBGs_Debug_Menu(u16 a)
     }
 }
 
-static void UpdateSubmenuOptionValue(u8 taskId, bool8 increment)
+static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
 {
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
-    u8 option = data->submenuYpos;
+    u8 option = data->submenuYpos[1];
 
     switch (option)
     {
@@ -1223,6 +1341,80 @@ static void UpdateSubmenuOptionValue(u8 taskId, bool8 increment)
     }
 }
 
+static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
+{
+    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    u16 species = data->currentmonId;
+    u8 option = data->submenuYpos[2];
+    s8 offset;
+    u8 y;
+
+    switch (option)
+    {
+    case 0: //Back picCoords
+        offset = data->offsetsSpriteValues.offset_back_picCoords;
+        if (increment)
+        {
+            if (offset == MAX_Y_OFFSET)
+                offset = -data->constSpriteValues.backPicCoords;
+            else
+                offset += 1;
+        }
+        else
+        {
+            if (offset == -data->constSpriteValues.backPicCoords)
+                offset = MAX_Y_OFFSET;
+            else
+                offset -= 1;
+        }
+        data->offsetsSpriteValues.offset_back_picCoords = offset;
+        gSprites[data->backspriteId].y = DEBUG_MON_BACK_Y + gMonBackPicCoords[species].y_offset + offset;
+        break;
+    case 1: //Front picCoords
+        offset = data->offsetsSpriteValues.offset_front_picCoords;
+        if (increment)
+        {
+            if (offset == MAX_Y_OFFSET)
+                offset = -data->constSpriteValues.frontPicCoords;
+            else
+                offset += 1;
+        }
+        else
+        {
+            if (offset == -data->constSpriteValues.frontPicCoords)
+                offset = MAX_Y_OFFSET;
+            else
+                offset -= 1;
+        }
+        data->offsetsSpriteValues.offset_front_picCoords = offset;
+        y = GetBattlerSpriteFinal_YCustom(species, offset, data->offsetsSpriteValues.offset_front_elevation);
+        gSprites[data->frontspriteId].y = y;
+        break;
+    case 2: //Front elevation
+        offset = data->offsetsSpriteValues.offset_front_elevation;
+        if (increment)
+        {
+            if (offset == MAX_Y_OFFSET)
+                offset = -data->constSpriteValues.frontElevation;
+            else
+                offset += 1;
+        }
+        else
+        {
+            if (offset == -data->constSpriteValues.frontElevation)
+                offset = MAX_Y_OFFSET;
+            else
+                offset -= 1;
+        }
+        data->offsetsSpriteValues.offset_front_elevation = offset;
+        y = GetBattlerSpriteFinal_YCustom(species, data->offsetsSpriteValues.offset_front_picCoords, offset);
+        gSprites[data->frontspriteId].y = y;
+        break;
+    }
+
+    UpdateYPosOffsetText(data);
+}
+
 
 static void Handle_Input_Debug_Pokemon(u8 taskId)
 {
@@ -1263,11 +1455,11 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         PlaySE(SE_DEX_SCROLL);
     }
 
-    if (!data->inSubmenu)
+    if (data->currentSubmenu == 0)
     {
         if (JOY_NEW(A_BUTTON))
         {
-            data->inSubmenu = TRUE;
+            data->currentSubmenu = 1;
             SetArrowInvisibility(data);
             PrintInstructionsOnWindow(data);
         }
@@ -1288,6 +1480,9 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
                 data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
                 data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
                 UpdateMonAnimNames(taskId);
+                data->offsetsSpriteValues.offset_back_picCoords = 0;
+                data->offsetsSpriteValues.offset_front_picCoords = 0;
+                data->offsetsSpriteValues.offset_front_elevation = 0;
             }
             PlaySE(SE_DEX_SCROLL);
             while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
@@ -1303,6 +1498,9 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
                 data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
                 data->animIdFront = sMonFrontAnimIdsTable[data->currentmonId - 1];
                 UpdateMonAnimNames(taskId);
+                data->offsetsSpriteValues.offset_back_picCoords = 0;
+                data->offsetsSpriteValues.offset_front_picCoords = 0;
+                data->offsetsSpriteValues.offset_front_elevation = 0;
             }
 
             PlaySE(SE_DEX_SCROLL);
@@ -1327,15 +1525,23 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         }
 
     }
-    else //Submenu
+    else if (data->currentSubmenu == 1) //Submenu 1
     {
-        if (JOY_NEW(B_BUTTON))
+        if (JOY_NEW(A_BUTTON))
         {
-            data->inSubmenu = FALSE;
-            if (data->submenuYpos == 3)
+            data->currentSubmenu = 2;
+            SetConstSpriteValues(data);
+            PrintInstructionsOnWindow(data);
+            SetArrowInvisibility(data);
+            UpdateYPosOffsetText(data);
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            data->currentSubmenu = 0;
+            if (data->submenuYpos[1] == 3)
             {
-                data->submenuYpos = 2;
-                data->optionArrows.currentDigit = data->submenuYpos;
+                data->submenuYpos[1] = 2;
+                data->optionArrows.currentDigit = data->submenuYpos[1];
                 gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
             }
             SetArrowInvisibility(data);
@@ -1343,37 +1549,75 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            data->submenuYpos += 1;
-            if (data->submenuYpos >= 3)
+            data->submenuYpos[1] += 1;
+            if (data->submenuYpos[1] >= 3)
             {
-                if ((gFormSpeciesIdTables[data->currentmonId] == NULL) || (data->submenuYpos >= 4))
-                    data->submenuYpos = 0;
+                if ((gFormSpeciesIdTables[data->currentmonId] == NULL) || (data->submenuYpos[1] >= 4))
+                    data->submenuYpos[1] = 0;
             }
-            data->optionArrows.currentDigit = data->submenuYpos;
+            data->optionArrows.currentDigit = data->submenuYpos[1];
             gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
         }
         else if (JOY_NEW(DPAD_UP))
         {
-            if (data->submenuYpos == 0)
+            if (data->submenuYpos[1] == 0)
             {
                 if (gFormSpeciesIdTables[data->currentmonId] != NULL)
-                    data->submenuYpos = 3;
+                    data->submenuYpos[1] = 3;
                 else
-                    data->submenuYpos = 2;
+                    data->submenuYpos[1] = 2;
             }
             else
-                data->submenuYpos -= 1;
+                data->submenuYpos[1] -= 1;
 
-            data->optionArrows.currentDigit = data->submenuYpos;
+            data->optionArrows.currentDigit = data->submenuYpos[1];
             gSprites[data->optionArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12;
         }
         else if (JOY_NEW(DPAD_LEFT))
         {
-            UpdateSubmenuOptionValue(taskId, FALSE);
+            UpdateSubmenuOneOptionValue(taskId, FALSE);
         }
         else if (JOY_NEW(DPAD_RIGHT))
         {
-            UpdateSubmenuOptionValue(taskId, TRUE);
+            UpdateSubmenuOneOptionValue(taskId, TRUE);
+        }
+    }
+    else if (data->currentSubmenu == 2) //Submenu 2
+    {
+        if (JOY_NEW(B_BUTTON))
+        {
+            data->currentSubmenu = 1;
+
+            SetArrowInvisibility(data);
+            PrintInstructionsOnWindow(data);
+            UpdateMonAnimNames(taskId);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            data->submenuYpos[2] += 1;
+            if (data->submenuYpos[2] >= 3)
+                data->submenuYpos[2] = 0;
+    
+            data->yPosModifyArrows.currentDigit = data->submenuYpos[2];
+            gSprites[data->yPosModifyArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->yPosModifyArrows.currentDigit * 12;
+        }
+        else if (JOY_NEW(DPAD_UP))
+        {
+            if (data->submenuYpos[2] == 0)
+                    data->submenuYpos[2] = 2;
+            else
+                data->submenuYpos[2] -= 1;
+
+            data->yPosModifyArrows.currentDigit = data->submenuYpos[2];
+            gSprites[data->yPosModifyArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->yPosModifyArrows.currentDigit * 12;
+        }
+        else if (JOY_NEW(DPAD_LEFT))
+        {
+            UpdateSubmenuTwoOptionValue(taskId, FALSE);
+        }
+        else if (JOY_NEW(DPAD_RIGHT))
+        {
+            UpdateSubmenuTwoOptionValue(taskId, TRUE);
         }
     }
 }
@@ -1411,13 +1655,13 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
     gMultiuseSpriteTemplate.paletteTag = palette->tag;
-    front_y = GetBattlerSpriteFinal_YCustom(species);
+    front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
     data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
     gSprites[data->frontspriteId].oam.paletteNum = 1;
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
     //Front Shadow
-    LoadAndCreateEnemyShadowSpriteCustom(data, front_x, front_y, species);
+    LoadAndCreateEnemyShadowSpriteCustom(data, species);
     
     //Back
     HandleLoadSpecialPokePicCustom(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[2], species, 0, data->isFemale);
@@ -1439,10 +1683,15 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     data->modifyArrows.arrowSpriteId[1] = CreateSprite(&sSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X + (data->modifyArrows.currentDigit * 6), MODIFY_DIGITS_ARROW2_Y, 0);
     gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
 
-    //Option Arrows
+    //Option Arrow
     LoadSpritePalette(&sSpritePalette_Arrow);
     data->optionArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y + data->optionArrows.currentDigit * 12, 0);
     gSprites[data->optionArrows.arrowSpriteId[0]].animNum = 2;
+
+    //Y Pos Modify Arrow
+    LoadSpritePalette(&sSpritePalette_Arrow);
+    data->yPosModifyArrows.arrowSpriteId[0] = CreateSprite(&sSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y + data->yPosModifyArrows.currentDigit * 12, 0);
+    gSprites[data->yPosModifyArrows.arrowSpriteId[0]].animNum = 2;
 
     //Arrow invisibility
     SetArrowInvisibility(data);

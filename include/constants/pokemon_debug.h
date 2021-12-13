@@ -23,6 +23,9 @@
 #define MON_PIC_BACK 0
 #define MON_PIC_FRONT 1
 
+//Sprite offset
+#define MAX_Y_OFFSET 20
+
 //Windows
 #define WIN_NAME_NUMBERS 0
 #define WIN_INSTRUCTIONS 1
