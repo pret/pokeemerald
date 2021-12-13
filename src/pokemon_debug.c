@@ -42,6 +42,7 @@
 extern const struct BattleBackground sBattleTerrainTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
+extern const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2];
 extern const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] ;
 extern const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS];
 extern const u8 sCastformElevations[NUM_CASTFORM_FORMS];
@@ -739,6 +740,7 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, 
     if (gEnemyMonElevation[species] == 0 && !IsCastformForm(species))
         return;
     LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
+    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
 
     data->frontShadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y + 29, 0xC8);
     gSprites[data->frontShadowSpriteId].data[0] = data->frontspriteId;
