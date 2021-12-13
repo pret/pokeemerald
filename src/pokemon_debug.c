@@ -21,6 +21,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "palette_util.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
 #include "pokemon_debug.h"
@@ -135,6 +136,16 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .height = 6,
         .paletteNum = 0xF,
         .baseBlock = 1 + 30 + 60 + 30
+    },
+    [WIN_FOOTPRINT] =
+    {
+        .bg = 0,
+        .tilemapLeft = 27,
+        .tilemapTop = 14,
+        .width = 2,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 1 + 30 + 60 + 30 + 150,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -750,6 +761,31 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, 
     gSprites[data->frontShadowSpriteId].invisible = FALSE;
 }
 
+//Tile functions (footprints)
+static void DrawFootprintCustom(u8 windowId, u16 species)
+{
+    u8 footprint[32 * 4] = {0};
+    const u8 * footprintGfx = gMonFootprintTable[species];
+    u32 i, j, tileIdx = 0;
+
+    if (footprintGfx != NULL)
+    {
+        for (i = 0; i < 32; i++)
+        {
+            u8 tile = footprintGfx[i];
+            for (j = 0; j < 4; j++)
+            {
+                u8 value = ((tile >> (2 * j)) & 1 ? 2 : 0);
+                if (tile & (2 << (2 * j)))
+                    value |= 0x20;
+                footprint[tileIdx] = value;
+                tileIdx++;
+            }
+        }
+    }
+    CopyToWindowPixelBuffer(windowId, footprint, sizeof(footprint), 0);
+}
+
 //Battle background functions
 static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
 {
@@ -1049,6 +1085,10 @@ void CB2_Debug_Pokemon(void)
 
             //BattleNg Name
             PrintBattleBgName(taskId);
+
+            //Footprint
+            DrawFootprintCustom(WIN_FOOTPRINT, species);
+            CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
 
             gMain.state++;
             break;
@@ -1406,6 +1446,10 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
 
     //Arrow invisibility
     SetArrowInvisibility(data);
+
+    //Footprint
+    DrawFootprintCustom(WIN_FOOTPRINT, species);
+    CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
 }
 
 static void Exit_Debug_Pokemon(u8 taskId)
