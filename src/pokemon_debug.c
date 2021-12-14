@@ -410,6 +410,9 @@ static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
     u8 textBottomSubmenuTwo[] = _("B coords:\nF coords:\nF elev:");
     u16 species = data->modifyArrows.currValue;
     
+    u8 textL[] = _("{L_BUTTON}");
+    u8 textR[] = _("{R_BUTTON}");
+
     //Instruction window
     FillWindowPixelBuffer(WIN_INSTRUCTIONS, 0x11);
     if (data->currentSubmenu == 0)
@@ -439,6 +442,8 @@ static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
     FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
     if (data->currentSubmenu != 2)
     {
+        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textL, 30, 0, 0, NULL);
+        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textR, 30, 12, 0, NULL);
         if (gFormSpeciesIdTables[data->currentmonId] != NULL)
             AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomForms, 0, 0, 0, NULL);
         else
@@ -1011,24 +1016,20 @@ static void UpdateMonAnimNames(u8 taskId)
     u8 backAnim = data->animIdBack;
     u8 text[34];
     u8 fontId = 0;
-    u8 textL[] = _("{L_BUTTON}");
-    u8 textR[] = _("{R_BUTTON}");
     u8 textNum[4];
 
     FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
 
     //Back
     StringCopy(text, gBackAnimNames[backAnim]);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textL, 0, 0, 0, NULL);
     ConvertIntToDecimalStringN(textNum, backAnim, STR_CONV_MODE_LEADING_ZEROS, 3);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 18, 0, 0, NULL);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 36, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 0, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 18, 0, 0, NULL);
     //Front
     StringCopy(text, gFrontAnimNames[frontAnim]);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textR, 0, 12, 0, NULL);
     ConvertIntToDecimalStringN(textNum, frontAnim, STR_CONV_MODE_LEADING_ZEROS, 3);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 18, 12, 0, NULL);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 36, 12, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 0, 12, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 18, 12, 0, NULL);
 
     PrintBattleBgName(taskId);
 }
