@@ -943,7 +943,7 @@ static void UpdateBattleBg(u8 taskId, bool8 increment)
 {
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
 
-    if (data->battleBgType == 0)
+    if (data->battleBgType == MAP_BATTLE_SCENE_NORMAL)
     {
         if (increment)
         {
@@ -1004,17 +1004,22 @@ static void UpdateMonAnimNames(u8 taskId)
     u8 fontId = 0;
     u8 textL[] = _("{L_BUTTON}");
     u8 textR[] = _("{R_BUTTON}");
+    u8 textNum[4];
 
     FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
 
     //Back
     StringCopy(text, gBackAnimNames[backAnim]);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textL, 0, 0, 0, NULL);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 20, 0, 0, NULL);
+    ConvertIntToDecimalStringN(textNum, backAnim, STR_CONV_MODE_LEADING_ZEROS, 3);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 18, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 36, 0, 0, NULL);
     //Front
     StringCopy(text, gFrontAnimNames[frontAnim]);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textR, 0, 12, 0, NULL);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 20, 12, 0, NULL);
+    ConvertIntToDecimalStringN(textNum, frontAnim, STR_CONV_MODE_LEADING_ZEROS, 3);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 18, 12, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 36, 12, 0, NULL);
 
     PrintBattleBgName(taskId);
 }
@@ -1325,10 +1330,21 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
             else
             {
                 if (gFormSpeciesIdTables[data->currentmonId][formId] == gFormSpeciesIdTables[data->currentmonId][0])
-                    modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][0];
+                {
+                    u8 lastForm;
+                    for (lastForm = 0; gFormSpeciesIdTables[data->currentmonId][lastForm] != FORM_SPECIES_END; lastForm++)
+                    {
+                        if (gFormSpeciesIdTables[data->currentmonId][lastForm + 1] == FORM_SPECIES_END)
+                            break;
+                    }
+                    modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][lastForm];
+                }
                 else
                     modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId - 1);
             }
+            data->animIdBack = GetSpeciesBackAnimSet(modArrows->currValue) + 1;
+            data->animIdFront = sMonFrontAnimIdsTable[modArrows->currValue - 1];
+            UpdateMonAnimNames(taskId);
                 
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
@@ -1710,7 +1726,7 @@ static void Exit_Debug_Pokemon(u8 taskId)
         FreeMonSpritesGfx();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
     }
 }
 
