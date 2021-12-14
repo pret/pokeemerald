@@ -1004,17 +1004,22 @@ static void UpdateMonAnimNames(u8 taskId)
     u8 fontId = 0;
     u8 textL[] = _("{L_BUTTON}");
     u8 textR[] = _("{R_BUTTON}");
+    u8 textNum[4];
 
     FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
 
     //Back
     StringCopy(text, gBackAnimNames[backAnim]);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textL, 0, 0, 0, NULL);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 20, 0, 0, NULL);
+    ConvertIntToDecimalStringN(textNum, backAnim, STR_CONV_MODE_LEADING_ZEROS, 3);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 18, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 36, 0, 0, NULL);
     //Front
     StringCopy(text, gFrontAnimNames[frontAnim]);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textR, 0, 12, 0, NULL);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 20, 12, 0, NULL);
+    ConvertIntToDecimalStringN(textNum, frontAnim, STR_CONV_MODE_LEADING_ZEROS, 3);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNum, 18, 12, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 36, 12, 0, NULL);
 
     PrintBattleBgName(taskId);
 }
