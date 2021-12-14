@@ -943,7 +943,7 @@ static void UpdateBattleBg(u8 taskId, bool8 increment)
 {
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
 
-    if (data->battleBgType == 0)
+    if (data->battleBgType == MAP_BATTLE_SCENE_NORMAL)
     {
         if (increment)
         {
@@ -1337,6 +1337,9 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
                 else
                     modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId - 1);
             }
+            data->animIdBack = GetSpeciesBackAnimSet(modArrows->currValue) + 1;
+            data->animIdFront = sMonFrontAnimIdsTable[modArrows->currValue - 1];
+            UpdateMonAnimNames(taskId);
                 
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
