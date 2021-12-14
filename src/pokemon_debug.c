@@ -797,21 +797,29 @@ static u8 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 off
     return y;
 }
 
+static void UpdateShadowSpriteInvisible(struct PokemonDebugMenu *data)
+{
+    if (data->constSpriteValues.frontElevation + data->offsetsSpriteValues.offset_front_elevation == 0)
+        gSprites[data->frontShadowSpriteId].invisible = TRUE;
+    else
+        gSprites[data->frontShadowSpriteId].invisible = FALSE;
+}
+
 static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
 {
-    bool8 invisible = FALSE;
     u8 frontSpriteId = shadowSprite->data[0];
     struct Sprite *battlerSprite = &gSprites[frontSpriteId];
 
     shadowSprite->x = battlerSprite->x;
     shadowSprite->x2 = battlerSprite->x2;
-    shadowSprite->invisible = invisible;
 }
+
 static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u16 species)
 {
     u8 x, y;
+    bool8 invisible = FALSE;
     if (gEnemyMonElevation[species] == 0 && !IsCastformForm(species))
-        return;
+        invisible = TRUE;
     LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
     LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
     x = sBattlerCoords[0][1].x;
@@ -822,7 +830,7 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, 
     
     gSprites[data->frontShadowSpriteId].callback = SpriteCB_EnemyShadowCustom;
     gSprites[data->frontShadowSpriteId].oam.priority = 0;
-    gSprites[data->frontShadowSpriteId].invisible = FALSE;
+    gSprites[data->frontShadowSpriteId].invisible = invisible;
 }
 
 //Tile functions (footprints)
@@ -1426,6 +1434,7 @@ static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
         data->offsetsSpriteValues.offset_front_elevation = offset;
         y = GetBattlerSpriteFinal_YCustom(species, data->offsetsSpriteValues.offset_front_picCoords, offset);
         gSprites[data->frontspriteId].y = y;
+        UpdateShadowSpriteInvisible(data);
         break;
     }
 
@@ -1478,9 +1487,10 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         {
             data->currentSubmenu = 1;
             SetArrowInvisibility(data);
+            SetConstSpriteValues(data);
             PrintInstructionsOnWindow(data);
         }
-        else if (JOY_NEW(B_BUTTON))
+        else if (JOY_HELD(B_BUTTON))
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Exit_Debug_Pokemon;
@@ -1547,7 +1557,6 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         if (JOY_NEW(A_BUTTON))
         {
             data->currentSubmenu = 2;
-            SetConstSpriteValues(data);
             PrintInstructionsOnWindow(data);
             SetArrowInvisibility(data);
             UpdateYPosOffsetText(data);
