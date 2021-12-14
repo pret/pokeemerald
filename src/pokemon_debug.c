@@ -1490,7 +1490,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
             SetConstSpriteValues(data);
             PrintInstructionsOnWindow(data);
         }
-        else if (JOY_HELD(B_BUTTON))
+        else if (JOY_NEW(B_BUTTON))
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Exit_Debug_Pokemon;
