@@ -1325,7 +1325,15 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
             else
             {
                 if (gFormSpeciesIdTables[data->currentmonId][formId] == gFormSpeciesIdTables[data->currentmonId][0])
-                    modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][0];
+                {
+                    u8 lastForm;
+                    for (lastForm = 0; gFormSpeciesIdTables[data->currentmonId][lastForm] != FORM_SPECIES_END; lastForm++)
+                    {
+                        if (gFormSpeciesIdTables[data->currentmonId][lastForm + 1] == FORM_SPECIES_END)
+                            break;
+                    }
+                    modArrows->currValue = gFormSpeciesIdTables[data->currentmonId][lastForm];
+                }
                 else
                     modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId - 1);
             }
