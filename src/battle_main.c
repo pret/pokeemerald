@@ -3921,6 +3921,18 @@ static void HandleEndTurn_ContinueBattle(void)
     }
 }
 
+bool32 IsBattlerAlive(u8 battlerId)
+{
+    if (gBattleMons[battlerId].hp == 0)
+        return FALSE;
+    else if (battlerId >= gBattlersCount)
+        return FALSE;
+    else if (gAbsentBattlerFlags & gBitTable[battlerId])
+        return FALSE;
+    else
+        return TRUE;
+}
+
 void BattleTurnPassed(void)
 {
     s32 i;
