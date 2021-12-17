@@ -1813,7 +1813,7 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
     s32 i;
 
     gPotentialItemEffectBattler = battlerId;
-    
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         // No move
@@ -2436,7 +2436,7 @@ u8 DoFieldEndTurnEffects(void)
             break;
         }
     } while (effect == 0);
-    
+
     return (gBattleMainFunc != BattleTurnPassed);
 }
 
@@ -9172,7 +9172,7 @@ bool32 CanMegaEvolve(u8 battlerId)
     if (mega->alreadyEvolved[battlerPosition])
         return FALSE;
     if (gBattleStruct->zmove.toBeUsed[battlerId])
-        return FALSE;   //cannot use z move and mega evolve on same turn
+        return FALSE;   // cannot use z move and mega evolve on same turn
     
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
@@ -9470,7 +9470,7 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)
     return FALSE;
 }
 
-//photon geyser & light that burns the sky
+// photon geyser & light that burns the sky
 u8 GetSplitBasedOnStats(u8 battlerId)
 {
     u32 attack = gBattleMons[battlerId].attack;

@@ -1813,7 +1813,7 @@ static void Cmd_ppreduce(void)
 
     if (gBattleControllerExecFlags)
         return;
-    
+
     if (!gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure)
     {
         switch (gBattleMoves[gCurrentMove].target)
@@ -7366,7 +7366,7 @@ static void HandleTerrainMove(u16 move)
 {
     u32 statusFlag = 0;
     u8 *timer = NULL;
-    
+
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_MISTY_TERRAIN:
