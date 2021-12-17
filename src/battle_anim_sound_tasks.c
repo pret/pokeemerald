@@ -168,7 +168,7 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     }
 
     if (species != SPECIES_NONE)
-        PlayCry3(species, pan, 3);
+        PlayCry_ByMode(species, pan, CRY_MODE_HIGH_PITCH);
 
     DestroyAnimVisualTask(taskId);
 }
@@ -219,10 +219,10 @@ void SoundTask_PlayDoubleCry(u8 taskId)
 
     if (species != SPECIES_NONE)
     {
-        if (gBattleAnimArgs[1] == 0xFF)
-            PlayCry3(species, pan, 9);
-        else
-            PlayCry3(species, pan, 7);
+        if (gBattleAnimArgs[1] == DOUBLE_CRY_GROWL)
+            PlayCry_ByMode(species, pan, CRY_MODE_GROWL_1);
+        else // DOUBLE_CRY_ROAR
+            PlayCry_ByMode(species, pan, CRY_MODE_ROAR_1);
 
         gTasks[taskId].func = SoundTask_PlayDoubleCry_Step;
     }
@@ -243,19 +243,19 @@ static void SoundTask_PlayDoubleCry_Step(u8 taskId)
     }
     else
     {
-        if (gTasks[taskId].data[0] == 0xFF)
+        if (gTasks[taskId].data[0] == DOUBLE_CRY_GROWL)
         {
             if (!IsCryPlaying())
             {
-                PlayCry3(species, pan, 10);
+                PlayCry_ByMode(species, pan, CRY_MODE_GROWL_2);
                 DestroyAnimVisualTask(taskId);
             }
         }
-        else
+        else // DOUBLE_CRY_ROAR
         {
             if (!IsCryPlaying())
             {
-                PlayCry3(species, pan, 8);
+                PlayCry_ByMode(species, pan, CRY_MODE_ROAR_2);
                 DestroyAnimVisualTask(taskId);
             }
         }
@@ -275,12 +275,18 @@ void SoundTask_WaitForCry(u8 taskId)
     }
 }
 
+
+#define tSpecies data[1]
+#define tPan     data[2]
+#define tState   data[9]
+#define tLastCry data[10] // If it's not the last cry, don't try to restore the BGM, because another is coming
+
 void SoundTask_PlayCryWithEcho(u8 taskId)
 {
     u16 species;
     s8 pan;
 
-    gTasks[taskId].data[10] = gBattleAnimArgs[0];
+    gTasks[taskId].tLastCry = gBattleAnimArgs[0];
     pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
 
     if (IsContest())
@@ -288,8 +294,8 @@ void SoundTask_PlayCryWithEcho(u8 taskId)
     else
         species = gAnimBattlerSpecies[gBattleAnimAttacker];
 
-    gTasks[taskId].data[1] = species;
-    gTasks[taskId].data[2] = pan;
+    gTasks[taskId].tSpecies = species;
+    gTasks[taskId].tPan = pan;
 
     if (species != SPECIES_NONE)
         gTasks[taskId].func = SoundTask_PlayCryWithEcho_Step;
@@ -299,37 +305,43 @@ void SoundTask_PlayCryWithEcho(u8 taskId)
 
 static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 {
-    u16 species = gTasks[taskId].data[1];
-    s8 pan = gTasks[taskId].data[2];
+    u16 species = gTasks[taskId].tSpecies;
+    s8 pan = gTasks[taskId].tPan;
 
-    switch (gTasks[taskId].data[9])
+    // Note the cases are not in order of execution
+    switch (gTasks[taskId].tState)
     {
     case 2:
-        PlayCry6(species, pan, 4);
-        gTasks[taskId].data[9]++;
+        PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_START);
+        gTasks[taskId].tState++;
         break;
     case 1:
     case 3:
     case 4:
-        gTasks[taskId].data[9]++;
+        gTasks[taskId].tState++;
         break;
     case 5:
         if (IsCryPlaying())
             break;
     case 0:
         StopCryAndClearCrySongs();
-        gTasks[taskId].data[9]++;
+        gTasks[taskId].tState++;
         break;
     default:
-        if (gTasks[taskId].data[10] == 0)
-            PlayCry6(species, pan, 6);
+        if (!gTasks[taskId].tLastCry)
+            PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_END);
         else
-            PlayCry3(species, pan, 6);
+            PlayCry_ByMode(species, pan, CRY_MODE_ECHO_END);
 
         DestroyAnimVisualTask(taskId);
         break;
     }
 }
+
+#undef tSpecies
+#undef tPan
+#undef tState
+#undef tLastCry
 
 void SoundTask_PlaySE1WithPanning(u8 taskId)
 {

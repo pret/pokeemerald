@@ -1,8 +1,7 @@
 #ifndef GUARD_BATTLE_CONTROLLERS_H
 #define GUARD_BATTLE_CONTROLLERS_H
 
-enum
-{
+enum {
     REQUEST_ALL_BATTLE,
     REQUEST_SPECIES_BATTLE,
     REQUEST_HELDITEM_BATTLE,
@@ -67,18 +66,35 @@ enum
 
 // Special arguments for Battle Controller functions.
 
-#define RESET_ACTION_MOVE_SELECTION     0
-#define RESET_ACTION_SELECTION          1
-#define RESET_MOVE_SELECTION            2
+enum { // Values given to the emit functions to choose gBattleBufferA or gBattleBufferB
+    BUFFER_A,
+    BUFFER_B
+};
 
-#define BALL_NO_SHAKES          0
-#define BALL_1_SHAKE            1
-#define BALL_2_SHAKES           2
-#define BALL_3_SHAKES_FAIL      3
-#define BALL_3_SHAKES_SUCCESS   4
-#define BALL_TRAINER_BLOCK      5
+enum {
+    RESET_ACTION_MOVE_SELECTION,
+    RESET_ACTION_SELECTION,
+    RESET_MOVE_SELECTION,
+};
+
+enum {
+    BALL_NO_SHAKES,
+    BALL_1_SHAKE,
+    BALL_2_SHAKES,
+    BALL_3_SHAKES_FAIL,
+    BALL_3_SHAKES_SUCCESS,
+    BALL_TRAINER_BLOCK,
+};
+
+enum {
+    LINK_STANDBY_MSG_STOP_BOUNCE,
+    LINK_STANDBY_STOP_BOUNCE_ONLY,
+    LINK_STANDBY_MSG_ONLY,
+};
 
 #define INSTANT_HP_BAR_DROP     32767
+
+#define PARTY_SUMM_SKIP_DRAW_DELAY (1 << 7)
 
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
@@ -191,7 +207,7 @@ void BtlController_EmitSetMonData(u8 bufferId, u8 requestId, u8 monToCheck, u8 b
 void BtlController_EmitSetRawMonData(u8 bufferId, u8 monId, u8 bytes, void *data); // unused
 void BtlController_EmitLoadMonSprite(u8 bufferId);
 void BtlController_EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubstituteBit);
-void BtlController_EmitReturnMonToBall(u8 bufferId, u8 arg1);
+void BtlController_EmitReturnMonToBall(u8 bufferId, bool8 skipAnim);
 void BtlController_EmitDrawTrainerPic(u8 bufferId);
 void BtlController_EmitTrainerSlide(u8 bufferId);
 void BtlController_EmitTrainerSlideBack(u8 bufferId);
@@ -203,11 +219,11 @@ void BtlController_EmitPause(u8 bufferId, u8 toWait, void *data); // unused
 void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit);
 void BtlController_EmitPrintString(u8 bufferId, u16 stringId);
 void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringId);
-void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
+void BtlController_EmitChooseAction(u8 bufferId, u8 action, u16 itemId);
 void BtlController_EmitYesNoBox(u8 bufferId);
 void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
 void BtlController_EmitChooseItem(u8 bufferId, u8* arg1);
-void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4);
+void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abilityId, u8* data);
 void BtlController_EmitCmd23(u8 bufferId); // unused
 void BtlController_EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
 void BtlController_EmitExpUpdate(u8 bufferId, u8 partyId, u16 expPoints);
@@ -216,7 +232,7 @@ void BtlController_EmitStatusAnimation(u8 bufferId, bool8 status2, u32 status);
 void BtlController_EmitStatusXor(u8 bufferId, u8 b); // unused
 void BtlController_EmitDataTransfer(u8 bufferId, u16 size, void *data);
 void BtlController_EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, void *data); // unused
-void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *unusedDumbDataParameter); // unused
+void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *data); // unused
 void BtlController_EmitCmd32(u8 bufferId, u16 size, void *c); // unused
 void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2);
 void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c);
@@ -233,7 +249,7 @@ void BtlController_EmitPlayFanfareOrBGM(u8 bufferId, u16 songId, bool8 playBGM);
 void BtlController_EmitFaintingCry(u8 bufferId);
 void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
-void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
+void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 flags);
 void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);

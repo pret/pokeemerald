@@ -345,7 +345,7 @@ void CryScreenPlayButton(u16 species)
 
 static void PlayCryScreenCry(u16 species)
 {
-    PlayCry2(species, 0, 125, 10);
+    PlayCry_NormalNoDucking(species, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
     sDexCryScreen->cryState = 1;
 }
 
@@ -432,7 +432,7 @@ static void DrawWaveformSegment(u8 position, u8 amplitude)
 
 static void DrawWaveformWindow(u8 windowId)
 {
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 // rsVertical is leftover from a very different version of this function in RS
@@ -443,7 +443,7 @@ static void ShiftWaveformOver(u8 windowId, s16 offset, bool8 rsVertical)
     if (!rsVertical)
     {
         u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
-        ChangeBgX(bg, offset << 8, 0);
+        ChangeBgX(bg, offset << 8, BG_COORD_SET);
     }
 }
 

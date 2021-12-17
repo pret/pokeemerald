@@ -4,7 +4,7 @@
 #include "ereader_helpers.h"
 #include "link.h"
 #include "main.h"
-#include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"
@@ -13,37 +13,38 @@
 #include "util.h"
 #include "constants/songs.h"
 
-struct Unk81D5014
+// Equivalent to MysteryGiftTaskData
+struct EReaderTaskData
 {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 *unk10;
+    u16 timer;
+    u16 unused1;
+    u16 unused2;
+    u16 unused3;
+    u8 state;
+    u8 textState;
+    u8 unused4;
+    u8 unused5;
+    u8 unused6;
+    u8 unused7;
+    u8 status;
+    u8 *unusedBuffer;
 };
 
-struct Unk03006370
+struct EReaderData
 {
-    u16 unk0;
-    u32 unk4;
-    u32 *unk8;
+    u16 status;
+    u32 size;
+    u32 *data;
 };
 
-static void sub_81D5084(u8);
+static void Task_EReader(u8);
 
-struct Unk03006370 gUnknown_03006370;
+struct EReaderData gEReaderData;
 
-extern const u8 gUnknown_089A3470[];
-extern const u8 gMultiBootProgram_BerryGlitchFix_Start[];
+extern const u8 gEReaderLinkData_Start[];
+extern const u8 gEReaderLinkData_End[];
 
-static void sub_81D4D50(struct Unk03006370 *arg0, int arg1, u32 *arg2)
+static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
 {
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;
@@ -53,12 +54,12 @@ static void sub_81D4D50(struct Unk03006370 *arg0, int arg1, u32 *arg2)
     EReaderHelper_ClearSendRecvMgr();
     REG_IE |= INTR_FLAG_VCOUNT;
     REG_IME = backupIME;
-    arg0->unk0 = 0;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+    eReader->status = 0;
+    eReader->size = size;
+    eReader->data = data;
 }
 
-static void sub_81D4DB8(struct Unk03006370 *arg0)
+static void EReader_Reset(struct EReaderData *eReader)
 {
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;
@@ -68,21 +69,30 @@ static void sub_81D4DB8(struct Unk03006370 *arg0)
     REG_IME = backupIME;
 }
 
-static u8 sub_81D4DE8(struct Unk03006370 *arg0)
+// Return values for EReader_Transfer
+enum {
+    TRANSFER_ACTIVE,
+    TRANSFER_SUCCESS,
+    TRANSFER_CANCELED,
+    TRANSFER_TIMEOUT,
+};
+
+static u8 EReader_Transfer(struct EReaderData *eReader)
 {
-    u8 var0 = 0;
-    arg0->unk0 = EReaderHandleTransfer(1, arg0->unk4, arg0->unk8, NULL);
-    if ((arg0->unk0 & 0x13) == 0x10)
-        var0 = 1;
+    u8 transferStatus = TRANSFER_ACTIVE;
+    eReader->status = EReaderHandleTransfer(TRUE, eReader->size, eReader->data, NULL);
 
-    if (arg0->unk0 & 0x8)
-        var0 = 2;
+    if ((eReader->status & EREADER_XFER_MASK) == 0 && eReader->status & EREADER_CHECKSUM_OK_MASK)
+        transferStatus = TRANSFER_SUCCESS;
 
-    if (arg0->unk0 & 0x4)
-        var0 = 3;
+    if (eReader->status & EREADER_CANCEL_KEY_MASK)
+        transferStatus = TRANSFER_CANCELED;
+
+    if (eReader->status & EREADER_CANCEL_TIMEOUT_MASK)
+        transferStatus = TRANSFER_TIMEOUT;
 
     gShouldAdvanceLinkState = 0;
-    return var0;
+    return transferStatus;
 }
 
 static void OpenEReaderLink(void)
@@ -93,17 +103,20 @@ static void OpenEReaderLink(void)
     SetSuppressLinkErrorMessage(TRUE);
 }
 
-static bool32 sub_81D4E60(void)
+static bool32 ValidateEReaderConnection(void)
 {
     volatile u16 backupIME;
-    u16 sp4[4];
+    u16 handshakes[MAX_LINK_PLAYERS];
 
     backupIME = REG_IME;
     REG_IME = 0;
-    *(u64 *)sp4 = *(u64 *)gLink.tempRecvBuffer;
+    *(u64 *)handshakes = *(u64 *)gLink.handshakeBuffer;
     REG_IME = backupIME;
-    if (sp4[0] == 0xB9A0 && sp4[1] == 0xCCD0
-     && sp4[2] == 0xFFFF && sp4[3] == 0xFFFF)
+    
+    // Validate that we are player 1, the EReader is player 2,
+    // and that players 3 and 4 are empty.
+    if (handshakes[0] == SLAVE_HANDSHAKE && handshakes[1] == EREADER_HANDSHAKE
+     && handshakes[2] == 0xFFFF && handshakes[3] == 0xFFFF)
     {
         return TRUE;
     }
@@ -111,7 +124,7 @@ static bool32 sub_81D4E60(void)
     return FALSE;
 }
 
-static bool32 sub_81D4EC0(void)
+static bool32 IsChildConnected(void)
 {
     if (IsLinkMaster() && GetLinkPlayerCount_2() == 2)
         return TRUE;
@@ -119,56 +132,77 @@ static bool32 sub_81D4EC0(void)
     return FALSE;
 }
 
-static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
-{
-    u8 var0;
+// States for TryReceiveCard
+enum {
+    RECV_STATE_INIT,
+    RECV_STATE_WAIT_START,
+    RECV_STATE_START,
+    RECV_STATE_EXCHANGE,
+    RECV_STATE_START_DISCONNECT,
+    RECV_STATE_WAIT_DISCONNECT,
+};
 
-    var0 = *arg0 - 3;
-    if (var0 < 3 && HasLinkErrorOccurred())
+// Return values for TryReceiveCard
+enum {
+    RECV_ACTIVE,
+    RECV_CANCELED,
+    RECV_SUCCESS,
+    RECV_ERROR,
+    RECV_DISCONNECTED,
+    RECV_TIMEOUT,
+};
+
+static u32 TryReceiveCard(u8 *state, u16 *timer)
+{
+    if (*state >= RECV_STATE_EXCHANGE 
+     && *state <= RECV_STATE_WAIT_DISCONNECT 
+     && HasLinkErrorOccurred())
     {
-        *arg0 = 0;
-        return 3;
+        // Return error status if an error occurs
+        // during the link exchange.
+        *state = 0;
+        return RECV_ERROR;
     }
 
-    switch (*arg0)
+    switch (*state)
     {
-    case 0:
+    case RECV_STATE_INIT:
         if (IsLinkMaster() && GetLinkPlayerCount_2() > 1)
         {
-            *arg0 = 1;
+            *state = RECV_STATE_WAIT_START;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            *arg0 = 0;
-            return 1;
+            *state = 0;
+            return RECV_CANCELED;
         }
         break;
-    case 1:
-        if (++(*arg1) > 5)
+    case RECV_STATE_WAIT_START:
+        if (++(*timer) > 5)
         {
-            *arg1 = 0;
-            *arg0 = 2;
+            *timer = 0;
+            *state = RECV_STATE_START;
         }
         break;
-    case 2:
+    case RECV_STATE_START:
         if (GetLinkPlayerCount_2() == 2)
         {
             PlaySE(SE_DING_DONG);
             CheckShouldAdvanceLinkState();
-            *arg1 = 0;
-            *arg0 = 3;
+            *timer = 0;
+            *state = RECV_STATE_EXCHANGE;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            *arg0 = 0;
-            return 1;
+            *state = 0;
+            return RECV_CANCELED;
         }
         break;
-    case 3:
-        if (++(*arg1) > 30)
+    case RECV_STATE_EXCHANGE:
+        if (++(*timer) > 30)
         {
-            *arg0 = 0;
-            return 5;
+            *state = 0;
+            return RECV_TIMEOUT;
         }
 
         if (IsLinkConnectionEstablished())
@@ -177,285 +211,320 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
             {
                 if (IsLinkPlayerDataExchangeComplete())
                 {
-                    *arg0 = 0;
-                    return 2;
+                    *state = 0;
+                    return RECV_SUCCESS;
                 }
                 else
                 {
-                    *arg0 = 4;
+                    *state = RECV_STATE_START_DISCONNECT;
                 }
             }
             else
             {
-                *arg0 = 3;
+                *state = RECV_STATE_EXCHANGE;
             }
         }
         break;
-    case 4:
+    case RECV_STATE_START_DISCONNECT:
         SetCloseLinkCallbackAndType(0);
-        *arg0 = 5;
+        *state = RECV_STATE_WAIT_DISCONNECT;
         break;
-    case 5:
+    case RECV_STATE_WAIT_DISCONNECT:
         if (!gReceivedRemoteLinkPlayers)
         {
-            *arg0 = 0;
-            return 4;
+            *state = 0;
+            return RECV_DISCONNECTED;
         }
         break;
     default:
-        return 0;
+        return RECV_ACTIVE;
     }
 
-    return 0;
+    return RECV_ACTIVE;
 }
 
-void task_add_00_ereader(void)
+void CreateEReaderTask(void)
 {
-    struct Unk81D5014 *data;
-    u8 taskId = CreateTask(sub_81D5084, 0);
-    data = (struct Unk81D5014 *)gTasks[taskId].data;
-    data->unk8 = 0;
-    data->unk9 = 0;
-    data->unkA = 0;
-    data->unkB = 0;
-    data->unkC = 0;
-    data->unkD = 0;
-    data->unk0 = 0;
-    data->unk2 = 0;
-    data->unk4 = 0;
-    data->unk6 = 0;
-    data->unkE = 0;
-    data->unk10 = AllocZeroed(0x40);
+    struct EReaderTaskData *data;
+    u8 taskId = CreateTask(Task_EReader, 0);
+    data = (struct EReaderTaskData *)gTasks[taskId].data;
+    data->state = 0;
+    data->textState = 0;
+    data->unused4 = 0;
+    data->unused5 = 0;
+    data->unused6 = 0;
+    data->unused7 = 0;
+    data->timer = 0;
+    data->unused1 = 0;
+    data->unused2 = 0;
+    data->unused3 = 0;
+    data->status = 0;
+    data->unusedBuffer = AllocZeroed(0x40);
 }
 
-static void sub_81D505C(u16 *arg0)
+static void ResetTimer(u16 *timer)
 {
-    *arg0 = 0;
+    *timer = 0;
 }
 
-static bool32 sub_81D5064(u16 *arg0, u16 arg1)
+static bool32 UpdateTimer(u16 *timer, u16 time)
 {
-    if (++(*arg0) > arg1)
+    if (++(*timer) > time)
     {
-        *arg0 = 0;
+        // Timer has finished
+        *timer = 0;
         return TRUE;
     }
 
     return FALSE;
 }
 
-static void sub_81D5084(u8 taskId)
+// States for Task_EReader
+enum {
+    ER_STATE_START,
+    ER_STATE_INIT_LINK,
+    ER_STATE_INIT_LINK_WAIT,
+    ER_STATE_INIT_LINK_CHECK,
+    ER_STATE_MSG_SELECT_CONNECT,
+    ER_STATE_MSG_SELECT_CONNECT_WAIT,
+    ER_STATE_TRY_LINK,
+    ER_STATE_INCORRECT_LINK,
+    ER_STATE_CONNECTING,
+    ER_STATE_TRANSFER,
+    ER_STATE_TRANSFER_END,
+    ER_STATE_TRANSFER_SUCCESS,
+    ER_STATE_LOAD_CARD_START,
+    ER_STATE_LOAD_CARD,
+    ER_STATE_WAIT_RECV_CARD,
+    ER_STATE_VALIDATE_CARD,
+    ER_STATE_WAIT_DISCONNECT,
+    ER_STATE_SAVE,
+    ER_STATE_SUCCESS_MSG,
+    ER_STATE_SUCCESS_END,
+    ER_STATE_LINK_ERROR,
+    ER_STATE_LINK_ERROR_TRY_AGAIN,
+    ER_STATE_SAVE_FAILED,
+    ER_STATE_CANCELED_CARD_READ,
+    ER_STATE_UNUSED_1,
+    ER_STATE_UNUSED_2,
+    ER_STATE_END,
+};
+
+static void Task_EReader(u8 taskId)
 {
-    struct Unk81D5014 *data = (struct Unk81D5014 *)gTasks[taskId].data;
-    switch (data->unk8)
+    struct EReaderTaskData *data = (struct EReaderTaskData *)gTasks[taskId].data;
+    switch (data->state)
     {
-    case 0:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ReceiveMysteryGiftWithEReader))
-            data->unk8 = 1;
+    case ER_STATE_START:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_ReceiveMysteryGiftWithEReader))
+            data->state = ER_STATE_INIT_LINK;
         break;
-    case 1:
+    case ER_STATE_INIT_LINK:
         OpenEReaderLink();
-        sub_81D505C(&data->unk0);
-        data->unk8 = 2;
+        ResetTimer(&data->timer);
+        data->state = ER_STATE_INIT_LINK_WAIT;
         break;
-    case 2:
-        if (sub_81D5064(&data->unk0, 10))
-            data->unk8 = 3;
+    case ER_STATE_INIT_LINK_WAIT:
+        if (UpdateTimer(&data->timer, 10))
+            data->state = ER_STATE_INIT_LINK_CHECK;
         break;
-    case 3:
-        if (!sub_81D4EC0())
+    case ER_STATE_INIT_LINK_CHECK:
+        if (!IsChildConnected())
         {
             CloseLink();
-            data->unk8 = 4;
+            data->state = ER_STATE_MSG_SELECT_CONNECT;
         }
         else
         {
-            data->unk8 = 13;
+            data->state = ER_STATE_LOAD_CARD;
         }
         break;
-    case 4:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_SelectConnectFromEReaderMenu))
+    case ER_STATE_MSG_SELECT_CONNECT:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_SelectConnectFromEReaderMenu))
         {
             AddTextPrinterToWindow1(gJPText_SelectConnectWithGBA);
-            sub_81D505C(&data->unk0);
-            data->unk8 = 5;
+            ResetTimer(&data->timer);
+            data->state = ER_STATE_MSG_SELECT_CONNECT_WAIT;
         }
         break;
-    case 5:
-        if (sub_81D5064(&data->unk0, 90))
+    case ER_STATE_MSG_SELECT_CONNECT_WAIT:
+        if (UpdateTimer(&data->timer, 90))
         {
             OpenEReaderLink();
-            data->unk8 = 6;
+            data->state = ER_STATE_TRY_LINK;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            sub_81D505C(&data->unk0);
+            ResetTimer(&data->timer);
             PlaySE(SE_SELECT);
-            data->unk8 = 23;
+            data->state = ER_STATE_CANCELED_CARD_READ;
         }
         break;
-    case 6:
+    case ER_STATE_TRY_LINK:
         if (JOY_NEW(B_BUTTON))
         {
+            // Canceled
             PlaySE(SE_SELECT);
             CloseLink();
-            sub_81D505C(&data->unk0);
-            data->unk8 = 23;
+            ResetTimer(&data->timer);
+            data->state = ER_STATE_CANCELED_CARD_READ;
         }
         else if (GetLinkPlayerCount_2() > 1)
         {
-            sub_81D505C(&data->unk0);
+            ResetTimer(&data->timer);
             CloseLink();
-            data->unk8 = 7;
+            data->state = ER_STATE_INCORRECT_LINK;
         }
-        else if (sub_81D4E60())
+        else if (ValidateEReaderConnection())
         {
+            // Successful connection
             PlaySE(SE_SELECT);
             CloseLink();
-            sub_81D505C(&data->unk0);
-            data->unk8 = 8;
+            ResetTimer(&data->timer);
+            data->state = ER_STATE_CONNECTING;
         }
-        else if (sub_81D5064(&data->unk0, 10))
+        else if (UpdateTimer(&data->timer, 10))
         {
+            // Retry connection
             CloseLink();
             OpenEReaderLink();
-            sub_81D505C(&data->unk0);
+            ResetTimer(&data->timer);
         }
         break;
-    case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_LinkIsIncorrect))
-            data->unk8 = 4;
+    case ER_STATE_INCORRECT_LINK:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_LinkIsIncorrect))
+            data->state = ER_STATE_MSG_SELECT_CONNECT;
         break;
-    case 8:
+    case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        // XXX: This (u32*) cast is discarding the const qualifier from gUnknown_089A3470
-        sub_81D4D50(&gUnknown_03006370, gMultiBootProgram_BerryGlitchFix_Start - gUnknown_089A3470, (u32*)gUnknown_089A3470);
-        data->unk8 = 9;
+        // XXX: This (u32*) cast is discarding the const qualifier from gEReaderLinkData_Start
+        EReader_Load(&gEReaderData, gEReaderLinkData_End - gEReaderLinkData_Start, (u32*)gEReaderLinkData_Start);
+        data->state = ER_STATE_TRANSFER;
         break;
-    case 9:
-        data->unkE = sub_81D4DE8(&gUnknown_03006370);
-        if (data->unkE)
-            data->unk8 = 10;
+    case ER_STATE_TRANSFER:
+        data->status = EReader_Transfer(&gEReaderData);
+        if (data->status != TRANSFER_ACTIVE)
+            data->state = ER_STATE_TRANSFER_END;
         break;
-    case 10:
-        sub_81D4DB8(&gUnknown_03006370);
-        if (data->unkE == 3)
+    case ER_STATE_TRANSFER_END:
+        EReader_Reset(&gEReaderData);
+        if (data->status == TRANSFER_TIMEOUT)
         {
-            data->unk8 = 20;
+            data->state = ER_STATE_LINK_ERROR;
         }
-        else if (data->unkE == 1)
+        else if (data->status == TRANSFER_SUCCESS)
         {
-            sub_81D505C(&data->unk0);
+            ResetTimer(&data->timer);
             AddTextPrinterToWindow1(gJPText_PleaseWaitAMoment);
-            data->unk8 = 11;
+            data->state = ER_STATE_TRANSFER_SUCCESS;
         }
-        else
+        else // TRANSFER_CANCELED
         {
-            data->unk8 = 0;
+            data->state = ER_STATE_START;
         }
         break;
-    case 11:
-        if (sub_81D5064(&data->unk0, 840))
-            data->unk8 = 12;
+    case ER_STATE_TRANSFER_SUCCESS:
+        if (UpdateTimer(&data->timer, 840))
+            data->state = ER_STATE_LOAD_CARD_START;
         break;
-    case 12:
+    case ER_STATE_LOAD_CARD_START:
         OpenEReaderLink();
         AddTextPrinterToWindow1(gJPText_AllowEReaderToLoadCard);
-        data->unk8 = 13;
+        data->state = ER_STATE_LOAD_CARD;
         break;
-    case 13:
-        switch (sub_81D4EE4(&data->unk9, &data->unk0))
+    case ER_STATE_LOAD_CARD:
+        switch (TryReceiveCard(&data->textState, &data->timer))
         {
-            case 0:
-                break;
-            case 2:
-                AddTextPrinterToWindow1(gJPText_Connecting);
-                data->unk8 = 14;
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                CloseLink();
-                data->unk8 = 23;
-                break;
-            case 5:
-                CloseLink();
-                data->unk8 = 21;
-                break;
-            case 3:
-            case 4:
-                CloseLink();
-                data->unk8 = 20;
-                break;
+        case RECV_ACTIVE:
+            break;
+        case RECV_SUCCESS:
+            AddTextPrinterToWindow1(gJPText_Connecting);
+            data->state = ER_STATE_WAIT_RECV_CARD;
+            break;
+        case RECV_CANCELED:
+            PlaySE(SE_SELECT);
+            CloseLink();
+            data->state = ER_STATE_CANCELED_CARD_READ;
+            break;
+        case RECV_TIMEOUT:
+            CloseLink();
+            data->state = ER_STATE_LINK_ERROR_TRY_AGAIN;
+            break;
+        case RECV_ERROR:
+        case RECV_DISCONNECTED:
+            CloseLink();
+            data->state = ER_STATE_LINK_ERROR;
+            break;
         }
         break;
-    case 14:
+    case ER_STATE_WAIT_RECV_CARD:
         if (HasLinkErrorOccurred())
         {
             CloseLink();
-            data->unk8 = 20;
+            data->state = ER_STATE_LINK_ERROR;
         }
         else if (GetBlockReceivedStatus())
         {
             ResetBlockReceivedFlags();
-            data->unk8 = 15;
+            data->state = ER_STATE_VALIDATE_CARD;
         }
         break;
-    case 15:
-        data->unkE = ValidateTrainerHillData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
-        SetCloseLinkCallbackAndType(data->unkE);
-        data->unk8 = 16;
+    case ER_STATE_VALIDATE_CARD:
+        data->status = ValidateTrainerHillData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
+        SetCloseLinkCallbackAndType(data->status);
+        data->state = ER_STATE_WAIT_DISCONNECT;
         break;
-    case 16:
+    case ER_STATE_WAIT_DISCONNECT:
         if (!gReceivedRemoteLinkPlayers)
         {
-            if (data->unkE == 1)
-                data->unk8 = 17;
+            if (data->status == TRUE) // Was data valid?
+                data->state = ER_STATE_SAVE;
             else
-                data->unk8 = 20;
+                data->state = ER_STATE_LINK_ERROR;
         }
         break;
-    case 17:
+    case ER_STATE_SAVE:
         if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
         {
             AddTextPrinterToWindow1(gJPText_ConnectionComplete);
-            sub_81D505C(&data->unk0);
-            data->unk8 = 18;
+            ResetTimer(&data->timer);
+            data->state = ER_STATE_SUCCESS_MSG;
         }
         else
         {
-            data->unk8 = 22;
+            data->state = ER_STATE_SAVE_FAILED;
         }
         break;
-    case 18:
-        if (sub_81D5064(&data->unk0, 120))
+    case ER_STATE_SUCCESS_MSG:
+        if (UpdateTimer(&data->timer, 120))
         {
             AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
             PlayFanfare(MUS_OBTAIN_ITEM);
-            data->unk8 = 19;
+            data->state = ER_STATE_SUCCESS_END;
         }
         break;
-    case 19:
+    case ER_STATE_SUCCESS_END:
         if (IsFanfareTaskInactive() && (JOY_NEW(A_BUTTON | B_BUTTON)))
-            data->unk8 = 26;
+            data->state = ER_STATE_END;
         break;
-    case 23:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_CardReadingHasBeenHalted))
-            data->unk8 = 26;
+    case ER_STATE_CANCELED_CARD_READ:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_CardReadingHasBeenHalted))
+            data->state = ER_STATE_END;
         break;
-    case 20:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ConnectionErrorCheckLink))
-            data->unk8 = 0;
+    case ER_STATE_LINK_ERROR:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_ConnectionErrorCheckLink))
+            data->state = ER_STATE_START;
         break;
-    case 21:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ConnectionErrorTryAgain))
-            data->unk8 = 0;
+    case ER_STATE_LINK_ERROR_TRY_AGAIN:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_ConnectionErrorTryAgain))
+            data->state = ER_STATE_START;
         break;
-    case 22:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_WriteErrorUnableToSaveData))
-            data->unk8 = 0;
+    case ER_STATE_SAVE_FAILED:
+        if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_WriteErrorUnableToSaveData))
+            data->state = ER_STATE_START;
         break;
-    case 26:
-        Free(data->unk10);
+    case ER_STATE_END:
+        Free(data->unusedBuffer);
         DestroyTask(taskId);
         SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);
         break;

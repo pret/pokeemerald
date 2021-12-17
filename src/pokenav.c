@@ -49,7 +49,6 @@ static void Task_RunLoopedTask(u8 taskId);
 static void Task_Pokenav(u8 taskId);
 static void CB2_InitPokenavForTutorial(void);
 
-// TODO: Use MENU ids
 const struct PokenavCallbacks PokenavMenuCallbacks[15] =
 {
     [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
@@ -122,15 +121,15 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeRegionMapSubstruct1,
         .free2 = FreeRegionMapSubstruct2,
     },
-    [POKENAV_CONDITION_PARTY - POKENAV_MENU_IDS_START] =
+    [POKENAV_CONDITION_GRAPH_PARTY - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_PartyCondition,
-        .callback = GetPartyConditionCallback,
-        .open = OpenPartyConditionMenu,
-        .createLoopTask = CreatePartyConditionLoopedTask,
-        .isLoopTaskActive = IsPartyConditionLoopedTaskActive,
-        .free1 = FreePartyConditionSubstruct1,
-        .free2 = FreePartyConditionSubstruct2,
+        .init = PokenavCallback_Init_ConditionGraph_Party,
+        .callback = GetConditionGraphMenuCallback,
+        .open = OpenConditionGraphMenu,
+        .createLoopTask = CreateConditionGraphMenuLoopedTask,
+        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
+        .free1 = FreeConditionGraphMenuSubstruct1,
+        .free2 = FreeConditionGraphMenuSubstruct2,
     },
     [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] =
     {
@@ -142,15 +141,15 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeSearchResultSubstruct1,
         .free2 = FreeSearchResultSubstruct2,
     },
-    [POKENAV_CONDITION_GRAPH_FROM_SEARCH - POKENAV_MENU_IDS_START] =
+    [POKENAV_CONDITION_GRAPH_SEARCH - POKENAV_MENU_IDS_START] =
     {
-        .init = PokenavCallback_Init_ConditionGraphFromSearch,
-        .callback = GetPartyConditionCallback,
-        .open = OpenPartyConditionMenu,
-        .createLoopTask = CreatePartyConditionLoopedTask,
-        .isLoopTaskActive = IsPartyConditionLoopedTaskActive,
-        .free1 = FreePartyConditionSubstruct1,
-        .free2 = FreePartyConditionSubstruct2,
+        .init = PokenavCallback_Init_ConditionGraph_Search,
+        .callback = GetConditionGraphMenuCallback,
+        .open = OpenConditionGraphMenu,
+        .createLoopTask = CreateConditionGraphMenuLoopedTask,
+        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
+        .free1 = FreeConditionGraphMenuSubstruct1,
+        .free2 = FreeConditionGraphMenuSubstruct2,
     },
     [POKENAV_RETURN_CONDITION_SEARCH - POKENAV_MENU_IDS_START] =
     {
@@ -179,8 +178,8 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .open = OpenRibbonsMonList,
         .createLoopTask = CreateRibbonsMonListLoopedTask,
         .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList1,
-        .free2 = FreeRibbonsMonList2,
+        .free1 = FreeRibbonsMonList,
+        .free2 = FreeRibbonsMonMenu,
     },
     [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
     {
@@ -199,8 +198,8 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .open = OpenRibbonsMonListFromRibbonsSummary,
         .createLoopTask = CreateRibbonsMonListLoopedTask,
         .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList1,
-        .free2 = FreeRibbonsMonList2,
+        .free1 = FreeRibbonsMonList,
+        .free2 = FreeRibbonsMonMenu,
     },
 };
 
@@ -212,7 +211,7 @@ u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority)
 {
     u16 taskId;
 
-    if (!IsUpdateLinkStateCBActive())
+    if (!IsOverworldLinkActive())
         taskId = CreateTask(Task_RunLoopedTask, priority);
     else
         taskId = CreateTask(Task_RunLoopedTask_LinkMode, priority);
@@ -288,7 +287,7 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
     s16 *state;
     u32 action;
 
-    if (Overworld_LinkRecvQueueLengthMoreThan2())
+    if (Overworld_IsRecvQueueAtMax())
         return;
 
     task = (LoopedTask)GetWordTaskArg(taskId, 1);

@@ -25,10 +25,10 @@ static const s32 sPowersOfTen[] =
     1000000000,
 };
 
-u8 *StringCopy10(u8 *dest, const u8 *src)
+u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
 {
     u8 i;
-    u32 limit = 10;
+    u32 limit = POKEMON_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
     {
@@ -42,10 +42,10 @@ u8 *StringCopy10(u8 *dest, const u8 *src)
     return &dest[i];
 }
 
-u8 *StringGetEnd10(u8 *str)
+u8 *StringGet_Nickname(u8 *str)
 {
     u8 i;
-    u32 limit = 10;
+    u32 limit = POKEMON_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
         if (str[i] == EOS)
@@ -55,10 +55,10 @@ u8 *StringGetEnd10(u8 *str)
     return &str[i];
 }
 
-u8 *StringCopy7(u8 *dest, const u8 *src)
+u8 *StringCopy_PlayerName(u8 *dest, const u8 *src)
 {
     s32 i;
-    s32 limit = 7;
+    s32 limit = PLAYER_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
     {
@@ -206,7 +206,7 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
         }
         else if (state == WRITING_SPACES)
         {
-            *dest++ = 0x77;
+            *dest++ = CHAR_SPACER;
         }
 
         value = temp;
@@ -262,7 +262,7 @@ u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode
         }
         else if (state == WRITING_SPACES)
         {
-            *dest++ = 0x77;
+            *dest++ = CHAR_SPACER;
         }
 
         value = temp;
@@ -322,7 +322,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
         }
         else if (state == WRITING_SPACES)
         {
-            *dest++ = 0x77;
+            *dest++ = CHAR_SPACER;
         }
 
         value = temp;
@@ -386,7 +386,7 @@ u8 *StringBraille(u8 *dest, const u8 *src)
 {
     const u8 setBrailleFont[] = {
         EXT_CTRL_CODE_BEGIN,
-        EXT_CTRL_CODE_SIZE,
+        EXT_CTRL_CODE_FONT,
         6,
         EOS
     };
@@ -414,7 +414,7 @@ u8 *StringBraille(u8 *dest, const u8 *src)
             break;
         default:
             *dest++ = c;
-            *dest++ = c + 0x40;
+            *dest++ = c + NUM_BRAILLE_CHARS;
             break;
         }
     }
@@ -664,7 +664,7 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_SHADOW]                 = 2,
         [EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW] = 4,
         [EXT_CTRL_CODE_PALETTE]                = 2,
-        [EXT_CTRL_CODE_SIZE]                   = 2,
+        [EXT_CTRL_CODE_FONT]                   = 2,
         [EXT_CTRL_CODE_RESET_SIZE]             = 1,
         [EXT_CTRL_CODE_PAUSE]                  = 2,
         [EXT_CTRL_CODE_PAUSE_UNTIL_PRESS]      = 1,

@@ -22,7 +22,7 @@ FallarborTown_BattleTentCorridor_EventScript_EnterCorridor::
 	closedoor 2, 1
 	waitdooranim
 	setvar VAR_0x8006, 0
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM, 255, 4, 4
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM, 4, 4
 	waitstate
 	releaseall
 	end

@@ -31,14 +31,14 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
-static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void sub_81D24A4(struct ConditionGraph *a0);
-static void sub_81D2634(struct ConditionGraph *a0);
-static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void nullsub_79(void);
-static void SetNextConditionSparkle(struct Sprite *sprite);
-static void SpriteCB_ConditionSparkle(struct Sprite *sprite);
-static void ShowAllConditionSparkles(struct Sprite *sprite);
+static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
+static void ConditionGraph_CalcRightHalf(struct ConditionGraph *);
+static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *);
+static void MoveRelearnerCursorCallback(s32, bool8, struct ListMenu *);
+static void MoveRelearnerDummy(void);
+static void SetNextConditionSparkle(struct Sprite *);
+static void SpriteCB_ConditionSparkle(struct Sprite *);
+static void ShowAllConditionSparkles(struct Sprite *);
 
 static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT] =
 {
@@ -80,46 +80,29 @@ static const u8 sEmptyItemName[] = _("");
 
 static const struct ScanlineEffectParams sConditionGraphScanline =
 {
-    .dmaDest = (void*)REG_ADDR_WIN0H,
+    .dmaDest = &REG_WIN0H,
     .dmaControl = SCANLINE_EFFECT_DMACNT_32BIT,
     .initState = 1,
 };
 
-static const u8 sUnknown_08625410[] =
+static const u8 sConditionToLineLength[MAX_CONDITION + 1] =
 {
-    4,
-    5,
-    6,
-    7,
-    8,
-    9, 9,
-    10, 10,
-    0xB, 0xB,
-    0xC, 0xC,
-    0xD, 0xD,
-    0xD, 0xD,
-    0xE, 0xE, 0xE, 0xE,
-    0xF, 0xF, 0xF, 0xF,
-    0x10, 0x10, 0x10, 0x10, 0x10, 0x10,
-    0x11, 0x11, 0x11, 0x11, 0x11, 0x11,
-    0x12, 0x12, 0x12, 0x12, 0x12, 0x12,
-    0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13,
-    0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14,
-    0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15,
-    0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16,
-    0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17,
-    0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18,
-    0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19,
-    0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A,
-    0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B,
-    0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C,
-    0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D,
-    0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E,
-    0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
-    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-    0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21,
-    0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22,
-    0x23
+     4,  5,  6,  7,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 13,
+    13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17,
+    17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19,
+    19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21,
+    21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23,
+    23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24,
+    24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26,
+    26, 26, 26, 26, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27, 27, 27,
+    27, 27, 27, 27, 27, 27, 27, 28, 28, 28, 28, 28, 28, 28, 28, 28,
+    28, 28, 28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
+    29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+    30, 30, 30, 30, 30, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31,
+    31, 31, 31, 31, 31, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+    32, 32, 32, 32, 32, 32, 32, 32, 33, 33, 33, 33, 33, 33, 33, 33,
+    33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 34, 34, 34, 34, 34,
+    34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 35
 };
 
 
@@ -203,9 +186,13 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 1,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
+
+//--------------
+// Mailbox menu
+//--------------
 
 bool8 MailboxMenu_Alloc(u8 count)
 {
@@ -268,7 +255,7 @@ static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
     length = StringLength(buffer);
     if (length < PLAYER_NAME_LENGTH - 1)
         ConvertInternationalString(buffer, LANGUAGE_JAPANESE);
-    AddTextPrinterParameterized4(windowId, 1, 8, y, 0, 0, sPlayerNameTextColors, -1, buffer);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 8, y, 0, 0, sPlayerNameTextColors, TEXT_SKIP_DRAW, buffer);
 }
 
 u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
@@ -296,7 +283,7 @@ u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
     gMultiuseListMenuTemplate.cursorShadowPal = 3;
     gMultiuseListMenuTemplate.moveCursorFunc = MailboxMenu_MoveCursorFunc;
     gMultiuseListMenuTemplate.itemPrintFunc = MailboxMenu_ItemPrintFunc;
-    gMultiuseListMenuTemplate.fontId = 1;
+    gMultiuseListMenuTemplate.fontId = FONT_NORMAL;
     gMultiuseListMenuTemplate.cursorKind = 0;
     gMultiuseListMenuTemplate.lettersSpacing = 0;
     gMultiuseListMenuTemplate.itemVerticalPadding = 0;
@@ -320,67 +307,83 @@ void MailboxMenu_Free(void)
     Free(sMailboxList);
 }
 
-void InitConditionGraphData(struct ConditionGraph *graph)
+//---------------------------------------
+// Condition graph
+//
+// This is the graph in the Pokénav and
+// Pokéblock case that shows a Pokémon's
+// conditions (Beauty, Tough, etc.).
+// It works by using scanlines to
+// selectively reveal a bg that has been
+// filled with the graph color.
+//---------------------------------------
+
+#define SHIFT_RIGHT_ADJUSTED(n, s)(((n) >> (s)) + (((n) >> ((s) - 1)) & 1))
+
+void ConditionGraph_Init(struct ConditionGraph *graph)
 {
     u8 i, j;
 
-    for (j = 0; j < FLAVOR_COUNT; j++)
+    for (j = 0; j < CONDITION_COUNT; j++)
     {
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < CONDITION_GRAPH_UPDATE_STEPS; i++)
         {
-            graph->unk64[i][j].unk0 = 0;
-            graph->unk64[i][j].unk2 = 0;
-        }
-        for (i = 0; i < 4; i++)
-        {
-            graph->stat[i][j] = 0;
-            graph->unk14[i][j].unk0 = 155;
-            graph->unk14[i][j].unk2 = 91;
+            graph->newPositions[i][j].x = 0;
+            graph->newPositions[i][j].y = 0;
         }
 
-        graph->unk12C[j].unk0 = 0;
-        graph->unk12C[j].unk2 = 0;
+        for (i = 0; i < CONDITION_GRAPH_LOAD_MAX; i++)
+        {
+            graph->conditions[i][j] = 0;
+            graph->savedPositions[i][j].x = CONDITION_GRAPH_CENTER_X;
+            graph->savedPositions[i][j].y = CONDITION_GRAPH_CENTER_Y;
+        }
+
+        graph->curPositions[j].x = 0;
+        graph->curPositions[j].y = 0;
     }
 
-    graph->unk354 = 0;
-    graph->unk352 = 0;
+    graph->needsDraw = FALSE;
+    graph->updateCounter = 0;
 }
 
-void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
+// Fills the newPositions array with incremental positions between
+// old and new for the graph transition when switching between Pokémon.
+void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new)
 {
     u16 i, j;
-    s32 r5, r6;
+    s32 coord, increment;
 
-    for (i = 0; i < FLAVOR_COUNT; i++)
+    for (i = 0; i < CONDITION_COUNT; i++)
     {
-        r5 = arg1[i].unk0 << 8;
-        r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / 10;
-        for (j = 0; j < 9; j++)
+        coord = old[i].x << 8;
+        increment = ((new[i].x - old[i].x) << 8) / CONDITION_GRAPH_UPDATE_STEPS;
+        for (j = 0; j < CONDITION_GRAPH_UPDATE_STEPS - 1; j++)
         {
-            graph->unk64[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
-            r5 += r6;
+            graph->newPositions[j][i].x = SHIFT_RIGHT_ADJUSTED(coord, 8);
+            coord += increment;
         }
-        graph->unk64[j][i].unk0 = arg2[i].unk0;
+        graph->newPositions[j][i].x = new[i].x;
 
-        r5 = arg1[i].unk2 << 8;
-        r6 = ((arg2[i].unk2 - arg1[i].unk2) << 8) / 10;
-        for (j = 0; j < 9; j++)
+        coord = old[i].y << 8;
+        increment = ((new[i].y - old[i].y) << 8) / CONDITION_GRAPH_UPDATE_STEPS;
+        for (j = 0; j < CONDITION_GRAPH_UPDATE_STEPS - 1; j++)
         {
-            graph->unk64[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
-            r5 += r6;
+            graph->newPositions[j][i].y = SHIFT_RIGHT_ADJUSTED(coord, 8);
+            coord += increment;
         }
-        graph->unk64[j][i].unk2 = arg2[i].unk2;
+        graph->newPositions[j][i].y = new[i].y;
     }
 
-    graph->unk352 = 0;
+    graph->updateCounter = 0;
 }
 
-bool32 TransitionConditionGraph(struct ConditionGraph *graph)
+bool8 ConditionGraph_TryUpdate(struct ConditionGraph *graph)
 {
-    if (graph->unk352 < 10)
+    if (graph->updateCounter < CONDITION_GRAPH_UPDATE_STEPS)
     {
-        sub_81D2230(graph);
-        return (++graph->unk352 != 10);
+        ConditionGraph_Update(graph);
+        return (++graph->updateCounter != CONDITION_GRAPH_UPDATE_STEPS);
     }
     else
     {
@@ -388,293 +391,315 @@ bool32 TransitionConditionGraph(struct ConditionGraph *graph)
     }
 }
 
-void InitConditionGraphState(struct ConditionGraph *graph)
+void ConditionGraph_InitResetScanline(struct ConditionGraph *graph)
 {
-    graph->state = 0;
+    graph->scanlineResetState = 0;
 }
 
-bool8 SetupConditionGraphScanlineParams(struct ConditionGraph *graph)
+bool8 ConditionGraph_ResetScanline(struct ConditionGraph *graph)
 {
     struct ScanlineEffectParams params;
 
-    switch (graph->state)
+    switch (graph->scanlineResetState)
     {
     case 0:
         ScanlineEffect_Clear();
-        graph->state++;
+        graph->scanlineResetState++;
         return TRUE;
     case 1:
         params = sConditionGraphScanline;
         ScanlineEffect_SetParams(params);
-        graph->state++;
+        graph->scanlineResetState++;
         return FALSE;
     default:
         return FALSE;
     }
 }
 
-void sub_81D2108(struct ConditionGraph *graph)
+void ConditionGraph_Draw(struct ConditionGraph *graph)
 {
     u16 i;
 
-    if (graph->unk354 == 0)
+    if (!graph->needsDraw)
         return;
 
-    sub_81D24A4(graph);
-    sub_81D2634(graph);
+    ConditionGraph_CalcRightHalf(graph);
+    ConditionGraph_CalcLeftHalf(graph);
 
-    for (i = 0; i < 66; i++)
+    for (i = 0; i < CONDITION_GRAPH_HEIGHT; i++)
     {
-        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (graph->unk140[i][0] << 8) | (graph->unk140[i][1]);
-        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (graph->unk248[i][0] << 8) | (graph->unk248[i][1]);
+        // Draw right half
+        gScanlineEffectRegBuffers[1][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 0] = // double assignment
+        gScanlineEffectRegBuffers[0][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 0] = (graph->scanlineRight[i][0] << 8) | (graph->scanlineRight[i][1]);
+        // Draw left half
+        gScanlineEffectRegBuffers[1][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 1] = // double assignment
+        gScanlineEffectRegBuffers[0][(i + CONDITION_GRAPH_TOP_Y - 1) * 2 + 1] = (graph->scanlineLeft[i][0] << 8) | (graph->scanlineLeft[i][1]);
     }
 
-    graph->unk354 = 0;
+    graph->needsDraw = FALSE;
 }
 
-void SetConditionGraphIOWindows(u8 bg)
+void ConditionGraph_InitWindow(u8 bg)
 {
     u32 flags;
 
-    if (bg > 3)
+    if (bg >= NUM_BACKGROUNDS)
         bg = 0;
 
     // Unset the WINOUT flag for the bg.
     flags = (WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ) & ~(1 << bg);
 
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 0, DISPLAY_WIDTH));
-    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE( 0, 155));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(56, 121));
-    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(56, 121));
+    // Set limits for graph data
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 0, DISPLAY_WIDTH)); // Right side horizontal
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE( 0, CONDITION_GRAPH_CENTER_X)); // Left side horizontal
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(CONDITION_GRAPH_TOP_Y, CONDITION_GRAPH_BOTTOM_Y)); // Right side vertical
+    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(CONDITION_GRAPH_TOP_Y, CONDITION_GRAPH_BOTTOM_Y)); // Left side vertical
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, flags);
 }
 
-void sub_81D2230(struct ConditionGraph *graph)
+void ConditionGraph_Update(struct ConditionGraph *graph)
 {
     u16 i;
-    for (i = 0; i < FLAVOR_COUNT; i++)
-        graph->unk12C[i] = graph->unk64[graph->unk352][i];
+    for (i = 0; i < CONDITION_COUNT; i++)
+        graph->curPositions[i] = graph->newPositions[graph->updateCounter][i];
 
-    graph->unk354 = 1;
+    graph->needsDraw = TRUE;
 }
 
-static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 *arg5)
+static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline, struct UCoords16 *pos1, struct UCoords16 *pos2, bool8 dir, u16 *overflowScanline)
 {
-    u16 i, r8, r10, r0, var_30;
+    u16 i, height, top, bottom, x2;
     u16 *ptr;
-    s32 r4, var_2C;
+    s32 x, xIncrement = 0;
 
-    var_2C = 0;
-    if (arg2->unk2 < arg3->unk2)
+    if (pos1->y < pos2->y)
     {
-        r10 = arg2->unk2;
-        r0 = arg3->unk2;
-        r4 = arg2->unk0 << 10;
-        var_30 = arg3->unk0;
-        r8 = r0 - r10;
-        if (r8 != 0)
-            var_2C = ((var_30 - arg2->unk0) << 10) / r8;
+        top = pos1->y;
+        bottom = pos2->y;
+        x = pos1->x << 10;
+        x2 = pos2->x;
+        height = bottom - top;
+        if (height != 0)
+            xIncrement = ((x2 - pos1->x) << 10) / height;
     }
     else
     {
-        r0 = arg2->unk2;
-        r10 = arg3->unk2;
-        r4 = arg3->unk0 << 10;
-        var_30 = arg2->unk0;
-        r8 = r0 - r10;
-        if (r8 != 0)
-            var_2C = ((var_30 - arg3->unk0) << 10) / r8;
+        bottom = pos1->y;
+        top = pos2->y;
+        x = pos2->x << 10;
+        x2 = pos1->x;
+        height = bottom - top;
+        if (height != 0)
+            xIncrement = ((x2 - pos2->x) << 10) / height;
     }
 
-    r8++;
-    if (arg5 == NULL)
+    height++;
+    if (overflowScanline == NULL)
     {
-        arg1 += (r10 - 56) * 2;
-        for (i = 0; i < r8; i++)
+        scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        for (i = 0; i < height; i++)
         {
-            arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            r4 += var_2C;
-            arg1 += 2;
+            scanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
+            x += xIncrement;
+            scanline += 2;
         }
 
-        ptr = arg1 - 2;
+        ptr = scanline - 2;
     }
-    else if (var_2C > 0)
+    else if (xIncrement > 0)
     {
-        arg5 += (r10 - 56) * 2;
+        overflowScanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
         // Less readable than the other loops, but it has to be written this way to match.
-        for (i = 0; i < r8; arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4, r4 += var_2C, arg5 += 2, i++)
+        for (i = 0; i < height; overflowScanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir, x += xIncrement, overflowScanline += 2, i++)
         {
-            if (r4 >= (155 << 10))
+            if (x >= (CONDITION_GRAPH_CENTER_X << 10))
                 break;
         }
 
-        graph->unk350 = r10 + i;
-        arg1 += (graph->unk350 - 56) * 2;
-        for (; i < r8; i++)
+        graph->bottom = top + i;
+        scanline += (graph->bottom - CONDITION_GRAPH_TOP_Y) * 2;
+        for (; i < height; i++)
         {
-            arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            r4 += var_2C;
-            arg1 += 2;
+            scanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
+            x += xIncrement;
+            scanline += 2;
         }
 
-        ptr = arg1 - 2;
+        ptr = scanline - 2;
     }
-    else if (var_2C < 0)
+    else if (xIncrement < 0)
     {
-        arg1 += (r10 - 56) * 2;
-        for (i = 0; i < r8; i++)
+        scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        for (i = 0; i < height; i++)
         {
-            arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            if (r4 < (155 << 10))
+            scanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
+            if (x < (CONDITION_GRAPH_CENTER_X << 10))
             {
-                arg1[arg4] = 155;
+                scanline[dir] = CONDITION_GRAPH_CENTER_X;
                 break;
             }
-            r4 += var_2C;
-            arg1 += 2;
+            x += xIncrement;
+            scanline += 2;
         }
 
-        graph->unk350 = r10 + i;
-        arg5 += (graph->unk350 - 56) * 2;
-        for (; i < r8; i++)
+        graph->bottom = top + i;
+        overflowScanline += (graph->bottom - CONDITION_GRAPH_TOP_Y) * 2;
+        for (; i < height; i++)
         {
-            arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
-            r4 += var_2C;
-            arg5 += 2;
+            overflowScanline[dir] = SHIFT_RIGHT_ADJUSTED(x, 10) + dir;
+            x += xIncrement;
+            overflowScanline += 2;
         }
 
-        ptr = arg5 - 2;
+        ptr = overflowScanline - 2;
     }
     else
     {
-        graph->unk350 = r10;
-        arg1 += (r10 - 56) * 2;
-        arg5 += (r10 - 56) * 2;
-        arg1[1] = arg2->unk0 + 1;
-        arg5[0] = arg3->unk0;
-        arg5[1] = 155;
+        graph->bottom = top;
+        scanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        overflowScanline += (top - CONDITION_GRAPH_TOP_Y) * 2;
+        scanline[1] = pos1->x + 1;
+        overflowScanline[0] = pos2->x;
+        overflowScanline[1] = CONDITION_GRAPH_CENTER_X;
         return;
     }
 
-    ptr[arg4] = arg4 + var_30;
+    ptr[dir] = dir + x2;
 }
 
-static void sub_81D24A4(struct ConditionGraph *graph)
+static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
 {
-    u16 i, r6, varMax;
+    u16 i, y, bottom;
 
-    if (graph->unk12C[0].unk2 < graph->unk12C[1].unk2)
+    // Calculate Cool -> Beauty line
+    if (graph->curPositions[GRAPH_COOL].y < graph->curPositions[GRAPH_BEAUTY].y)
     {
-        r6 = graph->unk12C[0].unk2;
-        sub_81D2278(graph, graph->unk140[0], &graph->unk12C[0], &graph->unk12C[1], 1, NULL);
+        y = graph->curPositions[GRAPH_COOL].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_COOL], &graph->curPositions[GRAPH_BEAUTY], TRUE, NULL);
     }
     else
     {
-        r6 = graph->unk12C[1].unk2;
-        sub_81D2278(graph, graph->unk140[0], &graph->unk12C[1], &graph->unk12C[0], 0, NULL);
+        y = graph->curPositions[GRAPH_BEAUTY].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_BEAUTY], &graph->curPositions[GRAPH_COOL], FALSE, NULL);
     }
 
-    sub_81D2278(graph, graph->unk140[0], &graph->unk12C[1], &graph->unk12C[2], 1, NULL);
+    // Calculate Beauty -> Cute line
+    // No need for conditional, positions on the Beauty line are always above the Cute line
+    ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_BEAUTY], &graph->curPositions[GRAPH_CUTE], TRUE, NULL);
 
-    i = (graph->unk12C[2].unk2 <= graph->unk12C[3].unk2);
-    sub_81D2278(graph, graph->unk140[0], &graph->unk12C[2], &graph->unk12C[3], i, graph->unk248[0]);
-    for (i = 56; i < r6; i++)
+    // Calculate Cute -> Tough line (includes left scanline because this crosses the halfway point)
+    i = (graph->curPositions[GRAPH_CUTE].y <= graph->curPositions[GRAPH_SMART].y);
+    ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_CUTE], &graph->curPositions[GRAPH_SMART], i, graph->scanlineLeft[0]);
+
+    // Clear down to new top
+    for (i = CONDITION_GRAPH_TOP_Y; i < y; i++)
     {
-        graph->unk140[i - 56][0] = 0;
-        graph->unk140[i - 56][1] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
-        graph->unk140[i - 56][0] = 155;
+    for (i = graph->curPositions[GRAPH_COOL].y; i <= graph->bottom; i++)
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = CONDITION_GRAPH_CENTER_X;
 
-    varMax = max(graph->unk350, graph->unk12C[2].unk2);
-    for (i = varMax + 1; i < 122; i++)
+    // Clear after new bottom
+    bottom = max(graph->bottom, graph->curPositions[GRAPH_CUTE].y);
+    for (i = bottom + 1; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        graph->unk140[i - 56][0] = 0;
-        graph->unk140[i - 56][1] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = 56; i < 122; i++)
+    for (i = CONDITION_GRAPH_TOP_Y; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        if (graph->unk140[i - 56][0] == 0 && graph->unk140[i - 56][1] != 0)
-            graph->unk140[i - 56][0] = 155;
+        if (graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] == 0
+         && graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][1] != 0)
+            graph->scanlineRight[i - CONDITION_GRAPH_TOP_Y][0] = CONDITION_GRAPH_CENTER_X;
     }
 }
 
-static void sub_81D2634(struct ConditionGraph *graph)
+static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *graph)
 {
-    s32 i, r6, varMax;
+    s32 i, y, bottom;
 
-    if (graph->unk12C[0].unk2 < graph->unk12C[4].unk2)
+    // Calculate Cool -> Tough line
+    if (graph->curPositions[GRAPH_COOL].y < graph->curPositions[GRAPH_TOUGH].y)
     {
-        r6 = graph->unk12C[0].unk2;
-        sub_81D2278(graph, graph->unk248[0], &graph->unk12C[0], &graph->unk12C[4], 0, NULL);
+        y = graph->curPositions[GRAPH_COOL].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineLeft[0], &graph->curPositions[GRAPH_COOL], &graph->curPositions[GRAPH_TOUGH], FALSE, NULL);
     }
     else
     {
-        r6 = graph->unk12C[4].unk2;
-        sub_81D2278(graph, graph->unk248[0], &graph->unk12C[4], &graph->unk12C[0], 1, NULL);
+        y = graph->curPositions[GRAPH_TOUGH].y;
+        ConditionGraph_CalcLine(graph, graph->scanlineLeft[0], &graph->curPositions[GRAPH_TOUGH], &graph->curPositions[GRAPH_COOL], TRUE, NULL);
     }
 
-    sub_81D2278(graph, graph->unk248[0], &graph->unk12C[4], &graph->unk12C[3], 0, NULL);
+    // Calculate Tough -> Smart line
+    // No need for conditional, positions on the Tough line are always above the Smart line
+    ConditionGraph_CalcLine(graph, graph->scanlineLeft[0], &graph->curPositions[GRAPH_TOUGH], &graph->curPositions[GRAPH_SMART], FALSE, NULL);
 
-    for (i = 56; i < r6; i++)
+    // Clear down to new top
+    for (i = CONDITION_GRAPH_TOP_Y; i < y; i++)
     {
-        graph->unk140[i + 10][0] = 0;
-        graph->unk140[i + 10][1] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
-        graph->unk140[i + 10][1] = 155;
+    for (i = graph->curPositions[GRAPH_COOL].y; i <= graph->bottom; i++)
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][1] = CONDITION_GRAPH_CENTER_X;
 
-    varMax = max(graph->unk350, graph->unk12C[3].unk2 + 1);
-    for (i = varMax; i < 122; i++)
+    // Clear after new bottom
+    bottom = max(graph->bottom, graph->curPositions[GRAPH_SMART].y + 1);
+    for (i = bottom; i <= CONDITION_GRAPH_BOTTOM_Y; i++)
     {
-        graph->unk140[i + 10][0] = 0;
-        graph->unk140[i + 10][1] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][0] = 0;
+        graph->scanlineLeft[i - CONDITION_GRAPH_TOP_Y][1] = 0;
     }
 
-    for (i = 0; i < 66; i++)
+    for (i = 0; i < CONDITION_GRAPH_HEIGHT; i++)
     {
-        if (graph->unk248[i][0] >= graph->unk248[i][1])
+        if (graph->scanlineLeft[i][0] >= graph->scanlineLeft[i][1])
         {
-            graph->unk248[i][1] = 0;
-            graph->unk248[i][0] = 0;
+            graph->scanlineLeft[i][1] = 0;
+            graph->scanlineLeft[i][0] = 0;
         }
     }
 }
 
-void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1)
+void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions)
 {
-    u8 r2, r7;
-    s8 r12;
+    u8 lineLength, sinIdx;
+    s8 posIdx;
     u16 i;
 
-    r2 = sUnknown_08625410[*(arg0++)];
-    arg1->unk0 = 155;
-    arg1->unk2 = 91 - r2;
+    // Cool is straight up-and-down (not angled), so no need for Sin
+    lineLength = sConditionToLineLength[*(conditions++)];
+    positions[GRAPH_COOL].x = CONDITION_GRAPH_CENTER_X;
+    positions[GRAPH_COOL].y = CONDITION_GRAPH_CENTER_Y - lineLength;
 
-    r7 = 64;
-    r12 = 0;
-    for (i = 1; i < 5; i++)
+    sinIdx = 64;
+    posIdx = GRAPH_COOL;
+    for (i = 1; i < CONDITION_COUNT; i++)
     {
-        r7 += 51;
-        if (--r12 < 0)
-            r12 = 4;
+        sinIdx += 51;
+        if (--posIdx < 0)
+            posIdx = CONDITION_COUNT - 1;
 
-        if (r12 == 2)
-            r7++;
+        if (posIdx == GRAPH_CUTE)
+            sinIdx++;
 
-        r2 = sUnknown_08625410[*(arg0++)];
-        arg1[r12].unk0 = 155 + ((r2 * gSineTable[64 + r7]) >> 8);
-        arg1[r12].unk2 = 91  - ((r2 * gSineTable[r7]) >> 8);
+        lineLength = sConditionToLineLength[*(conditions++)];
+        positions[posIdx].x = CONDITION_GRAPH_CENTER_X + ((lineLength * gSineTable[64 + sinIdx]) >> 8);
+        positions[posIdx].y = CONDITION_GRAPH_CENTER_Y - ((lineLength * gSineTable[sinIdx]) >> 8);
 
-        if (r12 < 3 && (r2 != 32 || r12 != 2))
-            arg1[r12].unk0 = 156 + ((r2 * gSineTable[64 + r7]) >> 8);
+        if (posIdx <= GRAPH_CUTE && (lineLength != 32 || posIdx != GRAPH_CUTE))
+            positions[posIdx].x++;
     }
 }
+
+//----------------
+// Move relearner
+//----------------
 
 void InitMoveRelearnerWindows(bool8 useContextWindow)
 {
@@ -683,12 +708,10 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 
-    for (i = 0; i < 5; i++)
-    {
+    for (i = 0; i < ARRAY_COUNT(sMoveRelearnerWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(1));
-    }
 
     if (!useContextWindow)
     {
@@ -704,11 +727,11 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     PutWindowTilemap(3);
     DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
     DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
-    nullsub_79();
+    MoveRelearnerDummy();
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void nullsub_79(void)
+static void MoveRelearnerDummy(void)
 {
 
 }
@@ -720,13 +743,10 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
     gMultiuseListMenuTemplate.items = items;
 
     if (numChoices < 6)
-    {
         gMultiuseListMenuTemplate.maxShowed = numChoices;
-    }
     else
-    {
         gMultiuseListMenuTemplate.maxShowed = 6;
-    }
+
     return gMultiuseListMenuTemplate.maxShowed;
 }
 
@@ -734,36 +754,36 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 {
     s32 x;
     const struct BattleMove *move;
-    u8 buffer[0x20];
+    u8 buffer[32];
     const u8 *str;
 
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     str = gText_MoveRelearnerBattleMoves;
-    x = GetStringCenterAlignXOffset(1, str, 0x80);
-    AddTextPrinterParameterized(0, 1, str, x, 1, TEXT_SPEED_FF, NULL);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPP;
-    AddTextPrinterParameterized(0, 1, str, 4, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x29, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPower;
-    x = GetStringRightAlignXOffset(1, str, 0x6A);
-    AddTextPrinterParameterized(0, 1, str, x, 0x19, TEXT_SPEED_FF, NULL);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x6A);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAccuracy;
-    x = GetStringRightAlignXOffset(1, str, 0x6A);
-    AddTextPrinterParameterized(0, 1, str, x, 0x29, TEXT_SPEED_FF, NULL);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x6A);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
     if (chosenMove == LIST_CANCEL)
     {
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         return;
     }
     move = &gBattleMoves[chosenMove];
     str = gTypeNames[move->type];
-    AddTextPrinterParameterized(0, 1, str, 4, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
 
-    x = 4 + GetStringWidth(1, gText_MoveRelearnerPP, 0);
+    x = 4 + GetStringWidth(FONT_NORMAL, gText_MoveRelearnerPP, 0);
     ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    AddTextPrinterParameterized(0, 1, buffer, x, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, buffer, x, 0x29, TEXT_SKIP_DRAW, NULL);
 
     if (move->power < 2)
     {
@@ -774,7 +794,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(0, 1, str, 0x6A, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x19, TEXT_SKIP_DRAW, NULL);
 
     if (move->accuracy == 0)
     {
@@ -785,10 +805,10 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(0, 1, str, 0x6A, 0x29, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
 
     str = gMoveDescriptionPointers[chosenMove - 1];
-    AddTextPrinterParameterized(0, 7, str, 0, 0x41, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
 }
 
 static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
@@ -800,31 +820,31 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     MoveRelearnerShowHideHearts(chosenMove);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     str = gText_MoveRelearnerContestMovesTitle;
-    x = GetStringCenterAlignXOffset(1, str, 0x80);
-    AddTextPrinterParameterized(1, 1, str, x, 1, TEXT_SPEED_FF, NULL);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAppeal;
-    x = GetStringRightAlignXOffset(1, str, 0x5C);
-    AddTextPrinterParameterized(1, 1, str, x, 0x19, TEXT_SPEED_FF, NULL);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x5C);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerJam;
-    x = GetStringRightAlignXOffset(1, str, 0x5C);
-    AddTextPrinterParameterized(1, 1, str, x, 0x29, TEXT_SPEED_FF, NULL);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x5C);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
 
     if (chosenMove == MENU_NOTHING_CHOSEN)
     {
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         return;
     }
 
     move = &gContestMoves[chosenMove];
     str = gContestMoveTypeTextPointers[move->contestCategory];
-    AddTextPrinterParameterized(1, 1, str, 4, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
 
     str = gContestEffectDescriptionPointers[move->effect];
-    AddTextPrinterParameterized(1, 7, str, 0, 0x41, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, FONT_NARROW, str, 0, 0x41, TEXT_SKIP_DRAW, NULL);
 
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -842,7 +862,7 @@ void MoveRelearnerPrintText(u8 *str)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     gTextFlags.canABSpeedUpPrint = TRUE;
     speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized2(3, 1, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
+    AddTextPrinterParameterized2(3, FONT_NORMAL, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
 }
 
 bool16 MoveRelearnerRunTextPrinters(void)
@@ -855,6 +875,10 @@ void MoveRelearnerCreateYesNoMenu(void)
 {
     CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
 }
+
+//----------------
+// Condition menu
+//----------------
 
 s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
 {
@@ -895,7 +919,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     if (GetBoxOrPartyMonData(box, mon, MON_DATA_IS_EGG, NULL))
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
     GetBoxOrPartyMonData(box, mon, MON_DATA_NICKNAME, dst);
-    StringGetEnd10(dst);
+    StringGet_Nickname(dst);
     species = GetBoxOrPartyMonData(box, mon, MON_DATA_SPECIES, NULL);
     if (box == TOTAL_BOXES_COUNT) // Party mon.
     {
@@ -1010,7 +1034,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
     }
 }
 
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
@@ -1019,25 +1043,23 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 
 
     if (partyId != numMons)
     {
-        graph->stat[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        graph->stat[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        graph->stat[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        graph->stat[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        graph->stat[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        graph->conditions[id][CONDITION_COOL] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        graph->conditions[id][CONDITION_TOUGH] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        graph->conditions[id][CONDITION_SMART] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        graph->conditions[id][CONDITION_CUTE] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        graph->conditions[id][CONDITION_BEAUTY] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
 
-        sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
-                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
-                 : 9;
+        numSparkles[id] = GET_NUM_CONDITION_SPARKLES(GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL));
 
-        sub_81D2754(graph->stat[id], graph->unk14[id]);
+        ConditionGraph_CalcPositions(graph->conditions[id], graph->savedPositions[id]);
     }
     else
     {
-        for (i = 0; i < FLAVOR_COUNT; i++)
+        for (i = 0; i < CONDITION_COUNT; i++)
         {
-            graph->stat[id][i] = 0;
-            graph->unk14[id][i].unk0 = 155;
-            graph->unk14[id][i].unk2 = 91;
+            graph->conditions[id][i] = 0;
+            graph->savedPositions[id][i].x = CONDITION_GRAPH_CENTER_X;
+            graph->savedPositions[id][i].y = CONDITION_GRAPH_CENTER_Y;
         }
     }
 }
@@ -1076,17 +1098,17 @@ bool8 MoveConditionMonOffscreen(s16 *x)
     return (*x != -80);
 }
 
-bool8 TryUpdateConditionMonTransitionOn(struct ConditionGraph *graph, s16 *x)
+bool8 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 graphUpdating = TransitionConditionGraph(graph);
+    bool8 graphUpdating = ConditionGraph_TryUpdate(graph);
     bool8 monUpdating = MoveConditionMonOnscreen(x);
 
     return (graphUpdating || monUpdating);
 }
 
-bool8 TryUpdateConditionMonTransitionOff(struct ConditionGraph *graph, s16 *x)
+bool8 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 graphUpdating = TransitionConditionGraph(graph);
+    bool8 graphUpdating = ConditionGraph_TryUpdate(graph);
     bool8 monUpdating = MoveConditionMonOffscreen(x);
 
     return (graphUpdating || monUpdating);
@@ -1145,8 +1167,8 @@ static const union AnimCmd sAnim_ConditionSelectionIcon_Unselected[] =
 
 static const union AnimCmd *const sAnims_ConditionSelectionIcon[] =
 {
-    sAnim_ConditionSelectionIcon_Selected,
-    sAnim_ConditionSelectionIcon_Unselected
+    [CONDITION_ICON_SELECTED] = sAnim_ConditionSelectionIcon_Selected,
+    [CONDITION_ICON_UNSELECTED] = sAnim_ConditionSelectionIcon_Unselected
 };
 
 // Just loads the generic data, up to the caller to load the actual sheet/pal for the specific mon
@@ -1512,7 +1534,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
     {
 
         AddTextPrinterParameterized3(windowId,
-                                     1,
+                                     FONT_NORMAL,
                                      0,
                                      15 * i,
                                      color,
@@ -1521,7 +1543,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
 
         StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_Dash);
         AddTextPrinterParameterized3(windowId,
-                                     1,
+                                     FONT_NORMAL,
                                      56,
                                      15 * i,
                                      color,
@@ -1534,7 +1556,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
 
         ConvertIntToDecimalStringN(text, abs(statsDiff[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
         AddTextPrinterParameterized3(windowId,
-                                     1,
+                                     FONT_NORMAL,
                                      56 + x,
                                      15 * i,
                                      color,
@@ -1576,7 +1598,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
         x = 6 * (4 - numDigits);
 
         AddTextPrinterParameterized3(windowId,
-                                     1,
+                                     FONT_NORMAL,
                                      0,
                                      15 * i,
                                      color,
@@ -1584,7 +1606,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
                                      sLvlUpStatStrings[i]);
 
         AddTextPrinterParameterized3(windowId,
-                                     1,
+                                     FONT_NORMAL,
                                      56 + x,
                                      15 * i,
                                      color,

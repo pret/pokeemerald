@@ -81,7 +81,7 @@ voicegroup023::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 2, 0, 1, 7, 0
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4890, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 1
 	voice_square_1_alt 60, 0, 0, 2, 0, 1, 7, 0
 	voice_square_2_alt 60, 0, 2, 0, 1, 6, 1
 	voice_square_1_alt 60, 0, 0, 2, 0, 1, 6, 1

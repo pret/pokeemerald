@@ -267,14 +267,14 @@ static void InitContestPaintingWindow(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
     sWindowId = AddWindow(&sWindowTemplate);
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sWindowId);
-    CopyWindowToVram(sWindowId, 3);
+    CopyWindowToVram(sWindowId, COPYWIN_FULL);
     ShowBg(1);
 }
 
@@ -306,8 +306,8 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
         StringExpandPlaceholders(gStringVar4, sMuseumCaptions[category]);
     }
 
-    x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
-    AddTextPrinterParameterized(sWindowId, 1, gStringVar4, x, 1, 0, 0);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
+    AddTextPrinterParameterized(sWindowId, FONT_NORMAL, gStringVar4, x, 1, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 

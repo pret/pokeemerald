@@ -26,6 +26,8 @@ enum {
     BALL_AFFINE_ANIM_4
 };
 
+extern const struct CompressedSpriteSheet gBallSpriteSheets[];
+extern const struct CompressedSpritePalette gBallSpritePalettes[];
 extern const struct SpriteTemplate gBallSpriteTemplates[];
 
 #define POKEBALL_PLAYER_SENDOUT     0xFF

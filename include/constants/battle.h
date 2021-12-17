@@ -306,4 +306,59 @@
 #define B_WAIT_TIME_MED   48
 #define B_WAIT_TIME_SHORT 32
 
+#define CASTFORM_NORMAL     0
+#define CASTFORM_FIRE       1
+#define CASTFORM_WATER      2
+#define CASTFORM_ICE        3
+#define NUM_CASTFORM_FORMS  4
+#define CASTFORM_SUBSTITUTE (1 << 7)
+
+#define FLEE_ITEM    1
+#define FLEE_ABILITY 2
+
+#define B_WIN_TYPE_NORMAL 0
+#define B_WIN_TYPE_ARENA  1
+
+// Window Ids for gStandardBattleWindowTemplates / gBattleArenaWindowTemplates
+#define B_WIN_MSG                 0
+#define B_WIN_ACTION_PROMPT       1 // "What will {x} do?"
+#define B_WIN_ACTION_MENU         2 // "Fight/Pokémon/Bag/Run" menu
+#define B_WIN_MOVE_NAME_1         3 // Top left
+#define B_WIN_MOVE_NAME_2         4 // Top right
+#define B_WIN_MOVE_NAME_3         5 // Bottom left
+#define B_WIN_MOVE_NAME_4         6 // Bottom right
+#define B_WIN_PP                  7
+#define B_WIN_DUMMY               8
+#define B_WIN_PP_REMAINING        9
+#define B_WIN_MOVE_TYPE          10
+#define B_WIN_SWITCH_PROMPT      11 // "Switch which?"
+#define B_WIN_YESNO              12
+#define B_WIN_LEVEL_UP_BOX       13
+#define B_WIN_LEVEL_UP_BANNER    14
+#define B_WIN_VS_PLAYER          15
+#define B_WIN_VS_OPPONENT        16
+#define B_WIN_VS_MULTI_PLAYER_1  17
+#define B_WIN_VS_MULTI_PLAYER_2  18
+#define B_WIN_VS_MULTI_PLAYER_3  19
+#define B_WIN_VS_MULTI_PLAYER_4  20
+#define B_WIN_VS_OUTCOME_DRAW    21
+#define B_WIN_VS_OUTCOME_LEFT    22
+#define B_WIN_VS_OUTCOME_RIGHT   23
+
+// The following are duplicate id values for windows that Battle Arena uses differently.
+#define ARENA_WIN_PLAYER_NAME      15
+#define ARENA_WIN_VS               16
+#define ARENA_WIN_OPPONENT_NAME    17
+#define ARENA_WIN_MIND             18
+#define ARENA_WIN_SKILL            19
+#define ARENA_WIN_BODY             20
+#define ARENA_WIN_JUDGEMENT_TITLE  21
+#define ARENA_WIN_JUDGEMENT_TEXT   22
+
+// Flag for BattlePutTextOnWindow. Never set
+#define B_WIN_COPYTOVRAM (1 << 7)
+
+// Indicator for the party summary bar to display an empty slot.
+#define HP_EMPTY_SLOT 0xFFFF
+
 #endif // GUARD_CONSTANTS_BATTLE_H

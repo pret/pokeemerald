@@ -1,16 +1,16 @@
 	.align 2
 voicegroup113::
 	voice_keysplit_all voicegroup002
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4990, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B49B0, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B49A0, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4970, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4980, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48B0, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48C0, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48D0, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48E0, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48F0, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_23, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_25, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_24, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_21, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_22, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_9, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_10, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_11, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_12, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_13, 0, 7, 15, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 204
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -39,7 +39,7 @@ voicegroup113::
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_slap_bass, 255, 235, 128, 99
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4920, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_16, 0, 7, 15, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -87,7 +87,7 @@ voicegroup113::
 	voice_square_2_alt 60, 0, 3, 0, 7, 7, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4910, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_15, 0, 7, 15, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

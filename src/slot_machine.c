@@ -557,10 +557,10 @@ static struct SpriteFrameImage *sImageTables_DigitalDisplay[NUM_DIG_DISPLAY_SPRI
 // Const rom data.
 static const struct DigitalDisplaySprite *const sDigitalDisplayScenes[];
 static const u16 sUnkPalette[];
-static const u8 sLuckyRoundProbabilities[][3];
+static const u8 sLuckyRoundProbabilities[NUM_SLOT_MACHINE_IDS][MAX_BET];
 static const u8 sBiasTags[];
-static const u16 sLuckyFlagSettings_Top3[];
-static const u16 sLuckyFlagSettings_NotTop3[];
+static const u16 sLuckyFlagSettings_Top3[3];
+static const u16 sLuckyFlagSettings_NotTop3[5];
 static const s16 sDigitalDisplay_SpriteCoords[][2];
 static const SpriteCallback sDigitalDisplay_SpriteCallbacks[];
 static const struct SpriteTemplate *const sSpriteTemplates_DigitalDisplay[NUM_DIG_DISPLAY_SPRITES];
@@ -582,8 +582,8 @@ static const struct SpriteSheet sSlotMachineSpriteSheets[22];
 static const struct SpritePalette sSlotMachineSpritePalettes[];
 static const u16 *const sDigitalDisplay_Pal;
 static const s16 sInitialReelPositions[NUM_REELS][2];
-static const u8 sLuckyFlagProbabilities_Top3[][6];
-static const u8 sLuckyFlagProbabilities_NotTop3[][6];
+static const u8 sLuckyFlagProbabilities_Top3[][NUM_SLOT_MACHINE_IDS];
+static const u8 sLuckyFlagProbabilities_NotTop3[][NUM_SLOT_MACHINE_IDS];
 static const u8 sReeltimeProbabilities_UnluckyGame[][17];
 static const u8 sReelTimeProbabilities_LuckyGame[][17];
 static const u8 sSymToMatch[];
@@ -1253,8 +1253,8 @@ static bool8 SlotAction_HandleBetInput(struct Task *task)
 static bool8 SlotAction_PrintMsg_Need3Coins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
-    CopyWindowToVram(0, 3);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
+    CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOT_ACTION_WAIT_MSG_NEED_3_COINS;
     return FALSE;
 }
@@ -1518,8 +1518,8 @@ static bool8 SlotAction_NoMatches(struct Task *task)
 static bool8 SlotAction_AskQuit(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
-    CopyWindowToVram(0, 3);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
+    CopyWindowToVram(0, COPYWIN_FULL);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = SLOT_ACTION_HANDLE_QUIT_INPUT;
     return FALSE;
@@ -1550,8 +1550,8 @@ static bool8 SlotAction_HandleQuitInput(struct Task *task)
 static bool8 SlotAction_PrintMsg_9999Coins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
-    CopyWindowToVram(0, 3);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
+    CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOT_ACTION_WAIT_MSG_MAX_COINS;
     return FALSE;
 }
@@ -1571,8 +1571,8 @@ static bool8 SlotAction_WaitMsg_9999Coins(struct Task *task)
 static bool8 SlotAction_PrintMsg_NoMoreCoins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
-    CopyWindowToVram(0, 3);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
+    CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOT_ACTION_WAIT_MSG_NO_MORE_COINS;
     return FALSE;
 }
@@ -1651,22 +1651,18 @@ static void DrawLuckyFlags(void)
             if (IsThisRoundLucky())
             {
                 attempts = AttemptsAtLuckyFlags_Top3();
-                if (attempts != 3) // if you found a lucky number
+                if (attempts != ARRAY_COUNT(sLuckyFlagSettings_Top3)) // if you found a lucky number
                 {
                     // attempts == 1:  reelTime flag set
                     sSlotMachine->luckyFlags |= sLuckyFlagSettings_Top3[attempts];
                     if (attempts != 1)
-                    {
                         return;
-                    }
                 }
             }
             // if it's not a lucky round or you got reel time, roll for the lower lucky flags
             attempts = AttemptsAtLuckyFlags_NotTop3();
-            if (attempts != 5)  // if you found a lucky number
-            {
+            if (attempts != ARRAY_COUNT(sLuckyFlagSettings_NotTop3))  // if you found a lucky number
                 sSlotMachine->luckyFlags |= sLuckyFlagSettings_NotTop3[attempts];
-            }
         }
     }
 }
@@ -1704,7 +1700,7 @@ static u8 AttemptsAtLuckyFlags_Top3(void)
 {
     s16 count;
 
-    for (count = 0; count < 3; count++)
+    for (count = 0; count < (int)ARRAY_COUNT(sLuckyFlagSettings_Top3); count++)
     {
         s16 rval = Random() & 0xff;
         s16 value = sLuckyFlagProbabilities_Top3[count][sSlotMachine->machineId];
@@ -1718,7 +1714,7 @@ static u8 AttemptsAtLuckyFlags_NotTop3(void)
 {
     s16 count;
 
-    for (count = 0; count < 5; count++)
+    for (count = 0; count < (int)ARRAY_COUNT(sLuckyFlagSettings_NotTop3); count++)
     {
         s16 rval = Random() & 0xff; // random byte
         s16 value = sLuckyFlagProbabilities_NotTop3[count][sSlotMachine->machineId];
@@ -3444,8 +3440,8 @@ static void InfoBox_DrawWindow(struct Task *task)
 
 static void InfoBox_AddText(struct Task *task)
 {
-    AddTextPrinterParameterized3(1, 1, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
-    CopyWindowToVram(1, 3);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
+    CopyWindowToVram(1, COPYWIN_FULL);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
     task->tState++;
 }
@@ -3456,7 +3452,7 @@ static void InfoBox_AwaitPlayerInput(struct Task *task)
     {
         FillWindowPixelBuffer(1, PIXEL_FILL(0));
         ClearWindowTilemap(1);
-        CopyWindowToVram(1, 1);
+        CopyWindowToVram(1, COPYWIN_MAP);
         RemoveWindow(1);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
         task->tState++;
@@ -4807,27 +4803,83 @@ static const s16 sInitialReelPositions[NUM_REELS][2] = {
     [RIGHT_REEL]  = {0,  2}
 };
 
-static const u8 sLuckyRoundProbabilities[][3] = {
-    {1, 1, 12},
-    {1, 1, 14},
-    {2, 2, 14},
-    {2, 2, 14},
-    {2, 3, 16},
-    {3, 3, 16}
+static const u8 sLuckyRoundProbabilities[NUM_SLOT_MACHINE_IDS][MAX_BET] = {
+    [SLOT_MACHINE_UNLUCKIEST] = {1, 1, 12},
+    [SLOT_MACHINE_UNLUCKIER]  = {1, 1, 14},
+    [SLOT_MACHINE_UNLUCKY]    = {2, 2, 14},
+    [SLOT_MACHINE_LUCKY]      = {2, 2, 14},
+    [SLOT_MACHINE_LUCKIER]    = {2, 3, 16},
+    [SLOT_MACHINE_LUCKIEST]   = {3, 3, 16}
 };
 
-static const u8 sLuckyFlagProbabilities_Top3[][6] = {
-    {25, 25, 30, 40, 40, 50},
-    {25, 25, 30, 30, 35, 35},
-    {25, 25, 30, 25, 25, 30}
+static const u8 sLuckyFlagProbabilities_Top3[][NUM_SLOT_MACHINE_IDS] = {
+    { // Probabilities for LUCKY_BIAS_777
+        [SLOT_MACHINE_UNLUCKIEST] = 25,
+        [SLOT_MACHINE_UNLUCKIER]  = 25,
+        [SLOT_MACHINE_UNLUCKY]    = 30,
+        [SLOT_MACHINE_LUCKY]      = 40,
+        [SLOT_MACHINE_LUCKIER]    = 40,
+        [SLOT_MACHINE_LUCKIEST]   = 50
+    },
+    { // Probabilities for LUCKY_BIAS_REELTIME
+        [SLOT_MACHINE_UNLUCKIEST] = 25,
+        [SLOT_MACHINE_UNLUCKIER]  = 25,
+        [SLOT_MACHINE_UNLUCKY]    = 30,
+        [SLOT_MACHINE_LUCKY]      = 30,
+        [SLOT_MACHINE_LUCKIER]    = 35,
+        [SLOT_MACHINE_LUCKIEST]   = 35
+    },
+    { // Probabilities for LUCKY_BIAS_MIXED_777
+        [SLOT_MACHINE_UNLUCKIEST] = 25,
+        [SLOT_MACHINE_UNLUCKIER]  = 25,
+        [SLOT_MACHINE_UNLUCKY]    = 30,
+        [SLOT_MACHINE_LUCKY]      = 25,
+        [SLOT_MACHINE_LUCKIER]    = 25,
+        [SLOT_MACHINE_LUCKIEST]   = 30
+    }
 };
 
-static const u8 sLuckyFlagProbabilities_NotTop3[][6] = {
-    {20, 25, 25, 20, 25, 25},
-    {12, 15, 15, 18, 19, 22},
-    {25, 25, 25, 30, 30, 40},
-    {25, 25, 20, 20, 15, 15},
-    {40, 40, 35, 35, 40, 40}
+static const u8 sLuckyFlagProbabilities_NotTop3[][NUM_SLOT_MACHINE_IDS] = {
+    { // Probabilities for LUCKY_BIAS_POWER
+        [SLOT_MACHINE_UNLUCKIEST] = 20,
+        [SLOT_MACHINE_UNLUCKIER]  = 25,
+        [SLOT_MACHINE_UNLUCKY]    = 25,
+        [SLOT_MACHINE_LUCKY]      = 20,
+        [SLOT_MACHINE_LUCKIER]    = 25,
+        [SLOT_MACHINE_LUCKIEST]   = 25
+    },
+    { // Probabilities for LUCKY_BIAS_AZURILL
+        [SLOT_MACHINE_UNLUCKIEST] = 12,
+        [SLOT_MACHINE_UNLUCKIER]  = 15,
+        [SLOT_MACHINE_UNLUCKY]    = 15,
+        [SLOT_MACHINE_LUCKY]      = 18,
+        [SLOT_MACHINE_LUCKIER]    = 19,
+        [SLOT_MACHINE_LUCKIEST]   = 22
+    },
+    { // Probabilities for LUCKY_BIAS_LOTAD
+        [SLOT_MACHINE_UNLUCKIEST] = 25,
+        [SLOT_MACHINE_UNLUCKIER]  = 25,
+        [SLOT_MACHINE_UNLUCKY]    = 25,
+        [SLOT_MACHINE_LUCKY]      = 30,
+        [SLOT_MACHINE_LUCKIER]    = 30,
+        [SLOT_MACHINE_LUCKIEST]   = 40
+    },
+    { // Probabilities for LUCKY_BIAS_CHERRY
+        [SLOT_MACHINE_UNLUCKIEST] = 25,
+        [SLOT_MACHINE_UNLUCKIER]  = 25,
+        [SLOT_MACHINE_UNLUCKY]    = 20,
+        [SLOT_MACHINE_LUCKY]      = 20,
+        [SLOT_MACHINE_LUCKIER]    = 15,
+        [SLOT_MACHINE_LUCKIEST]   = 15
+    },
+    { // Probabilities for LUCKY_BIAS_REPLAY
+        [SLOT_MACHINE_UNLUCKIEST] = 40,
+        [SLOT_MACHINE_UNLUCKIER]  = 40,
+        [SLOT_MACHINE_UNLUCKY]    = 35,
+        [SLOT_MACHINE_LUCKY]      = 35,
+        [SLOT_MACHINE_LUCKIER]    = 40,
+        [SLOT_MACHINE_LUCKIEST]   = 40
+    }
 };
 
 static const u8 sReeltimeProbabilities_UnluckyGame[][17] = {
@@ -5708,7 +5760,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Insert =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Stop =
 {
-    .tileTag = 18,
+    .tileTag = GFXTAG_STOP,
     .paletteTag = PALTAG_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
@@ -5741,7 +5793,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Lose =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Bonus =
 {
-    .tileTag = 19,
+    .tileTag = GFXTAG_BONUS,
     .paletteTag = PALTAG_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
@@ -5752,7 +5804,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Bonus =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Big =
 {
-    .tileTag = 20,
+    .tileTag = GFXTAG_BIG,
     .paletteTag = PALTAG_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
@@ -5763,7 +5815,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Big =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Reg =
 {
-    .tileTag = 21,
+    .tileTag = GFXTAG_REG,
     .paletteTag = PALTAG_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,

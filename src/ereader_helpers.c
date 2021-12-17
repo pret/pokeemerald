@@ -16,31 +16,6 @@
 #include "constants/items.h"
 #include "constants/trainer_hill.h"
 
-enum {
-    EREADER_XFR_STATE_INIT = 0,
-    EREADER_XFR_STATE_HANDSHAKE,
-    EREADER_XFR_STATE_START,
-    EREADER_XFR_STATE_TRANSFER,
-    EREADER_XFR_STATE_TRANSFER_DONE,
-    EREADER_XFR_STATE_CHECKSUM,
-    EREADER_XFR_STATE_DONE
-};
-
-#define EREADER_XFER_EXE 1
-#define EREADER_XFER_CHK 2
-#define EREADER_XFER_SHIFT 0
-#define EREADER_XFER_MASK  3
-
-#define EREADER_CANCEL_TIMEOUT 1
-#define EREADER_CANCEL_KEY     2
-#define EREADER_CANCEL_MASK  0xC
-#define EREADER_CANCEL_SHIFT 2
-
-#define EREADER_CHECKSUM_OK  1
-#define EREADER_CHECKSUM_ERR 2
-#define EREADER_CHECKSUM_MASK  0x30
-#define EREADER_CHECKSUM_SHIFT 4
-
 struct SendRecvMgr
 {
     bool8 isParent;
@@ -506,7 +481,7 @@ static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet * hillSe
     }
 
     hillTag->checksum = CalcByteArraySum((u8 *)hillTag->floors, NUM_TRAINER_HILL_FLOORS * sizeof(struct TrHillFloor));
-    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)hillTag) != SAVE_STATUS_OK)
+    if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_HILL, (u8 *)hillTag) != SAVE_STATUS_OK)
         return FALSE;
 
     return TRUE;
@@ -522,7 +497,7 @@ bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
 
 static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 * buffer)
 {
-    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
+    if (TryReadSpecialSaveSector(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;
 
     memcpy(dest, buffer, sizeof(struct EReaderTrainerHillSet));
@@ -562,17 +537,17 @@ int EReader_Send(int size, const void * src)
 
         sendStatus = EReaderHandleTransfer(1, size, src, NULL);
         sSendRecvStatus = sendStatus;
-        if ((sSendRecvStatus & 0x13) == 0x10)
+        if ((sSendRecvStatus & EREADER_XFER_MASK) == 0 && sSendRecvStatus & EREADER_CHECKSUM_OK_MASK)
         {
             result = 0;
             break;
         }
-        else if (sSendRecvStatus & 0x8)
+        else if (sSendRecvStatus & EREADER_CANCEL_KEY_MASK)
         {
             result = 1;
             break;
         }
-        else if (sSendRecvStatus & 0x4)
+        else if (sSendRecvStatus & EREADER_CANCEL_TIMEOUT_MASK)
         {
             result = 2;
             break;
@@ -603,17 +578,17 @@ int EReader_Recv(void * dest)
 
         recvStatus = EReaderHandleTransfer(0, 0, NULL, dest);
         sSendRecvStatus = recvStatus;
-        if ((sSendRecvStatus & 0x13) == 0x10)
+        if ((sSendRecvStatus & EREADER_XFER_MASK) == 0 && sSendRecvStatus & EREADER_CHECKSUM_OK_MASK)
         {
             result = 0;
             break;
         }
-        else if (sSendRecvStatus & 0x8)
+        else if (sSendRecvStatus & EREADER_CANCEL_KEY_MASK)
         {
             result = 1;
             break;
         }
-        else if (sSendRecvStatus & 0x4)
+        else if (sSendRecvStatus & EREADER_CANCEL_TIMEOUT_MASK)
         {
             result = 2;
             break;

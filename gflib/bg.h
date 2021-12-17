@@ -1,16 +1,6 @@
 #ifndef GUARD_BG_H
 #define GUARD_BG_H
 
-struct BGCntrlBitfield // for the I/O registers
-{
-    volatile u16 priority:2;
-    volatile u16 charBaseBlock:2;
-    volatile u16 field_0_2:4;
-    volatile u16 field_1_0:5;
-    volatile u16 areaOverflowMode:1;
-    volatile u16 screenSize:2;
-};
-
 enum
 {
 	BG_ATTR_CHARBASEINDEX = 1,
@@ -29,6 +19,13 @@ enum {
 	BG_TYPE_NORMAL,
 	BG_TYPE_AFFINE,
 	BG_TYPE_NONE = 0xFFFF
+};
+
+// Modes for ChangeBgX / ChangeBgY
+enum {
+	BG_COORD_SET,
+	BG_COORD_ADD,
+	BG_COORD_SUB,
 };
 
 struct BgTemplate
@@ -76,7 +73,7 @@ void CopyToBgTilemapBuffer(u8 bg, const void *src, u16 mode, u16 destOffset);
 void CopyBgTilemapBufferToVram(u8 bg);
 void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height);
 void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, const void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette);
-void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 unused, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, s16 palette1, s16 tileOffset);
+void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, s16 tileOffset, s16 palette2);
 void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height);
 void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette);
 void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, s16 tileNumDelta);

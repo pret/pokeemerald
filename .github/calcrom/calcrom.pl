@@ -1,9 +1,15 @@
 #!/usr/bin/perl
 
 use IPC::Cmd qw[ run ];
+use Getopt::Long;
+
+my $usage = "Usage: calcrom.pl file.map [--data]\n";
+
+my $showData;
+GetOptions("data" => \$showData) or die $usage;
 
 (@ARGV == 1)
-    or die "ERROR: no map file specified.\n";
+    or die $usage;
 open(my $file, $ARGV[0])
     or die "ERROR: could not open file '$ARGV[0]'.\n";
 
@@ -57,14 +63,14 @@ while (my $line = <$file>)
 # though. Uniq is pretty fast!
 my $base_cmd = "nm $elffname | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
 
-# This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
+# This looks for Unknown_, Unknown_, or sub_, followed by an address. Note that
 # it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
-my $undoc_cmd = "grep '[Uu]nknown_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
+my $undoc_cmd = "grep '[Uu]nknown_[0-9a-fA-F]\\{5,7\\}\\|sub_[0-9a-fA-F]\\{5,7\\}'";
 
 # This looks for every symbol with an address at the end of it. Some things are
 # given a name based on their type / location, but still have an unknown purpose.
 # For example, FooMap_EventScript_FFFFFFF.
-my $partial_doc_cmd = "grep '_[0-28][0-9a-fA-F]\\{5,6\\}'";
+my $partial_doc_cmd = "grep '_[0-28][0-9a-fA-F]\\{5,7\\}'";
 
 my $count_cmd = "wc -l";
 
@@ -98,16 +104,19 @@ my $partial_documented_as_string;
 # Performing addition on a string converts it to a number. Any string that fails
 # to convert to a number becomes 0. So if our converted number is 0, but our string
 # is nonzero, then the conversion was an error.
+$undocumented_as_string =~ s/^\s+|\s+$//g;
 my $undocumented = $undocumented_as_string + 0;
-(($undocumented != 0) and ($undocumented_as_string ne "0"))
+(($undocumented != 0) or (($undocumented == 0) and ($undocumented_as_string eq "0")))
     or die "ERROR: Cannot convert string to num: '$undocumented_as_string'";
 
+$partial_documented_as_string =~ s/^\s+|\s+$//g;
 my $partial_documented = $partial_documented_as_string + 0;
-(($partial_documented != 0) and ($partial_documented_as_string ne "0"))
+(($partial_documented != 0) or (($partial_documented == 0) and ($partial_documented_as_string eq "0")))
 	or die "ERROR: Cannot convert string to num: '$partial_documented_as_string'";
 
+$total_syms_as_string =~ s/^\s+|\s+$//g;
 my $total_syms = $total_syms_as_string + 0;
-(($total_syms != 0) and ($total_syms_as_string ne "0"))
+(($total_syms != 0) or (($total_syms == 0) and ($total_syms_as_string eq "0")))
     or die "ERROR: Cannot convert string to num: '$total_syms_as_string'";
 
 ($total_syms != 0)
@@ -149,17 +158,13 @@ else
     print "$undocumented symbols undocumented ($undocPct%)\n";
 }
 
-print "\n";
-my $dataTotal = $srcdata + $data;
-my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
-my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
+if ($showData)
+{
+    print "\n";
+    my $dataTotal = $srcdata + $data;
+    my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
+    my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
 
-if ($data == 0)
-{
-    print "Data porting to C is 100% complete\n"
-}
-else
-{
     print "$dataTotal total bytes of data\n";
     print "$srcdata bytes of data in src ($srcDataPct%)\n";
     print "$data bytes of data in data ($dataPct%)\n";

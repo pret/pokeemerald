@@ -119,8 +119,8 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
     {
         s32 puzzleTileStart;
         u8 puzzleTileNum;
-        s16 x = objectEvents[i].x + 7;
-        s16 y = objectEvents[i].y + 7;
+        s16 x = objectEvents[i].x + MAP_OFFSET;
+        s16 y = objectEvents[i].y + MAP_OFFSET;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         if (!sRotatingTilePuzzle->isTrickHouse)
@@ -134,14 +134,14 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
             continue;
 
         // Object is on a metatile after the puzzle tile section (never occurs, in both cases the puzzle tiles are last)
-        if ((u8)((metatile - puzzleTileStart) / 8) >= 5)
+        if ((u8)((metatile - puzzleTileStart) / METATILE_ROW_WIDTH) >= 5)
             continue;
 
         // Object is on a metatile in puzzle tile section, but not one of the currently rotating color
-        if ((u8)((metatile - puzzleTileStart) / 8) != puzzleNumber)
+        if ((u8)((metatile - puzzleTileStart) / METATILE_ROW_WIDTH) != puzzleNumber)
             continue;
 
-        puzzleTileNum = (u8)((metatile - puzzleTileStart) % 8);
+        puzzleTileNum = (u8)((metatile - puzzleTileStart) % METATILE_ROW_WIDTH);
 
         // First 4 puzzle tiles are the colored arrows
         if (puzzleTileNum < 4)
@@ -211,8 +211,8 @@ void TurnRotatingTileObjects(void)
         s32 rotation;
         s8 tileDifference;
         u8 objectEventId;
-        s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + 7;
-        s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + 7;
+        s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + MAP_OFFSET;
+        s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + MAP_OFFSET;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         // NOTE: The following 2 assignments and if else could all be replaced with rotation = ROTATE_COUNTERCLOCKWISE
@@ -221,7 +221,7 @@ void TurnRotatingTileObjects(void)
         // prevPuzzleTileNum will similarly be a number [0-3] representing the arrow tile the object just moved from
         // All the puzzles are oriented counter-clockwise and can only move 1 step at a time, so the difference between the current tile and the previous tile will always either be -1 or 3 (0-1, 1-2, 2-3, 3-0)
         // Which means tileDifference will always either be -1 or 3 after the below subtraction, and rotation will always be ROTATE_COUNTERCLOCKWISE after the following conditionals
-        tileDifference = (u8)((metatile - puzzleTileStart) % 8);
+        tileDifference = (u8)((metatile - puzzleTileStart) % METATILE_ROW_WIDTH);
         tileDifference -= (sRotatingTilePuzzle->objects[i].prevPuzzleTileNum);
 
         // Always true, see above
@@ -322,8 +322,8 @@ static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
     s32 puzzleTileStart;
     u16 movementType;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
-    s16 x = objectEvents[eventTemplateId].x + 7;
-    s16 y = objectEvents[eventTemplateId].y + 7;
+    s16 x = objectEvents[eventTemplateId].x + MAP_OFFSET;
+    s16 y = objectEvents[eventTemplateId].y + MAP_OFFSET;
     u16 metatile = MapGridGetMetatileIdAt(x, y);
 
     if (!sRotatingTilePuzzle->isTrickHouse)
@@ -331,7 +331,7 @@ static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
     else
         puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
 
-    tileDifference = (u8)((metatile - puzzleTileStart) % 8);
+    tileDifference = (u8)((metatile - puzzleTileStart) % METATILE_ROW_WIDTH);
     tileDifference -= puzzleTileNum;
 
     if (tileDifference < 0 || tileDifference == 3)
