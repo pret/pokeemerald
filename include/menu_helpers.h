@@ -7,7 +7,7 @@
 #define MENU_L_PRESSED 1
 #define MENU_R_PRESSED 2
 
-// Exported type declarations
+#define SWAP_LINE_HAS_MARGIN (1 << 7)
 
 struct YesNoFuncTable
 {
@@ -15,9 +15,6 @@ struct YesNoFuncTable
     TaskFunc noFunc;
 };
 
-// Exported RAM declarations
-
-// Exported ROM declarations
 void ResetVramOamAndBgCntRegs(void);
 void ResetAllBgsCoordinates(void);
 void SetVBlankHBlankCallbacksToNull(void);
@@ -30,8 +27,8 @@ u8 GetLRKeysPressed(void);
 u8 GetLRKeysPressedAndHeld(void);
 bool8 IsHoldingItemAllowed(u16 itemId);
 bool8 IsWritingMailAllowed(u16 itemId);
-bool8 MenuHelpers_LinkSomething(void);
-bool8 MenuHelpers_CallLinkSomething(void);
+bool8 MenuHelpers_IsLinkActive(void);
+bool8 MenuHelpers_ShouldWaitForLinkRecv(void);
 void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage);
 void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems);
 void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems);

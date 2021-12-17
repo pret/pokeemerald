@@ -210,35 +210,35 @@ static const struct SpriteTemplate sFlickeringShrinkOrbSpriteTemplate =
 static const struct Subsprite sFrozenIceCubeSubsprites[] =
 {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(64x64),      
-        .size = SPRITE_SIZE(64x64), 
-        .tileOffset = 0, 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(64x64),
+        .size = SPRITE_SIZE(64x64),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  48, 
-        .shape = SPRITE_SHAPE(64x32), 
-        .size = SPRITE_SIZE(64x32), 
-        .tileOffset = 64, 
+        .x = -16,
+        .y =  48,
+        .shape = SPRITE_SHAPE(64x32),
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 64,
         .priority = 2
     },
     {
-        .x =  48, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x64), 
+        .x =  48,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x64),
         .size = SPRITE_SIZE(32x64),
-        .tileOffset = 96, 
+        .tileOffset = 96,
         .priority = 2
     },
     {
-        .x =  48, 
-        .y =  48, 
-        .shape = SPRITE_SHAPE(32x32),   
-        .size = SPRITE_SIZE(32x32), 
-        .tileOffset = 128, 
+        .x =  48,
+        .y =  48,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .tileOffset = 128,
         .priority = 2
     },
 };

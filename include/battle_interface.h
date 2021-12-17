@@ -41,7 +41,9 @@ enum
 
 #define TAG_MEGA_TRIGGER_TILE           0xD777
 #define TAG_MEGA_INDICATOR_TILE         0xD778
-#define TAG_ZMOVE_TRIGGER_TILE          0xD779
+#define TAG_ALPHA_INDICATOR_TILE        0xD779
+#define TAG_OMEGA_INDICATOR_TILE        0xD77A
+#define TAG_ZMOVE_TRIGGER_TILE          0xD77B
 
 #define TAG_HEALTHBOX_PAL               0xD6FF
 #define TAG_HEALTHBAR_PAL               0xD704
@@ -50,7 +52,9 @@ enum
 
 #define TAG_MEGA_TRIGGER_PAL            0xD777
 #define TAG_MEGA_INDICATOR_PAL          0xD778
-#define TAG_ZMOVE_TRIGGER_PAL           0xD779
+#define TAG_ALPHA_INDICATOR_PAL         0xD779
+#define TAG_OMEGA_INDICATOR_PAL         0xD77A
+#define TAG_ZMOVE_TRIGGER_PAL           0xD77B
 
 enum
 {
@@ -96,5 +100,10 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp);
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle);
 void DestroyAbilityPopUp(u8 battlerId);
 void HideTriggerSprites(void);
+bool32 CanThrowLastUsedBall(void);
+void TryHideLastUsedBall(void);
+void TryRestoreLastUsedBall(void);
+void TryAddLastUsedBallItemSprites(void);
+void UpdateAbilityPopup(u8 battlerId);
 
 #endif // GUARD_BATTLE_INTERFACE_H

@@ -17,6 +17,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -825,7 +826,7 @@ static void CreateCableCarSprites(void)
         case FALSE:
         default:
             // Create player sprite
-            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 200, 73, 102);
+            spriteId = CreateObjectGraphicsSprite(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 200, 73, 102);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -853,7 +854,7 @@ static void CreateCableCarSprites(void)
         case TRUE:
             CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap + 0x24, 24, 26, 12, 3, 17);
             // Create player sprite
-            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 128, 39, 102);
+            spriteId = CreateObjectGraphicsSprite(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 128, 39, 102);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -890,27 +891,25 @@ static void CreateCableCarSprites(void)
     if ((rval % 64) == 0)
     {
         // Unclear if this was intentional, but the - 1 in the below ARRAY_COUNT means the Zigzagoon is never used
-        spriteId = AddPseudoObjectEvent(hikerGraphicsIds[rval % (ARRAY_COUNT(hikerGraphicsIds) - 1)], hikerCallbacks[GOING_DOWN], hikerCoords[GOING_DOWN][0], hikerCoords[GOING_DOWN][1], 106);
+        spriteId = CreateObjectGraphicsSprite(hikerGraphicsIds[rval % (ARRAY_COUNT(hikerGraphicsIds) - 1)], hikerCallbacks[GOING_DOWN], hikerCoords[GOING_DOWN][0], hikerCoords[GOING_DOWN][1], 106);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].x2 = -gSprites[spriteId].centerToCornerVecX;
             gSprites[spriteId].y2 = -gSprites[spriteId].centerToCornerVecY;
-            
+
             // Randomly choose which direction the NPC is going
             if (!GOING_DOWN)
             {
                 if (rval % 2)
                 {
-                    // Do walking west anim
-                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_WEST);
                     gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].y += 2;
                 }
                 else
                 {
-                    // Do walking east anim
-                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_EAST);
                     gSprites[spriteId].sSameDir = FALSE;
                 }
             }
@@ -918,15 +917,13 @@ static void CreateCableCarSprites(void)
             {
                 if (rval % 2)
                 {
-                    // Do walking east anim
-                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_EAST);
                     gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].y += 2;
                 }
                 else
                 {
-                    // Do walking west anim
-                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_WEST);
                     gSprites[spriteId].sSameDir = FALSE;
                 }
             }
@@ -1024,7 +1021,7 @@ static void DrawNextGroundSegmentGoingDown(void)
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 2) % 32;
     sCableCar->groundTileIdx += 2;
     sGroundSegmentY_Down = sCableCar->groundSegmentYStart;
-    
+
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {

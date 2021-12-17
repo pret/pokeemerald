@@ -43,12 +43,12 @@ static u8 GetMoveBattleStyle(u16 move);
 
 // Number of moves needed on the team to be considered using a certain battle style
 static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
-    [FACTORY_STYLE_PREPARATION - 1]   = 3, 
-    [FACTORY_STYLE_SLOW_STEADY - 1]   = 3, 
-    [FACTORY_STYLE_ENDURANCE - 1]     = 3, 
-    [FACTORY_STYLE_HIGH_RISK - 1]     = 2, 
-    [FACTORY_STYLE_WEAKENING - 1]     = 2, 
-    [FACTORY_STYLE_UNPREDICTABLE - 1] = 2, 
+    [FACTORY_STYLE_PREPARATION - 1]   = 3,
+    [FACTORY_STYLE_SLOW_STEADY - 1]   = 3,
+    [FACTORY_STYLE_ENDURANCE - 1]     = 3,
+    [FACTORY_STYLE_HIGH_RISK - 1]     = 2,
+    [FACTORY_STYLE_WEAKENING - 1]     = 2,
+    [FACTORY_STYLE_UNPREDICTABLE - 1] = 2,
     [FACTORY_STYLE_WEATHER - 1]       = 2
 };
 
@@ -217,7 +217,7 @@ static void InitFactoryChallenge(void)
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         gFrontierTempParty[i] = 0xFFFF;
 
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
     gTrainerBattleOpponent_A = 0;
 }
 

@@ -1,4 +1,4 @@
-#define GFXTAG_MENU_TEXT       200 // Used as a base tag in CB2_CreateTradeMenu and CB2_ReturnToTradeMenu 
+#define GFXTAG_MENU_TEXT       200 // Used as a base tag in CB2_CreateTradeMenu and CB2_ReturnToTradeMenu
 #define GFXTAG_CURSOR          300
 #define GFXTAG_LINK_MON_GLOW   5550
 #define GFXTAG_LINK_MON_SHADOW 5552
@@ -19,7 +19,7 @@ static const u32 sUnusedStructSizes[] =
     sizeof(struct SaveBlock1),
     sizeof(struct MapHeader),
  // 0x00000530, in RS
-    sizeof(struct MailStruct),  //or ObjectEvent / ObjectEventGraphicsInfo
+    sizeof(struct Mail),        //or ObjectEvent / ObjectEventGraphicsInfo
     sizeof(struct Pokemon),     //or TrainerCard
     0x00000528  // 0x000004D8, in RS
 };
@@ -395,7 +395,7 @@ static const struct MenuAction sSelectTradeMonActions[] =
     {sText_Trade2,   Task_DrawSelectionTrade}
 };
 
-static const u8 *const sTradeMessages[] = 
+static const u8 *const sTradeMessages[] =
 {
     [TRADE_MSG_STANDBY]                    = sText_CommunicationStandby,
     [TRADE_MSG_CANCELED]                   = sText_TheTradeHasBeenCanceled,
@@ -408,8 +408,8 @@ static const u8 *const sTradeMessages[] =
     [TRADE_MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
 };
 
-static const u8 sTradeTextColors[] = 
-{ 
+static const u8 sTradeTextColors[] =
+{
     TEXT_COLOR_TRANSPARENT, //bg color
     TEXT_COLOR_WHITE,       //fg color
     TEXT_COLOR_DARK_GRAY    //shadow color
@@ -1003,67 +1003,67 @@ static const union AffineAnimCmd *const sAffineAnims_CrossingMonPics[] =
 
 static const struct InGameTrade sIngameTrades[] =
 {
-    [INGAME_TRADE_SEEDOT] = 
+    [INGAME_TRADE_SEEDOT] =
     {
-        .nickname = _("DOTS"), 
+        .nickname = _("DOTS"),
         .species = SPECIES_SEEDOT,
         .ivs = {5, 4, 5, 4, 4, 4},
-        .abilityNum = 1, 
+        .abilityNum = 1,
         .otId = 38726,
         .conditions = {30, 5, 5, 5, 5},
         .personality = 0x84,
-        .heldItem = ITEM_CHESTO_BERRY, 
+        .heldItem = ITEM_CHESTO_BERRY,
         .mailNum = -1,
-        .otName = _("KOBE"), 
-        .otGender = MALE, 
+        .otName = _("KOBE"),
+        .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
-    }, 
-    [INGAME_TRADE_PLUSLE] = 
+    },
+    [INGAME_TRADE_PLUSLE] =
     {
-        .nickname = _("PLUSES"), 
+        .nickname = _("PLUSES"),
         .species = SPECIES_PLUSLE,
         .ivs = {4, 4, 4, 5, 5, 4},
-        .abilityNum = 0, 
+        .abilityNum = 0,
         .otId = 73996,
         .conditions = {5, 5, 30, 5, 5},
         .personality = 0x6F,
-        .heldItem = ITEM_WOOD_MAIL, 
+        .heldItem = ITEM_WOOD_MAIL,
         .mailNum = 0,
-        .otName = _("ROMAN"), 
-        .otGender = MALE, 
+        .otName = _("ROMAN"),
+        .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_VOLBEAT
-    }, 
-    [INGAME_TRADE_HORSEA] = 
+    },
+    [INGAME_TRADE_HORSEA] =
     {
         .nickname = _("SEASOR"),
         .species = SPECIES_HORSEA,
         .ivs = {5, 4, 4, 4, 5, 4},
-        .abilityNum = 0, 
+        .abilityNum = 0,
         .otId = 46285,
         .conditions = {5, 5, 5, 5, 30},
         .personality = 0x7F,
-        .heldItem = ITEM_WAVE_MAIL, 
+        .heldItem = ITEM_WAVE_MAIL,
         .mailNum = 1,
-        .otName = _("SKYLAR"), 
-        .otGender = MALE, 
+        .otName = _("SKYLAR"),
+        .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_BAGON
-    }, 
-    [INGAME_TRADE_MEOWTH] = 
+    },
+    [INGAME_TRADE_MEOWTH] =
     {
         .nickname = _("MEOWOW"),
         .species = SPECIES_MEOWTH,
         .ivs = {4, 5, 4, 5, 4, 4},
-        .abilityNum = 0, 
+        .abilityNum = 0,
         .otId = 91481,
         .conditions = {5, 5, 5, 30, 5},
         .personality = 0x8B,
-        .heldItem = ITEM_RETRO_MAIL, 
+        .heldItem = ITEM_RETRO_MAIL,
         .mailNum = 2,
-        .otName = _("ISIS"), 
-        .otGender = FEMALE, 
+        .otName = _("ISIS"),
+        .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SKITTY
     }

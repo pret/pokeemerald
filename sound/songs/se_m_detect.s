@@ -31,7 +31,7 @@ se_m_detect_1:
 	.byte		        c_v+4
 	.byte	W01
 	.byte		        c_v+1
-	.byte		N06   , Bn5 
+	.byte		N06   , Bn5
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte	W02
@@ -45,7 +45,7 @@ se_m_detect_1:
 	.byte		        c_v+4
 	.byte	W01
 	.byte		        c_v+1
-	.byte		N06   , Bn5 
+	.byte		N06   , Bn5
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte	W04
@@ -59,7 +59,7 @@ se_m_detect_1:
 	.byte		        c_v+4
 	.byte	W01
 	.byte		        c_v+1
-	.byte		N06   , Bn5 
+	.byte		N06   , Bn5
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte	W04
@@ -72,7 +72,7 @@ se_m_detect_1:
 	.byte		        c_v+4
 	.byte	W01
 	.byte		        c_v+1
-	.byte		N06   , Bn5 
+	.byte		N06   , Bn5
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte	W03
