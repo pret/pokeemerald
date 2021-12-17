@@ -1847,7 +1847,6 @@ static bool32 TryMoveDigit(struct BattleDebugModifyArrows *modArrows, bool32 mov
                 }
             }
         }
-
         else
             charDigits[modArrows->currentDigit]--;
     }
