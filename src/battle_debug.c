@@ -1834,11 +1834,12 @@ static bool32 TryMoveDigit(struct BattleDebugModifyArrows *modArrows, bool32 mov
         if (charDigits[modArrows->currentDigit] == CHAR_0)
         {
             charDigits[modArrows->currentDigit] = CHAR_9;
-            
             for (i = modArrows->currentDigit - 1; i >= 0; i--)
             {
                 if (charDigits[i] == CHAR_0)
+                {
                     charDigits[i] = CHAR_9;
+                }
                 else
                 {
                     charDigits[i]--;
