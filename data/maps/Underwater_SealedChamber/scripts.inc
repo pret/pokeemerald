@@ -4,25 +4,21 @@ Underwater_SealedChamber_MapScripts::
 
 Underwater_SealedChamber_OnDive:
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 12
-	goto_if_ne Underwater_SealedChamber_EventScript_SurfaceRoute134
-	compare VAR_0x8005, 44
-	goto_if_ne Underwater_SealedChamber_EventScript_SurfaceRoute134
+	goto_if_ne VAR_0x8004, 12, Underwater_SealedChamber_EventScript_SurfaceRoute134
+	goto_if_ne VAR_0x8005, 44, Underwater_SealedChamber_EventScript_SurfaceRoute134
 	goto Underwater_SealedChamber_EventScript_SurfaceSealedChamber
 
 Underwater_SealedChamber_EventScript_SurfaceRoute134::
-	setdivewarp MAP_ROUTE134, 255, 60, 31
+	setdivewarp MAP_ROUTE134, 60, 31
 	end
 
 Underwater_SealedChamber_EventScript_SurfaceSealedChamber::
-	setdivewarp MAP_SEALED_CHAMBER_OUTER_ROOM, 255, 10, 19
+	setdivewarp MAP_SEALED_CHAMBER_OUTER_ROOM, 10, 19
 	end
 
 Underwater_SealedChamber_EventScript_Braille::
 	lockall
-	braillemessage Underwater_SealedChamber_Braille_GoUpHere
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox Underwater_SealedChamber_Braille_GoUpHere
 	releaseall
 	end
 
