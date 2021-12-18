@@ -9,33 +9,28 @@ LittlerootTown_MaysHouse_1F_MapScripts::
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_OnLoad:
-	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes
+	call_if_lt VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes
 	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes::
-	setmetatile 5, 4, METATILE_BrendansMaysHouse_MovingBox_Open, 1
-	setmetatile 5, 2, METATILE_BrendansMaysHouse_MovingBox_Closed, 1
+	setmetatile 5, 4, METATILE_BrendansMaysHouse_MovingBox_Open, TRUE
+	setmetatile 5, 2, METATILE_BrendansMaysHouse_MovingBox_Closed, TRUE
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual::
 	checkplayergender
-	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual
+	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual::
-	setmetatile 6, 7, METATILE_BrendansMaysHouse_BookOnTable, 1
+	setmetatile 6, 7, METATILE_BrendansMaysHouse_BookOnTable, TRUE
 	return
 
 LittlerootTown_MaysHouse_1F_OnTransition:
-	compare VAR_LITTLEROOT_INTRO_STATE, 3
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor
-	compare VAR_LITTLEROOT_INTRO_STATE, 5
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs
-	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs::
@@ -69,7 +64,7 @@ LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock::
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
 	applymovement LOCALID_MOM, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
 	waitmovement 0
-	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
+	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 1, 1
 	waitstate
 	releaseall
 	end
@@ -99,7 +94,7 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	waitmovement 0
 	applymovement LOCALID_RIVAL_MOM, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_RIVAL_MOM, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -123,8 +118,7 @@ RivalsHouse_1F_EventScript_RivalMom::
 	faceplayer
 	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, RivalsHouse_1F_EventScript_GoHomeEverySoOften
 	goto_if_set FLAG_SYS_POKEMON_GET, RivalsHouse_1F_EventScript_RivalIsOnRoute103
-	compare VAR_LITTLEROOT_RIVAL_STATE, 3
-	goto_if_eq RivalsHouse_1F_EventScript_RivalTooBusy
+	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, RivalsHouse_1F_EventScript_RivalTooBusy
 	special GetRivalSonDaughterString
 	msgbox RivalsHouse_1F_Text_LikeChildLikeFather, MSGBOX_DEFAULT
 	release
@@ -157,7 +151,7 @@ LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
 	setvar VAR_0x8005, FEMALE
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestRight
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
 	end
@@ -190,23 +184,16 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	compare VAR_0x8008, 1
-	call_if_ne LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
+	call_if_ne VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
 	playbgm MUS_ENCOUNTER_MAY, TRUE
-	compare VAR_0x8008, 0
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
-	compare VAR_0x8008, 1
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
-	compare VAR_0x8008, 2
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
+	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
+	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
+	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
 	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_0x8008, 0
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
-	compare VAR_0x8008, 1
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
-	compare VAR_0x8008, 2
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
+	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
+	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
+	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
 	playse SE_EXIT
 	removeobject LOCALID_RIVAL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
@@ -221,7 +208,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -241,9 +228,9 @@ LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2::
 	return
 
 LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_up
 	walk_up
 	walk_up
@@ -257,9 +244,9 @@ LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1:
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_up
 	walk_up
 	walk_up
@@ -287,48 +274,48 @@ LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2::
 LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit0:
 	delay_16
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit1:
 	delay_16
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit2:
 	delay_16
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs0:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_up
 	walk_up
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs1:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_up
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_up
 	walk_up
 	step_end

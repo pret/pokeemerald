@@ -39,16 +39,20 @@ enum
 #define TAG_STATUS_SUMMARY_BAR_TILE     0xD70C
 #define TAG_STATUS_SUMMARY_BALLS_TILE   0xD714
 
-#define TAG_MEGA_TRIGGER_TILE			0xD777
+#define TAG_MEGA_TRIGGER_TILE           0xD777
 #define TAG_MEGA_INDICATOR_TILE         0xD778
+#define TAG_ALPHA_INDICATOR_TILE        0xD779
+#define TAG_OMEGA_INDICATOR_TILE        0xD77A
 
 #define TAG_HEALTHBOX_PAL               0xD6FF
 #define TAG_HEALTHBAR_PAL               0xD704
 #define TAG_STATUS_SUMMARY_BAR_PAL      0xD710
 #define TAG_STATUS_SUMMARY_BALLS_PAL    0xD712
 
-#define TAG_MEGA_TRIGGER_PAL			0xD777
-#define TAG_MEGA_INDICATOR_PAL			0xD778
+#define TAG_MEGA_TRIGGER_PAL            0xD777
+#define TAG_MEGA_INDICATOR_PAL          0xD778
+#define TAG_ALPHA_INDICATOR_PAL         0xD779
+#define TAG_OMEGA_INDICATOR_PAL         0xD77A
 
 enum
 {
@@ -93,5 +97,10 @@ u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle);
 void DestroyAbilityPopUp(u8 battlerId);
+bool32 CanThrowLastUsedBall(void);
+void TryHideLastUsedBall(void);
+void TryRestoreLastUsedBall(void);
+void TryAddLastUsedBallItemSprites(void);
+void UpdateAbilityPopup(u8 battlerId);
 
 #endif // GUARD_BATTLE_INTERFACE_H

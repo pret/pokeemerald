@@ -15,12 +15,11 @@
 #include "task.h"
 #include "window.h"
 #include "constants/event_objects.h"
-#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
 
-struct MirageTowerPulseBlend 
+struct MirageTowerPulseBlend
 {
     u8 taskId;
     struct PulseBlend pulseBlend;
@@ -153,8 +152,8 @@ static const union AnimCmd *const sAnims_FallingFossil[] =
 
 static const struct SpriteTemplate sSpriteTemplate_FallingFossil =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_FallingFossil,
     .anims = sAnims_FallingFossil,
     .images = NULL,
@@ -204,7 +203,7 @@ static const struct OamData sOamData_CeilingCrumbleSmall =
 
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleSmall = {
     .tileTag = TAG_CEILING_CRUMBLE,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleSmall,
     .anims = sAnims_CeilingCrumbleSmall,
     .images = NULL,
@@ -242,7 +241,7 @@ static const struct OamData sOamData_CeilingCrumbleLarge =
 
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge = {
     .tileTag = TAG_CEILING_CRUMBLE,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleLarge,
     .anims = sAnims_CeilingCrumbleLarge,
     .images = NULL,
@@ -479,7 +478,9 @@ static void SetInvisibleMirageTowerMetatiles(void)
 {
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sInvisibleMirageTowerMetatiles); i++)
-        MapGridSetMetatileIdAt(sInvisibleMirageTowerMetatiles[i].x + 7, sInvisibleMirageTowerMetatiles[i].y + 7, sInvisibleMirageTowerMetatiles[i].metatileId);
+        MapGridSetMetatileIdAt(sInvisibleMirageTowerMetatiles[i].x + MAP_OFFSET,
+                               sInvisibleMirageTowerMetatiles[i].y + MAP_OFFSET,
+                               sInvisibleMirageTowerMetatiles[i].metatileId);
     DrawWholeMapView();
 }
 
@@ -534,8 +535,8 @@ static void InitMirageTowerShake(u8 taskId)
     case 1:
         sMirageTowerGfxBuffer = (u8 *)AllocZeroed(MIRAGE_TOWER_GFX_LENGTH);
         sMirageTowerTilemapBuffer = (u8 *)AllocZeroed(BG_SCREEN_SIZE);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
         gTasks[taskId].tState++;
         break;
     case 2:
@@ -764,7 +765,7 @@ static void UpdateDisintegrationEffect(u8* tiles, u16 randId, u8 c, u8 size, u8 
     col = width & 7;
     sDebug_DisintegrationData[2] = height & 7;
     sDebug_DisintegrationData[3] = width & 7;
-    
+
     widthTiles = width / 8;
     heightTiles = height / 8;
     sDebug_DisintegrationData[4] = width / 8;
@@ -772,11 +773,11 @@ static void UpdateDisintegrationEffect(u8* tiles, u16 randId, u8 c, u8 size, u8 
 
     var = (size / 8) * (heightTiles * 64) + (widthTiles * 64);
     sDebug_DisintegrationData[6] = var;
-    
+
     baseOffset = var + ((row * 8) + col);
     baseOffset /= 2;
     sDebug_DisintegrationData[7] = var + ((row * 8) + col);
-    
+
     flag = ((randId % 2) ^ 1);
     tileMask = (c << (flag << 2)) | 15 << (((flag ^ 1) << 2));
     tiles[baseOffset + (offset * 32)] &= tileMask;

@@ -15,6 +15,7 @@
 #include "battle_controllers.h"
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
+#include "constants/items.h"
 
 //// function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
@@ -93,6 +94,40 @@ const struct SpriteTemplate gPowerTrickSpriteTemplate =
 
 
 //// GEN 5
+//shell smash
+const struct SpriteTemplate gShellSmashLeftShellSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_SHELL_RIGHT,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gShellSmashRightShellSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_SHELL_LEFT,
+    .paletteTag = ANIM_TAG_SHELL_LEFT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gShellSmashPurpleRocksSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_FlyingRock,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRockFragment
+};
+
 //wide guard
 const struct SpriteTemplate gWideGuardBlueConversionTemplate =
 {
@@ -1854,7 +1889,7 @@ const struct SpriteTemplate gLightOfRuinPinkOrbsTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_PINK_PETAL,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimHyperBeamOrb
@@ -2784,7 +2819,7 @@ const struct SpriteTemplate gCoreEnforcerBeamTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_CoreEnforcerBeam
@@ -2922,7 +2957,7 @@ const struct SpriteTemplate gFleurCannonOrbTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_PINK_PETAL,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimHyperBeamOrb
@@ -3240,7 +3275,7 @@ const struct SpriteTemplate gMoongeistBeamBlueOrbsTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_WATER_GUN,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimHyperBeamOrb
@@ -3251,7 +3286,7 @@ const struct SpriteTemplate gMoongeistBeamPurpleOrbsTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ASSURANCE_HAND,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarbeamBigOrbAnimTable,
+    .anims = gSolarBeamBigOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimHyperBeamOrb
@@ -4249,7 +4284,7 @@ static void SpriteCB_GrowingSuperpower(struct Sprite *sprite)
 
     InitAnimLinearTranslation(sprite);
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
 }
 
 static void SpriteCB_CentredSpiderWeb(struct Sprite* sprite)
@@ -4289,7 +4324,7 @@ static void SpriteCB_CoreEnforcerBeam(struct Sprite* sprite)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
-        AnimSolarbeamBigOrb(sprite);
+        AnimSolarBeamBigOrb(sprite);
     }
     else
     {
@@ -4931,7 +4966,7 @@ static void AnimHappyHourCoinShower(struct Sprite *sprite)
     sprite->data[4] = -70;
     sprite->data[5] = gBattleAnimArgs[2];
     StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
-    sprite->callback = TranslateSpriteInEllipseOverDuration;
+    sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
 }
 
@@ -5018,5 +5053,45 @@ void AnimTask_TechnoBlast(u8 taskId)
         gBattleAnimArgs[0] = ItemId_GetSecondaryId(gBattleMons[gBattleAnimAttacker].item);
     else
         gBattleAnimArgs[0] = 0;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_PrimalReversion(u8 taskId)
+{
+    if (ItemId_GetId(gBattleMons[gBattleAnimAttacker].item) == ITEM_RED_ORB)
+        gBattleAnimArgs[0] = ItemId_GetId(gBattleMons[gBattleAnimAttacker].item);
+    else
+        gBattleAnimArgs[0] = 0;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_ShellSideArm(u8 taskId)
+{
+    if (gSwapDamageCategory)
+        gBattleAnimArgs[0] = TRUE;
+    else
+        gBattleAnimArgs[0] = FALSE;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_TerrainPulse(u8 taskId)
+{
+    if (IsBattlerTerrainAffected(gBattleAnimAttacker, STATUS_FIELD_TERRAIN_ANY))
+    {
+        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_ELECTRIC;
+        else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_GRASS;
+        else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_FAIRY;
+        else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+            gBattleAnimArgs[0] = TYPE_PSYCHIC;
+        else //failsafe
+            gBattleAnimArgs[0] = 0;
+    }
+    else
+    {
+        gBattleAnimArgs[0] = 0;
+    }
     DestroyAnimVisualTask(taskId);
 }

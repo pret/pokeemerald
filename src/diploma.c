@@ -83,7 +83,7 @@ void CB2_ShowDiploma(void)
     LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
-    BlendPalettes(-1, 16, 0);
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB);
@@ -140,7 +140,7 @@ static void DisplayDiplomaText(void)
     StringExpandPlaceholders(gStringVar4, gText_PokedexDiploma);
     PrintDiplomaText(gStringVar4, 0, 1);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static const struct BgTemplate sDiplomaBgTemplates[2] =
@@ -196,7 +196,7 @@ static void InitDiplomaWindow(void)
 {
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 }
@@ -205,5 +205,5 @@ static void PrintDiplomaText(u8 *text, u8 var1, u8 var2)
 {
     u8 color[3] = {0, 2, 3};
 
-    AddTextPrinterParameterized4(0, 1, var1, var2, 0, 0, color, -1, text);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, var1, var2, 0, 0, color, TEXT_SKIP_DRAW, text);
 }

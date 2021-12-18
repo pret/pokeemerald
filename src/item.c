@@ -165,7 +165,7 @@ bool8 HasAtLeastOneBerry(void)
 {
     u16 i;
 
-    for (i = FIRST_BERRY_INDEX; i < ITEM_BRIGHT_POWDER; i++)
+    for (i = FIRST_BERRY_INDEX; i <= LAST_BERRY_INDEX; i++)
     {
         if (CheckBagHasItem(i, 1) == TRUE)
         {

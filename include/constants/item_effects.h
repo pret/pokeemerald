@@ -35,7 +35,7 @@
 #define ITEM3_POISON            0x10
 #define ITEM3_SLEEP             0x20
 #define ITEM3_LEVEL_UP          0x40
-#define ITEM3_GUARD_SPEC        0x80 // Works the same way as the move Mist.   
+#define ITEM3_GUARD_SPEC        0x80 // Works the same way as the move Mist.
 
 #define ITEM3_STATUS_ALL        (ITEM3_CONFUSION | ITEM3_PARALYSIS | ITEM3_FREEZE | ITEM3_BURN | ITEM3_POISON | ITEM3_SLEEP)
 
@@ -67,9 +67,10 @@
 #define ITEM_EFFECT_ARG_START 6
 
 // Special HP recovery amounts for ITEM4_HEAL_HP
-#define ITEM6_HEAL_HP_FULL   ((u8) -1)
-#define ITEM6_HEAL_HP_HALF   ((u8) -2)
-#define ITEM6_HEAL_HP_LVL_UP ((u8) -3)
+#define ITEM6_HEAL_HP_FULL    ((u8) -1)
+#define ITEM6_HEAL_HP_HALF    ((u8) -2)
+#define ITEM6_HEAL_HP_LVL_UP  ((u8) -3)
+#define ITEM6_HEAL_HP_QUARTER ((u8) -4)
 
 // Special PP recovery amounts for ITEM4_HEAL_PP
 #define ITEM6_HEAL_PP_FULL   0x7F
