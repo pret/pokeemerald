@@ -59,7 +59,6 @@ static bool32 TryRemoveScreens(u8 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
-extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
@@ -520,7 +519,7 @@ void HandleAction_UseItem(void)
 
     if (gLastUsedItem <= LAST_BALL) // is ball
     {
-        gBattlescriptCurrInstr = gBattlescriptsForBallThrow[gLastUsedItem];
+        gBattlescriptCurrInstr = BattleScript_BallThrow;
     }
     else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
     {
@@ -608,7 +607,7 @@ bool8 TryRunFromBattle(u8 battler)
     u8 pyramidMultiplier;
     u8 speedVar;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = gEnigmaBerries[battler].holdEffect;
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
@@ -758,7 +757,7 @@ void HandleAction_SafariZoneBallThrow(void)
     gBattle_BG0_Y = 0;
     gNumSafariBalls--;
     gLastUsedItem = ITEM_SAFARI_BALL;
-    gBattlescriptCurrInstr = gBattlescriptsForBallThrow[ITEM_SAFARI_BALL];
+    gBattlescriptCurrInstr = BattleScript_SafariBallThrow;
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 

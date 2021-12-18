@@ -631,7 +631,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
     }
     else
     {
-        const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
+        const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY_E_READER));
 
         for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = berryData->name[i];
@@ -675,7 +675,7 @@ static void SetAllPlayersBerryData(void)
         }
         else
         {
-            const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
+            const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY_E_READER));
 
             for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
@@ -3749,7 +3749,7 @@ u8 IsRunningFromBattleImpossible(void)
 {
     u32 holdEffect, i;
 
-    if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);

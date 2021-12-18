@@ -67,9 +67,10 @@
 #define ITEM_EFFECT_ARG_START 6
 
 // Special HP recovery amounts for ITEM4_HEAL_HP
-#define ITEM6_HEAL_HP_FULL   ((u8) -1)
-#define ITEM6_HEAL_HP_HALF   ((u8) -2)
-#define ITEM6_HEAL_HP_LVL_UP ((u8) -3)
+#define ITEM6_HEAL_HP_FULL    ((u8) -1)
+#define ITEM6_HEAL_HP_HALF    ((u8) -2)
+#define ITEM6_HEAL_HP_LVL_UP  ((u8) -3)
+#define ITEM6_HEAL_HP_QUARTER ((u8) -4)
 
 // Special PP recovery amounts for ITEM4_HEAL_PP
 #define ITEM6_HEAL_PP_FULL   0x7F
