@@ -34,8 +34,8 @@ double ieee754_read_extended (uint8_t*);
 #define FATAL_ERROR(format, ...)           \
 do                                         \
 {                                          \
-    fprintf(stderr, format, __VA_ARGS__);  \
-    exit(1);                               \
+	fprintf(stderr, format, __VA_ARGS__);  \
+	exit(1);                               \
 } while (0)
 
 #else
@@ -43,8 +43,8 @@ do                                         \
 #define FATAL_ERROR(format, ...)            \
 do                                          \
 {                                           \
-    fprintf(stderr, format, ##__VA_ARGS__); \
-    exit(1);                                \
+	fprintf(stderr, format, ##__VA_ARGS__); \
+	exit(1);                                \
 } while (0)
 
 #endif // _MSC_VER
