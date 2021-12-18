@@ -19,7 +19,6 @@ ALIGNED(4) const u8 sJPText_HoldBerryCrush[] = _("きのみマッシャーを �
 ALIGNED(4) const u8 sJPText_HoldBerryPicking[] = _("きのみどりを かいさいする");
 ALIGNED(4) const u8 sJPText_HoldSpinTrade[] = _("ぐるぐるこうかんを かいさいする");
 ALIGNED(4) const u8 sJPText_HoldSpinShop[] = _("ぐるぐるショップを かいさいする");
->>>>>>> 017f580835b439309570e23c8463f754b4f87225
 
 // Unused
 static const u8 *const sJPLinkGroupActionTexts[] = {
@@ -47,7 +46,6 @@ const u8 sText_2PlayerMode[] = _("2-Player\nMode");
 const u8 sText_3PlayerMode[] = _("3-Player\nMode");
 const u8 sText_4PlayerMode[] = _("4-Player\nMode");
 const u8 sText_5PlayerMode[] = _("5-Player\nMode");
->>>>>>> 017f580835b439309570e23c8463f754b4f87225
 
 static const u8 *const sPlayersNeededOrModeTexts[][5] = {
     // 2 players required

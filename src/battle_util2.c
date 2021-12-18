@@ -14,8 +14,6 @@
 
 void AllocateBattleResources(void)
 {
-    gBattleResources = gBattleResources; // something dumb needed to match
-
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         InitTrainerHillBattleStruct();
 
@@ -29,7 +27,6 @@ void AllocateBattleResources(void)
     gBattleResources->beforeLvlUp = AllocZeroed(sizeof(*gBattleResources->beforeLvlUp));
     gBattleResources->ai = AllocZeroed(sizeof(*gBattleResources->ai));
     gBattleResources->battleHistory = AllocZeroed(sizeof(*gBattleResources->battleHistory));
-    gBattleResources->AI_ScriptsStack = AllocZeroed(sizeof(*gBattleResources->AI_ScriptsStack));
 
     gLinkBattleSendBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
     gLinkBattleRecvBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
@@ -49,6 +46,7 @@ void FreeBattleResources(void)
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         FreeTrainerHillBattleStruct();
 
+    gFieldStatuses = 0;
     if (gBattleResources != NULL)
     {
         FREE_AND_SET_NULL(gBattleStruct);
@@ -60,7 +58,6 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleResources->beforeLvlUp);
         FREE_AND_SET_NULL(gBattleResources->ai);
         FREE_AND_SET_NULL(gBattleResources->battleHistory);
-        FREE_AND_SET_NULL(gBattleResources->AI_ScriptsStack);
         FREE_AND_SET_NULL(gBattleResources);
 
         FREE_AND_SET_NULL(gLinkBattleSendBuffer);
@@ -145,7 +142,7 @@ u32 BattlePalace_TryEscapeStatus(u8 battlerId)
                 {
                     u32 toSub;
 
-                    if (gBattleMons[battlerId].ability == ABILITY_EARLY_BIRD)
+                    if (GetBattlerAbility(battlerId) == ABILITY_EARLY_BIRD)
                         toSub = 2;
                     else
                         toSub = 1;

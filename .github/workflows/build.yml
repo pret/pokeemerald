@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - battle_engine
+      - pokemon_expansion
+      - item_expansion
   pull_request:
 
 jobs:
@@ -13,20 +17,13 @@ jobs:
       GAME_REVISION: 0
       GAME_LANGUAGE: ENGLISH
       MODERN: 0
-      COMPARE: 1
+      COMPARE: 0
     steps:
       - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Checkout syms
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/checkout@master
-        with:
-          path: symbols
-          ref: symbols
+        uses: actions/checkout@v2
 
       - name: Checkout agbcc
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           path: agbcc
           repository: pret/agbcc
@@ -43,26 +40,11 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Compare
-        run: make -j${nproc} all syms
+      - name: Agbcc
+        run: make -j${nproc} all
 
       - name: Modern
         env:
           MODERN: 1
           COMPARE: 0
         run: make -j${nproc} all
-
-      - name: Move symfiles
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          cp -v *.sym symbols/
-          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
-
-      - name: Update symfiles
-        if: ${{ github.event_name == 'push' }}
-        uses: EndBug/add-and-commit@v7
-        with:
-          branch: symbols
-          cwd: "./symbols"
-          add: "*.sym"
-          message: ${{ env.SYMBOLS_COMMIT_MSG }}
