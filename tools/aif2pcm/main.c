@@ -31,20 +31,20 @@ double ieee754_read_extended (uint8_t*);
 
 #ifdef _MSC_VER
 
-#define FATAL_ERROR(format, ...)		   \
-do										 \
-{										  \
-	fprintf(stderr, format, __VA_ARGS__);  \
-	exit(1);							   \
+#define FATAL_ERROR(format, ...)           \
+do                                         \
+{                                          \
+    fprintf(stderr, format, __VA_ARGS__);  \
+    exit(1);                               \
 } while (0)
 
 #else
 
-#define FATAL_ERROR(format, ...)			\
-do										  \
-{										   \
-	fprintf(stderr, format, ##__VA_ARGS__); \
-	exit(1);								\
+#define FATAL_ERROR(format, ...)            \
+do                                          \
+{                                           \
+    fprintf(stderr, format, ##__VA_ARGS__); \
+    exit(1);                                \
 } while (0)
 
 #endif // _MSC_VER
@@ -457,7 +457,7 @@ int get_delta_index(uint8_t sample, uint8_t prev_sample)
 	int sample_signed = U8_TO_S8(sample);
 	int prev_sample_signed = U8_TO_S8(prev_sample);
 
-	// if we're going up (or equal), only choose positive deltas
+    // if we're going up (or equal), only choose positive deltas
 	if (prev_sample_signed <= sample_signed) {
 		delta_table_start_index = POSITIVE_DELTAS_START;
 		delta_table_end_index = POSITIVE_DELTAS_END;
@@ -796,13 +796,13 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	aif->data[pos++] = 20;
 
 	aif->data[pos++] = base_note;  // baseNote
-	aif->data[pos++] = 0;		  // detune
-	aif->data[pos++] = 0;		  // lowNote
-	aif->data[pos++] = 127;		// highNote
-	aif->data[pos++] = 1;		  // lowVelocity
-	aif->data[pos++] = 127;		// highVelocity
-	aif->data[pos++] = 0;		  // gain (hi)
-	aif->data[pos++] = 0;		  // gain (lo)
+	aif->data[pos++] = 0;          // detune
+	aif->data[pos++] = 0;          // lowNote
+	aif->data[pos++] = 127;        // highNote
+	aif->data[pos++] = 1;          // lowVelocity
+	aif->data[pos++] = 127;        // highVelocity
+	aif->data[pos++] = 0;          // gain (hi)
+	aif->data[pos++] = 0;          // gain (lo)
 
 	// Instrument Chunk sustainLoop
 	aif->data[pos++] = 0;
@@ -881,7 +881,7 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 void usage(void)
 {
 	fprintf(stderr, "Usage: aif2pcm bin_file [aif_file]\n");
-	fprintf(stderr, "	   aif2pcm aif_file [bin_file] [--compress]\n");
+	fprintf(stderr, "       aif2pcm aif_file [bin_file] [--compress]\n");
 }
 
 int main(int argc, char **argv)
