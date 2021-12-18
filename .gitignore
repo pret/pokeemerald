@@ -37,3 +37,6 @@ porymap.project.cfg
 .ropeproject/
 overworld/
 *.sna
+*.diff
+*.sym
+*.js

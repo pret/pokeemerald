@@ -11,6 +11,11 @@
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
+// Rows of metatiles do not actually have a strict width.
+// This constant is used for calculations for finding the next row of metatiles
+// for constructing large tiles, such as the Battle Pike's curtain tile.
+#define METATILE_ROW_WIDTH 8
+
 enum
 {
     CONNECTION_INVALID = -1,
@@ -146,7 +151,7 @@ struct MapHeader
     /* 0x1A */ bool8 allowCycling:1;
                bool8 allowEscaping:1; // Escape Rope and Dig
                bool8 allowRunning:1;
-               bool8 showMapName:5; // the last 4 bits are unused 
+               bool8 showMapName:5; // the last 4 bits are unused
                                     // but the 5 bit sized bitfield is required to match
     /* 0x1B */ u8 battleType;
 };
@@ -207,7 +212,7 @@ struct ObjectEvent
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ union __attribute__((packed)) {
-        u8 playerCopyableMovement;
+        u8 playerCopyableMovement; // COPY_MOVE_*
         struct __attribute__((packed)) {
             u16 species:10; // 11 bits; 1024 species
             u16 form:5; // Used for Deoxys, Unown, etc
@@ -249,14 +254,14 @@ enum {
     PLAYER_AVATAR_STATE_WATERING,
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT     (1 << 0)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE   (1 << 1)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE   (1 << 2)
-#define PLAYER_AVATAR_FLAG_SURFING     (1 << 3)
-#define PLAYER_AVATAR_FLAG_UNDERWATER  (1 << 4)
-#define PLAYER_AVATAR_FLAG_5           (1 << 5)
-#define PLAYER_AVATAR_FLAG_FORCED_MOVE (1 << 6)
-#define PLAYER_AVATAR_FLAG_DASH        (1 << 7)
+#define PLAYER_AVATAR_FLAG_ON_FOOT      (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE    (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE    (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING      (1 << 3)
+#define PLAYER_AVATAR_FLAG_UNDERWATER   (1 << 4)
+#define PLAYER_AVATAR_FLAG_CONTROLLABLE (1 << 5)
+#define PLAYER_AVATAR_FLAG_FORCED_MOVE  (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH         (1 << 7)
 
 enum
 {
