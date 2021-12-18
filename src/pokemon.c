@@ -1269,6 +1269,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_RATTATA_ALOLAN - 1] = NATIONAL_DEX_RATTATA,
     [SPECIES_RATICATE_ALOLAN - 1] = NATIONAL_DEX_RATICATE,
     [SPECIES_RAICHU_ALOLAN - 1] = NATIONAL_DEX_RAICHU,
+    [SPECIES_SANDSHREW_ALOLAN - 1] = NATIONAL_DEX_SANDSHREW,
+    [SPECIES_SANDSLASH_ALOLAN - 1] = NATIONAL_DEX_SANDSLASH,
     [SPECIES_VULPIX_ALOLAN - 1] = NATIONAL_DEX_VULPIX,
     [SPECIES_NINETALES_ALOLAN - 1] = NATIONAL_DEX_NINETALES,
     [SPECIES_DIGLETT_ALOLAN - 1] = NATIONAL_DEX_DIGLETT,
@@ -1586,7 +1588,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 };
 
  // Assigns all Hoenn Dex Indexes to a National Dex Index
-static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
+static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
     HOENN_TO_NATIONAL(GROVYLE),
@@ -1850,6 +1852,8 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/level_up_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_species_table_pointers.h"
+#include "data/pokemon/form_change_tables.h"
+#include "data/pokemon/form_change_table_pointers.h"
 
 // SPECIES_NONE are ignored in the following two tables, so decrement before accessing these arrays to get the right result
 
@@ -2351,80 +2355,6 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_SHAYMIN - 1]       = ANIM_SHRINK_GROW,
     [SPECIES_ARCEUS - 1]        = ANIM_CIRCULAR_VIBRATE,
 
-    //Gen 6
-    [SPECIES_CHESPIN - 1]       = ANIM_H_JUMPS,
-    [SPECIES_QUILLADIN - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_CHESNAUGHT - 1]    = ANIM_V_SHAKE_TWICE,
-    [SPECIES_FENNEKIN - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_BRAIXEN - 1]       = ANIM_SHAKE_GLOW_RED_SLOW,
-    [SPECIES_DELPHOX - 1]       = ANIM_V_STRETCH,
-    [SPECIES_FROAKIE - 1]       = ANIM_H_JUMPS_V_STRETCH,
-    [SPECIES_FROGADIER - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_GRENINJA - 1]      = ANIM_SHRINK_GROW,
-    [SPECIES_BUNNELBY - 1]      = ANIM_V_JUMPS_SMALL,
-    [SPECIES_DIGGERSBY - 1]     = ANIM_V_SHAKE_TWICE,
-    [SPECIES_FLETCHLING - 1]    = ANIM_H_STRETCH,
-    [SPECIES_FLETCHINDER - 1]   = ANIM_GROW_VIBRATE,
-    [SPECIES_TALONFLAME - 1]    = ANIM_GROW_IN_STAGES,
-    [SPECIES_SCATTERBUG - 1]    = ANIM_H_JUMPS,
-    [SPECIES_SPEWPA - 1]        = ANIM_V_SHAKE,
-    [SPECIES_VIVILLON - 1]      = ANIM_H_SLIDE_WOBBLE,
-    [SPECIES_LITLEO - 1]        = ANIM_BACK_AND_LUNGE,
-    [SPECIES_PYROAR - 1]        = ANIM_GROW_VIBRATE,
-    [SPECIES_FLABEBE - 1]       = ANIM_V_SLIDE_WOBBLE_SMALL,
-    [SPECIES_FLOETTE - 1]       = ANIM_SWING_CONVEX,
-    [SPECIES_FLORGES - 1]       = ANIM_V_SLIDE_SLOW,
-    [SPECIES_SKIDDO - 1]        = ANIM_H_STRETCH,
-    [SPECIES_GOGOAT - 1]        = ANIM_V_STRETCH,
-    [SPECIES_PANCHAM - 1]       = ANIM_V_JUMPS_SMALL,
-    [SPECIES_PANGORO - 1]       = ANIM_V_SHAKE_TWICE,
-    [SPECIES_FURFROU - 1]       = ANIM_H_STRETCH,
-    [SPECIES_ESPURR - 1]        = ANIM_H_STRETCH,
-    [SPECIES_MEOWSTIC - 1]      = ANIM_SHRINK_GROW,
-    [SPECIES_HONEDGE - 1]       = ANIM_SWING_CONVEX,
-    [SPECIES_DOUBLADE - 1]      = ANIM_SWING_CONVEX,
-    [SPECIES_AEGISLASH - 1]     = ANIM_H_VIBRATE,
-    [SPECIES_SPRITZEE - 1]      = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_AROMATISSE - 1]    = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
-    [SPECIES_SWIRLIX - 1]       = ANIM_H_JUMPS_V_STRETCH,
-    [SPECIES_SLURPUFF - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_INKAY - 1]         = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_MALAMAR - 1]       = ANIM_CIRCULAR_STRETCH_TWICE,
-    [SPECIES_BINACLE - 1]       = ANIM_V_STRETCH,
-    [SPECIES_BARBARACLE - 1]    = ANIM_ROTATE_UP_SLAM_DOWN,
-    [SPECIES_SKRELP - 1]        = ANIM_V_SLIDE_WOBBLE_SMALL,
-    [SPECIES_DRAGALGE - 1]      = ANIM_SHRINK_GROW,
-    [SPECIES_CLAUNCHER - 1]     = ANIM_V_JUMPS_SMALL,
-    [SPECIES_CLAWITZER - 1]     = ANIM_BACK_AND_LUNGE,
-    [SPECIES_HELIOPTILE - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_HELIOLISK - 1]     = ANIM_GROW_VIBRATE,
-    [SPECIES_TYRUNT - 1]        = ANIM_V_SHAKE,
-    [SPECIES_TYRANTRUM - 1]     = ANIM_H_SHAKE,
-    [SPECIES_AMAURA - 1]        = ANIM_V_STRETCH,
-    [SPECIES_AURORUS - 1]       = ANIM_V_SHAKE_TWICE,
-    [SPECIES_SYLVEON - 1]       = ANIM_H_STRETCH,
-    [SPECIES_HAWLUCHA - 1]      = ANIM_H_STRETCH,
-    [SPECIES_DEDENNE - 1]       = ANIM_V_JUMPS_SMALL,
-    [SPECIES_CARBINK - 1]       = ANIM_SWING_CONVEX,
-    [SPECIES_GOOMY - 1]         = ANIM_CIRCULAR_STRETCH_TWICE,
-    [SPECIES_SLIGGOO - 1]       = ANIM_H_SPRING_SLOW,
-    [SPECIES_GOODRA - 1]        = ANIM_V_SHAKE,
-    [SPECIES_KLEFKI - 1]        = ANIM_SWING_CONVEX,
-    [SPECIES_PHANTUMP - 1]      = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_TREVENANT - 1]     = ANIM_FLICKER_INCREASING,
-    [SPECIES_PUMPKABOO - 1]     = ANIM_H_SLIDE_WOBBLE,
-    [SPECIES_GOURGEIST - 1]     = ANIM_SWING_CONVEX,
-    [SPECIES_BERGMITE - 1]      = ANIM_V_SHAKE,
-    [SPECIES_AVALUGG - 1]       = ANIM_ROTATE_UP_SLAM_DOWN,
-    [SPECIES_NOIBAT - 1]        = ANIM_V_SLIDE_WOBBLE_SMALL,
-    [SPECIES_NOIVERN - 1]       = ANIM_GROW_VIBRATE,
-    [SPECIES_XERNEAS - 1]       = ANIM_GLOW_YELLOW,
-    [SPECIES_YVELTAL - 1]       = ANIM_SHAKE_GLOW_BLACK_SLOW,
-    [SPECIES_ZYGARDE - 1]       = ANIM_GROW_VIBRATE,
-    [SPECIES_DIANCIE - 1]       = ANIM_SWING_CONVEX,
-    [SPECIES_HOOPA - 1]         = ANIM_ZIGZAG_SLOW,
-    [SPECIES_VOLCANION - 1]     = ANIM_V_SHAKE,
-
     // Gen 5 Todo: Assign proper ones.
     [SPECIES_VICTINI - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_SNIVY - 1]         = ANIM_V_SQUISH_AND_BOUNCE,
@@ -2453,7 +2383,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_MUSHARNA - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_PIDOVE - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_TRANQUILL - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_UNFEZANT - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_UNFEZANT - 1]      = ANIM_V_STRETCH,
     [SPECIES_BLITZLE - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ZEBSTRIKA - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ROGGENROLA - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
@@ -2582,6 +2512,80 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_KELDEO - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_MELOETTA - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_GENESECT - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+
+    //Gen 6
+    [SPECIES_CHESPIN - 1]       = ANIM_H_JUMPS,
+    [SPECIES_QUILLADIN - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CHESNAUGHT - 1]    = ANIM_V_SHAKE_TWICE,
+    [SPECIES_FENNEKIN - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BRAIXEN - 1]       = ANIM_SHAKE_GLOW_RED_SLOW,
+    [SPECIES_DELPHOX - 1]       = ANIM_V_STRETCH,
+    [SPECIES_FROAKIE - 1]       = ANIM_H_JUMPS_V_STRETCH,
+    [SPECIES_FROGADIER - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GRENINJA - 1]      = ANIM_SHRINK_GROW,
+    [SPECIES_BUNNELBY - 1]      = ANIM_V_JUMPS_SMALL,
+    [SPECIES_DIGGERSBY - 1]     = ANIM_V_SHAKE_TWICE,
+    [SPECIES_FLETCHLING - 1]    = ANIM_H_STRETCH,
+    [SPECIES_FLETCHINDER - 1]   = ANIM_GROW_VIBRATE,
+    [SPECIES_TALONFLAME - 1]    = ANIM_GROW_IN_STAGES,
+    [SPECIES_SCATTERBUG - 1]    = ANIM_H_JUMPS,
+    [SPECIES_SPEWPA - 1]        = ANIM_V_SHAKE,
+    [SPECIES_VIVILLON - 1]      = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_LITLEO - 1]        = ANIM_BACK_AND_LUNGE,
+    [SPECIES_PYROAR - 1]        = ANIM_GROW_VIBRATE,
+    [SPECIES_FLABEBE - 1]       = ANIM_V_SLIDE_WOBBLE_SMALL,
+    [SPECIES_FLOETTE - 1]       = ANIM_SWING_CONVEX,
+    [SPECIES_FLORGES - 1]       = ANIM_V_SLIDE_SLOW,
+    [SPECIES_SKIDDO - 1]        = ANIM_H_STRETCH,
+    [SPECIES_GOGOAT - 1]        = ANIM_V_STRETCH,
+    [SPECIES_PANCHAM - 1]       = ANIM_V_JUMPS_SMALL,
+    [SPECIES_PANGORO - 1]       = ANIM_V_SHAKE_TWICE,
+    [SPECIES_FURFROU - 1]       = ANIM_H_STRETCH,
+    [SPECIES_ESPURR - 1]        = ANIM_H_STRETCH,
+    [SPECIES_MEOWSTIC - 1]      = ANIM_SHRINK_GROW,
+    [SPECIES_HONEDGE - 1]       = ANIM_SWING_CONVEX,
+    [SPECIES_DOUBLADE - 1]      = ANIM_SWING_CONVEX,
+    [SPECIES_AEGISLASH - 1]     = ANIM_H_VIBRATE,
+    [SPECIES_SPRITZEE - 1]      = ANIM_V_SLIDE_WOBBLE,
+    [SPECIES_AROMATISSE - 1]    = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
+    [SPECIES_SWIRLIX - 1]       = ANIM_H_JUMPS_V_STRETCH,
+    [SPECIES_SLURPUFF - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_INKAY - 1]         = ANIM_V_SLIDE_WOBBLE,
+    [SPECIES_MALAMAR - 1]       = ANIM_CIRCULAR_STRETCH_TWICE,
+    [SPECIES_BINACLE - 1]       = ANIM_V_STRETCH,
+    [SPECIES_BARBARACLE - 1]    = ANIM_ROTATE_UP_SLAM_DOWN,
+    [SPECIES_SKRELP - 1]        = ANIM_V_SLIDE_WOBBLE_SMALL,
+    [SPECIES_DRAGALGE - 1]      = ANIM_SHRINK_GROW,
+    [SPECIES_CLAUNCHER - 1]     = ANIM_V_JUMPS_SMALL,
+    [SPECIES_CLAWITZER - 1]     = ANIM_BACK_AND_LUNGE,
+    [SPECIES_HELIOPTILE - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_HELIOLISK - 1]     = ANIM_GROW_VIBRATE,
+    [SPECIES_TYRUNT - 1]        = ANIM_V_SHAKE,
+    [SPECIES_TYRANTRUM - 1]     = ANIM_H_SHAKE,
+    [SPECIES_AMAURA - 1]        = ANIM_V_STRETCH,
+    [SPECIES_AURORUS - 1]       = ANIM_V_SHAKE_TWICE,
+    [SPECIES_SYLVEON - 1]       = ANIM_H_STRETCH,
+    [SPECIES_HAWLUCHA - 1]      = ANIM_H_STRETCH,
+    [SPECIES_DEDENNE - 1]       = ANIM_V_JUMPS_SMALL,
+    [SPECIES_CARBINK - 1]       = ANIM_SWING_CONVEX,
+    [SPECIES_GOOMY - 1]         = ANIM_CIRCULAR_STRETCH_TWICE,
+    [SPECIES_SLIGGOO - 1]       = ANIM_H_SPRING_SLOW,
+    [SPECIES_GOODRA - 1]        = ANIM_V_SHAKE,
+    [SPECIES_KLEFKI - 1]        = ANIM_SWING_CONVEX,
+    [SPECIES_PHANTUMP - 1]      = ANIM_V_SLIDE_WOBBLE,
+    [SPECIES_TREVENANT - 1]     = ANIM_FLICKER_INCREASING,
+    [SPECIES_PUMPKABOO - 1]     = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_GOURGEIST - 1]     = ANIM_SWING_CONVEX,
+    [SPECIES_BERGMITE - 1]      = ANIM_V_SHAKE,
+    [SPECIES_AVALUGG - 1]       = ANIM_ROTATE_UP_SLAM_DOWN,
+    [SPECIES_NOIBAT - 1]        = ANIM_V_SLIDE_WOBBLE_SMALL,
+    [SPECIES_NOIVERN - 1]       = ANIM_GROW_VIBRATE,
+    [SPECIES_XERNEAS - 1]       = ANIM_GLOW_YELLOW,
+    [SPECIES_YVELTAL - 1]       = ANIM_SHAKE_GLOW_BLACK_SLOW,
+    [SPECIES_ZYGARDE - 1]       = ANIM_GROW_VIBRATE,
+    [SPECIES_DIANCIE - 1]       = ANIM_SWING_CONVEX,
+    [SPECIES_HOOPA - 1]         = ANIM_ZIGZAG_SLOW,
+    [SPECIES_VOLCANION - 1]     = ANIM_V_SHAKE,
 
     // Gen 7
     [SPECIES_ROWLET - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
@@ -2765,11 +2769,28 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_CALYREX - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
 
     // Forms
-    [SPECIES_ROTOM_HEAT - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_ROTOM_FROST - 1]   = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_ROTOM_FAN - 1]     = ANIM_FIGURE_8,
-    [SPECIES_ROTOM_MOW - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_ROTOM_WASH - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ROTOM_HEAT - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ROTOM_FROST - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ROTOM_FAN - 1]       = ANIM_FIGURE_8,
+    [SPECIES_ROTOM_MOW - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ROTOM_WASH - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ARCEUS_FIGHTING - 1] = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_FLYING - 1]   = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_POISON - 1]   = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_GROUND - 1]   = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_ROCK - 1]     = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_BUG - 1]      = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_GHOST - 1]    = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_STEEL - 1]    = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_FIRE - 1]     = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_WATER - 1]    = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_GRASS - 1]    = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_ELECTRIC - 1] = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_PSYCHIC - 1]  = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_ICE - 1]      = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_DRAGON - 1]   = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_DARK - 1]     = ANIM_CIRCULAR_VIBRATE,
+    [SPECIES_ARCEUS_FAIRY - 1]    = ANIM_CIRCULAR_VIBRATE,
 };
 
 static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
@@ -4102,13 +4123,11 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 u32 GetUnownSpeciesId(u32 personality)
 {
-    return GetUnownLetterByPersonality(personality) + SPECIES_UNOWN_B - 1; //TODO
-    /*
     u16 unownLetter = GetUnownLetterByPersonality(personality);
+
     if (unownLetter == 0)
         return SPECIES_UNOWN;
     return unownLetter + SPECIES_UNOWN_B - 1;
-    */
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
@@ -6408,7 +6427,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 break;
             case EVO_LEVEL_RAIN:
                 j = GetCurrentWeather();
-                if (j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR)
+                if (gEvolutionTable[species][i].param <= level
+                 && (j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR))
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_MAPSEC:
@@ -8023,4 +8043,66 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
         }
     }
     return targetFormId;
+}
+
+// returns SPECIES_NONE if no form change is possible
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
+{
+    u32 i;
+    u16 targetSpecies = SPECIES_NONE;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+    u16 heldItem;
+    u32 ability;
+
+    if (formChanges != NULL)
+    {
+        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+
+        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        {
+            if (method == formChanges[i].method)
+            {
+                switch (method)
+                {
+                case FORM_ITEM_HOLD:
+                    if (heldItem == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_ITEM_USE:
+                    if (arg == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_MOVE:
+                    if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_ITEM_HOLD_ABILITY:
+                    if (heldItem == formChanges[i].param1 && ability == formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_ITEM_USE_TIME:
+                    RtcCalcLocalTime();
+                    if (arg == formChanges[i].param1)
+                    {
+                        switch (formChanges[i].param2)
+                        {
+                        case DAY:
+                            if (gLocalTime.hours >= 12 && gLocalTime.hours < 24)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        case NIGHT:
+                            if (gLocalTime.hours >= 0 && gLocalTime.hours < 12)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    return species != targetSpecies ? targetSpecies : SPECIES_NONE;
 }
