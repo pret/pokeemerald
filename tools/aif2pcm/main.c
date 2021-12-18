@@ -31,32 +31,32 @@ double ieee754_read_extended (uint8_t*);
 
 #ifdef _MSC_VER
 
-#define FATAL_ERROR(format, ...)           \
-do                                         \
-{                                          \
+#define FATAL_ERROR(format, ...)		   \
+do										 \
+{										  \
 	fprintf(stderr, format, __VA_ARGS__);  \
-	exit(1);                               \
+	exit(1);							   \
 } while (0)
 
 #else
 
-#define FATAL_ERROR(format, ...)            \
-do                                          \
-{                                           \
+#define FATAL_ERROR(format, ...)			\
+do										  \
+{										   \
 	fprintf(stderr, format, ##__VA_ARGS__); \
-	exit(1);                                \
+	exit(1);								\
 } while (0)
 
 #endif // _MSC_VER
 
 typedef struct {
 	unsigned long num_samples;
-    union {
-        uint8_t *samples8;
-        uint16_t *samples16;
-    };
+	union {
+		uint8_t *samples8;
+		uint16_t *samples16;
+	};
 	uint8_t midi_note;
-    uint8_t sample_size;
+	uint8_t sample_size;
 	bool has_loop;
 	unsigned long loop_offset;
 	double sample_rate;
@@ -299,28 +299,28 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			pos += 8;
 
 			unsigned long num_samples = chunk_size - 8;
-            if (aif_data->sample_size == 8)
-            {
-                uint8_t *sample_data = (uint8_t *)malloc(num_samples * sizeof(uint8_t));
-                memcpy(sample_data, &aif->data[pos], num_samples);
-    
-                aif_data->samples8 = sample_data;
-                aif_data->real_num_samples = num_samples;
-            }
-            else
-            {
-                uint16_t *sample_data = (uint16_t *)malloc(num_samples * sizeof(uint16_t));
-                uint16_t *sample_data_swapped = (uint16_t *)malloc(num_samples * sizeof(uint16_t));
-                memcpy(sample_data, &aif->data[pos], num_samples);
-                for (long unsigned i = 0; i < num_samples; i++)
-                {
-                    sample_data_swapped[i] = __builtin_bswap16(sample_data[i]);
-                }
-    
-                aif_data->samples16 = sample_data_swapped;
-                aif_data->real_num_samples = num_samples;
-                free(sample_data);
-            }
+			if (aif_data->sample_size == 8)
+			{
+				uint8_t *sample_data = (uint8_t *)malloc(num_samples * sizeof(uint8_t));
+				memcpy(sample_data, &aif->data[pos], num_samples);
+	
+				aif_data->samples8 = sample_data;
+				aif_data->real_num_samples = num_samples;
+			}
+			else
+			{
+				uint16_t *sample_data = (uint16_t *)malloc(num_samples * sizeof(uint16_t));
+				uint16_t *sample_data_swapped = (uint16_t *)malloc(num_samples * sizeof(uint16_t));
+				memcpy(sample_data, &aif->data[pos], num_samples);
+				for (long unsigned i = 0; i < num_samples; i++)
+				{
+					sample_data_swapped[i] = __builtin_bswap16(sample_data[i]);
+				}
+	
+				aif_data->samples16 = sample_data_swapped;
+				aif_data->real_num_samples = num_samples;
+				free(sample_data);
+			}
 			pos += chunk_size - 8;
 		}
 		else
@@ -457,7 +457,7 @@ int get_delta_index(uint8_t sample, uint8_t prev_sample)
 	int sample_signed = U8_TO_S8(sample);
 	int prev_sample_signed = U8_TO_S8(prev_sample);
 
-    // if we're going up (or equal), only choose positive deltas
+	// if we're going up (or equal), only choose positive deltas
 	if (prev_sample_signed <= sample_signed) {
 		delta_table_start_index = POSITIVE_DELTAS_START;
 		delta_table_end_index = POSITIVE_DELTAS_END;
@@ -573,19 +573,19 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	struct Bytes *aif = read_bytearray(aif_filename);
 	AifData aif_data = {0};
 	read_aif(aif, &aif_data);
-    
-    // Convert 16-bit to 8-bit if necessary
-    if (aif_data.sample_size == 16)
-    {
-        aif_data.real_num_samples /= 2;
-        uint8_t *converted_samples = malloc(aif_data.real_num_samples * sizeof(uint8_t));
-        for (unsigned long i = 0; i < aif_data.real_num_samples; i++)
-        {
-            converted_samples[i] = aif_data.samples16[i] >> 8;
-        }
-        free(aif_data.samples16);
-        aif_data.samples8 = converted_samples;
-    }
+	
+	// Convert 16-bit to 8-bit if necessary
+	if (aif_data.sample_size == 16)
+	{
+		aif_data.real_num_samples /= 2;
+		uint8_t *converted_samples = malloc(aif_data.real_num_samples * sizeof(uint8_t));
+		for (unsigned long i = 0; i < aif_data.real_num_samples; i++)
+		{
+			converted_samples[i] = aif_data.samples16[i] >> 8;
+		}
+		free(aif_data.samples16);
+		aif_data.samples8 = converted_samples;
+	}
 
 	int header_size = 0x10;
 	struct Bytes *pcm;
@@ -796,13 +796,13 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	aif->data[pos++] = 20;
 
 	aif->data[pos++] = base_note;  // baseNote
-	aif->data[pos++] = 0;          // detune
-	aif->data[pos++] = 0;          // lowNote
-	aif->data[pos++] = 127;        // highNote
-	aif->data[pos++] = 1;          // lowVelocity
-	aif->data[pos++] = 127;        // highVelocity
-	aif->data[pos++] = 0;          // gain (hi)
-	aif->data[pos++] = 0;          // gain (lo)
+	aif->data[pos++] = 0;		  // detune
+	aif->data[pos++] = 0;		  // lowNote
+	aif->data[pos++] = 127;		// highNote
+	aif->data[pos++] = 1;		  // lowVelocity
+	aif->data[pos++] = 127;		// highVelocity
+	aif->data[pos++] = 0;		  // gain (hi)
+	aif->data[pos++] = 0;		  // gain (lo)
 
 	// Instrument Chunk sustainLoop
 	aif->data[pos++] = 0;
@@ -881,7 +881,7 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 void usage(void)
 {
 	fprintf(stderr, "Usage: aif2pcm bin_file [aif_file]\n");
-	fprintf(stderr, "       aif2pcm aif_file [bin_file] [--compress]\n");
+	fprintf(stderr, "	   aif2pcm aif_file [bin_file] [--compress]\n");
 }
 
 int main(int argc, char **argv)
