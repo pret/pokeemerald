@@ -34,32 +34,32 @@ int GetStringWidthDifference(int fontId, const u8 *str, int totalWidth, int lett
         return 0;
 }
 
-int GetMaxWidthInMenuTable(const struct MenuAction *str, int numActions)
+int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
 {
-    int i, var;
+    int i, maxWidth;
 
-    for (var = 0, i = 0; i < numActions; i++)
+    for (maxWidth = 0, i = 0; i < numActions; i++)
     {
-        int stringWidth = GetStringWidth(1, str[i].text, 0);
-        if (stringWidth > var)
-            var = stringWidth;
+        int stringWidth = GetStringWidth(FONT_NORMAL, actions[i].text, 0);
+        if (stringWidth > maxWidth)
+            maxWidth = stringWidth;
     }
 
-    return ConvertPixelWidthToTileWidth(var);
+    return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
-int sub_81DB3D8(const struct MenuAction *str, const u8* arg1, int arg2)
+int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8* actionIds, int numActions)
 {
-    int i, var;
+    int i, maxWidth;
 
-    for (var = 0, i = 0; i < arg2; i++)
+    for (maxWidth = 0, i = 0; i < numActions; i++)
     {
-        int stringWidth = GetStringWidth(1, str[arg1[i]].text, 0);
-        if (stringWidth > var)
-            var = stringWidth;
+        int stringWidth = GetStringWidth(FONT_NORMAL, actions[actionIds[i]].text, 0);
+        if (stringWidth > maxWidth)
+            maxWidth = stringWidth;
     }
 
-    return ConvertPixelWidthToTileWidth(var);
+    return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
 int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
@@ -93,32 +93,29 @@ void CopyMonCategoryText(int dexNum, u8 *dest)
     StringCopy(str + 1, gText_Pokemon);
 }
 
-u8 *sub_81DB494(u8 *str, int fontId, const u8 *str2, int totalStringWidth)
+u8 *GetStringClearToWidth(u8 *dest, int fontId, const u8 *str, int totalStringWidth)
 {
     u8 *buffer;
     int width;
     int clearWidth;
 
-    if (str2)
+    if (str)
     {
-        buffer = StringCopy(str, str2);
-        width = GetStringWidth(fontId, str2, 0);
+        buffer = StringCopy(dest, str);
+        width = GetStringWidth(fontId, str, 0);
     }
     else
     {
-        buffer = str;
+        buffer = dest;
         width = 0;
     }
 
     clearWidth = totalStringWidth - width;
     if (clearWidth > 0)
     {
-        *buffer = EXT_CTRL_CODE_BEGIN;
-        buffer++;
-        *buffer = EXT_CTRL_CODE_CLEAR;
-        buffer++;
-        *buffer = clearWidth;
-        buffer++;
+        *(buffer++) = EXT_CTRL_CODE_BEGIN;
+        *(buffer++) = EXT_CTRL_CODE_CLEAR;
+        *(buffer++) = clearWidth;
         *buffer = EOS;
     }
 
@@ -209,7 +206,7 @@ void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
     ConvertInternationalString(dest, language);
 }
 
-int sub_81DB604(u8 *str)
+int GetNicknameLanguage(u8 *str)
 {
     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
         return LANGUAGE_JAPANESE;
@@ -217,10 +214,11 @@ int sub_81DB604(u8 *str)
         return GAME_LANGUAGE;
 }
 
-void sub_81DB620(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows)
+// Used by Pokénav's Match Call to erase the previous trainer's flavor text when switching between their info pages.
+void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows)
 {
     u8 *windowTileData;
-    int fillSize, windowRowSize, rowsToFill;
+    int fillSize, windowRowSize, i;
     struct Window *window = &gWindows[windowId];
 
     fillSize = numFillTiles * TILE_SIZE_4BPP;
@@ -228,12 +226,10 @@ void sub_81DB620(int windowId, int columnStart, int rowStart, int numFillTiles, 
     windowTileData = window->tileData + (rowStart * windowRowSize) + (columnStart * TILE_SIZE_4BPP);
     if (numRows > 0)
     {
-        rowsToFill = numRows;
-        while (rowsToFill)
+        for (i = numRows; i != 0; i--)
         {
             CpuFastFill8(0x11, windowTileData, fillSize);
             windowTileData += windowRowSize;
-            rowsToFill--;
         }
     }
 }

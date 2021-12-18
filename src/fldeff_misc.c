@@ -193,7 +193,7 @@ static const struct SpriteFrameImage sPicTable_SecretPowerShrub[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_TREE,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerCave,
@@ -204,7 +204,7 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerTree,
@@ -215,7 +215,7 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerShrub =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerShrub,
@@ -261,7 +261,7 @@ static const struct SpriteFrameImage sPicTable_SandPillar[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SandPillar =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SAND_PILLAR,
     .oam = &sOam_SandPillar,
     .anims = sAnimTable_SandPillar,
@@ -299,7 +299,7 @@ static const union AnimCmd *const sAnimTable_RecordMixLights[] =
 
 static const struct SpriteTemplate sSpriteTemplate_RecordMixLights =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = 0x1000,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = sAnimTable_RecordMixLights,

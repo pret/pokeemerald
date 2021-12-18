@@ -3,10 +3,9 @@
 
 // return values for BattleAI_ChooseMoveOrAction
 // 0 - 3 are move idx
-#define AI_CHOICE_FLEE      4
-#define AI_CHOICE_WATCH     5
-#define AI_CHOICE_SWITCH    7
-#define AI_CHOICE_USE_ITEM  8
+#define AI_CHOICE_FLEE 4
+#define AI_CHOICE_WATCH 5
+#define AI_CHOICE_SWITCH 7
 
 #define RETURN_SCORE_PLUS(val)      \
 {                                   \
