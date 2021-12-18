@@ -305,6 +305,13 @@ const union AnimCmd *const gAnims_MonPic[] =
 const bool8 SpeciesHasGenderDifference[NUM_SPECIES] =
 {
     [SPECIES_EEVEE] = TRUE,
+    [SPECIES_STARLY] = TRUE,
+    [SPECIES_STARAVIA] = TRUE,
+    [SPECIES_STARAPTOR] = TRUE,
+    [SPECIES_BIDOOF] = TRUE,
+    [SPECIES_KRICKETOT] = TRUE,
+    [SPECIES_KRICKETUNE] = TRUE,
+    [SPECIES_SHINX] = TRUE,
     [SPECIES_COMBEE] = TRUE,
     [SPECIES_HIPPOPOTAS] = TRUE,
     [SPECIES_HIPPOWDON] = TRUE,

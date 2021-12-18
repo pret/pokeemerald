@@ -1243,6 +1243,13 @@ const u8 *const gMonIconTable[] =
 const u8 *const gMonIconTableFemale[] =
 {
     [SPECIES_EEVEE] = gMonIcon_Eevee,
+    [SPECIES_STARLY] = gMonIcon_Starly,
+    [SPECIES_STARAVIA] = gMonIcon_Staravia,
+    [SPECIES_STARAPTOR] = gMonIcon_Staraptor,
+    [SPECIES_BIDOOF] = gMonIcon_Bidoof,
+    [SPECIES_KRICKETOT] = gMonIcon_Kricketot,
+    [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
+    [SPECIES_SHINX] = gMonIcon_Shinx,
     [SPECIES_COMBEE] = gMonIcon_Combee,
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
@@ -2431,6 +2438,12 @@ const u8 gMonIconPaletteIndices[] =
 const u8 gMonIconPaletteIndicesFemale[] =
 {
     [SPECIES_EEVEE] = 2,
+    [SPECIES_STARLY] = 0,
+    [SPECIES_STARAVIA] = 0,
+    [SPECIES_BIDOOF] = 2,
+    [SPECIES_KRICKETOT] = 2,
+    [SPECIES_KRICKETUNE] = 2,
+    [SPECIES_SHINX] = 0,
     [SPECIES_COMBEE] = 0,
     [SPECIES_HIPPOPOTAS] = 1,
     [SPECIES_HIPPOWDON] = 1,
