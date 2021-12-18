@@ -246,10 +246,10 @@ struct SpindaSpot
     u16 image[16];
 };
 
-struct __attribute__((packed)) LevelUpMove
+struct LevelUpMove
 {
-    u16 move:9;
-    u16 level:7;
+    u16 move;
+    u16 level;
 };
 
 struct Evolution
@@ -282,7 +282,7 @@ extern const u8 gFacilityClassToTrainerClass[];
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
-extern const u16 *const gLevelUpLearnsets[];
+extern const struct LevelUpMove *const gLevelUpLearnsets[];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
