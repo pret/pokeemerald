@@ -30,7 +30,7 @@ Questionnaire_Text_YouCanAccessMysteryEvent::
 	.string "Once you save your game, you can\n"
 	.string "access the Mystery Event.$"
 
-Mevent_Text_TheresATicketForYou::
+MysteryGift_Text_TheresATicketForYou::
 	.string "Thank you for using the Mystery\n"
 	.string "Event System.\p"
 	.string "You must be {PLAYER}.\n"

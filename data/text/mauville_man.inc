@@ -58,6 +58,6 @@ GiddyText_LyingBackInTheGreenGrass::
 	.string "Lying back in the green grass…\n"
 	.string "Oh, it's so, so nice!$"
 
-gMauvilleManText_SecretBasesAreSoWonderful::
+GiddyText_SecretBasesAreSoWonderful::
 	.string "Secret Bases are so wonderful!\n"
 	.string "Can't you feel the excitement?$"
