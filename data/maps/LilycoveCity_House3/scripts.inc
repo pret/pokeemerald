@@ -11,8 +11,7 @@ LilycoveCity_House3_EventScript_PokefanF::
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LilycoveCity_House3_EventScript_DeclinePokeblockLearn
+	goto_if_eq VAR_RESULT, NO, LilycoveCity_House3_EventScript_DeclinePokeblockLearn
 	msgbox LilycoveCity_House3_Text_ExplainPokeblocks, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection

@@ -63,7 +63,6 @@ void CB2_PyramidBagMenuFromStartMenu(void);
 void CB2_ReturnToPyramidBagMenu(void);
 void UpdatePyramidBagList(void);
 void UpdatePyramidBagCursorPos(void);
-void sub_81C4EFC(void);
 void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void));
 void Task_CloseBattlePyramidBagMessage(u8 taskId);
 void TryStoreHeldItemsInPyramidBag(void);

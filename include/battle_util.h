@@ -7,30 +7,37 @@
 #define MOVE_LIMITATION_TORMENTED               (1 << 3)
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
+#define MOVE_LIMITATIONS_ALL                    0xFF
 
-#define ABILITYEFFECT_ON_SWITCHIN                0x0
-#define ABILITYEFFECT_ENDTURN                    0x1
-#define ABILITYEFFECT_MOVES_BLOCK                0x2
-#define ABILITYEFFECT_ABSORBING                  0x3
-#define ABILITYEFFECT_MOVE_END_ATTACKER          0x4
-#define ABILITYEFFECT_MOVE_END                   0x5
-#define ABILITYEFFECT_IMMUNITY                   0x6
-#define ABILITYEFFECT_FORECAST                   0x7
-#define ABILITYEFFECT_SYNCHRONIZE                0x8
-#define ABILITYEFFECT_ATK_SYNCHRONIZE            0x9
-#define ABILITYEFFECT_INTIMIDATE1                0xA
-#define ABILITYEFFECT_INTIMIDATE2                0xB
-#define ABILITYEFFECT_TRACE1                     0xC
-#define ABILITYEFFECT_TRACE2                     0xD
-#define ABILITYEFFECT_MOVE_END_OTHER             0xE
-#define ABILITYEFFECT_SWITCH_IN_TERRAIN          0xFE
-#define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
+#define ABILITYEFFECT_ON_SWITCHIN                0
+#define ABILITYEFFECT_ENDTURN                    1
+#define ABILITYEFFECT_MOVES_BLOCK                2
+#define ABILITYEFFECT_ABSORBING                  3
+#define ABILITYEFFECT_MOVE_END_ATTACKER          4
+#define ABILITYEFFECT_MOVE_END                   5
+#define ABILITYEFFECT_IMMUNITY                   6
+#define ABILITYEFFECT_FORECAST                   7
+#define ABILITYEFFECT_SYNCHRONIZE                8
+#define ABILITYEFFECT_ATK_SYNCHRONIZE            9
+#define ABILITYEFFECT_INTIMIDATE1                10
+#define ABILITYEFFECT_INTIMIDATE2                11
+#define ABILITYEFFECT_TRACE1                     12
+#define ABILITYEFFECT_TRACE2                     13
+#define ABILITYEFFECT_MOVE_END_OTHER             14
+#define ABILITYEFFECT_NEUTRALIZINGGAS            15
+#define ABILITYEFFECT_SWITCH_IN_TERRAIN          254
+#define ABILITYEFFECT_SWITCH_IN_WEATHER          255
 
-#define ITEMEFFECT_ON_SWITCH_IN                 0x0
-#define ITEMEFFECT_MOVE_END                     0x3
-#define ITEMEFFECT_KINGSROCK_SHELLBELL          0x4
-#define ITEMEFFECT_TARGET                       0x5
-#define ITEMEFFECT_ORBS                         0x6
+// For the first argument of ItemBattleEffects, to deteremine which block of item effects to try
+#define ITEMEFFECT_ON_SWITCH_IN                 0
+#define ITEMEFFECT_NORMAL                       1
+#define ITEMEFFECT_DUMMY                        2 // Unused, empty
+#define ITEMEFFECT_MOVE_END                     3
+#define ITEMEFFECT_KINGSROCK                    4
+#define ITEMEFFECT_TARGET                       5
+#define ITEMEFFECT_ORBS                         6
+#define ITEMEFFECT_LIFEORB_SHELLBELL            7
+#define ITEMEFFECT_BATTLER_MOVE_END             8 // move end effects for just the battler, not whole field
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
@@ -46,7 +53,8 @@ struct TypePower
 
 extern const struct TypePower gNaturalGiftTable[];
 
-bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide);
+void HandleAction_ThrowBall(void);
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move);
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
 void HandleAction_UseItem(void);
@@ -99,6 +107,7 @@ u32 IsAbilityOnOpposingSide(u32 battlerId, u32 ability);
 u32 IsAbilityOnField(u32 ability);
 u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battlerId);
+bool32 IsBattlerProtected(u8 battlerId, u16 move);
 bool32 CanBattlerEscape(u32 battlerId); // no ability check
 void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
@@ -106,7 +115,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u32 SetRandomTarget(u32 battlerId);
-u8 GetMoveTarget(u16 move, u8 setTarget);
+u32 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating);
 u32 GetBattlerHoldEffectParam(u8 battlerId);
@@ -138,8 +147,27 @@ bool32 CanFling(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
+void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
+bool32 TestSheerForceFlag(u8 battler, u16 move);
+void TryRestoreStolenItems(void);
+bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item);
+void TrySaveExchangedItem(u8 battlerId, u16 stolenItem);
+bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
+u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
+bool32 IsBattlerAffectedByHazards(u8 battlerId, bool32 toxicSpikes);
+void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
+bool32 CompareStat(u8 battlerId, u8 statId, u8 cmpTo, u8 cmpKind);
+bool32 TryRoomService(u8 battlerId);
+void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
+void DoBurmyFormChange(u32 monId);
+bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
+u16 GetUsedHeldItem(u8 battler);
+bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
+void TryToApplyMimicry(u8 battlerId, bool8 various);
+void TryToRevertMimicry(void);
+void RestoreBattlerOriginalTypes(u8 battlerId);
 
-// ability checks
+// Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
 bool32 IsRolePlayBannedAbility(u16 ability);
 bool32 IsSkillSwapBannedAbility(u16 ability);
@@ -147,5 +175,13 @@ bool32 IsWorrySeedBannedAbility(u16 ability);
 bool32 IsGastroAcidBannedAbility(u16 ability);
 bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
 bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability);
+
+bool32 CanSleep(u8 battlerId);
+bool32 CanBePoisoned(u8 battlerAttacker, u8 battlerTarget);
+bool32 CanBeBurned(u8 battlerId);
+bool32 CanBeParalyzed(u8 battlerId);
+bool32 CanBeFrozen(u8 battlerId);
+bool32 CanBeConfused(u8 battlerId);
+bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 
 #endif // GUARD_BATTLE_UTIL_H

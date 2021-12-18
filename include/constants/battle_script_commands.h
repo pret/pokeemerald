@@ -1,45 +1,60 @@
 #ifndef GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 
-// Battle Scripting and BattleCommunication addresses
-#define sPAINSPLIT_HP gBattleScripting
-#define sBIDE_DMG gBattleScripting + 4
-#define sMULTIHIT_STRING gBattleScripting + 8
-#define sEXP_CATCH gBattleScripting + 0xE
-#define sTWOTURN_STRINGID gBattleScripting + 0xF
-#define sB_ANIM_ARG1 gBattleScripting + 0x10
-#define sB_ANIM_ARG2 gBattleScripting + 0x11
-#define sTRIPLE_KICK_POWER gBattleScripting + 0x12
-#define sMOVEEND_STATE gBattleScripting + 0x14
-#define sSAVED_STAT_CHANGER gBattleScripting + 0x15
-#define sSHIFT_SWITCHED gBattleScripting + 0x16
-#define sBATTLER gBattleScripting + 0x17
-#define sB_ANIM_TURN gBattleScripting + 0x18
-#define sB_ANIM_TARGETS_HIT gBattleScripting + 0x19
-#define sSTATCHANGER gBattleScripting + 0x1A
-#define sSTAT_ANIM_PLAYED gBattleScripting + 0x1B
-#define sGIVEEXP_STATE gBattleScripting + 0x1C
-#define sBATTLE_STYLE gBattleScripting + 0x1D
-#define sLVLBOX_STATE gBattleScripting + 0x1E
-#define sLEARNMOVE_STATE gBattleScripting + 0x1F
-#define sSAVED_BATTLER gBattleScripting + 0x20
-#define sRESHOW_MAIN_STATE gBattleScripting + 0x21
-#define sRESHOW_HELPER_STATE gBattleScripting + 0x22
-#define sFIELD_23 gBattleScripting + 0x23
-#define sWINDOWS_TYPE gBattleScripting + 0x24
-#define sMULTIPLAYER_ID gBattleScripting + 0x25
-#define sSPECIAL_TRAINER_BATTLE_TYPE gBattleScripting + 0x26
-#define sMON_CAUGHT gBattleScripting + 0x27
-#define sSAVED_DMG gBattleScripting + 0x28
-#define sSAVED_MOVE_EFFECT gBattleScripting + 0x2C
-#define sMOVE_EFFECT gBattleScripting + 0x2E
-#define sMULTIHIT_EFFECT gBattleScripting + 0x30
-#define sILLUSION_NICK_HACK gBattleScripting + 0x32
-#define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
-#define sABILITY_OVERWRITE gBattleScripting + 0x34
+// The following correspond to the struct members of BattleScripting by adding their offset
+#define sPAINSPLIT_HP                (gBattleScripting + 0x00) // painSplitHp
+#define sBIDE_DMG                    (gBattleScripting + 0x04) // bideDmg
+#define sMULTIHIT_STRING             (gBattleScripting + 0x08) // multihitString
+#define sEXP_CATCH                   (gBattleScripting + 0x0E) // expOnCatch
+#define sTWOTURN_STRINGID            (gBattleScripting + 0x0F) // twoTurnsMoveStringId
+#define sB_ANIM_ARG1                 (gBattleScripting + 0x10) // animArg1
+#define sB_ANIM_ARG2                 (gBattleScripting + 0x11) // animArg2
+#define sTRIPLE_KICK_POWER           (gBattleScripting + 0x12) // tripleKickPower
+#define sMOVEEND_STATE               (gBattleScripting + 0x14) // moveendState
+#define sSAVED_STAT_CHANGER          (gBattleScripting + 0x15) // savedStatChanger
+#define sSHIFT_SWITCHED              (gBattleScripting + 0x16) // shiftSwitched
+#define sBATTLER                     (gBattleScripting + 0x17) // battler
+#define sB_ANIM_TURN                 (gBattleScripting + 0x18) // animTurn
+#define sB_ANIM_TARGETS_HIT          (gBattleScripting + 0x19) // animTargetsHit
+#define sSTATCHANGER                 (gBattleScripting + 0x1A) // statChanger
+#define sSTAT_ANIM_PLAYED            (gBattleScripting + 0x1B) // statAnimPlayed
+#define sGIVEEXP_STATE               (gBattleScripting + 0x1C) // getexpState
+#define sBATTLE_STYLE                (gBattleScripting + 0x1D) // battleStyle
+#define sLVLBOX_STATE                (gBattleScripting + 0x1E) // drawlvlupboxState
+#define sLEARNMOVE_STATE             (gBattleScripting + 0x1F) // learnMoveState
+#define sSAVED_BATTLER               (gBattleScripting + 0x20) // savedBattler
+#define sRESHOW_MAIN_STATE           (gBattleScripting + 0x21) // reshowMainState
+#define sRESHOW_HELPER_STATE         (gBattleScripting + 0x22) // reshowHelperState
+#define sLVLUP_HP                    (gBattleScripting + 0x23) // levelUpHP
+#define sWINDOWS_TYPE                (gBattleScripting + 0x24) // windowsType
+#define sMULTIPLAYER_ID              (gBattleScripting + 0x25) // multiplayerId
+#define sSPECIAL_TRAINER_BATTLE_TYPE (gBattleScripting + 0x26) // specialTrainerBattleType
+#define sMON_CAUGHT                  (gBattleScripting + 0x27) // monCaught
+#define sSAVED_DMG                   (gBattleScripting + 0x28) // savedDmg
+#define sSAVED_MOVE_EFFECT           (gBattleScripting + 0x2C) // savedMoveEffect
+#define sMOVE_EFFECT                 (gBattleScripting + 0x2E) // moveEffect
+#define sMULTIHIT_EFFECT             (gBattleScripting + 0x30) // multihitMoveEffect
+#define sILLUSION_NICK_HACK          (gBattleScripting + 0x32) // illusionNickHack
+#define sFIXED_ABILITY_POPUP         (gBattleScripting + 0x33) // fixedPopup
+#define sABILITY_OVERWRITE           (gBattleScripting + 0x34) // abilityPopupOverwrite
+#define sSWITCH_CASE                 (gBattleScripting + 0x36) // switchCase
+#define sBERRY_OVERRIDE              (gBattleScripting + 0x37) // overrideBerryRequirements
 
-#define cMULTISTRING_CHOOSER gBattleCommunication + 5
-#define cMISS_TYPE gBattleCommunication + 6
+// Array entries for battle communication
+#define MULTIUSE_STATE          0
+#define CURSOR_POSITION         1
+#define TASK_ID                 1 // task Id and cursor position share the same field
+#define SPRITES_INIT_STATE1     1 // shares the Id as well
+#define SPRITES_INIT_STATE2     2
+#define MOVE_EFFECT_BYTE        3
+#define ACTIONS_CONFIRMED_COUNT 4
+#define MULTISTRING_CHOOSER     5
+#define MISS_TYPE               6
+#define MSG_DISPLAY             7
+#define BATTLE_COMMUNICATION_ENTRIES_COUNT  8
+
+#define cMULTISTRING_CHOOSER (gBattleCommunication + MULTISTRING_CHOOSER)
+#define cMISS_TYPE           (gBattleCommunication + MISS_TYPE)
 
 // Battle Script defines for getting the wanted battler
 #define BS_TARGET                   0
@@ -47,8 +62,8 @@
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
 #define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_updatestatusicon
-#define BS_UNK_5                    5
-#define BS_UNK_6                    6
+#define BS_FAINTED_LINK_MULTIPLE_1  5
+#define BS_FAINTED_LINK_MULTIPLE_2  6
 #define BS_BATTLER_0                7
 #define BS_ATTACKER_SIDE            8 // for Cmd_jumpifability
 #define BS_TARGET_SIDE              9 // for Cmd_jumpifability
@@ -79,12 +94,15 @@
 #define VARIOUS_GET_BATTLER_FAINTED             4
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
+#define VARIOUS_RESET_PLAYER_FAINTED            7
 #define VARIOUS_PALACE_FLAVOR_TEXT              8
 #define VARIOUS_ARENA_JUDGMENT_WINDOW           9
 #define VARIOUS_ARENA_OPPONENT_MON_LOST         10
 #define VARIOUS_ARENA_PLAYER_MON_LOST           11
 #define VARIOUS_ARENA_BOTH_MONS_LOST            12
 #define VARIOUS_EMIT_YESNOBOX                   13
+#define VARIOUS_DRAW_ARENA_REF_TEXT_BOX         14
+#define VARIOUS_ERASE_ARENA_REF_TEXT_BOX        15
 #define VARIOUS_ARENA_JUDGMENT_STRING           16
 #define VARIOUS_ARENA_WAIT_STRING               17
 #define VARIOUS_WAIT_CRY                        18
@@ -93,6 +111,7 @@
 #define VARIOUS_VOLUME_DOWN                     21
 #define VARIOUS_VOLUME_UP                       22
 #define VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT 23
+#define VARIOUS_PALACE_TRY_ESCAPE_STATUS        24
 #define VARIOUS_SET_TELEPORT_OUTCOME            25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
 #define VARIOUS_STAT_TEXT_BUFFER                27
@@ -173,6 +192,39 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_TERRAIN_SEED                    106
+#define VARIOUS_MAKE_INVISIBLE                  107
+#define VARIOUS_ROOM_SERVICE                    108
+#define VARIOUS_JUMP_IF_TERRAIN_AFFECTED        109
+#define VARIOUS_EERIE_SPELL_PP_REDUCE           110
+#define VARIOUS_JUMP_IF_TEAM_HEALTHY            111
+#define VARIOUS_TRY_HEAL_QUARTER_HP             112
+#define VARIOUS_REMOVE_TERRAIN                  113
+#define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
+#define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     115
+#define VARIOUS_GET_ROTOTILLER_TARGETS          116
+#define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 117
+#define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        118
+#define VARIOUS_CONSUME_BERRY                   119
+#define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL   120
+#define VARIOUS_HANDLE_PRIMAL_REVERSION         121
+#define VARIOUS_APPLY_PLASMA_FISTS              122
+#define VARIOUS_JUMP_IF_SPECIES                 123
+#define VARIOUS_UPDATE_ABILITY_POPUP            124
+#define VARIOUS_JUMP_IF_WEATHER_AFFECTED        125
+#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    126
+#define VARIOUS_SET_ATTACKER_STICKY_WEB_USER    127
+#define VARIOUS_TRY_TO_APPLY_MIMICRY            128
+#define VARIOUS_PHOTON_GEYSER_CHECK             129
+#define VARIOUS_SHELL_SIDE_ARM_CHECK            130
+#define VARIOUS_TRY_NO_RETREAT                  131
+#define VARIOUS_TRY_TAR_SHOT                    132
+#define VARIOUS_CAN_TAR_SHOT_WORK               133
+#define VARIOUS_CHECK_POLTERGEIST               134
+#define VARIOUS_SET_OCTOLOCK                    135
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
+#define VARIOUS_TRY_END_NEUTRALIZING_GAS        137
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -191,6 +243,7 @@
 // Cmd_statbuffchange
 #define STAT_BUFF_ALLOW_PTR                 (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
 #define STAT_BUFF_NOT_PROTECT_AFFECTED      (1 << 5)
+#define STAT_BUFF_UPDATE_MOVE_EFFECT        (1 << 6)
 
 // stat change flags for Cmd_playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             (1 << 0)
@@ -227,15 +280,24 @@
 #define MOVEEND_ITEM_EFFECTS_TARGET               13
 #define MOVEEND_MOVE_EFFECTS2                     14
 #define MOVEEND_ITEM_EFFECTS_ALL                  15
-#define MOVEEND_KINGSROCK_SHELLBELL               16
+#define MOVEEND_KINGSROCK                         16    // These item effects will occur each strike of a multi-hit move
 #define MOVEEND_SUBSTITUTE                        17
 #define MOVEEND_UPDATE_LAST_MOVES                 18
 #define MOVEEND_MIRROR_MOVE                       19
-#define MOVEEND_NEXT_TARGET                       20
-#define MOVEEND_LIFE_ORB                          21
-#define MOVEEND_DANCER                            22
-#define MOVEEND_EMERGENCY_EXIT                    23
-#define MOVEEND_CLEAR_BITS                        24
-#define MOVEEND_COUNT                             25
+#define MOVEEND_NEXT_TARGET                       20    // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_EJECT_BUTTON                      21
+#define MOVEEND_RED_CARD                          22
+#define MOVEEND_EJECT_PACK                        23
+#define MOVEEND_LIFEORB_SHELLBELL                 24    // Includes shell bell, throat spray, etc
+#define MOVEEND_PICKPOCKET                        25
+#define MOVEEND_DANCER                            26
+#define MOVEEND_EMERGENCY_EXIT                    27
+#define MOVEEND_CLEAR_BITS                        28
+#define MOVEEND_COUNT                             29
+
+// switch cases
+#define B_SWITCH_NORMAL     0
+#define B_SWITCH_HIT        1   // dragon tail, circle throw
+#define B_SWITCH_RED_CARD   2
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

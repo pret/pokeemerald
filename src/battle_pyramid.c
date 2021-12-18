@@ -26,6 +26,7 @@
 #include "malloc.h"
 #include "overworld.h"
 #include "event_scripts.h"
+#include "graphics.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_pyramid.h"
 #include "constants/event_objects.h"
@@ -33,14 +34,11 @@
 #include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
-#include "constants/maps.h"
+#include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
 
 extern const struct MapLayout *const gMapLayouts[];
-extern const u16 gUnknown_08D856C8[][16];
-
-
 
 struct PyramidWildMon
 {
@@ -449,7 +447,7 @@ static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54]
     {TRAINER_CLASS_PKMN_BREEDER, TRAINER_ENCOUNTER_MUSIC_FEMALE},
     {TRAINER_CLASS_COLLECTOR, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
     {TRAINER_CLASS_PKMN_RANGER, TRAINER_ENCOUNTER_MUSIC_COOL},
-    {TRAINER_CLASS_PKMN_TRAINER_3, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_RIVAL, TRAINER_ENCOUNTER_MUSIC_MALE},
     {TRAINER_CLASS_YOUNG_COUPLE, TRAINER_ENCOUNTER_MUSIC_GIRL},
     {TRAINER_CLASS_PSYCHIC, TRAINER_ENCOUNTER_MUSIC_INTENSE},
     {TRAINER_CLASS_SR_AND_JR, TRAINER_ENCOUNTER_MUSIC_TWINS},
@@ -1187,7 +1185,7 @@ static void Task_SetPyramidFloorPalette(u8 taskId)
 {
     if (gPaletteFade.active)
     {
-        CpuCopy16(gUnknown_08D856C8[gSaveBlock2Ptr->frontier.curChallengeBattleNum], &gPlttBufferUnfaded[96], 32);
+        CpuCopy16(gBattlePyramidFloor_Pal[gSaveBlock2Ptr->frontier.curChallengeBattleNum], &gPlttBufferUnfaded[96], 32);
         DestroyTask(taskId);
     }
 }
@@ -1235,16 +1233,16 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
     int x, y;
     u8 textIndex = 0;
     u16 *map = gBackupMapLayout.map;
-    map += gBackupMapLayout.width * 7 + 7;
+    map += gBackupMapLayout.width * 7 + MAP_OFFSET;
 
     for (y = 0; y < 32; map += 47, y++)
     {
         for (x = 0; x < 32; x++)
         {
-            if ((map[x] & METATILE_ID_MASK) == FLOOR_EXIT_METATILE)
+            if ((map[x] & METATILE_ID_MASK) == METATILE_BattlePyramid_Exit)
             {
-                x += 7 - gObjectEvents[gSelectedObjectEvent].initialCoords.x;
-                y += 7 - gObjectEvents[gSelectedObjectEvent].initialCoords.y;
+                x += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.x;
+                y += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.y;
                 if (x >= minDistanceForExitHint
                  || x <= -minDistanceForExitHint
                  || y >= minDistanceForExitHint
@@ -1537,17 +1535,17 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         const u16 *layoutMap = mapLayout->map;
 
         gBackupMapLayout.map = backupMapData;
-        gBackupMapLayout.width = mapLayout->width * 4 + 15;
-        gBackupMapLayout.height = mapLayout->height * 4 + 14;
+        gBackupMapLayout.width = mapLayout->width * 4 + MAP_OFFSET_W;
+        gBackupMapLayout.height = mapLayout->height * 4 + MAP_OFFSET_H;
         map = backupMapData;
-        yOffset = ((i / 4 * mapLayout->height) + 7) * gBackupMapLayout.width;
-        xOffset = (i % 4 * mapLayout->width) + 7;
+        yOffset = ((i / 4 * mapLayout->height) + MAP_OFFSET) * gBackupMapLayout.width;
+        xOffset = (i % 4 * mapLayout->width) + MAP_OFFSET;
         map += yOffset + xOffset;
         for (y = 0; y < mapLayout->height; y++)
         {
             for (x = 0; x < mapLayout->width; x++)
             {
-                if ((layoutMap[x] & METATILE_ID_MASK) != FLOOR_EXIT_METATILE)
+                if ((layoutMap[x] & METATILE_ID_MASK) != METATILE_BattlePyramid_Exit)
                 {
                     map[x] = layoutMap[x];
                 }
@@ -1558,14 +1556,14 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
                         gSaveBlock1Ptr->pos.x = (mapLayout->width * (i % 4)) + x;
                         gSaveBlock1Ptr->pos.y = (mapLayout->height * (i / 4)) + y;
                     }
-                    map[x] = (layoutMap[x] & 0xFC00) | FLOOR_WALKABLE_METATILE;
+                    map[x] = (layoutMap[x] & (METATILE_ELEVATION_MASK | METATILE_COLLISION_MASK)) | METATILE_BattlePyramid_Floor;
                 }
                 else
                 {
                     map[x] = layoutMap[x];
                 }
             }
-            map += 15 + (mapLayout->width * 4);
+            map += MAP_OFFSET_W + (mapLayout->width * 4);
             layoutMap += mapLayout->width;
         }
     }

@@ -82,13 +82,22 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
 }; /* size = 12 */
 
+// Number of bytes in the largest Pokémon substruct.
+// They are assumed to be the same size, and will be padded to
+// the largest size by the union.
+// By default they are all 12 bytes.
+#define NUM_SUBSTRUCT_BYTES (max(sizeof(struct PokemonSubstruct0),     \
+                             max(sizeof(struct PokemonSubstruct1),     \
+                             max(sizeof(struct PokemonSubstruct2),     \
+                                 sizeof(struct PokemonSubstruct3)))))
+
 union PokemonSubstruct
 {
     struct PokemonSubstruct0 type0;
     struct PokemonSubstruct1 type1;
     struct PokemonSubstruct2 type2;
     struct PokemonSubstruct3 type3;
-    u16 raw[6];
+    u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
 };
 
 struct BoxPokemon
@@ -108,7 +117,7 @@ struct BoxPokemon
 
     union
     {
-        u32 raw[12];
+        u32 raw[(NUM_SUBSTRUCT_BYTES * 4) / 4]; // *4 because there are 4 substructs, /4 because it's u32, not u8
         union PokemonSubstruct substructs[4];
     } secure;
 };
@@ -128,18 +137,30 @@ struct Pokemon
     u16 spDefense;
 };
 
-struct Unknown_806F160_Struct
+struct MonSpritesGfxManager
 {
-    u32 field_0_0:4;
-    u32 field_0_1:4;
-    u32 field_1:8;
-    u16 magic:8;
-    u32 field_3_0:4;
-    u32 field_3_1:4;
-    void *bytes;
-    u8 **byteArrays;
+    u32 numSprites:4;
+    u32 numSprites2:4; // Never read
+    u32 numFrames:8;
+    u32 active:8;
+    u32 dataSize:4;
+    u32 mode:4; // MON_SPR_GFX_MODE_*
+    void *spriteBuffer;
+    u8 **spritePointers;
     struct SpriteTemplate *templates;
     struct SpriteFrameImage *frameImages;
+};
+
+enum {
+    MON_SPR_GFX_MODE_NORMAL,
+    MON_SPR_GFX_MODE_BATTLE,
+    MON_SPR_GFX_MODE_FULL_PARTY,
+};
+
+enum {
+    MON_SPR_GFX_MANAGER_A,
+    MON_SPR_GFX_MANAGER_B, // Nothing ever sets up this manager.
+    MON_SPR_GFX_MANAGERS_COUNT
 };
 
 struct BattlePokemon
@@ -221,7 +242,7 @@ struct BattleMove
     u8 accuracy;
     u8 pp;
     u8 secondaryEffectChance;
-    u8 target;
+    u16 target;
     s8 priority;
     u32 flags;
     u8 split;
@@ -256,6 +277,8 @@ struct Evolution
     | (((personality) & 0x00000003) >> 0)  \
 ) % NUM_UNOWN_FORMS)
 
+#define GET_SHINY_VALUE(otId, personality)HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality)
+
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
@@ -270,8 +293,8 @@ extern const u8 *const gItemEffectTable[];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];
 extern const u8 gPPUpGetMask[];
-extern const u8 gPPUpSetMask[];
-extern const u8 gPPUpAddMask[];
+extern const u8 gPPUpClearMask[];
+extern const u8 gPPUpAddValues[];
 extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gLinkPlayerFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
@@ -290,7 +313,7 @@ void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32
 void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId);
 void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
 void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src);
-void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50);
+void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50);
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
@@ -312,12 +335,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
-
 u8 CountAliveMonsInBattle(u8 caseId);
-#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
-#define BATTLE_ALIVE_ATK_SIDE       1
-#define BATTLE_ALIVE_DEF_SIDE       2
-
 u8 GetDefaultMoveTarget(u8 battlerId);
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
@@ -338,7 +356,6 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
-u8 SendMonToPC(struct Pokemon* mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 u8 GetMonsStateToDoubles(void);
@@ -370,7 +387,6 @@ u16 NationalToHoennOrder(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u16 SpeciesToHoennPokedexNum(u16 species);
 u16 HoennToNationalOrder(u16 hoennNum);
-void sub_806D544(u16 species, u32 personality, u8 *dest);
 void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 u8 GetPlayerFlankId(void);
@@ -421,18 +437,16 @@ void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, 
 void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneFrame);
 void StopPokemonAnimationDelayTask(void);
 void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
-u8 sub_806EF08(u8 arg0);
-u8 sub_806EF84(u8 arg0, u8 arg1);
-u16 sub_806EFF0(u16 arg0);
+u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId);
 u16 FacilityClassToPicIndex(u16 facilityClass);
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 const u8 *GetTrainerClassNameFromId(u16 trainerId);
 const u8 *GetTrainerNameFromId(u16 trainerId);
 bool8 HasTwoFramesAnimation(u16 species);
-struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
-void sub_806F47C(u8 id);
-u8 *sub_806F4F8(u8 id, u8 arg1);
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
+void DestroyMonSpritesGfxManager(u8 managerId);
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
 u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 

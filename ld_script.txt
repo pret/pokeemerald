@@ -41,6 +41,8 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
+        src/rom_header.o(.text);
+        src/rom_header_gf.o(.text.*);
         src/crt0.o(.text);
         src/main.o(.text);
         gflib/malloc.o(.text);
@@ -57,16 +59,16 @@ SECTIONS {
         src/link_rfu_3.o(.text);
         src/link_rfu_2.o(.text);
         src/union_room.o(.text);
-        src/mystery_gift.o(.text);
+        src/mystery_gift_menu.o(.text);
         src/union_room_player_avatar.o(.text);
         src/wireless_communication_status_screen.o(.text);
         src/union_room_battle.o(.text);
-        src/mevent2.o(.text);
-        src/mevent_801BAAC.o(.text);
-        src/mevent_server.o(.text);
-        src/mevent_client.o(.text);
-        src/mevent_server_helpers.o(.text);
-        src/mevent_news.o(.text);
+        src/mystery_gift.o(.text);
+        src/mystery_gift_view.o(.text);
+        src/mystery_gift_server.o(.text);
+        src/mystery_gift_client.o(.text);
+        src/mystery_gift_link.o(.text);
+        src/wonder_news.o(.text);
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);
         src/berry_powder.o(.text);
@@ -253,7 +255,7 @@ SECTIONS {
         src/battle_controller_wally.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
-        src/reset_save_heap.o(.text);
+        src/reload_save.o(.text);
         src/field_region_map.o(.text);
         src/battle_anim_throw.o(.text);
         src/hall_of_fame.o(.text);
@@ -296,7 +298,7 @@ SECTIONS {
         src/item_icon.o(.text);
         src/party_menu.o(.text);
         src/battle_tent.o(.text);
-        src/unk_text_util_2.o(.text);
+        src/braille.o(.text);
         src/multiboot.o(.text);
         src/berry_fix_graphics.o(.text);
         src/battle_controller_player_partner.o(.text);
@@ -307,17 +309,17 @@ SECTIONS {
         src/battle_pyramid_bag.o(.text);
         src/pokenav.o(.text);
         src/pokenav_main_menu.o(.text);
-        src/pokenav_match_call_ui.o(.text);
-        src/pokenav_menu_handler_1.o(.text);
-        src/pokenav_menu_handler_2.o(.text);
-        src/pokenav_match_call_1.o(.text);
-        src/pokenav_match_call_2.o(.text);
+        src/pokenav_list.o(.text);
+        src/pokenav_menu_handler.o(.text);
+        src/pokenav_menu_handler_gfx.o(.text);
+        src/pokenav_match_call_list.o(.text);
+        src/pokenav_match_call_gfx.o(.text);
         src/pokenav_region_map.o(.text);
-        src/pokenav_conditions_1.o(.text);
-        src/pokenav_conditions_2.o(.text);
-        src/pokenav_conditions_3.o(.text);
-        src/pokenav_ribbons_1.o(.text);
-        src/pokenav_ribbons_2.o(.text);
+        src/pokenav_conditions.o(.text);
+        src/pokenav_conditions_gfx.o(.text);
+        src/pokenav_conditions_search_results.o(.text);
+        src/pokenav_ribbons_list.o(.text);
+        src/pokenav_ribbons_summary.o(.text);
         src/pokenav_match_call_data.o(.text);
         src/menu_specialized.o(.text);
         src/ereader_helpers.o(.text);
@@ -431,6 +433,8 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
+        src/rom_header.o(.rodata);
+        src/rom_header_gf.o(.rodata);
         src/main.o(.rodata);
         gflib/bg.o(.rodata);
         gflib/window.o(.rodata);
@@ -445,15 +449,15 @@ SECTIONS {
         src/link_rfu_2.o(.rodata);
         src/link_rfu_2.o(.rodata.str1.4);
         src/union_room.o(.rodata);
-        src/mystery_gift.o(.rodata);
+        src/mystery_gift_menu.o(.rodata);
         src/union_room_player_avatar.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/union_room_battle.o(.rodata);
-        src/mevent2.o(.rodata);
-        src/mevent_801BAAC.o(.rodata);
-        src/mevent_server.o(.rodata);
-        src/mevent_client.o(.rodata);
-        src/mevent_scripts.o(.rodata);
+        src/mystery_gift.o(.rodata);
+        src/mystery_gift_view.o(.rodata);
+        src/mystery_gift_server.o(.rodata);
+        src/mystery_gift_client.o(.rodata);
+        src/mystery_gift_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
@@ -653,7 +657,7 @@ SECTIONS {
         src/item_icon.o(.rodata);
         src/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
-        src/unk_text_util_2.o(.rodata);
+        src/braille.o(.rodata);
         src/multiboot.o(.rodata);
         src/berry_fix_graphics.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
@@ -664,16 +668,16 @@ SECTIONS {
         src/battle_pyramid_bag.o(.rodata);
         src/pokenav.o(.rodata);
         src/pokenav_main_menu.o(.rodata);
-        src/pokenav_match_call_ui.o(.rodata);
-        src/pokenav_menu_handler_1.o(.rodata);
-        src/pokenav_menu_handler_2.o(.rodata);
-        src/pokenav_match_call_1.o(.rodata);
-        src/pokenav_match_call_2.o(.rodata);
+        src/pokenav_list.o(.rodata);
+        src/pokenav_menu_handler.o(.rodata);
+        src/pokenav_menu_handler_gfx.o(.rodata);
+        src/pokenav_match_call_list.o(.rodata);
+        src/pokenav_match_call_gfx.o(.rodata);
         src/pokenav_region_map.o(.rodata);
-        src/pokenav_conditions_2.o(.rodata);
-        src/pokenav_conditions_3.o(.rodata);
-        src/pokenav_ribbons_1.o(.rodata);
-        src/pokenav_ribbons_2.o(.rodata);
+        src/pokenav_conditions_gfx.o(.rodata);
+        src/pokenav_conditions_search_results.o(.rodata);
+        src/pokenav_ribbons_list.o(.rodata);
+        src/pokenav_ribbons_summary.o(.rodata);
         src/pokenav_match_call_data.o(.rodata);
         src/menu_specialized.o(.rodata);
         src/ereader_helpers.o(.rodata);
@@ -685,9 +689,9 @@ SECTIONS {
         src/gym_leader_rematch.o(.rodata);
         src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
-        data/fonts.o(.rodata);
+        src/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
-        data/mystery_event.o(.rodata);
+        data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
@@ -1249,7 +1253,7 @@ SECTIONS {
     other_data :
     ALIGN(4)
     {
-        data/unknown_serial_data.o(.rodata);
+        data/ereader_link_data.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0

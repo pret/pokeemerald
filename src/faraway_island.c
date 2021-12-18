@@ -7,7 +7,6 @@
 #include "sprite.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
-#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 
 static u8 GetValidMewMoveDirection(u8);
@@ -29,10 +28,10 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
 static const s16 sFarawayIslandRockCoords[4][2] =
 {
-    {14 + 7,  9 + 7},
-    {18 + 7,  9 + 7},
-    { 9 + 7, 10 + 7},
-    {13 + 7, 13 + 7},
+    {14 + MAP_OFFSET,  9 + MAP_OFFSET},
+    {18 + MAP_OFFSET,  9 + MAP_OFFSET},
+    { 9 + MAP_OFFSET, 10 + MAP_OFFSET},
+    {13 + MAP_OFFSET, 13 + MAP_OFFSET},
 };
 
 static u8 GetMewObjectEventId(void)

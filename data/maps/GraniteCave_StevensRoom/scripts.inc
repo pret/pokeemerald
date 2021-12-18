@@ -12,8 +12,7 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM47
-	compare VAR_RESULT, FALSE
-	call_if_eq GraniteCave_StevensRoom_EventScript_BagFull
+	call_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -25,14 +24,10 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
 	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitNorth
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitSouth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
-	compare VAR_FACING, DIR_EAST
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, GraniteCave_StevensRoom_EventScript_StevenExitSouth
+	call_if_eq VAR_FACING, DIR_WEST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	call_if_eq VAR_FACING, DIR_EAST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	playse SE_EXIT
 	removeobject LOCALID_STEVEN
 	release
@@ -72,7 +67,7 @@ GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit:
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 GraniteCave_StevensRoom_Movement_StevenExitSouth:

@@ -1,9 +1,9 @@
 #ifndef GUARD_BATTLE_AI_UTIL_H
 #define GUARD_BATTLE_AI_UTIL_H
 
-// for IsAiFaster
-#define AI_CHECK_FASTER   0       // if_user_faster
-#define AI_CHECK_SLOWER   1       // if_target_faster
+// for AI_WhoStrikesFirst
+#define AI_IS_FASTER   0
+#define AI_IS_SLOWER   1
 
 #define FOE(battler) ((battler ^ BIT_SIDE) & BIT_SIDE)
 
@@ -21,12 +21,13 @@ void SaveBattlerData(u8 battlerId);
 void SetBattlerData(u8 battlerId);
 void RestoreBattlerData(u8 battlerId);
 
+bool32 WillAIStrikeFirst(void);
 u32 GetTotalBaseStat(u32 species);
 bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u8 battler);
 u32 GetHealthPercentage(u8 battler);
 bool32 IsBattlerTrapped(u8 battler, bool8 switching);
-bool32 IsAiFaster(u8 battler);
+u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2);
 bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk);
 bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits);
 bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgMod);
@@ -35,7 +36,8 @@ u16 AI_GetHoldEffect(u32 battlerId);
 u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u8 atkHoldEffect, u8 defHoldEffect, u16 move);
 bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move);
 bool32 AI_WeatherHasEffect(void);
-bool32 CanAttackerFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHits);
+bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits);
+bool32 CanIndexMoveFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHits);
 bool32 AI_IsTerrainAffected(u8 battlerId, u32 flags);
 bool32 AI_IsBattlerGrounded(u8 battlerId);
 bool32 HasDamagingMove(u8 battlerId);
@@ -51,9 +53,13 @@ bool32 ShouldRecover(u8 battlerAtk, u8 battlerDef, u16 move, u8 healPercent);
 bool32 ShouldSetScreen(u8 battlerAtk, u8 battlerDef, u16 moveEffect);
 bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 moveIndex);
 bool32 IsRecycleEncouragedItem(u16 item);
+bool32 ShouldRestoreHpBerry(u8 battlerAtk, u16 item);
+bool32 IsStatBoostingBerry(u16 item);
 bool32 CanKnockOffItem(u8 battler, u16 item);
 bool32 IsAbilityOfRating(u16 ability, s8 rating);
 s8 GetAbilityRating(u16 ability);
+bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
+bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
@@ -119,10 +125,9 @@ bool32 IsUngroundingEffect(u16 effect);
 bool32 IsSemiInvulnerable(u8 battlerDef, u16 move);
 
 // status checks
-bool32 CanBeBurned(u8 battler, u16 ability);
-bool32 CanBePoisoned(u8 battler, u16 ability);
-bool32 CanBeConfused(u8 battler, u16 ability);
-bool32 CanSleep(u8 battler, u16 ability);
+bool32 AI_CanBeBurned(u8 battler, u16 ability);
+bool32 AI_CanBeConfused(u8 battler, u16 ability);
+bool32 AI_CanSleep(u8 battler, u16 ability);
 bool32 IsBattlerIncapacitated(u8 battler, u16 ability);
 bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove);
 bool32 ShouldPoisonSelf(u8 battler, u16 ability);
