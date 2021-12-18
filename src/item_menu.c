@@ -1654,6 +1654,14 @@ static void OpenContextMenu(u8 taskId)
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_ItemsPocket;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
                 break;
+            case MEGASTONES_POCKET:
+                gBagMenu->contextMenuItemsPtr = sContextMenuItems_ItemsPocket;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
+                break;
+            case ZCRYSTALS_POCKET:
+                gBagMenu->contextMenuItemsPtr = sContextMenuItems_ItemsPocket;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
+                break;
             }
         }
     }

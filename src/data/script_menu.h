@@ -936,6 +936,8 @@ const u8 *const gStdStrings[] =
     [STDSTRING_MEDICINE] = gText_Medicine,
     [STDSTRING_BATTLEITEMS] = gText_BattleItems,
     [STDSTRING_TREASURES] = gText_Treasures,
+    [STDSTRING_MEGASTONES] = gText_MegaStones,
+    [STDSTRING_ZCRYSTALS] = gText_ZCrystals,
 };
 
 static const u8 sLinkServicesMultichoiceIds[] =
