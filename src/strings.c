@@ -287,6 +287,8 @@ const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 const u8 gText_MedicinePocket[] = _("MEDICINE");
 const u8 gText_BattleItemsPocket[] = _("BATTLE ITEM");
 const u8 gText_TreasuresPocket[] = _("TREASURES");
+const u8 gText_MegaStonesPocket[] = _("MEGA STONES");
+const u8 gText_ZCrystalsPocket[] = _("Z-CRYSTALS");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
@@ -296,6 +298,8 @@ const u8 *const gPocketNamesStringsTable[] =
     [BATTLEITEMS_POCKET] = gText_BattleItemsPocket,
     [BERRIES_POCKET] = gText_BerriesPocket,
     [TREASURES_POCKET] = gText_TreasuresPocket,
+    [MEGASTONES_POCKET] = gText_MegaStonesPocket,
+    [ZCRYSTALS_POCKET] = gText_ZCrystalsPocket,
     [TMHM_POCKET]  = gText_TMHMPocket,
     [KEYITEMS_POCKET] = gText_KeyItemsPocket
 };
