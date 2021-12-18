@@ -181,7 +181,7 @@ Route117_EventScript_Aisha::
 	end
 
 Route117_Text_DayCarePokemonHadNewMove:
-	.string "I left my POKéMON at the DAY CARE.\p"
+	.string "I left my Pokémon at the Day Care.\p"
 	.string "When I got it back, it had a new move\n"
 	.string "that I didn't teach it.\l"
 	.string "I was really, really surprised.$"
@@ -195,14 +195,14 @@ Route117_Text_AirIsTastyHere:
 	.string "The air is tasty here!$"
 
 Route117_Text_RouteSignVerdanturf:
-	.string "ROUTE 117\n"
-	.string "{LEFT_ARROW} VERDANTURF TOWN$"
+	.string "Route 117\n"
+	.string "{LEFT_ARROW} Verdanturf Town$"
 
 Route117_Text_RouteSignMauville:
-	.string "ROUTE 117\n"
-	.string "{RIGHT_ARROW} MAUVILLE CITY$"
+	.string "Route 117\n"
+	.string "{RIGHT_ARROW} Mauville City$"
 
 Route117_Text_DayCareSign:
-	.string "POKéMON DAY CARE\n"
-	.string "“Let us raise your POKéMON.”$"
+	.string "Pokémon Day Care\n"
+	.string "“Let us raise your Pokémon.”$"
 

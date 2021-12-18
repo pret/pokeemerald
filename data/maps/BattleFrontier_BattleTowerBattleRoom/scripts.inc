@@ -438,7 +438,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_RetireChallenge::
 	end
 
 BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth:
-	.string "We will restore your POKéMON to\n"
+	.string "We will restore your Pokémon to\n"
 	.string "full health.$"
 
 @ Unused
@@ -472,11 +472,11 @@ BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor7thOpponent:
 
 BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle:
 	.string "Record your battle on your\n"
-	.string "FRONTIER PASS?$"
+	.string "Frontier Pass?$"
 
 BattleFrontier_BattleTowerLobby_Text_BattleRecordedOnPass:
 	.string "{PLAYER}'s battle was recorded\n"
-	.string "on the FRONTIER PASS.$"
+	.string "on the Frontier Pass.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_SaveAndQuitGame:
 	.string "Would you like to save and\n"
@@ -487,8 +487,8 @@ BattleFrontier_BattleTowerBattleRoom_Text_SavingPleaseWait:
 	.string "Please wait.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge:
-	.string "Would you like to cancel your BATTLE\n"
-	.string "ROOM challenge?$"
+	.string "Would you like to cancel your Battle\n"
+	.string "Room challenge?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved::
 	.string "There was an error of some sort.\n"
@@ -496,19 +496,19 @@ BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved::
 
 BattleFrontier_BattleTowerBattleRoom_Text_SalonMaidenOnHerWay:
 	.string "Excuse me, but…\p"
-	.string "Our leader, the SALON MAIDEN, is on\n"
+	.string "Our leader, the Salon Maiden, is on\n"
 	.string "her way here in hopes of battling you.\p"
 	.string "She should be arriving very shortly.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyForSalonMaiden:
-	.string "You will be facing the SALON MAIDEN.\n"
+	.string "You will be facing the Salon Maiden.\n"
 	.string "Are you prepared?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_GreetingsImAnabel:
 	.string "Greetings…\n"
-	.string "My name is ANABEL.\p"
-	.string "I am the SALON MAIDEN, and I am in\n"
-	.string "charge of running the BATTLE TOWER…\p"
+	.string "My name is Anabel.\p"
+	.string "I am the Salon Maiden, and I am in\n"
+	.string "charge of running the Battle Tower…\p"
 	.string "I have heard several rumors\n"
 	.string "about you…\p"
 	.string "In all honesty, what I have heard does\n"
@@ -521,17 +521,17 @@ BattleFrontier_BattleTowerBattleRoom_Text_LetMeSeeYourTalent:
 	.string "its entirety…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelTalentShallBeRecognized:
-	.string "ANABEL: Fufufu, nicely done…\p"
-	.string "Your FRONTIER PASS, please…\n"
+	.string "Anabel: Fufufu, nicely done…\p"
+	.string "Your Frontier Pass, please…\n"
 	.string "Your talent shall be recognized.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReceivedAbilitySymbol:
 	.string "The Ability Symbol was embossed on\n"
-	.string "the FRONTIER PASS!$"
+	.string "the Frontier Pass!$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_UntilNextTime:
 	.string "… … … … … …\p"
-	.string "You have confidence in your POKéMON\n"
+	.string "You have confidence in your Pokémon\n"
 	.string "battling talent, don't you?\p"
 	.string "I urge you to keep battling and\n"
 	.string "keep on winning.\p"
@@ -539,7 +539,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_UntilNextTime:
 	.string "Until the next time we meet…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelYouCameBack:
-	.string "ANABEL: You really did come back to\n"
+	.string "Anabel: You really did come back to\n"
 	.string "see me…\p"
 	.string "… … … … … …\p"
 	.string "You've won straight matches to see me…\n"
@@ -552,8 +552,8 @@ BattleFrontier_BattleTowerBattleRoom_Text_LetsBeginShallWe:
 	.string "Let's begin, shall we?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelCongratsYourPassPlease:
-	.string "ANABEL: Fufu, congratulations…\n"
-	.string "Your FRONTIER PASS, please…$"
+	.string "Anabel: Fufu, congratulations…\n"
+	.string "Your Frontier Pass, please…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine:
 	.string "The Ability Symbol took on\n"
@@ -561,7 +561,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine:
 
 BattleFrontier_BattleTowerBattleRoom_Text_WishICouldBattleYouAgain:
 	.string "That was fun…\p"
-	.string "I have never had a POKéMON battle\n"
+	.string "I have never had a Pokémon battle\n"
 	.string "so enjoyable before…\p"
 	.string "I wish I could battle with you again…$"
 

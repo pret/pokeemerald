@@ -20,7 +20,7 @@ SeafloorCavern_Room1_Text_Grunt1Defeat:
 
 SeafloorCavern_Room1_Text_Grunt1PostBattle:
 	.string "I want to get a promotion so I can\n"
-	.string "boss around the GRUNTS…$"
+	.string "boss around the Grunts…$"
 
 SeafloorCavern_Room1_Text_Grunt2Intro:
 	.string "That submarine… It's tiny inside.\n"

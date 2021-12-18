@@ -70,12 +70,12 @@ LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
 
 LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove:
 	.string "Uh…\n"
-	.string "Oh, yes, I'm the MOVE DELETER.\p"
-	.string "I can make POKéMON forget their moves.\p"
+	.string "Oh, yes, I'm the Move Deleter.\p"
+	.string "I can make Pokémon forget their moves.\p"
 	.string "Would you like me to do that?$"
 
 LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget:
-	.string "Which POKéMON should forget a move?$"
+	.string "Which Pokémon should forget a move?$"
 
 LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten:
 	.string "Which move should be forgotten?$"
@@ -99,10 +99,10 @@ LilycoveCity_MoveDeletersHouse_Text_ComeAgain:
 
 LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves:
 	.string "What?\n"
-	.string "No EGG should know any moves.$"
+	.string "No Egg should know any moves.$"
 
 LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf:
 	.string "Hm!\p"
 	.string "Your {STR_VAR_1} doesn't seem willing\n"
-	.string "to forget SURF.$"
+	.string "to forget Surf.$"
 

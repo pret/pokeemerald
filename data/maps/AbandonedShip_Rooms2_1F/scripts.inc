@@ -50,78 +50,78 @@ AbandonedShip_Rooms2_1F_EventScript_Garrison::
 	end
 
 AbandonedShip_Rooms2_1F_Text_DanIntro:
-	.string "DAN: While searching for treasures,\n"
-	.string "we discovered a TRAINER!$"
+	.string "Dan: While searching for treasures,\n"
+	.string "we discovered a Trainer!$"
 
 AbandonedShip_Rooms2_1F_Text_DanDefeat:
-	.string "DAN: We couldn't win even though\n"
+	.string "Dan: We couldn't win even though\n"
 	.string "we worked together…$"
 
 AbandonedShip_Rooms2_1F_Text_DanPostBattle:
-	.string "DAN: We can't find any treasures…\n"
+	.string "Dan: We can't find any treasures…\n"
 	.string "I wonder if someone got them already?$"
 
 AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons:
-	.string "DAN: You don't even have two POKéMON.\n"
+	.string "Dan: You don't even have two Pokémon.\n"
 	.string "You can't expect to beat us like that.$"
 
 AbandonedShip_Rooms2_1F_Text_KiraIntro:
-	.string "KIRA: Oh?\n"
+	.string "Kira: Oh?\n"
 	.string "We were searching for treasures.\l"
-	.string "But we discovered a TRAINER instead!$"
+	.string "But we discovered a Trainer instead!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraDefeat:
-	.string "KIRA: Ooh, so strong!$"
+	.string "Kira: Ooh, so strong!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraPostBattle:
-	.string "KIRA: Where could the treasures be?\p"
+	.string "Kira: Where could the treasures be?\p"
 	.string "I've already decided what I'm buying\n"
 	.string "when we find the treasures!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons:
-	.string "KIRA: Oh, you don't have two POKéMON?\n"
+	.string "Kira: Oh, you don't have two Pokémon?\n"
 	.string "We'll have to battle some other time!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRegister:
-	.string "KIRA: Oh, you make me so angry!\n"
+	.string "Kira: Oh, you make me so angry!\n"
 	.string "I'm going to register you for that!$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchIntro:
-	.string "DAN: We've been searching for\n"
+	.string "Dan: We've been searching for\n"
 	.string "treasures all this time.\p"
-	.string "Our POKéMON have grown stronger, too.\n"
+	.string "Our Pokémon have grown stronger, too.\n"
 	.string "Let us show you, okay?$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchDefeat:
-	.string "DAN: You're strong, as usual!$"
+	.string "Dan: You're strong, as usual!$"
 
 AbandonedShip_Rooms2_1F_Text_DanPostRematch:
-	.string "DAN: We can't find any treasures,\n"
-	.string "we lose at POKéMON…\p"
+	.string "Dan: We can't find any treasures,\n"
+	.string "we lose at Pokémon…\p"
 	.string "I want to go home… But if I say that,\n"
 	.string "she gets all angry with me…$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons:
-	.string "DAN: You don't even have two POKéMON.\n"
+	.string "Dan: You don't even have two Pokémon.\n"
 	.string "You can't expect to beat us like that.$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchIntro:
-	.string "KIRA: Oh? We meet again!\p"
+	.string "Kira: Oh? We meet again!\p"
 	.string "Just like us, you still haven't given up\n"
 	.string "searching for treasures, have you?\p"
 	.string "Want to make it so the loser has\n"
 	.string "to give up searching?$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat:
-	.string "KIRA: Oh, we lost again…$"
+	.string "Kira: Oh, we lost again…$"
 
 AbandonedShip_Rooms2_1F_Text_KiraPostRematch:
-	.string "KIRA: We're not leaving until we raise\n"
-	.string "our POKéMON some more and we find\l"
+	.string "Kira: We're not leaving until we raise\n"
+	.string "our Pokémon some more and we find\l"
 	.string "the treasures here!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons:
-	.string "KIRA: Oh, you don't have two POKéMON?\n"
+	.string "Kira: Oh, you don't have two Pokémon?\n"
 	.string "We'll have to battle some other time!$"
 
 AbandonedShip_Rooms2_1F_Text_JaniIntro:
@@ -138,7 +138,7 @@ AbandonedShip_Rooms2_1F_Text_JaniPostBattle:
 
 AbandonedShip_Rooms2_1F_Text_GarrisonIntro:
 	.string "Strength and compassion…\n"
-	.string "Those are a TRAINER's treasures!$"
+	.string "Those are a Trainer's treasures!$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonDefeat:
 	.string "Ah, there is something about you\n"

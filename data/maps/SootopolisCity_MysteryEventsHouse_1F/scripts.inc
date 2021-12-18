@@ -167,16 +167,16 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideRight:
 
 SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles:
 	.string "When I was young, I traveled the world\n"
-	.string "as a POKéMON TRAINER.\p"
+	.string "as a Pokémon Trainer.\p"
 	.string "Now that I've become an old buzzard,\n"
 	.string "my only amusement is watching young\l"
-	.string "TRAINERS battle.$"
+	.string "Trainers battle.$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_DoorAppearsToBeLocked:
 	.string "The door appears to be locked.$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_ChallengeVisitingTrainer:
-	.string "A TRAINER named {STR_VAR_1}\n"
+	.string "A Trainer named {STR_VAR_1}\n"
 	.string "is visiting my home.\p"
 	.string "Would you like to challenge\n"
 	.string "{STR_VAR_1}?$"

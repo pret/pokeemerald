@@ -43,9 +43,9 @@ BattleFrontier_Lounge5_EventScript_LittleBoy::
 
 BattleFrontier_Lounge5_Text_NatureGirlGreeting::
 	.string "Ehehe!\n"
-	.string "I can tell what POKéMON are thinking!\p"
+	.string "I can tell what Pokémon are thinking!\p"
 	.string "Please!\n"
-	.string "Can I see your POKéMON?$"
+	.string "Can I see your Pokémon?$"
 
 BattleFrontier_Lounge5_Text_NatureGirlNoneShown::
 	.string "Boo!\n"
@@ -184,13 +184,13 @@ BattleFrontier_Lounge5_Text_NatureGirlCareful::
 	.string "it will turn sneaky!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlEgg::
-	.string "That's silly! An EGG is asleep!\n"
+	.string "That's silly! An Egg is asleep!\n"
 	.string "I can't talk to it!$"
 
 BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon::
 	.string "How charming!\n"
 	.string "That little lady claims she can\l"
-	.string "understand POKéMON!$"
+	.string "understand Pokémon!$"
 
 BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound::
 	.string "I have this feeling that the little girl\n"
