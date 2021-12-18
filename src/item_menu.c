@@ -63,7 +63,12 @@
                             max(BAG_BERRIES_COUNT,           \
                             max(BAG_ITEMS_COUNT,             \
                             max(BAG_KEYITEMS_COUNT,          \
-                                BAG_POKEBALLS_COUNT))))) + 1)
+                            max(BAG_MEGASTONES_COUNT,        \
+                            max(BAG_ZCRYSTALS_COUNT,         \
+                            max(BAG_TREASURES_COUNT,         \
+                            max(BAG_MEDICINE_COUNT,          \
+                            max(BAG_KEYITEMS_COUNT,          \
+                                BAG_POKEBALLS_COUNT)))))))))) + 1)
 
 // Up to 8 item slots can be visible at a time
 #define MAX_ITEMS_SHOWN 8
