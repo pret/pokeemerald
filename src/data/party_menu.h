@@ -1168,20 +1168,6 @@ static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
     .callback = SpriteCallbackDummy,
 };
 
-// Mask for the partners party in a multi battle. TRUE if in the partners party, FALSE otherwise
-// The 7th slot is Cancel, and the 8th slot is unreachable
-// Used only to determine whether or not to show the Deoxys form icon sprite
-static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
-{
-    FALSE,
-    TRUE,
-    FALSE,
-    FALSE,
-    TRUE,
-    TRUE,
-    FALSE
-};
-
 static const u8 *const sUnused_StatStrings[] =
 {
     gText_HP4,

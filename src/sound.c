@@ -372,11 +372,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u32 length;
     u32 pitch;
     u32 chorus;
-    u32 index;
-    u8 table;
 
-    species--;
-    
     // Set default values
     // May be overridden depending on mode.
     length = 140;
@@ -463,34 +459,8 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    // This is a fancy way to get a cry of a pokemon.
-    // It creates 4 sets of 128 mini cry tables.
-    // If you wish to expand pokemon, you need to
-    // append new cases to the switch.
-    species = SpeciesToCryId(species);
-    index = species % 128;
-    table = species / 128;
-
-    #define GET_CRY(speciesIndex, tableId, reversed) \
-        ((reversed) ? &gCryTable_Reverse[(128 * (tableId)) + (speciesIndex)] : &gCryTable[(128 * (tableId)) + (speciesIndex)])
-
-    switch (table)
-    {
-    case 0:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 0, reverse));
-        break;
-    case 1:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 1, reverse));
-        break;
-    case 2:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 2, reverse));
-        break;
-    case 3:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 3, reverse));
-        break;
-    }
-
-    #undef GET_CRY
+    species--;
+    gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
 }
 
 bool8 IsCryFinished(void)

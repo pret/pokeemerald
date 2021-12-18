@@ -302,9 +302,19 @@ const union AnimCmd *const gAnims_MonPic[] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
-#include "data/pokemon_graphics/unknown_anims.h"
+const bool8 SpeciesHasGenderDifference[NUM_SPECIES] =
+{
+    [SPECIES_EEVEE] = TRUE,
+    [SPECIES_COMBEE] = TRUE,
+    [SPECIES_HIPPOPOTAS] = TRUE,
+    [SPECIES_HIPPOWDON] = TRUE,
+    [SPECIES_UNFEZANT] = TRUE,
+    [SPECIES_FRILLISH] = TRUE,
+    [SPECIES_JELLICENT] = TRUE,
+    [SPECIES_PYROAR] = TRUE,
+};
+
 #include "data/pokemon_graphics/front_pic_coordinates.h"
-#include "data/pokemon_graphics/still_front_pic_table.h"
 #include "data/pokemon_graphics/back_pic_coordinates.h"
 
 #include "data/pokemon_graphics/back_pic_table.h"
@@ -319,7 +329,6 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/pokemon_graphics/enemy_mon_elevation.h"
 #include "data/pokemon_graphics/front_pic_anims.h"
 #include "data/pokemon_graphics/front_pic_table.h"
-#include "data/pokemon_graphics/unknown_table.h"
 
 #include "data/trainer_parties.h"
 #include "data/text/trainer_class_names.h"
