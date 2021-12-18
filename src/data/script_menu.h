@@ -935,7 +935,7 @@ const u8 *const gStdStrings[] =
 
     [STDSTRING_MEDICINE] = gText_Medicine,
     [STDSTRING_BATTLEITEMS] = gText_BattleItems,
-    [STDSTRING_POWERUP] = gText_PowerUp,
+    [STDSTRING_TREASURES] = gText_Treasures,
 };
 
 static const u8 sLinkServicesMultichoiceIds[] =
