@@ -5,7 +5,7 @@ SecretBase_Text_TreeCanBeClimbed:
 SecretBase_Text_TreeUseSecretPower:
 	.string "If some vines drop down, this tree can\n"
 	.string "be climbed.\p"
-	.string "Use the SECRET POWER?$"
+	.string "Use the Secret Power?$"
 
 SecretBase_Text_VineDroppedDown:
 	.string "A thick vine dropped down!$"
@@ -17,7 +17,7 @@ SecretBase_Text_ClumpOfGrass:
 SecretBase_Text_ClumpUseSecretPower:
 	.string "If this clump of grass can be moved,\n"
 	.string "it might be possible to go inside.\p"
-	.string "Use the SECRET POWER?$"
+	.string "Use the Secret Power?$"
 
 SecretBase_Text_DiscoveredSmallEntrance:
 	.string "Discovered a small entrance!$"
@@ -673,12 +673,12 @@ SecretBase_EventScript_CushionInteract::
 
 SecretBase_Text_AllDecorationsWillBeReturned:
 	.string "All decorations and furniture in your\n"
-	.string "SECRET BASE will be returned to your PC.\p"
+	.string "Secret Base will be returned to your PC.\p"
 	.string "Is that okay?$"
 
 SecretBase_Text_WantToRegisterSecretBase:
 	.string "Do you want to register\n"
-	.string "{STR_VAR_1}'s SECRET BASE?$"
+	.string "{STR_VAR_1}'s Secret Base?$"
 
 SecretBase_Text_AlreadyRegisteredDelete:
 	.string "This data is already registered.\n"
@@ -702,36 +702,36 @@ SecretBase_Text_WhatWouldYouLikeToDo:
 	.string "What would you like to do?$"
 
 SecretBase_Text_RegistryInfo:
-	.string "Once registered, a SECRET BASE will not\n"
-	.string "disappear unless the other TRAINER\l"
+	.string "Once registered, a Secret Base will not\n"
+	.string "disappear unless the other Trainer\l"
 	.string "moves it to a different location.\p"
-	.string "If a SECRET BASE is deleted from the\n"
+	.string "If a Secret Base is deleted from the\n"
 	.string "registered list, another one may take\l"
 	.string "its place.\p"
-	.string "Up to ten SECRET BASE locations\n"
+	.string "Up to ten Secret Base locations\n"
 	.string "may be registered.$"
 
 SecretBase_Text_BattleTowerShield:
 	.string "A shield of {STR_VAR_2} that marks winning\n"
-	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
+	.string "{STR_VAR_1} times in a row at the Battle Tower.$"
 
 SecretBase_Text_ToyTV:
 	.string "A realistic toy TV. It could be easily\n"
 	.string "mistaken for the real thing.$"
 
 SecretBase_Text_SeedotTV:
-	.string "A toy TV shaped like a SEEDOT.\n"
+	.string "A toy TV shaped like a Seedot.\n"
 	.string "It looks ready to roll away on its own…$"
 
 SecretBase_Text_SkittyTV:
-	.string "A toy TV shaped like a SKITTY.\n"
+	.string "A toy TV shaped like a Skitty.\n"
 	.string "It looks ready to stroll away…$"
 
 SecretBase_Text_WouldYouLikeToMoveBases:
-	.string "You may only make one SECRET BASE.\p"
-	.string "Would you like to move from the SECRET\n"
-	.string "BASE near {STR_VAR_1}?$"
+	.string "You may only make one Secret Base.\p"
+	.string "Would you like to move from the Secret\n"
+	.string "Base near {STR_VAR_1}?$"
 
 SecretBase_Text_MovingCompletedUseSecretPower:
 	.string "Moving completed.\p"
-	.string "Would you like to use the SECRET POWER?$"
+	.string "Would you like to use the Secret Power?$"

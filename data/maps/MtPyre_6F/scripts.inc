@@ -36,13 +36,13 @@ MtPyre_6F_Text_ValerieDefeat:
 
 MtPyre_6F_Text_ValeriePostBattle:
 	.string "Perhaps the power is from the spirits\n"
-	.string "of POKéMON in fitful sleep here…$"
+	.string "of Pokémon in fitful sleep here…$"
 
 MtPyre_6F_Text_ValerieRegister:
 	.string "Fufufu… I lost the match, but…\n"
 	.string "I have this little ability…\p"
 	.string "Without ever laying my hands on\n"
-	.string "your POKéNAV… Hiyah!$"
+	.string "your Pokénav… Hiyah!$"
 
 MtPyre_6F_Text_ValerieRematchIntro:
 	.string "Behind you…\n"
@@ -52,7 +52,7 @@ MtPyre_6F_Text_ValerieRematchDefeat:
 	.string "Something faded away…$"
 
 MtPyre_6F_Text_ValeriePostRematch:
-	.string "The POKéMON at rest here…\n"
+	.string "The Pokémon at rest here…\n"
 	.string "Sometimes, they play…$"
 
 MtPyre_6F_Text_CedricIntro:
@@ -63,7 +63,7 @@ MtPyre_6F_Text_CedricDefeat:
 	.string "Weren't you lost?$"
 
 MtPyre_6F_Text_CedricPostBattle:
-	.string "I had this feeling that a lost TRAINER\n"
+	.string "I had this feeling that a lost Trainer\n"
 	.string "would be panicked and easy to beat.\p"
 	.string "It's dirty and I won't try it again…$"
 

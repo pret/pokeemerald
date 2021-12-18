@@ -24,14 +24,14 @@ EverGrandeCity_EventScript_SetVisitedEverGrande::
 	end
 
 EverGrandeCity_Text_EnteringVictoryRoad:
-	.string "ENTERING VICTORY ROAD$"
+	.string "Entering Victory Road$"
 
 EverGrandeCity_Text_EnteringPokemonLeague:
-	.string "ENTERING POKéMON LEAGUE\n"
-	.string "CENTER GATE$"
+	.string "Entering Pokémon League\n"
+	.string "Center Gate$"
 
 EverGrandeCity_Text_CitySign:
-	.string "EVER GRANDE CITY\p"
+	.string "Ever Grande City\p"
 	.string "“The paradise of flowers, the sea,\n"
-	.string "and POKéMON.”$"
+	.string "and Pokémon.”$"
 

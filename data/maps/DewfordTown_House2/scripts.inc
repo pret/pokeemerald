@@ -28,7 +28,7 @@ DewfordTown_House2_EventScript_Boy::
 
 DewfordTown_House2_Text_WantYouToHaveSilkScarf:
 	.string "Gorge your eyes on this!\p"
-	.string "It's a SILK SCARF. It's right at the\n"
+	.string "It's a Silk Scarf. It's right at the\n"
 	.string "cutting edge of fashion, yeah!\p"
 	.string "Oh, I can see your eyes twinkling!\n"
 	.string "You appreciate my dazzling style!\p"
@@ -37,21 +37,21 @@ DewfordTown_House2_Text_WantYouToHaveSilkScarf:
 
 DewfordTown_House2_Text_NoRoom:
 	.string "Oh, you don't have room?\p"
-	.string "Now, listen tight, this SCARF is a must-\n"
+	.string "Now, listen tight, this Scarf is a must-\n"
 	.string "have! Why, I would sell all my items\l"
 	.string "in order to get it!$"
 
 DewfordTown_House2_Text_ExplainSilkScarf:
-	.string "The SILK SCARF raises the power of\n"
-	.string "NORMAL-type moves.\p"
-	.string "It's a marvelous SCARF that will go\n"
-	.string "with almost all POKéMON!$"
+	.string "The Silk Scarf raises the power of\n"
+	.string "Normal-type moves.\p"
+	.string "It's a marvelous Scarf that will go\n"
+	.string "with almost all Pokémon!$"
 
 DewfordTown_House2_Text_BrawlySoCool:
 	.string "Wow, you bothered to cross the sea\n"
-	.string "to visit DEWFORD?\p"
+	.string "to visit Dewford?\p"
 	.string "Did you maybe come here because you\n"
-	.string "heard about BRAWLY?\p"
+	.string "heard about Brawly?\p"
 	.string "He's so cool…\n"
 	.string "Everyone idolizes him.$"
 

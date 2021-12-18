@@ -255,9 +255,9 @@ BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn:
 	.string "Get a move on!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
-	.string "Hey, my name's NOLAND!\n"
+	.string "Hey, my name's Noland!\n"
 	.string "I'm basically in charge of this place,\l"
-	.string "which is why I'm the FACTORY HEAD!\p"
+	.string "which is why I'm the Factory Head!\p"
 	.string "I had a look at your Battle Swap data.\p"
 	.string "You seem to have the right idea,\n"
 	.string "but you're still square in your head!\p"
@@ -269,19 +269,19 @@ BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
 	.string "your heart and your body, understand?\p"
 	.string "I'll take you on under the same\n"
 	.string "conditions as you.\p"
-	.string "I'll be using rental POKéMON, too!$"
+	.string "I'll be using rental Pokémon, too!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn:
 	.string "Shake out every last bit of your\n"
 	.string "knowledge and bring it on!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass:
-	.string "NOLAND: Smart going!\n"
-	.string "Let's see your FRONTIER PASS.$"
+	.string "Noland: Smart going!\n"
+	.string "Let's see your Frontier Pass.$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol:
 	.string "The Knowledge Symbol was embossed\n"
-	.string "on the FRONTIER PASS!$"
+	.string "on the Frontier Pass!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
 	.string "Heh…\n"
@@ -291,7 +291,7 @@ BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
 	.string "You keep up your studies!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime:
-	.string "NOLAND: Hey, hey! How's it going?\n"
+	.string "Noland: Hey, hey! How's it going?\n"
 	.string "You keeping up with your studies?\p"
 	.string "…Oh?\p"
 	.string "You've taken on a harder look than\n"
@@ -304,10 +304,10 @@ BattleFrontier_BattleFactoryBattleRoom_Text_AllRightBringItOn:
 	.string "Bring it on!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass:
-	.string "NOLAND: What the…\n"
+	.string "Noland: What the…\n"
 	.string "You're getting out of my league!\p"
 	.string "Sheesh!\n"
-	.string "Let's see that FRONTIER PASS!$"
+	.string "Let's see that Frontier Pass!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine:
 	.string "The Knowledge Symbol took on\n"

@@ -31,15 +31,15 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf::
 	end
 
 Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother:
-	.string "My big brother's the FOSSIL MANIAC…\n"
-	.string "He's a nice guy who loves FOSSILS…\p"
+	.string "My big brother's the Fossil Maniac…\n"
+	.string "He's a nice guy who loves Fossils…\p"
 	.string "He loves digging holes, too…\n"
 	.string "He dug this hole by himself…\p"
-	.string "You can have this, so you can DIG\n"
+	.string "You can have this, so you can Dig\n"
 	.string "holes just like my big brother…$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance:
-	.string "If you make a POKéMON DIG inside a\n"
+	.string "If you make a Pokémon Dig inside a\n"
 	.string "cave, you're returned to the entrance…$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
@@ -47,8 +47,8 @@ Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
 	.string "the display case…$"
 
 Route114_FossilManiacsHouse_Text_CrammedWithBooks:
-	.string "THE COMPOSITION OF STRATA…\n"
-	.string "HOW RAIN SHAPES THE LAND…\l"
-	.string "STONES, SOIL, AND ROCK…\p"
+	.string "The Composition of Strata…\n"
+	.string "How Rain Shapes the Land…\l"
+	.string "Stones, Soil, and Rock…\p"
 	.string "It's crammed with books.$"
 

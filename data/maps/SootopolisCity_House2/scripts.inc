@@ -19,7 +19,7 @@ SootopolisCity_House2_EventScript_DontKnowAboutOrbs::
 	return
 
 SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs:
-	.string "MT. PYRE…\p"
+	.string "Mt. Pyre…\p"
 	.string "At its peak are two orbs placed side\n"
 	.string "by side. Did you know?$"
 
