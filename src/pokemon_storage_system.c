@@ -6911,7 +6911,6 @@ void SetMonFormPSS(struct BoxPokemon *boxMon)
         targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
-        //PlayCry2(targetSpecies, 0, 0x7D, 0xA);
         SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);
         UpdateSpeciesSpritePSS(boxMon);
     }

@@ -5317,7 +5317,7 @@ void TryItemHoldFormChange(struct Pokemon *mon)
         targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
-        PlayCry2(targetSpecies, 0, 0x7D, 0xA);
+        PlayCry_NormalNoDucking(targetSpecies, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
         FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
         CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
