@@ -4113,7 +4113,7 @@ static void Cmd_getexp(void)
     }
 }
 
-#ifdef B_NEW_MULTI_BATTLE_DEFEAT_CONDITION == TRUE
+#ifdef B_MULTI_BATTLE_WHITEOUT >= GEN_4
 static bool32 NoAliveMonsForPlayerAndPartner(void)
 {
     u32 i;
@@ -4190,7 +4190,7 @@ static void Cmd_unknown_24(void)
     if (gBattleControllerExecFlags)
         return;
 
-    #ifdef B_NEW_MULTI_BATTLE_DEFEAT_CONDITION == TRUE
+    #ifdef B_MULTI_BATTLE_WHITEOUT >= GEN_4
     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER) && NoAliveMonsForPlayerAndPartner())
         gBattleOutcome |= B_OUTCOME_LOST;
     #endif
