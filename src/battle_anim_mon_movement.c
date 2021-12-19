@@ -449,14 +449,14 @@ static void DoHorizontalLunge(struct Sprite *sprite)
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseHorizontalLungeDirection);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void ReverseHorizontalLungeDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[1] = -sprite->data[1];
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -476,14 +476,14 @@ static void DoVerticalDip(struct Sprite *sprite)
     sprite->data[3] = spriteId;
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseVerticalDipDirection);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void ReverseVerticalDipDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[2] = -sprite->data[2];
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -589,7 +589,7 @@ static void SlideMonToOffset(struct Sprite *sprite)
     sprite->data[5] = monSpriteId;
     sprite->invisible = TRUE;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = TranslateMonSpriteLinearFixedPoint;
+    sprite->callback = TranslateSpriteLinearByIdFixedPoint;
 }
 
 static void SlideMonToOffsetAndBack(struct Sprite *sprite)
@@ -630,7 +630,7 @@ static void SlideMonToOffsetAndBack(struct Sprite *sprite)
     {
         StoreSpriteCallbackInData6(sprite, SlideMonToOffsetAndBack_End);
     }
-    sprite->callback = TranslateMonSpriteLinearFixedPoint;
+    sprite->callback = TranslateSpriteLinearByIdFixedPoint;
 }
 
 

@@ -15,8 +15,7 @@ RusturfTunnel_OnFrame:
 	.2byte 0
 
 RusturfTunnel_OnTransition:
-	compare VAR_RUSTURF_TUNNEL_STATE, 2
-	call_if_eq RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
+	call_if_eq VAR_RUSTURF_TUNNEL_STATE, 2, RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
 	end
 
 RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos::
@@ -56,36 +55,25 @@ RusturfTunnel_EventScript_AlreadySpokenTo::
 
 RusturfTunnel_EventScript_ClearTunnelScene::
 	lockall
-	compare VAR_TEMP_1, 1
-	call_if_eq RusturfTunnel_EventScript_FaceWandasBoyfriend1
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_FaceWandasBoyfriend2
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_FaceWandasBoyfriend3
+	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_FaceWandasBoyfriend1
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_FaceWandasBoyfriend2
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_FaceWandasBoyfriend3
 	call RusturfTunnel_EventScript_WandasBoyfriendNotice
 	msgbox RusturfTunnel_Text_YouShatteredBoulderTakeHM, MSGBOX_DEFAULT
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
 	giveitem ITEM_HM04
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_TEMP_1, 1
-	call_if_eq RusturfTunnel_EventScript_BoyfriendApproachWanda1
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_BoyfriendApproachWanda2
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_BoyfriendApproachWanda3
+	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_BoyfriendApproachWanda1
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_BoyfriendApproachWanda2
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_BoyfriendApproachWanda3
 	msgbox RusturfTunnel_Text_WandaReunion, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_TEMP_1, 1
-	call_if_eq RusturfTunnel_EventScript_WandaAndBoyfriendExit1
-	compare VAR_TEMP_1, 2
-	call_if_eq RusturfTunnel_EventScript_WandaAndBoyfriendExit
-	compare VAR_TEMP_1, 3
-	call_if_eq RusturfTunnel_EventScript_WandaAndBoyfriendExit
+	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_WandaAndBoyfriendExit1
+	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_WandaAndBoyfriendExit
+	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_WandaAndBoyfriendExit
 	call RusturfTunnel_EventScript_SetRusturfTunnelOpen
 	releaseall
 	end
@@ -100,7 +88,7 @@ RusturfTunnel_EventScript_BoyfriendApproachWanda2::
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerWatchBoyfriend
 	applymovement LOCALID_WANDAS_BF, RusturfTunnel_Movement_BoyfriendApproachWanda
 	waitmovement 0
-	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -108,14 +96,14 @@ RusturfTunnel_EventScript_BoyfriendApproachWanda3::
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerWatchBoyfriend
 	applymovement LOCALID_WANDAS_BF, RusturfTunnel_Movement_BoyfriendApproachWanda
 	waitmovement 0
-	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_FaceWandasBoyfriend1::
-	applymovement LOCALID_WANDAS_BF, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_WANDAS_BF, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -184,44 +172,44 @@ RusturfTunnel_Movement_WandaExit:
 
 RusturfTunnel_Movement_PlayerWatchWandaExit:
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_Unused1:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_Unused2:
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_Unused3:
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_PlayerWatchBoyfriend1:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_PlayerWatchBoyfriend:
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 RusturfTunnel_Movement_BoyfriendFaceRight:
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RusturfTunnel_Movement_WandasBoyfriendExit1:
@@ -269,7 +257,7 @@ RusturfTunnel_Movement_BoyfriendApproachWanda:
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_fast_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 RusturfTunnel_EventScript_TunnelBlockagePos1::
@@ -307,7 +295,7 @@ RusturfTunnel_EventScript_Peeko::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
 	msgbox RusturfTunnel_Text_Peeko, MSGBOX_DEFAULT
 	waitmoncry
 	release
@@ -339,7 +327,7 @@ RusturfTunnel_EventScript_Grunt::
 	message RusturfTunnel_Text_ThankYouLetsGoHomePeeko
 	waitmessage
 	waitse
-	playmoncry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
 	waitbuttonpress
 	waitmoncry
 	closemessage
@@ -362,12 +350,12 @@ RusturfTunnel_Movement_PushPlayerAsideForGrunt:
 	lock_facing_direction
 	walk_up
 	unlock_facing_direction
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 RusturfTunnel_Movement_PlayerMoveAsideForBriney:
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 RusturfTunnel_Movement_GruntEscape:
@@ -410,7 +398,7 @@ RusturfTunnel_Movement_PlayerWatchBrineyExit:
 	delay_16
 	delay_8
 	delay_4
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 RusturfTunnel_Movement_BrineyApproachPeeko2:
