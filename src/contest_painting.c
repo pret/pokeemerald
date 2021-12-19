@@ -267,14 +267,14 @@ static void InitContestPaintingWindow(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
     sWindowId = AddWindow(&sWindowTemplate);
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sWindowId);
-    CopyWindowToVram(sWindowId, 3);
+    CopyWindowToVram(sWindowId, COPYWIN_FULL);
     ShowBg(1);
 }
 
@@ -306,8 +306,8 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
         StringExpandPlaceholders(gStringVar4, sMuseumCaptions[category]);
     }
 
-    x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
-    AddTextPrinterParameterized(sWindowId, 1, gStringVar4, x, 1, 0, 0);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
+    AddTextPrinterParameterized(sWindowId, FONT_NORMAL, gStringVar4, x, 1, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 
@@ -361,27 +361,27 @@ static void VBlankCB_ContestPainting(void)
     TransferPlttBuffer();
 }
 
-static void InitContestMonPixels(u16 species, u8 whichSprite)
+static void InitContestMonPixels(u16 species, bool8 backPic)
 {
     const void *pal = GetMonSpritePalFromSpeciesAndPersonality(species, gContestPaintingWinner->trainerId, gContestPaintingWinner->personality);
     LZDecompressVram(pal, gContestPaintingMonPalette);
-    if (whichSprite == 0)
+    if (!backPic)
     {
         HandleLoadSpecialPokePic(
             &gMonFrontPicTable[species],
-            gMonSpritesGfxPtr->sprites.ptr[1],
+            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
             species,
             gContestPaintingWinner->personality);
-        _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[1], gContestPaintingMonPalette, (void *)gContestMonPixels);
+        _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], gContestPaintingMonPalette, (void *)gContestMonPixels);
     }
     else
     {
         HandleLoadSpecialPokePic(
             &gMonBackPicTable[species],
-            gMonSpritesGfxPtr->sprites.ptr[0],
+            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT],
             species,
             gContestPaintingWinner->personality);
-        _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[0], gContestPaintingMonPalette, (void *)gContestMonPixels);
+        _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], gContestPaintingMonPalette, (void *)gContestMonPixels);
     }
 }
 
@@ -592,7 +592,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
 static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist)
 {
     AllocPaintingResources();
-    InitContestMonPixels(gContestPaintingWinner->species, 0);
+    InitContestMonPixels(gContestPaintingWinner->species, FALSE);
     DoContestPaintingImageProcessing(GetImageEffectForContestWinner(contestWinnerId));
     InitPaintingMonOamData(contestWinnerId);
     LoadContestPaintingFrame(contestWinnerId, isForArtist);

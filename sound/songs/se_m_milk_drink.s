@@ -103,7 +103,7 @@ se_m_milk_drink_2:
 	.byte		N06   , Fs6 , v040
 	.byte	W04
 	.byte	W04
-	.byte		N06   
+	.byte		N06
 	.byte	W02
 	.byte	W06
 	.byte	W01

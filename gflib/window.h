@@ -3,8 +3,7 @@
 
 #define PIXEL_FILL(num) ((num) | ((num) << 4))
 
-enum
-{
+enum {
     WINDOW_BG,
     WINDOW_TILEMAP_LEFT,
     WINDOW_TILEMAP_TOP,
@@ -13,6 +12,14 @@ enum
     WINDOW_PALETTE_NUM,
     WINDOW_BASE_BLOCK,
     WINDOW_TILE_DATA
+};
+
+// Mode for CopyWindowToVram, CopyWindowRectToVram and CopyWindowToVram8Bit
+enum {
+    COPYWIN_NONE,
+    COPYWIN_MAP,
+    COPYWIN_GFX,
+    COPYWIN_FULL,
 };
 
 struct WindowTemplate
@@ -28,13 +35,7 @@ struct WindowTemplate
 
 #define DUMMY_WIN_TEMPLATE          \
 {                                   \
-    0xFF,                           \
-    0,                              \
-    0,                              \
-    0,                              \
-    0,                              \
-    0,                              \
-    0,                              \
+    .bg = 0xFF,                     \
 }
 
 #define WINDOW_NONE 0xFF
