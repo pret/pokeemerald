@@ -4538,7 +4538,7 @@ const struct Item gItems[] =
 
     [ITEM_POISONIUM_Z] =
     {
-        .name = _("Poisinium Z"),
+        .name = _("Poisonium Z"),
         .itemId = ITEM_POISONIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
