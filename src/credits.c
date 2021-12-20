@@ -369,7 +369,7 @@ static void InitCreditsBgsAndWindows(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
 }
 
@@ -400,8 +400,8 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
         color[2] = TEXT_COLOR_DARK_GRAY;
     }
 
-    x = GetStringCenterAlignXOffsetWithLetterSpacing(1, string, DISPLAY_WIDTH, 1);
-    AddTextPrinterParameterized4(0, 1, x, y, 1, 0, color, -1, string);
+    x = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_NORMAL, string, DISPLAY_WIDTH, 1);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 1, 0, color, TEXT_SKIP_DRAW, string);
 }
 
 #define tMainTaskId data[1]
@@ -759,9 +759,9 @@ static void Task_UpdatePage(u8 taskId)
                 for (i = 0; i < ENTRIES_PER_PAGE; i++)
                     PrintCreditsText(
                         sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->text,
-                         5 + i * 16, 
+                         5 + i * 16,
                          sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->isTitle);
-                CopyWindowToVram(0, 2);
+                CopyWindowToVram(0, COPYWIN_GFX);
 
                 gTasks[taskId].tCurrentPage++;
                 gTasks[taskId].tState++;
@@ -811,7 +811,7 @@ static void Task_UpdatePage(u8 taskId)
         {
             // Still more Credits pages to show, return to state 2 to print
             FillWindowPixelBuffer(0, PIXEL_FILL(0));
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
             gTasks[taskId].tState = 2;
         }
         return;
@@ -911,9 +911,9 @@ static void Task_ShowMons(u8 taskId)
     case 2:
         if (sCreditsData->imgCounter == NUM_MON_SLIDES || gTasks[gTasks[taskId].tMainTaskId].func != Task_CreditsMain)
             break;
-        spriteId = CreateCreditsMonSprite(sCreditsData->monToShow[sCreditsData->currShownMon], 
-                                    sMonSpritePos[sCreditsData->nextImgPos][0], 
-                                    sMonSpritePos[sCreditsData->nextImgPos][1], 
+        spriteId = CreateCreditsMonSprite(sCreditsData->monToShow[sCreditsData->currShownMon],
+                                    sMonSpritePos[sCreditsData->nextImgPos][0],
+                                    sMonSpritePos[sCreditsData->nextImgPos][1],
                                     sCreditsData->nextImgPos);
         if (sCreditsData->currShownMon < sCreditsData->numMonToShow - 1)
         {
@@ -1103,10 +1103,10 @@ static void SetBikeScene(u8 scene, u8 taskId)
     case SCENE_OCEAN_MORNING:
         gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
         gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = DISPLAY_WIDTH + 32;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = DISPLAY_WIDTH + 32;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tRivalSpriteId].x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].y = 46;
         gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
         gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
         gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
@@ -1114,10 +1114,10 @@ static void SetBikeScene(u8 scene, u8 taskId)
     case SCENE_OCEAN_SUNSET:
         gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
         gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 120;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = DISPLAY_WIDTH + 32;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x = 120;
+        gSprites[gTasks[taskId].tRivalSpriteId].x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].y = 46;
         gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
         gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
         gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
@@ -1125,10 +1125,10 @@ static void SetBikeScene(u8 scene, u8 taskId)
     case SCENE_FOREST_RIVAL_ARRIVE:
         gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
         gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 120;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = DISPLAY_WIDTH + 32;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x = 120;
+        gSprites[gTasks[taskId].tRivalSpriteId].x = DISPLAY_WIDTH + 32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].y = 46;
         gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
         gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
         gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
@@ -1136,10 +1136,10 @@ static void SetBikeScene(u8 scene, u8 taskId)
     case SCENE_FOREST_CATCH_RIVAL:
         gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
         gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 120;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = -32;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x = 120;
+        gSprites[gTasks[taskId].tRivalSpriteId].x = -32;
+        gSprites[gTasks[taskId].tPlayerSpriteId].y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].y = 46;
         gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
         gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
         gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
@@ -1147,10 +1147,10 @@ static void SetBikeScene(u8 scene, u8 taskId)
     case SCENE_CITY_NIGHT:
         gSprites[gTasks[taskId].tPlayerSpriteId].invisible = FALSE;
         gSprites[gTasks[taskId].tRivalSpriteId].invisible = FALSE;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.x = 88;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.x = 152;
-        gSprites[gTasks[taskId].tPlayerSpriteId].pos1.y = 46;
-        gSprites[gTasks[taskId].tRivalSpriteId].pos1.y = 46;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x = 88;
+        gSprites[gTasks[taskId].tRivalSpriteId].x = 152;
+        gSprites[gTasks[taskId].tPlayerSpriteId].y = 46;
+        gSprites[gTasks[taskId].tRivalSpriteId].y = 46;
         gSprites[gTasks[taskId].tPlayerSpriteId].data[0] = 0;
         gSprites[gTasks[taskId].tRivalSpriteId].data[0] = 0;
         gTasks[taskId].tTaskId_BgScenery = CreateBicycleBgAnimationTask(2, 0x2000, 0x200, 8);
@@ -1359,8 +1359,8 @@ static void SpriteCB_Player(struct Sprite *sprite)
         break;
     case 1:
         StartSpriteAnimIfDifferent(sprite, 1);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x--;
+        if (sprite->x > -32)
+            sprite->x--;
         break;
     case 2:
         StartSpriteAnimIfDifferent(sprite, 2);
@@ -1370,13 +1370,13 @@ static void SpriteCB_Player(struct Sprite *sprite)
         break;
     case 4:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > 120)
-            sprite->pos1.x--;
+        if (sprite->x > 120)
+            sprite->x--;
         break;
     case 5:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x--;
+        if (sprite->x > -32)
+            sprite->x--;
         break;
     }
 }
@@ -1392,28 +1392,28 @@ static void SpriteCB_Rival(struct Sprite *sprite)
     switch (sprite->sState)
     {
     case 0:
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         StartSpriteAnimIfDifferent(sprite, 0);
         break;
     case 1:
-        if (sprite->pos1.x > 200)
+        if (sprite->x > 200)
             StartSpriteAnimIfDifferent(sprite, 1);
         else
             StartSpriteAnimIfDifferent(sprite, 2);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 2;
-        sprite->pos2.y = -gIntroCredits_MovingSceneryVOffset;
+        if (sprite->x > -32)
+            sprite->x -= 2;
+        sprite->y2 = -gIntroCredits_MovingSceneryVOffset;
         break;
     case 2:
         sprite->data[7]++;
         StartSpriteAnimIfDifferent(sprite, 0);
         if ((sprite->data[7] & 3) == 0)
-            sprite->pos1.x++;
+            sprite->x++;
         break;
     case 3:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x--;
+        if (sprite->x > -32)
+            sprite->x--;
         break;
     }
 }
@@ -1455,15 +1455,15 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
         {
         case POS_LEFT + 1:
             if ((sprite->data[7] & 3) == 0)
-                sprite->pos1.y++;
-            sprite->pos1.x -= 2;
+                sprite->y++;
+            sprite->x -= 2;
             break;
         case POS_CENTER + 1:
             break;
         case POS_RIGHT + 1:
             if ((sprite->data[7] & 3) == 0)
-                sprite->pos1.y++;
-            sprite->pos1.x += 2;
+                sprite->y++;
+            sprite->x += 2;
             break;
         }
         break;
@@ -1522,7 +1522,7 @@ static u8 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
     gSprites[monSpriteId].callback = SpriteCB_CreditsMon;
     gSprites[monSpriteId].sSpriteId = monSpriteId;
 
-    bgSpriteId = CreateSprite(&sSpriteTemplate_CreditsMonBg, gSprites[monSpriteId].pos1.x, gSprites[monSpriteId].pos1.y, 1);
+    bgSpriteId = CreateSprite(&sSpriteTemplate_CreditsMonBg, gSprites[monSpriteId].x, gSprites[monSpriteId].y, 1);
     gSprites[bgSpriteId].sMonSpriteId = monSpriteId;
 
     StartSpriteAnimIfDifferent(&gSprites[bgSpriteId], position);
@@ -1532,7 +1532,7 @@ static u8 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
 
 static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 {
-    if (gSprites[sprite->sMonSpriteId].data[0] == 10 
+    if (gSprites[sprite->sMonSpriteId].data[0] == 10
      || gIntroCredits_MovingSceneryState != INTROCRED_SCENERY_NORMAL)
     {
         DestroySprite(sprite);
@@ -1544,8 +1544,8 @@ static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
     sprite->oam.objMode = gSprites[sprite->sMonSpriteId].oam.objMode;
     sprite->oam.affineMode = gSprites[sprite->sMonSpriteId].oam.affineMode;
     sprite->oam.matrixNum = gSprites[sprite->sMonSpriteId].oam.matrixNum;
-    sprite->pos1.x = gSprites[sprite->sMonSpriteId].pos1.x;
-    sprite->pos1.y = gSprites[sprite->sMonSpriteId].pos1.y;
+    sprite->x = gSprites[sprite->sMonSpriteId].x;
+    sprite->y = gSprites[sprite->sMonSpriteId].y;
 }
 
 static void DeterminePokemonToShow(void)
@@ -1554,7 +1554,7 @@ static void DeterminePokemonToShow(void)
     u16 page;
     u16 dexNum;
     u16 j;
-    
+
     // Go through the Pokedex, and anything that has gotten caught we put into our massive array.
     // This basically packs all of the caught pokemon into the front of the array
     for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
@@ -1584,7 +1584,7 @@ static void DeterminePokemonToShow(void)
         // Select a random mon, insert into array
         page = Random() % sCreditsData->numCaughtMon;
         sCreditsData->monToShow[j] = sCreditsData->caughtMonIds[page];
-        
+
         // Remove the select mon from the array, and condense array entries
         j++;
         sCreditsData->caughtMonIds[page] = 0;

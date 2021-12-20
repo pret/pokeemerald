@@ -145,7 +145,7 @@ se_m_solar_beam_1:
 	.byte	W02
 	.byte		VOL   , 5*se_m_solar_beam_mvl/mxv
 	.byte	W04
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

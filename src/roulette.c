@@ -148,7 +148,7 @@
 #define GFXTAG_SHADOW 14
 
 // 2 different Roulette tables with 2 different rates (normal vs service day special)
-// & 1 gets which table, >> 7 gets if ROULETTE_SPECIAL_RATE is set 
+// & 1 gets which table, >> 7 gets if ROULETTE_SPECIAL_RATE is set
 #define GET_MIN_BET_ID(var)(((var) & 1) + (((var) >> 7) * 2))
 
 // Having Shroomish or Taillow in the party can make rolls more consistent in length
@@ -1223,8 +1223,8 @@ static void CB2_LoadRoulette(void)
         SetMultiplierSprite(SELECTION_NONE);
         DrawGridBackground(SELECTION_NONE);
         DrawStdWindowFrame(sTextWindowId, FALSE);
-        AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_ControlsInstruction, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sTextWindowId, 3);
+        AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_ControlsInstruction, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
         gSpriteCoordOffsetX = -60;
         gSpriteCoordOffsetY = 0;
         break;
@@ -1294,8 +1294,8 @@ static void Task_AskKeepPlaying(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DrawStdWindowFrame(sTextWindowId, 0);
-    AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_KeepPlaying, 0, 1, TEXT_SPEED_FF, 0);
-    CopyWindowToVram(sTextWindowId, 3);
+    AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_KeepPlaying, 0, 1, TEXT_SKIP_DRAW, 0);
+    CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
     DoYesNoFuncWithChoice(taskId, &sYesNoTable_KeepPlaying);
 }
 
@@ -1317,28 +1317,28 @@ static void UpdateGridSelectionRect(u8 selectionId)
     switch (selectionId)
     {
     case SELECTION_NONE:
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         break;
     case COL_WYNAUT:
     case COL_AZURILL:
     case COL_SKITTY:
     case COL_MAKUHITA:
         temp0 = (selectionId * 3 + 14);
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         SetTilemapRect(&sRoulette->tilemapBuffers[0][0], &sRoulette->gridTilemap[281], temp0, 7, 3, 13);
         break;
     case ROW_ORANGE:
     case ROW_GREEN:
     case ROW_PURPLE:
         temp1 = ((selectionId - 1) / 5 * 3 + 10);
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         SetTilemapRect(&sRoulette->tilemapBuffers[0][0], &sRoulette->gridTilemap[320], 14, temp1, 16, 3);
         break;
     // Individual square
     default:
         temp0 = GET_COL(selectionId) * 3 + 14;
         temp1 = ((selectionId - 1) / 5 * 3 + 7);
-        ClearTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
+        FillTilemapRect(&sRoulette->tilemapBuffers[0][0], 0, 14, 7, 16, 13);
         SetTilemapRect(&sRoulette->tilemapBuffers[0][0], &sRoulette->gridTilemap[272], temp0, temp1, 3, 3);
         break;
     }
@@ -1448,7 +1448,7 @@ static void ProcessBetGridInput(u8 taskId)
         RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
         sRoulette->flashUtil.palettes[FLASH_ICON].available = sRoulette->flashUtil.palettes[FLASH_ICON_2].available = sRoulette->flashUtil.palettes[FLASH_ICON_3].available = FALSE;
         FlashSelectionOnWheel(gTasks[taskId].tSelectionId);
-        
+
         // Switch all the poke (column) headers to gray outlines
         for (i = 0; i < NUM_BOARD_POKES; i++)
         {
@@ -1568,11 +1568,11 @@ static u8 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
             else
                 return 1;
         }
-        else if (!(rand & 3)) 
+        else if (!(rand & 3))
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow / 2;
         }
-        else 
+        else
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow;
         }
@@ -1586,11 +1586,11 @@ static u8 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
             else
                 return 1;
         }
-        else if ((rand & 1) && ballNum > BALLS_PER_ROUND) 
+        else if ((rand & 1) && ballNum > BALLS_PER_ROUND)
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow / 4;
         }
-        else 
+        else
         {
             return sRouletteTables[sRoulette->tableId].randDistanceLow / 2;
         }
@@ -1806,23 +1806,23 @@ static void Task_PrintSpinResult(u8 taskId)
         {
             PlayFanfare(MUS_SLOTS_JACKPOT);
             DrawStdWindowFrame(sTextWindowId, FALSE);
-            AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_Jackpot, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(sTextWindowId, 3);
+            AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_Jackpot, 0, 1, TEXT_SKIP_DRAW, NULL);
+            CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
         }
         else
         {
             PlayFanfare(MUS_SLOTS_WIN);
             DrawStdWindowFrame(sTextWindowId, FALSE);
-            AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_ItsAHit, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(sTextWindowId, 3);
+            AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_ItsAHit, 0, 1, TEXT_SKIP_DRAW, NULL);
+            CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
         }
         break;
     case FALSE:
     default:
         m4aSongNumStart(SE_FAILURE);
         DrawStdWindowFrame(sTextWindowId, FALSE);
-        AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_NothingDoing, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sTextWindowId, 3);
+        AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_NothingDoing, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
         break;
     }
     gTasks[taskId].data[1] = 0;
@@ -1866,8 +1866,8 @@ static void Task_PrintPayout(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar1, (sRoulette->minBet * gTasks[taskId].tMultiplier), STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, Roulette_Text_YouveWonXCoins);
     DrawStdWindowFrame(sTextWindowId, FALSE);
-    AddTextPrinterParameterized(sTextWindowId, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(sTextWindowId, 3);
+    AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
     gTasks[taskId].tPayout = (sRoulette->minBet * gTasks[taskId].tMultiplier);
     gTasks[taskId].data[7] = 0;
     gTasks[taskId].func = Task_GivePayout;
@@ -1902,16 +1902,16 @@ static void Task_TryPrintEndTurnMsg(u8 taskId)
         {
             // Reached Ball 6, clear board
             DrawStdWindowFrame(sTextWindowId, FALSE);
-            AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_BoardWillBeCleared, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(sTextWindowId, 3);
+            AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_BoardWillBeCleared, 0, 1, TEXT_SKIP_DRAW, NULL);
+            CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
             StartTaskAfterDelayOrInput(taskId, Task_ClearBoard, NO_DELAY, A_BUTTON | B_BUTTON);
         }
         else if (gTasks[taskId].tCoins == MAX_COINS)
         {
             // Player maxed out coins
             DrawStdWindowFrame(sTextWindowId, FALSE);
-            AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_CoinCaseIsFull, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(sTextWindowId, 3);
+            AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_CoinCaseIsFull, 0, 1, TEXT_SKIP_DRAW, NULL);
+            CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
             StartTaskAfterDelayOrInput(taskId, Task_AskKeepPlaying, NO_DELAY, A_BUTTON | B_BUTTON);
         }
         else
@@ -1924,8 +1924,8 @@ static void Task_TryPrintEndTurnMsg(u8 taskId)
     {
         // Player out of coins
         DrawStdWindowFrame(sTextWindowId, FALSE);
-        AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_NoCoinsLeft, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sTextWindowId, 3);
+        AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_NoCoinsLeft, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
         StartTaskAfterDelayOrInput(taskId, Task_StopPlaying, 60, A_BUTTON | B_BUTTON);
     }
 }
@@ -1949,8 +1949,8 @@ static void Task_ClearBoard(u8 taskId)
     if (gTasks[taskId].tCoins == MAX_COINS)
     {
         DrawStdWindowFrame(sTextWindowId, FALSE);
-        AddTextPrinterParameterized(sTextWindowId, 1, Roulette_Text_CoinCaseIsFull, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sTextWindowId, 3);
+        AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_CoinCaseIsFull, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
         StartTaskAfterDelayOrInput(taskId, Task_AskKeepPlaying, NO_DELAY, A_BUTTON | B_BUTTON);
     }
     else
@@ -2060,14 +2060,14 @@ static u8 RecordHit(u8 taskId, u8 slotId)
 {
     u8 i, j;
     u32 columnFlags[NUM_BOARD_POKES] = {
-        F_WYNAUT_COL | F_ORANGE_WYNAUT | F_GREEN_WYNAUT | F_PURPLE_WYNAUT, 
-        F_AZURILL_COL | F_ORANGE_AZURILL | F_GREEN_AZURILL | F_PURPLE_AZURILL, 
-        F_SKITTY_COL | F_ORANGE_SKITTY | F_GREEN_SKITTY | F_PURPLE_SKITTY, 
+        F_WYNAUT_COL | F_ORANGE_WYNAUT | F_GREEN_WYNAUT | F_PURPLE_WYNAUT,
+        F_AZURILL_COL | F_ORANGE_AZURILL | F_GREEN_AZURILL | F_PURPLE_AZURILL,
+        F_SKITTY_COL | F_ORANGE_SKITTY | F_GREEN_SKITTY | F_PURPLE_SKITTY,
         F_MAKUHITA_COL | F_ORANGE_MAKUHITA | F_GREEN_MAKUHITA | F_PURPLE_MAKUHITA
     };
     u32 rowFlags[NUM_BOARD_COLORS] = {
-        F_ORANGE_ROW | F_ORANGE_WYNAUT | F_ORANGE_AZURILL | F_ORANGE_SKITTY | F_ORANGE_MAKUHITA, 
-        F_GREEN_ROW | F_GREEN_WYNAUT | F_GREEN_AZURILL | F_GREEN_SKITTY | F_GREEN_MAKUHITA, 
+        F_ORANGE_ROW | F_ORANGE_WYNAUT | F_ORANGE_AZURILL | F_ORANGE_SKITTY | F_ORANGE_MAKUHITA,
+        F_GREEN_ROW | F_GREEN_WYNAUT | F_GREEN_AZURILL | F_GREEN_SKITTY | F_GREEN_MAKUHITA,
         F_PURPLE_ROW | F_PURPLE_WYNAUT | F_PURPLE_AZURILL | F_PURPLE_SKITTY | F_PURPLE_MAKUHITA
     };
 
@@ -2109,15 +2109,15 @@ static bool8 IsHitInBetSelection(u8 gridSquare, u8 betSelection)
         case COL_AZURILL:
         case COL_SKITTY:
         case COL_MAKUHITA:
-            if (hit == betSelection + ROW_ORANGE 
-             || hit == betSelection + ROW_GREEN 
+            if (hit == betSelection + ROW_ORANGE
+             || hit == betSelection + ROW_GREEN
              || hit == betSelection + ROW_PURPLE)
                 return TRUE;
             break;
         case ROW_ORANGE:
         case ROW_GREEN:
         case ROW_PURPLE:
-            if (hit >= (betSelection + COL_WYNAUT) 
+            if (hit >= (betSelection + COL_WYNAUT)
              && hit <= (betSelection + COL_MAKUHITA))
                 return TRUE;
             break;
@@ -3426,8 +3426,8 @@ static void Task_PrintMinBet(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringExpandPlaceholders(gStringVar4, Roulette_Text_PlayMinimumWagerIsX);
         DrawStdWindowFrame(0, FALSE);
-        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(0, 3);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_ShowMinBetYesNo;
     }
 }
@@ -3438,15 +3438,15 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
     PrintCoinsString(gTasks[taskId].tCoins);
     minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_0x8004)];
     ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
-    
+
     if (gTasks[taskId].tCoins >= minBet)
     {
         if ((gSpecialVar_0x8004 & ROULETTE_SPECIAL_RATE) && (gSpecialVar_0x8004 & 1))
         {
             // Special rate for Game Corner service day (only at second table)
             DrawStdWindowFrame(0, FALSE);
-            AddTextPrinterParameterized(0, 1, Roulette_Text_SpecialRateTable, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(0, 3);
+            AddTextPrinterParameterized(0, FONT_NORMAL, Roulette_Text_SpecialRateTable, 0, 1, TEXT_SKIP_DRAW, NULL);
+            CopyWindowToVram(0, COPYWIN_FULL);
             gTasks[taskId].func = Task_PrintMinBet;
         }
         else
@@ -3454,8 +3454,8 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
             // Print minimum bet
             StringExpandPlaceholders(gStringVar4, Roulette_Text_PlayMinimumWagerIsX);
             DrawStdWindowFrame(0, FALSE);
-            AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(0, 3);
+            AddTextPrinterParameterized(0, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+            CopyWindowToVram(0, COPYWIN_FULL);
             gTasks[taskId].func = Task_ShowMinBetYesNo;
         }
     }
@@ -3464,8 +3464,8 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
         // Not enough for minimum bet
         StringExpandPlaceholders(gStringVar4, Roulette_Text_NotEnoughCoins);
         DrawStdWindowFrame(0, FALSE);
-        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(0, 3);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_NotEnoughForMinBet;
         gTasks[taskId].tCoins = 0;
         gTasks[taskId].data[0] = 0;
@@ -3632,8 +3632,8 @@ static void ShowHideGridBalls(bool8 hideAll, u8 hideBallId)
             else
             {
                 gSprites[sRoulette->spriteIds[i + SPR_GRID_BALLS]].invisible = FALSE;
-                gSprites[sRoulette->spriteIds[i + SPR_GRID_BALLS]].pos1.x = (sGridSelections[sRoulette->hitSquares[i]].x + 1) * 8 + 4;
-                gSprites[sRoulette->spriteIds[i + SPR_GRID_BALLS]].pos1.y = (sGridSelections[sRoulette->hitSquares[i]].y + 1) * 8 + 3;
+                gSprites[sRoulette->spriteIds[i + SPR_GRID_BALLS]].x = (sGridSelections[sRoulette->hitSquares[i]].x + 1) * 8 + 4;
+                gSprites[sRoulette->spriteIds[i + SPR_GRID_BALLS]].y = (sGridSelections[sRoulette->hitSquares[i]].y + 1) * 8 + 3;
             }
         }
     }
@@ -3648,8 +3648,8 @@ static void ShowHideWinSlotCursor(u8 selectionId)
     else
     {
         gSprites[sRoulette->spriteIds[SPR_WIN_SLOT_CURSOR]].invisible = FALSE;
-        gSprites[sRoulette->spriteIds[SPR_WIN_SLOT_CURSOR]].pos1.x = (sGridSelections[selectionId].x + 2) * 8;
-        gSprites[sRoulette->spriteIds[SPR_WIN_SLOT_CURSOR]].pos1.y = (sGridSelections[selectionId].y + 2) * 8;
+        gSprites[sRoulette->spriteIds[SPR_WIN_SLOT_CURSOR]].x = (sGridSelections[selectionId].x + 2) * 8;
+        gSprites[sRoulette->spriteIds[SPR_WIN_SLOT_CURSOR]].y = (sGridSelections[selectionId].y + 2) * 8;
     }
 }
 
@@ -3688,8 +3688,8 @@ static void SpriteCB_WheelIcon(struct Sprite *sprite)
         angle -= 360;
     sin = Sin2(angle);
     cos = Cos2(angle);
-    sprite->pos2.x =  sin * sprite->data[1] >> 12;
-    sprite->pos2.y = -cos * sprite->data[1] >> 12;
+    sprite->x2 =  sin * sprite->data[1] >> 12;
+    sprite->y2 = -cos * sprite->data[1] >> 12;
     matrixNum = sprite->oam.matrixNum;
     sin /= 16;
     gOamMatrices[matrixNum].d = cos /= 16;
@@ -3845,7 +3845,7 @@ static void SetBallCounterNumLeft(u8 numBalls)
 
 static void SpriteCB_GridSquare(struct Sprite *sprite)
 {
-    sprite->pos2.x = sRoulette->gridX;
+    sprite->x2 = sRoulette->gridX;
 }
 
 static void CreateWheelCenterSprite(void)
@@ -3995,12 +3995,12 @@ static void UpdateBallPos(struct Sprite *sprite)
     sprite->sBallDistToCenter = sRoulette->ballDistToCenter;
     sin = Sin2(sprite->sBallAngle);
     cos = Cos2(sprite->sBallAngle);
-    sprite->pos2.x =  sin * sprite->sBallDistToCenter >> 12;
-    sprite->pos2.y = -cos * sprite->sBallDistToCenter >> 12;
+    sprite->x2 =  sin * sprite->sBallDistToCenter >> 12;
+    sprite->y2 = -cos * sprite->sBallDistToCenter >> 12;
     if (IsSEPlaying())
     {
-        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, sprite->pos2.x);
-        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, sprite->x2);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, sprite->x2);
     }
 }
 
@@ -4013,9 +4013,9 @@ static void SpriteCB_BallLandInSlot(struct Sprite *sprite)
         sprite->sBallAngle -= 360;
     sin = Sin2(sprite->sBallAngle);
     cos = Cos2(sprite->sBallAngle);
-    sprite->pos2.x =  sin * sprite->sBallDistToCenter >> 12;
-    sprite->pos2.y = -cos * sprite->sBallDistToCenter >> 12;
-    sprite->pos2.y += gSpriteCoordOffsetY;
+    sprite->x2 =  sin * sprite->sBallDistToCenter >> 12;
+    sprite->y2 = -cos * sprite->sBallDistToCenter >> 12;
+    sprite->y2 += gSpriteCoordOffsetY;
 }
 
 static void SpriteCB_UnstickBall_ShroomishBallFall(struct Sprite *sprite)
@@ -4098,9 +4098,9 @@ static void SpriteCB_UnstickBall_Shroomish(struct Sprite *sprite)
 
 static void SpriteCB_UnstickBall_TaillowDrop(struct Sprite *sprite)
 {
-    sprite->pos2.y = (s16)(sprite->data[2] * 0.05f * sprite->data[2]) - 45;
+    sprite->y2 = (s16)(sprite->data[2] * 0.05f * sprite->data[2]) - 45;
     sprite->data[2]++;
-    if (sprite->data[2] >= DEGREES_PER_SLOT && sprite->pos2.y >= 0)
+    if (sprite->data[2] >= DEGREES_PER_SLOT && sprite->y2 >= 0)
     {
         LandBall()
         sRoulette->ballUnstuck = TRUE;
@@ -4111,11 +4111,11 @@ static void SpriteCB_UnstickBall_TaillowPickUp(struct Sprite *sprite)
 {
     if (sprite->data[2]++ < 45)
     {
-        sprite->pos2.y--;
+        sprite->y2--;
         if (sprite->data[2] == 45)
         {
             if (gSprites[sRoulette->spriteIds[SPR_CLEAR_MON]].animCmdIndex == 1)
-                sprite->pos2.y++;
+                sprite->y2++;
         }
     }
     else
@@ -4125,9 +4125,9 @@ static void SpriteCB_UnstickBall_TaillowPickUp(struct Sprite *sprite)
             if (gSprites[sRoulette->spriteIds[SPR_CLEAR_MON]].animDelayCounter == 0)
             {
                 if (gSprites[sRoulette->spriteIds[SPR_CLEAR_MON]].animCmdIndex == 1)
-                    sprite->pos2.y++;
+                    sprite->y2++;
                 else
-                    sprite->pos2.y--;
+                    sprite->y2--;
             }
         }
         else
@@ -4449,13 +4449,13 @@ static void SetBallStuck(struct Sprite *sprite)
     if (sRoulette->useTaillow)
     {
         if (sprite->sStuckOnWheelLeft)
-            PlayCry1(SPECIES_TAILLOW, -63);
+            PlayCry_Normal(SPECIES_TAILLOW, -63);
         else
-            PlayCry1(SPECIES_TAILLOW, 63);
+            PlayCry_Normal(SPECIES_TAILLOW, 63);
     }
     else
     {
-        PlayCry1(SPECIES_SHROOMISH, -63);
+        PlayCry_Normal(SPECIES_SHROOMISH, -63);
     }
 
     slotsToSkip = 2;
@@ -4516,8 +4516,8 @@ static void SpriteCB_ShroomishExit(struct Sprite *sprite)
     // Delay for screen shaking, then exit left
     if (sprite->data[1]++ >= sprite->data[3])
     {
-	    sprite->pos1.x -= 2;
-        if (sprite->pos1.x < -16)
+	    sprite->x -= 2;
+        if (sprite->x < -16)
         {
             if (!sRoulette->ballUnstuck)
                 sRoulette->ballUnstuck = TRUE;
@@ -4563,7 +4563,7 @@ static void SpriteCB_ShroomishFall(struct Sprite *sprite)
     f32 timer;
     sprite->data[1]++;
     timer = sprite->data[1];
-    sprite->pos2.y = timer * 0.039f * timer;
+    sprite->y2 = timer * 0.039f * timer;
     sRoulette->shroomishShadowAlpha = sShroomishShadowAlphas[(sRoulette->shroomishShadowTimer - 1) / 2];
     if (sRoulette->shroomishShadowTimer < ARRAY_COUNT(sShroomishShadowAlphas) * 2 - 1)
         sRoulette->shroomishShadowTimer++;
@@ -4636,9 +4636,9 @@ static void SpriteCB_TaillowShadow_Flash(struct Sprite *sprite)
 
 static void SpriteCB_Taillow_FlyAway(struct Sprite *sprite)
 {
-    if (sprite->pos1.y > -16)
+    if (sprite->y > -16)
     {
-        sprite->pos1.y--;
+        sprite->y--;
     }
     else
     {
@@ -4657,9 +4657,9 @@ static void SpriteCB_Taillow_PickUpBall(struct Sprite *sprite)
     if (sprite->data[1] >= 0)
     {
         sprite->data[1]--;
-        sprite->pos1.y--;
+        sprite->y--;
         if (sprite->data[1] == 0 && sprite->animCmdIndex == 1)
-            sprite->pos2.y++;
+            sprite->y2++;
     }
     else
     {
@@ -4669,9 +4669,9 @@ static void SpriteCB_Taillow_PickUpBall(struct Sprite *sprite)
             if (sprite->animDelayCounter == 0)
             {
                 if (sprite->animCmdIndex == 1)
-                    sprite->pos2.y++;
+                    sprite->y2++;
                 else
-                    sprite->pos2.y--;
+                    sprite->y2--;
             }
         }
         else
@@ -4700,28 +4700,28 @@ static void SpriteCB_Taillow_FlyIn(struct Sprite *sprite)
 
     if (sprite->data[1]-- > 7)
     {
-        sprite->pos1.x += xMoveOffsets[sRoulette->ball->sStuckOnWheelLeft] * 2;
+        sprite->x += xMoveOffsets[sRoulette->ball->sStuckOnWheelLeft] * 2;
         if (IsSEPlaying())
         {
-            s8 pan = -((116 - sprite->pos1.x) / 2);
-            m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, pan);
-            m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, pan);
+            s8 pan = -((116 - sprite->x) / 2);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);
         }
     }
     else
     {
         if (sprite->data[1] >= 0)
         {
-            sprite->pos1.x += xMoveOffsets[sRoulette->ball->sStuckOnWheelLeft] * yMoveOffsets[7 - sprite->data[1]][0];
-            sprite->pos1.y += yMoveOffsets[7 - sprite->data[1]][1];
+            sprite->x += xMoveOffsets[sRoulette->ball->sStuckOnWheelLeft] * yMoveOffsets[7 - sprite->data[1]][0];
+            sprite->y += yMoveOffsets[7 - sprite->data[1]][1];
         }
         else
         {
             m4aSongNumStartOrChange(SE_TAILLOW_WING_FLAP);
             if (sRoulette->ball->sStuckOnWheelLeft == 0)
-                PlayCry1(SPECIES_TAILLOW, 63);
+                PlayCry_Normal(SPECIES_TAILLOW, 63);
             else
-                PlayCry1(SPECIES_TAILLOW, -63);
+                PlayCry_Normal(SPECIES_TAILLOW, -63);
             StartSpriteAnim(sprite, sRoulette->ball->sStuckOnWheelLeft + 2);
             sprite->data[1] = 45;
             sprite->callback = SpriteCB_Taillow_PickUpBall;
@@ -4735,7 +4735,7 @@ static void SpriteCB_TaillowShadow_FlyIn(struct Sprite *sprite)
 
     if (sprite->data[1]-- >= 0)
     {
-        sprite->pos1.x += moveDir[sRoulette->ball->sStuckOnWheelLeft] * 2;
+        sprite->x += moveDir[sRoulette->ball->sStuckOnWheelLeft] * 2;
         gSprites[sprite->sMonShadowSpriteId].invisible ^= 1;
     }
     else

@@ -68,7 +68,7 @@ static const u16 sMapPopUp_PaletteTable[][16] =
 
 static const u16 sMapPopUp_Palette_Underwater[16] = INCBIN_U16("graphics/interface/map_popup/underwater.gbapal");
 
-static const u8 gRegionMapSectionId_To_PopUpThemeIdMapping[] =
+static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
 {
     [MAPSEC_LITTLEROOT_TOWN] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_OLDALE_TOWN] = MAPPOPUP_THEME_WOOD,
@@ -325,12 +325,12 @@ static void ShowMapNamePopUpWindow(void)
     }
     AddMapNamePopUpWindow();
     LoadMapNamePopUpWindowBg();
-    x = GetStringCenterAlignXOffset(7, withoutPrefixPtr, 80);
+    x = GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 80);
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
-    AddTextPrinterParameterized(GetMapNamePopUpWindowId(), 7, mapDisplayHeader, x, 3, 0xFF, NULL);
-    CopyWindowToVram(GetMapNamePopUpWindowId(), 3);
+    AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
 }
 
 #define TILE_TOP_EDGE_START 0x21D
@@ -378,7 +378,7 @@ static void LoadMapNamePopUpWindowBg(void)
         else
             regionMapSectionId = 0; // Discard kanto region sections;
     }
-    popUpThemeId = gRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+    popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
     LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), sMapPopUp_OutlineTable[popUpThemeId], 0x400, 0x21D);
     CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);

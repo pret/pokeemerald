@@ -8,6 +8,14 @@
 #define POKENEWS_BLENDMASTER  4
 #define NUM_POKENEWS_TYPES    4 // Excludes NONE
 
+#define POKENEWS_STATE_INACTIVE 0
+#define POKENEWS_STATE_UPCOMING 1
+#define POKENEWS_STATE_ACTIVE   2
+
+// Number of days to count down until the news event occurs.
+// Nothing is aired on TV the first day
+#define POKENEWS_COUNTDOWN 4
+
 // TV shows are categorized as being in one of 3 groups
 // - TVGROUP_NORMAL, TV shows that can appear without Record Mixing
 // - TVGROUP_RECORD_MIX, TV shows that can only appear via Record Mixing
@@ -35,7 +43,7 @@
 
 // TVGROUP_RECORD_MIX
 #define TVGROUP_RECORD_MIX_START                    21
-#define TVSHOW_POKEMON_TODAY_CAUGHT                 21 
+#define TVSHOW_POKEMON_TODAY_CAUGHT                 21
 #define TVSHOW_SMART_SHOPPER                        22
 #define TVSHOW_POKEMON_TODAY_FAILED                 23
 #define TVSHOW_FISHING_ADVICE                       24
@@ -248,6 +256,21 @@
 #define CONTESTLADYLIVE_STATE_WON        1
 #define CONTESTLADYLIVE_STATE_LOST       2
 #define CONTESTLADYLIVE_STATE_LOST_BADLY 3
+
+// TV Show states for Smart Shopper
+#define SMARTSHOPPER_STATE_INTRO           0
+#define SMARTSHOPPER_STATE_CLERK_NORMAL    1
+#define SMARTSHOPPER_STATE_RAND_COMMENT_1  2
+#define SMARTSHOPPER_STATE_RAND_COMMENT_2  3
+#define SMARTSHOPPER_STATE_RAND_COMMENT_3  4
+#define SMARTSHOPPER_STATE_RAND_COMMENT_4  5
+#define SMARTSHOPPER_STATE_SECOND_ITEM     6
+#define SMARTSHOPPER_STATE_THIRD_ITEM      7
+#define SMARTSHOPPER_STATE_DURING_SALE     8
+#define SMARTSHOPPER_STATE_OUTRO_NORMAL    9
+#define SMARTSHOPPER_STATE_IS_VIP         10
+#define SMARTSHOPPER_STATE_CLERK_MAX      11
+#define SMARTSHOPPER_STATE_OUTRO_MAX      12
 
 #define SMARTSHOPPER_NUM_ITEMS 3
 

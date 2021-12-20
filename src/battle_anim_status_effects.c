@@ -210,35 +210,35 @@ static const struct SpriteTemplate sFlickeringShrinkOrbSpriteTemplate =
 static const struct Subsprite sFrozenIceCubeSubsprites[] =
 {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(64x64),      
-        .size = SPRITE_SIZE(64x64), 
-        .tileOffset = 0, 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(64x64),
+        .size = SPRITE_SIZE(64x64),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  48, 
-        .shape = SPRITE_SHAPE(64x32), 
-        .size = SPRITE_SIZE(64x32), 
-        .tileOffset = 64, 
+        .x = -16,
+        .y =  48,
+        .shape = SPRITE_SHAPE(64x32),
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 64,
         .priority = 2
     },
     {
-        .x =  48, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x64), 
+        .x =  48,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x64),
         .size = SPRITE_SIZE(32x64),
-        .tileOffset = 96, 
+        .tileOffset = 96,
         .priority = 2
     },
     {
-        .x =  48, 
-        .y =  48, 
-        .shape = SPRITE_SHAPE(32x32),   
-        .size = SPRITE_SIZE(32x32), 
-        .tileOffset = 128, 
+        .x =  48,
+        .y =  48,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .tileOffset = 128,
         .priority = 2
     },
 };
@@ -286,7 +286,7 @@ static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
         gTasks[taskId].data[1] = RGB_RED;
         for (i = 0; i < 10; i++)
         {
-            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y + 32, 0);
+            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].x, gSprites[battlerSpriteId].y + 32, 0);
             gSprites[spriteId].data[0] = i * 51;
             gSprites[spriteId].data[1] = -256;
             gSprites[spriteId].invisible = TRUE;
@@ -299,7 +299,7 @@ static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
         gTasks[taskId].data[1] = RGB_BLUE;
         for (i = 0; i < 10; i++)
         {
-            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].pos1.x, gSprites[battlerSpriteId].pos1.y - 32, 0);
+            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].x, gSprites[battlerSpriteId].y - 32, 0);
             gSprites[spriteId].data[0] = i * 51;
             gSprites[spriteId].data[1] = 256;
             gSprites[spriteId].invisible = TRUE;
@@ -360,15 +360,15 @@ static void AnimFlashingCircleImpact(struct Sprite *sprite)
 
 static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 32);
-    sprite->pos2.y = Sin(sprite->data[0], 8);
+    sprite->x2 = Cos(sprite->data[0], 32);
+    sprite->y2 = Sin(sprite->data[0], 8);
     if (sprite->data[0] < 128)
         sprite->subpriority = 29;
     else
         sprite->subpriority = 31;
     sprite->data[0] = (sprite->data[0] + 8) & 0xFF;
     sprite->data[5] += sprite->data[1];
-    sprite->pos2.y += sprite->data[5] >> 8;
+    sprite->y2 += sprite->data[5] >> 8;
     sprite->data[2]++;
     if (sprite->data[2] == 52)
     {

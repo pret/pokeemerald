@@ -261,8 +261,8 @@ const struct SpriteTemplate gPersistHitSplatSpriteTemplate =
 // arg 4: duration
 static void AnimConfusionDuck(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -283,8 +283,8 @@ static void AnimConfusionDuck(struct Sprite *sprite)
 
 static void AnimConfusionDuck_Step(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 30);
-    sprite->pos2.y = Sin(sprite->data[0], 10);
+    sprite->x2 = Cos(sprite->data[0], 30);
+    sprite->y2 = Sin(sprite->data[0], 10);
 
     if ((u16)sprite->data[0] < 128)
         sprite->oam.priority = 1;
@@ -400,8 +400,8 @@ static void AnimComplexPaletteBlend_Step2(struct Sprite *sprite)
 
 static void AnimCirclingSparkle(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = 0;
     sprite->data[1] = 10;
     sprite->data[2] = 8;
@@ -409,7 +409,7 @@ static void AnimCirclingSparkle(struct Sprite *sprite)
     sprite->data[4] = 112;
     sprite->data[5] = 0;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = TranslateSpriteInGrowingCircleOverDuration;
+    sprite->callback = TranslateSpriteInGrowingCircle;
     sprite->callback(sprite);
 }
 
@@ -425,7 +425,7 @@ static void AnimCirclingSparkle(struct Sprite *sprite)
 #define tPalSelectorHi data[9]
 #define tPalSelectorLo data[10]
 
-// Blends mon/screen to designated color or back alternately tNumBlends times 
+// Blends mon/screen to designated color or back alternately tNumBlends times
 // Many uses of this task only set a tNumBlends of 2, which has the effect of blending to a color and back once
 void AnimTask_BlendColorCycle(u8 taskId)
 {
@@ -733,50 +733,67 @@ void AnimTask_InvertScreenColor(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void UnusedAnimTask_8115F94(u8 taskId)
+// Unused
+#define tTimer         data[0]
+#define tLength        data[1]
+#define tFlagsScenery  data[2]
+#define tFlagsAttacker data[3]
+#define tFlagsTarget   data[4]
+#define tColorR        data[5]
+#define tColorG        data[6]
+#define tColorB        data[7]
+void AnimTask_TintPalettes(u8 taskId)
 {
     u8 attackerBattler;
     u8 targetBattler;
     u8 paletteIndex;
     u32 selectedPalettes = 0;
 
-    if (gTasks[taskId].data[0] == 0)
+    if (gTasks[taskId].tTimer == 0)
     {
-        gTasks[taskId].data[2] = gBattleAnimArgs[0];
-        gTasks[taskId].data[3] = gBattleAnimArgs[1];
-        gTasks[taskId].data[4] = gBattleAnimArgs[2];
-        gTasks[taskId].data[1] = gBattleAnimArgs[3];
-        gTasks[taskId].data[5] = gBattleAnimArgs[4];
-        gTasks[taskId].data[6] = gBattleAnimArgs[5];
-        gTasks[taskId].data[7] = gBattleAnimArgs[6];
+        gTasks[taskId].tFlagsScenery = gBattleAnimArgs[0];
+        gTasks[taskId].tFlagsAttacker = gBattleAnimArgs[1];
+        gTasks[taskId].tFlagsTarget = gBattleAnimArgs[2];
+        gTasks[taskId].tLength = gBattleAnimArgs[3];
+        gTasks[taskId].tColorR = gBattleAnimArgs[4];
+        gTasks[taskId].tColorG = gBattleAnimArgs[5];
+        gTasks[taskId].tColorB = gBattleAnimArgs[6];
     }
 
-    gTasks[taskId].data[0]++;
+    gTasks[taskId].tTimer++;
     attackerBattler = gBattleAnimAttacker;
     targetBattler = gBattleAnimTarget;
 
-    if (gTasks[taskId].data[2] & 0x100)
-        selectedPalettes = 0x0000FFFF;
+    if (gTasks[taskId].tFlagsScenery & (1 << 8))
+        selectedPalettes = PALETTES_BG;
 
-    if (gTasks[taskId].data[2] & 0x1)
+    if (gTasks[taskId].tFlagsScenery & 1)
     {
         paletteIndex = IndexOfSpritePaletteTag(gSprites[gHealthboxSpriteIds[attackerBattler]].template->paletteTag);
         selectedPalettes |= (1 << paletteIndex) << 16;
     }
-    
-    if (gTasks[taskId].data[3] & 0x100)
+
+    if (gTasks[taskId].tFlagsAttacker & (1 << 8))
         selectedPalettes |= (1 << attackerBattler) << 16;
 
-    if (gTasks[taskId].data[4] & 0x100)
+    if (gTasks[taskId].tFlagsTarget & (1 << 8))
         selectedPalettes |= (1 << targetBattler) << 16;
 
-    TintPlttBuffer(selectedPalettes, gTasks[taskId].data[5], gTasks[taskId].data[6], gTasks[taskId].data[7]);
-    if (gTasks[taskId].data[0] == gTasks[taskId].data[1])
+    TintPlttBuffer(selectedPalettes, gTasks[taskId].tColorR, gTasks[taskId].tColorG, gTasks[taskId].tColorB);
+    if (gTasks[taskId].tTimer == gTasks[taskId].tLength)
     {
         UnfadePlttBuffer(selectedPalettes);
         DestroyAnimVisualTask(taskId);
     }
 }
+#undef tTimer
+#undef tLength
+#undef tFlagsScenery
+#undef tFlagsAttacker
+#undef tFlagsTarget
+#undef tColorR
+#undef tColorG
+#undef tColorB
 
 static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
 {
@@ -956,7 +973,7 @@ static void AnimHitSplatHandleInvert(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER && !IsContest())
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    
+
     AnimHitSplatBasic(sprite);
 }
 
@@ -971,8 +988,8 @@ static void AnimHitSplatRandom(struct Sprite *sprite)
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
 
-    sprite->pos2.x += (Random2() % 48) - 24;
-    sprite->pos2.y += (Random2() % 24) - 12;
+    sprite->x2 += (Random2() % 48) - 24;
+    sprite->y2 += (Random2() % 24) - 12;
 
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
@@ -981,10 +998,10 @@ static void AnimHitSplatRandom(struct Sprite *sprite)
 static void AnimHitSplatOnMonEdge(struct Sprite *sprite)
 {
     sprite->data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x + gSprites[sprite->data[0]].pos2.x;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y + gSprites[sprite->data[0]].pos2.y;
-    sprite->pos2.x = gBattleAnimArgs[1];
-    sprite->pos2.y = gBattleAnimArgs[2];
+    sprite->x = gSprites[sprite->data[0]].x + gSprites[sprite->data[0]].x2;
+    sprite->y = gSprites[sprite->data[0]].y + gSprites[sprite->data[0]].y2;
+    sprite->x2 = gBattleAnimArgs[1];
+    sprite->y2 = gBattleAnimArgs[2];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;

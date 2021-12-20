@@ -3,7 +3,10 @@
 
 #define MAX_SPRITES 64
 #define SPRITE_NONE 0xFF
-#define SPRITE_INVALID_TAG 0xFFFF
+#define TAG_NONE 0xFFFF
+
+// Given to SetSpriteMatrixAnchor to skip anchoring one of the coords.
+#define NO_ANCHOR 0x800
 
 struct SpriteSheet
 {
@@ -197,8 +200,8 @@ struct Sprite
     /*0x18*/ const struct SubspriteTable *subspriteTables;
     /*0x1C*/ SpriteCallback callback;
 
-    /*0x20*/ struct Coords16 pos1;
-    /*0x24*/ struct Coords16 pos2;
+    /*0x20*/ s16 x, y;
+    /*0x24*/ s16 x2, y2;
     /*0x28*/ s8 centerToCornerVecX;
     /*0x29*/ s8 centerToCornerVecY;
 
@@ -227,7 +230,7 @@ struct Sprite
              bool16 animEnded:1;           //0x10
              bool16 affineAnimEnded:1;     //0x20
              bool16 usingSheet:1;          //0x40
-             bool16 flags_f:1;             //0x80
+             bool16 anchored:1;            //0x80
 
     /*0x40*/ u16 sheetTileStart;
 
@@ -278,9 +281,8 @@ void FreeSpriteTiles(struct Sprite *sprite);
 void FreeSpritePalette(struct Sprite *sprite);
 void FreeSpriteOamMatrix(struct Sprite *sprite);
 void DestroySpriteAndFreeResources(struct Sprite *sprite);
-void sub_800142C(u32 a1, u32 a2, u16 *a3, u16 a4, u32 a5);
 void AnimateSprite(struct Sprite *sprite);
-void sub_8007E18(struct Sprite* sprite, s16 a2, s16 a3);
+void SetSpriteMatrixAnchor(struct Sprite* sprite, s16 x, s16 y);
 void StartSpriteAnim(struct Sprite *sprite, u8 animNum);
 void StartSpriteAnimIfDifferent(struct Sprite *sprite, u8 animNum);
 void SeekSpriteAnim(struct Sprite *sprite, u8 animCmdIndex);
