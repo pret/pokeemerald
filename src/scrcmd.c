@@ -1011,14 +1011,8 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
       if (objEvent == NULL || gSprites[objEvent->spriteId].data[1] == 0) {
         return FALSE;
       }
-      // ClearEventObjectMovement(
-      objEvent->singleMovementActive = 0;
-      objEvent->heldMovementActive = FALSE;
-      objEvent->heldMovementFinished = FALSE;
-      objEvent->movementActionId = 0xFF;
-      gSprites[objEvent->spriteId].data[1] = 0;
-      // )
-      gSprites[objEvent->spriteId].animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
+      ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
+      gSprites[objEvent->spriteId].animCmdIndex = 0; // Needed to set start frame of animation
       ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_FOLLOWER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, EnterPokeballMovement);
     }
     return FALSE;
@@ -1268,15 +1262,9 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 {
     u8 playerObjectId;
     struct ObjectEvent *followerObject = GetFollowerObject();
-    if (followerObject) { // Release follower from movement
-      // ObjectEventClearHeldMovement( TODO: Change the way data[1] determines state
-      followerObject->singleMovementActive = FALSE;
-      followerObject->movementActionId = 0xFF;
-      followerObject->heldMovementActive = FALSE;
-      followerObject->heldMovementFinished = FALSE;
-      gSprites[followerObject->spriteId].data[2] = 0;
-      // )
-    }
+    // Release follower from movement iff it exists and is in the shadowing state
+    if (followerObject && gSprites[followerObject->spriteId].data[1] == 0)
+        ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
 
     HideFieldMessageBox();
     playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
@@ -1290,15 +1278,9 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 {
     u8 playerObjectId;
     struct ObjectEvent *followerObject = GetFollowerObject();
-    if (followerObject) { // Release follower from movement
-      // ObjectEventClearHeldMovement(
-      followerObject->singleMovementActive = FALSE;
-      followerObject->movementActionId = 0xFF;
-      followerObject->heldMovementActive = FALSE;
-      followerObject->heldMovementFinished = FALSE;
-      gSprites[followerObject->spriteId].data[2] = 0;
-      // )
-    }
+    // Release follower from movement iff it exists and is in the shadowing state
+    if (followerObject && gSprites[followerObject->spriteId].data[1] == 0)
+        ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
 
     HideFieldMessageBox();
     if (gObjectEvents[gSelectedObjectEvent].active)

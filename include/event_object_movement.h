@@ -92,6 +92,7 @@ void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup
 void GetMapCoordsFromSpritePos(s16, s16, s16 *, s16 *);
 u8 GetFaceDirectionAnimNum(u8);
 void SetSpritePosToOffsetMapCoords(s16 *, s16 *, s16, s16);
+void ClearObjectEventMovement(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 void ObjectEventClearHeldMovement(struct ObjectEvent *);
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *);
 struct Pokemon * GetFirstLiveMon(void);
