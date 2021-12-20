@@ -16,7 +16,6 @@
 #include "decompress.h"
 #include "constants/songs.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 
 #define TAG_SWAP_LINE 109
 
@@ -106,14 +105,14 @@ void ResetVramOamAndBgCntRegs(void)
 
 void ResetAllBgsCoordinates(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 }
 
 void SetVBlankHBlankCallbacksToNull(void)

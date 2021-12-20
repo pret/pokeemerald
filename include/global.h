@@ -10,6 +10,7 @@
 #include "constants/vars.h"
 #include "constants/species.h"
 #include "constants/berry.h"
+#include "constants/maps.h"
 
 // free saveblock 1 defines
 #define FREE_EXTRA_SEEN_FLAGS           //free up extra pokedex seen flags. Frees up 104 bytes
@@ -138,10 +139,12 @@
     f;                       \
 })
 
-#define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
+#define DIV_ROUND_UP(val, roundBy)(((val) / (roundBy)) + (((val) % (roundBy)) ? 1 : 0))
 
-#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(NUM_SPECIES))
-#define NUM_FLAG_BYTES (ROUND_BITS_TO_BYTES(FLAGS_COUNT))
+#define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, 8)
+
+#define DEX_FLAGS_NO ROUND_BITS_TO_BYTES(NUM_SPECIES)
+#define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 
 struct Coords8
 {
@@ -997,10 +1000,10 @@ struct SaveBlock1
     /*0x2B92*/ u8 outbreakLocationMapNum;
     /*0x2B93*/ u8 outbreakLocationMapGroup;
     /*0x2B94*/ u8 outbreakPokemonLevel;
-    /*0x2B95*/ u8 outbreakUnk1;
-    /*0x2B96*/ u16 outbreakUnk2;
+    /*0x2B95*/ u8 outbreakUnused1;
+    /*0x2B96*/ u16 outbreakUnused2;
     /*0x2B98*/ u16 outbreakPokemonMoves[MAX_MON_MOVES];
-    /*0x2BA0*/ u8 outbreakUnk4;
+    /*0x2BA0*/ u8 outbreakUnused3;
     /*0x2BA1*/ u8 outbreakPokemonProbability;
     /*0x2BA2*/ u16 outbreakDaysLeft;
     /*0x2BA4*/ struct GabbyAndTyData gabbyAndTyData;

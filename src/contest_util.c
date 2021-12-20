@@ -1181,7 +1181,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
     if (strWidth > 30)
      strWidth = 30;
 
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, TEXT_SKIP_DRAW, text);
     {
         s32 i;
         struct Sprite *sprite;
@@ -1578,7 +1578,7 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
     {
         if (++sprite->data[0] == 10)
         {
-            PlayCry1(sprite->data[1], 0);
+            PlayCry_Normal(sprite->data[1], 0);
             sprite->data[1] = 0;
         }
     }
@@ -2253,10 +2253,10 @@ void Task_LinkContest_FinalizeConnection(u8 taskId)
     {
         // Succesfully connected
         for (i = 0; i < CONTESTANT_COUNT; i++)
-            StringGetEnd10(gContestMons[i].nickname);
+            StringGet_Nickname(gContestMons[i].nickname);
 
         DestroyTask(taskId);
-        SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+        SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
         ScriptContext2_Disable();
         EnableBothScriptContexts();
     }

@@ -1147,13 +1147,19 @@ void LoadAndCreateEnemyShadowSprites(void)
     LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
 
     battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-    gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, 0), GetBattlerSpriteCoord(battlerId, 1) + 29, 0xC8);
+    gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow,
+                                                                                    GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X),
+                                                                                    GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 29,
+                                                                                    0xC8);
     gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
 
     if (IsDoubleBattle())
     {
         battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, 0), GetBattlerSpriteCoord(battlerId, 1) + 29, 0xC8);
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow,
+                                                                                        GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X),
+                                                                                        GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 29,
+                                                                                        0xC8);
         gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
     }
 }

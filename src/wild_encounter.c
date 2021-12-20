@@ -20,7 +20,6 @@
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
-#include "constants/maps.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];
@@ -301,7 +300,7 @@ static u16 GetCurrentMapWildMonHeaderId(void)
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
-        if (wildHeader->mapGroup == 0xFF)
+        if (wildHeader->mapGroup == MAP_GROUP(UNDEFINED))
             break;
 
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&

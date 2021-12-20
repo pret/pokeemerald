@@ -126,10 +126,10 @@ static const u8 sTileBitAttributes[] =
     [MB_BRIDGE_OVER_POND_LOW] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_BRIDGE_OVER_POND_MED] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_BRIDGE_OVER_POND_HIGH] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_PACIFIDLOG_VERTICAL_LOG_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_PACIFIDLOG_VERTICAL_LOG_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_PACIFIDLOG_HORIZONTAL_LOG_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_PACIFIDLOG_HORIZONTAL_LOG_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_PACIFIDLOG_VERTICAL_LOG_TOP] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_PACIFIDLOG_VERTICAL_LOG_BOTTOM] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_PACIFIDLOG_HORIZONTAL_LOG_LEFT] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_PACIFIDLOG_HORIZONTAL_LOG_RIGHT] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_FORTREE_BRIDGE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_79] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_BRIDGE_OVER_POND_MED_EDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
@@ -1131,33 +1131,33 @@ bool8 MetatileBehavior_IsFortreeBridge(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPacifidlogVerticalLog1(u8 metatileBehavior)
+bool8 MetatileBehavior_IsPacifidlogVerticalLogTop(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_1)
+    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_TOP)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPacifidlogVerticalLog2(u8 metatileBehavior)
+bool8 MetatileBehavior_IsPacifidlogVerticalLogBottom(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_2)
+    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_BOTTOM)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPacifidlogHorizontalLog1(u8 metatileBehavior)
+bool8 MetatileBehavior_IsPacifidlogHorizontalLogLeft(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_1)
+    if (metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_LEFT)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPacifidlogHorizontalLog2(u8 metatileBehavior)
+bool8 MetatileBehavior_IsPacifidlogHorizontalLogRight(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_2)
+    if (metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_RIGHT)
         return TRUE;
     else
         return FALSE;
@@ -1165,10 +1165,10 @@ bool8 MetatileBehavior_IsPacifidlogHorizontalLog2(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsPacifidlogLog(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_1
-     || metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_2
-     || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_1
-     || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_2)
+    if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_TOP
+     || metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_BOTTOM
+     || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_LEFT
+     || metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_RIGHT)
         return TRUE;
     else
         return FALSE;

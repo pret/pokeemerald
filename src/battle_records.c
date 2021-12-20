@@ -339,7 +339,7 @@ void ShowLinkBattleRecords(void)
     }
     #endif
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, 3);
+    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
 
 void RemoveRecordsWindow(void)
@@ -387,7 +387,7 @@ static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     RemoveWindow(windowId);
 }
 
@@ -430,14 +430,14 @@ static void ClearTasksAndGraphicalStructs(void)
 
 static void ResetBgCoordinates(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 }
 
 static void SetDispcntReg(void)

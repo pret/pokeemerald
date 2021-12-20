@@ -270,7 +270,9 @@
 #define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
 
-#define MAX_FRIENDSHIP  0xFF
+#define MAX_FRIENDSHIP  255
+#define MAX_SHEEN       255
+#define MAX_CONDITION   255
 
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
@@ -337,7 +339,9 @@
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
-#define MON_PIC_SIZE (64 * 64 / 2)
+#define MON_PIC_WIDTH 64
+#define MON_PIC_HEIGHT 64
+#define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
 
 #define BATTLE_ALIVE_EXCEPT_ACTIVE  0
 #define BATTLE_ALIVE_ATK_SIDE       1

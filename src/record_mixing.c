@@ -287,7 +287,7 @@ static void PrintTextOnRecordMixing(const u8 *src)
 {
     DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, FONT_NORMAL, src, 0, 1, 0, NULL);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 #define tCounter data[0]
@@ -1002,11 +1002,11 @@ static void Task_DoRecordMixing(u8 taskId)
     case 2:
         // Mixing Ruby/Sapphire records.
         SetContinueGameWarpStatusToDynamicWarp();
-        FullSaveGame();
+        WriteSaveBlock2();
         task->tState++;
         break;
     case 3:
-        if (CheckSaveFile())
+        if (WriteSaveBlock1Sector())
         {
             ClearContinueGameWarpStatus2();
             task->tState = 4;
@@ -1030,12 +1030,12 @@ static void Task_DoRecordMixing(u8 taskId)
     case 6:
         if (!Rfu_SetLinkRecovery(FALSE))
         {
-            CreateTask(Task_LinkSave, 5);
+            CreateTask(Task_LinkFullSave, 5);
             task->tState++;
         }
         break;
-    case 7: // wait for Task_LinkSave to finish.
-        if (!FuncIsActiveTask(Task_LinkSave))
+    case 7: // wait for Task_LinkFullSave to finish.
+        if (!FuncIsActiveTask(Task_LinkFullSave))
         {
             if (gWirelessCommType)
             {

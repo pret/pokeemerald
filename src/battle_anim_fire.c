@@ -472,7 +472,7 @@ static void AnimFireSpiralInward(struct Sprite *sprite)
 
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 
-    sprite->callback = TranslateSpriteInGrowingCircleOverDuration;
+    sprite->callback = TranslateSpriteInGrowingCircle;
     sprite->callback(sprite);
 }
 
@@ -665,9 +665,9 @@ static void AnimFireRing_Step1(struct Sprite *sprite)
     {
         sprite->data[0] = 0x19;
         sprite->data[1] = sprite->x;
-        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
         sprite->data[3] = sprite->y;
-        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
         InitAnimLinearTranslation(sprite);
 
@@ -681,8 +681,8 @@ static void AnimFireRing_Step2(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
 
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->y2 = 0;
         sprite->x2 = 0;
 
@@ -1101,9 +1101,9 @@ static void AnimWillOWispOrb(struct Sprite *sprite)
 
             sprite->data[0] = 256;
             sprite->data[1] = sprite->x;
-            sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+            sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
             sprite->data[3] = sprite->y;
-            sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+            sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
             InitAnimLinearTranslationWithSpeed(sprite);
             sprite->callback = AnimWillOWispOrb_Step;

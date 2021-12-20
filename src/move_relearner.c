@@ -687,7 +687,7 @@ static void DoMoveRelearnerMain(void)
             ShowTeachMoveText(TRUE);
         }
         RemoveScrollArrows();
-        CopyWindowToVram(3, 2);
+        CopyWindowToVram(3, COPYWIN_GFX);
         break;
     case MENU_STATE_TRY_OVERWRITE_MOVE:
         if (!gPaletteFade.active)
@@ -912,7 +912,7 @@ static void CreateLearnableMovesList(void)
     }
 
     GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gStringVar1, nickname);
+    StringCopy_Nickname(gStringVar1, nickname);
     sMoveRelearnerStruct->menuItems[sMoveRelearnerStruct->numMenuChoices].name = gText_Cancel;
     sMoveRelearnerStruct->menuItems[sMoveRelearnerStruct->numMenuChoices].id = LIST_CANCEL;
     sMoveRelearnerStruct->numMenuChoices++;

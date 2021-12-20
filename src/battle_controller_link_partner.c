@@ -489,7 +489,7 @@ static u32 CopyLinkPartnerMonData(u8 monId, u8 *dst)
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battleMon.nickname, nickname);
+        StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); size++)
@@ -1017,7 +1017,7 @@ static void LinkPartnerHandleLoadMonSprite(void)
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               GetBattlerSpriteCoord(gActiveBattler, 2),
+                                               GetBattlerSpriteCoord(gActiveBattler, BATTLER_COORD_X_2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
@@ -1048,7 +1048,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
 
     gBattlerSpriteIds[battlerId] = CreateSprite(
       &gMultiuseSpriteTemplate,
-      GetBattlerSpriteCoord(battlerId, 2),
+      GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
       GetBattlerSpriteDefault_Y(battlerId),
       GetBattlerSpriteSubpriority(battlerId));
 
@@ -1513,7 +1513,7 @@ static void LinkPartnerHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry3(species, -25, 5);
+    PlayCry_ByMode(species, -25, CRY_MODE_FAINT);
     LinkPartnerBufferExecCompleted();
 }
 

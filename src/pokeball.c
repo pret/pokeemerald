@@ -641,7 +641,7 @@ static void SpriteCB_BallThrow_Shake(struct Sprite *sprite)
 #define tCryTaskSpecies         data[0]
 #define tCryTaskPan             data[1]
 #define tCryTaskWantedCry       data[2]
-#define tCryTaskBattler            data[3]
+#define tCryTaskBattler         data[3]
 #define tCryTaskMonSpriteId     data[4]
 #define tCryTaskMonPtr1         data[5]
 #define tCryTaskMonPtr2         data[6]
@@ -665,10 +665,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskState = wantedCry + 1;
         break;
     case 1:
+        // Play single cry
         if (ShouldPlayNormalMonCry(mon) == TRUE)
-            PlayCry3(species, pan, 0);
+            PlayCry_ByMode(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry3(species, pan, 11);
+            PlayCry_ByMode(species, pan, CRY_MODE_WEAK);
         gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);
         break;
@@ -680,10 +681,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
     case 20:
         if (gTasks[taskId].tCryTaskFrames == 0)
         {
+            // Play first doubles cry
             if (ShouldPlayNormalMonCry(mon) == TRUE)
-                PlayCry4(species, pan, 1);
+                PlayCry_ReleaseDouble(species, pan, CRY_MODE_DOUBLES);
             else
-                PlayCry4(species, pan, 12);
+                PlayCry_ReleaseDouble(species, pan, CRY_MODE_WEAK_DOUBLES);
 
             gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
             DestroyTask(taskId);
@@ -719,10 +721,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskFrames--;
             break;
         }
+        // Play second doubles cry
         if (ShouldPlayNormalMonCry(mon) == TRUE)
-            PlayCry4(species, pan, 0);
+            PlayCry_ReleaseDouble(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry4(species, pan, 11);
+            PlayCry_ReleaseDouble(species, pan, CRY_MODE_WEAK);
 
         gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);
@@ -894,8 +897,8 @@ static void SpriteCB_BallThrow_CaptureMon(struct Sprite *sprite)
 static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
 {
     sprite->data[0] = 25;
-    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBattler, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, 3) + 24;
+    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBattler, BATTLER_COORD_X_2);
+    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, BATTLER_COORD_Y_PIC_OFFSET) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->sBattler;
     InitAnimArcTranslation(sprite);
@@ -1135,7 +1138,7 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
         sprite->callback = SpriteCB_TradePokeballSendOff;
 #ifdef BUGFIX
         // FIX: If this is used on a sprite that has previously had an affine animation, it will not
-        // play the shrink anim properly due to being paused. Works together with the fix to `sub_817F77C`.
+        // play the shrink anim properly due to being paused. Works together with the fix to ResetSpriteAfterAnim.
         gSprites[monSpriteId].affineAnimPaused = FALSE;
 #endif // BUGFIX
         StartSpriteAffineAnim(&gSprites[monSpriteId], BATTLER_AFFINE_RETURN);

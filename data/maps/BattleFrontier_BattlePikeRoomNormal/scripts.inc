@@ -44,7 +44,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom::
 	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle
 BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 5, 6
 	waitstate
 	end
 
@@ -137,21 +137,18 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter::
 	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver
 	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_ImThePikeQueen, MSGBOX_DEFAULT
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_HopeYouDidntUseUpLuck, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver
+	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver::
 	frontier_getsymbols
-	compare VAR_RESULT, 0
-	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy
+	goto_if_ne VAR_RESULT, 0, BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_LucyShowMeFrontierPass, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_OBTAIN_SYMBOL
@@ -165,21 +162,18 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver::
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold::
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_LucyYouAgain, MSGBOX_DEFAULT
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_NowComeOn, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold
+	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold::
 	frontier_getsymbols
-	compare VAR_RESULT, 2
-	goto_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy
+	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_LucyFrontierPass, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_OBTAIN_SYMBOL
@@ -290,10 +284,8 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom::
 	waitmovement 0
 	pike_getstatusmon
 	copyvar VAR_0x8004, VAR_RESULT
-	compare VAR_0x8004, PIKE_STATUSMON_KIRLIA
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack
-	compare VAR_0x8004, PIKE_STATUSMON_DUSCLOPS
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack
+	call_if_eq VAR_0x8004, PIKE_STATUSMON_KIRLIA, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack
+	call_if_eq VAR_0x8004, PIKE_STATUSMON_DUSCLOPS, BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_AttacksWhenStartled, MSGBOX_DEFAULT
 	closemessage
 	releaseall
@@ -303,17 +295,13 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_KirliaStop, MSGBOX_DEFAULT
 	closemessage
 	waitse
-	playmoncry SPECIES_KIRLIA, 0
+	playmoncry SPECIES_KIRLIA, CRY_MODE_NORMAL
 	waitmoncry
 	pike_getstatus
-	compare VAR_RESULT, PIKE_STATUS_TOXIC
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedToxic
-	compare VAR_RESULT, PIKE_STATUS_BURN
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedWillOWisp
-	compare VAR_RESULT, PIKE_STATUS_PARALYSIS
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedThunderWave
-	compare VAR_RESULT, PIKE_STATUS_SLEEP
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedHypnosis
+	call_if_eq VAR_RESULT, PIKE_STATUS_TOXIC, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedToxic
+	call_if_eq VAR_RESULT, PIKE_STATUS_BURN, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedWillOWisp
+	call_if_eq VAR_RESULT, PIKE_STATUS_PARALYSIS, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedThunderWave
+	call_if_eq VAR_RESULT, PIKE_STATUS_SLEEP, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedHypnosis
 	pike_flashscreen
 	waitstate
 	applymovement LOCALID_OBJ_0, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon
@@ -321,11 +309,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack::
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_KIRLIA, 0
+	playmoncry SPECIES_KIRLIA, CRY_MODE_NORMAL
 	waitmoncry
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_ThatsEnough, MSGBOX_DEFAULT
 	waitse
-	playmoncry SPECIES_KIRLIA, 0
+	playmoncry SPECIES_KIRLIA, CRY_MODE_NORMAL
 	waitmoncry
 	closemessage
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_MonMoveAside
@@ -338,13 +326,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_DusclopsStop, MSGBOX_DEFAULT
 	closemessage
 	waitse
-	playmoncry SPECIES_DUSCLOPS, 0
+	playmoncry SPECIES_DUSCLOPS, CRY_MODE_NORMAL
 	waitmoncry
 	pike_getstatus
-	compare VAR_RESULT, PIKE_STATUS_FREEZE
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedIceBeam
-	compare VAR_RESULT, PIKE_STATUS_BURN
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp
+	call_if_eq VAR_RESULT, PIKE_STATUS_FREEZE, BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedIceBeam
+	call_if_eq VAR_RESULT, PIKE_STATUS_BURN, BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp
 	pike_flashscreen
 	waitstate
 	applymovement LOCALID_OBJ_0, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon
@@ -352,11 +338,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack::
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_DUSCLOPS, 0
+	playmoncry SPECIES_DUSCLOPS, CRY_MODE_NORMAL
 	waitmoncry
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_ThatsEnough, MSGBOX_DEFAULT
 	waitse
-	playmoncry SPECIES_DUSCLOPS, 0
+	playmoncry SPECIES_DUSCLOPS, CRY_MODE_NORMAL
 	waitmoncry
 	closemessage
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_MonMoveAside
@@ -569,10 +555,8 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_StatusNPC::
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC::
 	pike_healonetwomons
-	compare VAR_RESULT, 2
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreTwoMons
-	compare VAR_RESULT, 1
-	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon
+	call_if_eq VAR_RESULT, 2, BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreTwoMons
+	call_if_eq VAR_RESULT, 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon
 	playfanfare MUS_HEAL
 	waitfanfare
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell, MSGBOX_DEFAULT
@@ -608,46 +592,46 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_StatusMon::
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage1_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage1_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage1_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage1_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage1_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage1_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage1_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage1_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage1_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage1_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage1_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage1_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage1_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage1_Tile6, TRUE
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesLittleClosed::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage2_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage2_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage2_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage2_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage2_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage2_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage2_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage2_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage2_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage2_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage2_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage2_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage2_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage2_Tile6, TRUE
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesOpen::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage3_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage3_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage3_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage3_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage3_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage3_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage3_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage3_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage3_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage3_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage3_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage3_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage3_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage3_Tile6, TRUE
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesClosed::
-	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage0_Tile0, 1
-	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage0_Tile1, 1
-	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage0_Tile2, 1
-	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage0_Tile3, 1
-	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage0_Tile4, 1
-	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage0_Tile5, 0
-	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage0_Tile6, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage0_Tile0, TRUE
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage0_Tile1, TRUE
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage0_Tile2, TRUE
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage0_Tile3, TRUE
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage0_Tile4, TRUE
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage0_Tile5, FALSE
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage0_Tile6, TRUE
 	special DrawWholeMapView
 	return
 

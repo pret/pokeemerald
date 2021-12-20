@@ -292,10 +292,9 @@ static void LinkTestScreen(void)
     gLinkType = LINKTYPE_TRADE;
     OpenLink();
     SeedRng(gMain.vblankCounter2);
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
         gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
-    }
+
     InitLinkTestBG(0, 2, 4, 0, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
     CreateTask(Task_DestroySelf, 0);
@@ -1648,8 +1647,8 @@ static void ErrorMsg_MoveCloserToPartner(void)
     AddTextPrinterParameterized3(2, FONT_SHORT_COPY_1, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
     PutWindowTilemap(2);
-    CopyWindowToVram(0, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(0, COPYWIN_NONE); // Does nothing
+    CopyWindowToVram(2, COPYWIN_FULL);
 }
 
 static void ErrorMsg_CheckConnections(void)
@@ -1660,8 +1659,8 @@ static void ErrorMsg_CheckConnections(void)
     AddTextPrinterParameterized3(1, FONT_SHORT_COPY_1, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);
-    CopyWindowToVram(1, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(1, COPYWIN_NONE); // Does nothing
+    CopyWindowToVram(2, COPYWIN_FULL);
 }
 
 static void CB2_PrintErrorMessage(void)

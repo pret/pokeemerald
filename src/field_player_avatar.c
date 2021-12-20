@@ -26,7 +26,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
@@ -903,7 +902,7 @@ static bool8 PlayerAnimIsMultiFrameStationary(void)
 
     if (movementActionId <= MOVEMENT_ACTION_FACE_RIGHT
      || (movementActionId >= MOVEMENT_ACTION_DELAY_1 && movementActionId <= MOVEMENT_ACTION_DELAY_16)
-     || (movementActionId >= MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN && movementActionId <= MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT)
+     || (movementActionId >= MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN && movementActionId <= MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_RIGHT)
      || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT)
      || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT))
         return TRUE;
@@ -1764,7 +1763,7 @@ static bool8 Fishing_InitDots(struct Task *task)
 {
     u32 randVal;
 
-    sub_819786C(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     task->tStep++;
     task->tFrameCounter = 0;
     task->tNumDots = 0;

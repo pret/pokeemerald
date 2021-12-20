@@ -29,7 +29,6 @@
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/event_objects.h"
-#include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
@@ -1187,10 +1186,10 @@ static void StartMatchCall(void)
     CreateTask(ExecuteMatchCall, 1);
 }
 
-static const u16 sMatchCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call_window.gbapal");
-static const u8 sMatchCallWindow_Gfx[] = INCBIN_U8("graphics/pokenav/match_call_window.4bpp");
-static const u16 sPokenavIcon_Pal[] = INCBIN_U16("graphics/pokenav/icon.gbapal");
-static const u32 sPokenavIcon_Gfx[] = INCBIN_U32("graphics/pokenav/icon.4bpp.lz");
+static const u16 sMatchCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/window.gbapal");
+static const u8 sMatchCallWindow_Gfx[] = INCBIN_U8("graphics/pokenav/match_call/window.4bpp");
+static const u16 sPokenavIcon_Pal[] = INCBIN_U16("graphics/pokenav/match_call/nav_icon.gbapal");
+static const u32 sPokenavIcon_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/nav_icon.4bpp.lz");
 
 static const u8 sText_PokenavCallEllipsis[] = _("………………\p");
 
@@ -1263,7 +1262,7 @@ static bool32 MatchCall_LoadGfx(u8 taskId)
     FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
     LoadPalette(sMatchCallWindow_Pal, 0xE0, sizeof(sMatchCallWindow_Pal));
     LoadPalette(sPokenavIcon_Pal, 0xF0, sizeof(sPokenavIcon_Pal));
-    ChangeBgY(0, -0x2000, 0);
+    ChangeBgY(0, -0x2000, BG_COORD_SET);
     return TRUE;
 }
 
@@ -1277,7 +1276,7 @@ static bool32 MatchCall_DrawWindow(u8 taskId)
     DrawMatchCallTextBoxBorder_Internal(tWindowId, TILE_MC_WINDOW, 14);
     WriteSequenceToBgTilemapBuffer(0, (0xF << 12) | TILE_POKENAV_ICON, 1, 15, 4, 4, 17, 1);
     tIconTaskId = CreateTask(Task_SpinPokenavIcon, 10);
-    CopyWindowToVram(tWindowId, 2);
+    CopyWindowToVram(tWindowId, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(0);
     return TRUE;
 }
@@ -1297,9 +1296,9 @@ static bool32 MatchCall_ReadyIntro(u8 taskId)
 
 static bool32 MatchCall_SlideWindowIn(u8 taskId)
 {
-    if (ChangeBgY(0, 0x600, 1) >= 0)
+    if (ChangeBgY(0, 0x600, BG_COORD_ADD) >= 0)
     {
-        ChangeBgY(0, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
         return TRUE;
     }
 
@@ -1329,7 +1328,7 @@ static bool32 MatchCall_PrintMessage(u8 taskId)
     if (!RunMatchCallTextPrinter(tWindowId) && !IsSEPlaying() && JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
-        CopyWindowToVram(tWindowId, 2);
+        CopyWindowToVram(tWindowId, COPYWIN_GFX);
         PlaySE(SE_POKENAV_HANG_UP);
         return TRUE;
     }
@@ -1340,7 +1339,7 @@ static bool32 MatchCall_PrintMessage(u8 taskId)
 static bool32 MatchCall_SlideWindowOut(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (ChangeBgY(0, 0x600, 2) <= -0x2000)
+    if (ChangeBgY(0, 0x600, BG_COORD_SUB) <= -0x2000)
     {
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 14, 30, 6);
         DestroyTask(tIconTaskId);
@@ -1357,7 +1356,7 @@ static bool32 MatchCall_EndCall(u8 taskId)
     u8 playerObjectId;
     if (!IsDma3ManagerBusyWithBgCopy() && !IsSEPlaying())
     {
-        ChangeBgY(0, 0, 0);
+        ChangeBgY(0, 0, BG_COORD_SET);
         if (!sMatchCallState.triggeredFromScript)
         {
             LoadMessageBoxAndBorderGfx();
@@ -1501,7 +1500,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
 {
     u32 matchCallId;
     const struct MatchCallText *matchCallText;
-    bool32 retVal = FALSE;
+    bool32 newRematchRequest = FALSE;
 
     matchCallId = GetTrainerMatchCallId(trainerId);
     sBattleFrontierStreakInfo.facilityId = 0;
@@ -1519,7 +1518,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     else if (ShouldTrainerRequestBattle(matchCallId))
     {
         matchCallText = GetDifferentRouteMatchCallText(matchCallId, str);
-        retVal = TRUE;
+        newRematchRequest = TRUE;
         UpdateRematchIfDefeated(matchCallId);
     }
     else if (Random() % 3)
@@ -1534,7 +1533,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     }
 
     BuildMatchCallString(matchCallId, matchCallText, str);
-    return retVal;
+    return newRematchRequest;
 }
 
 static int GetTrainerMatchCallId(int trainerId)

@@ -4647,7 +4647,7 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].type2 = gBaseStats[gBattleMons[battlerId].species].type2;
     gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gBattleMons[battlerId].nickname, nickname);
+    StringCopy_Nickname(gBattleMons[battlerId].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battlerId].otName);
 
     hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(battlerId)];
@@ -6714,14 +6714,14 @@ void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, 
     {
         // No animation, only check if cry needs to be played
         if (!noCry)
-            PlayCry1(species, pan);
+            PlayCry_Normal(species, pan);
         sprite->callback = SpriteCallbackDummy;
     }
     else
     {
         if (!noCry)
         {
-            PlayCry1(species, pan);
+            PlayCry_Normal(species, pan);
             if (HasTwoFramesAnimation(species))
                 StartSpriteAnim(sprite, 1);
         }

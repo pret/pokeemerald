@@ -69,7 +69,6 @@
 #include "constants/field_effects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
@@ -754,7 +753,7 @@ static void RenderPartyMenuBox(u8 slot)
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
         else
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_MULTI_ALT);
-        CopyWindowToVram(sPartyMenuBoxes[slot].windowId, 2);
+        CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
         PutWindowTilemap(sPartyMenuBoxes[slot].windowId);
         ScheduleBgCopyTilemapToVram(2);
     }
@@ -764,7 +763,7 @@ static void RenderPartyMenuBox(u8 slot)
         {
             DrawEmptySlot(sPartyMenuBoxes[slot].windowId);
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
-            CopyWindowToVram(sPartyMenuBoxes[slot].windowId, 2);
+            CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
         }
         else
         {
@@ -954,7 +953,7 @@ static void DisplayPartyPokemonDataForMultiBattle(u8 slot)
     {
         menuBox->infoRects->blitFunc(menuBox->windowId, 0, 0, 0, 0, FALSE);
         StringCopy(gStringVar1, gMultiPartnerParty[actualSlot].nickname);
-        StringGetEnd10(gStringVar1);
+        StringGet_Nickname(gStringVar1);
         ConvertInternationalPlayerName(gStringVar1);
         DisplayPartyPokemonBarDetail(menuBox->windowId, gStringVar1, 0, menuBox->infoRects->dimensions);
         DisplayPartyPokemonLevel(gMultiPartnerParty[actualSlot].level, menuBox);
@@ -1622,7 +1621,7 @@ static s8 GetNewSlotDoubleLayout(s8 slotId, s8 movementDir)
 u8* GetMonNickname(struct Pokemon *mon, u8 *dest)
 {
     GetMonData(mon, MON_DATA_NICKNAME, dest);
-    return StringGetEnd10(dest);
+    return StringGet_Nickname(dest);
 }
 
 #define tKeepOpen  data[0]
@@ -2036,9 +2035,9 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
             confirmWindowId = AddWindow(&sConfirmButtonWindowTemplate);
             FillWindowPixelBuffer(confirmWindowId, PIXEL_FILL(0));
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gMenuText_Confirm, 48);
-            AddTextPrinterParameterized4(confirmWindowId, FONT_SMALL, mainOffset, 1, 0, 0, sFontColorTable[0], -1, gMenuText_Confirm);
+            AddTextPrinterParameterized4(confirmWindowId, FONT_SMALL, mainOffset, 1, 0, 0, sFontColorTable[0], TEXT_SKIP_DRAW, gMenuText_Confirm);
             PutWindowTilemap(confirmWindowId);
-            CopyWindowToVram(confirmWindowId, 2);
+            CopyWindowToVram(confirmWindowId, COPYWIN_GFX);
             cancelWindowId = AddWindow(&sMultiCancelButtonWindowTemplate);
             offset = 0;
         }
@@ -2053,15 +2052,15 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
         if (gPartyMenu.menuType != PARTY_MENU_TYPE_SPIN_TRADE)
         {
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gText_Cancel, 48);
-            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel);
+            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, gText_Cancel);
         }
         else
         {
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gText_Cancel2, 48);
-            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel2);
+            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, gText_Cancel2);
         }
         PutWindowTilemap(cancelWindowId);
-        CopyWindowToVram(cancelWindowId, 2);
+        CopyWindowToVram(cancelWindowId, COPYWIN_GFX);
         ScheduleBgCopyTilemapToVram(0);
     }
 }
@@ -2354,7 +2353,7 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct PartyMenuBox *men
         FillWindowPixelRect(menuBox->windowId, 0x0D, menuBox->infoRects->dimensions[20] + hpFraction, menuBox->infoRects->dimensions[21], menuBox->infoRects->dimensions[22] - hpFraction, 1);
         FillWindowPixelRect(menuBox->windowId, 0x02, menuBox->infoRects->dimensions[20] + hpFraction, menuBox->infoRects->dimensions[21] + 1, menuBox->infoRects->dimensions[22] - hpFraction, 2);
     }
-    CopyWindowToVram(menuBox->windowId, 2);
+    CopyWindowToVram(menuBox->windowId, COPYWIN_GFX);
 }
 
 static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox *menuBox, u8 c)
@@ -2481,7 +2480,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
         AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
     }
 
-    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, 1);
+    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
     ScheduleBgCopyTilemapToVram(2);
 
     return sPartyMenuInternal->windowId[0];
@@ -3343,7 +3342,7 @@ static void Task_HandleSendMailToPCYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes, send to PC
-        if (TakeMailFromMon2(&gPlayerParty[gPartyMenu.slotId]) != 0xFF)
+        if (TakeMailFromMonAndSave(&gPlayerParty[gPartyMenu.slotId]) != MAIL_NONE)
         {
             DisplayPartyMenuMessage(gText_MailSentToPC, FALSE);
             gTasks[taskId].func = Task_UpdateHeldItemSprite;
@@ -4508,11 +4507,11 @@ static void ShowMoveSelectWindow(u8 slot)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
-        AddTextPrinterParameterized(windowId, fontId, gMoveNames[move], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, fontId, gMoveNames[move], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
         if (move != MOVE_NONE)
             moveCount++;
     }
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, moveCount, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, moveCount, 0);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -4962,7 +4961,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
 
     arrayPtr[12] = CreateLevelUpStatsWindow();
     DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(arrayPtr[12], 2);
+    CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -4971,7 +4970,7 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
     s16 *arrayPtr = sPartyMenuInternal->data;
 
     DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(arrayPtr[12], 2);
+    CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -6068,7 +6067,7 @@ static void Task_InitMultiPartnerPartySlideIn(u8 taskId)
     // The first slide step also sets the sprites offscreen
     gTasks[taskId].tXPos = 256;
     SlideMultiPartyMenuBoxSpritesOneStep(taskId);
-    ChangeBgX(2, 0x10000, 0);
+    ChangeBgX(2, 0x10000, BG_COORD_SET);
     gTasks[taskId].func = Task_MultiPartnerPartySlideIn;
 }
 
@@ -6124,7 +6123,7 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].statusSpriteId, tXPos - 8);
         }
     }
-    ChangeBgX(2, 0x800, 1);
+    ChangeBgX(2, 0x800, BG_COORD_ADD);
 }
 
 #undef tXpos
@@ -6145,7 +6144,7 @@ static void BufferMonSelection(void)
 {
     gSpecialVar_0x8004 = GetCursorSelectionMonId();
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = 0xFF;
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
@@ -6188,7 +6187,7 @@ static void CB2_ChooseContestMon(void)
 {
     gContestMonPartyIndex = GetCursorSelectionMonId();
     if (gContestMonPartyIndex >= PARTY_SIZE)
-        gContestMonPartyIndex = 0xFF;
+        gContestMonPartyIndex = PARTY_NOTHING_CHOSEN;
     gSpecialVar_0x8004 = gContestMonPartyIndex;
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
@@ -6233,7 +6232,7 @@ static void CB2_ChooseMonForMoveRelearner(void)
 {
     gSpecialVar_0x8004 = GetCursorSelectionMonId();
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = 0xFF;
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
     else
         gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_0x8004]);
     gFieldCallback2 = CB2_FadeFromPartyMenu;

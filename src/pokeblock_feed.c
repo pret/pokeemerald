@@ -945,7 +945,7 @@ static void SpriteCB_MonJumpForPokeblock(struct Sprite* sprite)
 
     // Play cry at jump peak
     if (sprite->sSpeed == 0)
-        PlayCry1(sprite->sSpecies, 0);
+        PlayCry_Normal(sprite->sSpecies, 0);
 
     if (sprite->sSpeed == 9)
         sprite->callback = SpriteCallbackDummy;

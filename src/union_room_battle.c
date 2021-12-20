@@ -89,7 +89,7 @@ static bool32 PrintUnionRoomBattleMessage(s16 * state, const u8 * str, s32 speed
         DrawTextBorderOuter(0, 0x001, 0xD);
         AddTextPrinterForUnionRoomBattle(0, str, 0, 1, speed);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:

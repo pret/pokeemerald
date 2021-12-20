@@ -491,7 +491,7 @@ static u32 CopyWallyMonData(u8 monId, u8 *dst)
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battleMon.nickname, nickname);
+        StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); size++)
@@ -1415,7 +1415,9 @@ static void WallyHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry1(species, 25);
+    // Seems that it doesn't bother using CRY_MODE_FAINT because
+    // Wally's Pokémon during the tutorial is never intended to faint.
+    PlayCry_Normal(species, 25);
     WallyBufferExecCompleted();
 }
 
@@ -1466,7 +1468,7 @@ static void StartSendOutAnim(u8 battlerId)
     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
-                                        GetBattlerSpriteCoord(battlerId, 2),
+                                        GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
                                         GetBattlerSpriteDefault_Y(battlerId),
                                         GetBattlerSpriteSubpriority(battlerId));
 
