@@ -40,6 +40,7 @@ FORM_ITEM_USE_TIME:
 #define NIGHT  1
 
 static const struct FormChange sGiratinaFormChangeTable[] = {
+    {FORM_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
     {FORM_CHANGE_END},
 };
