@@ -646,6 +646,7 @@ SecretBase_EventScript_BattleTrainer::
 	call_if_eq VAR_RESULT, B_OUTCOME_WON, SecretBase_EventScript_WonSecretBaseBattle
 	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SecretBase_EventScript_LostSecretBaseBattle
 	special HealPlayerParty
+  callnative UpdateFollowingPokemon
 	release
 	end
 
