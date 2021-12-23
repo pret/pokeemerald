@@ -181,7 +181,7 @@ struct ObjectEvent
              u32 inShallowFlowingWater:1;
              u32 inSandPile:1;
              u32 inHotSprings:1;
-             u32 noShadow:1;
+             u32 hasShadow:1;
              u32 spriteAnimPausedBackup:1;
     /*0x03*/ u32 spriteAffineAnimPausedBackup:1;
              u32 disableJumpLandingGroundEffect:1;

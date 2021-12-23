@@ -157,7 +157,6 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
       }
       paletteNum = LoadSpritePalette(&filteredPalette);
       UpdateSpritePaletteWithWeather(paletteNum);
-      UpdateSpritePaletteWithTime(paletteNum);
     }
     sprite->oam.paletteNum = paletteNum;
     sprite->oam.objMode = 1; // Alpha blending
@@ -210,7 +209,6 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         }
         paletteNum = LoadSpritePalette(&filteredPalette);
         UpdateSpritePaletteWithWeather(paletteNum);
-        UpdateSpritePaletteWithTime(paletteNum);
       }
       reflectionSprite->oam.paletteNum = paletteNum;
     }
@@ -355,7 +353,6 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->y = linkedSprite->y + sprite->data[3];
         sprite->invisible = linkedSprite->invisible;
         if (!objectEvent->active
-         || objectEvent->noShadow
          || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->previousMetatileBehavior))

@@ -28,12 +28,6 @@ static const struct SpriteFrameImage sPicTable_ShadowExtraLarge[] = {
     obj_frame_tiles(gFieldEffectObjectPic_ShadowExtraLarge),
 };
 
-const struct SpriteFrameImage gFieldEffectObjectPicTable_BallLight[] = {
-    obj_frame_tiles(gFieldEffectObjectPic_BallLight),
-};
-
-const struct SpriteTemplate gFieldEffectObjectTemplate_BallLight = {TAG_NONE, OBJ_EVENT_PAL_TAG_LIGHT, &gObjectEventBaseOam_32x32, sAnimTable_Inanimate, gFieldEffectObjectPicTable_BallLight, gDummySpriteAffineAnimTable, UpdateLightSprite};
-
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_MAY,

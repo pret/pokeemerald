@@ -57,7 +57,6 @@ extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
-extern u8 gTimeOfDay;
 
 // Exported ROM declarations
 extern const struct UCoords32 gDirectionToVectors[];
@@ -136,7 +135,6 @@ void CleanupOverworldWindowsAndTilemaps(void);
 bool32 IsOverworldLinkActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
-void BlendPalettesWithTime(u32);
 void CB2_Overworld(void);
 void SetMainCallback1(void (*cb)(void));
 void SetUnusedCallback(void *a0);

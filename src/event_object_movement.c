@@ -449,7 +449,6 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
-#define OBJ_EVENT_PAL_TAG_LIGHT                   0x8001
 #define OBJ_EVENT_PAL_TAG_EMOTES                  0x8002
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
@@ -499,7 +498,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     {gObjectEventPal_Npc1, OBJ_EVENT_PAL_TAG_DYNAMIC},
-    {gObjectEventPaletteLight, OBJ_EVENT_PAL_TAG_LIGHT},
     {gObjectEventPaletteEmotes, OBJ_EVENT_PAL_TAG_EMOTES},
     {NULL,                  0x0000},
 };
@@ -1684,7 +1682,6 @@ static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species, u8
     if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF) { // Load compressed palette
       LoadCompressedSpritePalette(spritePalette);
       sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
-      UpdateSpritePaletteWithTime(sprite->oam.paletteNum);
     } else
       sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
   }
@@ -1937,87 +1934,6 @@ bool8 ScrFunc_followerfly(struct ScriptContext *ctx) {
   return FALSE;
 }
 
-// Sprite callback for light sprites
-void UpdateLightSprite(struct Sprite *sprite) {
-  s16 left =   gSaveBlock1Ptr->pos.x - 2;
-  s16 right =  gSaveBlock1Ptr->pos.x + 17;
-  s16 top =    gSaveBlock1Ptr->pos.y;
-  s16 bottom = gSaveBlock1Ptr->pos.y + 15;
-  s16 x = sprite->data[6];
-  s16 y = sprite->data[7];
-  u16 sheetTileStart;
-  u32 paletteNum;
-  bool8 finished = TRUE;
-  // Ripped from RemoveObjectEventIfOutsideView
-  if (x >= left && x <= right
-   && y >= top && y <= bottom)
-      finished = FALSE;
-  finished = finished ? finished : gTimeOfDay != TIME_OF_DAY_NIGHT;
-  if (finished) {
-    sheetTileStart = sprite->sheetTileStart;
-    paletteNum = sprite->oam.paletteNum;
-    DestroySprite(sprite);
-    FieldEffectFreeTilesIfUnused(sheetTileStart);
-    FieldEffectFreePaletteIfUnused(paletteNum);
-    return;
-  }
-
-  if (gPlayerAvatar.tileTransitionState) { // As long as the second coefficient stays 12, shadows will not change
-    Weather_SetBlendCoeffs(7, 12);
-    sprite->invisible = FALSE;
-  } else {
-    Weather_SetBlendCoeffs(12, 12);
-    sprite->invisible = gSaveBlock2Ptr->playTimeVBlanks & 1;
-  }
-}
-
-// Spawn a light at a map coordinate based on metatile behavior
-static void SpawnLightSprite(s16 x, s16 y, s16 camX, s16 camY, u32 behavior) {
-  struct Sprite *sprite;
-  u8 i;
-  for (i = 0; i < MAX_SPRITES; i++) {
-    sprite = &gSprites[i];
-    if (sprite->inUse && sprite->callback == UpdateLightSprite && sprite->data[6] == x && sprite->data[7] == y)
-      return;
-  }
-  sprite = &gSprites[CreateSprite(&gFieldEffectObjectTemplate_BallLight, 0, 0, 0)];
-  UpdateSpritePaletteByTemplate(&gFieldEffectObjectTemplate_BallLight, sprite);
-  GetMapCoordsFromSpritePos(x + camX, y + camY, &sprite->x, &sprite->y);
-  sprite->data[6] = x;
-  sprite->data[7] = y;
-  sprite->affineAnims = gDummySpriteAffineAnimTable;
-  sprite->affineAnimBeginning = TRUE;
-  sprite->centerToCornerVecX = -(32 >> 1);
-  sprite->centerToCornerVecY = -(32 >> 1);
-  sprite->oam.priority = 1;
-  sprite->oam.objMode = 1; // BLEND
-  sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-  sprite->coordOffsetEnabled = TRUE;
-  sprite->x += 8;
-  sprite->y += 22 + sprite->centerToCornerVecY;
-}
-
-void TrySpawnLightSprites(s16 camX, s16 camY) {
-  s16 left = gSaveBlock1Ptr->pos.x - 2;
-  s16 right = gSaveBlock1Ptr->pos.x + 17;
-  s16 top = gSaveBlock1Ptr->pos.y;
-  s16 bottom = gSaveBlock1Ptr->pos.y + 16;
-  u8 i = 0;
-  s16 x, y;
-  u32 behavior;
-  if (gTimeOfDay != TIME_OF_DAY_NIGHT)
-    return;
-  for (i = 0; gLightMetatiles[i].x > 0; i++) {
-    x = gLightMetatiles[i].x;
-    y = gLightMetatiles[i].y;
-    if (x >= left && x <= right && y >= top && y <= bottom) {
-      behavior = MapGridGetMetatileBehaviorAt(x, y);
-      if (behavior == 0x04) // TODO: Use an actual constant for light metatiles
-        SpawnLightSprite(x, y, camX, camY, behavior);
-    }
-  }
-}
-
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 {
     u8 i;
@@ -2048,7 +1964,6 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
                 TrySpawnObjectEventTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
         }
     }
-    TrySpawnLightSprites(cameraX, cameraY);
 }
 
 void RemoveObjectEventsOutsideView(void)
@@ -2102,7 +2017,6 @@ void SpawnObjectEventsOnReturnToField(s16 x, s16 y)
             SpawnObjectEventOnReturnToField(i, x, y);
     }
     CreateReflectionEffectSprites();
-    TrySpawnLightSprites(x, y);
 }
 
 static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
@@ -2166,7 +2080,7 @@ static void ResetObjectEventFldEffData(struct ObjectEvent *objectEvent)
 {
     objectEvent->singleMovementActive = FALSE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
-    objectEvent->noShadow = FALSE;
+    objectEvent->hasShadow = FALSE;
     objectEvent->hasReflection = FALSE;
     objectEvent->inShortGrass = FALSE;
     objectEvent->inShallowFlowingWater = FALSE;
@@ -2191,7 +2105,6 @@ static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct
   sprite->inUse = TRUE;
   if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF) {
     sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
-    UpdateSpritePaletteWithTime(sprite->oam.paletteNum);
   } else {
     sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
   }
@@ -2437,7 +2350,6 @@ static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)
         return 0xFF;
     paletteNum = LoadSpritePalette(spritePalette);
-    UpdateSpritePaletteWithTime(paletteNum);
     return paletteNum;
 }
 
@@ -6154,7 +6066,7 @@ bool8 MovementAction_Jump2Down_Step1(struct ObjectEvent *objectEvent, struct Spr
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -6171,7 +6083,7 @@ bool8 MovementAction_Jump2Up_Step1(struct ObjectEvent *objectEvent, struct Sprit
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -6188,7 +6100,7 @@ bool8 MovementAction_Jump2Left_Step1(struct ObjectEvent *objectEvent, struct Spr
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -6205,7 +6117,7 @@ bool8 MovementAction_Jump2Right_Step1(struct ObjectEvent *objectEvent, struct Sp
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -6976,7 +6888,7 @@ bool8 MovementAction_JumpDown_Step1(struct ObjectEvent *objectEvent, struct Spri
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -6993,7 +6905,7 @@ bool8 MovementAction_JumpUp_Step1(struct ObjectEvent *objectEvent, struct Sprite
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7010,7 +6922,7 @@ bool8 MovementAction_JumpLeft_Step1(struct ObjectEvent *objectEvent, struct Spri
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7027,7 +6939,7 @@ bool8 MovementAction_JumpRight_Step1(struct ObjectEvent *objectEvent, struct Spr
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7044,7 +6956,7 @@ bool8 MovementAction_JumpInPlaceDown_Step1(struct ObjectEvent *objectEvent, stru
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7061,7 +6973,7 @@ bool8 MovementAction_JumpInPlaceUp_Step1(struct ObjectEvent *objectEvent, struct
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7078,7 +6990,7 @@ bool8 MovementAction_JumpInPlaceLeft_Step1(struct ObjectEvent *objectEvent, stru
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7095,7 +7007,7 @@ bool8 MovementAction_JumpInPlaceRight_Step1(struct ObjectEvent *objectEvent, str
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7112,7 +7024,7 @@ bool8 MovementAction_JumpInPlaceDownUp_Step1(struct ObjectEvent *objectEvent, st
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7129,7 +7041,7 @@ bool8 MovementAction_JumpInPlaceUpDown_Step1(struct ObjectEvent *objectEvent, st
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7146,7 +7058,7 @@ bool8 MovementAction_JumpInPlaceLeftRight_Step1(struct ObjectEvent *objectEvent,
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7163,7 +7075,7 @@ bool8 MovementAction_JumpInPlaceRightLeft_Step1(struct ObjectEvent *objectEvent,
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->hasShadow = 0;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7608,7 +7520,7 @@ bool8 MovementAction_AcroWheelieHopFaceDown_Step1(struct ObjectEvent *objectEven
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7625,7 +7537,7 @@ bool8 MovementAction_AcroWheelieHopFaceUp_Step1(struct ObjectEvent *objectEvent,
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7642,7 +7554,7 @@ bool8 MovementAction_AcroWheelieHopFaceLeft_Step1(struct ObjectEvent *objectEven
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7659,7 +7571,7 @@ bool8 MovementAction_AcroWheelieHopFaceRight_Step1(struct ObjectEvent *objectEve
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7676,7 +7588,7 @@ bool8 MovementAction_AcroWheelieHopDown_Step1(struct ObjectEvent *objectEvent, s
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7693,7 +7605,7 @@ bool8 MovementAction_AcroWheelieHopUp_Step1(struct ObjectEvent *objectEvent, str
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7710,7 +7622,7 @@ bool8 MovementAction_AcroWheelieHopLeft_Step1(struct ObjectEvent *objectEvent, s
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7727,7 +7639,7 @@ bool8 MovementAction_AcroWheelieHopRight_Step1(struct ObjectEvent *objectEvent, 
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7744,7 +7656,7 @@ bool8 MovementAction_AcroWheelieJumpDown_Step1(struct ObjectEvent *objectEvent, 
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7761,7 +7673,7 @@ bool8 MovementAction_AcroWheelieJumpUp_Step1(struct ObjectEvent *objectEvent, st
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7778,7 +7690,7 @@ bool8 MovementAction_AcroWheelieJumpLeft_Step1(struct ObjectEvent *objectEvent, 
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -7795,7 +7707,7 @@ bool8 MovementAction_AcroWheelieJumpRight_Step1(struct ObjectEvent *objectEvent,
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8806,7 +8718,6 @@ static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *
     for (i = 0; i < ARRAY_COUNT(sGroundEffectFuncs); i++, flags >>= 1)
         if (flags & 1)
             sGroundEffectFuncs[i](objEvent, sprite);
-    GroundEffect_Shadow(objEvent, sprite);
 }
 
 void filters_out_some_ground_effects(struct ObjectEvent *objEvent, u32 *flags)
@@ -9512,9 +9423,9 @@ u32 StartFieldEffectForObjectEvent(u8 fieldEffectId, struct ObjectEvent *objectE
 
 static void DoShadowFieldEffect(struct ObjectEvent *objectEvent)
 {
-    if (objectEvent->noShadow)
+    if (!objectEvent->hasShadow)
     {
-        objectEvent->noShadow = FALSE;
+        objectEvent->hasShadow = 1;
         StartFieldEffectForObjectEvent(FLDEFF_SHADOW, objectEvent);
     }
 }

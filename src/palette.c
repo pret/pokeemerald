@@ -205,53 +205,6 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
     }
 }
 
-// Like normal palette fade but respects sprite/tile palettes immune to time of day fading
-bool8 BeginTimeOfDayPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u16 blendColor)
-{
-    u8 temp;
-    u16 color = blendColor;
-
-    if (gPaletteFade.active)
-    {
-        return FALSE;
-    }
-    else
-    {
-        gPaletteFade.deltaY = 2;
-
-        if (delay < 0)
-        {
-            gPaletteFade.deltaY += (delay * -1);
-            delay = 0;
-        }
-
-        gPaletteFade_selectedPalettes = selectedPalettes;
-        gPaletteFade.delayCounter = delay;
-        gPaletteFade_delay = delay;
-        gPaletteFade.y = startY;
-        gPaletteFade.targetY = targetY;
-        gPaletteFade.blendColor = color;
-        gPaletteFade.active = 1;
-        gPaletteFade.mode = TIME_OF_DAY_FADE;
-
-        if (startY < targetY)
-            gPaletteFade.yDec = 0;
-        else
-            gPaletteFade.yDec = 1;
-
-        UpdatePaletteFade();
-
-        temp = gPaletteFade.bufferTransferDisabled;
-        gPaletteFade.bufferTransferDisabled = 0;
-        CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
-        sPlttBufferTransferPending = 0;
-        if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
-            UpdateBlendRegisters();
-        gPaletteFade.bufferTransferDisabled = temp;
-        return TRUE;
-    }
-}
-
 // Unused
 static bool8 BeginPlttFade(u32 selectedPalettes, u8 delay, u8 startY, u8 targetY, u16 blendColor)
 {

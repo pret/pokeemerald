@@ -100,7 +100,6 @@ void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);
 struct ObjectEvent * GetFollowerObject(void);
 u8 GetDirectionToFace(s16, s16, s16, s16);
-void UpdateLightSprite(struct Sprite *);
 void TrySpawnObjectEvents(s16, s16);
 u8 CreateObjectGraphicsSprite(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 TrySpawnObjectEvent(u8, u8, u8);

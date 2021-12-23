@@ -35,7 +35,6 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles;
 const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza;
-const struct SpriteTemplate gFieldEffectObjectTemplate_BallLight;
 
 const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_SHADOW_S]              = &gFieldEffectObjectTemplate_ShadowSmall,
