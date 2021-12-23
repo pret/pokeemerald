@@ -174,6 +174,9 @@ static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite);
 static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
 static bool8 NpcTakeStep(struct Sprite *sprite);
+static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny);
+static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny);
+static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
@@ -1557,10 +1560,30 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     const struct SubspriteTable *subspriteTables;
     struct Sprite *sprite;
     u8 spriteId;
+    u16 species;
+    u8 form;
+    bool8 shiny;
+    u8 paletteNum;
 
     spriteTemplate = malloc(sizeof(struct SpriteTemplate));
-    CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
-    if (spriteTemplate->paletteTag != TAG_NONE)
+    if (graphicsId == OBJ_EVENT_GFX_OW_MON && GetFollowerInfo(&species, &form, &shiny)) {
+        const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
+        spriteTemplate->tileTag = graphicsInfo->tileTag;
+        spriteTemplate->paletteTag = graphicsInfo->paletteTag;
+        spriteTemplate->oam = graphicsInfo->oam;
+        spriteTemplate->anims = graphicsInfo->anims;
+        spriteTemplate->images = graphicsInfo->images;
+        spriteTemplate->affineAnims = graphicsInfo->affineAnims;
+        spriteTemplate->callback = callback;
+        subspriteTables = graphicsInfo->subspriteTables;
+    } else
+        CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
+
+    if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) {
+        const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
+        paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
+        spriteTemplate->paletteTag = spritePalette->tag;
+    } else if (spriteTemplate->paletteTag != TAG_NONE)
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
@@ -1661,41 +1684,61 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
   return graphicsInfo->tileTag == 0xFFFF ? graphicsInfo : &gPokemonObjectGraphics[SPECIES_PORYGON]; // avoid OOB access
 }
 
-// Set graphics & sprite for a follower object event by species & shininess.
-static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species, u8 form, bool8 shiny) {
-  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
-  objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
-  ObjectEventSetGraphics(objectEvent, graphicsInfo);
-  objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
-  objectEvent->extra.mon.species = species;
-  objectEvent->extra.mon.form = form;
-  objectEvent->extra.mon.shiny = shiny;
-  if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
-    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+// Find, or load, the palette for the specified pokemon info
+static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny) {
+    u8 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
     const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
-    // Free palette if otherwise unused
-    sprite->inUse = FALSE;
-    FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
-    sprite->inUse = TRUE;
-    if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF) { // Load compressed palette
+    if ((paletteNum = IndexOfSpritePaletteTag(spritePalette->tag)) == 0xFF) { // Load compressed palette
       LoadCompressedSpritePalette(spritePalette);
-      sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
-    } else
-      sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
+      paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
+    }
+    return paletteNum;
+}
+
+// Set graphics & sprite for a follower object event by species & shininess.
+static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 form, bool8 shiny) {
+  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
+  objEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
+  ObjectEventSetGraphics(objEvent, graphicsInfo);
+  objEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
+  objEvent->extra.mon.species = species;
+  objEvent->extra.mon.form = form;
+  objEvent->extra.mon.shiny = shiny;
+  if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
+      struct Sprite *sprite = &gSprites[objEvent->spriteId];
+      // Free palette if otherwise unused
+      sprite->inUse = FALSE;
+      FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
+      sprite->inUse = TRUE;
+      sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
   }
+}
+
+// Retrieve graphic information about the following pokemon, if any
+static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
+    struct Pokemon *mon = GetFirstLiveMon();
+    if (!mon) {
+        *species = SPECIES_NONE;
+        *form = 0;
+        *shiny = 0;
+        return FALSE;
+    }
+    *species = GetMonData(mon, MON_DATA_SPECIES);
+    *shiny = IsMonShiny(mon);
+    *form = *species == SPECIES_UNOWN ? GET_UNOWN_LETTER(mon->box.personality) : 0;
+    return TRUE;
 }
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct ObjectEvent *objEvent = GetFollowerObject();
-  struct Pokemon *mon = GetFirstLiveMon();
   struct Sprite *sprite;
   u16 species;
   bool8 shiny;
   u8 form;
   // Avoid spawning large (64x64) follower pokemon inside buildings
-  if (mon && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(GetMonData(mon, MON_DATA_SPECIES), 0)->width == 64)) {
+  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->width == 64)) {
     if (objEvent == NULL) { // Spawn follower
       struct ObjectEventTemplate template = {
         .localId = OBJ_EVENT_ID_FOLLOWER,
@@ -1709,9 +1752,6 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
       objEvent->invisible = TRUE;
     }
     sprite = &gSprites[objEvent->spriteId];
-    species = GetMonData(mon, MON_DATA_SPECIES);
-    shiny = IsMonShiny(mon);
-    form = species == SPECIES_UNOWN ? GET_UNOWN_LETTER(mon->box.personality) : 0;
     // Follower appearance changed; move to player and set invisible
     if (species != objEvent->extra.mon.species || shiny != objEvent->extra.mon.shiny || form != objEvent->extra.mon.form) {
       MoveObjectEventToMapCoords(objEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
