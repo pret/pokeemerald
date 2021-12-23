@@ -23,19 +23,19 @@ struct TrHillRoomTrainers
 
 struct TrHillDisplay
 {
-    // Metatile data. Add 0x200 to the values in this array to get metatiles. 
+    // Metatile data. Add 0x200 to the values in this array to get metatiles.
     // This data then overwrites the metatiles in the map starting at (0,5)
-    u8 metatileData[0x100]; 
-    // Collision data. One bit for each tile in column-major order, 
+    u8 metatileData[0x100];
+    // Collision data. One bit for each tile in column-major order,
     // so every array entry is one row. 1 = impassable, 0 = passable
     u16 collisionData[16];
     // Trainer coordinates, starting at (0,6). Format is 0bYYYYXXXX.
     u8 coords[2];
-    // Trainer facing directions. Same as (DIR_* - 1). 
+    // Trainer facing directions. Same as (DIR_* - 1).
     // Effectively an array of nibbles, one for each trainer.
     u8 direction;
     // Trainer sight ranges. Effectively an array of nibbles, one for each trainer.
-    u8 range; 
+    u8 range;
 };
 
 struct TrHillFloor

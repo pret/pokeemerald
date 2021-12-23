@@ -68,7 +68,7 @@ se_m_minimize_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+28
-	.byte		N06   , An3 
+	.byte		N06   , An3
 	.byte	W01
 	.byte		BEND  , c_v+20
 	.byte	W01

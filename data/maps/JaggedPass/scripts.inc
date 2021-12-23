@@ -8,14 +8,12 @@ JaggedPass_MapScripts::
 
 JaggedPass_OnResume:
 	setstepcallback STEP_CB_ASH
-	compare VAR_JAGGED_PASS_STATE, 0
-	call_if_eq JaggedPass_EventScript_CheckHasMagmaEmblem
+	call_if_eq VAR_JAGGED_PASS_STATE, 0, JaggedPass_EventScript_CheckHasMagmaEmblem
 	end
 
 JaggedPass_EventScript_CheckHasMagmaEmblem::
-	checkitem ITEM_MAGMA_EMBLEM, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq JaggedPass_EventScript_SetReadyToOpenHideout
+	checkitem ITEM_MAGMA_EMBLEM
+	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_SetReadyToOpenHideout
 	return
 
 JaggedPass_EventScript_SetReadyToOpenHideout::
@@ -23,8 +21,7 @@ JaggedPass_EventScript_SetReadyToOpenHideout::
 	return
 
 JaggedPass_OnTransition:
-	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
-	call_if_eq JaggedPass_EventScript_SetWeatherAsh
+	call_if_eq VAR_JAGGED_PASS_ASH_WEATHER, 1, JaggedPass_EventScript_SetWeatherAsh
 	end
 
 JaggedPass_EventScript_SetWeatherAsh::
@@ -33,13 +30,12 @@ JaggedPass_EventScript_SetWeatherAsh::
 	return
 
 JaggedPass_OnLoad:
-	compare VAR_JAGGED_PASS_STATE, 1
-	goto_if_le JaggedPass_EventScript_ConcealHideoutEntrance
+	goto_if_le VAR_JAGGED_PASS_STATE, 1, JaggedPass_EventScript_ConcealHideoutEntrance
 	end
 
 JaggedPass_EventScript_ConcealHideoutEntrance::
-	setmetatile 16, 17, METATILE_Lavaridge_RockWall, 1
-	setmetatile 16, 18, METATILE_Lavaridge_RockWall, 1
+	setmetatile 16, 17, METATILE_Lavaridge_RockWall, TRUE
+	setmetatile 16, 18, METATILE_Lavaridge_RockWall, TRUE
 	end
 
 JaggedPass_EventScript_OpenMagmaHideout::
@@ -59,8 +55,8 @@ JaggedPass_EventScript_OpenMagmaHideout::
 	special ShakeCamera
 	waitstate
 	playse SE_EFFECTIVE
-	setmetatile 16, 17, METATILE_Lavaridge_CaveEntrance_Top, 1
-	setmetatile 16, 18, METATILE_Lavaridge_CaveEntrance_Bottom, 0
+	setmetatile 16, 17, METATILE_Lavaridge_CaveEntrance_Top, TRUE
+	setmetatile 16, 18, METATILE_Lavaridge_CaveEntrance_Bottom, FALSE
 	special DrawWholeMapView
 	delay 30
 	setvar VAR_JAGGED_PASS_STATE, 2
@@ -106,8 +102,7 @@ JaggedPass_EventScript_Eric::
 JaggedPass_EventScript_Diana::
 	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq JaggedPass_EventScript_DianaRematch
+	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_DianaRematch
 	msgbox JaggedPass_Text_DianaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -127,8 +122,7 @@ JaggedPass_EventScript_DianaRematch::
 JaggedPass_EventScript_Ethan::
 	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq JaggedPass_EventScript_EthanRematch
+	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_EthanRematch
 	msgbox JaggedPass_Text_EthanPostBattle, MSGBOX_DEFAULT
 	release
 	end

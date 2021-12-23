@@ -5,10 +5,8 @@ SootopolisCity_House2_EventScript_ExpertF::
 	lock
 	faceplayer
 	msgbox SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq SootopolisCity_House2_EventScript_KnowAboutOrbs
-	compare VAR_RESULT, NO
-	call_if_eq SootopolisCity_House2_EventScript_DontKnowAboutOrbs
+	call_if_eq VAR_RESULT, YES, SootopolisCity_House2_EventScript_KnowAboutOrbs
+	call_if_eq VAR_RESULT, NO, SootopolisCity_House2_EventScript_DontKnowAboutOrbs
 	release
 	end
 

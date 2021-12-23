@@ -417,7 +417,7 @@
 #define SOUND_PAN_TARGET    63
 
 // move background ids
-#define BG_DARK_ 0 // the same as BG_DARK but is unused
+#define BG_NONE 0 // the same as BG_DARK but is unused
 #define BG_DARK 1
 #define BG_GHOST 2
 #define BG_PSYCHIC 3
@@ -441,9 +441,9 @@
 #define BG_FISSURE 21
 #define BG_BUG_OPPONENT 22
 #define BG_BUG_PLAYER 23
-#define BG_SOLARBEAM_OPPONENT 24
-#define BG_SOLARBEAM_PLAYER 25
-#define BG_SOLARBEAM_CONTESTS 26
+#define BG_SOLAR_BEAM_OPPONENT 24
+#define BG_SOLAR_BEAM_PLAYER 25
+#define BG_SOLAR_BEAM_CONTESTS 26
 #define BG_MAGMA_STORM 27
 #define BG_GIGA_IMPACT_OPPONENT 28
 #define BG_GIGA_IMPACT_PLAYER 29
@@ -453,51 +453,50 @@
 #define BG_SPACIAL_REND_ON_OPPONENT 33
 #define BG_SPACIAL_REND_ON_PLAYER 34
 #define BG_DARK_VOID 35
-
-#define BG_WATER                                36
-#define BG_NIGHTMARE                            37
-#define BG_LEAF_STORM                           38
-#define BG_FIRE                                 39
-#define BG_FIRE_2                               40
-#define BG_WATER_2                              41
-#define BG_POISON                               42
-#define BG_AEROBLAST                            43
-#define BG_HURRICANE                            44  
-#define BG_ELECTRIC_TERRAIN                     45
-#define BG_GRASSY_TERRAIN                       46
-#define BG_MISTY_TERRAIN                        47
-#define BG_PSYCHIC_TERRAIN                      48
-#define BG_FOCUS_BLAST                          49
-#define BG_GUNK_SHOT                            50
-#define BG_HYDRO_CANNON                         51
-#define BG_WONDER_ROOM                          52
-#define BG_MAGIC_ROOM                           53
-#define BG_HYPERSPACE_FURY                      54
-#define BG_BOLT_STRIKE                          55
-#define BG_ZMOVE_ACTIVATE                       56
-#define BG_TECTONIC_RAGE                        57
-#define BG_BLUE_SKY_DAY                         58
-#define BG_BLUE_SKY_AFTERNOON                   59
-#define BG_BLUE_SKY_NIGHT                       60
-#define BG_ZMOVE_MOUNTAIN                       61
-#define BG_NEVERENDING_NIGHTMARE                62
-#define BG_WATER_PULSE                          63
-#define BG_INFERNO_OVERDRIVE                    64
-#define BG_BLOOM_DOOM                           65
-#define BG_SHATTERED_PSYCHE                     66
-#define BG_TWINKLE_TACKLE                       67
-#define BG_BLACKHOLE_ECLIPSE                    68
-#define BG_SOULSTEALING_7STAR_STRIKE            69
-#define BG_MALICIOUS_MOONSAULT                  70
-#define BG_CLANGOROUS_SOULBLAZE                 71
-#define BG_SNUGGLE_FOREVER                      72
-#define BG_MAX_LIGHTNING                        73
-#define BG_GARBAGE_FALLS                        74
-#define BG_HYPER_BEAM                           75
-#define BG_DYNAMAX_CANNON                       76
-#define BG_AURA_SPHERE                          77
-#define BG_STEEL_BEAM_OPPONENT                  78
-#define BG_STEEL_BEAM_PLAYER                    79
+#define BG_WATER 36
+#define BG_NIGHTMARE 37
+#define BG_LEAF_STORM 38
+#define BG_FIRE 39
+#define BG_FIRE_2 40
+#define BG_WATER_2 41
+#define BG_POISON 42
+#define BG_AEROBLAST 43
+#define BG_HURRICANE 44  
+#define BG_ELECTRIC_TERRAIN 45
+#define BG_GRASSY_TERRAIN 46
+#define BG_MISTY_TERRAIN 47
+#define BG_PSYCHIC_TERRAIN 48
+#define BG_FOCUS_BLAST 49
+#define BG_GUNK_SHOT 50
+#define BG_HYDRO_CANNON 51
+#define BG_WONDER_ROOM 52
+#define BG_MAGIC_ROOM 53
+#define BG_HYPERSPACE_FURY 54
+#define BG_BOLT_STRIKE 55
+#define BG_ZMOVE_ACTIVATE 56
+#define BG_TECTONIC_RAGE 57
+#define BG_BLUE_SKY_DAY 58
+#define BG_BLUE_SKY_AFTERNOON 59
+#define BG_BLUE_SKY_NIGHT 60
+#define BG_ZMOVE_MOUNTAIN 61
+#define BG_NEVERENDING_NIGHTMARE 62
+#define BG_WATER_PULSE 63
+#define BG_INFERNO_OVERDRIVE 64
+#define BG_BLOOM_DOOM 65
+#define BG_SHATTERED_PSYCHE 66
+#define BG_TWINKLE_TACKLE 67
+#define BG_BLACKHOLE_ECLIPSE 68
+#define BG_SOULSTEALING_7STAR_STRIKE 69
+#define BG_MALICIOUS_MOONSAULT 70
+#define BG_CLANGOROUS_SOULBLAZE 71
+#define BG_SNUGGLE_FOREVER 72
+#define BG_MAX_LIGHTNING 73
+#define BG_GARBAGE_FALLS 74
+#define BG_HYPER_BEAM 75
+#define BG_DYNAMAX_CANNON 76
+#define BG_AURA_SPHERE 77
+#define BG_STEEL_BEAM_OPPONENT 78
+#define BG_STEEL_BEAM_PLAYER 79
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0
@@ -557,6 +556,9 @@
 
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
+
+// For createsprite macro to use internally
+#define ANIMSPRITE_IS_TARGET (1 << 7)
 
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0
