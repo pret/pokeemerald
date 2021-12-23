@@ -9,13 +9,12 @@ There are several branches, each with additional features compared to vanilla:
 **romhack** branch:
 * [HGSS-style pokémon followers](https://bulbapedia.bulbagarden.net/wiki/Walking_Pok%C3%A9mon#Pok.C3.A9mon_HeartGold_and_SoulSilver) for all 386 pokémon, including emotes, the 28 Unown forms and a majority of follower messages.
 * Dynamic overworld palettes & reflections compatible with vanilla berry trees.
-* HGSS-style alpha-blended shadows for object events.
 * A way to change a pokemon's nature while mangling its PID as little as possible.
 * Function to detect newer emulators/new GBA hardware.
 
 **icons** branch:
 * Everything from the **romhack** branch.
-* All pokemon icons updated to nicer looking Gen 6 style, based on [this repo](https://github.com/msikma/pokesprite/tree/master/icons/pokemon/regular)
+* All pokemon icons updated to Gen 6, based on [this repo](https://github.com/msikma/pokesprite/tree/master/icons/pokemon/regular)
 * This includes compatibility with the PC, trade, contests, mail, Battle Dome. Examples:
 ![PC](https://i.imgur.com/wzwJfd1.png)
 ![Party](https://i.imgur.com/8hbE88t.png)
@@ -27,6 +26,7 @@ There are several branches, each with additional features compared to vanilla:
 * Day/night shading compatible with weather.
 * GSC-style window lights.
 * WIP interframe-blended lamp lights at night, i.e in Rustboro.
+* HGSS-style alpha-blended shadows for object events.
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
