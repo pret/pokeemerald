@@ -2855,83 +2855,83 @@ static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp2 =
 static const s16 sAbilityPopUpCoordsDoubles[MAX_BATTLERS_COUNT][2] =
 {
     {29, 80}, // player left
-	{186, 19}, // opponent left
-	{29, 97}, // player right
-	{186, 36}, // opponent right
+    {186, 19}, // opponent left
+    {29, 97}, // player right
+    {186, 36}, // opponent right
 };
 
 static const s16 sAbilityPopUpCoordsSingles[MAX_BATTLERS_COUNT][2] =
 {
     {29, 97}, // player
-	{186, 57}, // opponent
+    {186, 57}, // opponent
 };
 
 static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8 *str, u32 x, u32 y, u32 color1, u32 color2, u32 color3, u32 *windowId)
 {
-	u8 color[3] = {color1, color2, color3};
-	struct WindowTemplate winTemplate = {0};
-	winTemplate.width = 8;
-	winTemplate.height = 2;
+    u8 color[3] = {color1, color2, color3};
+    struct WindowTemplate winTemplate = {0};
+    winTemplate.width = 8;
+    winTemplate.height = 2;
 
-	*windowId = AddWindow(&winTemplate);
-	FillWindowPixelBuffer(*windowId, PIXEL_FILL(color1));
+    *windowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(*windowId, PIXEL_FILL(color1));
 
-	AddTextPrinterParameterized4(*windowId, 0, x, y, 0, 0, color, -1, str);
-	return (u8*)(GetWindowAttribute(*windowId, WINDOW_TILE_DATA));
+    AddTextPrinterParameterized4(*windowId, 0, x, y, 0, 0, color, -1, str);
+    return (u8*)(GetWindowAttribute(*windowId, WINDOW_TILE_DATA));
 }
 
 static void TextIntoAbilityPopUp(void *dest, u8 *windowTileData, s32 arg2, bool32 arg3)
 {
-	CpuCopy32(windowTileData + 256, dest + 256, arg2 * 32);
-	if (arg2 > 0)
-	{
-		do
-		{
-			if (arg3)
-				CpuCopy32(windowTileData + 16, dest + 16, 16);
-			else
-				CpuCopy32(windowTileData + 20, dest + 20, 12);
-			dest += 32, windowTileData += 32;
-			arg2--;
-		} while (arg2 != 0);
-	}
+    CpuCopy32(windowTileData + 256, dest + 256, arg2 * 32);
+    if (arg2 > 0)
+    {
+        do
+        {
+            if (arg3)
+                CpuCopy32(windowTileData + 16, dest + 16, 16);
+            else
+                CpuCopy32(windowTileData + 20, dest + 20, 12);
+            dest += 32, windowTileData += 32;
+            arg2--;
+        } while (arg2 != 0);
+    }
 }
 
 #define MAX_CHARS_PRINTED 12
 
 static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTileData2, u32 x1, u32 x2, u32 y, u32 color1, u32 color2, u32 color3)
 {
-	u32 windowId, i;
-	u8 *windowTileData;
-	u8 text1[MAX_CHARS_PRINTED];
-	u8 text2[MAX_CHARS_PRINTED];
+    u32 windowId, i;
+    u8 *windowTileData;
+    u8 text1[MAX_CHARS_PRINTED];
+    u8 text2[MAX_CHARS_PRINTED];
 
-	for (i = 0; i < MAX_CHARS_PRINTED; i++)
-	{
-		text1[i] = str[i];
-		if (text1[i] == EOS)
-			break;
-	}
-	text1[i] = EOS;
+    for (i = 0; i < MAX_CHARS_PRINTED; i++)
+    {
+        text1[i] = str[i];
+        if (text1[i] == EOS)
+            break;
+    }
+    text1[i] = EOS;
 
-	windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text1, x1, y, color1, color2, color3, &windowId);
-	TextIntoAbilityPopUp(spriteTileData1, windowTileData, 8, (y == 0));
-	RemoveWindow(windowId);
+    windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text1, x1, y, color1, color2, color3, &windowId);
+    TextIntoAbilityPopUp(spriteTileData1, windowTileData, 8, (y == 0));
+    RemoveWindow(windowId);
 
-	if (i == MAX_CHARS_PRINTED)
-	{
-		for (i = 0; i < MAX_CHARS_PRINTED; i++)
-		{
-			text2[i] = str[MAX_CHARS_PRINTED + i];
-			if (text2[i] == EOS)
-				break;
-		}
-		text2[i] = EOS;
+    if (i == MAX_CHARS_PRINTED)
+    {
+        for (i = 0; i < MAX_CHARS_PRINTED; i++)
+        {
+            text2[i] = str[MAX_CHARS_PRINTED + i];
+            if (text2[i] == EOS)
+                break;
+        }
+        text2[i] = EOS;
 
-		windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text2, x2, y, color1, color2, color3, &windowId);
-		TextIntoAbilityPopUp(spriteTileData2, windowTileData, 3, (y == 0));
-		RemoveWindow(windowId);
-	}
+        windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text2, x2, y, color1, color2, color3, &windowId);
+        TextIntoAbilityPopUp(spriteTileData2, windowTileData, 3, (y == 0));
+        RemoveWindow(windowId);
+    }
 }
 
 static const u8 sText_Space16[]= _("                ");
@@ -2992,120 +2992,120 @@ static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
                         7, 9, 1);
 }
 
-#define PIXEL_COORDS_TO_OFFSET(x, y)(			\
-/*Add tiles by X*/								\
-((y / 8) * 32 * 8)								\
-/*Add tiles by X*/								\
-+ ((x / 8) * 32)								\
-/*Add pixels by Y*/								\
-+ ((((y) - ((y / 8) * 8))) * 4)					\
-/*Add pixels by X*/								\
+#define PIXEL_COORDS_TO_OFFSET(x, y)(            \
+/*Add tiles by X*/                                \
+((y / 8) * 32 * 8)                                \
+/*Add tiles by X*/                                \
++ ((x / 8) * 32)                                \
+/*Add pixels by Y*/                                \
++ ((((y) - ((y / 8) * 8))) * 4)                    \
+/*Add pixels by X*/                                \
 + ((((x) - ((x / 8) * 8)) / 2)))
 
 static const u16 sOverwrittenPixelsTable[][2] =
 {
-	{PIXEL_COORDS_TO_OFFSET(0, 0), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 1), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 2), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 3), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 4), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 5), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 6), 5},
-	{PIXEL_COORDS_TO_OFFSET(0, 7), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 8), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 9), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 10), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 11), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 12), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(0, 0), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 1), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 2), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 3), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 4), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 5), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 6), 5},
+    {PIXEL_COORDS_TO_OFFSET(0, 7), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 8), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 9), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 10), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 11), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 12), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 13), 8},
 
-	{PIXEL_COORDS_TO_OFFSET(8, 13), 8},
-	{PIXEL_COORDS_TO_OFFSET(16, 13), 8},
-	{PIXEL_COORDS_TO_OFFSET(24, 13), 8},
-	{PIXEL_COORDS_TO_OFFSET(32, 13), 8},
-	{PIXEL_COORDS_TO_OFFSET(40, 13), 8},
-	{PIXEL_COORDS_TO_OFFSET(48, 13), 8},
-	{PIXEL_COORDS_TO_OFFSET(56, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(8, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(16, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(24, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(32, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(40, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(48, 13), 8},
+    {PIXEL_COORDS_TO_OFFSET(56, 13), 8},
 
-	{PIXEL_COORDS_TO_OFFSET(0, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(8, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(16, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(24, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(32, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(40, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(48, 14), 8},
-	{PIXEL_COORDS_TO_OFFSET(56, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(0, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(8, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(16, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(24, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(32, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(40, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(48, 14), 8},
+    {PIXEL_COORDS_TO_OFFSET(56, 14), 8},
 
-	{PIXEL_COORDS_TO_OFFSET(0, 15), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 16), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 17), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 18), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 19), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 20), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 21), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 22), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 23), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 24), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 25), 3},
-	{PIXEL_COORDS_TO_OFFSET(0, 26), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 15), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 16), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 17), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 18), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 19), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 20), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 21), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 22), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 23), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 24), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 25), 3},
+    {PIXEL_COORDS_TO_OFFSET(0, 26), 3},
 
 //Second Row Of Image
-	{PIXEL_COORDS_TO_OFFSET(0, 45), 8},
-	{PIXEL_COORDS_TO_OFFSET(0, 46), 8},
-	{PIXEL_COORDS_TO_OFFSET(0, 47), 8},
-	//{PIXEL_COORDS_TO_OFFSET(0, 48), 8},   // cuts off the top of the 'G' in Neutralizing Gas
-	{PIXEL_COORDS_TO_OFFSET(8, 45), 8},
-	{PIXEL_COORDS_TO_OFFSET(8, 46), 8},
-	{PIXEL_COORDS_TO_OFFSET(8, 47), 8},
-	{PIXEL_COORDS_TO_OFFSET(8, 48), 8},
-	{PIXEL_COORDS_TO_OFFSET(16, 45), 8},
-	{PIXEL_COORDS_TO_OFFSET(16, 46), 8},
-	{PIXEL_COORDS_TO_OFFSET(16, 47), 8},
-	{PIXEL_COORDS_TO_OFFSET(16, 48), 8},
+    {PIXEL_COORDS_TO_OFFSET(0, 45), 8},
+    {PIXEL_COORDS_TO_OFFSET(0, 46), 8},
+    {PIXEL_COORDS_TO_OFFSET(0, 47), 8},
+    //{PIXEL_COORDS_TO_OFFSET(0, 48), 8},   // cuts off the top of the 'G' in Neutralizing Gas
+    {PIXEL_COORDS_TO_OFFSET(8, 45), 8},
+    {PIXEL_COORDS_TO_OFFSET(8, 46), 8},
+    {PIXEL_COORDS_TO_OFFSET(8, 47), 8},
+    {PIXEL_COORDS_TO_OFFSET(8, 48), 8},
+    {PIXEL_COORDS_TO_OFFSET(16, 45), 8},
+    {PIXEL_COORDS_TO_OFFSET(16, 46), 8},
+    {PIXEL_COORDS_TO_OFFSET(16, 47), 8},
+    {PIXEL_COORDS_TO_OFFSET(16, 48), 8},
 };
 
 static inline void CopyPixels(u8 *dest, const u8 *src, u32 pixelCount)
 {
-	u32 i = 0;
+    u32 i = 0;
 
-	if (pixelCount & 1)
-	{
-		while (pixelCount != 0)
-		{
-			dest[i] &= ~(0xF);
-			dest[i] |= (src[i] & 0xF);
-			if (--pixelCount != 0)
-			{
-				dest[i] &= ~(0xF0);
-				dest[i] |= (src[i] & 0xF0);
-				pixelCount--;
-			}
-			i++;
-		}
-	}
-	else
-	{
-		for (i = 0; i < pixelCount / 2; i++)
-			dest[i] = src[i];
-	}
+    if (pixelCount & 1)
+    {
+        while (pixelCount != 0)
+        {
+            dest[i] &= ~(0xF);
+            dest[i] |= (src[i] & 0xF);
+            if (--pixelCount != 0)
+            {
+                dest[i] &= ~(0xF0);
+                dest[i] |= (src[i] & 0xF0);
+                pixelCount--;
+            }
+            i++;
+        }
+    }
+    else
+    {
+        for (i = 0; i < pixelCount / 2; i++)
+            dest[i] = src[i];
+    }
 }
 
 static void RestoreOverwrittenPixels(u8 *tiles)
 {
-	u32 i;
-	u8 *buffer = Alloc(sizeof(sAbilityPopUpGfx) * 2);
+    u32 i;
+    u8 *buffer = Alloc(sizeof(sAbilityPopUpGfx) * 2);
 
-	CpuCopy32(tiles, buffer, sizeof(sAbilityPopUpGfx));
+    CpuCopy32(tiles, buffer, sizeof(sAbilityPopUpGfx));
 
-	for (i = 0; i < ARRAY_COUNT(sOverwrittenPixelsTable); i++)
-	{
-		CopyPixels(buffer + sOverwrittenPixelsTable[i][0],
-				   sAbilityPopUpGfx + sOverwrittenPixelsTable[i][0],
-				   sOverwrittenPixelsTable[i][1]);
-	}
+    for (i = 0; i < ARRAY_COUNT(sOverwrittenPixelsTable); i++)
+    {
+        CopyPixels(buffer + sOverwrittenPixelsTable[i][0],
+                   sAbilityPopUpGfx + sOverwrittenPixelsTable[i][0],
+                   sOverwrittenPixelsTable[i][1]);
+    }
 
-	CpuCopy32(buffer, tiles, sizeof(sAbilityPopUpGfx));
-	Free(buffer);
+    CpuCopy32(buffer, tiles, sizeof(sAbilityPopUpGfx));
+    Free(buffer);
 }
 
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
@@ -3254,19 +3254,19 @@ static void Task_FreeAbilityPopUpGfx(u8 taskId)
 
 static const struct OamData sOamData_LastUsedBall =
 {
-	.y = 0,
-	.affineMode = 0,
-	.objMode = 0,
-	.mosaic = 0,
-	.bpp = 0,
-	.shape = SPRITE_SHAPE(32x32),
-	.x = 0,
-	.matrixNum = 0,
-	.size = SPRITE_SIZE(32x32),
-	.tileNum = 0,
-	.priority = 1,
-	.paletteNum = 0,
-	.affineParam = 0,
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_LastUsedBallWindow =

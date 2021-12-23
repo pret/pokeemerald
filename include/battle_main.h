@@ -29,7 +29,7 @@ struct ChooseMoveStruct;
 #define ABILITY_NAME_LENGTH 16
 #else
 #define ABILITY_NAME_LENGTH 12
-#endif    
+#endif
 
 // defines for the 'DoBounceEffect' function
 #define BOUNCE_MON          0x0
