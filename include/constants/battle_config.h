@@ -198,11 +198,13 @@
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
 #define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
 #define B_FLAG_FORCE_DOUBLE_WILD    0     // If this flag is set, all land and surfing wild battles will be double battles.
+#define B_SMART_WILD_AI_FLAG        0     // If not 0, you can set this flag in a script to enable smart wild pokemon
 
 // Var Settings
 // To use the following features in scripting, replace the 0s with the var ID you're assigning it to.
 // Eg: Replace with VAR_UNUSED_0x40F7 so you can use VAR_TERRAIN for that feature.
 #define VAR_TERRAIN                 0     // If this var has a value, assigning a STATUS_FIELD_xx_TERRAIN to it before battle causes the battle to start with that terrain active
+#define B_VAR_WILD_AI_FLAGS         0     // If not 0, you can use this var to add to default wild AI flags. NOT usable with flags above (1 << 15)
 
 // Terrain settings
 #define B_TERRAIN_BG_CHANGE         TRUE  // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.

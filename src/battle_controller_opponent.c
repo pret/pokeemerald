@@ -1563,7 +1563,8 @@ static void OpponentHandleChooseMove(void)
         u8 chosenMoveId;
         struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
-        if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
+        if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
+         || IsWildMonSmart())
         {
             BattleAI_SetupAIData(0xF);
             chosenMoveId = BattleAI_ChooseMoveOrAction();
