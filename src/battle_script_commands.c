@@ -12344,6 +12344,7 @@ static void Cmd_trycopyability(void) // role play
     }
     else
     {
+        gBattleScripting.abilityPopupOverwrite = gBattleMons[gBattlerAttacker].ability;
         gBattleMons[gBattlerAttacker].ability = defAbility;
         gLastUsedAbility = defAbility;
         gBattlescriptCurrInstr += 5;
