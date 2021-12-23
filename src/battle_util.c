@@ -1427,117 +1427,72 @@ void CancelMultiTurnMoves(u8 battler)
     gBattleMons[battler].status2 &= ~(STATUS2_UPROAR);
     gBattleMons[battler].status2 &= ~(STATUS2_BIDE);
 
-    // Don't clear battler's semi-invulnerable bits if they are held by Sky Drop.
-    if (gBattleStruct->skyDropTargets[1] != battler && gBattleStruct->skyDropTargets[3] != battler)
+    // Clear battler's semi-invulnerable bits if they are not held by Sky Drop.
+    if (!(gStatuses3[battler] & STATUS3_SKY_DROPPED))
         gStatuses3[battler] &= ~(STATUS3_SEMI_INVULNERABLE);
     
     // Check to see if this Pokemon was in the middle of using Sky Drop. If so, release the target.
-    if (gBattleStruct->skyDropTargets[0] == battler)
+    if (gBattleStruct->skyDropTargets[battler] != 0xFF && !(gStatuses3[battler] & STATUS3_SKY_DROPPED))
     {
-        // Sets skyDropTargets[1] to be the battler id for the target
-        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        // Get the target's battler id
+        u8 otherSkyDropper = gBattleStruct->skyDropTargets[battler];
+        
+        // Clears sky_dropped and on_air statuses
+        gStatuses3[otherSkyDropper] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
+        
+        // Makes both attacker and target's sprites visible
+        gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[otherSkyDropper]].invisible = FALSE;
+        
+        // If target was sky dropped in the middle of Outrage/Thrash/Petal Dance,
+        // confuse them upon release and display "confused by fatigue" message & animation.
+        // Don't do this if this CancelMultiTurnMoves is caused by falling asleep via Yawn.
+        if (gBattleMons[otherSkyDropper].status2 & STATUS2_LOCK_CONFUSE && gBattleStruct->turnEffectsTracker != 24)
         {
-            if (gBattleStruct->skyDropTargets[1] == i)
+            gBattleMons[otherSkyDropper].status2 &= ~(STATUS2_LOCK_CONFUSE);
+
+            // If the target can be confused, confuse them.
+            // Don't use CanBeConfused, can cause issues in edge cases.
+            if (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO
+                || gBattleMons[otherSkyDropper].status2 & STATUS2_CONFUSION
+                || IsBattlerTerrainAffected(otherSkyDropper, STATUS_FIELD_MISTY_TERRAIN)))
             {
-                // Clears sky dropped and on_air statuses
-                gStatuses3[i] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
-                
-                // Makes both attacker and target's sprites visible
-                gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
-                gSprites[gBattlerSpriteIds[i]].invisible = FALSE;
-                
-                // If target was sky dropped in the middle of Outrage/Thrash/Petal Dance,
-                // confuse them upon release and display "confused by fatigue" message & animation.
-                // Don't do this if this CancelMultiTurnMoves is caused by falling asleep via Yawn.
-                if (gBattleMons[i].status2 & STATUS2_LOCK_CONFUSE && gBattleStruct->turnEffectsTracker != 24)
+                // Set confused status
+                gBattleMons[otherSkyDropper].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
+
+                // If this CancelMultiTurnMoves is occuring due to attackcanceller
+                if (gBattlescriptCurrInstr[0] == 0x0)
                 {
-                    gBattleMons[i].status2 &= ~(STATUS2_LOCK_CONFUSE);
-
-                    // If the target can be confused, confuse them.
-                    // Don't use CanBeConfused, can cause issues in edge cases.
-                    if (!(GetBattlerAbility(i) == ABILITY_OWN_TEMPO
-                        || gBattleMons[i].status2 & STATUS2_CONFUSION
-                        || IsBattlerTerrainAffected(i, STATUS_FIELD_MISTY_TERRAIN)))
-                    {
-                        gBattleMons[i].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
-
-                        // If this CancelMultiTurnMoves is occuring due to attackcanceller or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
-                        if (gBattlescriptCurrInstr[0] == 0x0 || (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76))
-                        {
-                            gBattleStruct->skyDropTargets[0] = 0xFE - battler;
-                        }
-                        // If this CancelMultiTurnMoves is occuring due to cancelmultiturnmoves script
-                        else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
-                        {
-                            gBattlerAttacker = i;
-                            gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
-                        }
-                        // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
-                        else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
-                        {
-                            gBattlerAttacker = i;
-                            BattleScriptPush(gBattlescriptCurrInstr + 1);
-                            gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 1;
-                        }
-                    }
+                    gBattleStruct->skyDropTargets[battler] = 0xFE;
                 }
-                break;
+                // If this CancelMultiTurnMoves is occuring due to VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+                // Reapplying STATUS3_SKY_DROPPED allows for avoiding unecessary messages when Gravity is applied to the target.
+                else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76)
+                {
+                    gBattleStruct->skyDropTargets[battler] = 0xFE;
+                    gStatuses3[otherSkyDropper] |= STATUS3_SKY_DROPPED;
+                }
+                // If this CancelMultiTurnMoves is occuring due to cancelmultiturnmoves script
+                else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
+                {
+                    gBattlerAttacker = otherSkyDropper;
+                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
+                }
+                // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
+                else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
+                {
+                    gBattlerAttacker = otherSkyDropper;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 1;
+                }
             }
         }
 
         // Clear skyDropTargets data, unless this CancelMultiTurnMoves is caused by Yawn, attackcanceler, or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
-        if (!(gBattleMons[gBattleStruct->skyDropTargets[1]].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[0] < 4)
+        if (!(gBattleMons[otherSkyDropper].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[battler] < 4)
         {
-            gBattleStruct->skyDropTargets[0] = 0xFF;
-            gBattleStruct->skyDropTargets[1] = 0xFF;
-        }
-    }
-    else if (gBattleStruct->skyDropTargets[2] == battler)
-    {
-        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        {
-            if (gBattleStruct->skyDropTargets[3] == i)
-            {
-                gStatuses3[i] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
-
-                gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
-                gSprites[gBattlerSpriteIds[i]].invisible = FALSE;
-
-                if (gBattleMons[i].status2 & STATUS2_LOCK_CONFUSE && gBattleStruct->turnEffectsTracker != 24)
-                {
-                    gBattleMons[i].status2 &= ~(STATUS2_LOCK_CONFUSE);
-					
-                    if (!(GetBattlerAbility(i) == ABILITY_OWN_TEMPO
-                        || gBattleMons[i].status2 & STATUS2_CONFUSION
-                        || IsBattlerTerrainAffected(i, STATUS_FIELD_MISTY_TERRAIN)))
-                    {
-                        gBattleMons[i].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
-
-                        if (gBattlescriptCurrInstr[0] == 0x0 || (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76))
-                        {
-                            gBattleStruct->skyDropTargets[2] = 0xFE - battler;
-                        }
-                        else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
-                        {
-                            gBattlerAttacker = i;
-                            gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
-                        }
-                        else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
-                        {
-                            gBattlerAttacker = i;
-                            BattleScriptPush(gBattlescriptCurrInstr + 1);
-                            gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 1;
-                        }
-                    }
-                }
-                break;
-            }
-        }
-
-        if (!(gBattleMons[gBattleStruct->skyDropTargets[3]].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[2] < 4)
-        {
-            gBattleStruct->skyDropTargets[2] = 0xFF;
-            gBattleStruct->skyDropTargets[3] = 0xFF;
+            gBattleStruct->skyDropTargets[battler] = 0xFF;
+            gBattleStruct->skyDropTargets[otherSkyDropper] = 0xFF;
         }
     }
 
