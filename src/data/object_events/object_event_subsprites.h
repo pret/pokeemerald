@@ -1,78 +1,78 @@
 static const struct Subsprite sOamTable_16x16_0[] = {
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_16x16_1[] = {
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x16), 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SIZE(16x16),
-        .tileOffset = 0, 
+        .tileOffset = 0,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_16x16_2[] = {
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 0,
         .priority = 2
     },
-    { 
-        .x = -8,  
-        .y =  0, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 2, 
+    {
+        .x = -8,
+        .y =  0,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 2,
         .priority = 3
     }
 };
 
 static const struct Subsprite sOamTable_16x16_3[] = {
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 2
     },
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 3
     }
 };
 
 static const struct Subsprite sOamTable_16x16_4[] = {
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 1
     },
-    { 
-        .x = -8,  
-        .y = -8, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 3
     }
 };
@@ -87,88 +87,88 @@ static const struct SubspriteTable sOamTables_16x16[] = {
 };
 
 static const struct Subsprite sOamTable_16x32_0[] = {
-    { 
-        .x = -8, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(16x32), 
-        .size = SPRITE_SIZE(16x32), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_16x32_1[] = {
-    { 
-        .x = -8, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(16x32), 
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x32),
         .size = SPRITE_SIZE(16x32),
-        .tileOffset = 0, 
+        .tileOffset = 0,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_16x32_2[] = {
-    { 
-        .x = -8, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 2
     },
-    { 
-        .x = -8, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 4, 
+    {
+        .x = -8,
+        .y =   0,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 4,
         .priority = 2
     },
-    { 
-        .x = -8, 
-        .y =   8, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 6, 
+    {
+        .x = -8,
+        .y =   8,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 6,
         .priority = 3
     }
 };
 
 static const struct Subsprite sOamTable_16x32_3[] = {
-    { 
-        .x = -8, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 2
     },
-    { 
-        .x = -8, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 4, 
+    {
+        .x = -8,
+        .y =   0,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 4,
         .priority = 3
     }
 };
 
 static const struct Subsprite sOamTable_16x32_4[] = {
-    { 
-        .x = -8, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 0, 
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
         .priority = 1
     },
-    { 
-        .x = -8, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(16x16), 
-        .size = SPRITE_SIZE(16x16), 
-        .tileOffset = 4, 
+    {
+        .x = -8,
+        .y =   0,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 4,
         .priority = 3
     }
 };
@@ -184,87 +184,87 @@ static const struct SubspriteTable sOamTables_16x32[] = {
 
 static const struct Subsprite sOamTable_32x32_0[] = {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x32), 
-        .size = SPRITE_SIZE(32x32), 
-        .tileOffset = 0, 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_32x32_1[] = {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x32), 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
-        .tileOffset = 0, 
+        .tileOffset = 0,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_32x32_2[] = {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x16), 
-        .size = SPRITE_SIZE(32x16), 
-        .tileOffset = 0, 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x16),
+        .size = SPRITE_SIZE(32x16),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 8, 
+        .x = -16,
+        .y =   0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   8, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -16,
+        .y =   8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 3
     }
 };
 
 static const struct Subsprite sOamTable_32x32_3[] = {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x16), 
-        .size = SPRITE_SIZE(32x16), 
-        .tileOffset = 0, 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x16),
+        .size = SPRITE_SIZE(32x16),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(32x16), 
+        .x = -16,
+        .y =   0,
+        .shape = SPRITE_SHAPE(32x16),
         .size = SPRITE_SIZE(32x16),
-        .tileOffset = 8, 
+        .tileOffset = 8,
         .priority = 3
     }
 };
 
 static const struct Subsprite sOamTable_32x32_4[] = {
     {
-        .x = -16, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x16), 
+        .x = -16,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x16),
         .size = SPRITE_SIZE(32x16),
-        .tileOffset = 0, 
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(32x16), 
+        .x = -16,
+        .y =   0,
+        .shape = SPRITE_SHAPE(32x16),
         .size = SPRITE_SIZE(32x16),
-        .tileOffset = 8, 
+        .tileOffset = 8,
         .priority = 3
     }
 };
@@ -280,99 +280,99 @@ static const struct SubspriteTable sOamTables_32x32[] = {
 
 static const struct Subsprite sOamTable_48x48[] = {
     {
-        .x = -24, 
-        .y = -24, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -24,
+        .y = -24,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x =   8, 
-        .y = -24, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 4, 
+        .x =   8,
+        .y = -24,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 4,
         .priority = 2
     },
     {
-        .x = -24, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 6, 
+        .x = -24,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 6,
         .priority = 2
     },
     {
-        .x =   8, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 10, 
+        .x =   8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 10,
         .priority = 2
     },
     {
-        .x = -24, 
-        .y =  -8, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -24,
+        .y =  -8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 2
     },
     {
-        .x =   8, 
-        .y =  -8, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 16, 
+        .x =   8,
+        .y =  -8,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 16,
         .priority = 2
     },
     {
-        .x = -24, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 18, 
+        .x = -24,
+        .y =   0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 18,
         .priority = 2
     },
     {
-        .x =   8, 
-        .y =   0, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 22, 
+        .x =   8,
+        .y =   0,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 22,
         .priority = 2
     },
     {
-        .x = -24, 
-        .y =   8, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 24, 
+        .x = -24,
+        .y =   8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 24,
         .priority = 2
     },
     {
-        .x =   8, 
-        .y =   8, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 28, 
+        .x =   8,
+        .y =   8,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 28,
         .priority = 2
     },
     {
-        .x = -24, 
-        .y =  16, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 30, 
+        .x = -24,
+        .y =  16,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 30,
         .priority = 2
     },
     {
-        .x =   8, 
-        .y =  16, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 34, 
+        .x =   8,
+        .y =  16,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 34,
         .priority = 2
     }
 };
@@ -388,44 +388,44 @@ static const struct SubspriteTable sOamTables_48x48[] = {
 
 static const struct Subsprite sOamTable_64x32_0[] = {
     {
-        .x = -32, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(64x32), 
-        .size = SPRITE_SIZE(64x32), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -16,
+        .shape = SPRITE_SHAPE(64x32),
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_64x32_1[] = {
     {
-        .x = -32, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(64x32), 
-        .size = SPRITE_SIZE(64x32), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -16,
+        .shape = SPRITE_SHAPE(64x32),
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 0,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_64x32_2[] = {
     {
-        .x = -32, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(64x32), 
-        .size = SPRITE_SIZE(64x32), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -16,
+        .shape = SPRITE_SHAPE(64x32),
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_64x32_3[] = {
     {
-        .x = -32, 
-        .y = -16, 
-        .shape = SPRITE_SHAPE(64x32), 
-        .size = SPRITE_SIZE(64x32), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -16,
+        .shape = SPRITE_SHAPE(64x32),
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 0,
         .priority = 2
     }
 };
@@ -442,44 +442,44 @@ static const struct SubspriteTable sOamTables_64x32[] = {
 
 static const struct Subsprite sOamTable_64x64_0[] = {
     {
-        .x = -32, 
-        .y = -32, 
-        .shape = SPRITE_SHAPE(64x64), 
-        .size = SPRITE_SIZE(64x64), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -32,
+        .shape = SPRITE_SHAPE(64x64),
+        .size = SPRITE_SIZE(64x64),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_64x64_1[] = {
     {
-        .x = -32, 
-        .y = -32, 
-        .shape = SPRITE_SHAPE(64x64), 
-        .size = SPRITE_SIZE(64x64), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -32,
+        .shape = SPRITE_SHAPE(64x64),
+        .size = SPRITE_SIZE(64x64),
+        .tileOffset = 0,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_64x64_2[] = {
     {
-        .x = -32, 
-        .y = -32, 
-        .shape = SPRITE_SHAPE(64x64), 
-        .size = SPRITE_SIZE(64x64), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -32,
+        .shape = SPRITE_SHAPE(64x64),
+        .size = SPRITE_SIZE(64x64),
+        .tileOffset = 0,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_64x64_3[] = {
     {
-        .x = -32, 
-        .y = -32, 
-        .shape = SPRITE_SHAPE(64x64), 
-        .size = SPRITE_SIZE(64x64), 
-        .tileOffset = 0, 
+        .x = -32,
+        .y = -32,
+        .shape = SPRITE_SHAPE(64x64),
+        .size = SPRITE_SIZE(64x64),
+        .tileOffset = 0,
         .priority = 2
     }
 };
@@ -495,492 +495,492 @@ static const struct SubspriteTable sOamTables_64x64[] = {
 
 static const struct Subsprite sOamTable_96x40_0[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 16, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 16,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 20, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 20,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 24, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 24,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 28, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 28,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 32, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 36, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 36,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 40, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 40,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 44, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 44,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 48, 
+        .x = -48,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 48,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 52, 
+        .x = -16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 52,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 56, 
+        .x =  16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 56,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_96x40_1[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 16, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 16,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 20, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 20,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 24, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 24,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 28, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 28,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 32, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 32,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 36, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 36,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 40, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 40,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 44, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 44,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 48, 
+        .x = -48,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 48,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 52, 
+        .x = -16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 52,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 56, 
+        .x =  16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 56,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_96x40_2[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 16, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 16,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 20, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 20,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 24, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 24,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 28, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 28,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 32, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 36, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 36,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 40, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 40,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 44, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 44,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 48, 
+        .x = -48,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 48,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 52, 
+        .x = -16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 52,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 56, 
+        .x =  16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 56,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_96x40_3[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 16, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 16,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 20, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 20,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 24, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 24,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 28, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 28,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 32, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 36, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 36,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 40, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 40,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 44, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 44,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 48, 
+        .x = -48,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 48,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 52, 
+        .x = -16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 52,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 56, 
+        .x =  16,
+        .y =  12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 56,
         .priority = 2
     }
 };
@@ -997,524 +997,524 @@ static const struct SubspriteTable sOamTables_96x40[] = {
 
 static const struct Subsprite sOamTable_88x32_0[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 8,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 10, 
+        .x =  32,
+        .y = -20,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 10,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 11, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 11,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 15, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 19, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 19,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 21, 
+        .x =  32,
+        .y = -12,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 21,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 22, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 22,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 26, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 26,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 30, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 30,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 32, 
+        .x =  32,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 33, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 33,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 37, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 37,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 41, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 41,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 43, 
+        .x =  32,
+        .y =   4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 43,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_88x32_1[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 8,
         .priority = 1
     },
     {
-        .x =  32, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 10, 
+        .x =  32,
+        .y = -20,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 10,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 11, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 11,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 15, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 19, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 19,
         .priority = 1
     },
     {
-        .x =  32, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 21, 
+        .x =  32,
+        .y = -12,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 21,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 22, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 22,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 26, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 26,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 30, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 30,
         .priority = 1
     },
     {
-        .x =  32, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 32, 
+        .x =  32,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 32,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 33, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 33,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 37, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 37,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 41, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 41,
         .priority = 1
     },
     {
-        .x =  32, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 43, 
+        .x =  32,
+        .y =   4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 43,
         .priority = 1
     }
 };
 
 static const struct Subsprite sOamTable_88x32_2[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 8,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 10, 
+        .x =  32,
+        .y = -20,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 10,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 11, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 11,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 15, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 19, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 19,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 21, 
+        .x =  32,
+        .y = -12,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 21,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 22, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 22,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 26, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 26,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 30, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 30,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 32, 
+        .x =  32,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 33, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 33,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 37, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 37,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 41, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 41,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 43, 
+        .x =  32,
+        .y =   4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 43,
         .priority = 2
     }
 };
 
 static const struct Subsprite sOamTable_88x32_3[] = {
     {
-        .x = -48, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 0, 
+        .x = -48,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 4, 
+        .x = -16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 8, 
+        .x =  16,
+        .y = -20,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 8,
         .priority = 1
     },
     {
-        .x =  32, 
-        .y = -20, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 10, 
+        .x =  32,
+        .y = -20,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 10,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 11, 
+        .x = -48,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 11,
         .priority = 1
     },
     {
-        .x = -16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 15, 
+        .x = -16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,
         .priority = 1
     },
     {
-        .x =  16, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 19, 
+        .x =  16,
+        .y = -12,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 19,
         .priority = 1
     },
     {
-        .x =  32, 
-        .y = -12, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 21, 
+        .x =  32,
+        .y = -12,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 21,
         .priority = 1
     },
     {
-        .x = -48, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 22, 
+        .x = -48,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 22,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 26, 
+        .x = -16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 26,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 30, 
+        .x =  16,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 30,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y =  -4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 32, 
+        .x =  32,
+        .y =  -4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -48, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 33, 
+        .x = -48,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 33,
         .priority = 2
     },
     {
-        .x = -16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 37, 
+        .x = -16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 37,
         .priority = 2
     },
     {
-        .x =  16, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(16x8), 
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 41, 
+        .x =  16,
+        .y =   4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 41,
         .priority = 2
     },
     {
-        .x =  32, 
-        .y =   4, 
-        .shape = SPRITE_SHAPE(8x8), 
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 43, 
+        .x =  32,
+        .y =   4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 43,
         .priority = 2
     }
 };

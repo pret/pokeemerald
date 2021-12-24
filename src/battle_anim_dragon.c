@@ -318,8 +318,8 @@ static void AnimSpinningDracoMeteor(struct Sprite *sprite)
 
 static void AnimOutrageFlame(struct Sprite *sprite)
 {
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->x -= gBattleAnimArgs[0];
@@ -344,8 +344,8 @@ static void AnimOutrageFlame(struct Sprite *sprite)
 static void StartDragonFireTranslation(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->x -= gBattleAnimArgs[1];
@@ -371,13 +371,13 @@ void AnimDragonRageFirePlume(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
     }
     else
     {
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
     }
 
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[1]);
@@ -399,8 +399,8 @@ void AnimDragonDanceOrb(struct Sprite *sprite)
 {
     u16 r5;
     u16 r0;
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[4] = 0;
     sprite->data[5] = 1;
     sprite->data[6] = gBattleAnimArgs[0];
@@ -546,8 +546,8 @@ void AnimOverheatFlame(struct Sprite *sprite)
 {
     int i;
     int yAmplitude = (gBattleAnimArgs[2] * 3) / 5;
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[4];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[4];
     sprite->data[1] = Cos(gBattleAnimArgs[1], gBattleAnimArgs[2]);
     sprite->data[2] = Sin(gBattleAnimArgs[1], yAmplitude);
     sprite->x += sprite->data[1] * gBattleAnimArgs[0];

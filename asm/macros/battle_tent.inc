@@ -26,7 +26,7 @@
 	special CallVerdanturfTentFunction
 	.endm
 
-	@ Buffers the opponents intro speech to STR_VAR_4. Despite being a Verdanturf Tent function, it serves the same purpose for all 3 tents. 
+	@ Buffers the opponents intro speech to STR_VAR_4. Despite being a Verdanturf Tent function, it serves the same purpose for all 3 tents.
 	.macro battletent_getopponentintro
 	setvar VAR_0x8004, VERDANTURF_TENT_FUNC_GET_OPPONENT_INTRO
 	special CallVerdanturfTentFunction
@@ -36,7 +36,7 @@
 	.macro verdanturftent_save challengeStatus:req
 	setvar VAR_0x8004, VERDANTURF_TENT_FUNC_SAVE
 	setvar VAR_0x8005, \challengeStatus
-	special CallVerdanturfTentFunction  
+	special CallVerdanturfTentFunction
 	.endm
 
 	@ Set the prize item as randomly selected from a list. Randomness unnecessary, as the list is only 1 item
@@ -49,7 +49,7 @@
 	.macro verdanturftent_giveprize
 	setvar VAR_0x8004, VERDANTURF_TENT_FUNC_GIVE_PRIZE
 	special CallVerdanturfTentFunction
-	.endm  
+	.endm
 
 
 @ Fallarbor Tent
@@ -79,7 +79,7 @@
 	setvar VAR_0x8004, FALLARBOR_TENT_FUNC_SAVE
 	setvar VAR_0x8005, \challengeStatus
 	special CallFallarborTentFunction
-	.endm   
+	.endm
 
 	@ Set the prize item as randomly selected from a list. Randomness unnecessary, as the list is only 1 item
 	.macro fallarbortent_setrandomprize
@@ -97,7 +97,7 @@
 	.macro fallarbortent_getopponentname
 	setvar VAR_0x8004, FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME
 	special CallFallarborTentFunction
-	.endm 
+	.endm
 
 
 @ Slateport Tent
@@ -127,15 +127,15 @@
 	setvar VAR_0x8004, SLATEPORT_TENT_FUNC_SAVE
 	setvar VAR_0x8005, \challengeStatus
 	special CallSlateportTentFunction
-	.endm   
+	.endm
 
-	@ Set the prize item as randomly selected from a list. Randomness unnecessary, as the list is only 1 item 
+	@ Set the prize item as randomly selected from a list. Randomness unnecessary, as the list is only 1 item
 	.macro slateporttent_setrandomprize
 	setvar VAR_0x8004, SLATEPORT_TENT_FUNC_SET_RANDOM_PRIZE
 	special CallSlateportTentFunction
 	.endm
 
-	@ Give the current prize item. FALSE if no room for prize 
+	@ Give the current prize item. FALSE if no room for prize
 	.macro slateporttent_giveprize
 	setvar VAR_0x8004, SLATEPORT_TENT_FUNC_GIVE_PRIZE
 	special CallSlateportTentFunction
@@ -157,7 +157,7 @@
 	.macro slateporttent_generateopponentmons
 	setvar VAR_0x8004, SLATEPORT_TENT_FUNC_GENERATE_OPPONENT_MONS
 	special CallSlateportTentFunction
-	.endm 
+	.endm
 
 	@ Slateport Tent's version of factory_generaterentalmons
 	.macro slateporttent_generaterentalmons

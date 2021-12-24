@@ -26,7 +26,6 @@
 #include "overworld.h"
 #include "math_util.h"
 #include "constants/battle_frontier.h"
-#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -178,9 +177,9 @@ static const u32 sUnusedData[]                   = INCBIN_U32("graphics/frontier
 static const u32 sBattleRecord_Tilemap[]         = INCBIN_U32("graphics/frontier_pass/record_frame.bin.lz");
 static const u32 sMapAndCard_Zooming_Tilemap[]   = INCBIN_U32("graphics/frontier_pass/small_map_and_card_affine.bin.lz");
 
-static const s16 sBgAffineCoords[][2] = 
+static const s16 sBgAffineCoords[][2] =
 {
-    [CURSOR_AREA_MAP - 1]  = {216,  32}, 
+    [CURSOR_AREA_MAP - 1]  = {216,  32},
     [CURSOR_AREA_CARD - 1] = {216, 128}
 };
 
@@ -561,14 +560,14 @@ static void ResetGpuRegsAndBgs(void)
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1099,7 +1098,7 @@ static void Task_PassAreaZoom(u8 taskId)
         tScaleY += tScaleSpeedY;
         sPassGfx->scaleX = MathUtil_Inv16(tScaleX);
         sPassGfx->scaleY = MathUtil_Inv16(tScaleY);
-        
+
         // Check if zoom hasn't reached target
         if (!tZoomOut)
         {
@@ -1117,7 +1116,7 @@ static void Task_PassAreaZoom(u8 taskId)
             sPassGfx->zooming = FALSE;
         if (UpdatePaletteFade())
             return;
-        
+
         if (!tZoomOut)
         {
             // Zoomed in and faded out, switch to map or trainer card
@@ -1150,23 +1149,23 @@ static void ShowAndPrintWindows(void)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
 
-    x = GetStringCenterAlignXOffset(1, gText_SymbolsEarned, 96);
-    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, 1, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_SymbolsEarned, 96);
+    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
 
-    x = GetStringCenterAlignXOffset(1, gText_BattleRecord, 96);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, 1, x, 5, sTextColors[0], 0, gText_BattleRecord);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_BattleRecord, 96);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_BattleRecord);
 
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, 5, 4, sTextColors[0], 0, gText_BattlePoints);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, 5, 4, sTextColors[0], 0, gText_BattlePoints);
     ConvertIntToDecimalStringN(gStringVar4, sPassData->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
-    x = GetStringRightAlignXOffset(8, gStringVar4, 91);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, x, 16, sTextColors[0], 0, gStringVar4);
+    x = GetStringRightAlignXOffset(FONT_SMALL_NARROW, gStringVar4, 91);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, x, 16, sTextColors[0], 0, gStringVar4);
 
     sPassData->cursorArea = GetCursorAreaFromCoords(sPassData->cursorX - 5, sPassData->cursorY + 5);
     sPassData->previousCursorArea = CURSOR_AREA_NOTHING;
     PrintAreaDescription(sPassData->cursorArea);
 
     for (i = 0; i < WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1174,13 +1173,13 @@ static void ShowAndPrintWindows(void)
 static void PrintAreaDescription(u8 cursorArea)
 {
     FillWindowPixelBuffer(WINDOW_DESCRIPTION, PIXEL_FILL(0));
-    
-    if (cursorArea == CURSOR_AREA_RECORD && !sPassData->hasBattleRecord)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[CURSOR_AREA_NOTHING]);
-    else if (cursorArea != CURSOR_AREA_NOTHING)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
 
-    CopyWindowToVram(WINDOW_DESCRIPTION, 3);
+    if (cursorArea == CURSOR_AREA_RECORD && !sPassData->hasBattleRecord)
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[CURSOR_AREA_NOTHING]);
+    else if (cursorArea != CURSOR_AREA_NOTHING)
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
+
+    CopyWindowToVram(WINDOW_DESCRIPTION, COPYWIN_FULL);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1256,7 +1255,7 @@ static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
             return;
         break;
     }
-    
+
     // If moving on to highlightable area, highlight it
     switch (cursorArea)
     {
@@ -1715,15 +1714,15 @@ static void PrintOnFrontierMap(void)
     for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
     {
         if (i == sMapData->cursorPos)
-            AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (i * 16) + 1, sTextColors[2], 0, sMapLandmarks[i].name);
+            AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (i * 16) + 1, sTextColors[2], 0, sMapLandmarks[i].name);
         else
-            AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (i * 16) + 1, sTextColors[1], 0, sMapLandmarks[i].name);
+            AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (i * 16) + 1, sTextColors[1], 0, sMapLandmarks[i].name);
     }
 
-    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1743,8 +1742,8 @@ static void HandleFrontierMapCursorMove(u8 direction)
         sMapData->cursorPos = (oldCursorPos + 1) % NUM_FRONTIER_FACILITIES;
     }
 
-    AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (oldCursorPos * 16) + 1, sTextColors[1], 0, sMapLandmarks[oldCursorPos].name);
-    AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (sMapData->cursorPos * 16) + 1, sTextColors[2], 0, sMapLandmarks[sMapData->cursorPos].name);
+    AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (oldCursorPos * 16) + 1, sTextColors[1], 0, sMapLandmarks[oldCursorPos].name);
+    AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (sMapData->cursorPos * 16) + 1, sTextColors[2], 0, sMapLandmarks[sMapData->cursorPos].name);
 
     sMapData->cursorSprite->y = (sMapData->cursorPos * 16) + 8;
 
@@ -1752,10 +1751,10 @@ static void HandleFrontierMapCursorMove(u8 direction)
     sMapData->mapIndicatorSprite->x = sMapLandmarks[sMapData->cursorPos].x;
     sMapData->mapIndicatorSprite->y = sMapLandmarks[sMapData->cursorPos].y;
     FillWindowPixelBuffer(MAP_WINDOW_DESCRIPTION, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
     PlaySE(SE_DEX_SCROLL);

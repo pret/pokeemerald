@@ -11,8 +11,7 @@ BattleFrontier_OutsideEast_OnResume:
 
 BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne Common_EventScript_NopReturn
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -72,7 +71,7 @@ BattleFrontier_OutsideEast_EventScript_Zigzagoon::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_ZIGZAGOON, 0
+	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
 	msgbox BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant, MSGBOX_DEFAULT
 	waitmoncry
 	release
@@ -126,7 +125,7 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	msgbox gText_Sudowoodo_Attacked, MSGBOX_DEFAULT
 	closemessage
 	waitse
-	playmoncry SPECIES_SUDOWOODO, 2
+	playmoncry SPECIES_SUDOWOODO, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_SUDOWOODO
@@ -135,12 +134,9 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
 	setflag FLAG_DEFEATED_SUDOWOODO
 	release
 	end

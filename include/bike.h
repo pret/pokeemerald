@@ -17,11 +17,11 @@ struct BikeHistoryInputInfo
 // Player speeds
 enum
 {
-    SPEED_STANDING,
-    SPEED_NORMAL,
-    SPEED_FAST,
-    SPEED_FASTER,
-    SPEED_FASTEST,
+    BIKE_SPEED_STANDING,
+    BIKE_SPEED_NORMAL,
+    BIKE_SPEED_FAST,
+    BIKE_SPEED_FASTER,
+    BIKE_SPEED_FASTEST,
 };
 
 // mach bike transitions enum
