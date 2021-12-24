@@ -110,35 +110,35 @@ static const struct MenuAction MultichoiceList_Mechadoll1_Q1[] =
     {gTrickHouse_Mechadoll_Taillow},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll1_Q2[] = 
+static const struct MenuAction MultichoiceList_Mechadoll1_Q2[] =
 {
     {gTrickHouse_Mechadoll_Azurill},
     {gTrickHouse_Mechadoll_Lotad},
     {gTrickHouse_Mechadoll_Wingull},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll1_Q3[] = 
+static const struct MenuAction MultichoiceList_Mechadoll1_Q3[] =
 {
     {gTrickHouse_Mechadoll_Dustox},
     {gTrickHouse_Mechadoll_Zubat},
     {gTrickHouse_Mechadoll_Nincada},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll2_Q1[] = 
+static const struct MenuAction MultichoiceList_Mechadoll2_Q1[] =
 {
     {gTrickHouse_Mechadoll_Ralts},
     {gTrickHouse_Mechadoll_Zigzagoon},
     {gTrickHouse_Mechadoll_Slakoth},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll2_Q2[] = 
+static const struct MenuAction MultichoiceList_Mechadoll2_Q2[] =
 {
     {gTrickHouse_Mechadoll_Poochyena2},
     {gTrickHouse_Mechadoll_Shroomish},
     {gTrickHouse_Mechadoll_Zigzagoon2},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll2_Q3[] = 
+static const struct MenuAction MultichoiceList_Mechadoll2_Q3[] =
 {
     {gTrickHouse_Mechadoll_Poochyena3},
     {gTrickHouse_Mechadoll_Zubat2},
@@ -152,56 +152,56 @@ static const struct MenuAction MultichoiceList_Mechadoll3_Q1[] =
     {gTrickHouse_Mechadoll_SamePrice},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll3_Q2[] = 
+static const struct MenuAction MultichoiceList_Mechadoll3_Q2[] =
 {
     {gTrickHouse_Mechadoll_60Yen},
     {gTrickHouse_Mechadoll_55Yen},
     {gTrickHouse_Mechadoll_Nothing},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll3_Q3[] = 
+static const struct MenuAction MultichoiceList_Mechadoll3_Q3[] =
 {
     {gTrickHouse_Mechadoll_CostMore},
     {gTrickHouse_Mechadoll_CostLess},
     {gTrickHouse_Mechadoll_SamePrice2},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll4_Q1[] = 
+static const struct MenuAction MultichoiceList_Mechadoll4_Q1[] =
 {
     {gTrickHouse_Mechadoll_Male},
     {gTrickHouse_Mechadoll_Female},
     {gTrickHouse_Mechadoll_Neither},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll4_Q2[] = 
+static const struct MenuAction MultichoiceList_Mechadoll4_Q2[] =
 {
     {gTrickHouse_Mechadoll_ElderlyMen},
     {gTrickHouse_Mechadoll_ElderlyLadies},
     {gTrickHouse_Mechadoll_SameNumber},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll4_Q3[] = 
+static const struct MenuAction MultichoiceList_Mechadoll4_Q3[] =
 {
     {gTrickHouse_Mechadoll_None},
     {gTrickHouse_Mechadoll_One},
     {gTrickHouse_Mechadoll_Two},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll5_Q1[] = 
+static const struct MenuAction MultichoiceList_Mechadoll5_Q1[] =
 {
     {gTrickHouse_Mechadoll_Two2},
     {gTrickHouse_Mechadoll_Three},
     {gTrickHouse_Mechadoll_Four},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll5_Q2[] = 
+static const struct MenuAction MultichoiceList_Mechadoll5_Q2[] =
 {
     {gTrickHouse_Mechadoll_Six},
     {gTrickHouse_Mechadoll_Seven},
     {gTrickHouse_Mechadoll_Eight},
 };
 
-static const struct MenuAction MultichoiceList_Mechadoll5_Q3[] = 
+static const struct MenuAction MultichoiceList_Mechadoll5_Q3[] =
 {
     {gTrickHouse_Mechadoll_Six2},
     {gTrickHouse_Mechadoll_Seven2},
@@ -934,14 +934,14 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
 };
 
-static const u8 sLinkServicesMultichoiceIds[] = 
-{ 
-    MULTI_CABLE_CLUB_NO_RECORD_MIX, 
-    MULTI_WIRELESS_NO_RECORD_BERRY, 
-    MULTI_CABLE_CLUB_WITH_RECORD_MIX, 
-    MULTI_WIRELESS_NO_BERRY, 
-    MULTI_WIRELESS_NO_RECORD, 
-    MULTI_WIRELESS_ALL_SERVICES 
+static const u8 sLinkServicesMultichoiceIds[] =
+{
+    MULTI_CABLE_CLUB_NO_RECORD_MIX,
+    MULTI_WIRELESS_NO_RECORD_BERRY,
+    MULTI_CABLE_CLUB_WITH_RECORD_MIX,
+    MULTI_WIRELESS_NO_BERRY,
+    MULTI_WIRELESS_NO_RECORD,
+    MULTI_WIRELESS_ALL_SERVICES
 };
 
 static const u8 *const sPCNameStrings[] =

@@ -18,7 +18,7 @@ const u8 gRibbonDescriptionPart2_Artist[] = _("as a super sketch model.");
 const u8 gRibbonDescriptionPart1_Effort[] = _("RIBBON awarded for");
 const u8 gRibbonDescriptionPart2_Effort[] = _("being a hard worker.");
 
-const u8 *const gRibbonDescriptionPointers[][2] = 
+const u8 *const gRibbonDescriptionPointers[][2] =
 {
     [CHAMPION_RIBBON]      = {gRibbonDescriptionPart1_Champion,      gRibbonDescriptionPart2_Champion},
     [COOL_RIBBON_NORMAL]   = {gRibbonDescriptionPart1_CoolContest,   gRibbonDescriptionPart2_NormalRank},

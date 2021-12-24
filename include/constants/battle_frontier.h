@@ -17,11 +17,6 @@
 #define FACILITY_UNION_ROOM        8
 #define FACILITY_MULTI_OR_EREADER  9  // Direct Corner multi battles, multi battle with Steven, and e-Reader battles
 
-// Battle Frontier lvl modes.
-#define FRONTIER_LVL_50   0
-#define FRONTIER_LVL_OPEN 1
-#define FRONTIER_LVL_TENT 2
-
 // Battle Frontier battle modes.
 #define FRONTIER_MODE_SINGLES      0
 #define FRONTIER_MODE_DOUBLES      1
@@ -54,28 +49,28 @@
 
 // These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous
-#define RANKING_HALL_BATTLE_TOWER_SINGLES   0
-#define RANKING_HALL_BATTLE_TOWER_DOUBLES   1
-#define RANKING_HALL_BATTLE_TOWER_MULTIS    2
-#define RANKING_HALL_BATTLE_DOME            3
-#define RANKING_HALL_BATTLE_PALACE          4
-#define RANKING_HALL_BATTLE_ARENA           5
-#define RANKING_HALL_BATTLE_FACTORY         6
-#define RANKING_HALL_BATTLE_PIKE            7
-#define RANKING_HALL_BATTLE_PYRAMID         8
-#define RANKING_HALL_BATTLE_TOWER_LINK      9
+#define RANKING_HALL_TOWER_SINGLES   0
+#define RANKING_HALL_TOWER_DOUBLES   1
+#define RANKING_HALL_TOWER_MULTIS    2
+#define RANKING_HALL_DOME            3
+#define RANKING_HALL_PALACE          4
+#define RANKING_HALL_ARENA           5
+#define RANKING_HALL_FACTORY         6
+#define RANKING_HALL_PIKE            7
+#define RANKING_HALL_PYRAMID         8
+#define RANKING_HALL_TOWER_LINK      9
 
-#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES   0
-#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES   1
-#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS    2
-#define FRONTIER_MANIAC_BATTLE_TOWER_LINK      3
-#define FRONTIER_MANIAC_BATTLE_DOME            4
-#define FRONTIER_MANIAC_BATTLE_FACTORY         5
-#define FRONTIER_MANIAC_BATTLE_PALACE          6
-#define FRONTIER_MANIAC_BATTLE_ARENA           7
-#define FRONTIER_MANIAC_BATTLE_PIKE            8
-#define FRONTIER_MANIAC_BATTLE_PYRAMID         9
-#define FRONTIER_MANIAC_FACILITY_COUNT        10
+#define FRONTIER_MANIAC_TOWER_SINGLES   0
+#define FRONTIER_MANIAC_TOWER_DOUBLES   1
+#define FRONTIER_MANIAC_TOWER_MULTIS    2
+#define FRONTIER_MANIAC_TOWER_LINK      3
+#define FRONTIER_MANIAC_DOME            4
+#define FRONTIER_MANIAC_FACTORY         5
+#define FRONTIER_MANIAC_PALACE          6
+#define FRONTIER_MANIAC_ARENA           7
+#define FRONTIER_MANIAC_PIKE            8
+#define FRONTIER_MANIAC_PYRAMID         9
+#define FRONTIER_MANIAC_FACILITY_COUNT  10
 
 #define FRONTIER_MANIAC_MESSAGE_COUNT 3
 

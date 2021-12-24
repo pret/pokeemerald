@@ -64,7 +64,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterRoom::
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit
 	waitmovement 0
 	copyobjectxytoperm LOCALID_ATTENDANT
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -78,7 +78,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterRoom:
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant::
@@ -87,8 +87,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant::
 	message BattleFrontier_BattleTowerMultiPartnerRoom_Text_QuitLookingForPartner
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner2, MSGBOX_DEFAULT
 	release
 	end
@@ -101,14 +100,14 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge::
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterElevator::
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 10, 1
 	waitdooranim
 	call BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevator
 	closedoor 10, 1
 	waitdooranim
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 1, 6
 	waitstate
 	releaseall
 	end
@@ -183,13 +182,11 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner::
 	waitmessage
 	waitbuttonpress
 	closemessage
-	compare VAR_FACING, DIR_SOUTH
-	call_if_ne BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth
+	call_if_ne VAR_FACING, DIR_SOUTH, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit
+	call_if_eq VAR_FACING, DIR_SOUTH, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER
-	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 255, 10, 3
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 10, 3
 	waitstate
 	release
 	end

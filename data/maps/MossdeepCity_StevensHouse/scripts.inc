@@ -12,12 +12,11 @@ MossdeepCity_StevensHouse_OnLoad:
 	end
 
 MossdeepCity_StevensHouse_EventScript_HideStevensNote::
-	setmetatile 6, 4, METATILE_GenericBuilding_TableEdge, 1
+	setmetatile 6, 4, METATILE_GenericBuilding_TableEdge, TRUE
 	return
 
 MossdeepCity_StevensHouse_OnTransition:
-	compare VAR_STEVENS_HOUSE_STATE, 2
-	call_if_eq MossdeepCity_StevensHouse_EventScript_SetStevenPos
+	call_if_eq VAR_STEVENS_HOUSE_STATE, 2, MossdeepCity_StevensHouse_EventScript_SetStevenPos
 	end
 
 MossdeepCity_StevensHouse_EventScript_SetStevenPos::
@@ -31,7 +30,7 @@ MossdeepCity_StevensHouse_OnFrame:
 
 MossdeepCity_StevensHouse_EventScript_StevenGivesDive::
 	lockall
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
@@ -62,7 +61,7 @@ MossdeepCity_StevensHouse_Movement_StevenApproachPlayer:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 MossdeepCity_StevensHouse_Movement_StevenReturn:
@@ -70,14 +69,13 @@ MossdeepCity_StevensHouse_Movement_StevenReturn:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 MossdeepCity_StevensHouse_EventScript_BeldumPokeball::
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MossdeepCity_StevensHouse_EventScript_LeaveBeldum
+	goto_if_eq VAR_RESULT, NO, MossdeepCity_StevensHouse_EventScript_LeaveBeldum
 	goto MossdeepCity_StevensHouse_EventScript_GiveBeldum
 	end
 
@@ -89,18 +87,15 @@ MossdeepCity_StevensHouse_EventScript_LeaveBeldum::
 MossdeepCity_StevensHouse_EventScript_GiveBeldum::
 	setvar VAR_TEMP_1, SPECIES_BELDUM
 	givemon SPECIES_BELDUM, 5, ITEM_NONE
-	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_StevensHouse_EventScript_SendBeldumParty
-	compare VAR_RESULT, 1
-	goto_if_eq MossdeepCity_StevensHouse_EventScript_SendBeldumPC
+	goto_if_eq VAR_RESULT, 0, MossdeepCity_StevensHouse_EventScript_SendBeldumParty
+	goto_if_eq VAR_RESULT, 1, MossdeepCity_StevensHouse_EventScript_SendBeldumPC
 	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 MossdeepCity_StevensHouse_EventScript_SendBeldumParty::
 	call MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MossdeepCity_StevensHouse_EventScript_ReceivedBeldum
+	goto_if_eq VAR_RESULT, NO, MossdeepCity_StevensHouse_EventScript_ReceivedBeldum
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
 	goto MossdeepCity_StevensHouse_EventScript_ReceivedBeldum
@@ -109,8 +104,7 @@ MossdeepCity_StevensHouse_EventScript_SendBeldumParty::
 MossdeepCity_StevensHouse_EventScript_SendBeldumPC::
 	call MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC
+	goto_if_eq VAR_RESULT, NO, MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon
 	goto MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC
 	end
@@ -121,13 +115,13 @@ MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC::
 	end
 
 MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare::
-	bufferspeciesname 1, SPECIES_BELDUM
+	bufferspeciesname STR_VAR_2, SPECIES_BELDUM
 	removeobject LOCALID_BELDUM_BALL
 	playfanfare MUS_OBTAIN_ITEM
 	message MossdeepCity_StevensHouse_Text_ObtainedBeldum
 	waitmessage
 	waitfanfare
-	bufferspeciesname 0, SPECIES_BELDUM
+	bufferspeciesname STR_VAR_1, SPECIES_BELDUM
 	return
 
 MossdeepCity_StevensHouse_EventScript_ReceivedBeldum::
