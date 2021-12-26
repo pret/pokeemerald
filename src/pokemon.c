@@ -3940,6 +3940,8 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     {
         if (gLevelUpLearnsets[species][i].level > level)
             break;
+        if (gLevelUpLearnsets[species][i].level == 0)
+            continue;
         if (GiveMoveToBoxMon(boxMon, gLevelUpLearnsets[species][i].move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, gLevelUpLearnsets[species][i].move);
     }
