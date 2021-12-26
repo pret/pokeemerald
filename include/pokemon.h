@@ -456,5 +456,6 @@ u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
 u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg);
+u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 
 #endif // GUARD_POKEMON_H
