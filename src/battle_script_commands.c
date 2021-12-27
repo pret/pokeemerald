@@ -5179,22 +5179,23 @@ static void Cmd_moveend(void)
             {
                 if (gBattleStruct->skyDropTargets[i] == 0xFE)
                 {
+                    u8 targetId;
                     // Find the battler id of the Pokemon that was held by Sky Drop
-                    for (arg1 = 0; arg1 < gBattlersCount; arg1++)
+                    for (targetId = 0; targetId < gBattlersCount; targetId++)
                     {
-                        if (gBattleStruct->skyDropTargets[arg1] == i)
+                        if (gBattleStruct->skyDropTargets[targetId] == i)
                             break;
                     }
                     
                     // Set gBattlerAttacker to the battler id of the target
-                    gBattlerAttacker = arg1;
+                    gBattlerAttacker = targetId;
                     
                     // Jump to "confused due to fatigue" script
                     gBattlescriptCurrInstr = BattleScript_ThrashConfuses;
                     
                     // Clear skyDropTargets data
                     gBattleStruct->skyDropTargets[i] = 0xFF;
-                    gBattleStruct->skyDropTargets[arg1] = 0xFF;
+                    gBattleStruct->skyDropTargets[targetId] = 0xFF;
                     return;
                 }
             }
