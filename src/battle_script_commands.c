@@ -4190,12 +4190,21 @@ static void Cmd_unknown_24(void)
     if (gBattleControllerExecFlags)
         return;
 
-    #ifdef B_MULTI_BATTLE_WHITEOUT >= GEN_4
-    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER) && NoAliveMonsForPlayerAndPartner())
+#ifdef B_MULTI_BATTLE_WHITEOUT >= GEN_4
+    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
+    {
+        if (NoAliveMonsForPlayerAndPartner())
+            gBattleOutcome |= B_OUTCOME_LOST;
+    }
+    else
+    {
+        if (NoAliveMonsForPlayer())
+            gBattleOutcome |= B_OUTCOME_LOST;
+    }
+#else
+    if (NoAliveMonsForPlayer())
         gBattleOutcome |= B_OUTCOME_LOST;
-    #endif
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)) && NoAliveMonsForPlayer())
-        gBattleOutcome |= B_OUTCOME_LOST;
+#endif
     if (NoAliveMonsForOpponent())
         gBattleOutcome |= B_OUTCOME_WON;
 
