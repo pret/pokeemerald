@@ -435,15 +435,15 @@ const u32 gBattleAnimSpriteGfx_BlueFlames2[] = INCBIN_U32("graphics/battle_anims
 // Contest
 const u32 gJPContestGfx1[] = INCBIN_U32("graphics/contest/japanese/composite_1.4bpp.lz");
 const u32 gJPContestPal[] = INCBIN_U32("graphics/contest/japanese/palette.gbapal.lz");
-const u32 gJPContestTilemap1[] = INCBIN_U32("graphics/contest/japanese/tilemap_1.bin.lz");
-const u32 gJPContestTilemap2[] = INCBIN_U32("graphics/contest/japanese/tilemap_2.bin.lz");
+const u32 gJPContestBgTilemap[] = INCBIN_U32("graphics/contest/japanese/bg.bin.lz");
+const u32 gJPContestWindowsTilemap[] = INCBIN_U32("graphics/contest/japanese/windows.bin.lz");
 const u32 gJPContestGfx2[] = INCBIN_U32("graphics/contest/japanese/composite_2.4bpp.lz");
 
 const u32 gContestInterfaceAudiencePalette[] = INCBIN_U32("graphics/contest/interface_audience.gbapal.lz");
 const u32 gContestAudienceTilemap[] = INCBIN_U32("graphics/contest/audience.bin.lz");
 const u32 gContestInterfaceTilemap[] = INCBIN_U32("graphics/contest/interface.bin.lz");
-const u32 gContestUnusedTilemap1[] = INCBIN_U32("graphics/contest/unused_tilemap_1.bin.lz");
-const u32 gContestUnusedTilemap2[] = INCBIN_U32("graphics/contest/unused_tilemap_2.bin.lz");
+const u32 gJPContestInterfaceTilemap[] = INCBIN_U32("graphics/contest/japanese/interface.bin.lz");
+const u32 gJPContestAudienceTilemap[] = INCBIN_U32("graphics/contest/japanese/audience.bin.lz");
 const u32 gContestCurtainTilemap[] = INCBIN_U32("graphics/contest/curtain.bin.lz");
 
 const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/interface.4bpp.lz");
