@@ -34,7 +34,6 @@
 #include "constants/battle_dome.h"
 #include "constants/frontier_util.h"
 #include "constants/moves.h"
-#include "constants/pokemon.h"
 #include "constants/trainers.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"

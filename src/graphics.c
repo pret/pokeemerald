@@ -435,15 +435,15 @@ const u32 gBattleAnimSpriteGfx_BlueFlames2[] = INCBIN_U32("graphics/battle_anims
 // Contest
 const u32 gJPContestGfx1[] = INCBIN_U32("graphics/contest/japanese/composite_1.4bpp.lz");
 const u32 gJPContestPal[] = INCBIN_U32("graphics/contest/japanese/palette.gbapal.lz");
-const u32 gJPContestTilemap1[] = INCBIN_U32("graphics/contest/japanese/tilemap_1.bin.lz");
-const u32 gJPContestTilemap2[] = INCBIN_U32("graphics/contest/japanese/tilemap_2.bin.lz");
+const u32 gJPContestBgTilemap[] = INCBIN_U32("graphics/contest/japanese/bg.bin.lz");
+const u32 gJPContestWindowsTilemap[] = INCBIN_U32("graphics/contest/japanese/windows.bin.lz");
 const u32 gJPContestGfx2[] = INCBIN_U32("graphics/contest/japanese/composite_2.4bpp.lz");
 
 const u32 gContestInterfaceAudiencePalette[] = INCBIN_U32("graphics/contest/interface_audience.gbapal.lz");
 const u32 gContestAudienceTilemap[] = INCBIN_U32("graphics/contest/audience.bin.lz");
 const u32 gContestInterfaceTilemap[] = INCBIN_U32("graphics/contest/interface.bin.lz");
-const u32 gContestUnusedTilemap1[] = INCBIN_U32("graphics/contest/unused_tilemap_1.bin.lz");
-const u32 gContestUnusedTilemap2[] = INCBIN_U32("graphics/contest/unused_tilemap_2.bin.lz");
+const u32 gJPContestInterfaceTilemap[] = INCBIN_U32("graphics/contest/japanese/interface.bin.lz");
+const u32 gJPContestAudienceTilemap[] = INCBIN_U32("graphics/contest/japanese/audience.bin.lz");
 const u32 gContestCurtainTilemap[] = INCBIN_U32("graphics/contest/curtain.bin.lz");
 
 const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/interface.4bpp.lz");
@@ -1505,12 +1505,12 @@ const u16 gMonIconPalettes[][16] =
 const u16 gTitleScreenBgPalettes[]         = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
                                                         "graphics/title_screen/rayquaza_and_clouds.gbapal");
 const u16 gTitleScreenEmeraldVersionPal[]  = INCBIN_U16("graphics/title_screen/emerald_version.gbapal");
-const u32 gTitleScreenCloudsTilemap[]      = INCBIN_U32("graphics/title_screen/title_screen1.bin.lz");
+const u32 gTitleScreenCloudsTilemap[]      = INCBIN_U32("graphics/title_screen/clouds.bin.lz");
 const u32 gTitleScreenPokemonLogoGfx[]     = INCBIN_U32("graphics/title_screen/pokemon_logo.8bpp.lz");
 const u32 gTitleScreenEmeraldVersionGfx[]  = INCBIN_U32("graphics/title_screen/emerald_version.8bpp.lz");
 const u16 gTitleScreenPressStartPal[]      = INCBIN_U16("graphics/title_screen/press_start.gbapal");
 const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/press_start.4bpp.lz");
-const u32 gTitleScreenPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen/title_screen2.bin.lz");
+const u32 gTitleScreenPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen/pokemon_logo.bin.lz");
 
 // size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 const u16 gFrontierPassBg_Pal[][16]                      = INCBIN_U16("graphics/frontier_pass/bg.gbapal");

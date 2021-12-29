@@ -65,7 +65,6 @@
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
-#include "constants/easy_chat.h"
 #include "constants/field_effects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
