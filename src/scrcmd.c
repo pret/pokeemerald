@@ -1005,7 +1005,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
 
     ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
     sMovingNpcId = localId;
-    if (localId != OBJ_EVENT_ID_FOLLOWER) { // Force follower into pokeball
+    if (localId != OBJ_EVENT_ID_FOLLOWER && !FlagGet(FLAG_SAFE_FOLLOWER_MOVEMENT)) { // Force follower into pokeball
       objEvent = GetFollowerObject();
       // return early if no follower or in shadowing state
       if (objEvent == NULL || gSprites[objEvent->spriteId].data[1] == 0) {
@@ -1262,6 +1262,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 {
     u8 playerObjectId;
     struct ObjectEvent *followerObject = GetFollowerObject();
+    FlagClear(FLAG_SAFE_FOLLOWER_MOVEMENT);
     // Release follower from movement iff it exists and is in the shadowing state
     if (followerObject && gSprites[followerObject->spriteId].data[1] == 0)
         ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
@@ -1278,6 +1279,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 {
     u8 playerObjectId;
     struct ObjectEvent *followerObject = GetFollowerObject();
+    FlagClear(FLAG_SAFE_FOLLOWER_MOVEMENT);
     // Release follower from movement iff it exists and is in the shadowing state
     if (followerObject && gSprites[followerObject->spriteId].data[1] == 0)
         ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
