@@ -6311,26 +6311,23 @@ bool8 MovementAction_WalkInPlaceSlowDown_Step0(struct ObjectEvent *objectEvent, 
 
 // Copy and load objectEvent's palette, but set all opaque colors to white
 static u8 LoadWhiteFlashPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-
-  u8 i;
   u16 paletteData[16];
   struct SpritePalette dynamicPalette = {.tag = OBJ_EVENT_PAL_TAG_NONE-1, .data = paletteData};  // TODO: Use a proper palette tag here
-  for (i=1; i<16; i++) {
-    paletteData[i] = 0xFFFF;
-  }
+  CpuFill16(0xFFFF, &paletteData[1], 30);
   return UpdateSpritePalette(&dynamicPalette, sprite);
 }
 
 bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-
+    u8 direction = gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
     objectEvent->invisible = FALSE;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) { // If player is dashing, the pokemon must come out faster
-      InitMoveInPlace(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_NORTH), 8);
+      InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFastestAnimNum(direction) + 4, 8);
       sprite->data[6] = 0; // fast speed
     } else {
-      InitMoveInPlace(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_SOUTH), 16);
+      InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFastestAnimNum(direction), 16);
       sprite->data[6] = 1; // slow speed
     }
+    sprite->data[6] |= (direction == DIR_EAST ? 1 : 0) << 4;
     ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
     return MovementAction_ExitPokeball_Step1(objectEvent, sprite);
 }
@@ -6341,6 +6338,15 @@ static const union AffineAnimCmd sAffineAnim_PokeballExit[] =
     AFFINEANIMCMD_FRAME(0x80, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0xC0, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_PokeballExitEast[] = // sprite is h-flipped when east
+{
+    AFFINEANIMCMD_FRAME(0xFFC0, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFF80, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFF40, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
@@ -6365,6 +6371,7 @@ static const union AffineAnimCmd sAffineAnim_PokeballEnterEast[] = // sprtie is 
 static const union AffineAnimCmd *const sAffineAnims_PokeballFollower[] =
 {
     sAffineAnim_PokeballExit,
+    sAffineAnim_PokeballExitEast,
     sAffineAnim_PokeballEnter,
     sAffineAnim_PokeballEnterEast,
 };
@@ -6375,7 +6382,8 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
     sprite->data[3]--;
     if (sprite->data[3] == 0)
     {
-        sprite->data[2] = 2;
+        sprite->sActionFuncId = 2;
+        sprite->animCmdIndex = 0;
         sprite->animPaused = TRUE;
         return TRUE;
     // Set graphics, palette, and affine animation
@@ -6386,7 +6394,7 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
       sprite->affineAnims = sAffineAnims_PokeballFollower;
       sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
       InitSpriteAffineAnim(sprite);
-      StartSpriteAffineAnim(sprite, 0);
+      StartSpriteAffineAnim(sprite, sprite->data[6] >> 4);
     // Restore original palette & disable affine
     } else if ((duration == 0 && sprite->data[3] == 1) || (duration == 1 && sprite->data[3] == 3)) {
       sprite->affineAnimEnded = TRUE;
@@ -6400,7 +6408,7 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
 bool8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     u8 direction = objectEvent->facingDirection;
     InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction), 16);
-    sprite->data[6] = direction == DIR_EAST ? 2 : 1; // affine animation number
+    sprite->data[6] = direction == DIR_EAST ? 3 : 2; // affine animation number
     return MovementAction_EnterPokeball_Step1(objectEvent, sprite);
 }
 

@@ -370,7 +370,7 @@ static const union AnimCmd sAnim_GoFasterSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_ExitPokeball[] =
+static const union AnimCmd sAnim_ExitPokeballSouth[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(0, 3),
@@ -379,7 +379,46 @@ static const union AnimCmd sAnim_ExitPokeball[] =
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_FRAME(4, 1),
-    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_ExitPokeballNorth[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_ExitPokeballWest[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_ExitPokeballEast[] =
+{
+    ANIMCMD_FRAME(0, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -467,15 +506,51 @@ static const union AnimCmd sAnim_GoFastestSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_ExitPokeballFast[] =
+static const union AnimCmd sAnim_ExitPokeballFastSouth[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_ExitPokeballFastNorth[] =
+{
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_ExitPokeballFastWest[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(4, 2),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_ExitPokeballFastEast[] =
+{
+    ANIMCMD_FRAME(0, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(4, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 1, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -1025,10 +1100,15 @@ static const union AnimCmd *const sAnimTable_Following[] = {
     sAnim_EnterNorth,
     sAnim_EnterWest,
     sAnim_EnterEast,
-    sAnim_ExitPokeball,
-    sAnim_ExitPokeballFast,
-    sAnim_ExitPokeball,
-    sAnim_ExitPokeball,
+    sAnim_ExitPokeballSouth,
+    sAnim_ExitPokeballNorth,
+    sAnim_ExitPokeballWest,
+    sAnim_ExitPokeballEast,
+    // ANIM_STD_COUNT =
+    sAnim_ExitPokeballFastSouth,
+    sAnim_ExitPokeballFastNorth,
+    sAnim_ExitPokeballFastWest,
+    sAnim_ExitPokeballFastEast,
 };
 
 static const union AnimCmd *const sAnimTable_HoOh[] = {
