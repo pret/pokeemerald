@@ -2,22 +2,28 @@
 #define GUARD_EVENT_SCRIPTS_H
 
 extern const u8 EventScript_Follower[];
-extern const u8 EventScript_FollowerUnhappyToBeWet[];
-extern const u8 EventScript_FollowerSplashesAbout[];
-extern const u8 EventScript_FollowerLovesYou[];
-extern const u8 EventScript_FollowerUnhappyFace[];
-extern const u8 EventScript_FollowerHappyRain[];
-extern const u8 EventScript_FollowerMetLocation[];
 extern const u8 EventScript_FollowerEnd[];
-extern const u8 EventScript_FollowerSkeptical[];
-extern const u8 EventScript_FollowerAppraising[];
-extern const u8 EventScript_FollowerHappyWalk[];
-extern const u8 EventScript_FollowerAboutToFall[];
-extern const u8 EventScript_FollowerTryingToKeepUp[];
-extern const u8 EventScript_FollowerIsShivering[];
-extern const u8 EventScript_FollowerBurnPainful[];
 extern const u8 EventScript_FollowerGeneric[];
-extern const u8 EventScript_FollowerLove[];
+extern const u8 EventScript_FollowerLovesYou[];
+
+extern const u8 EventScript_FollowerIsShivering[];
+extern const u8 EventScript_FollowerNostalgia[];
+extern const u8 EventScript_FollowerHopping[];
+extern const u8 EventScript_FollowerJumpOnPlayer[];
+extern const u8 EventScript_FollowerCuddling[];
+extern const u8 EventScript_FollowerShiverCuddling[];
+extern const u8 EventScript_FollowerGetCloser[];
+extern const u8 EventScript_FollowerPokingPlayer[];
+extern const u8 EventScript_FollowerLookAround[];
+extern const u8 EventScript_FollowerLookAway[];
+extern const u8 EventScript_FollowerLookAwayBark[];
+extern const u8 EventScript_FollowerLookAwayPoke[];
+extern const u8 EventScript_FollowerPokeGround[];
+extern const u8 EventScript_FollowerStartled[];
+extern const u8 EventScript_FollowerFastHopping[];
+extern const u8 EventScript_FollowerDizzy[];
+extern const u8 EventScript_FollowerLookAroundScared[];
+extern const u8 EventScript_FollowerDance[];
 extern const u8 EnterPokeballMovement[];
 
 extern const u8 EventScript_TestSignpostMsg[];

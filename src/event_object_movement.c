@@ -1855,7 +1855,6 @@ bool8 ScrFunc_emote(struct ScriptContext *ctx) {
 }
 
 struct SpecialEmote { // Used for storing conditional emotes
-  const u8 * script;
   u16 index;
   u8 emotion;
 };
@@ -1864,7 +1863,7 @@ struct SpecialEmote { // Used for storing conditional emotes
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
   u16 species;
-  u32 behavior;
+  s32 multi;
   s16 health_percent;
   u8 friendship;
   struct SpecialEmote cond_emotes[16] = {0};
@@ -1880,16 +1879,9 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   // If map is not flyable, set the script to jump past the fly check TODO: Should followers ask to fly?
   if (TRUE || !Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType))
     ScriptJump(ctx, EventScript_FollowerEnd);
-  behavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+  multi = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
   species = GetMonData(mon, MON_DATA_SPECIES);
   friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-  // // 1. Puddle splash or wet feet
-  // if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
-  //   if (SpeciesHasType(species, TYPE_FIRE))
-  //     message_choices[n_choices++] = EventScript_FollowerUnhappyToBeWet;
-  //   else if (SpeciesToGraphicsInfo(species, 0)->tracks) // if follower is grounded
-  //     message_choices[n_choices++] = EventScript_FollowerSplashesAbout;
-  // }
   // Happy weights
   emotion_weight[FOLLOWER_EMOTION_HAPPY] = 10;
   if (friendship > 170)
@@ -1924,10 +1916,11 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_HAPPY, .index=31};
   else if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
     if (SpeciesHasType(species, TYPE_FIRE)) {
-      emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
-      cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=3};
-      cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_UPSET, .index=3};
-    }
+        emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
+        cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=3};
+        cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_UPSET, .index=3};
+    } else
+        cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_MUSIC, .index=14};
     cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SURPRISE, .index=20};
   }
   // Health & status-related
@@ -1946,26 +1939,20 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   if (mon->status & 0x8) // STATUS1_POISON
     emotion = FOLLOWER_EMOTION_POISONED;
   ObjectEventEmote(objEvent, emotion);
+  multi = Random() % followerBasicMessages[emotion].length;
   if (Random() & 1) { // With 50% chance, select special message using reservoir sampling
     u8 i, j = 1;
     struct SpecialEmote *choice = 0;
     for (i = 0; i < n_choices; i++) {
-      if (cond_emotes[i].emotion == emotion) {
-        if (Random() < 0x10000 / (j++)) // Replace item with 1/j chance
-          choice = &cond_emotes[i];
-      }
+      if (cond_emotes[i].emotion == emotion && (Random() < 0x10000 / (j++)))  // Replace item with 1/j chance
+        choice = &cond_emotes[i];
     }
-    if (choice) { // Only continue if a script was actually chosen
-      ctx->data[0] = (u32) followerBasicMessages[emotion].messages[choice->index];
-      if (choice->script)
-        ScriptCall(ctx, choice->script);
-      else
-        ScriptCall(ctx, followerBasicMessages[emotion].script);
-      return FALSE;
-    }
+    if (choice)
+        multi = choice->index;
   }
-  ctx->data[0] = (u32) followerBasicMessages[emotion].messages[Random() % followerBasicMessages[emotion].length];
-  ScriptCall(ctx, followerBasicMessages[emotion].script);
+  ctx->data[0] = (u32) followerBasicMessages[emotion].messages[multi].text; // Load message text
+  ScriptCall(ctx, followerBasicMessages[emotion].messages[multi].script ?
+      followerBasicMessages[emotion].messages[multi].script : followerBasicMessages[emotion].script);
   return FALSE;
 }
 
