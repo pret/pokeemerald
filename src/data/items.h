@@ -8655,17 +8655,6 @@ const struct Item gItems[] =
 
 // Battle Mechanic Key Items
 
-    [ITEM_KEY_STONE] = // Todo
-    {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
-
     [ITEM_MEGA_RING] = // Todo (Replaces ITEM_MEGA_BRACELET)
     {
         .name = _("Mega Bracelet"),

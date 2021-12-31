@@ -3315,9 +3315,6 @@ static const u8 sReinsOfUnityDesc[] = _( // Todo
     "?????");
 
 // Battle Mechanic Key Items
-static const u8 sKeyStoneDesc[] = _( // Todo
-    "?????");
-
 static const u8 sMegaRingDesc[] = _(
     "Enables {PKMN} holding\n"
     "their Mega Stone to\n"

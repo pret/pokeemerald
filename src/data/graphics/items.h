@@ -1870,9 +1870,6 @@ const u32 gItemIconPalette_Gracidea[] = INCBIN_U32("graphics/items/icon_palettes
 
 // Battle Mechanic Key Items
 
-//const u32 gItemIcon_KeyStone[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
-//const u32 gItemIconPalette_KeyStone[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
-
 //const u32 gItemIcon_MegaRing[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
 //const u32 gItemIconPalette_MegaRing[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
 
