@@ -2592,7 +2592,7 @@ static void ScrollableMultichoice_ProcessInput(u8 taskId)
         }
         else if (input == task->tNumItems - 1)
         {
-            // if selected option was the last one (Exit)
+            // Selected option was the last one (Exit)
             CloseScrollableMultichoice(taskId);
         }
         else
