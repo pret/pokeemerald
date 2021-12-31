@@ -749,9 +749,7 @@ const u32 *const gItemIconTable[][2] =
     // Battle Mechanic Key Items
     [ITEM_KEY_STONE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     [ITEM_MEGA_RING] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
-    //[ITEM_MEGA_BRACELET] = {gItemIcon_MegaBracelet, gItemIconPalette_MegaBracelet}, // Remove
     [ITEM_Z_POWER_RING] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
-    //[ITEM_Z_RING] = {gItemIcon_ZRing, gItemIconPalette_ZRing}, // Remove
     [ITEM_DYNAMAX_BAND] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     // Misc. Key Items
     [ITEM_BICYCLE] = {gItemIcon_Bicycle, gItemIconPalette_Bicycle},
