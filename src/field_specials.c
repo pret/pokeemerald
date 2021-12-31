@@ -324,7 +324,8 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
             *mapNum = MAP_NUM(ROUTE132);
             *x = 65 - *varCruiseStepCount;
         }
-        else if (*varCruiseStepCount < 146) {
+        else if (*varCruiseStepCount < 146)
+        {
             *mapNum = MAP_NUM(ROUTE133);
             *x = 145 - *varCruiseStepCount;
         }
