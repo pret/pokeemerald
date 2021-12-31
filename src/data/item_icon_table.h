@@ -316,7 +316,6 @@ const u32 *const gItemIconTable[][2] =
     // Colored Orbs
     [ITEM_RED_ORB] = {gItemIcon_RedOrb, gItemIconPalette_RedOrb},
     [ITEM_BLUE_ORB] = {gItemIcon_BlueOrb, gItemIconPalette_BlueOrb},
-    [ITEM_JADE_ORB] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // Todo
     // Mega Stones
     [ITEM_VENUSAURITE] = {gItemIcon_Venusaurite, gItemIconPalette_Venusaurite},
     [ITEM_CHARIZARDITE_X] = {gItemIcon_CharizarditeX, gItemIconPalette_CharizarditeX},

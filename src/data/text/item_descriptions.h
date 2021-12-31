@@ -1366,9 +1366,6 @@ static const u8 sBlueOrbDesc[] = _(
     "said to contain an\n"
     "ancient power.");
 
-static const u8 sJadeOrbDesc[] = _( // Todo
-    "?????");
-
 // Mega Stones
 static const u8 sVenusauriteDesc[] = _(
     "This stone enables\n"
