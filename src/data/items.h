@@ -8739,7 +8739,7 @@ const struct Item gItems[] =
         .itemId = ITEM_KEY_STONE,
         .price = 0,
         .description = sKeyStoneDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -8774,7 +8774,7 @@ const struct Item gItems[] =
         .itemId = ITEM_DYNAMAX_BAND,
         .price = 0,
         .description = sDynamaxBandDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -8931,7 +8931,7 @@ const struct Item gItems[] =
 
     [ITEM_POKEMON_BOX_LINK] =
     {
-        .name = _("{PKMN} BOX LINK"),
+        .name = _("{PKMN} Box Link"),
         .itemId = ITEM_POKEMON_BOX_LINK,
         .price = 0,
         .description = sPokemonBoxLinkDesc,

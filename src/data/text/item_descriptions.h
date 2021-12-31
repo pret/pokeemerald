@@ -430,108 +430,108 @@ static const u8 sAbilityPatchDesc[] = _(
 
 // Mints
 static const u8 sLonelyMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Attack, but"
+    "Can be smelled. It\n"
+    "ups Attack, but\n"
     "reduces Defense.");
 
 static const u8 sAdamantMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Attack, but"
+    "Can be smelled. It\n"
+    "ups Attack, but\n"
     "reduces Sp. Atk.");
 
 static const u8 sNaughtyMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Attack, but"
+    "Can be smelled. It\n"
+    "ups Attack, but\n"
     "reduces Sp. Def.");
 
 static const u8 sBraveMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Attack, but"
+    "Can be smelled. It\n"
+    "ups Attack, but\n"
     "reduces Speed.");
 
 static const u8 sBoldMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Defense, but"
+    "Can be smelled. It\n"
+    "ups Defense, but\n"
     "reduces Attack.");
 
 static const u8 sImpishMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Defense, but"
+    "Can be smelled. It\n"
+    "ups Defense, but\n"
     "reduces Sp. Atk.");
 
 static const u8 sLaxMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Defense, but"
+    "Can be smelled. It\n"
+    "ups Defense, but\n"
     "reduces Sp. Def.");
 
 static const u8 sRelaxedMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Defense, but"
+    "Can be smelled. It\n"
+    "ups Defense, but\n"
     "reduces Speed.");
 
 static const u8 sModestMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Atk, but"
+    "Can be smelled. It\n"
+    "ups Sp. Atk, but\n"
     "reduces Attack.");
 
 static const u8 sMildMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Atk, but"
+    "Can be smelled. It\n"
+    "ups Sp. Atk, but\n"
     "reduces Defense.");
 
 static const u8 sRashMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Atk, but"
+    "Can be smelled. It\n"
+    "ups Sp. Atk, but\n"
     "reduces Sp. Def.");
 
 static const u8 sQuietMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Atk, but"
+    "Can be smelled. It\n"
+    "ups Sp. Atk, but\n"
     "reduces Speed.");
 
 static const u8 sCalmMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Def, but"
+    "Can be smelled. It\n"
+    "ups Sp. Def, but\n"
     "reduces Attack.");
 
 static const u8 sGentleMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Def, but"
+    "Can be smelled. It\n"
+    "ups Sp. Def, but\n"
     "reduces Defense.");
 
 static const u8 sCarefulMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Def, but"
+    "Can be smelled. It\n"
+    "ups Sp. Def, but\n"
     "reduces Sp. Atk.");
 
 static const u8 sSassyMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Sp. Def, but"
+    "Can be smelled. It\n"
+    "ups Sp. Def, but\n"
     "reduces Speed.");
 
 static const u8 sTimidMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Speed, but"
+    "Can be smelled. It\n"
+    "ups Speed, but\n"
     "reduces Attack.");
 
 static const u8 sHastyMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Speed, but"
+    "Can be smelled. It\n"
+    "ups Speed, but\n"
     "reduces Defense.");
 
 static const u8 sJollyMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Speed, but"
+    "Can be smelled. It\n"
+    "ups Speed, but\n"
     "reduces Sp. Atk.");
 
 static const u8 sNaiveMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Speed, but"
+    "Can be smelled. It\n"
+    "ups Speed, but\n"
     "reduces Sp. Def.");
 
 static const u8 sSeriousMintDesc[] = _(
-    "Can be smelled. It"
-    "ups Speed, but"
+    "Can be smelled. It\n"
+    "ups Speed, but\n"
     "reduces Attack.");
 
 // Candy
