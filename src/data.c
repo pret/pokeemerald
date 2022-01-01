@@ -302,25 +302,6 @@ const union AnimCmd *const gAnims_MonPic[] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
-const bool8 SpeciesHasGenderDifference[NUM_SPECIES] =
-{
-    [SPECIES_EEVEE] = TRUE,
-    [SPECIES_STARLY] = TRUE,
-    [SPECIES_STARAVIA] = TRUE,
-    [SPECIES_STARAPTOR] = TRUE,
-    [SPECIES_BIDOOF] = TRUE,
-    [SPECIES_KRICKETOT] = TRUE,
-    [SPECIES_KRICKETUNE] = TRUE,
-    [SPECIES_SHINX] = TRUE,
-    [SPECIES_COMBEE] = TRUE,
-    [SPECIES_HIPPOPOTAS] = TRUE,
-    [SPECIES_HIPPOWDON] = TRUE,
-    [SPECIES_UNFEZANT] = TRUE,
-    [SPECIES_FRILLISH] = TRUE,
-    [SPECIES_JELLICENT] = TRUE,
-    [SPECIES_PYROAR] = TRUE,
-};
-
 #include "data/pokemon_graphics/front_pic_coordinates.h"
 #include "data/pokemon_graphics/back_pic_coordinates.h"
 
