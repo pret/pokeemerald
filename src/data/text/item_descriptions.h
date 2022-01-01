@@ -3467,14 +3467,14 @@ static const u8 sShinyCharmDesc[] = _(
     "of Shiny Pokémon.");
 
 static const u8 sCatchingCharmDesc[] = _(
-    "This charm raises\n"
+    "A charm that raises\n"
     "the chance of\n"
     "Critical Captures.");
 
 static const u8 sExpCharmDesc[] = _(
-    "This charm raises\n"
+    "A charm that raises\n"
     "the amount of Exp.\n"
-    "obtained.");
+    "earned in battle.");
 
 // Form-changing Key Items
 static const u8 sRotomCatalogDesc[] = _(
