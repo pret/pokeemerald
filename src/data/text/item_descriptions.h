@@ -542,27 +542,27 @@ static const u8 sRareCandyDesc[] = _(
 
 static const u8 sExpCandyXSDesc[] = _(
     "Gives a very small\n"
-    "amount of exp. to\n"
+    "amount of Exp. to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandySDesc[] = _(
     "Gives a small\n"
-    "amount of exp. to\n"
+    "amount of Exp. to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandyMDesc[] = _(
     "Gives a moderate\n"
-    "amount of exp. to\n"
+    "amount of Exp. to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandyLDesc[] = _(
     "Gives a large\n"
-    "amount of exp. to\n"
+    "amount of Exp. to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandyXLDesc[] = _(
     "Gives a very large\n"
-    "amount of exp. to\n"
+    "amount of Exp. to\n"
     "a single Pokémon.");
 
 static const u8 sDynamaxCandyDesc[] = _(
@@ -612,14 +612,20 @@ static const u8 sMaxRepelDesc[] = _(
     "Pokémon for 250\n"
     "steps.");
 
-static const u8 sLureDesc[] = _( // Todo
-    "?????");
+static const u8 sLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 100 steps.");
 
-static const u8 sSuperLureDesc[] = _( // Todo
-    "?????");
+static const u8 sSuperLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 200 steps.");
 
-static const u8 sMaxLureDesc[] = _( // Todo
-    "?????");
+static const u8 sMaxLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 250 steps.");
 
 static const u8 sEscapeRopeDesc[] = _(
     "Use to escape\n"
@@ -1039,8 +1045,8 @@ static const u8 sBlackApricornDesc[] = _(
     "scribable scent.");
 
 static const u8 sWishingPieceDesc[] = _(
-    "Throw into a Poké-\n"
-    "mon Den to attract\n"
+    "Throw into a\n"
+    "{PKMN} Den to attract\n"
     "Dynamax Pokémon.");
 
 static const u8 sGalaricaTwigDesc[] = _(
@@ -3456,23 +3462,23 @@ static const u8 sOvalCharmDesc[] = _(
     "at the daycare.");
 
 static const u8 sShinyCharmDesc[] = _(
-	"A charm that will\n"
+    "A charm that will\n"
     "raise the chance\n"
     "of Shiny Pokémon.");
 
 static const u8 sCatchingCharmDesc[] = _(
-	"This charm raises\n"
-    "the chance of Crit-\n"
-    "ical Captures.");
+    "This charm raises\n"
+    "the chance of\n"
+    "Critical Captures.");
 
 static const u8 sExpCharmDesc[] = _(
-	"This charm raises\n"
-    "the amount of expe-\n"
-    "rience obtained.");
+    "This charm raises\n"
+    "the amount of Exp.\n"
+    "obtained.");
 
 // Form-changing Key Items
 static const u8 sRotomCatalogDesc[] = _(
-	"A catalog full of\n"
+    "A catalog full of\n"
     "deviced liked by\n"
     "Rotom.");
 
@@ -3488,8 +3494,8 @@ static const u8 sRevealGlassDesc[] = _(
 
 static const u8 sDNASplicersDesc[] = _(
     "Splicer that fuses\n"
-    "Kyurem and a cer-\n"
-    "tain Pokémon.");
+    "Kyurem and a\n"
+    "certain Pokémon.");
 
 static const u8 sZygardeCubeDesc[] = _(
     "An item to store\n"
@@ -3595,8 +3601,8 @@ static const u8 sBerryPouchDesc[] = _(
 
 static const u8 sPokemonBoxLinkDesc[] = _(
     "This device grants\n"
-    "access to the Poké-\n"
-    "mon Storage System.");
+    "access to the {PKMN}\n"
+    "Storage System.");
 
 static const u8 sCoinCaseDesc[] = _(
     "A case that holds\n"

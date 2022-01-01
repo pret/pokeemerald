@@ -815,7 +815,7 @@ const struct Item gItems[] =
     {
         .name = _("CasteliaCone"),
         .itemId = ITEM_CASTELIACONE,
-        .price = 400,
+        .price = 350,
         .description = sCasteliaconeDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -828,7 +828,7 @@ const struct Item gItems[] =
     {
         .name = _("LumioseGlete"),
         .itemId = ITEM_LUMIOSE_GALETTE,
-        .price = 400,
+        .price = 350,
         .description = sLumioseGaletteDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -841,7 +841,7 @@ const struct Item gItems[] =
     {
         .name = _("ShalourSable"),
         .itemId = ITEM_SHALOUR_SABLE,
-        .price = 400,
+        .price = 350,
         .description = sShalourSableDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1308,7 +1308,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy S"),
         .itemId = ITEM_EXP_CANDY_S,
-        .price = 20,
+        .price = 240,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -1319,7 +1319,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy M"),
         .itemId = ITEM_EXP_CANDY_M,
-        .price = 20,
+        .price = 1000,
         .description = sExpCandyMDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -1330,7 +1330,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy L"),
         .itemId = ITEM_EXP_CANDY_L,
-        .price = 20,
+        .price = 3000,
         .description = sExpCandyLDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -1341,7 +1341,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy XL"),
         .itemId = ITEM_EXP_CANDY_XL,
-        .price = 20,
+        .price = 10000,
         .description = sExpCandyXLDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -1464,37 +1464,43 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_Repel,
     },
 
-    [ITEM_LURE] = // Todo
+    [ITEM_LURE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("Lure"),
+        .itemId = ITEM_LURE,
+        .price = 350,
+        .holdEffectParam = 100,
+        .description = sLureDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
     },
 
-    [ITEM_SUPER_LURE] = // Todo
+    [ITEM_SUPER_LURE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("Super Lure"),
+        .itemId = ITEM_SUPER_LURE,
+        .price = 500,
+        .holdEffectParam = 200,
+        .description = sSuperLureDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
     },
 
-    [ITEM_MAX_LURE] = // Todo
+    [ITEM_MAX_LURE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("Max Lure"),
+        .itemId = ITEM_MAX_LURE,
+        .price = 700,
+        .holdEffectParam = 250,
+        .description = sMaxLureDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
     },
 
     [ITEM_ESCAPE_ROPE] =
@@ -2019,7 +2025,7 @@ const struct Item gItems[] =
     {
         .name = _("StrngeSouvnr"),
         .itemId = ITEM_STRANGE_SOUVENIR,
-        .price = 30000,
+        .price = 3000,
         .description = sStrangeSouvenirDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,

@@ -288,14 +288,10 @@ const u32 gItemIconPalette_SuperRepel[] = INCBIN_U32("graphics/items/icon_palett
 
 const u32 gItemIconPalette_MaxRepel[] = INCBIN_U32("graphics/items/icon_palettes/max_repel.gbapal.lz");
 
-const u32 gItemIcon_Lure[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
-const u32 gItemIconPalette_Lure[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
-
-const u32 gItemIcon_SuperLure[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
-const u32 gItemIconPalette_SuperLure[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
-
-const u32 gItemIcon_MaxLure[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
-const u32 gItemIconPalette_MaxLure[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
+const u32 gItemIcon_Lure[] = INCBIN_U32("graphics/items/icons/lure.4bpp.lz");
+const u32 gItemIconPalette_Lure[] = INCBIN_U32("graphics/items/icon_palettes/lure.gbapal.lz");
+const u32 gItemIconPalette_SuperLure[] = INCBIN_U32("graphics/items/icon_palettes/super_lure.gbapal.lz");
+const u32 gItemIconPalette_MaxLure[] = INCBIN_U32("graphics/items/icon_palettes/max_lure.gbapal.lz");
 
 const u32 gItemIcon_EscapeRope[] = INCBIN_U32("graphics/items/icons/escape_rope.4bpp.lz");
 const u32 gItemIconPalette_EscapeRope[] = INCBIN_U32("graphics/items/icon_palettes/escape_rope.gbapal.lz");
