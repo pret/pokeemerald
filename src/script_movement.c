@@ -66,7 +66,7 @@ static void ScriptMovement_StartMoveObjects(u8 priority)
 
     taskId = CreateTask(ScriptMovement_MoveObjects, priority);
 
-    for (i = 1; i < NUM_TASK_DATA; i++) 
+    for (i = 1; i < NUM_TASK_DATA; i++)
         gTasks[taskId].data[i] = 0xFFFF;
 }
 

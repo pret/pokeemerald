@@ -15,20 +15,14 @@ BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor::
 	waitmovement 0
 	lockall
 	palace_getcomment
-	compare VAR_RESULT, 0
-	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment1
-	compare VAR_RESULT, 1
-	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment2
-	compare VAR_RESULT, 2
-	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment3
-	compare VAR_RESULT, 3
-	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_StreakComment
-	compare VAR_RESULT, 4
-	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_LongStreakComment
+	call_if_eq VAR_RESULT, 0, BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment1
+	call_if_eq VAR_RESULT, 1, BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment2
+	call_if_eq VAR_RESULT, 2, BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment3
+	call_if_eq VAR_RESULT, 3, BattleFrontier_BattlePalaceCorridor_EventScript_StreakComment
+	call_if_eq VAR_RESULT, 4, BattleFrontier_BattlePalaceCorridor_EventScript_LongStreakComment
 	closemessage
 	frontier_get FRONTIER_DATA_LVL_MODE
-	compare VAR_RESULT, FRONTIER_LVL_OPEN
-	goto_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom
+	goto_if_eq VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkTo50BattleRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkTo50BattleRoom
 	waitmovement 0
@@ -53,7 +47,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom::
 	closedoor 10, 3
 	waitdooranim
 BattleFrontier_BattlePalaceCorridor_EventScript_WarpToBattleRoom::
-	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM, 255, 7, 4
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM, 7, 4
 	waitstate
 	end
 

@@ -18,22 +18,22 @@ Underwater_SeafloorCavern_OnLoad:
 	end
 
 Underwater_SeafloorCavern_EventScript_SetSubmarineGoneMetatiles::
-	setmetatile 5, 3, METATILE_Underwater_RockWall, 1
-	setmetatile 6, 3, METATILE_Underwater_RockWall, 1
-	setmetatile 7, 3, METATILE_Underwater_RockWall, 1
-	setmetatile 8, 3, METATILE_Underwater_RockWall, 1
-	setmetatile 5, 4, METATILE_Underwater_FloorShadow, 0
-	setmetatile 6, 4, METATILE_Underwater_FloorShadow, 0
-	setmetatile 7, 4, METATILE_Underwater_FloorShadow, 0
-	setmetatile 8, 4, METATILE_Underwater_FloorShadow, 0
-	setmetatile 5, 5, METATILE_Underwater_FloorShadow, 0
-	setmetatile 6, 5, METATILE_Underwater_FloorShadow, 0
-	setmetatile 7, 5, METATILE_Underwater_FloorShadow, 0
-	setmetatile 8, 5, METATILE_Underwater_FloorShadow, 0
+	setmetatile 5, 3, METATILE_Underwater_RockWall, TRUE
+	setmetatile 6, 3, METATILE_Underwater_RockWall, TRUE
+	setmetatile 7, 3, METATILE_Underwater_RockWall, TRUE
+	setmetatile 8, 3, METATILE_Underwater_RockWall, TRUE
+	setmetatile 5, 4, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 6, 4, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 7, 4, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 8, 4, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 5, 5, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 6, 5, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 7, 5, METATILE_Underwater_FloorShadow, FALSE
+	setmetatile 8, 5, METATILE_Underwater_FloorShadow, FALSE
 	return
 
 Underwater_SeafloorCavern_OnResume:
-	setdivewarp MAP_SEAFLOOR_CAVERN_ENTRANCE, 255, 10, 17
+	setdivewarp MAP_SEAFLOOR_CAVERN_ENTRANCE, 10, 17
 	end
 
 Underwater_SeafloorCavern_EventScript_CheckStolenSub::

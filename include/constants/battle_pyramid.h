@@ -4,9 +4,6 @@
 #define TOTAL_ROUNDS 20
 #define PICKUP_ITEMS_PER_ROUND 10
 
-#define FLOOR_WALKABLE_METATILE 0x28D
-#define FLOOR_EXIT_METATILE 0x28E
-
 #define HINT_EXIT_DIRECTION                   0
 #define HINT_REMAINING_ITEMS                  1
 #define HINT_REMAINING_TRAINERS               2
@@ -23,7 +20,7 @@
 #define OBJ_POSITIONS_UNIFORM               0
 #define OBJ_POSITIONS_IN_AND_NEAR_ENTRANCE  1
 #define OBJ_POSITIONS_IN_AND_NEAR_EXIT      2
-#define OBJ_POSITIONS_NEAR_ENTRANCE         3         
+#define OBJ_POSITIONS_NEAR_ENTRANCE         3
 #define OBJ_POSITIONS_NEAR_EXIT             4
 
 // Functions IDs for sBattlePyramidFunctions / CallBattlePyramidFunction

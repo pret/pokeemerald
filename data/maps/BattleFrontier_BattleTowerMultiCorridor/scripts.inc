@@ -14,17 +14,14 @@ BattleFrontier_BattleTowerMultiCorridor_MapScripts::
 	@ The multi partner is represented by LOCALID_PARTNER, and has the gfx id VAR_OBJ_GFX_ID_E
 
 BattleFrontier_BattleTowerMultiCorridor_OnTransition:
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx
 	end
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx::
 	tower_setpartnergfx
 	checkplayergender
-	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
 	return
 
@@ -76,8 +73,8 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor
 	waitmovement 0
 	delay 40
-	applymovement LOCALID_ATTENDANT_2, Common_Movement_WalkInPlaceFastestUp
-	applymovement LOCALID_ATTENDANT_1, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT_2, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_ATTENDANT_1, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 7, 1
 	waitdooranim
@@ -95,29 +92,25 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	end
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom::
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
 	return
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom::
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 4, 8
 	waitstate
 	return
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom::
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 4, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
 	waitstate
 	return
 
 @ Unnecessary duplicate of the above
 BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom::
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 4, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
 	waitstate
 	return
 
@@ -149,7 +142,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor:
 	walk_right
 	walk_right
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor:
@@ -160,7 +153,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor:
 	walk_left
 	walk_left
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor:

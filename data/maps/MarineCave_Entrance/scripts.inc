@@ -3,6 +3,6 @@ MarineCave_Entrance_MapScripts::
 	.byte 0
 
 MarineCave_Entrance_OnResume:
-	setdivewarp MAP_UNDERWATER_MARINE_CAVE, 255, 9, 6
+	setdivewarp MAP_UNDERWATER_MARINE_CAVE, 9, 6
 	end
 

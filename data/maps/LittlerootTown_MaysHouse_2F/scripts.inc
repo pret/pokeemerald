@@ -6,28 +6,22 @@ LittlerootTown_MaysHouse_2F_MapScripts::
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_OnTransition:
-	compare VAR_LITTLEROOT_RIVAL_STATE, 2
-	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay
-	compare VAR_LITTLEROOT_RIVAL_STATE, 3
-	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos
-	compare VAR_LITTLEROOT_INTRO_STATE, 4
-	call_if_eq PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
+	call_if_lt VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay
+	call_if_ge VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
 	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos::
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos
-	compare VAR_BIRCH_LAB_STATE, 2
-	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_Ret
+	goto_if_ge VAR_BIRCH_LAB_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_Ret
 	goto LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos
 
 LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos::
 	checkplayergender
-	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_Ret
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
-	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_Ret
+	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_2F_EventScript_Ret
+	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_Ret
 	setobjectxyperm LOCALID_RIVAL, 8, 2
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
 	return
@@ -37,8 +31,7 @@ LittlerootTown_MaysHouse_2F_EventScript_Ret::
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
+	goto_if_eq VAR_RESULT, MALE, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay::
@@ -51,14 +44,12 @@ LittlerootTown_MaysHouse_2F_OnWarp:
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckInitDecor::
 	checkplayergender
-	compare VAR_RESULT, FEMALE
-	goto_if_eq SecretBase_EventScript_InitDecorations
+	goto_if_eq VAR_RESULT, FEMALE, SecretBase_EventScript_InitDecorations
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall::
 	lockall
-	compare VAR_LITTLEROOT_RIVAL_STATE, 2
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMay
+	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_MeetMay
 	msgbox RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -75,14 +66,10 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMay::
 	waitmovement 0
 	delay 10
 	playbgm MUS_ENCOUNTER_MAY, TRUE
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest
-	compare VAR_FACING, DIR_EAST
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast
+	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth
+	call_if_eq VAR_FACING, DIR_WEST, LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest
+	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
@@ -95,7 +82,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMay::
 LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth::
 	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
@@ -107,7 +94,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth::
 LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth::
 	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
@@ -119,7 +106,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth::
 LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest::
 	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
@@ -130,7 +117,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest::
 LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast::
 	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
@@ -142,7 +129,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast::
 LittlerootTown_MaysHouse_2F_Movement_MayEnters:
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth:
@@ -157,22 +144,22 @@ LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth:
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth:
@@ -183,20 +170,20 @@ LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth:
 
 LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth:
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth:
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest:
@@ -205,28 +192,28 @@ LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest:
 	walk_up
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 @ Unused, the player is already facing this direction so its unneeded
 LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayWest:
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast:
 	walk_right
 	walk_right
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast:
@@ -237,25 +224,23 @@ LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast:
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 RivalsHouse_2F_EventScript_Rival::
 	lockall
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, RivalsHouse_2F_EventScript_RivalPostLilycove
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq RivalsHouse_2F_EventScript_May
-	compare VAR_RESULT, FEMALE
-	goto_if_eq RivalsHouse_2F_EventScript_Brendan
+	goto_if_eq VAR_RESULT, MALE, RivalsHouse_2F_EventScript_May
+	goto_if_eq VAR_RESULT, FEMALE, RivalsHouse_2F_EventScript_Brendan
 	end
 
 RivalsHouse_2F_EventScript_May::
@@ -272,10 +257,8 @@ RivalsHouse_2F_EventScript_RivalPostLilycove::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq RivalsHouse_2F_EventScript_MayPostLilycove
-	compare VAR_RESULT, FEMALE
-	call_if_eq RivalsHouse_2F_EventScript_BrendanPostLilycove
+	call_if_eq VAR_RESULT, MALE, RivalsHouse_2F_EventScript_MayPostLilycove
+	call_if_eq VAR_RESULT, FEMALE, RivalsHouse_2F_EventScript_BrendanPostLilycove
 	setflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	releaseall
 	end
@@ -301,10 +284,8 @@ RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext::
 LittlerootTown_MaysHouse_2F_EventScript_PC::
 	lockall
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
-	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
+	goto_if_eq VAR_RESULT, MALE, LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
+	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC::

@@ -31,6 +31,7 @@ struct BagPocket
     u8 capacity;
 };
 
+extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
