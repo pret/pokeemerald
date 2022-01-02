@@ -128,7 +128,7 @@ static void LoadSpecialPokePicCustom(const struct CompressedSpriteSheet *src, vo
     }
     else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
-    else if (SpeciesHasGenderDifference[species] && isFemale)
+    else if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
     {
         if (isFrontPic)
             LZ77UnCompWram(gMonFrontPicTableFemale[species].data, dest);

@@ -2607,7 +2607,7 @@ u8 CreateMonIconCustom(u16 species, void (*callback)(struct Sprite *), s16 x, s1
 
     if (species > NUM_SPECIES)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
-    else if (SpeciesHasGenderDifference[species] && isFemale)
+    else if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
@@ -2768,7 +2768,7 @@ const u8* GetMonIconTiles(u16 species, u32 personality)
 static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale)
 {
     const u8* iconSprite = gMonIconTable[species];
-    if (SpeciesHasGenderDifference[species] && isFemale)
+    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
     {
         iconSprite = gMonIconTableFemale[species];
     }
