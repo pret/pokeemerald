@@ -8752,6 +8752,9 @@ static void PrintForms(u8 taskId, u16 species)
 
     if (species == SPECIES_UNOWN)
         y_offset_icons = 8;
+    
+    if (GetFormSpeciesId(species, 0) == SPECIES_UNOWN)
+        y_offset_icons = 8;
 
     StringCopy(gStringVar1, gSpeciesNames[species]);
 
