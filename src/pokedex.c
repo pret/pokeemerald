@@ -6620,7 +6620,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
 
         #ifdef POKEMON_EXPANSION
         FillWindowPixelBuffer(WIN_STATS_ABILITIES, PIXEL_FILL(0)); 
-        PrintStatsScreen_Abilities(taskId)
+        PrintStatsScreen_Abilities(taskId);
         #endif
     }
     if (JOY_NEW(B_BUTTON))
