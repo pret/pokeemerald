@@ -603,6 +603,8 @@ extern const u8 gText_Stats_eggGroup_UNDISCOVERED[];
 extern const u8 gText_Dex_SEEN[];
 extern const u8 gText_Dex_OWN[];
 
+extern const u8 gText_EVO_Buttons[];
+extern const u8 gText_EVO_Buttons_Decapped[];
 extern const u8 gText_EVO_Buttons_PE[];
 extern const u8 gText_EVO_Buttons_Decapped_PE[];
 extern const u8 gText_EVO_Name[];
