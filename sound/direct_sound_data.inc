@@ -3212,7 +3212,7 @@ Cry_Goodra::
 
 	.align 2
 Cry_Klefki::
-	.incbin "sound/direct_sound_samples/cries/klefki.bin"
+	.incbin "sound/direct_sound_samples/cries/uncomp_klefki.bin"
 
 	.align 2
 Cry_Phantump::
