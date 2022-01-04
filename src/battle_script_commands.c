@@ -9063,7 +9063,7 @@ static void Cmd_various(void)
         
         // End any Follow Me/Rage Powder effects caused by the target
         if (gSideTimers[GetBattlerSide(gBattlerTarget)].followmeTimer != 0 && gSideTimers[GetBattlerSide(gBattlerTarget)].followmeTarget == gBattlerTarget)
-            SideTimers[GetBattlerSide(gBattlerTarget)].followmeTimer = 0;
+            gSideTimers[GetBattlerSide(gBattlerTarget)].followmeTimer = 0;
 
         break;
     case VARIOUS_CLEAR_SKY_DROP:
