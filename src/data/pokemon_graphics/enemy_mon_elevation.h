@@ -14,7 +14,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_MAGNETON] = 9,
     [SPECIES_GASTLY] = 10,
     [SPECIES_HAUNTER] = 11,
-    [SPECIES_VOLTORB] = 11,
     [SPECIES_ELECTRODE] = 12,
     [SPECIES_KOFFING] = 14,
     [SPECIES_WEEZING] = 6,
