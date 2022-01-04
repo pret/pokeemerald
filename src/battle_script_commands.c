@@ -9060,6 +9060,11 @@ static void Cmd_various(void)
         gBattleMons[gBattlerTarget].status2 &= ~(STATUS2_BIDE);
         gDisableStructs[gBattlerTarget].rolloutTimer = 0;
         gDisableStructs[gBattlerTarget].furyCutterCounter = 0;
+        
+        // End any Follow Me/Rage Powder effects caused by the target
+        if (gSideTimers[GetBattlerSide(gBattlerTarget)].followmeTimer != 0 && gSideTimers[GetBattlerSide(gBattlerTarget)].followmeTarget == gBattlerTarget)
+            SideTimers[GetBattlerSide(gBattlerTarget)].followmeTimer = 0;
+
         break;
     case VARIOUS_CLEAR_SKY_DROP:
         // Check to see if the initial target of this Sky Drop fainted before the 2nd turn of Sky Drop.
