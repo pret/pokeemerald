@@ -1516,28 +1516,26 @@ static void UnhideRegionMapPlayerIcon(void)
     }
 }
 
+#define sY       data[0]
+#define sX       data[1]
+#define sVisible data[2]
+#define sTimer   data[7]
+
 static void SpriteCB_PlayerIconMapZoomed(struct Sprite *sprite)
 {
     sprite->x2 = -2 * gRegionMap->scrollX;
     sprite->y2 = -2 * gRegionMap->scrollY;
-    sprite->data[0] = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
-    sprite->data[1] = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
-    if (sprite->data[0] < -8 || sprite->data[0] > 0xa8 || sprite->data[1] < -8 || sprite->data[1] > 0xf8)
-    {
-        sprite->data[2] = FALSE;
-    }
+    sprite->sY = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
+    sprite->sX = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
+    if (sprite->sY < -8 || sprite->sY > DISPLAY_HEIGHT + 8 || sprite->sX < -8 || sprite->sX > DISPLAY_WIDTH + 8)
+        sprite->sVisible = FALSE;
     else
-    {
-        sprite->data[2] = TRUE;
-    }
-    if (sprite->data[2] == TRUE)
-    {
+        sprite->sVisible = TRUE;
+
+    if (sprite->sVisible == TRUE)
         SpriteCB_PlayerIcon(sprite);
-    }
     else
-    {
         sprite->invisible = TRUE;
-    }
 }
 
 static void SpriteCB_PlayerIconMapFull(struct Sprite *sprite)
@@ -1549,9 +1547,9 @@ static void SpriteCB_PlayerIcon(struct Sprite *sprite)
 {
     if (gRegionMap->blinkPlayerIcon)
     {
-        if (++sprite->data[7] > 16)
+        if (++sprite->sTimer > 16)
         {
-            sprite->data[7] = 0;
+            sprite->sTimer = 0;
             sprite->invisible = sprite->invisible ? FALSE : TRUE;
         }
     }
@@ -1566,6 +1564,11 @@ void TrySetPlayerIconBlink(void)
     if (gRegionMap->playerIsInCave)
         gRegionMap->blinkPlayerIcon = TRUE;
 }
+
+#undef sY
+#undef sX
+#undef sVisible
+#undef sTimer
 
 u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
 {
@@ -1709,7 +1712,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 7:
-        LoadPalette(sRegionMapFramePal, 0x10, 0x20);
+        LoadPalette(sRegionMapFramePal, 0x10, sizeof(sRegionMapFramePal));
         PutWindowTilemap(2);
         FillWindowPixelBuffer(2, PIXEL_FILL(0));
         AddTextPrinterParameterized(2, FONT_NORMAL, gText_FlyToWhere, 0, 1, 0, NULL);

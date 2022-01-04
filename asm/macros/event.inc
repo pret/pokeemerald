@@ -604,9 +604,8 @@
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (localId) object finish.
-	@ If the specified object is 0, then the command will block script execution until all objects
-	@ affected by applymovement finish their movements. If the specified object is not currently being
-	@ manipulated with applymovement, then this command does nothing.
+	@ If localId is 0, then the id of the last-moved object will be used instead. If the specified object
+	@ is not currently being manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro waitmovement localId:req, map
 		.ifb \map
