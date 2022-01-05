@@ -2892,7 +2892,7 @@ u8 DoBattlerEndTurnEffects(void)
                     }
                     else
                     {
-                        gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
+                        gBattleMons[gEffectBattler].status1 |= (B_SLEEP_TURNS >= GEN_5) ? ((Random() % 3) + 2) : ((Random() % 4) + 3);
                         BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                         MarkBattlerForControllerExec(gActiveBattler);
                         BattleScriptExecute(BattleScript_YawnMakesAsleep);
