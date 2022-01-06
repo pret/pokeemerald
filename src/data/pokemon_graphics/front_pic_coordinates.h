@@ -2452,12 +2452,12 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_PHIONE] =
     {
         .size = MON_COORDS_SIZE(56, 40),
-        .y_offset = 12,
+        .y_offset = 8,
     },
     [SPECIES_MANAPHY] =
     {
         .size = MON_COORDS_SIZE(64, 40),
-        .y_offset = 13,
+        .y_offset = 10,
     },
     [SPECIES_DARKRAI] =
     {
@@ -2592,7 +2592,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MUNNA] =
     {
         .size = MON_COORDS_SIZE(32, 32),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MUSHARNA] =
     {
