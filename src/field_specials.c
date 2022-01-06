@@ -377,9 +377,7 @@ bool32 ShouldDoScottFortreeCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -404,9 +402,7 @@ bool32 ShouldDoScottBattleFrontierCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -431,9 +427,7 @@ bool32 ShouldDoRoxanneCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -458,9 +452,7 @@ bool32 ShouldDoRivalRayquazaCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
