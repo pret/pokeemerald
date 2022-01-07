@@ -51,8 +51,12 @@ do                                          \
 
 typedef struct {
 	unsigned long num_samples;
-	uint8_t *samples;
+	union {
+		uint8_t *samples8;
+		uint16_t *samples16;
+	};
 	uint8_t midi_note;
+	uint8_t sample_size;
 	bool has_loop;
 	unsigned long loop_offset;
 	double sample_rate;
@@ -208,11 +212,11 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			num_sample_frames |= (aif->data[pos++] <<  8);
 			num_sample_frames |=  (uint8_t)aif->data[pos++];
 
-			short sample_size = (aif->data[pos++] << 8);
-			sample_size |= (uint8_t)aif->data[pos++];
-			if (sample_size != 8)
+			aif_data->sample_size = (aif->data[pos++] << 8);
+			aif_data->sample_size |= (uint8_t)aif->data[pos++];
+			if (aif_data->sample_size != 8 && aif_data->sample_size != 16)
 			{
-				FATAL_ERROR("sampleSize (%d) in the COMM Chunk must be 8!\n", sample_size);
+				FATAL_ERROR("sampleSize (%d) in the COMM Chunk must be 8 or 16!\n", aif_data->sample_size);
 			}
 
 			double sample_rate = ieee754_read_extended((uint8_t*)(aif->data + pos));
@@ -295,11 +299,28 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			pos += 8;
 
 			unsigned long num_samples = chunk_size - 8;
-			uint8_t *sample_data = (uint8_t *)malloc(num_samples * sizeof(uint8_t));
-			memcpy(sample_data, &aif->data[pos], num_samples);
-
-			aif_data->samples = sample_data;
-			aif_data->real_num_samples = num_samples;
+			if (aif_data->sample_size == 8)
+			{
+				uint8_t *sample_data = (uint8_t *)malloc(num_samples * sizeof(uint8_t));
+				memcpy(sample_data, &aif->data[pos], num_samples);
+	
+				aif_data->samples8 = sample_data;
+				aif_data->real_num_samples = num_samples;
+			}
+			else
+			{
+				uint16_t *sample_data = (uint16_t *)malloc(num_samples * sizeof(uint16_t));
+				uint16_t *sample_data_swapped = (uint16_t *)malloc(num_samples * sizeof(uint16_t));
+				memcpy(sample_data, &aif->data[pos], num_samples);
+				for (long unsigned i = 0; i < num_samples; i++)
+				{
+					sample_data_swapped[i] = __builtin_bswap16(sample_data[i]);
+				}
+	
+				aif_data->samples16 = sample_data_swapped;
+				aif_data->real_num_samples = num_samples;
+				free(sample_data);
+			}
 			pos += chunk_size - 8;
 		}
 		else
@@ -550,8 +571,21 @@ do { \
 void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 {
 	struct Bytes *aif = read_bytearray(aif_filename);
-	AifData aif_data = {0,0,0,0,0,0,0};
+	AifData aif_data = {0};
 	read_aif(aif, &aif_data);
+	
+	// Convert 16-bit to 8-bit if necessary
+	if (aif_data.sample_size == 16)
+	{
+		aif_data.real_num_samples /= 2;
+		uint8_t *converted_samples = malloc(aif_data.real_num_samples * sizeof(uint8_t));
+		for (unsigned long i = 0; i < aif_data.real_num_samples; i++)
+		{
+			converted_samples[i] = aif_data.samples16[i] >> 8;
+		}
+		free(aif_data.samples16);
+		aif_data.samples8 = converted_samples;
+	}
 
 	int header_size = 0x10;
 	struct Bytes *pcm;
@@ -560,7 +594,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	if (compress)
 	{
 		struct Bytes *input = malloc(sizeof(struct Bytes));
-		input->data = aif_data.samples;
+		input->data = aif_data.samples8;
 		input->length = aif_data.real_num_samples;
 		pcm = delta_compress(input);
 		free(input);
@@ -568,7 +602,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	else
 	{
 		pcm = malloc(sizeof(struct Bytes));
-		pcm->data = aif_data.samples;
+		pcm->data = aif_data.samples8;
 		pcm->length = aif_data.real_num_samples;
 	}
 	output.length = header_size + pcm->length;
@@ -591,7 +625,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	free(aif);
 	free(pcm);
 	free(output.data);
-	free(aif_data.samples);
+	free(aif_data.samples8);
 }
 
 // Reads a .pcm file containing an array of 8-bit samples and produces an .aif file.
@@ -631,8 +665,8 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 		pcm->data += 0x10;
 	}
 
-	aif_data->samples = malloc(pcm->length);
-	memcpy(aif_data->samples, pcm->data, pcm->length);
+	aif_data->samples8 = malloc(pcm->length);
+	memcpy(aif_data->samples8, pcm->data, pcm->length);
 
 	struct Bytes *aif = malloc(sizeof(struct Bytes));
 	aif->length = 54 + 60 + pcm->length;
@@ -819,14 +853,14 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	// Sound Data Chunk soundData
 	for (unsigned int i = 0; i < aif_data->loop_offset; i++)
 	{
-		aif->data[pos++] = aif_data->samples[i];
+		aif->data[pos++] = aif_data->samples8[i];
 	}
 
 	int j = 0;
 	for (unsigned int i = aif_data->loop_offset; i < pcm->length; i++)
 	{
 		int pcm_index = aif_data->loop_offset + (j++ % (pcm->length - aif_data->loop_offset));
-		aif->data[pos++] = aif_data->samples[pcm_index];
+		aif->data[pos++] = aif_data->samples8[pcm_index];
 	}
 
 	aif->length = pos;

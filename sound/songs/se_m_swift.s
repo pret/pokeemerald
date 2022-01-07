@@ -41,7 +41,7 @@ se_m_swift_1:
 	.byte	W02
 	.byte		VOL   , 100*se_m_swift_mvl/mxv
 	.byte		BEND  , c_v+0
-	.byte		N06   
+	.byte		N06
 	.byte	W01
 	.byte		PAN   , c_v+5
 	.byte		BEND  , c_v-11

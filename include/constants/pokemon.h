@@ -78,11 +78,13 @@
 #define STAT_SPEED   3
 #define STAT_SPATK   4
 #define STAT_SPDEF   5
+#define NUM_STATS    6
+
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_NATURE_STATS NUM_STATS - 1 // excludes HP
-#define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
+#define NUM_NATURE_STATS (NUM_STATS - 1) // excludes HP
+#define NUM_BATTLE_STATS (NUM_STATS + 2) // includes Accuracy and Evasion
 
 #define MIN_STAT_STAGE     0
 #define DEFAULT_STAT_STAGE 6
@@ -225,7 +227,7 @@
 // 1 bit each in the Pokémon struct. Gen 4 hard-codes
 // each of these to the given name. In Gen 3 they're
 // used to get an index into giftRibbons in the save block,
-// which can have a value 0-64 (0 is 'no ribbon') that 
+// which can have a value 0-64 (0 is 'no ribbon') that
 // corresponds to one of the special ribbons listed
 // in gGiftRibbonDescriptionPointers. Most of these were
 // never distributed
@@ -270,7 +272,9 @@
 #define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
 
-#define MAX_FRIENDSHIP  0xFF
+#define MAX_FRIENDSHIP  255
+#define MAX_SHEEN       255
+#define MAX_CONDITION   255
 
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
@@ -337,6 +341,14 @@
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
-#define MON_PIC_SIZE (64 * 64 / 2)
+#define MON_PIC_WIDTH 64
+#define MON_PIC_HEIGHT 64
+#define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
+
+#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
+#define BATTLE_ALIVE_ATK_SIDE       1
+#define BATTLE_ALIVE_DEF_SIDE       2
+
+#define SKIP_FRONT_ANIM (1 << 7)
 
 #endif // GUARD_CONSTANTS_POKEMON_H

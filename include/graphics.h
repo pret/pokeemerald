@@ -3208,12 +3208,12 @@ extern const u16 gBerryFixWindow_Pal[];
 extern const u32 gBattleTextboxTiles[];
 extern const u32 gBattleTextboxTilemap[];
 extern const u32 gBattleTextboxPalette[];
-extern const u32 gUnknown_08D778F0[];
 extern const u32 gVsLettersGfx[];
-extern const u32 gUnknown_08D77AE4[];
-extern const u32 gUnknown_08D779D8[];
-extern const u32 gUnknown_08D857A8[];
-extern const u32 gUnknown_08D85A1C[];
+extern const u32 gBattleVSFrame_Gfx[];
+extern const u32 gBattleVSFrame_Pal[];
+extern const u32 gBattleVSFrame_Tilemap[];
+extern const u32 gMultiBattleIntroBg_Opponent_Tilemap[];
+extern const u32 gMultiBattleIntroBg_Player_Tilemap[];
 
 // battle terrains
 extern const u32 gBattleTerrainTiles_TallGrass[];
@@ -3855,10 +3855,10 @@ extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 
 //menu graphics
-extern const u16 gFireRedMenuElements1_Pal[16];
-extern const u16 gFireRedMenuElements2_Pal[16];
-extern const u16 gFireRedMenuElements3_Pal[16];
-extern const u8 gFireRedMenuElements_Gfx[];
+extern const u16 gMenuInfoElements1_Pal[16];
+extern const u16 gMenuInfoElements2_Pal[16];
+extern const u16 gMenuInfoElements3_Pal[16];
+extern const u8 gMenuInfoElements_Gfx[];
 
 // item menu graphics
 extern const u32 gBagScreen_Gfx[];
@@ -4032,16 +4032,16 @@ extern const u16 gPokenavRibbonsSummaryBg_Pal[];
 extern const u32 gPokenavRibbonsSummaryBg_Gfx[];
 extern const u32 gPokenavRibbonsSummaryBg_Tilemap[];
 
-extern const u32 gPageInfoTilemap[];
-extern const u32 gUnknown_08D98CC8[];
-extern const u32 gPageSkillsTilemap[];
-extern const u32 gPageBattleMovesTilemap[];
-extern const u32 gPageContestMovesTilemap[];
-extern const u32 gStatusScreenPalette[];
-extern const u16 gUnknown_08D85620[];
+extern const u32 gSummaryScreen_Gfx[];
+extern const u32 gSummaryScreen_Pal[];
+extern const u32 gSummaryPage_Info_Tilemap[];
+extern const u32 gSummaryPage_InfoCopy_Tilemap[];
+extern const u32 gSummaryPage_Skills_Tilemap[];
+extern const u32 gSummaryPage_BattleMoves_Tilemap[];
+extern const u32 gSummaryPage_ContestMoves_Tilemap[];
+extern const u16 gPPTextPalette[];
 extern const u16 gSummaryScreenWindow_Tilemap[];
 extern const u32 gMoveTypes_Pal[];
-extern const u32 gStatusScreenBitmap[];
 
 extern const u16 gSummaryScreenPowAcc_Tilemap[];
 extern const u16 gSummaryScreenAppealJam_Tilemap[];
@@ -4081,7 +4081,7 @@ extern const u32 gPokeblockFeedBg_Tilemap[];
 extern const u32 gConfetti_Gfx[];
 extern const u32 gConfetti_Pal[];
 
-extern const u32 gUnknown_08C093F0[];
+extern const u32 gBattleInterfaceGfx_BattleBar[];
 extern const u32 gSubstituteDollBackGfx[];
 extern const u32 gSubstituteDollFrontGfx[];
 extern const u32 gSubstituteDollPal[];
@@ -4097,17 +4097,19 @@ extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u32 gBagSwapLineGfx[];
 extern const u32 gBagSwapLinePal[];
 
-extern const u32 gBattleFrontierGfx_PyramidBag[];
-extern const u32 gBattleFrontierGfx_PyramidBag_Pal[];
-extern const u32 gBattleFrontierGfx_PyramidBagTileMap[];
-extern const u32 gUnknown_08D9AF44[];
-extern const u16 gUnknown_0860F074[];
+extern const u32 gBattlePyramidBag_Gfx[];
+extern const u32 gBattlePyramidBag_Pal[];
+extern const u32 gBattlePyramidBagTilemap[];
+extern const u32 gBattlePyramidBagInterface_Pal[];
+extern const u16 gBattlePyramidFloor_Pal[][16];
+
+extern const u16 gStandardMenuPalette[];
 
 extern const u32 gTitleScreenEmeraldVersionGfx[];
 extern const u32 gTitleScreenPressStartGfx[];
 extern const u32 gTitleScreenPokemonLogoGfx[];
-extern const u32 gUnknown_08DE0644[];
-extern const u32 gUnknown_08DDE458[];
+extern const u32 gTitleScreenPokemonLogoTilemap[];
+extern const u32 gTitleScreenCloudsTilemap[];
 extern const u16 gTitleScreenBgPalettes[];
 extern const u16 gTitleScreenPressStartPal[];
 extern const u16 gTitleScreenEmeraldVersionPal[];
@@ -4635,9 +4637,9 @@ extern const u32 gBattleAnimSpritePal_RedHeart[];
 extern const u32 gBattleAnimSpritePal_RedOrb[];
 extern const u32 gBattleAnimSpritePal_EyeSparkle[];
 extern const u32 gBattleAnimSpritePal_PinkHeart[];
-extern const u32 gBattleAnimBgImage_Attract;
-extern const u32 gBattleAnimBgPalette_Attract;
-extern const u32 gBattleAnimBgTilemap_Attract;
+extern const u32 gBattleAnimBgImage_Attract[];
+extern const u32 gBattleAnimBgPalette_Attract[];
+extern const u32 gBattleAnimBgTilemap_Attract[];
 extern const u32 gBattleAnimSpritePal_Angel[];
 extern const u32 gBattleAnimSpritePal_Devil[];
 extern const u32 gBattleAnimSpritePal_Swipe[];
@@ -4731,7 +4733,7 @@ extern const u32 gBattleAnimBgPalette_Sky[];
 extern const u32 gBattleAnimBgPalette_Aurora[];
 extern const u32 gBattleAnimBgPalette_Fissure[];
 extern const u32 gBattleAnimBgPalette_Bug[];
-extern const u32 gBattleAnimBgPalette_Solarbeam[];
+extern const u32 gBattleAnimBgPalette_SolarBeam[];
 extern const u32 gBattleAnimBgTilemap_Dark[];
 extern const u32 gBattleAnimBgTilemap_Ghost[];
 extern const u32 gBattleAnimBgTilemap_Psychic[];
@@ -4773,15 +4775,15 @@ extern const u32 gBattleStatMask6_Pal[];
 extern const u32 gBattleStatMask7_Pal[];
 extern const u32 gBattleStatMask8_Pal[];
 
-extern const u32 gContestMiscGfx[];
+extern const u32 gContestInterfaceGfx[];
 extern const u32 gContestAudienceGfx[];
 extern const u8 gContestApplauseMeterGfx[];
 extern const u8 gContestNextTurnNumbersGfx[];
 extern const u8 gContestNextTurnRandomGfx[];
-extern const u32 gOldContestGfx[];
-extern const u32 gOldContestPalette[];
-extern const u32 gUnknown_08C17170[];
-extern const u32 gUnknown_08C17980[];
+extern const u32 gContestAudienceTilemap[];
+extern const u32 gContestInterfaceAudiencePalette[];
+extern const u32 gContestInterfaceTilemap[];
+extern const u32 gContestCurtainTilemap[];
 extern const u32 gContestSliderHeart_Gfx[];
 extern const u32 gContestNextTurnGfx[];
 extern const u16 gContestPal[];
@@ -4789,7 +4791,7 @@ extern const u32 gContestFaces_Gfx[];
 extern const u32 gContestApplauseGfx[];
 extern const u32 gContestJudgeGfx[];
 extern const u32 gContestJudgeSymbolsGfx[];
-extern const u32 gContest3Pal[];
+extern const u32 gContestJudgeSymbolsPal[];
 
 extern const u32 gBattleAnimBgTilemap_SurfOpponent[];
 extern const u32 gBattleAnimBgTilemap_SurfPlayer[];
@@ -4899,7 +4901,7 @@ extern const u16 gCableCar_Pal[];
 // Trade
 extern const u16 gTradeMenu_Pal[];
 extern const u8 gTradeMenu_Gfx[];
-extern const u16 gUnknown_08DDCF04[];
+extern const u16 gTradeMenu_Tilemap[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];

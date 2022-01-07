@@ -28,7 +28,6 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 
-// This file's functions.
 static void InitArenaChallenge(void);
 static void GetArenaData(void);
 static void SetArenaData(void);
@@ -39,7 +38,6 @@ static void BufferArenaOpponentName(void);
 static void SpriteCb_JudgmentIcon(struct Sprite *sprite);
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
 
-// Const rom data.
 static const s8 sMindRatings[] =
 {
     [MOVE_NONE] = 0,
@@ -453,7 +451,7 @@ static const union AnimCmd *const sJudgementIconAnimCmds[] =
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
     .tileTag = TAG_JUDGEMENT_ICON,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sJudgementIconOamData,
     .anims = sJudgementIconAnimCmds,
     .images = NULL,
@@ -501,7 +499,6 @@ static const u16 sLongStreakPrizeItems[] =
     ITEM_CHOICE_BAND,
 };
 
-// code
 void CallBattleArenaFunction(void)
 {
     sArenaFunctions[gSpecialVar_0x8004]();
@@ -537,15 +534,15 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
             gBattleTextBuff2[0] = CHAR_0;
             gBattleTextBuff2[1] = EOS;
             BattleStringExpandPlaceholdersToDisplayedString(gText_PlayerMon1Name);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 15);
-            BattlePutTextOnWindow(gText_Vs, 16);
+            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_PLAYER_NAME);
+            BattlePutTextOnWindow(gText_Vs, ARENA_WIN_VS);
             BattleStringExpandPlaceholdersToDisplayedString(gText_OpponentMon1Name);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 17);
-            BattlePutTextOnWindow(gText_Mind, 18);
-            BattlePutTextOnWindow(gText_Skill, 19);
-            BattlePutTextOnWindow(gText_Body, 20);
+            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_OPPONENT_NAME);
+            BattlePutTextOnWindow(gText_Mind, ARENA_WIN_MIND);
+            BattlePutTextOnWindow(gText_Skill, ARENA_WIN_SKILL);
+            BattlePutTextOnWindow(gText_Body, ARENA_WIN_BODY);
             BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 21);
+            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
             (*state)++;
         }
         break;
@@ -567,7 +564,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 21);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
         (*state)++;
         ret = 1;
         break;
@@ -576,7 +573,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 21);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
         (*state)++;
         ret = 1;
         break;
@@ -585,7 +582,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 21);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
         (*state)++;
         ret = 1;
         break;
@@ -614,7 +611,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
         HandleBattleWindow(5, 0, 24, 13, WINDOW_CLEAR);
         CopyBgTilemapBufferToVram(0);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 8, 0, RGB_BLACK);
         (*state)++;
         break;
@@ -801,7 +798,7 @@ static void InitArenaChallenge(void)
     if (!isCurrent)
         gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = 0;
 
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
     gTrainerBattleOpponent_A = 0;
 }
 
@@ -917,7 +914,7 @@ void DrawArenaRefereeTextBox(void)
     FillBgTilemapBufferRect(0, 0x836, 29, 19, 1,  1, palNum);
 }
 
-void RemoveArenaRefereeTextBox(void)
+void EraseArenaRefereeTextBox(void)
 {
     u8 width;
     u8 height;
