@@ -224,6 +224,7 @@ bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move)
     if (gSideTimers[defSide].followmeTimer == 0
         || gBattleMons[gSideTimers[defSide].followmeTarget].hp == 0
         || gBattleMoves[move].effect == EFFECT_SNIPE_SHOT
+        || gBattleMoves[move].effect == EFFECT_SKY_DROP
         || ability == ABILITY_PROPELLER_TAIL || ability == ABILITY_STALWART)
         return FALSE;
 
@@ -1413,12 +1414,80 @@ void MarkBattlerReceivedLinkData(u8 battlerId)
 
 void CancelMultiTurnMoves(u8 battler)
 {
-    gBattleMons[battler].status2 &= ~STATUS2_MULTIPLETURNS;
-    gBattleMons[battler].status2 &= ~STATUS2_LOCK_CONFUSE;
-    gBattleMons[battler].status2 &= ~STATUS2_UPROAR;
-    gBattleMons[battler].status2 &= ~STATUS2_BIDE;
+    u8 i;
+    gBattleMons[battler].status2 &= ~(STATUS2_MULTIPLETURNS);
+    gBattleMons[battler].status2 &= ~(STATUS2_LOCK_CONFUSE);
+    gBattleMons[battler].status2 &= ~(STATUS2_UPROAR);
+    gBattleMons[battler].status2 &= ~(STATUS2_BIDE);
 
-    gStatuses3[battler] &= ~STATUS3_SEMI_INVULNERABLE;
+    // Clear battler's semi-invulnerable bits if they are not held by Sky Drop.
+    if (!(gStatuses3[battler] & STATUS3_SKY_DROPPED))
+        gStatuses3[battler] &= ~(STATUS3_SEMI_INVULNERABLE);
+    
+    // Check to see if this Pokemon was in the middle of using Sky Drop. If so, release the target.
+    if (gBattleStruct->skyDropTargets[battler] != 0xFF && !(gStatuses3[battler] & STATUS3_SKY_DROPPED))
+    {
+        // Get the target's battler id
+        u8 otherSkyDropper = gBattleStruct->skyDropTargets[battler];
+        
+        // Clears sky_dropped and on_air statuses
+        gStatuses3[otherSkyDropper] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
+        
+        // Makes both attacker and target's sprites visible
+        gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[otherSkyDropper]].invisible = FALSE;
+        
+        // If target was sky dropped in the middle of Outrage/Thrash/Petal Dance,
+        // confuse them upon release and display "confused by fatigue" message & animation.
+        // Don't do this if this CancelMultiTurnMoves is caused by falling asleep via Yawn.
+        if (gBattleMons[otherSkyDropper].status2 & STATUS2_LOCK_CONFUSE && gBattleStruct->turnEffectsTracker != 24)
+        {
+            gBattleMons[otherSkyDropper].status2 &= ~(STATUS2_LOCK_CONFUSE);
+
+            // If the target can be confused, confuse them.
+            // Don't use CanBeConfused, can cause issues in edge cases.
+            if (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO
+                || gBattleMons[otherSkyDropper].status2 & STATUS2_CONFUSION
+                || IsBattlerTerrainAffected(otherSkyDropper, STATUS_FIELD_MISTY_TERRAIN)))
+            {
+                // Set confused status
+                gBattleMons[otherSkyDropper].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
+
+                // If this CancelMultiTurnMoves is occuring due to attackcanceller
+                if (gBattlescriptCurrInstr[0] == 0x0)
+                {
+                    gBattleStruct->skyDropTargets[battler] = 0xFE;
+                }
+                // If this CancelMultiTurnMoves is occuring due to VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+                // Reapplying STATUS3_SKY_DROPPED allows for avoiding unecessary messages when Gravity is applied to the target.
+                else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76)
+                {
+                    gBattleStruct->skyDropTargets[battler] = 0xFE;
+                    gStatuses3[otherSkyDropper] |= STATUS3_SKY_DROPPED;
+                }
+                // If this CancelMultiTurnMoves is occuring due to cancelmultiturnmoves script
+                else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
+                {
+                    gBattlerAttacker = otherSkyDropper;
+                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
+                }
+                // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
+                else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
+                {
+                    gBattlerAttacker = otherSkyDropper;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 1;
+                }
+            }
+        }
+
+        // Clear skyDropTargets data, unless this CancelMultiTurnMoves is caused by Yawn, attackcanceler, or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+        if (!(gBattleMons[otherSkyDropper].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[battler] < 4)
+        {
+            gBattleStruct->skyDropTargets[battler] = 0xFF;
+            gBattleStruct->skyDropTargets[otherSkyDropper] = 0xFF;
+        }
+    }
 
     gDisableStructs[battler].rolloutTimer = 0;
     gDisableStructs[battler].furyCutterCounter = 0;
@@ -2784,7 +2853,8 @@ u8 DoBattlerEndTurnEffects(void)
                 gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_THRASH:  // thrash
-            if (gBattleMons[gActiveBattler].status2 & STATUS2_LOCK_CONFUSE)
+            // Don't decrement STATUS2_LOCK_CONFUSE if the target is held by Sky Drop
+            if (gBattleMons[gActiveBattler].status2 & STATUS2_LOCK_CONFUSE && !(gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED))
             {
                 gBattleMons[gActiveBattler].status2 -= STATUS2_LOCK_CONFUSE_TURN(1);
                 if (WasUnableToUseMove(gActiveBattler))
@@ -3225,6 +3295,7 @@ void TryClearRageAndFuryCutter(void)
 enum
 {
     CANCELLER_FLAGS,
+    CANCELLER_SKY_DROP,
     CANCELLER_ASLEEP,
     CANCELLER_FROZEN,
     CANCELLER_TRUANT,
@@ -3259,6 +3330,16 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_FLAGS: // flags clear
             gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_DESTINY_BOND;
             gStatuses3[gBattlerAttacker] &= ~STATUS3_GRUDGE;
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_SKY_DROP:
+            // If Pokemon is being held in Sky Drop
+            if (gStatuses3[gBattlerAttacker] & STATUS3_SKY_DROPPED)
+            {
+                gBattlescriptCurrInstr = BattleScript_MoveEnd;
+                gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
+            }
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_ASLEEP: // check being asleep
@@ -4901,7 +4982,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
              && !(gBattleTypeFlags & BATTLE_TYPE_ARENA)
-             && CountUsablePartyMons(battler) > 0)
+             && CountUsablePartyMons(battler) > 0
+             // Not currently held by Sky Drop
+             && !(gStatuses3[battler] & STATUS3_SKY_DROPPED))
             {
                 gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_EMERGENCY_EXIT;
                 effect++;
@@ -5792,6 +5875,8 @@ bool32 CanBattlerEscape(u32 battlerId) // no ability check
     else if (gStatuses3[battlerId] & STATUS3_ROOTED)
         return FALSE;
     else if (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
+        return FALSE;
+    else if (gStatuses3[battlerId] & STATUS3_SKY_DROPPED)
         return FALSE;
     else
         return TRUE;
@@ -9183,6 +9268,10 @@ bool32 CanMegaEvolve(u8 battlerId)
             && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
             return FALSE;
     }
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battlerId] & STATUS3_SKY_DROPPED)
+        return FALSE;
 
     // Gets mon data.
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
