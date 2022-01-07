@@ -331,6 +331,13 @@ enum {
     TILEMAPID_COUNT
 };
 
+// Window IDs for sWindowTemplates
+enum {
+    WIN_DISPLAY_INFO,
+    WIN_MESSAGE,
+    WIN_ITEM_DESC,
+};
+
 struct Wallpaper
 {
     const u32 *tiles;
@@ -981,7 +988,8 @@ static const u16 sUnknown_Pal[]  = INCBIN_U16("graphics/pokemon_storage/unknown.
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    {
+    // The panel below the currently displayed Pokémon
+    [WIN_DISPLAY_INFO] = {
         .bg = 1,
         .tilemapLeft = 0,
         .tilemapTop = 11,
@@ -990,7 +998,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .paletteNum = 3,
         .baseBlock = 0xC0,
     },
-    {
+    [WIN_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 17,
@@ -999,7 +1007,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 0x14,
     },
-    {
+    [WIN_ITEM_DESC] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
@@ -2136,10 +2144,10 @@ static void Task_InitPokeStorage(u8 taskId)
         }
         break;
     case 2:
-        PutWindowTilemap(0);
-        ClearWindowTilemap(1);
+        PutWindowTilemap(WIN_DISPLAY_INFO);
+        ClearWindowTilemap(WIN_MESSAGE);
         CpuFill32(0, (void *)VRAM, 0x200);
-        LoadUserWindowBorderGfx(1, 0xB, 0xE0);
+        LoadUserWindowBorderGfx(WIN_MESSAGE, 0xB, 0xE0);
         break;
     case 3:
         ResetAllBgCoords();
@@ -4001,23 +4009,23 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
 
 static void PrintDisplayMonInfo(void)
 {
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    FillWindowPixelBuffer(WIN_DISPLAY_INFO, PIXEL_FILL(1));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(0, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(0, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
     }
 
-    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(WIN_DISPLAY_INFO, COPYWIN_GFX);
     if (sStorage->displayMonSpecies != SPECIES_NONE)
     {
         UpdateMonMarkingTiles(sStorage->displayMonMarkings, sStorage->markingComboTilesPtr);
@@ -4278,7 +4286,7 @@ static void UpdateBoxToSendMons(void)
 static void InitPokeStorageBg0(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
-    LoadUserWindowBorderGfx(1, 2, 208);
+    LoadUserWindowBorderGfx(WIN_MESSAGE, 2, 208);
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     CopyBgTilemapBufferToVram(0);
 }
@@ -4317,11 +4325,11 @@ static void PrintMessage(u8 id)
     }
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
-    DrawTextBorderOuter(1, 2, 14);
-    PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_GFX);
+    FillWindowPixelBuffer(WIN_MESSAGE, PIXEL_FILL(1));
+    AddTextPrinterParameterized(WIN_MESSAGE, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
+    DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
+    PutWindowTilemap(WIN_MESSAGE);
+    CopyWindowToVram(WIN_MESSAGE, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -4333,7 +4341,7 @@ static void ShowYesNoWindow(s8 cursorPos)
 
 static void ClearBottomWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(1, FALSE);
+    ClearStdWindowAndFrameToTransparent(WIN_MESSAGE, FALSE);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -9201,8 +9209,8 @@ static void PrintItemDescription(void)
     else
         description = ItemId_GetDescription(sStorage->displayMonItemId);
 
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    AddTextPrinterParameterized5(2, FONT_NORMAL, description, 4, 0, 0, NULL, 0, 1);
+    FillWindowPixelBuffer(WIN_ITEM_DESC, PIXEL_FILL(1));
+    AddTextPrinterParameterized5(WIN_ITEM_DESC, FONT_NORMAL, description, 4, 0, 0, NULL, 0, 1);
 }
 
 static void InitItemInfoWindow(void)
