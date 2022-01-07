@@ -6434,30 +6434,6 @@ static void Cmd_various(void)
         BtlController_EmitPlayFanfareOrBGM(0, MUS_VICTORY_TRAINER, TRUE);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
-	case VARIOUS_USE_REVIVE_ON_OPPONENT:
-		for(i = 0; i < PARTY_SIZE; i++)
-		{
-			u16 currentMonMax = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
-			u16 currentMonHalf = currentMonMax / 2;
-			if(GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
-			{
-				gBattleStruct->wildVictorySong = i;
-				switch(gLastUsedItem)
-				{
-					// Half health (revive)
-					case ITEM_REVIVE:
-						SetMonData(&gEnemyParty[i], MON_DATA_HP, &currentMonHalf);
-						break;
-					// Full Health (max revive, revival herb)
-					case ITEM_MAX_REVIVE:
-					case ITEM_REVIVAL_HERB:
-						SetMonData(&gEnemyParty[i], MON_DATA_HP, &currentMonMax);
-						break;
-				}
-				break;
-			}
-		}
-		break;
     }
 
     gBattlescriptCurrInstr += 3;

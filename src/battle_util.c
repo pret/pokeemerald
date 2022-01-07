@@ -337,7 +337,6 @@ void HandleAction_UseItem(void)
         {
         case AI_ITEM_FULL_RESTORE:
         case AI_ITEM_HEAL_HP:
-		case AI_ITEM_REVIVE:
             break;
         case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = AI_HEAL_CONFUSION;
