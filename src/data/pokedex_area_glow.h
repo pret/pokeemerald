@@ -56,6 +56,7 @@ enum {
 // with edge flags are cancelled out before lookup. For example, GLOW_CORNER_TL | GLOW_EDGE_L
 // will never be read, and has the same value as GLOW_EDGE_L.
 static const u8 sAreaGlowTilemapMapping[] = {
+    [0] = GLOW_TILE_EMPTY,
     [GLOW_EDGE_R] = GLOW_TILE_EDGE_R,
     [GLOW_EDGE_L] = GLOW_TILE_EDGE_L,
     [GLOW_EDGE_L | GLOW_EDGE_R] = GLOW_TILE_EDGE_L_R,
