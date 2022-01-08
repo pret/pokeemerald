@@ -4237,7 +4237,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_ARROKUDA] =
     {
         .size = MON_COORDS_SIZE(56, 32),
-        .y_offset = 17,
+        .y_offset = 13,
     },
     [SPECIES_BARRASKEWDA] =
     {
@@ -5249,7 +5249,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_ROTOM_MOW] =
     {
         .size = MON_COORDS_SIZE(56, 64),
-        .y_offset = 3,
+        .y_offset = 12,
     },
     // Giratina
     [SPECIES_GIRATINA_ORIGIN] =
