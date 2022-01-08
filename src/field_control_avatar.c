@@ -28,6 +28,7 @@
 #include "trainer_see.h"
 #include "trainer_hill.h"
 #include "wild_encounter.h"
+#include "follow_me.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
@@ -156,9 +157,41 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
+        
+        if (gSaveBlock2Ptr->follower.inProgress && gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible == TRUE && gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT
+            && gSaveBlock2Ptr->follower.comeOutDoorStairs == 0)
+        {
+            switch(playerDirection)
+            {
+                case 1: // South
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x = gSprites[gPlayerAvatar.spriteId].x;
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].y = gSprites[gPlayerAvatar.spriteId].y - 16;
+                    break;
+                case 2: // North
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x = gSprites[gPlayerAvatar.spriteId].x;
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].y = gSprites[gPlayerAvatar.spriteId].y + 16;
+                    break;
+                case 3: // West
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x = gSprites[gPlayerAvatar.spriteId].x + 16;
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].y = gSprites[gPlayerAvatar.spriteId].y;
+                    break;
+                case 4: // East
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x = gSprites[gPlayerAvatar.spriteId].x - 16;
+                    gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].y = gSprites[gPlayerAvatar.spriteId].y;
+                    break;
+            }
+            gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible = FALSE;
+        }
+        
         if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
+    else if(gSaveBlock2Ptr->follower.inProgress)
+    {
+        ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
+        ObjectEventSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 0x9E);
+    }
+    
     if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileBehavior) == TRUE)
         return TRUE;
     if (input->heldDirection && input->dpadDirection == playerDirection)
@@ -306,6 +339,13 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
 
     if (InTrainerHill() == TRUE)
         script = GetTrainerHillTrainerScript();
+    else if (objectEventId == GetFollowerObjectId())//(gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_FOLLOWER)
+    {
+        if(gObjectEvents[objectEventId].invisible == FALSE)
+            script = GetFollowerScriptPointer();
+        else
+            return NULL;
+    }
     else
         script = GetObjectEventScriptPointerByObjectEventId(objectEventId);
 

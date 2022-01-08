@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "main.h"
 #include "palette.h"
+#include "global.fieldmap.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -970,6 +971,29 @@ void ContinueAnim(struct Sprite *sprite)
     }
 }
 
+bool8 IsFlyingPokemonGraphic(u16 graphicsId)
+{
+    switch(graphicsId)
+    {
+        case 250:
+        case 253:
+        case 255:
+        case 256:
+        case 260:
+        case 279:
+        case 280:
+        case 287:
+        case 380:
+        case 382:
+        case 383:
+        case 384:
+        case 387:
+            return TRUE;
+        default:
+            return FALSE;
+    }
+}
+
 void AnimCmd_frame(struct Sprite *sprite)
 {
     s16 imageValue;
@@ -987,6 +1011,15 @@ void AnimCmd_frame(struct Sprite *sprite)
 
     sprite->animDelayCounter = duration;
 
+    if(gSaveBlock2Ptr->follower.inProgress && sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && sprite->y2 >= -1
+    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId))
+    {
+        if(sprite->animCmdIndex % 2 == 0)
+            sprite->y2 = 0;
+        else
+            sprite->y2 = -1;
+    }
+    
     if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
@@ -1020,6 +1053,15 @@ void AnimCmd_jump(struct Sprite *sprite)
         duration--;
 
     sprite->animDelayCounter = duration;
+    
+    if(gSaveBlock2Ptr->follower.inProgress && sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && sprite->y2 >= -1
+    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId))
+    {
+        if(sprite->animCmdIndex % 2 == 0)
+            sprite->y2 = 0;
+        else
+            sprite->y2 = -1;
+    }
 
     if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);

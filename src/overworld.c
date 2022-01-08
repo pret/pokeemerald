@@ -59,6 +59,7 @@
 #include "scanline_effect.h"
 #include "wild_encounter.h"
 #include "frontier_util.h"
+#include "follow_me.h"
 #include "constants/abilities.h"
 #include "constants/layouts.h"
 #include "constants/map_types.h"
@@ -66,6 +67,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "constants/event_object_movement.h"
 
 struct CableClubPlayer
 {
@@ -365,6 +367,7 @@ void DoWhiteOut(void)
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();
+    UpdateFollowerPokemonGraphic();
     WarpIntoMap();
 }
 
@@ -414,6 +417,8 @@ static void Overworld_ResetStateAfterWhiteOut(void)
         VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 0);
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
+    
+    FollowMe_TryRemoveFollowerOnWhiteOut();
 }
 
 static void UpdateMiscOverworldStates(void)
@@ -1447,6 +1452,10 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
             PlayerStep(inputStruct.dpadDirection, newKeys, heldKeys);
         }
     }
+    
+    // if stop running but keep holding B -> fix follower frame
+    if (PlayerHasFollower() && IsPlayerOnFoot() && IsPlayerStandingStill())
+        ObjectEventSetHeldMovement(&gObjectEvents[GetFollowerObjectId()], GetFaceDirectionAnimNum(gObjectEvents[GetFollowerObjectId()].facingDirection));
 }
 
 void CB1_Overworld(void)
@@ -1482,6 +1491,20 @@ void CB2_Overworld(void)
     OverworldBasic();
     if (fading)
         SetFieldVBlankCallback();
+    
+    // Make sure follower's sprite is properly positioned when map reloads.
+    if (gSaveBlock2Ptr->follower.inProgress)
+    {
+        switch(gObjectEvents[gSaveBlock2Ptr->follower.objId].facingDirection)
+        {
+            case DIR_EAST:
+                gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x2 = -8;
+                break;
+            case DIR_WEST:
+                gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x2 = 8;
+                break;
+        }
+    }
 }
 
 void SetMainCallback1(MainCallback cb)
@@ -1664,6 +1687,7 @@ void CB2_ReturnToFieldWithOpenMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback2 = FieldCB_ReturnToFieldOpenStartMenu;
+    UpdateFollowerPokemonGraphic();
     CB2_ReturnToField();
 }
 
@@ -2130,10 +2154,7 @@ static void ResumeMap(bool32 a1)
     ResetAllPicSprites();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
-    if (!a1)
-        InitObjectEventPalettes(0);
-    else
-        InitObjectEventPalettes(1);
+    FreeAllSpritePalettes();
 
     FieldEffectActiveListClear();
     StartWeather();
@@ -2168,6 +2189,7 @@ static void InitObjectEventsLocal(void)
     ResetInitialPlayerAvatarState();
     TrySpawnObjectEvents(0, 0);
     TryRunOnWarpIntoMapScript();
+    FollowMe_HandleSprite();
 }
 
 static void InitObjectEventsReturnToField(void)
@@ -3217,5 +3239,49 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
         sprite->data[7]++;
+    }
+}
+
+void UpdateFollowerPokemonGraphic(void)
+{
+    // Loaded in case the player changed the species of the Pokemon in the lead of the party.
+    // If so, the following Pokemon needs to change.
+    u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + 238;
+    struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
+    if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
+    {
+        // Sets the follower's graphic data to the proper following Pokemon graphic data
+        gSaveBlock2Ptr->follower.graphicsId = leadMonGraphicId;
+
+        // Sets the current follower object's graphic data to the proper data.
+        // Necessary because, without it, the follower's sprite won't change until entering a loading zone.
+        follower->graphicsId = leadMonGraphicId;
+
+        // Specifically for Pokemon Center, if lead Pokemon is revived, deletes old follower and creates new one
+        if(gSpecialVar_Unused_0x8014 == 1)
+        {
+            // Loop allows for creation of variables not at top of function
+            do
+            {
+                u8 newSpriteId;
+                struct ObjectEventTemplate clone;
+                struct ObjectEvent backupFollower = *follower;
+                backupFollower.graphicsId = gSaveBlock2Ptr->follower.graphicsId;
+                DestroySprite(&gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId]);
+                RemoveObjectEvent(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
+
+                clone = *GetObjectEventTemplateByLocalIdAndMap(gSaveBlock2Ptr->follower.map.id, gSaveBlock2Ptr->follower.map.number, gSaveBlock2Ptr->follower.map.group);
+                clone.graphicsId = gSaveBlock2Ptr->follower.graphicsId;;
+                gSaveBlock2Ptr->follower.objId = TrySpawnObjectEventTemplate(&clone, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, clone.x, clone.y);
+
+                follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
+                newSpriteId = follower->spriteId;
+                *follower = backupFollower;
+                follower->spriteId = newSpriteId;
+                MoveObjectEventToMapCoords(follower, follower->currentCoords.x, follower->currentCoords.y);
+                ObjectEventTurn(follower, follower->facingDirection);
+                gSpecialVar_Unused_0x8014 = 0;
+            } while(FALSE);
+        }
     }
 }

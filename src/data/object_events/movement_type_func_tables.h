@@ -24,6 +24,13 @@ u8 (*const gGetVectorDirectionFuncs[])(s16, s16, s16, s16) = {
     GetLimitedVectorDirection_SouthWestEast,
 };
 
+u8 (*const gMovementTypeFuncs_FollowingPokemon[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_FollowingPokemon_Step0,
+    MovementType_FollowingPokemon_Step1,
+    MovementType_FollowingPokemon_Step2,
+    MovementType_FollowingPokemon_Step3,
+};
+
 u8 (*const gMovementTypeFuncs_LookAround[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_LookAround_Step0,
     MovementType_LookAround_Step1,

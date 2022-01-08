@@ -1143,6 +1143,324 @@ static const union AffineAnimCmd *const sAffineAnimTable_KyogreGroudon[] = {
     sAffineAnim_KyogreGroudon_DipEast,      // Unused
 };
 
+const union AnimCmd gObjectEventImageAnim_FaceSouth_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceNorth_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(2, 14),
+    ANIMCMD_FRAME(2, 14),
+    ANIMCMD_FRAME(3, 14),
+    ANIMCMD_FRAME(3, 14),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceNorth_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(0, 14, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 14, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 14, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 14, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceWest_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 14),
+    ANIMCMD_FRAME(4, 14),
+    ANIMCMD_FRAME(5, 14),
+    ANIMCMD_FRAME(5, 14),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceWest_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(2, 14),
+    ANIMCMD_FRAME(2, 14),
+    ANIMCMD_FRAME(3, 14),
+    ANIMCMD_FRAME(3, 14),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceEast_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 14, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 14, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 14, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 14, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceEast_Unique_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(6, 14),
+    ANIMCMD_FRAME(6, 14),
+    ANIMCMD_FRAME(7, 14),
+    ANIMCMD_FRAME(7, 14),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceEast_Unique_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 14),
+    ANIMCMD_FRAME(4, 14),
+    ANIMCMD_FRAME(5, 14),
+    ANIMCMD_FRAME(5, 14),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkSouth_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkNorth_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkNorth_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkWest_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkWest_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkEast_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkEast_Unique_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_FRAME(7, 8),
+    ANIMCMD_FRAME(7, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkEast_Unique_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkSouthFast_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkNorthFast_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkNorthFast_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(0, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 6, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkWestFast_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkWestFast_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkEastFast_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 6, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkEastFast_Unique_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(6, 6),
+    ANIMCMD_FRAME(6, 6),
+    ANIMCMD_FRAME(7, 6),
+    ANIMCMD_FRAME(7, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_WalkEastFast_Unique_Double_FollowingPokemon[] =
+{
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gObjectEventImageAnimTable_FollowingPokemon[] = {
+    // Needed for if the Pokemon is in overworld and for idle animation.
+    gObjectEventImageAnim_FaceSouth_FollowingPokemon,
+    gObjectEventImageAnim_FaceNorth_FollowingPokemon,
+    gObjectEventImageAnim_FaceWest_FollowingPokemon,
+    gObjectEventImageAnim_FaceEast_FollowingPokemon,
+
+    // Needed for when the player walks
+    gObjectEventImageAnim_WalkSouth_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorth_FollowingPokemon,
+    gObjectEventImageAnim_WalkWest_FollowingPokemon,
+    gObjectEventImageAnim_WalkEast_FollowingPokemon,
+
+    // Filler
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_FollowingPokemon,
+
+    // Needed for when the player runs
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_FollowingPokemon,
+};
+
+const union AnimCmd *const gObjectEventImageAnimTable_FollowingPokemon_UniqueEast[] = {
+    // Needed for if the Pokemon is in overworld.
+    gObjectEventImageAnim_FaceSouth_FollowingPokemon,
+    gObjectEventImageAnim_FaceNorth_FollowingPokemon,
+    gObjectEventImageAnim_FaceWest_FollowingPokemon,
+    gObjectEventImageAnim_FaceEast_Unique_FollowingPokemon,
+
+    // Needed for when the player walks
+    gObjectEventImageAnim_WalkSouth_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorth_FollowingPokemon,
+    gObjectEventImageAnim_WalkWest_FollowingPokemon,
+    gObjectEventImageAnim_WalkEast_Unique_FollowingPokemon,
+
+    // Filler
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_FollowingPokemon,
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_FollowingPokemon,
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_FollowingPokemon,
+
+    // Needed for when the player runs
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_FollowingPokemon,
+};
+
+const union AnimCmd *const gObjectEventImageAnimTable_FollowingPokemon_UniqueEast_DoubleNorth[] = {
+    // Needed for if the Pokemon is in overworld.
+    gObjectEventImageAnim_FaceSouth_FollowingPokemon,
+    gObjectEventImageAnim_FaceNorth_Double_FollowingPokemon,
+    gObjectEventImageAnim_FaceWest_Double_FollowingPokemon,
+    gObjectEventImageAnim_FaceEast_Unique_Double_FollowingPokemon,
+
+    // Needed for when the player walks
+    gObjectEventImageAnim_WalkSouth_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorth_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkWest_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkEast_Unique_Double_FollowingPokemon,
+
+    // Filler
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_Double_FollowingPokemon,
+
+    // Needed for when the player runs
+    gObjectEventImageAnim_WalkSouthFast_FollowingPokemon,
+    gObjectEventImageAnim_WalkNorthFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkWestFast_Double_FollowingPokemon,
+    gObjectEventImageAnim_WalkEastFast_Unique_Double_FollowingPokemon,
+};
+
 // For animations with alternating steps
 static const struct StepAnimTable sStepAnimTables[] = {
     {

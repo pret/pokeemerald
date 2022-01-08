@@ -7,6 +7,8 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
+#include "event_data.h"
+#include "sprite.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
@@ -971,16 +973,81 @@ bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void)
 
 void GetOnOffBike(u8 transitionFlags)
 {
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
+    bool8 followerPlaced = FALSE;
     gUnusedBikeCameraAheadPanback = FALSE;
 
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
+        if (gSaveBlock2Ptr->follower.inProgress)
+        {
+            if (!(player->currentCoords.x == follower->currentCoords.x && player->currentCoords.y == follower->currentCoords.y))
+            {
+                follower->currentCoords = player->currentCoords;
+                gSprites[follower->spriteId].x = gSprites[gPlayerAvatar.spriteId].x;
+                gSprites[follower->spriteId].y = gSprites[gPlayerAvatar.spriteId].y;
+            }
+            ObjectEventClearHeldMovement(follower);                
+
+            // First, check to see if the follower can appear behind the player
+            if (player->facingDirection == DIR_NORTH)
+            {
+                if (!GetCollisionAtCoords(player, player->currentCoords.x, player->currentCoords.y + 1, DIR_SOUTH))
+                {
+                    ObjectEventSetHeldMovement(follower, 8);
+                    followerPlaced = TRUE;
+                }
+            }
+            else if (player->facingDirection == DIR_SOUTH)
+            {
+                if (!GetCollisionAtCoords(player, player->currentCoords.x, player->currentCoords.y - 1, DIR_NORTH))
+                {
+                    ObjectEventSetHeldMovement(follower, 9);
+                    followerPlaced = TRUE;
+                }
+            }
+            else if (player->facingDirection == DIR_EAST)
+            {
+                if (!GetCollisionAtCoords(player, player->currentCoords.x - 1, player->currentCoords.y, DIR_WEST))
+                {
+                    ObjectEventSetHeldMovement(follower, 10);
+                    followerPlaced = TRUE;
+                }
+            }
+            // Don't need to check playerDirection due to else-if chain
+            else if (!GetCollisionAtCoords(player, player->currentCoords.x + 1, player->currentCoords.y, DIR_EAST))
+            {
+                ObjectEventSetHeldMovement(follower, 11);
+                followerPlaced = TRUE;
+            }
+
+            // If follower can't appear behind player, then check if they can appear south, north, west, or east of player.
+            if (!followerPlaced)
+            {
+                if (!GetCollisionAtCoords(player, player->currentCoords.x, player->currentCoords.y + 1, DIR_SOUTH))
+                    ObjectEventSetHeldMovement(follower, 8);
+                else if (!GetCollisionAtCoords(player, player->currentCoords.x, player->currentCoords.y - 1, DIR_NORTH))
+                    ObjectEventSetHeldMovement(follower, 9);
+                else if (!GetCollisionAtCoords(player, player->currentCoords.x - 1, player->currentCoords.y, DIR_WEST))
+                    ObjectEventSetHeldMovement(follower, 10);
+                else if (!GetCollisionAtCoords(player, player->currentCoords.x + 1, player->currentCoords.y, DIR_EAST))
+                    ObjectEventSetHeldMovement(follower, 11);
+            }
+            follower->invisible = FALSE;
+        }
+
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
         Overworld_ClearSavedMusic();
         Overworld_PlaySpecialMapMusic();
     }
     else
     {
+        if (gSaveBlock2Ptr->follower.inProgress)
+        {
+            follower->invisible = TRUE;
+        }
+        
         SetPlayerAvatarTransitionFlags(transitionFlags);
         Overworld_SetSavedMusic(MUS_CYCLING);
         Overworld_ChangeMusicTo(MUS_CYCLING);
