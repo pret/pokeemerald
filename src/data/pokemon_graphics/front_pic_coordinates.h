@@ -3737,7 +3737,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_WISHIWASHI] =
     {
         .size = MON_COORDS_SIZE(40, 24),
-        .y_offset = 20,
+        .y_offset = 15,
     },
     [SPECIES_MAREANIE] =
     {
@@ -5915,37 +5915,37 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MINIOR_CORE_RED] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MINIOR_CORE_ORANGE] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MINIOR_CORE_YELLOW] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MINIOR_CORE_GREEN] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MINIOR_CORE_BLUE] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MINIOR_CORE_INDIGO] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     [SPECIES_MINIOR_CORE_VIOLET] =
     {
         .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 16,
+        .y_offset = 14,
     },
     // Mimikyu
     [SPECIES_MIMIKYU_BUSTED] =
