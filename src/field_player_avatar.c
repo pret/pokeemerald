@@ -33,12 +33,6 @@
 #define NUM_FORCED_MOVEMENTS 18
 #define NUM_ACRO_BIKE_COLLISIONS 5
 
-enum {
-    PLAYER_STILL,
-    PLAYER_TURNING,
-    PLAYER_MOVING,
-};
-
 static EWRAM_DATA u8 sSpinStartFacingDir = 0;
 EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
@@ -196,9 +190,9 @@ static bool8 (*const sForcedMovementFuncs[NUM_FORCED_MOVEMENTS + 1])(void) =
 
 static void (*const sPlayerNotOnBikeFuncs[])(u8, u16) =
 {
-    [PLAYER_STILL]   = PlayerNotOnBikeNotMoving,
-    [PLAYER_TURNING] = PlayerNotOnBikeTurningInPlace,
-    [PLAYER_MOVING]  = PlayerNotOnBikeMoving,
+    [NOT_MOVING]     = PlayerNotOnBikeNotMoving,
+    [TURN_DIRECTION] = PlayerNotOnBikeTurningInPlace,
+    [MOVING]         = PlayerNotOnBikeMoving,
 };
 
 static bool8 (*const sAcroBikeTrickMetatiles[NUM_ACRO_BIKE_COLLISIONS])(u8) =
@@ -591,20 +585,11 @@ static void MovePlayerNotOnBike(u8 direction, u16 heldKeys)
 static u8 CheckMovementInputNotOnBike(u8 direction)
 {
     if (direction == DIR_NONE)
-    {
-        gPlayerAvatar.runningState = NOT_MOVING;
-        return PLAYER_STILL;
-    }
+        return gPlayerAvatar.runningState = NOT_MOVING;
     else if (direction != GetPlayerMovementDirection() && gPlayerAvatar.runningState != MOVING)
-    {
-        gPlayerAvatar.runningState = TURN_DIRECTION;
-        return PLAYER_TURNING;
-    }
+        return gPlayerAvatar.runningState = TURN_DIRECTION;
     else
-    {
-        gPlayerAvatar.runningState = MOVING;
-        return PLAYER_MOVING;
-    }
+        return gPlayerAvatar.runningState = MOVING;
 }
 
 static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
