@@ -2779,6 +2779,8 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     union PokemonSubstruct *substruct1 = GetSubstruct(boxMon, boxMon->personality, 1);
     union PokemonSubstruct *substruct2 = GetSubstruct(boxMon, boxMon->personality, 2);
     union PokemonSubstruct *substruct3 = GetSubstruct(boxMon, boxMon->personality, 3);
+    union PokemonSubstruct *substruct4 = GetSubstruct(boxMon, boxMon->personality, 4);
+    union PokemonSubstruct *substruct5 = GetSubstruct(boxMon, boxMon->personality, 5);
     s32 i;
 
     for (i = 0; i < (s32)ARRAY_COUNT(substruct0->raw); i++)
@@ -2792,6 +2794,12 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 
     for (i = 0; i < (s32)ARRAY_COUNT(substruct3->raw); i++)
         checksum += substruct3->raw[i];
+
+    for (i = 0; i < (s32)ARRAY_COUNT(substruct4->raw); i++)
+        checksum += substruct4->raw[i];
+
+    for (i = 0; i < (s32)ARRAY_COUNT(substruct5->raw); i++)
+        checksum += substruct5->raw[i];
 
     return checksum;
 }
@@ -3614,6 +3622,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     struct PokemonSubstruct1 *substruct1 = NULL;
     struct PokemonSubstruct2 *substruct2 = NULL;
     struct PokemonSubstruct3 *substruct3 = NULL;
+    struct PokemonSubstruct4 *substruct4 = NULL;
+    struct PokemonSubstruct5 *substruct5 = NULL;
 
     // Any field greater than MON_DATA_ENCRYPT_SEPARATOR is encrypted and must be treated as such
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
@@ -3622,6 +3632,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         substruct1 = &(GetSubstruct(boxMon, boxMon->personality, 1)->type1);
         substruct2 = &(GetSubstruct(boxMon, boxMon->personality, 2)->type2);
         substruct3 = &(GetSubstruct(boxMon, boxMon->personality, 3)->type3);
+        substruct4 = &(GetSubstruct(boxMon, boxMon->personality, 4)->type4);
+        substruct5 = &(GetSubstruct(boxMon, boxMon->personality, 5)->type5);
 
         DecryptBoxMon(boxMon);
 
@@ -4018,6 +4030,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     struct PokemonSubstruct1 *substruct1 = NULL;
     struct PokemonSubstruct2 *substruct2 = NULL;
     struct PokemonSubstruct3 *substruct3 = NULL;
+    struct PokemonSubstruct4 *substruct4 = NULL;
+    struct PokemonSubstruct5 *substruct5 = NULL;
 
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
@@ -4025,6 +4039,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         substruct1 = &(GetSubstruct(boxMon, boxMon->personality, 1)->type1);
         substruct2 = &(GetSubstruct(boxMon, boxMon->personality, 2)->type2);
         substruct3 = &(GetSubstruct(boxMon, boxMon->personality, 3)->type3);
+        substruct4 = &(GetSubstruct(boxMon, boxMon->personality, 4)->type4);
+        substruct5 = &(GetSubstruct(boxMon, boxMon->personality, 5)->type5);
 
         DecryptBoxMon(boxMon);
 
