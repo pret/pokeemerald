@@ -268,9 +268,9 @@ void main_callback(u32 * state, void * unused1, void * unused2)
 
 void DBG_LoadDigitsPal(void)
 {
-    const u16 * src;
     s32 i;
-    register vu16 * dest asm("r3") = (vu16 *)BG_PLTT + 1;
+    const u16 * src;
+    vu16 * dest = (vu16 *)BG_PLTT + 1;
     DmaFill16(3, RGB(31, 31, 31), (vu16 *)BG_PLTT, BG_PLTT_SIZE);
     src = sDebugPals;
     for (i = 0; i < 4; i++)
