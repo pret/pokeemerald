@@ -1255,7 +1255,7 @@ static void TurnNPCIntoFollower(u8 localId, u16 followerFlags)
             follower->movementType = MOVEMENT_TYPE_NONE; //Doesn't get to move on its own anymore
             gSprites[follower->spriteId].callback = MovementType_None; //MovementType_None
             SetObjEventTemplateMovementType(localId, 0);
-            if (CheckFollowerFlag(FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT))
+            if (followerFlags & FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT)
                 script = (const u8 *)ReadWord(0);
             else
                 script = GetObjectEventScriptPointerByObjectEventId(eventObjId);
