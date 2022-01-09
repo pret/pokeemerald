@@ -4147,7 +4147,7 @@ static void Cmd_getexp(void)
     }
 }
 
-#ifdef B_MULTI_BATTLE_WHITEOUT >= GEN_4
+#if B_MULTI_BATTLE_WHITEOUT >= GEN_4
 static bool32 NoAliveMonsForPlayerAndPartner(void)
 {
     u32 i;
@@ -4230,7 +4230,7 @@ static void Cmd_checkteamslost(void)
     if (gBattleControllerExecFlags)
         return;
 
-#ifdef B_MULTI_BATTLE_WHITEOUT >= GEN_4
+#if B_MULTI_BATTLE_WHITEOUT >= GEN_4
     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
     {
         if (NoAliveMonsForPlayerAndPartner())
