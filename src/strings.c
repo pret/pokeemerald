@@ -508,6 +508,7 @@ const u8 gText_PkmnInfo[] = _("POKéMON INFO");
 const u8 gText_PkmnSkills[] = _("POKéMON SKILLS");
 const u8 gText_BattleMoves[] = _("BATTLE MOVES");
 const u8 gText_ContestMoves[] = _("C0NTEST MOVES");
+const u8 gText_Abilities[] = _("ABILITIES");
 const u8 gText_Info[] = _("INFO");
 const u8 gText_EggWillTakeALongTime[] = _("It looks like this EGG will\ntake a long time to hatch.");
 const u8 gText_EggWillTakeSomeTime[] = _("What will hatch from this?\nIt will take some time.");

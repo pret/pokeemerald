@@ -944,6 +944,7 @@ extern const u8 gText_PkmnInfo[];
 extern const u8 gText_PkmnSkills[];
 extern const u8 gText_BattleMoves[];
 extern const u8 gText_ContestMoves[];
+extern const u8 gText_Abilities[];
 extern const u8 gText_HMMovesCantBeForgotten2[];
 extern const u8 gText_Info[];
 extern const u8 gText_Switch[];

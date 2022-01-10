@@ -42,6 +42,7 @@
 #include "window.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/abilities.h"
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
@@ -51,6 +52,7 @@ enum {
     PSS_PAGE_INFO,
     PSS_PAGE_SKILLS,
     PSS_PAGE_BATTLE_MOVES,
+    PSS_PAGE_ABILITIES,
     PSS_PAGE_CONTEST_MOVES,
     PSS_PAGE_COUNT,
 };
@@ -60,6 +62,7 @@ enum {
 #define PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE 1
 #define PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE 2
 #define PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE 3
+#define PSS_LABEL_WINDOW_ABILITIES_TITLE 21
 
 // Button control text (upper right)
 #define PSS_LABEL_WINDOW_PROMPT_CANCEL 4
@@ -105,6 +108,12 @@ enum {
 #define PSS_DATA_WINDOW_MOVE_NAMES 0
 #define PSS_DATA_WINDOW_MOVE_PP 1
 #define PSS_DATA_WINDOW_MOVE_DESCRIPTION 2
+
+// Dynamic fields for the Ability page
+#define PSS_DATA_WINDOW_ABILITY_NAMES 0
+#define PSS_DATA_WINDOW_ABILITY_SP 1
+#define PSS_DATA_WINDOW_ABILITY_DESCRIPTION 2
+
 
 #define MOVE_SELECTOR_SPRITES_COUNT 10
 // for the spriteIds field in PokemonSummaryScreenData
@@ -164,6 +173,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 sanity; // 0x35
         u8 OTName[17]; // 0x36
         u32 OTID; // 0x48
+        u16 abilities[MAX_MON_ABILITIES];
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
     u8 mode;
@@ -278,8 +288,10 @@ static void PrintExpPointsNextLevel(void);
 static void PrintBattleMoves(void);
 static void Task_PrintBattleMoves(u8 taskId);
 static void PrintMoveNameAndPP(u8 a);
+static void PrintAbilityNameAndSP(u8 a);
 static void PrintContestMoves(void);
 static void Task_PrintContestMoves(u8 taskId);
+static void Task_PrintAbilities(u8 taskId);
 static void PrintContestMoveDescription(u8 a);
 static void PrintMoveDetails(u16 a);
 static void PrintNewMoveDetailsOrCancelText(void);
@@ -420,6 +432,15 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .height = 2,
         .paletteNum = 6,
         .baseBlock = 67,
+    },
+    [PSS_LABEL_WINDOW_ABILITIES_TITLE] = {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 11,
+        .height = 2,
+        .paletteNum = 6,
+        .baseBlock = 45,
     },
     [PSS_LABEL_WINDOW_PROMPT_CANCEL] = {
         .bg = 0,
@@ -684,6 +705,36 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .baseBlock = 599,
     },
 };
+static const struct WindowTemplate sPageAbilitiesTemplate[] = // This is used for abilities page
+{
+    [PSS_DATA_WINDOW_ABILITY_NAMES] = {
+        .bg = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 4,
+        .width = 9,
+        .height = 10,
+        .paletteNum = 6,
+        .baseBlock = 449,
+    },
+    [PSS_DATA_WINDOW_ABILITY_SP] = {
+        .bg = 0,
+        .tilemapLeft = 24,
+        .tilemapTop = 4,
+        .width = 6,
+        .height = 10,
+        .paletteNum = 8,
+        .baseBlock = 539,
+    },
+    [PSS_DATA_WINDOW_ABILITY_DESCRIPTION] = {
+        .bg = 0,
+        .tilemapLeft = 10,
+        .tilemapTop = 15,
+        .width = 20,
+        .height = 4,
+        .paletteNum = 6,
+        .baseBlock = 599,
+    },
+};
 static const u8 sTextColors[][3] =
 {
     {0, 1, 2},
@@ -717,7 +768,8 @@ static void (*const sTextPrinterTasks[])(u8 taskId) =
     [PSS_PAGE_INFO] = Task_PrintInfoPage,
     [PSS_PAGE_SKILLS] = Task_PrintSkillsPage,
     [PSS_PAGE_BATTLE_MOVES] = Task_PrintBattleMoves,
-    [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves
+    [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves,
+    [PSS_PAGE_ABILITIES] = Task_PrintAbilities
 };
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
@@ -1536,10 +1588,15 @@ static void Task_HandleInput(u8 taskId)
                     PlaySE(SE_SELECT);
                     BeginCloseSummaryScreen(taskId);
                 }
-                else // Contest or Battle Moves
+                else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
+                      || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES) // Contest or Battle Moves
                 {
                     PlaySE(SE_SELECT);
                     SwitchToMoveSelection(taskId);
+                } else { // Abilities
+                    // TODO: add this
+                    // PlaySE(SE_SELECT);
+                    // SwitchToAbilitySelection(taskId);
                 }
             }
         }
@@ -1883,6 +1940,35 @@ static void SwitchToMoveSelection(u8 taskId)
     ScheduleBgCopyTilemapToVram(2);
     CreateMoveSelectorSprites(SPRITE_ARR_ID_MOVE_SELECTOR1);
     gTasks[taskId].func = Task_HandleInput_MoveSelect;
+}
+
+static void SwitchToAbilitySelection(u8 taskId)
+{
+    // TODO: flesh this out
+    // u16 move;
+
+    // sMonSummaryScreen->firstMoveIndex = 0;
+    // move = sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex];
+    // ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
+    // if (!gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_STATUS]].invisible)
+    //     ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
+    // HandlePowerAccTilemap(9, -3);
+    // HandleAppealJamTilemap(9, -3, move);
+    // if (!sMonSummaryScreen->lockMovesFlag)
+    // {
+    //     ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_INFO);
+    //     PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_SWITCH);
+    // }
+    // TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][0], 3, FALSE);
+    // TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0], 1, FALSE);
+    // PrintMoveDetails(move);
+    // PrintNewMoveDetailsOrCancelText();
+    // SetNewMoveTypeIcon();
+    // ScheduleBgCopyTilemapToVram(0);
+    // ScheduleBgCopyTilemapToVram(1);
+    // ScheduleBgCopyTilemapToVram(2);
+    // CreateMoveSelectorSprites(SPRITE_ARR_ID_MOVE_SELECTOR1);
+    // gTasks[taskId].func = Task_HandleInput_MoveSelect;
 }
 
 static void Task_HandleInput_MoveSelect(u8 taskId)
@@ -2802,6 +2888,7 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE, gText_PkmnSkills, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE, gText_BattleMoves, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE, gText_ContestMoves, 2, 1, 0, 1);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_ABILITIES_TITLE, gText_Abilities, 2, 1, 0, 1);
 
     stringXPos = GetStringRightAlignXOffset(FONT_NORMAL, gText_Cancel2, 62);
     iconXPos = stringXPos - 16;
@@ -2855,6 +2942,7 @@ static void PutPageWindowTilemaps(u8 page)
     ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE);
     ClearWindowTilemap(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE);
     ClearWindowTilemap(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE);
+    ClearWindowTilemap(PSS_LABEL_WINDOW_ABILITIES_TITLE);
 
     switch (page)
     {
@@ -2895,7 +2983,13 @@ static void PutPageWindowTilemaps(u8 page)
             PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_INFO);
         }
         break;
+    case PSS_PAGE_ABILITIES:
+        PutWindowTilemap(PSS_LABEL_WINDOW_ABILITIES_TITLE);
+        // TODO: case for SUMMARY_MODE_SELECT_ABILITY
+        PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_INFO);
+        break;
     }
+
 
     for (i = 0; i < ARRAY_COUNT(sMonSummaryScreen->windowIds); i++)
         PutWindowTilemap(sMonSummaryScreen->windowIds[i]);
@@ -2941,6 +3035,10 @@ static void ClearPageWindowTilemaps(u8 page)
         {
             ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_INFO);
         }
+        break;
+    case PSS_PAGE_ABILITIES:
+        // TODO: add SUMMARY_MODE_SELECT_ABILITY and add case for that
+        ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_INFO);
         break;
     }
 
@@ -3555,6 +3653,38 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
     }
 }
 
+static void PrintAbilityNameAndSP(u8 abilityIndex)
+{
+    u8 sp;
+    int x;
+    const u8 *text;
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+    u8 abilityNameWindowId = AddWindowFromTemplateList(sPageAbilitiesTemplate, PSS_DATA_WINDOW_ABILITY_NAMES);
+    u8 spValueWindowId = AddWindowFromTemplateList(sPageAbilitiesTemplate, PSS_DATA_WINDOW_ABILITY_SP);
+    u16 ability = summary->abilities[abilityIndex];
+
+    ability = 10; // TODO: get rid
+    if (ability != 0)
+    {
+        sp = CalculateSP(ability);
+        PrintTextOnWindow(abilityNameWindowId, gAbilityNames[ability], 0, abilityIndex * 16 + 1, 0, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sp, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        DynamicPlaceholderTextUtil_Reset();
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sMovesPPLayout);
+        text = gStringVar4;
+        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 44);
+    }
+    else
+    {
+        PrintTextOnWindow(abilityNameWindowId, gText_OneDash, 0, abilityIndex * 16 + 1, 0, 1);
+        text = gText_TwoDashes;
+        x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 44);
+    }
+
+    PrintTextOnWindow(spValueWindowId, text, x, abilityIndex * 16 + 1, 0, 1);
+}
+
 static void PrintContestMoves(void)
 {
     PrintMoveNameAndPP(0);
@@ -3619,6 +3749,39 @@ static void PrintContestMoveDescription(u8 moveSlot)
         u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_DESCRIPTION);
         PrintTextOnWindow(windowId, gContestEffectDescriptionPointers[gContestMoves[move].effect], 6, 1, 0, 0);
     }
+}
+
+
+static void Task_PrintAbilities(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 1:
+        PrintAbilityNameAndSP(0);
+        break;
+    case 2:
+        PrintAbilityNameAndSP(1);
+        break;
+    case 3:
+        PrintAbilityNameAndSP(2);
+        break;
+    case 4:
+        PrintAbilityNameAndSP(3);
+        break;
+    // TODO: add cases for print abilities 4 and 5
+    case 5:
+        // TODO: cases for SUMMARY_MODE_SELECT_ABILITY
+        break;
+    case 6:
+        // TODO: cases for SUMMARY_MODE_SELECT_ABILITY
+        break;
+    case 7:
+        DestroyTask(taskId);
+        return;
+    }
+    data[0]++;
 }
 
 static void PrintMoveDetails(u16 move)

@@ -4533,6 +4533,12 @@ u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex)
     return basePP + ((basePP * 20 * ((gPPUpGetMask[moveIndex] & ppBonuses) >> (2 * moveIndex))) / 100);
 }
 
+u8 CalculateSP(u16 ability)
+{
+    // TODO: make lookup table for abilities
+    return 1;
+}
+
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex)
 {
     u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
