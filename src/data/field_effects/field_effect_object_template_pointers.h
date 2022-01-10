@@ -35,6 +35,9 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles;
 const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SlitherTracks;
+const struct SpriteTemplate gFieldEffectObjectTemplate_BugTracks;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SpotTracks;
 
 const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_SHADOW_S]              = &gFieldEffectObjectTemplate_ShadowSmall,
@@ -74,4 +77,7 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_BUBBLES]               = &gFieldEffectObjectTemplate_Bubbles,
     [FLDEFFOBJ_SMALL_SPARKLE]         = &gFieldEffectObjectTemplate_SmallSparkle,
     [FLDEFFOBJ_RAYQUAZA]              = &gFieldEffectObjectTemplate_Rayquaza,
+    [FLDEFFOBJ_TRACKS_SLITHER]        = &gFieldEffectObjectTemplate_SlitherTracks,
+    [FLDEFFOBJ_TRACKS_SPOT]           = &gFieldEffectObjectTemplate_SpotTracks,
+    [FLDEFFOBJ_TRACKS_BUG]            = &gFieldEffectObjectTemplate_BugTracks,
 };
