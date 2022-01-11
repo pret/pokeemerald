@@ -4035,16 +4035,16 @@ extern const u32 gPokenavRibbonsSummaryBg_Tilemap[];
 extern const u32 gSummaryScreen_Gfx[];
 extern const u32 gSummaryScreen_Pal[];
 extern const u32 gSummaryPage_Info_Tilemap[];
-extern const u32 gSummaryPage_InfoCopy_Tilemap[];
+extern const u32 gSummaryPage_InfoEgg_Tilemap[];
 extern const u32 gSummaryPage_Skills_Tilemap[];
 extern const u32 gSummaryPage_BattleMoves_Tilemap[];
 extern const u32 gSummaryPage_ContestMoves_Tilemap[];
 extern const u16 gPPTextPalette[];
-extern const u16 gSummaryScreenWindow_Tilemap[];
 extern const u32 gMoveTypes_Pal[];
 
-extern const u16 gSummaryScreenPowAcc_Tilemap[];
-extern const u16 gSummaryScreenAppealJam_Tilemap[];
+extern const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[];
+extern const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[];
+extern const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[];
 
 extern const u32 gMoveTypes_Gfx[];
 extern const u32 gSummaryMoveSelect_Gfx[];
