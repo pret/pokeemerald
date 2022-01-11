@@ -145,7 +145,7 @@ RustboroCity_DevonCorp_2F_EventScript_AnorithReady::
 
 RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep::
 	setvar VAR_TEMP_1, SPECIES_LILEEP
-	givemon SPECIES_LILEEP, 20, ITEM_NONE
+	givemon SPECIES_LILEEP, 20
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC
 	goto Common_EventScript_NoMoreRoomForPokemon
@@ -190,7 +190,7 @@ RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep::
 
 RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith::
 	setvar VAR_TEMP_1, SPECIES_ANORITH
-	givemon SPECIES_ANORITH, 20, ITEM_NONE
+	givemon SPECIES_ANORITH, 20
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC
 	goto Common_EventScript_NoMoreRoomForPokemon

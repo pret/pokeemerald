@@ -986,7 +986,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, holding the specified item. The trailing 0s are unused parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
-	.macro givemon species:req, level:req, item:req
+	.macro givemon species:req, level:req, item=ITEM_NONE
 	.byte 0x79
 	.2byte \species
 	.byte \level
@@ -1432,7 +1432,7 @@
 
 	@ Prepares to start a wild battle against a 'species' at 'level' holding 'item'. Running this command will not affect
 	@ normal wild battles. You start the prepared battle with dowildbattle.
-	.macro setwildbattle species:req, level:req, item:req
+	.macro setwildbattle species:req, level:req, item=ITEM_NONE
 	.byte 0xb6
 	.2byte \species
 	.byte \level
