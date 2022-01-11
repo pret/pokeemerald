@@ -8299,6 +8299,7 @@ BattleScript_MimicryActivatesEnd3::
 	end3
 
 BattleScript_ProteanActivates::
+	pause B_WAIT_TIME_SHORTEST
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNCHANGEDTYPE
 	waitmessage B_WAIT_TIME_LONG
