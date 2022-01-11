@@ -47,7 +47,7 @@ SouthernIsland_Interior_EventScript_SetMayGfx::
 
 SouthernIsland_Interior_EventScript_TryLatiEncounter::
 	lockall
-	setvar VAR_0x8008, 12
+	setvar VAR_0x8008, 12  @ Player's Y coordinate. Not read
 	goto SouthernIsland_Interior_EventScript_Lati
 	end
 
