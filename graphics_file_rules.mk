@@ -440,7 +440,7 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
                                   $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $^ >$@
 
-$(INTERFACEGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
+graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
 $(RAYQUAZAGFXDIR)/scene_2/rayquaza.8bpp: %.8bpp: %.png

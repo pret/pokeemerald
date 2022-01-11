@@ -16,7 +16,7 @@ const u32 gUnusedPal_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.gbap
 const u32 gSmokescreenImpactTiles[] = INCBIN_U32("graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz");
 const u32 gSmokescreenImpactPalette[] = INCBIN_U32("graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz");
 
-#include "data/graphics/interface_pokeballs.h"
+#include "data/graphics/pokeballs.h"
 
 const u32 gBlankGfxCompressed[] = INCBIN_U32("graphics/interface/blank.4bpp.lz");
 
@@ -1137,29 +1137,28 @@ const u32 gSummaryPage_BattleMoves_Tilemap[]  = INCBIN_U32("graphics/summary_scr
 const u32 gSummaryPage_ContestMoves_Tilemap[] = INCBIN_U32("graphics/summary_screen/page_contest_moves.bin.lz");
 const u32 gSummaryPage_InfoEgg_Tilemap[]      = INCBIN_U32("graphics/summary_screen/page_info_egg.bin.lz");
 
-const u32 gBagMaleTiles[] = INCBIN_U32("graphics/misc/bag_male.4bpp.lz");
-const u32 gBagFemaleTiles[] = INCBIN_U32("graphics/misc/bag_female.4bpp.lz");
-const u32 gBagPalette[] = INCBIN_U32("graphics/misc/bag.gbapal.lz");
+const u32 gBagMaleTiles[] = INCBIN_U32("graphics/bag/bag_male.4bpp.lz");
+const u32 gBagFemaleTiles[] = INCBIN_U32("graphics/bag/bag_female.4bpp.lz");
+const u32 gBagPalette[] = INCBIN_U32("graphics/bag/bag.gbapal.lz");
 
-const u32 gBagScreenMale_Pal[] = INCBIN_U32("graphics/interface/bag_screen_male.gbapal.lz");
-const u32 gBagScreenFemale_Pal[] = INCBIN_U32("graphics/interface/bag_screen_female.gbapal.lz");
+const u32 gBagScreenMale_Pal[] = INCBIN_U32("graphics/bag/menu_male.gbapal.lz");
+const u32 gBagScreenFemale_Pal[] = INCBIN_U32("graphics/bag/menu_female.gbapal.lz");
 
-const u32 gBagScreen_Gfx[] = INCBIN_U32("graphics/interface/bag_screen.4bpp.lz");
-const u32 gBagScreen_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_tilemap.bin.lz");
+const u32 gBagScreen_Gfx[] = INCBIN_U32("graphics/bag/menu.4bpp.lz");
+const u32 gBagScreen_GfxTileMap[] = INCBIN_U32("graphics/bag/menu.bin.lz");
 
-const u32 gBattlePyramidBag_Gfx[]          = INCBIN_U32("graphics/interface/bag_pyramid.4bpp.lz");
-const u32 gBattlePyramidBag_Pal[]          = INCBIN_U32("graphics/interface/bag_pyramid.gbapal.lz"); // female palette is first and male is second.
-const u32 gBattlePyramidBagTilemap[]       = INCBIN_U32("graphics/interface/bag_pyramid_tilemap.bin.lz");
-const u32 gBattlePyramidBagInterface_Pal[] = INCBIN_U32("graphics/interface/bag_pyramid_interface.gbapal.lz");
+const u32 gBattlePyramidBag_Gfx[]          = INCBIN_U32("graphics/bag/bag_pyramid.4bpp.lz");
+const u32 gBattlePyramidBag_Pal[]          = INCBIN_U32("graphics/bag/bag_pyramid.gbapal.lz"); // female palette is first and male is second.
+const u32 gBattlePyramidBagTilemap[]       = INCBIN_U32("graphics/bag/menu_pyramid.bin.lz");
+const u32 gBattlePyramidBagInterface_Pal[] = INCBIN_U32("graphics/bag/menu_pyramid.gbapal.lz");
 
-const u32 gBagSwapLineGfx[] = INCBIN_U32("graphics/interface/bag_swap.4bpp.lz");
-const u32 gBagSwapLinePal[] = INCBIN_U32("graphics/interface/bag_swap.gbapal.lz");
+const u32 gSwapLineGfx[] = INCBIN_U32("graphics/interface/swap_line.4bpp.lz");
+const u32 gSwapLinePal[] = INCBIN_U32("graphics/interface/swap_line.gbapal.lz");
 
-const u32 gBuyMenuFrame_Gfx[] = INCBIN_U32("graphics/interface/mart_frame.4bpp.lz");
-const u32 gMenuMoneyPal[] = INCBIN_U32("graphics/interface/mart_frame.gbapal.lz");
-const u32 gBuyMenuFrame_Tilemap[] = INCBIN_U32("graphics/interface/mart_frame.bin.lz");
-
-const u32 gMenuMoneyGfx[] = INCBIN_U32("graphics/interface/money.4bpp.lz");
+const u32 gShopMenu_Gfx[] = INCBIN_U32("graphics/shop/menu.4bpp.lz");
+const u32 gShopMenu_Pal[] = INCBIN_U32("graphics/shop/menu.gbapal.lz");
+const u32 gShopMenu_Tilemap[] = INCBIN_U32("graphics/shop/menu.bin.lz");
+const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/money.4bpp.lz");
 
 // Pokeblock
 
@@ -1271,14 +1270,12 @@ const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("graphics/intro/copyright.bin.l
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/area_unknown.gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/area_unknown.4bpp.lz");
 
-// seems to be fire red leftovers, but the menu elements is reused in the item menu for TM descriptions.
-
 const u16 gMenuInfoElements1_Pal[] = INCBIN_U16("graphics/interface/menu_info1.gbapal");
 const u16 gMenuInfoElements2_Pal[] = INCBIN_U16("graphics/interface/menu_info2.gbapal");
 const u16 gMenuInfoElements3_Pal[] = INCBIN_U16("graphics/interface/menu_info3.gbapal");
-const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/menu_info.4bpp"); //the types are reused for item menu
+const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/menu_info.4bpp");
 
-const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/interface/hm.4bpp");
+const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/hm.4bpp");
 
 // contest results screen
 
