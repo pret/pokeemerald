@@ -1428,6 +1428,8 @@ static void Cmd_attackcanceler(void)
         SET_BATTLER_TYPE(gBattlerAttacker, moveType);
         gBattlerAbility = gBattlerAttacker;
         BattleScriptPushCursor();
+        PrepareStringBattle(STRINGID_EMPTYSTRING3, gBattlerAttacker);
+        gBattleCommunication[MSG_DISPLAY] = 1;
         gBattlescriptCurrInstr = BattleScript_ProteanActivates;
         return;
     }
