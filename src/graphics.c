@@ -950,9 +950,9 @@ const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz")
 #include "data/graphics/battle_terrain.h"
 
 // Battle Dome
-const u32 gDomeTourneyBg_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_bg.4bpp.lz");
+const u32 gDomeTourneyTree_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_tree.4bpp.lz");
 const u32 gDomeTourneyLine_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_line.4bpp.lz"); // the red glow mask for the tourney advancement lines
-const u32 gDomeTourneyLineMask_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_line_mask_map.bin.lz");
+const u32 gDomeTourneyTree_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_tree.bin.lz");
 const u32 gDomeTourneyLineDown_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_line_down_map.bin.lz");
 const u32 gDomeTourneyLineUp_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_line_up_map.bin.lz");
 const u32 gDomeTourneyInfoCard_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_info_card.4bpp.lz");
@@ -967,7 +967,7 @@ const u32 gBattleArenaJudgementSymbolsGfx[] = INCBIN_U32("graphics/battle_fronti
 const u32 gBattleArenaJudgementSymbolsPalette[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.gbapal.lz");
 
 const u32 gBattleWindowTextPalette[] = INCBIN_U32("graphics/battle_interface/text.gbapal.lz");
-const u16 gPPTextPalette[] = INCBIN_U16("graphics/battle_frontier/text_pp.gbapal");
+const u16 gPPTextPalette[] = INCBIN_U16("graphics/battle_interface/text_pp.gbapal");
 
 const u16 gTilesetAnims_BattleDomePals0_0[] = INCBIN_U16("graphics/battle_frontier/dome_anim1.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_1[] = INCBIN_U16("graphics/battle_frontier/dome_anim2.gbapal");
