@@ -843,7 +843,9 @@ static u8 GetTrainerBattleTransition(void)
         || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_AQUA_ADMIN)
         return B_TRANSITION_AQUA;
 
-    if (gTrainers[gTrainerBattleOpponent_A].battleType == TYPE_DOUBLE_BATTLE)
+    if (gTrainers[gTrainerBattleOpponent_A].battleType == TYPE_TRIPLE_BATTLE)
+        minPartyCount = 3; // triple battles always at least have 3 pokemon.
+    else if (gTrainers[gTrainerBattleOpponent_A].battleType == TYPE_DOUBLE_BATTLE)
         minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
         minPartyCount = 1;

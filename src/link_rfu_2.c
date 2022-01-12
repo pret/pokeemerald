@@ -1437,7 +1437,6 @@ static void WaitAllReadyToCloseLink(void)
     if (count == playerCount)
     {
         // All ready, close link
-        gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
         if (gRfu.parentChild == MODE_CHILD)
         {
             gRfu.errorState = RFU_ERROR_STATE_DISCONNECTING;

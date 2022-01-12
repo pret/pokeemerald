@@ -2686,7 +2686,7 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     u16 statValue = 0;
     u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+    if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
         return 0;
 
     ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);

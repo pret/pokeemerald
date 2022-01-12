@@ -1126,8 +1126,6 @@ static void CB2_HandleStartBattle(void)
             gPreBattleCallback1 = gMain.callback1;
             gMain.callback1 = BattleMainCB1;
             SetMainCallback2(BattleMainCB2);
-            if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-                gBattleTypeFlags |= BATTLE_TYPE_LINK_IN_BATTLE;
         }
         break;
     // Introduce short delays between sending party Pokémon for link
@@ -1387,8 +1385,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             gPreBattleCallback1 = gMain.callback1;
             gMain.callback1 = BattleMainCB1;
             SetMainCallback2(BattleMainCB2);
-            if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-                gBattleTypeFlags |= BATTLE_TYPE_LINK_IN_BATTLE;
         }
         break;
     }
@@ -1841,7 +1837,6 @@ static void CB2_HandleStartMultiBattle(void)
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 gTrainerBattleOpponent_A = TRAINER_LINK_OPPONENT;
-                gBattleTypeFlags |= BATTLE_TYPE_LINK_IN_BATTLE;
             }
         }
         break;
@@ -2057,7 +2052,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             }
         }
 
-        gBattleTypeFlags |= (gTrainers[trainerNum].battleType == TYPE_DOUBLE_BATTLE); //gTrainers[trainerNum].doubleBattle;
+        if (gTrainers[trainerNum].battleType == TYPE_DOUBLE_BATTLE)
+            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+        else if (gTrainers[trainerNum].battleType == TYPE_TRIPLE_BATTLE)
+            gBattleTypeFlags |= BATTLE_TYPE_TRIPLE;
     }
 
     return gTrainers[trainerNum].partySize;
@@ -2170,7 +2168,6 @@ void CB2_InitEndLinkBattle(void)
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
-    gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
     {

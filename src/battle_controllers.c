@@ -825,7 +825,7 @@ void TryReceiveLinkBattleData(void)
     s32 j;
     u8 *recvBuffer;
 
-    if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE))
+    if (gReceivedRemoteLinkPlayers != 0)
     {
         DestroyTask_RfuIdle();
         for (i = 0; i < GetLinkPlayerCount(); i++)

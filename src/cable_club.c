@@ -990,7 +990,6 @@ static void CB2_ReturnFromUnionRoomBattle(void)
 
 void CB2_ReturnFromCableClubBattle(void)
 {
-    gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();

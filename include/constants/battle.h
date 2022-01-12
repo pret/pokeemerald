@@ -45,11 +45,11 @@
 
 // Battle Type Flags
 #define BATTLE_TYPE_DOUBLE             (1 << 0)
-#define BATTLE_TYPE_LINK               (1 << 1)
-#define BATTLE_TYPE_IS_MASTER          (1 << 2) // In not-link battles, it's always set.
-#define BATTLE_TYPE_TRAINER            (1 << 3)
-#define BATTLE_TYPE_FIRST_BATTLE       (1 << 4)
-#define BATTLE_TYPE_LINK_IN_BATTLE     (1 << 5) // Set on battle entry, cleared on exit. Checked rarely
+#define BATTLE_TYPE_TRIPLE             (1 << 1)
+#define BATTLE_TYPE_LINK               (1 << 2)
+#define BATTLE_TYPE_IS_MASTER          (1 << 3) // In not-link battles, it's always set.
+#define BATTLE_TYPE_TRAINER            (1 << 4)
+#define BATTLE_TYPE_FIRST_BATTLE       (1 << 5)
 #define BATTLE_TYPE_MULTI              (1 << 6)
 #define BATTLE_TYPE_SAFARI             (1 << 7)
 #define BATTLE_TYPE_BATTLE_TOWER       (1 << 8)
