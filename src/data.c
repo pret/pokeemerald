@@ -46,6 +46,23 @@ const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
     BATTLER_OFFSET(15), MON_PIC_SIZE,
 };
 
+const struct SpriteFrameImage gBattlerPicTable_PlayerMiddle[] =
+{
+    BATTLER_OFFSET(16),  MON_PIC_SIZE,
+    BATTLER_OFFSET(17),  MON_PIC_SIZE,
+    BATTLER_OFFSET(18), MON_PIC_SIZE,
+    BATTLER_OFFSET(19), MON_PIC_SIZE,
+};
+
+const struct SpriteFrameImage gBattlerPicTable_OpponentMiddle[] =
+{
+    BATTLER_OFFSET(20), MON_PIC_SIZE,
+    BATTLER_OFFSET(21), MON_PIC_SIZE,
+    BATTLER_OFFSET(22), MON_PIC_SIZE,
+    BATTLER_OFFSET(23), MON_PIC_SIZE,
+};
+
+
 const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
 {
     gTrainerBackPic_Brendan, 0x0800,

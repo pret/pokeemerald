@@ -694,12 +694,12 @@ extern struct BattleStruct *gBattleStruct;
 extern u8 *gLinkBattleSendBuffer;
 extern u8 *gLinkBattleRecvBuffer;
 extern struct BattleResources *gBattleResources;
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
+extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT_2];
+extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT_2];
+extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT_2];
 extern u8 gBattlerInMenuId;
 extern bool8 gDoingBattleAnim;
-extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
+extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT_2];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
@@ -707,16 +707,16 @@ extern struct BattleHealthboxInfo *gBattleControllerOpponentHealthboxData;
 extern struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData;
 extern u16 gBattleMovePower;
 extern u16 gMoveToLearn;
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
+extern u8 gBattleMonForms[MAX_BATTLERS_COUNT_2];
 
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
 extern struct BattleResults gBattleResults;
 extern u8 gLeveledUpInBattle;
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT_2])(void);
+extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT_2];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
-extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT_2];
 
 #endif // GUARD_BATTLE_H

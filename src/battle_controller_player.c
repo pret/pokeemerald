@@ -322,6 +322,7 @@ static void HandleInputChooseAction(void)
             BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
         }
+        // TODO: add case for triple battle
     }
     else if (JOY_NEW(START_BUTTON))
     {
