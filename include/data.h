@@ -13,6 +13,12 @@ enum {
     BATTLER_AFFINE_RETURN,
 };
 
+enum {
+    TYPE_SINGLE_BATTLE,
+    TYPE_DOUBLE_BATTLE,
+    TYPE_TRIPLE_BATTLE,
+};
+
 struct MonCoords
 {
     // This would use a bitfield, but some function
@@ -73,7 +79,7 @@ struct Trainer
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[12];
     /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
-    /*0x18*/ bool8 doubleBattle;
+    /*0x18*/ u8 battleType;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
     /*0x24*/ union TrainerMonPtr party;
