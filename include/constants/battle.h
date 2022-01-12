@@ -26,6 +26,9 @@
 #define MAX_BATTLERS_COUNT  4
 #define MAX_BATTLERS_COUNT_2  6
 
+// for double battles
+#define MAX_BATTLERS_COUNT_DOUBLE  4
+
 #define B_POSITION_PLAYER_LEFT        0
 #define B_POSITION_OPPONENT_LEFT      1
 #define B_POSITION_PLAYER_RIGHT       2

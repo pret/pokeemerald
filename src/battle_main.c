@@ -3028,7 +3028,7 @@ static void BattleStartClearSetData(void)
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
     {
         gStatuses3[i] = 0;
 
@@ -3115,7 +3115,7 @@ static void BattleStartClearSetData(void)
         *(i + 3 * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0) = 0;
     }
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + i) = PARTY_SIZE;
     }
