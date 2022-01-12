@@ -590,11 +590,11 @@ struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     union {
-    	void* ptr[MAX_BATTLERS_COUNT];
-    	u8* byte[MAX_BATTLERS_COUNT];
+        void* ptr[MAX_BATTLERS_COUNT_2];
+        u8* byte[MAX_BATTLERS_COUNT_2];
     } sprites;
-    struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
-    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
+    struct SpriteTemplate templates[MAX_BATTLERS_COUNT_2];
+    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT_2][4];
     u8 unusedArr[0x80];
     u8 *barFontGfx;
     void *unusedPtr;
