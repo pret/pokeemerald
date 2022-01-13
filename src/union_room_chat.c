@@ -917,7 +917,7 @@ static void InitUnionRoomChat(struct UnionRoomChat *chat)
     PrepareSendBuffer_Null(chat->sendMessageBuffer);
     #ifndef FREE_UNION_ROOM_CHAT
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
-        StringCopy(unionRoomChat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
+        StringCopy(chat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
     #endif
 }
 
