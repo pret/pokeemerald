@@ -1251,7 +1251,7 @@ BattleScript_EffectAromaticMistWorks:
 	setstatchanger STAT_SPDEF, 1, FALSE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_EffectAromaticMistEnd
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AromaticMistAnim
-	pause 16
+	pause B_WAIT_TIME_SHORTEST
 	printstring STRINGID_TARGETSTATWONTGOHIGHER
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_EffectAromaticMistEnd
@@ -7147,7 +7147,7 @@ BattleScript_EnduredMsg::
 
 BattleScript_SturdiedMsg::
 	copybyte gBattlerAbility, gBattlerTarget
-	pause 16
+	pause B_WAIT_TIME_SHORTEST
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_ENDUREDSTURDY
 	waitmessage B_WAIT_TIME_LONG
@@ -8299,6 +8299,7 @@ BattleScript_MimicryActivatesEnd3::
 	end3
 
 BattleScript_ProteanActivates::
+	pause B_WAIT_TIME_SHORTEST
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNCHANGEDTYPE
 	waitmessage B_WAIT_TIME_LONG
@@ -8394,7 +8395,7 @@ BattleScript_WeakArmorActivates::
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_WeakArmorActivatesSpeed
 	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_WeakArmorDefAnim
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_WeakArmorActivatesSpeed
-	pause 16
+	pause B_WAIT_TIME_SHORTEST
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_WeakArmorActivatesSpeed
@@ -8408,7 +8409,7 @@ BattleScript_WeakArmorActivatesSpeed:
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_WeakArmorActivatesEnd
 	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_WeakArmorSpeedAnim
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_ROSE_EMPTY, BattleScript_WeakArmorActivatesEnd
-	pause 16
+	pause B_WAIT_TIME_SHORTEST
 	printstring STRINGID_TARGETSTATWONTGOHIGHER
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_WeakArmorActivatesEnd

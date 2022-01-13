@@ -396,9 +396,10 @@
 
 #define BATTLE_TERRAIN_COUNT            22
 
-#define B_WAIT_TIME_LONG  64
-#define B_WAIT_TIME_MED   48
-#define B_WAIT_TIME_SHORT 32
+#define B_WAIT_TIME_LONG     64
+#define B_WAIT_TIME_MED      48
+#define B_WAIT_TIME_SHORT    32
+#define B_WAIT_TIME_SHORTEST 16
 
 #define CHERRIM_OVERCAST  0
 #define CHERRIM_SUNSHINE  1
