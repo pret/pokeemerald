@@ -170,6 +170,7 @@
 #define STATUS3_AQUA_RING               (1 << 28)
 #define STATUS3_LASER_FOCUS             (1 << 29)
 #define STATUS3_POWER_TRICK             (1 << 30)
+#define STATUS3_SKY_DROPPED             (1 << 31) // Target of Sky Drop
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE)
 
 #define STATUS4_ELECTRIFIED             (1 << 0)
@@ -361,7 +362,9 @@
 #define MOVE_EFFECT_RECOIL_HP_25        0x46
 #define MOVE_EFFECT_RELIC_SONG          0x47
 #define MOVE_EFFECT_TRAP_BOTH           0x48
-#define NUM_MOVE_EFFECTS                0x49
+#define MOVE_EFFECT_SKY_DROP            0x49
+
+#define NUM_MOVE_EFFECTS                0x50
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
@@ -393,9 +396,10 @@
 
 #define BATTLE_TERRAIN_COUNT            22
 
-#define B_WAIT_TIME_LONG  64
-#define B_WAIT_TIME_MED   48
-#define B_WAIT_TIME_SHORT 32
+#define B_WAIT_TIME_LONG     64
+#define B_WAIT_TIME_MED      48
+#define B_WAIT_TIME_SHORT    32
+#define B_WAIT_TIME_SHORTEST 16
 
 #define CHERRIM_OVERCAST  0
 #define CHERRIM_SUNSHINE  1
