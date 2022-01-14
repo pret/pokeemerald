@@ -64,17 +64,33 @@ static const struct CompressedSpriteSheet sSpriteSheets_DoublesOpponentHealthbox
     {gHealthboxDoublesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE}
 };
 
+static const struct CompressedSpriteSheet sSpriteSheets_TriplesPlayerHealthbox[3] =
+{
+    {gHealthboxTriplesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
+    {gHealthboxTriplesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER2_TILE},
+    {gHealthboxTriplesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER3_TILE}
+};
+
+static const struct CompressedSpriteSheet sSpriteSheets_TriplesOpponentHealthbox[3] =
+{
+    {gHealthboxTriplesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT1_TILE},
+    {gHealthboxTriplesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE},
+    {gHealthboxTriplesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT3_TILE}
+};
+
 static const struct CompressedSpriteSheet sSpriteSheet_SafariHealthbox =
 {
     gHealthboxSafariGfx, 0x1000, TAG_HEALTHBOX_SAFARI_TILE
 };
 
-static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_COUNT] =
+static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_COUNT_2] =
 {
     {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER1_TILE},
     {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT1_TILE},
     {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER2_TILE},
-    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE}
+    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE},
+    {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER3_TILE},
+    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT3_TILE}
 };
 
 static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
@@ -739,7 +755,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
             LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[1]);
         }
-        else if (!IsDoubleBattle())
+        else if (!IsDoubleBattle() && !IsTripleBattle())
         {
             if (state == 2)
             {
@@ -757,7 +773,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             else
                 retVal = TRUE;
         }
-        else
+        else if (IsDoubleBattle())
         {
             if (state == 2)
                 LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[0]);
@@ -775,6 +791,35 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
                 LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[2]]);
             else if (state == 9)
                 LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[3]]);
+            else
+                retVal = TRUE;
+        }
+        else // IsTripleBattle()
+        {
+            if (state == 2)
+                LoadCompressedSpriteSheet(&sSpriteSheets_TriplesPlayerHealthbox[0]);
+            else if (state == 3)
+                LoadCompressedSpriteSheet(&sSpriteSheets_TriplesPlayerHealthbox[1]);
+            else if (state == 4)
+                LoadCompressedSpriteSheet(&sSpriteSheets_TriplesPlayerHealthbox[2]);
+            else if (state == 5)
+                LoadCompressedSpriteSheet(&sSpriteSheets_TriplesOpponentHealthbox[0]);
+            else if (state == 6)
+                LoadCompressedSpriteSheet(&sSpriteSheets_TriplesOpponentHealthbox[1]);
+            else if (state == 7)
+                LoadCompressedSpriteSheet(&sSpriteSheets_TriplesOpponentHealthbox[2]);
+            else if (state == 8)
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[0]]);
+            else if (state == 9)
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[1]]);
+            else if (state == 10)
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[2]]);
+            else if (state == 11)
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[3]]);
+            else if (state == 12)
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[4]]);
+            else if (state == 13)
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[5]]);
             else
                 retVal = TRUE;
         }

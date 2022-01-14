@@ -206,7 +206,7 @@ static const struct OamData sOamData_64x32 =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
+static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[3] =
 {
     {
         .tileTag = TAG_HEALTHBOX_PLAYER1_TILE,
@@ -225,10 +225,19 @@ static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = TAG_HEALTHBOX_PLAYER3_TILE,
+        .paletteTag = TAG_HEALTHBOX_PAL,
+        .oam = &sOamData_64x32,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
     }
 };
 
-static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
+static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[3] =
 {
     {
         .tileTag = TAG_HEALTHBOX_OPPONENT1_TILE,
@@ -241,6 +250,15 @@ static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
     },
     {
         .tileTag = TAG_HEALTHBOX_OPPONENT2_TILE,
+        .paletteTag = TAG_HEALTHBOX_PAL,
+        .oam = &sOamData_64x32,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = TAG_HEALTHBOX_OPPONENT3_TILE,
         .paletteTag = TAG_HEALTHBOX_PAL,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
@@ -278,7 +296,7 @@ static const struct OamData sOamData_Healthbar =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT] =
+static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT_2] =
 {
     {
         .tileTag = TAG_HEALTHBAR_PLAYER1_TILE,
@@ -309,6 +327,24 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
     },
     {
         .tileTag = TAG_HEALTHBAR_OPPONENT2_TILE,
+        .paletteTag = TAG_HEALTHBAR_PAL,
+        .oam = &sOamData_Healthbar,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_HealthBar
+    },
+    {
+        .tileTag = TAG_HEALTHBAR_PLAYER3_TILE,
+        .paletteTag = TAG_HEALTHBAR_PAL,
+        .oam = &sOamData_Healthbar,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_HealthBar
+    },
+    {
+        .tileTag = TAG_HEALTHBAR_OPPONENT3_TILE,
         .paletteTag = TAG_HEALTHBAR_PAL,
         .oam = &sOamData_Healthbar,
         .anims = gDummySpriteAnimTable,

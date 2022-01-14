@@ -8617,7 +8617,7 @@ const struct Trainer gTrainers[] = {
         .trainerPic = TRAINER_PIC_BUG_CATCHER,
         .trainerName = _("RICK"),
         .items = {},
-        .battleType = TYPE_DOUBLE_BATTLE,
+        .battleType = TYPE_TRIPLE_BATTLE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .partySize = ARRAY_COUNT(sParty_Rick),
         .party = {.NoItemDefaultMoves = sParty_Rick},

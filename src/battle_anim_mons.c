@@ -17,6 +17,7 @@
 #include "constants/battle_anim.h"
 
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+#define IS_TRIPLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_TRIPLE))
 
 extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
@@ -906,6 +907,11 @@ bool8 IsBattlerSpritePresent(u8 battlerId)
 bool8 IsDoubleBattle(void)
 {
     return IS_DOUBLE_BATTLE();
+}
+
+bool8 IsTripleBattle(void)
+{
+    return IS_TRIPLE_BATTLE();
 }
 
 void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
