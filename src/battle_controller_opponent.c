@@ -1893,7 +1893,7 @@ static void Task_StartSendOutAnim(u8 taskId)
     u8 savedActiveBank = gActiveBattler;
 
     gActiveBattler = gTasks[taskId].data[0];
-    if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
+    if (!IsDoubleOrTripleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
@@ -1903,7 +1903,7 @@ static void Task_StartSendOutAnim(u8 taskId)
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
     }
-    else
+    else if (IsDoubleBattle())
     {
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
@@ -1911,6 +1911,18 @@ static void Task_StartSendOutAnim(u8 taskId)
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
         gActiveBattler ^= BIT_FLANK;
+    }
+    else // IsTripleBattle()
+    {
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        StartSendOutAnim(gActiveBattler, FALSE);
+        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT_2;
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        StartSendOutAnim(gActiveBattler, FALSE);
+        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT_2;
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        StartSendOutAnim(gActiveBattler, FALSE);
+        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT_2;
     }
     gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
     gActiveBattler = savedActiveBank;

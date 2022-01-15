@@ -40,8 +40,11 @@
 #define BATTLE_OPPOSITE(id) ((id) ^ 1)
 
 // Only used for double battles
-// #define BATTLE_PARTNER(id) ((id) ^ 4)
 #define BATTLE_PARTNER(id) ((id) ^ 2)
+
+// Only used for triple battles
+#define BATTLER_TO_RIGHT(id) (((id) + 2) % 6)
+#define BATTLER_TO_LEFT(id) (((id) + 4) % 6)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
