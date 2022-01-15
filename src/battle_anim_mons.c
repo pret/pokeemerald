@@ -923,6 +923,11 @@ bool8 IsTripleBattle(void)
     return IS_TRIPLE_BATTLE();
 }
 
+bool8 IsDoubleOrTripleBattle(void)
+{
+    return IS_DOUBLE_BATTLE() || IS_TRIPLE_BATTLE();
+}
+
 void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
 {
     if (IsContest())

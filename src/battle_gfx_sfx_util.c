@@ -755,7 +755,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
             LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[1]);
         }
-        else if (!IsDoubleBattle() && !IsTripleBattle())
+        else if (!IsDoubleOrTripleBattle())
         {
             if (state == 2)
             {
@@ -1113,7 +1113,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId)
     else
     {
         gBattleSpritesDataPtr->battlerData[battlerId].lowHpSong = 0;
-        if (!IsDoubleBattle() && !IsTripleBattle())
+        if (!IsDoubleOrTripleBattle())
         {
             m4aSongNumStop(SE_LOW_HEALTH);
             return;
@@ -1171,7 +1171,7 @@ void HandleBattleLowHpMusicChange(void)
 
         if (GetMonData(&gPlayerParty[battler1PartyId], MON_DATA_HP) != 0)
             HandleLowHpMusicChange(&gPlayerParty[battler1PartyId], playerBattler1);
-        if ((IsDoubleBattle() || IsTripleBattle()) && GetMonData(&gPlayerParty[battler2PartyId], MON_DATA_HP) != 0)
+        if (IsDoubleOrTripleBattle() && GetMonData(&gPlayerParty[battler2PartyId], MON_DATA_HP) != 0)
             HandleLowHpMusicChange(&gPlayerParty[battler2PartyId], playerBattler2);
         if (IsTripleBattle() && GetMonData(&gPlayerParty[battler3PartyId], MON_DATA_HP) != 0)
             HandleLowHpMusicChange(&gPlayerParty[battler3PartyId], playerBattler3);
@@ -1215,7 +1215,7 @@ void LoadAndCreateEnemyShadowSprites(void)
                                                                                     0xC8);
     gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
 
-    if (IsDoubleBattle() || IsTripleBattle())
+    if (IsDoubleOrTripleBattle())
     {
         battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
         gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow,
