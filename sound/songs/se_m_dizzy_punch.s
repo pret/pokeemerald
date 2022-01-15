@@ -46,7 +46,7 @@ se_m_dizzy_punch_1:
 	.byte	W01
 	.byte		PAN   , c_v-13
 	.byte		BEND  , c_v+0
-	.byte		N04   , Cn6 
+	.byte		N04   , Cn6
 	.byte	W01
 	.byte		VOL   , 66*se_m_dizzy_punch_mvl/mxv
 	.byte		PAN   , c_v+0

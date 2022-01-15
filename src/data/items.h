@@ -2680,7 +2680,7 @@ const struct Item gItems[] =
         .name = _("UP-GRADE"),
         .itemId = ITEM_UP_GRADE,
         .price = 2100,
-        .holdEffect = HOLD_EFFECT_UP_GRADE,
+        .holdEffect = HOLD_EFFECT_UPGRADE,
         .description = sUpGradeDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -2767,7 +2767,7 @@ const struct Item gItems[] =
         .name = _("STICK"),
         .itemId = ITEM_STICK,
         .price = 200,
-        .holdEffect = HOLD_EFFECT_STICK,
+        .holdEffect = HOLD_EFFECT_LEEK,
         .description = sStickDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -3744,10 +3744,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM22_SOLARBEAM] =
+    [ITEM_TM22_SOLAR_BEAM] =
     {
         .name = _("TM22"),
-        .itemId = ITEM_TM22_SOLARBEAM,
+        .itemId = ITEM_TM22_SOLAR_BEAM,
         .price = 3000,
         .description = sTM22Desc,
         .pocket = POCKET_TM_HM,

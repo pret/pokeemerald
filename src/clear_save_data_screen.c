@@ -80,7 +80,7 @@ void CB2_InitClearSaveDataScreen(void)
 static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
 {
     DrawStdFrameWithCustomTileAndPalette(0, 0, 2, 14);
-    AddTextPrinterParameterized(0, 1, gText_ClearAllSaveData, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearAllSaveData, 0, 1, 0, 0);
     CreateYesNoMenu(sClearSaveYesNo, 2, 14, 1);
     gTasks[taskId].func = Task_ClearSaveDataScreenYesNoChoice;
 }
@@ -91,7 +91,7 @@ static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
     {
     case 0:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized(0, 1, gText_ClearingData, 0, 1, 0, 0);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearingData, 0, 1, 0, 0);
         gTasks[taskId].func = Task_ClearSaveData;
         break;
     case 1:
@@ -205,5 +205,5 @@ static void InitClearSaveDataScreenWindows(void)
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     LoadWindowGfx(0, 0, 2, 224);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 }

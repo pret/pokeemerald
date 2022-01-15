@@ -261,6 +261,7 @@ extern const u8 BattleScript_AttackerAbilityStatRaiseEnd3[];
 extern const u8 BattleScript_PoisonHealActivates[];
 extern const u8 BattleScript_BadDreamsActivates[];
 extern const u8 BattleScript_SwitchInAbilityMsg[];
+extern const u8 BattleScript_SwitchInAbilityMsgRet[];
 extern const u8 BattleScript_ToxicSpikesPoisoned[];
 extern const u8 BattleScript_ToxicSpikesAbsorbed[];
 extern const u8 BattleScript_StickyWebOnSwitchIn[];
@@ -413,6 +414,7 @@ extern const u8 BattleScript_AttackerFormChangeEnd3NoPopup[];
 extern const u8 BattleScript_AttackerFormChangeMoveEffect[];
 extern const u8 BattleScript_BothCanNoLongerEscape[];
 extern const u8 BattleScript_OctolockEndTurn[];
+extern const u8 BattleScript_NeutralizingGasExits[];
 extern const u8 BattleScript_MagicianActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

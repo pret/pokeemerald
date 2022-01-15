@@ -232,35 +232,35 @@ se_m_reversal_2:
 	.byte	W02
 	.byte	W01
 	.byte		        c_v+31
-	.byte		N03   , Cs5 
+	.byte		N03   , Cs5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
 	.byte		        c_v-33
 	.byte	W03
 	.byte		        c_v+31
-	.byte		N03   , Dn5 
+	.byte		N03   , Dn5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
 	.byte		        c_v-33
 	.byte	W02
 	.byte		        c_v+31
-	.byte		N03   , Ds5 
+	.byte		N03   , Ds5
 	.byte	W02
 	.byte		BEND  , c_v+0
 	.byte	W01
 	.byte		        c_v-33
 	.byte	W02
 	.byte		        c_v+31
-	.byte		N03   , En5 
+	.byte		N03   , En5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W02
 	.byte		        c_v-33
 	.byte	W02
 	.byte		        c_v+31
-	.byte		N03   , Fn5 
+	.byte		N03   , Fn5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -268,35 +268,35 @@ se_m_reversal_2:
 	.byte	W02
 	.byte	W01
 	.byte		        c_v+31
-	.byte		N03   , Fs5 
+	.byte		N03   , Fs5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
 	.byte		        c_v-33
 	.byte	W03
 	.byte		        c_v+31
-	.byte		N03   , Gn5 
+	.byte		N03   , Gn5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
 	.byte		        c_v-33
 	.byte	W02
 	.byte		        c_v+31
-	.byte		N03   , Gs5 
+	.byte		N03   , Gs5
 	.byte	W02
 	.byte		BEND  , c_v+0
 	.byte	W01
 	.byte		        c_v-33
 	.byte	W02
 	.byte		        c_v+31
-	.byte		N03   , An5 
+	.byte		N03   , An5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W02
 	.byte		        c_v-33
 	.byte	W02
 	.byte		        c_v+31
-	.byte		N03   , As5 
+	.byte		N03   , As5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -304,7 +304,7 @@ se_m_reversal_2:
 	.byte	W02
 	.byte	W01
 	.byte		        c_v+31
-	.byte		N03   , Bn5 
+	.byte		N03   , Bn5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01

@@ -8,6 +8,7 @@
 #include "data.h"
 #include "event_data.h"
 #include "frontier_util.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "link.h"
@@ -44,18 +45,13 @@ struct BattleWindowText
     u8 shadowColor;
 };
 
-extern const u16 gUnknown_08D85620[];
-
-// this file's functions
 static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
-// EWRAM vars
 static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
-// const rom data
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
 
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
@@ -431,6 +427,8 @@ static const u8 sText_ExclamationMark4[] = _("!");
 static const u8 sText_ExclamationMark5[] = _("!");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
+static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX} took {B_DEF_NAME_WITH_PREFIX}\ninto the air!");
+static const u8 sText_TargetTooHeavy[] = _("But the target\nwas too heavy!");
 
 const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -565,8 +563,8 @@ static const u8 sText_Electromagnetism[] = _("electromagnetism");
 static const u8 sText_BufferEnds[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwore off!");
 static const u8 sText_ThroatChopEnds[] = _("{B_ATK_NAME_WITH_PREFIX} can\nuse sound-based moves again!");
 static const u8 sText_TelekinesisEnds[] = _("{B_ATK_NAME_WITH_PREFIX} was freed\nfrom the telekinesis!");
-static const u8 sText_TailwindEnds[] = _("{B_ATK_TEAM1} team's tailwind\n petered out!");
-static const u8 sText_LuckyChantEnds[] = _("{B_ATK_TEAM1} team's Lucky Chant\n wore off!");
+static const u8 sText_TailwindEnds[] = _("{B_ATK_TEAM1} team's tailwind\npetered out!");
+static const u8 sText_LuckyChantEnds[] = _("{B_ATK_TEAM1} team's Lucky Chant\nwore off!");
 static const u8 sText_TrickRoomEnds[] = _("The twisted dimensions returned to\nnormal!");
 static const u8 sText_WonderRoomEnds[] = _("Wonder Room wore off, and Defense\nand Sp. Def stats returned to normal!");
 static const u8 sText_MagicRoomEnds[] = _("Magic Room wore off, and held items'\neffects returned to normal!");
@@ -629,7 +627,7 @@ static const u8 sText_TerrainBecomesGrassy[] = _("Grass grew to cover\nthe battl
 static const u8 sText_TerrainBecomesElectric[] = _("An electric current runs across\nthe battlefield!");
 static const u8 sText_TerrainBecomesPsychic[] = _("The battlefield got weird!");
 static const u8 sText_TargetElectrified[] = _("The {B_DEF_NAME_WITH_PREFIX}'s moves\nhave been electrified!");
-static const u8 sText_AssaultVestDoesntAllow[] = _("The effects of the {B_LAST_ITEM} prevent status\nmoves from being used!\p");
+static const u8 sText_AssaultVestDoesntAllow[] = _("{B_LAST_ITEM}'s effects prevent\nstatus moves from being used!\p");
 static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} can't use {B_CURRENT_MOVE}\nbecause of gravity!\p");
 static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} was\nprevented from healing!\p");
 static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ITEM} is \nreacting to {B_ATK_TRAINER_NAME}'s Mega Ring!");
@@ -733,9 +731,13 @@ static const u8 sText_CantEscapeDueToUsedMove[] = _("{B_ATK_NAME_WITH_PREFIX} ca
 static const u8 sText_PkmnBecameWeakerToFire[] = _("{B_DEF_NAME_WITH_PREFIX} became\nweaker to fire!");
 static const u8 sText_PkmnAboutToBeAttackedByItsItem[] = _("{B_DEF_NAME_WITH_PREFIX} is about\nto be attacked by its {B_BUFF1}!");
 static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PREFIX} can no longer escape\nbecause of {B_CURRENT_MOVE}!");
+static const u8 sText_NeutralizingGasEnters[] = _("Neutralizing Gas filled the area!");
+static const u8 sText_NeutralizingGasOver[] = _("The effects of Neutralizing\nGas wore off!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_NEUTRALIZINGGASOVER - 12] = sText_NeutralizingGasOver,
+    [STRINGID_NEUTRALIZINGGASENTERS - 12] = sText_NeutralizingGasEnters,
     [STRINGID_BATTLERTYPECHANGEDTO - 12] = sText_BattlerTypeChangedTo,
     [STRINGID_PASTELVEILENTERS - 12] = sText_PastelVeilEnters,
     [STRINGID_PASTELVEILPROTECTED -12] = sText_PastelVeilProtected,
@@ -1330,6 +1332,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNBECAMEWEAKERTOFIRE - 12] = sText_PkmnBecameWeakerToFire,
     [STRINGID_ABOUTTOUSEPOLTERGEIST - 12] = sText_PkmnAboutToBeAttackedByItsItem,
     [STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE - 12] = sText_CantEscapeBecauseOfCurrentMove,
+    [STRINGID_PKMNTOOKTARGETHIGH - 12] = sText_PkmnTookTargetHigh,
+    [STRINGID_TARGETTOOHEAVY - 12] = sText_TargetTooHeavy,
 };
 
 const u16 gMentalHerbCureStringIds[] = 
@@ -1392,6 +1396,7 @@ const u16 gSwitchInAbilityStringIds[] =
     [B_MSG_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
     [B_MSG_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
     [B_MSG_SWITCHIN_PASTEL_VEIL] = STRINGID_PASTELVEILENTERS,
+    [B_MSG_SWITCHIN_NEUTRALIZING_GAS] = STRINGID_NEUTRALIZINGGASENTERS,
 };
 
 const u16 gMissStringIds[] =
@@ -1543,6 +1548,7 @@ const u16 gFirstTurnOfTwoStringIds[] =
     [B_MSG_TURN1_PHANTOM_FORCE] = STRINGID_VANISHEDINSTANTLY,
     [B_MSG_TURN1_GEOMANCY]      = STRINGID_PKNMABSORBINGPOWER,
     [B_MSG_TURN1_FREEZE_SHOCK]  = STRINGID_CLOAKEDINAFREEZINGLIGHT,
+    [B_MSG_TURN1_SKY_DROP]      = STRINGID_PKMNTOOKTARGETHIGH,
 };
 
 // Index copied from move's index in sTrappingMoves
@@ -1990,585 +1996,584 @@ static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, 
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 {
-// The corresponding WindowTemplate is gStandardBattleWindowTemplates[] within src/battle_bg.c
-    { // 0 Standard battle message
+    [B_WIN_MSG] = {
         .fillValue = PIXEL_FILL(0xF),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 1,
-        .fgColor = 1,
-        .bgColor = 15,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_DYNAMIC_COLOR_6,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
-    { // 1 "What will (pokemon) do?"
+    [B_WIN_ACTION_PROMPT] = {
         .fillValue = PIXEL_FILL(0xF),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 15,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_DYNAMIC_COLOR_6,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
-    { // 2 "Fight/Pokemon/Bag/Run"
+    [B_WIN_ACTION_MENU] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 3 Top left move
+    [B_WIN_MOVE_NAME_1] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 4 Top right move
+    [B_WIN_MOVE_NAME_2] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 5 Bottom left move
+    [B_WIN_MOVE_NAME_3] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 6 Bottom right move
+    [B_WIN_MOVE_NAME_4] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 7 "PP"
+    [B_WIN_PP] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = TEXT_DYNAMIC_COLOR_3,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_2,
     },
-    { // 8
+    [B_WIN_DUMMY] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 9 PP remaining
+    [B_WIN_PP_REMAINING] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 2,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = TEXT_DYNAMIC_COLOR_3,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_2,
     },
-    { // 10 "type"
+    [B_WIN_MOVE_TYPE] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 11 "switch which?"
+    [B_WIN_SWITCH_PROMPT] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 12 "gText_BattleYesNoChoice"
+    [B_WIN_YESNO] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 13
+    [B_WIN_LEVEL_UP_BOX] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 14
+    [B_WIN_LEVEL_UP_BANNER] = {
         .fillValue = PIXEL_FILL(0),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 32,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 0,
-        .shadowColor = 2,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_COLOR_TRANSPARENT,
+        .shadowColor = TEXT_COLOR_DARK_GRAY,
     },
-    { // 15
+    [B_WIN_VS_PLAYER] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 16
+    [B_WIN_VS_OPPONENT] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 17
+    [B_WIN_VS_MULTI_PLAYER_1] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 18
+    [B_WIN_VS_MULTI_PLAYER_2] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 19
+    [B_WIN_VS_MULTI_PLAYER_3] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 20
+    [B_WIN_VS_MULTI_PLAYER_4] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 21
+    [B_WIN_VS_OUTCOME_DRAW] = {
         .fillValue = PIXEL_FILL(0),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 0,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_COLOR_TRANSPARENT,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
-    { // 22
+    [B_WIN_VS_OUTCOME_LEFT] = {
         .fillValue = PIXEL_FILL(0),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 0,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_COLOR_TRANSPARENT,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
-    { // 23
+    [B_WIN_VS_OUTCOME_RIGHT] = {
         .fillValue = PIXEL_FILL(0x0),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 0,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_COLOR_TRANSPARENT,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
 };
 
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
 {
-    { // 0
+    [B_WIN_MSG] = {
         .fillValue = PIXEL_FILL(0xF),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 1,
-        .fgColor = 1,
-        .bgColor = 15,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_DYNAMIC_COLOR_6,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
-    { // 1
+    [B_WIN_ACTION_PROMPT] = {
         .fillValue = PIXEL_FILL(0xF),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 15,
-        .shadowColor = 6,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_DYNAMIC_COLOR_6,
+        .shadowColor = TEXT_COLOR_GREEN,
     },
-    { // 2
+    [B_WIN_ACTION_MENU] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 3
+    [B_WIN_MOVE_NAME_1] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 4
+    [B_WIN_MOVE_NAME_2] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 5
+    [B_WIN_MOVE_NAME_3] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 6
+    [B_WIN_MOVE_NAME_4] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 7
+    [B_WIN_PP] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = TEXT_DYNAMIC_COLOR_3,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_2,
     },
-    { // 8
+    [B_WIN_DUMMY] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 9
+    [B_WIN_PP_REMAINING] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 2,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = TEXT_DYNAMIC_COLOR_3,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_2,
     },
-    { // 10
+    [B_WIN_MOVE_TYPE] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 11
+    [B_WIN_SWITCH_PROMPT] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 7,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 12
+    [B_WIN_YESNO] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 13
+    [B_WIN_LEVEL_UP_BOX] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 14
+    [B_WIN_LEVEL_UP_BANNER] = {
         .fillValue = PIXEL_FILL(0),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 32,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 0,
-        .shadowColor = 2,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_COLOR_TRANSPARENT,
+        .shadowColor = TEXT_COLOR_DARK_GRAY,
     },
-    { // 15
+    [ARENA_WIN_PLAYER_NAME] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 1,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_COLOR_WHITE,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 16
+    [ARENA_WIN_VS] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 17
+    [ARENA_WIN_OPPONENT_NAME] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 18
+    [ARENA_WIN_MIND] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 19
+    [ARENA_WIN_SKILL] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 20
+    [ARENA_WIN_BODY] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 21
+    [ARENA_WIN_JUDGEMENT_TITLE] = {
         .fillValue = PIXEL_FILL(0xE),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = -1,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
     },
-    { // 22
+    [ARENA_WIN_JUDGEMENT_TEXT] = {
         .fillValue = PIXEL_FILL(0x1),
-        .fontId = 1,
+        .fontId = FONT_NORMAL,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .speed = 1,
-        .fgColor = 2,
-        .bgColor = 1,
-        .shadowColor = 3,
+        .fgColor = TEXT_COLOR_DARK_GRAY,
+        .bgColor = TEXT_COLOR_WHITE,
+        .shadowColor = TEXT_COLOR_LIGHT_GRAY,
     },
 };
 
 static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
 {
-    sTextOnWindowsInfo_Normal, sTextOnWindowsInfo_Arena
+    [B_WIN_TYPE_NORMAL] = sTextOnWindowsInfo_Normal,
+    [B_WIN_TYPE_ARENA]  = sTextOnWindowsInfo_Arena
 };
 
 static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
-// code
 void BufferStringBattle(u16 stringID)
 {
     s32 i;
@@ -2913,7 +2918,7 @@ static void GetBattlerNick(u32 battlerId, u8 *dst)
     if (illusionMon != NULL)
         mon = illusionMon;
     GetMonData(mon, MON_DATA_NICKNAME, dst);
-    StringGetEnd10(dst);
+    StringGet_Nickname(dst);
 }
 
 #define HANDLE_NICKNAME_STRING_CASE(battlerId)                          \
@@ -3185,7 +3190,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, text);
                 else
                     GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
@@ -3338,7 +3343,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 {
                     GetMonData(&gPlayerParty[gBattleStruct->field_52], MON_DATA_NICKNAME, text);
                 }
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
@@ -3589,7 +3594,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
             }
-            StringGetEnd10(text);
+            StringGet_Nickname(text);
             StringAppend(dst, text);
             srcID += 3;
             break;
@@ -3610,7 +3615,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 gBattleScripting.illusionNickHack = 0;
                 IllusionNickHack(src[srcID + 1], src[srcID + 2], dst);
-                StringGetEnd10(dst);
+                StringGet_Nickname(dst);
             }
             else
             {
@@ -3618,7 +3623,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                     GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
                 else
                     GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
-                StringGetEnd10(dst);
+                StringGet_Nickname(dst);
             }
             srcID += 3;
             break;
@@ -3748,9 +3753,9 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
 
-    if (windowId & 0x80)
+    if (windowId & B_WIN_COPYTOVRAM)
     {
-        windowId &= ~(0x80);
+        windowId &= ~B_WIN_COPYTOVRAM;
         copyToVram = FALSE;
     }
     else
@@ -3780,17 +3785,17 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         printerTemplate.x = printerTemplate.currentX = alignX;
     }
 
-    if (windowId == 0x16)
-        gTextFlags.useAlternateDownArrow = 0;
+    if (windowId == ARENA_WIN_JUDGEMENT_TEXT)
+        gTextFlags.useAlternateDownArrow = FALSE;
     else
-        gTextFlags.useAlternateDownArrow = 1;
+        gTextFlags.useAlternateDownArrow = TRUE;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED))
-        gTextFlags.autoScroll = 1;
+        gTextFlags.autoScroll = TRUE;
     else
-        gTextFlags.autoScroll = 0;
+        gTextFlags.autoScroll = FALSE;
 
-    if (windowId == 0 || windowId == 0x16)
+    if (windowId == B_WIN_MSG || windowId == ARENA_WIN_JUDGEMENT_TEXT)
     {
         if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
             speed = 1;
@@ -3812,14 +3817,14 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
     if (copyToVram)
     {
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
     }
 }
 
 void SetPpNumbersPaletteInMoveSelection(void)
 {
     struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
-    const u16 *palPtr = gUnknown_08D85620;
+    const u16 *palPtr = gPPTextPalette;
     u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBattler]],
                          chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBattler]]);
 

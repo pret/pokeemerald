@@ -114,8 +114,8 @@ static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_BATTLE_DOUBLE,                 GROUPTYPE_BATTLE, 2},
     {ACTIVITY_BATTLE_MULTI,                  GROUPTYPE_BATTLE, 4},
     {ACTIVITY_TRADE,                         GROUPTYPE_TRADE,  2},
-    {ACTIVITY_WONDER_CARD,                   GROUPTYPE_TOTAL,  2},
-    {ACTIVITY_WONDER_NEWS,                   GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_WONDER_CARD_DUP,               GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_WONDER_NEWS_DUP,               GROUPTYPE_TOTAL,  2},
     {ACTIVITY_POKEMON_JUMP,                  GROUPTYPE_TOTAL,  0},
     {ACTIVITY_BERRY_CRUSH,                   GROUPTYPE_TOTAL,  0},
     {ACTIVITY_BERRY_PICK,                    GROUPTYPE_TOTAL,  0},
@@ -132,8 +132,8 @@ static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_NPCTALK | IN_UNION_ROOM,       GROUPTYPE_UNION,  2},
     {ACTIVITY_ACCEPT | IN_UNION_ROOM,        GROUPTYPE_UNION,  1},
     {ACTIVITY_DECLINE | IN_UNION_ROOM,       GROUPTYPE_UNION,  1},
-    {ACTIVITY_WONDER_CARD2,                  GROUPTYPE_TOTAL,  2},
-    {ACTIVITY_WONDER_NEWS2,                  GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_WONDER_CARD,                   GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_WONDER_NEWS,                   GROUPTYPE_TOTAL,  2},
     {ACTIVITY_CONTEST_COOL,                  GROUPTYPE_TOTAL,  0},
     {ACTIVITY_CONTEST_BEAUTY,                GROUPTYPE_TOTAL,  0},
     {ACTIVITY_CONTEST_CUTE,                  GROUPTYPE_TOTAL,  0},
@@ -189,10 +189,10 @@ static void CB2_InitWirelessCommunicationScreen(void)
     sStatusScreen->taskId = CreateTask(Task_WirelessCommunicationScreen, 0);
     sStatusScreen->rfuTaskId = CreateTask_ListenToWireless();
     sStatusScreen->prevGroupCounts[GROUPTYPE_TOTAL] = 1;
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
     LoadPalette(sBgTiles_Pal, 0x00, 0x20);
     Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
@@ -236,16 +236,16 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    WCSS_AddTextPrinterParameterized(0, 1, sHeaderTexts[0], GetStringCenterAlignXOffset(1, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
+    WCSS_AddTextPrinterParameterized(0, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
     for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
     {
-        WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+        WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
-    WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
+    WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 #define tState data[0]
@@ -280,12 +280,12 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != GROUPTYPE_TOTAL)
-                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
                 else
-                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 98, COLORMODE_RED);
+                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
             }
             PutWindowTilemap(2);
-            CopyWindowToVram(2, 3);
+            CopyWindowToVram(2, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
@@ -344,13 +344,13 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
         break;
     }
 
-    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
-static u32 CountPlayersInGroupAndGetActivity(struct UnkStruct_x20 * unk20, u32 * groupCounts)
+static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * groupCounts)
 {
     int i, j, k;
-    u32 activity = unk20->gname_uname.gname.activity;
+    u32 activity = player->rfu.data.activity;
 
     #define group_activity(i) (sActivityGroupInfo[(i)][0])
     #define group_type(i)     (sActivityGroupInfo[(i)][1])
@@ -358,15 +358,13 @@ static u32 CountPlayersInGroupAndGetActivity(struct UnkStruct_x20 * unk20, u32 *
 
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
-        if (activity == group_activity(i) && unk20->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
+        if (activity == group_activity(i) && player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (group_players(i) == 0)
             {
                 k = 0;
                 for (j = 0; j < RFU_CHILD_MAX; j++)
-                {
-                    if (unk20->gname_uname.gname.child_sprite_gender[j] != 0) k++;
-                }
+                    if (player->rfu.data.partnerInfo[j] != 0) k++;
                 k++;
                 groupCounts[group_type(i)] += k;
             }
@@ -398,12 +396,12 @@ static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts
 {
     bool32 activitiesChanged = FALSE;
     u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};
-    struct UnkStruct_x20 ** data = (void *)gTasks[taskId].data;
+    struct RfuPlayer ** players = (void *)gTasks[taskId].data;
     s32 i;
 
     for (i = 0; i < NUM_TASK_DATA; i++)
     {
-        u32 activity = CountPlayersInGroupAndGetActivity(&(*data)[i], groupCountBuffer);
+        u32 activity = CountPlayersInGroupAndGetActivity(&(*players)[i], groupCountBuffer);
         if (activity != activities[i])
         {
             activities[i] = activity;
@@ -423,9 +421,9 @@ static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts
         memcpy(groupCounts,     groupCountBuffer, sizeof(groupCountBuffer));
         memcpy(prevGroupCounts, groupCountBuffer, sizeof(groupCountBuffer));
 
-        groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE] 
-                                     + groupCounts[GROUPTYPE_BATTLE] 
-                                     + groupCounts[GROUPTYPE_UNION] 
+        groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE]
+                                     + groupCounts[GROUPTYPE_BATTLE]
+                                     + groupCounts[GROUPTYPE_UNION]
                                      + groupCounts[GROUPTYPE_TOTAL];
         return TRUE;
     }

@@ -494,7 +494,7 @@ static void AnimCirclingSparkle(struct Sprite *sprite)
     sprite->data[4] = 112;
     sprite->data[5] = 0;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = TranslateSpriteInGrowingCircleOverDuration;
+    sprite->callback = TranslateSpriteInGrowingCircle;
     sprite->callback(sprite);
 }
 
@@ -818,50 +818,67 @@ void AnimTask_InvertScreenColor(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void UnusedAnimTask_8115F94(u8 taskId)
+// Unused
+#define tTimer         data[0]
+#define tLength        data[1]
+#define tFlagsScenery  data[2]
+#define tFlagsAttacker data[3]
+#define tFlagsTarget   data[4]
+#define tColorR        data[5]
+#define tColorG        data[6]
+#define tColorB        data[7]
+void AnimTask_TintPalettes(u8 taskId)
 {
     u8 attackerBattler;
     u8 targetBattler;
     u8 paletteIndex;
     u32 selectedPalettes = 0;
 
-    if (gTasks[taskId].data[0] == 0)
+    if (gTasks[taskId].tTimer == 0)
     {
-        gTasks[taskId].data[2] = gBattleAnimArgs[0];
-        gTasks[taskId].data[3] = gBattleAnimArgs[1];
-        gTasks[taskId].data[4] = gBattleAnimArgs[2];
-        gTasks[taskId].data[1] = gBattleAnimArgs[3];
-        gTasks[taskId].data[5] = gBattleAnimArgs[4];
-        gTasks[taskId].data[6] = gBattleAnimArgs[5];
-        gTasks[taskId].data[7] = gBattleAnimArgs[6];
+        gTasks[taskId].tFlagsScenery = gBattleAnimArgs[0];
+        gTasks[taskId].tFlagsAttacker = gBattleAnimArgs[1];
+        gTasks[taskId].tFlagsTarget = gBattleAnimArgs[2];
+        gTasks[taskId].tLength = gBattleAnimArgs[3];
+        gTasks[taskId].tColorR = gBattleAnimArgs[4];
+        gTasks[taskId].tColorG = gBattleAnimArgs[5];
+        gTasks[taskId].tColorB = gBattleAnimArgs[6];
     }
 
-    gTasks[taskId].data[0]++;
+    gTasks[taskId].tTimer++;
     attackerBattler = gBattleAnimAttacker;
     targetBattler = gBattleAnimTarget;
 
-    if (gTasks[taskId].data[2] & 0x100)
-        selectedPalettes = 0x0000FFFF;
+    if (gTasks[taskId].tFlagsScenery & (1 << 8))
+        selectedPalettes = PALETTES_BG;
 
-    if (gTasks[taskId].data[2] & 0x1)
+    if (gTasks[taskId].tFlagsScenery & 1)
     {
         paletteIndex = IndexOfSpritePaletteTag(gSprites[gHealthboxSpriteIds[attackerBattler]].template->paletteTag);
         selectedPalettes |= (1 << paletteIndex) << 16;
     }
 
-    if (gTasks[taskId].data[3] & 0x100)
+    if (gTasks[taskId].tFlagsAttacker & (1 << 8))
         selectedPalettes |= (1 << attackerBattler) << 16;
 
-    if (gTasks[taskId].data[4] & 0x100)
+    if (gTasks[taskId].tFlagsTarget & (1 << 8))
         selectedPalettes |= (1 << targetBattler) << 16;
 
-    TintPlttBuffer(selectedPalettes, gTasks[taskId].data[5], gTasks[taskId].data[6], gTasks[taskId].data[7]);
-    if (gTasks[taskId].data[0] == gTasks[taskId].data[1])
+    TintPlttBuffer(selectedPalettes, gTasks[taskId].tColorR, gTasks[taskId].tColorG, gTasks[taskId].tColorB);
+    if (gTasks[taskId].tTimer == gTasks[taskId].tLength)
     {
         UnfadePlttBuffer(selectedPalettes);
         DestroyAnimVisualTask(taskId);
     }
 }
+#undef tTimer
+#undef tLength
+#undef tFlagsScenery
+#undef tFlagsAttacker
+#undef tFlagsTarget
+#undef tColorR
+#undef tColorG
+#undef tColorB
 
 static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
 {
