@@ -1924,7 +1924,7 @@ static const u8 sHoldEffectToType[][2] =
     {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
 };
 
-const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT_2] =
+const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
     [B_POSITION_PLAYER_LEFT] = {
         .tileTag = TAG_NONE,
@@ -6899,8 +6899,8 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
  // case MON_SPR_GFX_MODE_BATTLE:       
     case MON_SPR_GFX_MODE_NORMAL:
     default:
-        gfx->numSprites = MAX_BATTLERS_COUNT;
-        gfx->numSprites2 = MAX_BATTLERS_COUNT;
+        gfx->numSprites = MAX_BATTLERS_COUNT_DOUBLE;
+        gfx->numSprites2 = MAX_BATTLERS_COUNT_DOUBLE;
         gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
         gfx->dataSize = 1;
         gfx->mode = MON_SPR_GFX_MODE_NORMAL;

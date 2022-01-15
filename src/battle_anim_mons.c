@@ -37,7 +37,7 @@ static void CreateBattlerTrace(struct Task *task, u8 taskId);
 
 EWRAM_DATA static union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
 
-static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT_2] =
+static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 {
     { // Single battle
         { 72, 80 },

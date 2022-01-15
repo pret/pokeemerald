@@ -296,7 +296,7 @@ static const struct OamData sOamData_Healthbar =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT_2] =
+static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
     {
         .tileTag = TAG_HEALTHBAR_PLAYER1_TILE,

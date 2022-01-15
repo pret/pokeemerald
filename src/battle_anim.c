@@ -213,7 +213,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     {
         InitPrioritiesForVisibleBattlers();
         UpdateOamPriorityInAllHealthboxes(0);
-        for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (GetBattlerSide(i) != B_SIDE_PLAYER)
                 gAnimBattlerSpecies[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);

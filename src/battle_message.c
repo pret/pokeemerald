@@ -47,7 +47,7 @@ static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
-static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT_2] = {0};
+static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
@@ -2070,7 +2070,7 @@ void BufferStringBattle(u16 stringID)
     gPotentialItemEffectBattler = gBattleMsgDataPtr->itemEffectBattler;
     *(&gBattleStruct->stringMoveType) = gBattleMsgDataPtr->moveType;
 
-    for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         sBattlerAbilities[i] = gBattleMsgDataPtr->abilities[i];
     }

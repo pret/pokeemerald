@@ -1955,13 +1955,13 @@ static void Task_StartSendOutAnim(u8 taskId)
     {
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
-        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT_2;
+        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT;
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
-        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT_2;
+        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT;
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
-        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT_2;
+        gActiveBattler = (gActiveBattler + 2) % MAX_BATTLERS_COUNT;
     }
     gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
     gActiveBattler = savedActiveBank;

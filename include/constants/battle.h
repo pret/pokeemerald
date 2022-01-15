@@ -23,8 +23,7 @@
  *   +---------------------------+
  */
 
-#define MAX_BATTLERS_COUNT  4
-#define MAX_BATTLERS_COUNT_2  6
+#define MAX_BATTLERS_COUNT  6
 
 // for double battles
 #define MAX_BATTLERS_COUNT_DOUBLE  4
