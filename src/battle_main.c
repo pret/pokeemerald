@@ -1416,7 +1416,7 @@ static void CB2_PreInitMultiBattle(void)
 {
     s32 i;
     u8 playerMultiplierId;
-    s32 numPlayers = MAX_BATTLERS_COUNT;
+    s32 numPlayers = MAX_BATTLERS_COUNT_DOUBLE;
     u8 blockMask = 0xF;
     u32 *savedBattleTypeFlags;
     void (**savedCallback)(void);
@@ -3857,7 +3857,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (effect)
             return;
     }
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
     {
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
         gChosenActionByBattler[i] = B_ACTION_NONE;
@@ -3969,7 +3969,7 @@ void BattleTurnPassed(void)
         gChosenMoveByBattler[i] = MOVE_NONE;
     }
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;

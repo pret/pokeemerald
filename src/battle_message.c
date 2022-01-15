@@ -47,7 +47,7 @@ static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
-static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT_2] = {0};
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
@@ -387,6 +387,7 @@ static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME}\nw
 static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!");
 static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!");
 static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
+static const u8 sText_Trainer1SentOutThreePkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}, {B_OPPONENT_MON2_NAME} and {B_OPPONENT_MON3_NAME}!");
 static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_BUFF1}!");
 static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME}!");
 static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
@@ -395,6 +396,7 @@ static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME} sen
 static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} sent out\n{B_BUFF1}!");
 static const u8 sText_GoPkmn[] = _("Go! {B_PLAYER_MON1_NAME}!");
 static const u8 sText_GoTwoPkmn[] = _("Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!");
+static const u8 sText_GoThreePkmn[] = _("Go! {B_PLAYER_MON1_NAME}, {B_PLAYER_MON2_NAME} and\n{B_PLAYER_MON3_NAME}!");
 static const u8 sText_GoPkmn2[] = _("Go! {B_BUFF1}!");
 static const u8 sText_DoItPkmn[] = _("Do it! {B_BUFF1}!");
 static const u8 sText_GoForItPkmn[] = _("Go for it, {B_BUFF1}!");
@@ -2068,7 +2070,7 @@ void BufferStringBattle(u16 stringID)
     gPotentialItemEffectBattler = gBattleMsgDataPtr->itemEffectBattler;
     *(&gBattleStruct->stringMoveType) = gBattleMsgDataPtr->moveType;
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT_2; i++)
     {
         sBattlerAbilities[i] = gBattleMsgDataPtr->abilities[i];
     }
@@ -2143,6 +2145,10 @@ void BufferStringBattle(u16 stringID)
                 else
                     stringPtr = sText_GoTwoPkmn;
             }
+            else if (gBattleTypeFlags & BATTLE_TYPE_TRIPLE)
+            {
+                stringPtr = sText_GoThreePkmn;
+            }
             else
             {
                 stringPtr = sText_GoPkmn;
@@ -2162,6 +2168,10 @@ void BufferStringBattle(u16 stringID)
                     stringPtr = sText_LinkTrainerSentOutTwoPkmn;
                 else
                     stringPtr = sText_Trainer1SentOutTwoPkmn;
+            }
+            else if (gBattleTypeFlags & BATTLE_TYPE_TRIPLE)
+            {
+                stringPtr = sText_Trainer1SentOutThreePkmn;
             }
             else
             {
@@ -2483,6 +2493,18 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
                 GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],
+                           MON_DATA_NICKNAME, text);
+                StringGet_Nickname(text);
+                toCpy = text;
+                break;
+            case B_TXT_PLAYER_MON3_NAME: // third player poke name
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE)]],
+                           MON_DATA_NICKNAME, text);
+                StringGet_Nickname(text);
+                toCpy = text;
+                break;
+            case B_TXT_OPPONENT_MON3_NAME: // third enemy poke name
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE)]],
                            MON_DATA_NICKNAME, text);
                 StringGet_Nickname(text);
                 toCpy = text;

@@ -645,7 +645,9 @@ static void SetBattlePartyIds(void)
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE  // Probably a typo by Game Freak. The rest use SPECIES2.
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlerPartyIndexes[i - 2] != j)
+                         && gBattlerPartyIndexes[i - 2] != j
+                         && (i < 4 || gBattlerPartyIndexes[i - 4] != j) // for triple battle
+                        )
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -657,7 +659,9 @@ static void SetBattlePartyIds(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlerPartyIndexes[i - 2] != j)
+                         && gBattlerPartyIndexes[i - 2] != j
+                         && (i < 4 || gBattlerPartyIndexes[i - 4] != j) // for triple battle
+                        )
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
