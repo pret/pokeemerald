@@ -5804,7 +5804,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
         }
         return;
     }
-    else if (IsDoubleBattle() == FALSE)
+    else if (!IsDoubleOrTripleBattle())
     {
         j = 1;
         partyIds[0] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
@@ -5817,7 +5817,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
             }
         }
     }
-    else
+    else if (IsDoubleBattle())
     {
         j = 2;
         partyIds[0] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
@@ -5825,6 +5825,21 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (i != partyIds[0] && i != partyIds[1])
+            {
+                partyIds[j] = i;
+                j++;
+            }
+        }
+    }
+    else // IsTripleBattle()
+    {
+        j = 3;
+        partyIds[0] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
+        partyIds[1] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE)];
+        partyIds[2] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)];
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (i != partyIds[0] && i != partyIds[1] && i != partyIds[2])
             {
                 partyIds[j] = i;
                 j++;
