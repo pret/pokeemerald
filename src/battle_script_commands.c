@@ -5323,7 +5323,7 @@ static void Cmd_moveend(void)
 
                 if (IsBattlerAlive(battlerId))
                 {
-                    gBattlerTarget = battlerId;
+                    gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = battlerId; // Fix for moxie spread moves
                     gBattleScripting.moveendState = 0;
                     MoveValuesCleanUp();
                     gBattleScripting.moveEffect = gBattleScripting.savedMoveEffect;
