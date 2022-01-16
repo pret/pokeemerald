@@ -5,57 +5,59 @@
 
 // Species with peculiar battle effects.
 #ifndef POKEMON_EXPANSION
-    #define SPECIES_DIALGA                  0
-    #define SPECIES_PALKIA                  0
-    #define SPECIES_GIRATINA                0
-    #define SPECIES_CHERRIM                 0
-    #define SPECIES_ARCEUS                  0
-    #define SPECIES_SILVALLY                0
-    #define SPECIES_GENESECT                0
-    #define SPECIES_AEGISLASH               0
-    #define SPECIES_AEGISLASH_BLADE         10000
-    #define SPECIES_MIMIKYU                 0
-    #define SPECIES_MIMIKYU_BUSTED          10001
-    #define SPECIES_DARMANITAN              0
-    #define SPECIES_DARMANITAN_ZEN_MODE     10002
-    #define SPECIES_MINIOR_CORE_RED         0
-    #define SPECIES_MINIOR                  10003
-    #define SPECIES_MINIOR_CORE_BLUE        0
-    #define SPECIES_MINIOR_METEOR_BLUE      10004
-    #define SPECIES_MINIOR_CORE_GREEN       0
-    #define SPECIES_MINIOR_METEOR_GREEN     10005
-    #define SPECIES_MINIOR_CORE_INDIGO      0
-    #define SPECIES_MINIOR_METEOR_INDIGO    10006
-    #define SPECIES_MINIOR_CORE_ORANGE      0
-    #define SPECIES_MINIOR_METEOR_ORANGE    10007
-    #define SPECIES_MINIOR_CORE_VIOLET      0
-    #define SPECIES_MINIOR_METEOR_VIOLET    10008
-    #define SPECIES_MINIOR_CORE_YELLOW      0
-    #define SPECIES_MINIOR_METEOR_YELLOW    10009
-    #define SPECIES_WISHIWASHI              0
-    #define SPECIES_WISHIWASHI_SCHOOL       10010
-    #define SPECIES_ZYGARDE                 0     // 50%
-    #define SPECIES_ZYGARDE_10              10011 // 10 %
-    #define SPECIES_ZYGARDE_COMPLETE        10012 // 100 %
-    #define SPECIES_BURMY                   0
-    #define SPECIES_BURMY_SANDY_CLOAK       10013
-    #define SPECIES_BURMY_TRASH_CLOAK       10014
-    #define SPECIES_CRAMORANT               0
-    #define SPECIES_CRAMORANT_GORGING       10015
-    #define SPECIES_CRAMORANT_GULPING       10016
-    #define SPECIES_GRENINJA_BATTLE_BOND    0
-    #define SPECIES_GRENINJA_ASH            10017
-    #define SPECIES_HOOPA                   0
-    #define SPECIES_HOOPA_UNBOUND           10018
-    #define SPECIES_MELOETTA                0
-    #define SPECIES_MELOETTA_PIROUETTE      10019
-    #define SPECIES_MORPEKO                 0
-    #define SPECIES_MORPEKO_HANGRY          10020
-    #define SPECIES_SIRFETCHD               10021
-    #define SPECIES_HEATMOR                 0
-    #define SPECIES_DURANT                  0
-    #define SPECIES_CARBINK                 0
-    #define SPECIES_MAREANIE                0
+    #define SPECIES_DIALGA                          0
+    #define SPECIES_PALKIA                          0
+    #define SPECIES_GIRATINA                        0
+    #define SPECIES_CHERRIM                         0
+    #define SPECIES_ARCEUS                          0
+    #define SPECIES_SILVALLY                        0
+    #define SPECIES_GENESECT                        0
+    #define SPECIES_AEGISLASH                       0
+    #define SPECIES_AEGISLASH_BLADE                 10000
+    #define SPECIES_MIMIKYU                         0
+    #define SPECIES_MIMIKYU_BUSTED                  10001
+    #define SPECIES_DARMANITAN                      0
+    #define SPECIES_DARMANITAN_ZEN_MODE             10002
+    #define SPECIES_MINIOR_CORE_RED                 0
+    #define SPECIES_MINIOR                          10003
+    #define SPECIES_MINIOR_CORE_BLUE                0
+    #define SPECIES_MINIOR_METEOR_BLUE              10004
+    #define SPECIES_MINIOR_CORE_GREEN               0
+    #define SPECIES_MINIOR_METEOR_GREEN             10005
+    #define SPECIES_MINIOR_CORE_INDIGO              0
+    #define SPECIES_MINIOR_METEOR_INDIGO            10006
+    #define SPECIES_MINIOR_CORE_ORANGE              0
+    #define SPECIES_MINIOR_METEOR_ORANGE            10007
+    #define SPECIES_MINIOR_CORE_VIOLET              0
+    #define SPECIES_MINIOR_METEOR_VIOLET            10008
+    #define SPECIES_MINIOR_CORE_YELLOW              0
+    #define SPECIES_MINIOR_METEOR_YELLOW            10009
+    #define SPECIES_WISHIWASHI                      0
+    #define SPECIES_WISHIWASHI_SCHOOL               10010
+    #define SPECIES_ZYGARDE                         0     // 50%
+    #define SPECIES_ZYGARDE_10                      10011 // 10 %
+    #define SPECIES_ZYGARDE_COMPLETE                10012 // 100 %
+    #define SPECIES_BURMY                           0
+    #define SPECIES_BURMY_SANDY_CLOAK               10013
+    #define SPECIES_BURMY_TRASH_CLOAK               10014
+    #define SPECIES_CRAMORANT                       0
+    #define SPECIES_CRAMORANT_GORGING               10015
+    #define SPECIES_CRAMORANT_GULPING               10016
+    #define SPECIES_GRENINJA_BATTLE_BOND            0
+    #define SPECIES_GRENINJA_ASH                    10017
+    #define SPECIES_HOOPA                           0
+    #define SPECIES_HOOPA_UNBOUND                   10018
+    #define SPECIES_MELOETTA                        0
+    #define SPECIES_MELOETTA_PIROUETTE              10019
+    #define SPECIES_MORPEKO                         0
+    #define SPECIES_MORPEKO_HANGRY                  10020
+    #define SPECIES_SIRFETCHD                       10021
+    #define SPECIES_DARMANITAN_GALARIAN             0
+    #define SPECIES_DARMANITAN_ZEN_MODE_GALARIAN    10022
+    #define SPECIES_HEATMOR                         0
+    #define SPECIES_DURANT                          0
+    #define SPECIES_CARBINK                         0
+    #define SPECIES_MAREANIE                        0
 #endif
 
 // Items with peculiar battle effects.
@@ -122,7 +124,8 @@
 #define B_PAYBACK_SWITCH_BOOST      GEN_7 // In Gen5+, if the opponent switches out, Payback's damage will no longer be doubled.
 #define B_HIDDEN_POWER_DMG          GEN_7 // In Gen6+, Hidden Power's base power was set to always be 60. Before, it was determined by the mon's IVs.
 #define B_ROUGH_SKIN_DMG            GEN_7 // In Gen4+, Rough Skin contact damage is 1/8th of max HP instead of 1/16th. This will also affect Iron Barbs.
-#define B_KNOCK_OFF_DMG             GEN_8 // In Gen6+, Knock Off deals 50% more damage when knocking off an item
+#define B_KNOCK_OFF_DMG             GEN_8 // In Gen6+, Knock Off deals 50% more damage when knocking off an item.
+#define B_SPORT_DMG_REDUCTION       GEN_7 // In Gen5+, Water/Mud Sport reduce Fire/Electric Damage by 67% instead of 50%.
 
 // Type settings
 #define B_GHOSTS_ESCAPE             GEN_7 // In Gen6+, abilities like Shadow Tag or moves like Mean Look fail on Ghost-type Pokémon. They can also escape any Wild Battle.
@@ -139,6 +142,7 @@
 #define B_TAILWIND_TURNS            GEN_7 // In Gen5+, Tailwind lasts 4 turns instead of 3.
 #define B_SLEEP_TURNS               GEN_7 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
 #define B_TAUNT_TURNS               GEN_7 // In Gen5+, Taunt lasts 3 turns if the user acts before the target, or 4 turns if the target acted before the user. In Gen3, taunt lasts 2 turns and in Gen 4, 3-5 turns.
+#define B_SPORT_TURNS               GEN_7 // In Gen6+, Water/Mud Sport last 5 turns, even if the user switches out.
 
 // Move data settings
 #define B_UPDATED_MOVE_DATA         GEN_8 // Updates move data in gBattleMoves, including Power, Accuracy, PP, stat changes, targets, chances of secondary effects, etc.
@@ -167,6 +171,7 @@
 #define B_RAMPAGE_CANCELLING        GEN_7 // In Gen5+, a failed Thrash, etc, will cancel except on its last turn.
 
 // Ability settings
+#define B_EXPANDED_ABILITY_NAMES    TRUE  // If TRUE, ability names are increased from 12 characters to 16 characters.
 #define B_ABILITY_WEATHER           GEN_7 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.
 #define B_GALE_WINGS                GEN_7 // In Gen7+ requires full HP to trigger.
 #define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7+, Stance Change fails if the Pokémon is unable to use a move because of confusion, paralysis, etc. In Gen6, it doesn't.
@@ -234,9 +239,10 @@
 #define B_LAST_USED_BALL            TRUE     // If TRUE, the "last used ball" feature from Gen 7 will be implemented
 #define B_LAST_USED_BALL_BUTTON     R_BUTTON // If last used ball is implemented, this button (or button combo) will trigger throwing the last used ball.
 
-// Other
-#define B_DOUBLE_WILD_CHANCE        0        // % chance of encountering two Pokémon in a Wild Encounter.
-#define B_WILD_NATURAL_ENEMIES      TRUE     // Certain wild mon species will attack other species when partnered in double wild battles (eg. Zangoose vs Seviper)
+// Other settings
+#define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
+#define B_MULTI_BATTLE_WHITEOUT     GEN_8 // In Gen4+, multi battles end when the Player and also their Partner don't have any more Pokémon to fight.
+#define B_WILD_NATURAL_ENEMIES      TRUE  // If set to TRUE, certain wild mon species will attack other species when partnered in double wild battles (eg. Zangoose vs Seviper)
 
 // Animation Settings
 #define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.

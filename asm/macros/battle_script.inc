@@ -2061,3 +2061,26 @@
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, \jumpptr
 	1:
 	.endm
+
+	@ Will jump to script pointer if the target weighs less than 200 kg, or 441 lbs.
+	.macro jumpifunder200 battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_UNDER_200
+	.4byte \ptr
+	.endm
+
+	@ Sets the sky drop status and does all other necessary operations
+	.macro setskydrop
+	various 0, VARIOUS_SET_SKY_DROP
+	.endm
+
+	@ Clears the sky drop status and does all other necessary operations.
+	@ If the target fainted in before this script is called, it goes to the given script.
+	.macro clearskydrop ptr:req
+	various 0, VARIOUS_CLEAR_SKY_DROP
+	.4byte \ptr
+	.endm
+
+	@ Accounts for if the target of Sky Drop was in confuse_lock when the attacker falls asleep due to Yawn.
+	.macro skydropyawn
+	various 0, VARIOUS_SKY_DROP_YAWN
+	.endm
