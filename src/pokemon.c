@@ -5670,8 +5670,8 @@ u16 SpeciesToCryId(u16 species)
     means each spot can start at any position -8 to +7 off of its base coordinates (256 possibilities).
 
     The macro then loops over the 16x16 spot image. For each bit in the spot's binary image, if
-    if the bit is set then it's part of the spot; try to draw it. A pixel is drawn on Spinda
-    if the pixel on Spinda satisfies the following formula: (colorIndex - 1 <= 2). The -1 excludes
+    the bit is set then it's part of the spot; try to draw it. A pixel is drawn on Spinda if the
+    pixel on Spinda satisfies the following formula: (colorIndex - 1 <= 2). The -1 excludes
     transparent pixels, as these are index 0. Therefore only colors 1, 2, or 3 on Spinda will
     allow a spot to be drawn. These color indexes are Spinda's light brown body colors. To create
     the spot it adds 4 to the color index, so Spinda's spots will be colors 5, 6, and 7.
