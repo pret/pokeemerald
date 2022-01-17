@@ -42,6 +42,25 @@ u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
     return &dest[i];
 }
 
+// for debugging
+u8 *StringCopy_Number(u8 *str, u8 number)
+{
+    int i, j;
+    u8 tmp;
+    for (i = 0; number > 0; i++) {
+        // 0xA1 translates to 0 in charmap
+        str[i] = (number % 10) + 0xA1;
+        number /= 10;
+    }
+
+    // reverse str
+    for (j = 0; j < i/2; j++) {
+        tmp = str[j];
+        str[j] = str[i-j-1];
+        str[i-j-1] = tmp;
+    }
+}
+
 u8 *StringGet_Nickname(u8 *str)
 {
     u8 i;

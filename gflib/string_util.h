@@ -14,6 +14,7 @@ enum StringConvertMode
 };
 
 u8 *StringCopy_Nickname(u8 *dest, const u8 *src);
+u8 *StringCopy_Number(u8 *str, const u8 battlerId);
 u8 *StringGet_Nickname(u8 *str);
 u8 *StringCopy_PlayerName(u8 *dest, const u8 *src);
 u8 *StringCopy(u8 *dest, const u8 *src);
