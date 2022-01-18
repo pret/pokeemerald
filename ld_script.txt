@@ -15,14 +15,10 @@ SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
-        gHeap = .;
-
-        . = 0x1C000;
-
         INCLUDE "sym_ewram.ld"
 
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
