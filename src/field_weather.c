@@ -279,17 +279,12 @@ static void BuildGammaShiftTables(void)
     u16 v5;
     u16 gammaIndex;
     u16 v9;
-    u32 v10;
-    u16 v11;
-    s16 dunno;
+    s16 diff;
 
     sPaletteGammaTypes = sBasePaletteGammaTypes;
-    for (v0 = 0; v0 <= 1; v0++)
+    for (v0 = 0; v0 < 2; v0++)
     {
-        if (v0 == 0)
-            gammaTable = gWeatherPtr->gammaShifts;
-        else
-            gammaTable = gWeatherPtr->altGammaShifts;
+        gammaTable = (v0 == 0) ? gWeatherPtr->gammaShifts : gWeatherPtr->altGammaShifts;
 
         for (v2 = 0; v2 < 32; v2++)
         {
@@ -298,39 +293,35 @@ static void BuildGammaShiftTables(void)
                 v5 = (v2 << 8) / 16;
             else
                 v5 = 0;
-            for (gammaIndex = 0; gammaIndex <= 2; gammaIndex++)
+            for (gammaIndex = 0; gammaIndex < 3; gammaIndex++)
             {
-                v4 = (v4 - v5);
+                v4 -= v5;
                 gammaTable[gammaIndex][v2] = v4 >> 8;
             }
             v9 = v4;
-            v10 = 0x1f00 - v4;
-            if ((0x1f00 - v4) < 0)
-            {
-                v10 += 0xf;
-            }
-            v11 = v10 >> 4;
+            v5 = (0x1f00 - v4) / 16;
+
             if (v2 < 12)
             {
                 for (; gammaIndex < 19; gammaIndex++)
                 {
-                    v4 += v11;
-                    dunno = v4 - v9;
-                    if (dunno > 0)
-                        v4 -= (dunno + ((u16)dunno >> 15)) >> 1;
+                    v4 += v5;
+                    diff = v4 - v9;
+                    if (diff > 0)
+                        v4 -= (diff/2);
                     gammaTable[gammaIndex][v2] = v4 >> 8;
-                    if (gammaTable[gammaIndex][v2] > 0x1f)
-                        gammaTable[gammaIndex][v2] = 0x1f;
+                    if (gammaTable[gammaIndex][v2] > 31)
+                        gammaTable[gammaIndex][v2] = 31;
                 }
             }
             else
             {
                 for (; gammaIndex < 19; gammaIndex++)
                 {
-                    v4 += v11;
+                    v4 += v5;
                     gammaTable[gammaIndex][v2] = v4 >> 8;
-                    if (gammaTable[gammaIndex][v2] > 0x1f)
-                        gammaTable[gammaIndex][v2] = 0x1f;
+                    if (gammaTable[gammaIndex][v2] > 31)
+                        gammaTable[gammaIndex][v2] = 31;
                 }
             }
         }
