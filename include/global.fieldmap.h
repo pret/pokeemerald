@@ -1,13 +1,24 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#define METATILE_BEHAVIOR_MASK 0x00FF
-#define METATILE_COLLISION_MASK 0x0C00
-#define METATILE_ID_MASK 0x03FF
-#define METATILE_ID_UNDEFINED 0x03FF
-#define METATILE_ELEVATION_SHIFT 12
-#define METATILE_COLLISION_SHIFT 10
-#define METATILE_ELEVATION_MASK 0xF000
+// Masks/shifts for blocks in the map grid
+// Map grid blocks consist of a 10 bit metatile id, a 2 bit collision value, and a 4 bit elevation value
+// This is the data stored in each data/layouts/*/map.bin and border.bin file
+#define MAPGRID_METATILE_ID_MASK 0x03FF // Bits 1-10
+#define MAPGRID_COLLISION_MASK   0x0C00 // Bits 11-12
+#define MAPGRID_ELEVATION_MASK   0xF000 // Bits 13-16
+#define MAPGRID_COLLISION_SHIFT  10
+#define MAPGRID_ELEVATION_SHIFT  12
+
+// An undefined map grid block has all metatile id bits set and nothing else
+#define MAPGRID_UNDEFINED   MAPGRID_METATILE_ID_MASK
+
+// Masks/shifts for metatile attributes
+// Metatile attributes consist of an 8 bit behavior value, 4 unused bits, and a 4 bit layer type value
+// This is the data stored in each data/tilesets/*/*/metatile_attributes.bin file
+#define METATILE_ATTR_BEHAVIOR_MASK 0x00FF // Bits 1-8
+#define METATILE_ATTR_LAYER_MASK    0xF000 // Bits 13-16
+#define METATILE_ATTR_LAYER_SHIFT   12
 
 enum {
     METATILE_LAYER_TYPE_NORMAL,  // Metatile uses middle and top bg layers
