@@ -188,8 +188,8 @@ static const u8 sTileBitAttributes[] =
     [MB_UNUSED_AF] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_SECRET_BASE_PC] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_SECRET_BASE_REGISTER_PC] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_SECRET_BASE_UNUSED] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_BLOCK_DECORATION] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_SECRET_BASE_OBSTACLE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_SECRET_BASE_TRAINER_SPOT] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SECRET_BASE_DECORATION] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_HOLDS_SMALL_DECORATION] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_B6] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
@@ -687,17 +687,19 @@ bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 Unref_MetatileBehavior_IsSecretBaseUnused_B2(u8 metatileBehavior)
+// Used by the rock/grass floor spaces that the secret base trainer is not standing on
+bool8 MetatileBehavior_IsSecretBaseObstacle1(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SECRET_BASE_UNUSED)
+    if (metatileBehavior == MB_SECRET_BASE_OBSTACLE)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsBlockDecoration(u8 metatileBehavior)
+// Used by the rock/grass floor space that the secret base trainer stands on
+bool8 MetatileBehavior_IsSecretBaseTrainerSpot(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_BLOCK_DECORATION)
+    if (metatileBehavior == MB_SECRET_BASE_TRAINER_SPOT)
         return TRUE;
     else
         return FALSE;
@@ -743,9 +745,9 @@ bool8 MetatileBehavior_IsSecretBaseNorthWall(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 Unref_MetatileBehavior_IsSecretBaseUnused_B2_2(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSecretBaseObstacle2(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SECRET_BASE_UNUSED)
+    if (metatileBehavior == MB_SECRET_BASE_OBSTACLE)
         return TRUE;
     else
         return FALSE;

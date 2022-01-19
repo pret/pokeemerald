@@ -1211,7 +1211,8 @@ static void ShowDecorationOnMap_(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, 
         {
             x = mapX + i;
             attributes = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i]);
-            if (MetatileBehavior_IsSecretBaseImpassable(attributes) == TRUE || (gDecorations[decoration].permission != DECORPERM_PASS_FLOOR && (attributes >> METATILE_ATTR_LAYER_SHIFT)))
+            if (MetatileBehavior_IsSecretBaseImpassable(attributes & METATILE_ATTR_BEHAVIOR_MASK) == TRUE 
+             || (gDecorations[decoration].permission != DECORPERM_PASS_FLOOR && (attributes >> METATILE_ATTR_LAYER_SHIFT) != METATILE_LAYER_TYPE_NORMAL))
                 impassableFlag = MAPGRID_COLLISION_MASK;
             else
                 impassableFlag = 0;
@@ -1471,23 +1472,26 @@ static void AttemptCancelPlaceDecoration(u8 taskId)
     DisplayItemMessageOnField(taskId, gStringVar4, CancelDecoratingPrompt);
 }
 
-static bool8 IsNonBlockNonElevated(u8 behaviorAt, u16 layerType)
+static bool8 IsSecretBaseTrainerSpot(u8 behaviorAt, u16 layerType)
 {
-    if (MetatileBehavior_IsBlockDecoration(behaviorAt) != TRUE || layerType != 0)
+    if (!(MetatileBehavior_IsSecretBaseTrainerSpot(behaviorAt) == TRUE && layerType == METATILE_LAYER_TYPE_NORMAL))
         return FALSE;
     return TRUE;
 }
 
+// Can't place decoration where the player was standing when they interacted with the PC
 static bool8 IsntInitialPosition(u8 taskId, s16 x, s16 y, u16 layerType)
 {
-    if (x == gTasks[taskId].tInitialX + MAP_OFFSET && y == gTasks[taskId].tInitialY + MAP_OFFSET && layerType != 0)
+    if (x == gTasks[taskId].tInitialX + MAP_OFFSET 
+     && y == gTasks[taskId].tInitialY + MAP_OFFSET
+     && layerType != METATILE_LAYER_TYPE_NORMAL)
         return FALSE;
     return TRUE;
 }
 
 static bool8 IsFloorOrBoardAndHole(u16 behaviorAt, const struct Decoration *decoration)
 {
-    if (MetatileBehavior_IsBlockDecoration(behaviorAt) != TRUE)
+    if (MetatileBehavior_IsSecretBaseTrainerSpot(behaviorAt) != TRUE)
     {
         if (decoration->id == DECOR_SOLID_BOARD && MetatileBehavior_IsSecretBaseHole(behaviorAt) == TRUE)
             return TRUE;
@@ -1545,7 +1549,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                 curX = gTasks[taskId].tCursorX + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 layerType = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ATTR_LAYER_MASK;
-                if (!MetatileBehavior_IsNormal(behaviorAt) && !IsNonBlockNonElevated(behaviorAt, layerType))
+                if (!MetatileBehavior_IsNormal(behaviorAt) && !IsSecretBaseTrainerSpot(behaviorAt, layerType))
                     return FALSE;
 
                 if (!IsntInitialPosition(taskId, curX, curY, layerType))
