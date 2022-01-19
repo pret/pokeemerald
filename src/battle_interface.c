@@ -1285,7 +1285,8 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
 static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 text[20];
-    s32 j, spriteTileNum;
+    s32 j;
+    u8 *spriteTileNum;
     u8 *barFontGfx;
     u8 i, var, nature, healthBarSpriteId;
 
@@ -1312,12 +1313,12 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 
     for (j = 1; j < var + 1; j++)
     {
-        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
-        CpuCopy32(barFontGfx, (void*)(OBJ_VRAM0) + (spriteTileNum), 0x20);
+        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + (j % 8) + (0x40 * (j / 8))) * TILE_SIZE_4BPP + (void *)OBJ_VRAM0;
+        CpuCopy32(barFontGfx, spriteTileNum, 0x20);
         barFontGfx += 0x20;
 
-        spriteTileNum = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
-        CpuCopy32(barFontGfx, (void*)(OBJ_VRAM0) + (spriteTileNum), 0x20);
+        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + 8 + (j % 8) + (0x40 * (j / 8))) * TILE_SIZE_4BPP + (void *)OBJ_VRAM0;
+        CpuCopy32(barFontGfx, spriteTileNum, 0x20);
         barFontGfx += 0x20;
     }
 
@@ -1328,19 +1329,18 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
     text[8] = CHAR_SLASH;
     RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
 
-    j = healthBarSpriteId; // Needed to match for some reason.
     for (j = 0; j < 5; j++)
     {
-        if (j <= 1)
+        if (j < 2)
         {
             CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
-                      (void*)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * TILE_SIZE_4BPP,
+                      (void *)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * TILE_SIZE_4BPP,
                       32);
         }
         else
         {
             CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
-                      (void*)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthBarSpriteId].oam.tileNum) * TILE_SIZE_4BPP,
+                      (void *)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 8 + j - 2) * TILE_SIZE_4BPP, // Must be written as "8 + j - 2" to match
                       32);
         }
     }
