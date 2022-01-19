@@ -775,7 +775,7 @@ void EReaderHelper_SerialCallback(void)
     {
     case EREADER_XFR_STATE_HANDSHAKE:
         REG_SIOMLT_SEND = 0xCCD0; // Handshake id
-        *(u64 *)recv = REG_SIOMLT_RECV;
+        *(vu64 *)recv = REG_SIOMLT_RECV;
         for (i = 0, cnt1 = 0, cnt2 = 0; i < 4; i++)
         {
             if (recv[i] == 0xCCD0)

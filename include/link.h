@@ -129,7 +129,7 @@ struct LinkStatus
 #define SLAVE_HANDSHAKE   0xB9A0
 #define EREADER_HANDSHAKE 0xCCD0
 
-#define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
+#define SIO_MULTI_CNT ((struct SioMultiCnt * volatile )REG_ADDR_SIOCNT)
 
 enum
 {

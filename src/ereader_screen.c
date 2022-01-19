@@ -105,7 +105,7 @@ static void OpenEReaderLink(void)
 
 static bool32 ValidateEReaderConnection(void)
 {
-    volatile u16 backupIME;
+    vu16 backupIME;
     u16 handshakes[MAX_LINK_PLAYERS];
 
     backupIME = REG_IME;

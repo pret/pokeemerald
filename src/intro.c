@@ -1072,7 +1072,7 @@ static u8 SetUpCopyrightScreen(void)
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
-        *(u16 *)PLTT = RGB_WHITE;
+        *(vu16 *)PLTT = RGB_WHITE;
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
@@ -1119,10 +1119,10 @@ static u8 SetUpCopyrightScreen(void)
             if (gMultibootProgramStruct.gcmb_field_2 == 2)
             {
                 // check the multiboot ROM header game code to see if we already did this
-                if (*(u32 *)(EWRAM_START + 0xAC) == COLOSSEUM_GAME_CODE)
+                if (*(vu32 *)(EWRAM_START + 0xAC) == COLOSSEUM_GAME_CODE)
                 {
                     CpuCopy16(&gMultiBootProgram_PokemonColosseum_Start, (void *)EWRAM_START, sizeof(gMultiBootProgram_PokemonColosseum_Start));
-                    *(u32 *)(EWRAM_START + 0xAC) = COLOSSEUM_GAME_CODE;
+                    *(vu32 *)(EWRAM_START + 0xAC) = COLOSSEUM_GAME_CODE;
                 }
                 GameCubeMultiBoot_ExecuteProgram(&gMultibootProgramStruct);
             }
