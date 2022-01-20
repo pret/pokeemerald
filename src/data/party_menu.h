@@ -1,3 +1,9 @@
+enum {
+    TAG_POKEBALL = 1200,
+    TAG_POKEBALL_SMALL,
+    TAG_STATUS_ICONS,
+};
+
 static const struct BgTemplate sPartyMenuBgTemplates[] =
 {
     {
@@ -112,8 +118,8 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 };
 
 // Used only when both Cancel and Confirm are present
-static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_confirm_button.bin");
-static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_cancel_button.bin");
+static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/party_menu/confirm_button.bin");
+static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/party_menu/cancel_button.bin");
 
 // Text colors for BG, FG, and Shadow in that order
 static const u8 sFontColorTable[][3] =
@@ -873,8 +879,8 @@ static const u8 *const sUnionRoomTradeMessages[] =
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
 
-static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
-static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
+static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
+static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/party_menu/hold_icons.gbapal");
 
 static const struct OamData sOamData_HeldItem =
 {
@@ -969,19 +975,19 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeball[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
 {
-    gPartyMenuPokeball_Gfx, 0x400, 0x04b0
+    gPartyMenuPokeball_Gfx, 0x400, TAG_POKEBALL
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
 {
-    gPartyMenuPokeball_Pal, 0x04b0
+    gPartyMenuPokeball_Pal, TAG_POKEBALL
 };
 
 // Used for the pokeball sprite on each party slot / Cancel button
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
 {
-    .tileTag = 0x04b0,
-    .paletteTag = 0x04b0,
+    .tileTag = TAG_POKEBALL,
+    .paletteTag = TAG_POKEBALL,
     .oam = &sOamData_MenuPokeball,
     .anims = sSpriteAnimTable_MenuPokeball,
     .images = NULL,
@@ -1055,14 +1061,14 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
 {
-    gPartyMenuPokeballSmall_Gfx, 0x0300, 0x04b1
+    gPartyMenuPokeballSmall_Gfx, 0x0300, TAG_POKEBALL_SMALL
 };
 
 // Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 {
-    .tileTag = 1201,
-    .paletteTag = 1200,
+    .tileTag = TAG_POKEBALL_SMALL,
+    .paletteTag = TAG_POKEBALL,
     .oam = &sOamData_MenuPokeballSmall,
     .anims = sSpriteAnimTable_MenuPokeballSmall,
     .images = NULL,
@@ -1149,18 +1155,18 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
 {
-    gStatusGfx_Icons, 0x400, 1202
+    gStatusGfx_Icons, 0x400, TAG_STATUS_ICONS
 };
 
 static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
 {
-    gStatusPal_Icons, 1202
+    gStatusPal_Icons, TAG_STATUS_ICONS
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 {
-    .tileTag = 1202,
-    .paletteTag = 1202,
+    .tileTag = TAG_STATUS_ICONS,
+    .paletteTag = TAG_STATUS_ICONS,
     .oam = &sOamData_StatusCondition,
     .anims = sSpriteTemplate_StatusCondition,
     .images = NULL,

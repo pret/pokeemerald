@@ -440,7 +440,7 @@ static const struct YesNoFuncTable sStopPuttingAwayDecorationsYesNoFunctions =
     .noFunc = ContinuePuttingAwayDecorations,
 };
 
-static const u8 sDecorationPuttingAwayCursor[] = INCBIN_U8("graphics/misc/decoration_putting_away_cursor.4bpp");
+static const u8 sDecorationPuttingAwayCursor[] = INCBIN_U8("graphics/decorations/put_away_cursor.4bpp");
 
 static const struct SpritePalette sSpritePal_PuttingAwayCursorBrendan =
 {

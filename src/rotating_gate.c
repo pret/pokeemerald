@@ -219,14 +219,14 @@ static const struct RotatingGatePuzzle sRotatingGate_TrickHousePuzzleConfig[] =
     {10, 19, GATE_SHAPE_L3, GATE_ORIENTATION_180},
 };
 
-static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/misc/rotating_gate_1.4bpp");
-static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/misc/rotating_gate_2.4bpp");
-static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/misc/rotating_gate_3.4bpp");
-static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/misc/rotating_gate_4.4bpp");
-static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/misc/rotating_gate_5.4bpp");
-static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/misc/rotating_gate_6.4bpp");
-static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/misc/rotating_gate_7.4bpp");
-static const u8 sRotatingGateTiles_8[] = INCBIN_U8("graphics/misc/rotating_gate_8.4bpp");
+static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/l1.4bpp");
+static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/l2.4bpp");
+static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/l3.4bpp");
+static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/l4.4bpp");
+static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/t1.4bpp");
+static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/t2.4bpp");
+static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/t3.4bpp");
+static const u8 sRotatingGateTiles_8[] = INCBIN_U8("graphics/rotating_gates/t4.4bpp");
 
 static const struct OamData sOamData_RotatingGateLarge =
 {
