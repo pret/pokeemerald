@@ -1096,13 +1096,13 @@ void InitBattlerHealthboxCoords(u8 battler)
         case B_POSITION_PLAYER_LEFT:
             x = 159, y = 76;
             break;
-        case B_POSITION_PLAYER_RIGHT:
+        case B_POSITION_PLAYER_MIDDLE:
             x = 171, y = 101;
             break;
         case B_POSITION_OPPONENT_LEFT:
             x = 44, y = 19;
             break;
-        case B_POSITION_OPPONENT_RIGHT:
+        case B_POSITION_OPPONENT_MIDDLE:
             x = 32, y = 44;
             break;
         }
@@ -1490,7 +1490,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
 
-    if (!arg2 || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
+    if (!arg2 || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_MIDDLE)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {

@@ -1944,24 +1944,6 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
         .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
         .callback = SpriteCb_WildMon,
     },
-    [B_POSITION_PLAYER_RIGHT] = {
-        .tileTag = TAG_NONE,
-        .paletteTag = 0,
-        .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL,
-        .images = gBattlerPicTable_PlayerRight,
-        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
-        .callback = SpriteCB_BattleSpriteStartSlideLeft,
-    },
-    [B_POSITION_OPPONENT_RIGHT] = {
-        .tileTag = TAG_NONE,
-        .paletteTag = 0,
-        .oam = &gOamData_BattleSpriteOpponentSide,
-        .anims = NULL,
-        .images = gBattlerPicTable_OpponentRight,
-        .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
-        .callback = SpriteCb_WildMon
-    },
     [B_POSITION_PLAYER_MIDDLE] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
@@ -1977,6 +1959,24 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
         .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL,
         .images = gBattlerPicTable_OpponentMiddle,
+        .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
+        .callback = SpriteCb_WildMon
+    },
+    [B_POSITION_PLAYER_RIGHT] = {
+        .tileTag = TAG_NONE,
+        .paletteTag = 0,
+        .oam = &gOamData_BattleSpritePlayerSide,
+        .anims = NULL,
+        .images = gBattlerPicTable_PlayerRight,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
+    },
+    [B_POSITION_OPPONENT_RIGHT] = {
+        .tileTag = TAG_NONE,
+        .paletteTag = 0,
+        .oam = &gOamData_BattleSpriteOpponentSide,
+        .anims = NULL,
+        .images = gBattlerPicTable_OpponentRight,
         .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
         .callback = SpriteCb_WildMon
     },
@@ -5664,7 +5664,7 @@ static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT]
-        && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_RIGHT])
+        && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_MIDDLE])
         DRAW_SPINDA_SPOTS;
 }
 

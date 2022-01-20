@@ -317,12 +317,12 @@ static u16 GetBattlePalaceTarget(void)
         if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         {
             opposing1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            opposing2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            opposing2 = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
         }
         else
         {
             opposing1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            opposing2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            opposing2 = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
         }
 
         if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
@@ -1163,8 +1163,8 @@ void HandleBattleLowHpMusicChange(void)
     if (gMain.inBattle)
     {
         u8 playerBattler1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        u8 playerBattler2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-        u8 playerBattler3 = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
+        u8 playerBattler2 = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
+        u8 playerBattler3 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
         u8 battler1PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler1]);
         u8 battler2PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler2]);
         u8 battler3PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler3]);
@@ -1217,7 +1217,7 @@ void LoadAndCreateEnemyShadowSprites(void)
 
     if (IsDoubleOrTripleBattle())
     {
-        battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
         gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow,
                                                                                         GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X),
                                                                                         GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 29,
@@ -1357,8 +1357,8 @@ void FreeMonSpritesGfx(void)
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->firstDecompressed);
     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT] = NULL;
     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT] = NULL;
-    gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_RIGHT] = NULL;
-    gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT] = NULL;
+    gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_MIDDLE] = NULL;
+    gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_MIDDLE] = NULL;
     FREE_AND_SET_NULL(gMonSpritesGfxPtr);
 }
 

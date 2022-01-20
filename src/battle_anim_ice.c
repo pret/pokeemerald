@@ -374,13 +374,13 @@ static const struct HailStruct sHailCoordData[] =
     {.x = 100, .y = 120, .bPosition = B_POSITION_PLAYER_LEFT,    .unk3 = 2},
     {.x = 85,  .y = 120, .bPosition = B_POSITION_PLAYER_LEFT,    .unk3 = 0},
     {.x = 242, .y = 120, .bPosition = B_POSITION_OPPONENT_LEFT,  .unk3 = 1},
-    {.x = 66,  .y = 120, .bPosition = B_POSITION_PLAYER_RIGHT,   .unk3 = 1},
-    {.x = 182, .y = 120, .bPosition = B_POSITION_OPPONENT_RIGHT, .unk3 = 0},
+    {.x = 66,  .y = 120, .bPosition = B_POSITION_PLAYER_MIDDLE,   .unk3 = 1},
+    {.x = 182, .y = 120, .bPosition = B_POSITION_OPPONENT_MIDDLE, .unk3 = 0},
     {.x = 60,  .y = 120, .bPosition = B_POSITION_PLAYER_LEFT,    .unk3 = 2},
     {.x = 214, .y = 120, .bPosition = B_POSITION_OPPONENT_LEFT,  .unk3 = 0},
     {.x = 113, .y = 120, .bPosition = B_POSITION_PLAYER_LEFT,    .unk3 = 1},
-    {.x = 210, .y = 120, .bPosition = B_POSITION_OPPONENT_RIGHT, .unk3 = 1},
-    {.x = 38,  .y = 120, .bPosition = B_POSITION_PLAYER_RIGHT,   .unk3 = 0},
+    {.x = 210, .y = 120, .bPosition = B_POSITION_OPPONENT_MIDDLE, .unk3 = 1},
+    {.x = 38,  .y = 120, .bPosition = B_POSITION_PLAYER_MIDDLE,   .unk3 = 0},
 };
 
 static const union AffineAnimCmd sAffineAnim_HailParticle_0[] =

@@ -162,7 +162,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             if (IsDoubleOrTripleBattle())
             {
-                opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
                 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);
                 SetBattlerShadowSpriteCallback(opponentBattler, species);
             }
@@ -324,7 +324,7 @@ static void CreateHealthboxSprite(u8 battler)
         else
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
 
-        if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT || GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)
+        if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_MIDDLE || GetBattlerPosition(battler) == B_POSITION_PLAYER_MIDDLE)
             DummyBattleInterfaceFunc(gHealthboxSpriteIds[battler], TRUE);
         else
             DummyBattleInterfaceFunc(gHealthboxSpriteIds[battler], FALSE);

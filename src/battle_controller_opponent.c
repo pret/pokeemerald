@@ -1617,7 +1617,7 @@ static void OpponentHandleChooseMove(void)
                 {
                     gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
                 }
                 BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 break;
@@ -1670,7 +1670,7 @@ static void OpponentHandleChoosePokemon(void)
             else
             {
                 battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
             }
 
             if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))

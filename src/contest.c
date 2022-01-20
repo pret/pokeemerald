@@ -1347,11 +1347,11 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateUnusedBlendTask();
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-        gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
-        gBattlerPositions[3] = B_POSITION_PLAYER_RIGHT;
+        gBattlerPositions[2] = B_POSITION_OPPONENT_MIDDLE;
+        gBattlerPositions[3] = B_POSITION_PLAYER_MIDDLE;
         gBattleTypeFlags = 0;
-        gBattlerAttacker = B_POSITION_PLAYER_RIGHT;
-        gBattlerTarget = B_POSITION_OPPONENT_RIGHT;
+        gBattlerAttacker = B_POSITION_PLAYER_MIDDLE;
+        gBattlerTarget = B_POSITION_OPPONENT_MIDDLE;
         // Unclear why judge sprite is assigned here
         // Overwritten in APPEALSTATE_SLIDE_MON_IN with the attacking contest mon
         gBattlerSpriteIds[gBattlerAttacker] = CreateJudgeSprite();
@@ -5370,19 +5370,19 @@ static void SetMoveAnimAttackerData(u8 contestant)
 
 static void CreateInvisibleBattleTargetSprite(void)
 {
-    gBattlerSpriteIds[B_POSITION_OPPONENT_RIGHT] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    gBattlerSpriteIds[B_POSITION_OPPONENT_MIDDLE] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     InitSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattlerTarget]]);
     SetBattleTargetSpritePosition();
 }
 
 static void SetBattleTargetSpritePosition(void)
 {
-    struct Sprite *sprite = &gSprites[gBattlerSpriteIds[B_POSITION_OPPONENT_RIGHT]];
+    struct Sprite *sprite = &gSprites[gBattlerSpriteIds[B_POSITION_OPPONENT_MIDDLE]];
 
     sprite->x2 = 0;
     sprite->y2 = 0;
-    sprite->x = GetBattlerSpriteCoord(B_POSITION_OPPONENT_RIGHT, BATTLER_COORD_X);
-    sprite->y = GetBattlerSpriteCoord(B_POSITION_OPPONENT_RIGHT, BATTLER_COORD_Y);
+    sprite->x = GetBattlerSpriteCoord(B_POSITION_OPPONENT_MIDDLE, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord(B_POSITION_OPPONENT_MIDDLE, BATTLER_COORD_Y);
     sprite->invisible = TRUE;
 }
 
@@ -5392,14 +5392,14 @@ static void SetMoveTargetPosition(u16 move)
     {
     case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_USER:
-        gBattlerTarget = B_POSITION_PLAYER_RIGHT;
+        gBattlerTarget = B_POSITION_PLAYER_MIDDLE;
         break;
     case MOVE_TARGET_SELECTED:
     case MOVE_TARGET_RANDOM:
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
     default:
-        gBattlerTarget = B_POSITION_OPPONENT_RIGHT;
+        gBattlerTarget = B_POSITION_OPPONENT_MIDDLE;
         break;
     }
 }

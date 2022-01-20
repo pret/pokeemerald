@@ -2411,6 +2411,7 @@ static const u8* TryGetStatusString(u8 *src)
         GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
     }                                                                   \
     StringGet_Nickname(text);                                           \
+    StringCopy_Number(text, battlerId); \
     toCpy = text;
 
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
@@ -2486,25 +2487,25 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = text;
                 break;
             case B_TXT_PLAYER_MON2_NAME: // second player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)]],
-                           MON_DATA_NICKNAME, text);
-                StringGet_Nickname(text);
-                toCpy = text;
-                break;
-            case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],
-                           MON_DATA_NICKNAME, text);
-                StringGet_Nickname(text);
-                toCpy = text;
-                break;
-            case B_TXT_PLAYER_MON3_NAME: // third player poke name
                 GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE)]],
                            MON_DATA_NICKNAME, text);
                 StringGet_Nickname(text);
                 toCpy = text;
                 break;
-            case B_TXT_OPPONENT_MON3_NAME: // third enemy poke name
+            case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
                 GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE)]],
+                           MON_DATA_NICKNAME, text);
+                StringGet_Nickname(text);
+                toCpy = text;
+                break;
+            case B_TXT_PLAYER_MON3_NAME: // third player poke name
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)]],
+                           MON_DATA_NICKNAME, text);
+                StringGet_Nickname(text);
+                toCpy = text;
+                break;
+            case B_TXT_OPPONENT_MON3_NAME: // third enemy poke name
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],
                            MON_DATA_NICKNAME, text);
                 StringGet_Nickname(text);
                 toCpy = text;

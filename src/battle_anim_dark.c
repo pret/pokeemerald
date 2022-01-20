@@ -834,7 +834,7 @@ void AnimTask_MetallicShine(u8 taskId)
 
     if (IsDoubleBattle() && !IsContest())
     {
-        if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_RIGHT || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT)
+        if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_MIDDLE || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT)
         {
             if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)) == TRUE)
             {
@@ -948,7 +948,7 @@ void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
         calcSpriteId = TRUE;
         break;
     case 5:
-        position = B_POSITION_PLAYER_RIGHT;
+        position = B_POSITION_PLAYER_MIDDLE;
         calcSpriteId = TRUE;
         break;
     case 6:
@@ -956,7 +956,7 @@ void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
         calcSpriteId = TRUE;
         break;
     case 7:
-        position = B_POSITION_OPPONENT_RIGHT;
+        position = B_POSITION_OPPONENT_MIDDLE;
         calcSpriteId = TRUE;
         break;
     default:

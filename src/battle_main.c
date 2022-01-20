@@ -3454,15 +3454,15 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
-             || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
+            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_MIDDLE
+             || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_MIDDLE)
             {
                 BtlController_EmitDrawTrainerPic(BUFFER_A);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
         }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_MIDDLE)
         {
             BtlController_EmitDrawTrainerPic(BUFFER_A);
             MarkBattlerForControllerExec(gActiveBattler);
@@ -3595,16 +3595,16 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
     u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        position = B_POSITION_OPPONENT_RIGHT;
+        position = B_POSITION_OPPONENT_MIDDLE;
     else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_IS_MASTER)
-            position = B_POSITION_OPPONENT_RIGHT;
+            position = B_POSITION_OPPONENT_MIDDLE;
         else
-            position = B_POSITION_PLAYER_RIGHT;
+            position = B_POSITION_PLAYER_MIDDLE;
     }
     else
-        position = B_POSITION_OPPONENT_RIGHT;
+        position = B_POSITION_OPPONENT_MIDDLE;
 
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
@@ -3714,16 +3714,16 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
     u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        position = B_POSITION_PLAYER_RIGHT;
+        position = B_POSITION_PLAYER_MIDDLE;
     else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_IS_MASTER)
-            position = B_POSITION_PLAYER_RIGHT;
+            position = B_POSITION_PLAYER_MIDDLE;
         else
-            position = B_POSITION_OPPONENT_RIGHT;
+            position = B_POSITION_OPPONENT_MIDDLE;
     }
     else
-        position = B_POSITION_PLAYER_RIGHT;
+        position = B_POSITION_PLAYER_MIDDLE;
 
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {

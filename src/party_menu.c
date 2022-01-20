@@ -5821,7 +5821,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
     {
         j = 2;
         partyIds[0] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
-        partyIds[1] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)];
+        partyIds[1] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE)];
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (i != partyIds[0] && i != partyIds[1])
@@ -5866,12 +5866,12 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 ba
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
         leftBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        rightBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+        rightBattler = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
     }
     else
     {
         leftBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        rightBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        rightBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
     }
 
     if (IsMultiBattle() == TRUE)

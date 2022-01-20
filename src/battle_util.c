@@ -181,14 +181,14 @@ void HandleAction_UseMove(void)
                     if (Random() & 1)
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
                     else
-                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
                 }
                 else
                 {
                     if (Random() & 1)
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                     else
-                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
                 }
             }
             else
@@ -226,14 +226,14 @@ void HandleAction_UseMove(void)
             if (Random() & 1)
                 gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             else
-                gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
         }
         else
         {
             if (Random() & 1)
                 gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
             else
-                gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
         }
 
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget]
@@ -722,10 +722,10 @@ u8 GetBattlerForBattleScript(u8 caseId)
         ret = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         break;
     case BS_PLAYER2:
-        ret = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+        ret = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
         break;
     case BS_OPPONENT2:
-        ret = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        ret = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
         break;
     }
     return ret;
@@ -2346,13 +2346,13 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
         {
             id2 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            id1 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            id1 = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
             party = gEnemyParty;
         }
         else
         {
             id2 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            id1 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            id1 = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
             party = gPlayerParty;
         }
 
@@ -3858,14 +3858,14 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
                 if (Random() & 1)
                     targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
                 else
-                    targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                    targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
             }
             else
             {
                 if (Random() & 1)
                     targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                 else
-                    targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                    targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
             }
             if (gAbsentBattlerFlags & gBitTable[targetBattler])
                 targetBattler ^= BIT_FLANK;

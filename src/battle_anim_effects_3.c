@@ -2582,11 +2582,11 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             {
                 if (position == B_POSITION_OPPONENT_LEFT)
                     gBattle_BG1_X = -155;
-                if (position == B_POSITION_OPPONENT_RIGHT)
+                if (position == B_POSITION_OPPONENT_MIDDLE)
                     gBattle_BG1_X = -115;
                 if (position == B_POSITION_PLAYER_LEFT)
                     gBattle_BG1_X = 14;
-                if (position == B_POSITION_PLAYER_RIGHT)
+                if (position == B_POSITION_PLAYER_MIDDLE)
                     gBattle_BG1_X = -20;
             }
             else

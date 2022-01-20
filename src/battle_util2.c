@@ -80,7 +80,7 @@ void AdjustFriendshipOnBattleFaint(u8 battlerId)
         u8 opposingBattlerId2;
 
         opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        opposingBattlerId2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        opposingBattlerId2 = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
 
         if (gBattleMons[opposingBattlerId2].level > gBattleMons[opposingBattlerId].level)
             opposingBattlerId = opposingBattlerId2;

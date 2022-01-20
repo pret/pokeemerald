@@ -426,7 +426,7 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 switchID, u8 pokeID, u16* specie
     {
         // Alternate sprite allocation position. Never reached.
         mon = &gPlayerParty[pokeID];
-        position = B_POSITION_OPPONENT_RIGHT;
+        position = B_POSITION_OPPONENT_MIDDLE;
     }
     switch (switchID)
     {

@@ -623,8 +623,8 @@ static void AnimSunlight(struct Sprite *sprite)
 static void AnimEmberFlare(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget)
-        && (gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
-            || gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+        && (gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE)
+            || gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->callback = AnimTravelDiagonally;

@@ -176,14 +176,14 @@ void AnimTask_ShakeMon2(u8 taskId)
             battlerId = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
             break;
         case 5:
-            battlerId = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            battlerId = GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE);
             break;
         case 6:
             battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             break;
         case 7:
         default:
-            battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_MIDDLE);
             break;
         }
 
