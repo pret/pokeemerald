@@ -684,13 +684,11 @@ static void RotatingGate_LoadPuzzleConfig(void)
     {
     case PUZZLE_FORTREE_CITY_GYM:
         gRotatingGate_PuzzleConfig = sRotatingGate_FortreePuzzleConfig;
-        gRotatingGate_PuzzleCount =
-            sizeof(sRotatingGate_FortreePuzzleConfig) / sizeof(struct RotatingGatePuzzle);
+        gRotatingGate_PuzzleCount = ARRAY_COUNT(sRotatingGate_FortreePuzzleConfig);
         break;
     case PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6:
         gRotatingGate_PuzzleConfig = sRotatingGate_TrickHousePuzzleConfig;
-        gRotatingGate_PuzzleCount =
-            sizeof(sRotatingGate_TrickHousePuzzleConfig) / sizeof(struct RotatingGatePuzzle);
+        gRotatingGate_PuzzleCount = ARRAY_COUNT(sRotatingGate_TrickHousePuzzleConfig);
         break;
     case PUZZLE_NONE:
     default:
@@ -698,9 +696,7 @@ static void RotatingGate_LoadPuzzleConfig(void)
     }
 
     for (i = 0; i < ROTATING_GATE_PUZZLE_MAX - 1; i++)
-    {
         gRotatingGate_GateSpriteIds[i] = MAX_SPRITES;
-    }
 }
 
 static void RotatingGate_CreateGatesWithinViewport(s16 deltaX, s16 deltaY)
@@ -773,7 +769,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
     {
         affineAnimation = orientation + 4;
 
-        if (GetPlayerSpeed() != 1)
+        if (GetPlayerSpeed() != PLAYER_SPEED_NORMAL)
             affineAnimation += 8;
 
         PlaySE(SE_ROTATING_GATE);
@@ -783,7 +779,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
     {
         affineAnimation = orientation + 8;
 
-        if (GetPlayerSpeed() != 1)
+        if (GetPlayerSpeed() != PLAYER_SPEED_NORMAL)
             affineAnimation += 8;
 
         PlaySE(SE_ROTATING_GATE);
