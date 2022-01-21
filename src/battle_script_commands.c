@@ -13375,7 +13375,7 @@ static void Cmd_handleballthrow(void)
             catchRate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
 
         #ifdef POKEMON_EXPANSION
-        if (gBaseStats[gBattleMons[gBattlerTarget].species].flags & F_ULTRA_BEAST)
+        if (gBaseStats[gBattleMons[gBattlerTarget].species].flags & FLAG_ULTRA_BEAST)
         {
             if (gLastUsedItem == ITEM_BEAST_BALL)
                 ballMultiplier = 50;
