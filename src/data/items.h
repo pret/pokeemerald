@@ -3635,19 +3635,6 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_JADE_ORB] =
-    {
-        .name = _("Jade Orb"),
-        .itemId = ITEM_JADE_ORB,
-        .price = 0,
-        .description = sJadeOrbDesc,
-        .importance = 1,
-        .unk19 = 1,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
-
 // Mega Stones
 
     [ITEM_VENUSAURITE] =
@@ -8736,17 +8723,6 @@ const struct Item gItems[] =
     },
 
 // Battle Mechanic Key Items
-
-    [ITEM_KEY_STONE] =
-    {
-        .name = _("Key Stone"),
-        .itemId = ITEM_KEY_STONE,
-        .price = 0,
-        .description = sKeyStoneDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
 
     [ITEM_MEGA_RING] =
     {

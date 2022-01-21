@@ -791,9 +791,6 @@ const u32 gItemIconPalette_RedOrb[] = INCBIN_U32("graphics/items/icon_palettes/r
 const u32 gItemIcon_BlueOrb[] = INCBIN_U32("graphics/items/icons/blue_orb.4bpp.lz");
 const u32 gItemIconPalette_BlueOrb[] = INCBIN_U32("graphics/items/icon_palettes/blue_orb.gbapal.lz");
 
-const u32 gItemIcon_JadeOrb[] = INCBIN_U32("graphics/items/icons/jade_orb.4bpp.lz");
-const u32 gItemIconPalette_JadeOrb[] = INCBIN_U32("graphics/items/icon_palettes/jade_orb.gbapal.lz");
-
 // Mega Stones
 
 const u32 gItemIcon_Venusaurite[] = INCBIN_U32("graphics/items/icons/venusaurite.4bpp.lz");
@@ -1768,9 +1765,6 @@ const u32 gItemIcon_ReinsOfUnity[] = INCBIN_U32("graphics/items/icons/reins_of_u
 const u32 gItemIconPalette_ReinsOfUnity[] = INCBIN_U32("graphics/items/icon_palettes/reins_of_unity.gbapal.lz");
 
 // Battle Mechanic Key Items
-
-const u32 gItemIcon_KeyStone[] = INCBIN_U32("graphics/items/icons/key_stone.4bpp.lz");
-const u32 gItemIconPalette_KeyStone[] = INCBIN_U32("graphics/items/icon_palettes/key_stone.gbapal.lz");
 
 const u32 gItemIcon_MegaRing[] = INCBIN_U32("graphics/items/icons/mega_ring.4bpp.lz");
 const u32 gItemIconPalette_MegaRing[] = INCBIN_U32("graphics/items/icon_palettes/mega_ring.gbapal.lz");
