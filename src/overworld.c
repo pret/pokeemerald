@@ -2692,7 +2692,7 @@ static void LoadCableClubPlayer(s32 linkPlayerId, s32 myPlayerId, struct CableCl
     GetLinkPlayerCoords(linkPlayerId, &x, &y);
     trainer->pos.x = x;
     trainer->pos.y = y;
-    trainer->pos.height = GetLinkPlayerElevation(linkPlayerId);
+    trainer->pos.elevation = GetLinkPlayerElevation(linkPlayerId);
     trainer->metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 }
 
@@ -2745,7 +2745,7 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
     otherPlayerPos = player->pos;
     otherPlayerPos.x += gDirectionToVectors[player->facing].x;
     otherPlayerPos.y += gDirectionToVectors[player->facing].y;
-    otherPlayerPos.height = 0;
+    otherPlayerPos.elevation = 0;
     linkPlayerId = GetLinkPlayerIdAt(otherPlayerPos.x, otherPlayerPos.y);
 
     if (linkPlayerId != MAX_LINK_PLAYERS)
@@ -2955,7 +2955,7 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     objEvent->previousCoords.y = y;
     SetSpritePosToMapCoords(x, y, &objEvent->initialCoords.x, &objEvent->initialCoords.y);
     objEvent->initialCoords.x += 8;
-    ObjectEventUpdateZCoord(objEvent);
+    ObjectEventUpdateElevation(objEvent);
 }
 
 static void SetLinkPlayerObjectRange(u8 linkPlayerId, u8 dir)
@@ -3095,7 +3095,7 @@ static bool8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayer
     {
         objEvent->directionSequenceIndex = 16;
         ShiftObjectEventCoords(objEvent, x, y);
-        ObjectEventUpdateZCoord(objEvent);
+        ObjectEventUpdateElevation(objEvent);
         return TRUE;
     }
 }
@@ -3201,8 +3201,8 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     struct ObjectEvent *objEvent = &gObjectEvents[linkPlayerObjEvent->objEventId];
     sprite->x = objEvent->initialCoords.x;
     sprite->y = objEvent->initialCoords.y;
-    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
-    sprite->oam.priority = ZCoordToPriority(objEvent->previousElevation);
+    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
+    sprite->oam.priority = ElevationToPriority(objEvent->previousElevation);
 
     if (linkPlayerObjEvent->movementMode == MOVEMENT_MODE_FREE)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(linkDirection(objEvent)));

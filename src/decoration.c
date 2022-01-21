@@ -1534,7 +1534,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                 if (!IsntInitialPosition(taskId, curX, curY, layerType))
                     return FALSE;
 
-                behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
+                behaviorAt = GetObjectEventIdByPosition(curX, curY, 0);
                 if (behaviorAt != 0 && behaviorAt != OBJECT_EVENTS_COUNT)
                     return FALSE;
             }
@@ -1555,7 +1555,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                 if (!IsntInitialPosition(taskId, curX, curY, layerType))
                     return FALSE;
 
-                if (GetObjectEventIdByXYZ(curX, curY, 0) != OBJECT_EVENTS_COUNT)
+                if (GetObjectEventIdByPosition(curX, curY, 0) != OBJECT_EVENTS_COUNT)
                     return FALSE;
             }
         }
@@ -1572,7 +1572,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             if (!IsntInitialPosition(taskId, curX, curY, layerType))
                 return FALSE;
 
-            behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
+            behaviorAt = GetObjectEventIdByPosition(curX, curY, 0);
             if (behaviorAt != 0 && behaviorAt != OBJECT_EVENTS_COUNT)
                 return FALSE;
         }
@@ -1609,7 +1609,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                     return FALSE;
             }
 
-            if (GetObjectEventIdByXYZ(curX, curY, 0) != OBJECT_EVENTS_COUNT)
+            if (GetObjectEventIdByPosition(curX, curY, 0) != OBJECT_EVENTS_COUNT)
                 return FALSE;
         }
         break;

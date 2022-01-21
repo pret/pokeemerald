@@ -342,7 +342,7 @@ static void FillEastConnection(struct MapHeader const *mapHeader, struct MapHead
     }
 }
 
-u8 MapGridGetZCoordAt(int x, int y)
+u8 MapGridGetElevationAt(int x, int y)
 {
     u16 block = GetMapGridBlockAt(x, y);
 
