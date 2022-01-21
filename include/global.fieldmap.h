@@ -3,7 +3,7 @@
 
 // Masks/shifts for blocks in the map grid
 // Map grid blocks consist of a 10 bit metatile id, a 2 bit collision value, and a 4 bit elevation value
-// This is the data stored in each data/layouts/*/map.bin and border.bin file
+// This is the data stored in each data/layouts/*/map.bin file
 #define MAPGRID_METATILE_ID_MASK 0x03FF // Bits 1-10
 #define MAPGRID_COLLISION_MASK   0x0C00 // Bits 11-12
 #define MAPGRID_ELEVATION_MASK   0xF000 // Bits 13-16
