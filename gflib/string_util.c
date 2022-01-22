@@ -2,6 +2,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"
+#include "malloc.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
@@ -778,4 +779,89 @@ void StripExtCtrlCodes(u8 *str)
         }
     }
     str[destIndex] = EOS;
+}
+
+char *ConvertToAscii(const u8 *str)
+{
+    s32 i;
+    char * textBuffer = malloc(128);
+    for (i = 0; *str != EOS; i++, str++)
+    {
+        char modifiedCode = '?';
+		if(*str >= CHAR_a && *str <= CHAR_z)
+        {
+            modifiedCode = *str-(CHAR_a-'a'); // lower-case characters
+        }
+        else if(*str >= CHAR_A && *str <= CHAR_Z)
+        {
+            modifiedCode = *str-(CHAR_A-'A'); // upper-case characters
+        }
+        else if (*str >= CHAR_0 && *str <= CHAR_9)
+        {
+            modifiedCode = *str-(CHAR_0-'0'); // numbers
+        }
+        else if (*str == CHAR_SPACE)
+        {
+            modifiedCode = ' '; // space
+        }
+        else if (*str == CHAR_EXCL_MARK)
+        {
+            modifiedCode = '!'; // exclamation point
+        }
+        else if (*str == CHAR_QUESTION_MARK)
+        {
+            modifiedCode = '?'; // question mark
+        }
+        else if (*str == CHAR_PERIOD)
+        {
+            modifiedCode = '.'; // period
+        }
+        else if (*str == CHAR_DBL_QUOTE_LEFT || *str == CHAR_DBL_QUOTE_RIGHT)
+        {
+            modifiedCode = '"'; // double quote
+        }
+        else if (*str == CHAR_SGL_QUOTE_LEFT || *str == CHAR_SGL_QUOTE_RIGHT)
+        {
+            modifiedCode = '"'; // single quote
+        }
+        else if (*str == CHAR_CURRENCY)
+        {
+            modifiedCode = '$'; // currency mark (pokemonies in game, dollar sign in logs)
+        }
+        else if (*str == CHAR_COMMA)
+        {
+            modifiedCode = ','; // comma
+        }
+        else if (*str == CHAR_MULT_SIGN)
+        {
+            modifiedCode = '#'; // pound, hashtag, octothorpe, whatever
+        }
+        else if (*str == CHAR_SLASH)
+        {
+            modifiedCode = '/'; // slash
+        }
+        else if (*str == CHAR_LESS_THAN)
+        {
+            modifiedCode = '<'; // less than sign
+        }
+        else if (*str == CHAR_GREATER_THAN)
+        {
+            modifiedCode = '>'; // greater than sign
+        }
+        else if (*str == CHAR_PERCENT)
+        {
+            modifiedCode = '%'; // percentage
+        }
+        else if (*str == CHAR_LEFT_PAREN)
+        {
+            modifiedCode = '('; // opening parentheses
+        }
+        else if (*str == CHAR_RIGHT_PAREN)
+        {
+            modifiedCode = ')'; // closing parentheses
+        }
+        textBuffer[i] = modifiedCode;
+    }
+    textBuffer[i] = 0;
+    return textBuffer;
 }
