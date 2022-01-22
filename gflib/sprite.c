@@ -135,7 +135,7 @@ static const u8 sUnknownData[24] =
     0x02, 0x04, 0x08, 0x20,
 };
 
-static const u8 sCenterToCornerVecTable[3][4][2] =
+static const s8 sCenterToCornerVecTable[3][4][2] =
 {
     {   // square
         {  -4,  -4 },
@@ -690,8 +690,8 @@ void ResetSprite(struct Sprite *sprite)
 
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode)
 {
-    u8 x = sCenterToCornerVecTable[shape][size][0];
-    u8 y = sCenterToCornerVecTable[shape][size][1];
+    s8 x = sCenterToCornerVecTable[shape][size][0];
+    s8 y = sCenterToCornerVecTable[shape][size][1];
 
     if (affineMode & ST_OAM_AFFINE_DOUBLE_MASK)
     {
@@ -720,7 +720,7 @@ s16 AllocSpriteTiles(u16 tileCount)
 
     i = gReservedSpriteTileCount;
 
-    for (;;)
+    do
     {
         while (SPRITE_TILE_IS_ALLOCATED(i))
         {
@@ -745,10 +745,7 @@ s16 AllocSpriteTiles(u16 tileCount)
             else
                 break;
         }
-
-        if (numTilesFound == tileCount)
-            break;
-    }
+    } while (numTilesFound != tileCount);
 
     for (i = start; i < tileCount + start; i++)
         ALLOC_SPRITE_TILE(i);
@@ -760,23 +757,23 @@ u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
 {
     u8 index = bit / 8;
     u8 shift = bit % 8;
-    u8 val = bit % 8;
     u8 retVal = 0;
+    u8 val;
 
     if (op == 0)
     {
-        val = ~(1 << val);
+        val = ~(1 << shift);
         sSpriteTileAllocBitmap[index] &= val;
     }
     else if (op == 1)
     {
-        val = (1 << val);
+        val = 1 << shift;
         sSpriteTileAllocBitmap[index] |= val;
     }
     else
     {
-        retVal = 1 << shift;
-        retVal &= sSpriteTileAllocBitmap[index];
+        val = 1 << shift;
+        retVal = sSpriteTileAllocBitmap[index] & val;
     }
 
     return retVal;
