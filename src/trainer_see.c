@@ -167,8 +167,8 @@ static const union AnimCmd *const sSpriteAnimTable_Icons[] =
 
 static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 {
-    .tileTag = 0xffff,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_ExclamationQuestionMark,
@@ -178,7 +178,7 @@ static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 
 static const struct SpriteTemplate sSpriteTemplate_HeartIcon =
 {
-    .tileTag = 0xffff,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
@@ -523,7 +523,7 @@ static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct O
     if (ObjectEventIsMovementOverridden(playerObj) && !ObjectEventClearHeldMovementIfFinished(playerObj))
         return FALSE;
 
-    sub_808BCE8();
+    CancelPlayerForcedMovement();
     ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
     task->tFuncId++; // TRSEE_PLAYER_FACE_WAIT
     return FALSE;

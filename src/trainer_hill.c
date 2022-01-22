@@ -28,7 +28,6 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/moves.h"
-#include "constants/maps.h"
 #include "constants/trainers.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
@@ -126,7 +125,7 @@ struct
     {TRAINER_CLASS_PKMN_BREEDER, TRAINER_ENCOUNTER_MUSIC_FEMALE},
     {TRAINER_CLASS_COLLECTOR, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
     {TRAINER_CLASS_PKMN_RANGER, TRAINER_ENCOUNTER_MUSIC_COOL},
-    {TRAINER_CLASS_PKMN_TRAINER_3, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_RIVAL, TRAINER_ENCOUNTER_MUSIC_MALE},
     {TRAINER_CLASS_YOUNG_COUPLE, TRAINER_ENCOUNTER_MUSIC_GIRL},
     {TRAINER_CLASS_PSYCHIC, TRAINER_ENCOUNTER_MUSIC_INTENSE},
     {TRAINER_CLASS_SR_AND_JR, TRAINER_ENCOUNTER_MUSIC_TWINS},
@@ -261,16 +260,16 @@ static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
     .trainerType = TRAINER_TYPE_NORMAL,
 };
 
-static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] = 
+static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] =
 {
-    MAP_NUM(TRAINER_HILL_2F), 
-    MAP_NUM(TRAINER_HILL_3F), 
-    MAP_NUM(TRAINER_HILL_4F), 
+    MAP_NUM(TRAINER_HILL_2F),
+    MAP_NUM(TRAINER_HILL_3F),
+    MAP_NUM(TRAINER_HILL_4F),
     MAP_NUM(TRAINER_HILL_ROOF)
 };
-static const u8 sTrainerPartySlots[][PARTY_SIZE / 2] = 
+static const u8 sTrainerPartySlots[][PARTY_SIZE / 2] =
 {
-    {0, 1, 2}, 
+    {0, 1, 2},
     {3, 4, 5}
 };
 
@@ -590,13 +589,13 @@ void PrintOnTrainerHillRecordsWindow(void)
 
     SetUpDataStruct();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    x = GetStringCenterAlignXOffset(1, gText_TimeBoard, 0xD0);
-    AddTextPrinterParameterized3(0, 1, x, 2, sRecordWinColors, TEXT_SPEED_FF, gText_TimeBoard);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_TimeBoard, 0xD0);
+    AddTextPrinterParameterized3(0, FONT_NORMAL, x, 2, sRecordWinColors, TEXT_SKIP_DRAW, gText_TimeBoard);
 
     y = 18;
     for (i = 0; i < 4; i++)
     {
-        AddTextPrinterParameterized3(0, 1, 0, y, sRecordWinColors, TEXT_SPEED_FF, sTagMatchStrings[i]);
+        AddTextPrinterParameterized3(0, FONT_NORMAL, 0, y, sRecordWinColors, TEXT_SKIP_DRAW, sTagMatchStrings[i]);
         y += 15;
         total = GetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i]);
         minutes = total / (60 * 60);
@@ -608,13 +607,13 @@ void PrintOnTrainerHillRecordsWindow(void)
         secondsFraction = (total * 168) / 100;
         ConvertIntToDecimalStringN(gStringVar3, secondsFraction, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringExpandPlaceholders(StringCopy(gStringVar4, gText_TimeCleared), gText_XMinYDotZSec);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 0xD0);
-        AddTextPrinterParameterized3(0, 1, x, y, sRecordWinColors, TEXT_SPEED_FF, gStringVar4);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0xD0);
+        AddTextPrinterParameterized3(0, FONT_NORMAL, x, y, sRecordWinColors, TEXT_SKIP_DRAW, gStringVar4);
         y += 17;
     }
 
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
     FreeDataStruct();
 }
 

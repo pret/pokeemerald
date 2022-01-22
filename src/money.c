@@ -149,7 +149,7 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
         *(txtPtr++) = 0x77;
 
     StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, speed, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);
 }
 
 void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
@@ -171,7 +171,7 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
     sMoneyBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sMoneyBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sMoneyBoxWindowId);
-    CopyWindowToVram(sMoneyBoxWindowId, 1);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_MAP);
     PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x214, 14, amount);
     AddMoneyLabelObject((8 * x) + 19, (8 * y) + 11);
 }
@@ -180,7 +180,7 @@ void HideMoneyBox(void)
 {
     RemoveMoneyLabelObject();
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
-    CopyWindowToVram(sMoneyBoxWindowId, 2);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
     RemoveWindow(sMoneyBoxWindowId);
 }
 

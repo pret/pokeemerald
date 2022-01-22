@@ -198,7 +198,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -209,7 +209,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -219,7 +219,7 @@ static void WallyHandleActions(void)
     case 3:
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
-            BtlController_EmitTwoReturnValues(1, B_ACTION_WALLY_THROW, 0);
+            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_WALLY_THROW, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -240,7 +240,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_ITEM, 0);
             WallyBufferExecCompleted();
         }
         break;
@@ -255,7 +255,7 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(B_WIN_MSG))
         WallyBufferExecCompleted();
 }
 
@@ -280,18 +280,18 @@ static void CompleteOnChosenItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(BUFFER_B, gSpecialVar_ItemId);
         WallyBufferExecCompleted();
     }
 }
 
 static void Intro_TryShinyAnimShowHealthbox(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim 
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
         TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim 
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
         TryShinyAnimation(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
 
@@ -446,7 +446,7 @@ static void WallyHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(1, size, monData);
+    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
     WallyBufferExecCompleted();
 }
 
@@ -492,7 +492,7 @@ static u32 CopyWallyMonData(u8 monId, u8 *dst)
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battleMon.nickname, nickname);
+        StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); size++)
@@ -1179,7 +1179,7 @@ static void WallyHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleResources->bufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1206,14 +1206,14 @@ static void WallyHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_BattleMenu, 2);
+    BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillWallyDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
 static void WallyHandleYesNoBox(void)
@@ -1242,7 +1242,7 @@ static void WallyHandleChooseMove(void)
         if (--gBattleStruct->wallyMoveFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, 10, 0x100);
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0x100);
             WallyBufferExecCompleted();
         }
         break;
@@ -1416,7 +1416,9 @@ static void WallyHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry1(species, 25);
+    // Seems that it doesn't bother using CRY_MODE_FAINT because
+    // Wally's Pokémon during the tutorial is never intended to faint.
+    PlayCry_Normal(species, 25);
     WallyBufferExecCompleted();
 }
 
@@ -1467,7 +1469,7 @@ static void StartSendOutAnim(u8 battlerId)
     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
-                                        GetBattlerSpriteCoord(battlerId, 2),
+                                        GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
                                         GetBattlerSpriteDefault_Y(battlerId),
                                         GetBattlerSpriteSubpriority(battlerId));
 
