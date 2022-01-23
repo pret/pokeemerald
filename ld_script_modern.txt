@@ -27,6 +27,7 @@ SECTIONS {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
         gflib/*.o(.bss);
+        data/*.o(.bss);
         *libc.a:*.o(.bss*);
         *libnosys.a:*.o(.bss*);
 
