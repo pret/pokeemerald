@@ -229,7 +229,7 @@
 #define VARIOUS_SET_SKY_DROP                        139
 #define VARIOUS_CLEAR_SKY_DROP                      140
 #define VARIOUS_SKY_DROP_YAWN                       141
-#define VARIOUS_JUMP_IF_FLING_FAILS                 142
+#define VARIOUS_JUMP_IF_CANT_FLING                  142
 #define VARIOUS_JUMP_IF_HOLD_EFFECT                 143
 #define VARIOUS_CURE_CERTAIN_STATUSES               144
 #define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES      145

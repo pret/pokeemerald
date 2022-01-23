@@ -1932,8 +1932,8 @@
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
-	.macro jumpifflingfails battler:req, ptr:req
-	various \battler, VARIOUS_JUMP_IF_FLING_FAILS
+	.macro jumpifcantfling battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_CANT_FLING
 	.4byte \ptr
 	.endm
 

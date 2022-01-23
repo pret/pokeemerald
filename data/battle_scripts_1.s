@@ -464,12 +464,9 @@ BattleScript_SkyDropFlyingAlreadyConfused:
 	goto BattleScript_ThrashConfuses
 
 BattleScript_EffectFling:
-	jumpifflingfails BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifcantfling BS_ATTACKER, BattleScript_ButItFailedAtkStringPpReduce
 	jumpifstatus3 BS_ATTACKER, STATUS3_EMBARGO, BattleScript_ButItFailedAtkStringPpReduce
 	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailedAtkStringPpReduce
-.if B_KLUTZ_FLING_INTERACTION >= GEN_5
-	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailedAtkStringPpReduce
-.endif
 	setlastuseditem BS_ATTACKER
 	removeitem BS_ATTACKER
 	attackcanceler
@@ -511,7 +508,7 @@ BattleScript_EffectFlingConsumeBerry:
 	setbyte sBERRY_OVERRIDE, FALSE
 	restorebattleritem BS_TARGET
 BattleScript_FlingEnd:
-	tryfaintmon BS_TARGET, FALSE, NULL
+	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
 BattleScript_FlingFlameOrb:

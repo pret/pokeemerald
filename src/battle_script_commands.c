@@ -1356,19 +1356,6 @@ static void Cmd_attackcanceler(void)
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    // Unnerve prevents a Pokémon holding a Berry from using Fling.
-    if (gCurrentMove == MOVE_FLING
-     && GetBattlerAbility(gBattlerAttacker) == ABILITY_UNNERVE
-     && ItemId_GetPocket(gLastUsedItem) == POCKET_BERRIES)
-    {
-        // Fling removes the item just before attackcanceler kicks in.
-        // This is done to work around an opponent using Protect/Detect.
-        gBattleMons[gBattlerAttacker].item = gLastUsedItem;
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_ButItFailedAtkStringPpReduce;
-        return;
-    }
-
     if (moveType == TYPE_FIRE
      && (gBattleWeather & B_WEATHER_RAIN_PRIMAL)
      && WEATHER_HAS_EFFECT
@@ -9467,14 +9454,8 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
-    case VARIOUS_JUMP_IF_FLING_FAILS:
-    #ifdef ITEM_EXPANSION
-        if (!ItemId_GetFlingPower(gBattleMons[gActiveBattler].item))
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        else if (gLastUsedItem == ITEM_NONE)
-    #else
-        if (gLastUsedItem == ITEM_NONE)
-    #endif
+    case VARIOUS_JUMP_IF_CANT_FLING:
+        if (!CanFling(gActiveBattler))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
