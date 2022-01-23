@@ -257,7 +257,7 @@ struct SlotMachine
     /*0x18*/ s16 currReel;
     /*0x1A*/ s16 reelIncrement; // speed of reel
     /*0x1C*/ s16 reelPixelOffsets[NUM_REELS];
-    /*0x22*/ u16 reelPixelOffsetsWhileStopping[NUM_REELS];
+    /*0x22*/ s16 reelPixelOffsetsWhileStopping[NUM_REELS];
     /*0x28*/ s16 reelPositions[NUM_REELS];
     /*0x2E*/ s16 reelExtraTurns[NUM_REELS];
     /*0x34*/ s16 winnerRows[NUM_REELS];
@@ -3601,7 +3601,7 @@ static void SpriteCB_ReelSymbol(struct Sprite *sprite)
 {
     sprite->data[2] = sSlotMachine->reelPixelOffsets[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
-    sprite->y = sSlotMachine->reelPixelOffsetsWhileStopping[sprite->data[0]] + 28 + sprite->data[2];
+    sprite->y = sprite->data[2] + 28 + sSlotMachine->reelPixelOffsetsWhileStopping[sprite->data[0]];
     sprite->sheetTileStart = GetSpriteTileStartByTag(GetTagAtRest(sprite->data[0], sprite->data[2] / 24));
     SetSpriteSheetFrameTileNum(sprite);
 }
