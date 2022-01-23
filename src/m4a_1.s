@@ -1912,5 +1912,5 @@ _081DDD90:
 
 	.bss
 gDecodingBuffer: @ Used as a buffer for audio decoded from compressed DPCM
-    .space 0x40
-    .size gDecodingBuffer, .-gDecodingBuffer
+	.space 0x40
+	.size gDecodingBuffer, .-gDecodingBuffer
