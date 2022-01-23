@@ -6,23 +6,19 @@
 
     .bss
 
-    .global gMPlayTrack_BGM
-gMPlayTrack_BGM:
+gMPlayTrack_BGM::
     .space TRACK_SIZE * NUM_TRACKS_BGM
     .size gMPlayTrack_BGM, .-gMPlayTrack_BGM
 
-    .global gMPlayTrack_SE1
-gMPlayTrack_SE1:
+gMPlayTrack_SE1::
     .space TRACK_SIZE * NUM_TRACKS_SE1
     .size gMPlayTrack_SE1, .-gMPlayTrack_SE1
 
-    .global gMPlayTrack_SE2
-gMPlayTrack_SE2:
+gMPlayTrack_SE2::
     .space TRACK_SIZE * NUM_TRACKS_SE2
     .size gMPlayTrack_SE2, .-gMPlayTrack_SE2
 
-    .global gMPlayTrack_SE3
-gMPlayTrack_SE3:
+gMPlayTrack_SE3::
     .space TRACK_SIZE * NUM_TRACKS_SE3
     .size gMPlayTrack_SE3, .-gMPlayTrack_SE3
 
