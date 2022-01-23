@@ -988,6 +988,20 @@ bool8 IsFlyingPokemonGraphic(u16 graphicsId)
         case 383:
         case 384:
         case 387:
+        case 402:
+        case 403:
+        case 404:
+        case 407:
+        case 414:
+        case 425:
+        case 426:
+        case 427:
+        case 431:
+        case 464:
+        case 465:
+        case 487:
+        case 488:
+        case 489:
             return TRUE;
         default:
             return FALSE;
