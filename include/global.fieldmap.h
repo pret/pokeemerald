@@ -16,18 +16,6 @@
 // for constructing large tiles, such as the Battle Pike's curtain tile.
 #define METATILE_ROW_WIDTH 8
 
-enum
-{
-    CONNECTION_INVALID = -1,
-    CONNECTION_NONE,
-    CONNECTION_SOUTH,
-    CONNECTION_NORTH,
-    CONNECTION_WEST,
-    CONNECTION_EAST,
-    CONNECTION_DIVE,
-    CONNECTION_EMERGE
-};
-
 typedef void (*TilesetCB)(void);
 
 struct Tileset
