@@ -8661,15 +8661,9 @@ static void Cmd_various(void)
         i = TRUE;
         if (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS)
         {
-            if (targetAbility == ABILITY_LIMBER)
+            if (!(CanBeParalyzed(gBattlerTarget)))
             {
                 gBattlerAbility = gBattlerTarget;
-                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                gBattlescriptCurrInstr = BattleScript_PRLZPrevention;
-                i = FALSE;
-            }
-            else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_ELECTRIC))
-            {
                 BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
                 gBattlescriptCurrInstr = BattleScript_PRLZPrevention;
                 i = FALSE;
@@ -8681,15 +8675,9 @@ static void Cmd_various(void)
         }
         else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_PSN_ANY)
         {
-            if (targetAbility == ABILITY_IMMUNITY)
+            if (!CanBePoisoned(gBattlerTarget, targetAbility))
             {
                 gBattlerAbility = gBattlerTarget;
-                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                gBattlescriptCurrInstr = BattleScript_PSNPrevention;
-                i = FALSE;
-            }
-            else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_POISON) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_STEEL))
-            {
                 BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
                 i = FALSE;
@@ -8704,16 +8692,9 @@ static void Cmd_various(void)
         }
         else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_BURN)
         {
-            if (targetAbility == ABILITY_WATER_VEIL
-             || targetAbility == ABILITY_WATER_BUBBLE)
+            if (!CanBeBurned(gBattlerTarget))
             {
                 gBattlerAbility = gBattlerTarget;
-                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                gBattlescriptCurrInstr = BattleScript_BRNPrevention;
-                i = FALSE;
-            }
-            else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_FIRE))
-            {
                 BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
                 gBattlescriptCurrInstr = BattleScript_BRNPrevention;
                 i = FALSE;
@@ -8725,7 +8706,7 @@ static void Cmd_various(void)
         }
         else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
         {
-            if (targetAbility == ABILITY_INSOMNIA || targetAbility == ABILITY_VITAL_SPIRIT)
+            if (!CanSleep(gBattlerTarget))
             {
                 gBattlerAbility = gBattlerTarget;
                 // BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
