@@ -58,14 +58,14 @@ static const struct SpriteTemplate sSpriteTemplate_MoneyLabel =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MoneyLabel =
 {
-    .data = gMenuMoneyGfx,
+    .data = gShopMenuMoney_Gfx,
     .size = 256,
     .tag = MONEY_LABEL_TAG,
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
 {
-    .data = gMenuMoneyPal,
+    .data = gShopMenu_Pal,
     .tag = MONEY_LABEL_TAG
 };
 
@@ -146,7 +146,7 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
     txtPtr = gStringVar4;
 
     while (strLength-- > 0)
-        *(txtPtr++) = 0x77;
+        *(txtPtr++) = CHAR_SPACER;
 
     StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);

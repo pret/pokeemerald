@@ -820,7 +820,7 @@ static void CrackedFloorPerStepCallback(u8 taskId)
     tPrevY = y;
     if (MetatileBehavior_IsCrackedFloor(behavior))
     {
-        if (GetPlayerSpeed() != BIKE_SPEED_FASTEST)
+        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
             VarSet(VAR_ICE_STEP_COUNT, 0); // this var does double duty
 
         if (tFloor1Delay == 0)
