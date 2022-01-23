@@ -1,7 +1,7 @@
 	@ Initialize the Battle Pyramid challenge
 	.macro pyramid_init
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_INIT
-	special CallBattlePyramidFunction 
+	special CallBattlePyramidFunction
 	.endm
 
 	@ Get the value of some PYRAMID_DATA_*. See GetBattlePyramidData for the data types that can be retrieved
@@ -59,7 +59,7 @@
 	@ Set the facility trainers to gBattleFrontierTrainers
 	.macro pyramid_settrainers
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_TRAINERS
-	special CallBattlePyramidFunction 
+	special CallBattlePyramidFunction
 	.endm
 
 	@ Show the post-battle hint text
@@ -68,11 +68,11 @@
 	special CallBattlePyramidFunction
 	.endm
 
-	@ VAR_RESULT is 1 if player is on a Pyramid floor, 2 if on the Pyramid peak, 0 otherwise 
+	@ VAR_RESULT is 1 if player is on a Pyramid floor, 2 if on the Pyramid peak, 0 otherwise
 	.macro pyramid_inchallenge
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
 	special CallBattlePyramidFunction
-	.endm   
+	.endm
 
 	@ Update the light around the player. 2 different modes, for setting or incrementing light. See PYRAMID_LIGHT_*
 	.macro pyramid_updatelight radius:req, mode:req, sound=0xFFFF
@@ -83,7 +83,7 @@
 	setvar VAR_0x8007, \sound
 	.endif
 	special CallBattlePyramidFunction
-	.endm  
+	.endm
 
 	@ Reset the held items to what they were at the start of the challenge
 	.macro pyramid_clearhelditems
@@ -100,5 +100,5 @@
 	@ Reset sketched moves and update the party order in the saveblock
 	.macro pyramid_resetparty
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_RESTORE_PARTY
-	special CallBattlePyramidFunction 
+	special CallBattlePyramidFunction
 	.endm

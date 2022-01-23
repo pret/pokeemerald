@@ -24,29 +24,29 @@
     Information about a Dewford trend is stored in a struct DewfordTrend.
     In addition to the two easy chat words that make up the trend's phrase,
     each trend has a few randomly generated values associated with it.
-    - rand: 
+    - rand:
         This is a 16 bit value generated once when the phrase is created.
         It's used in calculations for Feebas tiles, Slot Machines, and Match Call.
-    - trendiness / maxTrendiness: 
+    - trendiness / maxTrendiness:
         Initialized as a random value between 30-127 inclusive. This is used to
         compare how trendy one phrase is vs another. If a submitted phrase is
         less trendy than the current one it won't be accepted. If the trend is
-        "boring" (see below) it will lose trendiness over time until it reaches 0, 
+        "boring" (see below) it will lose trendiness over time until it reaches 0,
         at which point it will stop being boring and gain trendiness until it
         reaches maxTrendiness (then it becomes boring again and the cycle repeats).
-    - gainingTrendiness: 
+    - gainingTrendiness:
         This is a flag that determines whether a phrase should be gaining or losing
         trendiness. An NPC in Dewford Hall will comment on whether the current phrase
         is "boring" or not, and if it is gaining trendiness (or if it is still trendier
-        than the last phrase) it is not boring. This field will always be TRUE for any 
+        than the last phrase) it is not boring. This field will always be TRUE for any
         new phrase submitted after the 1st submission.
 
     ## Saving trends ##
-    Each time a potential trendy phrase is submitted, it is saved in gSaveBlock1Ptr->dewfordTrends[]. 
-    Up to SAVED_TRENDS_COUNT (5) trends may be saved at one time. The trends in this array are kept 
-    in sorted order from most trendy to least trendy. The current trendy phrase is always at 
-    gSaveBlock1Ptr->dewfordTrends[0]. If the player mixes records with another player, their own 
-    trends are replaced with their mixing partner's, unless the phrase is the same, in which case 
+    Each time a potential trendy phrase is submitted, it is saved in gSaveBlock1Ptr->dewfordTrends[].
+    Up to SAVED_TRENDS_COUNT (5) trends may be saved at one time. The trends in this array are kept
+    in sorted order from most trendy to least trendy. The current trendy phrase is always at
+    gSaveBlock1Ptr->dewfordTrends[0]. If the player mixes records with another player, their own
+    trends are replaced with their mixing partner's, unless the phrase is the same, in which case
     the version with a higher trendiness value is used (see ReceiveDewfordTrendData).
 
     ## TV Show ##
@@ -247,7 +247,7 @@ void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 
     players = GetLinkPlayerCount();
     for (i = 0; i < players; i++)
         memcpy(&linkedTrendsBuffer[i * SAVED_TRENDS_COUNT], (u8 *)linkedTrends + i * size, SAVED_TRENDS_SIZE);
-    
+
     // Determine which of the received trends should be saved.
     // savedTrendsBuffer starts empty, and when finished will contain
     // which of the linked trends to save in the saveblock.
@@ -271,15 +271,13 @@ void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 
                 // Only overwrrite it if it's "trendier"
                 temp = &savedTrendsBuffer[idx];
                 if (temp->trendiness < src->trendiness)
-                {
                     *temp = *src;
-                }
             }
             src++;
         }
     }
     SortTrends(savedTrendsBuffer, numTrends, SORT_MODE_FULL);
-    
+
     // Overwrite current saved trends with new saved trends
     src = savedTrendsBuffer;
     dst = gSaveBlock1Ptr->dewfordTrends;
@@ -301,7 +299,7 @@ void BufferTrendyPhraseString(void)
 void IsTrendyPhraseBoring(void)
 {
     bool16 result = FALSE;
-    
+
     do
     {
         if (gSaveBlock1Ptr->dewfordTrends[0].trendiness - gSaveBlock1Ptr->dewfordTrends[1].trendiness > 1)
@@ -312,7 +310,7 @@ void IsTrendyPhraseBoring(void)
             break;
         result = TRUE;
     } while (0);
-    
+
     gSpecialVar_Result = result;
 }
 

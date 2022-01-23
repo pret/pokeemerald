@@ -490,7 +490,7 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogreDorsalFin =
 
 static const struct ScanlineEffectParams sScanlineParams_DuoFight_Clouds =
 {
-    .dmaDest = (vu16 *)REG_ADDR_BG1HOFS,
+    .dmaDest = &REG_BG1HOFS,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
     .initState = 1
 };
@@ -1757,8 +1757,8 @@ static void DuoFight_LightningLong(void)
 
 static void DuoFight_AnimateRain(void)
 {
-    ChangeBgX(2, 0x400, 1);
-    ChangeBgY(2, 0x800, 2);
+    ChangeBgX(2, 0x400, BG_COORD_ADD);
+    ChangeBgY(2, 0x800, BG_COORD_SUB);
 }
 
 // Only used by the full version, which pans up at the end (so scene objects move down)
@@ -1772,7 +1772,7 @@ static void DuoFight_PanOffScene(u8 taskId)
 
     bgY = GetBgY(1);
     if (GetBgY(1) == 0 || bgY > 0x8000)
-        ChangeBgY(1, 0x400, 2);
+        ChangeBgY(1, 0x400, BG_COORD_SUB);
 
     if (tTimer != 16)
     {
@@ -1795,7 +1795,7 @@ static void Task_DuoFightEnd(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyTask(tHelperTaskId);
-        ChangeBgY(1, 0, 0);
+        ChangeBgY(1, 0, BG_COORD_SET);
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
         ResetSpriteData();
@@ -2392,7 +2392,7 @@ static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     s16 frame = sTimer;
-    
+
     // Updates to Rayquaza's coords occur more frequently
     // as time goes on (it accelerates as it emerges)
     if (frame == 0)
@@ -2579,8 +2579,8 @@ static void Task_RayCharges_ShakeRayquaza(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if ((tTimer & 3) == 0)
     {
-        ChangeBgX(1, (Random() % 8 - 4) << 8, 0);
-        ChangeBgY(1, (Random() % 8 - 4) << 8, 0);
+        ChangeBgX(1, (Random() % 8 - 4) << 8, BG_COORD_SET);
+        ChangeBgY(1, (Random() % 8 - 4) << 8, BG_COORD_SET);
     }
 
     tTimer++;
@@ -2592,16 +2592,16 @@ static void Task_RayCharges_FlyOffscreen(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (tState == 0)
     {
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         tState++;
         tOffset = 10;
         tShakeDir = -1;
     }
     else if (tState == 1)
     {
-        ChangeBgX(1, tOffset << 8, 2);
-        ChangeBgY(1, tOffset << 8, 1);
+        ChangeBgX(1, tOffset << 8, BG_COORD_SUB);
+        ChangeBgY(1, tOffset << 8, BG_COORD_ADD);
         tOffset += tShakeDir;
         if (tOffset == -10)
             tShakeDir *= -1;
@@ -2616,12 +2616,12 @@ static void Task_RayCharges_FlyOffscreen(u8 taskId)
 static void RayCharges_AnimateBg(void)
 {
     // Update yellow orbs
-    ChangeBgX(2, 0x400, 2);
-    ChangeBgY(2, 0x400, 1);
+    ChangeBgX(2, 0x400, BG_COORD_SUB);
+    ChangeBgY(2, 0x400, BG_COORD_ADD);
 
     // Update blue streaks
-    ChangeBgX(0, 0x800, 2);
-    ChangeBgY(0, 0x800, 1);
+    ChangeBgX(0, 0x800, BG_COORD_SUB);
+    ChangeBgY(0, 0x800, BG_COORD_ADD);
 }
 
 static void Task_RayChargesEnd(u8 taskId)
@@ -3064,7 +3064,7 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
         ChasesAway_SetRayquazaAnim(sprite, 3, 48, 16);
         sprite->x2 = 1;
         gSprites[sprite->sTailSpriteId].x2 = 1;
-        PlayCry1(SPECIES_RAYQUAZA, 0);
+        PlayCry_Normal(SPECIES_RAYQUAZA, 0);
         CreateTask(Task_ChasesAway_AnimateRing, 0);
     }
     else

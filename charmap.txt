@@ -423,7 +423,7 @@ HIGHLIGHT = FC 02 @ same as fc 01
 SHADOW = FC 03 @ same as fc 01
 COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
 PALETTE = FC 05 @ used in credits
-SIZE = FC 06 @ note that anything other than "SMALL" is invalid
+FONT = FC 06 @ Given a font id, or use font constants below instead
 RESET_SIZE = FC 07
 PAUSE = FC 08 @ manually print the wait byte after this, havent mapped them
 PAUSE_UNTIL_PRESS = FC 09
@@ -442,6 +442,14 @@ JPN = FC 15
 ENG = FC 16
 PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
+
+@ fonts
+
+FONT_SMALL = FC 06 00
+FONT_NORMAL = FC 06 01
+FONT_SHORT = FC 06 02
+FONT_NARROW = FC 06 07
+FONT_SMALL_NARROW = FC 06 08
 
 @ colors
 

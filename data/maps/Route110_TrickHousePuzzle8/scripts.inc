@@ -3,8 +3,7 @@ Route110_TrickHousePuzzle8_MapScripts::
 
 Route110_TrickHousePuzzle8_EventScript_Scroll::
 	lockall
-	compare VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle8_EventScript_FoundScroll
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0, Route110_TrickHousePuzzle8_EventScript_FoundScroll
 	goto Route110_TrickHousePuzzle_EventScript_ReadScrollAgain
 	end
 

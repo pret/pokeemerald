@@ -53,9 +53,20 @@
 #define UNION_ROOM_KB_ROW_COUNT 10
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
-
 #define PYRAMID_BAG_ITEMS_COUNT 10
-#define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
+
+// Number of facilities for Ranking Hall.
+// 7 facilities for single mode + tower double mode + tower multi mode.
+// Excludes link modes. See RANKING_HALL_* in include/constants/battle_frontier.h
+#define HALL_FACILITIES_COUNT 9
+// Received via record mixing, 1 for each player other than yourself
+#define HALL_RECORDS_COUNT 3
+
+// Battle Frontier level modes.
+#define FRONTIER_LVL_50         0
+#define FRONTIER_LVL_OPEN       1
+#define FRONTIER_LVL_MODE_COUNT 2
+#define FRONTIER_LVL_TENT       FRONTIER_LVL_MODE_COUNT // Special usage for indicating Battle Tent
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4
@@ -86,6 +97,13 @@
 #define EASY_CHAT_BATTLE_WORDS_COUNT 6
 #define MOVE_NAME_LENGTH 12
 #define NUM_QUESTIONNAIRE_WORDS 4
+#define QUIZ_QUESTION_LEN 9
+#define WONDER_CARD_TEXT_LENGTH 40
+#define WONDER_NEWS_TEXT_LENGTH 40
+#define WONDER_CARD_BODY_TEXT_LINES 4
+#define WONDER_NEWS_BODY_TEXT_LINES 10
+
+#define MAX_STAMP_CARD_STAMPS 7
 
 #define MALE 0
 #define FEMALE 1
@@ -94,6 +112,8 @@
 #define BARD_SONG_LENGTH       6
 #define NUM_STORYTELLER_TALES  4
 #define NUM_TRADER_ITEMS       4
+#define GIDDY_MAX_TALES       10
+#define GIDDY_MAX_QUESTIONS    8
 
 #define OPTIONS_BUTTON_MODE_NORMAL 0
 #define OPTIONS_BUTTON_MODE_LR 1
