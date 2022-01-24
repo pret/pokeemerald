@@ -1429,9 +1429,8 @@ static void Cmd_check_ability(void)
         {
             if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
             {
-                u8 abilityDummyVariable = ability; // Needed to match.
-                if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != abilityDummyVariable
-                && gBaseStats[gBattleMons[battlerId].species].abilities[1] != abilityDummyVariable)
+                if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != gAIScriptPtr[2]
+                && gBaseStats[gBattleMons[battlerId].species].abilities[1] != gAIScriptPtr[2]) // Unnecessary, should have just accessed ability var
                 {
                     ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
                 }
