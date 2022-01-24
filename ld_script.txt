@@ -182,7 +182,6 @@ SECTIONS {
         src/contest_link.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
-        src/battle_anim_effects_2.o(.text);
         src/battle_anim_water.o(.text);
         src/battle_anim_fire.o(.text);
         src/battle_anim_electric.o(.text);
@@ -248,7 +247,7 @@ SECTIONS {
         src/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
-        src/battle_anim_effects_3.o(.text);
+        src/battle_anim_effects_2.o(.text);
         src/move_relearner.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
@@ -557,7 +556,6 @@ SECTIONS {
         src/contest_link.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
-        src/battle_anim_effects_2.o(.rodata);
         src/battle_anim_water.o(.rodata);
         src/battle_anim_fire.o(.rodata);
         src/battle_anim_electric.o(.rodata);
@@ -610,7 +608,7 @@ SECTIONS {
         src/contest_ai.o(.rodata);
         src/battle_anim_sound_tasks.o(.rodata);
         src/battle_controller_safari.o(.rodata);
-        src/battle_anim_effects_3.o(.rodata);
+        src/battle_anim_effects_2.o(.rodata);
         src/move_relearner.o(.rodata);
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
