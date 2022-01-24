@@ -36,3 +36,5 @@ porymap.project.cfg
 *.sna
 *.diff
 *.sym
+mgba.sh
+core
