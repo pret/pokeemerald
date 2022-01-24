@@ -1143,6 +1143,196 @@ static const union AffineAnimCmd *const sAffineAnimTable_KyogreGroudon[] = {
     sAffineAnim_KyogreGroudon_DipEast,      // Unused
 };
 
+const union AnimCmd gObjectEventImageAnim_Pokemon_FaceSouth[] =
+{
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_FaceNorth[] =
+{
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_FaceWest[] =
+{
+    ANIMCMD_FRAME(2, 16),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_FaceEast[] =
+{
+    ANIMCMD_FRAME(2, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoSouth[] =
+{
+    ANIMCMD_FRAME(3, 8),
+    //ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(4, 8),
+    //ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoNorth[] =
+{
+    ANIMCMD_FRAME(5, 8),
+    //ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(6, 8),
+    //ANIMCMD_FRAME(1, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoWest[] =
+{
+    ANIMCMD_FRAME(7, 8),
+    //ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(8, 8),
+    //ANIMCMD_FRAME(2, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoEast[] =
+{
+    ANIMCMD_FRAME(7, 8, .hFlip = TRUE),
+    //ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 8, .hFlip = TRUE),
+    //ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastSouth[] =
+{
+    ANIMCMD_FRAME(3, 4),
+    //ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(4, 4),
+    //ANIMCMD_FRAME(0, 4),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastNorth[] =
+{
+    ANIMCMD_FRAME(5, 4),
+    //ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(6, 4),
+    //ANIMCMD_FRAME(1, 4),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastWest[] =
+{
+    ANIMCMD_FRAME(7, 4),
+    //ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(8, 4),
+    //ANIMCMD_FRAME(2, 4),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastEast[] =
+{
+    ANIMCMD_FRAME(7, 4, .hFlip = TRUE),
+    //ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 4, .hFlip = TRUE),
+    //ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFasterSouth[] =
+{
+    ANIMCMD_FRAME(3, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(4, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFasterNorth[] =
+{
+    ANIMCMD_FRAME(5, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(6, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFasterWest[] =
+{
+    ANIMCMD_FRAME(7, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_FRAME(8, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFasterEast[] =
+{
+    ANIMCMD_FRAME(7, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastestSouth[] =
+{
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastestNorth[] =
+{
+    ANIMCMD_FRAME(5, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(6, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastestWest[] =
+{
+    ANIMCMD_FRAME(7, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_Pokemon_GoFastestEast[] =
+{
+    ANIMCMD_FRAME(7, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+const union AnimCmd *const gObjectEventImageAnimTable_PokemonSpecies[] = {
+    gObjectEventImageAnim_Pokemon_FaceSouth,
+    gObjectEventImageAnim_Pokemon_FaceNorth,
+    gObjectEventImageAnim_Pokemon_FaceWest,
+    gObjectEventImageAnim_Pokemon_FaceEast,
+    gObjectEventImageAnim_Pokemon_GoSouth,
+    gObjectEventImageAnim_Pokemon_GoNorth,
+    gObjectEventImageAnim_Pokemon_GoWest,
+    gObjectEventImageAnim_Pokemon_GoEast,
+    gObjectEventImageAnim_Pokemon_GoFastSouth,
+    gObjectEventImageAnim_Pokemon_GoFastNorth,
+    gObjectEventImageAnim_Pokemon_GoFastWest,
+    gObjectEventImageAnim_Pokemon_GoFastEast,
+    gObjectEventImageAnim_Pokemon_GoFasterSouth,
+    gObjectEventImageAnim_Pokemon_GoFasterNorth,
+    gObjectEventImageAnim_Pokemon_GoFasterWest,
+    gObjectEventImageAnim_Pokemon_GoFasterEast,
+    gObjectEventImageAnim_Pokemon_GoFastestSouth,
+    gObjectEventImageAnim_Pokemon_GoFastestNorth,
+    gObjectEventImageAnim_Pokemon_GoFastestWest,
+    gObjectEventImageAnim_Pokemon_GoFastestEast,
+};
+
 // For animations with alternating steps
 static const struct StepAnimTable sStepAnimTables[] = {
     {
@@ -1171,6 +1361,10 @@ static const struct StepAnimTable sStepAnimTables[] = {
     },
     {
         .anims = sAnimTable_Fishing,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = gObjectEventImageAnimTable_PokemonSpecies,
         .animPos = {1, 3, 0, 2},
     },
     {},
