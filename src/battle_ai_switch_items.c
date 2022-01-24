@@ -437,7 +437,7 @@ static bool8 ShouldSwitch(void)
     (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP)) || // Misses the flying type and Levitate check.
     ((ABILITY_ON_FIELD2(ABILITY_MAGNET_PULL)) && 
     ((gBattleMons[gActiveBattler].type1 == TYPE_STEEL) || (gBattleMons[gActiveBattler].type2 == TYPE_STEEL)))) ||
-    (gBattleTypeFlags & BATTLE_TYPE_ARENA)) {
+    (gBattleTypeFlags & BATTLE_TYPE_ARENA))
         return FALSE;
     }
 
