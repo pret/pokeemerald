@@ -439,7 +439,6 @@ static bool8 ShouldSwitch(void)
     ((gBattleMons[gActiveBattler].type1 == TYPE_STEEL) || (gBattleMons[gActiveBattler].type2 == TYPE_STEEL)))) ||
     (gBattleTypeFlags & BATTLE_TYPE_ARENA))
         return FALSE;
-    }
 
     availableToSwitch = 0;
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
