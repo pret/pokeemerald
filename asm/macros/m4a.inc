@@ -8,6 +8,6 @@
 	.4byte \info_struct
 	.4byte \track_struct
 	.byte \num_tracks
-	.byte 0  @ Padding
+	.space 1  @ Padding
 	.2byte \unknown
 	.endm

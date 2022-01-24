@@ -1,3 +1,5 @@
+@ The first .byte argument of each macro below is an index into gFieldEffectScriptFuncs
+
 	.macro field_eff_loadtiles address:req
 	.byte 0
 	.4byte \address
