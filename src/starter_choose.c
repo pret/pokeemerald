@@ -23,6 +23,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "shuffler.h"
 
 #define STARTER_MON_COUNT   3
 
@@ -357,7 +358,10 @@ u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-    return sStarterMon[chosenStarterId];
+    if (gSpecialVar_0x8004 == 1) { 
+        return realStarterMon[chosenStarterId + 3];
+    }
+    return realStarterMon[chosenStarterId];
 }
 
 static void VblankCB_StarterChoose(void)

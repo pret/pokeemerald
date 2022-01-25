@@ -590,6 +590,7 @@
 
 // gMapGroup_IndoorRoute124
 #define MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE (0 | (33 << 8))
+#define MAP_START_MAP                              (1 | (33 << 8))
 
 #define MAP_GROUPS_COUNT 34
 
