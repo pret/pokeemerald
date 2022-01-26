@@ -9625,13 +9625,8 @@ bool32 CanFling(u8 battlerId)
       #endif
       || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
       || gDisableStructs[battlerId].embargoTimer != 0
-      || !CanBattlerGetOrLoseItem(battlerId, item)
-      //|| itemEffect == HOLD_EFFECT_PRIMAL_ORB
-      || itemEffect == HOLD_EFFECT_GEMS
-      #ifdef ITEM_ABILITY_CAPSULE
-      || item == ITEM_ABILITY_CAPSULE
-      #endif
-      || GetPocketByItemId(item) == POCKET_POKE_BALLS)
+      || ItemId_GetFlingPower(item) != 0
+      || !CanBattlerGetOrLoseItem(battlerId, item))
         return FALSE;
 
     return TRUE;
