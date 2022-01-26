@@ -9625,7 +9625,9 @@ bool32 CanFling(u8 battlerId)
       #endif
       || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
       || gDisableStructs[battlerId].embargoTimer != 0
+      #ifdef ITEM_EXPANSION
       || ItemId_GetFlingPower(item) != 0
+      #endif
       || !CanBattlerGetOrLoseItem(battlerId, item))
         return FALSE;
 
