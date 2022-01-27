@@ -10,7 +10,7 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 
-/* 
+/*
     This file handles the movements of the Pokémon intro animations.
 
     Each animation type is identified by an ANIM_* constant that
@@ -26,7 +26,7 @@
 
     The table linking species to a BACK_ANIM is in this file (sSpeciesToBackAnimSet)
     while the table linking species to an ANIM for their front animation is in
-    pokemon.c (sMonFrontAnimIdsTable). 
+    pokemon.c (sMonFrontAnimIdsTable).
 
     These are the functions that will start an animation:
     - LaunchAnimationTaskForFrontSprite

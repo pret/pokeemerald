@@ -7,7 +7,8 @@ struct TrainerMoney
     u8 value;
 };
 
-struct UnknownPokemonStruct4
+// For displaying a multi battle partner's Pokémon in the party menu
+struct MultiPartnerMenuPokemon
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
@@ -21,10 +22,13 @@ struct UnknownPokemonStruct4
     /*0x1D*/ u8 language;
 };
 
-struct ChooseMoveStruct;
-
 #define TYPE_NAME_LENGTH 6
+
+#if B_EXPANDED_ABILITY_NAMES
+#define ABILITY_NAME_LENGTH 16
+#else
 #define ABILITY_NAME_LENGTH 12
+#endif
 
 // defines for the 'DoBounceEffect' function
 #define BOUNCE_MON          0x0
@@ -33,8 +37,6 @@ struct ChooseMoveStruct;
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void CB2_QuitRecordedBattle(void);
-void sub_8038528(struct Sprite* sprite);
-void sub_8038A04(void); // unused
 void VBlankCB_Battle(void);
 void SpriteCB_VsLetterDummy(struct Sprite *sprite);
 void SpriteCB_VsLetterInit(struct Sprite *sprite);
@@ -46,15 +48,14 @@ void SpriteCallbackDummy_2(struct Sprite *sprite);
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
 void SpriteCb_ShowAsMoveTarget(struct Sprite *sprite);
 void SpriteCb_HideAsMoveTarget(struct Sprite *sprite);
-void SpriteCb_OpponentMonFromBall(struct Sprite *sprite);
+void SpriteCB_OpponentMonFromBall(struct Sprite *sprite);
 void SpriteCB_BattleSpriteStartSlideLeft(struct Sprite *sprite);
 void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
 void DoBounceEffect(u8 battlerId, u8 b, s8 c, s8 d);
 void EndBounceEffect(u8 battlerId, bool8 b);
-void SpriteCb_PlayerMonFromBall(struct Sprite *sprite);
-void sub_8039E60(struct Sprite *sprite);
+void SpriteCB_PlayerMonFromBall(struct Sprite *sprite);
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
-void sub_8039E9C(struct Sprite *sprite);
+void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
@@ -72,11 +73,11 @@ void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
-void FillChooseMoveStruct(struct ChooseMoveStruct *moveInfo);
+bool32 IsWildMonSmart(void);
 
-extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
+extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 
-extern const struct SpriteTemplate gUnknown_0831AC88;
+extern const struct SpriteTemplate gUnusedBattleInitSprite;
 extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
 extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];

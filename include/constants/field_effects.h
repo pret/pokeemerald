@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_EFFECT_CONSTANTS_H
 #define GUARD_FIELD_EFFECT_CONSTANTS_H
 
-#define FLDEFF_EXCLAMATION_MARK_ICON     0 
+#define FLDEFF_EXCLAMATION_MARK_ICON     0
 #define FLDEFF_USE_CUT_ON_GRASS          1
 #define FLDEFF_USE_CUT_ON_TREE           2
 #define FLDEFF_SHADOW                    3
@@ -46,7 +46,7 @@
 #define FLDEFF_HOT_SPRINGS_WATER         42
 #define FLDEFF_USE_WATERFALL             43
 #define FLDEFF_USE_DIVE                  44
-#define FLDEFF_POKEBALL                  45
+#define FLDEFF_POKEBALL_TRAIL            45
 #define FLDEFF_HEART_ICON                46
 #define FLDEFF_NOP_47                    47
 #define FLDEFF_NOP_48                    48
@@ -113,7 +113,7 @@
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005
 #define FLDEFF_PAL_TAG_POKEBALL_GLOW      0x1007
 #define FLDEFF_PAL_TAG_SECRET_POWER_PLANT 0x1008
-#define FLDEFF_PAL_TAG_POKEBALL           0x1009
+#define FLDEFF_PAL_TAG_POKEBALL_TRAIL     0x1009
 #define FLDEFF_PAL_TAG_ASH                0x100D
 #define FLDEFF_PAL_TAG_SAND_PILLAR        0x100E
 #define FLDEFF_PAL_TAG_SMALL_SPARKLE      0x100F

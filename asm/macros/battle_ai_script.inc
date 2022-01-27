@@ -251,11 +251,11 @@
 	.4byte \ptr
 	.endm
 
-	.macro nullsub_2A
+	.macro nop_2A
 	.byte 0x2a
 	.endm
 
-	.macro nullsub_2B
+	.macro nop_2B
 	.byte 0x2b
 	.endm
 
@@ -287,11 +287,11 @@
 	.4byte \param1
 	.endm
 
-	.macro nullsub_32
+	.macro nop_32
 	.byte 0x32
 	.endm
 
-	.macro nullsub_33
+	.macro nop_33
 	.byte 0x33
 	.endm
 
@@ -490,12 +490,12 @@
 	.endm
 
 	.macro call_if_move_flag flag ptr
-	.byte 0x52
+	.byte 0x56
 	.4byte \flag
 	.4byte \ptr
 	.endm
 
-	.macro nullsub_57
+	.macro nop_57
 	.byte 0x57
 	.endm
 

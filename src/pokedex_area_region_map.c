@@ -17,31 +17,35 @@ static const u32 sPokedexAreaMapAffine_Tilemap[] = INCBIN_U32("graphics/interfac
 void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
 {
     u8 mode;
-    sPokedexAreaMapBgNum = Alloc(4);
+    void * tilemap;
+    sPokedexAreaMapBgNum = Alloc(sizeof(sPokedexAreaMapBgNum));
     mode = template->mode;
 
     if (mode == 0)
     {
         SetBgAttribute(template->bg, BG_ATTR_METRIC, 0);
         DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Gfx, 0, template->offset, 0);
-        sub_8199D3C(DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Tilemap, 0, 0, 1), template->offset, 32, 32, FALSE);
+        tilemap = DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Tilemap, 0, 0, 1);
+        AddValToTilemapBuffer(tilemap, template->offset, 32, 32, FALSE); // template->offset is always 0, so this does nothing.
     }
     else
     {
+        // This is never reached, only a mode of 0 is given
         SetBgAttribute(template->bg, BG_ATTR_METRIC, 2);
-        SetBgAttribute(template->bg, BG_ATTR_TYPE, 1);
+        SetBgAttribute(template->bg, BG_ATTR_TYPE, BG_TYPE_AFFINE); // This does nothing. BG_ATTR_TYPE can't be set with this function
         DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Gfx, 0, template->offset, 0);
-        sub_8199D3C(DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Tilemap, 0, 0, 1), template->offset, 64, 64, TRUE);
+        tilemap = DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Tilemap, 0, 0, 1);
+        AddValToTilemapBuffer(tilemap, template->offset, 64, 64, TRUE); // template->offset is always 0, so this does nothing.
     }
 
-    ChangeBgX(template->bg, 0, 0);
-    ChangeBgY(template->bg, 0, 0);
+    ChangeBgX(template->bg, 0, BG_COORD_SET);
+    ChangeBgY(template->bg, 0, BG_COORD_SET);
     SetBgAttribute(template->bg, BG_ATTR_PALETTEMODE, 1);
     CpuCopy32(sPokedexAreaMap_Pal, &gPlttBufferUnfaded[0x70], 0x60);
     *sPokedexAreaMapBgNum = template->bg;
 }
 
-bool32 sub_81C4E90(void)
+bool32 TryShowPokedexAreaMap(void)
 {
     if (!FreeTempTileDataBuffersIfPossible())
     {
@@ -56,11 +60,10 @@ bool32 sub_81C4E90(void)
 
 void FreePokedexAreaMapBgNum(void)
 {
-    if (sPokedexAreaMapBgNum != NULL)
-        FREE_AND_SET_NULL(sPokedexAreaMapBgNum);
+    TRY_FREE_AND_SET_NULL(sPokedexAreaMapBgNum);
 }
 
 void PokedexAreaMapChangeBgY(u32 a0)
 {
-    ChangeBgY(*sPokedexAreaMapBgNum, a0 * 0x100, 0);
+    ChangeBgY(*sPokedexAreaMapBgNum, a0 * 0x100, BG_COORD_SET);
 }
