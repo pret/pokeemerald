@@ -403,6 +403,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectOctolock                @ EFFECT_OCTOLOCK
 	.4byte BattleScript_EffectClangorousSoul          @ EFFECT_CLANGOROUS_SOUL
 	.4byte BattleScript_EffectHit                     @ EFFECT_BOLT_BEAK
+	.4byte BattleScript_EffectSkyDrop                 @ EFFECT_SKY_DROP
 	.4byte BattleScript_EffectHit                     @ EFFECT_EXPANDING_FORCE
 	.4byte BattleScript_EffectScaleShot               @ EFFECT_SCALE_SHOT
 	.4byte BattleScript_EffectMeteorBeam              @ EFFECT_METEOR_BEAM
@@ -512,11 +513,10 @@ BattleScript_ScaleShotPrintStrings::
 BattleScript_ScaleShotEnd::
 	setmoveeffect MOVE_EFFECT_SCALE_SHOT | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	seteffectwithchance
-	tryfaintmon BS_TARGET, FALSE, NULL
+	tryfaintmon BS_TARGET
 	moveendcase MOVEEND_SYNCHRONIZE_TARGET
 	moveendfrom MOVEEND_STATUS_IMMUNITY_ABILITIES
 	end
-	.4byte BattleScript_EffectSkyDrop                 @ EFFECT_SKY_DROP
   
 BattleScript_EffectSkyDrop:
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_SkyDropTurn2
