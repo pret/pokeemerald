@@ -341,7 +341,7 @@ static void Debug_AddDaycareSteps(u16 numSteps)
 
 u8 GetNumLevelsGainedFromDaycare(void)
 {
-    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004].mon, MON_DATA_SPECIES) != 0)
+    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004].mon, MON_DATA_SPECIES) != SPECIES_NONE)
         return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004]);
 
     return 0;
