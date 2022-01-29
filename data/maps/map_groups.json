@@ -621,6 +621,10 @@
   ],
   "gMapGroup_IndoorRoute124": [
     "Route124_DivingTreasureHuntersHouse",
-    "StartMap"
+    "StartMap",
+    "DoubleTrainerFight",
+    "EndMap",
+    "TwoWildEncounters",
+    "HealerRoom"
   ]
 }

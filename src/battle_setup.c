@@ -37,6 +37,7 @@
 #include "mirage_tower.h"
 #include "field_screen_effect.h"
 #include "data.h"
+#include "shuffler.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/game_stat.h"
@@ -46,6 +47,9 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+
+#include "printf.h"
+#include "mgba.h"
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -758,17 +762,17 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     u8 sum;
     u32 count = numMons;
 
-    if (gTrainers[opponentId].partySize < count)
-        count = gTrainers[opponentId].partySize;
+    if (RedirectTrainer(opponentId)->partySize < count)
+        count = RedirectTrainer(opponentId)->partySize;
 
     sum = 0;
 
-    switch (gTrainers[opponentId].partyFlags)
+    switch (RedirectTrainer(opponentId)->partyFlags)
     {
     case 0:
         {
             const struct TrainerMonNoItemDefaultMoves *party;
-            party = gTrainers[opponentId].party.NoItemDefaultMoves;
+            party = RedirectTrainer(opponentId)->party.NoItemDefaultMoves;
             for (i = 0; i < count; i++)
                 sum += party[i].lvl;
         }
@@ -776,7 +780,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     case F_TRAINER_PARTY_CUSTOM_MOVESET:
         {
             const struct TrainerMonNoItemCustomMoves *party;
-            party = gTrainers[opponentId].party.NoItemCustomMoves;
+            party = RedirectTrainer(opponentId)->party.NoItemCustomMoves;
             for (i = 0; i < count; i++)
                 sum += party[i].lvl;
         }
@@ -784,7 +788,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     case F_TRAINER_PARTY_HELD_ITEM:
         {
             const struct TrainerMonItemDefaultMoves *party;
-            party = gTrainers[opponentId].party.ItemDefaultMoves;
+            party = RedirectTrainer(opponentId)->party.ItemDefaultMoves;
             for (i = 0; i < count; i++)
                 sum += party[i].lvl;
         }
@@ -792,7 +796,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
         {
             const struct TrainerMonItemCustomMoves *party;
-            party = gTrainers[opponentId].party.ItemCustomMoves;
+            party = RedirectTrainer(opponentId)->party.ItemCustomMoves;
             for (i = 0; i < count; i++)
                 sum += party[i].lvl;
         }
@@ -834,7 +838,9 @@ u8 GetTrainerBattleTransition(void)
     if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         return B_TRANSITION_CHAMPION;
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
+    u8 trainerClass = RedirectTrainer(gTrainerBattleOpponent_A)->trainerClass;
+
+    if (trainerClass == TRAINER_CLASS_ELITE_FOUR)
     {
         if (gTrainerBattleOpponent_A == TRAINER_SIDNEY)
             return B_TRANSITION_SIDNEY;
@@ -847,20 +853,20 @@ u8 GetTrainerBattleTransition(void)
         return B_TRANSITION_CHAMPION;
     }
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
+    if (trainerClass == TRAINER_CLASS_CHAMPION)
         return B_TRANSITION_CHAMPION;
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_TEAM_MAGMA
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_MAGMA_LEADER
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_MAGMA_ADMIN)
+    if (trainerClass == TRAINER_CLASS_TEAM_MAGMA
+        || trainerClass == TRAINER_CLASS_MAGMA_LEADER
+        || trainerClass == TRAINER_CLASS_MAGMA_ADMIN)
         return B_TRANSITION_MAGMA;
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_TEAM_AQUA
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_AQUA_LEADER
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_AQUA_ADMIN)
+    if (trainerClass == TRAINER_CLASS_TEAM_AQUA
+        || trainerClass == TRAINER_CLASS_AQUA_LEADER
+        || trainerClass == TRAINER_CLASS_AQUA_ADMIN)
         return B_TRANSITION_AQUA;
 
-    if (gTrainers[gTrainerBattleOpponent_A].doubleBattle == TRUE)
+    if (RedirectTrainer(gTrainerBattleOpponent_A)->doubleBattle == TRUE)
         minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
         minPartyCount = 1;
@@ -937,9 +943,9 @@ static void CB2_GiveStarter(void)
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
     ResetTasks();
-    //PlayBattleBGM();
-    //SetMainCallback2(CB2_StartFirstBattle);
-    //BattleTransition_Start(B_TRANSITION_BLUR);
+    // PlayBattleBGM();
+    // SetMainCallback2(CB2_StartFirstBattle);
+    // BattleTransition_Start(B_TRANSITION_BLUR);
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -999,12 +1005,12 @@ static u8 TrainerBattleLoadArg8(const u8 *ptr)
 
 static u16 GetTrainerAFlag(void)
 {
-    return TRAINER_FLAGS_START + gTrainerBattleOpponent_A;
+    return GetAdjustedTrainerFlag(gTrainerBattleOpponent_A);
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return TRAINER_FLAGS_START + gTrainerBattleOpponent_B;
+    return GetAdjustedTrainerFlag(gTrainerBattleOpponent_B);
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1101,6 +1107,8 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
             break;
         case TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR:
             SetPtr(specs->varPtr, data);
+            sTrainerAIntroSpeech = GetAdjustedTrainerIntroText(gTrainerBattleOpponent_A - 1);
+            sTrainerADefeatSpeech = GetAdjustedTrainerDefeatText(gTrainerBattleOpponent_A - 1);
             return;
         }
         specs++;
@@ -1232,7 +1240,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
-    return FlagGet(TRAINER_FLAGS_START + flag);
+    return FlagGet(GetAdjustedTrainerFlag(flag));
 }
 
 // Set trainer's movement type so they stop and remain facing that direction
@@ -1273,17 +1281,17 @@ static void SetBattledTrainerFlag(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(TRAINER_FLAGS_START + trainerId);
+    return FlagGet(GetAdjustedTrainerFlag(trainerId));
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(TRAINER_FLAGS_START + trainerId);
+    FlagSet(GetAdjustedTrainerFlag(trainerId));
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(TRAINER_FLAGS_START + trainerId);
+    FlagClear(GetAdjustedTrainerFlag(trainerId));
 }
 
 void BattleSetup_StartTrainerBattle(void)

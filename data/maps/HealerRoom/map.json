@@ -1,7 +1,7 @@
 {
-  "id": "MAP_START_MAP",
-  "name": "StartMap",
-  "layout": "LAYOUT_START_MAP",
+  "id": "MAP_HEALER_ROOM",
+  "name": "HealerRoom",
+  "layout": "LAYOUT_HEALER_ROOM",
   "music": "MUS_ABANDONED_SHIP",
   "region_map_section": "MAPSEC_ROUTE_124",
   "requires_flash": false,
@@ -15,32 +15,45 @@
   "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_BIRCHS_BAG",
-      "x": 3,
-      "y": 2,
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
+      "x": 2,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "StartMap_BirchsBag",
-      "flag": "FLAG_SYS_POKEMON_GET"
+      "script": "Shuffler_NPC1",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 17,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Shuffler_Item2",
+      "flag": "FLAG_ITEM_ROUTE_102_POTION"
     }
   ],
   "warp_events": [
     {
-      "x": 3,
-      "y": 5,
+      "x": 10,
+      "y": 14,
       "elevation": 0,
-      "dest_map": "MAP_START_MAP",
+      "dest_map": "MAP_HEALER_ROOM",
       "dest_warp_id": 0
     },
     {
-      "x": 3,
+      "x": 14,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_START_MAP",
+      "dest_map": "MAP_HEALER_ROOM",
       "dest_warp_id": 0
     }
   ],

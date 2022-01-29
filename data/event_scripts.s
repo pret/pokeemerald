@@ -103,6 +103,8 @@ gStdScripts::
 	.4byte Std_MsgboxPokenav           @ MSGBOX_POKENAV
 gStdScripts_End::
 
+	.include "data/scripts/shuffler_text.inc"
+	.include "data/scripts/shuffler.inc"
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"
 	.include "data/maps/MauvilleCity/scripts.inc"
@@ -1059,3 +1061,11 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/maps/StartMap/scripts.inc"
+
+	.include "data/maps/DoubleTrainerFight/scripts.inc"
+
+	.include "data/maps/EndMap/scripts.inc"
+
+	.include "data/maps/TwoWildEncounters/scripts.inc"
+
+	.include "data/maps/HealerRoom/scripts.inc"

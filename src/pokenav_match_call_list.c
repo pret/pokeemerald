@@ -9,6 +9,7 @@
 #include "overworld.h"
 #include "pokemon.h"
 #include "pokenav.h"
+#include "shuffler.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
@@ -336,7 +337,7 @@ int GetMatchCallTrainerPic(int index)
     if (!state->matchCallEntries[index].isSpecialTrainer)
     {
         index = GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId);
-        return gTrainers[index].trainerPic;
+        return RedirectTrainer(index)->trainerPic;
     }
 
     headerId = state->matchCallEntries[index].headerId;
@@ -344,7 +345,7 @@ int GetMatchCallTrainerPic(int index)
     if (index != REMATCH_TABLE_ENTRIES)
     {
         index = GetTrainerIdxByRematchIdx(index);
-        return gTrainers[index].trainerPic;
+        return RedirectTrainer(index)->trainerPic;
     }
 
     index = MatchCall_GetOverrideFacilityClass(headerId);
@@ -406,7 +407,7 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     if (!matchCallEntry->isSpecialTrainer)
     {
         int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
-        const struct Trainer *trainer = &gTrainers[index];
+        const struct Trainer *trainer = RedirectTrainer(index);
         int class = trainer->trainerClass;
         className = gTrainerClassNames[class];
         trainerName = trainer->trainerName;

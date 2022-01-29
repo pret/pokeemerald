@@ -4420,6 +4420,46 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/StartMap/border.bin",
       "blockdata_filepath": "data/layouts/StartMap/map.bin"
+    },
+    {
+      "id": "LAYOUT_DOUBLE_TRAINER_FIGHT",
+      "name": "DoubleTrainerFight_Layout",
+      "width": 12,
+      "height": 6,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/DoubleTrainerFight/border.bin",
+      "blockdata_filepath": "data/layouts/DoubleTrainerFight/map.bin"
+    },
+    {
+      "id": "LAYOUT_END_MAP",
+      "name": "EndMap_Layout",
+      "width": 7,
+      "height": 7,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/EndMap/border.bin",
+      "blockdata_filepath": "data/layouts/EndMap/map.bin"
+    },
+    {
+      "id": "LAYOUT_TWO_WILD_ENCOUNTERS",
+      "name": "TwoWildEncounters_Layout",
+      "width": 5,
+      "height": 12,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/TwoWildEncounters/border.bin",
+      "blockdata_filepath": "data/layouts/TwoWildEncounters/map.bin"
+    },
+    {
+      "id": "LAYOUT_HEALER_ROOM",
+      "name": "HealerRoom_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/HealerRoom/border.bin",
+      "blockdata_filepath": "data/layouts/HealerRoom/map.bin"
     }
   ]
 }

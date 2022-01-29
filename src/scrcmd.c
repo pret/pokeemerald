@@ -40,6 +40,7 @@
 #include "script_movement.h"
 #include "script_pokemon_util.h"
 #include "shop.h"
+#include "shuffler.h"
 #include "slot_machine.h"
 #include "sound.h"
 #include "string_util.h"
@@ -49,6 +50,10 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "battle_main.h"
+
+#include "printf.h"
+#include "mgba.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -489,8 +494,8 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
+    u16 adjustedItemId = AdjustItem(itemId);
+    gSpecialVar_Result = AddBagItem(adjustedItemId, (u8)quantity);
     return FALSE;
 }
 
@@ -1824,6 +1829,7 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 {
+    mgba_printf(MGBA_LOG_INFO, "ctx->scriptPtr[0]: %d", ctx->scriptPtr[0]);
     ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;
 }
@@ -1881,7 +1887,11 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 
     if(species2 == SPECIES_NONE)
     {
-        CreateScriptedWildMon(species, level, item);
+        CreateScriptedWildMon(
+            GetAdjustedWildMonSpecies(species - 1),
+            GetAdjustedWildMonLevel(species - 1),
+            item
+        );
         gIsScriptedWildDouble = FALSE;
     }
     else
@@ -2330,4 +2340,46 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     DoWhiteFadeWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
+}
+
+bool8 ScrCmd_declareitem(struct ScriptContext *ctx) {
+    u8 objNum = ScriptReadByte(ctx) - 1;
+    DeclareItem(objNum);
+    return TRUE;
+}
+
+bool8 ScrCmd_declaretrainer(struct ScriptContext *ctx) {
+    u8 objNum = ScriptReadByte(ctx) - 1;
+    DeclareTrainer(objNum);
+    return TRUE;
+}
+
+bool8 ScrCmd_declarewildmon(struct ScriptContext *ctx) {
+    u8 objNum = ScriptReadByte(ctx) - 1;
+    DeclareWildMon(objNum);
+    return TRUE;
+}
+
+bool8 ScrCmd_declarenpc(struct ScriptContext *ctx) {
+    u8 objNum = ScriptReadByte(ctx) - 1;
+    DeclareNPC(objNum);
+    return TRUE;
+}
+
+bool8 ScrCmd_bufferpostbattletext(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u8 objNum = ScriptReadByte(ctx) - 1;
+
+    StringCopy(sScriptStringVars[stringVarIndex], GetAdjustedTrainerPostbattleText(objNum));
+    return FALSE;
+}
+
+bool8 ScrCmd_buffertypename(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u16 type = VarGet(ScriptReadHalfword(ctx));
+
+    StringCopy(sScriptStringVars[stringVarIndex], gTypeNames[type]);
+    return FALSE;
 }

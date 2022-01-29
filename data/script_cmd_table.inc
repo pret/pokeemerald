@@ -227,6 +227,13 @@ gScriptCmdTable::
 	.4byte ScrCmd_warpwhitefade             @ 0xe0
 	.4byte ScrCmd_buffercontestname         @ 0xe1
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
+	.4byte ScrCmd_nop
+	.4byte ScrCmd_declareitem
+	.4byte ScrCmd_declaretrainer
+	.4byte ScrCmd_declarewildmon
+	.4byte ScrCmd_buffertypename
+	.4byte ScrCmd_declarenpc
+	.4byte ScrCmd_bufferpostbattletext
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

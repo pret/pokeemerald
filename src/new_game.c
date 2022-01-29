@@ -127,7 +127,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(START_MAP), MAP_NUM(START_MAP), 1, 1, 5);
+    SetWarpDestination(MAP_GROUP(START_MAP), MAP_NUM(START_MAP), 0, -1, -1);
     WarpIntoMap();
 }
 
@@ -206,7 +206,7 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
 
-    Shuffle();
+    Shuffle(2);
 }
 
 static void ResetMiniGamesRecords(void)

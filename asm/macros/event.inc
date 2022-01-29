@@ -1736,6 +1736,37 @@
 	.2byte \quantity
 	.endm
 
+	.macro declareitem objnum:req
+	.byte 0xe4
+	.byte \objnum
+	.endm
+
+	.macro declaretrainer objnum:req
+	.byte 0xe5
+	.byte \objnum
+	.endm
+
+	.macro declarewildmon objnum:req
+	.byte 0xe6
+	.byte \objnum
+	.endm
+
+	.macro buffertypename out:req, type:req
+	.byte 0xe7
+	.byte \out
+	.2byte \type
+	.endm
+
+	.macro declarenpc objnum:req
+	.byte 0xe8
+	.byte \objnum
+	.endm
+
+	.macro bufferpostbattletext out:req, objnum:req
+	.byte 0xe9
+	.byte \out
+	.byte \objnum
+	.endm
 
 @ Supplementary
 

@@ -48,6 +48,7 @@
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "secret_base.h"
+#include "shuffler.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
@@ -61,6 +62,7 @@
 #include "frontier_util.h"
 #include "constants/abilities.h"
 #include "constants/layouts.h"
+#include "constants/map_scripts.h"
 #include "constants/map_types.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -545,6 +547,7 @@ const struct MapLayout *GetMapLayout(void)
 
 void ApplyCurrentWarp(void)
 {
+    RedirectShuffledWarp(&sWarpDestination);
     gLastUsedWarp = gSaveBlock1Ptr->location;
     gSaveBlock1Ptr->location = sWarpDestination;
     sFixedDiveWarp = sDummyWarpData;
@@ -596,6 +599,12 @@ static void LoadCurrentMapData(void)
 {
     sLastMapSectionId = gMapHeader.regionMapSectionId;
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    // walkingeye: run map script to declare trainer sprites that need adjusting
+    // This appears to be run twice each time a map loads:
+    // once from WarpIntoMap() and once from LoadMapFromWarp()
+    NotifyShufflerChangedRoom();
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_INTRO_TRAINERS);
+
     gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
     gMapHeader.mapLayout = GetMapLayout();
 }

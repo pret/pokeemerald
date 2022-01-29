@@ -30,6 +30,7 @@
 #include "random.h"
 #include "recorded_battle.h"
 #include "rtc.h"
+#include "shuffler.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
@@ -6733,9 +6734,9 @@ u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
 
 #define IS_LEAGUE_BATTLE                                                                \
     ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)                                           \
-    && (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR    \
-     || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER        \
-     || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))    \
+    && (RedirectTrainer(gTrainerBattleOpponent_A)->trainerClass == TRAINER_CLASS_ELITE_FOUR    \
+     || RedirectTrainer(gTrainerBattleOpponent_A)->trainerClass == TRAINER_CLASS_LEADER        \
+     || RedirectTrainer(gTrainerBattleOpponent_A)->trainerClass == TRAINER_CLASS_CHAMPION))    \
 
 void AdjustFriendship(struct Pokemon *mon, u8 event)
 {
@@ -7254,7 +7255,7 @@ u16 GetBattleBGM(void)
         else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
             trainerClass = TRAINER_CLASS_EXPERT;
         else
-            trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
+            trainerClass = RedirectTrainer(gTrainerBattleOpponent_A)->trainerClass;
 
         switch (trainerClass)
         {
@@ -7273,7 +7274,7 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return MUS_VS_RIVAL;
-            if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, gText_BattleWallyName))
+            if (!StringCompare(RedirectTrainer(gTrainerBattleOpponent_A)->trainerName, gText_BattleWallyName))
                 return MUS_VS_TRAINER;
             return MUS_VS_RIVAL;
         case TRAINER_CLASS_ELITE_FOUR:
@@ -7588,7 +7589,7 @@ const u8 *GetTrainerPartnerName(void)
     {
         if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
         {
-            return gTrainers[TRAINER_STEVEN].trainerName;
+            return RedirectTrainer(TRAINER_STEVEN)->trainerName;
         }
         else
         {
@@ -7811,14 +7812,14 @@ const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId >= TRAINERS_COUNT)
         trainerId = TRAINER_NONE;
-    return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+    return gTrainerClassNames[RedirectTrainer(trainerId)->trainerClass];
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)
 {
     if (trainerId >= TRAINERS_COUNT)
         trainerId = TRAINER_NONE;
-    return gTrainers[trainerId].trainerName;
+    return RedirectTrainer(trainerId)->trainerName;
 }
 
 bool8 HasTwoFramesAnimation(u16 species)

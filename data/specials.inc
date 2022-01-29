@@ -536,3 +536,11 @@ gSpecials::
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 	def_special SetTotemBoost
+	def_special GetShuffledNPCType
+	def_special GetNPCFlag
+	def_special SetNPCFlag
+	def_special ClearNPCFlag
+	def_special BufferWitchText
+	def_special DoWitchDeal
+	def_special GetInGameTradeTypeInfo
+	def_special CompareTradeTypes

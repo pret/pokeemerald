@@ -21,6 +21,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "reshow_battle_screen.h"
+#include "shuffler.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
@@ -1288,13 +1289,13 @@ static void OpponentHandleDrawTrainerPic(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
         if (gActiveBattler != 1)
-            trainerPicId = gTrainers[gTrainerBattleOpponent_B].trainerPic;
+            trainerPicId = RedirectTrainer(gTrainerBattleOpponent_B)->trainerPic;
         else
-            trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+            trainerPicId = RedirectTrainer(gTrainerBattleOpponent_A)->trainerPic;
     }
     else
     {
-        trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+        trainerPicId = RedirectTrainer(gTrainerBattleOpponent_A)->trainerPic;
     }
 
     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
@@ -1372,13 +1373,13 @@ static void OpponentHandleTrainerSlide(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
         if (gActiveBattler != 1)
-            trainerPicId = gTrainers[gTrainerBattleOpponent_B].trainerPic;
+            trainerPicId = RedirectTrainer(gTrainerBattleOpponent_B)->trainerPic;
         else
-            trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+            trainerPicId = RedirectTrainer(gTrainerBattleOpponent_A)->trainerPic;
     }
     else
     {
-        trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+        trainerPicId = RedirectTrainer(gTrainerBattleOpponent_A)->trainerPic;
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
