@@ -4460,6 +4460,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/HealerRoom/border.bin",
       "blockdata_filepath": "data/layouts/HealerRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHOICE_MAP1",
+      "name": "ChoiceMap1_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChoiceMap1/border.bin",
+      "blockdata_filepath": "data/layouts/ChoiceMap1/map.bin"
     }
   ]
 }

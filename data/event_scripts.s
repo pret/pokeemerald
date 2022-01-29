@@ -1069,3 +1069,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/TwoWildEncounters/scripts.inc"
 
 	.include "data/maps/HealerRoom/scripts.inc"
+
+	.include "data/maps/ChoiceMap1/scripts.inc"
