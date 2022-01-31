@@ -1829,7 +1829,6 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 {
-    mgba_printf(MGBA_LOG_INFO, "ctx->scriptPtr[0]: %d", ctx->scriptPtr[0]);
     ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;
 }
