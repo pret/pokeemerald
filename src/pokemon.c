@@ -7085,6 +7085,8 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     {
         return 0;
     }
+    return 1;
+    /*
     else if (tm < 32)
     {
         u32 mask = 1 << tm;
@@ -7095,6 +7097,7 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
         u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
+    */
 }
 
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
@@ -7103,6 +7106,8 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
     {
         return 0;
     }
+    return 1;
+    /*
     else if (tm < 32)
     {
         u32 mask = 1 << tm;
@@ -7113,6 +7118,7 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
         u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
+    */
 }
 
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
