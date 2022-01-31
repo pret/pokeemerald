@@ -1599,8 +1599,9 @@ bool8 ScrCmd_bufferitemnameplural(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
+    u16 adjustedItemId = AdjustItem(itemId);
 
-    CopyItemNameHandlePlural(itemId, sScriptStringVars[stringVarIndex], quantity);
+    CopyItemNameHandlePlural(adjustedItemId, sScriptStringVars[stringVarIndex], quantity);
     return FALSE;
 }
 
