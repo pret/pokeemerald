@@ -626,6 +626,7 @@
     "EndMap",
     "TwoWildEncounters",
     "HealerRoom",
-    "ChoiceMap1"
+    "ChoiceMap1",
+    "SingleItemTestMap"
   ]
 }

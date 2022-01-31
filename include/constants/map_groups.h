@@ -596,6 +596,7 @@
 #define MAP_TWO_WILD_ENCOUNTERS                    (4 | (33 << 8))
 #define MAP_HEALER_ROOM                            (5 | (33 << 8))
 #define MAP_CHOICE_MAP1                            (6 | (33 << 8))
+#define MAP_SINGLE_ITEM_TEST_MAP                   (7 | (33 << 8))
 
 #define MAP_GROUPS_COUNT 34
 

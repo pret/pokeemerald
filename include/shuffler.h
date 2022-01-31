@@ -12,8 +12,8 @@
 #define POSSIBLE_WITCH_ITEM_REWARDS 1
 #define POSSIBLE_WITCH_EFFECTS 1
 #define POSSIBLE_WITCH_REWARD_TYPES 1
-#define TOTAL_ROOMS 6
-#define TOTAL_WARPS 12
+#define TOTAL_ROOMS 7
+#define TOTAL_WARPS TOTAL_ROOMS
 #define MAT1 0x8f7011ee
 #define MAT2 0xfc78ff1f
 #define TMAT 0x3793fdff
@@ -116,7 +116,6 @@ const u8 *GetAdjustedTrainerIntroText(u16 objNum);
 const u8 *GetAdjustedTrainerDefeatText(u16 objNum);
 const u8 *GetAdjustedTrainerName(u16 index);
 const u8 *GetAdjustedTrainerPostbattleText(u8 objNum);
-u16 GetAdjustedTrainerFlag(u16 objNum);
 const struct Trainer *RedirectTrainer(u16 index);
 void DeclareWildMon(u8 objNum);
 u8 GetAdjustedWildMonLevel(u8 objNum);
@@ -133,5 +132,6 @@ u16 ClearNPCFlag(void);
 void DeclareNPC(u16 objNum);
 u16 DoWitchDeal(void);
 u16 BufferWitchText(void);
+u16 ShuffledFlagNumberByObjectEventId(u16 objNum);
 
 #endif // GUARD_SHUFFLER_H

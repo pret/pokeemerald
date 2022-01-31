@@ -236,6 +236,7 @@ void DeclareTrainer(u8 objNum) {
     AdjustedObjects[objNum].t.postbattleText = tt->postbattleText;
     AdjustedObjects[objNum].t.name = tt->trainerName;
     AdjustedTemplates[objNum].graphicsId = tt->graphicsId;
+    AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
 
 void DeclareWildMon(u8 objNum) {
@@ -245,6 +246,7 @@ void DeclareWildMon(u8 objNum) {
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = distances[CurrentAdjustedRoomIndex] + 1;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = i + 1;
     AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + i;
+    AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
 
 void DeclareItem(u16 objNum) {
@@ -252,6 +254,7 @@ void DeclareItem(u16 objNum) {
     int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_ITEMS;
     AdjustedObjects[objNum].itemId = possibleItems[i];
     AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_ITEM_BALL;
+    AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
 
 static const u8 nickname[] = _("SHITASS");
@@ -334,6 +337,7 @@ void DeclareNPC(u16 objNum) {
         MYLOG("unknown NPC!");
         break;
     }
+    AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
 
 const u8 *GetAdjustedTrainerIntroText(u16 objNum) {
@@ -363,15 +367,6 @@ const u8 *GetAdjustedTrainerPostbattleText(u8 objNum) {
         return AdjustedObjects[objNum].t.postbattleText;
     }
     return unknown_string;
-}
-
-u16 GetAdjustedTrainerFlag(u16 index) {
-    u16 objNum = index - 1;
-    if (objNum >= AdjustedMapEvents.objectEventCount) {
-        MYLOG("problem with trainer flags");
-        return TRAINER_FLAGS_START + index;
-    }
-    return TRAINER_FLAGS_START + AdjustedMapEvents.objectEvents[objNum].flagId;
 }
 
 const struct Trainer *RedirectTrainer(u16 index) {
@@ -498,4 +493,9 @@ u16 BufferWitchText(void) {
     u16 objNum = gSpecialVar_0x8008 - 1;
     StringCopy(gStringVar1, AdjustedObjects[objNum].npc.witch.effectText);
     StringCopy(gStringVar2, AdjustedObjects[objNum].npc.witch.rewardText);
+}
+
+u16 ShuffledFlagNumberByObjectEventId(u16 objNum) {
+    MYLOG("getting flag for objNum %u", objNum);
+    return TEMP_FLAGS_START + objNum;
 }

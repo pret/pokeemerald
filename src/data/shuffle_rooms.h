@@ -15,6 +15,9 @@ static const struct RoomInfo Rooms[TOTAL_ROOMS] = {
         .id = MAP_CHOICE_MAP1,
         .warpIds = { 0, 0, 0, 0},
     }, {
+        .id = MAP_SINGLE_ITEM_TEST_MAP,
+        .warpIds = {0, 0, 0, 0},
+    }, {
         .id = MAP_END_MAP,
         .warpIds = { 0,  1, -1, -1},
     }

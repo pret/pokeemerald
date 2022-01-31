@@ -4470,6 +4470,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/ChoiceMap1/border.bin",
       "blockdata_filepath": "data/layouts/ChoiceMap1/map.bin"
+    },
+    {
+      "id": "LAYOUT_SINGLE_ITEM_TEST_MAP",
+      "name": "SingleItemTestMap_Layout",
+      "width": 5,
+      "height": 5,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/SingleItemTestMap/border.bin",
+      "blockdata_filepath": "data/layouts/SingleItemTestMap/map.bin"
     }
   ]
 }

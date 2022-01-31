@@ -1005,12 +1005,12 @@ static u8 TrainerBattleLoadArg8(const u8 *ptr)
 
 static u16 GetTrainerAFlag(void)
 {
-    return GetAdjustedTrainerFlag(gTrainerBattleOpponent_A);
+    return ShuffledFlagNumberByObjectEventId(gTrainerBattleOpponent_A);
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return GetAdjustedTrainerFlag(gTrainerBattleOpponent_B);
+    return ShuffledFlagNumberByObjectEventId(gTrainerBattleOpponent_B);
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1240,7 +1240,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
-    return FlagGet(GetAdjustedTrainerFlag(flag));
+    return FlagGet(ShuffledFlagNumberByObjectEventId(flag));
 }
 
 // Set trainer's movement type so they stop and remain facing that direction
@@ -1281,17 +1281,17 @@ static void SetBattledTrainerFlag(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(GetAdjustedTrainerFlag(trainerId));
+    return FlagGet(ShuffledFlagNumberByObjectEventId(trainerId));
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(GetAdjustedTrainerFlag(trainerId));
+    FlagSet(ShuffledFlagNumberByObjectEventId(trainerId));
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(GetAdjustedTrainerFlag(trainerId));
+    FlagClear(ShuffledFlagNumberByObjectEventId(trainerId));
 }
 
 void BattleSetup_StartTrainerBattle(void)
