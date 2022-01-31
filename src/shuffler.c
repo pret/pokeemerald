@@ -166,13 +166,11 @@ void MirrorMapData() {
 }
 
 void DeclareTrainer(u8 objNum) {
-    MYLOG("declare trainer %d", objNum);
     MirrorMapData();
 
     int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_TRAINERS;
 
     const struct TrainerTemplate *tt = qTrainers[i];
-    MYLOG("i: %d", i);
 
     AdjustedObjects[objNum].t.trainer.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
     AdjustedObjects[objNum].t.trainer.doubleBattle = FALSE;
@@ -182,9 +180,7 @@ void DeclareTrainer(u8 objNum) {
     for (int i = 0; i < 4; i++) {
         AdjustedObjects[objNum].t.trainer.items[i] = ITEM_NONE;
     }
-    MYLOG("rarity %d", tt->rarity);
     if (tt->rarity == 0) {
-        MYLOG("hello from first if");
         AdjustedObjects[objNum].t.trainer.partyFlags = tt->partyFlags;
         AdjustedObjects[objNum].t.trainer.partySize = tt->partySize;
 
@@ -224,23 +220,19 @@ void DeclareTrainer(u8 objNum) {
                 break;
         }
     } else {
-        MYLOG("hello from else");
         AdjustedObjects[objNum].t.trainer.partyFlags = 0;
         AdjustedObjects[objNum].t.trainer.partySize = 2;
         for (int i = 0; i < AdjustedObjects[objNum].t.trainer.partySize; i++) {
             AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].iv = 0;
             AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl = distances[CurrentAdjustedRoomIndex] + 1;
-            MYLOG("level: %d", distances[CurrentAdjustedRoomIndex] + 1);
             int r = tinymt32_generate_uint32(&currentRoomSeed) % 20;
             int s = TrainerMonTypes[tt->type1][r];
             AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].species = s;
-            MYLOG("species: %d", s);
         }
         AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
     }
     AdjustedObjects[objNum].t.defeatText = tt->defeatText;
     AdjustedObjects[objNum].t.introText = tt->introText;
-    MYLOG("intro text: %s", tt->introText);
     AdjustedObjects[objNum].t.postbattleText = tt->postbattleText;
     AdjustedObjects[objNum].t.name = tt->trainerName;
     AdjustedTemplates[objNum].graphicsId = tt->graphicsId;
