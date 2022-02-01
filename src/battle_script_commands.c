@@ -13218,8 +13218,32 @@ static void Cmd_handleballthrow(void)
     {
         u32 odds, i;
         u8 catchRate;
-    
+
         gLastThrownBall = gLastUsedItem;
+        u8 hpLevel = GetHPBarLevel(gBattleMons[gBattlerTarget].hp, gBattleMons[gBattlerTarget].maxHP);
+        u8 hasStatus = gBattleMons[gBattlerTarget].status1 & STATUS1_ANY;
+        odds = 0;
+        switch(gLastUsedItem) {
+            case ITEM_MASTER_BALL:
+                odds = 255;
+                break;
+            case ITEM_ULTRA_BALL:
+                if ((hpLevel == HP_BAR_FULL && hasStatus) || (hpLevel == HP_BAR_GREEN && hasStatus) || hpLevel == HP_BAR_YELLOW || hpLevel == HP_BAR_RED) {
+                    odds = 255;
+                }
+                break;
+            case ITEM_GREAT_BALL:
+                if ((hpLevel == HP_BAR_YELLOW && hasStatus) || hpLevel == HP_BAR_RED) {
+                    odds = 255;
+                }
+                break;
+            case ITEM_POKE_BALL:
+                if (hpLevel == HP_BAR_RED && hasStatus) {
+                    odds = 255;
+                }
+                break;
+        }
+/*
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else
@@ -13424,7 +13448,7 @@ static void Cmd_handleballthrow(void)
 
         if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
             gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
-
+*/
         if (odds > 254) // mon caught
         {
             BtlController_EmitBallThrowAnim(BUFFER_A, BALL_3_SHAKES_SUCCESS);
@@ -13441,6 +13465,7 @@ static void Cmd_handleballthrow(void)
         else // mon may be caught, calculate shakes
         {
             u8 shakes;
+/*
             u8 maxShakes;
 
             gBattleSpritesDataPtr->animationData->isCriticalCapture = 0;
@@ -13466,10 +13491,10 @@ static void Cmd_handleballthrow(void)
                 odds = 1048560 / odds;
                 for (shakes = 0; shakes < maxShakes && Random() < odds; shakes++);
             }
-
+*/
             BtlController_EmitBallThrowAnim(BUFFER_A, shakes);
             MarkBattlerForControllerExec(gActiveBattler);
-
+/*
             if (shakes == maxShakes) // mon caught, copy of the code above
             {
                 if (IsCriticalCapture())
@@ -13494,7 +13519,7 @@ static void Cmd_handleballthrow(void)
                 }
                 #endif
             }
-            else // not caught
+            else // not caught */
             {
                 if (!gHasFetchedBall)
                     gLastUsedBall = gLastUsedItem;
