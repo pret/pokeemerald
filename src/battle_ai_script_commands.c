@@ -452,7 +452,7 @@ static u8 ChooseMoveOrAction_Singles(void)
 static u8 ChooseMoveOrAction_Doubles(void)
 {
     int i;
-    int j;
+    int mostViableTargetsNo;
 #ifndef BUGFIX
     s32 scriptsToRun;
 #else
@@ -464,12 +464,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
     u32 scriptsToRun;
 #endif
     s16 bestMovePointsForTarget[MAX_BATTLERS_COUNT];
-    s8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
+    u8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
     s8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
-    u8 mostViableMovesScores[MAX_MON_MOVES];
-    s8 mostViableMovesIndices[MAX_MON_MOVES];
-    s32 mostViableTargetsNo;
-    s32 mostViableMovesNo;
+
     s16 mostMovePoints;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -516,6 +513,11 @@ static u8 ChooseMoveOrAction_Doubles(void)
         }
         else
         {
+            u8 mostViableMovesScores[MAX_MON_MOVES];
+            u8 mostViableMovesIndices[MAX_MON_MOVES];
+            s32 mostViableMovesNo;
+            s32 j;
+
             mostViableMovesScores[0] = AI_THINKING_STRUCT->score[0];
             mostViableMovesIndices[0] = 0;
             mostViableMovesNo = 1;
@@ -556,8 +558,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     {
         if (mostMovePoints == bestMovePointsForTarget[i])
         {
-            mostViableTargetsArray[mostViableTargetsNo] = i;
-            mostViableTargetsNo++;
+            mostViableTargetsArray[mostViableTargetsNo++] = i;
         }
         if (mostMovePoints < bestMovePointsForTarget[i])
         {
