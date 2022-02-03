@@ -451,8 +451,8 @@ static u8 ChooseMoveOrAction_Singles(void)
 
 static u8 ChooseMoveOrAction_Doubles(void)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 #ifndef BUGFIX
     s32 scriptsToRun;
 #else
@@ -467,7 +467,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     s8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
     s8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
     u8 mostViableMovesScores[MAX_MON_MOVES];
-    u8 mostViableMovesIndices[MAX_MON_MOVES];
+    s8 mostViableMovesIndices[MAX_MON_MOVES];
     s32 mostViableTargetsNo;
     s32 mostViableMovesNo;
     s16 mostMovePoints;
