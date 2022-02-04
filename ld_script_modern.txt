@@ -27,7 +27,6 @@ SECTIONS {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
         gflib/*.o(.bss);
-        data/*.o(.bss);
         *libc.a:*.o(.bss*);
         *libnosys.a:*.o(.bss*);
 
@@ -112,10 +111,10 @@ SECTIONS {
         src/libisagbprn.o(.rodata);
     } =0
 
-    multiboot_data :
+    other_data :
     ALIGN(4)
     {
-        data/multiboot_ereader.o(.rodata);
+        data/ereader_link_data.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0

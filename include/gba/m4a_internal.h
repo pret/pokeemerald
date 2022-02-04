@@ -349,7 +349,7 @@ struct MusicPlayer
 {
     struct MusicPlayerInfo *info;
     struct MusicPlayerTrack *track;
-    u8 numTracks;
+    u8 unk_8;
     u16 unk_A;
 };
 

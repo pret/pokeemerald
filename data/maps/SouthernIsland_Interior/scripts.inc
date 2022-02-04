@@ -47,7 +47,7 @@ SouthernIsland_Interior_EventScript_SetMayGfx::
 
 SouthernIsland_Interior_EventScript_TryLatiEncounter::
 	lockall
-	setvar VAR_0x8008, 12  @ Player's Y coordinate. Not read
+	setvar VAR_0x8008, 12
 	goto SouthernIsland_Interior_EventScript_Lati
 	end
 
@@ -105,11 +105,17 @@ SouthernIsland_Interior_EventScript_Sign::
 	end
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
-	seteventmon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
+	setvar VAR_0x8004, SPECIES_LATIOS
+	setvar VAR_0x8005, 50 @ level
+	setvar VAR_0x8006, ITEM_SOUL_DEW
+	special CreateEventLegalEnemyMon
 	return
 
 SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
-	seteventmon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
+	setvar VAR_0x8004, SPECIES_LATIAS
+	setvar VAR_0x8005, 50 @ level
+	setvar VAR_0x8006, ITEM_SOUL_DEW
+	special CreateEventLegalEnemyMon
 	return
 
 SouthernIsland_Interior_Movement_CameraPanUp:

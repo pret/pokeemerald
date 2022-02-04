@@ -776,75 +776,75 @@ void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 Unused_AdjustBgMosaic(u8 val, u8 mode)
+u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
 {
-    u16 mosaic = GetGpuReg(REG_OFFSET_MOSAIC);
-    s16 bgH = mosaic & 0xF;
-    s16 bgV = (mosaic >> 4) & 0xF;
+    u16 result = GetGpuReg(REG_OFFSET_MOSAIC);
+    s16 test1 = result & 0xF;
+    s16 test2 = (result >> 4) & 0xF;
 
-    mosaic &= 0xFF00; // clear background mosaic sizes
+    result &= 0xFF00;
 
-    switch (mode)
+    switch (a2)
     {
-    case BG_MOSAIC_SET_HV:
+    case 0:
     default:
-        bgH = val & 0xF;
-        bgV = val >> 0x4;
+        test1 = a1 & 0xF;
+        test2 = a1 >> 0x4;
         break;
-    case BG_MOSAIC_SET_H:
-        bgH = val & 0xF;
+    case 1:
+        test1 = a1 & 0xF;
         break;
-    case BG_MOSAIC_ADD_H:
-        if ((bgH + val) > 0xF)
+    case 2:
+        if ((test1 + a1) > 0xF)
         {
-            bgH = 0xF;
+            test1 = 0xF;
         }
         else
         {
-            bgH += val;
+            test1 += a1;
         }
         break;
-    case BG_MOSAIC_SUB_H:
-        if ((bgH - val) < 0)
+    case 3:
+        if ((test1 - a1) < 0)
         {
-            bgH = 0x0;
+            test1 = 0x0;
         }
         else
         {
-            bgH -= val;
+            test1 -= a1;
         }
         break;
-    case BG_MOSAIC_SET_V:
-        bgV = val & 0xF;
+    case 4:
+        test2 = a1 & 0xF;
         break;
-    case BG_MOSAIC_ADD_V:
-        if ((bgV + val) > 0xF)
+    case 5:
+        if ((test2 + a1) > 0xF)
         {
-            bgV = 0xF;
+            test2 = 0xF;
         }
         else
         {
-            bgV += val;
+            test2 += a1;
         }
         break;
-    case BG_MOSAIC_SUB_V:
-        if ((bgV - val) < 0)
+    case 6:
+        if ((test2 - a1) < 0)
         {
-            bgV = 0x0;
+            test2 = 0x0;
         }
         else
         {
-            bgV -= val;
+            test2 -= a1;
         }
         break;
     }
 
-    mosaic |= ((bgV << 0x4) & 0xF0);
-    mosaic |= (bgH & 0xF);
+    result |= ((test2 << 0x4) & 0xF0);
+    result |= (test1 & 0xF);
 
-    SetGpuReg(REG_OFFSET_MOSAIC, mosaic);
+    SetGpuReg(REG_OFFSET_MOSAIC, result);
 
-    return mosaic;
+    return result;
 }
 
 void SetBgTilemapBuffer(u8 bg, void *tilemap)
@@ -1053,7 +1053,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 for (x16 = x; x16 < (x + width); x16++)
                 {
                     CopyTileMapEntry(&firstTileNum, &((u16*)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
-                    firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
+                    firstTileNum = (firstTileNum & (METATILE_COLLISION_MASK | METATILE_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & METATILE_ID_MASK);
                 }
             }
             break;
@@ -1064,7 +1064,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 for (x16 = x; x16 < (x + width); x16++)
                 {
                     ((u8*)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
-                    firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
+                    firstTileNum = (firstTileNum & (METATILE_COLLISION_MASK | METATILE_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & METATILE_ID_MASK);
                 }
             }
             break;

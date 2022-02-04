@@ -2,6 +2,7 @@
 #include "constants/apprentice.h"
 #include "constants/battle.h"
 #include "constants/battle_arena.h"
+#include "constants/battle_config.h"
 #include "constants/battle_dome.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_frontier.h"
@@ -59,6 +60,7 @@
 
 	.section script_data, "aw", %progbits
 
+@ 81DB67C
 	.include "data/script_cmd_table.inc"
 
 gSpecialVars::

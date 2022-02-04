@@ -4,6 +4,7 @@
 #include "task.h"
 #include "text.h"
 #include "window.h"
+#include "constants/pokemon.h"
 
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1

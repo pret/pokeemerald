@@ -62,6 +62,7 @@ static EWRAM_DATA u16 sMovingNpcMapNum = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 static u8 sBrailleWindowId;
+static bool8 gIsScriptedWildDouble;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
@@ -999,7 +1000,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_applymovementat(struct ScriptContext *ctx)
+bool8 ScrCmd_applymovement_at(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     const void *movementScript = (const void *)ScriptReadWord(ctx);
@@ -1028,7 +1029,7 @@ bool8 ScrCmd_waitmovement(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_waitmovementat(struct ScriptContext *ctx)
+bool8 ScrCmd_waitmovement_at(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup;
@@ -1052,7 +1053,7 @@ bool8 ScrCmd_removeobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_removeobjectat(struct ScriptContext *ctx)
+bool8 ScrCmd_removeobject_at(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1070,7 +1071,7 @@ bool8 ScrCmd_addobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_addobjectat(struct ScriptContext *ctx)
+bool8 ScrCmd_addobject_at(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1108,7 +1109,7 @@ bool8 ScrCmd_copyobjectxytoperm(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_showobjectat(struct ScriptContext *ctx)
+bool8 ScrCmd_showobject_at(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1118,7 +1119,7 @@ bool8 ScrCmd_showobjectat(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_hideobjectat(struct ScriptContext *ctx)
+bool8 ScrCmd_hideobject_at(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1874,15 +1875,37 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     u16 species = ScriptReadHalfword(ctx);
     u8 level = ScriptReadByte(ctx);
     u16 item = ScriptReadHalfword(ctx);
+    u16 species2 = ScriptReadHalfword(ctx);
+    u8 level2 = ScriptReadByte(ctx);
+    u16 item2 = ScriptReadHalfword(ctx);
 
-    CreateScriptedWildMon(species, level, item);
+    if(species2 == SPECIES_NONE)
+    {
+        CreateScriptedWildMon(species, level, item);
+        gIsScriptedWildDouble = FALSE;
+    }
+    else
+    { 
+        CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
+        gIsScriptedWildDouble = TRUE;
+    }
+
     return FALSE;
 }
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    BattleSetup_StartScriptedWildBattle();
-    ScriptContext1_Stop();
+    if(gIsScriptedWildDouble == FALSE)
+    {
+        BattleSetup_StartScriptedWildBattle();
+        ScriptContext1_Stop();
+    }
+    else
+    {
+        BattleSetup_StartScriptedDoubleWildBattle();
+        ScriptContext1_Stop();
+    }
+
     return TRUE;
 }
 
@@ -2046,7 +2069,7 @@ bool8 ScrCmd_setmetatile(struct ScriptContext *ctx)
     if (!isImpassable)
         MapGridSetMetatileIdAt(x, y, tileId);
     else
-        MapGridSetMetatileIdAt(x, y, tileId | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
     return FALSE;
 }
 

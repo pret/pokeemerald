@@ -359,7 +359,7 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
          || objectEvent->previousCoords.y != sprite->sY))
             sprite->sObjectMoved = TRUE;
 
-        // Metatile behavior var re-used as subpriority
+        // Metatile behavior var re-used
         metatileBehavior = 0;
         if (sprite->animCmdIndex == 0)
             metatileBehavior = 4;
@@ -423,7 +423,7 @@ u32 FldEff_LongGrass(void)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
-        sprite->oam.priority = ElevationToPriority(gFieldEffectArguments[2]);
+        sprite->oam.priority = ZCoordToPriority(gFieldEffectArguments[2]);
         sprite->sElevation = gFieldEffectArguments[2];
         sprite->sX = gFieldEffectArguments[0];
         sprite->sY = gFieldEffectArguments[1];
@@ -1108,7 +1108,7 @@ void SynchroniseSurfPosition(struct ObjectEvent *playerObj, struct Sprite *sprit
         for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
         {
             MoveCoords(i, &x, &y);
-            if (MapGridGetElevationAt(x, y) == 3)
+            if (MapGridGetZCoordAt(x, y) == 3)
             {
                 sprite->data[5]++;
                 break;
@@ -1646,7 +1646,7 @@ void UpdateJumpImpactEffect(struct Sprite *sprite)
     else
     {
         UpdateObjectEventSpriteInvisibility(sprite, FALSE);
-        SetObjectSubpriorityByElevation(sprite->sElevation, sprite, 0);
+        SetObjectSubpriorityByZCoord(sprite->sElevation, sprite, 0);
     }
 }
 
@@ -1658,14 +1658,14 @@ void WaitFieldEffectSpriteAnim(struct Sprite *sprite)
         UpdateObjectEventSpriteInvisibility(sprite, FALSE);
 }
 
-static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevation, u8 subpriority)
+static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 z, u8 offset)
 {
     u8 i;
     s16 var, xhi, lyhi, yhi, ylo;
     const struct ObjectEventGraphicsInfo *graphicsInfo; // Unused Variable
     struct Sprite *linkedSprite;
 
-    SetObjectSubpriorityByElevation(elevation, sprite, subpriority);
+    SetObjectSubpriorityByZCoord(z, sprite, offset);
     for (i = 0; i < OBJECT_EVENTS_COUNT; i ++)
     {
         struct ObjectEvent *objectEvent = &gObjectEvents[i];

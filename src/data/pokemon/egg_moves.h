@@ -35,7 +35,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(PIDGEY,
               MOVE_PURSUIT,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_FORESIGHT,
               MOVE_STEEL_WING,
               MOVE_AIR_CUTTER),
@@ -51,7 +51,7 @@ const u16 gEggMoves[] = {
               MOVE_SWAGGER),
 
     egg_moves(SPEAROW,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_FALSE_SWIPE,
               MOVE_SCARY_FACE,
               MOVE_QUICK_ATTACK,
@@ -95,7 +95,7 @@ const u16 gEggMoves[] = {
               MOVE_BEAT_UP),
 
     egg_moves(VULPIX,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_HYPNOSIS,
               MOVE_FLAIL,
               MOVE_SPITE,
@@ -107,7 +107,7 @@ const u16 gEggMoves[] = {
     egg_moves(ZUBAT,
               MOVE_QUICK_ATTACK,
               MOVE_PURSUIT,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_GUST,
               MOVE_WHIRLWIND,
               MOVE_CURSE),
@@ -137,7 +137,7 @@ const u16 gEggMoves[] = {
               MOVE_SIGNAL_BEAM),
 
     egg_moves(DIGLETT,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_SCREECH,
               MOVE_ANCIENT_POWER,
               MOVE_PURSUIT,
@@ -171,7 +171,7 @@ const u16 gEggMoves[] = {
               MOVE_REVERSAL,
               MOVE_BEAT_UP,
               MOVE_REVENGE,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLING_SALTS),
 
     egg_moves(GROWLITHE,
               MOVE_BODY_SLAM,
@@ -204,7 +204,7 @@ const u16 gEggMoves[] = {
               MOVE_MEDITATE,
               MOVE_ROLLING_KICK,
               MOVE_ENCORE,
-              MOVE_SMELLING_SALT,
+              MOVE_SMELLING_SALTS,
               MOVE_COUNTER,
               MOVE_ROCK_SLIDE),
 
@@ -261,7 +261,7 @@ const u16 gEggMoves[] = {
               MOVE_QUICK_ATTACK,
               MOVE_SUPERSONIC,
               MOVE_HAZE,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_FLAIL,
               MOVE_ENDEAVOR),
 
@@ -347,7 +347,7 @@ const u16 gEggMoves[] = {
               MOVE_MAGNITUDE,
               MOVE_BODY_SLAM,
               MOVE_CURSE,
-              MOVE_SMELLING_SALT,
+              MOVE_SMELLING_SALTS,
               MOVE_SLEEP_TALK,
               MOVE_SNORE,
               MOVE_SUBSTITUTE),
@@ -434,7 +434,7 @@ const u16 gEggMoves[] = {
               MOVE_FURY_ATTACK,
               MOVE_FLAIL,
               MOVE_FALSE_SWIPE,
-              MOVE_FAINT_ATTACK),
+              MOVE_FEINT_ATTACK),
 
     egg_moves(LAPRAS,
               MOVE_FORESIGHT,
@@ -539,7 +539,7 @@ const u16 gEggMoves[] = {
     egg_moves(HOOTHOOT,
               MOVE_MIRROR_MOVE,
               MOVE_SUPERSONIC,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_WING_ATTACK,
               MOVE_WHIRLWIND,
               MOVE_SKY_ATTACK,
@@ -585,7 +585,7 @@ const u16 gEggMoves[] = {
     egg_moves(IGGLYBUFF,
               MOVE_PERISH_SONG,
               MOVE_PRESENT,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_WISH,
               MOVE_FAKE_TEARS),
 
@@ -602,7 +602,7 @@ const u16 gEggMoves[] = {
               MOVE_HAZE,
               MOVE_DRILL_PECK,
               MOVE_QUICK_ATTACK,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_STEEL_WING,
               MOVE_PSYCH_UP,
               MOVE_FEATHER_DANCE,
@@ -726,13 +726,13 @@ const u16 gEggMoves[] = {
 
     egg_moves(SNUBBULL,
               MOVE_METRONOME,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_REFLECT,
               MOVE_PRESENT,
               MOVE_CRUNCH,
               MOVE_HEAL_BELL,
               MOVE_SNORE,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLING_SALTS),
 
     egg_moves(QWILFISH,
               MOVE_FLAIL,
@@ -853,7 +853,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(TYROGUE,
               MOVE_RAPID_SPIN,
-              MOVE_HI_JUMP_KICK,
+              MOVE_HIGH_JUMP_KICK,
               MOVE_MACH_PUNCH,
               MOVE_MIND_READER,
               MOVE_HELPING_HAND),
@@ -915,7 +915,7 @@ const u16 gEggMoves[] = {
               MOVE_ENDURE,
               MOVE_SWAGGER,
               MOVE_ROCK_SLIDE,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLING_SALTS),
 
     egg_moves(MUDKIP,
               MOVE_REFRESH,
@@ -957,7 +957,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(NINCADA,
               MOVE_ENDURE,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_GUST,
               MOVE_SILVER_WIND),
 
@@ -984,7 +984,7 @@ const u16 gEggMoves[] = {
               MOVE_BATON_PASS,
               MOVE_WISH,
               MOVE_TRICK,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLING_SALTS),
 
     egg_moves(WINGULL,
               MOVE_MIST,
@@ -1077,7 +1077,7 @@ const u16 gEggMoves[] = {
               MOVE_GUST),
 
     egg_moves(MAKUHITA,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_DETECT,
               MOVE_FORESIGHT,
               MOVE_HELPING_HAND,
@@ -1172,7 +1172,7 @@ const u16 gEggMoves[] = {
               MOVE_PAIN_SPLIT,
               MOVE_GRUDGE,
               MOVE_MEMENTO,
-              MOVE_FAINT_ATTACK),
+              MOVE_FEINT_ATTACK),
 
     egg_moves(ROSELIA,
               MOVE_SPIKES,
@@ -1207,7 +1207,7 @@ const u16 gEggMoves[] = {
               MOVE_SNORE,
               MOVE_SWAGGER,
               MOVE_EXTRASENSORY,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLING_SALTS),
 
     egg_moves(CLAMPERL,
               MOVE_REFRESH,
@@ -1219,7 +1219,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(ABSOL,
               MOVE_BATON_PASS,
-              MOVE_FAINT_ATTACK,
+              MOVE_FEINT_ATTACK,
               MOVE_DOUBLE_EDGE,
               MOVE_MAGIC_COAT,
               MOVE_CURSE,
@@ -1258,7 +1258,7 @@ const u16 gEggMoves[] = {
               MOVE_ENDEAVOR,
               MOVE_BODY_SLAM,
               MOVE_STOMP,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLING_SALTS),
 
     egg_moves(CASTFORM,
               MOVE_FUTURE_SIGHT,

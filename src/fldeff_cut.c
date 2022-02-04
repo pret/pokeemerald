@@ -140,7 +140,7 @@ bool8 SetUpFieldMove_Cut(void)
     s16 x, y;
     u8 i, j;
     u8 tileBehavior;
-    u8 userAbility;
+    u16 userAbility;
     bool8 cutTiles[CUT_NORMAL_AREA];
     bool8 ret;
 
@@ -181,7 +181,7 @@ bool8 SetUpFieldMove_Cut(void)
             for (j = 0; j < CUT_NORMAL_SIDE; j++)
             {
                 x = j - 1 + gPlayerFacingPosition.x;
-                if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
+                if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if (MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
@@ -238,7 +238,7 @@ bool8 SetUpFieldMove_Cut(void)
 
                 if (tileCuttable == TRUE)
                 {
-                    if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
+                    if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
                     {
                         u8 tileArrayId = ((sHyperCutStruct[i].y * 5) + 12) + (sHyperCutStruct[i].x);
                         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);

@@ -91,7 +91,7 @@
 	.include "src/region_map.o"
 	.include "src/decoration.o"
 	.include "src/slot_machine.o"
-	.include "src/battle_ai_script_commands.o"
+	.include "src/battle_ai_main.o"
 	.include "src/fldeff_misc.o"
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
