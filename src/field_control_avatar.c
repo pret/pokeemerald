@@ -866,7 +866,7 @@ static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 e
 
     for (i = 0; i < warpCount; i++, warpEvent++)
     {
-        if ((u16)warpEvent->x == x && (u16)warpEvent->y == y)
+        if (warpEvent->x == x && warpEvent->y == y)
         {
             if (warpEvent->elevation == elevation || warpEvent->elevation == 0)
                 return i;
@@ -889,7 +889,7 @@ static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
             ScriptContext2_RunNewScript(coordEvent->script);
             return NULL;
         }
-        if (VarGet(coordEvent->trigger) == (u8)coordEvent->index)
+        if (VarGet(coordEvent->trigger) == coordEvent->index)
             return coordEvent->script;
     }
     return NULL;
@@ -903,7 +903,7 @@ static u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16
 
     for (i = 0; i < coordEventCount; i++)
     {
-        if ((u16)coordEvents[i].x == x && (u16)coordEvents[i].y == y)
+        if (coordEvents[i].x == x && coordEvents[i].y == y)
         {
             if (coordEvents[i].elevation == elevation || coordEvents[i].elevation == 0)
             {
@@ -929,7 +929,7 @@ static struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapHeader,
 
     for (i = 0; i < bgEventCount; i++)
     {
-        if ((u16)bgEvents[i].x == x && (u16)bgEvents[i].y == y)
+        if (bgEvents[i].x == x && bgEvents[i].y == y)
         {
             if (bgEvents[i].elevation == elevation || bgEvents[i].elevation == 0)
                 return &bgEvents[i];
