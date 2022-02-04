@@ -5067,7 +5067,13 @@ static void HandleEndTurn_FinishBattle(void)
             UndoMegaEvolution(i);
             UndoFormChange(i, B_SIDE_PLAYER, FALSE);
             DoBurmyFormChange(i);
+            if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0) {
+                // remove the mon from the party if it's dead
+                ZeroMonData(&gPlayerParty[i]);
+            }
         }
+        // if something died, this is necessary.
+        CompactPartySlots();
     #if B_RECALCULATE_STATS >= GEN_5
         // Recalculate the stats of every party member before the end
         for (i = 0; i < PARTY_SIZE; i++)
