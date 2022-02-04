@@ -308,7 +308,7 @@ static void BuildGammaShiftTables(void)
                     v4 += v5;
                     diff = v4 - v9;
                     if (diff > 0)
-                        v4 -= (diff/2);
+                        v4 -= (diff / 2);
                     gammaTable[gammaIndex][v2] = v4 >> 8;
                     if (gammaTable[gammaIndex][v2] > 31)
                         gammaTable[gammaIndex][v2] = 31;
