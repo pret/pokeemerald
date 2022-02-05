@@ -4480,6 +4480,46 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/SingleItemTestMap/border.bin",
       "blockdata_filepath": "data/layouts/SingleItemTestMap/map.bin"
+    },
+    {
+      "id": "LAYOUT_VIOLET_GYM",
+      "name": "VioletGym_Layout",
+      "width": 12,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/VioletGym/border.bin",
+      "blockdata_filepath": "data/layouts/VioletGym/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHOICE_MAP2",
+      "name": "ChoiceMap2_Layout",
+      "width": 20,
+      "height": 10,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChoiceMap2/border.bin",
+      "blockdata_filepath": "data/layouts/ChoiceMap2/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHOICE_MAP3",
+      "name": "ChoiceMap3_Layout",
+      "width": 10,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChoiceMap3/border.bin",
+      "blockdata_filepath": "data/layouts/ChoiceMap3/map.bin"
+    },
+    {
+      "id": "LAYOUT_CERULEAN_GYM",
+      "name": "CeruleanGym_Layout",
+      "width": 12,
+      "height": 16,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Pacifidlog",
+      "border_filepath": "data/layouts/CeruleanGym/border.bin",
+      "blockdata_filepath": "data/layouts/CeruleanGym/map.bin"
     }
   ]
 }

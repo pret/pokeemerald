@@ -2350,7 +2350,8 @@ bool8 ScrCmd_declareitem(struct ScriptContext *ctx) {
 
 bool8 ScrCmd_declaretrainer(struct ScriptContext *ctx) {
     u8 objNum = ScriptReadByte(ctx) - 1;
-    DeclareTrainer(objNum);
+    u8 trainerType = ScriptReadByte(ctx);
+    DeclareTrainer(objNum, trainerType);
     return TRUE;
 }
 

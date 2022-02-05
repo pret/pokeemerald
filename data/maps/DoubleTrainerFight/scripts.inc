@@ -3,6 +3,6 @@ DoubleTrainerFight_MapScripts::
 	.byte 0
 
 DoubleTrainerFight_OnIntroTrainers::
-	declaretrainer 1
-	declaretrainer 2
+	declaretrainer 1, 0
+	declaretrainer 2, 0
 	end

@@ -3,8 +3,8 @@ ChoiceMap1_MapScripts::
 	.byte 0
 
 ChoiceMap1_OnIntroTrainers::
-	declaretrainer 1
-	declaretrainer 2
+	declaretrainer 1, 0
+	declaretrainer 2, 0
 	declareitem 3
 	declareitem 4
 	declarewildmon 5

@@ -6,14 +6,13 @@
 
 #define MAX_OBJECTS 10
 #define POSSIBLE_STARTERS 108
-#define POSSIBLE_TRAINERS 18
-#define POSSIBLE_ITEMS 61
+#define POSSIBLE_ITEMS 62
 #define POSSIBLE_NPCS 3
 #define POSSIBLE_WITCH_ITEM_REWARDS 1
 #define POSSIBLE_WITCH_EFFECTS 1
 #define POSSIBLE_WITCH_REWARD_TYPES 1
-#define TOTAL_ROOMS 7
-#define TOTAL_WARPS TOTAL_ROOMS
+#define ROOMS_PER_SET 6
+#define TOTAL_WARPS ROOMS_PER_SET + 1
 #define MAT1 0x8f7011ee
 #define MAT2 0xfc78ff1f
 #define TMAT 0x3793fdff
@@ -30,11 +29,9 @@ struct TrainerTemplate {
     u8 trainerPic;
     const u8* trainerName;
     u8 partySize;
+    u8 poolSize;
     
     union TrainerMonPtr party;
-    u8 type1;
-    u8 type2;
-    u8 rarity;
 
     const u8* introText;
     const u8* defeatText;
@@ -103,15 +100,10 @@ union ShuffledObject {
     struct NPCInfo npc;
 };
 
-struct RoomInfo {
-    u16 id;
-    u8 warpIds[4];
-};
-
 extern u16 realStarterMon[6];
 
 void Shuffle(u32 s);
-void DeclareTrainer(u8 objNum);
+void DeclareTrainer(u8 objNum, u8 trainerType);
 const u8 *GetAdjustedTrainerIntroText(u16 objNum);
 const u8 *GetAdjustedTrainerDefeatText(u16 objNum);
 const u8 *GetAdjustedTrainerName(u16 index);
@@ -133,5 +125,6 @@ void DeclareNPC(u16 objNum);
 u16 DoWitchDeal(void);
 u16 BufferWitchText(void);
 u16 ShuffledFlagNumberByObjectEventId(u16 objNum);
+u8 GetScaledLevel(u8 distance);
 
 #endif // GUARD_SHUFFLER_H

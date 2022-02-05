@@ -1741,9 +1741,10 @@
 	.byte \objnum
 	.endm
 
-	.macro declaretrainer objnum:req
+	.macro declaretrainer objnum:req trainertype:req
 	.byte 0xe5
 	.byte \objnum
+	.byte \trainertype
 	.endm
 
 	.macro declarewildmon objnum:req

@@ -627,6 +627,10 @@
     "TwoWildEncounters",
     "HealerRoom",
     "ChoiceMap1",
-    "SingleItemTestMap"
+    "SingleItemTestMap",
+    "VioletGym",
+    "ChoiceMap2",
+    "ChoiceMap3",
+    "CeruleanGym"
   ]
 }

@@ -597,6 +597,10 @@
 #define MAP_HEALER_ROOM                            (5 | (33 << 8))
 #define MAP_CHOICE_MAP1                            (6 | (33 << 8))
 #define MAP_SINGLE_ITEM_TEST_MAP                   (7 | (33 << 8))
+#define MAP_VIOLET_GYM                             (8 | (33 << 8))
+#define MAP_CHOICE_MAP2                            (9 | (33 << 8))
+#define MAP_CHOICE_MAP3                            (10 | (33 << 8))
+#define MAP_CERULEAN_GYM                           (11 | (33 << 8))
 
 #define MAP_GROUPS_COUNT 34
 

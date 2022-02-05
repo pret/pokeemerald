@@ -45,7 +45,8 @@ EWRAM_DATA u8 CurrentAdjustedRoomIndex;
 EWRAM_DATA union ShuffledObject AdjustedObjects[MAX_OBJECTS];
 
 EWRAM_DATA struct WarpData realWarps[TOTAL_WARPS] = {};
-EWRAM_DATA u8 distances[TOTAL_ROOMS];
+EWRAM_DATA u8 distance = 0;
+EWRAM_DATA u16 lastRoom = 0;
 
 void Shuffle(u32 s) {
     tinymt32_t tinymt;
@@ -57,7 +58,7 @@ void Shuffle(u32 s) {
     MYLOG("seed: %u", seed);
 
     int r;
-    for (int i = 0; i < TOTAL_ROOMS; i++) {
+    for (int i = 0; i < ROOMS_PER_SET; i++) {
         // burn RNs for room seeds.
         r = tinymt32_generate_uint32(&tinymt); 
     }
@@ -78,28 +79,77 @@ void Shuffle(u32 s) {
         i++;
     }
 
-    int allRooms[TOTAL_ROOMS - 1];
-    for (int j = 0; j < TOTAL_ROOMS - 2; j++) {
-        allRooms[j] = j + 1;
+    int normals[TOTAL_NORMAL_ROOMS];
+    int gyms[TOTAL_GYM_ROOMS];
+    int elites[TOTAL_ELITE_ROOMS];
+    int normalIdx = 0;
+    int gymIdx = 0;
+    int eliteIdx = 0;
+
+    // this is basically always going to be TOTAL_NORMAL_ROOMS
+    // but just in case it ever isn't, we check here.
+    // it should all get optimized out by the compiler anyway.
+    int max = TOTAL_NORMAL_ROOMS;
+    if (TOTAL_GYM_ROOMS > max) {
+        max = TOTAL_GYM_ROOMS;
     }
-    allRooms[TOTAL_ROOMS - 2] = TOTAL_ROOMS - 1;
-    
-    for (int j = TOTAL_ROOMS - 3; j > 0; j--) {
-        r = (tinymt32_generate_uint32(&tinymt) % j);
-        u16 t = allRooms[r];
-        allRooms[r] = allRooms[j];
-        allRooms[j] = t;
+    if (TOTAL_ELITE_ROOMS > max) {
+        max = TOTAL_ELITE_ROOMS;
     }
 
-    int currentRoomIndex = 0;
-    distances[currentRoomIndex] = 0;
-    for (int j = 0; j < TOTAL_ROOMS - 1; j++) {
-        int targetRoomIndex = allRooms[j];
-        distances[targetRoomIndex] = distances[currentRoomIndex] + 1;
-        u8 roomGroup = Rooms[targetRoomIndex].id >> 8;
-        u8 roomId = Rooms[targetRoomIndex].id & 0xFF;
-        realWarps[currentRoomIndex] = (struct WarpData){roomGroup, roomId, 0, -1, -1};
-        currentRoomIndex = targetRoomIndex;
+    for (int j = 0; j < max; j++) {
+        if (j < TOTAL_NORMAL_ROOMS) {
+            normals[j] = j;
+        }
+        if (j < TOTAL_GYM_ROOMS) {
+            gyms[j] = j;
+        }
+        if (j < TOTAL_ELITE_ROOMS) {
+            elites[j] = j;
+        }
+    }
+
+    for (int j = max - 1; j > 0; j--) {
+        int t;
+        if (j < TOTAL_NORMAL_ROOMS) {
+            r = tinymt32_generate_uint32(&tinymt) % (j + 1);
+            t = normals[r];
+            normals[r] = normals[j];
+            normals[j] = t;
+        }
+        if (j < TOTAL_GYM_ROOMS) {
+            r = tinymt32_generate_uint32(&tinymt) % (j + 1);
+            t = gyms[r];
+            gyms[r] = gyms[j];
+            gyms[j] = t;
+        }
+        if (j < TOTAL_ELITE_ROOMS) {
+            r = tinymt32_generate_uint32(&tinymt) % (j + 1);
+            t = elites[r];
+            elites[r] = elites[j];
+            elites[j] = t;
+        }
+    }
+
+    for (int j = 0; j <= ROOMS_PER_SET; j++) {
+        u8 roomGroup, roomId;
+        if (j == ROOMS_PER_SET) {
+            roomGroup = EndRooms[0] >> 8;
+            roomId = EndRooms[0] & 0xFF;
+        } else if (j <= 4 || (j >= 6 && j <= 10)) {
+            roomGroup = NormalRooms[normals[normalIdx]] >> 8;
+            roomId = NormalRooms[normals[normalIdx]] & 0xFF;
+            normalIdx++;
+        } else if (j == 5 || j == 11) {
+            roomGroup = GymRooms[gyms[gymIdx]] >> 8;
+            roomId = GymRooms[gyms[gymIdx]] & 0xFF;
+            gymIdx++;
+        } else if (j == 12) {
+            roomGroup = EliteRooms[elites[eliteIdx]] >> 8;
+            roomId = EliteRooms[elites[eliteIdx]] & 0xFF;
+            eliteIdx++;
+        }
+        realWarps[j] = (struct WarpData){roomGroup, roomId, 0, -1, -1};
     }
 
     for (int i = 0; i < 5; i++) {
@@ -108,8 +158,7 @@ void Shuffle(u32 s) {
     }
 
     AddBagItem(ITEM_POTION, 5);
-    AddBagItem(ITEM_MAX_ELIXIR, 3);
-    AddBagItem(ITEM_REVIVE, 1);
+    AddBagItem(ITEM_ETHER, 5);
 
     AddBagItem(ITEM_POKE_BALL, 8);
     AddBagItem(ITEM_GREAT_BALL, 4);
@@ -124,18 +173,9 @@ void SetCurrentRoomSeed() {
     tinymt.tmat = TMAT;
     tinymt32_init(&tinymt, seed);
     int seed2;
-    int broke = 0;
     // burn an appropriate amount of RNs here.
-    for (int i = 0; i < TOTAL_ROOMS; i++) {
+    for (int i = 0; i < distance; i++) {
         seed2 = tinymt32_generate_uint32(&tinymt);
-        if (Rooms[i].id == CurrentAdjustedRoom) {
-            CurrentAdjustedRoomIndex = i;
-            broke = 1;
-            break;
-        }
-    }
-    if (broke == 0) {
-        MYLOG("never broke!");
     }
     currentRoomSeed.mat1 = MAT1;
     currentRoomSeed.mat2 = MAT2;
@@ -147,6 +187,8 @@ void MirrorMapData() {
     u16 currentRoom = gSaveBlock1Ptr->location.mapNum | (gSaveBlock1Ptr->location.mapGroup << 8);
     if (CurrentAdjustedRoom != currentRoom) {
         CurrentAdjustedRoom = currentRoom;
+        distance++;
+        MYLOG("distance: %u", distance);
         SetCurrentRoomSeed();
 
         size_t mapevents_bytes = sizeof(struct MapEvents);
@@ -165,12 +207,12 @@ void MirrorMapData() {
     gMapHeader.events = &AdjustedMapEvents;
 }
 
-void DeclareTrainer(u8 objNum) {
+void DeclareTrainer(u8 objNum, u8 trainerType) {
     MirrorMapData();
 
-    int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_TRAINERS;
+    int i = tinymt32_generate_uint32(&currentRoomSeed) % allTrainersCount[trainerType];
 
-    const struct TrainerTemplate *tt = qTrainers[i];
+    const struct TrainerTemplate *tt = allTrainers[trainerType][i];
 
     AdjustedObjects[objNum].t.trainer.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
     AdjustedObjects[objNum].t.trainer.doubleBattle = FALSE;
@@ -180,57 +222,68 @@ void DeclareTrainer(u8 objNum) {
     for (int i = 0; i < 4; i++) {
         AdjustedObjects[objNum].t.trainer.items[i] = ITEM_NONE;
     }
-    if (tt->rarity == 0) {
-        AdjustedObjects[objNum].t.trainer.partyFlags = tt->partyFlags;
-        AdjustedObjects[objNum].t.trainer.partySize = tt->partySize;
 
-        int move_bytes = tt->partySize;
-        switch (tt->partyFlags & 3) {
-            case 0:
-                move_bytes *= sizeof(struct TrainerMonNoItemDefaultMoves);
-                memcpy(&AdjustedObjects[objNum].t.party, tt->party.NoItemDefaultMoves, move_bytes);
-                for (int i = 0; i < tt->partySize; i++) {
-                    AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl = distances[CurrentAdjustedRoomIndex] + 1;
-                }
-                AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
-                break;
-            case F_TRAINER_PARTY_CUSTOM_MOVESET:
-                move_bytes *= sizeof(struct TrainerMonNoItemCustomMoves);
-                memcpy(&AdjustedObjects[objNum].t.party, tt->party.NoItemCustomMoves, move_bytes);
-                for (int i = 0; i < tt->partySize; i++) {
-                    AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].lvl = distances[CurrentAdjustedRoomIndex] + 1;
-                }
-                AdjustedObjects[objNum].t.trainer.party.NoItemCustomMoves = AdjustedObjects[objNum].t.party.NoItemCustomMoves;
-                break;
-            case F_TRAINER_PARTY_HELD_ITEM:
-                move_bytes *= sizeof(struct TrainerMonItemDefaultMoves);
-                memcpy(&AdjustedObjects[objNum].t.party, tt->party.ItemDefaultMoves, move_bytes);
-                for (int i = 0; i < tt->partySize; i++) {
-                    AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].lvl = distances[CurrentAdjustedRoomIndex] + 1;
-                }
-                AdjustedObjects[objNum].t.trainer.party.ItemDefaultMoves = AdjustedObjects[objNum].t.party.ItemDefaultMoves;
-                break;
-            case F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET:
-                move_bytes *= sizeof(struct TrainerMonItemCustomMoves);
-                memcpy(&AdjustedObjects[objNum].t.party, tt->party.ItemCustomMoves, move_bytes);
-                for (int i = 0; i < tt->partySize; i++) {
-                    AdjustedObjects[objNum].t.party.ItemCustomMoves[i].lvl = distances[CurrentAdjustedRoomIndex] + 1;
-                }
-                AdjustedObjects[objNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party.ItemCustomMoves;
-                break;
-        }
-    } else {
-        AdjustedObjects[objNum].t.trainer.partyFlags = 0;
-        AdjustedObjects[objNum].t.trainer.partySize = 2;
-        for (int i = 0; i < AdjustedObjects[objNum].t.trainer.partySize; i++) {
-            AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].iv = 0;
-            AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl = distances[CurrentAdjustedRoomIndex] + 1;
-            int r = tinymt32_generate_uint32(&currentRoomSeed) % 20;
-            int s = TrainerMonTypes[tt->type1][r];
-            AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].species = s;
-        }
-        AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
+    AdjustedObjects[objNum].t.trainer.partyFlags = tt->partyFlags;
+    AdjustedObjects[objNum].t.trainer.partySize = tt->partySize;
+
+    int pool[tt->poolSize];
+    for (int i = 0; i < tt->poolSize; i++) {
+        pool[i] = i;
     }
+    for (int i = tt->poolSize - 1; i > 0; i--) {
+        int j = tinymt32_generate_uint32(&currentRoomSeed) % (i + 1);
+        int tmp = pool[i];
+        pool[i] = pool[j];
+        pool[j] = tmp;
+    }
+    int move_bytes = 0;
+    switch (tt->partyFlags & 3) {
+        case 0:
+            move_bytes = sizeof(struct TrainerMonNoItemDefaultMoves);
+            for (int i = 0; i < tt->partySize; i++) {
+                memcpy(
+                    &AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i],
+                    &(tt->party.NoItemDefaultMoves[pool[i]]),
+                    move_bytes);
+                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl = GetScaledLevel(distance);
+            }
+            AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
+            break;
+        case F_TRAINER_PARTY_CUSTOM_MOVESET:
+            move_bytes = sizeof(struct TrainerMonNoItemCustomMoves);
+            for (int i = 0; i < tt->partySize; i++) {
+                memcpy(
+                    &AdjustedObjects[objNum].t.party.NoItemCustomMoves[i],
+                    &(tt->party.NoItemCustomMoves[pool[i]]),
+                    move_bytes);
+                AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].lvl = GetScaledLevel(distance);
+            }
+            AdjustedObjects[objNum].t.trainer.party.NoItemCustomMoves = AdjustedObjects[objNum].t.party.NoItemCustomMoves;
+            break;
+        case F_TRAINER_PARTY_HELD_ITEM:
+            move_bytes = sizeof(struct TrainerMonItemDefaultMoves);
+            for (int i = 0; i < tt->partySize; i++) {
+                memcpy(
+                    &AdjustedObjects[objNum].t.party.ItemDefaultMoves[i],
+                    &(tt->party.ItemDefaultMoves[pool[i]]),
+                    move_bytes);
+                AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].lvl = GetScaledLevel(distance);
+            }
+            AdjustedObjects[objNum].t.trainer.party.ItemDefaultMoves = AdjustedObjects[objNum].t.party.ItemDefaultMoves;
+            break;
+        case F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET:
+            move_bytes = sizeof(struct TrainerMonItemCustomMoves);
+            for (int i = 0; i < tt->partySize; i++) {
+                memcpy(
+                    &AdjustedObjects[objNum].t.party.ItemCustomMoves[i],
+                    &(tt->party.ItemCustomMoves[pool[i]]),
+                    move_bytes);
+                AdjustedObjects[objNum].t.party.ItemCustomMoves[i].lvl = GetScaledLevel(distance);
+            }
+            AdjustedObjects[objNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party.ItemCustomMoves;
+            break;
+    }
+
     AdjustedObjects[objNum].t.defeatText = tt->defeatText;
     AdjustedObjects[objNum].t.introText = tt->introText;
     AdjustedObjects[objNum].t.postbattleText = tt->postbattleText;
@@ -243,7 +296,7 @@ void DeclareWildMon(u8 objNum) {
     MirrorMapData();
     int i = tinymt32_generate_uint32(&currentRoomSeed) % 809;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.iv = 15;
-    AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = distances[CurrentAdjustedRoomIndex] + 1;
+    AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = GetScaledLevel(distance);
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = i + 1;
     AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + i;
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
@@ -397,32 +450,19 @@ void NotifyShufflerChangedRoom() {
 }
 
 void RedirectShuffledWarp(struct WarpData *warp) {
-    // We skip the first two warp redirects.
-    // The first warp places the player in the truck.
-    // The second warp takes the player from the truck to littleroot town.
+    // We skip the first warp redirects.
+    // The first warp places the player in the start room.
     static int warpSkips = 0;
     if (warpSkips < 1) {
         warpSkips++;
         return;
     }
-    int fromIndex = -1;
-    int roomId = (warp->mapGroup << 8) | warp->mapNum;
-    for (int i = 0; i < TOTAL_ROOMS; i++) {
-        if (Rooms[i].id == roomId) {
-            fromIndex = i;
-            break;
-        }
-    }
-    if (fromIndex == -1) {
-        if (warp->mapGroup == 0 && warp->mapNum == 0 && warp->warpId == 0 && warp->x == 0 && warp->y == 0) {
-            MYLOG("white out warp");
-        } else {
-            MYLOG("unknown warp {%d, %d, %d, %d, %d}", warp->mapGroup, warp->mapNum, warp->warpId, warp->x, warp->y);
-        }
+    if (warp->mapGroup == 0 && warp->mapNum == 0 && warp->warpId == 0 && warp->x == 0 && warp->y == 0) {
+        MYLOG("white out warp");
         return;
     }
     int leavingDirection = warp->warpId;
-    struct WarpData w = realWarps[fromIndex];
+    struct WarpData w = realWarps[distance];
     warp->mapGroup = w.mapGroup;
     warp->mapNum = w.mapNum;
     warp->warpId = w.warpId;
@@ -496,6 +536,25 @@ u16 BufferWitchText(void) {
 }
 
 u16 ShuffledFlagNumberByObjectEventId(u16 objNum) {
-    MYLOG("getting flag for objNum %u", objNum);
     return TEMP_FLAGS_START + objNum;
+}
+
+u8 GetScaledLevel(u8 dist) {
+    switch(dist) {
+    case 0:
+    case 1:
+        return 2;
+    case 2:
+        return 3;
+    case 3:
+        return 5;
+    case 4:
+        return 6;
+    case 5:
+        return 8;
+    case 6:
+        return 10;
+    default:
+        return 90;
+    }
 }

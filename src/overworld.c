@@ -599,11 +599,6 @@ static void LoadCurrentMapData(void)
 {
     sLastMapSectionId = gMapHeader.regionMapSectionId;
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-    // walkingeye: run map script to declare trainer sprites that need adjusting
-    // This appears to be run twice each time a map loads:
-    // once from WarpIntoMap() and once from LoadMapFromWarp()
-    NotifyShufflerChangedRoom();
-    MapHeaderRunScriptType(MAP_SCRIPT_ON_INTRO_TRAINERS);
 
     gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
     gMapHeader.mapLayout = GetMapLayout();
@@ -845,6 +840,8 @@ static void LoadMapFromWarp(bool32 a1)
     bool8 isIndoors;
 
     LoadCurrentMapData();
+    NotifyShufflerChangedRoom();
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_INTRO_TRAINERS);
     if (!(sObjectEventLoadFlag & SKIP_OBJECT_EVENT_LOAD))
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
