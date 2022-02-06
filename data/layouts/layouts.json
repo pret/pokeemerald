@@ -4520,6 +4520,46 @@
       "secondary_tileset": "gTileset_Pacifidlog",
       "border_filepath": "data/layouts/CeruleanGym/border.bin",
       "blockdata_filepath": "data/layouts/CeruleanGym/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHOICE_MAP4",
+      "name": "ChoiceMap4_Layout",
+      "width": 10,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChoiceMap4/border.bin",
+      "blockdata_filepath": "data/layouts/ChoiceMap4/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHOICE_MAP5",
+      "name": "ChoiceMap5_Layout",
+      "width": 20,
+      "height": 12,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChoiceMap5/border.bin",
+      "blockdata_filepath": "data/layouts/ChoiceMap5/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHOICE_MAP6",
+      "name": "ChoiceMap6_Layout",
+      "width": 20,
+      "height": 12,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChoiceMap6/border.bin",
+      "blockdata_filepath": "data/layouts/ChoiceMap6/map.bin"
+    },
+    {
+      "id": "LAYOUT_ELITE_ROOM1",
+      "name": "EliteRoom1_Layout",
+      "width": 7,
+      "height": 7,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MeteorFalls",
+      "border_filepath": "data/layouts/EliteRoom1/border.bin",
+      "blockdata_filepath": "data/layouts/EliteRoom1/map.bin"
     }
   ]
 }

@@ -47,9 +47,9 @@ static const struct TrainerMonNoItemDefaultMoves etHoldemJoeParty[] = {
         .species = SPECIES_DUSKULL,
     }
 };
-static const u8 etHoldemJoeIntroText[] = _("test intro 1");
-static const u8 etHoldemJoeDefeatText[] = _("test defeat 1");
-static const u8 etHoldemJoePostbattleText[] = _("postbattle 1");
+static const u8 etHoldemJoeIntroText[] = _("elite intro");
+static const u8 etHoldemJoeDefeatText[] = _("elite defeat");
+static const u8 etHoldemJoePostbattleText[] = _("elite postbattle");
 static const u8 etHoldemJoeName[] = _("HoldemJoe");
 static const struct TrainerTemplate etHoldemJoe = {
     .partyFlags = 0,

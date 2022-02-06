@@ -1081,3 +1081,11 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/ChoiceMap3/scripts.inc"
 
 	.include "data/maps/CeruleanGym/scripts.inc"
+
+	.include "data/maps/ChoiceMap4/scripts.inc"
+
+	.include "data/maps/ChoiceMap5/scripts.inc"
+
+	.include "data/maps/ChoiceMap6/scripts.inc"
+
+	.include "data/maps/EliteRoom1/scripts.inc"

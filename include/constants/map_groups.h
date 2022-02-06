@@ -601,6 +601,10 @@
 #define MAP_CHOICE_MAP2                            (9 | (33 << 8))
 #define MAP_CHOICE_MAP3                            (10 | (33 << 8))
 #define MAP_CERULEAN_GYM                           (11 | (33 << 8))
+#define MAP_CHOICE_MAP4                            (12 | (33 << 8))
+#define MAP_CHOICE_MAP5                            (13 | (33 << 8))
+#define MAP_CHOICE_MAP6                            (14 | (33 << 8))
+#define MAP_ELITE_ROOM1                            (15 | (33 << 8))
 
 #define MAP_GROUPS_COUNT 34
 
