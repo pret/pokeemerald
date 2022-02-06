@@ -7,6 +7,7 @@
 #define MAX_OBJECTS 10
 #define POSSIBLE_STARTERS 108
 #define POSSIBLE_ITEMS 62
+#define POSSIBLE_WILD_MON 443
 #define POSSIBLE_NPCS 3
 #define POSSIBLE_WITCH_ITEM_REWARDS 1
 #define POSSIBLE_WITCH_EFFECTS 1
@@ -126,5 +127,6 @@ u16 DoWitchDeal(void);
 u16 BufferWitchText(void);
 u16 ShuffledFlagNumberByObjectEventId(u16 objNum);
 u8 GetScaledLevel(u8 distance);
+u16 AdjustSpecies(u16 species, u8 level);
 
 #endif // GUARD_SHUFFLER_H

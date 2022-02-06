@@ -24,6 +24,7 @@
 #include "data/shuffle_starters.h"
 #include "data/shuffle_rooms.h"
 #include "data/shuffle_items.h"
+#include "data/shuffle_wildmon.h"
 
 #ifdef __wasm__
 #define MYLOG(f_, ...) printf("GBA: "); printf((f_), ##__VA_ARGS__); printf("\n")
@@ -32,6 +33,8 @@
 #include "mgba.h"
 #define MYLOG(f_, ...) mgba_printf(MGBA_LOG_INFO, (f_), ##__VA_ARGS__)
 #endif
+
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 EWRAM_DATA int seed;
 EWRAM_DATA tinymt32_t currentRoomSeed;
@@ -246,6 +249,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                     &(tt->party.NoItemDefaultMoves[pool[i]]),
                     move_bytes);
                 AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].species, AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl);
             }
             AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
             break;
@@ -257,6 +261,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                     &(tt->party.NoItemCustomMoves[pool[i]]),
                     move_bytes);
                 AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].lvl = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].species, AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].lvl);
             }
             AdjustedObjects[objNum].t.trainer.party.NoItemCustomMoves = AdjustedObjects[objNum].t.party.NoItemCustomMoves;
             break;
@@ -268,6 +273,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                     &(tt->party.ItemDefaultMoves[pool[i]]),
                     move_bytes);
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].lvl = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].species, AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].lvl);
             }
             AdjustedObjects[objNum].t.trainer.party.ItemDefaultMoves = AdjustedObjects[objNum].t.party.ItemDefaultMoves;
             break;
@@ -279,6 +285,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                     &(tt->party.ItemCustomMoves[pool[i]]),
                     move_bytes);
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[i].lvl = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.ItemCustomMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.ItemCustomMoves[i].species, AdjustedObjects[objNum].t.party.ItemCustomMoves[i].lvl);
             }
             AdjustedObjects[objNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party.ItemCustomMoves;
             break;
@@ -294,11 +301,11 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
 
 void DeclareWildMon(u8 objNum) {
     MirrorMapData();
-    int i = tinymt32_generate_uint32(&currentRoomSeed) % 809;
+    int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.iv = 15;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = GetScaledLevel(distance);
-    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = i + 1;
-    AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + i;
+    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = AdjustSpecies(possibleWildMon[i], AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl);
+    AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + AdjustedObjects[objNum].wm.NoItemDefaultMoves.species - 1;
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
 
@@ -554,7 +561,96 @@ u8 GetScaledLevel(u8 dist) {
         return 8;
     case 6:
         return 10;
+    case 7:
+        return 12;
+    case 8:
+        return 14;
+    case 9:
+        return 15;
+    case 10:
+        return 17;
+    case 11:
+        return 18;
+    case 12:
+        return 21;
+    case 13:
+        return 25;
     default:
         return 90;
     }
+}
+
+u16 AdjustSpecies(u16 species, u8 level) {
+    u16 newSpecies = species;
+    int possible = 0;
+    u16 possibilities[EVOS_PER_MON + 1];
+    int addSelf = 0;
+
+    for (int i = 0; i < EVOS_PER_MON; i++) {
+        u16 method = gEvolutionTable[species][i].method;
+        u16 param = gEvolutionTable[species][i].param;
+        u16 targetSpecies = gEvolutionTable[species][i].targetSpecies;
+        if (!method) {
+            continue;
+        }
+        if (method == EVO_MEGA_EVOLUTION || method == EVO_MOVE_MEGA_EVOLUTION || method == EVO_PRIMAL_REVERSION) {
+            continue;
+        }
+        if ((method == EVO_LEVEL
+            || method == EVO_LEVEL_ATK_GT_DEF
+            || method == EVO_LEVEL_ATK_EQ_DEF
+            || method == EVO_LEVEL_ATK_LT_DEF
+            || method == EVO_LEVEL_SILCOON
+            || method == EVO_LEVEL_CASCOON
+            || method == EVO_LEVEL_NINJASK
+            || method == EVO_LEVEL_SHEDINJA
+            || method == EVO_LEVEL_FEMALE
+            || method == EVO_LEVEL_MALE
+            || method == EVO_LEVEL_NIGHT
+            || method == EVO_LEVEL_DAY
+            || method == EVO_LEVEL_DUSK
+            || method == EVO_ITEM_HOLD_DAY
+            || method == EVO_ITEM_HOLD_NIGHT
+            || method == EVO_LEVEL_RAIN) && param <= level) {
+
+            possibilities[possible] = targetSpecies;
+            possible++;
+            continue;
+        }
+        if (method == EVO_FRIENDSHIP
+            || method == EVO_FRIENDSHIP_DAY
+            || method == EVO_FRIENDSHIP_NIGHT
+            || method == EVO_TRADE
+            || method == EVO_TRADE_ITEM
+            || method == EVO_ITEM
+            || method == EVO_ITEM_HOLD_DAY
+            || method == EVO_ITEM_HOLD_NIGHT
+            || method == EVO_MAPSEC
+            || method == EVO_ITEM_MALE
+            || method == EVO_ITEM_FEMALE
+            || method == EVO_SPECIFIC_MAP
+            || method == EVO_BEAUTY
+            || method == EVO_MOVE
+            || method == EVO_MOVE_TYPE
+            || method == EVO_SPECIFIC_MON_IN_PARTY
+            || method == EVO_LEVEL_DARK_TYPE_MON_IN_PARTY
+            || method == EVO_TRADE_SPECIFIC_MON) {
+
+            addSelf = 1;
+            possibilities[possible] = targetSpecies;
+            possible++;
+            continue;
+        }
+    }
+    if (addSelf || possible == 0) {
+        possibilities[possible] = species;
+        possible++;
+    }
+
+    newSpecies = possibilities[tinymt32_generate_uint32(&currentRoomSeed) % possible];
+    if (newSpecies == species) {
+        return newSpecies;
+    }
+
+    return AdjustSpecies(newSpecies, level);
 }
