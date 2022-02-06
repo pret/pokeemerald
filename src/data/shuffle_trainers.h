@@ -253,7 +253,7 @@ static const struct TrainerMonNoItemDefaultMoves ctGroundParty[] = {
     { .iv = 0, .lvl = 1, .species = SPECIES_HIPPOPOTAS },
 };
 static const u8 ctGroundIntroText[] = _("Runnin' my fingers through this\nhere soil... makes me feel alive.");
-static const u8 ctGroundDefeatText[] = _("Not much left to harvest\nnow that rains stopped comin'.");
+static const u8 ctGroundDefeatText[] = _("Not much left to harvest\nnow the rains stopped comin'.");
 static const u8 ctGroundPostbattleText[] = _("You live and die\nby what the land gives ya.");
 static const u8 ctGroundName[] = _("Farmer Jed");
 static const struct TrainerTemplate ctGround = {
