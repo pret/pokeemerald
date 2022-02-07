@@ -57,14 +57,14 @@ struct AnimFrameCmd
 
 struct AnimLoopCmd
 {
-    u32 type:16;
-    u32 count:6;
+    s16 type;
+    u8 count:6;
 };
 
 struct AnimJumpCmd
 {
-    u32 type:16;
-    u32 target:6;
+    s16 type;
+    u8 target:6;
 };
 
 // The first halfword of this union specifies the type of command.
