@@ -569,14 +569,27 @@ struct Roamer
     /*0x08*/ u16 species;
     /*0x0A*/ u16 hp;
     /*0x0C*/ u8 level;
+// The roamer's status field is u8, but SetMonData expects status to be u32, so it sets the roamer's status
+// using the status field and the following 3 bytes (cool, beauty, and cute).
+// This seems to be a mistake as it's the only field inconsistent with what it copes to the pokemon struct
+#ifdef BUGFIX
+             u32 status;
+#else
     /*0x0D*/ u8 status;
+#endif
     /*0x0E*/ u8 cool;
     /*0x0F*/ u8 beauty;
     /*0x10*/ u8 cute;
     /*0x11*/ u8 smart;
     /*0x12*/ u8 tough;
     /*0x13*/ bool8 active;
+
+ // Whole struct has to be 28 bytes due to hard-coded save/load logic
+#ifdef BUGFIX
+             u8 filler[0x5];
+#else
     /*0x14*/ u8 filler[0x8];
+#endif
 };
 
 struct RamScriptData
