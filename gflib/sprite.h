@@ -48,11 +48,11 @@ struct AnimFrameCmd
 {
     // If the sprite has an array of images, this is the array index.
     // If the sprite has a sheet, this is the tile offset.
-    u32 imageValue:16;
+    s16 imageValue;
 
-    u32 duration:6;
-    u32 hFlip:1;
-    u32 vFlip:1;
+    u8 duration:6;
+    u8 hFlip:1;
+    u8 vFlip:1;
 };
 
 struct AnimLoopCmd
