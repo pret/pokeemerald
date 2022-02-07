@@ -221,7 +221,7 @@ bool8 SetUpFieldMove_Cut(void)
         else
         {
             bool8 tileCuttable;
-            for (i = 0; i < 16; i++)
+            for (i = 0; i < ARRAY_COUNT(sHyperCutStruct); i++)
             {
                 x = gPlayerFacingPosition.x + sHyperCutStruct[i].x;
                 y = gPlayerFacingPosition.y + sHyperCutStruct[i].y;
@@ -475,7 +475,7 @@ static void HandleLongGrassOnHyper(u8 caseId, s16 x, s16 y)
         arr[0] = sHyperCutTiles[9];
         arr[1] = sHyperCutTiles[14];
         arr[2] = sHyperCutTiles[19];
-        newX = x + 4;
+        newX = x + (CUT_HYPER_SIDE - 1);
     }
     else // invalid case
     {
