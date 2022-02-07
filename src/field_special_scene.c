@@ -50,9 +50,9 @@ static void Task_Truck3(u8);
 
 s16 GetTruckCameraBobbingY(int a1)
 {
-    if (!(a1 % 120))
+    if ((a1 % 120) == 0)
         return -1;
-    else if ((a1 % 10) <= 4)
+    else if ((a1 % 10) < 5)
         return 1;
 
     return 0;
@@ -60,7 +60,7 @@ s16 GetTruckCameraBobbingY(int a1)
 
 s16 GetTruckBoxMovement(int a1) // for the box movement?
 {
-    if (!((a1 + 120) % 180))
+    if (((a1 + 120) % 180) == 0)
         return -1;
 
     return 0;
@@ -103,7 +103,7 @@ void Task_Truck2(u8 taskId)
         data[0] = 0;
         data[1]++;
     }
-    if ((u16)data[1] == 19)
+    if (data[1] == ARRAY_COUNT(gTruckCamera_HorizontalTable))
     {
         DestroyTask(taskId);
     }
@@ -138,7 +138,7 @@ static void Task_Truck3(u8 taskId)
        data[1]++;
    }
 
-   if ((u16)data[1] == 19)
+   if (data[1] == ARRAY_COUNT(gTruckCamera_HorizontalTable))
    {
        DestroyTask(taskId);
    }
@@ -234,7 +234,7 @@ void ExecuteTruckSequence(void)
     MapGridSetMetatileIdAt(4 + MAP_OFFSET, 3 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Bottom);
     DrawWholeMapView();
     ScriptContext2_Enable();
-    CpuFastFill(0, gPlttBufferFaded, 0x400);
+    CpuFastFill(0, gPlttBufferFaded, PLTT_SIZE);
     CreateTask(Task_HandleTruckSequence, 0xA);
 }
 
