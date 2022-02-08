@@ -160,8 +160,8 @@ void Shuffle(u32 s) {
         AddBagItem(ITEM_TM01 + r, 1);
     }
 
-    AddBagItem(ITEM_POTION, 5);
-    AddBagItem(ITEM_ETHER, 5);
+    AddBagItem(ITEM_SITRUS_BERRY, 5);
+    AddBagItem(ITEM_LEPPA_BERRY, 5);
 
     AddBagItem(ITEM_POKE_BALL, 8);
     AddBagItem(ITEM_GREAT_BALL, 4);
@@ -311,9 +311,27 @@ void DeclareWildMon(u8 objNum) {
 
 void DeclareItem(u16 objNum) {
     MirrorMapData();
-    int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_ITEMS;
-    AdjustedObjects[objNum].itemId = possibleItems[i];
-    AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_ITEM_BALL;
+    int i = tinymt32_generate_uint32(&currentRoomSeed) % 6;
+    switch (i) {
+    case 0:
+    case 1:
+    case 2:
+        AdjustedObjects[objNum].itemId = possibleHealingItems[tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_HEALING_ITEMS];
+        AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_ITEM_BALL_GREEN;
+        break;
+    case 3:
+        AdjustedObjects[objNum].itemId = possibleMiscItems[tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_MISC_ITEMS];
+        AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_ITEM_BALL_PURPLE;
+        break;
+    case 4:
+    case 5:
+        AdjustedObjects[objNum].itemId = possibleTMs[tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_TMS];
+        AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_ITEM_BALL;
+        break;
+    default:
+        MYLOG("error randomizing an item ball.");
+        break;
+    }
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
 
@@ -357,7 +375,7 @@ void DeclareNPC(u16 objNum) {
         AdjustedObjects[objNum].npc.trader.igt.conditions[3] = 5;
         AdjustedObjects[objNum].npc.trader.igt.conditions[4] = 5;
         AdjustedObjects[objNum].npc.trader.igt.personality = 0x84;
-        AdjustedObjects[objNum].npc.trader.igt.heldItem = possibleItems[tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_ITEMS];
+        AdjustedObjects[objNum].npc.trader.igt.heldItem = possibleHealingItems[tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_HEALING_ITEMS];
         AdjustedObjects[objNum].npc.trader.igt.mailNum = -1;
         AdjustedObjects[objNum].npc.trader.igt.otGender = MALE;
         AdjustedObjects[objNum].npc.trader.igt.sheen = 10;
