@@ -16,6 +16,7 @@ static const u16 possibleHealingItems[POSSIBLE_HEALING_ITEMS] = {
     ITEM_LUM_BERRY,
     ITEM_SITRUS_BERRY
 };
+
 static const u16 possibleMiscItems[POSSIBLE_MISC_ITEMS] = {
     ITEM_GREAT_BALL,
     ITEM_ULTRA_BALL,
