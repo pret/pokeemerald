@@ -46,12 +46,12 @@ struct TrainerCard
     /*0x38*/ u8 version;
              // Gamefreak probably meant to put this in the same memory as unionRoomNum, but the compiler put it two bytes away.
              // It doesn't result in a bug though since these fields aren't affected by memcpy, unlike the fields before it
-             bool16 linkHasAllFrontierSymbols;
-    /*0x3A*/ union {
+    /*0x3A*/ bool16 linkHasAllFrontierSymbols;
+    /*0x3C*/ union {
                 u16 frontierBP;
                 u32 berryCrush;
              } linkPoints; // This field is used differently by FRLG vs Emerald
-    /*0x3E*/ u32 unionRoomNum;
+    /*0x40*/ u32 unionRoomNum;
     /*0x44*/ u8 filler[8];
     /*0x4C*/ bool8 shouldDrawStickers; // FRLG only
     /*0x4D*/ u8 unused;
