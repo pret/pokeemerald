@@ -44,7 +44,7 @@ struct TrainerCard
     /*0x28*/ u16 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH];
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x38*/ u8 version;
-             // Gamefreak probably meant to put this in the same memory as unionRoomNum, but the compiler put it two bytes away.
+             // GF probably meant to put this in the same memory location as unionRoomNum, but the compiler put it two bytes away.
              // It doesn't result in a bug though since these fields aren't affected by memcpy, unlike the fields before it
     /*0x3A*/ bool16 linkHasAllFrontierSymbols;
     /*0x3C*/ union {
