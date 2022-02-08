@@ -601,6 +601,9 @@ static void CB2_InitTrainerCard(void)
         FreeAllSpritePalettes();
         ResetPaletteFade();
         gMain.state++;
+    #ifdef BUGFIX
+        break;
+    #endif
     case 4:
         InitBgsAndWindows();
         gMain.state++;
@@ -732,14 +735,23 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
         trainerCard->battleTowerWins = 0;
         trainerCard->battleTowerStraightWins = 0;
     // Seems like GF got CARD_TYPE_FRLG and CARD_TYPE_RS wrong.
+    #ifdef BUGFIX
+    case CARD_TYPE_RS:
+    #else
     case CARD_TYPE_FRLG:
+    #endif
         trainerCard->contestsWithFriends = GetCappedGameStat(GAME_STAT_WON_LINK_CONTEST, 999);
         trainerCard->pokeblocksWithFriends = GetCappedGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
         if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
             trainerCard->hasAllPaintings = TRUE;
         trainerCard->stars = GetRubyTrainerStars(trainerCard);
         break;
+    
+    #ifdef BUGFIX
+    case CARD_TYPE_FRLG:
+    #else
     case CARD_TYPE_RS:
+    #endif
         trainerCard->battleTowerWins = 0;
         trainerCard->battleTowerStraightWins = 0;
         trainerCard->contestsWithFriends = 0;
@@ -772,7 +784,7 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
     trainerCard->version = GAME_VERSION;
     SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
     trainerCard->linkHasAllFrontierSymbols = HasAllFrontierSymbols();
-    *((u16*)&trainerCard->linkPoints.frontier) = gSaveBlock2Ptr->frontier.cardBattlePoints;
+    trainerCard->linkPoints.frontierBP = gSaveBlock2Ptr->frontier.cardBattlePoints;
     if (trainerCard->linkHasAllFrontierSymbols)
         trainerCard->stars++;
 
@@ -797,9 +809,9 @@ void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 ga
         break;
     case CARD_TYPE_EMERALD:
         memcpy(dst, src, 0x60);
-        dst->linkPoints.frontier = 0;
+        dst->linkPoints.berryCrush = 0;
         dst->hasAllFrontierSymbols = src->linkHasAllFrontierSymbols;
-        dst->frontierBP = *((u16*)&src->linkPoints.frontier);
+        dst->frontierBP = src->linkPoints.frontierBP;
         break;
     }
 }
