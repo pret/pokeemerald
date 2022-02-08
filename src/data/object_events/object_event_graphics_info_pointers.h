@@ -1297,6 +1297,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_LINK_RS_MAY] =              &gObjectEventGraphicsInfo_RubySapphireMay,
     [OBJ_EVENT_GFX_LUGIA] =                    &gObjectEventGraphicsInfo_Lugia,
     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
+    [OBJ_EVENT_GFX_ITEM_BALL_GREEN] =          &gObjectEventGraphicsInfo_ItemBallGreen,
+    [OBJ_EVENT_GFX_ITEM_BALL_PURPLE] =         &gObjectEventGraphicsInfo_ItemBallPurple,
     //Pokemon species overworlds
     [OBJ_EVENT_GFX_POKEMON_001] = 	&gObjectEventGraphicsInfo_Pokemon_Species_001,
     [OBJ_EVENT_GFX_POKEMON_002] = 	&gObjectEventGraphicsInfo_Pokemon_Species_002,

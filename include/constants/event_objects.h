@@ -240,8 +240,10 @@
 #define OBJ_EVENT_GFX_LINK_RS_MAY                236
 #define OBJ_EVENT_GFX_LUGIA                      237
 #define OBJ_EVENT_GFX_HOOH                       238
+#define OBJ_EVENT_GFX_ITEM_BALL_GREEN            239
+#define OBJ_EVENT_GFX_ITEM_BALL_PURPLE           240
 
-#define NUM_REGULAR_OBJ_EVENT_GFX                239
+#define NUM_REGULAR_OBJ_EVENT_GFX                241
 
 #define OBJ_EVENT_GFX_POKEMON_001		(NUM_REGULAR_OBJ_EVENT_GFX + 0)
 #define OBJ_EVENT_GFX_POKEMON_002		(NUM_REGULAR_OBJ_EVENT_GFX + 1)
