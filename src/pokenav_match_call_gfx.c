@@ -1024,7 +1024,7 @@ static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
     int index = PokenavList_GetSelectedIndex() + delta;
     int mapSec = GetMatchCallMapSec(index);
     if (mapSec != MAPSEC_NONE)
-        GetMapName(mapName, mapSec, 0);
+        CopyMapName(mapName, mapSec, 0);
     else
         StringCopy(mapName, gText_Unknown);
 

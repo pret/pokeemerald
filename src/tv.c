@@ -4480,7 +4480,7 @@ static void DoTVShowTodaysSmartShopper(void)
     {
     case SMARTSHOPPER_STATE_INTRO:
         TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
-        GetMapName(gStringVar2, show->smartshopperShow.shopLocation, 0);
+        CopyMapName(gStringVar2, show->smartshopperShow.shopLocation, 0);
         if (show->smartshopperShow.itemAmounts[0] >= 255)
             sTVShowState = SMARTSHOPPER_STATE_CLERK_MAX;
         else
@@ -4737,7 +4737,7 @@ static void DoTVShowPokemonTodayFailedCapture(void)
         break;
     case 1:
         TVShowConvertInternationalString(gStringVar1, show->pokemonTodayFailed.playerName, show->pokemonTodayFailed.language);
-        GetMapName(gStringVar2, show->pokemonTodayFailed.location, 0);
+        CopyMapName(gStringVar2, show->pokemonTodayFailed.location, 0);
         StringCopy(gStringVar3, gSpeciesNames[show->pokemonTodayFailed.species2]);
         if (show->pokemonTodayFailed.outcome == 1)
             sTVShowState = 3;
@@ -4897,7 +4897,7 @@ static void DoTVShowPokemonNewsMassOutbreak(void)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    GetMapName(gStringVar1, show->massOutbreak.locationMapNum, 0);
+    CopyMapName(gStringVar1, show->massOutbreak.locationMapNum, 0);
     StringCopy(gStringVar2, gSpeciesNames[show->massOutbreak.species]);
     TVShowDone();
     StartMassOutbreak();
@@ -5429,7 +5429,7 @@ void DoTVShowInSearchOfTrainers(void)
     switch (state)
     {
     case 0:
-        GetMapName(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.mapnum, 0);
+        CopyMapName(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.mapnum, 0);
         if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 1)
             sTVShowState = 1;
         else
@@ -5526,7 +5526,7 @@ static void DoTVShowTheWorldOfMasters(void)
         break;
     case 2:
         TVShowConvertInternationalString(gStringVar1, show->worldOfMasters.playerName, show->worldOfMasters.language);
-        GetMapName(gStringVar2, show->worldOfMasters.location, 0);
+        CopyMapName(gStringVar2, show->worldOfMasters.location, 0);
         StringCopy(gStringVar3, gSpeciesNames[show->worldOfMasters.caughtPoke]);
         TVShowDone();
         break;
@@ -5571,7 +5571,7 @@ static void DoTVShowTodaysRivalTrainer(void)
     case 7:
         TVShowConvertInternationalString(gStringVar1, show->rivalTrainer.playerName, show->rivalTrainer.language);
         ConvertIntToDecimalString(1, show->rivalTrainer.dexCount);
-        GetMapName(gStringVar3, show->rivalTrainer.location, 0);
+        CopyMapName(gStringVar3, show->rivalTrainer.location, 0);
         if (show->rivalTrainer.badgeCount != 0)
             sTVShowState = 1;
         else
@@ -5735,7 +5735,7 @@ static void DoTVShowHoennTreasureInvestigators(void)
     case 1:
         StringCopy(gStringVar1, ItemId_GetName(show->treasureInvestigators.item));
         TVShowConvertInternationalString(gStringVar2, show->treasureInvestigators.playerName, show->treasureInvestigators.language);
-        GetMapName(gStringVar3, show->treasureInvestigators.location, 0);
+        CopyMapName(gStringVar3, show->treasureInvestigators.location, 0);
         TVShowDone();
         break;
     case 2:
@@ -5836,7 +5836,7 @@ static void DoTVShowBreakingNewsTV(void)
     case 1:
         TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
         StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
-        GetMapName(gStringVar3, show->breakingNews.location, 0);
+        CopyMapName(gStringVar3, show->breakingNews.location, 0);
         sTVShowState = 2;
         break;
     case 2:
@@ -5852,13 +5852,13 @@ static void DoTVShowBreakingNewsTV(void)
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
-        GetMapName(gStringVar2, show->breakingNews.location, 0);
+        CopyMapName(gStringVar2, show->breakingNews.location, 0);
         TVShowDone();
         break;
     case 5:
         TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
         StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
-        GetMapName(gStringVar3, show->breakingNews.location, 0);
+        CopyMapName(gStringVar3, show->breakingNews.location, 0);
         sTVShowState = 6;
         break;
     case 6:
@@ -5894,14 +5894,14 @@ static void DoTVShowBreakingNewsTV(void)
         break;
     case 8:
         TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
-        GetMapName(gStringVar2, show->breakingNews.location, 0);
+        CopyMapName(gStringVar2, show->breakingNews.location, 0);
         sTVShowState = 11;
         break;
     case 9:
     case 10:
         TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
         StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
-        GetMapName(gStringVar3, show->breakingNews.location, 0);
+        CopyMapName(gStringVar3, show->breakingNews.location, 0);
         sTVShowState = 11;
         break;
     case 11:

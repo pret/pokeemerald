@@ -1231,7 +1231,7 @@ u8 GetPokeblockNameByMonNature(void)
 
 void GetSecretBaseNearbyMapName(void)
 {
-    GetMapName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
+    CopyMapName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
 u16 GetBestBattleTowerStreak(void)
@@ -3416,7 +3416,7 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
 
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
-    GetMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
+    CopyMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
 
     if (abnormalWeather < MARINE_CAVE_LOCATIONS_START)
         return FALSE;

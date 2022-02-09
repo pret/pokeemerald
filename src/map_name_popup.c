@@ -321,7 +321,7 @@ static void ShowMapNamePopUpWindow(void)
     else
     {
         withoutPrefixPtr = &(mapDisplayHeader[3]);
-        GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
+        CopyMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
     }
     AddMapNamePopUpWindow();
     LoadMapNamePopUpWindowBg();

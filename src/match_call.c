@@ -1683,7 +1683,7 @@ static void PopulateTrainerName(int matchCallId, u8 *destStr)
 
 static void PopulateMapName(int matchCallId, u8 *destStr)
 {
-    GetMapName(destStr, GetRematchTrainerLocation(matchCallId), 0);
+    CopyMapName(destStr, GetRematchTrainerLocation(matchCallId), 0);
 }
 
 static u8 GetLandEncounterSlot(void)

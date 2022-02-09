@@ -28,21 +28,21 @@ struct RegionMap {
     /*0x000*/ u16 mapSecId;
     /*0x002*/ u8 mapSecType;
     /*0x003*/ u8 posWithinMapSec;
-    /*0x004*/ u8 mapSecName[20];
+    /*0x004*/ u8 mapSecName[20]; // Only up to 19 is used
     /*0x018*/ u8 (*inputCallback)(void);
     /*0x01c*/ struct Sprite *cursorSprite;
     /*0x020*/ struct Sprite *playerIconSprite;
     /*0x024*/ s32 bg2x;
     /*0x028*/ s32 bg2y;
-    /*0x02c*/ u32 bg2pa;
-    /*0x034*/ u32 bg2pc;
-    /*0x030*/ u32 bg2pb;
-    /*0x038*/ u32 bg2pd;
+    /*0x02c*/ s32 bg2pa;
+    /*0x034*/ s32 bg2pc;
+    /*0x030*/ s32 bg2pb;
+    /*0x038*/ s32 bg2pd;
     /*0x03c*/ s32 unk_03c;
     /*0x040*/ s32 unk_040;
     /*0x044*/ s32 unk_044;
     /*0x048*/ s32 unk_048;
-    /*0x04c*/ s32 unk_04c;
+    /*0x04c*/ s32 zoomRatio;
     /*0x050*/ s32 unk_050;
     /*0x054*/ u16 cursorPosX;
     /*0x056*/ u16 cursorPosY;
@@ -102,7 +102,7 @@ u16 GetRegionMapSecIdAt(u16 x, u16 y);
 void CreateRegionMapPlayerIcon(u16 x, u16 y);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 bool32 IsEventIslandMapSecId(u8 mapSecId);
-u8 *GetMapName(u8 *, u16, u16);
+u8 *CopyMapName(u8 *, u16, u16);
 u8 *GetMapNameGeneric(u8 *dest, u16 mapSecId);
 u8 *GetMapNameHandleAquaHideout(u8 *dest, u16 mapSecId);
 u16 CorrectSpecialMapSecId(u16 mapSecId);
@@ -111,6 +111,8 @@ void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
 void CB2_OpenFlyMap(void);
 bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
+
+// coeff should be u8
 void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
 
