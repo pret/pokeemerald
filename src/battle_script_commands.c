@@ -8657,70 +8657,17 @@ static void Cmd_various(void)
         return;
     case VARIOUS_PSYCHO_SHIFT:
     {
-        u16 targetAbility = GetBattlerAbility(gBattlerTarget);
-        i = TRUE;
-        if (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS)
+        if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS && !CanBeParalyzed(gBattlerTarget))
+          || (gBattleMons[gBattlerAttacker].status1 & STATUS1_PSN_ANY && !CanBePoisoned(gBattlerAttacker, gBattlerTarget))
+          || (gBattleMons[gBattlerAttacker].status1 & STATUS1_BURN && !CanBeBurned(gBattlerTarget))
+          || (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && !CanSleep(gBattlerTarget)))
         {
-            if (!(CanBeParalyzed(gBattlerTarget)))
-            {
-                gBattlerAbility = gBattlerTarget;
-                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                gBattlescriptCurrInstr = BattleScript_PRLZPrevention;
-                i = FALSE;
-            }
-            else
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-            }
+            // fails
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         }
-        else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_PSN_ANY)
+        else
         {
-            if (!CanBePoisoned(gBattlerTarget, targetAbility))
-            {
-                gBattlerAbility = gBattlerTarget;
-                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                gBattlescriptCurrInstr = BattleScript_PSNPrevention;
-                i = FALSE;
-            }
-            else
-            {
-                if (gBattleMons[gBattlerAttacker].status1 & STATUS1_POISON)
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                else
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-            }
-        }
-        else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_BURN)
-        {
-            if (!CanBeBurned(gBattlerTarget))
-            {
-                gBattlerAbility = gBattlerTarget;
-                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                gBattlescriptCurrInstr = BattleScript_BRNPrevention;
-                i = FALSE;
-            }
-            else
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-            }
-        }
-        else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
-        {
-            if (!CanSleep(gBattlerTarget))
-            {
-                gBattlerAbility = gBattlerTarget;
-                // BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
-                // gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-                i = FALSE;
-            }
-            else
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-            }
-        }
-
-        if (i == TRUE)
-        {
+            // Psycho shift works
             gBattleMons[gBattlerTarget].status1 = gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY;
             gActiveBattler = gBattlerTarget;
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
