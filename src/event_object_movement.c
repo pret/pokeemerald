@@ -436,401 +436,348 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_GROUDON                 0x1118
 #define OBJ_EVENT_PAL_TAG_GROUDON_REFLECTION      0x1119
 #define OBJ_EVENT_PAL_TAG_UNUSED                  0x111A
-#define OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW        0x111B
-#define OBJ_EVENT_PAL_TAG_POOCHYENA               0x111C
-#define OBJ_EVENT_PAL_TAG_RED_LEAF                0x111D
-#define OBJ_EVENT_PAL_TAG_DEOXYS                  0x111E
-#define OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE      0x111F
-#define OBJ_EVENT_PAL_TAG_HO_OH                   0x1120
-#define OBJ_EVENT_PAL_TAG_LUGIA                   0x1121
-#define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
-#define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
-#define OBJ_EVENT_PAL_TAG_BULBASAUR               0x1124
-#define OBJ_EVENT_PAL_TAG_IVYSAUR                 0x1125
-#define OBJ_EVENT_PAL_TAG_VENUSAUR                0x1126
-#define OBJ_EVENT_PAL_TAG_CHARMANDER              0x1127
-#define OBJ_EVENT_PAL_TAG_CHARMELEON              0x1128
-#define OBJ_EVENT_PAL_TAG_CHARIZARD               0x1129
-#define OBJ_EVENT_PAL_TAG_SQUIRTLE                0x112A
-#define OBJ_EVENT_PAL_TAG_WARTORTLE               0x112B
-#define OBJ_EVENT_PAL_TAG_BLASTOISE               0x112C
-#define OBJ_EVENT_PAL_TAG_CATERPIE                0x112D
-#define OBJ_EVENT_PAL_TAG_METAPOD                 0x112E
-#define OBJ_EVENT_PAL_TAG_BUTTERFREE              0x112F
-#define OBJ_EVENT_PAL_TAG_WEEDLE                  0x1130
-#define OBJ_EVENT_PAL_TAG_KAKUNA                  0x1131
-#define OBJ_EVENT_PAL_TAG_BEEDRILL                0x1132
-#define OBJ_EVENT_PAL_TAG_PIDGEY                  0x1133
-#define OBJ_EVENT_PAL_TAG_PIDGEOTTO               0x1134
-#define OBJ_EVENT_PAL_TAG_PIDGEOT                 0x1135
-#define OBJ_EVENT_PAL_TAG_RATTATA                 0x1136
-#define OBJ_EVENT_PAL_TAG_RATICATE                0x1137
-#define OBJ_EVENT_PAL_TAG_SPEAROW                 0x1138
-#define OBJ_EVENT_PAL_TAG_FEAROW                  0x1139
-#define OBJ_EVENT_PAL_TAG_EKANS                   0x113A
-#define OBJ_EVENT_PAL_TAG_ARBOK                   0x113B
-#define OBJ_EVENT_PAL_TAG_PIKACHU                 0x113C
-#define OBJ_EVENT_PAL_TAG_RAICHU                  0x113D
-#define OBJ_EVENT_PAL_TAG_SANDSHREW               0x113E
-#define OBJ_EVENT_PAL_TAG_SANDSLASH               0x113F
-#define OBJ_EVENT_PAL_TAG_NIDORAN_F               0x1140
-#define OBJ_EVENT_PAL_TAG_NIDORINA                0x1141
-#define OBJ_EVENT_PAL_TAG_NIDOQUEEN               0x1142
-#define OBJ_EVENT_PAL_TAG_NIDORAN_M               0x1143
-#define OBJ_EVENT_PAL_TAG_NIDORINO                0x1144
-#define OBJ_EVENT_PAL_TAG_NIDOKING                0x1145
-#define OBJ_EVENT_PAL_TAG_CLEFAIRY                0x1146
-#define OBJ_EVENT_PAL_TAG_CLEFABLE                0x1147
-#define OBJ_EVENT_PAL_TAG_VULPIX                  0x1148
-#define OBJ_EVENT_PAL_TAG_NINETALES               0x1149
-#define OBJ_EVENT_PAL_TAG_JIGGLYPUFF              0x114A
-#define OBJ_EVENT_PAL_TAG_WIGGLYTUFF              0x114B
-#define OBJ_EVENT_PAL_TAG_ZUBAT                   0x114C
-#define OBJ_EVENT_PAL_TAG_GOLBAT                  0x114D
-#define OBJ_EVENT_PAL_TAG_ODDISH                  0x114E
-#define OBJ_EVENT_PAL_TAG_GLOOM                   0x114F
-#define OBJ_EVENT_PAL_TAG_VILEPLUME               0x1150
-#define OBJ_EVENT_PAL_TAG_PARAS                   0x1151
-#define OBJ_EVENT_PAL_TAG_PARASECT                0x1152
-#define OBJ_EVENT_PAL_TAG_VENONAT                 0x1153
-#define OBJ_EVENT_PAL_TAG_VENOMOTH                0x1154
-#define OBJ_EVENT_PAL_TAG_DIGLETT                 0x1155
-#define OBJ_EVENT_PAL_TAG_DUGTRIO                 0x1156
-#define OBJ_EVENT_PAL_TAG_MEOWTH                  0x1157
-#define OBJ_EVENT_PAL_TAG_PERSIAN                 0x1158
-#define OBJ_EVENT_PAL_TAG_PSYDUCK                 0x1159
-#define OBJ_EVENT_PAL_TAG_GOLDUCK                 0x115A
-#define OBJ_EVENT_PAL_TAG_MANKEY                  0x115B
-#define OBJ_EVENT_PAL_TAG_PRIMEAPE                0x115C
-#define OBJ_EVENT_PAL_TAG_GROWLITHE               0x115D
-#define OBJ_EVENT_PAL_TAG_ARCANINE                0x115E
-#define OBJ_EVENT_PAL_TAG_POLIWAG                 0x115F
-#define OBJ_EVENT_PAL_TAG_POLIWHIRL               0x1160
-#define OBJ_EVENT_PAL_TAG_POLIWRATH               0x1161
-#define OBJ_EVENT_PAL_TAG_ABRA                    0x1162
-#define OBJ_EVENT_PAL_TAG_KADABRA                 0x1163
-#define OBJ_EVENT_PAL_TAG_ALAKAZAM                0x1164
-#define OBJ_EVENT_PAL_TAG_MACHOP                  0x1165
-#define OBJ_EVENT_PAL_TAG_MACHOKE                 0x1166
-#define OBJ_EVENT_PAL_TAG_MACHAMP                 0x1167
-#define OBJ_EVENT_PAL_TAG_BELLSPROUT              0x1168
-#define OBJ_EVENT_PAL_TAG_WEEPINBELL              0x1169
-#define OBJ_EVENT_PAL_TAG_VICTREEBEL              0x116A
-#define OBJ_EVENT_PAL_TAG_TENTACOOL               0x116B
-#define OBJ_EVENT_PAL_TAG_TENTACRUEL              0x116C
-#define OBJ_EVENT_PAL_TAG_GEODUDE                 0x116D
-#define OBJ_EVENT_PAL_TAG_GRAVELER                0x116E
-#define OBJ_EVENT_PAL_TAG_GOLEM                   0x116F
-#define OBJ_EVENT_PAL_TAG_PONYTA                  0x1170
-#define OBJ_EVENT_PAL_TAG_RAPIDASH                0x1171
-#define OBJ_EVENT_PAL_TAG_SLOWPOKE                0x1172
-#define OBJ_EVENT_PAL_TAG_SLOWBRO                 0x1173
-#define OBJ_EVENT_PAL_TAG_MAGNEMITE               0x1174
-#define OBJ_EVENT_PAL_TAG_MAGNETON                0x1175
-#define OBJ_EVENT_PAL_TAG_FARFETCHD               0x1176
-#define OBJ_EVENT_PAL_TAG_DODUO                   0x1177
-#define OBJ_EVENT_PAL_TAG_DODRIO                  0x1178
-#define OBJ_EVENT_PAL_TAG_SEEL                    0x1179
-#define OBJ_EVENT_PAL_TAG_DEWGONG                 0x117A
-#define OBJ_EVENT_PAL_TAG_GRIMER                  0x117B
-#define OBJ_EVENT_PAL_TAG_MUK                     0x117C
-#define OBJ_EVENT_PAL_TAG_SHELLDER                0x117D
-#define OBJ_EVENT_PAL_TAG_CLOYSTER                0x117E
-#define OBJ_EVENT_PAL_TAG_GASTLY                  0x117F
-#define OBJ_EVENT_PAL_TAG_HAUNTER                 0x1180
-#define OBJ_EVENT_PAL_TAG_GENGAR                  0x1181
-#define OBJ_EVENT_PAL_TAG_ONIX                    0x1182
-#define OBJ_EVENT_PAL_TAG_DROWZEE                 0x1183
-#define OBJ_EVENT_PAL_TAG_HYPNO                   0x1184
-#define OBJ_EVENT_PAL_TAG_KRABBY                  0x1185
-#define OBJ_EVENT_PAL_TAG_KINGLER                 0x1186
-#define OBJ_EVENT_PAL_TAG_VOLTORB                 0x1187
-#define OBJ_EVENT_PAL_TAG_ELECTRODE               0x1188
-#define OBJ_EVENT_PAL_TAG_EXEGGCUTE               0x1189
-#define OBJ_EVENT_PAL_TAG_EXEGGUTOR               0x118A
-#define OBJ_EVENT_PAL_TAG_CUBONE                  0x118B
-#define OBJ_EVENT_PAL_TAG_MAROWAK                 0x118C
-#define OBJ_EVENT_PAL_TAG_HITMONLEE               0x118D
-#define OBJ_EVENT_PAL_TAG_HITMONCHAN              0x118E
-#define OBJ_EVENT_PAL_TAG_LICKITUNG               0x118F
-#define OBJ_EVENT_PAL_TAG_KOFFING                 0x1190
-#define OBJ_EVENT_PAL_TAG_WEEZING                 0x1191
-#define OBJ_EVENT_PAL_TAG_RHYHORN                 0x1192
-#define OBJ_EVENT_PAL_TAG_RHYDON                  0x1193
-#define OBJ_EVENT_PAL_TAG_CHANSEY                 0x1194
-#define OBJ_EVENT_PAL_TAG_TANGELA                 0x1195
-#define OBJ_EVENT_PAL_TAG_KANGASKHAN              0x1196
-#define OBJ_EVENT_PAL_TAG_HORSEA                  0x1197
-#define OBJ_EVENT_PAL_TAG_SEADRA                  0x1198
-#define OBJ_EVENT_PAL_TAG_GOLDEEN                 0x1199
-#define OBJ_EVENT_PAL_TAG_SEAKING                 0x119A
-#define OBJ_EVENT_PAL_TAG_STARYU                  0x119B
-#define OBJ_EVENT_PAL_TAG_STARMIE                 0x119C
-#define OBJ_EVENT_PAL_TAG_MR_MIME                 0x119D
-#define OBJ_EVENT_PAL_TAG_SCYTHER                 0x119E
-#define OBJ_EVENT_PAL_TAG_JYNX                    0x119F
-#define OBJ_EVENT_PAL_TAG_ELECTABUZZ              0x11A0
-#define OBJ_EVENT_PAL_TAG_MAGMAR                  0x11A1
-#define OBJ_EVENT_PAL_TAG_PINSIR                  0x11A2
-#define OBJ_EVENT_PAL_TAG_TAUROS                  0x11A3
-#define OBJ_EVENT_PAL_TAG_MAGIKARP                0x11A4
-#define OBJ_EVENT_PAL_TAG_GYARADOS                0x11A5
-#define OBJ_EVENT_PAL_TAG_LAPRAS                  0x11A6
-#define OBJ_EVENT_PAL_TAG_DITTO                   0x11A7
-#define OBJ_EVENT_PAL_TAG_EEVEE                   0x11A8
-#define OBJ_EVENT_PAL_TAG_VAPOREON                0x11A9
-#define OBJ_EVENT_PAL_TAG_JOLTEON                 0x11AA
-#define OBJ_EVENT_PAL_TAG_FLAREON                 0x11AB
-#define OBJ_EVENT_PAL_TAG_PORYGON                 0x11AC
-#define OBJ_EVENT_PAL_TAG_OMANYTE                 0x11AD
-#define OBJ_EVENT_PAL_TAG_OMASTAR                 0x11AE
-#define OBJ_EVENT_PAL_TAG_KABUTO                  0x11AF
-#define OBJ_EVENT_PAL_TAG_KABUTOPS                0x11B0
-#define OBJ_EVENT_PAL_TAG_AERODACTYL              0x11B1
-#define OBJ_EVENT_PAL_TAG_SNORLAX                 0x11B2
-#define OBJ_EVENT_PAL_TAG_ARTICUNO                0x11B3
-#define OBJ_EVENT_PAL_TAG_ZAPDOS                  0x11B4
-#define OBJ_EVENT_PAL_TAG_MOLTRES                 0x11B5
-#define OBJ_EVENT_PAL_TAG_DRATINI                 0x11B6
-#define OBJ_EVENT_PAL_TAG_DRAGONAIR               0x11B7
-#define OBJ_EVENT_PAL_TAG_DRAGONITE               0x11B8
-#define OBJ_EVENT_PAL_TAG_MEWTWO                  0x11B9
-#define OBJ_EVENT_PAL_TAG_MEW                     0x11BA
-#define OBJ_EVENT_PAL_TAG_CHIKORITA               0x11BB
-#define OBJ_EVENT_PAL_TAG_BAYLEEF                 0x11BC
-#define OBJ_EVENT_PAL_TAG_MEGANIUM                0x11BD
-#define OBJ_EVENT_PAL_TAG_CYNDAQUIL               0x11BE
-#define OBJ_EVENT_PAL_TAG_QUILAVA                 0x11BF
-#define OBJ_EVENT_PAL_TAG_TYPHLOSION              0x11C0
-#define OBJ_EVENT_PAL_TAG_TOTODILE                0x11C1
-#define OBJ_EVENT_PAL_TAG_CROCONAW                0x11C2
-#define OBJ_EVENT_PAL_TAG_FERALIGATR              0x11C3
-#define OBJ_EVENT_PAL_TAG_SENTRET                 0x11C4
-#define OBJ_EVENT_PAL_TAG_FURRET                  0x11C5
-#define OBJ_EVENT_PAL_TAG_HOOTHOOT                0x11C6
-#define OBJ_EVENT_PAL_TAG_NOCTOWL                 0x11C7
-#define OBJ_EVENT_PAL_TAG_LEDYBA                  0x11C8
-#define OBJ_EVENT_PAL_TAG_LEDIAN                  0x11C9
-#define OBJ_EVENT_PAL_TAG_SPINARAK                0x11CA
-#define OBJ_EVENT_PAL_TAG_ARIADOS                 0x11CB
-#define OBJ_EVENT_PAL_TAG_CROBAT                  0x11CC
-#define OBJ_EVENT_PAL_TAG_CHINCHOU                0x11CD
-#define OBJ_EVENT_PAL_TAG_LANTURN                 0x11CE
-#define OBJ_EVENT_PAL_TAG_PICHU                   0x11CF
-#define OBJ_EVENT_PAL_TAG_CLEFFA                  0x11D0
-#define OBJ_EVENT_PAL_TAG_IGGLYBUFF               0x11D1
-#define OBJ_EVENT_PAL_TAG_TOGEPI                  0x11D2
-#define OBJ_EVENT_PAL_TAG_TOGETIC                 0x11D3
-#define OBJ_EVENT_PAL_TAG_NATU                    0x11D4
-#define OBJ_EVENT_PAL_TAG_XATU                    0x11D5
-#define OBJ_EVENT_PAL_TAG_MAREEP                  0x11D6
-#define OBJ_EVENT_PAL_TAG_FLAAFFY                 0x11D7
-#define OBJ_EVENT_PAL_TAG_AMPHAROS                0x11D8
-#define OBJ_EVENT_PAL_TAG_BELLOSSOM               0x11D9
-#define OBJ_EVENT_PAL_TAG_MARILL                  0x11DA
-#define OBJ_EVENT_PAL_TAG_AZUMARILL               0x11DB
-#define OBJ_EVENT_PAL_TAG_SUDOWOODO               0x11DC
-#define OBJ_EVENT_PAL_TAG_POLITOED                0x11DD
-#define OBJ_EVENT_PAL_TAG_HOPPIP                  0x11DE
-#define OBJ_EVENT_PAL_TAG_SKIPLOOM                0x11DF
-#define OBJ_EVENT_PAL_TAG_JUMPLUFF                0x11E0
-#define OBJ_EVENT_PAL_TAG_AIPOM                   0x11E1
-#define OBJ_EVENT_PAL_TAG_SUNKERN                 0x11E2
-#define OBJ_EVENT_PAL_TAG_SUNFLORA                0x11E3
-#define OBJ_EVENT_PAL_TAG_YANMA                   0x11E4
-#define OBJ_EVENT_PAL_TAG_WOOPER                  0x11E5
-#define OBJ_EVENT_PAL_TAG_QUAGSIRE                0x11E6
-#define OBJ_EVENT_PAL_TAG_ESPEON                  0x11E7
-#define OBJ_EVENT_PAL_TAG_UMBREON                 0x11E8
-#define OBJ_EVENT_PAL_TAG_MURKROW                 0x11E9
-#define OBJ_EVENT_PAL_TAG_SLOWKING                0x11EA
-#define OBJ_EVENT_PAL_TAG_MISDREAVUS              0x11EB
-#define OBJ_EVENT_PAL_TAG_UNOWN                   0x11EC
-#define OBJ_EVENT_PAL_TAG_WOBBUFFET               0x11ED
-#define OBJ_EVENT_PAL_TAG_GIRAFARIG               0x11EE
-#define OBJ_EVENT_PAL_TAG_PINECO                  0x11EF
-#define OBJ_EVENT_PAL_TAG_FORRETRESS              0x11F0
-#define OBJ_EVENT_PAL_TAG_DUNSPARCE               0x11F1
-#define OBJ_EVENT_PAL_TAG_GLIGAR                  0x11F2
-#define OBJ_EVENT_PAL_TAG_STEELIX                 0x11F3
-#define OBJ_EVENT_PAL_TAG_SNUBBULL                0x11F4
-#define OBJ_EVENT_PAL_TAG_GRANBULL                0x11F5
-#define OBJ_EVENT_PAL_TAG_QWILFISH                0x11F6
-#define OBJ_EVENT_PAL_TAG_SCIZOR                  0x11F7
-#define OBJ_EVENT_PAL_TAG_SHUCKLE                 0x11F8
-#define OBJ_EVENT_PAL_TAG_HERACROSS               0x11F9
-#define OBJ_EVENT_PAL_TAG_SNEASEL                 0x11FA
-#define OBJ_EVENT_PAL_TAG_TEDDIURSA               0x11FB
-#define OBJ_EVENT_PAL_TAG_URSARING                0x11FC
-#define OBJ_EVENT_PAL_TAG_SLUGMA                  0x11FD
-#define OBJ_EVENT_PAL_TAG_MAGCARGO                0x11FE
-#define OBJ_EVENT_PAL_TAG_SWINUB                  0x10FF
-#define OBJ_EVENT_PAL_TAG_PILOSWINE               0x10FE
-#define OBJ_EVENT_PAL_TAG_CORSOLA                 0x10FD
-#define OBJ_EVENT_PAL_TAG_REMORAID                0x10FC
-#define OBJ_EVENT_PAL_TAG_OCTILLERY               0x10FB
-#define OBJ_EVENT_PAL_TAG_DELIBIRD                0x10FA
-#define OBJ_EVENT_PAL_TAG_MANTINE                 0x10F9
-#define OBJ_EVENT_PAL_TAG_SKARMORY                0x10F8
-#define OBJ_EVENT_PAL_TAG_HOUNDOUR                0x10F7
-#define OBJ_EVENT_PAL_TAG_HOUNDOOM                0x10F6
-#define OBJ_EVENT_PAL_TAG_KINGDRA                 0x10F5
-#define OBJ_EVENT_PAL_TAG_PHANPY                  0x10F4
-#define OBJ_EVENT_PAL_TAG_DONPHAN                 0x10F3
-#define OBJ_EVENT_PAL_TAG_PORYGON2                0x10F2
-#define OBJ_EVENT_PAL_TAG_STANTLER                0x10F1
-#define OBJ_EVENT_PAL_TAG_SMEARGLE                0x10F0
-#define OBJ_EVENT_PAL_TAG_TYROGUE                 0x10EF
-#define OBJ_EVENT_PAL_TAG_HITMONTOP               0x10EE
-#define OBJ_EVENT_PAL_TAG_SMOOCHUM                0x10ED
-#define OBJ_EVENT_PAL_TAG_ELEKID                  0x10EC
-#define OBJ_EVENT_PAL_TAG_MAGBY                   0x10EB
-#define OBJ_EVENT_PAL_TAG_MILTANK                 0x10EA
-#define OBJ_EVENT_PAL_TAG_BLISSEY                 0x10E9
-#define OBJ_EVENT_PAL_TAG_RAIKOU                  0x10E8
-#define OBJ_EVENT_PAL_TAG_ENTEI                   0x10E7
-#define OBJ_EVENT_PAL_TAG_SUICUNE                 0x10E6
-#define OBJ_EVENT_PAL_TAG_LARVITAR                0x10E5
-#define OBJ_EVENT_PAL_TAG_PUPITAR                 0x10E4
-#define OBJ_EVENT_PAL_TAG_TYRANITAR               0x10E3
-#define OBJ_EVENT_PAL_TAG_LUGIA_FOLLOWER          0x10E2
-#define OBJ_EVENT_PAL_TAG_HO_OH_FOLLOWER          0x10E1
-#define OBJ_EVENT_PAL_TAG_CELEBI                  0x10E0
-#define OBJ_EVENT_PAL_TAG_TREECKO                 0x10DF
-#define OBJ_EVENT_PAL_TAG_GROVYLE                 0x10DE
-#define OBJ_EVENT_PAL_TAG_SCEPTILE                0x10DD
-#define OBJ_EVENT_PAL_TAG_TORCHIC                 0x10DC
-#define OBJ_EVENT_PAL_TAG_COMBUSKEN               0x10DB
-#define OBJ_EVENT_PAL_TAG_BLAZIKEN                0x10DA
-#define OBJ_EVENT_PAL_TAG_MUDKIP                  0x10D9
-#define OBJ_EVENT_PAL_TAG_MARSHTOMP               0x10D8
-#define OBJ_EVENT_PAL_TAG_SWAMPERT                0x10D7
-#define OBJ_EVENT_PAL_TAG_POOCHYENA_FOLLOWER      0x10D6
-#define OBJ_EVENT_PAL_TAG_MIGHTYENA               0x10D5
-#define OBJ_EVENT_PAL_TAG_ZIGZAGOON_FOLLOWER      0x10D4
-#define OBJ_EVENT_PAL_TAG_LINOONE                 0x10D3
-#define OBJ_EVENT_PAL_TAG_WURMPLE                 0x10D2
-#define OBJ_EVENT_PAL_TAG_SILCOON                 0x10D1
-#define OBJ_EVENT_PAL_TAG_BEAUTIFLY               0x10D0
-#define OBJ_EVENT_PAL_TAG_CASCOON                 0x10CF
-#define OBJ_EVENT_PAL_TAG_DUSTOX                  0x10CE
-#define OBJ_EVENT_PAL_TAG_LOTAD                   0x10CD
-#define OBJ_EVENT_PAL_TAG_LOMBRE                  0x10CC
-#define OBJ_EVENT_PAL_TAG_LUDICOLO                0x10CB
-#define OBJ_EVENT_PAL_TAG_SEEDOT                  0x10CA
-#define OBJ_EVENT_PAL_TAG_NUZLEAF                 0x10C9
-#define OBJ_EVENT_PAL_TAG_SHIFTRY                 0x10C8
-#define OBJ_EVENT_PAL_TAG_TAILLOW                 0x10C7
-#define OBJ_EVENT_PAL_TAG_SWELLOW                 0x10C6
-#define OBJ_EVENT_PAL_TAG_WINGULL                 0x10C5
-#define OBJ_EVENT_PAL_TAG_PELIPPER                0x10C4
-#define OBJ_EVENT_PAL_TAG_RALTS                   0x10C3
-#define OBJ_EVENT_PAL_TAG_KIRLIA                  0x10C2
-#define OBJ_EVENT_PAL_TAG_GARDEVOIR               0x10C1
-#define OBJ_EVENT_PAL_TAG_SURSKIT                 0x10C0
-#define OBJ_EVENT_PAL_TAG_MASQUERAIN              0x10BF
-#define OBJ_EVENT_PAL_TAG_SHROOMISH               0x10BE
-#define OBJ_EVENT_PAL_TAG_BRELOOM                 0x10BD
-#define OBJ_EVENT_PAL_TAG_SLAKOTH                 0x10BC
-#define OBJ_EVENT_PAL_TAG_VIGOROTH_FOLLOWER       0x10BB
-#define OBJ_EVENT_PAL_TAG_SLAKING                 0x10BA
-#define OBJ_EVENT_PAL_TAG_NINCADA                 0x10B9
-#define OBJ_EVENT_PAL_TAG_NINJASK                 0x10B8
-#define OBJ_EVENT_PAL_TAG_SHEDINJA                0x10B7
-#define OBJ_EVENT_PAL_TAG_WHISMUR                 0x10B6
-#define OBJ_EVENT_PAL_TAG_LOUDRED                 0x10B5
-#define OBJ_EVENT_PAL_TAG_EXPLOUD                 0x10B4
-#define OBJ_EVENT_PAL_TAG_MAKUHITA                0x10B3
-#define OBJ_EVENT_PAL_TAG_HARIYAMA                0x10B2
-#define OBJ_EVENT_PAL_TAG_AZURILL_FOLLOWER        0x10B1
-#define OBJ_EVENT_PAL_TAG_NOSEPASS                0x10B0
-#define OBJ_EVENT_PAL_TAG_SKITTY_FOLLOWER         0x10AF
-#define OBJ_EVENT_PAL_TAG_DELCATTY                0x10AE
-#define OBJ_EVENT_PAL_TAG_SABLEYE                 0x10AD
-#define OBJ_EVENT_PAL_TAG_MAWILE                  0x10AC
-#define OBJ_EVENT_PAL_TAG_ARON                    0x10AB
-#define OBJ_EVENT_PAL_TAG_LAIRON                  0x10AA
-#define OBJ_EVENT_PAL_TAG_AGGRON                  0x10A9
-#define OBJ_EVENT_PAL_TAG_MEDITITE                0x10A8
-#define OBJ_EVENT_PAL_TAG_MEDICHAM                0x10A7
-#define OBJ_EVENT_PAL_TAG_ELECTRIKE               0x10A6
-#define OBJ_EVENT_PAL_TAG_MANECTRIC               0x10A5
-#define OBJ_EVENT_PAL_TAG_PLUSLE                  0x10A4
-#define OBJ_EVENT_PAL_TAG_MINUN                   0x10A3
-#define OBJ_EVENT_PAL_TAG_VOLBEAT                 0x10A2
-#define OBJ_EVENT_PAL_TAG_ILLUMISE                0x10A1
-#define OBJ_EVENT_PAL_TAG_ROSELIA                 0x10A0
-#define OBJ_EVENT_PAL_TAG_GULPIN                  0x109F
-#define OBJ_EVENT_PAL_TAG_SWALOT                  0x109E
-#define OBJ_EVENT_PAL_TAG_CARVANHA                0x109D
-#define OBJ_EVENT_PAL_TAG_SHARPEDO                0x109C
-#define OBJ_EVENT_PAL_TAG_WAILMER                 0x109B
-#define OBJ_EVENT_PAL_TAG_WAILORD                 0x109A
-#define OBJ_EVENT_PAL_TAG_NUMEL                   0x1099
-#define OBJ_EVENT_PAL_TAG_CAMERUPT                0x1098
-#define OBJ_EVENT_PAL_TAG_TORKOAL                 0x1097
-#define OBJ_EVENT_PAL_TAG_SPOINK                  0x1096
-#define OBJ_EVENT_PAL_TAG_GRUMPIG                 0x1095
-#define OBJ_EVENT_PAL_TAG_SPINDA                  0x1094
-#define OBJ_EVENT_PAL_TAG_TRAPINCH                0x1093
-#define OBJ_EVENT_PAL_TAG_VIBRAVA                 0x1092
-#define OBJ_EVENT_PAL_TAG_FLYGON                  0x1091
-#define OBJ_EVENT_PAL_TAG_CACNEA                  0x1090
-#define OBJ_EVENT_PAL_TAG_CACTURNE                0x108F
-#define OBJ_EVENT_PAL_TAG_SWABLU                  0x108E
-#define OBJ_EVENT_PAL_TAG_ALTARIA                 0x108D
-#define OBJ_EVENT_PAL_TAG_ZANGOOSE                0x108C
-#define OBJ_EVENT_PAL_TAG_SEVIPER                 0x108B
-#define OBJ_EVENT_PAL_TAG_LUNATONE                0x108A
-#define OBJ_EVENT_PAL_TAG_SOLROCK                 0x1089
-#define OBJ_EVENT_PAL_TAG_BARBOACH                0x1088
-#define OBJ_EVENT_PAL_TAG_WHISCASH                0x1087
-#define OBJ_EVENT_PAL_TAG_CORPHISH                0x1086
-#define OBJ_EVENT_PAL_TAG_CRAWDAUNT               0x1085
-#define OBJ_EVENT_PAL_TAG_BALTOY                  0x1084
-#define OBJ_EVENT_PAL_TAG_CLAYDOL                 0x1083
-#define OBJ_EVENT_PAL_TAG_LILEEP                  0x1082
-#define OBJ_EVENT_PAL_TAG_CRADILY                 0x1081
-#define OBJ_EVENT_PAL_TAG_ANORITH                 0x1080
-#define OBJ_EVENT_PAL_TAG_ARMALDO                 0x107F
-#define OBJ_EVENT_PAL_TAG_FEEBAS                  0x107E
-#define OBJ_EVENT_PAL_TAG_MILOTIC                 0x107D
-#define OBJ_EVENT_PAL_TAG_CASTFORM                0x107C
-#define OBJ_EVENT_PAL_TAG_KECLEON                 0x107B
-#define OBJ_EVENT_PAL_TAG_SHUPPET                 0x107A
-#define OBJ_EVENT_PAL_TAG_BANETTE                 0x1079
-#define OBJ_EVENT_PAL_TAG_DUSKULL                 0x1078
-#define OBJ_EVENT_PAL_TAG_DUSCLOPS                0x1077
-#define OBJ_EVENT_PAL_TAG_TROPIUS                 0x1076
-#define OBJ_EVENT_PAL_TAG_CHIMECHO                0x1075
-#define OBJ_EVENT_PAL_TAG_ABSOL                   0x1074
-#define OBJ_EVENT_PAL_TAG_WYNAUT                  0x1073
-#define OBJ_EVENT_PAL_TAG_SNORUNT                 0x1072
-#define OBJ_EVENT_PAL_TAG_GLALIE                  0x1071
-#define OBJ_EVENT_PAL_TAG_SPHEAL                  0x1070
-#define OBJ_EVENT_PAL_TAG_SEALEO                  0x106F
-#define OBJ_EVENT_PAL_TAG_WALREIN                 0x106E
-#define OBJ_EVENT_PAL_TAG_CLAMPERL                0x106D
-#define OBJ_EVENT_PAL_TAG_HUNTAIL                 0x106C
-#define OBJ_EVENT_PAL_TAG_GOREBYSS                0x106B
-#define OBJ_EVENT_PAL_TAG_RELICANTH               0x106A
-#define OBJ_EVENT_PAL_TAG_LUVDISC                 0x1069
-#define OBJ_EVENT_PAL_TAG_BAGON                   0x1068
-#define OBJ_EVENT_PAL_TAG_SHELGON                 0x1067
-#define OBJ_EVENT_PAL_TAG_SALAMENCE               0x1066
-#define OBJ_EVENT_PAL_TAG_BELDUM                  0x1065
-#define OBJ_EVENT_PAL_TAG_METANG                  0x1064
-#define OBJ_EVENT_PAL_TAG_METAGROSS               0x1063
-#define OBJ_EVENT_PAL_TAG_REGIROCK                0x1062
-#define OBJ_EVENT_PAL_TAG_REGICE                  0x1061
-#define OBJ_EVENT_PAL_TAG_REGISTEEL               0x1060
-#define OBJ_EVENT_PAL_TAG_LATIAS                  0x105F
-#define OBJ_EVENT_PAL_TAG_LATIOS                  0x105E
-#define OBJ_EVENT_PAL_TAG_KYOGRE_FOLLOWER         0x105D
-#define OBJ_EVENT_PAL_TAG_GROUDON_FOLLOWER        0x105C
-#define OBJ_EVENT_PAL_TAG_RAYQUAZA                0x105B
-#define OBJ_EVENT_PAL_TAG_JIRACHI                 0x105A
-#define OBJ_EVENT_PAL_TAG_DEOXYS_FOLLOWER         0x1059
+#define OBJ_EVENT_PAL_TAG_POOCHYENA               0x111B
+#define OBJ_EVENT_PAL_TAG_RED_LEAF                0x111C
+#define OBJ_EVENT_PAL_TAG_DEOXYS                  0x111D
+#define OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE      0x111E
+#define OBJ_EVENT_PAL_TAG_HO_OH                   0x111F
+#define OBJ_EVENT_PAL_TAG_LUGIA                   0x1120
+#define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1121
+#define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1122
+#define OBJ_EVENT_PAL_TAG_BULBASAUR               0x1123
+#define OBJ_EVENT_PAL_TAG_IVYSAUR                 0x1124
+#define OBJ_EVENT_PAL_TAG_VENUSAUR                0x1125
+#define OBJ_EVENT_PAL_TAG_CHARMANDER              0x1126
+#define OBJ_EVENT_PAL_TAG_CHARMELEON              0x1127
+#define OBJ_EVENT_PAL_TAG_CHARIZARD               0x1128
+#define OBJ_EVENT_PAL_TAG_SQUIRTLE                0x1129
+#define OBJ_EVENT_PAL_TAG_WARTORTLE               0x112A
+#define OBJ_EVENT_PAL_TAG_BLASTOISE               0x112B
+#define OBJ_EVENT_PAL_TAG_CATERPIE                0x112C
+#define OBJ_EVENT_PAL_TAG_BUTTERFREE              0x112D
+#define OBJ_EVENT_PAL_TAG_WEEDLE                  0x112E
+#define OBJ_EVENT_PAL_TAG_BEEDRILL                0x112F
+#define OBJ_EVENT_PAL_TAG_PIDGEY                  0x1130
+#define OBJ_EVENT_PAL_TAG_PIDGEOTTO               0x1131
+#define OBJ_EVENT_PAL_TAG_PIDGEOT                 0x1132
+#define OBJ_EVENT_PAL_TAG_RATTATA                 0x1133
+#define OBJ_EVENT_PAL_TAG_RATICATE                0x1134
+#define OBJ_EVENT_PAL_TAG_SPEAROW                 0x1135
+#define OBJ_EVENT_PAL_TAG_FEAROW                  0x1136
+#define OBJ_EVENT_PAL_TAG_EKANS                   0x1137
+#define OBJ_EVENT_PAL_TAG_ARBOK                   0x1138
+#define OBJ_EVENT_PAL_TAG_PIKACHU                 0x1139
+#define OBJ_EVENT_PAL_TAG_RAICHU                  0x113A
+#define OBJ_EVENT_PAL_TAG_SANDSHREW               0x113B
+#define OBJ_EVENT_PAL_TAG_SANDSLASH               0x113C
+#define OBJ_EVENT_PAL_TAG_NIDORAN_F               0x113D
+#define OBJ_EVENT_PAL_TAG_NIDORINA                0x113E
+#define OBJ_EVENT_PAL_TAG_NIDOQUEEN               0x113F
+#define OBJ_EVENT_PAL_TAG_NIDORAN_M               0x1140
+#define OBJ_EVENT_PAL_TAG_NIDOKING                0x1141
+#define OBJ_EVENT_PAL_TAG_CLEFABLE                0x1142
+#define OBJ_EVENT_PAL_TAG_VULPIX                  0x1143
+#define OBJ_EVENT_PAL_TAG_NINETALES               0x1144
+#define OBJ_EVENT_PAL_TAG_JIGGLYPUFF              0x1145
+#define OBJ_EVENT_PAL_TAG_WIGGLYTUFF              0x1146
+#define OBJ_EVENT_PAL_TAG_GOLBAT                  0x1147
+#define OBJ_EVENT_PAL_TAG_GLOOM                   0x1148
+#define OBJ_EVENT_PAL_TAG_PARAS                   0x1149
+#define OBJ_EVENT_PAL_TAG_VENONAT                 0x114A
+#define OBJ_EVENT_PAL_TAG_VENOMOTH                0x114B
+#define OBJ_EVENT_PAL_TAG_DIGLETT                 0x114C
+#define OBJ_EVENT_PAL_TAG_DUGTRIO                 0x114D
+#define OBJ_EVENT_PAL_TAG_MEOWTH                  0x114E
+#define OBJ_EVENT_PAL_TAG_PERSIAN                 0x114F
+#define OBJ_EVENT_PAL_TAG_GOLDUCK                 0x1150
+#define OBJ_EVENT_PAL_TAG_MANKEY                  0x1151
+#define OBJ_EVENT_PAL_TAG_PRIMEAPE                0x1152
+#define OBJ_EVENT_PAL_TAG_ARCANINE                0x1153
+#define OBJ_EVENT_PAL_TAG_POLIWAG                 0x1154
+#define OBJ_EVENT_PAL_TAG_POLIWHIRL               0x1155
+#define OBJ_EVENT_PAL_TAG_KADABRA                 0x1156
+#define OBJ_EVENT_PAL_TAG_MACHOP                  0x1157
+#define OBJ_EVENT_PAL_TAG_MACHOKE                 0x1158
+#define OBJ_EVENT_PAL_TAG_MACHAMP                 0x1159
+#define OBJ_EVENT_PAL_TAG_WEEPINBELL              0x115A
+#define OBJ_EVENT_PAL_TAG_VICTREEBEL              0x115B
+#define OBJ_EVENT_PAL_TAG_TENTACOOL               0x115C
+#define OBJ_EVENT_PAL_TAG_TENTACRUEL              0x115D
+#define OBJ_EVENT_PAL_TAG_GRAVELER                0x115E
+#define OBJ_EVENT_PAL_TAG_GOLEM                   0x115F
+#define OBJ_EVENT_PAL_TAG_PONYTA                  0x1160
+#define OBJ_EVENT_PAL_TAG_SLOWPOKE                0x1161
+#define OBJ_EVENT_PAL_TAG_SLOWBRO                 0x1162
+#define OBJ_EVENT_PAL_TAG_MAGNEMITE               0x1163
+#define OBJ_EVENT_PAL_TAG_FARFETCHD               0x1164
+#define OBJ_EVENT_PAL_TAG_DODUO                   0x1165
+#define OBJ_EVENT_PAL_TAG_DODRIO                  0x1166
+#define OBJ_EVENT_PAL_TAG_SEEL                    0x1167
+#define OBJ_EVENT_PAL_TAG_MUK                     0x1168
+#define OBJ_EVENT_PAL_TAG_SHELLDER                0x1169
+#define OBJ_EVENT_PAL_TAG_CLOYSTER                0x116A
+#define OBJ_EVENT_PAL_TAG_GASTLY                  0x116B
+#define OBJ_EVENT_PAL_TAG_HAUNTER                 0x116C
+#define OBJ_EVENT_PAL_TAG_GENGAR                  0x116D
+#define OBJ_EVENT_PAL_TAG_HYPNO                   0x116E
+#define OBJ_EVENT_PAL_TAG_KINGLER                 0x116F
+#define OBJ_EVENT_PAL_TAG_VOLTORB                 0x1170
+#define OBJ_EVENT_PAL_TAG_EXEGGCUTE               0x1171
+#define OBJ_EVENT_PAL_TAG_EXEGGUTOR               0x1172
+#define OBJ_EVENT_PAL_TAG_CUBONE                  0x1173
+#define OBJ_EVENT_PAL_TAG_HITMONLEE               0x1174
+#define OBJ_EVENT_PAL_TAG_HITMONCHAN              0x1175
+#define OBJ_EVENT_PAL_TAG_LICKITUNG               0x1176
+#define OBJ_EVENT_PAL_TAG_KOFFING                 0x1177
+#define OBJ_EVENT_PAL_TAG_RHYDON                  0x1178
+#define OBJ_EVENT_PAL_TAG_CHANSEY                 0x1179
+#define OBJ_EVENT_PAL_TAG_TANGELA                 0x117A
+#define OBJ_EVENT_PAL_TAG_KANGASKHAN              0x117B
+#define OBJ_EVENT_PAL_TAG_HORSEA                  0x117C
+#define OBJ_EVENT_PAL_TAG_SEADRA                  0x117D
+#define OBJ_EVENT_PAL_TAG_GOLDEEN                 0x117E
+#define OBJ_EVENT_PAL_TAG_SEAKING                 0x117F
+#define OBJ_EVENT_PAL_TAG_STARMIE                 0x1180
+#define OBJ_EVENT_PAL_TAG_MR_MIME                 0x1181
+#define OBJ_EVENT_PAL_TAG_SCYTHER                 0x1182
+#define OBJ_EVENT_PAL_TAG_JYNX                    0x1183
+#define OBJ_EVENT_PAL_TAG_MAGMAR                  0x1184
+#define OBJ_EVENT_PAL_TAG_PINSIR                  0x1185
+#define OBJ_EVENT_PAL_TAG_TAUROS                  0x1186
+#define OBJ_EVENT_PAL_TAG_MAGIKARP                0x1187
+#define OBJ_EVENT_PAL_TAG_GYARADOS                0x1188
+#define OBJ_EVENT_PAL_TAG_LAPRAS                  0x1189
+#define OBJ_EVENT_PAL_TAG_EEVEE                   0x118A
+#define OBJ_EVENT_PAL_TAG_VAPOREON                0x118B
+#define OBJ_EVENT_PAL_TAG_JOLTEON                 0x118C
+#define OBJ_EVENT_PAL_TAG_FLAREON                 0x118D
+#define OBJ_EVENT_PAL_TAG_PORYGON                 0x118E
+#define OBJ_EVENT_PAL_TAG_OMANYTE                 0x118F
+#define OBJ_EVENT_PAL_TAG_OMASTAR                 0x1190
+#define OBJ_EVENT_PAL_TAG_KABUTO                  0x1191
+#define OBJ_EVENT_PAL_TAG_KABUTOPS                0x1192
+#define OBJ_EVENT_PAL_TAG_AERODACTYL              0x1193
+#define OBJ_EVENT_PAL_TAG_SNORLAX                 0x1194
+#define OBJ_EVENT_PAL_TAG_ARTICUNO                0x1195
+#define OBJ_EVENT_PAL_TAG_ZAPDOS                  0x1196
+#define OBJ_EVENT_PAL_TAG_MOLTRES                 0x1197
+#define OBJ_EVENT_PAL_TAG_DRATINI                 0x1198
+#define OBJ_EVENT_PAL_TAG_DRAGONAIR               0x1199
+#define OBJ_EVENT_PAL_TAG_DRAGONITE               0x119A
+#define OBJ_EVENT_PAL_TAG_MEWTWO                  0x119B
+#define OBJ_EVENT_PAL_TAG_MEW                     0x119C
+#define OBJ_EVENT_PAL_TAG_BAYLEEF                 0x119D
+#define OBJ_EVENT_PAL_TAG_MEGANIUM                0x119E
+#define OBJ_EVENT_PAL_TAG_CYNDAQUIL               0x119F
+#define OBJ_EVENT_PAL_TAG_QUILAVA                 0x11A0
+#define OBJ_EVENT_PAL_TAG_TYPHLOSION              0x11A1
+#define OBJ_EVENT_PAL_TAG_TOTODILE                0x11A2
+#define OBJ_EVENT_PAL_TAG_CROCONAW                0x11A3
+#define OBJ_EVENT_PAL_TAG_FERALIGATR              0x11A4
+#define OBJ_EVENT_PAL_TAG_SENTRET                 0x11A5
+#define OBJ_EVENT_PAL_TAG_FURRET                  0x11A6
+#define OBJ_EVENT_PAL_TAG_HOOTHOOT                0x11A7
+#define OBJ_EVENT_PAL_TAG_NOCTOWL                 0x11A8
+#define OBJ_EVENT_PAL_TAG_LEDYBA                  0x11A9
+#define OBJ_EVENT_PAL_TAG_LEDIAN                  0x11AA
+#define OBJ_EVENT_PAL_TAG_SPINARAK                0x11AB
+#define OBJ_EVENT_PAL_TAG_ARIADOS                 0x11AC
+#define OBJ_EVENT_PAL_TAG_CROBAT                  0x11AD
+#define OBJ_EVENT_PAL_TAG_CHINCHOU                0x11AE
+#define OBJ_EVENT_PAL_TAG_LANTURN                 0x11AF
+#define OBJ_EVENT_PAL_TAG_PICHU                   0x11B0
+#define OBJ_EVENT_PAL_TAG_CLEFFA                  0x11B1
+#define OBJ_EVENT_PAL_TAG_IGGLYBUFF               0x11B2
+#define OBJ_EVENT_PAL_TAG_TOGEPI                  0x11B3
+#define OBJ_EVENT_PAL_TAG_NATU                    0x11B4
+#define OBJ_EVENT_PAL_TAG_XATU                    0x11B5
+#define OBJ_EVENT_PAL_TAG_MAREEP                  0x11B6
+#define OBJ_EVENT_PAL_TAG_FLAAFFY                 0x11B7
+#define OBJ_EVENT_PAL_TAG_AMPHAROS                0x11B8
+#define OBJ_EVENT_PAL_TAG_BELLOSSOM               0x11B9
+#define OBJ_EVENT_PAL_TAG_AZUMARILL               0x11BA
+#define OBJ_EVENT_PAL_TAG_SUDOWOODO               0x11BB
+#define OBJ_EVENT_PAL_TAG_POLITOED                0x11BC
+#define OBJ_EVENT_PAL_TAG_HOPPIP                  0x11BD
+#define OBJ_EVENT_PAL_TAG_SKIPLOOM                0x11BE
+#define OBJ_EVENT_PAL_TAG_JUMPLUFF                0x11BF
+#define OBJ_EVENT_PAL_TAG_AIPOM                   0x11C0
+#define OBJ_EVENT_PAL_TAG_SUNKERN                 0x11C1
+#define OBJ_EVENT_PAL_TAG_SUNFLORA                0x11C2
+#define OBJ_EVENT_PAL_TAG_YANMA                   0x11C3
+#define OBJ_EVENT_PAL_TAG_QUAGSIRE                0x11C4
+#define OBJ_EVENT_PAL_TAG_ESPEON                  0x11C5
+#define OBJ_EVENT_PAL_TAG_UMBREON                 0x11C6
+#define OBJ_EVENT_PAL_TAG_MURKROW                 0x11C7
+#define OBJ_EVENT_PAL_TAG_SLOWKING                0x11C8
+#define OBJ_EVENT_PAL_TAG_MISDREAVUS              0x11C9
+#define OBJ_EVENT_PAL_TAG_WOBBUFFET               0x11CA
+#define OBJ_EVENT_PAL_TAG_GIRAFARIG               0x11CB
+#define OBJ_EVENT_PAL_TAG_PINECO                  0x11CC
+#define OBJ_EVENT_PAL_TAG_FORRETRESS              0x11CD
+#define OBJ_EVENT_PAL_TAG_DUNSPARCE               0x11CE
+#define OBJ_EVENT_PAL_TAG_GLIGAR                  0x11CF
+#define OBJ_EVENT_PAL_TAG_SNUBBULL                0x11D0
+#define OBJ_EVENT_PAL_TAG_GRANBULL                0x11D1
+#define OBJ_EVENT_PAL_TAG_QWILFISH                0x11D2
+#define OBJ_EVENT_PAL_TAG_SCIZOR                  0x11D3
+#define OBJ_EVENT_PAL_TAG_SHUCKLE                 0x11D4
+#define OBJ_EVENT_PAL_TAG_HERACROSS               0x11D5
+#define OBJ_EVENT_PAL_TAG_SNEASEL                 0x11D6
+#define OBJ_EVENT_PAL_TAG_TEDDIURSA               0x11D7
+#define OBJ_EVENT_PAL_TAG_URSARING                0x11D8
+#define OBJ_EVENT_PAL_TAG_MAGCARGO                0x11D9
+#define OBJ_EVENT_PAL_TAG_SWINUB                  0x11DA
+#define OBJ_EVENT_PAL_TAG_PILOSWINE               0x11DB
+#define OBJ_EVENT_PAL_TAG_CORSOLA                 0x11DC
+#define OBJ_EVENT_PAL_TAG_REMORAID                0x11DD
+#define OBJ_EVENT_PAL_TAG_OCTILLERY               0x11DE
+#define OBJ_EVENT_PAL_TAG_DELIBIRD                0x11DF
+#define OBJ_EVENT_PAL_TAG_MANTINE                 0x11E0
+#define OBJ_EVENT_PAL_TAG_SKARMORY                0x11E1
+#define OBJ_EVENT_PAL_TAG_HOUNDOOM                0x11E2
+#define OBJ_EVENT_PAL_TAG_KINGDRA                 0x11E3
+#define OBJ_EVENT_PAL_TAG_PHANPY                  0x11E4
+#define OBJ_EVENT_PAL_TAG_DONPHAN                 0x11E5
+#define OBJ_EVENT_PAL_TAG_PORYGON2                0x11E6
+#define OBJ_EVENT_PAL_TAG_STANTLER                0x11E7
+#define OBJ_EVENT_PAL_TAG_SMEARGLE                0x11E8
+#define OBJ_EVENT_PAL_TAG_TYROGUE                 0x11E9
+#define OBJ_EVENT_PAL_TAG_HITMONTOP               0x11EA
+#define OBJ_EVENT_PAL_TAG_SMOOCHUM                0x11EB
+#define OBJ_EVENT_PAL_TAG_ELEKID                  0x11EC
+#define OBJ_EVENT_PAL_TAG_MAGBY                   0x11ED
+#define OBJ_EVENT_PAL_TAG_MILTANK                 0x11EE
+#define OBJ_EVENT_PAL_TAG_BLISSEY                 0x11EF
+#define OBJ_EVENT_PAL_TAG_RAIKOU                  0x11F0
+#define OBJ_EVENT_PAL_TAG_ENTEI                   0x11F1
+#define OBJ_EVENT_PAL_TAG_SUICUNE                 0x11F2
+#define OBJ_EVENT_PAL_TAG_LARVITAR                0x11F3
+#define OBJ_EVENT_PAL_TAG_TYRANITAR               0x11F4
+#define OBJ_EVENT_PAL_TAG_LUGIA_FOLLOWER          0x11F5
+#define OBJ_EVENT_PAL_TAG_HO_OH_FOLLOWER          0x11F6
+#define OBJ_EVENT_PAL_TAG_CELEBI                  0x11F7
+#define OBJ_EVENT_PAL_TAG_TREECKO                 0x11F8
+#define OBJ_EVENT_PAL_TAG_GROVYLE                 0x11F9
+#define OBJ_EVENT_PAL_TAG_SCEPTILE                0x11FA
+#define OBJ_EVENT_PAL_TAG_COMBUSKEN               0x11FB
+#define OBJ_EVENT_PAL_TAG_BLAZIKEN                0x11FC
+#define OBJ_EVENT_PAL_TAG_MUDKIP                  0x11FD
+#define OBJ_EVENT_PAL_TAG_MARSHTOMP               0x11FE
+#define OBJ_EVENT_PAL_TAG_SWAMPERT                0x10FF
+#define OBJ_EVENT_PAL_TAG_POOCHYENA_FOLLOWER      0x10FE
+#define OBJ_EVENT_PAL_TAG_MIGHTYENA               0x10FD
+#define OBJ_EVENT_PAL_TAG_ZIGZAGOON_FOLLOWER      0x10FC
+#define OBJ_EVENT_PAL_TAG_LINOONE                 0x10FB
+#define OBJ_EVENT_PAL_TAG_WURMPLE                 0x10FA
+#define OBJ_EVENT_PAL_TAG_BEAUTIFLY               0x10F9
+#define OBJ_EVENT_PAL_TAG_CASCOON                 0x10F8
+#define OBJ_EVENT_PAL_TAG_DUSTOX                  0x10F7
+#define OBJ_EVENT_PAL_TAG_LOTAD                   0x10F6
+#define OBJ_EVENT_PAL_TAG_LOMBRE                  0x10F5
+#define OBJ_EVENT_PAL_TAG_LUDICOLO                0x10F4
+#define OBJ_EVENT_PAL_TAG_SEEDOT                  0x10F3
+#define OBJ_EVENT_PAL_TAG_NUZLEAF                 0x10F2
+#define OBJ_EVENT_PAL_TAG_SHIFTRY                 0x10F1
+#define OBJ_EVENT_PAL_TAG_TAILLOW                 0x10F0
+#define OBJ_EVENT_PAL_TAG_SWELLOW                 0x10EF
+#define OBJ_EVENT_PAL_TAG_WINGULL                 0x10EE
+#define OBJ_EVENT_PAL_TAG_PELIPPER                0x10ED
+#define OBJ_EVENT_PAL_TAG_GARDEVOIR               0x10EC
+#define OBJ_EVENT_PAL_TAG_SURSKIT                 0x10EB
+#define OBJ_EVENT_PAL_TAG_MASQUERAIN              0x10EA
+#define OBJ_EVENT_PAL_TAG_SHROOMISH               0x10E9
+#define OBJ_EVENT_PAL_TAG_BRELOOM                 0x10E8
+#define OBJ_EVENT_PAL_TAG_SLAKOTH                 0x10E7
+#define OBJ_EVENT_PAL_TAG_VIGOROTH_FOLLOWER       0x10E6
+#define OBJ_EVENT_PAL_TAG_SLAKING                 0x10E5
+#define OBJ_EVENT_PAL_TAG_NINCADA                 0x10E4
+#define OBJ_EVENT_PAL_TAG_NINJASK                 0x10E3
+#define OBJ_EVENT_PAL_TAG_SHEDINJA                0x10E2
+#define OBJ_EVENT_PAL_TAG_WHISMUR                 0x10E1
+#define OBJ_EVENT_PAL_TAG_EXPLOUD                 0x10E0
+#define OBJ_EVENT_PAL_TAG_MAKUHITA                0x10DF
+#define OBJ_EVENT_PAL_TAG_HARIYAMA                0x10DE
+#define OBJ_EVENT_PAL_TAG_AZURILL_FOLLOWER        0x10DD
+#define OBJ_EVENT_PAL_TAG_NOSEPASS                0x10DC
+#define OBJ_EVENT_PAL_TAG_DELCATTY                0x10DB
+#define OBJ_EVENT_PAL_TAG_SABLEYE                 0x10DA
+#define OBJ_EVENT_PAL_TAG_MAWILE                  0x10D9
+#define OBJ_EVENT_PAL_TAG_LAIRON                  0x10D8
+#define OBJ_EVENT_PAL_TAG_AGGRON                  0x10D7
+#define OBJ_EVENT_PAL_TAG_MEDITITE                0x10D6
+#define OBJ_EVENT_PAL_TAG_MEDICHAM                0x10D5
+#define OBJ_EVENT_PAL_TAG_ELECTRIKE               0x10D4
+#define OBJ_EVENT_PAL_TAG_MANECTRIC               0x10D3
+#define OBJ_EVENT_PAL_TAG_MINUN                   0x10D2
+#define OBJ_EVENT_PAL_TAG_VOLBEAT                 0x10D1
+#define OBJ_EVENT_PAL_TAG_ILLUMISE                0x10D0
+#define OBJ_EVENT_PAL_TAG_ROSELIA                 0x10CF
+#define OBJ_EVENT_PAL_TAG_GULPIN                  0x10CE
+#define OBJ_EVENT_PAL_TAG_SWALOT                  0x10CD
+#define OBJ_EVENT_PAL_TAG_CARVANHA                0x10CC
+#define OBJ_EVENT_PAL_TAG_SHARPEDO                0x10CB
+#define OBJ_EVENT_PAL_TAG_WAILMER                 0x10CA
+#define OBJ_EVENT_PAL_TAG_WAILORD                 0x10C9
+#define OBJ_EVENT_PAL_TAG_NUMEL                   0x10C8
+#define OBJ_EVENT_PAL_TAG_CAMERUPT                0x10C7
+#define OBJ_EVENT_PAL_TAG_TORKOAL                 0x10C6
+#define OBJ_EVENT_PAL_TAG_SPOINK                  0x10C5
+#define OBJ_EVENT_PAL_TAG_GRUMPIG                 0x10C4
+#define OBJ_EVENT_PAL_TAG_SPINDA                  0x10C3
+#define OBJ_EVENT_PAL_TAG_TRAPINCH                0x10C2
+#define OBJ_EVENT_PAL_TAG_VIBRAVA                 0x10C1
+#define OBJ_EVENT_PAL_TAG_FLYGON                  0x10C0
+#define OBJ_EVENT_PAL_TAG_CACNEA                  0x10BF
+#define OBJ_EVENT_PAL_TAG_ALTARIA                 0x10BE
+#define OBJ_EVENT_PAL_TAG_ZANGOOSE                0x10BD
+#define OBJ_EVENT_PAL_TAG_SEVIPER                 0x10BC
+#define OBJ_EVENT_PAL_TAG_SOLROCK                 0x10BB
+#define OBJ_EVENT_PAL_TAG_BARBOACH                0x10BA
+#define OBJ_EVENT_PAL_TAG_WHISCASH                0x10B9
+#define OBJ_EVENT_PAL_TAG_CORPHISH                0x10B8
+#define OBJ_EVENT_PAL_TAG_CRAWDAUNT               0x10B7
+#define OBJ_EVENT_PAL_TAG_BALTOY                  0x10B6
+#define OBJ_EVENT_PAL_TAG_CLAYDOL                 0x10B5
+#define OBJ_EVENT_PAL_TAG_LILEEP                  0x10B4
+#define OBJ_EVENT_PAL_TAG_CRADILY                 0x10B3
+#define OBJ_EVENT_PAL_TAG_ANORITH                 0x10B2
+#define OBJ_EVENT_PAL_TAG_ARMALDO                 0x10B1
+#define OBJ_EVENT_PAL_TAG_FEEBAS                  0x10B0
+#define OBJ_EVENT_PAL_TAG_MILOTIC                 0x10AF
+#define OBJ_EVENT_PAL_TAG_KECLEON                 0x10AE
+#define OBJ_EVENT_PAL_TAG_BANETTE                 0x10AD
+#define OBJ_EVENT_PAL_TAG_DUSKULL                 0x10AC
+#define OBJ_EVENT_PAL_TAG_DUSCLOPS                0x10AB
+#define OBJ_EVENT_PAL_TAG_TROPIUS                 0x10AA
+#define OBJ_EVENT_PAL_TAG_CHIMECHO                0x10A9
+#define OBJ_EVENT_PAL_TAG_ABSOL                   0x10A8
+#define OBJ_EVENT_PAL_TAG_WYNAUT                  0x10A7
+#define OBJ_EVENT_PAL_TAG_SNORUNT                 0x10A6
+#define OBJ_EVENT_PAL_TAG_GLALIE                  0x10A5
+#define OBJ_EVENT_PAL_TAG_SPHEAL                  0x10A4
+#define OBJ_EVENT_PAL_TAG_SEALEO                  0x10A3
+#define OBJ_EVENT_PAL_TAG_WALREIN                 0x10A2
+#define OBJ_EVENT_PAL_TAG_CLAMPERL                0x10A1
+#define OBJ_EVENT_PAL_TAG_HUNTAIL                 0x10A0
+#define OBJ_EVENT_PAL_TAG_GOREBYSS                0x109F
+#define OBJ_EVENT_PAL_TAG_RELICANTH               0x109E
+#define OBJ_EVENT_PAL_TAG_LUVDISC                 0x109D
+#define OBJ_EVENT_PAL_TAG_BAGON                   0x109C
+#define OBJ_EVENT_PAL_TAG_SHELGON                 0x109B
+#define OBJ_EVENT_PAL_TAG_SALAMENCE               0x109A
+#define OBJ_EVENT_PAL_TAG_BELDUM                  0x1099
+#define OBJ_EVENT_PAL_TAG_METANG                  0x1098
+#define OBJ_EVENT_PAL_TAG_REGIROCK                0x1097
+#define OBJ_EVENT_PAL_TAG_REGICE                  0x1096
+#define OBJ_EVENT_PAL_TAG_REGISTEEL               0x1095
+#define OBJ_EVENT_PAL_TAG_LATIAS                  0x1094
+#define OBJ_EVENT_PAL_TAG_LATIOS                  0x1093
+#define OBJ_EVENT_PAL_TAG_KYOGRE_FOLLOWER         0x1092
+#define OBJ_EVENT_PAL_TAG_GROUDON_FOLLOWER        0x1091
+#define OBJ_EVENT_PAL_TAG_RAYQUAZA                0x1090
+#define OBJ_EVENT_PAL_TAG_JIRACHI                 0x108F
+#define OBJ_EVENT_PAL_TAG_DEOXYS_FOLLOWER         0x108E
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -868,7 +815,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_KyogreReflection,      OBJ_EVENT_PAL_TAG_KYOGRE_REFLECTION},
     {gObjectEventPal_Groudon,               OBJ_EVENT_PAL_TAG_GROUDON},
     {gObjectEventPal_GroudonReflection,     OBJ_EVENT_PAL_TAG_GROUDON_REFLECTION},
-    {gObjectEventPal_SubmarineShadow,       OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW},
     {gObjectEventPal_Poochyena,             OBJ_EVENT_PAL_TAG_POOCHYENA},
     {gObjectEventPal_RedLeaf,               OBJ_EVENT_PAL_TAG_RED_LEAF},
     {gObjectEventPal_Deoxys,                OBJ_EVENT_PAL_TAG_DEOXYS},
@@ -887,10 +833,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Wartortle,             OBJ_EVENT_PAL_TAG_WARTORTLE},
     {gObjectEventPal_Blastoise,             OBJ_EVENT_PAL_TAG_BLASTOISE},
     {gObjectEventPal_Caterpie,              OBJ_EVENT_PAL_TAG_CATERPIE},
-    {gObjectEventPal_Metapod,               OBJ_EVENT_PAL_TAG_METAPOD},
     {gObjectEventPal_Butterfree,            OBJ_EVENT_PAL_TAG_BUTTERFREE},
     {gObjectEventPal_Weedle,                OBJ_EVENT_PAL_TAG_WEEDLE},
-    {gObjectEventPal_Kakuna,                OBJ_EVENT_PAL_TAG_KAKUNA},
     {gObjectEventPal_Beedrill,              OBJ_EVENT_PAL_TAG_BEEDRILL},
     {gObjectEventPal_Pidgey,                OBJ_EVENT_PAL_TAG_PIDGEY},
     {gObjectEventPal_Pidgeotto,             OBJ_EVENT_PAL_TAG_PIDGEOTTO},
@@ -909,85 +853,61 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Nidorina,              OBJ_EVENT_PAL_TAG_NIDORINA},
     {gObjectEventPal_Nidoqueen,             OBJ_EVENT_PAL_TAG_NIDOQUEEN},
     {gObjectEventPal_Nidoran_M,             OBJ_EVENT_PAL_TAG_NIDORAN_M},
-    {gObjectEventPal_Nidorino,              OBJ_EVENT_PAL_TAG_NIDORINO},
     {gObjectEventPal_Nidoking,              OBJ_EVENT_PAL_TAG_NIDOKING},
-    {gObjectEventPal_Clefairy,              OBJ_EVENT_PAL_TAG_CLEFAIRY},
     {gObjectEventPal_Clefable,              OBJ_EVENT_PAL_TAG_CLEFABLE},
     {gObjectEventPal_Vulpix,                OBJ_EVENT_PAL_TAG_VULPIX},
     {gObjectEventPal_Ninetales,             OBJ_EVENT_PAL_TAG_NINETALES},
     {gObjectEventPal_Jigglypuff,            OBJ_EVENT_PAL_TAG_JIGGLYPUFF},
     {gObjectEventPal_Wigglytuff,            OBJ_EVENT_PAL_TAG_WIGGLYTUFF},
-    {gObjectEventPal_Zubat,                 OBJ_EVENT_PAL_TAG_ZUBAT},
     {gObjectEventPal_Golbat,                OBJ_EVENT_PAL_TAG_GOLBAT},
-    {gObjectEventPal_Oddish,                OBJ_EVENT_PAL_TAG_ODDISH},
     {gObjectEventPal_Gloom,                 OBJ_EVENT_PAL_TAG_GLOOM},
-    {gObjectEventPal_Vileplume,             OBJ_EVENT_PAL_TAG_VILEPLUME},
     {gObjectEventPal_Paras,                 OBJ_EVENT_PAL_TAG_PARAS},
-    {gObjectEventPal_Parasect,              OBJ_EVENT_PAL_TAG_PARASECT},
     {gObjectEventPal_Venonat,               OBJ_EVENT_PAL_TAG_VENONAT},
     {gObjectEventPal_Venomoth,              OBJ_EVENT_PAL_TAG_VENOMOTH},
     {gObjectEventPal_Diglett,               OBJ_EVENT_PAL_TAG_DIGLETT},
     {gObjectEventPal_Dugtrio,               OBJ_EVENT_PAL_TAG_DUGTRIO},
     {gObjectEventPal_Meowth,                OBJ_EVENT_PAL_TAG_MEOWTH},
     {gObjectEventPal_Persian,               OBJ_EVENT_PAL_TAG_PERSIAN},
-    {gObjectEventPal_Psyduck,               OBJ_EVENT_PAL_TAG_PSYDUCK},
     {gObjectEventPal_Golduck,               OBJ_EVENT_PAL_TAG_GOLDUCK},
     {gObjectEventPal_Mankey,                OBJ_EVENT_PAL_TAG_MANKEY},
     {gObjectEventPal_Primeape,              OBJ_EVENT_PAL_TAG_PRIMEAPE},
-    {gObjectEventPal_Growlithe,             OBJ_EVENT_PAL_TAG_GROWLITHE},
     {gObjectEventPal_Arcanine,              OBJ_EVENT_PAL_TAG_ARCANINE},
     {gObjectEventPal_Poliwag,               OBJ_EVENT_PAL_TAG_POLIWAG},
     {gObjectEventPal_Poliwhirl,             OBJ_EVENT_PAL_TAG_POLIWHIRL},
-    {gObjectEventPal_Poliwrath,             OBJ_EVENT_PAL_TAG_POLIWRATH},
-    {gObjectEventPal_Abra,                  OBJ_EVENT_PAL_TAG_ABRA},
     {gObjectEventPal_Kadabra,               OBJ_EVENT_PAL_TAG_KADABRA},
-    {gObjectEventPal_Alakazam,              OBJ_EVENT_PAL_TAG_ALAKAZAM},
     {gObjectEventPal_Machop,                OBJ_EVENT_PAL_TAG_MACHOP},
     {gObjectEventPal_Machoke,               OBJ_EVENT_PAL_TAG_MACHOKE},
     {gObjectEventPal_Machamp,               OBJ_EVENT_PAL_TAG_MACHAMP},
-    {gObjectEventPal_Bellsprout,            OBJ_EVENT_PAL_TAG_BELLSPROUT},
     {gObjectEventPal_Weepinbell,            OBJ_EVENT_PAL_TAG_WEEPINBELL},
     {gObjectEventPal_Victreebel,            OBJ_EVENT_PAL_TAG_VICTREEBEL},
     {gObjectEventPal_Tentacool,             OBJ_EVENT_PAL_TAG_TENTACOOL},
     {gObjectEventPal_Tentacruel,            OBJ_EVENT_PAL_TAG_TENTACRUEL},
-    {gObjectEventPal_Geodude,               OBJ_EVENT_PAL_TAG_GEODUDE},
     {gObjectEventPal_Graveler,              OBJ_EVENT_PAL_TAG_GRAVELER},
     {gObjectEventPal_Golem,                 OBJ_EVENT_PAL_TAG_GOLEM},
     {gObjectEventPal_Ponyta,                OBJ_EVENT_PAL_TAG_PONYTA},
-    {gObjectEventPal_Rapidash,              OBJ_EVENT_PAL_TAG_RAPIDASH},
     {gObjectEventPal_Slowpoke,              OBJ_EVENT_PAL_TAG_SLOWPOKE},
     {gObjectEventPal_Slowbro,               OBJ_EVENT_PAL_TAG_SLOWBRO},
     {gObjectEventPal_Magnemite,             OBJ_EVENT_PAL_TAG_MAGNEMITE},
-    {gObjectEventPal_Magneton,              OBJ_EVENT_PAL_TAG_MAGNETON},
     {gObjectEventPal_Farfetchd,             OBJ_EVENT_PAL_TAG_FARFETCHD},
     {gObjectEventPal_Doduo,                 OBJ_EVENT_PAL_TAG_DODUO},
     {gObjectEventPal_Dodrio,                OBJ_EVENT_PAL_TAG_DODRIO},
     {gObjectEventPal_Seel,                  OBJ_EVENT_PAL_TAG_SEEL},
-    {gObjectEventPal_Dewgong,               OBJ_EVENT_PAL_TAG_DEWGONG},
-    {gObjectEventPal_Grimer,                OBJ_EVENT_PAL_TAG_GRIMER},
     {gObjectEventPal_Muk,                   OBJ_EVENT_PAL_TAG_MUK},
     {gObjectEventPal_Shellder,              OBJ_EVENT_PAL_TAG_SHELLDER},
     {gObjectEventPal_Cloyster,              OBJ_EVENT_PAL_TAG_CLOYSTER},
     {gObjectEventPal_Gastly,                OBJ_EVENT_PAL_TAG_GASTLY},
     {gObjectEventPal_Haunter,               OBJ_EVENT_PAL_TAG_HAUNTER},
     {gObjectEventPal_Gengar,                OBJ_EVENT_PAL_TAG_GENGAR},
-    {gObjectEventPal_Onix,                  OBJ_EVENT_PAL_TAG_ONIX},
-    {gObjectEventPal_Drowzee,               OBJ_EVENT_PAL_TAG_DROWZEE},
     {gObjectEventPal_Hypno,                 OBJ_EVENT_PAL_TAG_HYPNO},
-    {gObjectEventPal_Krabby,                OBJ_EVENT_PAL_TAG_KRABBY},
     {gObjectEventPal_Kingler,               OBJ_EVENT_PAL_TAG_KINGLER},
     {gObjectEventPal_Voltorb,               OBJ_EVENT_PAL_TAG_VOLTORB},
-    {gObjectEventPal_Electrode,             OBJ_EVENT_PAL_TAG_ELECTRODE},
     {gObjectEventPal_Exeggcute,             OBJ_EVENT_PAL_TAG_EXEGGCUTE},
     {gObjectEventPal_Exeggutor,             OBJ_EVENT_PAL_TAG_EXEGGUTOR},
     {gObjectEventPal_Cubone,                OBJ_EVENT_PAL_TAG_CUBONE},
-    {gObjectEventPal_Marowak,               OBJ_EVENT_PAL_TAG_MAROWAK},
     {gObjectEventPal_Hitmonlee,             OBJ_EVENT_PAL_TAG_HITMONLEE},
     {gObjectEventPal_Hitmonchan,            OBJ_EVENT_PAL_TAG_HITMONCHAN},
     {gObjectEventPal_Lickitung,             OBJ_EVENT_PAL_TAG_LICKITUNG},
     {gObjectEventPal_Koffing,               OBJ_EVENT_PAL_TAG_KOFFING},
-    {gObjectEventPal_Weezing,               OBJ_EVENT_PAL_TAG_WEEZING},
-    {gObjectEventPal_Rhyhorn,               OBJ_EVENT_PAL_TAG_RHYHORN},
     {gObjectEventPal_Rhydon,                OBJ_EVENT_PAL_TAG_RHYDON},
     {gObjectEventPal_Chansey,               OBJ_EVENT_PAL_TAG_CHANSEY},
     {gObjectEventPal_Tangela,               OBJ_EVENT_PAL_TAG_TANGELA},
@@ -996,19 +916,16 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Seadra,                OBJ_EVENT_PAL_TAG_SEADRA},
     {gObjectEventPal_Goldeen,               OBJ_EVENT_PAL_TAG_GOLDEEN},
     {gObjectEventPal_Seaking,               OBJ_EVENT_PAL_TAG_SEAKING},
-    {gObjectEventPal_Staryu,                OBJ_EVENT_PAL_TAG_STARYU},
     {gObjectEventPal_Starmie,               OBJ_EVENT_PAL_TAG_STARMIE},
     {gObjectEventPal_Mr_Mime,               OBJ_EVENT_PAL_TAG_MR_MIME},
     {gObjectEventPal_Scyther,               OBJ_EVENT_PAL_TAG_SCYTHER},
     {gObjectEventPal_Jynx,                  OBJ_EVENT_PAL_TAG_JYNX},
-    {gObjectEventPal_Electabuzz,            OBJ_EVENT_PAL_TAG_ELECTABUZZ},
     {gObjectEventPal_Magmar,                OBJ_EVENT_PAL_TAG_MAGMAR},
     {gObjectEventPal_Pinsir,                OBJ_EVENT_PAL_TAG_PINSIR},
     {gObjectEventPal_Tauros,                OBJ_EVENT_PAL_TAG_TAUROS},
     {gObjectEventPal_Magikarp,              OBJ_EVENT_PAL_TAG_MAGIKARP},
     {gObjectEventPal_Gyarados,              OBJ_EVENT_PAL_TAG_GYARADOS},
     {gObjectEventPal_Lapras,                OBJ_EVENT_PAL_TAG_LAPRAS},
-    {gObjectEventPal_Ditto,                 OBJ_EVENT_PAL_TAG_DITTO},
     {gObjectEventPal_Eevee,                 OBJ_EVENT_PAL_TAG_EEVEE},
     {gObjectEventPal_Vaporeon,              OBJ_EVENT_PAL_TAG_VAPOREON},
     {gObjectEventPal_Jolteon,               OBJ_EVENT_PAL_TAG_JOLTEON},
@@ -1028,7 +945,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Dragonite,             OBJ_EVENT_PAL_TAG_DRAGONITE},
     {gObjectEventPal_Mewtwo,                OBJ_EVENT_PAL_TAG_MEWTWO},
     {gObjectEventPal_Mew,                   OBJ_EVENT_PAL_TAG_MEW},
-    {gObjectEventPal_Chikorita,             OBJ_EVENT_PAL_TAG_CHIKORITA},
     {gObjectEventPal_Bayleef,               OBJ_EVENT_PAL_TAG_BAYLEEF},
     {gObjectEventPal_Meganium,              OBJ_EVENT_PAL_TAG_MEGANIUM},
     {gObjectEventPal_Cyndaquil,             OBJ_EVENT_PAL_TAG_CYNDAQUIL},
@@ -1052,14 +968,12 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Cleffa,                OBJ_EVENT_PAL_TAG_CLEFFA},
     {gObjectEventPal_Igglybuff,             OBJ_EVENT_PAL_TAG_IGGLYBUFF},
     {gObjectEventPal_Togepi,                OBJ_EVENT_PAL_TAG_TOGEPI},
-    {gObjectEventPal_Togetic,               OBJ_EVENT_PAL_TAG_TOGETIC},
     {gObjectEventPal_Natu,                  OBJ_EVENT_PAL_TAG_NATU},
     {gObjectEventPal_Xatu,                  OBJ_EVENT_PAL_TAG_XATU},
     {gObjectEventPal_Mareep,                OBJ_EVENT_PAL_TAG_MAREEP},
     {gObjectEventPal_Flaaffy,               OBJ_EVENT_PAL_TAG_FLAAFFY},
     {gObjectEventPal_Ampharos,              OBJ_EVENT_PAL_TAG_AMPHAROS},
     {gObjectEventPal_Bellossom,             OBJ_EVENT_PAL_TAG_BELLOSSOM},
-    {gObjectEventPal_Marill,                OBJ_EVENT_PAL_TAG_MARILL},
     {gObjectEventPal_Azumarill,             OBJ_EVENT_PAL_TAG_AZUMARILL},
     {gObjectEventPal_Sudowoodo,             OBJ_EVENT_PAL_TAG_SUDOWOODO},
     {gObjectEventPal_Politoed,              OBJ_EVENT_PAL_TAG_POLITOED},
@@ -1070,21 +984,18 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Sunkern,               OBJ_EVENT_PAL_TAG_SUNKERN},
     {gObjectEventPal_Sunflora,              OBJ_EVENT_PAL_TAG_SUNFLORA},
     {gObjectEventPal_Yanma,                 OBJ_EVENT_PAL_TAG_YANMA},
-    {gObjectEventPal_Wooper,                OBJ_EVENT_PAL_TAG_WOOPER},
     {gObjectEventPal_Quagsire,              OBJ_EVENT_PAL_TAG_QUAGSIRE},
     {gObjectEventPal_Espeon,                OBJ_EVENT_PAL_TAG_ESPEON},
     {gObjectEventPal_Umbreon,               OBJ_EVENT_PAL_TAG_UMBREON},
     {gObjectEventPal_Murkrow,               OBJ_EVENT_PAL_TAG_MURKROW},
     {gObjectEventPal_Slowking,              OBJ_EVENT_PAL_TAG_SLOWKING},
     {gObjectEventPal_Misdreavus,            OBJ_EVENT_PAL_TAG_MISDREAVUS},
-    {gObjectEventPal_Unown,                 OBJ_EVENT_PAL_TAG_UNOWN},
     {gObjectEventPal_Wobbuffet,             OBJ_EVENT_PAL_TAG_WOBBUFFET},
     {gObjectEventPal_Girafarig,             OBJ_EVENT_PAL_TAG_GIRAFARIG},
     {gObjectEventPal_Pineco,                OBJ_EVENT_PAL_TAG_PINECO},
     {gObjectEventPal_Forretress,            OBJ_EVENT_PAL_TAG_FORRETRESS},
     {gObjectEventPal_Dunsparce,             OBJ_EVENT_PAL_TAG_DUNSPARCE},
     {gObjectEventPal_Gligar,                OBJ_EVENT_PAL_TAG_GLIGAR},
-    {gObjectEventPal_Steelix,               OBJ_EVENT_PAL_TAG_STEELIX},
     {gObjectEventPal_Snubbull,              OBJ_EVENT_PAL_TAG_SNUBBULL},
     {gObjectEventPal_Granbull,              OBJ_EVENT_PAL_TAG_GRANBULL},
     {gObjectEventPal_Qwilfish,              OBJ_EVENT_PAL_TAG_QWILFISH},
@@ -1094,7 +1005,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Sneasel,               OBJ_EVENT_PAL_TAG_SNEASEL},
     {gObjectEventPal_Teddiursa,             OBJ_EVENT_PAL_TAG_TEDDIURSA},
     {gObjectEventPal_Ursaring,              OBJ_EVENT_PAL_TAG_URSARING},
-    {gObjectEventPal_Slugma,                OBJ_EVENT_PAL_TAG_SLUGMA},
     {gObjectEventPal_Magcargo,              OBJ_EVENT_PAL_TAG_MAGCARGO},
     {gObjectEventPal_Swinub,                OBJ_EVENT_PAL_TAG_SWINUB},
     {gObjectEventPal_Piloswine,             OBJ_EVENT_PAL_TAG_PILOSWINE},
@@ -1104,7 +1014,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Delibird,              OBJ_EVENT_PAL_TAG_DELIBIRD},
     {gObjectEventPal_Mantine,               OBJ_EVENT_PAL_TAG_MANTINE},
     {gObjectEventPal_Skarmory,              OBJ_EVENT_PAL_TAG_SKARMORY},
-    {gObjectEventPal_Houndour,              OBJ_EVENT_PAL_TAG_HOUNDOUR},
     {gObjectEventPal_Houndoom,              OBJ_EVENT_PAL_TAG_HOUNDOOM},
     {gObjectEventPal_Kingdra,               OBJ_EVENT_PAL_TAG_KINGDRA},
     {gObjectEventPal_Phanpy,                OBJ_EVENT_PAL_TAG_PHANPY},
@@ -1123,7 +1032,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Entei,                 OBJ_EVENT_PAL_TAG_ENTEI},
     {gObjectEventPal_Suicune,               OBJ_EVENT_PAL_TAG_SUICUNE},
     {gObjectEventPal_Larvitar,              OBJ_EVENT_PAL_TAG_LARVITAR},
-    {gObjectEventPal_Pupitar,               OBJ_EVENT_PAL_TAG_PUPITAR},
     {gObjectEventPal_Tyranitar,             OBJ_EVENT_PAL_TAG_TYRANITAR},
     {gObjectEventPal_Lugia_Follower,        OBJ_EVENT_PAL_TAG_LUGIA_FOLLOWER},
     {gObjectEventPal_HoOh_Follower,         OBJ_EVENT_PAL_TAG_HO_OH_FOLLOWER},
@@ -1131,7 +1039,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Treecko,               OBJ_EVENT_PAL_TAG_TREECKO},
     {gObjectEventPal_Grovyle,               OBJ_EVENT_PAL_TAG_GROVYLE},
     {gObjectEventPal_Sceptile,              OBJ_EVENT_PAL_TAG_SCEPTILE},
-    {gObjectEventPal_Torchic,               OBJ_EVENT_PAL_TAG_TORCHIC},
     {gObjectEventPal_Combusken,             OBJ_EVENT_PAL_TAG_COMBUSKEN},
     {gObjectEventPal_Blaziken,              OBJ_EVENT_PAL_TAG_BLAZIKEN},
     {gObjectEventPal_Mudkip,                OBJ_EVENT_PAL_TAG_MUDKIP},
@@ -1142,7 +1049,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Zigzagoon_Follower,    OBJ_EVENT_PAL_TAG_ZIGZAGOON_FOLLOWER},
     {gObjectEventPal_Linoone,               OBJ_EVENT_PAL_TAG_LINOONE},
     {gObjectEventPal_Wurmple,               OBJ_EVENT_PAL_TAG_WURMPLE},
-    {gObjectEventPal_Silcoon,               OBJ_EVENT_PAL_TAG_SILCOON},
     {gObjectEventPal_Beautifly,             OBJ_EVENT_PAL_TAG_BEAUTIFLY},
     {gObjectEventPal_Cascoon,               OBJ_EVENT_PAL_TAG_CASCOON},
     {gObjectEventPal_Dustox,                OBJ_EVENT_PAL_TAG_DUSTOX},
@@ -1156,8 +1062,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Swellow,               OBJ_EVENT_PAL_TAG_SWELLOW},
     {gObjectEventPal_Wingull,               OBJ_EVENT_PAL_TAG_WINGULL},
     {gObjectEventPal_Pelipper,              OBJ_EVENT_PAL_TAG_PELIPPER},
-    {gObjectEventPal_Ralts,                 OBJ_EVENT_PAL_TAG_RALTS},
-    {gObjectEventPal_Kirlia,                OBJ_EVENT_PAL_TAG_KIRLIA},
     {gObjectEventPal_Gardevoir,             OBJ_EVENT_PAL_TAG_GARDEVOIR},
     {gObjectEventPal_Surskit,               OBJ_EVENT_PAL_TAG_SURSKIT},
     {gObjectEventPal_Masquerain,            OBJ_EVENT_PAL_TAG_MASQUERAIN},
@@ -1170,24 +1074,20 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Ninjask,               OBJ_EVENT_PAL_TAG_NINJASK},
     {gObjectEventPal_Shedinja,              OBJ_EVENT_PAL_TAG_SHEDINJA},
     {gObjectEventPal_Whismur,               OBJ_EVENT_PAL_TAG_WHISMUR},
-    {gObjectEventPal_Loudred,               OBJ_EVENT_PAL_TAG_LOUDRED},
     {gObjectEventPal_Exploud,               OBJ_EVENT_PAL_TAG_EXPLOUD},
     {gObjectEventPal_Makuhita,              OBJ_EVENT_PAL_TAG_MAKUHITA},
     {gObjectEventPal_Hariyama,              OBJ_EVENT_PAL_TAG_HARIYAMA},
     {gObjectEventPal_Azurill_Follower,      OBJ_EVENT_PAL_TAG_AZURILL_FOLLOWER},
     {gObjectEventPal_Nosepass,              OBJ_EVENT_PAL_TAG_NOSEPASS},
-    {gObjectEventPal_Skitty_Follower,       OBJ_EVENT_PAL_TAG_SKITTY_FOLLOWER},
     {gObjectEventPal_Delcatty,              OBJ_EVENT_PAL_TAG_DELCATTY},
     {gObjectEventPal_Sableye,               OBJ_EVENT_PAL_TAG_SABLEYE},
     {gObjectEventPal_Mawile,                OBJ_EVENT_PAL_TAG_MAWILE},
-    {gObjectEventPal_Aron,                  OBJ_EVENT_PAL_TAG_ARON},
     {gObjectEventPal_Lairon,                OBJ_EVENT_PAL_TAG_LAIRON},
     {gObjectEventPal_Aggron,                OBJ_EVENT_PAL_TAG_AGGRON},
     {gObjectEventPal_Meditite,              OBJ_EVENT_PAL_TAG_MEDITITE},
     {gObjectEventPal_Medicham,              OBJ_EVENT_PAL_TAG_MEDICHAM},
     {gObjectEventPal_Electrike,             OBJ_EVENT_PAL_TAG_ELECTRIKE},
     {gObjectEventPal_Manectric,             OBJ_EVENT_PAL_TAG_MANECTRIC},
-    {gObjectEventPal_Plusle,                OBJ_EVENT_PAL_TAG_PLUSLE},
     {gObjectEventPal_Minun,                 OBJ_EVENT_PAL_TAG_MINUN},
     {gObjectEventPal_Volbeat,               OBJ_EVENT_PAL_TAG_VOLBEAT},
     {gObjectEventPal_Illumise,              OBJ_EVENT_PAL_TAG_ILLUMISE},
@@ -1208,12 +1108,9 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Vibrava,               OBJ_EVENT_PAL_TAG_VIBRAVA},
     {gObjectEventPal_Flygon,                OBJ_EVENT_PAL_TAG_FLYGON},
     {gObjectEventPal_Cacnea,                OBJ_EVENT_PAL_TAG_CACNEA},
-    {gObjectEventPal_Cacturne,              OBJ_EVENT_PAL_TAG_CACTURNE},
-    {gObjectEventPal_Swablu,                OBJ_EVENT_PAL_TAG_SWABLU},
     {gObjectEventPal_Altaria,               OBJ_EVENT_PAL_TAG_ALTARIA},
     {gObjectEventPal_Zangoose,              OBJ_EVENT_PAL_TAG_ZANGOOSE},
     {gObjectEventPal_Seviper,               OBJ_EVENT_PAL_TAG_SEVIPER},
-    {gObjectEventPal_Lunatone,              OBJ_EVENT_PAL_TAG_LUNATONE},
     {gObjectEventPal_Solrock,               OBJ_EVENT_PAL_TAG_SOLROCK},
     {gObjectEventPal_Barboach,              OBJ_EVENT_PAL_TAG_BARBOACH},
     {gObjectEventPal_Whiscash,              OBJ_EVENT_PAL_TAG_WHISCASH},
@@ -1227,9 +1124,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Armaldo,               OBJ_EVENT_PAL_TAG_ARMALDO},
     {gObjectEventPal_Feebas,                OBJ_EVENT_PAL_TAG_FEEBAS},
     {gObjectEventPal_Milotic,               OBJ_EVENT_PAL_TAG_MILOTIC},
-    {gObjectEventPal_Castform,              OBJ_EVENT_PAL_TAG_CASTFORM},
     {gObjectEventPal_Kecleon,               OBJ_EVENT_PAL_TAG_KECLEON},
-    {gObjectEventPal_Shuppet,               OBJ_EVENT_PAL_TAG_SHUPPET},
     {gObjectEventPal_Banette,               OBJ_EVENT_PAL_TAG_BANETTE},
     {gObjectEventPal_Duskull,               OBJ_EVENT_PAL_TAG_DUSKULL},
     {gObjectEventPal_Dusclops,              OBJ_EVENT_PAL_TAG_DUSCLOPS},
@@ -1252,7 +1147,6 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Salamence,             OBJ_EVENT_PAL_TAG_SALAMENCE},
     {gObjectEventPal_Beldum,                OBJ_EVENT_PAL_TAG_BELDUM},
     {gObjectEventPal_Metang,                OBJ_EVENT_PAL_TAG_METANG},
-    {gObjectEventPal_Metagross,             OBJ_EVENT_PAL_TAG_METAGROSS},
     {gObjectEventPal_Regirock,              OBJ_EVENT_PAL_TAG_REGIROCK},
     {gObjectEventPal_Regice,                OBJ_EVENT_PAL_TAG_REGICE},
     {gObjectEventPal_Registeel,             OBJ_EVENT_PAL_TAG_REGISTEEL},
@@ -1337,10 +1231,10 @@ static const u16 sReflectionPaletteTags_SSTidal[] = {
 };
 
 static const u16 sReflectionPaletteTags_SubmarineShadow[] = {
-    OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW,
-    OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW,
-    OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW,
-    OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW,
+    OBJ_EVENT_PAL_TAG_SSTIDAL,
+    OBJ_EVENT_PAL_TAG_SSTIDAL,
+    OBJ_EVENT_PAL_TAG_SSTIDAL,
+    OBJ_EVENT_PAL_TAG_SSTIDAL,
 };
 
 static const u16 sReflectionPaletteTags_Kyogre[] = {
@@ -1383,7 +1277,7 @@ static const struct PairedPalettes sSpecialObjectReflectionPaletteSets[] = {
     {OBJ_EVENT_PAL_TAG_KYOGRE,           sReflectionPaletteTags_Kyogre},
     {OBJ_EVENT_PAL_TAG_GROUDON,          sReflectionPaletteTags_Groudon},
     {OBJ_EVENT_PAL_TAG_NPC_3,            sReflectionPaletteTags_Npc3},
-    {OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW, sReflectionPaletteTags_SubmarineShadow},
+    {OBJ_EVENT_PAL_TAG_SSTIDAL,          sReflectionPaletteTags_SubmarineShadow},
     {OBJ_EVENT_PAL_TAG_RED_LEAF,         sReflectionPaletteTags_RedLeaf},
     {OBJ_EVENT_PAL_TAG_NONE,             NULL},
 };
