@@ -39,6 +39,7 @@
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
+#include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
@@ -3248,6 +3249,15 @@ void UpdateFollowerPokemonGraphic(void)
     // If so, the following Pokemon needs to change.
     u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + 238;
     struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
+        
+    // If the lead Pokemon is Unown, use the correct sprite
+    if (leadMonGraphicId == 439)
+    {
+        u8 unownLetter = GET_UNOWN_LETTER(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_PERSONALITY));
+        
+        if (unownLetter)
+            leadMonGraphicId = 652 + unownLetter;
+    }
     
     if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
     {
