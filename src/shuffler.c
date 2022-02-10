@@ -139,15 +139,18 @@ void Shuffle(u32 s) {
         if (j == ROOMS_PER_SET) {
             roomGroup = EndRooms[0] >> 8;
             roomId = EndRooms[0] & 0xFF;
-        } else if (j <= 4 || (j >= 6 && j <= 10)) {
+        } else if (j <= 4 || (j >= 7 && j <= 11)) {
             roomGroup = NormalRooms[normals[normalIdx]] >> 8;
             roomId = NormalRooms[normals[normalIdx]] & 0xFF;
             normalIdx++;
-        } else if (j == 5 || j == 11) {
+        } else if (j == 5 || j == 12) {
             roomGroup = GymRooms[gyms[gymIdx]] >> 8;
             roomId = GymRooms[gyms[gymIdx]] & 0xFF;
             gymIdx++;
-        } else if (j == 12) {
+        } else if (j == 6 || j == 13) {
+            roomGroup = PostGymRooms[0] >> 8;
+            roomId = PostGymRooms[0] & 0xFF;
+        } else if (j == 14) {
             roomGroup = EliteRooms[elites[eliteIdx]] >> 8;
             roomId = EliteRooms[elites[eliteIdx]] & 0xFF;
             eliteIdx++;
@@ -352,9 +355,12 @@ static const u16 witchItemQuantities[POSSIBLE_WITCH_ITEM_REWARDS] = {
 static const u8* const witchItemRewardTexts[POSSIBLE_WITCH_ITEM_REWARDS] = {
     witchRewardText0
 };
-void DeclareNPC(u16 objNum) {
+void DeclareNPC(u16 objNum, u8 npcType) {
     MirrorMapData();
-    int i = (tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_NPCS) + 1;
+    int i = npcType;
+    if (npcType == 0) {
+        i = (tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_NPCS) + 1;
+    }
     AdjustedObjects[objNum].npc.type = i;
     switch(i) {
     case 1: // Trader

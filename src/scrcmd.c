@@ -2363,7 +2363,8 @@ bool8 ScrCmd_declarewildmon(struct ScriptContext *ctx) {
 
 bool8 ScrCmd_declarenpc(struct ScriptContext *ctx) {
     u8 objNum = ScriptReadByte(ctx) - 1;
-    DeclareNPC(objNum);
+    u8 npcType = ScriptReadByte(ctx);
+    DeclareNPC(objNum, npcType);
     return TRUE;
 }
 

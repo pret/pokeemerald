@@ -4,9 +4,9 @@ ChoiceMap6_MapScripts::
 
 ChoiceMap6_OnIntroTrainers::
 	declarewildmon 1
-	declarenpc 2
+	declarenpc 2, 0
 	declaretrainer 3, 0
 	declaretrainer 4, 0
-	declarenpc 5
+	declarenpc 5, 0
 	declarewildmon 6
 	end

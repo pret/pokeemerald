@@ -14,7 +14,7 @@
 #define POSSIBLE_WITCH_ITEM_REWARDS 1
 #define POSSIBLE_WITCH_EFFECTS 1
 #define POSSIBLE_WITCH_REWARD_TYPES 1
-#define ROOMS_PER_SET 13
+#define ROOMS_PER_SET 15
 #define TOTAL_WARPS ROOMS_PER_SET + 1
 #define MAT1 0x8f7011ee
 #define MAT2 0xfc78ff1f
@@ -124,7 +124,7 @@ struct InGameTrade* GetShuffledInGameTrade(u16 index);
 u16 GetNPCFlag(void);
 u16 SetNPCFlag(void);
 u16 ClearNPCFlag(void);
-void DeclareNPC(u16 objNum);
+void DeclareNPC(u16 objNum, u8 npcType);
 u16 DoWitchDeal(void);
 u16 BufferWitchText(void);
 u16 ShuffledFlagNumberByObjectEventId(u16 objNum);

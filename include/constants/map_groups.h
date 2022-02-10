@@ -605,6 +605,7 @@
 #define MAP_CHOICE_MAP5                            (13 | (33 << 8))
 #define MAP_CHOICE_MAP6                            (14 | (33 << 8))
 #define MAP_ELITE_ROOM1                            (15 | (33 << 8))
+#define MAP_POST_GYM_ROOM                          (16 | (33 << 8))
 
 #define MAP_GROUPS_COUNT 34
 

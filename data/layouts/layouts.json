@@ -4560,6 +4560,16 @@
       "secondary_tileset": "gTileset_MeteorFalls",
       "border_filepath": "data/layouts/EliteRoom1/border.bin",
       "blockdata_filepath": "data/layouts/EliteRoom1/map.bin"
+    },
+    {
+      "id": "LAYOUT_POST_GYM_ROOM",
+      "name": "PostGymRoom_Layout",
+      "width": 7,
+      "height": 9,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/PostGymRoom/border.bin",
+      "blockdata_filepath": "data/layouts/PostGymRoom/map.bin"
     }
   ]
 }

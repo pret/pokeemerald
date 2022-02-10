@@ -4,6 +4,7 @@
 #define TOTAL_ELITE_ROOMS 1
 #define TOTAL_CHAMPION_ROOMS 0
 #define TOTAL_END_ROOMS 1
+#define TOTAL_POST_GYM_ROOMS 1
 static const int StartRooms[TOTAL_START_ROOMS] = {
     MAP_START_MAP,
 };
@@ -30,4 +31,7 @@ static const int ChampionRooms[TOTAL_CHAMPION_ROOMS] = {
 };
 static const int EndRooms[TOTAL_END_ROOMS] = {
     MAP_END_MAP,
+};
+static const int PostGymRooms[TOTAL_POST_GYM_ROOMS] = {
+    MAP_POST_GYM_ROOM,
 };

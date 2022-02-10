@@ -1758,9 +1758,10 @@
 	.2byte \type
 	.endm
 
-	.macro declarenpc objnum:req
+	.macro declarenpc objnum:req, npctype:req
 	.byte 0xe8
 	.byte \objnum
+	.byte \npctype
 	.endm
 
 	.macro bufferpostbattletext out:req, objnum:req

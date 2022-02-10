@@ -3,6 +3,6 @@ HealerRoom_MapScripts::
 	.byte 0
 
 HealerRoom_OnIntroTrainers::
-	declarenpc 1
+	declarenpc 1, 0
 	declareitem 2
 	end
