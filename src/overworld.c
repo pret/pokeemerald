@@ -3248,6 +3248,7 @@ void UpdateFollowerPokemonGraphic(void)
     // If so, the following Pokemon needs to change.
     u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + 238;
     struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
+    
     if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
     {
         // Sets the follower's graphic data to the proper following Pokemon graphic data
@@ -3260,28 +3261,24 @@ void UpdateFollowerPokemonGraphic(void)
         // Specifically for Pokemon Center, if lead Pokemon is revived, deletes old follower and creates new one
         if(gSpecialVar_Unused_0x8014 == 1)
         {
-            // Loop allows for creation of variables not at top of function
-            do
-            {
-                u8 newSpriteId;
-                struct ObjectEventTemplate clone;
-                struct ObjectEvent backupFollower = *follower;
-                backupFollower.graphicsId = gSaveBlock2Ptr->follower.graphicsId;
-                DestroySprite(&gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId]);
-                RemoveObjectEvent(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
+            u8 newSpriteId;
+            struct ObjectEventTemplate clone;
+            struct ObjectEvent backupFollower = *follower;
+            backupFollower.graphicsId = gSaveBlock2Ptr->follower.graphicsId;
+            DestroySprite(&gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId]);
+            RemoveObjectEvent(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
 
-                clone = *GetObjectEventTemplateByLocalIdAndMap(gSaveBlock2Ptr->follower.map.id, gSaveBlock2Ptr->follower.map.number, gSaveBlock2Ptr->follower.map.group);
-                clone.graphicsId = gSaveBlock2Ptr->follower.graphicsId;;
-                gSaveBlock2Ptr->follower.objId = TrySpawnObjectEventTemplate(&clone, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, clone.x, clone.y);
+            clone = *GetObjectEventTemplateByLocalIdAndMap(gSaveBlock2Ptr->follower.map.id, gSaveBlock2Ptr->follower.map.number, gSaveBlock2Ptr->follower.map.group);
+            clone.graphicsId = gSaveBlock2Ptr->follower.graphicsId;;
+            gSaveBlock2Ptr->follower.objId = TrySpawnObjectEventTemplate(&clone, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, clone.x, clone.y);
 
-                follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
-                newSpriteId = follower->spriteId;
-                *follower = backupFollower;
-                follower->spriteId = newSpriteId;
-                MoveObjectEventToMapCoords(follower, follower->currentCoords.x, follower->currentCoords.y);
-                ObjectEventTurn(follower, follower->facingDirection);
-                gSpecialVar_Unused_0x8014 = 0;
-            } while(FALSE);
+            follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
+            newSpriteId = follower->spriteId;
+            *follower = backupFollower;
+            follower->spriteId = newSpriteId;
+            MoveObjectEventToMapCoords(follower, follower->currentCoords.x, follower->currentCoords.y);
+            ObjectEventTurn(follower, follower->facingDirection);
+            gSpecialVar_Unused_0x8014 = 0;
         }
     }
 }

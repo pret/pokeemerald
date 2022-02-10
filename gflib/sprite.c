@@ -1002,6 +1002,20 @@ bool8 IsFlyingPokemonGraphic(u16 graphicsId)
         case 487:
         case 488:
         case 489:
+        case 530:
+        case 532:
+        case 543:
+        case 547:
+        case 548:
+        case 550:
+        case 572:
+        case 596:
+        case 597:
+        case 624:
+        case 625:
+        case 642:
+        case 645:
+        case 646:
             return TRUE;
         default:
             return FALSE;
@@ -1025,10 +1039,10 @@ void AnimCmd_frame(struct Sprite *sprite)
 
     sprite->animDelayCounter = duration;
 
-    if(gSaveBlock2Ptr->follower.inProgress && sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && sprite->y2 >= -1
+    if(sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && gSaveBlock2Ptr->follower.inProgress && sprite->y2 >= -1
     && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId))
     {
-        if(sprite->animCmdIndex % 2 == 0)
+        if(sprite->animCmdIndex % 2 == 1)
             sprite->y2 = 0;
         else
             sprite->y2 = -1;
@@ -1068,10 +1082,10 @@ void AnimCmd_jump(struct Sprite *sprite)
 
     sprite->animDelayCounter = duration;
     
-    if(gSaveBlock2Ptr->follower.inProgress && sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && sprite->y2 >= -1
+    if(sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && gSaveBlock2Ptr->follower.inProgress && sprite->y2 >= -1
     && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId))
     {
-        if(sprite->animCmdIndex % 2 == 0)
+        if(sprite->animCmdIndex % 2 == 1)
             sprite->y2 = 0;
         else
             sprite->y2 = -1;
