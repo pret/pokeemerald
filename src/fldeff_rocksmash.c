@@ -19,7 +19,6 @@
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
-// static functions
 static void Task_DoFieldMove_Init(u8 taskId);
 static void Task_DoFieldMove_ShowMonAfterPose(u8 taskId);
 static void Task_DoFieldMove_WaitForMon(u8 taskId);
@@ -34,8 +33,8 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
     u8 objEventId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-    gPlayerFacingPosition.height = PlayerGetZCoord();
-    objEventId = GetObjectEventIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
+    gPlayerFacingPosition.elevation = PlayerGetElevation();
+    objEventId = GetObjectEventIdByPosition(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.elevation);
     if (gObjectEvents[objEventId].graphicsId != graphicsId)
     {
         return FALSE;
