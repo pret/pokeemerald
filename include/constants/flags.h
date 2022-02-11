@@ -190,7 +190,7 @@
 #define FLAG_RECEIVED_TM40                   0xAA
 #define FLAG_RECEIVED_TM04                   0xAB
 #define FLAG_RECEIVED_TM03                   0xAC
-#define FLAG_DECORATION_0                    0xAD
+#define FLAG_HIDE_SECRET_BASE_TRAINER        0xAD
 #define FLAG_DECORATION_1                    0xAE
 #define FLAG_DECORATION_2                    0xAF
 #define FLAG_DECORATION_3                    0xB0

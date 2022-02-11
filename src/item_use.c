@@ -725,11 +725,11 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 static bool8 TryToWaterSudowoodo(void)
 {
     u16 x, y;
-    u8 z;
+    u8 elevation;
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    z = PlayerGetZCoord();
-    objId = GetObjectEventIdByXYZ(x, y, z);
+    elevation = PlayerGetElevation();
+    objId = GetObjectEventIdByPosition(x, y, elevation);
     if (objId == OBJECT_EVENTS_COUNT || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_SUDOWOODO)
         return FALSE;
     else

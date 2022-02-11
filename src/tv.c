@@ -852,7 +852,7 @@ void UpdateTVScreensOnMap(int width, int height)
     }
 }
 
-static void SetTVMetatilesOnMap(int width, int height, u16 tileId)
+static void SetTVMetatilesOnMap(int width, int height, u16 metatileId)
 {
     int x;
     int y;
@@ -862,7 +862,7 @@ static void SetTVMetatilesOnMap(int width, int height, u16 tileId)
         for (x = 0; x < width; x++)
         {
             if (MapGridGetMetatileBehaviorAt(x, y) == MB_TELEVISION)
-                MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
+                MapGridSetMetatileIdAt(x, y, metatileId | MAPGRID_COLLISION_MASK);
         }
     }
 }
