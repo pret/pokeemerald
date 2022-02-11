@@ -99,7 +99,7 @@ void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *);
 void TrySpawnObjectEvents(s16, s16);
 u8 CreateObjectGraphicsSprite(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 TrySpawnObjectEvent(u8, u8, u8);
-u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z);
+u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation);
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
 void SetSpritePosToMapCoords(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
@@ -420,7 +420,7 @@ u8 MovementType_FollowingPokemon_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_FollowingPokemon_Step2(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_FollowingPokemon_Step3(struct ObjectEvent *, struct Sprite *);
 
-u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 direction);
+u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction);
 void TurnVirtualObject(u8 virtualObjId, u8 direction);
 void SetVirtualObjectGraphics(u8 virtualObjId, u16 graphicsId);
 void SetVirtualObjectInvisibility(u8 virtualObjId, bool32 invisible);
