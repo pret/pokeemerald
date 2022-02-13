@@ -171,6 +171,7 @@
 #define B_WISH_HP_SOURCE            GEN_7 // In Gen5+, Wish heals half of the user's max HP instead of the target's.
 #define B_RAMPAGE_CANCELLING        GEN_7 // In Gen5+, a failed Thrash, etc, will cancel except on its last turn.
 #define B_ROOTED_GROUNDING          GEN_7 // In Gen4+, Ingrain causes the affected Pokémon to become grounded.
+#define B_GROWTH_UNDER_SUN          GEN_7 // In Gen5+, Growth's effects are doubled when under the effects of the sun.
 
 // Ability settings
 #define B_EXPANDED_ABILITY_NAMES    TRUE  // If TRUE, ability names are increased from 12 characters to 16 characters.
