@@ -1022,9 +1022,9 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2)
     {
         // Priorities are the same(at least comparing to moves the AI is aware of), decide by speed.
         if (GetWhoStrikesFirst(battlerAI, battler2, TRUE) == 0)
-            return TRUE;
+            return AI_IS_FASTER;
         else
-            return FALSE;
+            return AI_IS_SLOWER;
     }
 }
 
