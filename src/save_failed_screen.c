@@ -153,7 +153,7 @@ static void SaveFailedScreenTextPrint(const u8 *text, u8 x, u8 y)
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
-    AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], 1, x * 8, y * 8 + 1, 0, 0, color, 0, text);
+    AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], FONT_NORMAL, x * 8, y * 8 + 1, 0, 0, color, 0, text);
 }
 
 void DoSaveFailedScreen(u8 saveType)
@@ -217,13 +217,13 @@ static void CB2_SaveFailedScreen(void)
         LoadPalette(gBirchBagGrassPal, 0, 0x40);
         LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
         LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
-        LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+        LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
         FillWindowPixelBuffer(sWindowIds[CLOCK_WIN_ID], PIXEL_FILL(1)); // backwards?
         FillWindowPixelBuffer(sWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
-        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], 2); // again?
-        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], 1);
+        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], COPYWIN_GFX); // again?
+        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], COPYWIN_MAP);
         SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(1);
@@ -363,9 +363,10 @@ static bool8 VerifySectorWipe(u16 sector)
 
     ReadFlash(sector, 0, (u8 *)ptr, SECTOR_SIZE);
 
-    for (i = 0; i < 0x400; i++, ptr++)
+    // 1/4 because ptr is u32
+    for (i = 0; i < SECTOR_SIZE / 4; i++, ptr++)
         if (*ptr)
-            return TRUE;
+            return TRUE; // Sector has nonzero data, failed
 
     return FALSE;
 }
@@ -375,6 +376,7 @@ static bool8 WipeSector(u16 sector)
     u16 i, j;
     bool8 failed = TRUE;
 
+    // Attempt to wipe sector with an arbitrary attempt limit of 130
     for (i = 0; failed && i < 130; i++)
     {
         for (j = 0; j < SECTOR_SIZE; j++)

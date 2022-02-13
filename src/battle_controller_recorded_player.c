@@ -25,9 +25,6 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
-// this file's functions
 static void RecordedPlayerHandleGetMonData(void);
 static void RecordedPlayerHandleGetRawMonData(void);
 static void RecordedPlayerHandleSetMonData(void);
@@ -318,7 +315,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
             }
 
         }
@@ -390,7 +387,7 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(B_WIN_MSG))
         RecordedPlayerBufferExecCompleted();
 }
 
@@ -520,7 +517,7 @@ static void RecordedPlayerHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(1, size, monData);
+    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
     RecordedPlayerBufferExecCompleted();
 }
 
@@ -566,7 +563,7 @@ static u32 CopyRecordedPlayerMonData(u8 monId, u8 *dst)
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battleMon.nickname, nickname);
+        StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); size++)
@@ -1094,7 +1091,7 @@ static void RecordedPlayerHandleLoadMonSprite(void)
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               GetBattlerSpriteCoord(gActiveBattler, 2),
+                                               GetBattlerSpriteCoord(gActiveBattler, BATTLER_COORD_X_2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                GetBattlerSpriteSubpriority(gActiveBattler));
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
@@ -1125,7 +1122,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
 
     gBattlerSpriteIds[battlerId] = CreateSprite(
       &gMultiuseSpriteTemplate,
-      GetBattlerSpriteCoord(battlerId, 2),
+      GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
       GetBattlerSpriteDefault_Y(battlerId),
       GetBattlerSpriteSubpriority(battlerId));
 
@@ -1403,7 +1400,7 @@ static void RecordedPlayerHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleResources->bufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1416,7 +1413,7 @@ static void ChooseActionInBattlePalace(void)
 {
     if (gBattleCommunication[4] >= gBattlersCount / 2)
     {
-        BtlController_EmitTwoReturnValues(1, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
+        BtlController_EmitTwoReturnValues(BUFFER_B, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
         RecordedPlayerBufferExecCompleted();
     }
 }
@@ -1429,7 +1426,7 @@ static void RecordedPlayerHandleChooseAction(void)
     }
     else
     {
-        BtlController_EmitTwoReturnValues(1, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
+        BtlController_EmitTwoReturnValues(BUFFER_B, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
         RecordedPlayerBufferExecCompleted();
     }
 }
@@ -1443,13 +1440,13 @@ static void RecordedPlayerHandleChooseMove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
-        BtlController_EmitTwoReturnValues(1, 10, ChooseMoveAndTargetInBattlePalace());
+        BtlController_EmitTwoReturnValues(BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace());
     }
     else
     {
         u8 moveId = RecordedBattle_GetBattlerAction(gActiveBattler);
         u8 target = RecordedBattle_GetBattlerAction(gActiveBattler);
-        BtlController_EmitTwoReturnValues(1, 10, moveId | (target << 8));
+        BtlController_EmitTwoReturnValues(BUFFER_B, 10, moveId | (target << 8));
     }
 
     RecordedPlayerBufferExecCompleted();
@@ -1463,7 +1460,7 @@ static void RecordedPlayerHandleChooseItem(void)
 static void RecordedPlayerHandleChoosePokemon(void)
 {
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = RecordedBattle_GetBattlerAction(gActiveBattler);
-    BtlController_EmitChosenMonReturnValue(1, *(gBattleStruct->monToSwitchIntoId + gActiveBattler), NULL);
+    BtlController_EmitChosenMonReturnValue(BUFFER_B, *(gBattleStruct->monToSwitchIntoId + gActiveBattler), NULL);
     RecordedPlayerBufferExecCompleted();
 }
 
@@ -1646,7 +1643,7 @@ static void RecordedPlayerHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry3(species, -25, 5);
+    PlayCry_ByMode(species, -25, CRY_MODE_FAINT);
     RecordedPlayerBufferExecCompleted();
 }
 

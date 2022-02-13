@@ -6,23 +6,15 @@
 #include "sound.h"
 #include "task.h"
 #include "constants/field_effects.h"
-#include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
 #include "fieldmap.h"
 #include "party_menu.h"
 #include "fldeff.h"
 
-// why do this, GF?
-enum
-{
-    REGIROCK_PUZZLE,
-    REGISTEEL_PUZZLE
-};
+EWRAM_DATA static bool8 sIsRegisteelPuzzle = 0;
 
-EWRAM_DATA static u8 sBraillePuzzleCallbackFlag = 0;
-
-static const u8 gRegicePathCoords[][2] =
+static const u8 sRegicePathCoords[][2] =
 {
     {4,  21},
     {5,  21},
@@ -62,9 +54,9 @@ static const u8 gRegicePathCoords[][2] =
     {4,  22},
 };
 
-void SealedChamberShakingEffect(u8);
-void DoBrailleRegirockEffect(void);
-void DoBrailleRegisteelEffect(void);
+static void Task_SealedChamberShakingEffect(u8);
+static void DoBrailleRegirockEffect(void);
+static void DoBrailleRegisteelEffect(void);
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
@@ -85,12 +77,12 @@ bool8 ShouldDoBrailleDigEffect(void)
 
 void DoBrailleDigEffect(void)
 {
-    MapGridSetMetatileIdAt(16, 8, METATILE_Cave_SealedChamberEntrance_TopLeft);
-    MapGridSetMetatileIdAt(17, 8, METATILE_Cave_SealedChamberEntrance_TopMid);
-    MapGridSetMetatileIdAt(18, 8, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(16, 9, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(17, 9, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(18, 9, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(10 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(10 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
@@ -112,123 +104,52 @@ bool8 CheckRelicanthWailord(void)
 }
 
 // THEORY: this was caused by block commenting out all of the older R/S braille functions but leaving the call to it itself, which creates the nullsub.
-// the code is shown below to show what this might look like.
 void ShouldDoBrailleRegirockEffectOld(void)
 {
-    /*
-        if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
-    {
-        if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
-            return TRUE;
-        else if (gSaveBlock1.pos.x == 9 && gSaveBlock1.pos.y == 23)
-            return TRUE;
-        else if (gSaveBlock1.pos.x == 11 && gSaveBlock1.pos.y == 23)
-            return TRUE;
-    }
-
-    return FALSE;
 }
 
-void DoBrailleRegirockEffect(void)
+#define tDelayCounter  data[1]
+#define tShakeCounter  data[2]
+#define tVerticalPan   data[4]
+#define tDelay         data[5]
+#define tNumShakes     data[6]
+
+void DoSealedChamberShakingEffect_Long(void)
 {
-    FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
-    DrawWholeMapView();
-    PlaySE(SE_BANG);
-    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
-    ScriptContext2_Disable();
-}
+    u8 taskId = CreateTask(Task_SealedChamberShakingEffect, 9);
 
-bool8 ShouldDoBrailleRegisteelEffect(void)
-{
-    if (!FlagGet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
-    {
-        if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-void DoBrailleRegisteelEffect(void)
-{
-    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    FieldEffectStart(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
-}
-
-bool8 FldEff_UseFlyAncientTomb(void)
-{
-    u8 taskId = CreateFieldMoveTask();
-
-    gTasks[taskId].data[8] = (u32)UseRegisteelHm_Callback >> 16;
-    gTasks[taskId].data[9] = (u32)UseRegisteelHm_Callback;
-    return FALSE;
-}
-
-void UseRegisteelHm_Callback(void)
-{
-    FieldEffectActiveListRemove(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
-    UseFlyAncientTomb_Finish();
-}
-
-void UseFlyAncientTomb_Finish(void)
-{
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
-    DrawWholeMapView();
-    PlaySE(SE_BANG);
-    FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
-    ScriptContext2_Disable();
-}
-    */
-}
-
-void DoSealedChamberShakingEffect1(void)
-{
-    u8 taskId = CreateTask(SealedChamberShakingEffect, 9);
-
-    gTasks[taskId].data[1] = 0;
-    gTasks[taskId].data[2] = 0;
-    gTasks[taskId].data[4] = 2;
-    gTasks[taskId].data[5] = 5;
-    gTasks[taskId].data[6] = 50;
+    gTasks[taskId].tDelayCounter = 0;
+    gTasks[taskId].tShakeCounter = 0;
+    gTasks[taskId].tVerticalPan = 2;
+    gTasks[taskId].tDelay = 5;
+    gTasks[taskId].tNumShakes = 50;
     SetCameraPanningCallback(0);
 }
 
-void DoSealedChamberShakingEffect2(void)
+void DoSealedChamberShakingEffect_Short(void)
 {
-    u8 taskId = CreateTask(SealedChamberShakingEffect, 9);
+    u8 taskId = CreateTask(Task_SealedChamberShakingEffect, 9);
 
-    gTasks[taskId].data[1] = 0;
-    gTasks[taskId].data[2] = 0;
-    gTasks[taskId].data[4] = 3;
-    gTasks[taskId].data[5] = 5;
-    gTasks[taskId].data[6] = 2;
+    gTasks[taskId].tDelayCounter = 0;
+    gTasks[taskId].tShakeCounter = 0;
+    gTasks[taskId].tVerticalPan = 3;
+    gTasks[taskId].tDelay = 5;
+    gTasks[taskId].tNumShakes = 2;
     SetCameraPanningCallback(0);
 }
 
-void SealedChamberShakingEffect(u8 taskId)
+static void Task_SealedChamberShakingEffect(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[1]++;
-
-    if (!(task->data[1] % task->data[5]))
+    task->tDelayCounter++;
+    if (task->tDelayCounter % task->tDelay == 0)
     {
-        task->data[1] = 0;
-        task->data[2]++;
-        task->data[4] = -task->data[4];
-        SetCameraPanning(0, task->data[4]);
-        if (task->data[2] == task->data[6])
+        task->tDelayCounter = 0;
+        task->tShakeCounter++;
+        task->tVerticalPan = -task->tVerticalPan;
+        SetCameraPanning(0, task->tVerticalPan);
+        if (task->tShakeCounter == task->tNumShakes)
         {
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -237,7 +158,12 @@ void SealedChamberShakingEffect(u8 taskId)
     }
 }
 
-// moved later in the function because it was rewritten.
+#undef tDelayCounter
+#undef tShakeCounter
+#undef tVerticalPan
+#undef tDelay
+#undef tNumShakes
+
 bool8 ShouldDoBrailleRegirockEffect(void)
 {
     if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)
@@ -246,17 +172,17 @@ bool8 ShouldDoBrailleRegirockEffect(void)
     {
         if (gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 23)
         {
-            sBraillePuzzleCallbackFlag = REGIROCK_PUZZLE;
+            sIsRegisteelPuzzle = FALSE;
             return TRUE;
         }
         else if (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 23)
         {
-            sBraillePuzzleCallbackFlag = REGIROCK_PUZZLE;
+            sIsRegisteelPuzzle = FALSE;
             return TRUE;
         }
         else if (gSaveBlock1Ptr->pos.x == 7 && gSaveBlock1Ptr->pos.y == 23)
         {
-            sBraillePuzzleCallbackFlag = REGIROCK_PUZZLE;
+            sIsRegisteelPuzzle = FALSE;
             return TRUE;
         }
     }
@@ -276,14 +202,14 @@ void UseRegirockHm_Callback(void)
     DoBrailleRegirockEffect();
 }
 
-void DoBrailleRegirockEffect(void)
+static void DoBrailleRegirockEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, METATILE_Cave_SealedChamberEntrance_TopLeft);
-    MapGridSetMetatileIdAt(15, 26, METATILE_Cave_SealedChamberEntrance_TopMid);
-    MapGridSetMetatileIdAt(16, 26, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(14, 27, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
@@ -296,7 +222,7 @@ bool8 ShouldDoBrailleRegisteelEffect(void)
     {
         if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
         {
-            sBraillePuzzleCallbackFlag = REGISTEEL_PUZZLE;
+            sIsRegisteelPuzzle = TRUE;
             return TRUE;
         }
     }
@@ -315,14 +241,14 @@ void UseRegisteelHm_Callback(void)
     DoBrailleRegisteelEffect();
 }
 
-void DoBrailleRegisteelEffect(void)
+static void DoBrailleRegisteelEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, METATILE_Cave_SealedChamberEntrance_TopLeft);
-    MapGridSetMetatileIdAt(15, 26, METATILE_Cave_SealedChamberEntrance_TopMid);
-    MapGridSetMetatileIdAt(16, 26, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(14, 27, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(8 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
@@ -330,80 +256,8 @@ void DoBrailleRegisteelEffect(void)
 }
 
 // theory: another commented out DoBrailleWait and Task_BrailleWait.
-void DoBrailleWait(void)
+static void DoBrailleWait(void)
 {
-    /*
-    if (!FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
-        CreateTask(Task_BrailleWait, 0x50);
-}
-
-void Task_BrailleWait(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    switch (data[0])
-    {
-    case 0:
-        data[1] = 7200;
-        data[0] = 1;
-        break;
-    case 1:
-        if (BrailleWait_CheckButtonPress() != FALSE)
-        {
-            MenuZeroFillScreen();
-            PlaySE(SE_SELECT);
-            data[0] = 2;
-        }
-        else
-        {
-            data[1] = data[1] - 1;
-            if (data[1] == 0)
-            {
-                MenuZeroFillScreen();
-                data[0] = 3;
-                data[1] = 30;
-            }
-        }
-        break;
-    case 2:
-        if (BrailleWait_CheckButtonPress() == FALSE)
-        {
-            data[1] = data[1] - 1;
-            if (data[1] == 0)
-                data[0] = 4;
-            break;
-        }
-        sub_8064E2C();
-        DestroyTask(taskId);
-        ScriptContext2_Disable();
-        break;
-    case 3:
-        data[1] = data[1] - 1;
-        if (data[1] == 0)
-            data[0] = 4;
-        break;
-    case 4:
-        sub_8064E2C();
-        ScriptContext1_SetupScript(S_OpenRegiceChamber);
-        DestroyTask(taskId);
-        break;
-    }
-}
-
-bool32 BrailleWait_CheckButtonPress(void)
-{
-    u16 keyMask = A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON | DPAD_ANY;
-
-    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        keyMask |= L_BUTTON | R_BUTTON;
-    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        keyMask |= L_BUTTON;
-
-    if (gMain.newKeys & keyMask)
-        return TRUE;
-    else
-        return FALSE;
-    */
 }
 
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?
@@ -411,7 +265,7 @@ bool8 FldEff_UsePuzzleEffect(void)
 {
     u8 taskId = CreateFieldMoveTask();
 
-    if (sBraillePuzzleCallbackFlag == REGISTEEL_PUZZLE)
+    if (sIsRegisteelPuzzle == TRUE)
     {
         gTasks[taskId].data[8] = (u32)UseRegisteelHm_Callback >> 16;
         gTasks[taskId].data[9] = (u32)UseRegisteelHm_Callback;
@@ -438,10 +292,10 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
         if (FlagGet(FLAG_TEMP_3) == TRUE)
             return FALSE;
 
-        for (i = 0; i < 36; i++)
+        for (i = 0; i < ARRAY_COUNT(sRegicePathCoords); i++)
         {
-            u8 xPos = gRegicePathCoords[i][0];
-            u8 yPos = gRegicePathCoords[i][1];
+            u8 xPos = sRegicePathCoords[i][0];
+            u8 yPos = sRegicePathCoords[i][1];
             if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
             {
                 u16 varValue;

@@ -30,10 +30,10 @@ se_m_heal_bell_1:
 	.byte		        c_v+11
 	.byte	W01
 	.byte		        c_v+1
-	.byte		N01   , An5 
+	.byte		N01   , An5
 	.byte	W01
 	.byte		MOD   , 7
-	.byte		N18   , Bn5 
+	.byte		N18   , Bn5
 	.byte	W02
 	.byte		PAN   , c_v+11
 	.byte	W01
