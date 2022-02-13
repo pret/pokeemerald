@@ -10728,6 +10728,10 @@ static void Cmd_tryKO(void)
         else
         {
             u16 odds = gBattleMoves[gCurrentMove].accuracy + (gBattleMons[gBattlerAttacker].level - gBattleMons[gBattlerTarget].level);
+            #if B_SHEER_COLD_ACC >= GEN_7
+                if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
+                    odds -= 10;
+            #endif
             if (Random() % 100 + 1 < odds && gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
                 lands = TRUE;
         }
