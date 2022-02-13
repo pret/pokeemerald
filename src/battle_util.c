@@ -7736,8 +7736,10 @@ bool32 IsBattlerGrounded(u8 battlerId)
         return TRUE;
     else if (gFieldStatuses & STATUS_FIELD_GRAVITY)
         return TRUE;
+#if B_ROOTED_GROUNDING >= GEN_4
     else if (gStatuses3[battlerId] & STATUS3_ROOTED)
         return TRUE;
+#endif
     else if (gStatuses3[battlerId] & STATUS3_SMACKED_DOWN)
         return TRUE;
 
