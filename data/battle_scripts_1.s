@@ -4341,7 +4341,11 @@ BattleScript_NightmareWorked::
 BattleScript_EffectMinimize::
 	attackcanceler
 	setminimize
+.if B_MINIMIZE_EVASION >= GEN_5
+	setstatchanger STAT_EVASION, 2, FALSE
+.else
 	setstatchanger STAT_EVASION, 1, FALSE
+.endif
 	goto BattleScript_EffectStatUpAfterAtkCanceler
 
 BattleScript_EffectCurse::
