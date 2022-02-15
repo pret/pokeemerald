@@ -97,7 +97,7 @@ enum
 
 struct PartyMenuBoxInfoRects
 {
-    void (*blitFunc)(u8, u8, u8, u8, u8, u8);
+    void (*blitFunc)(u8, u8, u8, u8, u8, bool8);
     u8 dimensions[24];
     u8 descTextLeft;
     u8 descTextTop;
@@ -377,8 +377,8 @@ static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
 static void ShiftMoveSlot(struct Pokemon*, u8, u8);
-static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, u8);
-static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, u8);
+static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
+static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
 static void CursorCb_Summary(u8);
 static void CursorCb_Switch(u8);
 static void CursorCb_Cancel1(u8);
@@ -2086,30 +2086,30 @@ static void BlitBitmapToPartyWindow(u8 windowId, const u8 *b, u8 c, u8 x, u8 y, 
     }
 }
 
-static void BlitBitmapToPartyWindow_LeftColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 isEgg)
+static void BlitBitmapToPartyWindow_LeftColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP)
 {
     if (width == 0 && height == 0)
     {
         width = 10;
         height = 7;
     }
-    if (isEgg == FALSE)
+    if (hideHP == FALSE)
         BlitBitmapToPartyWindow(windowId, sSlotTilemap_Main, 10, x, y, width, height);
     else
-        BlitBitmapToPartyWindow(windowId, sSlotTilemap_MainEgg, 10, x, y, width, height);
+        BlitBitmapToPartyWindow(windowId, sSlotTilemap_MainNoHP, 10, x, y, width, height);
 }
 
-static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 isEgg)
+static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP)
 {
     if (width == 0 && height == 0)
     {
         width = 18;
         height = 3;
     }
-    if (isEgg == FALSE)
+    if (hideHP == FALSE)
         BlitBitmapToPartyWindow(windowId, sSlotTilemap_Wide, 18, x, y, width, height);
     else
-        BlitBitmapToPartyWindow(windowId, sSlotTilemap_WideEgg, 18, x, y, width, height);
+        BlitBitmapToPartyWindow(windowId, sSlotTilemap_WideNoHP, 18, x, y, width, height);
 }
 
 static void DrawEmptySlot(u8 windowId)
