@@ -28,6 +28,17 @@ enum {
 	BG_COORD_SUB,
 };
 
+// Modes for Unused_AdjustBgMosaic
+enum {
+    BG_MOSAIC_SET_HV,
+    BG_MOSAIC_SET_H,
+    BG_MOSAIC_ADD_H,
+    BG_MOSAIC_SUB_H,
+    BG_MOSAIC_SET_V,
+    BG_MOSAIC_ADD_V,
+    BG_MOSAIC_SUB_V,
+};
+
 struct BgTemplate
 {
     u16 bg:2;                   // 0x1, 0x2 -> 0x3

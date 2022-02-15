@@ -7154,18 +7154,18 @@ static const struct SpriteSheet sSlotMachineSpriteSheets[22] =
 
 static const u8 *const sReelBackground_Tilemap = gSlotMachineReelBackground_Tilemap;
 
-static const u16 sUnused[] =
+static const u16 sUnusedColors[] =
 {
-    0x6F7B,
-    0x6968,
-    0x36AB,
-    0x7FFF,
-    0x5750,
-    0x7EC0,
-    0x02BA,
-    0x02BA,
-    0x01FD,
-    0x01FD,
+    RGB(27, 27, 27),
+    RGB(8, 11, 26),
+    RGB(11, 21, 13),
+    RGB(31, 31, 31),
+    RGB(16, 26, 21),
+    RGB(0, 22, 31),
+    RGB(26, 21, 0),
+    RGB(26, 21, 0),
+    RGB(29, 15, 0),
+    RGB(29, 15, 0),
 };
 
 // The Bet 2 and 3 match line palettes are duplicated unnecessarily
@@ -7234,7 +7234,10 @@ static const u16 *const sPokeballShiningPalTable[] =
 };
 
 static const u16 *const sDigitalDisplay_Pal = gSlotMachineDigitalDisplay_Pal;
-static const u16 sUnkPalette[] = INCBIN_U16("graphics/slot_machine/85A8524.bin");
+static const u16 sUnkPalette[16] = {
+    [1] = RGB_WHITEALPHA,
+    [3] = RGB(8, 8, 8),
+};
 
 static const struct SpritePalette sSlotMachineSpritePalettes[] =
 {

@@ -1,5 +1,0 @@
-    .include "src/main.o"
-    .include "src/rtc.o"
-    .include "src/flash.o"
-	.include "src/agb_flash.o"
-    .include "src/siirtc.o"
