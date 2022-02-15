@@ -28,6 +28,7 @@
 #include "pokemon_summary_screen.h"
 #ifdef POKEMON_EXPANSION
 #include "region_map.h"
+#include "pokemon.h"
 #endif
 #include "reset_rtc_screen.h"
 #include "scanline_effect.h"
