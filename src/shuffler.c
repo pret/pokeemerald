@@ -245,11 +245,19 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
     AdjustedObjects[objNum].t.trainer.partyFlags = partyFlags;
     AdjustedObjects[objNum].t.trainer.partySize = tt->partySize;
 
-    int pool[tt->poolSize];
+    int poolSize = tt->poolSize;
+    int pool[poolSize];
+    int nextIndex = 0;
+    u8 level = GetScaledLevel(distance);
     for (int j = 0; j < tt->poolSize; j++) {
-        pool[j] = j;
+        if ((tt->party[j].minLevel != 0 && level < tt->party[j].minLevel) || (tt->party[j].maxLevel != 0 && level > tt->party[j].maxLevel)) {
+            poolSize--;
+            continue;
+        }
+        pool[nextIndex] = j;
+        nextIndex++;
     }
-    for (int j = tt->poolSize - 1; j > 0; j--) {
+    for (int j = poolSize - 1; j > 0; j--) {
         int k = tinymt32_generate_uint32(&currentRoomSeed) % (j + 1);
         int tmp = pool[j];
         pool[j] = pool[k];
@@ -260,7 +268,6 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
         case 0:
             for (int j = 0; j < tt->partySize; j++) {
                 AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].iv = 0;
-                u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].species =
                     AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
@@ -270,7 +277,6 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
         case F_TRAINER_PARTY_CUSTOM_MOVESET:
             for (int j = 0; j < tt->partySize; j++) {
                 AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].iv = 0;
-                u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].species = 
                     AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
@@ -283,7 +289,6 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
         case F_TRAINER_PARTY_HELD_ITEM:
             for (int j = 0; j < tt->partySize; j++) {
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].iv = 0;
-                u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].species =
                     AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
@@ -295,7 +300,6 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
         case F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET:
             for (int j = 0; j < tt->partySize; j++) {
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[j].iv = 0;
-                u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[j].species =
                     AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);

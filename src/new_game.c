@@ -206,8 +206,7 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
 
-    // Shuffle(Random32());
-    Shuffle(3132977113);
+    Shuffle(Random32());
 }
 
 static void ResetMiniGamesRecords(void)
