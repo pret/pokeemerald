@@ -225,70 +225,85 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
     AdjustedObjects[objNum].t.trainer.encounterMusic_gender = tt->encounterMusic_gender;
     AdjustedObjects[objNum].t.trainer.trainerClass = tt->trainerClass;
     AdjustedObjects[objNum].t.trainer.trainerPic = tt->trainerPic;
-    for (int i = 0; i < 4; i++) {
-        AdjustedObjects[objNum].t.trainer.items[i] = ITEM_NONE;
+    for (int j = 0; j < 4; j++) {
+        AdjustedObjects[objNum].t.trainer.items[j] = ITEM_NONE;
     }
 
-    AdjustedObjects[objNum].t.trainer.partyFlags = tt->partyFlags;
+    int partyFlags = 0;
+    for (int j = 0; j < tt->poolSize; j++) {
+        if (tt->party[j].moves[0] != 0) {
+            partyFlags |= F_TRAINER_PARTY_CUSTOM_MOVESET;
+        }
+        if (tt->party[j].heldItem != 0) {
+            partyFlags |= F_TRAINER_PARTY_HELD_ITEM;
+        }
+        if (partyFlags == F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM) {
+            break;
+        }
+    }
+
+    AdjustedObjects[objNum].t.trainer.partyFlags = partyFlags;
     AdjustedObjects[objNum].t.trainer.partySize = tt->partySize;
 
     int pool[tt->poolSize];
-    for (int i = 0; i < tt->poolSize; i++) {
-        pool[i] = i;
+    for (int j = 0; j < tt->poolSize; j++) {
+        pool[j] = j;
     }
-    for (int i = tt->poolSize - 1; i > 0; i--) {
-        int j = tinymt32_generate_uint32(&currentRoomSeed) % (i + 1);
-        int tmp = pool[i];
-        pool[i] = pool[j];
-        pool[j] = tmp;
+    for (int j = tt->poolSize - 1; j > 0; j--) {
+        int k = tinymt32_generate_uint32(&currentRoomSeed) % (j + 1);
+        int tmp = pool[j];
+        pool[j] = pool[k];
+        pool[k] = tmp;
     }
-    int move_bytes = 0;
-    switch (tt->partyFlags & 3) {
+
+    switch (partyFlags & 3) {
         case 0:
-            move_bytes = sizeof(struct TrainerMonNoItemDefaultMoves);
-            for (int i = 0; i < tt->partySize; i++) {
-                memcpy(
-                    &AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i],
-                    &(tt->party.NoItemDefaultMoves[pool[i]]),
-                    move_bytes);
-                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl = GetScaledLevel(distance);
-                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].species, AdjustedObjects[objNum].t.party.NoItemDefaultMoves[i].lvl);
+            for (int j = 0; j < tt->partySize; j++) {
+                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].iv = 0;
+                u8 level = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].lvl = level;
+                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].species =
+                    AdjustSpecies(tt->party[pool[j]].species, level);
             }
             AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
             break;
         case F_TRAINER_PARTY_CUSTOM_MOVESET:
-            move_bytes = sizeof(struct TrainerMonNoItemCustomMoves);
-            for (int i = 0; i < tt->partySize; i++) {
-                memcpy(
-                    &AdjustedObjects[objNum].t.party.NoItemCustomMoves[i],
-                    &(tt->party.NoItemCustomMoves[pool[i]]),
-                    move_bytes);
-                AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].lvl = GetScaledLevel(distance);
-                AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].species, AdjustedObjects[objNum].t.party.NoItemCustomMoves[i].lvl);
+            for (int j = 0; j < tt->partySize; j++) {
+                AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].iv = 0;
+                u8 level = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].lvl = level;
+                AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].species = 
+                    AdjustSpecies(tt->party[pool[j]].species, level);
+                for (int k = 0; k < 4; k++) {
+                    AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].moves[k] = tt->party[pool[j]].moves[k];
+                }
             }
             AdjustedObjects[objNum].t.trainer.party.NoItemCustomMoves = AdjustedObjects[objNum].t.party.NoItemCustomMoves;
             break;
         case F_TRAINER_PARTY_HELD_ITEM:
-            move_bytes = sizeof(struct TrainerMonItemDefaultMoves);
-            for (int i = 0; i < tt->partySize; i++) {
-                memcpy(
-                    &AdjustedObjects[objNum].t.party.ItemDefaultMoves[i],
-                    &(tt->party.ItemDefaultMoves[pool[i]]),
-                    move_bytes);
-                AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].lvl = GetScaledLevel(distance);
-                AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].species, AdjustedObjects[objNum].t.party.ItemDefaultMoves[i].lvl);
+            for (int j = 0; j < tt->partySize; j++) {
+                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].iv = 0;
+                u8 level = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].lvl = level;
+                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].species =
+                    AdjustSpecies(tt->party[pool[j]].species, level);
+                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].heldItem =
+                    tt->party[pool[j]].heldItem;
             }
             AdjustedObjects[objNum].t.trainer.party.ItemDefaultMoves = AdjustedObjects[objNum].t.party.ItemDefaultMoves;
             break;
         case F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET:
-            move_bytes = sizeof(struct TrainerMonItemCustomMoves);
-            for (int i = 0; i < tt->partySize; i++) {
-                memcpy(
-                    &AdjustedObjects[objNum].t.party.ItemCustomMoves[i],
-                    &(tt->party.ItemCustomMoves[pool[i]]),
-                    move_bytes);
-                AdjustedObjects[objNum].t.party.ItemCustomMoves[i].lvl = GetScaledLevel(distance);
-                AdjustedObjects[objNum].t.party.ItemCustomMoves[i].species = AdjustSpecies(AdjustedObjects[objNum].t.party.ItemCustomMoves[i].species, AdjustedObjects[objNum].t.party.ItemCustomMoves[i].lvl);
+            for (int j = 0; j < tt->partySize; j++) {
+                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].iv = 0;
+                u8 level = GetScaledLevel(distance);
+                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].lvl = level;
+                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].species =
+                    AdjustSpecies(tt->party[pool[j]].species, level);
+                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].heldItem =
+                    tt->party[pool[j]].heldItem;
+                for (int k = 0; k < 4; k++) {
+                    AdjustedObjects[objNum].t.party.ItemCustomMoves[j].moves[k] = tt->party[pool[j]].moves[k];
+                }
             }
             AdjustedObjects[objNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party.ItemCustomMoves;
             break;

@@ -20,13 +20,25 @@
 #define MAT2 0xfc78ff1f
 #define TMAT 0x3793fdff
 
-#define NORTH 0
-#define SOUTH 1
-#define EAST 2
-#define WEST 3
+#define EVO_STRAT_DO_NOT 1
+#define EVO_STRAT_NO_BELLOSSOM 2
+#define EVO_STRAT_NO_MAROWAK_ALOLAN 3
+#define EVO_STRAT_NO_EXEGGUTOR_ALOLAN 4
+#define EVO_STRAT_NO_GALLADE 5
+#define EVO_STRAT_NO_MR_MIME_GALARIAN 6
+
+struct PokemonTemplate {
+    u16 species;
+    u8 minLevel;
+    u8 maxLevel;
+    u16 moves[MAX_MON_MOVES];
+    u16 heldItem;
+    u16 iv;
+    u8 weight;
+    u8 evoStrat;
+};
 
 struct TrainerTemplate {
-    u8 partyFlags;
     u8 trainerClass; // No longer used for displaying class name but still controls the transition animation and some music.
     u8 encounterMusic_gender;
     u8 trainerPic;
@@ -34,7 +46,7 @@ struct TrainerTemplate {
     u8 partySize;
     u8 poolSize;
     
-    union TrainerMonPtr party;
+    struct PokemonTemplate* party;
 
     const u8* introText;
     const u8* defeatText;
