@@ -141,6 +141,6 @@ u16 DoWitchDeal(void);
 u16 BufferWitchText(void);
 u16 ShuffledFlagNumberByObjectEventId(u16 objNum);
 u8 GetScaledLevel(u8 distance);
-u16 AdjustSpecies(u16 species, u8 level);
+u16 AdjustSpecies(u16 species, u8 level, int evoStrat);
 
 #endif // GUARD_SHUFFLER_H

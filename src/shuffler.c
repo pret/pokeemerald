@@ -263,7 +263,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                 u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].species =
-                    AdjustSpecies(tt->party[pool[j]].species, level);
+                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
             }
             AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
             break;
@@ -273,7 +273,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                 u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].species = 
-                    AdjustSpecies(tt->party[pool[j]].species, level);
+                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
                 for (int k = 0; k < 4; k++) {
                     AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].moves[k] = tt->party[pool[j]].moves[k];
                 }
@@ -286,7 +286,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                 u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].species =
-                    AdjustSpecies(tt->party[pool[j]].species, level);
+                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
                 AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].heldItem =
                     tt->party[pool[j]].heldItem;
             }
@@ -298,7 +298,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
                 u8 level = GetScaledLevel(distance);
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[j].lvl = level;
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[j].species =
-                    AdjustSpecies(tt->party[pool[j]].species, level);
+                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
                 AdjustedObjects[objNum].t.party.ItemCustomMoves[j].heldItem =
                     tt->party[pool[j]].heldItem;
                 for (int k = 0; k < 4; k++) {
@@ -322,7 +322,7 @@ void DeclareWildMon(u8 objNum) {
     int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.iv = 15;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = GetScaledLevel(distance);
-    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = AdjustSpecies(possibleWildMon[i], AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl);
+    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = AdjustSpecies(possibleWildMon[i], AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl, 0);
     AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + AdjustedObjects[objNum].wm.NoItemDefaultMoves.species - 1;
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
@@ -619,7 +619,7 @@ u8 GetScaledLevel(u8 dist) {
     }
 }
 
-u16 AdjustSpecies(u16 species, u8 level) {
+u16 AdjustSpecies(u16 species, u8 level, int evoStrat) {
     u16 newSpecies = species;
     int possible = 0;
     u16 possibilities[EVOS_PER_MON + 1];
@@ -632,7 +632,15 @@ u16 AdjustSpecies(u16 species, u8 level) {
         if (!method) {
             continue;
         }
-        if (method == EVO_MEGA_EVOLUTION || method == EVO_MOVE_MEGA_EVOLUTION || method == EVO_PRIMAL_REVERSION) {
+        if (method == EVO_MEGA_EVOLUTION || method == EVO_MOVE_MEGA_EVOLUTION || method == EVO_PRIMAL_REVERSION || evoStrat == EVO_STRAT_DO_NOT) {
+            continue;
+        }
+        if ((evoStrat == EVO_STRAT_NO_BELLOSSOM && targetSpecies == SPECIES_BELLOSSOM) ||
+            (evoStrat == EVO_STRAT_NO_MAROWAK_ALOLAN && targetSpecies == SPECIES_MAROWAK_ALOLAN) ||
+            (evoStrat == EVO_STRAT_NO_EXEGGUTOR_ALOLAN && targetSpecies == SPECIES_EXEGGUTOR_ALOLAN) ||
+            (evoStrat == EVO_STRAT_NO_GALLADE && targetSpecies == SPECIES_GALLADE) ||
+            (evoStrat == EVO_STRAT_NO_MR_MIME_GALARIAN && targetSpecies == SPECIES_MR_MIME_GALARIAN)) {
+            
             continue;
         }
         if ((method == EVO_LEVEL
@@ -691,5 +699,5 @@ u16 AdjustSpecies(u16 species, u8 level) {
         return newSpecies;
     }
 
-    return AdjustSpecies(newSpecies, level);
+    return AdjustSpecies(newSpecies, level, evoStrat);
 }
