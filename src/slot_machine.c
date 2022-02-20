@@ -65,6 +65,14 @@
 #define BIAS_SPECIAL (BIAS_7 | BIAS_REELTIME)
 #define BIAS_REGULAR (BIAS_REPLAY | BIAS_CHERRY | BIAS_LOATAD | BIAS_AZURILL | BIAS_POWER)
 
+// The slot machine will try to manipulate the outcome by adding up to 4 extra
+// turns to the reel after you press stop.
+//
+// The only exception is when it is stopping the third reel and it has decided
+// you will lose. In this case, it adds as many turns as necessary to prevent a
+// match.
+#define MAX_EXTRA_TURNS 4
+
 enum {
     GFXTAG_7_RED,
     GFXTAG_7_BLUE,
@@ -122,12 +130,12 @@ enum {
 };
 
 enum {
-    ROW_MIDDLE,
-    ROW_TOP,
-    ROW_BOTTOM,
-    ROW_DIAG_NWSE,
-    ROW_DIAG_NESW,
-    NUM_MATCH_ROWS,
+    MATCH_MIDDLE_ROW,
+    MATCH_TOP_ROW,
+    MATCH_BOTTOM_ROW,
+    MATCH_NWSE_DIAG,
+    MATCH_NESW_DIAG,
+    NUM_MATCH_LINES,
 };
 
 enum {
@@ -374,7 +382,7 @@ struct SlotMachine
     /*0x41*/ u8 reelTimeExplosionSpriteId;
     /*0x42*/ u8 reelTimeBrokenMachineSpriteId;
     /*0x43*/ u8 reelTimeSmokeSpriteId;
-    /*0x44*/ u8 flashMatchLineSpriteIds[NUM_MATCH_ROWS];
+    /*0x44*/ u8 flashMatchLineSpriteIds[NUM_MATCH_LINES];
     /*0x49*/ u8 reelTimeMachineSpriteIds[2];
     /*0x49*/ u8 reelTimeNumberSpriteIds[3];
     /*0x4E*/ u8 reelTimeShadowSpriteIds[2];
@@ -694,9 +702,9 @@ static const u8 sReelTimeProbabilities_LuckyGame[][17];
 static const u8 sTagToMatch[];
 static const u8 sReelTimeTags[];
 static const u8 sReelTileTags[NUM_REELS][TAGS_PER_REEL];
-static const u16 *const sLitMatchLinePalTable[NUM_MATCH_ROWS];
-static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_ROWS];
-static const u8 sMatchLinePalOffsets[NUM_MATCH_ROWS];
+static const u16 *const sLitMatchLinePalTable[NUM_MATCH_LINES];
+static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_LINES];
+static const u8 sMatchLinePalOffsets[NUM_MATCH_LINES];
 static const u8 sBetToMatchLineIds[MAX_BET][2];
 static const u8 sMatchLinesPerBet[MAX_BET];
 static const u16 *const sFlashingLightsPalTable[];
@@ -1985,7 +1993,7 @@ static void CheckMatch_CenterRow(void)
     {
         sSlotMachine->payout += sSlotPayouts[match];
         sSlotMachine->matches |= sSlotMatchFlags[match];
-        FlashMatchLine(ROW_MIDDLE);
+        FlashMatchLine(MATCH_MIDDLE_ROW);
     }
 }
 
@@ -2003,7 +2011,7 @@ static void CheckMatch_TopAndBottom(void)
             match = MATCH_TOPBOT_CHERRY;
         sSlotMachine->payout += sSlotPayouts[match];
         sSlotMachine->matches |= sSlotMatchFlags[match];
-        FlashMatchLine(ROW_TOP);
+        FlashMatchLine(MATCH_TOP_ROW);
     }
     tag1 = GetTagAtRest(LEFT_REEL, 3);
     tag2 = GetTagAtRest(MIDDLE_REEL, 3);
@@ -2015,7 +2023,7 @@ static void CheckMatch_TopAndBottom(void)
             match = MATCH_TOPBOT_CHERRY;
         sSlotMachine->payout += sSlotPayouts[match];
         sSlotMachine->matches |= sSlotMatchFlags[match];
-        FlashMatchLine(ROW_BOTTOM);
+        FlashMatchLine(MATCH_BOTTOM_ROW);
     }
 }
 
@@ -2036,7 +2044,7 @@ static void CheckMatch_Diagonals(void)
             sSlotMachine->payout += sSlotPayouts[match];
             sSlotMachine->matches |= sSlotMatchFlags[match];
         }
-        FlashMatchLine(ROW_DIAG_NWSE);
+        FlashMatchLine(MATCH_NWSE_DIAG);
     }
     tag1 = GetTagAtRest(LEFT_REEL, 3);
     tag2 = GetTagAtRest(MIDDLE_REEL, 2);
@@ -2051,7 +2059,7 @@ static void CheckMatch_Diagonals(void)
             sSlotMachine->payout += sSlotPayouts[match];
             sSlotMachine->matches |= sSlotMatchFlags[match];
         }
-        FlashMatchLine(ROW_DIAG_NESW);
+        FlashMatchLine(MATCH_NESW_DIAG);
     }
 }
 
@@ -2382,9 +2390,9 @@ static bool8 EitherTagAtPos_Reel1(s16 pos, u8 tag1, u8 tag2)
 // of turns.
 static bool8 AreCherriesOnScreen_Reel1(s16 turns)
 {
-    if (GetTag(LEFT_REEL, 1 - turns) == GFXTAG_CHERRY ||
-        GetTag(LEFT_REEL, 2 - turns) == GFXTAG_CHERRY ||
-        GetTag(LEFT_REEL, 3 - turns) == GFXTAG_CHERRY)
+    if (GetTag(LEFT_REEL, 1 - turns) == GFXTAG_CHERRY
+        || GetTag(LEFT_REEL, 2 - turns) == GFXTAG_CHERRY
+        || GetTag(LEFT_REEL, 3 - turns) == GFXTAG_CHERRY)
         return TRUE;
     else
         return FALSE;
@@ -2404,7 +2412,7 @@ static bool8 DecideStop_Bias_Reel1_Bet1(u8 tag1, u8 tag2)
 {
     s16 i;
 
-    for (i = 0; i <= 4; i++)
+    for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
         if (EitherTagAtPos_Reel1(2 - i, tag1, tag2))
         {
@@ -2458,7 +2466,7 @@ static bool8 DecideStop_Bias_Reel1_Bet2or3(u8 tag1, u8 tag2)
     }
 
     // Check the next 4 turns
-    for (i = 1; i <= 4; i++)
+    for (i = 1; i <= MAX_EXTRA_TURNS; i++)
     {
         bool8 cherry7BiasCopy = cherry7Bias; // redundant
         if (cherry7BiasCopy || !AreCherriesOnScreen_Reel1(i))
@@ -2498,7 +2506,7 @@ static bool8 DecideStop_Bias_Reel2_Bet1or2(void)
     s16 i;
     s16 reel1BiasRow = sSlotMachine->winnerRows[0];
 
-    for (i = 0; i <= 4; i++)
+    for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
         if (GetTag(MIDDLE_REEL, reel1BiasRow - i) == sSlotMachine->biasTag)
         {
@@ -2554,7 +2562,7 @@ static bool8 DecideStop_Bias_Reel2_Bet3(void)
         {
             // Try turning this into a diagonal match by lining up the bias tag
             // in the middle row of reel 2 within 4 turns.
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 if (GetTag(MIDDLE_REEL, 2 - i) == sSlotMachine->biasTag)
                 {
@@ -2573,7 +2581,7 @@ static bool8 DecideStop_Bias_Reel2_Bet3(void)
     {
         // Try to match the bias tag in middle row of reel 2 within 4 turns.
         // Adds coverage for the two cases mentioned above.
-        for (i = 0; i <= 4; i++)
+        for (i = 0; i <= MAX_EXTRA_TURNS; i++)
         {
             if (GetTag(MIDDLE_REEL, 2 - i) == sSlotMachine->biasTag)
             {
@@ -2609,7 +2617,7 @@ static bool8 DecideStop_Bias_Reel3_Bet1or2(u8 biasTag)
     s16 i;
     s16 reel2BiasRow = sSlotMachine->winnerRows[1];
 
-    for (i = 0; i <= 4; i++)
+    for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
         if (GetTag(RIGHT_REEL, reel2BiasRow - i) == biasTag)
         {
@@ -2638,7 +2646,7 @@ static bool8 DecideStop_Bias_Reel3_Bet3(u8 biasTag)
         biasRow = 3;
     else
         biasRow = 1;
-    for (i = 0; i <= 4; i++)
+    for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
         if (GetTag(RIGHT_REEL, biasRow - i) == biasTag)
         {
@@ -2665,16 +2673,16 @@ static void DecideStop_NoBias_Reel1(void)
 
 // If the bias tag is one of the 7's, switch to the opposite color and return
 // true. Otherwise, return false.
-static bool8 IfTag7_SwitchColor(u8 *tagPtr)
+static bool8 IfTag7_SwitchColor(u8 *tag)
 {
-    if (*tagPtr == GFXTAG_7_RED)
+    if (*tag == GFXTAG_7_RED)
     {
-        *tagPtr = GFXTAG_7_BLUE;
+        *tag = GFXTAG_7_BLUE;
         return TRUE;
     }
-    if (*tagPtr == GFXTAG_7_BLUE)
+    if (*tag == GFXTAG_7_BLUE)
     {
-        *tagPtr = GFXTAG_7_RED;
+        *tag = GFXTAG_7_RED;
         return TRUE;
     }
     return FALSE;
@@ -2714,7 +2722,7 @@ static void DecideStop_NoBias_Reel2_Bet1(void)
         if (IfTag7_SwitchColor(&reel1MiddleTag))
         {
             s16 i;
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 if (reel1MiddleTag == GetTag(MIDDLE_REEL, 2 - i))
                 {
@@ -2745,7 +2753,7 @@ static void DecideStop_NoBias_Reel2_Bet2(void)
         if (IfTag7_SwitchColor(&reel1BiasTag))
         {
             s16 i;
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 if (reel1BiasTag == GetTag(MIDDLE_REEL, sSlotMachine->winnerRows[0] - i))
                 {
@@ -2835,7 +2843,7 @@ static void DecideStop_NoBias_Reel2_Bet3(void)
 
             // Check if opposite-color 7 will appear in same row as reel 1 in
             // over the next 4 turns
-            for (j = 1; j <= 4; j++)
+            for (j = 1; j <= MAX_EXTRA_TURNS; j++)
             {
                 if (reel1BiasTag == GetTag(MIDDLE_REEL, sSlotMachine->winnerRows[0] - j))
                 {
@@ -2904,11 +2912,11 @@ static bool8 MismatchedTags_777(u8 tag1, u8 tag2, u8 tag3)
 // Note, this does not account for cherry matches.
 static bool8 NeitherMatchNor7Mismatch(u8 tag1, u8 tag2, u8 tag3)
 {
-    if ((tag1 == GFXTAG_7_RED && tag2 == GFXTAG_7_BLUE && tag3 == GFXTAG_7_RED) ||
-        (tag1 == GFXTAG_7_BLUE && tag2 == GFXTAG_7_RED && tag3 == GFXTAG_7_BLUE) ||
-        (tag1 == GFXTAG_7_RED && tag2 == GFXTAG_7_RED && tag3 == GFXTAG_7_BLUE) ||
-        (tag1 == GFXTAG_7_BLUE && tag2 == GFXTAG_7_BLUE && tag3 == GFXTAG_7_RED) ||
-        (tag1 == tag2 && tag1 == tag3))
+    if ((tag1 == GFXTAG_7_RED && tag2 == GFXTAG_7_BLUE && tag3 == GFXTAG_7_RED)
+        || (tag1 == GFXTAG_7_BLUE && tag2 == GFXTAG_7_RED && tag3 == GFXTAG_7_BLUE)
+        || (tag1 == GFXTAG_7_RED && tag2 == GFXTAG_7_RED && tag3 == GFXTAG_7_BLUE)
+        || (tag1 == GFXTAG_7_BLUE && tag2 == GFXTAG_7_BLUE && tag3 == GFXTAG_7_RED)
+        || (tag1 == tag2 && tag1 == tag3))
     {
         return FALSE;
     }
@@ -2948,9 +2956,9 @@ static void DecideStop_NoBias_Reel3_Bet1(void)
         while (TRUE)
         {
             u8 tag3;
-            if (!((tag1 == (tag3 = GetTag(RIGHT_REEL, 2 - i))) ||
-                  (tag1 == GFXTAG_7_RED && tag3 == GFXTAG_7_BLUE) ||
-                  (tag1 == GFXTAG_7_BLUE && tag3 == GFXTAG_7_RED)))
+            if (!((tag1 == (tag3 = GetTag(RIGHT_REEL, 2 - i)))
+                  || (tag1 == GFXTAG_7_RED && tag3 == GFXTAG_7_BLUE)
+                  || (tag1 == GFXTAG_7_BLUE && tag3 == GFXTAG_7_RED)))
                 break;
             i++;
         }
@@ -2962,7 +2970,7 @@ static void DecideStop_NoBias_Reel3_Bet1(void)
         // turns
         if (sSlotMachine->machineBias & BIAS_STRAIGHT_7)
         {
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 if (tag1 == GetTag(RIGHT_REEL, 2 - i))
                 {
@@ -3023,7 +3031,7 @@ static void DecideStop_NoBias_Reel3_Bet2(void)
         if (MismatchedTags_77(tag1, tag2))
         {
             // Iterate over the next 4 turns
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 tag3 = GetTag(RIGHT_REEL, sSlotMachine->winnerRows[1] - i);
                 if (tag1 == tag3)
@@ -3124,7 +3132,7 @@ static void DecideStop_NoBias_Reel3_Bet3(void)
             row = 1;
             if (sSlotMachine->winnerRows[0] == 1)
                 row = 3;
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 tag3 = GetTag(RIGHT_REEL, row - (sSlotMachine->reelExtraTurns[2] + i));
                 if (tag1 == tag3)
@@ -3142,8 +3150,8 @@ static void DecideStop_NoBias_Reel3_Bet3(void)
         tag1 = GetTag(LEFT_REEL, 1 - sSlotMachine->reelExtraTurns[0]);
         tag2 = GetTag(MIDDLE_REEL, 2 - sSlotMachine->reelExtraTurns[1]);
         tag3 = GetTag(RIGHT_REEL, 3 - sSlotMachine->reelExtraTurns[2]);
-        if (NeitherMatchNor7Mismatch(tag1, tag2, tag3) ||
-            (MismatchedTags_777(tag1, tag2, tag3) && sSlotMachine->machineBias & BIAS_STRAIGHT_7))
+        if (NeitherMatchNor7Mismatch(tag1, tag2, tag3)
+            || (MismatchedTags_777(tag1, tag2, tag3) && sSlotMachine->machineBias & BIAS_STRAIGHT_7))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
@@ -3154,8 +3162,8 @@ static void DecideStop_NoBias_Reel3_Bet3(void)
         tag1 = GetTag(LEFT_REEL, 3 - sSlotMachine->reelExtraTurns[0]);
         tag2 = GetTag(MIDDLE_REEL, 2 - sSlotMachine->reelExtraTurns[1]);
         tag3 = GetTag(RIGHT_REEL, 1 - sSlotMachine->reelExtraTurns[2]);
-        if (NeitherMatchNor7Mismatch(tag1, tag2, tag3) ||
-            (MismatchedTags_777(tag1, tag2, tag3) && sSlotMachine->machineBias & BIAS_STRAIGHT_7))
+        if (NeitherMatchNor7Mismatch(tag1, tag2, tag3)
+            || (MismatchedTags_777(tag1, tag2, tag3) && sSlotMachine->machineBias & BIAS_STRAIGHT_7))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
@@ -7697,37 +7705,37 @@ static const u16 sTopRowLit_Pal[]  = {RGB(31, 29, 16)};
 static const u16 sBottomRowt_Pal[] = {RGB(31, 29, 16)};
 static const u16 sNWSEDiagLit_Pal[] = {RGB(31, 21, 18)};
 static const u16 sNESWDiagLit_Pal[] = {RGB(31, 21, 18)};
-static const u16 *const sLitMatchLinePalTable[NUM_MATCH_ROWS] =
+static const u16 *const sLitMatchLinePalTable[NUM_MATCH_LINES] =
 {
-    [ROW_MIDDLE]    = sMiddleRowLit_Pal,
-    [ROW_TOP]       = sTopRowLit_Pal,
-    [ROW_BOTTOM]    = sBottomRowt_Pal,
-    [ROW_DIAG_NWSE] = sNWSEDiagLit_Pal,
-    [ROW_DIAG_NESW] = sNESWDiagLit_Pal,
+    [MATCH_MIDDLE_ROW] = sMiddleRowLit_Pal,
+    [MATCH_TOP_ROW]    = sTopRowLit_Pal,
+    [MATCH_BOTTOM_ROW] = sBottomRowt_Pal,
+    [MATCH_NWSE_DIAG]  = sNWSEDiagLit_Pal,
+    [MATCH_NESW_DIAG]  = sNESWDiagLit_Pal,
 };
 
-static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_ROWS] =
+static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_LINES] =
 {
-    [ROW_MIDDLE]    = &gSlotMachineMenu_Pal[74],
-    [ROW_TOP]       = &gSlotMachineMenu_Pal[75],
-    [ROW_BOTTOM]    = &gSlotMachineMenu_Pal[76],
-    [ROW_DIAG_NWSE] = &gSlotMachineMenu_Pal[77],
-    [ROW_DIAG_NESW] = &gSlotMachineMenu_Pal[78],
+    [MATCH_MIDDLE_ROW] = &gSlotMachineMenu_Pal[74],
+    [MATCH_TOP_ROW]    = &gSlotMachineMenu_Pal[75],
+    [MATCH_BOTTOM_ROW] = &gSlotMachineMenu_Pal[76],
+    [MATCH_NWSE_DIAG]  = &gSlotMachineMenu_Pal[77],
+    [MATCH_NESW_DIAG]  = &gSlotMachineMenu_Pal[78],
 };
 
-static const u8 sMatchLinePalOffsets[NUM_MATCH_ROWS] = {
-    [ROW_MIDDLE]    = 74,
-    [ROW_TOP]       = 75,
-    [ROW_BOTTOM]    = 76,
-    [ROW_DIAG_NWSE] = 78, // Diag colors flipped for some reason
-    [ROW_DIAG_NESW] = 77  // Doesn't matter as both are identical
+static const u8 sMatchLinePalOffsets[NUM_MATCH_LINES] = {
+    [MATCH_MIDDLE_ROW] = 74,
+    [MATCH_TOP_ROW]    = 75,
+    [MATCH_BOTTOM_ROW] = 76,
+    [MATCH_NWSE_DIAG]  = 78, // Diag colors flipped for some reason
+    [MATCH_NESW_DIAG]  = 77  // Doesn't matter as both are identical
 };
 
 static const u8 sBetToMatchLineIds[MAX_BET][2] =
 {
-    {ROW_MIDDLE,    ROW_MIDDLE},    // Bet 1
-    {ROW_TOP,       ROW_BOTTOM},    // Bet 2
-    {ROW_DIAG_NWSE, ROW_DIAG_NESW}, // Bet 3
+    {MATCH_MIDDLE_ROW, MATCH_MIDDLE_ROW}, // Bet 1
+    {MATCH_TOP_ROW,    MATCH_BOTTOM_ROW}, // Bet 2
+    {MATCH_NWSE_DIAG,  MATCH_NESW_DIAG},  // Bet 3
 };
 
 static const u8 sMatchLinesPerBet[MAX_BET] = { 1, 2, 2 };
