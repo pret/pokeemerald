@@ -295,6 +295,7 @@ enum {
     DIG_DISPLAY_BONUS_BIG
 };
 
+
 // How ReelTime works
 // ==================
 // Entering ReelTime:
@@ -321,7 +322,8 @@ enum {
 //    extra turns to manipulate the outcome.
 //  - ReelTime ends early if you win red 7's or blue 7's.
 
-// Field explanations:
+
+// SlotMachine field explanations:
 //
 // luckyGame:
 //   Determined at random when you start playing. Some events modify this:
@@ -2566,11 +2568,11 @@ static bool8 DecideStop_Bias_Reel2_Bet3(void)
     }
 
     // If you can't line up the bias tag in the same row in 4 turns, and the
-    // bias tag is not in the middle row of reel 1. Adds coverage for the two
-    // cases mentioned above.
+    // bias tag is not in the middle row of reel 1
     if (sSlotMachine->winnerRows[0] != 2)
     {
-        // Try to match the bias tag in middle row of reel 2 within 4 turns
+        // Try to match the bias tag in middle row of reel 2 within 4 turns.
+        // Adds coverage for the two cases mentioned above.
         for (i = 0; i <= 4; i++)
         {
             if (GetTag(MIDDLE_REEL, 2 - i) == sSlotMachine->biasTag)
@@ -7697,35 +7699,35 @@ static const u16 sNWSEDiagLit_Pal[] = {RGB(31, 21, 18)};
 static const u16 sNESWDiagLit_Pal[] = {RGB(31, 21, 18)};
 static const u16 *const sLitMatchLinePalTable[NUM_MATCH_ROWS] =
 {
-    [ROW_MIDDLE] = sMiddleRowLit_Pal,
-    [ROW_TOP]    = sTopRowLit_Pal,
-    [ROW_BOTTOM] = sBottomRowt_Pal,
-    [ROW_DIAG_NWSE]  = sNWSEDiagLit_Pal,
-    [ROW_DIAG_NESW]  = sNESWDiagLit_Pal,
+    [ROW_MIDDLE]    = sMiddleRowLit_Pal,
+    [ROW_TOP]       = sTopRowLit_Pal,
+    [ROW_BOTTOM]    = sBottomRowt_Pal,
+    [ROW_DIAG_NWSE] = sNWSEDiagLit_Pal,
+    [ROW_DIAG_NESW] = sNESWDiagLit_Pal,
 };
 
 static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_ROWS] =
 {
-    [ROW_MIDDLE] = &gSlotMachineMenu_Pal[74],
-    [ROW_TOP]    = &gSlotMachineMenu_Pal[75],
-    [ROW_BOTTOM] = &gSlotMachineMenu_Pal[76],
-    [ROW_DIAG_NWSE]  = &gSlotMachineMenu_Pal[77],
-    [ROW_DIAG_NESW]  = &gSlotMachineMenu_Pal[78],
+    [ROW_MIDDLE]    = &gSlotMachineMenu_Pal[74],
+    [ROW_TOP]       = &gSlotMachineMenu_Pal[75],
+    [ROW_BOTTOM]    = &gSlotMachineMenu_Pal[76],
+    [ROW_DIAG_NWSE] = &gSlotMachineMenu_Pal[77],
+    [ROW_DIAG_NESW] = &gSlotMachineMenu_Pal[78],
 };
 
 static const u8 sMatchLinePalOffsets[NUM_MATCH_ROWS] = {
-    [ROW_MIDDLE] = 74,
-    [ROW_TOP]    = 75,
-    [ROW_BOTTOM] = 76,
-    [ROW_DIAG_NWSE]  = 78, // Diag colors flipped for some reason
-    [ROW_DIAG_NESW]  = 77  // Doesn't matter as both are identical
+    [ROW_MIDDLE]    = 74,
+    [ROW_TOP]       = 75,
+    [ROW_BOTTOM]    = 76,
+    [ROW_DIAG_NWSE] = 78, // Diag colors flipped for some reason
+    [ROW_DIAG_NESW] = 77  // Doesn't matter as both are identical
 };
 
 static const u8 sBetToMatchLineIds[MAX_BET][2] =
 {
-    {ROW_MIDDLE, ROW_MIDDLE}, // Bet 1
-    {ROW_TOP, ROW_BOTTOM},    // Bet 2
-    {ROW_DIAG_NWSE, ROW_DIAG_NESW},   // Bet 3
+    {ROW_MIDDLE,    ROW_MIDDLE},    // Bet 1
+    {ROW_TOP,       ROW_BOTTOM},    // Bet 2
+    {ROW_DIAG_NWSE, ROW_DIAG_NESW}, // Bet 3
 };
 
 static const u8 sMatchLinesPerBet[MAX_BET] = { 1, 2, 2 };
