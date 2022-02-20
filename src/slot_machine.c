@@ -31,9 +31,9 @@
 #define SLOTMACHINE_GFX_TILES 233
 #define MAX_BET 3
 
-#define SYBMOLS_PER_REEL   21
+#define SYMBOLS_PER_REEL   21
 #define REEL_SYMBOL_HEIGHT 24
-#define REEL_HEIGHT        (SYBMOLS_PER_REEL * REEL_SYMBOL_HEIGHT)
+#define REEL_HEIGHT        (SYMBOLS_PER_REEL * REEL_SYMBOL_HEIGHT)
 
 #define REELTIME_SYMBOLS       6
 #define REELTIME_SYMBOL_HEIGHT 20
@@ -199,7 +199,7 @@ enum {
     REEL_TASK_SPIN,
     REEL_TASK_DECIDE_STOP,
     REEL_TASK_STOP_MOVE,
-    REEL_ACTION_STOP_SHAKE,
+    REEL_TASK_STOP_SHAKE,
 };
 
 enum {
@@ -561,7 +561,7 @@ static void LoadReelTimeWindowTilemap(s16, s16);
 static void ClearReelTimeWindowTilemap(s16);
 static void OpenInfoBox(u8);
 static bool8 IsInfoBoxClosed(void);
-static void RunInfoBoxActions(u8 );
+static void Task_InfoBox(u8 );
 static void InfoBox_FadeIn(struct Task *);
 static void InfoBox_WaitFade(struct Task *);
 static void InfoBox_DrawWindow(struct Task *);
@@ -712,7 +712,7 @@ static const u8 sReelTimeProbabilities_NormalGame[][17];
 static const u8 sReelTimeProbabilities_LuckyGame[][17];
 static const u8 sSymbolToMatch[];
 static const u8 sReelTimeSymbols[];
-static const u8 sReelSymbols[NUM_REELS][SYBMOLS_PER_REEL];
+static const u8 sReelSymbols[NUM_REELS][SYMBOLS_PER_REEL];
 static const u16 *const sLitMatchLinePalTable[NUM_MATCH_LINES];
 static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_LINES];
 static const u8 sMatchLinePalOffsets[NUM_MATCH_LINES];
@@ -854,7 +854,7 @@ static bool8 (*const sReelTasks[])(struct Task *task) =
     [REEL_TASK_SPIN]         = ReelTask_Spin,
     [REEL_TASK_DECIDE_STOP]  = ReelTask_DecideStop,
     [REEL_TASK_STOP_MOVE]    = ReelTask_MoveToStop,
-    [REEL_ACTION_STOP_SHAKE] = ReelTask_ShakingStop,
+    [REEL_TASK_STOP_SHAKE] = ReelTask_ShakingStop,
 };
 
 // Returns true if it is possible to match the bias symbol in the reel.
@@ -992,7 +992,7 @@ static void (*const sInfoBoxTasks[])(struct Task *task) =
 };
 
 // Just idles, digital display is handled by CreateDigitalDisplayScene and sprite callbacks
-static void (*const sDigitalDisplayActions[])(struct Task *task) =
+static void (*const sDigitalDisplayTasks[])(struct Task *task) =
 {
     DigitalDisplay_Idle,
 };
@@ -1210,7 +1210,7 @@ static void InitSlotMachine(void)
     for (i = 0; i < NUM_REELS; i++)
     {
         sSlotMachine->reelShockOffsets[i] = 0;
-        sSlotMachine->reelPositions[i] = sInitialReelPositions[i][sSlotMachine->luckyGame] % SYBMOLS_PER_REEL;
+        sSlotMachine->reelPositions[i] = sInitialReelPositions[i][sSlotMachine->luckyGame] % SYMBOLS_PER_REEL;
         sSlotMachine->reelPixelOffsets[i] = REEL_HEIGHT - sSlotMachine->reelPositions[i] * REEL_SYMBOL_HEIGHT;
         sSlotMachine->reelPixelOffsets[i] %= REEL_HEIGHT;
     }
@@ -1387,7 +1387,7 @@ static bool8 SlotTask_HandleBetInput(struct Task *task)
     return FALSE;
 }
 
-// SLOT_ACTION_NEED_3_COINS
+// SLOTTASK_MSG_NEED_3_COINS
 static bool8 SlotTask_PrintMsg_Need3Coins(struct Task *task)
 {
     DrawDialogueFrame(0, 0);
@@ -2172,9 +2172,9 @@ static bool8 PayoutTask_Free(struct Task *task)
 //           .-----------------.
 static u8 GetSymbolAtRest(u8 reel, s16 offset)
 {
-    s16 pos = (sSlotMachine->reelPositions[reel] + offset) % SYBMOLS_PER_REEL;
+    s16 pos = (sSlotMachine->reelPositions[reel] + offset) % SYMBOLS_PER_REEL;
     if (pos < 0)
-        pos += SYBMOLS_PER_REEL;
+        pos += SYMBOLS_PER_REEL;
     return sReelSymbols[reel][pos];
 }
 
@@ -2200,7 +2200,7 @@ static void AdvanceSlotReel(u8 reelIndex, s16 value)
 {
     sSlotMachine->reelPixelOffsets[reelIndex] += value;
     sSlotMachine->reelPixelOffsets[reelIndex] %= REEL_HEIGHT;
-    sSlotMachine->reelPositions[reelIndex] = SYBMOLS_PER_REEL - sSlotMachine->reelPixelOffsets[reelIndex] / REEL_SYMBOL_HEIGHT;
+    sSlotMachine->reelPositions[reelIndex] = SYMBOLS_PER_REEL - sSlotMachine->reelPixelOffsets[reelIndex] / REEL_SYMBOL_HEIGHT;
 }
 
 // Advances the reel no further than the next symbol. Returns the remaining
@@ -2338,7 +2338,7 @@ static bool8 ReelTask_MoveToStop(struct Task *task)
 
     if (reelPixelPos == 0 && sSlotMachine->reelExtraTurns[task->tReelId] == 0)
     {
-        task->tState++; // REEL_ACTION_STOP_SHAKE
+        task->tState++; // REEL_TASK_STOP_SHAKE
         task->tShockMagnitude = reelStopShocks[task->tExtraTurns];
         task->tTimer = 0;
     }
@@ -3622,7 +3622,7 @@ static void ReelTime_PikachuSpeedUp1(struct Task *task)
     SetReelTimeBoltDelay(reelTimeBoltDelays[i]);
     SetReelTimePikachuAuraFlashDelay(pikachuAuraFlashDelays[i]);
     StartSpriteAnimIfDifferent(&gSprites[sSlotMachine->reelTimePikachuSpriteId], pikachuAnimIds[i]);
-    // once speed goes below 256, go to next ReelTimeAction and keep the speed level
+    // once speed goes below 256, go to next ReelTime task and keep the speed level
     if (task->tRtReelSpeed <= 0x100)
     {
         task->tState++; // RT_TASK_PIKA_SPEEDUP2
@@ -3894,20 +3894,20 @@ static void ClearReelTimeWindowTilemap(s16 a0)
 // Info Box is the screen shown when Select is pressed
 static void OpenInfoBox(u8 digDisplayId)
 {
-    u8 taskId = CreateTask(RunInfoBoxActions, 1);
+    u8 taskId = CreateTask(Task_InfoBox, 1);
     gTasks[taskId].data[1] = digDisplayId;
-    RunInfoBoxActions(taskId);
+    Task_InfoBox(taskId);
 }
 
 static bool8 IsInfoBoxClosed(void)
 {
-    if (FindTaskIdByFunc(RunInfoBoxActions) == TASK_NONE)
+    if (FindTaskIdByFunc(Task_InfoBox) == TASK_NONE)
         return TRUE;
     else
         return FALSE;
 }
 
-static void RunInfoBoxActions(u8 taskId)
+static void Task_InfoBox(u8 taskId)
 {
     sInfoBoxTasks[gTasks[taskId].tState](&gTasks[taskId]);
 }
@@ -3977,7 +3977,7 @@ static void InfoBox_LoadPikaPowerMeter(struct Task *task)
 
 static void InfoBox_FreeTask(struct Task *task)
 {
-    DestroyTask(FindTaskIdByFunc(RunInfoBoxActions));
+    DestroyTask(FindTaskIdByFunc(Task_InfoBox));
 }
 
 #undef tState
@@ -4068,7 +4068,7 @@ static bool8 IsDigitalDisplayAnimFinished(void)
 
 static void Task_DigitalDisplay(u8 taskId)
 {
-    sDigitalDisplayActions[gTasks[taskId].data[0]](&gTasks[taskId]);
+    sDigitalDisplayTasks[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
 static void DigitalDisplay_Idle(struct Task *task)
@@ -5216,7 +5216,7 @@ static void AllocDigitalDisplayGfx(void)
     sImageTable_DigitalDisplay_DPad[1].size = 0x180;
 }
 
-static const u8 sReelSymbols[NUM_REELS][SYBMOLS_PER_REEL] =
+static const u8 sReelSymbols[NUM_REELS][SYMBOLS_PER_REEL] =
 {
     [LEFT_REEL] = {
         SYMBOL_7_RED,
