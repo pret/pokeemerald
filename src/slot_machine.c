@@ -295,9 +295,6 @@ enum {
     DIG_DISPLAY_BONUS_BIG
 };
 
-// DO NOT SUBMIT until committing in the 'DO NOT SUBMIT' state.
-// Keep for posterity as more of an unabridged explanation.
-
 // How ReelTime works
 // ==================
 // Entering ReelTime:
@@ -1781,13 +1778,6 @@ static void DrawMachineBias(void)
 
     if (sSlotMachine->reelTimeSpinsLeft == 0)
     {
-        // DO NOT SUBMIT until deleting this!!! Test code to see effects of
-        // power bolts on ReelTime.
-        // if ((Random() % 100) < 30) {
-        //     sSlotMachine->machineBias = BIAS_REELTIME;
-        // } else {
-        //     sSlotMachine->machineBias = BIAS_POWER;
-        // }
         if (!(sSlotMachine->machineBias & (BIAS_STRAIGHT_7 | BIAS_MIXED_7)))
         {
             if (ShouldTrySpecialBias())
@@ -2556,39 +2546,12 @@ static bool8 DecideStop_Bias_Reel2_Bet3(void)
     // If you can line up the bias tag in the same row as reel 1 within 4 turns
     if (DecideStop_Bias_Reel2_Bet1or2())
     {
-        // DO NOT SUBMIT until cleaning up this long-winded musing on Game
-        // Freak's choices...
-        //
-        // QUESTION: Why is the 2-3 turn requirement in place?? That leaves out
-        // some potential middle row matches. E.g.,
-        //  - Bias tag in top of reel 1 and it takes 1 turn to get it in the top
-        //    of reel 2
-        //  - Bias tag in bottom row of reel 1 and it takes 4 turns to get it in
-        //    the bottom row of reel 2
-        //  * In both cases above, it would have been possible to get the bias
-        //    tag in the middle row of reel 2, but we aren't considering it...
-        //    It'll just be matched in the same row instead
-        //
-        // The exact intent is a bit unclear. It could either be:
-        //  1. Skewing toward a diagonal match rather than a straight match with
-        //     2/5 probability.
-        //  2. A programming error: They meant to guard against scenarios where a
-        //     match in the middle is impossible within 4 turns. E.g.,
-        //      - Bias tag in top of reel 1 and it would take 5 turns to get it
-        //        to match in the middle of reel 2
-        //      - Bias tag in bottom of reel 1 and bias tag is currently in
-        //        bottom of reel 2
-        //    But if this were the case, you would expect the inequality to be
-        //    sSlotMachine->reelExtraTurns[1] >= 1 ...
-        //  * I'll give them the benefit of the doubt and assume it was (1).
-        //    After all, the fact that they then check whether it's even
-        //    possible to match in the middle makes (2) redundant.
-        //
         // If bias tag is not in the middle row of reel 1 and it takes either
         // 2 or 3 turns to get it in the same row for reel 2
         if (sSlotMachine->winnerRows[0] != 2 && sSlotMachine->reelExtraTurns[1] > 1 && sSlotMachine->reelExtraTurns[1] != 4)
         {
-            // Try to match the bias tag in middle row of reel 2 within 4 turns
+            // Try turning this into a diagonal match by lining up the bias tag
+            // in the middle row of reel 2 within 4 turns.
             for (i = 0; i <= 4; i++)
             {
                 if (GetTag(MIDDLE_REEL, 2 - i) == sSlotMachine->biasTag)
