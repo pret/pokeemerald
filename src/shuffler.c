@@ -35,6 +35,7 @@
 #endif
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+extern u32 GetTotalBaseStat(u32 species);
 
 EWRAM_DATA int seed;
 EWRAM_DATA tinymt32_t currentRoomSeed;
@@ -323,10 +324,24 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
 
 void DeclareWildMon(u8 objNum) {
     MirrorMapData();
-    int i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON;
+    int i;
+    if (WILD_LEGEND_ODDS == 0) {
+        i = 1;
+    } else {
+        i = tinymt32_generate_uint32(&currentRoomSeed) % WILD_LEGEND_ODDS;
+    }
+    u16 species;
+    if (i == 0) {
+        i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON_LEGENDARY;
+        species = possibleWildMon[i];
+    } else {
+        i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON;
+        species = possibleWildLegends[i];
+    }
+    u8 level = GetScaledLevel(distance);
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.iv = 15;
-    AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = GetScaledLevel(distance);
-    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = AdjustSpecies(possibleWildMon[i], AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl, 0);
+    AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = level;
+    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = AdjustSpecies(species, level, EVO_STRAT_WILD);
     AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + AdjustedObjects[objNum].wm.NoItemDefaultMoves.species - 1;
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
@@ -668,6 +683,10 @@ u16 AdjustSpecies(u16 species, u8 level, int evoStrat) {
             possible++;
             continue;
         }
+        if (evoStrat == EVO_STRAT_WILD) {
+            // we don't want to evolve wild pokemon that level up in a way other than level.
+            continue;
+        }
         if (method == EVO_FRIENDSHIP
             || method == EVO_FRIENDSHIP_DAY
             || method == EVO_FRIENDSHIP_NIGHT
@@ -687,10 +706,17 @@ u16 AdjustSpecies(u16 species, u8 level, int evoStrat) {
             || method == EVO_LEVEL_DARK_TYPE_MON_IN_PARTY
             || method == EVO_TRADE_SPECIFIC_MON) {
 
-            addSelf = 1;
-            possibilities[possible] = targetSpecies;
-            possible++;
-            continue;
+            u32 bstOld = GetTotalBaseStat(species);
+            u32 bstNew = GetTotalBaseStat(targetSpecies);
+            // int levelOld = (bstOld - 208) / 3.59;
+            // int levelNew = (bstNew - 321) / 4.68;
+            int levelMid = (((bstOld - 208) / 3.59) + ((bstNew - 321) / 4.68)) / 2;
+
+            if (levelMid <= level) {
+                possibilities[possible] = targetSpecies;
+                possible++;
+                continue;
+            }
         }
     }
     if (addSelf || possible == 0) {
