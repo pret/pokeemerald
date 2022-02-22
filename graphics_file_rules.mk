@@ -336,7 +336,7 @@ graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 graphics/pokemon_jump/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
 
-graphics/pokenav/region_map.8bpp: %.8bpp: %.png
+graphics/pokenav/region_map/map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
 
 $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
