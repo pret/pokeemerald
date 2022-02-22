@@ -283,21 +283,17 @@ static void BuildStartMenuActions(void)
     {
         BuildMultiPartnerRoomStartMenu();
     }
-    #ifdef TX_DEBUGGING
-        if (TX_DEBUG_MENU_OPTION)
-        {
-            BuildDebugStartMenu();
-        }
-        else
-        {
-            BuildNormalStartMenu();
-        }
-    #else
-        else
-            {
-                BuildNormalStartMenu();
-            }
-    #endif
+#if defined(TX_DEBUGGING) && TX_DEBUG_MENU_OPTION
+    else
+    {
+        BuildDebugStartMenu();
+    }
+#else
+    else
+    {
+        BuildNormalStartMenu();
+    }
+#endif
 }
 
 static void AddStartMenuAction(u8 action)
