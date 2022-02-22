@@ -957,7 +957,7 @@ static u16 GetMapSecIdAt(u16 x, u16 y)
     }
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
-    return sRegionMap_MapSectionLayout[x + y * MAP_WIDTH];
+    return sRegionMap_MapSectionLayout[y][x];
 }
 
 static void InitMapBasedOnPlayerLocation(void)
