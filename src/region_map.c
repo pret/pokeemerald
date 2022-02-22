@@ -53,16 +53,12 @@ enum {
     TAG_FLY_ICON,
 };
 
-// Static type declarations
-
 struct MultiNameFlyDest
 {
     const u8 *const *name;
     u16 mapSecId;
     u16 flag;
 };
-
-// Static RAM declarations
 
 static EWRAM_DATA struct RegionMap *gRegionMap = NULL;
 
@@ -77,8 +73,6 @@ static EWRAM_DATA struct {
 } *sFlyMap = NULL;
 
 static bool32 sDrawFlyDestTextWindow;
-
-// Static ROM declarations
 
 static u8 ProcessRegionMapInput_Full(void);
 static u8 MoveRegionMapCursor_Full(void);
@@ -127,8 +121,8 @@ static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokena
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/region_map/may_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/region_map/may_icon.4bpp");
-static const u8 sRegionMap_MapSectionLayout[] = INCBIN_U8("graphics/pokenav/region_map_section_layout.bin");
 
+#include "data/region_map/region_map_layout.h"
 #include "data/region_map/region_map_entries.h"
 
 static const u16 sRegionMap_SpecialPlaceLocations[][2] =
@@ -505,8 +499,6 @@ static const struct SpriteTemplate sFlyDestIconSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-
-// .text
 
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
 {
