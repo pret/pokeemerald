@@ -1465,7 +1465,7 @@ void CopyPyramidTrainerLoseSpeech(u16 trainerId)
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
 }
 
-u8 GetBattlePyramindTrainerEncounterMusicId(u16 trainerId)
+u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
 {
     int i;
 
