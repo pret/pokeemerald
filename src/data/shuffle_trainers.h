@@ -30,6 +30,8 @@ static const int allTrainersCount[TOTAL_TRAINER_TYPES] = {
     POSSIBLE_VIOLET_GYM_LEADERS,
     POSSIBLE_CERULEAN_GYM_MEMBERS,
     POSSIBLE_CERULEAN_GYM_LEADERS,
+    POSSIBLE_CELADON_GYM_MEMBERS,
+    POSSIBLE_CELADON_GYM_LEADERS,
 };
 
 static const struct PokemonTemplate etHoldemJoeParty[] = {
