@@ -658,7 +658,8 @@ u16 AdjustSpecies(u16 species, u8 level, int evoStrat) {
             (evoStrat == EVO_STRAT_NO_MAROWAK_ALOLAN && targetSpecies == SPECIES_MAROWAK_ALOLAN) ||
             (evoStrat == EVO_STRAT_NO_EXEGGUTOR_ALOLAN && targetSpecies == SPECIES_EXEGGUTOR_ALOLAN) ||
             (evoStrat == EVO_STRAT_NO_GALLADE && targetSpecies == SPECIES_GALLADE) ||
-            (evoStrat == EVO_STRAT_NO_MR_MIME_GALARIAN && targetSpecies == SPECIES_MR_MIME_GALARIAN)) {
+            (evoStrat == EVO_STRAT_NO_MR_MIME_GALARIAN && targetSpecies == SPECIES_MR_MIME_GALARIAN) ||
+            (evoStrat == EVO_STRAT_NO_VILEPLUME && targetSpecies == SPECIES_VILEPLUME)) {
             
             continue;
         }

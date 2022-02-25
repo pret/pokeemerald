@@ -29,6 +29,7 @@
 #define EVO_STRAT_NO_GALLADE 5
 #define EVO_STRAT_NO_MR_MIME_GALARIAN 6
 #define EVO_STRAT_WILD 7
+#define EVO_STRAT_NO_VILEPLUME 8
 
 struct PokemonTemplate {
     u16 species;
