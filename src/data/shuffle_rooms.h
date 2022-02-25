@@ -1,6 +1,6 @@
 #define TOTAL_START_ROOMS 1
 #define TOTAL_NORMAL_ROOMS 10
-#define TOTAL_GYM_ROOMS 2
+#define TOTAL_GYM_ROOMS 3
 #define TOTAL_ELITE_ROOMS 1
 #define TOTAL_CHAMPION_ROOMS 0
 #define TOTAL_END_ROOMS 1
@@ -23,6 +23,7 @@ static const int NormalRooms[TOTAL_NORMAL_ROOMS] = {
 static const int GymRooms[TOTAL_GYM_ROOMS] = {
     MAP_VIOLET_GYM,
     MAP_CERULEAN_GYM,
+    MAP_CELADON_GYM,
 };
 static const int EliteRooms[TOTAL_ELITE_ROOMS] = {
     MAP_ELITE_ROOM1,

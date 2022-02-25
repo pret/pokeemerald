@@ -1091,3 +1091,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/EliteRoom1/scripts.inc"
 
 	.include "data/maps/PostGymRoom/scripts.inc"
+
+	.include "data/maps/CeladonGym/scripts.inc"

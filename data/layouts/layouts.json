@@ -4570,6 +4570,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/PostGymRoom/border.bin",
       "blockdata_filepath": "data/layouts/PostGymRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_CELADON_GYM",
+      "name": "CeladonGym_Layout",
+      "width": 16,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/CeladonGym/border.bin",
+      "blockdata_filepath": "data/layouts/CeladonGym/map.bin"
     }
   ]
 }
