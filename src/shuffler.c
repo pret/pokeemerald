@@ -333,15 +333,16 @@ void DeclareWildMon(u8 objNum) {
     u16 species;
     if (i == 0) {
         i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON_LEGENDARY;
-        species = possibleWildMon[i];
+        species = possibleWildLegends[i];
     } else {
         i = tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_WILD_MON;
-        species = possibleWildLegends[i];
+        species = possibleWildMon[i];
     }
     u8 level = GetScaledLevel(distance);
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.iv = 15;
     AdjustedObjects[objNum].wm.NoItemDefaultMoves.lvl = level;
-    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = AdjustSpecies(species, level, EVO_STRAT_WILD);
+    u16 adjustedSpecies = AdjustSpecies(species, level, EVO_STRAT_WILD);
+    AdjustedObjects[objNum].wm.NoItemDefaultMoves.species = adjustedSpecies;
     AdjustedTemplates[objNum].graphicsId = OBJ_EVENT_GFX_POKEMON_001 + AdjustedObjects[objNum].wm.NoItemDefaultMoves.species - 1;
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
 }
