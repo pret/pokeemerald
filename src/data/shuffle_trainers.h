@@ -5,7 +5,9 @@
 #define TRAINER_TYPE_VIOLET_GYM_LEADER 4
 #define TRAINER_TYPE_CERULEAN_GYM_MEMBER 5
 #define TRAINER_TYPE_CERULEAN_GYM_LEADER 6
-#define TOTAL_TRAINER_TYPES 7
+#define TRAINER_TYPE_CELADON_GYM_MEMBER 7
+#define TRAINER_TYPE_CELADON_GYM_LEADER 8
+#define TOTAL_TRAINER_TYPES 9
 
 #define POSSIBLE_COMMON_TRAINERS 18
 #define POSSIBLE_ELITE_TRAINERS 1
@@ -15,6 +17,8 @@
 #define POSSIBLE_VIOLET_GYM_LEADERS 1
 #define POSSIBLE_CERULEAN_GYM_MEMBERS 3
 #define POSSIBLE_CERULEAN_GYM_LEADERS 1
+#define POSSIBLE_CELADON_GYM_MEMBERS 4
+#define POSSIBLE_CELADON_GYM_LEADERS 2
 
 static const u8 unknown_string[] = _("unknown");
 
@@ -1355,6 +1359,204 @@ static const struct TrainerTemplate glCerulean1 = {
     .graphicsId = OBJ_EVENT_GFX_FISHERMAN,
 };
 
+static const struct PokemonTemplate gmCeladon1Party[] = {
+    { .species = SPECIES_BELLSPROUT },
+    { .species = SPECIES_ODDISH },
+    { .species = SPECIES_BULBASAUR },
+    { .species = SPECIES_EXEGGCUTE },
+    { .species = SPECIES_HOPPIP },
+    { .species = SPECIES_PARAS },
+    { .species = SPECIES_CARNIVINE },
+    { .species = SPECIES_TANGELA },
+};
+static const u8 gmCeladon1IntroText[] = _("intro text");
+static const u8 gmCeladon1DefeatText[] = _("defeat text");
+static const u8 gmCeladon1PostbattleText[] = _("postbattle text");
+static const u8 gmCeladon1Name[] = _("Celadon Gym Member 1");
+static const struct TrainerTemplate gmCeladon1 = {
+    .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+    .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+    .trainerPic = TRAINER_PIC_BEAUTY,
+    .trainerName = gmCeladon1Name,
+    .partySize = 3,
+    .poolSize = 8,
+    .party = &gmCeladon1Party,
+    .introText = gmCeladon1IntroText,
+    .defeatText = gmCeladon1DefeatText,
+    .postbattleText = gmCeladon1PostbattleText,
+    .graphicsId = OBJ_EVENT_GFX_BEAUTY,
+};
+
+static const struct PokemonTemplate gmCeladon2Party[] = {
+    { .species = SPECIES_BULBASAUR },
+    { .species = SPECIES_CHIKORITA },
+    { .species = SPECIES_TREECKO },
+    { .species = SPECIES_TURTWIG },
+    { .species = SPECIES_SNIVY },
+    { .species = SPECIES_CHESPIN },
+    { .species = SPECIES_ROWLET },
+    { .species = SPECIES_GROOKEY },
+    { .species = SPECIES_LEAFEON },
+};
+static const u8 gmCeladon2IntroText[] = _("intro text");
+static const u8 gmCeladon2DefeatText[] = _("defeat text");
+static const u8 gmCeladon2PostbattleText[] = _("postbattle text");
+static const u8 gmCeladon2Name[] = _("Celadon Gym Member 2");
+static const struct TrainerTemplate gmCeladon2 = {
+    .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+    .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+    .trainerPic = TRAINER_PIC_BEAUTY,
+    .trainerName = gmCeladon2Name,
+    .partySize = 3,
+    .poolSize = 9,
+    .party = &gmCeladon2Party,
+    .introText = gmCeladon2IntroText,
+    .defeatText = gmCeladon2DefeatText,
+    .postbattleText = gmCeladon2PostbattleText,
+    .graphicsId = OBJ_EVENT_GFX_GIRL_1,
+};
+
+static const struct PokemonTemplate gmCeladon3Party[] = {
+    { .species = SPECIES_CHIKORITA },
+    { .species = SPECIES_SUNKERN },
+    { .species = SPECIES_LOTAD },
+    { .species = SPECIES_SEEDOT },
+    { .species = SPECIES_SHROOMISH },
+    { .species = SPECIES_CACNEA },
+    { .species = SPECIES_LILEEP },
+    { .species = SPECIES_TROPIUS },
+    { .species = SPECIES_WORMADAM },
+};
+static const u8 gmCeladon3IntroText[] = _("intro text");
+static const u8 gmCeladon3DefeatText[] = _("defeat text");
+static const u8 gmCeladon3PostbattleText[] = _("postbattle text");
+static const u8 gmCeladon3Name[] = _("Celadon Gym Member 3");
+static const struct TrainerTemplate gmCeladon3 = {
+    .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+    .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+    .trainerPic = TRAINER_PIC_BEAUTY,
+    .trainerName = gmCeladon3Name,
+    .partySize = 3,
+    .poolSize = 9,
+    .party = &gmCeladon3Party,
+    .introText = gmCeladon3IntroText,
+    .defeatText = gmCeladon3DefeatText,
+    .postbattleText = gmCeladon3PostbattleText,
+    .graphicsId = OBJ_EVENT_GFX_GIRL_2,
+};
+
+static const struct PokemonTemplate gmCeladon4Party[] = {
+    { .species = SPECIES_TURTWIG },
+    { .species = SPECIES_BUDEW },
+    { .species = SPECIES_CHERUBI },
+    { .species = SPECIES_SNOVER },
+    { .species = SPECIES_SEWADDLE },
+    { .species = SPECIES_COTTONEE },
+    { .species = SPECIES_PETILIL },
+    { .species = SPECIES_MARACTUS },
+    { .species = SPECIES_DEERLING },
+    { .species = SPECIES_FERROSEED },
+    { .species = SPECIES_AMOONGUSS },
+};
+static const u8 gmCeladon4IntroText[] = _("intro text");
+static const u8 gmCeladon4DefeatText[] = _("defeat text");
+static const u8 gmCeladon4PostbattleText[] = _("postbattle text");
+static const u8 gmCeladon4Name[] = _("Celadon Gym Member 3");
+static const struct TrainerTemplate gmCeladon4 = {
+    .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+    .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+    .trainerPic = TRAINER_PIC_BEAUTY,
+    .trainerName = gmCeladon4Name,
+    .partySize = 3,
+    .poolSize = 11,
+    .party = &gmCeladon4Party,
+    .introText = gmCeladon4IntroText,
+    .defeatText = gmCeladon4DefeatText,
+    .postbattleText = gmCeladon4PostbattleText,
+    .graphicsId = OBJ_EVENT_GFX_GIRL_3,
+};
+
+static const struct PokemonTemplate glCeladon1Party[] = {
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_RAZOR_LEAF, MOVE_WRAP, MOVE_POISON_POWDER, MOVE_SLEEP_POWDER} },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_CONSTRICT, MOVE_BIND, MOVE_NONE, MOVE_NONE} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_PETAL_DANCE, MOVE_POISON_POWDER, MOVE_MEGA_DRAIN, MOVE_SLEEP_POWDER}, .evoStrat = EVO_STRAT_NO_BELLOSSOM },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_BIND, MOVE_MEGA_DRAIN, MOVE_VINE_WHIP, MOVE_CONSTRICT} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_ACID, MOVE_STUN_SPORE, MOVE_SLEEP_POWDER, MOVE_RAZOR_LEAF} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_ACID, MOVE_PETAL_DANCE, MOVE_STUN_SPORE, MOVE_SLEEP_POWDER} },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_VINE_WHIP, MOVE_BIND, MOVE_GIGA_DRAIN, MOVE_SLEEP_POWDER} },
+    { .species = SPECIES_HOPPIP, .moves = {MOVE_MEGA_DRAIN, MOVE_LEECH_SEED, MOVE_COTTON_SPORE, MOVE_GIGA_DRAIN} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_SUNNY_DAY, MOVE_SYNTHESIS, MOVE_ACID, MOVE_RAZOR_LEAF} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_SUNNY_DAY, MOVE_SYNTHESIS, MOVE_PETAL_DANCE, MOVE_SOLAR_BEAM}, .evoStrat = EVO_STRAT_NO_VILEPLUME },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_STUN_SPORE, MOVE_ACID, MOVE_POISON_POWDER, MOVE_GIGA_DRAIN} },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_POISON_POWDER, MOVE_CONSTRICT, MOVE_INGRAIN, MOVE_GIGA_DRAIN} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_SLEEP_POWDER, MOVE_ACID, MOVE_STUN_SPORE, MOVE_GIGA_DRAIN}, .evoStrat = EVO_STRAT_NO_VILEPLUME },
+    { .species = SPECIES_HOPPIP, .moves = {MOVE_LEECH_SEED, MOVE_U_TURN, MOVE_GIGA_DRAIN, MOVE_SUNNY_DAY} },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_ANCIENT_POWER, MOVE_WRING_OUT, MOVE_GIGA_DRAIN, MOVE_SLEEP_POWDER} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_SUNNY_DAY, MOVE_SYNTHESIS, MOVE_LEAF_STORM, MOVE_GRASS_KNOT} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_GIGA_DRAIN, MOVE_SYNTHESIS}, .evoStrat = EVO_STRAT_NO_VILEPLUME },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_MEGA_DRAIN, MOVE_SLEEP_POWDER, MOVE_BIND, MOVE_NONE} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_MEGA_DRAIN, MOVE_POISON_JAB, MOVE_NONE, MOVE_NONE} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_MEGA_DRAIN, MOVE_MOONBLAST, MOVE_NONE, MOVE_NONE} },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_MEGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_REFLECT, MOVE_POWER_WHIP} },
+};
+static const u8 glCeladon1IntroText[] = _("intro text");
+static const u8 glCeladon1DefeatText[] = _("defeat text");
+static const u8 glCeladon1PostbattleText[] = _("postbattle text");
+static const u8 glCeladon1Name[] = _("Erika 1");
+static const struct TrainerTemplate glCeladon1 = {
+    .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+    .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+    .trainerPic = TRAINER_PIC_BEAUTY,
+    .trainerName = glCeladon1Name,
+    .partySize = 6,
+    .poolSize = 21,
+    .party = &glCeladon1Party,
+    .introText = glCeladon1IntroText,
+    .defeatText = glCeladon1DefeatText,
+    .postbattleText = glCeladon1PostbattleText,
+    .graphicsId = OBJ_EVENT_GFX_BEAUTY,
+};
+
+static const struct PokemonTemplate glCeladon2Party[] = {
+    { .species = SPECIES_PARAS, .moves = {MOVE_SOLAR_BEAM, MOVE_BRICK_BREAK, MOVE_LEECH_LIFE, MOVE_SPORE} },
+    { .species = SPECIES_EXEGGCUTE, .moves = {MOVE_SOLAR_BEAM, MOVE_SLUDGE_BOMB, MOVE_HYPER_BEAM, MOVE_PSYCHIC} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_POWER_WHIP, MOVE_POISON_JAB, MOVE_REFLECT, MOVE_SWORDS_DANCE} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_MOONBLAST, MOVE_PETAL_DANCE, MOVE_SLUDGE_BOMB, MOVE_STUN_SPORE}, .evoStrat = EVO_STRAT_NO_BELLOSSOM },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_ACID, MOVE_SLEEP_POWDER, MOVE_PETAL_DANCE, MOVE_MEGA_DRAIN} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_SLEEP_POWDER, MOVE_ACID, MOVE_RAZOR_LEAF, MOVE_CUT} },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_BIND, MOVE_STUN_SPORE, MOVE_DOUBLE_EDGE, MOVE_MEGA_DRAIN} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_ACID, MOVE_ABSORB, MOVE_SOLAR_BEAM, MOVE_BODY_SLAM}, .evoStrat = EVO_STRAT_NO_BELLOSSOM },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_WRAP, MOVE_STUN_SPORE, MOVE_MEGA_DRAIN, MOVE_RAZOR_LEAF} },
+    { .species = SPECIES_EXEGGCUTE, .moves = {MOVE_HYPNOSIS, MOVE_LEECH_SEED, MOVE_TOXIC, MOVE_PSYCHIC} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_STUN_SPORE, MOVE_PETAL_DANCE, MOVE_BODY_SLAM, MOVE_MEGA_DRAIN}, .evoStrat = EVO_STRAT_NO_BELLOSSOM },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_BIND, MOVE_TOXIC, MOVE_DOUBLE_EDGE, MOVE_MEGA_DRAIN} },
+    { .species = SPECIES_BELLSPROUT, .moves = {MOVE_BIND, MOVE_MEGA_DRAIN, MOVE_RAZOR_LEAF, MOVE_TOXIC} },
+    { .species = SPECIES_EXEGGCUTE, .moves = {MOVE_HYPNOSIS, MOVE_EXPLOSION, MOVE_PSYCHIC, MOVE_MEGA_DRAIN} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_SLEEP_POWDER, MOVE_RETURN, MOVE_MOONLIGHT, MOVE_GIGA_DRAIN}, .evoStrat = EVO_STRAT_NO_VILEPLUME },
+    { .species = SPECIES_TANGELA, .moves = {MOVE_SLEEP_POWDER, MOVE_SLAM, MOVE_SOLAR_BEAM, MOVE_GIGA_DRAIN} },
+    { .species = SPECIES_BULBASAUR, .moves = {MOVE_SLEEP_POWDER, MOVE_CUT, MOVE_LEECH_SEED, MOVE_RAZOR_LEAF} },
+    { .species = SPECIES_HOPPIP, .moves = {MOVE_SLEEP_POWDER, MOVE_RETURN, MOVE_SOLAR_BEAM, MOVE_LEECH_SEED} },
+    { .species = SPECIES_ODDISH, .moves = {MOVE_RETURN, MOVE_RAZOR_LEAF, MOVE_STUN_SPORE, MOVE_SLEEP_POWDER}, .evoStrat = EVO_STRAT_NO_VILEPLUME },
+    { .species = SPECIES_EXEGGCUTE, .moves = {MOVE_PSYCHIC, MOVE_GIGA_DRAIN, MOVE_STUN_SPORE, MOVE_SLEEP_POWDER} },
+};
+static const u8 glCeladon2IntroText[] = _("intro text");
+static const u8 glCeladon2DefeatText[] = _("defeat text");
+static const u8 glCeladon2PostbattleText[] = _("postbattle text");
+static const u8 glCeladon2Name[] = _("Erika 2");
+static const struct TrainerTemplate glCeladon2 = {
+    .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+    .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+    .trainerPic = TRAINER_PIC_BEAUTY,
+    .trainerName = glCeladon2Name,
+    .partySize = 6,
+    .poolSize = 20,
+    .party = &glCeladon2Party,
+    .introText = glCeladon2IntroText,
+    .defeatText = glCeladon2DefeatText,
+    .postbattleText = glCeladon2PostbattleText,
+    .graphicsId = OBJ_EVENT_GFX_BEAUTY,
+};
+
 static const struct TrainerTemplate* const commonTrainers[POSSIBLE_COMMON_TRAINERS] = {
     &ctNormal,
     &ctFighting,
@@ -1392,6 +1594,16 @@ static const struct TrainerTemplate* const ceruleanGymMembers[POSSIBLE_CERULEAN_
 static const struct TrainerTemplate* const ceruleanGymLeaders[POSSIBLE_CERULEAN_GYM_LEADERS] = {
     &glCerulean1
 };
+static const struct TrainerTemplate* const celadonGymMembers[POSSIBLE_CELADON_GYM_MEMBERS] = {
+    &gmCeladon1,
+    &gmCeladon2,
+    &gmCeladon3,
+    &gmCeladon4,
+};
+static const struct TrainerTemplate* const celadonGymLeaders[POSSIBLE_CELADON_GYM_LEADERS] = {
+    &glCeladon1,
+    &glCeladon2,
+};
 static const struct TrainerTemplate* const eliteTrainers[POSSIBLE_ELITE_TRAINERS] = {
     &etHoldemJoe,
 };
@@ -1402,5 +1614,7 @@ static const struct TrainerTemplate** const allTrainers[TOTAL_TRAINER_TYPES] = {
     &violetGymMembers,
     &violetGymLeaders,
     &ceruleanGymMembers,
-    &ceruleanGymLeaders
+    &ceruleanGymLeaders,
+    &celadonGymMembers,
+    &celadonGymLeaders,
 };
