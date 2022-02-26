@@ -8267,6 +8267,8 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                     }
                     break;
                 }
+                if (species != targetSpecies)
+                    break;
             }
         }
     }
