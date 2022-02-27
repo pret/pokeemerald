@@ -6086,7 +6086,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                     case 7: // ITEM4_EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, SPECIES_NONE);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
@@ -6410,7 +6410,7 @@ u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u16 tradePartnerSpecies)
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
     int i, j;
     u16 targetSpecies = 0;
@@ -6423,6 +6423,26 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
     u16 currentMap;
+    u16 partnerSpecies;
+    u16 partnerHeldItem;
+    u8 partnerHoldEffect;
+
+    if (tradePartner != NULL)
+    {
+        partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
+        partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
+        
+        if (partnerHeldItem == ITEM_ENIGMA_BERRY)
+            partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        else
+            partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
+    }
+    else
+    {
+        partnerSpecies = SPECIES_NONE;
+        partnerHeldItem = ITEM_NONE;
+        partnerHoldEffect = HOLD_EFFECT_NONE;
+    }
 
     if (heldItem == ITEM_ENIGMA_BERRY)
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
@@ -6654,7 +6674,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_TRADE_SPECIFIC_MON:
-                if (gEvolutionTable[species][i].param == tradePartnerSpecies)
+                if (gEvolutionTable[species][i].param == partnerSpecies && partnerHoldEffect != HOLD_EFFECT_PREVENT_EVOLVE)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }

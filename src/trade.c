@@ -3798,7 +3798,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case TS_STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_UpdateInGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
@@ -4298,7 +4298,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case TS_STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_UpdateInGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
@@ -4343,7 +4343,7 @@ static void CB2_TryLinkTradeEvolution(void)
         break;
     case 4:
         gCB2_AfterEvolution = CB2_SaveAndEndTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         else if (IsWirelessTrade())

@@ -5150,7 +5150,7 @@ static void TryEvolvePokemon(void)
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, SPECIES_NONE);
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, NULL);
                 if (species != SPECIES_NONE)
                 {
                     FreeAllWindowBuffers();
