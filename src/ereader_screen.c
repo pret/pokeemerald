@@ -41,8 +41,8 @@ static void Task_EReader(u8);
 
 struct EReaderData gEReaderData;
 
-extern const u8 gEReaderLinkData_Start[];
-extern const u8 gEReaderLinkData_End[];
+extern const u8 gMultiBootProgram_EReader_Start[];
+extern const u8 gMultiBootProgram_EReader_End[];
 
 static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
 {
@@ -397,8 +397,8 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        // XXX: This (u32*) cast is discarding the const qualifier from gEReaderLinkData_Start
-        EReader_Load(&gEReaderData, gEReaderLinkData_End - gEReaderLinkData_Start, (u32*)gEReaderLinkData_Start);
+        // XXX: This (u32*) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
+        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32*)gMultiBootProgram_EReader_Start);
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

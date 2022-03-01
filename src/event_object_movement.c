@@ -110,7 +110,7 @@ static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
 static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent*);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
-static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
+static void InitObjectPriorityByElevation(struct Sprite *, u8);
 static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
 static void DoTracksGroundEffect_None(struct ObjectEvent*, struct Sprite*, u8);
 static void DoTracksGroundEffect_Footprints(struct ObjectEvent*, struct Sprite*, u8);
@@ -142,27 +142,29 @@ static void ResetObjectEventFldEffData(struct ObjectEvent *);
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
 static u8 FindObjectEventPaletteIndexByTag(u16);
 static void _PatchObjectPalette(u16, u8);
-static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *, u8);
+static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
 static void SpriteCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
 static void CameraObject_2(struct Sprite *);
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count);
+static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8, struct ObjectEventTemplate *, u8);
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void SetSpriteDataForNormalStep(struct Sprite *, u8, u8);
-static void InitSpriteForFigure8Anim(struct Sprite *sprite);
-static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
+static void InitSpriteForFigure8Anim(struct Sprite *);
+static bool8 AnimateSpriteInFigure8(struct Sprite *);
 static void SpriteCB_VirtualObject(struct Sprite *);
 static void DoShadowFieldEffect(struct ObjectEvent *);
 static void SetJumpSpriteData(struct Sprite *, u8, u8, u8);
-static void SetWalkSlowSpriteData(struct Sprite *sprite, u8 direction);
-static bool8 UpdateWalkSlowAnim(struct Sprite *sprite);
-static u8 DoJumpSpriteMovement(struct Sprite *sprite);
-static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite);
+static void SetWalkSlowSpriteData(struct Sprite *, u8);
+static bool8 UpdateWalkSlowAnim(struct Sprite *);
+static u8 DoJumpSpriteMovement(struct Sprite *);
+static u8 DoJumpSpecialSpriteMovement(struct Sprite *);
 static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
-static bool8 NpcTakeStep(struct Sprite *sprite);
+static bool8 NpcTakeStep(struct Sprite *);
+static bool8 IsElevationMismatchAt(u8, s16, s16);
+static bool8 AreElevationsCompatible(u8 a, u8 b);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
@@ -1433,7 +1435,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     if (!objectEvent->inanimate)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
 
-    SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+    SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
     UpdateObjectEventVisibility(objectEvent, sprite);
     return objectEventId;
 }
@@ -1470,7 +1472,7 @@ u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *objectEventTemplate)
     return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
-u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
+u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
 {
     struct ObjectEventTemplate objectEventTemplate;
 
@@ -1481,7 +1483,7 @@ u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 l
     objectEventTemplate.inConnection = 0;
     objectEventTemplate.x = x;
     objectEventTemplate.y = y;
-    objectEventTemplate.elevation = z;
+    objectEventTemplate.elevation = elevation;
     objectEventTemplate.movementType = movementBehavior;
     objectEventTemplate.movementRangeX = 0;
     objectEventTemplate.movementRangeY = 0;
@@ -1560,7 +1562,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
 // A unique id is given as an argument and stored in the sprite data to allow referring back to the same virtual object.
 // They can be turned (and, in the case of the Union Room, animated teleporting in and out) but do not have movement types
 // or any of the other data normally associated with object events.
-u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 direction)
+u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1587,7 +1589,7 @@ u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 di
 
         sprite->coordOffsetEnabled = TRUE;
         sprite->sVirtualObjId = virtualObjId;
-        sprite->sVirtualObjElev = z;
+        sprite->sVirtualObjElev = elevation;
         if (graphicsInfo->paletteSlot == 10)
             LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
         else if (graphicsInfo->paletteSlot >= 16)
@@ -1598,8 +1600,8 @@ u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 di
             SetSubspriteTables(sprite, subspriteTables);
             sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
-        InitObjectPriorityByZCoord(sprite, z);
-        SetObjectSubpriorityByZCoord(z, sprite, 1);
+        InitObjectPriorityByElevation(sprite, elevation);
+        SetObjectSubpriorityByElevation(elevation, sprite, 1);
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(direction));
     }
     return spriteId;
@@ -1755,7 +1757,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
             StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
 
         ResetObjectEventFldEffData(objectEvent);
-        SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+        SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
     }
 }
 
@@ -2148,7 +2150,7 @@ void UpdateObjectEventCoordsForCameraUpdate(void)
     }
 }
 
-u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
+u8 GetObjectEventIdByPosition(u16 x, u16 y, u8 elevation)
 {
     u8 i;
 
@@ -2156,16 +2158,18 @@ u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
     {
         if (gObjectEvents[i].active)
         {
-            if (gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y && ObjectEventDoesZCoordMatch(&gObjectEvents[i], z))
+            if (gObjectEvents[i].currentCoords.x == x
+             && gObjectEvents[i].currentCoords.y == y
+             && ObjectEventDoesElevationMatch(&gObjectEvents[i], elevation))
                 return i;
         }
     }
     return OBJECT_EVENTS_COUNT;
 }
 
-static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *objectEvent, u8 z)
+static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *objectEvent, u8 elevation)
 {
-    if (objectEvent->currentElevation != 0 && z != 0 && objectEvent->currentElevation != z)
+    if (objectEvent->currentElevation != 0 && elevation != 0 && objectEvent->currentElevation != elevation)
         return FALSE;
 
     return TRUE;
@@ -4626,11 +4630,11 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
     u8 direction = dir;
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
-    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
+    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
         return COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
         return COLLISION_IMPASSABLE;
-    else if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
+    else if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
         return COLLISION_ELEVATION_MISMATCH;
     else if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
         return COLLISION_OBJECT_EVENT;
@@ -4642,13 +4646,13 @@ u8 GetCollisionFlagsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 d
     u8 flags = 0;
 
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
-        flags |= 1;
-    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
-        flags |= 2;
-    if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
-        flags |= 4;
+        flags |= 1 << (COLLISION_OUTSIDE_RANGE - 1);
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
+        flags |= 1 << (COLLISION_IMPASSABLE - 1);
+    if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
+        flags |= 1 << (COLLISION_ELEVATION_MISMATCH - 1);
     if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
-        flags |= 8;
+        flags |= 1 << (COLLISION_OBJECT_EVENT - 1);
     return flags;
 }
 
@@ -4699,7 +4703,7 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
         {
             if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
             {
-                if (AreZCoordsCompatible(objectEvent->currentElevation, curObject->currentElevation))
+                if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
                     return TRUE;
             }
         }
@@ -7667,23 +7671,23 @@ static void SetObjectEventSpriteOamTableForLongGrass(struct ObjectEvent *objEven
 
     sprite->subspriteTableNum = 4;
 
-    if (ZCoordToPriority(objEvent->previousElevation) == 1)
+    if (ElevationToPriority(objEvent->previousElevation) == 1)
         sprite->subspriteTableNum = 5;
 }
 
-bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
+static bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 {
-    u8 mapZ;
+    u8 mapElevation;
 
-    if (z == 0)
+    if (elevation == 0)
         return FALSE;
 
-    mapZ = MapGridGetZCoordAt(x, y);
+    mapElevation = MapGridGetElevationAt(x, y);
 
-    if (mapZ == 0 || mapZ == 15)
+    if (mapElevation == 0 || mapElevation == 15)
         return FALSE;
 
-    if (mapZ != z)
+    if (mapElevation != elevation)
         return TRUE;
 
     return FALSE;
@@ -7701,43 +7705,43 @@ static const u8 sElevationToSubspriteTableNum[] = {
     1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
 };
 
-void UpdateObjectEventZCoordAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
+static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     if (objEvent->fixedPriority)
         return;
 
-    ObjectEventUpdateZCoord(objEvent);
+    ObjectEventUpdateElevation(objEvent);
 
     sprite->subspriteTableNum = sElevationToSubspriteTableNum[objEvent->previousElevation];
     sprite->oam.priority = sElevationToPriority[objEvent->previousElevation];
 }
 
-static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z)
+static void InitObjectPriorityByElevation(struct Sprite *sprite, u8 elevation)
 {
-    sprite->subspriteTableNum = sElevationToSubspriteTableNum[z];
-    sprite->oam.priority = sElevationToPriority[z];
+    sprite->subspriteTableNum = sElevationToSubspriteTableNum[elevation];
+    sprite->oam.priority = sElevationToPriority[elevation];
 }
 
-u8 ZCoordToPriority(u8 z)
+u8 ElevationToPriority(u8 elevation)
 {
-    return sElevationToPriority[z];
+    return sElevationToPriority[elevation];
 }
 
-void ObjectEventUpdateZCoord(struct ObjectEvent *objEvent)
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
 {
-    u8 z = MapGridGetZCoordAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
-    u8 z2 = MapGridGetZCoordAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+    u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+    u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (z == 0xF || z2 == 0xF)
+    if (curElevation == 15 || prevElevation == 15)
         return;
 
-    objEvent->currentElevation = z;
+    objEvent->currentElevation = curElevation;
 
-    if (z != 0 && z != 0xF)
-        objEvent->previousElevation = z;
+    if (curElevation != 0 && curElevation != 15)
+        objEvent->previousElevation = curElevation;
 }
 
-void SetObjectSubpriorityByZCoord(u8 elevation, struct Sprite *sprite, u8 subpriority)
+void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 subpriority)
 {
     s32 tmp = sprite->centerToCornerVecY;
     u32 tmpa = *(u16 *)&sprite->y;
@@ -7752,10 +7756,10 @@ static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sp
     if (objEvent->fixedPriority)
         return;
 
-    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
+    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
 }
 
-bool8 AreZCoordsCompatible(u8 a, u8 b)
+static bool8 AreElevationsCompatible(u8 a, u8 b)
 {
     if (a == 0 || b == 0)
         return TRUE;
@@ -8051,7 +8055,7 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
     if (objEvent->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         DoFlaggedGroundEffects(objEvent, sprite, flags);
@@ -8067,7 +8071,7 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
     if (objEvent->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         filters_out_some_ground_effects(objEvent, &flags);
@@ -8084,7 +8088,7 @@ static void DoGroundEffects_OnFinishStep(struct ObjectEvent *objEvent, struct Sp
     if (objEvent->triggerGroundEffectsOnStop)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnFinishStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         FilterOutStepOnPuddleGroundEffectIfJumping(objEvent, &flags);
@@ -8548,7 +8552,7 @@ void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible)
 static void SpriteCB_VirtualObject(struct Sprite *sprite)
 {
     VirtualObject_UpdateAnim(sprite);
-    SetObjectSubpriorityByZCoord(sprite->sVirtualObjElev, sprite, 1);
+    SetObjectSubpriorityByElevation(sprite->sVirtualObjElev, sprite, 1);
     UpdateObjectEventSpriteInvisibility(sprite, sprite->sInvisible);
 }
 

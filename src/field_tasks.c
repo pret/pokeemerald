@@ -445,8 +445,8 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
 
 static void TryLowerFortreeBridge(s16 x, s16 y)
 {
-    u8 z = PlayerGetZCoord();
-    if (!(z & 1))
+    u8 elevation = PlayerGetElevation();
+    if (!(elevation & 1))
     {
         switch (MapGridGetMetatileIdAt(x, y))
         {
@@ -462,8 +462,8 @@ static void TryLowerFortreeBridge(s16 x, s16 y)
 
 static void TryRaiseFortreeBridge(s16 x, s16 y)
 {
-    u8 z = PlayerGetZCoord();
-    if (!(z & 1))
+    u8 elevation = PlayerGetElevation();
+    if (!(elevation & 1))
     {
         switch (MapGridGetMetatileIdAt(x, y))
         {
@@ -488,7 +488,7 @@ static void FortreeBridgePerStepCallback(u8 taskId)
 {
     bool8 isFortreeBridgeCur;
     bool8 isFortreeBridgePrev;
-    u8 z, onBridgeElevation;
+    u8 elevation, onBridgeElevation;
     s16 x, y, prevX, prevY;
     s16 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
@@ -520,9 +520,9 @@ static void FortreeBridgePerStepCallback(u8 taskId)
         isFortreeBridgePrev = MetatileBehavior_IsFortreeBridge(MapGridGetMetatileBehaviorAt(prevX, prevY));
         
         // Make sure player isn't below bridge
-        z = PlayerGetZCoord();
+        elevation = PlayerGetElevation();
         onBridgeElevation = FALSE;
-        if ((u8)(z & 1) == 0)
+        if ((u8)(elevation & 1) == 0)
             onBridgeElevation = TRUE;
 
         if (onBridgeElevation && (isFortreeBridgeCur == TRUE || isFortreeBridgePrev == TRUE))
@@ -820,7 +820,7 @@ static void CrackedFloorPerStepCallback(u8 taskId)
     tPrevY = y;
     if (MetatileBehavior_IsCrackedFloor(behavior))
     {
-        if (GetPlayerSpeed() != BIKE_SPEED_FASTEST)
+        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
             VarSet(VAR_ICE_STEP_COUNT, 0); // this var does double duty
 
         if (tFloor1Delay == 0)

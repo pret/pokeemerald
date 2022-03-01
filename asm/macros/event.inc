@@ -604,9 +604,8 @@
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (localId) object finish.
-	@ If the specified object is 0, then the command will block script execution until all objects
-	@ affected by applymovement finish their movements. If the specified object is not currently being
-	@ manipulated with applymovement, then this command does nothing.
+	@ If localId is 0, then the id of the last-moved object will be used instead. If the specified object
+	@ is not currently being manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro waitmovement localId:req, map
 		.ifb \map
@@ -987,7 +986,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, holding the specified item. The trailing 0s are unused parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
-	.macro givemon species:req, level:req, item:req
+	.macro givemon species:req, level:req, item=ITEM_NONE
 	.byte 0x79
 	.2byte \species
 	.byte \level
@@ -1436,7 +1435,7 @@
 	@ that is also against 'species2' at 'level2' holding 'item2'.
 	@ Running this command will not affect normal wild battles. You start the prepared battle with dowildbattle.
 	@ If the player only has one Pokemon, a scripted double battle will be buggy.
-	.macro setwildbattle species:req, level:req, item:req, species2=SPECIES_NONE, level2=0, item2=ITEM_NONE
+	.macro setwildbattle species:req, level:req, item=ITEM_NONE, species2=SPECIES_NONE, level2=0, item2=ITEM_NONE
 	.byte 0xb6
 	.2byte \species
 	.byte \level
@@ -1937,6 +1936,14 @@
 	braillemessage \text
 	waitbuttonpress
 	closebraillemessage
+	.endm
+
+	@ Creates an "event legal" Pokémon for an encounter
+	.macro seteventmon species:req, level:req, item=ITEM_NONE
+	setvar VAR_0x8004, \species
+	setvar VAR_0x8005, \level
+	setvar VAR_0x8006, \item
+	special CreateEventLegalEnemyMon
 	.endm
 
 	@ Set up a totem boost for the next battle.
