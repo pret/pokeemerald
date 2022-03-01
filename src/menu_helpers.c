@@ -71,12 +71,12 @@ static const union AnimCmd *const sAnims_SwapLine[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_SwapLine =
 {
-    gBagSwapLineGfx, 0x100, TAG_SWAP_LINE
+    gSwapLineGfx, 0x100, TAG_SWAP_LINE
 };
 
 static const struct CompressedSpritePalette sSpritePalette_SwapLine =
 {
-    gBagSwapLinePal, TAG_SWAP_LINE
+    gSwapLinePal, TAG_SWAP_LINE
 };
 
 static const struct SpriteTemplate sSpriteTemplate_SwapLine =

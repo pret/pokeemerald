@@ -4000,7 +4000,7 @@ static void Cmd_playanimation(void)
     }
 }
 
-// Same as playanimation, expect it takes a pointer to some animation id, instead of taking the value directly
+// Same as playanimation, except it takes a pointer to some animation id, instead of taking the value directly
 static void Cmd_playanimation_var(void)
 {
     const u16* argumentPtr;

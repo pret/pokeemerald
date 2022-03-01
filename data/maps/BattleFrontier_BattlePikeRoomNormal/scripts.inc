@@ -193,7 +193,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy::
 	waitmovement 0
 	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
-	pike_set PIKE_DATA_WIN_STREAK VAR_RESULT
+	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
 	call BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom
 	waitstate
 	end
