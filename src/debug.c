@@ -2389,8 +2389,8 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
         if(gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > MOVES_COUNT)
-                gTasks[taskId].data[3] = MOVES_COUNT;
+            if(gTasks[taskId].data[3] >= MOVES_COUNT)
+                gTasks[taskId].data[3] = MOVES_COUNT - 1;
         }
         if(gMain.newKeys & DPAD_DOWN)
         {
@@ -2574,7 +2574,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     //Moves
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] == 0 || moves[i] == 0xFF || moves[i] > MOVES_COUNT)
+        if (moves[i] == 0 || moves[i] == 0xFF || moves[i] >= MOVES_COUNT)
             continue;
 
         SetMonMoveSlot(&mon, moves[i], i);
