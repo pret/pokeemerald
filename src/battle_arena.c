@@ -741,7 +741,7 @@ void BattleArena_AddSkillPoints(u8 battler)
     }
 }
 
-void BattleArena_DeductMindPoints(u8 battler, u16 stringId)
+void BattleArena_DeductSkillPoints(u8 battler, u16 stringId)
 {
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
 
