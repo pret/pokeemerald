@@ -33,8 +33,8 @@ static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite);
 static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 
 // static const rom data
-static const u16 gRotatingBall_Pal[] = INCBIN_U16("graphics/interface/bag_spinner.gbapal");
-static const u8 gRotatingBall[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
+static const u16 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
+static const u8 sRotatingBall_Gfx[] = INCBIN_U8("graphics/bag/rotating_ball.4bpp");
 static const u8 gCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
 static const u16 gCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
@@ -200,12 +200,12 @@ static const union AffineAnimCmd *const sRotatingBallAnimCmds_FullRotation[] =
 
 static const struct SpriteSheet sRotatingBallTable =
 {
-    gRotatingBall, 0x80, TAG_ROTATING_BALL_GFX
+    sRotatingBall_Gfx, 0x80, TAG_ROTATING_BALL_GFX
 };
 
 static const struct SpritePalette sRotatingBallPaletteTable =
 {
-    gRotatingBall_Pal, TAG_ROTATING_BALL_GFX
+    sRotatingBall_Pal, TAG_ROTATING_BALL_GFX
 };
 
 static const struct SpriteTemplate sRotatingBallSpriteTemplate =
