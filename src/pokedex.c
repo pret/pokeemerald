@@ -1514,7 +1514,7 @@ void ResetPokedex(void)
     gSaveBlock2Ptr->pokedex.spindaPersonality = 0;
     gSaveBlock2Ptr->pokedex.unknown3 = 0;
     DisableNationalPokedex();
-    for (i = 0; i < DEX_FLAGS_NO; i++)
+    for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
         gSaveBlock2Ptr->pokedex.owned[i] = 0;
         gSaveBlock2Ptr->pokedex.seen[i] = 0;

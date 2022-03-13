@@ -29,7 +29,6 @@
 #include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
-#include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainer_types.h"
 
@@ -200,7 +199,7 @@ static const u16 *const *const sPrizeListSets[] =
     sPrizeLists2
 };
 
-static const u16 sEReader_Pal[] = INCBIN_U16("graphics/misc/trainer_hill_ereader.gbapal");
+static const u16 sEReader_Pal[] = INCBIN_U16("graphics/trainer_hill/ereader.gbapal");
 static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrHillTag *const sDataPerTag[] =
@@ -678,9 +677,9 @@ static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride i
 
     impassable = (sHillData->floors[floorId].display.collisionData[y] >> (15 - x) & 1);
     metatile = sHillData->floors[floorId].display.metatileData[stride * y + x] + NUM_METATILES_IN_PRIMARY;
-    elevation = 3 << METATILE_ELEVATION_SHIFT;
+    elevation = 3 << MAPGRID_ELEVATION_SHIFT;
 
-    return ((impassable << METATILE_COLLISION_SHIFT) & METATILE_COLLISION_MASK) | elevation | (metatile & METATILE_ID_MASK);
+    return ((impassable << MAPGRID_COLLISION_SHIFT) & MAPGRID_COLLISION_MASK) | elevation | (metatile & MAPGRID_METATILE_ID_MASK);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
