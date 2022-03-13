@@ -1,7 +1,6 @@
 #include "global.h"
 #include "main.h"
 #include "constants/songs.h"
-#include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
