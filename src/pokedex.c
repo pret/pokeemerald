@@ -8651,7 +8651,7 @@ static void Task_HandleFormsScreenInput(u8 taskId)
     u8 offset_y = 34;
     if (!sPokedexView->sFormScreenData.inSubmenu)
     {
-        if (JOY_NEW(A_BUTTON))
+        if (JOY_NEW(A_BUTTON) && sPokedexView->sFormScreenData.numForms != 0)
         {
             sPokedexView->sFormScreenData.inSubmenu = TRUE;
             sPokedexView->sFormScreenData.arrowSpriteId = CreateSprite(&gSpriteTemplate_Arrow, base_x + offset_x, base_y, 0);
