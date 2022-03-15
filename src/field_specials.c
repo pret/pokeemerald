@@ -3118,7 +3118,8 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-                DestroySpriteAndFreeResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
+                // This makes sure deleting the icon will not clear palettes in use by object events
+                FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
                 break;
         }
         sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;

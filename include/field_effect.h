@@ -25,6 +25,7 @@ void FieldEffectScript_LoadTiles(u8 **script);
 void FieldEffectScript_LoadFadedPalette(u8 **script);
 void FieldEffectScript_LoadPalette(u8 **script);
 void FieldEffectScript_CallNative(u8 **script, u32 *val);
+void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
 void FieldEffectFreeTilesIfUnused(u16 tileStart);
 void FieldEffectFreePaletteIfUnused(u8 paletteNum);
 bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val);
