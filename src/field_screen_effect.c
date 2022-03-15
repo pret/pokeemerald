@@ -1174,6 +1174,9 @@ static void Task_OrbEffect(u8 taskId)
         tState = 4;
         break;
     case 4:
+        // If the caller script is delayed after starting the orb effect, a `waitstate` might be reached *after*
+        // we enable the ScriptContext in case 2; enabling it here as well avoids softlocks in this scenario
+        EnableBothScriptContexts();
         if (--tShakeDelay == 0)
         {
             s32 panning;
