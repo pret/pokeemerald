@@ -276,7 +276,11 @@ extern u8 Debug_ShowFieldMessageStringVar4[];
 extern u8 Debug_CheatStart[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
+#ifdef BATTLE_ENGINE
+#define ABILITY_NAME_LENGTH 16
+#else
 #define ABILITY_NAME_LENGTH 12
+#endif
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 
 
