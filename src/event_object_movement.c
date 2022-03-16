@@ -4705,6 +4705,12 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
       objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
       return FALSE;
     }
+    // Move follower to player, in case we end up in the shadowing state for only 1 frame
+    // This way the player cannot talk to the invisible follower before it appears
+    if (objectEvent->invisible) {
+        MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+        objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
+    }
     sprite->data[1] = 1; // Enter active state; if the player moves the follower will appear
     return TRUE;
 }
