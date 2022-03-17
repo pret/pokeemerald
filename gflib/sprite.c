@@ -1040,7 +1040,7 @@ void AnimCmd_frame(struct Sprite *sprite)
     sprite->animDelayCounter = duration;
 
     if(sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && gSaveBlock2Ptr->follower.inProgress && sprite->y2 >= -1
-    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId))
+    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId) && !sprite->oam.affineMode)
     {
         if(sprite->animCmdIndex % 2 == 1)
             sprite->y2 = 0;
@@ -1083,7 +1083,7 @@ void AnimCmd_jump(struct Sprite *sprite)
     sprite->animDelayCounter = duration;
     
     if(sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && gSaveBlock2Ptr->follower.inProgress && sprite->y2 >= -1
-    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId))
+    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId) && !sprite->oam.affineMode)
     {
         if(sprite->animCmdIndex % 2 == 1)
             sprite->y2 = 0;

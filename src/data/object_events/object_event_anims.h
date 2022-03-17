@@ -1579,6 +1579,125 @@ const union AnimCmd *const gObjectEventImageAnimTable_FollowingPokemon_Rayquaza[
     gObjectEventImageAnim_WalkEastFast_FollowingPokemon_Rayquaza,
 };
 
+static const union AffineAnimCmd Following_Pokemon_Shrink[] =
+{
+    AFFINEANIMCMD_FRAME(-25, -25, 0, 10),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd Following_Pokemon_Grow[] =
+{
+    AFFINEANIMCMD_FRAME(-256, -256, 0, 1),
+    AFFINEANIMCMD_FRAME(4, 4, 0, 1),
+    AFFINEANIMCMD_FRAME(28, 28, 0, 9),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd Following_Pokemon_Shrink_Right[] =
+{
+    AFFINEANIMCMD_FRAME(-512, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(28, -28, 0, 9),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd Following_Pokemon_Grow_Right[] =
+{
+    AFFINEANIMCMD_FRAME(-256, -256, 0, 1),
+    AFFINEANIMCMD_FRAME(-4, 4, 0, 1),
+    AFFINEANIMCMD_FRAME(-28, 28, 0, 9),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const FollowerAffineTable[] = {
+    Following_Pokemon_Shrink,
+    Following_Pokemon_Grow,
+    Following_Pokemon_Shrink_Right,
+    Following_Pokemon_Grow_Right,
+};
+
+static const union AnimCmd ExpandingSparkle[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_FRAME(3, 3),
+    ANIMCMD_FRAME(4, 3),
+    ANIMCMD_FRAME(5, 3),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const ExpandingSparkleTable[] =
+{
+    ExpandingSparkle,
+};
+
+static const union AffineAnimCmd North[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd NorthEast[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -32, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd East[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -64, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd SouthEast[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -96, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd South[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -128, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd SouthWest[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 96, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd West[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 64, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd NorthWest[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 32, 1),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const ExpandingSparkleAffineTable[] = {
+    North,
+    NorthEast,
+    East,
+    SouthEast,
+    South,
+    SouthWest,
+    West,
+    NorthWest,
+};
+
 // For animations with alternating steps
 static const struct StepAnimTable sStepAnimTables[] = {
     {

@@ -264,7 +264,7 @@
 #define OBJ_EVENT_GFX_FEAROW                     260
 #define OBJ_EVENT_GFX_EKANS                      261
 #define OBJ_EVENT_GFX_ARBOK                      262
-#define OBJ_EVENT_GFX_PIKACHU_FOLLOW             263
+#define OBJ_EVENT_GFX_PIKACHU_FOLLOWER           263
 #define OBJ_EVENT_GFX_RAICHU                     264
 #define OBJ_EVENT_GFX_SANDSHREW                  265
 #define OBJ_EVENT_GFX_SANDSLASH                  266
@@ -491,6 +491,20 @@
 #define OBJ_EVENT_GFX_LUGIA_FOLLOWER             487
 #define OBJ_EVENT_GFX_HOOH_FOLLOWER              488
 #define OBJ_EVENT_GFX_CELEBI                     489
+
+#define OBJ_EVENT_GFX_GREAT_BALL                 490
+#define OBJ_EVENT_GFX_ULTRA_BALL                 491
+#define OBJ_EVENT_GFX_MASTER_BALL                492
+#define OBJ_EVENT_GFX_SAFARI_BALL                493
+#define OBJ_EVENT_GFX_NET_BALL                   494
+#define OBJ_EVENT_GFX_DIVE_BALL                  495
+#define OBJ_EVENT_GFX_NEST_BALL                  496
+#define OBJ_EVENT_GFX_REPEAT_BALL                497
+#define OBJ_EVENT_GFX_TIMER_BALL                 498
+#define OBJ_EVENT_GFX_LUXURY_BALL                499
+#define OBJ_EVENT_GFX_PREMIER_BALL               500
+#define OBJ_EVENT_GFX_EXPANDING_SPARKLE          501
+
 // Jump in numbers due to SPECIES_OLD_UNOWN constants
 #define OBJ_EVENT_GFX_TREECKO                    515
 #define OBJ_EVENT_GFX_GROVYLE                    516

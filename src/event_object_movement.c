@@ -11,11 +11,13 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
+#include "field_specials.h"
 #include "fieldmap.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
+#include "pokemon.h"
 #include "random.h"
 #include "sprite.h"
 #include "task.h"
@@ -833,6 +835,17 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_RAYQUAZA                0x105B
 #define OBJ_EVENT_PAL_TAG_JIRACHI                 0x105A
 #define OBJ_EVENT_PAL_TAG_DEOXYS_FOLLOWER         0x1059
+#define OBJ_EVENT_PAL_TAG_GREAT_BALL              0x1058
+#define OBJ_EVENT_PAL_TAG_ULTRA_BALL              0x1057
+#define OBJ_EVENT_PAL_TAG_MASTER_BALL             0x1056
+#define OBJ_EVENT_PAL_TAG_SAFARI_BALL             0x1055
+#define OBJ_EVENT_PAL_TAG_NET_BALL                0x1054
+#define OBJ_EVENT_PAL_TAG_DIVE_BALL               0x1053
+#define OBJ_EVENT_PAL_TAG_NEST_BALL               0x1052
+#define OBJ_EVENT_PAL_TAG_REPEAT_BALL             0x1051
+#define OBJ_EVENT_PAL_TAG_TIMER_BALL              0x1050
+#define OBJ_EVENT_PAL_TAG_LUXURY_BALL             0x104F
+#define OBJ_EVENT_PAL_TAG_PREMIER_BALL            0x104E
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -1265,6 +1278,18 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Rayquaza,              OBJ_EVENT_PAL_TAG_RAYQUAZA},
     {gObjectEventPal_Jirachi,               OBJ_EVENT_PAL_TAG_JIRACHI},
     {gObjectEventPal_Deoxys_Follower,       OBJ_EVENT_PAL_TAG_DEOXYS_FOLLOWER},
+    {gObjectEventPal_GreatBall,             OBJ_EVENT_PAL_TAG_GREAT_BALL},
+    {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_ULTRA_BALL},
+    {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_MASTER_BALL},
+    {gObjectEventPal_SafariBall,            OBJ_EVENT_PAL_TAG_SAFARI_BALL},
+    {gObjectEventPal_NetBall,               OBJ_EVENT_PAL_TAG_NET_BALL},
+    {gObjectEventPal_DiveBall,              OBJ_EVENT_PAL_TAG_DIVE_BALL},
+    {gObjectEventPal_NestBall,              OBJ_EVENT_PAL_TAG_NEST_BALL},
+    {gObjectEventPal_RepeatBall,            OBJ_EVENT_PAL_TAG_REPEAT_BALL},
+    {gObjectEventPal_TimerBall,             OBJ_EVENT_PAL_TAG_TIMER_BALL},
+    {gObjectEventPal_LuxuryBall,            OBJ_EVENT_PAL_TAG_LUXURY_BALL},
+    {gObjectEventPal_PremierBall,           OBJ_EVENT_PAL_TAG_PREMIER_BALL},
+    {gFieldEffectPal_SmallSparkle,          FLDEFF_PAL_TAG_SMALL_SPARKLE},
     {},
 };
 
@@ -9809,6 +9834,18 @@ u8 (*const gMovementActionFuncs_FollowingPokemon_FaceEast[])(struct ObjectEvent 
     MovementAction_Finish,
 };
 
+u8 (*const gMovementActionFuncs_FollowingPokemon_Shrink[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_FollowingPokemon_Shrink_Step0,
+    MovementAction_FollowingPokemon_Shrink_Step1,
+    MovementAction_Finish,
+};
+
+u8 (*const gMovementActionFuncs_FollowingPokemon_Grow[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_FollowingPokemon_Grow_Step0,
+    MovementAction_FollowingPokemon_Grow_Step1,
+    MovementAction_Finish,
+};
+
 u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     bool32 ableToStore = FALSE;
@@ -10056,6 +10093,416 @@ u8 MovementAction_FollowingPokemon_FaceEast_Step0(struct ObjectEvent *objectEven
     sprite->x2 = -8;
     MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
     sprite->data[2]++;
+    return FALSE;
+}
+
+static void PokeballCallback(struct Sprite *sprite)
+{
+    if (++sprite->data[0] == 21)
+        DestroySprite(sprite);
+}
+
+u8 MovementAction_FollowingPokemon_Shrink_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    s16 x = objectEvent->currentCoords.x;
+    s16 y = objectEvent->currentCoords.y;
+    u8 spriteId;
+    bool8 playerPriority;
+    
+    sprite->data[7] = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    InitSpriteAffineAnim(sprite);
+    
+    if (objectEvent->facingDirection == DIR_EAST && GetObjectEventGraphicsInfo(objectEvent->graphicsId)->anims != gObjectEventImageAnimTable_FollowingPokemon_UniqueEast && objectEvent->graphicsId != OBJ_EVENT_GFX_KRABBY)
+        StartSpriteAffineAnim(sprite, 2);
+    else
+        StartSpriteAffineAnim(sprite, 0);
+    
+    if (y == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y) // If follower is to the east or west of player
+    {
+        SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
+        playerPriority = FALSE;
+    }
+    else if (y < gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y) // If follower is north of player
+    {
+        SetSpritePosToOffsetMapCoords(&x, &y, 8, 4);
+        playerPriority = TRUE;
+    }
+    else // If follower is south of player
+    {
+        SetSpritePosToOffsetMapCoords(&x, &y, 8, 0);
+        playerPriority = FALSE;
+    }
+
+    switch(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_POKEBALL))
+    {
+        case 1: // Master Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MASTER_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 2: // Ultra Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ULTRA_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 3: // Great Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_GREAT_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 5: // Safari Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SAFARI_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 6: // Net Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_NET_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 7: // Dive Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DIVE_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 8: // Nest Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_NEST_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 9: // Repeat Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_REPEAT_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 10: // Timer Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_TIMER_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 11: // Luxury Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LUXURY_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case 12: // Premier Ball
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PREMIER_BALL, &PokeballCallback, x, y, 2);
+            break;
+        default: // PokeBall
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ITEM_BALL, &PokeballCallback, x, y, 2);
+            break;
+    }
+
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].coordOffsetEnabled = TRUE;
+        gSprites[spriteId].oam.priority = 2;
+        gSprites[spriteId].data[0] = 0;
+    }
+    
+    if (playerPriority)
+    {
+        gSprites[gPlayerAvatar.spriteId].oam.priority = 1;
+        gSprites[gPlayerAvatar.spriteId].subpriority = 1;
+        gObjectEvents[gPlayerAvatar.objectEventId].fixedPriority = TRUE;
+    }
+    
+    sprite->oam.priority = 1;
+    sprite->subpriority = 1;
+    
+    sprite->data[2]++;
+    return FALSE;
+}
+
+u8 MovementAction_FollowingPokemon_Shrink_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    sprite->data[7]++;
+    
+    if (objectEvent->currentCoords.x > gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x) // east side
+    {
+        switch(objectEvent->facingDirection)
+        {
+            case DIR_EAST:
+                if (sprite->data[7] < 8)
+                    sprite->x2 += sprite->data[7] - 1;
+                else
+                    sprite->x2 += 7;
+                break;
+            case DIR_WEST:
+                if (sprite->data[7] <= 5)
+                {
+                    if (sprite->data[7] > 3)
+                        sprite->x2 += 1 - sprite->data[7];
+                    else
+                        sprite->x2 -= sprite->data[7];
+                }            
+                else if (sprite->data[7] == 6)
+                    sprite->x2 += -5;
+                else
+                    sprite->x2 += 1 - sprite->data[7];
+                break;
+        }
+        
+        // Adjust the height of the 64x64 sprites differently
+        if (IsBigSprite(objectEvent->graphicsId))
+        {
+            if (sprite->data[7] < 3)
+                sprite->y2 = sprite->data[7] * 2 + 1;
+            else if (sprite->data[7] < 5)
+                sprite->y2 = sprite->data[7] * 2 + 2;
+            else if (sprite->data[7] < 6)
+                sprite->y2 = sprite->data[7] * 2 + 3;
+            else if (sprite->data[7] < 8)
+                sprite->y2 = sprite->data[7] * 2 + 4;
+            else if (sprite->data[7] < 9)
+                sprite->y2 = sprite->data[7] * 2 + 5;
+            else
+                sprite->y2 = sprite->data[7] * 2 + 6;
+        }
+        else
+        {
+            if (sprite->data[7] >= 10)
+                sprite->y2 = 10;
+            else
+                sprite->y2 = sprite->data[7];
+        }
+    }
+    else if (objectEvent->currentCoords.x < gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x) // west side
+    {
+        switch(objectEvent->facingDirection)
+        {
+            case DIR_EAST:
+                if (sprite->data[7] <= 5)
+                {
+                    if (sprite->data[7] > 3)
+                        sprite->x2 -= 2 - sprite->data[7];
+                    else
+                        sprite->x2 += sprite->data[7] - 1;
+                }            
+                else if (sprite->data[7] == 6)
+                    sprite->x2 -= -4;
+                else
+                    sprite->x2 -= 2 - sprite->data[7];
+                break;
+            case DIR_WEST:
+                if (sprite->data[7] < 9)
+                    sprite->x2 -= sprite->data[7] - 1;
+                else
+                    sprite->x2 -= 8;
+                break;
+        }
+        
+        // Adjust the height of the 64x64 sprites differently
+        if (IsBigSprite(objectEvent->graphicsId))
+        {
+            if (sprite->data[7] < 3)
+                sprite->y2 = sprite->data[7] * 2 + 1;
+            else if (sprite->data[7] < 5)
+                sprite->y2 = sprite->data[7] * 2 + 2;
+            else if (sprite->data[7] < 6)
+                sprite->y2 = sprite->data[7] * 2 + 3;
+            else if (sprite->data[7] < 8)
+                sprite->y2 = sprite->data[7] * 2 + 4;
+            else if (sprite->data[7] < 9)
+                sprite->y2 = sprite->data[7] * 2 + 5;
+            else
+                sprite->y2 = sprite->data[7] * 2 + 6;
+        }
+        else
+        {
+            if (sprite->data[7] >= 10)
+                sprite->y2 = 10;
+            else
+                sprite->y2 = sprite->data[7];
+        }
+    }
+    else if (objectEvent->currentCoords.y > gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y) // south side
+    {
+        switch(objectEvent->facingDirection)
+        {
+            case DIR_EAST:
+                if (sprite->data[7] < 7)
+                    sprite->x2 += sprite->data[7] - 1;
+                else
+                    sprite->x2 += 6;
+                break;
+            case DIR_WEST:
+                if (sprite->data[7] < 8)
+                    sprite->x2 -= sprite->data[7] - 1;
+                else
+                    sprite->x2 -= 7;
+                break;
+        }
+        
+        // Adjust the height of the 64x64 sprites differently
+        if (IsBigSprite(objectEvent->graphicsId))
+        {
+            if (sprite->data[7] < 3)
+                sprite->y2 = sprite->data[7] + 3;
+            else if (sprite->data[7] < 5)
+                sprite->y2 = sprite->data[7] + 4;
+            else if (sprite->data[7] < 6)
+                sprite->y2 = sprite->data[7] + 5;
+            else if (sprite->data[7] < 8)
+                sprite->y2 = sprite->data[7] + 6;
+            else if (sprite->data[7] < 9)
+                sprite->y2 = sprite->data[7] + 7;
+            else
+                sprite->y2 = sprite->data[7] + 8;
+        }
+        else
+            sprite->y2 = 1;
+    }
+    else // north side
+    {
+        switch(objectEvent->facingDirection)
+        {
+            case DIR_EAST:
+                if (sprite->data[7] < 7)
+                    sprite->x2 += sprite->data[7] - 1;
+                else
+                    sprite->x2 += 6;
+                break;
+            case DIR_WEST:
+                if (sprite->data[7] < 8)
+                    sprite->x2 -= sprite->data[7] - 1;
+                else
+                    sprite->x2 -= 7;
+                break;
+        }
+        
+        // Adjust the height of the 64x64 sprites differently
+        if (IsBigSprite(objectEvent->graphicsId))
+        {
+            if (sprite->data[7] < 5)
+                sprite->y2 = sprite->data[7] * 2 + 1;
+            else if (sprite->data[7] < 8)
+                sprite->y2 = sprite->data[7] * 2 + 2;
+            else
+                sprite->y2 = sprite->data[7] * 2 + 3;
+        }
+        else
+        {
+            if (sprite->data[7] < 6)
+                sprite->y2 = sprite->data[7];
+            else
+                sprite->y2 = 6;
+        }
+    }
+    
+    if (sprite->data[7] >= 11)
+    {
+        gObjectEvents[gPlayerAvatar.objectEventId].fixedPriority = FALSE;
+        objectEvent->invisible = TRUE;
+        sprite->data[2]++;
+    }
+
+    return FALSE;
+}
+
+u8 MovementAction_FollowingPokemon_Grow_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    sprite->data[7] = 11;
+    sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    InitSpriteAffineAnim(sprite);
+    
+    if (gObjectEvents[gPlayerAvatar.objectEventId].facingDirection == DIR_EAST && GetObjectEventGraphicsInfo(objectEvent->graphicsId)->anims != gObjectEventImageAnimTable_FollowingPokemon_UniqueEast && objectEvent->graphicsId != OBJ_EVENT_GFX_KRABBY)
+        StartSpriteAffineAnim(sprite, 3);
+    else
+        StartSpriteAffineAnim(sprite, 1);
+    
+    switch(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection)
+    {
+        case DIR_SOUTH:
+            sprite->y2 = 6;
+            sprite->x2 = 0;
+            break;
+        case DIR_NORTH:
+            sprite->y2 = 1;
+            sprite->x2 = 0;
+            break;
+        case DIR_EAST:
+            sprite->y2 = 10;
+            sprite->x2 += 9;
+            break;
+        case DIR_WEST:
+            sprite->y2 = 10;
+            sprite->x2 -= 9;
+            break;
+    }
+    sprite->data[2]++;
+    return FALSE;
+}
+
+u8 MovementAction_FollowingPokemon_Grow_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    sprite->data[7]--;
+    
+    if (sprite->data[7] == 10)
+        gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible = FALSE;
+    
+    switch(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection)
+    {
+        case DIR_SOUTH:            
+            if (sprite->data[7] < 6)
+                sprite->y2 = sprite->data[7];
+            else
+                sprite->y2 = 6;
+            break;
+        case DIR_NORTH:
+            sprite->y2 = 1;
+            break;
+        case DIR_WEST:
+            if (sprite->data[7] <= 5)
+            {
+                if (sprite->data[7] > 3)
+                    sprite->x2 += 1 - sprite->data[7];
+                else
+                    sprite->x2 -= sprite->data[7];
+            }            
+            else if (sprite->data[7] == 6)
+                sprite->x2 += -5;
+            else
+                sprite->x2 += 1 - sprite->data[7];
+            
+            if (sprite->data[7] >= 10)
+                sprite->y2 = 10;
+            else
+                sprite->y2 = sprite->data[7];
+            
+            break;
+        case DIR_EAST:
+            if (sprite->data[7] <= 5)
+            {
+                if (sprite->data[7] > 3)
+                    sprite->x2 -= 2 - sprite->data[7];
+                else
+                    sprite->x2 += sprite->data[7] - 1;
+            }            
+            else if (sprite->data[7] == 6)
+                sprite->x2 -= -4;
+            else
+                sprite->x2 -= 2 - sprite->data[7];
+            
+            if (sprite->data[7] >= 10)
+                sprite->y2 = 10;
+            else
+                sprite->y2 = sprite->data[7];
+            
+            break;
+    }
+    
+    // Adjust the height of the 64x64 sprites differently
+    if (IsBigSprite(objectEvent->graphicsId))
+    {
+        if (sprite->data[7] > 9)
+            sprite->y2 -= (11 - sprite->data[7]) + 2;
+        else if (sprite->data[7] > 7)
+            sprite->y2 -= (11 - sprite->data[7]) + 3;
+        else if (sprite->data[7] > 6)
+            sprite->y2 -= (11 - sprite->data[7]) + 4;
+        else if (sprite->data[7] > 4)
+            sprite->y2 -= (11 - sprite->data[7]) + 5;
+        else if (sprite->data[7] > 3)
+            sprite->y2 -= (11 - sprite->data[7]) + 6;
+        else
+            sprite->y2 -= (11 - sprite->data[7]) + 7;
+    }
+    
+    if (sprite->data[7] <= 1)
+    {
+        // Set y2 of the 64x64 sprites back to 0, and compensate with y.
+        if (IsBigSprite(objectEvent->graphicsId))
+        {
+            sprite->y -= 16;
+            sprite->y2 = 0;
+        }
+        
+        sprite->data[2]++;
+        sprite->oam.affineMode = 0;
+    }
+    
     return FALSE;
 }
 

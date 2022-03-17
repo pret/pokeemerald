@@ -266,6 +266,10 @@ u8 MovementAction_FollowingPokemon_FaceSouth_Step0(struct ObjectEvent *, struct 
 u8 MovementAction_FollowingPokemon_FaceNorth_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FollowingPokemon_FaceWest_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FollowingPokemon_FaceEast_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Shrink_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Shrink_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Grow_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Grow_Step1(struct ObjectEvent *, struct Sprite *);
 
 u8 (*const gMovementActionFuncs_FaceDown[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_FaceUp[])(struct ObjectEvent *, struct Sprite *);
@@ -431,6 +435,8 @@ u8 (*const gMovementActionFuncs_FollowingPokemon_FaceSouth[])(struct ObjectEvent
 u8 (*const gMovementActionFuncs_FollowingPokemon_FaceNorth[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_FollowingPokemon_FaceWest[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_FollowingPokemon_FaceEast[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_Shrink[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_Grow[])(struct ObjectEvent *, struct Sprite *);
 
 u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *) = {
     [MOVEMENT_ACTION_FACE_DOWN] = gMovementActionFuncs_FaceDown,
@@ -596,6 +602,8 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACENORTH] = gMovementActionFuncs_FollowingPokemon_FaceNorth,
     [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACEWEST] = gMovementActionFuncs_FollowingPokemon_FaceWest,
     [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACEEAST] = gMovementActionFuncs_FollowingPokemon_FaceEast,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_SHRINK] = gMovementActionFuncs_FollowingPokemon_Shrink,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_GROW] = gMovementActionFuncs_FollowingPokemon_Grow,
 };
 
 u8 (*const gMovementActionFuncs_FaceDown[])(struct ObjectEvent *, struct Sprite *) = {

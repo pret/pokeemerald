@@ -155,5 +155,8 @@ bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 void UpdateFollowerPokemonGraphic(void);
+void FollowerPokeballSparkle(void);
+void FollowerIntoPokeball(void);
+bool8 IsBigSprite(u16);
 
 #endif // GUARD_OVERWORLD_H

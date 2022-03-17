@@ -1979,3 +1979,8 @@
 	.macro showfollower
 	callnative ShowFollower
 	.endm
+    
+    .macro followerintopokeball
+    setvar VAR_UNUSED_0x8014, 0
+    callnative FollowerIntoPokeball
+    .endm
