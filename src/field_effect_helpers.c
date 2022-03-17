@@ -487,6 +487,8 @@ void UpdateLongGrassFieldEffect(struct Sprite *sprite)
 #undef sCurrentMap
 #undef sObjectMoved
 
+// Effectively unused as it's not possible in vanilla to jump onto long grass (no adjacent ledges, and can't ride the Acro Bike in it).
+// The graphics for this effect do not visually correspond to long grass either. Perhaps these graphics were its original design?
 u32 FldEff_JumpLongGrass(void)
 {
     u8 spriteId;
