@@ -747,6 +747,59 @@ static const struct SpriteFrameImage sPicTable_ItemBall[] = {
     obj_frame_tiles(gObjectEventPic_ItemBall),
 };
 
+static const struct SpriteFrameImage sPicTable_GreatBall[] = {
+    obj_frame_tiles(gObjectEventPic_GreatBall),
+};
+
+static const struct SpriteFrameImage sPicTable_UltraBall[] = {
+    obj_frame_tiles(gObjectEventPic_UltraBall),
+};
+
+static const struct SpriteFrameImage sPicTable_MasterBall[] = {
+    obj_frame_tiles(gObjectEventPic_MasterBall),
+};
+
+static const struct SpriteFrameImage sPicTable_SafariBall[] = {
+    obj_frame_tiles(gObjectEventPic_SafariBall),
+};
+
+static const struct SpriteFrameImage sPicTable_NetBall[] = {
+    obj_frame_tiles(gObjectEventPic_NetBall),
+};
+
+static const struct SpriteFrameImage sPicTable_DiveBall[] = {
+    obj_frame_tiles(gObjectEventPic_DiveBall),
+};
+
+static const struct SpriteFrameImage sPicTable_NestBall[] = {
+    obj_frame_tiles(gObjectEventPic_NestBall),
+};
+
+static const struct SpriteFrameImage sPicTable_RepeatBall[] = {
+    obj_frame_tiles(gObjectEventPic_RepeatBall),
+};
+
+static const struct SpriteFrameImage sPicTable_TimerBall[] = {
+    obj_frame_tiles(gObjectEventPic_TimerBall),
+};
+
+static const struct SpriteFrameImage sPicTable_LuxuryBall[] = {
+    obj_frame_tiles(gObjectEventPic_LuxuryBall),
+};
+
+static const struct SpriteFrameImage sPicTable_PremierBall[] = {
+    obj_frame_tiles(gObjectEventPic_PremierBall),
+};
+
+static const struct SpriteFrameImage sPicTable_ExpandingSparkle[] = {
+    overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 0),
+    overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 1),
+    overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 2),
+    overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 3),
+    overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 4),
+    overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 5),
+};
+
 static const struct SpriteFrameImage sPicTable_ProfBirch[] = {
     overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 0),
     overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 1),

@@ -306,7 +306,7 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
     }*/
 
     ObjectEventClearHeldMovementIfActive(follower);
-	ObjectEventSetHeldMovement(follower, newState);
+    ObjectEventSetHeldMovement(follower, newState);
     PlayerLogCoordinates(player);
 
     switch (newState) 
@@ -413,7 +413,7 @@ static u8 DetermineFollowerState(struct ObjectEvent* follower, u8 state, u8 dire
 
     case MOVEMENT_ACTION_JUMP_2_DOWN ... MOVEMENT_ACTION_JUMP_2_RIGHT:
 		// If the follower is invisible due to bike riding, just walk
-		if(follower->invisible == FALSE)
+		if(!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
 		{
 			// Ledge jump
 			if (((newState - direction) >= MOVEMENT_ACTION_JUMP_2_DOWN && (newState - direction) <= MOVEMENT_ACTION_JUMP_2_RIGHT)
@@ -500,7 +500,7 @@ static u8 DetermineFollowerState(struct ObjectEvent* follower, u8 state, u8 dire
         gSaveBlock2Ptr->follower.delayedState = MOVEMENT_ACTION_JUMP_SPECIAL_DOWN;
         RETURN_STATE(MOVEMENT_ACTION_WALK_NORMAL_DOWN, direction);
     case MOVEMENT_ACTION_JUMP_DOWN ... MOVEMENT_ACTION_JUMP_RIGHT:
-		if(gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible == FALSE)
+		if(!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
 			gSaveBlock2Ptr->follower.delayedState = MOVEMENT_ACTION_JUMP_DOWN;
         RETURN_STATE(MOVEMENT_ACTION_WALK_NORMAL_DOWN, direction);
     

@@ -58,6 +58,18 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteM
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteF;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreatBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UltraBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MasterBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SafariBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NetBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DiveBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NestBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RepeatBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TimerBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LuxuryBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PremierBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ExpandingSparkle;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeLateStages;
@@ -268,7 +280,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Spearow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fearow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ekans;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Arbok;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu_Follow;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu_Follower;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Raichu;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sandshrew;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sandslash;
@@ -723,6 +735,18 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =     &gObjectEventGraphicsInfo_CyclingTriathleteF,
     [OBJ_EVENT_GFX_NURSE] =                    &gObjectEventGraphicsInfo_Nurse,
     [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_ItemBall,
+    [OBJ_EVENT_GFX_GREAT_BALL] =               &gObjectEventGraphicsInfo_GreatBall,
+    [OBJ_EVENT_GFX_ULTRA_BALL] =               &gObjectEventGraphicsInfo_UltraBall,
+    [OBJ_EVENT_GFX_MASTER_BALL] =              &gObjectEventGraphicsInfo_MasterBall,
+    [OBJ_EVENT_GFX_SAFARI_BALL] =              &gObjectEventGraphicsInfo_SafariBall,
+    [OBJ_EVENT_GFX_NEST_BALL] =                &gObjectEventGraphicsInfo_NestBall,
+    [OBJ_EVENT_GFX_DIVE_BALL] =                &gObjectEventGraphicsInfo_DiveBall,
+    [OBJ_EVENT_GFX_NET_BALL] =                 &gObjectEventGraphicsInfo_NetBall,
+    [OBJ_EVENT_GFX_REPEAT_BALL] =              &gObjectEventGraphicsInfo_RepeatBall,
+    [OBJ_EVENT_GFX_TIMER_BALL] =               &gObjectEventGraphicsInfo_TimerBall,
+    [OBJ_EVENT_GFX_LUXURY_BALL] =              &gObjectEventGraphicsInfo_LuxuryBall,
+    [OBJ_EVENT_GFX_PREMIER_BALL] =             &gObjectEventGraphicsInfo_PremierBall,
+    [OBJ_EVENT_GFX_EXPANDING_SPARKLE] =        &gObjectEventGraphicsInfo_ExpandingSparkle,
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
@@ -926,7 +950,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_FEAROW] =                   &gObjectEventGraphicsInfo_Fearow,
     [OBJ_EVENT_GFX_EKANS] =                    &gObjectEventGraphicsInfo_Ekans,
     [OBJ_EVENT_GFX_ARBOK] =                    &gObjectEventGraphicsInfo_Arbok,
-    [OBJ_EVENT_GFX_PIKACHU_FOLLOW] =           &gObjectEventGraphicsInfo_Pikachu_Follow,
+    [OBJ_EVENT_GFX_PIKACHU_FOLLOWER] =           &gObjectEventGraphicsInfo_Pikachu_Follower,
     [OBJ_EVENT_GFX_RAICHU] =                   &gObjectEventGraphicsInfo_Raichu,
     [OBJ_EVENT_GFX_SANDSHREW] =                &gObjectEventGraphicsInfo_Sandshrew,
     [OBJ_EVENT_GFX_SANDSLASH] =                &gObjectEventGraphicsInfo_Sandslash,
