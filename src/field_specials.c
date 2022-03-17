@@ -1069,11 +1069,11 @@ static void PCTurnOffEffect(void)
         dy = -1;
         break;
     }
-    if (gSpecialVar_0x8004 == 0)
+    if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
         tileId = METATILE_Building_PC_Off;
-    else if (gSpecialVar_0x8004 == 1)
+    else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
         tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-    else if (gSpecialVar_0x8004 == 2)
+    else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
         tileId = METATILE_BrendansMaysHouse_MayPC_Off;
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();

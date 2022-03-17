@@ -413,56 +413,56 @@ static const union AnimCmd sAnim_GetOnOffSurfBlobEast[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_BunnyHoppyBackWheelSouth[] =
+static const union AnimCmd sAnim_BunnyHopBackWheelSouth[] =
 {
     ANIMCMD_FRAME(9, 4),
     ANIMCMD_FRAME(10, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyBackWheelNorth[] =
+static const union AnimCmd sAnim_BunnyHopBackWheelNorth[] =
 {
     ANIMCMD_FRAME(13, 4),
     ANIMCMD_FRAME(14, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyBackWheelWest[] =
+static const union AnimCmd sAnim_BunnyHopBackWheelWest[] =
 {
     ANIMCMD_FRAME(17, 4),
     ANIMCMD_FRAME(18, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyBackWheelEast[] =
+static const union AnimCmd sAnim_BunnyHopBackWheelEast[] =
 {
     ANIMCMD_FRAME(17, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(18, 4, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyFrontWheelSouth[] =
+static const union AnimCmd sAnim_BunnyHopFrontWheelSouth[] =
 {
     ANIMCMD_FRAME(11, 4),
     ANIMCMD_FRAME(12, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyFrontWheelNorth[] =
+static const union AnimCmd sAnim_BunnyHopFrontWheelNorth[] =
 {
     ANIMCMD_FRAME(15, 4),
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyFrontWheelWest[] =
+static const union AnimCmd sAnim_BunnyHopFrontWheelWest[] =
 {
     ANIMCMD_FRAME(19, 4),
     ANIMCMD_FRAME(20, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BunnyHoppyFrontWheelEast[] =
+static const union AnimCmd sAnim_BunnyHopFrontWheelEast[] =
 {
     ANIMCMD_FRAME(19, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(20, 4, .hFlip = TRUE),
@@ -1024,14 +1024,14 @@ static const union AnimCmd *const sAnimTable_AcroBike[] = {
     [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
     [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
     [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
-    [ANIM_BUNNY_HOPPY_BACK_WHEEL_SOUTH] = sAnim_BunnyHoppyBackWheelSouth,
-    [ANIM_BUNNY_HOPPY_BACK_WHEEL_NORTH] = sAnim_BunnyHoppyBackWheelNorth,
-    [ANIM_BUNNY_HOPPY_BACK_WHEEL_WEST] = sAnim_BunnyHoppyBackWheelWest,
-    [ANIM_BUNNY_HOPPY_BACK_WHEEL_EAST] = sAnim_BunnyHoppyBackWheelEast,
-    [ANIM_BUNNY_HOPPY_FRONT_WHEEL_SOUTH] = sAnim_BunnyHoppyFrontWheelSouth,
-    [ANIM_BUNNY_HOPPY_FRONT_WHEEL_NORTH] = sAnim_BunnyHoppyFrontWheelNorth,
-    [ANIM_BUNNY_HOPPY_FRONT_WHEEL_WEST] = sAnim_BunnyHoppyFrontWheelWest,
-    [ANIM_BUNNY_HOPPY_FRONT_WHEEL_EAST] = sAnim_BunnyHoppyFrontWheelEast,
+    [ANIM_BUNNY_HOP_BACK_WHEEL_SOUTH] = sAnim_BunnyHopBackWheelSouth,
+    [ANIM_BUNNY_HOP_BACK_WHEEL_NORTH] = sAnim_BunnyHopBackWheelNorth,
+    [ANIM_BUNNY_HOP_BACK_WHEEL_WEST] = sAnim_BunnyHopBackWheelWest,
+    [ANIM_BUNNY_HOP_BACK_WHEEL_EAST] = sAnim_BunnyHopBackWheelEast,
+    [ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH] = sAnim_BunnyHopFrontWheelSouth,
+    [ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH] = sAnim_BunnyHopFrontWheelNorth,
+    [ANIM_BUNNY_HOP_FRONT_WHEEL_WEST] = sAnim_BunnyHopFrontWheelWest,
+    [ANIM_BUNNY_HOP_FRONT_WHEEL_EAST] = sAnim_BunnyHopFrontWheelEast,
     [ANIM_STANDING_WHEELIE_BACK_WHEEL_SOUTH] = sAnim_StandingWheelieBackWheelSouth,
     [ANIM_STANDING_WHEELIE_BACK_WHEEL_NORTH] = sAnim_StandingWheelieBackWheelNorth,
     [ANIM_STANDING_WHEELIE_BACK_WHEEL_WEST] = sAnim_StandingWheelieBackWheelWest,
