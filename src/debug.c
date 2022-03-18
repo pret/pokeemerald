@@ -31,6 +31,7 @@
 #include "naming_screen.h"
 #include "new_game.h"
 #include "overworld.h"
+#include "palette.h"
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -48,6 +49,7 @@
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
+#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 
@@ -61,6 +63,7 @@ enum { // Main
     DEBUG_MENU_ITEM_VARS,
     DEBUG_MENU_ITEM_GIVE,
     DEBUG_MENU_ITEM_SOUND,
+    DEBUG_MENU_ITEM_ACCESS_PC,
     DEBUG_MENU_ITEM_CANCEL
 };
 enum { // Util
@@ -115,7 +118,6 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
     DEBUG_GIVE_MENU_ITEM_FILL_PC,
     DEBUG_GIVE_MENU_ITEM_CHEAT,
-    //DEBUG_MENU_ITEM_ACCESS_PC,
 };
 enum { //Sound
     DEBUG_SOUND_MENU_ITEM_SE,
@@ -374,7 +376,7 @@ static const u8 gDebugText_Give_MaxCoins[] =            _("Max Coins");
 static const u8 gDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
 static const u8 gDebugText_Give_FillPc[] =              _("Fill Pc");
 static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
-// static const u8 gDebugText_Give_AccessPC[] =         _("Access PC");
+static const u8 gDebugText_AccessPC[] =                 _("Access PC");
 // Sound Mneu
 static const u8 gDebugText_Sound_SE[] =                 _("Effects");
 static const u8 gDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
@@ -425,6 +427,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     [DEBUG_MENU_ITEM_VARS]          = {gDebugText_Vars,         DEBUG_MENU_ITEM_VARS},
     [DEBUG_MENU_ITEM_GIVE]          = {gDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
     [DEBUG_MENU_ITEM_SOUND]         = {gDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
+    [DEBUG_MENU_ITEM_ACCESS_PC]     = {gDebugText_AccessPC,     DEBUG_MENU_ITEM_ACCESS_PC},
     [DEBUG_MENU_ITEM_CANCEL]        = {gDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL}
 };
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -484,7 +487,6 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = {gDebugText_Give_DaycareEgg,          DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = {gDebugText_Give_FillPc,              DEBUG_GIVE_MENU_ITEM_FILL_PC},
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = {gDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
-    //[DEBUG_MENU_ITEM_ACCESS_PC] = {gDebugText_AccessPC, DEBUG_MENU_ITEM_ACCESS_PC},
 };
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
@@ -502,6 +504,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_VARS]          = DebugAction_OpenVariablesMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
+    [DEBUG_MENU_ITEM_ACCESS_PC]     = DebugAction_AccessPC,
     [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
 };
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
@@ -561,7 +564,6 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = DebugAction_Give_DayCareEgg,
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = DebugAction_Give_FillPC,
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = DebugAction_Give_CHEAT,
-    //[DEBUG_MENU_ITEM_ACCESS_PC] = DebugAction_AccessPC,
 };
 static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
@@ -2690,12 +2692,23 @@ static void DebugAction_Give_CHEAT(u8 taskId)
     ScriptContext1_SetupScript(Debug_CheatStart);
 }
 
-// static void DebugAction_AccessPC(u8 taskId)
-// {
-//     Debug_DestroyMenu(taskId);
-//     PlaySE(SE_PC_ON);
-//     ScriptContext1_SetupScript(EventScript_PC);
-// }
+static void Task_WaitFadeAccessPC(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        FlagSet(FLAG_SYS_PC_FROM_DEBUG_MENU);
+        EnterPokeStorage(2);
+    }
+}
+
+static void DebugAction_AccessPC(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    CleanupOverworldWindowsAndTilemaps();
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_WaitFadeAccessPC, 0);
+}
 
 
 // *******************************
