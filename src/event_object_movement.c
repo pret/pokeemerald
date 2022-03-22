@@ -10030,37 +10030,37 @@ u8 MovementAction_FollowingPokemon_Shrink_Step0(struct ObjectEvent *objectEvent,
 
     switch(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_POKEBALL))
     {
-        case 1: // Master Ball
+        case ITEM_MASTER_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MASTER_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 2: // Ultra Ball
+        case ITEM_ULTRA_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ULTRA_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 3: // Great Ball
+        case ITEM_GREAT_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_GREAT_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 5: // Safari Ball
+        case ITEM_SAFARI_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SAFARI_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 6: // Net Ball
+        case ITEM_NET_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_NET_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 7: // Dive Ball
+        case ITEM_DIVE_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DIVE_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 8: // Nest Ball
+        case ITEM_NEST_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_NEST_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 9: // Repeat Ball
+        case ITEM_REPEAT_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_REPEAT_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 10: // Timer Ball
+        case ITEM_TIMER_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_TIMER_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 11: // Luxury Ball
+        case ITEM_LUXURY_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LUXURY_BALL, &PokeballCallback, x, y, 2);
             break;
-        case 12: // Premier Ball
+        case ITEM_PREMIER_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PREMIER_BALL, &PokeballCallback, x, y, 2);
             break;
         default: // PokeBall
