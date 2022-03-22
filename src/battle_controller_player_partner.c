@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
@@ -1535,7 +1536,7 @@ static void PlayerPartnerHandleChooseMove(void)
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
     
-    if (ShouldAIUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
+    if (ShouldUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
         QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
 
     // If partner can mega evolve, do it.

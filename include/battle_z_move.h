@@ -23,7 +23,6 @@ void DestroyZMoveTriggerSprite(void);
 bool32 MoveSelectionDisplayZMove(u16 zmove);
 const u8* GetZMoveName(u16 move);
 void SetZEffect(void);
-bool32 ShouldAIUseZMove(u8 activeId, u8 targetId, u16 chosenMove);
 bool32 IsZMoveUsable(u8 battlerId, u16 moveIndex);
 void GetUsableZMoves(u8 battlerId, u16 *moves);
 

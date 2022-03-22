@@ -3636,3 +3636,35 @@ bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move)
         return TRUE;
     return FALSE;
 }
+
+//TODO - this could use some more sophisticated logic
+bool32 ShouldUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
+{
+    // simple logic. just upgrades chosen move to z move if possible, unless regular move would kill opponent
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && battlerDef == BATTLE_PARTNER(battlerAtk))
+        return FALSE; //don't use z move on partner
+    if (gBattleStruct->zmove.used[battlerAtk])
+        return FALSE;   //cant use z move twice
+    
+    if (IsViableZMove(battlerAtk, chosenMove))
+    {
+        #ifdef POKEMON_EXPANSION
+        if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU)
+            return FALSE; // Don't waste a Z-Move busting disguise
+        if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
+            return FALSE; // Don't waste a Z-Move busting Ice Face
+        #endif
+        
+        if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
+            return FALSE;
+        else if (!IS_MOVE_STATUS(chosenMove) && IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
+            return FALSE;
+        
+        if (!IS_MOVE_STATUS(chosenMove) && AI_CalcDamage(chosenMove, battlerAtk, battlerDef, FALSE) >= gBattleMons[battlerDef].hp)
+            return FALSE;   // don't waste damaging z move if can otherwise faint target
+        
+        return TRUE;
+    }
+    
+    return FALSE;
+}
