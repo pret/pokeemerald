@@ -17,18 +17,12 @@ Route110_TrickHouseEntrance_MapScripts::
 
 Route110_TrickHouseEntrance_OnTransition:
 	setflag FLAG_LANDMARK_TRICK_HOUSE
-	compare VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR, 1
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_EnterFromCorridor
-	compare VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward
-	compare VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor
-	compare VAR_TRICK_HOUSE_ENTRANCE_STATE, 5
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle
-	compare VAR_TRICK_HOUSE_ENTRANCE_STATE, 3
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle
-	compare VAR_TRICK_HOUSE_ENTRANCE_STATE, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle
+	goto_if_eq VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR, 1, Route110_TrickHouseEntrance_EventScript_EnterFromCorridor
+	goto_if_eq VAR_TRICK_HOUSE_PRIZE_PICKUP, 1, Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward
+	goto_if_eq VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1, Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor
+	call_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 5, Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle
+	call_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 3, Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle
+	call_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 0, Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle
 	switch VAR_TRICK_HOUSE_ENTRANCE_STATE
 	case 0, Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger
 	case 1, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1
@@ -38,8 +32,7 @@ Route110_TrickHouseEntrance_OnTransition:
 
 Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward::
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
-	compare VAR_TRICK_HOUSE_LEVEL, 8
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 8, Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 2
 	end
 
@@ -55,22 +48,14 @@ Route110_TrickHouseEntrance_EventScript_EnterFromCorridor::
 
 Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle::
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 0
-	compare VAR_TRICK_HOUSE_LEVEL, 1
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2
-	compare VAR_TRICK_HOUSE_LEVEL, 2
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3
-	compare VAR_TRICK_HOUSE_LEVEL, 3
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4
-	compare VAR_TRICK_HOUSE_LEVEL, 4
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5
-	compare VAR_TRICK_HOUSE_LEVEL, 5
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6
-	compare VAR_TRICK_HOUSE_LEVEL, 6
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7
-	compare VAR_TRICK_HOUSE_LEVEL, 7
-	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8
-	compare VAR_TRICK_HOUSE_LEVEL, 8
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FinishedPuzzles
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 1, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 2, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 3, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 4, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 5, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 6, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 7, Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 8, Route110_TrickHouseEntrance_EventScript_FinishedPuzzles
 	return
 
 Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2::
@@ -216,8 +201,7 @@ Route110_TrickHouseEntrance_OnFrame:
 Route110_TrickHouseEntrance_EventScript_BeginChallenge::
 	lockall
 	delay 20
-	compare VAR_TRICK_HOUSE_LEVEL, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_MeetTrickMaster
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 0, Route110_TrickHouseEntrance_EventScript_MeetTrickMaster
 	msgbox Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -251,25 +235,17 @@ Route110_TrickHouseEntrance_EventScript_FoundTrickMaster::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
-	compare VAR_TRICK_HOUSE_LEVEL, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk
-	compare VAR_TRICK_HOUSE_LEVEL, 1
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundBehindTree
-	compare VAR_TRICK_HOUSE_LEVEL, 2
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundInDresser
-	compare VAR_TRICK_HOUSE_LEVEL, 3
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundBeyondWindow
-	compare VAR_TRICK_HOUSE_LEVEL, 4
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundInPlanter
-	compare VAR_TRICK_HOUSE_LEVEL, 5
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundInCupboard
-	compare VAR_TRICK_HOUSE_LEVEL, 6
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundBehindWindow
-	compare VAR_TRICK_HOUSE_LEVEL, 7
-	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundBeneathCushion
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 0, Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 1, Route110_TrickHouseEntrance_EventScript_FoundBehindTree
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 2, Route110_TrickHouseEntrance_EventScript_FoundInDresser
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 3, Route110_TrickHouseEntrance_EventScript_FoundBeyondWindow
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 4, Route110_TrickHouseEntrance_EventScript_FoundInPlanter
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 5, Route110_TrickHouseEntrance_EventScript_FoundInCupboard
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 6, Route110_TrickHouseEntrance_EventScript_FoundBehindWindow
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 7, Route110_TrickHouseEntrance_EventScript_FoundBeneathCushion
 	closemessage
 	setvar VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1
-	warpsilent MAP_ROUTE110_TRICK_HOUSE_ENTRANCE, 255, 6, 2
+	warpsilent MAP_ROUTE110_TRICK_HOUSE_ENTRANCE, 6, 2
 	waitstate
 	releaseall
 	end
@@ -343,7 +319,7 @@ Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges, MSGBOX_DEFAULT
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	releaseall
 	end
@@ -352,88 +328,67 @@ Route110_TrickHouseEntrance_EventScript_GiveReward::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward, MSGBOX_DEFAULT
-	compare VAR_TRICK_HOUSE_LEVEL, 1
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward
-	compare VAR_TRICK_HOUSE_LEVEL, 2
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward
-	compare VAR_TRICK_HOUSE_LEVEL, 3
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward
-	compare VAR_TRICK_HOUSE_LEVEL, 4
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward
-	compare VAR_TRICK_HOUSE_LEVEL, 5
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward
-	compare VAR_TRICK_HOUSE_LEVEL, 6
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward
-	compare VAR_TRICK_HOUSE_LEVEL, 7
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 1, Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 2, Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 3, Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 4, Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 5, Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 6, Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 7, Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward::
 	giveitem ITEM_RARE_CANDY
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward::
 	giveitem ITEM_TIMER_BALL
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
 	giveitem ITEM_HARD_STONE
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
 	giveitem ITEM_SMOKE_BALL
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
 	giveitem ITEM_TM12
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward::
 	giveitem ITEM_MAGNET
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
 	giveitem ITEM_PP_MAX
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -441,7 +396,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
 Route110_TrickHouseEntrance_EventScript_GotReward::
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 3
-	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	releaseall
 	end
@@ -451,10 +406,8 @@ Route110_TrickHouseEntrance_EventScript_MechadollReward::
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT
 	call Route110_TrickHouseEntrance_EventScript_ChooseTent
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_ReceivedTent
-	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_NoRoomForDecor
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_ReceivedTent
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -506,13 +459,12 @@ Route110_TrickHouseEntrance_EventScript_ItsAScroll::
 Route110_TrickHouseEntrance_EventScript_GoInHolePrompt::
 	msgbox Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll, MSGBOX_YESNO
 	closemessage
-	compare VAR_RESULT, YES
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom
+	goto_if_eq VAR_RESULT, YES, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom::
-	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, 0
+	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, FALSE
 	special DrawWholeMapView
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
@@ -535,49 +487,49 @@ Route110_TrickHouseEntrance_Movement_EnterRoom:
 	step_end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom1::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE1, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE1, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom2::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE2, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE2, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom3::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE3, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE3, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom4::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE4, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE4, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom5::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom6::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE6, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE6, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom7::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom8::
-	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE8, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE8, 0, 21
 	waitstate
 	releaseall
 	end
@@ -588,8 +540,7 @@ Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote::
 	end
 
 Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage::
-	compare VAR_TRICK_HOUSE_LEVEL, 8
-	goto_if_eq Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2
+	goto_if_eq VAR_TRICK_HOUSE_LEVEL, 8, Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2
 	msgbox Route110_TrickHouseEntrance_Text_ItsAScroll, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -613,89 +564,81 @@ Route110_TrickHousePuzzle_EventScript_Door::
 	end
 
 Route110_TrickHousePuzzle1_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle2_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_2_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_3_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_3_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_3_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_4_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_4_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_4_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle5_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_5_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_5_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_5_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle6_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_6_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle7_EventScript_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHousePuzzle8_EventScript_Door::
-	compare VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle_EventScript_DoorLocked
+	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0, Route110_TrickHousePuzzle_EventScript_DoorLocked
 	msgbox Route110_TrickHousePuzzle8_EventScript_WroteSecretCodeLockOpened, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_TRICK_HOUSE_PUZZLE_8_STATE, 2
-	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE
 	special DrawWholeMapView
 	releaseall
 	end
@@ -722,12 +665,9 @@ Route110_TrickHouseEntrance_EventScript_TrickMasterHiding::
 	lockall
 	msgbox Route110_TrickHouseEntrance_Text_YoureBeingWatched, MSGBOX_DEFAULT
 	releaseall
-	compare VAR_TRICK_HOUSE_LEVEL, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1
-	compare VAR_TRICK_HOUSE_LEVEL, 1
-	call_if_eq Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2
-	compare VAR_TRICK_HOUSE_LEVEL, 2
-	call_if_eq Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 0, Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 1, Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2
+	call_if_eq VAR_TRICK_HOUSE_LEVEL, 2, Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
 	end
 

@@ -56,7 +56,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_PIKACHU, 0
+	playmoncry SPECIES_PIKACHU, CRY_MODE_NORMAL
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_Pikachu, MSGBOX_DEFAULT
 	waitmoncry
 	release

@@ -33,8 +33,8 @@ static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite);
 static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 
 // static const rom data
-static const u16 gRotatingBall_Pal[] = INCBIN_U16("graphics/interface/bag_spinner.gbapal");
-static const u8 gRotatingBall[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
+static const u16 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
+static const u8 sRotatingBall_Gfx[] = INCBIN_U8("graphics/bag/rotating_ball.4bpp");
 static const u8 gCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
 static const u16 gCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
@@ -200,12 +200,12 @@ static const union AffineAnimCmd *const sRotatingBallAnimCmds_FullRotation[] =
 
 static const struct SpriteSheet sRotatingBallTable =
 {
-    gRotatingBall, 0x80, TAG_ROTATING_BALL_GFX
+    sRotatingBall_Gfx, 0x80, TAG_ROTATING_BALL_GFX
 };
 
 static const struct SpritePalette sRotatingBallPaletteTable =
 {
-    gRotatingBall_Pal, TAG_ROTATING_BALL_GFX
+    sRotatingBall_Pal, TAG_ROTATING_BALL_GFX
 };
 
 static const struct SpriteTemplate sRotatingBallSpriteTemplate =
@@ -271,7 +271,7 @@ static const struct SpriteFrameImage sBerryPicSpriteImageTable[] =
 
 static const struct SpriteTemplate gBerryPicSpriteTemplate =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = TAG_BERRY_PIC_PAL,
     .oam = &sBerryPicOamData,
     .anims = sBerryPicSpriteAnimTable,
@@ -310,7 +310,7 @@ static const union AffineAnimCmd *const sBerryPicRotatingAnimCmds[] =
 
 static const struct SpriteTemplate gBerryPicRotatingSpriteTemplate =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = TAG_BERRY_PIC_PAL,
     .oam = &sBerryPicRotatingOamData,
     .anims = sBerryPicSpriteAnimTable,
@@ -559,26 +559,34 @@ void SetItemMenuSwapLineInvisibility(bool8 invisible)
 
 void UpdateItemMenuSwapLinePos(u8 y)
 {
-    UpdateSwapLineSpritesPos(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH | 0x80, 120, (y + 1) * 16);
+    UpdateSwapLineSpritesPos(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }
 
-static void sub_80D5018(void *mem0, void *mem1)
+static void ArrangeBerryGfx(void *src, void *dest)
 {
     u8 i, j;
 
-    memset(mem1, 0, 0x800);
-    mem1 += 0x100;
+    memset(dest, 0, 0x800);
+
+    // Create top margin
+    dest += 0x100;
+
     for (i = 0; i < 6; i++)
     {
-        mem1 += 0x20;
+        // Create left margin
+        dest += 0x20;
+
+        // Copy one row of berry's icon
         for (j = 0; j < 6; j++)
         {
-            memcpy(mem1, mem0, 0x20);
-            mem1 += 0x20;
-            mem0 += 0x20;
+            memcpy(dest, src, 0x20);
+            dest += 0x20;
+            src += 0x20;
         }
+
+        // Create right margin
         if (i != 5)
-            mem1 += 0x20;
+            dest += 0x20;
     }
 }
 
@@ -595,7 +603,7 @@ static void LoadBerryGfx(u8 berryId)
     pal.tag = TAG_BERRY_PIC_PAL;
     LoadCompressedSpritePalette(&pal);
     LZDecompressWram(sBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
-    sub_80D5018(&gDecompressionBuffer[0x1000], &gDecompressionBuffer[0]);
+    ArrangeBerryGfx(&gDecompressionBuffer[0x1000], &gDecompressionBuffer[0]);
 }
 
 u8 CreateBerryTagSprite(u8 id, s16 x, s16 y)

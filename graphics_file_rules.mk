@@ -17,6 +17,9 @@ PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
 OBJEVENTGFXDIR := graphics/object_events
 MISCGFXDIR := graphics/misc
+JPCONTESTGFXDIR := graphics/contest/japanese
+POKEDEXGFXDIR := graphics/pokedex
+STARTERGFXDIR := graphics/starter_choose
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -26,33 +29,33 @@ contest_types := cool beauty cute smart tough
 ### Castform ###
 
 $(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/front_normal_form.4bpp \
-							  $(CASTFORMGFXDIR)/front_sunny_form.4bpp \
-							  $(CASTFORMGFXDIR)/front_rainy_form.4bpp \
-							  $(CASTFORMGFXDIR)/front_snowy_form.4bpp
+                              $(CASTFORMGFXDIR)/front_sunny_form.4bpp \
+                              $(CASTFORMGFXDIR)/front_rainy_form.4bpp \
+                              $(CASTFORMGFXDIR)/front_snowy_form.4bpp
 	@cat $^ >$@
 
 $(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/back_normal_form.4bpp \
-							 $(CASTFORMGFXDIR)/back_sunny_form.4bpp \
-							 $(CASTFORMGFXDIR)/back_rainy_form.4bpp \
-							 $(CASTFORMGFXDIR)/back_snowy_form.4bpp
+                             $(CASTFORMGFXDIR)/back_sunny_form.4bpp \
+                             $(CASTFORMGFXDIR)/back_rainy_form.4bpp \
+                             $(CASTFORMGFXDIR)/back_snowy_form.4bpp
 	@cat $^ >$@
 
 $(CASTFORMGFXDIR)/anim_front.4bpp: $(CASTFORMGFXDIR)/anim_front_normal_form.4bpp \
-								   $(CASTFORMGFXDIR)/anim_front_sunny_form.4bpp \
-								   $(CASTFORMGFXDIR)/anim_front_rainy_form.4bpp \
-								   $(CASTFORMGFXDIR)/anim_front_snowy_form.4bpp
+                                   $(CASTFORMGFXDIR)/anim_front_sunny_form.4bpp \
+                                   $(CASTFORMGFXDIR)/anim_front_rainy_form.4bpp \
+                                   $(CASTFORMGFXDIR)/anim_front_snowy_form.4bpp
 	@cat $^ >$@
 
 $(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal_normal_form.gbapal \
-								 $(CASTFORMGFXDIR)/normal_sunny_form.gbapal \
-								 $(CASTFORMGFXDIR)/normal_rainy_form.gbapal \
-								 $(CASTFORMGFXDIR)/normal_snowy_form.gbapal
+                                 $(CASTFORMGFXDIR)/normal_sunny_form.gbapal \
+                                 $(CASTFORMGFXDIR)/normal_rainy_form.gbapal \
+                                 $(CASTFORMGFXDIR)/normal_snowy_form.gbapal
 	@cat $^ >$@
 
 $(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/shiny_normal_form.gbapal \
-								$(CASTFORMGFXDIR)/shiny_sunny_form.gbapal \
-								$(CASTFORMGFXDIR)/shiny_rainy_form.gbapal \
-								$(CASTFORMGFXDIR)/shiny_snowy_form.gbapal
+                                $(CASTFORMGFXDIR)/shiny_sunny_form.gbapal \
+                                $(CASTFORMGFXDIR)/shiny_rainy_form.gbapal \
+                                $(CASTFORMGFXDIR)/shiny_snowy_form.gbapal
 	@cat $^ >$@
 
 
@@ -289,57 +292,41 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 
 ### Fonts ###
 
-$(FONTGFXDIR)/font0.latfont: $(FONTGFXDIR)/font0_latin.png
+$(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font1.latfont: $(FONTGFXDIR)/font1_latin.png
+$(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font2.latfont: $(FONTGFXDIR)/font2_latin.png
+$(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font7.latfont: $(FONTGFXDIR)/font7_latin.png
+$(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font8.latfont: $(FONTGFXDIR)/font8_latin.png
+$(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font0.hwjpnfont: $(FONTGFXDIR)/font0_japanese.png
+$(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font1.hwjpnfont: $(FONTGFXDIR)/font1_japanese.png
+$(FONTGFXDIR)/normal.hwjpnfont: $(FONTGFXDIR)/japanese_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font9.hwjpnfont: $(FONTGFXDIR)/font9_japanese.png
+$(FONTGFXDIR)/bold.hwjpnfont: $(FONTGFXDIR)/japanese_bold.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font2.fwjpnfont: $(FONTGFXDIR)/font2_japanese.png
+$(FONTGFXDIR)/short.fwjpnfont: $(FONTGFXDIR)/japanese_short.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font6.fwjpnfont: $(FONTGFXDIR)/font6_braille.png
+$(FONTGFXDIR)/braille.fwjpnfont: $(FONTGFXDIR)/braille.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/unused_frlg_male.fwjpnfont: $(FONTGFXDIR)/unused_japanese_frlg_male_font.png
+$(FONTGFXDIR)/frlg_male.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_male_font.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/unused_frlg_female.fwjpnfont: $(FONTGFXDIR)/unused_japanese_frlg_female_font.png
+$(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female_font.png
 	$(GFX) $< $@
-
-$(FONTGFXDIR)/down_arrow.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/down_arrow_rs.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/unused_frlg_blanked_down_arrow.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/unused_frlg_down_arrow.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/keypad_icons.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
 
 
 ### Miscellaneous ###
@@ -356,38 +343,38 @@ $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
 $(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox_0.gbapal \
-								$(BATINTGFXDIR)/textbox_1.gbapal
+                                $(BATINTGFXDIR)/textbox_1.gbapal
 	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/ice_cube.4bpp: $(BTLANMSPRGFXDIR)/ice_cube_0.4bpp \
-						 	 $(BTLANMSPRGFXDIR)/ice_cube_1.4bpp \
-						 	 $(BTLANMSPRGFXDIR)/ice_cube_2.4bpp \
-						 	 $(BTLANMSPRGFXDIR)/ice_cube_3.4bpp
+                                  $(BTLANMSPRGFXDIR)/ice_cube_1.4bpp \
+                                  $(BTLANMSPRGFXDIR)/ice_cube_2.4bpp \
+                                  $(BTLANMSPRGFXDIR)/ice_cube_3.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal \
-									$(UNUSEDGFXDIR)/old_pal2.gbapal \
-									$(UNUSEDGFXDIR)/old_pal3.gbapal
+                                    $(UNUSEDGFXDIR)/old_pal2.gbapal \
+                                    $(UNUSEDGFXDIR)/old_pal3.gbapal
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi_palpak3.gbapal: $(UNUSEDGFXDIR)/old_pal5.gbapal \
-									$(UNUSEDGFXDIR)/old_pal6.gbapal \
-									$(UNUSEDGFXDIR)/old_pal7.gbapal
+                                    $(UNUSEDGFXDIR)/old_pal6.gbapal \
+                                    $(UNUSEDGFXDIR)/old_pal7.gbapal
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur.4bpp \
-						   $(UNUSEDGFXDIR)/old_charizard.4bpp
+                           $(UNUSEDGFXDIR)/old_charizard.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp \
-						   $(UNUSEDGFXDIR)/old_battle_interface_1.4bpp \
-						   $(UNUSEDGFXDIR)/old_battle_interface_2.4bpp \
-						   $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
+                           $(UNUSEDGFXDIR)/old_battle_interface_1.4bpp \
+                           $(UNUSEDGFXDIR)/old_battle_interface_2.4bpp \
+                           $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
 	@cat $^ >$@
 
-$(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
-									$(INTERFACEGFXDIR)/numbers1.4bpp \
-									$(INTERFACEGFXDIR)/numbers2.4bpp
+$(BATINTGFXDIR)/battle_bar.4bpp: $(BATINTGFXDIR)/hpbar_anim_unused.4bpp \
+                                 $(BATINTGFXDIR)/numbers1.4bpp \
+                                 $(BATINTGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
@@ -402,39 +389,39 @@ $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
 $(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
 
-$(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_floor.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_symbols.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_meter.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_classes.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
+$(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
+                                     $(JPCONTESTGFXDIR)/floor.4bpp \
+                                     $(JPCONTESTGFXDIR)/frame_2.4bpp \
+                                     $(JPCONTESTGFXDIR)/symbols.4bpp \
+                                     $(JPCONTESTGFXDIR)/meter.4bpp \
+                                     $(JPCONTESTGFXDIR)/letters.4bpp \
+                                     $(JPCONTESTGFXDIR)/numbers.4bpp
 	@cat $^ >$@
 
-$(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp \
-									$(UNUSEDGFXDIR)/old_contest_2_2.4bpp
+$(JPCONTESTGFXDIR)/composite_2.4bpp: $(JPCONTESTGFXDIR)/interface.4bpp \
+                                     $(JPCONTESTGFXDIR)/audience.4bpp
 	@cat $^ >$@
 
-$(UNKNOWNGFXDIR)/unknown_C19470.4bpp: %.4bpp: %.png
+$(JPCONTESTGFXDIR)/voltage.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
 $(BTLANMSPRGFXDIR)/ice_crystals.4bpp: $(BTLANMSPRGFXDIR)/ice_crystals_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/ice_crystals_1.4bpp \
-						  $(BTLANMSPRGFXDIR)/ice_crystals_2.4bpp \
-						  $(BTLANMSPRGFXDIR)/ice_crystals_3.4bpp \
-						  $(BTLANMSPRGFXDIR)/ice_crystals_4.4bpp
+                                      $(BTLANMSPRGFXDIR)/ice_crystals_1.4bpp \
+                                      $(BTLANMSPRGFXDIR)/ice_crystals_2.4bpp \
+                                      $(BTLANMSPRGFXDIR)/ice_crystals_3.4bpp \
+                                      $(BTLANMSPRGFXDIR)/ice_crystals_4.4bpp
 	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/mud_sand.4bpp: $(BTLANMSPRGFXDIR)/mud_sand_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/mud_sand_1.4bpp
+                                  $(BTLANMSPRGFXDIR)/mud_sand_1.4bpp
 	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/flower.4bpp: $(BTLANMSPRGFXDIR)/flower_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/flower_1.4bpp
+                                $(BTLANMSPRGFXDIR)/flower_1.4bpp
 	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/spark.4bpp: $(BTLANMSPRGFXDIR)/spark_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/spark_1.4bpp
+                               $(BTLANMSPRGFXDIR)/spark_1.4bpp
 	@cat $^ >$@
 
 $(MASKSGFXDIR)/unused_level_up.4bpp: %.4bpp: %.png
@@ -443,18 +430,18 @@ $(MASKSGFXDIR)/unused_level_up.4bpp: %.4bpp: %.png
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 16
 
-$(INTERFACEGFXDIR)/party_menu_bg.4bpp: %.4bpp: %.png
+graphics/party_menu/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
 
 $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
-							   $(TYPESGFXDIR)/move_types_2.gbapal \
-							   $(TYPESGFXDIR)/move_types_3.gbapal
+                                  $(TYPESGFXDIR)/move_types_2.gbapal \
+                                  $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $^ >$@
 
-$(INTERFACEGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
+graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
 $(RAYQUAZAGFXDIR)/scene_2/rayquaza.8bpp: %.8bpp: %.png
@@ -480,13 +467,13 @@ graphics/picture_frame/lobby.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 86
 
 $(ROULETTEGFXDIR)/roulette_tilt.4bpp: $(ROULETTEGFXDIR)/shroomish.4bpp \
-									  $(ROULETTEGFXDIR)/tailow.4bpp
+                                      $(ROULETTEGFXDIR)/tailow.4bpp
 	@cat $^ >$@
 
 $(ROULETTEGFXDIR)/wheel_icons.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
-									$(ROULETTEGFXDIR)/azurill.4bpp \
-									$(ROULETTEGFXDIR)/skitty.4bpp \
-									$(ROULETTEGFXDIR)/makuhita.4bpp
+                                    $(ROULETTEGFXDIR)/azurill.4bpp \
+                                    $(ROULETTEGFXDIR)/skitty.4bpp \
+                                    $(ROULETTEGFXDIR)/makuhita.4bpp
 	@cat $^ >$@
 
 $(BATTRANSGFXDIR)/regis.4bpp: %.4bpp: %.png
@@ -496,26 +483,26 @@ $(BATTRANSGFXDIR)/rayquaza.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 938
 
 $(BATTRANSGFXDIR)/frontier_square_1.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_1.4bpp
+                                          $(BATTRANSGFXDIR)/frontier_squares_1.4bpp
 	@cat $^ >$@
 
 $(BATTRANSGFXDIR)/frontier_square_2.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_2.4bpp
+                                          $(BATTRANSGFXDIR)/frontier_squares_2.4bpp
 	@cat $^ >$@
 
 $(BATTRANSGFXDIR)/frontier_square_3.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_3.4bpp
+                                          $(BATTRANSGFXDIR)/frontier_squares_3.4bpp
 	@cat $^ >$@
 
 $(BATTRANSGFXDIR)/frontier_square_4.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_4.4bpp
+                                          $(BATTRANSGFXDIR)/frontier_squares_4.4bpp
 	@cat $^ >$@
 
 $(SLOTMACHINEGFXDIR)/reel_time_gfx.4bpp: $(SLOTMACHINEGFXDIR)/reel_time_pikachu.4bpp \
-										 $(SLOTMACHINEGFXDIR)/reel_time_machine.4bpp
+                                         $(SLOTMACHINEGFXDIR)/reel_time_machine.4bpp
 	@cat $^ >$@
 
-$(UNUSEDGFXDIR)/intro_birch_beauty.4bpp: %.4bpp: %.png
+graphics/birch_speech/unused_beauty.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 822
 
 
@@ -692,18 +679,18 @@ $(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
 ### Pokenav ###
 
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/condition.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/party.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/search.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/cool.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/cute.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/smart.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/tough.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/cancel.4bpp
+                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
 	@cat $^ >$@
 
 $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
@@ -712,14 +699,14 @@ $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
 $(PKNAVGFXDIR)/device_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 	
-$(PKNAVGFXDIR)/ui_matchcall.4bpp: %.4bpp: %.png
+$(PKNAVGFXDIR)/match_call/ui.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 13
 
-$(INTERFACEGFXDIR)/region_map.8bpp: %.8bpp: %.png
+$(POKEDEXGFXDIR)/region_map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 232
 
-$(INTERFACEGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
+$(POKEDEXGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
 
-$(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
+$(STARTERGFXDIR)/birch_help.4bpp: $(STARTERGFXDIR)/birch_bag.4bpp $(STARTERGFXDIR)/birch_grass.4bpp
 	@cat $^ >$@

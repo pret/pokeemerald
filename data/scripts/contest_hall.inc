@@ -18,8 +18,7 @@
 LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist::
 	lock
 	faceplayer
-	compare VAR_CONTEST_PRIZE_PICKUP, 0
-	goto_if_ne LilycoveCity_ContestLobby_EventScript_PickUpPrize
+	goto_if_ne VAR_CONTEST_PRIZE_PICKUP, 0, LilycoveCity_ContestLobby_EventScript_PickUpPrize
 	call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_ReceptionWelcome
 	call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_GivePokeblockCase
 	goto LilycoveCity_ContestLobby_EventScript_AskEnterContest
@@ -44,8 +43,7 @@ LilycoveCity_ContestLobby_EventScript_PickUpPrize::
 
 LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter::
 	giveitem ITEM_LUXURY_BALL
-	compare VAR_RESULT, FALSE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
 	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
@@ -103,19 +101,13 @@ LilycoveCity_ContestLobby_EventScript_CancelEnterContest::
 LilycoveCity_ContestLobby_EventScript_ChooseContestMon::
 	msgbox LilycoveCity_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
 	choosecontestmon
-	compare VAR_0x8004, 255
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	special TryEnterContestMon
-	compare VAR_RESULT, CANT_ENTER_CONTEST
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
-	compare VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_EnterMon
-	compare VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
-	compare VAR_RESULT, CANT_ENTER_CONTEST_EGG
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterEgg
-	compare VAR_RESULT, CANT_ENTER_CONTEST_FAINTED
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterFainted
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST, LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
+	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK, LilycoveCity_ContestLobby_EventScript_EnterMon
+	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK, LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_EGG, LilycoveCity_ContestLobby_EventScript_CantEnterEgg
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_FAINTED, LilycoveCity_ContestLobby_EventScript_CantEnterFainted
 	end
 
 LilycoveCity_ContestLobby_EventScript_ChooseContestRank::
@@ -283,8 +275,8 @@ ContestHall_EventScript_GetCategoryTough::
 	return
 
 ContestHall_EventScript_ContestGettingStarted::
-	buffercontesttypestring 1, VAR_0x8008
-	bufferstdstring 2, VAR_0x8009
+	buffercontestname STR_VAR_2, VAR_0x8008
+	bufferstdstring STR_VAR_3, VAR_0x8009
 	call ContestHall_EventScript_GettingStarted
 	lockall
 	applymovement LOCALID_MC, ContestHall_Movement_MCBackUp
@@ -293,8 +285,7 @@ ContestHall_EventScript_ContestGettingStarted::
 	return
 
 ContestHall_EventScript_GettingStarted::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_GettingStartedLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_GettingStartedLink
 	lockall
 	msgbox ContestHall_Text_GettingStartedParticipantsAsFollows, MSGBOX_DEFAULT
 	releaseall
@@ -302,8 +293,7 @@ ContestHall_EventScript_GettingStarted::
 
 ContestHall_EventScript_GettingStartedLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_GettingStartedWireless
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_GettingStartedWireless
 	messageautoscroll ContestHall_Text_GettingStartedParticipantsAsFollowsLink
 	waitmessage
 	return
@@ -326,16 +316,14 @@ ContestHall_EventScript_ShowContestMons::
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_TryWaitForLink
 	addvar VAR_0x8006, 1
-	compare VAR_0x8006, CONTESTANT_COUNT
-	goto_if_ne ContestHall_EventScript_ShowContestMons
+	goto_if_ne VAR_0x8006, CONTESTANT_COUNT, ContestHall_EventScript_ShowContestMons
 	call ContestHall_EventScript_AudienceVote
 	setvar VAR_TEMP_1, 6
 	return
 
 ContestHall_EventScript_TryWaitForLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_WaitForLink
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_WaitForLink
 	return
 
 ContestHall_EventScript_WaitForLink::
@@ -344,14 +332,10 @@ ContestHall_EventScript_WaitForLink::
 	return
 
 ContestHall_EventScript_ContestantWalkToCenter::
-	compare VAR_0x8006, 0
-	goto_if_eq ContestHall_EventScript_Player1WalkToCenter
-	compare VAR_0x8006, 1
-	goto_if_eq ContestHall_EventScript_Player2WalkToCenter
-	compare VAR_0x8006, 2
-	goto_if_eq ContestHall_EventScript_Player3WalkToCenter
-	compare VAR_0x8006, 3
-	goto_if_eq ContestHall_EventScript_Player4WalkToCenter
+	goto_if_eq VAR_0x8006, 0, ContestHall_EventScript_Player1WalkToCenter
+	goto_if_eq VAR_0x8006, 1, ContestHall_EventScript_Player2WalkToCenter
+	goto_if_eq VAR_0x8006, 2, ContestHall_EventScript_Player3WalkToCenter
+	goto_if_eq VAR_0x8006, 3, ContestHall_EventScript_Player4WalkToCenter
 	return
 
 ContestHall_EventScript_Player1WalkToCenter::
@@ -393,7 +377,7 @@ ContestHall_EventScript_Player4WalkToCenter::
 ContestHall_EventScript_ShowContestMonPic::
 	special BufferContestTrainerAndMonNames
 	addvar VAR_0x8006, 1
-	buffernumberstring 1, VAR_0x8006
+	buffernumberstring STR_VAR_2, VAR_0x8006
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	waitmovement 0
@@ -413,8 +397,7 @@ ContestHall_EventScript_ShowContestMonPic::
 	return
 
 ContestHall_EventScript_EntryXTrainersMon::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_EntryXTrainersMonLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_EntryXTrainersMonLink
 	message ContestHall_Text_EntryXTrainersMon
 	waitmessage
 	return
@@ -441,15 +424,13 @@ ContestHall_EventScript_AudienceVote::
 	return
 
 ContestHall_EventScript_AudienceWillVote::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_AudienceWillVoteLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_AudienceWillVoteLink
 	msgbox ContestHall_Text_SeenContestantsAudienceWillVote, MSGBOX_DEFAULT
 	return
 
 ContestHall_EventScript_AudienceWillVoteLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_AudienceWillVoteWireless
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_AudienceWillVoteWireless
 	messageautoscroll ContestHall_Text_SeenContestantsAudienceWillVote
 	waitmessage
 	return
@@ -467,8 +448,7 @@ ContestHall_EventScript_AudienceWillVoteWireless::
 	return
 
 ContestHall_EventScript_VotingUnderWay::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_VotingUnderWayLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_VotingUnderWayLink
 	message ContestHall_Text_VotingUnderWay
 	return
 
@@ -510,16 +490,11 @@ ContestHall_EventScript_AudienceReactToContestant::
 @    and are set to 9 if they havent displayed a heart yet, and 1 if they have
 ContestHall_EventScript_AudienceHeartEmotes::
 	special GetContestMonCondition
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsNormal
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsSuper
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_HYPER
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsHyper
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_MASTER
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsMaster
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsLink
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_GetNumberOfHeartsNormal
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_GetNumberOfHeartsSuper
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_HYPER, ContestHall_EventScript_GetNumberOfHeartsHyper
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_MASTER, ContestHall_EventScript_GetNumberOfHeartsMaster
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_GetNumberOfHeartsLink
 	setvar VAR_TEMP_1, 9
 	setvar VAR_TEMP_2, 9
 	setvar VAR_TEMP_3, 9
@@ -528,8 +503,7 @@ ContestHall_EventScript_AudienceHeartEmotes::
 	setvar VAR_TEMP_6, 9
 	setvar VAR_TEMP_7, 9
 	setvar VAR_TEMP_8, 9
-	compare VAR_TEMP_0, 0
-	call_if_gt ContestHall_EventScript_DisplayHearts
+	call_if_gt VAR_TEMP_0, 0, ContestHall_EventScript_DisplayHearts
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -543,124 +517,75 @@ ContestHall_EventScript_AudienceHeartEmotes::
 ContestHall_EventScript_DisplayHearts::
 	setvar VAR_RESULT, 8
 	special GenerateContestRand
-	compare VAR_RESULT, 0
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember1
-	compare VAR_RESULT, 1
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember2
-	compare VAR_RESULT, 2
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember3
-	compare VAR_RESULT, 3
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember4
-	compare VAR_RESULT, 4
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember5
-	compare VAR_RESULT, 5
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember6
-	compare VAR_RESULT, 6
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember7
-	compare VAR_RESULT, 7
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember8
-	compare VAR_TEMP_0, 0  @ Still more hearts to display
-	goto_if_gt ContestHall_EventScript_DisplayHearts
+	call_if_eq VAR_RESULT, 0, ContestHall_EventScript_TryDisplayHeartAudienceMember1
+	call_if_eq VAR_RESULT, 1, ContestHall_EventScript_TryDisplayHeartAudienceMember2
+	call_if_eq VAR_RESULT, 2, ContestHall_EventScript_TryDisplayHeartAudienceMember3
+	call_if_eq VAR_RESULT, 3, ContestHall_EventScript_TryDisplayHeartAudienceMember4
+	call_if_eq VAR_RESULT, 4, ContestHall_EventScript_TryDisplayHeartAudienceMember5
+	call_if_eq VAR_RESULT, 5, ContestHall_EventScript_TryDisplayHeartAudienceMember6
+	call_if_eq VAR_RESULT, 6, ContestHall_EventScript_TryDisplayHeartAudienceMember7
+	call_if_eq VAR_RESULT, 7, ContestHall_EventScript_TryDisplayHeartAudienceMember8
+	goto_if_gt VAR_TEMP_0, 0, ContestHall_EventScript_DisplayHearts  @ Still more hearts to display
 	waitmovement 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsNormal::
-	compare VAR_0x8004, 80
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 70
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 60
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 50
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 40
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 30
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 20
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 10
-	goto_if_gt ContestHall_EventScript_Set1Heart
+	goto_if_gt VAR_0x8004, 80, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 70, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 60, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 50, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 40, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 30, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 20, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 10, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsSuper::
-	compare VAR_0x8004, 230
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 210
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 190
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 170
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 150
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 130
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 110
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 90
-	goto_if_gt ContestHall_EventScript_Set1Heart
+	goto_if_gt VAR_0x8004, 230, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 210, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 190, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 170, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 150, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 130, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 110, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 90, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsHyper::
-	compare VAR_0x8004, 380
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 350
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 320
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 290
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 260
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 230
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 200
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 170
-	goto_if_gt ContestHall_EventScript_Set1Heart
+	goto_if_gt VAR_0x8004, 380, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 350, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 320, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 290, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 260, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 230, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 200, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 170, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsMaster::
-	compare VAR_0x8004, 600
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 560
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 520
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 480
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 440
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 400
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 360
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 320
-	goto_if_gt ContestHall_EventScript_Set1Heart
+	goto_if_gt VAR_0x8004, 600, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 560, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 520, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 480, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 440, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 400, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 360, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 320, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsLink::
-	compare VAR_0x8004, 600
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 550
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 500
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 450
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 400
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 300
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 200
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 100
-	goto_if_gt ContestHall_EventScript_Set1Heart
+	goto_if_gt VAR_0x8004, 600, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 550, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 500, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 450, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 400, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 300, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 200, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 100, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
@@ -697,8 +622,7 @@ ContestHall_EventScript_Set8Hearts::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember1::
-	compare VAR_TEMP_1, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember1AlreadyEmoted
+	goto_if_eq VAR_TEMP_1, 1, ContestHall_EventScript_AudienceMember1AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_1, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -710,8 +634,7 @@ ContestHall_EventScript_AudienceMember1AlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember2::
-	compare VAR_TEMP_2, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember2AlreadyEmoted
+	goto_if_eq VAR_TEMP_2, 1, ContestHall_EventScript_AudienceMember2AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_2, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -723,8 +646,7 @@ ContestHall_EventScript_AudienceMember2AlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember3::
-	compare VAR_TEMP_3, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember3AlreadyEmoted
+	goto_if_eq VAR_TEMP_3, 1, ContestHall_EventScript_AudienceMember3AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_3, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -736,8 +658,7 @@ ContestHall_EventScript_AudienceMember3AlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember4::
-	compare VAR_TEMP_4, 1
-	goto_if_eq ContestHall_EventScript_Audience4MemberAlreadyEmoted
+	goto_if_eq VAR_TEMP_4, 1, ContestHall_EventScript_Audience4MemberAlreadyEmoted
 	applymovement LOCALID_AUDIENCE_4, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -749,8 +670,7 @@ ContestHall_EventScript_Audience4MemberAlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember5::
-	compare VAR_TEMP_5, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember5AlreadyEmoted
+	goto_if_eq VAR_TEMP_5, 1, ContestHall_EventScript_AudienceMember5AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_5, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -762,8 +682,7 @@ ContestHall_EventScript_AudienceMember5AlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember6::
-	compare VAR_TEMP_6, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember6AlreadyEmoted
+	goto_if_eq VAR_TEMP_6, 1, ContestHall_EventScript_AudienceMember6AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_6, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -775,8 +694,7 @@ ContestHall_EventScript_AudienceMember6AlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember7::
-	compare VAR_TEMP_7, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember7AlreadyEmoted
+	goto_if_eq VAR_TEMP_7, 1, ContestHall_EventScript_AudienceMember7AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_7, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -788,8 +706,7 @@ ContestHall_EventScript_AudienceMember7AlreadyEmoted::
 	return
 
 ContestHall_EventScript_TryDisplayHeartAudienceMember8::
-	compare VAR_TEMP_8, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember8AlreadyEmoted
+	goto_if_eq VAR_TEMP_8, 1, ContestHall_EventScript_AudienceMember8AlreadyEmoted
 	applymovement LOCALID_ARTIST, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -870,15 +787,13 @@ ContestHall_EventScript_DoContestAppeals::
 	return
 
 ContestHall_EventScript_LetsAppeal::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_LetsAppealLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_LetsAppealLink
 	msgbox ContestHall_Text_VotingCompleteLetsAppeal, MSGBOX_DEFAULT
 	return
 
 ContestHall_EventScript_LetsAppealLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_LetsAppealWireless
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_LetsAppealWireless
 	messageautoscroll ContestHall_Text_VotingCompleteLetsAppeal
 	waitmessage
 	return
@@ -920,8 +835,7 @@ ContestHall_EventScript_ContestResults::
 	return
 
 ContestHall_EventScript_ThatsItForJudging::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_ThatsItForJudgingLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_ThatsItForJudgingLink
 	msgbox ContestHall_Text_ThatsItForJudging, MSGBOX_DEFAULT
 	return
 
@@ -933,8 +847,7 @@ ContestHall_EventScript_ThatsItForJudgingLink::
 	return
 
 ContestHall_EventScript_ThankYouForAppeals::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_ThankYouForAppealsLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_ThankYouForAppealsLink
 	msgbox ContestHall_Text_ThankYouForAppeals, MSGBOX_DEFAULT
 	return
 
@@ -946,8 +859,7 @@ ContestHall_EventScript_ThankYouForAppealsLink::
 	return
 
 ContestHall_EventScript_JudgeLooksReady::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_JudgeLooksReadyLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_JudgeLooksReadyLink
 	msgbox ContestHall_Text_JudgeLooksReady, MSGBOX_DEFAULT
 	return
 
@@ -959,8 +871,7 @@ ContestHall_EventScript_JudgeLooksReadyLink::
 	return
 
 ContestHall_EventScript_WeWillDeclareWinner::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_WeWillDeclareWinnerLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_WeWillDeclareWinnerLink
 	msgbox ContestHall_Text_WeWillNowDeclareWinner, MSGBOX_DEFAULT
 	return
 
@@ -1000,7 +911,7 @@ ContestHall_EventScript_CongratulateWinner::
 	special BufferContestWinnerTrainerName
 	special BufferContestWinnerMonName
 	addvar VAR_0x8005, 1
-	buffernumberstring 1, VAR_0x8005
+	buffernumberstring STR_VAR_2, VAR_0x8005
 	addvar VAR_0x8005, -1
 	call ContestHall_EventScript_CongratsWinner
 	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
@@ -1010,8 +921,7 @@ ContestHall_EventScript_CongratulateWinner::
 	return
 
 ContestHall_EventScript_CongratsWinner::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_CongratsWinnerLink
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_CongratsWinnerLink
 	msgbox ContestHall_Text_CongratsTrainerXandMon, MSGBOX_DEFAULT
 	return
 
@@ -1023,8 +933,7 @@ ContestHall_EventScript_CongratsWinnerLink::
 ContestHall_EventScript_AudienceLookAround::
 	addvar VAR_TEMP_1, 1
 	lockall
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL
-	call_if_gt ContestHall_EventScript_VObjectAudienceLookAround
+	call_if_gt VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_VObjectAudienceLookAround
 	applymovement LOCALID_AUDIENCE_5, ContestHall_Movement_AudienceMemberLookRight
 	applymovement LOCALID_AUDIENCE_2, ContestHall_Movement_AudienceMemberLookDown
 	applymovement LOCALID_AUDIENCE_3, ContestHall_Movement_AudienceMemberLookRight
@@ -1033,8 +942,7 @@ ContestHall_EventScript_AudienceLookAround::
 	applymovement LOCALID_AUDIENCE_7, ContestHall_Movement_AudienceMemberLookDown
 	applymovement LOCALID_AUDIENCE_1, ContestHall_Movement_AudienceMemberLookUp
 	applymovement LOCALID_AUDIENCE_4, ContestHall_Movement_AudienceMemberLookLeft
-	compare VAR_TEMP_1, 4
-	goto_if_ne ContestHall_EventScript_AudienceLookAround
+	goto_if_ne VAR_TEMP_1, 4, ContestHall_EventScript_AudienceLookAround
 	delay 30
 	return
 
@@ -1108,8 +1016,7 @@ ContestHall_EventScript_VObjectAudienceLookAround::
 	return
 
 ContestHall_EventScript_GiveWinnerPrize::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_EndLinkContest
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_EndLinkContest
 	call ContestHall_EventScript_CheckShouldSkipPrize
 	goto_if_set FLAG_TEMP_2, ContestHall_EventScript_SkipPrize
 	lockall
@@ -1122,8 +1029,7 @@ ContestHall_EventScript_GiveWinnerPrize::
 	call ContestHall_EventScript_AudienceLookAround
 	delay 30
 	special ShouldReadyContestArtist
-	compare VAR_0x8004, TRUE
-	goto_if_eq ContestHall_EventScript_SetReadyForContestArtist
+	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
 	return
 
 ContestHall_EventScript_SkipPrize::
@@ -1132,25 +1038,21 @@ ContestHall_EventScript_SkipPrize::
 	releaseall
 	delay 90
 	special ShouldReadyContestArtist
-	compare VAR_0x8004, TRUE
-	goto_if_eq ContestHall_EventScript_SetReadyForContestArtist
+	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
 	return
 
 ContestHall_EventScript_CheckShouldSkipPrize::
 	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_CheckPlayerWon
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_CheckPlayerWon
 	return
 
 ContestHall_EventScript_CheckPlayerWon::
 	special GetContestWinnerId
-	compare VAR_0x8005, 3
-	goto_if_eq ContestHall_EventScript_CheckRankIsMaster
+	goto_if_eq VAR_0x8005, 3, ContestHall_EventScript_CheckRankIsMaster
 	return
 
 ContestHall_EventScript_CheckRankIsMaster::
-	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
-	goto_if_eq ContestHall_EventScript_DontSkipPrize
+	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_DontSkipPrize
 	setflag FLAG_TEMP_2
 	return
 
@@ -1171,8 +1073,7 @@ ContestHall_EventScript_EndLinkContest::
 	special GetContestPlayerId
 	special GetContestWinnerId
 	special ShouldReadyContestArtist
-	compare VAR_0x8004, TRUE
-	goto_if_eq ContestHall_EventScript_SetReadyForLinkContestArtist
+	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForLinkContestArtist
 	closemessage
 	return
 
@@ -1223,21 +1124,17 @@ ContestHall_EventScript_Player4ApproachForPrize::
 @ In NPC Contests, the player is always entry 4 (id number 3)
 ContestHall_EventScript_GivePrizeIfWinner::
 	special GetContestWinnerId
-	compare VAR_0x8005, 3
-	goto_if_eq ContestHall_EventScript_GiveContestPrizes
+	goto_if_eq VAR_0x8005, 3, ContestHall_EventScript_GiveContestPrizes
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
 ContestHall_EventScript_GiveContestPrizes::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER
-	call_if_eq ContestHall_EventScript_SetSketchFlag
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_SetSketchFlag
 	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	compare VAR_RESULT, FALSE
-	goto_if_eq ContestHall_EventScript_ReceiveContestRibbon
-	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
-	goto_if_eq ContestHall_EventScript_GiveLuxuryBall
+	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_ReceiveContestRibbon
+	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_GiveLuxuryBall
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
@@ -1253,8 +1150,7 @@ ContestHall_EventScript_NoRoomForLuxuryBall::
 
 ContestHall_EventScript_GiveLuxuryBall::
 	giveitem ITEM_LUXURY_BALL
-	compare VAR_RESULT, FALSE
-	goto_if_eq ContestHall_EventScript_NoRoomForLuxuryBall
+	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_NoRoomForLuxuryBall
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
@@ -1285,7 +1181,7 @@ ContestHall_Movement_MCBackUp:
 	step_end
 
 ContestHall_Movement_MCFaceJudge:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_Heart:
@@ -1293,24 +1189,24 @@ ContestHall_Movement_Heart:
 	step_end
 
 ContestHall_Movement_FaceContestants:
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WalkStageLeft:
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WalkStageRight:
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WinningPlayerWalkUp:
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_ContestantDelay32:
@@ -1319,15 +1215,15 @@ ContestHall_Movement_ContestantDelay32:
 	step_end
 
 ContestHall_Movement_MCFaceJudge2:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_JudgeFaceMC:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 ContestHall_Movement_FaceContestants2:
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_Player3ApproachForPrize:
@@ -1375,20 +1271,20 @@ ContestHall_Movement_Player4FaceUp:
 ContestHall_Movement_MCLookAtJudge:
 	face_up
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_JudgeLookAtMC:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_MCWalkInPlaceDown:
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_Player1WalkToCenter:
@@ -1396,7 +1292,7 @@ ContestHall_Movement_Player1WalkToCenter:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player1WalkBack:
@@ -1404,31 +1300,31 @@ ContestHall_Movement_Player1WalkBack:
 	walk_fast_left
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player2WalkToCenter:
 	walk_up
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player2WalkBack:
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player3WalkToCenter:
 	walk_up
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player3WalkBack:
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player4WalkToCenter:
@@ -1436,7 +1332,7 @@ ContestHall_Movement_Player4WalkToCenter:
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player4WalkBack:
@@ -1444,7 +1340,7 @@ ContestHall_Movement_Player4WalkBack:
 	walk_fast_right
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player1ApproachForPrize:
@@ -1460,8 +1356,7 @@ ContestHall_Movement_Player2ApproachForPrize:
 @ IsContestWithRSPlayer has no side effect, so this is nop
 ContestHall_EventScript_CheckIfContestWithRSPlayer::
 	specialvar VAR_RESULT, IsContestWithRSPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_RetRSPlayer
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_RetRSPlayer
 	return
 
 ContestHall_EventScript_RetRSPlayer::
@@ -1469,8 +1364,7 @@ ContestHall_EventScript_RetRSPlayer::
 
 LilycoveCity_ContestLobby_EventScript_DelayIfContestWithRSPlayer::
 	specialvar VAR_RESULT, IsContestWithRSPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer
+	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer
 	return
 
 LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer::

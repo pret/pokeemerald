@@ -249,14 +249,12 @@ BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection::
 	copyvar VAR_0x8004, VAR_TEMP_D
 	copyvar VAR_0x8005, VAR_TEMP_E
 	special BufferBattleFrontierTutorMoveName
-	buffernumberstring 1, VAR_0x8008
+	buffernumberstring STR_VAR_2, VAR_0x8008
 	copyvar VAR_0x8004, VAR_TEMP_C
 	msgbox BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq BattleFrontier_Lounge7_EventScript_ChooseNewMove
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge7_EventScript_ChooseNewMove
 	specialvar VAR_TEMP_1, GetFrontierBattlePoints
-	compare VAR_TEMP_1, VAR_0x8008
-	goto_if_ge BattleFrontier_Lounge7_EventScript_TeachTutorMove
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_Lounge7_EventScript_TeachTutorMove
 	msgbox BattleFrontier_Lounge7_Text_HaventGotEnoughPoints, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge7_EventScript_ChooseNewMove
 	end
@@ -269,8 +267,7 @@ BattleFrontier_Lounge7_EventScript_TeachTutorMove::
 	special CloseBattleFrontierTutorWindow
 	special ChooseMonForMoveTutor
 	waitstate
-	compare VAR_RESULT, FALSE
-	goto_if_eq BattleFrontier_Lounge7_EventScript_CancelChooseMon
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_Lounge7_EventScript_CancelChooseMon
 	msgbox BattleFrontier_Lounge7_Text_IllTakeBattlePoints, MSGBOX_DEFAULT
 	copyvar VAR_0x8004, VAR_0x8008
 	special TakeFrontierBattlePoints
@@ -278,8 +275,7 @@ BattleFrontier_Lounge7_EventScript_TeachTutorMove::
 	end
 
 BattleFrontier_Lounge7_EventScript_ChooseNewMove::
-	compare VAR_TEMP_E, 0
-	goto_if_eq BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove
+	goto_if_eq VAR_TEMP_E, 0, BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove
 	goto BattleFrontier_Lounge7_EventScript_ChooseNewRightTutorMove
 	end
 

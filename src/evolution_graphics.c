@@ -501,12 +501,12 @@ static void SpriteCB_EvolutionMonSprite(struct Sprite* sprite)
 u8 CycleEvolutionMonSprite(u8 preEvoSpriteId, u8 postEvoSpriteId)
 {
     u16 i;
-    u16 stack[16];
+    u16 monPalette[16];
     u8 taskId;
     s32 toDiv;
 
-    for (i = 0; i < ARRAY_COUNT(stack); i++)
-        stack[i] = 0x7FFF;
+    for (i = 0; i < ARRAY_COUNT(monPalette); i++)
+        monPalette[i] = RGB_WHITE;
 
     taskId = CreateTask(Task_CycleEvolutionMonSprite_Init, 0);
     gTasks[taskId].tPreEvoSpriteId = preEvoSpriteId;
@@ -522,13 +522,13 @@ u8 CycleEvolutionMonSprite(u8 preEvoSpriteId, u8 postEvoSpriteId)
     gSprites[preEvoSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[preEvoSpriteId].oam.matrixNum = MATRIX_PRE_EVO;
     gSprites[preEvoSpriteId].invisible = FALSE;
-    CpuSet(stack, &gPlttBufferFaded[0x100 + (gSprites[preEvoSpriteId].oam.paletteNum * 16)], 16);
+    CpuSet(monPalette, &gPlttBufferFaded[0x100 + (gSprites[preEvoSpriteId].oam.paletteNum * 16)], 16);
 
     gSprites[postEvoSpriteId].callback = SpriteCB_EvolutionMonSprite;
     gSprites[postEvoSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[postEvoSpriteId].oam.matrixNum = MATRIX_POST_EVO;
     gSprites[postEvoSpriteId].invisible = FALSE;
-    CpuSet(stack, &gPlttBufferFaded[0x100 + (gSprites[postEvoSpriteId].oam.paletteNum * 16)], 16);
+    CpuSet(monPalette, &gPlttBufferFaded[0x100 + (gSprites[postEvoSpriteId].oam.paletteNum * 16)], 16);
 
     gTasks[taskId].tEvoStopped = FALSE;
     return taskId;

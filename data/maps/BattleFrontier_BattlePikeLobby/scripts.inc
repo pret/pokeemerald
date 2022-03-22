@@ -31,7 +31,7 @@ BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving::
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting, MSGBOX_DEFAULT
 	closemessage
-	pike_set PIKE_DATA_WIN_STREAK 0
+	pike_set PIKE_DATA_WIN_STREAK, 0
 	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
@@ -41,8 +41,7 @@ BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving::
 BattleFrontier_BattlePikeLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen
 	msgbox BattleFrontier_BattlePikeLobby_Text_PossessLuckInAbundance, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattlePikeLobby_EventScript_GiveBattlePoints
@@ -116,8 +115,7 @@ BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge::
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
 	frontier_checkineligible
-	compare VAR_0x8004, TRUE
-	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons
+	goto_if_eq VAR_0x8004, TRUE, BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattlePikeLobby_Text_PleaseChooseThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
@@ -126,8 +124,7 @@ BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge::
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
@@ -149,8 +146,7 @@ BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge::
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	pike_savehelditems
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePikeLobby_EventScript_CancelChallengeSaveFailed
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePikeLobby_Text_StepThisWay, MSGBOX_DEFAULT
@@ -159,7 +155,7 @@ BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge::
 	call BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor
 	special HealPlayerParty
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
-	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 6, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

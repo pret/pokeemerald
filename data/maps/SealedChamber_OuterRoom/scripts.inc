@@ -5,8 +5,8 @@ SealedChamber_OuterRoom_MapScripts::
 	.byte 0
 
 SealedChamber_OuterRoom_OnResume:
-	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
-	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
+	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 12, 44
+	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 12, 44
 	end
 
 SealedChamber_OuterRoom_OnTransition:
@@ -18,100 +18,78 @@ SealedChamber_OuterRoom_OnLoad:
 	end
 
 SealedChamber_OuterRoom_EventScript_CloseInnerRoomEntrance::
-	setmetatile 9, 1, METATILE_Cave_EntranceCover, 1
-	setmetatile 10, 1, METATILE_Cave_EntranceCover, 1
-	setmetatile 11, 1, METATILE_Cave_EntranceCover, 1
-	setmetatile 9, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
-	setmetatile 10, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
-	setmetatile 11, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 9, 1, METATILE_Cave_EntranceCover, TRUE
+	setmetatile 10, 1, METATILE_Cave_EntranceCover, TRUE
+	setmetatile 11, 1, METATILE_Cave_EntranceCover, TRUE
+	setmetatile 9, 2, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	setmetatile 10, 2, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	setmetatile 11, 2, METATILE_Cave_SealedChamberBraille_Mid, TRUE
 	return
 
 SealedChamber_OuterRoom_EventScript_BrailleABC::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_ABC
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_ABC
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleGHI::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_GHI
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_GHI
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleMNO::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_MNO
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_MNO
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleTUV::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_TUV
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_TUV
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleDEF::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_DEF
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_DEF
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleJKL::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_JKL
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_JKL
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BraillePQRS::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_PQRS
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_PQRS
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BraillePeriod::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_Period
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_Period
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleWXYZ::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_WXYZ
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_WXYZ
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_BrailleComma::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_Comma
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_Comma
 	releaseall
 	end
 
 SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall::
 	lockall
 	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_HoleInWall
-	braillemessage SealedChamber_OuterRoom_Braille_DigHere
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_DigHere
 	releaseall
 	end
 
@@ -122,9 +100,7 @@ SealedChamber_OuterRoom_EventScript_HoleInWall::
 
 SealedChamber_OuterRoom_EventScript_BrailleDigHere::
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_DigHere
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox SealedChamber_OuterRoom_Braille_DigHere
 	releaseall
 	end
 

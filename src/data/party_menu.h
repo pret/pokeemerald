@@ -1,3 +1,9 @@
+enum {
+    TAG_POKEBALL = 1200,
+    TAG_POKEBALL_SMALL,
+    TAG_STATUS_ICONS,
+};
+
 static const struct BgTemplate sPartyMenuBgTemplates[] =
 {
     {
@@ -37,9 +43,9 @@ enum
 
 static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 {
-    [PARTY_BOX_LEFT_COLUMN] = 
+    [PARTY_BOX_LEFT_COLUMN] =
     {
-        BlitBitmapToPartyWindow_LeftColumn, 
+        BlitBitmapToPartyWindow_LeftColumn,
         {
             //The below are the x, y, width, and height for each of the following info
             24, 11, 40, 13, // Nickname
@@ -48,12 +54,12 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             38, 37, 24,  8, // HP
             53, 37, 24,  8, // Max HP
             24, 35, 48,  3  // HP bar
-        }, 
+        },
         12, 34, 64, 16      // Description text (e.g. NO USE)
     },
-    [PARTY_BOX_RIGHT_COLUMN] = 
+    [PARTY_BOX_RIGHT_COLUMN] =
     {
-        BlitBitmapToPartyWindow_RightColumn, 
+        BlitBitmapToPartyWindow_RightColumn,
         {
              // See above comment
              22,  3, 40, 13, // Nickname
@@ -62,7 +68,7 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             102, 12, 24,  8, // HP
             117, 12, 24,  8, // Max HP
              88, 10, 48,  3  // HP bar
-        }, 
+        },
         77, 4, 64, 16        // Description text
     },
 };
@@ -73,7 +79,7 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 // Pokemon icon (x, y), held item (x, y), status condition (x, y), menu pokeball (x, y)
 static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 {
-    [PARTY_LAYOUT_SINGLE] = 
+    [PARTY_LAYOUT_SINGLE] =
     {
         { 16,  40,  20,  50,  50,  52,  16,  34},
         {104,  18, 108,  28, 136,  27, 102,  25},
@@ -82,7 +88,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104,  90, 108, 100, 136,  99, 102,  97},
         {104, 114, 108, 124, 136, 123, 102, 121},
     },
-    [PARTY_LAYOUT_DOUBLE] = 
+    [PARTY_LAYOUT_DOUBLE] =
     {
         {16, 24, 20, 34, 50, 36, 16, 18},
         {16, 80, 20, 90, 50, 92, 16, 74},
@@ -91,7 +97,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104, 82, 108, 92, 136, 91, 102, 89},
         {104, 114, 108, 124, 136, 123, 102, 121},
     },
-    [PARTY_LAYOUT_MULTI] = 
+    [PARTY_LAYOUT_MULTI] =
     {
         {16, 24, 20, 34, 50, 36, 16, 18},
         {16, 80, 20, 90, 50, 92, 16, 74},
@@ -100,7 +106,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104, 82, 106, 92, 136, 91, 102, 89},
         {104, 106, 106, 116, 136, 115, 102, 113},
     },
-    [PARTY_LAYOUT_MULTI_SHOWCASE] = 
+    [PARTY_LAYOUT_MULTI_SHOWCASE] =
     {
         {16, 32, 20, 42, 50, 44, 16, 26},
         {104, 34, 106, 44, 136, 43, 102, 41},
@@ -112,8 +118,8 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 };
 
 // Used only when both Cancel and Confirm are present
-static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_confirm_button.bin");
-static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_cancel_button.bin");
+static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/party_menu/confirm_button.bin");
+static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/party_menu/cancel_button.bin");
 
 // Text colors for BG, FG, and Shadow in that order
 static const u8 sFontColorTable[][3] =
@@ -565,34 +571,14 @@ static const struct WindowTemplate sUnusedWindowTemplate2 =
     .baseBlock = 0x39D,
 };
 
-// Tile nums
-static const u8 sMainSlotTileNums[] = {24, 25, 25, 25, 25, 25, 25, 25, 25, 26,
-                                       32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
-                                       32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
-                                       32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
-                                       40, 59, 60, 58, 58, 58, 58, 58, 58, 61,
-                                       15, 16, 16, 16, 16, 16, 16, 16, 16, 17,
-                                       46, 47, 47, 47, 47, 47, 47, 47, 47, 48};
-
-static const u8 sMainSlotTileNums_Egg[] = {24, 25, 25, 25, 25, 25, 25, 25, 25, 26,
-                                           32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
-                                           32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
-                                           32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
-                                           40, 41, 41, 41, 41, 41, 41, 41, 41, 42,
-                                           15, 16, 16, 16, 16, 16, 16, 16, 16, 17,
-                                           46, 47, 47, 47, 47, 47, 47, 47, 47, 48};
-
-static const u8 sOtherSlotsTileNums[] = {43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45,
-                                         49, 33, 33, 33, 33, 33, 33, 33, 33, 52, 53, 51, 51, 51, 51, 51, 51, 54,
-                                         55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57};
-
-static const u8 sOtherSlotsTileNums_Egg[] = {43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45,
-                                             49, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 50,
-                                             55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57};
-
-static const u8 sEmptySlotTileNums[] = {21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23,
-                                        30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31,
-                                        37, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 39};
+// Plain tilemaps for party menu slots.
+// The versions with no HP bar are used by eggs, and in certain displays like registering at a battle facility.
+// There is no empty version of the main slot because it shouldn't ever be empty.
+static const u8 sSlotTilemap_Main[]      = INCBIN_U8("graphics/party_menu/slot_main.bin");
+static const u8 sSlotTilemap_MainNoHP[]  = INCBIN_U8("graphics/party_menu/slot_main_no_hp.bin");
+static const u8 sSlotTilemap_Wide[]      = INCBIN_U8("graphics/party_menu/slot_wide.bin");
+static const u8 sSlotTilemap_WideNoHP[]  = INCBIN_U8("graphics/party_menu/slot_wide_no_hp.bin");
+static const u8 sSlotTilemap_WideEmpty[] = INCBIN_U8("graphics/party_menu/slot_wide_empty.bin");
 
 // Palette offsets
 static const u8 sGenderPalOffsets[] = {11, 12};
@@ -873,8 +859,8 @@ static const u8 *const sUnionRoomTradeMessages[] =
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
 
-static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
-static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
+static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
+static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/party_menu/hold_icons.gbapal");
 
 static const struct OamData sOamData_HeldItem =
 {
@@ -969,19 +955,19 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeball[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
 {
-    gPartyMenuPokeball_Gfx, 0x400, 0x04b0
+    gPartyMenuPokeball_Gfx, 0x400, TAG_POKEBALL
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
 {
-    gPartyMenuPokeball_Pal, 0x04b0
+    gPartyMenuPokeball_Pal, TAG_POKEBALL
 };
 
 // Used for the pokeball sprite on each party slot / Cancel button
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
 {
-    .tileTag = 0x04b0,
-    .paletteTag = 0x04b0,
+    .tileTag = TAG_POKEBALL,
+    .paletteTag = TAG_POKEBALL,
     .oam = &sOamData_MenuPokeball,
     .anims = sSpriteAnimTable_MenuPokeball,
     .images = NULL,
@@ -1055,14 +1041,14 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
 {
-    gPartyMenuPokeballSmall_Gfx, 0x0300, 0x04b1
+    gPartyMenuPokeballSmall_Gfx, 0x0300, TAG_POKEBALL_SMALL
 };
 
 // Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 {
-    .tileTag = 1201,
-    .paletteTag = 1200,
+    .tileTag = TAG_POKEBALL_SMALL,
+    .paletteTag = TAG_POKEBALL,
     .oam = &sOamData_MenuPokeballSmall,
     .anims = sSpriteAnimTable_MenuPokeballSmall,
     .images = NULL,
@@ -1149,18 +1135,18 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
 {
-    gStatusGfx_Icons, 0x400, 1202
+    gStatusGfx_Icons, 0x400, TAG_STATUS_ICONS
 };
 
 static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
 {
-    gStatusPal_Icons, 1202
+    gStatusPal_Icons, TAG_STATUS_ICONS
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 {
-    .tileTag = 1202,
-    .paletteTag = 1202,
+    .tileTag = TAG_STATUS_ICONS,
+    .paletteTag = TAG_STATUS_ICONS,
     .oam = &sOamData_StatusCondition,
     .anims = sSpriteTemplate_StatusCondition,
     .images = NULL,
@@ -1171,14 +1157,14 @@ static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 // Mask for the partners party in a multi battle. TRUE if in the partners party, FALSE otherwise
 // The 7th slot is Cancel, and the 8th slot is unreachable
 // Used only to determine whether or not to show the Deoxys form icon sprite
-static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] = 
+static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
 {
-    FALSE, 
-    TRUE, 
-    FALSE, 
-    FALSE, 
-    TRUE, 
-    TRUE, 
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
     FALSE
 };
 

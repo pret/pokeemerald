@@ -15,7 +15,7 @@
 
 // These two are a hack to stop user input until link stuff can be
 // resolved.
-#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B 
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B
 #define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
 #define LINK_KEY_CODE_EXIT_SEAT 0x1D
 #define LINK_KEY_CODE_UNK_8 0x1E
@@ -40,20 +40,18 @@ struct LinkPlayerObjectEvent
     u8 movementMode;
 };
 
-// Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
-extern u16 *gBGTilemapBuffers1;
-extern u16 *gBGTilemapBuffers2;
-extern u16 *gBGTilemapBuffers3;
+extern u16 *gOverworldTilemapBuffer_Bg2;
+extern u16 *gOverworldTilemapBuffer_Bg1;
+extern u16 *gOverworldTilemapBuffer_Bg3;
 extern u16 gHeldKeyCodeToSend;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
 
-// Exported ROM declarations
 extern const struct UCoords32 gDirectionToVectors[];
 
 void DoWhiteOut(void);
@@ -67,8 +65,8 @@ void SetGameStat(u8 index, u32 value);
 void ApplyNewEncryptionKeyToGameStats(u32 newKey);
 void LoadObjEventTemplatesFromHeader(void);
 void LoadSaveblockObjEventScripts(void);
-void Overworld_SetObjEventTemplateCoords(u8 localId, s16 x, s16 y);
-void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType);
+void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y);
+void SetObjEventTemplateMovementType(u8 localId, u8 movementType);
 const struct MapLayout *GetMapLayout(void);
 void ApplyCurrentWarp(void);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
@@ -98,8 +96,8 @@ void ResetInitialPlayerAvatarState(void);
 void StoreInitialPlayerAvatarState(void);
 bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
-void Overworld_SetFlashLevel(s32 flashLevel);
-u8 Overworld_GetFlashLevel(void);
+void SetFlashLevel(s32 flashLevel);
+u8 GetFlashLevel(void);
 void SetCurrentMapLayout(u16 mapLayoutId);
 void SetObjectEventLoadFlag(u8 var);
 u16 GetLocationMusic(struct WarpData *warp);
@@ -127,7 +125,7 @@ u8 GetSavedWarpRegionMapSectionId(void);
 u8 GetCurrentRegionMapSectionId(void);
 u8 GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
-bool32 IsUpdateLinkStateCBActive(void);
+bool32 IsOverworldLinkActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_Overworld(void);
@@ -151,7 +149,7 @@ u16 SetInCableClubSeat(void);
 u16 SetLinkWaitingForScript(void);
 u16 QueueExitLinkRoomKey(void);
 u16 SetStartedCableClubActivity(void);
-bool32 Overworld_LinkRecvQueueLengthMoreThan2(void);
+bool32 Overworld_IsRecvQueueAtMax(void);
 bool32 Overworld_RecvKeysFromLinkIsRunning(void);
 bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
