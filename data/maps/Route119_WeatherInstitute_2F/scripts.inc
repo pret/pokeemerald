@@ -90,8 +90,8 @@ Route119_WeatherInstitute_2F_EventScript_ReceiveCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, SPECIES_CASTFORM
 	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER
-	goto_if_eq VAR_RESULT, 0, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty
-	goto_if_eq VAR_RESULT, 1, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC
 	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 

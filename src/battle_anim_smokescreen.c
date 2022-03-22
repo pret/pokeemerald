@@ -5,7 +5,6 @@
 #include "graphics.h"
 #include "sprite.h"
 #include "util.h"
-#include "constants/pokemon.h"
 #include "constants/battle_palace.h"
 
 static void SmokescreenImpact_Callback(struct Sprite *);

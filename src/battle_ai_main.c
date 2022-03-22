@@ -7,6 +7,7 @@
 #include "battle_factory.h"
 #include "battle_setup.h"
 #include "data.h"
+#include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
 #include "random.h"
@@ -123,6 +124,28 @@ void BattleAI_SetupItems(void)
     }
 }
 
+static u32 GetWildAiFlags(void)
+{
+    u8 avgLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u32 flags;
+    
+    if (IsDoubleBattle())
+        avgLevel = (GetMonData(&gEnemyParty[0], MON_DATA_LEVEL) + GetMonData(&gEnemyParty[1], MON_DATA_LEVEL)) / 2;
+    
+    flags |= AI_FLAG_CHECK_BAD_MOVE;
+    if (avgLevel >= 20)
+        flags |= AI_FLAG_CHECK_VIABILITY;
+    if (avgLevel >= 60)
+        flags |= AI_FLAG_PREFER_STRONGEST_MOVE;
+    if (avgLevel >= 80)
+        flags |= AI_FLAG_HP_AWARE;
+    
+    if (B_VAR_WILD_AI_FLAGS != 0 && VarGet(B_VAR_WILD_AI_FLAGS) != 0)
+        flags |= VarGet(B_VAR_WILD_AI_FLAGS);
+    
+    return flags;
+}
+
 void BattleAI_SetupFlags(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
@@ -141,6 +164,10 @@ void BattleAI_SetupFlags(void)
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags | gTrainers[gTrainerBattleOpponent_B].aiFlags;
     else
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
+    
+    // check smart wild AI
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER)) && IsWildMonSmart())
+        AI_THINKING_STRUCT->aiFlags |= GetWildAiFlags();
 
     if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS) || gTrainers[gTrainerBattleOpponent_A].doubleBattle)
         AI_THINKING_STRUCT->aiFlags |= AI_FLAG_DOUBLE_BATTLE; // Act smart in doubles and don't attack your partner.
@@ -1576,11 +1603,13 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_MUD_SPORT:
             if (gFieldStatuses & STATUS_FIELD_MUDSPORT
+              || gStatuses4[battlerAtk] & STATUS4_MUD_SPORT
               || PartnerHasSameMoveEffectWithoutTarget(AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
                 score -= 10;
             break;
         case EFFECT_WATER_SPORT:
             if (gFieldStatuses & STATUS_FIELD_WATERSPORT
+              || gStatuses4[battlerAtk] & STATUS4_WATER_SPORT
               || PartnerHasSameMoveEffectWithoutTarget(AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
                 score -= 10;
             break;

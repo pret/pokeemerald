@@ -48,7 +48,7 @@
 
 struct ResourceFlags
 {
-    u32 flags[4];
+    u32 flags[MAX_BATTLERS_COUNT];
 };
 
 #define RESOURCE_FLAG_FLASH_FIRE        0x1
@@ -625,6 +625,8 @@ struct BattleStruct
     u8 blunderPolicy:1; // should blunder policy activate
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 stickyWebUser;
+    u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
+    u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
@@ -803,8 +805,8 @@ struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     union {
-    	void* ptr[MAX_BATTLERS_COUNT];
-    	u8* byte[MAX_BATTLERS_COUNT];
+        void* ptr[MAX_BATTLERS_COUNT];
+        u8* byte[MAX_BATTLERS_COUNT];
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
     struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];

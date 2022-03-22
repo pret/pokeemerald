@@ -9017,7 +9017,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SKY_DROP] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_SKY_DROP,
         .power = 60,
         .type = TYPE_FLYING,
         .accuracy = 100,

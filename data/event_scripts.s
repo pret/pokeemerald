@@ -60,7 +60,6 @@
 
 	.section script_data, "aw", %progbits
 
-@ 81DB67C
 	.include "data/script_cmd_table.inc"
 
 gSpecialVars::
