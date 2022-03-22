@@ -70,6 +70,7 @@
 #include "constants/weather.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/items.h"
 
 struct CableClubPlayer
 {
@@ -3638,7 +3639,7 @@ void UpdateFollowerPokemonGraphic(void)
 {
     // Loaded in case the player changed the species of the Pokemon in the lead of the party.
     // If so, the following Pokemon needs to change.
-    u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + 238;
+    u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + OBJ_EVENT_GFX_BULBASAUR - 1;
     struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
 
     if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
@@ -4057,41 +4058,41 @@ void FollowerPokeballSparkle(void)
         
         switch(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_POKEBALL))
         {
-            case 1: // Master Ball
-                spriteId = CreateObjectGraphicsSprite(492, &SparklePokeballCallback, x, y, 2);
+            case ITEM_MASTER_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MASTER_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 2: // Ultra Ball
-                spriteId = CreateObjectGraphicsSprite(491, &SparklePokeballCallback, x, y, 2);
+            case ITEM_ULTRA_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ULTRA_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 3: // Great Ball
-                spriteId = CreateObjectGraphicsSprite(490, &SparklePokeballCallback, x, y, 2);
+            case ITEM_GREAT_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_GREAT_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 5: // Safari Ball
-                spriteId = CreateObjectGraphicsSprite(493, &SparklePokeballCallback, x, y, 2);
+            case ITEM_SAFARI_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SAFARI_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 6: // Net Ball
-                spriteId = CreateObjectGraphicsSprite(494, &SparklePokeballCallback, x, y, 2);
+            case ITEM_NET_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_NET_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 7: // Dive Ball
-                spriteId = CreateObjectGraphicsSprite(495, &SparklePokeballCallback, x, y, 2);
+            case ITEM_DIVE_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DIVE_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 8: // Nest Ball
-                spriteId = CreateObjectGraphicsSprite(496, &SparklePokeballCallback, x, y, 2);
+            case ITEM_NEST_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_NEST_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 9: // Repeat Ball
-                spriteId = CreateObjectGraphicsSprite(497, &SparklePokeballCallback, x, y, 2);
+            case ITEM_REPEAT_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_REPEAT_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 10: // Timer Ball
-                spriteId = CreateObjectGraphicsSprite(498, &SparklePokeballCallback, x, y, 2);
+            case ITEM_TIMER_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_TIMER_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 11: // Luxury Ball
-                spriteId = CreateObjectGraphicsSprite(499, &SparklePokeballCallback, x, y, 2);
+            case ITEM_LUXURY_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LUXURY_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            case 12: // Premier Ball
-                spriteId = CreateObjectGraphicsSprite(500, &SparklePokeballCallback, x, y, 2);
+            case ITEM_PREMIER_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PREMIER_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
-            default: // PokeBall, at default rather than 4 in case of item_expansion
-                spriteId = CreateObjectGraphicsSprite(59, &SparklePokeballCallback, x, y, 2);
+            default: // PokeBall
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ITEM_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
         }
         
