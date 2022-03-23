@@ -3792,10 +3792,12 @@ static void SparklePokeballCallback(struct Sprite *sprite)
         // Account for the other Unown forms
         if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_DEOXYS_SPEED)
             graphicsId = 200;
-        else if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_CELEBI) // Gen 3 OBJ_EVENT_GFX constants are 25 too high due to OLD_UNOWN constants.
-            graphicsId = gSaveBlock2Ptr->follower.graphicsId - 239 - 25;
+        #ifndef POKEMON_EXPANSION
+        else if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_CELEBI) // Gen 3+ OBJ_EVENT_GFX constants are 25 too high due to OLD_UNOWN constants.
+            graphicsId = gSaveBlock2Ptr->follower.graphicsId - OBJ_EVENT_GFX_BULBASAUR - 25;
+        #endif
         else
-            graphicsId = gSaveBlock2Ptr->follower.graphicsId - 239;
+            graphicsId = gSaveBlock2Ptr->follower.graphicsId - OBJ_EVENT_GFX_BULBASAUR;
 
         switch(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection)
         {
@@ -3836,7 +3838,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
         if (IsBigSprite(follower->graphicsId))
         {
             // North sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3849,7 +3851,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // NorthEast sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3862,7 +3864,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // East sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3875,7 +3877,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // SouthEast sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3888,7 +3890,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // South sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3901,7 +3903,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // SouthWest sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3914,7 +3916,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // West sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3927,7 +3929,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // NorthWest sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &BigSparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3942,7 +3944,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
         else
         {
             // North sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3954,7 +3956,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // NorthEast sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3966,7 +3968,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // East sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3978,7 +3980,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // SouthEast sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3990,7 +3992,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // South sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -4002,7 +4004,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // SouthWest sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -4014,7 +4016,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // West sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -4026,7 +4028,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
             }
 
             // NorthWest sparkle
-            spriteId = CreateObjectGraphicsSprite(501, &SparkleCallback, x, y, 0);
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -4138,7 +4140,7 @@ void FollowerPokeballSparkle(void)
         player->fixedPriority = TRUE;
 
         SeekSpriteAnim(&gSprites[follower->spriteId], 0);        
-        ObjectEventForceSetHeldMovement(follower, 0xA5);
+        ObjectEventForceSetHeldMovement(follower, MOVEMENT_ACTION_FOLLOWING_POKEMON_GROW);
     }
 }
 
@@ -4146,7 +4148,7 @@ void FollowerIntoPokeball(void)
 {
     if (gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible == FALSE && gSaveBlock2Ptr->follower.comeOutDoorStairs == 0 && gSaveBlock2Ptr->follower.inProgress)
     {
-        ObjectEventForceSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 0xA4);
+        ObjectEventForceSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], MOVEMENT_ACTION_FOLLOWING_POKEMON_SHRINK);
         gSpecialVar_Unused_0x8014 = 1;
     }
 }
