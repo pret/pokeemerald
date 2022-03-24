@@ -4093,6 +4093,50 @@ void FollowerPokeballSparkle(void)
             case ITEM_PREMIER_BALL:
                 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PREMIER_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
+            #ifdef ITEM_EXPANSION
+            case ITEM_HEAL_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_HEAL_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_DUSK_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DUSK_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_QUICK_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_QUICK_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_LEVEL_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LEVEL_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_LURE_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LURE_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_MOON_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MOON_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_FRIEND_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_FRIEND_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_LOVE_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LOVE_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_FAST_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_FAST_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_HEAVY_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_HEAVY_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_DREAM_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DREAM_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_SPORT_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SPORT_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_PARK_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PARK_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            case ITEM_CHERISH_BALL:
+                spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_CHERISH_BALL, &SparklePokeballCallback, x, y, 2);
+                break;
+            #endif
             default: // PokeBall
                 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ITEM_BALL, &SparklePokeballCallback, x, y, 2);
                 break;

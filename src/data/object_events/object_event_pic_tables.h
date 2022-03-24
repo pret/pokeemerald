@@ -791,6 +791,62 @@ static const struct SpriteFrameImage sPicTable_PremierBall[] = {
     obj_frame_tiles(gObjectEventPic_PremierBall),
 };
 
+static const struct SpriteFrameImage sPicTable_HealBall[] = {
+    obj_frame_tiles(gObjectEventPic_HealBall),
+};
+
+static const struct SpriteFrameImage sPicTable_DuskBall[] = {
+    obj_frame_tiles(gObjectEventPic_DuskBall),
+};
+
+static const struct SpriteFrameImage sPicTable_QuickBall[] = {
+    obj_frame_tiles(gObjectEventPic_QuickBall),
+};
+
+static const struct SpriteFrameImage sPicTable_LevelBall[] = {
+    obj_frame_tiles(gObjectEventPic_LevelBall),
+};
+
+static const struct SpriteFrameImage sPicTable_LureBall[] = {
+    obj_frame_tiles(gObjectEventPic_LureBall),
+};
+
+static const struct SpriteFrameImage sPicTable_MoonBall[] = {
+    obj_frame_tiles(gObjectEventPic_MoonBall),
+};
+
+static const struct SpriteFrameImage sPicTable_FriendBall[] = {
+    obj_frame_tiles(gObjectEventPic_FriendBall),
+};
+
+static const struct SpriteFrameImage sPicTable_LoveBall[] = {
+    obj_frame_tiles(gObjectEventPic_LoveBall),
+};
+
+static const struct SpriteFrameImage sPicTable_FastBall[] = {
+    obj_frame_tiles(gObjectEventPic_FastBall),
+};
+
+static const struct SpriteFrameImage sPicTable_HeavyBall[] = {
+    obj_frame_tiles(gObjectEventPic_HeavyBall),
+};
+
+static const struct SpriteFrameImage sPicTable_DreamBall[] = {
+    obj_frame_tiles(gObjectEventPic_DreamBall),
+};
+
+static const struct SpriteFrameImage sPicTable_SportBall[] = {
+    obj_frame_tiles(gObjectEventPic_SportBall),
+};
+
+static const struct SpriteFrameImage sPicTable_ParkBall[] = {
+    obj_frame_tiles(gObjectEventPic_ParkBall),
+};
+
+static const struct SpriteFrameImage sPicTable_CherishBall[] = {
+    obj_frame_tiles(gObjectEventPic_CherishBall),
+};
+
 static const struct SpriteFrameImage sPicTable_ExpandingSparkle[] = {
     overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 0),
     overworld_frame(gFieldEffectObjectPic_ExpandingSparkle, 4, 4, 1),

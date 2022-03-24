@@ -846,6 +846,20 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_TIMER_BALL              0x1050
 #define OBJ_EVENT_PAL_TAG_LUXURY_BALL             0x104F
 #define OBJ_EVENT_PAL_TAG_PREMIER_BALL            0x104E
+#define OBJ_EVENT_PAL_TAG_HEAL_BALL               0x104D
+#define OBJ_EVENT_PAL_TAG_DUSK_BALL               0x104C
+#define OBJ_EVENT_PAL_TAG_QUICK_BALL              0x104B
+#define OBJ_EVENT_PAL_TAG_LEVEL_BALL              0x104A
+#define OBJ_EVENT_PAL_TAG_LURE_BALL               0x1049
+#define OBJ_EVENT_PAL_TAG_MOON_BALL               0x1048
+#define OBJ_EVENT_PAL_TAG_FRIEND_BALL             0x1047
+#define OBJ_EVENT_PAL_TAG_LOVE_BALL               0x1046
+#define OBJ_EVENT_PAL_TAG_FAST_BALL               0x1045
+#define OBJ_EVENT_PAL_TAG_HEAVY_BALL              0x1044
+#define OBJ_EVENT_PAL_TAG_DREAM_BALL              0x1043
+#define OBJ_EVENT_PAL_TAG_SPORT_BALL              0x1042
+#define OBJ_EVENT_PAL_TAG_PARK_BALL               0x1041
+#define OBJ_EVENT_PAL_TAG_CHERISH_BALL            0x1040
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -1289,6 +1303,20 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_TimerBall,             OBJ_EVENT_PAL_TAG_TIMER_BALL},
     {gObjectEventPal_LuxuryBall,            OBJ_EVENT_PAL_TAG_LUXURY_BALL},
     {gObjectEventPal_PremierBall,           OBJ_EVENT_PAL_TAG_PREMIER_BALL},
+    {gObjectEventPal_HealBall,              OBJ_EVENT_PAL_TAG_HEAL_BALL},
+    {gObjectEventPal_DuskBall,              OBJ_EVENT_PAL_TAG_DUSK_BALL},
+    {gObjectEventPal_QuickBall,             OBJ_EVENT_PAL_TAG_QUICK_BALL},
+    {gObjectEventPal_LevelBall,             OBJ_EVENT_PAL_TAG_LEVEL_BALL},
+    {gObjectEventPal_LureBall,              OBJ_EVENT_PAL_TAG_LURE_BALL},
+    {gObjectEventPal_MoonBall,              OBJ_EVENT_PAL_TAG_MOON_BALL},
+    {gObjectEventPal_FriendBall,            OBJ_EVENT_PAL_TAG_FRIEND_BALL},
+    {gObjectEventPal_LoveBall,              OBJ_EVENT_PAL_TAG_LOVE_BALL},
+    {gObjectEventPal_FastBall,              OBJ_EVENT_PAL_TAG_FAST_BALL},
+    {gObjectEventPal_HeavyBall,             OBJ_EVENT_PAL_TAG_HEAVY_BALL},
+    {gObjectEventPal_DreamBall,             OBJ_EVENT_PAL_TAG_DREAM_BALL},
+    {gObjectEventPal_SportBall,             OBJ_EVENT_PAL_TAG_SPORT_BALL},
+    {gObjectEventPal_ParkBall,              OBJ_EVENT_PAL_TAG_PARK_BALL},
+    {gObjectEventPal_CherishBall,           OBJ_EVENT_PAL_TAG_CHERISH_BALL},
     {gFieldEffectPal_SmallSparkle,          FLDEFF_PAL_TAG_SMALL_SPARKLE},
     {},
 };
@@ -10169,6 +10197,50 @@ u8 MovementAction_FollowingPokemon_Shrink_Step0(struct ObjectEvent *objectEvent,
         case ITEM_PREMIER_BALL:
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PREMIER_BALL, &PokeballCallback, x, y, 2);
             break;
+        #ifdef ITEM_EXPANSION
+        case ITEM_HEAL_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_HEAL_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_DUSK_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DUSK_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_QUICK_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_QUICK_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_LEVEL_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LEVEL_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_LURE_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LURE_BALL, &PokeballCallback, x, y, 2);
+            break;    
+        case ITEM_MOON_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MOON_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_FRIEND_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_FRIEND_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_LOVE_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_LOVE_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_FAST_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_FAST_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_HEAVY_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_HEAVY_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_DREAM_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_DREAM_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_SPORT_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SPORT_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_PARK_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PARK_BALL, &PokeballCallback, x, y, 2);
+            break;
+        case ITEM_CHERISH_BALL:
+            spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_CHERISH_BALL, &PokeballCallback, x, y, 2);
+            break;
+        #endif
         default: // PokeBall
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ITEM_BALL, &PokeballCallback, x, y, 2);
             break;

@@ -69,6 +69,20 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RepeatBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TimerBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LuxuryBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PremierBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HealBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DuskBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_QuickBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LevelBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LureBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MoonBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FriendBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LoveBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FastBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HeavyBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DreamBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SportBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ParkBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CherishBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ExpandingSparkle;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages;
@@ -746,6 +760,20 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TIMER_BALL] =               &gObjectEventGraphicsInfo_TimerBall,
     [OBJ_EVENT_GFX_LUXURY_BALL] =              &gObjectEventGraphicsInfo_LuxuryBall,
     [OBJ_EVENT_GFX_PREMIER_BALL] =             &gObjectEventGraphicsInfo_PremierBall,
+    [OBJ_EVENT_GFX_HEAL_BALL] =                &gObjectEventGraphicsInfo_HealBall,
+    [OBJ_EVENT_GFX_DUSK_BALL] =                &gObjectEventGraphicsInfo_DuskBall,
+    [OBJ_EVENT_GFX_QUICK_BALL] =               &gObjectEventGraphicsInfo_QuickBall,
+    [OBJ_EVENT_GFX_LEVEL_BALL] =               &gObjectEventGraphicsInfo_LevelBall,
+    [OBJ_EVENT_GFX_LURE_BALL] =                &gObjectEventGraphicsInfo_LureBall,
+    [OBJ_EVENT_GFX_MOON_BALL] =                &gObjectEventGraphicsInfo_MoonBall,
+    [OBJ_EVENT_GFX_FRIEND_BALL] =              &gObjectEventGraphicsInfo_FriendBall,
+    [OBJ_EVENT_GFX_LOVE_BALL] =                &gObjectEventGraphicsInfo_LoveBall,
+    [OBJ_EVENT_GFX_FAST_BALL] =                &gObjectEventGraphicsInfo_FastBall,
+    [OBJ_EVENT_GFX_HEAVY_BALL] =               &gObjectEventGraphicsInfo_HeavyBall,
+    [OBJ_EVENT_GFX_DREAM_BALL] =               &gObjectEventGraphicsInfo_DreamBall,
+    [OBJ_EVENT_GFX_SPORT_BALL] =               &gObjectEventGraphicsInfo_SportBall,
+    [OBJ_EVENT_GFX_PARK_BALL] =                &gObjectEventGraphicsInfo_ParkBall,
+    [OBJ_EVENT_GFX_CHERISH_BALL] =             &gObjectEventGraphicsInfo_CherishBall,
     [OBJ_EVENT_GFX_EXPANDING_SPARKLE] =        &gObjectEventGraphicsInfo_ExpandingSparkle,
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
