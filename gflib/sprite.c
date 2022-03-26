@@ -3,6 +3,7 @@
 #include "main.h"
 #include "palette.h"
 #include "global.fieldmap.h"
+#include "constants/event_objects.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -975,47 +976,47 @@ bool8 IsFlyingPokemonGraphic(u16 graphicsId)
 {
     switch(graphicsId)
     {
-        case 250:
-        case 253:
-        case 255:
-        case 256:
-        case 260:
-        case 279:
-        case 280:
-        case 287:
-        case 380:
-        case 382:
-        case 383:
-        case 384:
-        case 387:
-        case 402:
-        case 403:
-        case 404:
-        case 407:
-        case 414:
-        case 425:
-        case 426:
-        case 427:
-        case 431:
-        case 464:
-        case 465:
-        case 487:
-        case 488:
-        case 489:
-        case 530:
-        case 532:
-        case 543:
-        case 547:
-        case 548:
-        case 550:
-        case 572:
-        case 596:
-        case 597:
-        case 624:
-        case 625:
-        case 642:
-        case 645:
-        case 646:
+        case OBJ_EVENT_GFX_BUTTERFREE:
+        case OBJ_EVENT_GFX_BEEDRILL:
+        case OBJ_EVENT_GFX_PIDGEOTTO:
+        case OBJ_EVENT_GFX_PIDGEOT:
+        case OBJ_EVENT_GFX_FEAROW:
+        case OBJ_EVENT_GFX_ZUBAT:
+        case OBJ_EVENT_GFX_GOLBAT:
+        case OBJ_EVENT_GFX_VENOMOTH:
+        case OBJ_EVENT_GFX_AERODACTYL:
+        case OBJ_EVENT_GFX_ARTICUNO:
+        case OBJ_EVENT_GFX_ZAPDOS:
+        case OBJ_EVENT_GFX_MOLTRES:
+        case OBJ_EVENT_GFX_DRAGONITE:
+        case OBJ_EVENT_GFX_NOCTOWL:
+        case OBJ_EVENT_GFX_LEDYBA:
+        case OBJ_EVENT_GFX_LEDIAN:
+        case OBJ_EVENT_GFX_CROBAT:
+        case OBJ_EVENT_GFX_TOGETIC:
+        case OBJ_EVENT_GFX_HOPPIP:
+        case OBJ_EVENT_GFX_SKIPLOOM:
+        case OBJ_EVENT_GFX_JUMPLUFF:
+        case OBJ_EVENT_GFX_YANMA:
+        case OBJ_EVENT_GFX_MANTINE:
+        case OBJ_EVENT_GFX_SKARMORY:
+        case OBJ_EVENT_GFX_LUGIA_FOLLOWER:
+        case OBJ_EVENT_GFX_HOOH_FOLLOWER:
+        case OBJ_EVENT_GFX_CELEBI:
+        case OBJ_EVENT_GFX_BEAUTIFLY:
+        case OBJ_EVENT_GFX_DUSTOX:
+        case OBJ_EVENT_GFX_SWELLOW:
+        case OBJ_EVENT_GFX_WINGULL_FOLLOWER:
+        case OBJ_EVENT_GFX_PELIPPER:
+        case OBJ_EVENT_GFX_MASQUERAIN:
+        case OBJ_EVENT_GFX_FLYGON:
+        case OBJ_EVENT_GFX_SWABLU:
+        case OBJ_EVENT_GFX_ALTARIA:
+        case OBJ_EVENT_GFX_VOLBEAT:
+        case OBJ_EVENT_GFX_ILLUMISE:
+        case OBJ_EVENT_GFX_KYOGRE:
+        case OBJ_EVENT_GFX_LATIAS_FOLLOWER:
+        case OBJ_EVENT_GFX_LATIOS_FOLLOWER:
             return TRUE;
         default:
             return FALSE;
