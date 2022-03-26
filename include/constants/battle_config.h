@@ -54,6 +54,10 @@
     #define SPECIES_SIRFETCHD                        10021
     #define SPECIES_DARMANITAN_GALARIAN              0
     #define SPECIES_DARMANITAN_ZEN_MODE_GALARIAN     10022
+    #define SPECIES_HEATMOR                          0
+    #define SPECIES_DURANT                           0
+    #define SPECIES_CARBINK                          0
+    #define SPECIES_MAREANIE                         0
 #endif
 
 // Items with peculiar battle effects.
@@ -147,6 +151,7 @@
 #define B_SPEED_BUFFING_RAPID_SPIN  GEN_8 // In Gen8, Rapid Spin raises the user's Speed by 1 stage.
 #define B_RECOIL_IF_MISS_DMG        GEN_7 // In Gen5+, Jump Kick and High Jump Kick will always do half of the user's max HP when missing.
 #define B_KLUTZ_FLING_INTERACTION   GEN_7 // In Gen5+, Pokémon with the Klutz ability can't use Fling.
+#define B_UPDATED_CONVERSION        GEN_7 // In Gen6+, Conversion changes the user's type to match their first move's. Before, it would choose a move at random.
 
 // Move accuracy settings
 #define B_TOXIC_NEVER_MISS          GEN_7 // In Gen6+, if Toxic is used by a Poison-type Pokémon, it will never miss.
@@ -238,6 +243,7 @@
 // Other settings
 #define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
 #define B_MULTI_BATTLE_WHITEOUT     GEN_8 // In Gen4+, multi battles end when the Player and also their Partner don't have any more Pokémon to fight.
+#define B_WILD_NATURAL_ENEMIES      TRUE  // If set to TRUE, certain wild mon species will attack other species when partnered in double wild battles (eg. Zangoose vs Seviper)
 
 // Animation Settings
 #define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.

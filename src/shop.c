@@ -674,9 +674,9 @@ static void BuyMenuInitBgs(void)
 
 static void BuyMenuDecompressBgGraphics(void)
 {
-    DecompressAndCopyTileDataToVram(1, gBuyMenuFrame_Gfx, 0x3A0, 0x3E3, 0);
-    LZDecompressWram(gBuyMenuFrame_Tilemap, sShopData->tilemapBuffers[0]);
-    LoadCompressedPalette(gMenuMoneyPal, 0xC0, 0x20);
+    DecompressAndCopyTileDataToVram(1, gShopMenu_Gfx, 0x3A0, 0x3E3, 0);
+    LZDecompressWram(gShopMenu_Tilemap, sShopData->tilemapBuffers[0]);
+    LoadCompressedPalette(gShopMenu_Pal, 0xC0, 0x20);
 }
 
 static void BuyMenuInitWindows(void)
@@ -743,7 +743,7 @@ static void BuyMenuDrawMapBg(void)
             if (BuyMenuCheckForOverlapWithMenuBg(i, j) == TRUE)
                 metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
             else
-                metatileLayerType = 1;
+                metatileLayerType = METATILE_LAYER_TYPE_COVERED;
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
             {
@@ -764,15 +764,15 @@ static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLaye
 
     switch (metatileLayerType)
     {
-    case 0:
+    case METATILE_LAYER_TYPE_NORMAL:
         BuyMenuDrawMapMetatileLayer(sShopData->tilemapBuffers[3], offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(sShopData->tilemapBuffers[1], offset1, offset2, src + 4);
         break;
-    case 1:
+    case METATILE_LAYER_TYPE_COVERED:
         BuyMenuDrawMapMetatileLayer(sShopData->tilemapBuffers[2], offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(sShopData->tilemapBuffers[3], offset1, offset2, src + 4);
         break;
-    case 2:
+    case METATILE_LAYER_TYPE_SPLIT:
         BuyMenuDrawMapMetatileLayer(sShopData->tilemapBuffers[2], offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(sShopData->tilemapBuffers[1], offset1, offset2, src + 4);
         break;
@@ -866,7 +866,7 @@ static void BuyMenuDrawObjectEvents(void)
 
 static bool8 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *object)
 {
-    if (!BuyMenuCheckForOverlapWithMenuBg(object[X_COORD], object[Y_COORD] + 2) && object[LAYER_TYPE] != MB_SECRET_BASE_WALL)
+    if (!BuyMenuCheckForOverlapWithMenuBg(object[X_COORD], object[Y_COORD] + 2) && object[LAYER_TYPE] != METATILE_LAYER_TYPE_COVERED)
     {
         return TRUE;
     }

@@ -33,7 +33,6 @@ static void SpriteCB_MoongeistCharge(struct Sprite *sprite);
 static void SpriteCB_MindBlownBall(struct Sprite *sprite);
 static void AnimMindBlownBallStep(struct Sprite *sprite);
 static void SpriteCB_MindBlownExplosion(struct Sprite* sprite);
-static void SpriteCB_RandomCentredHits(struct Sprite* sprite);
 static void SpriteCB_LockingJaw(struct Sprite *sprite);
 static void SpriteCB_LockingJawStep(struct Sprite *sprite);
 static void SpriteCB_LockingJawFinish(struct Sprite *sprite);
@@ -4585,7 +4584,7 @@ static void SpriteCB_MindBlownExplosion(struct Sprite* sprite)
     }
 }
 
-static void SpriteCB_RandomCentredHits(struct Sprite* sprite)
+void SpriteCB_RandomCentredHits(struct Sprite* sprite)
 {
     if (gBattleAnimArgs[1] == -1)
         gBattleAnimArgs[1] = Random() & 3;
