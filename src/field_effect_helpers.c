@@ -820,7 +820,8 @@ static void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *sprite)
     struct Sprite *linkedSprite;
     struct ObjectEvent *objectEvent;
 
-    if (TryGetObjectEventIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &objectEventId) || !gObjectEvents[objectEventId].inShallowFlowingWater)
+    if (TryGetObjectEventIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &objectEventId) || !gObjectEvents[objectEventId].inShallowFlowingWater
+        || (gObjectEvents[objectEventId].invisible && objectEventId == gSaveBlock2Ptr->follower.objId && gSaveBlock2Ptr->follower.inProgress))
     {
         FieldEffectStop(sprite, FLDEFF_FEET_IN_FLOWING_WATER);
     }

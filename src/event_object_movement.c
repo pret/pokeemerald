@@ -10573,6 +10573,14 @@ u8 MovementAction_FollowingPokemon_Grow_Step1(struct ObjectEvent *objectEvent, s
         }
         
         FreeSpriteOamMatrix(sprite);
+        
+        // Make sure water ripples at the feet of the follower if they are appearing on top of shallow water.
+        if (MetatileBehavior_IsShallowFlowingWater(MapGridGetMetatileBehaviorAt(objectEvent->currentCoords.x, objectEvent->currentCoords.y)))
+        {
+            objectEvent->inShallowFlowingWater = TRUE;
+            StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objectEvent);
+        }
+        
         sprite->data[2]++;
     }
     
