@@ -326,11 +326,11 @@ RESET:
 static void Task_ReallowPlayerMovement(u8 taskId)
 {
     bool8 animStatus = ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetFollowerMapObjId()]);
-    if (animStatus == 0)
+    if (animStatus == 0 && gObjectEvents[GetFollowerMapObjId()].movementActionId != MOVEMENT_ACTION_FOLLOWING_POKEMON)
     {
-        /*if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)
         && ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gPlayerAvatar.objectEventId]))
-            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT); //Temporarily stop running*/
+            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT); //Temporarily stop running
         return;
     }
 
