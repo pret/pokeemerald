@@ -403,25 +403,25 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     switch (connection->direction)
     {
     // same weird temp variable behavior seen in IsHiddenItemPresentAtCoords
-    case 2:
+    case CONNECTION_NORTH:
         localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
         localLength = mapHeader->mapLayout->height - MAP_OFFSET;
         localY = localLength + y; // additions are reversed for some reason
         break;
-    case 1:
+    case CONNECTION_SOUTH:
         localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
         localLength = gMapHeader.mapLayout->height + MAP_OFFSET;
         localY = y - localLength;
         break;
-    case 3:
+    case CONNECTION_WEST:
         localLength = mapHeader->mapLayout->width - MAP_OFFSET;
         localX = localLength + x; // additions are reversed for some reason
         localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
-    case 4:
+    case CONNECTION_EAST:
         localLength = gMapHeader.mapLayout->width + MAP_OFFSET;
         localX = x - localLength;
         localOffset = connection->offset + MAP_OFFSET;
