@@ -996,10 +996,14 @@ static void TrainerHillSetMode(void)
     gSaveBlock1Ptr->trainerHill.bestTime = gSaveBlock1Ptr->trainerHillTimes[gSpecialVar_0x8005];
 }
 
-static u8 GetPrizeListId(bool8 maxTrainers)
+// Determines which prize list to use from the set of prize lists.
+static u8 GetPrizeListId(bool8 allowTMs)
 {
     u8 prizeListId, i, modBy;
 
+    // The initial selection depends on the trainer numbers for the completed challenge.
+    // These don't change with the available challenge modes, so Normal/Unique will always
+    // have a prizeListId of 8, and Variety/Expert will have a prizeListId of 24.
     prizeListId = 0;
     for (i = 0; i < NUM_TRAINER_HILL_FLOORS; i++)
     {
@@ -1007,8 +1011,10 @@ static u8 GetPrizeListId(bool8 maxTrainers)
         prizeListId ^= sHillData->floors[i].trainerNum2 & 0x1F;
     }
 
-    // Not possible to win TMs with fewer than 8 trainers
-    if (maxTrainers)
+    // In practice, the conditional below is always true.
+    // The 2nd half of the lists in both sets of lists all have a TM as the "grand prize", while the 1st half do not,
+    // so taking the mod of the (total / 2) ensures that a prize list without a TM will be used.
+    if (allowTMs)
         modBy = NUM_TRAINER_HILL_PRIZE_LISTS;
     else
         modBy = NUM_TRAINER_HILL_PRIZE_LISTS / 2;
@@ -1021,38 +1027,64 @@ static u16 GetPrizeItemId(void)
 {
     u8 i;
     const u16 *prizeList;
-    s32 var = 0, prizeListSetId, minutes, id;
+    s32 trainerNumSum = 0, prizeListSetId, minutes, id;
 
+    // First determine which set of prize lists to use. The sets of lists only differ in
+    // what TMs they can offer as the "grand prize" for a time under 12 minutes.
+    // Which set of lists gets used is based on the sum of all the trainer numbers for that
+    // challenge. These don't change with the available challenge modes, so Normal will always
+    // have a prizeListSetId of 0, and Unique/Variety/Expert will have a prizeListSetId of 1.
     for (i = 0; i < NUM_TRAINER_HILL_FLOORS; i++)
     {
-        var += sHillData->floors[i].trainerNum1;
-        var += sHillData->floors[i].trainerNum2;
+        trainerNumSum += sHillData->floors[i].trainerNum1;
+        trainerNumSum += sHillData->floors[i].trainerNum2;
     }
+    prizeListSetId = trainerNumSum / 256;
+    prizeListSetId %= (int)ARRAY_COUNT(sPrizeListSets);
 
-    prizeListSetId = var / 256;
-    prizeListSetId %= 2;
+    // Now get which prize list to use from the set. See GetPrizeListId for details.
+    // The below conditional will always be true, because a Trainer Hill challenge can't be entered
+    // until the player has entered the Hall of Fame (FLAG_SYS_GAME_CLEAR is set) and because all
+    // of the available challenge modes have the full 8 trainers (NUM_TRAINER_HILL_TRAINERS).
     if (FlagGet(FLAG_SYS_GAME_CLEAR) && sHillData->challenge.numTrainers == NUM_TRAINER_HILL_TRAINERS)
         i = GetPrizeListId(TRUE);
     else
         i = GetPrizeListId(FALSE);
 
+    // 1 is added to Expert mode's prize list selection because otherwise it has the same prizes as Variety
     if (gSaveBlock1Ptr->trainerHill.mode == HILL_MODE_EXPERT)
         i = (i + 1) % NUM_TRAINER_HILL_PRIZE_LISTS;
 
+    // After the above (non-random) calculations, the following are the possible prize list selections:
+    // sPrizeListSets[0][8] (Normal)
+    // sPrizeListSets[1][4] (Variety)
+    // sPrizeListSets[1][8] (Unique)
+    // sPrizeListSets[1][5] (Expert)
     prizeList = sPrizeListSets[prizeListSetId][i];
+
+    // Which prize is given from the list depends on the time scored.
+    // The prize for any time after 12 minutes is the same in every list.
+    // The prizes for a time under 12 minutes are:
+    // - ITEM_TM11_SUNNY_DAY   (Normal)
+    // - ITEM_ELIXIR           (Variety)
+    // - ITEM_TM19_GIGA_DRAIN  (Unique)
+    // - ITEM_TM31_BRICK_BREAK (Expert)
+    // As an additional note, if players were allowed to enter a Trainer Hill challenge before
+    // entering the Hall of Fame, there would be 1 additional prize possibility (ITEM_MAX_ETHER)
+    // as Normal / Unique modes would use sPrizeListSets[0][3] / sPrizeListSets[1][3] respectively.
     minutes = (signed)(gSaveBlock1Ptr->trainerHill.timer) / (60 * 60);
     if (minutes < 12)
-        id = 0;
+        id = 0; // Depends on list
     else if (minutes < 13)
-        id = 1;
+        id = 1; // ITEM_ETHER
     else if (minutes < 14)
-        id = 2;
+        id = 2; // ITEM_MAX_POTION
     else if (minutes < 16)
-        id = 3;
+        id = 3; // ITEM_REVIVE
     else if (minutes < 18)
-        id = 4;
+        id = 4; // ITEM_FLUFFY_TAIL
     else
-        id = 5;
+        id = 5; // ITEM_GREAT_BALL
 
     return prizeList[id];
 }
