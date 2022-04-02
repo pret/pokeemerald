@@ -1932,6 +1932,42 @@
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
+	.macro jumpifcantfling battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_CANT_FLING
+	.4byte \ptr
+	.endm
+
+	.macro curecertainstatuses battler:req
+	various \battler, VARIOUS_CURE_CERTAIN_STATUSES
+	.endm
+
+	.macro tryresetnegativestatstages battler:req
+	various \battler, VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES
+	.endm
+
+	.macro jumpiflastuseditemberry ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY
+	.4byte \ptr
+	.endm
+
+	.macro jumpiflastuseditemholdeffect battler:req, holdEffect:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT
+	.byte \holdEffect
+	.4byte \ptr
+	.endm
+
+	.macro savebattleritem battler:req
+	various \battler, VARIOUS_SAVE_BATTLER_ITEM
+	.endm
+
+	.macro restorebattleritem battler:req
+	various \battler, VARIOUS_RESTORE_BATTLER_ITEM
+	.endm
+
+	.macro battleritemtolastuseditem battler:req
+	various \battler, VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
