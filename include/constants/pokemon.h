@@ -79,11 +79,13 @@
 #define STAT_SPEED   3
 #define STAT_SPATK   4
 #define STAT_SPDEF   5
+#define NUM_STATS    6
+
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_NATURE_STATS NUM_STATS - 1 // excludes HP
-#define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
+#define NUM_NATURE_STATS (NUM_STATS - 1) // excludes HP
+#define NUM_BATTLE_STATS (NUM_STATS + 2) // includes Accuracy and Evasion
 
 #define MIN_STAT_STAGE     0
 #define DEFAULT_STAT_STAGE 6
@@ -379,6 +381,8 @@
 #define EVO_LEVEL_DARK_TYPE_MON_IN_PARTY  30     // Pokémon reaches the specified level with a Dark Type Pokémon in party
 #define EVO_TRADE_SPECIFIC_MON            31     // Pokémon is traded for a specified Pokémon
 #define EVO_SPECIFIC_MAP                  32     // Pokémon levels up on specified map
+#define EVO_LEVEL_NATURE_AMPED            33     // Pokémon reaches the specified level, it has a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature.
+#define EVO_LEVEL_NATURE_LOW_KEY          34     // Pokémon reaches the specified level, it has a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature.
 
 #define EVOS_PER_MON 10
 
