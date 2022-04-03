@@ -153,11 +153,8 @@ static const struct CaptureStar sCaptureStars[] =
 #define TAG_PARTICLES_SAFARIBALL  65052
 #define TAG_PARTICLES_SPORTBALL   65053
 #define TAG_PARTICLES_PARKBALL    65054
-#define TAG_PARTICLES_BEASTBALL   65065
+#define TAG_PARTICLES_BEASTBALL   65055
 #define TAG_PARTICLES_CHERISHBALL 65056
-
-static const u32 sNewParticlesGfx[] = INCBIN_U32("graphics/interface/ball/particles2.4bpp.lz");
-static const u32 sNewParticlesPal[] = INCBIN_U32("graphics/interface/ball/particles2.gbapal.lz");
 
 static const struct CompressedSpriteSheet sBallParticleSpriteSheets[] =
 {
@@ -166,28 +163,28 @@ static const struct CompressedSpriteSheet sBallParticleSpriteSheets[] =
     [BALL_ULTRA]    = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_ULTRABALL},
     [BALL_MASTER]   = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_MASTERBALL},
     [BALL_PREMIER]  = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_PREMIERBALL},
-    [BALL_HEAL]     = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_HEALBALL},
+    [BALL_HEAL]     = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_HEALBALL},
     [BALL_NET]      = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NETBALL},
     [BALL_NEST]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NESTBALL},
     [BALL_DIVE]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_DIVEBALL},
-    [BALL_DUSK]     = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_DUSKBALL},
+    [BALL_DUSK]     = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_DUSKBALL},
     [BALL_TIMER]    = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_TIMERBALL},
-    [BALL_QUICK]    = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_QUICKBALL},
+    [BALL_QUICK]    = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_QUICKBALL},
     [BALL_REPEAT]   = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_REPEATBALL},
     [BALL_LUXURY]   = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_LUXURYBALL},
-    [BALL_LEVEL]    = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_LEVELBALL},
+    [BALL_LEVEL]    = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_LEVELBALL},
     [BALL_LURE]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_LUREBALL},
-    [BALL_MOON]     = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_MOONBALL},
+    [BALL_MOON]     = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_MOONBALL},
     [BALL_FRIEND]   = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_FRIENDBALL},
     [BALL_LOVE]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_LOVEBALL},
-    [BALL_FAST]     = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_FASTBALL},
-    [BALL_HEAVY]    = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_HEAVYBALL},
+    [BALL_FAST]     = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_FASTBALL},
+    [BALL_HEAVY]    = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_HEAVYBALL},
     [BALL_DREAM]    = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_DREAMBALL},
     [BALL_SAFARI]   = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_SAFARIBALL},
     [BALL_SPORT]    = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_SPORTBALL},
     [BALL_PARK]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_PARKBALL},
     [BALL_BEAST]    = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_BEASTBALL},
-    [BALL_CHERISH]  = {sNewParticlesGfx,                    0x100, TAG_PARTICLES_CHERISHBALL},
+    [BALL_CHERISH]  = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_CHERISHBALL},
 };
 
 static const struct CompressedSpritePalette sBallParticlePalettes[] =
@@ -197,28 +194,28 @@ static const struct CompressedSpritePalette sBallParticlePalettes[] =
     [BALL_ULTRA]    = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_ULTRABALL},
     [BALL_MASTER]   = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_MASTERBALL},
     [BALL_PREMIER]  = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_PREMIERBALL},
-    [BALL_HEAL]     = {sNewParticlesPal,                    TAG_PARTICLES_HEALBALL},
+    [BALL_HEAL]     = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_HEALBALL},
     [BALL_NET]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NETBALL},
     [BALL_NEST]     = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NESTBALL},
     [BALL_DIVE]     = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_DIVEBALL},
-    [BALL_DUSK]     = {sNewParticlesPal,                    TAG_PARTICLES_DUSKBALL},
+    [BALL_DUSK]     = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_DUSKBALL},
     [BALL_TIMER]    = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_TIMERBALL},
-    [BALL_QUICK]    = {sNewParticlesPal,                    TAG_PARTICLES_QUICKBALL},
+    [BALL_QUICK]    = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_QUICKBALL},
     [BALL_REPEAT]   = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_REPEATBALL},
     [BALL_LUXURY]   = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_LUXURYBALL},
-    [BALL_LEVEL]    = {sNewParticlesPal,                    TAG_PARTICLES_LEVELBALL},
+    [BALL_LEVEL]    = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_LEVELBALL},
     [BALL_LURE]     = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_LUREBALL},
-    [BALL_MOON]     = {sNewParticlesPal,                    TAG_PARTICLES_MOONBALL},
+    [BALL_MOON]     = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_MOONBALL},
     [BALL_FRIEND]   = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_FRIENDBALL},
     [BALL_LOVE]     = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_LOVEBALL},
-    [BALL_FAST]     = {sNewParticlesPal,                    TAG_PARTICLES_FASTBALL},
-    [BALL_HEAVY]    = {sNewParticlesPal,                    TAG_PARTICLES_HEAVYBALL},
+    [BALL_FAST]     = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_FASTBALL},
+    [BALL_HEAVY]    = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_HEAVYBALL},
     [BALL_DREAM]    = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_DREAMBALL},
     [BALL_SAFARI]   = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_SAFARIBALL},
     [BALL_SPORT]    = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_SPORTBALL},
     [BALL_PARK]     = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_PARKBALL},
     [BALL_BEAST]    = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_BEASTBALL},
-    [BALL_CHERISH]  = {sNewParticlesPal,                    TAG_PARTICLES_CHERISHBALL},
+    [BALL_CHERISH]  = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_CHERISHBALL},
 };
 
 static const union AnimCmd sAnim_RegularBall[] =

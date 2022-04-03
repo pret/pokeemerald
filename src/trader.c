@@ -15,7 +15,7 @@
 #include "task.h"
 #include "script_menu.h"
 
-static const u8 * const sDefaultTraderNames[] =
+static const u8 * const sDefaultTraderNames[NUM_TRADER_ITEMS] =
 {
     gText_Tristan,
     gText_Philip,
@@ -23,7 +23,7 @@ static const u8 * const sDefaultTraderNames[] =
     gText_Roberto,
 };
 
-static const u8 sDefaultTraderDecorations[] =
+static const u8 sDefaultTraderDecorations[NUM_TRADER_ITEMS] =
 {
     DECOR_DUSKULL_DOLL,
     DECOR_BALL_CUSHION,
@@ -39,7 +39,7 @@ void TraderSetup(void)
     trader->id = MAUVILLE_MAN_TRADER;
     trader->alreadyTraded = FALSE;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_TRADER_ITEMS; i++)
     {
         StringCopy(trader->playerNames[i], sDefaultTraderNames[i]);
         trader->decorations[i] = sDefaultTraderDecorations[i];
@@ -53,15 +53,25 @@ void Trader_ResetFlag(void)
     trader->alreadyTraded = FALSE;
 }
 
+#define tWindowId data[3]
+
 void CreateAvailableDecorationsMenu(u8 taskId)
 {
     u8 i;
     s16 * data = gTasks[taskId].data;
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
-    struct WindowTemplate windowTemplate = {0, 1, 1, 10, 10, 15, 1};
+    struct WindowTemplate windowTemplate = {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 10,
+        .paletteNum = 15,
+        .baseBlock = 1
+    };
     s32 windowWidth = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
     s32 fiveMarksWidth = GetStringWidth(FONT_NORMAL, gText_FiveMarks, 0);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_TRADER_ITEMS; i++)
     {
         s32 curWidth;
         if (trader->decorations[i] > NUM_DECORATIONS)
@@ -72,17 +82,17 @@ void CreateAvailableDecorationsMenu(u8 taskId)
             windowWidth = curWidth;
     }
     windowTemplate.width = ConvertPixelWidthToTileWidth(windowWidth);
-    data[3] = AddWindow(&windowTemplate);
-    DrawStdFrameWithCustomTileAndPalette(data[3], FALSE, 0x214, 14);
-    for (i = 0; i < 4; i++)
+    tWindowId = AddWindow(&windowTemplate);
+    DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 0x214, 14);
+    for (i = 0; i < NUM_TRADER_ITEMS; i++)
     {
         if (trader->decorations[i] > NUM_DECORATIONS)
-            AddTextPrinterParameterized(data[3], FONT_NORMAL, gText_FiveMarks, 8, 16 * i + 1, 255, NULL);
+            AddTextPrinterParameterized(tWindowId, FONT_NORMAL, gText_FiveMarks, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
         else
-            AddTextPrinterParameterized(data[3], FONT_NORMAL, gDecorations[trader->decorations[i]].name, 8, 16 * i + 1, 255, NULL);
+            AddTextPrinterParameterized(tWindowId, FONT_NORMAL, gDecorations[trader->decorations[i]].name, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     }
-    AddTextPrinterParameterized(data[3], FONT_NORMAL, gText_Exit, 8, 16 * i + 1, 255, NULL);
-    InitMenuInUpperLeftCornerNormal(data[3], 5, 0);
+    AddTextPrinterParameterized(tWindowId, FONT_NORMAL, gText_Exit, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
+    InitMenuInUpperLeftCornerNormal(tWindowId, NUM_TRADER_ITEMS + 1, 0);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -90,17 +100,13 @@ void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
 {
     s16 * data = gTasks[taskId].data;
     if (decorationId > NUM_DECORATIONS)
-    {
         gSpecialVar_0x8004 = 0xFFFF;
-    }
     else
-    {
         gSpecialVar_0x8004 = decorationId;
-    }
 
-    ClearStdWindowAndFrameToTransparent(data[3], FALSE);
-    ClearWindowTilemap(data[3]);
-    RemoveWindow(data[3]);
+    ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
+    ClearWindowTilemap(tWindowId);
+    RemoveWindow(tWindowId);
     ScheduleBgCopyTilemapToVram(0);
     DestroyTask(taskId);
     EnableBothScriptContexts();
@@ -116,7 +122,7 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
         case MENU_NOTHING_CHOSEN:
             break;
         case MENU_B_PRESSED:
-        case 4:
+        case NUM_TRADER_ITEMS: // EXIT
             PlaySE(SE_SELECT);
             Task_BufferDecorSelectionAndCloseWindow(taskId, 0);
             break;
@@ -140,7 +146,7 @@ void DoesPlayerHaveNoDecorations(void)
 {
     u8 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < DECORCAT_COUNT; i++)
     {
         if (GetNumOwnedDecorationsInCategory(i))
         {

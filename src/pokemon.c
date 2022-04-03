@@ -91,11 +91,14 @@ static const struct CombinedMove sCombinedMoves[2] =
     {0xFFFF, 0xFFFF, 0xFFFF}
 };
 
+// NOTE: The order of the elements in the 3 arrays below is irrelevant.
+// To reorder the pokedex, see the values in include/constants/pokedex.h.
+
 #define SPECIES_TO_HOENN(name)      [SPECIES_##name - 1] = HOENN_DEX_##name
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 
- // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
+// Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
 static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_HOENN(TREECKO),
@@ -311,7 +314,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(DEOXYS),
 };
 
- // Assigns all species to the National Dex Index (Summary No. for National Dex)
+// Assigns all species to the National Dex Index (Summary No. for National Dex)
 static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_NATIONAL(BULBASAUR),
@@ -1587,7 +1590,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_CALYREX_SHADOW_RIDER - 1] = NATIONAL_DEX_CALYREX,
 };
 
- // Assigns all Hoenn Dex Indexes to a National Dex Index
+// Assigns all Hoenn Dex Indexes to a National Dex Index
 static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
@@ -1805,10 +1808,10 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
 {
-    {16, 7, INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
-    {40, 8, INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
-    {22, 25, INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
-    {34, 26, INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
+    {.x = 16, .y = 7, .image = INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
+    {.x = 40, .y = 8, .image = INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
+    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
+    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
 };
 
 #include "data/pokemon/item_effects.h"
@@ -1856,8 +1859,11 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/form_change_table_pointers.h"
 
 // SPECIES_NONE are ignored in the following two tables, so decrement before accessing these arrays to get the right result
-
+#if P_ENABLE_DEBUG == TRUE
+const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
+#else
 static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
+#endif
 {
     [SPECIES_BULBASAUR - 1]     = ANIM_V_JUMPS_H_JUMPS,
     [SPECIES_IVYSAUR - 1]       = ANIM_V_STRETCH,
@@ -3931,6 +3937,8 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     {
         if (gLevelUpLearnsets[species][i].level > level)
             break;
+        if (gLevelUpLearnsets[species][i].level == 0)
+            continue;
         if (GiveMoveToBoxMon(boxMon, gLevelUpLearnsets[species][i].move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, gLevelUpLearnsets[species][i].move);
     }
@@ -5142,14 +5150,26 @@ u8 GetMonsStateToDoubles_2(void)
 
 u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
+    int i;
+
     if (abilityNum < NUM_ABILITY_SLOTS)
         gLastUsedAbility = gBaseStats[species].abilities[abilityNum];
     else
-        gLastUsedAbility = gBaseStats[species].abilities[0];
-
-    if (gLastUsedAbility == ABILITY_NONE)
-        gLastUsedAbility = gBaseStats[species].abilities[0];
-
+        gLastUsedAbility = ABILITY_NONE;
+    
+    if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS) // if abilityNum is empty hidden ability, look for other hidden abilities
+    {
+        for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
+        {
+            gLastUsedAbility = gBaseStats[species].abilities[i];
+        }
+    }
+    
+    for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
+    {
+        gLastUsedAbility = gBaseStats[species].abilities[i];
+    }
+    
     return gLastUsedAbility;
 }
 
@@ -6440,6 +6460,53 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 if (currentMap == gEvolutionTable[species][i].param)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            case EVO_LEVEL_NATURE_AMPED:
+                if (gEvolutionTable[species][i].param <= level)
+                {
+                    u8 nature = GetNature(mon);
+                    switch (nature)
+                    {
+                        case NATURE_HARDY:
+                        case NATURE_BRAVE:
+                        case NATURE_ADAMANT:
+                        case NATURE_NAUGHTY:
+                        case NATURE_DOCILE:
+                        case NATURE_IMPISH:
+                        case NATURE_LAX:
+                        case NATURE_HASTY:
+                        case NATURE_JOLLY:
+                        case NATURE_NAIVE:
+                        case NATURE_RASH:
+                        case NATURE_SASSY:
+                        case NATURE_QUIRKY:
+                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                            break;
+                    }
+                }
+                break;
+            case EVO_LEVEL_NATURE_LOW_KEY:
+                if (gEvolutionTable[species][i].param <= level)
+                {
+                    u8 nature = GetNature(mon);
+                    switch (nature)
+                    {
+                        case NATURE_LONELY:
+                        case NATURE_BOLD:
+                        case NATURE_RELAXED:
+                        case NATURE_TIMID:
+                        case NATURE_SERIOUS:
+                        case NATURE_MODEST:
+                        case NATURE_MILD:
+                        case NATURE_QUIET:
+                        case NATURE_BASHFUL:
+                        case NATURE_CALM:
+                        case NATURE_GENTLE:
+                        case NATURE_CAREFUL:
+                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                            break;
+                    }
+                }
+                break;
             }
         }
         break;
@@ -6570,42 +6637,81 @@ u16 HoennToNationalOrder(u16 hoennNum)
     return sHoennToNationalOrder[hoennNum - 1];
 }
 
-#define DRAW_SPINDA_SPOTS                                                       \
+// Spots can be drawn on Spinda's color indexes 1, 2, or 3
+#define FIRST_SPOT_COLOR 1
+#define LAST_SPOT_COLOR  3
+
+// To draw a spot pixel, add 4 to the color index
+#define SPOT_COLOR_ADJUSTMENT 4
+/*
+    The macro below handles drawing the randomly-placed spots on Spinda's front sprite.
+    Spinda has 4 spots, each with an entry in gSpindaSpotGraphics. Each entry contains
+    a base x and y coordinate for the spot and a 16x16 binary image. Each bit in the image
+    determines whether that pixel should be considered part of the spot.
+
+    The position of each spot is randomized using the Spinda's personality. The entire 32 bit
+    personality value is used, 4 bits for each coordinate of the 4 spots. If the personality
+    value is 0x87654321, then 0x1 will be used for the 1st spot's x coord, 0x2 will be used for
+    the 1st spot's y coord, 0x3 will be used for the 2nd spot's x coord, and so on. Each
+    coordinate is calculated as (baseCoord + (given 4 bits of personality) - 8). In effect this
+    means each spot can start at any position -8 to +7 off of its base coordinates (256 possibilities).
+
+    The macro then loops over the 16x16 spot image. For each bit in the spot's binary image, if
+    the bit is set then it's part of the spot; try to draw it. A pixel is drawn on Spinda if the
+    pixel on Spinda satisfies the following formula: ((u8)(colorIndex - 1) <= 2). The -1 excludes
+    transparent pixels, as these are index 0. Therefore only colors 1, 2, or 3 on Spinda will
+    allow a spot to be drawn. These color indexes are Spinda's light brown body colors. To create
+    the spot it adds 4 to the color index, so Spinda's spots will be colors 5, 6, and 7.
+
+    The above is done two different ways in the macro: one with << 4, and one without. This
+    is because Spinda's sprite is a 4 bits per pixel image, but the pointer to Spinda's pixels
+    (destPixels) is an 8 bit pointer, so it addresses two pixels. Shifting by 4 accesses the 2nd
+    of these pixels, so this is done every other time.
+*/
+#define DRAW_SPINDA_SPOTS(personality, dest)                                    \
 {                                                                               \
-    int i;                                                                      \
-    for (i = 0; i < 4; i++)                                                     \
+    s32 i;                                                                      \
+    for (i = 0; i < (s32)ARRAY_COUNT(gSpindaSpotGraphics); i++)                 \
     {                                                                           \
-        int j;                                                                  \
+        s32 row;                                                                \
         u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);           \
         u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);    \
                                                                                 \
-        for (j = 0; j < 16; j++)                                                \
+        for (row = 0; row < SPINDA_SPOT_HEIGHT; row++)                          \
         {                                                                       \
-            int k;                                                              \
-            s32 row = gSpindaSpotGraphics[i].image[j];                          \
+            s32 column;                                                         \
+            s32 spotPixelRow = gSpindaSpotGraphics[i].image[row];               \
                                                                                 \
-            for (k = x; k < x + 16; k++)                                        \
+            for (column = x; column < x + SPINDA_SPOT_WIDTH; column++)          \
             {                                                                   \
-                u8 *val = dest + ((k / 8) * 32) +                               \
-                                 ((k % 8) / 2) +                                \
-                                 ((y >> 3) << 8) +                              \
-                                 ((y & 7) << 2);                                \
+                /* Get target pixels on Spinda's sprite */                      \
+                u8 *destPixels = dest + ((column / 8) * TILE_SIZE_4BPP) +       \
+                                        ((column % 8) / 2) +                    \
+                                             ((y / 8) * TILE_SIZE_4BPP * 8) +   \
+                                             ((y % 8) * 4);                     \
                                                                                 \
-                if (row & 1)                                                    \
+                /* Is this pixel in the 16x16 spot image part of the spot? */   \
+                if (spotPixelRow & 1)                                           \
                 {                                                               \
-                    if (k & 1)                                                  \
+                    /* destPixels addressess two pixels, alternate which */     \
+                    /* of the two pixels is being considered for drawing */     \
+                    if (column & 1)                                             \
                     {                                                           \
-                        if ((u8)((*val & 0xF0) - 0x10) <= 0x20)                 \
-                            *val += 0x40;                                       \
+                        /* Draw spot pixel if this is Spinda's body color */    \
+                        if ((u8)((*destPixels & 0xF0) - (FIRST_SPOT_COLOR << 4))\
+                                 <= ((LAST_SPOT_COLOR - FIRST_SPOT_COLOR) << 4))\
+                            *destPixels += (SPOT_COLOR_ADJUSTMENT << 4);        \
                     }                                                           \
                     else                                                        \
                     {                                                           \
-                        if ((u8)((*val & 0xF) - 0x01) <= 0x02)                  \
-                            *val += 0x04;                                       \
+                        /* Draw spot pixel if this is Spinda's body color */    \
+                        if ((u8)((*destPixels & 0xF) - FIRST_SPOT_COLOR)        \
+                                 <= (LAST_SPOT_COLOR - FIRST_SPOT_COLOR))       \
+                            *destPixels += SPOT_COLOR_ADJUSTMENT;               \
                     }                                                           \
                 }                                                               \
                                                                                 \
-                row >>= 1;                                                      \
+                spotPixelRow >>= 1;                                             \
             }                                                                   \
                                                                                 \
             y++;                                                                \
@@ -6622,13 +6728,13 @@ static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT]
         && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_RIGHT])
-        DRAW_SPINDA_SPOTS;
+        DRAW_SPINDA_SPOTS(personality, dest);
 }
 
 void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, bool8 isFrontPic)
 {
     if (species == SPECIES_SPINDA && isFrontPic)
-        DRAW_SPINDA_SPOTS;
+        DRAW_SPINDA_SPOTS(personality, dest);
 }
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
@@ -6688,7 +6794,7 @@ s32 GetBattlerMultiplayerId(u16 a1)
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
     if (InBattlePyramid())
-        return GetBattlePyramindTrainerEncounterMusicId(trainerOpponentId);
+        return GetTrainerEncounterMusicIdInBattlePyramid(trainerOpponentId);
     else if (InTrainerHillChallenge())
         return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
     else
@@ -7354,14 +7460,14 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
             return gMonShinyPaletteTableFemale[species].data;
         else
             return gMonShinyPaletteTable[species].data;
     }
     else
     {
-        if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
             return gMonPaletteTableFemale[species].data;
         else
             return gMonPaletteTable[species].data;
@@ -7383,14 +7489,14 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
             return &gMonShinyPaletteTableFemale[species];
         else
             return &gMonShinyPaletteTable[species];
     }
     else
     {
-        if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
             return &gMonPaletteTableFemale[species];
         else
             return &gMonPaletteTable[species];
@@ -8045,20 +8151,25 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
     return targetFormId;
 }
 
-// returns SPECIES_NONE if no form change is possible
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
+{
+    return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
+}
+
+// Returns SPECIES_NONE if no form change is possible
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg) 
 {
     u32 i;
     u16 targetSpecies = SPECIES_NONE;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 species = GetBoxMonData(mon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[species];
     u16 heldItem;
     u32 ability;
 
     if (formChanges != NULL)
     {
-        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-        ability = GetAbilityBySpecies(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+        heldItem = GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetBoxMonData(mon, MON_DATA_ABILITY_NUM, NULL));
 
         for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
         {
@@ -8067,7 +8178,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                 switch (method)
                 {
                 case FORM_ITEM_HOLD:
-                    if (heldItem == formChanges[i].param1)
+                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE:
@@ -8075,11 +8186,12 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_MOVE:
-                    if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                    if (BoxMonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_HOLD_ABILITY:
-                    if (heldItem == formChanges[i].param1 && ability == formChanges[i].param2)
+                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                        && ability == formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE_TIME:
@@ -8105,4 +8217,30 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
     }
 
     return species != targetSpecies ? targetSpecies : SPECIES_NONE;
+}
+
+u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+
+    // Since you can learn more than one move per level,
+    // the game needs to know whether you decided to
+    // learn it or keep the old set to avoid asking
+    // you to learn the same move over and over again.
+    if (firstMove)
+    {
+        sLearningMoveTableID = 0;
+    }
+    while(gLevelUpLearnsets[species][sLearningMoveTableID].move != LEVEL_UP_END)
+    {
+        while (gLevelUpLearnsets[species][sLearningMoveTableID].level == 0 || gLevelUpLearnsets[species][sLearningMoveTableID].level == level)
+        {
+            gMoveToLearn = gLevelUpLearnsets[species][sLearningMoveTableID].move;
+            sLearningMoveTableID++;
+            return GiveMoveToMon(mon, gMoveToLearn);
+        }
+        sLearningMoveTableID++;
+    }
+    return 0;
 }

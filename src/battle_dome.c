@@ -34,7 +34,6 @@
 #include "constants/battle_dome.h"
 #include "constants/frontier_util.h"
 #include "constants/moves.h"
-#include "constants/pokemon.h"
 #include "constants/trainers.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
@@ -5286,10 +5285,10 @@ static void Task_ShowTourneyTree(u8 taskId)
         break;
     case 2:
         sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
-        LZDecompressWram(gDomeTourneyLineMask_Tilemap, sTilemapBuffer);
+        LZDecompressWram(gDomeTourneyTree_Tilemap, sTilemapBuffer);
         SetBgTilemapBuffer(1, sTilemapBuffer);
         CopyBgTilemapBufferToVram(1);
-        DecompressAndLoadBgGfxUsingHeap(1, gDomeTourneyBg_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, gDomeTourneyTree_Gfx, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyLine_Gfx, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyLineDown_Tilemap, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gDomeTourneyLineUp_Tilemap, 0x2000, 0, 1);

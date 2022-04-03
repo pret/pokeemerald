@@ -759,8 +759,8 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
         else if (*species == SPECIES_HAPPINY && motherItem != ITEM_LUCK_INCENSE && fatherItem != ITEM_LUCK_INCENSE)
             *species = SPECIES_CHANSEY;
     #endif
-    #ifdef SPECIES_MIMEJR
-        else if (*species == SPECIES_MIMEJR && motherItem != ITEM_ODD_INCENSE && fatherItem != ITEM_ODD_INCENSE)
+    #ifdef SPECIES_MIME_JR
+        else if (*species == SPECIES_MIME_JR && motherItem != ITEM_ODD_INCENSE && fatherItem != ITEM_ODD_INCENSE)
             *species = SPECIES_MR_MIME;
     #endif
     #ifdef SPECIES_CHINGLING

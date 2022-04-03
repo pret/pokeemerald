@@ -792,13 +792,13 @@ static void Task_ShowAiPoints(u8 taskId)
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
-                                                 39, 130, 15, 0xFFFF);
+                                                 39, 130, 15, TAG_NONE);
         #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
-                                                 39, 130, 15, 0xFFFF);
+                                                 39, 130, 15, TAG_NONE);
         #endif
         data->aiViewState++;
         break;
@@ -915,13 +915,13 @@ static void Task_ShowAiKnowledge(u8 taskId)
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
-                                                 39, 130, 15, 0xFFFF);
+                                                 39, 130, 15, TAG_NONE);
         #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
-                                                 39, 130, 15, 0xFFFF);
+                                                 39, 130, 15, TAG_NONE);
         #endif
         data->aiViewState++;
         break;
@@ -1996,7 +1996,7 @@ static const u8 sText_HoldEffectQuickPowder[] = _("Quick Powder");
 static const u8 sText_HoldEffectAdamantOrb[] = _("Adamant Orb");
 static const u8 sText_HoldEffectLustrousOrb[] = _("Lustrous Orb");
 static const u8 sText_HoldEffectGriseousOrb[] = _("Griseous Orb");
-static const u8 sText_HoldEffectGracidea[] = _("Gracidea");
+static const u8 sText_HoldEffectEnigmaBerry[] = _("Enigma Berry");
 static const u8 sText_HoldEffectResistBerry[] = _("Resist Berry");
 static const u8 sText_HoldEffectPowerItem[] = _("Power Item");
 static const u8 sText_HoldEffectRestorePctHp[] = _("Restore Pct Hp");
@@ -2025,11 +2025,13 @@ static const u8 sText_HoldEffectSafetyGoggles[] = _("Safety Goggles");
 static const u8 sText_HoldEffectLuminousMoss[] = _("Luminous Moss");
 static const u8 sText_HoldEffectSnowball[] = _("Snowball");
 static const u8 sText_HoldEffectWeaknessPolicy[] = _("Weakness Policy");
+static const u8 sText_HoldEffectPrimalOrb[] = _("Primal Orb");
 static const u8 sText_HoldEffectProtectivePads[] = _("Protective Pads");
 static const u8 sText_HoldEffectTerrainExtender[] = _("Terrain Extender");
 static const u8 sText_HoldEffectSeeds[] = _("Seeds");
 static const u8 sText_HoldEffectAdrenalineOrb[] = _("Adrenaline Orb");
 static const u8 sText_HoldEffectMemory[] = _("Memory");
+static const u8 sText_HoldEffectZCrystal[] = _("Z-Crystal");
 static const u8 sText_HoldEffectPlate[] = _("Plate");
 static const u8 sText_HoldEffectUtilityUmbrella[] = _("Utility Umbrella");
 static const u8 sText_HoldEffectEjectPack[] = _("Eject Pack");
@@ -2067,7 +2069,7 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_EXP_SHARE] = sText_HoldEffectExpShare,
     [HOLD_EFFECT_QUICK_CLAW] = sText_HoldEffectQuickClaw,
     [HOLD_EFFECT_FRIENDSHIP_UP] = sText_HoldEffectFriendshipUp,
-    //[HOLD_EFFECT_MENTAL_HERB] = sText_HoldEffectMentalHerb,
+    [HOLD_EFFECT_MENTAL_HERB] = sText_HoldEffectMentalHerb,
     [HOLD_EFFECT_CHOICE_BAND] = sText_HoldEffectChoiceBand,
     [HOLD_EFFECT_FLINCH] = sText_HoldEffectFlinch,
     [HOLD_EFFECT_BUG_POWER] = sText_HoldEffectBugPower,
@@ -2136,16 +2138,17 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_ADAMANT_ORB] = sText_HoldEffectAdamantOrb,
     [HOLD_EFFECT_LUSTROUS_ORB] = sText_HoldEffectLustrousOrb,
     [HOLD_EFFECT_GRISEOUS_ORB] = sText_HoldEffectGriseousOrb,
-    [HOLD_EFFECT_GRACIDEA] = sText_HoldEffectGracidea,
+    [HOLD_EFFECT_ENIGMA_BERRY] = sText_HoldEffectEnigmaBerry,
     [HOLD_EFFECT_RESIST_BERRY] = sText_HoldEffectResistBerry,
     [HOLD_EFFECT_POWER_ITEM] = sText_HoldEffectPowerItem,
     [HOLD_EFFECT_RESTORE_PCT_HP] = sText_HoldEffectRestorePctHp,
-    //[HOLD_EFFECT_MICLE_BERRY] = sText_HoldEffectMicleBerry,
-    //[HOLD_EFFECT_CUSTAP_BERRY] = sText_HoldEffectCustapBerry,
-    //[HOLD_EFFECT_JABOCA_BERRY] = sText_HoldEffectJabocaBerry,
-    //[HOLD_EFFECT_ROWAP_BERRY] = sText_HoldEffectRowapBerry,
-    //[HOLD_EFFECT_KEE_BERRY] = sText_HoldEffectKeeBerry,
-    //[HOLD_EFFECT_MARANGA_BERRY] = sText_HoldEffectMarangaBerry,
+    [HOLD_EFFECT_MICLE_BERRY] = sText_HoldEffectMicleBerry,
+    [HOLD_EFFECT_CUSTAP_BERRY] = sText_HoldEffectCustapBerry,
+    [HOLD_EFFECT_JABOCA_BERRY] = sText_HoldEffectJabocaBerry,
+    [HOLD_EFFECT_ROWAP_BERRY] = sText_HoldEffectRowapBerry,
+    [HOLD_EFFECT_KEE_BERRY] = sText_HoldEffectKeeBerry,
+    [HOLD_EFFECT_MARANGA_BERRY] = sText_HoldEffectMarangaBerry,
+    [HOLD_EFFECT_PLATE] = sText_HoldEffectPlate,
     [HOLD_EFFECT_FLOAT_STONE] = sText_HoldEffectFloatStone,
     [HOLD_EFFECT_EVIOLITE] = sText_HoldEffectEviolite,
     [HOLD_EFFECT_ASSAULT_VEST] = sText_HoldEffectAssaultVest,
@@ -2165,12 +2168,13 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_LUMINOUS_MOSS] = sText_HoldEffectLuminousMoss,
     [HOLD_EFFECT_SNOWBALL] = sText_HoldEffectSnowball,
     [HOLD_EFFECT_WEAKNESS_POLICY] = sText_HoldEffectWeaknessPolicy,
+    [HOLD_EFFECT_PRIMAL_ORB] = sText_HoldEffectPrimalOrb,
     [HOLD_EFFECT_PROTECTIVE_PADS] = sText_HoldEffectProtectivePads,
     [HOLD_EFFECT_TERRAIN_EXTENDER] = sText_HoldEffectTerrainExtender,
     [HOLD_EFFECT_SEEDS] = sText_HoldEffectSeeds,
     [HOLD_EFFECT_ADRENALINE_ORB] = sText_HoldEffectAdrenalineOrb,
     [HOLD_EFFECT_MEMORY] = sText_HoldEffectMemory,
-    [HOLD_EFFECT_PLATE] = sText_HoldEffectPlate,
+    [HOLD_EFFECT_Z_CRYSTAL] = sText_HoldEffectZCrystal,
     [HOLD_EFFECT_UTILITY_UMBRELLA] = sText_HoldEffectUtilityUmbrella,
     [HOLD_EFFECT_EJECT_PACK] = sText_HoldEffectEjectPack,
     [HOLD_EFFECT_ROOM_SERVICE] = sText_HoldEffectRoomService,

@@ -30,7 +30,7 @@ void PlayerSetAnimId(u8 a, u8 b);
 bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction);
 void PlayerOnBikeCollideWithFarawayIslandMew(u8 direction);
 u8 CheckForObjectEventCollision(struct ObjectEvent *a, s16 b, s16 c, u8 d, u8 e);
-u8 PlayerGetZCoord(void);
+u8 PlayerGetElevation(void);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void CancelPlayerForcedMovement(void);
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);

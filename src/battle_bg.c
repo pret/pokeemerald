@@ -26,6 +26,7 @@
 #include "constants/trainers.h"
 #include "constants/battle_anim.h"
 
+#if !P_ENABLE_DEBUG
 struct BattleBackground
 {
     const void *tileset;
@@ -34,6 +35,7 @@ struct BattleBackground
     const void *entryTilemap;
     const void *palette;
 };
+#endif
 
 // .rodata
 static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?
@@ -600,7 +602,11 @@ const struct WindowTemplate * const gBattleWindowTemplates[] =
     [B_WIN_TYPE_ARENA]  = gBattleArenaWindowTemplates,
 };
 
+#if P_ENABLE_DEBUG == TRUE
+const struct BattleBackground sBattleTerrainTable[] =
+#else
 static const struct BattleBackground sBattleTerrainTable[] =
+#endif
 {
     [BATTLE_TERRAIN_GRASS] =
     {

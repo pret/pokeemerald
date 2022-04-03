@@ -1,5 +1,3 @@
-#define FORM_SPECIES_END (0xffff)
-
 static const u16 sVenusaurFormSpeciesIdTable[] = {
     SPECIES_VENUSAUR,
     SPECIES_VENUSAUR_MEGA,

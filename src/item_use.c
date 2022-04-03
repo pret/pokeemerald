@@ -404,25 +404,25 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     switch (connection->direction)
     {
     // same weird temp variable behavior seen in IsHiddenItemPresentAtCoords
-    case 2:
+    case CONNECTION_NORTH:
         localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
         localLength = mapHeader->mapLayout->height - MAP_OFFSET;
         localY = localLength + y; // additions are reversed for some reason
         break;
-    case 1:
+    case CONNECTION_SOUTH:
         localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
         localLength = gMapHeader.mapLayout->height + MAP_OFFSET;
         localY = y - localLength;
         break;
-    case 3:
+    case CONNECTION_WEST:
         localLength = mapHeader->mapLayout->width - MAP_OFFSET;
         localX = localLength + x; // additions are reversed for some reason
         localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
-    case 4:
+    case CONNECTION_EAST:
         localLength = gMapHeader.mapLayout->width + MAP_OFFSET;
         localX = x - localLength;
         localOffset = connection->offset + MAP_OFFSET;
@@ -726,11 +726,11 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 static bool8 TryToWaterSudowoodo(void)
 {
     u16 x, y;
-    u8 z;
+    u8 elevation;
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    z = PlayerGetZCoord();
-    objId = GetObjectEventIdByXYZ(x, y, z);
+    elevation = PlayerGetElevation();
+    objId = GetObjectEventIdByPosition(x, y, elevation);
     if (objId == OBJECT_EVENTS_COUNT || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_SUDOWOODO)
         return FALSE;
     else
@@ -948,34 +948,33 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
-u32 CanThrowBall(void)
+static u32 GetBallThrowableState(void)
 {
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
-        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) 
-    {
-        return 1;   // There are two present pokemon.
-    }
+     && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+        return BALL_THROW_UNABLE_TWO_MONS;
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
-    {
-        return 2;   // No room for mon
-    }
-    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+        return BALL_THROW_UNABLE_NO_ROOM;
+#if B_SEMI_INVULNERABLE_CATCH >= GEN_4
     else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
-    {
-        return 3;   // in semi-invulnerable state
-    }
-    #endif
-    
-    return 0;   // usable 
+        return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
+#endif
+
+    return BALL_THROW_ABLE;
+}
+
+bool32 CanThrowBall(void)
+{
+    return (GetBallThrowableState() == BALL_THROW_ABLE);
 }
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    switch (CanThrowBall())
+    switch (GetBallThrowableState())
     {
-    case 0: // usable
+    case BALL_THROW_ABLE:
     default:
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
@@ -983,20 +982,20 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             CloseBattlePyramidBag(taskId);
         break;
-    case 1:  // There are two present pokemon.
+    case BALL_THROW_UNABLE_TWO_MONS:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_TwoMons, Task_CloseBattlePyramidBagMessage);
         break;
-    case 2: // No room for mon
+    case BALL_THROW_UNABLE_NO_ROOM:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
         break;
     #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
-    case 3: // Semi-Invulnerable
+    case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
