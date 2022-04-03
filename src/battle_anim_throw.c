@@ -153,7 +153,7 @@ static const struct CaptureStar sCaptureStars[] =
 #define TAG_PARTICLES_SAFARIBALL  65052
 #define TAG_PARTICLES_SPORTBALL   65053
 #define TAG_PARTICLES_PARKBALL    65054
-#define TAG_PARTICLES_BEASTBALL   65065
+#define TAG_PARTICLES_BEASTBALL   65055
 #define TAG_PARTICLES_CHERISHBALL 65056
 
 static const struct CompressedSpriteSheet sBallParticleSpriteSheets[] =
