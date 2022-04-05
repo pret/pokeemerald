@@ -1,0 +1,24 @@
+{{ doNotModifyHeader }}
+#ifndef GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
+#define GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
+
+## for map_section in map_sections
+{% if isEmptyString(getVar(map_section.name)) and not existsIn(map_section, "name_clone") %}{{ setVar(map_section.name, map_section.map_section) }}{% endif %}
+## endfor
+
+## for map_section in map_sections
+{% if getVar(map_section.name) == map_section.map_section %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name }}");
+{% endif %}
+{% if existsIn(map_section, "name_clone") %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name }}");
+{% endif %}
+## endfor
+
+const struct RegionMapLocation gRegionMapEntries[] = {
+## for map_section in map_sections
+    [{{ map_section.map_section }}] = { {{ map_section.x }}, {{ map_section.y }}, {{ map_section.width }}, {{ map_section.height }}, sMapName_{{ cleanString(map_section.name) }}{% if existsIn(map_section, "name_clone") %}_Clone{% endif %} },
+## endfor
+};
+
+#endif // GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
