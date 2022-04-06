@@ -305,6 +305,20 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
 </details>
+    
+### Arch Linux
+Run this command as root to install the necessary packages:
+```bash
+pacman -S base-devel arm-none-eabi-binutils git libpng
+```
+Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
+<details>
+    <summary><i>Note for legacy repos...</i></summary>
+
+>   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
+>   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
+>   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
+</details>
 
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
@@ -513,6 +527,24 @@ devkitARM is now installed.
     > Note: `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
 
 4. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
+
+    ```bash
+    source /etc/profile.d/devkit-env.sh
+    ```
+
+devkitARM is now installed.
+
+## Installing devkitARM on Arch Linux
+        
+1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
+2. Install `gba-dev`: run the following command as root.
+
+    ```console
+    pacman -S gba-dev
+    ```
+    This will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+3. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
 
     ```bash
     source /etc/profile.d/devkit-env.sh
