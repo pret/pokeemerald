@@ -668,7 +668,7 @@ $(FLDEFFGFXDIR)/tall_grass.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/tree_disguise.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(FLDEFFGFXDIR)/unknown_16.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/jump_long_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(FLDEFFGFXDIR)/unknown_17.4bpp: %.4bpp: %.png
