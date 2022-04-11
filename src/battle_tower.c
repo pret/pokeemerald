@@ -1836,13 +1836,18 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
-        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode; // Unused variable.
+        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
+    #ifdef BUGFIX
+        u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+    #else
         u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / 7;
+    #endif
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 6)
-            fixedIV = GetFactoryMonFixedIV(challengeNum, 0);
+            fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
         else
-            fixedIV = GetFactoryMonFixedIV(challengeNum, 1);
+            fixedIV = GetFactoryMonFixedIV(challengeNum, TRUE); // Last trainer in challenge uses higher IVs
     }
     else if (trainerId == TRAINER_EREADER)
     {
