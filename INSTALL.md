@@ -418,20 +418,24 @@ If you aren't in the pokeemerald directory already, then **change directory** to
 ```bash
 cd pokeemerald
 ```
-To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
+To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)). **You should only use `make compare` when verifying if your built ROM matches the vanilla game. If the repo has been modified for a hack and produces a different ROM, this command will fail**:
 ```bash
 make compare
 ```
+        
 If an OK is returned, then the installation went smoothly.
+
+
+Once the repository has been modified, build the repo with this instead:
+```bash
+make
+```
+        
 <details>
 <summary>Note for Windows...</summary>
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
-
-To build **pokeemerald.gba** with your changes:
-```bash
-make
-```
+        
 
 # Building guidance
 
