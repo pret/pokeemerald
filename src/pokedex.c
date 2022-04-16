@@ -7982,6 +7982,11 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     u16 preEvolutionTwo = 0;
     u8 numPreEvolutions = 0;
 
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
+    if (gSaveBlock1Ptr->tx_Random_Evolutions || gSaveBlock1Ptr->tx_Random_EvolutionMethodes)
+        return 0;
+    #endif
+
     #ifdef POKEMON_EXPANSION
         bool8 isMega = FALSE;
         sPokedexView->sEvoScreenData.isMega = FALSE;
