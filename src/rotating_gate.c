@@ -5,7 +5,6 @@
 #include "fieldmap.h"
 #include "sound.h"
 #include "sprite.h"
-#include "constants/maps.h"
 #include "constants/songs.h"
 
 #define ROTATING_GATE_TILE_TAG 0x1300
@@ -220,14 +219,14 @@ static const struct RotatingGatePuzzle sRotatingGate_TrickHousePuzzleConfig[] =
     {10, 19, GATE_SHAPE_L3, GATE_ORIENTATION_180},
 };
 
-static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/misc/rotating_gate_1.4bpp");
-static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/misc/rotating_gate_2.4bpp");
-static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/misc/rotating_gate_3.4bpp");
-static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/misc/rotating_gate_4.4bpp");
-static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/misc/rotating_gate_5.4bpp");
-static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/misc/rotating_gate_6.4bpp");
-static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/misc/rotating_gate_7.4bpp");
-static const u8 sRotatingGateTiles_8[] = INCBIN_U8("graphics/misc/rotating_gate_8.4bpp");
+static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/l1.4bpp");
+static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/l2.4bpp");
+static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/l3.4bpp");
+static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/l4.4bpp");
+static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/t1.4bpp");
+static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/t2.4bpp");
+static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/t3.4bpp");
+static const u8 sRotatingGateTiles_8[] = INCBIN_U8("graphics/rotating_gates/t4.4bpp");
 
 static const struct OamData sOamData_RotatingGateLarge =
 {
@@ -685,13 +684,11 @@ static void RotatingGate_LoadPuzzleConfig(void)
     {
     case PUZZLE_FORTREE_CITY_GYM:
         gRotatingGate_PuzzleConfig = sRotatingGate_FortreePuzzleConfig;
-        gRotatingGate_PuzzleCount =
-            sizeof(sRotatingGate_FortreePuzzleConfig) / sizeof(struct RotatingGatePuzzle);
+        gRotatingGate_PuzzleCount = ARRAY_COUNT(sRotatingGate_FortreePuzzleConfig);
         break;
     case PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6:
         gRotatingGate_PuzzleConfig = sRotatingGate_TrickHousePuzzleConfig;
-        gRotatingGate_PuzzleCount =
-            sizeof(sRotatingGate_TrickHousePuzzleConfig) / sizeof(struct RotatingGatePuzzle);
+        gRotatingGate_PuzzleCount = ARRAY_COUNT(sRotatingGate_TrickHousePuzzleConfig);
         break;
     case PUZZLE_NONE:
     default:
@@ -699,9 +696,7 @@ static void RotatingGate_LoadPuzzleConfig(void)
     }
 
     for (i = 0; i < ROTATING_GATE_PUZZLE_MAX - 1; i++)
-    {
         gRotatingGate_GateSpriteIds[i] = MAX_SPRITES;
-    }
 }
 
 static void RotatingGate_CreateGatesWithinViewport(s16 deltaX, s16 deltaY)
@@ -774,7 +769,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
     {
         affineAnimation = orientation + 4;
 
-        if (GetPlayerSpeed() != 1)
+        if (GetPlayerSpeed() != PLAYER_SPEED_NORMAL)
             affineAnimation += 8;
 
         PlaySE(SE_ROTATING_GATE);
@@ -784,7 +779,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
     {
         affineAnimation = orientation + 8;
 
-        if (GetPlayerSpeed() != 1)
+        if (GetPlayerSpeed() != PLAYER_SPEED_NORMAL)
             affineAnimation += 8;
 
         PlaySE(SE_ROTATING_GATE);

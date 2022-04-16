@@ -4,7 +4,7 @@ AbandonedShip_Corridors_B1F_MapScripts::
 	.byte 0
 
 AbandonedShip_Corridors_B1F_OnResume:
-	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 255, 5, 4
+	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 5, 4
 	end
 
 AbandonedShip_Corridors_B1F_OnLoad:
@@ -13,11 +13,11 @@ AbandonedShip_Corridors_B1F_OnLoad:
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom::
-	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Locked, 1
+	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Locked, TRUE
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom::
-	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, 1
+	setmetatile 11, 4, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, TRUE
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_TuberM::
@@ -27,9 +27,8 @@ AbandonedShip_Corridors_B1F_EventScript_TuberM::
 AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor::
 	lockall
 	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked
-	checkitem ITEM_STORAGE_KEY, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked
+	checkitem ITEM_STORAGE_KEY
+	goto_if_eq VAR_RESULT, FALSE, AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked
 	msgbox AbandonedShip_Corridors_B1F_Text_InsertedStorageKey, MSGBOX_DEFAULT
 	playse SE_PIN
 	removeitem ITEM_STORAGE_KEY

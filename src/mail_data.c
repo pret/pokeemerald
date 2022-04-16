@@ -5,7 +5,6 @@
 #include "pokemon_icon.h"
 #include "text.h"
 #include "international_string_util.h"
-#include "constants/easy_chat.h"
 
 #define UNOWN_OFFSET 30000
 
@@ -157,7 +156,7 @@ void ClearMailItemId(u8 mailId)
     gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
 }
 
-u8 TakeMailFromMon2(struct Pokemon *mon)
+u8 TakeMailFromMonAndSave(struct Pokemon *mon)
 {
     u8 i;
     u8 newHeldItem[2];
@@ -179,6 +178,7 @@ u8 TakeMailFromMon2(struct Pokemon *mon)
         }
     }
 
+    // No space to save mail
     return MAIL_NONE;
 }
 

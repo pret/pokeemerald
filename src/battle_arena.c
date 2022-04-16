@@ -741,7 +741,7 @@ void BattleArena_AddSkillPoints(u8 battler)
     }
 }
 
-void BattleArena_DeductMindPoints(u8 battler, u16 stringId)
+void BattleArena_DeductSkillPoints(u8 battler, u16 stringId)
 {
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
 
@@ -798,7 +798,7 @@ static void InitArenaChallenge(void)
     if (!isCurrent)
         gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = 0;
 
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
     gTrainerBattleOpponent_A = 0;
 }
 

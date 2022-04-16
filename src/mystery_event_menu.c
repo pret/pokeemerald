@@ -111,16 +111,16 @@ static bool8 GetEventLoadMessage(u8 *dest, u32 status)
 {
     bool8 retVal = TRUE;
 
-    if (status == 0)
+    if (status == MEVENT_STATUS_LOAD_OK)
     {
         StringCopy(dest, gText_EventSafelyLoaded);
         retVal = FALSE;
     }
 
-    if (status == 2)
+    if (status == MEVENT_STATUS_SUCCESS)
         retVal = FALSE;
 
-    if (status == 1)
+    if (status == MEVENT_STATUS_LOAD_ERROR)
         StringCopy(dest, gText_LoadErrorEndingSession);
 
     return retVal;
@@ -193,7 +193,7 @@ static void CB2_MysteryEventMenu(void)
         }
         else
         {
-            GetEventLoadMessage(gStringVar4, 1);
+            GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
             PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
             gMain.state = 13;
         }
@@ -206,7 +206,7 @@ static void CB2_MysteryEventMenu(void)
                 if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == EXCHANGE_DIFF_SELECTIONS)
                 {
                     SetCloseLinkCallback();
-                    GetEventLoadMessage(gStringVar4, 1);
+                    GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
                     PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
                     gMain.state = 13;
                 }
@@ -218,7 +218,7 @@ static void CB2_MysteryEventMenu(void)
                 else
                 {
                     CloseLink();
-                    GetEventLoadMessage(gStringVar4, 1);
+                    GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
                     PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
                     gMain.state = 13;
                 }
@@ -252,9 +252,9 @@ static void CB2_MysteryEventMenu(void)
     case 11:
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            u16 unkVal = RunMysteryEventScript(gDecompressionBuffer);
+            u16 status = RunMysteryEventScript(gDecompressionBuffer);
             CpuFill32(0, gDecompressionBuffer, 0x7D4);
-            if (!GetEventLoadMessage(gStringVar4, unkVal))
+            if (!GetEventLoadMessage(gStringVar4, status))
                 TrySavingData(SAVE_NORMAL);
             gMain.state++;
         }
@@ -290,7 +290,7 @@ static void CB2_MysteryEventMenu(void)
     if (gLinkStatus & 0x40 && !IsLinkMaster())
     {
         CloseLink();
-        GetEventLoadMessage(gStringVar4, 1);
+        GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
         PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
         gMain.state = 13;
     }

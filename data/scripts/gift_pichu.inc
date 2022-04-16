@@ -5,8 +5,7 @@ MysteryGiftScript_SurfPichu::
 
 SurfPichu_GiveIfPossible:
 	specialvar VAR_GIFT_PICHU_SLOT, CalculatePlayerPartyCount
-	compare VAR_GIFT_PICHU_SLOT, PARTY_SIZE
-	vgoto_if_eq SurfPichu_FullParty
+	vgoto_if_eq VAR_GIFT_PICHU_SLOT, PARTY_SIZE, SurfPichu_FullParty
 	setflag FLAG_MYSTERY_GIFT_DONE
 	vcall SurfPichu_GiveEgg
 	lock
@@ -32,16 +31,11 @@ SurfPichu_GiveEgg:
 	giveegg SPECIES_PICHU
 	setmoneventlegal VAR_GIFT_PICHU_SLOT
 	setmonmetlocation VAR_GIFT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
-	compare VAR_GIFT_PICHU_SLOT, 1
-	vgoto_if_eq SurfPichu_Slot1
-	compare VAR_GIFT_PICHU_SLOT, 2
-	vgoto_if_eq SurfPichu_Slot2
-	compare VAR_GIFT_PICHU_SLOT, 3
-	vgoto_if_eq SurfPichu_Slot3
-	compare VAR_GIFT_PICHU_SLOT, 4
-	vgoto_if_eq SurfPichu_Slot4
-	compare VAR_GIFT_PICHU_SLOT, 5
-	vgoto_if_eq SurfPichu_Slot5
+	vgoto_if_eq VAR_GIFT_PICHU_SLOT, 1, SurfPichu_Slot1
+	vgoto_if_eq VAR_GIFT_PICHU_SLOT, 2, SurfPichu_Slot2
+	vgoto_if_eq VAR_GIFT_PICHU_SLOT, 3, SurfPichu_Slot3
+	vgoto_if_eq VAR_GIFT_PICHU_SLOT, 4, SurfPichu_Slot4
+	vgoto_if_eq VAR_GIFT_PICHU_SLOT, 5, SurfPichu_Slot5
 	return
 
 SurfPichu_Slot1:

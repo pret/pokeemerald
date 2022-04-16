@@ -8,6 +8,14 @@
 #define POKENEWS_BLENDMASTER  4
 #define NUM_POKENEWS_TYPES    4 // Excludes NONE
 
+#define POKENEWS_STATE_INACTIVE 0
+#define POKENEWS_STATE_UPCOMING 1
+#define POKENEWS_STATE_ACTIVE   2
+
+// Number of days to count down until the news event occurs.
+// Nothing is aired on TV the first day
+#define POKENEWS_COUNTDOWN 4
+
 // TV shows are categorized as being in one of 3 groups
 // - TVGROUP_NORMAL, TV shows that can appear without Record Mixing
 // - TVGROUP_RECORD_MIX, TV shows that can only appear via Record Mixing
