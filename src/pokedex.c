@@ -48,8 +48,8 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#ifdef TX_DIFFICULTY_CHALLENGES_USED
-    //#include "tx_difficulty_challenges.h"
+#ifdef TX_RANDOMIZER_AND_CHALLENGES
+    //#include "tx_randomizer_and_challenges.h"
 #endif
 
 enum
@@ -4660,7 +4660,7 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
         dexNum = SpeciesToNationalPokedexNum(species);
     }
     //type icon(s)
-    #ifdef TX_DIFFICULTY_CHALLENGES_USED
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
         type1 = GetTypeBySpecies(species, 1);
         type2 = GetTypeBySpecies(species, 2);
     #else
@@ -8098,10 +8098,10 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     if (species == SPECIES_EEVEE)
         isEevee = TRUE;
 
-    #ifdef TX_DIFFICULTY_CHALLENGES_USED
-        if (gSaveBlock1Ptr->txRandEvolutionMethodes) //tx_difficulty_challenges
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
+        if (gSaveBlock1Ptr->tx_Random_EvolutionMethodes) //tx_randomizer_and_challenges
         {
-            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->txRandEvolutions, !gSaveBlock1Ptr->txRandChaos);
+            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->tx_Random_Evolutions, !gSaveBlock1Ptr->tx_Random_Chaos);
             if (species == SPECIES_NONE)
                 return SPECIES_NONE;
         }
@@ -8137,9 +8137,9 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         previousTargetSpecies = targetSpecies;
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
         sPokedexView->sEvoScreenData.targetSpecies[sPokedexView->sEvoScreenData.numAllEvolutions++] = targetSpecies;
-        #ifdef TX_DIFFICULTY_CHALLENGES_USED
-            if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
-                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->txRandChaos);
+        #ifdef TX_RANDOMIZER_AND_CHALLENGES
+            if (gSaveBlock1Ptr->tx_Random_Evolutions && targetSpecies != SPECIES_NONE) //tx_randomizer_and_challenges
+                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
         #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
         HandleTargetSpeciesPrint(taskId, targetSpecies, previousTargetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i, isEevee); //evolution mon name
