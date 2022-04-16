@@ -33,7 +33,7 @@ static void ClearDecorationInventory(u8 category)
 void ClearDecorationInventories(void)
 {
     u8 category;
-    for (category = 0; category < 8; category++)
+    for (category = 0; category < DECORCAT_COUNT; category++)
         ClearDecorationInventory(category);
 }
 
