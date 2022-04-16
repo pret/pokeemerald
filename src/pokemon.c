@@ -3294,6 +3294,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         #if P_LEGENDARY_PERFECT_IVS >= GEN_6
             if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
             {
+                iv = MAX_PER_STAT_IVS;
                 // Initialize a list of IV indices.
                 for (i = 0; i < NUM_STATS; i++)
                 {
@@ -3312,24 +3313,22 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                     switch (selectedIvs[i])
                     {
                         case STAT_HP:
-                            SetBoxMonData(boxMon, MON_DATA_HP_IV, MAX_PER_STAT_IVS);
-                            //iv = GetBoxMonData(&daycare->mons[whichParents[i]].mon, MON_DATA_HP_IV);
-                            //SetMonData(egg, MON_DATA_HP_IV, &iv);
+                            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
                             break;
                         case STAT_ATK:
-                            SetBoxMonData(boxMon, MON_DATA_ATK_IV, MAX_PER_STAT_IVS);
+                            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
                             break;
                         case STAT_DEF:
-                            SetBoxMonData(boxMon, MON_DATA_DEF_IV, MAX_PER_STAT_IVS);
+                            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
                             break;
                         case STAT_SPEED:
-                            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, MAX_PER_STAT_IVS);
+                            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
                             break;
                         case STAT_SPATK:
-                            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, MAX_PER_STAT_IVS);
+                            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
                             break;
                         case STAT_SPDEF:
-                            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, MAX_PER_STAT_IVS);
+                            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
                             break;
                     }
                 }
