@@ -88,11 +88,14 @@ static const struct CombinedMove sCombinedMoves[2] =
     {0xFFFF, 0xFFFF, 0xFFFF}
 };
 
+// NOTE: The order of the elements in the 3 arrays below is irrelevant.
+// To reorder the pokedex, see the values in include/constants/pokedex.h.
+
 #define SPECIES_TO_HOENN(name)      [SPECIES_##name - 1] = HOENN_DEX_##name
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 
- // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
+// Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
 static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_HOENN(BULBASAUR),
@@ -508,7 +511,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(CHIMECHO),
 };
 
- // Assigns all species to the National Dex Index (Summary No. for National Dex)
+// Assigns all species to the National Dex Index (Summary No. for National Dex)
 static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_NATIONAL(BULBASAUR),
@@ -924,7 +927,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(CHIMECHO),
 };
 
- // Assigns all Hoenn Dex Indexes to a National Dex Index
+// Assigns all Hoenn Dex Indexes to a National Dex Index
 static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
@@ -1342,10 +1345,10 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
 {
-    {16, 7, INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
-    {40, 8, INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
-    {22, 25, INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
-    {34, 26, INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
+    {.x = 16, .y = 7, .image = INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
+    {.x = 40, .y = 8, .image = INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
+    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
+    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
 };
 
 #include "data/pokemon/item_effects.h"
@@ -5650,42 +5653,81 @@ u16 SpeciesToCryId(u16 species)
     return gSpeciesIdToCryId[species - (SPECIES_TREECKO - 1)];
 }
 
-#define DRAW_SPINDA_SPOTS                                                       \
+// Spots can be drawn on Spinda's color indexes 1, 2, or 3
+#define FIRST_SPOT_COLOR 1
+#define LAST_SPOT_COLOR  3
+
+// To draw a spot pixel, add 4 to the color index
+#define SPOT_COLOR_ADJUSTMENT 4
+/*
+    The macro below handles drawing the randomly-placed spots on Spinda's front sprite.
+    Spinda has 4 spots, each with an entry in gSpindaSpotGraphics. Each entry contains
+    a base x and y coordinate for the spot and a 16x16 binary image. Each bit in the image
+    determines whether that pixel should be considered part of the spot.
+
+    The position of each spot is randomized using the Spinda's personality. The entire 32 bit
+    personality value is used, 4 bits for each coordinate of the 4 spots. If the personality
+    value is 0x87654321, then 0x1 will be used for the 1st spot's x coord, 0x2 will be used for
+    the 1st spot's y coord, 0x3 will be used for the 2nd spot's x coord, and so on. Each
+    coordinate is calculated as (baseCoord + (given 4 bits of personality) - 8). In effect this
+    means each spot can start at any position -8 to +7 off of its base coordinates (256 possibilities).
+
+    The macro then loops over the 16x16 spot image. For each bit in the spot's binary image, if
+    the bit is set then it's part of the spot; try to draw it. A pixel is drawn on Spinda if the
+    pixel on Spinda satisfies the following formula: ((u8)(colorIndex - 1) <= 2). The -1 excludes
+    transparent pixels, as these are index 0. Therefore only colors 1, 2, or 3 on Spinda will
+    allow a spot to be drawn. These color indexes are Spinda's light brown body colors. To create
+    the spot it adds 4 to the color index, so Spinda's spots will be colors 5, 6, and 7.
+
+    The above is done two different ways in the macro: one with << 4, and one without. This
+    is because Spinda's sprite is a 4 bits per pixel image, but the pointer to Spinda's pixels
+    (destPixels) is an 8 bit pointer, so it addresses two pixels. Shifting by 4 accesses the 2nd
+    of these pixels, so this is done every other time.
+*/
+#define DRAW_SPINDA_SPOTS(personality, dest)                                    \
 {                                                                               \
-    int i;                                                                      \
-    for (i = 0; i < 4; i++)                                                     \
+    s32 i;                                                                      \
+    for (i = 0; i < (s32)ARRAY_COUNT(gSpindaSpotGraphics); i++)                 \
     {                                                                           \
-        int j;                                                                  \
+        s32 row;                                                                \
         u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);           \
         u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);    \
                                                                                 \
-        for (j = 0; j < 16; j++)                                                \
+        for (row = 0; row < SPINDA_SPOT_HEIGHT; row++)                          \
         {                                                                       \
-            int k;                                                              \
-            s32 row = gSpindaSpotGraphics[i].image[j];                          \
+            s32 column;                                                         \
+            s32 spotPixelRow = gSpindaSpotGraphics[i].image[row];               \
                                                                                 \
-            for (k = x; k < x + 16; k++)                                        \
+            for (column = x; column < x + SPINDA_SPOT_WIDTH; column++)          \
             {                                                                   \
-                u8 *val = dest + ((k / 8) * 32) +                               \
-                                 ((k % 8) / 2) +                                \
-                                 ((y >> 3) << 8) +                              \
-                                 ((y & 7) << 2);                                \
+                /* Get target pixels on Spinda's sprite */                      \
+                u8 *destPixels = dest + ((column / 8) * TILE_SIZE_4BPP) +       \
+                                        ((column % 8) / 2) +                    \
+                                             ((y / 8) * TILE_SIZE_4BPP * 8) +   \
+                                             ((y % 8) * 4);                     \
                                                                                 \
-                if (row & 1)                                                    \
+                /* Is this pixel in the 16x16 spot image part of the spot? */   \
+                if (spotPixelRow & 1)                                           \
                 {                                                               \
-                    if (k & 1)                                                  \
+                    /* destPixels addressess two pixels, alternate which */     \
+                    /* of the two pixels is being considered for drawing */     \
+                    if (column & 1)                                             \
                     {                                                           \
-                        if ((u8)((*val & 0xF0) - 0x10) <= 0x20)                 \
-                            *val += 0x40;                                       \
+                        /* Draw spot pixel if this is Spinda's body color */    \
+                        if ((u8)((*destPixels & 0xF0) - (FIRST_SPOT_COLOR << 4))\
+                                 <= ((LAST_SPOT_COLOR - FIRST_SPOT_COLOR) << 4))\
+                            *destPixels += (SPOT_COLOR_ADJUSTMENT << 4);        \
                     }                                                           \
                     else                                                        \
                     {                                                           \
-                        if ((u8)((*val & 0xF) - 0x01) <= 0x02)                  \
-                            *val += 0x04;                                       \
+                        /* Draw spot pixel if this is Spinda's body color */    \
+                        if ((u8)((*destPixels & 0xF) - FIRST_SPOT_COLOR)        \
+                                 <= (LAST_SPOT_COLOR - FIRST_SPOT_COLOR))       \
+                            *destPixels += SPOT_COLOR_ADJUSTMENT;               \
                     }                                                           \
                 }                                                               \
                                                                                 \
-                row >>= 1;                                                      \
+                spotPixelRow >>= 1;                                             \
             }                                                                   \
                                                                                 \
             y++;                                                                \
@@ -5702,13 +5744,13 @@ static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT]
         && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_RIGHT])
-        DRAW_SPINDA_SPOTS;
+        DRAW_SPINDA_SPOTS(personality, dest);
 }
 
 void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, bool8 isFrontPic)
 {
     if (species == SPECIES_SPINDA && isFrontPic)
-        DRAW_SPINDA_SPOTS;
+        DRAW_SPINDA_SPOTS(personality, dest);
 }
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
@@ -5768,7 +5810,7 @@ s32 GetBattlerMultiplayerId(u16 a1)
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
     if (InBattlePyramid())
-        return GetBattlePyramindTrainerEncounterMusicId(trainerOpponentId);
+        return GetTrainerEncounterMusicIdInBattlePyramid(trainerOpponentId);
     else if (InTrainerHillChallenge())
         return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
     else

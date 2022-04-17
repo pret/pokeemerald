@@ -603,10 +603,13 @@ extern const u8 gText_Stats_eggGroup_UNDISCOVERED[];
 extern const u8 gText_Dex_SEEN[];
 extern const u8 gText_Dex_OWN[];
 
+extern const u8 gText_EVO_Buttons[];
+extern const u8 gText_EVO_Buttons_Decapped[];
 extern const u8 gText_EVO_Buttons_PE[];
 extern const u8 gText_EVO_Buttons_Decapped_PE[];
 extern const u8 gText_EVO_Name[];
 extern const u8 gText_EVO_PreEvo[];
+extern const u8 gText_EVO_PreEvo_PE_Mega[];
 extern const u8 gText_EVO_FRIENDSHIP[];
 extern const u8 gText_EVO_FRIENDSHIP_DAY[];
 extern const u8 gText_EVO_FRIENDSHIP_NIGHT[];
@@ -644,6 +647,8 @@ extern const u8 gText_EVO_NONE[];
 
 extern const u8 gText_FORMS_Buttons_PE[];
 extern const u8 gText_FORMS_Buttons_Decapped_PE[];
+extern const u8 gText_FORMS_Buttons_Submenu_PE[];
+extern const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[];
 extern const u8 gText_FORMS_NONE[];
 
 

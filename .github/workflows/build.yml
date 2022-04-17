@@ -52,14 +52,6 @@ jobs:
           COMPARE: 0
         run: make -j${nproc} all
 
-      - name: Webhook
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
-        env:
-          CALCROM_DISCORD_WEBHOOK_USERNAME: OK
-          CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
-          CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
-        run: sh .github/calcrom/webhook.sh pokeemerald
-
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}
         run: |

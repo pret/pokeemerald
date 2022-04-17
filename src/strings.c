@@ -1890,10 +1890,13 @@ const u8 gText_Stats_eggGroup_UNDISCOVERED[]= _("---");
 const u8 gText_Dex_SEEN[]   = _("SEEN");
 const u8 gText_Dex_OWN[]    = _("OWN");
 
-const u8 gText_EVO_Buttons_PE[]                     = _("{A_BUTTON}FORMS");
-const u8 gText_EVO_Buttons_Decapped_PE[]            = _("{A_BUTTON}Forms");
+const u8 gText_EVO_Buttons[]                        = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK");
+const u8 gText_EVO_Buttons_Decapped[]               = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check");
+const u8 gText_EVO_Buttons_PE[]                     = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK  {START_BUTTON}FORMs");
+const u8 gText_EVO_Buttons_Decapped_PE[]            = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check  {START_BUTTON}Froms");
 const u8 gText_EVO_Name[]                           = _("{STR_VAR_3}:");
 const u8 gText_EVO_PreEvo[]                         = _("{STR_VAR_1} evolves from {STR_VAR_2}");
+const u8 gText_EVO_PreEvo_PE_Mega[]                 = _("{STR_VAR_1} mega evolves with {STR_VAR_2}");
 const u8 gText_EVO_FRIENDSHIP[]                     = _("LvlUp, high friendship");
 const u8 gText_EVO_FRIENDSHIP_DAY[]                 = _("LvlUp, high friendship, day");
 const u8 gText_EVO_FRIENDSHIP_NIGHT[]               = _("Lvlup, high friendship, night");
@@ -1929,6 +1932,8 @@ const u8 gText_EVO_SPECIFIC_MAP[]                   = _("LvlUp on {STR_VAR_2}");
 const u8 gText_EVO_UNKNOWN[]                        = _("Method unknown");
 const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} has no evolution.");
 
-const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}EVOLUTIONS");
-const u8 gText_FORMS_Buttons_Decapped_PE[]          = _("{A_BUTTON}Evolutions");
+const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}FORM MODE  {START_BUTTON}EVOs");
+const u8 gText_FORMS_Buttons_Decapped_PE[]          = _("{START_BUTTON}Evos");
+const u8 gText_FORMS_Buttons_Submenu_PE[]           = _("{DPAD_NONE}FORMs {A_BUTTON}CHECK {START_BUTTON}EVOs");
+const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[]  = _("{START_BUTTON}Evos");
 const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} has no alternate forms.");

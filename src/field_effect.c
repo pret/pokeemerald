@@ -243,32 +243,33 @@ extern u8 *gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
 static const u32 sNewGameBirch_Gfx[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
-static const u32 sUnusedBirchBeauty[] = INCBIN_U32("graphics/unused/intro_birch_beauty.4bpp");
+static const u32 sUnusedBirchBeauty[] = INCBIN_U32("graphics/birch_speech/unused_beauty.4bpp");
 static const u16 sNewGameBirch_Pal[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
-static const u32 sPokeballGlow_Gfx[] = INCBIN_U32("graphics/misc/pokeball_glow.4bpp");
+
+static const u32 sPokeballGlow_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokeball_glow.4bpp");
 static const u16 sPokeballGlow_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/pokeball_glow.gbapal");
-static const u32 sPokecenterMonitor0_Gfx[] = INCBIN_U32("graphics/misc/pokecenter_monitor/0.4bpp");
-static const u32 sPokecenterMonitor1_Gfx[] = INCBIN_U32("graphics/misc/pokecenter_monitor/1.4bpp");
-static const u32 sHofMonitorBig_Gfx[] = INCBIN_U32("graphics/misc/hof_monitor_big.4bpp");
-static const u8 sHofMonitorSmall_Gfx[] = INCBIN_U8("graphics/misc/hof_monitor_small.4bpp");
+static const u32 sPokecenterMonitor0_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokecenter_monitor/0.4bpp");
+static const u32 sPokecenterMonitor1_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokecenter_monitor/1.4bpp");
+static const u32 sHofMonitorBig_Gfx[] = INCBIN_U32("graphics/field_effects/pics/hof_monitor_big.4bpp");
+static const u8 sHofMonitorSmall_Gfx[] = INCBIN_U8("graphics/field_effects/pics/hof_monitor_small.4bpp");
 static const u16 sHofMonitor_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/hof_monitor.gbapal");
 
 // Graphics for the lights streaking past your Pokemon when it uses a field move.
-static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCBIN_U32("graphics/misc/field_move_streaks.4bpp");
-static const u16 sFieldMoveStreaksOutdoors_Pal[16] = INCBIN_U16("graphics/misc/field_move_streaks.gbapal");
-static const u16 sFieldMoveStreaksOutdoors_Tilemap[320] = INCBIN_U16("graphics/misc/field_move_streaks_map.bin");
+static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCBIN_U32("graphics/field_effects/pics/field_move_streaks.4bpp");
+static const u16 sFieldMoveStreaksOutdoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.gbapal");
+static const u16 sFieldMoveStreaksOutdoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.bin");
 
 // The following light streaks effect is used when the map is indoors
-static const u32 sFieldMoveStreaksIndoors_Gfx[] = INCBIN_U32("graphics/misc/darkness_field_move_streaks.4bpp");
-static const u16 sFieldMoveStreaksIndoors_Pal[16] = INCBIN_U16("graphics/misc/darkness_field_move_streaks.gbapal");
-static const u16 sFieldMoveStreaksIndoors_Tilemap[320] = INCBIN_U16("graphics/misc/darkness_field_move_streaks_map.bin");
+static const u32 sFieldMoveStreaksIndoors_Gfx[] = INCBIN_U32("graphics/field_effects/pics/field_move_streaks_indoors.4bpp");
+static const u16 sFieldMoveStreaksIndoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks_indoors.gbapal");
+static const u16 sFieldMoveStreaksIndoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks_indoors.bin");
 
-static const u16 sSpotlight_Pal[16] = INCBIN_U16("graphics/misc/spotlight.gbapal");
-static const u8 sSpotlight_Gfx[] = INCBIN_U8("graphics/misc/spotlight.4bpp");
-static const u8 sRockFragment_TopLeft[] = INCBIN_U8("graphics/misc/deoxys_rock_fragment_top_left.4bpp");
-static const u8 sRockFragment_TopRight[] = INCBIN_U8("graphics/misc/deoxys_rock_fragment_top_right.4bpp");
-static const u8 sRockFragment_BottomLeft[] = INCBIN_U8("graphics/misc/deoxys_rock_fragment_bottom_left.4bpp");
-static const u8 sRockFragment_BottomRight[] = INCBIN_U8("graphics/misc/deoxys_rock_fragment_bottom_right.4bpp");
+static const u16 sSpotlight_Pal[16] = INCBIN_U16("graphics/field_effects/pics/spotlight.gbapal");
+static const u8 sSpotlight_Gfx[] = INCBIN_U8("graphics/field_effects/pics/spotlight.4bpp");
+static const u8 sRockFragment_TopLeft[] = INCBIN_U8("graphics/field_effects/pics/deoxys_rock_fragment_top_left.4bpp");
+static const u8 sRockFragment_TopRight[] = INCBIN_U8("graphics/field_effects/pics/deoxys_rock_fragment_top_right.4bpp");
+static const u8 sRockFragment_BottomLeft[] = INCBIN_U8("graphics/field_effects/pics/deoxys_rock_fragment_bottom_left.4bpp");
+static const u8 sRockFragment_BottomRight[] = INCBIN_U8("graphics/field_effects/pics/deoxys_rock_fragment_bottom_right.4bpp");
 
 bool8 (*const gFieldEffectScriptFuncs[])(u8 **, u32 *) =
 {
@@ -2619,7 +2620,7 @@ static void FieldMoveShowMonOutdoorsEffect_LoadGfx(struct Task *task)
     u16 delta = ((REG_BG0CNT >> 8) << 11);
     CpuCopy16(sFieldMoveStreaksOutdoors_Gfx, (void *)(VRAM + offset), 0x200);
     CpuFill32(0, (void *)(VRAM + delta), 0x800);
-    LoadPalette(sFieldMoveStreaksOutdoors_Pal, 0xf0, 0x20);
+    LoadPalette(sFieldMoveStreaksOutdoors_Pal, 0xf0, sizeof(sFieldMoveStreaksOutdoors_Pal));
     LoadFieldMoveOutdoorStreaksTilemap(delta);
     task->tState++;
 }
@@ -2782,7 +2783,7 @@ static void FieldMoveShowMonIndoorsEffect_LoadGfx(struct Task *task)
     task->data[12] = delta;
     CpuCopy16(sFieldMoveStreaksIndoors_Gfx, (void *)(VRAM + offset), 0x80);
     CpuFill32(0, (void *)(VRAM + delta), 0x800);
-    LoadPalette(sFieldMoveStreaksIndoors_Pal, 0xf0, 0x20);
+    LoadPalette(sFieldMoveStreaksIndoors_Pal, 0xf0, sizeof(sFieldMoveStreaksIndoors_Pal));
     task->tState++;
 }
 
