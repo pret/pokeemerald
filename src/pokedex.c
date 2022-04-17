@@ -7717,6 +7717,11 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     u16 preEvolutionTwo = 0;
     u8 numPreEvolutions = 0;
 
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
+    if (gSaveBlock1Ptr->tx_Random_Evolutions || gSaveBlock1Ptr->tx_Random_EvolutionMethods)
+        return 0;
+    #endif
+
     //Calculate previous evolution
     for (i = 0; i < NUM_SPECIES; i++)
     {
@@ -7792,13 +7797,11 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     if (species == SPECIES_EEVEE)
         isEevee = TRUE;
 
-    #ifdef TX_DIFFICULTY_CHALLENGES_USED
-        if (gSaveBlock1Ptr->txRandEvolutionMethodes) //tx_difficulty_challenges
-        {
-            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->txRandEvolutions, !gSaveBlock1Ptr->txRandChaos);
-            if (species == SPECIES_NONE)
-                return SPECIES_NONE;
-        }
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
+    if (EvolutionBlockedByEvoLimit(species)) //No Evos already previously checked
+        species = SPECIES_NONE;
+    else if (gSaveBlock1Ptr->tx_Random_EvolutionMethods) 
+        species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_EVO_METH);
     #endif
 
     //Calculate number of possible direct evolutions (e.g. Eevee has 5 but torchic has 1)
@@ -7832,7 +7835,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
         #ifdef TX_DIFFICULTY_CHALLENGES_USED
             if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
-                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->txRandChaos);
+                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_T_EVO);
         #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
         HandleTargetSpeciesPrint(taskId, targetSpecies, previousTargetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i, isEevee); //evolution mon name
