@@ -457,6 +457,7 @@ To build **pokeemerald.elf** with enhanced debug info:
 ```bash
 make DINFO=1
 ```
+Note that this is only necessary for the `modern` target; the regular target has debug info enabled by default.
 
 ## devkitARM's C compiler
 
