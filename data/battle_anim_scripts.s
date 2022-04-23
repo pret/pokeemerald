@@ -14078,8 +14078,8 @@ Move_SHELL_SIDE_ARM_SPECIAL: @ Modified Snipe Shot, placeholder
 	loadspritegfx ANIM_TAG_LEER
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT_2, 0, 6, 6, RGB_MAGENTA
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_LEER, 0, 6, 6, RGB_MAGENTA
-	launchtemplate gLeerSpriteTemplate 0x82, 2 0x18 -12
 	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
+	launchtemplate gLeerSpriteTemplate 0x82, 2 0x18 -12
 	waitforvisualfinish
 	delay 0x20
 	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
