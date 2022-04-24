@@ -34,6 +34,7 @@
 #include "constants/items.h"
 #include "constants/map_types.h"
 #include "constants/mauville_old_man.h"
+#include "constants/rgb.h"
 #include "constants/species.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
@@ -1484,7 +1485,13 @@ TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTemplate,
       shiny = gObjectEvents[objectEventId].extra.mon.shiny;
       FollowerSetGraphics(&gObjectEvents[objectEventId], species, form, shiny);
     }
-
+  // Set runtime species based on VAR_TEMP_4, if template has a dynamic graphics ID
+  } else if (objectEventTemplate->graphicsId >= OBJ_EVENT_GFX_VARS && VarGetObjectEventGraphicsId(objectEventTemplate->graphicsId - OBJ_EVENT_GFX_VARS) == OBJ_EVENT_GFX_OW_MON) {
+      gObjectEvents[objectEventId].extra.asU16 = VarGet(VAR_TEMP_4);
+      FollowerSetGraphics(&gObjectEvents[objectEventId],
+          gObjectEvents[objectEventId].extra.mon.species,
+          gObjectEvents[objectEventId].extra.mon.form,
+          gObjectEvents[objectEventId].extra.mon.form);
   }
 
   return objectEventId;
@@ -6336,7 +6343,7 @@ bool8 MovementAction_WalkInPlaceSlowDown_Step0(struct ObjectEvent *objectEvent, 
 static u8 LoadWhiteFlashPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
   u16 paletteData[16];
   struct SpritePalette dynamicPalette = {.tag = OBJ_EVENT_PAL_TAG_NONE-1, .data = paletteData};  // TODO: Use a proper palette tag here
-  CpuFill16(0xFFFF, &paletteData[1], 30);
+  CpuFill16(RGB_WHITE, paletteData, 32);
   return UpdateSpritePalette(&dynamicPalette, sprite);
 }
 
