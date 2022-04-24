@@ -26,6 +26,7 @@
 #include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/opponents.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
@@ -3878,7 +3879,9 @@ struct TrainerSlide
 
 static const struct TrainerSlide sTrainerSlides[] =
 {
-    {0x291, sText_AarghAlmostHadIt, sText_BoxIsFull, sText_123Poof},
+    // Put any trainer slide-in messages inside this array.
+    // Example:
+    // {TRAINER_WALLY_VR_2, sText_AarghAlmostHadIt, sText_BoxIsFull, sText_123Poof},
 };
 
 static u32 GetEnemyMonCount(bool32 onlyAlive)
