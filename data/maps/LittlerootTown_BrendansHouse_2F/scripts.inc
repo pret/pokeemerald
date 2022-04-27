@@ -22,7 +22,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos::
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, LittlerootTown_BrendansHouse_2F_EventScript_Ret
 	@ Odd that the MaysHouse equivalent was used below instead
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2 LittlerootTown_MaysHouse_2F_EventScript_Ret
+	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_Ret
 	setobjectxyperm LOCALID_RIVAL, 0, 2
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
 	return
@@ -243,7 +243,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_PC::
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC::
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, PC_LOCATION_BRENDANS_HOUSE
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
@@ -253,7 +253,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC::
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC::
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, PC_LOCATION_BRENDANS_HOUSE
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall

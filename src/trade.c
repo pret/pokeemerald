@@ -44,7 +44,6 @@
 #include "util.h"
 #include "window.h"
 #include "constants/contest.h"
-#include "constants/easy_chat.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
@@ -1391,7 +1390,7 @@ static void TradeMenuProcessInput(void)
             DrawTextBorderOuter(1, 1, 14);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
             PrintMenuTable(1, ARRAY_COUNT(sSelectTradeMonActions), sSelectTradeMonActions);
-            InitMenuInUpperLeftCornerNormal(1, 2, 0);
+            InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sSelectTradeMonActions), 0);
             PutWindowTilemap(1);
             CopyWindowToVram(1, COPYWIN_FULL);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_SELECTED_MON;
@@ -3798,7 +3797,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case TS_STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_UpdateInGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
@@ -4298,7 +4297,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case TS_STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_UpdateInGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
@@ -4343,7 +4342,7 @@ static void CB2_TryLinkTradeEvolution(void)
         break;
     case 4:
         gCB2_AfterEvolution = CB2_SaveAndEndTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         else if (IsWirelessTrade())
@@ -4524,7 +4523,8 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     CalculateMonStats(&gEnemyParty[0]);
 }
 
-static void SetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trade) {
+static void SetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trade)
+{
     s32 i;
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)

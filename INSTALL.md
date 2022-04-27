@@ -125,51 +125,18 @@ Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or conti
 
 Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
 
-1. Open msys2 at C:\devkitPro\msys2\msys2_shell.bat.
+1. Open msys2 at C:\devkitPro\msys2\mingw64.exe or run `C:\devkitPro\msys2\msys2_shell.bat -mingw64`.
 
 2. Certain packages are required to build pokeemerald. Install these by running the following command:
 
     ```bash
-    pacman -S make gcc zlib-devel git
+    pacman -S make zlib-devel git mingw-w64-x86_64-gcc mingw-w64-x86_64-libpng
     ```
     <details>
         <summary><i>Note...</i></summary>
 
     >   This command will ask for confirmation, just enter the yes action when prompted.
     </details>
-
-3. Download [libpng](https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/libpng-1.6.37.tar.xz/download).
-
-4. Change directory to where libpng was downloaded. By default, msys2 will start in the current user's profile folder, located at **C:\Users\\&#8288;_\<user>_**, where *\<user>* is your Windows username. In most cases, libpng should be saved within a subfolder of the profile folder. For example, if libpng was saved to **C:\Users\\_\<user>_\Downloads** (the Downloads location for most users), enter this command:
-
-    ```bash
-    cd Downloads
-    ```
-
-    <details>
-        <summary><i>Notes...</i></summary>
-
-    >   Note 1: While not shown, msys uses forward slashes `/` instead of backwards slashes `\` as the directory separator.  
-    >   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Downloads/My Downloads"`.  
-    >   Note 3: Windows path names are case-insensitive so adhering to capitalization isn’t needed.   
-    >   Note 4: If libpng was saved elsewhere, you will need to specify the full path to where libpng was downloaded, e.g. `cd c:/devkitpro/msys2` if it was saved there.
-    </details>
-
-5. Run the following commands to uncompress and install libpng.
-
-    ```bash
-    tar xf libpng-1.6.37.tar.xz
-    cd libpng-1.6.37
-    ./configure --prefix=/usr
-    make check
-    make install
-    ```
-
-6. Then finally, run the following command to change back to the user profile folder.
-
-    ```bash
-    cd
-    ```
 
 ### Choosing where to store pokeemerald (msys2)
 At this point, you can choose a folder to store pokeemerald into. If you're okay with storing pokeemerald in the user profile folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald is stored when changing directory to the pokeemerald folder.
@@ -337,6 +304,20 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
 >   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
+</details>
+    
+### Arch Linux
+Run this command as root to install the necessary packages:
+```bash
+pacman -S base-devel arm-none-eabi-binutils git libpng
+```
+Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
+<details>
+    <summary><i>Note for legacy repos...</i></summary>
+
+>   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
+>   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
+>   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
 </details>
 
 ### Other distributions
@@ -546,6 +527,24 @@ devkitARM is now installed.
     > Note: `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
 
 4. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
+
+    ```bash
+    source /etc/profile.d/devkit-env.sh
+    ```
+
+devkitARM is now installed.
+
+## Installing devkitARM on Arch Linux
+        
+1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
+2. Install `gba-dev`: run the following command as root.
+
+    ```console
+    pacman -S gba-dev
+    ```
+    This will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+3. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
 
     ```bash
     source /etc/profile.d/devkit-env.sh

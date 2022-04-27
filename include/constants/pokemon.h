@@ -79,11 +79,13 @@
 #define STAT_SPEED   3
 #define STAT_SPATK   4
 #define STAT_SPDEF   5
+#define NUM_STATS    6
+
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_NATURE_STATS NUM_STATS - 1 // excludes HP
-#define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
+#define NUM_NATURE_STATS (NUM_STATS - 1) // excludes HP
+#define NUM_BATTLE_STATS (NUM_STATS + 2) // includes Accuracy and Evasion
 
 #define MIN_STAT_STAGE     0
 #define DEFAULT_STAT_STAGE 6
@@ -384,5 +386,15 @@
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
+
+// Species Flags
+#define FLAG_LEGENDARY          (1 << 0)
+#define FLAG_MYTHICAL           (1 << 1)
+#define FLAG_ULTRA_BEAST        (1 << 2)
+#define FLAG_ALOLAN_FORM        (1 << 3)
+#define FLAG_GALARIAN_FORM      (1 << 4)
+#define FLAG_GENDER_DIFFERENCE  (1 << 5)
+
+#define LEGENDARY_PERFECT_IV_COUNT 3
 
 #endif // GUARD_CONSTANTS_POKEMON_H

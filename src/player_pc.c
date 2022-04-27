@@ -511,7 +511,7 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
     tWindowId = AddWindow(&windowTemplate);
     SetStandardWindowBorderStyle(tWindowId, 0);
     PrintMenuTable(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), sItemStorage_MenuActions);
-    InitMenuInUpperLeftCornerNormal(tWindowId, 4, var);
+    InitMenuInUpperLeftCornerNormal(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), var);
     ScheduleBgCopyTilemapToVram(0);
     ItemStorageMenuPrint(sItemStorage_OptionDescriptions[var]);
 }
@@ -753,7 +753,7 @@ static void Mailbox_PrintMailOptions(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_OPTIONS);
     PrintMenuTable(windowId, ARRAY_COUNT(gMailboxMailOptions), gMailboxMailOptions);
-    InitMenuInUpperLeftCornerNormal(windowId, 4, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, ARRAY_COUNT(gMailboxMailOptions), 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Mailbox_MailOptionsProcessInput;
 }

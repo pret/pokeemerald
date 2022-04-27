@@ -5,31 +5,31 @@
 extern const u32 gMessageBox_Gfx[];
 extern const u16 gMessageBox_Pal[];
 
-// interface pokeballs
-extern const u32 gInterfaceGfx_PokeBall[];
-extern const u32 gInterfacePal_PokeBall[];
-extern const u32 gInterfaceGfx_GreatBall[];
-extern const u32 gInterfacePal_GreatBall[];
-extern const u32 gInterfaceGfx_SafariBall[];
-extern const u32 gInterfacePal_SafariBall[];
-extern const u32 gInterfaceGfx_UltraBall[];
-extern const u32 gInterfacePal_UltraBall[];
-extern const u32 gInterfaceGfx_MasterBall[];
-extern const u32 gInterfacePal_MasterBall[];
-extern const u32 gInterfaceGfx_NetBall[];
-extern const u32 gInterfacePal_NetBall[];
-extern const u32 gInterfaceGfx_DiveBall[];
-extern const u32 gInterfacePal_DiveBall[];
-extern const u32 gInterfaceGfx_NestBall[];
-extern const u32 gInterfacePal_NestBall[];
-extern const u32 gInterfaceGfx_RepeatBall[];
-extern const u32 gInterfacePal_RepeatBall[];
-extern const u32 gInterfaceGfx_TimerBall[];
-extern const u32 gInterfacePal_TimerBall[];
-extern const u32 gInterfaceGfx_LuxuryBall[];
-extern const u32 gInterfacePal_LuxuryBall[];
-extern const u32 gInterfaceGfx_PremierBall[];
-extern const u32 gInterfacePal_PremierBall[];
+// pokeballs
+extern const u32 gBallGfx_Poke[];
+extern const u32 gBallPal_Poke[];
+extern const u32 gBallGfx_Great[];
+extern const u32 gBallPal_Great[];
+extern const u32 gBallGfx_Safari[];
+extern const u32 gBallPal_Safari[];
+extern const u32 gBallGfx_Ultra[];
+extern const u32 gBallPal_Ultra[];
+extern const u32 gBallGfx_Master[];
+extern const u32 gBallPal_Master[];
+extern const u32 gBallGfx_Net[];
+extern const u32 gBallPal_Net[];
+extern const u32 gBallGfx_Dive[];
+extern const u32 gBallPal_Dive[];
+extern const u32 gBallGfx_Nest[];
+extern const u32 gBallPal_Nest[];
+extern const u32 gBallGfx_Repeat[];
+extern const u32 gBallPal_Repeat[];
+extern const u32 gBallGfx_Timer[];
+extern const u32 gBallPal_Timer[];
+extern const u32 gBallGfx_Luxury[];
+extern const u32 gBallPal_Luxury[];
+extern const u32 gBallGfx_Premier[];
+extern const u32 gBallPal_Premier[];
 extern const u32 gOpenPokeballGfx[];
 
 // pokemon gfx
@@ -5826,8 +5826,8 @@ extern const u8 gMonIcon_ZacianCrownedSword[];
 extern const u8 gMonIcon_ZamazentaCrownedShield[];
 extern const u8 gMonIcon_EternatusEternamax[];
 extern const u8 gMonIcon_ZarudeDada[];
-//extern const u8 gMonIcon_CalyrexIceRider[];
-//extern const u8 gMonIcon_CalyrexShadowRider[];
+extern const u8 gMonIcon_CalyrexIceRider[];
+extern const u8 gMonIcon_CalyrexShadowRider[];
 extern const u8 gMonIcon_Egg[];
 
 extern const u8 gMonFootprint_QuestionMark[];
@@ -7897,16 +7897,16 @@ extern const u32 gPokenavRibbonsSummaryBg_Tilemap[];
 extern const u32 gSummaryScreen_Gfx[];
 extern const u32 gSummaryScreen_Pal[];
 extern const u32 gSummaryPage_Info_Tilemap[];
-extern const u32 gSummaryPage_InfoCopy_Tilemap[];
+extern const u32 gSummaryPage_InfoEgg_Tilemap[];
 extern const u32 gSummaryPage_Skills_Tilemap[];
 extern const u32 gSummaryPage_BattleMoves_Tilemap[];
 extern const u32 gSummaryPage_ContestMoves_Tilemap[];
 extern const u16 gPPTextPalette[];
-extern const u16 gSummaryScreenWindow_Tilemap[];
 extern const u32 gMoveTypes_Pal[];
 
-extern const u16 gSummaryScreenPowAcc_Tilemap[];
-extern const u16 gSummaryScreenAppealJam_Tilemap[];
+extern const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[];
+extern const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[];
+extern const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[];
 
 extern const u32 gMoveTypes_Gfx[];
 extern const u32 gSummaryMoveSelect_Gfx[];
@@ -7914,10 +7914,10 @@ extern const u32 gSummaryMoveSelect_Pal[];
 extern const u32 gStatusGfx_Icons[];
 extern const u32 gStatusPal_Icons[];
 
-extern const u32 gBuyMenuFrame_Gfx[];
-extern const u32 gBuyMenuFrame_Tilemap[];
-extern const u32 gMenuMoneyGfx[];
-extern const u32 gMenuMoneyPal[];
+extern const u32 gShopMenu_Gfx[];
+extern const u32 gShopMenu_Tilemap[];
+extern const u32 gShopMenu_Pal[];
+extern const u32 gShopMenuMoney_Gfx[];
 
 extern const u32 gBattleInterface_BallStatusBarGfx[];
 extern const u8 gBattleInterface_BallDisplayGfx[];
@@ -7956,8 +7956,8 @@ extern const u32 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 
-extern const u32 gBagSwapLineGfx[];
-extern const u32 gBagSwapLinePal[];
+extern const u32 gSwapLineGfx[];
+extern const u32 gSwapLinePal[];
 
 extern const u32 gBattlePyramidBag_Gfx[];
 extern const u32 gBattlePyramidBag_Pal[];
@@ -7983,11 +7983,11 @@ extern const u32 gDomeTourneyInfoCardBg_Tilemap[];
 extern const u32 gDomeTourneyTree_Pal[];
 extern const u32 gDomeTourneyTreeButtons_Pal[];
 extern const u32 gDomeTourneyMatchCardBg_Pal[];
-extern const u32 gDomeTourneyBg_Gfx[];
+extern const u32 gDomeTourneyTree_Gfx[];
 extern const u32 gDomeTourneyLine_Gfx[];
 extern const u32 gDomeTourneyLineDown_Tilemap[];
 extern const u32 gDomeTourneyLineUp_Tilemap[];
-extern const u32 gDomeTourneyLineMask_Tilemap[];
+extern const u32 gDomeTourneyTree_Tilemap[];
 extern const u32 gDomeTourneyTreeButtons_Gfx[];
 extern const u16 gTilesetAnims_BattleDomePals0_0[];
 extern const u16 gTilesetAnims_BattleDomePals0_1[];
@@ -8864,7 +8864,7 @@ extern const u16 gUsePokeblockCondition_Pal[];
 // Berry Crush
 extern const u32 gBerryCrush_Crusher_Gfx[];
 extern const u16 gBerryCrush_Crusher_Pal[];
-extern const u32 gBerryCrush_Crusher_Tilemap[];
+extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
 // Pokenav
 extern const u32 gPokenavMessageBox_Gfx[];

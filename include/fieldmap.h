@@ -7,7 +7,7 @@
 #define NUM_METATILES_TOTAL 1024
 #define NUM_PALS_IN_PRIMARY 6
 #define NUM_PALS_TOTAL 13
-#define MAX_MAP_DATA_SIZE 0x2800
+#define MAX_MAP_DATA_SIZE 10240
 
 // Map coordinates are offset by 7 when using the map
 // buffer because it needs to load sufficient border
@@ -29,10 +29,10 @@ void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(int, int);
 int GetMapBorderIdAt(int x, int y);
 bool32 CanCameraMoveInDirection(int direction);
-u16 GetBehaviorByMetatileId(u16 metatileId);
+u16 GetMetatileAttributesById(u16 metatileId);
 void GetCameraFocusCoords(u16 *x, u16 *y);
 u8 MapGridGetMetatileLayerTypeAt(int x, int y);
-u8 MapGridGetZCoordAt(int x, int y);
+u8 MapGridGetElevationAt(int x, int y);
 bool8 CameraMove(int deltaX, int deltaY);
 void SaveMapView(void);
 void SetCameraFocusCoords(u16 x, u16 y);
