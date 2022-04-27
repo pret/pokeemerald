@@ -566,7 +566,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     GET_MOVE_TYPE(move, moveType);
     
     // check non-user target
-    if (moveTarget & MOVE_TARGET_USER)
+    if (!(moveTarget & MOVE_TARGET_USER))
     {
         // handle negative checks on non-user target
         // check powder moves
