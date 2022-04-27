@@ -128,4 +128,9 @@
 #define FLDEFF_PAL_TAG_HOF_MONITOR        0x1010
 #define FLDEFF_PAL_TAG_UNKNOWN            0x1011
 
+
+// Duplicates of event_object_movement tags
+#define FLDEFF_PAL_TAG_MAY 0x1110 // OBJ_EVENT_PAL_TAG_MAY
+#define FLDEFF_PAL_TAG_BRENDAN 0x1100 // OBJ_EVENT_PAL_TAG_BRENDAN
+
 #endif // GUARD_FIELD_EFFECT_CONSTANTS_H
