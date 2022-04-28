@@ -298,10 +298,15 @@
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
 
 // battlers
-#define ANIM_ATTACKER    0
-#define ANIM_TARGET      1
-#define ANIM_ATK_PARTNER 2
-#define ANIM_DEF_PARTNER 3
+#define ANIM_ATTACKER         0
+#define ANIM_TARGET           1
+#define ANIM_ATK_PARTNER      2
+#define ANIM_DEF_PARTNER      3
+#define ANIM_PLAYER_LEFT      4
+#define ANIM_PLAYER_RIGHT     5
+#define ANIM_OPPONENT_LEFT    6
+#define ANIM_OPPONENT_RIGHT   7
+#define ANIM_ATTACKER_FORCE   8
 
 // stereo panning constants [0-255]
 //
