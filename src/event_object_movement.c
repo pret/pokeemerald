@@ -1762,7 +1762,8 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
         .graphicsId = OBJ_EVENT_GFX_OW_MON,
         .x = gSaveBlock1Ptr->pos.x,
         .y = gSaveBlock1Ptr->pos.y,
-        .elevation = 3,
+        // If player active, copy player elevation
+        .elevation = gObjectEvents[gPlayerAvatar.objectEventId].active ? gObjectEvents[gPlayerAvatar.objectEventId].currentElevation : 3,
         .movementType = MOVEMENT_TYPE_FOLLOW_PLAYER,
       };
       objEvent = &gObjectEvents[SpawnSpecialObjectEvent(&template)];
